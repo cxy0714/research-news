@@ -14,28 +14,62 @@ log = logging.getLogger(__name__)
 
 SCORE_SYSTEM = """You score academic papers for a statistics researcher.
 You will receive (1) the researcher's interests and (2) a batch of papers.
-Return a JSON array; each element is {"id": <paper_id>, "score": <0-10 integer>, "reason": "<one short sentence>"}.
+
+Respond with ONLY a valid JSON object of the form:
+{"results": [{"id": "<paper_id>", "score": <0-10 integer>, "reason": "<one short sentence>"}, ...]}
+
+No prose, no markdown fences, no commentary — just the JSON object.
 Score 0-10 per the rubric in the interests file. Be strict: most papers in
 unrelated subfields should get 0-3."""
 
 SUMMARY_SYSTEM = """You write personalized Chinese summaries of papers for a
-statistics researcher. Follow the summary_style guidance in the interests
-file. Return JSON: {"summary_zh": "...", "why_relevant": "..."}."""
+statistics researcher. Follow the summary_style guidance in the interests file.
+
+Respond with ONLY a valid JSON object of the form:
+{"summary_zh": "...", "why_relevant": "..."}
+
+No prose, no markdown fences, no commentary — just the JSON object."""
 
 EVENT_SYSTEM = """You extract academic events (conference dates, deadlines,
-seminar talks) from a web page's plain text. Return a JSON array; each
-element is {"title": "...", "date": "YYYY-MM-DD or freeform", "speaker":
-"... or null", "location": "... or null", "url": "... or null", "note": "...
-or null"}. Only include events; ignore navigation, footers, and prose."""
+seminar talks) from a web page's plain text.
+
+Respond with ONLY a valid JSON object of the form:
+{"events": [{"title": "...", "date": "YYYY-MM-DD or freeform or null", "speaker": "... or null", "location": "... or null", "url": "... or null", "note": "... or null"}, ...]}
+
+No prose, no markdown fences, no commentary — just the JSON object.
+Only include real events; ignore navigation, footers, and generic prose. If
+the page contains no events, return {"events": []}."""
 
 
 def _extract_json(text: str):
-    """Tolerant JSON extraction — strips code fences if present."""
-    text = text.strip()
+    """Tolerant JSON extraction — strips code fences, finds first {...} or [...] block."""
+    text = (text or "").strip()
+    # Strip code fences if present
     m = re.search(r"```(?:json)?\s*(.+?)```", text, flags=re.DOTALL)
     if m:
         text = m.group(1).strip()
-    return json.loads(text)
+    # Try direct parse first
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        pass
+    # Fallback: find the first balanced JSON object or array
+    for opener, closer in (("{", "}"), ("[", "]")):
+        start = text.find(opener)
+        if start == -1:
+            continue
+        depth = 0
+        for i in range(start, len(text)):
+            if text[i] == opener:
+                depth += 1
+            elif text[i] == closer:
+                depth -= 1
+                if depth == 0:
+                    try:
+                        return json.loads(text[start : i + 1])
+                    except json.JSONDecodeError:
+                        break
+    raise json.JSONDecodeError("no parseable JSON found", text, 0)
 
 
 def score_papers(
@@ -70,15 +104,14 @@ def score_papers(
                     {"role": "system", "content": SCORE_SYSTEM},
                     {"role": "user", "content": user},
                 ],
-                response_format={"type": "json_object"},
+                max_tokens=3000,
             )
-            # Some providers wrap arrays in {"data": [...]} when forced to JSON object.
             try:
                 parsed = _extract_json(raw)
             except json.JSONDecodeError:
-                parsed = []
+                log.warning("score batch: could not parse JSON, raw=%r", raw[:300])
+                continue
             if isinstance(parsed, dict):
-                # Try common wrapper keys
                 for k in ("results", "data", "papers", "scores"):
                     if k in parsed and isinstance(parsed[k], list):
                         parsed = parsed[k]
@@ -116,7 +149,7 @@ def summarize_paper(
             {"role": "user", "content": user},
         ],
         deep=deep,
-        response_format={"type": "json_object"},
+        max_tokens=1500,
     )
     try:
         parsed = _extract_json(raw)
@@ -134,7 +167,7 @@ def extract_events(client: SJTUClient, source_name: str, text: str) -> list[Even
                 {"role": "system", "content": EVENT_SYSTEM},
                 {"role": "user", "content": user},
             ],
-            response_format={"type": "json_object"},
+            max_tokens=2500,
         )
         parsed = _extract_json(raw)
         if isinstance(parsed, dict):

@@ -54,17 +54,18 @@ class SJTUClient:
         messages: list[dict],
         *,
         deep: bool = False,
-        response_format: dict | None = None,
         temperature: float = 0.2,
+        max_tokens: int = 2048,
     ) -> str:
+        # SJTU V3.2 requires a real user message.
+        if not any(m.get("role") == "user" for m in messages):
+            raise ValueError("SJTU API requires at least one user-role message")
         self.limiter.wait()
         model = self.model_deep if deep else self.model_fast
-        kwargs: dict = {
-            "model": model,
-            "messages": messages,
-            "temperature": temperature,
-        }
-        if response_format:
-            kwargs["response_format"] = response_format
-        resp = self.client.chat.completions.create(**kwargs)
+        resp = self.client.chat.completions.create(
+            model=model,
+            messages=messages,
+            temperature=temperature,
+            max_tokens=max_tokens,
+        )
         return resp.choices[0].message.content or ""
