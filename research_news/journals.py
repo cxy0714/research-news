@@ -31,6 +31,7 @@ from .models import Paper
 from .render.markdown import render_journals, update_index
 from .scrapers.crossref import KNOWN_JOURNALS, fetch_latest_issue
 from .scrapers.jmlr import fetch_latest as jmlr_fetch_latest
+from .usage import report as report_token_usage
 
 log = logging.getLogger("research_news.journals")
 
@@ -45,7 +46,7 @@ CROSSREF_BY_SHORT = {short: (name, issn)
                      for name, (issn, short) in KNOWN_JOURNALS.items()}
 
 
-def _fetch_journal(short: str, *, jmlr_n: int = 10,
+def _fetch_journal(short: str, *, jmlr_n: int | None = None,
                    jmlr_vol: int | None = None,
                    n_issues: int = 1) -> list[Paper]:
     if short == "JMLR":
@@ -58,12 +59,16 @@ def _fetch_journal(short: str, *, jmlr_n: int = 10,
 
 
 def _save_papers(papers: list[Paper], path: Path) -> None:
-    import json
+    """Atomic write: serialize to <path>.tmp, then os.replace into place. So a
+    crash mid-write can't corrupt the file."""
+    import json, os
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    tmp.write_text(
         json.dumps([p.to_dict() for p in papers], ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
+    os.replace(tmp, path)
     log.info("saved %d papers to %s", len(papers), path)
 
 
@@ -100,6 +105,10 @@ def run(only: list[str] | None = None, dry_run: bool = False,
                 continue
             log.info("  %s → %d papers", short, len(ps))
             papers.extend(ps)
+            # Incremental save: if a journal fetch later crashes (or you ^C),
+            # everything fetched so far is already on disk.
+            if save_papers:
+                _save_papers([p for p in papers if p.abstract], save_papers)
 
         # Drop any without an abstract — can't score them meaningfully.
         n_before = len(papers)
@@ -170,8 +179,8 @@ def run(only: list[str] | None = None, dry_run: bool = False,
     elif skip_pdf:
         log.info("skip_pdf set; not downloading journal highlight PDFs")
 
-    log.info("wrote %s  (total LLM calls: %d)", out_path, client.calls)
-    log.info("token usage: %s", client.usage)
+    log.info("wrote %s", out_path)
+    report_token_usage(client, "journals", today)
     return out_path
 
 
@@ -187,8 +196,9 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--only", default=None,
                     help="Comma-separated subset of journals to fetch. "
                          f"Available: {','.join(DEFAULT_JOURNALS)}")
-    ap.add_argument("--jmlr-n", type=int, default=10,
-                    help="How many recent JMLR papers to pull (default 10).")
+    ap.add_argument("--jmlr-n", type=int, default=None,
+                    help="Cap how many recent JMLR papers to pull. "
+                         "Default: no cap (take entire current volume, ~50).")
     ap.add_argument("--jmlr-vol", type=int, default=None,
                     help="Override JMLR volume (default: current year - 1999).")
     ap.add_argument("--n-issues", type=int, default=1,

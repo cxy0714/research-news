@@ -22,6 +22,25 @@ python -m research_news.smoke_test    # 验 API 通
 
 兴趣配置：编辑 `config/interests.yaml`（自然语言写就行，LLM 直接读）。
 
+### 依赖
+
+`pip install -e ".[docs]"` 会按 `pyproject.toml` 装全。明细：
+
+| 依赖 | 用途 |
+|---|---|
+| `httpx` | 全部 HTTP（arxiv / JMLR / Crossref / S2 / OpenAlex / publisher 落地页） |
+| `feedparser` | arxiv RSS 解析 |
+| `beautifulsoup4` + `lxml` | HTML 解析（JMLR 卷索引页 + arxiv HTML 深读 + 落地页 abstract） |
+| `openai` | SJTU API（OpenAI-compatible 协议） |
+| `pyyaml` | 读 `config/*.yaml` |
+| `python-dotenv` | 加载 `.env` |
+| `tenacity` | HTTP / LLM 调用重试 |
+| `pypdf` | 高相关论文 PDF 文本抽取（shootout 深读） |
+| `jinja2`, `python-dateutil` | 模板 + 日期工具 |
+| `mkdocs`, `mkdocs-material` | 文档站点（仅 `.[docs]` extras） |
+
+Linux/macOS 上 `feedparser` 可能装不上 `sgmllib3k`（Python 3.10+ 移除了 sgmllib）。如果碰到，单独装 feedparser==6.0.10 或 6.0.11 一般能绕开，或 `pip install --no-build-isolation` 重试。
+
 ## 每日 arXiv 管道
 
 ```powershell
@@ -54,8 +73,8 @@ python -m research_news.journals
 # 子集
 python -m research_news.journals --only JMLR,AoS
 
-# 近 N 期（quarterly 期刊：4=一年，8=两年；JMLR 用 --jmlr-n 控制条数）
-python -m research_news.journals --n-issues 4 --jmlr-n 30
+# 近 N 期（quarterly 期刊：4=一年，8=两年；JMLR 默认拉整卷 ~50 篇，--jmlr-n N 限制）
+python -m research_news.journals --n-issues 4
 
 # 干跑
 python -m research_news.journals --dry-run
@@ -66,8 +85,8 @@ python -m research_news.journals --dry-run
 抓取慢（多期可能 15+ 分钟）、LLM 评分慢且贵。拆开后可以抓一次、反复迭代：
 
 ```powershell
-# 一次性抓取，存盘
-python -m research_news.journals --n-issues 4 --jmlr-n 30 `
+# 一次性抓取，存盘（每抓完一个期刊就重写 JSON，^C / 崩了不丢之前的）
+python -m research_news.journals --n-issues 4 `
     --save-papers data/corpus-2026Q2-4i.json --dry-run
 
 # 从盘上载入跑 LLM（快，可反复）
@@ -78,7 +97,7 @@ $env:JOURNALS_MODEL="deepseek-chat"
 python -m research_news.journals --load-papers data/corpus-2026Q2-4i.json --label deepseek
 ```
 
-`--save-papers` 出的 JSON 就是 `Paper` 字段列表，可以手动编辑（删 paper、加 abstract、改 title）再 load。
+`--save-papers` 出的 JSON 就是 `Paper` 字段列表，原子写入（写 `.tmp` 后 rename），可以手动编辑（删 paper、加 abstract、改 title）再 load。
 
 ### Abstract backfill 链路
 
