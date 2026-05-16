@@ -8,6 +8,7 @@ empty — that is expected behaviour.
 from __future__ import annotations
 
 import logging
+import re
 from email.utils import parsedate_to_datetime
 
 import feedparser
@@ -20,6 +21,11 @@ log = logging.getLogger(__name__)
 
 RSS_BASE = "https://rss.arxiv.org/rss"
 
+# Matches post-2007 arXiv ID: YYMM.NNNNN (4 or 5 digits, optional vN).
+_ARXIV_ID_RE = re.compile(r"\b(\d{4}\.\d{4,6})(?:v\d+)?\b")
+# Pre-2007 IDs look like astro-ph/9901001 — keep a fallback.
+_OLD_ARXIV_ID_RE = re.compile(r"\b([a-z\-]+(?:\.[A-Z]{2})?/\d{7})(?:v\d+)?\b")
+
 
 @retry(stop=stop_after_attempt(4), wait=wait_exponential(multiplier=2, min=2, max=16))
 def _fetch_rss(url: str) -> str:
@@ -30,10 +36,20 @@ def _fetch_rss(url: str) -> str:
 
 
 def _arxiv_id(entry) -> str:
-    """Extract bare arXiv ID from entry id/link fields."""
-    raw = entry.get("id") or entry.get("link") or ""
-    # typical: http://arxiv.org/abs/2505.12345v1
-    return raw.rstrip("/").rsplit("/", 1)[-1].split("v")[0]
+    """Extract canonical arXiv ID from any of the entry's id/link fields.
+
+    RSS feeds use OAI-style IDs like 'oai:arXiv.org:2505.12345v1', where a
+    naive '.split("v")' would catch the 'v' in 'arXiv'. We use a regex.
+    """
+    for field in ("id", "link"):
+        raw = entry.get(field) or ""
+        m = _ARXIV_ID_RE.search(raw)
+        if m:
+            return m.group(1)
+        m = _OLD_ARXIV_ID_RE.search(raw)
+        if m:
+            return m.group(1)
+    return ""
 
 
 def _is_cross_listed(entry) -> bool:
@@ -62,9 +78,12 @@ def fetch_category(
             continue
 
         arxiv_id = _arxiv_id(entry)
+        if not arxiv_id:
+            log.debug("skipping entry with no recognizable arXiv ID: %r", entry.get("id"))
+            continue
         title = " ".join((entry.get("title") or "").split())
         abstract = " ".join((entry.get("summary") or "").split())
-        link = entry.get("link") or f"https://arxiv.org/abs/{arxiv_id}"
+        link = f"https://arxiv.org/abs/{arxiv_id}"
 
         authors: list[str] = []
         for a in entry.get("authors", []):
