@@ -33,6 +33,7 @@ from xml.etree import ElementTree as ET
 import httpx
 import yaml
 from bs4 import BeautifulSoup
+from dotenv import load_dotenv
 from tenacity import retry, stop_after_attempt, wait_exponential
 
 from .llm.pipeline import SUMMARY_SYSTEM as BASELINE_SUMMARY_SYSTEM, _extract_json
@@ -118,9 +119,12 @@ def fetch_metadata(arxiv_id: str) -> Paper:
 
 # ── arxiv HTML extraction (intro + per-section first para + conclusion) ───────
 
-INTRO_RE = re.compile(r"^\s*(?:\d+[\.\)]?\s*)?introduction\s*$", re.I)
+INTRO_RE = re.compile(
+    r"^\s*(?:\d+(?:\.\d+)?[\.\)]?[\s ]+)?introduction\b.*$", re.I,
+)
 CONCL_RE = re.compile(
-    r"^\s*(?:\d+[\.\)]?\s*)?(?:conclusion[s]?|concluding remarks|discussion|summary)\s*$",
+    r"^\s*(?:\d+(?:\.\d+)?[\.\)]?[\s ]+)?"
+    r"(?:conclusion[s]?|concluding remarks|discussion|summary|final remarks)\b.*$",
     re.I,
 )
 SECTION_NUM_RE = re.compile(r"^\s*\d+(?:\.\d+)?[\.\)]?\s+\S")
@@ -132,31 +136,19 @@ class DeepContent:
     section_leads: list[tuple[str, str]]   # (section_title, first_paragraph)
     conclusion: str
     char_count: int
-    source: str   # "html" | "fallback-abstract"
+    source: str   # "html" | "pdf" | "fallback-abstract"
 
 
 def _clean(text: str) -> str:
+    # Normalize NBSP + other unicode whitespace before collapsing
+    text = text.replace(" ", " ").replace(" ", " ")
     return re.sub(r"\s+", " ", text).strip()
 
 
-def fetch_deep_content(arxiv_id: str, abstract_fallback: str) -> DeepContent:
-    """Pull intro / section-first-paragraphs / conclusion from arXiv HTML.
-
-    arXiv HTML is at https://arxiv.org/html/<id>. Newer papers have it;
-    older ones may not. On any failure we fall back to abstract-only.
-    """
-    url = f"https://arxiv.org/html/{arxiv_id}"
-    try:
-        html = _get(url)
-    except Exception as e:
-        log.warning("arxiv HTML unavailable for %s (%s); using abstract", arxiv_id, e)
-        return DeepContent("", [], "", len(abstract_fallback), "fallback-abstract")
-
+def _extract_from_html(html: str) -> tuple[str, list[tuple[str, str]], str]:
     soup = BeautifulSoup(html, "lxml")
-    # ar5iv / arxiv-html mark sections as <section> with an <h2> heading.
     sections = soup.find_all("section")
     if not sections:
-        # Some pages use <div class="ltx_section">
         sections = soup.find_all("div", class_="ltx_section")
 
     intro = ""
@@ -166,7 +158,6 @@ def fetch_deep_content(arxiv_id: str, abstract_fallback: str) -> DeepContent:
     for sec in sections:
         h = sec.find(["h1", "h2", "h3"])
         title = _clean(h.get_text()) if h else ""
-        # First substantive paragraph
         para = ""
         for p in sec.find_all("p"):
             t = _clean(p.get_text())
@@ -175,23 +166,142 @@ def fetch_deep_content(arxiv_id: str, abstract_fallback: str) -> DeepContent:
                 break
         if not para:
             continue
-        # Cap each paragraph
         para_short = para[:1200]
         if INTRO_RE.match(title) and not intro:
             intro = para_short
         elif CONCL_RE.match(title):
-            conclusion = para_short   # keep last one (often "Conclusion")
-        else:
-            if title and len(section_leads) < 8:
-                section_leads.append((title, para_short))
+            conclusion = para_short
+        elif title and len(section_leads) < 8:
+            section_leads.append((title, para_short))
 
-    chars = len(intro) + sum(len(t) + len(p) for t, p in section_leads) + len(conclusion)
-    if chars < 400:
-        log.warning("deep content for %s looks thin (%d chars); using abstract",
+    return intro, section_leads, conclusion
+
+
+@retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=2, min=2, max=10))
+def _get_bytes(url: str) -> bytes:
+    with httpx.Client(timeout=60, follow_redirects=True,
+                      headers={"User-Agent": "research-news-shootout/0.1"}) as c:
+        r = c.get(url)
+        r.raise_for_status()
+        return r.content
+
+
+# Heuristic heading regex for plain-text PDF content. Allows numbered
+# (e.g. "1 Introduction", "1. Introduction", "2.3 Methods") or unnumbered.
+_PDF_HEADING_RE = re.compile(
+    r"^\s*(?:(?P<num>\d+(?:\.\d+)?)[\.\)]?\s+)?(?P<title>[A-Z][A-Za-z][\w \-/&'’()]{1,80})\s*$"
+)
+
+
+def _extract_from_pdf_text(text: str) -> tuple[str, list[tuple[str, str]], str]:
+    """Heuristic: walk lines, find heading-like lines, group paragraphs between them.
+
+    PDF text extraction is noisy — lines wrap mid-sentence, headers/footers
+    intrude. We do the simplest thing that mostly works: split by blank lines
+    into paragraph blocks, treat short Title-Case blocks as candidate
+    headings, and emit (heading, next-substantive-paragraph) pairs.
+    """
+    # Normalize whitespace per-line but keep line breaks for heading detection
+    raw_lines = [l.strip() for l in text.splitlines()]
+    # Group into blocks separated by blank lines; join wrapped lines inside a block
+    blocks: list[str] = []
+    cur: list[str] = []
+    for ln in raw_lines:
+        if ln:
+            cur.append(ln)
+        elif cur:
+            blocks.append(_clean(" ".join(cur)))
+            cur = []
+    if cur:
+        blocks.append(_clean(" ".join(cur)))
+
+    intro = ""
+    conclusion = ""
+    section_leads: list[tuple[str, str]] = []
+    pending_heading: str | None = None
+
+    def is_heading(b: str) -> bool:
+        if len(b) > 100 or len(b) < 3:
+            return False
+        return bool(_PDF_HEADING_RE.match(b))
+
+    for b in blocks:
+        if is_heading(b):
+            pending_heading = b
+            continue
+        if pending_heading is None:
+            continue
+        if len(b) < 80:
+            # too short to be a real paragraph; skip but keep heading
+            continue
+        para_short = b[:1200]
+        title = pending_heading
+        pending_heading = None
+        if INTRO_RE.match(title) and not intro:
+            intro = para_short
+        elif CONCL_RE.match(title):
+            conclusion = para_short   # keep latest
+        elif len(section_leads) < 8:
+            section_leads.append((title, para_short))
+
+    return intro, section_leads, conclusion
+
+
+def _pdf_to_text(arxiv_id: str) -> str | None:
+    try:
+        from pypdf import PdfReader   # lazy import; optional dep
+    except ImportError:
+        log.warning("pypdf not installed; cannot read PDF for %s "
+                    "(pip install pypdf)", arxiv_id)
+        return None
+    try:
+        pdf_bytes = _get_bytes(f"https://arxiv.org/pdf/{arxiv_id}")
+    except Exception as e:
+        log.warning("PDF download failed for %s: %s", arxiv_id, e)
+        return None
+    import io
+    try:
+        reader = PdfReader(io.BytesIO(pdf_bytes))
+        # Cap at first 25 pages — methods/intro/conclusion almost always fit;
+        # avoids huge appendix dumps.
+        max_pages = min(len(reader.pages), 25)
+        chunks = []
+        for i in range(max_pages):
+            try:
+                chunks.append(reader.pages[i].extract_text() or "")
+            except Exception as e:
+                log.debug("pdf page %d extract failed for %s: %s", i, arxiv_id, e)
+        return "\n\n".join(chunks)
+    except Exception as e:
+        log.warning("pypdf parse failed for %s: %s", arxiv_id, e)
+        return None
+
+
+def fetch_deep_content(arxiv_id: str, abstract_fallback: str) -> DeepContent:
+    """Try arxiv HTML first, fall back to PDF, then to abstract-only."""
+    # 1) HTML
+    try:
+        html = _get(f"https://arxiv.org/html/{arxiv_id}")
+        intro, leads, conclusion = _extract_from_html(html)
+        chars = len(intro) + sum(len(t) + len(p) for t, p in leads) + len(conclusion)
+        if chars >= 400:
+            return DeepContent(intro, leads, conclusion, chars, "html")
+        log.info("HTML for %s too thin (%d chars), trying PDF", arxiv_id, chars)
+    except Exception as e:
+        log.info("arxiv HTML unavailable for %s (%s), trying PDF", arxiv_id, e)
+
+    # 2) PDF
+    text = _pdf_to_text(arxiv_id)
+    if text:
+        intro, leads, conclusion = _extract_from_pdf_text(text)
+        chars = len(intro) + sum(len(t) + len(p) for t, p in leads) + len(conclusion)
+        if chars >= 400:
+            return DeepContent(intro, leads, conclusion, chars, "pdf")
+        log.warning("PDF extraction for %s also thin (%d chars), using abstract",
                     arxiv_id, chars)
-        return DeepContent("", [], "", len(abstract_fallback), "fallback-abstract")
 
-    return DeepContent(intro, section_leads, conclusion, chars, "html")
+    # 3) fallback
+    return DeepContent("", [], "", len(abstract_fallback), "fallback-abstract")
 
 
 def deep_content_to_text(d: DeepContent, paper: Paper) -> str:
@@ -399,6 +509,7 @@ DEFAULT_EXTRA = [
 def main(argv: list[str] | None = None) -> int:
     logging.basicConfig(level=logging.INFO,
                         format="%(asctime)s %(levelname)s %(message)s")
+    load_dotenv()
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("ids", nargs="*",
                     help="arXiv IDs (e.g. 2408.06103). URLs accepted; the ID is extracted.")
