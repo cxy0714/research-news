@@ -1,0 +1,485 @@
+"""Prompt / depth shootout for evaluating summary quality.
+
+Runs each paper through 4 variants and renders a side-by-side comparison
+page so the researcher can pick the best (prompt, depth, model) combo.
+
+Variants
+--------
+A         baseline: current SUMMARY_SYSTEM prompt + abstract (truncated)
+B         richer prompt + abstract (full)
+C-fast    richer prompt + intro / per-section first paragraph / conclusion,
+          run on the fast chat model
+C-deep    same content as C-fast, run on the reasoning model
+
+Usage
+-----
+    python -m research_news.shootout 2408.06103 2508.12627 ...
+
+Output: docs/shootout/<YYYY-MM-DD>.md
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import logging
+import re
+import sys
+import time
+from dataclasses import dataclass
+from datetime import date
+from pathlib import Path
+from xml.etree import ElementTree as ET
+
+import httpx
+import yaml
+from bs4 import BeautifulSoup
+from tenacity import retry, stop_after_attempt, wait_exponential
+
+from .llm.pipeline import SUMMARY_SYSTEM as BASELINE_SUMMARY_SYSTEM, _extract_json
+from .llm.sjtu_client import SJTUClient
+from .models import Paper
+
+log = logging.getLogger(__name__)
+
+ATOM = "{http://www.w3.org/2005/Atom}"
+ARXIV_NS = "{http://arxiv.org/schemas/atom}"
+
+OUTPUT_DIR = Path("docs/shootout")
+
+
+# ── richer prompt (variants B, C) ─────────────────────────────────────────────
+
+RICH_SUMMARY_SYSTEM = """You write personalized Chinese research notes for a
+statistics researcher (focus: causal inference, semiparametric/nonparametric
+theory, high-dimensional statistics, efficiency theory, astrostatistics).
+
+For each paper, return ONLY a valid JSON object of the form:
+{
+  "topic": "<one of: causal_inference | high_dim | nonparam_semipara | efficiency | inverse_problems | higher_order_U | astrostats | mechanism_design | other>",
+  "summary_zh": "...",
+  "key_techniques": ["..."],
+  "why_relevant": "..."
+}
+
+No prose, no markdown fences — just the JSON object.
+
+Guidance for `summary_zh` (4-7 句中文):
+  - 第一句: 研究问题 + 设定（包含 estimand / assumptions / regularity 条件等关键词，越具体越好）。
+  - 中间: 方法的核心机制（estimator 名称、cross-fitting、influence function、minimax rate、convergence rate、identification strategy 等技术词；不要空泛形容词）。
+  - 最后: 主要理论或实证结果（一致性 / 效率 / 收敛率 / 实验对比）。
+  - 若 paper 仅是 application/empirical，明确指出 method 的统计 novelty 程度。
+
+`key_techniques`: 3-6 个英文短语，命名具体的方法/概念（e.g. "doubly robust",
+"orthogonal score", "kernel ridge regression", "U-statistic projection",
+"simulation-based inference"）。不要泛词如 "machine learning" 或 "estimation"。
+
+`why_relevant`: 1-2 句中文，明确连接到 researcher 的具体 primary_interest
+（点名是哪个：causal inference / semiparametric efficiency / inverse problems
+/ higher-order U / astrostats / etc.），并指出"为什么值得读"（新理论？sharper
+rate？放松假设？方法可迁移？）。"""
+
+
+# ── arxiv metadata ────────────────────────────────────────────────────────────
+
+@retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=2, min=2, max=10))
+def _get(url: str, params: dict | None = None) -> str:
+    with httpx.Client(timeout=40, follow_redirects=True,
+                      headers={"User-Agent": "research-news-shootout/0.1"}) as c:
+        r = c.get(url, params=params)
+        r.raise_for_status()
+        return r.text
+
+
+def fetch_metadata(arxiv_id: str) -> Paper:
+    xml = _get("https://export.arxiv.org/api/query",
+               params={"id_list": arxiv_id})
+    root = ET.fromstring(xml)
+    entry = root.find(f"{ATOM}entry")
+    if entry is None:
+        raise RuntimeError(f"no entry for {arxiv_id}")
+    title = " ".join((entry.findtext(f"{ATOM}title") or "").split())
+    abstract = " ".join((entry.findtext(f"{ATOM}summary") or "").split())
+    authors = [(a.findtext(f"{ATOM}name") or "").strip()
+               for a in entry.findall(f"{ATOM}author")]
+    cats = [c.attrib.get("term", "")
+            for c in entry.findall(f"{ARXIV_NS}category")]
+    published = (entry.findtext(f"{ATOM}published") or "")[:10]
+    return Paper(
+        source="arxiv",
+        paper_id=arxiv_id,
+        title=title,
+        authors=authors,
+        abstract=abstract,
+        url=f"https://arxiv.org/abs/{arxiv_id}",
+        categories=cats,
+        published=published,
+    )
+
+
+# ── arxiv HTML extraction (intro + per-section first para + conclusion) ───────
+
+INTRO_RE = re.compile(r"^\s*(?:\d+[\.\)]?\s*)?introduction\s*$", re.I)
+CONCL_RE = re.compile(
+    r"^\s*(?:\d+[\.\)]?\s*)?(?:conclusion[s]?|concluding remarks|discussion|summary)\s*$",
+    re.I,
+)
+SECTION_NUM_RE = re.compile(r"^\s*\d+(?:\.\d+)?[\.\)]?\s+\S")
+
+
+@dataclass
+class DeepContent:
+    intro: str
+    section_leads: list[tuple[str, str]]   # (section_title, first_paragraph)
+    conclusion: str
+    char_count: int
+    source: str   # "html" | "fallback-abstract"
+
+
+def _clean(text: str) -> str:
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def fetch_deep_content(arxiv_id: str, abstract_fallback: str) -> DeepContent:
+    """Pull intro / section-first-paragraphs / conclusion from arXiv HTML.
+
+    arXiv HTML is at https://arxiv.org/html/<id>. Newer papers have it;
+    older ones may not. On any failure we fall back to abstract-only.
+    """
+    url = f"https://arxiv.org/html/{arxiv_id}"
+    try:
+        html = _get(url)
+    except Exception as e:
+        log.warning("arxiv HTML unavailable for %s (%s); using abstract", arxiv_id, e)
+        return DeepContent("", [], "", len(abstract_fallback), "fallback-abstract")
+
+    soup = BeautifulSoup(html, "lxml")
+    # ar5iv / arxiv-html mark sections as <section> with an <h2> heading.
+    sections = soup.find_all("section")
+    if not sections:
+        # Some pages use <div class="ltx_section">
+        sections = soup.find_all("div", class_="ltx_section")
+
+    intro = ""
+    conclusion = ""
+    section_leads: list[tuple[str, str]] = []
+
+    for sec in sections:
+        h = sec.find(["h1", "h2", "h3"])
+        title = _clean(h.get_text()) if h else ""
+        # First substantive paragraph
+        para = ""
+        for p in sec.find_all("p"):
+            t = _clean(p.get_text())
+            if len(t) > 80:
+                para = t
+                break
+        if not para:
+            continue
+        # Cap each paragraph
+        para_short = para[:1200]
+        if INTRO_RE.match(title) and not intro:
+            intro = para_short
+        elif CONCL_RE.match(title):
+            conclusion = para_short   # keep last one (often "Conclusion")
+        else:
+            if title and len(section_leads) < 8:
+                section_leads.append((title, para_short))
+
+    chars = len(intro) + sum(len(t) + len(p) for t, p in section_leads) + len(conclusion)
+    if chars < 400:
+        log.warning("deep content for %s looks thin (%d chars); using abstract",
+                    arxiv_id, chars)
+        return DeepContent("", [], "", len(abstract_fallback), "fallback-abstract")
+
+    return DeepContent(intro, section_leads, conclusion, chars, "html")
+
+
+def deep_content_to_text(d: DeepContent, paper: Paper) -> str:
+    parts = [f"Abstract: {paper.abstract}"]
+    if d.intro:
+        parts.append(f"\n## Introduction\n{d.intro}")
+    for title, para in d.section_leads:
+        parts.append(f"\n## {title}\n{para}")
+    if d.conclusion:
+        parts.append(f"\n## Conclusion\n{d.conclusion}")
+    return "\n".join(parts)
+
+
+# ── variant runners ───────────────────────────────────────────────────────────
+
+@dataclass
+class VariantResult:
+    name: str
+    model: str
+    raw: str
+    parsed: dict
+    prompt_tokens: int
+    completion_tokens: int
+    seconds: float
+    content_source: str   # "abstract-600" | "abstract-full" | "html" | "fallback-abstract"
+    error: str | None = None
+
+
+def _run_chat(client: SJTUClient, system: str, user: str, *, deep: bool) -> tuple[str, int, int, float]:
+    model = client.model_deep if deep else client.model_fast
+    before_calls = client.calls
+    before_usage = dict(client.usage.get(model, {}))
+    t0 = time.monotonic()
+    raw = client.chat(
+        [
+            {"role": "system", "content": system},
+            {"role": "user", "content": user},
+        ],
+        deep=deep,
+        max_tokens=2000,
+    )
+    dt = time.monotonic() - t0
+    after = client.usage.get(model, {})
+    pt = after.get("prompt_tokens", 0) - before_usage.get("prompt_tokens", 0)
+    ct = after.get("completion_tokens", 0) - before_usage.get("completion_tokens", 0)
+    _ = before_calls  # not strictly needed
+    return raw, pt, ct, dt
+
+
+def run_variant_a(client: SJTUClient, paper: Paper, interests_yaml: str) -> VariantResult:
+    """Baseline: current prompt + abstract truncated to 600 chars."""
+    user = (
+        "## Researcher interests\n" + interests_yaml +
+        f"\n\n## Paper\nTitle: {paper.title}\n"
+        f"Authors: {', '.join(paper.authors)}\n"
+        f"Categories: {', '.join(paper.categories)}\n"
+        f"Abstract: {paper.abstract[:600]}\n"
+    )
+    try:
+        raw, pt, ct, dt = _run_chat(client, BASELINE_SUMMARY_SYSTEM, user, deep=False)
+        parsed = _extract_json(raw) if raw else {}
+        return VariantResult("A (baseline)", client.model_fast, raw,
+                             parsed if isinstance(parsed, dict) else {},
+                             pt, ct, dt, "abstract-600")
+    except Exception as e:
+        return VariantResult("A (baseline)", client.model_fast, "", {}, 0, 0, 0,
+                             "abstract-600", str(e))
+
+
+def run_variant_b(client: SJTUClient, paper: Paper, interests_yaml: str) -> VariantResult:
+    """Richer prompt + full abstract."""
+    user = (
+        "## Researcher interests\n" + interests_yaml +
+        f"\n\n## Paper\nTitle: {paper.title}\n"
+        f"Authors: {', '.join(paper.authors)}\n"
+        f"Categories: {', '.join(paper.categories)}\n"
+        f"Abstract: {paper.abstract}\n"
+    )
+    try:
+        raw, pt, ct, dt = _run_chat(client, RICH_SUMMARY_SYSTEM, user, deep=False)
+        parsed = _extract_json(raw) if raw else {}
+        return VariantResult("B (rich+abs)", client.model_fast, raw,
+                             parsed if isinstance(parsed, dict) else {},
+                             pt, ct, dt, "abstract-full")
+    except Exception as e:
+        return VariantResult("B (rich+abs)", client.model_fast, "", {}, 0, 0, 0,
+                             "abstract-full", str(e))
+
+
+def run_variant_c(
+    client: SJTUClient, paper: Paper, interests_yaml: str,
+    deep_content: DeepContent, *, use_deep_model: bool,
+) -> VariantResult:
+    """Richer prompt + intro/sections/conclusion."""
+    body = deep_content_to_text(deep_content, paper)
+    user = (
+        "## Researcher interests\n" + interests_yaml +
+        f"\n\n## Paper\nTitle: {paper.title}\n"
+        f"Authors: {', '.join(paper.authors)}\n"
+        f"Categories: {', '.join(paper.categories)}\n\n"
+        f"{body}\n"
+    )
+    label = "C-deep (rich+html, reasoner)" if use_deep_model else "C-fast (rich+html, chat)"
+    model = client.model_deep if use_deep_model else client.model_fast
+    try:
+        raw, pt, ct, dt = _run_chat(client, RICH_SUMMARY_SYSTEM, user, deep=use_deep_model)
+        parsed = _extract_json(raw) if raw else {}
+        return VariantResult(label, model, raw,
+                             parsed if isinstance(parsed, dict) else {},
+                             pt, ct, dt, deep_content.source)
+    except Exception as e:
+        return VariantResult(label, model, "", {}, 0, 0, 0,
+                             deep_content.source, str(e))
+
+
+# ── rendering ─────────────────────────────────────────────────────────────────
+
+def _render_cell(v: VariantResult) -> str:
+    if v.error:
+        return f"_(error: {v.error})_"
+    p = v.parsed or {}
+    lines = []
+    if "topic" in p:
+        lines.append(f"**topic**: `{p.get('topic', '')}`")
+    if p.get("summary_zh"):
+        lines.append(f"**摘要**: {p['summary_zh']}")
+    if p.get("key_techniques"):
+        kt = p["key_techniques"]
+        if isinstance(kt, list):
+            lines.append("**key_techniques**: " + ", ".join(f"`{k}`" for k in kt))
+    if p.get("why_relevant"):
+        lines.append(f"**为什么相关**: {p['why_relevant']}")
+    if not lines and v.raw:
+        # Couldn't parse; show raw (truncated)
+        lines.append(f"_(raw, parse failed)_\n\n```\n{v.raw[:600]}\n```")
+    lines.append(
+        f"\n<sub>model=`{v.model}` · source=`{v.content_source}` · "
+        f"tokens in/out = {v.prompt_tokens}/{v.completion_tokens} · {v.seconds:.1f}s</sub>"
+    )
+    return "\n\n".join(lines)
+
+
+def render_shootout(
+    results: list[tuple[Paper, DeepContent, list[VariantResult]]],
+    when: date,
+    out_dir: Path = OUTPUT_DIR,
+) -> Path:
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out_path = out_dir / f"{when.isoformat()}.md"
+
+    lines: list[str] = []
+    lines.append(f"# Prompt/Depth Shootout — {when.isoformat()}\n")
+    lines.append(
+        "对照 4 种 variant：A=baseline prompt+短摘要，B=新 prompt+完整摘要，"
+        "C-fast=新 prompt+arxiv HTML 抽取（intro/各 section 首段/conclusion，chat 模型），"
+        "C-deep=同样内容但 reasoner 模型。\n"
+    )
+    # Token totals
+    tot = {"A": [0, 0], "B": [0, 0], "Cf": [0, 0], "Cd": [0, 0]}
+    for _, _, vs in results:
+        for v, key in zip(vs, ["A", "B", "Cf", "Cd"]):
+            tot[key][0] += v.prompt_tokens
+            tot[key][1] += v.completion_tokens
+    lines.append("**Token 总览**（in / out）:")
+    lines.append(
+        f"- A: {tot['A'][0]} / {tot['A'][1]}  · "
+        f"B: {tot['B'][0]} / {tot['B'][1]}  · "
+        f"C-fast: {tot['Cf'][0]} / {tot['Cf'][1]}  · "
+        f"C-deep: {tot['Cd'][0]} / {tot['Cd'][1]}\n"
+    )
+
+    for paper, deep, vs in results:
+        lines.append(f"## [{paper.paper_id}]({paper.url}) — {paper.title}\n")
+        cats = " · ".join(paper.categories) if paper.categories else ""
+        lines.append(f"- **作者**: {', '.join(paper.authors[:6])}"
+                     f"{' et al.' if len(paper.authors) > 6 else ''}")
+        if cats:
+            lines.append(f"- **arxiv 分类**: {cats}")
+        lines.append(f"- **深读抓取**: source=`{deep.source}`, "
+                     f"intro={len(deep.intro)} chars, sections={len(deep.section_leads)}, "
+                     f"conclusion={len(deep.conclusion)} chars\n")
+
+        # 2x2 table for compact comparison
+        lines.append("| | fast chat (`deepseek-chat`) |")
+        lines.append("|---|---|")
+        lines.append(f"| **A** baseline + abstract-600 | {_render_cell(vs[0]).replace(chr(10), '<br>')} |")
+        lines.append(f"| **B** rich prompt + full abstract | {_render_cell(vs[1]).replace(chr(10), '<br>')} |")
+        lines.append(f"| **C-fast** rich prompt + html | {_render_cell(vs[2]).replace(chr(10), '<br>')} |")
+        lines.append(f"| **C-deep** rich prompt + html (reasoner=`deepseek-reasoner`) | {_render_cell(vs[3]).replace(chr(10), '<br>')} |")
+        lines.append("")
+
+    out_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return out_path
+
+
+# ── CLI ───────────────────────────────────────────────────────────────────────
+
+DEFAULT_EXTRA = [
+    "2605.14692",   # Anytime-valid U-statistics — higher_order_U
+    "2605.13983",   # SBI for kilonovae — astrostats
+    "2605.11806",   # Adaptive kernel ridge, minimax — nonparam_semipara
+]
+
+
+def main(argv: list[str] | None = None) -> int:
+    logging.basicConfig(level=logging.INFO,
+                        format="%(asctime)s %(levelname)s %(message)s")
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("ids", nargs="*",
+                    help="arXiv IDs (e.g. 2408.06103). URLs accepted; the ID is extracted.")
+    ap.add_argument("--add-defaults", action="store_true",
+                    help="Also include the built-in extra coverage papers "
+                         "(U-stat, astro, kernel-ridge).")
+    ap.add_argument("--skip-deep-model", action="store_true",
+                    help="Skip the C-deep (reasoner) variant — halves cost.")
+    ap.add_argument("--interests", default="config/interests.yaml")
+    ap.add_argument("--dry-run", action="store_true",
+                    help="Only fetch metadata + HTML extraction; print plan; don't call LLM.")
+    args = ap.parse_args(argv)
+
+    # Normalize IDs (strip URL prefix / version suffix)
+    id_re = re.compile(r"(\d{4}\.\d{4,6})")
+    ids: list[str] = []
+    for raw in args.ids:
+        m = id_re.search(raw)
+        if m:
+            ids.append(m.group(1))
+        else:
+            log.warning("could not parse arxiv id from %r — skipping", raw)
+    if args.add_defaults:
+        for d in DEFAULT_EXTRA:
+            if d not in ids:
+                ids.append(d)
+    if not ids:
+        ap.error("provide at least one arxiv id (or pass --add-defaults)")
+
+    log.info("shootout on %d papers: %s", len(ids), ids)
+    interests_yaml = Path(args.interests).read_text(encoding="utf-8")
+
+    # Phase 1: fetch metadata + HTML for everything (no LLM)
+    fetched: list[tuple[Paper, DeepContent]] = []
+    for pid in ids:
+        log.info("fetching metadata for %s", pid)
+        try:
+            paper = fetch_metadata(pid)
+        except Exception as e:
+            log.error("metadata fetch failed for %s: %s — skipping", pid, e)
+            continue
+        log.info("  title: %s", paper.title[:90])
+        log.info("fetching HTML for %s", pid)
+        deep = fetch_deep_content(pid, paper.abstract)
+        log.info("  deep: source=%s intro=%d sections=%d conclusion=%d",
+                 deep.source, len(deep.intro), len(deep.section_leads), len(deep.conclusion))
+        fetched.append((paper, deep))
+        time.sleep(3)  # arxiv API rate limit
+
+    if args.dry_run:
+        print(json.dumps([
+            {"id": p.paper_id, "title": p.title,
+             "deep_source": d.source, "intro_chars": len(d.intro),
+             "n_sections": len(d.section_leads),
+             "conclusion_chars": len(d.conclusion)}
+            for p, d in fetched
+        ], indent=2, ensure_ascii=False))
+        return 0
+
+    # Phase 2: LLM
+    client = SJTUClient()
+    results: list[tuple[Paper, DeepContent, list[VariantResult]]] = []
+    for paper, deep in fetched:
+        log.info("running variants for %s", paper.paper_id)
+        a = run_variant_a(client, paper, interests_yaml)
+        b = run_variant_b(client, paper, interests_yaml)
+        cf = run_variant_c(client, paper, interests_yaml, deep, use_deep_model=False)
+        if args.skip_deep_model:
+            cd = VariantResult("C-deep (skipped)", client.model_deep, "", {}, 0, 0, 0,
+                               deep.source, "skipped")
+        else:
+            cd = run_variant_c(client, paper, interests_yaml, deep, use_deep_model=True)
+        results.append((paper, deep, [a, b, cf, cd]))
+
+    out = render_shootout(results, date.today())
+    log.info("wrote %s", out)
+    log.info("total LLM calls: %d", client.calls)
+    log.info("usage by model: %s", json.dumps(client.usage, indent=2))
+    print(out)
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
