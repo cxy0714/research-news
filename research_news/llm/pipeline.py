@@ -11,33 +11,12 @@ from .sjtu_client import SJTUClient
 log = logging.getLogger(__name__)
 
 
-SCORE_SYSTEM = """You score academic papers for a statistics researcher.
-You will receive (1) the researcher's interests and (2) a batch of papers.
-
-Respond with ONLY a valid JSON object of the form:
-{"results": [{"id": "<paper_id>", "score": <0-10 integer>, "reason": "<one short sentence>"}, ...]}
-
-No prose, no markdown fences, no commentary — just the JSON object.
-Score 0-10 per the rubric in the interests file. Be strict: most papers in
-unrelated subfields should get 0-3."""
-
-SUMMARY_SYSTEM = """You write personalized Chinese summaries of papers for a
-statistics researcher. Follow the summary_style guidance in the interests file.
-
-Respond with ONLY a valid JSON object of the form:
-{"summary_zh": "...", "why_relevant": "..."}
-
-No prose, no markdown fences, no commentary — just the JSON object."""
-
-EVENT_SYSTEM = """You extract academic events (conference dates, deadlines,
-seminar talks) from a web page's plain text.
-
-Respond with ONLY a valid JSON object of the form:
-{"events": [{"title": "...", "date": "YYYY-MM-DD or freeform or null", "speaker": "... or null", "location": "... or null", "url": "... or null", "note": "... or null"}, ...]}
-
-No prose, no markdown fences, no commentary — just the JSON object.
-Only include real events; ignore navigation, footers, and generic prose. If
-the page contains no events, return {"events": []}."""
+from .prompts import (
+    EVENT_SYSTEM,
+    RICH_SUMMARY_SYSTEM,
+    SCORE_SYSTEM,
+    TOPICS,
+)
 
 
 def _extract_json(text: str):
@@ -74,6 +53,7 @@ def score_papers(
     interests_yaml: str,
     *,
     batch_size: int = 8,   # smaller batches → shorter output → less risk of truncation
+    model: str | None = None,
 ) -> dict[str, tuple[float, str]]:
     """Returns {paper_id: (score, reason)}."""
     out: dict[str, tuple[float, str]] = {}
@@ -102,6 +82,7 @@ def score_papers(
                     {"role": "system", "content": SCORE_SYSTEM},
                     {"role": "user", "content": user},
                 ],
+                model=model,
                 max_tokens=2000,
             )
             log.debug("score batch %d raw response: %s", bi + 1, raw[:500])
@@ -174,28 +155,46 @@ def summarize_paper(
     interests_yaml: str,
     *,
     deep: bool = False,
-) -> tuple[str, str]:
+    model: str | None = None,
+    extra_body: str | None = None,
+) -> dict:
+    """Mutates `paper` with summary_zh / why_relevant / topic / key_techniques /
+    novelty_flag, and returns the parsed dict (for callers who want it raw)."""
+    body = f"Abstract: {paper.abstract}"
+    if extra_body:
+        body += "\n\n" + extra_body
     user = (
-        "## Researcher interests\n"
-        + interests_yaml
-        + f"\n\n## Paper\nTitle: {paper.title}\nAuthors: {', '.join(paper.authors)}\n"
-        f"Categories: {', '.join(paper.categories)}\n"
-        f"Abstract: {paper.abstract}\n"
+        "## Researcher interests\n" + interests_yaml +
+        f"\n\n## Paper\nTitle: {paper.title}\n"
+        f"Authors: {', '.join(paper.authors)}\n"
+        f"Venue: {paper.venue or paper.source}\n"
+        f"Categories: {', '.join(paper.categories)}\n\n{body}\n"
     )
     raw = client.chat(
         [
-            {"role": "system", "content": SUMMARY_SYSTEM},
+            {"role": "system", "content": RICH_SUMMARY_SYSTEM},
             {"role": "user", "content": user},
         ],
         deep=deep,
+        model=model,
         max_tokens=1500,
     )
     try:
         parsed = _extract_json(raw)
-        return parsed.get("summary_zh", "").strip(), parsed.get("why_relevant", "").strip()
+        if not isinstance(parsed, dict):
+            parsed = {}
     except Exception as e:
         log.warning("summary parse failed for %s: %s", paper.paper_id, e)
-        return raw.strip(), ""
+        parsed = {"summary_zh": raw.strip()}
+
+    paper.summary_zh = (parsed.get("summary_zh") or "").strip()
+    paper.why_relevant = (parsed.get("why_relevant") or "").strip()
+    topic = (parsed.get("topic") or "").strip().lower()
+    paper.topic = topic if topic in TOPICS else "other"
+    kt = parsed.get("key_techniques")
+    paper.key_techniques = [str(x).strip() for x in kt] if isinstance(kt, list) else []
+    paper.novelty_flag = (parsed.get("novelty_flag") or "").strip() or None
+    return parsed
 
 
 def extract_events(client: SJTUClient, source_name: str, text: str) -> list[Event]:
