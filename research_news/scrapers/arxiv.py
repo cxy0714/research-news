@@ -18,13 +18,13 @@ from ..models import Paper
 
 log = logging.getLogger(__name__)
 
-ARXIV_API = "http://export.arxiv.org/api/query"
+ARXIV_API = "https://export.arxiv.org/api/query"
 ATOM = "{http://www.w3.org/2005/Atom}"
 
 
 @retry(stop=stop_after_attempt(4), wait=wait_exponential(multiplier=2, min=2, max=16))
 def _fetch(params: dict) -> str:
-    with httpx.Client(timeout=30) as c:
+    with httpx.Client(timeout=30, follow_redirects=True) as c:
         r = c.get(ARXIV_API, params=params)
         r.raise_for_status()
         return r.text
