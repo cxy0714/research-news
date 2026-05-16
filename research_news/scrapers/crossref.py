@@ -215,6 +215,67 @@ def _openalex_abstract(doi: str) -> str:
     return _reconstruct_inverted_index(data.get("abstract_inverted_index"))
 
 
+# ── T4: arxiv title search ────────────────────────────────────────────────────
+# Stats methodology papers almost always have an arxiv preprint with the same
+# or near-identical title. When the publisher / OpenAlex don't have an
+# abstract (e.g. very recent JRSSB issue not yet indexed), look up the
+# preprint on arxiv and use its summary.
+
+_ARXIV_ATOM_NS = "{http://www.w3.org/2005/Atom}"
+
+
+def _normalize_title(s: str) -> str:
+    s = re.sub(r"[^\w\s]+", " ", (s or "").lower())
+    return re.sub(r"\s+", " ", s).strip()
+
+
+def _title_match(a: str, b: str, *, min_overlap: float = 0.82) -> bool:
+    """True if a and b refer to the same paper. Cheap heuristic: token-set
+    Jaccard >= min_overlap, after normalization."""
+    ta = set(_normalize_title(a).split())
+    tb = set(_normalize_title(b).split())
+    if not ta or not tb:
+        return False
+    inter = len(ta & tb)
+    smaller = min(len(ta), len(tb))
+    return inter / smaller >= min_overlap
+
+
+@retry(stop=stop_after_attempt(2), wait=wait_exponential(multiplier=2, min=1, max=6))
+def _arxiv_search_abstract(title: str) -> str:
+    """Search arxiv for a paper by title; return its abstract if a high-
+    confidence match is found."""
+    from xml.etree import ElementTree as ET
+
+    norm = _normalize_title(title)
+    if len(norm) < 20:   # too short to disambiguate; skip
+        return ""
+    # arxiv `ti:` filter accepts quoted phrases; remove punctuation that
+    # confuses the query.
+    query = f'ti:"{norm}"'
+    with httpx.Client(timeout=25, follow_redirects=True, headers=UA) as c:
+        r = c.get("https://export.arxiv.org/api/query",
+                  params={"search_query": query,
+                          "max_results": 3,
+                          "sortBy": "relevance"})
+        r.raise_for_status()
+        xml = r.text
+    try:
+        root = ET.fromstring(xml)
+    except ET.ParseError:
+        return ""
+    for entry in root.findall(f"{_ARXIV_ATOM_NS}entry"):
+        cand_title = " ".join(
+            (entry.findtext(f"{_ARXIV_ATOM_NS}title") or "").split()
+        )
+        if _title_match(title, cand_title):
+            summary = " ".join(
+                (entry.findtext(f"{_ARXIV_ATOM_NS}summary") or "").split()
+            )
+            return summary.strip()
+    return ""
+
+
 _META_NAMES_ABSTRACT = (
     "citation_abstract",
     "DC.Description",
@@ -356,25 +417,25 @@ def _fill_missing_abstracts(papers: list[Paper], sleep_s: float = 1.2) -> None:
             time.sleep(sleep_s)
         log.info("  T3 filled %d/%d", n_oa, len(still_missing))
 
-    # Tier 4: publisher landing page (last resort)
+    # Tier 4: arxiv title search. Stats methodology papers almost always have
+    # an arxiv preprint with the same/near-identical title; we look that up
+    # and use its summary. Covers brand-new JRSSB / JASA issues that OpenAlex
+    # hasn't indexed yet. Publisher landing pages (the previous T4) are
+    # uniformly Cloudflare-blocked for Oxford / T&F so we don't bother.
     still_missing = [p for p in papers if not p.abstract]
     if still_missing:
-        log.info("backfill T4 (landing page): %d papers", len(still_missing))
-        n_lp = 0
-        diag_samples: list[str] = []
+        log.info("backfill T4 (arxiv title search): %d papers", len(still_missing))
+        n_ax = 0
         for p in still_missing:
-            abs_text, diag = _landing_page_abstract(p.paper_id)
-            if abs_text and len(abs_text) >= 150:
-                p.abstract = abs_text
-                n_lp += 1
-            else:
-                if len(diag_samples) < 3:
-                    diag_samples.append(f"  {p.paper_id}: {diag}")
-            time.sleep(sleep_s)
-        log.info("  T4 filled %d/%d", n_lp, len(still_missing))
-        if n_lp < len(still_missing) and diag_samples:
-            log.warning("T4 misses, sample diagnostics:\n%s",
-                        "\n".join(diag_samples))
+            try:
+                abs_text = _arxiv_search_abstract(p.title)
+                if abs_text and len(abs_text) >= 150:
+                    p.abstract = abs_text
+                    n_ax += 1
+            except Exception as e:
+                log.debug("arxiv search miss for %s: %s", p.paper_id, e)
+            time.sleep(3.5)   # arxiv API politeness: 3s minimum
+        log.info("  T4 filled %d/%d", n_ax, len(still_missing))
 
     final_missing = sum(1 for p in papers if not p.abstract)
     log.info("after all backfills: %d/%d still missing abstract",
@@ -406,27 +467,35 @@ if __name__ == "__main__":
         sys.exit(2)
     for doi in sys.argv[1:]:
         print(f"\n=== {doi} ===")
-        # OpenAlex (the new T3)
+        # First get the title via Crossref for arxiv search
+        title = ""
+        try:
+            data = _get_json(f"{CROSSREF_BASE}/works/{doi}")
+            title_list = data.get("message", {}).get("title") or []
+            title = title_list[0] if title_list else ""
+            if title:
+                print(f"title: {title[:100]}")
+        except Exception as e:
+            print(f"Crossref title fetch: ERROR {type(e).__name__}: {e}")
+
+        # T2: Semantic Scholar
+        try:
+            s2 = _s2_abstract(doi)
+            print(f"T2 S2: {len(s2)} chars" + (f"  | {s2[:140]}..." if s2 else " (empty)"))
+        except Exception as e:
+            print(f"T2 S2: ERROR {type(e).__name__}: {e}")
+
+        # T3: OpenAlex
         try:
             oa = _openalex_abstract(doi)
-            if oa:
-                print(f"OpenAlex: {len(oa)} chars\n  {oa[:300]}...")
-            else:
-                print("OpenAlex: empty (no abstract_inverted_index for this DOI)")
+            print(f"T3 OpenAlex: {len(oa)} chars" + (f"  | {oa[:140]}..." if oa else " (empty)"))
         except Exception as e:
-            print(f"OpenAlex: ERROR {type(e).__name__}: {e}")
+            print(f"T3 OpenAlex: ERROR {type(e).__name__}: {e}")
 
-        # Landing page (the old T3, now T4)
-        try:
-            with httpx.Client(timeout=30, follow_redirects=True, headers=UA) as c:
-                r = c.get(f"https://doi.org/{doi}")
-                print(f"landing URL: {r.url}")
-                print(f"landing status: {r.status_code} ({len(r.text)} chars)")
-                if r.status_code == 200:
-                    abs_text, notes = _extract_abstract_from_html(r.text)
-                    if abs_text:
-                        print(f"landing abstract: {len(abs_text)} chars")
-                    else:
-                        print(f"landing: no selectors matched ({len(notes)} cands)")
-        except Exception as e:
-            print(f"landing: ERROR {type(e).__name__}: {e}")
+        # T4: arxiv title search
+        if title:
+            try:
+                ax = _arxiv_search_abstract(title)
+                print(f"T4 arxiv: {len(ax)} chars" + (f"  | {ax[:140]}..." if ax else " (no match)"))
+            except Exception as e:
+                print(f"T4 arxiv: ERROR {type(e).__name__}: {e}")
