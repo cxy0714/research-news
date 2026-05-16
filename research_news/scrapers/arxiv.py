@@ -1,16 +1,16 @@
-"""arXiv daily-new scraper using the official API.
+"""arXiv daily-new scraper using official RSS feeds.
 
-Strategy: query each category for entries submitted in the last 24h window
-(UTC), filter to "new" submissions only (no cross-list, no replacements).
-arXiv's RSS lumps new+cross+replacements together; the API gives us cleaner
-control via submittedDate range and primary-category filtering.
+RSS endpoint: https://rss.arxiv.org/rss/<category>
+Each feed contains the papers *announced* today (submitted the prior business
+day). On weekends and holidays arXiv does not announce papers, so the feed is
+empty — that is expected behaviour.
 """
 from __future__ import annotations
 
 import logging
-from datetime import datetime, timedelta, timezone
-from xml.etree import ElementTree as ET
+from email.utils import parsedate_to_datetime
 
+import feedparser
 import httpx
 from tenacity import retry, stop_after_attempt, wait_exponential
 
@@ -18,63 +18,68 @@ from ..models import Paper
 
 log = logging.getLogger(__name__)
 
-ARXIV_API = "https://export.arxiv.org/api/query"
-ATOM = "{http://www.w3.org/2005/Atom}"
+RSS_BASE = "https://rss.arxiv.org/rss"
 
 
 @retry(stop=stop_after_attempt(4), wait=wait_exponential(multiplier=2, min=2, max=16))
-def _fetch(params: dict) -> str:
+def _fetch_rss(url: str) -> str:
     with httpx.Client(timeout=30, follow_redirects=True) as c:
-        r = c.get(ARXIV_API, params=params)
+        r = c.get(url)
         r.raise_for_status()
         return r.text
 
 
-def _window_utc(days: int = 1) -> tuple[str, str]:
-    end = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0)
-    start = end - timedelta(days=days)
-    fmt = "%Y%m%d%H%M"
-    return start.strftime(fmt), end.strftime(fmt)
+def _arxiv_id(entry) -> str:
+    """Extract bare arXiv ID from entry id/link fields."""
+    raw = entry.get("id") or entry.get("link") or ""
+    # typical: http://arxiv.org/abs/2505.12345v1
+    return raw.rstrip("/").rsplit("/", 1)[-1].split("v")[0]
+
+
+def _is_cross_listed(entry) -> bool:
+    """RSS entries have a <arxiv:announce_type> tag for new / cross / rep."""
+    announce = entry.get("arxiv_announce_type", "new")
+    return announce != "new"
 
 
 def fetch_category(
     category: str,
     *,
-    lookback_days: int = 1,
-    max_results: int = 80,
     include_cross_listed: bool = False,
+    max_results: int = 80,
 ) -> list[Paper]:
-    start, end = _window_utc(lookback_days)
-    query = f"cat:{category} AND submittedDate:[{start} TO {end}]"
-    params = {
-        "search_query": query,
-        "sortBy": "submittedDate",
-        "sortOrder": "descending",
-        "start": 0,
-        "max_results": max_results,
-    }
-    xml = _fetch(params)
-    root = ET.fromstring(xml)
-    out: list[Paper] = []
-    for entry in root.findall(f"{ATOM}entry"):
-        arxiv_url = (entry.findtext(f"{ATOM}id") or "").strip()
-        arxiv_id = arxiv_url.rsplit("/", 1)[-1]
-        title = " ".join((entry.findtext(f"{ATOM}title") or "").split())
-        abstract = " ".join((entry.findtext(f"{ATOM}summary") or "").split())
-        published = (entry.findtext(f"{ATOM}published") or "").strip()
-        authors = [
-            (a.findtext(f"{ATOM}name") or "").strip()
-            for a in entry.findall(f"{ATOM}author")
-        ]
-        cats = [
-            c.attrib.get("term", "")
-            for c in entry.findall("{http://arxiv.org/schemas/atom}category")
-        ]
-        primary_el = entry.find("{http://arxiv.org/schemas/atom}primary_category")
-        primary = primary_el.attrib.get("term") if primary_el is not None else ""
+    url = f"{RSS_BASE}/{category}"
+    try:
+        xml = _fetch_rss(url)
+    except Exception as e:
+        log.warning("arXiv RSS fetch failed for %s: %s", category, e)
+        return []
 
-        if not include_cross_listed and primary != category:
+    feed = feedparser.parse(xml)
+    out: list[Paper] = []
+    for entry in feed.entries:
+        if not include_cross_listed and _is_cross_listed(entry):
             continue
+
+        arxiv_id = _arxiv_id(entry)
+        title = " ".join((entry.get("title") or "").split())
+        abstract = " ".join((entry.get("summary") or "").split())
+        link = entry.get("link") or f"https://arxiv.org/abs/{arxiv_id}"
+
+        authors: list[str] = []
+        for a in entry.get("authors", []):
+            name = a.get("name") if isinstance(a, dict) else str(a)
+            if name:
+                authors.append(name)
+
+        cats = [t.get("term", "") for t in entry.get("tags", [])]
+
+        published = ""
+        if entry.get("published"):
+            try:
+                published = parsedate_to_datetime(entry["published"]).date().isoformat()
+            except Exception:
+                published = entry["published"]
 
         out.append(
             Paper(
@@ -83,11 +88,14 @@ def fetch_category(
                 title=title,
                 authors=authors,
                 abstract=abstract,
-                url=arxiv_url.replace("http://", "https://"),
+                url=link,
                 categories=cats,
                 published=published,
             )
         )
+        if len(out) >= max_results:
+            break
+
     log.info("arxiv %s: %d new papers", category, len(out))
     return out
 
@@ -95,14 +103,11 @@ def fetch_category(
 def fetch_all(cfg: dict) -> list[Paper]:
     papers: list[Paper] = []
     for cat in cfg.get("categories", []):
-        try:
-            papers.extend(
-                fetch_category(
-                    cat,
-                    max_results=cfg.get("max_per_category", 80),
-                    include_cross_listed=cfg.get("include_cross_listed", False),
-                )
+        papers.extend(
+            fetch_category(
+                cat,
+                include_cross_listed=cfg.get("include_cross_listed", False),
+                max_results=cfg.get("max_per_category", 80),
             )
-        except Exception as e:
-            log.warning("arxiv fetch failed for %s: %s", cat, e)
+        )
     return papers
