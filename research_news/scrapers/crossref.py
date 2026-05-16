@@ -24,6 +24,7 @@ log = logging.getLogger(__name__)
 
 CROSSREF_BASE = "https://api.crossref.org"
 S2_BASE = "https://api.semanticscholar.org/graph/v1"
+OPENALEX_BASE = "https://api.openalex.org"
 UA = {"User-Agent": "Mozilla/5.0 (research-news/0.1; mailto:noreply@example.com)"}
 
 
@@ -182,6 +183,38 @@ def _s2_abstract(doi: str) -> str:
     return (data.get("abstract") or "").strip()
 
 
+def _reconstruct_inverted_index(idx: dict | None) -> str:
+    """OpenAlex stores abstracts as {word: [positions...]}. Reconstruct."""
+    if not idx:
+        return ""
+    try:
+        n = max(p for positions in idx.values() for p in positions) + 1
+    except ValueError:
+        return ""
+    words = [""] * n
+    for w, positions in idx.items():
+        for p in positions:
+            if 0 <= p < n:
+                words[p] = w
+    return " ".join(w for w in words if w).strip()
+
+
+@retry(stop=stop_after_attempt(2), wait=wait_exponential(multiplier=2, min=1, max=8))
+def _openalex_abstract(doi: str) -> str:
+    """Look up a work in OpenAlex by DOI and reconstruct its abstract.
+
+    OpenAlex covers most journal articles broadly, is free with no key, and
+    returns 200 even for publishers that 403 us (Oxford / T&F Cloudflare),
+    so it's the right Tier-3 fallback when S2 misses.
+    """
+    data = _get_json(
+        f"{OPENALEX_BASE}/works/doi:{doi}",
+        params={"select": "abstract_inverted_index"},
+        timeout=20,
+    )
+    return _reconstruct_inverted_index(data.get("abstract_inverted_index"))
+
+
 _META_NAMES_ABSTRACT = (
     "citation_abstract",
     "DC.Description",
@@ -283,16 +316,18 @@ def _landing_page_abstract(doi: str) -> tuple[str, str]:
 
 
 def _fill_missing_abstracts(papers: list[Paper], sleep_s: float = 1.2) -> None:
-    """Three-tier abstract backfill: Semantic Scholar → publisher landing page.
-
-    (Crossref's own abstract was already used in _item_to_paper.)
+    """Four-tier abstract backfill:
+      T1: Crossref's own JATS abstract (already used in _item_to_paper)
+      T2: Semantic Scholar by DOI
+      T3: OpenAlex by DOI (works for publishers that 403 us — Oxford / T&F)
+      T4: publisher landing page (last resort, only works for non-Cloudflare sites)
     """
     missing = [p for p in papers if not p.abstract]
     if not missing:
         return
 
-    # Tier 2: Semantic Scholar by DOI
-    log.info("backfill T2: Semantic Scholar for %d papers", len(missing))
+    # Tier 2: Semantic Scholar
+    log.info("backfill T2 (S2): %d papers", len(missing))
     n_s2 = 0
     for p in missing:
         try:
@@ -301,17 +336,30 @@ def _fill_missing_abstracts(papers: list[Paper], sleep_s: float = 1.2) -> None:
                 p.abstract = abs_text
                 n_s2 += 1
         except Exception as e:
-            log.debug("S2 abstract miss for %s: %s", p.paper_id, e)
+            log.debug("S2 miss for %s: %s", p.paper_id, e)
         time.sleep(sleep_s)
     log.info("  T2 filled %d/%d", n_s2, len(missing))
 
-    # Tier 3: publisher landing page (DOI redirect). Require >=150 chars to
-    # filter out site-wide descriptions / cookie-wall copy that look like
-    # abstracts but are not.
+    # Tier 3: OpenAlex
     still_missing = [p for p in papers if not p.abstract]
     if still_missing:
-        log.info("backfill T3: publisher landing pages for %d papers",
-                 len(still_missing))
+        log.info("backfill T3 (OpenAlex): %d papers", len(still_missing))
+        n_oa = 0
+        for p in still_missing:
+            try:
+                abs_text = _openalex_abstract(p.paper_id)
+                if abs_text and len(abs_text) >= 150:
+                    p.abstract = abs_text
+                    n_oa += 1
+            except Exception as e:
+                log.debug("OpenAlex miss for %s: %s", p.paper_id, e)
+            time.sleep(sleep_s)
+        log.info("  T3 filled %d/%d", n_oa, len(still_missing))
+
+    # Tier 4: publisher landing page (last resort)
+    still_missing = [p for p in papers if not p.abstract]
+    if still_missing:
+        log.info("backfill T4 (landing page): %d papers", len(still_missing))
         n_lp = 0
         diag_samples: list[str] = []
         for p in still_missing:
@@ -323,10 +371,9 @@ def _fill_missing_abstracts(papers: list[Paper], sleep_s: float = 1.2) -> None:
                 if len(diag_samples) < 3:
                     diag_samples.append(f"  {p.paper_id}: {diag}")
             time.sleep(sleep_s)
-        log.info("  T3 filled %d/%d", n_lp, len(still_missing))
+        log.info("  T4 filled %d/%d", n_lp, len(still_missing))
         if n_lp < len(still_missing) and diag_samples:
-            # Surface why T3 missed so we can fix the selectors.
-            log.warning("T3 misses, sample diagnostics:\n%s",
+            log.warning("T4 misses, sample diagnostics:\n%s",
                         "\n".join(diag_samples))
 
     final_missing = sum(1 for p in papers if not p.abstract)
@@ -359,30 +406,27 @@ if __name__ == "__main__":
         sys.exit(2)
     for doi in sys.argv[1:]:
         print(f"\n=== {doi} ===")
+        # OpenAlex (the new T3)
+        try:
+            oa = _openalex_abstract(doi)
+            if oa:
+                print(f"OpenAlex: {len(oa)} chars\n  {oa[:300]}...")
+            else:
+                print("OpenAlex: empty (no abstract_inverted_index for this DOI)")
+        except Exception as e:
+            print(f"OpenAlex: ERROR {type(e).__name__}: {e}")
+
+        # Landing page (the old T3, now T4)
         try:
             with httpx.Client(timeout=30, follow_redirects=True, headers=UA) as c:
                 r = c.get(f"https://doi.org/{doi}")
-                print(f"final URL: {r.url}")
-                print(f"status:    {r.status_code}")
-                print(f"size:      {len(r.text)} chars")
-                if r.status_code != 200:
-                    print(f"body head: {r.text[:300]!r}")
-                    continue
-                abs_text, notes = _extract_abstract_from_html(r.text)
-                print(f"candidates found: {len(notes)}")
-                for n in notes[:8]:
-                    print(f"  - {n}")
-                if abs_text:
-                    print(f"abstract ({len(abs_text)} chars):\n{abs_text[:400]}...")
-                else:
-                    # Dump the first <head> contents so we can eyeball what's there
-                    soup = BeautifulSoup(r.text, "lxml")
-                    head = soup.find("head")
-                    if head:
-                        metas = head.find_all("meta")[:25]
-                        print("first 25 <meta> tags:")
-                        for m in metas:
-                            keys = {k: v[:80] for k, v in m.attrs.items()}
-                            print(f"  {keys}")
+                print(f"landing URL: {r.url}")
+                print(f"landing status: {r.status_code} ({len(r.text)} chars)")
+                if r.status_code == 200:
+                    abs_text, notes = _extract_abstract_from_html(r.text)
+                    if abs_text:
+                        print(f"landing abstract: {len(abs_text)} chars")
+                    else:
+                        print(f"landing: no selectors matched ({len(notes)} cands)")
         except Exception as e:
-            print(f"ERROR: {type(e).__name__}: {e}")
+            print(f"landing: ERROR {type(e).__name__}: {e}")
