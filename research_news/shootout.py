@@ -60,7 +60,7 @@ Primary interests (the researcher's own words):
   - higher-order U-statistics
   - semiparametric & nonparametric theory
   - efficiency theory (semiparametric efficiency bounds, debiased ML)
-  - statistical computing (numerical methods, algorithms)
+  - statistical computing (numerical methods and software, matrix, tensor)
 Secondary interests:
   - astrostatistics (datasets, popular-science-style pieces by statisticians)
   - economic theory (datasets, models, applied causal work)
