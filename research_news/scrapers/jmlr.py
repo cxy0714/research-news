@@ -146,10 +146,11 @@ def _enrich_abstract(paper: Paper) -> None:
         log.warning("no abstract found on %s", paper.url)
 
 
-def fetch_latest(n: int = 10, volume: int | None = None,
+def fetch_latest(n: int | None = None, volume: int | None = None,
                  *, sleep_s: float = 1.0) -> list[Paper]:
     """Return the `n` most recent JMLR papers from the given volume.
 
+    `n=None` (default) returns all papers in the volume.
     `volume=None` auto-resolves to the current year's volume.
     """
     vol = volume or _current_volume()
@@ -162,8 +163,11 @@ def fetch_latest(n: int = 10, volume: int | None = None,
         vol -= 1
         html = _get(f"{BASE}/papers/v{vol}/")
     papers = _parse_index(html, vol)
-    log.info("JMLR v%d index: %d papers found, taking top %d", vol, len(papers), n)
-    papers = papers[:n]
+    if n is not None:
+        log.info("JMLR v%d index: %d papers found, taking top %d", vol, len(papers), n)
+        papers = papers[:n]
+    else:
+        log.info("JMLR v%d index: %d papers, taking all", vol, len(papers))
     for p in papers:
         _enrich_abstract(p)
         if sleep_s:
