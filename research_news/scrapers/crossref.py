@@ -182,8 +182,6 @@ def _s2_abstract(doi: str) -> str:
     return (data.get("abstract") or "").strip()
 
 
-# Meta tags that publishers commonly use to expose abstracts on landing pages.
-# Order = preference; longer / more structured wins.
 _META_NAMES_ABSTRACT = (
     "citation_abstract",
     "DC.Description",
@@ -194,15 +192,33 @@ _META_NAMES_ABSTRACT = (
 )
 _META_PROPS_ABSTRACT = ("og:description",)
 
+# Selectors used by the major scholarly publishers, in roughly preference
+# order. Class matching is partial (contains) where the underlying value
+# combines multiple class names like "abstractSection abstractInFull".
+_ABSTRACT_SELECTORS: list[tuple[str, dict]] = [
+    # Oxford Academic (JRSSB, Biometrika)
+    ("section", {"class": re.compile(r"\babstract\b", re.I)}),
+    ("div",     {"class": re.compile(r"abstract-content|article-abstract", re.I)}),
+    # Taylor & Francis (JASA, JCGS)
+    ("div",     {"class": re.compile(r"abstractSection|hlFld-Abstract", re.I)}),
+    # Project Euclid (AoS, Statistical Science, EJS)
+    ("div",     {"class": re.compile(r"article-abstract|publication-abstract", re.I)}),
+    ("div",     {"id": "abstract"}),
+    # Wiley / generic
+    ("div",     {"class": re.compile(r"^abstract$|article-section__content", re.I)}),
+    ("p",       {"class": re.compile(r"\babstract\b", re.I)}),
+]
 
-def _extract_abstract_from_html(html: str) -> str:
-    """Try meta tags first, then common abstract block selectors.
 
-    Works for Oxford Academic (JRSSB, Biometrika), Taylor & Francis (JASA),
-    Project Euclid (AoS), and most publishers that follow scholarly meta
-    conventions. Returns "" if nothing usable found."""
+def _extract_abstract_from_html(html: str) -> tuple[str, list[str]]:
+    """Returns (best_abstract, diagnostic_notes).
+
+    Notes record which selectors hit and their lengths, so we can see what's
+    wrong when nothing comes back.
+    """
+    notes: list[str] = []
     if not html:
-        return ""
+        return "", ["empty html"]
     soup = BeautifulSoup(html, "lxml")
 
     candidates: list[str] = []
@@ -211,35 +227,36 @@ def _extract_abstract_from_html(html: str) -> str:
             v = (tag.get("content") or "").strip()
             if v:
                 candidates.append(v)
+                notes.append(f"meta[name={name}] len={len(v)}")
     for prop in _META_PROPS_ABSTRACT:
         for tag in soup.find_all("meta", attrs={"property": prop}):
             v = (tag.get("content") or "").strip()
             if v:
                 candidates.append(v)
+                notes.append(f"meta[property={prop}] len={len(v)}")
 
-    # Structural selectors used by the big publishers.
-    for sel in [
-        {"name": "section", "attrs": {"class_": "abstract"}},
-        {"name": "div", "attrs": {"class_": "abstractSection"}},   # T&F
-        {"name": "div", "attrs": {"class_": "abstract"}},
-        {"name": "div", "attrs": {"id": "abstract"}},
-        {"name": "div", "attrs": {"class_": "hlFld-Abstract"}},    # T&F variant
-        {"name": "p",   "attrs": {"class_": "abstract"}},
-    ]:
-        for el in soup.find_all(sel["name"], **sel["attrs"]):
+    for tag_name, attrs in _ABSTRACT_SELECTORS:
+        for el in soup.find_all(tag_name, attrs=attrs):
             t = re.sub(r"\s+", " ", el.get_text(" ")).strip()
-            # Strip a leading "Abstract" label
             t = re.sub(r"^abstract[:\s]*", "", t, flags=re.I).strip()
             if t:
                 candidates.append(t)
+                notes.append(f"{tag_name}{attrs} len={len(t)}")
 
-    # Keep candidates that look like real abstracts: long enough, and not
-    # site-wide marketing copy ("description" sometimes returns a site tagline).
+    # Last-resort heuristic: any element with id/class containing "abstract"
+    if not candidates:
+        for el in soup.find_all(attrs={"class": re.compile(r"abstract", re.I)}):
+            t = re.sub(r"\s+", " ", el.get_text(" ")).strip()
+            if 100 < len(t) < 5000:
+                candidates.append(t)
+                notes.append(f"heuristic class~=abstract len={len(t)}")
+
+    if not candidates:
+        return "", notes or ["no candidates found"]
+
     good = [c for c in candidates if len(c) >= 200]
-    if good:
-        return max(good, key=len)
-    # Last resort: longest candidate regardless of length floor.
-    return max(candidates, key=len) if candidates else ""
+    pick = max(good, key=len) if good else max(candidates, key=len)
+    return pick, notes
 
 
 @retry(stop=stop_after_attempt(2), wait=wait_exponential(multiplier=2, min=1, max=8))
@@ -250,14 +267,19 @@ def _get_html(url: str, timeout: float = 25) -> str:
         return r.text
 
 
-def _landing_page_abstract(doi: str) -> str:
-    """Follow the DOI to the publisher landing page and parse its abstract."""
+def _landing_page_abstract(doi: str) -> tuple[str, str]:
+    """Returns (abstract, diagnostic) — the diagnostic explains what happened
+    when the abstract is empty."""
     try:
         html = _get_html(f"https://doi.org/{doi}")
     except Exception as e:
-        log.debug("landing-page fetch failed for %s: %s", doi, e)
-        return ""
-    return _extract_abstract_from_html(html)
+        return "", f"HTTP failed: {type(e).__name__}: {str(e)[:120]}"
+    if not html:
+        return "", "HTTP ok but empty body"
+    abs_text, notes = _extract_abstract_from_html(html)
+    if abs_text:
+        return abs_text, f"ok via {notes[0] if notes else 'unknown'}"
+    return "", f"HTTP ok ({len(html)} chars), no selector hit. tried: {notes[:3]}"
 
 
 def _fill_missing_abstracts(papers: list[Paper], sleep_s: float = 1.2) -> None:
@@ -291,13 +313,21 @@ def _fill_missing_abstracts(papers: list[Paper], sleep_s: float = 1.2) -> None:
         log.info("backfill T3: publisher landing pages for %d papers",
                  len(still_missing))
         n_lp = 0
+        diag_samples: list[str] = []
         for p in still_missing:
-            abs_text = _landing_page_abstract(p.paper_id)
+            abs_text, diag = _landing_page_abstract(p.paper_id)
             if abs_text and len(abs_text) >= 150:
                 p.abstract = abs_text
                 n_lp += 1
+            else:
+                if len(diag_samples) < 3:
+                    diag_samples.append(f"  {p.paper_id}: {diag}")
             time.sleep(sleep_s)
         log.info("  T3 filled %d/%d", n_lp, len(still_missing))
+        if n_lp < len(still_missing) and diag_samples:
+            # Surface why T3 missed so we can fix the selectors.
+            log.warning("T3 misses, sample diagnostics:\n%s",
+                        "\n".join(diag_samples))
 
     final_missing = sum(1 for p in papers if not p.abstract)
     log.info("after all backfills: %d/%d still missing abstract",
@@ -313,3 +343,46 @@ KNOWN_JOURNALS: dict[str, tuple[str, str]] = {
     "Journal of the Royal Statistical Society Series B": ("1369-7412", "JRSSB"),
     "Biometrika":                   ("0006-3444", "Biometrika"),
 }
+
+
+# ── diagnostic CLI ────────────────────────────────────────────────────────────
+# Run: python -m research_news.scrapers.crossref <DOI> [<DOI> ...]
+# Prints: final URL after DOI redirect, HTML size, which selectors matched
+# and how long the matched abstract was. Use this when T3 misses an entire
+# publisher — paste the output back so we know which selector to add.
+
+if __name__ == "__main__":
+    import sys
+    logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
+    if len(sys.argv) < 2:
+        print("usage: python -m research_news.scrapers.crossref <DOI> [<DOI> ...]")
+        sys.exit(2)
+    for doi in sys.argv[1:]:
+        print(f"\n=== {doi} ===")
+        try:
+            with httpx.Client(timeout=30, follow_redirects=True, headers=UA) as c:
+                r = c.get(f"https://doi.org/{doi}")
+                print(f"final URL: {r.url}")
+                print(f"status:    {r.status_code}")
+                print(f"size:      {len(r.text)} chars")
+                if r.status_code != 200:
+                    print(f"body head: {r.text[:300]!r}")
+                    continue
+                abs_text, notes = _extract_abstract_from_html(r.text)
+                print(f"candidates found: {len(notes)}")
+                for n in notes[:8]:
+                    print(f"  - {n}")
+                if abs_text:
+                    print(f"abstract ({len(abs_text)} chars):\n{abs_text[:400]}...")
+                else:
+                    # Dump the first <head> contents so we can eyeball what's there
+                    soup = BeautifulSoup(r.text, "lxml")
+                    head = soup.find("head")
+                    if head:
+                        metas = head.find_all("meta")[:25]
+                        print("first 25 <meta> tags:")
+                        for m in metas:
+                            keys = {k: v[:80] for k, v in m.attrs.items()}
+                            print(f"  {keys}")
+        except Exception as e:
+            print(f"ERROR: {type(e).__name__}: {e}")
