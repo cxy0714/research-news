@@ -46,7 +46,21 @@ class SJTUClient:
         self.client = OpenAI(base_url=base, api_key=key)
         self.model_fast = os.environ.get("SJTU_MODEL_FAST", "deepseek-chat")
         self.model_deep = os.environ.get("SJTU_MODEL_DEEP", "deepseek-reasoner")
-        self.limiter = RateLimiter(max_per_minute=9)   # leave headroom under 10
+        self.limiter = RateLimiter(max_per_minute=9)
+        # Per-run accounting; keys are model names.
+        self.usage: dict[str, dict[str, int]] = {}
+        self.calls: int = 0
+
+    def _record(self, model: str, usage_obj) -> None:
+        if usage_obj is None:
+            return
+        slot = self.usage.setdefault(
+            model, {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}
+        )
+        slot["prompt_tokens"] += int(getattr(usage_obj, "prompt_tokens", 0) or 0)
+        slot["completion_tokens"] += int(getattr(usage_obj, "completion_tokens", 0) or 0)
+        slot["total_tokens"] += int(getattr(usage_obj, "total_tokens", 0) or 0)
+        self.calls += 1
 
     @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=2, min=2, max=20))
     def chat(
@@ -57,7 +71,6 @@ class SJTUClient:
         temperature: float = 0.2,
         max_tokens: int = 2048,
     ) -> str:
-        # SJTU V3.2 requires a real user message.
         if not any(m.get("role") == "user" for m in messages):
             raise ValueError("SJTU API requires at least one user-role message")
         self.limiter.wait()
@@ -68,4 +81,5 @@ class SJTUClient:
             temperature=temperature,
             max_tokens=max_tokens,
         )
+        self._record(model, getattr(resp, "usage", None))
         return resp.choices[0].message.content or ""

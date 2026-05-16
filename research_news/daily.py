@@ -124,8 +124,65 @@ def run(dry_run: bool = False, for_date: date | None = None) -> Path:
     mark_seen(papers, seen)
     save_seen(seen)
 
+    _report_token_usage(client, report_date)
     log.info("wrote %s", out_path)
     return out_path
+
+
+def _report_token_usage(client: SJTUClient, report_date: date) -> None:
+    """Log per-run token usage and append to data/token_usage.json."""
+    import json as _json
+
+    if not client.usage:
+        return
+
+    total_all = sum(m["total_tokens"] for m in client.usage.values())
+    log.info(
+        "token usage: %d calls, %d tokens total across %d model(s)",
+        client.calls,
+        total_all,
+        len(client.usage),
+    )
+    for model, u in client.usage.items():
+        log.info(
+            "  %s: %d prompt + %d completion = %d total",
+            model,
+            u["prompt_tokens"],
+            u["completion_tokens"],
+            u["total_tokens"],
+        )
+
+    log_file = Path("data/token_usage.json")
+    log_file.parent.mkdir(parents=True, exist_ok=True)
+    history = []
+    if log_file.exists():
+        try:
+            history = _json.loads(log_file.read_text(encoding="utf-8"))
+        except _json.JSONDecodeError:
+            history = []
+    history.append(
+        {
+            "run_at": date.today().isoformat(),
+            "report_date": report_date.isoformat(),
+            "calls": client.calls,
+            "by_model": client.usage,
+            "total_tokens": total_all,
+        }
+    )
+    log_file.write_text(
+        _json.dumps(history, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+
+    # Rolling 7-day total — useful since SJTU quota is per-week.
+    from datetime import timedelta as _td
+    cutoff = (date.today() - _td(days=7)).isoformat()
+    week_total = sum(
+        h["total_tokens"] for h in history if h["run_at"] >= cutoff
+    )
+    log.info(
+        "rolling 7-day total: %d tokens (SJTU weekly quota: 1,000,000,000)",
+        week_total,
+    )
 
 def _setup_logging(log_dir: str = "logs") -> None:
     from datetime import date
