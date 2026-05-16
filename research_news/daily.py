@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import logging
+from datetime import date, timedelta
 from pathlib import Path
 
 import yaml
@@ -26,10 +27,10 @@ def _load_config() -> tuple[dict, str]:
     return sources, interests_text
 
 
-def _collect_papers(sources_cfg: dict) -> list[Paper]:
+def _collect_papers(sources_cfg: dict, for_date: date | None = None) -> list[Paper]:
     papers: list[Paper] = []
     if sources_cfg.get("arxiv", {}).get("enabled"):
-        papers.extend(arxiv_scraper.fetch_all(sources_cfg["arxiv"]))
+        papers.extend(arxiv_scraper.fetch_all(sources_cfg["arxiv"], for_date=for_date))
     if sources_cfg.get("authors", {}).get("enabled"):
         authors_cfg = yaml.safe_load(Path("config/authors.yaml").read_text(encoding="utf-8"))
         papers.extend(
@@ -58,13 +59,14 @@ def _parse_thresholds(interests_text: str) -> tuple[float, float]:
     )
 
 
-def run(dry_run: bool = False) -> Path:
+def run(dry_run: bool = False, for_date: date | None = None) -> Path:
     load_dotenv()
     sources_cfg, interests_text = _load_config()
     th_show, th_highlight = _parse_thresholds(interests_text)
 
-    log.info("collecting papers ...")
-    papers = _collect_papers(sources_cfg)
+    report_date = for_date or date.today()
+    log.info("collecting papers for %s ...", report_date)
+    papers = _collect_papers(sources_cfg, for_date=for_date)
     log.info("collected %d papers before dedup", len(papers))
 
     seen = load_seen()
@@ -116,7 +118,7 @@ def run(dry_run: bool = False) -> Path:
     high = [p for p in papers if (p.score or 0) >= th_highlight]
     mid = [p for p in papers if (p.score or 0) < th_highlight]
 
-    out_path = render_daily(high, mid, events)
+    out_path = render_daily(high, mid, events, when=report_date)
     update_index()
 
     mark_seen(papers, seen)
@@ -161,10 +163,29 @@ def _setup_logging(log_dir: str = "logs") -> None:
 
 def main() -> None:
     _setup_logging()
-    ap = argparse.ArgumentParser()
+    ap = argparse.ArgumentParser(description="Fetch and summarise daily research papers.")
     ap.add_argument("--dry-run", action="store_true", help="Fetch only; skip LLM and rendering")
+    ap.add_argument(
+        "--date",
+        metavar="YYYY-MM-DD",
+        help="Fetch papers for this date instead of today (uses arXiv API)",
+    )
+    ap.add_argument(
+        "--lookback-days",
+        type=int,
+        default=0,
+        metavar="N",
+        help="Fetch papers from N days ago (e.g. 3 on Monday to get Friday's papers)",
+    )
     args = ap.parse_args()
-    run(dry_run=args.dry_run)
+
+    for_date: date | None = None
+    if args.date:
+        for_date = date.fromisoformat(args.date)
+    elif args.lookback_days > 0:
+        for_date = date.today() - timedelta(days=args.lookback_days)
+
+    run(dry_run=args.dry_run, for_date=for_date)
 
 
 if __name__ == "__main__":
