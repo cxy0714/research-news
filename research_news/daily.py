@@ -80,6 +80,12 @@ def run(dry_run: bool = False) -> Path:
     if papers:
         log.info("scoring papers ...")
         scores = score_papers(client, papers, interests_text)
+
+        # Show first few paper IDs and whether they matched, for debugging
+        for p in papers[:3]:
+            matched = p.paper_id in scores
+            log.info("ID sample: %r  matched=%s", p.paper_id, matched)
+
         for p in papers:
             sr = scores.get(p.paper_id)
             if sr:

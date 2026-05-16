@@ -4,7 +4,6 @@ from __future__ import annotations
 import json
 import logging
 import re
-from typing import Iterable
 
 from ..models import Event, Paper
 from .sjtu_client import SJTUClient
@@ -44,16 +43,13 @@ the page contains no events, return {"events": []}."""
 def _extract_json(text: str):
     """Tolerant JSON extraction — strips code fences, finds first {...} or [...] block."""
     text = (text or "").strip()
-    # Strip code fences if present
     m = re.search(r"```(?:json)?\s*(.+?)```", text, flags=re.DOTALL)
     if m:
         text = m.group(1).strip()
-    # Try direct parse first
     try:
         return json.loads(text)
     except json.JSONDecodeError:
         pass
-    # Fallback: find the first balanced JSON object or array
     for opener, closer in (("{", "}"), ("[", "]")):
         start = text.find(opener)
         if start == -1:
@@ -77,17 +73,18 @@ def score_papers(
     papers: list[Paper],
     interests_yaml: str,
     *,
-    batch_size: int = 15,
+    batch_size: int = 8,   # smaller batches → shorter output → less risk of truncation
 ) -> dict[str, tuple[float, str]]:
     """Returns {paper_id: (score, reason)}."""
     out: dict[str, tuple[float, str]] = {}
-    for i in range(0, len(papers), batch_size):
+    n_batches = (len(papers) + batch_size - 1) // batch_size
+    for bi, i in enumerate(range(0, len(papers), batch_size)):
         batch = papers[i : i + batch_size]
         payload = [
             {
                 "id": p.paper_id,
                 "title": p.title,
-                "abstract": p.abstract[:1200],
+                "abstract": p.abstract[:600],   # shorter → fewer tokens
                 "categories": p.categories,
             }
             for p in batch
@@ -98,34 +95,76 @@ def score_papers(
             + "\n\n## Papers to score\n"
             + json.dumps(payload, ensure_ascii=False)
         )
+        log.info("scoring batch %d/%d (%d papers) ...", bi + 1, n_batches, len(batch))
         try:
             raw = client.chat(
                 [
                     {"role": "system", "content": SCORE_SYSTEM},
                     {"role": "user", "content": user},
                 ],
-                max_tokens=3000,
+                max_tokens=2000,
             )
-            try:
-                parsed = _extract_json(raw)
-            except json.JSONDecodeError:
-                log.warning("score batch: could not parse JSON, raw=%r", raw[:300])
-                continue
-            if isinstance(parsed, dict):
-                for k in ("results", "data", "papers", "scores"):
-                    if k in parsed and isinstance(parsed[k], list):
-                        parsed = parsed[k]
-                        break
-            if not isinstance(parsed, list):
-                log.warning("score batch returned unexpected shape: %r", parsed)
-                continue
-            for item in parsed:
-                pid = str(item.get("id"))
-                score = float(item.get("score", 0))
-                reason = str(item.get("reason", ""))
-                out[pid] = (score, reason)
+            log.debug("score batch %d raw response: %s", bi + 1, raw[:500])
         except Exception as e:
-            log.warning("score batch failed: %s", e)
+            log.warning("score batch %d: LLM call failed: %s", bi + 1, e)
+            continue
+
+        try:
+            parsed = _extract_json(raw)
+        except json.JSONDecodeError:
+            log.warning(
+                "score batch %d: JSON parse failed. Raw response (first 400 chars):\n%s",
+                bi + 1,
+                raw[:400],
+            )
+            continue
+
+        # Unwrap common wrapper keys
+        if isinstance(parsed, dict):
+            for k in ("results", "data", "papers", "scores"):
+                if k in parsed and isinstance(parsed[k], list):
+                    parsed = parsed[k]
+                    break
+
+        if not isinstance(parsed, list):
+            log.warning(
+                "score batch %d: unexpected shape %s. Raw:\n%s",
+                bi + 1,
+                type(parsed).__name__,
+                raw[:400],
+            )
+            continue
+
+        n_ok = 0
+        for item in parsed:
+            if not isinstance(item, dict):
+                continue
+            pid = str(item.get("id", "")).strip()
+            if not pid:
+                continue
+            try:
+                score = float(item.get("score", 0))
+            except (TypeError, ValueError):
+                score = 0.0
+            reason = str(item.get("reason", ""))
+            out[pid] = (score, reason)
+            n_ok += 1
+        log.info("score batch %d: parsed %d scores", bi + 1, n_ok)
+
+    # Log score distribution so we can see what happened
+    if out:
+        scores_only = [v[0] for v in out.values()]
+        log.info(
+            "score distribution: min=%.1f max=%.1f mean=%.1f  (matched %d/%d papers)",
+            min(scores_only),
+            max(scores_only),
+            sum(scores_only) / len(scores_only),
+            len(out),
+            len(papers),
+        )
+    else:
+        log.warning("score_papers returned 0 results — all papers will be dropped")
+
     return out
 
 
