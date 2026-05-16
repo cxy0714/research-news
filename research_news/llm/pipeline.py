@@ -149,6 +149,74 @@ def score_papers(
     return out
 
 
+def _try_repair_truncated_json(text: str) -> str:
+    """If `text` looks like JSON that got cut off mid-string/list/dict, close
+    the open brackets so it parses. Returns the (possibly modified) text."""
+    text = (text or "").strip()
+    # Tolerate a leading ```json fence stripped earlier
+    if not text or text[0] not in "{[":
+        return text
+
+    # Walk to track string state + bracket stack. Find last "safe" position
+    # where we could cut cleanly (after a `}`, `]`, or string-close quote that
+    # is itself followed by punctuation).
+    stack: list[str] = []
+    in_str = False
+    esc = False
+    safe_cut: int | None = None
+    for i, ch in enumerate(text):
+        if esc:
+            esc = False
+            continue
+        if in_str:
+            if ch == "\\":
+                esc = True
+            elif ch == '"':
+                in_str = False
+            continue
+        if ch == '"':
+            in_str = True
+        elif ch in "{[":
+            stack.append(ch)
+        elif ch in "}]":
+            if stack:
+                stack.pop()
+            if not stack:
+                safe_cut = i + 1   # complete JSON ends here
+        elif ch == "," and stack:
+            # cutting just before a comma drops the next (partial) element
+            safe_cut = i
+
+    # Truncate at the last comma-or-end-of-object boundary so the partial last
+    # element is dropped, then close any remaining open brackets / strings.
+    if safe_cut is not None:
+        text = text[:safe_cut]
+        # Re-walk to get the actual stack at safe_cut
+        stack, in_str, esc = [], False, False
+        for ch in text:
+            if esc:
+                esc = False
+                continue
+            if in_str:
+                if ch == "\\":
+                    esc = True
+                elif ch == '"':
+                    in_str = False
+                continue
+            if ch == '"':
+                in_str = True
+            elif ch in "{[":
+                stack.append(ch)
+            elif ch in "}]" and stack:
+                stack.pop()
+
+    if in_str:
+        text += '"'
+    for opener in reversed(stack):
+        text += "}" if opener == "{" else "]"
+    return text
+
+
 def summarize_paper(
     client: SJTUClient,
     paper: Paper,
@@ -170,22 +238,42 @@ def summarize_paper(
         f"Venue: {paper.venue or paper.source}\n"
         f"Categories: {', '.join(paper.categories)}\n\n{body}\n"
     )
-    raw = client.chat(
-        [
-            {"role": "system", "content": RICH_SUMMARY_SYSTEM},
-            {"role": "user", "content": user},
-        ],
-        deep=deep,
-        model=model,
-        max_tokens=1500,
-    )
+
+    def _call(max_tokens: int) -> str:
+        return client.chat(
+            [
+                {"role": "system", "content": RICH_SUMMARY_SYSTEM},
+                {"role": "user", "content": user},
+            ],
+            deep=deep,
+            model=model,
+            max_tokens=max_tokens,
+        )
+
+    # First attempt: generous budget. Rich prompt typically outputs ~1500-2500
+    # tokens. 1500 was truncating the JSON mid-array for ~half of AoS papers.
+    raw = _call(max_tokens=3000)
+    parsed: dict | None = None
     try:
         parsed = _extract_json(raw)
-        if not isinstance(parsed, dict):
-            parsed = {}
-    except Exception as e:
-        log.warning("summary parse failed for %s: %s", paper.paper_id, e)
-        parsed = {"summary_zh": raw.strip()}
+    except Exception:
+        # Retry once: try truncation-repair, then if still bad, ask again.
+        repaired = _try_repair_truncated_json(raw)
+        try:
+            parsed = _extract_json(repaired)
+            log.info("summary recovered via JSON repair for %s", paper.paper_id)
+        except Exception:
+            log.warning("summary parse failed for %s, retrying LLM call",
+                        paper.paper_id)
+            try:
+                raw = _call(max_tokens=3500)
+                parsed = _extract_json(raw)
+            except Exception as e:
+                log.warning("summary retry also failed for %s: %s", paper.paper_id, e)
+
+    if not isinstance(parsed, dict):
+        parsed = {"summary_zh": raw.strip()[:600]}   # cap so a raw blob doesn't
+                                                       # pollute the rendered page
 
     paper.summary_zh = (parsed.get("summary_zh") or "").strip()
     paper.why_relevant = (parsed.get("why_relevant") or "").strip()
