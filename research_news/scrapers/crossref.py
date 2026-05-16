@@ -244,35 +244,63 @@ def _title_match(a: str, b: str, *, min_overlap: float = 0.82) -> bool:
 @retry(stop=stop_after_attempt(2), wait=wait_exponential(multiplier=2, min=1, max=6))
 def _arxiv_search_abstract(title: str) -> str:
     """Search arxiv for a paper by title; return its abstract if a high-
-    confidence match is found."""
+    confidence match is found.
+
+    Two strategies tried in order:
+      1. Quoted exact-phrase  `ti:"<title>"`  (high precision, low recall)
+      2. Unquoted AND of distinctive words   (high recall, filtered via
+         _title_match on candidate titles)
+    """
     from xml.etree import ElementTree as ET
 
     norm = _normalize_title(title)
-    if len(norm) < 20:   # too short to disambiguate; skip
+    if len(norm) < 20:
         return ""
-    # arxiv `ti:` filter accepts quoted phrases; remove punctuation that
-    # confuses the query.
-    query = f'ti:"{norm}"'
-    with httpx.Client(timeout=25, follow_redirects=True, headers=UA) as c:
-        r = c.get("https://export.arxiv.org/api/query",
-                  params={"search_query": query,
-                          "max_results": 3,
-                          "sortBy": "relevance"})
-        r.raise_for_status()
-        xml = r.text
+
+    def _query(q: str, max_results: int = 5) -> list[tuple[str, str]]:
+        """Return [(candidate_title, summary), ...] from arxiv API."""
+        with httpx.Client(timeout=25, follow_redirects=True, headers=UA) as c:
+            r = c.get("https://export.arxiv.org/api/query",
+                      params={"search_query": q,
+                              "max_results": max_results,
+                              "sortBy": "relevance"})
+            r.raise_for_status()
+            xml = r.text
+        try:
+            root = ET.fromstring(xml)
+        except ET.ParseError:
+            return []
+        out = []
+        for entry in root.findall(f"{_ARXIV_ATOM_NS}entry"):
+            t = " ".join((entry.findtext(f"{_ARXIV_ATOM_NS}title") or "").split())
+            s = " ".join((entry.findtext(f"{_ARXIV_ATOM_NS}summary") or "").split())
+            if t and s:
+                out.append((t, s.strip()))
+        return out
+
+    # Strategy 1: quoted phrase
     try:
-        root = ET.fromstring(xml)
-    except ET.ParseError:
+        for cand_title, summary in _query(f'ti:"{norm}"', max_results=3):
+            if _title_match(title, cand_title):
+                return summary
+    except Exception:
+        pass
+
+    # Strategy 2: AND of distinctive words (drop short stopword-ish tokens)
+    stop = {"a", "an", "the", "of", "for", "and", "or", "on", "in", "with",
+            "to", "via", "by", "is", "are", "from", "at", "as", "be", "into"}
+    words = [w for w in norm.split() if len(w) >= 3 and w not in stop]
+    if len(words) < 2:
         return ""
-    for entry in root.findall(f"{_ARXIV_ATOM_NS}entry"):
-        cand_title = " ".join(
-            (entry.findtext(f"{_ARXIV_ATOM_NS}title") or "").split()
-        )
-        if _title_match(title, cand_title):
-            summary = " ".join(
-                (entry.findtext(f"{_ARXIV_ATOM_NS}summary") or "").split()
-            )
-            return summary.strip()
+    # Cap query length; too-long ANDs return zero matches
+    words = words[:8]
+    q = " AND ".join(f"ti:{w}" for w in words)
+    try:
+        for cand_title, summary in _query(q, max_results=8):
+            if _title_match(title, cand_title):
+                return summary
+    except Exception:
+        pass
     return ""
 
 
@@ -434,7 +462,7 @@ def _fill_missing_abstracts(papers: list[Paper], sleep_s: float = 1.2) -> None:
                     n_ax += 1
             except Exception as e:
                 log.debug("arxiv search miss for %s: %s", p.paper_id, e)
-            time.sleep(3.5)   # arxiv API politeness: 3s minimum
+            time.sleep(5.0)   # arxiv API politeness — 3s min, leave headroom
         log.info("  T4 filled %d/%d", n_ax, len(still_missing))
 
     final_missing = sum(1 for p in papers if not p.abstract)
