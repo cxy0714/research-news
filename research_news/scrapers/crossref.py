@@ -37,6 +37,33 @@ def _get_json(url: str, params: dict | None = None,
         return r.json()
 
 
+# Titles that signal discussion-section content (comments, replies, rejoinders).
+# These items never have abstracts and are never on arxiv, so filtering them
+# before backfill saves a lot of wasted requests — and they're not what the
+# researcher wants in a journal digest anyway.
+_DISCUSSION_TITLE_RE = re.compile(
+    r"\b("
+    r"contribution to (?:the )?discussion"
+    r"|comments? on"
+    r"|discussion (?:of|on)"
+    r"|rejoinder"
+    r"|author(?:s|'s|s')?\s+rep(?:ly|lies)"
+    r"|reply to (?:the )?discussion"
+    r"|response to discussion"
+    r"|invited (?:comment|discussion)"
+    r"|editor(?:ial|'s introduction)?"
+    r"|correction to"
+    r"|corrigend(?:um|a)"
+    r"|erratum"
+    r")\b",
+    re.I,
+)
+
+
+def _is_discussion_content(title: str) -> bool:
+    return bool(_DISCUSSION_TITLE_RE.search(title or ""))
+
+
 def _strip_jats(s: str) -> str:
     """Crossref abstracts are wrapped in JATS XML, e.g.
     "<jats:p>...</jats:p>". Strip tags, keep text."""
@@ -162,11 +189,17 @@ def fetch_latest_issue(issn: str, journal_name: str, *,
         keep = items[:15]
 
     papers: list[Paper] = []
+    n_discussion = 0
     for it in keep:
         p = _item_to_paper(it, journal_name)
-        if p:
-            papers.append(p)
-    log.info("  %d papers in latest issue", len(papers))
+        if not p:
+            continue
+        if _is_discussion_content(p.title):
+            n_discussion += 1
+            continue
+        papers.append(p)
+    log.info("  %d papers in latest issue (filtered %d discussion/comment items)",
+             len(papers), n_discussion)
 
     if fill_abstract:
         _fill_missing_abstracts(papers)
