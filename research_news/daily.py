@@ -125,11 +125,42 @@ def run(dry_run: bool = False) -> Path:
     log.info("wrote %s", out_path)
     return out_path
 
+def _setup_logging(log_dir: str = "logs") -> None:
+    from datetime import date
+    from pathlib import Path
+
+    fmt = "%(asctime)s %(levelname)s %(name)s: %(message)s"
+    datefmt = "%Y-%m-%d %H:%M:%S"
+
+    Path(log_dir).mkdir(exist_ok=True)
+    log_file = Path(log_dir) / f"{date.today().isoformat()}.log"
+
+    root = logging.getLogger()
+    root.setLevel(logging.INFO)
+
+    # Console handler
+    ch = logging.StreamHandler()
+    ch.setFormatter(logging.Formatter(fmt, datefmt=datefmt))
+    root.addHandler(ch)
+
+    # File handler — append so reruns on the same day accumulate
+    fh = logging.FileHandler(log_file, encoding="utf-8")
+    fh.setFormatter(logging.Formatter(fmt, datefmt=datefmt))
+    root.addHandler(fh)
+
+    # httpx HTTP request lines are noisy on console; keep them in file only
+    console_httpx = logging.getLogger("httpx")
+    console_httpx.setLevel(logging.WARNING)
+    # But also add a file-only handler at INFO to capture them in the log file
+    fh_httpx = logging.FileHandler(log_file, encoding="utf-8")
+    fh_httpx.setFormatter(logging.Formatter(fmt, datefmt=datefmt))
+    fh_httpx.setLevel(logging.INFO)
+    console_httpx.addHandler(fh_httpx)
+    console_httpx.propagate = False
+
 
 def main() -> None:
-    logging.basicConfig(
-        level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s"
-    )
+    _setup_logging()
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true", help="Fetch only; skip LLM and rendering")
     args = ap.parse_args()
