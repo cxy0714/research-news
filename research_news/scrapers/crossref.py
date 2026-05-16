@@ -15,6 +15,7 @@ import time
 from collections import defaultdict
 
 import httpx
+from bs4 import BeautifulSoup
 from tenacity import retry, stop_after_attempt, wait_exponential
 
 from ..models import Paper
@@ -23,7 +24,7 @@ log = logging.getLogger(__name__)
 
 CROSSREF_BASE = "https://api.crossref.org"
 S2_BASE = "https://api.semanticscholar.org/graph/v1"
-UA = {"User-Agent": "research-news/0.1 (mailto:noreply@example.com)"}
+UA = {"User-Agent": "Mozilla/5.0 (research-news/0.1; mailto:noreply@example.com)"}
 
 
 @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=2, min=2, max=15))
@@ -181,22 +182,126 @@ def _s2_abstract(doi: str) -> str:
     return (data.get("abstract") or "").strip()
 
 
+# Meta tags that publishers commonly use to expose abstracts on landing pages.
+# Order = preference; longer / more structured wins.
+_META_NAMES_ABSTRACT = (
+    "citation_abstract",
+    "DC.Description",
+    "dc.Description",
+    "DC.description",
+    "dc.description",
+    "description",
+)
+_META_PROPS_ABSTRACT = ("og:description",)
+
+
+def _extract_abstract_from_html(html: str) -> str:
+    """Try meta tags first, then common abstract block selectors.
+
+    Works for Oxford Academic (JRSSB, Biometrika), Taylor & Francis (JASA),
+    Project Euclid (AoS), and most publishers that follow scholarly meta
+    conventions. Returns "" if nothing usable found."""
+    if not html:
+        return ""
+    soup = BeautifulSoup(html, "lxml")
+
+    candidates: list[str] = []
+    for name in _META_NAMES_ABSTRACT:
+        for tag in soup.find_all("meta", attrs={"name": name}):
+            v = (tag.get("content") or "").strip()
+            if v:
+                candidates.append(v)
+    for prop in _META_PROPS_ABSTRACT:
+        for tag in soup.find_all("meta", attrs={"property": prop}):
+            v = (tag.get("content") or "").strip()
+            if v:
+                candidates.append(v)
+
+    # Structural selectors used by the big publishers.
+    for sel in [
+        {"name": "section", "attrs": {"class_": "abstract"}},
+        {"name": "div", "attrs": {"class_": "abstractSection"}},   # T&F
+        {"name": "div", "attrs": {"class_": "abstract"}},
+        {"name": "div", "attrs": {"id": "abstract"}},
+        {"name": "div", "attrs": {"class_": "hlFld-Abstract"}},    # T&F variant
+        {"name": "p",   "attrs": {"class_": "abstract"}},
+    ]:
+        for el in soup.find_all(sel["name"], **sel["attrs"]):
+            t = re.sub(r"\s+", " ", el.get_text(" ")).strip()
+            # Strip a leading "Abstract" label
+            t = re.sub(r"^abstract[:\s]*", "", t, flags=re.I).strip()
+            if t:
+                candidates.append(t)
+
+    # Keep candidates that look like real abstracts: long enough, and not
+    # site-wide marketing copy ("description" sometimes returns a site tagline).
+    good = [c for c in candidates if len(c) >= 200]
+    if good:
+        return max(good, key=len)
+    # Last resort: longest candidate regardless of length floor.
+    return max(candidates, key=len) if candidates else ""
+
+
+@retry(stop=stop_after_attempt(2), wait=wait_exponential(multiplier=2, min=1, max=8))
+def _get_html(url: str, timeout: float = 25) -> str:
+    with httpx.Client(timeout=timeout, follow_redirects=True, headers=UA) as c:
+        r = c.get(url)
+        r.raise_for_status()
+        return r.text
+
+
+def _landing_page_abstract(doi: str) -> str:
+    """Follow the DOI to the publisher landing page and parse its abstract."""
+    try:
+        html = _get_html(f"https://doi.org/{doi}")
+    except Exception as e:
+        log.debug("landing-page fetch failed for %s: %s", doi, e)
+        return ""
+    return _extract_abstract_from_html(html)
+
+
 def _fill_missing_abstracts(papers: list[Paper], sleep_s: float = 1.2) -> None:
+    """Three-tier abstract backfill: Semantic Scholar → publisher landing page.
+
+    (Crossref's own abstract was already used in _item_to_paper.)
+    """
     missing = [p for p in papers if not p.abstract]
     if not missing:
         return
-    log.info("backfilling %d abstracts from Semantic Scholar", len(missing))
+
+    # Tier 2: Semantic Scholar by DOI
+    log.info("backfill T2: Semantic Scholar for %d papers", len(missing))
+    n_s2 = 0
     for p in missing:
         try:
             abs_text = _s2_abstract(p.paper_id)
             if abs_text:
                 p.abstract = abs_text
+                n_s2 += 1
         except Exception as e:
             log.debug("S2 abstract miss for %s: %s", p.paper_id, e)
         time.sleep(sleep_s)
-    still_missing = sum(1 for p in papers if not p.abstract)
-    log.info("after backfill: %d/%d still missing abstract",
-             still_missing, len(papers))
+    log.info("  T2 filled %d/%d", n_s2, len(missing))
+
+    # Tier 3: publisher landing page (DOI redirect). Require >=150 chars to
+    # filter out site-wide descriptions / cookie-wall copy that look like
+    # abstracts but are not.
+    still_missing = [p for p in papers if not p.abstract]
+    if still_missing:
+        log.info("backfill T3: publisher landing pages for %d papers",
+                 len(still_missing))
+        n_lp = 0
+        for p in still_missing:
+            abs_text = _landing_page_abstract(p.paper_id)
+            if abs_text and len(abs_text) >= 150:
+                p.abstract = abs_text
+                n_lp += 1
+            time.sleep(sleep_s)
+        log.info("  T3 filled %d/%d", n_lp, len(still_missing))
+
+    final_missing = sum(1 for p in papers if not p.abstract)
+    log.info("after all backfills: %d/%d still missing abstract",
+             final_missing, len(papers))
 
 
 # Built-in ISSN registry for the journals we usually want. Override via
