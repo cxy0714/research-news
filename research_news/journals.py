@@ -57,36 +57,62 @@ def _fetch_journal(short: str, *, jmlr_n: int = 10,
     return []
 
 
+def _save_papers(papers: list[Paper], path: Path) -> None:
+    import json
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        json.dumps([p.to_dict() for p in papers], ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+    log.info("saved %d papers to %s", len(papers), path)
+
+
+def _load_papers(path: Path) -> list[Paper]:
+    import json
+    raw = json.loads(path.read_text(encoding="utf-8"))
+    papers = [Paper(**d) for d in raw]
+    log.info("loaded %d papers from %s", len(papers), path)
+    return papers
+
+
 def run(only: list[str] | None = None, dry_run: bool = False,
         jmlr_n: int = 10, jmlr_vol: int | None = None,
         n_issues: int = 1, label: str | None = None,
-        skip_pdf: bool = False) -> Path | None:
+        skip_pdf: bool = False,
+        save_papers: Path | None = None,
+        load_papers: Path | None = None) -> Path | None:
     load_dotenv()
     interests_text = Path("config/interests.yaml").read_text(encoding="utf-8")
 
-    targets = only or DEFAULT_JOURNALS
-    log.info("journals run: %s", targets)
+    if load_papers:
+        log.info("skipping fetch; loading papers from %s", load_papers)
+        papers = _load_papers(load_papers)
+    else:
+        targets = only or DEFAULT_JOURNALS
+        log.info("journals run: %s", targets)
+        papers = []
+        for short in targets:
+            try:
+                ps = _fetch_journal(short, jmlr_n=jmlr_n, jmlr_vol=jmlr_vol,
+                                    n_issues=n_issues)
+            except Exception as e:
+                log.error("fetch failed for %s: %s", short, e)
+                continue
+            log.info("  %s → %d papers", short, len(ps))
+            papers.extend(ps)
 
-    papers: list[Paper] = []
-    for short in targets:
-        try:
-            ps = _fetch_journal(short, jmlr_n=jmlr_n, jmlr_vol=jmlr_vol,
-                                n_issues=n_issues)
-        except Exception as e:
-            log.error("fetch failed for %s: %s", short, e)
-            continue
-        log.info("  %s → %d papers", short, len(ps))
-        papers.extend(ps)
+        # Drop any without an abstract — can't score them meaningfully.
+        n_before = len(papers)
+        papers = [p for p in papers if p.abstract]
+        if len(papers) < n_before:
+            log.info("dropped %d papers with no abstract (Crossref + S2 both empty)",
+                     n_before - len(papers))
 
-    # Drop any without an abstract — can't score them meaningfully.
-    n_before = len(papers)
-    papers = [p for p in papers if p.abstract]
-    if len(papers) < n_before:
-        log.info("dropped %d papers with no abstract (Crossref + S2 both empty)",
-                 n_before - len(papers))
+        if save_papers:
+            _save_papers(papers, save_papers)
 
     if not papers:
-        log.error("no papers fetched — bailing")
+        log.error("no papers — bailing")
         return None
 
     if dry_run:
@@ -176,12 +202,22 @@ def main(argv: list[str] | None = None) -> int:
                     help="Don't download PDFs for high-relevance papers.")
     ap.add_argument("--dry-run", action="store_true",
                     help="Fetch metadata + abstracts only; skip LLM and rendering.")
+    ap.add_argument("--save-papers", type=Path, default=None, metavar="PATH",
+                    help="After fetching (before LLM), dump papers to PATH as JSON. "
+                         "Combine with --dry-run for a pure 'fetch only' step.")
+    ap.add_argument("--load-papers", type=Path, default=None, metavar="PATH",
+                    help="Skip fetching and load papers from PATH. Lets you "
+                         "iterate on prompts / models without re-scraping.")
     args = ap.parse_args(argv)
+
+    if args.load_papers and args.save_papers:
+        ap.error("--load-papers and --save-papers are mutually exclusive")
 
     only = [s.strip() for s in args.only.split(",")] if args.only else None
     run(only=only, dry_run=args.dry_run, jmlr_n=args.jmlr_n,
         jmlr_vol=args.jmlr_vol, n_issues=args.n_issues, label=args.label,
-        skip_pdf=args.skip_pdf)
+        skip_pdf=args.skip_pdf,
+        save_papers=args.save_papers, load_papers=args.load_papers)
     return 0
 
 
