@@ -10,6 +10,7 @@ import yaml
 from dotenv import load_dotenv
 
 from .dedup import filter_new, load_seen, mark_seen, save_seen
+from .highlights import save_highlights
 from .llm.pipeline import extract_events, score_papers, summarize_paper
 from .llm.sjtu_client import SJTUClient
 from .models import Event, Paper
@@ -19,6 +20,11 @@ from .scrapers import authors as authors_scraper
 from .scrapers import conferences as conf_scraper
 
 log = logging.getLogger("research_news")
+
+# Model used by the daily pipeline (overridable via env). GLM-5.1 won the
+# in-house shootout vs DeepSeek V3.2 — see docs/shootout/.
+import os
+DAILY_MODEL = os.environ.get("DAILY_MODEL", "glm-5.1")
 
 
 def _load_config() -> tuple[dict, str]:
@@ -80,18 +86,16 @@ def run(dry_run: bool = False, for_date: date | None = None) -> Path:
     client = SJTUClient()
 
     if papers:
-        log.info("scoring papers ...")
-        scores = score_papers(client, papers, interests_text)
+        log.info("scoring papers (model=%s) ...", DAILY_MODEL)
+        scores = score_papers(client, papers, interests_text, model=DAILY_MODEL)
 
-        # Show first few paper IDs and whether they matched, for debugging
         for p in papers[:3]:
-            matched = p.paper_id in scores
-            log.info("ID sample: %r  matched=%s", p.paper_id, matched)
+            log.info("ID sample: %r  matched=%s", p.paper_id, p.paper_id in scores)
 
         for p in papers:
             sr = scores.get(p.paper_id)
             if sr:
-                p.score, _ = sr
+                p.score, p.score_reason = sr
             else:
                 p.score = 0.0
 
@@ -102,13 +106,10 @@ def run(dry_run: bool = False, for_date: date | None = None) -> Path:
         # Cap to keep the daily digest readable.
         papers = papers[:25]
 
-        # Summarize: deep model for highlights, fast for the rest.
+        log.info("summarizing %d papers (model=%s) ...", len(papers), DAILY_MODEL)
         for p in papers:
-            deep = (p.score or 0) >= th_highlight
             try:
-                p.summary_zh, p.why_relevant = summarize_paper(
-                    client, p, interests_text, deep=deep
-                )
+                summarize_paper(client, p, interests_text, model=DAILY_MODEL)
             except Exception as e:
                 log.warning("summary failed for %s: %s", p.paper_id, e)
 
@@ -120,6 +121,12 @@ def run(dry_run: bool = False, for_date: date | None = None) -> Path:
 
     out_path = render_daily(high, mid, events, when=report_date)
     update_index()
+
+    # Persist high-relevance papers: download PDFs into per-topic folders
+    # and update the global manifest.
+    if high:
+        log.info("saving %d highlights (PDF + manifest)", len(high))
+        save_highlights(high, run_date=report_date)
 
     mark_seen(papers, seen)
     save_seen(seen)

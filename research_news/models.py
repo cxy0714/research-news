@@ -18,8 +18,14 @@ class Paper:
     venue: str | None = None
     # Filled in by the LLM step:
     score: float | None = None
+    score_reason: str | None = None
     summary_zh: str | None = None
     why_relevant: str | None = None
+    topic: str | None = None              # one of llm.prompts.TOPICS
+    key_techniques: list[str] = field(default_factory=list)
+    novelty_flag: str | None = None       # new_theory|new_method|sharper_rate|...
+    # Set when we download the PDF for high-relevance papers:
+    pdf_path: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
