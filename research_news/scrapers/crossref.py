@@ -123,10 +123,13 @@ def _item_to_paper(item: dict, journal_name: str) -> Paper | None:
 
 
 def _latest_issue_key(items: list[dict]) -> tuple | None:
-    """Pick the most recent (volume, issue) tuple from a list of works.
+    """Pick the most recent (volume, issue) tuple from a list of works."""
+    keys = _issue_keys(items)
+    return max(keys) if keys else None
 
-    Numeric where possible. Returns None if no items have both volume + issue.
-    """
+
+def _issue_keys(items: list[dict]) -> list[tuple]:
+    """Return all (volume, issue) tuples present in `items`, deduped & sorted desc."""
     def key_for(it: dict):
         vol = it.get("volume")
         iss = it.get("issue") or it.get("journal-issue", {}).get("issue")
@@ -139,23 +142,26 @@ def _latest_issue_key(items: list[dict]) -> tuple | None:
             return None
         return (vol_n, iss_n)
 
-    keys = [k for k in (key_for(it) for it in items) if k is not None]
-    if not keys:
-        return None
-    return max(keys)
+    keys = {k for k in (key_for(it) for it in items) if k is not None}
+    return sorted(keys, reverse=True)
 
 
 def fetch_latest_issue(issn: str, journal_name: str, *,
-                       rows: int = 60,
+                       n_issues: int = 1,
+                       rows: int | None = None,
                        fill_abstract: bool = True) -> list[Paper]:
-    """Fetch the most recent issue's worth of articles for a journal.
+    """Fetch the most recent `n_issues` issues' worth of articles for a journal.
 
-    We pull the latest 60 works for the ISSN, identify the most-recent
-    (volume, issue) tuple, then return only papers in that issue.
-    For journals that don't expose issue numbers (rolling pub like JMLR
-    via Crossref), we fall back to the most recent `rows` items capped at 15.
+    `n_issues=1` (default) returns the latest issue only. `n_issues=4` returns
+    the four most recent (vol, issue) tuples — roughly one year for a
+    quarterly journal. For journals without issue numbers (rolling pub like
+    JMLR via Crossref), we fall back to `15 * n_issues` most recent items.
     """
-    log.info("Crossref: fetching latest works for %s (ISSN %s)", journal_name, issn)
+    if rows is None:
+        # Generous headroom: ~30 papers per issue worst case
+        rows = max(60, n_issues * 35)
+    log.info("Crossref: fetching latest %d issues of %s (ISSN %s)",
+             n_issues, journal_name, issn)
     data = _get_json(
         f"{CROSSREF_BASE}/journals/{issn}/works",
         params={
@@ -170,23 +176,26 @@ def fetch_latest_issue(issn: str, journal_name: str, *,
     if not items:
         return []
 
-    target = _latest_issue_key(items)
-    if target is not None:
-        vol_n, iss_n = target
-        log.info("  latest issue key: vol %d issue %d", vol_n, iss_n)
+    issue_keys = _issue_keys(items)
+    if issue_keys:
+        targets = set(issue_keys[:n_issues])
+        log.info("  taking issues: %s", sorted(targets, reverse=True))
         keep = []
         for it in items:
             v = it.get("volume")
             i = it.get("issue") or it.get("journal-issue", {}).get("issue")
             try:
-                if v and i and int(re.sub(r"[^0-9]", "", v)) == vol_n \
-                   and int(re.sub(r"[^0-9]", "", i)) == iss_n:
+                if v and i and (
+                    int(re.sub(r"[^0-9]", "", v)),
+                    int(re.sub(r"[^0-9]", "", i))
+                ) in targets:
                     keep.append(it)
             except ValueError:
                 continue
     else:
-        log.info("  no (vol, issue) keys found, taking 15 most recent")
-        keep = items[:15]
+        cap = 15 * n_issues
+        log.info("  no (vol, issue) keys found, taking %d most recent", cap)
+        keep = items[:cap]
 
     papers: list[Paper] = []
     n_discussion = 0
