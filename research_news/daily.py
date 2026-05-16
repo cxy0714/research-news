@@ -21,8 +21,8 @@ log = logging.getLogger("research_news")
 
 
 def _load_config() -> tuple[dict, str]:
-    sources = yaml.safe_load(Path("config/sources.yaml").read_text())
-    interests_text = Path("config/interests.yaml").read_text()
+    sources = yaml.safe_load(Path("config/sources.yaml").read_text(encoding="utf-8"))
+    interests_text = Path("config/interests.yaml").read_text(encoding="utf-8")
     return sources, interests_text
 
 
@@ -31,7 +31,7 @@ def _collect_papers(sources_cfg: dict) -> list[Paper]:
     if sources_cfg.get("arxiv", {}).get("enabled"):
         papers.extend(arxiv_scraper.fetch_all(sources_cfg["arxiv"]))
     if sources_cfg.get("authors", {}).get("enabled"):
-        authors_cfg = yaml.safe_load(Path("config/authors.yaml").read_text())
+        authors_cfg = yaml.safe_load(Path("config/authors.yaml").read_text(encoding="utf-8"))
         papers.extend(
             authors_scraper.fetch_all(
                 authors_cfg, lookback_days=sources_cfg["authors"].get("lookback_days", 14)

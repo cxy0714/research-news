@@ -38,13 +38,15 @@ def _get(path: str, params: dict | None = None) -> dict:
 
 def _load_cache() -> dict:
     if CACHE_FILE.exists():
-        return json.loads(CACHE_FILE.read_text())
+        return json.loads(CACHE_FILE.read_text(encoding="utf-8"))
     return {}
 
 
 def _save_cache(d: dict) -> None:
     CACHE_FILE.parent.mkdir(parents=True, exist_ok=True)
-    CACHE_FILE.write_text(json.dumps(d, ensure_ascii=False, indent=2))
+    CACHE_FILE.write_text(
+        json.dumps(d, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
 
 
 def resolve_author(name: str, affiliation_hint: str | None = None) -> str | None:

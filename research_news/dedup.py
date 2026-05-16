@@ -11,13 +11,15 @@ SEEN_FILE = Path("data/seen_papers.json")
 
 def load_seen() -> set[str]:
     if SEEN_FILE.exists():
-        return set(json.loads(SEEN_FILE.read_text()))
+        return set(json.loads(SEEN_FILE.read_text(encoding="utf-8")))
     return set()
 
 
 def save_seen(ids: set[str]) -> None:
     SEEN_FILE.parent.mkdir(parents=True, exist_ok=True)
-    SEEN_FILE.write_text(json.dumps(sorted(ids), ensure_ascii=False, indent=2))
+    SEEN_FILE.write_text(
+        json.dumps(sorted(ids), ensure_ascii=False, indent=2), encoding="utf-8"
+    )
 
 
 def filter_new(papers: list[Paper], seen: set[str]) -> list[Paper]:
