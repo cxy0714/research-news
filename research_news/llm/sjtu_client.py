@@ -68,13 +68,15 @@ class SJTUClient:
         messages: list[dict],
         *,
         deep: bool = False,
+        model: str | None = None,
         temperature: float = 0.2,
         max_tokens: int = 2048,
     ) -> str:
         if not any(m.get("role") == "user" for m in messages):
             raise ValueError("SJTU API requires at least one user-role message")
         self.limiter.wait()
-        model = self.model_deep if deep else self.model_fast
+        if model is None:
+            model = self.model_deep if deep else self.model_fast
         resp = self.client.chat.completions.create(
             model=model,
             messages=messages,
