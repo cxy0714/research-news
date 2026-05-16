@@ -28,8 +28,8 @@ from .highlights import save_highlights
 from .llm.pipeline import score_papers, summarize_paper
 from .llm.sjtu_client import SJTUClient
 from .models import Paper
-from .render.markdown import render_journals, update_index
-from .scrapers.crossref import KNOWN_JOURNALS, fetch_latest_issue
+from .render.markdown import render_journals_by_group, update_index
+from .scrapers.crossref import fetch_latest_issue
 from .scrapers.jmlr import fetch_latest as jmlr_fetch_latest
 from .usage import report as report_token_usage
 
@@ -38,24 +38,29 @@ log = logging.getLogger("research_news.journals")
 JOURNALS_MODEL = os.environ.get("JOURNALS_MODEL",
                                 os.environ.get("DAILY_MODEL", "glm-5.1"))
 
-# Journals enabled by default. "JMLR" is special (own scraper); the rest go
-# through Crossref via KNOWN_JOURNALS.
-DEFAULT_JOURNALS = ["JMLR", "AoS", "JASA", "JRSSB", "Biometrika"]
-
-CROSSREF_BY_SHORT = {short: (name, issn)
-                     for name, (issn, short) in KNOWN_JOURNALS.items()}
+JOURNALS_CONFIG_PATH = Path("config/journals.yaml")
 
 
-def _fetch_journal(short: str, *, jmlr_n: int | None = None,
+def _load_groups() -> dict:
+    """Returns {group_key: {label, journals: [{short, full, issn}]}}."""
+    import yaml as _yaml
+    cfg = _yaml.safe_load(JOURNALS_CONFIG_PATH.read_text(encoding="utf-8"))
+    return cfg.get("groups", {})
+
+
+def _fetch_journal(jcfg: dict, *, jmlr_n: int | None = None,
                    jmlr_vol: int | None = None,
                    n_issues: int = 1) -> list[Paper]:
-    if short == "JMLR":
+    issn = jcfg["issn"]
+    full = jcfg["full"]
+    short = jcfg.get("short", full)
+    if issn == "jmlr":
         return jmlr_fetch_latest(n=jmlr_n, volume=jmlr_vol)
-    if short in CROSSREF_BY_SHORT:
-        full_name, issn = CROSSREF_BY_SHORT[short]
-        return fetch_latest_issue(issn, full_name, n_issues=n_issues)
-    log.warning("unknown journal short name: %r — skipping", short)
-    return []
+    try:
+        return fetch_latest_issue(issn, full, n_issues=n_issues)
+    except Exception as e:
+        log.warning("fetch failed for %s (ISSN %s): %s", short, issn, e)
+        return []
 
 
 def _save_papers(papers: list[Paper], path: Path) -> None:
@@ -105,30 +110,42 @@ def run(only: list[str] | None = None, dry_run: bool = False,
         skip_pdf: bool = False,
         save_papers: Path | None = None,
         load_papers: Path | None = None,
-        retry_broken: bool = False) -> Path | None:
+        retry_broken: bool = False,
+        only_group: list[str] | None = None) -> list[Path] | None:
     load_dotenv()
     interests_text = Path("config/interests.yaml").read_text(encoding="utf-8")
+    groups = _load_groups()
 
     if load_papers:
         log.info("skipping fetch; loading papers from %s", load_papers)
         papers = _load_papers(load_papers)
     else:
-        targets = only or DEFAULT_JOURNALS
-        log.info("journals run: %s", targets)
+        if only_group:
+            groups_to_run = {k: groups[k] for k in only_group if k in groups}
+            unknown = [k for k in only_group if k not in groups]
+            if unknown:
+                log.warning("unknown groups (skipped): %s — available: %s",
+                            unknown, list(groups.keys()))
+        else:
+            groups_to_run = groups
+
+        only_shorts = set(s.strip() for s in (only or []) if s.strip())
+        log.info("journals run: groups=%s, only=%s",
+                 list(groups_to_run.keys()),
+                 sorted(only_shorts) if only_shorts else "all")
+
         papers = []
-        for short in targets:
-            try:
-                ps = _fetch_journal(short, jmlr_n=jmlr_n, jmlr_vol=jmlr_vol,
-                                    n_issues=n_issues)
-            except Exception as e:
-                log.error("fetch failed for %s: %s", short, e)
-                continue
-            log.info("  %s → %d papers", short, len(ps))
-            papers.extend(ps)
-            # Incremental save: if a journal fetch later crashes (or you ^C),
-            # everything fetched so far is already on disk.
-            if save_papers:
-                _save_papers([p for p in papers if p.abstract], save_papers)
+        for gkey, gcfg in groups_to_run.items():
+            for jcfg in gcfg["journals"]:
+                if only_shorts and jcfg["short"] not in only_shorts:
+                    continue
+                ps = _fetch_journal(jcfg, jmlr_n=jmlr_n,
+                                    jmlr_vol=jmlr_vol, n_issues=n_issues)
+                log.info("  [%s] %s → %d papers", gkey, jcfg["short"], len(ps))
+                papers.extend(ps)
+                # Incremental save: ^C / crash leaves earlier journals on disk.
+                if save_papers:
+                    _save_papers([p for p in papers if p.abstract], save_papers)
 
         # Drop any without an abstract — can't score them meaningfully.
         n_before = len(papers)
@@ -211,7 +228,7 @@ def run(only: list[str] | None = None, dry_run: bool = False,
         label = f"{today.year}Q{quarter}"
         if n_issues > 1:
             label = f"{label}-{n_issues}issues"
-    out_path = render_journals(papers, when=today, label=label)
+    out_paths = render_journals_by_group(papers, groups, when=today, label=label)
     update_index()
 
     if high and not skip_pdf:
@@ -220,9 +237,10 @@ def run(only: list[str] | None = None, dry_run: bool = False,
     elif skip_pdf:
         log.info("skip_pdf set; not downloading journal highlight PDFs")
 
-    log.info("wrote %s", out_path)
+    for p in out_paths:
+        log.info("wrote %s", p)
     report_token_usage(client, "journals", today)
-    return out_path
+    return out_paths
 
 
 def _setup_logging() -> None:
@@ -235,8 +253,12 @@ def main(argv: list[str] | None = None) -> int:
     _setup_logging()
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--only", default=None,
-                    help="Comma-separated subset of journals to fetch. "
-                         f"Available: {','.join(DEFAULT_JOURNALS)}")
+                    help="Comma-separated subset of journal short names to fetch "
+                         "(e.g. JMLR,AoS). See config/journals.yaml for the list.")
+    ap.add_argument("--only-group", default=None,
+                    help="Comma-separated subset of group keys to fetch "
+                         "(e.g. core,applied). Skips all journals outside these "
+                         "groups. See config/journals.yaml for the group list.")
     ap.add_argument("--jmlr-n", type=int, default=None,
                     help="Cap how many recent JMLR papers to pull. "
                          "Default: no cap (take entire current volume, ~50).")
@@ -272,7 +294,10 @@ def main(argv: list[str] | None = None) -> int:
         ap.error("--retry-broken requires --load-papers")
 
     only = [s.strip() for s in args.only.split(",")] if args.only else None
-    run(only=only, dry_run=args.dry_run, jmlr_n=args.jmlr_n,
+    only_group = [s.strip() for s in args.only_group.split(",")] \
+        if args.only_group else None
+    run(only=only, only_group=only_group,
+        dry_run=args.dry_run, jmlr_n=args.jmlr_n,
         jmlr_vol=args.jmlr_vol, n_issues=args.n_issues, label=args.label,
         skip_pdf=args.skip_pdf,
         save_papers=args.save_papers, load_papers=args.load_papers,
