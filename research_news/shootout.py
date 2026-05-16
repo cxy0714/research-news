@@ -36,7 +36,11 @@ from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 from tenacity import retry, stop_after_attempt, wait_exponential
 
-from .llm.pipeline import SUMMARY_SYSTEM as BASELINE_SUMMARY_SYSTEM, _extract_json
+from .llm.pipeline import _extract_json
+from .llm.prompts import (
+    RICH_SUMMARY_SYSTEM,
+    SUMMARY_SYSTEM as BASELINE_SUMMARY_SYSTEM,
+)
 from .llm.sjtu_client import SJTUClient
 from .models import Paper
 
@@ -46,62 +50,6 @@ ATOM = "{http://www.w3.org/2005/Atom}"
 ARXIV_NS = "{http://arxiv.org/schemas/atom}"
 
 OUTPUT_DIR = Path("docs/shootout")
-
-
-# ── richer prompt (variants B, C) ─────────────────────────────────────────────
-
-RICH_SUMMARY_SYSTEM = """You write personalized Chinese research notes for a
-statistics researcher.
-
-Primary interests (the researcher's own words):
-  - causal inference (proximal CI, sensitivity, IV, mediation, longitudinal)
-  - mathematical statistics & hypothesis testing
-  - high-dimensional statistics, random matrix theory
-  - higher-order U-statistics
-  - semiparametric & nonparametric theory
-  - efficiency theory (semiparametric efficiency bounds, debiased ML)
-  - statistical computing (numerical methods and software, matrix, tensor)
-Secondary interests:
-  - astrostatistics (datasets, popular-science-style pieces by statisticians)
-  - economic theory (datasets, models, applied causal work)
-  - epidemiology (datasets, applied causal work)
-
-For each paper, return ONLY a valid JSON object of the form:
-{
-  "topic": "<one of: causal_inference | high_dim_rmt | nonparam_semipara | efficiency_dml | higher_order_U | hypothesis_testing | stat_computing | astrostats | econ_theory | epidemiology | other>",
-  "summary_zh": "...",
-  "key_techniques": ["..."],
-  "why_relevant": "...",
-  "novelty_flag": "<one of: new_theory | new_method | sharper_rate | weaker_assumption | application | survey | minor>"
-}
-
-No prose, no markdown fences — just the JSON object.
-
-Guidance for `summary_zh` (5-7 句中文，信息密度优先于辞藻):
-  - 第 1 句: 研究问题 + 设定。明确指出 estimand / model / 关键 regularity 假设
-    （e.g. "在 proximal CI 框架下，目标是 ATE 在 negative-control 假设下的 identification …"）。
-  - 中间 2-4 句: 方法的核心机制。优先给出具体技术词：
-      * estimator 名称（DR / TMLE / orthogonal / one-step / IPW / sieve ...）
-      * 收敛性质（cross-fitting, n^{-1/2}-CAN, minimax rate, semiparametric
-        efficiency bound, influence function, neural tangent ...）
-      * 关键技术工具（empirical process, U-statistic projection, RMT
-        Marchenko-Pastur, concentration inequality, kernel / sieve / RKHS ...）
-    禁止空泛形容词："优秀"、"高效"、"强大" → 改成具体率/界/对比。
-  - 最后 1-2 句: 主要理论或实证结果，外加"对您可能有用"的一句话连接到
-    primary 或 secondary interest 的具体子方向（点名哪个）。
-  - 若 paper 仅是 application / empirical / position / survey，必须在最后明确
-    指出方法学 novelty 程度（用 novelty_flag 同时标）。
-
-`key_techniques`: 3-6 个英文短语，命名具体方法/概念（如 "double machine
-learning", "orthogonal score", "Marchenko-Pastur law", "U-statistic projection",
-"proximal g-formula", "sieve M-estimation", "simulation-based inference"）。
-不要泛词如 "machine learning" / "estimation" / "deep learning"。
-
-`why_relevant`: 1-2 句中文，点名连接到 researcher 的哪个具体 interest
-（primary 或 secondary 均可，但要点名子方向，例如"proximal CI 的 negative
-control 设定 / RMT 在高维 inference 的应用 / 流行病学队列研究的 IV 方法"），
-并说明读它的具体收益（新理论 / sharper rate / 放松假设 / 方法可迁移 / 数据集
-价值 / 写作风格借鉴）。"""
 
 
 # ── arxiv metadata ────────────────────────────────────────────────────────────

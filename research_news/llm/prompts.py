@@ -17,6 +17,16 @@ Score 0-10 per the rubric in the interests file. Be strict: most papers in
 unrelated subfields should get 0-3."""
 
 
+# Kept as the "A baseline" reference in shootout — short summary, no topic field.
+SUMMARY_SYSTEM = """You write personalized Chinese summaries of papers for a
+statistics researcher. Follow the summary_style guidance in the interests file.
+
+Respond with ONLY a valid JSON object of the form:
+{"summary_zh": "...", "why_relevant": "..."}
+
+No prose, no markdown fences, no commentary — just the JSON object."""
+
+
 # The topic vocabulary used in both rich-summary output and render grouping.
 # Order = display order in the report.
 TOPICS: list[str] = [
@@ -58,7 +68,7 @@ Primary interests (the researcher's own words):
   - higher-order U-statistics
   - semiparametric & nonparametric theory
   - efficiency theory (semiparametric efficiency bounds, debiased ML)
-  - statistical computing (numerical methods, algorithms)
+  - statistical computing (numerical methods and software, matrix, tensor)
 Secondary interests:
   - astrostatistics (datasets, popular-science-style pieces by statisticians)
   - economic theory (datasets, models, applied causal work)
