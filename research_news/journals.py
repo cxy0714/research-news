@@ -46,18 +46,20 @@ CROSSREF_BY_SHORT = {short: (name, issn)
 
 
 def _fetch_journal(short: str, *, jmlr_n: int = 10,
-                   jmlr_vol: int | None = None) -> list[Paper]:
+                   jmlr_vol: int | None = None,
+                   n_issues: int = 1) -> list[Paper]:
     if short == "JMLR":
         return jmlr_fetch_latest(n=jmlr_n, volume=jmlr_vol)
     if short in CROSSREF_BY_SHORT:
         full_name, issn = CROSSREF_BY_SHORT[short]
-        return fetch_latest_issue(issn, full_name)
+        return fetch_latest_issue(issn, full_name, n_issues=n_issues)
     log.warning("unknown journal short name: %r — skipping", short)
     return []
 
 
 def run(only: list[str] | None = None, dry_run: bool = False,
         jmlr_n: int = 10, jmlr_vol: int | None = None,
+        n_issues: int = 1, label: str | None = None,
         skip_pdf: bool = False) -> Path | None:
     load_dotenv()
     interests_text = Path("config/interests.yaml").read_text(encoding="utf-8")
@@ -68,7 +70,8 @@ def run(only: list[str] | None = None, dry_run: bool = False,
     papers: list[Paper] = []
     for short in targets:
         try:
-            ps = _fetch_journal(short, jmlr_n=jmlr_n, jmlr_vol=jmlr_vol)
+            ps = _fetch_journal(short, jmlr_n=jmlr_n, jmlr_vol=jmlr_vol,
+                                n_issues=n_issues)
         except Exception as e:
             log.error("fetch failed for %s: %s", short, e)
             continue
@@ -124,10 +127,14 @@ def run(only: list[str] | None = None, dry_run: bool = False,
     )
     high = [p for p in papers if (p.score or 0) >= th_highlight]
 
-    # Stamp the file with the year + quarter for easy quarterly recognition.
+    # Stamp the file with the year + quarter for easy quarterly recognition,
+    # unless an explicit label is given (e.g. for multi-issue backfills).
     today = date.today()
-    quarter = (today.month - 1) // 3 + 1
-    label = f"{today.year}Q{quarter}"
+    if label is None:
+        quarter = (today.month - 1) // 3 + 1
+        label = f"{today.year}Q{quarter}"
+        if n_issues > 1:
+            label = f"{label}-{n_issues}issues"
     out_path = render_journals(papers, when=today, label=label)
     update_index()
 
@@ -158,6 +165,13 @@ def main(argv: list[str] | None = None) -> int:
                     help="How many recent JMLR papers to pull (default 10).")
     ap.add_argument("--jmlr-vol", type=int, default=None,
                     help="Override JMLR volume (default: current year - 1999).")
+    ap.add_argument("--n-issues", type=int, default=1,
+                    help="How many recent issues to pull from each quarterly "
+                         "journal (AoS/JASA/JRSSB/Biometrika). "
+                         "Default 1 (latest only). Use 4 for a full year, 8 for two.")
+    ap.add_argument("--label", default=None,
+                    help="Override the output filename suffix "
+                         "(default: '<year>Q<n>' or '<year>Q<n>-Nissues').")
     ap.add_argument("--skip-pdf", action="store_true",
                     help="Don't download PDFs for high-relevance papers.")
     ap.add_argument("--dry-run", action="store_true",
@@ -166,7 +180,8 @@ def main(argv: list[str] | None = None) -> int:
 
     only = [s.strip() for s in args.only.split(",")] if args.only else None
     run(only=only, dry_run=args.dry_run, jmlr_n=args.jmlr_n,
-        jmlr_vol=args.jmlr_vol, skip_pdf=args.skip_pdf)
+        jmlr_vol=args.jmlr_vol, n_issues=args.n_issues, label=args.label,
+        skip_pdf=args.skip_pdf)
     return 0
 
 
