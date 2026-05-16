@@ -51,33 +51,57 @@ OUTPUT_DIR = Path("docs/shootout")
 # ── richer prompt (variants B, C) ─────────────────────────────────────────────
 
 RICH_SUMMARY_SYSTEM = """You write personalized Chinese research notes for a
-statistics researcher (focus: causal inference, semiparametric/nonparametric
-theory, high-dimensional statistics, efficiency theory, astrostatistics).
+statistics researcher.
+
+Primary interests (the researcher's own words):
+  - causal inference (proximal CI, sensitivity, IV, mediation, longitudinal)
+  - mathematical statistics & hypothesis testing
+  - high-dimensional statistics, random matrix theory
+  - higher-order U-statistics
+  - semiparametric & nonparametric theory
+  - efficiency theory (semiparametric efficiency bounds, debiased ML)
+  - statistical computing (numerical methods, algorithms)
+Secondary interests:
+  - astrostatistics (datasets, popular-science-style pieces by statisticians)
+  - economic theory (datasets, models, applied causal work)
+  - epidemiology (datasets, applied causal work)
 
 For each paper, return ONLY a valid JSON object of the form:
 {
-  "topic": "<one of: causal_inference | high_dim | nonparam_semipara | efficiency | inverse_problems | higher_order_U | astrostats | mechanism_design | other>",
+  "topic": "<one of: causal_inference | high_dim_rmt | nonparam_semipara | efficiency_dml | higher_order_U | hypothesis_testing | stat_computing | astrostats | econ_theory | epidemiology | other>",
   "summary_zh": "...",
   "key_techniques": ["..."],
-  "why_relevant": "..."
+  "why_relevant": "...",
+  "novelty_flag": "<one of: new_theory | new_method | sharper_rate | weaker_assumption | application | survey | minor>"
 }
 
 No prose, no markdown fences — just the JSON object.
 
-Guidance for `summary_zh` (4-7 句中文):
-  - 第一句: 研究问题 + 设定（包含 estimand / assumptions / regularity 条件等关键词，越具体越好）。
-  - 中间: 方法的核心机制（estimator 名称、cross-fitting、influence function、minimax rate、convergence rate、identification strategy 等技术词；不要空泛形容词）。
-  - 最后: 主要理论或实证结果（一致性 / 效率 / 收敛率 / 实验对比）。
-  - 若 paper 仅是 application/empirical，明确指出 method 的统计 novelty 程度。
+Guidance for `summary_zh` (5-7 句中文，信息密度优先于辞藻):
+  - 第 1 句: 研究问题 + 设定。明确指出 estimand / model / 关键 regularity 假设
+    （e.g. "在 proximal CI 框架下，目标是 ATE 在 negative-control 假设下的 identification …"）。
+  - 中间 2-4 句: 方法的核心机制。优先给出具体技术词：
+      * estimator 名称（DR / TMLE / orthogonal / one-step / IPW / sieve ...）
+      * 收敛性质（cross-fitting, n^{-1/2}-CAN, minimax rate, semiparametric
+        efficiency bound, influence function, neural tangent ...）
+      * 关键技术工具（empirical process, U-statistic projection, RMT
+        Marchenko-Pastur, concentration inequality, kernel / sieve / RKHS ...）
+    禁止空泛形容词："优秀"、"高效"、"强大" → 改成具体率/界/对比。
+  - 最后 1-2 句: 主要理论或实证结果，外加"对您可能有用"的一句话连接到
+    primary 或 secondary interest 的具体子方向（点名哪个）。
+  - 若 paper 仅是 application / empirical / position / survey，必须在最后明确
+    指出方法学 novelty 程度（用 novelty_flag 同时标）。
 
-`key_techniques`: 3-6 个英文短语，命名具体的方法/概念（e.g. "doubly robust",
-"orthogonal score", "kernel ridge regression", "U-statistic projection",
-"simulation-based inference"）。不要泛词如 "machine learning" 或 "estimation"。
+`key_techniques`: 3-6 个英文短语，命名具体方法/概念（如 "double machine
+learning", "orthogonal score", "Marchenko-Pastur law", "U-statistic projection",
+"proximal g-formula", "sieve M-estimation", "simulation-based inference"）。
+不要泛词如 "machine learning" / "estimation" / "deep learning"。
 
-`why_relevant`: 1-2 句中文，明确连接到 researcher 的具体 primary_interest
-（点名是哪个：causal inference / semiparametric efficiency / inverse problems
-/ higher-order U / astrostats / etc.），并指出"为什么值得读"（新理论？sharper
-rate？放松假设？方法可迁移？）。"""
+`why_relevant`: 1-2 句中文，点名连接到 researcher 的哪个具体 interest
+（primary 或 secondary 均可，但要点名子方向，例如"proximal CI 的 negative
+control 设定 / RMT 在高维 inference 的应用 / 流行病学队列研究的 IV 方法"），
+并说明读它的具体收益（新理论 / sharper rate / 放松假设 / 方法可迁移 / 数据集
+价值 / 写作风格借鉴）。"""
 
 
 # ── arxiv metadata ────────────────────────────────────────────────────────────
@@ -330,9 +354,11 @@ class VariantResult:
     error: str | None = None
 
 
-def _run_chat(client: SJTUClient, system: str, user: str, *, deep: bool) -> tuple[str, int, int, float]:
-    model = client.model_deep if deep else client.model_fast
-    before_calls = client.calls
+def _run_chat(client: SJTUClient, system: str, user: str, *,
+              deep: bool = False, model: str | None = None,
+              max_tokens: int = 2000) -> tuple[str, int, int, float]:
+    if model is None:
+        model = client.model_deep if deep else client.model_fast
     before_usage = dict(client.usage.get(model, {}))
     t0 = time.monotonic()
     raw = client.chat(
@@ -340,15 +366,99 @@ def _run_chat(client: SJTUClient, system: str, user: str, *, deep: bool) -> tupl
             {"role": "system", "content": system},
             {"role": "user", "content": user},
         ],
-        deep=deep,
-        max_tokens=2000,
+        model=model,
+        max_tokens=max_tokens,
     )
     dt = time.monotonic() - t0
     after = client.usage.get(model, {})
     pt = after.get("prompt_tokens", 0) - before_usage.get("prompt_tokens", 0)
     ct = after.get("completion_tokens", 0) - before_usage.get("completion_tokens", 0)
-    _ = before_calls  # not strictly needed
     return raw, pt, ct, dt
+
+
+# ── model-sweep mode (one column per model, fixed rich prompt + best content) ─
+
+def run_model_variant(
+    client: SJTUClient, paper: Paper, interests_yaml: str,
+    deep_content: DeepContent, model: str,
+) -> VariantResult:
+    """Rich prompt + best available content (html/pdf if any, else full abstract),
+    run on a specific model."""
+    if deep_content.source in ("html", "pdf"):
+        body = deep_content_to_text(deep_content, paper)
+        content_src = deep_content.source
+    else:
+        body = f"Abstract: {paper.abstract}"
+        content_src = "abstract-full"
+    user = (
+        "## Researcher interests\n" + interests_yaml +
+        f"\n\n## Paper\nTitle: {paper.title}\n"
+        f"Authors: {', '.join(paper.authors)}\n"
+        f"Venue: {paper.venue or paper.source}\n"
+        f"Categories: {', '.join(paper.categories)}\n\n"
+        f"{body}\n"
+    )
+    try:
+        raw, pt, ct, dt = _run_chat(client, RICH_SUMMARY_SYSTEM, user, model=model)
+        parsed = _extract_json(raw) if raw else {}
+        return VariantResult(model, model, raw,
+                             parsed if isinstance(parsed, dict) else {},
+                             pt, ct, dt, content_src)
+    except Exception as e:
+        return VariantResult(model, model, "", {}, 0, 0, 0, content_src, str(e))
+
+
+def render_model_sweep(
+    results: list[tuple[Paper, DeepContent, list[VariantResult]]],
+    models: list[str],
+    when: date,
+    out_dir: Path = OUTPUT_DIR,
+    label: str = "model-sweep",
+) -> Path:
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out_path = out_dir / f"{when.isoformat()}-{label}.md"
+
+    lines: list[str] = []
+    lines.append(f"# Model Sweep — {when.isoformat()} ({label})\n")
+    lines.append(
+        f"固定 rich prompt + 最佳可用内容（HTML/PDF > full abstract），"
+        f"沿 model 维度横向对比：{', '.join('`'+m+'`' for m in models)}.\n"
+    )
+    # Per-model token totals
+    tot: dict[str, list[int]] = {m: [0, 0] for m in models}
+    for _, _, vs in results:
+        for v in vs:
+            if v.model in tot:
+                tot[v.model][0] += v.prompt_tokens
+                tot[v.model][1] += v.completion_tokens
+    lines.append("**Token 总览**（in / out per model）:")
+    for m in models:
+        lines.append(f"- `{m}`: {tot[m][0]} / {tot[m][1]}")
+    lines.append("")
+
+    for paper, deep, vs in results:
+        lines.append(f"## [{paper.paper_id}]({paper.url}) — {paper.title}\n")
+        if paper.authors:
+            lines.append(f"- **作者**: {', '.join(paper.authors[:6])}"
+                         f"{' et al.' if len(paper.authors) > 6 else ''}")
+        if paper.venue:
+            lines.append(f"- **来源**: {paper.venue}")
+        if paper.categories:
+            lines.append(f"- **分类**: {' · '.join(paper.categories)}")
+        lines.append(f"- **内容抓取**: source=`{deep.source}`, "
+                     f"intro={len(deep.intro)} chars, sections={len(deep.section_leads)}, "
+                     f"conclusion={len(deep.conclusion)} chars\n")
+
+        # One row per model
+        lines.append("| model | output |")
+        lines.append("|---|---|")
+        for v in vs:
+            cell = _render_cell(v).replace(chr(10), "<br>")
+            lines.append(f"| `{v.model}` | {cell} |")
+        lines.append("")
+
+    out_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return out_path
 
 
 def run_variant_a(client: SJTUClient, paper: Paper, interests_yaml: str) -> VariantResult:
@@ -512,56 +622,83 @@ def main(argv: list[str] | None = None) -> int:
     load_dotenv()
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("ids", nargs="*",
-                    help="arXiv IDs (e.g. 2408.06103). URLs accepted; the ID is extracted.")
+                    help="arXiv IDs (e.g. 2408.06103). URLs accepted; the ID is extracted. "
+                         "Ignored when --source jmlr is used.")
+    ap.add_argument("--source", choices=["arxiv", "jmlr"], default="arxiv",
+                    help="Where to pull papers from.")
+    ap.add_argument("--n", type=int, default=10,
+                    help="Number of papers to take when --source jmlr.")
+    ap.add_argument("--jmlr-vol", type=int, default=None,
+                    help="Override JMLR volume number (default: current year - 1999).")
+    ap.add_argument("--models", default=None,
+                    help="Comma-separated list of model names. When set, runs the "
+                         "model-sweep mode (rich prompt + best content, one column "
+                         "per model) instead of the A/B/C/D variant mode. "
+                         "Example: --models deepseek-chat,glm-5.1")
     ap.add_argument("--add-defaults", action="store_true",
                     help="Also include the built-in extra coverage papers "
-                         "(U-stat, astro, kernel-ridge).")
+                         "(U-stat, astro, kernel-ridge). Arxiv only.")
     ap.add_argument("--skip-deep-model", action="store_true",
-                    help="Skip the C-deep (reasoner) variant — halves cost.")
+                    help="(variant mode) Skip the C-deep (reasoner) variant.")
     ap.add_argument("--interests", default="config/interests.yaml")
     ap.add_argument("--dry-run", action="store_true",
-                    help="Only fetch metadata + HTML extraction; print plan; don't call LLM.")
+                    help="Only fetch metadata + content; print plan; don't call LLM.")
     args = ap.parse_args(argv)
 
-    # Normalize IDs (strip URL prefix / version suffix)
-    id_re = re.compile(r"(\d{4}\.\d{4,6})")
-    ids: list[str] = []
-    for raw in args.ids:
-        m = id_re.search(raw)
-        if m:
-            ids.append(m.group(1))
-        else:
-            log.warning("could not parse arxiv id from %r — skipping", raw)
-    if args.add_defaults:
-        for d in DEFAULT_EXTRA:
-            if d not in ids:
-                ids.append(d)
-    if not ids:
-        ap.error("provide at least one arxiv id (or pass --add-defaults)")
-
-    log.info("shootout on %d papers: %s", len(ids), ids)
     interests_yaml = Path(args.interests).read_text(encoding="utf-8")
 
-    # Phase 1: fetch metadata + HTML for everything (no LLM)
+    # ── Phase 1: gather papers + deep content (no LLM) ────────────────────────
     fetched: list[tuple[Paper, DeepContent]] = []
-    for pid in ids:
-        log.info("fetching metadata for %s", pid)
-        try:
-            paper = fetch_metadata(pid)
-        except Exception as e:
-            log.error("metadata fetch failed for %s: %s — skipping", pid, e)
-            continue
-        log.info("  title: %s", paper.title[:90])
-        log.info("fetching HTML for %s", pid)
-        deep = fetch_deep_content(pid, paper.abstract)
-        log.info("  deep: source=%s intro=%d sections=%d conclusion=%d",
-                 deep.source, len(deep.intro), len(deep.section_leads), len(deep.conclusion))
-        fetched.append((paper, deep))
-        time.sleep(3)  # arxiv API rate limit
+
+    if args.source == "jmlr":
+        from .scrapers.jmlr import fetch_latest as jmlr_fetch_latest
+        papers = jmlr_fetch_latest(n=args.n, volume=args.jmlr_vol)
+        # JMLR has no arxiv HTML; use abstract as the only content.
+        for paper in papers:
+            deep = DeepContent("", [], "", len(paper.abstract or ""), "fallback-abstract")
+            fetched.append((paper, deep))
+    else:
+        id_re = re.compile(r"(\d{4}\.\d{4,6})")
+        ids: list[str] = []
+        for raw in args.ids:
+            m = id_re.search(raw)
+            if m:
+                ids.append(m.group(1))
+            else:
+                log.warning("could not parse arxiv id from %r — skipping", raw)
+        if args.add_defaults:
+            for d in DEFAULT_EXTRA:
+                if d not in ids:
+                    ids.append(d)
+        if not ids:
+            ap.error("provide at least one arxiv id (or pass --add-defaults), "
+                     "or use --source jmlr")
+
+        log.info("shootout on %d arxiv papers: %s", len(ids), ids)
+        for pid in ids:
+            log.info("fetching metadata for %s", pid)
+            try:
+                paper = fetch_metadata(pid)
+            except Exception as e:
+                log.error("metadata fetch failed for %s: %s — skipping", pid, e)
+                continue
+            log.info("  title: %s", paper.title[:90])
+            log.info("fetching deep content for %s", pid)
+            deep = fetch_deep_content(pid, paper.abstract)
+            log.info("  deep: source=%s intro=%d sections=%d conclusion=%d",
+                     deep.source, len(deep.intro), len(deep.section_leads),
+                     len(deep.conclusion))
+            fetched.append((paper, deep))
+            time.sleep(3)   # arxiv API rate limit
+
+    if not fetched:
+        log.error("no papers fetched; bailing")
+        return 1
 
     if args.dry_run:
         print(json.dumps([
-            {"id": p.paper_id, "title": p.title,
+            {"id": p.paper_id, "title": p.title, "venue": p.venue,
+             "abstract_chars": len(p.abstract),
              "deep_source": d.source, "intro_chars": len(d.intro),
              "n_sections": len(d.section_leads),
              "conclusion_chars": len(d.conclusion)}
@@ -569,22 +706,36 @@ def main(argv: list[str] | None = None) -> int:
         ], indent=2, ensure_ascii=False))
         return 0
 
-    # Phase 2: LLM
+    # ── Phase 2: LLM ──────────────────────────────────────────────────────────
     client = SJTUClient()
-    results: list[tuple[Paper, DeepContent, list[VariantResult]]] = []
-    for paper, deep in fetched:
-        log.info("running variants for %s", paper.paper_id)
-        a = run_variant_a(client, paper, interests_yaml)
-        b = run_variant_b(client, paper, interests_yaml)
-        cf = run_variant_c(client, paper, interests_yaml, deep, use_deep_model=False)
-        if args.skip_deep_model:
-            cd = VariantResult("C-deep (skipped)", client.model_deep, "", {}, 0, 0, 0,
-                               deep.source, "skipped")
-        else:
-            cd = run_variant_c(client, paper, interests_yaml, deep, use_deep_model=True)
-        results.append((paper, deep, [a, b, cf, cd]))
 
-    out = render_shootout(results, date.today())
+    if args.models:
+        models = [m.strip() for m in args.models.split(",") if m.strip()]
+        log.info("model-sweep mode: %d papers × %d models = %d calls",
+                 len(fetched), len(models), len(fetched) * len(models))
+        results: list[tuple[Paper, DeepContent, list[VariantResult]]] = []
+        for paper, deep in fetched:
+            log.info("running model sweep for %s", paper.paper_id)
+            vs = [run_model_variant(client, paper, interests_yaml, deep, m)
+                  for m in models]
+            results.append((paper, deep, vs))
+        out = render_model_sweep(results, models, date.today(), label=args.source)
+    else:
+        # Variant mode: A / B / C-fast / C-deep on the fixed default models
+        results = []
+        for paper, deep in fetched:
+            log.info("running variants for %s", paper.paper_id)
+            a = run_variant_a(client, paper, interests_yaml)
+            b = run_variant_b(client, paper, interests_yaml)
+            cf = run_variant_c(client, paper, interests_yaml, deep, use_deep_model=False)
+            if args.skip_deep_model:
+                cd = VariantResult("C-deep (skipped)", client.model_deep, "", {}, 0, 0, 0,
+                                   deep.source, "skipped")
+            else:
+                cd = run_variant_c(client, paper, interests_yaml, deep, use_deep_model=True)
+            results.append((paper, deep, [a, b, cf, cd]))
+        out = render_shootout(results, date.today())
+
     log.info("wrote %s", out)
     log.info("total LLM calls: %d", client.calls)
     log.info("usage by model: %s", json.dumps(client.usage, indent=2))
