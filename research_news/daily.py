@@ -13,6 +13,7 @@ from .dedup import filter_new, load_seen, mark_seen, save_seen
 from .deep_read import generate_deep_read_report
 from .highlights import save_highlights
 from .llm.pipeline import extract_events, score_papers, summarize_paper
+from .llm.prompts import SECONDARY_TOPICS
 from .llm.sjtu_client import SJTUClient
 from .models import Event, Paper
 from .render.markdown import render_daily, update_index
@@ -123,14 +124,21 @@ def run(dry_run: bool = False, for_date: date | None = None) -> Path:
 
     out_path = render_daily(high, mid, events, when=report_date)
 
+    # Deep-read candidates: primary-interest papers above th_highlight (8),
+    # plus secondary-interest papers (astrostats/econ_theory/epidemiology) above 6.
+    deep_read_papers = list(high) + [
+        p for p in mid
+        if (p.topic or "other") in SECONDARY_TOPICS and (p.score or 0) >= 6
+    ]
+
     # Persist high-relevance papers: download PDFs, deep-read, then update index.
     # update_index() is called last so the homepage includes today's deep reads.
-    if high:
-        log.info("saving %d highlights (PDF + manifest)", len(high))
-        save_highlights(high, run_date=report_date)
-        log.info("generating deep-read report for %d high papers ...", len(high))
+    if deep_read_papers:
+        log.info("saving %d highlights (PDF + manifest)", len(deep_read_papers))
+        save_highlights(deep_read_papers, run_date=report_date)
+        log.info("generating deep-read report for %d papers ...", len(deep_read_papers))
         generate_deep_read_report(
-            high, client, interests_text, report_date, "daily", model=DAILY_MODEL
+            deep_read_papers, client, interests_text, report_date, "daily", model=DAILY_MODEL
         )
 
     update_index()
