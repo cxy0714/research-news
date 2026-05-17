@@ -24,6 +24,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+from .deep_read import generate_deep_read_report
 from .highlights import save_highlights
 from .llm.pipeline import score_papers, summarize_paper
 from .llm.sjtu_client import SJTUClient
@@ -234,6 +235,10 @@ def run(only: list[str] | None = None, dry_run: bool = False,
     if high and not skip_pdf:
         log.info("saving %d journal highlights (PDF + manifest)", len(high))
         save_highlights(high, run_date=today)
+        log.info("generating deep-read report for %d journal highlights ...", len(high))
+        generate_deep_read_report(
+            high, client, interests_text, today, "journals", model=JOURNALS_MODEL
+        )
     elif skip_pdf:
         log.info("skip_pdf set; not downloading journal highlight PDFs")
 

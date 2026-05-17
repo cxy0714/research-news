@@ -11,6 +11,7 @@ from ..models import Event, Paper
 
 DOCS_DIR = Path("docs/daily")
 JOURNALS_DIR = Path("docs/journals")
+DEEP_READS_DIR = Path("docs/deep_reads")
 
 HOMEPAGE_URL = "https://cxy0714.github.io/"
 REPO_URL = "https://github.com/cxy0714/research-news"
@@ -280,7 +281,8 @@ def render_journals_by_group(
 # ── index ─────────────────────────────────────────────────────────────────────
 
 def update_index(daily_dir: Path = DOCS_DIR,
-                 journals_dir: Path = JOURNALS_DIR) -> None:
+                 journals_dir: Path = JOURNALS_DIR,
+                 deep_reads_dir: Path = DEEP_READS_DIR) -> None:
     """Regenerate docs/index.md with chronological lists of daily + journal pages.
 
     Journal pages are grouped by group key (parsed out of the filename:
@@ -291,6 +293,8 @@ def update_index(daily_dir: Path = DOCS_DIR,
     dailies = sorted(daily_dir.glob("*.md"), reverse=True)
     journals = sorted(journals_dir.glob("*.md"), reverse=True) \
         if journals_dir.exists() else []
+    deep_reads = sorted(deep_reads_dir.glob("*.md"), reverse=True) \
+        if deep_reads_dir.exists() else []
 
     lines = [
         "# Research News\n",
@@ -322,6 +326,12 @@ def update_index(daily_dir: Path = DOCS_DIR,
             for j in by_group[gkey]:
                 lines.append(f"- [{j.stem}](journals/{j.name})")
             lines.append("")
+
+    if deep_reads:
+        lines.append("## 精读报告\n")
+        for d in deep_reads:
+            lines.append(f"- [{d.stem}](deep_reads/{d.name})")
+        lines.append("")
 
     lines.append(_footer())
     (docs / "index.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
