@@ -1,12 +1,14 @@
 """Deep-read high-relevance papers via LLM using their downloaded PDFs.
 
-For each paper with a downloaded PDF, extract the full text and ask the LLM
-to produce a structured Chinese research note.  Results are written as
-Markdown to docs/deep_reads/<date>-<run_type>.md.
+Each paper gets its own page at docs/deep_reads/<date>-<paper_id_slug>.md.
+Metadata for all deep reads is persisted at data/deep_reads_index.json so
+the homepage can show today's deep reads with titles and scores.
 """
 from __future__ import annotations
 
+import json
 import logging
+import re
 from datetime import date
 from pathlib import Path
 
@@ -19,8 +21,16 @@ from .models import Paper
 log = logging.getLogger(__name__)
 
 DEEP_READS_DIR = Path("docs/deep_reads")
+DEEP_READS_INDEX_PATH = Path("data/deep_reads_index.json")
 # ~30 k chars ≈ 7-8 k tokens; covers the bulk of most stat theory papers.
 MAX_PDF_CHARS = 30_000
+
+HOMEPAGE_URL = "https://cxy0714.github.io/"
+REPO_URL = "https://github.com/cxy0714/research-news"
+
+
+def _slug(s: str) -> str:
+    return re.sub(r"[^A-Za-z0-9_.-]+", "_", s).strip("_") or "unknown"
 
 
 def extract_pdf_text(pdf_path: str | Path, max_chars: int = MAX_PDF_CHARS) -> str:
@@ -48,7 +58,7 @@ def deep_read_paper(
     *,
     model: str | None = None,
 ) -> str:
-    """Return a Markdown deep-read section for one paper (empty string on failure)."""
+    """Return a Markdown deep-read body for one paper (empty string on failure)."""
     pdf_text = ""
     if paper.pdf_path and Path(paper.pdf_path).exists():
         pdf_text = extract_pdf_text(paper.pdf_path)
@@ -81,6 +91,52 @@ def deep_read_paper(
         return ""
 
 
+def _render_deep_read_page(
+    paper: Paper,
+    content: str,
+    run_date: date,
+    output_dir: Path = DEEP_READS_DIR,
+) -> Path:
+    """Write a single paper's deep-read page. Returns the path."""
+    output_dir.mkdir(parents=True, exist_ok=True)
+    fname = f"{run_date.isoformat()}-{_slug(paper.paper_id)}.md"
+    out = output_dir / fname
+    topic_label = TOPIC_LABELS_ZH.get(paper.topic or "other", paper.topic or "other")
+    authors_str = ", ".join(paper.authors[:5]) + (" et al." if len(paper.authors) > 5 else "")
+    lines = [
+        f"# {paper.title}\n",
+        f"**作者**: {authors_str}  ",
+    ]
+    if paper.venue:
+        lines.append(f"**来源**: {paper.venue}  ")
+    lines += [
+        f"**主题**: {topic_label}  ",
+        f"**相关性**: {paper.score:.0f}/10  ",
+        f"**链接**: <{paper.url}>\n",
+        "---\n",
+        content if content else "*（精读失败，请查看日志）*",
+        f"\n---\n\nMaintained by 陈星宇 · "
+        f"[Homepage]({HOMEPAGE_URL}) · [Source on GitHub]({REPO_URL})\n",
+    ]
+    out.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return out
+
+
+def _load_index(path: Path = DEEP_READS_INDEX_PATH) -> list[dict]:
+    if not path.exists():
+        return []
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        return data if isinstance(data, list) else []
+    except Exception:
+        return []
+
+
+def _save_index(entries: list[dict], path: Path = DEEP_READS_INDEX_PATH) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(entries, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
 def generate_deep_read_report(
     papers: list[Paper],
     client: SJTUClient,
@@ -90,47 +146,50 @@ def generate_deep_read_report(
     *,
     model: str | None = None,
     output_dir: Path = DEEP_READS_DIR,
-) -> Path | None:
-    """Generate a deep-read Markdown report for high-relevance papers.
+) -> list[Path]:
+    """Generate one deep-read page per paper and update the index.
 
-    Uses downloaded PDFs when available; falls back to abstract.  Writes to
-    output_dir/<date>-<run_type>.md and returns the path, or None if the list
-    is empty.
+    Returns list of written page paths.
     """
     if not papers:
-        log.info("deep_read: no papers — skipping report")
-        return None
+        log.info("deep_read: no papers — skipping")
+        return []
 
-    output_dir.mkdir(parents=True, exist_ok=True)
-    out_path = output_dir / f"{run_date.isoformat()}-{run_type}.md"
+    existing = _load_index()
+    existing_keys = {(e["paper_id"], e["date"]) for e in existing}
 
-    type_label = {"daily": "每日 arXiv", "journals": "期刊"}.get(run_type, run_type)
-    lines: list[str] = [
-        f"# 精读报告 · {type_label} · {run_date.isoformat()}\n",
-        f"共 {len(papers)} 篇高相关性论文（评分 ≥ 阈值）。\n",
-    ]
+    written: list[Path] = []
+    new_entries: list[dict] = []
 
     for i, paper in enumerate(papers, 1):
         log.info("deep reading %d/%d: %s", i, len(papers), paper.paper_id)
-        report = deep_read_paper(client, paper, interests_yaml, model=model)
-        topic_label = TOPIC_LABELS_ZH.get(paper.topic or "other", paper.topic or "other")
-        authors_str = ", ".join(paper.authors[:5]) + (" et al." if len(paper.authors) > 5 else "")
-        lines.append(f"\n---\n\n## {i}. {paper.title}")
-        lines.append(f"**作者**: {authors_str}  ")
-        if paper.venue:
-            lines.append(f"**来源**: {paper.venue}  ")
-        lines.append(f"**主题**: {topic_label}  ")
-        lines.append(f"**相关性**: {paper.score:.0f}/10  ")
-        lines.append(f"**链接**: <{paper.url}>\n")
-        lines.append(report if report else "*（精读失败，请查看日志）*")
+        content = deep_read_paper(client, paper, interests_yaml, model=model)
+        page_path = _render_deep_read_page(paper, content, run_date, output_dir)
+        written.append(page_path)
 
-    lines.append(
-        "\n---\n\n"
-        "Maintained by 陈星宇 · "
-        "[Homepage](https://cxy0714.github.io/) · "
-        "[Source on GitHub](https://github.com/cxy0714/research-news)\n"
-    )
+        key = (paper.paper_id, run_date.isoformat())
+        if key not in existing_keys:
+            new_entries.append({
+                "date": run_date.isoformat(),
+                "run_type": run_type,
+                "paper_id": paper.paper_id,
+                "title": paper.title,
+                "topic": paper.topic or "other",
+                "score": paper.score or 0.0,
+                # Path relative to docs/ for use in markdown links
+                "doc_path": f"deep_reads/{page_path.name}",
+            })
+            existing_keys.add(key)
 
-    out_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    log.info("deep read report written to %s", out_path)
-    return out_path
+    if new_entries:
+        merged = new_entries + existing
+        merged.sort(key=lambda e: (e["date"], e.get("score") or 0), reverse=True)
+        _save_index(merged)
+        log.info("deep reads index: added %d new entries", len(new_entries))
+
+    return written
+
+
+def load_index(path: Path = DEEP_READS_INDEX_PATH) -> list[dict]:
+    """Public accessor for the deep reads index (used by update_index)."""
+    return _load_index(path)

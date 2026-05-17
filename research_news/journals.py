@@ -29,7 +29,7 @@ from .highlights import save_highlights
 from .llm.pipeline import score_papers, summarize_paper
 from .llm.sjtu_client import SJTUClient
 from .models import Paper
-from .render.markdown import render_journals_by_group, update_index
+from .render.markdown import render_journal_page, update_index
 from .scrapers.crossref import fetch_latest_issue
 from .scrapers.jmlr import fetch_latest as jmlr_fetch_latest
 from .usage import report as report_token_usage
@@ -221,15 +221,26 @@ def run(only: list[str] | None = None, dry_run: bool = False,
     )
     high = [p for p in papers if (p.score or 0) >= th_highlight]
 
-    # Stamp the file with the year + quarter for easy quarterly recognition,
-    # unless an explicit label is given (e.g. for multi-issue backfills).
     today = date.today()
-    if label is None:
-        quarter = (today.month - 1) // 3 + 1
-        label = f"{today.year}Q{quarter}"
-        if n_issues > 1:
-            label = f"{label}-{n_issues}issues"
-    out_paths = render_journals_by_group(papers, groups, when=today, label=label)
+
+    # Build full_name → (short, full) mapping from the groups config.
+    full_to_meta: dict[str, tuple[str, str]] = {}
+    for gcfg in groups.values():
+        for jcfg in gcfg["journals"]:
+            full_to_meta[jcfg["full"]] = (jcfg["short"], jcfg["full"])
+
+    # Group papers by venue and render one page per journal.
+    by_venue: dict[str, list[Paper]] = {}
+    for p in papers:
+        by_venue.setdefault(p.venue or "Unknown", []).append(p)
+
+    out_paths = []
+    for venue, vps in by_venue.items():
+        meta = full_to_meta.get(venue)
+        short = meta[0] if meta else venue
+        out = render_journal_page(vps, short, venue, when=today)
+        out_paths.append(out)
+
     update_index()
 
     if high and not skip_pdf:
