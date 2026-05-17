@@ -119,6 +119,8 @@ def _item_to_paper(item: dict, journal_name: str) -> Paper | None:
         categories=cats,
         published=published,
         venue=journal_name,
+        volume=volume,
+        issue=issue,
     )
 
 
