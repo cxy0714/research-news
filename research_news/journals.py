@@ -48,7 +48,7 @@ def _load_groups() -> dict:
     return cfg.get("groups", {})
 
 
-def _fetch_journal(short: str, *, jmlr_n: int | None = None,
+def _fetch_journal(jcfg: dict, *, jmlr_n: int | None = None,
                    jmlr_vol: int | None = None,
                    n_issues: int = 1) -> list[Paper]:
     issn = jcfg["issn"]
@@ -135,19 +135,17 @@ def run(only: list[str] | None = None, dry_run: bool = False,
                  sorted(only_shorts) if only_shorts else "all")
 
         papers = []
-        for short in targets:
-            try:
-                ps = _fetch_journal(short, jmlr_n=jmlr_n, jmlr_vol=jmlr_vol,
-                                    n_issues=n_issues)
-            except Exception as e:
-                log.error("fetch failed for %s: %s", short, e)
-                continue
-            log.info("  %s → %d papers", short, len(ps))
-            papers.extend(ps)
-            # Incremental save: if a journal fetch later crashes (or you ^C),
-            # everything fetched so far is already on disk.
-            if save_papers:
-                _save_papers([p for p in papers if p.abstract], save_papers)
+        for gkey, gcfg in groups_to_run.items():
+            for jcfg in gcfg["journals"]:
+                if only_shorts and jcfg["short"] not in only_shorts:
+                    continue
+                ps = _fetch_journal(jcfg, jmlr_n=jmlr_n,
+                                    jmlr_vol=jmlr_vol, n_issues=n_issues)
+                log.info("  [%s] %s → %d papers", gkey, jcfg["short"], len(ps))
+                papers.extend(ps)
+                # Incremental save: ^C / crash leaves earlier journals on disk.
+                if save_papers:
+                    _save_papers([p for p in papers if p.abstract], save_papers)
 
         # Drop any without an abstract — can't score them meaningfully.
         n_before = len(papers)
@@ -239,9 +237,10 @@ def run(only: list[str] | None = None, dry_run: bool = False,
     elif skip_pdf:
         log.info("skip_pdf set; not downloading journal highlight PDFs")
 
-    log.info("wrote %s", out_path)
+    for p in out_paths:
+        log.info("wrote %s", p)
     report_token_usage(client, "journals", today)
-    return out_path
+    return out_paths
 
 
 def _setup_logging() -> None:
@@ -254,8 +253,12 @@ def main(argv: list[str] | None = None) -> int:
     _setup_logging()
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--only", default=None,
-                    help="Comma-separated subset of journals to fetch. "
-                         f"Available: {','.join(DEFAULT_JOURNALS)}")
+                    help="Comma-separated subset of journal short names to fetch "
+                         "(e.g. JMLR,AoS). See config/journals.yaml for the list.")
+    ap.add_argument("--only-group", default=None,
+                    help="Comma-separated subset of group keys to fetch "
+                         "(e.g. core,applied). Skips all journals outside these "
+                         "groups. See config/journals.yaml for the group list.")
     ap.add_argument("--jmlr-n", type=int, default=None,
                     help="Cap how many recent JMLR papers to pull. "
                          "Default: no cap (take entire current volume, ~50).")
