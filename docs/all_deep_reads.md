@@ -15,6 +15,13 @@
 - [Causal Stability Selection](deep_reads/2026-05-12-2605.09300.md)  
   `因果推断` · 8/10 [daily]
 
+## 2026-05-11
+
+- [Fit CATE Once: Model-Assisted Randomization Tests Without Sample Splitting](deep_reads/2026-05-11-2605.09116.md)  
+  `因果推断` · 9/10 [daily]
+- [Bias Correction for Semiparametric Regression Models](deep_reads/2026-05-11-2605.08656.md)  
+  `非参数 / 半参数` · 8/10 [daily]
+
 
 ---
 
