@@ -27,6 +27,7 @@ from dotenv import load_dotenv
 from .deep_read import generate_deep_read_report
 from .highlights import save_highlights
 from .llm.pipeline import score_papers, summarize_paper
+from .llm.prompts import SECONDARY_TOPICS
 from .llm.sjtu_client import SJTUClient
 from .models import Paper
 from .render.markdown import render_journal_page, update_index
@@ -242,12 +243,18 @@ def run(only: list[str] | None = None, dry_run: bool = False,
         out = render_journal_page(vps, short, venue, vol=vol, iss=iss, when=today)
         out_paths.append(out)
 
-    if high and not skip_pdf:
-        log.info("saving %d journal highlights (PDF + manifest)", len(high))
-        save_highlights(high, run_date=today)
-        log.info("generating deep-read report for %d journal highlights ...", len(high))
+    non_high = [p for p in papers if (p.score or 0) < th_highlight]
+    deep_read_papers = list(high) + [
+        p for p in non_high
+        if (p.topic or "other") in SECONDARY_TOPICS and (p.score or 0) >= 6
+    ]
+
+    if deep_read_papers and not skip_pdf:
+        log.info("saving %d journal highlights (PDF + manifest)", len(deep_read_papers))
+        save_highlights(deep_read_papers, run_date=today)
+        log.info("generating deep-read report for %d journal papers ...", len(deep_read_papers))
         generate_deep_read_report(
-            high, client, interests_text, today, "journals", model=JOURNALS_MODEL
+            deep_read_papers, client, interests_text, today, "journals", model=JOURNALS_MODEL
         )
     elif skip_pdf:
         log.info("skip_pdf set; not downloading journal highlight PDFs")

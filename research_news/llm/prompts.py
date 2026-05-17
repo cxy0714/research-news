@@ -43,6 +43,8 @@ TOPICS: list[str] = [
     "other",
 ]
 
+SECONDARY_TOPICS: set[str] = {"astrostats", "econ_theory", "epidemiology"}
+
 TOPIC_LABELS_ZH: dict[str, str] = {
     "causal_inference":    "因果推断",
     "high_dim_rmt":        "高维统计 / 随机矩阵",
