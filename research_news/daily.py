@@ -122,10 +122,9 @@ def run(dry_run: bool = False, for_date: date | None = None) -> Path:
     mid = [p for p in papers if (p.score or 0) < th_highlight]
 
     out_path = render_daily(high, mid, events, when=report_date)
-    update_index()
 
-    # Persist high-relevance papers: download PDFs into per-topic folders,
-    # update the global manifest, then do a deep-read pass.
+    # Persist high-relevance papers: download PDFs, deep-read, then update index.
+    # update_index() is called last so the homepage includes today's deep reads.
     if high:
         log.info("saving %d highlights (PDF + manifest)", len(high))
         save_highlights(high, run_date=report_date)
@@ -134,6 +133,7 @@ def run(dry_run: bool = False, for_date: date | None = None) -> Path:
             high, client, interests_text, report_date, "daily", model=DAILY_MODEL
         )
 
+    update_index()
     mark_seen(papers, seen)
     save_seen(seen)
 

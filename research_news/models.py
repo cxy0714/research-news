@@ -24,6 +24,9 @@ class Paper:
     topic: str | None = None              # one of llm.prompts.TOPICS
     key_techniques: list[str] = field(default_factory=list)
     novelty_flag: str | None = None       # new_theory|new_method|sharper_rate|...
+    # Journal issue metadata (set by crossref scraper):
+    volume: str | None = None
+    issue: str | None = None
     # Set when we download the PDF for high-relevance papers:
     pdf_path: str | None = None
 

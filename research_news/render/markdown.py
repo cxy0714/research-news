@@ -178,20 +178,36 @@ def render_journal_page(
     papers: list[Paper],
     short: str,
     full: str,
+    vol: str | None = None,
+    iss: str | None = None,
     when: date | None = None,
     output_dir: Path = JOURNALS_DIR,
 ) -> Path:
-    """Write one Markdown page for a single journal. Returns the path."""
+    """Write one Markdown page for a single journal issue. Returns the path."""
     when = when or date.today()
     output_dir.mkdir(parents=True, exist_ok=True)
-    out = output_dir / f"{when.isoformat()}-{_slug(short)}.md"
+
+    # Include vol/issue in filename so multiple issues of the same journal
+    # fetched on the same day don't collide.
+    suffix = ""
+    if vol:
+        suffix += f"-v{vol}"
+    if iss:
+        suffix += f"-i{iss}"
+    out = output_dir / f"{when.isoformat()}-{_slug(short)}{suffix}.md"
 
     papers_sorted = sorted(papers, key=lambda p: p.score or 0, reverse=True)
-    issue_lbl = _venue_issue_label(papers_sorted)
+
+    if vol and iss:
+        issue_label = f"Vol {vol}  Issue {iss}"
+    elif vol:
+        issue_label = f"Vol {vol}"
+    else:
+        issue_label = _venue_issue_label(papers_sorted)
 
     heading = f"# {short}"
-    if issue_lbl:
-        heading += f" — {issue_lbl}"
+    if issue_label:
+        heading += f" — {issue_label}"
     heading += f"  ·  {when.isoformat()}\n"
 
     lines: list[str] = [
