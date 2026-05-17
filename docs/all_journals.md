@@ -4,6 +4,10 @@
 
 - [2026-05-17](journals/2026-05-17-aos.md)
 
+## JASA
+
+- [2026-05-18](journals/2026-05-18-jasa.md)
+
 ## JMLR
 
 - [2026-05-17](journals/2026-05-17-jmlr.md)
