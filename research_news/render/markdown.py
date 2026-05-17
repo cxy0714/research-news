@@ -220,10 +220,14 @@ def _journal_short_from_stem(stem: str) -> str:
     return name.replace("-", " ").upper()
 
 
+SHOOTOUT_DIR = Path("docs/shootout")
+
+
 def update_index(
     daily_dir: Path = DOCS_DIR,
     journals_dir: Path = JOURNALS_DIR,
     deep_reads_dir: Path = DEEP_READS_DIR,
+    shootout_dir: Path = SHOOTOUT_DIR,
 ) -> None:
     """Regenerate docs/index.md and the three archive pages."""
     from ..deep_read import load_index as _load_dr_index
@@ -304,10 +308,13 @@ def update_index(
     lines.append(_footer())
     (docs / "index.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
-    # Also regenerate the three archive pages
+    # Also regenerate the four archive pages
     _update_all_daily_page(dailies, docs)
     _update_all_journals_page(journal_pages, docs)
     _update_all_deep_reads_page(dr_entries, docs)
+    shootout_pages = sorted(shootout_dir.glob("*.md"), reverse=True) \
+        if shootout_dir.exists() else []
+    _update_all_shootout_page(shootout_pages, docs)
 
 
 def _update_all_daily_page(dailies: list[Path], docs: Path) -> None:
@@ -373,3 +380,25 @@ def _update_all_deep_reads_page(entries: list[dict], docs: Path) -> None:
         lines.append("")
     lines.append(_footer())
     (docs / "all_deep_reads.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def _update_all_shootout_page(shootout_pages: list[Path], docs: Path) -> None:
+    lines = ["# 模型测评 (Shootout)\n",
+             "历次模型对比测试的结果存档。\n"]
+    if not shootout_pages:
+        lines.append("*（暂无记录）*\n")
+        (docs / "all_shootout.md").write_text("\n".join(lines), encoding="utf-8")
+        return
+    by_date: dict[str, list[Path]] = defaultdict(list)
+    for p in shootout_pages:
+        d = _parse_date_from_stem(p.stem) or "unknown"
+        by_date[d].append(p)
+    for d in sorted(by_date.keys(), reverse=True):
+        lines.append(f"## {d}\n")
+        for p in sorted(by_date[d]):
+            # stem 形如 2026-05-16 或 2026-05-16-jmlr，取后缀作标签
+            label = re.sub(r"^\d{4}-\d{2}-\d{2}-?", "", p.stem) or "综合"
+            lines.append(f"- [{label}](shootout/{p.name})")
+        lines.append("")
+    lines.append(_footer())
+    (docs / "all_shootout.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
