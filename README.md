@@ -1,6 +1,6 @@
 # research-news
 
-陈星宇个人定制的研究资讯系统。两条独立管道：
+个人定制的研究资讯系统。两条独立管道：
 
 - **每日 arXiv**: 抓 stat.ME / stat.TH / math.ST / econ.EM / astro-ph.IM 新提交，按个人兴趣评分，对高相关论文按主题分组生成中文摘要 + 下载 PDF + LLM 全文精读
 - **季度期刊**: 拉 JMLR / AoS / JASA / JRSSB / Biometrika 等最新一期（或近 N 期），同样的评分 + 摘要 + 主题分组 + 精读
