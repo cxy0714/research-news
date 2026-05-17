@@ -1,9 +1,9 @@
-"""Render the daily / journals report as a Markdown page consumed by MkDocs."""
+"""Render daily / journal / deep-read reports and maintain the site index."""
 from __future__ import annotations
 
 import re
 from collections import defaultdict
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 
 from ..llm.prompts import TOPIC_LABELS_ZH, TOPICS
@@ -55,9 +55,6 @@ def _group_by_topic(papers: list[Paper]) -> dict[str, list[Paper]]:
 
 
 def _render_topic_groups(papers: list[Paper], heading_prefix: str) -> list[str]:
-    """Render papers grouped by topic, ordered by TOPICS, with stable numbering
-    restarting at 1 inside each topic. Paper blocks nest one level deeper than
-    the topic-group heading."""
     if not papers:
         return []
     groups = _group_by_topic(papers)
@@ -75,14 +72,16 @@ def _render_topic_groups(papers: list[Paper], heading_prefix: str) -> list[str]:
     return out
 
 
-# ── footer ────────────────────────────────────────────────────────────────────
-
 def _footer() -> str:
     return (
         "\n---\n\n"
         f"Maintained by 陈星宇 · [Homepage]({HOMEPAGE_URL}) · "
         f"[Source on GitHub]({REPO_URL})\n"
     )
+
+
+def _slug(s: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
 
 
 # ── daily ─────────────────────────────────────────────────────────────────────
@@ -140,12 +139,10 @@ def render_daily(
     return out
 
 
-# ── journals ──────────────────────────────────────────────────────────────────
+# ── journals (one page per journal) ──────────────────────────────────────────
 
 def _venue_issue_label(papers: list[Paper]) -> str:
-    """For papers in one venue, build a 'Vol X, Issue Y' (or multi-issue range)
-    label from their categories field (which holds 'vol N', 'issue M', 'pp ...').
-    JMLR papers have 'JMLR vN' in categories — handle that variant too."""
+    """Build a 'Vol X, Issue Y' label from papers' categories field."""
     pairs: set[tuple[int, int]] = set()
     jmlr_vols: set[int] = set()
     for p in papers:
@@ -171,167 +168,208 @@ def _venue_issue_label(papers: list[Paper]) -> str:
     if len(pairs) == 1:
         v, i = next(iter(pairs))
         return f"Vol {v} Issue {i}"
-    # Multi-issue: list sorted descending, capped
     sorted_p = sorted(pairs, reverse=True)
     if len(sorted_p) <= 4:
         return ", ".join(f"{v}({i})" for v, i in sorted_p)
     return f"{sorted_p[0][0]}({sorted_p[0][1]}) - {sorted_p[-1][0]}({sorted_p[-1][1]})"
 
 
-def _slug(s: str) -> str:
-    return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
-
-
-def render_journals_by_group(
+def render_journal_page(
     papers: list[Paper],
-    groups: dict,
+    short: str,
+    full: str,
     when: date | None = None,
     output_dir: Path = JOURNALS_DIR,
-    label: str | None = None,
-) -> list[Path]:
-    """Write one Markdown page per group. Each page has venue → topic sections.
-
-    `groups` is the parsed config/journals.yaml dict (see journals._load_groups).
-    Pages are named `<date>-<group_key>[-<label>].md`. Empty groups (no papers
-    in them after fetch + filter) are skipped silently.
-    """
+) -> Path:
+    """Write one Markdown page for a single journal. Returns the path."""
     when = when or date.today()
     output_dir.mkdir(parents=True, exist_ok=True)
+    out = output_dir / f"{when.isoformat()}-{_slug(short)}.md"
 
-    # Build venue → group_key reverse map, and gather papers per group.
-    venue_to_group: dict[str, str] = {}
-    venue_to_short: dict[str, str] = {}
-    for gkey, gcfg in groups.items():
-        for jcfg in gcfg["journals"]:
-            venue_to_group[jcfg["full"]] = gkey
-            venue_to_short[jcfg["full"]] = jcfg.get("short", jcfg["full"])
+    papers_sorted = sorted(papers, key=lambda p: p.score or 0, reverse=True)
+    issue_lbl = _venue_issue_label(papers_sorted)
 
-    by_group: dict[str, list[Paper]] = defaultdict(list)
-    for p in papers:
-        venue = p.venue or ""
-        gkey = venue_to_group.get(venue, "other")
-        by_group[gkey].append(p)
+    heading = f"# {short}"
+    if issue_lbl:
+        heading += f" — {issue_lbl}"
+    heading += f"  ·  {when.isoformat()}\n"
 
-    out_paths: list[Path] = []
-    suffix = f"-{label}" if label else ""
-    for gkey, gcfg in groups.items():
-        ps = by_group.get(gkey, [])
-        if not ps:
-            continue
-        out = output_dir / f"{when.isoformat()}-{gkey}{suffix}.md"
-        out_paths.append(out)
-
-        # Group papers by venue inside this group
-        by_venue: dict[str, list[Paper]] = defaultdict(list)
-        for p in ps:
-            by_venue[p.venue or "Unknown"].append(p)
-        n_venues = len(by_venue)
-
-        lines: list[str] = []
-        lines.append(f"# {gcfg.get('label', gkey)} — {when.isoformat()}\n")
-        lines.append(f"- 共 {len(ps)} 篇 · 来自 {n_venues} 个期刊"
-                     f" · 分组 `{gkey}`\n")
-
-        # Venue order: follow the YAML order so the user's mental list matches
-        venue_order = [j["full"] for j in gcfg["journals"]]
-        venue_order_set = set(venue_order)
-        ordered_venues = [v for v in venue_order if v in by_venue] + \
-                         [v for v in by_venue if v not in venue_order_set]
-
-        for venue in ordered_venues:
-            vps = by_venue[venue]
-            vps.sort(key=lambda p: p.score or 0, reverse=True)
-            short = venue_to_short.get(venue, venue)
-            issue_lbl = _venue_issue_label(vps)
-            heading = f"## {short} — {issue_lbl}" if issue_lbl else f"## {short}"
-            heading += f"  *({len(vps)} 篇)*\n"
-            lines.append(heading)
-            lines.extend(_render_topic_groups(vps, heading_prefix="###"))
-
-        # Also show any "other" papers (venue not in this group's YAML list)
-        # We skip them — they should never end up here unless venue strings drift.
-
-        lines.append(_footer())
-        out.write_text("\n".join(lines) + "\n", encoding="utf-8")
-
-    # "other" bucket: papers whose venue isn't in any group (e.g. loaded from
-    # an old JSON before the group was added). Write to a dedicated page.
-    other = by_group.get("other", [])
-    if other:
-        out = output_dir / f"{when.isoformat()}-other{suffix}.md"
-        out_paths.append(out)
-        by_venue: dict[str, list[Paper]] = defaultdict(list)
-        for p in other:
-            by_venue[p.venue or "Unknown"].append(p)
-        lines = [f"# 其他期刊 — {when.isoformat()}\n",
-                 f"- 共 {len(other)} 篇 · 来自 {len(by_venue)} 个未分组期刊\n"]
-        for venue, vps in by_venue.items():
-            vps.sort(key=lambda p: p.score or 0, reverse=True)
-            issue_lbl = _venue_issue_label(vps)
-            heading = f"## {venue} — {issue_lbl}" if issue_lbl else f"## {venue}"
-            heading += f"  *({len(vps)} 篇)*\n"
-            lines.append(heading)
-            lines.extend(_render_topic_groups(vps, heading_prefix="###"))
-        lines.append(_footer())
-        out.write_text("\n".join(lines) + "\n", encoding="utf-8")
-
-    return out_paths
+    lines: list[str] = [
+        heading,
+        f"- 共 {len(papers_sorted)} 篇 · {full}\n",
+    ]
+    lines.extend(_render_topic_groups(papers_sorted, heading_prefix="##"))
+    lines.append(_footer())
+    out.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return out
 
 
-# ── index ─────────────────────────────────────────────────────────────────────
+# ── homepage + archive pages ─────────────────────────────────────────────────
 
-def update_index(daily_dir: Path = DOCS_DIR,
-                 journals_dir: Path = JOURNALS_DIR,
-                 deep_reads_dir: Path = DEEP_READS_DIR) -> None:
-    """Regenerate docs/index.md with chronological lists of daily + journal pages.
+def _parse_date_from_stem(stem: str) -> str | None:
+    """Extract YYYY-MM-DD from a filename stem, or None."""
+    m = re.match(r"(\d{4}-\d{2}-\d{2})", stem)
+    return m.group(1) if m else None
 
-    Journal pages are grouped by group key (parsed out of the filename:
-    `<date>-<group>[-<label>].md`).
-    """
+
+def _journal_short_from_stem(stem: str) -> str:
+    """'2026-05-17-jmlr' → 'JMLR', '2026-05-17-j-econometrics' → best guess."""
+    # Strip leading date
+    name = re.sub(r"^\d{4}-\d{2}-\d{2}-", "", stem)
+    # Un-slug: hyphen → space, capitalise
+    return name.replace("-", " ").upper()
+
+
+def update_index(
+    daily_dir: Path = DOCS_DIR,
+    journals_dir: Path = JOURNALS_DIR,
+    deep_reads_dir: Path = DEEP_READS_DIR,
+) -> None:
+    """Regenerate docs/index.md and the three archive pages."""
+    from ..deep_read import load_index as _load_dr_index
+
     docs = Path("docs")
     docs.mkdir(parents=True, exist_ok=True)
-    dailies = sorted(daily_dir.glob("*.md"), reverse=True)
-    journals = sorted(journals_dir.glob("*.md"), reverse=True) \
-        if journals_dir.exists() else []
-    deep_reads = sorted(deep_reads_dir.glob("*.md"), reverse=True) \
-        if deep_reads_dir.exists() else []
 
-    lines = [
+    dailies = sorted(daily_dir.glob("*.md"), reverse=True) if daily_dir.exists() else []
+    journal_pages = sorted(journals_dir.glob("*.md"), reverse=True) if journals_dir.exists() else []
+    dr_entries = _load_dr_index()  # newest first from deep_reads_index.json
+
+    today_str = dailies[0].stem if dailies else ""
+    week_cutoff = (date.fromisoformat(today_str) - timedelta(days=7)).isoformat() \
+        if today_str else ""
+
+    lines: list[str] = [
         "# Research News\n",
         "每日 arXiv + 季度期刊的个性化统计学 / 因果推断研究资讯。\n",
     ]
-    if dailies:
-        lines.append("## 每日 arXiv\n")
-        for d in dailies:
-            lines.append(f"- [{d.stem}](daily/{d.name})")
-        lines.append("")
 
-    if journals:
-        # Group journal pages by the inferred group key.
-        # File pattern: YYYY-MM-DD-<group>[-<label>].md
-        by_group: dict[str, list[Path]] = defaultdict(list)
-        for j in journals:
-            m = re.match(r"\d{4}-\d{2}-\d{2}-([a-z_]+)", j.stem)
-            gkey = m.group(1) if m else "other"
-            by_group[gkey].append(j)
+    # ── 今日 ────────────────────────────────────────────────────────────────
+    if today_str:
+        lines.append(f"## 今日 · {today_str}\n")
+        lines.append(f"### 每日 arXiv 速览\n")
+        lines.append(f"[→ 查看完整报告](daily/{dailies[0].name})\n")
 
-        # Stable display order: core first, then alphabetical
-        preferred = ["core", "prob_stats", "applied", "econ"]
-        ordered = [k for k in preferred if k in by_group] + \
-                  sorted(k for k in by_group if k not in preferred)
-
-        lines.append("## 期刊\n")
-        for gkey in ordered:
-            lines.append(f"### `{gkey}`\n")
-            for j in by_group[gkey]:
-                lines.append(f"- [{j.stem}](journals/{j.name})")
+        today_dr = [e for e in dr_entries if e.get("date") == today_str]
+        if today_dr:
+            today_dr_sorted = sorted(today_dr, key=lambda e: e.get("score") or 0, reverse=True)
+            lines.append(f"### 精读论文（{len(today_dr_sorted)} 篇）\n")
+            for e in today_dr_sorted:
+                topic_label = TOPIC_LABELS_ZH.get(e.get("topic", "other"), e.get("topic", "other"))
+                lines.append(
+                    f"- [{e['title']}]({e['doc_path']})  \n"
+                    f"  `{topic_label}` · 相关性 {e.get('score', 0):.0f}/10"
+                )
             lines.append("")
 
-    if deep_reads:
-        lines.append("## 精读报告\n")
-        for d in deep_reads:
-            lines.append(f"- [{d.stem}](deep_reads/{d.name})")
-        lines.append("")
+        # Today's journal pages
+        today_journals = [j for j in journal_pages
+                          if _parse_date_from_stem(j.stem) == today_str]
+        if today_journals:
+            lines.append("### 期刊更新\n")
+            for j in today_journals:
+                short = _journal_short_from_stem(j.stem)
+                lines.append(f"- [{short}](journals/{j.name})")
+            lines.append("")
+
+    # ── 本周 ────────────────────────────────────────────────────────────────
+    week_dailies = [d for d in dailies
+                    if d.stem != today_str and d.stem >= week_cutoff]
+    week_journals = [j for j in journal_pages
+                     if (_parse_date_from_stem(j.stem) or "") < today_str
+                     and (_parse_date_from_stem(j.stem) or "") >= week_cutoff]
+
+    if week_dailies or week_journals:
+        lines.append("## 本周\n")
+        if week_dailies:
+            lines.append("### 每日报告\n")
+            for d in week_dailies:
+                lines.append(f"- [{d.stem}](daily/{d.name})")
+            lines.append("")
+        if week_journals:
+            lines.append("### 期刊\n")
+            for j in week_journals:
+                short = _journal_short_from_stem(j.stem)
+                date_str = _parse_date_from_stem(j.stem) or j.stem
+                lines.append(f"- [{short} · {date_str}](journals/{j.name})")
+            lines.append("")
+
+    # ── 存档入口 ─────────────────────────────────────────────────────────────
+    lines.append("## 存档\n")
+    lines.append("- [→ 所有每日报告](all_daily.md)")
+    lines.append("- [→ 所有期刊](all_journals.md)")
+    lines.append("- [→ 所有精读报告](all_deep_reads.md)")
+    lines.append("")
 
     lines.append(_footer())
     (docs / "index.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+    # Also regenerate the three archive pages
+    _update_all_daily_page(dailies, docs)
+    _update_all_journals_page(journal_pages, docs)
+    _update_all_deep_reads_page(dr_entries, docs)
+
+
+def _update_all_daily_page(dailies: list[Path], docs: Path) -> None:
+    lines = ["# 每日 arXiv 存档\n"]
+    if not dailies:
+        lines.append("*（暂无记录）*\n")
+        (docs / "all_daily.md").write_text("\n".join(lines), encoding="utf-8")
+        return
+    by_month: dict[str, list[Path]] = defaultdict(list)
+    for d in dailies:
+        month = d.stem[:7]  # YYYY-MM
+        by_month[month].append(d)
+    for month in sorted(by_month.keys(), reverse=True):
+        lines.append(f"## {month}\n")
+        for d in sorted(by_month[month], reverse=True):
+            lines.append(f"- [{d.stem}](daily/{d.name})")
+        lines.append("")
+    lines.append(_footer())
+    (docs / "all_daily.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def _update_all_journals_page(journal_pages: list[Path], docs: Path) -> None:
+    lines = ["# 期刊存档\n"]
+    if not journal_pages:
+        lines.append("*（暂无记录）*\n")
+        (docs / "all_journals.md").write_text("\n".join(lines), encoding="utf-8")
+        return
+    # Group by journal short name
+    by_journal: dict[str, list[Path]] = defaultdict(list)
+    for j in journal_pages:
+        short = _journal_short_from_stem(j.stem)
+        by_journal[short].append(j)
+    for short in sorted(by_journal.keys()):
+        lines.append(f"## {short}\n")
+        for j in sorted(by_journal[short], reverse=True):
+            date_str = _parse_date_from_stem(j.stem) or j.stem
+            lines.append(f"- [{date_str}](journals/{j.name})")
+        lines.append("")
+    lines.append(_footer())
+    (docs / "all_journals.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def _update_all_deep_reads_page(entries: list[dict], docs: Path) -> None:
+    lines = ["# 精读报告存档\n"]
+    if not entries:
+        lines.append("*（暂无记录）*\n")
+        (docs / "all_deep_reads.md").write_text("\n".join(lines), encoding="utf-8")
+        return
+    by_date: dict[str, list[dict]] = defaultdict(list)
+    for e in entries:
+        by_date[e.get("date", "unknown")].append(e)
+    for d in sorted(by_date.keys(), reverse=True):
+        lines.append(f"## {d}\n")
+        day_entries = sorted(by_date[d], key=lambda e: e.get("score") or 0, reverse=True)
+        for e in day_entries:
+            topic_label = TOPIC_LABELS_ZH.get(e.get("topic", "other"), e.get("topic", "other"))
+            run_type = e.get("run_type", "")
+            tag = f"[{run_type}]" if run_type else ""
+            lines.append(
+                f"- [{e['title']}]({e['doc_path']})  \n"
+                f"  `{topic_label}` · {e.get('score', 0):.0f}/10 {tag}"
+            )
+        lines.append("")
+    lines.append(_footer())
+    (docs / "all_deep_reads.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
