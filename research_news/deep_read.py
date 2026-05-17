@@ -22,8 +22,8 @@ log = logging.getLogger(__name__)
 
 DEEP_READS_DIR = Path("docs/deep_reads")
 DEEP_READS_INDEX_PATH = Path("data/deep_reads_index.json")
-# ~30 k chars ≈ 7-8 k tokens; covers the bulk of most stat theory papers.
-MAX_PDF_CHARS = 30_000
+# ~60 k chars ≈ 15 k tokens; enough to cover full stat theory papers incl. proofs.
+MAX_PDF_CHARS = 60_000
 
 HOMEPAGE_URL = "https://cxy0714.github.io/"
 REPO_URL = "https://github.com/cxy0714/research-news"
@@ -33,14 +33,23 @@ def _slug(s: str) -> str:
     return re.sub(r"[^A-Za-z0-9_.-]+", "_", s).strip("_") or "unknown"
 
 
+def _clean_text(text: str) -> str:
+    """Strip control characters and garbled binary that pypdf sometimes emits."""
+    # Remove null bytes and non-printable control chars (keep \n \t)
+    text = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f-\x9f]", "", text)
+    # Drop tokens >120 chars (binary blobs disguised as text)
+    text = re.sub(r"\S{120,}", "[…]", text)
+    return text
+
+
 def extract_pdf_text(pdf_path: str | Path, max_chars: int = MAX_PDF_CHARS) -> str:
-    """Return up to max_chars of extracted text from a PDF file."""
+    """Return up to max_chars of cleaned text from a PDF file."""
     try:
         reader = PdfReader(str(pdf_path))
         parts: list[str] = []
         total = 0
         for page in reader.pages:
-            chunk = page.extract_text() or ""
+            chunk = _clean_text(page.extract_text() or "")
             parts.append(chunk)
             total += len(chunk)
             if total >= max_chars:
@@ -67,14 +76,25 @@ def deep_read_paper(
         log.info("no PDF text for %s — falling back to abstract", paper.paper_id)
         pdf_text = f"Abstract:\n{paper.abstract}"
 
+    # Include first-pass LLM output as context so the deep read can build on it.
+    meta_lines = [
+        f"Title: {paper.title}",
+        f"Authors: {', '.join(paper.authors)}",
+        f"Venue: {paper.venue or paper.source}",
+        f"Relevance score: {paper.score}/10",
+        f"Topic: {paper.topic}",
+        f"Novelty flag: {paper.novelty_flag or 'unknown'}",
+    ]
+    if paper.key_techniques:
+        meta_lines.append(f"Key techniques (first-pass): {', '.join(paper.key_techniques)}")
+    if paper.summary_zh:
+        meta_lines.append(f"First-pass summary (Chinese): {paper.summary_zh}")
+    if paper.why_relevant:
+        meta_lines.append(f"Why relevant (first-pass): {paper.why_relevant}")
+
     user = (
         f"## Researcher interests\n{interests_yaml}\n\n"
-        f"## Paper metadata\n"
-        f"Title: {paper.title}\n"
-        f"Authors: {', '.join(paper.authors)}\n"
-        f"Venue: {paper.venue or paper.source}\n"
-        f"Score: {paper.score}\n"
-        f"Topic: {paper.topic}\n\n"
+        f"## Paper metadata\n" + "\n".join(meta_lines) + "\n\n"
         f"## Full text\n{pdf_text}\n"
     )
     try:
@@ -84,7 +104,7 @@ def deep_read_paper(
                 {"role": "user", "content": user},
             ],
             model=model,
-            max_tokens=4000,
+            max_tokens=8000,
         )
     except Exception as e:
         log.warning("deep read LLM call failed for %s: %s", paper.paper_id, e)
