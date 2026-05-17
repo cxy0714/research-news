@@ -174,58 +174,47 @@ def _venue_issue_label(papers: list[Paper]) -> str:
     return f"{sorted_p[0][0]}({sorted_p[0][1]}) - {sorted_p[-1][0]}({sorted_p[-1][1]})"
 
 
-def _issue_sort_key(vol: str | None, iss: str | None) -> tuple:
-    """Numeric sort key for (volume, issue); None sorts last."""
-    def _n(s: str | None) -> int:
-        if s is None:
-            return -1
-        m = re.search(r"\d+", s)
-        return int(m.group()) if m else -1
-    return (_n(vol), _n(iss))
-
-
 def render_journal_page(
     papers: list[Paper],
     short: str,
     full: str,
+    vol: str | None = None,
+    iss: str | None = None,
     when: date | None = None,
     output_dir: Path = JOURNALS_DIR,
 ) -> Path:
-    """Write one Markdown page for a single journal, grouped by issue."""
+    """Write one Markdown page for a single journal issue. Returns the path."""
     when = when or date.today()
     output_dir.mkdir(parents=True, exist_ok=True)
-    out = output_dir / f"{when.isoformat()}-{_slug(short)}.md"
 
-    # Group papers by (volume, issue).
-    by_issue: dict[tuple, list[Paper]] = defaultdict(list)
-    for p in papers:
-        by_issue[(p.volume, p.issue)].append(p)
+    # Include vol/issue in filename so multiple issues of the same journal
+    # fetched on the same day don't collide.
+    suffix = ""
+    if vol:
+        suffix += f"-v{vol}"
+    if iss:
+        suffix += f"-i{iss}"
+    out = output_dir / f"{when.isoformat()}-{_slug(short)}{suffix}.md"
 
-    # Sort issues newest-first; (None, None) goes last.
-    issue_order = sorted(
-        by_issue.keys(),
-        key=lambda k: _issue_sort_key(k[0], k[1]),
-        reverse=True,
-    )
+    papers_sorted = sorted(papers, key=lambda p: p.score or 0, reverse=True)
 
-    n_issues_with_id = sum(1 for k in issue_order if k != (None, None))
-    heading = f"# {short}  ·  {when.isoformat()}\n"
+    if vol and iss:
+        issue_label = f"Vol {vol}  Issue {iss}"
+    elif vol:
+        issue_label = f"Vol {vol}"
+    else:
+        issue_label = _venue_issue_label(papers_sorted)
+
+    heading = f"# {short}"
+    if issue_label:
+        heading += f" — {issue_label}"
+    heading += f"  ·  {when.isoformat()}\n"
+
     lines: list[str] = [
         heading,
-        f"- 共 {len(papers)} 篇 · {n_issues_with_id} 期 · {full}\n",
+        f"- 共 {len(papers_sorted)} 篇 · {full}\n",
     ]
-
-    for vol, iss in issue_order:
-        issue_papers = sorted(by_issue[(vol, iss)], key=lambda p: p.score or 0, reverse=True)
-        if vol and iss:
-            section = f"## Vol {vol}  Issue {iss}  *({len(issue_papers)} 篇)*\n"
-        elif vol:
-            section = f"## Vol {vol}  *({len(issue_papers)} 篇)*\n"
-        else:
-            section = f"## 其他  *({len(issue_papers)} 篇)*\n"
-        lines.append(section)
-        lines.extend(_render_topic_groups(issue_papers, heading_prefix="###"))
-
+    lines.extend(_render_topic_groups(papers_sorted, heading_prefix="##"))
     lines.append(_footer())
     out.write_text("\n".join(lines) + "\n", encoding="utf-8")
     return out

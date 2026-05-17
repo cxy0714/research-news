@@ -229,16 +229,17 @@ def run(only: list[str] | None = None, dry_run: bool = False,
         for jcfg in gcfg["journals"]:
             full_to_meta[jcfg["full"]] = (jcfg["short"], jcfg["full"])
 
-    # Group papers by venue and render one page per journal.
-    by_venue: dict[str, list[Paper]] = {}
+    # Group papers by (venue, volume, issue) → one page per issue.
+    by_issue: dict[tuple, list[Paper]] = {}
     for p in papers:
-        by_venue.setdefault(p.venue or "Unknown", []).append(p)
+        key = (p.venue or "Unknown", p.volume, p.issue)
+        by_issue.setdefault(key, []).append(p)
 
     out_paths = []
-    for venue, vps in by_venue.items():
+    for (venue, vol, iss), vps in by_issue.items():
         meta = full_to_meta.get(venue)
         short = meta[0] if meta else venue
-        out = render_journal_page(vps, short, venue, when=today)
+        out = render_journal_page(vps, short, venue, vol=vol, iss=iss, when=today)
         out_paths.append(out)
 
     if high and not skip_pdf:
