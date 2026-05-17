@@ -18,10 +18,10 @@ REPO_URL = "https://github.com/cxy0714/research-news"
 
 # ── per-paper block ───────────────────────────────────────────────────────────
 
-def _paper_block(p: Paper, n: int) -> str:
+def _paper_block(p: Paper, n: int, heading_prefix: str = "####") -> str:
     authors = ", ".join(p.authors[:6]) + (" et al." if len(p.authors) > 6 else "")
     cats = " · ".join(p.categories) if p.categories else ""
-    head = f"### {n}. [{p.paper_id}]({p.url}) — {p.title}"
+    head = f"{heading_prefix} {n}. [{p.paper_id}]({p.url}) — {p.title}"
     body = []
     body.append(f"- **作者**: {authors}")
     if p.venue:
@@ -55,21 +55,22 @@ def _group_by_topic(papers: list[Paper]) -> dict[str, list[Paper]]:
 
 def _render_topic_groups(papers: list[Paper], heading_prefix: str) -> list[str]:
     """Render papers grouped by topic, ordered by TOPICS, with stable numbering
-    restarting at 1 inside each topic."""
+    restarting at 1 inside each topic. Paper blocks nest one level deeper than
+    the topic-group heading."""
     if not papers:
         return []
     groups = _group_by_topic(papers)
     out: list[str] = []
-    # Ordered by TOPICS, plus any unexpected topics appended at the end.
     ordered = [t for t in TOPICS if t in groups] + \
               [t for t in groups if t not in TOPICS]
+    paper_prefix = heading_prefix + "#"
     for topic in ordered:
         ps = groups[topic]
         ps.sort(key=lambda p: p.score or 0, reverse=True)
         label = TOPIC_LABELS_ZH.get(topic, topic)
         out.append(f"{heading_prefix} {label}  *({topic}, {len(ps)} 篇)*\n")
         for i, p in enumerate(ps, 1):
-            out.append(_paper_block(p, i))
+            out.append(_paper_block(p, i, heading_prefix=paper_prefix))
     return out
 
 
