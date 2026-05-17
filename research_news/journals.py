@@ -241,8 +241,6 @@ def run(only: list[str] | None = None, dry_run: bool = False,
         out = render_journal_page(vps, short, venue, when=today)
         out_paths.append(out)
 
-    update_index()
-
     if high and not skip_pdf:
         log.info("saving %d journal highlights (PDF + manifest)", len(high))
         save_highlights(high, run_date=today)
@@ -253,6 +251,7 @@ def run(only: list[str] | None = None, dry_run: bool = False,
     elif skip_pdf:
         log.info("skip_pdf set; not downloading journal highlight PDFs")
 
+    update_index()
     for p in out_paths:
         log.info("wrote %s", p)
     report_token_usage(client, "journals", today)
