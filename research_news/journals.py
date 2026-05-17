@@ -28,8 +28,8 @@ from .highlights import save_highlights
 from .llm.pipeline import score_papers, summarize_paper
 from .llm.sjtu_client import SJTUClient
 from .models import Paper
-from .render.markdown import render_journals, update_index
-from .scrapers.crossref import KNOWN_JOURNALS, fetch_latest_issue
+from .render.markdown import render_journals_by_group, update_index
+from .scrapers.crossref import fetch_latest_issue
 from .scrapers.jmlr import fetch_latest as jmlr_fetch_latest
 from .usage import report as report_token_usage
 
@@ -38,24 +38,29 @@ log = logging.getLogger("research_news.journals")
 JOURNALS_MODEL = os.environ.get("JOURNALS_MODEL",
                                 os.environ.get("DAILY_MODEL", "glm-5.1"))
 
-# Journals enabled by default. "JMLR" is special (own scraper); the rest go
-# through Crossref via KNOWN_JOURNALS.
-DEFAULT_JOURNALS = ["JMLR", "AoS", "JASA", "JRSSB", "Biometrika"]
+JOURNALS_CONFIG_PATH = Path("config/journals.yaml")
 
-CROSSREF_BY_SHORT = {short: (name, issn)
-                     for name, (issn, short) in KNOWN_JOURNALS.items()}
+
+def _load_groups() -> dict:
+    """Returns {group_key: {label, journals: [{short, full, issn}]}}."""
+    import yaml as _yaml
+    cfg = _yaml.safe_load(JOURNALS_CONFIG_PATH.read_text(encoding="utf-8"))
+    return cfg.get("groups", {})
 
 
 def _fetch_journal(short: str, *, jmlr_n: int | None = None,
                    jmlr_vol: int | None = None,
                    n_issues: int = 1) -> list[Paper]:
-    if short == "JMLR":
+    issn = jcfg["issn"]
+    full = jcfg["full"]
+    short = jcfg.get("short", full)
+    if issn == "jmlr":
         return jmlr_fetch_latest(n=jmlr_n, volume=jmlr_vol)
-    if short in CROSSREF_BY_SHORT:
-        full_name, issn = CROSSREF_BY_SHORT[short]
-        return fetch_latest_issue(issn, full_name, n_issues=n_issues)
-    log.warning("unknown journal short name: %r — skipping", short)
-    return []
+    try:
+        return fetch_latest_issue(issn, full, n_issues=n_issues)
+    except Exception as e:
+        log.warning("fetch failed for %s (ISSN %s): %s", short, issn, e)
+        return []
 
 
 def _save_papers(papers: list[Paper], path: Path) -> None:
@@ -80,21 +85,55 @@ def _load_papers(path: Path) -> list[Paper]:
     return papers
 
 
+def _summary_is_broken(p: Paper) -> bool:
+    """Heuristics for a paper whose LLM summary needs a retry.
+
+    Catches both LLM call failures (no summary at all) and parse failures
+    (raw JSON spill-over where summary_zh starts with '{')."""
+    s = (p.summary_zh or "").strip()
+    if not s:
+        return True
+    if s.startswith("{") or s.startswith("```"):
+        return True
+    if len(s) < 80:
+        return True
+    # A successful rich-prompt run always fills these; their absence is a
+    # strong signal that summarize_paper bailed out.
+    if not p.topic or not p.key_techniques or not p.why_relevant:
+        return True
+    return False
+
+
 def run(only: list[str] | None = None, dry_run: bool = False,
-        jmlr_n: int = 10, jmlr_vol: int | None = None,
+        jmlr_n: int | None = None, jmlr_vol: int | None = None,
         n_issues: int = 1, label: str | None = None,
         skip_pdf: bool = False,
         save_papers: Path | None = None,
-        load_papers: Path | None = None) -> Path | None:
+        load_papers: Path | None = None,
+        retry_broken: bool = False,
+        only_group: list[str] | None = None) -> list[Path] | None:
     load_dotenv()
     interests_text = Path("config/interests.yaml").read_text(encoding="utf-8")
+    groups = _load_groups()
 
     if load_papers:
         log.info("skipping fetch; loading papers from %s", load_papers)
         papers = _load_papers(load_papers)
     else:
-        targets = only or DEFAULT_JOURNALS
-        log.info("journals run: %s", targets)
+        if only_group:
+            groups_to_run = {k: groups[k] for k in only_group if k in groups}
+            unknown = [k for k in only_group if k not in groups]
+            if unknown:
+                log.warning("unknown groups (skipped): %s — available: %s",
+                            unknown, list(groups.keys()))
+        else:
+            groups_to_run = groups
+
+        only_shorts = set(s.strip() for s in (only or []) if s.strip())
+        log.info("journals run: groups=%s, only=%s",
+                 list(groups_to_run.keys()),
+                 sorted(only_shorts) if only_shorts else "all")
+
         papers = []
         for short in targets:
             try:
@@ -134,26 +173,47 @@ def run(only: list[str] | None = None, dry_run: bool = False,
 
     client = SJTUClient()
 
-    log.info("scoring %d papers (model=%s) ...", len(papers), JOURNALS_MODEL)
-    scores = score_papers(client, papers, interests_text, model=JOURNALS_MODEL)
-    for p in papers:
-        sr = scores.get(p.paper_id)
-        if sr:
-            p.score, p.score_reason = sr
-        else:
-            p.score = 0.0
+    # Skip scoring on --retry-broken with loaded papers: existing scores
+    # are still valid (rich-prompt summary failure doesn't invalidate the
+    # cheaper batch score).
+    if retry_broken and load_papers and all(p.score is not None for p in papers):
+        log.info("retry-broken: keeping cached scores from %s", load_papers)
+    else:
+        log.info("scoring %d papers (model=%s) ...", len(papers), JOURNALS_MODEL)
+        scores = score_papers(client, papers, interests_text, model=JOURNALS_MODEL)
+        for p in papers:
+            sr = scores.get(p.paper_id)
+            if sr:
+                p.score, p.score_reason = sr
+            else:
+                p.score = 0.0
 
     # No drop threshold: journals are pre-curated, the researcher wants to see
     # the whole issue. Sort by score so the most relevant float to the top
     # within each venue's section in the rendered output.
     papers.sort(key=lambda p: p.score or 0, reverse=True)
 
-    log.info("summarizing %d papers (model=%s) ...", len(papers), JOURNALS_MODEL)
-    for p in papers:
+    # If we loaded saved papers with --retry-broken, skip already-good
+    # summaries and only re-call LLM on the ones that broke last time.
+    if retry_broken and load_papers:
+        to_summarize = [p for p in papers if _summary_is_broken(p)]
+        log.info("retry-broken: %d/%d papers need re-summarize (model=%s)",
+                 len(to_summarize), len(papers), JOURNALS_MODEL)
+    else:
+        to_summarize = papers
+        log.info("summarizing %d papers (model=%s) ...",
+                 len(to_summarize), JOURNALS_MODEL)
+
+    for p in to_summarize:
         try:
             summarize_paper(client, p, interests_text, model=JOURNALS_MODEL)
         except Exception as e:
             log.warning("summary failed for %s: %s", p.paper_id, e)
+
+    # Persist the LLM enrichment back to the source JSON so a future
+    # --load-papers picks up the fixed summaries.
+    if load_papers:
+        _save_papers(papers, load_papers)
 
     # Highlight = score >= threshold from interests.yaml
     import yaml as _yaml
@@ -170,7 +230,7 @@ def run(only: list[str] | None = None, dry_run: bool = False,
         label = f"{today.year}Q{quarter}"
         if n_issues > 1:
             label = f"{label}-{n_issues}issues"
-    out_path = render_journals(papers, when=today, label=label)
+    out_paths = render_journals_by_group(papers, groups, when=today, label=label)
     update_index()
 
     if high and not skip_pdf:
@@ -218,16 +278,27 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--load-papers", type=Path, default=None, metavar="PATH",
                     help="Skip fetching and load papers from PATH. Lets you "
                          "iterate on prompts / models without re-scraping.")
+    ap.add_argument("--retry-broken", action="store_true",
+                    help="With --load-papers: only re-summarize papers whose "
+                         "previous LLM output was broken (empty / truncated JSON / "
+                         "missing topic+key_techniques). Keeps existing scores. "
+                         "Saves the fixed summaries back to the JSON.")
     args = ap.parse_args(argv)
 
     if args.load_papers and args.save_papers:
         ap.error("--load-papers and --save-papers are mutually exclusive")
+    if args.retry_broken and not args.load_papers:
+        ap.error("--retry-broken requires --load-papers")
 
     only = [s.strip() for s in args.only.split(",")] if args.only else None
-    run(only=only, dry_run=args.dry_run, jmlr_n=args.jmlr_n,
+    only_group = [s.strip() for s in args.only_group.split(",")] \
+        if args.only_group else None
+    run(only=only, only_group=only_group,
+        dry_run=args.dry_run, jmlr_n=args.jmlr_n,
         jmlr_vol=args.jmlr_vol, n_issues=args.n_issues, label=args.label,
         skip_pdf=args.skip_pdf,
-        save_papers=args.save_papers, load_papers=args.load_papers)
+        save_papers=args.save_papers, load_papers=args.load_papers,
+        retry_broken=args.retry_broken)
     return 0
 
 
