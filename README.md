@@ -2,8 +2,8 @@
 
 陈星宇个人定制的研究资讯系统。两条独立管道：
 
-- **每日 arXiv**: 抓 stat.ME / stat.TH / math.ST / econ.EM / astro-ph.IM 新提交，按个人兴趣评分，对高相关论文按主题分组生成中文摘要 + 下载 PDF
-- **季度期刊**: 拉 JMLR / AoS / JASA / JRSSB / Biometrika 最新一期（或近 N 期），同样的评分 + 摘要 + 主题分组
+- **每日 arXiv**: 抓 stat.ME / stat.TH / math.ST / econ.EM / astro-ph.IM 新提交，按个人兴趣评分，对高相关论文按主题分组生成中文摘要 + 下载 PDF + LLM 全文精读
+- **季度期刊**: 拉 JMLR / AoS / JASA / JRSSB / Biometrika 等最新一期（或近 N 期），同样的评分 + 摘要 + 主题分组 + 精读
 
 都用 SJTU LLM API（默认 GLM-5.1），渲染成 MkDocs Material 站点。
 
@@ -35,7 +35,7 @@ python -m research_news.smoke_test    # 验 API 通
 | `pyyaml` | 读 `config/*.yaml` |
 | `python-dotenv` | 加载 `.env` |
 | `tenacity` | HTTP / LLM 调用重试 |
-| `pypdf` | 高相关论文 PDF 文本抽取（shootout 深读） |
+| `pypdf` | 高相关论文 PDF 文本抽取（精读管道） |
 | `jinja2`, `python-dateutil` | 模板 + 日期工具 |
 | `mkdocs`, `mkdocs-material` | 文档站点（仅 `.[docs]` extras） |
 
@@ -59,9 +59,12 @@ $env:DAILY_MODEL="deepseek-chat"; python -m research_news.daily
 ```
 
 输出：
-- `docs/daily/<日期>.md` — 当日报告，按主题分组（因果推断 / 高维 RMT / 非参 / 效率理论 / ...）
-- `data/highlights/<topic>/<arxiv_id>.pdf` — 高相关论文（score ≥ 8）的 PDF
-- `data/highlights.json` — 高相关论文 manifest（含 score / topic / 摘要 / 关键技术 / DOI 等）
+- `docs/daily/<日期>.md` — 当日速览报告，按主题分组（因果推断 / 高维 RMT / 非参 / 效率理论 / ...）
+- `docs/deep_reads/<日期>-<paper_id>.md` — 每篇高相关论文（score ≥ 8）的独立精读页
+- `docs/index.md` / `docs/all_daily.md` / `docs/all_deep_reads.md` — 自动更新的首页和存档页
+- `data/highlights/<topic>/<arxiv_id>.pdf` — 高相关论文 PDF（本地存储，不上传 GitHub）
+- `data/highlights.json` — 高相关论文 manifest（含 score / topic / 摘要 / 关键技术等）
+- `data/deep_reads_index.json` — 精读元数据索引（首页展示用）
 - `logs/<日期>.log` — 详细日志
 
 ## 期刊管道
@@ -92,9 +95,9 @@ python -m research_news.journals --n-issues 4 `
 # 从盘上载入跑 LLM（快，可反复）
 python -m research_news.journals --load-papers data/corpus-2026Q2-4i.json
 
-# 改 prompt / 换模型再来一遍，用 --label 区分输出文件
+# 改 prompt / 换模型再来一遍
 $env:JOURNALS_MODEL="deepseek-chat"
-python -m research_news.journals --load-papers data/corpus-2026Q2-4i.json --label deepseek
+python -m research_news.journals --load-papers data/corpus-2026Q2-4i.json
 ```
 
 `--save-papers` 出的 JSON 就是 `Paper` 字段列表，原子写入（写 `.tmp` 后 rename），可以手动编辑（删 paper、加 abstract、改 title）再 load。
@@ -114,8 +117,10 @@ Discussion / reply / rejoinder / correction 类条目（如 JRSSB discussion iss
 
 ### 输出
 
-- `docs/journals/<日期>-<年>Q<n>[-Nissues].md` — 按 venue 分组 → topic 子分组
-- 高相关论文（score ≥ 8）的 PDF 也落 `data/highlights/<topic>/`（arxiv / JMLR PDF；付费期刊只记 manifest）
+- `docs/journals/<日期>-<期刊>.md` — 每个期刊独立一页（如 `2026-05-17-jmlr.md`、`2026-05-17-aos.md`），按主题分组
+- `docs/deep_reads/<日期>-<paper_id>.md` — 高相关论文（score ≥ 8）每篇独立精读页
+- `docs/all_journals.md` / `docs/all_deep_reads.md` — 自动更新的期刊和精读存档页
+- 高相关论文 PDF 落 `data/highlights/<topic>/`（arxiv / JMLR 可下；付费期刊只记 manifest）
 
 ## Shootout（评估工具）
 
@@ -130,7 +135,7 @@ python -m research_news.shootout --source jmlr --n 10 `
     --models deepseek-chat,glm-5.1
 ```
 
-输出在 `docs/shootout/<日期>.md`。
+输出在 `docs/shootout/<日期>.md`，`docs/all_shootout.md` 存档页自动更新。
 
 ## 配置文件
 
@@ -139,6 +144,7 @@ python -m research_news.shootout --source jmlr --n 10 `
 | `config/interests.yaml` | 你的研究兴趣 + score 阈值 + 摘要风格。LLM 直接读 |
 | `config/sources.yaml` | arxiv 抓哪些 category，是否启用会议 / authors 抓取 |
 | `config/authors.yaml` | 关注的作者列表（默认未启用） |
+| `config/journals.yaml` | 期刊列表 + ISSN |
 | `.env` | `SJTU_API_KEY` + 可选 model 覆盖；已 .gitignore |
 
 ## 定时（Windows 任务计划程序）
@@ -148,7 +154,7 @@ python -m research_news.shootout --source jmlr --n 10 `
 3. 操作：`powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\path\to\research-news\run_daily.ps1"`，起始于 `C:\path\to\research-news`
 4. 勾选"如果错过计划开始时间，尽快启动任务"
 
-期刊按季度跑，手动触发即可（每季度一次的事不值得设计排程）。
+期刊按季度跑，手动触发即可。
 
 ## 部署到 GitHub Pages
 
@@ -160,6 +166,7 @@ python -m research_news.shootout --source jmlr --n 10 `
 research_news/
   daily.py            # arxiv 每日管道入口
   journals.py         # 期刊管道入口
+  deep_read.py        # PDF 精读：文本抽取 + LLM 精读 + 独立页面生成
   shootout.py         # prompt / 模型对照评估
   highlights.py       # 高相关论文 PDF 下载 + manifest
   models.py           # Paper / Event dataclass
@@ -171,24 +178,37 @@ research_news/
     authors.py        # Semantic Scholar by author
     conferences.py    # 会议 / seminar 页面（默认禁用）
   llm/
-    prompts.py        # SCORE / RICH_SUMMARY / TOPICS 共享
+    prompts.py        # SCORE / RICH_SUMMARY / DEEP_READ / TOPICS 共享
     pipeline.py       # score_papers / summarize_paper
     sjtu_client.py    # SJTU OpenAI-compatible client
-  render/markdown.py  # MkDocs 页面渲染
-config/               # interests / sources / authors
-docs/                 # MkDocs 源（daily/ + journals/ 自动生成）
-data/                 # 运行时持久化（highlights/ + manifest + token_usage）
-logs/                 # 每日 log
+  render/markdown.py  # MkDocs 页面渲染（daily / journal / deep_read / index）
+config/               # interests / sources / authors / journals
+docs/
+  daily/              # 每日速览（自动生成）
+  journals/           # 期刊页，每期刊一页（自动生成）
+  deep_reads/         # 精读页，每篇论文一页（自动生成）
+  shootout/           # 模型对比页（手动/脚本生成）
+  index.md            # 首页（自动生成）
+  all_daily.md        # 每日存档（自动生成）
+  all_journals.md     # 期刊存档（自动生成）
+  all_deep_reads.md   # 精读存档（自动生成）
+  all_shootout.md     # 测评存档（自动生成）
+data/
+  highlights/         # 高相关论文 PDF（本地，.gitignore）
+  highlights.json     # 高相关论文 manifest
+  deep_reads_index.json  # 精读元数据索引
+  token_usage.json    # API token 用量记录
+logs/                 # 每日日志（.gitignore）
 ```
 
 ## 安全
 
 - API key 走 `.env`，已 `.gitignore`
+- `data/highlights/`（PDF 文件）已 `.gitignore`，不上传 GitHub
 - 仓库公开但无凭证
 
 ## TODO
 
-- [ ] arxiv 高相关论文也做 intro/section/conclusion 深读后再摘要
 - [ ] 期刊 PDF 兜底（Oxford / T&F 学校 IP 时下载？）
 - [ ] 加更多期刊：Bernoulli、EJS、Statistica Sinica、Statistical Science
 - [ ] 会议抓取改用结构化源（RSS / iCal / 会议官方 API）
