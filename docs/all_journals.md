@@ -16,6 +16,10 @@
 - [Vol 54 Issue 1 · 2026-05-18](journals/2026-05-18-aos-v54-i1.md)
 - [2026-05-17](journals/2026-05-17-aos.md)
 
+## APJS
+
+- [Vol 284 Issue 2 · 2026-05-18](journals/2026-05-18-apjs-v284-i2.md)
+
 ## BERNOULLI
 
 - [Vol 32 Issue 3 · 2026-05-18](journals/2026-05-18-bernoulli-v32-i3.md)
@@ -73,6 +77,10 @@
 ## JRSSB
 
 - [Vol 88 Issue 2 · 2026-05-18](journals/2026-05-18-jrssb-v88-i2.md)
+
+## MNRAS
+
+- [Vol 549 Issue 1 · 2026-05-18](journals/2026-05-18-mnras-v549-i1.md)
 
 ## QUANT ECON
 
