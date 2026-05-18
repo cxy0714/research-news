@@ -96,6 +96,16 @@
 
 - [2026-05-18](journals/2026-05-18-statistica-sinica.md)
 
+## 天文统计 (Astrostatistics)
+
+### ApJS
+
+- [Vol 284 Issue 2 · 2026-05-18](journals/2026-05-18-apjs-v284-i2.md)
+
+### MNRAS
+
+- [Vol 549 Issue 1 · 2026-05-18](journals/2026-05-18-mnras-v549-i1.md)
+
 
 ---
 
