@@ -240,6 +240,31 @@ def _journal_short_from_stem(stem: str) -> str:
     return name.replace("-", " ").upper()
 
 
+def _journal_slug_from_stem(stem: str) -> str:
+    """Same as _journal_short_from_stem but returns the raw slug
+    ('j-econometrics'), matching what _slug() produces from the config short."""
+    name = re.sub(r"^\d{4}-\d{2}-\d{2}-", "", stem)
+    name = re.sub(r"-v\d+(?:-i\d+)?$", "", name)
+    return name
+
+
+def _load_journal_groups_for_render() -> list[tuple[str, list[tuple[str, str]]]]:
+    """Read config/journals.yaml and return [(group_label, [(short, slug), ...]), ...]
+    in YAML group order; journals alpha-sorted within each group."""
+    import yaml as _yaml
+    path = Path("config/journals.yaml")
+    if not path.exists():
+        return []
+    cfg = _yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    out: list[tuple[str, list[tuple[str, str]]]] = []
+    for gkey, gcfg in (cfg.get("groups") or {}).items():
+        label = gcfg.get("label", gkey)
+        journals = [(j["short"], _slug(j["short"])) for j in gcfg.get("journals", [])]
+        journals.sort(key=lambda t: t[0].lower())
+        out.append((label, journals))
+    return out
+
+
 def _journal_vol_iss_from_stem(stem: str) -> tuple[int | None, int | None]:
     """Extract (vol, iss) from a journal page filename stem, or (None, None)."""
     name = re.sub(r"^\d{4}-\d{2}-\d{2}-", "", stem)
@@ -411,19 +436,24 @@ def _update_all_journals_page(journal_pages: list[Path], docs: Path) -> None:
         lines.append("*（暂无记录）*\n")
         (docs / "all_journals.md").write_text("\n".join(lines), encoding="utf-8")
         return
-    # Group by base journal short name (vol/issue suffix stripped).
-    by_journal: dict[str, list[Path]] = defaultdict(list)
+
+    # Bucket pages by the slug embedded in the filename so we can match against
+    # config/journals.yaml.
+    by_slug: dict[str, list[Path]] = defaultdict(list)
     for j in journal_pages:
-        short = _journal_short_from_stem(j.stem)
-        by_journal[short].append(j)
-    for short in sorted(by_journal.keys()):
-        lines.append(f"## {short}\n")
-        # Within a journal: newest issue first (vol desc, iss desc, date desc).
-        def _sort_key(p: Path) -> tuple:
-            vol, iss = _journal_vol_iss_from_stem(p.stem)
-            date_str = _parse_date_from_stem(p.stem) or ""
-            return (vol or 0, iss or 0, date_str)
-        for j in sorted(by_journal[short], key=_sort_key, reverse=True):
+        by_slug[_journal_slug_from_stem(j.stem)].append(j)
+
+    def _sort_key(p: Path) -> tuple:
+        vol, iss = _journal_vol_iss_from_stem(p.stem)
+        date_str = _parse_date_from_stem(p.stem) or ""
+        return (vol or 0, iss or 0, date_str)
+
+    def _render_journal_block(short: str, slug: str) -> None:
+        pages = by_slug.pop(slug, [])
+        if not pages:
+            return
+        lines.append(f"### {short}\n")
+        for j in sorted(pages, key=_sort_key, reverse=True):
             date_str = _parse_date_from_stem(j.stem) or j.stem
             vol, iss = _journal_vol_iss_from_stem(j.stem)
             if vol is not None and iss is not None:
@@ -434,6 +464,22 @@ def _update_all_journals_page(journal_pages: list[Path], docs: Path) -> None:
                 label = date_str
             lines.append(f"- [{label}](journals/{j.name})")
         lines.append("")
+
+    for group_label, journals in _load_journal_groups_for_render():
+        # Only emit a group heading if at least one of its journals has pages.
+        if not any(slug in by_slug for _, slug in journals):
+            continue
+        lines.append(f"## {group_label}\n")
+        for short, slug in journals:
+            _render_journal_block(short, slug)
+
+    # Orphans: pages whose slug doesn't match any configured journal (e.g.
+    # a journal was renamed or removed from the config but old pages remain).
+    if by_slug:
+        lines.append("## 其他 / Unmatched\n")
+        for slug in sorted(by_slug.keys()):
+            _render_journal_block(slug.replace("-", " ").upper(), slug)
+
     lines.append(_footer())
     (docs / "all_journals.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
