@@ -1,6 +1,7 @@
 """Render daily / journal / deep-read reports and maintain the site index."""
 from __future__ import annotations
 
+import json
 import re
 from collections import defaultdict
 from datetime import date, timedelta
@@ -229,11 +230,25 @@ def _parse_date_from_stem(stem: str) -> str | None:
 
 
 def _journal_short_from_stem(stem: str) -> str:
-    """'2026-05-17-jmlr' → 'JMLR', '2026-05-17-j-econometrics' → best guess."""
-    # Strip leading date
+    """'2026-05-17-jmlr' → 'JMLR', '2026-05-17-j-econometrics' → best guess.
+
+    Vol/issue suffix (``-vN`` / ``-vN-iM``) is stripped so different issues of
+    the same journal collapse to one heading on the archive page.
+    """
     name = re.sub(r"^\d{4}-\d{2}-\d{2}-", "", stem)
-    # Un-slug: hyphen → space, capitalise
+    name = re.sub(r"-v\d+(?:-i\d+)?$", "", name)
     return name.replace("-", " ").upper()
+
+
+def _journal_vol_iss_from_stem(stem: str) -> tuple[int | None, int | None]:
+    """Extract (vol, iss) from a journal page filename stem, or (None, None)."""
+    name = re.sub(r"^\d{4}-\d{2}-\d{2}-", "", stem)
+    m = re.search(r"-v(\d+)(?:-i(\d+))?$", name)
+    if not m:
+        return None, None
+    vol = int(m.group(1))
+    iss = int(m.group(2)) if m.group(2) else None
+    return vol, iss
 
 
 SHOOTOUT_DIR = Path("docs/shootout")
@@ -289,7 +304,14 @@ def update_index(
             lines.append("### 期刊更新\n")
             for j in today_journals:
                 short = _journal_short_from_stem(j.stem)
-                lines.append(f"- [{short}](journals/{j.name})")
+                vol, iss = _journal_vol_iss_from_stem(j.stem)
+                if vol is not None and iss is not None:
+                    label = f"{short} Vol {vol} Issue {iss}"
+                elif vol is not None:
+                    label = f"{short} Vol {vol}"
+                else:
+                    label = short
+                lines.append(f"- [{label}](journals/{j.name})")
             lines.append("")
 
     # ── 本周 ────────────────────────────────────────────────────────────────
@@ -310,8 +332,15 @@ def update_index(
             lines.append("### 期刊\n")
             for j in week_journals:
                 short = _journal_short_from_stem(j.stem)
+                vol, iss = _journal_vol_iss_from_stem(j.stem)
                 date_str = _parse_date_from_stem(j.stem) or j.stem
-                lines.append(f"- [{short} · {date_str}](journals/{j.name})")
+                if vol is not None and iss is not None:
+                    label = f"{short} Vol {vol} Issue {iss} · {date_str}"
+                elif vol is not None:
+                    label = f"{short} Vol {vol} · {date_str}"
+                else:
+                    label = f"{short} · {date_str}"
+                lines.append(f"- [{label}](journals/{j.name})")
             lines.append("")
 
     # ── 存档入口 ─────────────────────────────────────────────────────────────
@@ -331,6 +360,30 @@ def update_index(
     shootout_pages = sorted(shootout_dir.glob("*.md"), reverse=True) \
         if shootout_dir.exists() else []
     _update_all_shootout_page(shootout_pages, docs)
+
+    # Publish a slim deep-reads index under docs/data/ so the JS overlay on
+    # overview pages can fetch it and inject "🔍 精读" links inline.
+    _publish_deep_reads_index(dr_entries, docs)
+
+
+def _publish_deep_reads_index(entries: list[dict], docs: Path) -> None:
+    """Mirror data/deep_reads_index.json to docs/data/ for the JS overlay."""
+    data_dir = docs / "data"
+    data_dir.mkdir(parents=True, exist_ok=True)
+    slim = [
+        {
+            "paper_id": e.get("paper_id"),
+            "doc_path": e.get("doc_path"),
+            "date": e.get("date"),
+            "title": e.get("title"),
+            "score": e.get("score"),
+        }
+        for e in entries
+        if e.get("paper_id") and e.get("doc_path")
+    ]
+    (data_dir / "deep_reads_index.json").write_text(
+        json.dumps(slim, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
 
 
 def _update_all_daily_page(dailies: list[Path], docs: Path) -> None:
@@ -358,16 +411,28 @@ def _update_all_journals_page(journal_pages: list[Path], docs: Path) -> None:
         lines.append("*（暂无记录）*\n")
         (docs / "all_journals.md").write_text("\n".join(lines), encoding="utf-8")
         return
-    # Group by journal short name
+    # Group by base journal short name (vol/issue suffix stripped).
     by_journal: dict[str, list[Path]] = defaultdict(list)
     for j in journal_pages:
         short = _journal_short_from_stem(j.stem)
         by_journal[short].append(j)
     for short in sorted(by_journal.keys()):
         lines.append(f"## {short}\n")
-        for j in sorted(by_journal[short], reverse=True):
+        # Within a journal: newest issue first (vol desc, iss desc, date desc).
+        def _sort_key(p: Path) -> tuple:
+            vol, iss = _journal_vol_iss_from_stem(p.stem)
+            date_str = _parse_date_from_stem(p.stem) or ""
+            return (vol or 0, iss or 0, date_str)
+        for j in sorted(by_journal[short], key=_sort_key, reverse=True):
             date_str = _parse_date_from_stem(j.stem) or j.stem
-            lines.append(f"- [{date_str}](journals/{j.name})")
+            vol, iss = _journal_vol_iss_from_stem(j.stem)
+            if vol is not None and iss is not None:
+                label = f"Vol {vol} Issue {iss} · {date_str}"
+            elif vol is not None:
+                label = f"Vol {vol} · {date_str}"
+            else:
+                label = date_str
+            lines.append(f"- [{label}](journals/{j.name})")
         lines.append("")
     lines.append(_footer())
     (docs / "all_journals.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
