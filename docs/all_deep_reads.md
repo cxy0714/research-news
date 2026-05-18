@@ -170,10 +170,14 @@
   `因果推断` · 8/10 [journals]
 - [Optimized Variance Estimation under Interference and Complex Experimental Designs](deep_reads/2026-05-18-10.1080_01621459.2026.2627027.md)  
   `因果推断` · 8/10 [journals]
+- [Robust Cosmic Microwave Background B-mode Inference from Single-frequency Observations Using a Self-attention-based Generative Framework](deep_reads/2026-05-18-10.3847_1538-4365_ae5c01.md)  
+  `天体统计` · 7/10 [journals]
 - [Quasi-Bayesian Local Projection Instrumental-Variables Method: Application to Renewable Energy and Electricity Prices](deep_reads/2026-05-18-2605.15966.md)  
   `经济理论 / 应用` · 7/10 [daily]
 - [Identification through sparsity in factor models: The <i>ℓ</i> <sub>1</sub> ‐rotation criterion](deep_reads/2026-05-18-10.3982_qe2369.md)  
   `经济理论 / 应用` · 7/10 [journals]
+- [Interpretable Solar Flare Forecasting via Matrix Profile Shapelet Mining](deep_reads/2026-05-18-10.3847_1538-4365_ae5c04.md)  
+  `天体统计` · 6/10 [journals]
 - [Tweedie's Formula, Variance Functions, and Score-Driven Updating](deep_reads/2026-05-18-2605.15902.md)  
   `经济理论 / 应用` · 6/10 [daily]
 

@@ -8,7 +8,7 @@
 
 [→ 查看完整报告](daily/2026-05-18.md)
 
-### 精读论文（87 篇）
+### 精读论文（89 篇）
 
 - [Generalized linear spectral statistics of high-dimensional sample covariance matrices and its applications](deep_reads/2026-05-18-10.1214_25-aos2601.md)  
   `其他` · 相关性 10/10
@@ -178,10 +178,14 @@
   `因果推断` · 相关性 8/10
 - [Optimized Variance Estimation under Interference and Complex Experimental Designs](deep_reads/2026-05-18-10.1080_01621459.2026.2627027.md)  
   `因果推断` · 相关性 8/10
+- [Robust Cosmic Microwave Background B-mode Inference from Single-frequency Observations Using a Self-attention-based Generative Framework](deep_reads/2026-05-18-10.3847_1538-4365_ae5c01.md)  
+  `天体统计` · 相关性 7/10
 - [Quasi-Bayesian Local Projection Instrumental-Variables Method: Application to Renewable Energy and Electricity Prices](deep_reads/2026-05-18-2605.15966.md)  
   `经济理论 / 应用` · 相关性 7/10
 - [Identification through sparsity in factor models: The <i>ℓ</i> <sub>1</sub> ‐rotation criterion](deep_reads/2026-05-18-10.3982_qe2369.md)  
   `经济理论 / 应用` · 相关性 7/10
+- [Interpretable Solar Flare Forecasting via Matrix Profile Shapelet Mining](deep_reads/2026-05-18-10.3847_1538-4365_ae5c04.md)  
+  `天体统计` · 相关性 6/10
 - [Tweedie's Formula, Variance Functions, and Score-Driven Updating](deep_reads/2026-05-18-2605.15902.md)  
   `经济理论 / 应用` · 相关性 6/10
 
@@ -192,6 +196,7 @@
 - [SCAND J STAT Vol 53 Issue 1](journals/2026-05-18-scand-j-stat-v53-i1.md)
 - [QUANT ECON Vol 17 Issue 2](journals/2026-05-18-quant-econ-v17-i2.md)
 - [QUANT ECON Vol 17 Issue 1](journals/2026-05-18-quant-econ-v17-i1.md)
+- [MNRAS Vol 549 Issue 1](journals/2026-05-18-mnras-v549-i1.md)
 - [JRSSB Vol 88 Issue 2](journals/2026-05-18-jrssb-v88-i2.md)
 - [JRSS C Vol 75 Issue 2](journals/2026-05-18-jrss-c-v75-i2.md)
 - [JRSS C Vol 75 Issue 1](journals/2026-05-18-jrss-c-v75-i1.md)
@@ -213,6 +218,7 @@
 - [BIOMETRICS Vol 82 Issue 1](journals/2026-05-18-biometrics-v82-i1.md)
 - [BERNOULLI Vol 32 Issue 3](journals/2026-05-18-bernoulli-v32-i3.md)
 - [BERNOULLI Vol 32 Issue 2](journals/2026-05-18-bernoulli-v32-i2.md)
+- [APJS Vol 284 Issue 2](journals/2026-05-18-apjs-v284-i2.md)
 - [AOS Vol 54 Issue 2](journals/2026-05-18-aos-v54-i2.md)
 - [AOS Vol 54 Issue 1](journals/2026-05-18-aos-v54-i1.md)
 - [AOP Vol 54 Issue 3](journals/2026-05-18-aop-v54-i3.md)
