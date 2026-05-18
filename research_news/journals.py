@@ -254,9 +254,12 @@ def run(only: list[str] | None = None, dry_run: bool = False,
         out_paths.append(out)
 
     non_high = [p for p in papers if (p.score or 0) < th_highlight]
+    # Same two-bucket fallback as daily.py: secondary topics (score>=6) plus
+    # real-data application papers (score>=7).
     deep_read_papers = list(high) + [
         p for p in non_high
-        if (p.topic or "other") in SECONDARY_TOPICS and (p.score or 0) >= 6
+        if ((p.topic or "other") in SECONDARY_TOPICS and (p.score or 0) >= 6)
+        or (p.novelty_flag == "application" and (p.score or 0) >= 7)
     ]
 
     if deep_read_papers and not skip_pdf:

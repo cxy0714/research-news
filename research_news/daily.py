@@ -125,10 +125,14 @@ def run(dry_run: bool = False, for_date: date | None = None) -> Path:
     out_path = render_daily(high, mid, events, when=report_date)
 
     # Deep-read candidates: primary-interest papers above th_highlight (8),
-    # plus secondary-interest papers (astrostats/econ_theory/epidemiology) above 6.
+    # plus two secondary buckets from below the threshold:
+    #   - secondary-interest topics (astrostats/econ_theory/epidemiology) at score >= 6
+    #   - real-data application papers at score >= 7 (their analysis pipelines
+    #     and datasets are themselves worth a deep read)
     deep_read_papers = list(high) + [
         p for p in mid
-        if (p.topic or "other") in SECONDARY_TOPICS and (p.score or 0) >= 6
+        if ((p.topic or "other") in SECONDARY_TOPICS and (p.score or 0) >= 6)
+        or (p.novelty_flag == "application" and (p.score or 0) >= 7)
     ]
 
     # Persist high-relevance papers: download PDFs, deep-read, then update index.
