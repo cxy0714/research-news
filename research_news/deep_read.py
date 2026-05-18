@@ -14,7 +14,7 @@ from pathlib import Path
 
 from pypdf import PdfReader
 
-from .llm.prompts import DEEP_READ_SYSTEM, TOPIC_LABELS_ZH
+from .llm.prompts import DEEP_READ_ASTRO_SYSTEM, DEEP_READ_SYSTEM, TOPIC_LABELS_ZH
 from .llm.sjtu_client import SJTUClient
 from .models import Paper
 
@@ -97,10 +97,16 @@ def deep_read_paper(
         f"## Paper metadata\n" + "\n".join(meta_lines) + "\n\n"
         f"## Full text\n{pdf_text}\n"
     )
+    # Astrostat papers need a different deep-read style: the researcher lacks
+    # astronomy background, so the notes must teach the physical concepts
+    # before getting into the methodology.
+    system_prompt = (
+        DEEP_READ_ASTRO_SYSTEM if paper.topic == "astrostats" else DEEP_READ_SYSTEM
+    )
     try:
         return client.chat(
             [
-                {"role": "system", "content": DEEP_READ_SYSTEM},
+                {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user},
             ],
             model=model,
