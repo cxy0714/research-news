@@ -24,6 +24,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+from .dedup import filter_new, load_seen, mark_seen, save_seen
 from .deep_read import generate_deep_read_report
 from .highlights import save_highlights
 from .llm.pipeline import score_papers, summarize_paper
@@ -113,7 +114,8 @@ def run(only: list[str] | None = None, dry_run: bool = False,
         save_papers: Path | None = None,
         load_papers: Path | None = None,
         retry_broken: bool = False,
-        only_group: list[str] | None = None) -> list[Path] | None:
+        only_group: list[str] | None = None,
+        dedup: bool = True) -> list[Path] | None:
     load_dotenv()
     interests_text = Path("config/interests.yaml").read_text(encoding="utf-8")
     groups = _load_groups()
@@ -155,6 +157,14 @@ def run(only: list[str] | None = None, dry_run: bool = False,
         if len(papers) < n_before:
             log.info("dropped %d papers with no abstract (Crossref + S2 both empty)",
                      n_before - len(papers))
+
+        if dedup:
+            seen = load_seen()
+            n_before = len(papers)
+            papers = filter_new(papers, seen)
+            if len(papers) < n_before:
+                log.info("dropped %d papers already in seen_papers.json",
+                         n_before - len(papers))
 
         if save_papers:
             _save_papers(papers, save_papers)
@@ -244,9 +254,12 @@ def run(only: list[str] | None = None, dry_run: bool = False,
         out_paths.append(out)
 
     non_high = [p for p in papers if (p.score or 0) < th_highlight]
+    # Same two-bucket fallback as daily.py: secondary topics (score>=6) plus
+    # real-data application papers (score>=7).
     deep_read_papers = list(high) + [
         p for p in non_high
-        if (p.topic or "other") in SECONDARY_TOPICS and (p.score or 0) >= 6
+        if ((p.topic or "other") in SECONDARY_TOPICS and (p.score or 0) >= 6)
+        or (p.novelty_flag == "application" and (p.score or 0) >= 7)
     ]
 
     if deep_read_papers and not skip_pdf:
@@ -260,6 +273,14 @@ def run(only: list[str] | None = None, dry_run: bool = False,
         log.info("skip_pdf set; not downloading journal highlight PDFs")
 
     update_index()
+
+    # Record the papers we just published so future runs skip them.
+    # Done after rendering: a crash mid-render shouldn't poison seen_papers.json.
+    if dedup and not load_papers:
+        seen = load_seen()
+        mark_seen(papers, seen)
+        save_seen(seen)
+
     for p in out_paths:
         log.info("wrote %s", p)
     report_token_usage(client, "journals", today)
@@ -334,6 +355,10 @@ def main(argv: list[str] | None = None) -> int:
                          "previous LLM output was broken (empty / truncated JSON / "
                          "missing topic+key_techniques). Keeps existing scores. "
                          "Saves the fixed summaries back to the JSON.")
+    ap.add_argument("--no-dedup", action="store_true",
+                    help="Don't filter against data/seen_papers.json and don't "
+                         "update it. Use this to re-render an issue you've "
+                         "already published.")
     args = ap.parse_args(argv)
 
     if args.load_papers and args.save_papers:
@@ -349,7 +374,8 @@ def main(argv: list[str] | None = None) -> int:
         jmlr_vol=args.jmlr_vol, n_issues=args.n_issues, label=args.label,
         skip_pdf=args.skip_pdf,
         save_papers=args.save_papers, load_papers=args.load_papers,
-        retry_broken=args.retry_broken)
+        retry_broken=args.retry_broken,
+        dedup=not args.no_dedup)
     return 0
 
 
