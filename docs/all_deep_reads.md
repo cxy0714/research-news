@@ -10,6 +10,12 @@
   `因果推断` · 10/10 [journals]
 - [Semiparametric causal mediation analysis of cluster-randomized trials for indirect and spillover effects](deep_reads/2026-05-18-10.1093_biomtc_ujag017.md)  
   `因果推断` · 10/10 [journals]
+- [Nonparametric inference for sublevel-set probabilities of conditional average treatment effect functions](deep_reads/2026-05-18-2605.15373.md)  
+  `因果推断` · 9/10 [daily]
+- [Improving the Efficiency of Subgroup Analysis in Randomized Controlled Trials with TMLE](deep_reads/2026-05-18-2605.15483.md)  
+  `效率理论 / Debiased ML` · 9/10 [daily]
+- [Statistical Inference for Smoothed Support Vector Machines in High Dimensions: From Offline to Online Data](deep_reads/2026-05-18-2605.15911.md)  
+  `效率理论 / Debiased ML` · 9/10 [daily]
 - [Decorrelated Local Linear Estimator: Inference for Non-linear Effects in High-dimensional Additive Models](deep_reads/2026-05-18-jmlr_v27_22-1436.md)  
   `非参数 / 半参数` · 9/10 [journals]
 - [A causal fused lasso for interpretable heterogeneous treatment effects estimation](deep_reads/2026-05-18-jmlr_v27_23-0535.md)  
@@ -70,6 +76,12 @@
   `因果推断` · 9/10 [journals]
 - [Identification and estimation of mediational effects of longitudinal modified treatment policies](deep_reads/2026-05-18-10.1093_biostatistics_kxaf031.md)  
   `因果推断` · 9/10 [journals]
+- [Re-examining and calibrating weighted survival analysis for causal inference](deep_reads/2026-05-18-2605.15702.md)  
+  `因果推断` · 8/10 [daily]
+- [Nearest-Neighbour Matching on Unbounded Supports and Covariate Shift Transfer](deep_reads/2026-05-18-2605.16027.md)  
+  `其他` · 8/10 [daily]
+- [Tests for the mean of high-dimensional data](deep_reads/2026-05-18-2605.16033.md)  
+  `数理统计 / 假设检验` · 8/10 [daily]
 - [Flexible Functional Treatment Effect Estimation](deep_reads/2026-05-18-jmlr_v27_23-0944.md)  
   `因果推断` · 8/10 [journals]
 - [Neural Network Parameter-optimization of Gaussian Pre-marginalized Directed Acyclic Graphs](deep_reads/2026-05-18-jmlr_v27_23-1249.md)  
@@ -158,8 +170,12 @@
   `因果推断` · 8/10 [journals]
 - [Optimized Variance Estimation under Interference and Complex Experimental Designs](deep_reads/2026-05-18-10.1080_01621459.2026.2627027.md)  
   `因果推断` · 8/10 [journals]
+- [Quasi-Bayesian Local Projection Instrumental-Variables Method: Application to Renewable Energy and Electricity Prices](deep_reads/2026-05-18-2605.15966.md)  
+  `经济理论 / 应用` · 7/10 [daily]
 - [Identification through sparsity in factor models: The <i>ℓ</i> <sub>1</sub> ‐rotation criterion](deep_reads/2026-05-18-10.3982_qe2369.md)  
   `经济理论 / 应用` · 7/10 [journals]
+- [Tweedie's Formula, Variance Functions, and Score-Driven Updating](deep_reads/2026-05-18-2605.15902.md)  
+  `经济理论 / 应用` · 6/10 [daily]
 
 ## 2026-05-17
 
