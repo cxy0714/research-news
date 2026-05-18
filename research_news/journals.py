@@ -266,10 +266,35 @@ def run(only: list[str] | None = None, dry_run: bool = False,
     return out_paths
 
 
-def _setup_logging() -> None:
+def _setup_logging(log_dir: str = "logs") -> None:
+    from datetime import date
+    from pathlib import Path
+
     fmt = "%(asctime)s %(levelname)s %(name)s: %(message)s"
-    logging.basicConfig(level=logging.INFO, format=fmt, datefmt="%Y-%m-%d %H:%M:%S")
-    logging.getLogger("httpx").setLevel(logging.WARNING)
+    datefmt = "%Y-%m-%d %H:%M:%S"
+
+    Path(log_dir).mkdir(exist_ok=True)
+    log_file = Path(log_dir) / f"journals-{date.today().isoformat()}.log"
+
+    root = logging.getLogger()
+    root.setLevel(logging.INFO)
+
+    ch = logging.StreamHandler()
+    ch.setFormatter(logging.Formatter(fmt, datefmt=datefmt))
+    root.addHandler(ch)
+
+    fh = logging.FileHandler(log_file, encoding="utf-8")
+    fh.setFormatter(logging.Formatter(fmt, datefmt=datefmt))
+    root.addHandler(fh)
+
+    # httpx request lines are noisy on console; keep them in the file only
+    console_httpx = logging.getLogger("httpx")
+    console_httpx.setLevel(logging.WARNING)
+    fh_httpx = logging.FileHandler(log_file, encoding="utf-8")
+    fh_httpx.setFormatter(logging.Formatter(fmt, datefmt=datefmt))
+    fh_httpx.setLevel(logging.INFO)
+    console_httpx.addHandler(fh_httpx)
+    console_httpx.propagate = False
 
 
 def main(argv: list[str] | None = None) -> int:
