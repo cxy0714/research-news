@@ -13,7 +13,7 @@ from .dedup import filter_new, load_seen, mark_seen, save_seen
 from .deep_read import generate_deep_read_report
 from .highlights import save_highlights
 from .llm.pipeline import extract_events, score_papers, summarize_paper
-from .llm.prompts import SECONDARY_TOPICS
+from .llm.prompts import DEEP_READ_LOWER_THRESHOLD_TOPICS
 from .llm.sjtu_client import SJTUClient
 from .models import Event, Paper
 from .render.markdown import render_daily, update_index
@@ -126,12 +126,14 @@ def run(dry_run: bool = False, for_date: date | None = None) -> Path:
 
     # Deep-read candidates: primary-interest papers above th_highlight (8),
     # plus two secondary buckets from below the threshold:
-    #   - secondary-interest topics (astrostats/econ_theory/epidemiology) at score >= 6
+    #   - lower-threshold topics (secondary interests + stat_computing, where
+    #     the researcher is an outsider on the statistical-computational
+    #     tradeoff side) at score >= 6
     #   - real-data application papers at score >= 7 (their analysis pipelines
     #     and datasets are themselves worth a deep read)
     deep_read_papers = list(high) + [
         p for p in mid
-        if ((p.topic or "other") in SECONDARY_TOPICS and (p.score or 0) >= 6)
+        if ((p.topic or "other") in DEEP_READ_LOWER_THRESHOLD_TOPICS and (p.score or 0) >= 6)
         or (p.novelty_flag == "application" and (p.score or 0) >= 7)
     ]
 
