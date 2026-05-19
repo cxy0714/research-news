@@ -1,5 +1,16 @@
 # 精读报告存档
 
+## 2026-05-19
+
+- [Double/Debiased Machine Learning for Continuous Treatment Effects in Panel Data with Endogeneity](deep_reads/2026-05-19-2605.17910.md)  
+  `因果推断` · 9/10 [daily]
+- [Sensitivity analysis for causal mediation: bridge score, sharp sensitivity bounds, and calibration](deep_reads/2026-05-19-2605.18724.md)  
+  `因果推断` · 9/10 [daily]
+- [Single World Intervention Graphs as Distributions: A Framework for Causal Identification](deep_reads/2026-05-19-2605.17050.md)  
+  `因果推断` · 8/10 [daily]
+- [Symmetry-Aware Convex Shrinkage for High-Dimensional Covariance Estimation](deep_reads/2026-05-19-2605.17111.md)  
+  `高维统计 / 随机矩阵` · 8/10 [daily]
+
 ## 2026-05-18
 
 - [Generalized linear spectral statistics of high-dimensional sample covariance matrices and its applications](deep_reads/2026-05-18-10.1214_25-aos2601.md)  
