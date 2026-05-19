@@ -1,0 +1,46 @@
+{# Giscus comment widget — rendered only after repo_id is configured. #}
+{% set g = config.extra.giscus if config.extra else None %}
+{% if g and g.repo_id and g.category_id %}
+<h2 id="__comments">评论</h2>
+<script src="https://giscus.app/client.js"
+        data-repo="{{ g.repo }}"
+        data-repo-id="{{ g.repo_id }}"
+        data-category="{{ g.category }}"
+        data-category-id="{{ g.category_id }}"
+        data-mapping="{{ g.mapping }}"
+        data-strict="0"
+        data-reactions-enabled="{{ g.reactions_enabled }}"
+        data-emit-metadata="0"
+        data-input-position="{{ g.input_position }}"
+        data-theme="preferred_color_scheme"
+        data-lang="{{ g.lang }}"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+<script>
+  // Sync giscus theme with Material's light/dark palette switch.
+  (function () {
+    function currentTheme() {
+      try {
+        var palette = JSON.parse(localStorage.getItem(__md_get("__prefix", "__palette")) || "{}");
+        return (palette.color && palette.color.scheme === "slate") ? "dark" : "light";
+      } catch (e) { return "light"; }
+    }
+    function pushTheme() {
+      var frame = document.querySelector("iframe.giscus-frame");
+      if (!frame) return;
+      frame.contentWindow.postMessage(
+        { giscus: { setConfig: { theme: currentTheme() } } },
+        "https://giscus.app"
+      );
+    }
+    if (typeof document$ !== "undefined" && document$.subscribe) {
+      document$.subscribe(function () {
+        var inputs = document.querySelectorAll("[data-md-component=palette] input");
+        inputs.forEach(function (i) { i.addEventListener("change", pushTheme); });
+      });
+    }
+  })();
+</script>
+{% endif %}

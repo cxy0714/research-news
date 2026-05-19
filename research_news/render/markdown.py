@@ -13,6 +13,8 @@ from ..models import Event, Paper
 DOCS_DIR = Path("docs/daily")
 JOURNALS_DIR = Path("docs/journals")
 DEEP_READS_DIR = Path("docs/deep_reads")
+SHOOTOUT_DIR = Path("docs/shootout")
+WEEKLY_DIR = Path("docs/weekly")
 
 HOMEPAGE_URL = "https://cxy0714.github.io/"
 REPO_URL = "https://github.com/cxy0714/research-news"
@@ -276,16 +278,14 @@ def _journal_vol_iss_from_stem(stem: str) -> tuple[int | None, int | None]:
     return vol, iss
 
 
-SHOOTOUT_DIR = Path("docs/shootout")
-
-
 def update_index(
     daily_dir: Path = DOCS_DIR,
     journals_dir: Path = JOURNALS_DIR,
     deep_reads_dir: Path = DEEP_READS_DIR,
     shootout_dir: Path = SHOOTOUT_DIR,
+    weekly_dir: Path = WEEKLY_DIR,
 ) -> None:
-    """Regenerate docs/index.md and the three archive pages."""
+    """Regenerate docs/index.md and the archive pages."""
     from ..deep_read import load_index as _load_dr_index
 
     docs = Path("docs")
@@ -293,6 +293,7 @@ def update_index(
 
     dailies = sorted(daily_dir.glob("*.md"), reverse=True) if daily_dir.exists() else []
     journal_pages = sorted(journals_dir.glob("*.md"), reverse=True) if journals_dir.exists() else []
+    weekly_pages = sorted(weekly_dir.glob("*.md"), reverse=True) if weekly_dir.exists() else []
     dr_entries = _load_dr_index()  # newest first from deep_reads_index.json
 
     today_str = dailies[0].stem if dailies else ""
@@ -301,8 +302,33 @@ def update_index(
 
     lines: list[str] = [
         "# Research News\n",
-        "每日 arXiv + 季度期刊的个性化统计学 / 因果推断研究资讯。\n",
+        "每日 arXiv + 季度期刊的个性化 因果推断, 高维统计，统计计算，"
+        "统计应用，天文统计研究资讯。\n",
     ]
+
+    # ── 栏目 ────────────────────────────────────────────────────────────────
+    lines.append("## 栏目\n")
+    lines.append(
+        "- **[每日存档](all_daily.md)** — 每天的 arXiv 速览，"
+        "按 LLM 给出的相关性打分排序。"
+    )
+    lines.append(
+        "- **[精读存档](all_deep_reads.md)** — 当日 / 当期高相关性论文的"
+        "深入解读，含问题动机、核心方法、关键假设与结果。"
+    )
+    lines.append(
+        "- **[期刊存档](all_journals.md)** — 季度抓取核心统计 / 计量 / ML 期刊的"
+        "新发文章，按期刊分组。"
+    )
+    lines.append(
+        "- **[每周周报](all_weekly.md)** — 维护者手动挑选的当周备忘，"
+        "按兴趣分组，每篇一两句评论。"
+    )
+    lines.append(
+        "- **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的"
+        "打分 / 解读对比。"
+    )
+    lines.append("")
 
     # ── 今日 ────────────────────────────────────────────────────────────────
     if today_str:
@@ -322,66 +348,33 @@ def update_index(
                 )
             lines.append("")
 
-        # Today's journal pages
-        today_journals = [j for j in journal_pages
-                          if _parse_date_from_stem(j.stem) == today_str]
-        if today_journals:
-            lines.append("### 期刊更新\n")
-            for j in today_journals:
-                short = _journal_short_from_stem(j.stem)
-                vol, iss = _journal_vol_iss_from_stem(j.stem)
-                if vol is not None and iss is not None:
-                    label = f"{short} Vol {vol} Issue {iss}"
-                elif vol is not None:
-                    label = f"{short} Vol {vol}"
-                else:
-                    label = short
-                lines.append(f"- [{label}](journals/{j.name})")
-            lines.append("")
+    # ── 最新周报 ─────────────────────────────────────────────────────────────
+    if weekly_pages:
+        latest_weekly = weekly_pages[0]
+        lines.append("## 最新周报\n")
+        lines.append(
+            f"- [{latest_weekly.stem}](weekly/{latest_weekly.name})"
+            f" · 维护者手挑"
+        )
+        lines.append("")
 
-    # ── 本周 ────────────────────────────────────────────────────────────────
+    # ── 本周每日报告 ────────────────────────────────────────────────────────
     week_dailies = [d for d in dailies
                     if d.stem != today_str and d.stem >= week_cutoff]
-    week_journals = [j for j in journal_pages
-                     if (_parse_date_from_stem(j.stem) or "") < today_str
-                     and (_parse_date_from_stem(j.stem) or "") >= week_cutoff]
-
-    if week_dailies or week_journals:
-        lines.append("## 本周\n")
-        if week_dailies:
-            lines.append("### 每日报告\n")
-            for d in week_dailies:
-                lines.append(f"- [{d.stem}](daily/{d.name})")
-            lines.append("")
-        if week_journals:
-            lines.append("### 期刊\n")
-            for j in week_journals:
-                short = _journal_short_from_stem(j.stem)
-                vol, iss = _journal_vol_iss_from_stem(j.stem)
-                date_str = _parse_date_from_stem(j.stem) or j.stem
-                if vol is not None and iss is not None:
-                    label = f"{short} Vol {vol} Issue {iss} · {date_str}"
-                elif vol is not None:
-                    label = f"{short} Vol {vol} · {date_str}"
-                else:
-                    label = f"{short} · {date_str}"
-                lines.append(f"- [{label}](journals/{j.name})")
-            lines.append("")
-
-    # ── 存档入口 ─────────────────────────────────────────────────────────────
-    lines.append("## 存档\n")
-    lines.append("- [→ 所有每日报告](all_daily.md)")
-    lines.append("- [→ 所有期刊](all_journals.md)")
-    lines.append("- [→ 所有精读报告](all_deep_reads.md)")
-    lines.append("")
+    if week_dailies:
+        lines.append("## 本周每日报告\n")
+        for d in week_dailies:
+            lines.append(f"- [{d.stem}](daily/{d.name})")
+        lines.append("")
 
     lines.append(_footer())
     (docs / "index.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
-    # Also regenerate the four archive pages
+    # Also regenerate the archive pages
     _update_all_daily_page(dailies, docs)
     _update_all_journals_page(journal_pages, docs)
     _update_all_deep_reads_page(dr_entries, docs)
+    _update_all_weekly_page(weekly_pages, docs)
     shootout_pages = sorted(shootout_dir.glob("*.md"), reverse=True) \
         if shootout_dir.exists() else []
     _update_all_shootout_page(shootout_pages, docs)
@@ -507,6 +500,26 @@ def _update_all_deep_reads_page(entries: list[dict], docs: Path) -> None:
         lines.append("")
     lines.append(_footer())
     (docs / "all_deep_reads.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def _update_all_weekly_page(weekly_pages: list[Path], docs: Path) -> None:
+    lines = ["# 每周周报存档\n",
+             "维护者手动挑选的当周备忘，按 ISO 周号命名。\n"]
+    if not weekly_pages:
+        lines.append("*（暂无记录）*\n")
+        (docs / "all_weekly.md").write_text("\n".join(lines), encoding="utf-8")
+        return
+    by_year: dict[str, list[Path]] = defaultdict(list)
+    for w in weekly_pages:
+        year = w.stem[:4]
+        by_year[year].append(w)
+    for year in sorted(by_year.keys(), reverse=True):
+        lines.append(f"## {year}\n")
+        for w in sorted(by_year[year], reverse=True):
+            lines.append(f"- [{w.stem}](weekly/{w.name})")
+        lines.append("")
+    lines.append(_footer())
+    (docs / "all_weekly.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
 def _update_all_shootout_page(shootout_pages: list[Path], docs: Path) -> None:
