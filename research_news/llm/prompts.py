@@ -45,6 +45,12 @@ TOPICS: list[str] = [
 
 SECONDARY_TOPICS: set[str] = {"astrostats", "econ_theory", "epidemiology"}
 
+# Topics where the researcher is an outsider / wants broader coverage at a
+# lower deep-read threshold (score >= 6 instead of >= th_highlight). Currently
+# overlaps with SECONDARY_TOPICS plus stat_computing (statistical-computational
+# tradeoff is filed here and the researcher wants more entry-level reading).
+DEEP_READ_LOWER_THRESHOLD_TOPICS: set[str] = SECONDARY_TOPICS | {"stat_computing"}
+
 TOPIC_LABELS_ZH: dict[str, str] = {
     "causal_inference":    "因果推断",
     "high_dim_rmt":        "高维统计 / 随机矩阵",

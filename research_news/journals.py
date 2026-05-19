@@ -28,7 +28,7 @@ from .dedup import filter_new, load_seen, mark_seen, save_seen
 from .deep_read import generate_deep_read_report
 from .highlights import save_highlights
 from .llm.pipeline import score_papers, summarize_paper
-from .llm.prompts import SECONDARY_TOPICS
+from .llm.prompts import DEEP_READ_LOWER_THRESHOLD_TOPICS
 from .llm.sjtu_client import SJTUClient
 from .models import Paper
 from .render.markdown import render_journal_page, update_index
@@ -254,11 +254,12 @@ def run(only: list[str] | None = None, dry_run: bool = False,
         out_paths.append(out)
 
     non_high = [p for p in papers if (p.score or 0) < th_highlight]
-    # Same two-bucket fallback as daily.py: secondary topics (score>=6) plus
-    # real-data application papers (score>=7).
+    # Same two-bucket fallback as daily.py: lower-threshold topics
+    # (secondary interests + stat_computing) at score>=6, plus real-data
+    # application papers at score>=7.
     deep_read_papers = list(high) + [
         p for p in non_high
-        if ((p.topic or "other") in SECONDARY_TOPICS and (p.score or 0) >= 6)
+        if ((p.topic or "other") in DEEP_READ_LOWER_THRESHOLD_TOPICS and (p.score or 0) >= 6)
         or (p.novelty_flag == "application" and (p.score or 0) >= 7)
     ]
 
