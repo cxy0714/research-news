@@ -293,7 +293,11 @@ def update_index(
 
     dailies = sorted(daily_dir.glob("*.md"), reverse=True) if daily_dir.exists() else []
     journal_pages = sorted(journals_dir.glob("*.md"), reverse=True) if journals_dir.exists() else []
-    weekly_pages = sorted(weekly_dir.glob("*.md"), reverse=True) if weekly_dir.exists() else []
+    weekly_pages = sorted(
+        (w for w in weekly_dir.glob("*.md")
+         if not w.stem.startswith(("_", "template"))),
+        reverse=True,
+    ) if weekly_dir.exists() else []
     dr_entries = _load_dr_index()  # newest first from deep_reads_index.json
 
     today_str = dailies[0].stem if dailies else ""
