@@ -2,6 +2,14 @@
 
 每日 arXiv + 季度期刊的个性化 因果推断, 高维统计，统计计算，统计应用，天文统计研究资讯。
 
+## 栏目
+
+- **[每日存档](all_daily.md)** — 每天的 arXiv 速览，按 LLM 给出的相关性打分排序。
+- **[精读存档](all_deep_reads.md)** — 当日 / 当期高相关性论文的深入解读，含问题动机、核心方法、关键假设与结果。
+- **[期刊存档](all_journals.md)** — 季度抓取核心统计 / 计量 / ML 期刊的新发文章，按期刊分组。
+- **[每周周报](all_weekly.md)** — 维护者手动挑选的当周备忘，按兴趣分组，每篇一两句评论。
+- **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
+
 ## 今日 · 2026-05-19
 
 ### 每日 arXiv 速览
@@ -19,60 +27,17 @@
 - [Symmetry-Aware Convex Shrinkage for High-Dimensional Covariance Estimation](deep_reads/2026-05-19-2605.17111.md)  
   `高维统计 / 随机矩阵` · 相关性 8/10
 
-## 本周
+## 最新周报
 
-### 每日报告
+- [2026-W20](weekly/2026-W20.md) · 维护者手挑
+
+## 本周每日报告
 
 - [2026-05-18](daily/2026-05-18.md)
 - [2026-05-16](daily/2026-05-16.md)
 - [2026-05-15](daily/2026-05-15.md)
 - [2026-05-14](daily/2026-05-14.md)
 - [2026-05-12](daily/2026-05-12.md)
-
-### 期刊
-
-- [STATISTICA SINICA · 2026-05-18](journals/2026-05-18-statistica-sinica.md)
-- [SCAND J STAT Vol 53 Issue 2 · 2026-05-18](journals/2026-05-18-scand-j-stat-v53-i2.md)
-- [SCAND J STAT Vol 53 Issue 1 · 2026-05-18](journals/2026-05-18-scand-j-stat-v53-i1.md)
-- [QUANT ECON Vol 17 Issue 2 · 2026-05-18](journals/2026-05-18-quant-econ-v17-i2.md)
-- [QUANT ECON Vol 17 Issue 1 · 2026-05-18](journals/2026-05-18-quant-econ-v17-i1.md)
-- [MNRAS Vol 549 Issue 1 · 2026-05-18](journals/2026-05-18-mnras-v549-i1.md)
-- [JRSSB Vol 88 Issue 2 · 2026-05-18](journals/2026-05-18-jrssb-v88-i2.md)
-- [JRSS C Vol 75 Issue 2 · 2026-05-18](journals/2026-05-18-jrss-c-v75-i2.md)
-- [JRSS C Vol 75 Issue 1 · 2026-05-18](journals/2026-05-18-jrss-c-v75-i1.md)
-- [JMLR · 2026-05-18](journals/2026-05-18-jmlr.md)
-- [JBES Vol 44 Issue 2 · 2026-05-18](journals/2026-05-18-jbes-v44-i2.md)
-- [JASA · 2026-05-18](journals/2026-05-18-jasa.md)
-- [J ECONOMETRICS · 2026-05-18](journals/2026-05-18-j-econometrics.md)
-- [J ECONOMETRICS Vol 256 · 2026-05-18](journals/2026-05-18-j-econometrics-v256.md)
-- [J ECONOMETRICS Vol 255 · 2026-05-18](journals/2026-05-18-j-econometrics-v255.md)
-- [EJS Vol 20 Issue 1 · 2026-05-18](journals/2026-05-18-ejs-v20-i1.md)
-- [EJS Vol 19 Issue 2 · 2026-05-18](journals/2026-05-18-ejs-v19-i2.md)
-- [ECONOMETRICA Vol 94 Issue 2 · 2026-05-18](journals/2026-05-18-econometrica-v94-i2.md)
-- [ECONOMETRICA Vol 94 Issue 1 · 2026-05-18](journals/2026-05-18-econometrica-v94-i1.md)
-- [BIOSTATISTICS Vol 27 Issue 1 · 2026-05-18](journals/2026-05-18-biostatistics-v27-i1.md)
-- [BIOSTATISTICS Vol 26 Issue 1 · 2026-05-18](journals/2026-05-18-biostatistics-v26-i1.md)
-- [BIOMETRIKA Vol 113 Issue 2 · 2026-05-18](journals/2026-05-18-biometrika-v113-i2.md)
-- [BIOMETRIKA Vol 113 Issue 1 · 2026-05-18](journals/2026-05-18-biometrika-v113-i1.md)
-- [BIOMETRICS Vol 82 Issue 2 · 2026-05-18](journals/2026-05-18-biometrics-v82-i2.md)
-- [BIOMETRICS Vol 82 Issue 1 · 2026-05-18](journals/2026-05-18-biometrics-v82-i1.md)
-- [BERNOULLI Vol 32 Issue 3 · 2026-05-18](journals/2026-05-18-bernoulli-v32-i3.md)
-- [BERNOULLI Vol 32 Issue 2 · 2026-05-18](journals/2026-05-18-bernoulli-v32-i2.md)
-- [APJS Vol 284 Issue 2 · 2026-05-18](journals/2026-05-18-apjs-v284-i2.md)
-- [AOS Vol 54 Issue 2 · 2026-05-18](journals/2026-05-18-aos-v54-i2.md)
-- [AOS Vol 54 Issue 1 · 2026-05-18](journals/2026-05-18-aos-v54-i1.md)
-- [AOP Vol 54 Issue 3 · 2026-05-18](journals/2026-05-18-aop-v54-i3.md)
-- [AOP Vol 54 Issue 2 · 2026-05-18](journals/2026-05-18-aop-v54-i2.md)
-- [AOAS Vol 20 Issue 1 · 2026-05-18](journals/2026-05-18-aoas-v20-i1.md)
-- [AOAS Vol 19 Issue 4 · 2026-05-18](journals/2026-05-18-aoas-v19-i4.md)
-- [JMLR · 2026-05-17](journals/2026-05-17-jmlr.md)
-- [AOS · 2026-05-17](journals/2026-05-17-aos.md)
-
-## 存档
-
-- [→ 所有每日报告](all_daily.md)
-- [→ 所有期刊](all_journals.md)
-- [→ 所有精读报告](all_deep_reads.md)
 
 
 ---
