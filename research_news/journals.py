@@ -32,6 +32,7 @@ from .llm.prompts import DEEP_READ_LOWER_THRESHOLD_TOPICS
 from .llm.sjtu_client import SJTUClient
 from .models import Paper
 from .render.markdown import render_journal_page, update_index
+from .score_log import append_scored as append_score_log
 from .scrapers.crossref import fetch_latest_issue
 from .scrapers.jmlr import fetch_latest as jmlr_fetch_latest
 from .usage import report as report_token_usage
@@ -219,6 +220,13 @@ def run(only: list[str] | None = None, dry_run: bool = False,
             summarize_paper(client, p, interests_text, model=JOURNALS_MODEL)
         except Exception as e:
             log.warning("summary failed for %s: %s", p.paper_id, e)
+
+    append_score_log(
+        papers,
+        run_date=date.today(),
+        model=JOURNALS_MODEL,
+        interests_text=interests_text,
+    )
 
     # Persist the LLM enrichment back to the source JSON so a future
     # --load-papers picks up the fixed summaries.
