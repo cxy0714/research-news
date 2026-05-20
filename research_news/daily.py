@@ -17,6 +17,7 @@ from .llm.prompts import DEEP_READ_LOWER_THRESHOLD_TOPICS
 from .llm.sjtu_client import SJTUClient
 from .models import Event, Paper
 from .render.markdown import render_daily, update_index
+from .score_log import append_scored as append_score_log
 from .scrapers import arxiv as arxiv_scraper
 from .scrapers import authors as authors_scraper
 from .scrapers import conferences as conf_scraper
@@ -102,6 +103,11 @@ def run(dry_run: bool = False, for_date: date | None = None) -> Path:
             else:
                 p.score = 0.0
 
+        # Keep a reference to every scored paper for the score log. After
+        # summarize runs, above-threshold papers in this list will also carry
+        # topic/novelty_flag/key_techniques (same object references).
+        all_scored = list(papers)
+
         papers = [p for p in papers if (p.score or 0) >= th_show]
         papers.sort(key=lambda p: p.score or 0, reverse=True)
         log.info("%d papers above threshold %.0f", len(papers), th_show)
@@ -115,6 +121,13 @@ def run(dry_run: bool = False, for_date: date | None = None) -> Path:
                 summarize_paper(client, p, interests_text, model=DAILY_MODEL)
             except Exception as e:
                 log.warning("summary failed for %s: %s", p.paper_id, e)
+
+        append_score_log(
+            all_scored,
+            run_date=report_date,
+            model=DAILY_MODEL,
+            interests_text=interests_text,
+        )
 
     log.info("collecting events ...")
     events = _collect_events(client, sources_cfg)
