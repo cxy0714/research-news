@@ -10,20 +10,20 @@
 - **[每周周报](all_weekly.md)** — 维护者手动挑选的当周备忘，按兴趣分组，每篇一两句评论。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-05-20
+## 今日 · 2026-05-22
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-05-20.md)
+[→ 查看完整报告](daily/2026-05-22.md)
 
 ### 精读论文（3 篇）
 
-- [Statistical Unlearning of Distributions: A Hypothesis Testing Approach](deep_reads/2026-05-20-2605.16645.md)  
-  `数理统计 / 假设检验` · 相关性 9/10
-- [Fixed-order PCA: Theory for Overestimated Factor Models](deep_reads/2026-05-20-2605.18448.md)  
-  `高维统计 / 随机矩阵` · 相关性 9/10
-- [Self-Distillation is Optimal Among Spectral Shrinkage Estimators in Spiked Covariance Models](deep_reads/2026-05-20-2605.17778.md)  
-  `高维统计 / 随机矩阵` · 相关性 8/10
+- [Targeted maximum likelihood estimation of vaccine effectiveness and immune correlates in test-negative design studies with missing data](deep_reads/2026-05-22-2605.21793.md)  
+  `因果推断` · 相关性 9/10
+- [Block-Independent Likelihood Ratio Testing for High-Dimensional Mean Vectors with Applications to Matrix-Variate Data](deep_reads/2026-05-22-2605.21848.md)  
+  `数理统计 / 假设检验` · 相关性 8/10
+- [Sequential Sensitivity Analysis for Multiple Assumptions: A Framework for Understanding Racial Disparity in Police Use of Force](deep_reads/2026-05-22-2605.21893.md)  
+  `其他` · 相关性 8/10
 
 ## 最新周报
 
@@ -31,11 +31,12 @@
 
 ## 本周每日报告
 
+- [2026-05-21](daily/2026-05-21.md)
+- [2026-05-20](daily/2026-05-20.md)
 - [2026-05-19](daily/2026-05-19.md)
 - [2026-05-18](daily/2026-05-18.md)
 - [2026-05-16](daily/2026-05-16.md)
 - [2026-05-15](daily/2026-05-15.md)
-- [2026-05-14](daily/2026-05-14.md)
 
 
 ---
