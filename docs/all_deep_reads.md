@@ -1,5 +1,14 @@
 # 精读报告存档
 
+## 2026-05-22
+
+- [Targeted maximum likelihood estimation of vaccine effectiveness and immune correlates in test-negative design studies with missing data](deep_reads/2026-05-22-2605.21793.md)  
+  `因果推断` · 9/10 [daily]
+- [Block-Independent Likelihood Ratio Testing for High-Dimensional Mean Vectors with Applications to Matrix-Variate Data](deep_reads/2026-05-22-2605.21848.md)  
+  `数理统计 / 假设检验` · 8/10 [daily]
+- [Sequential Sensitivity Analysis for Multiple Assumptions: A Framework for Understanding Racial Disparity in Police Use of Force](deep_reads/2026-05-22-2605.21893.md)  
+  `其他` · 8/10 [daily]
+
 ## 2026-05-21
 
 - [Generalized linear spectral statistics of high-dimensional sample covariance matrices and its applications](deep_reads/2026-05-21-10.1214_25-aos2601.md)  
