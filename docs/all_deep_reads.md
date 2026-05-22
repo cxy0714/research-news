@@ -1,14 +1,5 @@
 # 精读报告存档
 
-## 2026-05-20
-
-- [Statistical Unlearning of Distributions: A Hypothesis Testing Approach](deep_reads/2026-05-20-2605.16645.md)  
-  `数理统计 / 假设检验` · 9/10 [daily]
-- [Fixed-order PCA: Theory for Overestimated Factor Models](deep_reads/2026-05-20-2605.18448.md)  
-  `高维统计 / 随机矩阵` · 9/10 [daily]
-- [Self-Distillation is Optimal Among Spectral Shrinkage Estimators in Spiked Covariance Models](deep_reads/2026-05-20-2605.17778.md)  
-  `高维统计 / 随机矩阵` · 8/10 [daily]
-
 ## 2026-05-21
 
 - [Generalized linear spectral statistics of high-dimensional sample covariance matrices and its applications](deep_reads/2026-05-21-10.1214_25-aos2601.md)  
@@ -109,6 +100,10 @@
   `效率理论 / Debiased ML` · 10/10 [journals]
 - [Efficient and Robust Estimation of the Generalized LATE Model](deep_reads/2026-05-21-10.1080_07350015.2023.2282497.md)  
   `因果推断` · 10/10 [journals]
+- [Linear Functional Testing with General Loadings in Sparse Regression: Separation Rates and Computational Barriers](deep_reads/2026-05-21-2605.21360.md)  
+  `数理统计 / 假设检验` · 9/10 [daily]
+- [Optimal Spectral Algorithms for Correlated Two-view Models in High Dimensions](deep_reads/2026-05-21-2605.19364.md)  
+  `高维统计 / 随机矩阵` · 9/10 [daily]
 - [Finite- and large sample inference for model and coefficients in high-dimensional linear regression with repro samples](deep_reads/2026-05-21-10.1214_25-aos2591.md)  
   `高维统计 / 随机矩阵` · 9/10 [journals]
 - [Large-scale multiple testing: Fundamental limits of false discovery rate control and compound oracle](deep_reads/2026-05-21-10.1214_25-aos2581.md)  
@@ -477,6 +472,8 @@
   `因果推断` · 9/10 [journals]
 - [Identification of a Triangular Two Equation System Without Instruments](deep_reads/2026-05-21-10.1080_07350015.2023.2166052.md)  
   `因果推断` · 9/10 [journals]
+- [The Harmonic Synthetic Control Method](deep_reads/2026-05-21-2605.20359.md)  
+  `因果推断` · 8/10 [daily]
 - [Flexible Functional Treatment Effect Estimation](deep_reads/2026-05-21-jmlr_v27_23-0944.md)  
   `因果推断` · 8/10 [journals]
 - [The Distribution of Ridgeless Least Squares Interpolators](deep_reads/2026-05-21-jmlr_v27_25-0458.md)  
@@ -941,6 +938,15 @@
   `经济理论 / 应用` · 6/10 [journals]
 - [Identification and Estimation of Structural VARMA Models Using Higher Order Dynamics](deep_reads/2026-05-21-10.1080_07350015.2022.2075000.md)  
   `经济理论 / 应用` · 6/10 [journals]
+
+## 2026-05-20
+
+- [Statistical Unlearning of Distributions: A Hypothesis Testing Approach](deep_reads/2026-05-20-2605.16645.md)  
+  `数理统计 / 假设检验` · 9/10 [daily]
+- [Fixed-order PCA: Theory for Overestimated Factor Models](deep_reads/2026-05-20-2605.18448.md)  
+  `高维统计 / 随机矩阵` · 9/10 [daily]
+- [Self-Distillation is Optimal Among Spectral Shrinkage Estimators in Spiked Covariance Models](deep_reads/2026-05-20-2605.17778.md)  
+  `高维统计 / 随机矩阵` · 8/10 [daily]
 
 ## 2026-05-19
 
