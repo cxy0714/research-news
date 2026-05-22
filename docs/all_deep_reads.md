@@ -1,5 +1,14 @@
 # 精读报告存档
 
+## 2026-05-20
+
+- [Statistical Unlearning of Distributions: A Hypothesis Testing Approach](deep_reads/2026-05-20-2605.16645.md)  
+  `数理统计 / 假设检验` · 9/10 [daily]
+- [Fixed-order PCA: Theory for Overestimated Factor Models](deep_reads/2026-05-20-2605.18448.md)  
+  `高维统计 / 随机矩阵` · 9/10 [daily]
+- [Self-Distillation is Optimal Among Spectral Shrinkage Estimators in Spiked Covariance Models](deep_reads/2026-05-20-2605.17778.md)  
+  `高维统计 / 随机矩阵` · 8/10 [daily]
+
 ## 2026-05-21
 
 - [Generalized linear spectral statistics of high-dimensional sample covariance matrices and its applications](deep_reads/2026-05-21-10.1214_25-aos2601.md)  

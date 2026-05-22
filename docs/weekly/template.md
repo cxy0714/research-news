@@ -4,13 +4,11 @@
 
 ## Causal inference
 
+1. Single World Intervention Graphs as Distributions: A Framework for Causal Identification
 
+    - https://arxiv.org/pdf/2605.17050
+    - 评论：诺华药厂的人写的博客类的文章，但是还没懂什么意思，重新推导一边识别公式？
 
-1. Single World Intervention Graphs as Distributions: A
-Framework for Causal IdentificationChristian 
-
-  - https://arxiv.org/pdf/2605.17050
-  - 评论：诺华药厂的人写的博客类的文章，但是还没懂什么意思，重新推导一边识别公式？
 ## High dimension statistics
 
 <!-- ... -->
@@ -23,7 +21,7 @@ Framework for Causal IdentificationChristian
 
 <!-- ... -->
 
-## Statistical computing 
+## Statistical computing
 
 <!-- ... -->
 
