@@ -1,5 +1,140 @@
 # 精读报告存档
 
+## 2026-05-24
+
+- [Statistical Issues Often Overlooked when Analyzing Astronomical Data](deep_reads/2026-05-24-10.3847_1538-4365_ae25eb.md)  
+  `天体统计` · 9/10 [journals]
+- [Analytic marginalization over binary variables in physics data](deep_reads/2026-05-24-10.1093_mnras_stag791.md)  
+  `天体统计` · 8/10 [journals]
+- [Physically motivated priors in the local distance ladder significantly reduce the Hubble tension](deep_reads/2026-05-24-10.1093_mnras_stag724.md)  
+  `天体统计` · 8/10 [journals]
+- [Simulation-based inference pipeline of the ionization history from the 2D 21 cm power spectrum](deep_reads/2026-05-24-10.1093_mnras_stag577.md)  
+  `天体统计` · 8/10 [journals]
+- [The LIRA–Ising Model: Estimating the Boundaries of Irregularly Shaped X-Ray Sources](deep_reads/2026-05-24-10.3847_1538-4365_ae3716.md)  
+  `天体统计` · 8/10 [journals]
+- [Bayesian model comparison and validation with Gaussian Process Regression for interferometric 21-cm signal recovery](deep_reads/2026-05-24-10.1093_mnras_stag878.md)  
+  `天体统计` · 7/10 [journals]
+- [Differential velocity cumulative distribution (DVCD): an efficient statistical method for binary-star analysis in large stellar catalogues using radial velocities](deep_reads/2026-05-24-10.1093_mnras_stag575.md)  
+  `天体统计` · 7/10 [journals]
+- [Implicit inference of the reionization history with higher-order statistics of the 21-cm signal](deep_reads/2026-05-24-10.1093_mnras_stag779.md)  
+  `天体统计` · 7/10 [journals]
+- [Inferring hemispheric asymmetries of stellar active regions through the information content of astrometric signals](deep_reads/2026-05-24-10.1093_mnras_stag675.md)  
+  `天体统计` · 7/10 [journals]
+- [A universal relationship between the variability time-scale and black hole mass in black hole jetted and non-jetted accreting systems](deep_reads/2026-05-24-10.1093_mnras_stag648.md)  
+  `天体统计` · 7/10 [journals]
+- [Fundamental properties of protoplanetary discs determined from simultaneous fits to thermal dust images and spectral energy distributions](deep_reads/2026-05-24-10.1093_mnras_stag628.md)  
+  `天体统计` · 7/10 [journals]
+- [How well does <scp>magphys</scp> recover galaxy properties? A test using <scp>eagle</scp> simulated star-forming galaxies](deep_reads/2026-05-24-10.1093_mnras_stag576.md)  
+  `天体统计` · 7/10 [journals]
+- [Dynamic or systematic? Bayesian model selection between dark energy and supernova biases](deep_reads/2026-05-24-10.1093_mnras_stag615.md)  
+  `天体统计` · 7/10 [journals]
+- [Ultraviolet atomic data assessment from astrophysical observations – I. A comparative study of evolutionary algorithms](deep_reads/2026-05-24-10.1093_mnras_stag601.md)  
+  `天体统计` · 7/10 [journals]
+- [A Baseline Separation Paradigm for High-precision Wide-field Radio Interferometric Imaging on Heterogeneous Architectures](deep_reads/2026-05-24-10.3847_1538-4365_ae619f.md)  
+  `天体统计` · 7/10 [journals]
+- [Uniform Rolling: An LSST Observing Cadence Offering Sufficient Survey Uniformity for Comprehensive Cosmological Analysis](deep_reads/2026-05-24-10.3847_1538-4365_ae6069.md)  
+  `天体统计` · 7/10 [journals]
+- [Do We Have Sufficient Knowledge of the Galactic Foreground Emission in Cosmic Microwave Background Science?](deep_reads/2026-05-24-10.3847_1538-4365_ae4fb8.md)  
+  `天体统计` · 7/10 [journals]
+- [Bayesian Model Comparison and Significance: Widespread Errors and How to Correct Them](deep_reads/2026-05-24-10.3847_1538-4365_ae0e71.md)  
+  `天体统计` · 7/10 [journals]
+- [An Information-based Metric for Observing Strategy Optimization, Demonstrated in the Context of Photometric Redshifts for LSST](deep_reads/2026-05-24-10.3847_1538-4365_ad7d07.md)  
+  `天体统计` · 7/10 [journals]
+- [Quantifying the Impact of LSST <i>u</i> -band Survey Strategy on Photometric Redshift Estimation and the Detection of Lyman-break Galaxies](deep_reads/2026-05-24-10.3847_1538-4365_ae14f0.md)  
+  `天体统计` · 7/10 [journals]
+- [Joint Inference of Population, Cosmology, and Neutron Star Equation of State from Gravitational Waves of Dark Binary Neutron Stars](deep_reads/2026-05-24-10.3847_1538-4365_ae0472.md)  
+  `天体统计` · 7/10 [journals]
+- [Microlensing Optical Depth, Event Rate, and Limits on Compact Objects in Dark Matter Based on 20 Yr of OGLE Observations of the Small Magellanic Cloud](deep_reads/2026-05-24-10.3847_1538-4365_adf842.md)  
+  `天体统计` · 7/10 [journals]
+- [An All-sky 3D Dust Map Based on Gaia and LAMOST](deep_reads/2026-05-24-10.3847_1538-4365_adea39.md)  
+  `天体统计` · 7/10 [journals]
+- [Emission-line Stacking of 21 cm Intensity Maps with MeerKLASS: Inference Pipeline and Application to the <i>L</i>-band Deep-field Data](deep_reads/2026-05-24-10.3847_1538-4365_add897.md)  
+  `天体统计` · 7/10 [journals]
+- [PANCAKE: A Python-based Numerical Color–Magnitude Diagram Analysis Package](deep_reads/2026-05-24-10.3847_1538-4365_add88c.md)  
+  `天体统计` · 7/10 [journals]
+- [Investigating light pollution trends at astronomical observatories worldwide](deep_reads/2026-05-24-10.1093_mnras_stag121.md)  
+  `天体统计` · 6/10 [journals]
+- [Probing ionized bubbles around luminous sources during reionization with SKA 21-cm observations](deep_reads/2026-05-24-10.1093_mnras_stag799.md)  
+  `天体统计` · 6/10 [journals]
+- [<tt>pop-cosmos</tt> : star formation over 12 Gyr from generative modelling of a deep infrared-selected galaxy catalogue](deep_reads/2026-05-24-10.1093_mnras_stag764.md)  
+  `天体统计` · 6/10 [journals]
+- [Sub-threshold post-merger gravitational waves can constrain the hot nuclear equation of state](deep_reads/2026-05-24-10.1093_mnras_stag750.md)  
+  `天体统计` · 6/10 [journals]
+- [Breaking free seismic forward modelling from the surface effect](deep_reads/2026-05-24-10.1093_mnras_stag736.md)  
+  `天体统计` · 6/10 [journals]
+- [Milky Way Mapper decoded abundances – I. Shared disc enrichment patterns](deep_reads/2026-05-24-10.1093_mnras_stag637.md)  
+  `天体统计` · 6/10 [journals]
+- [The radial component of the local Galactic magnetic field in 3D](deep_reads/2026-05-24-10.1093_mnras_stag640.md)  
+  `天体统计` · 6/10 [journals]
+- [A turbulence index independent framework for deriving solar wind speed and coronal electron density from radio spectral broadening](deep_reads/2026-05-24-10.1093_mnras_stag554.md)  
+  `天体统计` · 6/10 [journals]
+- [Sub-millimetre galaxies in hierarchical models: revisiting the need for a top-heavy stellar initial mass function with Bayesian optimization](deep_reads/2026-05-24-10.1093_mnras_stag564.md)  
+  `天体统计` · 6/10 [journals]
+- [Mock Catalogs of Strongly Lensed Gravitational Waves via a Halo Model Approach with Ground-based Detectors](deep_reads/2026-05-24-10.3847_1538-4365_ae6117.md)  
+  `天体统计` · 6/10 [journals]
+- [Efficient Evaluation of Gravitational Lensing Amplification Factors: A Deep Learning Framework](deep_reads/2026-05-24-10.3847_1538-4365_ae64e4.md)  
+  `天体统计` · 6/10 [journals]
+- [PISP: Projected-Space Inference of Stellar Parameters](deep_reads/2026-05-24-10.3847_1538-4365_ae4ed2.md)  
+  `天体统计` · 6/10 [journals]
+- [A Statistical Study of the O’Connell Effect in Eclipsing Binaries from the ASAS-SN Survey](deep_reads/2026-05-24-10.3847_1538-4365_ae4ed5.md)  
+  `天体统计` · 6/10 [journals]
+- [Detection and Classification of Astronomical Sources with Astro-RetinaNet in Crowded Stellar Fields](deep_reads/2026-05-24-10.3847_1538-4365_ae4a24.md)  
+  `天体统计` · 6/10 [journals]
+- [BayeSED-GALAXIES. II. Bayesian Full Spectrum Analysis of Galaxies and Application in the CSST Wide-field Slitless Spectroscopy Survey](deep_reads/2026-05-24-10.3847_1538-4365_ae497e.md)  
+  `天体统计` · 6/10 [journals]
+- [Beyond Colors: Probing Redshifts from Galaxy Morphology in Single-band Images with ViT-MDNz](deep_reads/2026-05-24-10.3847_1538-4365_ae4b3c.md)  
+  `天体统计` · 6/10 [journals]
+- [The <tt>democratic detrender</tt> : Ensemble-based Removal of the Nuisance Signal in Stellar Time-series Photometry](deep_reads/2026-05-24-10.3847_1538-4365_ae43c2.md)  
+  `天体统计` · 6/10 [journals]
+- [Identification of Strongly Lensed Gravitational-wave Events Using Squeeze-and-excitation Multilayer Perceptron Data-efficient Image Transformer](deep_reads/2026-05-24-10.3847_1538-4365_ae4340.md)  
+  `天体统计` · 6/10 [journals]
+- [RM-Tools: Software for Analyzing Polarized Radio Spectra](deep_reads/2026-05-24-10.3847_1538-4365_ae3dea.md)  
+  `天体统计` · 6/10 [journals]
+- [Cold Dust Properties and Submillimeter Excess in 33 Nearby Spiral Galaxies](deep_reads/2026-05-24-10.3847_1538-4365_ae3750.md)  
+  `天体统计` · 6/10 [journals]
+- [HyperAIRI: A Plug-and-play Algorithm for Precise Hyperspectral Image Reconstruction in Radio Interferometry](deep_reads/2026-05-24-10.3847_1538-4365_ae3149.md)  
+  `天体统计` · 6/10 [journals]
+- [Uncovering Hidden Systematics in Extreme-precision Radial Velocity Measurements](deep_reads/2026-05-24-10.3847_1538-4365_ae3088.md)  
+  `天体统计` · 6/10 [journals]
+- [Comprehensive Analyses of Cumulative Frequency Distributions for Solar X-Ray Flares](deep_reads/2026-05-24-10.3847_1538-4365_ae2d16.md)  
+  `天体统计` · 6/10 [journals]
+- [Constraining the nHz Gravitational-wave Background with an X-Ray Pulsar-timing Array from NICER Observations](deep_reads/2026-05-24-10.3847_1538-4365_ae2ff5.md)  
+  `天体统计` · 6/10 [journals]
+- [QHSC: The Quasar Candidate Catalog for the Hyper Suprime-Cam Subaru Strategic Program](deep_reads/2026-05-24-10.3847_1538-4365_ae2099.md)  
+  `天体统计` · 6/10 [journals]
+- [Can AI Dream of Unseen Galaxies? Conditional Diffusion Model for Galaxy Morphology Augmentation](deep_reads/2026-05-24-10.3847_1538-4365_ae1f10.md)  
+  `天体统计` · 6/10 [journals]
+- [Searching for Dark Structures: A Comparison of Weak-lensing Convergence Maps and Lensing-weighted Galaxy Density Maps](deep_reads/2026-05-24-10.3847_1538-4365_ae1e7f.md)  
+  `天体统计` · 6/10 [journals]
+- [Expanding the Ice Inventory of NGC 1333 IRAS 2A with INDRA Using JWST Observations: Tracing Organic Refractories and Beyond](deep_reads/2026-05-24-10.3847_1538-4365_ae112f.md)  
+  `天体统计` · 6/10 [journals]
+- [Foreground Removal in Ground-based CMB Observations Using a Transformer Model](deep_reads/2026-05-24-10.3847_1538-4365_ae12f1.md)  
+  `天体统计` · 6/10 [journals]
+- [Robust Forecasting and Physical Interpretability of Geomagnetic Storms Using XGBoost and SHAP](deep_reads/2026-05-24-10.3847_1538-4365_ae0b6b.md)  
+  `天体统计` · 6/10 [journals]
+- [Fast Reconstruction of Solar Wind Magnetohydrodynamic Parameters at 0.1 au with Machine Learning](deep_reads/2026-05-24-10.3847_1538-4365_ae13a2.md)  
+  `天体统计` · 6/10 [journals]
+- [The SPHEREx Sky Simulator: Science Data Modeling for the First All-sky Near-infrared Spectral Survey](deep_reads/2026-05-24-10.3847_1538-4365_ae04cc.md)  
+  `天体统计` · 6/10 [journals]
+- [A New Search Pipeline for Short Gamma-Ray Bursts in Fermi/GBM Data—A 50% Increase in the Number of Detections](deep_reads/2026-05-24-10.3847_1538-4365_ae0189.md)  
+  `天体统计` · 6/10 [journals]
+- [Discrete Fourier Transform and Minimum Variance Distortionless Response Beamforming Algorithms for Searching for Transients in Radio Interferometers that Experience Radio-frequency Interference](deep_reads/2026-05-24-10.3847_1538-4365_adfcbe.md)  
+  `天体统计` · 6/10 [journals]
+- [DarkAI: Reconstructing the Density, Velocity, and Tidal Fields of Dark Matter from a DESI-like Bright Galaxy Sample](deep_reads/2026-05-24-10.3847_1538-4365_adfa26.md)  
+  `天体统计` · 6/10 [journals]
+- [Accelerating the Fast Radio Burst Search: Data Set and Methods](deep_reads/2026-05-24-10.3847_1538-4365_adf42d.md)  
+  `天体统计` · 6/10 [journals]
+- [A Comprehensive All-sky Catalog of 3345 Molecular Clouds from Three-dimensional Dust Extinction](deep_reads/2026-05-24-10.3847_1538-4365_aded89.md)  
+  `天体统计` · 6/10 [journals]
+- [Spectroscopic Ages for 4 Million Main-sequence Dwarf Stars from LAMOST DR10 Estimated with a Data-driven Approach](deep_reads/2026-05-24-10.3847_1538-4365_aded16.md)  
+  `天体统计` · 6/10 [journals]
+- [Efficient Searches for Small Signals across Two-channel Noisy Data: A Challenge in Big-data Observations](deep_reads/2026-05-24-10.3847_1538-4365_adec9d.md)  
+  `天体统计` · 6/10 [journals]
+- [Identification of 30,000 White Dwarf–Main-sequence Binary Candidates from Gaia DR3 BP/RP (XP) Low-resolution Spectra](deep_reads/2026-05-24-10.3847_1538-4365_addf3a.md)  
+  `天体统计` · 6/10 [journals]
+- [A Characteristic Optical Variability Timescale in Jetted Active Galactic Nuclei: A Large Gamma-Ray Emission Sample](deep_reads/2026-05-24-10.3847_1538-4365_add481.md)  
+  `天体统计` · 6/10 [journals]
+
 ## 2026-05-22
 
 - [Targeted maximum likelihood estimation of vaccine effectiveness and immune correlates in test-negative design studies with missing data](deep_reads/2026-05-22-2605.21793.md)  
