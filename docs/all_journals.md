@@ -299,6 +299,47 @@
 - [Vol 548 Issue 1 · 2026-05-24](journals/2026-05-24-mnras-v548-i1.md)
 - [Vol 547 Issue 4 · 2026-05-24](journals/2026-05-24-mnras-v547-i4.md)
 
+## IEEE 系列 (IEEE)
+
+### JSAIT
+
+- [Vol 3 Issue 4 · 2026-05-24](journals/2026-05-24-jsait-v3-i4.md)
+- [Vol 3 Issue 3 · 2026-05-24](journals/2026-05-24-jsait-v3-i3.md)
+- [Vol 3 Issue 2 · 2026-05-24](journals/2026-05-24-jsait-v3-i2.md)
+- [Vol 3 Issue 1 · 2026-05-24](journals/2026-05-24-jsait-v3-i1.md)
+- [Vol 2 Issue 4 · 2026-05-24](journals/2026-05-24-jsait-v2-i4.md)
+- [Vol 2 Issue 3 · 2026-05-24](journals/2026-05-24-jsait-v2-i3.md)
+- [Vol 2 Issue 2 · 2026-05-24](journals/2026-05-24-jsait-v2-i2.md)
+- [Vol 2 Issue 1 · 2026-05-24](journals/2026-05-24-jsait-v2-i1.md)
+- [Vol 1 Issue 3 · 2026-05-24](journals/2026-05-24-jsait-v1-i3.md)
+- [Vol 1 Issue 2 · 2026-05-24](journals/2026-05-24-jsait-v1-i2.md)
+
+### TIT
+
+- [Vol 72 Issue 6 · 2026-05-24](journals/2026-05-24-tit-v72-i6.md)
+- [Vol 72 Issue 5 · 2026-05-24](journals/2026-05-24-tit-v72-i5.md)
+- [Vol 72 Issue 4 · 2026-05-24](journals/2026-05-24-tit-v72-i4.md)
+- [Vol 72 Issue 3 · 2026-05-24](journals/2026-05-24-tit-v72-i3.md)
+- [Vol 72 Issue 2 · 2026-05-24](journals/2026-05-24-tit-v72-i2.md)
+- [Vol 72 Issue 1 · 2026-05-24](journals/2026-05-24-tit-v72-i1.md)
+- [Vol 71 Issue 12 · 2026-05-24](journals/2026-05-24-tit-v71-i12.md)
+- [Vol 71 Issue 11 · 2026-05-24](journals/2026-05-24-tit-v71-i11.md)
+
+### TPAMI
+
+- [Vol 48 Issue 6 · 2026-05-24](journals/2026-05-24-tpami-v48-i6.md)
+- [Vol 48 Issue 5 · 2026-05-24](journals/2026-05-24-tpami-v48-i5.md)
+- [Vol 48 Issue 4 · 2026-05-24](journals/2026-05-24-tpami-v48-i4.md)
+- [Vol 48 Issue 3 · 2026-05-24](journals/2026-05-24-tpami-v48-i3.md)
+- [Vol 48 Issue 2 · 2026-05-24](journals/2026-05-24-tpami-v48-i2.md)
+- [Vol 48 Issue 1 · 2026-05-24](journals/2026-05-24-tpami-v48-i1.md)
+
+### TSP
+
+- [Vol 74 · 2026-05-24](journals/2026-05-24-tsp-v74.md)
+- [Vol 73 · 2026-05-24](journals/2026-05-24-tsp-v73.md)
+- [2026-05-24](journals/2026-05-24-tsp.md)
+
 ## 其他 / Unmatched
 
 ### J ECONOMETRICS V243 I1 2

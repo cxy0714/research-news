@@ -2,8 +2,50 @@
 
 ## 2026-05-24
 
+- [A Computational Transition for Detecting Multivariate Shuffled Linear Regression by Low-Degree Polynomials](deep_reads/2026-05-24-10.1109_tit.2026.3659093.md)  
+  `数理统计 / 假设检验` · 9/10 [journals]
+- [Tensor Estimation With Structured Priors](deep_reads/2026-05-24-10.1109_jsait.2020.3040336.md)  
+  `高维统计 / 随机矩阵` · 9/10 [journals]
 - [Statistical Issues Often Overlooked when Analyzing Astronomical Data](deep_reads/2026-05-24-10.3847_1538-4365_ae25eb.md)  
   `天体统计` · 9/10 [journals]
+- [Simultaneous Inference for Covariance and Precision Matrices of Long-Range Dependent Time Series](deep_reads/2026-05-24-10.1109_tit.2026.3685246.md)  
+  `数理统计 / 假设检验` · 8/10 [journals]
+- [Information-Theoretic Limits and Vector Approximate Message-Passing for High-Dimensional Time Series](deep_reads/2026-05-24-10.1109_tit.2026.3665948.md)  
+  `高维统计 / 随机矩阵` · 8/10 [journals]
+- [Optimal Estimation of Shared Singular Subspaces Across Multiple Noisy Matrices](deep_reads/2026-05-24-10.1109_tit.2026.3667733.md)  
+  `高维统计 / 随机矩阵` · 8/10 [journals]
+- [The Minimax Risk in Testing Uniformity Over Large Alphabets Under Missing-Ball Alternatives](deep_reads/2026-05-24-10.1109_tit.2025.3646804.md)  
+  `其他` · 8/10 [journals]
+- [Adaptive Monotonicity Testing in Sublinear Time](deep_reads/2026-05-24-10.1109_tit.2025.3646887.md)  
+  `其他` · 8/10 [journals]
+- [On Minimax Empirical Bayes Predictive Densities](deep_reads/2026-05-24-10.1109_tit.2025.3648620.md)  
+  `非参数 / 半参数` · 8/10 [journals]
+- [Robust Mean Change Point Testing in High-Dimensional Data With Heavy Tails](deep_reads/2026-05-24-10.1109_tit.2025.3634207.md)  
+  `数理统计 / 假设检验` · 8/10 [journals]
+- [Huber-Robust Likelihood Ratio Tests for Composite Nulls and Alternatives](deep_reads/2026-05-24-10.1109_tit.2025.3641166.md)  
+  `其他` · 8/10 [journals]
+- [Statistical Inference for Linear Functionals of Online Least-Squares SGD When <i>t</i> ≳ <i>d</i> <sup>1+δ</sup>](deep_reads/2026-05-24-10.1109_tit.2025.3635118.md)  
+  `数理统计 / 假设检验` · 8/10 [journals]
+- [Pearson Chi-Squared Conditional Randomization Test](deep_reads/2026-05-24-10.1109_tit.2025.3618595.md)  
+  `数理统计 / 假设检验` · 8/10 [journals]
+- [Uniform Variance Reduced Simultaneous Inference of Time-Varying Correlation Networks](deep_reads/2026-05-24-10.1109_tit.2025.3613143.md)  
+  `数理统计 / 假设检验` · 8/10 [journals]
+- [Information-Theoretic Thresholds for the Alignments of Partially Correlated Graphs](deep_reads/2026-05-24-10.1109_tit.2025.3619813.md)  
+  `高维统计 / 随机矩阵` · 8/10 [journals]
+- [Some Facts About the Optimality of the LSE in the Gaussian Sequence Model With Convex Constraint](deep_reads/2026-05-24-10.1109_tit.2025.3605342.md)  
+  `其他` · 8/10 [journals]
+- [A Large-dimensional Analysis of ESPRIT DoA Estimation: Inconsistency and a Correction via RMT](deep_reads/2026-05-24-10.1109_tsp.2026.3683673.md)  
+  `高维统计 / 随机矩阵` · 8/10 [journals]
+- [Direct Estimation of Eigenvalues of Large Dimensional Precision Matrix](deep_reads/2026-05-24-10.1109_tsp.2025.3647215.md)  
+  `高维统计 / 随机矩阵` · 8/10 [journals]
+- [Information-Theoretic Limits for the Matrix Tensor Product](deep_reads/2026-05-24-10.1109_jsait.2020.3040598.md)  
+  `高维统计 / 随机矩阵` · 8/10 [journals]
+- [Fisher Information Under Local Differential Privacy](deep_reads/2026-05-24-10.1109_jsait.2020.3039461.md)  
+  `效率理论 / Debiased ML` · 8/10 [journals]
+- [Lower Bounds and a Near-Optimal Shrinkage Estimator for Least Squares Using Random Projections](deep_reads/2026-05-24-10.1109_jsait.2020.3039509.md)  
+  `高维统计 / 随机矩阵` · 8/10 [journals]
+- [Recovering Data Permutations From Noisy Observations: The Linear Regime](deep_reads/2026-05-24-10.1109_jsait.2020.3041697.md)  
+  `数理统计 / 假设检验` · 8/10 [journals]
 - [Analytic marginalization over binary variables in physics data](deep_reads/2026-05-24-10.1093_mnras_stag791.md)  
   `天体统计` · 8/10 [journals]
 - [Physically motivated priors in the local distance ladder significantly reduce the Hubble tension](deep_reads/2026-05-24-10.1093_mnras_stag724.md)  
@@ -52,6 +94,10 @@
   `天体统计` · 7/10 [journals]
 - [PANCAKE: A Python-based Numerical Color–Magnitude Diagram Analysis Package](deep_reads/2026-05-24-10.3847_1538-4365_add88c.md)  
   `天体统计` · 7/10 [journals]
+- [Nearly Tight Bounds for Testing Tree Tensor Network States](deep_reads/2026-05-24-10.1109_tit.2026.3670320.md)  
+  `统计计算 / 算法` · 6/10 [journals]
+- [Where Prior Learning Can and Can’t Work in Unsupervised Inverse Problems](deep_reads/2026-05-24-10.1109_tsp.2026.3684951.md)  
+  `统计计算 / 算法` · 6/10 [journals]
 - [Investigating light pollution trends at astronomical observatories worldwide](deep_reads/2026-05-24-10.1093_mnras_stag121.md)  
   `天体统计` · 6/10 [journals]
 - [Probing ionized bubbles around luminous sources during reionization with SKA 21-cm observations](deep_reads/2026-05-24-10.1093_mnras_stag799.md)  
