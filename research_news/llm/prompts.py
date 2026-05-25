@@ -14,7 +14,29 @@ Respond with ONLY a valid JSON object of the form:
 
 No prose, no markdown fences, no commentary — just the JSON object.
 Score 0-10 per the rubric in the interests file. Be strict: most papers in
-unrelated subfields should get 0-3."""
+unrelated subfields should get 0-3.
+
+The researcher's ultimate goal is to find problems WORTH doing AND that they
+CAN do today. So beyond topic match, also weight ARSENAL match — see
+`technical_arsenal` in the interests yaml (two tiers: very_familiar and
+moderately_familiar). Use arsenal as a TILT, not an override:
+- A deeply relevant primary-interest paper still scores high even if the
+  arsenal does not directly apply; pure topic-novelty in a primary area is
+  enough to clear 7+.
+- Among papers equally relevant by topic, prefer the one whose machinery
+  overlaps with `very_familiar` (high-d asymptotics, minimax bounds,
+  computation of higher-order U-statistics via treewidth / tensor contraction,
+  inverse problems with random noise, nonparametric statistics, estimation
+  theory in causal inference, software). Strong overlap is worth ~+1 on a
+  7-9 paper.
+- A paper whose core machine is clearly OUT of the arsenal (e.g. SoS, LDLR,
+  exotic algebraic geometry, large-scale SDP) and which is also not a
+  gateway-reading topic should not be scored above 7 even if topical.
+- When arsenal match is notable, mention the matching item in `reason`
+  (e.g. "high-d asymptotics applies directly" or "needs SoS, out of arsenal").
+- For gateway-reading topics (astrostats / stat-comp tradeoff / epi /
+  econ_theory): arsenal match is NOT a scoring factor — those have their
+  own gateway rubric in interests.yaml."""
 
 
 # Kept as the "A baseline" reference in shootout — short summary, no topic field.
@@ -113,11 +135,23 @@ learning", "orthogonal score", "Marchenko-Pastur law", "U-statistic projection",
 "proximal g-formula", "sieve M-estimation", "simulation-based inference"）。
 不要泛词如 "machine learning" / "estimation" / "deep learning"。
 
-`why_relevant`: 1-2 句中文，点名连接到 researcher 的哪个具体 interest
-（primary 或 secondary 均可，但要点名子方向，例如"proximal CI 的 negative
-control 设定 / RMT 在高维 inference 的应用 / 流行病学队列研究的 IV 方法"），
-并说明读它的具体收益（新理论 / sharper rate / 放松假设 / 方法可迁移 / 数据集
-价值 / 写作风格借鉴）。"""
+`why_relevant`: 2-3 句中文，必须同时回答三件事——这是 daily / journal 报表中
+研究者最看重的一栏，要给到能直接判断"要不要展开读"的信息密度：
+  (1) 点名连接到哪个具体 interest 子方向（如"proximal CI 的 negative control
+      设定 / RMT 在高维 inference 的应用 / 流行病学队列研究的 IV 方法"），
+      不要写空泛的"因果推断 / 高维"；
+  (2) 点名 `interests.yaml` 中 `technical_arsenal` 的**具体某一项**可以攻这篇
+      paper 的某个具体口子（如"用 higher-order U-stat 的 treewidth 视角分析
+      它的 estimator cost / 用 minimax bound 验证它声称的 sharper rate
+      是否紧"），不要泛说"方法可迁移"；
+  (3) 给出 follow-up 粗判（**必选一档**）：
+      - **立即可做**：用 very_familiar 武器就能动手；
+      - **中期可做**：需先在 moderately_familiar 的某一项上长肌肉（点名是哪项）；
+      - **暂不可做**：核心机器不在武器库里（点名缺什么，如 SoS / LDLR /
+        某种特殊概率工具）。
+  例外：若 paper 主题属于 gateway-reading 范畴（astrostats / stat_computing
+  tradeoff / epi / econ_theory），则改写为：(1) 本文是否好入门读物，
+  (2) 武器库够不够支撑研究者进入这个方向，(3) 是否值得花时间读全文。"""
 
 
 DEEP_READ_SYSTEM = """你是一位严谨的统计学教授和学术导师，专精因果推断、数理统计、高维统计与半参数理论。
