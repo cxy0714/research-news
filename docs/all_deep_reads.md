@@ -1,5 +1,14 @@
 # 精读报告存档
 
+## 2026-05-25
+
+- [Joint Estimation of Marginal and Heterogeneous Treatment Effects](deep_reads/2026-05-25-2605.23691.md)  
+  `因果推断` · 8/10 [daily]
+- [Algorithm or Creative? A Three-Arm Experimental Design for Decomposing Algorithmic Bias in Platform A/B Tests](deep_reads/2026-05-25-2605.23706.md)  
+  `因果推断` · 8/10 [daily]
+- [A Markov-Chain-Monte-Carlo-based Hybrid Noise Inference for Continuous Wavelet Power Spectra: with Applications to Solar and Stellar Oscillatory Signals](deep_reads/2026-05-25-2605.23587.md)  
+  `天体统计` · 7/10 [daily]
+
 ## 2026-05-24
 
 - [A Computational Transition for Detecting Multivariate Shuffled Linear Regression by Low-Degree Polynomials](deep_reads/2026-05-24-10.1109_tit.2026.3659093.md)  
