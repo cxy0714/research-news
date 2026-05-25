@@ -487,19 +487,26 @@ def _update_all_deep_reads_page(entries: list[dict], docs: Path) -> None:
         lines.append("*（暂无记录）*\n")
         (docs / "all_deep_reads.md").write_text("\n".join(lines), encoding="utf-8")
         return
-    by_date: dict[str, list[dict]] = defaultdict(list)
+    by_topic: dict[str, list[dict]] = defaultdict(list)
     for e in entries:
-        by_date[e.get("date", "unknown")].append(e)
-    for d in sorted(by_date.keys(), reverse=True):
-        lines.append(f"## {d}\n")
-        day_entries = sorted(by_date[d], key=lambda e: e.get("score") or 0, reverse=True)
-        for e in day_entries:
-            topic_label = TOPIC_LABELS_ZH.get(e.get("topic", "other"), e.get("topic", "other"))
+        by_topic[e.get("topic", "other")].append(e)
+    topic_order = [t for t in TOPICS if t in by_topic] + [
+        t for t in by_topic if t not in TOPICS
+    ]
+    for topic in topic_order:
+        topic_label = TOPIC_LABELS_ZH.get(topic, topic)
+        lines.append(f"## {topic_label}\n")
+        topic_entries = sorted(
+            by_topic[topic],
+            key=lambda e: (e.get("score") or 0, e.get("date") or ""),
+            reverse=True,
+        )
+        for e in topic_entries:
             run_type = e.get("run_type", "")
             tag = f"[{run_type}]" if run_type else ""
             lines.append(
                 f"- [{e['title']}]({e['doc_path']})  \n"
-                f"  `{topic_label}` · {e.get('score', 0):.0f}/10 {tag}"
+                f"  {e.get('score', 0):.0f}/10 {tag}"
             )
         lines.append("")
     lines.append(_footer())
