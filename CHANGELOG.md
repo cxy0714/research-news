@@ -16,7 +16,13 @@
 
 ## [Unreleased]
 
-*（在此累加下一个版本的改动）*
+### Changed
+- 精读存档页面每个主题下再拆 `Daily` / `期刊` 两个子段：daily 按日期降序平铺
+  （同日按评分降序），期刊按日期分子段（最新在前），便于追上新增的精读。
+- `data/deep_reads_index.json` 增加可选的 `venue` / `volume` / `issue` 字段
+  （由 crossref 抓取的 journal 论文写入）；精读存档页面的期刊子段优先按
+  `(venue, volume, issue)` 分组（如 `TIT Vol 72 Issue 3`），未填字段的老条目
+  回退到 `run_date` 分组，向后兼容。
 
 ---
 
