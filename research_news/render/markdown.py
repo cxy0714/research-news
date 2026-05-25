@@ -529,17 +529,42 @@ def _update_all_deep_reads_page(entries: list[dict], docs: Path) -> None:
 
         if journal_entries:
             lines.append("### 期刊\n")
-            by_date: dict[str, list[dict]] = defaultdict(list)
+            issue_groups: dict[tuple, list[dict]] = defaultdict(list)
             for e in journal_entries:
-                by_date[e.get("date") or "unknown"].append(e)
-            for d in sorted(by_date.keys(), reverse=True):
-                lines.append(f"#### {d}\n")
-                date_entries = sorted(
-                    by_date[d],
-                    key=lambda e: e.get("score") or 0,
-                    reverse=True,
+                # Group by (venue, volume, issue) when those are stored;
+                # otherwise fall back to run date so older entries (saved
+                # before the schema was extended) still group sensibly.
+                if e.get("venue"):
+                    key = (e["venue"], e.get("volume") or "", e.get("issue") or "")
+                else:
+                    key = ("", "", e.get("date") or "unknown")
+                issue_groups[key].append(e)
+
+            def _group_sort_key(item):
+                key, items = item
+                latest_date = max((it.get("date") or "") for it in items)
+                return (latest_date, key)
+
+            for key, items in sorted(
+                issue_groups.items(), key=_group_sort_key, reverse=True
+            ):
+                venue, volume, issue = key
+                if venue:
+                    label = venue
+                    if volume and issue:
+                        label += f" Vol {volume} Issue {issue}"
+                    elif volume:
+                        label += f" Vol {volume}"
+                    elif issue:
+                        label += f" Issue {issue}"
+                else:
+                    # Fall-back bucket: key is ("", "", date).
+                    label = issue or "未知"
+                lines.append(f"#### {label}\n")
+                grouped = sorted(
+                    items, key=lambda e: e.get("score") or 0, reverse=True
                 )
-                for e in date_entries:
+                for e in grouped:
                     lines.append(_entry_line(e))
                 lines.append("")
 

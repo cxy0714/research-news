@@ -195,7 +195,7 @@ def generate_deep_read_report(
 
         key = (paper.paper_id, run_date.isoformat())
         if key not in existing_keys:
-            new_entries.append({
+            entry = {
                 "date": run_date.isoformat(),
                 "run_type": run_type,
                 "paper_id": paper.paper_id,
@@ -204,7 +204,16 @@ def generate_deep_read_report(
                 "score": paper.score or 0.0,
                 # Path relative to docs/ for use in markdown links
                 "doc_path": f"deep_reads/{page_path.name}",
-            })
+            }
+            # Journal issue metadata, populated by the crossref scraper.
+            # Optional so daily (arxiv) entries don't carry empty fields.
+            if paper.venue:
+                entry["venue"] = paper.venue
+            if paper.volume:
+                entry["volume"] = paper.volume
+            if paper.issue:
+                entry["issue"] = paper.issue
+            new_entries.append(entry)
             existing_keys.add(key)
 
     if new_entries:
