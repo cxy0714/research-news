@@ -493,22 +493,67 @@ def _update_all_deep_reads_page(entries: list[dict], docs: Path) -> None:
     topic_order = [t for t in TOPICS if t in by_topic] + [
         t for t in by_topic if t not in TOPICS
     ]
+
+    def _entry_line(e: dict) -> str:
+        run_type = e.get("run_type", "")
+        tag = f"[{run_type}]" if run_type else ""
+        return (
+            f"- [{e['title']}]({e['doc_path']})  \n"
+            f"  {e.get('score', 0):.0f}/10 {tag}"
+        )
+
     for topic in topic_order:
         topic_label = TOPIC_LABELS_ZH.get(topic, topic)
         lines.append(f"## {topic_label}\n")
-        topic_entries = sorted(
-            by_topic[topic],
-            key=lambda e: (e.get("score") or 0, e.get("date") or ""),
-            reverse=True,
-        )
-        for e in topic_entries:
-            run_type = e.get("run_type", "")
-            tag = f"[{run_type}]" if run_type else ""
-            lines.append(
-                f"- [{e['title']}]({e['doc_path']})  \n"
-                f"  {e.get('score', 0):.0f}/10 {tag}"
+
+        topic_entries = by_topic[topic]
+        daily_entries = [e for e in topic_entries if e.get("run_type") == "daily"]
+        journal_entries = [
+            e for e in topic_entries if e.get("run_type") == "journals"
+        ]
+        other_entries = [
+            e for e in topic_entries
+            if e.get("run_type") not in ("daily", "journals")
+        ]
+
+        if daily_entries:
+            lines.append("### Daily\n")
+            daily_sorted = sorted(
+                daily_entries,
+                key=lambda e: (e.get("date") or "", e.get("score") or 0),
+                reverse=True,
             )
-        lines.append("")
+            for e in daily_sorted:
+                lines.append(_entry_line(e))
+            lines.append("")
+
+        if journal_entries:
+            lines.append("### 期刊\n")
+            by_date: dict[str, list[dict]] = defaultdict(list)
+            for e in journal_entries:
+                by_date[e.get("date") or "unknown"].append(e)
+            for d in sorted(by_date.keys(), reverse=True):
+                lines.append(f"#### {d}\n")
+                date_entries = sorted(
+                    by_date[d],
+                    key=lambda e: e.get("score") or 0,
+                    reverse=True,
+                )
+                for e in date_entries:
+                    lines.append(_entry_line(e))
+                lines.append("")
+
+        if other_entries:
+            lines.append("### 其他\n")
+            other_sorted = sorted(
+                other_entries,
+                key=lambda e: (e.get("score") or 0, e.get("date") or ""),
+                reverse=True,
+            )
+            for e in other_sorted:
+                lines.append(_entry_line(e))
+            lines.append("")
+
     lines.append(_footer())
     (docs / "all_deep_reads.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
