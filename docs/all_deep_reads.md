@@ -4,6 +4,10 @@
 
 ### Daily
 
+- [Geometry Adaptive Counterfactual Distribution Learning with Diffusion-Guided Smoothing](deep_reads/2026-05-26-2605.25811.md)  
+  9/10 [daily]
+- [Confidence intervals for causal effects in sequential decision making](deep_reads/2026-05-26-2605.25687.md)  
+  9/10 [daily]
 - [Joint Estimation of Marginal and Heterogeneous Treatment Effects](deep_reads/2026-05-25-2605.23691.md)  
   8/10 [daily]
 - [Algorithm or Creative? A Three-Arm Experimental Design for Decomposing Algorithmic Bias in Platform A/B Tests](deep_reads/2026-05-25-2605.23706.md)  
@@ -201,6 +205,8 @@
 
 ### Daily
 
+- [Identification and Estimation of Semiparametric Multilayered Sample Selection Models](deep_reads/2026-05-26-2605.25519.md)  
+  9/10 [daily]
 - [Bias Correction for Semiparametric Regression Models](deep_reads/2026-05-11-2605.08656.md)  
   8/10 [daily]
 
@@ -267,6 +273,14 @@
 
 ### Daily
 
+- [Rank-Based Tests for Mutual Independence of High-Dimensional Random Vectors via $L_q$ Norm](deep_reads/2026-05-26-2605.25380.md)  
+  9/10 [daily]
+- [Adaptable High-Dimensional Change Point Detection via Ridge Regularization](deep_reads/2026-05-26-2605.24838.md)  
+  8/10 [daily]
+- [On the Sample Complexity of Robust Binary Hypothesis Testing](deep_reads/2026-05-26-2605.24741.md)  
+  8/10 [daily]
+- [Minimax Limits of k-Fold Cross-Validation via Majority](deep_reads/2026-05-26-2605.25859.md)  
+  8/10 [daily]
 - [Block-Independent Likelihood Ratio Testing for High-Dimensional Mean Vectors with Applications to Matrix-Variate Data](deep_reads/2026-05-22-2605.21848.md)  
   8/10 [daily]
 - [Linear Functional Testing with General Loadings in Sparse Regression: Separation Rates and Computational Barriers](deep_reads/2026-05-21-2605.21360.md)  
@@ -352,6 +366,8 @@
 
 ### Daily
 
+- [skysurvey: a pure python package to simulate the transient sky](deep_reads/2026-05-26-2605.25840.md)  
+  6/10 [daily]
 - [A Markov-Chain-Monte-Carlo-based Hybrid Noise Inference for Continuous Wavelet Power Spectra: with Applications to Solar and Stellar Oscillatory Signals](deep_reads/2026-05-25-2605.23587.md)  
   7/10 [daily]
 
@@ -368,6 +384,10 @@
 
 ### Daily
 
+- [Modified treatment policies that depend on the natural history of treatment](deep_reads/2026-05-26-2605.24167.md)  
+  9/10 [daily]
+- [Using the target trial framework for combining information: external comparator analyses and other applications](deep_reads/2026-05-26-2605.24346.md)  
+  8/10 [daily]
 - [Sequential Sensitivity Analysis for Multiple Assumptions: A Framework for Understanding Racial Disparity in Police Use of Force](deep_reads/2026-05-22-2605.21893.md)  
   8/10 [daily]
 - [Nearest-Neighbour Matching on Unbounded Supports and Covariate Shift Transfer](deep_reads/2026-05-18-2605.16027.md)  
