@@ -110,7 +110,7 @@ def deep_read_paper(
                 {"role": "user", "content": user},
             ],
             model=model,
-            max_tokens=8000,
+            max_tokens=16000,
         )
     except Exception as e:
         log.warning("deep read LLM call failed for %s: %s", paper.paper_id, e)

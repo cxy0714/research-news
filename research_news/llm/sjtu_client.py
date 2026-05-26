@@ -84,4 +84,15 @@ class SJTUClient:
             max_tokens=max_tokens,
         )
         self._record(model, getattr(resp, "usage", None))
-        return resp.choices[0].message.content or ""
+        choice = resp.choices[0]
+        finish_reason = getattr(choice, "finish_reason", None)
+        if finish_reason and finish_reason not in ("stop", "end_turn", None):
+            # `length` = hit max_tokens; `content_filter` = safety; anything
+            # other than `stop` means the output is partial. Surface it so we
+            # don't silently lose the tail of long deep-read responses.
+            log.warning(
+                "LLM response truncated: finish_reason=%s, model=%s, "
+                "max_tokens=%d (output may be missing the final sections)",
+                finish_reason, model, max_tokens,
+            )
+        return choice.message.content or ""
