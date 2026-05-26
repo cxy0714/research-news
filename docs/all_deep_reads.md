@@ -37,6 +37,110 @@
 - [Fit CATE Once: Model-Assisted Randomization Tests Without Sample Splitting](deep_reads/2026-05-11-2605.09116.md)  
   9/10 [daily]
 
+### 期刊
+
+#### Journal of the Royal Statistical Society Series B Vol 88 Issue 2
+
+- [Representation of context-specific causal models with observational and interventional data](deep_reads/2026-05-26-10.1093_jrsssb_qkaf059.md)  
+  8/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 88 Issue 1
+
+- [Principal stratification with continuous post-treatment variables: nonparametric identification and semiparametric estimation](deep_reads/2026-05-26-10.1093_jrsssb_qkaf049.md)  
+  9/10 [journals]
+- [Identification and multiply robust estimation in causal mediation analysis across principal strata](deep_reads/2026-05-26-10.1093_jrsssb_qkaf037.md)  
+  9/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 87 Issue 5
+
+- [Covariate-assisted bounds on causal effects with instrumental variables](deep_reads/2026-05-26-10.1093_jrsssb_qkaf028.md)  
+  9/10 [journals]
+- [Semiparametric localized principal stratification analysis with continuous strata](deep_reads/2026-05-26-10.1093_jrsssb_qkaf034.md)  
+  8/10 [journals]
+
+#### Journal of the American Statistical Association
+
+- [Individualized Dynamic Mediation Analysis Using Latent Factor Models](deep_reads/2026-05-26-10.1080_01621459.2026.2641242.md)  
+  9/10 [journals]
+- [Doubly Robust Pointwise Confidence Intervals for a Monotonic Continuous Treatment Effect Curve](deep_reads/2026-05-26-10.1080_01621459.2026.2639735.md)  
+  9/10 [journals]
+- [Enhanced Inference for Distributions and Quantiles of Individual Treatment Effects in Various Experiments](deep_reads/2026-05-26-10.1080_01621459.2026.2615997.md)  
+  9/10 [journals]
+- [An Online Meta-Level Adaptive Design Framework with Targeted Learning Inference: Applications to Evaluating and Utilizing Surrogate Outcomes in Adaptive Designs](deep_reads/2026-05-26-10.1080_01621459.2026.2657052.md)  
+  9/10 [journals]
+- [Facilitating Heterogeneous Effect Estimation via Statistically Efficient Categorical Modifiers](deep_reads/2026-05-26-10.1080_01621459.2026.2635078.md)  
+  8/10 [journals]
+- [Optimized Variance Estimation under Interference and Complex Experimental Designs](deep_reads/2026-05-26-10.1080_01621459.2026.2627027.md)  
+  8/10 [journals]
+- [Successive classification learning for estimating quantile optimal treatment regimes](deep_reads/2026-05-26-10.1080_01621459.2026.2664228.md)  
+  8/10 [journals]
+
+#### JMLR
+
+- [Hierarchical Causal Models](deep_reads/2026-05-26-jmlr_v27_25-0899.md)  
+  9/10 [journals]
+- [Flexible Functional Treatment Effect Estimation](deep_reads/2026-05-26-jmlr_v27_23-0944.md)  
+  8/10 [journals]
+- [Neural Network Parameter-optimization of Gaussian Pre-marginalized Directed Acyclic Graphs](deep_reads/2026-05-26-jmlr_v27_23-1249.md)  
+  8/10 [journals]
+- [A causal fused lasso for interpretable heterogeneous treatment effects estimation](deep_reads/2026-05-26-jmlr_v27_23-0535.md)  
+  8/10 [journals]
+- [Boosted Control Functions: Distribution Generalization and Invariance in Confounded Models](deep_reads/2026-05-26-jmlr_v27_24-2207.md)  
+  8/10 [journals]
+
+#### Biometrika Vol 113 Issue 2
+
+- [Assumption-lean post-integrated inference with surrogate-control outcomes](deep_reads/2026-05-26-10.1093_biomet_asag004.md)  
+  9/10 [journals]
+- [Calibrated sensitivity models](deep_reads/2026-05-26-10.1093_biomet_asag001.md)  
+  9/10 [journals]
+
+#### Biometrika Vol 113 Issue 1
+
+- [Post-selection inference for causal effects after causal discovery](deep_reads/2026-05-26-10.1093_biomet_asaf073.md)  
+  9/10 [journals]
+- [On the consistency of bootstrap for matching estimators](deep_reads/2026-05-26-10.1093_biomet_asag005.md)  
+  8/10 [journals]
+- [Bounds on causal effects in $ 2^{K} $ factorial experiments with noncompliance](deep_reads/2026-05-26-10.1093_biomet_asaf084.md)  
+  8/10 [journals]
+- [Planning for gold: Hypothesis screening with split samples for valid powerful testing in matched observational studies](deep_reads/2026-05-26-10.1093_biomet_asaf078.md)  
+  8/10 [journals]
+
+#### Biometrika Vol 112 Issue 4
+
+- [A semiparametric instrumented difference-in-differences approach to policy learning](deep_reads/2026-05-26-10.1093_biomet_asaf043.md)  
+  8/10 [journals]
+- [Sensitivity analysis for observational studies with flexible matched designs](deep_reads/2026-05-26-10.1093_biomet_asaf069.md)  
+  8/10 [journals]
+
+#### Biometrika Vol 111 Issue 4
+
+- [On propensity score matching with a diverging number of matches](deep_reads/2026-05-26-10.1093_biomet_asae026.md)  
+  9/10 [journals]
+- [Sensitivity analysis for matched observational studies with continuous exposures and binary outcomes](deep_reads/2026-05-26-10.1093_biomet_asae021.md)  
+  8/10 [journals]
+- [Sharp symbolic nonparametric bounds for measures of benefit in observational and imperfect randomized studies with ordinal outcomes](deep_reads/2026-05-26-10.1093_biomet_asae020.md)  
+  8/10 [journals]
+- [Covariate adjustment in randomized experiments with missing outcomes and covariates](deep_reads/2026-05-26-10.1093_biomet_asae017.md)  
+  8/10 [journals]
+
+#### Annals of Statistics Vol 54 Issue 2
+
+- [Parameter identification in linear non-Gaussian causal models under general confounding](deep_reads/2026-05-26-10.1214_25-aos2597.md)  
+  9/10 [journals]
+
+#### Annals of Statistics Vol 54 Issue 1
+
+- [Berry–Esseen bounds for design-based causal inference with possibly diverging treatment levels and varying group sizes](deep_reads/2026-05-26-10.1214_25-aos2569.md)  
+  9/10 [journals]
+- [Confounder selection via iterative graph expansion](deep_reads/2026-05-26-10.1214_25-aos2577.md)  
+  8/10 [journals]
+
+#### Annals of Statistics Vol 53 Issue 6
+
+- [Counterfactual inference in sequential experiments](deep_reads/2026-05-26-10.1214_25-aos2519.md)  
+  9/10 [journals]
+
 ## 高维统计 / 随机矩阵
 
 ### Daily
@@ -50,12 +154,83 @@
 - [Symmetry-Aware Convex Shrinkage for High-Dimensional Covariance Estimation](deep_reads/2026-05-19-2605.17111.md)  
   8/10 [daily]
 
+### 期刊
+
+#### Journal of the Royal Statistical Society Series B Vol 88 Issue 2
+
+- [Spectral change point estimation for high-dimensional time series by sparse tensor decomposition](deep_reads/2026-05-26-10.1093_jrsssb_qkaf064.md)  
+  9/10 [journals]
+
+#### JMLR
+
+- [The Distribution of Ridgeless Least Squares Interpolators](deep_reads/2026-05-26-jmlr_v27_25-0458.md)  
+  9/10 [journals]
+
+#### Biometrika Vol 113 Issue 2
+
+- [Diaconis–Ylvisaker prior penalized likelihood for $ p/n\to\kappa\in(0,1) $ logistic regression](deep_reads/2026-05-26-10.1093_biomet_asag014.md)  
+  9/10 [journals]
+- [Estimating the number of significant components in high-dimensional principal component analysis](deep_reads/2026-05-26-10.1093_biomet_asaf092.md)  
+  8/10 [journals]
+
+#### Biometrika Vol 112 Issue 4
+
+- [Dimension estimation in a spiked covariance model using high-dimensional data augmentation](deep_reads/2026-05-26-10.1093_biomet_asaf052.md)  
+  9/10 [journals]
+
+#### Annals of Statistics Vol 54 Issue 2
+
+- [Generalized linear spectral statistics of high-dimensional sample covariance matrices and its applications](deep_reads/2026-05-26-10.1214_25-aos2601.md)  
+  10/10 [journals]
+- [Analysis of singular subspaces under random perturbations](deep_reads/2026-05-26-10.1214_25-aos2582.md)  
+  9/10 [journals]
+- [Reviving pseudo-inverses: Asymptotic properties of large dimensional Moore–Penrose and ridge-type inverses with applications](deep_reads/2026-05-26-10.1214_25-aos2602.md)  
+  8/10 [journals]
+
+#### Annals of Statistics Vol 54 Issue 1
+
+- [Optimality of approximate message passing for spiked matrix models with rotationally invariant noise](deep_reads/2026-05-26-10.1214_25-aos2575.md)  
+  8/10 [journals]
+
+#### Annals of Statistics Vol 53 Issue 5
+
+- [Low-degree hardness of detection for correlated Erdős–Rényi graphs](deep_reads/2026-05-26-10.1214_25-aos2517.md)  
+  8/10 [journals]
+
 ## 非参数 / 半参数
 
 ### Daily
 
 - [Bias Correction for Semiparametric Regression Models](deep_reads/2026-05-11-2605.08656.md)  
   8/10 [daily]
+
+### 期刊
+
+#### JMLR
+
+- [Decorrelated Local Linear Estimator: Inference for Non-linear Effects in High-dimensional Additive Models](deep_reads/2026-05-26-jmlr_v27_22-1436.md)  
+  9/10 [journals]
+
+#### Annals of Statistics Vol 54 Issue 2
+
+- [Scalable inference for nonparametric stochastic approximation in reproducing kernel Hilbert spaces](deep_reads/2026-05-26-10.1214_25-aos2587.md)  
+  8/10 [journals]
+
+#### Annals of Statistics Vol 54 Issue 1
+
+- [Dualizing Le Cam’s method for functional estimation I: General theory](deep_reads/2026-05-26-10.1214_25-aos2498.md)  
+  9/10 [journals]
+- [On the structural dimension of sliced inverse regression](deep_reads/2026-05-26-10.1214_25-aos2505.md)  
+  8/10 [journals]
+- [Semiparametric Bernstein–von Mises phenomenon via Isotonized Posterior in Wicksell’s problem](deep_reads/2026-05-26-10.1214_25-aos2571.md)  
+  8/10 [journals]
+- [Multivariate root-n-consistent smoothing parameter-free matching estimators and estimators of inverse density weighted expectations](deep_reads/2026-05-26-10.1214_25-aos2568.md)  
+  8/10 [journals]
+
+#### Annals of Statistics Vol 53 Issue 5
+
+- [Yurinskii’s coupling for martingales](deep_reads/2026-05-26-10.1214_25-aos2538.md)  
+  8/10 [journals]
 
 ## 效率理论 / Debiased ML
 
@@ -65,6 +240,28 @@
   9/10 [daily]
 - [Statistical Inference for Smoothed Support Vector Machines in High Dimensions: From Offline to Online Data](deep_reads/2026-05-18-2605.15911.md)  
   9/10 [daily]
+
+### 期刊
+
+#### Journal of the American Statistical Association
+
+- [Semiparametric Efficient Fusion of Individual Data and Summary Statistics](deep_reads/2026-05-26-10.1080_01621459.2026.2659379.md)  
+  9/10 [journals]
+
+#### Annals of Statistics Vol 54 Issue 2
+
+- [Spectrum-aware debiasing: A modern inference framework with applications to principal components regression](deep_reads/2026-05-26-10.1214_25-aos2586.md)  
+  8/10 [journals]
+
+#### Annals of Statistics Vol 54 Issue 1
+
+- [Average partial effect estimation using double machine learning](deep_reads/2026-05-26-10.1214_25-aos2563.md)  
+  9/10 [journals]
+
+#### Annals of Statistics Vol 53 Issue 6
+
+- [Near-optimal inference in adaptive linear regression](deep_reads/2026-05-26-10.1214_24-aos2450.md)  
+  8/10 [journals]
 
 ## 数理统计 / 假设检验
 
@@ -78,6 +275,78 @@
   9/10 [daily]
 - [Tests for the mean of high-dimensional data](deep_reads/2026-05-18-2605.16033.md)  
   8/10 [daily]
+
+### 期刊
+
+#### Journal of the Royal Statistical Society Series B Vol 88 Issue 1
+
+- [Doubly robust conditional independence testing with generative neural networks](deep_reads/2026-05-26-10.1093_jrsssb_qkaf047.md)  
+  8/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 87 Issue 5
+
+- [Detection and inference of changes in high-dimensional linear regression with nonsparse structures](deep_reads/2026-05-26-10.1093_jrsssb_qkaf029.md)  
+  8/10 [journals]
+
+#### Journal of the American Statistical Association
+
+- [Nonparametric tests of treatment effect homogeneity for policy-makers](deep_reads/2026-05-26-10.1080_01621459.2026.2670746.md)  
+  9/10 [journals]
+
+#### Biometrika Vol 113 Issue 2
+
+- [Treatment choice with nonlinear regret](deep_reads/2026-05-26-10.1093_biomet_asag008.md)  
+  8/10 [journals]
+
+#### Biometrika Vol 112 Issue 4
+
+- [Goodness-of-fit tests for linear non-Gaussian structural equation models](deep_reads/2026-05-26-10.1093_biomet_asaf046.md)  
+  8/10 [journals]
+
+#### Biometrika Vol 111 Issue 4
+
+- [More power by using fewer permutations](deep_reads/2026-05-26-10.1093_biomet_asae031.md)  
+  8/10 [journals]
+- [Inference for possibly misspecified generalized linear models with nonpolynomial-dimensional nuisance parameters](deep_reads/2026-05-26-10.1093_biomet_asae024.md)  
+  8/10 [journals]
+
+#### Annals of Statistics Vol 54 Issue 2
+
+- [Large-scale multiple testing: Fundamental limits of false discovery rate control and compound oracle](deep_reads/2026-05-26-10.1214_25-aos2581.md)  
+  9/10 [journals]
+
+#### Annals of Statistics Vol 54 Issue 1
+
+- [Information theoretic limits of robust sub-Gaussian mean estimation under star-shaped constraints](deep_reads/2026-05-26-10.1214_25-aos2576.md)  
+  9/10 [journals]
+- [A computational transition for detecting correlated stochastic block models by low-degree polynomials](deep_reads/2026-05-26-10.1214_25-aos2565.md)  
+  8/10 [journals]
+
+#### Annals of Statistics Vol 53 Issue 5
+
+- [Tests of missing completely at random based on sample covariance matrices](deep_reads/2026-05-26-10.1214_25-aos2540.md)  
+  8/10 [journals]
+
+## 统计计算 / 算法
+
+### 期刊
+
+#### JMLR
+
+- [LazyDINO: Fast, Scalable, and Efficiently Amortized Bayesian Inversion via Structure-Exploiting and Surrogate-Driven Measure Transport](deep_reads/2026-05-26-jmlr_v27_25-0858.md)  
+  8/10 [journals]
+
+#### Biometrika Vol 113 Issue 1
+
+- [Thinning a Wishart random matrix](deep_reads/2026-05-26-10.1093_biomet_asaf081.md)  
+  8/10 [journals]
+
+#### Annals of Statistics Vol 54 Issue 1
+
+- [Communication-efficient and distributed-oracle estimation for high-dimensional quantile regression](deep_reads/2026-05-26-10.1214_25-aos2573.md)  
+  7/10 [journals]
+- [Solving the Poisson equation using coupled Markov chains](deep_reads/2026-05-26-10.1214_25-aos2564.md)  
+  6/10 [journals]
 
 ## 天体统计
 
@@ -103,6 +372,43 @@
   8/10 [daily]
 - [Nearest-Neighbour Matching on Unbounded Supports and Covariate Shift Transfer](deep_reads/2026-05-18-2605.16027.md)  
   8/10 [daily]
+
+### 期刊
+
+#### Journal of the Royal Statistical Society Series B Vol 88 Issue 1
+
+- [Simplifying debiased inference via automatic differentiation and probabilistic programming](deep_reads/2026-05-26-10.1093_jrsssb_qkaf052.md)  
+  9/10 [journals]
+
+#### Biometrika Vol 113 Issue 1
+
+- [Proximal indirect comparison](deep_reads/2026-05-26-10.1093_biomet_asaf044.md)  
+  10/10 [journals]
+
+#### Biometrika Vol 112 Issue 4
+
+- [On the asymptotic validity of confidence sets for linear functionals of solutions to integral equations](deep_reads/2026-05-26-10.1093_biomet_asaf067.md)  
+  9/10 [journals]
+
+#### Annals of Statistics Vol 54 Issue 2
+
+- [Finite- and large sample inference for model and coefficients in high-dimensional linear regression with repro samples](deep_reads/2026-05-26-10.1214_25-aos2591.md)  
+  8/10 [journals]
+
+#### Annals of Statistics Vol 54 Issue 1
+
+- [Change point estimation for a stochastic heat equation](deep_reads/2026-05-26-10.1214_25-aos2567.md)  
+  8/10 [journals]
+
+#### Annals of Statistics Vol 53 Issue 6
+
+- [Causal effect estimation under network interference with mean-field methods](deep_reads/2026-05-26-10.1214_25-aos2547.md)  
+  8/10 [journals]
+
+#### Annals of Statistics Vol 53 Issue 5
+
+- [Symmetry: A general structure in nonparametric regression](deep_reads/2026-05-26-10.1214_25-aos2529.md)  
+  8/10 [journals]
 
 
 ---
