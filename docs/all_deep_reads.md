@@ -4,6 +4,10 @@
 
 ### Daily
 
+- [Semiparametric Inference for Causal Effects on Functional Outcomes](deep_reads/2026-05-27-2605.26964.md)  
+  9/10 [daily]
+- [Learning a directed acyclic graph with additive heteroscedastic errors](deep_reads/2026-05-27-2605.26515.md)  
+  8/10 [daily]
 - [Geometry Adaptive Counterfactual Distribution Learning with Diffusion-Guided Smoothing](deep_reads/2026-05-26-2605.25811.md)  
   9/10 [daily]
 - [Confidence intervals for causal effects in sequential decision making](deep_reads/2026-05-26-2605.25687.md)  
@@ -205,6 +209,8 @@
 
 ### Daily
 
+- [Bernstein-von Mises Theorem for Sparse Generalized Linear Model](deep_reads/2026-05-27-2605.27137.md)  
+  8/10 [daily]
 - [Identification and Estimation of Semiparametric Multilayered Sample Selection Models](deep_reads/2026-05-26-2605.25519.md)  
   9/10 [daily]
 - [Bias Correction for Semiparametric Regression Models](deep_reads/2026-05-11-2605.08656.md)  
