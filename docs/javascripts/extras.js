@@ -610,7 +610,7 @@
   function favItemHtml(f, readonly) {
     const read = (!readonly && isRead(f.paper_id))
       ? '<span class="rn-c-read">✓ 已读</span>' : '';
-    const dr = f.deep_read_url ? ' · <a href="' + f.deep_read_url + '">🔍 精读</a>' : '';
+    const dr = f.deep_read_url ? ' · <a href="' + f.deep_read_url + '" target="_blank" rel="noopener noreferrer">🔍 精读</a>' : '';
     const metaBits = [f.date || "", f.venue || f.source || ""];
     if (f.score != null) metaBits.push("相关性 " + Math.round(f.score) + "/10");
     const meta = metaBits.filter(Boolean).map(escapeHtml).join(" · ");
