@@ -4,6 +4,18 @@
 
 ### Daily
 
+- [Identification and Inference for Structural Accelerated Failure Time Models via Instrument Interactions](deep_reads/2026-05-29-2605.28341.md)  
+  9/10 [daily]
+- [IV regression with distribution-valued outcomes](deep_reads/2026-05-29-2605.28749.md)  
+  9/10 [daily]
+- [Implementing the principal stratum strategy for intercurrent events with survival outcomes: a tutorial](deep_reads/2026-05-29-2605.27655.md)  
+  8/10 [daily]
+- [Identifying Direct Causal Effects in Latent Factor Models by Accounting for Unidentified Parents](deep_reads/2026-05-29-2605.28105.md)  
+  8/10 [daily]
+- [Beyond Exchangeability: Distribution-Shift-Aware Integration of External Control Data in Randomized Trials](deep_reads/2026-05-29-2605.28785.md)  
+  8/10 [daily]
+- [Deep Neural Networks for Doubly Robust Estimation with Nonprobability Survey Samples](deep_reads/2026-05-29-2605.28762.md)  
+  8/10 [daily]
 - [Semiparametric Inference for Causal Effects on Functional Outcomes](deep_reads/2026-05-27-2605.26964.md)  
   9/10 [daily]
 - [Learning a directed acyclic graph with additive heteroscedastic errors](deep_reads/2026-05-27-2605.26515.md)  
@@ -372,6 +384,14 @@
 
 ### Daily
 
+- [Probabilistic Data-Driven Modelling of Astrophysical Transients: The Neural Process Family for Ultrafast and Class-Agnostic Light Curve Reconstruction with NightLANP](deep_reads/2026-05-29-2605.27527.md)  
+  8/10 [daily]
+- [VROOM-SBI: A Fast Simulation-Based Bayesian Inference Methodology for QU-Fitting](deep_reads/2026-05-29-2605.27538.md)  
+  8/10 [daily]
+- [A Semi-Supervised Variational Autoencoder for Generating Neutron Star Equations of State](deep_reads/2026-05-29-2605.27562.md)  
+  7/10 [daily]
+- [Unsupervised Morphological Characterization of Gravitational-Wave Glitches in LIGO O4a Using Frozen DINOv2 Features](deep_reads/2026-05-29-2605.28572.md)  
+  6/10 [daily]
 - [skysurvey: a pure python package to simulate the transient sky](deep_reads/2026-05-26-2605.25840.md)  
   6/10 [daily]
 - [A Markov-Chain-Monte-Carlo-based Hybrid Noise Inference for Continuous Wavelet Power Spectra: with Applications to Solar and Stellar Oscillatory Signals](deep_reads/2026-05-25-2605.23587.md)  
@@ -390,6 +410,8 @@
 
 ### Daily
 
+- [The 'Right' Extension of Type-I Error to Data-Dependent Levels](deep_reads/2026-05-29-2605.28429.md)  
+  8/10 [daily]
 - [Modified treatment policies that depend on the natural history of treatment](deep_reads/2026-05-26-2605.24167.md)  
   9/10 [daily]
 - [Using the target trial framework for combining information: external comparator analyses and other applications](deep_reads/2026-05-26-2605.24346.md)  
