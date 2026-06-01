@@ -29,26 +29,24 @@ RSS_BASE = "https://rss.arxiv.org/rss"
 API_BASE = "https://export.arxiv.org/api/query"
 
 # arXiv blocks requests with a library-default User-Agent (httpx sends
-# "python-httpx/x.y"), which shows up as a repeated 403. Send a descriptive UA
-# as arXiv asks. Override via env if you want to add a contact email.
-_USER_AGENT = os.environ.get(
-    "ARXIV_USER_AGENT",
-    "research-news/1.0 (+https://github.com/cxy0714/research-news)",
-)
-_HEADERS = {"User-Agent": _USER_AGENT}
-
-# arXiv asks for ~1 request / 3s; bursts get a 429 that can stick for a while.
-# Space every request out and honor Retry-After on 429/503.
-_MIN_INTERVAL = float(os.environ.get("ARXIV_MIN_INTERVAL", "3"))
-_FETCH_ATTEMPTS = int(os.environ.get("ARXIV_FETCH_ATTEMPTS", "4"))
+# "python-httpx/x.y") and rate-limits bursts with a sticky 429. We send a
+# descriptive UA, space requests ~1/3s, and honor Retry-After on 429/503.
+# All three knobs are read at request time so a .env (loaded at run start, after
+# import) takes effect: ARXIV_USER_AGENT / ARXIV_MIN_INTERVAL / ARXIV_FETCH_ATTEMPTS.
+_DEFAULT_UA = "research-news/1.0 (+https://github.com/cxy0714/research-news)"
 _last_request = [0.0]
 _throttle_lock = threading.Lock()
 
 
+def _headers() -> dict:
+    return {"User-Agent": os.environ.get("ARXIV_USER_AGENT", _DEFAULT_UA)}
+
+
 def _throttle() -> None:
-    """Block until at least _MIN_INTERVAL has passed since the last request."""
+    """Block until the configured min interval has passed since the last request."""
+    min_interval = float(os.environ.get("ARXIV_MIN_INTERVAL", "3"))
     with _throttle_lock:
-        wait = _MIN_INTERVAL - (time.monotonic() - _last_request[0])
+        wait = min_interval - (time.monotonic() - _last_request[0])
         if wait > 0:
             time.sleep(wait)
         _last_request[0] = time.monotonic()
@@ -68,11 +66,12 @@ def _fetch(url: str, *, params: dict | None = None, timeout: float = 40) -> str:
     Raises the last httpx error if all attempts fail (status code visible in
     the message). Other 4xx (400/403) raise immediately — no point hammering.
     """
+    attempts = int(os.environ.get("ARXIV_FETCH_ATTEMPTS", "4"))
     last_exc: Exception | None = None
-    for attempt in range(_FETCH_ATTEMPTS):
+    for attempt in range(attempts):
         _throttle()
         try:
-            with httpx.Client(timeout=timeout, follow_redirects=True, headers=_HEADERS) as c:
+            with httpx.Client(timeout=timeout, follow_redirects=True, headers=_headers()) as c:
                 r = c.get(url, params=params)
         except httpx.TimeoutException as e:
             last_exc = e
@@ -81,7 +80,7 @@ def _fetch(url: str, *, params: dict | None = None, timeout: float = 40) -> str:
         if r.status_code in (429, 503):
             delay = _retry_after_seconds(r, attempt)
             log.info("arXiv %d; waiting %.0fs then retry (%d/%d)",
-                     r.status_code, delay, attempt + 1, _FETCH_ATTEMPTS)
+                     r.status_code, delay, attempt + 1, attempts)
             last_exc = httpx.HTTPStatusError(
                 f"{r.status_code} from arXiv", request=r.request, response=r)
             time.sleep(delay)
