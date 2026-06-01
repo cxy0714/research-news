@@ -1,33 +1,31 @@
 // Personal-account layer on top of the static mkdocs-material site.
 //
-// Everything here is opt-in and client-side. There is no server: a personal
-// GitHub token (gist scope) entered once in the browser acts as the "login",
-// and per-user state — which papers are read, and which are starred for the
-// weekly digest — lives in a single private GitHub Gist on that account.
+// There is no server: a personal GitHub token (gist scope) entered once in the
+// browser acts as the "login", and per-user state — which papers are read, and
+// which are starred (collected) along with per-paper comments — lives in a
+// single private GitHub Gist on that account, synced across every signed-in
+// device. Signing in is required; without a token only the login button shows.
 //
-// Three features layered on the pages:
-//   1) Account button (bottom-right): paste a GitHub token to sign in. State
-//      then syncs across every browser/device signed in to the same gist.
+// Features:
+//   1) Account button (bottom-right): paste a GitHub token to sign in / out.
 //   2) Per-paper read / unread + ☆ 收藏 badges on daily / journals / deep-read
-//      pages. Starring a paper drops it into the weekly digest automatically.
-//   3) The 每周周报 page (docs/weekly.md) renders all starred papers grouped by
-//      ISO week — no manual maintenance.
-//
-// Without a token everything still works locally (localStorage only, single
-// browser), exactly like the previous ?me=1 personal mode.
+//      pages. Starring a paper drops it into the 收藏 page automatically.
+//   3) The 收藏 page (docs/favorites.md) renders all starred papers, with a
+//      view toggle: 总收藏 (grouped by category → date) and 按周 (by ISO week).
+//      Each paper can carry an inline comment, edited right on the page.
 
 (function () {
   "use strict";
 
   // ── storage keys ────────────────────────────────────────────────────────
-  const MODE_KEY = "rn-personal-mode";      // legacy ?me=1 toggle
   const READ_PREFIX = "rn-paper-read:";     // legacy per-paper read keys
   const TOKEN_KEY = "rn-gh-token";
   const GIST_ID_KEY = "rn-gist-id";
   const STATE_CACHE_KEY = "rn-state";       // local mirror of gist state
+  const VIEW_KEY = "rn-collection-view";    // "total" | "week"
 
   const STATE_FILE = "research-news-state.json";
-  const GIST_DESC = "research-news · 已读与周报收藏状态（请勿删除）";
+  const GIST_DESC = "research-news · 已读与收藏状态（请勿删除）";
   const GH_API = "https://api.github.com";
 
   // ── in-memory state ───────────────────────────────────────────────────────
@@ -36,6 +34,7 @@
   let gistReady = false;     // true once the gist has been located/created
   let _synced = false;       // true once we've pulled from the gist this session
   let _deepReadsCache = null;
+  let _topicLabelsCache = null;
 
   function emptyState() {
     return { version: 1, read: {}, favorites: {} };
@@ -50,10 +49,9 @@
   function getGistId() { return lsGet(GIST_ID_KEY) || ""; }
   function loggedIn() { return !!getToken() && gistReady; }
 
-  function personalModeOn() { return lsGet(MODE_KEY) === "1"; }
-  // Badges (read / favorite) show whenever the user has opted in, either by
-  // signing in or via the legacy ?me=1 personal mode.
-  function active() { return !!getToken() || personalModeOn(); }
+  // Read / favorite badges and the collection page require signing in: state
+  // lives in the user's gist, so there is nowhere to persist without a token.
+  function active() { return !!getToken(); }
 
   // ── ISO week, e.g. "2026-W22" ──────────────────────────────────────────────
   function isoWeek(d) {
@@ -201,8 +199,11 @@
         deep_read_url: info.deepReadUrl || "",
         source: info.source || "",
         source_url: info.sourceUrl || location.pathname,
+        category: info.category || UNCATEGORIZED,
+        date: info.date || pageDate(),
         week: isoWeek(new Date()),
         added: new Date().toISOString(),
+        note: "",
       };
     }
     scheduleSync();
@@ -215,7 +216,29 @@
     document.dispatchEvent(new CustomEvent("rn:favchange"));
   }
 
+  function setNote(id, text) {
+    if (state.favorites[id]) {
+      state.favorites[id].note = text;
+      scheduleSync();
+    }
+  }
+
   // ── page / paper helpers ────────────────────────────────────────────────────
+  // Absolute site root, derived from this script's own URL so it is correct on
+  // any page depth and under any GitHub Pages base path.
+  let _siteRoot = null;
+  function siteRoot() {
+    if (_siteRoot) return _siteRoot;
+    const s = document.querySelector('script[src*="javascripts/extras.js"]');
+    if (s) {
+      const u = new URL(s.src, location.href);
+      _siteRoot = u.pathname.replace(/javascripts\/extras\.js.*$/, "");
+    } else {
+      _siteRoot = "/";
+    }
+    return _siteRoot;
+  }
+
   function getRoot() {
     const p = location.pathname;
     for (const d of ["/daily/", "/journals/", "/deep_reads/"]) {
@@ -223,6 +246,12 @@
       if (idx >= 0) return p.slice(0, idx + 1);
     }
     return p.replace(/[^\/]*$/, "");
+  }
+
+  // YYYY-MM-DD from the page path (daily / journal / deep-read all carry it).
+  function pageDate() {
+    const m = location.pathname.match(/(\d{4}-\d{2}-\d{2})/);
+    return m ? m[1] : new Date().toISOString().slice(0, 10);
   }
 
   function isOverviewPage() {
@@ -270,7 +299,7 @@
   // ── deep-read index (for "🔍 精读" links + deep_read_url on favorites) ───────
   function loadDeepReads() {
     if (_deepReadsCache) return Promise.resolve(_deepReadsCache);
-    const url = getRoot() + "data/deep_reads_index.json";
+    const url = siteRoot() + "data/deep_reads_index.json";
     return fetch(url, { cache: "no-cache" })
       .then((r) => (r.ok ? r.json() : []))
       .then((arr) => {
@@ -286,7 +315,49 @@
   }
 
   function deepReadHref(entry) {
-    return getRoot() + entry.doc_path.replace(/\.md$/i, "/");
+    return siteRoot() + entry.doc_path.replace(/\.md$/i, "/");
+  }
+
+  // ── topic taxonomy (for grouping favorites by category) ───────────────────────
+  // { order: [keys...], labels: {key: zh}, orderedLabels: [zh...] }
+  function loadTopicLabels() {
+    if (_topicLabelsCache) return Promise.resolve(_topicLabelsCache);
+    const url = siteRoot() + "data/topic_labels.json";
+    return fetch(url, { cache: "no-cache" })
+      .then((r) => (r.ok ? r.json() : { order: [], labels: {} }))
+      .then((j) => {
+        const order = j.order || [];
+        const labels = j.labels || {};
+        _topicLabelsCache = {
+          order: order,
+          labels: labels,
+          orderedLabels: order.map((k) => labels[k] || k),
+        };
+        return _topicLabelsCache;
+      })
+      .catch(() => ({ order: [], labels: {}, orderedLabels: [] }));
+  }
+
+  const UNCATEGORIZED = "未分类";
+
+  // Category label for a paper. Overview pages: nearest preceding section
+  // heading (the topic group). Stripped of the trailing "(causal, N 篇)".
+  function categoryFromHeading(h) {
+    if (!h) return UNCATEGORIZED;
+    const level = parseInt(h.tagName.slice(1), 10);
+    const all = Array.from(document.querySelectorAll("h1,h2,h3,h4,h5,h6"));
+    let idx = all.indexOf(h);
+    for (let i = idx - 1; i >= 0; i--) {
+      const lv = parseInt(all[i].tagName.slice(1), 10);
+      if (lv < level) {
+        let t = (all[i].textContent || "").replace(/¶/g, "").trim();
+        t = t.split(/\s*[\(（*]/)[0].trim();
+        // Skip the daily wrapper headings ("⭐ 高相关论文 …").
+        if (/高相关|中相关|会议|Seminar/.test(t)) continue;
+        return t || UNCATEGORIZED;
+      }
+    }
+    return UNCATEGORIZED;
   }
 
   // ── badges (read + favorite) ────────────────────────────────────────────────
@@ -326,7 +397,7 @@
     function refresh() {
       const fav = isFav(pl.paperId);
       badge.textContent = fav ? "★ 已收藏" : "☆ 收藏";
-      badge.title = fav ? "已加入每周周报，点击移除" : "加入每周周报";
+      badge.title = fav ? "已收藏，点击移除" : "加入收藏";
       badge.classList.toggle("rn-fav-on", fav);
     }
     badge.addEventListener("click", (e) => {
@@ -338,6 +409,8 @@
         deepReadUrl: drEntry ? deepReadHref(drEntry) : "",
         source: pageLabel(),
         sourceUrl: location.pathname,
+        category: categoryFromHeading(pl.heading),
+        date: pageDate(),
       });
       refresh();
     });
@@ -361,17 +434,24 @@
   }
 
   // Deep-read pages have no paper-link heading; star the page as a whole.
-  function addDeepReadPageBadge(byId) {
+  function addDeepReadPageBadge(byId, labels) {
     const h1 = document.querySelector("article h1, .md-content h1");
     if (!h1 || h1.dataset.rnFavBadge) return;
-    // Resolve paper_id/title from the deep-reads index via the page path.
+    // Resolve paper_id/title/topic from the deep-reads index via the page path.
     let paperId = null, title = (h1.textContent || "").replace(/¶/g, "").trim();
+    let category = UNCATEGORIZED, dateStr = pageDate();
     // Page slug, e.g. "2026-06-01-2605.31130" (DOI-based ids keep their slug).
     const slug = location.pathname.replace(/\/$/, "").split("/").pop() || "";
     if (byId) {
       for (const e of byId.values()) {
         const base = e.doc_path.replace(/^.*\//, "").replace(/\.md$/i, "");
-        if (base === slug) { paperId = e.paper_id; title = e.title || title; break; }
+        if (base === slug) {
+          paperId = e.paper_id;
+          title = e.title || title;
+          if (e.date) dateStr = e.date;
+          if (labels && e.topic) category = labels.labels[e.topic] || e.topic;
+          break;
+        }
       }
     }
     if (!paperId) {
@@ -383,8 +463,8 @@
     const badge = makeBadge("rn-fav-badge", "button");
     function refresh() {
       const fav = isFav(paperId);
-      badge.textContent = fav ? "★ 已收藏" : "☆ 收藏到周报";
-      badge.title = fav ? "已加入每周周报，点击移除" : "加入每周周报";
+      badge.textContent = fav ? "★ 已收藏" : "☆ 收藏";
+      badge.title = fav ? "已收藏，点击移除" : "加入收藏";
       badge.classList.toggle("rn-fav-on", fav);
     }
     badge.addEventListener("click", (e) => {
@@ -396,6 +476,8 @@
         deepReadUrl: location.pathname,
         source: "精读 · " + title,
         sourceUrl: location.pathname,
+        category: category,
+        date: dateStr,
       });
       refresh();
     });
@@ -422,15 +504,14 @@
     function renderPanel() {
       const favCount = Object.keys(state.favorites).length;
       const readCount = Object.keys(state.read).length;
-      const root = getRoot().replace(/\/(daily|journals|deep_reads)\/$/, "/");
-      const weeklyHref = (root.endsWith("/") ? root : root + "/") + "weekly/";
+      const favHref = siteRoot() + "favorites/";
       if (loggedIn()) {
         panel.innerHTML =
           '<div class="rn-ap-row"><strong>已登录</strong> · gist <code>' +
           getGistId().slice(0, 8) + '…</code></div>' +
           '<div class="rn-ap-row">收藏 <b>' + favCount + '</b> 篇 · 已读 <b>' +
           readCount + '</b> 篇</div>' +
-          '<div class="rn-ap-row"><a href="' + weeklyHref + '">→ 打开每周周报</a></div>' +
+          '<div class="rn-ap-row"><a href="' + favHref + '">→ 打开收藏</a></div>' +
           '<div class="rn-ap-row"><button id="rn-logout" type="button">退出登录</button></div>';
         const out = panel.querySelector("#rn-logout");
         if (out) out.addEventListener("click", () => {
@@ -473,70 +554,173 @@
     document.body.appendChild(panel);
   }
 
-  // ── weekly digest page ───────────────────────────────────────────────────────
-  function renderWeekly() {
-    const host = document.getElementById("rn-weekly");
+  // ── collection page (收藏) ───────────────────────────────────────────────────
+  function getView() { return lsGet(VIEW_KEY) === "week" ? "week" : "total"; }
+  function setView(v) { lsSet(VIEW_KEY, v); }
+
+  function dateDesc(a, b) {
+    const d = (b.date || "").localeCompare(a.date || "");
+    return d !== 0 ? d : (b.added || "").localeCompare(a.added || "");
+  }
+
+  // Order categories by the report taxonomy, with unknown ones last.
+  function orderedCategories(present, ordering) {
+    const seen = new Set(present);
+    const out = [];
+    (ordering || []).forEach((c) => { if (seen.has(c)) { out.push(c); seen.delete(c); } });
+    Array.from(seen).sort().forEach((c) => out.push(c));
+    // Always sink "未分类" to the very end.
+    return out.filter((c) => c !== UNCATEGORIZED)
+      .concat(out.includes(UNCATEGORIZED) ? [UNCATEGORIZED] : []);
+  }
+
+  function groupBy(favs, key) {
+    const g = {};
+    favs.forEach((f) => { const k = f[key] || UNCATEGORIZED; (g[k] = g[k] || []).push(f); });
+    return g;
+  }
+
+  function favItemHtml(f) {
+    const read = isRead(f.paper_id) ? '<span class="rn-c-read">✓ 已读</span>' : '';
+    const dr = f.deep_read_url ? ' · <a href="' + f.deep_read_url + '">🔍 精读</a>' : '';
+    const meta = [f.date || "", f.source || ""].filter(Boolean).map(escapeHtml).join(" · ");
+    const note = f.note
+      ? '<div class="rn-c-note" data-id="' + escapeHtml(f.paper_id) + '">' +
+        escapeHtml(f.note) + '</div>'
+      : '';
+    return (
+      '<li data-id="' + escapeHtml(f.paper_id) + '">' +
+      '<a class="rn-c-title" href="' + (f.url || "#") + '">' + escapeHtml(f.title) + '</a> ' +
+      read + dr +
+      '<button class="rn-c-rm" title="移除收藏" type="button">✕</button>' +
+      '<div class="rn-c-meta">' + meta +
+      ' · <button class="rn-c-edit" type="button">✎ ' + (f.note ? '改评论' : '评论') + '</button>' +
+      '</div>' + note +
+      '</li>'
+    );
+  }
+
+  function renderCollection() {
+    const host = document.getElementById("rn-collection");
     if (!host) return;
-    const favs = Object.values(state.favorites);
-    if (!favs.length) {
-      host.innerHTML = active()
-        ? '<p class="rn-weekly-empty">还没有收藏。去 <a href="../">日报 / 期刊 / 精读</a> 页面，' +
-          '点论文旁边的 <b>☆ 收藏</b> 把它加进来。</p>'
-        : '<p class="rn-weekly-empty">点右下角 <b>👤 登录</b> 后，你收藏的论文会按周显示在这里。</p>';
+    if (!active()) {
+      host.innerHTML = '<p class="rn-c-empty">点右下角 <b>👤 登录</b> 后，' +
+        '你收藏的论文会显示在这里。</p>';
       return;
     }
-    // group by week, newest week first; within a week newest-added first.
-    const byWeek = {};
-    favs.forEach((f) => { (byWeek[f.week] = byWeek[f.week] || []).push(f); });
-    const weeks = Object.keys(byWeek).sort().reverse();
-    const parts = [];
-    parts.push('<div class="rn-weekly-bar"><button id="rn-weekly-md" type="button">' +
-      '复制为 Markdown</button></div>');
-    weeks.forEach((w) => {
-      const items = byWeek[w].sort((a, b) => (b.added || "").localeCompare(a.added || ""));
-      parts.push('<h2>' + w + ' <small>(' + items.length + ' 篇)</small></h2>');
-      parts.push('<ul class="rn-weekly-list">');
-      items.forEach((f) => {
-        const read = isRead(f.paper_id) ? '<span class="rn-weekly-read">✓ 已读</span>' : '';
-        const dr = f.deep_read_url ? ' · <a href="' + f.deep_read_url + '">🔍 精读</a>' : '';
-        const src = f.source ? '<span class="rn-weekly-src">' + escapeHtml(f.source) + '</span>' : '';
-        parts.push(
-          '<li data-id="' + escapeHtml(f.paper_id) + '">' +
-          '<a class="rn-weekly-title" href="' + (f.url || "#") + '">' +
-          escapeHtml(f.title) + '</a> ' + read + dr +
-          '<button class="rn-weekly-rm" title="从周报移除" type="button">✕</button>' +
-          '<br>' + src +
-          '</li>'
-        );
-      });
-      parts.push('</ul>');
-    });
-    host.innerHTML = parts.join("");
+    const favs = Object.values(state.favorites);
+    loadTopicLabels().then((labels) => {
+      const view = getView();
+      const parts = [];
+      parts.push(
+        '<div class="rn-c-bar">' +
+        '<span class="rn-c-views">' +
+        '<button data-view="total" class="' + (view === "total" ? "on" : "") + '" type="button">总收藏</button>' +
+        '<button data-view="week" class="' + (view === "week" ? "on" : "") + '" type="button">按周</button>' +
+        '</span>' +
+        '<button id="rn-c-md" type="button">复制为 Markdown</button>' +
+        '</div>'
+      );
 
-    host.querySelectorAll(".rn-weekly-rm").forEach((b) => {
+      if (!favs.length) {
+        parts.push('<p class="rn-c-empty">还没有收藏。去日报 / 期刊 / 精读页面，' +
+          '点论文旁的 <b>☆ 收藏</b> 把它加进来。</p>');
+      } else if (view === "total") {
+        const byCat = groupBy(favs, "category");
+        orderedCategories(Object.keys(byCat), labels.orderedLabels).forEach((cat) => {
+          const items = byCat[cat].slice().sort(dateDesc);
+          parts.push('<h2>' + escapeHtml(cat) + ' <small>(' + items.length + ' 篇)</small></h2>');
+          parts.push('<ul class="rn-c-list">' + items.map(favItemHtml).join("") + '</ul>');
+        });
+      } else {
+        const byWeek = groupBy(favs, "week");
+        Object.keys(byWeek).sort().reverse().forEach((w) => {
+          parts.push('<h2>' + escapeHtml(w) + ' <small>(' + byWeek[w].length + ' 篇)</small></h2>');
+          const byCat = groupBy(byWeek[w], "category");
+          orderedCategories(Object.keys(byCat), labels.orderedLabels).forEach((cat) => {
+            const items = byCat[cat].slice().sort(dateDesc);
+            parts.push('<h3>' + escapeHtml(cat) + '</h3>');
+            parts.push('<ul class="rn-c-list">' + items.map(favItemHtml).join("") + '</ul>');
+          });
+        });
+      }
+      host.innerHTML = parts.join("");
+      wireCollection(host, favs, labels);
+    });
+  }
+
+  function wireCollection(host, favs, labels) {
+    host.querySelectorAll(".rn-c-views button").forEach((b) => {
+      b.addEventListener("click", () => { setView(b.getAttribute("data-view")); renderCollection(); });
+    });
+    host.querySelectorAll(".rn-c-rm").forEach((b) => {
       b.addEventListener("click", () => {
         const li = b.closest("li");
         if (li) removeFav(li.getAttribute("data-id"));
       });
     });
-    const mdBtn = host.querySelector("#rn-weekly-md");
-    if (mdBtn) mdBtn.addEventListener("click", () => copyWeeklyMarkdown(byWeek, weeks));
+    host.querySelectorAll(".rn-c-edit").forEach((b) => {
+      b.addEventListener("click", () => {
+        const li = b.closest("li");
+        if (li) openNoteEditor(li);
+      });
+    });
+    const mdBtn = host.querySelector("#rn-c-md");
+    if (mdBtn) mdBtn.addEventListener("click", () => copyCollectionMarkdown(favs, labels));
   }
 
-  function copyWeeklyMarkdown(byWeek, weeks) {
-    const lines = ["# 每周周报", ""];
-    weeks.forEach((w) => {
-      lines.push("## " + w, "");
-      byWeek[w].forEach((f) => {
-        const link = f.deep_read_url || f.url || "";
-        lines.push("- [" + f.title + "](" + link + ")" + (f.source ? "  — " + f.source : ""));
+  function openNoteEditor(li) {
+    if (li.querySelector(".rn-c-note-edit")) return;
+    const id = li.getAttribute("data-id");
+    const fav = state.favorites[id];
+    if (!fav) return;
+    const box = document.createElement("div");
+    box.className = "rn-c-note-edit";
+    const ta = document.createElement("textarea");
+    ta.value = fav.note || "";
+    ta.placeholder = "写点评论 / 笔记…";
+    const save = document.createElement("button");
+    save.type = "button"; save.textContent = "保存";
+    save.addEventListener("click", () => { setNote(id, ta.value.trim()); renderCollection(); });
+    box.appendChild(ta);
+    box.appendChild(save);
+    li.appendChild(box);
+    ta.focus();
+  }
+
+  function copyCollectionMarkdown(favs, labels) {
+    const lines = ["# 收藏", ""];
+    if (getView() === "week") {
+      const byWeek = groupBy(favs, "week");
+      Object.keys(byWeek).sort().reverse().forEach((w) => {
+        lines.push("## " + w, "");
+        const byCat = groupBy(byWeek[w], "category");
+        orderedCategories(Object.keys(byCat), labels.orderedLabels).forEach((cat) => {
+          lines.push("### " + cat, "");
+          byCat[cat].slice().sort(dateDesc).forEach((f) => lines.push(mdLine(f)));
+          lines.push("");
+        });
       });
-      lines.push("");
-    });
+    } else {
+      const byCat = groupBy(favs, "category");
+      orderedCategories(Object.keys(byCat), labels.orderedLabels).forEach((cat) => {
+        lines.push("## " + cat, "");
+        byCat[cat].slice().sort(dateDesc).forEach((f) => lines.push(mdLine(f)));
+        lines.push("");
+      });
+    }
     const text = lines.join("\n");
     if (navigator.clipboard) navigator.clipboard.writeText(text).then(
       () => alert("已复制为 Markdown。"), () => prompt("复制以下内容：", text));
     else prompt("复制以下内容：", text);
+  }
+
+  function mdLine(f) {
+    const link = f.deep_read_url || f.url || "";
+    let s = "- [" + f.title + "](" + link + ")";
+    if (f.date) s += "  · " + f.date;
+    if (f.note) s += "  — " + f.note;
+    return s;
   }
 
   function escapeHtml(s) {
@@ -597,18 +781,34 @@
         border: 1px solid #c79100; background: #ffce3a; color: #1a1400; cursor: pointer; }
       #rn-account-panel a { color: var(--md-primary-fg-color, #3f51b5); }
 
-      .rn-weekly-bar { margin: 0.5em 0 1em; }
-      .rn-weekly-bar button { padding: 0.3em 0.8em; border-radius: 0.3em;
-        border: 1px solid #c79100; background: #fff7d6; color: #8a6500; cursor: pointer; }
-      .rn-weekly-list { list-style: none; padding-left: 0; }
-      .rn-weekly-list li { margin: 0.5em 0; padding: 0.4em 0; border-bottom: 1px dashed rgba(0,0,0,0.12); }
-      .rn-weekly-title { font-weight: 600; }
-      .rn-weekly-read { font-size: 0.75em; color: #5a5a5a; background: #eee;
+      .rn-c-bar { display: flex; gap: 0.6em; align-items: center; flex-wrap: wrap;
+        margin: 0.5em 0 1em; }
+      .rn-c-bar button { padding: 0.3em 0.8em; border-radius: 0.3em; cursor: pointer;
+        border: 1px solid #c79100; background: #fff7d6; color: #8a6500; }
+      .rn-c-views { display: inline-flex; }
+      .rn-c-views button { border-radius: 0; }
+      .rn-c-views button:first-child { border-radius: 0.3em 0 0 0.3em; }
+      .rn-c-views button:last-child { border-radius: 0 0.3em 0.3em 0; border-left: none; }
+      .rn-c-views button.on { background: #ffce3a; color: #1a1400; font-weight: 600; }
+      .rn-c-list { list-style: none; padding-left: 0; }
+      .rn-c-list li { margin: 0.5em 0; padding: 0.4em 0; border-bottom: 1px dashed rgba(0,0,0,0.12); }
+      .rn-c-title { font-weight: 600; }
+      .rn-c-read { font-size: 0.75em; color: #5a5a5a; background: #eee;
         border-radius: 0.25em; padding: 0 0.4em; margin-left: 0.3em; }
-      .rn-weekly-src { font-size: 0.78em; opacity: 0.7; }
-      .rn-weekly-rm { float: right; border: none; background: transparent; cursor: pointer;
+      .rn-c-meta { font-size: 0.78em; opacity: 0.75; margin-top: 0.15em; }
+      .rn-c-meta .rn-c-edit { border: none; background: transparent; cursor: pointer;
+        color: var(--md-primary-fg-color, #3f51b5); font-size: 1em; padding: 0; }
+      .rn-c-note { font-size: 0.86em; margin-top: 0.3em; padding: 0.35em 0.6em;
+        border-left: 3px solid #e6c200; background: rgba(230,194,0,0.08); white-space: pre-wrap; }
+      .rn-c-note-edit { margin-top: 0.3em; }
+      .rn-c-note-edit textarea { width: 100%; min-height: 3.5em; box-sizing: border-box;
+        padding: 0.4em; border: 1px solid rgba(0,0,0,0.25); border-radius: 0.3em;
+        background: var(--md-default-bg-color, #fff); color: var(--md-default-fg-color, #222); }
+      .rn-c-note-edit button { margin-top: 0.3em; padding: 0.25em 0.8em; border-radius: 0.3em;
+        border: 1px solid #c79100; background: #ffce3a; color: #1a1400; cursor: pointer; }
+      .rn-c-rm { float: right; border: none; background: transparent; cursor: pointer;
         color: #b00; font-size: 0.9em; }
-      .rn-weekly-empty { opacity: 0.8; }
+      .rn-c-empty { opacity: 0.8; }
     `;
     const style = document.createElement("style");
     style.id = "rn-extras-style";
@@ -617,25 +817,16 @@
   }
 
   // ── lifecycle ────────────────────────────────────────────────────────────────
-  function syncPersonalMode() {
-    const params = new URLSearchParams(location.search);
-    if (params.has("me")) {
-      const v = params.get("me");
-      if (v === "0" || v === "off") lsDel(MODE_KEY);
-      else lsSet(MODE_KEY, "1");
-    }
-  }
-
   function refreshAllBadges() {
-    // Re-run badge attachment + weekly render after state changes (e.g. login).
+    // Re-run badge attachment + collection render after state changes (login).
     decoratePage();
-    renderWeekly();
+    renderCollection();
   }
 
   function decoratePage() {
     if (isDeepReadPage()) {
-      loadDeepReads().then((byId) => {
-        if (active()) addDeepReadPageBadge(byId);
+      Promise.all([loadDeepReads(), loadTopicLabels()]).then(([byId, labels]) => {
+        if (active()) addDeepReadPageBadge(byId, labels);
       });
       return;
     }
@@ -654,12 +845,11 @@
   }
 
   async function init() {
-    syncPersonalMode();
     ensureStyles();
     loadLocal();
     buildAccountUI();
     decoratePage();
-    renderWeekly();
+    renderCollection();
     // Bring in remote state (gist) once per session if signed in, then redraw.
     // Instant-navigation re-runs skip this to avoid clobbering pending edits.
     if (getToken() && !_synced) {

@@ -122,11 +122,11 @@ Discussion / reply / rejoinder / correction 类条目（如 JRSSB discussion iss
 - `docs/all_journals.md` / `docs/all_deep_reads.md` — 自动更新的期刊和精读存档页
 - 高相关论文 PDF 落 `data/highlights/<topic>/`（arxiv / JMLR 可下；付费期刊只记 manifest）
 
-## 账户与每周周报（网页端）
+## 账户与收藏（网页端）
 
 站点是纯静态的（GitHub Pages，无后端），但通过把状态存进你 GitHub 账号下的一个
-**私密 Gist**，实现了"登录账户 + 跨设备已读/未读 + 半自动周报"。全部逻辑在
-`docs/javascripts/extras.js`，无需任何服务器或第三方服务。
+**私密 Gist**，实现了"登录账户 + 跨设备已读/未读 + 半自动收藏"。全部逻辑在
+`docs/javascripts/extras.js`，无需任何服务器或第三方服务。需登录才会出现徽标与收藏按钮。
 
 **登录**：点页面右下角「👤 登录」，粘贴一个带 `gist` 权限的 GitHub Personal Access
 Token（classic）。Token 只存在你本机浏览器的 localStorage，首次登录会自动在你账号下
@@ -136,11 +136,15 @@ Token（classic）。Token 只存在你本机浏览器的 localStorage，首次�
 
 **已读 / 未读**：登录后每篇论文标题旁出现 `○ 未读` / `✓ 已读` 徽标，点击切换，跨设备同步。
 
-**收藏 → 周报**：每篇论文旁还有 **☆ 收藏** 按钮（精读页在大标题旁），点一下即把论文按当前
-ISO 周号加入「每周周报」页（`docs/weekly.md`），自动分组渲染，可逐条移除或一键复制为
-Markdown——不用再手动维护周报。
+**收藏**：每篇论文旁还有 **☆ 收藏** 按钮（精读页在大标题旁），点一下即把论文加入
+「收藏」页（`docs/favorites.md`），自动汇总——不用再手动维护周报。收藏页有两种视图：
 
-未登录时沿用旧的本地模式：浏览器访问任意页加 `?me=1` 开启徽标，状态仅存当前浏览器、不上传。
+- **总收藏**（默认）：按论文类别（沿用 `interests` 主题分类）分大类，类内按日期降序。
+- **按周**：按 ISO 周号分组，周内再按类别 / 日期。
+
+每篇收藏都能直接在网页上写 **评论 / 笔记**（点「✎ 评论」），随状态一起同步；
+还能一键「复制为 Markdown」。类别分组所需的主题分类表由管道写入
+`docs/data/topic_labels.json`。
 
 ## Shootout（评估工具）
 
