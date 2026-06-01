@@ -25,7 +25,10 @@ REPO_URL = "https://github.com/cxy0714/research-news"
 def _paper_block(p: Paper, n: int, heading_prefix: str = "####") -> str:
     authors = ", ".join(p.authors[:6]) + (" et al." if len(p.authors) > 6 else "")
     cats = " · ".join(p.categories) if p.categories else ""
-    head = f"{heading_prefix} {n}. [{p.paper_id}]({p.url}) — {p.title}"
+    links = f"[{p.paper_id}]({p.url})"
+    if p.arxiv_url:
+        links += f" · [arXiv]({p.arxiv_url})"
+    head = f"{heading_prefix} {n}. {links} — {p.title}"
     body = []
     body.append(f"- **作者**: {authors}")
     if p.venue:

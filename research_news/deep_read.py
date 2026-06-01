@@ -138,7 +138,12 @@ def _render_deep_read_page(
     lines += [
         f"**主题**: {topic_label}  ",
         f"**相关性**: {paper.score:.0f}/10  ",
-        f"**链接**: <{paper.url}>\n",
+    ]
+    if paper.arxiv_url:
+        lines.append(f"**链接**: [期刊页]({paper.url}) · [arXiv]({paper.arxiv_url})\n")
+    else:
+        lines.append(f"**链接**: <{paper.url}>\n")
+    lines += [
         "---\n",
         content if content else "*（精读失败，请查看日志）*",
         f"\n---\n\nMaintained by 陈星宇 · "
