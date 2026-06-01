@@ -17,10 +17,12 @@
 ## [Unreleased]
 
 ### Fixed
-- **arXiv 抓取 403 / RetryError**：`export.arxiv.org` 与 `rss.arxiv.org` 请求改为带描述性
-  User-Agent（arXiv 会拦截 httpx 默认 UA，表现为反复 403 → `RetryError[HTTPStatusError]`、
-  最终 0 篇）。同时给两个 fetch 的重试加 `reraise=True`，失败时日志直接显示真实状态码
-  （403/429/503）而非被 `RetryError` 吞掉。可用 `ARXIV_USER_AGENT` 覆盖（加联系邮箱）。
+- **arXiv 抓取 403 / 429 / RetryError**：`export.arxiv.org` 与 `rss.arxiv.org` 请求改为带
+  描述性 User-Agent（arXiv 会拦截 httpx 默认 UA，表现为反复 403），失败时日志直接显示真实
+  状态码而非被 `RetryError` 吞掉。并重写抓取重试：**请求间最小间隔 3 秒**（`ARXIV_MIN_INTERVAL`）、
+  遇 **429/503 时honor `Retry-After`**（无则 10/20/30…s 退避，封顶 120s）、超时单独退避。
+  这能避免突发请求触发 429、并从限流中自动恢复。可用 `ARXIV_USER_AGENT` / `ARXIV_MIN_INTERVAL`
+  / `ARXIV_FETCH_ATTEMPTS` 调。
 
 ### Added
 - **跨篇综合 / 选题引擎**：新增 `python -m research_news.synthesize`，把同一子方向近期的

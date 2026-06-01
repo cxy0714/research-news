@@ -12,6 +12,7 @@ from __future__ import annotations
 import logging
 import os
 import re
+import threading
 import time
 from datetime import date, datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
@@ -19,7 +20,6 @@ from xml.etree import ElementTree as ET
 
 import feedparser
 import httpx
-from tenacity import retry, stop_after_attempt, wait_exponential
 
 from ..models import Paper
 
@@ -36,6 +36,61 @@ _USER_AGENT = os.environ.get(
     "research-news/1.0 (+https://github.com/cxy0714/research-news)",
 )
 _HEADERS = {"User-Agent": _USER_AGENT}
+
+# arXiv asks for ~1 request / 3s; bursts get a 429 that can stick for a while.
+# Space every request out and honor Retry-After on 429/503.
+_MIN_INTERVAL = float(os.environ.get("ARXIV_MIN_INTERVAL", "3"))
+_FETCH_ATTEMPTS = int(os.environ.get("ARXIV_FETCH_ATTEMPTS", "4"))
+_last_request = [0.0]
+_throttle_lock = threading.Lock()
+
+
+def _throttle() -> None:
+    """Block until at least _MIN_INTERVAL has passed since the last request."""
+    with _throttle_lock:
+        wait = _MIN_INTERVAL - (time.monotonic() - _last_request[0])
+        if wait > 0:
+            time.sleep(wait)
+        _last_request[0] = time.monotonic()
+
+
+def _retry_after_seconds(resp: httpx.Response, attempt: int) -> float:
+    """Seconds to wait after a 429/503: honor Retry-After, else backoff."""
+    ra = resp.headers.get("Retry-After", "").strip()
+    if ra.isdigit():
+        return min(float(ra), 120)
+    return min(10.0 * (attempt + 1), 90.0)  # 10, 20, 30, ... capped
+
+
+def _fetch(url: str, *, params: dict | None = None, timeout: float = 40) -> str:
+    """GET with request spacing + Retry-After-aware retries on 429/503/timeout.
+
+    Raises the last httpx error if all attempts fail (status code visible in
+    the message). Other 4xx (400/403) raise immediately — no point hammering.
+    """
+    last_exc: Exception | None = None
+    for attempt in range(_FETCH_ATTEMPTS):
+        _throttle()
+        try:
+            with httpx.Client(timeout=timeout, follow_redirects=True, headers=_HEADERS) as c:
+                r = c.get(url, params=params)
+        except httpx.TimeoutException as e:
+            last_exc = e
+            time.sleep(min(5.0 * (attempt + 1), 30))
+            continue
+        if r.status_code in (429, 503):
+            delay = _retry_after_seconds(r, attempt)
+            log.info("arXiv %d; waiting %.0fs then retry (%d/%d)",
+                     r.status_code, delay, attempt + 1, _FETCH_ATTEMPTS)
+            last_exc = httpx.HTTPStatusError(
+                f"{r.status_code} from arXiv", request=r.request, response=r)
+            time.sleep(delay)
+            continue
+        r.raise_for_status()  # other 4xx/5xx → raise now
+        return r.text
+    if last_exc:
+        raise last_exc
+    raise RuntimeError("arXiv fetch failed with no exception captured")
 
 _ARXIV_ID_RE = re.compile(r"\b(\d{4}\.\d{4,6})(?:v\d+)?\b")
 _OLD_ARXIV_ID_RE = re.compile(r"\b([a-z\-]+(?:\.[A-Z]{2})?/\d{7})(?:v\d+)?\b")
@@ -54,12 +109,8 @@ def _extract_arxiv_id(text: str) -> str:
 
 # ── RSS path (today) ──────────────────────────────────────────────────────────
 
-@retry(stop=stop_after_attempt(4), wait=wait_exponential(multiplier=2, min=2, max=16), reraise=True)
 def _fetch_rss(url: str) -> str:
-    with httpx.Client(timeout=30, follow_redirects=True, headers=_HEADERS) as c:
-        r = c.get(url)
-        r.raise_for_status()
-        return r.text
+    return _fetch(url, timeout=30)
 
 
 def _is_cross_listed(entry) -> bool:
@@ -115,12 +166,8 @@ def fetch_rss(category: str, *, include_cross_listed: bool = False, max_results:
 
 # ── API path (historical) ─────────────────────────────────────────────────────
 
-@retry(stop=stop_after_attempt(4), wait=wait_exponential(multiplier=2, min=2, max=16), reraise=True)
 def _fetch_api(params: dict) -> str:
-    with httpx.Client(timeout=40, follow_redirects=True, headers=_HEADERS) as c:
-        r = c.get(API_BASE, params=params)
-        r.raise_for_status()
-        return r.text
+    return _fetch(API_BASE, params=params, timeout=40)
 
 
 def _date_window(for_date: date) -> tuple[str, str]:
