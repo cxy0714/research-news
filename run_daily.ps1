@@ -24,6 +24,9 @@ if (Test-Path $venvActivate) {
 # Run the pipeline.
 python -m research_news.daily
 
+# Re-run any garbled / truncated summaries in today's report.
+python -m research_news.rerun --date (Get-Date -Format "yyyy-MM-dd")
+
 # Commit and push if there are changes under docs/ or data/.
 $dirty = git status --porcelain docs/ data/
 if ($dirty) {

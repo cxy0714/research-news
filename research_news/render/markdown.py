@@ -19,6 +19,9 @@ WEEKLY_DIR = Path("docs/weekly")
 HOMEPAGE_URL = "https://cxy0714.github.io/"
 REPO_URL = "https://github.com/cxy0714/research-news"
 
+# Rendered when a paper's summary was salvaged from incomplete model output.
+RERUN_MARKER = "⚠️ *摘要不完整，待重跑（`python -m research_news.rerun`）*"
+
 
 # ── per-paper block ───────────────────────────────────────────────────────────
 
@@ -44,6 +47,10 @@ def _paper_block(p: Paper, n: int, heading_prefix: str = "####") -> str:
         body.append("- " + " · ".join(bits))
     if p.summary_zh:
         body.append(f"- **摘要**: {p.summary_zh}")
+    if p.summary_incomplete:
+        # Marker so `python -m research_news.rerun` can find papers whose summary
+        # was salvaged from truncated/garbled model output and re-generate them.
+        body.append(f"- {RERUN_MARKER}")
     if p.key_techniques:
         body.append("- **关键技术**: " + ", ".join(f"`{k}`" for k in p.key_techniques))
     if p.why_relevant:

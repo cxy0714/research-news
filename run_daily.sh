@@ -9,6 +9,10 @@ cd "$(dirname "$0")"
 
 python -m research_news.daily
 
+# Re-run any summaries that came out garbled / truncated. Uses the LLM for
+# blocks whose prose was cut off, and salvages clean prose for the rest.
+python -m research_news.rerun --date "$(date -I)"
+
 # Commit and push the new daily report.
 if [[ -n "$(git status --porcelain docs/)" ]]; then
   git add docs/ data/
