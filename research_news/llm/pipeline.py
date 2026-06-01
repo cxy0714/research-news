@@ -19,12 +19,23 @@ from .prompts import (
 )
 
 
-def _extract_json(text: str):
-    """Tolerant JSON extraction — strips code fences, finds first {...} or [...] block."""
+def _strip_code_fence(text: str) -> str:
+    """Drop a ```json … ``` fence (or a dangling ```json opener from truncated
+    output) so the bare JSON body can be repaired / parsed."""
     text = (text or "").strip()
     m = re.search(r"```(?:json)?\s*(.+?)```", text, flags=re.DOTALL)
     if m:
-        text = m.group(1).strip()
+        return m.group(1).strip()
+    # Truncated output keeps the opening fence but never reaches the closer.
+    m = re.match(r"```(?:json)?\s*", text)
+    if m:
+        return text[m.end():].strip()
+    return text
+
+
+def _extract_json(text: str):
+    """Tolerant JSON extraction — strips code fences, finds first {...} or [...] block."""
+    text = _strip_code_fence(text)
     try:
         return json.loads(text)
     except json.JSONDecodeError:
@@ -217,6 +228,73 @@ def _try_repair_truncated_json(text: str) -> str:
     return text
 
 
+# Field names the rich-summary prompt emits, used as anchors when salvaging
+# prose from JSON the model failed to escape / finish properly.
+_SUMMARY_KEYS = ("topic", "summary_zh", "key_techniques", "why_relevant", "novelty_flag")
+
+
+def summary_looks_garbled(text: str | None) -> bool:
+    """True when `text` is a raw JSON blob that leaked into a summary field
+    instead of clean prose — i.e. the parse fell back to dumping the model
+    output. Used both to flag papers at summarize time and to find blocks worth
+    re-running in already-rendered reports."""
+    t = (text or "").strip()
+    if not t:
+        return False
+    if t.startswith("```") or '```json' in t:
+        return True
+    # A bare JSON object whose first key is one of the schema fields.
+    if t.startswith("{") and re.search(r'"(?:%s)"\s*:' % "|".join(_SUMMARY_KEYS), t):
+        return True
+    return False
+
+
+def salvage_summary_fields(raw: str) -> dict:
+    """Best-effort recovery of summary fields from malformed/truncated JSON.
+
+    The model frequently emits unescaped inner quotes (e.g. a Chinese phrase in
+    "smart quotes") or gets cut off mid-array, so strict json.loads fails. We
+    anchor on the known field names instead: a value runs until the closing
+    quote that precedes the next field name (or the end of the object). Only
+    fully-formed values are returned — a half-written summary_zh is dropped so
+    callers can decide to re-run rather than render a fragment."""
+    body = _strip_code_fence(raw)
+    out: dict = {}
+
+    # topic / novelty_flag: simple quoted scalars.
+    for key in ("topic", "novelty_flag"):
+        m = re.search(rf'"{key}"\s*:\s*"([^"]*)"', body)
+        if m:
+            out[key] = m.group(1).strip()
+
+    # summary_zh / why_relevant: prose that may contain stray quotes. Capture up
+    # to the closing `",` (or `"}`) that is immediately followed by a known key
+    # or the end of the object, so embedded quotes don't end the match early.
+    next_key = r'(?:%s)' % "|".join(_SUMMARY_KEYS)
+    for key in ("summary_zh", "why_relevant"):
+        m = re.search(
+            rf'"{key}"\s*:\s*"(.*?)"\s*,\s*"{next_key}"\s*:', body, flags=re.DOTALL
+        )
+        if not m:
+            m = re.search(rf'"{key}"\s*:\s*"(.*?)"\s*\}}', body, flags=re.DOTALL)
+        if m:
+            out[key] = m.group(1).strip()
+
+    # key_techniques: pull every complete quoted item, even if the array was cut
+    # off before its closing bracket.
+    m = re.search(r'"key_techniques"\s*:\s*\[(.*)', body, flags=re.DOTALL)
+    if m:
+        arr = m.group(1)
+        end = arr.find("]")
+        if end != -1:
+            arr = arr[:end]
+        items = re.findall(r'"([^"]*)"', arr)
+        if items:
+            out["key_techniques"] = [s.strip() for s in items]
+
+    return out
+
+
 def summarize_paper(
     client: SJTUClient,
     paper: Paper,
@@ -250,30 +328,49 @@ def summarize_paper(
             max_tokens=max_tokens,
         )
 
+    def _parse(text: str) -> dict | None:
+        """Strict parse, then truncation-repair (fence stripped first), as a dict."""
+        try:
+            p = _extract_json(text)
+            return p if isinstance(p, dict) else None
+        except Exception:
+            pass
+        try:
+            p = _extract_json(_try_repair_truncated_json(_strip_code_fence(text)))
+            if isinstance(p, dict):
+                log.info("summary recovered via JSON repair for %s", paper.paper_id)
+                return p
+        except Exception:
+            pass
+        return None
+
     # First attempt: generous budget. Rich prompt typically outputs ~1500-2500
     # tokens. 1500 was truncating the JSON mid-array for ~half of AoS papers.
     raw = _call(max_tokens=3000)
-    parsed: dict | None = None
-    try:
-        parsed = _extract_json(raw)
-    except Exception:
-        # Retry once: try truncation-repair, then if still bad, ask again.
-        repaired = _try_repair_truncated_json(raw)
+    parsed = _parse(raw)
+    if parsed is None:
+        # Retry once with a larger budget — the usual failure is the JSON array
+        # getting cut off by max_tokens.
+        log.warning("summary parse failed for %s, retrying LLM call", paper.paper_id)
         try:
-            parsed = _extract_json(repaired)
-            log.info("summary recovered via JSON repair for %s", paper.paper_id)
-        except Exception:
-            log.warning("summary parse failed for %s, retrying LLM call",
-                        paper.paper_id)
-            try:
-                raw = _call(max_tokens=3500)
-                parsed = _extract_json(raw)
-            except Exception as e:
-                log.warning("summary retry also failed for %s: %s", paper.paper_id, e)
+            raw = _call(max_tokens=3500)
+            parsed = _parse(raw)
+        except Exception as e:
+            log.warning("summary retry also failed for %s: %s", paper.paper_id, e)
 
-    if not isinstance(parsed, dict):
-        parsed = {"summary_zh": raw.strip()[:600]}   # cap so a raw blob doesn't
-                                                       # pollute the rendered page
+    paper.summary_incomplete = False
+    if parsed is None:
+        # Last resort: salvage whatever clean fields we can from the raw blob
+        # (handles unescaped inner quotes the repair can't). Flag the paper as
+        # incomplete so it can be picked up by `python -m research_news.rerun`.
+        parsed = salvage_summary_fields(raw)
+        paper.summary_incomplete = True
+        if parsed.get("summary_zh"):
+            log.warning("summary salvaged (incomplete) for %s — flagged for rerun",
+                        paper.paper_id)
+        else:
+            log.warning("summary unrecoverable for %s — flagged for rerun",
+                        paper.paper_id)
 
     paper.summary_zh = (parsed.get("summary_zh") or "").strip()
     paper.why_relevant = (parsed.get("why_relevant") or "").strip()

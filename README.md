@@ -58,6 +58,31 @@ python -m research_news.daily --lookback-days 3   # 周一补周五的
 $env:DAILY_MODEL="deepseek-chat"; python -m research_news.daily
 ```
 
+### 重跑乱码 / 没跑完的摘要
+
+LLM 偶尔会输出未转义的引号或在 `max_tokens` 处截断，导致某篇论文的「摘要」里
+渲染出一段生 JSON（页面上能看到 ```` ```json ````）。这类「没跑完」的块可以
+事后重跑修复，无需重跑整个管道：
+
+```powershell
+# 扫描所有 docs/daily/*.md，修复乱码块（缺摘要的用 LLM 重新生成）
+python -m research_news.rerun
+
+# 只处理某一天
+python -m research_news.rerun --date 2026-06-01
+
+# 离线模式：不调 LLM，只从页面里已有的残缺 JSON 抢救出干净正文
+python -m research_news.rerun --offline
+
+# 只看会改哪些、不落盘
+python -m research_news.rerun --dry-run
+```
+
+修复优先用 LLM 重新生成（论文元数据从 `data/llm_scores.jsonl` 还原）；当正文本身
+没被截断时，也能直接从页面残留的 JSON 里抢救出完整中文摘要（无需 API）。正文被
+拦腰截断、又没有可用 LLM 的块会被原样保留并在日志里标出，等有 `SJTU_API_KEY`
+时再重跑。`run_daily.*` 已在每次日跑后自动执行一次。
+
 输出：
 - `docs/daily/<日期>.md` — 当日速览报告，按主题分组（因果推断 / 高维 RMT / 非参 / 效率理论 / ...）
 - `docs/deep_reads/<日期>-<paper_id>.md` — 每篇高相关论文（score ≥ 8）的独立精读页
