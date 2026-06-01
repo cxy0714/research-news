@@ -4,6 +4,8 @@
 
 ### Daily
 
+- [Modeling Covariate Transition for Efficient Estimation of Longitudinal Treatment Effects in Randomized Experiments](deep_reads/2026-06-01-2605.31443.md)  
+  8/10 [daily]
 - [Identification and Inference for Structural Accelerated Failure Time Models via Instrument Interactions](deep_reads/2026-05-29-2605.28341.md)  
   9/10 [daily]
 - [IV regression with distribution-valued outcomes](deep_reads/2026-05-29-2605.28749.md)  
@@ -221,6 +223,8 @@
 
 ### Daily
 
+- [Rectified Linear Unit Regression](deep_reads/2026-06-01-2605.30609.md)  
+  8/10 [daily]
 - [Bernstein-von Mises Theorem for Sparse Generalized Linear Model](deep_reads/2026-05-27-2605.27137.md)  
   8/10 [daily]
 - [Identification and Estimation of Semiparametric Multilayered Sample Selection Models](deep_reads/2026-05-26-2605.25519.md)  
@@ -291,6 +295,10 @@
 
 ### Daily
 
+- [Sharp minimax risks and phase transitions in sparse submatrix detection](deep_reads/2026-06-01-2605.31583.md)  
+  9/10 [daily]
+- [The Nonparametric Kiefer-Weiss Problem](deep_reads/2026-06-01-2605.31465.md)  
+  8/10 [daily]
 - [Rank-Based Tests for Mutual Independence of High-Dimensional Random Vectors via $L_q$ Norm](deep_reads/2026-05-26-2605.25380.md)  
   9/10 [daily]
 - [Adaptable High-Dimensional Change Point Detection via Ridge Regularization](deep_reads/2026-05-26-2605.24838.md)  
@@ -384,6 +392,10 @@
 
 ### Daily
 
+- [Refining the Gaia DR3 Parallax Zero-point: A Hybrid Approach Combining Global Parametric Correction with Local Refinement](deep_reads/2026-06-01-2605.31402.md)  
+  8/10 [daily]
+- [Choosing the right MCMC sampler: a systematic benchmark of gradient-free methods](deep_reads/2026-06-01-2605.30412.md)  
+  7/10 [daily]
 - [Probabilistic Data-Driven Modelling of Astrophysical Transients: The Neural Process Family for Ultrafast and Class-Agnostic Light Curve Reconstruction with NightLANP](deep_reads/2026-05-29-2605.27527.md)  
   8/10 [daily]
 - [VROOM-SBI: A Fast Simulation-Based Bayesian Inference Methodology for QU-Fitting](deep_reads/2026-05-29-2605.27538.md)  
@@ -410,6 +422,8 @@
 
 ### Daily
 
+- [Debiased inference for stochastic treatment interventions with survival outcomes](deep_reads/2026-06-01-2605.31130.md)  
+  9/10 [daily]
 - [The 'Right' Extension of Type-I Error to Data-Dependent Levels](deep_reads/2026-05-29-2605.28429.md)  
   8/10 [daily]
 - [Modified treatment policies that depend on the natural history of treatment](deep_reads/2026-05-26-2605.24167.md)  

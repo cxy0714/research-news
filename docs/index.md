@@ -10,36 +10,28 @@
 - **[每周周报](all_weekly.md)** — 维护者手动挑选的当周备忘，按兴趣分组，每篇一两句评论。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-05-29
+## 今日 · 2026-06-01
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-05-29.md)
+[→ 查看完整报告](daily/2026-06-01.md)
 
-### 精读论文（11 篇）
+### 精读论文（7 篇）
 
-- [Identification and Inference for Structural Accelerated Failure Time Models via Instrument Interactions](deep_reads/2026-05-29-2605.28341.md)  
-  `因果推断` · 相关性 9/10
-- [IV regression with distribution-valued outcomes](deep_reads/2026-05-29-2605.28749.md)  
-  `因果推断` · 相关性 9/10
-- [Implementing the principal stratum strategy for intercurrent events with survival outcomes: a tutorial](deep_reads/2026-05-29-2605.27655.md)  
+- [Debiased inference for stochastic treatment interventions with survival outcomes](deep_reads/2026-06-01-2605.31130.md)  
+  `其他` · 相关性 9/10
+- [Sharp minimax risks and phase transitions in sparse submatrix detection](deep_reads/2026-06-01-2605.31583.md)  
+  `数理统计 / 假设检验` · 相关性 9/10
+- [Modeling Covariate Transition for Efficient Estimation of Longitudinal Treatment Effects in Randomized Experiments](deep_reads/2026-06-01-2605.31443.md)  
   `因果推断` · 相关性 8/10
-- [Identifying Direct Causal Effects in Latent Factor Models by Accounting for Unidentified Parents](deep_reads/2026-05-29-2605.28105.md)  
-  `因果推断` · 相关性 8/10
-- [Beyond Exchangeability: Distribution-Shift-Aware Integration of External Control Data in Randomized Trials](deep_reads/2026-05-29-2605.28785.md)  
-  `因果推断` · 相关性 8/10
-- [The 'Right' Extension of Type-I Error to Data-Dependent Levels](deep_reads/2026-05-29-2605.28429.md)  
-  `其他` · 相关性 8/10
-- [Deep Neural Networks for Doubly Robust Estimation with Nonprobability Survey Samples](deep_reads/2026-05-29-2605.28762.md)  
-  `因果推断` · 相关性 8/10
-- [Probabilistic Data-Driven Modelling of Astrophysical Transients: The Neural Process Family for Ultrafast and Class-Agnostic Light Curve Reconstruction with NightLANP](deep_reads/2026-05-29-2605.27527.md)  
+- [The Nonparametric Kiefer-Weiss Problem](deep_reads/2026-06-01-2605.31465.md)  
+  `数理统计 / 假设检验` · 相关性 8/10
+- [Rectified Linear Unit Regression](deep_reads/2026-06-01-2605.30609.md)  
+  `非参数 / 半参数` · 相关性 8/10
+- [Refining the Gaia DR3 Parallax Zero-point: A Hybrid Approach Combining Global Parametric Correction with Local Refinement](deep_reads/2026-06-01-2605.31402.md)  
   `天体统计` · 相关性 8/10
-- [VROOM-SBI: A Fast Simulation-Based Bayesian Inference Methodology for QU-Fitting](deep_reads/2026-05-29-2605.27538.md)  
-  `天体统计` · 相关性 8/10
-- [A Semi-Supervised Variational Autoencoder for Generating Neutron Star Equations of State](deep_reads/2026-05-29-2605.27562.md)  
+- [Choosing the right MCMC sampler: a systematic benchmark of gradient-free methods](deep_reads/2026-06-01-2605.30412.md)  
   `天体统计` · 相关性 7/10
-- [Unsupervised Morphological Characterization of Gravitational-Wave Glitches in LIGO O4a Using Frozen DINOv2 Features](deep_reads/2026-05-29-2605.28572.md)  
-  `天体统计` · 相关性 6/10
 
 ## 最新周报
 
@@ -47,11 +39,11 @@
 
 ## 本周每日报告
 
+- [2026-05-29](daily/2026-05-29.md)
 - [2026-05-28](daily/2026-05-28.md)
 - [2026-05-27](daily/2026-05-27.md)
 - [2026-05-26](daily/2026-05-26.md)
 - [2026-05-25](daily/2026-05-25.md)
-- [2026-05-22](daily/2026-05-22.md)
 
 
 ---
