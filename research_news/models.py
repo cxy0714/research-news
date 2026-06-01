@@ -20,6 +20,11 @@ class Paper:
     categories: list[str] = field(default_factory=list)
     published: str | None = None   # ISO date string
     venue: str | None = None
+    # Author affiliation strings, when available (crossref / arXiv / OpenAlex).
+    affiliations: list[str] = field(default_factory=list)
+    # Set when an author is at a whitelisted (US News top-50) institution: the
+    # matched institution name. Such papers are deep-read regardless of score.
+    green_light_institution: str | None = None
     # Filled in by the LLM step:
     score: float | None = None
     score_reason: str | None = None

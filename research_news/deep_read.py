@@ -18,6 +18,7 @@ from pypdf import PdfReader
 from .llm.prompts import DEEP_READ_ASTRO_SYSTEM, DEEP_READ_SYSTEM, TOPIC_LABELS_ZH
 from .llm.sjtu_client import SJTUClient
 from .models import Paper
+from .scrapers import affiliations as affil
 from .scrapers import references as refs
 
 log = logging.getLogger(__name__)
@@ -32,10 +33,10 @@ MAX_PDF_CHARS = 240_000
 # How much room the structured 4-section deep read needs.
 DEEP_READ_MAX_TOKENS = 24_000
 
-# Opt-in: fetch the abstracts of the paper's key cited works (Semantic Scholar)
-# and feed them in so the deep read can survey the direction, not just this one
-# paper. Off by default — flip DEEP_READ_FETCH_REFS=1 once S2 is reachable.
-FETCH_REFS = os.environ.get("DEEP_READ_FETCH_REFS", "").strip().lower() in ("1", "true", "yes")
+# Fetch the abstracts of the paper's key cited works (Semantic Scholar) and feed
+# them in so the deep read can survey the direction, not just this one paper.
+# On by default; set DEEP_READ_FETCH_REFS=0 to disable. Fails open (no refs).
+FETCH_REFS = os.environ.get("DEEP_READ_FETCH_REFS", "1").strip().lower() not in ("0", "false", "no", "")
 
 HOMEPAGE_URL = "https://cxy0714.github.io/"
 REPO_URL = "https://github.com/cxy0714/research-news"
@@ -142,6 +143,62 @@ def deep_read_paper(
         return ""
 
 
+def select_deep_read_papers(
+    all_scored: list[Paper],
+    digest_papers: list[Paper],
+    th_deepread: float,
+    *,
+    client: SJTUClient,
+    interests_yaml: str,
+    model: str | None = None,
+) -> list[Paper]:
+    """Choose which papers get a deep read.
+
+    Union of two rules:
+      1. score >= th_deepread, for ALL topics (the gate is loose on purpose —
+         scoring only sees the abstract);
+      2. an author at a whitelisted institution (config/institutions.yaml,
+         US News top-50) — green-lit regardless of score.
+
+    Green-lit papers that never got a first-pass summary (they were below the
+    digest threshold) are summarized here so the deep read has topic + context.
+    """
+    from .llm.pipeline import summarize_paper  # local import avoids import cycle
+
+    selected: list[Paper] = []
+    seen: set[str] = set()
+
+    def _add(p: Paper) -> None:
+        if p.paper_id not in seen:
+            seen.add(p.paper_id)
+            selected.append(p)
+
+    for p in digest_papers:
+        if (p.score or 0) >= th_deepread:
+            _add(p)
+
+    if affil.greenlight_enabled():
+        n_green = 0
+        for p in all_scored:
+            inst = affil.green_light(p)
+            if inst:
+                p.green_light_institution = inst
+                if p.paper_id not in seen:
+                    n_green += 1
+                _add(p)
+        if n_green:
+            log.info("institution green-light promoted %d extra paper(s)", n_green)
+
+    for p in selected:
+        if not p.summary_zh:
+            try:
+                summarize_paper(client, p, interests_yaml, model=model)
+            except Exception as e:  # noqa: BLE001
+                log.warning("first-pass summary failed for %s: %s", p.paper_id, e)
+
+    return selected
+
+
 def _render_deep_read_page(
     paper: Paper,
     content: str,
@@ -164,6 +221,8 @@ def _render_deep_read_page(
         f"**主题**: {topic_label}  ",
         f"**相关性**: {paper.score:.0f}/10  ",
     ]
+    if paper.green_light_institution:
+        lines.append(f"**机构绿灯**: {paper.green_light_institution}（US News 前 50，免分进入精读）  ")
     if paper.arxiv_url:
         lines.append(f"**链接**: [期刊页]({paper.url}) · [arXiv]({paper.arxiv_url})\n")
     else:

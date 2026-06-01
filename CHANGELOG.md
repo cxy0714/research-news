@@ -26,12 +26,21 @@
   （不给论文打分），把判断材料交回研究者。
 - **放宽精读上下文预算**：`MAX_PDF_CHARS` 60k → 240k（≈60k tokens，喂进几乎整篇含完整
   参考文献），精读输出 `max_tokens` 16k → 24k，以用满 128k 上下文窗口。
+- **精读门槛对所有领域统一放宽到 6**：评分只看摘要，故 deep-read 门槛从"primary 需 ≥8、
+  少数 topic ≥6"统一改为**所有 topic ≥ `score_threshold_deepread`（默认 6）**；并放宽
+  `SCORE_SYSTEM` 的打分标准（拿不准就往 6-7 靠，避免漏掉相关论文）。原先按 topic 分桶的
+  deep-read 选择逻辑（`DEEP_READ_LOWER_THRESHOLD_TOPICS`、application≥7）由统一阈值取代。
 
 ### Added
-- **精读可选检索核心被引文献**：新增 `research_news/scrapers/references.py`，通过
+- **机构绿灯：top-50 学者免分进入精读**：新增 `config/institutions.yaml`（US News 2024
+  全美大学前 50）+ `research_news/scrapers/affiliations.py`。任一作者属于名单内机构的论文，
+  **无视相关性分数**直接进入深度阅读（仍会先生成首遍摘要），精读页标注「机构绿灯」。作者机构
+  在 arXiv/Crossref 元数据里很稀疏，故运行时按 arXiv id / DOI 从 **OpenAlex** 回填机构信息。
+  默认开启、失败即降级，`AFFIL_GREENLIGHT=0` 关闭，`OPENALEX_MAILTO` 走 OpenAlex 礼貌池。
+- **精读检索核心被引文献（现默认开启）**：`research_news/scrapers/references.py` 通过
   Semantic Scholar 拉取本文 introduction 真正依赖的核心被引论文的标题 + 摘要 + 引用语境，
-  作为「## 主要被引论文（已检索）」喂进精读，让综述基于实际引用而非标题猜测。默认关闭、
-  失败即降级（仅用 PDF），用 `DEEP_READ_FETCH_REFS=1` 开启（需 S2 可达）。
+  作为「## 主要被引论文（已检索）」喂进精读，让综述基于实际引用而非标题猜测。失败即降级
+  （仅用 PDF），`DEEP_READ_FETCH_REFS=0` 关闭。
 - **重跑乱码 / 没跑完的摘要**：新增 `python -m research_news.rerun`，扫描
   `docs/daily/*.md` **和 `docs/journals/*.md`** 里因模型输出未转义引号或
   `max_tokens` 截断而渲染成生 JSON（含 ```` ```json ````）的「摘要」块并就地修复——

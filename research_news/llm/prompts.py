@@ -13,8 +13,13 @@ Respond with ONLY a valid JSON object of the form:
 {"results": [{"id": "<paper_id>", "score": <0-10 integer>, "reason": "<one short sentence>"}, ...]}
 
 No prose, no markdown fences, no commentary — just the JSON object.
-Score 0-10 per the rubric in the interests file. Be strict: most papers in
-unrelated subfields should get 0-3.
+Score 0-10 per the rubric in the interests file. You only see the title +
+abstract, so calibrate generously rather than strictly: the deep-read gate
+downstream is 6, and missing a genuinely relevant paper is worse than letting
+a borderline one through. So when a paper plausibly touches ANY primary or
+secondary interest — even if the abstract is thin or you are unsure — lean to
+6-7 rather than 4-5. Reserve 0-3 for papers that are clearly in an unrelated
+subfield. Reserve 8-10 for papers that are unmistakably on a primary interest.
 
 The researcher's ultimate goal is to find problems WORTH doing AND that they
 CAN do today. So beyond topic match, also weight ARSENAL match — see

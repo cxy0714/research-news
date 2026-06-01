@@ -25,10 +25,9 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 from .dedup import filter_new, load_seen, mark_seen, save_seen
-from .deep_read import generate_deep_read_report
+from .deep_read import generate_deep_read_report, select_deep_read_papers
 from .highlights import save_highlights
 from .llm.pipeline import score_papers, summarize_paper
-from .llm.prompts import DEEP_READ_LOWER_THRESHOLD_TOPICS
 from .llm.sjtu_client import SJTUClient
 from .models import Paper
 from .render.markdown import render_journal_page, update_index
@@ -245,9 +244,9 @@ def run(only: list[str] | None = None, dry_run: bool = False,
 
     # Highlight = score >= threshold from interests.yaml
     import yaml as _yaml
-    th_highlight = float(
-        _yaml.safe_load(interests_text).get("score_threshold_highlight", 8)
-    )
+    _icfg = _yaml.safe_load(interests_text)
+    th_highlight = float(_icfg.get("score_threshold_highlight", 8))
+    th_deepread = float(_icfg.get("score_threshold_deepread", 6))
     high = [p for p in papers if (p.score or 0) >= th_highlight]
 
     today = date.today()
@@ -271,15 +270,12 @@ def run(only: list[str] | None = None, dry_run: bool = False,
         out = render_journal_page(vps, short, venue, vol=vol, iss=iss, when=today)
         out_paths.append(out)
 
-    non_high = [p for p in papers if (p.score or 0) < th_highlight]
-    # Same two-bucket fallback as daily.py: lower-threshold topics
-    # (secondary interests + stat_computing) at score>=6, plus real-data
-    # application papers at score>=7.
-    deep_read_papers = list(high) + [
-        p for p in non_high
-        if ((p.topic or "other") in DEEP_READ_LOWER_THRESHOLD_TOPICS and (p.score or 0) >= 6)
-        or (p.novelty_flag == "application" and (p.score or 0) >= 7)
-    ]
+    # Deep-read: score >= th_deepread (6) for ALL topics, plus any paper with a
+    # top-50-institution author (green-lit regardless of score).
+    deep_read_papers = select_deep_read_papers(
+        papers, papers, th_deepread,
+        client=client, interests_yaml=interests_text, model=JOURNALS_MODEL,
+    )
 
     if deep_read_papers and not skip_pdf:
         log.info("saving %d journal highlights (PDF + manifest)", len(deep_read_papers))

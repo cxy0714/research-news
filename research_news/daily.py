@@ -10,14 +10,14 @@ import yaml
 from dotenv import load_dotenv
 
 from .dedup import filter_new, load_seen, mark_seen, save_seen
-from .deep_read import generate_deep_read_report
+from .deep_read import generate_deep_read_report, select_deep_read_papers
 from .highlights import save_highlights
 from .llm.pipeline import extract_events, score_papers, summarize_paper
-from .llm.prompts import DEEP_READ_LOWER_THRESHOLD_TOPICS
 from .llm.sjtu_client import SJTUClient
 from .models import Event, Paper
 from .render.markdown import render_daily, update_index
 from .score_log import append_scored as append_score_log
+from .scrapers import affiliations as affil
 from .scrapers import arxiv as arxiv_scraper
 from .scrapers import authors as authors_scraper
 from .scrapers import conferences as conf_scraper
@@ -61,18 +61,19 @@ def _collect_events(client: SJTUClient, sources_cfg: dict) -> list[Event]:
     return events
 
 
-def _parse_thresholds(interests_text: str) -> tuple[float, float]:
+def _parse_thresholds(interests_text: str) -> tuple[float, float, float]:
     cfg = yaml.safe_load(interests_text)
     return (
         float(cfg.get("score_threshold_show", 4)),
         float(cfg.get("score_threshold_highlight", 8)),
+        float(cfg.get("score_threshold_deepread", 6)),
     )
 
 
 def run(dry_run: bool = False, for_date: date | None = None) -> Path:
     load_dotenv()
     sources_cfg, interests_text = _load_config()
-    th_show, th_highlight = _parse_thresholds(interests_text)
+    th_show, th_highlight, th_deepread = _parse_thresholds(interests_text)
 
     report_date = for_date or date.today()
     log.info("collecting papers for %s ...", report_date)
@@ -89,6 +90,7 @@ def run(dry_run: bool = False, for_date: date | None = None) -> Path:
 
     client = SJTUClient()
 
+    all_scored: list[Paper] = []
     if papers:
         log.info("scoring papers (model=%s) ...", DAILY_MODEL)
         scores = score_papers(client, papers, interests_text, model=DAILY_MODEL)
@@ -137,18 +139,12 @@ def run(dry_run: bool = False, for_date: date | None = None) -> Path:
 
     out_path = render_daily(high, mid, events, when=report_date)
 
-    # Deep-read candidates: primary-interest papers above th_highlight (8),
-    # plus two secondary buckets from below the threshold:
-    #   - lower-threshold topics (secondary interests + stat_computing, where
-    #     the researcher is an outsider on the statistical-computational
-    #     tradeoff side) at score >= 6
-    #   - real-data application papers at score >= 7 (their analysis pipelines
-    #     and datasets are themselves worth a deep read)
-    deep_read_papers = list(high) + [
-        p for p in mid
-        if ((p.topic or "other") in DEEP_READ_LOWER_THRESHOLD_TOPICS and (p.score or 0) >= 6)
-        or (p.novelty_flag == "application" and (p.score or 0) >= 7)
-    ]
+    # Deep-read candidates: score >= th_deepread (6) for ALL topics, plus any
+    # paper with a top-50-institution author (green-lit regardless of score).
+    deep_read_papers = select_deep_read_papers(
+        all_scored, papers, th_deepread,
+        client=client, interests_yaml=interests_text, model=DAILY_MODEL,
+    )
 
     # Persist high-relevance papers: download PDFs, deep-read, then update index.
     # update_index() is called last so the homepage includes today's deep reads.
