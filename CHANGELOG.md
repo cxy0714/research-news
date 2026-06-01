@@ -18,12 +18,14 @@
 
 ### Added
 - **重跑乱码 / 没跑完的摘要**：新增 `python -m research_news.rerun`，扫描
-  `docs/daily/*.md` 里因模型输出未转义引号或 `max_tokens` 截断而渲染成生 JSON
-  （含 ```` ```json ````）的「摘要」块并就地修复——优先用 LLM 重新生成（论文元数据
-  从 `data/llm_scores.jsonl` 还原），正文未被截断时也能离线从残留 JSON 抢救出干净
-  中文摘要。支持 `--date` / `--offline` / `--dry-run`，并已接入 `run_daily.*` 的日跑
-  收尾步骤。同时修复了 `summarize_paper` 的 JSON 修复在带 ```` ```json ```` 围栏时
-  失效、以及解析失败时把生 JSON 直接灌进摘要的问题（改为抢救干净正文并标记待重跑）。
+  `docs/daily/*.md` **和 `docs/journals/*.md`** 里因模型输出未转义引号或
+  `max_tokens` 截断而渲染成生 JSON（含 ```` ```json ````）的「摘要」块并就地修复——
+  优先用 LLM 重新生成（论文元数据从 `data/llm_scores.jsonl` 还原，沿用当初打分用的
+  模型），正文未被截断时也能离线从残留 JSON 抢救出干净中文摘要。支持
+  `--scope daily|journals|all` / `--date` / `--offline` / `--dry-run`，并已接入
+  `run_daily.*` 的日跑收尾步骤。同时修复了 `summarize_paper` 的 JSON 修复在带
+  ```` ```json ```` 围栏时失效、以及解析失败时把生 JSON 直接灌进摘要的问题
+  （改为抢救干净正文并标记待重跑）。一次性清理了既有报告中 40 处乱码块。
 - **账户 + 半自动收藏**：站点新增右下角「👤 登录」。用一个带 `gist` 权限的 GitHub
   Personal Access Token 登录后，已读 / 未读状态与「收藏」会存进你账号下的一个私密
   Gist，多设备同步。需登录才显示徽标与收藏按钮（不再有 `?me=1` 本地模式）。

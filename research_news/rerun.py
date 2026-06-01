@@ -1,10 +1,12 @@
-"""Re-run the summary step for daily-report papers that came out garbled.
+"""Re-run the summary step for daily / journal report papers that came out garbled.
 
-The daily pipeline occasionally renders a raw or cut-off JSON blob into a
-paper's 摘要 — this happens when the model emits unescaped inner quotes or hits
-``max_tokens`` mid-output, so the JSON can't be parsed and the fallback leaks
-the raw text into the page (see ``docs/daily/*.md`` blocks containing
-``\`\`\`json``). This tool finds those blocks and regenerates them in place:
+The daily and journal pipelines occasionally render a raw or cut-off JSON blob
+into a paper's 摘要 — this happens when the model emits unescaped inner quotes or
+hits ``max_tokens`` mid-output, so the JSON can't be parsed and the fallback
+leaks the raw text into the page (blocks under ``docs/daily/*.md`` or
+``docs/journals/*.md`` containing ``\`\`\`json``). This tool finds those blocks
+and regenerates them in place (both report types share the same renderer and
+log their papers to ``data/llm_scores.jsonl``):
 
   1. **LLM re-run** (best quality; needs ``SJTU_API_KEY``): paper metadata is
      reconstructed from ``data/llm_scores.jsonl`` and the summary is generated
@@ -20,8 +22,9 @@ when no working LLM is available.
 
 Usage::
 
-    python -m research_news.rerun                  # scan every daily report
-    python -m research_news.rerun --date 2026-06-01
+    python -m research_news.rerun                  # every daily + journal report
+    python -m research_news.rerun --scope journals  # only journal pages
+    python -m research_news.rerun --date 2026-05-26 # reports for one date
     python -m research_news.rerun --offline         # salvage only, no API calls
     python -m research_news.rerun --dry-run         # report findings, write nothing
 """
@@ -39,14 +42,17 @@ from dotenv import load_dotenv
 from .llm.pipeline import salvage_summary_fields, summary_looks_garbled, summarize_paper
 from .llm.prompts import TOPICS
 from .models import Paper
-from .render.markdown import DOCS_DIR, RERUN_MARKER, _paper_block
+from .render.markdown import DOCS_DIR, JOURNALS_DIR, RERUN_MARKER, _paper_block
 from .score_log import SCORE_LOG_FILE
 
 log = logging.getLogger("research_news.rerun")
 
+# Paper headings are rendered with 3 hashes on journal pages (### N. …) and 4 on
+# daily pages (#### N. …); accept either so both are covered.
 _HEADING_RE = re.compile(
-    r"^(#{4,6}) (\d+)\. \[([^\]]+)\]\(([^)]+)\) (?:—|-) (.*)$"
+    r"^(#{3,6}) (\d+)\. \[([^\]]+)\]\(([^)]+)\) (?:—|-) (.*)$"
 )
+_DATE_PREFIX_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})")
 _BOUNDARY_RE = re.compile(r"^(#|---\s*$)")
 _LEAKED_JSON_RE = re.compile(
     r'^\s*"(?:topic|summary_zh|key_techniques|why_relevant|novelty_flag)"\s*:',
@@ -192,13 +198,18 @@ def _regenerate_block(
     prefix, n, pid = heading.group(1), int(heading.group(2)), heading.group(3)
 
     rows = score_index.get(pid)
-    paper = _paper_from_row(_pick_row(rows, report_date)) if rows else None
+    row = _pick_row(rows, report_date) if rows else None
+    paper = _paper_from_row(row) if row else None
 
-    # 1) LLM re-run — needs the abstract from the score log.
+    # 1) LLM re-run — needs the abstract from the score log. Re-run with the same
+    # model that originally scored the paper (daily and journals differ), unless
+    # the caller forced one via --model.
     if not offline and client is not None and paper is not None and paper.abstract:
+        eff_model = model or (row.get("model") if row else None) \
+            or os.environ.get("DAILY_MODEL", "glm-5.1")
         try:
             _carry_over_from_block(paper, block_text)
-            summarize_paper(client, paper, interests_text, model=model)
+            summarize_paper(client, paper, interests_text, model=eff_model)
             if paper.summary_zh and not summary_looks_garbled(paper.summary_zh):
                 how = "incomplete-but-recovered" if paper.summary_incomplete else "ok"
                 log.info("re-ran %s via LLM (%s)", pid, how)
@@ -238,7 +249,9 @@ def rerun_file(
     """Repair garbled blocks in one daily report.
 
     Returns (n_garbled_found, n_fixed)."""
-    report_date = path.stem
+    # Daily stems are the date itself; journal stems prefix it (2026-05-26-aos…).
+    m = _DATE_PREFIX_RE.match(path.stem)
+    report_date = m.group(1) if m else path.stem
     lines = path.read_text(encoding="utf-8").split("\n")
 
     # A dry run must never spend API calls, so it only considers the offline
@@ -300,30 +313,36 @@ def _make_client():
 def run(
     *,
     date_str: str | None = None,
+    scope: str = "all",
     offline: bool = False,
     dry_run: bool = False,
     model: str | None = None,
 ) -> int:
-    """Repair garbled summaries across daily reports. Returns the number fixed."""
+    """Repair garbled summaries across daily and journal reports.
+
+    Returns the number of blocks fixed."""
     load_dotenv()
 
+    dirs: list[Path] = []
+    if scope in ("all", "daily"):
+        dirs.append(DOCS_DIR)
+    if scope in ("all", "journals"):
+        dirs.append(JOURNALS_DIR)
+    targets = sorted(p for d in dirs if d.exists() for p in d.glob("*.md"))
+
     if date_str:
-        targets = [DOCS_DIR / f"{date_str}.md"]
-        if not targets[0].exists():
-            log.error("no daily report at %s", targets[0])
+        # Matches the daily file (2026-06-01.md) and any journal page for that
+        # date (2026-05-26-aos-v54-i1.md, …).
+        targets = [t for t in targets if t.stem.startswith(date_str)]
+        if not targets:
+            log.error("no %s report(s) matching %s", scope, date_str)
             return 0
-    else:
-        targets = sorted(DOCS_DIR.glob("*.md"))
 
     interests_path = Path("config/interests.yaml")
     interests_text = interests_path.read_text(encoding="utf-8") if interests_path.exists() else ""
 
     score_index = load_score_index()
     client = None if offline else _make_client()
-    if model is None:
-        # Same default the daily pipeline uses (kept in sync without importing
-        # the heavy daily module / its PDF deps).
-        model = os.environ.get("DAILY_MODEL", "glm-5.1")
 
     total_found = total_fixed = 0
     for path in targets:
@@ -359,18 +378,23 @@ def main() -> None:
         datefmt="%Y-%m-%d %H:%M:%S",
     )
     ap = argparse.ArgumentParser(
-        description="Re-run garbled / truncated daily-report summaries."
+        description="Re-run garbled / truncated daily & journal report summaries."
     )
     ap.add_argument("--date", metavar="YYYY-MM-DD",
-                    help="only this report (default: every docs/daily/*.md)")
+                    help="only reports whose filename starts with this date "
+                         "(default: every docs/daily/*.md and docs/journals/*.md)")
+    ap.add_argument("--scope", choices=("all", "daily", "journals"), default="all",
+                    help="which reports to scan (default: all)")
     ap.add_argument("--offline", action="store_true",
                     help="salvage clean prose from the page; never call the LLM")
     ap.add_argument("--dry-run", action="store_true",
                     help="report what would change without writing")
-    ap.add_argument("--model", help="override the summary model")
+    ap.add_argument("--model", help="override the summary model "
+                                     "(default: the model that first scored each paper)")
     args = ap.parse_args()
 
-    run(date_str=args.date, offline=args.offline, dry_run=args.dry_run, model=args.model)
+    run(date_str=args.date, scope=args.scope, offline=args.offline,
+        dry_run=args.dry_run, model=args.model)
 
 
 if __name__ == "__main__":

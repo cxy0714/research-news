@@ -121,6 +121,53 @@ def test_rerun_file_offline_salvages_only_garbled_block(tmp_path: Path):
     assert "production func" not in text  # truncated item dropped
 
 
+# Journal pages render papers with 3-hash headings and DOI / jmlr ids.
+_GARBLED_JOURNAL_MD = """# JASA  ·  2026-05-26
+
+- 共 1 篇 · Journal of the American Statistical Association
+
+## 因果推断  *(causal_inference, 1 篇)*
+
+### 1. [10.1080/01621459.2026.2627493](https://doi.org/10.1080/01621459.2026.2627493) — A garbled journal paper
+- **作者**: Some Author
+- **期刊/来源**: JASA
+- **分类**: Vol 121 · Issue 1
+- 相关性 7/10
+- **摘要**: ```json
+{
+  "topic": "causal_inference",
+  "summary_zh": "这是一段"带引号"的完整中文摘要。",
+  "key_techniques": [
+    "technique one",
+    "trunc
+
+---
+
+Maintained by 陈星宇
+"""
+
+
+def test_rerun_handles_journal_pages(tmp_path: Path):
+    md = tmp_path / "2026-05-26-jasa.md"
+    md.write_text(_GARBLED_JOURNAL_MD, encoding="utf-8")
+
+    found, fixed = rerun.rerun_file(
+        md, offline=True, client=None, score_index={},
+        interests_text="", model=None, dry_run=False,
+    )
+    assert (found, fixed) == (1, 1)
+
+    text = md.read_text(encoding="utf-8")
+    assert "```json" not in text
+    # 3-hash heading is preserved (journal style), not rewritten to 4 hashes.
+    assert "### 1. [10.1080/01621459.2026.2627493]" in text
+    assert "- **摘要**: 这是一段" in text
+    # Venue carried over from the rendered block (score log doesn't store it).
+    assert "- **期刊/来源**: JASA" in text
+    assert "`technique one`" in text
+    assert "trunc" not in text
+
+
 def test_rerun_file_dry_run_writes_nothing(tmp_path: Path):
     md = tmp_path / "2026-06-01.md"
     md.write_text(_GARBLED_MD, encoding="utf-8")
