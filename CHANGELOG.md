@@ -16,6 +16,16 @@
 
 ## [Unreleased]
 
+### Added
+- **跨篇综合 / 选题引擎**：新增 `python -m research_news.synthesize`，把同一子方向近期的
+  **期刊**精读聚合起来，归纳只在跨篇层面才看得见的信号——**反复出现的开放问题**（被 ≥2 篇
+  独立论文点名，recurrence 即证据）、论文间的**张力**、以及接武器库的**迁移空位**。两段式：
+  先用 `extract_problems.py` 把每篇精读抽成结构化「问题种子」（limitation / future work /
+  窄结论 / 张力 / 迁移线索）存进 `data/open_problems.jsonl`（缺的才抽、可累积），再按 topic
+  综合。贯彻一条原则——**LLM 只挖掘与归纳、不打分不排名**，每条点名来源论文供研究者自判。
+  输出 `docs/synthesis/<date>-<topic>.md` + 存档页 `docs/all_synthesis.md`（导航「选题综合」）。
+  自包含，不触动 daily / journal 管道。`--dry-run` / `--topic` / `--since` / `--min-papers`。
+
 ### Changed
 - **精读重构为「先综述方向、再谈值不值得做」**：重写 `DEEP_READ_SYSTEM`，把重心从
   "这篇论文讲了啥 + 我能做什么" 改成 **先用 introduction + bibliography 把这个方向的

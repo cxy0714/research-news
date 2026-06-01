@@ -339,3 +339,61 @@ Respond with ONLY a valid JSON object of the form:
 No prose, no markdown fences, no commentary — just the JSON object.
 Only include real events; ignore navigation, footers, and generic prose. If
 the page contains no events, return {"events": []}."""
+
+
+# ── Cross-paper synthesis (problem-finding engine) ─────────────────────────────
+# Two stages: (1) extract grounded problem-seeds from each paper's deep-read note,
+# (2) synthesize across a topic slice to surface recurring open problems, tensions,
+# and arsenal-shaped transfer gaps. The LLM mines & groups; it never scores/ranks
+# — judgment stays with the researcher.
+
+PROBLEM_EXTRACT_SYSTEM = """你从一篇统计学论文的【精读笔记】里**抽取**（不是生成）结构化信息，供日后跨篇综合使用。
+只抽取笔记里**确有依据**的内容；找不到就给空数组。不要编造、不要用常识补充。
+
+只返回一个合法 JSON 对象（无前言、无 markdown 围栏）：
+{
+  "direction": "<一句话：这篇属于哪个具体子方向>",
+  "open_questions": ["<这个方向在追问的核心开放问题，取自笔记的综述/脉络节>", ...],
+  "stated_limitations": ["<作者自己承认的 limitation>", ...],
+  "future_work": [{"item": "<具体的 future work>", "boilerplate": <true 若是“我们懒得做”式客套，false 若实打实>}, ...],
+  "narrow_conclusions": ["<结论比证明窄的地方：在条件 X 下证明却被泛泛 claim/conjecture>", ...],
+  "cited_tensions": ["<笔记里指出的被引工作之间的矛盾/分歧>", ...],
+  "transfer_hints": ["<方法形状的洞 / 可迁移点，尤其能接上 nonparametric / minimax / 高阶 U-统计量计算(einsum,tensor contraction) / 高维渐近 / 半参数 / 识别理论 的>", ...]
+}"""
+
+
+SYNTHESIS_SYSTEM = """你是一位统计学研究导师，正在帮研究者做**跨篇综合**——从一批同子方向的论文里找出**值得做的研究问题**。
+
+核心原则（严格遵守）：
+- 你只负责**从这批论文里挖掘与归纳**：**不做质量评判、不打分、不排名**。
+- 每一条结论都必须**点名它来自哪几篇**（用论文编号 [k]），让“反复出现”这件事可被研究者亲自审计。
+- 真信号来自**跨篇的模式**，不是你的直觉——单篇里看不出来的东西才有价值。
+
+输入是某个子方向最近的一批论文，每篇给了：编号/标题/出处，以及从其精读里抽出的
+direction / open_questions / stated_limitations / future_work / narrow_conclusions /
+cited_tensions / transfer_hints（外加一段综述摘录）。
+
+输出中文 Markdown，只出以下四节，信息密度优先，禁止空泛词：
+
+### 一、这个子方向的全景（3-5 句）
+把这批论文放一起看：这个方向现在在追问什么、主流路线有哪几条、整体停在哪。
+
+### 二、反复出现的开放问题（最有价值的一节）
+聚类这批论文的 stated_limitations / future_work / open_questions / narrow_conclusions。
+**只报告被 ≥2 篇独立论文点名的**条目。每条给：①问题表述（要证/估/算什么）；②点名哪几篇
+[k] 提到它（这就是“它是真问题”的证据，而非你的判断）；③它卡在上面哪条路线上。
+被独立点名越多的越靠前。只出现一次的不要放这里（可挪到第四节当迁移线索）。
+
+### 三、张力 / 矛盾
+这批论文之间结论或假设打架的地方（A 在某条件得 X、B 略改条件得非 X；或对同一前作、同一
+gap 给出不同 characterize）。每条点名涉及哪几篇 [k]。调和这种张力往往就是一篇。
+没有就写“未见明显张力”。
+
+### 四、迁移空位（接研究者武器库）
+研究者的 very_familiar 武器尤其包括：高阶 U-统计量的计算（einsum / tensor contraction /
+treewidth）、minimax 下界、高维渐近、nonparametric、因果推断 estimation theory。扫这批论文
+里**方法形状的洞**：哪里有个估计量 / 算法 / 界，正好这些武器能填、而作者没去做？每条给：
+①空位在哪（点名 [k]）；②用武器库里的哪一件；③第一步具体动作。无则写“无”。
+
+---
+只输出 Markdown，从“### 一、”开始，不加前言后记。每条尽量点名论文编号 [k]。"""

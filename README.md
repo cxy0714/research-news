@@ -157,6 +157,27 @@ Discussion / reply / rejoinder / correction 类条目（如 JRSSB discussion iss
 - `docs/all_journals.md` / `docs/all_deep_reads.md` — 自动更新的期刊和精读存档页
 - 高相关论文 PDF 落 `data/highlights/<topic>/`（arxiv / JMLR 可下；付费期刊只记 manifest）
 
+## 跨篇综合 / 选题引擎
+
+把同一子方向近期的**期刊**精读放在一起，归纳只在跨篇层面才看得见的信号：反复出现的开放
+问题（被 ≥2 篇独立论文点名）、论文之间的张力、以及能接上武器库的迁移空位。**LLM 只做
+挖掘与归纳，不打分不排名**，每条都点名来源论文，供你自己判断选题。
+
+```powershell
+# 先看各 topic 的论文数（不调 LLM）
+python -m research_news.synthesize --dry-run
+
+# 对所有 ≥3 篇的子方向各生成一份综合
+python -m research_news.synthesize
+
+# 只做某个子方向 / 只看某日期之后的期刊精读
+python -m research_news.synthesize --topic causal_inference --since 2026-01-01
+```
+
+两段式：先把每篇精读抽成结构化的「问题种子」（limitation / future work / 张力 / 迁移线索）
+存进 `data/open_problems.jsonl`（缺的才抽，可累积），再按 topic 综合。输出
+`docs/synthesis/<日期>-<topic>.md`，并刷新存档页 `docs/all_synthesis.md`（站点导航「选题综合」）。
+
 ## 账户与收藏（网页端）
 
 站点是纯静态的（GitHub Pages，无后端），但通过把状态存进你 GitHub 账号下的一个
