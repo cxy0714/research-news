@@ -460,6 +460,23 @@
       paperId = m ? m[1] : slug;
     }
     h1.dataset.rnFavBadge = "1";
+
+    // Read / unread toggle for the paper as a whole.
+    const readBadge = makeBadge("rn-read-badge", "button");
+    readBadge.title = "点击切换已读 / 未读";
+    function refreshRead() {
+      const read = isRead(paperId);
+      readBadge.textContent = read ? "✓ 已读" : "○ 未读";
+      readBadge.classList.toggle("rn-read", read);
+      readBadge.classList.toggle("rn-unread", !read);
+    }
+    readBadge.addEventListener("click", (e) => {
+      e.preventDefault(); e.stopPropagation();
+      toggleRead(paperId); refreshRead();
+    });
+    refreshRead();
+    h1.appendChild(readBadge);
+
     const badge = makeBadge("rn-fav-badge", "button");
     function refresh() {
       const fav = isFav(paperId);
