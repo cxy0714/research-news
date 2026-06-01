@@ -1,0 +1,52 @@
+name: Publish favorites snapshot
+
+# Nightly: read the private state gist and refresh the public favorites
+# snapshot (docs/data/favorites_public.json). Committing it (with a PAT, not
+# GITHUB_TOKEN) lets the existing Pages deploy workflow pick the change up.
+#
+# Requires a repo secret GIST_TOKEN: a classic PAT with scopes `gist` and
+# `public_repo` (the repo is public). Optional repo variable RN_GIST_ID pins
+# the gist id; otherwise it is discovered by description / filename.
+
+on:
+  schedule:
+    - cron: "0 19 * * *"   # 19:00 UTC ≈ 03:00 北京时间
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-favorites
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Use the PAT so the snapshot commit triggers deploy-pages.yml.
+          token: ${{ secrets.GIST_TOKEN }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install deps
+        run: pip install httpx
+      - name: Build public snapshot
+        env:
+          GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
+          RN_GIST_ID: ${{ vars.RN_GIST_ID }}
+        run: python -m research_news.publish_favorites
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/data/favorites_public.json
+          if git diff --cached --quiet; then
+            echo "No changes to favorites snapshot."
+          else
+            git commit -m "chore: refresh public favorites snapshot"
+            git push
+          fi

@@ -35,6 +35,7 @@
   let _synced = false;       // true once we've pulled from the gist this session
   let _deepReadsCache = null;
   let _topicLabelsCache = null;
+  let _publicCache = null;
 
   function emptyState() {
     return { version: 1, read: {}, favorites: {} };
@@ -338,6 +339,15 @@
       .catch(() => ({ order: [], labels: {}, orderedLabels: [] }));
   }
 
+  // Public favorites snapshot, refreshed nightly by a GitHub Action.
+  function loadPublicFavs() {
+    if (_publicCache) return Promise.resolve(_publicCache);
+    return fetch(siteRoot() + "data/favorites_public.json", { cache: "no-cache" })
+      .then((r) => (r.ok ? r.json() : []))
+      .then((arr) => { _publicCache = Array.isArray(arr) ? arr : []; return _publicCache; })
+      .catch(() => []);
+  }
+
   const UNCATEGORIZED = "未分类";
 
   // Category label for a paper. Overview pages: nearest preceding section
@@ -597,22 +607,29 @@
     return g;
   }
 
-  function favItemHtml(f) {
-    const read = isRead(f.paper_id) ? '<span class="rn-c-read">✓ 已读</span>' : '';
+  function favItemHtml(f, readonly) {
+    const read = (!readonly && isRead(f.paper_id))
+      ? '<span class="rn-c-read">✓ 已读</span>' : '';
     const dr = f.deep_read_url ? ' · <a href="' + f.deep_read_url + '">🔍 精读</a>' : '';
-    const meta = [f.date || "", f.source || ""].filter(Boolean).map(escapeHtml).join(" · ");
+    const metaBits = [f.date || "", f.venue || f.source || ""];
+    if (f.score != null) metaBits.push("相关性 " + Math.round(f.score) + "/10");
+    const meta = metaBits.filter(Boolean).map(escapeHtml).join(" · ");
+    const summary = f.summary
+      ? '<div class="rn-c-summary">' + escapeHtml(f.summary) + '</div>' : '';
     const note = f.note
       ? '<div class="rn-c-note" data-id="' + escapeHtml(f.paper_id) + '">' +
-        escapeHtml(f.note) + '</div>'
+        '💬 ' + escapeHtml(f.note) + '</div>'
       : '';
+    const rm = readonly ? '' :
+      '<button class="rn-c-rm" title="移除收藏" type="button">✕</button>';
+    const editBtn = readonly ? '' :
+      ' · <button class="rn-c-edit" type="button">✎ ' + (f.note ? '改评论' : '评论') + '</button>';
     return (
       '<li data-id="' + escapeHtml(f.paper_id) + '">' +
       '<a class="rn-c-title" href="' + (f.url || "#") + '">' + escapeHtml(f.title) + '</a> ' +
-      read + dr +
-      '<button class="rn-c-rm" title="移除收藏" type="button">✕</button>' +
-      '<div class="rn-c-meta">' + meta +
-      ' · <button class="rn-c-edit" type="button">✎ ' + (f.note ? '改评论' : '评论') + '</button>' +
-      '</div>' + note +
+      read + dr + rm +
+      '<div class="rn-c-meta">' + meta + editBtn + '</div>' +
+      summary + note +
       '</li>'
     );
   }
@@ -620,12 +637,18 @@
   function renderCollection() {
     const host = document.getElementById("rn-collection");
     if (!host) return;
-    if (!active()) {
-      host.innerHTML = '<p class="rn-c-empty">点右下角 <b>👤 登录</b> 后，' +
-        '你收藏的论文会显示在这里。</p>';
-      return;
+    if (active()) {
+      renderFavs(host, Object.values(state.favorites), false);
+    } else {
+      loadPublicFavs().then((favs) => {
+        if (favs && favs.length) renderFavs(host, favs, true);
+        else host.innerHTML = '<p class="rn-c-empty">还没有公开的收藏。' +
+          '点右下角 <b>👤 登录</b> 可管理你自己的收藏。</p>';
+      });
     }
-    const favs = Object.values(state.favorites);
+  }
+
+  function renderFavs(host, favs, readonly) {
     loadTopicLabels().then((labels) => {
       const view = getView();
       const parts = [];
@@ -638,6 +661,15 @@
         '<button id="rn-c-md" type="button">复制为 Markdown</button>' +
         '</div>'
       );
+      if (readonly) {
+        parts.push('<p class="rn-c-pubnote">📖 这是公开收藏快照（每日自动刷新）。' +
+          '登录后可在此管理你自己的收藏。</p>');
+      }
+
+      const itemsHtml = (arr) =>
+        '<ul class="rn-c-list">' +
+        arr.slice().sort(dateDesc).map((f) => favItemHtml(f, readonly)).join("") +
+        '</ul>';
 
       if (!favs.length) {
         parts.push('<p class="rn-c-empty">还没有收藏。去日报 / 期刊 / 精读页面，' +
@@ -645,31 +677,32 @@
       } else if (view === "total") {
         const byCat = groupBy(favs, "category");
         orderedCategories(Object.keys(byCat), labels.orderedLabels).forEach((cat) => {
-          const items = byCat[cat].slice().sort(dateDesc);
-          parts.push('<h2>' + escapeHtml(cat) + ' <small>(' + items.length + ' 篇)</small></h2>');
-          parts.push('<ul class="rn-c-list">' + items.map(favItemHtml).join("") + '</ul>');
+          parts.push('<h2>' + escapeHtml(cat) + ' <small>(' + byCat[cat].length + ' 篇)</small></h2>');
+          parts.push(itemsHtml(byCat[cat]));
         });
       } else {
         const byWeek = groupBy(favs, "week");
         Object.keys(byWeek).sort().reverse().forEach((w) => {
-          parts.push('<h2>' + escapeHtml(w) + ' <small>(' + byWeek[w].length + ' 篇)</small></h2>');
+          parts.push('<h2>' + escapeHtml(w || "未归周") + ' <small>(' + byWeek[w].length + ' 篇)</small></h2>');
           const byCat = groupBy(byWeek[w], "category");
           orderedCategories(Object.keys(byCat), labels.orderedLabels).forEach((cat) => {
-            const items = byCat[cat].slice().sort(dateDesc);
             parts.push('<h3>' + escapeHtml(cat) + '</h3>');
-            parts.push('<ul class="rn-c-list">' + items.map(favItemHtml).join("") + '</ul>');
+            parts.push(itemsHtml(byCat[cat]));
           });
         });
       }
       host.innerHTML = parts.join("");
-      wireCollection(host, favs, labels);
+      wireCollection(host, favs, labels, readonly);
     });
   }
 
-  function wireCollection(host, favs, labels) {
+  function wireCollection(host, favs, labels, readonly) {
     host.querySelectorAll(".rn-c-views button").forEach((b) => {
       b.addEventListener("click", () => { setView(b.getAttribute("data-view")); renderCollection(); });
     });
+    const mdBtn = host.querySelector("#rn-c-md");
+    if (mdBtn) mdBtn.addEventListener("click", () => copyCollectionMarkdown(favs, labels));
+    if (readonly) return;
     host.querySelectorAll(".rn-c-rm").forEach((b) => {
       b.addEventListener("click", () => {
         const li = b.closest("li");
@@ -682,8 +715,6 @@
         if (li) openNoteEditor(li);
       });
     });
-    const mdBtn = host.querySelector("#rn-c-md");
-    if (mdBtn) mdBtn.addEventListener("click", () => copyCollectionMarkdown(favs, labels));
   }
 
   function openNoteEditor(li) {
@@ -815,8 +846,12 @@
       .rn-c-meta { font-size: 0.78em; opacity: 0.75; margin-top: 0.15em; }
       .rn-c-meta .rn-c-edit { border: none; background: transparent; cursor: pointer;
         color: var(--md-primary-fg-color, #3f51b5); font-size: 1em; padding: 0; }
+      .rn-c-summary { font-size: 0.88em; margin-top: 0.3em; opacity: 0.92; line-height: 1.6; }
       .rn-c-note { font-size: 0.86em; margin-top: 0.3em; padding: 0.35em 0.6em;
         border-left: 3px solid #e6c200; background: rgba(230,194,0,0.08); white-space: pre-wrap; }
+      .rn-c-pubnote { font-size: 0.82em; opacity: 0.8; margin: 0.2em 0 1em;
+        padding: 0.4em 0.6em; border-left: 3px solid var(--md-primary-fg-color, #3f51b5);
+        background: rgba(63,81,181,0.06); }
       .rn-c-note-edit { margin-top: 0.3em; }
       .rn-c-note-edit textarea { width: 100%; min-height: 3.5em; box-sizing: border-box;
         padding: 0.4em; border: 1px solid rgba(0,0,0,0.25); border-radius: 0.3em;
