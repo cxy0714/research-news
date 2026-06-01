@@ -85,6 +85,33 @@ def test_build_user_message_numbers_and_cites():
     assert "dir1" in msg and "fw1" in msg and "lim2" in msg
 
 
+def test_resolve_venue_filter_journal_and_group():
+    # No filter → None (all journals).
+    allowed, label, slug = syn.resolve_venue_filter(None, None)
+    assert allowed is None and slug == "all"
+
+    # Single journal by short name resolves to its full venue.
+    allowed, label, slug = syn.resolve_venue_filter(["AoS"], None)
+    assert allowed is not None
+    assert syn._venue_allowed("Annals of Statistics", allowed)
+    assert not syn._venue_allowed("Bernoulli", allowed)
+    assert "AoS" in label
+
+    # A group pulls in all its journals.
+    allowed_g, _, slug_g = syn.resolve_venue_filter(None, ["core"])
+    assert syn._venue_allowed("Journal of the American Statistical Association", allowed_g)
+    assert slug_g == "core"
+
+
+def test_split_flattens_comma_and_repeat():
+    assert syn._split(["AoS,JASA", "JRSSB"]) == ["AoS", "JASA", "JRSSB"]
+    assert syn._split([]) == []
+
+
+def test_venue_allowed_none_means_all():
+    assert syn._venue_allowed("anything", None) is True
+
+
 def test_update_index_dedups_by_date_topic(tmp_path, monkeypatch):
     idx = tmp_path / "synthesis_index.json"
     monkeypatch.setattr(syn, "SYNTHESIS_INDEX", idx)

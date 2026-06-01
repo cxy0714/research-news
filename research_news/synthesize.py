@@ -44,6 +44,78 @@ MIN_PAPERS = 3
 
 HOMEPAGE_URL = "https://cxy0714.github.io/"
 REPO_URL = "https://github.com/cxy0714/research-news"
+JOURNALS_CONFIG = Path("config/journals.yaml")
+
+
+def _norm_venue(s: str | None) -> str:
+    return re.sub(r"\s+", " ", (s or "").strip().lower())
+
+
+def load_journal_groups() -> dict:
+    """Return the `groups` mapping from config/journals.yaml ({} if missing)."""
+    if not JOURNALS_CONFIG.exists():
+        return {}
+    import yaml
+    cfg = yaml.safe_load(JOURNALS_CONFIG.read_text(encoding="utf-8")) or {}
+    return cfg.get("groups", {}) or {}
+
+
+def resolve_venue_filter(
+    journals: list[str] | None, groups: list[str] | None
+) -> tuple[set[str] | None, str, str]:
+    """Resolve --journal / --group into (allowed_venues, scope_label, scope_slug).
+
+    allowed_venues is a set of normalized full venue names, or None for "no
+    filter / all journals". journals match by short name or full name (or
+    substring); groups match group keys in config/journals.yaml.
+    """
+    groups_cfg = load_journal_groups()
+    # Map any normalized name (short OR full) → both its forms, since the corpus
+    # stores venue inconsistently (e.g. "JMLR" short, "Annals of Statistics" full).
+    name_to_forms: dict[str, set[str]] = {}
+    for g in groups_cfg.values():
+        for j in g.get("journals", []):
+            forms = {_norm_venue(j["short"]), _norm_venue(j["full"])}
+            for f in forms:
+                name_to_forms[f] = forms
+
+    allowed: set[str] = set()
+    labels: list[str] = []
+    for gname in groups or []:
+        key = gname.strip().lower()
+        g = groups_cfg.get(key)
+        if not g:
+            log.warning("unknown journal group %r (have: %s)", gname, ", ".join(groups_cfg))
+            continue
+        for j in g.get("journals", []):
+            allowed.add(_norm_venue(j["short"]))
+            allowed.add(_norm_venue(j["full"]))
+        labels.append(key)
+    for jn in journals or []:
+        k = _norm_venue(jn)
+        forms = name_to_forms.get(k)
+        if forms:
+            allowed.update(forms); labels.append(jn)
+        else:  # substring fallback against known names
+            hits = {f for f in name_to_forms if k and len(k) > 4 and (k in f or f in k)}
+            if hits:
+                for h in hits:
+                    allowed.update(name_to_forms[h])
+                labels.append(jn)
+            else:
+                log.warning("unknown journal %r", jn)
+
+    if not allowed:
+        return None, "全部期刊", "all"
+    return allowed, " + ".join(labels), (_slug("-".join(labels)) or "scope")
+
+
+def _venue_allowed(venue: str | None, allowed: set[str] | None) -> bool:
+    if allowed is None:
+        return True
+    vn = _norm_venue(venue)
+    # Exact match on any form (short codes), or substring match for long full names.
+    return any(a == vn or (len(a) > 8 and (a in vn or vn in a)) for a in allowed)
 
 
 def load_deep_reads(run_type: str | None = "journals") -> list[dict]:
@@ -147,10 +219,13 @@ def synthesize_topic(
     )
 
 
-def _render_page(topic: str, entries: list[dict], content: str, run_date: date) -> Path:
+def _render_page(
+    topic: str, entries: list[dict], content: str, run_date: date,
+    *, scope_label: str = "全部期刊", scope_slug: str = "all",
+) -> Path:
     SYNTHESIS_DIR.mkdir(parents=True, exist_ok=True)
     label = TOPIC_LABELS_ZH.get(topic, topic)
-    out = SYNTHESIS_DIR / f"{run_date.isoformat()}-{_slug(topic)}.md"
+    out = SYNTHESIS_DIR / f"{run_date.isoformat()}-{scope_slug}-{_slug(topic)}.md"
     src_lines = [
         f"- [{k}] {e.get('title','')} — {e.get('venue') or ''} ({e.get('date','')})"
         for k, e in enumerate(entries, 1)
@@ -158,6 +233,7 @@ def _render_page(topic: str, entries: list[dict], content: str, run_date: date) 
     lines = [
         f"# 跨篇综合 · {label}\n",
         f"**子方向**: {label}  ",
+        f"**期刊范围**: {scope_label}  ",
         f"**聚合期刊论文数**: {len(entries)}  ",
         f"**生成日期**: {run_date.isoformat()}  ",
         "\n> 本页由跨篇综合自动生成：从近期期刊精读里归纳反复出现的开放问题、张力与迁移空位。"
@@ -179,11 +255,13 @@ def _update_index(new_entries: list[dict]) -> None:
             existing = json.loads(SYNTHESIS_INDEX.read_text(encoding="utf-8"))
         except Exception:
             existing = []
-    # De-dup by (date, topic): newest run wins.
-    by_key = {(e["date"], e["topic"]): e for e in existing}
+    # De-dup by (date, scope, topic): newest run wins.
+    def _key(e: dict) -> tuple:
+        return (e["date"], e.get("scope", "all"), e["topic"])
+    by_key = {_key(e): e for e in existing}
     for e in new_entries:
-        by_key[(e["date"], e["topic"])] = e
-    merged = sorted(by_key.values(), key=lambda e: (e["date"], e["topic"]), reverse=True)
+        by_key[_key(e)] = e
+    merged = sorted(by_key.values(), key=_key, reverse=True)
     SYNTHESIS_INDEX.parent.mkdir(parents=True, exist_ok=True)
     SYNTHESIS_INDEX.write_text(
         json.dumps(merged, ensure_ascii=False, indent=2), encoding="utf-8"
@@ -207,8 +285,11 @@ def _write_archive(entries: list[dict]) -> None:
         if not doc_path:
             continue
         stem = Path(doc_path).stem
+        scope = e.get("scope_label", "")
+        scope_tag = f" · {scope}" if scope and scope != "全部期刊" else ""
         lines.append(
-            f"- [{e.get('topic_label', e['topic'])}（{e.get('n_papers','?')} 篇）](synthesis/{stem}.md)"
+            f"- [{e.get('topic_label', e['topic'])}（{e.get('n_papers','?')} 篇）{scope_tag}]"
+            f"(synthesis/{stem}.md)"
         )
     (DOCS_DIR / "all_synthesis.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
@@ -219,15 +300,21 @@ def run(
     since: str | None = None,
     min_papers: int = MIN_PAPERS,
     model: str | None = None,
+    journals: list[str] | None = None,
+    groups: list[str] | None = None,
     dry_run: bool = False,
 ) -> list[Path]:
     model = model or DEFAULT_MODEL
     run_date = date.today()
 
+    allowed, scope_label, scope_slug = resolve_venue_filter(journals, groups)
+
     entries = load_deep_reads(run_type="journals")
     if since:
         entries = [e for e in entries if (e.get("date") or "") >= since]
-    log.info("loaded %d journal deep-reads", len(entries))
+    if allowed is not None:
+        entries = [e for e in entries if _venue_allowed(e.get("venue"), allowed)]
+    log.info("loaded %d journal deep-reads (期刊范围: %s)", len(entries), scope_label)
 
     # Group by topic.
     by_topic: dict[str, list[dict]] = {}
@@ -268,12 +355,15 @@ def run(
         except Exception as e:  # noqa: BLE001
             log.warning("synthesis failed for %s: %s", t, e)
             continue
-        page = _render_page(t, group, content, run_date)
+        page = _render_page(t, group, content, run_date,
+                            scope_label=scope_label, scope_slug=scope_slug)
         written.append(page)
         index_entries.append({
             "date": run_date.isoformat(),
             "topic": t,
             "topic_label": TOPIC_LABELS_ZH.get(t, t),
+            "scope": scope_slug,
+            "scope_label": scope_label,
             "n_papers": len(group),
             "doc_path": f"synthesis/{page.name}",
         })
@@ -284,18 +374,53 @@ def run(
     return written
 
 
+def _split(values: list[str] | None) -> list[str]:
+    """Flatten repeated + comma-separated CLI values: --journal AoS,JASA --journal JRSSB."""
+    out: list[str] = []
+    for v in values or []:
+        out.extend(part.strip() for part in v.split(",") if part.strip())
+    return out
+
+
+def _print_journals() -> None:
+    groups = load_journal_groups()
+    if not groups:
+        print("no config/journals.yaml found")
+        return
+    print("可用期刊组 (--group) 与期刊 (--journal，用 short 名)：\n")
+    for key, g in groups.items():
+        print(f"  --group {key}    # {g.get('label', key)}")
+        shorts = ", ".join(j["short"] for j in g.get("journals", []))
+        print(f"      journals: {shorts}\n")
+
+
 def main() -> None:
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-    ap = argparse.ArgumentParser(description="Cross-paper synthesis over journal deep-reads.")
+    ap = argparse.ArgumentParser(
+        description="Cross-paper synthesis over journal deep-reads (problem-finding engine).")
     ap.add_argument("--topic", help="only this topic (e.g. causal_inference)")
+    ap.add_argument("--journal", action="append", default=[],
+                    help="scope to these journals (short or full name; comma-separated "
+                         "or repeat the flag). E.g. --journal AoS,JASA")
+    ap.add_argument("--group", action="append", default=[],
+                    help="scope to these journal groups from config/journals.yaml "
+                         "(e.g. --group core). Comma-separated or repeat the flag.")
     ap.add_argument("--since", help="only deep-reads on/after this ISO date")
     ap.add_argument("--min-papers", type=int, default=MIN_PAPERS)
     ap.add_argument("--model", default=None)
+    ap.add_argument("--list-journals", action="store_true",
+                    help="print available journal groups + journals, then exit")
     ap.add_argument("--dry-run", action="store_true", help="show topic counts, no LLM")
     args = ap.parse_args()
+
+    if args.list_journals:
+        _print_journals()
+        return
+
     paths = run(
         topic_filter=args.topic, since=args.since, min_papers=args.min_papers,
-        model=args.model, dry_run=args.dry_run,
+        model=args.model, journals=_split(args.journal), groups=_split(args.group),
+        dry_run=args.dry_run,
     )
     print(f"wrote {len(paths)} synthesis page(s)")
 

@@ -167,16 +167,37 @@ Discussion / reply / rejoinder / correction 类条目（如 JRSSB discussion iss
 # 先看各 topic 的论文数（不调 LLM）
 python -m research_news.synthesize --dry-run
 
-# 对所有 ≥3 篇的子方向各生成一份综合
+# 对所有 ≥3 篇的子方向各生成一份综合（默认聚合全部期刊）
 python -m research_news.synthesize
 
 # 只做某个子方向 / 只看某日期之后的期刊精读
 python -m research_news.synthesize --topic causal_inference --since 2026-01-01
 ```
 
+**按期刊 / 期刊组聚合**（范围都在 `config/journals.yaml`，用 `--list-journals` 列出）：
+
+```powershell
+python -m research_news.synthesize --list-journals          # 看有哪些期刊组和期刊
+
+python -m research_news.synthesize --journal AoS            # 单个期刊（short 名）
+python -m research_news.synthesize --journal AoS,JASA       # 多个期刊（逗号分隔）
+python -m research_news.synthesize --group core            # 一个期刊组（core/prob_stats/applied/econ/...）
+python -m research_news.synthesize --group core,applied    # 多个期刊组
+python -m research_news.synthesize --group core --journal Bernoulli   # 组 + 散刊混搭
+python -m research_news.synthesize --group core --topic causal_inference  # 再叠 topic 过滤
+```
+
+`--journal` 接 short 名（如 `AoS` `JASA` `JRSSB` `Biometrika` `JMLR`）或全名，`--group` 接组
+键名（`core` `prob_stats` `applied` `econ` `astro` `epi` `ieee`）；两者都支持逗号分隔或重复传，
+也可同时用。不带范围参数 = 全部期刊。
+
+全部参数：`--topic` `--journal` `--group` `--since` `--min-papers`（默认 3）`--model`
+`--list-journals` `--dry-run`。
+
 两段式：先把每篇精读抽成结构化的「问题种子」（limitation / future work / 张力 / 迁移线索）
 存进 `data/open_problems.jsonl`（缺的才抽，可累积），再按 topic 综合。输出
-`docs/synthesis/<日期>-<topic>.md`，并刷新存档页 `docs/all_synthesis.md`（站点导航「选题综合」）。
+`docs/synthesis/<日期>-<范围>-<topic>.md`，并刷新存档页 `docs/all_synthesis.md`（站点导航
+「选题综合」）。不同范围（如 `all` / `core` / `AoS-JASA`）各自独立成页、不互相覆盖。
 
 ## 账户与收藏（网页端）
 

@@ -31,8 +31,14 @@
   先用 `extract_problems.py` 把每篇精读抽成结构化「问题种子」（limitation / future work /
   窄结论 / 张力 / 迁移线索）存进 `data/open_problems.jsonl`（缺的才抽、可累积），再按 topic
   综合。贯彻一条原则——**LLM 只挖掘与归纳、不打分不排名**，每条点名来源论文供研究者自判。
-  输出 `docs/synthesis/<date>-<topic>.md` + 存档页 `docs/all_synthesis.md`（导航「选题综合」）。
-  自包含，不触动 daily / journal 管道。`--dry-run` / `--topic` / `--since` / `--min-papers`。
+  输出 `docs/synthesis/<date>-<范围>-<topic>.md` + 存档页 `docs/all_synthesis.md`（导航
+  「选题综合」）。自包含，不触动 daily / journal 管道。
+  - **可按期刊 / 期刊组聚合**：`--journal AoS,JASA`（short 或全名）、`--group core,applied`
+    （`config/journals.yaml` 的组键），支持逗号分隔或重复传、可混搭、可再叠 `--topic`；
+    `--list-journals` 列出所有组与期刊。不同范围各自独立成页、不互相覆盖（页名带范围 slug，
+    索引按 date+scope+topic 去重）。期刊名匹配同时认 short（如 `JMLR`）和全名。
+  - 全部参数：`--topic` / `--journal` / `--group` / `--since` / `--min-papers` / `--model`
+    / `--list-journals` / `--dry-run`。
 
 ### Changed
 - **精读重构为「先综述方向、再谈值不值得做」**：重写 `DEEP_READ_SYSTEM`，把重心从
