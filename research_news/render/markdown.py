@@ -325,8 +325,8 @@ def update_index(
         "新发文章，按期刊分组。"
     )
     lines.append(
-        "- **[每周周报](all_weekly.md)** — 维护者手动挑选的当周备忘，"
-        "按兴趣分组，每篇一两句评论。"
+        "- **[每周周报](weekly.md)** — 登录后在各页点 ☆ 收藏的论文，"
+        "自动按 ISO 周号汇总到这里（半自动，无需手动维护）。"
     )
     lines.append(
         "- **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的"
@@ -352,15 +352,14 @@ def update_index(
                 )
             lines.append("")
 
-    # ── 最新周报 ─────────────────────────────────────────────────────────────
-    if weekly_pages:
-        latest_weekly = weekly_pages[0]
-        lines.append("## 最新周报\n")
-        lines.append(
-            f"- [{latest_weekly.stem}](weekly/{latest_weekly.name})"
-            f" · 维护者手挑"
-        )
-        lines.append("")
+    # ── 每周周报 ─────────────────────────────────────────────────────────────
+    # 收藏是客户端状态（存在登录账户的私密 gist 里），首页无法在构建期枚举，
+    # 这里只给出动态周报页的入口。
+    lines.append("## 每周周报\n")
+    lines.append(
+        "- [→ 打开每周周报](weekly.md) · 登录后在各页点 ☆ 收藏即可自动汇总"
+    )
+    lines.append("")
 
     # ── 本周每日报告 ────────────────────────────────────────────────────────
     week_dailies = [d for d in dailies
