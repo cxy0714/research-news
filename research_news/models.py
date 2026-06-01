@@ -13,6 +13,10 @@ class Paper:
     authors: list[str]
     abstract: str
     url: str
+    # Best-effort arXiv preprint link for journal papers (publisher URL stays in
+    # `url`). Filled by the crossref scraper's arxiv title search; None when no
+    # confident preprint match is found (or for arxiv-native papers).
+    arxiv_url: str | None = None
     categories: list[str] = field(default_factory=list)
     published: str | None = None   # ISO date string
     venue: str | None = None

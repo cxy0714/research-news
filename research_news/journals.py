@@ -33,7 +33,7 @@ from .llm.sjtu_client import SJTUClient
 from .models import Paper
 from .render.markdown import render_journal_page, update_index
 from .score_log import append_scored as append_score_log
-from .scrapers.crossref import fetch_latest_issue
+from .scrapers.crossref import fetch_latest_issue, fill_arxiv_links
 from .scrapers.jmlr import fetch_latest as jmlr_fetch_latest
 from .usage import report as report_token_usage
 
@@ -167,12 +167,22 @@ def run(only: list[str] | None = None, dry_run: bool = False,
                 log.info("dropped %d papers already in seen_papers.json",
                          n_before - len(papers))
 
-        if save_papers:
-            _save_papers(papers, save_papers)
-
     if not papers:
         log.error("no papers — bailing")
         return None
+
+    # Resolve arxiv preprint links so the rendered journal + deep-read pages can
+    # show both the publisher link and the (paywall-free) arxiv link. Runs on
+    # both fetch and --load-papers paths; papers that already have a link
+    # (e.g. arxiv-native, or picked up during abstract backfill) are skipped.
+    fill_arxiv_links(papers)
+
+    # Persist the enrichment so a later --load-papers run reuses the links
+    # without re-querying arxiv.
+    if save_papers:
+        _save_papers(papers, save_papers)
+    elif load_papers:
+        _save_papers(papers, load_papers)
 
     if dry_run:
         log.info("dry-run: %d papers across %d venues",

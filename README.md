@@ -115,6 +115,10 @@ python -m research_news.journals --load-papers data/corpus-2026Q2-4i.json
 
 Discussion / reply / rejoinder / correction 类条目（如 JRSSB discussion issue）在 backfill 之前就过滤掉，省时间又干净。
 
+### arXiv 预印本链接
+
+期刊文章的官方链接（DOI 落地页）常要看权限才能打开，arXiv 预印本免费、一点就开。所以抓取后会对每篇期刊文章（含 JMLR）按标题在 arXiv 上找一遍预印本：找到高置信匹配就把 arXiv 链接记到 `Paper.arxiv_url`，**期刊页和深度阅读页都同时挂「官方链接 + arXiv」两个链接**（没找到的只挂官方链接）。链接随 `--save-papers` 落盘，`--load-papers` 直接复用、不重查。
+
 ### 输出
 
 - `docs/journals/<日期>-<期刊>.md` — 每个期刊独立一页（如 `2026-05-17-jmlr.md`、`2026-05-17-aos.md`），按主题分组

@@ -285,10 +285,17 @@ def _title_match(a: str, b: str, *, min_overlap: float = 0.82) -> bool:
     return inter / smaller >= min_overlap
 
 
+def _arxiv_abs_url(entry_id: str) -> str:
+    """Turn an arxiv Atom <id> ('http://arxiv.org/abs/2401.12345v2') into a
+    clean, versionless abstract URL ('https://arxiv.org/abs/2401.12345')."""
+    m = re.search(r"arxiv\.org/abs/(.+?)(?:v\d+)?$", (entry_id or "").strip())
+    return f"https://arxiv.org/abs/{m.group(1)}" if m else ""
+
+
 @retry(stop=stop_after_attempt(2), wait=wait_exponential(multiplier=2, min=1, max=6))
-def _arxiv_search_abstract(title: str) -> str:
-    """Search arxiv for a paper by title; return its abstract if a high-
-    confidence match is found.
+def _arxiv_search_match(title: str) -> tuple[str, str] | None:
+    """Search arxiv for a paper by title; return (arxiv_url, abstract) for a
+    high-confidence match, or None.
 
     Two strategies tried in order:
       1. Quoted exact-phrase  `ti:"<title>"`  (high precision, low recall)
@@ -299,10 +306,10 @@ def _arxiv_search_abstract(title: str) -> str:
 
     norm = _normalize_title(title)
     if len(norm) < 20:
-        return ""
+        return None
 
-    def _query(q: str, max_results: int = 5) -> list[tuple[str, str]]:
-        """Return [(candidate_title, summary), ...] from arxiv API."""
+    def _query(q: str, max_results: int = 5) -> list[tuple[str, str, str]]:
+        """Return [(candidate_title, summary, arxiv_url), ...] from arxiv API."""
         with httpx.Client(timeout=25, follow_redirects=True, headers=UA) as c:
             r = c.get("https://export.arxiv.org/api/query",
                       params={"search_query": q,
@@ -318,15 +325,16 @@ def _arxiv_search_abstract(title: str) -> str:
         for entry in root.findall(f"{_ARXIV_ATOM_NS}entry"):
             t = " ".join((entry.findtext(f"{_ARXIV_ATOM_NS}title") or "").split())
             s = " ".join((entry.findtext(f"{_ARXIV_ATOM_NS}summary") or "").split())
-            if t and s:
-                out.append((t, s.strip()))
+            url = _arxiv_abs_url(entry.findtext(f"{_ARXIV_ATOM_NS}id") or "")
+            if t and url:
+                out.append((t, s.strip(), url))
         return out
 
     # Strategy 1: quoted phrase
     try:
-        for cand_title, summary in _query(f'ti:"{norm}"', max_results=3):
+        for cand_title, summary, url in _query(f'ti:"{norm}"', max_results=3):
             if _title_match(title, cand_title):
-                return summary
+                return url, summary
     except Exception:
         pass
 
@@ -335,17 +343,23 @@ def _arxiv_search_abstract(title: str) -> str:
             "to", "via", "by", "is", "are", "from", "at", "as", "be", "into"}
     words = [w for w in norm.split() if len(w) >= 3 and w not in stop]
     if len(words) < 2:
-        return ""
+        return None
     # Cap query length; too-long ANDs return zero matches
     words = words[:8]
     q = " AND ".join(f"ti:{w}" for w in words)
     try:
-        for cand_title, summary in _query(q, max_results=8):
+        for cand_title, summary, url in _query(q, max_results=8):
             if _title_match(title, cand_title):
-                return summary
+                return url, summary
     except Exception:
         pass
-    return ""
+    return None
+
+
+def _arxiv_search_abstract(title: str) -> str:
+    """Back-compat thin wrapper: return just the abstract of an arxiv match."""
+    match = _arxiv_search_match(title)
+    return match[1] if match else ""
 
 
 _META_NAMES_ABSTRACT = (
@@ -500,10 +514,14 @@ def _fill_missing_abstracts(papers: list[Paper], sleep_s: float = 1.2) -> None:
         n_ax = 0
         for p in still_missing:
             try:
-                abs_text = _arxiv_search_abstract(p.title)
-                if abs_text and len(abs_text) >= 150:
-                    p.abstract = abs_text
-                    n_ax += 1
+                match = _arxiv_search_match(p.title)
+                if match:
+                    arxiv_url, abs_text = match
+                    if arxiv_url and not p.arxiv_url:
+                        p.arxiv_url = arxiv_url
+                    if abs_text and len(abs_text) >= 150:
+                        p.abstract = abs_text
+                        n_ax += 1
             except Exception as e:
                 log.debug("arxiv search miss for %s: %s", p.paper_id, e)
             time.sleep(5.0)   # arxiv API politeness — 3s min, leave headroom
@@ -512,6 +530,39 @@ def _fill_missing_abstracts(papers: list[Paper], sleep_s: float = 1.2) -> None:
     final_missing = sum(1 for p in papers if not p.abstract)
     log.info("after all backfills: %d/%d still missing abstract",
              final_missing, len(papers))
+
+
+def fill_arxiv_links(papers: list[Paper], sleep_s: float = 5.0) -> None:
+    """Attach an arXiv preprint link to each journal paper that has one.
+
+    Stats / ML papers almost always have an arxiv preprint with the same or
+    near-identical title; the arxiv link is paywall-free and one click to open,
+    so we surface it alongside the publisher link. arxiv-native papers (daily
+    pipeline) keep their link in `url` and are skipped here, as are papers that
+    already picked up an arxiv link during abstract backfill (T4).
+    """
+    targets = [
+        p for p in papers
+        if p.source != "arxiv" and not p.arxiv_url and (p.title or "").strip()
+    ]
+    if not targets:
+        return
+    log.info("arxiv link resolution: searching for %d papers", len(targets))
+    n = 0
+    for p in targets:
+        try:
+            match = _arxiv_search_match(p.title)
+            if match:
+                arxiv_url, abs_text = match
+                if arxiv_url:
+                    p.arxiv_url = arxiv_url
+                    n += 1
+                if not p.abstract and abs_text and len(abs_text) >= 150:
+                    p.abstract = abs_text
+        except Exception as e:
+            log.debug("arxiv link miss for %s: %s", p.paper_id, e)
+        time.sleep(sleep_s)   # arxiv API politeness — 3s min, leave headroom
+    log.info("  attached arxiv link to %d/%d papers", n, len(targets))
 
 
 # Built-in ISSN registry for the journals we usually want. Override via
