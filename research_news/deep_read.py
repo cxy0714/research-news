@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import re
 from datetime import date
 from pathlib import Path
@@ -17,13 +18,24 @@ from pypdf import PdfReader
 from .llm.prompts import DEEP_READ_ASTRO_SYSTEM, DEEP_READ_SYSTEM, TOPIC_LABELS_ZH
 from .llm.sjtu_client import SJTUClient
 from .models import Paper
+from .scrapers import references as refs
 
 log = logging.getLogger(__name__)
 
 DEEP_READS_DIR = Path("docs/deep_reads")
 DEEP_READS_INDEX_PATH = Path("data/deep_reads_index.json")
-# ~60 k chars ≈ 15 k tokens; enough to cover full stat theory papers incl. proofs.
-MAX_PDF_CHARS = 60_000
+# ~240 k chars ≈ 60 k tokens. The deep-read model has a 128k context window;
+# feed (almost) the whole paper — intro + body + full bibliography — so the
+# survey section can be built from what the paper actually cites. The bulk of
+# the budget is intentionally left for the long structured output.
+MAX_PDF_CHARS = 240_000
+# How much room the structured 4-section deep read needs.
+DEEP_READ_MAX_TOKENS = 24_000
+
+# Opt-in: fetch the abstracts of the paper's key cited works (Semantic Scholar)
+# and feed them in so the deep read can survey the direction, not just this one
+# paper. Off by default — flip DEEP_READ_FETCH_REFS=1 once S2 is reachable.
+FETCH_REFS = os.environ.get("DEEP_READ_FETCH_REFS", "").strip().lower() in ("1", "true", "yes")
 
 HOMEPAGE_URL = "https://cxy0714.github.io/"
 REPO_URL = "https://github.com/cxy0714/research-news"
@@ -92,10 +104,23 @@ def deep_read_paper(
     if paper.why_relevant:
         meta_lines.append(f"Why relevant (first-pass): {paper.why_relevant}")
 
+    # Optionally pull the key cited works so the survey section can be built
+    # from the actual references, not just how this paper paraphrases them.
+    refs_block = ""
+    if FETCH_REFS:
+        arxiv_id = refs.extract_arxiv_id(paper.paper_id, paper.arxiv_url, paper.url)
+        if arxiv_id:
+            rows = refs.fetch_references(arxiv_id)
+            refs_block = refs.format_references_block(rows)
+            if refs_block:
+                log.info("deep read %s: attached %d-char references block",
+                         paper.paper_id, len(refs_block))
+
     user = (
         f"## Researcher interests\n{interests_yaml}\n\n"
         f"## Paper metadata\n" + "\n".join(meta_lines) + "\n\n"
-        f"## Full text\n{pdf_text}\n"
+        + (f"{refs_block}\n" if refs_block else "")
+        + f"## Full text\n{pdf_text}\n"
     )
     # Astrostat papers need a different deep-read style: the researcher lacks
     # astronomy background, so the notes must teach the physical concepts
@@ -110,7 +135,7 @@ def deep_read_paper(
                 {"role": "user", "content": user},
             ],
             model=model,
-            max_tokens=16000,
+            max_tokens=DEEP_READ_MAX_TOKENS,
         )
     except Exception as e:
         log.warning("deep read LLM call failed for %s: %s", paper.paper_id, e)

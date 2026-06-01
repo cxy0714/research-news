@@ -16,7 +16,22 @@
 
 ## [Unreleased]
 
+### Changed
+- **精读重构为「先综述方向、再谈值不值得做」**：重写 `DEEP_READ_SYSTEM`，把重心从
+  "这篇论文讲了啥 + 我能做什么" 改成 **先用 introduction + bibliography 把这个方向的
+  发展脉络（history）综述清楚**（奠基→进展→frontier→本文位置、子线索聚类、核心问题与
+  瓶颈、**明确标注"作者的 framing"与被引工作之间的张力**），**之后**才谈值不值得做、
+  能做什么。问题种子要求 grounded（扎根在本文的 limitation / future work / 窄结论上），
+  并新增「迁移视角」一节。落实一条原则：**LLM 负责挖掘与生成、不替研究者做质量评判**
+  （不给论文打分），把判断材料交回研究者。
+- **放宽精读上下文预算**：`MAX_PDF_CHARS` 60k → 240k（≈60k tokens，喂进几乎整篇含完整
+  参考文献），精读输出 `max_tokens` 16k → 24k，以用满 128k 上下文窗口。
+
 ### Added
+- **精读可选检索核心被引文献**：新增 `research_news/scrapers/references.py`，通过
+  Semantic Scholar 拉取本文 introduction 真正依赖的核心被引论文的标题 + 摘要 + 引用语境，
+  作为「## 主要被引论文（已检索）」喂进精读，让综述基于实际引用而非标题猜测。默认关闭、
+  失败即降级（仅用 PDF），用 `DEEP_READ_FETCH_REFS=1` 开启（需 S2 可达）。
 - **重跑乱码 / 没跑完的摘要**：新增 `python -m research_news.rerun`，扫描
   `docs/daily/*.md` **和 `docs/journals/*.md`** 里因模型输出未转义引号或
   `max_tokens` 截断而渲染成生 JSON（含 ```` ```json ````）的「摘要」块并就地修复——
