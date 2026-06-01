@@ -16,6 +16,12 @@
 
 ## [Unreleased]
 
+### Fixed
+- **arXiv 抓取 403 / RetryError**：`export.arxiv.org` 与 `rss.arxiv.org` 请求改为带描述性
+  User-Agent（arXiv 会拦截 httpx 默认 UA，表现为反复 403 → `RetryError[HTTPStatusError]`、
+  最终 0 篇）。同时给两个 fetch 的重试加 `reraise=True`，失败时日志直接显示真实状态码
+  （403/429/503）而非被 `RetryError` 吞掉。可用 `ARXIV_USER_AGENT` 覆盖（加联系邮箱）。
+
 ### Added
 - **跨篇综合 / 选题引擎**：新增 `python -m research_news.synthesize`，把同一子方向近期的
   **期刊**精读聚合起来，归纳只在跨篇层面才看得见的信号——**反复出现的开放问题**（被 ≥2 篇

@@ -10,6 +10,7 @@
 from __future__ import annotations
 
 import logging
+import os
 import re
 import time
 from datetime import date, datetime, timedelta, timezone
@@ -26,6 +27,15 @@ log = logging.getLogger(__name__)
 
 RSS_BASE = "https://rss.arxiv.org/rss"
 API_BASE = "https://export.arxiv.org/api/query"
+
+# arXiv blocks requests with a library-default User-Agent (httpx sends
+# "python-httpx/x.y"), which shows up as a repeated 403. Send a descriptive UA
+# as arXiv asks. Override via env if you want to add a contact email.
+_USER_AGENT = os.environ.get(
+    "ARXIV_USER_AGENT",
+    "research-news/1.0 (+https://github.com/cxy0714/research-news)",
+)
+_HEADERS = {"User-Agent": _USER_AGENT}
 
 _ARXIV_ID_RE = re.compile(r"\b(\d{4}\.\d{4,6})(?:v\d+)?\b")
 _OLD_ARXIV_ID_RE = re.compile(r"\b([a-z\-]+(?:\.[A-Z]{2})?/\d{7})(?:v\d+)?\b")
@@ -44,9 +54,9 @@ def _extract_arxiv_id(text: str) -> str:
 
 # ── RSS path (today) ──────────────────────────────────────────────────────────
 
-@retry(stop=stop_after_attempt(4), wait=wait_exponential(multiplier=2, min=2, max=16))
+@retry(stop=stop_after_attempt(4), wait=wait_exponential(multiplier=2, min=2, max=16), reraise=True)
 def _fetch_rss(url: str) -> str:
-    with httpx.Client(timeout=30, follow_redirects=True) as c:
+    with httpx.Client(timeout=30, follow_redirects=True, headers=_HEADERS) as c:
         r = c.get(url)
         r.raise_for_status()
         return r.text
@@ -105,9 +115,9 @@ def fetch_rss(category: str, *, include_cross_listed: bool = False, max_results:
 
 # ── API path (historical) ─────────────────────────────────────────────────────
 
-@retry(stop=stop_after_attempt(4), wait=wait_exponential(multiplier=2, min=2, max=16))
+@retry(stop=stop_after_attempt(4), wait=wait_exponential(multiplier=2, min=2, max=16), reraise=True)
 def _fetch_api(params: dict) -> str:
-    with httpx.Client(timeout=40, follow_redirects=True) as c:
+    with httpx.Client(timeout=40, follow_redirects=True, headers=_HEADERS) as c:
         r = c.get(API_BASE, params=params)
         r.raise_for_status()
         return r.text
