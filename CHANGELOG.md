@@ -28,6 +28,12 @@
   一键「复制为 Markdown」。旧的手工周报仍存档在 `all_weekly.md` 并从页面底部链接。
 - 管道新增 `docs/data/topic_labels.json`（主题分类表）供收藏页按类别分组 / 排序；
   `docs/data/deep_reads_index.json` 增加 `topic` 字段，供精读页收藏时归类。
+- 精读页大标题旁也加了「○ 未读 / ✓ 已读」开关，与日报 / 期刊页共用同一份已读状态。
+- **公开收藏快照**：新增每晚定时 Action `publish-favorites.yml` + 脚本
+  `research_news/publish_favorites.py`，读私密 Gist 并拼上 `highlights.json` 的摘要 /
+  评分，写出 `docs/data/favorites_public.json`。未登录访客在收藏页看到这份只读快照
+  （带摘要与评论）。摘要在发布时从仓库数据拼接、不入 Gist，故 Gist 不膨胀。
+  需配置仓库 secret `GIST_TOKEN`（`gist` + `public_repo`）。
 
 ### Changed
 - 精读存档页面每个主题下再拆 `Daily` / `期刊` 两个子段：daily 按日期降序平铺

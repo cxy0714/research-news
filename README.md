@@ -150,6 +150,22 @@ Token（classic）。Token 只存在你本机浏览器的 localStorage，首次�
 还能一键「复制为 Markdown」。类别分组所需的主题分类表由管道写入
 `docs/data/topic_labels.json`。
 
+### 公开收藏快照（让访客也能看）
+
+私密 Gist 只有你登录后看得到。要让没登录的访客也能浏览你的收藏，有一个**每晚定时**的
+GitHub Action（`.github/workflows/publish-favorites.yml`）：读私密 Gist →
+按 `paper_id` 拼上 `data/highlights.json` 里的中文摘要 / 评分（**摘要不存进 Gist，
+所以 Gist 始终很小**）→ 写出 `docs/data/favorites_public.json` → 有变化才提交，
+触发 Pages 部署。收藏页对未登录访客就渲染这份**只读快照**（带摘要与你的评论）。
+
+`research_news/publish_favorites.py` 是导出脚本，也可本地手动跑
+（`GIST_TOKEN=... python -m research_news.publish_favorites`）。
+
+**一次性配置**：仓库 Settings → Secrets and variables → Actions → 新建
+secret `GIST_TOKEN`，填一个 classic PAT（勾 `gist` + `public_repo`；用 PAT 推送
+快照才能触发部署 workflow）。可选 variable `RN_GIST_ID` 固定 gist id，
+不填则按描述 / 文件名自动发现。
+
 ## Shootout（评估工具）
 
 调 prompt / 换模型时用。把同一批 paper 跑多个 variant 出对照页：
