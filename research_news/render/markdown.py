@@ -325,8 +325,8 @@ def update_index(
         "新发文章，按期刊分组。"
     )
     lines.append(
-        "- **[每周周报](all_weekly.md)** — 维护者手动挑选的当周备忘，"
-        "按兴趣分组，每篇一两句评论。"
+        "- **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里"
+        "（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。"
     )
     lines.append(
         "- **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的"
@@ -352,15 +352,14 @@ def update_index(
                 )
             lines.append("")
 
-    # ── 最新周报 ─────────────────────────────────────────────────────────────
-    if weekly_pages:
-        latest_weekly = weekly_pages[0]
-        lines.append("## 最新周报\n")
-        lines.append(
-            f"- [{latest_weekly.stem}](weekly/{latest_weekly.name})"
-            f" · 维护者手挑"
-        )
-        lines.append("")
+    # ── 收藏 ─────────────────────────────────────────────────────────────────
+    # 收藏是客户端状态（存在登录账户的私密 gist 里），首页无法在构建期枚举，
+    # 这里只给出收藏页的入口。
+    lines.append("## 收藏\n")
+    lines.append(
+        "- [→ 打开收藏](favorites.md) · 登录后在各页点 ☆ 收藏即可自动汇总"
+    )
+    lines.append("")
 
     # ── 本周每日报告 ────────────────────────────────────────────────────────
     week_dailies = [d for d in dailies
@@ -386,6 +385,7 @@ def update_index(
     # Publish a slim deep-reads index under docs/data/ so the JS overlay on
     # overview pages can fetch it and inject "🔍 精读" links inline.
     _publish_deep_reads_index(dr_entries, docs)
+    _publish_topic_labels(docs)
 
 
 def _publish_deep_reads_index(entries: list[dict], docs: Path) -> None:
@@ -399,12 +399,27 @@ def _publish_deep_reads_index(entries: list[dict], docs: Path) -> None:
             "date": e.get("date"),
             "title": e.get("title"),
             "score": e.get("score"),
+            "topic": e.get("topic"),
         }
         for e in entries
         if e.get("paper_id") and e.get("doc_path")
     ]
     (data_dir / "deep_reads_index.json").write_text(
         json.dumps(slim, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+
+
+def _publish_topic_labels(docs: Path) -> None:
+    """Publish the topic taxonomy so the JS collection page can group favorites
+    by category and order the groups the same way the reports do."""
+    data_dir = docs / "data"
+    data_dir.mkdir(parents=True, exist_ok=True)
+    payload = {
+        "order": list(TOPICS),
+        "labels": {t: TOPIC_LABELS_ZH.get(t, t) for t in TOPICS},
+    }
+    (data_dir / "topic_labels.json").write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8"
     )
 
 
