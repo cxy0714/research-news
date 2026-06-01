@@ -32,8 +32,9 @@
   deep-read 选择逻辑（`DEEP_READ_LOWER_THRESHOLD_TOPICS`、application≥7）由统一阈值取代。
 
 ### Added
-- **机构绿灯：top-50 学者免分进入精读**：新增 `config/institutions.yaml`（US News 2024
-  全美大学前 50）+ `research_news/scrapers/affiliations.py`。任一作者属于名单内机构的论文，
+- **机构绿灯：top 学者免分进入精读**：新增 `config/institutions.yaml`（US News 2024
+  全美大学前 50 + 一批策划的国际统计/数学强校：Oxbridge、ETH、EPFL、Toronto、Tsinghua、
+  NUS、HKUST 等）+ `research_news/scrapers/affiliations.py`。任一作者属于名单内机构的论文，
   **无视相关性分数**直接进入深度阅读（仍会先生成首遍摘要），精读页标注「机构绿灯」。作者机构
   在 arXiv/Crossref 元数据里很稀疏，故运行时按 arXiv id / DOI 从 **OpenAlex** 回填机构信息。
   默认开启、失败即降级，`AFFIL_GREENLIGHT=0` 关闭，`OPENALEX_MAILTO` 走 OpenAlex 礼貌池。
