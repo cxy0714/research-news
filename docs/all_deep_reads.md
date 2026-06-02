@@ -4,6 +4,22 @@
 
 ### Daily
 
+- [Causal Density Functions](deep_reads/2026-06-02-2606.00754.md)  
+  9/10 [daily]
+- [Partial Identification under High-Dimensional Potential Outcomes and Confounders via Optimal Transport](deep_reads/2026-06-02-2606.00847.md)  
+  9/10 [daily]
+- [Design-based edge-level causal inference with machine learning assisted covariate adjustment](deep_reads/2026-06-02-2606.00965.md)  
+  9/10 [daily]
+- [Beyond principal ignorability: Nonparametric sensitivity bounds for principal stratification](deep_reads/2026-06-02-2606.01669.md)  
+  9/10 [daily]
+- [Scalable Counterfactual Risk Estimation for Rare Events in Longitudinal Data](deep_reads/2026-06-02-2606.01539.md)  
+  8/10 [daily]
+- [Data-Automated Policy Learning for Nonlinear Welfare](deep_reads/2026-06-02-2606.01659.md)  
+  8/10 [daily]
+- [When Do Treatment Changes Identify Causal Effects?](deep_reads/2026-06-02-2606.02234.md)  
+  8/10 [daily]
+- [Topological Ignorability for Structural Causal Effects Beyond Means](deep_reads/2026-06-02-2606.01184.md)  
+  7/10 [daily]
 - [Modeling Covariate Transition for Efficient Estimation of Longitudinal Treatment Effects in Randomized Experiments](deep_reads/2026-06-01-2605.31443.md)  
   8/10 [daily]
 - [Identification and Inference for Structural Accelerated Failure Time Models via Instrument Interactions](deep_reads/2026-05-29-2605.28341.md)  
@@ -167,6 +183,10 @@
 
 ### Daily
 
+- [Structural Change Detection in High-Dimensional Transformed Factor Models via Canonical Correlation Analysis](deep_reads/2026-06-02-2606.01553.md)  
+  7/10 [daily]
+- [Online Sparse Regression with Expanding Observables](deep_reads/2026-06-02-2606.00478.md)  
+  7/10 [daily]
 - [Optimal Spectral Algorithms for Correlated Two-view Models in High Dimensions](deep_reads/2026-05-21-2605.19364.md)  
   9/10 [daily]
 - [Fixed-order PCA: Theory for Overestimated Factor Models](deep_reads/2026-05-20-2605.18448.md)  
@@ -223,6 +243,14 @@
 
 ### Daily
 
+- [Fast Near-Optimal Estimation over Symmetric Norm Balls](deep_reads/2026-06-02-2606.01554.md)  
+  8/10 [daily]
+- [Empirical Likelihood with Generative AI](deep_reads/2026-06-02-2606.00425.md)  
+  7/10 [daily]
+- [Rate-optimal neural boundary detection from unlabeled noisy images](deep_reads/2026-06-02-2606.00715.md)  
+  7/10 [daily]
+- [Statistical Inference on Gradient Flows](deep_reads/2026-06-02-2606.01257.md)  
+  7/10 [daily]
 - [Rectified Linear Unit Regression](deep_reads/2026-06-01-2605.30609.md)  
   8/10 [daily]
 - [Bernstein-von Mises Theorem for Sparse Generalized Linear Model](deep_reads/2026-05-27-2605.27137.md)  
@@ -264,6 +292,12 @@
 
 ### Daily
 
+- [Higher-Order Efficient Estimators: A Review and Simulation-Based Benchmark Study](deep_reads/2026-06-02-2606.01674.md)  
+  10/10 [daily]
+- [Higher-Order Debiased Estimators for General Treatment Models](deep_reads/2026-06-02-2606.01706.md)  
+  10/10 [daily]
+- [Semiparametric Efficiency of Residual Correlation Testing under Gaussian Additive Noise Models](deep_reads/2026-06-02-2606.01011.md)  
+  9/10 [daily]
 - [Improving the Efficiency of Subgroup Analysis in Randomized Controlled Trials with TMLE](deep_reads/2026-05-18-2605.15483.md)  
   9/10 [daily]
 - [Statistical Inference for Smoothed Support Vector Machines in High Dimensions: From Offline to Online Data](deep_reads/2026-05-18-2605.15911.md)  
@@ -295,6 +329,12 @@
 
 ### Daily
 
+- [When Do Generalized Permutation Tests Achieve Optimal Power? A Dispersion Characterization](deep_reads/2026-06-02-2606.00578.md)  
+  8/10 [daily]
+- [Hypothesis Testing for a Functional Parameter via Self-normalization](deep_reads/2026-06-02-2606.00887.md)  
+  8/10 [daily]
+- [Comb Test: Histogram Uniformity Testing Based on Discrete Total Variation](deep_reads/2026-06-02-2606.01465.md)  
+  7/10 [daily]
 - [Sharp minimax risks and phase transitions in sparse submatrix detection](deep_reads/2026-06-01-2605.31583.md)  
   9/10 [daily]
 - [The Nonparametric Kiefer-Weiss Problem](deep_reads/2026-06-01-2605.31465.md)  
@@ -392,6 +432,8 @@
 
 ### Daily
 
+- [Bayesian estimation of spectral parameters of the 6.7-GHz methanol maser G339.884-1.259 from GRAO observations](deep_reads/2026-06-02-2606.00768.md)  
+  8/10 [daily]
 - [Refining the Gaia DR3 Parallax Zero-point: A Hybrid Approach Combining Global Parametric Correction with Local Refinement](deep_reads/2026-06-01-2605.31402.md)  
   8/10 [daily]
 - [Choosing the right MCMC sampler: a systematic benchmark of gradient-free methods](deep_reads/2026-06-01-2605.30412.md)  
