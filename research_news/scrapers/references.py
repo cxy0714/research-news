@@ -15,11 +15,24 @@ import os
 import re
 
 import httpx
-from tenacity import retry, stop_after_attempt, wait_exponential
+from tenacity import retry, retry_if_exception, stop_after_attempt, wait_exponential
 
 log = logging.getLogger(__name__)
 
 S2_BASE = "https://api.semanticscholar.org/graph/v1"
+
+
+def should_retry_http(exc: BaseException) -> bool:
+    """Retry only *transient* failures: 429 (rate limit), 5xx, network/timeout.
+
+    A 404 (paper not yet indexed — common for same-day arXiv posts) or any
+    other 4xx is permanent, so we don't waste two more round-trips on it.
+    Shared with the OpenAlex scraper so both report the real cause.
+    """
+    if isinstance(exc, httpx.HTTPStatusError):
+        code = exc.response.status_code
+        return code == 429 or code >= 500
+    return isinstance(exc, (httpx.TransportError, httpx.TimeoutException))
 
 # Fields we ask S2 for on each cited paper. `isInfluential` + `intents` let us
 # rank "core" citations (methodological / background) above passing mentions.
@@ -47,7 +60,12 @@ def extract_arxiv_id(*candidates: str | None) -> str | None:
     return None
 
 
-@retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=2, min=2, max=10))
+@retry(
+    retry=retry_if_exception(should_retry_http),
+    stop=stop_after_attempt(3),
+    wait=wait_exponential(multiplier=2, min=2, max=10),
+    reraise=True,  # surface the real HTTPStatusError, not an opaque RetryError
+)
 def _get(path: str, params: dict) -> dict:
     with httpx.Client(timeout=30, headers=_headers()) as c:
         r = c.get(f"{S2_BASE}{path}", params=params)
@@ -67,7 +85,12 @@ def fetch_references(arxiv_id: str, *, fetch_limit: int = 100) -> list[dict]:
             {"fields": f"isInfluential,intents,contexts,{_REF_FIELDS}", "limit": fetch_limit},
         )
         return data.get("data", []) or []
-    except Exception as e:  # noqa: BLE001 — fail open, deep read still works
+    except httpx.HTTPStatusError as e:  # fail open, deep read still works
+        code = e.response.status_code
+        hint = " (paper not indexed yet?)" if code == 404 else (" (rate limited)" if code == 429 else "")
+        log.info("reference fetch failed for arXiv:%s: HTTP %s%s", arxiv_id, code, hint)
+        return []
+    except Exception as e:  # noqa: BLE001 — network/parse error, also fail open
         log.info("reference fetch failed for arXiv:%s: %s", arxiv_id, e)
         return []
 

@@ -21,10 +21,10 @@ from pathlib import Path
 
 import httpx
 import yaml
-from tenacity import retry, stop_after_attempt, wait_exponential
+from tenacity import retry, retry_if_exception, stop_after_attempt, wait_exponential
 
 from ..models import Paper
-from .references import extract_arxiv_id
+from .references import extract_arxiv_id, should_retry_http
 
 log = logging.getLogger(__name__)
 
@@ -103,7 +103,12 @@ def _doi_for(paper: Paper) -> str | None:
     return None
 
 
-@retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=2, min=2, max=10))
+@retry(
+    retry=retry_if_exception(should_retry_http),
+    stop=stop_after_attempt(3),
+    wait=wait_exponential(multiplier=2, min=2, max=10),
+    reraise=True,  # surface the real HTTPStatusError, not an opaque RetryError
+)
 def _openalex_work(doi: str) -> dict:
     params = {"select": "authorships"}
     mailto = os.environ.get("OPENALEX_MAILTO")
@@ -119,7 +124,12 @@ def fetch_openalex_affiliations(doi: str) -> list[str]:
     """Return affiliation strings for a work, or [] on any failure."""
     try:
         work = _openalex_work(doi)
-    except Exception as e:  # noqa: BLE001 — fail open
+    except httpx.HTTPStatusError as e:  # fail open — green-light just finds nothing
+        code = e.response.status_code
+        hint = " (work not indexed yet?)" if code == 404 else (" (rate limited)" if code == 429 else "")
+        log.info("OpenAlex affiliation lookup failed for %s: HTTP %s%s", doi, code, hint)
+        return []
+    except Exception as e:  # noqa: BLE001 — network/parse error, also fail open
         log.info("OpenAlex affiliation lookup failed for %s: %s", doi, e)
         return []
     affils: list[str] = []
