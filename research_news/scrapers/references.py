@@ -185,3 +185,162 @@ def format_references_block(rows: list[dict], *, top_n: int = 25, max_chars: int
             lines.append("（其余被引文献从略。）")
             break
     return "\n".join(lines).rstrip() + "\n"
+
+
+# ── OpenAlex fallback ───────────────────────────────────────────────────────
+# Semantic Scholar declined our API key, so on heavy-throttle days S2 may fail
+# or return references with no abstracts. OpenAlex (free, no key, polite pool
+# with OPENALEX_MAILTO) is a second source. It has no per-citation signals
+# (isInfluential / intents / contexts), so those come back empty and the
+# ranking falls back to citation count — but the abstracts let the survey
+# section still get built, and the edges still feed the citation graph.
+
+OPENALEX_BASE = "https://api.openalex.org"
+
+# Fields we pull per cited work. abstract_inverted_index is OpenAlex's abstract
+# representation; we reconstruct plain text from it.
+_OA_SELECT = (
+    "id,ids,doi,title,display_name,publication_year,cited_by_count,"
+    "abstract_inverted_index,authorships,primary_location"
+)
+
+
+def _openalex_params(extra: dict) -> dict:
+    params = dict(extra)
+    mailto = os.environ.get("OPENALEX_MAILTO")
+    if mailto:
+        params["mailto"] = mailto
+    return params
+
+
+def _do_openalex_get(path: str, params: dict) -> dict:
+    with httpx.Client(timeout=30) as c:
+        r = c.get(f"{OPENALEX_BASE}{path}", params=_openalex_params(params))
+        r.raise_for_status()
+        return r.json()
+
+
+def _openalex_get(path: str, params: dict) -> dict:
+    retryer = Retrying(
+        retry=retry_if_exception(should_retry_http),
+        stop=stop_after_attempt(_env_int("OPENALEX_FETCH_ATTEMPTS", 4)),
+        wait=wait_random_exponential(multiplier=1.5, max=_env_float("OPENALEX_MAX_BACKOFF", 20.0)),
+        reraise=True,
+    )
+    return retryer(_do_openalex_get, path, params)
+
+
+def _reconstruct_abstract(inv_index: dict | None) -> str:
+    """Rebuild plain-text abstract from OpenAlex's word -> [positions] index."""
+    if not inv_index:
+        return ""
+    pairs = [(pos, word) for word, positions in inv_index.items() for pos in positions]
+    pairs.sort()
+    return " ".join(word for _, word in pairs)
+
+
+def _bare_doi(doi: str | None) -> str | None:
+    if not doi:
+        return None
+    doi = doi.strip()
+    for pre in ("https://doi.org/", "http://doi.org/", "doi.org/"):
+        if doi.lower().startswith(pre):
+            return doi[len(pre):] or None
+    return doi or None
+
+
+def _openalex_work_to_cited(work: dict) -> dict:
+    """Normalize an OpenAlex work into the same `citedPaper` shape S2 returns,
+    so downstream ranking / formatting / edge extraction work unchanged."""
+    doi = _bare_doi(work.get("doi"))
+    ext: dict = {}
+    if doi:
+        ext["DOI"] = doi
+        # arXiv works carry the 10.48550/arXiv.<id> DOI — recover the bare id.
+        m = re.match(r"10\.48550/arxiv\.(.+)$", doi, re.IGNORECASE)
+        if m:
+            ext["ArXiv"] = m.group(1)
+    oa_id = ((work.get("ids") or {}).get("openalex") or work.get("id") or "")
+    authors = [
+        {"name": (a.get("author") or {}).get("display_name")}
+        for a in (work.get("authorships") or [])
+        if (a.get("author") or {}).get("display_name")
+    ]
+    venue = ((work.get("primary_location") or {}).get("source") or {}).get("display_name")
+    return {
+        "paperId": oa_id.rsplit("/", 1)[-1] or None,
+        "title": work.get("title") or work.get("display_name"),
+        "abstract": _reconstruct_abstract(work.get("abstract_inverted_index")),
+        "year": work.get("publication_year"),
+        "authors": authors,
+        "externalIds": ext,
+        "citationCount": work.get("cited_by_count"),
+        "venue": venue,
+    }
+
+
+def fetch_references_openalex(arxiv_id: str, *, fetch_limit: int = 100) -> list[dict]:
+    """Return cited-work rows from OpenAlex, in the same shape as S2 rows.
+
+    Two steps: the paper's `referenced_works` (OpenAlex ids), then a batched
+    metadata fetch (≤50 ids per request — OpenAlex's pipe-OR limit). [] on any
+    failure.
+    """
+    doi = f"10.48550/arXiv.{arxiv_id}"
+    try:
+        head = _openalex_get(f"/works/doi:{doi}", {"select": "referenced_works"})
+    except httpx.HTTPStatusError as e:
+        code = e.response.status_code
+        hint = " (not indexed yet?)" if code == 404 else ""
+        log.info("OpenAlex refs: lookup failed for arXiv:%s: HTTP %s%s", arxiv_id, code, hint)
+        return []
+    except Exception as e:  # noqa: BLE001 — fail open
+        log.info("OpenAlex refs: lookup failed for arXiv:%s: %s", arxiv_id, e)
+        return []
+
+    ref_ids = [u.rsplit("/", 1)[-1] for u in (head.get("referenced_works") or [])]
+    ref_ids = [r for r in ref_ids if r][:fetch_limit]
+    if not ref_ids:
+        return []
+
+    rows: list[dict] = []
+    for i in range(0, len(ref_ids), 50):
+        chunk = ref_ids[i:i + 50]
+        try:
+            data = _openalex_get(
+                "/works",
+                {"filter": "ids.openalex:" + "|".join(chunk),
+                 "per-page": 50, "select": _OA_SELECT},
+            )
+        except Exception as e:  # noqa: BLE001 — keep whatever we already have
+            log.info("OpenAlex refs: batch fetch failed for arXiv:%s: %s", arxiv_id, e)
+            continue
+        for w in data.get("results", []) or []:
+            rows.append({
+                "isInfluential": False,  # OpenAlex has no such signal
+                "intents": [],
+                "contexts": [],
+                "citedPaper": _openalex_work_to_cited(w),
+            })
+    return rows
+
+
+def fetch_references_best(arxiv_id: str, *, fetch_limit: int = 100) -> tuple[list[dict], str]:
+    """Best available references: prefer S2 (richer signals); fall back to
+    OpenAlex when S2 yields no abstract-bearing references.
+
+    Returns (rows, source) where source is "s2" / "openalex" / "none".
+    """
+    s2 = fetch_references(arxiv_id, fetch_limit=fetch_limit)
+    if select_key_references(s2):
+        return s2, "s2"
+    oa = fetch_references_openalex(arxiv_id, fetch_limit=fetch_limit)
+    if select_key_references(oa):
+        return oa, "openalex"
+    # Neither yields usable abstracts; still return edges for the graph,
+    # preferring S2's richer rows when present.
+    if s2:
+        return s2, "s2"
+    if oa:
+        return oa, "openalex"
+    return [], "none"

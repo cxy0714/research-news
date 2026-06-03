@@ -112,7 +112,9 @@ def deep_read_paper(
     if FETCH_REFS:
         arxiv_id = refs.extract_arxiv_id(paper.paper_id, paper.arxiv_url, paper.url)
         if arxiv_id:
-            rows = refs.fetch_references(arxiv_id)
+            # S2 first (richer signals); OpenAlex fallback when S2 is throttled
+            # or returns no abstract-bearing references.
+            rows, src = refs.fetch_references_best(arxiv_id)
             # Persist the citation edges first — we want them even when the
             # cited works have no abstracts (so no prompt block), since the
             # identifiers alone build the citation graph over time.
@@ -123,8 +125,8 @@ def deep_read_paper(
                 # Count what actually made it into the block (each cited work is
                 # rendered as a "### [i] …" heading); persist it as tuning data.
                 paper.n_references = refs_block.count("### [")
-                log.info("deep read %s: attached %d refs (%d chars)",
-                         paper.paper_id, paper.n_references, len(refs_block))
+                log.info("deep read %s: attached %d refs (%d chars) via %s",
+                         paper.paper_id, paper.n_references, len(refs_block), src)
 
     user = (
         f"## Researcher interests\n{interests_yaml}\n\n"
