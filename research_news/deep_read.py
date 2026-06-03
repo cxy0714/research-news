@@ -15,6 +15,7 @@ from pathlib import Path
 
 from pypdf import PdfReader
 
+from . import citations
 from .llm.prompts import DEEP_READ_ASTRO_SYSTEM, DEEP_READ_SYSTEM, TOPIC_LABELS_ZH
 from .llm.sjtu_client import SJTUClient
 from .models import Paper
@@ -112,6 +113,11 @@ def deep_read_paper(
         arxiv_id = refs.extract_arxiv_id(paper.paper_id, paper.arxiv_url, paper.url)
         if arxiv_id:
             rows = refs.fetch_references(arxiv_id)
+            # Persist the citation edges first — we want them even when the
+            # cited works have no abstracts (so no prompt block), since the
+            # identifiers alone build the citation graph over time.
+            if rows:
+                citations.record_citations(paper.paper_id, arxiv_id, rows)
             refs_block = refs.format_references_block(rows)
             if refs_block:
                 # Count what actually made it into the block (each cited work is
