@@ -236,12 +236,36 @@ def run(
     return total
 
 
+def _setup_logging(log_dir: str = "logs") -> None:
+    """Log to console *and* logs/<today>.log, mirroring the daily pipeline, so
+    backfill runs (incl. the real reference-fetch HTTP status codes) are
+    persisted for diagnosis rather than lost to the console."""
+    fmt = "%(asctime)s %(levelname)s %(name)s: %(message)s"
+    datefmt = "%Y-%m-%d %H:%M:%S"
+    Path(log_dir).mkdir(exist_ok=True)
+    log_file = Path(log_dir) / f"{date.today().isoformat()}.log"
+
+    root = logging.getLogger()
+    root.setLevel(logging.INFO)
+    formatter = logging.Formatter(fmt, datefmt=datefmt)
+    ch = logging.StreamHandler()
+    ch.setFormatter(formatter)
+    root.addHandler(ch)
+    fh = logging.FileHandler(log_file, encoding="utf-8")  # append
+    fh.setFormatter(formatter)
+    root.addHandler(fh)
+    # httpx request lines stay in the file but off the console.
+    httpx_log = logging.getLogger("httpx")
+    httpx_log.setLevel(logging.WARNING)
+    fh_httpx = logging.FileHandler(log_file, encoding="utf-8")
+    fh_httpx.setFormatter(formatter)
+    fh_httpx.setLevel(logging.INFO)
+    httpx_log.addHandler(fh_httpx)
+    httpx_log.propagate = False
+
+
 def main() -> None:
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s %(levelname)s %(name)s: %(message)s",
-        datefmt="%Y-%m-%d %H:%M:%S",
-    )
+    _setup_logging()
     ap = argparse.ArgumentParser(
         description="Backfill deep-read reports for past dailies under today's "
                     "(lower) score threshold, using data/llm_scores.jsonl."
