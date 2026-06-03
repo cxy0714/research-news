@@ -130,7 +130,7 @@ python -m research_news.backfill_deep_reads --date 2026-05-29 --force
 - `data/highlights/<topic>/<arxiv_id>.pdf` — 高相关论文 PDF（本地存储，不上传 GitHub）
 - `data/highlights.json` — 高相关论文 manifest（含 score / topic / 摘要 / 关键技术等）
 - `data/deep_reads_index.json` — 精读元数据索引（首页展示用；含每篇 `n_references` 被引篇数）
-- `data/citations.json` — 精读论文的引用边（被引文献的 arXiv/DOI/S2 id + 是否高影响 / 引用意图 / 被引数）。即使当时没抓到摘要也存，攒成引用网络供日后挖掘问题。被引检索优先用 Semantic Scholar，限速或无摘要时回退到 OpenAlex（设 `OPENALEX_MAILTO` 更稳）
+- `data/citations.json` — 精读论文的引用边（被引文献的 arXiv/DOI/S2 id + 是否高影响 / 引用意图 / 被引数）。即使当时没抓到摘要也存，攒成引用网络供日后挖掘问题
 - `logs/<日期>.log` — 详细日志
 
 ## 期刊管道
