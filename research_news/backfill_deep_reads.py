@@ -75,12 +75,19 @@ def qualifying_papers(
     threshold: float,
     *,
     sources: set[str] | None = None,
+    force: bool = False,
 ) -> list[Paper]:
     """Papers scored on ``run_date`` at/above ``threshold``, not yet deep-read.
 
     Sourced from data/llm_scores.jsonl. Deduped by paper_id (a paper can have
-    several rows); the highest-scoring row for that date wins. Papers already in
-    the deep-reads index for this date are excluded.
+    several rows); the highest-scoring row for that date wins.
+
+    By default papers already in the deep-reads index for this date are excluded
+    (incremental backfill). With ``force=True`` nothing is excluded and the set
+    is *every* paper that is either at/above threshold OR already deep-read that
+    day — i.e. regenerate the whole day's deep reads, picking up newly-qualifying
+    papers too. A previously deep-read paper below the threshold (e.g. an
+    institution green-light) is still re-run under force so the day isn't shrunk.
     """
     score_index = load_score_index()  # paper_id -> list[row]
     already = {pid for pid, d in
@@ -91,7 +98,8 @@ def qualifying_papers(
         for row in rows:
             if row.get("run_date") != run_date:
                 continue
-            if (row.get("score") or 0) < threshold:
+            meets = (row.get("score") or 0) >= threshold
+            if not meets and not (force and pid in already):
                 continue
             if sources and (row.get("source") or "arxiv") not in sources:
                 continue
@@ -101,7 +109,7 @@ def qualifying_papers(
 
     papers: list[Paper] = []
     for pid, row in best_row.items():
-        if pid in already:
+        if pid in already and not force:
             continue
         papers.append(_paper_from_row(row))
     # Highest score first — the most relevant papers get deep-read even under a
@@ -120,9 +128,10 @@ def backfill_date(
     limit: int | None,
     dry_run: bool,
     sources: set[str] | None,
+    force: bool,
 ) -> int:
     """Backfill deep reads for one date. Returns the number deep-read."""
-    papers = qualifying_papers(run_date, threshold, sources=sources)
+    papers = qualifying_papers(run_date, threshold, sources=sources, force=force)
     if limit is not None:
         papers = papers[:limit]
 
@@ -130,8 +139,10 @@ def backfill_date(
         log.info("%s: nothing to backfill (no new papers >= %.0f)", run_date, threshold)
         return 0
 
-    log.info("%s: %d paper(s) qualify for backfill (score >= %.0f):",
-             run_date, len(papers), threshold)
+    verb = "re-run" if force else "backfill"
+    log.info("%s: %d paper(s) to %s (score >= %.0f%s):",
+             run_date, len(papers), verb, threshold,
+             ", incl. already-deep-read" if force else "")
     for p in papers:
         log.info("  %s  score=%.0f  topic=%s  %s",
                  p.paper_id, p.score or 0, p.topic or "?", p.title[:70])
@@ -181,6 +192,7 @@ def run(
     limit: int | None = None,
     dry_run: bool = False,
     sources: set[str] | None = None,
+    force: bool = False,
 ) -> int:
     """Backfill deep reads for one date or a date range. Returns total deep-read."""
     load_dotenv()
@@ -215,6 +227,7 @@ def run(
             limit=limit,
             dry_run=dry_run,
             sources=sources,
+            force=force,
         )
 
     if total and not dry_run:
@@ -248,6 +261,10 @@ def main() -> None:
                          "a trial run before committing tokens")
     ap.add_argument("--source", action="append", dest="sources",
                     help="only papers from this source (e.g. arxiv); repeatable")
+    ap.add_argument("--force", action="store_true",
+                    help="re-run the WHOLE day: don't skip already-deep-read papers, "
+                         "and re-generate them too (use when the deep-read recipe "
+                         "changed and you want the day refreshed end-to-end)")
     ap.add_argument("--dry-run", action="store_true",
                     help="list what would be backfilled without calling the LLM "
                          "or downloading anything")
@@ -265,6 +282,7 @@ def main() -> None:
         limit=args.limit,
         dry_run=args.dry_run,
         sources=set(args.sources) if args.sources else None,
+        force=args.force,
     )
 
 
