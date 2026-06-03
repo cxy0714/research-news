@@ -10,56 +10,42 @@
 - **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-06-02
+## 今日 · 2026-06-03
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-06-02.md)
+[→ 查看完整报告](daily/2026-06-03.md)
 
-### 精读论文（21 篇）
+### 精读论文（14 篇）
 
-- [Higher-Order Efficient Estimators: A Review and Simulation-Based Benchmark Study](deep_reads/2026-06-02-2606.01674.md)  
-  `效率理论 / Debiased ML` · 相关性 10/10
-- [Higher-Order Debiased Estimators for General Treatment Models](deep_reads/2026-06-02-2606.01706.md)  
-  `效率理论 / Debiased ML` · 相关性 10/10
-- [Causal Density Functions](deep_reads/2026-06-02-2606.00754.md)  
-  `因果推断` · 相关性 9/10
-- [Partial Identification under High-Dimensional Potential Outcomes and Confounders via Optimal Transport](deep_reads/2026-06-02-2606.00847.md)  
-  `因果推断` · 相关性 9/10
-- [Design-based edge-level causal inference with machine learning assisted covariate adjustment](deep_reads/2026-06-02-2606.00965.md)  
-  `因果推断` · 相关性 9/10
-- [Beyond principal ignorability: Nonparametric sensitivity bounds for principal stratification](deep_reads/2026-06-02-2606.01669.md)  
-  `因果推断` · 相关性 9/10
-- [Semiparametric Efficiency of Residual Correlation Testing under Gaussian Additive Noise Models](deep_reads/2026-06-02-2606.01011.md)  
-  `效率理论 / Debiased ML` · 相关性 9/10
-- [When Do Generalized Permutation Tests Achieve Optimal Power? A Dispersion Characterization](deep_reads/2026-06-02-2606.00578.md)  
+- [Identification, Estimation, and Inference for Sequential Causally Ordered Mediation Pathways](deep_reads/2026-06-03-2606.02833.md)  
+  `因果推断` · 相关性 8/10
+- [Assessing the Impact of Intercurrent Events on Power and Sample Size for Estimands with Time-to-Event Endpoints](deep_reads/2026-06-03-2606.03863.md)  
   `数理统计 / 假设检验` · 相关性 8/10
-- [Hypothesis Testing for a Functional Parameter via Self-normalization](deep_reads/2026-06-02-2606.00887.md)  
-  `数理统计 / 假设检验` · 相关性 8/10
-- [Scalable Counterfactual Risk Estimation for Rare Events in Longitudinal Data](deep_reads/2026-06-02-2606.01539.md)  
-  `因果推断` · 相关性 8/10
-- [Fast Near-Optimal Estimation over Symmetric Norm Balls](deep_reads/2026-06-02-2606.01554.md)  
-  `非参数 / 半参数` · 相关性 8/10
-- [Data-Automated Policy Learning for Nonlinear Welfare](deep_reads/2026-06-02-2606.01659.md)  
-  `因果推断` · 相关性 8/10
-- [When Do Treatment Changes Identify Causal Effects?](deep_reads/2026-06-02-2606.02234.md)  
-  `因果推断` · 相关性 8/10
-- [Bayesian estimation of spectral parameters of the 6.7-GHz methanol maser G339.884-1.259 from GRAO observations](deep_reads/2026-06-02-2606.00768.md)  
-  `天体统计` · 相关性 8/10
-- [Empirical Likelihood with Generative AI](deep_reads/2026-06-02-2606.00425.md)  
-  `非参数 / 半参数` · 相关性 7/10
-- [Rate-optimal neural boundary detection from unlabeled noisy images](deep_reads/2026-06-02-2606.00715.md)  
-  `非参数 / 半参数` · 相关性 7/10
-- [Topological Ignorability for Structural Causal Effects Beyond Means](deep_reads/2026-06-02-2606.01184.md)  
-  `因果推断` · 相关性 7/10
-- [Comb Test: Histogram Uniformity Testing Based on Discrete Total Variation](deep_reads/2026-06-02-2606.01465.md)  
+- [Powerful Switchback Experiments -- Or Not?](deep_reads/2026-06-03-2606.03012.md)  
   `数理统计 / 假设检验` · 相关性 7/10
-- [Structural Change Detection in High-Dimensional Transformed Factor Models via Canonical Correlation Analysis](deep_reads/2026-06-02-2606.01553.md)  
+- [A Fast Screening Approach for High-dimensional Outcomes and High-dimensional Predictors](deep_reads/2026-06-03-2606.03018.md)  
   `高维统计 / 随机矩阵` · 相关性 7/10
-- [Online Sparse Regression with Expanding Observables](deep_reads/2026-06-02-2606.00478.md)  
+- [A Better Comparison under right-censoring: ABC Statistic for Equivalence Testing and Quantification](deep_reads/2026-06-03-2606.03415.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Network Time Series Models for Multivariate Volatility Forecasting](deep_reads/2026-06-03-2606.03828.md)  
+  `经济理论 / 应用` · 相关性 7/10
+- [Principal Components Decomposition of Fraction of Variance Explained in High Dimensional Linear Models with Strong Correlation](deep_reads/2026-06-03-2606.03880.md)  
   `高维统计 / 随机矩阵` · 相关性 7/10
-- [Statistical Inference on Gradient Flows](deep_reads/2026-06-02-2606.01257.md)  
-  `非参数 / 半参数` · 相关性 7/10
+- [Sparse Tree-Based Aggregation for Time Series Regressions](deep_reads/2026-06-03-2606.03665.md)  
+  `经济理论 / 应用` · 相关性 7/10
+- [Marginalised Poisson Hurdle Model for Cross-Sectional Count Data with Excess Zeros](deep_reads/2026-06-03-2606.03023.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Efficient Federated Estimation and Inference for High-Dimensional Tail Index Regression](deep_reads/2026-06-03-2606.03154.md)  
+  `效率理论 / Debiased ML` · 相关性 6/10
+- [Projection Diagnostics for Directional Asymmetry and Tail-Ratio Departure in Multivariate Data](deep_reads/2026-06-03-2606.03670.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Regularization in Paired Comparison Models via Pseudo-Games and Phantom Players](deep_reads/2026-06-03-2606.03805.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [A Neural Estimation Framework for Aggregated Relational Data under Intractable Likelihoods](deep_reads/2026-06-03-2606.03961.md)  
+  `统计计算 / 算法` · 相关性 6/10
+- [Neutrino Fingerprints: Image-Based Encodings of IceCube Events for CNN Direction Reconstruction](deep_reads/2026-06-03-2606.02788.md)  
+  `天体统计` · 相关性 6/10
 
 ## 收藏
 
@@ -67,11 +53,11 @@
 
 ## 本周每日报告
 
+- [2026-06-02](daily/2026-06-02.md)
 - [2026-06-01](daily/2026-06-01.md)
 - [2026-05-29](daily/2026-05-29.md)
 - [2026-05-28](daily/2026-05-28.md)
 - [2026-05-27](daily/2026-05-27.md)
-- [2026-05-26](daily/2026-05-26.md)
 
 
 ---

@@ -4,6 +4,8 @@
 
 ### Daily
 
+- [Identification, Estimation, and Inference for Sequential Causally Ordered Mediation Pathways](deep_reads/2026-06-03-2606.02833.md)  
+  8/10 [daily]
 - [Causal Density Functions](deep_reads/2026-06-02-2606.00754.md)  
   9/10 [daily]
 - [Partial Identification under High-Dimensional Potential Outcomes and Confounders via Optimal Transport](deep_reads/2026-06-02-2606.00847.md)  
@@ -183,6 +185,10 @@
 
 ### Daily
 
+- [A Fast Screening Approach for High-dimensional Outcomes and High-dimensional Predictors](deep_reads/2026-06-03-2606.03018.md)  
+  7/10 [daily]
+- [Principal Components Decomposition of Fraction of Variance Explained in High Dimensional Linear Models with Strong Correlation](deep_reads/2026-06-03-2606.03880.md)  
+  7/10 [daily]
 - [Structural Change Detection in High-Dimensional Transformed Factor Models via Canonical Correlation Analysis](deep_reads/2026-06-02-2606.01553.md)  
   7/10 [daily]
 - [Online Sparse Regression with Expanding Observables](deep_reads/2026-06-02-2606.00478.md)  
@@ -243,6 +249,10 @@
 
 ### Daily
 
+- [Marginalised Poisson Hurdle Model for Cross-Sectional Count Data with Excess Zeros](deep_reads/2026-06-03-2606.03023.md)  
+  6/10 [daily]
+- [Regularization in Paired Comparison Models via Pseudo-Games and Phantom Players](deep_reads/2026-06-03-2606.03805.md)  
+  6/10 [daily]
 - [Fast Near-Optimal Estimation over Symmetric Norm Balls](deep_reads/2026-06-02-2606.01554.md)  
   8/10 [daily]
 - [Empirical Likelihood with Generative AI](deep_reads/2026-06-02-2606.00425.md)  
@@ -292,6 +302,8 @@
 
 ### Daily
 
+- [Efficient Federated Estimation and Inference for High-Dimensional Tail Index Regression](deep_reads/2026-06-03-2606.03154.md)  
+  6/10 [daily]
 - [Higher-Order Efficient Estimators: A Review and Simulation-Based Benchmark Study](deep_reads/2026-06-02-2606.01674.md)  
   10/10 [daily]
 - [Higher-Order Debiased Estimators for General Treatment Models](deep_reads/2026-06-02-2606.01706.md)  
@@ -329,6 +341,14 @@
 
 ### Daily
 
+- [Assessing the Impact of Intercurrent Events on Power and Sample Size for Estimands with Time-to-Event Endpoints](deep_reads/2026-06-03-2606.03863.md)  
+  8/10 [daily]
+- [Powerful Switchback Experiments -- Or Not?](deep_reads/2026-06-03-2606.03012.md)  
+  7/10 [daily]
+- [A Better Comparison under right-censoring: ABC Statistic for Equivalence Testing and Quantification](deep_reads/2026-06-03-2606.03415.md)  
+  7/10 [daily]
+- [Projection Diagnostics for Directional Asymmetry and Tail-Ratio Departure in Multivariate Data](deep_reads/2026-06-03-2606.03670.md)  
+  6/10 [daily]
 - [When Do Generalized Permutation Tests Achieve Optimal Power? A Dispersion Characterization](deep_reads/2026-06-02-2606.00578.md)  
   8/10 [daily]
 - [Hypothesis Testing for a Functional Parameter via Self-normalization](deep_reads/2026-06-02-2606.00887.md)  
@@ -409,6 +429,11 @@
 
 ## 统计计算 / 算法
 
+### Daily
+
+- [A Neural Estimation Framework for Aggregated Relational Data under Intractable Likelihoods](deep_reads/2026-06-03-2606.03961.md)  
+  6/10 [daily]
+
 ### 期刊
 
 #### JMLR
@@ -432,6 +457,8 @@
 
 ### Daily
 
+- [Neutrino Fingerprints: Image-Based Encodings of IceCube Events for CNN Direction Reconstruction](deep_reads/2026-06-03-2606.02788.md)  
+  6/10 [daily]
 - [Bayesian estimation of spectral parameters of the 6.7-GHz methanol maser G339.884-1.259 from GRAO observations](deep_reads/2026-06-02-2606.00768.md)  
   8/10 [daily]
 - [Refining the Gaia DR3 Parallax Zero-point: A Hybrid Approach Combining Global Parametric Correction with Local Refinement](deep_reads/2026-06-01-2605.31402.md)  
@@ -455,6 +482,10 @@
 
 ### Daily
 
+- [Network Time Series Models for Multivariate Volatility Forecasting](deep_reads/2026-06-03-2606.03828.md)  
+  7/10 [daily]
+- [Sparse Tree-Based Aggregation for Time Series Regressions](deep_reads/2026-06-03-2606.03665.md)  
+  7/10 [daily]
 - [Quasi-Bayesian Local Projection Instrumental-Variables Method: Application to Renewable Energy and Electricity Prices](deep_reads/2026-05-18-2605.15966.md)  
   7/10 [daily]
 - [Tweedie's Formula, Variance Functions, and Score-Driven Updating](deep_reads/2026-05-18-2605.15902.md)  
