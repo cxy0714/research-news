@@ -36,6 +36,10 @@
   8/10 [daily]
 - [Deep Neural Networks for Doubly Robust Estimation with Nonprobability Survey Samples](deep_reads/2026-05-29-2605.28762.md)  
   8/10 [daily]
+- [Improving Power in Randomized Controlled Trials with Time-to-Event Endpoints: A Risk-Free Approach](deep_reads/2026-05-29-2605.27711.md)  
+  7/10 [daily]
+- [The Modified Egger Intercept Tests for Detecting Horizontal Pleiotropy in Two-Sample Summary-Data Mendelian Randomization](deep_reads/2026-05-29-2605.28471.md)  
+  6/10 [daily]
 - [Semiparametric Inference for Causal Effects on Functional Outcomes](deep_reads/2026-05-27-2605.26964.md)  
   9/10 [daily]
 - [Learning a directed acyclic graph with additive heteroscedastic errors](deep_reads/2026-05-27-2605.26515.md)  
@@ -263,6 +267,8 @@
   7/10 [daily]
 - [Rectified Linear Unit Regression](deep_reads/2026-06-01-2605.30609.md)  
   8/10 [daily]
+- [Robust Moment-Based Estimation via Spectral Gradient Reweighting](deep_reads/2026-05-29-2605.27718.md)  
+  6/10 [daily]
 - [Bernstein-von Mises Theorem for Sparse Generalized Linear Model](deep_reads/2026-05-27-2605.27137.md)  
   8/10 [daily]
 - [Identification and Estimation of Semiparametric Multilayered Sample Selection Models](deep_reads/2026-05-26-2605.25519.md)  
@@ -359,6 +365,8 @@
   9/10 [daily]
 - [The Nonparametric Kiefer-Weiss Problem](deep_reads/2026-06-01-2605.31465.md)  
   8/10 [daily]
+- [Admissibility of Adaptive Monotone Step-Down Multiple Testing Procedures Under Arbitrary Covariance Dependence](deep_reads/2026-05-29-2605.27625.md)  
+  7/10 [daily]
 - [Rank-Based Tests for Mutual Independence of High-Dimensional Random Vectors via $L_q$ Norm](deep_reads/2026-05-26-2605.25380.md)  
   9/10 [daily]
 - [Adaptable High-Dimensional Change Point Detection via Ridge Regularization](deep_reads/2026-05-26-2605.24838.md)  
