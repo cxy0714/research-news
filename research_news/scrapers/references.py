@@ -15,7 +15,7 @@ import os
 import re
 
 import httpx
-from tenacity import retry, retry_if_exception, stop_after_attempt, wait_exponential
+from tenacity import Retrying, retry_if_exception, stop_after_attempt, wait_random_exponential
 
 log = logging.getLogger(__name__)
 
@@ -60,17 +60,43 @@ def extract_arxiv_id(*candidates: str | None) -> str | None:
     return None
 
 
-@retry(
-    retry=retry_if_exception(should_retry_http),
-    stop=stop_after_attempt(3),
-    wait=wait_exponential(multiplier=2, min=2, max=10),
-    reraise=True,  # surface the real HTTPStatusError, not an opaque RetryError
-)
-def _get(path: str, params: dict) -> dict:
+def _env_int(name: str, default: int) -> int:
+    try:
+        return max(1, int(os.environ.get(name, str(default))))
+    except ValueError:
+        return default
+
+
+def _env_float(name: str, default: float) -> float:
+    try:
+        return float(os.environ.get(name, str(default)))
+    except ValueError:
+        return default
+
+
+def _do_get(path: str, params: dict) -> dict:
     with httpx.Client(timeout=30, headers=_headers()) as c:
         r = c.get(f"{S2_BASE}{path}", params=params)
         r.raise_for_status()
         return r.json()
+
+
+def _get(path: str, params: dict) -> dict:
+    """GET with patient, jittered retry on 429/5xx/network.
+
+    Semantic Scholar refused our API-key request, so we live on the shared
+    unauthenticated pool where 429s are frequent. The lever we have left is to
+    retry more patiently: more attempts + longer, *jittered* backoff (so we
+    don't hammer the shared pool in lockstep with everyone else). Tunable via
+    S2_FETCH_ATTEMPTS / S2_MAX_BACKOFF; read at call time so .env takes effect.
+    """
+    retryer = Retrying(
+        retry=retry_if_exception(should_retry_http),
+        stop=stop_after_attempt(_env_int("S2_FETCH_ATTEMPTS", 6)),
+        wait=wait_random_exponential(multiplier=1.5, max=_env_float("S2_MAX_BACKOFF", 30.0)),
+        reraise=True,  # surface the real HTTPStatusError, not an opaque RetryError
+    )
+    return retryer(_do_get, path, params)
 
 
 def fetch_references(arxiv_id: str, *, fetch_limit: int = 100) -> list[dict]:
