@@ -89,9 +89,32 @@ python -m research_news.rerun --dry-run
 > 期刊管道另有 `--retry-broken`（配合 `--load-papers`）可在抓取快照仍在时只重跑坏掉
 > 的摘要；`rerun` 则不依赖快照，直接在已发布的页面上修复，二者互补。
 
+### 补做历史精读（阈值放宽后）
+
+精读阈值放宽后（`score_threshold_deepread`，现为 6），过去的每日里有些当时没精读、
+但按现在的标准够格的论文。每篇打过分的论文都记在 `data/llm_scores.jsonl`（含摘要），
+所以可以直接拿这份记录补做精读，无需重抓重打分：
+
+```bash
+# 补做某天够格但当时没精读的论文（阈值默认读 config/interests.yaml）
+python -m research_news.backfill_deep_reads --date 2026-05-29
+
+# 先空跑看会补哪些、补几篇（不调 LLM、不下 PDF）
+python -m research_news.backfill_deep_reads --date 2026-05-29 --dry-run
+
+# 自定义阈值 / 先试补分数最高的 5 篇
+python -m research_news.backfill_deep_reads --date 2026-05-29 --threshold 7 --limit 5
+
+# 补一段日期区间
+python -m research_news.backfill_deep_reads --since 2026-05-27 --until 2026-06-02
+```
+
+补做的精读页会落到论文**原本的报告日期**下（和当天精读位置一致），已精读过的论文自动
+跳过，所以重复运行安全且不会浪费 token。补完会自动刷新首页与存档页。
+
 输出：
 - `docs/daily/<日期>.md` — 当日速览报告，按主题分组（因果推断 / 高维 RMT / 非参 / 效率理论 / ...）
-- `docs/deep_reads/<日期>-<paper_id>.md` — 每篇高相关论文（score ≥ 8）的独立精读页
+- `docs/deep_reads/<日期>-<paper_id>.md` — 每篇高相关论文（score ≥ `score_threshold_deepread`，现为 6）的独立精读页
 - `docs/index.md` / `docs/all_daily.md` / `docs/all_deep_reads.md` — 自动更新的首页和存档页
 - `data/highlights/<topic>/<arxiv_id>.pdf` — 高相关论文 PDF（本地存储，不上传 GitHub）
 - `data/highlights.json` — 高相关论文 manifest（含 score / topic / 摘要 / 关键技术等）
