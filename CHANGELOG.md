@@ -17,6 +17,13 @@
 ## [Unreleased]
 
 ### Fixed
+- **被引检索 / 机构查询失败显示真实状态码，404 不再重试**：`references.py`（Semantic
+  Scholar）与 `affiliations.py`（OpenAlex）原先把异常被 `RetryError[HTTPStatusError]`
+  吞掉，看不出是 404（论文尚未被收录）还是 429（限速）——而两者解法完全不同。新增
+  `should_retry_http`：只对 **429 / 5xx / 网络超时**重试，**404 等 4xx 直接放过**（不再
+  白重试），并 `reraise=True` 让真实异常冒泡、日志打印真实状态码与提示。
+- **`backfill_deep_reads` 日志落盘**：原先用 `logging.basicConfig` 只输出到控制台，重跑
+  时的真实 HTTP 状态码没被保存。改为同时写入 `logs/<当天>.log`（对齐 daily 的日志设置）。
 - **arXiv 抓取 403 / 429 / RetryError**：`export.arxiv.org` 与 `rss.arxiv.org` 请求改为带
   描述性 User-Agent（arXiv 会拦截 httpx 默认 UA，表现为反复 403），失败时日志直接显示真实
   状态码而非被 `RetryError` 吞掉。并重写抓取重试：**请求间最小间隔 3 秒**（`ARXIV_MIN_INTERVAL`）、
@@ -25,6 +32,17 @@
   / `ARXIV_FETCH_ATTEMPTS` 调。
 
 ### Added
+- **补做历史精读 `backfill_deep_reads`**：精读门槛放宽到 6 后，过去的每日里有些当时没
+  精读、但按现在标准够格的论文。`data/llm_scores.jsonl` 记了每篇打过分论文（含摘要），
+  据此补做精读，无需重抓重打分：`--date` / `--since..--until` / `--threshold` / `--limit`
+  / `--source` / `--dry-run`。精读页落到论文**原报告日期**下；默认增量（跳过已精读），
+  **`--force` 整天重跑**（含已精读的、连绿灯低分的也重跑，不缩小当天集合）。
+- **引用网络存储 `data/citations.json`**：精读时已从 Semantic Scholar 抓到 references；
+  即便被引works没摘要（不进 prompt），也带 `externalIds`。把这些**引用边**存下来——每条
+  边含 arXiv / DOI / S2 id + 标题 + 年份 + 是否高影响 + 引用意图 + 被引数（都是客观信号），
+  按 paper_id upsert（重跑刷新）。攒多了可只凭引用关系构论文引用网络，辅助发掘问题。
+- **记录每篇精读附带的被引篇数 `n_references`**：写进日志（`attached N refs (X chars)`）
+  与 `data/deep_reads_index.json`，作为日后调 prompt 的参考数据；重跑已存在的论文时就地刷新。
 - **跨篇综合 / 选题引擎**：新增 `python -m research_news.synthesize`，把同一子方向近期的
   **期刊**精读聚合起来，归纳只在跨篇层面才看得见的信号——**反复出现的开放问题**（被 ≥2 篇
   独立论文点名，recurrence 即证据）、论文间的**张力**、以及接武器库的**迁移空位**。两段式：
@@ -41,6 +59,23 @@
     / `--list-journals` / `--dry-run`。
 
 ### Changed
+- **精读 prompt 再迭代：重心转向「综述 + 把论文讲透」，砍掉按武器库找问题**。实践发现
+  LLM 按研究者技能判断「能不能做」很不可靠、且常高估其能力，故大幅删减。`DEEP_READ_SYSTEM`：
+  第二节升为重心（≥45%），新增**「证明路线与技术技巧」**（整体路线 / 关键跳跃点 / 技巧点名）
+  与**「真实例子与应用（有就必须讲）」**；第三节从「武器库 A/B/C 找问题 + 迁移视角」精简为
+  **「开放问题点到为止」**（最多 3-4 条、扎根具体语句、不判可行性、不匹配技能）；第四节由
+  「阅读路线 + 检测题」改为**「最核心、最简单的例子 / 数学问题」**（剥掉一般性假设，讲清
+  支撑整篇证明的最简特例 / 最小命题）。
+- **天文精读 prompt 用上被引文献**：`DEEP_READ_ASTRO_SYSTEM` 原先抓了被引却不用（astro
+  论文加被引后质量无变化）。把被引织进已有节——第三节「主流方法与局限」落到具体被引工作
+  （作者-年份），第六节「下一步读什么」从**真实**被引文献里挑确切标题（禁止编造）。
+- **Semantic Scholar 无 API key，被引检索改为更耐心的重试**：S2 拒了 key 申请，只能用
+  免认证共享池（429 频繁）。已确认 S2 有这些论文、失败纯是限速、重试能救回，故重试预算
+  3 次 → **6 次**（`S2_FETCH_ATTEMPTS`），退避改 `wait_random_exponential`（**带抖动**，
+  避免与共享池其他人锁步重试，上限 30s / `S2_MAX_BACKOFF`），用 `Retrying` 在调用时读 env
+  让 `.env` 生效。（曾尝试 OpenAlex 作被引兜底，但实测 OpenAlex 对近期 arXiv 预印本
+  **无参考文献**——其引用数据来自 Crossref deposit，预印本没有；S2 是唯一解析 PDF 抽被引的
+  来源——故已回退。）
 - **精读重构为「先综述方向、再谈值不值得做」**：重写 `DEEP_READ_SYSTEM`，把重心从
   "这篇论文讲了啥 + 我能做什么" 改成 **先用 introduction + bibliography 把这个方向的
   发展脉络（history）综述清楚**（奠基→进展→frontier→本文位置、子线索聚类、核心问题与
