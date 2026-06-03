@@ -114,8 +114,11 @@ def deep_read_paper(
             rows = refs.fetch_references(arxiv_id)
             refs_block = refs.format_references_block(rows)
             if refs_block:
-                log.info("deep read %s: attached %d-char references block",
-                         paper.paper_id, len(refs_block))
+                # Count what actually made it into the block (each cited work is
+                # rendered as a "### [i] …" heading); persist it as tuning data.
+                paper.n_references = refs_block.count("### [")
+                log.info("deep read %s: attached %d refs (%d chars)",
+                         paper.paper_id, paper.n_references, len(refs_block))
 
     user = (
         f"## Researcher interests\n{interests_yaml}\n\n"
@@ -271,10 +274,11 @@ def generate_deep_read_report(
         return []
 
     existing = _load_index()
-    existing_keys = {(e["paper_id"], e["date"]) for e in existing}
+    existing_by_key = {(e["paper_id"], e["date"]): e for e in existing}
 
     written: list[Path] = []
     new_entries: list[dict] = []
+    updated = 0
 
     for i, paper in enumerate(papers, 1):
         log.info("deep reading %d/%d: %s", i, len(papers), paper.paper_id)
@@ -283,33 +287,46 @@ def generate_deep_read_report(
         written.append(page_path)
 
         key = (paper.paper_id, run_date.isoformat())
-        if key not in existing_keys:
-            entry = {
-                "date": run_date.isoformat(),
-                "run_type": run_type,
-                "paper_id": paper.paper_id,
-                "title": paper.title,
-                "topic": paper.topic or "other",
-                "score": paper.score or 0.0,
-                # Path relative to docs/ for use in markdown links
-                "doc_path": f"deep_reads/{page_path.name}",
-            }
-            # Journal issue metadata, populated by the crossref scraper.
-            # Optional so daily (arxiv) entries don't carry empty fields.
-            if paper.venue:
-                entry["venue"] = paper.venue
-            if paper.volume:
-                entry["volume"] = paper.volume
-            if paper.issue:
-                entry["issue"] = paper.issue
-            new_entries.append(entry)
-            existing_keys.add(key)
+        prev = existing_by_key.get(key)
+        if prev is not None:
+            # Re-run of an indexed paper: refresh the cited-works count so the
+            # tuning data reflects this run (these mutate `existing` in place).
+            if paper.n_references is not None and prev.get("n_references") != paper.n_references:
+                prev["n_references"] = paper.n_references
+                updated += 1
+            continue
 
-    if new_entries:
+        entry = {
+            "date": run_date.isoformat(),
+            "run_type": run_type,
+            "paper_id": paper.paper_id,
+            "title": paper.title,
+            "topic": paper.topic or "other",
+            "score": paper.score or 0.0,
+            # Path relative to docs/ for use in markdown links
+            "doc_path": f"deep_reads/{page_path.name}",
+        }
+        # Cited-works count attached to the deep read (tuning data); omitted when
+        # references couldn't be fetched so the field stays meaningful.
+        if paper.n_references is not None:
+            entry["n_references"] = paper.n_references
+        # Journal issue metadata, populated by the crossref scraper.
+        # Optional so daily (arxiv) entries don't carry empty fields.
+        if paper.venue:
+            entry["venue"] = paper.venue
+        if paper.volume:
+            entry["volume"] = paper.volume
+        if paper.issue:
+            entry["issue"] = paper.issue
+        new_entries.append(entry)
+        existing_by_key[key] = entry
+
+    if new_entries or updated:
         merged = new_entries + existing
         merged.sort(key=lambda e: (e["date"], e.get("score") or 0), reverse=True)
         _save_index(merged)
-        log.info("deep reads index: added %d new entries", len(new_entries))
+        log.info("deep reads index: %d new entries, %d ref-count update(s)",
+                 len(new_entries), updated)
 
     return written
 

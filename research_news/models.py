@@ -41,6 +41,9 @@ class Paper:
     issue: str | None = None
     # Set when we download the PDF for high-relevance papers:
     pdf_path: str | None = None
+    # Number of cited works (with abstracts) attached to the deep-read prompt.
+    # Recorded per deep read as reference data for tuning the prompt later.
+    n_references: int | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
