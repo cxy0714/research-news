@@ -10,42 +10,44 @@
 - **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-06-03
+## 今日 · 2026-06-04
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-06-03.md)
+[→ 查看完整报告](daily/2026-06-04.md)
 
-### 精读论文（14 篇）
+### 精读论文（15 篇）
 
-- [Identification, Estimation, and Inference for Sequential Causally Ordered Mediation Pathways](deep_reads/2026-06-03-2606.02833.md)  
+- [Beyond First-order Asymptotics in Sequential Mean Testing](deep_reads/2026-06-04-2606.04520.md)  
+  `数理统计 / 假设检验` · 相关性 9/10
+- [Stochastic Sensitivity Analysis for Matched Observational Studies](deep_reads/2026-06-04-2606.05120.md)  
+  `因果推断` · 相关性 9/10
+- [Local Sensitivity Under Transport Restrictions](deep_reads/2026-06-04-2606.04276.md)  
+  `因果推断` · 相关性 9/10
+- [Optimal Treatment Policy Estimation for Recurrent Events with a Competing Terminal Event: An Instrumented Difference-in-Differences Approach](deep_reads/2026-06-04-2606.04134.md)  
   `因果推断` · 相关性 8/10
-- [Assessing the Impact of Intercurrent Events on Power and Sample Size for Estimands with Time-to-Event Endpoints](deep_reads/2026-06-03-2606.03863.md)  
-  `数理统计 / 假设检验` · 相关性 8/10
-- [Powerful Switchback Experiments -- Or Not?](deep_reads/2026-06-03-2606.03012.md)  
-  `数理统计 / 假设检验` · 相关性 7/10
-- [A Fast Screening Approach for High-dimensional Outcomes and High-dimensional Predictors](deep_reads/2026-06-03-2606.03018.md)  
-  `高维统计 / 随机矩阵` · 相关性 7/10
-- [A Better Comparison under right-censoring: ABC Statistic for Equivalence Testing and Quantification](deep_reads/2026-06-03-2606.03415.md)  
-  `数理统计 / 假设检验` · 相关性 7/10
-- [Network Time Series Models for Multivariate Volatility Forecasting](deep_reads/2026-06-03-2606.03828.md)  
+- [Powerful Multivariate Sensitivity Analysis via Sample Splitting in an Observational Study of the Effects of Poverty on Cardiovascular Disease Risk Factors](deep_reads/2026-06-04-2606.04416.md)  
+  `因果推断` · 相关性 8/10
+- [Improving Longitudinal Targeted Maximum Likelihood Estimation in Target Trial Emulation using Joint Calibrated Weights](deep_reads/2026-06-04-2606.04673.md)  
+  `因果推断` · 相关性 8/10
+- [Minimax Private Estimation of Smooth Optimal-Transport Maps](deep_reads/2026-06-04-2606.04683.md)  
+  `非参数 / 半参数` · 相关性 8/10
+- [Multifrequency Synthesis via CHIBI: Colorful Hierarchical Interferometric Bayesian Imaging](deep_reads/2026-06-04-2606.04094.md)  
+  `天体统计` · 相关性 8/10
+- [A Model Selection Criterion for Multidimensional Gaussian Processes: Application to Radial Velocities](deep_reads/2026-06-04-2606.04875.md)  
+  `天体统计` · 相关性 8/10
+- [On prediction-powered inference for quantile regression via convolution smoothing](deep_reads/2026-06-04-2606.04128.md)  
+  `效率理论 / Debiased ML` · 相关性 7/10
+- [Constrained Weighted Bayesian Bootstrap](deep_reads/2026-06-04-2606.04237.md)  
+  `统计计算 / 算法` · 相关性 7/10
+- [Unbiased estimation of squared concentration in the Fisher-von Mises-Langevin distribution and the impossibility of unbiased concentration](deep_reads/2026-06-04-2606.04267.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Sequential algorithm for structural estimations with equilibrium constraints](deep_reads/2026-06-04-2606.04356.md)  
   `经济理论 / 应用` · 相关性 7/10
-- [Principal Components Decomposition of Fraction of Variance Explained in High Dimensional Linear Models with Strong Correlation](deep_reads/2026-06-03-2606.03880.md)  
-  `高维统计 / 随机矩阵` · 相关性 7/10
-- [Sparse Tree-Based Aggregation for Time Series Regressions](deep_reads/2026-06-03-2606.03665.md)  
-  `经济理论 / 应用` · 相关性 7/10
-- [Marginalised Poisson Hurdle Model for Cross-Sectional Count Data with Excess Zeros](deep_reads/2026-06-03-2606.03023.md)  
+- [Posterior sampling in the Age of Emulators](deep_reads/2026-06-04-2606.04895.md)  
+  `天体统计` · 相关性 7/10
+- [Robust Prediction Variance Estimation for Gaussian Process Regression Under Covariance Smoothness Misspecification](deep_reads/2026-06-04-2606.04322.md)  
   `非参数 / 半参数` · 相关性 6/10
-- [Efficient Federated Estimation and Inference for High-Dimensional Tail Index Regression](deep_reads/2026-06-03-2606.03154.md)  
-  `效率理论 / Debiased ML` · 相关性 6/10
-- [Projection Diagnostics for Directional Asymmetry and Tail-Ratio Departure in Multivariate Data](deep_reads/2026-06-03-2606.03670.md)  
-  `数理统计 / 假设检验` · 相关性 6/10
-- [Regularization in Paired Comparison Models via Pseudo-Games and Phantom Players](deep_reads/2026-06-03-2606.03805.md)  
-  `非参数 / 半参数` · 相关性 6/10
-- [A Neural Estimation Framework for Aggregated Relational Data under Intractable Likelihoods](deep_reads/2026-06-03-2606.03961.md)  
-  `统计计算 / 算法` · 相关性 6/10
-- [Neutrino Fingerprints: Image-Based Encodings of IceCube Events for CNN Direction Reconstruction](deep_reads/2026-06-03-2606.02788.md)  
-  `天体统计` · 相关性 6/10
 
 ## 收藏
 
@@ -53,11 +55,11 @@
 
 ## 本周每日报告
 
+- [2026-06-03](daily/2026-06-03.md)
 - [2026-06-02](daily/2026-06-02.md)
 - [2026-06-01](daily/2026-06-01.md)
 - [2026-05-29](daily/2026-05-29.md)
 - [2026-05-28](daily/2026-05-28.md)
-- [2026-05-27](daily/2026-05-27.md)
 
 
 ---

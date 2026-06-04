@@ -4,6 +4,16 @@
 
 ### Daily
 
+- [Stochastic Sensitivity Analysis for Matched Observational Studies](deep_reads/2026-06-04-2606.05120.md)  
+  9/10 [daily]
+- [Local Sensitivity Under Transport Restrictions](deep_reads/2026-06-04-2606.04276.md)  
+  9/10 [daily]
+- [Optimal Treatment Policy Estimation for Recurrent Events with a Competing Terminal Event: An Instrumented Difference-in-Differences Approach](deep_reads/2026-06-04-2606.04134.md)  
+  8/10 [daily]
+- [Powerful Multivariate Sensitivity Analysis via Sample Splitting in an Observational Study of the Effects of Poverty on Cardiovascular Disease Risk Factors](deep_reads/2026-06-04-2606.04416.md)  
+  8/10 [daily]
+- [Improving Longitudinal Targeted Maximum Likelihood Estimation in Target Trial Emulation using Joint Calibrated Weights](deep_reads/2026-06-04-2606.04673.md)  
+  8/10 [daily]
 - [Identification, Estimation, and Inference for Sequential Causally Ordered Mediation Pathways](deep_reads/2026-06-03-2606.02833.md)  
   8/10 [daily]
 - [Causal Density Functions](deep_reads/2026-06-02-2606.00754.md)  
@@ -253,6 +263,12 @@
 
 ### Daily
 
+- [Minimax Private Estimation of Smooth Optimal-Transport Maps](deep_reads/2026-06-04-2606.04683.md)  
+  8/10 [daily]
+- [Unbiased estimation of squared concentration in the Fisher-von Mises-Langevin distribution and the impossibility of unbiased concentration](deep_reads/2026-06-04-2606.04267.md)  
+  7/10 [daily]
+- [Robust Prediction Variance Estimation for Gaussian Process Regression Under Covariance Smoothness Misspecification](deep_reads/2026-06-04-2606.04322.md)  
+  6/10 [daily]
 - [Marginalised Poisson Hurdle Model for Cross-Sectional Count Data with Excess Zeros](deep_reads/2026-06-03-2606.03023.md)  
   6/10 [daily]
 - [Regularization in Paired Comparison Models via Pseudo-Games and Phantom Players](deep_reads/2026-06-03-2606.03805.md)  
@@ -308,6 +324,8 @@
 
 ### Daily
 
+- [On prediction-powered inference for quantile regression via convolution smoothing](deep_reads/2026-06-04-2606.04128.md)  
+  7/10 [daily]
 - [Efficient Federated Estimation and Inference for High-Dimensional Tail Index Regression](deep_reads/2026-06-03-2606.03154.md)  
   6/10 [daily]
 - [Higher-Order Efficient Estimators: A Review and Simulation-Based Benchmark Study](deep_reads/2026-06-02-2606.01674.md)  
@@ -347,6 +365,8 @@
 
 ### Daily
 
+- [Beyond First-order Asymptotics in Sequential Mean Testing](deep_reads/2026-06-04-2606.04520.md)  
+  9/10 [daily]
 - [Assessing the Impact of Intercurrent Events on Power and Sample Size for Estimands with Time-to-Event Endpoints](deep_reads/2026-06-03-2606.03863.md)  
   8/10 [daily]
 - [Powerful Switchback Experiments -- Or Not?](deep_reads/2026-06-03-2606.03012.md)  
@@ -439,6 +459,8 @@
 
 ### Daily
 
+- [Constrained Weighted Bayesian Bootstrap](deep_reads/2026-06-04-2606.04237.md)  
+  7/10 [daily]
 - [A Neural Estimation Framework for Aggregated Relational Data under Intractable Likelihoods](deep_reads/2026-06-03-2606.03961.md)  
   6/10 [daily]
 
@@ -465,6 +487,12 @@
 
 ### Daily
 
+- [Multifrequency Synthesis via CHIBI: Colorful Hierarchical Interferometric Bayesian Imaging](deep_reads/2026-06-04-2606.04094.md)  
+  8/10 [daily]
+- [A Model Selection Criterion for Multidimensional Gaussian Processes: Application to Radial Velocities](deep_reads/2026-06-04-2606.04875.md)  
+  8/10 [daily]
+- [Posterior sampling in the Age of Emulators](deep_reads/2026-06-04-2606.04895.md)  
+  7/10 [daily]
 - [Neutrino Fingerprints: Image-Based Encodings of IceCube Events for CNN Direction Reconstruction](deep_reads/2026-06-03-2606.02788.md)  
   6/10 [daily]
 - [Bayesian estimation of spectral parameters of the 6.7-GHz methanol maser G339.884-1.259 from GRAO observations](deep_reads/2026-06-02-2606.00768.md)  
@@ -490,6 +518,8 @@
 
 ### Daily
 
+- [Sequential algorithm for structural estimations with equilibrium constraints](deep_reads/2026-06-04-2606.04356.md)  
+  7/10 [daily]
 - [Network Time Series Models for Multivariate Volatility Forecasting](deep_reads/2026-06-03-2606.03828.md)  
   7/10 [daily]
 - [Sparse Tree-Based Aggregation for Time Series Regressions](deep_reads/2026-06-03-2606.03665.md)  
