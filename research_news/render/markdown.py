@@ -23,6 +23,15 @@ REPO_URL = "https://github.com/cxy0714/research-news"
 RERUN_MARKER = "⚠️ *摘要不完整，待重跑（`python -m research_news.rerun`）*"
 
 
+def format_institutions_line(institutions: list[str]) -> str:
+    """The '- **机构**: ...' line for a paper, shared by the renderer and the
+    retroactive backfill so both produce identical formatting. Lists the set of
+    institutions present on the paper (capped for readability)."""
+    insts = institutions[:8]
+    more = " 等" if len(institutions) > 8 else ""
+    return "- **机构**: " + " · ".join(insts) + more
+
+
 # ── per-paper block ───────────────────────────────────────────────────────────
 
 def _paper_block(p: Paper, n: int, heading_prefix: str = "####") -> str:
@@ -38,10 +47,8 @@ def _paper_block(p: Paper, n: int, heading_prefix: str = "####") -> str:
         body.append(f"- **期刊/来源**: {p.venue}")
     if p.institutions:
         # Just the set of institutions present on the paper — we don't track
-        # which author belongs to which. Cap the list so it stays readable.
-        insts = p.institutions[:8]
-        more = " 等" if len(p.institutions) > 8 else ""
-        body.append("- **机构**: " + " · ".join(insts) + more)
+        # which author belongs to which.
+        body.append(format_institutions_line(p.institutions))
     if cats:
         body.append(f"- **分类**: {cats}")
     bits = []
