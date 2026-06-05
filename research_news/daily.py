@@ -165,6 +165,11 @@ def run(dry_run: bool = False, for_date: date | None = None) -> Path:
     mark_seen(papers, seen)
     save_seen(seen)
 
+    # Retroactively fill institutions on recent pages: papers that were too new
+    # for OpenAlex on their original run date often get indexed within a few days.
+    from .backfill_institutions import backfill_recent
+    backfill_recent()
+
     report_token_usage(client, "daily", report_date)
     log.info("wrote %s", out_path)
     return out_path
