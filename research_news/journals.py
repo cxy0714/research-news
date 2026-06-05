@@ -32,6 +32,7 @@ from .llm.sjtu_client import SJTUClient
 from .models import Paper
 from .render.markdown import render_journal_page, update_index
 from .score_log import append_scored as append_score_log
+from .scrapers import affiliations as affil
 from .scrapers.crossref import fetch_latest_issue, fill_arxiv_links
 from .scrapers.jmlr import fetch_latest as jmlr_fetch_latest
 from .usage import report as report_token_usage
@@ -256,6 +257,11 @@ def run(only: list[str] | None = None, dry_run: bool = False,
     for gcfg in groups.values():
         for jcfg in gcfg["journals"]:
             full_to_meta[jcfg["full"]] = (jcfg["short"], jcfg["full"])
+
+    # Look up author institutions (OpenAlex) before rendering. Cached on each
+    # Paper so the deep-read green-light below reuses them instead of re-fetching.
+    log.info("looking up institutions for %d journal papers ...", len(papers))
+    affil.backfill_affiliations(papers)
 
     # Group papers by (venue, volume, issue) → one page per issue.
     by_issue: dict[tuple, list[Paper]] = {}

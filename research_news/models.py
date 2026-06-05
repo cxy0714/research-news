@@ -21,7 +21,13 @@ class Paper:
     published: str | None = None   # ISO date string
     venue: str | None = None
     # Author affiliation strings, when available (crossref / arXiv / OpenAlex).
+    # Holds both institution names and raw affiliation strings; used for the
+    # green-light match below.
     affiliations: list[str] = field(default_factory=list)
+    # Clean, deduplicated institution display names (from OpenAlex) shown on the
+    # daily / journal pages. We don't track which author belongs to which
+    # institution — just the set present on the paper.
+    institutions: list[str] = field(default_factory=list)
     # Set when an author is at a whitelisted (US News top-50) institution: the
     # matched institution name. Such papers are deep-read regardless of score.
     green_light_institution: str | None = None

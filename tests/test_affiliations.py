@@ -49,6 +49,56 @@ def test_green_light_uses_existing_affiliations_without_network(monkeypatch):
     assert affil.green_light(p2, backfill=False) is None
 
 
+def test_parse_authorships_dedupes_institutions():
+    work = {
+        "authorships": [
+            {
+                "institutions": [{"display_name": "Stanford University"}],
+                "raw_affiliation_strings": ["Dept. of Statistics, Stanford University, CA"],
+            },
+            {
+                "institutions": [{"display_name": "Stanford University"}],
+                "raw_affiliation_strings": ["Stanford University"],
+            },
+            {
+                "institutions": [{"display_name": "MIT"}],
+                "raw_affiliation_strings": [],
+            },
+        ]
+    }
+    affils, institutions = affil._parse_authorships(work)
+    # Institutions are deduped, order preserved.
+    assert institutions == ["Stanford University", "MIT"]
+    # Affiliation strings keep both display names and raw strings for matching.
+    assert "Stanford University" in affils
+    assert "Dept. of Statistics, Stanford University, CA" in affils
+
+
+def test_backfill_affiliations_populates_institutions(monkeypatch):
+    p = Paper(source="arxiv", paper_id="2401.00003", title="t", authors=["A"],
+              abstract="", url="")
+    monkeypatch.setattr(
+        affil, "_fetch_affiliations_and_institutions",
+        lambda doi: (["Princeton University"], ["Princeton University"]),
+    )
+    n = affil.backfill_affiliations([p])
+    assert n == 1
+    assert p.institutions == ["Princeton University"]
+    assert p.affiliations == ["Princeton University"]
+
+
+def test_backfill_skips_already_populated(monkeypatch):
+    p = Paper(source="arxiv", paper_id="2401.00004", title="t", authors=["A"],
+              abstract="", url="", institutions=["MIT"], affiliations=["MIT"])
+
+    def _boom(doi):  # must not be called
+        raise AssertionError("should not fetch when already populated")
+
+    monkeypatch.setattr(affil, "_fetch_affiliations_and_institutions", _boom)
+    assert affil.backfill_affiliations([p]) == 0
+    assert p.institutions == ["MIT"]
+
+
 def test_doi_for_arxiv_and_journal():
     p = Paper(source="arxiv", paper_id="2401.01234v2", title="t", authors=[], abstract="", url="")
     assert affil._doi_for(p) == "10.48550/arXiv.2401.01234"

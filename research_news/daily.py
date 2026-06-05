@@ -137,6 +137,11 @@ def run(dry_run: bool = False, for_date: date | None = None) -> Path:
     high = [p for p in papers if (p.score or 0) >= th_highlight]
     mid = [p for p in papers if (p.score or 0) < th_highlight]
 
+    # Look up author institutions (OpenAlex) for the papers we're about to show.
+    # Cached on each Paper so the deep-read green-light below reuses them.
+    log.info("looking up institutions for %d digest papers ...", len(papers))
+    affil.backfill_affiliations(papers)
+
     out_path = render_daily(high, mid, events, when=report_date)
 
     # Deep-read candidates: score >= th_deepread (6) for ALL topics, plus any

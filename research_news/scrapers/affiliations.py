@@ -120,41 +120,91 @@ def _openalex_work(doi: str) -> dict:
         return r.json()
 
 
-def fetch_openalex_affiliations(doi: str) -> list[str]:
-    """Return affiliation strings for a work, or [] on any failure."""
+def _parse_authorships(work: dict) -> tuple[list[str], list[str]]:
+    """Split an OpenAlex work into (affiliation_strings, institution_names).
+
+    The first list (institution display names + raw affiliation strings) feeds
+    green-light matching; the second is a deduplicated list of clean institution
+    display names for showing on the daily / journal pages.
+    """
+    affils: list[str] = []
+    institutions: list[str] = []
+    for a in work.get("authorships") or []:
+        for inst in a.get("institutions") or []:
+            name = inst.get("display_name")
+            if name:
+                affils.append(name)
+                institutions.append(name)
+        affils.extend(a.get("raw_affiliation_strings") or [])
+    seen: set[str] = set()
+    deduped = [n for n in institutions if not (n in seen or seen.add(n))]
+    return affils, deduped
+
+
+def _fetch_affiliations_and_institutions(doi: str) -> tuple[list[str], list[str]]:
+    """(affiliation_strings, institution_names) for a work, ([], []) on failure."""
     try:
         work = _openalex_work(doi)
     except httpx.HTTPStatusError as e:  # fail open — green-light just finds nothing
         code = e.response.status_code
         hint = " (work not indexed yet?)" if code == 404 else (" (rate limited)" if code == 429 else "")
         log.info("OpenAlex affiliation lookup failed for %s: HTTP %s%s", doi, code, hint)
-        return []
+        return [], []
     except Exception as e:  # noqa: BLE001 — network/parse error, also fail open
         log.info("OpenAlex affiliation lookup failed for %s: %s", doi, e)
-        return []
-    affils: list[str] = []
-    for a in work.get("authorships") or []:
-        for inst in a.get("institutions") or []:
-            if inst.get("display_name"):
-                affils.append(inst["display_name"])
-        affils.extend(a.get("raw_affiliation_strings") or [])
-    return affils
+        return [], []
+    return _parse_authorships(work)
+
+
+def fetch_openalex_affiliations(doi: str) -> list[str]:
+    """Return affiliation strings for a work, or [] on any failure."""
+    return _fetch_affiliations_and_institutions(doi)[0]
+
+
+def backfill_affiliations(papers: list[Paper]) -> int:
+    """Populate `affiliations` + `institutions` from OpenAlex for the given papers.
+
+    Used to fill in institution names for the daily / journal pages before they
+    are rendered. Best-effort and fails open: papers OpenAlex doesn't know about
+    (or when the feature is disabled / unreachable) simply keep empty lists.
+    Results are cached on each Paper so the later green-light step reuses them
+    instead of fetching twice. Returns the number of papers that got at least
+    one institution.
+    """
+    if not greenlight_enabled():
+        return 0
+    n = 0
+    for p in papers:
+        if p.affiliations or p.institutions:
+            continue  # already populated (e.g. a prior run on the same object)
+        doi = _doi_for(p)
+        if not doi:
+            continue
+        affils, institutions = _fetch_affiliations_and_institutions(doi)
+        if affils:
+            p.affiliations = affils
+        if institutions:
+            p.institutions = institutions
+            n += 1
+    return n
 
 
 def green_light(paper: Paper, *, backfill: bool = True) -> str | None:
     """Return the matched institution name if this paper should be green-lit."""
     if not greenlight_enabled():
         return None
-    # 1) Anything the scrapers already captured.
+    # 1) Anything the scrapers (or a prior backfill_affiliations) already captured.
     hit = match_affiliation(paper.affiliations)
     if hit:
         return hit
-    # 2) Back-fill from OpenAlex.
-    if backfill:
+    # 2) Back-fill from OpenAlex — skip when affiliations are already cached, since
+    #    they come from the same source and re-fetching yields the same data.
+    if backfill and not paper.affiliations:
         doi = _doi_for(paper)
         if doi:
-            affils = fetch_openalex_affiliations(doi)
+            affils, institutions = _fetch_affiliations_and_institutions(doi)
             if affils:
                 paper.affiliations = affils  # cache on the paper for reuse
+                paper.institutions = institutions
                 return match_affiliation(affils)
     return None

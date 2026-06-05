@@ -36,6 +36,12 @@ def _paper_block(p: Paper, n: int, heading_prefix: str = "####") -> str:
     body.append(f"- **作者**: {authors}")
     if p.venue:
         body.append(f"- **期刊/来源**: {p.venue}")
+    if p.institutions:
+        # Just the set of institutions present on the paper — we don't track
+        # which author belongs to which. Cap the list so it stays readable.
+        insts = p.institutions[:8]
+        more = " 等" if len(p.institutions) > 8 else ""
+        body.append("- **机构**: " + " · ".join(insts) + more)
     if cats:
         body.append(f"- **分类**: {cats}")
     bits = []
