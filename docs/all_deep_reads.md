@@ -4,6 +4,10 @@
 
 ### Daily
 
+- [Leveraging External Controls for Treatment Switching in Randomized Controlled Trials: A Weighted Causal Inference Framework for Overall Survival](deep_reads/2026-06-05-2606.06441.md)  
+  8/10 [daily]
+- [Weighting a Census as a Non-Probability Sample: A Doubly Robust Framework for Correcting Differential Undercoverage in Uruguay's 2023 Census](deep_reads/2026-06-05-2606.05666.md)  
+  7/10 [daily]
 - [Stochastic Sensitivity Analysis for Matched Observational Studies](deep_reads/2026-06-04-2606.05120.md)  
   9/10 [daily]
 - [Local Sensitivity Under Transport Restrictions](deep_reads/2026-06-04-2606.04276.md)  
@@ -199,6 +203,10 @@
 
 ### Daily
 
+- [Statistically and Computationally Optimal Estimation and Inference of Common Subspaces](deep_reads/2026-06-05-2606.06483.md)  
+  9/10 [daily]
+- [A Robust Framework for Model Order Selection in Correlated Large-Dimensional CES Noise](deep_reads/2026-06-05-2606.06426.md)  
+  8/10 [daily]
 - [A Fast Screening Approach for High-dimensional Outcomes and High-dimensional Predictors](deep_reads/2026-06-03-2606.03018.md)  
   7/10 [daily]
 - [Principal Components Decomposition of Fraction of Variance Explained in High Dimensional Linear Models with Strong Correlation](deep_reads/2026-06-03-2606.03880.md)  
@@ -263,6 +271,8 @@
 
 ### Daily
 
+- [Estimation of the sub-Gaussian parameter](deep_reads/2026-06-05-2606.06384.md)  
+  6/10 [daily]
 - [Minimax Private Estimation of Smooth Optimal-Transport Maps](deep_reads/2026-06-04-2606.04683.md)  
   8/10 [daily]
 - [Unbiased estimation of squared concentration in the Fisher-von Mises-Langevin distribution and the impossibility of unbiased concentration](deep_reads/2026-06-04-2606.04267.md)  
@@ -324,6 +334,8 @@
 
 ### Daily
 
+- [Optimally taming biases in black-box models for efficient semiparametric estimation](deep_reads/2026-06-05-2606.06368.md)  
+  10/10 [daily]
 - [On prediction-powered inference for quantile regression via convolution smoothing](deep_reads/2026-06-04-2606.04128.md)  
   7/10 [daily]
 - [Efficient Federated Estimation and Inference for High-Dimensional Tail Index Regression](deep_reads/2026-06-03-2606.03154.md)  
@@ -365,6 +377,12 @@
 
 ### Daily
 
+- [Two-Sample Hypothesis Testing for Subspace Equality in Network Data](deep_reads/2026-06-05-2606.06482.md)  
+  7/10 [daily]
+- [Bentkus-type asymptotic e-values](deep_reads/2026-06-05-2606.06332.md)  
+  7/10 [daily]
+- [How abundant are good interpolators?](deep_reads/2026-06-05-2606.06469.md)  
+  7/10 [daily]
 - [Beyond First-order Asymptotics in Sequential Mean Testing](deep_reads/2026-06-04-2606.04520.md)  
   9/10 [daily]
 - [Assessing the Impact of Intercurrent Events on Power and Sample Size for Estimands with Time-to-Event Endpoints](deep_reads/2026-06-03-2606.03863.md)  
@@ -487,6 +505,8 @@
 
 ### Daily
 
+- [Toward decision-aware AI for LSST-scale time-domain astronomy](deep_reads/2026-06-05-2606.05285.md)  
+  8/10 [daily]
 - [Multifrequency Synthesis via CHIBI: Colorful Hierarchical Interferometric Bayesian Imaging](deep_reads/2026-06-04-2606.04094.md)  
   8/10 [daily]
 - [A Model Selection Criterion for Multidimensional Gaussian Processes: Application to Radial Velocities](deep_reads/2026-06-04-2606.04875.md)  
@@ -518,6 +538,10 @@
 
 ### Daily
 
+- [Econstellar: An Open-Source AI-Augmented Research Engine for Computational Financial Econometrics](deep_reads/2026-06-05-2606.05705.md)  
+  7/10 [daily]
+- [Interdependent Hitting Times](deep_reads/2026-06-05-2606.06251.md)  
+  6/10 [daily]
 - [Sequential algorithm for structural estimations with equilibrium constraints](deep_reads/2026-06-04-2606.04356.md)  
   7/10 [daily]
 - [Network Time Series Models for Multivariate Volatility Forecasting](deep_reads/2026-06-03-2606.03828.md)  
