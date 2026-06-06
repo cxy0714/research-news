@@ -97,6 +97,16 @@
 
 ### 期刊
 
+#### IEEE Transactions on Pattern Analysis and Machine Intelligence Vol 48 Issue 6
+
+- [Dynamical Causality Under Latent Confounders for Biological Network Reconstruction](deep_reads/2026-06-05-10.1109_tpami.2026.3658839.md)  
+  7/10 [journals]
+
+#### IEEE Transactions on Pattern Analysis and Machine Intelligence Vol 48 Issue 5
+
+- [Causal Inference via Style Bias Deconfounding for Domain Generalization](deep_reads/2026-06-05-10.1109_tpami.2026.3652609.md)  
+  4/10 [journals]
+
 #### Journal of the Royal Statistical Society Series B Vol 88 Issue 2
 
 - [Representation of context-specific causal models with observational and interventional data](deep_reads/2026-05-26-10.1093_jrsssb_qkaf059.md)  
@@ -226,6 +236,34 @@
 
 ### 期刊
 
+#### IEEE Transactions on Signal Processing Vol 74
+
+- [On Stochastic Beamforming for Ergodic Sum-Rate Maximization in Cooperative Transmission Systems](deep_reads/2026-06-05-10.1109_tsp.2025.3648327.md)  
+  0/10 [journals]
+
+#### IEEE Transactions on Signal Processing
+
+- [Orthogonal Approximate Message Passing for Double Linear Transformation Model](deep_reads/2026-06-05-10.1109_tsp.2026.3692526.md)  
+  5/10 [journals]
+
+#### IEEE Transactions on Information Theory Vol 72 Issue 6
+
+- [Smoothed Analysis in Compressed Sensing](deep_reads/2026-06-05-10.1109_tit.2026.3681197.md)  
+  7/10 [journals]
+- [Phase Retrieval and Matrix Sensing via Benign and Overparametrized Nonconvex Optimization](deep_reads/2026-06-05-10.1109_tit.2026.3684748.md)  
+  6/10 [journals]
+- [Asymptotic Analysis of Nonlinear One-Bit Precoding in Massive MIMO Systems via Approximate Message Passing](deep_reads/2026-06-05-10.1109_tit.2026.3682569.md)  
+  5/10 [journals]
+
+#### IEEE Transactions on Information Theory Vol 72 Issue 5
+
+- [Optimal Estimation of Shared Singular Subspaces Across Multiple Noisy Matrices](deep_reads/2026-06-05-10.1109_tit.2026.3667733.md)  
+  9/10 [journals]
+- [Information-Theoretic Limits and Vector Approximate Message-Passing for High-Dimensional Time Series](deep_reads/2026-06-05-10.1109_tit.2026.3665948.md)  
+  8/10 [journals]
+- [From Bayesian Asymptotics to General Large-Scale MIMO Capacity](deep_reads/2026-06-05-10.1109_tit.2026.3667490.md)  
+  7/10 [journals]
+
 #### Journal of the Royal Statistical Society Series B Vol 88 Issue 2
 
 - [Spectral change point estimation for high-dimensional time series by sparse tensor decomposition](deep_reads/2026-05-26-10.1093_jrsssb_qkaf064.md)  
@@ -303,6 +341,25 @@
   8/10 [daily]
 
 ### 期刊
+
+#### IEEE Transactions on Signal Processing Vol 74
+
+- [Einstein From Noise: Statistical Analysis](deep_reads/2026-06-05-10.1109_tsp.2026.3685712.md)  
+  9/10 [journals]
+- [Generative Principal Component Regression via Variational Inference](deep_reads/2026-06-05-10.1109_tsp.2026.3682931.md)  
+  7/10 [journals]
+
+#### IEEE Transactions on Information Theory Vol 72 Issue 6
+
+- [Instance-Dependent Uniform Tail Bounds for Empirical Processes](deep_reads/2026-06-05-10.1109_tit.2026.3677108.md)  
+  8/10 [journals]
+- [Fréchet Regression With Mondrian Forests: Finite-Sample Guarantees and Ensemble Benefits](deep_reads/2026-06-05-10.1109_tit.2026.3681693.md)  
+  7/10 [journals]
+
+#### IEEE Transactions on Information Theory Vol 72 Issue 5
+
+- [Majorizing Measures, Codes, and Information](deep_reads/2026-06-05-10.1109_tit.2026.3673035.md)  
+  8/10 [journals]
 
 #### JMLR
 
@@ -424,6 +481,25 @@
 
 ### 期刊
 
+#### IEEE Transactions on Information Theory Vol 72 Issue 6
+
+- [Simultaneous Inference for Covariance and Precision Matrices of Long-Range Dependent Time Series](deep_reads/2026-06-05-10.1109_tit.2026.3685246.md)  
+  8/10 [journals]
+
+#### IEEE Transactions on Information Theory Vol 72 Issue 5
+
+- [Consistent Model Selection in a Collection of Stochastic Block Models](deep_reads/2026-06-05-10.1109_tit.2026.3667930.md)  
+  6/10 [journals]
+- [Resolution Limits of Non-Adaptive 20 Questions Estimation for Tracking Multiple Moving Targets](deep_reads/2026-06-05-10.1109_tit.2026.3669170.md)  
+  6/10 [journals]
+
+#### IEEE Transactions on Information Theory Vol 72 Issue 4
+
+- [A Computational Transition for Detecting Multivariate Shuffled Linear Regression by Low-Degree Polynomials](deep_reads/2026-06-05-10.1109_tit.2026.3659093.md)  
+  9/10 [journals]
+- [Improving Wald’s (Approximate) Sequential Probability Ratio Test by Avoiding Overshoot](deep_reads/2026-06-05-10.1109_tit.2026.3658855.md)  
+  7/10 [journals]
+
 #### Journal of the Royal Statistical Society Series B Vol 88 Issue 1
 
 - [Doubly robust conditional independence testing with generative neural networks](deep_reads/2026-05-26-10.1093_jrsssb_qkaf047.md)  
@@ -483,6 +559,89 @@
   6/10 [daily]
 
 ### 期刊
+
+#### IEEE Transactions on Signal Processing Vol 74
+
+- [Rank-Revealing Bayesian Block-Term Tensor Completion With Graph Information](deep_reads/2026-06-05-10.1109_tsp.2026.3656119.md)  
+  6/10 [journals]
+- [Semi-Supervised Model-Free Bayesian State Estimation from Compressed Measurements](deep_reads/2026-06-05-10.1109_tsp.2026.3691273.md)  
+  6/10 [journals]
+- [Euclidean Distance Matrix Completion via Asymmetric Projected Gradient Descent](deep_reads/2026-06-05-10.1109_tsp.2025.3650509.md)  
+  6/10 [journals]
+- [External Division of Two Proximity Operators—Part I: Debiased Feature Grouping](deep_reads/2026-06-05-10.1109_tsp.2025.3619197.md)  
+  6/10 [journals]
+- [Distributed Hybrid Sketching for $\ell_{2}$-Embeddings](deep_reads/2026-06-05-10.1109_tsp.2025.3614162.md)  
+  4/10 [journals]
+- [Over-the-Air Computation on Network Edge for Collaborative Estimation](deep_reads/2026-06-05-10.1109_tsp.2026.3678844.md)  
+  2/10 [journals]
+- [Super-Resolution Channel Estimation for RIS-Aided Multi-User mmWave Systems: Dictionary Adaptation and Error Modeling](deep_reads/2026-06-05-10.1109_tsp.2026.3689912.md)  
+  0/10 [journals]
+
+#### IEEE Transactions on Signal Processing
+
+- [Accelerated Decentralized Constraint-Coupled Optimization: A Dual <sup>2</sup> Approach](deep_reads/2026-06-05-10.1109_tsp.2026.3695195.md)  
+  2/10 [journals]
+
+#### IEEE Transactions on Pattern Analysis and Machine Intelligence Vol 48 Issue 6
+
+- [Top-$k$k Feature Selection in Sparse Learning via Accelerated Coordinate Descent Method](deep_reads/2026-06-05-10.1109_tpami.2026.3660366.md)  
+  6/10 [journals]
+- [Robust Matrix Completion With Deterministic Sampling via Convex Optimization](deep_reads/2026-06-05-10.1109_tpami.2026.3659200.md)  
+  6/10 [journals]
+- [A CUR Decomposition-Based Mix-Order Framework for Large-Scale Hypergraph Matching](deep_reads/2026-06-05-10.1109_tpami.2026.3659463.md)  
+  5/10 [journals]
+
+#### IEEE Transactions on Pattern Analysis and Machine Intelligence Vol 48 Issue 5
+
+- [Iterative Differential Entropy Minimization (IDEM) Method for Fine Rigid Pairwise 3D Point Cloud Registration: A Focus on the Metric](deep_reads/2026-06-05-10.1109_tpami.2025.3647835.md)  
+  6/10 [journals]
+- [How to Break It Down for Building It Up? Theory-Guided Graph Decomposition Learning for Spatiotemporal Traffic Prediction](deep_reads/2026-06-05-10.1109_tpami.2026.3651246.md)  
+  1/10 [journals]
+- [MADTP++: Bridge the Gap Between Token and Weight Pruning for Accelerating VLTs](deep_reads/2026-06-05-10.1109_tpami.2025.3650545.md)  
+  1/10 [journals]
+
+#### IEEE Transactions on Information Theory Vol 72 Issue 6
+
+- [Sliding Finite Window Codes: Near-Optimality and Q-Learning for Zero-Delay Coding](deep_reads/2026-06-05-10.1109_tit.2026.3681183.md)  
+  4/10 [journals]
+- [Quantitative Bounds for Sorting-Based Permutation-Invariant Embeddings](deep_reads/2026-06-05-10.1109_tit.2026.3679460.md)  
+  4/10 [journals]
+- [Efficient Quantum Measurements: Computational Max- and Measured Rényi Divergences and Applications](deep_reads/2026-06-05-10.1109_tit.2026.3680247.md)  
+  2/10 [journals]
+
+#### IEEE Transactions on Information Theory Vol 72 Issue 5
+
+- [Gradient Descent Provably Solves Nonlinear Tomographic Reconstruction](deep_reads/2026-06-05-10.1109_tit.2026.3677729.md)  
+  7/10 [journals]
+- [Nearly Tight Bounds for Testing Tree Tensor Network States](deep_reads/2026-06-05-10.1109_tit.2026.3670320.md)  
+  6/10 [journals]
+
+#### IEEE Transactions on Information Theory Vol 72 Issue 4
+
+- [Weakly Private Distributed Multi-User Secret Sharing](deep_reads/2026-06-05-10.1109_tit.2026.3666525.md)  
+  0/10 [journals]
+
+#### IEEE Journal on Selected Areas in Information Theory Vol 7
+
+- [Reservoir Computing in Wireless Receive Processing: An Information-Theoretic Perspective](deep_reads/2026-06-05-10.1109_jsait.2026.3683606.md)  
+  4/10 [journals]
+- [Efficient Near-Field Channel Feature Estimation: Criteria and Algorithms](deep_reads/2026-06-05-10.1109_jsait.2025.3649807.md)  
+  3/10 [journals]
+- [Fundamental Limits of Learning Under Erasure-Constrained Communication Channels](deep_reads/2026-06-05-10.1109_jsait.2026.3677413.md)  
+  2/10 [journals]
+- [In-Memory Bit Error Rate Estimation Using Syndromes of LDPC Codes](deep_reads/2026-06-05-10.1109_jsait.2026.3686020.md)  
+  0/10 [journals]
+- [Array Configuration and Scaling Laws in Near-Field Uplink Multiuser MIMO](deep_reads/2026-06-05-10.1109_jsait.2026.3674909.md)  
+  0/10 [journals]
+
+#### IEEE Journal on Selected Areas in Information Theory Vol 6
+
+- [Geno-Weaving: A Framework for Low-Complexity Capacity-Achieving DNA Data Storage](deep_reads/2026-06-05-10.1109_jsait.2025.3610643.md)  
+  2/10 [journals]
+- [Survey of Sequence Reconstruction Problems and Their Applications in DNA-Based Storage](deep_reads/2026-06-05-10.1109_jsait.2025.3595457.md)  
+  2/10 [journals]
+- [Ramp Secret Sharing for Composite DNA](deep_reads/2026-06-05-10.1109_jsait.2025.3593447.md)  
+  1/10 [journals]
 
 #### JMLR
 
@@ -571,6 +730,115 @@
   8/10 [daily]
 
 ### 期刊
+
+#### IEEE Transactions on Signal Processing Vol 74
+
+- [Byzantine Attacks in Over-the-Air Cooperative Sensing Networks: Analysis and Defense](deep_reads/2026-06-05-10.1109_tsp.2025.3646135.md)  
+  1/10 [journals]
+- [Camouflage Adversarial Attacks on Multi-Agent Reinforcement Learning Systems](deep_reads/2026-06-05-10.1109_tsp.2025.3644869.md)  
+  1/10 [journals]
+- [Temperature Control for Cyber-Physical Thermal Systems over Wireless Networks: A Model-Assisted Deep Reinforcement Learning Approach](deep_reads/2026-06-05-10.1109_tsp.2026.3664289.md)  
+  0/10 [journals]
+
+#### IEEE Transactions on Pattern Analysis and Machine Intelligence Vol 48 Issue 6
+
+- [Semantic Contrast for Domain-Robust Underwater Image Quality Assessment](deep_reads/2026-06-05-10.1109_tpami.2026.3654426.md)  
+  2/10 [journals]
+- [Enhancing Adversarial Transferability With Cost-Efficient Landscape Flattening](deep_reads/2026-06-05-10.1109_tpami.2026.3664421.md)  
+  2/10 [journals]
+- [Boosting Learning Efficiency in Few-Shot Tasks With Layer-Adaptive PID Control](deep_reads/2026-06-05-10.1109_tpami.2026.3663608.md)  
+  2/10 [journals]
+- [ADVersa: Abductive Driving Accident Video Understanding](deep_reads/2026-06-05-10.1109_tpami.2026.3663545.md)  
+  1/10 [journals]
+- [Defying Distractions in Multimodal Tasks: A Novel Benchmark for Large Vision-Language Models](deep_reads/2026-06-05-10.1109_tpami.2026.3655641.md)  
+  1/10 [journals]
+- [Toward Enhanced Representation Learning for Single-Source Domain Generalization in LiDAR Semantic Segmentation](deep_reads/2026-06-05-10.1109_tpami.2026.3654352.md)  
+  1/10 [journals]
+- [All-in-One Transformer for Image Restoration Under Adverse Weather Degradations](deep_reads/2026-06-05-10.1109_tpami.2026.3658598.md)  
+  0/10 [journals]
+- [Computational Investigation of Abstraction in Claude Monet’s Water Lilies Through Brushstroke Analysis](deep_reads/2026-06-05-10.1109_tpami.2026.3664028.md)  
+  0/10 [journals]
+- [GCL-MIH: A Generative-Based Coverless Multi-Image Hiding Method](deep_reads/2026-06-05-10.1109_tpami.2026.3658731.md)  
+  0/10 [journals]
+- [Evaluating and Mitigating Relationship Hallucinations in Large Vision-Language Models](deep_reads/2026-06-05-10.1109_tpami.2026.3656175.md)  
+  0/10 [journals]
+- [Momentor++: Advancing Video Large Language Models With Fine-Grained Long Video Reasoning](deep_reads/2026-06-05-10.1109_tpami.2026.3656169.md)  
+  0/10 [journals]
+- [Learning From Each Other: Generalized Federated Incremental Semantic Segmentation](deep_reads/2026-06-05-10.1109_tpami.2026.3664293.md)  
+  0/10 [journals]
+- [A Generic Competitive-Cooperative Actor-Critic Framework for Deep Reinforcement Learning](deep_reads/2026-06-05-10.1109_tpami.2026.3664855.md)  
+  0/10 [journals]
+- [Allies Teach Better Than Enemies: Inverse Adversaries for Robust Knowledge Distillation](deep_reads/2026-06-05-10.1109_tpami.2026.3660863.md)  
+  0/10 [journals]
+- [Coded Event Focal Stack for Continuous Refocusing in Dynamic Scene](deep_reads/2026-06-05-10.1109_tpami.2026.3664082.md)  
+  0/10 [journals]
+- [Unifying Multi-Modal Hair Editing via Proxy Feature Blending](deep_reads/2026-06-05-10.1109_tpami.2026.3656763.md)  
+  0/10 [journals]
+- [Exploring Security Vulnerabilities in Multilingual Speech Translation Systems via Deceptive Inputs](deep_reads/2026-06-05-10.1109_tpami.2026.3658817.md)  
+  0/10 [journals]
+- [Robust Trusted Conflictive Multiview Collaborative Contrastive Learning](deep_reads/2026-06-05-10.1109_tpami.2026.3663788.md)  
+  0/10 [journals]
+
+#### IEEE Transactions on Pattern Analysis and Machine Intelligence Vol 48 Issue 5
+
+- [NuwaDynamics+: A Causality-Aware Generative Framework for Spatio-Temporal Representation Learning](deep_reads/2026-06-05-10.1109_tpami.2026.3652303.md)  
+  5/10 [journals]
+- [Learning Diffusion Priors for Inverse Rendering Under Unknown Illumination](deep_reads/2026-06-05-10.1109_tpami.2026.3650770.md)  
+  3/10 [journals]
+- [HGNNv2: Stable Hypergraph Neural Networks](deep_reads/2026-06-05-10.1109_tpami.2026.3652225.md)  
+  2/10 [journals]
+- [On the Transferability and Discriminability of Representation Learning in Unsupervised Domain Adaptation](deep_reads/2026-06-05-10.1109_tpami.2025.3649294.md)  
+  2/10 [journals]
+- [Parse, Align and Aggregate: Graph-Driven Compositional Reasoning for Video Question Answering](deep_reads/2026-06-05-10.1109_tpami.2026.3650864.md)  
+  1/10 [journals]
+- [Learn to Enhance Sparse Spike Streams](deep_reads/2026-06-05-10.1109_tpami.2026.3653768.md)  
+  0/10 [journals]
+- [Unleashing the Power of Text-to-Image Diffusion Models for Category-Agnostic Pose Estimation](deep_reads/2026-06-05-10.1109_tpami.2026.3651728.md)  
+  0/10 [journals]
+- [A Hierarchical Prior Mining Approach for Non-Local Multi-View Stereo](deep_reads/2026-06-05-10.1109_tpami.2026.3652616.md)  
+  0/10 [journals]
+
+#### IEEE Transactions on Pattern Analysis and Machine Intelligence Vol 48 Issue 4
+
+- [A Unified Experience Replay Framework for Spiking Deep Reinforcement Learning](deep_reads/2026-06-05-10.1109_tpami.2025.3642900.md)  
+  0/10 [journals]
+
+#### IEEE Transactions on Information Theory Vol 72 Issue 6
+
+- [Doeblin Curves](deep_reads/2026-06-05-10.1109_tit.2026.3678229.md)  
+  3/10 [journals]
+- [From List-Decodability to Proximity Gaps](deep_reads/2026-06-05-10.1109_tit.2026.3679739.md)  
+  1/10 [journals]
+- [Capacities of Entanglement Distribution From a Central Source](deep_reads/2026-06-05-10.1109_tit.2026.3684413.md)  
+  0/10 [journals]
+- [Abelian Group Codes for Classical-Quantum Channels: One-Shot and Asymptotic Rate Bounds](deep_reads/2026-06-05-10.1109_tit.2026.3687161.md)  
+  0/10 [journals]
+- [Cyclic Scheduler Design for Minimizing Age of Information in Massive Scale Networks Susceptible to Packet Errors](deep_reads/2026-06-05-10.1109_tit.2025.3548017.md)  
+  0/10 [journals]
+- [Improved Constructions of Linear Codes for Insertions and Deletions](deep_reads/2026-06-05-10.1109_tit.2026.3678200.md)  
+  0/10 [journals]
+
+#### IEEE Transactions on Information Theory Vol 72 Issue 5
+
+- [Polyphase Sequences With Flexible Zero-Ambiguity-Zone Configurations for Integrated Sensing and Communications](deep_reads/2026-06-05-10.1109_tit.2026.3668351.md)  
+  0/10 [journals]
+- [Constructions of Combinatorial Neural Codes With Asymmetric Discrepancy](deep_reads/2026-06-05-10.1109_tit.2026.3669230.md)  
+  0/10 [journals]
+
+#### IEEE Transactions on Information Theory Vol 72 Issue 4
+
+- [AntiGriesmer Bounds, Optimal Codes, and Their Subcode Support Weight Distributions](deep_reads/2026-06-05-10.1109_tit.2026.3665706.md)  
+  0/10 [journals]
+
+#### IEEE Journal on Selected Areas in Information Theory Vol 6
+
+- [Quantum Sensing and Communication via Non-Gaussian States](deep_reads/2026-06-05-10.1109_jsait.2024.3491692.md)  
+  0/10 [journals]
+
+#### IEEE Journal on Selected Areas in Information Theory
+
+- [Foundations of Efficient Model Reconstruction Using Counterfactual Explanations](deep_reads/2026-06-05-10.1109_jsait.2026.3695917.md)  
+  5/10 [journals]
 
 #### Journal of the Royal Statistical Society Series B Vol 88 Issue 1
 

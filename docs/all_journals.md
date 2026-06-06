@@ -31,6 +31,31 @@
 - [Vol 87 Issue 5 · 2026-05-26](journals/2026-05-26-jrssb-v87-i5.md)
 - [Vol 87 Issue 4 · 2026-05-26](journals/2026-05-26-jrssb-v87-i4.md)
 
+## IEEE 系列 (IEEE)
+
+### JSAIT
+
+- [Vol 7 · 2026-06-05](journals/2026-06-05-jsait-v7.md)
+- [Vol 6 · 2026-06-05](journals/2026-06-05-jsait-v6.md)
+- [2026-06-05](journals/2026-06-05-jsait.md)
+
+### TIT
+
+- [Vol 72 Issue 6 · 2026-06-05](journals/2026-06-05-tit-v72-i6.md)
+- [Vol 72 Issue 5 · 2026-06-05](journals/2026-06-05-tit-v72-i5.md)
+- [Vol 72 Issue 4 · 2026-06-05](journals/2026-06-05-tit-v72-i4.md)
+
+### TPAMI
+
+- [Vol 48 Issue 6 · 2026-06-05](journals/2026-06-05-tpami-v48-i6.md)
+- [Vol 48 Issue 5 · 2026-06-05](journals/2026-06-05-tpami-v48-i5.md)
+- [Vol 48 Issue 4 · 2026-06-05](journals/2026-06-05-tpami-v48-i4.md)
+
+### TSP
+
+- [Vol 74 · 2026-06-05](journals/2026-06-05-tsp-v74.md)
+- [2026-06-05](journals/2026-06-05-tsp.md)
+
 
 ---
 
