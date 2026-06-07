@@ -217,6 +217,90 @@ def fetch_latest_issue(issn: str, journal_name: str, *,
     return papers
 
 
+def _item_matches_issue(it: dict, vol: int, iss: int | None) -> bool:
+    """True if a Crossref work belongs to (vol, iss). ``iss=None`` matches the
+    whole volume (used for rolling-publication journals listed by volume only)."""
+    v = it.get("volume")
+    i = it.get("issue") or it.get("journal-issue", {}).get("issue")
+    try:
+        if not v or int(re.sub(r"[^0-9]", "", v)) != vol:
+            return False
+        if iss is None:
+            return True
+        return bool(i) and int(re.sub(r"[^0-9]", "", i)) == iss
+    except ValueError:
+        return False
+
+
+def fetch_issue(issn: str, journal_name: str, vol: int, iss: int | None = None, *,
+                fill_abstract: bool = True, max_rows: int = 400) -> list[Paper]:
+    """Fetch *one specific* (historical) issue's articles, keyed by (vol, iss).
+
+    Unlike :func:`fetch_latest_issue` (which takes the N most recent issues),
+    this targets an exact volume/issue — used by the issue-rerun path to
+    re-pull a page we already published. ``iss=None`` pulls the whole volume
+    (rolling-pub journals listed by volume only).
+
+    Crossref has no direct issue filter, so we pull ``max_rows`` works sorted by
+    publication date and keep those matching (vol, iss). For very old issues
+    that fall outside the window, raise ``max_rows``.
+    """
+    log.info("Crossref: fetching %s vol %s issue %s (ISSN %s)",
+             journal_name, vol, iss if iss is not None else "*", issn)
+    data = _get_json(
+        f"{CROSSREF_BASE}/journals/{issn}/works",
+        params={
+            "filter": "type:journal-article",
+            "sort": "published",
+            "order": "desc",
+            "rows": max_rows,
+        },
+    )
+    items = data.get("message", {}).get("items", [])
+    keep = [it for it in items if _item_matches_issue(it, vol, iss)]
+    log.info("  matched %d/%d works for the target issue", len(keep), len(items))
+
+    papers: list[Paper] = []
+    n_discussion = 0
+    for it in keep:
+        p = _item_to_paper(it, journal_name)
+        if not p:
+            continue
+        if _is_discussion_content(p.title):
+            n_discussion += 1
+            continue
+        papers.append(p)
+    log.info("  %d papers in issue (filtered %d discussion/comment items)",
+             len(papers), n_discussion)
+
+    if fill_abstract:
+        _fill_missing_abstracts(papers)
+    return papers
+
+
+def fetch_work(doi: str, journal_name: str | None = None, *,
+               fill_abstract: bool = True) -> Paper | None:
+    """Fetch a single article by DOI (used to auto-refetch papers the issue
+    scrape missed). ``journal_name`` overrides the venue label; otherwise the
+    container-title from Crossref is used."""
+    try:
+        data = _get_json(f"{CROSSREF_BASE}/works/{doi}")
+    except Exception as e:  # noqa: BLE001
+        log.warning("Crossref fetch_work failed for %s: %s", doi, e)
+        return None
+    item = data.get("message", {})
+    name = journal_name or (item.get("container-title") or [""])[0]
+    p = _item_to_paper(item, name)
+    if p is None:
+        return None
+    if _is_discussion_content(p.title):
+        log.info("fetch_work: %s is discussion/comment content — skipping", doi)
+        return None
+    if fill_abstract and not p.abstract:
+        _fill_missing_abstracts([p])
+    return p
+
+
 @retry(stop=stop_after_attempt(2), wait=wait_exponential(multiplier=2, min=1, max=8))
 def _s2_abstract(doi: str) -> str:
     data = _get_json(

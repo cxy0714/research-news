@@ -33,7 +33,7 @@ from .models import Paper
 from .render.markdown import render_journal_page, update_index
 from .score_log import append_scored as append_score_log
 from .scrapers import affiliations as affil
-from .scrapers.crossref import fetch_latest_issue, fill_arxiv_links
+from .scrapers.crossref import fetch_issue, fetch_latest_issue, fill_arxiv_links
 from .scrapers.jmlr import fetch_latest as jmlr_fetch_latest
 from .usage import report as report_token_usage
 
@@ -106,6 +106,89 @@ def _summary_is_broken(p: Paper) -> bool:
     if not p.topic or not p.key_techniques or not p.why_relevant:
         return True
     return False
+
+
+def _process_issue(
+    issue_papers: list[Paper],
+    short: str,
+    venue: str,
+    vol: str | None,
+    iss: str | None,
+    *,
+    when: date,
+    client: SJTUClient,
+    interests_text: str,
+    model: str,
+    th_deepread: float,
+    skip_pdf: bool = False,
+    retry_broken: bool = False,
+    is_loaded: bool = False,
+) -> Path:
+    """Score → summarize → render → deep-read one issue's papers, then return the
+    rendered journal page path.
+
+    Shared by the normal run (``when`` = today) and the issue-rerun path
+    (``when`` = the original page's date, so the regenerated page overwrites it).
+    Prompts are imported fresh from ``llm.prompts`` by the callees, so a rerun
+    automatically picks up any prompt edits.
+    """
+    # ── score ──────────────────────────────────────────────────────────────
+    # On --retry-broken with loaded papers the cached batch scores are still
+    # valid (only the rich summary broke), so we keep them.
+    if retry_broken and is_loaded and all(p.score is not None for p in issue_papers):
+        log.info("[%s v%s i%s] retry-broken: keeping cached scores", short, vol, iss)
+    else:
+        log.info("[%s v%s i%s] scoring %d papers (model=%s) ...",
+                 short, vol, iss, len(issue_papers), model)
+        scores = score_papers(client, issue_papers, interests_text, model=model)
+        for p in issue_papers:
+            sr = scores.get(p.paper_id)
+            p.score, p.score_reason = sr if sr else (0.0, p.score_reason)
+
+    # No drop threshold: journals are pre-curated. Sort so the most relevant
+    # float to the top within each topic section.
+    issue_papers.sort(key=lambda p: p.score or 0, reverse=True)
+
+    # ── summarize ──────────────────────────────────────────────────────────
+    if retry_broken and is_loaded:
+        to_summarize = [p for p in issue_papers if _summary_is_broken(p)]
+        log.info("[%s v%s i%s] retry-broken: %d/%d need re-summarize",
+                 short, vol, iss, len(to_summarize), len(issue_papers))
+    else:
+        to_summarize = issue_papers
+        log.info("[%s v%s i%s] summarizing %d papers (model=%s) ...",
+                 short, vol, iss, len(to_summarize), model)
+    for p in to_summarize:
+        try:
+            summarize_paper(client, p, interests_text, model=model)
+        except Exception as e:  # noqa: BLE001
+            log.warning("summary failed for %s: %s", p.paper_id, e)
+
+    append_score_log(issue_papers, run_date=when, model=model,
+                     interests_text=interests_text)
+
+    # ── institutions + render ───────────────────────────────────────────────
+    log.info("[%s v%s i%s] looking up institutions for %d papers ...",
+             short, vol, iss, len(issue_papers))
+    affil.backfill_affiliations(issue_papers)
+    out = render_journal_page(issue_papers, short, venue, vol=vol, iss=iss, when=when)
+
+    # ── deep read (score >= th_deepread, plus institution green-lights) ──────
+    deep_read_papers = select_deep_read_papers(
+        issue_papers, issue_papers, th_deepread,
+        client=client, interests_yaml=interests_text, model=model,
+    )
+    if deep_read_papers and not skip_pdf:
+        log.info("[%s v%s i%s] %d deep-read papers (PDF + report)",
+                 short, vol, iss, len(deep_read_papers))
+        save_highlights(deep_read_papers, run_date=when)
+        generate_deep_read_report(
+            deep_read_papers, client, interests_text, when, "journals", model=model
+        )
+    elif skip_pdf:
+        log.info("[%s v%s i%s] skip_pdf set; no PDF / deep read", short, vol, iss)
+
+    return out
 
 
 def run(only: list[str] | None = None, dry_run: bool = False,
@@ -194,76 +277,19 @@ def run(only: list[str] | None = None, dry_run: bool = False,
 
     client = SJTUClient()
 
-    # Skip scoring on --retry-broken with loaded papers: existing scores
-    # are still valid (rich-prompt summary failure doesn't invalidate the
-    # cheaper batch score).
-    if retry_broken and load_papers and all(p.score is not None for p in papers):
-        log.info("retry-broken: keeping cached scores from %s", load_papers)
-    else:
-        log.info("scoring %d papers (model=%s) ...", len(papers), JOURNALS_MODEL)
-        scores = score_papers(client, papers, interests_text, model=JOURNALS_MODEL)
-        for p in papers:
-            sr = scores.get(p.paper_id)
-            if sr:
-                p.score, p.score_reason = sr
-            else:
-                p.score = 0.0
-
-    # No drop threshold: journals are pre-curated, the researcher wants to see
-    # the whole issue. Sort by score so the most relevant float to the top
-    # within each venue's section in the rendered output.
-    papers.sort(key=lambda p: p.score or 0, reverse=True)
-
-    # If we loaded saved papers with --retry-broken, skip already-good
-    # summaries and only re-call LLM on the ones that broke last time.
-    if retry_broken and load_papers:
-        to_summarize = [p for p in papers if _summary_is_broken(p)]
-        log.info("retry-broken: %d/%d papers need re-summarize (model=%s)",
-                 len(to_summarize), len(papers), JOURNALS_MODEL)
-    else:
-        to_summarize = papers
-        log.info("summarizing %d papers (model=%s) ...",
-                 len(to_summarize), JOURNALS_MODEL)
-
-    for p in to_summarize:
-        try:
-            summarize_paper(client, p, interests_text, model=JOURNALS_MODEL)
-        except Exception as e:
-            log.warning("summary failed for %s: %s", p.paper_id, e)
-
-    append_score_log(
-        papers,
-        run_date=date.today(),
-        model=JOURNALS_MODEL,
-        interests_text=interests_text,
-    )
-
-    # Persist the LLM enrichment back to the source JSON so a future
-    # --load-papers picks up the fixed summaries.
-    if load_papers:
-        _save_papers(papers, load_papers)
-
-    # Highlight = score >= threshold from interests.yaml
     import yaml as _yaml
     _icfg = _yaml.safe_load(interests_text)
-    th_highlight = float(_icfg.get("score_threshold_highlight", 8))
     th_deepread = float(_icfg.get("score_threshold_deepread", 6))
-    high = [p for p in papers if (p.score or 0) >= th_highlight]
 
     today = date.today()
 
-    # Build full_name → (short, full) mapping from the groups config.
-    full_to_meta: dict[str, tuple[str, str]] = {}
+    # Build full_name → short mapping from the groups config.
+    full_to_short: dict[str, str] = {}
     for gcfg in groups.values():
         for jcfg in gcfg["journals"]:
-            full_to_meta[jcfg["full"]] = (jcfg["short"], jcfg["full"])
+            full_to_short[jcfg["full"]] = jcfg["short"]
 
-    # Look up author institutions (OpenAlex) before rendering. Cached on each
-    # Paper so the deep-read green-light below reuses them instead of re-fetching.
-    log.info("looking up institutions for %d journal papers ...", len(papers))
-    affil.backfill_affiliations(papers)
-
-    # Group papers by (venue, volume, issue) → one page per issue.
+    # Group papers by (venue, volume, issue) → process + render one page per issue.
     by_issue: dict[tuple, list[Paper]] = {}
     for p in papers:
         key = (p.venue or "Unknown", p.volume, p.issue)
@@ -271,27 +297,19 @@ def run(only: list[str] | None = None, dry_run: bool = False,
 
     out_paths = []
     for (venue, vol, iss), vps in by_issue.items():
-        meta = full_to_meta.get(venue)
-        short = meta[0] if meta else venue
-        out = render_journal_page(vps, short, venue, vol=vol, iss=iss, when=today)
+        short = full_to_short.get(venue, venue)
+        out = _process_issue(
+            vps, short, venue, vol, iss, when=today,
+            client=client, interests_text=interests_text, model=JOURNALS_MODEL,
+            th_deepread=th_deepread, skip_pdf=skip_pdf,
+            retry_broken=retry_broken, is_loaded=bool(load_papers),
+        )
         out_paths.append(out)
 
-    # Deep-read: score >= th_deepread (6) for ALL topics, plus any paper with a
-    # top-50-institution author (green-lit regardless of score).
-    deep_read_papers = select_deep_read_papers(
-        papers, papers, th_deepread,
-        client=client, interests_yaml=interests_text, model=JOURNALS_MODEL,
-    )
-
-    if deep_read_papers and not skip_pdf:
-        log.info("saving %d journal highlights (PDF + manifest)", len(deep_read_papers))
-        save_highlights(deep_read_papers, run_date=today)
-        log.info("generating deep-read report for %d journal papers ...", len(deep_read_papers))
-        generate_deep_read_report(
-            deep_read_papers, client, interests_text, today, "journals", model=JOURNALS_MODEL
-        )
-    elif skip_pdf:
-        log.info("skip_pdf set; not downloading journal highlight PDFs")
+    # Persist the LLM enrichment back to the source JSON so a future
+    # --load-papers picks up the fixed summaries.
+    if load_papers:
+        _save_papers(papers, load_papers)
 
     update_index()
 
@@ -305,6 +323,262 @@ def run(only: list[str] | None = None, dry_run: bool = False,
     for p in out_paths:
         log.info("wrote %s", p)
     report_token_usage(client, "journals", today)
+    return out_paths
+
+
+# ── issue rerun ────────────────────────────────────────────────────────────────
+# Re-generate already-published journal issue pages in place, using the *current*
+# deep-read + scoring prompts. Distinct from research_news.rerun (which repairs
+# garbled summary blocks); this re-runs the whole LLM stack for a chosen issue
+# and overwrites its markdown (backing up the old page + deep reads first).
+
+import re as _re
+import shutil as _shutil
+from typing import NamedTuple
+
+BACKUP_ROOT = Path("backups")
+
+# First [id](url) on a rendered paper heading: "### N. [DOI](url) [· [arXiv](..)] — Title".
+_PAGE_HEADING_RE = _re.compile(r"^#{2,6}\s+\d+\.\s+\[([^\]]+)\]\(([^)]+)\)")
+
+
+class _Target(NamedTuple):
+    path: Path          # existing docs/journals/*.md page
+    short: str          # config short name (e.g. "AoS")
+    full: str           # config full name / venue label
+    issn: str
+    vol: int
+    iss: int | None
+    when: date          # original page date — regen overwrites this exact file
+
+
+def _journal_catalog() -> dict[str, dict]:
+    """slug -> {short, full, issn, group} for every configured journal."""
+    from .render.markdown import _slug
+    out: dict[str, dict] = {}
+    for gkey, gcfg in _load_groups().items():
+        for j in gcfg["journals"]:
+            out[_slug(j["short"])] = {
+                "short": j["short"], "full": j["full"],
+                "issn": j["issn"], "group": gkey,
+            }
+    return out
+
+
+def _parse_issue_arg(s: str) -> tuple[int, int | None]:
+    """'v54-i1' / '54-1' / '54/1' / '54' → (54, 1) or (54, None)."""
+    m = _re.search(r"v?(\d+)(?:[-/ ]i?(\d+))?", s.strip(), _re.I)
+    if not m:
+        raise ValueError(f"can't parse issue spec {s!r} (try e.g. v54-i1)")
+    return int(m.group(1)), (int(m.group(2)) if m.group(2) else None)
+
+
+def _resolve_rerun_targets(*, only: list[str] | None, only_group: list[str] | None,
+                           recent: int | None, issue: str | None) -> list[_Target]:
+    """Find the docs/journals/*.md pages to re-generate, from journal/group/issue
+    filters and an optional 'most recent N issues per journal' cap."""
+    from collections import defaultdict
+    from .render.markdown import (
+        JOURNALS_DIR, _slug, _journal_slug_from_stem,
+        _journal_vol_iss_from_stem, _parse_date_from_stem,
+    )
+    catalog = _journal_catalog()
+    only_slugs = {_slug(s) for s in only} if only else None
+    only_groups = set(only_group) if only_group else None
+
+    candidates: list[_Target] = []
+    for p in sorted(JOURNALS_DIR.glob("*.md")):
+        slug = _journal_slug_from_stem(p.stem)
+        meta = catalog.get(slug)
+        if meta is None:
+            continue  # orphan page (journal not in config) — no ISSN to refetch
+        if only_slugs is not None and slug not in only_slugs:
+            continue
+        if only_groups is not None and meta["group"] not in only_groups:
+            continue
+        vol, iss = _journal_vol_iss_from_stem(p.stem)
+        if vol is None:
+            continue  # can't target an issue without a volume in the filename
+        dstr = _parse_date_from_stem(p.stem)
+        when = date.fromisoformat(dstr) if dstr else date.today()
+        candidates.append(
+            _Target(p, meta["short"], meta["full"], meta["issn"], vol, iss, when)
+        )
+
+    if issue is not None:
+        tv, ti = _parse_issue_arg(issue)
+        candidates = [c for c in candidates
+                      if c.vol == tv and (ti is None or c.iss == ti)]
+
+    if recent:
+        by_slug: dict[str, list[_Target]] = defaultdict(list)
+        for c in candidates:
+            by_slug[_slug(c.short)].append(c)
+        picked: list[_Target] = []
+        for cs in by_slug.values():
+            cs.sort(key=lambda c: (c.vol, c.iss or 0), reverse=True)
+            picked.extend(cs[:recent])
+        candidates = picked
+
+    candidates.sort(key=lambda c: (c.short.lower(), -c.vol, -(c.iss or 0)))
+    return candidates
+
+
+def _page_dois(path: Path) -> list[str]:
+    """The paper ids (DOIs) listed on a rendered journal page, in order."""
+    if not path.exists():
+        return []
+    out: list[str] = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        m = _PAGE_HEADING_RE.match(line)
+        if m:
+            out.append(m.group(1))
+    return out
+
+
+def _paper_in_issue(p: Paper, vol: int, iss: int | None) -> bool:
+    """Whether a snapshot paper belongs to (vol, iss). Matches on the volume/issue
+    fields when present, else on the 'vol N' / 'issue M' category strings — older
+    snapshots leave volume/issue None but always carry the categories."""
+    cats = " ".join(p.categories or []).lower()
+    vol_ok = (p.volume is not None and str(p.volume) == str(vol)) or f"vol {vol}" in cats
+    if not vol_ok:
+        return False
+    if iss is None:
+        return True
+    return (p.issue is not None and str(p.issue) == str(iss)) or f"issue {iss}" in cats
+
+
+def _assemble_issue_papers(t: _Target, from_snapshot: Path | None, *,
+                           fill_abstract: bool = True) -> list[Paper]:
+    """The paper set for one issue: re-fetched from Crossref/JMLR (default,
+    self-healing — picks up articles the original scrape missed) or loaded from a
+    snapshot (corpus JSON) for fast prompt iteration."""
+    if from_snapshot:
+        papers = [p for p in _load_papers(from_snapshot)
+                  if p.venue == t.full and _paper_in_issue(p, t.vol, t.iss)]
+        log.info("snapshot: %d papers for %s v%s i%s", len(papers),
+                 t.short, t.vol, t.iss if t.iss is not None else "*")
+        return [p for p in papers if p.abstract]
+    if t.issn == "jmlr":
+        papers = jmlr_fetch_latest(volume=t.vol)  # JMLR has no issues — whole volume
+    else:
+        papers = fetch_issue(t.issn, t.full, t.vol, t.iss, fill_abstract=fill_abstract)
+    if fill_abstract:
+        papers = [p for p in papers if p.abstract]
+        fill_arxiv_links(papers)
+    return papers
+
+
+def _backup_issue(t: _Target, stamp: str) -> None:
+    """Copy the issue page and its deep-read pages to backups/<stamp>/ before
+    they're overwritten."""
+    from .render.markdown import DEEP_READS_DIR
+    from .deep_read import _slug as _dr_slug
+    dest = BACKUP_ROOT / stamp
+    (dest / "journals").mkdir(parents=True, exist_ok=True)
+    if t.path.exists():
+        _shutil.copy2(t.path, dest / "journals" / t.path.name)
+    dr_n = 0
+    for doi in _page_dois(t.path):
+        cand = DEEP_READS_DIR / f"{t.when.isoformat()}-{_dr_slug(doi)}.md"
+        if cand.exists():
+            (dest / "deep_reads").mkdir(parents=True, exist_ok=True)
+            _shutil.copy2(cand, dest / "deep_reads" / cand.name)
+            dr_n += 1
+    log.info("backed up %s + %d deep-read page(s) → %s", t.path.name, dr_n, dest)
+
+
+def rerun(*, only: list[str] | None = None, only_group: list[str] | None = None,
+          recent: int | None = None, issue: str | None = None,
+          from_snapshot: Path | None = None, backup: bool = True,
+          dry_run: bool = False, skip_pdf: bool = False,
+          model: str | None = None,
+          extra_papers: list[Paper] | None = None) -> list[Path]:
+    """Re-generate published journal issue pages in place with current prompts.
+
+    Overwrites each targeted ``docs/journals/<date>-<short>-vN-iM.md`` (and the
+    matching deep-read pages) by re-running score → summarize → render → deep read
+    for that issue, pinned to the page's original date. Old pages are backed up
+    (timestamped) first unless ``backup=False``.
+
+    ``extra_papers`` (used by the completeness checker's --refetch --rerun) are
+    merged into whichever targeted issue they belong to, deduped by paper_id —
+    so articles the issue scrape missed get added back on regeneration.
+    """
+    load_dotenv()
+    interests_text = Path("config/interests.yaml").read_text(encoding="utf-8")
+    import yaml as _yaml
+    th_deepread = float((_yaml.safe_load(interests_text) or {}).get(
+        "score_threshold_deepread", 6))
+
+    targets = _resolve_rerun_targets(only=only, only_group=only_group,
+                                     recent=recent, issue=issue)
+    if not targets:
+        log.error("rerun: no journal issue pages match the given filters")
+        return []
+
+    log.info("rerun: %d issue page(s) targeted:", len(targets))
+    for t in targets:
+        log.info("  %s  (%s vol %s issue %s · %s)", t.path.name, t.short, t.vol,
+                 t.iss if t.iss is not None else "*", t.when)
+
+    if dry_run:
+        for t in targets:
+            try:
+                assembled = _assemble_issue_papers(t, from_snapshot, fill_abstract=False)
+            except Exception as e:  # noqa: BLE001
+                log.warning("  [dry-run] %s: assemble failed: %s", t.path.name, e)
+                continue
+            old = set(_page_dois(t.path))
+            new_ids = {p.paper_id for p in assembled}
+            log.info("  [dry-run] %s: page=%d source=%d (+%d new, -%d gone)%s",
+                     t.path.name, len(old), len(assembled),
+                     len(new_ids - old), len(old - new_ids),
+                     "; would back up page + deep reads" if backup else "")
+        log.info("rerun dry-run: wrote nothing, called no LLM")
+        return []
+
+    model = model or JOURNALS_MODEL
+    client = SJTUClient()
+    from datetime import datetime
+    stamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+
+    out_paths: list[Path] = []
+    for t in targets:
+        try:
+            papers = _assemble_issue_papers(t, from_snapshot)
+        except Exception as e:  # noqa: BLE001
+            log.warning("rerun: assemble failed for %s — skipping: %s", t.path.name, e)
+            continue
+        if extra_papers:
+            have = {p.paper_id for p in papers}
+            added = [p for p in extra_papers
+                     if _paper_in_issue(p, t.vol, t.iss) and p.paper_id not in have]
+            if added:
+                log.info("rerun: merging %d extra (recovered) paper(s) into %s",
+                         len(added), t.path.name)
+                papers.extend(added)
+        if not papers:
+            log.warning("rerun: no papers for %s — skipping", t.path.name)
+            continue
+        if backup:
+            _backup_issue(t, stamp)
+        out = _process_issue(
+            papers, t.short, t.full, str(t.vol),
+            str(t.iss) if t.iss is not None else None,
+            when=t.when, client=client, interests_text=interests_text,
+            model=model, th_deepread=th_deepread, skip_pdf=skip_pdf,
+        )
+        if out.resolve() != t.path.resolve():
+            log.warning("rerun: wrote %s but target was %s (slug mismatch?)",
+                        out.name, t.path.name)
+        out_paths.append(out)
+        log.info("rerun: regenerated %s (%d papers)", out, len(papers))
+
+    if out_paths:
+        update_index()
+    report_token_usage(client, "journals", date.today())
     return out_paths
 
 
@@ -380,16 +654,49 @@ def main(argv: list[str] | None = None) -> int:
                     help="Don't filter against data/seen_papers.json and don't "
                          "update it. Use this to re-render an issue you've "
                          "already published.")
+
+    # ── rerun mode: re-generate already-published issue pages in place ───────
+    g = ap.add_argument_group(
+        "rerun (re-generate published issue pages with the current prompts)")
+    g.add_argument("--rerun", action="store_true",
+                   help="Rerun mode: overwrite existing docs/journals/*.md pages "
+                        "(scoped by --only / --only-group / --rerun-recent / "
+                        "--issue) by re-running the LLM stack and pinning each "
+                        "page to its original date. Backs up the old page + deep "
+                        "reads first. NOT the same as `python -m research_news."
+                        "rerun` (which only repairs garbled summary blocks).")
+    g.add_argument("--rerun-recent", type=int, default=None, metavar="N",
+                   help="Rerun the N most recent issues per targeted journal.")
+    g.add_argument("--issue", default=None, metavar="vNN-iMM",
+                   help="Rerun one specific issue (e.g. v54-i1); best with --only.")
+    g.add_argument("--from-snapshot", type=Path, default=None, metavar="PATH",
+                   help="Rerun source: load papers from a corpus JSON instead of "
+                        "re-fetching Crossref (fast prompt iteration; won't pick "
+                        "up articles the original scrape missed).")
+    g.add_argument("--no-backup", action="store_true",
+                   help="With --rerun: don't back up the pages being overwritten.")
     args = ap.parse_args(argv)
 
     if args.load_papers and args.save_papers:
         ap.error("--load-papers and --save-papers are mutually exclusive")
     if args.retry_broken and not args.load_papers:
         ap.error("--retry-broken requires --load-papers")
+    rerun_only = ("--rerun-recent", "--issue", "--from-snapshot", "--no-backup")
+    if not args.rerun and (args.rerun_recent is not None or args.issue
+                           or args.from_snapshot or args.no_backup):
+        ap.error(f"{', '.join(rerun_only)} require --rerun")
 
     only = [s.strip() for s in args.only.split(",")] if args.only else None
     only_group = [s.strip() for s in args.only_group.split(",")] \
         if args.only_group else None
+
+    if args.rerun:
+        rerun(only=only, only_group=only_group, recent=args.rerun_recent,
+              issue=args.issue, from_snapshot=args.from_snapshot,
+              backup=not args.no_backup, dry_run=args.dry_run,
+              skip_pdf=args.skip_pdf)
+        return 0
+
     run(only=only, only_group=only_group,
         dry_run=args.dry_run, jmlr_n=args.jmlr_n,
         jmlr_vol=args.jmlr_vol, n_issues=args.n_issues, label=args.label,

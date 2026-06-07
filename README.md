@@ -185,6 +185,65 @@ Discussion / reply / rejoinder / correction 类条目（如 JRSSB discussion iss
 
 期刊文章的官方链接（DOI 落地页）常要看权限才能打开，arXiv 预印本免费、一点就开。所以抓取后会对每篇期刊文章（含 JMLR）按标题在 arXiv 上找一遍预印本：找到高置信匹配就把 arXiv 链接记到 `Paper.arxiv_url`，**期刊页和深度阅读页都同时挂「官方链接 + arXiv」两个链接**（没找到的只挂官方链接）。链接随 `--save-papers` 落盘，`--load-papers` 直接复用、不重查。
 
+### 重跑整期（换了 prompt / 模型后覆盖重生成）
+
+改了「深度阅读 + 打分」prompt 或换了模型后，想把**已发布的某些期**按新配方重新生成、
+**就地覆盖**对应 markdown，用 `--rerun`（挂在 `journals` 上；和 `python -m
+research_news.rerun` 不是一回事——后者只修页面里的乱码摘要块）：
+
+```powershell
+# core 组每刊最近 4 期，全部重跑
+python -m research_news.journals --rerun --only-group core --rerun-recent 4
+
+# 指定单期（最好配 --only 锁单刊）
+python -m research_news.journals --rerun --only AoS --issue v54-i1
+
+# 先干跑：列出会重生成哪些页、每期会拉到多少篇（对比页上现有，提示 +N 篇新增 / -N 篇消失），不调 LLM、不写盘
+python -m research_news.journals --rerun --only-group core --rerun-recent 4 --dry-run
+
+# 不重抓、直接复用快照里的这期论文（快、省钱，纯迭代 prompt；但不会带上原来漏抓的）
+python -m research_news.journals --rerun --only AoS --issue v54-i1 \
+    --from-snapshot data/corpus-2026Q2-4i.json
+```
+
+- 目标期次从 `docs/journals/*.md` 文件名解析（`--only` 刊 / `--only-group` 组 /
+  `--rerun-recent N` 每刊最近 N 期 / `--issue vNN-iMM` 单期，可叠加）。
+- **就地覆盖**：把 `run_date` 钉成原页面文件名里的日期，重渲染就盖回**同一个文件**
+  （期刊页 + 该期对应的精读页都覆盖），不会另起新日期页。prompt 现取，自动用最新版。
+- **默认重抓 Crossref**（能顺带带上原来漏抓的文章、元数据最新）；`--from-snapshot PATH`
+  改为从 corpus JSON 取，快但不自愈。
+- **默认先备份**：旧的期刊页 + 精读页拷到 `backups/<时间戳>/`（已 `.gitignore`），
+  `--no-backup` 关掉。
+- 仅适用于**带期号的页**（`-vN-iM` / `-vN`）。JMLR（滚动出版、单卷一页）与个别无期号的
+  单页（如旧的 `2026-05-26-jasa.md`）暂不在 issue-rerun 范围内——JMLR 直接用普通
+  `--only JMLR` 重抓即可。
+
+### 抓取完整性检查 + 报缺
+
+期刊抓取偶尔会漏文章（Crossref 的 issue 列表按发表日排序 + `rows` 窗口截断，或个别文章
+缺 vol/issue 元数据没归进该期）。拿**权威目录**对一下就能查出来：
+
+```powershell
+# 用你下载的 content PDF 作权威目录，对比已发布的 AoS v54-i1 页，报缺
+python -m research_news.completeness --journal AoS --issue v54-i1 --toc-pdf contents.pdf
+
+# 或抓 Project Euclid 的 issue TOC 作权威目录（AoS/AoP/AoAS/EJS/Bernoulli/Stat Sci）
+python -m research_news.completeness --journal AoS --issue v54-i1 --euclid
+
+# 查到缺失后：按 DOI 从 Crossref 单篇补抓，并重跑该期把补回来的文章一起重渲染
+python -m research_news.completeness --journal AoS --issue v54-i1 \
+    --toc-pdf contents.pdf --refetch --rerun
+```
+
+- **权威集**（真相）：content PDF 的 Contents 页（`--toc-pdf`，pypdf 解析）或 Project
+  Euclid 的 issue TOC（`--euclid`）。**已抓集**（现状）：默认解析已发布的期刊页
+  （`--page` 指定，或 `--snapshot` 用 corpus）。
+- **diff** 先按 DOI、无 DOI 再按标准化标题（复用抓取器里的标题匹配）；discussion /
+  comment / correction 类会**先从权威集滤掉**，不会误报成漏抓。
+- 输出「缺失文章」报告（标题 + DOI + 链接）。`--refetch` 按 DOI 单篇补抓
+  （`/works/{DOI}` 直查，即使 issue 列表漏了也能拿到）；再加 `--rerun` 就把补回来的文章
+  喂给上面的整期重跑，重新打分 / 摘要 / 精读 / 渲染进去。`--dry-run` 只报会补哪些、不动。
+
 ### 输出
 
 - `docs/journals/<日期>-<期刊>.md` — 每个期刊独立一页（如 `2026-05-17-jmlr.md`、`2026-05-17-aos.md`），按主题分组
@@ -317,7 +376,8 @@ python -m research_news.shootout --source jmlr --n 10 `
 ```
 research_news/
   daily.py            # arxiv 每日管道入口
-  journals.py         # 期刊管道入口
+  journals.py         # 期刊管道入口（含 --rerun 整期重跑）
+  completeness.py     # 抓取完整性检查：权威 TOC ↔ 已抓 diff + 报缺 + 补抓
   deep_read.py        # PDF 精读：文本抽取 + LLM 精读 + 独立页面生成
   shootout.py         # prompt / 模型对照评估
   highlights.py       # 高相关论文 PDF 下载 + manifest
@@ -326,7 +386,8 @@ research_news/
   scrapers/
     arxiv.py          # arxiv RSS + API
     jmlr.py           # JMLR 卷索引页
-    crossref.py       # 通用 ISSN → 期刊（含 T1-T4 abstract backfill）
+    crossref.py       # 通用 ISSN → 期刊（含 T1-T4 abstract backfill、按期/按 DOI 单抓）
+    euclid.py         # Project Euclid issue TOC（完整性检查的权威目录源之一）
     authors.py        # Semantic Scholar by author
     conferences.py    # 会议 / seminar 页面（默认禁用）
   llm/
