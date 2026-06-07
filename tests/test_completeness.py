@@ -5,7 +5,7 @@ from pathlib import Path
 
 from research_news import completeness as cmp
 from research_news.completeness import TocEntry
-from research_news.scrapers import euclid
+from research_news.scrapers import euclid, openalex
 
 
 # ── content-PDF TOC text parsing ───────────────────────────────────────────────
@@ -144,3 +144,56 @@ def test_euclid_parse_issue_html_extracts_doi_from_href():
     assert len(pairs) == 2
     titles = {t for t, _ in pairs}
     assert "Berry-Esseen bounds for design-based causal inference" in titles
+
+
+# ── OpenAlex issue listing parsing ─────────────────────────────────────────────
+
+def test_openalex_parse_works_json():
+    data = {
+        "meta": {"next_cursor": None},
+        "results": [
+            {"title": "Berry-Esseen bounds",
+             "doi": "https://doi.org/10.1214/25-AOS2569",
+             "biblio": {"volume": "54", "issue": "1"}},
+            {"display_name": "Confounder selection", "doi": None,
+             "biblio": {"volume": "54", "issue": "1"}},
+            {"title": "", "doi": "https://doi.org/10.1214/25-aos9999"},  # no title → dropped
+        ],
+    }
+    pairs = openalex.parse_works_json(data)
+    assert pairs == [
+        ("Berry-Esseen bounds", "10.1214/25-aos2569"),
+        ("Confounder selection", None),
+    ]
+
+
+# ── automatic authoritative-source resolution ──────────────────────────────────
+
+def test_resolve_authoritative_auto_prefers_euclid(monkeypatch):
+    monkeypatch.setattr(euclid, "fetch_issue_toc",
+                        lambda *a, **k: [TocEntry("From Euclid", "10.1/e")])
+    called = {"openalex": False}
+    def _oa(*a, **k):
+        called["openalex"] = True
+        return [TocEntry("From OpenAlex", "10.1/o")]
+    monkeypatch.setattr(openalex, "fetch_issue_toc", _oa)
+
+    entries, used = cmp.resolve_authoritative("0090-5364", "AoS", 54, 1)
+    assert used == "euclid" and entries[0].doi == "10.1/e"
+    assert called["openalex"] is False  # not consulted when Euclid has data
+
+
+def test_resolve_authoritative_auto_falls_back_to_openalex(monkeypatch):
+    monkeypatch.setattr(euclid, "fetch_issue_toc", lambda *a, **k: [])  # Euclid empty
+    monkeypatch.setattr(openalex, "fetch_issue_toc",
+                        lambda *a, **k: [TocEntry("From OpenAlex", "10.1/o")])
+    entries, used = cmp.resolve_authoritative("1234-5678", "JASA", 121, 1)
+    assert used == "openalex" and entries[0].doi == "10.1/o"
+
+
+def test_resolve_authoritative_pdf_override(monkeypatch, tmp_path):
+    monkeypatch.setattr(cmp, "extract_toc_from_pdf",
+                        lambda p, **k: [TocEntry("From PDF", "10.1/p")])
+    entries, used = cmp.resolve_authoritative(
+        "0090-5364", "AoS", 54, 1, toc_pdf=tmp_path / "c.pdf")
+    assert used == "pdf" and entries[0].doi == "10.1/p"

@@ -221,23 +221,26 @@ python -m research_news.journals --rerun --only AoS --issue v54-i1 \
 ### 抓取完整性检查 + 报缺
 
 期刊抓取偶尔会漏文章（Crossref 的 issue 列表按发表日排序 + `rows` 窗口截断，或个别文章
-缺 vol/issue 元数据没归进该期）。拿**权威目录**对一下就能查出来：
+缺 vol/issue 元数据没归进该期）。**权威目录脚本自己抓**，你只给期号就行：
 
 ```powershell
-# 用你下载的 content PDF 作权威目录，对比已发布的 AoS v54-i1 页，报缺
-python -m research_news.completeness --journal AoS --issue v54-i1 --toc-pdf contents.pdf
-
-# 或抓 Project Euclid 的 issue TOC 作权威目录（AoS/AoP/AoAS/EJS/Bernoulli/Stat Sci）
-python -m research_news.completeness --journal AoS --issue v54-i1 --euclid
+# 自动取权威目录（Euclid → OpenAlex），对比已发布的 AoS v54-i1 页，报缺
+python -m research_news.completeness --journal AoS --issue v54-i1
 
 # 查到缺失后：按 DOI 从 Crossref 单篇补抓，并重跑该期把补回来的文章一起重渲染
-python -m research_news.completeness --journal AoS --issue v54-i1 \
-    --toc-pdf contents.pdf --refetch --rerun
+python -m research_news.completeness --journal AoS --issue v54-i1 --refetch --rerun
+
+# 强制指定权威源（默认 auto），或离线用本地 content PDF 兜底
+python -m research_news.completeness --journal AoS --issue v54-i1 --euclid
+python -m research_news.completeness --journal AoS --issue v54-i1 --openalex
+python -m research_news.completeness --journal AoS --issue v54-i1 --toc-pdf contents.pdf
 ```
 
-- **权威集**（真相）：content PDF 的 Contents 页（`--toc-pdf`，pypdf 解析）或 Project
-  Euclid 的 issue TOC（`--euclid`）。**已抓集**（现状）：默认解析已发布的期刊页
-  （`--page` 指定，或 `--snapshot` 用 corpus）。
+- **权威集**（真相，自动获取）：① Project Euclid issue TOC（出版方权威，覆盖
+  AoS/AoP/AoAS/EJS/Bernoulli/Stat Sci）；② OpenAlex 按 ISSN+卷+期列全期文章（**通用**，
+  任何刊都行，且和 Crossref 是不同库——正好交叉验证当初漏抓的那次）。默认 `auto`
+  先 Euclid 后 OpenAlex；`--euclid`/`--openalex` 强制其一，`--toc-pdf` 离线兜底。
+- **已抓集**（现状）：默认解析已发布的期刊页（`--page` 指定，或 `--snapshot` 用 corpus）。
 - **diff** 先按 DOI、无 DOI 再按标准化标题（复用抓取器里的标题匹配）；discussion /
   comment / correction 类会**先从权威集滤掉**，不会误报成漏抓。
 - 输出「缺失文章」报告（标题 + DOI + 链接）。`--refetch` 按 DOI 单篇补抓
@@ -387,7 +390,8 @@ research_news/
     arxiv.py          # arxiv RSS + API
     jmlr.py           # JMLR 卷索引页
     crossref.py       # 通用 ISSN → 期刊（含 T1-T4 abstract backfill、按期/按 DOI 单抓）
-    euclid.py         # Project Euclid issue TOC（完整性检查的权威目录源之一）
+    euclid.py         # Project Euclid issue TOC（完整性检查权威源：出版方）
+    openalex.py       # OpenAlex 按期列文章（完整性检查权威源：通用、跨库交叉验证）
     authors.py        # Semantic Scholar by author
     conferences.py    # 会议 / seminar 页面（默认禁用）
   llm/

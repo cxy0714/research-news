@@ -7,11 +7,14 @@ window, or Crossref lacks its vol/issue metadata so it isn't bucketed into the
 issue. This tool catches those by comparing against an *authoritative* table of
 contents.
 
-Authoritative sources (choose one):
-  - ``--toc-pdf PATH``: a downloaded "Contents" / content PDF for the issue,
-    parsed for article titles (+ DOIs when the PDF carries them);
-  - ``--euclid``: the publisher's issue TOC page on Project Euclid (AoS, AoP,
-    AoAS, EJS, Bernoulli, Statistical Science).
+Authoritative sources are resolved automatically — you don't supply anything but
+the journal + issue. In order:
+  1. Project Euclid issue TOC (publisher-canonical) for the journals it hosts
+     (AoS, AoP, AoAS, EJS, Bernoulli, Statistical Science);
+  2. OpenAlex issue listing (universal — works for any journal by ISSN, and is an
+     independent database from the Crossref scrape that did the missing).
+Force one with ``--euclid`` / ``--openalex``, or override with a local content
+PDF via ``--toc-pdf PATH`` (offline fallback).
 
 The "scraped" side is the already-published journal page under
 ``docs/journals/`` (default) or a corpus snapshot (``--snapshot``). The diff is
@@ -28,9 +31,10 @@ deep-read and rendered in.
 
 Usage::
 
-    python -m research_news.completeness --journal AoS --issue v54-i1 --toc-pdf contents.pdf
+    python -m research_news.completeness --journal AoS --issue v54-i1
     python -m research_news.completeness --journal AoS --issue v54-i1 --euclid
-    python -m research_news.completeness --journal AoS --issue v54-i1 --toc-pdf c.pdf --refetch --rerun
+    python -m research_news.completeness --journal AoS --issue v54-i1 --refetch --rerun
+    python -m research_news.completeness --journal AoS --issue v54-i1 --toc-pdf contents.pdf
 """
 from __future__ import annotations
 
@@ -246,6 +250,36 @@ def format_report(missing: list[TocEntry], *, journal: str, vol: int,
 
 # ── refetch ─────────────────────────────────────────────────────────────────────
 
+def resolve_authoritative(issn: str, full_venue: str, vol: int, iss: int | None,
+                          *, source: str = "auto",
+                          toc_pdf: Path | None = None) -> tuple[list[TocEntry], str]:
+    """Obtain the issue's authoritative article list automatically.
+
+    ``source``: 'auto' (Euclid → OpenAlex), 'euclid', 'openalex', or 'pdf'.
+    Returns (entries, source_used). A local ``toc_pdf`` always wins when given.
+    """
+    if toc_pdf or source == "pdf":
+        if not toc_pdf:
+            log.error("source 'pdf' needs --toc-pdf PATH")
+            return [], "pdf"
+        return extract_toc_from_pdf(toc_pdf), "pdf"
+
+    if source in ("auto", "euclid"):
+        from .scrapers.euclid import fetch_issue_toc as euclid_toc
+        entries = euclid_toc(issn, full_venue, vol, iss)
+        if entries:
+            return entries, "euclid"
+        if source == "euclid":
+            return [], "euclid"
+        log.info("Euclid empty/unavailable — falling back to OpenAlex")
+
+    if source in ("auto", "openalex"):
+        from .scrapers.openalex import fetch_issue_toc as openalex_toc
+        return openalex_toc(issn, full_venue, vol, iss), "openalex"
+
+    return [], source
+
+
 def refetch_missing(missing: list[TocEntry], full_venue: str) -> list[Paper]:
     """Pull each missing article from Crossref by DOI. No-DOI entries can't be
     auto-refetched (reported only)."""
@@ -267,9 +301,10 @@ def refetch_missing(missing: list[TocEntry], full_venue: str) -> list[Paper]:
 
 # ── driver ──────────────────────────────────────────────────────────────────────
 
-def run(*, journal: str, issue: str, toc_pdf: Path | None = None,
-        euclid: bool = False, page: Path | None = None, snapshot: Path | None = None,
-        refetch: bool = False, rerun: bool = False, dry_run: bool = False) -> list[TocEntry]:
+def run(*, journal: str, issue: str, source: str = "auto",
+        toc_pdf: Path | None = None, page: Path | None = None,
+        snapshot: Path | None = None, refetch: bool = False,
+        rerun: bool = False, dry_run: bool = False) -> list[TocEntry]:
     """Returns the list of missing entries."""
     from .journals import (_journal_catalog, _parse_issue_arg,
                            _resolve_rerun_targets)
@@ -283,18 +318,15 @@ def run(*, journal: str, issue: str, toc_pdf: Path | None = None,
     vol, iss = _parse_issue_arg(issue)
     full, issn = meta["full"], meta["issn"]
 
-    # ── authoritative set ───────────────────────────────────────────────────
-    if toc_pdf:
-        authoritative = extract_toc_from_pdf(toc_pdf)
-    elif euclid:
-        from .scrapers.euclid import fetch_issue_toc
-        authoritative = fetch_issue_toc(issn, full, vol, iss)
-    else:
-        log.error("provide an authoritative source: --toc-pdf PATH or --euclid")
-        return []
+    # ── authoritative set (resolved automatically) ──────────────────────────
+    authoritative, used = resolve_authoritative(
+        issn, full, vol, iss, source=source, toc_pdf=toc_pdf)
     if not authoritative:
-        log.error("authoritative TOC is empty — nothing to diff against")
+        log.error("authoritative TOC is empty (source=%s) — nothing to diff "
+                  "against. Try --euclid / --openalex / --toc-pdf, or check "
+                  "network access.", used)
         return []
+    log.info("authoritative TOC: %d article(s) via %s", len(authoritative), used)
 
     # ── scraped set ─────────────────────────────────────────────────────────
     if snapshot:
@@ -360,10 +392,13 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--issue", required=True, metavar="vNN-iMM",
                     help="issue spec, e.g. v54-i1 (or v54 for a whole volume)")
     src = ap.add_mutually_exclusive_group()
-    src.add_argument("--toc-pdf", type=Path, metavar="PATH",
-                     help="authoritative source: a downloaded content/Contents PDF")
     src.add_argument("--euclid", action="store_true",
-                     help="authoritative source: the Project Euclid issue TOC page")
+                     help="force authoritative source: Project Euclid issue TOC")
+    src.add_argument("--openalex", action="store_true",
+                     help="force authoritative source: OpenAlex issue listing")
+    src.add_argument("--toc-pdf", type=Path, metavar="PATH",
+                     help="authoritative source: a local content/Contents PDF "
+                          "(offline fallback; default is to fetch automatically)")
     scr = ap.add_mutually_exclusive_group()
     scr.add_argument("--page", type=Path, metavar="PATH",
                      help="scraped side: a specific docs/journals/*.md page "
@@ -381,8 +416,10 @@ def main(argv: list[str] | None = None) -> int:
     if args.rerun and not args.refetch:
         ap.error("--rerun requires --refetch")
 
-    run(journal=args.journal, issue=args.issue, toc_pdf=args.toc_pdf,
-        euclid=args.euclid, page=args.page, snapshot=args.snapshot,
+    source = ("pdf" if args.toc_pdf else "euclid" if args.euclid
+              else "openalex" if args.openalex else "auto")
+    run(journal=args.journal, issue=args.issue, source=source, toc_pdf=args.toc_pdf,
+        page=args.page, snapshot=args.snapshot,
         refetch=args.refetch, rerun=args.rerun, dry_run=args.dry_run)
     return 0
 
