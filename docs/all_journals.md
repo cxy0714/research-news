@@ -31,6 +31,35 @@
 - [Vol 87 Issue 5 · 2026-05-26](journals/2026-05-26-jrssb-v87-i5.md)
 - [Vol 87 Issue 4 · 2026-05-26](journals/2026-05-26-jrssb-v87-i4.md)
 
+## 经济学 / 计量 (Econ)
+
+### Econometrica
+
+- [Vol 94 Issue 3 · 2026-06-07](journals/2026-06-07-econometrica-v94-i3.md)
+- [Vol 94 Issue 2 · 2026-06-07](journals/2026-06-07-econometrica-v94-i2.md)
+- [Vol 94 Issue 1 · 2026-06-07](journals/2026-06-07-econometrica-v94-i1.md)
+- [Vol 93 Issue 6 · 2026-06-07](journals/2026-06-07-econometrica-v93-i6.md)
+
+### J. Econometrics
+
+- [Vol 256 · 2026-06-07](journals/2026-06-07-j-econometrics-v256.md)
+- [Vol 255 · 2026-06-07](journals/2026-06-07-j-econometrics-v255.md)
+- [Vol 254 · 2026-06-07](journals/2026-06-07-j-econometrics-v254.md)
+- [2026-06-07](journals/2026-06-07-j-econometrics.md)
+
+### JBES
+
+- [Vol 44 Issue 2 · 2026-06-07](journals/2026-06-07-jbes-v44-i2.md)
+- [Vol 44 Issue 1 · 2026-06-07](journals/2026-06-07-jbes-v44-i1.md)
+- [Vol 43 Issue 4 · 2026-06-07](journals/2026-06-07-jbes-v43-i4.md)
+
+### Quant. Econ.
+
+- [Vol 17 Issue 2 · 2026-06-07](journals/2026-06-07-quant-econ-v17-i2.md)
+- [Vol 17 Issue 1 · 2026-06-07](journals/2026-06-07-quant-econ-v17-i1.md)
+- [Vol 16 Issue 4 · 2026-06-07](journals/2026-06-07-quant-econ-v16-i4.md)
+- [Vol 16 Issue 3 · 2026-06-07](journals/2026-06-07-quant-econ-v16-i3.md)
+
 ## IEEE 系列 (IEEE)
 
 ### JSAIT

@@ -97,6 +97,81 @@
 
 ### 期刊
 
+#### Quantitative Economics Vol 17 Issue 1
+
+- [The local approach to causal inference under network interference](deep_reads/2026-06-07-10.3982_qe2484.md)  
+  9/10 [journals]
+
+#### Quantitative Economics Vol 16 Issue 4
+
+- [Policy learning with new treatments](deep_reads/2026-06-07-10.3982_qe2477.md)  
+  9/10 [journals]
+
+#### Quantitative Economics Vol 16 Issue 3
+
+- [Estimation of optimal dynamic treatment assignment rules under policy constraints](deep_reads/2026-06-07-10.3982_qe2288.md)  
+  8/10 [journals]
+
+#### Journal of Econometrics Vol 256
+
+- [Treatment effects with targeting instruments](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106253.md)  
+  9/10 [journals]
+- [Estimation and inference in boundary discontinuity designs: Distance-based methods](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106266.md)  
+  8/10 [journals]
+- [Bounding treatment effects by pooling limited information across observations](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106254.md)  
+  8/10 [journals]
+
+#### Journal of Econometrics Vol 255
+
+- [Transfer estimates for causal effects across heterogeneous sites](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106250.md)  
+  9/10 [journals]
+- [Using spatial modeling to address covariate measurement error](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106241.md)  
+  6/10 [journals]
+
+#### Journal of Econometrics Vol 254
+
+- [The informativeness of combined experimental and observational data under dynamic selection](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106219.md)  
+  9/10 [journals]
+- [Regularizing fairness in optimal policy learning with distributional targets](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106186.md)  
+  7/10 [journals]
+
+#### Journal of Econometrics
+
+- [Weak-instrument-robust subvector inference in instrumental variables regression: A subvector Lagrange multiplier test and properties of subvector Anderson-Rubin confidence sets](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106239.md)  
+  8/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 44 Issue 2
+
+- [Doubly Robust Uniform Confidence Bands for Group-Time Conditional Average Treatment Effects in Difference-in-Differences](deep_reads/2026-06-07-10.1080_07350015.2025.2541719.md)  
+  9/10 [journals]
+- [Extreme Quantile Treatment Effects under Endogeneity](deep_reads/2026-06-07-10.1080_07350015.2025.2541723.md)  
+  8/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 44 Issue 1
+
+- [Double Debiased Machine Learning Nonparametric Inference with Continuous Treatments](deep_reads/2026-06-07-10.1080_07350015.2025.2505487.md)  
+  9/10 [journals]
+- [Nonparametric Causal Inference with Functional Covariates](deep_reads/2026-06-07-10.1080_07350015.2025.2501563.md)  
+  9/10 [journals]
+- [Social Interactions with Endogeneity](deep_reads/2026-06-07-10.1080_07350015.2025.2526432.md)  
+  8/10 [journals]
+- [Selection Bias Adjustment by Functional Transfer Learning via Reproducing Kernel Hilbert Space](deep_reads/2026-06-07-10.1080_07350015.2025.2515911.md)  
+  7/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 43 Issue 4
+
+- [Dynamic Causal Effects in a Nonlinear World: the Good, the Bad, and the Ugly](deep_reads/2026-06-07-10.1080_07350015.2025.2539478.md)  
+  9/10 [journals]
+- [Causal Machine Learning for Moderation Effects](deep_reads/2026-06-07-10.1080_07350015.2025.2479646.md)  
+  8/10 [journals]
+- [Nonlinearity in Dynamic Causal Effects: Making the Bad into the Good, and the Good into the Great?](deep_reads/2026-06-07-10.1080_07350015.2025.2529327.md)  
+  7/10 [journals]
+
+#### Econometrica Vol 94 Issue 2
+
+- [Optimally‐Transported Generalized Method of Moments](deep_reads/2026-06-07-10.3982_ecta22486.md)  
+  7/10 [journals]
+
 #### IEEE Transactions on Pattern Analysis and Machine Intelligence Vol 48 Issue 6
 
 - [Dynamical Causality Under Latent Confounders for Biological Network Reconstruction](deep_reads/2026-06-05-10.1109_tpami.2026.3658839.md)  
@@ -236,6 +311,31 @@
 
 ### 期刊
 
+#### Journal of Econometrics Vol 255
+
+- [Nuclear norm regularized estimation of panel regression models](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106246.md)  
+  6/10 [journals]
+
+#### Journal of Econometrics Vol 254
+
+- [High-dimensional conditional factor model](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106203.md)  
+  6/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 44 Issue 2
+
+- [Network-Assisted High-Dimensional Factor Model Estimation](deep_reads/2026-06-07-10.1080_07350015.2025.2548851.md)  
+  6/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 44 Issue 1
+
+- [Factor Modeling for High-Dimensional Functional Time Series](deep_reads/2026-06-07-10.1080_07350015.2025.2505493.md)  
+  4/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 43 Issue 4
+
+- [Matrix-Factor-Augmented Regression](deep_reads/2026-06-07-10.1080_07350015.2025.2478986.md)  
+  7/10 [journals]
+
 #### IEEE Transactions on Signal Processing Vol 74
 
 - [On Stochastic Beamforming for Ergodic Sum-Rate Maximization in Cooperative Transmission Systems](deep_reads/2026-06-05-10.1109_tsp.2025.3648327.md)  
@@ -342,6 +442,48 @@
 
 ### 期刊
 
+#### Quantitative Economics Vol 16 Issue 3
+
+- [Inference in a stationary/nonstationary autoregressive time‐varying‐parameter model](deep_reads/2026-06-07-10.3982_qe2465.md)  
+  6/10 [journals]
+
+#### Journal of Econometrics Vol 256
+
+- [A kernelization-based approach to nonparametric binary choice models](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106264.md)  
+  7/10 [journals]
+- [Semi-nonparametric models of multidimensional matching: An optimal transport approach](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106242.md)  
+  6/10 [journals]
+
+#### Journal of Econometrics Vol 254
+
+- [Minimax rates of convergence for nonparametric location-Scale models](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106187.md)  
+  9/10 [journals]
+- [Intraday volatility patterns from short-dated options](deep_reads/2026-06-07-10.1016_j.jeconom.2024.105732.md)  
+  3/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 44 Issue 2
+
+- [Quasi-Score Matching Estimation for Spatial Autoregressive Model with Random Weights Matrix and Regressors](deep_reads/2026-06-07-10.1080_07350015.2025.2538768.md)  
+  3/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 44 Issue 1
+
+- [Nonparametric Quantile Regression and Uniform Inference with Unknown Error Distribution](deep_reads/2026-06-07-10.1080_07350015.2025.2486009.md)  
+  9/10 [journals]
+- [Change-Point Detection for Object-Valued Time Series](deep_reads/2026-06-07-10.1080_07350015.2025.2520862.md)  
+  7/10 [journals]
+- [Inference in Semiparametric Formation Models for Directed Networks](deep_reads/2026-06-07-10.1080_07350015.2025.2515915.md)  
+  7/10 [journals]
+- [A Functional-Coefficient VAR Model for Dynamic Quantiles and Its Application to Constructing Nonparametric Financial Network](deep_reads/2026-06-07-10.1080_07350015.2025.2511960.md)  
+  5/10 [journals]
+- [Neural Tangent Kernel in Implied Volatility Forecasting: A Nonlinear Functional Autoregression Approach](deep_reads/2026-06-07-10.1080_07350015.2025.2489087.md)  
+  3/10 [journals]
+
+#### Econometrica Vol 94 Issue 3
+
+- [Continuity of the Distribution Function of the argmax of a Gaussian Process](deep_reads/2026-06-07-10.3982_ecta23862.md)  
+  9/10 [journals]
+
 #### IEEE Transactions on Signal Processing Vol 74
 
 - [Einstein From Noise: Statistical Analysis](deep_reads/2026-06-05-10.1109_tsp.2026.3685712.md)  
@@ -409,6 +551,41 @@
   9/10 [daily]
 
 ### 期刊
+
+#### Quantitative Economics Vol 16 Issue 4
+
+- [Estimation and inference in high‐dimensional panel data models with interactive fixed effects](deep_reads/2026-06-07-10.3982_qe2308.md)  
+  7/10 [journals]
+
+#### Journal of Econometrics Vol 255
+
+- [LASSO inference for high dimensional predictive regressions](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106240.md)  
+  8/10 [journals]
+
+#### Journal of Econometrics Vol 254
+
+- [Statistical inference of optimal allocations I: Regularities and their implications](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106217.md)  
+  8/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 44 Issue 1
+
+- [Uniform Inference on High-Dimensional Spatial Panel Networks](deep_reads/2026-06-07-10.1080_07350015.2025.2530122.md)  
+  8/10 [journals]
+
+#### Econometrica Vol 94 Issue 3
+
+- [Communicating Scientific Uncertainty via Approximate Posteriors](deep_reads/2026-06-07-10.3982_ecta22613.md)  
+  6/10 [journals]
+
+#### Econometrica Vol 94 Issue 2
+
+- [Empirical Bayes When Estimation Precision Predicts Parameters](deep_reads/2026-06-07-10.3982_ecta22935.md)  
+  7/10 [journals]
+
+#### Econometrica Vol 93 Issue 6
+
+- [Adapting to Misspecification](deep_reads/2026-06-07-10.3982_ecta21991.md)  
+  9/10 [journals]
 
 #### Journal of the American Statistical Association
 
@@ -480,6 +657,36 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Quantitative Economics Vol 16 Issue 4
+
+- [Testing homogeneity in dynamic discrete games in finite samples](deep_reads/2026-06-07-10.3982_qe2059.md)  
+  6/10 [journals]
+
+#### Quantitative Economics Vol 16 Issue 3
+
+- [Testing mean stationarity of intraday volatility curves](deep_reads/2026-06-07-10.3982_qe2644.md)  
+  6/10 [journals]
+
+#### Journal of Econometrics Vol 255
+
+- [The information matrix test for Gaussian mixtures](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106234.md)  
+  6/10 [journals]
+
+#### Journal of Econometrics Vol 254
+
+- [Testing for jumps in a discretely observed price process with endogenous sampling times](deep_reads/2026-06-07-10.1016_j.jeconom.2025.106132.md)  
+  6/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 44 Issue 2
+
+- [An Adaptive Residual-Based Test for Factor Structure](deep_reads/2026-06-07-10.1080_07350015.2025.2548893.md)  
+  7/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 44 Issue 1
+
+- [GLHT for High-Dimensional Covariance Matrices: A Normal-Reference Approach](deep_reads/2026-06-07-10.1080_07350015.2025.2505490.md)  
+  8/10 [journals]
 
 #### IEEE Transactions on Information Theory Vol 72 Issue 6
 
@@ -559,6 +766,11 @@
   6/10 [daily]
 
 ### 期刊
+
+#### Journal of Business & Economic Statistics Vol 44 Issue 2
+
+- [Seasonal Adjustment of Time Series Observed at Mixed Frequencies Using Singular Value Decomposition with Wavelet Thresholding](deep_reads/2026-06-07-10.1080_07350015.2025.2540064.md)  
+  4/10 [journals]
 
 #### IEEE Transactions on Signal Processing Vol 74
 
@@ -711,6 +923,180 @@
   7/10 [daily]
 - [Tweedie's Formula, Variance Functions, and Score-Driven Updating](deep_reads/2026-05-18-2605.15902.md)  
   6/10 [daily]
+
+### 期刊
+
+#### Quantitative Economics Vol 17 Issue 2
+
+- [Identification through sparsity in factor models: The <i>ℓ</i> <sub>1</sub> ‐rotation criterion](deep_reads/2026-06-07-10.3982_qe2369.md)  
+  7/10 [journals]
+- [Conditional choice probability estimation with an imperfectly measured latent state](deep_reads/2026-06-07-10.3982_qe1894.md)  
+  5/10 [journals]
+- [Forecasting with panel data: Estimation uncertainty versus parameter heterogeneity](deep_reads/2026-06-07-10.3982_qe2589.md)  
+  5/10 [journals]
+- [Satisficing, aggregation, and quasilinear utility](deep_reads/2026-06-07-10.3982_qe2025.md)  
+  4/10 [journals]
+- [DeepHAM: A global solution method for heterogeneous agent models with aggregate shocks](deep_reads/2026-06-07-10.3982_qe2190.md)  
+  3/10 [journals]
+- [An empirical framework for many‐to‐one matching markets](deep_reads/2026-06-07-10.3982_qe2180.md)  
+  3/10 [journals]
+- [Oil and the stock market revisited: A mixed functional VAR approach](deep_reads/2026-06-07-10.3982_qe2358.md)  
+  2/10 [journals]
+
+#### Quantitative Economics Vol 17 Issue 1
+
+- [Identification and estimation of continuous‐time dynamic discrete choice games](deep_reads/2026-06-07-10.3982_qe2281.md)  
+  7/10 [journals]
+- [Effects of disruptive peers in endogenous social networks](deep_reads/2026-06-07-10.3982_qe2266.md)  
+  6/10 [journals]
+- [Skill formation and the trouble with child noncognitive skill measures](deep_reads/2026-06-07-10.3982_qe2297.md)  
+  5/10 [journals]
+- [Durables and lemons: Private information and the market for cars](deep_reads/2026-06-07-10.3982_qe1822.md)  
+  5/10 [journals]
+- [Dynamic programming in economics on a quantum annealer](deep_reads/2026-06-07-10.3982_qe2555.md)  
+  2/10 [journals]
+
+#### Quantitative Economics Vol 16 Issue 4
+
+- [Identification of random coefficient latent utility models](deep_reads/2026-06-07-10.3982_qe1809.md)  
+  8/10 [journals]
+- [Aggregate and distributional impacts of LTV policy in China](deep_reads/2026-06-07-10.3982_qe2456.md)  
+  6/10 [journals]
+- [Learning with rare disasters](deep_reads/2026-06-07-10.3982_qe1716.md)  
+  3/10 [journals]
+
+#### Quantitative Economics Vol 16 Issue 3
+
+- [A unified empirical framework to study neighborhood segregation](deep_reads/2026-06-07-10.3982_qe2625.md)  
+  7/10 [journals]
+- [Asymmetric transmission of oil supply news](deep_reads/2026-06-07-10.3982_qe2548.md)  
+  5/10 [journals]
+- [Dynamic ordered panel logit models](deep_reads/2026-06-07-10.3982_qe2052.md)  
+  5/10 [journals]
+- [Forecasting with shadow rate VARs](deep_reads/2026-06-07-10.3982_qe2547.md)  
+  4/10 [journals]
+
+#### Journal of Econometrics Vol 256
+
+- [Estimation of characteristics-based quantile factor models](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106267.md)  
+  4/10 [journals]
+
+#### Journal of Econometrics Vol 255
+
+- [Robust econometrics for growth-at-risk](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106235.md)  
+  2/10 [journals]
+
+#### Journal of Econometrics Vol 254
+
+- [Efficient sampling for realized variance estimation in time-changed diffusion models](deep_reads/2026-06-07-10.1016_j.jeconom.2025.106150.md)  
+  3/10 [journals]
+
+#### Journal of Econometrics
+
+- [Clustered network connectedness: A new measurement framework with application to global equity markets](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106243.md)  
+  2/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 44 Issue 2
+
+- [Determination of the Effective Cointegration Rank in High-Dimensional Time-Series Predictive Regressions](deep_reads/2026-06-07-10.1080_07350015.2025.2550473.md)  
+  5/10 [journals]
+- [Theory Coherent Shrinkage of Time-Varying Parameters in VARs](deep_reads/2026-06-07-10.1080_07350015.2025.2542475.md)  
+  4/10 [journals]
+- [Forecast Selection in Unstable Environments](deep_reads/2026-06-07-10.1080_07350015.2025.2546444.md)  
+  3/10 [journals]
+- [High Frequency ANOVA that is Robust to Jumps, Microstructure Noise and Asynchronous Observation Times](deep_reads/2026-06-07-10.1080_07350015.2025.2547945.md)  
+  2/10 [journals]
+- [The Efficient Tail Hypothesis: An Extreme Value Perspective on Market Efficiency](deep_reads/2026-06-07-10.1080_07350015.2025.2540080.md)  
+  1/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 44 Issue 1
+
+- [Identification of Dynamic Discrete Choice Models with Hyperbolic Discounting Using a Terminating Action](deep_reads/2026-06-07-10.1080_07350015.2025.2519300.md)  
+  7/10 [journals]
+- [Least Squares Estimation in Nonstationary Nonlinear Cohort Panels with Learning from Experience](deep_reads/2026-06-07-10.1080_07350015.2025.2529325.md)  
+  6/10 [journals]
+- [How Important Is Selection into Full-Time and Part-Time Employment? A New Panel Data Sample Selection Model for Estimating Wage Profiles](deep_reads/2026-06-07-10.1080_07350015.2025.2520851.md)  
+  6/10 [journals]
+- [Unified Inference for Panel Autoregressive Models With Unobserved Grouped Heterogeneity](deep_reads/2026-06-07-10.1080_07350015.2025.2507375.md)  
+  4/10 [journals]
+- [Inflation Measurement with High-Frequency Data](deep_reads/2026-06-07-10.1080_07350015.2025.2537392.md)  
+  3/10 [journals]
+- [Panel Quantile GARCH Models under Homogeneity](deep_reads/2026-06-07-10.1080_07350015.2025.2526418.md)  
+  3/10 [journals]
+- [Common Components Structural VARs](deep_reads/2026-06-07-10.1080_07350015.2025.2495030.md)  
+  3/10 [journals]
+- [Cluster GARCH](deep_reads/2026-06-07-10.1080_07350015.2025.2510325.md)  
+  2/10 [journals]
+- [Estimating State Price Densities Implied by American Options](deep_reads/2026-06-07-10.1080_07350015.2025.2505488.md)  
+  2/10 [journals]
+
+#### Econometrica Vol 94 Issue 3
+
+- [Training Specificity and Occupational Mobility: Evidence From German Apprenticeships](deep_reads/2026-06-07-10.3982_ecta21835.md)  
+  7/10 [journals]
+- [Rural Migrants and Urban Informality: Evidence From Brazil](deep_reads/2026-06-07-10.3982_ecta21854.md)  
+  6/10 [journals]
+- [Holding up Green Energy: Counterparty Risk in the Indian Solar Power Market](deep_reads/2026-06-07-10.3982_ecta21084.md)  
+  3/10 [journals]
+- [Fisher–Schultz Lecture: Contracting Over Pharmaceutical Formularies and Rebates](deep_reads/2026-06-07-10.3982_ecta22488.md)  
+  2/10 [journals]
+- [Assortative Matching on Income](deep_reads/2026-06-07-10.3982_ecta21097.md)  
+  2/10 [journals]
+- [Outside Options, Reputations, and the Partial Success of the Coase Conjecture](deep_reads/2026-06-07-10.3982_ecta22022.md)  
+  1/10 [journals]
+
+#### Econometrica Vol 94 Issue 2
+
+- [Optimal Shrinkage Estimation of Fixed Effects in Linear Panel Data Models](deep_reads/2026-06-07-10.3982_ecta22386.md)  
+  8/10 [journals]
+- [Firm Accommodation After Workplace Disability: Labor Market Impacts and Implications for Subsidy Design](deep_reads/2026-06-07-10.3982_ecta22565.md)  
+  5/10 [journals]
+- [Trade and Domestic Distortions: The Case of Informality](deep_reads/2026-06-07-10.3982_ecta19378.md)  
+  4/10 [journals]
+- [Food Policy in a Warming World](deep_reads/2026-06-07-10.3982_ecta23125.md)  
+  3/10 [journals]
+- [Monotonicity and Robust Implementation Under Forward‐Induction Reasoning](deep_reads/2026-06-07-10.3982_ecta23709.md)  
+  2/10 [journals]
+- [An Experimental Evaluation of Deferred Acceptance: Evidence From Over 100 Army Officer Labor Markets](deep_reads/2026-06-07-10.3982_ecta22160.md)  
+  2/10 [journals]
+- [Dynamic Incentives in Incompletely Specified Environments](deep_reads/2026-06-07-10.3982_ecta23373.md)  
+  1/10 [journals]
+
+#### Econometrica Vol 94 Issue 1
+
+- [Choosing Who Chooses: Selection‐Driven Targeting in Energy Rebate Programs](deep_reads/2026-06-07-10.3982_ecta21180.md)  
+  7/10 [journals]
+- [Coordination and Commitment in International Climate Action: Evidence From Palm Oil](deep_reads/2026-06-07-10.3982_ecta20608.md)  
+  4/10 [journals]
+- [The Hitchhiker's Guide to Markup Estimation: Assessing Estimates From Financial Data](deep_reads/2026-06-07-10.3982_ecta22733.md)  
+  3/10 [journals]
+- [Equilibrium Existence in First‐Price Auctions With Private Values](deep_reads/2026-06-07-10.3982_ecta22570.md)  
+  1/10 [journals]
+- [Multidimensional Screening With Precise Seller Information](deep_reads/2026-06-07-10.3982_ecta23622.md)  
+  1/10 [journals]
+- [The Economics of Partisan Gerrymandering](deep_reads/2026-06-07-10.3982_ecta23609.md)  
+  1/10 [journals]
+- [A Framework for Geoeconomics](deep_reads/2026-06-07-10.3982_ecta23206.md)  
+  0/10 [journals]
+
+#### Econometrica Vol 93 Issue 6
+
+- [Consumer Surplus From Suppliers: How Big Is It and Does It Matter for Growth?](deep_reads/2026-06-07-10.3982_ecta22672.md)  
+  7/10 [journals]
+- [Gangs, Labor Mobility, and Development](deep_reads/2026-06-07-10.3982_ecta21305.md)  
+  5/10 [journals]
+- [The Social Tax: Redistributive Pressure and Labor Supply](deep_reads/2026-06-07-10.3982_ecta21078.md)  
+  5/10 [journals]
+- [Search Frictions and Product Design in the Municipal Bond Market](deep_reads/2026-06-07-10.3982_ecta21277.md)  
+  4/10 [journals]
+- [Transparency and Percent Plans](deep_reads/2026-06-07-10.3982_ecta18385.md)  
+  4/10 [journals]
+- [Competing Platforms and Transport Equilibrium](deep_reads/2026-06-07-10.3982_ecta21773.md)  
+  2/10 [journals]
+- [Presidential Address: Identity Politics](deep_reads/2026-06-07-10.3982_ecta22269.md)  
+  2/10 [journals]
+- [Marginal Reputation](deep_reads/2026-06-07-10.3982_ecta23782.md)  
+  1/10 [journals]
 
 ## 其他
 
