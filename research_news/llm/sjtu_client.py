@@ -15,6 +15,18 @@ from tenacity import retry, stop_after_attempt, wait_exponential
 
 log = logging.getLogger(__name__)
 
+# Per-request timeout and retry budget for the LLM endpoint. The SJTU/GLM
+# endpoint occasionally hangs on long deep-read calls; a real call finishes in
+# ~2-3 min, so default to a 5-min timeout to abandon a stuck request fast
+# instead of waiting out the SDK's 10-min default. Retries are owned here
+# (tenacity), so the OpenAI SDK's own retry layer is disabled (max_retries=0) to
+# keep the attempt count predictable: worst case = MAX_ATTEMPTS × REQUEST_TIMEOUT
+# (≈15 min/paper) instead of the old tenacity×SDK explosion (≈90 min/paper).
+# Both are env-overridable — lower them to fail faster on flaky days, raise them
+# if legitimate long reads get cut off.
+REQUEST_TIMEOUT = float(os.environ.get("SJTU_TIMEOUT", "300"))
+MAX_ATTEMPTS = int(os.environ.get("SJTU_MAX_ATTEMPTS", "3"))
+
 
 class RateLimiter:
     def __init__(self, max_per_minute: int = 10):
@@ -43,7 +55,9 @@ class SJTUClient:
         key = os.environ.get("SJTU_API_KEY")
         if not key:
             raise RuntimeError("SJTU_API_KEY is not set (check your .env)")
-        self.client = OpenAI(base_url=base, api_key=key)
+        self.client = OpenAI(
+            base_url=base, api_key=key, timeout=REQUEST_TIMEOUT, max_retries=0
+        )
         self.model_fast = os.environ.get("SJTU_MODEL_FAST", "deepseek-chat")
         self.model_deep = os.environ.get("SJTU_MODEL_DEEP", "deepseek-reasoner")
         self.limiter = RateLimiter(max_per_minute=9)
@@ -62,7 +76,7 @@ class SJTUClient:
         slot["total_tokens"] += int(getattr(usage_obj, "total_tokens", 0) or 0)
         self.calls += 1
 
-    @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=2, min=2, max=20))
+    @retry(stop=stop_after_attempt(MAX_ATTEMPTS), wait=wait_exponential(multiplier=2, min=2, max=20))
     def chat(
         self,
         messages: list[dict],
