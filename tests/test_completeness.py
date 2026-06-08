@@ -197,3 +197,56 @@ def test_resolve_authoritative_pdf_override(monkeypatch, tmp_path):
     entries, used = cmp.resolve_authoritative(
         "0090-5364", "AoS", 54, 1, toc_pdf=tmp_path / "c.pdf")
     assert used == "pdf" and entries[0].doi == "10.1/p"
+
+
+# ── inline completeness badge ──────────────────────────────────────────────────
+
+def test_diff_excludes_paratext():
+    auth = [
+        TocEntry("Front Matter", "10.1214/25-aos0001"),
+        TocEntry("Editorial Board", None),
+        TocEntry("A real research article", "10.1214/25-aos0003"),
+    ]
+    missing = cmp.diff(auth, scraped=[])
+    assert [m.doi for m in missing] == ["10.1214/25-aos0003"]
+
+
+def test_paper_doi_and_entries():
+    from research_news.models import Paper
+    crossref = Paper(source="crossref", paper_id="10.1214/25-AOS2601", title="T1",
+                     authors=[], abstract="a", url="u")
+    jmlr = Paper(source="jmlr", paper_id="jmlr:v27/foo", title="T2",
+                 authors=[], abstract="a", url="u")
+    assert cmp._paper_doi(crossref) == "10.1214/25-aos2601"
+    assert cmp._paper_doi(jmlr) is None
+    entries = cmp.papers_to_entries([crossref, jmlr])
+    assert [e.doi for e in entries] == ["10.1214/25-aos2601", None]
+
+
+def test_check_issue_and_status_line(monkeypatch):
+    from research_news.models import Paper
+    papers = [
+        Paper(source="crossref", paper_id="10.1214/a", title="Alpha", authors=[],
+              abstract="x", url="u"),
+        Paper(source="crossref", paper_id="10.1214/b", title="Beta", authors=[],
+              abstract="x", url="u"),
+    ]
+    # Authoritative has a third article we didn't scrape.
+    monkeypatch.setattr(cmp, "resolve_authoritative", lambda *a, **k: (
+        [TocEntry("Alpha", "10.1214/a"), TocEntry("Beta", "10.1214/b"),
+         TocEntry("Gamma", "10.1214/c")], "openalex"))
+    res = cmp.check_issue("0090-5364", "AoS", 54, 2, cmp.papers_to_entries(papers))
+    assert res.n_authoritative == 3 and res.n_scraped == 2
+    assert [m.doi for m in res.missing] == ["10.1214/c"]
+    line = cmp.format_status_line(res)
+    assert "疑似漏 1 篇" in line and "10.1214/c" in line
+
+
+def test_status_line_all_present_and_unavailable():
+    ok = cmp.CompletenessResult(22, 22, [], "openalex")
+    assert "✅" in cmp.format_status_line(ok) and "22 篇全部抓到" in cmp.format_status_line(ok)
+    none = cmp.CompletenessResult(0, 22, [], "none")
+    assert "未核对" in cmp.format_status_line(none)
+    # OpenAlex lagging (fewer than scraped) but nothing missing → no false alarm.
+    lag = cmp.CompletenessResult(3, 22, [], "openalex")
+    assert "未见遗漏" in cmp.format_status_line(lag)
