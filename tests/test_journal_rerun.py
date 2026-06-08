@@ -173,3 +173,43 @@ def test_rerun_dry_run_writes_nothing(tmp_path, monkeypatch):
     out = j.rerun(only=["AoS"], issue="v54-i1", from_snapshot=snap, dry_run=True)
     assert out == []                                   # dry-run returns no paths
     assert page.read_text(encoding="utf-8") == before  # page untouched
+
+
+# ── completeness badge in the rendered header ───────────────────────────────────
+
+def test_completeness_note_skipped_when_not_applicable():
+    papers = [Paper(source="crossref", paper_id="10.1/a", title="T", authors=[],
+                    abstract="x", url="u")]
+    # disabled
+    assert j._completeness_note("AoS", "Annals of Statistics", "0090-5364", "54",
+                                "1", papers, enabled=False, source="openalex") is None
+    # JMLR (no real ISSN / no issues)
+    assert j._completeness_note("JMLR", "JMLR", "jmlr", None, None, papers,
+                                enabled=True, source="openalex") is None
+    # no volume
+    assert j._completeness_note("AoS", "Annals of Statistics", "0090-5364", None,
+                                None, papers, enabled=True, source="openalex") is None
+
+
+def test_completeness_note_emitted(monkeypatch):
+    from research_news import completeness as cmp
+    papers = [Paper(source="crossref", paper_id="10.1214/a", title="Alpha",
+                    authors=[], abstract="x", url="u")]
+    monkeypatch.setattr(cmp, "resolve_authoritative",
+                        lambda *a, **k: ([cmp.TocEntry("Alpha", "10.1214/a")], "openalex"))
+    note = j._completeness_note("AoS", "Annals of Statistics", "0090-5364", "54",
+                                "1", papers, enabled=True, source="openalex")
+    assert note is not None and "目录核对 ✅" in note
+
+
+def test_render_journal_page_includes_completeness_note(tmp_path):
+    from research_news.render.markdown import render_journal_page
+    papers = [Paper(source="crossref", paper_id="10.1214/a", title="Alpha",
+                    authors=[], abstract="x", url="u", topic="causal_inference",
+                    score=7.0)]
+    out = render_journal_page(papers, "AoS", "Annals of Statistics", vol="54",
+                              iss="1", output_dir=tmp_path,
+                              completeness_note="目录核对 ✅ 1 篇全部抓到（对照 OpenAlex 1 篇）")
+    text = out.read_text(encoding="utf-8")
+    assert "- 共 1 篇 · Annals of Statistics" in text
+    assert "- 目录核对 ✅ 1 篇全部抓到" in text

@@ -59,6 +59,9 @@ def fetch_issue_works(issn: str, vol: int, iss: int | None = None,
     filt = f"primary_location.source.issn:{issn},biblio.volume:{vol}"
     if iss is not None:
         filt += f",biblio.issue:{iss}"
+    # Drop front/back-matter & TOC entries at the source so they don't show up as
+    # "missing" articles (real content is article/review/letter/editorial/…).
+    filt += ",type:!paratext"
     out: list[tuple[str, str | None]] = []
     cursor = "*"
     for _ in range(max_pages):

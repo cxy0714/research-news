@@ -67,6 +67,19 @@ _NON_TITLE_RE = re.compile(
     re.I,
 )
 
+# Front/back-matter and other non-article paratext that authoritative listings
+# (esp. OpenAlex) sometimes include — never report these as "missing".
+_PARATEXT_RE = re.compile(
+    r"^\s*(front\s*matter|back\s*matter|table of contents|editorial board|"
+    r"issue information|author index|subject index|masthead|cover|title page|"
+    r"contents|index to volume|acknowledg)",
+    re.I,
+)
+
+
+def _is_paratext(title: str) -> bool:
+    return bool(_PARATEXT_RE.match(title or ""))
+
 
 class TocEntry(NamedTuple):
     title: str
@@ -215,13 +228,13 @@ def snapshot_entries(snapshot: Path, full_venue: str, vol: int, iss: int | None)
 
 def diff(authoritative: list[TocEntry], scraped: list[TocEntry]) -> list[TocEntry]:
     """Authoritative entries absent from the scraped set. Match by DOI first,
-    then normalized title; discussion/comment items are dropped from the
-    authoritative set so they're never reported as missing."""
+    then normalized title; discussion / comment / paratext items are dropped from
+    the authoritative set so they're never reported as missing."""
     scraped_dois = {e.doi for e in scraped if e.doi}
     scraped_titles = [e.title for e in scraped if e.title]
     missing: list[TocEntry] = []
     for a in authoritative:
-        if _is_discussion_content(a.title):
+        if _is_discussion_content(a.title) or _is_paratext(a.title):
             continue
         if a.doi and a.doi in scraped_dois:
             continue
@@ -246,6 +259,56 @@ def format_report(missing: list[TocEntry], *, journal: str, vol: int,
         link = e.url or (f"https://doi.org/{e.doi}" if e.doi else "—")
         lines.append(f"{i}. {e.title}\n   - DOI: `{doi}`\n   - link: {link}")
     return "\n".join(lines) + "\n"
+
+
+# ── inline check (for the journal-page completeness badge) ──────────────────────
+
+class CompletenessResult(NamedTuple):
+    n_authoritative: int
+    n_scraped: int
+    missing: list[TocEntry]
+    source: str          # 'openalex' | 'euclid' | 'pdf' | 'none'
+
+
+def _paper_doi(p) -> str | None:
+    pid = (p.paper_id or "").strip()
+    return _norm_doi(pid) if pid.lower().startswith("10.") else None
+
+
+def papers_to_entries(papers) -> list[TocEntry]:
+    """Paper objects → TocEntry, for diffing freshly-scored papers (not a page)."""
+    return [TocEntry(_clean(p.title), _paper_doi(p), p.url) for p in papers]
+
+
+def check_issue(issn: str, full_venue: str, vol: int, iss: int | None,
+                scraped: list[TocEntry], *, source: str = "openalex") -> CompletenessResult:
+    """Diff a freshly-scraped issue against its authoritative TOC. Defaults to the
+    OpenAlex source — fast, universal, no Cloudflare — for the inline render badge
+    (the standalone CLI defaults to 'auto' = Euclid → OpenAlex)."""
+    authoritative, used = resolve_authoritative(issn, full_venue, vol, iss, source=source)
+    if not authoritative:
+        return CompletenessResult(0, len(scraped), [], "none")
+    return CompletenessResult(len(authoritative), len(scraped),
+                              diff(authoritative, scraped), used)
+
+
+_SOURCE_LABEL = {"openalex": "OpenAlex", "euclid": "Project Euclid", "pdf": "content PDF"}
+
+
+def format_status_line(r: CompletenessResult) -> str:
+    """The one-line '目录核对' badge shown at the top of a journal issue page."""
+    if r.source == "none":
+        return "目录核对 ⏭️ 未核对（权威目录源暂不可达）"
+    label = _SOURCE_LABEL.get(r.source, r.source)
+    m = len(r.missing)
+    if m == 0:
+        if r.n_authoritative and r.n_authoritative < r.n_scraped:
+            return (f"目录核对 ✅ 未见遗漏（对照 {label} {r.n_authoritative} 篇，"
+                    f"权威目录可能尚未完全收录本期）")
+        return f"目录核对 ✅ {r.n_scraped} 篇全部抓到（对照 {label} {r.n_authoritative} 篇）"
+    dois = "、".join((e.doi or e.title[:24]) for e in r.missing[:5])
+    more = " 等" if m > 5 else ""
+    return f"目录核对 ⚠️ 疑似漏 {m} 篇（对照 {label} {r.n_authoritative} 篇）：{dois}{more}"
 
 
 # ── refetch ─────────────────────────────────────────────────────────────────────

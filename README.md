@@ -247,6 +247,20 @@ python -m research_news.completeness --journal AoS --issue v54-i1 --toc-pdf cont
   （`/works/{DOI}` 直查，即使 issue 列表漏了也能拿到）；再加 `--rerun` 就把补回来的文章
   喂给上面的整期重跑，重新打分 / 摘要 / 精读 / 渲染进去。`--dry-run` 只报会补哪些、不动。
 
+**页头「目录核对」徽标**：每期页头（`共 N 篇` 那行下面）会自动加一行核对状态——拿本期抓到的
+文章对照权威目录（默认 OpenAlex，快且通用），直接告诉你是否齐全：
+
+```text
+# AoS — Vol 54  Issue 2  ·  2026-05-26
+
+- 共 22 篇 · Annals of Statistics
+- 目录核对 ✅ 22 篇全部抓到（对照 OpenAlex 22 篇）
+```
+
+漏了就显示 `⚠️ 疑似漏 N 篇（…）：<DOI>…`，源暂时连不上显示 `⏭️ 未核对`，最新一期 OpenAlex
+还没完全收录时显示 `✅ 未见遗漏（…可能尚未完全收录）`（不误报）。正常跑和 `--rerun` 都默认开，
+`--no-completeness-check` 可关。想要出版方权威的详单仍用上面的 `completeness --euclid`。
+
 ### 输出
 
 - `docs/journals/<日期>-<期刊>.md` — 每个期刊独立一页（如 `2026-05-17-jmlr.md`、`2026-05-17-aos.md`），按主题分组
