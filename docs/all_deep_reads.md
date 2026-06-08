@@ -390,10 +390,18 @@
 
 - [Generalized linear spectral statistics of high-dimensional sample covariance matrices and its applications](deep_reads/2026-05-26-10.1214_25-aos2601.md)  
   10/10 [journals]
+- [Eigenvector overlaps in large sample covariance matrices and nonlinear shrinkage estimators](deep_reads/2026-05-26-10.1214_25-aos2593.md)  
+  9/10 [journals]
 - [Analysis of singular subspaces under random perturbations](deep_reads/2026-05-26-10.1214_25-aos2582.md)  
   9/10 [journals]
+- [Optimal eigenvalue shrinkage in the semicircle limit](deep_reads/2026-05-26-10.1214_25-aos2584.md)  
+  8/10 [journals]
 - [Reviving pseudo-inverses: Asymptotic properties of large dimensional Moore–Penrose and ridge-type inverses with applications](deep_reads/2026-05-26-10.1214_25-aos2602.md)  
   8/10 [journals]
+- [Precise asymptotics of bagging regularized M-estimators](deep_reads/2026-05-26-10.1214_25-aos2590.md)  
+  7/10 [journals]
+- [The distributionally robust prediction error of the LASSO and related estimators](deep_reads/2026-05-26-10.1214_25-aos2599.md)  
+  7/10 [journals]
 
 #### Annals of Statistics Vol 54 Issue 1
 
@@ -512,6 +520,10 @@
 
 - [Scalable inference for nonparametric stochastic approximation in reproducing kernel Hilbert spaces](deep_reads/2026-05-26-10.1214_25-aos2587.md)  
   8/10 [journals]
+- [Adaptive Bayesian regression on data with low intrinsic dimensionality](deep_reads/2026-05-26-10.1214_25-aos2605.md)  
+  7/10 [journals]
+- [PCA for point processes](deep_reads/2026-05-26-10.1214_25-aos2596.md)  
+  6/10 [journals]
 
 #### Annals of Statistics Vol 54 Issue 1
 
@@ -596,6 +608,8 @@
 
 - [Spectrum-aware debiasing: A modern inference framework with applications to principal components regression](deep_reads/2026-05-26-10.1214_25-aos2586.md)  
   8/10 [journals]
+- [Distributionally robust learning for multisource unsupervised domain adaptation](deep_reads/2026-05-26-10.1214_25-aos2578.md)  
+  3/10 [journals]
 
 #### Annals of Statistics Vol 54 Issue 1
 
@@ -743,6 +757,10 @@
 
 - [Large-scale multiple testing: Fundamental limits of false discovery rate control and compound oracle](deep_reads/2026-05-26-10.1214_25-aos2581.md)  
   9/10 [journals]
+- [Trace test for high-dimensional cointegration](deep_reads/2026-05-26-10.1214_25-aos2579.md)  
+  7/10 [journals]
+- [Rank tests for PCA under weak identifiability](deep_reads/2026-05-26-10.1214_25-aos2552.md)  
+  7/10 [journals]
 
 #### Annals of Statistics Vol 54 Issue 1
 
