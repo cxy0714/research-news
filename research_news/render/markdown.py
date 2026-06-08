@@ -208,8 +208,12 @@ def render_journal_page(
     iss: str | None = None,
     when: date | None = None,
     output_dir: Path = JOURNALS_DIR,
+    completeness_note: str | None = None,
 ) -> Path:
-    """Write one Markdown page for a single journal issue. Returns the path."""
+    """Write one Markdown page for a single journal issue. Returns the path.
+
+    ``completeness_note`` (optional): a one-line '目录核对' badge — whether the
+    issue's full TOC was scraped — rendered just under the article count."""
     when = when or date.today()
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -236,10 +240,10 @@ def render_journal_page(
         heading += f" — {issue_label}"
     heading += f"  ·  {when.isoformat()}\n"
 
-    lines: list[str] = [
-        heading,
-        f"- 共 {len(papers_sorted)} 篇 · {full}\n",
-    ]
+    lines: list[str] = [heading, f"- 共 {len(papers_sorted)} 篇 · {full}"]
+    if completeness_note:
+        lines.append(f"- {completeness_note}")
+    lines.append("")
     lines.extend(_render_topic_groups(papers_sorted, heading_prefix="##"))
     lines.append(_footer())
     out.write_text("\n".join(lines) + "\n", encoding="utf-8")

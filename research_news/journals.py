@@ -108,6 +108,27 @@ def _summary_is_broken(p: Paper) -> bool:
     return False
 
 
+def _completeness_note(short: str, venue: str, issn: str | None,
+                       vol: str | None, iss: str | None,
+                       issue_papers: list[Paper], *,
+                       enabled: bool, source: str) -> str | None:
+    """The '目录核对' badge for a journal page: diff the rendered papers against
+    the issue's authoritative TOC. Returns None (no line) when disabled or not
+    applicable (no real ISSN — e.g. JMLR — or no volume). Never raises."""
+    if not enabled or not issn or issn == "jmlr" or not vol:
+        return None
+    try:
+        from .completeness import check_issue, format_status_line, papers_to_entries
+        res = check_issue(issn, venue, int(vol), int(iss) if iss else None,
+                          papers_to_entries(issue_papers), source=source)
+        note = format_status_line(res)
+        log.info("[%s v%s i%s] %s", short, vol, iss, note)
+        return note
+    except Exception as e:  # noqa: BLE001 — a failed check must not block rendering
+        log.warning("completeness check failed for %s v%s i%s: %s", short, vol, iss, e)
+        return None
+
+
 def _process_issue(
     issue_papers: list[Paper],
     short: str,
@@ -123,6 +144,9 @@ def _process_issue(
     skip_pdf: bool = False,
     retry_broken: bool = False,
     is_loaded: bool = False,
+    issn: str | None = None,
+    check_completeness: bool = True,
+    completeness_source: str = "openalex",
 ) -> Path:
     """Score → summarize → render → deep-read one issue's papers, then return the
     rendered journal page path.
@@ -167,11 +191,16 @@ def _process_issue(
     append_score_log(issue_papers, run_date=when, model=model,
                      interests_text=interests_text)
 
+    # ── completeness badge (diff this issue against an authoritative TOC) ─────
+    note = _completeness_note(short, venue, issn, vol, iss, issue_papers,
+                              enabled=check_completeness, source=completeness_source)
+
     # ── institutions + render ───────────────────────────────────────────────
     log.info("[%s v%s i%s] looking up institutions for %d papers ...",
              short, vol, iss, len(issue_papers))
     affil.backfill_affiliations(issue_papers)
-    out = render_journal_page(issue_papers, short, venue, vol=vol, iss=iss, when=when)
+    out = render_journal_page(issue_papers, short, venue, vol=vol, iss=iss,
+                              when=when, completeness_note=note)
 
     # ── deep read (score >= th_deepread, plus institution green-lights) ──────
     deep_read_papers = select_deep_read_papers(
@@ -199,7 +228,8 @@ def run(only: list[str] | None = None, dry_run: bool = False,
         load_papers: Path | None = None,
         retry_broken: bool = False,
         only_group: list[str] | None = None,
-        dedup: bool = True) -> list[Path] | None:
+        dedup: bool = True,
+        check_completeness: bool = True) -> list[Path] | None:
     load_dotenv()
     interests_text = Path("config/interests.yaml").read_text(encoding="utf-8")
     groups = _load_groups()
@@ -283,11 +313,13 @@ def run(only: list[str] | None = None, dry_run: bool = False,
 
     today = date.today()
 
-    # Build full_name → short mapping from the groups config.
+    # Build full_name → (short, issn) mapping from the groups config.
     full_to_short: dict[str, str] = {}
+    full_to_issn: dict[str, str] = {}
     for gcfg in groups.values():
         for jcfg in gcfg["journals"]:
             full_to_short[jcfg["full"]] = jcfg["short"]
+            full_to_issn[jcfg["full"]] = jcfg["issn"]
 
     # Group papers by (venue, volume, issue) → process + render one page per issue.
     by_issue: dict[tuple, list[Paper]] = {}
@@ -303,6 +335,7 @@ def run(only: list[str] | None = None, dry_run: bool = False,
             client=client, interests_text=interests_text, model=JOURNALS_MODEL,
             th_deepread=th_deepread, skip_pdf=skip_pdf,
             retry_broken=retry_broken, is_loaded=bool(load_papers),
+            issn=full_to_issn.get(venue), check_completeness=check_completeness,
         )
         out_paths.append(out)
 
@@ -494,7 +527,8 @@ def rerun(*, only: list[str] | None = None, only_group: list[str] | None = None,
           from_snapshot: Path | None = None, backup: bool = True,
           dry_run: bool = False, skip_pdf: bool = False,
           model: str | None = None,
-          extra_papers: list[Paper] | None = None) -> list[Path]:
+          extra_papers: list[Paper] | None = None,
+          check_completeness: bool = True) -> list[Path]:
     """Re-generate published journal issue pages in place with current prompts.
 
     Overwrites each targeted ``docs/journals/<date>-<short>-vN-iM.md`` (and the
@@ -569,6 +603,7 @@ def rerun(*, only: list[str] | None = None, only_group: list[str] | None = None,
             str(t.iss) if t.iss is not None else None,
             when=t.when, client=client, interests_text=interests_text,
             model=model, th_deepread=th_deepread, skip_pdf=skip_pdf,
+            issn=t.issn, check_completeness=check_completeness,
         )
         if out.resolve() != t.path.resolve():
             log.warning("rerun: wrote %s but target was %s (slug mismatch?)",
@@ -654,6 +689,11 @@ def main(argv: list[str] | None = None) -> int:
                     help="Don't filter against data/seen_papers.json and don't "
                          "update it. Use this to re-render an issue you've "
                          "already published.")
+    ap.add_argument("--no-completeness-check", action="store_true",
+                    help="Skip the per-issue '目录核对' badge (which diffs the "
+                         "scraped articles against the issue's authoritative TOC "
+                         "via OpenAlex). On by default for both normal runs and "
+                         "--rerun.")
 
     # ── rerun mode: re-generate already-published issue pages in place ───────
     g = ap.add_argument_group(
@@ -694,7 +734,8 @@ def main(argv: list[str] | None = None) -> int:
         rerun(only=only, only_group=only_group, recent=args.rerun_recent,
               issue=args.issue, from_snapshot=args.from_snapshot,
               backup=not args.no_backup, dry_run=args.dry_run,
-              skip_pdf=args.skip_pdf)
+              skip_pdf=args.skip_pdf,
+              check_completeness=not args.no_completeness_check)
         return 0
 
     run(only=only, only_group=only_group,
@@ -703,7 +744,8 @@ def main(argv: list[str] | None = None) -> int:
         skip_pdf=args.skip_pdf,
         save_papers=args.save_papers, load_papers=args.load_papers,
         retry_broken=args.retry_broken,
-        dedup=not args.no_dedup)
+        dedup=not args.no_dedup,
+        check_completeness=not args.no_completeness_check)
     return 0
 
 
