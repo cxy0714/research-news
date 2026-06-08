@@ -4,6 +4,10 @@
 
 ### Daily
 
+- [One-step Outcome Imputation: An Alternative to Multiple Imputation](deep_reads/2026-06-08-2606.07174.md)  
+  8/10 [daily]
+- [Causal inference of Plackett-Burman designs in applications](deep_reads/2026-06-08-2606.06961.md)  
+  7/10 [daily]
 - [Leveraging External Controls for Treatment Switching in Randomized Controlled Trials: A Weighted Causal Inference Framework for Overall Survival](deep_reads/2026-06-05-2606.06441.md)  
   8/10 [daily]
 - [Weighting a Census as a Non-Probability Sample: A Doubly Robust Framework for Correcting Differential Undercoverage in Uruguay's 2023 Census](deep_reads/2026-06-05-2606.05666.md)  
@@ -417,6 +421,14 @@
 
 ### Daily
 
+- [A Temporal Spatial Minimax Rate for Smoothly-Varying Distributions in Wasserstein Space](deep_reads/2026-06-08-2606.07325.md)  
+  9/10 [daily]
+- [Smooth Hard-Thresholding for Singular Values with Stein's Unbiased Risk Estimate](deep_reads/2026-06-08-2606.06632.md)  
+  8/10 [daily]
+- [Dependence Measures via Adapted Optimal Transport: Stability and Rates of Convergence](deep_reads/2026-06-08-2606.07354.md)  
+  7/10 [daily]
+- [Non-asymptotic bounds for quasi-MLE, misspecified models, and dependence under group sequential sampling](deep_reads/2026-06-08-2606.07499.md)  
+  7/10 [daily]
 - [Estimation of the sub-Gaussian parameter](deep_reads/2026-06-05-2606.06384.md)  
   6/10 [daily]
 - [Minimax Private Estimation of Smooth Optimal-Transport Maps](deep_reads/2026-06-04-2606.04683.md)  
@@ -545,6 +557,8 @@
 
 ### Daily
 
+- [Ising Models on Inhomogeneous Random Graphs: Inference, Local Asymptotic Minimaxity, and Limit of Experiments](deep_reads/2026-06-08-2606.07065.md)  
+  8/10 [daily]
 - [Optimally taming biases in black-box models for efficient semiparametric estimation](deep_reads/2026-06-05-2606.06368.md)  
   10/10 [daily]
 - [On prediction-powered inference for quantile regression via convolution smoothing](deep_reads/2026-06-04-2606.04128.md)  
@@ -625,6 +639,12 @@
 
 ### Daily
 
+- [Sequential testing of conditionally constrained hypotheses](deep_reads/2026-06-08-2606.06769.md)  
+  8/10 [daily]
+- [Testing Equality of Conditional Distributions via Generative Models](deep_reads/2026-06-08-2606.06930.md)  
+  7/10 [daily]
+- [Covariance-Adaptive Residualization and Stagewise Calibration for Dependent Multiple Testing](deep_reads/2026-06-08-2606.07466.md)  
+  7/10 [daily]
 - [Two-Sample Hypothesis Testing for Subspace Equality in Network Data](deep_reads/2026-06-05-2606.06482.md)  
   7/10 [daily]
 - [Bentkus-type asymptotic e-values](deep_reads/2026-06-05-2606.06332.md)  
@@ -894,6 +914,8 @@
 
 ### Daily
 
+- [Where Not to Look: A Parametric Avoidance Model for SETI Target Selection](deep_reads/2026-06-08-2606.06692.md)  
+  7/10 [daily]
 - [Toward decision-aware AI for LSST-scale time-domain astronomy](deep_reads/2026-06-05-2606.05285.md)  
   8/10 [daily]
 - [Multifrequency Synthesis via CHIBI: Colorful Hierarchical Interferometric Bayesian Imaging](deep_reads/2026-06-04-2606.04094.md)  
@@ -927,6 +949,10 @@
 
 ### Daily
 
+- [CausalAlpha: A Real-Time Geopolitical Risk Index from OSINT Channels for Causal Discovery in Financial Markets](deep_reads/2026-06-08-2606.07049.md)  
+  7/10 [daily]
+- [Consistent estimation in logit models using historical choices as practical consideration set](deep_reads/2026-06-08-2606.06638.md)  
+  6/10 [daily]
 - [Econstellar: An Open-Source AI-Augmented Research Engine for Computational Financial Econometrics](deep_reads/2026-06-05-2606.05705.md)  
   7/10 [daily]
 - [Interdependent Hitting Times](deep_reads/2026-06-05-2606.06251.md)  
