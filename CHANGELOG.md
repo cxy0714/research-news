@@ -32,6 +32,14 @@
   / `ARXIV_FETCH_ATTEMPTS` 调。
 
 ### Added
+- **应用论文专属精读 prompt `DEEP_READ_APPLIED_SYSTEM`**：应用 / 实证论文（`novelty_flag
+  = application`）原先和理论论文共用 `DEEP_READ_SYSTEM`，重心压在证明路线与技术技巧上，
+  跟"看数据怎么用、模型怎么设、结论是什么"错位。新增一套专门精读 prompt，重心改为
+  **问题 → 数据 → 模型 → 结论**四节（数据节细到来源 / 格式 / 维度 / 可观测可用性 / 噪声 /
+  缺失 / 选择偏倚，模型节细到设定 / 假设来源 / 推断手段），有理论保证只一句话点到、不展开
+  证明；**领域脉络与文献综述仍保留为第一节（≥20%）**。`deep_read.py` 路由加一档：
+  `astrostats → ASTRO`、`application → APPLIED`、其余 → 通用 `DEEP_READ_SYSTEM`；daily 与
+  journals 共用同一入口，自动生效。
 - **补做历史精读 `backfill_deep_reads`**：精读门槛放宽到 6 后，过去的每日里有些当时没
   精读、但按现在标准够格的论文。`data/llm_scores.jsonl` 记了每篇打过分论文（含摘要），
   据此补做精读，无需重抓重打分：`--date` / `--since..--until` / `--threshold` / `--limit`
@@ -59,6 +67,14 @@
     / `--list-journals` / `--dry-run`。
 
 ### Changed
+- **应用论文打分改用 `applied_paper_rubric`、不再被武器库错配压分**：原先应用论文靠 SCORE
+  prompt 里一句"不要降分"的弱引导，还会被"核心机器不在武器库 → 不超过 7"的 tilt 压住。
+  新增 `config/interests.yaml` 的 `applied_paper_rubric` 一级字段：应用 / 实证论文按
+  **(a) 应用与数据是否交代清楚（来源 / 格式 / 规模 / 可观测可用 / 噪声缺失选择）、(b) 模型
+  与方法设定是否明确、(c) 结论是否具体且有 baseline / 稳健性支撑、(d) 是否落在 primary /
+  secondary 兴趣域**打分——命中多则 8-10、部分则 6-7，**不因"缺新定理"降分**；并在
+  `SCORE_SYSTEM` 把应用论文并入"arsenal 不计入打分"的豁免（与 gateway 主题并列）。这样
+  数据 / 模型 / 结论清楚的应用论文能稳过 ≥6 精读门槛，再走上面的应用精读 prompt。
 - **精读 prompt 调整章节顺序：最简例子提到综述之后**。把原第四节「最核心、最简单的例子 /
   数学问题」上移为**第二节**（紧接领域综述），并要求展开例子前**先把所有符号、模型、可观测
   数据交代清楚**；原「这篇论文做了什么」「开放问题」顺延为第三、四节。意图：读者先在最小内核

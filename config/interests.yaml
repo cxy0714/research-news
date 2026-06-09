@@ -113,9 +113,38 @@ technical_arsenal:
 # 1-3 = tangential
 # 0   = unrelated
 #
-# Note: "real-data application" papers (novelty_flag = application) should not
-# be auto-downgraded — they enter the deep-read list at score >= 7 because the
-# datasets and analytical pipelines are themselves valuable.
+# Note: "real-data application" papers (novelty_flag = application) are scored
+# by `applied_paper_rubric` below — NOT auto-downgraded for lacking new theory,
+# and NOT penalized for an arsenal mismatch. Score them >= 7 when problem + data
+# + model + conclusions are laid out clearly, so they clear the deep-read gate
+# (score_threshold_deepread). They then get a data/model/conclusion-focused
+# deep-read prompt (DEEP_READ_APPLIED_SYSTEM); a literature review that maps a
+# direction is valued on its own terms (how well it lays out the landscape).
+#
+# Rubric for applied / empirical papers (novelty_flag = application). These are
+# valued for the DATASET + ANALYSIS PIPELINE + CONCLUSIONS, not for theoretical
+# novelty. Score 8-10 if MOST hold, 6-7 if SOME, low if NONE — regardless of how
+# routine the method is:
+applied_paper_rubric: |
+  (a) APPLICATION & DATA laid out clearly — data source, format / structure,
+      scale (n, p, #timepoints / #clusters), what is actually OBSERVABLE and
+      USABLE (which variables, in what form) vs. what is only latent /
+      counterfactual, plus the sampling design, noise / measurement error,
+      missingness / censoring and selection effects; extra credit if the data
+      is public or otherwise reproducible.
+  (b) MODEL / METHOD setup explicit — the statistical model or analysis
+      pipeline, which assumptions come from the domain vs. from computational /
+      identification convenience, and the inference approach (OLS / GLM / IV /
+      DML / TMLE / semiparametric / Bayesian / GP / ML + ...).
+  (c) CONCLUSIONS concrete and well-supported — clear quantitative findings, a
+      comparison against a baseline, and some robustness / sensitivity / placebo
+      check; be wary of conclusions (especially causal ones) claimed wider than
+      the data actually supports.
+  (d) sits in a primary or secondary interest area (causal / high-dim / semipara
+      / econ / epi / astro), so the data + pipeline are transferable reading.
+  A clear, well-documented dataset + analysis is itself worth a deep read, so
+  such a paper should score >= 7. A direction-mapping literature review / survey
+  is judged on how well it lays out the landscape, not on novelty.
 score_threshold_show: 4   # papers below this are dropped from the daily report
 score_threshold_highlight: 8  # papers above this go to the "⭐ 高相关" section
 # Papers at or above this score enter deep-read, for ALL topics (scoring only

@@ -16,7 +16,12 @@ from pathlib import Path
 from pypdf import PdfReader
 
 from . import citations
-from .llm.prompts import DEEP_READ_ASTRO_SYSTEM, DEEP_READ_SYSTEM, TOPIC_LABELS_ZH
+from .llm.prompts import (
+    DEEP_READ_APPLIED_SYSTEM,
+    DEEP_READ_ASTRO_SYSTEM,
+    DEEP_READ_SYSTEM,
+    TOPIC_LABELS_ZH,
+)
 from .llm.sjtu_client import SJTUClient
 from .models import Paper
 from .scrapers import affiliations as affil
@@ -132,12 +137,19 @@ def deep_read_paper(
         + (f"{refs_block}\n" if refs_block else "")
         + f"## Full text\n{pdf_text}\n"
     )
-    # Astrostat papers need a different deep-read style: the researcher lacks
-    # astronomy background, so the notes must teach the physical concepts
-    # before getting into the methodology.
-    system_prompt = (
-        DEEP_READ_ASTRO_SYSTEM if paper.topic == "astrostats" else DEEP_READ_SYSTEM
-    )
+    # Pick the deep-read style that fits the paper:
+    #   - astrostats: the researcher lacks astronomy background, so the notes
+    #     must teach the physical concepts before the methodology;
+    #   - application papers (novelty_flag = application): center the notes on
+    #     problem + data + model + conclusions (and the direction's literature),
+    #     not on proof routes / technical tricks;
+    #   - everything else: the theory-oriented default.
+    if paper.topic == "astrostats":
+        system_prompt = DEEP_READ_ASTRO_SYSTEM
+    elif paper.novelty_flag == "application":
+        system_prompt = DEEP_READ_APPLIED_SYSTEM
+    else:
+        system_prompt = DEEP_READ_SYSTEM
     try:
         return client.chat(
             [
