@@ -10,40 +10,54 @@
 - **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-06-08
+## 今日 · 2026-06-09
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-06-08.md)
+[→ 查看完整报告](daily/2026-06-09.md)
 
-### 精读论文（13 篇）
+### 精读论文（20 篇）
 
-- [A Temporal Spatial Minimax Rate for Smoothly-Varying Distributions in Wasserstein Space](deep_reads/2026-06-08-2606.07325.md)  
-  `非参数 / 半参数` · 相关性 9/10
-- [One-step Outcome Imputation: An Alternative to Multiple Imputation](deep_reads/2026-06-08-2606.07174.md)  
-  `因果推断` · 相关性 8/10
-- [Smooth Hard-Thresholding for Singular Values with Stein's Unbiased Risk Estimate](deep_reads/2026-06-08-2606.06632.md)  
+- [The Asymptotic Distribution of Sample Canonical Directions in Gaussian Spiked High-dimensional CCA](deep_reads/2026-06-09-2606.09153.md)  
+  `高维统计 / 随机矩阵` · 相关性 9/10
+- [Inference on the TSLS Estimand with Weak Instruments and Treatment Effect Heterogeneity](deep_reads/2026-06-09-2606.07871.md)  
+  `因果推断` · 相关性 9/10
+- [Adaptive Estimation of Aggregated Values of Conditional Linear Programs](deep_reads/2026-06-09-2606.08359.md)  
+  `经济理论 / 应用` · 相关性 9/10
+- [Semiparametric Difference-in-Differences Estimation With Missing Not at Random Data: A Shadow Variable Approach](deep_reads/2026-06-09-2606.08474.md)  
+  `因果推断` · 相关性 9/10
+- [Sharp Bounds and Inference in Sample Selection Models with Treatment Endogeneity](deep_reads/2026-06-09-2606.09223.md)  
+  `因果推断` · 相关性 9/10
+- [Inference for High-Dimensional Sparse Spectral Precision Matrices](deep_reads/2026-06-09-2606.07986.md)  
+  `高维统计 / 随机矩阵` · 相关性 8/10
+- [Nonparametric undirected graphical model selection using diffusion models](deep_reads/2026-06-09-2606.08468.md)  
   `非参数 / 半参数` · 相关性 8/10
-- [Sequential testing of conditionally constrained hypotheses](deep_reads/2026-06-08-2606.06769.md)  
+- [A Practical Framework for Sensitivity Analysis in Externally Controlled Trials: An Illustration with a Bayesian Hybrid Evidence Synthesis Case Study](deep_reads/2026-06-09-2606.08642.md)  
+  `因果推断` · 相关性 8/10
+- [Data augmented bootstrap: Unifying confidence interval construction by approximate invariance](deep_reads/2026-06-09-2606.09049.md)  
   `数理统计 / 假设检验` · 相关性 8/10
-- [Ising Models on Inhomogeneous Random Graphs: Inference, Local Asymptotic Minimaxity, and Limit of Experiments](deep_reads/2026-06-08-2606.07065.md)  
+- [Tests for Independence of High-Dimensional Nonstationary Time Series](deep_reads/2026-06-09-2606.08498.md)  
+  `数理统计 / 假设检验` · 相关性 8/10
+- [Statistical Optimality of Prediction-Powered Inference](deep_reads/2026-06-09-2606.08730.md)  
   `效率理论 / Debiased ML` · 相关性 8/10
-- [Testing Equality of Conditional Distributions via Generative Models](deep_reads/2026-06-08-2606.06930.md)  
+- [Constraint residuals, graph posteriors, and determinant-corrected full-space targets in Bayesian inverse problems](deep_reads/2026-06-09-2606.09594.md)  
+  `非参数 / 半参数` · 相关性 8/10
+- [A Synthetic Control Approach to Conditional Distributional Treatment Effects](deep_reads/2026-06-09-2606.09625.md)  
+  `因果推断` · 相关性 8/10
+- [Statistical Estimation and Correction of Model-Measurement Bias in Time-Dependent Correction Factors of KAGRA](deep_reads/2026-06-09-2606.09010.md)  
+  `天体统计` · 相关性 8/10
+- [High Dimensional Change Point Models for Two-Directional Data](deep_reads/2026-06-09-2606.07816.md)  
   `数理统计 / 假设检验` · 相关性 7/10
-- [Causal inference of Plackett-Burman designs in applications](deep_reads/2026-06-08-2606.06961.md)  
-  `因果推断` · 相关性 7/10
-- [Covariance-Adaptive Residualization and Stagewise Calibration for Dependent Multiple Testing](deep_reads/2026-06-08-2606.07466.md)  
+- [A Transferability Criterion for Null-Optimized Variance Reduction in Cumulant-Based Error-Independence Testing](deep_reads/2026-06-09-2606.08499.md)  
   `数理统计 / 假设检验` · 相关性 7/10
-- [Dependence Measures via Adapted Optimal Transport: Stability and Rates of Convergence](deep_reads/2026-06-08-2606.07354.md)  
-  `非参数 / 半参数` · 相关性 7/10
-- [Non-asymptotic bounds for quasi-MLE, misspecified models, and dependence under group sequential sampling](deep_reads/2026-06-08-2606.07499.md)  
-  `非参数 / 半参数` · 相关性 7/10
-- [CausalAlpha: A Real-Time Geopolitical Risk Index from OSINT Channels for Causal Discovery in Financial Markets](deep_reads/2026-06-08-2606.07049.md)  
-  `经济理论 / 应用` · 相关性 7/10
-- [Where Not to Look: A Parametric Avoidance Model for SETI Target Selection](deep_reads/2026-06-08-2606.06692.md)  
-  `天体统计` · 相关性 7/10
-- [Consistent estimation in logit models using historical choices as practical consideration set](deep_reads/2026-06-08-2606.06638.md)  
-  `经济理论 / 应用` · 相关性 6/10
+- [CP-factorization for high dimensional tensor time series and double projection iterations](deep_reads/2026-06-09-2606.08560.md)  
+  `统计计算 / 算法` · 相关性 7/10
+- [Revisiting the Behrens-Fisher Problem: Validity-First Optimality](deep_reads/2026-06-09-2606.07847.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Biweighted Poisson Subsampling for Convoluted Rank Regression with Massive Data](deep_reads/2026-06-09-2606.08668.md)  
+  `统计计算 / 算法` · 相关性 7/10
+- [Sparse Convexification for High-Dimensional Constrained Regression](deep_reads/2026-06-09-2606.09021.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
 
 ## 收藏
 
@@ -51,11 +65,11 @@
 
 ## 本周每日报告
 
+- [2026-06-08](daily/2026-06-08.md)
 - [2026-06-05](daily/2026-06-05.md)
 - [2026-06-04](daily/2026-06-04.md)
 - [2026-06-03](daily/2026-06-03.md)
 - [2026-06-02](daily/2026-06-02.md)
-- [2026-06-01](daily/2026-06-01.md)
 
 
 ---

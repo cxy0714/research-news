@@ -4,6 +4,16 @@
 
 ### Daily
 
+- [Inference on the TSLS Estimand with Weak Instruments and Treatment Effect Heterogeneity](deep_reads/2026-06-09-2606.07871.md)  
+  9/10 [daily]
+- [Semiparametric Difference-in-Differences Estimation With Missing Not at Random Data: A Shadow Variable Approach](deep_reads/2026-06-09-2606.08474.md)  
+  9/10 [daily]
+- [Sharp Bounds and Inference in Sample Selection Models with Treatment Endogeneity](deep_reads/2026-06-09-2606.09223.md)  
+  9/10 [daily]
+- [A Practical Framework for Sensitivity Analysis in Externally Controlled Trials: An Illustration with a Bayesian Hybrid Evidence Synthesis Case Study](deep_reads/2026-06-09-2606.08642.md)  
+  8/10 [daily]
+- [A Synthetic Control Approach to Conditional Distributional Treatment Effects](deep_reads/2026-06-09-2606.09625.md)  
+  8/10 [daily]
 - [One-step Outcome Imputation: An Alternative to Multiple Imputation](deep_reads/2026-06-08-2606.07174.md)  
   8/10 [daily]
 - [Causal inference of Plackett-Burman designs in applications](deep_reads/2026-06-08-2606.06961.md)  
@@ -292,6 +302,12 @@
 
 ### Daily
 
+- [The Asymptotic Distribution of Sample Canonical Directions in Gaussian Spiked High-dimensional CCA](deep_reads/2026-06-09-2606.09153.md)  
+  9/10 [daily]
+- [Inference for High-Dimensional Sparse Spectral Precision Matrices](deep_reads/2026-06-09-2606.07986.md)  
+  8/10 [daily]
+- [Sparse Convexification for High-Dimensional Constrained Regression](deep_reads/2026-06-09-2606.09021.md)  
+  7/10 [daily]
 - [Statistically and Computationally Optimal Estimation and Inference of Common Subspaces](deep_reads/2026-06-05-2606.06483.md)  
   9/10 [daily]
 - [A Robust Framework for Model Order Selection in Correlated Large-Dimensional CES Noise](deep_reads/2026-06-05-2606.06426.md)  
@@ -421,6 +437,10 @@
 
 ### Daily
 
+- [Nonparametric undirected graphical model selection using diffusion models](deep_reads/2026-06-09-2606.08468.md)  
+  8/10 [daily]
+- [Constraint residuals, graph posteriors, and determinant-corrected full-space targets in Bayesian inverse problems](deep_reads/2026-06-09-2606.09594.md)  
+  8/10 [daily]
 - [A Temporal Spatial Minimax Rate for Smoothly-Varying Distributions in Wasserstein Space](deep_reads/2026-06-08-2606.07325.md)  
   9/10 [daily]
 - [Smooth Hard-Thresholding for Singular Values with Stein's Unbiased Risk Estimate](deep_reads/2026-06-08-2606.06632.md)  
@@ -557,6 +577,8 @@
 
 ### Daily
 
+- [Statistical Optimality of Prediction-Powered Inference](deep_reads/2026-06-09-2606.08730.md)  
+  8/10 [daily]
 - [Ising Models on Inhomogeneous Random Graphs: Inference, Local Asymptotic Minimaxity, and Limit of Experiments](deep_reads/2026-06-08-2606.07065.md)  
   8/10 [daily]
 - [Optimally taming biases in black-box models for efficient semiparametric estimation](deep_reads/2026-06-05-2606.06368.md)  
@@ -639,6 +661,16 @@
 
 ### Daily
 
+- [Data augmented bootstrap: Unifying confidence interval construction by approximate invariance](deep_reads/2026-06-09-2606.09049.md)  
+  8/10 [daily]
+- [Tests for Independence of High-Dimensional Nonstationary Time Series](deep_reads/2026-06-09-2606.08498.md)  
+  8/10 [daily]
+- [High Dimensional Change Point Models for Two-Directional Data](deep_reads/2026-06-09-2606.07816.md)  
+  7/10 [daily]
+- [A Transferability Criterion for Null-Optimized Variance Reduction in Cumulant-Based Error-Independence Testing](deep_reads/2026-06-09-2606.08499.md)  
+  7/10 [daily]
+- [Revisiting the Behrens-Fisher Problem: Validity-First Optimality](deep_reads/2026-06-09-2606.07847.md)  
+  7/10 [daily]
 - [Sequential testing of conditionally constrained hypotheses](deep_reads/2026-06-08-2606.06769.md)  
   8/10 [daily]
 - [Testing Equality of Conditional Distributions via Generative Models](deep_reads/2026-06-08-2606.06930.md)  
@@ -798,6 +830,10 @@
 
 ### Daily
 
+- [CP-factorization for high dimensional tensor time series and double projection iterations](deep_reads/2026-06-09-2606.08560.md)  
+  7/10 [daily]
+- [Biweighted Poisson Subsampling for Convoluted Rank Regression with Massive Data](deep_reads/2026-06-09-2606.08668.md)  
+  7/10 [daily]
 - [Constrained Weighted Bayesian Bootstrap](deep_reads/2026-06-04-2606.04237.md)  
   7/10 [daily]
 - [A Neural Estimation Framework for Aggregated Relational Data under Intractable Likelihoods](deep_reads/2026-06-03-2606.03961.md)  
@@ -914,6 +950,8 @@
 
 ### Daily
 
+- [Statistical Estimation and Correction of Model-Measurement Bias in Time-Dependent Correction Factors of KAGRA](deep_reads/2026-06-09-2606.09010.md)  
+  8/10 [daily]
 - [Where Not to Look: A Parametric Avoidance Model for SETI Target Selection](deep_reads/2026-06-08-2606.06692.md)  
   7/10 [daily]
 - [Toward decision-aware AI for LSST-scale time-domain astronomy](deep_reads/2026-06-05-2606.05285.md)  
@@ -949,6 +987,8 @@
 
 ### Daily
 
+- [Adaptive Estimation of Aggregated Values of Conditional Linear Programs](deep_reads/2026-06-09-2606.08359.md)  
+  9/10 [daily]
 - [CausalAlpha: A Real-Time Geopolitical Risk Index from OSINT Channels for Causal Discovery in Financial Markets](deep_reads/2026-06-08-2606.07049.md)  
   7/10 [daily]
 - [Consistent estimation in logit models using historical choices as practical consideration set](deep_reads/2026-06-08-2606.06638.md)  
