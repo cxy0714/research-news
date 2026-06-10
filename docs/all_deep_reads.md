@@ -115,6 +115,80 @@
 
 ### 期刊
 
+#### Biostatistics Vol 27 Issue 1
+
+- [IV-learner: learning conditional average treatment effects using instrumental variables](deep_reads/2026-06-10-10.1093_biostatistics_kxag009.md)  
+  9/10 [journals]
+- [Addressing the influence of unmeasured confounding in observational studies with time-to-event outcomes: a semiparametric sensitivity analysis approach](deep_reads/2026-06-10-10.1093_biostatistics_kxag005.md)  
+  9/10 [journals]
+- [A doubly robust framework for addressing outcome-dependent selection bias in multi-cohort EHR studies](deep_reads/2026-06-10-10.1093_biostatistics_kxag001.md)  
+  8/10 [journals]
+- [A sensitivity analysis approach to principal stratification with a continuous longitudinal intermediate outcome: applications to a cohort stepped wedge trial](deep_reads/2026-06-10-10.1093_biostatistics_kxag004.md)  
+  8/10 [journals]
+
+#### Biostatistics Vol 26 Issue 1
+
+- [Identification and estimation of mediational effects of longitudinal modified treatment policies](deep_reads/2026-06-10-10.1093_biostatistics_kxaf031.md)  
+  10/10 [journals]
+- [Instrumental variable approach to estimating individual causal effects in N-of-1 trials: application to ISTOP study](deep_reads/2026-06-10-10.1093_biostatistics_kxaf042.md)  
+  9/10 [journals]
+- [Stratification-based instrumental variable analysis framework for nonlinear effect analysis](deep_reads/2026-06-10-10.1093_biostatistics_kxaf043.md)  
+  9/10 [journals]
+- [Multi-study <i>R</i> -learner for estimating heterogeneous treatment effects across studies using statistical machine learning](deep_reads/2026-06-10-10.1093_biostatistics_kxaf040.md)  
+  8/10 [journals]
+- [Counterfactual fairness for small subgroups](deep_reads/2026-06-10-10.1093_biostatistics_kxaf046.md)  
+  6/10 [journals]
+
+#### Biometrics Vol 82 Issue 2
+
+- [Targeted maximum likelihood estimation for mediation analysis with multiple time-varying mediators](deep_reads/2026-06-10-10.1093_biomtc_ujag102.md)  
+  9/10 [journals]
+- [Measurement error-robust causal inference via constructed instrumental variables](deep_reads/2026-06-10-10.1093_biomtc_ujag057.md)  
+  9/10 [journals]
+- [Causal inference targeting a concentration index for studies of health inequalities](deep_reads/2026-06-10-10.1093_biomtc_ujag082.md)  
+  9/10 [journals]
+- [Nonparametric estimation of the total treatment effect with multiple outcomes in the presence of terminal events](deep_reads/2026-06-10-10.1093_biomtc_ujag053.md)  
+  8/10 [journals]
+- [Personalized treatment design in the context of functional confounding](deep_reads/2026-06-10-10.1093_biomtc_ujag056.md)  
+  8/10 [journals]
+- [Assessing interactive causes of an occurred outcome due to two binary exposures](deep_reads/2026-06-10-10.1093_biomtc_ujag100.md)  
+  8/10 [journals]
+- [Efficient collaborative learning of the average treatment effect](deep_reads/2026-06-10-10.1093_biomtc_ujag076.md)  
+  8/10 [journals]
+- [Uncertainty quantification and multi-stage variable selection for personalized treatment regimes](deep_reads/2026-06-10-10.1093_biomtc_ujag081.md)  
+  8/10 [journals]
+- [<i>Q</i> -Learning with clustered-SMART (cSMART) data: examining moderators in the construction of clustered adaptive interventions](deep_reads/2026-06-10-10.1093_biomtc_ujag078.md)  
+  7/10 [journals]
+- [Heterogeneous causal mediation analysis using Bayesian additive regression trees](deep_reads/2026-06-10-10.1093_biomtc_ujag079.md)  
+  7/10 [journals]
+- [Integrative learning of individualized treatment rules from multiple studies with partially overlapping treatments](deep_reads/2026-06-10-10.1093_biomtc_ujag083.md)  
+  7/10 [journals]
+- [Bayesian shrinkage priors for penalized synthetic control estimators in the presence of spillovers](deep_reads/2026-06-10-10.1093_biomtc_ujag054.md)  
+  7/10 [journals]
+- [A First Course in Causal Inference](deep_reads/2026-06-10-10.1093_biomtc_ujag012.md)  
+  6/10 [journals]
+
+#### Biometrics Vol 82 Issue 1
+
+- [Semiparametric causal mediation analysis of cluster-randomized trials for indirect and spillover effects](deep_reads/2026-06-10-10.1093_biomtc_ujag017.md)  
+  9/10 [journals]
+- [A framework for causal estimand selection under positivity violations](deep_reads/2026-06-10-10.1093_biomtc_ujag014.md)  
+  8/10 [journals]
+- [Scalable and distributed individualized treatment rules for multicenter datasets](deep_reads/2026-06-10-10.1093_biomtc_ujag003.md)  
+  6/10 [journals]
+
+#### Annals of Applied Statistics Vol 20 Issue 1
+
+- [Multiply robust estimation for causal survival analysis with treatment noncompliance](deep_reads/2026-06-10-10.1214_25-aoas2117.md)  
+  9/10 [journals]
+
+#### Annals of Applied Statistics Vol 19 Issue 4
+
+- [Simultaneous adjustment of nonignorable verification bias and imperfect gold standard bias in diagnostic test studies, with an application to Alzheimer’s disease detection](deep_reads/2026-06-10-10.1214_25-aoas2081.md)  
+  7/10 [journals]
+- [Time-varying mediation analysis for incomplete data with application to DNA methylation study for PTSD](deep_reads/2026-06-10-10.1214_25-aoas2076.md)  
+  7/10 [journals]
+
 #### Quantitative Economics Vol 17 Issue 1
 
 - [The local approach to causal inference under network interference](deep_reads/2026-06-07-10.3982_qe2484.md)  
@@ -339,6 +413,15 @@
 
 ### 期刊
 
+#### Annals of Applied Statistics Vol 20 Issue 1
+
+- [Integrative learning of linear non-Gaussian directed acyclic graphs with application on multisource gene regulatory network analysis](deep_reads/2026-06-10-10.1214_25-aoas2116.md)  
+  8/10 [journals]
+- [Feature augmentations for high-dimensional learning: Applications to stock market prediction using Chinese news data](deep_reads/2026-06-10-10.1214_25-aoas2127.md)  
+  7/10 [journals]
+- [Statistical inference for covariate-adjusted and interpretable generalized latent factor model with application to testing fairness](deep_reads/2026-06-10-10.1214_25-aoas2113.md)  
+  6/10 [journals]
+
 #### Journal of Econometrics Vol 255
 
 - [Nuclear norm regularized estimation of panel regression models](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106246.md)  
@@ -498,6 +581,35 @@
 
 ### 期刊
 
+#### Journal of the Royal Statistical Society Series C Vol 75 Issue 2
+
+- [Modelling physician visit frequency and costs using a copula additive distributional regression approach](deep_reads/2026-06-10-10.1093_jrsssc_qlaf050.md)  
+  4/10 [journals]
+
+#### Biostatistics Vol 27 Issue 1
+
+- [Shortcomings of deep learning for distributional predictors: a note](deep_reads/2026-06-10-10.1093_biostatistics_kxaf051.md)  
+  4/10 [journals]
+
+#### Biometrics Vol 82 Issue 2
+
+- [Transfer learning estimation of the accelerated failure time model based on high-dimensional data](deep_reads/2026-06-10-10.1093_biomtc_ujag103.md)  
+  7/10 [journals]
+
+#### Biometrics Vol 82 Issue 1
+
+- [A general framework for heterogeneous variable importance: Pointwise and uniform inference](deep_reads/2026-06-10-10.1093_biomtc_ujag015.md)  
+  7/10 [journals]
+
+#### Annals of Applied Statistics Vol 20 Issue 1
+
+- [Data harmonization via regularized nonparametric mixing distribution estimation](deep_reads/2026-06-10-10.1214_25-aoas2024.md)  
+  8/10 [journals]
+- [Identification of genetic factors associated with corpus callosum morphology: Conditional strong independence screening for non-Euclidean responses](deep_reads/2026-06-10-10.1214_25-aoas2119.md)  
+  6/10 [journals]
+- [Regionalization of China’s PM2.5: A robust functional spatial clustering with angular depth](deep_reads/2026-06-10-10.1214_26-aoas2141.md)  
+  0/10 [journals]
+
 #### Quantitative Economics Vol 16 Issue 3
 
 - [Inference in a stationary/nonstationary autoregressive time‐varying‐parameter model](deep_reads/2026-06-07-10.3982_qe2465.md)  
@@ -615,6 +727,25 @@
   9/10 [daily]
 
 ### 期刊
+
+#### Biostatistics Vol 27 Issue 1
+
+- [Statistical inference for high-dimensional generalized estimating equations](deep_reads/2026-06-10-10.1093_biostatistics_kxag013.md)  
+  7/10 [journals]
+
+#### Biometrics Vol 82 Issue 2
+
+- [Efficient interaction analysis in randomized controlled trials](deep_reads/2026-06-10-10.1093_biomtc_ujag074.md)  
+  8/10 [journals]
+- [Borrowing information from an unidentifiable model: Guaranteed efficiency gain with a dichotomized outcome in the external data](deep_reads/2026-06-10-10.1093_biomtc_ujag062.md)  
+  7/10 [journals]
+
+#### Annals of Applied Statistics Vol 20 Issue 1
+
+- [Asymptotically efficient data-adaptive penalized shrinkage estimation with application to causal inference](deep_reads/2026-06-10-10.1214_25-aoas2129.md)  
+  9/10 [journals]
+- [Semiparametric analysis of interval-censored data subject to inaccurate diagnoses with a terminal event](deep_reads/2026-06-10-10.1214_25-aoas2134.md)  
+  7/10 [journals]
 
 #### Quantitative Economics Vol 16 Issue 4
 
@@ -744,6 +875,33 @@
 
 ### 期刊
 
+#### Biostatistics Vol 27 Issue 1
+
+- [High-dimensional test for one-sided hypotheses](deep_reads/2026-06-10-10.1093_biostatistics_kxag016.md)  
+  8/10 [journals]
+
+#### Biostatistics Vol 26 Issue 1
+
+- [Testing for a difference in means of a single feature after clustering](deep_reads/2026-06-10-10.1093_biostatistics_kxae046.md)  
+  7/10 [journals]
+- [High-dimensional inference for functional regression with an application to the Alzheimer’s disease magnetoencephalography study](deep_reads/2026-06-10-10.1093_biostatistics_kxaf050.md)  
+  6/10 [journals]
+
+#### Biometrics Vol 82 Issue 2
+
+- [A Bayesian decision-theoretic approach to multiple testing in basket trials](deep_reads/2026-06-10-10.1093_biomtc_ujag093.md)  
+  6/10 [journals]
+
+#### Annals of Applied Statistics Vol 20 Issue 1
+
+- [Ranking and selection in large-scale inference of heteroscedastic units](deep_reads/2026-06-10-10.1214_25-aoas2123.md)  
+  7/10 [journals]
+
+#### Annals of Applied Statistics Vol 19 Issue 4
+
+- [Optimal robust strategies for accelerated life tests and fatigue testing of polymer composite materials](deep_reads/2026-06-10-10.1214_25-aoas2075.md)  
+  3/10 [journals]
+
 #### Quantitative Economics Vol 16 Issue 4
 
 - [Testing homogeneity in dynamic discrete games in finite samples](deep_reads/2026-06-07-10.3982_qe2059.md)  
@@ -862,6 +1020,23 @@
   6/10 [daily]
 
 ### 期刊
+
+#### Biostatistics Vol 27 Issue 1
+
+- [Joint modeling of high-dimensional longitudinal data and survival using supervised low-rank tensor decomposition](deep_reads/2026-06-10-10.1093_biostatistics_kxag007.md)  
+  5/10 [journals]
+
+#### Biostatistics Vol 26 Issue 1
+
+- [Bayesian scalar-on-tensor regression using the Tucker decomposition for sparse spatial modeling](deep_reads/2026-06-10-10.1093_biostatistics_kxaf029.md)  
+  7/10 [journals]
+
+#### Annals of Applied Statistics Vol 19 Issue 4
+
+- [Probabilistic inversion modeling of gas emissions: A gradient-based MCMC estimation of Gaussian plume parameters](deep_reads/2026-06-10-10.1214_25-aoas2101.md)  
+  7/10 [journals]
+- [Network inference via approximate Bayesian computation. Illustration on a stochastic multipopulation neural mass model](deep_reads/2026-06-10-10.1214_25-aoas2084.md)  
+  2/10 [journals]
 
 #### Journal of Business & Economic Statistics Vol 44 Issue 2
 
@@ -1007,6 +1182,13 @@
 - [A Markov-Chain-Monte-Carlo-based Hybrid Noise Inference for Continuous Wavelet Power Spectra: with Applications to Solar and Stellar Oscillatory Signals](deep_reads/2026-05-25-2605.23587.md)  
   7/10 [daily]
 
+### 期刊
+
+#### Annals of Applied Statistics Vol 20 Issue 1
+
+- [Neural posterior estimation with autoregressive tiling for detecting objects in astronomical images](deep_reads/2026-06-10-10.1214_25-aoas2125.md)  
+  7/10 [journals]
+
 ## 经济理论 / 应用
 
 ### Daily
@@ -1035,6 +1217,16 @@
   6/10 [daily]
 
 ### 期刊
+
+#### Journal of the Royal Statistical Society Series C Vol 75 Issue 1
+
+- [Extended-support beta regression for [0, 1] responses](deep_reads/2026-06-10-10.1093_jrsssc_qlaf039.md)  
+  6/10 [journals]
+
+#### Annals of Applied Statistics Vol 19 Issue 4
+
+- [Bayesian group-shrinkage based estimation for panel vector autoregressive models with mixed frequency data](deep_reads/2026-06-10-10.1214_25-aoas2073.md)  
+  5/10 [journals]
 
 #### Quantitative Economics Vol 17 Issue 2
 
@@ -1217,6 +1409,77 @@
 - [Predicting Current Outcomes From Historical Survey Data With Weighted Conformal Prediction](deep_reads/2026-06-10-2606.10563.md)  
   7/10 [daily]
 
+### 期刊
+
+#### Journal of the Royal Statistical Society Series C Vol 75 Issue 2
+
+- [Dependence modelling across major causes of death via time-varying copula state space models](deep_reads/2026-06-10-10.1093_jrsssc_qlaf049.md)  
+  4/10 [journals]
+
+#### Biostatistics Vol 27 Issue 1
+
+- [Dynamic case-control sampling for rapid estimation of vaccine effectiveness against an emerging infectious disease variant](deep_reads/2026-06-10-10.1093_biostatistics_kxag002.md)  
+  6/10 [journals]
+- [SAM-HC: a Bayesian nonparametric construction of hybrid control for randomized clinical trials using external data](deep_reads/2026-06-10-10.1093_biostatistics_kxag003.md)  
+  5/10 [journals]
+- [Adaptive transfer learning for time-to-event modeling with applications in disease risk assessment](deep_reads/2026-06-10-10.1093_biostatistics_kxag011.md)  
+  5/10 [journals]
+- [Risk functions with outcome measurement error](deep_reads/2026-06-10-10.1093_biostatistics_kxaf052.md)  
+  4/10 [journals]
+
+#### Biostatistics Vol 26 Issue 1
+
+- [Decomposition of longitudinal disparities: an application to the fetal growth-singletons study](deep_reads/2026-06-10-10.1093_biostatistics_kxaf044.md)  
+  8/10 [journals]
+- [Network generalized estimating equations for complexly correlated data with applications to cluster randomized trials](deep_reads/2026-06-10-10.1093_biostatistics_kxaf039.md)  
+  5/10 [journals]
+- [Meta-analysis models with group structure for pleiotropy detection at gene and variant level using summary statistics from multiple datasets](deep_reads/2026-06-10-10.1093_biostatistics_kxaf037.md)  
+  4/10 [journals]
+
+#### Biometrics Vol 82 Issue 2
+
+- [Multivariate causal effects: a Bayesian causal regression factor model](deep_reads/2026-06-10-10.1093_biomtc_ujag101.md)  
+  7/10 [journals]
+- [Two-phase designs for biomarker studies when disease processes are under intermittent observation](deep_reads/2026-06-10-10.1093_biomtc_ujag088.md)  
+  6/10 [journals]
+- [Two-phase designs for cost-effective evaluation of cancer screening tests](deep_reads/2026-06-10-10.1093_biomtc_ujag058.md)  
+  6/10 [journals]
+- [Regression methods for cost-effectiveness analysis with different censoring times or terminating events for survival time and costs](deep_reads/2026-06-10-10.1093_biomtc_ujag073.md)  
+  3/10 [journals]
+- [A mixed effect similarity matrix regression model (SMRmix) for integrating multiple microbiome datasets at the community level](deep_reads/2026-06-10-10.1093_biomtc_ujag077.md)  
+  3/10 [journals]
+- [Correcting random effect distributions to account for survivorship bias in individual heterogeneity Cormack–Jolly–Seber models](deep_reads/2026-06-10-10.1093_biomtc_ujag086.md)  
+  2/10 [journals]
+- [Mixed membership latent variable model with unknown factors, factor loadings and number of extreme profiles](deep_reads/2026-06-10-10.1093_biomtc_ujag089.md)  
+  2/10 [journals]
+
+#### Biometrics Vol 82 Issue 1
+
+- [Multiple-index interaction models to accommodate exposure grouping in environmental mixtures](deep_reads/2026-06-10-10.1093_biomtc_ujaf175.md)  
+  6/10 [journals]
+
+#### Annals of Applied Statistics Vol 20 Issue 1
+
+- [Random forests and mixed effects random forests for small area estimation of general parameters: A poverty mapping case study in Mozambique](deep_reads/2026-06-10-10.1214_25-aoas2126.md)  
+  6/10 [journals]
+- [Latent space modeling for human disease network with temporal variations: Analysis of medicare data](deep_reads/2026-06-10-10.1214_25-aoas2121.md)  
+  4/10 [journals]
+- [Bridging the gap: Enhancing the generalizability of epigenetic clocks through transfer learning](deep_reads/2026-06-10-10.1214_26-aoas2136.md)  
+  4/10 [journals]
+- [Temporal models for estimation and short-term forecasting of neonatal mortality rates in sub-Saharan Africa](deep_reads/2026-06-10-10.1214_25-aoas2100.md)  
+  4/10 [journals]
+- [A partially collapsed Gibbs sampling algorithm for regression with misreported response](deep_reads/2026-06-10-10.1214_26-aoas2146.md)  
+  4/10 [journals]
+- [Latent class analysis with discrete failure time model](deep_reads/2026-06-10-10.1214_25-aoas2111.md)  
+  3/10 [journals]
+
+#### Annals of Applied Statistics Vol 19 Issue 4
+
+- [Exploring spatiotemporal variation in Covid-19 waves: Non-Euclidean spatially aware functional registration](deep_reads/2026-06-10-10.1214_25-aoas2077.md)  
+  4/10 [journals]
+- [Supervised learning of outcome-relevant items from a questionnaire via mixed integer optimization](deep_reads/2026-06-10-10.1214_25-aoas2093.md)  
+  3/10 [journals]
+
 ## 其他
 
 ### Daily
@@ -1235,6 +1498,46 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Journal of the Royal Statistical Society Series C Vol 75 Issue 2
+
+- [The role of data and priors in estimating climate sensitivity](deep_reads/2026-06-10-10.1093_jrsssc_qlaf047.md)  
+  2/10 [journals]
+- [Joint space-time modelling for upper daily maximum and minimum temperature record-breaking](deep_reads/2026-06-10-10.1093_jrsssc_qlaf046.md)  
+  1/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 75 Issue 1
+
+- [Functional Gaussian graphical regression models for air quality data](deep_reads/2026-06-10-10.1093_jrsssc_qlaf042.md)  
+  6/10 [journals]
+
+#### Biostatistics Vol 27 Issue 1
+
+- [NBSR: a Negative Binomial Softmax Regression model for microRNA-seq data analysis](deep_reads/2026-06-10-10.1093_biostatistics_kxag012.md)  
+  2/10 [journals]
+
+#### Biostatistics Vol 26 Issue 1
+
+- [Addressing the mean–variance relationship in spatially resolved transcriptomics data with <i>spoon</i>](deep_reads/2026-06-10-10.1093_biostatistics_kxaf012.md)  
+  2/10 [journals]
+
+#### Biometrics Vol 82 Issue 2
+
+- [Nonparanormal adjusted marginal inference](deep_reads/2026-06-10-10.1093_biomtc_ujag065.md)  
+  7/10 [journals]
+- [Heterogeneity learning in distributed networks with large-scale survival data](deep_reads/2026-06-10-10.1093_biomtc_ujag091.md)  
+  6/10 [journals]
+- [A zero-inflated hierarchical generalized transformation model to address non-normality in spatially-informed cell-type deconvolution](deep_reads/2026-06-10-10.1093_biomtc_ujag055.md)  
+  2/10 [journals]
+- [Knowledge-guided Bayesian biclustering model for omics data with noisy graphs](deep_reads/2026-06-10-10.1093_biomtc_ujag070.md)  
+  2/10 [journals]
+- [Minimum noninferiority dose for phase I clinical trials with immunotherapy](deep_reads/2026-06-10-10.1093_biomtc_ujag098.md)  
+  2/10 [journals]
+
+#### Annals of Applied Statistics Vol 20 Issue 1
+
+- [A general framework for investigating neurodevelopment of brain functional networks using multisite and longitudinal neuroimaging](deep_reads/2026-06-10-10.1214_25-aoas2133.md)  
+  3/10 [journals]
 
 #### IEEE Transactions on Signal Processing Vol 74
 

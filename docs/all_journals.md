@@ -31,6 +31,28 @@
 - [Vol 87 Issue 5 · 2026-05-26](journals/2026-05-26-jrssb-v87-i5.md)
 - [Vol 87 Issue 4 · 2026-05-26](journals/2026-05-26-jrssb-v87-i4.md)
 
+## 应用 / 生物统计 (Applied & Biostat)
+
+### AoAS
+
+- [Vol 20 Issue 1 · 2026-06-10](journals/2026-06-10-aoas-v20-i1.md)
+- [Vol 19 Issue 4 · 2026-06-10](journals/2026-06-10-aoas-v19-i4.md)
+
+### Biometrics
+
+- [Vol 82 Issue 2 · 2026-06-10](journals/2026-06-10-biometrics-v82-i2.md)
+- [Vol 82 Issue 1 · 2026-06-10](journals/2026-06-10-biometrics-v82-i1.md)
+
+### Biostatistics
+
+- [Vol 27 Issue 1 · 2026-06-10](journals/2026-06-10-biostatistics-v27-i1.md)
+- [Vol 26 Issue 1 · 2026-06-10](journals/2026-06-10-biostatistics-v26-i1.md)
+
+### JRSS-C
+
+- [Vol 75 Issue 2 · 2026-06-10](journals/2026-06-10-jrss-c-v75-i2.md)
+- [Vol 75 Issue 1 · 2026-06-10](journals/2026-06-10-jrss-c-v75-i1.md)
+
 ## 经济学 / 计量 (Econ)
 
 ### Econometrica
