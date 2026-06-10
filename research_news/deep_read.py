@@ -139,7 +139,7 @@ def deep_read_paper(
         DEEP_READ_ASTRO_SYSTEM if paper.topic == "astrostats" else DEEP_READ_SYSTEM
     )
     try:
-        return client.chat(
+        result = client.chat(
             [
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user},
@@ -147,8 +147,11 @@ def deep_read_paper(
             model=model,
             max_tokens=DEEP_READ_MAX_TOKENS,
         )
+        log.info("deep read LLM call succeeded for %s (%d chars)",
+                 paper.paper_id, len(result))
+        return result
     except Exception as e:
-        log.warning("deep read LLM call failed for %s: %s", paper.paper_id, e)
+        log.error("deep read FAILED for %s (all retries exhausted): %s", paper.paper_id, e)
         return ""
 
 

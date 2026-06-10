@@ -11,7 +11,9 @@ import time
 from collections import deque
 
 from openai import OpenAI
-from tenacity import retry, stop_after_attempt, wait_exponential
+from tenacity import retry, stop_after_attempt, wait_exponential, before_sleep_log
+
+import logging as _logging
 
 log = logging.getLogger(__name__)
 
@@ -76,7 +78,12 @@ class SJTUClient:
         slot["total_tokens"] += int(getattr(usage_obj, "total_tokens", 0) or 0)
         self.calls += 1
 
-    @retry(stop=stop_after_attempt(MAX_ATTEMPTS), wait=wait_exponential(multiplier=2, min=2, max=20))
+    @retry(
+        stop=stop_after_attempt(MAX_ATTEMPTS),
+        wait=wait_exponential(multiplier=2, min=2, max=20),
+        before_sleep=before_sleep_log(log, _logging.WARNING),
+        reraise=True,
+    )
     def chat(
         self,
         messages: list[dict],
