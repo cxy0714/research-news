@@ -10,54 +10,44 @@
 - **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-06-09
+## 今日 · 2026-06-10
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-06-09.md)
+[→ 查看完整报告](daily/2026-06-10.md)
 
-### 精读论文（20 篇）
+### 精读论文（15 篇）
 
-- [The Asymptotic Distribution of Sample Canonical Directions in Gaussian Spiked High-dimensional CCA](deep_reads/2026-06-09-2606.09153.md)  
-  `高维统计 / 随机矩阵` · 相关性 9/10
-- [Inference on the TSLS Estimand with Weak Instruments and Treatment Effect Heterogeneity](deep_reads/2026-06-09-2606.07871.md)  
+- [Empirical stratification for treatment effect heterogeneity with post-treatment variables](deep_reads/2026-06-10-2606.11013.md)  
   `因果推断` · 相关性 9/10
-- [Adaptive Estimation of Aggregated Values of Conditional Linear Programs](deep_reads/2026-06-09-2606.08359.md)  
-  `经济理论 / 应用` · 相关性 9/10
-- [Semiparametric Difference-in-Differences Estimation With Missing Not at Random Data: A Shadow Variable Approach](deep_reads/2026-06-09-2606.08474.md)  
-  `因果推断` · 相关性 9/10
-- [Sharp Bounds and Inference in Sample Selection Models with Treatment Endogeneity](deep_reads/2026-06-09-2606.09223.md)  
-  `因果推断` · 相关性 9/10
-- [Inference for High-Dimensional Sparse Spectral Precision Matrices](deep_reads/2026-06-09-2606.07986.md)  
+- [Minimum free energy randomized design to improve covariate balance](deep_reads/2026-06-10-2606.10497.md)  
+  `因果推断` · 相关性 8/10
+- [Two-Sample Homogeneity Test via Entropic Optimal Transport](deep_reads/2026-06-10-2606.10767.md)  
+  `数理统计 / 假设检验` · 相关性 8/10
+- [A Structural Separation Between Chernoff and Convex-Order Optimality in Robust Testing](deep_reads/2026-06-10-2606.10977.md)  
+  `数理统计 / 假设检验` · 相关性 8/10
+- [Fixed-Threshold One-Bit Toeplitz Covariance Estimation under Sparse-Ruler Sampling](deep_reads/2026-06-10-2606.11110.md)  
   `高维统计 / 随机矩阵` · 相关性 8/10
-- [Nonparametric undirected graphical model selection using diffusion models](deep_reads/2026-06-09-2606.08468.md)  
+- [Nonparametric Riemannian Empirical Bayes, and Denoising Measurements on Manifolds](deep_reads/2026-06-10-2606.11183.md)  
   `非参数 / 半参数` · 相关性 8/10
-- [A Practical Framework for Sensitivity Analysis in Externally Controlled Trials: An Illustration with a Bayesian Hybrid Evidence Synthesis Case Study](deep_reads/2026-06-09-2606.08642.md)  
-  `因果推断` · 相关性 8/10
-- [Data augmented bootstrap: Unifying confidence interval construction by approximate invariance](deep_reads/2026-06-09-2606.09049.md)  
-  `数理统计 / 假设检验` · 相关性 8/10
-- [Tests for Independence of High-Dimensional Nonstationary Time Series](deep_reads/2026-06-09-2606.08498.md)  
-  `数理统计 / 假设检验` · 相关性 8/10
-- [Statistical Optimality of Prediction-Powered Inference](deep_reads/2026-06-09-2606.08730.md)  
-  `效率理论 / Debiased ML` · 相关性 8/10
-- [Constraint residuals, graph posteriors, and determinant-corrected full-space targets in Bayesian inverse problems](deep_reads/2026-06-09-2606.09594.md)  
-  `非参数 / 半参数` · 相关性 8/10
-- [A Synthetic Control Approach to Conditional Distributional Treatment Effects](deep_reads/2026-06-09-2606.09625.md)  
-  `因果推断` · 相关性 8/10
-- [Statistical Estimation and Correction of Model-Measurement Bias in Time-Dependent Correction Factors of KAGRA](deep_reads/2026-06-09-2606.09010.md)  
-  `天体统计` · 相关性 8/10
-- [High Dimensional Change Point Models for Two-Directional Data](deep_reads/2026-06-09-2606.07816.md)  
-  `数理统计 / 假设检验` · 相关性 7/10
-- [A Transferability Criterion for Null-Optimized Variance Reduction in Cumulant-Based Error-Independence Testing](deep_reads/2026-06-09-2606.08499.md)  
-  `数理统计 / 假设检验` · 相关性 7/10
-- [CP-factorization for high dimensional tensor time series and double projection iterations](deep_reads/2026-06-09-2606.08560.md)  
-  `统计计算 / 算法` · 相关性 7/10
-- [Revisiting the Behrens-Fisher Problem: Validity-First Optimality](deep_reads/2026-06-09-2606.07847.md)  
-  `数理统计 / 假设检验` · 相关性 7/10
-- [Biweighted Poisson Subsampling for Convoluted Rank Regression with Massive Data](deep_reads/2026-06-09-2606.08668.md)  
-  `统计计算 / 算法` · 相关性 7/10
-- [Sparse Convexification for High-Dimensional Constrained Regression](deep_reads/2026-06-09-2606.09021.md)  
+- [Methods for adjusting for covariate measurement error in flexible modelling of functional form: results of a blinded, controlled neutral comparison simulation study](deep_reads/2026-06-10-2606.10123.md)  
+  `流行病学` · 相关性 7/10
+- [Predicting Current Outcomes From Historical Survey Data With Weighted Conformal Prediction](deep_reads/2026-06-10-2606.10563.md)  
+  `流行病学` · 相关性 7/10
+- [Bidirectional Random Projections](deep_reads/2026-06-10-2606.10377.md)  
   `高维统计 / 随机矩阵` · 相关性 7/10
+- [Distributionally Robust PCA with Data-Adaptive Wasserstein Geometry](deep_reads/2026-06-10-2606.10463.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Panel Data Estimation of Individual Demand in Markets with Many Consumers](deep_reads/2026-06-10-2606.11047.md)  
+  `经济理论 / 应用` · 相关性 7/10
+- [Estimating the Wasserstein barycenter of one-dimensional distributions under sparse sampling](deep_reads/2026-06-10-2606.10096.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Data compression for fast dimension reduction and clustering of high-dimensional discrete data](deep_reads/2026-06-10-2606.10593.md)  
+  `统计计算 / 算法` · 相关性 6/10
+- [Conformal Prediction for Dyadic Regression Under Complex Missingness](deep_reads/2026-06-10-2606.11136.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Flux-cube reconstruction from slitless spectroscopy](deep_reads/2026-06-10-2606.09974.md)  
+  `天体统计` · 相关性 6/10
 
 ## 收藏
 
@@ -65,11 +55,11 @@
 
 ## 本周每日报告
 
+- [2026-06-09](daily/2026-06-09.md)
 - [2026-06-08](daily/2026-06-08.md)
 - [2026-06-05](daily/2026-06-05.md)
 - [2026-06-04](daily/2026-06-04.md)
 - [2026-06-03](daily/2026-06-03.md)
-- [2026-06-02](daily/2026-06-02.md)
 
 
 ---
