@@ -1147,6 +1147,8 @@
 
 ### Daily
 
+- [A data-driven method for measuring corner-clipping probabilities in segmented particle detectors](deep_reads/2026-06-11-2606.11097.md)  
+  6/10 [daily]
 - [Flux-cube reconstruction from slitless spectroscopy](deep_reads/2026-06-10-2606.09974.md)  
   6/10 [daily]
 - [Statistical Estimation and Correction of Model-Measurement Bias in Time-Dependent Correction Factors of KAGRA](deep_reads/2026-06-09-2606.09010.md)  
@@ -1484,6 +1486,8 @@
 
 ### Daily
 
+- [Correcting Variable Importance Scored by Random Forests](deep_reads/2026-06-11-2606.10770.md)  
+  6/10 [daily]
 - [Debiased inference for stochastic treatment interventions with survival outcomes](deep_reads/2026-06-01-2605.31130.md)  
   9/10 [daily]
 - [The 'Right' Extension of Type-I Error to Data-Dependent Levels](deep_reads/2026-05-29-2605.28429.md)  
