@@ -538,7 +538,7 @@
   8/10 [daily]
 - [Posterior consistency of P\'olya trees for deconvolution under the linear model](deep_reads/2026-06-12-2606.11406.md)  
   7/10 [daily]
-- [A Likelihood Ratio Testing Approach for Interval-Censored Data](deep_reads/2026-06-12-2606.11439.md)  
+- [Bayesian Triangulation Splines: Spatial Adaptation on Irregular Domains](deep_reads/2026-06-12-2606.12296.md)  
   6/10 [daily]
 - [Nonparametric Riemannian Empirical Bayes, and Denoising Measurements on Manifolds](deep_reads/2026-06-10-2606.11183.md)  
   8/10 [daily]
@@ -822,9 +822,9 @@
 
 - [Pivotal and identification-robust nonparametric inference in linear IV models](deep_reads/2026-06-12-2606.12185.md)  
   9/10 [daily]
-- [Testing axial symmetry in multivariate location-scale linear regression](deep_reads/2026-06-12-2606.11933.md)  
-  7/10 [daily]
 - [Estimating the local false discovery rate under an unknown symmetric null](deep_reads/2026-06-12-2606.11548.md)  
+  6/10 [daily]
+- [Testing axial symmetry in multivariate location-scale linear regression](deep_reads/2026-06-12-2606.11933.md)  
   6/10 [daily]
 - [Two-Sample Homogeneity Test via Entropic Optimal Transport](deep_reads/2026-06-10-2606.10767.md)  
   8/10 [daily]
@@ -1028,8 +1028,6 @@
 
 - [ShrinkageTrees: An R Package for Bayesian Tree Ensembles for Survival Analysis and Causal Inference](deep_reads/2026-06-12-2606.12317.md)  
   7/10 [daily]
-- [A Discrete Cumulative Distribution Transform via Optimal Transport](deep_reads/2026-06-12-2606.12131.md)  
-  6/10 [daily]
 - [Data compression for fast dimension reduction and clustering of high-dimensional discrete data](deep_reads/2026-06-10-2606.10593.md)  
   6/10 [daily]
 - [CP-factorization for high dimensional tensor time series and double projection iterations](deep_reads/2026-06-09-2606.08560.md)  
@@ -1169,13 +1167,15 @@
 
 ### Daily
 
-- [Calibration of an Analog-to-Digital Conversion Nonlinearity in JWST/NIRISS](deep_reads/2026-06-12-2606.11983.md)  
-  7/10 [daily]
 - [Time Series Analysis in Machine Learning](deep_reads/2026-06-12-2606.11746.md)  
+  8/10 [daily]
+- [Wavelet-Based Extraction of Transient Noise in Gravitational-Wave Interferometers using a Saliency-Guided Learning Architecture](deep_reads/2026-06-12-2606.11595.md)  
+  7/10 [daily]
+- [Machine Learning for Event Reconstruction in Imaging Atmospheric Cherenkov Telescopes](deep_reads/2026-06-12-2606.11741.md)  
   7/10 [daily]
 - [Recalibration of SDSS photometric zero-points based on the InfraRed Flux Method temperature scale](deep_reads/2026-06-12-2606.11587.md)  
   6/10 [daily]
-- [Machine Learning for Event Reconstruction in Imaging Atmospheric Cherenkov Telescopes](deep_reads/2026-06-12-2606.11741.md)  
+- [Calibration of an Analog-to-Digital Conversion Nonlinearity in JWST/NIRISS](deep_reads/2026-06-12-2606.11983.md)  
   6/10 [daily]
 - [A data-driven method for measuring corner-clipping probabilities in segmented particle detectors](deep_reads/2026-06-11-2606.11097.md)  
   6/10 [daily]
@@ -1230,7 +1230,7 @@
 - [Threshold Regression for Fixed-T Panel Data with Interactive Fixed Effects](deep_reads/2026-06-12-2606.12184.md)  
   7/10 [daily]
 - [Assumption-Lean Shrinkage and Model Averaging for Spatial Parameters](deep_reads/2026-06-12-2606.12324.md)  
-  6/10 [daily]
+  7/10 [daily]
 - [Panel Data Estimation of Individual Demand in Markets with Many Consumers](deep_reads/2026-06-10-2606.11047.md)  
   7/10 [daily]
 - [Adaptive Estimation of Aggregated Values of Conditional Linear Programs](deep_reads/2026-06-09-2606.08359.md)  
