@@ -1028,6 +1028,8 @@
 
 - [ShrinkageTrees: An R Package for Bayesian Tree Ensembles for Survival Analysis and Causal Inference](deep_reads/2026-06-12-2606.12317.md)  
   7/10 [daily]
+- [A Discrete Cumulative Distribution Transform via Optimal Transport](deep_reads/2026-06-12-2606.12131.md)  
+  6/10 [daily]
 - [Data compression for fast dimension reduction and clustering of high-dimensional discrete data](deep_reads/2026-06-10-2606.10593.md)  
   6/10 [daily]
 - [CP-factorization for high dimensional tensor time series and double projection iterations](deep_reads/2026-06-09-2606.08560.md)  
@@ -1167,8 +1169,12 @@
 
 ### Daily
 
+- [Calibration of an Analog-to-Digital Conversion Nonlinearity in JWST/NIRISS](deep_reads/2026-06-12-2606.11983.md)  
+  7/10 [daily]
 - [Time Series Analysis in Machine Learning](deep_reads/2026-06-12-2606.11746.md)  
   7/10 [daily]
+- [Recalibration of SDSS photometric zero-points based on the InfraRed Flux Method temperature scale](deep_reads/2026-06-12-2606.11587.md)  
+  6/10 [daily]
 - [Machine Learning for Event Reconstruction in Imaging Atmospheric Cherenkov Telescopes](deep_reads/2026-06-12-2606.11741.md)  
   6/10 [daily]
 - [A data-driven method for measuring corner-clipping probabilities in segmented particle detectors](deep_reads/2026-06-11-2606.11097.md)  

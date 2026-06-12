@@ -16,7 +16,7 @@
 
 [→ 查看完整报告](daily/2026-06-12.md)
 
-### 精读论文（15 篇）
+### 精读论文（18 篇）
 
 - [Bracketing Relationships of Weighted Average Treatment Effects](deep_reads/2026-06-12-2606.11715.md)  
   `因果推断` · 相关性 9/10
@@ -28,6 +28,8 @@
   `非参数 / 半参数` · 相关性 8/10
 - [What is the Long-Term Value of Reliability?](deep_reads/2026-06-12-2606.11526.md)  
   `经济理论 / 应用` · 相关性 8/10
+- [Calibration of an Analog-to-Digital Conversion Nonlinearity in JWST/NIRISS](deep_reads/2026-06-12-2606.11983.md)  
+  `天体统计` · 相关性 7/10
 - [Bayesian Causal Machine Learning for Cure Models](deep_reads/2026-06-12-2606.11405.md)  
   `因果推断` · 相关性 7/10
 - [ShrinkageTrees: An R Package for Bayesian Tree Ensembles for Survival Analysis and Causal Inference](deep_reads/2026-06-12-2606.12317.md)  
@@ -40,6 +42,10 @@
   `经济理论 / 应用` · 相关性 7/10
 - [Time Series Analysis in Machine Learning](deep_reads/2026-06-12-2606.11746.md)  
   `天体统计` · 相关性 7/10
+- [A Discrete Cumulative Distribution Transform via Optimal Transport](deep_reads/2026-06-12-2606.12131.md)  
+  `统计计算 / 算法` · 相关性 6/10
+- [Recalibration of SDSS photometric zero-points based on the InfraRed Flux Method temperature scale](deep_reads/2026-06-12-2606.11587.md)  
+  `天体统计` · 相关性 6/10
 - [A Likelihood Ratio Testing Approach for Interval-Censored Data](deep_reads/2026-06-12-2606.11439.md)  
   `非参数 / 半参数` · 相关性 6/10
 - [Estimating the local false discovery rate under an unknown symmetric null](deep_reads/2026-06-12-2606.11548.md)  

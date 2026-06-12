@@ -29,6 +29,7 @@ log = logging.getLogger("research_news")
 # in-house shootout vs DeepSeek V3.2 — see docs/shootout/.
 import os
 DAILY_MODEL = os.environ.get("DAILY_MODEL", "glm-5.1")
+DEEP_READ_MODEL = os.environ.get("DEEP_READ_MODEL", "deepseek-reasoner")
 
 
 def _load_config() -> tuple[dict, str]:
@@ -148,7 +149,7 @@ def run(dry_run: bool = False, for_date: date | None = None) -> Path:
     # paper with a top-50-institution author (green-lit regardless of score).
     deep_read_papers = select_deep_read_papers(
         all_scored, papers, th_deepread,
-        client=client, interests_yaml=interests_text, model=DAILY_MODEL,
+        client=client, interests_yaml=interests_text, model=DEEP_READ_MODEL,
     )
 
     # Persist high-relevance papers: download PDFs, deep-read, then update index.
@@ -158,7 +159,7 @@ def run(dry_run: bool = False, for_date: date | None = None) -> Path:
         save_highlights(deep_read_papers, run_date=report_date)
         log.info("generating deep-read report for %d papers ...", len(deep_read_papers))
         generate_deep_read_report(
-            deep_read_papers, client, interests_text, report_date, "daily", model=DAILY_MODEL
+            deep_read_papers, client, interests_text, report_date, "daily", model=DEEP_READ_MODEL
         )
 
     update_index()
