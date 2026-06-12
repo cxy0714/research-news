@@ -540,8 +540,6 @@
   7/10 [daily]
 - [A Likelihood Ratio Testing Approach for Interval-Censored Data](deep_reads/2026-06-12-2606.11439.md)  
   6/10 [daily]
-- [Bayesian Triangulation Splines: Spatial Adaptation on Irregular Domains](deep_reads/2026-06-12-2606.12296.md)  
-  6/10 [daily]
 - [Nonparametric Riemannian Empirical Bayes, and Denoising Measurements on Manifolds](deep_reads/2026-06-10-2606.11183.md)  
   8/10 [daily]
 - [Distributionally Robust PCA with Data-Adaptive Wasserstein Geometry](deep_reads/2026-06-10-2606.10463.md)  
@@ -824,10 +822,10 @@
 
 - [Pivotal and identification-robust nonparametric inference in linear IV models](deep_reads/2026-06-12-2606.12185.md)  
   9/10 [daily]
-- [Estimating the local false discovery rate under an unknown symmetric null](deep_reads/2026-06-12-2606.11548.md)  
-  7/10 [daily]
 - [Testing axial symmetry in multivariate location-scale linear regression](deep_reads/2026-06-12-2606.11933.md)  
   7/10 [daily]
+- [Estimating the local false discovery rate under an unknown symmetric null](deep_reads/2026-06-12-2606.11548.md)  
+  6/10 [daily]
 - [Two-Sample Homogeneity Test via Entropic Optimal Transport](deep_reads/2026-06-10-2606.10767.md)  
   8/10 [daily]
 - [A Structural Separation Between Chernoff and Convex-Order Optimality in Robust Testing](deep_reads/2026-06-10-2606.10977.md)  
@@ -1224,7 +1222,7 @@
 - [What is the Long-Term Value of Reliability?](deep_reads/2026-06-12-2606.11526.md)  
   8/10 [daily]
 - [Threshold Regression for Fixed-T Panel Data with Interactive Fixed Effects](deep_reads/2026-06-12-2606.12184.md)  
-  8/10 [daily]
+  7/10 [daily]
 - [Assumption-Lean Shrinkage and Model Averaging for Spatial Parameters](deep_reads/2026-06-12-2606.12324.md)  
   6/10 [daily]
 - [Panel Data Estimation of Individual Demand in Markets with Many Consumers](deep_reads/2026-06-10-2606.11047.md)  

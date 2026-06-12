@@ -16,7 +16,7 @@
 
 [→ 查看完整报告](daily/2026-06-12.md)
 
-### 精读论文（16 篇）
+### 精读论文（15 篇）
 
 - [Bracketing Relationships of Weighted Average Treatment Effects](deep_reads/2026-06-12-2606.11715.md)  
   `因果推断` · 相关性 9/10
@@ -28,24 +28,22 @@
   `非参数 / 半参数` · 相关性 8/10
 - [What is the Long-Term Value of Reliability?](deep_reads/2026-06-12-2606.11526.md)  
   `经济理论 / 应用` · 相关性 8/10
-- [Threshold Regression for Fixed-T Panel Data with Interactive Fixed Effects](deep_reads/2026-06-12-2606.12184.md)  
-  `经济理论 / 应用` · 相关性 8/10
 - [Bayesian Causal Machine Learning for Cure Models](deep_reads/2026-06-12-2606.11405.md)  
   `因果推断` · 相关性 7/10
-- [Estimating the local false discovery rate under an unknown symmetric null](deep_reads/2026-06-12-2606.11548.md)  
-  `数理统计 / 假设检验` · 相关性 7/10
 - [ShrinkageTrees: An R Package for Bayesian Tree Ensembles for Survival Analysis and Causal Inference](deep_reads/2026-06-12-2606.12317.md)  
   `统计计算 / 算法` · 相关性 7/10
 - [Posterior consistency of P\'olya trees for deconvolution under the linear model](deep_reads/2026-06-12-2606.11406.md)  
   `非参数 / 半参数` · 相关性 7/10
 - [Testing axial symmetry in multivariate location-scale linear regression](deep_reads/2026-06-12-2606.11933.md)  
   `数理统计 / 假设检验` · 相关性 7/10
+- [Threshold Regression for Fixed-T Panel Data with Interactive Fixed Effects](deep_reads/2026-06-12-2606.12184.md)  
+  `经济理论 / 应用` · 相关性 7/10
 - [Time Series Analysis in Machine Learning](deep_reads/2026-06-12-2606.11746.md)  
   `天体统计` · 相关性 7/10
 - [A Likelihood Ratio Testing Approach for Interval-Censored Data](deep_reads/2026-06-12-2606.11439.md)  
   `非参数 / 半参数` · 相关性 6/10
-- [Bayesian Triangulation Splines: Spatial Adaptation on Irregular Domains](deep_reads/2026-06-12-2606.12296.md)  
-  `非参数 / 半参数` · 相关性 6/10
+- [Estimating the local false discovery rate under an unknown symmetric null](deep_reads/2026-06-12-2606.11548.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
 - [Assumption-Lean Shrinkage and Model Averaging for Spatial Parameters](deep_reads/2026-06-12-2606.12324.md)  
   `经济理论 / 应用` · 相关性 6/10
 - [Machine Learning for Event Reconstruction in Imaging Atmospheric Cherenkov Telescopes](deep_reads/2026-06-12-2606.11741.md)  
