@@ -4,6 +4,14 @@
 
 ### Daily
 
+- [Semiparametric Local Projections](deep_reads/2026-06-13-2606.13519.md)  
+  9/10 [daily]
+- [Causal invariance in graphical models with latent variables](deep_reads/2026-06-13-2606.13281.md)  
+  8/10 [daily]
+- [Semiparametric Bayesian inference for causal mediation in cluster randomized trials](deep_reads/2026-06-13-2606.13305.md)  
+  8/10 [daily]
+- [When Representative Samples Produce Worse Outcomes: Scale-up Decisions and Testing in Small-Budget RCTs](deep_reads/2026-06-13-2606.13531.md)  
+  6/10 [daily]
 - [Bracketing Relationships of Weighted Average Treatment Effects](deep_reads/2026-06-12-2606.11715.md)  
   9/10 [daily]
 - [Bayesian Causal Machine Learning for Cure Models](deep_reads/2026-06-12-2606.11405.md)  
@@ -384,6 +392,8 @@
 
 ### Daily
 
+- [Phase transition of Schott's statistic for high-dimensional heavy-tailed data](deep_reads/2026-06-13-2606.12943.md)  
+  8/10 [daily]
 - [Geometric bias in eigenspace perturbation under random heterogeneous noise](deep_reads/2026-06-12-2606.11263.md)  
   9/10 [daily]
 - [Fixed-Threshold One-Bit Toeplitz Covariance Estimation under Sparse-Ruler Sampling](deep_reads/2026-06-10-2606.11110.md)  
@@ -534,6 +544,14 @@
 
 ### Daily
 
+- [Volterra--Wiener--Kunchenko Orthogonalization: From Wiener--Hermite to Distribution-Matched Volterra Bases](deep_reads/2026-06-13-2606.12884.md)  
+  8/10 [daily]
+- [Estimating Semiparametric and Nonparametric Fixed Effects Panel Data Models with mgcv](deep_reads/2026-06-13-2606.12739.md)  
+  8/10 [daily]
+- [Consistency of variational approximations under bounded Kullback--Leibler divergence](deep_reads/2026-06-13-2606.13230.md)  
+  7/10 [daily]
+- [Asymptotic regimes for maximum likelihood estimation in the Ewens--Pitman model: When the strength parameter matters](deep_reads/2026-06-13-2606.13554.md)  
+  6/10 [daily]
 - [Second-Order Least Squares as a Special Case of the Polynomial Maximization Method](deep_reads/2026-06-12-2606.11421.md)  
   8/10 [daily]
 - [Posterior consistency of P\'olya trees for deconvolution under the linear model](deep_reads/2026-06-12-2606.11406.md)  
@@ -1026,6 +1044,8 @@
 
 ### Daily
 
+- [Computationally tractable robust differentially private mean estimation](deep_reads/2026-06-13-2606.12654.md)  
+  7/10 [daily]
 - [ShrinkageTrees: An R Package for Bayesian Tree Ensembles for Survival Analysis and Causal Inference](deep_reads/2026-06-12-2606.12317.md)  
   7/10 [daily]
 - [Data compression for fast dimension reduction and clustering of high-dimensional discrete data](deep_reads/2026-06-10-2606.10593.md)  
@@ -1167,6 +1187,8 @@
 
 ### Daily
 
+- [Artifact-Conditioned Interval Diagnostics for Flow-Matching Neural Posterior Estimation in a Controlled Gravitational-Wave Benchmark](deep_reads/2026-06-13-2606.12496.md)  
+  7/10 [daily]
 - [Time Series Analysis in Machine Learning](deep_reads/2026-06-12-2606.11746.md)  
   8/10 [daily]
 - [Wavelet-Based Extraction of Transient Noise in Gravitational-Wave Interferometers using a Saliency-Guided Learning Architecture](deep_reads/2026-06-12-2606.11595.md)  

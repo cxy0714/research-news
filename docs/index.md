@@ -10,50 +10,36 @@
 - **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-06-12
+## 今日 · 2026-06-13
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-06-12.md)
+[→ 查看完整报告](daily/2026-06-13.md)
 
-### 精读论文（18 篇）
+### 精读论文（11 篇）
 
-- [Bracketing Relationships of Weighted Average Treatment Effects](deep_reads/2026-06-12-2606.11715.md)  
+- [Semiparametric Local Projections](deep_reads/2026-06-13-2606.13519.md)  
   `因果推断` · 相关性 9/10
-- [Geometric bias in eigenspace perturbation under random heterogeneous noise](deep_reads/2026-06-12-2606.11263.md)  
-  `高维统计 / 随机矩阵` · 相关性 9/10
-- [Pivotal and identification-robust nonparametric inference in linear IV models](deep_reads/2026-06-12-2606.12185.md)  
-  `数理统计 / 假设检验` · 相关性 9/10
-- [Second-Order Least Squares as a Special Case of the Polynomial Maximization Method](deep_reads/2026-06-12-2606.11421.md)  
+- [Volterra--Wiener--Kunchenko Orthogonalization: From Wiener--Hermite to Distribution-Matched Volterra Bases](deep_reads/2026-06-13-2606.12884.md)  
   `非参数 / 半参数` · 相关性 8/10
-- [What is the Long-Term Value of Reliability?](deep_reads/2026-06-12-2606.11526.md)  
-  `经济理论 / 应用` · 相关性 8/10
-- [Time Series Analysis in Machine Learning](deep_reads/2026-06-12-2606.11746.md)  
-  `天体统计` · 相关性 8/10
-- [Bayesian Causal Machine Learning for Cure Models](deep_reads/2026-06-12-2606.11405.md)  
-  `因果推断` · 相关性 7/10
-- [ShrinkageTrees: An R Package for Bayesian Tree Ensembles for Survival Analysis and Causal Inference](deep_reads/2026-06-12-2606.12317.md)  
+- [Causal invariance in graphical models with latent variables](deep_reads/2026-06-13-2606.13281.md)  
+  `因果推断` · 相关性 8/10
+- [Semiparametric Bayesian inference for causal mediation in cluster randomized trials](deep_reads/2026-06-13-2606.13305.md)  
+  `因果推断` · 相关性 8/10
+- [Phase transition of Schott's statistic for high-dimensional heavy-tailed data](deep_reads/2026-06-13-2606.12943.md)  
+  `高维统计 / 随机矩阵` · 相关性 8/10
+- [Estimating Semiparametric and Nonparametric Fixed Effects Panel Data Models with mgcv](deep_reads/2026-06-13-2606.12739.md)  
+  `非参数 / 半参数` · 相关性 8/10
+- [Computationally tractable robust differentially private mean estimation](deep_reads/2026-06-13-2606.12654.md)  
   `统计计算 / 算法` · 相关性 7/10
-- [Posterior consistency of P\'olya trees for deconvolution under the linear model](deep_reads/2026-06-12-2606.11406.md)  
+- [Consistency of variational approximations under bounded Kullback--Leibler divergence](deep_reads/2026-06-13-2606.13230.md)  
   `非参数 / 半参数` · 相关性 7/10
-- [Threshold Regression for Fixed-T Panel Data with Interactive Fixed Effects](deep_reads/2026-06-12-2606.12184.md)  
-  `经济理论 / 应用` · 相关性 7/10
-- [Assumption-Lean Shrinkage and Model Averaging for Spatial Parameters](deep_reads/2026-06-12-2606.12324.md)  
-  `经济理论 / 应用` · 相关性 7/10
-- [Wavelet-Based Extraction of Transient Noise in Gravitational-Wave Interferometers using a Saliency-Guided Learning Architecture](deep_reads/2026-06-12-2606.11595.md)  
+- [Artifact-Conditioned Interval Diagnostics for Flow-Matching Neural Posterior Estimation in a Controlled Gravitational-Wave Benchmark](deep_reads/2026-06-13-2606.12496.md)  
   `天体统计` · 相关性 7/10
-- [Machine Learning for Event Reconstruction in Imaging Atmospheric Cherenkov Telescopes](deep_reads/2026-06-12-2606.11741.md)  
-  `天体统计` · 相关性 7/10
-- [Estimating the local false discovery rate under an unknown symmetric null](deep_reads/2026-06-12-2606.11548.md)  
-  `数理统计 / 假设检验` · 相关性 6/10
-- [Bayesian Triangulation Splines: Spatial Adaptation on Irregular Domains](deep_reads/2026-06-12-2606.12296.md)  
+- [When Representative Samples Produce Worse Outcomes: Scale-up Decisions and Testing in Small-Budget RCTs](deep_reads/2026-06-13-2606.13531.md)  
+  `因果推断` · 相关性 6/10
+- [Asymptotic regimes for maximum likelihood estimation in the Ewens--Pitman model: When the strength parameter matters](deep_reads/2026-06-13-2606.13554.md)  
   `非参数 / 半参数` · 相关性 6/10
-- [Testing axial symmetry in multivariate location-scale linear regression](deep_reads/2026-06-12-2606.11933.md)  
-  `数理统计 / 假设检验` · 相关性 6/10
-- [Recalibration of SDSS photometric zero-points based on the InfraRed Flux Method temperature scale](deep_reads/2026-06-12-2606.11587.md)  
-  `天体统计` · 相关性 6/10
-- [Calibration of an Analog-to-Digital Conversion Nonlinearity in JWST/NIRISS](deep_reads/2026-06-12-2606.11983.md)  
-  `天体统计` · 相关性 6/10
 
 ## 收藏
 
@@ -61,11 +47,11 @@
 
 ## 本周每日报告
 
+- [2026-06-12](daily/2026-06-12.md)
 - [2026-06-11](daily/2026-06-11.md)
 - [2026-06-10](daily/2026-06-10.md)
 - [2026-06-09](daily/2026-06-09.md)
 - [2026-06-08](daily/2026-06-08.md)
-- [2026-06-05](daily/2026-06-05.md)
 
 
 ---
