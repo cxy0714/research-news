@@ -546,9 +546,9 @@
 
 - [Volterra--Wiener--Kunchenko Orthogonalization: From Wiener--Hermite to Distribution-Matched Volterra Bases](deep_reads/2026-06-13-2606.12884.md)  
   8/10 [daily]
-- [Estimating Semiparametric and Nonparametric Fixed Effects Panel Data Models with mgcv](deep_reads/2026-06-13-2606.12739.md)  
-  8/10 [daily]
 - [Consistency of variational approximations under bounded Kullback--Leibler divergence](deep_reads/2026-06-13-2606.13230.md)  
+  7/10 [daily]
+- [Estimating Semiparametric and Nonparametric Fixed Effects Panel Data Models with mgcv](deep_reads/2026-06-13-2606.12739.md)  
   7/10 [daily]
 - [Asymptotic regimes for maximum likelihood estimation in the Ewens--Pitman model: When the strength parameter matters](deep_reads/2026-06-13-2606.13554.md)  
   6/10 [daily]
@@ -1189,6 +1189,8 @@
 
 - [Artifact-Conditioned Interval Diagnostics for Flow-Matching Neural Posterior Estimation in a Controlled Gravitational-Wave Benchmark](deep_reads/2026-06-13-2606.12496.md)  
   7/10 [daily]
+- [Feasibility of up-the-ramp sampling under variable sky for ground-based spectrographs](deep_reads/2026-06-13-2606.13600.md)  
+  6/10 [daily]
 - [Time Series Analysis in Machine Learning](deep_reads/2026-06-12-2606.11746.md)  
   8/10 [daily]
 - [Wavelet-Based Extraction of Transient Noise in Gravitational-Wave Interferometers using a Saliency-Guided Learning Architecture](deep_reads/2026-06-12-2606.11595.md)  
