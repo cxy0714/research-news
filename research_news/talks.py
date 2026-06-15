@@ -156,17 +156,30 @@ def ingest(
     *,
     model_size: str = "large-v3",
     prefer_subs: bool = False,
+    subs_file: str | None = None,
     force: bool = False,
 ) -> Path | None:
     """Produce data/talks/<id>.txt for one talk. Returns the path (or None on
-    failure). Needs the [asr] extra + ffmpeg + network — run locally."""
+    failure).
+
+    Source of the transcript, in priority order:
+      - ``subs_file``: an existing .srt/.vtt you made with any tool (whisper.cpp,
+        etc.) — no download, no ASR, fully offline;
+      - ``prefer_subs``: the video's own (auto)captions, if present — no ASR;
+      - otherwise: download audio + faster-whisper ASR (needs the [asr] extra +
+        ffmpeg). On a 4 GB GPU pass model_size="distil-large-v3" or "small".
+    """
     dest = transcript_path(talk.id)
     if dest.exists() and not force:
         log.info("transcript already present: %s (use --force to redo)", dest)
         return dest
 
     segments: list[dict] | None = None
-    if prefer_subs:
+    if subs_file:
+        vtt = Path(subs_file).read_text(encoding="utf-8", errors="ignore")
+        segments = tr.parse_vtt(vtt)
+        log.info("using subtitle file %s for %s (%d cues)", subs_file, talk.id, len(segments))
+    elif prefer_subs:
         try:
             vtt = tr.fetch_subtitles(talk.url, AUDIO_DIR, talk.id, lang=talk.language or "en")
             if vtt:
@@ -499,21 +512,26 @@ def run_ingest(
     talk_ids: list[str] | None = None,
     model_size: str = "large-v3",
     prefer_subs: bool = False,
+    subs_file: str | None = None,
     force: bool = False,
     dry_run: bool = False,
 ) -> list[Path]:
     asr_default, talks = load_talks()
     talks = _selected(talks, talk_ids)
+    if subs_file and len(talks) != 1:
+        log.error("--subs-file expects exactly one --id (got %d talks)", len(talks))
+        return []
     if dry_run:
         for t in talks:
             status = "has transcript" if transcript_path(t.id).exists() else "needs transcript"
             log.info("  %s — %s (%s)", t.id, t.title or t.url, status)
         return []
     out: list[Path] = []
-    for t in talks:
+    for i, t in enumerate(talks, 1):
+        log.info("ingest %d/%d: %s", i, len(talks), t.id)
         try:
             p = ingest(t, asr_default, model_size=model_size,
-                       prefer_subs=prefer_subs, force=force)
+                       prefer_subs=prefer_subs, subs_file=subs_file, force=force)
             if p:
                 out.append(p)
         except Exception as e:  # noqa: BLE001
@@ -641,9 +659,14 @@ def main() -> None:
     p_ing = sub.add_parser("ingest", help="download + transcribe (local; needs [asr] extra + ffmpeg)")
     p_ing.add_argument("--id", action="append", default=[], help="talk id (repeatable); omit with --all")
     p_ing.add_argument("--all", action="store_true", help="ingest every talk missing a transcript")
-    p_ing.add_argument("--model-size", default="large-v3", help="faster-whisper model (default large-v3)")
+    p_ing.add_argument("--model-size", default=os.environ.get("WHISPER_MODEL", "large-v3"),
+                       help="faster-whisper model (default large-v3; on a 4GB GPU use "
+                            "distil-large-v3 or small). Override default via $WHISPER_MODEL")
     p_ing.add_argument("--prefer-subs", action="store_true",
-                       help="use the video's existing captions if present, skip ASR")
+                       help="use the video's existing (auto)captions if present, skip ASR")
+    p_ing.add_argument("--subs-file",
+                       help="ingest an existing .srt/.vtt (e.g. from whisper.cpp) instead of "
+                            "running ASR; needs a single --id")
     p_ing.add_argument("--force", action="store_true", help="re-transcribe even if a transcript exists")
     p_ing.add_argument("--dry-run", action="store_true", help="list what would be ingested")
 
@@ -701,7 +724,8 @@ def main() -> None:
 
     if args.cmd == "ingest":
         paths = run_ingest(talk_ids=ids, model_size=args.model_size,
-                           prefer_subs=args.prefer_subs, force=args.force, dry_run=args.dry_run)
+                           prefer_subs=args.prefer_subs, subs_file=args.subs_file,
+                           force=args.force, dry_run=args.dry_run)
         print(f"ingested {len(paths)} transcript(s)")
     elif args.cmd == "read":
         paths = run_read(talk_ids=ids, model=args.model, read_papers=args.read_papers,

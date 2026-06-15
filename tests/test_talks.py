@@ -214,6 +214,26 @@ def test_update_index_dedups_and_writes_archive(tmp_path, monkeypatch):
     assert "(talks/a.md)" in archive
 
 
+def test_ingest_from_subs_file(tmp_path, monkeypatch):
+    # Offline path: feed an existing .srt (any tool's output) → cleaned transcript,
+    # no download, no ASR.
+    monkeypatch.setattr(talks, "TRANSCRIPTS_DIR", tmp_path)
+    srt = tmp_path / "x.srt"
+    srt.write_text(
+        "1\n00:00:01,000 --> 00:00:03,000\nwe study causal inference\n\n"
+        "2\n00:00:03,000 --> 00:00:05,000\nwe study causal inference\n\n"   # dup → collapsed
+        "3\n00:00:05,000 --> 00:00:07,000\nand double robustness\n",
+        encoding="utf-8",
+    )
+    t = talks.Talk(id="demo", url="https://youtu.be/x")
+    out = talks.ingest(t, subs_file=str(srt))
+    assert out == tmp_path / "demo.txt"
+    body = out.read_text(encoding="utf-8")
+    assert "[0:00:01] we study causal inference" in body
+    assert "[0:00:05] and double robustness" in body
+    assert body.count("we study causal inference") == 1   # consecutive dup collapsed
+
+
 def test_build_user_message_caps_and_includes(monkeypatch):
     monkeypatch.setattr(talks, "MAX_TRANSCRIPT_CHARS", 20)
     t = talks.Talk(id="x", url="u", title="T", papers=["2606.11421"])

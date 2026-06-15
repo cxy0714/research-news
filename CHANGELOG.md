@@ -46,8 +46,10 @@
 - **讲座精读管道 `talks`**：把会议 / seminar 录像（如 OCIS、INI workshop）读成
   deep-read 风格的结构化中文笔记，是论文精读的「口头报告」版。手挑视频、不打分不过滤。
   两步：① `talks ingest`（本地：yt-dlp 下音频 → faster-whisper 转写 →
-  `data/talks/<id>.txt`，带 `asr_prompt` 注入领域词偏置识别；`--prefer-subs` 可直接用
-  视频已有字幕跳过 ASR）；② `talks read`（转写 → 讲座专用 prompt `TALK_READ_SYSTEM` →
+  `data/talks/<id>.txt`，带 `asr_prompt` 注入领域词偏置识别）。转写来源三选一：默认 ASR、
+  `--prefer-subs`（下 YouTube 已有字幕、免 GPU）、`--subs-file foo.srt`（喂入 whisper.cpp 等任意
+  工具的字幕、纯离线）。小显存 GPU 用 `--model-size distil-large-v3`/`small` 或 `$WHISPER_MODEL`；
+  `ingest --all` 可断点续传，适合全量批跑。② `talks read`（转写 → 讲座专用 prompt `TALK_READ_SYSTEM` →
   `docs/talks/<date>-<id>.md`）。讲座可声明它对应的 arXiv/DOI 论文，自动**交叉链接**到这些
   论文的精读页；`read --read-papers` 还会把尚未精读的 arXiv 论文**自动拉进现有论文精读
   队列**。多讲者视频可在 config 里给 `segments`（时间点边界）切成「每讲者一篇」。新栏目

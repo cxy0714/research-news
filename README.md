@@ -335,8 +335,32 @@ python -m research_news.talks read --all                   # 所有有转写、�
 python -m research_news.talks read --id <id> --read-papers  # 顺带精读它点名的 arXiv 论文
 ```
 
-- **GPU / CPU**：默认 `large-v3`，GPU 上一个多小时的报告大概十几分钟；没 GPU 用
-  `WHISPER_DEVICE=cpu WHISPER_COMPUTE_TYPE=int8` + `--model-size medium` 也能跑，只是慢。
+- **转写模型不麻烦**：`pip install -e ".[asr]"` 装好 `faster-whisper`，模型**首次运行自动下载**，
+  不用手动找文件。默认 `large-v3`（约 5GB 显存）。
+- **小显存 GPU（如 GTX 1650 / 4GB）**：`large-v3` 放不下，用 `distil-large-v3`（英文质量接近、更快）
+  或 `small`，配 int8：
+  ```bash
+  # 一次设好，之后所有 ingest 都用它
+  set WHISPER_MODEL=distil-large-v3        # Windows；或 export ...（Linux/macOS）
+  set WHISPER_COMPUTE_TYPE=int8
+  # GPU 跑 faster-whisper 需要 CUDA/cuDNN 库；最省事是装进 venv：
+  pip install nvidia-cublas-cu12 nvidia-cudnn-cu12
+  python -m research_news.talks ingest --id <id>   # --model-size 也可临时覆盖
+  ```
+  实在配不动 CUDA 就 `set WHISPER_DEVICE=cpu`（int8）纯 CPU 跑，慢但能用。
+- **不想跑 ASR？两条更省事的路**：① `--prefer-subs` 直接下 YouTube 已有的（自动）字幕，**完全
+  不用 GPU**——OCIS 多数讲座年头够久、早有自动字幕，批量转写这条最快；② `--subs-file foo.srt`
+  喂入你用**任何工具**（whisper.cpp 等你本地那个轻量的）生成的 `.srt`/`.vtt`，我只做清洗入库。
+- **全量转写（194 场）**：`ingest --all` 一条命令搞定，**可断点续传**（已转写的自动跳过、单场
+  失败不影响其它），适合挂后台跑几天。1650 上 `distil-large-v3` 大致 3–8× 实时，194h 音频 ≈
+  一两天 GPU 时间。
+  ```bash
+  python -m research_news.talks ingest --all                 # ASR 全转（断了重跑即续）
+  python -m research_news.talks ingest --all --prefer-subs   # 或先用 YouTube 字幕快速铺一遍
+  ```
+  > ⚠️ **转写 vs 精读的成本不对称**：转写只花本地 GPU 时间（不花钱）；但 `read --all` 是 194 次
+  > LLM 长调用（deepseek-reasoner，每篇上万 token 输出），**很费 token**。建议转写可以全转，
+  > **精读挑着来**（先把 Robins / Rotnitzky / Tchetgen / 半参数效率那条线读了）。
 - **质量坑**（和论文精读一致的原则）：自动转写对人名 / 术语 / 公式 / 具体的率与界**容易听错**，
   讲座 prompt 已被要求把这些当线索、并对拿不准的地方标注「待核对」；每页页头也有这条提醒。
   `asr_prompt`（config 里按讲座写，叠加全局 `asr_prompt_default`）喂领域词能明显改善识别。
