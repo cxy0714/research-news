@@ -32,6 +32,15 @@
   / `ARXIV_FETCH_ATTEMPTS` 调。
 
 ### Added
+- **OCIS 目录批量导入 `talks import-ocis`**：把
+  [Online Causal Inference Seminar](https://sites.google.com/view/ocis/past-talks)
+  的历史讲座（按季分页，每期多带 video + arXiv + slides）解析成讲座目录，自动写进
+  `config/talks.ocis.yaml`（与手工 `talks.yaml` 并列、管道一起读，同 id 手工优先），arXiv
+  落到每场 `papers:` 上、出页面时交叉链接到论文精读。解析 **DOM 无关**：直接正则抓页面里的
+  youtube / arxiv / slides 链接、自动解开 Google `url?q=` 跳转包装，再让 LLM 把链接和讲者/
+  题目对应。`--season spring-2024` / `--all-seasons`（2020 至今，404 跳过）/ `--html`（离线解析
+  另存的页面）/ `--dry-run`（只数链接）/ `--catalog-only`。产出 `data/ocis_catalog.json` 全目录。
+  Google Sites 屏蔽服务器抓取，需本地网络，转写步骤亦同。
 - **讲座精读管道 `talks`**：把会议 / seminar 录像（如 OCIS、INI workshop）读成
   deep-read 风格的结构化中文笔记，是论文精读的「口头报告」版。手挑视频、不打分不过滤。
   两步：① `talks ingest`（本地：yt-dlp 下音频 → faster-whisper 转写 →

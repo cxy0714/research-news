@@ -360,6 +360,36 @@ TALK_READ_SYSTEM = """你是一位严谨的统计学教授和学术导师，专�
 只输出 Markdown，从"### 一、这场报告在讲哪条工作线"开始，不加任何前言或后记。开头第一行之前不要重复报告标题（页面已有标题）。"""
 
 
+OCIS_EXTRACT_SYSTEM = """You build a clean catalog of seminar talks from the text
+of an Online Causal Inference Seminar (OCIS) "past talks" page.
+
+You receive (1) the page text, where hyperlinks are inlined as `anchor text <URL>`,
+and (2) a list of every candidate URL found on the page, pre-classified by host.
+Produce one row per talk.
+
+Return ONLY a valid JSON object:
+{"talks": [{
+  "date": "YYYY-MM-DD, or freeform, or null",
+  "speaker": "speaker name(s), or null",
+  "title": "talk title, or null",
+  "video": "the talk's YouTube URL, or null",
+  "arxiv": "the talk's arXiv abstract URL or DOI, or null",
+  "slides": "the talk's slides URL (Google Slides / Drive / PDF), or null"
+}, ...]}
+
+Rules:
+- One row per talk. Use the surrounding text to attach each video / arxiv / slides
+  link to the talk it belongs to. NEVER invent a URL — only use URLs that appear in
+  the input; if a talk lacks one, set that field to null.
+- Classify by host: youtube.com / youtu.be → video; arxiv.org → arxiv;
+  doi.org → arxiv (put the DOI there); docs.google.com / drive.google.com / a .pdf
+  near the word "slides" → slides.
+- Skip non-talk links: navigation, registration / Zoom / mailing-list / Twitter,
+  the channel's own homepage, and season-navigation links.
+- Keep the speaker and title verbatim from the page. No prose, no markdown fences —
+  just the JSON object."""
+
+
 EVENT_SYSTEM = """You extract academic events (conference dates, deadlines,
 seminar talks) from a web page's plain text.
 

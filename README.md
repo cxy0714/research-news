@@ -355,6 +355,37 @@ python -m research_news.talks read --id <id> --read-papers  # 顺带精读它点
 - `data/talks/<id>.txt` — 清洗后的转写稿（带时间戳，纳入 git，CI 可据此重生成笔记）；
   音频落 `data/talks/audio/`，已 `.gitignore`、不上传。
 
+### 批量导入 OCIS 历史讲座目录
+
+**OCIS**（[Online Causal Inference Seminar](https://sites.google.com/view/ocis/past-talks)）
+的历史讲座按季分页，每期基本都带 **video + arXiv + slides**——是个高质量、对口的因果推断
+讲座库。`import-ocis` 把这些页面解析成讲座目录，**自动写进 `config/talks.ocis.yaml`**
+（与手工的 `talks.yaml` 并列、管道一起读；同 id 以手工文件为准），arXiv 链接落到每场的
+`papers:` 上、出页面时自动交叉链接到论文精读。
+
+```bash
+# 单季 / 多季 / 全部（Google Sites 屏蔽服务器抓取，需本地网络能开它的页面）
+python -m research_news.talks import-ocis --season spring-2024
+python -m research_news.talks import-ocis --season spring-2024 --season fall-2023
+python -m research_news.talks import-ocis --all-seasons          # 2020 至今，404 的季自动跳过
+
+# 先干跑：只抓页面、数出每页有多少 video/arxiv/slides 链接，不调 LLM、不写盘
+python -m research_news.talks import-ocis --season spring-2024 --dry-run
+
+# 离线：浏览器里把某季页面另存为 HTML，直接解析（连网都不用，只需 API key 做关联）
+python -m research_news.talks import-ocis --html spring-2024.html
+
+# 导完照常挑着转写 + 精读
+python -m research_news.talks list
+python -m research_news.talks ingest --id ocis-2024-04-16-james-robins
+python -m research_news.talks read   --id ocis-2024-04-16-james-robins
+```
+
+解析是 DOM 无关的：直接在页面字节里正则抓 youtube / arxiv / slides 链接（并自动解开
+Google 的 `url?q=` 跳转包装），再让 LLM 把链接和「讲者 / 题目 / 日期」对上。产出
+`data/ocis_catalog.json`（完整目录，含 slides）+ `config/talks.ocis.yaml`（有 video 的可转写
+条目）。导入后建议核对一下首批条目——讲者 / 题目的对应靠 LLM，链接抓取是确定性的。
+
 ## 账户与收藏（网页端）
 
 站点是纯静态的（GitHub Pages，无后端），但通过把状态存进你 GitHub 账号下的一个
@@ -419,6 +450,7 @@ python -m research_news.shootout --source jmlr --n 10 `
 | `config/authors.yaml` | 关注的作者列表（默认未启用） |
 | `config/journals.yaml` | 期刊列表 + ISSN |
 | `config/talks.yaml` | 讲座精读：要转写 + 精读的会议 / seminar 录像（URL + 讲者 + 对应论文 + ASR 偏置词） |
+| `config/talks.ocis.yaml` | `import-ocis` 自动生成的 OCIS 讲座条目，和 `talks.yaml` 一起被读（同 id 手工优先）；勿手改 |
 | `.env` | `SJTU_API_KEY` + 可选 model 覆盖；已 .gitignore |
 
 ## 定时（Windows 任务计划程序）
@@ -456,6 +488,7 @@ research_news/
     authors.py        # Semantic Scholar by author
     conferences.py    # 会议 / seminar 页面（事件预告，默认禁用）
     transcribe.py     # 讲座转写工具：yt-dlp 下音频 + faster-whisper ASR + VTT/转写清洗（[asr] extra）
+    ocis.py           # OCIS 历史讲座目录导入：抓 video/arxiv/slides 链接 + LLM 关联 → talks.ocis.yaml
   llm/
     prompts.py        # SCORE / RICH_SUMMARY / DEEP_READ / TOPICS 共享
     pipeline.py       # score_papers / summarize_paper
@@ -480,6 +513,7 @@ data/
   deep_reads_index.json  # 精读元数据索引
   talks/              # 讲座转写稿 <id>.txt（纳入 git）；audio/ 子目录为音频（.gitignore）
   talks_index.json    # 讲座元数据索引
+  ocis_catalog.json   # OCIS 导入的完整讲座目录（含 slides；import-ocis 生成）
   token_usage.json    # API token 用量记录
 logs/                 # 每日日志（.gitignore）
 ```
