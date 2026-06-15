@@ -310,6 +310,51 @@ python -m research_news.synthesize --group core --topic causal_inference  # 再�
 `docs/synthesis/<日期>-<范围>-<topic>.md`，并刷新存档页 `docs/all_synthesis.md`（站点导航
 「选题综合」）。不同范围（如 `all` / `core` / `AoS-JASA`）各自独立成页、不互相覆盖。
 
+## 讲座精读管道
+
+把会议 / seminar 录像（YouTube 上很多，如 **OCIS** Online Causal Inference Seminar 的历史
+录像、**INI** workshop 录像）读成 deep-read 风格的结构化中文笔记——论文精读的「口头报告」版。
+讲座是**手挑**的（写进 `config/talks.yaml`），所以没有评分 / 门槛，选了就读。
+
+两步走，**转写本地跑、精读哪都能跑**（转写要访问 YouTube + ffmpeg + 最好有 GPU，所以不进 CI）：
+
+```bash
+pip install -e ".[asr]"     # yt-dlp + faster-whisper（另需 ffmpeg 在 PATH）
+
+# 看有哪些讲座、各自转写 / 精读到哪一步了
+python -m research_news.talks list
+
+# ① 转写：下音频 → faster-whisper → data/talks/<id>.txt（带 asr_prompt 偏置领域词/人名）
+python -m research_news.talks ingest --id robins-cambridge-keynote-2026
+python -m research_news.talks ingest --all                 # 所有还没转写的
+python -m research_news.talks ingest --id <id> --prefer-subs   # 视频已有字幕就直接用，跳过 ASR
+
+# ② 精读：转写 → 讲座专用 prompt → docs/talks/<date>-<id>.md（+ 存档 + 首页入口）
+python -m research_news.talks read --id robins-cambridge-keynote-2026
+python -m research_news.talks read --all                   # 所有有转写、还没出页面的
+python -m research_news.talks read --id <id> --read-papers  # 顺带精读它点名的 arXiv 论文
+```
+
+- **GPU / CPU**：默认 `large-v3`，GPU 上一个多小时的报告大概十几分钟；没 GPU 用
+  `WHISPER_DEVICE=cpu WHISPER_COMPUTE_TYPE=int8` + `--model-size medium` 也能跑，只是慢。
+- **质量坑**（和论文精读一致的原则）：自动转写对人名 / 术语 / 公式 / 具体的率与界**容易听错**，
+  讲座 prompt 已被要求把这些当线索、并对拿不准的地方标注「待核对」；每页页头也有这条提醒。
+  `asr_prompt`（config 里按讲座写，叠加全局 `asr_prompt_default`）喂领域词能明显改善识别。
+- **对应论文**：每个讲座可在 config 里写 `papers: [arXiv id / DOI]`。出页面时这些论文会**交叉
+  链接**到它们的精读页（已精读的直接挂链接）；`read --read-papers` 会把还没精读的 arXiv 论文
+  **自动拉进现有论文精读队列**再链接回来。
+- **多讲者视频**：一个 1.5h 录像常是好几个 talk 连着。在 config 里给 `segments`（每段
+  `start` 时间点 + 可选 `speaker` / `title`，从节目单 / YouTube chapters 抄）就能按时间戳切成
+  **每讲者一篇**笔记；不填则整段读成一篇。
+
+输出：
+- `docs/talks/<date>-<id>.md` — 每场（或每讲者）一页，结构同精读：工作线背景 → 最小内核 →
+  报告主体（带 `[时间点]` 方便回看）→ 对应论文与开放问题。
+- `docs/all_talks.md` — 讲座存档（站点导航「讲座精读」），按来源（OCIS / INI / …）分组。
+- `data/talks_index.json` — 讲座元数据索引（首页「今日讲座」与存档页用）。
+- `data/talks/<id>.txt` — 清洗后的转写稿（带时间戳，纳入 git，CI 可据此重生成笔记）；
+  音频落 `data/talks/audio/`，已 `.gitignore`、不上传。
+
 ## 账户与收藏（网页端）
 
 站点是纯静态的（GitHub Pages，无后端），但通过把状态存进你 GitHub 账号下的一个
@@ -373,6 +418,7 @@ python -m research_news.shootout --source jmlr --n 10 `
 | `config/sources.yaml` | arxiv 抓哪些 category，是否启用会议 / authors 抓取 |
 | `config/authors.yaml` | 关注的作者列表（默认未启用） |
 | `config/journals.yaml` | 期刊列表 + ISSN |
+| `config/talks.yaml` | 讲座精读：要转写 + 精读的会议 / seminar 录像（URL + 讲者 + 对应论文 + ASR 偏置词） |
 | `.env` | `SJTU_API_KEY` + 可选 model 覆盖；已 .gitignore |
 
 ## 定时（Windows 任务计划程序）
@@ -394,6 +440,7 @@ python -m research_news.shootout --source jmlr --n 10 `
 research_news/
   daily.py            # arxiv 每日管道入口
   journals.py         # 期刊管道入口（含 --rerun 整期重跑）
+  talks.py            # 讲座精读管道：ingest（转写）+ read（LLM 精读）+ 独立页面 / 存档
   completeness.py     # 抓取完整性检查：权威 TOC ↔ 已抓 diff + 报缺 + 补抓
   deep_read.py        # PDF 精读：文本抽取 + LLM 精读 + 独立页面生成
   shootout.py         # prompt / 模型对照评估
@@ -407,7 +454,8 @@ research_news/
     euclid.py         # Project Euclid issue TOC（完整性检查权威源：出版方）
     openalex.py       # OpenAlex 按期列文章（完整性检查权威源：通用、跨库交叉验证）
     authors.py        # Semantic Scholar by author
-    conferences.py    # 会议 / seminar 页面（默认禁用）
+    conferences.py    # 会议 / seminar 页面（事件预告，默认禁用）
+    transcribe.py     # 讲座转写工具：yt-dlp 下音频 + faster-whisper ASR + VTT/转写清洗（[asr] extra）
   llm/
     prompts.py        # SCORE / RICH_SUMMARY / DEEP_READ / TOPICS 共享
     pipeline.py       # score_papers / summarize_paper
@@ -418,16 +466,20 @@ docs/
   daily/              # 每日速览（自动生成）
   journals/           # 期刊页，每期刊一页（自动生成）
   deep_reads/         # 精读页，每篇论文一页（自动生成）
+  talks/              # 讲座精读页，每场（或每讲者）一页（自动生成）
   shootout/           # 模型对比页（手动/脚本生成）
   index.md            # 首页（自动生成）
   all_daily.md        # 每日存档（自动生成）
   all_journals.md     # 期刊存档（自动生成）
   all_deep_reads.md   # 精读存档（自动生成）
+  all_talks.md        # 讲座精读存档（自动生成）
   all_shootout.md     # 测评存档（自动生成）
 data/
   highlights/         # 高相关论文 PDF（本地，.gitignore）
   highlights.json     # 高相关论文 manifest
   deep_reads_index.json  # 精读元数据索引
+  talks/              # 讲座转写稿 <id>.txt（纳入 git）；audio/ 子目录为音频（.gitignore）
+  talks_index.json    # 讲座元数据索引
   token_usage.json    # API token 用量记录
 logs/                 # 每日日志（.gitignore）
 ```

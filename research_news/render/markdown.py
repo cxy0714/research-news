@@ -258,6 +258,17 @@ def _parse_date_from_stem(stem: str) -> str | None:
     return m.group(1) if m else None
 
 
+def _load_talks_index(path: Path = Path("data/talks_index.json")) -> list[dict]:
+    """Talk pipeline index (data/talks_index.json), newest first. [] if absent."""
+    if not path.exists():
+        return []
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        return data if isinstance(data, list) else []
+    except Exception:
+        return []
+
+
 def _journal_short_from_stem(stem: str) -> str:
     """'2026-05-17-jmlr' → 'JMLR', '2026-05-17-j-econometrics' → best guess.
 
@@ -326,6 +337,7 @@ def update_index(
         reverse=True,
     ) if weekly_dir.exists() else []
     dr_entries = _load_dr_index()  # newest first from deep_reads_index.json
+    talk_entries = _load_talks_index()  # newest first from talks_index.json
 
     today_str = dailies[0].stem if dailies else ""
     week_cutoff = (date.fromisoformat(today_str) - timedelta(days=7)).isoformat() \
@@ -346,6 +358,10 @@ def update_index(
     lines.append(
         "- **[精读存档](all_deep_reads.md)** — 当日 / 当期高相关性论文的"
         "深入解读，含问题动机、核心方法、关键假设与结果。"
+    )
+    lines.append(
+        "- **[讲座精读](all_talks.md)** — 会议 / seminar 录像（如 OCIS、INI workshop）"
+        "转写后的结构化精读：工作线背景、最小内核、报告主体与对应论文链接。"
     )
     lines.append(
         "- **[期刊存档](all_journals.md)** — 季度抓取核心统计 / 计量 / ML 期刊的"
@@ -377,6 +393,14 @@ def update_index(
                     f"- [{e['title']}]({e['doc_path']})  \n"
                     f"  `{topic_label}` · 相关性 {e.get('score', 0):.0f}/10"
                 )
+            lines.append("")
+
+        today_talks = [e for e in talk_entries if (e.get("date") or "")[:10] == today_str]
+        if today_talks:
+            lines.append(f"### 今日讲座（{len(today_talks)} 篇）\n")
+            for e in today_talks:
+                sp = f" · {e['speaker']}" if e.get("speaker") else ""
+                lines.append(f"- [{e.get('title') or e['id']}]({e['doc_path']}){sp}")
             lines.append("")
 
     # ── 收藏 ─────────────────────────────────────────────────────────────────

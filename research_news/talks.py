@@ -1,0 +1,659 @@
+"""Conference talk / lecture pipeline.
+
+Turns a curated list of recorded talks (config/talks.yaml) into structured
+Chinese reading notes, the spoken-talk sibling of the paper deep-reads.
+
+Three steps, run from the CLI:
+
+    python -m research_news.talks list                     # status of every talk
+    python -m research_news.talks ingest --id <id>|--all   # video → data/talks/<id>.txt
+    python -m research_news.talks read   --id <id>|--all   # transcript → docs/talks/*.md
+
+`ingest` (download + ASR) needs the optional `[asr]` extra + ffmpeg + network and
+is meant to run **locally** (ideally on a GPU). `read` is pure text → LLM → render
+and runs anywhere the SJTU API is reachable, exactly like the rest of the pipeline.
+
+Self-contained: own index (data/talks_index.json) + archive page (docs/all_talks.md)
++ nav section. Talks are hand-picked, so there is no scoring / threshold gate. Each
+talk can name the arXiv ids / DOIs it is about; those are cross-linked to their
+deep-read pages, and `read --read-papers` auto-queues any that haven't been read.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import logging
+import os
+import re
+from datetime import date
+from pathlib import Path
+from typing import TYPE_CHECKING
+
+import yaml
+
+from .llm.prompts import TALK_READ_SYSTEM, TOPIC_LABELS_ZH, TOPICS
+from .models import Talk
+from .scrapers import transcribe as tr
+
+if TYPE_CHECKING:
+    from .llm.sjtu_client import SJTUClient
+    from .models import Paper
+
+log = logging.getLogger("research_news")
+
+TALKS_CONFIG = Path("config/talks.yaml")
+INTERESTS_CONFIG = Path("config/interests.yaml")
+DEEP_READS_INDEX = Path("data/deep_reads_index.json")
+
+DOCS_DIR = Path("docs")
+TALKS_DIR = DOCS_DIR / "talks"
+TALKS_INDEX = Path("data/talks_index.json")
+TRANSCRIPTS_DIR = Path("data/talks")
+AUDIO_DIR = TRANSCRIPTS_DIR / "audio"
+
+# Long structured read like a deep-read → default to the reasoning model.
+TALK_MODEL = os.environ.get("TALK_MODEL", os.environ.get("DEEP_READ_MODEL", "deepseek-reasoner"))
+# ~240k chars ≈ 60k tokens; a 1.5h talk transcript is well under this.
+MAX_TRANSCRIPT_CHARS = 240_000
+TALK_READ_MAX_TOKENS = 24_000
+
+HOMEPAGE_URL = "https://cxy0714.github.io/"
+REPO_URL = "https://github.com/cxy0714/research-news"
+
+_ARXIV_ID_RE = re.compile(r"^\d{4}\.\d{4,6}(v\d+)?$")
+
+
+def _slug(s: str) -> str:
+    return re.sub(r"[^A-Za-z0-9_.-]+", "_", s).strip("_") or "unknown"
+
+
+# ── config ────────────────────────────────────────────────────────────────────
+
+def load_talks(path: Path | None = None) -> tuple[str, list[Talk]]:
+    """Return (asr_prompt_default, [Talk, ...]) from config/talks.yaml."""
+    path = path or TALKS_CONFIG
+    if not path.exists():
+        log.warning("no talks config at %s", path)
+        return "", []
+    cfg = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    default_prompt = (cfg.get("asr_prompt_default") or "").strip()
+    talks: list[Talk] = []
+    for raw in cfg.get("talks", []) or []:
+        if not raw.get("id") or not raw.get("url"):
+            log.warning("skipping talk with missing id/url: %r", raw)
+            continue
+        topic = (raw.get("topic") or "").strip().lower() or None
+        if topic and topic not in TOPICS:
+            log.warning("talk %s: unknown topic %r → 'other'", raw["id"], topic)
+            topic = "other"
+        talks.append(Talk(
+            id=str(raw["id"]),
+            url=str(raw["url"]),
+            title=raw.get("title"),
+            speaker=raw.get("speaker"),
+            venue=raw.get("venue"),
+            date=str(raw["date"]) if raw.get("date") is not None else None,
+            papers=[str(p) for p in (raw.get("papers") or [])],
+            topic=topic,
+            asr_prompt=raw.get("asr_prompt"),
+            language=raw.get("language"),
+            segments=list(raw.get("segments") or []),
+        ))
+    return default_prompt, talks
+
+
+def transcript_path(talk_id: str) -> Path:
+    return TRANSCRIPTS_DIR / f"{_slug(talk_id)}.txt"
+
+
+def _asr_prompt(talk: Talk, default: str) -> str | None:
+    parts = [p.strip() for p in (default, talk.asr_prompt) if p and p.strip()]
+    return ", ".join(parts) or None
+
+
+# ── dates ─────────────────────────────────────────────────────────────────────
+
+def talk_date(talk: Talk) -> date:
+    """Best-effort calendar date for filename / sorting. YYYY-MM-DD or YYYY-MM
+    (→ first of month); anything else falls back to today."""
+    s = (talk.date or "").strip()
+    m = re.match(r"^(\d{4})-(\d{2})(?:-(\d{2}))?", s)
+    if m:
+        y, mo, d = int(m.group(1)), int(m.group(2)), int(m.group(3) or 1)
+        try:
+            return date(y, mo, d)
+        except ValueError:
+            pass
+    return date.today()
+
+
+# ── ingest (local: download + ASR) ────────────────────────────────────────────
+
+def ingest(
+    talk: Talk,
+    asr_default: str = "",
+    *,
+    model_size: str = "large-v3",
+    prefer_subs: bool = False,
+    force: bool = False,
+) -> Path | None:
+    """Produce data/talks/<id>.txt for one talk. Returns the path (or None on
+    failure). Needs the [asr] extra + ffmpeg + network — run locally."""
+    dest = transcript_path(talk.id)
+    if dest.exists() and not force:
+        log.info("transcript already present: %s (use --force to redo)", dest)
+        return dest
+
+    segments: list[dict] | None = None
+    if prefer_subs:
+        try:
+            vtt = tr.fetch_subtitles(talk.url, AUDIO_DIR, talk.id, lang=talk.language or "en")
+            if vtt:
+                segments = tr.parse_vtt(vtt)
+                log.info("using existing subtitles for %s (%d cues)", talk.id, len(segments))
+        except Exception as e:  # noqa: BLE001
+            log.warning("subtitle fetch failed for %s, falling back to ASR: %s", talk.id, e)
+
+    if not segments:
+        log.info("downloading audio for %s ...", talk.id)
+        audio = tr.download_audio(talk.url, AUDIO_DIR, talk.id)
+        log.info("transcribing %s (this can take a while) ...", audio.name)
+        segments = tr.transcribe_audio(
+            audio,
+            model_size=model_size,
+            initial_prompt=_asr_prompt(talk, asr_default),
+            language=talk.language,
+        )
+
+    text = tr.clean_transcript(tr.segments_to_text(segments))
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    dest.write_text(text + "\n", encoding="utf-8")
+    log.info("wrote transcript %s (%d chars)", dest, len(text))
+    return dest
+
+
+# ── cross-linking to paper deep-reads ─────────────────────────────────────────
+
+def _is_arxiv_id(pid: str) -> bool:
+    return bool(_ARXIV_ID_RE.match(pid.strip()))
+
+
+def _paper_url(pid: str) -> str:
+    pid = pid.strip()
+    if _is_arxiv_id(pid):
+        return f"https://arxiv.org/abs/{pid}"
+    if pid.lower().startswith("10."):
+        return f"https://doi.org/{pid}"
+    return pid
+
+
+def _load_deep_reads_index() -> list[dict]:
+    if not DEEP_READS_INDEX.exists():
+        return []
+    try:
+        data = json.loads(DEEP_READS_INDEX.read_text(encoding="utf-8"))
+        return data if isinstance(data, list) else []
+    except Exception:
+        return []
+
+
+def resolve_paper_links(talk: Talk) -> list[dict]:
+    """Map each of the talk's `papers` ids to {id, title, doc_path|None, url}.
+
+    doc_path is the deep-read page (relative to docs/) when one exists, else None.
+    """
+    by_id = {e.get("paper_id"): e for e in _load_deep_reads_index()}
+    out: list[dict] = []
+    for pid in talk.papers or []:
+        e = by_id.get(pid)
+        out.append({
+            "id": pid,
+            "title": e.get("title") if e else None,
+            "doc_path": e.get("doc_path") if e else None,
+            "url": _paper_url(pid),
+        })
+    return out
+
+
+def _paper_links_md(links: list[dict]) -> list[str]:
+    """Render the '## 相关论文' section for a talk page (talk pages live in
+    docs/talks/, so deep-read links are '../deep_reads/...')."""
+    if not links:
+        return []
+    lines = ["## 相关论文\n"]
+    for lk in links:
+        if lk["doc_path"]:
+            title = lk["title"] or lk["id"]
+            lines.append(f"- [{title}](../{lk['doc_path']}) · [原文]({lk['url']})")
+        else:
+            lines.append(
+                f"- [{lk['id']}]({lk['url']}) "
+                f"*（尚未精读 — `talks read --id … --read-papers` 可补）*"
+            )
+    lines.append("")
+    return lines
+
+
+def read_linked_papers(
+    client: "SJTUClient",
+    talk: Talk,
+    interests_text: str,
+    *,
+    model: str | None = None,
+    run_date: date | None = None,
+) -> int:
+    """Deep-read any of the talk's arXiv papers not already in the index, so the
+    cross-links resolve. Best-effort; returns how many were newly read."""
+    from .deep_read import generate_deep_read_report, load_index
+    from .highlights import save_highlights
+    from .llm.pipeline import summarize_paper
+
+    have = {e.get("paper_id") for e in load_index()}
+    fresh: list[Paper] = []
+    for pid in talk.papers or []:
+        if pid in have:
+            continue
+        if not _is_arxiv_id(pid):
+            log.info("talk %s: %s is not an arXiv id — link only, not auto-read", talk.id, pid)
+            continue
+        paper = fetch_arxiv_by_id(pid)
+        if not paper:
+            continue
+        try:
+            summarize_paper(client, paper, interests_text, model=model)
+        except Exception as e:  # noqa: BLE001
+            log.warning("first-pass summary failed for %s: %s", pid, e)
+        fresh.append(paper)
+
+    if not fresh:
+        return 0
+    run_date = run_date or date.today()
+    save_highlights(fresh, run_date=run_date)
+    generate_deep_read_report(fresh, client, interests_text, run_date, "talk", model=model)
+    log.info("auto-read %d linked paper(s) for talk %s", len(fresh), talk.id)
+    return len(fresh)
+
+
+def fetch_arxiv_by_id(arxiv_id: str) -> "Paper | None":
+    """Fetch a single arXiv paper's metadata by id (for --read-papers)."""
+    import httpx
+    from xml.etree import ElementTree as ET
+
+    from .scrapers.arxiv import ATOM, _api_entry_to_paper, _headers
+
+    try:
+        with httpx.Client(timeout=40, headers=_headers(), follow_redirects=True) as c:
+            r = c.get("https://export.arxiv.org/api/query",
+                      params={"id_list": arxiv_id, "max_results": 1})
+            r.raise_for_status()
+        entry = ET.fromstring(r.text).find(f"{ATOM}entry")
+        if entry is None:
+            log.warning("arXiv returned no entry for %s", arxiv_id)
+            return None
+        res = _api_entry_to_paper(entry)
+        return res[0] if res else None
+    except Exception as e:  # noqa: BLE001
+        log.warning("arXiv fetch by id %s failed: %s", arxiv_id, e)
+        return None
+
+
+# ── LLM read ──────────────────────────────────────────────────────────────────
+
+def build_user_message(
+    talk: Talk,
+    transcript: str,
+    interests_text: str,
+    *,
+    segment_title: str | None = None,
+    segment_speaker: str | None = None,
+) -> str:
+    meta = [
+        f"Title: {segment_title or talk.title or talk.id}",
+        f"Speaker: {segment_speaker or talk.speaker or 'unknown'}",
+        f"Venue: {talk.venue or 'unknown'}",
+        f"Date: {talk.date or 'unknown'}",
+        f"Video: {talk.url}",
+    ]
+    if talk.papers:
+        meta.append("Candidate papers (from curator, verify against the talk): "
+                    + ", ".join(talk.papers))
+    transcript = transcript[:MAX_TRANSCRIPT_CHARS]
+    return (
+        "## Researcher interests\n" + interests_text + "\n\n"
+        "## Talk metadata\n" + "\n".join(meta) + "\n\n"
+        "## Transcript (ASR — may contain errors; timestamps are [H:MM:SS])\n"
+        + transcript + "\n"
+    )
+
+
+def read_talk(
+    client: "SJTUClient",
+    talk: Talk,
+    transcript: str,
+    interests_text: str,
+    *,
+    model: str | None = None,
+    segment_title: str | None = None,
+    segment_speaker: str | None = None,
+) -> str:
+    """Return a Markdown reading-note body for one talk (empty on failure)."""
+    user = build_user_message(
+        talk, transcript, interests_text,
+        segment_title=segment_title, segment_speaker=segment_speaker,
+    )
+    try:
+        result = client.chat(
+            [
+                {"role": "system", "content": TALK_READ_SYSTEM},
+                {"role": "user", "content": user},
+            ],
+            model=model,
+            max_tokens=TALK_READ_MAX_TOKENS,
+        )
+        log.info("talk read LLM call succeeded for %s (%d chars)", talk.id, len(result))
+        return result
+    except Exception as e:  # noqa: BLE001
+        log.error("talk read FAILED for %s (all retries exhausted): %s", talk.id, e)
+        return ""
+
+
+# ── render ────────────────────────────────────────────────────────────────────
+
+def _render_talk_page(
+    talk: Talk,
+    content: str,
+    run_date: date,
+    *,
+    file_id: str,
+    paper_links: list[dict],
+    segment_title: str | None = None,
+    segment_speaker: str | None = None,
+) -> Path:
+    TALKS_DIR.mkdir(parents=True, exist_ok=True)
+    out = TALKS_DIR / f"{run_date.isoformat()}-{_slug(file_id)}.md"
+    title = segment_title or talk.title or talk.id
+    speaker = segment_speaker or talk.speaker
+    topic_label = TOPIC_LABELS_ZH.get(talk.topic or "other", talk.topic or "other")
+
+    lines = [f"# {title}\n"]
+    if speaker:
+        lines.append(f"**讲者**: {speaker}  ")
+    if talk.venue:
+        lines.append(f"**来源**: {talk.venue}  ")
+    if talk.date:
+        lines.append(f"**日期**: {talk.date}  ")
+    lines.append(f"**主题**: {topic_label}  ")
+    lines.append(f"**视频**: <{talk.url}>\n")
+    lines.append(
+        "> 本页据讲座录音的自动转写（ASR）生成。**人名 / 术语 / 公式 / 具体的率与界可能被听错**，"
+        "关键处请对照视频或讲者论文核对。\n"
+    )
+    lines.extend(_paper_links_md(paper_links))
+    lines += [
+        "---\n",
+        content if content else "*（讲座精读失败，请查看日志）*",
+        f"\n---\n\nMaintained by 陈星宇 · "
+        f"[Homepage]({HOMEPAGE_URL}) · [Source on GitHub]({REPO_URL})\n",
+    ]
+    out.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return out
+
+
+# ── index + archive ───────────────────────────────────────────────────────────
+
+def _load_index() -> list[dict]:
+    if not TALKS_INDEX.exists():
+        return []
+    try:
+        data = json.loads(TALKS_INDEX.read_text(encoding="utf-8"))
+        return data if isinstance(data, list) else []
+    except Exception:
+        return []
+
+
+def _update_index(new_entries: list[dict]) -> None:
+    """Upsert talk entries (keyed by id) into data/talks_index.json, newest run
+    wins, then refresh docs/all_talks.md."""
+    by_id = {e["id"]: e for e in _load_index()}
+    for e in new_entries:
+        by_id[e["id"]] = e
+    merged = sorted(
+        by_id.values(),
+        key=lambda e: (e.get("date") or "", e.get("id") or ""),
+        reverse=True,
+    )
+    TALKS_INDEX.parent.mkdir(parents=True, exist_ok=True)
+    TALKS_INDEX.write_text(json.dumps(merged, ensure_ascii=False, indent=2), encoding="utf-8")
+    _write_archive(merged)
+
+
+def _write_archive(entries: list[dict]) -> None:
+    """Refresh docs/all_talks.md (linked from the site nav), grouped by venue."""
+    lines = [
+        "# 讲座精读\n",
+        "会议 / seminar 录像（如 OCIS、INI workshop）转写后，按 deep-read 风格读成结构化笔记："
+        "工作线背景、最小内核、报告主体、对应论文与开放问题。**不打分、不排名**；"
+        "因来自自动转写，技术细节请对照视频 / 论文核对。\n",
+    ]
+    by_venue: dict[str, list[dict]] = {}
+    for e in entries:
+        by_venue.setdefault(e.get("venue") or "其他", []).append(e)
+    for venue in sorted(by_venue):
+        lines.append(f"## {venue}\n")
+        for e in sorted(by_venue[venue], key=lambda e: e.get("date") or "", reverse=True):
+            doc_path = e.get("doc_path")
+            if not doc_path:
+                continue
+            bits = []
+            if e.get("speaker"):
+                bits.append(e["speaker"])
+            if e.get("date"):
+                bits.append(e["date"])
+            topic_label = TOPIC_LABELS_ZH.get(e.get("topic", "other"), e.get("topic", "other"))
+            bits.append(topic_label)
+            meta = " · ".join(bits)
+            lines.append(f"- [{e.get('title') or e['id']}]({doc_path})  \n  {meta}")
+        lines.append("")
+    lines.append(
+        f"\n---\n\nMaintained by 陈星宇 · [Homepage]({HOMEPAGE_URL}) · [Source]({REPO_URL})\n"
+    )
+    (DOCS_DIR / "all_talks.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+# ── run ───────────────────────────────────────────────────────────────────────
+
+def _selected(talks: list[Talk], ids: list[str] | None) -> list[Talk]:
+    if not ids:
+        return talks
+    want = set(ids)
+    out = [t for t in talks if t.id in want]
+    missing = want - {t.id for t in out}
+    for m in missing:
+        log.warning("no talk with id %r in config", m)
+    return out
+
+
+def run_ingest(
+    *,
+    talk_ids: list[str] | None = None,
+    model_size: str = "large-v3",
+    prefer_subs: bool = False,
+    force: bool = False,
+    dry_run: bool = False,
+) -> list[Path]:
+    asr_default, talks = load_talks()
+    talks = _selected(talks, talk_ids)
+    if dry_run:
+        for t in talks:
+            status = "has transcript" if transcript_path(t.id).exists() else "needs transcript"
+            log.info("  %s — %s (%s)", t.id, t.title or t.url, status)
+        return []
+    out: list[Path] = []
+    for t in talks:
+        try:
+            p = ingest(t, asr_default, model_size=model_size,
+                       prefer_subs=prefer_subs, force=force)
+            if p:
+                out.append(p)
+        except Exception as e:  # noqa: BLE001
+            log.error("ingest failed for %s: %s", t.id, e)
+    return out
+
+
+def run_read(
+    *,
+    talk_ids: list[str] | None = None,
+    model: str | None = None,
+    read_papers: bool = False,
+    force: bool = False,
+    dry_run: bool = False,
+) -> list[Path]:
+    model = model or TALK_MODEL
+    _, talks = load_talks()
+    talks = _selected(talks, talk_ids)
+    done = {e.get("talk_id") for e in _load_index()}
+
+    pending: list[Talk] = []
+    for t in talks:
+        if not transcript_path(t.id).exists():
+            log.info("skip %s: no transcript yet (run `talks ingest --id %s`)", t.id, t.id)
+            continue
+        if t.id in done and not force:
+            log.info("skip %s: already read (use --force to re-read)", t.id)
+            continue
+        pending.append(t)
+
+    if dry_run:
+        for t in pending:
+            n_seg = len(t.segments) or 1
+            log.info("  would read %s — %s (%d note%s)",
+                     t.id, t.title or t.url, n_seg, "" if n_seg == 1 else "s")
+        return []
+    if not pending:
+        log.info("no talks ready to read")
+        return []
+
+    from dotenv import load_dotenv
+
+    from .llm.sjtu_client import SJTUClient
+    from .render.markdown import update_index
+    load_dotenv()
+    interests_text = INTERESTS_CONFIG.read_text(encoding="utf-8")
+    client = SJTUClient()
+
+    written: list[Path] = []
+    index_entries: list[dict] = []
+    for t in pending:
+        if read_papers and t.papers:
+            try:
+                read_linked_papers(client, t, interests_text, run_date=talk_date(t))
+            except Exception as e:  # noqa: BLE001
+                log.warning("read_linked_papers failed for %s: %s", t.id, e)
+
+        links = resolve_paper_links(t)
+        run_date = talk_date(t)
+        transcript = transcript_path(t.id).read_text(encoding="utf-8")
+        chunks = tr.split_by_segments(transcript, t.segments)
+        multi = len(chunks) > 1
+
+        for i, chunk in enumerate(chunks, 1):
+            file_id = f"{t.id}-{i}" if multi else t.id
+            seg_title = chunk.get("title")
+            seg_speaker = chunk.get("speaker")
+            label = seg_title or t.title or t.id
+            log.info("reading talk %s%s ...", t.id, f" [{i}/{len(chunks)}]" if multi else "")
+            content = read_talk(
+                client, t, chunk["text"], interests_text, model=model,
+                segment_title=seg_title, segment_speaker=seg_speaker,
+            )
+            page = _render_talk_page(
+                t, content, run_date, file_id=file_id, paper_links=links,
+                segment_title=seg_title, segment_speaker=seg_speaker,
+            )
+            written.append(page)
+            index_entries.append({
+                "id": file_id,
+                "talk_id": t.id,
+                "date": run_date.isoformat(),
+                "title": label,
+                "speaker": seg_speaker or t.speaker,
+                "venue": t.venue,
+                "topic": t.topic or "other",
+                "url": t.url,
+                "doc_path": f"talks/{page.name}",
+                "papers": [lk["id"] for lk in links],
+            })
+            log.info("wrote %s", page)
+
+    if index_entries:
+        _update_index(index_entries)
+        try:
+            update_index()  # refresh homepage + archive nav so the talk shows up
+        except Exception as e:  # noqa: BLE001
+            log.warning("homepage index refresh failed: %s", e)
+    return written
+
+
+def _print_list() -> None:
+    _, talks = load_talks()
+    if not talks:
+        print("no talks in config/talks.yaml")
+        return
+    dr_index = _load_index()
+    have_page = {e.get("talk_id") for e in dr_index}
+    print(f"{len(talks)} talk(s) in config/talks.yaml:\n")
+    for t in talks:
+        tx = "✓" if transcript_path(t.id).exists() else "·"
+        pg = "✓" if t.id in have_page else "·"
+        print(f"  [{tx} transcript] [{pg} page]  {t.id}")
+        print(f"      {t.title or '(no title)'} — {t.speaker or '?'} @ {t.venue or '?'}")
+
+
+def main() -> None:
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
+    ap = argparse.ArgumentParser(
+        description="Conference talk pipeline: transcribe lectures and read them into notes.")
+    sub = ap.add_subparsers(dest="cmd", required=True)
+
+    sub.add_parser("list", help="show every talk + its transcript/page status")
+
+    p_ing = sub.add_parser("ingest", help="download + transcribe (local; needs [asr] extra + ffmpeg)")
+    p_ing.add_argument("--id", action="append", default=[], help="talk id (repeatable); omit with --all")
+    p_ing.add_argument("--all", action="store_true", help="ingest every talk missing a transcript")
+    p_ing.add_argument("--model-size", default="large-v3", help="faster-whisper model (default large-v3)")
+    p_ing.add_argument("--prefer-subs", action="store_true",
+                       help="use the video's existing captions if present, skip ASR")
+    p_ing.add_argument("--force", action="store_true", help="re-transcribe even if a transcript exists")
+    p_ing.add_argument("--dry-run", action="store_true", help="list what would be ingested")
+
+    p_rd = sub.add_parser("read", help="LLM-read transcripts into docs/talks/ notes")
+    p_rd.add_argument("--id", action="append", default=[], help="talk id (repeatable); omit with --all")
+    p_rd.add_argument("--all", action="store_true", help="read every transcript missing a page")
+    p_rd.add_argument("--read-papers", action="store_true",
+                      help="also deep-read the talk's linked arXiv papers (so cross-links resolve)")
+    p_rd.add_argument("--model", default=None, help="override the read model")
+    p_rd.add_argument("--force", action="store_true", help="re-read even if a page exists")
+    p_rd.add_argument("--dry-run", action="store_true", help="list what would be read, no LLM")
+
+    args = ap.parse_args()
+
+    if args.cmd == "list":
+        _print_list()
+        return
+
+    ids = list(args.id) or None
+    if not ids and not args.all:
+        ap.error("pass --id <id> (repeatable) or --all")
+
+    if args.cmd == "ingest":
+        paths = run_ingest(talk_ids=ids, model_size=args.model_size,
+                           prefer_subs=args.prefer_subs, force=args.force, dry_run=args.dry_run)
+        print(f"ingested {len(paths)} transcript(s)")
+    elif args.cmd == "read":
+        paths = run_read(talk_ids=ids, model=args.model, read_papers=args.read_papers,
+                         force=args.force, dry_run=args.dry_run)
+        print(f"wrote {len(paths)} talk page(s)")
+
+
+if __name__ == "__main__":
+    main()

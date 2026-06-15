@@ -67,3 +67,38 @@ class Event:
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
+
+
+@dataclass
+class Talk:
+    """A hand-curated conference talk / lecture (e.g. a YouTube recording).
+
+    Unlike papers, talks are NOT scored or filtered — you pick the video and it
+    always gets read. The transcript (produced locally by
+    ``scrapers.transcribe``) is the "full text" the LLM reads, in place of a
+    paper's PDF. Talks ride the deep-read style but live in their own
+    docs/talks/ section + data/talks_index.json.
+    """
+    id: str                    # stable slug: transcript filename + dedup key
+    url: str                   # video / recording URL
+    title: str | None = None
+    speaker: str | None = None
+    venue: str | None = None   # seminar / conference (e.g. "OCIS", "INI CIFW04")
+    date: str | None = None    # talk date: YYYY-MM-DD, YYYY-MM, or freeform
+    # arXiv ids / DOIs the talk is about → cross-linked to their deep-read pages
+    # (and optionally auto-queued into the paper deep-read pipeline).
+    papers: list[str] = field(default_factory=list)
+    # One of llm.prompts.TOPICS — used to slot the talk into the archive's topic
+    # grouping. Defaults to "other" when unset.
+    topic: str | None = None
+    # Domain terms (names, jargon) fed to Whisper as initial_prompt to bias ASR.
+    asr_prompt: str | None = None
+    # ASR language hint ("en", "zh", ...); None = auto-detect.
+    language: str | None = None
+    # Per-talk boundaries for a multi-talk recording. Each segment is a dict with
+    # `start` (HH:MM:SS or seconds) + optional `speaker` / `title`. Empty = the
+    # whole video is a single talk.
+    segments: list[dict] = field(default_factory=list)
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)

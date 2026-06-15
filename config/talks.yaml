@@ -1,0 +1,74 @@
+# Hand-curated conference talks / lectures to transcribe and deep-read.
+#
+# Workflow (transcription runs LOCALLY — it needs YouTube access + ffmpeg +
+# ideally a GPU, so it is NOT part of the automated CI / daily cron):
+#
+#   python -m research_news.talks ingest --id robins-cambridge-keynote-2026
+#       # yt-dlp downloads audio → faster-whisper transcribes → data/talks/<id>.txt
+#   python -m research_news.talks read   --id robins-cambridge-keynote-2026
+#       # LLM reads the transcript → docs/talks/<date>-<id>.md (+ archive + homepage)
+#
+#   python -m research_news.talks ingest --all     # every talk missing a transcript
+#   python -m research_news.talks read   --all     # every transcript missing a page
+#   python -m research_news.talks list             # show talks + transcript/page status
+#
+# Per-talk fields:
+#   id         stable slug — transcript filename + dedup key.        REQUIRED
+#   url        video URL.                                            REQUIRED for ingest
+#   title/speaker/venue/date   metadata (date: YYYY-MM-DD / YYYY-MM / freeform).
+#   topic      one of the report topics (causal_inference | high_dim_rmt |
+#              nonparam_semipara | efficiency_dml | higher_order_U |
+#              hypothesis_testing | stat_computing | astrostats | econ_theory |
+#              epidemiology | other) — slots the talk into the archive grouping.
+#   papers     arXiv ids / DOIs the talk is about → cross-linked to their
+#              deep-read pages (and auto-read with `read --read-papers`).
+#   asr_prompt domain terms (names, jargon) to bias Whisper toward.
+#   language   ASR language hint ("en"); omit to auto-detect.
+#   segments   per-talk boundaries for a multi-talk recording, e.g.
+#                segments:
+#                  - {start: "0:00:00", speaker: "A. Author", title: "Talk 1"}
+#                  - {start: "0:32:10", speaker: "B. Author", title: "Talk 2"}
+#              omit when the whole video is a single talk.
+
+# Domain terms prepended to every talk's asr_prompt (helps Whisper with the
+# field's jargon + names regardless of which talk).
+asr_prompt_default: >-
+  semiparametric efficiency, influence function, higher-order influence function,
+  double machine learning, debiased machine learning, double robustness, proximal
+  causal inference, negative control, instrumental variable, mediation,
+  Neyman orthogonality, cross-fitting, Robins, Pearl, van der Vaart,
+  Tchetgen Tchetgen, Rotnitzky
+
+# Good sources to pull talks from (fill `talks:` with concrete videos):
+#   - OCIS — Online Causal Inference Seminar: https://sites.google.com/view/ocis/home
+#     (past meetings are recorded; a deep, on-topic backlog of causal-inference talks)
+#   - INI (Isaac Newton Institute) programmes, e.g. CIFW04 workshop recordings.
+
+talks:
+  - id: robins-cambridge-keynote-2026
+    url: "https://www.youtube.com/watch?v=9qSjwIOpvZw"
+    title: "Keynote"
+    speaker: "James M. Robins"
+    venue: "University of Cambridge"
+    date: "2026-06"
+    topic: causal_inference
+    language: en
+    papers: []
+    asr_prompt: >-
+      James Robins, higher-order influence functions, HOIF, double robustness,
+      g-formula, structural nested models, marginal structural models,
+      Andrea Rotnitzky, Eric Tchetgen Tchetgen, Lingling Li, Rajarshi Mukherjee,
+      Aad van der Vaart, minimax estimation, U-statistics
+
+  - id: cifw04-causality-and-ml-2026
+    url: "https://www.youtube.com/watch?v=JDYiFHzhgeI"
+    title: "Causality and machine learning [CIFW04]"
+    venue: "INI CIFW04 (Isaac Newton Institute)"
+    date: "2026-06-15"
+    topic: causal_inference
+    language: en
+    papers: []
+    # 1.5h recording = several talks back to back. Fill `segments` from the INI
+    # programme / YouTube chapters to split into one note per talk; until then it
+    # is read as a single (long) note.
+    segments: []

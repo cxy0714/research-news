@@ -32,6 +32,16 @@
   / `ARXIV_FETCH_ATTEMPTS` 调。
 
 ### Added
+- **讲座精读管道 `talks`**：把会议 / seminar 录像（如 OCIS、INI workshop）读成
+  deep-read 风格的结构化中文笔记，是论文精读的「口头报告」版。手挑视频、不打分不过滤。
+  两步：① `talks ingest`（本地：yt-dlp 下音频 → faster-whisper 转写 →
+  `data/talks/<id>.txt`，带 `asr_prompt` 注入领域词偏置识别；`--prefer-subs` 可直接用
+  视频已有字幕跳过 ASR）；② `talks read`（转写 → 讲座专用 prompt `TALK_READ_SYSTEM` →
+  `docs/talks/<date>-<id>.md`）。讲座可声明它对应的 arXiv/DOI 论文，自动**交叉链接**到这些
+  论文的精读页；`read --read-papers` 还会把尚未精读的 arXiv 论文**自动拉进现有论文精读
+  队列**。多讲者视频可在 config 里给 `segments`（时间点边界）切成「每讲者一篇」。新栏目
+  `docs/all_talks.md` + 首页「讲座精读」入口；转写需 `pip install -e ".[asr]"` + ffmpeg，
+  仅本地跑（YouTube / GPU），不进 CI。配置见 `config/talks.yaml`。
 - **补做历史精读 `backfill_deep_reads`**：精读门槛放宽到 6 后，过去的每日里有些当时没
   精读、但按现在标准够格的论文。`data/llm_scores.jsonl` 记了每篇打过分论文（含摘要），
   据此补做精读，无需重抓重打分：`--date` / `--since..--until` / `--threshold` / `--limit`
