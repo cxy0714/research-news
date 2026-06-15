@@ -667,6 +667,8 @@ def main() -> None:
                       help="parse a saved page HTML file instead of fetching (repeatable)")
     p_oc.add_argument("--catalog-only", action="store_true",
                       help="write data/ocis_catalog.json but not talks.ocis.yaml")
+    p_oc.add_argument("--llm", action="store_true",
+                      help="use the LLM to associate links (default: deterministic, offline)")
     p_oc.add_argument("--limit", type=int, default=None, help="cap number of talks (testing)")
     p_oc.add_argument("--model", default=None, help="override the extraction model")
     p_oc.add_argument("--dry-run", action="store_true",
@@ -688,7 +690,7 @@ def main() -> None:
         rows = ocis.import_pages(
             urls=urls or None, html_files=list(args.html) or None,
             model=args.model, catalog_only=args.catalog_only,
-            limit=args.limit, dry_run=args.dry_run,
+            limit=args.limit, dry_run=args.dry_run, use_llm=args.llm,
         )
         print(f"OCIS: extracted {len(rows)} talk row(s)")
         return

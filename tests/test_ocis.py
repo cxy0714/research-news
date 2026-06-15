@@ -111,6 +111,87 @@ def test_clean_text_with_links_inlines_and_unwraps():
 
 # ── writer + config merge ─────────────────────────────────────────────────────
 
+def _parse_one(block: str) -> dict:
+    rows = ocis.parse_talks_structured(block)
+    assert len(rows) == 1, rows
+    return rows[0]
+
+
+def test_structured_marker_format():
+    block = (
+        "Tuesday, June 02, 2026:\n"
+        "- Speaker:\nJane Doe <https://x.com>\n(MIT)\n"
+        "- Title:\nA Great Talk\n"
+        "- Discussant:\nBob Roe <https://y.com>\n(CMU)\n"
+        "[\nPaper <https://arxiv.org/abs/2401.00001>\n][\nVideo <https://youtu.be/abc>\n]"
+    )
+    r = _parse_one(block)
+    assert r["date"] == "2026-06-02"
+    assert r["speaker"] == "Jane Doe"          # affiliation + url stripped
+    assert r["title"] == "A Great Talk"
+    assert r["video"] == "https://youtu.be/abc"
+    assert r["arxiv"] == "https://arxiv.org/abs/2401.00001"   # discussant link not mistaken
+
+
+def test_structured_header_speaker_and_lone_title():
+    block = (
+        "Tuesday, October 12, 2021: Colin Fogarty (MIT)\n"
+        "Prepivoting in Finite Population Causal Inference\n"
+        "Discussant: Tirthankar Dasgupta (Rutgers)\n"
+        "[\nVideo <https://youtu.be/N0QOGkzZXhw>\n]"
+    )
+    r = _parse_one(block)
+    assert r["speaker"] == "Colin Fogarty"
+    assert r["title"] == "Prepivoting in Finite Population Causal Inference"
+    assert r["video"].endswith("N0QOGkzZXhw")
+
+
+def test_structured_speaker_marker_with_title_overflow():
+    block = (
+        "Tuesday, May 18, 2021:\n"
+        "Speaker: Ramesh Johari (Stanford University)\n"
+        "Experimental design in two-sided platforms\n"
+        "Discussant: Panos Toulis (University of Chicago)\n"
+        "[\nVideo <https://youtu.be/NDWuhbHtzMI>\n] [\nPaper <https://arxiv.org/abs/2002.05670>\n]"
+    )
+    r = _parse_one(block)
+    assert r["speaker"] == "Ramesh Johari"            # title not glued onto the name
+    assert r["title"] == "Experimental design in two-sided platforms"
+    assert r["arxiv"] == "https://arxiv.org/abs/2002.05670"
+
+
+def test_structured_multi_speaker_preamble():
+    block = (
+        "Tuesday, March 19, 2024:\n"
+        "Sara Magliacane <https://a>\n(Amsterdam),\nPhillip Lippe <https://b>\n(Amsterdam)\n"
+        "- Title: BISCUIT\n[\nVideo <https://youtu.be/v>\n]"
+    )
+    r = _parse_one(block)
+    assert r["speaker"] == "Sara Magliacane, Phillip Lippe"
+    assert r["title"] == "BISCUIT"
+
+
+def test_structured_quoted_title():
+    block = (
+        "Tuesday, March 31, 2020: Dylan Small (Wharton)\n"
+        '"Testing an Elaborate Theory" (w/ Bikram Karmakar)\n'
+        "Discussant:\nPeter Buhlmann (ETH Zurich)\n"
+        "[\nVideo <https://www.youtube.com/watch?v=DWTDIPuff14>\n]"
+    )
+    r = _parse_one(block)
+    assert r["speaker"] == "Dylan Small"
+    assert r["title"] == "Testing an Elaborate Theory"      # discussant + (w/ ...) excluded
+
+
+def test_structured_skips_panel_without_video():
+    block = (
+        "Tuesday, April 21, 2026:\n"
+        "- Panelists:\nEls Goetghebeur <https://x>\n(Gent)\n"
+        "[\nZoom <https://zoom.us/j/1>\n]"
+    )
+    assert ocis.parse_talks_structured(block) == []   # no video/arxiv/title → dropped
+
+
 def test_write_talks_yaml_and_load_merge(tmp_path, monkeypatch):
     main = tmp_path / "talks.yaml"
     main.write_text(

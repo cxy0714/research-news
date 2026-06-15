@@ -141,6 +141,7 @@ def test_load_talks_normalizes(tmp_path, monkeypatch):
         encoding="utf-8",
     )
     monkeypatch.setattr(talks, "TALKS_CONFIG", cfg)
+    monkeypatch.setattr(talks, "OCIS_TALKS_CONFIG", tmp_path / "absent.yaml")
     default, ts = talks.load_talks()
     assert default == "base terms"
     assert [t.id for t in ts] == ["t1", "t2"]

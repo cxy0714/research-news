@@ -361,7 +361,8 @@ python -m research_news.talks read --id <id> --read-papers  # 顺带精读它点
 的历史讲座按季分页，每期基本都带 **video + arXiv + slides**——是个高质量、对口的因果推断
 讲座库。`import-ocis` 把这些页面解析成讲座目录，**自动写进 `config/talks.ocis.yaml`**
 （与手工的 `talks.yaml` 并列、管道一起读；同 id 以手工文件为准），arXiv 链接落到每场的
-`papers:` 上、出页面时自动交叉链接到论文精读。
+`papers:` 上、出页面时自动交叉链接到论文精读。**仓库里已内置导入好的全量目录**（~194 场、
+2020 至今，含 arXiv 交叉链接），可直接 `talks list` 挑着转写。
 
 ```bash
 # 单季 / 多季 / 全部（Google Sites 屏蔽服务器抓取，需本地网络能开它的页面）
@@ -369,22 +370,24 @@ python -m research_news.talks import-ocis --season spring-2024
 python -m research_news.talks import-ocis --season spring-2024 --season fall-2023
 python -m research_news.talks import-ocis --all-seasons          # 2020 至今，404 的季自动跳过
 
-# 先干跑：只抓页面、数出每页有多少 video/arxiv/slides 链接，不调 LLM、不写盘
-python -m research_news.talks import-ocis --season spring-2024 --dry-run
-
-# 离线：浏览器里把某季页面另存为 HTML，直接解析（连网都不用，只需 API key 做关联）
+# 离线：浏览器里把某季页面另存为 HTML，直接解析（默认确定性解析，连网和 API key 都不用）
 python -m research_news.talks import-ocis --html spring-2024.html
+
+# 先干跑：只抓页面、数出每页有多少 video/arxiv/slides 链接，不写盘
+python -m research_news.talks import-ocis --season spring-2024 --dry-run
 
 # 导完照常挑着转写 + 精读
 python -m research_news.talks list
-python -m research_news.talks ingest --id ocis-2024-04-16-james-robins
-python -m research_news.talks read   --id ocis-2024-04-16-james-robins
+python -m research_news.talks ingest --id ocis-2026-06-02-suhas-vijaykumar
+python -m research_news.talks read   --id ocis-2026-06-02-suhas-vijaykumar
 ```
 
-解析是 DOM 无关的：直接在页面字节里正则抓 youtube / arxiv / slides 链接（并自动解开
-Google 的 `url?q=` 跳转包装），再让 LLM 把链接和「讲者 / 题目 / 日期」对上。产出
-`data/ocis_catalog.json`（完整目录，含 slides）+ `config/talks.ocis.yaml`（有 video 的可转写
-条目）。导入后建议核对一下首批条目——讲者 / 题目的对应靠 LLM，链接抓取是确定性的。
+解析 **DOM 无关、默认确定性、纯离线**：直接在页面字节里正则抓 youtube / arxiv / slides 链接
+（并自动解开 Google 的 `url?q=` 跳转包装），再按页面固定的「`Tuesday, 日期:` / `Speaker:` /
+`Title:` / `[Paper][Slides][Video]`」结构把每场对上——不需要 LLM、不需要 API key。跨 2020–2026
+几种历史排版都覆盖。产出 `data/ocis_catalog.json`（完整目录，含 slides）+
+`config/talks.ocis.yaml`（有 video 的可转写条目）。个别老页排版怪异时，`--llm` 可改用模型做
+关联兜底。链接抓取是确定性的，建议核对一下少量老条目的讲者 / 题目。
 
 ## 账户与收藏（网页端）
 

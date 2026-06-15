@@ -74,7 +74,11 @@ def classify_link(url: str) -> str:
         return "arxiv"
     if "doi.org/" in u:
         return "doi"
-    if "docs.google.com/presentation" in u or "drive.google.com" in u:
+    # Real slide decks only — not Google Sites' own Drive viewer chrome
+    # (bare drive.google.com / drive.google.com/viewer show up on every page).
+    if "docs.google.com/presentation" in u:
+        return "slides"
+    if "drive.google.com/file/" in u or "drive.google.com/open" in u or "drive.google.com/uc" in u:
         return "slides"
     if u.split("?")[0].endswith(".pdf"):
         return "slides"
@@ -114,6 +118,151 @@ def clean_text_with_links(html: str, max_chars: int = 40000) -> str:
     lines = [ln for ln in (s.strip() for s in text.splitlines()) if ln]
     cleaned = "\n".join(lines)
     return cleaned[:max_chars] + ("\n...[truncated]" if len(cleaned) > max_chars else "")
+
+
+# Each talk block on an OCIS season page starts with a weekday-date header and
+# carries `- Speaker:` / `- Title:` markers and a trailing
+# `[Paper <url>][Slides <url>][Video <url>]` row. We parse that structure
+# directly — more reliable than LLM association and works fully offline.
+_HEADER_RE = re.compile(
+    r"^(?:Mon|Tues|Wednes|Thurs|Fri|Satur|Sun)day,\s+"
+    r"([A-Z][a-z]{2,8}\.?\s+\d{1,2},\s+\d{4})\s*:"
+)
+_MARKER_RE = re.compile(r"^-\s*([A-Za-z][A-Za-z /]*?):\s*(.*)$")
+# Bare labels (no leading dash) used on older pages. Allowlisted so a normal
+# title containing a colon ("So Many Choices: ...") isn't mistaken for a marker.
+_BARE_MARKER_RE = re.compile(
+    r"^(Speaker|Title|Abstract|Discussants?|Panelists?|Details|Time)\s*:\s*(.*)$", re.I
+)
+_INLINE_URL_RE = re.compile(r"\s*<(https?://[^>]+)>")
+_WEBINAR_NOISE = re.compile(r"OCIS\+|joint webinar|INI\b", re.I)
+_QUOTED_RE = re.compile(r'["“”](.+?)["“”]', re.DOTALL)
+_CONNECTOR_RE = re.compile(r"^(and|&|,|with)+$", re.I)
+
+
+def _norm_ws(s: str) -> str:
+    return re.sub(r"\s+", " ", s.replace("\xa0", " ").replace("​", "")).strip()
+
+
+def _clean_inline(s: str) -> str:
+    """Drop inlined `<url>` tokens and normalize whitespace (keeps parentheses)."""
+    return _norm_ws(_INLINE_URL_RE.sub("", s))
+
+
+def _clean_speaker(s: str) -> str:
+    """Speaker name(s): drop inlined urls + `(affiliation)`, keep `&` for joints."""
+    s = _INLINE_URL_RE.sub("", s)
+    s = re.sub(r"\([^)]*\)", "", s)
+    return _norm_ws(s).strip(" ;,&")
+
+
+def parse_talks_structured(text: str) -> list[dict]:
+    """Deterministically parse an OCIS page (the inlined-link text from
+    ``clean_text_with_links``) into talk rows. No LLM, no network.
+
+    Handles the layouts OCIS has used over the years: `- Speaker:` / `- Title:`
+    markers (current season pages), speaker inline on the date header, and
+    quoted titles in an unmarked preamble (older pages). Links (video / arxiv /
+    slides) are scanned across the whole block, so they're captured regardless of
+    layout. Non-talk blocks (panels with no speaker/title/links) are skipped.
+    """
+    lines = text.splitlines()
+    heads = [i for i, ln in enumerate(lines) if _HEADER_RE.match(ln)]
+    rows: list[dict] = []
+    for k, i in enumerate(heads):
+        j = heads[k + 1] if k + 1 < len(heads) else len(lines)
+        block = lines[i:j]
+        date_str = _HEADER_RE.match(block[0]).group(1)
+        # Older pages put the speaker after the date colon on the header line.
+        after = block[0].split(":", 1)[1] if ":" in block[0] else ""
+        header_speaker = _clean_speaker(_WEBINAR_NOISE.sub("", after))
+
+        fields: dict[str, list[str]] = {}
+        preamble: list[str] = []      # unmarked lines before any marker/links
+        cur: str | None = None
+        links_started = False
+        for ln in block[1:]:
+            s = ln.lstrip()
+            # Everything from the trailing `[Paper <url>][Slides <url>]...` row on
+            # is links + page footer — stop absorbing text (links are scanned
+            # separately over the whole block).
+            if links_started:
+                continue
+            if s.startswith(("[", "]")):
+                links_started = True
+                cur = None
+                continue
+            m = _MARKER_RE.match(ln) or _BARE_MARKER_RE.match(ln)
+            if m:
+                label = m.group(1).strip().lower()
+                if label.startswith(("discussant", "panel")):
+                    cur = "_skip"      # drop discussant / panel lines
+                else:
+                    cur = label
+                    fields[cur] = [m.group(2)] if m.group(2).strip() else []
+                continue
+            if cur is None:
+                preamble.append(ln)
+            elif cur != "_skip":
+                fields[cur].append(ln)
+
+        sp_field = fields.get("speaker", [])
+        ti_field = fields.get("title", [])
+        has_title = bool(ti_field)
+        # Preamble minus pure "(affiliation)" lines and bare connectors ("and"),
+        # url-stripped.
+        pre = [p for p in (_clean_inline(x) for x in preamble
+                           if not x.lstrip().startswith("(")) if p and not _CONNECTOR_RE.match(p)]
+
+        # Speaker: a `Speaker:` marker's first line (later lines are an overflow
+        # title), else the date-header remainder, else the preamble — all of it
+        # when the title lives elsewhere, otherwise just the first (name) line.
+        title_extra: list[str] = []
+        if sp_field:
+            speaker = _clean_speaker(sp_field[0])
+            title_extra = sp_field[1:]
+        elif header_speaker:
+            speaker = header_speaker
+        elif pre and (has_title or len(pre) == 1):
+            speaker = _clean_speaker(", ".join(pre))
+        elif pre:
+            speaker = _clean_speaker(pre[0])
+        else:
+            speaker = ""
+
+        # Title: a `Title:` marker, else a quoted string, else the leftover text
+        # (speaker-field overflow, or the preamble lines that aren't the speaker —
+        # all of it when the speaker came from a marker/header, else pre[1:]).
+        title = _clean_inline(" ".join(ti_field))
+        if not title:
+            quoted = _QUOTED_RE.search(" ".join(preamble) + " " + " ".join(title_extra))
+            if quoted:
+                title = _clean_inline(quoted.group(1))
+            else:
+                cands = list(title_extra) + (pre if (sp_field or header_speaker) else pre[1:])
+                cands = [c for c in (_clean_inline(x) for x in cands)
+                         if c and not _CONNECTOR_RE.match(c)]
+                title = " ".join(cands)
+        title = title.strip(" \"“”'")
+
+        kinds: dict[str, str] = {}
+        for u in _INLINE_URL_RE.findall("\n".join(block)):
+            kind = classify_link(u)
+            if kind in ("video", "arxiv", "doi", "slides") and kind not in kinds:
+                kinds[kind] = u
+
+        row = {
+            "date": normalize_date(date_str),
+            "speaker": speaker or None,
+            "title": title or None,
+            "video": kinds.get("video"),
+            "arxiv": kinds.get("arxiv") or kinds.get("doi"),
+            "slides": kinds.get("slides"),
+        }
+        # Keep only blocks that are actually a talk (have a link or a title).
+        if row["video"] or row["arxiv"] or row["title"]:
+            rows.append(row)
+    return rows
 
 
 def arxiv_id_from_url(url: str) -> str | None:
@@ -271,17 +420,16 @@ def import_pages(
     catalog_only: bool = False,
     limit: int | None = None,
     dry_run: bool = False,
+    use_llm: bool = False,
 ) -> list[dict]:
     """Fetch / read the given OCIS pages, extract talk rows, write the catalog +
-    talks.ocis.yaml. Returns the talk rows. Local: needs network + API key.
+    talks.ocis.yaml. Returns the talk rows.
 
-    `html_files` lets you parse pages saved from a browser (offline, no fetch).
+    Default extraction is the deterministic structured parser (no LLM, no API
+    key) — OCIS season pages are regular. `use_llm=True` falls back to LLM
+    association for irregular pages. `html_files` parses pages saved from a
+    browser, so the whole import can run offline. Network/LLM only when used.
     """
-    from dotenv import load_dotenv
-
-    from ..llm.sjtu_client import SJTUClient
-    load_dotenv()
-
     sources: list[tuple[str, str]] = []  # (label, html)
     for path in html_files or []:
         try:
@@ -299,24 +447,37 @@ def import_pages(
         log.warning("no OCIS pages fetched/read")
         return []
 
-    client = None if dry_run else SJTUClient()
-    rows: list[dict] = []
-    for label, html in sources:
-        if dry_run:
+    if dry_run:
+        for label, html in sources:
             links = extract_links(html)
             log.info("  %s: %d candidate link(s) (%d video, %d arxiv, %d slides)",
                      label, len(links),
                      sum(lk["kind"] == "video" for lk in links),
                      sum(lk["kind"] == "arxiv" for lk in links),
                      sum(lk["kind"] == "slides" for lk in links))
-            continue
-        page_rows = extract_talks(client, label, html, model=model)
+        return []
+
+    client = None
+    if use_llm:
+        from dotenv import load_dotenv
+
+        from ..llm.sjtu_client import SJTUClient
+        load_dotenv()
+        client = SJTUClient()
+
+    rows: list[dict] = []
+    for label, html in sources:
+        if use_llm:
+            page_rows = extract_talks(client, label, html, model=model)
+        else:
+            page_rows = parse_talks_structured(clean_text_with_links(html, max_chars=2_000_000))
+            if not page_rows:
+                log.warning("%s: structured parse found 0 talks — try --llm", label)
         log.info("  %s: %d talk(s)", label, len(page_rows))
         rows.extend(page_rows)
 
-    if dry_run or not rows:
+    if not rows:
         return rows
-
     if limit:
         rows = rows[:limit]
     write_catalog(rows)
