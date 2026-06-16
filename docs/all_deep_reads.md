@@ -12,8 +12,14 @@
   8/10 [daily]
 - [When Representative Samples Produce Worse Outcomes: Scale-up Decisions and Testing in Small-Budget RCTs](deep_reads/2026-06-13-2606.13531.md)  
   6/10 [daily]
+- [HSCI: Neyman-Orthogonal Causal Inference under High-Dimensional Proportional Hazards](deep_reads/2026-06-12-2606.14132.md)  
+  9/10 [daily]
+- [Constraint-based difference graph discovery in a linear setting](deep_reads/2026-06-12-2606.13947.md)  
+  9/10 [daily]
 - [Bracketing Relationships of Weighted Average Treatment Effects](deep_reads/2026-06-12-2606.11715.md)  
   9/10 [daily]
+- [G-computation for causal effect estimation from observational hierarchical data with unmeasured cluster context](deep_reads/2026-06-12-2606.14131.md)  
+  8/10 [daily]
 - [Bayesian Causal Machine Learning for Cure Models](deep_reads/2026-06-12-2606.11405.md)  
   7/10 [daily]
 - [Empirical stratification for treatment effect heterogeneity with post-treatment variables](deep_reads/2026-06-10-2606.11013.md)  
@@ -396,6 +402,10 @@
   8/10 [daily]
 - [Geometric bias in eigenspace perturbation under random heterogeneous noise](deep_reads/2026-06-12-2606.11263.md)  
   9/10 [daily]
+- [Universality for Products of Random Matrices with i.i.d. Entries and the Fuss--Catalan Number](deep_reads/2026-06-12-2606.14450.md)  
+  8/10 [daily]
+- [Joint Nuclear and $\ell_1$ Regularization for Logistic Matrix Regression with Applications to Brain Imaging](deep_reads/2026-06-12-2606.14436.md)  
+  7/10 [daily]
 - [Fixed-Threshold One-Bit Toeplitz Covariance Estimation under Sparse-Ruler Sampling](deep_reads/2026-06-10-2606.11110.md)  
   8/10 [daily]
 - [Bidirectional Random Projections](deep_reads/2026-06-10-2606.10377.md)  
@@ -554,8 +564,12 @@
   6/10 [daily]
 - [Second-Order Least Squares as a Special Case of the Polynomial Maximization Method](deep_reads/2026-06-12-2606.11421.md)  
   8/10 [daily]
+- [Nonparametric inference on Fokker-Plank and McKean-Vlasov models](deep_reads/2026-06-12-2606.14514.md)  
+  7/10 [daily]
 - [Posterior consistency of P\'olya trees for deconvolution under the linear model](deep_reads/2026-06-12-2606.11406.md)  
   7/10 [daily]
+- [Confidence Bands for the Gradient Lines of a Density Function](deep_reads/2026-06-12-2606.14087.md)  
+  6/10 [daily]
 - [Bayesian Triangulation Splines: Spatial Adaptation on Irregular Domains](deep_reads/2026-06-12-2606.12296.md)  
   6/10 [daily]
 - [Nonparametric Riemannian Empirical Bayes, and Denoising Measurements on Manifolds](deep_reads/2026-06-10-2606.11183.md)  
@@ -840,6 +854,14 @@
 
 - [Pivotal and identification-robust nonparametric inference in linear IV models](deep_reads/2026-06-12-2606.12185.md)  
   9/10 [daily]
+- [Cauchy Aggregation of Ridge-Regularized Hotelling Tests for High-Dimensional Change-Point Detection](deep_reads/2026-06-12-2606.14092.md)  
+  8/10 [daily]
+- [Recovery thresholds for hidden weighted sparse graphs](deep_reads/2026-06-12-2606.14335.md)  
+  7/10 [daily]
+- [The Generalized Fisher Transformation: Finite-Sample Properties and Inference](deep_reads/2026-06-12-2606.13864.md)  
+  7/10 [daily]
+- [Rbreak: An R Package for Estimating Structural Breaks under Linear Restrictions with Application to Linear Model Tree](deep_reads/2026-06-12-2606.12261.md)  
+  6/10 [daily]
 - [Estimating the local false discovery rate under an unknown symmetric null](deep_reads/2026-06-12-2606.11548.md)  
   6/10 [daily]
 - [Testing axial symmetry in multivariate location-scale linear regression](deep_reads/2026-06-12-2606.11933.md)  
@@ -1044,6 +1066,8 @@
 
 ### Daily
 
+- [On the design distribution for predictive Bayesian regression](deep_reads/2026-06-16-2606.14544.md)  
+  6/10 [daily]
 - [Computationally tractable robust differentially private mean estimation](deep_reads/2026-06-13-2606.12654.md)  
   7/10 [daily]
 - [ShrinkageTrees: An R Package for Bayesian Tree Ensembles for Survival Analysis and Causal Inference](deep_reads/2026-06-12-2606.12317.md)  
@@ -1193,10 +1217,16 @@
   6/10 [daily]
 - [Time Series Analysis in Machine Learning](deep_reads/2026-06-12-2606.11746.md)  
   8/10 [daily]
+- [Semianalytic Sensitivity Estimates for Out-of-Bank Gravitational-Wave Signals](deep_reads/2026-06-12-2606.14045.md)  
+  7/10 [daily]
+- [Classification of Astronomical Spectra Using PCA-Compressed Flux and Inverse-Variance Features](deep_reads/2026-06-12-2606.13978.md)  
+  7/10 [daily]
 - [Wavelet-Based Extraction of Transient Noise in Gravitational-Wave Interferometers using a Saliency-Guided Learning Architecture](deep_reads/2026-06-12-2606.11595.md)  
   7/10 [daily]
 - [Machine Learning for Event Reconstruction in Imaging Atmospheric Cherenkov Telescopes](deep_reads/2026-06-12-2606.11741.md)  
   7/10 [daily]
+- [Multi-Variable Stellar Parameter Estimation Using Residual Multitask Neural Networks](deep_reads/2026-06-12-2606.13868.md)  
+  6/10 [daily]
 - [Recalibration of SDSS photometric zero-points based on the InfraRed Flux Method temperature scale](deep_reads/2026-06-12-2606.11587.md)  
   6/10 [daily]
 - [Calibration of an Analog-to-Digital Conversion Nonlinearity in JWST/NIRISS](deep_reads/2026-06-12-2606.11983.md)  
@@ -1249,12 +1279,18 @@
 
 ### Daily
 
+- [Granular Instrumental Variables: Estimation and Inference](deep_reads/2026-06-12-2606.14057.md)  
+  9/10 [daily]
 - [What is the Long-Term Value of Reliability?](deep_reads/2026-06-12-2606.11526.md)  
   8/10 [daily]
+- [Reliable Panel Regression: A Default Workflow for Slow-Moving, Mismeasured Variables](deep_reads/2026-06-12-2606.14009.md)  
+  7/10 [daily]
 - [Threshold Regression for Fixed-T Panel Data with Interactive Fixed Effects](deep_reads/2026-06-12-2606.12184.md)  
   7/10 [daily]
 - [Assumption-Lean Shrinkage and Model Averaging for Spatial Parameters](deep_reads/2026-06-12-2606.12324.md)  
   7/10 [daily]
+- [Forecasting with Bayesian Panel Vector Autoregressions Using the R Package bpvars](deep_reads/2026-06-12-2606.14143.md)  
+  6/10 [daily]
 - [Panel Data Estimation of Individual Demand in Markets with Many Consumers](deep_reads/2026-06-10-2606.11047.md)  
   7/10 [daily]
 - [Adaptive Estimation of Aggregated Values of Conditional Linear Programs](deep_reads/2026-06-09-2606.08359.md)  
@@ -1466,6 +1502,12 @@
 
 ### Daily
 
+- [Typical Healthcare Pathways as a Basis for Admixture Modeling of Patient Trajectories](deep_reads/2026-06-12-2606.14587.md)  
+  6/10 [daily]
+- [Bayesian machine learning approach for recurrent events studies using Soft Bayesian Additive Regression Trees (SBART)](deep_reads/2026-06-12-2606.12701.md)  
+  6/10 [daily]
+- [Restricted Multivariate Spatial Modeling](deep_reads/2026-06-12-2606.12677.md)  
+  6/10 [daily]
 - [Methods for adjusting for covariate measurement error in flexible modelling of functional form: results of a blinded, controlled neutral comparison simulation study](deep_reads/2026-06-10-2606.10123.md)  
   7/10 [daily]
 - [Predicting Current Outcomes From Historical Survey Data With Weighted Conformal Prediction](deep_reads/2026-06-10-2606.10563.md)  
@@ -1546,6 +1588,10 @@
 
 ### Daily
 
+- [Testing Preferential Sampling](deep_reads/2026-06-12-2606.14615.md)  
+  6/10 [daily]
+- [Introducing precision-weighted bias as a performance measure to inform the inclusion of adaptive designs in meta-analysis](deep_reads/2026-06-12-2606.12015.md)  
+  4/10 [daily]
 - [Correcting Variable Importance Scored by Random Forests](deep_reads/2026-06-11-2606.10770.md)  
   6/10 [daily]
 - [Debiased inference for stochastic treatment interventions with survival outcomes](deep_reads/2026-06-01-2605.31130.md)  
