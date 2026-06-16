@@ -131,28 +131,45 @@ python -m research_news.backfill_deep_reads --date 2026-05-29 --force
 LLM 评分 + 一句简评（score_reason），不再生成摘要**——这些数据每篇打分时就存进了
 `data/llm_scores.jsonl`，所以是零额外 LLM 调用。
 
-> 历史说明：早期版本对单日摘要设过 25 篇上限，所以**部分历史页**里会有当时超限、没展开
-> 的高分论文落在 🗂 里（评分仍标着，且高分的多半已有精读）。上限现已取消，新报告不再有
-> 这种情况；历史页要补全摘要需用配好 API key 的环境重跑。
+> 历史说明：早期版本对单日摘要设过 25 篇上限，所以**部分历史页**里有当时超限、没展开的
+> 高分论文落在 🗂 里（评分仍标着，且高分的多半已有精读）。上限现已取消，新报告不再有这种
+> 情况；历史页可用下面的 `backfill_summaries` 一次性补齐。
 
-过去的报告当时只渲染了阈值以上的，可以用下面的命令把被遗漏的论文从打分日志里**就地
-补回**到对应日期页（纯离线、无需 API）：
+**补回低相关列表（纯离线、无需 API）**——过去的报告当时只渲染了阈值以上的，下面的命令把
+被遗漏的论文从打分日志**就地补回**对应日期页的 🗂 一节：
 
 ```bash
 # 给所有历史每日页补全 🗂 其他论文 一节
 python -m research_news.backfill_low_relevance
 
-# 只补某天 / 某段区间
+# 只补某天 / 某段区间，或先空跑看会补哪些
 python -m research_news.backfill_low_relevance --date 2026-06-12
 python -m research_news.backfill_low_relevance --since 2026-06-01 --until 2026-06-13
-
-# 先看会补哪些、补几篇，不落盘
 python -m research_news.backfill_low_relevance --dry-run
 ```
 
-幂等：已有的 🗂 一节会被整体替换而非追加，重复运行安全（日志新增了行也能再补）。已在
-页面里渲染的论文（摘要区的）不会重复进 🗂；期刊管道写进同一日志的非 arXiv 行按 source
-过滤掉。
+幂等：已有的 🗂 一节会被整体替换而非追加，重复运行安全。已渲染（摘要区的）论文不会重复
+进 🗂；期刊管道写进同一日志的非 arXiv 行按 source 过滤掉。
+
+**把历史 🗂 里的高分论文补成摘要并提上去（需 API key）**——上限取消前堆在 🗂 里的过阈值
+论文，可以读打分日志里的摘要、补生成中文摘要，再把整页重渲染、让它们归位到 📌/⭐ 主题分组：
+
+```bash
+# 给所有历史页补：🗂 里 score ≥ score_threshold_show 的论文生成摘要并提上去
+python -m research_news.backfill_summaries
+
+# 只补某天 / 某段区间
+python -m research_news.backfill_summaries --date 2026-06-12
+
+# 先看每天会提哪几篇（不调 LLM、不写盘）
+python -m research_news.backfill_summaries --dry-run
+
+# 安全自检：不提升、只把每页重渲染一遍，报告哪页不能逐字还原（无需 API key）
+python -m research_news.backfill_summaries --self-check
+```
+
+已有的摘要原样保留（只对 🗂 里没摘要的补），故只对那几篇花 token。`--self-check` 会逐字
+比对重渲染前后，确认解析器不会动到既有内容——先跑它确认全绿再正式补。
 
 输出：
 - `docs/daily/<日期>.md` — 当日速览报告，按主题分组（因果推断 / 高维 RMT / 非参 / 效率理论 / ...）；页尾 **🗂 其他论文** 列出当天其余打分论文（评分 + 简评）
