@@ -168,9 +168,9 @@ def render_low_section(papers_low: list[Paper]) -> list[str]:
     ordered = sorted(papers_low, key=lambda p: (p.score or 0), reverse=True)
     out = [
         LOW_SECTION_HEADING + "\n",
-        "> 未生成中文摘要的论文：相关性低于展示阈值，或当日已达摘要篇数上限"
-        "（故高分篇目也可能落在这里）。按 LLM 评分由高到低排列，仅保留评分与"
-        "简评，便于回溯查全。\n",
+        "> 未生成中文摘要的论文，按 LLM 评分由高到低排列，仅保留评分与简评，"
+        "便于回溯查全。一般为相关性低于展示阈值者；个别历史页也含当时因单日"
+        "摘要上限未展开的高分篇目（评分仍清楚标着）。\n",
     ]
     for i, p in enumerate(ordered, 1):
         out.append(_low_paper_block(p, i))

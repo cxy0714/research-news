@@ -117,10 +117,6 @@ def run(dry_run: bool = False, for_date: date | None = None) -> Path:
         digest.sort(key=lambda p: p.score or 0, reverse=True)
         log.info("%d papers above threshold %.0f", len(digest), th_show)
 
-        # Cap the *summarised* digest to keep it (and the token bill) bounded;
-        # papers past the cap are still shown below, score + reason only.
-        digest = digest[:25]
-
         log.info("summarizing %d papers (model=%s) ...", len(digest), DAILY_MODEL)
         for p in digest:
             try:
