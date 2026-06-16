@@ -123,8 +123,38 @@ python -m research_news.backfill_deep_reads --date 2026-05-29 --force
 
 两种模式补完都会自动刷新首页与存档页。
 
+### 显示全部论文（含低相关）+ 补全历史
+
+每日报告现在**展示当天打过分的所有论文**，不再只留阈值以上的。够格的（score ≥
+`score_threshold_show`）照旧按主题分组、生成中文摘要；其余的（低于阈值，或当天摘要
+篇数已达上限）汇到页尾 **🗂 其他论文** 一节，按评分由高到低排列，**只列 LLM 评分 +
+一句简评（score_reason），不再生成摘要**——这些数据每篇打分时就存进了
+`data/llm_scores.jsonl`，所以是零额外 LLM 调用。
+
+> 注意：摘要篇数上限（25）只为控制单日篇幅 / token，**不影响**「是否展示」。篇数超限
+> 的当天，高分论文也可能落在 🗂 里（评分仍清楚标着），别误当成低相关。
+
+过去的报告当时只渲染了阈值以上的，可以用下面的命令把被遗漏的论文从打分日志里**就地
+补回**到对应日期页（纯离线、无需 API）：
+
+```bash
+# 给所有历史每日页补全 🗂 其他论文 一节
+python -m research_news.backfill_low_relevance
+
+# 只补某天 / 某段区间
+python -m research_news.backfill_low_relevance --date 2026-06-12
+python -m research_news.backfill_low_relevance --since 2026-06-01 --until 2026-06-13
+
+# 先看会补哪些、补几篇，不落盘
+python -m research_news.backfill_low_relevance --dry-run
+```
+
+幂等：已有的 🗂 一节会被整体替换而非追加，重复运行安全（日志新增了行也能再补）。已在
+页面里渲染的论文（摘要区的）不会重复进 🗂；期刊管道写进同一日志的非 arXiv 行按 source
+过滤掉。
+
 输出：
-- `docs/daily/<日期>.md` — 当日速览报告，按主题分组（因果推断 / 高维 RMT / 非参 / 效率理论 / ...）
+- `docs/daily/<日期>.md` — 当日速览报告，按主题分组（因果推断 / 高维 RMT / 非参 / 效率理论 / ...）；页尾 **🗂 其他论文** 列出当天其余打分论文（评分 + 简评）
 - `docs/deep_reads/<日期>-<paper_id>.md` — 每篇高相关论文（score ≥ `score_threshold_deepread`，现为 6）的独立精读页
 - `docs/index.md` / `docs/all_daily.md` / `docs/all_deep_reads.md` — 自动更新的首页和存档页
 - `data/highlights/<topic>/<arxiv_id>.pdf` — 高相关论文 PDF（本地存储，不上传 GitHub）

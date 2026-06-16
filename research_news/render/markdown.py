@@ -22,6 +22,12 @@ REPO_URL = "https://github.com/cxy0714/research-news"
 # Rendered when a paper's summary was salvaged from incomplete model output.
 RERUN_MARKER = "⚠️ *摘要不完整，待重跑（`python -m research_news.rerun`）*"
 
+# Heading for the "everything else" section of a daily report: papers that were
+# scored but never summarised — below the show-threshold, or above it but past
+# the digest cap. Kept as a stable constant so the retroactive backfill
+# (research_news.backfill_low_relevance) can find + replace the section.
+LOW_SECTION_HEADING = "## 🗂 其他论文（仅 LLM 评分，未生成摘要）"
+
 
 def format_institutions_line(institutions: list[str]) -> str:
     """The '- **机构**: ...' line for a paper, shared by the renderer and the
@@ -112,9 +118,69 @@ def _slug(s: str) -> str:
 
 # ── daily ─────────────────────────────────────────────────────────────────────
 
+def format_daily_count_line(
+    n_high: int, n_mid: int, n_low: int, n_events: int
+) -> str:
+    """The one-line tally rendered just under the daily report title. Shared by
+    ``render_daily`` and the retroactive low-relevance backfill so both produce
+    an identical line. The '其他' (low) count is only shown when non-zero."""
+    line = f"- 高相关论文 {n_high} 篇 · 中相关 {n_mid} 篇"
+    if n_low:
+        line += f" · 其他 {n_low} 篇"
+    line += f" · 会议/Seminar 事件 {n_events} 条"
+    return line
+
+
+def _low_paper_block(p: Paper, n: int) -> str:
+    """Compact block for a paper we never summarised — below the show-threshold,
+    or above it but past the digest cap. We show the stored LLM score + its
+    one-line reason instead of a Chinese summary (none was ever generated)."""
+    authors = ", ".join(p.authors[:6]) + (" et al." if len(p.authors) > 6 else "")
+    cats = " · ".join(p.categories) if p.categories else ""
+    links = f"[{p.paper_id}]({p.url})"
+    if p.arxiv_url:
+        links += f" · [arXiv]({p.arxiv_url})"
+    head = f"### {n}. {links} — {p.title}"
+    body: list[str] = []
+    if authors:
+        body.append(f"- **作者**: {authors}")
+    if cats:
+        body.append(f"- **分类**: {cats}")
+    bits: list[str] = []
+    if p.score is not None:
+        bits.append(f"相关性 {p.score:.0f}/10")
+    if p.novelty_flag:
+        bits.append(f"novelty: `{p.novelty_flag}`")
+    if bits:
+        body.append("- " + " · ".join(bits))
+    if p.score_reason:
+        body.append(f"- **评分理由**: {p.score_reason}")
+    return head + "\n" + "\n".join(body) + "\n"
+
+
+def render_low_section(papers_low: list[Paper]) -> list[str]:
+    """Lines for the '🗂 其他论文' section — every scored-but-unsummarised paper,
+    listed compactly (score + reason), highest score first. Returns ``[]`` when
+    there are none. Shared by ``render_daily`` and the retroactive backfill so
+    the section renders identically whether written live or recovered later."""
+    if not papers_low:
+        return []
+    ordered = sorted(papers_low, key=lambda p: (p.score or 0), reverse=True)
+    out = [
+        LOW_SECTION_HEADING + "\n",
+        "> 未生成中文摘要的论文：相关性低于展示阈值，或当日已达摘要篇数上限"
+        "（故高分篇目也可能落在这里）。按 LLM 评分由高到低排列，仅保留评分与"
+        "简评，便于回溯查全。\n",
+    ]
+    for i, p in enumerate(ordered, 1):
+        out.append(_low_paper_block(p, i))
+    return out
+
+
 def render_daily(
     papers_high: list[Paper],
     papers_mid: list[Paper],
+    papers_low: list[Paper],
     events: list[Event],
     when: date | None = None,
     output_dir: Path = DOCS_DIR,
@@ -126,8 +192,10 @@ def render_daily(
     lines: list[str] = []
     lines.append(f"# {when.isoformat()} 每日 arXiv 资讯\n")
     lines.append(
-        f"- 高相关论文 {len(papers_high)} 篇 · 中相关 {len(papers_mid)} 篇 · "
-        f"会议/Seminar 事件 {len(events)} 条\n"
+        format_daily_count_line(
+            len(papers_high), len(papers_mid), len(papers_low), len(events)
+        )
+        + "\n"
     )
 
     if papers_high:
@@ -159,6 +227,10 @@ def render_daily(
                     line += f"  \n  {e.note}"
                 lines.append(line)
             lines.append("")
+
+    # Everything else we scored but didn't summarise — listed last, just above
+    # the footer (the retroactive backfill inserts at the same spot).
+    lines.extend(render_low_section(papers_low))
 
     lines.append(_footer())
     out.write_text("\n".join(lines) + "\n", encoding="utf-8")

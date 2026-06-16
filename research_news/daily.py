@@ -92,6 +92,8 @@ def run(dry_run: bool = False, for_date: date | None = None) -> Path:
     client = SJTUClient()
 
     all_scored: list[Paper] = []
+    digest: list[Paper] = []   # papers we summarise + group by topic
+    low: list[Paper] = []      # everything else scored — listed, not summarised
     if papers:
         log.info("scoring papers (model=%s) ...", DAILY_MODEL)
         scores = score_papers(client, papers, interests_text, model=DAILY_MODEL)
@@ -111,15 +113,16 @@ def run(dry_run: bool = False, for_date: date | None = None) -> Path:
         # topic/novelty_flag/key_techniques (same object references).
         all_scored = list(papers)
 
-        papers = [p for p in papers if (p.score or 0) >= th_show]
-        papers.sort(key=lambda p: p.score or 0, reverse=True)
-        log.info("%d papers above threshold %.0f", len(papers), th_show)
+        digest = [p for p in all_scored if (p.score or 0) >= th_show]
+        digest.sort(key=lambda p: p.score or 0, reverse=True)
+        log.info("%d papers above threshold %.0f", len(digest), th_show)
 
-        # Cap to keep the daily digest readable.
-        papers = papers[:25]
+        # Cap the *summarised* digest to keep it (and the token bill) bounded;
+        # papers past the cap are still shown below, score + reason only.
+        digest = digest[:25]
 
-        log.info("summarizing %d papers (model=%s) ...", len(papers), DAILY_MODEL)
-        for p in papers:
+        log.info("summarizing %d papers (model=%s) ...", len(digest), DAILY_MODEL)
+        for p in digest:
             try:
                 summarize_paper(client, p, interests_text, model=DAILY_MODEL)
             except Exception as e:
@@ -132,23 +135,31 @@ def run(dry_run: bool = False, for_date: date | None = None) -> Path:
             interests_text=interests_text,
         )
 
+        # "Show all": every scored paper that didn't make the summarised digest
+        # (below threshold, or above it but past the cap) is still listed, from
+        # the score + reason we already stored — no extra LLM calls.
+        digest_ids = {p.paper_id for p in digest}
+        low = [p for p in all_scored if p.paper_id not in digest_ids]
+        low.sort(key=lambda p: p.score or 0, reverse=True)
+        log.info("%d papers listed below the fold (score only)", len(low))
+
     log.info("collecting events ...")
     events = _collect_events(client, sources_cfg)
 
-    high = [p for p in papers if (p.score or 0) >= th_highlight]
-    mid = [p for p in papers if (p.score or 0) < th_highlight]
+    high = [p for p in digest if (p.score or 0) >= th_highlight]
+    mid = [p for p in digest if (p.score or 0) < th_highlight]
 
     # Look up author institutions (OpenAlex) for the papers we're about to show.
     # Cached on each Paper so the deep-read green-light below reuses them.
-    log.info("looking up institutions for %d digest papers ...", len(papers))
-    affil.backfill_affiliations(papers)
+    log.info("looking up institutions for %d digest papers ...", len(digest))
+    affil.backfill_affiliations(digest)
 
-    out_path = render_daily(high, mid, events, when=report_date)
+    out_path = render_daily(high, mid, low, events, when=report_date)
 
     # Deep-read candidates: score >= th_deepread (6) for ALL topics, plus any
     # paper with a top-50-institution author (green-lit regardless of score).
     deep_read_papers = select_deep_read_papers(
-        all_scored, papers, th_deepread,
+        all_scored, digest, th_deepread,
         client=client, interests_yaml=interests_text, model=DEEP_READ_MODEL,
     )
 
@@ -163,7 +174,7 @@ def run(dry_run: bool = False, for_date: date | None = None) -> Path:
         )
 
     update_index()
-    mark_seen(papers, seen)
+    mark_seen(digest, seen)
     save_seen(seen)
 
     # Retroactively fill institutions on recent pages: papers that were too new
