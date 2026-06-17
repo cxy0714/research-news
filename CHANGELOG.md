@@ -27,7 +27,10 @@
   venv → `git pull --rebase --autostash` 先同步免得收尾 push 被拒 → `exec run_daily.sh`）；
   `run_daily.sh` 持管道与锁（daily → 修摘要 → 恢复当天 stub → `git add -A` 提交推送）。逻辑
   集中、进版本控制，cron 指 `run_rn.sh` 即可。互斥锁用 `flock`（进程退出内核自动释放，
-  `kill -9` / 断电不留死锁），daily 与期刊回补共用同一把、保证不并行。
+  `kill -9` / 断电不留死锁），daily 与期刊回补共用同一把、保证不并行。Windows 侧 `run_daily.ps1`
+  同步对齐（命名 Mutex 单实例锁 → `git pull` → daily → 修摘要 → 恢复当天 stub → `git add -A`
+  带重试 push），新增 `scripts/register-task.ps1` 一条命令注册任务计划程序任务（错过自动补跑、
+  不并行）；`run_daily.bat` 改为转发到 ps1。**daily 用纯 cron / 任务计划即可，无需 agent。**
 - **恢复失败的精读页 `backfill_deep_reads --retry-stubs`**：深度阅读偶尔失败（LLM 超时 /
   报错），精读页只剩 `*（精读失败，请查看日志）*` 占位。新增 `--retry-stubs` 扫
   `docs/deep_reads/*.md` 找这些 stub，从 `data/llm_scores.jsonl` 还原论文、按

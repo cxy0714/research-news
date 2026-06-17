@@ -607,14 +607,39 @@ python -m research_news.shootout --source jmlr --n 10 `
 | `config/talks.ocis.yaml` | `import-ocis` 自动生成的 OCIS 讲座条目，和 `talks.yaml` 一起被读（同 id 手工优先）；勿手改 |
 | `.env` | `SJTU_API_KEY` + 可选 model 覆盖；已 .gitignore |
 
-## 定时（Windows 任务计划程序）
+## 定时（Windows 11 · 任务计划程序，纯 cron 式，无需 agent）
 
-1. 任务计划程序 → 创建任务
-2. 触发器：每天 07:30
-3. 操作：`powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\path\to\research-news\run_daily.ps1"`，起始于 `C:\path\to\research-news`
-4. 勾选"如果错过计划开始时间，尽快启动任务"
+daily 全流程交给 Windows 任务计划程序跑 `run_daily.ps1` 即可，**不需要 OpenClaw / agent**
+（agent 只是个会自己烧 token 的外壳）。`run_daily.ps1` 已对齐 Linux 版：命名 **Mutex 单实例锁**
+→ `git pull --rebase` 同步 → daily → 修乱码摘要 → **恢复当天失败的精读** → `git add -A` 提交并
+带重试地 push。
 
-期刊按季度跑，手动触发即可。
+**一条命令注册任务**（仓库根目录、PowerShell 里跑一次；提示权限不足就用管理员 PowerShell）：
+
+```powershell
+.\scripts\register-task.ps1                 # 工作日 09:10
+.\scripts\register-task.ps1 -Time "08:30"   # 换时间
+Start-ScheduledTask -TaskName research-news-daily   # 立刻测一次
+```
+
+它已勾好这些关键项：**错过自动补跑**（`-StartWhenAvailable`，关机/睡眠错过的下次开机补一次）、
+**绝不并行**（`-MultipleInstances IgnoreNew`）、电池不挡。
+
+> 手动建任务的话：创建任务 → 触发器 周一至周五 09:10 → 操作
+> `powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\path\to\research-news\run_daily.ps1"`
+> 起始于仓库目录 → 设置里勾「错过尽快运行」、「已在运行则不启动新实例」。
+
+落地前提：
+
+- 机器在 09:10 前后**开着、联网**；睡眠中错过没关系（补跑会追一次；关太久就用
+  `python -m research_news.daily --date YYYY-MM-DD` 补指定天）。
+- 仓库目录里有 `.env`（`SJTU_API_KEY`）和 `.venv`。
+- **先手动 `git push` 一次**，让 Git Credential Manager（或 SSH key）缓存凭证——计划任务是
+  无人值守跑的，push 不能弹窗。
+- **只留一个执行者**：要从云服务器搬到台式机，就把云上的 cron 关掉，别两台都跑（会各自
+  commit/push 打架；锁只防同机并行）。
+
+期刊回补按 `ops/journal-backfill.md` 手动 / 半自动跑即可，不用进每日任务。
 
 ## 部署到 GitHub Pages
 

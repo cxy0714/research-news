@@ -1,11 +1,4 @@
 @echo off
-REM Simple batch wrapper. Prefer run_daily.ps1 for richer error handling.
-cd /d "%~dp0"
-if exist ".venv\Scripts\activate.bat" call ".venv\Scripts\activate.bat"
-python -m research_news.daily
-python -m research_news.rerun
-git add docs/ data/
-git diff --cached --quiet || (
-    git commit -m "daily report %date%"
-    git push
-)
+REM Thin wrapper — delegates to run_daily.ps1 so the date handling, lock, sync,
+REM pipeline and push retry all live in one place (avoids %date% locale issues).
+powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0run_daily.ps1"
