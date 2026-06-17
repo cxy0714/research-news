@@ -1,0 +1,1775 @@
+[0:00:11] Feel free to start.
+[0:00:16] Very good. Uh today we'll have as our presenter Naoki
+[0:00:18] presenter Naoki MIT presenting conformal policy learning
+[0:00:21] MIT presenting conformal policy learning with distribution free safety guarantees
+[0:00:24] with distribution free safety guarantees application to AI powered interactions.
+[0:00:27] application to AI powered interactions. As our discussion we'll have Eli Bacall.
+[0:00:30] As our discussion we'll have Eli Bacall. Uh
+[0:00:30] Uh I believe that also Engin is
+[0:00:32] I believe that also Engin is collaborator will be handling Q&amp;A.
+[0:00:46] And should I start or maybe or very
+[0:00:49] should I start or maybe or very I yeah I can
+[0:00:51] I yeah I can So if any questions uh you can
+[0:00:55] So if any questions uh you can uh post it in the Q&amp;A.
+[0:00:57] uh post it in the Q&amp;A. Uh so
+[0:00:58] Uh so uh Naoki I guess you'll take a a moment
+[0:01:00] uh Naoki I guess you'll take a a moment during the presentation to pause uh but
+[0:01:05] during the presentation to pause uh but uh
+[0:01:05] uh we'll also have uh Engin who will be uh
+[0:01:08] we'll also have uh Engin who will be uh responding directly in the meantime.
+[0:01:11] responding directly in the meantime. So uh on that note I'll hand it over to
+[0:01:13] So uh on that note I'll hand it over to you Naoki.
+[0:01:15] you Naoki. That's good. Thanks so much.
+[0:01:18] That's good. Thanks so much. Okay so let me
+[0:01:22] Okay so let me go back
+[0:01:28] and share the screen. And then I'll do the full screen.
+[0:01:32] And then I'll do the full screen. Does it look good?
+[0:01:34] Does it look good? Yeah. Okay perfect. Okay. So thank you
+[0:01:37] Yeah. Okay perfect. Okay. So thank you so much for the invitations. Um I have
+[0:01:40] so much for the invitations. Um I have been organizers for a while so I'm
+[0:01:42] been organizers for a while so I'm really excited to present my work here
+[0:01:44] really excited to present my work here as well. So today um I'm presenting my
+[0:01:47] as well. So today um I'm presenting my work joint with Engin um who is here my
+[0:01:51] work joint with Engin um who is here my long-term and amazing collaborators who
+[0:01:53] long-term and amazing collaborators who will be able to answer a lot of
+[0:01:55] will be able to answer a lot of questions in the Q&amp;A.
+[0:01:57] questions in the Q&amp;A. And um we're going to post the papers
+[0:01:59] And um we're going to post the papers probably on archive quite soon.
+[0:02:02] probably on archive quite soon. So, if you are interested in the papers,
+[0:02:04] So, if you are interested in the papers, please watch out for that. So, today's
+[0:02:06] please watch out for that. So, today's talk is about conformal policy learning
+[0:02:08] talk is about conformal policy learning and specifically talking about
+[0:02:10] and specifically talking about distribution free safety guarantees
+[0:02:12] distribution free safety guarantees focusing on applications to some kind of
+[0:02:14] focusing on applications to some kind of AI powered interventions.
+[0:02:16] AI powered interventions. So, let me start with a big pictures.
+[0:02:18] So, let me start with a big pictures. So, policy learning problems or
+[0:02:20] So, policy learning problems or sometimes called a treatment choice
+[0:02:22] sometimes called a treatment choice problems is try to decide who gets
+[0:02:25] problems is try to decide who gets treated and who gets control. So, this
+[0:02:27] treated and who gets control. So, this is going beyond sort of traditional
+[0:02:30] is going beyond sort of traditional causal inference problems that just
+[0:02:32] causal inference problems that just directly estimate a causal effect of
+[0:02:34] directly estimate a causal effect of interventions, but we are trying to go
+[0:02:35] interventions, but we are trying to go step one step beyond and try to decide
+[0:02:38] step one step beyond and try to decide who gets treated and who gets control.
+[0:02:41] who gets treated and who gets control. And this type of questions has been very
+[0:02:43] And this type of questions has been very fundamental in many domains like I'm a
+[0:02:45] fundamental in many domains like I'm a political scientist, so people are
+[0:02:47] political scientist, so people are trying to use this type of methods for
+[0:02:49] trying to use this type of methods for political campaigns. So, we're not just
+[0:02:51] political campaigns. So, we're not just interested in which types of messages
+[0:02:53] interested in which types of messages works on average, but we want to know
+[0:02:55] works on average, but we want to know who should get what type of messages to
+[0:02:57] who should get what type of messages to increase voter turnout. This is also the
+[0:02:59] increase voter turnout. This is also the foundational questions about precision
+[0:03:01] foundational questions about precision medicines. So, not just deciding what
+[0:03:03] medicines. So, not just deciding what types of drugs or medicines works on
+[0:03:05] types of drugs or medicines works on average, but we want to match the
+[0:03:08] average, but we want to match the patients to what types of drugs that we
+[0:03:10] patients to what types of drugs that we need to prescribe.
+[0:03:12] need to prescribe. And this is the one of the biggest
+[0:03:14] And this is the one of the biggest applications of this is online
+[0:03:15] applications of this is online advertising, right? So, whatever we see
+[0:03:17] advertising, right? So, whatever we see in algorithms and many many like
+[0:03:21] in algorithms and many many like services by big tech companies are
+[0:03:23] services by big tech companies are somehow powered by these type of policy
+[0:03:26] somehow powered by these type of policy learning algorithms behind it.
+[0:03:28] learning algorithms behind it. And for these type of problems, the
+[0:03:30] And for these type of problems, the common setup is try to maximize sort of
+[0:03:32] common setup is try to maximize sort of the average welfare. Most of the time
+[0:03:34] the average welfare. Most of the time just the average outcomes minus sort of
+[0:03:37] just the average outcomes minus sort of the cost under certain constraints.
+[0:03:39] the cost under certain constraints. So, think about a pi as a policy that
+[0:03:42] So, think about a pi as a policy that you want to learn, which is try to
+[0:03:44] you want to learn, which is try to maximize the expected sort of the
+[0:03:47] maximize the expected sort of the treatment effects from the policy. So,
+[0:03:49] treatment effects from the policy. So, here pi is the policies that you care
+[0:03:52] here pi is the policies that you care about and then X is the features that
+[0:03:54] about and then X is the features that you want to try to use to decide whether
+[0:03:57] you want to try to use to decide whether or who gets treated or not. So, this is
+[0:03:58] or who gets treated or not. So, this is sort of try to maximize the average
+[0:04:00] sort of try to maximize the average treatment effect under this new
+[0:04:02] treatment effect under this new treatment assignment rule.
+[0:04:04] treatment assignment rule. And often the case the key constraints
+[0:04:06] And often the case the key constraints in the literature is to think about a
+[0:04:08] in the literature is to think about a cost of the policies or many times
+[0:04:11] cost of the policies or many times interpretability of the treatment
+[0:04:12] interpretability of the treatment assignment rules. So, you might
+[0:04:14] assignment rules. So, you might constrain them to be the policy trees or
+[0:04:16] constrain them to be the policy trees or linear rules and so on and try to
+[0:04:18] linear rules and so on and try to probably do sort of the regret bound
+[0:04:20] probably do sort of the regret bound analysis.
+[0:04:23] analysis. What we're going to do today is slightly
+[0:04:24] What we're going to do today is slightly different problems. We call the policy
+[0:04:26] different problems. We call the policy learning with the safety guarantees. And
+[0:04:29] learning with the safety guarantees. And so, let me define it formally here.
+[0:04:32] so, let me define it formally here. So, given the observed data, the trip
+[0:04:34] So, given the observed data, the trip rates of the outcome Y, treatment and
+[0:04:36] rates of the outcome Y, treatment and then observed features, we want to learn
+[0:04:39] then observed features, we want to learn the policies that maps features to the
+[0:04:41] the policies that maps features to the treatment assignment with the following
+[0:04:42] treatment assignment with the following safety guarantees.
+[0:04:44] safety guarantees. So, this safety guarantee is meaning
+[0:04:47] So, this safety guarantee is meaning that the probability
+[0:04:49] that the probability of the outcome you would observe under
+[0:04:51] of the outcome you would observe under this new treatment rule is smaller than
+[0:04:53] this new treatment rule is smaller than the potential outcomes under control is
+[0:04:55] the potential outcomes under control is upper bounded by alpha. And then this N
+[0:04:57] upper bounded by alpha. And then this N plus 1 is the future test point. So, we
+[0:04:59] plus 1 is the future test point. So, we use N data to learn about these policies
+[0:05:02] use N data to learn about these policies and try to figure out the policy
+[0:05:04] and try to figure out the policy learning this rules for the new test
+[0:05:06] learning this rules for the new test point.
+[0:05:07] point. And so, interpretation is the
+[0:05:08] And so, interpretation is the probability of the harm in the test unit
+[0:05:10] probability of the harm in the test unit is at most alpha.
+[0:05:13] is at most alpha. By the linear by the linearity of the
+[0:05:16] By the linear by the linearity of the expectation this policy
+[0:05:18] expectation this policy also going to bound the expected
+[0:05:19] also going to bound the expected proportion of the harm units in the
+[0:05:21] proportion of the harm units in the future. So, if you roll out this new
+[0:05:22] future. So, if you roll out this new policies in the futures,
+[0:05:24] policies in the futures, hey, for the new like 100 people, then
+[0:05:27] hey, for the new like 100 people, then the proportion of the units who could be
+[0:05:29] the proportion of the units who could be harmed by this new chosen interventions
+[0:05:32] harmed by this new chosen interventions is going to be upper bounded by alpha.
+[0:05:35] is going to be upper bounded by alpha. And this is sort of slightly different
+[0:05:38] And this is sort of slightly different from welfare maximization even though it
+[0:05:40] from welfare maximization even though it might you might think that oh, you know,
+[0:05:42] might you might think that oh, you know, welfare maximization also going to try
+[0:05:44] welfare maximization also going to try to avoid basically treating the kind of
+[0:05:48] to avoid basically treating the kind of the units that could be harmed by the
+[0:05:49] the units that could be harmed by the treatment, which is true, but let's
+[0:05:51] treatment, which is true, but let's think about for example subgroups that
+[0:05:54] think about for example subgroups that are going to be affect 60% of the the
+[0:05:57] are going to be affect 60% of the the units within the subgroups are
+[0:05:58] units within the subgroups are benefited, but 40% are harmed. Okay, so
+[0:06:01] benefited, but 40% are harmed. Okay, so there's a lot of still heterogeneity
+[0:06:03] there's a lot of still heterogeneity within the subgroups. In this case, if
+[0:06:05] within the subgroups. In this case, if you are thinking about just the welfare
+[0:06:07] you are thinking about just the welfare maximization, probably you're going to
+[0:06:08] maximization, probably you're going to still treat the subgroup because maybe
+[0:06:11] still treat the subgroup because maybe the average treatment effect for this
+[0:06:12] the average treatment effect for this group is still maybe 20 percentage
+[0:06:14] group is still maybe 20 percentage points, which is really large, but from
+[0:06:16] points, which is really large, but from the safety perspective, this actually
+[0:06:18] the safety perspective, this actually still harms a ton of people, like the
+[0:06:20] still harms a ton of people, like the 40% of the people. So, if you think
+[0:06:22] 40% of the people. So, if you think about harm, this is probably not what
+[0:06:25] about harm, this is probably not what you're going to do.
+[0:06:26] you're going to do. Okay, so welfare maximization and sort
+[0:06:28] Okay, so welfare maximization and sort of what we're going to talk about is
+[0:06:30] of what we're going to talk about is probably in practice differs the most
+[0:06:32] probably in practice differs the most when treatment effects are quite
+[0:06:34] when treatment effects are quite heterogeneous,
+[0:06:35] heterogeneous, and especially when the X that you use
+[0:06:38] and especially when the X that you use is limited. Okay, so if X you use is
+[0:06:40] is limited. Okay, so if X you use is really fine-grained, so that within each
+[0:06:42] really fine-grained, so that within each subgroups that you identify, there's no
+[0:06:45] subgroups that you identify, there's no additional heterogeneity, then probably
+[0:06:48] additional heterogeneity, then probably the rules that you're going to learn is
+[0:06:49] the rules that you're going to learn is kind of very similar intuitively, but
+[0:06:52] kind of very similar intuitively, but when the X is limited, this is going to
+[0:06:54] when the X is limited, this is going to be quite different. Okay, and then this
+[0:06:55] be quite different. Okay, and then this is the case for many, many important
+[0:06:57] is the case for many, many important policy problems, um
+[0:06:59] policy problems, um especially outside of sort of the tech
+[0:07:03] especially outside of sort of the tech applications.
+[0:07:08] There's actually the very trivial policy that achieves these goals, which is the
+[0:07:09] that achieves these goals, which is the treatment probability, which is alpha,
+[0:07:12] treatment probability, which is alpha, for everyone, right? So, you're just
+[0:07:14] for everyone, right? So, you're just going to treat only the alpha percentage
+[0:07:16] going to treat only the alpha percentage of the people, let's say 1% of the
+[0:07:17] of the people, let's say 1% of the people, that going to satisfy the safety
+[0:07:19] people, that going to satisfy the safety guarantees, but it's going to have low
+[0:07:21] guarantees, but it's going to have low power, meaning that you cannot treat
+[0:07:23] power, meaning that you cannot treat many people, and it's going to have
+[0:07:25] many people, and it's going to have quite low welfare. So, the
+[0:07:26] quite low welfare. So, the methodological question we're going to
+[0:07:28] methodological question we're going to answer here is
+[0:07:30] answer here is to to decide whether we can create a
+[0:07:32] to to decide whether we can create a policy that achieves both safety and
+[0:07:34] policy that achieves both safety and some kind of optimality. Okay?
+[0:07:38] some kind of optimality. Okay? But I want to motivate these problems
+[0:07:40] But I want to motivate these problems from the AI part and dimensions. So, an
+[0:07:43] from the AI part and dimensions. So, an increasing number of social scientists
+[0:07:44] increasing number of social scientists and and many other scientists try to use
+[0:07:46] and and many other scientists try to use AI as an interventions. So, rather than
+[0:07:49] AI as an interventions. So, rather than using sort of the traditional fixed
+[0:07:52] using sort of the traditional fixed expert written interventions, but try to
+[0:07:55] expert written interventions, but try to use AI as sort of the automated natural
+[0:07:58] use AI as sort of the automated natural interventions. So, for example, people
+[0:07:59] interventions. So, for example, people have used to change attitudes and
+[0:08:01] have used to change attitudes and behaviors like try to reduce
+[0:08:03] behaviors like try to reduce polarization or reduce climate
+[0:08:05] polarization or reduce climate skepticisms and many others. One of the
+[0:08:08] skepticisms and many others. One of the main probably famous examples these days
+[0:08:10] main probably famous examples these days is try to use ChatGPTs to try to reduce
+[0:08:14] is try to use ChatGPTs to try to reduce the beliefs in conspiracy theories. So,
+[0:08:16] the beliefs in conspiracy theories. So, this is try to use
+[0:08:18] this is try to use the ChatGPTs and try to let the subjects
+[0:08:21] the ChatGPTs and try to let the subjects to interact with the ChatGPTs and try to
+[0:08:23] to interact with the ChatGPTs and try to debunk their strong beliefs about
+[0:08:25] debunk their strong beliefs about certain conspiracy beliefs. Okay? And
+[0:08:27] certain conspiracy beliefs. Okay? And this has been very surprising to many
+[0:08:29] this has been very surprising to many social scientists because people thought
+[0:08:32] social scientists because people thought that okay, the beliefs in conspiracy
+[0:08:34] that okay, the beliefs in conspiracy theories really deep, so it's really
+[0:08:36] theories really deep, so it's really hard to change their minds, but it turns
+[0:08:38] hard to change their minds, but it turns out it has been quite effective in the
+[0:08:40] out it has been quite effective in the literature.
+[0:08:42] literature. Not just these type of academic
+[0:08:44] Not just these type of academic applications, but if you think about the
+[0:08:46] applications, but if you think about the real world examples, there's a lot of
+[0:08:48] real world examples, there's a lot of decision-making problems that we are
+[0:08:50] decision-making problems that we are having right now in terms of use of AI.
+[0:08:53] having right now in terms of use of AI. So, for example, many many local
+[0:08:55] So, for example, many many local governments are deciding whether they
+[0:08:57] governments are deciding whether they want to sometimes offer the
+[0:08:59] want to sometimes offer the administrative service using AI instead
+[0:09:01] administrative service using AI instead of all based on human staff. So, for
+[0:09:04] of all based on human staff. So, for example, people ask the questions and
+[0:09:06] example, people ask the questions and people are going to handling certain
+[0:09:08] people are going to handling certain types of AI services using AI or not.
+[0:09:10] types of AI services using AI or not. This is also probably the policy
+[0:09:12] This is also probably the policy decision-making policy learning problems
+[0:09:15] decision-making policy learning problems because probably not all types of
+[0:09:17] because probably not all types of administrative service should be treated
+[0:09:18] administrative service should be treated by AI and sometimes should be treated by
+[0:09:21] by AI and sometimes should be treated by humans.
+[0:09:22] humans. As an academics, we also have this type
+[0:09:24] As an academics, we also have this type of questions about oh, maybe students
+[0:09:26] of questions about oh, maybe students going to answer the ask the questions
+[0:09:28] going to answer the ask the questions and can we answer them using AI? Right?
+[0:09:30] and can we answer them using AI? Right? That could be really fast and maybe for
+[0:09:33] That could be really fast and maybe for many many easy questions that might
+[0:09:35] many many easy questions that might serve quite well, but for certain types
+[0:09:37] serve quite well, but for certain types of questions, we should probably
+[0:09:39] of questions, we should probably encourage students and others to come to
+[0:09:42] encourage students and others to come to office hours. So, maybe some questions
+[0:09:44] office hours. So, maybe some questions are really inspiring that maybe could
+[0:09:46] are really inspiring that maybe could lead to some very interesting research
+[0:09:48] lead to some very interesting research projects with the professors. They
+[0:09:49] projects with the professors. They should come to office hours even if
+[0:09:51] should come to office hours even if maybe the AI can answer them. Or some
+[0:09:54] maybe the AI can answer them. Or some students may be really confused about
+[0:09:56] students may be really confused about certain important concepts. They should
+[0:09:57] certain important concepts. They should also probably come to office hours,
+[0:09:59] also probably come to office hours, right? So, these are kind of policy
+[0:10:01] right? So, these are kind of policy decision-making problems about who and
+[0:10:03] decision-making problems about who and what types of questions or tasks be
+[0:10:05] what types of questions or tasks be treated by AI or what type of question
+[0:10:07] treated by AI or what type of question should be treated by, let's say, humans
+[0:10:09] should be treated by, let's say, humans as the status quo.
+[0:10:12] as the status quo. The benefit of these AI systems are
+[0:10:14] The benefit of these AI systems are automated, adaptive, quick, cheap, and
+[0:10:15] automated, adaptive, quick, cheap, and scalable.
+[0:10:17] scalable. But, the big risk is that this large and
+[0:10:20] But, the big risk is that this large and unpredictable variations in the content
+[0:10:22] unpredictable variations in the content of the treatment. So, unlike what we
+[0:10:25] of the treatment. So, unlike what we have been doing in the before using
+[0:10:27] have been doing in the before using expert systems, we actually know what
+[0:10:29] expert systems, we actually know what the treatment is and almost all
+[0:10:31] the treatment is and almost all heterogeneity comes from just who is
+[0:10:33] heterogeneity comes from just who is treated.
+[0:10:34] treated. But, now basically, there's huge more
+[0:10:37] But, now basically, there's huge more uncertainty because the nature of the
+[0:10:39] uncertainty because the nature of the treatment is also quite unpredictable
+[0:10:41] treatment is also quite unpredictable and there's a huge variations in what
+[0:10:43] and there's a huge variations in what even AIs are going to speak about, okay?
+[0:10:48] even AIs are going to speak about, okay? And so, it could be good for many people
+[0:10:49] And so, it could be good for many people or could be good for many tasks, but
+[0:10:51] or could be good for many tasks, but could be quite harmful for some people
+[0:10:54] could be quite harmful for some people or some tasks, okay? And I just wanted
+[0:10:57] or some tasks, okay? And I just wanted to give one example, which is this very
+[0:10:59] to give one example, which is this very interesting randomized control trials
+[0:11:01] interesting randomized control trials done by the Harvard Business School
+[0:11:02] done by the Harvard Business School groups. So, what they did is they did
+[0:11:05] groups. So, what they did is they did the randomized control trials with the
+[0:11:06] the randomized control trials with the more than 700 consultants in the one of
+[0:11:09] more than 700 consultants in the one of the very famous global consulting firm.
+[0:11:11] the very famous global consulting firm. And they randomly assigned the AIs to
+[0:11:15] And they randomly assigned the AIs to different consultants on different types
+[0:11:17] different consultants on different types of consulting tasks. And what they found
+[0:11:19] of consulting tasks. And what they found is that for very easy consulting tasks,
+[0:11:22] is that for very easy consulting tasks, actually the consultants with access to
+[0:11:24] actually the consultants with access to AI can complete uh much faster and much
+[0:11:27] AI can complete uh much faster and much more accurately. But, for very hard
+[0:11:29] more accurately. But, for very hard consulting tasks, what they call
+[0:11:31] consulting tasks, what they call frontier tasks, that probably needs to
+[0:11:34] frontier tasks, that probably needs to think harder and go beyond sort of the
+[0:11:36] think harder and go beyond sort of the usual
+[0:11:37] usual like consulting
+[0:11:39] like consulting jobs.
+[0:11:40] jobs. It turns out the groups where the AI's
+[0:11:43] It turns out the groups where the AI's actually do much worse than the group
+[0:11:45] actually do much worse than the group without AI. Right? So this also tells
+[0:11:47] without AI. Right? So this also tells you that okay, we can't just give
+[0:11:49] you that okay, we can't just give probably consultants to AI for every
+[0:11:51] probably consultants to AI for every task. And the probably that the story
+[0:11:54] task. And the probably that the story that they gave is probably sometimes
+[0:11:56] that they gave is probably sometimes that the the workers often the case
+[0:11:58] that the the workers often the case over-reliant on AI if they even if the
+[0:12:01] over-reliant on AI if they even if the tasks are actually beyond the scope of
+[0:12:03] tasks are actually beyond the scope of the current AI capabilities. Okay.
+[0:12:06] the current AI capabilities. Okay. So from this application perspective,
+[0:12:08] So from this application perspective, how can we deploy AI intervention
+[0:12:10] how can we deploy AI intervention safely? So this goes back to this policy
+[0:12:12] safely? So this goes back to this policy learning problems I'm going to try to
+[0:12:14] learning problems I'm going to try to solve today, which is the individuals
+[0:12:16] solve today, which is the individuals comes in and we want to have the
+[0:12:18] comes in and we want to have the screening step, which is the policy
+[0:12:20] screening step, which is the policy learning algorithms. And if it's
+[0:12:22] learning algorithms. And if it's predicted to be safe for AI, we're going
+[0:12:24] predicted to be safe for AI, we're going to treat with an AI, predicted to be
+[0:12:26] to treat with an AI, predicted to be harmful by AI, maybe we're going to
+[0:12:28] harmful by AI, maybe we're going to still try to treat them with the status
+[0:12:31] still try to treat them with the status quo, such that the overall harm induced
+[0:12:34] quo, such that the overall harm induced by the AI is actually controlled a
+[0:12:37] by the AI is actually controlled a priori.
+[0:12:38] priori. And it could be task, different types of
+[0:12:40] And it could be task, different types of question administrative service, but the
+[0:12:42] question administrative service, but the really the key here is that if we can of
+[0:12:44] really the key here is that if we can of course predict whether it's going to be
+[0:12:46] course predict whether it's going to be safe for AI or predict to be harmed by
+[0:12:49] safe for AI or predict to be harmed by AI really precisely, this seems to be
+[0:12:51] AI really precisely, this seems to be easy.
+[0:12:52] easy. But the really the key idea for us is
+[0:12:55] But the really the key idea for us is that we want to have distribution free
+[0:12:57] that we want to have distribution free safety guarantees, meaning that we want
+[0:12:59] safety guarantees, meaning that we want to control the probability of you being
+[0:13:00] to control the probability of you being harmed by AI or any new interventions by
+[0:13:03] harmed by AI or any new interventions by at most alpha percent without assuming
+[0:13:06] at most alpha percent without assuming that these predictions of the safety of
+[0:13:08] that these predictions of the safety of AI is actually accurate. Right? So we do
+[0:13:10] AI is actually accurate. Right? So we do not want to make any assumptions
+[0:13:13] not want to make any assumptions for
+[0:13:14] for about what are these predictions of the
+[0:13:16] about what are these predictions of the AI harm is
+[0:13:18] AI harm is is is accurate and still we want to have
+[0:13:20] is is accurate and still we want to have the safety guarantees.
+[0:13:22] the safety guarantees. And to do that we're going to do the
+[0:13:23] And to do that we're going to do the conformal policy learning, which is sort
+[0:13:25] conformal policy learning, which is sort of the idea is policy learning with the
+[0:13:28] of the idea is policy learning with the stress holding conformal P values.
+[0:13:30] stress holding conformal P values. So, in particular, we're going to
+[0:13:31] So, in particular, we're going to construct a conformal P values for the
+[0:13:33] construct a conformal P values for the null hypothesis of the harm. So, this uh
+[0:13:37] null hypothesis of the harm. So, this uh how null hypothesis is sort of random
+[0:13:39] how null hypothesis is sort of random null hypothesis. So, this is uh the
+[0:13:41] null hypothesis. So, this is uh the reasons that it's uh become a little bit
+[0:13:43] reasons that it's uh become a little bit complicated as I'm explaining. And then,
+[0:13:46] complicated as I'm explaining. And then, we're going to figure out whether
+[0:13:48] we're going to figure out whether there's enough evidence against this
+[0:13:50] there's enough evidence against this null hypothesis of the harm. And if
+[0:13:52] null hypothesis of the harm. And if there's enough evidence, we're going to
+[0:13:53] there's enough evidence, we're going to start to treat them.
+[0:13:55] start to treat them. And in order to actually exploit uh and
+[0:13:57] And in order to actually exploit uh and we're going to try to exploit the sharp
+[0:14:00] we're going to try to exploit the sharp bound on the individual level harm in
+[0:14:02] bound on the individual level harm in order to achieve the optimality because
+[0:14:04] order to achieve the optimality because this harm is never observed because of
+[0:14:06] this harm is never observed because of the fundamental problem of causal
+[0:14:07] the fundamental problem of causal inference. So, we can't really a point
+[0:14:09] inference. So, we can't really a point identify this harm rate exactly. So,
+[0:14:12] identify this harm rate exactly. So, we're going to use the sharp bounds and
+[0:14:14] we're going to use the sharp bounds and partial identification.
+[0:14:17] partial identification. So, the theoretical property is that uh
+[0:14:19] So, the theoretical property is that uh for when we're learning the policy from
+[0:14:21] for when we're learning the policy from randomized control trials, we're going
+[0:14:23] randomized control trials, we're going to have the finite safety guarantees
+[0:14:25] to have the finite safety guarantees without any modeling assumptions, in
+[0:14:27] without any modeling assumptions, in particular, without any assumptions
+[0:14:28] particular, without any assumptions about sort of the conditional
+[0:14:30] about sort of the conditional expectations of the potential outcomes
+[0:14:32] expectations of the potential outcomes given the treatment and covariates,
+[0:14:34] given the treatment and covariates, right? The typical uh functionals that
+[0:14:36] right? The typical uh functionals that we care about in causal inference. We
+[0:14:38] we care about in causal inference. We have no assumptions about it even if it
+[0:14:40] have no assumptions about it even if it is
+[0:14:41] is uh arbitrarily specified, we still have
+[0:14:42] uh arbitrarily specified, we still have safety guarantees. However, we're going
+[0:14:45] safety guarantees. However, we're going to achieve the optimal power or optimal
+[0:14:47] to achieve the optimal power or optimal welfare asymptotically when those
+[0:14:49] welfare asymptotically when those assumptions met. So, if the conditional
+[0:14:52] assumptions met. So, if the conditional expectation is correctly specified, uh
+[0:14:54] expectation is correctly specified, uh we're going to be able to achieve the
+[0:14:56] we're going to be able to achieve the optimality.
+[0:14:57] optimality. Okay, so practical implication is that
+[0:15:00] Okay, so practical implication is that this is the way for us to use AI powered
+[0:15:02] this is the way for us to use AI powered interventions without worrying about oh,
+[0:15:05] interventions without worrying about oh, it might actually harm a lot of people.
+[0:15:07] it might actually harm a lot of people. So, instead of actually just try to
+[0:15:10] So, instead of actually just try to decide whether to use all AI versus no
+[0:15:12] decide whether to use all AI versus no AI, but we're going to try to offer sort
+[0:15:14] AI, but we're going to try to offer sort of the middle ground. Basically, okay,
+[0:15:17] of the middle ground. Basically, okay, what types of tasks, what types of
+[0:15:19] what types of tasks, what types of people should be treated by AI? And
+[0:15:21] people should be treated by AI? And we're going to have sort of a priori
+[0:15:22] we're going to have sort of a priori safety budget.
+[0:15:24] safety budget. So, if you're AI enthusiast and all, I
+[0:15:27] So, if you're AI enthusiast and all, I want to make AI itself completely safe,
+[0:15:31] want to make AI itself completely safe, I think it's it's often the case very
+[0:15:32] I think it's it's often the case very hard, but if it is the case it's a safe
+[0:15:34] hard, but if it is the case it's a safe for everyone from the beginning, then
+[0:15:37] for everyone from the beginning, then it's going to be the same as using AI
+[0:15:39] it's going to be the same as using AI for everyone. But this allows you to
+[0:15:41] for everyone. But this allows you to deploy AI systems even if it is not safe
+[0:15:44] deploy AI systems even if it is not safe for everyone, still you can guarantee
+[0:15:45] for everyone, still you can guarantee the safety.
+[0:15:47] the safety. There's a huge literatures that we rely
+[0:15:49] There's a huge literatures that we rely on, mostly policy learning literatures
+[0:15:52] on, mostly policy learning literatures and counterfactual harm literatures,
+[0:15:54] and counterfactual harm literatures, which is in talking about a partial
+[0:15:56] which is in talking about a partial identification for the harm rate, and in
+[0:15:58] identification for the harm rate, and in particular safe policy learning. This is
+[0:16:00] particular safe policy learning. This is the small but emerging literature,
+[0:16:02] the small but emerging literature, including a lot of work that Eli has
+[0:16:05] including a lot of work that Eli has done, our discussion today.
+[0:16:07] done, our discussion today. The key difference is that they are
+[0:16:09] The key difference is that they are focusing on sort of the harder problems
+[0:16:11] focusing on sort of the harder problems when you need to do sort of
+[0:16:12] when you need to do sort of extrapolations because the sort of the
+[0:16:15] extrapolations because the sort of the label data or training data
+[0:16:17] label data or training data only have sort of deterministic rules.
+[0:16:20] only have sort of deterministic rules. And they also have different types of
+[0:16:21] And they also have different types of safety notions. So, there's
+[0:16:24] safety notions. So, there's some kind of differences and so it's
+[0:16:26] some kind of differences and so it's complementary.
+[0:16:27] complementary. We are close to this papers later on,
+[0:16:30] We are close to this papers later on, but they make some kind of assumptions
+[0:16:32] but they make some kind of assumptions about potential outcomes in their
+[0:16:33] about potential outcomes in their analysis or asymptotics. So, those are
+[0:16:35] analysis or asymptotics. So, those are also kind different. Okay? And we will
+[0:16:37] also kind different. Okay? And we will of course rely on conformal inference.
+[0:16:39] of course rely on conformal inference. In particular, In has done a great work
+[0:16:41] In particular, In has done a great work on conformal selection before. So, if
+[0:16:43] on conformal selection before. So, if you're interested in it, you should read
+[0:16:44] you're interested in it, you should read this paper as well.
+[0:16:47] this paper as well. Okay. So, I'll probably pause here a
+[0:16:50] Okay. So, I'll probably pause here a little bit,
+[0:16:52] little bit, but it seems there's no questions, so
+[0:16:54] but it seems there's no questions, so can I just move on?
+[0:16:56] can I just move on? Yeah,
+[0:16:57] Yeah, we only had one and Ying dealt with it,
+[0:16:59] we only had one and Ying dealt with it, so uh
+[0:17:00] so uh Okay, perfect. Okay.
+[0:17:02] Okay, perfect. Okay. So, the road map is that we're going to
+[0:17:04] So, the road map is that we're going to start to do the problem set up, and then
+[0:17:07] start to do the problem set up, and then I'm going to talk about introducing
+[0:17:09] I'm going to talk about introducing conformal policy learning, and then talk
+[0:17:10] conformal policy learning, and then talk about two properties, the safety
+[0:17:12] about two properties, the safety guarantees and optimality. I'll end with
+[0:17:14] guarantees and optimality. I'll end with the extensions, and then
+[0:17:17] the extensions, and then briefly talk about the simulations and
+[0:17:19] briefly talk about the simulations and empirical applications.
+[0:17:26] So, the setup is kind of simple and and really uh standard in causal inference
+[0:17:28] really uh standard in causal inference and policy learning. So, we're going to
+[0:17:30] and policy learning. So, we're going to observe n i.i.d. samples. For each unit,
+[0:17:32] observe n i.i.d. samples. For each unit, we observe the triplets.
+[0:17:34] we observe the triplets. Treatment is binary here. TI = 1 is new
+[0:17:38] Treatment is binary here. TI = 1 is new interventions and TI = 0 is the status
+[0:17:40] interventions and TI = 0 is the status quo.
+[0:17:42] quo. And we have binary potential outcomes Y1
+[0:17:45] And we have binary potential outcomes Y1 and Y0. So, the method could be applied
+[0:17:48] and Y0. So, the method could be applied could be generalized to continuous ones,
+[0:17:50] could be generalized to continuous ones, but the current paper focuses on the
+[0:17:52] but the current paper focuses on the binary ones to have a sharp results.
+[0:17:55] binary ones to have a sharp results. We observe the outcomes consistent with
+[0:17:56] We observe the outcomes consistent with the potential outcomes. So, this is the
+[0:17:58] the potential outcomes. So, this is the one of the suit assumptions
+[0:18:00] one of the suit assumptions and then we're going to observe the
+[0:18:01] and then we're going to observe the feature X.
+[0:18:03] feature X. We assume that in this sort of the label
+[0:18:06] We assume that in this sort of the label data points label data sets, we have
+[0:18:09] data points label data sets, we have unconfoundedness. So, it's satisfied
+[0:18:11] unconfoundedness. So, it's satisfied automatically if you do randomized
+[0:18:13] automatically if you do randomized control trials. You need to justify if
+[0:18:15] control trials. You need to justify if you do from the observational studies,
+[0:18:17] you do from the observational studies, which also we're going to talk about at
+[0:18:19] which also we're going to talk about at the end.
+[0:18:24] The second key assumption is the test point is exchangeable with the observed
+[0:18:26] point is exchangeable with the observed data. And this is really common in the
+[0:18:28] data. And this is really common in the policy learning literature. Most of the
+[0:18:29] policy learning literature. Most of the time, we assume the test points come
+[0:18:31] time, we assume the test points come from the same distribution as our label
+[0:18:34] from the same distribution as our label data points or training data points for
+[0:18:36] data points or training data points for the for learning policies.
+[0:18:39] the for learning policies. But again, we also going to allow for
+[0:18:41] But again, we also going to allow for some covariate shift at the end. But for
+[0:18:43] some covariate shift at the end. But for now, I'm going to focus on the case
+[0:18:45] now, I'm going to focus on the case where the test point is exchangeable
+[0:18:46] where the test point is exchangeable with the observed data.
+[0:18:49] with the observed data. Again, the goal is to try to learn a
+[0:18:51] Again, the goal is to try to learn a policy with the specific safety
+[0:18:53] policy with the specific safety guarantee definitions
+[0:18:55] guarantee definitions for the specific new test points. We
+[0:18:57] for the specific new test points. We want to upper bound the probability that
+[0:19:00] want to upper bound the probability that the the outcomes that you observe under
+[0:19:02] the the outcomes that you observe under this new policy is smaller than the
+[0:19:04] this new policy is smaller than the potential outcomes in control,
+[0:19:06] potential outcomes in control, which is upper bounded by alpha. Okay.
+[0:19:10] which is upper bounded by alpha. Okay. And we want to achieve this without any
+[0:19:12] And we want to achieve this without any modeling assumptions.
+[0:19:16] So now let me walk you through step by step about how
+[0:19:19] walk you through step by step about how we can actually achieve this goal.
+[0:19:21] we can actually achieve this goal. The first thing is to turn the safety
+[0:19:23] The first thing is to turn the safety guarantees into the hypothesis testing.
+[0:19:26] guarantees into the hypothesis testing. So here the goal this is the safety
+[0:19:29] So here the goal this is the safety guarantees we have which is the
+[0:19:30] guarantees we have which is the potential outcomes under the treatment
+[0:19:33] potential outcomes under the treatment assignment based on this new policies is
+[0:19:35] assignment based on this new policies is smaller than potential outcomes on
+[0:19:36] smaller than potential outcomes on control.
+[0:19:38] control. Because of the very simple rules about
+[0:19:41] Because of the very simple rules about probabilities when
+[0:19:43] probabilities when this is equal to this one which is the
+[0:19:45] this is equal to this one which is the potential outcomes under treatment is
+[0:19:47] potential outcomes under treatment is smaller than potential outcome under
+[0:19:49] smaller than potential outcome under control and it's treated. Okay, so the
+[0:19:51] control and it's treated. Okay, so the harm will be realized when the unit is
+[0:19:55] harm will be realized when the unit is potentially harmed by the interventions
+[0:19:57] potentially harmed by the interventions and you actually decided to treat that
+[0:19:59] and you actually decided to treat that person. Okay, so you don't need to harm
+[0:20:00] person. Okay, so you don't need to harm this persons if that persons is
+[0:20:03] this persons if that persons is benefiting from the treatment or if the
+[0:20:05] benefiting from the treatment or if the persons could be harmed by the treatment
+[0:20:07] persons could be harmed by the treatment but we decide not to treat them. Okay,
+[0:20:08] but we decide not to treat them. Okay, so if these two events occurred at the
+[0:20:11] so if these two events occurred at the same time the harm will realize and so
+[0:20:13] same time the harm will realize and so we want to upper bound this probability.
+[0:20:16] we want to upper bound this probability. Because we focus on the binary potential
+[0:20:18] Because we focus on the binary potential outcomes for now this is the same as Y1
+[0:20:21] outcomes for now this is the same as Y1 equal to zero Y0 equal to one and pi
+[0:20:23] equal to zero Y0 equal to one and pi equal to one.
+[0:20:29] Let's suppose we can construct a p value such that this statement is true.
+[0:20:32] such that this statement is true. Meaning that this act as a null
+[0:20:34] Meaning that this act as a null hypothesis the potential outcomes under
+[0:20:36] hypothesis the potential outcomes under one is equal to zero potential outcomes
+[0:20:38] one is equal to zero potential outcomes under zero is equal to one and p value
+[0:20:41] under zero is equal to one and p value is smaller than alpha is alpha. Okay, so
+[0:20:43] is smaller than alpha is alpha. Okay, so this is sort of like kind of a a little
+[0:20:45] this is sort of like kind of a a little bit strange notions of the p values but
+[0:20:50] bit strange notions of the p values but this becomes handy and this is the
+[0:20:52] this becomes handy and this is the reasons why we need to do this is
+[0:20:53] reasons why we need to do this is because this null hypothesis is random.
+[0:20:55] because this null hypothesis is random. Okay, so it needs to be within the
+[0:20:57] Okay, so it needs to be within the probability.
+[0:20:59] probability. But let's suppose you can construct this
+[0:21:00] But let's suppose you can construct this p values then it's kind of easy because
+[0:21:03] p values then it's kind of easy because you just see this and you can replace
+[0:21:06] you just see this and you can replace this so you can just use this P values
+[0:21:08] this so you can just use this P values and threshold them with the alpha, you
+[0:21:10] and threshold them with the alpha, you can achieve the safety guarantees.
+[0:21:14] can achieve the safety guarantees. And so of course the really the question
+[0:21:15] And so of course the really the question is that okay, can we construct such P
+[0:21:17] is that okay, can we construct such P value without making modeling
+[0:21:18] value without making modeling assumption? That's the first questions.
+[0:21:21] assumption? That's the first questions. And the second is that why do we even
+[0:21:23] And the second is that why do we even care about the thresholding rules? Like
+[0:21:26] care about the thresholding rules? Like it seems okay if you can actually
+[0:21:28] it seems okay if you can actually achieve the safety guarantees, but is it
+[0:21:31] achieve the safety guarantees, but is it in some sense optimal among all the safe
+[0:21:33] in some sense optimal among all the safe policies?
+[0:21:40] So the preliminary ideas is that we want to first just directly apply the
+[0:21:42] to first just directly apply the conformal P values. Just to make things
+[0:21:45] conformal P values. Just to make things really concrete, we going to focus on
+[0:21:46] really concrete, we going to focus on the balanced randomized controlled
+[0:21:48] the balanced randomized controlled trials where just the treatment is just
+[0:21:51] trials where just the treatment is just fair coin flip. So it's just everyone
+[0:21:53] fair coin flip. So it's just everyone has 50% of chance to get treated and
+[0:21:55] has 50% of chance to get treated and control. Okay? And of course we going to
+[0:21:57] control. Okay? And of course we going to relax this one. This is just for
+[0:21:59] relax this one. This is just for simplicity.
+[0:22:01] simplicity. We're going to focus on first the
+[0:22:02] We're going to focus on first the conservative guarantees, meaning that we
+[0:22:05] conservative guarantees, meaning that we cannot observe Y1 = 0 and Y0 = 1. So we
+[0:22:09] cannot observe Y1 = 0 and Y0 = 1. So we just going to focus on the
+[0:22:10] just going to focus on the one side of this. Okay? And of course we
+[0:22:12] one side of this. Okay? And of course we going to make um use of partial
+[0:22:14] going to make um use of partial identifications later.
+[0:22:16] identifications later. But let's suppose you can construct this
+[0:22:18] But let's suppose you can construct this new P1, which is less than alpha is
+[0:22:21] new P1, which is less than alpha is alpha, then of course you can achieve
+[0:22:24] alpha, then of course you can achieve the safety guarantees as well because
+[0:22:26] the safety guarantees as well because this event is implied by the real harm
+[0:22:29] this event is implied by the real harm event.
+[0:22:34] But how can we do this? This is in fact what um uh conformal P values and what
+[0:22:37] what um uh conformal P values and what In has worked on before. This is the one
+[0:22:39] In has worked on before. This is the one that when you create the conformal P
+[0:22:41] that when you create the conformal P values using this particular scores,
+[0:22:44] values using this particular scores, okay? And so let me give you one
+[0:22:45] okay? And so let me give you one specific examples of the clip score
+[0:22:47] specific examples of the clip score functions.
+[0:22:49] functions. This is the case uh
+[0:22:50] This is the case uh when TI is treatment and Y is the
+[0:22:53] when TI is treatment and Y is the outcome and mu is just the the predicted
+[0:22:57] outcome and mu is just the the predicted uh probabilities of Y1 given TI = T and
+[0:23:00] uh probabilities of Y1 given TI = T and XI = X.
+[0:23:02] XI = X. So intuitively what does this is that
+[0:23:05] So intuitively what does this is that okay, let's
+[0:23:07] okay, let's look at among treated units, let's look
+[0:23:09] look at among treated units, let's look at the units that's Y
+[0:23:12] at the units that's Y I equal to zero. Because this is the
+[0:23:14] I equal to zero. Because this is the treated units, this is Y1, okay? So,
+[0:23:17] treated units, this is Y1, okay? So, this is Y1 equal to zero. So, you look
+[0:23:19] this is Y1 equal to zero. So, you look at the label data points that you
+[0:23:21] at the label data points that you already have collected XY T, you look at
+[0:23:25] already have collected XY T, you look at the older units that has Y1 equal to
+[0:23:27] the older units that has Y1 equal to zero. So, these are potentially unsafe
+[0:23:29] zero. So, these are potentially unsafe units. Right? It's just potential
+[0:23:31] units. Right? It's just potential because it could be Y0 is equal to zero,
+[0:23:34] because it could be Y0 is equal to zero, too. But if Y0 equal to one, that's
+[0:23:36] too. But if Y0 equal to one, that's unsafe units.
+[0:23:38] unsafe units. And you look at okay, among those units,
+[0:23:42] And you look at okay, among those units, this test units, which is Xn + 1,
+[0:23:47] this test units, which is Xn + 1, is this really extreme? So, we are going
+[0:23:48] is this really extreme? So, we are going to do actually the rank test against
+[0:23:51] to do actually the rank test against this potentially unsafe cases. So, we
+[0:23:53] this potentially unsafe cases. So, we are trying to figure out where are the
+[0:23:55] are trying to figure out where are the test unit belongs to this sort of
+[0:23:57] test unit belongs to this sort of potentially unsafe cases in the label
+[0:23:59] potentially unsafe cases in the label data points. So, that's sort of the
+[0:24:01] data points. So, that's sort of the intuition.
+[0:24:03] intuition. And in fact, this actually P values and
+[0:24:05] And in fact, this actually P values and you do the thresholding actually going
+[0:24:07] you do the thresholding actually going to satisfies this guarantees even when
+[0:24:11] to satisfies this guarantees even when this mu one is actually completely
+[0:24:13] this mu one is actually completely misspecified. So, let me actually use
+[0:24:16] misspecified. So, let me actually use very simple proof sketch to explain the
+[0:24:18] very simple proof sketch to explain the logic behind this.
+[0:24:20] logic behind this. So, first, let's think about the oracle
+[0:24:22] So, first, let's think about the oracle conformal P values. This is the oracle
+[0:24:25] conformal P values. This is the oracle in a sense that you don't get to observe
+[0:24:27] in a sense that you don't get to observe this. Because now we are imputing Y n +
+[0:24:31] this. Because now we are imputing Y n + 1 equal to one. So, this is the
+[0:24:33] 1 equal to one. So, this is the potential outcomes for the test unit.
+[0:24:35] potential outcomes for the test unit. So, this is something that you would
+[0:24:36] So, this is something that you would never observe in practice.
+[0:24:38] never observe in practice. And we're going to compare this to the
+[0:24:40] And we're going to compare this to the observed conformal P values. So, this is
+[0:24:42] observed conformal P values. So, this is the what you can actually compute in
+[0:24:44] the what you can actually compute in practice.
+[0:24:46] practice. So, there's one
+[0:24:48] So, there's one key difference, which is this new
+[0:24:50] key difference, which is this new potential outcomes for the test unit is
+[0:24:53] potential outcomes for the test unit is now imputed as zero, right? Which is the
+[0:24:55] now imputed as zero, right? Which is the null hypothesis that we have. Y1 in the
+[0:24:59] null hypothesis that we have. Y1 in the oracle conformal p-values and then Y in
+[0:25:01] oracle conformal p-values and then Y in the observed conformal p-values are
+[0:25:03] the observed conformal p-values are actually the same because among the
+[0:25:05] actually the same because among the treated units, Y and Y1 are the same.
+[0:25:09] treated units, Y and Y1 are the same. Then, if you think about this exactly
+[0:25:13] Then, if you think about this exactly the sort of the harm rate that we want
+[0:25:14] the sort of the harm rate that we want to control,
+[0:25:16] to control, Y1 equal to zero and P1 is smaller than
+[0:25:19] Y1 equal to zero and P1 is smaller than alpha is actually equal to the case when
+[0:25:22] alpha is actually equal to the case when Y1 equal to zero and then oracle
+[0:25:24] Y1 equal to zero and then oracle p-values is smaller than alpha because
+[0:25:27] p-values is smaller than alpha because when YN + 1 equal to 1
+[0:25:31] when YN + 1 equal to 1 under the null hypothesis, actually the
+[0:25:33] under the null hypothesis, actually the oracle p-values and observed p-values
+[0:25:34] oracle p-values and observed p-values are exactly the same.
+[0:25:37] are exactly the same. And because of the simple rules of the
+[0:25:38] And because of the simple rules of the probability, you can just drop this one
+[0:25:41] probability, you can just drop this one which actually,
+[0:25:42] which actually, you know, related to the sharpness,
+[0:25:46] you know, related to the sharpness, but this is always true.
+[0:25:48] but this is always true. And because
+[0:25:49] And because X and Y1
+[0:25:52] X and Y1 among the observed data and test units
+[0:25:54] among the observed data and test units are exchangeable and we did the
+[0:25:56] are exchangeable and we did the randomized treatments, so the one that
+[0:25:59] randomized treatments, so the one that we observe and then the the test units
+[0:26:02] we observe and then the the test units are exchangeable. So, this p-value is
+[0:26:05] are exchangeable. So, this p-value is actually dominated by the uniform
+[0:26:07] actually dominated by the uniform distribution. So, this actually going to
+[0:26:08] distribution. So, this actually going to be true, okay? And here in this proof,
+[0:26:11] be true, okay? And here in this proof, there's no place in which we use the
+[0:26:13] there's no place in which we use the particular
+[0:26:16] particular assumptions about B.
+[0:26:18] assumptions about B. Okay, so in this case that mu hat can be
+[0:26:21] Okay, so in this case that mu hat can be completely misspecified and still we can
+[0:26:23] completely misspecified and still we can have the safety guarantees.
+[0:26:30] What we propose in this paper is to improve upon this very first preliminary
+[0:26:33] improve upon this very first preliminary ideas in two ways. The first is to use
+[0:26:36] ideas in two ways. The first is to use the selective choice of the calibration.
+[0:26:37] the selective choice of the calibration. So, we're not going to just use just
+[0:26:39] So, we're not going to just use just treated units or just control units, but
+[0:26:42] treated units or just control units, but we're going to use a selectively. And we
+[0:26:44] we're going to use a selectively. And we also going to pick certain optimal score
+[0:26:46] also going to pick certain optimal score functions. So, the previous results are
+[0:26:48] functions. So, the previous results are true for any score functions, but we're
+[0:26:50] true for any score functions, but we're going to pick the particular optimal
+[0:26:52] going to pick the particular optimal ones.
+[0:26:54] ones. And so, what we propose in the paper is
+[0:26:56] And so, what we propose in the paper is conformal policy learning. Here, we're
+[0:26:57] conformal policy learning. Here, we're going to define the conformal P values
+[0:27:00] going to define the conformal P values using this new G
+[0:27:03] using this new G and V, but now we're going to use Y
+[0:27:05] and V, but now we're going to use Y dagger instead of just the Y. So, what
+[0:27:08] dagger instead of just the Y. So, what is the Y dagger? Y dagger is equal to Y
+[0:27:12] is the Y dagger? Y dagger is equal to Y when treated, and it is 1 minus uh YI if
+[0:27:17] when treated, and it is 1 minus uh YI if it is control.
+[0:27:18] it is control. So, why? Because this Y dagger again
+[0:27:21] So, why? Because this Y dagger again sort of encodes this
+[0:27:23] sort of encodes this uh sort of potentially unsafe cases.
+[0:27:25] uh sort of potentially unsafe cases. When Y dagger equal to zero, it means Y1
+[0:27:28] When Y dagger equal to zero, it means Y1 equal to zero or Y0 equal to one. So,
+[0:27:30] equal to zero or Y0 equal to one. So, it's again sort of encoding the idea
+[0:27:32] it's again sort of encoding the idea this unit could be still unsafe.
+[0:27:36] this unit could be still unsafe. And when you use GI equal to T, it
+[0:27:38] And when you use GI equal to T, it recovers the P1 that I showed you
+[0:27:40] recovers the P1 that I showed you before, which is really simple ones. And
+[0:27:43] before, which is really simple ones. And when you use just the 1 minus TI, you
+[0:27:45] when you use just the 1 minus TI, you just look at all the control units. It
+[0:27:47] just look at all the control units. It recovers the P0 that we
+[0:27:50] recovers the P0 that we uh the sort of the uh the counterpart of
+[0:27:52] uh the sort of the uh the counterpart of the P values that I showed.
+[0:27:55] the P values that I showed. So, the results that we have um in the
+[0:27:57] So, the results that we have um in the paper is that safety guarantees holds
+[0:28:00] paper is that safety guarantees holds for any V, essentially any V, and then
+[0:28:03] for any V, essentially any V, and then some large class of G that actually
+[0:28:05] some large class of G that actually contains the optimal choice of the G.
+[0:28:08] contains the optimal choice of the G. And the second result is that we're
+[0:28:11] And the second result is that we're going to be able to achieve asymptotic
+[0:28:13] going to be able to achieve asymptotic optimality by choosing specific
+[0:28:16] optimality by choosing specific functions V and specific functions of
+[0:28:19] functions V and specific functions of the G.
+[0:28:21] the G. So, it's going to be always safe, but
+[0:28:23] So, it's going to be always safe, but can be optimal with the specific choice
+[0:28:26] can be optimal with the specific choice of the B and the G.
+[0:28:29] of the B and the G. So, the first question is that can we
+[0:28:31] So, the first question is that can we achieve uh this uh can we construct P
+[0:28:34] achieve uh this uh can we construct P value with the safety guarantees?
+[0:28:37] value with the safety guarantees? So, for now, suppose GI is a functions
+[0:28:41] So, for now, suppose GI is a functions of both XI and TI. So, we can actually
+[0:28:44] of both XI and TI. So, we can actually choose which samples to be used for
+[0:28:47] choose which samples to be used for computing P values. Both X and TIs, and
+[0:28:50] computing P values. Both X and TIs, and actually those are the old informations
+[0:28:52] actually those are the old informations you have for the
+[0:28:54] you have for the pre-treatment.
+[0:28:57] pre-treatment. And this is again for simplifying
+[0:28:59] And this is again for simplifying assumptions. We're going to assume that
+[0:29:01] assumptions. We're going to assume that the what are you get sampled or not is
+[0:29:05] the what are you get sampled or not is actually constant. So it's independent
+[0:29:06] actually constant. So it's independent of the X and Y and Y zero. Okay, for
+[0:29:09] of the X and Y and Y zero. Okay, for now. Okay, and again this can be quite
+[0:29:11] now. Okay, and again this can be quite easily generalizable. And also the key
+[0:29:13] easily generalizable. And also the key point is that this assumption is not
+[0:29:16] point is that this assumption is not binding in a sense that actually the
+[0:29:18] binding in a sense that actually the optimal choice of the G actually still
+[0:29:20] optimal choice of the G actually still satisfies this assumptions three by
+[0:29:22] satisfies this assumptions three by construction.
+[0:29:25] construction. Recall this is the conformal P values we
+[0:29:27] Recall this is the conformal P values we have, and then we have the scale
+[0:29:29] have, and then we have the scale entities that if you use this P values
+[0:29:31] entities that if you use this P values and then do the thresholding with the
+[0:29:32] and then do the thresholding with the alpha, we can again have the safety
+[0:29:35] alpha, we can again have the safety guarantees under three assumptions.
+[0:29:39] guarantees under three assumptions. And so let me go through the proof again
+[0:29:41] And so let me go through the proof again just to generalize the proof sketch that
+[0:29:43] just to generalize the proof sketch that I showed before. So again, look at the
+[0:29:45] I showed before. So again, look at the conformal P values. Now, we are instead
+[0:29:48] conformal P values. Now, we are instead of using Y, here we are using Y star,
+[0:29:52] of using Y, here we are using Y star, which is not going to be observed for
+[0:29:54] which is not going to be observed for even the label data points
+[0:29:56] even the label data points um as well as for the test point. This
+[0:29:59] um as well as for the test point. This is the maximum of the Y1 and 1 minus Y0.
+[0:30:04] is the maximum of the Y1 and 1 minus Y0. And so Y star equal to zero
+[0:30:06] And so Y star equal to zero always means that it's unsafe. Right? So
+[0:30:09] always means that it's unsafe. Right? So it's both equal to zero. Okay, so it's
+[0:30:11] it's both equal to zero. Okay, so it's Y1 equal zero, Y0 equal to one.
+[0:30:15] Y1 equal zero, Y0 equal to one. We won't be able to again compute this
+[0:30:17] We won't be able to again compute this conformal P values, but we're going to
+[0:30:19] conformal P values, but we're going to construct the observed conformal P value
+[0:30:21] construct the observed conformal P value that's as closely mimicking this.
+[0:30:24] that's as closely mimicking this. So here there's two differences. The
+[0:30:26] So here there's two differences. The first difference is again for the test
+[0:30:28] first difference is again for the test point, we won't be able to observe them.
+[0:30:31] point, we won't be able to observe them. So we're going to impute with the null
+[0:30:32] So we're going to impute with the null hypothesis zero.
+[0:30:35] hypothesis zero. But even for the label data points, we
+[0:30:36] But even for the label data points, we won't be able to observe Y star, so
+[0:30:38] won't be able to observe Y star, so we're going to use Y dagger, which we
+[0:30:40] we're going to use Y dagger, which we have been using, which is just Y for
+[0:30:43] have been using, which is just Y for treated units and 1 - Y I for the
+[0:30:45] treated units and 1 - Y I for the control units.
+[0:30:48] control units. So, it turns out this Y dagger uh sorry,
+[0:30:52] So, it turns out this Y dagger uh sorry, Y star is always larger than the Y
+[0:30:55] Y star is always larger than the Y dagger.
+[0:30:56] dagger. So, when Y star is equal to zero,
+[0:31:01] So, when Y star is equal to zero, this is equal to this one, you just need
+[0:31:04] this is equal to this one, you just need to compare this one and this one, and
+[0:31:06] to compare this one and this one, and it's always the case that this is
+[0:31:08] it's always the case that this is bigger, so this P star the oracle P bar
+[0:31:12] bigger, so this P star the oracle P bar is always smaller than than the this
+[0:31:14] is always smaller than than the this observed P bar is.
+[0:31:16] observed P bar is. So, whenever you see the observed P bar
+[0:31:18] So, whenever you see the observed P bar is smaller than alpha, you know that a P
+[0:31:19] is smaller than alpha, you know that a P star is smaller than alpha. And you can
+[0:31:21] star is smaller than alpha. And you can also upper bound with this.
+[0:31:23] also upper bound with this. And this is something that we also prove
+[0:31:26] And this is something that we also prove in the paper because of the assumption
+[0:31:28] in the paper because of the assumption three, it's really easy to show that
+[0:31:29] three, it's really easy to show that it's exchangeable um with uh the X and Y
+[0:31:33] it's exchangeable um with uh the X and Y star of the observed data points and
+[0:31:35] star of the observed data points and test data points, so this P bar is also
+[0:31:38] test data points, so this P bar is also dominated by the uniform distribution,
+[0:31:40] dominated by the uniform distribution, so this is going to be uh satisfied. And
+[0:31:43] so this is going to be uh satisfied. And again, this assumption three is used
+[0:31:44] again, this assumption three is used just for simplicity to show the results
+[0:31:46] just for simplicity to show the results clearly.
+[0:31:54] The next question is that okay, it seems okay that we can threshold in the P
+[0:31:56] okay that we can threshold in the P values to satisfy the safety guarantee,
+[0:31:58] values to satisfy the safety guarantee, which is good, but why should we care
+[0:32:00] which is good, but why should we care about the thresholding rules on P values
+[0:32:02] about the thresholding rules on P values in the first place? So, we're going to
+[0:32:04] in the first place? So, we're going to first characterize the optimal policies
+[0:32:06] first characterize the optimal policies among all the policies.
+[0:32:09] among all the policies. So, suppose we are interested in the
+[0:32:11] So, suppose we are interested in the power maximizations. In this case, power
+[0:32:13] power maximizations. In this case, power we mean the probability
+[0:32:15] we mean the probability of treating the future units. Okay? So,
+[0:32:18] of treating the future units. Okay? So, again, it's uh truly safe if you just
+[0:32:22] again, it's uh truly safe if you just treat the people with the alpha percent,
+[0:32:24] treat the people with the alpha percent, so you want to probably maximize and
+[0:32:26] so you want to probably maximize and replace maybe like status quo with the
+[0:32:28] replace maybe like status quo with the new interventions as much as possible.
+[0:32:30] new interventions as much as possible. But, we're going to have the subject to
+[0:32:33] But, we're going to have the subject to this constraint. This subject is that a
+[0:32:36] this constraint. This subject is that a rate is upper bounded by alpha, but
+[0:32:38] rate is upper bounded by alpha, but we're going to consider worst case. So,
+[0:32:40] we're going to consider worst case. So, among all the possible worst case
+[0:32:42] among all the possible worst case scenarios, because we won't be able to
+[0:32:44] scenarios, because we won't be able to observe Y1 and Y0 jointly,
+[0:32:47] observe Y1 and Y0 jointly, everything that consistent with the
+[0:32:48] everything that consistent with the observed distributions, we want to still
+[0:32:50] observed distributions, we want to still want to guarantee the safety.
+[0:32:52] want to guarantee the safety. And it turns out you can reformulate
+[0:32:54] And it turns out you can reformulate this
+[0:32:55] this uh optimization problems
+[0:32:57] uh optimization problems uh as follows. So, in fact, this
+[0:33:00] uh as follows. So, in fact, this probability is the same as the
+[0:33:01] probability is the same as the expectation of the decisions
+[0:33:03] expectation of the decisions and subject to this multiplications of
+[0:33:06] and subject to this multiplications of the decisions, whether are you going to
+[0:33:07] the decisions, whether are you going to treat or not, and this gamma. Gamma is
+[0:33:11] treat or not, and this gamma. Gamma is actually just a 1 minus mu1 and mu0. Uh
+[0:33:14] actually just a 1 minus mu1 and mu0. Uh so, the minimum of the 1 minus mu1 and
+[0:33:16] so, the minimum of the 1 minus mu1 and mu0. So, this is actually the sharp
+[0:33:18] mu0. So, this is actually the sharp bounds on the probability of harm. So,
+[0:33:21] bounds on the probability of harm. So, this is the probability of Y1 smaller
+[0:33:24] this is the probability of Y1 smaller than Y0 given X.
+[0:33:26] than Y0 given X. So, if you um think about this one,
+[0:33:30] So, if you um think about this one, just based on the intuitions of the
+[0:33:31] just based on the intuitions of the linear relaxations, you can uh think
+[0:33:33] linear relaxations, you can uh think about oh, okay, so there's a utility
+[0:33:36] about oh, okay, so there's a utility coming is one if you decide to treat
+[0:33:39] coming is one if you decide to treat certain people, and then there's a cost
+[0:33:42] certain people, and then there's a cost which is coming from this red part,
+[0:33:44] which is coming from this red part, which is the harm. Okay? So, if you have
+[0:33:46] which is the harm. Okay? So, if you have this type of uh linear relaxations and
+[0:33:48] this type of uh linear relaxations and then discrete optimization problems,
+[0:33:51] then discrete optimization problems, the the solution is always sort of the
+[0:33:53] the the solution is always sort of the ratio of this utility and then the cost.
+[0:33:56] ratio of this utility and then the cost. And that's actually the case as well.
+[0:33:57] And that's actually the case as well. So, the optimal solutions among all the
+[0:34:00] So, the optimal solutions among all the safe policies, not even thinking about
+[0:34:02] safe policies, not even thinking about the optimal safe uh the conformal policy
+[0:34:04] the optimal safe uh the conformal policy learning problems, is to do the
+[0:34:06] learning problems, is to do the thresholding with respect to this harm
+[0:34:09] thresholding with respect to this harm rate gamma.
+[0:34:13] If you're interested in welfare maximization, which is the case for many
+[0:34:15] maximization, which is the case for many policy learning problems, we can treat
+[0:34:18] policy learning problems, we can treat the same prob- we can formulate the
+[0:34:19] the same prob- we can formulate the problem similarly, and it turns out this
+[0:34:22] problem similarly, and it turns out this problem is again reformulated as
+[0:34:26] problem is again reformulated as multiplications of the policy decisions,
+[0:34:29] multiplications of the policy decisions, pi, times the cate, subject to this
+[0:34:32] pi, times the cate, subject to this decision whether you treat or someone uh
+[0:34:35] decision whether you treat or someone uh treat the uh test unit or not, multiply
+[0:34:38] treat the uh test unit or not, multiply by alpha uh multiply by sorry, the harm.
+[0:34:41] by alpha uh multiply by sorry, the harm. Okay. So, again, from the linear
+[0:34:43] Okay. So, again, from the linear relaxation um
+[0:34:44] relaxation um um intuitions, you can probably guess
+[0:34:47] um intuitions, you can probably guess oh, probably the optimal solution is the
+[0:34:49] oh, probably the optimal solution is the ratio between them, and then you do the
+[0:34:51] ratio between them, and then you do the thresholding, and which is actually the
+[0:34:53] thresholding, and which is actually the case. Um even though the proof uses uh
+[0:34:55] case. Um even though the proof uses uh different techniques, um which is in the
+[0:34:57] different techniques, um which is in the paper. Okay. So, here the numerator is
+[0:35:00] paper. Okay. So, here the numerator is the Kate, and the denominator is the
+[0:35:02] the Kate, and the denominator is the harm.
+[0:35:04] harm. Okay. So, this also tells you that this
+[0:35:06] Okay. So, this also tells you that this is going to be different from the
+[0:35:07] is going to be different from the welfare maximization problems because
+[0:35:10] welfare maximization problems because even if the Kate is really large, if the
+[0:35:13] even if the Kate is really large, if the harm rate is really large, still you
+[0:35:15] harm rate is really large, still you might not still treat them. So, you want
+[0:35:17] might not still treat them. So, you want to probably think about both the Kate
+[0:35:19] to probably think about both the Kate estimates and this harm rate estimates
+[0:35:22] estimates and this harm rate estimates together when you're deciding.
+[0:35:24] together when you're deciding. However,
+[0:35:26] However, if you want to use this idea directly,
+[0:35:28] if you want to use this idea directly, you need to assume this mu 1, mu 0, and
+[0:35:30] you need to assume this mu 1, mu 0, and gamma all are are are estimated
+[0:35:32] gamma all are are are estimated consistently and correctly specified,
+[0:35:35] consistently and correctly specified, but we're not going to do that, right?
+[0:35:36] but we're not going to do that, right? So, we're going to achieve the
+[0:35:37] So, we're going to achieve the optimality using sort of the conformal
+[0:35:39] optimality using sort of the conformal policy learnings uh
+[0:35:41] policy learnings uh strategies.
+[0:35:43] strategies. So, in fact, we're going to achieve this
+[0:35:44] So, in fact, we're going to achieve this optimality using the conformal policies
+[0:35:46] optimality using the conformal policies as follows. So, we're going to first
+[0:35:48] as follows. So, we're going to first define the conformal p values as
+[0:35:51] define the conformal p values as follows. So, here we have still g, but
+[0:35:54] follows. So, here we have still g, but now we have this new specific clip score
+[0:35:58] now we have this new specific clip score functions.
+[0:35:59] functions. Y dagger is equal to zero, and then we
+[0:36:02] Y dagger is equal to zero, and then we have this score function s.
+[0:36:05] have this score function s. And here g is um a little bit
+[0:36:08] And here g is um a little bit convoluted, but I'll explain in a
+[0:36:10] convoluted, but I'll explain in a second. So, this g is sort of
+[0:36:13] second. So, this g is sort of selectively using some units from the
+[0:36:15] selectively using some units from the treated units and some units from the
+[0:36:17] treated units and some units from the control units.
+[0:36:19] control units. For units
+[0:36:21] For units whose predicted probability of the
+[0:36:24] whose predicted probability of the p uh probability predicted probability
+[0:36:27] p uh probability predicted probability of y 1 equal to 0 is smaller than the
+[0:36:29] of y 1 equal to 0 is smaller than the predicted probability of the Y 0 equal
+[0:36:31] predicted probability of the Y 0 equal to 1,
+[0:36:33] to 1, you're going to use the treated units
+[0:36:34] you're going to use the treated units because in fact for those units
+[0:36:38] because in fact for those units treated units going to give you the
+[0:36:39] treated units going to give you the sharp bounds on the potential harm or
+[0:36:41] sharp bounds on the potential harm or not.
+[0:36:42] not. And for the units whose predicted
+[0:36:44] And for the units whose predicted probability of Y 1 equal to 0 is larger
+[0:36:47] probability of Y 1 equal to 0 is larger than the predicted probability of Y 0
+[0:36:49] than the predicted probability of Y 0 equal to 1,
+[0:36:50] equal to 1, those are the units
+[0:36:52] those are the units um those are the cases when the control
+[0:36:54] um those are the cases when the control units in fact the mu 0 is going to be
+[0:36:56] units in fact the mu 0 is going to be the sharp bound.
+[0:36:58] the sharp bound. So we're going to try to pick which
+[0:37:00] So we're going to try to pick which units has the sharp bounds on the harm
+[0:37:02] units has the sharp bounds on the harm rate or not.
+[0:37:04] rate or not. So
+[0:37:08] And so basically look at the potentially unsafe cases for each unit, but instead
+[0:37:11] unsafe cases for each unit, but instead of just using the loose bounds on the
+[0:37:15] of just using the loose bounds on the unsafety for each unit, but we're going
+[0:37:18] unsafety for each unit, but we're going to try to use the sharp bounds.
+[0:37:20] to try to use the sharp bounds. And examine again whether the test unit
+[0:37:23] And examine again whether the test unit is extreme or not in terms of the
+[0:37:25] is extreme or not in terms of the relevant score. So that if you want to
+[0:37:26] relevant score. So that if you want to maximize the power, you use just the
+[0:37:28] maximize the power, you use just the harm rate directly, and if you want to
+[0:37:30] harm rate directly, and if you want to maximize the welfare, you actually do
+[0:37:32] maximize the welfare, you actually do the rank test based on this ratio that
+[0:37:35] the rank test based on this ratio that was relevant for the optimality.
+[0:37:42] And when this uh conditional expectations of the
+[0:37:44] this uh conditional expectations of the Y
+[0:37:45] Y uh the conditional expectations of the
+[0:37:47] uh the conditional expectations of the potential outcomes given treatment and
+[0:37:48] potential outcomes given treatment and control is consistently estimated,
+[0:37:53] control is consistently estimated, we're going to be able to achieve the
+[0:37:54] we're going to be able to achieve the optimal power or optimal welfare as N
+[0:37:56] optimal power or optimal welfare as N goes to infinity. Okay. And here the key
+[0:38:00] goes to infinity. Okay. And here the key is that if this assumption is true, this
+[0:38:02] is that if this assumption is true, this is going to be optimal, but even if this
+[0:38:04] is going to be optimal, but even if this assumption is not true, we always
+[0:38:06] assumption is not true, we always satisfies the safety in finite samples
+[0:38:09] satisfies the safety in finite samples using this P value threshold in this. So
+[0:38:12] using this P value threshold in this. So um always safe, but you're going to
+[0:38:14] um always safe, but you're going to achieve optimality um as the modern
+[0:38:17] achieve optimality um as the modern assumptions is is true.
+[0:38:20] assumptions is is true. I want to end with discussing certain
+[0:38:22] I want to end with discussing certain types of extensions. We can generalize
+[0:38:24] types of extensions. We can generalize the proposed approach to more general
+[0:38:26] the proposed approach to more general settings.
+[0:38:27] settings. We talked about just very simple
+[0:38:29] We talked about just very simple balanced randomized experiments to
+[0:38:31] balanced randomized experiments to illustrate the method, but we can use
+[0:38:33] illustrate the method, but we can use the we can use generalized random
+[0:38:35] the we can use generalized random experiment uh general general randomized
+[0:38:37] experiment uh general general randomized experiments. So, any stratified
+[0:38:38] experiments. So, any stratified experiments where propensity score is
+[0:38:40] experiments where propensity score is different for everyone.
+[0:38:43] different for everyone. And we can also uh do this one with
+[0:38:45] And we can also uh do this one with observational studies.
+[0:38:47] observational studies. Any choice of the calibration samples,
+[0:38:49] Any choice of the calibration samples, we assume
+[0:38:50] we assume sort of the uh the probability of
+[0:38:52] sort of the uh the probability of including samples to p-value
+[0:38:54] including samples to p-value construction is constant, but you can
+[0:38:56] construction is constant, but you can use anything. And we also allow for
+[0:38:59] use anything. And we also allow for covariate shift. And everything can be
+[0:39:00] covariate shift. And everything can be done within the broader framework of the
+[0:39:03] done within the broader framework of the weighted conformal p-value. So, we have
+[0:39:05] weighted conformal p-value. So, we have been always doing just the unweighted
+[0:39:07] been always doing just the unweighted conformal p-values and just picking
+[0:39:09] conformal p-values and just picking different G and picking different V, but
+[0:39:12] different G and picking different V, but by using different Ws, you're actually
+[0:39:15] by using different Ws, you're actually going to allow for variety of different
+[0:39:17] going to allow for variety of different settings. And in particular, W takes
+[0:39:19] settings. And in particular, W takes this form. Um the numerator is the
+[0:39:21] this form. Um the numerator is the propensity score times how likely you
+[0:39:24] propensity score times how likely you include the units within treated units,
+[0:39:28] include the units within treated units, 1 minus propensity score times the
+[0:39:30] 1 minus propensity score times the probability that you include the units
+[0:39:32] probability that you include the units given X and T equals 0. And then this is
+[0:39:34] given X and T equals 0. And then this is sort of the density ratios between the
+[0:39:37] sort of the density ratios between the test samples and calibration samples you
+[0:39:39] test samples and calibration samples you have.
+[0:39:41] have. And uh I don't have time to talk about
+[0:39:43] And uh I don't have time to talk about in this uh in this uh talk, but we
+[0:39:46] in this uh in this uh talk, but we derive the double robustness in
+[0:39:48] derive the double robustness in observational studies. So, sort of sort
+[0:39:50] observational studies. So, sort of sort of asymptotic W robust safety
+[0:39:51] of asymptotic W robust safety guarantees. So, we don't need to assume
+[0:39:54] guarantees. So, we don't need to assume uh outcome models are correct or
+[0:39:56] uh outcome models are correct or propensity scores are correct. We if
+[0:39:58] propensity scores are correct. We if just one of them is correct, we're going
+[0:39:59] just one of them is correct, we're going to still be able to achieve asymptotic
+[0:40:01] to still be able to achieve asymptotic safety guarantees when you're doing
+[0:40:03] safety guarantees when you're doing observational studies.
+[0:40:06] observational studies. With 5 minutes left, I'm going to walk
+[0:40:09] With 5 minutes left, I'm going to walk you through some simple simulation
+[0:40:10] you through some simple simulation studies and then illustrate the method
+[0:40:12] studies and then illustrate the method using applications.
+[0:40:14] using applications. So, the simulation is very simple. We're
+[0:40:16] So, the simulation is very simple. We're going to focus on the balance,
+[0:40:17] going to focus on the balance, randomized experiments, and consider
+[0:40:19] randomized experiments, and consider different types of GDP
+[0:40:22] different types of GDP DGP.
+[0:40:24] DGP. And we're going to
+[0:40:25] And we're going to illustrate our method using optimal
+[0:40:27] illustrate our method using optimal power versions, optimal welfare
+[0:40:29] power versions, optimal welfare versions, and compare against the
+[0:40:30] versions, and compare against the existing approaches.
+[0:40:32] existing approaches. This one has some assumptions about
+[0:40:34] This one has some assumptions about potential outcomes and all focus on
+[0:40:36] potential outcomes and all focus on asymptotic guarantees. And then just as
+[0:40:38] asymptotic guarantees. And then just as an ability
+[0:40:40] an ability the
+[0:40:41] the standard benchmarks, we're going to
+[0:40:43] standard benchmarks, we're going to focus on the policy tree. This is
+[0:40:44] focus on the policy tree. This is focusing on the welfare maximization. So
+[0:40:46] focusing on the welfare maximization. So they're not trained to control for
+[0:40:48] they're not trained to control for safety. So of course, they're not going
+[0:40:49] safety. So of course, they're not going to be able to achieve the safety, but
+[0:40:52] to be able to achieve the safety, but just wanted to show you because this is
+[0:40:53] just wanted to show you because this is one of the most popular and
+[0:40:55] one of the most popular and state-of-the-art methods people use.
+[0:40:58] state-of-the-art methods people use. So this is the harm rate that you see in
+[0:41:00] So this is the harm rate that you see in the simulations. So these are four
+[0:41:02] the simulations. So these are four different simulations setups and then
+[0:41:06] different simulations setups and then gray and then dark grays are the the
+[0:41:08] gray and then dark grays are the the baselines. And then the orange and dark
+[0:41:12] baselines. And then the orange and dark purple is our methods. So as you can
+[0:41:15] purple is our methods. So as you can see, this is the budget that we have is
+[0:41:17] see, this is the budget that we have is 10% and we control really tightly here
+[0:41:20] 10% and we control really tightly here and we are not really you know,
+[0:41:23] and we are not really you know, conservative either. But if you think
+[0:41:25] conservative either. But if you think about the other types of methods, the
+[0:41:27] about the other types of methods, the policy trees, they are actually
+[0:41:29] policy trees, they are actually surpassing the safety guarantees safety
+[0:41:31] surpassing the safety guarantees safety budget that you have.
+[0:41:33] budget that you have. And this is because the underlying
+[0:41:35] And this is because the underlying potential outcomes assumption is
+[0:41:36] potential outcomes assumption is validated for this method.
+[0:41:39] validated for this method. And these are four different data
+[0:41:41] And these are four different data generating process. This is the linear
+[0:41:43] generating process. This is the linear case and then we are fitting the linear
+[0:41:44] case and then we are fitting the linear models. So this is the case when the
+[0:41:46] models. So this is the case when the underlying model is actually correctly
+[0:41:47] underlying model is actually correctly specified. Even if that's the case that
+[0:41:50] specified. Even if that's the case that these two existing methods do not
+[0:41:52] these two existing methods do not guarantee the safety.
+[0:41:55] guarantee the safety. This is the linear but certain certain
+[0:41:57] This is the linear but certain certain key covariates are missing. So again,
+[0:41:59] key covariates are missing. So again, the models are misspecified. Underlying
+[0:42:01] the models are misspecified. Underlying model is non-linear, but we're still
+[0:42:02] model is non-linear, but we're still fitting the linear logistic regression
+[0:42:04] fitting the linear logistic regression models. This is the underlying model is
+[0:42:06] models. This is the underlying model is non-linear and there are missing
+[0:42:07] non-linear and there are missing covariates. So the more and more the
+[0:42:09] covariates. So the more and more the data generating process is complicated.
+[0:42:12] data generating process is complicated. The story is the same if you fit the
+[0:42:15] The story is the same if you fit the random forest as the underlying
+[0:42:18] random forest as the underlying estimation method. So, the the fact that
+[0:42:21] estimation method. So, the the fact that you see the other alternative methods
+[0:42:24] you see the other alternative methods cannot really achieve the safety
+[0:42:26] cannot really achieve the safety guarantee is not because too much
+[0:42:28] guarantee is not because too much because of the you fit very simple
+[0:42:29] because of the you fit very simple models like logistic regressions, even
+[0:42:31] models like logistic regressions, even if you fit more flexible models like
+[0:42:33] if you fit more flexible models like random forest, this is just do not
+[0:42:35] random forest, this is just do not achieve the safety guarantees. Okay? And
+[0:42:37] achieve the safety guarantees. Okay? And but like we always guarantee the safety.
+[0:42:45] But, what we want to make sure to show is that average welfare is also
+[0:42:47] is that average welfare is also something that you want to maximize. So,
+[0:42:48] something that you want to maximize. So, from our perspective, we have this
+[0:42:51] from our perspective, we have this safety guarantee as a constraint and
+[0:42:53] safety guarantee as a constraint and optimize the welfare as sort of the
+[0:42:55] optimize the welfare as sort of the secondary objective.
+[0:42:56] secondary objective. So, as you can see that of course the
+[0:42:59] So, as you can see that of course the alternative methods that are designed to
+[0:43:01] alternative methods that are designed to maximize the welfare is actually going
+[0:43:03] maximize the welfare is actually going to have the higher welfare than our
+[0:43:06] to have the higher welfare than our methods. This is something that you need
+[0:43:08] methods. This is something that you need to keep in mind as in a trade-off
+[0:43:09] to keep in mind as in a trade-off because we're going to have you as in a
+[0:43:12] because we're going to have you as in a safety, but at the same time we're not
+[0:43:14] safety, but at the same time we're not going to be able to achieve the welfare
+[0:43:16] going to be able to achieve the welfare as well as just focusing on the welfare
+[0:43:18] as well as just focusing on the welfare maximization, of course, right? But,
+[0:43:20] maximization, of course, right? But, what we want to show here is that the
+[0:43:22] what we want to show here is that the gap isn't that much, right? So, we are
+[0:43:24] gap isn't that much, right? So, we are not try to achieve the safety by
+[0:43:27] not try to achieve the safety by essentially not treating anyone and then
+[0:43:29] essentially not treating anyone and then be really conservative, but we are try
+[0:43:31] be really conservative, but we are try to treat as many people as possible
+[0:43:34] to treat as many people as possible within the
+[0:43:35] within the within the safety budget that we have.
+[0:43:37] within the safety budget that we have. Okay?
+[0:43:39] Okay? I want to end with an empirical
+[0:43:40] I want to end with an empirical applications of this Costero et al. So,
+[0:43:43] applications of this Costero et al. So, in this applications, they're interested
+[0:43:45] in this applications, they're interested in estimating the causal effect of AI
+[0:43:47] in estimating the causal effect of AI chatbots and conspiracy beliefs, and
+[0:43:50] chatbots and conspiracy beliefs, and they are try to use two different
+[0:43:51] they are try to use two different versions. One is AI chatbots try to
+[0:43:54] versions. One is AI chatbots try to debunk conspiracy theories, and the
+[0:43:55] debunk conspiracy theories, and the other is talking about other things, so
+[0:43:58] other is talking about other things, so which is control.
+[0:44:01] which is control. And we split the data into training,
+[0:44:03] And we split the data into training, calibration, test. Using the training
+[0:44:06] calibration, test. Using the training data, we train the Kate and propensity
+[0:44:08] data, we train the Kate and propensity score functions and use the calibration
+[0:44:11] score functions and use the calibration samples to compute the conformal P
+[0:44:12] samples to compute the conformal P values. And so, this is the results in
+[0:44:14] values. And so, this is the results in that show.
+[0:44:16] that show. So, our method, the power and welfare,
+[0:44:19] So, our method, the power and welfare, as you saw in the previous uh,
+[0:44:21] as you saw in the previous uh, simulation results, they are not that
+[0:44:23] simulation results, they are not that different in practice, which is good.
+[0:44:25] different in practice, which is good. Even though uh, they have different
+[0:44:28] Even though uh, they have different theoretical underpinnings, you don't
+[0:44:29] theoretical underpinnings, you don't need to really worry about whether I
+[0:44:31] need to really worry about whether I should optimize for power or welfare in
+[0:44:33] should optimize for power or welfare in practice because they often the case
+[0:44:35] practice because they often the case give you pretty results in practice. So,
+[0:44:38] give you pretty results in practice. So, they treat many people in practice. So,
+[0:44:41] they treat many people in practice. So, more than 90% of people are treated and
+[0:44:43] more than 90% of people are treated and harm rate is tightly controlled. The
+[0:44:46] harm rate is tightly controlled. The budget was 2.5% and estimated welfare is
+[0:44:50] budget was 2.5% and estimated welfare is about 25% and in fact, the welfare one
+[0:44:54] about 25% and in fact, the welfare one is slightly higher and then the power
+[0:44:56] is slightly higher and then the power one has a slightly more treated people.
+[0:44:58] one has a slightly more treated people. But, they are essentially the same.
+[0:45:01] But, they are essentially the same. If you compare to the baseline where you
+[0:45:03] If you compare to the baseline where you treat everyone, then treated proportion
+[0:45:06] treat everyone, then treated proportion is 100%. In this case, the harm rate is
+[0:45:09] is 100%. In this case, the harm rate is 4%, right? So, you don't really have any
+[0:45:11] 4%, right? So, you don't really have any control a priori, so you're going to uh,
+[0:45:14] control a priori, so you're going to uh, uh, harm um, more than
+[0:45:17] uh, harm um, more than about 4% and of course, it achieved the
+[0:45:19] about 4% and of course, it achieved the welfare. If you compare to the treaty
+[0:45:22] welfare. If you compare to the treaty safe policies where you're going to only
+[0:45:23] safe policies where you're going to only treat the 2.5% of the people, harm rate
+[0:45:26] treat the 2.5% of the people, harm rate is really small, but welfare is also
+[0:45:29] is really small, but welfare is also really small.
+[0:45:30] really small. So, this is somehow um, tells you how
+[0:45:33] So, this is somehow um, tells you how our method works. And so, this
+[0:45:35] our method works. And so, this difference between our method and then
+[0:45:37] difference between our method and then treat everyone is going to be probably
+[0:45:39] treat everyone is going to be probably bigger if there's more treatment effect
+[0:45:41] bigger if there's more treatment effect heterogeneity in practice. Okay.
+[0:45:43] heterogeneity in practice. Okay. And I just want to end by talking about
+[0:45:46] And I just want to end by talking about in practice, it's possible for you to
+[0:45:48] in practice, it's possible for you to decide uh, and visualize who gets
+[0:45:50] decide uh, and visualize who gets treated. And so, in this applications,
+[0:45:52] treated. And so, in this applications, this pre-treatment experiment to believe
+[0:45:54] this pre-treatment experiment to believe was a very important moderators that
+[0:45:56] was a very important moderators that decide who gets treated or not.
+[0:45:59] decide who gets treated or not. So, I want to end by saying that we
+[0:46:01] So, I want to end by saying that we introduce this new method conformal
+[0:46:03] introduce this new method conformal policy learning that has finite safety
+[0:46:05] policy learning that has finite safety guarantees without any modeling
+[0:46:07] guarantees without any modeling assumptions,
+[0:46:08] assumptions, but it's going to achieve the asymptotic
+[0:46:10] but it's going to achieve the asymptotic optimality if the standard modeling
+[0:46:12] optimality if the standard modeling assumptions about conditional
+[0:46:13] assumptions about conditional expectations are true.
+[0:46:15] expectations are true. And in fact, I want to emphasize that
+[0:46:16] And in fact, I want to emphasize that this conditional expectation estimation
+[0:46:18] this conditional expectation estimation does not have any particular convergence
+[0:46:20] does not have any particular convergence rate
+[0:46:21] rate requirements that if you do from
+[0:46:23] requirements that if you do from randomized control trial.
+[0:46:25] randomized control trial. We have observational studies extensions
+[0:46:27] We have observational studies extensions in the paper covariate shift. And we are
+[0:46:31] in the paper covariate shift. And we are working on a variety of different
+[0:46:32] working on a variety of different extensions of this idea focusing on
+[0:46:35] extensions of this idea focusing on maybe descriptive harm like
+[0:46:37] maybe descriptive harm like hallucinations. We're going to try to
+[0:46:39] hallucinations. We're going to try to incorporate multiple outcomes, not just
+[0:46:40] incorporate multiple outcomes, not just one outcomes, but we want to balance
+[0:46:42] one outcomes, but we want to balance different outcomes and we want to have
+[0:46:43] different outcomes and we want to have safety for all the outcomes, continuous
+[0:46:46] safety for all the outcomes, continuous outcomes and so on.
+[0:46:47] outcomes and so on. I've been working on these areas,
+[0:46:49] I've been working on these areas, so if you're interested in, I'm happy to
+[0:46:52] so if you're interested in, I'm happy to talk more on these areas of AI, causal
+[0:46:54] talk more on these areas of AI, causal inference in social sciences. So, please
+[0:46:57] inference in social sciences. So, please send us comments to me or in and thank
+[0:46:59] send us comments to me or in and thank you so much.
+[0:47:25] All right, maybe we can hand over to Eli for the discussion.
+[0:47:28] for the discussion. Sure, yeah.
+[0:47:36] Okay, can you see this? Working? All right, perfect.
+[0:47:38] Working? All right, perfect. Um okay, great. Yeah, hi. I am Eli. I
+[0:47:44] Um okay, great. Yeah, hi. I am Eli. I Sorry, I'm trying to move my
+[0:47:47] Sorry, I'm trying to move my thing here.
+[0:47:49] thing here. Oops.
+[0:47:55] Sorry about that. Okay, great. Sorry. Hi everyone. I'm Eli. I'm an assistant
+[0:47:57] everyone. I'm Eli. I'm an assistant professor of statistics and public
+[0:47:58] professor of statistics and public policy at Carnegie Mellon. Um
+[0:48:01] policy at Carnegie Mellon. Um I'm really happy to be asked to discuss
+[0:48:03] I'm really happy to be asked to discuss this paper. I think it's really
+[0:48:04] this paper. I think it's really interesting. They gave us a nice talk.
+[0:48:06] interesting. They gave us a nice talk. Um
+[0:48:07] Um So, I want to start by sort of taking a
+[0:48:10] So, I want to start by sort of taking a step back and just thinking about like
+[0:48:12] step back and just thinking about like the goals in this paper, but it's kind
+[0:48:13] the goals in this paper, but it's kind of our goals generally when we're
+[0:48:14] of our goals generally when we're thinking about policy learning,
+[0:48:16] thinking about policy learning, individualized treatment rules, all of
+[0:48:17] individualized treatment rules, all of that.
+[0:48:19] that. Um so, [sighs]
+[0:48:20] Um so, [sighs] generally what we want to do is we want
+[0:48:22] generally what we want to do is we want to learn a decision policy pi that maps
+[0:48:24] to learn a decision policy pi that maps from some space of covariates to a
+[0:48:27] from some space of covariates to a decision. And in this case, it's a
+[0:48:28] decision. And in this case, it's a binary decision between
+[0:48:30] binary decision between you know, giving someone a control
+[0:48:31] you know, giving someone a control condition or maybe not intervening on
+[0:48:32] condition or maybe not intervening on someone, which would be zero, versus um
+[0:48:36] someone, which would be zero, versus um actually treating them with maybe a new
+[0:48:38] actually treating them with maybe a new drug or something, which would be a one.
+[0:48:40] drug or something, which would be a one. Um but before we get into any of the
+[0:48:44] Um but before we get into any of the statistics, there's this fundamental
+[0:48:45] statistics, there's this fundamental question of how we actually choose a
+[0:48:48] question of how we actually choose a decision policy, right? Um
+[0:48:51] decision policy, right? Um And this is a like an age-old question.
+[0:48:53] And this is a like an age-old question. I think it I mean, it dates back to the
+[0:48:56] I think it I mean, it dates back to the beginning of writing, and probably
+[0:48:58] beginning of writing, and probably people in caves 20,000 years ago were
+[0:49:01] people in caves 20,000 years ago were debating this because this is about how
+[0:49:02] debating this because this is about how we organize society, right?
+[0:49:04] we organize society, right? So, a decision policy, any kind of
+[0:49:06] So, a decision policy, any kind of treatment, has some kind of trade-off.
+[0:49:08] treatment, has some kind of trade-off. So, as we saw, sometimes a treatment
+[0:49:10] So, as we saw, sometimes a treatment might help some people and hurt other
+[0:49:12] might help some people and hurt other people, right? Or even if a treatment is
+[0:49:14] people, right? Or even if a treatment is broadly beneficial, uh it might cost
+[0:49:16] broadly beneficial, uh it might cost something, so we have to trade off the
+[0:49:18] something, so we have to trade off the costs to the benefits, right? Um so,
+[0:49:21] costs to the benefits, right? Um so, there's no one like right way to do
+[0:49:23] there's no one like right way to do this, but the thing think about like
+[0:49:25] this, but the thing think about like what's relevant to the paper here is we
+[0:49:26] what's relevant to the paper here is we can think about setting this up as a
+[0:49:28] can think about setting this up as a kind of debate between um
+[0:49:31] kind of debate between um two [snorts] philosophers separated by
+[0:49:32] two [snorts] philosophers separated by about like 2,000 years. So, on the one
+[0:49:35] about like 2,000 years. So, on the one hand, um you might have uh Jeremy
+[0:49:38] hand, um you might have uh Jeremy Bentham, who was a utilitarian and said
+[0:49:40] Bentham, who was a utilitarian and said that what we should do, the way we
+[0:49:41] that what we should do, the way we should choose our decision policy, is we
+[0:49:43] should choose our decision policy, is we should choose the decision policy that
+[0:49:45] should choose the decision policy that leads to the greatest good for the
+[0:49:46] leads to the greatest good for the greatest number.
+[0:49:47] greatest number. Um
+[0:49:49] Um I guess he had calculus, but he didn't
+[0:49:50] I guess he had calculus, but he didn't have potential outcomes. So, I think I
+[0:49:52] have potential outcomes. So, I think I would write this, and other people have
+[0:49:53] would write this, and other people have written this in kind of the standard in
+[0:49:55] written this in kind of the standard in the policy learning literature is to
+[0:49:56] the policy learning literature is to write this as find a policy pi that
+[0:49:58] write this as find a policy pi that maximizes the expected potential outcome
+[0:50:00] maximizes the expected potential outcome under the policy.
+[0:50:03] under the policy. Now, on the other hand, if you go back
+[0:50:04] Now, on the other hand, if you go back further in time, you might ask
+[0:50:05] further in time, you might ask Hippocrates who would say, you know, in
+[0:50:07] Hippocrates who would say, you know, in a medical context, we should do no harm.
+[0:50:09] a medical context, we should do no harm. Uh he also didn't have potential
+[0:50:11] Uh he also didn't have potential outcomes, but and there's lots of
+[0:50:13] outcomes, but and there's lots of different ways to think about this, but
+[0:50:14] different ways to think about this, but one way to think about this is saying
+[0:50:15] one way to think about this is saying the outcome under your decision policy
+[0:50:17] the outcome under your decision policy should not be worse than the outcome
+[0:50:19] should not be worse than the outcome under doing nothing. Right?
+[0:50:21] under doing nothing. Right? Um and then the other benefit of the
+[0:50:22] Um and then the other benefit of the data I'll give him is he didn't have
+[0:50:24] data I'll give him is he didn't have measure theory, but we can say with
+[0:50:25] measure theory, but we can say with probability zero, this should happen.
+[0:50:28] probability zero, this should happen. And so, you know, you can look at this
+[0:50:30] And so, you know, you can look at this and say, okay, well, we're getting an
+[0:50:31] and say, okay, well, we're getting an opt an objective function from Bentham
+[0:50:33] opt an objective function from Bentham and a constraint from Hippocrates,
+[0:50:35] and a constraint from Hippocrates, right? So, we can have this kind of
+[0:50:36] right? So, we can have this kind of constrained optimization problem that we
+[0:50:37] constrained optimization problem that we saw before
+[0:50:39] saw before where we want to maximize the expected
+[0:50:40] where we want to maximize the expected outcome subject to some constraint on
+[0:50:42] outcome subject to some constraint on the portion of people who are harmed by
+[0:50:44] the portion of people who are harmed by the treatment.
+[0:50:46] the treatment. Um so, now I want to talk about this
+[0:50:48] Um so, now I want to talk about this constraint form, but I actually want to
+[0:50:50] constraint form, but I actually want to say that it's equivalent to an
+[0:50:52] say that it's equivalent to an alternative way of looking at this type
+[0:50:53] alternative way of looking at this type of problem, which is to look at utility
+[0:50:56] of problem, which is to look at utility maximization, and the equivalence comes
+[0:50:57] maximization, and the equivalence comes from just Lagrangian relaxations. And
+[0:51:00] from just Lagrangian relaxations. And this is
+[0:51:01] this is leaning on some of my prior work with
+[0:51:03] leaning on some of my prior work with co-authors. But, if we think about this
+[0:51:06] co-authors. But, if we think about this setup where we binary potential outcomes
+[0:51:08] setup where we binary potential outcomes and a binary treatment,
+[0:51:09] and a binary treatment, every single person can be in one of
+[0:51:11] every single person can be in one of four buckets. So, you know, the first
+[0:51:13] four buckets. So, you know, the first bucket are people for whom let's say the
+[0:51:16] bucket are people for whom let's say the outcome is survival. So, one is good,
+[0:51:18] outcome is survival. So, one is good, you survive, and zero is bad, you die.
+[0:51:21] you survive, and zero is bad, you die. Uh so, here we have people who would
+[0:51:23] Uh so, here we have people who would survive under control and treatment.
+[0:51:25] survive under control and treatment. Right? So, for those people, treatment
+[0:51:26] Right? So, for those people, treatment would be harmless.
+[0:51:28] would be harmless. Um and we might assign a utility of
+[0:51:31] Um and we might assign a utility of giving treatment to people for whom it
+[0:51:33] giving treatment to people for whom it is harmless of just zero. Right? So,
+[0:51:34] is harmless of just zero. Right? So, maybe there's costs, but let's put that
+[0:51:36] maybe there's costs, but let's put that away.
+[0:51:37] away. The flip side of that is you have people
+[0:51:39] The flip side of that is you have people who would always die, right? They would
+[0:51:40] who would always die, right? They would die under control or treatment. So, Y is
+[0:51:42] die under control or treatment. So, Y is equal to zero regardless of treatment.
+[0:51:44] equal to zero regardless of treatment. And for them, treatment is useless, so
+[0:51:46] And for them, treatment is useless, so you could assign a zero there.
+[0:51:48] you could assign a zero there. Uh where it gets interesting is like
+[0:51:49] Uh where it gets interesting is like these off-diagonals, so you don't now
+[0:51:51] these off-diagonals, so you don't now have this principal stratum
+[0:51:53] have this principal stratum where uh treatment is useful, so they
+[0:51:55] where uh treatment is useful, so they would die under control, so Y0 is zero,
+[0:51:58] would die under control, so Y0 is zero, but they would survive under treatment,
+[0:51:59] but they would survive under treatment, so Y1 is one. Uh and here we can say, if
+[0:52:02] so Y1 is one. Uh and here we can say, if we give treatment to someone for whom it
+[0:52:04] we give treatment to someone for whom it is useful, let's give them a let's
+[0:52:05] is useful, let's give them a let's assign a utility value of one to that.
+[0:52:08] assign a utility value of one to that. And then the flip is people for whom
+[0:52:10] And then the flip is people for whom treatment is harmful, so they would
+[0:52:11] treatment is harmful, so they would survive under control, Y0 is one, but
+[0:52:14] survive under control, Y0 is one, but they would die under treatment, so Y1 is
+[0:52:16] they would die under treatment, so Y1 is zero. And for that particular stra-
+[0:52:19] zero. And for that particular stra- principal stratum, um
+[0:52:22] principal stratum, um treatment is harmful, right? So you
+[0:52:23] treatment is harmful, right? So you might say, if you treat someone for whom
+[0:52:25] might say, if you treat someone for whom treatment is harmful, let's assign a
+[0:52:27] treatment is harmful, let's assign a disutility, so like uh negative UL,
+[0:52:29] disutility, so like uh negative UL, where UL is this magnitude of
+[0:52:31] where UL is this magnitude of disutility.
+[0:52:33] disutility. Um so now this kind of can be shifted
+[0:52:35] Um so now this kind of can be shifted all over the place, so if you set that
+[0:52:36] all over the place, so if you set that equal to one, then you're saying that
+[0:52:38] equal to one, then you're saying that avoiding harm is the same thing as being
+[0:52:39] avoiding harm is the same thing as being useful, and we're actually just back
+[0:52:41] useful, and we're actually just back into the kind of like Benthamite
+[0:52:42] into the kind of like Benthamite utilitarian utilitarian type view.
+[0:52:45] utilitarian utilitarian type view. Um if you set it to be greater than one,
+[0:52:48] Um if you set it to be greater than one, that means that you think avoiding harm
+[0:52:49] that means that you think avoiding harm is more important than being useful, and
+[0:52:51] is more important than being useful, and as we'll see that's the setting uh this
+[0:52:53] as we'll see that's the setting uh this paper is talking about. You can also
+[0:52:55] paper is talking about. You can also send it the other way around, right? You
+[0:52:56] send it the other way around, right? You can make it less than one and say,
+[0:52:57] can make it less than one and say, "Actually, I'm more interested in being
+[0:52:58] "Actually, I'm more interested in being useful, and like damn the consequences,
+[0:52:59] useful, and like damn the consequences, right? I'd rather avoid uh be useful
+[0:53:01] right? I'd rather avoid uh be useful than avoid harm."
+[0:53:03] than avoid harm." Um so once you have this kind of setup,
+[0:53:05] Um so once you have this kind of setup, you can then uh the kind of trick about
+[0:53:08] you can then uh the kind of trick about utility maximization is you can just
+[0:53:09] utility maximization is you can just always talk about bigger and more
+[0:53:11] always talk about bigger and more expanding sets of utilities. So you can
+[0:53:13] expanding sets of utilities. So you can just make this its own utility uh
+[0:53:15] just make this its own utility uh maximization problem, where now we can
+[0:53:17] maximization problem, where now we can say, "We're looking at the value as the
+[0:53:19] say, "We're looking at the value as the expected utility, where we're taking
+[0:53:21] expected utility, where we're taking into account the both potential
+[0:53:22] into account the both potential outcomes."
+[0:53:24] outcomes." Um and then this part's a little bit
+[0:53:25] Um and then this part's a little bit more uh wonky, but we need it for this
+[0:53:27] more uh wonky, but we need it for this kind of equivalence that I want to talk
+[0:53:29] kind of equivalence that I want to talk about.
+[0:53:30] about. Um so what we can do is we can measure
+[0:53:32] Um so what we can do is we can measure the expected utility loss of our policy
+[0:53:34] the expected utility loss of our policy pi relative to some alternative policy
+[0:53:38] pi relative to some alternative policy um which I believe is like fancy pi in
+[0:53:40] um which I believe is like fancy pi in LaTeX.
+[0:53:41] LaTeX. So you can look at the utility or the
+[0:53:42] So you can look at the utility or the value under fancy pi versus the value
+[0:53:44] value under fancy pi versus the value under the pi we care about, the actual
+[0:53:46] under the pi we care about, the actual decision rule.
+[0:53:47] decision rule. Um
+[0:53:48] Um and this ends up being an expectation
+[0:53:50] and this ends up being an expectation where we look at where those two
+[0:53:51] where we look at where those two policies disagree.
+[0:53:53] policies disagree. And then we have the Kate, the
+[0:53:55] And then we have the Kate, the conditional average treatment effect, um
+[0:53:57] conditional average treatment effect, um given the covariates, and then we have
+[0:53:59] given the covariates, and then we have some scaling times the conditional
+[0:54:01] some scaling times the conditional probability of harm. So, the probability
+[0:54:03] probability of harm. So, the probability given the covariates that someone is in
+[0:54:05] given the covariates that someone is in that harmful group. So, in Nerey's
+[0:54:07] that harmful group. So, in Nerey's initial example, that would be like 40%
+[0:54:09] initial example, that would be like 40% of people in this bucket are harmed.
+[0:54:11] of people in this bucket are harmed. Okay, so that's that set up. And what I
+[0:54:13] Okay, so that's that set up. And what I want to say is that these are kind of
+[0:54:14] want to say is that these are kind of equivalent problems if you go through
+[0:54:16] equivalent problems if you go through the Lagrangian relaxation.
+[0:54:19] the Lagrangian relaxation. So, if we start with this constrained
+[0:54:20] So, if we start with this constrained optimization problem where I'm just
+[0:54:22] optimization problem where I'm just rewriting it to just pull out the Kate
+[0:54:24] rewriting it to just pull out the Kate and this probability of harm, we're
+[0:54:25] and this probability of harm, we're saying we want to find a policy that
+[0:54:27] saying we want to find a policy that maximizes the expected effect subject to
+[0:54:29] maximizes the expected effect subject to a constraint that the expected harm is
+[0:54:32] a constraint that the expected harm is less than our conditional probability of
+[0:54:33] less than our conditional probability of harm is less than alpha, right? And this
+[0:54:35] harm is less than alpha, right? And this all works out through the
+[0:54:36] all works out through the power property.
+[0:54:38] power property. That's the the problem in in the paper,
+[0:54:40] That's the the problem in in the paper, but if we go and look at the Lagrangian
+[0:54:42] but if we go and look at the Lagrangian relaxation of that,
+[0:54:44] relaxation of that, that's equivalent or there's an
+[0:54:45] that's equivalent or there's an equivalent optimization problem, which
+[0:54:47] equivalent optimization problem, which is to still find a policy that maximizes
+[0:54:49] is to still find a policy that maximizes the effect, but then penalize treating
+[0:54:52] the effect, but then penalize treating people for whom there's a high
+[0:54:53] people for whom there's a high probability of harm.
+[0:54:55] probability of harm. Where the penalty, this lambda alpha,
+[0:54:59] Where the penalty, this lambda alpha, this Lagrangian multiplier, can be set
+[0:55:00] this Lagrangian multiplier, can be set to anything, but to get the equivalence,
+[0:55:02] to anything, but to get the equivalence, you can basically back solve and say the
+[0:55:04] you can basically back solve and say the Lagrangian multiplier needs to be the
+[0:55:06] Lagrangian multiplier needs to be the thing that gives you the constraint,
+[0:55:08] thing that gives you the constraint, right? So, there's always this
+[0:55:09] right? So, there's always this correspondence between a constrained
+[0:55:11] correspondence between a constrained problem and the Lagrangian form.
+[0:55:14] problem and the Lagrangian form. Okay, so now why am I bringing all this
+[0:55:15] Okay, so now why am I bringing all this up? So, now if you stare at this thing,
+[0:55:17] up? So, now if you stare at this thing, um
+[0:55:18] um the Lagrangian form of the constrained
+[0:55:20] the Lagrangian form of the constrained problem is the same thing as minimizing
+[0:55:23] problem is the same thing as minimizing this expected counterfactual utility
+[0:55:25] this expected counterfactual utility loss relative to not treating anybody
+[0:55:27] loss relative to not treating anybody with a particular utility value or you
+[0:55:30] with a particular utility value or you sort of disutility for
+[0:55:32] sort of disutility for um harming someone, which is just that
+[0:55:34] um harming someone, which is just that Lagrangian multiplier lambda alpha plus
+[0:55:36] Lagrangian multiplier lambda alpha plus one.
+[0:55:37] one. Okay.
+[0:55:38] Okay. So, why do I bring this up? Uh a few
+[0:55:39] So, why do I bring this up? Uh a few things. One,
+[0:55:41] things. One, it means that the two problems are
+[0:55:41] it means that the two problems are equivalent, right? For any constraint, I
+[0:55:44] equivalent, right? For any constraint, I can then induce what the utility would
+[0:55:46] can then induce what the utility would have to be to get to that problem. Or
+[0:55:48] have to be to get to that problem. Or for any utility, I can then induce what
+[0:55:50] for any utility, I can then induce what the constraint would be.
+[0:55:51] the constraint would be. Um it also tells us that, for instance,
+[0:55:54] Um it also tells us that, for instance, having this kind of constraint always
+[0:55:56] having this kind of constraint always gives us a harm avoidant utility value.
+[0:55:58] gives us a harm avoidant utility value. So, if you solve this constraint
+[0:56:00] So, if you solve this constraint optimization problem, that means that
+[0:56:02] optimization problem, that means that you're saying that I really I want to
+[0:56:03] you're saying that I really I want to avoid harm, right? It must be one or
+[0:56:05] avoid harm, right? It must be one or greater.
+[0:56:07] greater. Um and then this is sort of a less
+[0:56:08] Um and then this is sort of a less technical point, but I think the mapping
+[0:56:10] technical point, but I think the mapping from the constraint to the utility is
+[0:56:12] from the constraint to the utility is hard to reason about because it depends
+[0:56:14] hard to reason about because it depends on the distribution of people that you
+[0:56:15] on the distribution of people that you happen to be dealing with. So, you can
+[0:56:17] happen to be dealing with. So, you can elicit a utility maybe from a decision
+[0:56:19] elicit a utility maybe from a decision maker and say, "Here are the
+[0:56:20] maker and say, "Here are the consequences of that utility. Here's the
+[0:56:22] consequences of that utility. Here's the percentage of people that might be
+[0:56:23] percentage of people that might be harmed." But, going the other way is a
+[0:56:25] harmed." But, going the other way is a little bit more difficult. Um
+[0:56:28] little bit more difficult. Um So, when we think about cases like when
+[0:56:30] So, when we think about cases like when constraint optimization is really good,
+[0:56:31] constraint optimization is really good, it's like when I have a budget, right?
+[0:56:33] it's like when I have a budget, right? It's like I have $100. And if your
+[0:56:35] It's like I have $100. And if your decision rule spends $101, I am going
+[0:56:38] decision rule spends $101, I am going bankrupt.
+[0:56:39] bankrupt. For these kinds of things that are a
+[0:56:40] For these kinds of things that are a little bit more squishy, I I would argue
+[0:56:42] little bit more squishy, I I would argue that it's a little bit more challenging
+[0:56:43] that it's a little bit more challenging to think about whether the constraint
+[0:56:44] to think about whether the constraint version or the sort of Lagrangian
+[0:56:46] version or the sort of Lagrangian version matters because uh if you say
+[0:56:49] version matters because uh if you say I'm going to harm 10% of people versus
+[0:56:51] I'm going to harm 10% of people versus 11% of people, but this notion of harm
+[0:56:53] 11% of people, but this notion of harm is counterfactual and unverifiable, it
+[0:56:55] is counterfactual and unverifiable, it kind of becomes like
+[0:56:57] kind of becomes like maybe we should just be dealing with the
+[0:56:58] maybe we should just be dealing with the utilities to begin with and just say
+[0:57:00] utilities to begin with and just say what the implications are.
+[0:57:02] what the implications are. Okay. So, now the reason why I bring all
+[0:57:04] Okay. So, now the reason why I bring all this up is to then bring this into the
+[0:57:06] this up is to then bring this into the kind of decision-making under
+[0:57:07] kind of decision-making under uncertainty and think about things that
+[0:57:08] uncertainty and think about things that are a little bit more wonky there. So,
+[0:57:10] are a little bit more wonky there. So, um we can't identify this conditional
+[0:57:12] um we can't identify this conditional probability of harm. The only thing we
+[0:57:13] probability of harm. The only thing we can deal with is uh without extra
+[0:57:15] can deal with is uh without extra assumptions are these Fréchet bounds,
+[0:57:17] assumptions are these Fréchet bounds, which uh I won't include here, but they
+[0:57:18] which uh I won't include here, but they actually had the upper bound version.
+[0:57:19] actually had the upper bound version. So, we can for any X bound the
+[0:57:22] So, we can for any X bound the conditional probability that an
+[0:57:23] conditional probability that an individual is in the harm principle
+[0:57:25] individual is in the harm principle straight up from the lower bound and an
+[0:57:27] straight up from the lower bound and an upper bound.
+[0:57:29] upper bound. So, that means now we have to change our
+[0:57:31] So, that means now we have to change our our optimization problems, right, and
+[0:57:33] our optimization problems, right, and how we're doing our decision making. So,
+[0:57:35] how we're doing our decision making. So, a conservative approach, and the
+[0:57:36] a conservative approach, and the approach that's taken in this paper, is
+[0:57:37] approach that's taken in this paper, is to just upper bound that constraint,
+[0:57:39] to just upper bound that constraint, right? Which is equivalent to saying,
+[0:57:40] right? Which is equivalent to saying, let's maximize the worst-case utility.
+[0:57:44] let's maximize the worst-case utility. So, from the constraint perspective, and
+[0:57:45] So, from the constraint perspective, and this is the equation that we saw in the
+[0:57:47] this is the equation that we saw in the paper, what we're saying is, find the
+[0:57:48] paper, what we're saying is, find the policy that maximizes the effect subject
+[0:57:51] policy that maximizes the effect subject to a constraint on the upper bound on
+[0:57:54] to a constraint on the upper bound on the probability of
+[0:57:55] the probability of harm, or the proportion of people that
+[0:57:56] harm, or the proportion of people that are harmed.
+[0:57:58] are harmed. We go into the kind of like Lagrangian
+[0:58:00] We go into the kind of like Lagrangian relaxation utility version of this, it's
+[0:58:02] relaxation utility version of this, it's again saying, maximize the constraint,
+[0:58:04] again saying, maximize the constraint, and now we'll penalize based on this
+[0:58:06] and now we'll penalize based on this upper bounded uh upper bound on the
+[0:58:09] upper bounded uh upper bound on the probability of harm, rather than the
+[0:58:10] probability of harm, rather than the actual probability. So, both of these
+[0:58:12] actual probability. So, both of these are going to be conservative, right? The
+[0:58:13] are going to be conservative, right? The constraint approach is going to be uh
+[0:58:16] constraint approach is going to be uh controlling an upper bound on the harm,
+[0:58:18] controlling an upper bound on the harm, and the utility Lagrangian relaxation
+[0:58:20] and the utility Lagrangian relaxation approach is just going to be penalizing
+[0:58:21] approach is just going to be penalizing more than it needs to.
+[0:58:23] more than it needs to. Um but, both of these approaches have
+[0:58:25] Um but, both of these approaches have really long uh literatures and ideas,
+[0:58:27] really long uh literatures and ideas, right? So, the left-hand side, we can
+[0:58:28] right? So, the left-hand side, we can think about this as robust optimization,
+[0:58:31] think about this as robust optimization, where we have an uncertainty set. The
+[0:58:32] where we have an uncertainty set. The right-hand side, we can think about this
+[0:58:34] right-hand side, we can think about this as like a maximin policy in the sort of
+[0:58:35] as like a maximin policy in the sort of like general version of thinking about
+[0:58:37] like general version of thinking about decision making under uncertainty.
+[0:58:39] decision making under uncertainty. Um
+[0:58:40] Um but, that's kind of the way that I think
+[0:58:43] but, that's kind of the way that I think about this. Um
+[0:58:45] about this. Um one thing that gets a little bit weird,
+[0:58:47] one thing that gets a little bit weird, though, in decision making under
+[0:58:48] though, in decision making under certainty always is like a little
+[0:58:49] certainty always is like a little strange. So, here again, we can always
+[0:58:51] strange. So, here again, we can always have this mapping, right? If I choose a
+[0:58:53] have this mapping, right? If I choose a constraint on now the upper bound on the
+[0:58:55] constraint on now the upper bound on the probability of harm, that induces a
+[0:58:57] probability of harm, that induces a utility value, or disutility, on how
+[0:58:59] utility value, or disutility, on how much I want to avoid harming people, and
+[0:59:01] much I want to avoid harming people, and vice versa.
+[0:59:03] vice versa. But, what's weird is that uh or like
+[0:59:05] But, what's weird is that uh or like it's weird about this type of setting is
+[0:59:06] it's weird about this type of setting is that if I start with a utility value,
+[0:59:09] that if I start with a utility value, and then I say, give me the maximin
+[0:59:10] and then I say, give me the maximin policy or not, I'm still dealing with
+[0:59:12] policy or not, I'm still dealing with the same underlying problem.
+[0:59:14] the same underlying problem. If I choose a constraint, because of the
+[0:59:16] If I choose a constraint, because of the way that the mechanics of this
+[0:59:17] way that the mechanics of this Lagrangian
+[0:59:19] Lagrangian uh multiplier, it means that actually
+[0:59:21] uh multiplier, it means that actually I'm inducing a different utility value.
+[0:59:22] I'm inducing a different utility value. So, if I start with the initial problem,
+[0:59:24] So, if I start with the initial problem, right, where I have full ide- um I have
+[0:59:27] right, where I have full ide- um I have the kind of oracle situation. That
+[0:59:29] the kind of oracle situation. That induces one
+[0:59:31] induces one utility value for a given constraint.
+[0:59:33] utility value for a given constraint. And then if I go to what I can actually
+[0:59:34] And then if I go to what I can actually observe in practice, which is this
+[0:59:36] observe in practice, which is this upper bounded robust version, that
+[0:59:38] upper bounded robust version, that induces a different utility value. So
+[0:59:39] induces a different utility value. So you get this kind of like
+[0:59:41] you get this kind of like I don't know
+[0:59:42] I don't know disagreement between those two things.
+[0:59:45] disagreement between those two things. So now one of the questions I have here
+[0:59:47] So now one of the questions I have here though is that
+[0:59:50] though is that this type of approach is quite
+[0:59:51] this type of approach is quite conservative. So people often do things
+[0:59:52] conservative. So people often do things like minimax regret where they minimize
+[0:59:54] like minimax regret where they minimize the worst case you know utility relative
+[0:59:57] the worst case you know utility relative to some
+[0:59:58] to some best policy in some way that has in this
+[1:00:00] best policy in some way that has in this case like access to the true harm rate.
+[1:00:02] case like access to the true harm rate. And that's something you can do if
+[1:00:04] And that's something you can do if you're dealing with this Lagrangian
+[1:00:05] you're dealing with this Lagrangian relaxation.
+[1:00:06] relaxation. But it's a little bit harder to think
+[1:00:08] But it's a little bit harder to think about how to do with the constraint
+[1:00:09] about how to do with the constraint formulation. So one question I have for
+[1:00:11] formulation. So one question I have for the authors is like can we do that?
+[1:00:13] the authors is like can we do that? Right? Is there some way to change and
+[1:00:14] Right? Is there some way to change and this doesn't have anything to do with
+[1:00:15] this doesn't have anything to do with the conformal inference part, but if you
+[1:00:17] the conformal inference part, but if you could, right? Then it's saying okay, now
+[1:00:19] could, right? Then it's saying okay, now we have this sort of like broader class
+[1:00:20] we have this sort of like broader class of things that we can deal with not just
+[1:00:22] of things that we can deal with not just this conservative approach.
+[1:00:24] this conservative approach. Um
+[1:00:25] Um Okay. Um
+[1:00:26] Okay. Um But what I really really like about this
+[1:00:28] But what I really really like about this paper is I kind of started this thinking
+[1:00:31] paper is I kind of started this thinking you know the constraint thing and the
+[1:00:32] you know the constraint thing and the Lagrangian thing are exactly the same.
+[1:00:34] Lagrangian thing are exactly the same. If you solve one, you solve the other.
+[1:00:36] If you solve one, you solve the other. But what this paper shows is actually
+[1:00:38] But what this paper shows is actually constraint formulation buys you
+[1:00:39] constraint formulation buys you something really really cool and
+[1:00:41] something really really cool and important, which is that you know in the
+[1:00:43] important, which is that you know in the typical policy learning workflow in like
+[1:00:45] typical policy learning workflow in like an RCT in particular, which is their
+[1:00:46] an RCT in particular, which is their main setting, you still need to
+[1:00:48] main setting, you still need to consistently estimate that Kate, right?
+[1:00:50] consistently estimate that Kate, right? Or consistently estimate the upper bound
+[1:00:52] Or consistently estimate the upper bound on the probability of harm in order for
+[1:00:54] on the probability of harm in order for anything to work.
+[1:00:55] anything to work. But clearly and
+[1:00:58] But clearly and I mean I guess that this is way more
+[1:00:59] I mean I guess that this is way more than we actually need if only if we only
+[1:01:01] than we actually need if only if we only care about controlling the harm rate,
+[1:01:02] care about controlling the harm rate, right? As you said, we could just treat
+[1:01:04] right? As you said, we could just treat alpha percent of the population and
+[1:01:06] alpha percent of the population and guarantee this, right? So clearly
+[1:01:07] guarantee this, right? So clearly there's some kind of gap here between
+[1:01:09] there's some kind of gap here between like actually estimating things
+[1:01:10] like actually estimating things consistently and satisfying this
+[1:01:12] consistently and satisfying this constraint. So I think what's really
+[1:01:14] constraint. So I think what's really really neat about this paper is this
+[1:01:15] really neat about this paper is this trick of transforming that constraint
+[1:01:17] trick of transforming that constraint into a hypothesis testing problem and
+[1:01:19] into a hypothesis testing problem and then like plugging it through the
+[1:01:21] then like plugging it through the conformal inference machinery. Although
+[1:01:23] conformal inference machinery. Although um I do want to commend the authors and
+[1:01:24] um I do want to commend the authors and there's like
+[1:01:26] there's like four, I think, different conceptual
+[1:01:28] four, I think, different conceptual steps you need to make to to do that,
+[1:01:30] steps you need to make to to do that, and each one of them is like non-trivial
+[1:01:32] and each one of them is like non-trivial and very interesting. So, like, that
+[1:01:33] and very interesting. So, like, that chunk is super, super cool. Um
+[1:01:36] chunk is super, super cool. Um and I appreciated how you walked through
+[1:01:38] and I appreciated how you walked through the proofs. I think they're really
+[1:01:39] the proofs. I think they're really nice.
+[1:01:40] nice. Um okay, let me wrap up. I'll just say
+[1:01:43] Um okay, let me wrap up. I'll just say this leaves me with like
+[1:01:44] this leaves me with like two kind of questions here. Um
+[1:01:47] two kind of questions here. Um so, one is if we do want to have high
+[1:01:48] so, one is if we do want to have high welfare, in the end of the day, we we
+[1:01:50] welfare, in the end of the day, we we still need to estimate those outcome
+[1:01:51] still need to estimate those outcome models consistently. And I take this
+[1:01:53] models consistently. And I take this point that we're
+[1:01:54] point that we're ensuring the constraint holds, right,
+[1:01:56] ensuring the constraint holds, right, regardless, which I think is really
+[1:01:58] regardless, which I think is really nice. Um
+[1:01:59] nice. Um but one question I have is thinking
+[1:02:00] but one question I have is thinking about like scope of this. That would
+[1:02:02] about like scope of this. That would like in the multiple outcome case, that
+[1:02:04] like in the multiple outcome case, that would make a lot of sense to me, right?
+[1:02:05] would make a lot of sense to me, right? If I have two outcomes that I'm trying
+[1:02:06] If I have two outcomes that I'm trying to control, right, or balance, and one
+[1:02:08] to control, right, or balance, and one of them I cannot have, you know, more
+[1:02:11] of them I cannot have, you know, more than 10% of my users revolt, right? And
+[1:02:13] than 10% of my users revolt, right? And otherwise, I want to um
+[1:02:15] otherwise, I want to um improve their experience. I think that
+[1:02:17] improve their experience. I think that would make a lot of sense to me there,
+[1:02:18] would make a lot of sense to me there, where you always want to get that
+[1:02:19] where you always want to get that constraint, regardless of consistency.
+[1:02:22] constraint, regardless of consistency. In this sort of counterfactual harm
+[1:02:24] In this sort of counterfactual harm thing, it's a little bit more murky. Um
+[1:02:27] thing, it's a little bit more murky. Um and then one technical question I have
+[1:02:29] and then one technical question I have is often times for this for these sharp
+[1:02:30] is often times for this for these sharp bounds,
+[1:02:31] bounds, uh there's an issue where, you know,
+[1:02:33] uh there's an issue where, you know, that you're looking at a least upper
+[1:02:35] that you're looking at a least upper bound, and those two potential upper
+[1:02:36] bound, and those two potential upper bounds could be very close to each
+[1:02:38] bounds could be very close to each other, in which case um you could be
+[1:02:40] other, in which case um you could be wrong about which one is the right bound
+[1:02:42] wrong about which one is the right bound due to estimation error. So, in this
+[1:02:44] due to estimation error. So, in this literature, when people are dealing with
+[1:02:45] literature, when people are dealing with these sharp bounds, there's usually
+[1:02:46] these sharp bounds, there's usually these kinds of like margin-style
+[1:02:47] these kinds of like margin-style assumptions that say that the um two
+[1:02:49] assumptions that say that the um two possible two two possibilities in that
+[1:02:51] possible two two possibilities in that bound are well separated. Um
+[1:02:54] bound are well separated. Um and I don't know if you need anything
+[1:02:55] and I don't know if you need anything like that for uh the consistency-style
+[1:02:57] like that for uh the consistency-style results. I I assume not, because
+[1:02:59] results. I I assume not, because consistency is relatively weak, but just
+[1:03:01] consistency is relatively weak, but just kind of a question I would have. Um and
+[1:03:03] kind of a question I would have. Um and then I'm
+[1:03:04] then I'm going to wrap up. I'll just say um
+[1:03:07] going to wrap up. I'll just say um the extension to observational studies,
+[1:03:08] the extension to observational studies, I think, is really interesting, and this
+[1:03:09] I think, is really interesting, and this kind of a more broad version of that. Um
+[1:03:12] kind of a more broad version of that. Um and my understanding is that there you
+[1:03:13] and my understanding is that there you can get the kind of usual double
+[1:03:14] can get the kind of usual double robustness guarantees. Um what was
+[1:03:17] robustness guarantees. Um what was unclear to me is you get the double
+[1:03:19] unclear to me is you get the double robustness guarantees on the safety
+[1:03:20] robustness guarantees on the safety guarantee, too.
+[1:03:22] guarantee, too. In which case, I'm wondering whether we
+[1:03:24] In which case, I'm wondering whether we actually like gain anything cuz like the
+[1:03:26] actually like gain anything cuz like the nice neat core of the paper maybe starts
+[1:03:29] nice neat core of the paper maybe starts to fray out a little bit in terms of
+[1:03:31] to fray out a little bit in terms of distribution-free um
+[1:03:33] distribution-free um results.
+[1:03:34] results. Okay.
+[1:03:35] Okay. That's That's all I have. Um, thanks.
+[1:03:46] Okay. Thanks for that great discussion. Uh
+[1:03:47] Uh we have some time for the authors to
+[1:03:48] we have some time for the authors to respond.
+[1:03:50] respond. Do we?
+[1:03:52] Do we? I'm like first of all, thanks so much
+[1:03:54] I'm like first of all, thanks so much Eli. Like this was such a great
+[1:03:57] Eli. Like this was such a great discussion and I think Inna and I were
+[1:03:59] discussion and I think Inna and I were like taking a lot of notes that we need
+[1:04:01] like taking a lot of notes that we need to respond. Um
+[1:04:03] to respond. Um but I think as an organizers, too, I'm
+[1:04:06] but I think as an organizers, too, I'm aware that we are running out of time.
+[1:04:08] aware that we are running out of time. So, um I'm going to respond to Eli
+[1:04:10] So, um I'm going to respond to Eli offline.
+[1:04:18] Okay, maybe we can enter Rahul to close out.
+[1:04:19] out. Yeah, very good. Um, so at this moment,
+[1:04:22] Yeah, very good. Um, so at this moment, we do not yet have uh full details about
+[1:04:26] we do not yet have uh full details about the next session of OCIS.
+[1:04:28] the next session of OCIS. Therefore, I'll just put it here. Thank
+[1:04:29] Therefore, I'll just put it here. Thank you very much for coming.
+[1:04:32] you very much for coming. Thank you.

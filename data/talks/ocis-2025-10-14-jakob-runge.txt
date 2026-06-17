@@ -1,0 +1,1297 @@
+[0:00:02] Uh &gt;&gt; all right, welcome back to the online
+[0:00:04] &gt;&gt; all right, welcome back to the online causal inference seminar. Today we're
+[0:00:06] causal inference seminar. Today we're excited to have Jakob Brun from the
+[0:00:08] excited to have Jakob Brun from the University of Potam who will uh talk
+[0:00:11] University of Potam who will uh talk about the Python package uh causal
+[0:00:13] about the Python package uh causal inference on time series data with a
+[0:00:15] inference on time series data with a tiger package. Uh questions today will
+[0:00:18] tiger package. Uh questions today will be handled by Razi. So Razie,
+[0:00:21] be handled by Razi. So Razie, &gt;&gt; thanks Dominic. Uh so yeah, per usual,
+[0:00:24] &gt;&gt; thanks Dominic. Uh so yeah, per usual, please uh ask your questions using the
+[0:00:26] please uh ask your questions using the Q&amp;A box. I'll try to raise them uh if
+[0:00:30] Q&amp;A box. I'll try to raise them uh if they're quick clarifying questions
+[0:00:31] they're quick clarifying questions otherwise I'll leave them uh to the end
+[0:00:34] otherwise I'll leave them uh to the end and uh without further ado Jacob let's
+[0:00:37] and uh without further ado Jacob let's take it away.
+[0:00:39] take it away. &gt;&gt; Thanks uh go ahead.
+[0:00:48] All right you should see my my slide. So the the goal of this is is to um yeah
+[0:00:51] the the goal of this is is to um yeah present an overview of the tigerite
+[0:00:53] present an overview of the tigerite Python package for causal inference on
+[0:00:55] Python package for causal inference on time series data which is maybe what uh
+[0:00:58] time series data which is maybe what uh sets it apart. Um and I'll I go a little
+[0:01:02] sets it apart. Um and I'll I go a little bit into also um like an overview of how
+[0:01:06] bit into also um like an overview of how I intend this to be used by um by uh by
+[0:01:09] I intend this to be used by um by uh by practitioners and then also under the
+[0:01:12] practitioners and then also under the hood what what the functionality is and
+[0:01:14] hood what what the functionality is and uh potentially also about some more
+[0:01:17] uh potentially also about some more methodology that is uh that is um
+[0:01:20] methodology that is uh that is um implemented there. All right. So um
+[0:01:25] implemented there. All right. So um without further ado my my motivation
+[0:01:27] without further ado my my motivation that that guided me in my um research
+[0:01:30] that that guided me in my um research journey was really research about cause
+[0:01:32] journey was really research about cause inference on complex dynamical systems.
+[0:01:35] inference on complex dynamical systems. Um and this is um mostly uh earth system
+[0:01:39] Um and this is um mostly uh earth system data that I that I dealt with in my
+[0:01:41] data that I that I dealt with in my path. Um and there you would have
+[0:01:43] path. Um and there you would have questions like uh what drives flood
+[0:01:46] questions like uh what drives flood events uh and questions of causality
+[0:01:49] events uh and questions of causality arise there like what causes extreme
+[0:01:51] arise there like what causes extreme events for example and this can be uh
+[0:01:54] events for example and this can be uh different parts of causal inference. uh
+[0:01:57] different parts of causal inference. uh this is partially like the tipping
+[0:01:58] this is partially like the tipping points that are in in everyone's uh
+[0:02:01] points that are in in everyone's uh mouth now like how do they develop and
+[0:02:03] mouth now like how do they develop and how can we detect which systems are
+[0:02:05] how can we detect which systems are tipping there's a lot of things uh that
+[0:02:07] tipping there's a lot of things uh that can be done also with causal inference
+[0:02:09] can be done also with causal inference at least I I tried to push that uh
+[0:02:11] at least I I tried to push that uh statistical framework into that
+[0:02:13] statistical framework into that community which is not so aware of it um
+[0:02:17] community which is not so aware of it um another thing is like improving climate
+[0:02:20] another thing is like improving climate models using uh what is called hybrid
+[0:02:23] models using uh what is called hybrid modeling like using statistical models
+[0:02:25] modeling like using statistical models inside it runs just faster and thereby
+[0:02:29] inside it runs just faster and thereby trying to get the uncertainty or this
+[0:02:31] trying to get the uncertainty or this warming um trend uh to u like a smaller
+[0:02:36] warming um trend uh to u like a smaller um uncertainty range
+[0:02:39] um uncertainty range and then also something like u
+[0:02:42] and then also something like u teleconnection networks. So these are
+[0:02:44] teleconnection networks. So these are emergent phenomena in the climate system
+[0:02:46] emergent phenomena in the climate system and they are spatial temporal phenomena
+[0:02:48] and they are spatial temporal phenomena and that also guides a lot of my
+[0:02:50] and that also guides a lot of my research how to deal with spatial
+[0:02:52] research how to deal with spatial temporal data when you are interested in
+[0:02:54] temporal data when you are interested in in causal inference of these systems.
+[0:02:58] in causal inference of these systems. So I um used a workshop some some years
+[0:03:02] So I um used a workshop some some years ago where where I tried to aggregate
+[0:03:05] ago where where I tried to aggregate what the challenges of context dynamical
+[0:03:07] what the challenges of context dynamical systems data are for causal inference
+[0:03:10] systems data are for causal inference and that is uh led to this perspective
+[0:03:14] and that is uh led to this perspective paper in in 2019 and yeah the challenges
+[0:03:17] paper in in 2019 and yeah the challenges are for example at the process level
+[0:03:20] are for example at the process level like the underlying level like the
+[0:03:22] like the underlying level like the system might be highly autocorrelated
+[0:03:23] system might be highly autocorrelated have time delays nonlinear chaotic the
+[0:03:26] have time delays nonlinear chaotic the weather is as you know uh there's
+[0:03:28] weather is as you know uh there's different time scales, a slow ocean, a
+[0:03:31] different time scales, a slow ocean, a fast um atmospheric dynamics. Uh the
+[0:03:34] fast um atmospheric dynamics. Uh the noise distributions might be extreme and
+[0:03:37] noise distributions might be extreme and then at the data level uh we have often
+[0:03:39] then at the data level uh we have often the issue of um yeah the data is
+[0:03:42] the issue of um yeah the data is basically spatial temporal from
+[0:03:44] basically spatial temporal from satellites while we want to just have a
+[0:03:47] satellites while we want to just have a node and the data belong to that node in
+[0:03:49] node and the data belong to that node in our graph and that might be a problem
+[0:03:52] our graph and that might be a problem for like defining your variable at the
+[0:03:54] for like defining your variable at the outset. Um we have then problems of
+[0:03:58] outset. Um we have then problems of unobserved variables, hidden variables,
+[0:04:00] unobserved variables, hidden variables, time subsampling when the satellite
+[0:04:02] time subsampling when the satellite traverses a region only every few days.
+[0:04:05] traverses a region only every few days. Um measurement errors, selection bias,
+[0:04:08] Um measurement errors, selection bias, you know, uh these problems may be from
+[0:04:10] you know, uh these problems may be from many other fields. um discrete data,
+[0:04:13] many other fields. um discrete data, categorical data can also be uh a type
+[0:04:16] categorical data can also be uh a type of data in this range and dating
+[0:04:18] of data in this range and dating uncertainty uncertainties in paleo data
+[0:04:21] uncertainty uncertainties in paleo data next to the standard uh statistical
+[0:04:23] next to the standard uh statistical challenges of like sample size, high
+[0:04:25] challenges of like sample size, high dimensionality and so on. So my uh
+[0:04:29] dimensionality and so on. So my uh group's work um was
+[0:04:32] group's work um was trying to to like develop time series
+[0:04:35] trying to to like develop time series causal discovery and recently also
+[0:04:37] causal discovery and recently also causal effect estimation methods for
+[0:04:40] causal effect estimation methods for this. And so a typical object here is
+[0:04:43] this. And so a typical object here is not um this graph that that you might
+[0:04:46] not um this graph that that you might typically have but we deal with time
+[0:04:49] typically have but we deal with time series graphs. So these are stationary
+[0:04:52] series graphs. So these are stationary uh these if you uh assume a stationary
+[0:04:56] uh these if you uh assume a stationary system under underneath would look like
+[0:04:58] system under underneath would look like this and they are um infinite in time.
+[0:05:01] this and they are um infinite in time. So you would repeat this structure uh
+[0:05:03] So you would repeat this structure uh for every other uh time leg here. And
+[0:05:07] for every other uh time leg here. And this means that this graph in principle
+[0:05:09] this means that this graph in principle is an infinite graph. And this uh is
+[0:05:12] is an infinite graph. And this uh is quite an interesting thing actually also
+[0:05:14] quite an interesting thing actually also from causal inference perspective. And
+[0:05:16] from causal inference perspective. And we had some some work uh of projecting
+[0:05:20] we had some some work uh of projecting um stationary infinite graphs to uh
+[0:05:23] um stationary infinite graphs to uh finite uh graphs uh that is currently in
+[0:05:26] finite uh graphs uh that is currently in the in the archive. I didn't put the
+[0:05:28] the in the archive. I didn't put the reference here. And another way to
+[0:05:31] reference here. And another way to represent these uh systems is uh in such
+[0:05:34] represent these uh systems is uh in such process graphs also uh fields or summary
+[0:05:37] process graphs also uh fields or summary graphs sometimes they are called where
+[0:05:39] graphs sometimes they are called where you for example would have a cycle in
+[0:05:42] you for example would have a cycle in this case where the time series graph
+[0:05:44] this case where the time series graph does not have a cycle because the cyclic
+[0:05:47] does not have a cycle because the cyclic relations are resolved in time. Um so
+[0:05:50] relations are resolved in time. Um so this is the object that uh I looked at u
+[0:05:53] this is the object that uh I looked at u mostly and the way we we uh dealt with
+[0:05:57] mostly and the way we we uh dealt with this is by this range of uh causal
+[0:05:59] this is by this range of uh causal discovery methods that I somehow called
+[0:06:02] discovery methods that I somehow called PCMCI at some stage relating to the PC
+[0:06:05] PCMCI at some stage relating to the PC algorithm and the momentary conditional
+[0:06:08] algorithm and the momentary conditional independence uh tests which tries to um
+[0:06:11] independence uh tests which tries to um make condition independence testing
+[0:06:13] make condition independence testing valid and well calibrated for time
+[0:06:16] valid and well calibrated for time series data and the methods
+[0:06:19] series data and the methods we have here cover a range of
+[0:06:21] we have here cover a range of assumptions um from like PCMCI plus uh
+[0:06:25] assumptions um from like PCMCI plus uh allowing for instantaneous relations.
+[0:06:28] allowing for instantaneous relations. Then we have like LPCMCI that uh learns
+[0:06:32] Then we have like LPCMCI that uh learns latent uh time series max.
+[0:06:35] latent uh time series max. Um another option is JPCMCI which tries
+[0:06:39] Um another option is JPCMCI which tries to um move into this joint uh causal
+[0:06:43] to um move into this joint uh causal inference framework where you assume
+[0:06:45] inference framework where you assume that you have multiple data sets from
+[0:06:47] that you have multiple data sets from multiple different environments and this
+[0:06:50] multiple different environments and this is illustrated here. We would have like
+[0:06:53] is illustrated here. We would have like x1, x2 as the system variables we call
+[0:06:55] x1, x2 as the system variables we call them. And then you can add these context
+[0:06:58] them. And then you can add these context variables in the graph in the time
+[0:07:00] variables in the graph in the time series graph in this case. And they can
+[0:07:02] series graph in this case. And they can be uh time dependent um and basically
+[0:07:06] be uh time dependent um and basically cause each environment or they can be
+[0:07:09] cause each environment or they can be also uh static for each um data set. And
+[0:07:14] also uh static for each um data set. And then you have such a contextual space um
+[0:07:18] then you have such a contextual space um node. And in the end, even though that
+[0:07:22] node. And in the end, even though that uh sounds complex, you can still um
+[0:07:26] uh sounds complex, you can still um learn a graph that then covers uh system
+[0:07:29] learn a graph that then covers uh system variables as well as context variables.
+[0:07:31] variables as well as context variables. And this allows to also overcome some
+[0:07:34] And this allows to also overcome some types of uh hidden confounding due to
+[0:07:36] types of uh hidden confounding due to these contexts. Um maybe people know uh
+[0:07:40] these contexts. Um maybe people know uh fixed effects panel regression and this
+[0:07:42] fixed effects panel regression and this is trying to do that in a causal
+[0:07:44] is trying to do that in a causal discovery framework
+[0:07:47] discovery framework and and finally a method here that tries
+[0:07:50] and and finally a method here that tries to deal with non-stationary data. So we
+[0:07:53] to deal with non-stationary data. So we call this causal causal regimes and they
+[0:07:56] call this causal causal regimes and they may change over time and you don't know
+[0:07:58] may change over time and you don't know which time sample belongs to which time
+[0:08:01] which time sample belongs to which time point and so um this uh regime PCNCI
+[0:08:06] point and so um this uh regime PCNCI tries to learn both the different graphs
+[0:08:08] tries to learn both the different graphs and the samples uh at which these occur.
+[0:08:12] and the samples uh at which these occur. Um and this is really just an overview
+[0:08:15] Um and this is really just an overview here. uh there's uh maybe some time to
+[0:08:17] here. uh there's uh maybe some time to answer answer questions on these on
+[0:08:19] answer answer questions on these on these methods
+[0:08:22] these methods and another um uh research avenue I uh
+[0:08:25] and another um uh research avenue I uh we develop in the group is now uh effect
+[0:08:27] we develop in the group is now uh effect estimation on the one hand just for for
+[0:08:30] estimation on the one hand just for for like iid settings and then also for time
+[0:08:33] like iid settings and then also for time series uh graphs.
+[0:08:36] series uh graphs. Okay. Um I mentioned that I a little bit
+[0:08:40] Okay. Um I mentioned that I a little bit target this uh talk also to uh to
+[0:08:42] target this uh talk also to uh to practitioners as an overview and maybe
+[0:08:44] practitioners as an overview and maybe that slide is more for those. Um I wrote
+[0:08:47] that slide is more for those. Um I wrote a review or a guide paper uh two years
+[0:08:50] a review or a guide paper uh two years ago with uh with colleagues um that
+[0:08:53] ago with uh with colleagues um that tries to really illustrate just a whole
+[0:08:55] tries to really illustrate just a whole framework of causal inference for time
+[0:08:57] framework of causal inference for time series um methods and also tries to give
+[0:09:01] series um methods and also tries to give a little bit of a um like a bird's eye
+[0:09:04] a little bit of a um like a bird's eye perspective. Um so covering foundations
+[0:09:07] perspective. Um so covering foundations and a method overview and then also a
+[0:09:10] and a method overview and then also a method guide and worked through a case
+[0:09:12] method guide and worked through a case studies and I I would like to share one
+[0:09:16] studies and I I would like to share one of those bird eye views. You know, so
+[0:09:20] of those bird eye views. You know, so you might have heard of Pearl's causal
+[0:09:21] you might have heard of Pearl's causal hierarchy and I I kind of like this
+[0:09:24] hierarchy and I I kind of like this concept of making the different
+[0:09:26] concept of making the different questions that uh researchers have and
+[0:09:29] questions that uh researchers have and struct structuring them. So they uh
+[0:09:32] struct structuring them. So they uh learn which methods are are suitable for
+[0:09:34] learn which methods are are suitable for their task. So you assume some
+[0:09:37] their task. So you assume some underlying system and then a user may
+[0:09:39] underlying system and then a user may have a question and that may be a
+[0:09:41] have a question and that may be a non-causal question. It may be a
+[0:09:43] non-causal question. It may be a qualitative question about causality or
+[0:09:46] qualitative question about causality or quantitative. So meaning causal
+[0:09:48] quantitative. So meaning causal discovery or causal effect estimation or
+[0:09:51] discovery or causal effect estimation or a counterfactual question and then um
+[0:09:54] a counterfactual question and then um they have assumptions about this system
+[0:09:56] they have assumptions about this system and they have data about the system.
+[0:09:58] and they have data about the system. This might be observational or
+[0:10:00] This might be observational or interventional and this gives then rise
+[0:10:03] interventional and this gives then rise to what Pearl and maybe Alias uh framed
+[0:10:07] to what Pearl and maybe Alias uh framed as the causal inference engine and
+[0:10:12] as the causal inference engine and just opening up this space of
+[0:10:14] just opening up this space of assumptions here and space of variables.
+[0:10:16] assumptions here and space of variables. Um so the variables I I mentioned
+[0:10:18] Um so the variables I I mentioned already um are often not that um easily
+[0:10:21] already um are often not that um easily set in stone in in in complex spatial
+[0:10:24] set in stone in in in complex spatial temporal systems. So you first have to
+[0:10:27] temporal systems. So you first have to define uh variables and they might for
+[0:10:29] define uh variables and they might for example be um two basically underlying
+[0:10:33] example be um two basically underlying uh time series and so it's a
+[0:10:35] uh time series and so it's a two-dimensional underlying no um node or
+[0:10:38] two-dimensional underlying no um node or um it might be a node that extends into
+[0:10:40] um it might be a node that extends into the past. So it's like a longer past
+[0:10:43] the past. So it's like a longer past delay vector. You might have a full um
+[0:10:46] delay vector. You might have a full um spatial temporal setting here and
+[0:10:49] spatial temporal setting here and different types of data. And the
+[0:10:52] different types of data. And the assumptions um I try to kind of put that
+[0:10:55] assumptions um I try to kind of put that in a little picture here. Uh you can
+[0:10:57] in a little picture here. Uh you can make about the system are in causal
+[0:11:00] make about the system are in causal effect estimation the whole graph and
+[0:11:02] effect estimation the whole graph and that might have latent variables and
+[0:11:04] that might have latent variables and there might be context multiple
+[0:11:06] there might be context multiple environments and u delays or in causal
+[0:11:11] environments and u delays or in causal discovery you might assume whether the
+[0:11:12] discovery you might assume whether the graph has hidden variables or even
+[0:11:15] graph has hidden variables or even cyclic relations. There's lots of
+[0:11:17] cyclic relations. There's lots of research recently for cyclic causal
+[0:11:20] research recently for cyclic causal discovery.
+[0:11:21] discovery. animative assumptions about um the
+[0:11:24] animative assumptions about um the functional form and noise distributions
+[0:11:27] functional form and noise distributions that might lead to methods like lingum
+[0:11:29] that might lead to methods like lingum or uh so on and observational noise and
+[0:11:33] or uh so on and observational noise and stationerity in the time series context.
+[0:11:35] stationerity in the time series context. Um and given like a reflection about
+[0:11:38] Um and given like a reflection about these questions that the user has the
+[0:11:41] these questions that the user has the assumptions they are willing to make and
+[0:11:44] assumptions they are willing to make and the data they they have at hand. I have
+[0:11:47] the data they they have at hand. I have this uh huge flowchart that I um uh try
+[0:11:52] this uh huge flowchart that I um uh try to give them as a as a kind of
+[0:11:54] to give them as a as a kind of recommendation system. So they would for
+[0:11:56] recommendation system. So they would for example start here and then the first
+[0:11:58] example start here and then the first thing is do they have a causal question
+[0:12:00] thing is do they have a causal question and that's uh maybe in the last slide
+[0:12:03] and that's uh maybe in the last slide you know is it is it something about
+[0:12:05] you know is it is it something about just predicting in distribution or so
+[0:12:07] just predicting in distribution or so then it's not a causal question. Um if
+[0:12:10] then it's not a causal question. Um if they are however have a causal question
+[0:12:12] they are however have a causal question then first thing is maybe are their
+[0:12:14] then first thing is maybe are their causal nodes defined and if not can they
+[0:12:17] causal nodes defined and if not can they do some dimension reduction or do they
+[0:12:19] do some dimension reduction or do they have to do go all the way to causal
+[0:12:20] have to do go all the way to causal representation learning which is
+[0:12:22] representation learning which is interesting but challenging and then
+[0:12:25] interesting but challenging and then whether they have time series or not and
+[0:12:27] whether they have time series or not and whether that's stationary and there
+[0:12:29] whether that's stationary and there might be some pre-processing that makes
+[0:12:30] might be some pre-processing that makes it stationary or not and there's some
+[0:12:33] it stationary or not and there's some frameworks for this and then um the
+[0:12:36] frameworks for this and then um the question is do they want to do causal
+[0:12:38] question is do they want to do causal discovery or do they know the graph. If
+[0:12:41] discovery or do they know the graph. If they know the graph, are they interested
+[0:12:43] they know the graph, are they interested in total effects? If not, then likely if
+[0:12:46] in total effects? If not, then likely if they're not linear, you end up in uh
+[0:12:48] they're not linear, you end up in uh counterfactuals.
+[0:12:50] counterfactuals. And if it's about total effects, a
+[0:12:52] And if it's about total effects, a question here about data sets is do you
+[0:12:55] question here about data sets is do you have multiple data sets from different
+[0:12:56] have multiple data sets from different distributions? If not, do you have
+[0:12:58] distributions? If not, do you have hidden confounders?
+[0:13:00] hidden confounders? Uh maybe not. Is it linear? Maybe you
+[0:13:03] Uh maybe not. Is it linear? Maybe you end up with the path method or
+[0:13:05] end up with the path method or adjustment. If that's not identifiable
+[0:13:08] adjustment. If that's not identifiable by adjustment, you might end up uh with
+[0:13:11] by adjustment, you might end up uh with a front door or do calculos or maybe up
+[0:13:14] a front door or do calculos or maybe up to instrumental variables. And that is
+[0:13:16] to instrumental variables. And that is my attempt to structure this. And uh I'm
+[0:13:19] my attempt to structure this. And uh I'm super happy to get feedback on this
+[0:13:21] super happy to get feedback on this because it's I think fun to yeah have
+[0:13:24] because it's I think fun to yeah have such a graph that tries to give a user
+[0:13:26] such a graph that tries to give a user um uh an idea of which uh types of
+[0:13:30] um uh an idea of which uh types of methods uh can work.
+[0:13:33] methods uh can work. &gt;&gt; Jacob, sorry, quick interruption. Yeah,
+[0:13:35] &gt;&gt; Jacob, sorry, quick interruption. Yeah, there's a quick question. Can you also
+[0:13:37] there's a quick question. Can you also say something about the dimension of the
+[0:13:38] say something about the dimension of the system and this graphical scheme?
+[0:13:42] system and this graphical scheme? &gt;&gt; The dimension of the system.
+[0:13:45] &gt;&gt; The dimension of the system. Um, okay.
+[0:13:46] Um, okay. &gt;&gt; I don't get the question like maybe
+[0:13:49] &gt;&gt; I don't get the question like maybe &gt;&gt; I guess maybe the question is about how
+[0:13:51] &gt;&gt; I guess maybe the question is about how large of a system you're
+[0:13:54] large of a system you're trying to model or if there are any
+[0:13:56] trying to model or if there are any restrictions on the size.
+[0:13:59] restrictions on the size. &gt;&gt; Um, it's not about any particular model
+[0:14:03] &gt;&gt; Um, it's not about any particular model system or earth. This is just about uh
+[0:14:05] system or earth. This is just about uh yeah trying to find the right method for
+[0:14:07] yeah trying to find the right method for the right scientific question but maybe
+[0:14:10] the right scientific question but maybe maybe at the end I can I can get back to
+[0:14:12] maybe at the end I can I can get back to this uh better.
+[0:14:14] this uh better. &gt;&gt; Thanks.
+[0:14:15] &gt;&gt; Thanks. &gt;&gt; Um yeah so I'm I'm happy to to get
+[0:14:18] &gt;&gt; Um yeah so I'm I'm happy to to get feedback on uh on this of course. Then
+[0:14:22] feedback on uh on this of course. Then in this in this review paper we also
+[0:14:23] in this in this review paper we also cover a little table of uh which um
+[0:14:26] cover a little table of uh which um methods are implemented in which
+[0:14:28] methods are implemented in which packages. Um, and I hope there's no
+[0:14:31] packages. Um, and I hope there's no errors, but maybe this is outdated
+[0:14:33] errors, but maybe this is outdated already 2 years ago or there's I know
+[0:14:35] already 2 years ago or there's I know there's efforts uh in py and some
+[0:14:37] there's efforts uh in py and some packages are uh developed much further.
+[0:14:40] packages are uh developed much further. But I yeah try to do a little overview
+[0:14:42] But I yeah try to do a little overview of which methods are implemented where
+[0:14:44] of which methods are implemented where and some people want to use u maybe
+[0:14:47] and some people want to use u maybe Python, others want to use other methods
+[0:14:48] Python, others want to use other methods and so on. So there's always a good
+[0:14:50] and so on. So there's always a good choice
+[0:14:52] choice in these. And this brings me to to the
+[0:14:55] in these. And this brings me to to the py tiger python package. So that's um
+[0:14:57] py tiger python package. So that's um available on on GitHub or also on pip um
+[0:15:01] available on on GitHub or also on pip um and it's under the the GPL license which
+[0:15:04] and it's under the the GPL license which I did years ago and maybe I would do it
+[0:15:07] I did years ago and maybe I would do it different now but it's too late and um
+[0:15:10] different now but it's too late and um tiger might has different um available
+[0:15:13] tiger might has different um available tools. So one is about data processing
+[0:15:15] tools. So one is about data processing and analysis which I think it's
+[0:15:17] and analysis which I think it's important before you start causal
+[0:15:19] important before you start causal inference to make a good choice of
+[0:15:21] inference to make a good choice of methodology. Um so there's methods to
+[0:15:24] methodology. Um so there's methods to plot data to plot uh joint densities to
+[0:15:26] plot data to plot uh joint densities to plot these timel uh functions
+[0:15:31] plot these timel uh functions to get an idea of time lags and then
+[0:15:34] to get an idea of time lags and then there's a large part of it dedicated to
+[0:15:37] there's a large part of it dedicated to causal discovery. So you can learn uh
+[0:15:39] causal discovery. So you can learn uh causal graphs and there's uh the methods
+[0:15:42] causal graphs and there's uh the methods we developed in in my group and there's
+[0:15:45] we developed in in my group and there's a large range of independence tests for
+[0:15:47] a large range of independence tests for different types of data, different types
+[0:15:49] different types of data, different types of assumed relationships.
+[0:15:52] of assumed relationships. And then there's causal effect
+[0:15:54] And then there's causal effect estimation and mediation implemented. Um
+[0:15:57] estimation and mediation implemented. Um so this is based currently on on optimal
+[0:15:59] so this is based currently on on optimal adjustment or any other adjustment set
+[0:16:02] adjustment or any other adjustment set that you have. It uses scikitlearn to
+[0:16:05] that you have. It uses scikitlearn to model dependencies. So it's
+[0:16:07] model dependencies. So it's nonparametric in that um case. I also
+[0:16:10] nonparametric in that um case. I also have a class for um linear right based
+[0:16:13] have a class for um linear right based uh causal effect and mediation
+[0:16:15] uh causal effect and mediation estimation and recently also a package
+[0:16:18] estimation and recently also a package or another class for nonlinear
+[0:16:20] or another class for nonlinear non-additive causal mediation
+[0:16:23] non-additive causal mediation and I get to to this functionality in in
+[0:16:26] and I get to to this functionality in in a bit.
+[0:16:27] a bit. So um purely on the on the coding uh
+[0:16:31] So um purely on the on the coding uh structure um everything in tiger is
+[0:16:33] structure um everything in tiger is framed around a data frame and that
+[0:16:37] framed around a data frame and that handles a lot of the data uh issues that
+[0:16:41] handles a lot of the data uh issues that you have in time series data or general
+[0:16:43] you have in time series data or general and and real world data and this is then
+[0:16:46] and and real world data and this is then imported or used or uh imported into the
+[0:16:51] imported or used or uh imported into the causal discovery algorithms BCMCI,
+[0:16:53] causal discovery algorithms BCMCI, LPCMCI and so on and these also import
+[0:16:56] LPCMCI and so on and these also import particular condition independence test
+[0:16:58] particular condition independence test classes and the data frame also is used
+[0:17:01] classes and the data frame also is used by the causal effect estimation
+[0:17:03] by the causal effect estimation mediation um classes. Tiger Met has a
+[0:17:07] mediation um classes. Tiger Met has a plotting module. Um, I at the time was
+[0:17:11] plotting module. Um, I at the time was only looking into network X and I didn't
+[0:17:13] only looking into network X and I didn't like the arrows and I needed much more
+[0:17:15] like the arrows and I needed much more different types and colors of arrows and
+[0:17:18] different types and colors of arrows and so I I coded this plotting module which
+[0:17:20] so I I coded this plotting module which you have seen here in uh in these plots
+[0:17:23] you have seen here in uh in these plots and there's dozens or maybe I don't know
+[0:17:26] and there's dozens or maybe I don't know 15 tutorials or so that uh for each
+[0:17:29] 15 tutorials or so that uh for each method basically uh to to guide uh the
+[0:17:32] method basically uh to to guide uh the user.
+[0:17:33] user. So the main uh idea was to decouple data
+[0:17:36] So the main uh idea was to decouple data handling and analysis the condition
+[0:17:38] handling and analysis the condition independence tests discovery algorithm
+[0:17:40] independence tests discovery algorithm algorithms and effect estimation and
+[0:17:42] algorithms and effect estimation and everything is trying to be modular. So
+[0:17:45] everything is trying to be modular. So inside these classes to reuse
+[0:17:47] inside these classes to reuse functionality and so on and a simple
+[0:17:52] functionality and so on and a simple usage example would be you have your
+[0:17:54] usage example would be you have your data here as a as a numpy array. Um you
+[0:17:57] data here as a as a numpy array. Um you create a data frame of it. Um, you also
+[0:18:01] create a data frame of it. Um, you also initialize this class PCMCI for example
+[0:18:04] initialize this class PCMCI for example with a conditional independence test for
+[0:18:06] with a conditional independence test for example partial correlation and then you
+[0:18:08] example partial correlation and then you run a method PCMCI plus with a certain
+[0:18:12] run a method PCMCI plus with a certain time lag and PC alpha that would be the
+[0:18:14] time lag and PC alpha that would be the kind of minimal parameters. You get
+[0:18:17] kind of minimal parameters. You get results and then you get uh the p value
+[0:18:19] results and then you get uh the p value matrix but you also get or test
+[0:18:21] matrix but you also get or test statistic but you also get the graph and
+[0:18:23] statistic but you also get the graph and then you can plot it with the tiger
+[0:18:25] then you can plot it with the tiger plotting package and get such a graph
+[0:18:28] plotting package and get such a graph here.
+[0:18:33] So going into a little bit more detail about um the the data frame object. So
+[0:18:37] about um the the data frame object. So the initialization of this is firstly of
+[0:18:40] the initialization of this is firstly of course the data and this may be an array
+[0:18:43] course the data and this may be an array of shape time and and number of nodes or
+[0:18:46] of shape time and and number of nodes or it may be a shape with another dimension
+[0:18:48] it may be a shape with another dimension here when you have multiple
+[0:18:50] here when you have multiple environments. So it can then make use of
+[0:18:52] environments. So it can then make use of multiple time series uh data sets or as
+[0:18:56] multiple time series uh data sets or as a dictionary and this leads to these two
+[0:18:58] a dictionary and this leads to these two analysis modes of single or or multiple
+[0:19:01] analysis modes of single or or multiple data sets. Um you can uh also use a
+[0:19:04] data sets. Um you can uh also use a mask. Um if you have uh samples that you
+[0:19:08] mask. Um if you have uh samples that you don't want to use in a particular
+[0:19:09] don't want to use in a particular analysis like summer and winter month is
+[0:19:12] analysis like summer and winter month is typical in climate science. You also
+[0:19:14] typical in climate science. You also have an array uh giving the data type.
+[0:19:18] have an array uh giving the data type. So it might give a different data type
+[0:19:21] So it might give a different data type for even individual sample points. It's
+[0:19:23] for even individual sample points. It's currently not much use but why not in
+[0:19:26] currently not much use but why not in the future. So that um differentiates
+[0:19:29] the future. So that um differentiates continuous or discrete data. And then
+[0:19:32] continuous or discrete data. And then there's this functionality of what which
+[0:19:34] there's this functionality of what which I call vector variables. And this means
+[0:19:37] I call vector variables. And this means that maybe your underlying data frame
+[0:19:40] that maybe your underlying data frame contains hundreds of uh of of columns.
+[0:19:44] contains hundreds of uh of of columns. But then your node you want to be
+[0:19:46] But then your node you want to be defined uh just as the first two
+[0:19:48] defined uh just as the first two columns. So it's a two-dimensional
+[0:19:50] columns. So it's a two-dimensional underlying uh sample underlying uh
+[0:19:53] underlying uh sample underlying uh random variable. But the note here that
+[0:19:56] random variable. But the note here that you want to learn is is just uh yeah
+[0:19:59] you want to learn is is just uh yeah it's it's just one node but it comprises
+[0:20:02] it's it's just one node but it comprises basically two um columns in your data
+[0:20:05] basically two um columns in your data frame. And in that way you can very
+[0:20:07] frame. And in that way you can very flexibly uh define uh these vector
+[0:20:10] flexibly uh define uh these vector valued variables and then that is
+[0:20:12] valued variables and then that is digested by the dependence tests and
+[0:20:15] digested by the dependence tests and other functionality.
+[0:20:17] other functionality. You can also specify the the reference
+[0:20:20] You can also specify the the reference point. So this might be I only want to
+[0:20:23] point. So this might be I only want to uh use like summer or winter that is
+[0:20:25] uh use like summer or winter that is part of masking maybe. But you can also
+[0:20:27] part of masking maybe. But you can also specify only yeah half of the sample or
+[0:20:31] specify only yeah half of the sample or this allows to basically also do
+[0:20:33] this allows to basically also do bootstrapping by specifying like a
+[0:20:35] bootstrapping by specifying like a random uh draw with replacement from the
+[0:20:38] random uh draw with replacement from the data. This is used in all the packages.
+[0:20:41] data. This is used in all the packages. Um there's a missing flag for missing
+[0:20:43] Um there's a missing flag for missing samples and yeah variable names. And
+[0:20:46] samples and yeah variable names. And then once that is initialized every
+[0:20:49] then once that is initialized every method the causal discovery methods they
+[0:20:51] method the causal discovery methods they all make use of this construct array
+[0:20:53] all make use of this construct array function of this class
+[0:20:56] function of this class and that converts any query into an
+[0:20:59] and that converts any query into an array that is uh then digestible by
+[0:21:02] array that is uh then digestible by conditional independence tests by
+[0:21:03] conditional independence tests by scikitlearn. Basically it creates um an
+[0:21:08] scikitlearn. Basically it creates um an array that contains the correct values X
+[0:21:11] array that contains the correct values X Y and Z and maybe XY Z are time delayed
+[0:21:15] Y and Z and maybe XY Z are time delayed samples. Maybe some are missing because
+[0:21:17] samples. Maybe some are missing because of masking and all this stuff is handled
+[0:21:20] of masking and all this stuff is handled by the construct array function. So that
+[0:21:22] by the construct array function. So that the array that the method gets is
+[0:21:24] the array that the method gets is without missing samples and uh is just
+[0:21:28] without missing samples and uh is just kind of like the the ID um data that
+[0:21:32] kind of like the the ID um data that scikitlearn digests or numpy digest and
+[0:21:35] scikitlearn digests or numpy digest and so on. Um and there's also modules for
+[0:21:39] so on. Um and there's also modules for data transformations.
+[0:21:41] data transformations. Then there's uh the time series causal
+[0:21:43] Then there's uh the time series causal discovery algorithms um class uh or
+[0:21:48] discovery algorithms um class uh or classes and this are I mentioned PCMCI
+[0:21:51] classes and this are I mentioned PCMCI PCMCI plus latent PCMCI and I discussed
+[0:21:54] PCMCI plus latent PCMCI and I discussed them before. So this is a process graph
+[0:21:58] them before. So this is a process graph now and this is time series graph with
+[0:22:00] now and this is time series graph with these uh birected edges. So that's for
+[0:22:03] these uh birected edges. So that's for um time series max.
+[0:22:06] um time series max. And the way these classes work is they
+[0:22:09] And the way these classes work is they are initialized with a data frame with
+[0:22:11] are initialized with a data frame with an condition independence test and then
+[0:22:14] an condition independence test and then you just use something like run JPCMCI
+[0:22:17] you just use something like run JPCMCI plus. You can put um prior assumptions
+[0:22:20] plus. You can put um prior assumptions about your graph also uh as as a
+[0:22:23] about your graph also uh as as a parameter. So that might be um this link
+[0:22:26] parameter. So that might be um this link must be there. this cannot be removed in
+[0:22:28] must be there. this cannot be removed in uh the algorithm or it might be that
+[0:22:32] uh the algorithm or it might be that link is oriented that way if it exists.
+[0:22:35] link is oriented that way if it exists. So it's a bit flexible in terms of
+[0:22:37] So it's a bit flexible in terms of adjacencies and orientations.
+[0:22:39] adjacencies and orientations. Um or you say that this link cannot be
+[0:22:42] Um or you say that this link cannot be there. So your prior knowledge can be
+[0:22:44] there. So your prior knowledge can be quite flexible and yeah there can be
+[0:22:47] quite flexible and yeah there can be maximum time lag of course of this graph
+[0:22:49] maximum time lag of course of this graph and then an alpha level of the CI test
+[0:22:51] and then an alpha level of the CI test and I uh have a bootstrap functionality
+[0:22:54] and I uh have a bootstrap functionality covering all these methods. So that's a
+[0:22:57] covering all these methods. So that's a separate function where you just call a
+[0:22:58] separate function where you just call a method and its arguments and then it
+[0:23:01] method and its arguments and then it runs um a bootstrap of these methods and
+[0:23:04] runs um a bootstrap of these methods and we have one one paper about this because
+[0:23:07] we have one one paper about this because I think it's not so uh frequent that
+[0:23:10] I think it's not so uh frequent that cause discovery comes uh with with
+[0:23:12] cause discovery comes uh with with bootstraps but there's there's some for
+[0:23:13] bootstraps but there's there's some for the PC algorithm and this is for the
+[0:23:15] the PC algorithm and this is for the time series version in this case
+[0:23:19] time series version in this case um the independence test that we have
+[0:23:22] um the independence test that we have &gt;&gt; I'm sorry to interrupt uh so there there
+[0:23:24] &gt;&gt; I'm sorry to interrupt uh so there there are two questions the First one is uh
+[0:23:27] are two questions the First one is uh does does it can it decide which method
+[0:23:30] does does it can it decide which method to use for which variable pur depending
+[0:23:32] to use for which variable pur depending on their linear relationships and then
+[0:23:35] on their linear relationships and then the other one is the maximum lag uh is
+[0:23:37] the other one is the maximum lag uh is it estimate can it be estimated
+[0:23:39] it estimate can it be estimated automatically or set by hand only
+[0:23:41] automatically or set by hand only &gt;&gt; right so so far I don't have like uh an
+[0:23:46] &gt;&gt; right so so far I don't have like uh an automatic um method recommendation
+[0:23:48] automatic um method recommendation system that's that's my goal a bit in
+[0:23:50] system that's that's my goal a bit in the future but so far as the user would
+[0:23:52] the future but so far as the user would have to look into the assumptions and
+[0:23:54] have to look into the assumptions and what are they willing to make and then
+[0:23:57] what are they willing to make and then choose the method and the maximum time
+[0:24:00] choose the method and the maximum time lag. Um there I have in the tutorial a
+[0:24:03] lag. Um there I have in the tutorial a recommendation like either you know
+[0:24:04] recommendation like either you know physically like in in atmospheric
+[0:24:06] physically like in in atmospheric science you know that things decay after
+[0:24:08] science you know that things decay after 2 months. So that's your physical
+[0:24:10] 2 months. So that's your physical maximum time lag or you can uh try to
+[0:24:12] maximum time lag or you can uh try to learn that or estimate it using these
+[0:24:14] learn that or estimate it using these lacked functions basically
+[0:24:18] lacked functions basically at which point the lack functions here
+[0:24:20] at which point the lack functions here decay to almost zero and that's assuming
+[0:24:23] decay to almost zero and that's assuming faithfulness that's the maximum causal
+[0:24:25] faithfulness that's the maximum causal link you can get by far it's a very
+[0:24:28] link you can get by far it's a very conservative estimate. So those are my
+[0:24:31] conservative estimate. So those are my uh recommendations in in a tutorial on
+[0:24:33] uh recommendations in in a tutorial on this.
+[0:24:34] this. &gt;&gt; All right thank you. Um
+[0:24:37] &gt;&gt; All right thank you. Um so the independence test they they are
+[0:24:39] so the independence test they they are currently implemented for really various
+[0:24:42] currently implemented for really various um assumptions like univariate
+[0:24:44] um assumptions like univariate continuous data with linear dependencies
+[0:24:46] continuous data with linear dependencies and gshian noise or robust parkour
+[0:24:49] and gshian noise or robust parkour allows for different marginal
+[0:24:50] allows for different marginal distributions. Then this is weighted
+[0:24:53] distributions. Then this is weighted least square for heteroscadastic data. I
+[0:24:56] least square for heteroscadastic data. I have a gshian process distance
+[0:24:58] have a gshian process distance correlation based test uh for like
+[0:25:01] correlation based test uh for like additive nonlinear dependencies also
+[0:25:03] additive nonlinear dependencies also with a c GPU version. I have this uh CMI
+[0:25:07] with a c GPU version. I have this uh CMI KN&amp;N test uh that that I developed for
+[0:25:11] KN&amp;N test uh that that I developed for yeah almost arbitrary but of course we
+[0:25:13] yeah almost arbitrary but of course we know that no uh free lunch theorems
+[0:25:16] know that no uh free lunch theorems exist. Um we have G squ um a symbolic
+[0:25:21] exist. Um we have G squ um a symbolic like a categorical conditional mutual
+[0:25:23] like a categorical conditional mutual information test. Um, regression CRI
+[0:25:25] information test. Um, regression CRI uses regressions with and without the X
+[0:25:29] uses regressions with and without the X um, in principle and that can be applied
+[0:25:32] um, in principle and that can be applied to mixed data with like categorical and
+[0:25:34] to mixed data with like categorical and discrete data. Um this is of course
+[0:25:37] discrete data. Um this is of course categorical and all these are more for
+[0:25:39] categorical and all these are more for uh continuous samples. And then we have
+[0:25:41] uh continuous samples. And then we have a recent method CMI canon mix which is
+[0:25:44] a recent method CMI canon mix which is uh also for discrete and categorical
+[0:25:48] uh also for discrete and categorical data and general dependencies among the
+[0:25:50] data and general dependencies among the continuous variables and some of these
+[0:25:53] continuous variables and some of these allow for analytic
+[0:25:55] allow for analytic some uh just are based on permutation
+[0:25:58] some uh just are based on permutation tests.
+[0:25:59] tests. And I also have a nice wrapper class
+[0:26:02] And I also have a nice wrapper class that makes every univariate test um
+[0:26:04] that makes every univariate test um multivaried
+[0:26:06] multivaried which is called pairwise multi. And
+[0:26:08] which is called pairwise multi. And there's a there's a paper also by a PhD
+[0:26:11] there's a there's a paper also by a PhD student of mine. And now these tests
+[0:26:13] student of mine. And now these tests they all um they have a a wrapper class
+[0:26:17] they all um they have a a wrapper class a base class and that gives rise to this
+[0:26:20] a base class and that gives rise to this run test and that uh is based on some x
+[0:26:23] run test and that uh is based on some x some y some zed and also they might be
+[0:26:26] some y some zed and also they might be multivaried here even even the x and the
+[0:26:28] multivaried here even even the x and the y and um that then spits out p values
+[0:26:32] y and um that then spits out p values and test statistics and so uh you can
+[0:26:35] and test statistics and so uh you can write your own ci by by subclassing and
+[0:26:38] write your own ci by by subclassing and making use for example of the uh
+[0:26:40] making use for example of the uh permutation test function funality that
+[0:26:42] permutation test function funality that is um used by these tests.
+[0:26:45] is um used by these tests. Um example is the CMI KN&amp;N which um is
+[0:26:50] Um example is the CMI KN&amp;N which um is then initialized also with the KN&amp;N
+[0:26:52] then initialized also with the KN&amp;N parameter uh significance. In that case,
+[0:26:55] parameter uh significance. In that case, of course, there's no analytics and
+[0:26:58] of course, there's no analytics and there's mass types which allows to again
+[0:27:02] there's mass types which allows to again specify how to deal with a certain mask.
+[0:27:04] specify how to deal with a certain mask. And the permutation test is uh correct
+[0:27:07] And the permutation test is uh correct in the sense that it is a local
+[0:27:09] in the sense that it is a local permutation tests. When you test for XY
+[0:27:12] permutation tests. When you test for XY independent
+[0:27:14] independent given Z, you of course only shuffle
+[0:27:16] given Z, you of course only shuffle samples of where the Z value is uh
+[0:27:20] samples of where the Z value is uh similar um to make a asympto correct uh
+[0:27:24] similar um to make a asympto correct uh shuffle test here. Okay. Um moving to
+[0:27:28] shuffle test here. Okay. Um moving to causal effect estimation. So here we
+[0:27:31] causal effect estimation. So here we have the causal effects class and that
+[0:27:33] have the causal effects class and that is initialized with um a graph. That's
+[0:27:36] is initialized with um a graph. That's of course the assumption and that uh
+[0:27:38] of course the assumption and that uh graph type can be implemented now as DAX
+[0:27:42] graph type can be implemented now as DAX and they can be static DAXs or static
+[0:27:44] and they can be static DAXs or static ADMGs or there can be these stationary
+[0:27:47] ADMGs or there can be these stationary DAXs or stationary ADMGs.
+[0:27:50] DAXs or stationary ADMGs. Then you would specify your X and your Y
+[0:27:52] Then you would specify your X and your Y and potentially a conditional effect
+[0:27:54] and potentially a conditional effect variable if you want to estimate
+[0:27:56] variable if you want to estimate conditional causal effects. And based on
+[0:27:59] conditional causal effects. And based on that, you then have um a fit function um
+[0:28:02] that, you then have um a fit function um which uses the data frame and takes care
+[0:28:05] which uses the data frame and takes care of all those missing values and masks
+[0:28:07] of all those missing values and masks and whatnot.
+[0:28:09] and whatnot. Um and you specify a scikitlearn
+[0:28:12] Um and you specify a scikitlearn estimator here. you specify your
+[0:28:14] estimator here. you specify your adjustment set and that implemented is
+[0:28:17] adjustment set and that implemented is the the optimal adjustment um that uh
+[0:28:20] the the optimal adjustment um that uh that was developed by Hankle for DAX and
+[0:28:23] that was developed by Hankle for DAX and by myself for ADMGs
+[0:28:26] by myself for ADMGs or you can just use your own um you can
+[0:28:29] or you can just use your own um you can also specify like a conditional effect
+[0:28:32] also specify like a conditional effect estimator for in my case this is nested
+[0:28:35] estimator for in my case this is nested effect estimation and you can do prior
+[0:28:38] effect estimation and you can do prior transformations and the masking choice
+[0:28:40] transformations and the masking choice and then you predict and intervention
+[0:28:42] and then you predict and intervention can be then an array of interventions.
+[0:28:45] can be then an array of interventions. So to get multiple predictions at once
+[0:28:48] So to get multiple predictions at once and um also they can be hard or or soft
+[0:28:52] and um also they can be hard or or soft in this case. This uh is the way you
+[0:28:54] in this case. This uh is the way you compute these interventions
+[0:28:56] compute these interventions and also here I have this bootstrap
+[0:28:58] and also here I have this bootstrap functionality to use potentially block
+[0:29:01] functionality to use potentially block bootstraps of uh all the methodology
+[0:29:04] bootstraps of uh all the methodology that that you see here. Um and there's a
+[0:29:08] that that you see here. Um and there's a lot of other little functionality for
+[0:29:10] lot of other little functionality for example get all valid adjustment sets
+[0:29:12] example get all valid adjustment sets and this is thanks to uh fun and discour
+[0:29:16] and this is thanks to uh fun and discour because they have this nice um package
+[0:29:19] because they have this nice um package and pseudo code and I just u implemented
+[0:29:21] and pseudo code and I just u implemented this in Python here um to yeah for
+[0:29:24] this in Python here um to yeah for example run through all valid adjustment
+[0:29:26] example run through all valid adjustment sets um and there's this check
+[0:29:29] sets um and there's this check optimality which uh checks whether a
+[0:29:31] optimality which uh checks whether a given graph admits an optimal adjustment
+[0:29:34] given graph admits an optimal adjustment set and uh maybe that's all jargon. Now
+[0:29:37] set and uh maybe that's all jargon. Now this optimal adjustment is uh something
+[0:29:40] this optimal adjustment is uh something I may get uh to back in in the end. It
+[0:29:42] I may get uh to back in in the end. It tries to find um the optimal adjustment
+[0:29:46] tries to find um the optimal adjustment set in terms of asmtotic variance from
+[0:29:48] set in terms of asmtotic variance from all among all valid adjustment sets. And
+[0:29:52] all among all valid adjustment sets. And this uh theory is um uh asmtotically
+[0:29:56] this uh theory is um uh asmtotically correct for for linear um SCMs and uh
+[0:30:01] correct for for linear um SCMs and uh for others there's just numeric but I
+[0:30:03] for others there's just numeric but I think the optimal adjustment set is is
+[0:30:05] think the optimal adjustment set is is really working often better also in
+[0:30:08] really working often better also in nonlinear cases. Um
+[0:30:11] nonlinear cases. Um yeah um so maybe just a plot of uh
+[0:30:16] yeah um so maybe just a plot of uh non-parametric causal effect estimation.
+[0:30:19] non-parametric causal effect estimation. So when you give it a time series graph,
+[0:30:22] So when you give it a time series graph, what internally is computed is a is a
+[0:30:24] what internally is computed is a is a finite projection of a time series graph
+[0:30:28] finite projection of a time series graph which may look like this. And that's
+[0:30:30] which may look like this. And that's then containing these birected edges
+[0:30:32] then containing these birected edges because of uh kind of the past. And you
+[0:30:36] because of uh kind of the past. And you can then color your source node, your
+[0:30:39] can then color your source node, your target node and the mediators. And then
+[0:30:41] target node and the mediators. And then these orange nodes would be the optimal
+[0:30:43] these orange nodes would be the optimal adjustment set in that case. And then
+[0:30:46] adjustment set in that case. And then you can use in this case like a
+[0:30:48] you can use in this case like a multi-layer perceptron to estimate some
+[0:30:51] multi-layer perceptron to estimate some nice nonlinear causal effect uh and do
+[0:30:54] nice nonlinear causal effect uh and do some bootstrap uncertainty estimation.
+[0:30:59] some bootstrap uncertainty estimation. Um okay moving uh just quickly
+[0:31:03] Um okay moving uh just quickly &gt;&gt; yeah can I interrupt again sorry so
+[0:31:06] &gt;&gt; yeah can I interrupt again sorry so there there's a question about whether
+[0:31:07] there there's a question about whether you have any recommendations on what
+[0:31:09] you have any recommendations on what method to choose for causal discovery
+[0:31:10] method to choose for causal discovery and effect estimation when it comes to
+[0:31:12] and effect estimation when it comes to real world observational health data
+[0:31:14] real world observational health data where stationary assumptions don't
+[0:31:16] where stationary assumptions don't generally hold
+[0:31:18] generally hold &gt;&gt; yeah big question I mean um I think I I
+[0:31:21] &gt;&gt; yeah big question I mean um I think I I cover this like I cannot say that
+[0:31:23] cover this like I cannot say that generally now but I think this whole
+[0:31:26] generally now but I think this whole package gives a lot of um um guidance by
+[0:31:30] package gives a lot of um um guidance by for example here mentioning the
+[0:31:32] for example here mentioning the assumptions and if it's non-stationary
+[0:31:34] assumptions and if it's non-stationary maybe you have to use maybe either you
+[0:31:37] maybe you have to use maybe either you you uh can check which parts of the data
+[0:31:39] you uh can check which parts of the data are stationary or you do sliding windows
+[0:31:42] are stationary or you do sliding windows um or you use a more complex method that
+[0:31:45] um or you use a more complex method that doesn't try to assume that we are
+[0:31:48] doesn't try to assume that we are developing further methods currently
+[0:31:51] developing further methods currently and similarly for effect estimation a
+[0:31:55] and similarly for effect estimation a big topic of course how to define fine
+[0:31:57] big topic of course how to define fine but here it's I mean the graph you kind
+[0:31:59] but here it's I mean the graph you kind of put in and uh if you don't know it
+[0:32:01] of put in and uh if you don't know it then you have to go back to causal
+[0:32:03] then you have to go back to causal discovery or uh use different graphs
+[0:32:06] discovery or uh use different graphs that you assume and then transparently
+[0:32:08] that you assume and then transparently lay out for for this graph you get this
+[0:32:10] lay out for for this graph you get this effect for this graph you get this
+[0:32:11] effect for this graph you get this effect um of course choosing the right
+[0:32:14] effect um of course choosing the right psychic learn method is up to yeah
+[0:32:17] psychic learn method is up to yeah whether you want to assume linearity or
+[0:32:19] whether you want to assume linearity or not and that can be tested of course um
+[0:32:22] not and that can be tested of course um so parts are I I discuss in the
+[0:32:25] so parts are I I discuss in the tutorials of tigerite parts are just
+[0:32:27] tutorials of tigerite parts are just general things like uh do you use uh
+[0:32:30] general things like uh do you use uh KN&amp;N or linear regression that's uh kind
+[0:32:33] KN&amp;N or linear regression that's uh kind of covered in scikitlearn.
+[0:32:36] of covered in scikitlearn. &gt;&gt; Thank you. And another question of uh
+[0:32:38] &gt;&gt; Thank you. And another question of uh you mentioned that in causal discovery
+[0:32:39] you mentioned that in causal discovery you can accommodate like prior knowledge
+[0:32:42] you can accommodate like prior knowledge into the code and whether um there's
+[0:32:44] into the code and whether um there's also a way to incorporate like bian
+[0:32:46] also a way to incorporate like bian approaches and we're specifying priors
+[0:32:48] approaches and we're specifying priors etc.
+[0:32:49] etc. Um so this is this is constraint based
+[0:32:52] Um so this is this is constraint based uh this whole framework here and so the
+[0:32:56] uh this whole framework here and so the way you you encode link assumptions is
+[0:32:58] way you you encode link assumptions is is hard. You either say this link is
+[0:33:00] is hard. You either say this link is there or not. If you want to do like
+[0:33:03] there or not. If you want to do like Beijian stuff, you have to go to Beijian
+[0:33:05] Beijian stuff, you have to go to Beijian packages or use SAT solvers where you
+[0:33:08] packages or use SAT solvers where you kind of specify I believe this
+[0:33:10] kind of specify I believe this independence test with this confidence
+[0:33:13] independence test with this confidence and so on and then it's computationally
+[0:33:15] and so on and then it's computationally more expensive but can deal better with
+[0:33:17] more expensive but can deal better with such prior uncertainties
+[0:33:20] such prior uncertainties but it's it's kind of hard here.
+[0:33:29] &gt;&gt; Okay. Um continuing there's the causal mediation class and uh one that we have
+[0:33:32] mediation class and uh one that we have is for really non parametric um
+[0:33:35] is for really non parametric um situations
+[0:33:37] situations similarly to the graph uh to the causal
+[0:33:39] similarly to the graph uh to the causal effects class. It allows a graph array
+[0:33:42] effects class. It allows a graph array different types of
+[0:33:45] different types of graphs and then you can fit natural
+[0:33:48] graphs and then you can fit natural direct or indirect effects um specify
+[0:33:51] direct or indirect effects um specify the estimators to deal with. So this is
+[0:33:53] the estimators to deal with. So this is a complex gra class where you can define
+[0:33:56] a complex gra class where you can define which nodes are continuous or
+[0:33:58] which nodes are continuous or categorical and then find the correct um
+[0:34:00] categorical and then find the correct um estimation strategy
+[0:34:03] estimation strategy for purely linear systems. I have a much
+[0:34:06] for purely linear systems. I have a much faster version uh the linear mediation
+[0:34:09] faster version uh the linear mediation class. So this is all based on
+[0:34:11] class. So this is all based on estimating path coefficients and using
+[0:34:13] estimating path coefficients and using the right method here. And yeah, this
+[0:34:16] the right method here. And yeah, this has a lot of functionality about total
+[0:34:18] has a lot of functionality about total effects, mediated effects, also
+[0:34:20] effects, mediated effects, also bootstraps and is much faster of course
+[0:34:23] bootstraps and is much faster of course in a linear case.
+[0:34:26] in a linear case. And um
+[0:34:29] And um finally there's also a toy model and
+[0:34:31] finally there's also a toy model and tutorials part of tiger mites. So the
+[0:34:34] tutorials part of tiger mites. So the toy models I think are very useful for
+[0:34:36] toy models I think are very useful for users um to play around maybe generate
+[0:34:39] users um to play around maybe generate data where they know the causal
+[0:34:41] data where they know the causal structure but that has some types of
+[0:34:44] structure but that has some types of challenges and then evaluate whether a
+[0:34:47] challenges and then evaluate whether a certain method works good or not on the
+[0:34:50] certain method works good or not on the sample size you have. And that class um
+[0:34:54] sample size you have. And that class um digests like a links dictionary which
+[0:34:57] digests like a links dictionary which would be uh link or variable J is caused
+[0:35:00] would be uh link or variable J is caused by variable I at l toao with a
+[0:35:03] by variable I at l toao with a coefficient and this types of functional
+[0:35:04] coefficient and this types of functional dependency. So it's a generalized
+[0:35:06] dependency. So it's a generalized additive model.
+[0:35:09] additive model. Um you can specify noise distributions
+[0:35:11] Um you can specify noise distributions you call you can also generate
+[0:35:13] you call you can also generate interventional data where you just
+[0:35:15] interventional data where you just specify interventions and then also hard
+[0:35:19] specify interventions and then also hard or soft interventions.
+[0:35:21] or soft interventions. There's also um a function to just
+[0:35:23] There's also um a function to just generate uh SCMs based on uh drawing
+[0:35:27] generate uh SCMs based on uh drawing coefficients from a range, drawing uh
+[0:35:30] coefficients from a range, drawing uh link densities. Uh there's a lot of
+[0:35:32] link densities. Uh there's a lot of different parameters in that in that
+[0:35:34] different parameters in that in that function
+[0:35:37] function and that's maybe useful for method
+[0:35:39] and that's maybe useful for method developers. Um and then there's a lot of
+[0:35:42] developers. Um and then there's a lot of tutorials um in different folders.
+[0:35:45] tutorials um in different folders. Uh there's case studies, discovery,
+[0:35:47] Uh there's case studies, discovery, effect estimation, feature learning, and
+[0:35:49] effect estimation, feature learning, and some data challenges. And this is also
+[0:35:52] some data challenges. And this is also my uh preprint of that um perspective
+[0:35:55] my uh preprint of that um perspective paper on uh just the tutorials section.
+[0:36:00] paper on uh just the tutorials section. And there's lots of applications that I
+[0:36:03] And there's lots of applications that I just put on the slide here for for
+[0:36:05] just put on the slide here for for reference uh where these methods have
+[0:36:07] reference uh where these methods have been uh used and I collaborated on
+[0:36:10] been uh used and I collaborated on these.
+[0:36:12] these. And going back to to this which I try to
+[0:36:15] And going back to to this which I try to make really as a as an important point
+[0:36:18] make really as a as an important point for for practitioners to try to find the
+[0:36:20] for for practitioners to try to find the best method by just question asking
+[0:36:23] best method by just question asking yourself which assumptions am I willing
+[0:36:24] yourself which assumptions am I willing to make uh about the underlying system
+[0:36:27] to make uh about the underlying system that's a task that partially can be
+[0:36:30] that's a task that partially can be tested on the data and partially cannot.
+[0:36:32] tested on the data and partially cannot. So uh I don't know something like are
+[0:36:35] So uh I don't know something like are the hidden confounders there is some
+[0:36:37] the hidden confounders there is some tests of course but usually it's it's
+[0:36:39] tests of course but usually it's it's something that you have to make as an
+[0:36:41] something that you have to make as an assumption and uh you will also then um
+[0:36:44] assumption and uh you will also then um need to discuss this in a in a
+[0:36:45] need to discuss this in a in a scientific publication and this tries to
+[0:36:47] scientific publication and this tries to make this transparent so you don't have
+[0:36:49] make this transparent so you don't have implicit um assumptions
+[0:36:53] implicit um assumptions um I think given the time I will not go
+[0:36:55] um I think given the time I will not go through a tutorial here uh in depth but
+[0:36:58] through a tutorial here uh in depth but there's for example the biogeeoccience
+[0:37:01] there's for example the biogeeoccience uh case study
+[0:37:02] uh case study that goes all the way basically through
+[0:37:05] that goes all the way basically through this how to use this flowchart and how
+[0:37:07] this how to use this flowchart and how to choose the right hyperparameters of a
+[0:37:10] to choose the right hyperparameters of a particular method
+[0:37:12] particular method and
+[0:37:14] and coming uh to an end the idea of of
+[0:37:17] coming uh to an end the idea of of tigerite is to have extensibility so
+[0:37:20] tigerite is to have extensibility so it's easy to integrate further uh CI
+[0:37:23] it's easy to integrate further uh CI tests um and also many sub routines are
+[0:37:27] tests um and also many sub routines are parallelized via job lips some uh
+[0:37:30] parallelized via job lips some uh there's some script for MP NPI that I
+[0:37:32] there's some script for MP NPI that I have for selected methods and then
+[0:37:35] have for selected methods and then there's of course numpy is uh
+[0:37:38] there's of course numpy is uh parallelized internally. So it's always
+[0:37:40] parallelized internally. So it's always a discussion to have whether it's makes
+[0:37:43] a discussion to have whether it's makes sense to parallelize outside if uh numpy
+[0:37:46] sense to parallelize outside if uh numpy is internally doing this already.
+[0:37:48] is internally doing this already. there's some GPU support for like some
+[0:37:51] there's some GPU support for like some GPDC torch condition independence test
+[0:37:54] GPDC torch condition independence test and any further algorithms would um
+[0:37:57] and any further algorithms would um benefit much from the data frame
+[0:37:59] benefit much from the data frame handling of all the specifics about time
+[0:38:02] handling of all the specifics about time series where you need to shift lags and
+[0:38:04] series where you need to shift lags and missing values and masking and some are
+[0:38:07] missing values and masking and some are vector valued and so this is really
+[0:38:09] vector valued and so this is really tried uh trying to handle this
+[0:38:13] tried uh trying to handle this um my road map uh there's lots of things
+[0:38:16] um my road map uh there's lots of things that I want to do um and I'm happy for
+[0:38:18] that I want to do um and I'm happy for any uh pull requests or new
+[0:38:21] any uh pull requests or new functionality. So I'm trying to
+[0:38:23] functionality. So I'm trying to integrate further time series called
+[0:38:25] integrate further time series called discovery methods. Uh adding further CI
+[0:38:27] discovery methods. Uh adding further CI tests. Uh one branch that I'm looking in
+[0:38:31] tests. Uh one branch that I'm looking in into in my group is adding validation
+[0:38:33] into in my group is adding validation methods. So can we check assumption
+[0:38:35] methods. So can we check assumption violations? Can we check finite sample
+[0:38:38] violations? Can we check finite sample uncertainty better even though it's
+[0:38:40] uncertainty better even though it's constraintbased?
+[0:38:42] constraintbased? Then I want to expand causal effect
+[0:38:44] Then I want to expand causal effect estimation. For example, there's the the
+[0:38:47] estimation. For example, there's the the ID algorithm and I haven't integrated
+[0:38:49] ID algorithm and I haven't integrated that yet. It's uh something on my my
+[0:38:52] that yet. It's uh something on my my list. Then do more counterfactual
+[0:38:54] list. Then do more counterfactual analysis, more estimators uh for
+[0:38:57] analysis, more estimators uh for conditional effects. Also, uh some
+[0:39:00] conditional effects. Also, uh some currently it's you can use it fine for
+[0:39:02] currently it's you can use it fine for purely iid method. It's just your your
+[0:39:05] purely iid method. It's just your your graph is just the contemporaneous uh
+[0:39:08] graph is just the contemporaneous uh slice of the time series graph. Um so
+[0:39:11] slice of the time series graph. Um so all the methods are applicable to iid
+[0:39:13] all the methods are applicable to iid data.
+[0:39:15] data. I want to expand the the benchmark suite
+[0:39:17] I want to expand the the benchmark suite and also have what was asked now more
+[0:39:20] and also have what was asked now more functionality to method and
+[0:39:22] functionality to method and hyperparameter choice and I mentioned is
+[0:39:25] hyperparameter choice and I mentioned is some assumptions you have to make and
+[0:39:28] some assumptions you have to make and lay out and some can be tested on the
+[0:39:30] lay out and some can be tested on the data like is it linear or nonlinear
+[0:39:32] data like is it linear or nonlinear maybe and with that I summarize um again
+[0:39:36] maybe and with that I summarize um again tiger might as a cause inference for
+[0:39:38] tiger might as a cause inference for time series package uh which I think has
+[0:39:41] time series package uh which I think has not been uh there before It's modular
+[0:39:44] not been uh there before It's modular and extensible. It's quite widely used
+[0:39:48] and extensible. It's quite widely used um currently. Uh it's open source of
+[0:39:50] um currently. Uh it's open source of course and I try to make this question
+[0:39:53] course and I try to make this question assumptions data approach uh more
+[0:39:57] assumptions data approach uh more popular also in uh in this paper here.
+[0:40:01] popular also in uh in this paper here. And with that I'm I'm happy to take
+[0:40:03] And with that I'm I'm happy to take questions and thank my group that
+[0:40:04] questions and thank my group that contribute lots of methods and and code.
+[0:40:08] contribute lots of methods and and code. And yeah, thanks a lot for your
+[0:40:10] And yeah, thanks a lot for your attention.
+[0:40:16] Thank you Jacob for the tutorial and this looks like a wholesome package and
+[0:40:18] this looks like a wholesome package and there are quite a few questions. Uh so
+[0:40:20] there are quite a few questions. Uh so when you were talking about the uh what
+[0:40:22] when you were talking about the uh what methods you choose for nonstationary
+[0:40:25] methods you choose for nonstationary data so there was a followup to that. So
+[0:40:28] data so there was a followup to that. So uh if we apply fractional
+[0:40:30] uh if we apply fractional differentiation to the series to get
+[0:40:32] differentiation to the series to get them a stationary enough could uh that
+[0:40:34] them a stationary enough could uh that be a good solution and something related
+[0:40:36] be a good solution and something related to that and another person asked is can
+[0:40:39] to that and another person asked is can your package process non a stationary
+[0:40:41] your package process non a stationary time series automatically or should the
+[0:40:43] time series automatically or should the user process them before using your
+[0:40:46] user process them before using your package?
+[0:40:48] package? &gt;&gt; Right. Yeah. Good question. So this um
+[0:40:52] &gt;&gt; Right. Yeah. Good question. So this um differentiation prior uh analysis um so
+[0:40:56] differentiation prior uh analysis um so I'm I'm I'm really not in the economics
+[0:40:59] I'm I'm I'm really not in the economics uh literature so much where where this
+[0:41:01] uh literature so much where where this is common practice. Um in in kind of the
+[0:41:05] is common practice. Um in in kind of the physical sciences you you wouldn't do it
+[0:41:07] physical sciences you you wouldn't do it because if you do fractional like if you
+[0:41:09] because if you do fractional like if you do differences uh of temperature then
+[0:41:13] do differences uh of temperature then your time series variable would be not
+[0:41:14] your time series variable would be not temperature anymore but it would be
+[0:41:16] temperature anymore but it would be delta temperature and that is a
+[0:41:19] delta temperature and that is a different interpretation and your causal
+[0:41:21] different interpretation and your causal effects would be in terms of this and in
+[0:41:23] effects would be in terms of this and in causal discovery would be in terms of
+[0:41:24] causal discovery would be in terms of this. So it's not uh it's not so
+[0:41:26] this. So it's not uh it's not so innocent to just take differences to
+[0:41:28] innocent to just take differences to make it stationary. In the end you have
+[0:41:30] make it stationary. In the end you have a different causal variable and that has
+[0:41:32] a different causal variable and that has different interpretations and that is
+[0:41:34] different interpretations and that is what what you have to keep in mind. Um
+[0:41:38] what what you have to keep in mind. Um the other question about um
+[0:41:40] the other question about um non-stationerity so I it it was already
+[0:41:43] non-stationerity so I it it was already in between. So right now um the methods
+[0:41:46] in between. So right now um the methods um
+[0:41:48] um part of them assume stationerity part of
+[0:41:50] part of them assume stationerity part of them don't. So going back here PCMCI all
+[0:41:56] them don't. So going back here PCMCI all of these assume stationerity.
+[0:41:58] of these assume stationerity. um this doesn't it assumes that the the
+[0:42:01] um this doesn't it assumes that the the system has a finite number of regimes
+[0:42:04] system has a finite number of regimes between which it switches and then it
+[0:42:06] between which it switches and then it tries to learn those regimes.
+[0:42:09] tries to learn those regimes. Um JPMCI is kind of if you if you have
+[0:42:13] Um JPMCI is kind of if you if you have multiple data sets and then of course
+[0:42:15] multiple data sets and then of course there can be non-stationerity in in
+[0:42:17] there can be non-stationerity in in space but each single time series data
+[0:42:20] space but each single time series data set should be stationary.
+[0:42:23] set should be stationary. It's also it's a very uh like you cannot
+[0:42:26] It's also it's a very uh like you cannot just deal with arbitrary stationerity
+[0:42:28] just deal with arbitrary stationerity that's just no free lunch. So you have
+[0:42:30] that's just no free lunch. So you have to make assumptions about uh how how
+[0:42:34] to make assumptions about uh how how non-stationerity it is. And if it's for
+[0:42:37] non-stationerity it is. And if it's for example in different regimes then go to
+[0:42:40] example in different regimes then go to this method. If it's maybe smoothly
+[0:42:43] this method. If it's maybe smoothly varying over time maybe sliding windows
+[0:42:45] varying over time maybe sliding windows help. If it's periodic, so like summer
+[0:42:48] help. If it's periodic, so like summer and winter, and you have prior knowledge
+[0:42:50] and winter, and you have prior knowledge about that, then you can mask your data
+[0:42:52] about that, then you can mask your data to make the different masked um subsets
+[0:42:56] to make the different masked um subsets uh stationary.
+[0:42:58] uh stationary. Um yeah, I I I suggest to think about
+[0:43:02] Um yeah, I I I suggest to think about your system. Uh maybe just plot the data
+[0:43:04] your system. Uh maybe just plot the data and look whether you see strong trends
+[0:43:07] and look whether you see strong trends and reason about where these trends come
+[0:43:09] and reason about where these trends come from. Maybe uh there's a climate change
+[0:43:12] from. Maybe uh there's a climate change trend and then you can subtract uh uh
+[0:43:14] trend and then you can subtract uh uh like a smoothed version of this data to
+[0:43:19] like a smoothed version of this data to remove that trend uh assuming additivity
+[0:43:22] remove that trend uh assuming additivity and so on. And so it always requires you
+[0:43:26] and so on. And so it always requires you to put in um thought about what is the
+[0:43:28] to put in um thought about what is the reason for this non-stationerity and
+[0:43:30] reason for this non-stationerity and then try to appropriately deal with it.
+[0:43:37] &gt;&gt; Great. Uh so there's another question. Can you say more about the kinds of
+[0:43:38] Can you say more about the kinds of causal effects that are of interest in
+[0:43:40] causal effects that are of interest in time series especially like treatment
+[0:43:42] time series especially like treatment regimes and differences in
+[0:43:44] regimes and differences in identification assumptions across them?
+[0:43:46] identification assumptions across them? &gt;&gt; Um what was the first part of your
+[0:43:48] &gt;&gt; Um what was the first part of your sentence like discuss just
+[0:43:50] sentence like discuss just &gt;&gt; say yeah say more about what kind of
+[0:43:53] &gt;&gt; say yeah say more about what kind of causal effects are of interest in time
+[0:43:54] causal effects are of interest in time series.
+[0:43:56] series. &gt;&gt; Um yeah good question. So what's what
+[0:44:00] &gt;&gt; Um yeah good question. So what's what you see here is basically a a graph that
+[0:44:03] you see here is basically a a graph that comes from a a stationary time series
+[0:44:06] comes from a a stationary time series graph and you see here that you can in
+[0:44:09] graph and you see here that you can in the end it's just a it's just a graph
+[0:44:11] the end it's just a it's just a graph it's a finite graph. This is non
+[0:44:13] it's a finite graph. This is non infinite and this is finite the
+[0:44:14] infinite and this is finite the projection of this and um in this graph
+[0:44:18] projection of this and um in this graph basically this is might be typically an
+[0:44:22] basically this is might be typically an ADMG and then all the results about
+[0:44:25] ADMG and then all the results about identification hold and in this package
+[0:44:28] identification hold and in this package I only implemented adjustment so not ID
+[0:44:32] I only implemented adjustment so not ID um you can however for example
+[0:44:36] um you can however for example uh learn uh causal effects also for
+[0:44:39] uh learn uh causal effects also for joint interventions so you might specify
+[0:44:42] joint interventions so you might specify ify that uh to be a whole past array of
+[0:44:47] ify that uh to be a whole past array of um axis that you want to intervene on
+[0:44:51] um axis that you want to intervene on and uh also more than one uh target
+[0:44:54] and uh also more than one uh target node. Of course, we know that this just
+[0:44:57] node. Of course, we know that this just decouples um and then yeah use the the
+[0:45:02] decouples um and then yeah use the the the functionality of finding the optimal
+[0:45:05] the functionality of finding the optimal set for joint interventions or other
+[0:45:09] set for joint interventions or other adjustments for joint interventions. We
+[0:45:11] adjustments for joint interventions. We know that um most of these uh
+[0:45:13] know that um most of these uh identification results also hold for
+[0:45:15] identification results also hold for joint interventions um which which I
+[0:45:17] joint interventions um which which I make use of here. Um but I for example I
+[0:45:22] make use of here. Um but I for example I didn't implement ID algorithm or uh
+[0:45:25] didn't implement ID algorithm or uh there's no front door there's no uh uh
+[0:45:28] there's no front door there's no uh uh there's no instrumental variables
+[0:45:30] there's no instrumental variables implemented here that's all stuff I want
+[0:45:33] implemented here that's all stuff I want to uh work out further.
+[0:45:36] to uh work out further. Is my understanding correct that for
+[0:45:38] Is my understanding correct that for estimation is estimation of the
+[0:45:39] estimation is estimation of the adjustment functional basically at this
+[0:45:41] adjustment functional basically at this stage right?
+[0:45:43] stage right? &gt;&gt; Yeah. Like this this so this this um
+[0:45:48] &gt;&gt; Yeah. Like this this so this this um well by by using a certain sklearn
+[0:45:50] well by by using a certain sklearn method you you specify what how you fit
+[0:45:52] method you you specify what how you fit by which estimator and by specifying
+[0:45:55] by which estimator and by specifying either optimal and then it's
+[0:45:57] either optimal and then it's automatically chosen or your userdefined
+[0:45:59] automatically chosen or your userdefined set and then maybe it takes it tells you
+[0:46:01] set and then maybe it takes it tells you uh no not a valid set. There's there's a
+[0:46:04] uh no not a valid set. There's there's a test for this. Um and so yeah you can
+[0:46:09] test for this. Um and so yeah you can flexibly use different adjustment sets.
+[0:46:12] flexibly use different adjustment sets. &gt;&gt; Great. Uh so another question is about
+[0:46:15] &gt;&gt; Great. Uh so another question is about how do you recommend testing the
+[0:46:16] how do you recommend testing the effectiveness of the different different
+[0:46:18] effectiveness of the different different time series based causal discovery
+[0:46:20] time series based causal discovery methods given that the challenge is lack
+[0:46:22] methods given that the challenge is lack of ground truth in some applications.
+[0:46:24] of ground truth in some applications. &gt;&gt; Yeah. Yeah. Yeah. That's uh that's my my
+[0:46:27] &gt;&gt; Yeah. Yeah. Yeah. That's uh that's my my kind of outlook.
+[0:46:30] kind of outlook. um adding validation method it's a it's
+[0:46:32] um adding validation method it's a it's a big topic right like
+[0:46:35] a big topic right like so if you don't have ground truth then
+[0:46:38] so if you don't have ground truth then what you can do in in constraint based
+[0:46:40] what you can do in in constraint based what what I have implemented is these um
+[0:46:42] what what I have implemented is these um bootstrap um kind of bootstrap repeated
+[0:46:47] bootstrap um kind of bootstrap repeated uh computations of cause discovery
+[0:46:49] uh computations of cause discovery algorithms so you get in the end you get
+[0:46:52] algorithms so you get in the end you get basically a thousand graphs and then you
+[0:46:54] basically a thousand graphs and then you can do a majority vote uh and take that
+[0:46:58] can do a majority vote uh and take that as your finite graph have. Of course,
+[0:47:00] as your finite graph have. Of course, there's challenges with that. Um, it
+[0:47:03] there's challenges with that. Um, it also gives you like uh how how in how
+[0:47:05] also gives you like uh how how in how many of the bootstraps does this link
+[0:47:07] many of the bootstraps does this link exist and so far this is just numerical
+[0:47:10] exist and so far this is just numerical and I'm uh I talked to uh um um Thomas
+[0:47:16] and I'm uh I talked to uh um um Thomas Richardson once on a walk about what's
+[0:47:18] Richardson once on a walk about what's the theory behind like in what sense is
+[0:47:21] the theory behind like in what sense is this uh bootstrap based relating to uh
+[0:47:25] this uh bootstrap based relating to uh kind of uncertainty in a in a Beijing
+[0:47:28] kind of uncertainty in a in a Beijing sense or so and so far it's it's really
+[0:47:30] sense or so and so far it's it's really just more our method and we have a lot
+[0:47:33] just more our method and we have a lot of numerical evaluations but that's one
+[0:47:36] of numerical evaluations but that's one approach to do a finite sample
+[0:47:37] approach to do a finite sample uncertainty estimation. Um
+[0:47:41] uncertainty estimation. Um and the other direction is um to test
+[0:47:45] and the other direction is um to test whether the data generating process uh
+[0:47:48] whether the data generating process uh has assumption violations like to and
+[0:47:52] has assumption violations like to and that's quite recent work uh where we uh
+[0:47:54] that's quite recent work uh where we uh where we look into faithfulness
+[0:47:55] where we look into faithfulness violations uh can we detect them and can
+[0:47:59] violations uh can we detect them and can we detect whether they exist and that
+[0:48:01] we detect whether they exist and that might give rise to uh using other
+[0:48:03] might give rise to uh using other methods that are more robust against
+[0:48:05] methods that are more robust against faithfulness violations. Um but it's
+[0:48:08] faithfulness violations. Um but it's yeah it's a it's a tricky
+[0:48:10] yeah it's a it's a tricky topic and it's interesting and lots of
+[0:48:12] topic and it's interesting and lots of research should go into this.
+[0:48:16] research should go into this. &gt;&gt; Okay great. Uh another question is could
+[0:48:18] &gt;&gt; Okay great. Uh another question is could you use these methods for causal
+[0:48:20] you use these methods for causal inference in any dynamical systems for
+[0:48:23] inference in any dynamical systems for example in lines of Peters and company's
+[0:48:25] example in lines of Peters and company's work it's Peter's power and feature 2022
+[0:48:29] work it's Peter's power and feature 2022 I'm not familiar with the paper maybe
+[0:48:31] I'm not familiar with the paper maybe &gt;&gt; or what was sorry what's the the method
+[0:48:36] &gt;&gt; or what was sorry what's the the method kind of
+[0:48:37] kind of &gt;&gt; yeah can they be used for any dynamical
+[0:48:39] &gt;&gt; yeah can they be used for any dynamical systems and the ones have been talked
+[0:48:41] systems and the ones have been talked about in Peterson company yeah
+[0:48:44] about in Peterson company yeah &gt;&gt; yeah um so it it It is used of I mean
+[0:48:47] &gt;&gt; yeah um so it it It is used of I mean the the application um target here is is
+[0:48:50] the the application um target here is is time series data. So that might come
+[0:48:52] time series data. So that might come from a dynamical system. It is maybe
+[0:48:56] from a dynamical system. It is maybe that goes to to my nice flowchart.
+[0:49:04] Um you know entering causal discovery here. Maybe it's just one data set. If
+[0:49:07] here. Maybe it's just one data set. If you have a deterministic system then
+[0:49:09] you have a deterministic system then there's these state space methods uh
+[0:49:10] there's these state space methods uh convergent cross mapping um and that
+[0:49:14] convergent cross mapping um and that they they they are made for this target
+[0:49:16] they they they are made for this target like you know that we assume random
+[0:49:18] like you know that we assume random variables so uh you would not have
+[0:49:21] variables so uh you would not have deterministic variables
+[0:49:24] deterministic variables and um
+[0:49:28] and um yeah I don't know the method that you
+[0:49:29] yeah I don't know the method that you that you mentioned uh but
+[0:49:32] that you mentioned uh but maybe that's all I can say now this
+[0:49:34] maybe that's all I can say now this tries to answer like which which
+[0:49:36] tries to answer like which which assumptions uh lead you to which type of
+[0:49:39] assumptions uh lead you to which type of of method.
+[0:49:42] of method. &gt;&gt; Okay. Uh and are you currently exploring
+[0:49:46] &gt;&gt; Okay. Uh and are you currently exploring um other um conditional independent
+[0:49:48] um other um conditional independent tests for higher order multivaried
+[0:49:50] tests for higher order multivaried relationships?
+[0:49:52] relationships? &gt;&gt; Um well I mean many of these
+[0:49:54] &gt;&gt; Um well I mean many of these independence tests are for multivaried
+[0:49:57] independence tests are for multivaried relationships. Um so those are my
+[0:50:00] relationships. Um so those are my independence tests. So
+[0:50:02] independence tests. So like for example, CMI is natively
+[0:50:05] like for example, CMI is natively supporting um multivaried X. You see
+[0:50:08] supporting um multivaried X. You see that this is a list uh and this can be
+[0:50:10] that this is a list uh and this can be just multi- variables.
+[0:50:12] just multi- variables. &gt;&gt; Mhm.
+[0:50:13] &gt;&gt; Mhm. &gt;&gt; Um and then CMI SIM the same um CMIK
+[0:50:17] &gt;&gt; Um and then CMI SIM the same um CMIK mixed the same um G squ I think also. So
+[0:50:22] mixed the same um G squ I think also. So no it doesn't uh I think not now but
+[0:50:24] no it doesn't uh I think not now but actually that's not a not a big thing.
+[0:50:26] actually that's not a not a big thing. Um
+[0:50:27] Um &gt;&gt; I guess they specify like higher order.
+[0:50:29] &gt;&gt; I guess they specify like higher order. So maybe just like um are they suitable
+[0:50:31] So maybe just like um are they suitable for
+[0:50:33] for bigger dimensions?
+[0:50:34] bigger dimensions? &gt;&gt; Um higher order. What do you mean by
+[0:50:36] &gt;&gt; Um higher order. What do you mean by higher order? So CMI of course is for is
+[0:50:40] higher order? So CMI of course is for is KN&amp;N based. So it's um it doesn't assume
+[0:50:44] KN&amp;N based. So it's um it doesn't assume any polomials or whatever. It's just
+[0:50:46] any polomials or whatever. It's just cannonbased. So that's in principle uh
+[0:50:50] cannonbased. So that's in principle uh the most maybe um a general uh way to
+[0:50:54] the most maybe um a general uh way to make assumptions and therefore uh the
+[0:50:57] make assumptions and therefore uh the least power on uh on dependencies that
+[0:51:01] least power on uh on dependencies that are linear or nicely behaved.
+[0:51:05] are linear or nicely behaved. I think I don't exactly know what you
+[0:51:07] I think I don't exactly know what you what you mean by this higher order. Is
+[0:51:09] what you mean by this higher order. Is it is it just you know uh dependency
+[0:51:12] it is it just you know uh dependency type of nonlinearity or uh another
+[0:51:17] type of nonlinearity or uh another &gt;&gt; um I'm not sure that's all that is said.
+[0:51:18] &gt;&gt; um I'm not sure that's all that is said. So maybe um whoever asked this question
+[0:51:21] So maybe um whoever asked this question can clarify uh in a followup. Yeah.
+[0:51:24] can clarify uh in a followup. Yeah. &gt;&gt; Yeah.
+[0:51:25] &gt;&gt; Yeah. &gt;&gt; Okay. Um
+[0:51:28] &gt;&gt; Okay. Um so there's more questions about the
+[0:51:31] so there's more questions about the stationerity. So there's one uh rather
+[0:51:33] stationerity. So there's one uh rather than explicitly adjusting for assumed a
+[0:51:35] than explicitly adjusting for assumed a stationerity is there support for
+[0:51:38] stationerity is there support for automatically modeling a stationary as a
+[0:51:40] automatically modeling a stationary as a latent property?
+[0:51:42] latent property? Um yeah I have done that or you can kind
+[0:51:46] Um yeah I have done that or you can kind of always do that and the way I I um did
+[0:51:49] of always do that and the way I I um did it is
+[0:51:52] it is basically you can you can you can create
+[0:51:55] basically you can you can you can create your own variable maybe that's some uh
+[0:51:58] your own variable maybe that's some uh kind of smooth oscilly uh function over
+[0:52:01] kind of smooth oscilly uh function over time like you basically add a variable s
+[0:52:05] time like you basically add a variable s here and that's some of your choice and
+[0:52:07] here and that's some of your choice and this is maybe your model of of
+[0:52:09] this is maybe your model of of non-stationerity and then you use your
+[0:52:12] non-stationerity and then you use your link assumptions to specify that all
+[0:52:14] link assumptions to specify that all these variables are caused by that
+[0:52:16] these variables are caused by that variable
+[0:52:18] variable and they're always caused by that in the
+[0:52:20] and they're always caused by that in the link assumptions. And then the
+[0:52:22] link assumptions. And then the independence tests will condition on
+[0:52:24] independence tests will condition on that variable. And if you run an
+[0:52:27] that variable. And if you run an independent test between like X1 and X2
+[0:52:30] independent test between like X1 and X2 conditioning on that uh constructed
+[0:52:33] conditioning on that uh constructed variable that models your
+[0:52:34] variable that models your non-stationerity, then you account for
+[0:52:36] non-stationerity, then you account for it, right?
+[0:52:38] it, right? So that's a way to do that.
+[0:52:41] So that's a way to do that. And then your independence test can be
+[0:52:43] And then your independence test can be CMKN or it can be linear. And if it's
+[0:52:46] CMKN or it can be linear. And if it's linear and you put in as your maybe a
+[0:52:49] linear and you put in as your maybe a dummy variable of like yeah a dummy
+[0:52:51] dummy variable of like yeah a dummy variable if you have um
+[0:52:54] variable if you have um kind of a peace-wise um uh constant uh
+[0:52:58] kind of a peace-wise um uh constant uh values then it's similar to uh running
+[0:53:01] values then it's similar to uh running like a a fixed effects regression in
+[0:53:04] like a a fixed effects regression in your partial correlation test. It's
+[0:53:06] your partial correlation test. It's maybe a bit too too too involved, but I
+[0:53:09] maybe a bit too too too involved, but I think that's that's a way to deal with
+[0:53:11] think that's that's a way to deal with non-stationerity by explicitly putting
+[0:53:13] non-stationerity by explicitly putting it in as a another kind of artificial uh
+[0:53:19] it in as a another kind of artificial uh variable.
+[0:53:22] variable. There's there's something in my tutorial
+[0:53:23] There's there's something in my tutorial about this and I don't know which one
+[0:53:25] about this and I don't know which one cause discovery. I think it's I don't
+[0:53:28] cause discovery. I think it's I don't know.
+[0:53:30] know. &gt;&gt; All right. Uh and the followup to that
+[0:53:32] &gt;&gt; All right. Uh and the followup to that question uh instead of higher order
+[0:53:34] question uh instead of higher order multivariants and so say like
+[0:53:36] multivariants and so say like synergistic multivariants like yeah
+[0:53:39] synergistic multivariants like yeah that's a that's a great question. We
+[0:53:40] that's a that's a great question. We have one tutorial about um synergy but
+[0:53:45] have one tutorial about um synergy but the the way it's it's treated there is
+[0:53:48] the the way it's it's treated there is if you know beforehand that for example
+[0:53:51] if you know beforehand that for example two variables have a synergistic uh
+[0:53:53] two variables have a synergistic uh dependency towards another then you
+[0:53:55] dependency towards another then you basically specify them as a joint node
+[0:53:58] basically specify them as a joint node and then basically instead of having
+[0:54:00] and then basically instead of having three nodes here you have a your nodes
+[0:54:03] three nodes here you have a your nodes would this like basically that you form
+[0:54:05] would this like basically that you form a new node covering both of these and
+[0:54:08] a new node covering both of these and then you run causal discovery with a
+[0:54:11] then you run causal discovery with a suitable independence test that deals
+[0:54:12] suitable independence test that deals with uh vector valued or multivaried
+[0:54:16] with uh vector valued or multivaried XY Z and then that is a way to deal with
+[0:54:20] XY Z and then that is a way to deal with synergistic data. However, if you mean
+[0:54:22] synergistic data. However, if you mean that well, what if I just have x1, x2,
+[0:54:26] that well, what if I just have x1, x2, x3 and I have really um like diadic
+[0:54:31] x3 and I have really um like diadic relations where just you know you have
+[0:54:34] relations where just you know you have basically a faithfulness violation where
+[0:54:36] basically a faithfulness violation where it's just x1 and x2 jointly cause x3 and
+[0:54:41] it's just x1 and x2 jointly cause x3 and there is no marginal dependency. So this
+[0:54:44] there is no marginal dependency. So this is um a case of facefulness violation
+[0:54:47] is um a case of facefulness violation and that's why there is some methods in
+[0:54:50] and that's why there is some methods in this direction that but they're not
+[0:54:52] this direction that but they're not implemented for the time series. I don't
+[0:54:53] implemented for the time series. I don't know I'm not aware of time series
+[0:54:55] know I'm not aware of time series methods that uh can deal with these
+[0:54:58] methods that uh can deal with these types of uh synergistic faithfulness
+[0:55:01] types of uh synergistic faithfulness violations.
+[0:55:02] violations. There's always this argument against
+[0:55:04] There's always this argument against these types of faithfulness violations
+[0:55:05] these types of faithfulness violations that it's a super fine tuning of the SCM
+[0:55:08] that it's a super fine tuning of the SCM to really get zero marginal dependence.
+[0:55:12] to really get zero marginal dependence. But of course in finite samples you can
+[0:55:15] But of course in finite samples you can uh easily overlook such uh dependencies.
+[0:55:18] uh easily overlook such uh dependencies. We have we have a a tutorial on
+[0:55:21] We have we have a a tutorial on basically a priority knowing synergistic
+[0:55:23] basically a priority knowing synergistic relations and then using vector v
+[0:55:25] relations and then using vector v variables.
+[0:55:31] &gt;&gt; Thank you. And uh another question just popped up. So do you have time series
+[0:55:33] popped up. So do you have time series data sets with ground truce causal
+[0:55:35] data sets with ground truce causal discovery to play with?
+[0:55:37] discovery to play with? &gt;&gt; I do. I should have put that in. I have
+[0:55:39] &gt;&gt; I do. I should have put that in. I have this whole um it's not here. I have this
+[0:55:42] this whole um it's not here. I have this whole benchmark um platform called cosmi
+[0:55:47] whole benchmark um platform called cosmi uh cosmi.net net and that features lots
+[0:55:50] uh cosmi.net net and that features lots of synthetic like mo largely synthetic
+[0:55:54] of synthetic like mo largely synthetic data sets with different challenges of
+[0:55:56] data sets with different challenges of number of variables uh time series
+[0:55:58] number of variables uh time series length linear nonlinear loads of other
+[0:56:01] length linear nonlinear loads of other um challenges and also some real data uh
+[0:56:05] um challenges and also some real data uh uh data sets with known ground truth. Of
+[0:56:09] uh data sets with known ground truth. Of course the known is always with a grain
+[0:56:12] course the known is always with a grain of salt. There's this river runoff data
+[0:56:14] of salt. There's this river runoff data which was used uh
+[0:56:19] which was used uh in one of here like this is uh uh for
+[0:56:22] in one of here like this is uh uh for example something where the river runoff
+[0:56:24] example something where the river runoff uh was applied to and um also some some
+[0:56:28] uh was applied to and um also some some hybrid where it's like uh highly
+[0:56:31] hybrid where it's like uh highly realistic synthetic data because you
+[0:56:33] realistic synthetic data because you have these core climate models that are
+[0:56:35] have these core climate models that are basically models uh twins of the earth
+[0:56:38] basically models uh twins of the earth but uh yeah still you
+[0:56:42] but uh yeah still you implement or you know more about the
+[0:56:44] implement or you know more about the causal structure. So cosmi.net net has a
+[0:56:48] causal structure. So cosmi.net net has a lot of these. I don't have them in tiger
+[0:56:50] lot of these. I don't have them in tiger mite. It's just uh separate. And I have
+[0:56:52] mite. It's just uh separate. And I have to say that cosmi is um it is a
+[0:56:54] to say that cosmi is um it is a benchmark. So it's it's not that you can
+[0:56:58] benchmark. So it's it's not that you can download the ground truth. And some
+[0:56:59] download the ground truth. And some people ask me and it's on my list to
+[0:57:02] people ask me and it's on my list to basically provide kind of validation
+[0:57:04] basically provide kind of validation data with ground truth uh for all these
+[0:57:07] data with ground truth uh for all these deep learning methods to to to learn on.
+[0:57:11] deep learning methods to to to learn on. Um,
+[0:57:12] Um, but I I I want to keep it as a benchmark
+[0:57:15] but I I I want to keep it as a benchmark that this cannot be tricked.
+[0:57:22] &gt;&gt; Awesome. Thank you so much again for the tutorial and for taking the questions
+[0:57:23] tutorial and for taking the questions and the explanations. I think that's all
+[0:57:25] and the explanations. I think that's all we got and uh I'll pass it to Dominic
+[0:57:28] we got and uh I'll pass it to Dominic for the ra.
+[0:57:30] for the ra. &gt;&gt; All right. Yeah, thank you. Thank you
+[0:57:31] &gt;&gt; All right. Yeah, thank you. Thank you again for the very nice tutorial. I will
+[0:57:34] again for the very nice tutorial. I will now quickly wrap up. I hope that's okay.
+[0:57:38] now quickly wrap up. I hope that's okay. So yeah, so next week, thank you all for
+[0:57:40] So yeah, so next week, thank you all for coming today. Uh we're going to next
+[0:57:41] coming today. Uh we're going to next week we're going to have a talk by Wuka
+[0:57:43] week we're going to have a talk by Wuka uh from the Korea Advanced Institute of
+[0:57:45] uh from the Korea Advanced Institute of Science and Technology who will talk
+[0:57:47] Science and Technology who will talk about domain adaptation in particular
+[0:57:49] about domain adaptation in particular when few labelled target data suffice a
+[0:57:52] when few labelled target data suffice a theory of semi-supervised domain
+[0:57:54] theory of semi-supervised domain adaptation via fine-tuning from multiple
+[0:57:56] adaptation via fine-tuning from multiple adaptive starts. Yeah, thank you all for
+[0:57:58] adaptive starts. Yeah, thank you all for coming. Thank you again, Jacob, and see
+[0:58:00] coming. Thank you again, Jacob, and see you all next week.
+[0:58:03] you all next week. &gt;&gt; Thanks. Thanks.

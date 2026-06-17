@@ -1,0 +1,1295 @@
+[0:00:04] All right. Uh, welcome back to the online causal inference seminar. Today
+[0:00:05] online causal inference seminar. Today we're excited to have Wu Ka from the
+[0:00:08] we're excited to have Wu Ka from the Korea Advanced Institute of Science and
+[0:00:10] Korea Advanced Institute of Science and Technology who will talk about domain
+[0:00:12] Technology who will talk about domain adaptation. So when few labelled target
+[0:00:14] adaptation. So when few labelled target data suffice theory of semi-supervised
+[0:00:16] data suffice theory of semi-supervised domain adaptation with yeah via
+[0:00:18] domain adaptation with yeah via fine-tuning from multiple adaptive
+[0:00:20] fine-tuning from multiple adaptive start. Um the discussion today with will
+[0:00:23] start. Um the discussion today with will be Jason Klovski. We're very excited. Um
+[0:00:27] be Jason Klovski. We're very excited. Um questions today will be handled by Emma.
+[0:00:30] questions today will be handled by Emma. Emma, do you want to say a few words?
+[0:00:32] Emma, do you want to say a few words? &gt;&gt; Yes, sure. Hi everyone. Um so as always
+[0:00:36] &gt;&gt; Yes, sure. Hi everyone. Um so as always we will be handling the questions
+[0:00:38] we will be handling the questions through the Q&amp;A, not through the chat.
+[0:00:40] through the Q&amp;A, not through the chat. So please submit your questions through
+[0:00:42] So please submit your questions through the Q&amp;A. Uh we are pleased to say that
+[0:00:44] the Q&amp;A. Uh we are pleased to say that was his collaborator Yuans Chan from ETH
+[0:00:47] was his collaborator Yuans Chan from ETH to answer questions. So all your
+[0:00:49] to answer questions. So all your questions will be answered in the best
+[0:00:51] questions will be answered in the best way possible.
+[0:00:52] way possible. Um but yes, please don't hesitate to
+[0:00:55] Um but yes, please don't hesitate to answer question uh sorry to ask question
+[0:00:57] answer question uh sorry to ask question as soon as they come up because it takes
+[0:00:58] as soon as they come up because it takes a while to get through all the
+[0:00:59] a while to get through all the questions. That's it. Uh thank you so
+[0:01:02] questions. That's it. Uh thank you so much and you can take it away.
+[0:01:06] much and you can take it away. &gt;&gt; Okay. Um
+[0:01:18] Okay. So, can everyone see my screen? Cool. Okay. Um so thank you for the
+[0:01:21] Cool. Okay. Um so thank you for the introduction and thank you so much for
+[0:01:23] introduction and thank you so much for all the organizers for um having me
+[0:01:26] all the organizers for um having me here. Um it's my great uh honors to
+[0:01:30] here. Um it's my great uh honors to present my recent work in this online
+[0:01:32] present my recent work in this online culture in France seminar.
+[0:01:35] culture in France seminar. Um okay so
+[0:01:39] Um okay so so this is a joint work with uh
+[0:01:41] so this is a joint work with uh professor Yuansi Chen from it jurik um
+[0:01:45] professor Yuansi Chen from it jurik um and um it's always great pleasures and
+[0:01:48] and um it's always great pleasures and really inspiring to work with him
+[0:01:51] really inspiring to work with him and okay so uh here I will first start
+[0:01:55] and okay so uh here I will first start with some motivations and problem setup
+[0:01:57] with some motivations and problem setup for the domain adaptations and then I
+[0:02:00] for the domain adaptations and then I will talk about some uh semi-provised
+[0:02:03] will talk about some uh semi-provised domain adaptations under linear
+[0:02:04] domain adaptations under linear structural other models and then we
+[0:02:07] structural other models and then we developed some new fine-tuning
+[0:02:09] developed some new fine-tuning algorithms under different interventions
+[0:02:11] algorithms under different interventions and I will conclude with some simulation
+[0:02:14] and I will conclude with some simulation result.
+[0:02:21] Okay. So I believe that uh all of you must be familiar with the distribution
+[0:02:23] must be familiar with the distribution shift. So this is a very famous uh the
+[0:02:26] shift. So this is a very famous uh the chameleon 17 data set. So here uh we are
+[0:02:30] chameleon 17 data set. So here uh we are given some uh image of the tissues and
+[0:02:33] given some uh image of the tissues and the goal is to predict whether there is
+[0:02:35] the goal is to predict whether there is any uh tumor tissue in the uh center of
+[0:02:38] any uh tumor tissue in the uh center of the uh the image.
+[0:02:41] the uh the image. And here we train the some the models
+[0:02:44] And here we train the some the models from some of the the the training
+[0:02:46] from some of the the the training hospitals. And then we want to
+[0:02:48] hospitals. And then we want to generalize our models to the uh images
+[0:02:51] generalize our models to the uh images from the new hospital where this new
+[0:02:54] from the new hospital where this new hospital is not in the uh the training
+[0:02:56] hospital is not in the uh the training hospitals.
+[0:02:58] hospitals. And here uh we have some distribution
+[0:03:01] And here uh we have some distribution shift uh between uh the different
+[0:03:03] shift uh between uh the different hospitals because they have uh different
+[0:03:06] hospitals because they have uh different protocols in data collection and data
+[0:03:09] protocols in data collection and data processing uh which uh actually cause
+[0:03:11] processing uh which uh actually cause the distribution shift.
+[0:03:20] So this is the uh so in the top left uh plus uh uh this is a a well-known uh the
+[0:03:25] plus uh uh this is a a well-known uh the wild benchmark for the distribution
+[0:03:27] wild benchmark for the distribution shift. So here uh the the authors uh the
+[0:03:31] shift. So here uh the the authors uh the code at all uh they collect some real
+[0:03:33] code at all uh they collect some real world data sets uh with domain shift and
+[0:03:36] world data sets uh with domain shift and then cameon 17 is one of these uh
+[0:03:39] then cameon 17 is one of these uh benchmark data and uh they actually uh
+[0:03:43] benchmark data and uh they actually uh trained the the empirical risk
+[0:03:45] trained the the empirical risk minimization so erm on chameleon 17 and
+[0:03:48] minimization so erm on chameleon 17 and they they found that um the erm actually
+[0:03:51] they they found that um the erm actually suffers about like uh 23% performance
+[0:03:55] suffers about like uh 23% performance drop from in distribution to out of
+[0:03:57] drop from in distribution to out of distrib distributions on this Cameroon
+[0:04:00] distrib distributions on this Cameroon 17 data set. And uh they also tried this
+[0:04:05] 17 data set. And uh they also tried this across different uh data sets in this uh
+[0:04:08] across different uh data sets in this uh benchmark and they also found the
+[0:04:10] benchmark and they also found the similar uh generalization gaps between
+[0:04:13] similar uh generalization gaps between the in distribution and out of
+[0:04:15] the in distribution and out of distribution performance uh in this uh
+[0:04:18] distribution performance uh in this uh uh benchmark.
+[0:04:24] And uh people also found uh more examples uh where the the machine
+[0:04:26] examples uh where the the machine learning models are quite uh uh not good
+[0:04:29] learning models are quite uh uh not good at the distribution shift. So uh here is
+[0:04:32] at the distribution shift. So uh here is another examples uh where um uh in red
+[0:04:37] another examples uh where um uh in red at all uh in 2021
+[0:04:39] at all uh in 2021 uh they just uh
+[0:04:42] uh they just uh uh have some imaget trained models uh
+[0:04:45] uh have some imaget trained models uh and then they evaluate in uh different
+[0:04:47] and then they evaluate in uh different variations of the imaget data sets and
+[0:04:50] variations of the imaget data sets and under some domain shifts like style or
+[0:04:53] under some domain shifts like style or some sketch they found that performance
+[0:04:56] some sketch they found that performance also drops uh a lot
+[0:05:00] also drops uh a lot and in uh another uh in computer regions
+[0:05:03] and in uh another uh in computer regions they they also found that the the
+[0:05:05] they they also found that the the imaging models like a CNN's they have
+[0:05:08] imaging models like a CNN's they have some strong uh bias towards the texture.
+[0:05:11] some strong uh bias towards the texture. So if the the image the uh the CNN's uh
+[0:05:15] So if the the image the uh the CNN's uh have an input uh with this uh the the
+[0:05:19] have an input uh with this uh the the image on the on the on the the left uh
+[0:05:21] image on the on the on the the left uh then they can correctly predict this uh
+[0:05:24] then they can correctly predict this uh as the uh elephant and in the middle uh
+[0:05:28] as the uh elephant and in the middle uh if they take the the cat image as an
+[0:05:30] if they take the the cat image as an input uh they can correctly predict it
+[0:05:32] input uh they can correctly predict it as a cat. But if the uh the model sees
+[0:05:37] as a cat. But if the uh the model sees the image which has the shape of the
+[0:05:39] the image which has the shape of the catch with a different textures then
+[0:05:42] catch with a different textures then they they uh classify it as a elephant.
+[0:05:45] they they uh classify it as a elephant. So which shows that the model has some
+[0:05:47] So which shows that the model has some strong bias towards the textures and if
+[0:05:50] strong bias towards the textures and if there is some shift in the textures in
+[0:05:53] there is some shift in the textures in the uh in your uh target distributions
+[0:05:56] the uh in your uh target distributions then model can uh have model can fail.
+[0:06:04] Okay. So the domain adaptation is the the learning problem uh uh to to to
+[0:06:07] the learning problem uh uh to to to address this distribution shift. So the
+[0:06:10] address this distribution shift. So the the setup is as follows. So we have some
+[0:06:13] the setup is as follows. So we have some source data from um m um many
+[0:06:17] source data from um m um many environment uh where m can be either one
+[0:06:20] environment uh where m can be either one or bigger than one. And for the uh the
+[0:06:24] or bigger than one. And for the uh the the source data sets uh we observe both
+[0:06:27] the source data sets uh we observe both the labeled and unlabelled data. And we
+[0:06:29] the labeled and unlabelled data. And we use the the supererscript m to denote
+[0:06:32] use the the supererscript m to denote the the the index of the environment.
+[0:06:36] the the the index of the environment. And we also use the the subscript u to
+[0:06:39] And we also use the the subscript u to denote the uh the the unable data. So we
+[0:06:44] denote the uh the the unable data. So we have this uh the source data from M
+[0:06:46] have this uh the source data from M environment and for the target data we
+[0:06:49] environment and for the target data we we observe the data set from new
+[0:06:51] we observe the data set from new environment where again uh we observe
+[0:06:53] environment where again uh we observe the labelled and unlabelled data sets
+[0:06:55] the labelled and unlabelled data sets iid from some distribution and we use
+[0:06:58] iid from some distribution and we use the superscript zero uh denote to denote
+[0:07:01] the superscript zero uh denote to denote the index of the target environment
+[0:07:05] the index of the target environment and here uh our goal is to train the
+[0:07:08] and here uh our goal is to train the model f then minimize the target the
+[0:07:10] model f then minimize the target the target risk uh which is just uh given in
+[0:07:13] target risk uh which is just uh given in this way and in domain adaptations there
+[0:07:17] this way and in domain adaptations there are different uh the the settings. So
+[0:07:20] are different uh the the settings. So the unsure by adaptation or the UDA is a
+[0:07:24] the unsure by adaptation or the UDA is a setting where uh we we have the unable
+[0:07:27] setting where uh we we have the unable target data but we don't observe any
+[0:07:29] target data but we don't observe any label data label target data and in
+[0:07:32] label data label target data and in domain generalizations uh it's uh we
+[0:07:35] domain generalizations uh it's uh we don't observe any of the uh labeled and
+[0:07:39] don't observe any of the uh labeled and unlabelled target data. So we only
+[0:07:41] unlabelled target data. So we only observe the source data and then use
+[0:07:43] observe the source data and then use this uh data to to build a model.
+[0:07:47] this uh data to to build a model. And in semi-urbed adaptations or SSDA,
+[0:07:51] And in semi-urbed adaptations or SSDA, we observe both the labeled and
+[0:07:53] we observe both the labeled and unlabelled target data. But for the
+[0:07:55] unlabelled target data. But for the labor target samples, we only have a
+[0:07:58] labor target samples, we only have a very small number of the uh samples
+[0:08:01] very small number of the uh samples observed.
+[0:08:09] Okay. So um so then a natural question in the uh domain adaptation is whether
+[0:08:12] in the uh domain adaptation is whether we can beat uh some simple baselines
+[0:08:15] we can beat uh some simple baselines such as OS pool or OS star where the OS
+[0:08:19] such as OS pool or OS star where the OS pool is just a simple model that just
+[0:08:23] pool is just a simple model that just combines all the source data and just
+[0:08:25] combines all the source data and just train the models like using erm
+[0:08:28] train the models like using erm and we can think of this as a natural
+[0:08:31] and we can think of this as a natural baseline for the unsupervised domain
+[0:08:33] baseline for the unsupervised domain adaptations or domain generalizations
+[0:08:35] adaptations or domain generalizations when we don't use any target labels
+[0:08:39] when we don't use any target labels and ORS is uh another natural baseline
+[0:08:43] and ORS is uh another natural baseline uh especially in SSDA
+[0:08:46] uh especially in SSDA uh when we just directly train the
+[0:08:48] uh when we just directly train the models on the limited label target
+[0:08:50] models on the limited label target samples. Um so this is another natural
+[0:08:54] samples. Um so this is another natural baseline
+[0:09:00] and uh people have also developed more advanced uh unsure by adaptations and to
+[0:09:03] advanced uh unsure by adaptations and to do generalization methods. So one of the
+[0:09:06] do generalization methods. So one of the most popular algorithms is the DIP or
+[0:09:09] most popular algorithms is the DIP or the domain invarant projections. So here
+[0:09:13] the domain invarant projections. So here uh the model f uh is just some com
+[0:09:16] uh the model f uh is just some com composition of the function g and then
+[0:09:19] composition of the function g and then the phi. So you can think of the fi as
+[0:09:23] the phi. So you can think of the fi as extracting some middle layer features
+[0:09:25] extracting some middle layer features from the input x. So phi is some uh
+[0:09:28] from the input x. So phi is some uh feature extractor and then g is the the
+[0:09:31] feature extractor and then g is the the prediction model uh that is uh based on
+[0:09:35] prediction model uh that is uh based on the this uh the features. So in DIP uh
+[0:09:39] the this uh the features. So in DIP uh what they uh uh define the the the G and
+[0:09:43] what they uh uh define the the the G and FI by minimizing the the source risk
+[0:09:46] FI by minimizing the the source risk with a constraint that uh in the middle
+[0:09:49] with a constraint that uh in the middle layer features the distributions of the
+[0:09:51] layer features the distributions of the source and target uh uh they they are
+[0:09:55] source and target uh uh they they are close or they are just equal to zero. Uh
+[0:09:57] close or they are just equal to zero. Uh so here the d is the distributional
+[0:09:59] so here the d is the distributional distance such as MMD or waterstein or
+[0:10:03] distance such as MMD or waterstein or some adversary net. So the the idea uh
+[0:10:08] some adversary net. So the the idea uh is that the DIP assumes the some
+[0:10:11] is that the DIP assumes the some existence of the common features and
+[0:10:13] existence of the common features and they extract this common features
+[0:10:15] they extract this common features between source and target coariants by
+[0:10:18] between source and target coariants by putting this uh the the the invariance
+[0:10:20] putting this uh the the the invariance constraint
+[0:10:29] and the conditional invariant penalty or CIP is another uh popular algorithms in
+[0:10:33] CIP is another uh popular algorithms in uh domain generalizations
+[0:10:35] uh domain generalizations where uh here they instead of using the
+[0:10:38] where uh here they instead of using the target coariants uh they use the
+[0:10:41] target coariants uh they use the multiple source domains. So model F is a
+[0:10:44] multiple source domains. So model F is a composition of the G and FI and again
+[0:10:48] composition of the G and FI and again the FI is the feature extractor and G is
+[0:10:51] the FI is the feature extractor and G is the the the predictors based on the the
+[0:10:54] the the the predictors based on the the features and then G and FI is uh trained
+[0:10:58] features and then G and FI is uh trained to minimize the the combined source
+[0:11:00] to minimize the the combined source errors across multiple source
+[0:11:02] errors across multiple source environments with a constraint that the
+[0:11:05] environments with a constraint that the the conditional distribution of the
+[0:11:07] the conditional distribution of the features given Y is the same across all
+[0:11:10] features given Y is the same across all the environments.
+[0:11:12] the environments. So here uh the hope is that if the
+[0:11:15] So here uh the hope is that if the features are conditionally invariant
+[0:11:18] features are conditionally invariant across multiple source environment then
+[0:11:21] across multiple source environment then uh we hope that this uh conditional
+[0:11:23] uh we hope that this uh conditional invariance is also true for the target
+[0:11:26] invariance is also true for the target domain.
+[0:11:28] domain. So so so the I so this uh the feature
+[0:11:31] So so so the I so this uh the feature spy uh which satisfy this uh conditional
+[0:11:35] spy uh which satisfy this uh conditional invariance between source and target uh
+[0:11:37] invariance between source and target uh this is called the conditionally
+[0:11:40] this is called the conditionally invariant components in the
+[0:11:41] invariant components in the literature'ses or CIC's
+[0:11:43] literature'ses or CIC's and uh under some some strong
+[0:11:46] and uh under some some strong assumptions uh we can also show that
+[0:11:48] assumptions uh we can also show that these CIC's are identifiable whenever we
+[0:11:53] these CIC's are identifiable whenever we have enough number of the source
+[0:11:55] have enough number of the source environment
+[0:12:02] Okay. So, so uh these DIP and CIP algorithms have shown many uh empirical
+[0:12:05] algorithms have shown many uh empirical success but we don't use any target
+[0:12:08] success but we don't use any target labels in these algorithms. So this
+[0:12:11] labels in these algorithms. So this makes uh these algorithms quite
+[0:12:13] makes uh these algorithms quite unreliable in many scenarios.
+[0:12:17] unreliable in many scenarios. So one uh uh one example is that if the
+[0:12:21] So one uh uh one example is that if the the data generation is coder in the
+[0:12:24] the data generation is coder in the sense that uh we first generate the x
+[0:12:27] sense that uh we first generate the x and the y is generated by uh some
+[0:12:29] and the y is generated by uh some functions of the x then in this case
+[0:12:32] functions of the x then in this case it's known that uh dip is no better than
+[0:12:36] it's known that uh dip is no better than a simple os estimator based on the
+[0:12:38] a simple os estimator based on the source.
+[0:12:40] source. So the intuition is that uh the the
+[0:12:43] So the intuition is that uh the the generations of the the the coariant x
+[0:12:45] generations of the the the coariant x and then the generation of the y given x
+[0:12:48] and then the generation of the y given x they are just separate. So even if we
+[0:12:51] they are just separate. So even if we have many uh uh many target coariants uh
+[0:12:56] have many uh uh many target coariants uh uh this coariant information does not
+[0:12:58] uh this coariant information does not give any information about the y given
+[0:13:00] give any information about the y given x. So uh this kind of idea was uh
+[0:13:04] x. So uh this kind of idea was uh discussed first in uh this shov at all
+[0:13:07] discussed first in uh this shov at all in uh 2012 and then um uh this uh UNC
+[0:13:13] in uh 2012 and then um uh this uh UNC chain and Peter Bulman uh they um uh
+[0:13:16] chain and Peter Bulman uh they um uh brought this idea uh to the uh domain
+[0:13:19] brought this idea uh to the uh domain adaptation setting.
+[0:13:28] Also another uh uh well-known scenario uh for the failure uh uh for the failure
+[0:13:31] uh for the failure uh uh for the failure of the DIP is when there exist some
+[0:13:34] of the DIP is when there exist some label flipping features. So this is uh
+[0:13:38] label flipping features. So this is uh an example of the uh the data set from
+[0:13:41] an example of the uh the data set from the colored amnest. So you have the
+[0:13:43] the colored amnest. So you have the source and target data uh where the
+[0:13:45] source and target data uh where the source and target have digits four and
+[0:13:48] source and target have digits four and five with the different colors. So tip
+[0:13:52] five with the different colors. So tip just uh match the marginal distributions
+[0:13:55] just uh match the marginal distributions of the uh the coariates. So if they uh
+[0:14:00] of the uh the coariates. So if they uh they they can either extract the the
+[0:14:02] they they can either extract the the shape features or the color features to
+[0:14:05] shape features or the color features to match the source and targets. So in case
+[0:14:07] match the source and targets. So in case they they they extract the color
+[0:14:09] they they they extract the color features uh the the models trained with
+[0:14:12] features uh the the models trained with the source data can fail in the target
+[0:14:15] the source data can fail in the target distributions because the the green
+[0:14:17] distributions because the the green features in uh in source uh correspond
+[0:14:20] features in uh in source uh correspond to the label five digit five in the
+[0:14:22] to the label five digit five in the target. So uh when we have this kind of
+[0:14:26] target. So uh when we have this kind of label flipping features, we cannot
+[0:14:28] label flipping features, we cannot guarantee that the IP algorithms will
+[0:14:30] guarantee that the IP algorithms will always succeed.
+[0:14:38] And also the CIP algorithm is uh also quite overly conservative because the in
+[0:14:42] quite overly conservative because the in the CIP we try to find some
+[0:14:45] the CIP we try to find some conditionally invariant features across
+[0:14:47] conditionally invariant features across multiple source environment. So which
+[0:14:49] multiple source environment. So which means that we have to throw away a lot
+[0:14:52] means that we have to throw away a lot of informations to make sure that the
+[0:14:54] of informations to make sure that the features are invariant across uh many
+[0:14:57] features are invariant across uh many environment. So which uh often leads to
+[0:15:00] environment. So which uh often leads to uh suboptimal performance uh uh on the
+[0:15:04] uh suboptimal performance uh uh on the target distribution.
+[0:15:12] So uh the semmit-rovised domain adaptation is a more practical uh
+[0:15:14] adaptation is a more practical uh setting for domain adaptations where we
+[0:15:17] setting for domain adaptations where we not only use the uh the source and
+[0:15:19] not only use the uh the source and unlabelled data uh but we also use the
+[0:15:22] unlabelled data uh but we also use the limited label target data.
+[0:15:30] So uh if we define the target excess risk uh in in this way just the uh for
+[0:15:34] risk uh in in this way just the uh for the the target risk excess risk of the
+[0:15:36] the the target risk excess risk of the model f is the difference of the risk of
+[0:15:40] model f is the difference of the risk of the f and then the optimal risk optimal
+[0:15:43] the f and then the optimal risk optimal target risk. uh if we use this as the
+[0:15:46] target risk. uh if we use this as the measurable performance for the
+[0:15:48] measurable performance for the algorithms then uh by taking advantage
+[0:15:51] algorithms then uh by taking advantage of the limited target data uh we want
+[0:15:54] of the limited target data uh we want the the target access risk of the SSDA
+[0:15:58] the the target access risk of the SSDA to be lower than that of the the target
+[0:16:00] to be lower than that of the the target only methods uh or the unsurbed domain
+[0:16:04] only methods uh or the unsurbed domain adaptation or domain generalization
+[0:16:06] adaptation or domain generalization methods.
+[0:16:08] methods. So not only that we want this uh access
+[0:16:11] So not only that we want this uh access risk to be lower than these baseline
+[0:16:14] risk to be lower than these baseline algorithms, we can be more ambitious and
+[0:16:16] algorithms, we can be more ambitious and we can also ask whether the SSDA can
+[0:16:20] we can also ask whether the SSDA can achieve the minimax optimal rate.
+[0:16:31] So the minimax uh the target access risk uh uh can be just uh defined uh in a
+[0:16:34] uh uh can be just uh defined uh in a similar way to the classical setting
+[0:16:36] similar way to the classical setting where we just uh uh have the mean over
+[0:16:39] where we just uh uh have the mean over the the estimator f and then supreum
+[0:16:42] the the estimator f and then supreum over the some distribution class and
+[0:16:45] over the some distribution class and this uh for each distribution in the
+[0:16:48] this uh for each distribution in the distribution class is now the
+[0:16:50] distribution class is now the distribution over all the uh the source
+[0:16:53] distribution over all the uh the source and target data points.
+[0:16:55] and target data points. U combining both the labeled and
+[0:16:57] U combining both the labeled and unlabelled datas.
+[0:17:00] unlabelled datas. And here the the minimum is taken over
+[0:17:03] And here the the minimum is taken over all the estimator from some function
+[0:17:05] all the estimator from some function class f. And uh for for this papers uh
+[0:17:08] class f. And uh for for this papers uh we consider the linear function class
+[0:17:10] we consider the linear function class for simplicity.
+[0:17:20] Okay. So then uh we can have the the following questions. uh uh uh can you
+[0:17:24] following questions. uh uh uh can you show that uh this SSDA can provably uh
+[0:17:28] show that uh this SSDA can provably uh outperforms the baseline algorithm such
+[0:17:30] outperforms the baseline algorithm such as the target only methods that only use
+[0:17:33] as the target only methods that only use the target data for predictions or the
+[0:17:36] the target data for predictions or the UDA or DG methods and also what type
+[0:17:41] UDA or DG methods and also what type what type of the structures in
+[0:17:42] what type of the structures in distribution shift uh SSDA can can use
+[0:17:46] distribution shift uh SSDA can can use uh for most efficient use of the target
+[0:17:48] uh for most efficient use of the target labels or in another words where whether
+[0:17:51] labels or in another words where whether we can SSDA can achieve the minimax
+[0:17:54] we can SSDA can achieve the minimax optimality
+[0:17:59] and our contributions are the following. uh we introduced some new SSDA methods
+[0:18:03] uh we introduced some new SSDA methods that apply the finetuning strategies uh
+[0:18:06] that apply the finetuning strategies uh tailored to the different types of the
+[0:18:07] tailored to the different types of the distribution shift and when this uh the
+[0:18:12] distribution shift and when this uh the type of the distribution shift is
+[0:18:14] type of the distribution shift is vaguely known uh then we just combine
+[0:18:17] vaguely known uh then we just combine this new SSDA method with the model
+[0:18:20] this new SSDA method with the model selections uh which we we name it as
+[0:18:23] selections uh which we we name it as multi-addaptive start fine-tuning or mas
+[0:18:26] multi-addaptive start fine-tuning or mas SFT.
+[0:18:36] Okay. Um, so maybe I will pause here and then just take some questions if there
+[0:18:38] then just take some questions if there is any.
+[0:18:43] &gt;&gt; I was so at the moment we don't have questions, but I'd like to encourage
+[0:18:45] questions, but I'd like to encourage everyone to please submit your questions
+[0:18:46] everyone to please submit your questions to the Q&amp;A. Um, and
+[0:18:50] to the Q&amp;A. Um, and that's it. So, please continue.
+[0:18:52] that's it. So, please continue. &gt;&gt; Okay, cool. So, okay. So here uh for uh
+[0:18:58] &gt;&gt; Okay, cool. So, okay. So here uh for uh the semmitrovisor meditations uh we want
+[0:19:01] the semmitrovisor meditations uh we want to analyze this from the uh structural
+[0:19:04] to analyze this from the uh structural coder model framework. So I believe the
+[0:19:07] coder model framework. So I believe the audience here uh must know uh this
+[0:19:10] audience here uh must know uh this structural coder models better than me.
+[0:19:12] structural coder models better than me. But uh the this uh SCMs are structural
+[0:19:15] But uh the this uh SCMs are structural coder models. It describe the data
+[0:19:17] coder models. It describe the data generating process through some coder
+[0:19:20] generating process through some coder relationships between variables.
+[0:19:23] relationships between variables. And this SCMS has been used to model
+[0:19:27] And this SCMS has been used to model distribution shift as interventions on
+[0:19:29] distribution shift as interventions on the data generating process. And this
+[0:19:32] the data generating process. And this was uh this approach has been
+[0:19:34] was uh this approach has been established by uh a group of researchers
+[0:19:38] established by uh a group of researchers in uh ETH DRI and and also Stanford and
+[0:19:43] in uh ETH DRI and and also Stanford and in in our settings SSDA uh these uh
+[0:19:47] in in our settings SSDA uh these uh structural causal models they are just
+[0:19:49] structural causal models they are just the the data generation models uh for
+[0:19:52] the the data generation models uh for both the source and target data. uh and
+[0:19:54] both the source and target data. uh and we use this data generation models to
+[0:19:57] we use this data generation models to prove some guarantees for the algorithms
+[0:20:00] prove some guarantees for the algorithms but we don't actually need the need to
+[0:20:02] but we don't actually need the need to know the SCMS to run the the method
+[0:20:13] okay so here uh we consider the the anti-cod linear structural codal models
+[0:20:16] anti-cod linear structural codal models so the the for the source and targets
+[0:20:19] so the the for the source and targets the data generation uh is given given
+[0:20:23] the data generation uh is given given given in this way. So it x and y follows
+[0:20:26] given in this way. So it x and y follows the structural equation models
+[0:20:29] the structural equation models and here the y is the uh root node in
+[0:20:32] and here the y is the uh root node in the anti-coder uh models. So first y is
+[0:20:37] the anti-coder uh models. So first y is generated by by from some distribution
+[0:20:40] generated by by from some distribution and then uh given y and x is generated
+[0:20:44] and then uh given y and x is generated following this uh linear structure
+[0:20:46] following this uh linear structure equation models where the matrix b
+[0:20:49] equation models where the matrix b encodes the cer relations between the
+[0:20:51] encodes the cer relations between the coariant and this uh the vector b uh we
+[0:20:56] coariant and this uh the vector b uh we we call this anti-coder weight vector b
+[0:20:59] we call this anti-coder weight vector b is the the the effect of the y on the
+[0:21:02] is the the the effect of the y on the coariant
+[0:21:09] And this anti-causure data generation models uh is is common in many machine
+[0:21:12] models uh is is common in many machine learning data sets. So for instance in
+[0:21:15] learning data sets. So for instance in medical diagnosis uh uh uh let's say if
+[0:21:18] medical diagnosis uh uh uh let's say if the Y is the the co COVID 19 infection
+[0:21:22] the Y is the the co COVID 19 infection um and let's say X is uh some some uh
+[0:21:26] um and let's say X is uh some some uh the long periods in chest X-rays or the
+[0:21:29] the long periods in chest X-rays or the some some symptoms of the COVID then uh
+[0:21:32] some some symptoms of the COVID then uh this uh actually has the anti-causal
+[0:21:35] this uh actually has the anti-causal data generation process and also in the
+[0:21:38] data generation process and also in the image recognitions if the Y is the
+[0:21:41] image recognitions if the Y is the handwritten digits Let's say then um and
+[0:21:45] handwritten digits Let's say then um and given these digits uh it generates some
+[0:21:47] given these digits uh it generates some some x which is a two dimensional image
+[0:21:50] some x which is a two dimensional image of the digits.
+[0:21:58] Okay. So in this uh anti-cod linear structure equation models uh we can
+[0:22:01] structure equation models uh we can think of the different types of the
+[0:22:02] think of the different types of the distribution shift and uh here we
+[0:22:05] distribution shift and uh here we consider three different type of the
+[0:22:07] consider three different type of the distribution shift. So the sparse
+[0:22:10] distribution shift. So the sparse connectivity interventions the
+[0:22:12] connectivity interventions the compounded additive interventions and
+[0:22:14] compounded additive interventions and then the anti-coder weight
+[0:22:16] then the anti-coder weight interventions. So in the sparse
+[0:22:18] interventions. So in the sparse connectivity interventions
+[0:22:20] connectivity interventions uh this uh matrix B uh between the
+[0:22:23] uh this uh matrix B uh between the source and target they change and uh the
+[0:22:27] source and target they change and uh the perturbation occurs in R R columns among
+[0:22:31] perturbation occurs in R R columns among the D many columns uh in B matrix
+[0:22:36] the D many columns uh in B matrix and in the compounded additive
+[0:22:38] and in the compounded additive interventions uh the noise distribution
+[0:22:41] interventions uh the noise distribution uh they change between the source and
+[0:22:43] uh they change between the source and target uh because of the some uh low
+[0:22:47] target uh because of the some uh low dimensional unobserved compounder and in
+[0:22:51] dimensional unobserved compounder and in the anti-coder weight interventions we
+[0:22:53] the anti-coder weight interventions we assume that this anti-coder weight
+[0:22:55] assume that this anti-coder weight vector B uh they change between the
+[0:22:58] vector B uh they change between the source and target uh in some low
+[0:23:01] source and target uh in some low dimensional subspace.
+[0:23:10] So uh let's uh uh let me just briefly compare uh our approach with the
+[0:23:12] compare uh our approach with the previous approaches in the literature.
+[0:23:15] previous approaches in the literature. So uh existing works uh in this uh
+[0:23:19] So uh existing works uh in this uh literature'ses they assume that the
+[0:23:21] literature'ses they assume that the shift from the source to target uh this
+[0:23:24] shift from the source to target uh this shift occur directly in the regression
+[0:23:27] shift occur directly in the regression coefficients to be estimated and uh
+[0:23:30] coefficients to be estimated and uh these literatures often uh they are just
+[0:23:33] these literatures often uh they are just often referred to as the transfer
+[0:23:35] often referred to as the transfer running.
+[0:23:36] running. So for instance uh in the sparse
+[0:23:39] So for instance uh in the sparse regression models y is given by the x
+[0:23:42] regression models y is given by the x times beta plus some noise where beta is
+[0:23:45] times beta plus some noise where beta is sparse and then in the target maybe
+[0:23:48] sparse and then in the target maybe there is some shift in the the
+[0:23:50] there is some shift in the the populations uh beta uh maybe in some
+[0:23:53] populations uh beta uh maybe in some sparse directions
+[0:23:56] sparse directions and here uh our approach is slightly
+[0:23:59] and here uh our approach is slightly different uh and we take a different
+[0:24:01] different uh and we take a different viewpoint uh by by just assuming that
+[0:24:04] viewpoint uh by by just assuming that the the distribution shift
+[0:24:07] the the distribution shift arise as interventions in the data
+[0:24:09] arise as interventions in the data generating process. Uh eventually this
+[0:24:12] generating process. Uh eventually this shift influence model parameters to be
+[0:24:15] shift influence model parameters to be estimated.
+[0:24:17] estimated. But if uh when in the situations where
+[0:24:20] But if uh when in the situations where uh it's more intuitive to modeling the
+[0:24:22] uh it's more intuitive to modeling the distriution shift at the level of data
+[0:24:25] distriution shift at the level of data generations then our approach uh can be
+[0:24:28] generations then our approach uh can be more more tractable compared to the the
+[0:24:31] more more tractable compared to the the previous approach where they just
+[0:24:33] previous approach where they just directly model the shift uh uh in the
+[0:24:37] directly model the shift uh uh in the parameters to be estimated.
+[0:24:47] Okay. So uh because we consider the linear structure equation models uh we
+[0:24:49] linear structure equation models uh we we consider the linear function class
+[0:24:51] we consider the linear function class and uh here we first uh define the
+[0:24:55] and uh here we first uh define the oracle estimator which is just the the
+[0:24:58] oracle estimator which is just the the the population OS estimator on the
+[0:25:00] the population OS estimator on the target distributions uh which uh we just
+[0:25:03] target distributions uh which uh we just write it as beta star.
+[0:25:07] write it as beta star. Then uh first uh if we only use the
+[0:25:10] Then uh first uh if we only use the target data uh for the predictions we
+[0:25:13] target data uh for the predictions we have this uh the following the minimax
+[0:25:15] have this uh the following the minimax lower bound. So let's say uh our data
+[0:25:19] lower bound. So let's say uh our data follows the anti-causal linear
+[0:25:21] follows the anti-causal linear structural linear structural causal
+[0:25:23] structural linear structural causal models then uh the excess risk uh of the
+[0:25:30] models then uh the excess risk uh of the uh your your any uh your excess risk can
+[0:25:34] uh your your any uh your excess risk can be of the your estimators
+[0:25:37] be of the your estimators uh where the excess risk uh in in this
+[0:25:40] uh where the excess risk uh in in this linear models is just the difference
+[0:25:42] linear models is just the difference between the your estimator and then your
+[0:25:45] between the your estimator and then your Oracle estimator uh varied by the the
+[0:25:48] Oracle estimator uh varied by the the coariance matrix. So this excess risk is
+[0:25:51] coariance matrix. So this excess risk is always lower bounded by the d / n where
+[0:25:55] always lower bounded by the d / n where d is the dimensions of the coariants and
+[0:25:57] d is the dimensions of the coariants and then n uh n0 is the number of the label
+[0:26:01] then n uh n0 is the number of the label target sample.
+[0:26:03] target sample. So this rate is uh is quite well known
+[0:26:06] So this rate is uh is quite well known in classical linear regression setting
+[0:26:09] in classical linear regression setting and uh what we show here is that even
+[0:26:12] and uh what we show here is that even for the anti-codal uh settings with
+[0:26:15] for the anti-codal uh settings with unlabelled data still uh it doesn't
+[0:26:18] unlabelled data still uh it doesn't affect any uh classical minimax lower
+[0:26:21] affect any uh classical minimax lower bound
+[0:26:23] bound and especially when the number of the
+[0:26:26] and especially when the number of the label target sample is much smaller than
+[0:26:28] label target sample is much smaller than the dimensions of the problem then just
+[0:26:31] the dimensions of the problem then just by using the target data uh both the
+[0:26:33] by using the target data uh both the labeled and unlabeled uh they cannot
+[0:26:36] labeled and unlabeled uh they cannot reduce the excess risk below some
+[0:26:38] reduce the excess risk below some constant.
+[0:26:46] Okay. So now let me give you some uh some two motivating examples so that how
+[0:26:49] some two motivating examples so that how we can uh uh beat this uh target only
+[0:26:53] we can uh uh beat this uh target only methods by using some additional source
+[0:26:55] methods by using some additional source data.
+[0:27:05] So the first example is the sparse connectivity perturbations. So here uh
+[0:27:08] connectivity perturbations. So here uh we have the source and target uh which
+[0:27:11] we have the source and target uh which follows this uh coder diagrams
+[0:27:14] follows this uh coder diagrams and uh the y the labels are just some
+[0:27:17] and uh the y the labels are just some gausian from some gausian distributions
+[0:27:19] gausian from some gausian distributions and then the the the three coariantss uh
+[0:27:23] and then the the the three coariantss uh they they uh are they are generated by
+[0:27:26] they they uh are they are generated by by this uh linear structure equation
+[0:27:28] by this uh linear structure equation models and
+[0:27:31] models and here the the perturbation is on the uh
+[0:27:34] here the the perturbation is on the uh the mechanisms of the x1 to x2 and x3.
+[0:27:39] the mechanisms of the x1 to x2 and x3. So in the source uh the these uh
+[0:27:42] So in the source uh the these uh coefficients for the x1 uh is 2 and two
+[0:27:45] coefficients for the x1 uh is 2 and two here and in the target domain uh the
+[0:27:48] here and in the target domain uh the coefficients for uh for the uh x1 is
+[0:27:53] coefficients for uh for the uh x1 is minus2 and minus2.
+[0:27:56] minus2 and minus2. So in this case uh uh we can see that uh
+[0:28:00] So in this case uh uh we can see that uh even though there is the the mechanism
+[0:28:03] even though there is the the mechanism shift for the x1 uh if we look at the
+[0:28:06] shift for the x1 uh if we look at the partial correlations between the x2 and
+[0:28:09] partial correlations between the x2 and y and x3 and y uh they remain the same
+[0:28:13] y and x3 and y uh they remain the same between the source and target because
+[0:28:16] between the source and target because the partial correlations look at the
+[0:28:18] the partial correlations look at the correlations after you remove the effect
+[0:28:21] correlations after you remove the effect of the x1. So uh in another words uh
+[0:28:25] of the x1. So uh in another words uh only the the the regression coefficients
+[0:28:28] only the the the regression coefficients uh for the x1 change from the source
+[0:28:31] uh for the x1 change from the source source to target. So if we compute the
+[0:28:34] source to target. So if we compute the os source estimator on the os estimator
+[0:28:37] os source estimator on the os estimator on the source data then the difference
+[0:28:40] on the source data then the difference between the os estimator and then the
+[0:28:42] between the os estimator and then the oracle estimator must be sparse.
+[0:28:45] oracle estimator must be sparse. So in SSDA we only have the limited
+[0:28:49] So in SSDA we only have the limited target labels. So we the uh the natural
+[0:28:52] target labels. So we the uh the natural strategy is that we can just fine-tune
+[0:28:54] strategy is that we can just fine-tune the OS source in the sparse directions
+[0:29:04] and uh the the another example the the the second example is the the mean shift
+[0:29:06] the second example is the the mean shift perturbation scenario. So uh here we
+[0:29:10] perturbation scenario. So uh here we have some y uh from let's say from some
+[0:29:13] have some y uh from let's say from some gaussian distributions and we again have
+[0:29:16] gaussian distributions and we again have some three coariants and these coariants
+[0:29:19] some three coariants and these coariants have some mean interventions. So in the
+[0:29:22] have some mean interventions. So in the source the the means of the x1 x2 x3 are
+[0:29:26] source the the means of the x1 x2 x3 are all one and in the target domain the
+[0:29:30] all one and in the target domain the means of the x1 x2 x3 are just minus one
+[0:29:34] means of the x1 x2 x3 are just minus one zero and one. So there is a shift of the
+[0:29:37] zero and one. So there is a shift of the uh of the mean between the source and
+[0:29:38] uh of the mean between the source and target.
+[0:29:45] And in this case uh we can actually uh show that if we use the DIP algorithms
+[0:29:49] show that if we use the DIP algorithms with a mean matching penalty where the
+[0:29:51] with a mean matching penalty where the the distributional divergence is just uh
+[0:29:54] the distributional divergence is just uh mean difference between the source and
+[0:29:56] mean difference between the source and target. Then uh this mean matching
+[0:29:59] target. Then uh this mean matching penalty gives you uh this constraint. So
+[0:30:03] penalty gives you uh this constraint. So just uh make sure that the the
+[0:30:06] just uh make sure that the the difference between the the the source
+[0:30:10] difference between the the the source and target coariants uh after you pro
+[0:30:13] and target coariants uh after you pro you project to the by beta uh they must
+[0:30:16] you project to the by beta uh they must be the same
+[0:30:18] be the same and this dip penalty is just uh trying
+[0:30:21] and this dip penalty is just uh trying to find the beta which is orthogonal to
+[0:30:24] to find the beta which is orthogonal to the perturbation directions from source
+[0:30:26] the perturbation directions from source to target which is just two one zero
+[0:30:29] to target which is just two one zero vectors. So meaning that uh when you
+[0:30:32] vectors. So meaning that uh when you project the x to to the the beta
+[0:30:34] project the x to to the the beta directions they can captures this uh two
+[0:30:37] directions they can captures this uh two dimensional common features between the
+[0:30:39] dimensional common features between the source and target and we are only left
+[0:30:42] source and target and we are only left with a one dimensions uh and just by
+[0:30:44] with a one dimensions uh and just by using the target labels we can just
+[0:30:47] using the target labels we can just fine-tune this dip estimator in this one
+[0:30:50] fine-tune this dip estimator in this one dimensional subspace.
+[0:30:57] Okay, so uh these are just the main ideas about how we can use the target
+[0:30:59] ideas about how we can use the target labels when there is some structures uh
+[0:31:02] labels when there is some structures uh in distribution shift and uh in
+[0:31:05] in distribution shift and uh in particular just uh I want to emphasize
+[0:31:08] particular just uh I want to emphasize that uh uh for the efficient use of the
+[0:31:11] that uh uh for the efficient use of the target labels uh it really depends on
+[0:31:13] target labels uh it really depends on the type of the distribution shift.
+[0:31:23] Okay, so now let's make this idea more concrete. So in the next few slides uh
+[0:31:26] concrete. So in the next few slides uh we'll just uh make this uh more precise
+[0:31:29] we'll just uh make this uh more precise and more quantitative.
+[0:31:31] and more quantitative. So uh let me first consider the
+[0:31:34] So uh let me first consider the compounded additive shift intervention
+[0:31:37] compounded additive shift intervention or the CA shift intervention where the
+[0:31:40] or the CA shift intervention where the we have the source and target data
+[0:31:42] we have the source and target data generations uh given by this uh linear
+[0:31:45] generations uh given by this uh linear structure equation models
+[0:31:48] structure equation models and the the distribution shift is uh uh
+[0:31:52] and the the distribution shift is uh uh uh we have some distribution shifts in
+[0:31:54] uh we have some distribution shifts in the noise distribution
+[0:31:56] the noise distribution and uh in partic uh in particular they
+[0:31:59] and uh in partic uh in particular they are perturbed by some hidden
+[0:32:01] are perturbed by some hidden compounders. So in the source
+[0:32:03] compounders. So in the source distributions uh the epsilon x and
+[0:32:06] distributions uh the epsilon x and epsilon y are from some distributions
+[0:32:10] epsilon y are from some distributions and in the target in the target domain
+[0:32:13] and in the target in the target domain um let's say we have some cy x and c y
+[0:32:18] um let's say we have some cy x and c y they are from the same distribution as
+[0:32:19] they are from the same distribution as the source noise distributions and we
+[0:32:22] the source noise distributions and we have some additional uh compounder jet
+[0:32:26] have some additional uh compounder jet uh which is rd dimensional random
+[0:32:28] uh which is rd dimensional random vectors uh that act uh additively to the
+[0:32:32] vectors uh that act uh additively to the uh target noise. So uh the our target uh
+[0:32:36] uh target noise. So uh the our target uh noise uh for the X and Y are given by by
+[0:32:40] noise uh for the X and Y are given by by this
+[0:32:48] and under this uh CA shift interventions uh if we make the source and unlabelled
+[0:32:51] uh if we make the source and unlabelled target sample size they grow to infinite
+[0:32:54] target sample size they grow to infinite uh then we can show that the minimax
+[0:32:57] uh then we can show that the minimax excess risk is always lower bounded by R
+[0:33:00] excess risk is always lower bounded by R over N0 where R is the dimensions of the
+[0:33:05] over N0 where R is the dimensions of the these compounders that induce the
+[0:33:07] these compounders that induce the distribution shift and N0 is the number
+[0:33:10] distribution shift and N0 is the number of the label target samples.
+[0:33:19] Okay. And the next question is okay so we have this lower bound. So how can we
+[0:33:22] we have this lower bound. So how can we uh achieve this lower bound? So we we we
+[0:33:25] uh achieve this lower bound? So we we we we developed some new fine tuning
+[0:33:27] we developed some new fine tuning algorithms in this uh CA shift
+[0:33:30] algorithms in this uh CA shift interventions. So here we use the DIP
+[0:33:34] interventions. So here we use the DIP algorithms with a coariance matching
+[0:33:36] algorithms with a coariance matching penalty. So the DIP uh so which is just
+[0:33:40] penalty. So the DIP uh so which is just given by this uh the DIP estimator in
+[0:33:43] given by this uh the DIP estimator in this case uh is just uh the minimizers
+[0:33:46] this case uh is just uh the minimizers of the source risk under the constraint
+[0:33:49] of the source risk under the constraint that the the source and target uh
+[0:33:51] that the the source and target uh coarance matrix must be the matched
+[0:33:55] coarance matrix must be the matched and under our data generations the CA
+[0:33:58] and under our data generations the CA shift interventions the difference
+[0:34:00] shift interventions the difference between the target and source coarance
+[0:34:02] between the target and source coarance matrix is just a passive semidefinite
+[0:34:05] matrix is just a passive semidefinite with a rank
+[0:34:08] with a rank And uh we can actually show that under
+[0:34:10] And uh we can actually show that under this constraint uh the source and target
+[0:34:13] this constraint uh the source and target distributions the source and target data
+[0:34:16] distributions the source and target data are just have the same distributions. So
+[0:34:18] are just have the same distributions. So we can equivalently write this uh
+[0:34:21] we can equivalently write this uh original DIP formulation uh uh as these
+[0:34:25] original DIP formulation uh uh as these formulations on the right where the DIP
+[0:34:28] formulations on the right where the DIP is given by the minimizers of the target
+[0:34:30] is given by the minimizers of the target risk with the same constraint.
+[0:34:34] risk with the same constraint. So if we just look at this uh the
+[0:34:36] So if we just look at this uh the formulations uh dip estimator is just
+[0:34:39] formulations uh dip estimator is just the minimizers of the target risk with
+[0:34:42] the minimizers of the target risk with additional constraint where this
+[0:34:44] additional constraint where this constraint is our dimensional uh in in
+[0:34:47] constraint is our dimensional uh in in in our dimensions.
+[0:34:50] in our dimensions. So if we implement the DIP um then we
+[0:34:53] So if we implement the DIP um then we only lose r we only lose the r
+[0:34:56] only lose r we only lose the r dimensions compared to the uh oracle
+[0:34:58] dimensions compared to the uh oracle estimator.
+[0:35:01] estimator. So, so if the so so uh here is what just
+[0:35:05] So, so if the so so uh here is what just uh uh uh this is just what I what I just
+[0:35:09] uh uh uh this is just what I what I just explained. So, so DIP uh is just uh
+[0:35:14] explained. So, so DIP uh is just uh lives in the some orthogonal complement
+[0:35:16] lives in the some orthogonal complement of the space of the difference between
+[0:35:19] of the space of the difference between the coarience matrices.
+[0:35:21] the coarience matrices. uh let me just write this by some uh
+[0:35:25] uh let me just write this by some uh some the span of the Q where Q is the uh
+[0:35:29] some the span of the Q where Q is the uh basis matrix for the this complement
+[0:35:32] basis matrix for the this complement then this has a dimensions D minus R
+[0:35:35] then this has a dimensions D minus R then uh because they only lose the R
+[0:35:38] then uh because they only lose the R dimensions uh what we can do is we can
+[0:35:40] dimensions uh what we can do is we can just fine-tune diip in the directions
+[0:35:43] just fine-tune diip in the directions orthogonal to the Q which is just the R
+[0:35:45] orthogonal to the Q which is just the R dimensional subspace
+[0:35:48] dimensional subspace so this is the main idea and we can just
+[0:35:51] so this is the main idea and we can just uh use this idea to formulate the
+[0:35:53] uh use this idea to formulate the fine-tuning the DIP estimator. So uh the
+[0:35:57] fine-tuning the DIP estimator. So uh the estimator is just uh uh trying to
+[0:36:00] estimator is just uh uh trying to minimize the trying to fine-tune the the
+[0:36:04] minimize the trying to fine-tune the the beta on the label target samples with a
+[0:36:07] beta on the label target samples with a constraint that that uh on the Q
+[0:36:10] constraint that that uh on the Q directions uh they don't they don't make
+[0:36:12] directions uh they don't they don't make any updates and we only uh fine-tune the
+[0:36:15] any updates and we only uh fine-tune the beta in the orthogonal uh directions of
+[0:36:18] beta in the orthogonal uh directions of the Q
+[0:36:25] and if we define the the finetuning DIP estimators in this way. uh then we can
+[0:36:27] estimators in this way. uh then we can show that the excess risk target excess
+[0:36:30] show that the excess risk target excess risk of this estimator
+[0:36:33] risk of this estimator uh is upper bounded by the these terms
+[0:36:37] uh is upper bounded by the these terms uh where the important part is this
+[0:36:39] uh where the important part is this first term um so which is given by the r
+[0:36:44] first term um so which is given by the r / n um and with some additional terms
+[0:36:47] / n um and with some additional terms and if we have a large source and
+[0:36:50] and if we have a large source and unlabelled sample size then the these
+[0:36:53] unlabelled sample size then the these terms is just uh the small So we can
+[0:36:57] terms is just uh the small So we can show that the uh the fine-tuning DIP
+[0:37:00] show that the uh the fine-tuning DIP estimator uh they achieve the minimax uh
+[0:37:03] estimator uh they achieve the minimax uh minimax rate.
+[0:37:10] Okay. Uh now let's consider the second intervention scenario where we have some
+[0:37:13] intervention scenario where we have some sparse connectivity shift intervention.
+[0:37:16] sparse connectivity shift intervention. So again the source and target have this
+[0:37:19] So again the source and target have this uh follows this linear structure
+[0:37:22] uh follows this linear structure equation model where now the shift uh
+[0:37:26] equation model where now the shift uh occurs in the the connectivity matrix B
+[0:37:31] occurs in the the connectivity matrix B and uh in uh specifically the the source
+[0:37:34] and uh in uh specifically the the source and target B matrix change in r many
+[0:37:37] and target B matrix change in r many columns.
+[0:37:39] columns. So in this case uh we can extend the the
+[0:37:43] So in this case uh we can extend the the previous discussion in the toy example
+[0:37:45] previous discussion in the toy example and we can show that the the source and
+[0:37:48] and we can show that the the source and target the the the OS estimators on the
+[0:37:51] target the the the OS estimators on the source and the oracle estimator in the
+[0:37:53] source and the oracle estimator in the target the difference between these two
+[0:37:56] target the difference between these two are are rar R sparse uh where the uh
+[0:38:00] are are rar R sparse uh where the uh this non-zero coefficients appear in the
+[0:38:03] this non-zero coefficients appear in the intervened coariant.
+[0:38:10] So again in this uh shift intervention scenario uh if we we grow the the source
+[0:38:14] scenario uh if we we grow the the source and unlabelled target sample size to
+[0:38:16] and unlabelled target sample size to infinite uh the minimax access risk uh
+[0:38:20] infinite uh the minimax access risk uh is lower bounded by r over n where r is
+[0:38:24] is lower bounded by r over n where r is the the perturbations uh of the the
+[0:38:28] the the perturbations uh of the the columns of the b matrix and then n0 is
+[0:38:31] columns of the b matrix and then n0 is the number of the label target samples
+[0:38:37] &gt;&gt; and because &gt;&gt; sorry sorry to interrupt I just wanted
+[0:38:38] &gt;&gt; sorry sorry to interrupt I just wanted to remind you of the time you have
+[0:38:40] to remind you of the time you have around yeah seven to eight minutes left
+[0:38:42] around yeah seven to eight minutes left &gt;&gt; okay thank thanks yeah so I'll just
+[0:38:45] &gt;&gt; okay thank thanks yeah so I'll just speed up okay so so now we have the this
+[0:38:49] speed up okay so so now we have the this uh the difference between the OS source
+[0:38:52] uh the difference between the OS source and then Oracle estimator is sparse we
+[0:38:54] and then Oracle estimator is sparse we can just use the idea of the sparse
+[0:38:56] can just use the idea of the sparse regression so we can fine-tune the the
+[0:38:58] regression so we can fine-tune the the beta on the label target samples with
+[0:39:02] beta on the label target samples with the the this aloneum constraint um then
+[0:39:06] the the this aloneum constraint um then we And again we can show that under some
+[0:39:09] we And again we can show that under some mild conditions um this uh the the
+[0:39:13] mild conditions um this uh the the target excess risk of the fine this uh
+[0:39:16] target excess risk of the fine this uh estimator is bounded by some uh some two
+[0:39:20] estimator is bounded by some uh some two terms where the first term is attributed
+[0:39:24] terms where the first term is attributed by this uh finetuning on the label
+[0:39:26] by this uh finetuning on the label target samples which is given by r / n
+[0:39:30] target samples which is given by r / n uh with some additional log factors and
+[0:39:33] uh with some additional log factors and then the second term is just uh the
+[0:39:37] then the second term is just uh the error uh uh uh that appears by
+[0:39:41] error uh uh uh that appears by estimating the OS estimator by the
+[0:39:44] estimating the OS estimator by the source data and when the source sample
+[0:39:46] source data and when the source sample size is large enough uh we can ignore
+[0:39:49] size is large enough uh we can ignore this second term. So again this uh
+[0:39:51] this second term. So again this uh fine-tuning OS estimator is minimax
+[0:39:54] fine-tuning OS estimator is minimax optimal
+[0:40:01] and uh lastly we consider this uh anti-cod weight shift interventions or
+[0:40:03] anti-cod weight shift interventions or the AW shift intervention. Uh again we
+[0:40:07] the AW shift intervention. Uh again we have the source and target data uh
+[0:40:09] have the source and target data uh follow this linear structure equation
+[0:40:11] follow this linear structure equation models and then the perturbation uh uh
+[0:40:15] models and then the perturbation uh uh is on this anti-cod weight vector B and
+[0:40:20] is on this anti-cod weight vector B and uh we we actually make an assumption
+[0:40:22] uh we we actually make an assumption that the the the perturbation directions
+[0:40:25] that the the the perturbation directions from source to target which is B 0 minus
+[0:40:28] from source to target which is B 0 minus B1 they can be spanned by the
+[0:40:31] B1 they can be spanned by the perturbation directions observed in the
+[0:40:33] perturbation directions observed in the source domains.
+[0:40:35] source domains. And this perturbation directions uh uh
+[0:40:39] And this perturbation directions uh uh is uh they they they live in the low
+[0:40:43] is uh they they they live in the low dimensional subspace with dimension R.
+[0:40:46] dimensional subspace with dimension R. So they cannot spend the whole space.
+[0:40:50] So they cannot spend the whole space. Uh and this AW shift interventions uh if
+[0:40:54] Uh and this AW shift interventions uh if if we allow to use the unlabelled target
+[0:40:57] if we allow to use the unlabelled target samples uh the problems becomes quite
+[0:40:59] samples uh the problems becomes quite easy. So here in this work we also
+[0:41:03] easy. So here in this work we also assume that uh in this intervention
+[0:41:05] assume that uh in this intervention scenario we don't allow to use the
+[0:41:07] scenario we don't allow to use the unlabelled target data. So in this case
+[0:41:10] unlabelled target data. So in this case uh the minimax access risk can be lower
+[0:41:12] uh the minimax access risk can be lower bounded by R over N again and then just
+[0:41:17] bounded by R over N again and then just to uh uh to achieve this this rate we
+[0:41:21] to uh uh to achieve this this rate we consider the CIP estimator with a mean
+[0:41:23] consider the CIP estimator with a mean matching penalty. So the intuition is
+[0:41:27] matching penalty. So the intuition is pretty similar to the tip estimator but
+[0:41:30] pretty similar to the tip estimator but uh what what I want to emphasize here is
+[0:41:32] uh what what I want to emphasize here is that the CIP estimator uh they can find
+[0:41:35] that the CIP estimator uh they can find some t minus r dimensional uh invariant
+[0:41:38] some t minus r dimensional uh invariant features. So so that we can only
+[0:41:40] features. So so that we can only fine-tune this uh cip in the r
+[0:41:43] fine-tune this uh cip in the r dimensional uh uh the directions. So
+[0:41:47] dimensional uh uh the directions. So this is given by uh our uh estimator
+[0:41:50] this is given by uh our uh estimator here.
+[0:41:52] here. Um and just uh just to to note that uh
+[0:41:56] Um and just uh just to to note that uh this formulation is when we use the
+[0:41:57] this formulation is when we use the unlabelled target samples to estimate
+[0:42:00] unlabelled target samples to estimate the coariance matrix target coariance
+[0:42:02] the coariance matrix target coariance matrix and we can also uh if we don't we
+[0:42:05] matrix and we can also uh if we don't we are not allowed to use a target
+[0:42:07] are not allowed to use a target unlabelled samples we can still uh uh uh
+[0:42:11] unlabelled samples we can still uh uh uh propose a var variation of the this uh
+[0:42:14] propose a var variation of the this uh fine tuning cip estimator and then uh we
+[0:42:18] fine tuning cip estimator and then uh we can show that under some conditions uh
+[0:42:20] can show that under some conditions uh the the uh the target access risk of
+[0:42:23] the the uh the target access risk of this uh finetuning CIP estimator is also
+[0:42:27] this uh finetuning CIP estimator is also upper bounded by uh the r over n uh plus
+[0:42:30] upper bounded by uh the r over n uh plus some uh some terms which goes away if
+[0:42:33] some uh some terms which goes away if the source sample size is large enough.
+[0:42:36] the source sample size is large enough. So uh we can also show that this is a
+[0:42:38] So uh we can also show that this is a achieve the minimax optimal rate.
+[0:42:42] achieve the minimax optimal rate. Okay. So let me just uh uh briefly uh
+[0:42:47] Okay. So let me just uh uh briefly uh talk about the the multi-adaptive start
+[0:42:49] talk about the the multi-adaptive start fine-tuning algorithms.
+[0:42:51] fine-tuning algorithms. So here so far uh we we show that this
+[0:42:55] So here so far uh we we show that this effective fine-tuning must be tailor
+[0:42:57] effective fine-tuning must be tailor made for different types of
+[0:42:59] made for different types of interventions. But uh in practice uh the
+[0:43:02] interventions. But uh in practice uh the type of intervention is unknown. So in
+[0:43:05] type of intervention is unknown. So in in this case we can just uh uh try the
+[0:43:08] in this case we can just uh uh try the different fine-tuning algorithms with a
+[0:43:11] different fine-tuning algorithms with a multiple adaptive starts and then we can
+[0:43:13] multiple adaptive starts and then we can do the model selection. So the the
+[0:43:16] do the model selection. So the the intuition is that uh this is possible
+[0:43:19] intuition is that uh this is possible because the model selection is quite
+[0:43:21] because the model selection is quite cheap. So if we try the the fine-tuning
+[0:43:24] cheap. So if we try the the fine-tuning uh let's say L different models uh then
+[0:43:28] uh let's say L different models uh then we only need the the log L many label
+[0:43:31] we only need the the log L many label target data to select the best models
+[0:43:33] target data to select the best models among these L fine-tuned M candidates.
+[0:43:38] among these L fine-tuned M candidates. So the our uh multi-adaptive start
+[0:43:40] So the our uh multi-adaptive start fine-tuning algorithms is uh uh
+[0:43:44] fine-tuning algorithms is uh uh implement in three steps. In the first
+[0:43:47] implement in three steps. In the first we just train um l many uh let's say the
+[0:43:51] we just train um l many uh let's say the dip or cip or the os estimators on the
+[0:43:55] dip or cip or the os estimators on the source and unlabelled target data and
+[0:43:58] source and unlabelled target data and then we can just fine-tune each of them
+[0:44:01] then we can just fine-tune each of them using the label target data and then
+[0:44:04] using the label target data and then finally we we have a hold out uh hold
+[0:44:07] finally we we have a hold out uh hold out validation uh label target data uh
+[0:44:10] out validation uh label target data uh use this to select the the model with
+[0:44:13] use this to select the the model with the lowest uh validation risk.
+[0:44:17] the lowest uh validation risk. And just combining our previous theorems
+[0:44:20] And just combining our previous theorems for individual finetuning methods with
+[0:44:22] for individual finetuning methods with the model selection result then we can
+[0:44:24] the model selection result then we can also show that the uh this MAS SFT they
+[0:44:28] also show that the uh this MAS SFT they can achieve the the same rates as the
+[0:44:32] can achieve the the same rates as the the individual SSDA methods with
+[0:44:36] the individual SSDA methods with additional uh error terms which only
+[0:44:38] additional uh error terms which only depends on log factors. Um
+[0:44:43] depends on log factors. Um so uh this is just a very small error
+[0:44:46] so uh this is just a very small error terms.
+[0:44:48] terms. Um okay so I will just keep the the
+[0:44:51] Um okay so I will just keep the the simulation result. Uh we just show that
+[0:44:54] simulation result. Uh we just show that uh we just uh try different uh uh data
+[0:44:58] uh we just uh try different uh uh data generation models and we can show that
+[0:45:00] generation models and we can show that our uh uh uh fine-tuning algorithms can
+[0:45:04] our uh uh uh fine-tuning algorithms can have a better performance compared to
+[0:45:06] have a better performance compared to the baseline algorithms. So we have some
+[0:45:09] the baseline algorithms. So we have some uh research in the paper. So please take
+[0:45:11] uh research in the paper. So please take a look at the the papers if you are
+[0:45:13] a look at the the papers if you are interesting.
+[0:45:15] interesting. So let me just uh summarize. So we
+[0:45:18] So let me just uh summarize. So we proposed some theoretical framework for
+[0:45:21] proposed some theoretical framework for the semi-provisement adaptation and we
+[0:45:24] the semi-provisement adaptation and we also show that the fine-tuning must be
+[0:45:26] also show that the fine-tuning must be tailor made for the different type of
+[0:45:28] tailor made for the different type of the interventions in your data
+[0:45:30] the interventions in your data generations. Uh in particular this says
+[0:45:33] generations. Uh in particular this says that there is no universal finetuning
+[0:45:35] that there is no universal finetuning algorithm in SSDA.
+[0:45:38] algorithm in SSDA. And then we show that the finetuning
+[0:45:40] And then we show that the finetuning from the this UDA algorithms can be
+[0:45:42] from the this UDA algorithms can be minimax optimal under some linear
+[0:45:45] minimax optimal under some linear structural causal models and uh our MAS
+[0:45:50] structural causal models and uh our MAS SFP algorithms motivates the development
+[0:45:52] SFP algorithms motivates the development of the new UDA methods and new fine
+[0:45:55] of the new UDA methods and new fine tuning strategies
+[0:45:58] tuning strategies and we have many open and challenging uh
+[0:46:01] and we have many open and challenging uh questions. So let's say uh what we can
+[0:46:05] questions. So let's say uh what we can how can we extend beyond the linear
+[0:46:07] how can we extend beyond the linear structural coder models and linear
+[0:46:09] structural coder models and linear function class and uh how can we uh
+[0:46:13] function class and uh how can we uh develop some efficient fine tune
+[0:46:15] develop some efficient fine tune efficient finetuning in the lat feature
+[0:46:18] efficient finetuning in the lat feature space and also how can we understand the
+[0:46:21] space and also how can we understand the relationship between the finetuning
+[0:46:23] relationship between the finetuning dynamics and then domain adaptation
+[0:46:24] dynamics and then domain adaptation assumptions.
+[0:46:27] assumptions. Okay. So, thank you for your attentions.
+[0:46:34] &gt;&gt; Thanks. &gt;&gt; Thank you. Um, there is one question in
+[0:46:38] &gt;&gt; Thank you. Um, there is one question in the Q&amp;A. So, maybe we can quickly get
+[0:46:41] the Q&amp;A. So, maybe we can quickly get through it before the discussion. So,
+[0:46:44] through it before the discussion. So, the question is, would it be difficult
+[0:46:46] the question is, would it be difficult to go beyond linearity of structural
+[0:46:48] to go beyond linearity of structural console models to nonlinear models?
+[0:46:51] console models to nonlinear models? &gt;&gt; Um, that's an uh very interesting
+[0:46:54] &gt;&gt; Um, that's an uh very interesting question.
+[0:46:55] question. &gt;&gt; [clears throat]
+[0:46:56] &gt;&gt; [clears throat] &gt;&gt; So we also try to think about uh how we
+[0:46:58] &gt;&gt; So we also try to think about uh how we can extend the beyond the linear
+[0:47:01] can extend the beyond the linear structure equation models. Uh one
+[0:47:04] structure equation models. Uh one difficulty is that our algorithms is
+[0:47:06] difficulty is that our algorithms is based on the UDA algorithms like DIP or
+[0:47:09] based on the UDA algorithms like DIP or CIP algorithms. But the main challenge
+[0:47:12] CIP algorithms. But the main challenge is that uh for the beyond the linear
+[0:47:14] is that uh for the beyond the linear structure equation models even for the
+[0:47:17] structure equation models even for the this UDA algorithms it's not
+[0:47:19] this UDA algorithms it's not theoretically well understood and we can
+[0:47:22] theoretically well understood and we can actually find that some uh these DIP
+[0:47:26] actually find that some uh these DIP algorithms can cannot identify the
+[0:47:30] algorithms can cannot identify the correct invariant features. So if we
+[0:47:33] correct invariant features. So if we want to develop our framework beyond the
+[0:47:35] want to develop our framework beyond the linear case then we have to first uh try
+[0:47:39] linear case then we have to first uh try to get some nice theory about the UDA
+[0:47:42] to get some nice theory about the UDA algorithms first.
+[0:47:48] &gt;&gt; Great. Thank you. &gt;&gt; Yeah. So yeah thanks again for the nice
+[0:47:50] &gt;&gt; Yeah. So yeah thanks again for the nice talk. I think in interest of time let's
+[0:47:52] talk. I think in interest of time let's switch over to Jason's discussion. Jason
+[0:47:54] switch over to Jason's discussion. Jason please take us away.
+[0:47:56] please take us away. &gt;&gt; Sure.
+[0:48:03] All right. Uh so can you see my screen? Let me just do full screen.
+[0:48:09] You can see my screen. It's good. Okay. Awesome. So yeah uh thanks a lot Wuk for
+[0:48:12] Awesome. So yeah uh thanks a lot Wuk for the the wonderful talk and thanks to
+[0:48:14] the the wonderful talk and thanks to Dominic and to Adicha for the the
+[0:48:16] Dominic and to Adicha for the the invitation to to discuss uh the paper.
+[0:48:18] invitation to to discuss uh the paper. It really is a pleasure to um to be able
+[0:48:21] It really is a pleasure to um to be able to do this. So I just want to kind of
+[0:48:24] to do this. So I just want to kind of provide a little bit of a summary I
+[0:48:26] provide a little bit of a summary I guess of of the talk and the and the
+[0:48:28] guess of of the talk and the and the problem and then conclude with just a
+[0:48:30] problem and then conclude with just a few of my my own thoughts. Um they're
+[0:48:32] few of my my own thoughts. Um they're they're actually very relevant already
+[0:48:34] they're actually very relevant already to the the discussion. So um okay so
+[0:48:37] to the the discussion. So um okay so what what is the paper about? Well the
+[0:48:38] what what is the paper about? Well the paper is trying to adapt using source
+[0:48:41] paper is trying to adapt using source data um unlabelled target data but then
+[0:48:44] data um unlabelled target data but then with constraint where you have few
+[0:48:47] with constraint where you have few labeled target samples. So the setting
+[0:48:49] labeled target samples. So the setting here is is you have a source
+[0:48:50] here is is you have a source distribution. You observe maybe a lot of
+[0:48:52] distribution. You observe maybe a lot of distribu a lot of data from that uh
+[0:48:55] distribu a lot of data from that uh source distribution, but what you're
+[0:48:56] source distribution, but what you're really interested in is making uh making
+[0:49:00] really interested in is making uh making inferences about the target
+[0:49:01] inferences about the target distribution. But the caveat here is
+[0:49:04] distribution. But the caveat here is that uh you maybe only have a few
+[0:49:06] that uh you maybe only have a few labeled datas maybe if any at all. Uh
+[0:49:09] labeled datas maybe if any at all. Uh but then you also have many unlabeled
+[0:49:11] but then you also have many unlabeled data from the target domain. Okay. And
+[0:49:13] data from the target domain. Okay. And so the so there's kind of a
+[0:49:14] so the so there's kind of a semi-supervised transfer learning type
+[0:49:17] semi-supervised transfer learning type uh type of flavor type of setting going
+[0:49:20] uh type of flavor type of setting going on here uh which makes it quite
+[0:49:22] on here uh which makes it quite interesting. And so the challenge here
+[0:49:24] interesting. And so the challenge here of course is you want to balance these
+[0:49:25] of course is you want to balance these two sources in a way that you know
+[0:49:27] two sources in a way that you know optimally kind of aggregates or combines
+[0:49:29] optimally kind of aggregates or combines the two sources of data. Uh I mean if
+[0:49:32] the two sources of data. Uh I mean if you're too sourceheavy right especially
+[0:49:34] you're too sourceheavy right especially if there's a large distribution shift
+[0:49:36] if there's a large distribution shift you're going to incur a very large
+[0:49:37] you're going to incur a very large amount of bias. um if you're too target
+[0:49:39] amount of bias. um if you're too target heavy, right, because you don't have a
+[0:49:41] heavy, right, because you don't have a lot of of uh data in the target domain,
+[0:49:44] lot of of uh data in the target domain, you you might inflate your var variance.
+[0:49:46] you you might inflate your var variance. And so the question kind of is how do
+[0:49:48] And so the question kind of is how do you how do you optimally balance those
+[0:49:49] you how do you optimally balance those those two different regimes. Um so the
+[0:49:52] those two different regimes. Um so the so the main modeling framework and
+[0:49:53] so the main modeling framework and setting that the the paper explores are
+[0:49:56] setting that the the paper explores are these so-called structural causal
+[0:49:57] these so-called structural causal models, which I think are are quite
+[0:49:59] models, which I think are are quite interesting. Um, and so basically what
+[0:50:02] interesting. Um, and so basically what these models allow you to do is to is to
+[0:50:04] these models allow you to do is to is to model causal relationships between uh
+[0:50:08] model causal relationships between uh between the the input um uh the input
+[0:50:12] between the the input um uh the input parameters or sorry the input variables
+[0:50:13] parameters or sorry the input variables as well as the relationships between the
+[0:50:15] as well as the relationships between the labels and then the uh the coariantss
+[0:50:18] labels and then the uh the coariantss the predictor variables themselves.
+[0:50:20] the predictor variables themselves. Okay. And so the the relevant quantities
+[0:50:22] Okay. And so the the relevant quantities here that uh are going to capture
+[0:50:24] here that uh are going to capture different types of distribution shifts
+[0:50:26] different types of distribution shifts between the target and the source are
+[0:50:27] between the target and the source are going to be the capital B and the little
+[0:50:28] going to be the capital B and the little B here. Okay. And I think as was
+[0:50:31] B here. Okay. And I think as was discussed the re the main reason from
+[0:50:33] discussed the re the main reason from what I understand that they focused on
+[0:50:35] what I understand that they focused on on these linear uh SCMs is is due to
+[0:50:38] on these linear uh SCMs is is due to kind of the analytical tractability.
+[0:50:41] kind of the analytical tractability. Okay. And so um so kind of using using
+[0:50:43] Okay. And so um so kind of using using this uh this this structural equation to
+[0:50:46] this uh this this structural equation to model these relationships. The authors
+[0:50:48] model these relationships. The authors consider three different types of
+[0:50:49] consider three different types of methods. So the method one is the
+[0:50:51] methods. So the method one is the confounded additive. So this is where
+[0:50:53] confounded additive. So this is where the the B's are the same and the and the
+[0:50:55] the the B's are the same and the and the little B's are the same. Um but then the
+[0:50:59] little B's are the same. Um but then the these errors are allowed to change or
+[0:51:02] these errors are allowed to change or shift uh via some lowdimensional
+[0:51:04] shift uh via some lowdimensional confounder. Okay. And so and this is an
+[0:51:07] confounder. Okay. And so and this is an unobserved confounder. Okay. And then
+[0:51:09] unobserved confounder. Okay. And then method two is um the the little B's here
+[0:51:13] method two is um the the little B's here are fixed um and and the error
+[0:51:16] are fixed um and and the error distributions here are fixed are the
+[0:51:19] distributions here are fixed are the same. Um but what is allowed to vary are
+[0:51:21] same. Um but what is allowed to vary are the the columns of these uh B matrices.
+[0:51:24] the the columns of these uh B matrices. And so here I'm I'm abusing notation a
+[0:51:27] And so here I'm I'm abusing notation a little bit here, but what I really mean
+[0:51:28] little bit here, but what I really mean is just that the that at mo in this case
+[0:51:30] is just that the that at mo in this case at most s or I think in the notation at
+[0:51:32] at most s or I think in the notation at most r of the columns of these b
+[0:51:34] most r of the columns of these b matrices um differ and so you have a
+[0:51:36] matrices um differ and so you have a type of sparity assumption and then the
+[0:51:38] type of sparity assumption and then the third is is this anti-causal weight uh
+[0:51:41] third is is this anti-causal weight uh assumption shift assumption and here the
+[0:51:43] assumption shift assumption and here the capital B's are the same the laws of the
+[0:51:46] capital B's are the same the laws of the errors are the same um and and what
+[0:51:48] errors are the same um and and what really uh changes are the perturbations
+[0:51:52] really uh changes are the perturbations between the little B's between the the
+[0:51:54] between the little B's between the the source and target uh in in the
+[0:51:56] source and target uh in in the perturbations of potential m multiple
+[0:51:59] perturbations of potential m multiple source uh distributions. So I think the
+[0:52:02] source uh distributions. So I think the way I've written it here is maybe
+[0:52:03] way I've written it here is maybe technically incorrect. These should
+[0:52:04] technically incorrect. These should actually be more in terms of
+[0:52:05] actually be more in terms of perturbations. But and and the
+[0:52:07] perturbations. But and and the assumption here is that these
+[0:52:08] assumption here is that these perturbations live in a lowdimensional
+[0:52:11] perturbations live in a lowdimensional uh subspace. And so again you have these
+[0:52:14] uh subspace. And so again you have these very uh interesting structural
+[0:52:16] very uh interesting structural assumptions on on the way that these
+[0:52:18] assumptions on on the way that these distribution shifts occur across the
+[0:52:21] distribution shifts occur across the source and the targets. and and again it
+[0:52:23] source and the targets. and and again it exploits this this very nice uh crisp uh
+[0:52:26] exploits this this very nice uh crisp uh linear causal model.
+[0:52:28] linear causal model. Okay. So the main theorem here the main
+[0:52:30] Okay. So the main theorem here the main theoretical result is that under these
+[0:52:32] theoretical result is that under these structural causal model assumptions um
+[0:52:35] structural causal model assumptions um each ma matched method uh attains a
+[0:52:38] each ma matched method uh attains a minax optimal target risk. And the way
+[0:52:42] minax optimal target risk. And the way that this is done is via a two-stage
+[0:52:43] that this is done is via a two-stage approach. So you first train an
+[0:52:45] approach. So you first train an unsupervised uh domain adaptation method
+[0:52:48] unsupervised uh domain adaptation method on the source plus the unlabelled
+[0:52:50] on the source plus the unlabelled target. And the way that this this uh
+[0:52:52] target. And the way that this this uh UDA this unsupervised domain adaptation
+[0:52:54] UDA this unsupervised domain adaptation is done is it exploits the invariance
+[0:52:57] is done is it exploits the invariance properties that come from the type of of
+[0:52:59] properties that come from the type of of shift. And um and then the second stage
+[0:53:02] shift. And um and then the second stage is you do some fine-tuning with the
+[0:53:04] is you do some fine-tuning with the target labels that you have although you
+[0:53:06] target labels that you have although you don't have too many of them. And so in
+[0:53:08] don't have too many of them. And so in some sense like the the main kind of
+[0:53:10] some sense like the the main kind of punchline of of the methodology is that
+[0:53:13] punchline of of the methodology is that if you kind of start right so in other
+[0:53:15] if you kind of start right so in other words you have the right UDA
+[0:53:16] words you have the right UDA initialization which corresponds to the
+[0:53:19] initialization which corresponds to the right invariance uh from from the type
+[0:53:22] right invariance uh from from the type of distribution shift that you're
+[0:53:23] of distribution shift that you're assuming. Um that kind of matters more
+[0:53:26] assuming. Um that kind of matters more than actually having more labels in fact
+[0:53:28] than actually having more labels in fact and so that's what's kind of interesting
+[0:53:30] and so that's what's kind of interesting about the paper. Um so that as as we saw
+[0:53:32] about the paper. Um so that as as we saw in the talk the rates depend on the type
+[0:53:35] in the talk the rates depend on the type of shift the tuning dimension and of
+[0:53:36] of shift the tuning dimension and of course the the starting quality and so
+[0:53:38] course the the starting quality and so all these things uh determine the risk.
+[0:53:42] all these things uh determine the risk. Um okay and then I think this is briefly
+[0:53:44] Um okay and then I think this is briefly touched uh on at the end of the talk uh
+[0:53:48] touched uh on at the end of the talk uh which is okay what happens if the actual
+[0:53:50] which is okay what happens if the actual shift is unknown. So I said that you
+[0:53:52] shift is unknown. So I said that you know what what these earlier methods
+[0:53:54] know what what these earlier methods rely on is actually having the right
+[0:53:56] rely on is actually having the right start. So in other words, kind of
+[0:53:57] start. So in other words, kind of knowing in advance what the right type
+[0:53:58] knowing in advance what the right type of invariance, the right type of shift
+[0:54:00] of invariance, the right type of shift is so that you can, you know, tailor
+[0:54:02] is so that you can, you know, tailor your your UDA to that. But what happens
+[0:54:04] your your UDA to that. But what happens if you don't know it? And so now uh what
+[0:54:06] if you don't know it? And so now uh what the authors do is they propose this sort
+[0:54:08] the authors do is they propose this sort of interesting like model selection type
+[0:54:11] of interesting like model selection type problem where you train multiple UDA
+[0:54:14] problem where you train multiple UDA starts on different um shift
+[0:54:17] starts on different um shift assumptions. you you fine-tune each one
+[0:54:19] assumptions. you you fine-tune each one of these and then you and then you
+[0:54:20] of these and then you and then you select kind of uh you know the best one
+[0:54:23] select kind of uh you know the best one that performs best on some kind of small
+[0:54:25] that performs best on some kind of small validation set and and what they show is
+[0:54:27] validation set and and what they show is that this is kind of nearly optimal
+[0:54:29] that this is kind of nearly optimal without knowing a priority what the type
+[0:54:30] without knowing a priority what the type of shift is and so again you have this
+[0:54:32] of shift is and so again you have this kind of interesting uh model selection
+[0:54:34] kind of interesting uh model selection going on here which which I I thought
+[0:54:36] going on here which which I I thought was was quite uh cool. Okay, so um just
+[0:54:40] was was quite uh cool. Okay, so um just just to briefly wrap up with some of my
+[0:54:42] just to briefly wrap up with some of my own thoughts. Um so I I think this was
+[0:54:45] own thoughts. Um so I I think this was already uh mentioned mentioned a couple
+[0:54:47] already uh mentioned mentioned a couple times so in the talk and then also we
+[0:54:49] times so in the talk and then also we had a question near the end on this but
+[0:54:51] had a question near the end on this but yeah I think it would be really
+[0:54:52] yeah I think it would be really interesting to see okay well can you go
+[0:54:54] interesting to see okay well can you go beyond um these linear structural causal
+[0:54:57] beyond um these linear structural causal models um you know possibly
+[0:54:59] models um you know possibly incorporating nonlinearities
+[0:55:02] incorporating nonlinearities um I mentioned here deep extensions I I
+[0:55:04] um I mentioned here deep extensions I I don't know whether that's possible or
+[0:55:05] don't know whether that's possible or not I think the these the parametric
+[0:55:07] not I think the these the parametric form linear form of the model seems to
+[0:55:09] form linear form of the model seems to be important for the theory but I think
+[0:55:12] be important for the theory but I think that would also be very interesting. Um
+[0:55:13] that would also be very interesting. Um a second kind of related question which
+[0:55:16] a second kind of related question which is you know how how robust are these
+[0:55:19] is you know how how robust are these methods to to kind of model
+[0:55:21] methods to to kind of model misspecifications? So, you know, maybe
+[0:55:23] misspecifications? So, you know, maybe if you do have a little bit of nonlinear
+[0:55:25] if you do have a little bit of nonlinear nonlinearity in the way that the uh the
+[0:55:28] nonlinearity in the way that the uh the the structural uh causal models are um
+[0:55:31] the structural uh causal models are um are formed like how does that propagate
+[0:55:34] are formed like how does that propagate um to to your uh your in your risk
+[0:55:38] um to to your uh your in your risk bounds and so I I think characterizing
+[0:55:40] bounds and so I I think characterizing that would also be u be quite
+[0:55:42] that would also be u be quite interesting. Um so anyways okay so just
+[0:55:45] interesting. Um so anyways okay so just to summarize um I think the key
+[0:55:46] to summarize um I think the key contributions here are are these uh so
+[0:55:50] contributions here are are these uh so so the structural causal models um with
+[0:55:54] so the structural causal models um with the semi-supervised domain adaptation
+[0:55:56] the semi-supervised domain adaptation give us these miniax guarantees. Um we
+[0:55:58] give us these miniax guarantees. Um we have these three different regimes for
+[0:56:00] have these three different regimes for these structural causal models in terms
+[0:56:02] these structural causal models in terms of how we have the distribution shift
+[0:56:03] of how we have the distribution shift between the source and the target. Um
+[0:56:06] between the source and the target. Um and then we also have methods that can
+[0:56:08] and then we also have methods that can account for um lack of knowledge of the
+[0:56:12] account for um lack of knowledge of the type of shift that we have. And so we
+[0:56:14] type of shift that we have. And so we had this kind of model selection type
+[0:56:15] had this kind of model selection type procedure. And so I think what's really
+[0:56:18] procedure. And so I think what's really interesting about the paper is that it
+[0:56:19] interesting about the paper is that it kind of gives us a nice crisp clean
+[0:56:21] kind of gives us a nice crisp clean setting um to understand when few target
+[0:56:24] setting um to understand when few target labels suffice for doing this kind of
+[0:56:26] labels suffice for doing this kind of adaptation. And so um I think with that
+[0:56:29] adaptation. And so um I think with that I'll I'll just end here and uh happy to
+[0:56:32] I'll I'll just end here and uh happy to continue the discussion. So thank you.
+[0:56:34] continue the discussion. So thank you. Awesome.
+[0:56:42] Thank you. Yeah, do you want to respond? &gt;&gt; Um, sure. Okay. Uh, uh, first of all,
+[0:56:46] &gt;&gt; Um, sure. Okay. Uh, uh, first of all, thank you so much, Jason, for the very
+[0:56:48] thank you so much, Jason, for the very insightful questions and it's very
+[0:56:51] insightful questions and it's very interesting to hear about some uh how
+[0:56:53] interesting to hear about some uh how other people think about uh our
+[0:56:56] other people think about uh our approach.
+[0:56:58] approach. And just uh going back to your
+[0:57:00] And just uh going back to your questions, the first question was about
+[0:57:02] questions, the first question was about the extensions to the nonlinear case or
+[0:57:05] the extensions to the nonlinear case or the deep extensions. I think I briefly
+[0:57:08] the deep extensions. I think I briefly answered this at the end of the my talk
+[0:57:10] answered this at the end of the my talk but
+[0:57:11] but &gt;&gt; uh I believe the one challenging part is
+[0:57:14] &gt;&gt; uh I believe the one challenging part is that even for the this uh unsurbment
+[0:57:18] that even for the this uh unsurbment adaptation algorithms. So our method is
+[0:57:20] adaptation algorithms. So our method is based on this build build on this upon
+[0:57:23] based on this build build on this upon this uh unsupervised adaptation
+[0:57:25] this uh unsupervised adaptation algorithms and although people use this
+[0:57:28] algorithms and although people use this like um uh like a deep neuronet dim
+[0:57:31] like um uh like a deep neuronet dim neuron net to learn some invarant
+[0:57:33] neuron net to learn some invarant features in practice but uh indeed uh
+[0:57:36] features in practice but uh indeed uh there is no theoretical guarantees and
+[0:57:39] there is no theoretical guarantees and even we we actually uh Yans and I
+[0:57:43] even we we actually uh Yans and I actually did some experiments and they
+[0:57:45] actually did some experiments and they even fail under many uh different
+[0:57:47] even fail under many uh different settings uh so how can we uh design some
+[0:57:53] settings uh so how can we uh design some UDA algorithms that can provably
+[0:57:56] UDA algorithms that can provably identify the invariant features that
+[0:57:58] identify the invariant features that might be the first step to go beyond the
+[0:58:01] might be the first step to go beyond the the the linear settings
+[0:58:04] the the linear settings and uh in terms of the second questions
+[0:58:07] and uh in terms of the second questions about the robustness under model
+[0:58:09] about the robustness under model misspecifications
+[0:58:10] misspecifications I think uh this is a very interesting
+[0:58:13] I think uh this is a very interesting question and I believe uh it's also
+[0:58:16] question and I believe uh it's also quite challenging question so currently
+[0:58:18] quite challenging question so currently our theory it it requires the precise uh
+[0:58:23] our theory it it requires the precise uh model specifications and uh if the we
+[0:58:26] model specifications and uh if the we don't have uh we have the model
+[0:58:28] don't have uh we have the model specifications then we we may not get
+[0:58:30] specifications then we we may not get the minimax optimal rate so I'm not sure
+[0:58:33] the minimax optimal rate so I'm not sure how we can make this our finetuning
+[0:58:36] how we can make this our finetuning strategies to be robust maybe one one
+[0:58:40] strategies to be robust maybe one one one touch I can just uh come up with is
+[0:58:43] one touch I can just uh come up with is whether we can just incorporate this
+[0:58:45] whether we can just incorporate this distribution robustness approach to to
+[0:58:47] distribution robustness approach to to our finune So that uh if we have some
+[0:58:52] our finune So that uh if we have some knowledge about the how these target
+[0:58:54] knowledge about the how these target distributions we have some vague
+[0:58:56] distributions we have some vague information about how how the target
+[0:58:59] information about how how the target distribution change but we don't have a
+[0:59:00] distribution change but we don't have a precise knowledge maybe we can somehow
+[0:59:03] precise knowledge maybe we can somehow incorporate this uh distribution
+[0:59:05] incorporate this uh distribution robustness approach to the finetuning
+[0:59:08] robustness approach to the finetuning um but uh I'm not sure if the there is
+[0:59:11] um but uh I'm not sure if the there is any better way which is a very
+[0:59:13] any better way which is a very interesting uh research question we can
+[0:59:15] interesting uh research question we can we we can think about Yeah. Uh uh maybe
+[0:59:19] we we can think about Yeah. Uh uh maybe you
+[0:59:20] you &gt;&gt; you want to see do you also have some
+[0:59:22] &gt;&gt; you want to see do you also have some other thoughts or
+[0:59:25] other thoughts or &gt;&gt; yeah I think you yeah you covered the
+[0:59:28] &gt;&gt; yeah I think you yeah you covered the you answered it very well. Yeah I I
+[0:59:30] you answered it very well. Yeah I I think yeah it's the deep extensions
+[0:59:32] think yeah it's the deep extensions extensions is something we we are trying
+[0:59:35] extensions is something we we are trying to work on but yeah it's just doing
+[0:59:37] to work on but yeah it's just doing theory is is hard but in practice you
+[0:59:40] theory is is hard but in practice you can always try it and then do some kind
+[0:59:42] can always try it and then do some kind of model selection on the target data
+[0:59:44] of model selection on the target data set. uh yeah but I think that's what a
+[0:59:48] set. uh yeah but I think that's what a lot of applied people do they just get
+[0:59:50] lot of applied people do they just get some intuition they might not explicitly
+[0:59:53] some intuition they might not explicitly explain it with mass but they they get
+[0:59:56] explain it with mass but they they get get those intuition and try it on the
+[0:59:58] get those intuition and try it on the label target data set that that I think
+[1:00:00] label target data set that that I think makes also this semi-supervised domain
+[1:00:03] makes also this semi-supervised domain is kind of more practical kind of sense
+[1:00:06] is kind of more practical kind of sense yeah
+[1:00:07] yeah &gt;&gt; right I I think just to add to that I
+[1:00:08] &gt;&gt; right I I think just to add to that I mean one of the potential problems I can
+[1:00:11] mean one of the potential problems I can also see of working with something which
+[1:00:12] also see of working with something which is maybe too flexible
+[1:00:14] is maybe too flexible is that you're going to lose that kind
+[1:00:15] is that you're going to lose that kind of you know like causal interpretability
+[1:00:18] of you know like causal interpretability which you know is obviously a lot more
+[1:00:21] which you know is obviously a lot more uh uh it's a lot easier to understand
+[1:00:23] uh uh it's a lot easier to understand when you have this these kind of nice uh
+[1:00:25] when you have this these kind of nice uh linear causal models. So u I'm not sure
+[1:00:28] linear causal models. So u I'm not sure if interpretability is a thing that that
+[1:00:29] if interpretability is a thing that that matters in this area but you'd probably
+[1:00:31] matters in this area but you'd probably lose that I guess if if you went to
+[1:00:33] lose that I guess if if you went to something more complicated like a deep
+[1:00:34] something more complicated like a deep model.
+[1:00:37] model. &gt;&gt; Yeah I I totally agree. Yes.
+[1:00:46] Cool. I I also have a very quick question. So I asked you answer in chat
+[1:00:49] question. So I asked you answer in chat already. So this is essentially just
+[1:00:51] already. So this is essentially just about hybrid shift. So I could imagine
+[1:00:52] about hybrid shift. So I could imagine that in the real world there it's
+[1:00:54] that in the real world there it's probably not just one distribution, but
+[1:00:55] probably not just one distribution, but it might be like a a mix of different
+[1:00:58] it might be like a a mix of different shifts, right? So you could think about
+[1:00:59] shifts, right? So you could think about sparse connectivity plus a confounder
+[1:01:02] sparse connectivity plus a confounder shift or you could think about sparse
+[1:01:04] shift or you could think about sparse connectivity plus a do style adversarial
+[1:01:07] connectivity plus a do style adversarial shift or maybe even try to think about
+[1:01:10] shift or maybe even try to think about you know coariant shift plus some of
+[1:01:12] you know coariant shift plus some of these shift whatever that means exactly
+[1:01:14] these shift whatever that means exactly right do you have any any thoughts like
+[1:01:16] right do you have any any thoughts like whether your ideas can be extended to
+[1:01:19] whether your ideas can be extended to that setting or like what you would like
+[1:01:21] that setting or like what you would like to see first there
+[1:01:28] &gt;&gt; um yeah that is a very interesting question.
+[1:01:31] question. So,
+[1:01:33] So, so I'm not sure if our fine-tuning
+[1:01:36] so I'm not sure if our fine-tuning algorithms
+[1:01:37] algorithms can can be sequentially combined
+[1:01:39] can can be sequentially combined togethers to address this uh the joint
+[1:01:42] togethers to address this uh the joint shift where like you have a let's say
+[1:01:45] shift where like you have a let's say the sparse sparse connectivity and um
+[1:01:48] the sparse sparse connectivity and um the additive compounded interventions
+[1:01:52] the additive compounded interventions maybe you can first
+[1:01:54] maybe you can first uh try to find some embarrasses to
+[1:01:57] uh try to find some embarrasses to address the compounded additive
+[1:01:58] address the compounded additive interventions and Then
+[1:02:01] interventions and Then sequentially you also use some A1 uh
+[1:02:04] sequentially you also use some A1 uh sparse uh regression type algorithms to
+[1:02:08] sparse uh regression type algorithms to to address the sparse connectivity
+[1:02:11] to address the sparse connectivity perturbations. Uh but I'm not sure how
+[1:02:13] perturbations. Uh but I'm not sure how how this actually works in theory. Uh
+[1:02:16] how this actually works in theory. Uh it's just my guess. We haven't really
+[1:02:18] it's just my guess. We haven't really thought about this very seriously. Uh
+[1:02:20] thought about this very seriously. Uh but that's very interesting question.
+[1:02:23] but that's very interesting question. &gt;&gt; Sure. Sure. Thank you. Thank you.
+[1:02:30] &gt;&gt; Cool. All right, I think yeah, we're you know
+[1:02:32] know one hour so we time now. So yeah, let's
+[1:02:36] one hour so we time now. So yeah, let's quickly thank everyone again. Yeah,
+[1:02:37] quickly thank everyone again. Yeah, first thanks for super interesting talk
+[1:02:39] first thanks for super interesting talk and Jason for a cool very interesting
+[1:02:42] and Jason for a cool very interesting discussion. Thank you also Yansi for
+[1:02:45] discussion. Thank you also Yansi for being here and answering the questions
+[1:02:47] being here and answering the questions in in Q&amp;A. Um thank you all for coming.
+[1:02:50] in in Q&amp;A. Um thank you all for coming. Also, um, next week we're going to have
+[1:02:52] Also, um, next week we're going to have Linbo Wang from the University of
+[1:02:53] Linbo Wang from the University of Toronto who will talk about the
+[1:02:55] Toronto who will talk about the synthetic instrument from sparse
+[1:02:56] synthetic instrument from sparse association to sparse causation. Thank
+[1:02:59] association to sparse causation. Thank you all for coming. I hope you have a
+[1:03:01] you all for coming. I hope you have a great week and say you see you next
+[1:03:02] great week and say you see you next week.

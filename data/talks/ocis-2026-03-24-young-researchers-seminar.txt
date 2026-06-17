@@ -1,0 +1,1425 @@
+[0:00:06] Okay, welcome everyone to another edition of the online causal inference
+[0:00:08] edition of the online causal inference seminar. So today we have a young
+[0:00:10] seminar. So today we have a young researcher seminar. So two speakers. So
+[0:00:13] researcher seminar. So two speakers. So we'll begin with Jakamoa
+[0:00:16] we'll begin with Jakamoa from University of Bologna and then uh
+[0:00:19] from University of Bologna and then uh this will be followed up by William
+[0:00:20] this will be followed up by William Beaman from the University of
+[0:00:23] Beaman from the University of Pennsylvania. So I'll now hand over to
+[0:00:26] Pennsylvania. So I'll now hand over to Rahul to explain how the questions will
+[0:00:29] Rahul to explain how the questions will work.
+[0:00:34] Very good. So questions are welcome in the chat. Um they'll accumulate and uh I
+[0:00:38] the chat. Um they'll accumulate and uh I will play a partial uh curation role to
+[0:00:42] will play a partial uh curation role to to highlight uh ones that I think are
+[0:00:45] to highlight uh ones that I think are important for Jakamo. Jako, would you
+[0:00:46] important for Jakamo. Jako, would you like are there specific moments along
+[0:00:48] like are there specific moments along your talk which you'd like to take
+[0:00:50] your talk which you'd like to take questions or just at the end? What would
+[0:00:51] questions or just at the end? What would you prefer?
+[0:00:52] you prefer? &gt;&gt; Yeah, I think it's fine either way also
+[0:00:55] &gt;&gt; Yeah, I think it's fine either way also as they come. That's that's totally fine
+[0:00:57] as they come. That's that's totally fine to me. Yeah.
+[0:00:58] to me. Yeah. &gt;&gt; Fantastic. And with your permission,
+[0:01:00] &gt;&gt; Fantastic. And with your permission, I'll interrupt you from time to time
+[0:01:01] I'll interrupt you from time to time with very good questions.
+[0:01:03] with very good questions. &gt;&gt; Yes.
+[0:01:05] &gt;&gt; Yes. &gt;&gt; Okay. Chak, do you want to share?
+[0:01:08] &gt;&gt; Okay. Chak, do you want to share? &gt;&gt; Yes. Let me share my screen.
+[0:01:18] All right. So, I have 25 minutes, right? &gt;&gt; Yeah.
+[0:01:19] &gt;&gt; Yeah. &gt;&gt; Okay. Cool. Um, yeah. So, thanks for
+[0:01:22] &gt;&gt; Okay. Cool. Um, yeah. So, thanks for having me. I am very happy to be here
+[0:01:24] having me. I am very happy to be here virtually here presenting
+[0:01:27] virtually here presenting uh this paper policy learning with
+[0:01:29] uh this paper policy learning with unobserved hetrogenity.
+[0:01:36] Consider a policy makers general problem of targeting interventions across
+[0:01:38] of targeting interventions across individuals to maximize social wealth.
+[0:01:41] individuals to maximize social wealth. Throughout this talk, I will refer to
+[0:01:43] Throughout this talk, I will refer to targeting as to the practice of
+[0:01:44] targeting as to the practice of assigning intervention along individual
+[0:01:47] assigning intervention along individual characteristics and to social as to the
+[0:01:50] characteristics and to social as to the average of an outcome of interest.
+[0:01:53] average of an outcome of interest. As an example, think of an NGO that aims
+[0:01:56] As an example, think of an NGO that aims at fostering economic development in a
+[0:01:58] at fostering economic development in a developing country by providing cash
+[0:02:00] developing country by providing cash transfers to micro entrepreneurs.
+[0:02:03] transfers to micro entrepreneurs. So then the targeting problem in this
+[0:02:05] So then the targeting problem in this case can be framed as the question of
+[0:02:07] case can be framed as the question of who should receive the transfer when the
+[0:02:09] who should receive the transfer when the policy is deployed at scale.
+[0:02:12] policy is deployed at scale. It is especially relevant to get this
+[0:02:14] It is especially relevant to get this targeting problem right in case there
+[0:02:16] targeting problem right in case there are some entrepreneurs that would
+[0:02:18] are some entrepreneurs that would observe their profits to decrease had
+[0:02:21] observe their profits to decrease had they received the uh the cash transfer.
+[0:02:23] they received the uh the cash transfer. This could be the case for instance
+[0:02:25] This could be the case for instance because they don't know really how to
+[0:02:26] because they don't know really how to spend those money and they would end up
+[0:02:28] spend those money and they would end up spending them in the wrong way.
+[0:02:31] spending them in the wrong way. In fact, there's a large evidence in
+[0:02:34] In fact, there's a large evidence in applied microeconomic research of the
+[0:02:36] applied microeconomic research of the fact that interventions effects do vary
+[0:02:39] fact that interventions effects do vary quite substantially across individuals
+[0:02:41] quite substantially across individuals even in their side. As a result, a given
+[0:02:44] even in their side. As a result, a given policy can be at the same time uh
+[0:02:47] policy can be at the same time uh beneficial for some and determental for
+[0:02:49] beneficial for some and determental for others.
+[0:02:50] others. In light of this finding, policy makers
+[0:02:52] In light of this finding, policy makers started testing policies before
+[0:02:54] started testing policies before implementing them at scale. And the idea
+[0:02:57] implementing them at scale. And the idea of this practice is essentially being
+[0:02:59] of this practice is essentially being able to target only those or to assign
+[0:03:02] able to target only those or to assign the treatment only to those individual
+[0:03:05] the treatment only to those individual expected to benefit from it while
+[0:03:07] expected to benefit from it while protecting all the others.
+[0:03:10] protecting all the others. In response of this need,
+[0:03:12] In response of this need, econometricians and statisticians and
+[0:03:14] econometricians and statisticians and computer scientists developed a toolbox
+[0:03:16] computer scientists developed a toolbox which is often called policy learning or
+[0:03:19] which is often called policy learning or targeting.
+[0:03:20] targeting. In its simplest form, policy learning is
+[0:03:23] In its simplest form, policy learning is about levering gene randomized control
+[0:03:25] about levering gene randomized control trials running random samples of a given
+[0:03:28] trials running random samples of a given population of interest to learn
+[0:03:30] population of interest to learn assignment rules that will perform well
+[0:03:32] assignment rules that will perform well once applied to the full population.
+[0:03:36] once applied to the full population. The state-of-the-art assumes that all
+[0:03:39] The state-of-the-art assumes that all policy relevant dimensions are perfectly
+[0:03:41] policy relevant dimensions are perfectly observed.
+[0:03:43] observed. Motivated by the empirical fact that an
+[0:03:45] Motivated by the empirical fact that an observed dimension do explain quite a
+[0:03:48] observed dimension do explain quite a large portion of heterogenating
+[0:03:50] large portion of heterogenating treatment effects and by the key fact
+[0:03:53] treatment effects and by the key fact that those dimension are by definition
+[0:03:55] that those dimension are by definition unobserved and therefore need to be
+[0:03:57] unobserved and therefore need to be estimated or measured with some error. I
+[0:03:59] estimated or measured with some error. I asked the question of when and how to
+[0:04:02] asked the question of when and how to account for an observatory in the policy
+[0:04:05] account for an observatory in the policy learning problem.
+[0:04:12] So to understand better what policy learning is about and to introduce for
+[0:04:14] learning is about and to introduce for more formally an observatory let's go
+[0:04:17] more formally an observatory let's go back to our example and put some muff
+[0:04:19] back to our example and put some muff on. So we have this cash transfer binary
+[0:04:22] on. So we have this cash transfer binary policy that is assigned to micro
+[0:04:24] policy that is assigned to micro entrepreneurs and we see a random sample
+[0:04:27] entrepreneurs and we see a random sample of let's say the population of Indian
+[0:04:29] of let's say the population of Indian entrepreneurs. We run an experiment to
+[0:04:31] entrepreneurs. We run an experiment to evaluate the effect of providing
+[0:04:33] evaluate the effect of providing entrepreneurs with this cash transfer on
+[0:04:35] entrepreneurs with this cash transfer on for instance their profits. Let's say
+[0:04:37] for instance their profits. Let's say for simplicity that highly educated uh
+[0:04:40] for simplicity that highly educated uh entrepreneurs perceive a positive
+[0:04:42] entrepreneurs perceive a positive treatment effect from receiving the cash
+[0:04:44] treatment effect from receiving the cash transfer and poorly educated
+[0:04:46] transfer and poorly educated entrepreneurs back. So then the
+[0:04:50] entrepreneurs back. So then the targeting question becomes who should be
+[0:04:53] targeting question becomes who should be treated or who who should we provide
+[0:04:54] treated or who who should we provide with the cash transfer in the full
+[0:04:56] with the cash transfer in the full population of entrepreneurs and a simple
+[0:05:00] population of entrepreneurs and a simple policy rule that would fit in this
+[0:05:01] policy rule that would fit in this example would be well just assign it to
+[0:05:03] example would be well just assign it to highly educated entrepreneurs.
+[0:05:06] highly educated entrepreneurs. So then if you allow for
+[0:05:08] So then if you allow for unobservogenity, we are essentially
+[0:05:10] unobservogenity, we are essentially saying, well wait a minute, there's also
+[0:05:12] saying, well wait a minute, there's also an unobserved Latin factor like business
+[0:05:14] an unobserved Latin factor like business skills for instance that matters for the
+[0:05:17] skills for instance that matters for the treatment effect.
+[0:05:19] treatment effect. As a simple example, it could be the
+[0:05:21] As a simple example, it could be the case that uh entrepreneurs with high
+[0:05:24] case that uh entrepreneurs with high education or with a high level of
+[0:05:26] education or with a high level of business skills would perceive a
+[0:05:27] business skills would perceive a positive effect.
+[0:05:29] positive effect. But then at this time this simple
+[0:05:32] But then at this time this simple coariant based policy rule the one of
+[0:05:34] coariant based policy rule the one of treating uh only highly educated
+[0:05:36] treating uh only highly educated individuals is not really optimal
+[0:05:38] individuals is not really optimal anymore because at the same time you
+[0:05:40] anymore because at the same time you could have highly educated individuals
+[0:05:42] could have highly educated individuals that perceive a negative treatment
+[0:05:44] that perceive a negative treatment effect because of their poor business
+[0:05:46] effect because of their poor business skills and poorly educated individuals
+[0:05:48] skills and poorly educated individuals that would perceive a positive treatment
+[0:05:50] that would perceive a positive treatment effect because of their rich uh business
+[0:05:53] effect because of their rich uh business skills.
+[0:05:55] skills. In fact, what an oracle would do is well
+[0:05:57] In fact, what an oracle would do is well just assign the treatment or the cash
+[0:05:59] just assign the treatment or the cash transfer to those individuals whose
+[0:06:01] transfer to those individuals whose combination of values for the education
+[0:06:04] combination of values for the education level and the business skill level map
+[0:06:06] level and the business skill level map into a positive treatment effect. We
+[0:06:08] into a positive treatment effect. We would really like to do that but
+[0:06:10] would really like to do that but unfortunately that's not possible
+[0:06:12] unfortunately that's not possible because of two main reasons. The first
+[0:06:15] because of two main reasons. The first one is rather general and it's not
+[0:06:17] one is rather general and it's not really about an observatory.
+[0:06:19] really about an observatory. It's really that we don't only observe a
+[0:06:21] It's really that we don't only observe a random sample of a given population of
+[0:06:23] random sample of a given population of interest and we don't have a full
+[0:06:26] interest and we don't have a full knowledge about the causal load that
+[0:06:27] knowledge about the causal load that underlies the data. So this is a very
+[0:06:30] underlies the data. So this is a very you know fundamental problem that is
+[0:06:32] you know fundamental problem that is widely studied in previous literature in
+[0:06:34] widely studied in previous literature in policy learning and more broadly in
+[0:06:36] policy learning and more broadly in statistical learning. But I argue
+[0:06:38] statistical learning. But I argue there's also a second problem that is
+[0:06:40] there's also a second problem that is specific to the case of unobservatory
+[0:06:42] specific to the case of unobservatory that relates to the fact that we don't
+[0:06:44] that relates to the fact that we don't really observe the the actual values of
+[0:06:48] really observe the the actual values of our latent characteristic in the example
+[0:06:50] our latent characteristic in the example the business skills. A possible solution
+[0:06:53] the business skills. A possible solution would then be to learn uh estimates or
+[0:06:56] would then be to learn uh estimates or measure proxies of this latent factor
+[0:06:58] measure proxies of this latent factor and then learn the optimal policy upon
+[0:07:01] and then learn the optimal policy upon these values.
+[0:07:04] these values. So a great deal of of the theory work
+[0:07:08] So a great deal of of the theory work that I did for this project was
+[0:07:09] that I did for this project was essentially trying to understand whether
+[0:07:11] essentially trying to understand whether the quality or more formally the
+[0:07:13] the quality or more formally the precision of such an estimate or such a
+[0:07:16] precision of such an estimate or such a proxy really uh matters for the
+[0:07:19] proxy really uh matters for the performance of the policies that we
+[0:07:21] performance of the policies that we learn upon those estimated values.
+[0:07:24] learn upon those estimated values. Or in other words, whether estimated
+[0:07:26] Or in other words, whether estimated Latin characteristics can improve policy
+[0:07:29] Latin characteristics can improve policy recommendations when treatment effects
+[0:07:31] recommendations when treatment effects vary along their true values.
+[0:07:40] The paper is divided in three uh in three parts. In the first part, I argue
+[0:07:42] three parts. In the first part, I argue that the answer to this question is
+[0:07:44] that the answer to this question is really not trivial. In fact, it involves
+[0:07:46] really not trivial. In fact, it involves an approximation estimation error
+[0:07:48] an approximation estimation error trade-off.
+[0:07:50] trade-off. In particular, I showed that the
+[0:07:52] In particular, I showed that the increase in policy space complexity due
+[0:07:54] increase in policy space complexity due to adding one dimension to the decision
+[0:07:56] to adding one dimension to the decision problem is worth its price only if the
+[0:08:00] problem is worth its price only if the variation in treatment effects due to
+[0:08:01] variation in treatment effects due to the Latin factor exceeds the noise
+[0:08:04] the Latin factor exceeds the noise injected from the proxy into the
+[0:08:06] injected from the proxy into the decision problem.
+[0:08:09] decision problem. To study formal trade-off, I provide
+[0:08:11] To study formal trade-off, I provide theoretical guarantees uh comparing the
+[0:08:13] theoretical guarantees uh comparing the performance of policy views that of
+[0:08:16] performance of policy views that of policy rules that include this proxy or
+[0:08:19] policy rules that include this proxy or estimator or or that um ignore and
+[0:08:22] estimator or or that um ignore and observe heterogenity to the performance
+[0:08:24] observe heterogenity to the performance of an oracle that directly observes uh
+[0:08:27] of an oracle that directly observes uh the Latin factor and has complete
+[0:08:29] the Latin factor and has complete knowledge of the causal law that
+[0:08:30] knowledge of the causal law that underlies the data.
+[0:08:33] underlies the data. In the second part of the paper, I study
+[0:08:36] In the second part of the paper, I study the design problem of a policy maker
+[0:08:38] the design problem of a policy maker that can decide how to um collect the
+[0:08:42] that can decide how to um collect the data that will be used to learn the
+[0:08:43] data that will be used to learn the optimal policy. I show that this problem
+[0:08:47] optimal policy. I show that this problem can be framed as an allocation problem
+[0:08:50] can be framed as an allocation problem of fin of finite budget between two
+[0:08:53] of fin of finite budget between two competitive objectives. the one of
+[0:08:55] competitive objectives. the one of increasing precision in the proxy or in
+[0:08:58] increasing precision in the proxy or in the estimate AI hat and the one of
+[0:09:00] the estimate AI hat and the one of increasing precision in the estimated
+[0:09:02] increasing precision in the estimated policy rule itself.
+[0:09:07] In the third and final part of the paper, I make I run two empirical
+[0:09:11] paper, I make I run two empirical exercises taking the data from the
+[0:09:13] exercises taking the data from the example of entrepreneurs and cash
+[0:09:16] example of entrepreneurs and cash transfer that is taken from a paper by
+[0:09:18] transfer that is taken from a paper by Asam Regal and Ro published on the
+[0:09:20] Asam Regal and Ro published on the American economic review in 2022. In the
+[0:09:23] American economic review in 2022. In the first exercise, I show that using
+[0:09:25] first exercise, I show that using estimated business skills to direct
+[0:09:27] estimated business skills to direct transfers increases average profits
+[0:09:31] transfers increases average profits by 8% and halfs the probability of
+[0:09:33] by 8% and halfs the probability of generating welfare losses when scaling
+[0:09:36] generating welfare losses when scaling up the intervention.
+[0:09:38] up the intervention. In the second empirical exercise, I
+[0:09:40] In the second empirical exercise, I consider the data uh of the authors as a
+[0:09:43] consider the data uh of the authors as a pilot study and I estimate how to
+[0:09:45] pilot study and I estimate how to allocate resources between improving on
+[0:09:48] allocate resources between improving on the estimate of of business skills and
+[0:09:51] the estimate of of business skills and increasing the sample size of the
+[0:09:52] increasing the sample size of the experiment essentially uh running a
+[0:09:55] experiment essentially uh running a larger experiment to increase uh the
+[0:09:57] larger experiment to increase uh the precision of the estimated policy
+[0:10:00] precision of the estimated policy itself.
+[0:10:06] In terms of contribution, I argue that I contribute to the theoretical literature
+[0:10:08] contribute to the theoretical literature in policy learning. Um, as this is the
+[0:10:12] in policy learning. Um, as this is the first paper to to the best of my
+[0:10:14] first paper to to the best of my knowledge, this is the first paper to
+[0:10:15] knowledge, this is the first paper to consider noisy policy relevant variables
+[0:10:18] consider noisy policy relevant variables and to understand the trade-offs
+[0:10:19] and to understand the trade-offs connected to it. And I provide a new
+[0:10:21] connected to it. And I provide a new framing for data uh for data collection
+[0:10:24] framing for data uh for data collection problems in in policy learning in this
+[0:10:26] problems in in policy learning in this specific context.
+[0:10:28] specific context. But I argue that I also uh contribute
+[0:10:30] But I argue that I also uh contribute more broadly to the uh political in
+[0:10:33] more broadly to the uh political in applied microeconomics that notice uh
+[0:10:36] applied microeconomics that notice uh the effect the impact of an observed
+[0:10:38] the effect the impact of an observed characteristic in the heterogeneity of
+[0:10:40] characteristic in the heterogeneity of treatment effects by providing new
+[0:10:42] treatment effects by providing new algorithms to evaluate policy
+[0:10:44] algorithms to evaluate policy recommendations before actually
+[0:10:46] recommendations before actually recommending them and plan data
+[0:10:48] recommending them and plan data collections that are aware of the
+[0:10:49] collections that are aware of the trade-offs uh with the estimation error
+[0:10:52] trade-offs uh with the estimation error between the unobserved component and the
+[0:10:55] between the unobserved component and the policy itself.
+[0:10:58] policy itself. Uh Rahul, this could be a good mment to
+[0:11:01] Uh Rahul, this could be a good mment to take questions. Otherwise, I can keep
+[0:11:03] take questions. Otherwise, I can keep going.
+[0:11:06] going. &gt;&gt; It seems everybody perfectly follows and
+[0:11:08] &gt;&gt; It seems everybody perfectly follows and agrees. No questions as yet.
+[0:11:11] agrees. No questions as yet. &gt;&gt; Amazing.
+[0:11:12] &gt;&gt; Amazing. Okay. So, out of these three parts, I
+[0:11:15] Okay. So, out of these three parts, I think uh today I'm going to cover the
+[0:11:17] think uh today I'm going to cover the first two the more theoretical ones as
+[0:11:19] first two the more theoretical ones as uh time uh is running uh is running
+[0:11:22] uh time uh is running uh is running fast. Okay. So let's jump into the
+[0:11:25] fast. Okay. So let's jump into the theory and see the formal setting. Uh
+[0:11:27] theory and see the formal setting. Uh then discuss the assumption and derive
+[0:11:29] then discuss the assumption and derive the main or at least give the intuition
+[0:11:32] the main or at least give the intuition of the main theoretical results of the
+[0:11:33] of the main theoretical results of the paper.
+[0:11:35] paper. So I consider this random vector
+[0:11:37] So I consider this random vector composed of the uh two potential
+[0:11:39] composed of the uh two potential outcomes. A vector of characteristic
+[0:11:41] outcomes. A vector of characteristic observed characteristics XI and a latent
+[0:11:45] observed characteristics XI and a latent component AI that follow a joint
+[0:11:46] component AI that follow a joint distribution that is unknown and on top
+[0:11:49] distribution that is unknown and on top of this a treatment dummy that takes
+[0:11:51] of this a treatment dummy that takes value one with a certain probability
+[0:11:53] value one with a certain probability that is controlled by the observed
+[0:11:55] that is controlled by the observed coariance.
+[0:11:58] coariance. um the observable data. So essentially
+[0:12:00] um the observable data. So essentially the data from this experiment
+[0:12:02] the data from this experiment um are composed of the realized
+[0:12:05] um are composed of the realized potential outcome the vector of of
+[0:12:07] potential outcome the vector of of coariants and uh the treatment done.
+[0:12:12] coariants and uh the treatment done. A policy rule is defined as a mapping
+[0:12:14] A policy rule is defined as a mapping that goes from the policy relevant space
+[0:12:17] that goes from the policy relevant space which is essentially which is denoted in
+[0:12:19] which is essentially which is denoted in general by Z that can be equal to uh
+[0:12:22] general by Z that can be equal to uh this the set of values that coariates
+[0:12:24] this the set of values that coariates can take or the contention product
+[0:12:26] can take or the contention product between that set and the set of values
+[0:12:28] between that set and the set of values that an observed latent compon the the
+[0:12:31] that an observed latent compon the the latent component can take and they map
+[0:12:33] latent component can take and they map into the target set that is uh a set 01
+[0:12:36] into the target set that is uh a set 01 for simplicity but that could be a
+[0:12:38] for simplicity but that could be a larger discrete set.
+[0:12:41] larger discrete set. Um so then I define as coariant based
+[0:12:44] Um so then I define as coariant based those rule that map only coariantss into
+[0:12:46] those rule that map only coariantss into the target set and to and I refer to a
+[0:12:49] the target set and to and I refer to a augmented rules as those that also
+[0:12:52] augmented rules as those that also consider uh the unobserved component. So
+[0:12:55] consider uh the unobserved component. So in our example a coar based rule would
+[0:12:58] in our example a coar based rule would be assign the cash transfer by age and
+[0:13:00] be assign the cash transfer by age and education and an augmented rule would be
+[0:13:03] education and an augmented rule would be also include business skills in the
+[0:13:05] also include business skills in the picture.
+[0:13:10] So, a augmented rules are obviously not feasible because we don't observe AI,
+[0:13:13] feasible because we don't observe AI, but let's say that an estimate or a
+[0:13:15] but let's say that an estimate or a measure of AI is available. And I'm
+[0:13:17] measure of AI is available. And I'm going to be more precise later about the
+[0:13:19] going to be more precise later about the restrictions that I need to put on this
+[0:13:20] restrictions that I need to put on this AI. And we can then define feasible
+[0:13:24] AI. And we can then define feasible augmented rule or a pet augmented rules
+[0:13:27] augmented rule or a pet augmented rules as mapping that goes from the coariantss
+[0:13:30] as mapping that goes from the coariantss and the estimating to the target set. So
+[0:13:32] and the estimating to the target set. So this would be also include estimated
+[0:13:35] this would be also include estimated instead of true business skills uh into
+[0:13:38] instead of true business skills uh into the into the policy relevant set of
+[0:13:40] the into the policy relevant set of parles.
+[0:13:47] So because we want to keep uh tractable the comparison of welfare between
+[0:13:50] the comparison of welfare between different classes of rules, I restrict
+[0:13:53] different classes of rules, I restrict uh my attention to the class of
+[0:13:55] uh my attention to the class of parametric policies that are policies
+[0:13:57] parametric policies that are policies that take value one. Uh if a certain
+[0:13:59] that take value one. Uh if a certain score that is defined by a parametric
+[0:14:02] score that is defined by a parametric function of the uh policy relevant
+[0:14:04] function of the uh policy relevant variables exceed zero. is a very broad
+[0:14:07] variables exceed zero. is a very broad class that um that uh where
+[0:14:12] class that um that uh where most of the practically used or studied
+[0:14:15] most of the practically used or studied policy rules actually fit in. So an
+[0:14:18] policy rules actually fit in. So an example would be rectangular rules that
+[0:14:19] example would be rectangular rules that is just assigning the treatment if the
+[0:14:22] is just assigning the treatment if the set of policy uh relevant variables
+[0:14:25] set of policy uh relevant variables exceed a certain threshold.
+[0:14:32] So the objective function we try to maximize when considering this policy
+[0:14:35] maximize when considering this policy learning problem is expected welfare. So
+[0:14:38] learning problem is expected welfare. So this would be the expectation of the
+[0:14:41] this would be the expectation of the potential outcome that realizes given
+[0:14:43] potential outcome that realizes given the treatment tool GZ GZ. Um an oracle
+[0:14:49] the treatment tool GZ GZ. Um an oracle rule would just be choosing the GZ. So
+[0:14:52] rule would just be choosing the GZ. So inside the class that could be covered
+[0:14:54] inside the class that could be covered based or a hat augmented uh that
+[0:14:57] based or a hat augmented uh that maximizes uh expected welfare
+[0:15:01] maximizes uh expected welfare of course this is not feasible it's an
+[0:15:03] of course this is not feasible it's an anorical quantity because it depends on
+[0:15:05] anorical quantity because it depends on counter factors and solves a a
+[0:15:07] counter factors and solves a a populationwide uh problem. So there's a
+[0:15:11] populationwide uh problem. So there's a need of of an empirical analog and I
+[0:15:14] need of of an empirical analog and I take as an empirical analog the classic
+[0:15:17] take as an empirical analog the classic EWM rule which is just instead of
+[0:15:21] EWM rule which is just instead of putting the expectation you just
+[0:15:23] putting the expectation you just estimate it with the inverse probability
+[0:15:26] estimate it with the inverse probability waiting and you find the rule inside the
+[0:15:28] waiting and you find the rule inside the class that you care about that maximizes
+[0:15:30] class that you care about that maximizes them.
+[0:15:32] them. So this is how we find the rule. How do
+[0:15:34] So this is how we find the rule. How do we evaluate it? And this is actually a
+[0:15:37] we evaluate it? And this is actually a theoretical innovation that I bring in
+[0:15:39] theoretical innovation that I bring in into the paper. I compare the
+[0:15:41] into the paper. I compare the performance of the estimated rules
+[0:15:43] performance of the estimated rules within the class which could be a
+[0:15:45] within the class which could be a coariant based or a augmented
+[0:15:48] coariant based or a augmented uh rule to the welfare generated by an
+[0:15:52] uh rule to the welfare generated by an oracle that not only knows the
+[0:15:54] oracle that not only knows the counterfactual the causal load that
+[0:15:56] counterfactual the causal load that underlies the data but also observe
+[0:15:59] underlies the data but also observe perfectly the unobserved uh uh factor of
+[0:16:02] perfectly the unobserved uh uh factor of interest.
+[0:16:08] So this theoretical innovation is important because it provides a common
+[0:16:09] important because it provides a common ground essentially or a common benchmark
+[0:16:12] ground essentially or a common benchmark to compare different classes.
+[0:16:19] Okay. So we can now go through the assumptions and then state the main
+[0:16:20] assumptions and then state the main theoretical results. So a first set of
+[0:16:24] theoretical results. So a first set of assumption is about the DGP of the
+[0:16:26] assumption is about the DGP of the sample that we will use to estimate the
+[0:16:27] sample that we will use to estimate the policies. So this is composed of three
+[0:16:30] policies. So this is composed of three classical assumptions. First that
+[0:16:32] classical assumptions. First that outcomes are bounded in absolute value
+[0:16:34] outcomes are bounded in absolute value by some constant. Second that um the
+[0:16:38] by some constant. Second that um the assignment of the treatment is
+[0:16:40] assignment of the treatment is independent to the potential outcomes
+[0:16:42] independent to the potential outcomes and to the estimated uh trait condition
+[0:16:46] and to the estimated uh trait condition on the characteristics xi and that the
+[0:16:50] on the characteristics xi and that the propensity scores are known. This is a
+[0:16:52] propensity scores are known. This is a standard. Uh so in in case the data come
+[0:16:56] standard. Uh so in in case the data come from a stratified random experiment,
+[0:16:59] from a stratified random experiment, this would be um kind of the the
+[0:17:02] this would be um kind of the the situation and uh and fin or the
+[0:17:05] situation and uh and fin or the assumption would hold by design and the
+[0:17:07] assumption would hold by design and the final assumption the DGP of SN would be
+[0:17:09] final assumption the DGP of SN would be strict overlap meaning that there is a
+[0:17:11] strict overlap meaning that there is a positive probability for each unit to
+[0:17:13] positive probability for each unit to receive control or to receive the
+[0:17:14] receive control or to receive the treatment.
+[0:17:17] treatment. The second set of assumption is on the
+[0:17:19] The second set of assumption is on the estimate. So here in the presentation I
+[0:17:23] estimate. So here in the presentation I show you the case in which a hat uh
+[0:17:27] show you the case in which a hat uh comes from a measurement with error. So
+[0:17:30] comes from a measurement with error. So in this case we just have that a i is
+[0:17:33] in this case we just have that a i is equal to the true value a i plus an
+[0:17:35] equal to the true value a i plus an error component epsylon i. And I assume
+[0:17:37] error component epsylon i. And I assume this that distribution
+[0:17:40] this that distribution of epsyloni is independ that epylon is
+[0:17:43] of epsyloni is independ that epylon is independent to AI condition on Xi. That
+[0:17:46] independent to AI condition on Xi. That can be that allows for for a hat I to be
+[0:17:50] can be that allows for for a hat I to be arbitrarily biased or to the variance to
+[0:17:54] arbitrarily biased or to the variance to vary with the uh with the
+[0:17:56] vary with the uh with the characteristics XI.
+[0:17:59] characteristics XI. In the paper I also have the case when a
+[0:18:02] In the paper I also have the case when a at i comes from an estimate a data
+[0:18:04] at i comes from an estimate a data dependent estimate that is learned
+[0:18:07] dependent estimate that is learned inside an independent sample.
+[0:18:14] So the final set of assumptions is about the policy space. So first I need the
+[0:18:17] the policy space. So first I need the policy uh uh the the policy class to be
+[0:18:21] policy uh uh the the policy class to be to have uh finite vit dimension
+[0:18:24] to have uh finite vit dimension uh which is a classic uh assumption in
+[0:18:27] uh which is a classic uh assumption in the policy learning literature following
+[0:18:29] the policy learning literature following kaw 2018. Second I need a margin
+[0:18:33] kaw 2018. Second I need a margin condition on the score meaning that the
+[0:18:36] condition on the score meaning that the um probability mass cannot concentrate
+[0:18:38] um probability mass cannot concentrate around the threshold uh the decision
+[0:18:41] around the threshold uh the decision threshold of the of the score function.
+[0:18:44] threshold of the of the score function. And finally that the score function is
+[0:18:47] And finally that the score function is lit continuous. Just a reminder that
+[0:18:49] lit continuous. Just a reminder that this s theta x i is just the score that
+[0:18:53] this s theta x i is just the score that we need to exceed to zero to assign the
+[0:18:55] we need to exceed to zero to assign the treatment.
+[0:19:04] Okay. So these are the assumptions. So what do these assumptions buy? Um so
+[0:19:08] what do these assumptions buy? Um so first uh with these assumptions we can
+[0:19:11] first uh with these assumptions we can derive a regret bound that is
+[0:19:13] derive a regret bound that is non-trivial for coariant based rules. So
+[0:19:16] non-trivial for coariant based rules. So what is this record bound? This is uh an
+[0:19:20] what is this record bound? This is uh an upper bound on the expected difference
+[0:19:22] upper bound on the expected difference between the performance of an oracle
+[0:19:24] between the performance of an oracle that has complete knowledge of the
+[0:19:26] that has complete knowledge of the causal law that underlies the data and
+[0:19:28] causal law that underlies the data and directly observes the latent factor and
+[0:19:31] directly observes the latent factor and the estimated rule considering only
+[0:19:34] the estimated rule considering only coariants. So this would be ghat x.
+[0:19:37] coariants. So this would be ghat x. So this uh the expectation of this
+[0:19:40] So this uh the expectation of this difference is lower or equal than a
+[0:19:42] difference is lower or equal than a first term that is just the the kagram
+[0:19:45] first term that is just the the kagram of upper bound regret.
+[0:19:48] of upper bound regret. So which is bounding the statistical
+[0:19:51] So which is bounding the statistical error due to the fact that we are
+[0:19:52] error due to the fact that we are maximizing the analog of a
+[0:19:54] maximizing the analog of a populationwide problem plus an
+[0:19:57] populationwide problem plus an additional term that is due to the fact
+[0:19:58] additional term that is due to the fact that we are comparing two different
+[0:20:01] that we are comparing two different classes and that xa is richer than x. So
+[0:20:04] classes and that xa is richer than x. So this would just be the uh variance of
+[0:20:07] this would just be the uh variance of the treatment effect conditions. So how
+[0:20:10] the treatment effect conditions. So how much of the variation in the treatment
+[0:20:11] much of the variation in the treatment effect is explained by AI essentially.
+[0:20:15] effect is explained by AI essentially. Moreover, this bound we can show that
+[0:20:17] Moreover, this bound we can show that this is minim uh sharp up to uh constant
+[0:20:21] this is minim uh sharp up to uh constant terms
+[0:20:23] terms as a second result. So this would be uh
+[0:20:26] as a second result. So this would be uh essentially a measure of um of um of
+[0:20:32] essentially a measure of um of um of performance for the coarate based rules.
+[0:20:34] performance for the coarate based rules. And we can do the same thing for a
+[0:20:36] And we can do the same thing for a hatmented rules where essentially this
+[0:20:39] hatmented rules where essentially this bound will have the same additive
+[0:20:42] bound will have the same additive structure but the second term is going
+[0:20:44] structure but the second term is going to depend on the root square error of AI
+[0:20:46] to depend on the root square error of AI hat. Uh so this would be this second
+[0:20:49] hat. Uh so this would be this second term would be bounding essentially the
+[0:20:51] term would be bounding essentially the probability of making a mistake because
+[0:20:53] probability of making a mistake because we are observing AI pet instead of AI
+[0:20:55] we are observing AI pet instead of AI rescaled by the upper bound on the on
+[0:20:58] rescaled by the upper bound on the on the outcome which is index by m.
+[0:21:06] So and also this this bound is minimax sharp up to constants. So finally
+[0:21:09] sharp up to constants. So finally because we have these two sharp bounds
+[0:21:11] because we have these two sharp bounds we can claim uh that in case the
+[0:21:15] we can claim uh that in case the variation in treatment effects due to AI
+[0:21:17] variation in treatment effects due to AI is large enough compared to the root
+[0:21:19] is large enough compared to the root mean square error of of a hat I and the
+[0:21:22] mean square error of of a hat I and the increasing complexity that is due to
+[0:21:24] increasing complexity that is due to adding a hat to the decision problem
+[0:21:27] adding a hat to the decision problem then we so if this is the case then uh
+[0:21:31] then we so if this is the case then uh the lower bound for coariant base rule
+[0:21:33] the lower bound for coariant base rule is bigger than the upper bound for a hat
+[0:21:35] is bigger than the upper bound for a hat augmented rules and therefore it's
+[0:21:37] augmented rules and therefore it's minimax optimal to adopt a hack
+[0:21:39] minimax optimal to adopt a hack augmented rules or in other words to um
+[0:21:43] augmented rules or in other words to um to
+[0:21:45] to um consider an observatory via this
+[0:21:47] um consider an observatory via this proxy and to uh introduce it in the
+[0:21:50] proxy and to uh introduce it in the decision problem.
+[0:21:54] decision problem. Okay,
+[0:21:56] Okay, so the second part of the paper is going
+[0:21:59] so the second part of the paper is going into this minimax collection plans. I
+[0:22:01] into this minimax collection plans. I know this was kind of fast but hopefully
+[0:22:03] know this was kind of fast but hopefully uh clear enough. Um to get through that
+[0:22:06] uh clear enough. Um to get through that we need an additional assumption meaning
+[0:22:08] we need an additional assumption meaning that there exist an information index t
+[0:22:12] that there exist an information index t and an unknown function h that maps
+[0:22:15] and an unknown function h that maps essentially into the root mean square
+[0:22:17] essentially into the root mean square error of uh our estimate. So we can
+[0:22:20] error of uh our estimate. So we can denote a hat i of t as the estimate that
+[0:22:24] denote a hat i of t as the estimate that we produce with information level t and
+[0:22:27] we produce with information level t and then we can calculate the mean square
+[0:22:29] then we can calculate the mean square error of that. So then uh examples would
+[0:22:33] error of that. So then uh examples would would include the sample size that we
+[0:22:35] would include the sample size that we use if we are estimating a hat from from
+[0:22:38] use if we are estimating a hat from from an external sample or the size of a long
+[0:22:41] an external sample or the size of a long dimension of a panel if a pet is coming
+[0:22:44] dimension of a panel if a pet is coming from a fixed effect estimate for
+[0:22:46] from a fixed effect estimate for instance or even uh uh t could uh could
+[0:22:51] instance or even uh uh t could uh could u be the number of measurement if a pet
+[0:22:54] u be the number of measurement if a pet would come from a repeated measurement
+[0:22:57] would come from a repeated measurement type of type of um thing and
+[0:23:03] type of type of um thing and so given this new definition we can
+[0:23:05] so given this new definition we can handle the problem of how to allocate
+[0:23:07] handle the problem of how to allocate resources between improving in the
+[0:23:11] resources between improving in the estimate of a high so essentially we uh
+[0:23:14] estimate of a high so essentially we uh invest in t or if we invest in n so
+[0:23:18] invest in t or if we invest in n so essentially in the sample size of the
+[0:23:20] essentially in the sample size of the experiment that will give us our
+[0:23:22] experiment that will give us our estimate for the optimal policy rule.
+[0:23:26] estimate for the optimal policy rule. So formally we can uh solve the
+[0:23:30] So formally we can uh solve the following problem which is a
+[0:23:31] following problem which is a minimization problem over the
+[0:23:34] minimization problem over the information index and the sample size of
+[0:23:37] information index and the sample size of the experiment that will give us our
+[0:23:38] the experiment that will give us our estimate of the policy rule and we
+[0:23:41] estimate of the policy rule and we minimize the supreum over the DGPS of
+[0:23:44] minimize the supreum over the DGPS of regret where regret is indexed by both
+[0:23:47] regret where regret is indexed by both the information index and the sample
+[0:23:50] the information index and the sample size and this of course is sub this
+[0:23:53] size and this of course is sub this minization is subject to a budget
+[0:23:55] minization is subject to a budget constraint.
+[0:23:56] constraint. which is um essentially just noting that
+[0:24:00] which is um essentially just noting that we it is costly to both collect t and
+[0:24:03] we it is costly to both collect t and collect and so increasing the
+[0:24:06] collect and so increasing the information index of the sample size and
+[0:24:08] information index of the sample size and that we have a finite touch to spend.
+[0:24:17] So the important point is that we have derived regret bounds in theorem one and
+[0:24:19] derived regret bounds in theorem one and two and therefore we can just plug them
+[0:24:21] two and therefore we can just plug them in and rewrite this this this uh maximiz
+[0:24:25] in and rewrite this this this uh maximiz minimization problem as uh by uh
+[0:24:29] minimization problem as uh by uh plugging in the explicit formulas for
+[0:24:31] plugging in the explicit formulas for the regraph bounds.
+[0:24:33] the regraph bounds. So if we further impose some decay loss
+[0:24:38] So if we further impose some decay loss for the root mean square error and some
+[0:24:40] for the root mean square error and some cost functions then we can even get some
+[0:24:43] cost functions then we can even get some uh explicit forms for the optimal uh
+[0:24:47] uh explicit forms for the optimal uh design choices or the minimax optimal
+[0:24:50] design choices or the minimax optimal design choices.
+[0:24:53] design choices. Okay, so I have 1 minute 20 seconds
+[0:24:57] Okay, so I have 1 minute 20 seconds left, which is not probably enough to go
+[0:25:00] left, which is not probably enough to go through the empirical application, but
+[0:25:02] through the empirical application, but let me just show you the two main
+[0:25:04] let me just show you the two main graphs. So uh at least I can convey you
+[0:25:06] graphs. So uh at least I can convey you the intuition.
+[0:25:08] the intuition. So remember that we have this uh uh
+[0:25:11] So remember that we have this uh uh empirical application this setting with
+[0:25:14] empirical application this setting with uh conditional cash transfers in the
+[0:25:16] uh conditional cash transfers in the entrepreneurs and we are interested in
+[0:25:18] entrepreneurs and we are interested in their profits.
+[0:25:20] their profits. So what we can do as a first exercise is
+[0:25:23] So what we can do as a first exercise is ranking the welfare produced from
+[0:25:26] ranking the welfare produced from different type of rules. One type of
+[0:25:28] different type of rules. One type of rules would be just don't scale up the
+[0:25:31] rules would be just don't scale up the the intervention. It's not going to be
+[0:25:32] the intervention. It's not going to be good. A second rule would be well just
+[0:25:36] good. A second rule would be well just scale it up by random assignment. A
+[0:25:38] scale it up by random assignment. A third use only coariance. And a fourth
+[0:25:41] third use only coariance. And a fourth also used this proxy for uh business
+[0:25:44] also used this proxy for uh business skills which is called community rank
+[0:25:46] skills which is called community rank rating.
+[0:25:49] rating. We can do it uh in a fancy way that
+[0:25:51] We can do it uh in a fancy way that allows us to retrieve the um CDF of
+[0:25:54] allows us to retrieve the um CDF of performance over different um um out of
+[0:25:58] performance over different um um out of sample um realizations. And we can show
+[0:26:02] sample um realizations. And we can show essentially that if this is the status
+[0:26:05] essentially that if this is the status quo uh meaning what would happen if we
+[0:26:08] quo uh meaning what would happen if we were not to scale up the intervention
+[0:26:10] were not to scale up the intervention uh and this is the the for instance the
+[0:26:14] uh and this is the the for instance the the light blue line is what happens if
+[0:26:17] the light blue line is what happens if we scale it up by random assignment.
+[0:26:20] we scale it up by random assignment. And then the green line is what would
+[0:26:22] And then the green line is what would happen if we were to scale it up by a
+[0:26:24] happen if we were to scale it up by a coarate based rule. And finally the red
+[0:26:27] coarate based rule. And finally the red line is what would happen if we were to
+[0:26:30] line is what would happen if we were to scale up uh by uh also considering these
+[0:26:33] scale up uh by uh also considering these estimated business skills. So given this
+[0:26:36] estimated business skills. So given this picture we can conclude that well it is
+[0:26:39] picture we can conclude that well it is optimal in this case to include these
+[0:26:42] optimal in this case to include these estimated business skills inside the
+[0:26:44] estimated business skills inside the decision problem. In fact it's
+[0:26:47] decision problem. In fact it's performance is actually stoastically
+[0:26:48] performance is actually stoastically dominant compared to the other two
+[0:26:50] dominant compared to the other two alternatives. And most importantly, we
+[0:26:53] alternatives. And most importantly, we observe a drop in the probability, a
+[0:26:55] observe a drop in the probability, a consistent drop in the probability of
+[0:26:57] consistent drop in the probability of producing welfare losses. Meaning that
+[0:26:59] producing welfare losses. Meaning that by scaling up, we actually achieve a
+[0:27:02] by scaling up, we actually achieve a level of welfare that is lower than the
+[0:27:04] level of welfare that is lower than the status quo. So I think my time is over.
+[0:27:06] status quo. So I think my time is over. So unfortunately I don't I will not
+[0:27:08] So unfortunately I don't I will not cover the the optimal design exercise.
+[0:27:11] cover the the optimal design exercise. So but just let me give you the
+[0:27:14] So but just let me give you the conclusions. Um so I think there's two
+[0:27:16] conclusions. Um so I think there's two main insights from this paper. The first
+[0:27:19] main insights from this paper. The first one is that the quality or precision of
+[0:27:22] one is that the quality or precision of information that we leverage to learn
+[0:27:23] information that we leverage to learn policy really matters uh for the
+[0:27:26] policy really matters uh for the policy's performance. The second insight
+[0:27:29] policy's performance. The second insight is that when planning data collections,
+[0:27:31] is that when planning data collections, we need to allocate a finite batch
+[0:27:33] we need to allocate a finite batch between improving information quality
+[0:27:35] between improving information quality and the precision of the estimated
+[0:27:37] and the precision of the estimated policy itself and we can actually find
+[0:27:39] policy itself and we can actually find some sweet spot that solves this this uh
+[0:27:42] some sweet spot that solves this this uh uh trade-off optimally. And finally in
+[0:27:45] uh trade-off optimally. And finally in the paper I provide this empirical
+[0:27:46] the paper I provide this empirical application and I show intuitive
+[0:27:48] application and I show intuitive procedures to rank policy
+[0:27:50] procedures to rank policy recommendations and to estimate the
+[0:27:52] recommendations and to estimate the optimal designs. So that was it. I'm
+[0:27:55] optimal designs. So that was it. I'm sorry that was fast but uh thanks so
+[0:27:57] sorry that was fast but uh thanks so much for for your attention.
+[0:28:05] &gt;&gt; Jako, I might share one question and ask for a brief answer.
+[0:28:07] for a brief answer. &gt;&gt; Yeah. Um, how would you recommend that
+[0:28:09] &gt;&gt; Yeah. Um, how would you recommend that the researcher uh estimates the
+[0:28:12] the researcher uh estimates the unobserved AI in practice? And do you
+[0:28:15] unobserved AI in practice? And do you view any of your results integrating the
+[0:28:17] view any of your results integrating the learning of AI in the policy learning
+[0:28:19] learning of AI in the policy learning framework? Uh, or otherwise do you view
+[0:28:21] framework? Uh, or otherwise do you view there as future work to properly
+[0:28:22] there as future work to properly integrate it?
+[0:28:28] &gt;&gt; Oh, those are pretty interesting ones. Um, so in the theory, I'm taking the
+[0:28:32] Um, so in the theory, I'm taking the estimate or the measurement as given. So
+[0:28:35] estimate or the measurement as given. So the theoretical result would apply to
+[0:28:37] the theoretical result would apply to any uh you know estimate that you would
+[0:28:40] any uh you know estimate that you would uh come up with as long as you know the
+[0:28:42] uh come up with as long as you know the root means per error essentially and but
+[0:28:45] root means per error essentially and but it I'm totally agree the fact on the
+[0:28:48] it I'm totally agree the fact on the fact that it would be very interesting
+[0:28:50] fact that it would be very interesting to allow the researcher to choose also
+[0:28:53] to allow the researcher to choose also the estimator for AI AI and make that
+[0:28:56] the estimator for AI AI and make that choice indogenous to the decision
+[0:28:58] choice indogenous to the decision problem. So but for the paper is that's
+[0:29:01] problem. So but for the paper is that's a given. Uh for the second question is
+[0:29:04] a given. Uh for the second question is that if I understood correctly it's
+[0:29:06] that if I understood correctly it's about AI right so of the fact that
+[0:29:11] about AI right so of the fact that those AI hat could be uh formed by some
+[0:29:14] those AI hat could be uh formed by some artificial intelligence driven estimate
+[0:29:17] artificial intelligence driven estimate and I did not think much about that. I
+[0:29:20] and I did not think much about that. I guess the major problem would be that
+[0:29:23] guess the major problem would be that it's very hard to give theoretical
+[0:29:25] it's very hard to give theoretical guarantees on the root mean square error
+[0:29:26] guarantees on the root mean square error of those of those algorithms. But uh
+[0:29:29] of those of those algorithms. But uh yeah, that's definitely something
+[0:29:30] yeah, that's definitely something interesting to think about.
+[0:29:37] &gt;&gt; Okay, perfect. Thank you. &gt;&gt; Thanks
+[0:29:39] &gt;&gt; Thanks uh for a great uh great talk and um
+[0:29:43] uh for a great uh great talk and um we'll now hand over to our second uh
+[0:29:46] we'll now hand over to our second uh second speaker William Baker.
+[0:29:51] second speaker William Baker. Yeah, great. Uh, let me share my screen.
+[0:30:01] &gt;&gt; Can you see my screen? Okay. &gt;&gt; Yeah.
+[0:30:02] &gt;&gt; Yeah. &gt;&gt; Okay. Yeah. Well, thank you so much uh
+[0:30:04] &gt;&gt; Okay. Yeah. Well, thank you so much uh Jakamo for the great talk and uh to the
+[0:30:07] Jakamo for the great talk and uh to the organizers uh for inviting me. So, yeah,
+[0:30:09] organizers uh for inviting me. So, yeah, today I'm excited to talk about our new
+[0:30:11] today I'm excited to talk about our new work on sensitivity analysis um for
+[0:30:14] work on sensitivity analysis um for observational studies with many
+[0:30:15] observational studies with many outcomes. And so this is joint work with
+[0:30:18] outcomes. And so this is joint work with um some great collaborators. Um so my
+[0:30:20] um some great collaborators. Um so my adviser at Penn uh Dylan Small and Colin
+[0:30:24] adviser at Penn uh Dylan Small and Colin Fogerty at the University of Michigan.
+[0:30:27] Fogerty at the University of Michigan. So let's uh introduce this problem kind
+[0:30:30] So let's uh introduce this problem kind of under the lens of this motivating
+[0:30:31] of under the lens of this motivating example. Um so uh cardiovascular disease
+[0:30:35] example. Um so uh cardiovascular disease is a leading cause of mortality in the
+[0:30:37] is a leading cause of mortality in the US and throughout the world. Um and
+[0:30:39] US and throughout the world. Um and among the many factors that influence
+[0:30:41] among the many factors that influence cardiovascular outcomes, uh
+[0:30:42] cardiovascular outcomes, uh socioeconomic status is a prominent but
+[0:30:44] socioeconomic status is a prominent but a little bit of a complex underlying um
+[0:30:47] a little bit of a complex underlying um determinant of cardiovascular disease.
+[0:30:50] determinant of cardiovascular disease. So right, we see that um there's
+[0:30:53] So right, we see that um there's multiple studies that suggest
+[0:30:54] multiple studies that suggest associations between household income
+[0:30:56] associations between household income and these cardiovascular disease risk
+[0:30:58] and these cardiovascular disease risk factors. Um we see here um I include an
+[0:31:00] factors. Um we see here um I include an excerpt from a New York Times article um
+[0:31:03] excerpt from a New York Times article um which cites CDC studies and other things
+[0:31:05] which cites CDC studies and other things right which um quantify that there's um
+[0:31:08] right which um quantify that there's um the income gap is becoming a physical
+[0:31:09] the income gap is becoming a physical activity divide even in children and
+[0:31:11] activity divide even in children and adolescence. Um so it's interesting to
+[0:31:14] adolescence. Um so it's interesting to see that these effects are actually
+[0:31:15] see that these effects are actually starting earlier than perhaps we thought
+[0:31:17] starting earlier than perhaps we thought um in like the life course. Um so the
+[0:31:19] um in like the life course. Um so the question that we have is we want to use
+[0:31:21] question that we have is we want to use NHANES data from the CDC and we're going
+[0:31:23] NHANES data from the CDC and we're going to investigate is there a negative
+[0:31:25] to investigate is there a negative causal effect of growing up in poverty
+[0:31:27] causal effect of growing up in poverty with low family income on heart disease
+[0:31:30] with low family income on heart disease risk factors in children and
+[0:31:31] risk factors in children and adolescence. Um so this has previously
+[0:31:34] adolescence. Um so this has previously been answered and addressed a little bit
+[0:31:35] been answered and addressed a little bit um in the context of looking at
+[0:31:37] um in the context of looking at associations but this has not really
+[0:31:39] associations but this has not really been looked at um in the framework of
+[0:31:42] been looked at um in the framework of right assessing robustness to potential
+[0:31:44] right assessing robustness to potential unmeasured biases.
+[0:31:50] So now we're going to just uh give a little bit of background and set up the
+[0:31:52] little bit of background and set up the problem. So working in the potential
+[0:31:53] problem. So working in the potential outcome setting just some notation.
+[0:31:55] outcome setting just some notation. We're going to consider capital I match
+[0:31:57] We're going to consider capital I match sets um with N I individuals per
+[0:32:01] sets um with N I individuals per stratum. So this is we're going to
+[0:32:02] stratum. So this is we're going to accommodate any form of matching. So
+[0:32:04] accommodate any form of matching. So pair matching or perhaps like full
+[0:32:06] pair matching or perhaps like full matching. Um but most of our results are
+[0:32:08] matching. Um but most of our results are presented in the pair match setting.
+[0:32:15] Oh sorry great. So we're also going to consider that our treatment is going to
+[0:32:16] consider that our treatment is going to be some binary exposure denoted by Z and
+[0:32:20] be some binary exposure denoted by Z and we're going to consider capital and
+[0:32:22] we're going to consider capital and total subjects. Uh we're going to have
+[0:32:24] total subjects. Uh we're going to have uh for outcome K, we're going to look at
+[0:32:26] uh for outcome K, we're going to look at potential outcomes under treated and
+[0:32:28] potential outcomes under treated and control. And we're not going to observe
+[0:32:29] control. And we're not going to observe these potential outcomes for the same
+[0:32:31] these potential outcomes for the same individual. Instead, we're going to look
+[0:32:32] individual. Instead, we're going to look at this linear combination. We're going
+[0:32:34] at this linear combination. We're going to assume that we've measured some
+[0:32:36] to assume that we've measured some observed confounders given by X while
+[0:32:38] observed confounders given by X while allowing for the possibility of an
+[0:32:40] allowing for the possibility of an unmeasured confounder U. uh our
+[0:32:42] unmeasured confounder U. uh our inference is going to be conditional on
+[0:32:44] inference is going to be conditional on the set containing the potential
+[0:32:45] the set containing the potential outcomes the observed confounder and a
+[0:32:47] outcomes the observed confounder and a potential unobserved confounder while
+[0:32:49] potential unobserved confounder while this like math cal z is going to be the
+[0:32:51] this like math cal z is going to be the events that our treatment assignment
+[0:32:53] events that our treatment assignment satisfies this match design. So if we
+[0:32:56] satisfies this match design. So if we assume that we have a pair match study
+[0:32:58] assume that we have a pair match study um and a randomized trial, we're going
+[0:33:00] um and a randomized trial, we're going to see that the probability of treatment
+[0:33:02] to see that the probability of treatment um will equal a half. But under
+[0:33:04] um will equal a half. But under unobserved um confounding, this may not
+[0:33:07] unobserved um confounding, this may not actually be true.
+[0:33:14] Great. So we're going to work in the uh Rosenbal sensitivity framework. So we're
+[0:33:17] Rosenbal sensitivity framework. So we're going to assume that prior to matching
+[0:33:19] going to assume that prior to matching that each individual is independently
+[0:33:20] that each individual is independently assigned to treatment with some unknown
+[0:33:22] assigned to treatment with some unknown probability here. Um and the Rosenbound
+[0:33:25] probability here. Um and the Rosenbound model is going to stipulate that
+[0:33:26] model is going to stipulate that individuals in a match set can differ in
+[0:33:28] individuals in a match set can differ in their odds of treatment assignment um
+[0:33:31] their odds of treatment assignment um due to the presence of some unmeasured
+[0:33:32] due to the presence of some unmeasured confounder by a factor that's no larger
+[0:33:34] confounder by a factor that's no larger than than gamma. So if we're going to
+[0:33:37] than than gamma. So if we're going to conduct sensitivity analysis for a
+[0:33:38] conduct sensitivity analysis for a single outcome um so without loss of
+[0:33:41] single outcome um so without loss of generality, let's assume that we're
+[0:33:42] generality, let's assume that we're going to look at a test of some
+[0:33:43] going to look at a test of some non-positive treatment effect. Um, one
+[0:33:46] non-positive treatment effect. Um, one way to look at to to test this null is
+[0:33:48] way to look at to to test this null is to consider the class of effect
+[0:33:50] to consider the class of effect increasing sum statistics, which is a
+[0:33:52] increasing sum statistics, which is a very general class that incorporates a
+[0:33:54] very general class that incorporates a bunch of statistics that we can
+[0:33:55] bunch of statistics that we can typically use such as differences in
+[0:33:57] typically use such as differences in means and rank tests. Um, so one results
+[0:33:59] means and rank tests. Um, so one results by coffee at all is that um looking at
+[0:34:02] by coffee at all is that um looking at the Fisher sharpen for these effect
+[0:34:05] the Fisher sharpen for these effect increasing substics um is sufficient to
+[0:34:07] increasing substics um is sufficient to look at these um to do inference for
+[0:34:09] look at these um to do inference for these composite null. So most of our
+[0:34:11] these composite null. So most of our inference is actually going to be
+[0:34:12] inference is actually going to be concerned with Fisher sharp null. So for
+[0:34:15] concerned with Fisher sharp null. So for gamma equals 1, we know the null
+[0:34:17] gamma equals 1, we know the null distribution and this just corresponds
+[0:34:18] distribution and this just corresponds to the the canonical randomization
+[0:34:20] to the the canonical randomization inference where we look at um we can
+[0:34:22] inference where we look at um we can write the individual the null
+[0:34:24] write the individual the null distribution for hypothesis K just using
+[0:34:26] distribution for hypothesis K just using the permutation distribution. Um however
+[0:34:28] the permutation distribution. Um however for gamma that's greater than one um we
+[0:34:30] for gamma that's greater than one um we actually don't know this null
+[0:34:31] actually don't know this null distribution due to the dependence on
+[0:34:33] distribution due to the dependence on this unknown UI. So what we can do is we
+[0:34:36] this unknown UI. So what we can do is we can compute upper bounds on the tail
+[0:34:37] can compute upper bounds on the tail probability um that's compatible with
+[0:34:40] probability um that's compatible with the sensitivity model. So there's
+[0:34:41] the sensitivity model. So there's different ways to do this in par match
+[0:34:43] different ways to do this in par match studies. There's you can use like the
+[0:34:44] studies. There's you can use like the separable algorithm of gas worth at all
+[0:34:47] separable algorithm of gas worth at all which is linear in the number of matched
+[0:34:48] which is linear in the number of matched pairs and then there's some um some
+[0:34:50] pairs and then there's some um some other ways to do it um for general match
+[0:34:53] other ways to do it um for general match structures and then one thing that you
+[0:34:55] structures and then one thing that you could do is you can assess the
+[0:34:56] could do is you can assess the robustness of um your your sensitivity
+[0:34:59] robustness of um your your sensitivity um analysis to potential unmeasured bias
+[0:35:02] um analysis to potential unmeasured bias by the sensitivity value. So this is the
+[0:35:04] by the sensitivity value. So this is the smallest gamma that's greater than or
+[0:35:06] smallest gamma that's greater than or equal to one that the p value for this
+[0:35:07] equal to one that the p value for this outcome is going to be greater than
+[0:35:09] outcome is going to be greater than alpha. So this was introduced by Cheng
+[0:35:11] alpha. So this was introduced by Cheng Yuan who I think is here um I think
+[0:35:13] Yuan who I think is here um I think 2019. So this is going to this is the
+[0:35:17] 2019. So this is going to this is the sensitivity analysis for a single
+[0:35:18] sensitivity analysis for a single outcome. So going back to our motivating
+[0:35:21] outcome. So going back to our motivating example, how can we conduct sensitivity
+[0:35:22] example, how can we conduct sensitivity analysis for multiple outcomes? So one
+[0:35:25] analysis for multiple outcomes? So one thing that we can do is look at this
+[0:35:26] thing that we can do is look at this intersection null hypothesis here which
+[0:35:28] intersection null hypothesis here which is just corresponds to that all of the
+[0:35:31] is just corresponds to that all of the individual H hn knots are going to be
+[0:35:34] individual H hn knots are going to be null. So the alternative is that any of
+[0:35:36] null. So the alternative is that any of these nulls are actually uh are actually
+[0:35:38] these nulls are actually uh are actually false.
+[0:35:41] false. So this uh test of intersection nulls uh
+[0:35:44] So this uh test of intersection nulls uh right has actually been fairly well
+[0:35:45] right has actually been fairly well studied in nonobservational settings. So
+[0:35:48] studied in nonobservational settings. So here we give a bunch of examples of
+[0:35:50] here we give a bunch of examples of methods that have been introduced. Um
+[0:35:52] methods that have been introduced. Um yeah it's there's been classical methods
+[0:35:54] yeah it's there's been classical methods dating back to the 30s and still being
+[0:35:56] dating back to the 30s and still being introduced uh today um that depend you
+[0:35:59] introduced uh today um that depend you can if you know knowledge of the
+[0:36:00] can if you know knowledge of the underlying structures you can uh right
+[0:36:03] underlying structures you can uh right you can choose particular methods.
+[0:36:04] you can choose particular methods. there's more intermediate and adaptive
+[0:36:06] there's more intermediate and adaptive approaches, resampling based approaches
+[0:36:08] approaches, resampling based approaches and a whole bunch of others. Um so
+[0:36:10] and a whole bunch of others. Um so obviously for this um different
+[0:36:12] obviously for this um different conditions on the p values are required
+[0:36:14] conditions on the p values are required for validity. Um but in general this is
+[0:36:17] for validity. Um but in general this is um can be used for a variety of
+[0:36:18] um can be used for a variety of applications. Um and again corresponds
+[0:36:21] applications. Um and again corresponds to the setting where you have many
+[0:36:22] to the setting where you have many hypotheses and you're interested if any
+[0:36:24] hypotheses and you're interested if any of them are actually non-null.
+[0:36:31] So global n testing um can also be particularly valuable in the context of
+[0:36:33] particularly valuable in the context of observational studies. Uh in particular,
+[0:36:36] observational studies. Uh in particular, observational studies typically have
+[0:36:38] observational studies typically have many hypotheses that we may be
+[0:36:39] many hypotheses that we may be interested in. Unlike randomized trials,
+[0:36:41] interested in. Unlike randomized trials, we it's pretty inexpensive to collect
+[0:36:43] we it's pretty inexpensive to collect data. So we tend to have uh superfluous
+[0:36:46] data. So we tend to have uh superfluous data. Um and so one thing that uh has
+[0:36:49] data. Um and so one thing that uh has been thought about is right using these
+[0:36:52] been thought about is right using these global null tests to clarify the step
+[0:36:54] global null tests to clarify the step from association to causation. Uh so
+[0:36:57] from association to causation. Uh so Fischer said to make your theories
+[0:36:59] Fischer said to make your theories elaborate is a good way to do this. Um
+[0:37:01] elaborate is a good way to do this. Um and right so we can design our
+[0:37:02] and right so we can design our observational studies to assess some
+[0:37:04] observational studies to assess some complex pattern of predictions made by a
+[0:37:06] complex pattern of predictions made by a causal theory. Um and so this has been
+[0:37:09] causal theory. Um and so this has been studied but a little less so than in the
+[0:37:11] studied but a little less so than in the uh context of randomized experiments. So
+[0:37:13] uh context of randomized experiments. So this has been introduced in Rosenbal uh
+[0:37:16] this has been introduced in Rosenbal uh 1997 where he considers just a linear
+[0:37:18] 1997 where he considers just a linear combination of your signed rank
+[0:37:19] combination of your signed rank statistics. In 2016 uh Paul Rosenbal
+[0:37:23] statistics. In 2016 uh Paul Rosenbal looks at all linear combinations of your
+[0:37:25] looks at all linear combinations of your statistics. um by employing chef
+[0:37:27] statistics. um by employing chef projections from from Anova. Uh Tinga
+[0:37:30] projections from from Anova. Uh Tinga explores the trade-off between the power
+[0:37:33] explores the trade-off between the power that you gain from looking at these um
+[0:37:36] that you gain from looking at these um different projections but with the
+[0:37:37] different projections but with the corrections that you actually need to do
+[0:37:38] corrections that you actually need to do for multiple testing. Um and also
+[0:37:41] for multiple testing. Um and also recently there's a paper by Peter Cohen
+[0:37:43] recently there's a paper by Peter Cohen and Colin Fogerty uh which restricts the
+[0:37:45] and Colin Fogerty uh which restricts the vector that you're looking at to the
+[0:37:46] vector that you're looking at to the non-gative orthin. So this one's
+[0:37:48] non-gative orthin. So this one's actually probably the most appropriate
+[0:37:49] actually probably the most appropriate for assessing this notion of elaborate
+[0:37:52] for assessing this notion of elaborate theories in the sense that we often
+[0:37:54] theories in the sense that we often expect our elaborate theories to have um
+[0:37:56] expect our elaborate theories to have um to manifest in a particular direction.
+[0:37:58] to manifest in a particular direction. So in the example that we gave for
+[0:38:00] So in the example that we gave for example we may be worried that growing
+[0:38:02] example we may be worried that growing up in poverty can result in your
+[0:38:05] up in poverty can result in your cardiovascular disease risk factors
+[0:38:07] cardiovascular disease risk factors worsening. So that's what we're going to
+[0:38:09] worsening. So that's what we're going to kind of the framework that we're going
+[0:38:10] kind of the framework that we're going to work in for this study.
+[0:38:14] to work in for this study. Um so we're going to uh introduce these
+[0:38:17] Um so we're going to uh introduce these weighted combinations of test
+[0:38:18] weighted combinations of test statistics. So first we're going to
+[0:38:20] statistics. So first we're going to define the conditional probability of
+[0:38:21] define the conditional probability of treatment as uh this row J which because
+[0:38:24] treatment as uh this row J which because it's conditional on this F we know that
+[0:38:26] it's conditional on this F we know that it's we it's unknown due to the
+[0:38:28] it's we it's unknown due to the dependence on the hidden bias. uh as we
+[0:38:31] dependence on the hidden bias. uh as we mentioned we're going to consider these
+[0:38:33] mentioned we're going to consider these um effect increasing sum statistics
+[0:38:35] um effect increasing sum statistics where under the global null these uh qk
+[0:38:38] where under the global null these uh qk are going to be fixed and we can gather
+[0:38:40] are going to be fixed and we can gather these collection of test statistics um
+[0:38:42] these collection of test statistics um and under the null look at its
+[0:38:44] and under the null look at its expectation and covariance in these
+[0:38:46] expectation and covariance in these following forms here. So under suitable
+[0:38:50] following forms here. So under suitable conditions for for the scores and right
+[0:38:52] conditions for for the scores and right now we're just going to assume this
+[0:38:53] now we're just going to assume this positive definitess of the coariance
+[0:38:55] positive definitess of the coariance matrix. We'll relax that later in the
+[0:38:57] matrix. We'll relax that later in the talk. Um right so we can just say that t
+[0:38:59] talk. Um right so we can just say that t will be asintoically multivariant normal
+[0:39:02] will be asintoically multivariant normal once we standardize it. And then we can
+[0:39:04] once we standardize it. And then we can look at this standardized deviate here
+[0:39:05] look at this standardized deviate here which will also be uh standard normal
+[0:39:08] which will also be uh standard normal for a fixed row and some nonzero
+[0:39:10] for a fixed row and some nonzero collection of weights given by lambda.
+[0:39:13] collection of weights given by lambda. So in practice our actual row is going
+[0:39:15] So in practice our actual row is going to be unknown. So what we're going to do
+[0:39:17] to be unknown. So what we're going to do is work inside the sensitivity model and
+[0:39:20] is work inside the sensitivity model and the sensitivity model will act as um u
+[0:39:23] the sensitivity model will act as um u imposing some polyhedral set p gamma of
+[0:39:26] imposing some polyhedral set p gamma of constraints onto our onto our objective.
+[0:39:29] constraints onto our onto our objective. Um
+[0:39:31] Um so for example the we're going to be
+[0:39:34] so for example the we're going to be considering a lot about these weights.
+[0:39:36] considering a lot about these weights. So the coherent rank test of Rosenbal is
+[0:39:38] So the coherent rank test of Rosenbal is just going to be looking at equal
+[0:39:40] just going to be looking at equal equally weighing all of the individual K
+[0:39:42] equally weighing all of the individual K hypotheses. Um while for example if you
+[0:39:45] hypotheses. Um while for example if you were to conduct a single sensitivity
+[0:39:47] were to conduct a single sensitivity analysis for a single outcome you would
+[0:39:49] analysis for a single outcome you would just be looking at the kith um basis
+[0:39:51] just be looking at the kith um basis vector uh the method of fogerty and
+[0:39:53] vector uh the method of fogerty and small in 2016 considers a collection of
+[0:39:56] small in 2016 considers a collection of standard basis vectors um while
+[0:39:58] standard basis vectors um while Rosenbound 2016 looks at the whole real
+[0:40:00] Rosenbound 2016 looks at the whole real line minus the zero vector and coh at
+[0:40:03] line minus the zero vector and coh at all considered the non- negative orthin
+[0:40:05] all considered the non- negative orthin which will just be the positive orthon
+[0:40:06] which will just be the positive orthon without the zero vector. Um
+[0:40:11] without the zero vector. Um so let's uh concretize what exactly the
+[0:40:14] so let's uh concretize what exactly the problem is. So these problems are going
+[0:40:16] problem is. So these problems are going to be assessing right the standardized
+[0:40:18] to be assessing right the standardized deviate here and this is just going to
+[0:40:19] deviate here and this is just going to be presented as like some monotone
+[0:40:21] be presented as like some monotone non-deasing
+[0:40:23] non-deasing um transformation of this standardized
+[0:40:25] um transformation of this standardized deviate here just to make the problem
+[0:40:26] deviate here just to make the problem convex and the idea that uh Cohen at all
+[0:40:29] convex and the idea that uh Cohen at all presents in their in their paper is
+[0:40:31] presents in their in their paper is interpreting this quantity as like a
+[0:40:33] interpreting this quantity as like a two-player game. So what they assume is
+[0:40:35] two-player game. So what they assume is that um this n uh so nature is going to
+[0:40:39] that um this n uh so nature is going to act first to present some worst case
+[0:40:41] act first to present some worst case pattern of hidden bias to our um to our
+[0:40:44] pattern of hidden bias to our um to our standardized deviate and then us as a
+[0:40:46] standardized deviate and then us as a researcher can determine the best linear
+[0:40:48] researcher can determine the best linear combination of the test statistics to
+[0:40:50] combination of the test statistics to com to combat this adversarial
+[0:40:52] com to combat this adversarial assignment of bias. Um so what we can
+[0:40:56] assignment of bias. Um so what we can say is that there exists some constant C
+[0:40:59] say is that there exists some constant C which is parameterized by A sorry by
+[0:41:01] which is parameterized by A sorry by alpha and the uh the weights that you're
+[0:41:03] alpha and the uh the weights that you're working with for which this objective uh
+[0:41:06] working with for which this objective uh is actually um that you'll have be able
+[0:41:09] is actually um that you'll have be able to conduct valid inference under the
+[0:41:11] to conduct valid inference under the global null. So for Cohen at all when
+[0:41:13] global null. So for Cohen at all when they work with the uh the non-gative
+[0:41:16] they work with the uh the non-gative orthin they identify that this value
+[0:41:19] orthin they identify that this value here can be um can be taken using this
+[0:41:22] here can be um can be taken using this quantile from the kiar square
+[0:41:23] quantile from the kiar square distribution. So the kaar square
+[0:41:25] distribution. So the kaar square distribution arises in like some order
+[0:41:27] distribution arises in like some order constrained statistical inference. Um so
+[0:41:30] constrained statistical inference. Um so it works well for their problem but it's
+[0:41:31] it works well for their problem but it's pretty um challenging to work with in
+[0:41:33] pretty um challenging to work with in practice. So for example, the quantiles
+[0:41:35] practice. So for example, the quantiles of this distribution um even if you know
+[0:41:38] of this distribution um even if you know the underlying uh correlation structure
+[0:41:40] the underlying uh correlation structure can only be typically evaluated by
+[0:41:42] can only be typically evaluated by Montzy Carlo. Um and unfortunately for
+[0:41:45] Montzy Carlo. Um and unfortunately for in in practice we don't actually know
+[0:41:47] in in practice we don't actually know the true assignment probabilities
+[0:41:48] the true assignment probabilities because they depend on the um the
+[0:41:50] because they depend on the um the unknown confounding. So we actually have
+[0:41:53] unknown confounding. So we actually have this weird case where the reference
+[0:41:55] this weird case where the reference distribution for our inference is
+[0:41:56] distribution for our inference is actually unknown as well. Um so what
+[0:41:58] actually unknown as well. Um so what they do is they like they can like
+[0:41:59] they do is they like they can like upperbound the uh the critical value.
+[0:42:01] upperbound the uh the critical value. But this just feels like a little bit of
+[0:42:02] But this just feels like a little bit of an unsatisfying approach.
+[0:42:05] an unsatisfying approach. Um, additionally, um, not just being
+[0:42:08] Um, additionally, um, not just being unsatisfying, um, so when we were what
+[0:42:12] unsatisfying, um, so when we were what kind of inspired this project was this,
+[0:42:14] kind of inspired this project was this, uh, these types of previous methods
+[0:42:17] uh, these types of previous methods really work poorly for larger numbers of
+[0:42:20] really work poorly for larger numbers of outcomes. Um, so the reason that this is
+[0:42:22] outcomes. Um, so the reason that this is is that these critical values that I
+[0:42:24] is that these critical values that I introduced previously, um, they tend to
+[0:42:27] introduced previously, um, they tend to scale with the actual number of
+[0:42:28] scale with the actual number of hypotheses that you're looking at. So we
+[0:42:31] hypotheses that you're looking at. So we see that for the method of Cohen at all
+[0:42:33] see that for the method of Cohen at all you're going to be looking at these
+[0:42:35] you're going to be looking at these critical values from the kiar squar
+[0:42:37] critical values from the kiar squar distribution and then the rosebound
+[0:42:39] distribution and then the rosebound paper where you're looking at the real
+[0:42:40] paper where you're looking at the real line you're looking at the kai square
+[0:42:41] line you're looking at the kai square distribution and we see that for any k
+[0:42:45] distribution and we see that for any k that's not very small it's it's very
+[0:42:47] that's not very small it's it's very challenging to actually um even if you
+[0:42:50] challenging to actually um even if you have a very a very uh strong evidence
+[0:42:52] have a very a very uh strong evidence against your global null to actually
+[0:42:54] against your global null to actually reject it because you're going to be
+[0:42:55] reject it because you're going to be comparing your standardized deviate to
+[0:42:57] comparing your standardized deviate to just larger and larger critical values.
+[0:43:00] just larger and larger critical values. Um so in practice we have this concern
+[0:43:01] Um so in practice we have this concern that these methods have very low finite
+[0:43:03] that these methods have very low finite sample power as well as being possibly
+[0:43:05] sample power as well as being possibly computationally challenging. Um so in
+[0:43:08] computationally challenging. Um so in practice actually these previous works
+[0:43:10] practice actually these previous works have all in their data applications and
+[0:43:12] have all in their data applications and their simulations have only considered
+[0:43:14] their simulations have only considered um I think it's up to five outcomes. So
+[0:43:17] um I think it's up to five outcomes. So unfortunately this isn't amendable to
+[0:43:18] unfortunately this isn't amendable to our motivating example where we're going
+[0:43:20] our motivating example where we're going to be looking at a bunch of
+[0:43:21] to be looking at a bunch of cardiovascular disease risk factors. Um
+[0:43:24] cardiovascular disease risk factors. Um so the thing that we kind of resolved on
+[0:43:27] so the thing that we kind of resolved on on is that um if you look at this
+[0:43:29] on is that um if you look at this leftmost column here the standard normal
+[0:43:30] leftmost column here the standard normal distribution the critical value does not
+[0:43:33] distribution the critical value does not change based on the number of hypotheses
+[0:43:35] change based on the number of hypotheses that you're considering. Um so kind of
+[0:43:37] that you're considering. Um so kind of what we're going to aspire to is that if
+[0:43:39] what we're going to aspire to is that if we can spree specify our weights and our
+[0:43:41] we can spree specify our weights and our combination of test statistics. We can
+[0:43:43] combination of test statistics. We can simply compare our objective value to
+[0:43:45] simply compare our objective value to the standard normal reference
+[0:43:46] the standard normal reference distribution to obtain valid inference.
+[0:43:49] distribution to obtain valid inference. So that's going to be the general idea
+[0:43:51] So that's going to be the general idea for this um for our method.
+[0:43:56] Uh let me just check how I'm doing on time. So I think we s okay good. Um so
+[0:43:59] time. So I think we s okay good. Um so this goes align with um so previous
+[0:44:02] this goes align with um so previous works with sample splitting to design
+[0:44:04] works with sample splitting to design observational studies. So this was kind
+[0:44:06] observational studies. So this was kind of first introduced by Ruth Heler in
+[0:44:08] of first introduced by Ruth Heler in 2009 and Paul Rosenum discusses it in
+[0:44:10] 2009 and Paul Rosenum discusses it in his book the design of observational
+[0:44:12] his book the design of observational studies and they really argue that a
+[0:44:14] studies and they really argue that a glimpse of the data can be um helpful in
+[0:44:16] glimpse of the data can be um helpful in guiding decisions in shaping design. Uh
+[0:44:19] guiding decisions in shaping design. Uh so randomly splitting your sample into a
+[0:44:21] so randomly splitting your sample into a smaller planning sample for choosing the
+[0:44:23] smaller planning sample for choosing the design. So for example, choosing your
+[0:44:25] design. So for example, choosing your test statistics um choosing the level of
+[0:44:27] test statistics um choosing the level of unconfoundedness that you want to
+[0:44:29] unconfoundedness that you want to control at um and then a larger analysis
+[0:44:32] control at um and then a larger analysis sample for conducting inference can
+[0:44:33] sample for conducting inference can actually help us enhance our analysis.
+[0:44:36] actually help us enhance our analysis. Um don't sacrifice validity and you can
+[0:44:38] Um don't sacrifice validity and you can also gain the benefits of some data
+[0:44:40] also gain the benefits of some data dependent decisions that you get from
+[0:44:42] dependent decisions that you get from exploratory data analysis.
+[0:44:45] exploratory data analysis. So under certain conditions, data
+[0:44:46] So under certain conditions, data splitting and observational studies can
+[0:44:48] splitting and observational studies can actually improve power in finite
+[0:44:49] actually improve power in finite samples. Um which is a little bit in
+[0:44:51] samples. Um which is a little bit in contradiction to perhaps like the
+[0:44:52] contradiction to perhaps like the canonical statistical wisdom which is
+[0:44:54] canonical statistical wisdom which is right data splitting you'll just lose
+[0:44:56] right data splitting you'll just lose your power because of um the loss of
+[0:44:59] your power because of um the loss of sample size. Um but in the case of
+[0:45:01] sample size. Um but in the case of observational studies um right the the
+[0:45:04] observational studies um right the the bias that you want to correct for
+[0:45:05] bias that you want to correct for typically is worthwhile to split and
+[0:45:08] typically is worthwhile to split and actually deal with that than um the
+[0:45:10] actually deal with that than um the variance that you'll have to deal with
+[0:45:12] variance that you'll have to deal with from from losing the sample size. Um and
+[0:45:15] from from losing the sample size. Um and we have a recent paper in in biometric
+[0:45:17] we have a recent paper in in biometric which uh introduces a method for this.
+[0:45:20] which uh introduces a method for this. Um so this seems like a great idea. Um
+[0:45:22] Um so this seems like a great idea. Um everything's resolved but there is a
+[0:45:24] everything's resolved but there is a potential pitfall um with this idea. So
+[0:45:27] potential pitfall um with this idea. So in particular, estimating the optimal
+[0:45:29] in particular, estimating the optimal combination of test statistics on the
+[0:45:31] combination of test statistics on the planning sample and plugging it in does
+[0:45:32] planning sample and plugging it in does yield valid inference, but it actually
+[0:45:34] yield valid inference, but it actually could be sub-optimal in practice. Um,
+[0:45:36] could be sub-optimal in practice. Um, and the reason is that the problem that
+[0:45:38] and the reason is that the problem that we're considering is actually
+[0:45:39] we're considering is actually fundamentally different from these
+[0:45:41] fundamentally different from these alternative formulations. So as we
+[0:45:44] alternative formulations. So as we mentioned, uh, this left hand side here
+[0:45:45] mentioned, uh, this left hand side here is going to correspond to these previous
+[0:45:47] is going to correspond to these previous methods in which the researcher
+[0:45:48] methods in which the researcher determines the best linear combination
+[0:45:50] determines the best linear combination to combat nature's presentation of the
+[0:45:52] to combat nature's presentation of the worst case pattern of of hidden bias.
+[0:45:55] worst case pattern of of hidden bias. But in we're actually considering this
+[0:45:57] But in we're actually considering this problem on the right hand side here in
+[0:45:59] problem on the right hand side here in which we actually prespecify
+[0:46:01] which we actually prespecify the combination of test statistics and
+[0:46:03] the combination of test statistics and then afterwards nature can actually act
+[0:46:05] then afterwards nature can actually act adversariately in um in response to our
+[0:46:08] adversariately in um in response to our chosen combination. And so indeed the
+[0:46:11] chosen combination. And so indeed the following holds for general sets of
+[0:46:13] following holds for general sets of weights uh here in which case we see
+[0:46:16] weights uh here in which case we see that in general um this minimax
+[0:46:18] that in general um this minimax inequality is just that um right we
+[0:46:21] inequality is just that um right we actually could do worse and underperform
+[0:46:23] actually could do worse and underperform compared to alternative methods. Um and
+[0:46:26] compared to alternative methods. Um and there actually have been examples of
+[0:46:27] there actually have been examples of this such as um Fogerty and small in
+[0:46:29] this such as um Fogerty and small in 2016 um right where you actually do in
+[0:46:32] 2016 um right where you actually do in fact lose power um um if you deal with
+[0:46:35] fact lose power um um if you deal with this right hand side of this inequality
+[0:46:37] this right hand side of this inequality compared to this left hand side.
+[0:46:40] compared to this left hand side. So before I continue maybe I'll just
+[0:46:42] So before I continue maybe I'll just check for for any questions. Um
+[0:46:47] check for for any questions. Um &gt;&gt; we have no questions at this point.
+[0:46:49] &gt;&gt; we have no questions at this point. &gt;&gt; Okay. Yeah. Thank you so much. Um so now
+[0:46:52] &gt;&gt; Okay. Yeah. Thank you so much. Um so now let me um move on to to some theoretical
+[0:46:54] let me um move on to to some theoretical results. So, so we provide for the first
+[0:46:57] results. So, so we provide for the first time a uh novel minimax theorem to this
+[0:47:00] time a uh novel minimax theorem to this literature. Um so here we and we
+[0:47:03] literature. Um so here we and we characterize the set lambda for which
+[0:47:05] characterize the set lambda for which this minimax theorem actually goes
+[0:47:06] this minimax theorem actually goes through which um right is again unique
+[0:47:08] through which um right is again unique to this literature and has been open
+[0:47:10] to this literature and has been open since Rosenbal discussed it in his 2016
+[0:47:12] since Rosenbal discussed it in his 2016 paper. Um so we define this um extended
+[0:47:15] paper. Um so we define this um extended real payoff which is basically going to
+[0:47:17] real payoff which is basically going to be the same thing as we discussed
+[0:47:18] be the same thing as we discussed previously but it also accommodates the
+[0:47:20] previously but it also accommodates the possibility of positive semidefinite um
+[0:47:22] possibility of positive semidefinite um coariance matrices. Um in practice this
+[0:47:25] coariance matrices. Um in practice this isn't actually going to be a very strong
+[0:47:27] isn't actually going to be a very strong assumption to assume positive definite
+[0:47:29] assumption to assume positive definite and it's actually empirically checkable
+[0:47:31] and it's actually empirically checkable at gamma equals 1. Um but we just wanted
+[0:47:33] at gamma equals 1. Um but we just wanted to present it in full generality here.
+[0:47:36] to present it in full generality here. Um so I mentioned that uh the proof uses
+[0:47:38] Um so I mentioned that uh the proof uses science minimax theorem. Um and this
+[0:47:40] science minimax theorem. Um and this result is is really great and applies to
+[0:47:43] result is is really great and applies to these previous examples that we
+[0:47:44] these previous examples that we discussed um Rosenbound's 2016 paper um
+[0:47:47] discussed um Rosenbound's 2016 paper um the constrained version in Cohen at all
+[0:47:49] the constrained version in Cohen at all in 2020 and it actually also um right we
+[0:47:53] in 2020 and it actually also um right we we we now can understand why these
+[0:47:56] we we now can understand why these exceptions exist such as the example in
+[0:47:58] exceptions exist such as the example in Fogerty and small because the set of
+[0:48:00] Fogerty and small because the set of standard basis vectors is not a convex
+[0:48:02] standard basis vectors is not a convex cone. Um so that's kind of the
+[0:48:04] cone. Um so that's kind of the characterization that we introduce here.
+[0:48:06] characterization that we introduce here. Uh we also think that actually the the
+[0:48:09] Uh we also think that actually the the cone may not be strictly necessary but
+[0:48:11] cone may not be strictly necessary but um we introduce it um here for now. Um
+[0:48:14] um we introduce it um here for now. Um as a correlary the minimax inequality is
+[0:48:16] as a correlary the minimax inequality is going to hold for on the positive or um
+[0:48:19] going to hold for on the positive or um and as well as the probability simplex
+[0:48:22] and as well as the probability simplex um assuming convexity these would be
+[0:48:23] um assuming convexity these would be very trivial um without the cone but um
+[0:48:26] very trivial um without the cone but um um so the simplex requires a little bit
+[0:48:28] um so the simplex requires a little bit more work here. Uh I think there's a
+[0:48:30] more work here. Uh I think there's a question in the in the chat. Oh I'm
+[0:48:32] question in the in the chat. Oh I'm sorry that was Aditia. Um great.
+[0:48:36] sorry that was Aditia. Um great. So now that we have this new theorem um
+[0:48:39] So now that we have this new theorem um we can say that so our goal is to say
+[0:48:42] we can say that so our goal is to say that um we could gain in finite samples
+[0:48:44] that um we could gain in finite samples but we want to be sure that we're not
+[0:48:45] but we want to be sure that we're not losing out asmtoically. So in fact if we
+[0:48:48] losing out asmtoically. So in fact if we assume that um that this uh capital
+[0:48:51] assume that um that this uh capital lambda set of weight vectors is actually
+[0:48:53] lambda set of weight vectors is actually this convex cone that we were discussing
+[0:48:55] this convex cone that we were discussing before and that we're going to assume
+[0:48:57] before and that we're going to assume some positive definitess of this
+[0:48:59] some positive definitess of this coariance matrix. the design sensitivity
+[0:49:01] coariance matrix. the design sensitivity that we achieve by conducting
+[0:49:02] that we achieve by conducting sensitivity analysis using our sample
+[0:49:05] sensitivity analysis using our sample splitting approach is actually going to
+[0:49:06] splitting approach is actually going to be the same as on the whole sample. Um
+[0:49:09] be the same as on the whole sample. Um yeah, Aditia you have a you have a
+[0:49:11] yeah, Aditia you have a you have a question.
+[0:49:13] question. &gt;&gt; Uh no, sorry that was accidental. Please
+[0:49:15] &gt;&gt; Uh no, sorry that was accidental. Please go ahead.
+[0:49:16] go ahead. &gt;&gt; Oh okay. Um so this proof relies um on
+[0:49:21] &gt;&gt; Oh okay. Um so this proof relies um on this new minimax theorem that we
+[0:49:22] this new minimax theorem that we introduced and right this before was not
+[0:49:25] introduced and right this before was not actually guaranteed without this
+[0:49:26] actually guaranteed without this characterization of um this convex cone.
+[0:49:30] characterization of um this convex cone. Um so this is great because we we're now
+[0:49:32] Um so this is great because we we're now guaranteed to lose no power asmtoically
+[0:49:34] guaranteed to lose no power asmtoically under this regime while we actually
+[0:49:36] under this regime while we actually typically gain in finite samples.
+[0:49:39] typically gain in finite samples. Um, and just as a quick correlary, um,
+[0:49:43] Um, and just as a quick correlary, um, we're also going to find that the
+[0:49:44] we're also going to find that the contrast that maximizes the sensitivity
+[0:49:46] contrast that maximizes the sensitivity value on the planning sample will
+[0:49:48] value on the planning sample will actually share the same limit as the one
+[0:49:50] actually share the same limit as the one that maximizes the design sensitivity on
+[0:49:52] that maximizes the design sensitivity on the entire sample. And this justifies
+[0:49:54] the entire sample. And this justifies our use of estimating the contrast on
+[0:49:56] our use of estimating the contrast on the first sample and then using it for
+[0:49:58] the first sample and then using it for inference on the on the analysis sample.
+[0:50:02] inference on the on the analysis sample. So just to write this down formally, we
+[0:50:04] So just to write this down formally, we can now describe our method in in
+[0:50:06] can now describe our method in in generality. So, we're just going to
+[0:50:07] generality. So, we're just going to randomly partition our data set into
+[0:50:09] randomly partition our data set into independent and discrete uh planning and
+[0:50:11] independent and discrete uh planning and analysis samples. Um, and then we're
+[0:50:14] analysis samples. Um, and then we're going to choose um from the first sample
+[0:50:16] going to choose um from the first sample a contrast that's going to solve this
+[0:50:18] a contrast that's going to solve this optimization problem. We're going to
+[0:50:20] optimization problem. We're going to look at the probability uh simplex and
+[0:50:23] look at the probability uh simplex and then we're just going to run the the
+[0:50:24] then we're just going to run the the usual uh sensitivity analysis um and
+[0:50:28] usual uh sensitivity analysis um and then return the optimizing value for
+[0:50:30] then return the optimizing value for which this um this maximum is achieved
+[0:50:33] which this um this maximum is achieved which we're going to refer to as gamma
+[0:50:35] which we're going to refer to as gamma planned hat. And then we're just going
+[0:50:36] planned hat. And then we're just going to plug this into the analysis sample
+[0:50:38] to plug this into the analysis sample and solve it here. Um and then right we
+[0:50:41] and solve it here. Um and then right we can just reject the global null if this
+[0:50:43] can just reject the global null if this objective value exceeds the critical
+[0:50:45] objective value exceeds the critical value from the standard normal
+[0:50:46] value from the standard normal distribution. So, and again, so in
+[0:50:48] distribution. So, and again, so in practice, we're going to expect this to
+[0:50:50] practice, we're going to expect this to perform substantially better in terms of
+[0:50:52] perform substantially better in terms of finite sample power um because of when
+[0:50:55] finite sample power um because of when we do a good job specifying this lambda,
+[0:50:58] we do a good job specifying this lambda, we can um compare our standardized
+[0:51:01] we can um compare our standardized deviate to often a way smaller critical
+[0:51:03] deviate to often a way smaller critical value than if we were to um estimate the
+[0:51:06] value than if we were to um estimate the contrast and conduct inference on the
+[0:51:07] contrast and conduct inference on the same sample. So, I I remark that if we
+[0:51:10] same sample. So, I I remark that if we wish to conduct EDA and we have a
+[0:51:12] wish to conduct EDA and we have a sufficiently large sample, this
+[0:51:13] sufficiently large sample, this typically is almost always worthwhile.
+[0:51:16] typically is almost always worthwhile. Um it also gives us some natural
+[0:51:18] Um it also gives us some natural variable selection. Um gives us like a
+[0:51:21] variable selection. Um gives us like a natural way to define composite measures
+[0:51:22] natural way to define composite measures that are robust to potential unmeasured
+[0:51:24] that are robust to potential unmeasured confounding and also is compatible with
+[0:51:27] confounding and also is compatible with multiple testing procedures on trees. So
+[0:51:29] multiple testing procedures on trees. So all of these are going to be illustrated
+[0:51:31] all of these are going to be illustrated in our data application.
+[0:51:33] in our data application. Um so I'll quickly go over some
+[0:51:35] Um so I'll quickly go over some simulation results and the the
+[0:51:37] simulation results and the the application results. So here we're going
+[0:51:39] application results. So here we're going to consider um some equorrelated
+[0:51:42] to consider um some equorrelated outcomes with some constant correlation.
+[0:51:45] outcomes with some constant correlation. Um, and we're going to look at 5, 15,
+[0:51:46] Um, and we're going to look at 5, 15, and 25 outcomes. So, these are larger
+[0:51:49] and 25 outcomes. So, these are larger than all of the previous methods have
+[0:51:51] than all of the previous methods have have studied. Um, and as a result, they
+[0:51:54] have studied. Um, and as a result, they don't really fare very well in this
+[0:51:55] don't really fare very well in this setting. We're going to look at um 300
+[0:51:57] setting. We're going to look at um 300 and a,000 um observations that are going
+[0:52:00] and a,000 um observations that are going to be drawn from a multivariant normal.
+[0:52:02] to be drawn from a multivariant normal. And we're going to have this uh
+[0:52:03] And we're going to have this uh relatively sparse reg sparse regime in
+[0:52:06] relatively sparse reg sparse regime in which 20% of our um outcomes are going
+[0:52:09] which 20% of our um outcomes are going to have a treatment effect of 1/2 while
+[0:52:11] to have a treatment effect of 1/2 while the remainder are going to have a
+[0:52:12] the remainder are going to have a treatment effect of of one/10enth. uh
+[0:52:14] treatment effect of of one/10enth. uh we're going to consider the um the test
+[0:52:17] we're going to consider the um the test statistic to be an M statistic with
+[0:52:19] statistic to be an M statistic with Huber SI function and we're going to
+[0:52:21] Huber SI function and we're going to randomly partition our data into a 2575%
+[0:52:24] randomly partition our data into a 2575% split for um planning the design and
+[0:52:26] split for um planning the design and then conducting inference.
+[0:52:29] then conducting inference. So I'll quickly go over these results.
+[0:52:30] So I'll quickly go over these results. So this is the case of 300 pairs. So our
+[0:52:34] So this is the case of 300 pairs. So our the purple line is going to be the full
+[0:52:35] the purple line is going to be the full sample method of uh Cohen at all which
+[0:52:38] sample method of uh Cohen at all which conducts inference um estimates the
+[0:52:41] conducts inference um estimates the contrast on the same sample. um our our
+[0:52:44] contrast on the same sample. um our our line corresponds to this blue here which
+[0:52:46] line corresponds to this blue here which is right we're going to split our data
+[0:52:48] is right we're going to split our data um estimate the contrast then conduct
+[0:52:50] um estimate the contrast then conduct entrance on the separate sample and then
+[0:52:53] entrance on the separate sample and then this orange line here is going to be
+[0:52:54] this orange line here is going to be some oracle that somehow knows the true
+[0:52:58] some oracle that somehow knows the true um contrast that optimizes design
+[0:53:00] um contrast that optimizes design sensitivity and applies that to the full
+[0:53:01] sensitivity and applies that to the full sample. So in this top row here, this is
+[0:53:04] sample. So in this top row here, this is going to be the uncorrelated setting and
+[0:53:06] going to be the uncorrelated setting and this is going to be the setting with a
+[0:53:08] this is going to be the setting with a slight positive correlation and the
+[0:53:11] slight positive correlation and the columns correspond to an increasing
+[0:53:12] columns correspond to an increasing number of outcomes. So we see for
+[0:53:14] number of outcomes. So we see for example that with larger numbers of
+[0:53:16] example that with larger numbers of outcomes we particularly outperform
+[0:53:18] outcomes we particularly outperform these full sample approaches um and the
+[0:53:21] these full sample approaches um and the benefit becomes even more stark. Um and
+[0:53:24] benefit becomes even more stark. Um and then for a thousand pairs we see that
+[0:53:26] then for a thousand pairs we see that right we actually do very quickly
+[0:53:27] right we actually do very quickly approach um this kind of optimizing
+[0:53:30] approach um this kind of optimizing design sensitivity as well as right we
+[0:53:32] design sensitivity as well as right we this this difference becomes even more
+[0:53:34] this this difference becomes even more pronounced. Um so I have two minutes and
+[0:53:36] pronounced. Um so I have two minutes and I will discuss really quickly our
+[0:53:38] I will discuss really quickly our findings from the data application. Um
+[0:53:41] findings from the data application. Um we consider um growing up below the
+[0:53:43] we consider um growing up below the poverty line as our exposure and then
+[0:53:45] poverty line as our exposure and then above the poverty line as kind of our
+[0:53:47] above the poverty line as kind of our control and then we look at outcomes on
+[0:53:50] control and then we look at outcomes on such as diet, blood pressure, waist to
+[0:53:53] such as diet, blood pressure, waist to height ratio, physical activity and then
+[0:53:55] height ratio, physical activity and then some other laboratory measurements and
+[0:53:57] some other laboratory measurements and again we wish to affect assess like our
+[0:53:59] again we wish to affect assess like our elaborate theory that there is some
+[0:54:01] elaborate theory that there is some negative causal effect of low family
+[0:54:03] negative causal effect of low family income on the emergence of these
+[0:54:05] income on the emergence of these cardiovascular disease risk factors.
+[0:54:08] cardiovascular disease risk factors. Um so this is just saying that we have
+[0:54:11] Um so this is just saying that we have um a pretty good sample size and that we
+[0:54:13] um a pretty good sample size and that we get some uh coariant balance after
+[0:54:15] get some uh coariant balance after matching and what we're going to do is
+[0:54:17] matching and what we're going to do is we're going to run some uh tree testing
+[0:54:20] we're going to run some uh tree testing procedure in order to adjust RP values
+[0:54:22] procedure in order to adjust RP values um and correct for for multiple
+[0:54:24] um and correct for for multiple comparisons. Um so I think this will be
+[0:54:26] comparisons. Um so I think this will be how I conclude. So this is conducting
+[0:54:28] how I conclude. So this is conducting inference at gamma equals 1. So the top
+[0:54:32] inference at gamma equals 1. So the top uh tree here is going to correspond to
+[0:54:34] uh tree here is going to correspond to our method while the bottom one
+[0:54:35] our method while the bottom one corresponds to running the full sample
+[0:54:38] corresponds to running the full sample approach. And so these uh these boxes
+[0:54:41] approach. And so these uh these boxes here correspond to the global nulls
+[0:54:42] here correspond to the global nulls which are exactly what our procedure
+[0:54:44] which are exactly what our procedure targets. Um so these are these on this
+[0:54:48] targets. Um so these are these on this level here correspond to like these age
+[0:54:50] level here correspond to like these age sex strata. Um and then these leaf nodes
+[0:54:52] sex strata. Um and then these leaf nodes here are going to correspond to the
+[0:54:54] here are going to correspond to the particular um outcomes that were
+[0:54:56] particular um outcomes that were recorded within that stratum. So what we
+[0:54:59] recorded within that stratum. So what we see here is that our method um at gamma
+[0:55:02] see here is that our method um at gamma equals 1 is able to reject a bunch of
+[0:55:03] equals 1 is able to reject a bunch of leaf nodes um as well as all these
+[0:55:05] leaf nodes um as well as all these global nulls here while already at gamma
+[0:55:08] global nulls here while already at gamma equals 1 these the full sample procedure
+[0:55:10] equals 1 these the full sample procedure does suffer in terms of in terms of
+[0:55:12] does suffer in terms of in terms of finite sample power. Um and this only
+[0:55:15] finite sample power. Um and this only gets worse and worse as we increase the
+[0:55:17] gets worse and worse as we increase the gamma that we're comparing. For example,
+[0:55:18] gamma that we're comparing. For example, at gamma equals 1.5 the full sample uh
+[0:55:21] at gamma equals 1.5 the full sample uh can't even reject the null of um an
+[0:55:23] can't even reject the null of um an effect in the older age group. um while
+[0:55:26] effect in the older age group. um while our method can keep rejecting for for a
+[0:55:29] our method can keep rejecting for for a larger numbers of gamma. So I think I'm
+[0:55:31] larger numbers of gamma. So I think I'm out of time. So I'll quickly just say
+[0:55:33] out of time. So I'll quickly just say that um um right when we're able to use
+[0:55:37] that um um right when we're able to use data splitting we can inform our design
+[0:55:39] data splitting we can inform our design we can prespecify the combination of
+[0:55:41] we can prespecify the combination of test statistics that we're going to use
+[0:55:42] test statistics that we're going to use and often conduct more powerful
+[0:55:44] and often conduct more powerful inference. In practice, this resulted in
+[0:55:46] inference. In practice, this resulted in us um discovering some various age sex
+[0:55:50] us um discovering some various age sex specific effects of this um
+[0:55:52] specific effects of this um socioeconomic status on cardiovascular
+[0:55:55] socioeconomic status on cardiovascular disease. Um and this warrants some
+[0:55:57] disease. Um and this warrants some further investigation as well. So yeah,
+[0:56:01] further investigation as well. So yeah, uh I'll stop here and thank you all very
+[0:56:03] uh I'll stop here and thank you all very much. Um and I'm happy to answer any
+[0:56:05] much. Um and I'm happy to answer any questions.
+[0:56:13] &gt;&gt; I'm seeing a question in the chat. Um question is does the non- negative
+[0:56:15] question is does the non- negative orphant approach in cohen at all satisfy
+[0:56:18] orphant approach in cohen at all satisfy this assumption uh I guess referring to
+[0:56:20] this assumption uh I guess referring to the convex cone and the minimax theorem
+[0:56:22] the convex cone and the minimax theorem as well if so why did you say it has
+[0:56:25] as well if so why did you say it has poor power
+[0:56:26] poor power &gt;&gt; yeah so thanks a lot ching so so long
+[0:56:29] &gt;&gt; yeah so thanks a lot ching so so long you clarify that so so the non- negative
+[0:56:31] you clarify that so so the non- negative orthin is not actually a convex cone so
+[0:56:34] orthin is not actually a convex cone so the way that we um we characterize it is
+[0:56:37] the way that we um we characterize it is it satisfies the same assumptions as our
+[0:56:39] it satisfies the same assumptions as our theorems because of right the our
+[0:56:42] theorems because of right the our objective is going to be like
+[0:56:43] objective is going to be like homogeneous of degree zero in in lambda.
+[0:56:46] homogeneous of degree zero in in lambda. So let me let me go back. Um
+[0:56:50] So let me let me go back. Um see
+[0:56:52] see um
+[0:56:53] um so that that actually would be
+[0:56:55] so that that actually would be satisfied. So what we're just saying is
+[0:56:57] satisfied. So what we're just saying is that um so the reason that it it does
+[0:57:00] that um so the reason that it it does show low lower finite sample power is
+[0:57:02] show low lower finite sample power is that they don't split their data. That's
+[0:57:05] that they don't split their data. That's that's what we're saying. So what they
+[0:57:06] that's what we're saying. So what they have to they still have to deal with
+[0:57:08] have to they still have to deal with this um conducting inf sorry um
+[0:57:12] this um conducting inf sorry um estimating the optimal contrast and
+[0:57:13] estimating the optimal contrast and conducting inference on the full sample
+[0:57:15] conducting inference on the full sample and using a a worse critical value. Um
+[0:57:18] and using a a worse critical value. Um but yes when we work in their framework
+[0:57:20] but yes when we work in their framework with the non- negative orthin or the
+[0:57:22] with the non- negative orthin or the positive orthin or the probability
+[0:57:23] positive orthin or the probability simplex we're what we're just saying is
+[0:57:25] simplex we're what we're just saying is that we actually can data split and um
+[0:57:29] that we actually can data split and um uh not lose the asmtoic power and often
+[0:57:31] uh not lose the asmtoic power and often gain in the finite sample power. I think
+[0:57:33] gain in the finite sample power. I think that was kind of the um if that makes
+[0:57:36] that was kind of the um if that makes sense.
+[0:57:48] &gt;&gt; Very good. Those are all the questions I see.
+[0:57:49] see. &gt;&gt; Okay.
+[0:58:05] Okay. On that note, maybe I can um wrap up for this week. So, as far as I'm
+[0:58:09] up for this week. So, as far as I'm aware, there's no uh the the the causal
+[0:58:12] aware, there's no uh the the the causal inference online causal inference
+[0:58:14] inference online causal inference seminar for next week is to be decided.
+[0:58:17] seminar for next week is to be decided. Um so, um in that case, I'll just thank
+[0:58:21] Um so, um in that case, I'll just thank both of our excellent speakers again and
+[0:58:24] both of our excellent speakers again and look forward to seeing everyone else
+[0:58:25] look forward to seeing everyone else next time.
+[0:58:31] &gt;&gt; Thank you. so much. &gt;&gt; Thank you very

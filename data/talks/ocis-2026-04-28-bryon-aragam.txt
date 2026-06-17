@@ -1,0 +1,1333 @@
+[0:00:16] It's asking me to join audio, but I should say no.
+[0:00:18] should say no. &gt;&gt; Oh, I think this is recorded.
+[0:00:21] &gt;&gt; Oh, I think this is recorded. Um, we should be able to hear hear us.
+[0:00:26] Um, we should be able to hear hear us. This room is miked.
+[0:00:30] This room is miked. That's it.
+[0:00:54] All right. Um, let's get started. Um, today we're very pleased to have Brian
+[0:00:56] today we're very pleased to have Brian Araban from University of Chicago. I'm
+[0:00:59] Araban from University of Chicago. I'm giving a talk about his work on causal
+[0:01:02] giving a talk about his work on causal representation learning. Brian, feel
+[0:01:05] representation learning. Brian, feel free to talk.
+[0:01:06] free to talk. &gt;&gt; All right. Thank you very much. Uh it's
+[0:01:09] &gt;&gt; All right. Thank you very much. Uh it's my pleasure to uh be here and chat about
+[0:01:13] my pleasure to uh be here and chat about some of our recent work on causal
+[0:01:15] some of our recent work on causal representation learning. So um what I'm
+[0:01:18] representation learning. So um what I'm going to do is uh
+[0:01:22] going to do is uh causal representation learning is this
+[0:01:24] causal representation learning is this problem uh of trying to build generative
+[0:01:27] problem uh of trying to build generative models that learn representations that
+[0:01:29] models that learn representations that have some type of causal semantic
+[0:01:31] have some type of causal semantic structure. And I'm going to give a
+[0:01:34] structure. And I'm going to give a little bit of an introduction to this
+[0:01:35] little bit of an introduction to this problem. Um but to start just to set
+[0:01:38] problem. Um but to start just to set expectations and uh so you know sort of
+[0:01:41] expectations and uh so you know sort of what the model that I'll be actually
+[0:01:42] what the model that I'll be actually talking about is uh I'll present sort of
+[0:01:44] talking about is uh I'll present sort of the basic linear model that we're going
+[0:01:46] the basic linear model that we're going to look at and then I'm going to talk
+[0:01:47] to look at and then I'm going to talk about uh why we're looking at this
+[0:01:49] about uh why we're looking at this particular linear model um and then show
+[0:01:52] particular linear model um and then show some of the potential applications. So
+[0:01:55] some of the potential applications. So um this uh is the model that we're going
+[0:01:58] um this uh is the model that we're going to be interested in today. Uh so uh this
+[0:02:01] to be interested in today. Uh so uh this is just to give sort of a preview. So
+[0:02:04] is just to give sort of a preview. So I'll get into some of the technical
+[0:02:05] I'll get into some of the technical details later on. Uh the model we're
+[0:02:08] details later on. Uh the model we're going to consider is a simple linear
+[0:02:10] going to consider is a simple linear factor model with latent causal
+[0:02:12] factor model with latent causal structure. So the key is uh we have some
+[0:02:16] structure. So the key is uh we have some linear structural equation model over
+[0:02:18] linear structural equation model over some latent factor zed. Uh these are
+[0:02:20] some latent factor zed. Uh these are unobserved and the underlying causal
+[0:02:23] unobserved and the underlying causal structure is also unobserved.
+[0:02:26] structure is also unobserved. That is passed through some linear
+[0:02:28] That is passed through some linear mixing matrix also known as a decoder.
+[0:02:32] mixing matrix also known as a decoder. what we observe is X. Uh and so what we
+[0:02:34] what we observe is X. Uh and so what we have is something that looks a lot like
+[0:02:36] have is something that looks a lot like a classical linear factor model where
+[0:02:38] a classical linear factor model where what we want to do is recover the latent
+[0:02:41] what we want to do is recover the latent factor zed. Uh but moreover we also want
+[0:02:44] factor zed. Uh but moreover we also want to uncover the latent causal structure.
+[0:02:47] to uncover the latent causal structure. So what is that causal structure? Uh
+[0:02:49] So what is that causal structure? Uh this uh structural equation model has
+[0:02:52] this uh structural equation model has the structural coefficients encoded in
+[0:02:54] the structural coefficients encoded in this matrix A which defines of course a
+[0:02:56] this matrix A which defines of course a directed graph uh over these latent
+[0:02:59] directed graph uh over these latent factors. We'll call that G. So our goal
+[0:03:01] factors. We'll call that G. So our goal is to learn the decoder matrix B, the
+[0:03:03] is to learn the decoder matrix B, the latent factor zed, uh as well as this
+[0:03:06] latent factor zed, uh as well as this latent causal model G.
+[0:03:10] latent causal model G. So this is a model that of course is
+[0:03:11] So this is a model that of course is widely used throughout the physical and
+[0:03:13] widely used throughout the physical and social sciences. Uh you can see that
+[0:03:16] social sciences. Uh you can see that this uh covers several special cases of
+[0:03:19] this uh covers several special cases of models that are very important in the
+[0:03:20] models that are very important in the statistics literature. Uh so this
+[0:03:23] statistics literature. Uh so this includes for example sufficient causal
+[0:03:26] includes for example sufficient causal discovery. So if you set the decoder
+[0:03:28] discovery. So if you set the decoder matrix to be the identity, you get rid
+[0:03:30] matrix to be the identity, you get rid of the error and you assume the graph is
+[0:03:32] of the error and you assume the graph is a cyclic. This is just classical linear
+[0:03:34] a cyclic. This is just classical linear structural equation model. You can
+[0:03:36] structural equation model. You can capture regression uh in a similar way
+[0:03:38] capture regression uh in a similar way by focusing on a particular variable.
+[0:03:40] by focusing on a particular variable. We'll talk about this later on. And of
+[0:03:42] We'll talk about this later on. And of course you can also recover a classical
+[0:03:44] course you can also recover a classical factor model by essentially ignoring the
+[0:03:46] factor model by essentially ignoring the causal structure. Uh now what motivates
+[0:03:51] causal structure. Uh now what motivates my interest in this type of model? uh
+[0:03:54] my interest in this type of model? uh not only are the the classical
+[0:03:55] not only are the the classical applications but if you consider the
+[0:03:58] applications but if you consider the nonlinear generation generalization of
+[0:04:00] nonlinear generation generalization of this model uh where instead of a linear
+[0:04:04] this model uh where instead of a linear function mapping zed into X you have
+[0:04:07] function mapping zed into X you have some nonlinear function that maps the
+[0:04:10] some nonlinear function that maps the lane factors as well as the noise into
+[0:04:13] lane factors as well as the noise into what you observe and this generalization
+[0:04:17] what you observe and this generalization uh has been studied for quite a while as
+[0:04:19] uh has been studied for quite a while as a model for representation learning in
+[0:04:21] a model for representation learning in the machine learning and artificial
+[0:04:23] the machine learning and artificial intelligence literature.
+[0:04:25] intelligence literature. So, uh just to make sure we're all on
+[0:04:28] So, uh just to make sure we're all on the same page when I use the term
+[0:04:30] the same page when I use the term representation,
+[0:04:31] representation, uh this is essentially synonymous with
+[0:04:33] uh this is essentially synonymous with latent with a latent factor, but more
+[0:04:35] latent with a latent factor, but more generally you can think of this as some
+[0:04:37] generally you can think of this as some vector summary of some data that is
+[0:04:40] vector summary of some data that is useful for some downstream task. So,
+[0:04:43] useful for some downstream task. So, classically you might think of problems
+[0:04:45] classically you might think of problems like classification and prediction where
+[0:04:46] like classification and prediction where we use deep neural networks to learn
+[0:04:48] we use deep neural networks to learn representations that enable uh
+[0:04:50] representations that enable uh classification. More recently in the
+[0:04:52] classification. More recently in the context of generative AI with things
+[0:04:54] context of generative AI with things like diffusions and large language
+[0:04:56] like diffusions and large language models, you might think of the
+[0:04:57] models, you might think of the downstream task as being sample. Okay.
+[0:05:00] downstream task as being sample. Okay. Uh this idea of learning representations
+[0:05:03] Uh this idea of learning representations for downstream tasks forms the backbone
+[0:05:05] for downstream tasks forms the backbone of many if not most of the modern
+[0:05:08] of many if not most of the modern advances in artificial intelligence. So
+[0:05:10] advances in artificial intelligence. So GPT, clip, units, BERT, all of these
+[0:05:13] GPT, clip, units, BERT, all of these things are based on some type of
+[0:05:15] things are based on some type of representation learning.
+[0:05:18] representation learning. Causal representation learning is the
+[0:05:20] Causal representation learning is the problem of learning representations with
+[0:05:23] problem of learning representations with causal semantics. Uh so the reason we
+[0:05:26] causal semantics. Uh so the reason we would be interested in this type of
+[0:05:27] would be interested in this type of thing uh is out of distribution
+[0:05:30] thing uh is out of distribution generalization would be one example.
+[0:05:32] generalization would be one example. Counterfactual explanations controllable
+[0:05:35] Counterfactual explanations controllable generation. You can think of this as
+[0:05:37] generation. You can think of this as interventions or manipulating uh the
+[0:05:39] interventions or manipulating uh the samples you're generating. And the hope
+[0:05:43] samples you're generating. And the hope is that by learning representations that
+[0:05:45] is that by learning representations that have called semantics, this would enable
+[0:05:47] have called semantics, this would enable these types of uh abilities that current
+[0:05:50] these types of uh abilities that current models lack. Yes,
+[0:05:52] models lack. Yes, &gt;&gt; I have a clarification question. So um
+[0:05:55] &gt;&gt; I have a clarification question. So um so it sounds like if if I think about
+[0:05:57] so it sounds like if if I think about zed as your as a lating representation,
+[0:06:00] zed as your as a lating representation, then your x is a function of the
+[0:06:03] then your x is a function of the representation. But in your informal
+[0:06:05] representation. But in your informal definition, your representation sounds
+[0:06:06] definition, your representation sounds like a function of x.
+[0:06:09] like a function of x. So do these are these kind of used in a
+[0:06:13] So do these are these kind of used in a um vague way that uh
+[0:06:16] um vague way that uh &gt;&gt; so I think I think what you're getting
+[0:06:18] &gt;&gt; so I think I think what you're getting at here is the distinction between what
+[0:06:20] at here is the distinction between what the underlying generative model is
+[0:06:22] the underlying generative model is versus how we actually estimate right so
+[0:06:24] versus how we actually estimate right so of course the estimator is a function of
+[0:06:27] of course the estimator is a function of x because that's the data that we
+[0:06:28] x because that's the data that we observe but the generative model is that
+[0:06:30] observe but the generative model is that you start with zed and then that's
+[0:06:32] you start with zed and then that's what's used to generate x right
+[0:06:35] what's used to generate x right &gt;&gt; but I mean as a statistician I would say
+[0:06:37] &gt;&gt; but I mean as a statistician I would say any kind of summary of the data a vector
+[0:06:40] any kind of summary of the data a vector or not is a statistic. That's kind of
+[0:06:42] or not is a statistic. That's kind of the first thing we learn. So statistics
+[0:06:44] the first thing we learn. So statistics a function of the data.
+[0:06:46] a function of the data. &gt;&gt; Sure.
+[0:06:47] &gt;&gt; Sure. &gt;&gt; How is that different from
+[0:06:48] &gt;&gt; How is that different from representation?
+[0:06:50] representation? &gt;&gt; I think at at a high enough level you
+[0:06:52] &gt;&gt; I think at at a high enough level you can think about that as the same thing
+[0:06:53] can think about that as the same thing if you like.
+[0:06:55] if you like. &gt;&gt; So ultimately we're going to try to
+[0:06:58] &gt;&gt; So ultimately we're going to try to we're going to be estimating these lat
+[0:06:59] we're going to be estimating these lat factors, right? That's what we're trying
+[0:07:00] factors, right? That's what we're trying to do.
+[0:07:03] to do. So when when maybe when we get to the
+[0:07:05] So when when maybe when we get to the part where we actually talk about the
+[0:07:06] part where we actually talk about the estimation, we can try to clarify it.
+[0:07:08] estimation, we can try to clarify it. But yes, there there is an ambiguity
+[0:07:10] But yes, there there is an ambiguity here, but I'm not right now we're not
+[0:07:11] here, but I'm not right now we're not getting into into that detail. So
+[0:07:15] getting into into that detail. So &gt;&gt; okay,
+[0:07:18] &gt;&gt; okay, so the first thing I want to point out
+[0:07:21] so the first thing I want to point out is that of course this is uh this idea
+[0:07:23] is that of course this is uh this idea of using causal ideas in art artificial
+[0:07:26] of using causal ideas in art artificial intelligence is a very old idea dates
+[0:07:28] intelligence is a very old idea dates back well before the 1980s. But I think
+[0:07:31] back well before the 1980s. But I think some of the uh canonical references in
+[0:07:34] some of the uh canonical references in this area date at least back to the
+[0:07:35] this area date at least back to the 1980s. So this is the work from folks at
+[0:07:38] 1980s. So this is the work from folks at CMU of course Uda Pearl's work on
+[0:07:40] CMU of course Uda Pearl's work on probabilistic reasoning and intelligent
+[0:07:42] probabilistic reasoning and intelligent systems uh as well as work on expert
+[0:07:45] systems uh as well as work on expert systems from Lson and Spiegel.
+[0:07:48] systems from Lson and Spiegel. More recently there's been an explosion
+[0:07:50] More recently there's been an explosion of interest in problems related to
+[0:07:52] of interest in problems related to causal AI. So this includes causal
+[0:07:55] causal AI. So this includes causal representation learning which is what
+[0:07:56] representation learning which is what I've talked about but then also many
+[0:07:58] I've talked about but then also many other things like compositional
+[0:07:59] other things like compositional generalization, multi-environment
+[0:08:01] generalization, multi-environment learning, neural causal discovery, lots
+[0:08:03] learning, neural causal discovery, lots of other topics. More recently, some of
+[0:08:05] of other topics. More recently, some of you may have heard of recent advances in
+[0:08:08] you may have heard of recent advances in world models which is very closely
+[0:08:09] world models which is very closely related to what's happening in causal AI
+[0:08:11] related to what's happening in causal AI as well.
+[0:08:13] as well. So to just give you sort of a sense of
+[0:08:15] So to just give you sort of a sense of what are the types of problems we hope
+[0:08:17] what are the types of problems we hope to be able to solve here uh I'll give
+[0:08:19] to be able to solve here uh I'll give you a sort of toy uh task that we would
+[0:08:22] you a sort of toy uh task that we would like a generative model to be able to
+[0:08:23] like a generative model to be able to solve. So here is some observational
+[0:08:25] solve. So here is some observational data. Uh there are three laten factors
+[0:08:28] data. Uh there are three laten factors all corresponding to color in this case.
+[0:08:30] all corresponding to color in this case. So the laten factors are the background
+[0:08:32] So the laten factors are the background color, the object color and it's hard to
+[0:08:35] color, the object color and it's hard to see but there's also a spotlight that
+[0:08:37] see but there's also a spotlight that has uh color that varies in the
+[0:08:40] has uh color that varies in the observational data. uh we are sampling
+[0:08:44] observational data. uh we are sampling uh the laten factors the colors all come
+[0:08:46] uh the laten factors the colors all come from this sort of orange yellow green h
+[0:08:48] from this sort of orange yellow green h use
+[0:08:51] use I can imagine an interventional context
+[0:08:54] I can imagine an interventional context where in the second row here I've
+[0:08:56] where in the second row here I've intervened on the background color so
+[0:08:58] intervened on the background color so I've changed it to go from the uh yellow
+[0:09:02] I've changed it to go from the uh yellow green hue to sort of reds and blues in
+[0:09:05] green hue to sort of reds and blues in the third row I leave the background
+[0:09:07] the third row I leave the background color the same and I intervene on the
+[0:09:09] color the same and I intervene on the object Okay,
+[0:09:13] object Okay, so the first question you could ask is
+[0:09:14] so the first question you could ask is whether or not a model trained on
+[0:09:17] whether or not a model trained on observational data would be able to pick
+[0:09:18] observational data would be able to pick up these uh individual concepts like the
+[0:09:22] up these uh individual concepts like the background and the object color. But the
+[0:09:24] background and the object color. But the more interesting question that we would
+[0:09:26] more interesting question that we would like our uh models to be able to address
+[0:09:28] like our uh models to be able to address is something like this which is can they
+[0:09:31] is something like this which is can they generalize out of distribution
+[0:09:34] generalize out of distribution to compose these different concepts
+[0:09:36] to compose these different concepts together and intervene on multiple
+[0:09:39] together and intervene on multiple concepts uh when they haven't been shown
+[0:09:41] concepts uh when they haven't been shown to the model during training. So this is
+[0:09:43] to the model during training. So this is very important. So in this type of
+[0:09:46] very important. So in this type of setup, you can concoct settings where
+[0:09:49] setup, you can concoct settings where the model has only ever seen data say
+[0:09:51] the model has only ever seen data say from the first three rows and what you
+[0:09:54] from the first three rows and what you want the model to be able to do is to
+[0:09:55] want the model to be able to do is to generate samples from the fourth row.
+[0:09:58] generate samples from the fourth row. And this is genuinely out of
+[0:09:59] And this is genuinely out of distribution by construction. So that's
+[0:10:02] distribution by construction. So that's sort of the the idea
+[0:10:04] sort of the the idea what under there's two abilities that
+[0:10:06] what under there's two abilities that are underlying this. So the first is
+[0:10:08] are underlying this. So the first is what we call abstraction which is the
+[0:10:10] what we call abstraction which is the ability to learn meaningful concepts
+[0:10:12] ability to learn meaningful concepts like color. So think of that as the
+[0:10:15] like color. So think of that as the second and third rows. And from a
+[0:10:17] second and third rows. And from a statistical context, we would think
+[0:10:19] statistical context, we would think about this as identifying latent factors
+[0:10:21] about this as identifying latent factors that correspond to meaningful concepts.
+[0:10:23] that correspond to meaningful concepts. That's the basic uh idea behind
+[0:10:26] That's the basic uh idea behind abstraction.
+[0:10:27] abstraction. Composition is what's happening in the
+[0:10:30] Composition is what's happening in the fourth row, which is the ability to
+[0:10:32] fourth row, which is the ability to reason over combinations of concepts
+[0:10:33] reason over combinations of concepts that haven't been seen together.
+[0:10:36] that haven't been seen together. From a causal perspective, you can think
+[0:10:38] From a causal perspective, you can think about this as out of distribution
+[0:10:39] about this as out of distribution generalization to unseen multi-target
+[0:10:42] generalization to unseen multi-target interventions.
+[0:10:43] interventions. And again, by construction, this is
+[0:10:45] And again, by construction, this is genuinely out of distribution. That's
+[0:10:47] genuinely out of distribution. That's crucial.
+[0:10:49] crucial. So my perspective on this is to
+[0:10:51] So my perspective on this is to interpret composition as a causal
+[0:10:53] interpret composition as a causal property. It is worth pointing out that
+[0:10:55] property. It is worth pointing out that this idea of compositional
+[0:10:56] this idea of compositional generalization encompasses many uh
+[0:10:59] generalization encompasses many uh different abilities in these models. C
+[0:11:02] different abilities in these models. C uh causal generalization being one of
+[0:11:03] uh causal generalization being one of them. That's going to be my
+[0:11:04] them. That's going to be my interpretation, but of course there are
+[0:11:05] interpretation, but of course there are others uh that appear in the literature.
+[0:11:09] others uh that appear in the literature. Okay, so we have three goals. We would
+[0:11:11] Okay, so we have three goals. We would like to be able to identify and learn
+[0:11:13] like to be able to identify and learn these abstract concepts. We would like
+[0:11:14] these abstract concepts. We would like to be able to compose them together and
+[0:11:16] to be able to compose them together and we'd like to do this using existing
+[0:11:18] we'd like to do this using existing proven differentiable architectures.
+[0:11:21] proven differentiable architectures. Now the question is how do we go about
+[0:11:22] Now the question is how do we go about doing this?
+[0:11:24] doing this? Well, the way we do this is we train a
+[0:11:27] Well, the way we do this is we train a generative model that learns an internal
+[0:11:29] generative model that learns an internal causal model that enables this type of
+[0:11:31] causal model that enables this type of generalization.
+[0:11:33] generalization. And in a paper that we just presented a
+[0:11:35] And in a paper that we just presented a few weeks ago, uh we presented an
+[0:11:37] few weeks ago, uh we presented an architecture that accomplished this
+[0:11:38] architecture that accomplished this task. Uh so what I showed you on the
+[0:11:41] task. Uh so what I showed you on the previous slide were not actually uh
+[0:11:43] previous slide were not actually uh samples from the training data, but
+[0:11:44] samples from the training data, but these are actually generated samples
+[0:11:46] these are actually generated samples from the model and the last row that you
+[0:11:48] from the model and the last row that you saw were the generated atom distribution
+[0:11:51] saw were the generated atom distribution samples. Okay,
+[0:11:53] samples. Okay, today's talk is I'm not going to go into
+[0:11:56] today's talk is I'm not going to go into the details of how we did this
+[0:11:57] the details of how we did this specifically uh because what I want to
+[0:11:59] specifically uh because what I want to do is talk about how do we actually know
+[0:12:03] do is talk about how do we actually know that what we're getting out of this is
+[0:12:05] that what we're getting out of this is really causal right so you can train a
+[0:12:07] really causal right so you can train a model like this uh it can generalize out
+[0:12:09] model like this uh it can generalize out of distribution uh but how do you say
+[0:12:13] of distribution uh but how do you say something about what this model is
+[0:12:14] something about what this model is actually doing how do you know that you
+[0:12:16] actually doing how do you know that you didn't just get lucky so the first step
+[0:12:19] didn't just get lucky so the first step of course hopefully I don't need to
+[0:12:20] of course hopefully I don't need to convince this audience is to say
+[0:12:22] convince this audience is to say something about identifiability. Okay.
+[0:12:25] something about identifiability. Okay. Now, this in the context of causal
+[0:12:27] Now, this in the context of causal representation learning, this is at this
+[0:12:29] representation learning, this is at this point a very wellstudied problem. Early
+[0:12:32] point a very wellstudied problem. Early work specifically on causal
+[0:12:34] work specifically on causal representation learning dates back at
+[0:12:35] representation learning dates back at least to the work of Ricardo Silva and
+[0:12:37] least to the work of Ricardo Silva and co-authors in 2006. Uh there have been
+[0:12:40] co-authors in 2006. Uh there have been several follow-up works since then and
+[0:12:42] several follow-up works since then and recent years. So this is a partial list
+[0:12:44] recent years. So this is a partial list from 2023 alone of the uh various papers
+[0:12:49] from 2023 alone of the uh various papers that cover identifiability results in
+[0:12:51] that cover identifiability results in causal representation learning. And I'll
+[0:12:52] causal representation learning. And I'll show you one example on the next slide.
+[0:12:55] show you one example on the next slide. The various assumptions go from linear
+[0:12:57] The various assumptions go from linear models to nonlinear models, soft
+[0:12:59] models to nonlinear models, soft interventions, hard interventions,
+[0:13:01] interventions, hard interventions, single node, multi-node interventions.
+[0:13:02] single node, multi-node interventions. The basic idea is under the right
+[0:13:04] The basic idea is under the right assumptions, you can actually identify
+[0:13:06] assumptions, you can actually identify something in these models. What I want
+[0:13:09] something in these models. What I want to focus on for the rest of this talk is
+[0:13:11] to focus on for the rest of this talk is how do we go beyond identifiability to
+[0:13:14] how do we go beyond identifiability to understand estimation and inference in
+[0:13:17] understand estimation and inference in causal AI. That's the basic goal uh for
+[0:13:20] causal AI. That's the basic goal uh for the rest of today's talk.
+[0:13:27] Okay. So let me show you one example of an identifiability result. This is from
+[0:13:29] an identifiability result. This is from a paper uh that we published uh a few
+[0:13:31] a paper uh that we published uh a few years ago. Again there are many other
+[0:13:33] years ago. Again there are many other similar results along these lines. This
+[0:13:35] similar results along these lines. This is just to give you a flavor of the type
+[0:13:37] is just to give you a flavor of the type of result. So here's a standard setup
+[0:13:40] of result. So here's a standard setup that you would see uh when building a
+[0:13:42] that you would see uh when building a generative model. So you assume the lane
+[0:13:44] generative model. So you assume the lane factors have multivariate gausian prior
+[0:13:47] factors have multivariate gausian prior and then you pass that through some
+[0:13:49] and then you pass that through some injective differentiable decoder some
+[0:13:52] injective differentiable decoder some very complicated deep neural network
+[0:13:53] very complicated deep neural network let's say.
+[0:13:55] let's say. Of course on its own this is not going
+[0:13:57] Of course on its own this is not going to be enough to identify anything in
+[0:13:59] to be enough to identify anything in this model. uh there are multiple ways
+[0:14:01] this model. uh there are multiple ways to push the distribution over zed
+[0:14:03] to push the distribution over zed forward into any distribution that you
+[0:14:05] forward into any distribution that you want
+[0:14:07] want in order to get identifiability. This is
+[0:14:09] in order to get identifiability. This is where we want to actually think about
+[0:14:10] where we want to actually think about the causal structure of this model. So
+[0:14:13] the causal structure of this model. So of course it's a consequence of
+[0:14:14] of course it's a consequence of multivaried normality that you can write
+[0:14:17] multivaried normality that you can write uh this uh the latent factors as a
+[0:14:20] uh this uh the latent factors as a linear structural equation model where
+[0:14:22] linear structural equation model where the structural coefficients follow a DAG
+[0:14:25] the structural coefficients follow a DAG which means now we can talk about things
+[0:14:26] which means now we can talk about things like interventions on these latent
+[0:14:28] like interventions on these latent factors. And so instead of assuming that
+[0:14:30] factors. And so instead of assuming that we have access to just one observational
+[0:14:32] we have access to just one observational data set which is going to make it very
+[0:14:34] data set which is going to make it very difficult to identify anything
+[0:14:36] difficult to identify anything we're going to assume we have access to
+[0:14:38] we're going to assume we have access to multiple data sets arising from multiple
+[0:14:40] multiple data sets arising from multiple environments. And for today I'm going to
+[0:14:42] environments. And for today I'm going to focus on the setting where you have
+[0:14:44] focus on the setting where you have access to interventions.
+[0:14:46] access to interventions. So uh an example of the type of thing
+[0:14:49] So uh an example of the type of thing you can prove in this setting is if you
+[0:14:51] you can prove in this setting is if you have access to latent unknown single
+[0:14:54] have access to latent unknown single node interventions on each of these
+[0:14:56] node interventions on each of these latent factors then the entire model
+[0:14:58] latent factors then the entire model would be unique up to permutation and
+[0:15:00] would be unique up to permutation and scaling. So you get identification of
+[0:15:02] scaling. So you get identification of the latent factors, you get
+[0:15:04] the latent factors, you get identification of the nonlinearity f you
+[0:15:06] identification of the nonlinearity f you get identification of the structural
+[0:15:08] get identification of the structural coefficients as well as the graph again
+[0:15:10] coefficients as well as the graph again up to permutation and scaling.
+[0:15:12] up to permutation and scaling. So there are many similar types of
+[0:15:14] So there are many similar types of results under different types of
+[0:15:15] results under different types of assumptions uh various types of
+[0:15:18] assumptions uh various types of interventions but this is gives you sort
+[0:15:19] interventions but this is gives you sort of a general flavor of what you can do.
+[0:15:23] of a general flavor of what you can do. But what I want to talk about is going
+[0:15:25] But what I want to talk about is going beyond just these identifiability
+[0:15:27] beyond just these identifiability results to say something about
+[0:15:29] results to say something about estimation.
+[0:15:32] estimation. Now in these types of models we sort of
+[0:15:34] Now in these types of models we sort of know estimating causal models is really
+[0:15:37] know estimating causal models is really hard. We also know that estimating
+[0:15:38] hard. We also know that estimating latent variables is a very hard problem.
+[0:15:41] latent variables is a very hard problem. So this is a figure taken from a very
+[0:15:43] So this is a figure taken from a very nice paper. I think it was published at
+[0:15:44] nice paper. I think it was published at ICML last year that took some of these
+[0:15:47] ICML last year that took some of these causal representation learning methods
+[0:15:49] causal representation learning methods and tested them on both synthetic
+[0:15:52] and tested them on both synthetic ablations as well as real data to see
+[0:15:54] ablations as well as real data to see how well they would actually work. And
+[0:15:56] how well they would actually work. And the basic conclusion was that on
+[0:15:58] the basic conclusion was that on synthetic data things worked okay but on
+[0:16:01] synthetic data things worked okay but on real data we ran into challenges right
+[0:16:05] real data we ran into challenges right uh this is not surprising not unexpected
+[0:16:08] uh this is not surprising not unexpected if you've ever tried estimating causal
+[0:16:11] if you've ever tried estimating causal models or estimating latent factor
+[0:16:12] models or estimating latent factor models right so one way to think about
+[0:16:15] models right so one way to think about this at least the way I think about this
+[0:16:17] this at least the way I think about this is when we talk about these causal AI
+[0:16:19] is when we talk about these causal AI problems we're really looking at a
+[0:16:21] problems we're really looking at a statistical world that lies at the
+[0:16:23] statistical world that lies at the intersection of latent variable modeling
+[0:16:26] intersection of latent variable modeling graphical models and nonparametric
+[0:16:28] graphical models and nonparametric statistics. Right? When we say
+[0:16:29] statistics. Right? When we say representations, causality, and deep
+[0:16:31] representations, causality, and deep learning, this is what we're referring
+[0:16:33] learning, this is what we're referring to. And we know that any one of these on
+[0:16:36] to. And we know that any one of these on its own is already quite tricky to deal
+[0:16:38] its own is already quite tricky to deal with. That's the basic message that I
+[0:16:40] with. That's the basic message that I want to uh get across here. So, there's
+[0:16:44] want to uh get across here. So, there's a lot of hardness results that are known
+[0:16:46] a lot of hardness results that are known from the literature. I'm just going to
+[0:16:48] from the literature. I'm just going to survey a few just to give a little bit
+[0:16:50] survey a few just to give a little bit of a sense of what we know about the
+[0:16:52] of a sense of what we know about the difficulty in these problems. So just
+[0:16:54] difficulty in these problems. So just from purely the causal perspective uh
+[0:16:57] from purely the causal perspective uh there are papers that show for example
+[0:17:00] there are papers that show for example the non-existence of uniformly
+[0:17:01] the non-existence of uniformly consistent tests uh we know the strong
+[0:17:05] consistent tests uh we know the strong faithfulness assumption induces geometry
+[0:17:08] faithfulness assumption induces geometry that's very complicated and the set of
+[0:17:10] that's very complicated and the set of distributions that is not strong
+[0:17:11] distributions that is not strong faithful can be surprisingly large.
+[0:17:15] faithful can be surprisingly large. Uh and there's also results on the
+[0:17:17] Uh and there's also results on the non-estability of causal models against
+[0:17:20] non-estability of causal models against root end alternatives showing that
+[0:17:21] root end alternatives showing that causal model selection is sort of uh
+[0:17:24] causal model selection is sort of uh different than classical model selection
+[0:17:26] different than classical model selection problems uh in terms of the testability
+[0:17:28] problems uh in terms of the testability problems.
+[0:17:30] problems. That's just causality
+[0:17:32] That's just causality without talking about latent variables.
+[0:17:35] without talking about latent variables. we can talk about latent variables uh
+[0:17:37] we can talk about latent variables uh and then we get into issues like
+[0:17:39] and then we get into issues like singular asmtoics that destroy any
+[0:17:41] singular asmtoics that destroy any possibility of uniformity
+[0:17:44] possibility of uniformity uh in convergence to classical limiting
+[0:17:46] uh in convergence to classical limiting distributions. Uh it's known that
+[0:17:49] distributions. Uh it's known that there's a phase transition in signal
+[0:17:50] there's a phase transition in signal detection that makes reliable detection
+[0:17:52] detection that makes reliable detection impossible
+[0:17:54] impossible and uh in a more recent paper we showed
+[0:17:56] and uh in a more recent paper we showed that uh in certain nonparametric latent
+[0:17:59] that uh in certain nonparametric latent variable models there again is a
+[0:18:01] variable models there again is a non-existence of uniformly consistent
+[0:18:03] non-existence of uniformly consistent estimators. So these are all relatively
+[0:18:05] estimators. So these are all relatively simple statistical
+[0:18:07] simple statistical relatively simple statistical problems
+[0:18:09] relatively simple statistical problems for which we know that there are sort of
+[0:18:12] for which we know that there are sort of fundamental hardness results and
+[0:18:14] fundamental hardness results and difficulties.
+[0:18:16] difficulties. So for this reason let's take a step
+[0:18:19] So for this reason let's take a step back and take a look at linear models
+[0:18:21] back and take a look at linear models like the one I started with and ask
+[0:18:23] like the one I started with and ask whether or not we can actually estimate
+[0:18:26] whether or not we can actually estimate uh the parameters in these models. If we
+[0:18:28] uh the parameters in these models. If we can here then we have some hope of being
+[0:18:31] can here then we have some hope of being able to generalize to the nonlinear
+[0:18:32] able to generalize to the nonlinear case.
+[0:18:34] case. So the first paper I'm going to talk
+[0:18:36] So the first paper I'm going to talk about uh we just posted uh an early
+[0:18:39] about uh we just posted uh an early version of this paper on the archive. Uh
+[0:18:41] version of this paper on the archive. Uh this is joint work uh with my postto and
+[0:18:44] this is joint work uh with my postto and student in beyond and tong about
+[0:18:46] student in beyond and tong about learning causal representations uh with
+[0:18:49] learning causal representations uh with a few environments. So this is the model
+[0:18:51] a few environments. So this is the model I showed you uh at the very beginning.
+[0:18:54] I showed you uh at the very beginning. So I can now get into a little more
+[0:18:55] So I can now get into a little more detail on this. Uh so
+[0:18:59] detail on this. Uh so we have the standard linear structural
+[0:19:01] we have the standard linear structural equation model. We're going to assume
+[0:19:02] equation model. We're going to assume that we have little d latent factors and
+[0:19:05] that we have little d latent factors and that what we observe is this random
+[0:19:08] that what we observe is this random vector x which is pd dimensional.
+[0:19:11] vector x which is pd dimensional. Uh we are not going to make any
+[0:19:12] Uh we are not going to make any distributional assumptions on the noise.
+[0:19:14] distributional assumptions on the noise. So everything here could be gausian non-
+[0:19:16] So everything here could be gausian non- gausian. Uh what we need for the finite
+[0:19:19] gausian. Uh what we need for the finite sample results is subgaussianity.
+[0:19:22] sample results is subgaussianity. How are we going to get identification?
+[0:19:25] How are we going to get identification? Well, similar to the result I presented
+[0:19:29] Well, similar to the result I presented just a minute ago, we'll assume that we
+[0:19:30] just a minute ago, we'll assume that we are able to observe the data in capital
+[0:19:33] are able to observe the data in capital K environments where in each of these
+[0:19:35] K environments where in each of these environments, we target a subset of the
+[0:19:37] environments, we target a subset of the lane factors for intervention. We don't
+[0:19:40] lane factors for intervention. We don't know what the targets of intervention
+[0:19:41] know what the targets of intervention are, but we know that some number of
+[0:19:44] are, but we know that some number of variables have been targeted.
+[0:19:46] variables have been targeted. Unlike the previous result, one of the
+[0:19:48] Unlike the previous result, one of the core goals here is to be able to do this
+[0:19:50] core goals here is to be able to do this using a sublinear number of
+[0:19:52] using a sublinear number of environments.
+[0:19:54] environments. So if you have D latent variables, we're
+[0:19:56] So if you have D latent variables, we're interested in only needing log D
+[0:19:58] interested in only needing log D environments. You can think of settings
+[0:20:01] environments. You can think of settings where uh the the previous setting where
+[0:20:04] where uh the the previous setting where if I have single node interventions on
+[0:20:05] if I have single node interventions on all the latent variables, then I need uh
+[0:20:09] all the latent variables, then I need uh d many interventions and in you know
+[0:20:12] d many interventions and in you know standard generative model settings, you
+[0:20:14] standard generative model settings, you would expect that you have a latent
+[0:20:15] would expect that you have a latent dimension in the thousands. You don't
+[0:20:17] dimension in the thousands. You don't expect to be able to collect thousands
+[0:20:18] expect to be able to collect thousands of environments. So that's one of the
+[0:20:21] of environments. So that's one of the key things we're aiming for here.
+[0:20:23] key things we're aiming for here. the matrix B is going to be only assumed
+[0:20:26] the matrix B is going to be only assumed to be full rank. So in the uh factor
+[0:20:29] to be full rank. So in the uh factor modeling literature, a common way to get
+[0:20:31] modeling literature, a common way to get identification is to assume some type of
+[0:20:33] identification is to assume some type of sparsity. Uh this is reasonable in many
+[0:20:35] sparsity. Uh this is reasonable in many scientific settings. In the setting of
+[0:20:37] scientific settings. In the setting of representation learning, it's harder to
+[0:20:39] representation learning, it's harder to justify this assumption. So we want to
+[0:20:41] justify this assumption. So we want to allow B to be a dense matrix. As I
+[0:20:44] allow B to be a dense matrix. As I mentioned, the noise will be subgausian.
+[0:20:46] mentioned, the noise will be subgausian. Uh and we're not going to make any
+[0:20:48] Uh and we're not going to make any faithfulness assumptions here.
+[0:20:51] faithfulness assumptions here. So the goal is recall to recover
+[0:20:55] So the goal is recall to recover capital B the mixing matrix or the
+[0:20:57] capital B the mixing matrix or the decoder the latent causal graph and the
+[0:21:00] decoder the latent causal graph and the representation zed from iid samples from
+[0:21:03] representation zed from iid samples from the fewest possible environments. So
+[0:21:05] the fewest possible environments. So you'll notice that this matches the
+[0:21:07] you'll notice that this matches the information theoretic lower bound on the
+[0:21:09] information theoretic lower bound on the number of environments that are needed
+[0:21:11] number of environments that are needed even when you don't have latent
+[0:21:12] even when you don't have latent variables to identify uh a causal model.
+[0:21:17] variables to identify uh a causal model. All right. As far as related work on
+[0:21:19] All right. As far as related work on this problem goes, there are a few
+[0:21:21] this problem goes, there are a few papers in the causal representation
+[0:21:23] papers in the causal representation learning literature that study finite
+[0:21:25] learning literature that study finite sample properties. In particular, I'll
+[0:21:27] sample properties. In particular, I'll emphasize this paper uh which studies
+[0:21:30] emphasize this paper uh which studies the noiseless version of this model.
+[0:21:33] the noiseless version of this model. This problem is of course very closely
+[0:21:35] This problem is of course very closely related to an older literature on
+[0:21:37] related to an older literature on multi-environment learning and
+[0:21:38] multi-environment learning and generalization when you have access to
+[0:21:40] generalization when you have access to multiple environments things like
+[0:21:42] multiple environments things like invariant causal prediction
+[0:21:44] invariant causal prediction and then of course also the literature
+[0:21:46] and then of course also the literature on causal discovery with interventions
+[0:21:49] on causal discovery with interventions &gt;&gt; clarifying question. So uh
+[0:21:52] &gt;&gt; clarifying question. So uh what's the hydrogenity across
+[0:21:54] what's the hydrogenity across environments here? I think like say K
+[0:21:57] environments here? I think like say K environments they
+[0:21:59] environments they &gt;&gt; they have the same
+[0:22:01] &gt;&gt; they have the same like A and B or I mean I guess I wasn't
+[0:22:04] like A and B or I mean I guess I wasn't sure what
+[0:22:06] sure what &gt;&gt; like what's the assumption being made on
+[0:22:07] &gt;&gt; like what's the assumption being made on the environments and the interventions.
+[0:22:09] the environments and the interventions. I'll get there in just a second. Yeah.
+[0:22:10] I'll get there in just a second. Yeah. Yeah. Go ahead.
+[0:22:11] Yeah. Go ahead. &gt;&gt; Another Are you assuming sigma squared
+[0:22:13] &gt;&gt; Another Are you assuming sigma squared is known here?
+[0:22:14] is known here? &gt;&gt; No. Good question. Yeah.
+[0:22:16] &gt;&gt; No. Good question. Yeah. &gt;&gt; And then you're assuming but it's
+[0:22:17] &gt;&gt; And then you're assuming but it's homoscadastic.
+[0:22:19] homoscadastic. &gt;&gt; Yes. Yeah. So this is the standard setup
+[0:22:21] &gt;&gt; Yes. Yeah. So this is the standard setup that's used in factor models. So we're
+[0:22:22] that's used in factor models. So we're sort of adopting that. Yeah.
+[0:22:24] sort of adopting that. Yeah. &gt;&gt; So if it's a heteroscadastic kind of
+[0:22:26] &gt;&gt; So if it's a heteroscadastic kind of model, you would need a different way to
+[0:22:28] model, you would need a different way to identify the latent struct latency like
+[0:22:30] identify the latent struct latency like in a heteroscadastic PCA setting if you
+[0:22:33] in a heteroscadastic PCA setting if you just ignore a so this is a good
+[0:22:36] just ignore a so this is a good question. Um one of so one of the things
+[0:22:39] question. Um one of so one of the things that happens here is there's essentially
+[0:22:41] that happens here is there's essentially two problems that arise. So one is the
+[0:22:43] two problems that arise. So one is the dnoising that you have to deal with
+[0:22:45] dnoising that you have to deal with because of the noise. But then after
+[0:22:47] because of the noise. But then after that, so in typical factor analysis
+[0:22:49] that, so in typical factor analysis papers, you don't actually identify the
+[0:22:50] papers, you don't actually identify the matrix B. You identify something like
+[0:22:52] matrix B. You identify something like the column space of B. But here we're
+[0:22:54] the column space of B. But here we're actually interested in identifying the
+[0:22:56] actually interested in identifying the the matrix B itself up to permutation
+[0:22:59] the matrix B itself up to permutation and scaling. That's actually where the
+[0:23:01] and scaling. That's actually where the real difficulty is. So you're right that
+[0:23:03] real difficulty is. So you're right that if you had heteroscadastic noise, the
+[0:23:05] if you had heteroscadastic noise, the dnoising step would look different, but
+[0:23:07] dnoising step would look different, but you would still have to deal with how do
+[0:23:09] you would still have to deal with how do you get B and zed from this, right? And
+[0:23:13] you get B and zed from this, right? And so my expectation would be that that
+[0:23:15] so my expectation would be that that part, the dnoising part would look
+[0:23:16] part, the dnoising part would look similar to heteroscadastic factor
+[0:23:18] similar to heteroscadastic factor analysis, but you then still have the
+[0:23:20] analysis, but you then still have the additional step.
+[0:23:21] additional step. &gt;&gt; And then just one more question
+[0:23:23] &gt;&gt; And then just one more question clarifying. So is P assumed to go to uh
+[0:23:26] clarifying. So is P assumed to go to uh infinity faster to D in your case and if
+[0:23:29] infinity faster to D in your case and if you do it as
+[0:23:31] you do it as &gt;&gt; uh so is P assumed to go
+[0:23:35] &gt;&gt; uh so is P assumed to go that is not strictly needed. No. Uh
+[0:23:39] that is not strictly needed. No. Uh we'll you'll see in the in the rates
+[0:23:41] we'll you'll see in the in the rates that that is the typical setting that
+[0:23:44] that that is the typical setting that you would be interested in. Uh but
+[0:23:46] you would be interested in. Uh but that's not strictly needed.
+[0:23:51] Are there any other questions?
+[0:23:59] Okay. So uh what hap you can sort of see what's happening in this model here. So
+[0:24:01] what's happening in this model here. So if you write down the coariance matrix
+[0:24:03] if you write down the coariance matrix of the observations, it basically breaks
+[0:24:05] of the observations, it basically breaks down into a low rank signal plus uh a
+[0:24:09] down into a low rank signal plus uh a noisy part of the signal. Uh uh so low
+[0:24:13] noisy part of the signal. Uh uh so low rank signal plus noise. Uh so this is a
+[0:24:16] rank signal plus noise. Uh so this is a classical problem. This is uh related to
+[0:24:18] classical problem. This is uh related to the previous question. So you know that
+[0:24:20] the previous question. So you know that there are various challenges that arise
+[0:24:22] there are various challenges that arise in detecting a no a signal in noise.
+[0:24:26] in detecting a no a signal in noise. This is also complicated by the fact
+[0:24:29] This is also complicated by the fact that we have multiple environments which
+[0:24:30] that we have multiple environments which means we have multiple perturbed spaces
+[0:24:32] means we have multiple perturbed spaces that we have to figure out how to align.
+[0:24:33] that we have to figure out how to align. That's one of the challenges that arises
+[0:24:35] That's one of the challenges that arises in this analysis.
+[0:24:38] in this analysis. &gt;&gt; Yeah. To clarify, we're not going to
+[0:24:39] &gt;&gt; Yeah. To clarify, we're not going to look at higher order moments just the
+[0:24:41] look at higher order moments just the coarian.
+[0:24:42] coarian. &gt;&gt; We're only going to be looking at the
+[0:24:43] &gt;&gt; We're only going to be looking at the coariance. Yeah.
+[0:24:46] coariance. Yeah. &gt;&gt; All right. So, I think uh there was a
+[0:24:48] &gt;&gt; All right. So, I think uh there was a question about the assumptions on the
+[0:24:51] question about the assumptions on the environments. So, uh there's three key
+[0:24:53] environments. So, uh there's three key assumptions that we're going to make. So
+[0:24:54] assumptions that we're going to make. So the first is that the interventions form
+[0:24:57] the first is that the interventions form what's called a separating system. So
+[0:24:59] what's called a separating system. So we're going to assume we have access to
+[0:25:01] we're going to assume we have access to an observational environment where
+[0:25:02] an observational environment where nothing has been intervened upon and
+[0:25:05] nothing has been intervened upon and then the remaining environments have to
+[0:25:07] then the remaining environments have to have this property that for any pair of
+[0:25:09] have this property that for any pair of latent factors there's an environment
+[0:25:10] latent factors there's an environment where one has been intervened upon but
+[0:25:12] where one has been intervened upon but the other one hasn't and vice versa. So
+[0:25:14] the other one hasn't and vice versa. So the classical notion of separating
+[0:25:15] the classical notion of separating systems that arises in the experimental
+[0:25:17] systems that arises in the experimental design literature. It's exactly what you
+[0:25:19] design literature. It's exactly what you need to be able to get the information
+[0:25:22] need to be able to get the information throughout a lower bounds on the number
+[0:25:23] throughout a lower bounds on the number of environments. There's an additional
+[0:25:25] of environments. There's an additional technical restriction on the noise
+[0:25:27] technical restriction on the noise ratios between the environments. So,
+[0:25:29] ratios between the environments. So, we're going to also intervene on the
+[0:25:30] we're going to also intervene on the noise by changing uh its variance. And
+[0:25:34] noise by changing uh its variance. And you need to make sure that uh the ratio
+[0:25:36] you need to make sure that uh the ratio between different environments doesn't
+[0:25:38] between different environments doesn't stay the same. And then finally, this
+[0:25:41] stay the same. And then finally, this last assumption, if you're familiar with
+[0:25:42] last assumption, if you're familiar with the factor analysis literature, then you
+[0:25:44] the factor analysis literature, then you recognize this assumption. This is the
+[0:25:45] recognize this assumption. This is the pervasiveness assumption. uh that
+[0:25:48] pervasiveness assumption. uh that assumes essentially is saying that uh
+[0:25:51] assumes essentially is saying that uh the singer values of the decoder matrix
+[0:25:54] the singer values of the decoder matrix B do not decay too quickly and this is
+[0:25:56] B do not decay too quickly and this is very closely related to uh what's
+[0:25:58] very closely related to uh what's happening with the noise. If you uh if
+[0:26:01] happening with the noise. If you uh if you get rid of the noise and you
+[0:26:02] you get rid of the noise and you consider a noiseless uh model then this
+[0:26:06] consider a noiseless uh model then this assumption would
+[0:26:08] assumption would weaken substantially. The main point
+[0:26:10] weaken substantially. The main point that I like to make that I want to make
+[0:26:12] that I like to make that I want to make about these assumptions is if you
+[0:26:14] about these assumptions is if you randomly choose intervention targets, if
+[0:26:16] randomly choose intervention targets, if you randomly choose the noise variances
+[0:26:19] you randomly choose the noise variances and if you randomly choose the entries
+[0:26:20] and if you randomly choose the entries of B, then all of these assumptions will
+[0:26:22] of B, then all of these assumptions will be will hold with high probability.
+[0:26:26] be will hold with high probability. &gt;&gt; Question regarding the first assumption,
+[0:26:28] &gt;&gt; Question regarding the first assumption, um I think there's a paper from a few
+[0:26:30] um I think there's a paper from a few years ago which does talk that if you're
+[0:26:32] years ago which does talk that if you're trying to pair samples in that manner in
+[0:26:34] trying to pair samples in that manner in an N dimensional latent vector, you need
+[0:26:35] an N dimensional latent vector, you need n minus one similarity between the
+[0:26:37] n minus one similarity between the samples, right? So but but in reality
+[0:26:41] samples, right? So but but in reality it's poss it's probably impossible to
+[0:26:43] it's poss it's probably impossible to actually attain the the paired samples
+[0:26:46] actually attain the the paired samples before actually identifying the causal
+[0:26:47] before actually identifying the causal structure of the dat of the laten vector
+[0:26:49] structure of the dat of the laten vector right so how do you pair those samples
+[0:26:51] right so how do you pair those samples together generally
+[0:26:53] together generally uh so um I guess the the the way I'll
+[0:26:56] uh so um I guess the the the way I'll answer that is to say if you simply just
+[0:26:58] answer that is to say if you simply just randomly generate targets then you will
+[0:27:01] randomly generate targets then you will satisfy this assumption with high
+[0:27:02] satisfy this assumption with high probability you you don't need to
+[0:27:04] probability you you don't need to carefully design the the targets in
+[0:27:06] carefully design the the targets in advance you can but you don't need
+[0:27:07] advance you can but you don't need Right.
+[0:27:08] Right. &gt;&gt; And that but that assumes you have full
+[0:27:10] &gt;&gt; And that but that assumes you have full intervention control over the
+[0:27:11] intervention control over the environment, right?
+[0:27:13] environment, right? &gt;&gt; So what do you mean by full intervention
+[0:27:14] &gt;&gt; So what do you mean by full intervention &gt;&gt; as in like I should be able to intervene
+[0:27:16] &gt;&gt; as in like I should be able to intervene on the on on the environment that
+[0:27:19] on the on on the environment that &gt;&gt; Yeah. Of course. Yeah. Of course.
+[0:27:20] &gt;&gt; Yeah. Of course. Yeah. Of course. &gt;&gt; Yeah. Yeah. Yeah. Of course. There's the
+[0:27:23] &gt;&gt; Yeah. Yeah. Yeah. Of course. There's the assumption is that the the interventions
+[0:27:24] assumption is that the the interventions are successful,
+[0:27:25] are successful, &gt;&gt; right? Okay. Because I guess there is
+[0:27:27] &gt;&gt; right? Okay. Because I guess there is some work which talks about if you're
+[0:27:28] some work which talks about if you're just doing purely observationally and
+[0:27:30] just doing purely observationally and then you sort of make some assumption of
+[0:27:31] then you sort of make some assumption of the the mixing the mixing function and
+[0:27:34] the the mixing the mixing function and then you can do some sort of
+[0:27:35] then you can do some sort of identifiability without making the the
+[0:27:37] identifiability without making the the the parade.
+[0:27:38] the parade. &gt;&gt; Oh you're saying without making without
+[0:27:39] &gt;&gt; Oh you're saying without making without using any interventions at all.
+[0:27:41] using any interventions at all. &gt;&gt; I mean that just because in a lot of
+[0:27:43] &gt;&gt; I mean that just because in a lot of these settings you don't have full
+[0:27:44] these settings you don't have full access to the environment.
+[0:27:45] access to the environment. &gt;&gt; Sure. That's a so that's a very
+[0:27:46] &gt;&gt; Sure. That's a so that's a very different question but yes you can talk
+[0:27:48] different question but yes you can talk about observational identifiability in
+[0:27:50] about observational identifiability in these models for sure. Yes.
+[0:27:51] these models for sure. Yes. &gt;&gt; Yeah. Maybe you'll go through what what
+[0:27:53] &gt;&gt; Yeah. Maybe you'll go through what what does it mean for an intervention target
+[0:27:55] does it mean for an intervention target to form a separating system like what is
+[0:27:57] to form a separating system like what is a separating system?
+[0:27:59] a separating system? &gt;&gt; So that's uh so sorry. So uh for every
+[0:28:01] &gt;&gt; So that's uh so sorry. So uh for every pair of so you have a set of you have a
+[0:28:03] pair of so you have a set of you have a set of intervention targets a set of
+[0:28:05] set of intervention targets a set of sets of interventional targets and for
+[0:28:07] sets of interventional targets and for every pair of variables there's a set
+[0:28:11] every pair of variables there's a set where one is intervened and the other
+[0:28:13] where one is intervened and the other hasn't been and vice versa.
+[0:28:22] I might have to move the paper actually just
+[0:28:23] just but this is this is this is a standard
+[0:28:25] but this is this is this is a standard notion uh in the experimental design
+[0:28:27] notion uh in the experimental design literatur. Yeah.
+[0:28:33] &gt;&gt; Okay. So before I talk about our solution,
+[0:28:35] So before I talk about our solution, it's worth uh going through a little bit
+[0:28:38] it's worth uh going through a little bit what the common strategies uh in in
+[0:28:40] what the common strategies uh in in these types of models are. So a standard
+[0:28:43] these types of models are. So a standard uh is the quasi likelihood method using
+[0:28:46] uh is the quasi likelihood method using sparsity based assumptions, lining gam
+[0:28:48] sparsity based assumptions, lining gam based assumptions. So this would be
+[0:28:49] based assumptions. So this would be using things like higher order moments
+[0:28:51] using things like higher order moments uh as well as single node interventions
+[0:28:53] uh as well as single node interventions which is has arisen in the causal
+[0:28:55] which is has arisen in the causal representation learning literature and
+[0:28:57] representation learning literature and it's worth pointing out what happens if
+[0:28:59] it's worth pointing out what happens if you try any of these individual
+[0:29:00] you try any of these individual strategies. So if you want a likelihood
+[0:29:02] strategies. So if you want a likelihood then you would have to make some type of
+[0:29:04] then you would have to make some type of assumption on the noise uh like say
+[0:29:07] assumption on the noise uh like say gausian noise you made. uh you could do
+[0:29:09] gausian noise you made. uh you could do something like a quasi likelihood and
+[0:29:11] something like a quasi likelihood and then you end up you end up losing
+[0:29:13] then you end up you end up losing identifying power as I mentioned before
+[0:29:16] identifying power as I mentioned before there are these sparsity based methods
+[0:29:17] there are these sparsity based methods where you assume particular zero
+[0:29:19] where you assume particular zero patterns in the decoder matrix uh that's
+[0:29:22] patterns in the decoder matrix uh that's an alternative method but again we don't
+[0:29:24] an alternative method but again we don't want to make these types of assumptions
+[0:29:26] want to make these types of assumptions you can use higher order moments like
+[0:29:28] you can use higher order moments like lingam this would require that you
+[0:29:29] lingam this would require that you assume some that that everything is non-
+[0:29:31] assume some that that everything is non- gausian at most one at least and then if
+[0:29:35] gausian at most one at least and then if you assume that you only have access to
+[0:29:37] you assume that you only have access to single node interventions then you have
+[0:29:39] single node interventions then you have this known lower bound that you would
+[0:29:40] this known lower bound that you would need at least as many interventions as
+[0:29:42] need at least as many interventions as you have latent factors.
+[0:29:45] you have latent factors. So our approach is to use multiple
+[0:29:48] So our approach is to use multiple environments and so what you get so the
+[0:29:50] environments and so what you get so the cost of course as some of the previous
+[0:29:52] cost of course as some of the previous questions alluded to is that you now
+[0:29:54] questions alluded to is that you now have to collect more data and that of
+[0:29:56] have to collect more data and that of course is costly but what you gain is
+[0:29:59] course is costly but what you gain is that you get this latent causal
+[0:30:00] that you get this latent causal structure without making distributional
+[0:30:02] structure without making distributional assumptions or sparity constraints.
+[0:30:05] assumptions or sparity constraints. These methods based on single load
+[0:30:07] These methods based on single load interventions that have been in the
+[0:30:08] interventions that have been in the literature for some time now. What they
+[0:30:11] literature for some time now. What they do is they exploit the rank one
+[0:30:12] do is they exploit the rank one fingerprint that's left by these single
+[0:30:14] fingerprint that's left by these single loan interventions to identify uh the
+[0:30:17] loan interventions to identify uh the source nodes. When you have multiple
+[0:30:20] source nodes. When you have multiple targets which we use to reduce the
+[0:30:22] targets which we use to reduce the number of overall environments, the
+[0:30:24] number of overall environments, the source nodes become mixed with the
+[0:30:26] source nodes become mixed with the non-source nodes and the rank structure
+[0:30:28] non-source nodes and the rank structure becomes far more complex and intricate.
+[0:30:30] becomes far more complex and intricate. You can't there's no longer just a
+[0:30:31] You can't there's no longer just a single rank one fingerprint that you can
+[0:30:33] single rank one fingerprint that you can rely on for identification.
+[0:30:36] rely on for identification. And as I mentioned before to maximize
+[0:30:38] And as I mentioned before to maximize the amount of shared information we need
+[0:30:41] the amount of shared information we need to align these noisy spaces across the
+[0:30:43] to align these noisy spaces across the different environments and so these are
+[0:30:44] different environments and so these are some of the challenges uh that we have
+[0:30:46] some of the challenges uh that we have to deal with.
+[0:30:48] to deal with. Okay. So I'll briefly uh outline what
+[0:30:51] Okay. So I'll briefly uh outline what the algorithm looks like. I'm going to
+[0:30:52] the algorithm looks like. I'm going to skip details but I just kind of want to
+[0:30:54] skip details but I just kind of want to give you a little bit of a flavor. So
+[0:30:56] give you a little bit of a flavor. So the first thing we do is we construct
+[0:30:58] the first thing we do is we construct these dinoised coariance matrices. So
+[0:31:00] these dinoised coariance matrices. So this is how we deal with the unknown
+[0:31:02] this is how we deal with the unknown noise. Okay.
+[0:31:05] noise. Okay. Then uh the first thing we do even
+[0:31:07] Then uh the first thing we do even though the intervention targets aren't
+[0:31:09] though the intervention targets aren't one of our uh main est demands, we will
+[0:31:12] one of our uh main est demands, we will use that in the later steps of the
+[0:31:14] use that in the later steps of the algorithm. So we will pick up the
+[0:31:16] algorithm. So we will pick up the intervention targets by extracting them
+[0:31:18] intervention targets by extracting them from the dimension of the shared column
+[0:31:19] from the dimension of the shared column space between the different
+[0:31:20] space between the different environments.
+[0:31:22] environments. And this is one of the more technical
+[0:31:24] And this is one of the more technical parts of the analysis. There is an
+[0:31:26] parts of the analysis. There is an algorithm that essentially translates
+[0:31:28] algorithm that essentially translates these dimensions into the intervention
+[0:31:31] these dimensions into the intervention targets. Okay, so that's one of the
+[0:31:33] targets. Okay, so that's one of the critical steps. Uh and being able to
+[0:31:36] critical steps. Uh and being able to extract these dimensions uh is an
+[0:31:38] extract these dimensions uh is an important part of the analysis.
+[0:31:40] important part of the analysis. So from here once we have the
+[0:31:42] So from here once we have the intervention targets we can exploit a
+[0:31:44] intervention targets we can exploit a nice property uh of this model which is
+[0:31:47] nice property uh of this model which is that the J column of this decoder matrix
+[0:31:50] that the J column of this decoder matrix is given by or it's proportional to the
+[0:31:53] is given by or it's proportional to the generator of the shared subspace between
+[0:31:55] generator of the shared subspace between the environments that don't intervene on
+[0:31:57] the environments that don't intervene on the J variable. Okay. So once I get the
+[0:32:00] the J variable. Okay. So once I get the intervention targets, I can look at
+[0:32:01] intervention targets, I can look at these shared subspaces and use that to
+[0:32:04] these shared subspaces and use that to extract the columns of the decoder
+[0:32:06] extract the columns of the decoder matrix. Then getting the latent
+[0:32:08] matrix. Then getting the latent representations is an easy task. We can
+[0:32:10] representations is an easy task. We can just use pseudo inversion to do this.
+[0:32:13] just use pseudo inversion to do this. There are more sophisticated tools you
+[0:32:14] There are more sophisticated tools you could use to get better rates, but uh
+[0:32:17] could use to get better rates, but uh the for this uh this will suffice for
+[0:32:19] the for this uh this will suffice for getting the uh reasonable estimates of
+[0:32:22] getting the uh reasonable estimates of the latent representations. And then to
+[0:32:24] the latent representations. And then to learn the latent causal DAG you constru
+[0:32:27] learn the latent causal DAG you constru you reconstruct this using the solutions
+[0:32:29] you reconstruct this using the solutions to a generalized icon value problem
+[0:32:31] to a generalized icon value problem across the different environments. So
+[0:32:33] across the different environments. So you sort of operate uh in these four
+[0:32:35] you sort of operate uh in these four steps and that's what gets you uh the
+[0:32:38] steps and that's what gets you uh the the estimates we're interested in.
+[0:32:42] the estimates we're interested in. So uh the rates that we get
+[0:32:46] So uh the rates that we get so first of all in terms of the mixing
+[0:32:48] so first of all in terms of the mixing matrix B. So one thing that I should
+[0:32:51] matrix B. So one thing that I should emphasize here so everything of course
+[0:32:53] emphasize here so everything of course is up to label switching. Okay, you can
+[0:32:55] is up to label switching. Okay, you can permute the uh the labels on the latent
+[0:32:58] permute the uh the labels on the latent variables and uh that doesn't change
+[0:33:00] variables and uh that doesn't change anything. There's also a scaling issue.
+[0:33:03] anything. There's also a scaling issue. So you're only going to be able to
+[0:33:05] So you're only going to be able to identify the mixing matrix as well as
+[0:33:08] identify the mixing matrix as well as the representations up to uh some
+[0:33:10] the representations up to uh some scaling. So that's what you see here.
+[0:33:12] scaling. So that's what you see here. I'm just to relax the notational
+[0:33:15] I'm just to relax the notational overload. um uh omitting the permutation
+[0:33:18] overload. um uh omitting the permutation matrices from the label switching here
+[0:33:21] matrices from the label switching here but I will emphasize the diagonal
+[0:33:23] but I will emphasize the diagonal scaling. So you get the sort of
+[0:33:24] scaling. So you get the sort of conventional root dlog p overn rate from
+[0:33:27] conventional root dlog p overn rate from the factor analysis literature
+[0:33:30] the factor analysis literature for the mixing matrix. You get the same
+[0:33:32] for the mixing matrix. You get the same rate for learning the latent coariance
+[0:33:33] rate for learning the latent coariance matrices. Again there is a diagonal
+[0:33:35] matrices. Again there is a diagonal scaling. Uh this is for each of the
+[0:33:37] scaling. Uh this is for each of the environments.
+[0:33:39] environments. And then finally uh under uh signal
+[0:33:42] And then finally uh under uh signal strength condition on the structural
+[0:33:44] strength condition on the structural coefficients in the structural equation
+[0:33:45] coefficients in the structural equation model uh you're able to recover the
+[0:33:48] model uh you're able to recover the underlying light and causal graph.
+[0:33:52] underlying light and causal graph. Are there any questions about the the
+[0:33:54] Are there any questions about the the theorem here? Before I move on,
+[0:33:57] theorem here? Before I move on, &gt;&gt; there's a online question not on this
+[0:34:00] &gt;&gt; there's a online question not on this part but maybe on the previous slide
+[0:34:02] part but maybe on the previous slide about the estimation. Uh the question is
+[0:34:05] about the estimation. Uh the question is would it make sense to use basian
+[0:34:07] would it make sense to use basian approaches for example in quasi
+[0:34:09] approaches for example in quasi likelihood estimation part?
+[0:34:11] likelihood estimation part? &gt;&gt; You certainly could. Yes, absolutely.
+[0:34:13] &gt;&gt; You certainly could. Yes, absolutely. Yeah, I don't think there's a
+[0:34:15] Yeah, I don't think there's a fundamental obstruction to that.
+[0:34:25] All right. Uh so uh as I mentioned uh this is actually ongoing work. Uh so uh
+[0:34:29] this is actually ongoing work. Uh so uh the preprint an early preprint is on the
+[0:34:32] the preprint an early preprint is on the archive and we're hoping to update this
+[0:34:33] archive and we're hoping to update this soon with some of the more recent
+[0:34:34] soon with some of the more recent results. Uh but what I want to do is now
+[0:34:37] results. Uh but what I want to do is now talk about a second paper which is about
+[0:34:40] talk about a second paper which is about a more refined version of this problem.
+[0:34:42] a more refined version of this problem. Uh where I'm what I'm actually going to
+[0:34:43] Uh where I'm what I'm actually going to do is abstract away the latent variables
+[0:34:45] do is abstract away the latent variables and talk about the problem of
+[0:34:47] and talk about the problem of neighborhood selection. in structural
+[0:34:49] neighborhood selection. in structural equation models. Again, if you're going
+[0:34:52] equation models. Again, if you're going to recover the causal graph either in
+[0:34:54] to recover the causal graph either in the latent space or not in the latent
+[0:34:56] the latent space or not in the latent space, this is a problem that you have
+[0:34:58] space, this is a problem that you have to solve as a subpro.
+[0:35:02] to solve as a subpro. So, let me give you the setup for this.
+[0:35:04] So, let me give you the setup for this. So, as before, you have some causal
+[0:35:07] So, as before, you have some causal graph G over some variables uh Z1
+[0:35:09] graph G over some variables uh Z1 through uh Z D + one here. Uh so what
+[0:35:14] through uh Z D + one here. Uh so what I'm going to do now is I'm going to
+[0:35:16] I'm going to do now is I'm going to translate this into a standard
+[0:35:17] translate this into a standard regression problem.
+[0:35:19] regression problem. So I'll call the last variable y.
+[0:35:24] So I'll call the last variable y. I will call the rest of the variables x.
+[0:35:26] I will call the rest of the variables x. And then the incoming edges into this
+[0:35:28] And then the incoming edges into this target variable y I will denote by beta.
+[0:35:31] target variable y I will denote by beta. So now the local subpro of learning the
+[0:35:34] So now the local subpro of learning the parents around this one node in this
+[0:35:36] parents around this one node in this causal graph is a classical variable
+[0:35:39] causal graph is a classical variable selection problem. Right? Uh so you want
+[0:35:41] selection problem. Right? Uh so you want to learn you can think of this as either
+[0:35:42] to learn you can think of this as either learning the parents of y or the non-
+[0:35:44] learning the parents of y or the non- coefficients of the vector beta.
+[0:35:48] coefficients of the vector beta. This problem goes by various names in
+[0:35:50] This problem goes by various names in the literature. Uh you can think about
+[0:35:51] the literature. Uh you can think about this as neighborhood selection or
+[0:35:53] this as neighborhood selection or support recovery in a linear model. The
+[0:35:56] support recovery in a linear model. The sort of standard approaches to solving
+[0:35:58] sort of standard approaches to solving this problem. One would be the lasso. Uh
+[0:36:01] this problem. One would be the lasso. Uh the lasso here is pretty easy to see
+[0:36:03] the lasso here is pretty easy to see that this is automatically out of the
+[0:36:05] that this is automatically out of the running because it's going to be
+[0:36:06] running because it's going to be inconsistent due to the dependence
+[0:36:07] inconsistent due to the dependence between the x's. An alternative approach
+[0:36:11] between the x's. An alternative approach is to do subset selection.
+[0:36:13] is to do subset selection. This is going to be consistent.
+[0:36:16] This is going to be consistent. But the question that I want to focus on
+[0:36:18] But the question that I want to focus on is is this going to be optimal? Meaning
+[0:36:21] is is this going to be optimal? Meaning is there something better you could do
+[0:36:24] is there something better you could do than subset selection for solving this
+[0:36:27] than subset selection for solving this neighborhood selection problem? And the
+[0:36:30] neighborhood selection problem? And the key that I want you to keep in mind as
+[0:36:32] key that I want you to keep in mind as I'm talking about this is the issue uh
+[0:36:34] I'm talking about this is the issue uh throughout is the strong dependence
+[0:36:36] throughout is the strong dependence between the x's. If you're familiar with
+[0:36:38] between the x's. If you're familiar with the variable selection literature, then
+[0:36:40] the variable selection literature, then you know that generally the way you
+[0:36:42] you know that generally the way you successfully recover the variables in a
+[0:36:44] successfully recover the variables in a variable se the variables in a variable
+[0:36:46] variable se the variables in a variable selection problem is by assuming that
+[0:36:48] selection problem is by assuming that the dependence between the variables is
+[0:36:50] the dependence between the variables is somehow not too strong. And we don't
+[0:36:53] somehow not too strong. And we don't want to make those types of assumptions.
+[0:36:54] want to make those types of assumptions. So the question now is is there
+[0:36:56] So the question now is is there something better you could do in this
+[0:36:58] something better you could do in this type of setting. So I want to talk about
+[0:37:00] type of setting. So I want to talk about minimax rates in this variable selection
+[0:37:03] minimax rates in this variable selection problem. So in particular, so when I say
+[0:37:05] problem. So in particular, so when I say minimax rates, what do I mean? I mean
+[0:37:07] minimax rates, what do I mean? I mean what is the minimum number of samples
+[0:37:09] what is the minimum number of samples required to recover the parent set in
+[0:37:13] required to recover the parent set in this structural equation model for this
+[0:37:15] this structural equation model for this variable Y. The loss function that we're
+[0:37:18] variable Y. The loss function that we're using is 01 loss. Okay.
+[0:37:21] using is 01 loss. Okay. uh the folklore wisdom on this is that
+[0:37:24] uh the folklore wisdom on this is that best subset selection is the optimal
+[0:37:26] best subset selection is the optimal procedure. So just as a reminder what is
+[0:37:28] procedure. So just as a reminder what is best subset selection? This is a
+[0:37:30] best subset selection? This is a procedure that looks over all subsets of
+[0:37:32] procedure that looks over all subsets of a particular size and chooses the subset
+[0:37:35] a particular size and chooses the subset that minimizes the residual variance.
+[0:37:37] that minimizes the residual variance. Okay. Uh simple enough to implement and
+[0:37:40] Okay. Uh simple enough to implement and there are various results in the
+[0:37:42] there are various results in the literature on the sort of optimality
+[0:37:44] literature on the sort of optimality versus near optimality of this
+[0:37:46] versus near optimality of this procedure.
+[0:37:47] procedure. Uh basically what the results show is
+[0:37:50] Uh basically what the results show is that best subset selection is nearly
+[0:37:52] that best subset selection is nearly minimax optimal. You can show uh in a in
+[0:37:56] minimax optimal. You can show uh in a in a separate paper uh that we we put out
+[0:37:58] a separate paper uh that we we put out recently that best subset the best
+[0:38:01] recently that best subset the best subset selection is exactly minimax
+[0:38:04] subset selection is exactly minimax optimal for a certain class of coariance
+[0:38:07] optimal for a certain class of coariance matrices that is going to be relevant
+[0:38:09] matrices that is going to be relevant for what we're talking about here. So
+[0:38:11] for what we're talking about here. So the question is can you beat best subset
+[0:38:13] the question is can you beat best subset selection and the answer turns out to be
+[0:38:15] selection and the answer turns out to be yes. Uh and what you do is you modify
+[0:38:18] yes. Uh and what you do is you modify best subset selection by adding a second
+[0:38:20] best subset selection by adding a second term that accounts for the residual uh a
+[0:38:23] term that accounts for the residual uh a second term after the residual that
+[0:38:25] second term after the residual that accounts for the partial regression
+[0:38:27] accounts for the partial regression coefficients in this model. The
+[0:38:30] coefficients in this model. The important thing here is we're assuming G
+[0:38:32] important thing here is we're assuming G is unknown. So nothing about the graph
+[0:38:34] is unknown. So nothing about the graph is known in this problem. And the
+[0:38:36] is known in this problem. And the procedure that I'm I'll show you on the
+[0:38:38] procedure that I'm I'll show you on the next slide. Uh if there is no structure
+[0:38:40] next slide. Uh if there is no structure in the problem, if there's no graph, it
+[0:38:42] in the problem, if there's no graph, it basically collapses back on to best
+[0:38:43] basically collapses back on to best subset selection. And over here on the
+[0:38:46] subset selection. And over here on the right, this is just a uh indication of
+[0:38:50] right, this is just a uh indication of so in over different sample sizes and
+[0:38:53] so in over different sample sizes and different types of graphs uh the
+[0:38:56] different types of graphs uh the proportion of models where you're able
+[0:38:58] proportion of models where you're able to successfully recover um the support
+[0:39:01] to successfully recover um the support using KBSS versus uh subset selection.
+[0:39:08] Okay, so what does this look like? So the difference is we add this second
+[0:39:10] the difference is we add this second term here.
+[0:39:12] term here. Then where does this second term come
+[0:39:13] Then where does this second term come from? So it comes from the KL in KLBSS.
+[0:39:19] from? So it comes from the KL in KLBSS. So what we do is we define P to be the
+[0:39:22] So what we do is we define P to be the true model with a correct support SAR
+[0:39:25] true model with a correct support SAR and then we look at any competitor model
+[0:39:29] and then we look at any competitor model with some alternative subset T uh and
+[0:39:32] with some alternative subset T uh and some alternative subset of coefficients
+[0:39:34] some alternative subset of coefficients gamma.
+[0:39:36] gamma. You look at the KL divergence between
+[0:39:38] You look at the KL divergence between these two models. If you're familiar
+[0:39:39] these two models. If you're familiar with minimax analysis, then this makes a
+[0:39:41] with minimax analysis, then this makes a lot of sense. You're basically asking
+[0:39:42] lot of sense. You're basically asking how close can these two models get.
+[0:39:45] how close can these two models get. There's one term in this KL divergence.
+[0:39:47] There's one term in this KL divergence. This is the residual variance. This is
+[0:39:49] This is the residual variance. This is exactly what you get what you use in
+[0:39:51] exactly what you get what you use in subset selection. But there is a second
+[0:39:53] subset selection. But there is a second term. There's a second term that depends
+[0:39:56] term. There's a second term that depends on this gamma uh that best subset
+[0:39:59] on this gamma uh that best subset selection ignores. And that is exactly
+[0:40:01] selection ignores. And that is exactly how we construct this second term here.
+[0:40:03] how we construct this second term here. We basically ask which one of these
+[0:40:05] We basically ask which one of these gamas gives us the closest model. And
+[0:40:08] gamas gives us the closest model. And this gives us some extra identifying
+[0:40:10] this gives us some extra identifying power. uh to estimate the underlying
+[0:40:13] power. uh to estimate the underlying support. So the basic idea here is that
+[0:40:15] support. So the basic idea here is that we're capturing the hidden signal left
+[0:40:17] we're capturing the hidden signal left by this unknown structural equation
+[0:40:20] by this unknown structural equation model structure that subset selection
+[0:40:22] model structure that subset selection misses.
+[0:40:27] So let me give you a little bit of intuition on how this works. So here's a
+[0:40:29] intuition on how this works. So here's a very simple uh two variable model with a
+[0:40:32] very simple uh two variable model with a single target. So you have X1 and X2.
+[0:40:34] single target. So you have X1 and X2. You have a response Y.
+[0:40:37] You have a response Y. X1 is the true parent of Y.
+[0:40:41] X1 is the true parent of Y. X1 is also a parent of X2. This dotted
+[0:40:44] X1 is also a parent of X2. This dotted line here, this is not an actual edge in
+[0:40:46] line here, this is not an actual edge in the model. This is to indicate the
+[0:40:48] the model. This is to indicate the partial regression coefficient of uh Y
+[0:40:50] partial regression coefficient of uh Y on X2. So the true edges in this model
+[0:40:53] on X2. So the true edges in this model are little B and beta over here.
+[0:40:56] are little B and beta over here. And you can see what the difficulty is,
+[0:40:58] And you can see what the difficulty is, right? So in this setting, if little B
+[0:41:01] right? So in this setting, if little B is sufficiently large, then you have
+[0:41:03] is sufficiently large, then you have very difficult selection problem because
+[0:41:04] very difficult selection problem because X1 and X2 are nearly indistinguishable.
+[0:41:09] X1 and X2 are nearly indistinguishable. Now in these variable selection
+[0:41:10] Now in these variable selection problems, there are these igen values
+[0:41:13] problems, there are these igen values that are used to quantify the difficulty
+[0:41:15] that are used to quantify the difficulty of the selection problem. Okay, for best
+[0:41:18] of the selection problem. Okay, for best subset selection, you can calculate that
+[0:41:20] subset selection, you can calculate that igen value in this model and you get
+[0:41:23] igen value in this model and you get something that depends on the strength
+[0:41:24] something that depends on the strength of this coefficient little b here. Okay,
+[0:41:27] of this coefficient little b here. Okay, so as the strength of the dependence
+[0:41:30] so as the strength of the dependence between X1 and X2 grows, you need more
+[0:41:32] between X1 and X2 grows, you need more and more samples for subset selection to
+[0:41:35] and more samples for subset selection to successfully recover uh the correct
+[0:41:37] successfully recover uh the correct parent X1. Now, it's worth pointing out
+[0:41:40] parent X1. Now, it's worth pointing out with enough samples, subset selection
+[0:41:42] with enough samples, subset selection will work, right? We're not saying it's
+[0:41:44] will work, right? We're not saying it's inconsistent, but that requires a
+[0:41:46] inconsistent, but that requires a certain number of samples. If you
+[0:41:48] certain number of samples. If you calculate the corresponding signal
+[0:41:50] calculate the corresponding signal strength parameter or IGEN value for
+[0:41:52] strength parameter or IGEN value for KLBSS, you see that it doesn't depend on
+[0:41:54] KLBSS, you see that it doesn't depend on B^ 2 anymore. So by accounting for that
+[0:41:58] B^ 2 anymore. So by accounting for that second term in the KL divergence, you
+[0:42:01] second term in the KL divergence, you end up with a sample complexity that's
+[0:42:03] end up with a sample complexity that's substantially smaller than the sample
+[0:42:04] substantially smaller than the sample complexity that subset selection
+[0:42:06] complexity that subset selection requires
+[0:42:07] requires at least in terms of uh this parameter B
+[0:42:10] at least in terms of uh this parameter B here. So uh the I'll give you an
+[0:42:14] here. So uh the I'll give you an informal version of the theorem that we
+[0:42:16] informal version of the theorem that we proved in this paper. So there's two
+[0:42:17] proved in this paper. So there's two results on the pointwise and the minimax
+[0:42:20] results on the pointwise and the minimax optimal sample complexity. the pointwise
+[0:42:23] optimal sample complexity. the pointwise sample complexity. The key point is uh
+[0:42:26] sample complexity. The key point is uh what is highlighted here. So these two
+[0:42:28] what is highlighted here. So these two rates are identical except for the
+[0:42:30] rates are identical except for the subscript k versus b. So these are these
+[0:42:33] subscript k versus b. So these are these igen value parameters that I was
+[0:42:34] igen value parameters that I was referring to and the and the key is that
+[0:42:37] referring to and the and the key is that you can show that uh for this class of
+[0:42:40] you can show that uh for this class of models uh the KBSS igen value is
+[0:42:43] models uh the KBSS igen value is strictly larger than the subset
+[0:42:45] strictly larger than the subset selection value which means the
+[0:42:48] selection value which means the pointwise sample complexity is smaller
+[0:42:50] pointwise sample complexity is smaller than uh the min the the pointwise sample
+[0:42:53] than uh the min the the pointwise sample complexity for subset selection
+[0:42:56] complexity for subset selection and more importantly KLBSS also achieves
+[0:42:59] and more importantly KLBSS also achieves the minimax optimal sample complexity
+[0:43:01] the minimax optimal sample complexity over this class.
+[0:43:09] This is a comparison of the sample complexities that you would get uh
+[0:43:11] complexities that you would get uh comparing KLBSS to different methods. Uh
+[0:43:14] comparing KLBSS to different methods. Uh so compared to BSS uh the loss is linear
+[0:43:18] so compared to BSS uh the loss is linear in S as well as this factor of B ^ squ.
+[0:43:21] in S as well as this factor of B ^ squ. uh and then things like the lasso and
+[0:43:23] uh and then things like the lasso and orth orthogonal matching pursuit and
+[0:43:25] orth orthogonal matching pursuit and related methods they rely on these
+[0:43:27] related methods they rely on these irrepresentability and incoherence
+[0:43:29] irrepresentability and incoherence assumptions which are not going to be
+[0:43:30] assumptions which are not going to be satisfied in these types of models owing
+[0:43:32] satisfied in these types of models owing to dependence.
+[0:43:34] to dependence. You can implement this uh relatively
+[0:43:37] You can implement this uh relatively straightforwardly
+[0:43:39] straightforwardly and the main takeaway here is so uh
+[0:43:42] and the main takeaway here is so uh lasso is what you see here. It is
+[0:43:44] lasso is what you see here. It is inconsistent on all of the models.
+[0:43:46] inconsistent on all of the models. subset selection is consistent uh but
+[0:43:49] subset selection is consistent uh but KLBSS which is the blue and the green
+[0:43:51] KLBSS which is the blue and the green lines here uh typically has a higher
+[0:43:54] lines here uh typically has a higher probability of successfully recovering
+[0:43:56] probability of successfully recovering the variables. More interesting
+[0:43:58] the variables. More interesting comparison is on real data where you
+[0:44:01] comparison is on real data where you don't actually know what the sort of
+[0:44:03] don't actually know what the sort of true underlying support is but what you
+[0:44:05] true underlying support is but what you can do is you can you can compare the
+[0:44:07] can do is you can you can compare the prediction performance of the selected
+[0:44:09] prediction performance of the selected models. So this is uh a comparison we
+[0:44:12] models. So this is uh a comparison we did on gene expression data where we
+[0:44:16] did on gene expression data where we used KLBSS and BSS to select underlying
+[0:44:19] used KLBSS and BSS to select underlying models and then use them use the underly
+[0:44:22] models and then use them use the underly the selected models to evaluate the
+[0:44:24] the selected models to evaluate the outof sample prediction performance and
+[0:44:27] outof sample prediction performance and anything that lies above the dash line
+[0:44:29] anything that lies above the dash line here is where the prediction error for
+[0:44:32] here is where the prediction error for KBSS was lower than the prediction error
+[0:44:34] KBSS was lower than the prediction error for BSS.
+[0:44:36] for BSS. &gt;&gt; Yeah.
+[0:44:37] &gt;&gt; Yeah. &gt;&gt; Um can I ask a question?
+[0:44:39] &gt;&gt; Um can I ask a question? I guess another way to do model
+[0:44:41] I guess another way to do model selection is to kind of look at the
+[0:44:42] selection is to kind of look at the whole model calculate like a information
+[0:44:46] whole model calculate like a information criterion using the likelihood of the
+[0:44:47] criterion using the likelihood of the whole model.
+[0:44:48] whole model. &gt;&gt; Is that related to using this K?
+[0:44:51] &gt;&gt; Is that related to using this K? &gt;&gt; It absolutely is. So one thing that I've
+[0:44:54] &gt;&gt; It absolutely is. So one thing that I've sort of glossed over here is so if I go
+[0:44:56] sort of glossed over here is so if I go back
+[0:45:03] so with sub subset selection only works without if you don't use an information
+[0:45:04] without if you don't use an information information criterion if you have a
+[0:45:06] information criterion if you have a fixed model size for exactly the reason
+[0:45:08] fixed model size for exactly the reason you just said right because if you don't
+[0:45:09] you just said right because if you don't have a fixed model size then you have to
+[0:45:11] have a fixed model size then you have to figure out how to penalize models of
+[0:45:12] figure out how to penalize models of different complexity the way you handle
+[0:45:15] different complexity the way you handle that is with an information criteria so
+[0:45:18] that is with an information criteria so the same thing would work for BSS and
+[0:45:21] the same thing would work for BSS and the exact same goes for KLBSS. So
+[0:45:24] the exact same goes for KLBSS. So there's a version that has sort of a
+[0:45:26] there's a version that has sort of a fixed model size and so then all you
+[0:45:28] fixed model size and so then all you need is uh this score function to
+[0:45:32] need is uh this score function to distinguish models of the same
+[0:45:33] distinguish models of the same complexity but then once you have models
+[0:45:35] complexity but then once you have models of different complexity then you add uh
+[0:45:37] of different complexity then you add uh a complexity penalization.
+[0:45:39] a complexity penalization. &gt;&gt; Okay. So my question was more about your
+[0:45:41] &gt;&gt; Okay. So my question was more about your intuition with this uh correlation
+[0:45:43] intuition with this uh correlation between
+[0:45:44] between &gt;&gt; okay
+[0:45:44] &gt;&gt; okay &gt;&gt; these two variables. I thought maybe the
+[0:45:47] &gt;&gt; these two variables. I thought maybe the reason BS what the least squares doesn't
+[0:45:50] reason BS what the least squares doesn't immediately work is that it somehow
+[0:45:51] immediately work is that it somehow doesn't model that part of the
+[0:45:55] doesn't model that part of the dependence between these different X
+[0:45:56] dependence between these different X variables and it would
+[0:45:58] variables and it would &gt;&gt; that would be addressed if you somehow
+[0:46:00] &gt;&gt; that would be addressed if you somehow got a full information like full
+[0:46:03] got a full information like full likelihood function for the join from
+[0:46:06] likelihood function for the join from the joint distribution of X and Y
+[0:46:07] the joint distribution of X and Y instead of just a conditional
+[0:46:10] instead of just a conditional is that related or
+[0:46:12] is that related or &gt;&gt; that's a good question I haven't uh I
+[0:46:14] &gt;&gt; that's a good question I haven't uh I haven't thought much about that I would
+[0:46:15] haven't thought much about that I would So I mean right so if you if you make
+[0:46:17] So I mean right so if you if you make specific distributional assumptions and
+[0:46:19] specific distributional assumptions and you're willing to write down the exact
+[0:46:20] you're willing to write down the exact likelihood then typically you're going
+[0:46:22] likelihood then typically you're going to get something that's efficient right
+[0:46:24] to get something that's efficient right uh so one would imagine that something
+[0:46:26] uh so one would imagine that something like that would work um but I haven't
+[0:46:29] like that would work um but I haven't that's not something we've looked into
+[0:46:30] that's not something we've looked into specifically
+[0:46:37] certainly it's the claim is not that this is the the only thing um
+[0:46:41] this is the the only thing um okay um so Where was I?
+[0:46:47] okay um so Where was I? All right. And the last thing I was
+[0:46:48] All right. And the last thing I was going to say about this is um one of the
+[0:46:51] going to say about this is um one of the questions that you might ask is whether
+[0:46:53] questions that you might ask is whether or not there is an efficient way to do
+[0:46:55] or not there is an efficient way to do this in the sense of a polomial time
+[0:46:57] this in the sense of a polomial time algorithm.
+[0:46:58] algorithm. And uh it turns out you can show that
+[0:47:01] And uh it turns out you can show that assuming standard computational
+[0:47:03] assuming standard computational complexity conjectures this is actually
+[0:47:05] complexity conjectures this is actually provably impossible. There is no
+[0:47:06] provably impossible. There is no polomial time algorithm under
+[0:47:08] polomial time algorithm under dependence. If you get rid of the
+[0:47:09] dependence. If you get rid of the dependence then polinomial time
+[0:47:12] dependence then polinomial time algorithms like the lasso start to
+[0:47:14] algorithms like the lasso start to emerge. Uh and so a very interesting
+[0:47:17] emerge. Uh and so a very interesting question is to try to understand what
+[0:47:19] question is to try to understand what this frontier looks like between
+[0:47:21] this frontier looks like between polinomial time algorithms and the
+[0:47:22] polinomial time algorithms and the amount of dependence that you can allow
+[0:47:24] amount of dependence that you can allow inside of these models.
+[0:47:27] inside of these models. All right. Uh so uh I will uh wrap up
+[0:47:32] All right. Uh so uh I will uh wrap up here. Let me quickly summarize. So the
+[0:47:35] here. Let me quickly summarize. So the first thing uh is uh that causality is a
+[0:47:39] first thing uh is uh that causality is a is useful for designing interpretive
+[0:47:41] is useful for designing interpretive gener interpretable generative models
+[0:47:43] gener interpretable generative models that hopefully generalize out of
+[0:47:45] that hopefully generalize out of distribution and this is sort of the
+[0:47:48] distribution and this is sort of the whole gestalt behind why we're
+[0:47:50] whole gestalt behind why we're interested in learning causal
+[0:47:52] interested in learning causal representations.
+[0:47:55] representations. I would like to argue that not enough
+[0:47:56] I would like to argue that not enough attention has been paid to the finite
+[0:47:58] attention has been paid to the finite sample aspects of this problem. uh and
+[0:48:00] sample aspects of this problem. uh and we need this to ground our models in
+[0:48:03] we need this to ground our models in practical settings where we only have
+[0:48:05] practical settings where we only have access to finite samples.
+[0:48:08] access to finite samples. Even in very simple settings, some
+[0:48:09] Even in very simple settings, some surprising behaviors emerge. Uh there's
+[0:48:13] surprising behaviors emerge. Uh there's still a lot to be learned by studying
+[0:48:14] still a lot to be learned by studying just linear models. Uh I would argue
+[0:48:17] just linear models. Uh I would argue that most of the interesting causal
+[0:48:19] that most of the interesting causal action is here in the linear case. Of
+[0:48:22] action is here in the linear case. Of course, the nonlinear generalizations
+[0:48:23] course, the nonlinear generalizations are still non-trivial. uh I'd be very
+[0:48:26] are still non-trivial. uh I'd be very happy to chat offline about some of the
+[0:48:29] happy to chat offline about some of the other challenges that arise uh when you
+[0:48:31] other challenges that arise uh when you look at the nonlinear generalizations
+[0:48:33] look at the nonlinear generalizations for these models
+[0:48:35] for these models but uh I will stop there if there are
+[0:48:37] but uh I will stop there if there are any questions these are some references
+[0:48:39] any questions these are some references uh for what I've talked about happy to
+[0:48:42] uh for what I've talked about happy to take any questions
+[0:48:52] &gt;&gt; thank you I think we can open the floor for some questions either from online
+[0:48:56] for some questions either from online &gt;&gt; uh from the from the room. Oh yeah,
+[0:49:10] I have a question like the framework. So uh I'm reasonably
+[0:49:13] the framework. So uh I'm reasonably familiar with sufficient dimension
+[0:49:15] familiar with sufficient dimension reduction but then um
+[0:49:18] reduction but then um usually it can be written in terms of
+[0:49:21] usually it can be written in terms of the statistical model like uh some kind
+[0:49:24] the statistical model like uh some kind of uh independence assumption or
+[0:49:27] of uh independence assumption or conditional independence assumption. So
+[0:49:30] conditional independence assumption. So I guess how do you find well of course
+[0:49:33] I guess how do you find well of course like there's some regression type of you
+[0:49:36] like there's some regression type of you know you know models and uh I guess one
+[0:49:39] know you know models and uh I guess one one reason thing that I sort of work
+[0:49:41] one reason thing that I sort of work with the student is on like you can
+[0:49:44] with the student is on like you can represent like conditional average human
+[0:49:46] represent like conditional average human effects given like certain um uh uh sort
+[0:49:52] effects given like certain um uh uh sort of um you know potential confounders as
+[0:49:56] of um you know potential confounders as a sort of like linear combination of of
+[0:49:59] a sort of like linear combination of of them. So so so at least you can write it
+[0:50:01] them. So so so at least you can write it into some kind of models but or or or
+[0:50:05] into some kind of models but or or or distill it into some some kind of like
+[0:50:08] distill it into some some kind of like simpler model. I I guess I'm a little
+[0:50:10] simpler model. I I guess I'm a little bit
+[0:50:12] bit unclear like in the general setting how
+[0:50:15] unclear like in the general setting how can how can you say if you have a
+[0:50:19] can how can you say if you have a nonlinear representation and then you I
+[0:50:22] nonlinear representation and then you I mean I mean can can you reduce it to a
+[0:50:24] mean I mean can can you reduce it to a certain
+[0:50:26] certain maybe using some kind of
+[0:50:29] maybe using some kind of like other way to I guess I guess um
+[0:50:33] like other way to I guess I guess um represent the model in terms of maybe
+[0:50:35] represent the model in terms of maybe conditional independence type of
+[0:50:43] So I think in some sense a lot of this boils down to conditional independence
+[0:50:45] boils down to conditional independence right so the idea is that the causal
+[0:50:47] right so the idea is that the causal graph is encoding uh various types of
+[0:50:50] graph is encoding uh various types of conditional independence relations that
+[0:50:51] conditional independence relations that are being satisfied in the latent space
+[0:50:54] are being satisfied in the latent space those typically get destroyed in the
+[0:50:57] those typically get destroyed in the observed space um I'm not sure if that
+[0:51:00] observed space um I'm not sure if that answers your question but
+[0:51:01] answers your question but &gt;&gt; okay I guess yeah I guess that's sort of
+[0:51:03] &gt;&gt; okay I guess yeah I guess that's sort of the the distinction
+[0:51:06] the the distinction &gt;&gt; because most most of the thing is well I
+[0:51:09] &gt;&gt; because most most of the thing is well I I guess they they can model the offset
+[0:51:11] I guess they they can model the offset one pretty easily but I guess that's I
+[0:51:14] one pretty easily but I guess that's I guess
+[0:51:17] guess &gt;&gt; if you you have the lat one that's I
+[0:51:20] &gt;&gt; if you you have the lat one that's I guess you have to like measure error it
+[0:51:24] guess you have to like measure error it just destroy a lot of
+[0:51:25] just destroy a lot of &gt;&gt; right exactly yeah that's the thing
+[0:51:26] &gt;&gt; right exactly yeah that's the thing exactly the conditional independent
+[0:51:28] exactly the conditional independent structure isn't visible from the
+[0:51:30] structure isn't visible from the observed data alone yeah
+[0:51:31] observed data alone yeah &gt;&gt; if I may I think in that scenario
+[0:51:33] &gt;&gt; if I may I think in that scenario generally there's like a common
+[0:51:34] generally there's like a common assumption that people make that in
+[0:51:36] assumption that people make that in these high dimensional setting there's a
+[0:51:37] these high dimensional setting there's a diffomorphic sort of more you can sort
+[0:51:40] diffomorphic sort of more you can sort of assumption between the latent factor
+[0:51:41] of assumption between the latent factor of the observation
+[0:51:49] &gt;&gt; we got a question online is the approach distribution free nonp parametric or are
+[0:51:52] distribution free nonp parametric or are there any used parametric assumption for
+[0:51:54] there any used parametric assumption for example gausianity
+[0:51:55] example gausianity &gt;&gt; gausianity is not assumed the parametric
+[0:51:58] &gt;&gt; gausianity is not assumed the parametric assumption would be linearity that would
+[0:52:00] assumption would be linearity that would be the that would be the the parametric
+[0:52:02] be the that would be the the parametric assumption but in terms of the error
+[0:52:03] assumption but in terms of the error distribution though
+[0:52:05] distribution though &gt;&gt; thank Okay, any other questions from the
+[0:52:08] &gt;&gt; thank Okay, any other questions from the room or online?
+[0:52:16] Okay, does not seem the case. I think we can call it a day for today and we see
+[0:52:18] can call it a day for today and we see you next week. Same time here seminar
+[0:52:21] you next week. Same time here seminar live and friends at the Institute. Thank
+[0:52:24] live and friends at the Institute. Thank you.
+[0:52:25] you. &gt;&gt; Thank you.
+[0:52:38] I'm PhD student.

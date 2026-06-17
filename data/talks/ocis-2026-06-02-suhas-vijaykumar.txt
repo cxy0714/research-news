@@ -1,0 +1,1314 @@
+[0:00:05] Hi everyone, welcome to this week's online causal inference seminar. So uh
+[0:00:08] online causal inference seminar. So uh today we're excited to have uh Sue has
+[0:00:10] today we're excited to have uh Sue has BJ Kumer from UC San Diego uh to present
+[0:00:14] BJ Kumer from UC San Diego uh to present demonstration experiments and for uh for
+[0:00:18] demonstration experiments and for uh for discussant we have uh Aurelian uh Bibble
+[0:00:22] discussant we have uh Aurelian uh Bibble from Netflix. Um today the Q&amp;A will be
+[0:00:25] from Netflix. Um today the Q&amp;A will be handled by Aditia. Adita do you want to
+[0:00:27] handled by Aditia. Adita do you want to say a little bit about that?
+[0:00:29] say a little bit about that? &gt;&gt; Thanks. Um, yeah, for the audience,
+[0:00:31] &gt;&gt; Thanks. Um, yeah, for the audience, please uh feel free to put all your
+[0:00:33] please uh feel free to put all your questions in the Q&amp;A and uh please write
+[0:00:35] questions in the Q&amp;A and uh please write your questions as soon as you have them.
+[0:00:38] your questions as soon as you have them. With that, uh, Suas, the floor is all
+[0:00:40] With that, uh, Suas, the floor is all yours.
+[0:00:41] yours. &gt;&gt; Awesome. Thanks so much uh so much both
+[0:00:43] &gt;&gt; Awesome. Thanks so much uh so much both of you.
+[0:00:45] of you. &gt;&gt; Um,
+[0:00:47] &gt;&gt; Um, &gt;&gt; I'm just sending the request to share my
+[0:00:48] &gt;&gt; I'm just sending the request to share my screen. Okay,
+[0:00:54] &gt;&gt; awesome. So, uh, today, uh, I'm really excited to be, uh, presenting a recent
+[0:00:57] excited to be, uh, presenting a recent project called demonstration
+[0:00:58] project called demonstration experiments.
+[0:01:00] experiments. um uh which studies inference from
+[0:01:02] um uh which studies inference from adaptive sampling uh where the goal
+[0:01:04] adaptive sampling uh where the goal isn't to precisely measure an effect uh
+[0:01:06] isn't to precisely measure an effect uh it's to demonstrate that an effect
+[0:01:08] it's to demonstrate that an effect exists. Um so this is joint work with a
+[0:01:11] exists. Um so this is joint work with a really great team including um Hedo Imb
+[0:01:14] really great team including um Hedo Imb Lorenzo Moro Sasha Rocklin Thomas
+[0:01:18] Lorenzo Moro Sasha Rocklin Thomas Richardson and myself and we did a bunch
+[0:01:21] Richardson and myself and we did a bunch of this uh work uh although we all have
+[0:01:23] of this uh work uh although we all have separate affiliations while we were
+[0:01:25] separate affiliations while we were working at Amazon. Um
+[0:01:29] working at Amazon. Um so the motivating problem uh I want to
+[0:01:31] so the motivating problem uh I want to present uh to you all is one of uh sort
+[0:01:35] present uh to you all is one of uh sort of a web platform experiment. Um so we
+[0:01:37] of a web platform experiment. Um so we can imagine that a large uh retailer
+[0:01:40] can imagine that a large uh retailer uh you know uh is testing thousands of
+[0:01:43] uh you know uh is testing thousands of variants to their front page each year.
+[0:01:45] variants to their front page each year. Okay. So each of these is a small change
+[0:01:48] Okay. So each of these is a small change [snorts] um that uh gets a narrow
+[0:01:50] [snorts] um that uh gets a narrow experiment. So it gets exposed to a
+[0:01:52] experiment. So it gets exposed to a relatively small fraction of the total
+[0:01:54] relatively small fraction of the total traffic. uh and most of these variants
+[0:01:57] traffic. uh and most of these variants uh you know will have no real uh
+[0:01:59] uh you know will have no real uh measurable effect uh on the sort of like
+[0:02:01] measurable effect uh on the sort of like goal metrics.
+[0:02:04] goal metrics. So you know when there's so many
+[0:02:06] So you know when there's so many different experiments uh running uh this
+[0:02:08] different experiments uh running uh this sort of raises the question uh you know
+[0:02:11] sort of raises the question uh you know which of these uh are meant to be thrown
+[0:02:13] which of these uh are meant to be thrown away and which of these are worth the
+[0:02:15] away and which of these are worth the cost of a powerful careful follow-up
+[0:02:18] cost of a powerful careful follow-up experiment. Right? So that's sort of the
+[0:02:21] experiment. Right? So that's sort of the motivating question.
+[0:02:29] Okay. So, uh you know uh this setting I described uh you know was fairly general
+[0:02:32] described uh you know was fairly general uh and applies to a lot of web platform
+[0:02:35] uh and applies to a lot of web platform experiments. Okay. [snorts] So, the
+[0:02:38] experiments. Okay. [snorts] So, the familiar setting is that there are many
+[0:02:41] familiar setting is that there are many candidate interventions many many uh
+[0:02:43] candidate interventions many many uh experiments uh running per year [snorts]
+[0:02:47] experiments uh running per year [snorts] but most of these experiments uh find no
+[0:02:49] but most of these experiments uh find no measurable positive effect on the
+[0:02:51] measurable positive effect on the desired goal metric.
+[0:02:53] desired goal metric. So uh this creates an environment where
+[0:02:56] So uh this creates an environment where you know in some uh experimentation uh
+[0:02:59] you know in some uh experimentation uh is actually very costly.
+[0:03:02] is actually very costly. Um and it raises this central question
+[0:03:04] Um and it raises this central question you know when is it worthwhile to invest
+[0:03:06] you know when is it worthwhile to invest or limited experimental resources uh to
+[0:03:09] or limited experimental resources uh to conduct a careful experiment.
+[0:03:12] conduct a careful experiment. So uh this motivates the idea of a
+[0:03:16] So uh this motivates the idea of a demonstration experiment uh which is a
+[0:03:18] demonstration experiment uh which is a sort of a lowcost experiment uh whose
+[0:03:21] sort of a lowcost experiment uh whose goal is to efficiently um you know
+[0:03:24] goal is to efficiently um you know efficiently in terms of sampling
+[0:03:26] efficiently in terms of sampling [snorts] uh so adaptively uh demonstrate
+[0:03:29] [snorts] uh so adaptively uh demonstrate whether uh a meaningful effect exists um
+[0:03:32] whether uh a meaningful effect exists um which is distinct from precisely
+[0:03:34] which is distinct from precisely measuring a treatment effect or finding
+[0:03:36] measuring a treatment effect or finding the best treatment.
+[0:03:39] the best treatment. &gt;&gt; [snorts]
+[0:03:40] &gt;&gt; [snorts] &gt;&gt; Okay, so this is actually a very
+[0:03:42] &gt;&gt; Okay, so this is actually a very familiar problem. Um, we might uh, you
+[0:03:44] familiar problem. Um, we might uh, you know, think of it as a cousin of
+[0:03:47] know, think of it as a cousin of adaptive platform trials in clinical
+[0:03:49] adaptive platform trials in clinical research or phase two trials. [snorts]
+[0:03:51] research or phase two trials. [snorts] So you know this problem of efficiently
+[0:03:54] So you know this problem of efficiently demonstrating effect uh can take many
+[0:03:56] demonstrating effect uh can take many forms. So one form uh which is the the
+[0:04:00] forms. So one form uh which is the the sort of baseline picture mental model I
+[0:04:03] sort of baseline picture mental model I want you all to have uh with you
+[0:04:04] want you all to have uh with you throughout the talk is one of many uh
+[0:04:06] throughout the talk is one of many uh different treatment doses or treatment
+[0:04:08] different treatment doses or treatment variance and the question we're asking
+[0:04:09] variance and the question we're asking is does any of these uh improve uh the
+[0:04:13] is does any of these uh improve uh the status quo.
+[0:04:15] status quo. Uh another is subopuls. So we can
+[0:04:18] Uh another is subopuls. So we can imagine there's many mutually exclusive
+[0:04:20] imagine there's many mutually exclusive strata or or subopuls
+[0:04:22] strata or or subopuls um and we're instead asking you know can
+[0:04:25] um and we're instead asking you know can we discover a particular subgroup for
+[0:04:28] we discover a particular subgroup for whom uh the treatment has a meaningful
+[0:04:29] whom uh the treatment has a meaningful effect.
+[0:04:32] effect. Another more distant relative uh is when
+[0:04:34] Another more distant relative uh is when measurement is costly. So you know uh we
+[0:04:37] measurement is costly. So you know uh we might uh only have the option to measure
+[0:04:39] might uh only have the option to measure a few contrasts uh per unit. Um [snorts]
+[0:04:42] a few contrasts uh per unit. Um [snorts] and then we are trying to efficiently uh
+[0:04:46] and then we are trying to efficiently uh find a a meaningful contrast.
+[0:04:50] find a a meaningful contrast. Okay. So these problems arise uh in many
+[0:04:53] Okay. So these problems arise uh in many settings. Um uh you know we can imagine
+[0:04:56] settings. Um uh you know we can imagine these tools being applied to many
+[0:04:57] these tools being applied to many experimental problems. Um and they all
+[0:05:00] experimental problems. Um and they all uh sort of are closely related to a
+[0:05:02] uh sort of are closely related to a problem uh that is relatively well
+[0:05:04] problem uh that is relatively well studied from learning theory which is
+[0:05:05] studied from learning theory which is that of uh the K armed threshold bandit.
+[0:05:10] that of uh the K armed threshold bandit. So the threshold bandit problem uh
+[0:05:13] So the threshold bandit problem uh studies how can we quickly verify uh
+[0:05:16] studies how can we quickly verify uh that any arm um uh or any action uh
+[0:05:22] that any arm um uh or any action uh clears a particular fixed bar.
+[0:05:26] clears a particular fixed bar. So [snorts] in this paper uh we study uh
+[0:05:29] So [snorts] in this paper uh we study uh sort of the corresponding statistical
+[0:05:31] sort of the corresponding statistical inference problem after an adaptive
+[0:05:34] inference problem after an adaptive experiment uh which is in this threshold
+[0:05:37] experiment uh which is in this threshold bandit problem. So we want to study
+[0:05:39] bandit problem. So we want to study statistical inference on whether any arm
+[0:05:42] statistical inference on whether any arm uh clears a bar.
+[0:05:52] So there's two really important uh well one really important uh first uh first
+[0:05:56] one really important uh first uh first I'll start with just one uh underlying
+[0:05:58] I'll start with just one uh underlying idea um that sort of ties together
+[0:06:00] idea um that sort of ties together everything we do in the paper uh and
+[0:06:02] everything we do in the paper uh and that's that of game theoretic
+[0:06:04] that's that of game theoretic statistics. Okay. So uh this is a really
+[0:06:07] statistics. Okay. So uh this is a really powerful framework um which has a lot to
+[0:06:10] powerful framework um which has a lot to say about uh the problem we have at
+[0:06:12] say about uh the problem we have at hand. Uh so we can think of a game
+[0:06:16] hand. Uh so we can think of a game played between the experimentter uh and
+[0:06:18] played between the experimentter uh and the data analyst. Uh and the
+[0:06:21] the data analyst. Uh and the experimentter as their goal is to
+[0:06:23] experimentter as their goal is to demonstrate an effect when one exists.
+[0:06:26] demonstrate an effect when one exists. So they're trying to gather evidence and
+[0:06:28] So they're trying to gather evidence and and convince um the analyst uh that
+[0:06:33] and convince um the analyst uh that there is a meaningful effect present.
+[0:06:36] there is a meaningful effect present. Meanwhile, the analyst wishes to control
+[0:06:39] Meanwhile, the analyst wishes to control false positives um under the null. Okay,
+[0:06:42] false positives um under the null. Okay, so we can think of the experimental
+[0:06:44] so we can think of the experimental strategy as an adaptive allocation
+[0:06:46] strategy as an adaptive allocation algorithm. So deciding which arm to
+[0:06:48] algorithm. So deciding which arm to sample at each round [snorts] and the
+[0:06:50] sample at each round [snorts] and the analyst strategy is a robust test.
+[0:06:53] analyst strategy is a robust test. And usually the analyst plays first. So
+[0:06:55] And usually the analyst plays first. So they choose a test and then the
+[0:06:57] they choose a test and then the experimentter gets to sample with the
+[0:06:59] experimentter gets to sample with the goal of trying to reject the null.
+[0:07:04] goal of trying to reject the null. So this creates an interesting tension.
+[0:07:06] So this creates an interesting tension. Um so adaptive sampling so the more
+[0:07:08] Um so adaptive sampling so the more power we give uh the experimentter uh so
+[0:07:12] power we give uh the experimentter uh so the larger uh their strategy space is um
+[0:07:17] the larger uh their strategy space is um the more power they have to reject the
+[0:07:19] the more power they have to reject the null uh even when the null holds.
+[0:07:23] null uh even when the null holds. [snorts] Okay. So you know this uh is an
+[0:07:26] [snorts] Okay. So you know this uh is an instantiation of a common finding which
+[0:07:28] instantiation of a common finding which is that adaptive sampling distorts
+[0:07:31] is that adaptive sampling distorts standard sort of naive tests onto the
+[0:07:34] standard sort of naive tests onto the null.
+[0:07:36] null. So in this paper, we're going to try to
+[0:07:38] So in this paper, we're going to try to give good strategies for both players.
+[0:07:40] give good strategies for both players. Um so we're going to propose robust test
+[0:07:44] Um so we're going to propose robust test statistics. Um so these are statistics
+[0:07:46] statistics. Um so these are statistics that will control type one uh error
+[0:07:48] that will control type one uh error under the null um despite a relatively
+[0:07:51] under the null um despite a relatively general adaptive sampling.
+[0:07:54] general adaptive sampling. Um we're also going to study strategies
+[0:07:58] Um we're also going to study strategies uh for the experimentter. So we're going
+[0:08:00] uh for the experimentter. So we're going to propose uh experimental designs um
+[0:08:03] to propose uh experimental designs um which correspond to maximizing uh the
+[0:08:06] which correspond to maximizing uh the analyst the analysts test statistic.
+[0:08:09] analyst the analysts test statistic. [snorts] I mean in particular we're
+[0:08:11] [snorts] I mean in particular we're going to propose a particular bandit
+[0:08:13] going to propose a particular bandit algorithm sort of a proof of concept um
+[0:08:16] algorithm sort of a proof of concept um which has a a regret bound um which in
+[0:08:21] which has a a regret bound um which in turn guarantees power under certain
+[0:08:23] turn guarantees power under certain alternatives.
+[0:08:32] Okay. Uh and the other half of this idea is that the these demonstration
+[0:08:34] is that the these demonstration experiments we are studying uh differ
+[0:08:36] experiments we are studying uh differ quite a bit from uh other problems
+[0:08:39] quite a bit from uh other problems studied uh in the post uh adaptive uh
+[0:08:44] studied uh in the post uh adaptive uh in the literature on inference after
+[0:08:46] in the literature on inference after adaptive data collection.
+[0:08:49] adaptive data collection. Um so you know a really uh sort of broad
+[0:08:52] Um so you know a really uh sort of broad finding um uh which has written about
+[0:08:56] finding um uh which has written about very uh very uh informatively um is that
+[0:09:01] very uh very uh informatively um is that uh you know in standard uh bandit
+[0:09:03] uh you know in standard uh bandit problems whether they be you sort of
+[0:09:05] problems whether they be you sort of exploration exploitation problems or
+[0:09:07] exploration exploitation problems or pure exploration problems like best arm
+[0:09:09] pure exploration problems like best arm identification um [snorts] there's
+[0:09:11] identification um [snorts] there's generally a trade-off between fully
+[0:09:13] generally a trade-off between fully adaptive sampling um and efficient
+[0:09:15] adaptive sampling um and efficient inference. Um so what we show is that in
+[0:09:19] inference. Um so what we show is that in contrast for the demonstration null um
+[0:09:22] contrast for the demonstration null um we can propose a sharp joint test of the
+[0:09:25] we can propose a sharp joint test of the global null um that there's no uh
+[0:09:28] global null um that there's no uh positive effect present [snorts]
+[0:09:31] positive effect present [snorts] and then we can also expand that uh
+[0:09:33] and then we can also expand that uh although no longer uh sharp to a sort of
+[0:09:37] although no longer uh sharp to a sort of an efficient time uniform uh multiple
+[0:09:40] an efficient time uniform uh multiple test on individual arms. So we can uh
+[0:09:42] test on individual arms. So we can uh also uh sort of test individual
+[0:09:45] also uh sort of test individual hypotheses on the means of individual
+[0:09:46] hypotheses on the means of individual arms um being negative uh or positive.
+[0:09:53] arms um being negative uh or positive. Um moreover these tests uh are shown to
+[0:09:56] Um moreover these tests uh are shown to be valid in a setting uh where the
+[0:09:58] be valid in a setting uh where the number of arms can be large relative to
+[0:10:00] number of arms can be large relative to the sample size uh and also under very
+[0:10:03] the sample size uh and also under very minimal restrictions on the adaptive
+[0:10:04] minimal restrictions on the adaptive sampling rule. Um and the takeaway here
+[0:10:07] sampling rule. Um and the takeaway here is that uh these demonstration uh null
+[0:10:10] is that uh these demonstration uh null hypotheses that we're considering are
+[0:10:11] hypotheses that we're considering are fundamentally easier than say best arm
+[0:10:14] fundamentally easier than say best arm identification hypothesis. [snorts] Um
+[0:10:17] identification hypothesis. [snorts] Um so the tools underlying uh these tests
+[0:10:19] so the tools underlying uh these tests are actually quite familiar in the
+[0:10:21] are actually quite familiar in the literature. So they are methods of
+[0:10:24] literature. So they are methods of stabilizing the variance of the
+[0:10:25] stabilizing the variance of the statistic
+[0:10:27] statistic um and using sort of uh time uniformity
+[0:10:30] um and using sort of uh time uniformity to remove uh sort of pathological
+[0:10:32] to remove uh sort of pathological dependence between the arms means.
+[0:10:36] dependence between the arms means. Okay. So I just want to highlight um
+[0:10:38] Okay. So I just want to highlight um there's a really uh interesting um and
+[0:10:40] there's a really uh interesting um and closely related paper at all um who
+[0:10:43] closely related paper at all um who study the non-asmotic counterparts. So
+[0:10:45] study the non-asmotic counterparts. So we're going to propose asmtoic tests um
+[0:10:48] we're going to propose asmtoic tests um which are relatively practitioner
+[0:10:50] which are relatively practitioner friendly in that they um uh sort of
+[0:10:53] friendly in that they um uh sort of don't depend on precise characteristics
+[0:10:55] don't depend on precise characteristics of uh the arms distributions [snorts] um
+[0:10:59] of uh the arms distributions [snorts] um but uh sort of sandal at all give a
+[0:11:01] but uh sort of sandal at all give a really really um powerful uh analysis uh
+[0:11:04] really really um powerful uh analysis uh of non-asmotic uh testing
+[0:11:07] of non-asmotic uh testing um in a very similar problem. So sort of
+[0:11:09] um in a very similar problem. So sort of testing these this global or
+[0:11:11] testing these this global or demonstration null hypothesis um and
+[0:11:15] demonstration null hypothesis um and we'll come back to this comparison at
+[0:11:16] we'll come back to this comparison at the end um because it's uh it gives us a
+[0:11:19] the end um because it's uh it gives us a lot of uh interesting directions we can
+[0:11:21] lot of uh interesting directions we can go in.
+[0:11:30] Okay. Uh so uh the outline uh for the talk first I'm going to just uh give uh
+[0:11:32] talk first I'm going to just uh give uh the basic setup. So uh sort of the
+[0:11:35] the basic setup. So uh sort of the sampling model um sort of the uh sort of
+[0:11:37] sampling model um sort of the uh sort of distributional assumptions we make
+[0:11:40] distributional assumptions we make &gt;&gt; [snorts]
+[0:11:40] &gt;&gt; [snorts] &gt;&gt; um and I'll introduce sort of formally
+[0:11:42] &gt;&gt; um and I'll introduce sort of formally uh the demonstration null
+[0:11:44] uh the demonstration null um then I'll spend a little bit of time
+[0:11:47] um then I'll spend a little bit of time um talking about the demonstration
+[0:11:49] um talking about the demonstration problem and sort of trying to convince
+[0:11:51] problem and sort of trying to convince you why this is you know truly an easier
+[0:11:54] you why this is you know truly an easier problem than best arm identification if
+[0:11:55] problem than best arm identification if you aren't already convinced.
+[0:11:58] you aren't already convinced. Um then I'll sort of go into the sort uh
+[0:12:01] Um then I'll sort of go into the sort uh sort of the construction of two
+[0:12:02] sort of the construction of two statistics. So one is a pulled test uh
+[0:12:05] statistics. So one is a pulled test uh which uses sort of variance
+[0:12:08] which uses sort of variance stabilization to produce a test that is
+[0:12:11] stabilization to produce a test that is sharp under general adaptive sampling um
+[0:12:17] sharp under general adaptive sampling um uh to test sort of this joint null that
+[0:12:20] uh to test sort of this joint null that all of the arms means do not exceed a
+[0:12:24] all of the arms means do not exceed a given threshold.
+[0:12:26] given threshold. Um then uh we'll sort of consider a time
+[0:12:29] Um then uh we'll sort of consider a time uniform test called the max called max
+[0:12:32] uniform test called the max called max testing um which allows us to reject
+[0:12:36] testing um which allows us to reject hypotheses on the means of individual
+[0:12:38] hypotheses on the means of individual arms or test hypothesis on the means of
+[0:12:40] arms or test hypothesis on the means of individual arms. And then finally we'll
+[0:12:42] individual arms. And then finally we'll turn to the experimentter um and we'll
+[0:12:45] turn to the experimentter um and we'll propose a particular variant of uh upper
+[0:12:48] propose a particular variant of uh upper confidence band um which enjoys a regret
+[0:12:51] confidence band um which enjoys a regret bound um and you know this is another uh
+[0:12:55] bound um and you know this is another uh nice uh sort of aspect of this work is
+[0:12:58] nice uh sort of aspect of this work is that the regret bound translates
+[0:12:59] that the regret bound translates immediately to a power envelope for
+[0:13:03] immediately to a power envelope for these two tests.
+[0:13:05] these two tests. [snorts] Okay. And then lastly, I'll
+[0:13:07] [snorts] Okay. And then lastly, I'll present some simulation evidence um if
+[0:13:09] present some simulation evidence um if time if time allows.
+[0:13:20] Okay, so let's just uh introduce the setting.
+[0:13:22] setting. Okay, so we have a really uh sort of
+[0:13:25] Okay, so we have a really uh sort of familiar uh basic even uh setting um
+[0:13:28] familiar uh basic even uh setting um which is in many ways a sort of a toy
+[0:13:31] which is in many ways a sort of a toy model for the uh full uh de
+[0:13:34] model for the uh full uh de demonstration experiment. one may see in
+[0:13:36] demonstration experiment. one may see in practice. Um we imagine that there's a
+[0:13:38] practice. Um we imagine that there's a karmed bandit. So in each round of a
+[0:13:41] karmed bandit. So in each round of a finite number capital T of rounds, the
+[0:13:43] finite number capital T of rounds, the experiment chooses an arm uh and
+[0:13:46] experiment chooses an arm uh and observes a particular uh observation um
+[0:13:49] observes a particular uh observation um which we think of as a sort of entry of
+[0:13:51] which we think of as a sort of entry of a potential outcome vector.
+[0:13:54] a potential outcome vector. Okay. And these uh vectors are IID
+[0:13:56] Okay. And these uh vectors are IID across time.
+[0:14:04] Um we uh kind of have some notation. So uh you know the experimental strategy
+[0:14:06] uh you know the experimental strategy needs to be uh sort of uh conditioned
+[0:14:09] needs to be uh sort of uh conditioned only on the evidence they've seen so
+[0:14:11] only on the evidence they've seen so far. So their choices up to those up
+[0:14:13] far. So their choices up to those up till this point and their the
+[0:14:15] till this point and their the observations they've seen up till this
+[0:14:16] observations they've seen up till this point. [snorts]
+[0:14:18] point. [snorts] Um and uh sort of will keep track of uh
+[0:14:22] Um and uh sort of will keep track of uh sort of these two parameters. Uh so the
+[0:14:24] sort of these two parameters. Uh so the number of rounds in which the arm G is
+[0:14:26] number of rounds in which the arm G is selected um and uh sort of uh the number
+[0:14:30] selected um and uh sort of uh the number of uh rounds in which a particular arm
+[0:14:33] of uh rounds in which a particular arm has been drawn up until uh the given
+[0:14:36] has been drawn up until uh the given point in time little t.
+[0:14:38] point in time little t. [snorts]
+[0:14:45] Um so we consider uh sort of uh this threshold null hypothesis. So we
+[0:14:48] threshold null hypothesis. So we consider the null hypothesis that each
+[0:14:51] consider the null hypothesis that each arm's mean minus a sort of particular
+[0:14:55] arm's mean minus a sort of particular arm specific threshold is less than or
+[0:14:57] arm specific threshold is less than or equal to zero. So we're testing a joint
+[0:14:59] equal to zero. So we're testing a joint hypothesis that each arm's mean does not
+[0:15:01] hypothesis that each arm's mean does not exceed a fixed threshold. Um now uh this
+[0:15:05] exceed a fixed threshold. Um now uh this you know might raise some eyebrows
+[0:15:07] you know might raise some eyebrows because uh it isn't really uh the same
+[0:15:10] because uh it isn't really uh the same as testing uh that a given arm is better
+[0:15:13] as testing uh that a given arm is better than control um except that you know in
+[0:15:16] than control um except that you know in the settings we have in mind um sort of
+[0:15:18] the settings we have in mind um sort of the status quo is measured very very
+[0:15:20] the status quo is measured very very precisely. Okay. So this uh this is how
+[0:15:23] precisely. Okay. So this uh this is how we're thinking about the problem. we
+[0:15:25] we're thinking about the problem. we sort of know what the status quo is and
+[0:15:28] sort of know what the status quo is and we're uh we know what the cost of each
+[0:15:30] we're uh we know what the cost of each arm is roughly um to implement and we're
+[0:15:33] arm is roughly um to implement and we're just focusing uh on this particular
+[0:15:36] just focusing uh on this particular problem of whether um the arm's mean uh
+[0:15:39] problem of whether um the arm's mean uh which is unknown exists uh exceeds a
+[0:15:41] which is unknown exists uh exceeds a known threshold. Okay, this is an
+[0:15:44] known threshold. Okay, this is an obvious simplification um but I think it
+[0:15:47] obvious simplification um but I think it is a good starting point.
+[0:15:49] is a good starting point. So you know in this setting um which is
+[0:15:52] So you know in this setting um which is admittedly a simplified setting um we
+[0:15:55] admittedly a simplified setting um we can reduce to the case where you know
+[0:15:58] can reduce to the case where you know each threshold is zero um just by
+[0:16:00] each threshold is zero um just by shifting all of the arms observations.
+[0:16:04] shifting all of the arms observations. [snorts]
+[0:16:08] Okay. So uh you know from this point forward we'll just consider testing the
+[0:16:11] forward we'll just consider testing the hypothesis that each arm's mean doesn't
+[0:16:13] hypothesis that each arm's mean doesn't exceed zero um against the alternative
+[0:16:16] exceed zero um against the alternative that at least one mean exceeds zero.
+[0:16:26] Okay, so we make two further uh distributional assumptions. Um one uh is
+[0:16:30] distributional assumptions. Um one uh is uh sort of a what we view as a
+[0:16:32] uh sort of a what we view as a relatively mild uh regularity condition
+[0:16:34] relatively mild uh regularity condition that each arm is sampled at least twice
+[0:16:37] that each arm is sampled at least twice at the very beginning of the experiment.
+[0:16:39] at the very beginning of the experiment. We really need this in order to be able
+[0:16:41] We really need this in order to be able to construct uh estimates of the armwise
+[0:16:44] to construct uh estimates of the armwise uh standard deviation.
+[0:16:46] uh standard deviation. Um and the other uh sort of uh slightly
+[0:16:51] Um and the other uh sort of uh slightly stronger assumption uh is that each
+[0:16:53] stronger assumption uh is that each arm's draw is sub subgausian. Um this
+[0:16:56] arm's draw is sub subgausian. Um this plays a couple of uh important roles for
+[0:16:58] plays a couple of uh important roles for us. So for one um you know uh we are
+[0:17:01] us. So for one um you know uh we are considering finite sample asmtoics where
+[0:17:04] considering finite sample asmtoics where the number of arms is growing as the
+[0:17:06] the number of arms is growing as the number of rounds grows. So this actually
+[0:17:09] number of rounds grows. So this actually this assumption has bite there. So it it
+[0:17:11] this assumption has bite there. So it it is important for verifying that the
+[0:17:13] is important for verifying that the number of the rate at which um the
+[0:17:15] number of the rate at which um the number of arms can grow. Um the other
+[0:17:19] number of arms can grow. Um the other role it plays is in uh analyzing the uh
+[0:17:22] role it plays is in uh analyzing the uh bandit algorithm for the experimentter.
+[0:17:31] Okay. So uh in this setting uh the main goal is to test uh is to devise tests uh
+[0:17:35] goal is to test uh is to devise tests uh that control size uh for any uh you know
+[0:17:39] that control size uh for any uh you know adaptive rule that satisfies this
+[0:17:41] adaptive rule that satisfies this minimal initialization requirement.
+[0:17:50] Okay. So now I'm going to try to convince you why uh for this these
+[0:17:53] convince you why uh for this these demonstration nulls um we can actually
+[0:17:56] demonstration nulls um we can actually uh expect to uh have sharp tests uh
+[0:18:00] uh expect to uh have sharp tests uh under only this initialization
+[0:18:02] under only this initialization requirement.
+[0:18:09] So uh just to explain why this might be surprising um you know the literature
+[0:18:12] surprising um you know the literature sort of establishes uh that you know if
+[0:18:15] sort of establishes uh that you know if we're trying to do uh inference on
+[0:18:17] we're trying to do uh inference on individual arms means uh after adaptive
+[0:18:20] individual arms means uh after adaptive data collection um the our measurements
+[0:18:23] data collection um the our measurements are typically biased. So for example um
+[0:18:26] are typically biased. So for example um a nice story is one in which um you know
+[0:18:29] a nice story is one in which um you know an arm is quickly abandoned because it
+[0:18:31] an arm is quickly abandoned because it receives a bad initial draw. in this
+[0:18:34] receives a bad initial draw. in this setting um you know that arm is never
+[0:18:36] setting um you know that arm is never revisited um you know and so the
+[0:18:41] revisited um you know and so the estimator of that arm's mean the naive
+[0:18:43] estimator of that arm's mean the naive estimator of that arm's mean is going to
+[0:18:44] estimator of that arm's mean is going to be biased downwards
+[0:18:46] be biased downwards okay this is a well-known phenomenon
+[0:18:50] okay this is a well-known phenomenon um and uh usually the literature uh is
+[0:18:56] um and uh usually the literature uh is forced with one of two choices um in
+[0:18:59] forced with one of two choices um in this setting one is to sort of restrict
+[0:19:01] this setting one is to sort of restrict the strategies uh for for adaptive
+[0:19:03] the strategies uh for for adaptive sampling. So for example, if we sample
+[0:19:06] sampling. So for example, if we sample arms with stable propensities uh that
+[0:19:09] arms with stable propensities uh that are bounded away from zero and one, then
+[0:19:11] are bounded away from zero and one, then we can do some something akin to inverse
+[0:19:14] we can do some something akin to inverse probability waiting uh and recover an
+[0:19:16] probability waiting uh and recover an unbiased estimate of the arms mean. Um
+[0:19:18] unbiased estimate of the arms mean. Um but uh you know these tend to rule out
+[0:19:21] but uh you know these tend to rule out the most aggressive um uh regret
+[0:19:25] the most aggressive um uh regret minimizing uh bandit strategies.
+[0:19:29] minimizing uh bandit strategies. Um uh another uh nice idea is uh to sort
+[0:19:34] Um uh another uh nice idea is uh to sort of uh you know in the worst case you
+[0:19:36] of uh you know in the worst case you know it's possible to recover unbiased
+[0:19:38] know it's possible to recover unbiased estimation of the arms mean uh but do so
+[0:19:42] estimation of the arms mean uh but do so uh at a potential cost and so the recent
+[0:19:45] uh at a potential cost and so the recent paper of Kamaro um study that uh study
+[0:19:48] paper of Kamaro um study that uh study sort of um online or not uh
+[0:19:52] sort of um online or not uh um linear contextual bandits um and they
+[0:19:54] um linear contextual bandits um and they show that you know this cost or this
+[0:19:57] show that you know this cost or this penalty um in the rate uh of estimation
+[0:20:01] penalty um in the rate uh of estimation &gt;&gt; [snorts]
+[0:20:01] &gt;&gt; [snorts] &gt;&gt; um is unavoidable under unrestricted
+[0:20:03] &gt;&gt; um is unavoidable under unrestricted adaptive sampling and for particular
+[0:20:06] adaptive sampling and for particular contrast.
+[0:20:07] contrast. Okay. So uh what we find in our work is
+[0:20:10] Okay. So uh what we find in our work is that the demonstration nulls um so for
+[0:20:13] that the demonstration nulls um so for the contrast that we are most interested
+[0:20:15] the contrast that we are most interested in um these constraints uh go away.
+[0:20:21] in um these constraints uh go away. Okay. So why should this be the case? Um
+[0:20:24] Okay. So why should this be the case? Um well let's leave aside the issue of
+[0:20:26] well let's leave aside the issue of adaptivity. Let's consider a setting
+[0:20:28] adaptivity. Let's consider a setting with just three arms [snorts]
+[0:20:30] with just three arms [snorts] and let's consider uh the null
+[0:20:33] and let's consider uh the null hypothesis uh tested in the
+[0:20:35] hypothesis uh tested in the demonstration experiment. Okay. So this
+[0:20:37] demonstration experiment. Okay. So this is uh the null hypothesis is just that
+[0:20:39] is uh the null hypothesis is just that all of the means lie in the non-positive
+[0:20:43] all of the means lie in the non-positive uh half space. Um so it is testing that
+[0:20:47] uh half space. Um so it is testing that the vector of means lies in this
+[0:20:49] the vector of means lies in this negative orant.
+[0:20:52] negative orant. Meanwhile, we can also consider testing
+[0:20:55] Meanwhile, we can also consider testing the hypothesis that arm one is the best
+[0:20:57] the hypothesis that arm one is the best arm. Okay, so this instead you know if
+[0:21:01] arm. Okay, so this instead you know if we plot this in difference space um
+[0:21:05] we plot this in difference space um corresponds to uh the complimentary uh
+[0:21:09] corresponds to uh the complimentary uh or a complimentary uh not actually the
+[0:21:12] or a complimentary uh not actually the complimentary set because the
+[0:21:13] complimentary set because the coordinates are different um but it
+[0:21:15] coordinates are different um but it corresponds to this union of half spaces
+[0:21:18] corresponds to this union of half spaces um which in particular is non-convex.
+[0:21:21] um which in particular is non-convex. Okay. So uh you know uh a classical uh
+[0:21:25] Okay. So uh you know uh a classical uh sort of observation um in you know
+[0:21:28] sort of observation um in you know hypothesis testing is that testing sort
+[0:21:31] hypothesis testing is that testing sort of the convex null hypothesis is
+[0:21:34] of the convex null hypothesis is fundamentally an easier problem.
+[0:21:36] fundamentally an easier problem. [snorts]
+[0:21:36] [snorts] And so this is a first clue that uh sort
+[0:21:39] And so this is a first clue that uh sort of we should expect uh testing the
+[0:21:42] of we should expect uh testing the demonstration null to be easier even uh
+[0:21:44] demonstration null to be easier even uh you know if we throw away this issue of
+[0:21:46] you know if we throw away this issue of adaptive sampling.
+[0:21:50] adaptive sampling. Um the second uh similar observation is
+[0:21:52] Um the second uh similar observation is that uh sort of uh
+[0:21:56] that uh sort of uh in order to reject uh the demonstration
+[0:21:58] in order to reject uh the demonstration null hypothesis we really just require
+[0:22:00] null hypothesis we really just require one certificate. Okay, we need some
+[0:22:02] one certificate. Okay, we need some combination of the arms uh whose means
+[0:22:04] combination of the arms uh whose means exceed zero. So this first of all gives
+[0:22:07] exceed zero. So this first of all gives us a lot of flexibility uh to choose the
+[0:22:09] us a lot of flexibility uh to choose the contrast. Uh we'll see how that comes
+[0:22:11] contrast. Uh we'll see how that comes into play uh when we construct
+[0:22:13] into play uh when we construct statistics. [snorts]
+[0:22:15] statistics. [snorts] Um and second of all it only requires
+[0:22:18] Um and second of all it only requires one certificate. Uh so
+[0:22:21] one certificate. Uh so uh the total amount of evidence we have
+[0:22:24] uh the total amount of evidence we have to collect uh is in some sense smaller.
+[0:22:28] to collect uh is in some sense smaller. Meanwhile uh to sort certify that one a
+[0:22:31] Meanwhile uh to sort certify that one a given arm is best. Okay. So to reject
+[0:22:33] given arm is best. Okay. So to reject the best arm hypothesis for arm one we
+[0:22:36] the best arm hypothesis for arm one we we require k minus one certificates one
+[0:22:38] we require k minus one certificates one for each competitor. So this is uh
+[0:22:40] for each competitor. So this is uh highly constraining for adaptive
+[0:22:42] highly constraining for adaptive sampling um because in order to sort of
+[0:22:46] sampling um because in order to sort of uh provide these k minus one
+[0:22:47] uh provide these k minus one certificates uh I need sufficient
+[0:22:49] certificates uh I need sufficient evidence on every comp competing arm.
+[0:22:52] evidence on every comp competing arm. Okay. So this just reproduces what we
+[0:22:55] Okay. So this just reproduces what we discussed two slides ago which is that
+[0:22:56] discussed two slides ago which is that if the sampling rule avoids any of those
+[0:22:58] if the sampling rule avoids any of those arms um then uh it's uh we lose the
+[0:23:03] arms um then uh it's uh we lose the ability uh to reject the best arm null
+[0:23:06] ability uh to reject the best arm null hypothesis.
+[0:23:07] hypothesis. Okay. So this flexibility um and the
+[0:23:10] Okay. So this flexibility um and the fact that we only get to uh we only need
+[0:23:12] fact that we only get to uh we only need to certify one direction um is precisely
+[0:23:15] to certify one direction um is precisely what's going to make um the
+[0:23:17] what's going to make um the demonstration null easy to test.
+[0:23:32] Okay. Um so now I I'll introduce uh sort of our first uh test statistic um which
+[0:23:35] of our first uh test statistic um which is going to be uh remarkably simple um
+[0:23:38] is going to be uh remarkably simple um and is going to provide sharp inference
+[0:23:41] and is going to provide sharp inference under just the assumption of two samples
+[0:23:44] under just the assumption of two samples per arm.
+[0:23:50] Okay. So uh to introduce the statistic uh it's helpful to first uh begin uh
+[0:23:53] uh it's helpful to first uh begin uh with um its uh infeasible uh
+[0:23:56] with um its uh infeasible uh counterpart. Okay. So this statistic
+[0:23:59] counterpart. Okay. So this statistic just is a running sum of individually
+[0:24:02] just is a running sum of individually standardized so arm uh observations from
+[0:24:06] standardized so arm uh observations from each arm. So we take each arm's
+[0:24:09] each arm. So we take each arm's observation uh we standardize it um and
+[0:24:12] observation uh we standardize it um and then we uh sort of sum over all of all
+[0:24:15] then we uh sort of sum over all of all of the rounds of the experiment.
+[0:24:18] of the rounds of the experiment. Um so first of all um you know it's easy
+[0:24:21] Um so first of all um you know it's easy to check that uh you know under the null
+[0:24:24] to check that uh you know under the null the mean of this running sum can't be
+[0:24:26] the mean of this running sum can't be positive.
+[0:24:27] positive. Um and in fact it's has the super
+[0:24:30] Um and in fact it's has the super martingale property so its increments
+[0:24:32] martingale property so its increments have non-positive mean [snorts]
+[0:24:40] so you know under the sharp null uh that all the means are zero uh this thing uh
+[0:24:42] all the means are zero uh this thing uh will converge uh to uh a standard
+[0:24:45] will converge uh to uh a standard normal. The other thing that's easy to
+[0:24:47] normal. The other thing that's easy to check is that each increment uh of this
+[0:24:49] check is that each increment uh of this running sum uh has conditional variance
+[0:24:52] running sum uh has conditional variance exactly one.
+[0:24:55] exactly one. Um so another nice property of this
+[0:24:58] Um so another nice property of this object uh is that you know if we move
+[0:25:01] object uh is that you know if we move away from the null hypothesis uh we can
+[0:25:03] away from the null hypothesis uh we can see that its conditional mean is a
+[0:25:05] see that its conditional mean is a weighted uh average of signal to noise
+[0:25:08] weighted uh average of signal to noise ratios.
+[0:25:10] ratios. Um so in particular the weights are
+[0:25:11] Um so in particular the weights are these allocation weights. So the
+[0:25:13] these allocation weights. So the fraction of samples uh allocated to
+[0:25:16] fraction of samples uh allocated to ARMG. Um and the things being awaited
+[0:25:19] ARMG. Um and the things being awaited are these signal to noise ratios uh
+[0:25:22] are these signal to noise ratios uh which are sort of the means divided by
+[0:25:24] which are sort of the means divided by the standard deviations.
+[0:25:26] the standard deviations. Okay. So this is going to come back
+[0:25:28] Okay. So this is going to come back later when we discuss uh sort of
+[0:25:31] later when we discuss uh sort of experimental design um because uh
+[0:25:34] experimental design um because uh optimizing the statistic uh sort of is
+[0:25:37] optimizing the statistic uh sort of is naturally [snorts] um going to
+[0:25:39] naturally [snorts] um going to correspond to a bandit problem where we
+[0:25:42] correspond to a bandit problem where we want to optimize the signal to noise
+[0:25:43] want to optimize the signal to noise ratio.
+[0:25:45] ratio. [snorts] Um and the other thing I want
+[0:25:47] [snorts] Um and the other thing I want to emphasize is that this is a very
+[0:25:49] to emphasize is that this is a very simple approach. Um so uh this idea of
+[0:25:52] simple approach. Um so uh this idea of standardizing the increments uh has
+[0:25:54] standardizing the increments uh has certainly appeared before in uh attempt
+[0:25:57] certainly appeared before in uh attempt you know in work on uh testing best ARM
+[0:26:01] you know in work on uh testing best ARM hypothesis. Um but here it's going to
+[0:26:03] hypothesis. Um but here it's going to buy us quite a lot. Um
+[0:26:08] buy us quite a lot. Um okay so the only real obstacle we have
+[0:26:10] okay so the only real obstacle we have uh in order to sort of put this into
+[0:26:13] uh in order to sort of put this into practice is how to uh sort of uh
+[0:26:15] practice is how to uh sort of uh estimize uh estimate the armwise
+[0:26:18] estimize uh estimate the armwise standard deviations. Sorry.
+[0:26:29] Um so to explain uh why that um is not so difficult um we want to make the
+[0:26:32] so difficult um we want to make the point that uh these weights uh sort of
+[0:26:35] point that uh these weights uh sort of that we assign to each arm's uh
+[0:26:37] that we assign to each arm's uh standardized sum follow the algorithm.
+[0:26:40] standardized sum follow the algorithm. So the more the al algorithm uh chooses
+[0:26:43] So the more the al algorithm uh chooses uh to explore a certain arm the more
+[0:26:46] uh to explore a certain arm the more weight that arm receives uh in the
+[0:26:48] weight that arm receives uh in the statistic.
+[0:26:50] statistic. Um so this is exploiting exactly the
+[0:26:52] Um so this is exploiting exactly the phenomenon we discussed uh when we were
+[0:26:54] phenomenon we discussed uh when we were talking in general about the
+[0:26:55] talking in general about the demonstration null. Um it we have the
+[0:26:57] demonstration null. Um it we have the flexibility to look in any direction
+[0:26:59] flexibility to look in any direction where we have sufficient evidence.
+[0:27:00] where we have sufficient evidence. [snorts] Um and uh you know so we're
+[0:27:03] [snorts] Um and uh you know so we're just constructing the statistic to look
+[0:27:05] just constructing the statistic to look in the direction where the evidence is
+[0:27:06] in the direction where the evidence is there.
+[0:27:15] Okay. So in order to make this feasible um we have to do a regularization.
+[0:27:18] um we have to do a regularization. Um this is quite natural. Um so you know
+[0:27:22] Um this is quite natural. Um so you know in the setting where we have a given arm
+[0:27:24] in the setting where we have a given arm with very very few observations say just
+[0:27:27] with very very few observations say just two uh it's possible that the standard
+[0:27:30] two uh it's possible that the standard armwise estimate of the standard
+[0:27:32] armwise estimate of the standard deviation is tiny and then you know this
+[0:27:35] deviation is tiny and then you know this arm can have a speurious and very large
+[0:27:38] arm can have a speurious and very large contribution to the running sum. So we
+[0:27:40] contribution to the running sum. So we need a minimal regularization um to rule
+[0:27:42] need a minimal regularization um to rule that out.
+[0:27:44] that out. Uh so a very simple approach which we
+[0:27:47] Uh so a very simple approach which we show in the paper uh works um is to just
+[0:27:50] show in the paper uh works um is to just pad uh the um variance or the standard
+[0:27:54] pad uh the um variance or the standard deviation estimates with a quantity that
+[0:27:56] deviation estimates with a quantity that shrinks um with the sample size.
+[0:28:00] shrinks um with the sample size. So uh you know in particular we propose
+[0:28:02] So uh you know in particular we propose a square root of log of the number of
+[0:28:05] a square root of log of the number of arms times the number of of the total
+[0:28:07] arms times the number of of the total sample budget divided by uh the number
+[0:28:10] sample budget divided by uh the number of observations of that arm so far.
+[0:28:14] of observations of that arm so far. Okay, so this is completely tuning free.
+[0:28:16] Okay, so this is completely tuning free. Um, and we'll show that this is really
+[0:28:18] Um, and we'll show that this is really all we need to do in order to implement
+[0:28:20] all we need to do in order to implement the statistic.
+[0:28:29] Okay. Um so in this setting uh we can show uh sort of Barry Essen bound so a
+[0:28:32] show uh sort of Barry Essen bound so a sort of martingale central limit theorem
+[0:28:35] sort of martingale central limit theorem with a finite uh error bound um on uh
+[0:28:39] with a finite uh error bound um on uh the the feasible version of the
+[0:28:42] the the feasible version of the statistic. So in particular um under
+[0:28:46] statistic. So in particular um under sort of the uh sharp null um the
+[0:28:52] sort of the uh sharp null um the statistic will converge to a normal
+[0:28:54] statistic will converge to a normal distribution uh at this rate um which is
+[0:28:57] distribution uh at this rate um which is sort of uh the one overt rate plus some
+[0:29:01] sort of uh the one overt rate plus some logarithmic uh terms um and importantly
+[0:29:06] logarithmic uh terms um and importantly um a variance estimation error factor
+[0:29:08] um a variance estimation error factor which scales like k the number of arms.
+[0:29:16] Okay, so this immediately implies that um if we use a normal critical value um
+[0:29:18] um if we use a normal critical value um you know in the regime where this error
+[0:29:20] you know in the regime where this error bound is converging to zero we will
+[0:29:22] bound is converging to zero we will recover uh a valid test. So we'll uh
+[0:29:26] recover uh a valid test. So we'll uh control type one error. Um so I just
+[0:29:29] control type one error. Um so I just want to emphasize again that you know
+[0:29:31] want to emphasize again that you know this applies uh for almost any um
+[0:29:35] this applies uh for almost any um sampling rule.
+[0:29:38] sampling rule. Um now I've studied this I've described
+[0:29:41] Um now I've studied this I've described this centered statistic. There's another
+[0:29:43] this centered statistic. There's another step which I've suppressed which is that
+[0:29:45] step which I've suppressed which is that uh you know under the null uh any uh the
+[0:29:48] uh you know under the null uh any uh the feasible statistic is going to be
+[0:29:49] feasible statistic is going to be dominated by its centered counterpart.
+[0:29:52] dominated by its centered counterpart. Okay. So this uh provides um a test of
+[0:29:55] Okay. So this uh provides um a test of the null um in general.
+[0:29:59] the null um in general. Um and the test uh is also sharp in the
+[0:30:02] Um and the test uh is also sharp in the sense that under the sharp null um the
+[0:30:05] sense that under the sharp null um the alpha um size of the test is exact.
+[0:30:16] Um so just to say a little bit about why this works uh it's a relatively simple
+[0:30:18] this works uh it's a relatively simple argument. Um so there's two cases.
+[0:30:22] argument. Um so there's two cases. There's the case where we have
+[0:30:23] There's the case where we have sufficient evidence on this arm and then
+[0:30:26] sufficient evidence on this arm and then everything is fine. Um so the variance
+[0:30:28] everything is fine. Um so the variance estimate is close to um the true
+[0:30:31] estimate is close to um the true variance and you know for these arms um
+[0:30:35] variance and you know for these arms um their contribution to the feasible
+[0:30:37] their contribution to the feasible statistic is roughly uh the same as um
+[0:30:41] statistic is roughly uh the same as um it would be uh with the infeasible
+[0:30:43] it would be uh with the infeasible statistic. Um meanwhile when uh the
+[0:30:46] statistic. Um meanwhile when uh the number of sampled arms is small uh well
+[0:30:50] number of sampled arms is small uh well uh those arms receive a small weight in
+[0:30:54] uh those arms receive a small weight in the running sum.
+[0:30:56] the running sum. So regularization uh gives us a trivial
+[0:30:58] So regularization uh gives us a trivial bound uh on the potential uh sort of
+[0:31:02] bound uh on the potential uh sort of size of those uh increments uh the
+[0:31:05] size of those uh increments uh the [snorts] increments from those arms uh
+[0:31:07] [snorts] increments from those arms uh relative uh to uh sort of the
+[0:31:10] relative uh to uh sort of the unstandardized versions.
+[0:31:13] unstandardized versions. Um and that trivial bound scales like
+[0:31:16] Um and that trivial bound scales like the number of draws of the arm so far.
+[0:31:19] the number of draws of the arm so far. Uh meanwhile the weights assigned uh to
+[0:31:22] Uh meanwhile the weights assigned uh to those arms also scale like the number of
+[0:31:23] those arms also scale like the number of draws so far. So you know on this uh
+[0:31:26] draws so far. So you know on this uh path where this arm doesn't receive many
+[0:31:28] path where this arm doesn't receive many draws uh the contribution from uh all of
+[0:31:31] draws uh the contribution from uh all of this uh can be controlled.
+[0:31:35] this uh can be controlled. Um and so I just want to revisit this
+[0:31:38] Um and so I just want to revisit this point that the crucial thing making this
+[0:31:40] point that the crucial thing making this work is that we uh don't need to
+[0:31:43] work is that we uh don't need to estimate every arm. Uh we just need to
+[0:31:45] estimate every arm. Uh we just need to estimate some combination of the arms
+[0:31:47] estimate some combination of the arms where the evidence happens to be. Okay,
+[0:31:50] where the evidence happens to be. Okay, this is a strong difference from best
+[0:31:52] this is a strong difference from best arm identification.
+[0:32:04] Okay. So now I want to turn to a test which loses this you know really nice uh
+[0:32:07] which loses this you know really nice uh um uh sort of sharp property of the
+[0:32:11] um uh sort of sharp property of the pulled statistic we've just discussed um
+[0:32:14] pulled statistic we've just discussed um but does so uh for a good reason. Um so
+[0:32:17] but does so uh for a good reason. Um so the pool test I've just discussed is
+[0:32:19] the pool test I've just discussed is very elegant um I think but um uh it is
+[0:32:24] very elegant um I think but um uh it is also uh you know um it has real
+[0:32:26] also uh you know um it has real practical limitations. Um the biggest
+[0:32:28] practical limitations. Um the biggest one is that you know it's in some
+[0:32:31] one is that you know it's in some settings uh it is indeed useful to
+[0:32:33] settings uh it is indeed useful to certify [snorts] um that there's some
+[0:32:35] certify [snorts] um that there's some meaningful effect present. Um but it's
+[0:32:38] meaningful effect present. Um but it's still an open problem for us how to take
+[0:32:41] still an open problem for us how to take uh the pool statistic and recover the
+[0:32:43] uh the pool statistic and recover the identity of an actually good arm.
+[0:32:46] identity of an actually good arm. Um so in order to uh sort of get past
+[0:32:49] Um so in order to uh sort of get past this sort of problem um we uh turn to uh
+[0:32:54] this sort of problem um we uh turn to uh a different approach which corresponds
+[0:32:56] a different approach which corresponds to a multiple uh hypothesis test on the
+[0:33:00] to a multiple uh hypothesis test on the uh on the mean of each individual arm.
+[0:33:03] uh on the mean of each individual arm. Um it turns out that the approach uh
+[0:33:06] Um it turns out that the approach uh that we'll take will naturally also
+[0:33:08] that we'll take will naturally also allow us to accommodate early stopping.
+[0:33:10] allow us to accommodate early stopping. So you know as soon as we have
+[0:33:11] So you know as soon as we have sufficient evidence we can end the
+[0:33:12] sufficient evidence we can end the experiment and sort of report uh a
+[0:33:15] experiment and sort of report uh a rejection for a particular arm.
+[0:33:22] Um another uh thing which we discovered you know in simulations uh and which is
+[0:33:26] you know in simulations uh and which is certainly also true is that you know in
+[0:33:28] certainly also true is that you know in the setting where one arm is
+[0:33:30] the setting where one arm is particularly good um it's actually
+[0:33:34] particularly good um it's actually potentially more powerful to just use
+[0:33:36] potentially more powerful to just use the evidence from that arm. Okay. Okay,
+[0:33:37] the evidence from that arm. Okay. Okay, the pulled statistic by uh throwing
+[0:33:40] the pulled statistic by uh throwing together pulling together evidence from
+[0:33:42] together pulling together evidence from all of the arms uh is going to weigh
+[0:33:44] all of the arms uh is going to weigh down uh the statistic under the
+[0:33:46] down uh the statistic under the alternative um with all of the samples
+[0:33:48] alternative um with all of the samples from uh sub-optimal arms.
+[0:33:56] Okay. Uh so the idea is we are going to jointly test these individual uh null
+[0:33:59] jointly test these individual uh null hypotheses on the individual arms uh
+[0:34:02] hypotheses on the individual arms uh using armwise se sequential tstistics.
+[0:34:07] using armwise se sequential tstistics. Um so this uh approach is going to be uh
+[0:34:10] Um so this uh approach is going to be uh quite flexible as well. It's going to
+[0:34:12] quite flexible as well. It's going to allow the number of arms to grow rapidly
+[0:34:15] allow the number of arms to grow rapidly essentially as quickly as possible under
+[0:34:17] essentially as quickly as possible under this minimal requirement that there are
+[0:34:18] this minimal requirement that there are two samples per arm.
+[0:34:21] two samples per arm. Um uh but it will come at a cost um and
+[0:34:25] Um uh but it will come at a cost um and the cost is uh that generally this will
+[0:34:28] the cost is uh that generally this will provide a more conservative test and we
+[0:34:30] provide a more conservative test and we we see that in practice in the
+[0:34:32] we see that in practice in the simulations as well.
+[0:34:34] simulations as well. Okay, essentially we have to pay some
+[0:34:36] Okay, essentially we have to pay some cost for multiple hypothesis uh testing.
+[0:34:40] cost for multiple hypothesis uh testing. Um and you know Aurelian actually uh
+[0:34:43] Um and you know Aurelian actually uh chat when in chatting about the paper uh
+[0:34:45] chat when in chatting about the paper uh gave a really good idea towards sort of
+[0:34:47] gave a really good idea towards sort of improving this uh this penalty or or
+[0:34:49] improving this uh this penalty or or mitigating it um which I'll come to at
+[0:34:52] mitigating it um which I'll come to at the very end.
+[0:34:55] the very end. Okay. So you know earlier I sort of
+[0:34:57] Okay. So you know earlier I sort of presented the whole benefit of uh the
+[0:35:00] presented the whole benefit of uh the demonstration experiment as we don't
+[0:35:01] demonstration experiment as we don't need to provide a certificate for each
+[0:35:03] need to provide a certificate for each arm. Uh but here now I'm telling you
+[0:35:06] arm. Uh but here now I'm telling you we're going to test all of the arms. Uh
+[0:35:08] we're going to test all of the arms. Uh so let me explain uh how this can still
+[0:35:11] so let me explain uh how this can still work.
+[0:35:13] work. Okay. So uh the first idea which is not
+[0:35:15] Okay. So uh the first idea which is not our idea. It comes from uh this time
+[0:35:18] our idea. It comes from uh this time uniform inference uh literature which is
+[0:35:20] uniform inference uh literature which is uh really active. um is uh you know
+[0:35:26] uh really active. um is uh you know to notice that all of the pathological
+[0:35:28] to notice that all of the pathological dependence uh in our observations uh
+[0:35:31] dependence uh in our observations uh from the bandit experiment come through
+[0:35:34] from the bandit experiment come through the number of samples allocated to each
+[0:35:36] the number of samples allocated to each arm. So if I imagine a counterfactual
+[0:35:38] arm. So if I imagine a counterfactual world uh where I sample each arm uh for
+[0:35:42] world uh where I sample each arm uh for all T rounds then I observe a stationary
+[0:35:45] all T rounds then I observe a stationary an IIAD sequence for that arm uh for
+[0:35:48] an IIAD sequence for that arm uh for each arm
+[0:35:50] each arm and so um somehow if I can remove the
+[0:35:53] and so um somehow if I can remove the dependence on which index I happen to be
+[0:35:56] dependence on which index I happen to be at okay how many samples I've allocated
+[0:35:58] at okay how many samples I've allocated to each arm uh then uh I can potentially
+[0:36:02] to each arm uh then uh I can potentially remove this topological dependence
+[0:36:04] remove this topological dependence between the arms. Okay. Uh and so uh the
+[0:36:08] between the arms. Okay. Uh and so uh the naive but also quite effective thing uh
+[0:36:11] naive but also quite effective thing uh which we're going to do um is we're
+[0:36:13] which we're going to do um is we're going to just look at the sort of
+[0:36:15] going to just look at the sort of supreum over all of these points in
+[0:36:17] supreum over all of these points in time. Uh in doing so uh we remove this
+[0:36:20] time. Uh in doing so uh we remove this dependence on which point in time we
+[0:36:22] dependence on which point in time we happen to be uh visiting at the end of
+[0:36:25] happen to be uh visiting at the end of the experiment.
+[0:36:34] Okay. So instead of testing uh these particular armwise sample means we're
+[0:36:36] particular armwise sample means we're going to test the whole path.
+[0:36:45] Okay. So the idea here following um uh sort of uh classical work by Robin
+[0:36:48] sort of uh classical work by Robin Ziggman uh and uh others um is to use
+[0:36:51] Ziggman uh and uh others um is to use the invariance principle. So each of
+[0:36:53] the invariance principle. So each of these uh partial sum processes
+[0:36:56] these uh partial sum processes corresponding to each arm are going to
+[0:36:58] corresponding to each arm are going to be uh in a large sample you know after
+[0:37:01] be uh in a large sample you know after some burn-in period close to a brownie
+[0:37:02] some burn-in period close to a brownie in motion path.
+[0:37:06] in motion path. Um
+[0:37:07] Um okay so if we instead of focusing on the
+[0:37:11] okay so if we instead of focusing on the particular uh running sum for that arm
+[0:37:14] particular uh running sum for that arm at the end of the experiment or at any
+[0:37:15] at the end of the experiment or at any point in time look at the whole path uh
+[0:37:19] point in time look at the whole path uh then uh we remove the problem of uh the
+[0:37:24] then uh we remove the problem of uh the dependence from uh adaptive sample
+[0:37:26] dependence from uh adaptive sample allocation and moreover this is a
+[0:37:29] allocation and moreover this is a pivotal uh sort of object uh sort of uh
+[0:37:32] pivotal uh sort of object uh sort of uh you know we can carefully compute the
+[0:37:34] you know we can carefully compute the probability that the brownie in motion
+[0:37:36] probability that the brownie in motion crosses the boundary.
+[0:37:42] Okay, so here's the picture of what's going on. So we run our experiment.
+[0:37:44] going on. So we run our experiment. [snorts] Uh each time we uh we have many
+[0:37:48] [snorts] Uh each time we uh we have many colored lines here on the picture uh
+[0:37:51] colored lines here on the picture uh each corresponding to a different arm
+[0:37:54] each corresponding to a different arm and uh you know every time we draw a
+[0:37:56] and uh you know every time we draw a sample from that arm uh we sort of move
+[0:37:59] sample from that arm uh we sort of move down its counterfactual path. Um we
+[0:38:02] down its counterfactual path. Um we extend the solid part of the line and
+[0:38:05] extend the solid part of the line and then at the end of the experiment the
+[0:38:06] then at the end of the experiment the solid part of the line stops extending.
+[0:38:09] solid part of the line stops extending. Um but still there's this counterfactual
+[0:38:12] Um but still there's this counterfactual uh set of draws of that arm uh which are
+[0:38:15] uh set of draws of that arm uh which are dotted and which continue all the way
+[0:38:17] dotted and which continue all the way until uh the end of the experiment.
+[0:38:26] So the idea is uh the pathological dependence we've discussed so sort of
+[0:38:28] dependence we've discussed so sort of this adaptive sample allocation only
+[0:38:30] this adaptive sample allocation only concerns uh when the solid line becomes
+[0:38:32] concerns uh when the solid line becomes a dotted line. So if we instead replace
+[0:38:35] a dotted line. So if we instead replace each solid line by combining it with its
+[0:38:39] each solid line by combining it with its dotted counterpart, [snorts] we get a
+[0:38:42] dotted counterpart, [snorts] we get a test which is pivotal um and which uh
+[0:38:45] test which is pivotal um and which uh sort of doesn't uh suffer from this
+[0:38:48] sort of doesn't uh suffer from this dependence uh due to adaptive sample
+[0:38:50] dependence uh due to adaptive sample allocation. Um now uh the sort of caveat
+[0:38:56] allocation. Um now uh the sort of caveat is that this is obviously conservative.
+[0:38:58] is that this is obviously conservative. Okay, it is uh sort of uh not uh just uh
+[0:39:02] Okay, it is uh sort of uh not uh just uh testing uh the particular allocation we
+[0:39:05] testing uh the particular allocation we saw but it's actually sort of testing
+[0:39:09] saw but it's actually sort of testing it's taking a union bound over all of
+[0:39:10] it's taking a union bound over all of these paths uh over the full length of
+[0:39:13] these paths uh over the full length of the path
+[0:39:15] the path and so it's paying for the infinite
+[0:39:17] and so it's paying for the infinite horizon. So the potential that if I were
+[0:39:19] horizon. So the potential that if I were to have kept sampling this arm I would
+[0:39:21] to have kept sampling this arm I would eventually reject. [snorts]
+[0:39:23] eventually reject. [snorts] Um and it's also in some way paying for
+[0:39:24] Um and it's also in some way paying for multiplicity.
+[0:39:31] Okay. So the way we put this into practice uh is you know Robin
+[0:39:33] practice uh is you know Robin &gt;&gt; Hi Sua uh sorry for the interruption um
+[0:39:36] &gt;&gt; Hi Sua uh sorry for the interruption um but we're like close to uh time. So if
+[0:39:39] but we're like close to uh time. So if you can wrap up the talk you like five
+[0:39:41] you can wrap up the talk you like five to 10 minutes that would be very
+[0:39:43] to 10 minutes that would be very helpful. Thank you.
+[0:39:44] helpful. Thank you. &gt;&gt; Yes. Let me um skip ahead. [snorts]
+[0:39:46] &gt;&gt; Yes. Let me um skip ahead. [snorts] &gt;&gt; Yeah. Um
+[0:39:47] &gt;&gt; Yeah. Um &gt;&gt; so the I guess one thing I'll say is the
+[0:39:50] &gt;&gt; so the I guess one thing I'll say is the key sort of challenge technically is to
+[0:39:53] key sort of challenge technically is to show that this uh approximation works
+[0:39:55] show that this uh approximation works when there's a growing number of arms.
+[0:39:57] when there's a growing number of arms. Okay. So that's important technical
+[0:39:59] Okay. So that's important technical aspect of the paper.
+[0:40:01] aspect of the paper. Um uh and in doing so we get a sort of
+[0:40:05] Um uh and in doing so we get a sort of valid uh test uh you know which allows
+[0:40:08] valid uh test uh you know which allows us to uh sort of uh um reject early if
+[0:40:12] us to uh sort of uh um reject early if if the evidence allows and and also uh
+[0:40:15] if the evidence allows and and also uh sort of reject these individual
+[0:40:16] sort of reject these individual hypotheses on arms.
+[0:40:19] hypotheses on arms. Um
+[0:40:21] Um okay we have four minutes left. Awesome.
+[0:40:25] okay we have four minutes left. Awesome. Um okay so I I briefly want to comment
+[0:40:27] Um okay so I I briefly want to comment on this uh sort of uh concurrent very
+[0:40:30] on this uh sort of uh concurrent very similar paper because there's one really
+[0:40:31] similar paper because there's one really good idea that I want to um discuss as
+[0:40:34] good idea that I want to um discuss as an opportunity for future work. Um so
+[0:40:36] an opportunity for future work. Um so Sandival Wabby Smith and Jordan uh sort
+[0:40:39] Sandival Wabby Smith and Jordan uh sort of do the e-process version of global
+[0:40:41] of do the e-process version of global null testing which is very complimentary
+[0:40:43] null testing which is very complimentary to what we do in this paper. And one
+[0:40:45] to what we do in this paper. And one really interesting idea uh which comes
+[0:40:47] really interesting idea uh which comes out of that uh is you know in the test I
+[0:40:51] out of that uh is you know in the test I just described we allocate an equal sort
+[0:40:54] just described we allocate an equal sort of alpha budget to each arm. Um
+[0:40:58] of alpha budget to each arm. Um and uh a very nice idea is to adaptively
+[0:41:02] and uh a very nice idea is to adaptively sort of tilt uh the alpha spending
+[0:41:04] sort of tilt uh the alpha spending towards arms that seem to be doing well.
+[0:41:06] towards arms that seem to be doing well. So that's something which the pulled
+[0:41:07] So that's something which the pulled statistic does automatically um but this
+[0:41:10] statistic does automatically um but this max uh statistic as we've constructed it
+[0:41:12] max uh statistic as we've constructed it does not do. Um and so that's a
+[0:41:14] does not do. Um and so that's a potential to improve this multiplicity
+[0:41:16] potential to improve this multiplicity cost.
+[0:41:19] cost. Okay. Um
+[0:41:21] Okay. Um I think uh in the interest of time uh
+[0:41:24] I think uh in the interest of time uh I'm going to just uh sort of give uh the
+[0:41:26] I'm going to just uh sort of give uh the takeaways. Um so um but please look at
+[0:41:30] takeaways. Um so um but please look at the paper uh to learn about uh sort of
+[0:41:32] the paper uh to learn about uh sort of the experimenters strategy as well and
+[0:41:35] the experimenters strategy as well and to see simulation evidence. Um so the
+[0:41:37] to see simulation evidence. Um so the first thing uh takeaway I want to leave
+[0:41:39] first thing uh takeaway I want to leave you with is that the question uh really
+[0:41:41] you with is that the question uh really matters. So this demonstration uh null
+[0:41:44] matters. So this demonstration uh null is much easier to test than the best
+[0:41:46] is much easier to test than the best arm.
+[0:41:47] arm. And what this means is that we can uh
+[0:41:49] And what this means is that we can uh propose statistics uh which are valid
+[0:41:52] propose statistics uh which are valid under uh nearly a sort of unrestricted
+[0:41:55] under uh nearly a sort of unrestricted adaptive sampling.
+[0:41:57] adaptive sampling. Um and the last thing which we didn't
+[0:41:59] Um and the last thing which we didn't really get to discuss but which is nice
+[0:42:01] really get to discuss but which is nice is that both of these statistics we've
+[0:42:03] is that both of these statistics we've uh constructed are large uh precisely
+[0:42:05] uh constructed are large uh precisely when uh the adaptive sampling focuses on
+[0:42:08] when uh the adaptive sampling focuses on arms with the highest signal to noise
+[0:42:09] arms with the highest signal to noise ratio which is natural.
+[0:42:12] ratio which is natural. And so we can actually construct banded
+[0:42:14] And so we can actually construct banded algorithms uh which target the signal to
+[0:42:16] algorithms uh which target the signal to noise ratio and these will have power
+[0:42:19] noise ratio and these will have power envelope guarantees for the these
+[0:42:21] envelope guarantees for the these statistics under alternative hypothesis.
+[0:42:24] statistics under alternative hypothesis. Okay. Um and with that uh I'll sort of
+[0:42:27] Okay. Um and with that uh I'll sort of wrap up the talk. Thanks everyone for
+[0:42:29] wrap up the talk. Thanks everyone for having me. Uh yeah um happy to answer
+[0:42:32] having me. Uh yeah um happy to answer questions now.
+[0:42:39] &gt;&gt; Great. Thanks for the very nice talk. Uh we have two quick questions that you you
+[0:42:42] we have two quick questions that you you might answer now and then we can move to
+[0:42:44] might answer now and then we can move to the discussion. The first one says could
+[0:42:46] the discussion. The first one says could the arms have different dimensions?
+[0:42:49] the arms have different dimensions? &gt;&gt; Uh yes. Uh in principle they they could.
+[0:42:52] &gt;&gt; Uh yes. Uh in principle they they could. Um I think uh you mean different
+[0:42:54] Um I think uh you mean different dimensions from each other? Um
+[0:42:57] dimensions from each other? Um &gt;&gt; I think in the
+[0:42:59] &gt;&gt; I think in the I think in the max testing approach they
+[0:43:02] I think in the max testing approach they certainly could. um in the pool testing
+[0:43:05] certainly could. um in the pool testing approach, I'm not entirely sure how uh I
+[0:43:10] approach, I'm not entirely sure how uh I would implement it or or how how I would
+[0:43:12] would implement it or or how how I would construct the statistic. Um so that
+[0:43:16] construct the statistic. Um so that that's a very good question. Um I I
+[0:43:17] that's a very good question. Um I I think because we have flexibility to for
+[0:43:20] think because we have flexibility to for example
+[0:43:21] example yeah I I guess also I'm not sure what
+[0:43:23] yeah I I guess also I'm not sure what the the individual arm hypothesis is in
+[0:43:26] the the individual arm hypothesis is in the in the case of a multi-dimensional
+[0:43:28] the in the case of a multi-dimensional statistic. So I would also want to think
+[0:43:29] statistic. So I would also want to think about that.
+[0:43:32] about that. &gt;&gt; Thanks. Another question from another
+[0:43:34] &gt;&gt; Thanks. Another question from another attendee is that uh could there be
+[0:43:36] attendee is that uh could there be situations where the limiting behavior
+[0:43:38] situations where the limiting behavior becomes non-branian say levy?
+[0:43:41] becomes non-branian say levy? &gt;&gt; Um so yes
+[0:43:46] &gt;&gt; Um so yes there could um uh that being said um you
+[0:43:51] there could um uh that being said um you know I think uh in a pretty large like
+[0:43:53] know I think uh in a pretty large like you know the the Brownian limit I think
+[0:43:55] you know the the Brownian limit I think has a very wide domain of attraction. So
+[0:43:57] has a very wide domain of attraction. So I think I'd have to it it would take me
+[0:43:59] I think I'd have to it it would take me some work to construct an example where
+[0:44:01] some work to construct an example where that was a sort of meaningful uh
+[0:44:03] that was a sort of meaningful uh behavior.
+[0:44:09] &gt;&gt; Awesome. I think that's all we had from the audience so far. So maybe we can now
+[0:44:12] the audience so far. So maybe we can now quickly move to the discussion. Um or
+[0:44:14] quickly move to the discussion. Um or feel free to share.
+[0:44:16] feel free to share. &gt;&gt; All right. Yeah. Uh all right. So let me
+[0:44:19] &gt;&gt; All right. Yeah. Uh all right. So let me present. So we practiced that earlier so
+[0:44:21] present. So we practiced that earlier so it should be fine. Share. All right. Uh
+[0:44:26] it should be fine. Share. All right. Uh yes.
+[0:44:28] yes. [clears throat]
+[0:44:28] [clears throat] &gt;&gt; Can you see? So
+[0:44:30] &gt;&gt; Can you see? So &gt;&gt; yes.
+[0:44:31] &gt;&gt; yes. &gt;&gt; All right. Uh let me move to full
+[0:44:34] &gt;&gt; All right. Uh let me move to full screen.
+[0:44:36] screen. &gt;&gt; Can I still see you guys? I can still
+[0:44:37] &gt;&gt; Can I still see you guys? I can still see you guys. All right. So yeah, uh
+[0:44:40] see you guys. All right. So yeah, uh thanks a lot for for the very nice talk.
+[0:44:43] thanks a lot for for the very nice talk. It was very very interesting problem.
+[0:44:45] It was very very interesting problem. And um so I think like I'm going to
+[0:44:49] And um so I think like I'm going to mention a few things that that came to
+[0:44:51] mention a few things that that came to mind when I read the paper and hopefully
+[0:44:53] mind when I read the paper and hopefully uh like it's how I progressed towards
+[0:44:56] uh like it's how I progressed towards understanding of it. So maybe it could
+[0:44:59] understanding of it. So maybe it could be uh valuable for for the audience as
+[0:45:01] be uh valuable for for the audience as well. Um and uh and then like based on
+[0:45:05] well. Um and uh and then like based on this discussion we had a very nice
+[0:45:06] this discussion we had a very nice discussion with with SW yesterday. Um so
+[0:45:09] discussion with with SW yesterday. Um so hopefully like uh we can pursue with the
+[0:45:11] hopefully like uh we can pursue with the audience like some of these talking
+[0:45:13] audience like some of these talking points. All right. So again like just um
+[0:45:16] points. All right. So again like just um to reccast what's the point what SW made
+[0:45:18] to reccast what's the point what SW made extremely clear is this is about testing
+[0:45:20] extremely clear is this is about testing the global null that norm is good right
+[0:45:24] the global null that norm is good right and this is literally like this problem
+[0:45:25] and this is literally like this problem of demonstration and so touched to like
+[0:45:29] of demonstration and so touched to like this problem of exhibition so like there
+[0:45:31] this problem of exhibition so like there is this tension between demonstration
+[0:45:32] is this tension between demonstration and exhibition and again so as pointed
+[0:45:36] and exhibition and again so as pointed out demonstration is essentially a not
+[0:45:38] out demonstration is essentially a not too hard um statistical task
+[0:45:42] too hard um statistical task um which is rejecting the global null
+[0:45:44] um which is rejecting the global null because like the complimentary of the
+[0:45:46] because like the complimentary of the global null is a fairly wide region. Now
+[0:45:48] global null is a fairly wide region. Now there is a question of the exhibition
+[0:45:50] there is a question of the exhibition which u gets to uh with the the max uh
+[0:45:55] which u gets to uh with the the max uh statistic which is to find which is
+[0:45:57] statistic which is to find which is finding a very good arm like a good arm
+[0:46:00] finding a very good arm like a good arm uh as in like well the value of it is be
+[0:46:03] uh as in like well the value of it is be like above like let's say control okay
+[0:46:07] like above like let's say control okay so when I when I looked at this thing so
+[0:46:10] so when I when I looked at this thing so uh maybe from from talking to people in
+[0:46:12] uh maybe from from talking to people in that uh in that field recently like I
+[0:46:15] that uh in that field recently like I was thinking oh well
+[0:46:18] was thinking oh well like how can I understand it from a new
+[0:46:19] like how can I understand it from a new value perspective? And um so the the
+[0:46:23] value perspective? And um so the the pool statistic is really like to me like
+[0:46:26] pool statistic is really like to me like a perfect like example of um something
+[0:46:30] a perfect like example of um something that is supernatural to approach with a
+[0:46:32] that is supernatural to approach with a knee value even though like it's an
+[0:46:35] knee value even though like it's an styized example and was like approaches
+[0:46:38] styized example and was like approaches way more general in the sense that it
+[0:46:40] way more general in the sense that it allows for nonp parametricity for like
+[0:46:44] allows for nonp parametricity for like um non knowledge of the uh of the
+[0:46:47] um non knowledge of the uh of the variance but like at least like just for
+[0:46:50] variance but like at least like just for the the sake of intuition building. uh
+[0:46:52] the the sake of intuition building. uh like the pulled um the pulled approach
+[0:46:55] like the pulled um the pulled approach uh it feels very eal like in the sense
+[0:46:58] uh it feels very eal like in the sense that well you want to multiply E values
+[0:47:00] that well you want to multiply E values so as to get a new process and track
+[0:47:03] so as to get a new process and track like essentially the amount of
+[0:47:04] like essentially the amount of accumulated dividends right so the way
+[0:47:06] accumulated dividends right so the way you define like a a corresponding E
+[0:47:08] you define like a a corresponding E value
+[0:47:10] value uh is well you can just reverse engineer
+[0:47:14] uh is well you can just reverse engineer Swiss's like pool statistic and think
+[0:47:16] Swiss's like pool statistic and think what it would look like value wise so
+[0:47:19] what it would look like value wise so it's just like all right like you you
+[0:47:21] it's just like all right like you you just uh define this E this E process
+[0:47:23] just uh define this E this E process that I I isolated uh in this equation
+[0:47:26] that I I isolated uh in this equation too
+[0:47:28] too um and you could basically threshold uh
+[0:47:32] um and you could basically threshold uh this guy at uh like the the threshold
+[0:47:34] this guy at uh like the the threshold given by V's inequality and you would
+[0:47:37] given by V's inequality and you would just reject when the pulled uh E process
+[0:47:40] just reject when the pulled uh E process crosses that thing that would be any
+[0:47:43] crosses that thing that would be any time valid
+[0:47:44] time valid uh being any time valid when you have a
+[0:47:47] uh being any time valid when you have a fixed horizon when you want to conclude
+[0:47:48] fixed horizon when you want to conclude is lossy power-wise so That's why um
+[0:47:52] is lossy power-wise so That's why um like Su and co authors what they do is
+[0:47:54] like Su and co authors what they do is well they get like at the exact
+[0:47:56] well they get like at the exact distributional uh properties of uh the
+[0:48:00] distributional uh properties of uh the pulled um evidence statistic at the
+[0:48:03] pulled um evidence statistic at the stopping time and they threshold
+[0:48:05] stopping time and they threshold appropriately and this is tighter uh but
+[0:48:08] appropriately and this is tighter uh but obviously um it's uh it's some work
+[0:48:12] obviously um it's uh it's some work right um so now like there is a question
+[0:48:15] right um so now like there is a question of how would you go about like the
+[0:48:17] of how would you go about like the exhibition um like task via a new value
+[0:48:21] exhibition um like task via a new value approach and again um the the way I
+[0:48:24] approach and again um the the way I understood like SW's work but first
+[0:48:28] understood like SW's work but first recasting it in the not nonparametric uh
+[0:48:31] recasting it in the not nonparametric uh setting because it's easier is um it's
+[0:48:35] setting because it's easier is um it's just it's as if you're maintaining ARM
+[0:48:38] just it's as if you're maintaining ARM specific eprocesses
+[0:48:40] specific eprocesses you monitor them all and you reject at a
+[0:48:43] you monitor them all and you reject at a bonfire corrected level as soon as
+[0:48:46] bonfire corrected level as soon as enough evidence accumulates for any
+[0:48:48] enough evidence accumulates for any specific arm right and like do you get
+[0:48:51] specific arm right and like do you get essentially at this rule uh which is all
+[0:48:54] essentially at this rule uh which is all right as soon as I cross the v's
+[0:48:56] right as soon as I cross the v's inequality dictated uh threshold uh for
+[0:49:00] inequality dictated uh threshold uh for any specific uh of the arm specific e
+[0:49:03] any specific uh of the arm specific e processes you reject and that's uh a way
+[0:49:08] processes you reject and that's uh a way to exhibiting an arm attaining the vacum
+[0:49:11] to exhibiting an arm attaining the vacum because like the arm for which you got
+[0:49:13] because like the arm for which you got enough evidence to reject uh well that
+[0:49:16] enough evidence to reject uh well that there was at least one here's a Yeah.
+[0:49:19] there was at least one here's a Yeah. Um, and a question I was really
+[0:49:22] Um, and a question I was really wondering about is like Bon Ferroni
+[0:49:25] wondering about is like Bon Ferroni certainly works, but when the number of
+[0:49:28] certainly works, but when the number of arms is big, it feels like
+[0:49:31] arms is big, it feels like maybe there's something uh else to do,
+[0:49:34] maybe there's something uh else to do, but it's really not easy to figure it
+[0:49:36] but it's really not easy to figure it out why to figure out why. Like we
+[0:49:38] out why to figure out why. Like we talked about it with with SAS a little
+[0:49:40] talked about it with with SAS a little bit and it sounded like fairly fairly
+[0:49:42] bit and it sounded like fairly fairly challenging. So um but it it is like a
+[0:49:48] challenging. So um but it it is like a problem that even appears in in other
+[0:49:50] problem that even appears in in other pro in other like a batch nonID uh like
+[0:49:54] pro in other like a batch nonID uh like in in batch IID settings. You don't even
+[0:49:56] in in batch IID settings. You don't even have to to go to uh like the specific
+[0:49:59] have to to go to uh like the specific kind of setting that that uh Swiss and
+[0:50:01] kind of setting that that uh Swiss and co authors are tackling to to see where
+[0:50:04] co authors are tackling to to see where the challenge comes from. And it's a
+[0:50:06] the challenge comes from. And it's a challenge that's been like extensively
+[0:50:08] challenge that's been like extensively written about in the literature. So it's
+[0:50:10] written about in the literature. So it's really like this um like needle in a
+[0:50:13] really like this um like needle in a haststack problem where let's say for
+[0:50:15] haststack problem where let's say for instance like these people like so like
+[0:50:18] instance like these people like so like areas Castro Condes and and others and
+[0:50:22] areas Castro Condes and and others and opcastro and Novak have uh I've written
+[0:50:26] opcastro and Novak have uh I've written about this detection versus localization
+[0:50:28] about this detection versus localization problem and like um typical example
+[0:50:31] problem and like um typical example where you would have this tension
+[0:50:33] where you would have this tension between demonstration and exhibition is
+[0:50:35] between demonstration and exhibition is well let's say you have like just a
+[0:50:38] well let's say you have like just a bunch of uh like means uh like empirical
+[0:50:42] bunch of uh like means uh like empirical means uh across like a bunch of uh of
+[0:50:45] means uh across like a bunch of uh of arms like for fixed sample sizes no
+[0:50:47] arms like for fixed sample sizes no adaptivity whatsoever
+[0:50:49] adaptivity whatsoever and the signal is weak. But like if you
+[0:50:52] and the signal is weak. But like if you pull the signal, if you just basically
+[0:50:53] pull the signal, if you just basically aggregate all of these means, you get uh
+[0:50:56] aggregate all of these means, you get uh some uh concentration and uh the signal
+[0:50:59] some uh concentration and uh the signal to noise ratio can accumulate enough
+[0:51:01] to noise ratio can accumulate enough that you could be able to reject that
+[0:51:06] that you could be able to reject that norm uh as value above zero that you can
+[0:51:10] norm uh as value above zero that you can do. Um
+[0:51:13] do. Um but finding
+[0:51:16] but finding one is actually like something that's
+[0:51:18] one is actually like something that's notoriously hard. like it's it's been
+[0:51:20] notoriously hard. like it's it's been written about extensively. So it's
+[0:51:23] written about extensively. So it's really like a question that seems very
+[0:51:26] really like a question that seems very pervasive in in a bunch of areas of
+[0:51:29] pervasive in in a bunch of areas of statistics for for instance like even in
+[0:51:30] statistics for for instance like even in like the like best time identification
+[0:51:33] like the like best time identification literature in like uh the uh when you
+[0:51:36] literature in like uh the uh when you have many arms. Well, people have tried
+[0:51:38] have many arms. Well, people have tried ADOC stuff like for instance like there
+[0:51:40] ADOC stuff like for instance like there is like this uh this paper by JSON and
+[0:51:43] is like this uh this paper by JSON and uh others in Bubc um this paper called
+[0:51:47] uh others in Bubc um this paper called like uh Lil UCB where they have like
+[0:51:50] like uh Lil UCB where they have like some adoc way of um essentially
+[0:51:53] some adoc way of um essentially spreading the alpha across the arms so
+[0:51:56] spreading the alpha across the arms so as not to pay too high of a price for
+[0:51:57] as not to pay too high of a price for the number of arms. And to me it sounds
+[0:52:00] the number of arms. And to me it sounds like in this specific setting maybe
+[0:52:02] like in this specific setting maybe there would be like in in the setting
+[0:52:03] there would be like in in the setting that SW is tackling. I'm really
+[0:52:05] that SW is tackling. I'm really wondering like wouldn't there be like
+[0:52:06] wondering like wouldn't there be like some um you know some perhaps trick
+[0:52:10] some um you know some perhaps trick tricks or more systematic approaches to
+[0:52:13] tricks or more systematic approaches to really like making sure like you don't
+[0:52:14] really like making sure like you don't pay too much of a price for the
+[0:52:17] pay too much of a price for the exhibition uh task. So it's it's
+[0:52:20] exhibition uh task. So it's it's something that that I find very
+[0:52:21] something that that I find very intriguing and um
+[0:52:24] intriguing and um which is especially uh interesting
+[0:52:27] which is especially uh interesting because one thing I found like there is
+[0:52:29] because one thing I found like there is like a way like all right so like
+[0:52:33] like a way like all right so like one thing that that you did to us was
+[0:52:35] one thing that that you did to us was you you did all of this extremely like I
+[0:52:38] you you did all of this extremely like I find it extremely technical work on not
+[0:52:40] find it extremely technical work on not paying too much of a price uh for the
+[0:52:42] paying too much of a price uh for the number of arms when you applied uh like
+[0:52:44] number of arms when you applied uh like KMT
+[0:52:46] KMT and Um
+[0:52:49] and Um it sounds like this is kind of a a
+[0:52:51] it sounds like this is kind of a a strength like uh of this approach and
+[0:52:54] strength like uh of this approach and I'm really excited to to see what's next
+[0:52:56] I'm really excited to to see what's next uh like uh how uh you guys are going to
+[0:53:00] uh like uh how uh you guys are going to like perhaps address like the how do I
+[0:53:02] like perhaps address like the how do I not even pay too much of a price for the
+[0:53:04] not even pay too much of a price for the exhibition problem. So with that I'll
+[0:53:07] exhibition problem. So with that I'll stop here and I'm I'm very curious if
+[0:53:09] stop here and I'm I'm very curious if anybody has like some extra thoughts on
+[0:53:12] anybody has like some extra thoughts on these questions and uh yeah thanks uh
+[0:53:15] these questions and uh yeah thanks uh thanks again for a fantastic talk. I
+[0:53:17] thanks again for a fantastic talk. I think it's really really cool cool work
+[0:53:19] think it's really really cool cool work and I'm very glad to see more of this uh
+[0:53:21] and I'm very glad to see more of this uh like uh strong invarance principle
+[0:53:23] like uh strong invarance principle approaches and uh like uh well even like
+[0:53:27] approaches and uh like uh well even like beyond strong principle KMT is like uh I
+[0:53:30] beyond strong principle KMT is like uh I think what people call like strong
+[0:53:31] think what people call like strong approximation beyond like strong
+[0:53:33] approximation beyond like strong invariance. So like I think it's uh it's
+[0:53:37] invariance. So like I think it's uh it's very much due to uh Aditar Ramdas and
+[0:53:41] very much due to uh Aditar Ramdas and Yan would be Smith and a little bit
+[0:53:43] Yan would be Smith and a little bit perhaps myself unearthing the things
+[0:53:45] perhaps myself unearthing the things like from the 70s and like making it
+[0:53:48] like from the 70s and like making it like for apply for for real world stuff.
+[0:53:51] like for apply for for real world stuff. So it's it's very exciting stuff.
+[0:53:55] So it's it's very exciting stuff. Thanks uh thanks S and everybody.
+[0:53:58] Thanks uh thanks S and everybody. &gt;&gt; Thank you for the nice discussion and
+[0:54:00] &gt;&gt; Thank you for the nice discussion and thank you S again for the great talk.
+[0:54:03] thank you S again for the great talk. Yeah, feel free to um uh discuss and
+[0:54:06] Yeah, feel free to um uh discuss and respond. Thank you.
+[0:54:08] respond. Thank you. &gt;&gt; Thanks everyone
+[0:54:10] &gt;&gt; Thanks everyone and thanks. Yeah.
+[0:54:19] &gt;&gt; Yeah. Do you want to like briefly respond to the discussion? Um so
+[0:54:22] respond to the discussion? Um so &gt;&gt; yeah I mean I all I have to say is I
+[0:54:26] &gt;&gt; yeah I mean I all I have to say is I agree that this is this uh problem of um
+[0:54:30] agree that this is this uh problem of um sort of like whether there's a way to
+[0:54:32] sort of like whether there's a way to avoid paying for multiplicity um when
+[0:54:35] avoid paying for multiplicity um when testing sort of the means of the
+[0:54:38] testing sort of the means of the individual arms or in this exhibition
+[0:54:40] individual arms or in this exhibition problem uh is is very very intriguing. I
+[0:54:44] problem uh is is very very intriguing. I think we, you know, I only to be honest,
+[0:54:46] think we, you know, I only to be honest, it was only after talking to you that I
+[0:54:48] it was only after talking to you that I I sort of realized just how interesting
+[0:54:50] I sort of realized just how interesting it is. So, I really appreciate um you
+[0:54:54] it is. So, I really appreciate um you bringing that point up. Um I believe the
+[0:54:58] bringing that point up. Um I believe the Sandival at all paper addresses this in
+[0:55:00] Sandival at all paper addresses this in some way because they're, you know,
+[0:55:02] some way because they're, you know, considering the optimal uh betting
+[0:55:04] considering the optimal uh betting strategy across the arms. And so I
+[0:55:06] strategy across the arms. And so I wonder if there's some way of mapping
+[0:55:08] wonder if there's some way of mapping this uh uh this uh sort of their
+[0:55:12] this uh uh this uh sort of their algorithm or approach back into this
+[0:55:14] algorithm or approach back into this sort of Gaussian experiment. Um I think
+[0:55:16] sort of Gaussian experiment. Um I think that that would be an interesting place
+[0:55:17] that that would be an interesting place to start. Um but I agree that it's a
+[0:55:19] to start. Um but I agree that it's a challenging and super interesting
+[0:55:22] challenging and super interesting problem. Um
+[0:55:23] problem. Um &gt;&gt; well since you're here, do you remember
+[0:55:25] &gt;&gt; well since you're here, do you remember how they do it like the like and
+[0:55:29] how they do it like the like and &gt;&gt; I don't I haven't um read the paper
+[0:55:31] &gt;&gt; I don't I haven't um read the paper closely enough yet.
+[0:55:33] closely enough yet. I was talking to a colleague about your
+[0:55:35] I was talking to a colleague about your paper yesterday, Sw and uh like there
+[0:55:38] paper yesterday, Sw and uh like there are like definitely I mean I think like
+[0:55:40] are like definitely I mean I think like it comes from like your Amazon
+[0:55:41] it comes from like your Amazon applications right like I mean like
+[0:55:42] applications right like I mean like Amazon and like your co-authors like
+[0:55:45] Amazon and like your co-authors like Amazon applications but us at Netflix we
+[0:55:48] Amazon applications but us at Netflix we do have like similar like stuff popping
+[0:55:50] do have like similar like stuff popping out and we are talking with my my
+[0:55:52] out and we are talking with my my colleague Michael Lindon with like in
+[0:55:54] colleague Michael Lindon with like in some of the papers you might have read
+[0:55:55] some of the papers you might have read about this like anytime or the the
+[0:55:58] about this like anytime or the the asmtoic anytime valid paper right?
+[0:56:01] asmtoic anytime valid paper right? &gt;&gt; Yeah. Yeah. So I I mean but he does like
+[0:56:03] &gt;&gt; Yeah. Yeah. So I I mean but he does like way more of these things than I do. And
+[0:56:04] way more of these things than I do. And so I was busy reaching out to him about
+[0:56:06] so I was busy reaching out to him about about your work and he was like yeah
+[0:56:09] about your work and he was like yeah that's very intriguing and we like it's
+[0:56:11] that's very intriguing and we like it's kind of like after like reading your
+[0:56:13] kind of like after like reading your thing that you and like talking about
+[0:56:15] thing that you and like talking about the discussion between like the
+[0:56:17] the discussion between like the exhibition versus demonstration that we
+[0:56:19] exhibition versus demonstration that we thought it's kind of
+[0:56:22] thought it's kind of actually pervasive even in industry
+[0:56:24] actually pervasive even in industry practice. So like for instance let me
+[0:56:26] practice. So like for instance let me give you an example. It's like when you
+[0:56:29] give you an example. It's like when you have like u many um like devices that
+[0:56:34] have like u many um like devices that run a certain like piece of software
+[0:56:37] run a certain like piece of software like the Netflix app for instance and
+[0:56:40] like the Netflix app for instance and then like uh you see that um there seems
+[0:56:43] then like uh you see that um there seems to be like a longer lag time uh on a
+[0:56:47] to be like a longer lag time uh on a device and it's like non Netflix
+[0:56:49] device and it's like non Netflix specific it's everywhere like everybody
+[0:56:50] specific it's everywhere like everybody was an app like every company was an app
+[0:56:53] was an app like every company was an app that runs on different devices across
+[0:56:54] that runs on different devices across different versions of the operating
+[0:56:56] different versions of the operating system and stuff like is like you wonder
+[0:57:00] system and stuff like is like you wonder where like the uh like where's like a
+[0:57:02] where like the uh like where's like a release uh makes uh like uh some uh
+[0:57:07] release uh makes uh like uh some uh device times uh software crash
+[0:57:11] device times uh software crash but you like it's easy to to detect it
+[0:57:13] but you like it's easy to to detect it fairly fast but like then the software
+[0:57:16] fairly fast but like then the software engineers we're going to talk about are
+[0:57:18] engineers we're going to talk about are going to ask yeah but which one
+[0:57:21] going to ask yeah but which one first of all it's good because like you
+[0:57:22] first of all it's good because like you can kill the release if it's dramatic
+[0:57:24] can kill the release if it's dramatic fast you you can just kill it all
+[0:57:26] fast you you can just kill it all together. But then like there's a
+[0:57:28] together. But then like there's a question of well which one like like if
+[0:57:32] question of well which one like like if should you want to salvage it?
+[0:57:35] should you want to salvage it? Which one? Uh like where do I try to to
+[0:57:38] Which one? Uh like where do I try to to patch like for which device do I try to
+[0:57:40] patch like for which device do I try to patch? But uh I wonder like where like
+[0:57:43] patch? But uh I wonder like where like you guys I mean maybe it's like stuff
+[0:57:45] you guys I mean maybe it's like stuff you can discuss or maybe it's stuff you
+[0:57:47] you can discuss or maybe it's stuff you can discuss. I don't know like in if you
+[0:57:49] can discuss. I don't know like in if you had like a specific like example you had
+[0:57:51] had like a specific like example you had in mind like from I mean you did mention
+[0:57:53] in mind like from I mean you did mention some of these but
+[0:57:55] some of these but where you had like this tension
+[0:57:57] where you had like this tension &gt;&gt; that was that was the motivating example
+[0:57:58] &gt;&gt; that was that was the motivating example I I think some of my co-authors would
+[0:58:00] I I think some of my co-authors would probably have have much more insight
+[0:58:02] probably have have much more insight into the potential uses at Amazon beyond
+[0:58:05] into the potential uses at Amazon beyond sort of like these many armed
+[0:58:08] sort of like these many armed experiments where it's like many uh
+[0:58:11] experiments where it's like many uh combinations of small interventions or
+[0:58:14] combinations of small interventions or sort of like small tweaks to a web page.
+[0:58:17] sort of like small tweaks to a web page. This was mind. Yeah,
+[0:58:20] This was mind. Yeah, &gt;&gt; I see some questions. So I don't mean to
+[0:58:22] &gt;&gt; I see some questions. So I don't mean to to I mean the moderator. So
+[0:58:26] to I mean the moderator. So &gt;&gt; one quick question before we end the
+[0:58:27] &gt;&gt; one quick question before we end the seminar. What's the role of time in this
+[0:58:30] seminar. What's the role of time in this problem and does longer time complicate
+[0:58:32] problem and does longer time complicate anything?
+[0:58:34] anything? &gt;&gt; Uh that is a great question. Uh mostly
+[0:58:37] &gt;&gt; Uh that is a great question. Uh mostly time helps. Um
+[0:58:39] time helps. Um uh so um I suppose uh it increases the
+[0:58:43] uh so um I suppose uh it increases the total amount of evidence we have to play
+[0:58:45] total amount of evidence we have to play with. Um so in that sense it certainly
+[0:58:47] with. Um so in that sense it certainly helps. Um it is a little bit more
+[0:58:50] helps. Um it is a little bit more nuanced in the max testing framework
+[0:58:53] nuanced in the max testing framework because we have to decide how we spend
+[0:58:55] because we have to decide how we spend our alpha across time not only across
+[0:58:56] our alpha across time not only across arms. Um and so you know it was sort of
+[0:59:01] arms. Um and so you know it was sort of getting towards the end of the talk but
+[0:59:02] getting towards the end of the talk but there were two different boundaries that
+[0:59:03] there were two different boundaries that we presented and both of those have very
+[0:59:05] we presented and both of those have very different properties. So one of them
+[0:59:07] different properties. So one of them places a lot of power at the very
+[0:59:09] places a lot of power at the very beginning. Um the other one sort of
+[0:59:12] beginning. Um the other one sort of instead sort of spreads it out over
+[0:59:14] instead sort of spreads it out over time. uh and in doing so it remains more
+[0:59:18] time. uh and in doing so it remains more powerful uh
+[0:59:20] powerful uh you know at long horizons uh and it also
+[0:59:24] you know at long horizons uh and it also uh you know is more conservative. Um so
+[0:59:26] uh you know is more conservative. Um so you know there's this interesting
+[0:59:27] you know there's this interesting question of you know I think what's so
+[0:59:29] question of you know I think what's so interesting about you know the thing uh
+[0:59:32] interesting about you know the thing uh the the issue brought up is there's this
+[0:59:35] the the issue brought up is there's this issue of like both allocating alpha
+[0:59:37] issue of like both allocating alpha across arms and across time um which is
+[0:59:40] across arms and across time um which is a very nuanced and fascinating uh
+[0:59:44] a very nuanced and fascinating uh question problem. Yeah.
+[0:59:46] question problem. Yeah. &gt;&gt; Uh awesome. Uh for the interest of time
+[0:59:48] &gt;&gt; Uh awesome. Uh for the interest of time I think I'll switch to wing to wrap it
+[0:59:51] I think I'll switch to wing to wrap it up but I highly encourage the audience
+[0:59:52] up but I highly encourage the audience to reach out to the speaker for
+[0:59:54] to reach out to the speaker for follow-up questions. Yeah,
+[0:59:56] follow-up questions. Yeah, &gt;&gt; thank you so much again for the great
+[0:59:58] &gt;&gt; thank you so much again for the great talk, the great discussion and um thank
+[1:00:01] talk, the great discussion and um thank you the audience for the questions as
+[1:00:05] you the audience for the questions as well. Let me share my screen.
+[1:00:11] One second.
+[1:00:19] Okay. Um yeah, so yeah, it's a good time to wrap up the seminar for this week. So
+[1:00:21] to wrap up the seminar for this week. So for next week we um it's going to be a
+[1:00:24] for next week we um it's going to be a joint seminar with Isaac Newton
+[1:00:26] joint seminar with Isaac Newton Institute and we will have prof uh
+[1:00:28] Institute and we will have prof uh professor Wong from University of
+[1:00:30] professor Wong from University of Michigan to present causal inference
+[1:00:32] Michigan to present causal inference with unstructured data. We look forward
+[1:00:34] with unstructured data. We look forward to seeing you next week.

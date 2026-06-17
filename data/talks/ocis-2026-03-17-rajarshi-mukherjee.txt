@@ -1,0 +1,1647 @@
+[0:00:03] It's my pleasure to introduce Rajashi Mukherjee from the Biostatistics
+[0:00:06] Rajashi Mukherjee from the Biostatistics Department at Harvard University and
+[0:00:08] Department at Harvard University and Shawn McGrath from the Biostatistics
+[0:00:10] Shawn McGrath from the Biostatistics Department at Yale, who's an incoming
+[0:00:12] Department at Yale, who's an incoming professor at the University of
+[0:00:14] professor at the University of Washington University in St. Louis.
+[0:00:17] Washington University in St. Louis. Um we are all a group of people here at
+[0:00:19] Um we are all a group of people here at the Isaac Newton Institute in Cambridge,
+[0:00:22] the Isaac Newton Institute in Cambridge, UK, who look forward to their talk on
+[0:00:25] UK, who look forward to their talk on nuisance parameter tuning for estimating
+[0:00:27] nuisance parameter tuning for estimating doubly robust functionals.
+[0:00:32] Okay. Um
+[0:00:33] Um Uh thanks Mats uh for um uh for the nice
+[0:00:36] Uh thanks Mats uh for um uh for the nice introduction and uh thank I want to
+[0:00:38] introduction and uh thank I want to thank Ching-Yuan for inviting us to give
+[0:00:41] thank Ching-Yuan for inviting us to give the talk. And this talk will be mostly
+[0:00:44] the talk. And this talk will be mostly driven by Shawn, uh who's really the
+[0:00:46] driven by Shawn, uh who's really the expert of this subject. Uh so I will
+[0:00:48] expert of this subject. Uh so I will just start with uh some couple of
+[0:00:50] just start with uh some couple of initial slides, but of course I'll take
+[0:00:52] initial slides, but of course I'll take all the praise and leave all the
+[0:00:53] all the praise and leave all the difficult questions for Shawn in the
+[0:00:54] difficult questions for Shawn in the end. So that will be the structure.
+[0:00:56] end. So that will be the structure. Um so uh the the title of the talk, as
+[0:01:00] Um so uh the the title of the talk, as you saw, is quite general. Like
+[0:01:02] you saw, is quite general. Like uh we will be thinking about how to tune
+[0:01:04] uh we will be thinking about how to tune in nuisance functions for estimating
+[0:01:07] in nuisance functions for estimating hopefully eventually for a class of
+[0:01:08] hopefully eventually for a class of doubly robust functionals, but we will
+[0:01:10] doubly robust functionals, but we will focus on a very specific functional that
+[0:01:12] focus on a very specific functional that we were able to
+[0:01:14] we were able to uh characterize uh detail behavior of in
+[0:01:16] uh characterize uh detail behavior of in terms of nuisance function tuning.
+[0:01:18] terms of nuisance function tuning. So what I'm going to do is I'm going to
+[0:01:19] So what I'm going to do is I'm going to start with uh
+[0:01:21] start with uh a simulation result to set up um
+[0:01:24] a simulation result to set up um uh some questions. We will extract some
+[0:01:26] uh some questions. We will extract some general questions from uh from the
+[0:01:28] general questions from uh from the simulation results. And as I said, then
+[0:01:30] simulation results. And as I said, then focus on a particular instance of the
+[0:01:32] focus on a particular instance of the general question that Shawn is going to
+[0:01:34] general question that Shawn is going to uh talk about in the rest of the talk.
+[0:01:37] uh talk about in the rest of the talk. So since this is a causal inference
+[0:01:38] So since this is a causal inference seminar, I would like to start with um
+[0:01:41] seminar, I would like to start with um the maybe the most uh uh
+[0:01:43] the maybe the most uh uh talked about causal inference
+[0:01:44] talked about causal inference functional, which is the average
+[0:01:45] functional, which is the average treatment effect.
+[0:01:47] treatment effect. So here is a simulation for estimating
+[0:01:49] So here is a simulation for estimating average treatment effect uh with a
+[0:01:51] average treatment effect uh with a sample size of 1,000. With the dimension
+[0:01:54] sample size of 1,000. With the dimension of the number of of the observed
+[0:01:56] of the number of of the observed confounders uh is 300.
+[0:01:59] confounders uh is 300. And we are trying to estimate the
+[0:02:00] And we are trying to estimate the average treatment effect using the uh
+[0:02:03] average treatment effect using the uh very popular augmented inverse
+[0:02:04] very popular augmented inverse probability weighted estimator
+[0:02:06] probability weighted estimator that has in its uh pipeline estimation
+[0:02:09] that has in its uh pipeline estimation of a outcome regression function uh
+[0:02:12] of a outcome regression function uh which we fit here through the ordinary
+[0:02:13] which we fit here through the ordinary least squares because the truth
+[0:02:15] least squares because the truth underlying true outcome regression is
+[0:02:17] underlying true outcome regression is also a linear regression in this case.
+[0:02:19] also a linear regression in this case. And we fit the propensity score through
+[0:02:22] And we fit the propensity score through our ridge regularized logistic
+[0:02:24] our ridge regularized logistic regression where because the true
+[0:02:25] regression where because the true propensity score here is also a logistic
+[0:02:27] propensity score here is also a logistic regression.
+[0:02:28] regression. Uh and uh we do uh double sample
+[0:02:31] Uh and uh we do uh double sample splitting. That means we split the
+[0:02:33] splitting. That means we split the sample of n 1,000 in roughly uh three
+[0:02:36] sample of n 1,000 in roughly uh three equal splits.
+[0:02:38] equal splits. And then uh we uh
+[0:02:40] And then uh we uh estimate outcome regression from one
+[0:02:42] estimate outcome regression from one part, we estimate the propensity score
+[0:02:43] part, we estimate the propensity score from one part, plug it in the third part
+[0:02:46] from one part, plug it in the third part to estimate uh use uh the average
+[0:02:47] to estimate uh use uh the average treatment effect using the AIPW
+[0:02:49] treatment effect using the AIPW estimation technique. And then we do
+[0:02:52] estimation technique. And then we do cross-fitting. That we we take all
+[0:02:53] cross-fitting. That we we take all possible three factorial combinations of
+[0:02:56] possible three factorial combinations of this uh kind of sample splitting and
+[0:02:57] this uh kind of sample splitting and take an average.
+[0:02:59] take an average. And on the and then we plot on the
+[0:03:01] And on the and then we plot on the x-axis uh the tuning parameter lambda in
+[0:03:04] x-axis uh the tuning parameter lambda in logarithmic scale for estimating the
+[0:03:06] logarithmic scale for estimating the logistic regression.
+[0:03:08] logistic regression. And on the y-axis, the standard
+[0:03:10] And on the y-axis, the standard deviation of the resulting AIPW
+[0:03:12] deviation of the resulting AIPW estimator over 5,000 Monte Carlo
+[0:03:14] estimator over 5,000 Monte Carlo simulations.
+[0:03:15] simulations. This estimator is exactly unbiased
+[0:03:17] This estimator is exactly unbiased because we have done double sample
+[0:03:19] because we have done double sample splitting and done ordinary least
+[0:03:20] splitting and done ordinary least squares to estimate uh
+[0:03:22] squares to estimate uh the uh the outcome regression. So, it
+[0:03:25] the uh the outcome regression. So, it gives you exact unbiasedness. So,
+[0:03:27] gives you exact unbiasedness. So, looking at the standard deviation gives
+[0:03:28] looking at the standard deviation gives you an idea about the mean squared error
+[0:03:30] you an idea about the mean squared error of the problem.
+[0:03:32] of the problem. So, in the dotted red line is the
+[0:03:34] So, in the dotted red line is the standard deviation that you get by
+[0:03:36] standard deviation that you get by choosing uh the the tuning parameter
+[0:03:39] choosing uh the the tuning parameter lambda by leave-one-out
+[0:03:40] lambda by leave-one-out cross-validation, which is we can think
+[0:03:42] cross-validation, which is we can think about is uh the optimal for out of out
+[0:03:44] about is uh the optimal for out of out of sample prediction.
+[0:03:45] of sample prediction. And on the and the uh the blue curve is
+[0:03:49] And on the and the uh the blue curve is the standard deviation that you can get
+[0:03:51] the standard deviation that you can get for the AIPW estimator for all possible
+[0:03:53] for the AIPW estimator for all possible other different values of lambda.
+[0:03:55] other different values of lambda. And uh
+[0:03:57] And uh the story that we want to say here is
+[0:03:59] the story that we want to say here is choosing lambda optimally for prediction
+[0:04:02] choosing lambda optimally for prediction does not give you optimal uh tuning for
+[0:04:05] does not give you optimal uh tuning for uh
+[0:04:05] uh estimating the actual average treatment
+[0:04:07] estimating the actual average treatment effect. You can get better standard
+[0:04:09] effect. You can get better standard deviation by tuning the uh logistic
+[0:04:11] deviation by tuning the uh logistic regression separately.
+[0:04:13] regression separately. So, uh this is the kind of story we we'd
+[0:04:15] So, uh this is the kind of story we we'd like to talk about uh in general.
+[0:04:18] like to talk about uh in general. Uh
+[0:04:18] Uh Basically, how to tune your nuisance
+[0:04:21] Basically, how to tune your nuisance functions to optimally estimate a
+[0:04:23] functions to optimally estimate a downstream functional of interest and
+[0:04:25] downstream functional of interest and where the goal is not for prediction,
+[0:04:27] where the goal is not for prediction, but downstream optimization of maybe
+[0:04:29] but downstream optimization of maybe asymptotic variance.
+[0:04:31] asymptotic variance. So, next slide, please. Uh
+[0:04:33] So, next slide, please. Uh So, most generally, one can think about
+[0:04:35] So, most generally, one can think about this problem through this uh broad
+[0:04:37] this problem through this uh broad framework where you have n IID data, say
+[0:04:40] framework where you have n IID data, say O1 up to On, from some distribution P
+[0:04:43] O1 up to On, from some distribution P indexed by some eta, which is belongs to
+[0:04:45] indexed by some eta, which is belongs to some space H. And this space H you can
+[0:04:47] some space H. And this space H you can think about like a model that you're
+[0:04:49] think about like a model that you're thinking about. Typically, it will be
+[0:04:50] thinking about. Typically, it will be some kind of normed, often linear space.
+[0:04:53] some kind of normed, often linear space. And the goal is to estimate a
+[0:04:56] And the goal is to estimate a functional, which is a map from the
+[0:04:58] functional, which is a map from the space H to the real line, say. So, the
+[0:05:01] space H to the real line, say. So, the goal is not to estimate this parameter
+[0:05:03] goal is not to estimate this parameter eta, which is we call the nuisance
+[0:05:04] eta, which is we call the nuisance object or nuisance parameter or nuisance
+[0:05:06] object or nuisance parameter or nuisance function, depending on the context, but
+[0:05:08] function, depending on the context, but some one-dimensional summary of it.
+[0:05:11] some one-dimensional summary of it. And traditional uh statistical theory or
+[0:05:13] And traditional uh statistical theory or now very developed the semiparametric
+[0:05:15] now very developed the semiparametric theory goes as follows.
+[0:05:18] theory goes as follows. You start with your best possible
+[0:05:19] You start with your best possible estimator of eta
+[0:05:21] estimator of eta from some perspective, maybe from
+[0:05:22] from some perspective, maybe from prediction perspective or for uh
+[0:05:24] prediction perspective or for uh function estimation perspective. And you
+[0:05:26] function estimation perspective. And you start with a plug-in estimator, psi of
+[0:05:28] start with a plug-in estimator, psi of eta hat. Typically, this psi of eta hat
+[0:05:30] eta hat. Typically, this psi of eta hat will have large bias if your model uh H
+[0:05:33] will have large bias if your model uh H is pretty complex. So, then you do this
+[0:05:35] is pretty complex. So, then you do this one-step bias correction Newton-Raphson
+[0:05:37] one-step bias correction Newton-Raphson kind using uh typically the first-order
+[0:05:39] kind using uh typically the first-order influence function.
+[0:05:41] influence function. And often, if the model space is not too
+[0:05:43] And often, if the model space is not too complex, this will give you pretty good
+[0:05:44] complex, this will give you pretty good results.
+[0:05:45] results. But if the model space is too complex,
+[0:05:47] But if the model space is too complex, you can kind of generalize this
+[0:05:48] you can kind of generalize this principle through this notion of higher
+[0:05:49] principle through this notion of higher order corrections.
+[0:05:51] order corrections. So this raises two kinds of questions
+[0:05:53] So this raises two kinds of questions that one can typically answer. The
+[0:05:55] that one can typically answer. The typical question is if I give you the
+[0:05:57] typical question is if I give you the best possible estimator eta hat, which
+[0:05:59] best possible estimator eta hat, which is consistent, very importantly, and
+[0:06:02] is consistent, very importantly, and rate optimal most of the time, how can I
+[0:06:04] rate optimal most of the time, how can I design an estimator of psi eta starting
+[0:06:06] design an estimator of psi eta starting from the plug-in principle and
+[0:06:07] from the plug-in principle and downstream bias correction?
+[0:06:09] downstream bias correction? And then of course this question makes
+[0:06:11] And then of course this question makes sense when your estimator eta hat of eta
+[0:06:13] sense when your estimator eta hat of eta is at least consistent and rate optimal.
+[0:06:16] is at least consistent and rate optimal. The example I saw in the last slide,
+[0:06:18] The example I saw in the last slide, that estimator of the logistic
+[0:06:20] that estimator of the logistic regression is not consistent, and there
+[0:06:22] regression is not consistent, and there is no consistent estimator of the
+[0:06:23] is no consistent estimator of the logistic regression in that regime
+[0:06:25] logistic regression in that regime unless you start assuming some sparsity.
+[0:06:28] unless you start assuming some sparsity. So this will motivate us to answer a
+[0:06:30] So this will motivate us to answer a different question, which is now I will
+[0:06:32] different question, which is now I will tell you I'm going to estimate my
+[0:06:33] tell you I'm going to estimate my functional by my favorite method, maybe
+[0:06:36] functional by my favorite method, maybe plug-in, maybe just one-step bias
+[0:06:38] plug-in, maybe just one-step bias correction, maybe the AIPW, which is a
+[0:06:40] correction, maybe the AIPW, which is a one-step bias correction estimator. And
+[0:06:42] one-step bias correction estimator. And then my goal will be how do I estimate
+[0:06:44] then my goal will be how do I estimate eta hat so that I get the best possible
+[0:06:47] eta hat so that I get the best possible variance downstream.
+[0:06:49] variance downstream. Of course, as we know, if we just do
+[0:06:51] Of course, as we know, if we just do plug-in, and if we estimate eta by the
+[0:06:53] plug-in, and if we estimate eta by the rate optimal method, you might not get
+[0:06:55] rate optimal method, you might not get the best possible asymptotic variance.
+[0:06:57] the best possible asymptotic variance. You might have to do something else. So
+[0:06:58] You might have to do something else. So this is the story we want to talk about
+[0:07:00] this is the story we want to talk about in this talk, but through the lens of
+[0:07:02] in this talk, but through the lens of this very one particular functional that
+[0:07:05] this very one particular functional that we were able to do very detailed
+[0:07:06] we were able to do very detailed calculations in. So I'll leave the rest
+[0:07:08] calculations in. So I'll leave the rest of the talk to Shawn, and I'm happy to
+[0:07:10] of the talk to Shawn, and I'm happy to answer questions in the end together.
+[0:07:17] Great. Thanks, Prashant. Okay, so as Prashant said, we're going to be
+[0:07:18] Prashant said, we're going to be focusing specifically on one type of a
+[0:07:21] focusing specifically on one type of a functional of interest, and this is
+[0:07:23] functional of interest, and this is referred to as the expected conditional
+[0:07:24] referred to as the expected conditional covariance. So if if we think of A as
+[0:07:27] covariance. So if if we think of A as some sort of treatment variable and Y as
+[0:07:29] some sort of treatment variable and Y as some sort of outcome, let's think of
+[0:07:31] some sort of outcome, let's think of let's say binary treatment and binary
+[0:07:32] let's say binary treatment and binary outcome, and X is some vector of
+[0:07:36] outcome, and X is some vector of baseline covariates.
+[0:07:38] baseline covariates. Expected conditional covariance is, you
+[0:07:39] Expected conditional covariance is, you know, the the covariance between our
+[0:07:41] know, the the covariance between our treatment and our outcome conditional on
+[0:07:43] treatment and our outcome conditional on X,
+[0:07:44] X, and then taking the expectation with
+[0:07:45] and then taking the expectation with respect to X.
+[0:07:46] respect to X. Um
+[0:07:48] Um Now, um you know, we can express that in
+[0:07:50] Now, um you know, we can express that in terms of the expectation of the
+[0:07:52] terms of the expectation of the treatment minus conditional expectation
+[0:07:54] treatment minus conditional expectation times
+[0:07:55] times uh the difference between Y minus its
+[0:07:57] uh the difference between Y minus its conditional expectation.
+[0:07:59] conditional expectation. Um
+[0:08:00] Um Now, uh you know, this is a causal
+[0:08:01] Now, uh you know, this is a causal inference seminar, so this this type of
+[0:08:04] inference seminar, so this this type of functional has appeared in lots of
+[0:08:05] functional has appeared in lots of causal inference problems. I'll mention
+[0:08:08] causal inference problems. I'll mention one of them very briefly in the next
+[0:08:09] one of them very briefly in the next slide. Um
+[0:08:11] slide. Um And this has also been studied in
+[0:08:13] And this has also been studied in independence testing problems, and um
+[0:08:15] independence testing problems, and um this has been studied uh a bit more
+[0:08:17] this has been studied uh a bit more broadly in in semi-parametric theory.
+[0:08:20] broadly in in semi-parametric theory. Um and this, in some sense, is a nice
+[0:08:22] Um and this, in some sense, is a nice functional to analyze because it has the
+[0:08:24] functional to analyze because it has the complexity of relying on multiple
+[0:08:26] complexity of relying on multiple nuisance functions, which we're going to
+[0:08:27] nuisance functions, which we're going to see um there's a lot of subtlety when
+[0:08:29] see um there's a lot of subtlety when there's more than one.
+[0:08:31] there's more than one. But at the same time, it's it's it's uh
+[0:08:33] But at the same time, it's it's it's uh somewhat easier to analyze than than
+[0:08:35] somewhat easier to analyze than than others because it's just a product of
+[0:08:37] others because it's just a product of basically the nuisance functions.
+[0:08:39] basically the nuisance functions. And we're going to see that come into
+[0:08:40] And we're going to see that come into play a little bit later. Um
+[0:08:43] play a little bit later. Um So, um a little bit more detail of why
+[0:08:45] So, um a little bit more detail of why we may be interested in the expected
+[0:08:47] we may be interested in the expected conditional covariance, or the ECC, um
+[0:08:50] conditional covariance, or the ECC, um so um
+[0:08:52] so um under some assumptions, we can express
+[0:08:54] under some assumptions, we can express what is so-called a variance-weighted
+[0:08:56] what is so-called a variance-weighted average treatment effect in terms of the
+[0:08:58] average treatment effect in terms of the expected conditional covariance, where
+[0:09:00] expected conditional covariance, where this is a ratio uh where the numerator's
+[0:09:03] this is a ratio uh where the numerator's the the ECC,
+[0:09:05] the the ECC, and the denominator is, uh of course, a
+[0:09:07] and the denominator is, uh of course, a special case of the expected conditional
+[0:09:09] special case of the expected conditional covariance when when A is just equal to
+[0:09:11] covariance when when A is just equal to Y.
+[0:09:12] Y. Right? Um And so, why why is this the
+[0:09:15] Right? Um And so, why why is this the case? Well, under our usual
+[0:09:17] case? Well, under our usual identification assumptions in causal
+[0:09:19] identification assumptions in causal inference problems, right, of of no
+[0:09:21] inference problems, right, of of no unmeasured confounding most importantly,
+[0:09:23] unmeasured confounding most importantly, um
+[0:09:24] um we can express a conditional average
+[0:09:26] we can express a conditional average treatment effect among individuals with
+[0:09:29] treatment effect among individuals with covariates X equals little x
+[0:09:31] covariates X equals little x in terms of this um gamma function here,
+[0:09:34] in terms of this um gamma function here, which is just the difference in
+[0:09:35] which is just the difference in expectation of the outcome
+[0:09:37] expectation of the outcome among treated minus untreated all
+[0:09:39] among treated minus untreated all conditional on X.
+[0:09:42] conditional on X. And we can express
+[0:09:44] And we can express an average of the conditional average
+[0:09:46] an average of the conditional average treatment effects
+[0:09:47] treatment effects over the over X where we weight
+[0:09:49] over the over X where we weight individuals by some weight that's
+[0:09:51] individuals by some weight that's proportional to their conditional
+[0:09:53] proportional to their conditional variance.
+[0:09:54] variance. Um and you can see that in in the binary
+[0:09:56] Um and you can see that in in the binary case this reduces to that expression at
+[0:09:59] case this reduces to that expression at the top of the slide here which is the
+[0:10:00] the top of the slide here which is the ratio between the expected conditional
+[0:10:02] ratio between the expected conditional covariance and expected conditional
+[0:10:04] covariance and expected conditional variance.
+[0:10:05] variance. Um and and one place this can
+[0:10:07] Um and and one place this can particularly be used is is testing a no
+[0:10:09] particularly be used is is testing a no treatment effect
+[0:10:10] treatment effect as as um
+[0:10:12] as as um one type of example.
+[0:10:14] one type of example. Um
+[0:10:15] Um okay. So um
+[0:10:18] okay. So um let's get into the estimation aspect of
+[0:10:20] let's get into the estimation aspect of this.
+[0:10:21] this. Um
+[0:10:22] Um so the nuisance functions here
+[0:10:25] so the nuisance functions here are the conditional expectation of our
+[0:10:26] are the conditional expectation of our treatment and the conditional
+[0:10:28] treatment and the conditional expectation of the the outcome.
+[0:10:31] expectation of the the outcome. So I'm going to note that by P for the
+[0:10:33] So I'm going to note that by P for the treatment and B for the outcome.
+[0:10:36] treatment and B for the outcome. And you know as Richard she mentioned in
+[0:10:38] And you know as Richard she mentioned in in in the early slides here we can think
+[0:10:40] in in the early slides here we can think of constructing different types of
+[0:10:41] of constructing different types of estimators of our functional of
+[0:10:43] estimators of our functional of interests. Um
+[0:10:45] interests. Um so one of them we're going to analyze
+[0:10:47] so one of them we're going to analyze which is based off of a type of first
+[0:10:48] which is based off of a type of first order bias correction um is um
+[0:10:53] order bias correction um is um is given in this slide here and and one
+[0:10:55] is given in this slide here and and one interpretation is we're just simply
+[0:10:57] interpretation is we're just simply plugging in estimates of the nuisance
+[0:10:58] plugging in estimates of the nuisance functions P and B
+[0:11:00] functions P and B and we're in a sense we're replacing the
+[0:11:01] and we're in a sense we're replacing the expectation with a with a sample sample
+[0:11:04] expectation with a with a sample sample mean.
+[0:11:05] mean. Um and we can express this functional of
+[0:11:07] Um and we can express this functional of interest in many ways. We're going to
+[0:11:08] interest in many ways. We're going to see them later in the presentation of
+[0:11:10] see them later in the presentation of many different types of estimators we
+[0:11:11] many different types of estimators we can consider.
+[0:11:12] can consider. Um
+[0:11:14] Um so in the second one here we have
+[0:11:16] so in the second one here we have conditional expectate the expectation of
+[0:11:18] conditional expectate the expectation of A times Y which can be estimated with a
+[0:11:20] A times Y which can be estimated with a with a sample mean of of A times Y and
+[0:11:22] with a sample mean of of A times Y and and the second term here
+[0:11:25] and the second term here we can just replace the expectations
+[0:11:27] we can just replace the expectations with the mean and and plug in our
+[0:11:29] with the mean and and plug in our estimates of our nuisance functions.
+[0:11:31] estimates of our nuisance functions. Um
+[0:11:33] Um Now um kind of the the classic pipeline
+[0:11:35] Now um kind of the the classic pipeline for inference in this type of setting as
+[0:11:37] for inference in this type of setting as we've already mentioned is you know, we
+[0:11:38] we've already mentioned is you know, we just we plug in some good estimators of
+[0:11:40] just we plug in some good estimators of our nuisance functions. So, we're going
+[0:11:41] our nuisance functions. So, we're going to plug in some P hat and B hat. Maybe
+[0:11:44] to plug in some P hat and B hat. Maybe we use some cross-validation approach to
+[0:11:47] we use some cross-validation approach to construct some good estimator of those.
+[0:11:49] construct some good estimator of those. And then we plug those in uh into our
+[0:11:51] And then we plug those in uh into our estimator of choice of the functional of
+[0:11:53] estimator of choice of the functional of interest.
+[0:11:55] interest. And and proceed in that way.
+[0:11:57] And and proceed in that way. Uh and once again, kind of the question
+[0:11:59] Uh and once again, kind of the question that's going to drive the projects I'm
+[0:12:00] that's going to drive the projects I'm going to present today is how can we
+[0:12:02] going to present today is how can we construct these estimators P hat and B
+[0:12:04] construct these estimators P hat and B hat to optimize the downstream
+[0:12:06] hat to optimize the downstream performance of the estimator of the ECC.
+[0:12:09] performance of the estimator of the ECC. Uh and and and the key insight is the
+[0:12:12] Uh and and and the key insight is the best way to estimate P and V
+[0:12:14] best way to estimate P and V in a sense are going to be suboptimal
+[0:12:15] in a sense are going to be suboptimal for estimating the nuisance functions,
+[0:12:17] for estimating the nuisance functions, but those lead to optimal inference of
+[0:12:19] but those lead to optimal inference of of psi.
+[0:12:21] of psi. Is is the intuition here.
+[0:12:23] Is is the intuition here. Um so, I'm going to be focusing on a
+[0:12:25] Um so, I'm going to be focusing on a non-parametric case. Um there'll also be
+[0:12:27] non-parametric case. Um there'll also be a high-dimensional case later on. Uh
+[0:12:29] a high-dimensional case later on. Uh I'll be using my plus time on that case.
+[0:12:32] I'll be using my plus time on that case. Um but we have preprints out uh if
+[0:12:34] Um but we have preprints out uh if you're curious for more details. Uh we
+[0:12:36] you're curious for more details. Uh we have some links at the end.
+[0:12:37] have some links at the end. Um
+[0:12:38] Um So, let's let's focus on the
+[0:12:39] So, let's let's focus on the non-parametric case where we're going to
+[0:12:41] non-parametric case where we're going to assume some non-parametric models for
+[0:12:43] assume some non-parametric models for our nuisance functions.
+[0:12:45] our nuisance functions. In particular, we're going to assume
+[0:12:46] In particular, we're going to assume that P, so once again this is the
+[0:12:48] that P, so once again this is the conditional expectation of our
+[0:12:49] conditional expectation of our treatment, um lies in some Holder space
+[0:12:52] treatment, um lies in some Holder space indexed by alpha.
+[0:12:53] indexed by alpha. And B lies in some other Holder space
+[0:12:55] And B lies in some other Holder space indexed by beta.
+[0:12:57] indexed by beta. Um and one rough way of interpreting
+[0:12:59] Um and one rough way of interpreting these Holder spaces is thinking about it
+[0:13:02] these Holder spaces is thinking about it in a sense it has alpha many derivatives
+[0:13:04] in a sense it has alpha many derivatives for the Holder space indexed by alpha.
+[0:13:06] for the Holder space indexed by alpha. And Holder space
+[0:13:08] And Holder space uh indexed by beta is of course
+[0:13:10] uh indexed by beta is of course similarly.
+[0:13:12] similarly. And so, and the intuition is so as as
+[0:13:14] And so, and the intuition is so as as alpha and beta get larger, we have um
+[0:13:17] alpha and beta get larger, we have um essentially smaller and smaller models
+[0:13:19] essentially smaller and smaller models that have stronger regularity
+[0:13:20] that have stronger regularity conditions. So, it's
+[0:13:21] conditions. So, it's and the opposite is of course as alpha
+[0:13:23] and the opposite is of course as alpha and beta get small.
+[0:13:25] and beta get small. Now, um
+[0:13:27] Now, um the we're going to be thinking about
+[0:13:29] the we're going to be thinking about rates of estimation Uh um
+[0:13:31] rates of estimation Uh um in terms of let's say the mean squared
+[0:13:32] in terms of let's say the mean squared error. Um and we have uh some optimality
+[0:13:37] error. Um and we have uh some optimality results from the past literature
+[0:13:39] results from the past literature which established um yeah, the minimax
+[0:13:41] which established um yeah, the minimax rate of estimation under an L2 loss.
+[0:13:44] rate of estimation under an L2 loss. And it's given here in the um in the
+[0:13:47] And it's given here in the um in the bottom of the slide here where there's
+[0:13:48] bottom of the slide here where there's this elbow-like behavior where
+[0:13:51] this elbow-like behavior where um if alpha and beta are sufficiently
+[0:13:53] um if alpha and beta are sufficiently large, so if we have sufficiently strong
+[0:13:55] large, so if we have sufficiently strong regularity conditions, we get these fast
+[0:13:57] regularity conditions, we get these fast rates of of estimation that go that
+[0:13:59] rates of of estimation that go that behave like one over n.
+[0:14:01] behave like one over n. Now, if alpha and beta are small enough,
+[0:14:04] Now, if alpha and beta are small enough, if their average is below this threshold
+[0:14:05] if their average is below this threshold of d over 4, which is going to come into
+[0:14:07] of d over 4, which is going to come into play uh later on in our analyses, of
+[0:14:09] play uh later on in our analyses, of course,
+[0:14:10] course, um we get these slower rates of
+[0:14:12] um we get these slower rates of convergence.
+[0:14:13] convergence. And so, we're going to be trying to
+[0:14:14] And so, we're going to be trying to target um these sort of minimax rates in
+[0:14:17] target um these sort of minimax rates in some cases.
+[0:14:24] All right. So, um the um
+[0:14:26] the um So, yeah, once again, we're going to
+[0:14:27] So, yeah, once again, we're going to study how to optimally tune these
+[0:14:28] study how to optimally tune these estimators P hat and B hat.
+[0:14:31] estimators P hat and B hat. And we're going to see if there's a very
+[0:14:32] And we're going to see if there's a very delicate uh interplay between the type
+[0:14:35] delicate uh interplay between the type of estimator that we use,
+[0:14:37] of estimator that we use, um you know, we presented a couple of
+[0:14:39] um you know, we presented a couple of them in the first few slides,
+[0:14:41] them in the first few slides, as well as the type of sample splitting
+[0:14:42] as well as the type of sample splitting strategy, which is really going to be a
+[0:14:45] strategy, which is really going to be a big theme of the the topic today.
+[0:14:47] big theme of the the topic today. Um so, to define these things, the no
+[0:14:50] Um so, to define these things, the no sample splitting strategy is trivially,
+[0:14:51] sample splitting strategy is trivially, we just use the same data to estimate
+[0:14:53] we just use the same data to estimate everything.
+[0:14:55] everything. Now, the single sample splitting
+[0:14:56] Now, the single sample splitting strategy
+[0:14:58] strategy is we're going to divide our data set
+[0:14:59] is we're going to divide our data set into two halves,
+[0:15:00] into two halves, randomly partition observations into
+[0:15:02] randomly partition observations into half one versus half two.
+[0:15:04] half one versus half two. Half one, we're going to estimate on
+[0:15:06] Half one, we're going to estimate on nuisance functions.
+[0:15:07] nuisance functions. And half two is we're going to use those
+[0:15:09] And half two is we're going to use those and plug in those estimators and
+[0:15:12] and plug in those estimators and use that to estimate the expected
+[0:15:13] use that to estimate the expected conditional covariance.
+[0:15:16] conditional covariance. And double sample splitting, that was I
+[0:15:17] And double sample splitting, that was I think we actually defined that
+[0:15:19] think we actually defined that very early on is
+[0:15:20] very early on is that idea going to try to estimate
+[0:15:21] that idea going to try to estimate everything in in separate subsamples.
+[0:15:24] everything in in separate subsamples. So, since we have two nuisance
+[0:15:25] So, since we have two nuisance functions,
+[0:15:26] functions, we're going to use one sample to
+[0:15:28] we're going to use one sample to estimate P, second sample to estimate B,
+[0:15:31] estimate P, second sample to estimate B, third sample to estimate the ECC.
+[0:15:34] third sample to estimate the ECC. Um
+[0:15:36] Um so, um
+[0:15:37] so, um yeah, I think I think this is already
+[0:15:39] yeah, I think I think this is already clear, but just to drill it in, this is
+[0:15:40] clear, but just to drill it in, this is going to be pretty crucial. Uh so,
+[0:15:42] going to be pretty crucial. Uh so, single sample splitting, right? We're
+[0:15:43] single sample splitting, right? We're going to estimate both nuisance
+[0:15:44] going to estimate both nuisance functions the same subsample, ECC in the
+[0:15:47] functions the same subsample, ECC in the other one. Double sample splitting,
+[0:15:49] other one. Double sample splitting, everything is in separate subsamples.
+[0:15:51] everything is in separate subsamples. Okay.
+[0:15:53] Okay. So, now let's think about types of
+[0:15:55] So, now let's think about types of estimators we can consider for
+[0:15:57] estimators we can consider for estimating um
+[0:15:59] estimating um the nuisance functions.
+[0:16:01] the nuisance functions. So, under these uh Holder type models,
+[0:16:05] So, under these uh Holder type models, um there's different common classes of
+[0:16:07] um there's different common classes of estimators we can consider that are very
+[0:16:08] estimators we can consider that are very classic. We can use splines, kernel
+[0:16:10] classic. We can use splines, kernel methods, we can use wavelet methods. In
+[0:16:13] methods, we can use wavelet methods. In fact, there's um number of results for
+[0:16:16] fact, there's um number of results for this type of problem actually under each
+[0:16:17] this type of problem actually under each of these
+[0:16:18] of these uh types of uh estimators.
+[0:16:21] uh types of uh estimators. Um and and the point is is that
+[0:16:24] Um and and the point is is that regardless of
+[0:16:25] regardless of which type of estimator you choose,
+[0:16:26] which type of estimator you choose, they're they're indexed by some
+[0:16:28] they're they're indexed by some parameter. We're going to call it tuning
+[0:16:30] parameter. We're going to call it tuning parameter.
+[0:16:31] parameter. Indexed by K.
+[0:16:33] Indexed by K. So, in particular, we're going to adopt
+[0:16:34] So, in particular, we're going to adopt the wavelet case.
+[0:16:36] the wavelet case. Um the the wavelet projection type
+[0:16:38] Um the the wavelet projection type estimator.
+[0:16:39] estimator. Um and so, we're going to denote our
+[0:16:40] Um and so, we're going to denote our estimator B hat indexed by K.
+[0:16:44] estimator B hat indexed by K. And the interpretation of this type of
+[0:16:46] And the interpretation of this type of estimators in a sense that
+[0:16:48] estimators in a sense that it um performs a type of approximate
+[0:16:50] it um performs a type of approximate projection of the data onto a
+[0:16:52] projection of the data onto a K-dimensional subspace.
+[0:16:54] K-dimensional subspace. And so, K controls the bias-variance
+[0:16:57] And so, K controls the bias-variance tradeoff of that estimator. So, as K
+[0:16:59] tradeoff of that estimator. So, as K gets very large, the bias gets small,
+[0:17:01] gets very large, the bias gets small, the variance gets large.
+[0:17:04] the variance gets large. And the you know, of course, the
+[0:17:05] And the you know, of course, the opposite as as K gets small.
+[0:17:07] opposite as as K gets small. Um and so, when we're when I'm going to
+[0:17:09] Um and so, when we're when I'm going to when we use the language nuisance
+[0:17:11] when we use the language nuisance function tuning or nuisance function
+[0:17:12] function tuning or nuisance function smoothing, we're referring to um
+[0:17:15] smoothing, we're referring to um selecting that K in a principled way.
+[0:17:17] selecting that K in a principled way. Um and so, we're as we're going to as
+[0:17:19] Um and so, we're as we're going to as you can imagine
+[0:17:21] you can imagine not only does it control the bias
+[0:17:22] not only does it control the bias variance trade-off of the nuisance
+[0:17:23] variance trade-off of the nuisance function estimator, but it will in turn
+[0:17:25] function estimator, but it will in turn control the bias variance trade-off of
+[0:17:27] control the bias variance trade-off of the estimator of the expected
+[0:17:29] the estimator of the expected conditional covariance.
+[0:17:34] Now, a little bit more language I'm going to be using later on today is this
+[0:17:38] going to be using later on today is this notion of under smoothing, over
+[0:17:39] notion of under smoothing, over smoothing, and prediction optimal
+[0:17:41] smoothing, and prediction optimal smoothing.
+[0:17:42] smoothing. Um so the the idea here is that
+[0:17:46] Um so the the idea here is that you know, the the kind of what we say
+[0:17:47] you know, the the kind of what we say the standard pipeline involves
+[0:17:48] the standard pipeline involves estimating the nuisance functions the
+[0:17:50] estimating the nuisance functions the best way possible.
+[0:17:52] best way possible. Um we're going to refer to that as
+[0:17:54] Um we're going to refer to that as prediction optimal smoothing. So we're
+[0:17:56] prediction optimal smoothing. So we're going to we're going to choose K in a
+[0:17:58] going to we're going to choose K in a way that minimizes uh the mean squared
+[0:18:01] way that minimizes uh the mean squared error actually the mean integrated
+[0:18:03] error actually the mean integrated squared error of the estimator of our
+[0:18:06] squared error of the estimator of our nuisance function.
+[0:18:07] nuisance function. And so that's a known result. K um
+[0:18:10] And so that's a known result. K um is
+[0:18:12] is scales like N, which also
+[0:18:14] scales like N, which also and also depends on the dimension of our
+[0:18:16] and also depends on the dimension of our covariates, which is D.
+[0:18:18] covariates, which is D. Um and beta, which is indexing the
+[0:18:20] Um and beta, which is indexing the smoothness class of the model.
+[0:18:22] smoothness class of the model. Um
+[0:18:23] Um Now, um you know, an important aspect of
+[0:18:26] Now, um you know, an important aspect of the prediction optimal smoothing is
+[0:18:28] the prediction optimal smoothing is that's when the squared bias and the
+[0:18:30] that's when the squared bias and the variance behave at the same rate.
+[0:18:33] variance behave at the same rate. And so under smoothing is referred to
+[0:18:36] And so under smoothing is referred to when K is larger than the prediction
+[0:18:38] when K is larger than the prediction optimal smoothing.
+[0:18:40] optimal smoothing. And what that means is that the bias
+[0:18:41] And what that means is that the bias shrinks very fast compared to the
+[0:18:43] shrinks very fast compared to the variance or like the squared bias
+[0:18:44] variance or like the squared bias shrinks very fast. And and over
+[0:18:47] shrinks very fast. And and over smoothing is the opposite.
+[0:18:49] smoothing is the opposite. And so we can, you know, they're kind of
+[0:18:50] And so we can, you know, they're kind of illustrated here in the bottom of the
+[0:18:51] illustrated here in the bottom of the slide where
+[0:18:53] slide where you know, in a sense under smoothing is
+[0:18:54] you know, in a sense under smoothing is like in a sense like over fitting and
+[0:18:57] like in a sense like over fitting and over smoothing is like under fitting the
+[0:18:58] over smoothing is like under fitting the model for the nuisance function.
+[0:19:01] model for the nuisance function. Okay. So we're going to be using that
+[0:19:02] Okay. So we're going to be using that language throughout.
+[0:19:05] language throughout. And kind of the last piece of setup is
+[0:19:07] And kind of the last piece of setup is defining all the estimators we're going
+[0:19:09] defining all the estimators we're going to analyze. So we we covered the the of
+[0:19:11] to analyze. So we we covered the the of estimator we're going to use for the
+[0:19:12] estimator we're going to use for the nuisance function, the sample splitting
+[0:19:13] nuisance function, the sample splitting strategies, last ingredient is the type
+[0:19:16] strategies, last ingredient is the type of estimator of the functional of
+[0:19:17] of estimator of the functional of interest.
+[0:19:18] interest. And we're going to analyze these four.
+[0:19:20] And we're going to analyze these four. Um
+[0:19:21] Um So, um you know, the the the I
+[0:19:23] So, um you know, the the the I particular form of these estimators is
+[0:19:25] particular form of these estimators is not crucial for today, but just
+[0:19:26] not crucial for today, but just understand we're analyzing a few
+[0:19:28] understand we're analyzing a few different ones.
+[0:19:29] different ones. Um
+[0:19:30] Um the first two are based off of the same
+[0:19:32] the first two are based off of the same type of representation of the expected
+[0:19:34] type of representation of the expected conditional covariance.
+[0:19:36] conditional covariance. Which the tricky part to estimate is the
+[0:19:37] Which the tricky part to estimate is the second half here, which is the product
+[0:19:39] second half here, which is the product expectation of the product of the
+[0:19:40] expectation of the product of the nuisance functions. And one place we're
+[0:19:42] nuisance functions. And one place we're just going to plug in the estimates and
+[0:19:45] just going to plug in the estimates and directly integrate over the known
+[0:19:47] directly integrate over the known distribution of X.
+[0:19:48] distribution of X. Uh the second case we're going to
+[0:19:49] Uh the second case we're going to perform a type of
+[0:19:51] perform a type of Monte Carlo integration. We're going to
+[0:19:53] Monte Carlo integration. We're going to take a sample mean um over the
+[0:19:55] take a sample mean um over the distribution of X here.
+[0:19:56] distribution of X here. Um
+[0:19:57] Um Now, one uh another estimator that's
+[0:19:59] Now, one uh another estimator that's very interesting to analyze, which will
+[0:20:01] very interesting to analyze, which will have its own subtleties and
+[0:20:03] have its own subtleties and implications, is
+[0:20:04] implications, is this uh estimator that was studied in a
+[0:20:06] this uh estimator that was studied in a very related paper by Newey and Robins,
+[0:20:08] very related paper by Newey and Robins, which only involves uh one nuisance
+[0:20:10] which only involves uh one nuisance function.
+[0:20:12] function. And we can of course consider analogous
+[0:20:14] And we can of course consider analogous one that depends just on the other
+[0:20:15] one that depends just on the other nuisance function.
+[0:20:16] nuisance function. Um
+[0:20:17] Um and then this is the and then lastly
+[0:20:18] and then this is the and then lastly we're going to analyze the first-order
+[0:20:20] we're going to analyze the first-order estimator
+[0:20:21] estimator um as well, which depends on both
+[0:20:22] um as well, which depends on both nuisance functions.
+[0:20:29] Okay, so our I'm going to present uh some theoretical results as well as some
+[0:20:31] some theoretical results as well as some simulations. Um so, the the structure of
+[0:20:35] simulations. Um so, the the structure of our theoretical results is is as
+[0:20:37] our theoretical results is is as follows.
+[0:20:38] follows. We're going to consider each of those
+[0:20:39] We're going to consider each of those four estimators and consider each sample
+[0:20:41] four estimators and consider each sample splitting strategy.
+[0:20:43] splitting strategy. And our analysis is is going to proceed
+[0:20:44] And our analysis is is going to proceed as follows. Um
+[0:20:46] as follows. Um First, we're going to characterize uh
+[0:20:48] First, we're going to characterize uh we're going to get uh sharp bounds,
+[0:20:50] we're going to get uh sharp bounds, upper and lower bounds, on the bias of
+[0:20:51] upper and lower bounds, on the bias of these estimators.
+[0:20:53] these estimators. And we're going to get bounds on the
+[0:20:54] And we're going to get bounds on the variance as well.
+[0:20:56] variance as well. And these are going to depend on the
+[0:20:57] And these are going to depend on the resolutions K1 and K2 of the nuisance
+[0:20:59] resolutions K1 and K2 of the nuisance functions.
+[0:21:00] functions. Um and then once we have those, we can
+[0:21:03] Um and then once we have those, we can trivially choose K1 and K2 that minimize
+[0:21:06] trivially choose K1 and K2 that minimize the rate of convergence of the mean
+[0:21:08] the rate of convergence of the mean squared error after doing so.
+[0:21:10] squared error after doing so. And a couple interesting things we're
+[0:21:11] And a couple interesting things we're going to we're going to think about
+[0:21:13] going to we're going to think about after that is compare how do those
+[0:21:15] after that is compare how do those optimal K compared to the prediction
+[0:21:17] optimal K compared to the prediction optimal ones
+[0:21:18] optimal ones and try to understand
+[0:21:20] and try to understand in what settings do we have to be
+[0:21:22] in what settings do we have to be careful about what our downstream goal
+[0:21:24] careful about what our downstream goal is and under over smooth K1 and K2
+[0:21:27] is and under over smooth K1 and K2 versus when can we just be ignorant to
+[0:21:29] versus when can we just be ignorant to what our downstream task is and just
+[0:21:30] what our downstream task is and just plugging good estimators for the
+[0:21:31] plugging good estimators for the nuisance functions.
+[0:21:33] nuisance functions. Um and then after doing so, we're going
+[0:21:35] Um and then after doing so, we're going to characterize
+[0:21:36] to characterize when we choose K in the best way
+[0:21:38] when we choose K in the best way possible, when can we actually get these
+[0:21:40] possible, when can we actually get these minimax rates
+[0:21:42] minimax rates for which estimators under which sample
+[0:21:43] for which estimators under which sample splitting strategies under which
+[0:21:45] splitting strategies under which smoothness conditions. Um
+[0:21:47] smoothness conditions. Um So, that's the structure.
+[0:21:49] So, that's the structure. And
+[0:21:50] And um
+[0:21:52] um let's dig into it. So,
+[0:21:54] let's dig into it. So, I'm first going to consider the double
+[0:21:55] I'm first going to consider the double sample splitting case and um I think it
+[0:21:58] sample splitting case and um I think it may be clear why we're going to start
+[0:21:59] may be clear why we're going to start there uh later on because this is
+[0:22:00] there uh later on because this is actually going to be the simplest case
+[0:22:03] actually going to be the simplest case to analyze.
+[0:22:05] to analyze. So, um
+[0:22:07] So, um first we're going to characterize the
+[0:22:08] first we're going to characterize the bias.
+[0:22:10] bias. And um
+[0:22:12] And um for the integral based ones and in the
+[0:22:13] for the integral based ones and in the Monte Carlo based one, they're actually
+[0:22:15] Monte Carlo based one, they're actually trivially the same the bias.
+[0:22:17] trivially the same the bias. And it's going to depend on the the
+[0:22:20] And it's going to depend on the the smoothness of both nuisance functions.
+[0:22:22] smoothness of both nuisance functions. In partic- the smoothness of both
+[0:22:24] In partic- the smoothness of both nuisance function estimators. So, so K
+[0:22:26] nuisance function estimators. So, so K min is going to actually be the minimum
+[0:22:28] min is going to actually be the minimum of K1 and K2.
+[0:22:30] of K1 and K2. And so, it gets um
+[0:22:32] And so, it gets um So, the bias is a function of the both
+[0:22:34] So, the bias is a function of the both smoothness parameters alpha and beta in
+[0:22:36] smoothness parameters alpha and beta in the dimension of X.
+[0:22:38] the dimension of X. And um
+[0:22:39] And um essentially both K1 and K2 have to be
+[0:22:41] essentially both K1 and K2 have to be large in order to shrink the bias.
+[0:22:43] large in order to shrink the bias. Right? I think which aligns with our
+[0:22:45] Right? I think which aligns with our intuition that in a sense these
+[0:22:47] intuition that in a sense these estimators are not doubly robust. We
+[0:22:48] estimators are not doubly robust. We need we need
+[0:22:49] need we need both to have small bias in order to
+[0:22:51] both to have small bias in order to shrink the bias of the estimator
+[0:22:54] shrink the bias of the estimator um of the functional of interest.
+[0:22:56] um of the functional of interest. And the first order estimator, the the
+[0:22:58] And the first order estimator, the the doubly robust one,
+[0:23:00] doubly robust one, it um only depend it only requires one
+[0:23:03] it um only depend it only requires one of the nuisance function estimators to
+[0:23:04] of the nuisance function estimators to have a bias that shrinks very
+[0:23:06] have a bias that shrinks very fast. So, it just depends on the maximum
+[0:23:08] fast. So, it just depends on the maximum of K1 and K2.
+[0:23:10] of K1 and K2. Um, which is actually going to be, I
+[0:23:12] Um, which is actually going to be, I think, really important in some
+[0:23:13] think, really important in some downstream
+[0:23:14] downstream um
+[0:23:15] um implications of these bounds. Um,
+[0:23:18] implications of these bounds. Um, and so, you know, our takeaway is, of
+[0:23:20] and so, you know, our takeaway is, of course, we can we can shrink the bias as
+[0:23:21] course, we can we can shrink the bias as fast as we want as long as we just
+[0:23:23] fast as we want as long as we just select the resolutions to be large
+[0:23:24] select the resolutions to be large enough.
+[0:23:25] enough. Um, and so, the only thing we need to be
+[0:23:27] Um, and so, the only thing we need to be careful about when thinking about
+[0:23:28] careful about when thinking about minimizing rate of convergence of these
+[0:23:30] minimizing rate of convergence of these estimators is making sure the variance
+[0:23:31] estimators is making sure the variance doesn't blow up
+[0:23:33] doesn't blow up or grow too large or not decay fast
+[0:23:35] or grow too large or not decay fast enough.
+[0:23:36] enough. And so, we can next look at the
+[0:23:37] And so, we can next look at the variance.
+[0:23:39] variance. And um
+[0:23:42] And um the variance grows as K as K increases,
+[0:23:44] the variance grows as K as K increases, as of course, we would expect. And um
+[0:23:47] as of course, we would expect. And um the different estimators have different
+[0:23:49] the different estimators have different um
+[0:23:50] um forms of
+[0:23:52] forms of the this variance. We can show that
+[0:23:53] the this variance. We can show that these ter- these terms are indeed
+[0:23:55] these ter- these terms are indeed necessary, but I just present upper
+[0:23:57] necessary, but I just present upper bounds here since
+[0:23:58] bounds here since that's all that's needed for our main
+[0:24:00] that's all that's needed for our main results.
+[0:24:01] results. Um, and it's of course, it's not
+[0:24:03] Um, and it's of course, it's not important to dwell on the exact form of
+[0:24:04] important to dwell on the exact form of these, but we can get upper bounds on
+[0:24:06] these, but we can get upper bounds on the variance on some K1 and K2, and we
+[0:24:08] the variance on some K1 and K2, and we can then study how should we select K1
+[0:24:10] can then study how should we select K1 and K2.
+[0:24:15] Now, some of the main results here we're going to uh present are on when we have
+[0:24:17] going to uh present are on when we have to under smooth or over smooth versus
+[0:24:19] to under smooth or over smooth versus when can we just use prediction optimal
+[0:24:22] when can we just use prediction optimal resolutions.
+[0:24:23] resolutions. Um, so, the panels here are going to
+[0:24:25] Um, so, the panels here are going to correspond to different estimators.
+[0:24:27] correspond to different estimators. So, I actually I present both the
+[0:24:29] So, I actually I present both the integral based plug-in estimator and the
+[0:24:31] integral based plug-in estimator and the Monte Carlo based one because it's
+[0:24:32] Monte Carlo based one because it's actually the same on the left panel, and
+[0:24:34] actually the same on the left panel, and the right panel is is the
+[0:24:36] the right panel is is the first order estimator.
+[0:24:38] first order estimator. And the the structure of these panels is
+[0:24:40] And the the structure of these panels is the x-axis is alpha, the y-axis is beta,
+[0:24:43] the x-axis is alpha, the y-axis is beta, right? So, as alpha gets large and beta
+[0:24:45] right? So, as alpha gets large and beta gets large, we're imposing stronger
+[0:24:47] gets large, we're imposing stronger regularity conditions.
+[0:24:48] regularity conditions. Um,
+[0:24:49] Um, now, in the the coloring of the panel is
+[0:24:52] now, in the the coloring of the panel is based off of um when we can use
+[0:24:54] based off of um when we can use prediction optimal resolutions versus
+[0:24:56] prediction optimal resolutions versus when we have to do this under smoothing
+[0:24:57] when we have to do this under smoothing or over-smoothing for our downstream
+[0:24:58] or over-smoothing for our downstream goal.
+[0:24:59] goal. And so, blue is when we can use
+[0:25:01] And so, blue is when we can use prediction optimal resolutions, red is
+[0:25:02] prediction optimal resolutions, red is otherwise.
+[0:25:04] otherwise. So, you know, if we just take a quick
+[0:25:05] So, you know, if we just take a quick glance at this, what you see,
+[0:25:07] glance at this, what you see, you know, as probably we one may expect
+[0:25:09] you know, as probably we one may expect as as we invoke stronger regularity
+[0:25:12] as as we invoke stronger regularity conditions, we can just use prediction
+[0:25:13] conditions, we can just use prediction optimal resolutions.
+[0:25:15] optimal resolutions. But, once we get further down to the
+[0:25:16] But, once we get further down to the bottom left corner of of of the panel,
+[0:25:20] bottom left corner of of of the panel, we have to under-smooth, in this case,
+[0:25:21] we have to under-smooth, in this case, under-smooth both of the
+[0:25:24] under-smooth both of the uh the nuisance function estimators.
+[0:25:26] uh the nuisance function estimators. Um Now, the first order estimator, it's
+[0:25:28] Um Now, the first order estimator, it's uh there's a larger region that's blue.
+[0:25:31] uh there's a larger region that's blue. Um but, no matter what, as we get um
+[0:25:34] Um but, no matter what, as we get um larger and larger models, we're going to
+[0:25:36] larger and larger models, we're going to eventually have to do some type of uh
+[0:25:38] eventually have to do some type of uh under-smoothing.
+[0:25:41] under-smoothing. And um you know, in this case,
+[0:25:44] And um you know, in this case, uh for the first order estimator, it
+[0:25:46] uh for the first order estimator, it doesn't really matter which one we
+[0:25:47] doesn't really matter which one we under-smooth
+[0:25:48] under-smooth um because it only depends on the
+[0:25:51] um because it only depends on the one of the nuisance function. The bias
+[0:25:53] one of the nuisance function. The bias only requires that one of them be
+[0:25:54] only requires that one of them be estimated with a bias that shrinks very
+[0:25:56] estimated with a bias that shrinks very quickly to zero.
+[0:25:58] quickly to zero. Um
+[0:25:59] Um Whereas, the other estimators, you have
+[0:26:00] Whereas, the other estimators, you have to be a little bit careful about which
+[0:26:01] to be a little bit careful about which one we under-smooth.
+[0:26:05] Okay. So, um
+[0:26:07] So, um the the other aspect of our results is
+[0:26:09] the the other aspect of our results is thinking about
+[0:26:12] thinking about whenever we plug in the optimal
+[0:26:14] whenever we plug in the optimal resolutions, when can we actually get
+[0:26:16] resolutions, when can we actually get the minimax rate of estimation?
+[0:26:19] the minimax rate of estimation? And this figure here is showing
+[0:26:21] And this figure here is showing across uh the average smoothness, which
+[0:26:24] across uh the average smoothness, which in some sense is this is the right
+[0:26:26] in some sense is this is the right measure of complexity because we're
+[0:26:27] measure of complexity because we're getting sharp bounds based off of
+[0:26:29] getting sharp bounds based off of whether or not the average smoothness is
+[0:26:31] whether or not the average smoothness is below or above a certain threshold.
+[0:26:33] below or above a certain threshold. Um when can we get these minimax rates?
+[0:26:35] Um when can we get these minimax rates? And that's illustrated in these dotted
+[0:26:37] And that's illustrated in these dotted lines.
+[0:26:38] lines. So, what this is saying is that for the
+[0:26:40] So, what this is saying is that for the integral-based plug-in estimator,
+[0:26:42] integral-based plug-in estimator, for any alpha and beta, we can get the
+[0:26:44] for any alpha and beta, we can get the minimax rate
+[0:26:46] minimax rate if we choose the resolutions
+[0:26:47] if we choose the resolutions appropriately.
+[0:26:48] appropriately. Um but, that's not the case for all the
+[0:26:50] Um but, that's not the case for all the estimators. So, the Monte Carlo-based
+[0:26:52] estimators. So, the Monte Carlo-based one,
+[0:26:53] one, if the smoothness is sufficiently small,
+[0:26:55] if the smoothness is sufficiently small, we can't get minimax rate optimality no
+[0:26:56] we can't get minimax rate optimality no matter what.
+[0:26:58] matter what. And so, uh one way of thinking about
+[0:27:00] And so, uh one way of thinking about this is
+[0:27:02] this is um
+[0:27:03] um is that without explicitly relying on
+[0:27:05] is that without explicitly relying on these sort types of higher-order bias
+[0:27:08] these sort types of higher-order bias corrections, we construct these in a
+[0:27:10] corrections, we construct these in a sense simple plug-in estimators that get
+[0:27:12] sense simple plug-in estimators that get these that give you these optimality
+[0:27:14] these that give you these optimality guarantees if you're just careful in
+[0:27:17] guarantees if you're just careful in doing sample splitting and tuning the
+[0:27:19] doing sample splitting and tuning the nuisance function estimators
+[0:27:20] nuisance function estimators appropriately.
+[0:27:22] appropriately. And of course, same for even the
+[0:27:23] And of course, same for even the first-order estimator as well.
+[0:27:25] first-order estimator as well. But this is subtle because we can't do
+[0:27:26] But this is subtle because we can't do that for every single estimator,
+[0:27:28] that for every single estimator, um unlike the Monte Carlo one, for
+[0:27:30] um unlike the Monte Carlo one, for example.
+[0:27:31] example. Okay.
+[0:27:32] Okay. So, let's do a similar analysis in the
+[0:27:35] So, let's do a similar analysis in the single sample splitting and no sample
+[0:27:37] single sample splitting and no sample splitting cases, and I think that will
+[0:27:40] splitting cases, and I think that will um illustrate advantages to these types
+[0:27:42] um illustrate advantages to these types of sample splitting strategies.
+[0:27:45] of sample splitting strategies. So, let's think of let's do the same
+[0:27:47] So, let's think of let's do the same exact thing now for single sample
+[0:27:49] exact thing now for single sample splitting.
+[0:27:51] splitting. And we can characterize the bias of
+[0:27:53] And we can characterize the bias of those three estimators again.
+[0:27:55] those three estimators again. There's a fourth one now, but let's
+[0:27:56] There's a fourth one now, but let's let's not focus on that right away.
+[0:27:59] let's not focus on that right away. We get this We get um
+[0:28:01] We get this We get um the same bias bounds as before in the
+[0:28:03] the same bias bounds as before in the sense that the first term is exactly the
+[0:28:05] sense that the first term is exactly the same,
+[0:28:06] same, but now we incur this additional term in
+[0:28:08] but now we incur this additional term in orange.
+[0:28:09] orange. And this this term in orange has been
+[0:28:11] And this this term in orange has been referred to as as non-linearity bias in
+[0:28:14] referred to as as non-linearity bias in a Newey-Robbins um that analog that had
+[0:28:17] a Newey-Robbins um that analog that had a very similar estimation problem
+[0:28:19] a very similar estimation problem um and studied
+[0:28:20] um and studied similar estimators here.
+[0:28:23] similar estimators here. And um
+[0:28:24] And um this non-linearity bias grows with K
+[0:28:26] this non-linearity bias grows with K now, actually the minimum of K1 and K2.
+[0:28:30] now, actually the minimum of K1 and K2. And so, this is
+[0:28:31] And so, this is this is a problem for some of the
+[0:28:32] this is a problem for some of the estimators because
+[0:28:34] estimators because this first term gets small as as K gets
+[0:28:36] this first term gets small as as K gets large and and the second term gets large
+[0:28:38] large and and the second term gets large as K gets large, so this is tension and
+[0:28:41] as K gets large, so this is tension and introduces subtlety in how do we
+[0:28:42] introduces subtlety in how do we optimally choose K.
+[0:28:44] optimally choose K. And so, for some of the estimators now,
+[0:28:46] And so, for some of the estimators now, we can't shrink the bias as fast as we
+[0:28:48] we can't shrink the bias as fast as we want because of these this tension.
+[0:28:52] want because of these this tension. Now, for uh the Newey-Robbins one that
+[0:28:55] Now, for uh the Newey-Robbins one that only depends on one of these nuisance
+[0:28:56] only depends on one of these nuisance functions, it it trivially doesn't have
+[0:28:58] functions, it it trivially doesn't have this non-linearity bias because
+[0:29:00] this non-linearity bias because we're only estimating one nuisance
+[0:29:01] we're only estimating one nuisance function. So, this non-linearity bias is
+[0:29:03] function. So, this non-linearity bias is due to the correlation between
+[0:29:04] due to the correlation between estimating these multiple nuisance
+[0:29:06] estimating these multiple nuisance functions using the same data.
+[0:29:09] functions using the same data. Okay.
+[0:29:11] Okay. So, um
+[0:29:13] So, um we can do the same thing. We do the same
+[0:29:14] we can do the same thing. We do the same analysis and plot when we have to do
+[0:29:16] analysis and plot when we have to do under smoothing, over smoothing,
+[0:29:19] under smoothing, over smoothing, prediction optimal smoothing, and so on.
+[0:29:21] prediction optimal smoothing, and so on. And um
+[0:29:23] And um now,
+[0:29:24] now, the left panel is once again the inner
+[0:29:26] the left panel is once again the inner rule based estimator and the Monte Carlo
+[0:29:28] rule based estimator and the Monte Carlo based one. The right one is the first
+[0:29:29] based one. The right one is the first order estimator.
+[0:29:30] order estimator. Uh these are not the same panels as
+[0:29:32] Uh these are not the same panels as before, although the the color scheme is
+[0:29:33] before, although the the color scheme is actually the same.
+[0:29:35] actually the same. Um so, the region when you can use
+[0:29:37] Um so, the region when you can use prediction optimal smoothing is the
+[0:29:38] prediction optimal smoothing is the same,
+[0:29:39] same, but the requirements in how you have to
+[0:29:41] but the requirements in how you have to under smooth are different now.
+[0:29:43] under smooth are different now. Um so, for example, if we look at the
+[0:29:45] Um so, for example, if we look at the first order estimator,
+[0:29:48] first order estimator, in the bottom left corner here, when we
+[0:29:50] in the bottom left corner here, when we have very large models,
+[0:29:53] have very large models, uh previously, we just had to under
+[0:29:54] uh previously, we just had to under smooth one of the nuisance function
+[0:29:56] smooth one of the nuisance function estimators, and we didn't have any
+[0:29:57] estimators, and we didn't have any strong requirements for what we did with
+[0:29:59] strong requirements for what we did with the other.
+[0:30:00] the other. Now, we have to under smooth one of
+[0:30:01] Now, we have to under smooth one of them, but over smooth the other one.
+[0:30:04] them, but over smooth the other one. And the intuition behind this is that we
+[0:30:06] And the intuition behind this is that we don't want the non-linearity bias to
+[0:30:08] don't want the non-linearity bias to grow too fast.
+[0:30:10] grow too fast. And so, we can have Kmax get very large
+[0:30:12] And so, we can have Kmax get very large and and Kmin to be very small. And so,
+[0:30:14] and and Kmin to be very small. And so, it
+[0:30:15] it Uh the point of this is that there's
+[0:30:17] Uh the point of this is that there's subtleties now if we're doing single
+[0:30:18] subtleties now if we're doing single versus double sample splitting uh
+[0:30:20] versus double sample splitting uh because of this uh non-linearity bias.
+[0:30:24] because of this uh non-linearity bias. And we can, of course, analyze the the
+[0:30:26] And we can, of course, analyze the the Newey-Robbins plug-in estimator. And the
+[0:30:28] Newey-Robbins plug-in estimator. And the point of this is that, you know, these
+[0:30:30] point of this is that, you know, these panels look different depending on the
+[0:30:31] panels look different depending on the type of estimator. So, there's there's
+[0:30:32] type of estimator. So, there's there's subtlety involved, and and it's very
+[0:30:34] subtlety involved, and and it's very case specific.
+[0:30:40] And we can then analyze when we get minimaxality when we use the optimal um
+[0:30:42] minimaxality when we use the optimal um smoothing.
+[0:30:44] smoothing. And so, you know, if we compare this to
+[0:30:46] And so, you know, if we compare this to the figure in the double sample
+[0:30:47] the figure in the double sample splitting case, we see that these lines
+[0:30:49] splitting case, we see that these lines are shifted to the right.
+[0:30:51] are shifted to the right. That um
+[0:30:53] That um that now for the integral base plug-in
+[0:30:55] that now for the integral base plug-in estimator, we can't get minimax rates
+[0:30:57] estimator, we can't get minimax rates across all alpha and beta.
+[0:30:59] across all alpha and beta. And so, one way of thinking about this
+[0:31:00] And so, one way of thinking about this is in a sense this double sample
+[0:31:02] is in a sense this double sample splitting was is is a requirement for
+[0:31:05] splitting was is is a requirement for getting the minimaxality
+[0:31:07] getting the minimaxality um
+[0:31:09] um when thinking about this estimator with
+[0:31:10] when thinking about this estimator with an optimal smoothing.
+[0:31:12] an optimal smoothing. Um
+[0:31:14] Um and the Monte Carlo base one is also
+[0:31:16] and the Monte Carlo base one is also shifted to the right, and but the first
+[0:31:18] shifted to the right, and but the first order estimator can still be rate
+[0:31:19] order estimator can still be rate optimal. And so, it's it's um this kind
+[0:31:22] optimal. And so, it's it's um this kind of I think underscores this this this
+[0:31:24] of I think underscores this this this case-by-case
+[0:31:26] case-by-case um aspect of this problem.
+[0:31:28] um aspect of this problem. Okay. So, let's do our final analysis
+[0:31:31] Okay. So, let's do our final analysis now on the theory side and do no sample
+[0:31:34] now on the theory side and do no sample splitting
+[0:31:36] splitting and analyze all these estimators again.
+[0:31:38] and analyze all these estimators again. And we can get uh sharp bounds on the
+[0:31:40] And we can get uh sharp bounds on the bias,
+[0:31:41] bias, which um
+[0:31:43] which um now for these estimators,
+[0:31:45] now for these estimators, the last three here, we have these red
+[0:31:47] the last three here, we have these red terms that that come out. Depends on It
+[0:31:49] terms that that come out. Depends on It grows now with K. In fact, it grows with
+[0:31:51] grows now with K. In fact, it grows with Kmax instead of Kmin.
+[0:31:54] Kmax instead of Kmin. Um and this is we can interpret this as
+[0:31:57] Um and this is we can interpret this as or this has been called own observation
+[0:31:59] or this has been called own observation bias by uh Newey and Robins,
+[0:32:01] bias by uh Newey and Robins, and we can interpret this as um
+[0:32:05] and we can interpret this as um using the same data to estimate the
+[0:32:06] using the same data to estimate the functional of interest as as the
+[0:32:09] functional of interest as as the nuisance function estimators.
+[0:32:11] nuisance function estimators. And this doesn't of course this
+[0:32:12] And this doesn't of course this trivially doesn't occur in single sample
+[0:32:14] trivially doesn't occur in single sample splitting and double sample splitting,
+[0:32:15] splitting and double sample splitting, but it occurs in the the no sample
+[0:32:17] but it occurs in the the no sample splitting.
+[0:32:19] splitting. And so, this this also introduces
+[0:32:21] And so, this this also introduces complexities now, where we now we really
+[0:32:23] complexities now, where we now we really can't make the bias of any of these
+[0:32:24] can't make the bias of any of these estimators converge as fast as we want
+[0:32:27] estimators converge as fast as we want um or as fast arbitrarily fast. And so,
+[0:32:29] um or as fast arbitrarily fast. And so, we have to be there's we have to be
+[0:32:31] we have to be there's we have to be careful in how we tune these.
+[0:32:34] careful in how we tune these. And we can we can have bounds in the
+[0:32:36] And we can we can have bounds in the variance as well, but aren't really
+[0:32:37] variance as well, but aren't really consequential for our discussion today.
+[0:32:40] consequential for our discussion today. Um,
+[0:32:40] Um, and so um
+[0:32:43] and so um once again, we can plot you know, when
+[0:32:45] once again, we can plot you know, when we have to do prediction optimal
+[0:32:46] we have to do prediction optimal smoothing versus when we have to do
+[0:32:48] smoothing versus when we have to do under and over smoothing. The color
+[0:32:49] under and over smoothing. The color scheme is the same as before for these
+[0:32:52] scheme is the same as before for these Monte Carlo and integral based plug-in
+[0:32:53] Monte Carlo and integral based plug-in estimators, but the requirements are
+[0:32:55] estimators, but the requirements are actually different than the previous
+[0:32:56] actually different than the previous cases here.
+[0:32:58] cases here. Um
+[0:32:59] Um and now for the first order estimator,
+[0:33:01] and now for the first order estimator, now we can only get we can only use
+[0:33:03] now we can only get we can only use prediction optimal smoothing if we have
+[0:33:04] prediction optimal smoothing if we have these uh very high regularity
+[0:33:06] these uh very high regularity conditions. So, um
+[0:33:09] conditions. So, um once again, these plots look differently
+[0:33:11] once again, these plots look differently depending on the sample splitting scheme
+[0:33:13] depending on the sample splitting scheme you're in.
+[0:33:18] And, you know, lastly, we can think about when we could we get minimax rate
+[0:33:19] about when we could we get minimax rate optimality. And um for all these
+[0:33:22] optimality. And um for all these estimators now, once the average
+[0:33:24] estimators now, once the average smoothness is smaller than D over 2, we
+[0:33:26] smoothness is smaller than D over 2, we can't get these minimax rates anymore,
+[0:33:27] can't get these minimax rates anymore, no matter how clever of a choice of K1
+[0:33:30] no matter how clever of a choice of K1 and K2 that we make.
+[0:33:32] and K2 that we make. Um and one interesting aspect of this,
+[0:33:36] Um and one interesting aspect of this, given, you know, the the causal focus of
+[0:33:38] given, you know, the the causal focus of the seminar today is there's in some
+[0:33:40] the seminar today is there's in some sense a connection with this notion of
+[0:33:42] sense a connection with this notion of Donsker classes, where um
+[0:33:45] Donsker classes, where um if alpha is uh smaller than D over 2,
+[0:33:49] if alpha is uh smaller than D over 2, the model becomes for that nuisance
+[0:33:51] the model becomes for that nuisance function
+[0:33:52] function uh becomes so large that it fails to be
+[0:33:53] uh becomes so large that it fails to be Donsker. And similarly with beta.
+[0:33:57] Donsker. And similarly with beta. And so we we can kind of interpret this
+[0:33:58] And so we we can kind of interpret this boundary of of when we can't get
+[0:34:01] boundary of of when we can't get rate optimality without sample splitting
+[0:34:03] rate optimality without sample splitting in in term of that in some sense uh
+[0:34:06] in in term of that in some sense uh relates to this Donsker condition, where
+[0:34:08] relates to this Donsker condition, where we're showing a type of necessity of
+[0:34:11] we're showing a type of necessity of these type of conditions in order to get
+[0:34:13] these type of conditions in order to get rate optimality without sample
+[0:34:14] rate optimality without sample splitting. Um
+[0:34:16] splitting. Um Okay.
+[0:34:19] Okay. So, um another thing I want to talk
+[0:34:20] So, um another thing I want to talk about briefly is as our simulations,
+[0:34:22] about briefly is as our simulations, which um we perform kind of analogous
+[0:34:25] which um we perform kind of analogous analyses and simulations. We're
+[0:34:26] analyses and simulations. We're comparing prediction optimal and optimal
+[0:34:27] comparing prediction optimal and optimal smoothing, and we're going to think
+[0:34:29] smoothing, and we're going to think about its impact on the mean squared
+[0:34:31] about its impact on the mean squared error and the squared bias and and the
+[0:34:33] error and the squared bias and and the variance of these estimators.
+[0:34:35] variance of these estimators. Um so we have more results in the paper
+[0:34:37] Um so we have more results in the paper if you're curious about this. I'm
+[0:34:39] if you're curious about this. I'm actually going to show the case where we
+[0:34:40] actually going to show the case where we have actually quite small sample size of
+[0:34:42] have actually quite small sample size of of 300 and try to see if those those
+[0:34:44] of 300 and try to see if those those implications of those themes, you know,
+[0:34:46] implications of those themes, you know, we learn in the in the rates of
+[0:34:48] we learn in the in the rates of estimation
+[0:34:50] estimation uh apply here in in these relatively
+[0:34:52] uh apply here in in these relatively small
+[0:34:53] small um small sample setting.
+[0:34:55] um small sample setting. And I'm just going to present two
+[0:34:57] And I'm just going to present two regularity settings that um
+[0:35:00] regularity settings that um I mean about as the upper and lower ends
+[0:35:02] I mean about as the upper and lower ends that we may be interested in. The low
+[0:35:04] that we may be interested in. The low regularity case is when alpha and beta
+[0:35:07] regularity case is when alpha and beta are both equal to 0.05. So this is
+[0:35:10] are both equal to 0.05. So this is always going to be in that bottom left
+[0:35:12] always going to be in that bottom left corner we saw on those plots.
+[0:35:14] corner we saw on those plots. Uh the high regularity case is going to
+[0:35:16] Uh the high regularity case is going to be corresponding to that top right
+[0:35:17] be corresponding to that top right corner of those plots that I showed with
+[0:35:21] corner of those plots that I showed with the red and blue
+[0:35:22] the red and blue um regions.
+[0:35:24] um regions. Okay, and so the low regularity case is
+[0:35:26] Okay, and so the low regularity case is is of course the hard estimation
+[0:35:27] is of course the hard estimation problem. We have less smoothness
+[0:35:30] problem. We have less smoothness nuisance functions and these are
+[0:35:31] nuisance functions and these are illustrated in the
+[0:35:32] illustrated in the low low regularity case in the left
+[0:35:34] low low regularity case in the left panel, the high regularity case is in
+[0:35:35] panel, the high regularity case is in the right panel.
+[0:35:36] the right panel. Um
+[0:35:38] Um and just want to briefly walk through
+[0:35:40] and just want to briefly walk through some of some of the key results here.
+[0:35:42] some of some of the key results here. Uh and I'm just going to present the
+[0:35:43] Uh and I'm just going to present the double sample splitting case cuz um
+[0:35:46] double sample splitting case cuz um you know, the the themes are similar in
+[0:35:48] you know, the the themes are similar in single and no sample splitting.
+[0:35:50] single and no sample splitting. Um so the the first thing we can look at
+[0:35:52] Um so the the first thing we can look at is comparing the prediction optimal
+[0:35:54] is comparing the prediction optimal versus optimal resolutions.
+[0:35:56] versus optimal resolutions. And we're going to look at those
+[0:35:58] And we're going to look at those separately based off of whether we're
+[0:35:59] separately based off of whether we're going to think about the low regularity
+[0:36:00] going to think about the low regularity versus the high regularity regimes.
+[0:36:03] versus the high regularity regimes. So those are in the different rows.
+[0:36:05] So those are in the different rows. The the rows that are highlighted now in
+[0:36:07] The the rows that are highlighted now in this in gray are the values of K1 and K2
+[0:36:12] this in gray are the values of K1 and K2 selected in the prediction optimal case
+[0:36:14] selected in the prediction optimal case where
+[0:36:15] where um minimizing the mean integrated
+[0:36:17] um minimizing the mean integrated squared error of the nuisance function
+[0:36:20] squared error of the nuisance function uh estimators and the optimal ones were
+[0:36:22] uh estimators and the optimal ones were directly minimizing the mean squared
+[0:36:24] directly minimizing the mean squared error of our functional of interest.
+[0:36:27] error of our functional of interest. And so in in the low regularity case, we
+[0:36:29] And so in in the low regularity case, we are choosing K1 and K2 that are much
+[0:36:31] are choosing K1 and K2 that are much larger than the prediction optimal ones,
+[0:36:33] larger than the prediction optimal ones, which lines with some of the lessons we
+[0:36:35] which lines with some of the lessons we learned in our in our theoretical
+[0:36:37] learned in our in our theoretical results. That's when we're in the bottom
+[0:36:38] results. That's when we're in the bottom left corner of those plots.
+[0:36:40] left corner of those plots. Um
+[0:36:41] Um Now we're in the high regularity
+[0:36:42] Now we're in the high regularity setting, the optimal resolutions and the
+[0:36:44] setting, the optimal resolutions and the prediction optimal ones actually exactly
+[0:36:46] prediction optimal ones actually exactly coincide for most of these estimators.
+[0:36:49] coincide for most of these estimators. There's a slight difference for the
+[0:36:50] There's a slight difference for the first order estimator, but
+[0:36:53] first order estimator, but um
+[0:36:54] um the very close.
+[0:36:55] the very close. And so um
+[0:36:58] And so um that in a sense aligns with what we'd
+[0:37:00] that in a sense aligns with what we'd expect from the rates of estimation.
+[0:37:02] expect from the rates of estimation. And the other thing we can think about
+[0:37:04] And the other thing we can think about is what's what are these implications on
+[0:37:07] is what's what are these implications on the performance of these estimators of
+[0:37:09] the performance of these estimators of functional of interest.
+[0:37:11] functional of interest. And what we can see here is in the low
+[0:37:13] And what we can see here is in the low regularity case where prediction optimal
+[0:37:16] regularity case where prediction optimal and optimal
+[0:37:17] and optimal smoothing parameters differ,
+[0:37:19] smoothing parameters differ, it does kind of what we would think it
+[0:37:20] it does kind of what we would think it would do. It shrinks the mean squared
+[0:37:22] would do. It shrinks the mean squared error,
+[0:37:22] error, and it does that by decreasing the bias,
+[0:37:25] and it does that by decreasing the bias, but inflating the variance a bit. So
+[0:37:26] but inflating the variance a bit. So that the trade-off is optimal.
+[0:37:29] that the trade-off is optimal. And in the high regularity case,
+[0:37:31] And in the high regularity case, there isn't there there's no there's no
+[0:37:34] there isn't there there's no there's no difference because we're choosing the
+[0:37:36] difference because we're choosing the same tuning parameters. So they're
+[0:37:37] same tuning parameters. So they're trivially the just the same
+[0:37:39] trivially the just the same uh for the most part.
+[0:37:41] uh for the most part. Okay. And so we you know, if you're
+[0:37:43] Okay. And so we you know, if you're curious about you know, more details in
+[0:37:45] curious about you know, more details in this, you know, we have our preprint
+[0:37:46] this, you know, we have our preprint which has uh no no sample splitting
+[0:37:48] which has uh no no sample splitting single sample splitting results. We have
+[0:37:49] single sample splitting results. We have cross-fitting and other sample sizes. Um
+[0:37:53] cross-fitting and other sample sizes. Um They may be interesting.
+[0:37:55] They may be interesting. Okay. So with the remaining time we
+[0:37:57] Okay. So with the remaining time we have, I want to just briefly walk
+[0:37:58] have, I want to just briefly walk through an analogous project in the
+[0:38:00] through an analogous project in the high-dimensional case.
+[0:38:03] high-dimensional case. Uh so this is an addition with joint
+[0:38:05] Uh so this is an addition with joint work with Rajarshi. This is also joint
+[0:38:06] work with Rajarshi. This is also joint work with Debarghya Mukherjee and Cecil
+[0:38:09] work with Debarghya Mukherjee and Cecil Wing
+[0:38:10] Wing um
+[0:38:10] um at BU, Boston University and Harvard
+[0:38:13] at BU, Boston University and Harvard respectively.
+[0:38:14] respectively. Okay.
+[0:38:15] Okay. Um so we're going to consider the same
+[0:38:17] Um so we're going to consider the same setup, and IID data, the same variables,
+[0:38:20] setup, and IID data, the same variables, same parameter of interest.
+[0:38:22] same parameter of interest. Uh but now we're going to um have a
+[0:38:25] Uh but now we're going to um have a linear model.
+[0:38:27] linear model. So, the conditional expectation of A is
+[0:38:29] So, the conditional expectation of A is now X transpose uh alpha, where alpha is
+[0:38:33] now X transpose uh alpha, where alpha is our uh nuisance parameter.
+[0:38:35] our uh nuisance parameter. Or alpha naught, I should say. And
+[0:38:37] Or alpha naught, I should say. And similarly, for the conditional
+[0:38:38] similarly, for the conditional expectation of Y now, it depends on X
+[0:38:40] expectation of Y now, it depends on X transpose beta naught.
+[0:38:43] transpose beta naught. And, you know, the key challenge here in
+[0:38:46] And, you know, the key challenge here in the type of setup we're considering is
+[0:38:48] the type of setup we're considering is the proportional asymptotic regime,
+[0:38:50] the proportional asymptotic regime, where D is the dimension of X, and so D
+[0:38:52] where D is the dimension of X, and so D over N converges to some constant,
+[0:38:55] over N converges to some constant, denoted by C.
+[0:38:57] denoted by C. And we're not um assuming sparsity here
+[0:38:59] And we're not um assuming sparsity here on on alpha naught and beta naught.
+[0:39:02] on on alpha naught and beta naught. And so, the challenge here is um for
+[0:39:04] And so, the challenge here is um for thinking about uh conventional
+[0:39:05] thinking about uh conventional approaches is that we don't have
+[0:39:06] approaches is that we don't have consistent estimators of uh these
+[0:39:09] consistent estimators of uh these nuisance parameters.
+[0:39:15] So, um even kind of before proceeding with our analysis, you know, I think
+[0:39:16] with our analysis, you know, I think it's important to mention that in the
+[0:39:19] it's important to mention that in the non-parametric case, we had a very clear
+[0:39:21] non-parametric case, we had a very clear notion of optimality from prior results
+[0:39:24] notion of optimality from prior results in the literature. We we knew the
+[0:39:25] in the literature. We we knew the minimax rates from the existing
+[0:39:27] minimax rates from the existing literature. And so, we can think about
+[0:39:29] literature. And so, we can think about selecting tuning parameters to achieve
+[0:39:31] selecting tuning parameters to achieve this rate, uh or if this wasn't
+[0:39:33] this rate, uh or if this wasn't achievable, to select to get the best
+[0:39:35] achievable, to select to get the best possible rates um for that type of
+[0:39:37] possible rates um for that type of estimator.
+[0:39:39] estimator. So, in the high-dimensional case, we
+[0:39:40] So, in the high-dimensional case, we don't really have an analogous theory of
+[0:39:42] don't really have an analogous theory of of optimality.
+[0:39:44] of optimality. And so, we're just going to be thinking
+[0:39:45] And so, we're just going to be thinking about selecting these tuning parameters
+[0:39:48] about selecting these tuning parameters just to minimize the asymptotic variance
+[0:39:50] just to minimize the asymptotic variance of that estimator across all possible
+[0:39:52] of that estimator across all possible choices for the tuning parameter. So,
+[0:39:54] choices for the tuning parameter. So, it's uh in a some sense, it's kind of
+[0:39:56] it's uh in a some sense, it's kind of analogous to our non-parametric setting
+[0:39:58] analogous to our non-parametric setting in the case where we couldn't get the um
+[0:40:02] in the case where we couldn't get the um minimax rates for that type of
+[0:40:03] minimax rates for that type of estimator.
+[0:40:05] estimator. Okay.
+[0:40:06] Okay. So, for the type of estimators we're
+[0:40:07] So, for the type of estimators we're going to consider, we're going to use a
+[0:40:09] going to consider, we're going to use a ridge regression approach, where lambda
+[0:40:11] ridge regression approach, where lambda one is going to denote the tuning
+[0:40:12] one is going to denote the tuning parameter for um
+[0:40:15] parameter for um conditional expectation of treatment a
+[0:40:17] conditional expectation of treatment a model, and lambda two is going to be
+[0:40:19] model, and lambda two is going to be analogously for the outcome.
+[0:40:22] analogously for the outcome. And we can think of uh similar types of
+[0:40:24] And we can think of uh similar types of estimators. We have the
+[0:40:26] estimators. We have the an an analogous integral-based plug-in
+[0:40:28] an an analogous integral-based plug-in estimator,
+[0:40:30] estimator, uh we get analogous first-order
+[0:40:32] uh we get analogous first-order estimator, an analogous Newey-Robbins
+[0:40:35] estimator, an analogous Newey-Robbins type estimator that just depends on
+[0:40:38] type estimator that just depends on um
+[0:40:39] um one of the nuisance functions.
+[0:40:41] one of the nuisance functions. And we're going to perform these anal-
+[0:40:43] And we're going to perform these anal- our analyses in the single sample
+[0:40:44] our analyses in the single sample splitting case and the double sample
+[0:40:45] splitting case and the double sample splitting case um like we did in the
+[0:40:47] splitting case um like we did in the non-parametric case.
+[0:40:49] non-parametric case. Okay.
+[0:40:50] Okay. And so just to, you know, briefly
+[0:40:52] And so just to, you know, briefly summarize the the main results is um
+[0:40:56] summarize the the main results is um is kind of before even thinking about
+[0:40:58] is kind of before even thinking about nuisance function tuning, uh we have
+[0:41:01] nuisance function tuning, uh we have this debiasing step that we need. So
+[0:41:03] this debiasing step that we need. So each of these estimators have an order
+[0:41:05] each of these estimators have an order one bias,
+[0:41:06] one bias, and we have to perform a type of bias
+[0:41:09] and we have to perform a type of bias correction based off of some random
+[0:41:10] correction based off of some random matrix theory to um get a consistent
+[0:41:13] matrix theory to um get a consistent estimator um before even doing this
+[0:41:15] estimator um before even doing this nuisance function tuning.
+[0:41:17] nuisance function tuning. Again, so our our main result is showing
+[0:41:19] Again, so our our main result is showing that for each estimator and each sample
+[0:41:21] that for each estimator and each sample splitting strategy,
+[0:41:23] splitting strategy, the uh these type of debiased estimators
+[0:41:26] the uh these type of debiased estimators of the interval-based one, the
+[0:41:27] of the interval-based one, the first-order one, and the Newey-Robbins
+[0:41:29] first-order one, and the Newey-Robbins one are root n consistent, and we
+[0:41:31] one are root n consistent, and we characterize the limiting variance of
+[0:41:33] characterize the limiting variance of that estimator, which depends on lambda
+[0:41:36] that estimator, which depends on lambda one and lambda two.
+[0:41:38] one and lambda two. And we want to think about when we think
+[0:41:39] And we want to think about when we think about nuisance function tuning, we're
+[0:41:40] about nuisance function tuning, we're going to choose lambda one and lambda
+[0:41:41] going to choose lambda one and lambda two that uh minimize this asymptotic
+[0:41:44] two that uh minimize this asymptotic variance.
+[0:41:45] variance. And we have a parametric bootstrap
+[0:41:47] And we have a parametric bootstrap approach I consistently estimate this
+[0:41:48] approach I consistently estimate this limiting variance,
+[0:41:50] limiting variance, which, you know, directly gives a a type
+[0:41:52] which, you know, directly gives a a type of estimation strategy where you can
+[0:41:53] of estimation strategy where you can select lambda one and lambda two to
+[0:41:55] select lambda one and lambda two to minimize, you know, the estimate of the
+[0:41:57] minimize, you know, the estimate of the variance of the debiased estimator.
+[0:42:01] variance of the debiased estimator. Um and so just to give a, you know,
+[0:42:03] Um and so just to give a, you know, flavor of of some of the simulation
+[0:42:05] flavor of of some of the simulation results, we show I think this is the
+[0:42:07] results, we show I think this is the double sample splitting case.
+[0:42:09] double sample splitting case. Um we can show the asymptotic variance
+[0:42:11] Um we can show the asymptotic variance of these estimators
+[0:42:13] of these estimators as a function of lambda. So, we're going
+[0:42:15] as a function of lambda. So, we're going to if we set lambda one equal to lambda
+[0:42:17] to if we set lambda one equal to lambda two,
+[0:42:18] two, um we can plot the variance as a
+[0:42:20] um we can plot the variance as a function of lambda.
+[0:42:21] function of lambda. And the prediction optimal tuning is
+[0:42:24] And the prediction optimal tuning is shown in these uh vertical uh blue
+[0:42:27] shown in these uh vertical uh blue lines. And the optimal tuning is shown
+[0:42:29] lines. And the optimal tuning is shown in the in the vertical red line.
+[0:42:31] in the in the vertical red line. And kind of like we saw in the themes of
+[0:42:33] And kind of like we saw in the themes of the non-parametric
+[0:42:34] the non-parametric problem, the um
+[0:42:37] problem, the um the results are kind of they're
+[0:42:38] the results are kind of they're case-specific and they depend on the
+[0:42:39] case-specific and they depend on the type of estimator. For the
+[0:42:41] type of estimator. For the interval-based one, for example, the
+[0:42:42] interval-based one, for example, the prediction optimal and optimal tuning
+[0:42:45] prediction optimal and optimal tuning almost coincide exactly.
+[0:42:47] almost coincide exactly. Um whereas the first-order estimator in
+[0:42:48] Um whereas the first-order estimator in the Newey-West one, the optimal one is
+[0:42:51] the Newey-West one, the optimal one is is much smaller. Uh
+[0:42:54] is much smaller. Uh and so um
+[0:42:55] and so um yeah.
+[0:42:56] yeah. Okay, so I want to give I want to leave
+[0:42:58] Okay, so I want to give I want to leave a little bit of time uh for questions at
+[0:43:00] a little bit of time uh for questions at the end. So, I just want to just briefly
+[0:43:01] the end. So, I just want to just briefly summarize kind of the main themes of the
+[0:43:03] summarize kind of the main themes of the project today.
+[0:43:04] project today. Um
+[0:43:05] Um so, kind of the the standard pipeline of
+[0:43:08] so, kind of the the standard pipeline of of plugging in optimal uh estimates of
+[0:43:11] of plugging in optimal uh estimates of our nuisance functions
+[0:43:12] our nuisance functions can lead to suboptimal estimation of the
+[0:43:14] can lead to suboptimal estimation of the target parameter for certain types of
+[0:43:16] target parameter for certain types of estimators.
+[0:43:18] estimators. And if we do this, you know, careful
+[0:43:20] And if we do this, you know, careful nuisance function tuning and do these
+[0:43:22] nuisance function tuning and do these sample splitting strategies to create
+[0:43:23] sample splitting strategies to create these important independencies, these
+[0:43:26] these important independencies, these strategies can be necessary and
+[0:43:27] strategies can be necessary and sufficient uh for obtaining optimal
+[0:43:29] sufficient uh for obtaining optimal inference of our downstream target.
+[0:43:31] inference of our downstream target. Um and so, in these simulation results,
+[0:43:33] Um and so, in these simulation results, we're seeing that even without, you
+[0:43:35] we're seeing that even without, you know, extremely large sample sizes,
+[0:43:38] know, extremely large sample sizes, um these sort of tuning strategies and
+[0:43:39] um these sort of tuning strategies and sample splitting strategies can have a
+[0:43:42] sample splitting strategies can have a important um impact on the
+[0:43:45] important um impact on the mean squared error or the asymptotic
+[0:43:46] mean squared error or the asymptotic variance of the estimator of the uh
+[0:43:49] variance of the estimator of the uh functional of interest.
+[0:43:50] functional of interest. Um and if you're curious for more
+[0:43:52] Um and if you're curious for more details, we we have
+[0:43:54] details, we we have the preprints are are up online in the
+[0:43:56] the preprints are are up online in the non-parametric case and the
+[0:43:57] non-parametric case and the high-dimensional case. Um
+[0:44:00] high-dimensional case. Um and happy to yeah, happy to take any
+[0:44:02] and happy to yeah, happy to take any questions. Um that's the end. So, happy
+[0:44:04] questions. Um that's the end. So, happy to take any questions or comments.
+[0:44:07] to take any questions or comments. Thank you.
+[0:44:20] Thank you very much Shalom and Rajarshi. I will start and ask
+[0:44:22] I will start and ask for questions in the room here in
+[0:44:24] for questions in the room here in Cambridge, UK. Anyone speak up?
+[0:44:30] Stijn van der Aalst. Uh thank you for the talk, very interesting work.
+[0:44:33] the talk, very interesting work. Um
+[0:44:34] Um I wasn't sure in the
+[0:44:35] I wasn't sure in the in the second application
+[0:44:37] in the second application the tuning parameters were they chosen
+[0:44:39] the tuning parameters were they chosen data adaptively or this is based on the
+[0:44:43] data adaptively or this is based on the um
+[0:44:44] um based on the the known data generating
+[0:44:45] based on the the known data generating mechanism.
+[0:44:47] mechanism. Were they like estimated?
+[0:44:49] Were they like estimated? Let me
+[0:44:52] Let me I'm sorry, I I realized as we're uh
+[0:44:54] I'm sorry, I I realized as we're uh discussing there was Okay, I see where
+[0:44:55] discussing there was Okay, I see where Rajarshi is replying to some of the
+[0:44:56] Rajarshi is replying to some of the questions.
+[0:44:57] questions. &gt;&gt; Yeah, I'm I'll do reply the questions
+[0:44:58] &gt;&gt; Yeah, I'm I'll do reply the questions online and you can take the uh the ones
+[0:45:01] online and you can take the uh the ones that people are asking in person.
+[0:45:03] that people are asking in person. Got it. So, the um
+[0:45:06] Got it. So, the um the So, you're asking about in the
+[0:45:07] the So, you're asking about in the high-dimensional case here, the variance
+[0:45:10] high-dimensional case here, the variance that's plotted,
+[0:45:11] that's plotted, um this is the true variance. We have we
+[0:45:14] um this is the true variance. We have we have some results actually that show
+[0:45:15] have some results actually that show that compare the estimated variance to
+[0:45:17] that compare the estimated variance to the true variance, but um and so this
+[0:45:19] the true variance, but um and so this type of strategy can be applied with an
+[0:45:21] type of strategy can be applied with an estimate, but the
+[0:45:23] estimate, but the the be you know, to answer your literal
+[0:45:26] the be you know, to answer your literal question here is this is showing the
+[0:45:27] question here is this is showing the true variance and so we when we can um
+[0:45:31] true variance and so we when we can um and so when we're selecting the optimal
+[0:45:32] and so when we're selecting the optimal one, this is based off of the the true
+[0:45:35] one, this is based off of the the true data generating
+[0:45:36] data generating data generating mechanism of
+[0:45:39] data generating mechanism of involved.
+[0:45:49] Let's see. I'm looking at the chat here. Yes, there was Yeah, the um
+[0:45:51] Yes, there was Yeah, the um the first work Yeah, the optimally tuned
+[0:45:53] the first work Yeah, the optimally tuned K's in the prediction optimal ones were
+[0:45:54] K's in the prediction optimal ones were numerically to minimize the exact mean
+[0:45:57] numerically to minimize the exact mean squared error in the prediction one
+[0:45:58] squared error in the prediction one rather than rates of the rates of
+[0:46:00] rather than rates of the rates of estimation of them.
+[0:46:03] estimation of them. I think
+[0:46:04] I think Chenyuan has a question. Oh, yeah.
+[0:46:07] Chenyuan has a question. Oh, yeah. I'm sorry I came in a bit late today,
+[0:46:09] I'm sorry I came in a bit late today, but it's it's very interesting
+[0:46:11] but it's it's very interesting phenomenon. I was wondering
+[0:46:14] phenomenon. I was wondering I mean on a high level is it's the
+[0:46:16] I mean on a high level is it's the message that basically saying you need
+[0:46:18] message that basically saying you need to kind of
+[0:46:19] to kind of tune your
+[0:46:20] tune your your nuisance parameters estimates
+[0:46:23] your nuisance parameters estimates according to
+[0:46:25] according to um the
+[0:46:27] um the estimator you eventually use.
+[0:46:30] estimator you eventually use. And so is there like a general way to do
+[0:46:33] And so is there like a general way to do that? Um like in a more automatic way
+[0:46:36] that? Um like in a more automatic way like without it
+[0:46:37] like without it studying all these um
+[0:46:39] studying all these um you know, doing all the theoretical
+[0:46:40] you know, doing all the theoretical investigation.
+[0:46:43] investigation. Yeah, that's that's a great question. Um
+[0:46:45] Yeah, that's that's a great question. Um so the results are are
+[0:46:47] so the results are are uh the
+[0:46:48] uh the flavor of all the results here is very
+[0:46:50] flavor of all the results here is very case-specific. Uh we'd absolutely love a
+[0:46:52] case-specific. Uh we'd absolutely love a more generic um
+[0:46:54] more generic um generic procedure that, you know, people
+[0:46:56] generic procedure that, you know, people can do.
+[0:46:57] can do. Um but everything is here is is is very
+[0:47:00] Um but everything is here is is is very case-specific on the type of estimator
+[0:47:02] case-specific on the type of estimator you're considering on the
+[0:47:03] you're considering on the type of regularity condition you're in,
+[0:47:05] type of regularity condition you're in, the type of sample splitting strategy,
+[0:47:07] the type of sample splitting strategy, the type of model you're assuming, and
+[0:47:08] the type of model you're assuming, and so on.
+[0:47:10] so on. Um
+[0:47:10] Um And I think that is the message in me
+[0:47:12] And I think that is the message in me saying that if you think about the the
+[0:47:15] saying that if you think about the the thing about the
+[0:47:16] thing about the first-order influence function as
+[0:47:17] first-order influence function as estimator, it's like it allows you to
+[0:47:21] estimator, it's like it allows you to often generically estimate nuisance
+[0:47:23] often generically estimate nuisance functions without thinking about that
+[0:47:25] functions without thinking about that you're using the influence function as
+[0:47:26] you're using the influence function as estimator because the whole error of
+[0:47:28] estimator because the whole error of estimating nuisance function gets kind
+[0:47:30] estimating nuisance function gets kind of eaten up in the error term in this at
+[0:47:32] of eaten up in the error term in this at least in the parametric rates of
+[0:47:33] least in the parametric rates of convergence thing.
+[0:47:35] convergence thing. And uh what uh
+[0:47:37] And uh what uh we observed in this analysis is like it
+[0:47:40] we observed in this analysis is like it really depends on the interplay between
+[0:47:42] really depends on the interplay between the type of sample splitting you have
+[0:47:44] the type of sample splitting you have done, the type of estimation uh you have
+[0:47:46] done, the type of estimation uh you have done for the functional.
+[0:47:48] done for the functional. And I think also we're trying to say it
+[0:47:50] And I think also we're trying to say it also depends on how you estimate the
+[0:47:51] also depends on how you estimate the nuisance functions.
+[0:47:52] nuisance functions. So we And but we believe that uh
+[0:47:55] So we And but we believe that uh of course we don't have a proof
+[0:47:57] of course we don't have a proof that at least for the class of double
+[0:47:59] that at least for the class of double robust functionals,
+[0:48:00] robust functionals, this should hold.
+[0:48:03] this should hold. But, we also believe it might not hold
+[0:48:05] But, we also believe it might not hold beyond this at least the story we said
+[0:48:07] beyond this at least the story we said might not hold exactly if you want to go
+[0:48:09] might not hold exactly if you want to go beyond double robust functionals and
+[0:48:12] beyond double robust functionals and I think Lynn is online at least in the
+[0:48:14] I think Lynn is online at least in the in the
+[0:48:16] in the and he did some calculations for a
+[0:48:19] and he did some calculations for a non-double robust functionals where this
+[0:48:20] non-double robust functionals where this story kind of turns out to be different.
+[0:48:24] story kind of turns out to be different. So, in in a while summarize yeah, it's
+[0:48:27] So, in in a while summarize yeah, it's the automation is the main point we are
+[0:48:29] the automation is the main point we are trying to make is automation is tricky
+[0:48:31] trying to make is automation is tricky because it's the
+[0:48:33] because it's the the results are not universal in that
+[0:48:34] the results are not universal in that sense.
+[0:48:43] A new question from Caleb Miles. Thanks, nice talk.
+[0:48:45] Thanks, nice talk. Kind of naive question, but
+[0:48:48] Kind of naive question, but you know, under smoothing is sort of
+[0:48:49] you know, under smoothing is sort of spiritually similar to like TMLE and I
+[0:48:52] spiritually similar to like TMLE and I wonder if the same results for
+[0:48:57] wonder if the same results for the yeah, for the nuisance parameter
+[0:48:59] the yeah, for the nuisance parameter estimation hold for TMLE as for as for
+[0:49:03] estimation hold for TMLE as for as for first order estimation or is that a
+[0:49:06] first order estimation or is that a entirely different?
+[0:49:08] entirely different? I don't think we have done it, but I
+[0:49:11] I don't think we have done it, but I think we believe the intuition it
+[0:49:12] think we believe the intuition it should.
+[0:49:13] should. Another kind of small connection is and
+[0:49:16] Another kind of small connection is and this has to be worked out.
+[0:49:18] this has to be worked out. If you look at some of these estimators
+[0:49:20] If you look at some of these estimators and when you under smooth the nuisance
+[0:49:22] and when you under smooth the nuisance function at least in the non-parametric
+[0:49:23] function at least in the non-parametric case,
+[0:49:24] case, it is
+[0:49:25] it is what I'm going to say is not
+[0:49:28] what I'm going to say is not precise, but it's very much related to
+[0:49:30] precise, but it's very much related to the exact second order
+[0:49:32] the exact second order the higher influence function estimator.
+[0:49:34] the higher influence function estimator. Some version of it is asymptotically
+[0:49:36] Some version of it is asymptotically equivalent. So, I think the reason this
+[0:49:38] equivalent. So, I think the reason this is working you are getting the minimax
+[0:49:40] is working you are getting the minimax rates of convergence because it's
+[0:49:41] rates of convergence because it's becomes asymptotically equivalent to the
+[0:49:43] becomes asymptotically equivalent to the second order influence function.
+[0:49:46] second order influence function. So, but the TMLE I believe it should be
+[0:49:48] So, but the TMLE I believe it should be the same story as the first order
+[0:49:50] the same story as the first order influence function.
+[0:49:51] influence function. We haven't done it. The calculations.
+[0:50:00] But also I think we have one it is another point we'd like to mention is
+[0:50:02] another point we'd like to mention is uh this story also depends on whether
+[0:50:05] uh this story also depends on whether you can estimate your nuisance functions
+[0:50:07] you can estimate your nuisance functions consistently or not. I think the first
+[0:50:09] consistently or not. I think the first part of the talk was when you can and
+[0:50:11] part of the talk was when you can and the second part is when you cannot. Uh
+[0:50:13] the second part is when you cannot. Uh and so
+[0:50:18] Yeah, I do sadly we don't have an universal answer to that.
+[0:50:25] Yeah. I have another maybe simple question uh
+[0:50:28] I have another maybe simple question uh about all these different combination of
+[0:50:31] about all these different combination of estimators.
+[0:50:33] estimators. Is there I know this is probably not the
+[0:50:35] Is there I know this is probably not the point of the talk but is there a clear
+[0:50:38] point of the talk but is there a clear winner out of all the estimators we're
+[0:50:41] winner out of all the estimators we're considering?
+[0:50:45] Um yeah. Yeah, go ahead. Sure.
+[0:50:47] Yeah, go ahead. Sure. I was going to say yeah, it's it's it's
+[0:50:49] I was going to say yeah, it's it's it's quite yeah, it's it's quite tricky cuz
+[0:50:52] quite yeah, it's it's quite tricky cuz um you know,
+[0:50:53] um you know, not to add more complexity to this
+[0:50:55] not to add more complexity to this question but if you're doing if you're
+[0:50:57] question but if you're doing if you're doing
+[0:50:58] doing um
+[0:50:59] um sample splitting in practice um you're
+[0:51:01] sample splitting in practice um you're probably going to do some sort of cross
+[0:51:04] probably going to do some sort of cross a fitting approach where you're going to
+[0:51:05] a fitting approach where you're going to be
+[0:51:07] be uh
+[0:51:07] uh averaging over the different permutation
+[0:51:09] averaging over the different permutation of the order of the splits basically to
+[0:51:11] of the order of the splits basically to in some sense try to gain more
+[0:51:12] in some sense try to gain more efficiency.
+[0:51:14] efficiency. Um and so
+[0:51:16] Um and so um
+[0:51:17] um you know,
+[0:51:18] you know, if you're thinking about what type of
+[0:51:20] if you're thinking about what type of you know,
+[0:51:21] you know, which one performs well, you also
+[0:51:22] which one performs well, you also probably want to factor that in which
+[0:51:24] probably want to factor that in which which we have some you know, results
+[0:51:26] which we have some you know, results like that in the paper if you're curious
+[0:51:27] like that in the paper if you're curious but um there's also subtleties with that
+[0:51:30] but um there's also subtleties with that in terms of the samples what sample
+[0:51:32] in terms of the samples what sample sizes
+[0:51:33] sizes these sort of rates kick in more of of
+[0:51:36] these sort of rates kick in more of of when this sort of cross fitting becomes
+[0:51:37] when this sort of cross fitting becomes advantageous
+[0:51:39] advantageous um
+[0:51:40] um as well as now the type of estimator and
+[0:51:42] as well as now the type of estimator and the regularity regime as well. Um so the
+[0:51:46] the regularity regime as well. Um so the the
+[0:51:47] the long way of saying uh I don't think we
+[0:51:49] long way of saying uh I don't think we have like a clear
+[0:51:51] have like a clear the clear approach that this this
+[0:51:52] the clear approach that this this approach is the winner amongst them
+[0:51:53] approach is the winner amongst them because it depends on these different
+[0:51:55] because it depends on these different subtleties, but um
+[0:51:57] subtleties, but um also welcome if Rajarshi has anything to
+[0:51:58] also welcome if Rajarshi has anything to add to that.
+[0:52:00] add to that. No, no, I think that's
+[0:52:01] No, no, I think that's a
+[0:52:02] a very good point and additionally there
+[0:52:04] very good point and additionally there is
+[0:52:05] is there are two things. When you are just
+[0:52:08] there are two things. When you are just thinking about rates and once you attain
+[0:52:10] thinking about rates and once you attain the minimax rates, you can say, "Okay,
+[0:52:12] the minimax rates, you can say, "Okay, then all of them are optimal in the rate
+[0:52:14] then all of them are optimal in the rate sense whenever you achieve it."
+[0:52:16] sense whenever you achieve it." But then it depends on the constant
+[0:52:19] But then it depends on the constant in the regime where you're in the
+[0:52:20] in the regime where you're in the parametric rates of convergence in the
+[0:52:22] parametric rates of convergence in the non-parametric first part of the talk.
+[0:52:25] non-parametric first part of the talk. Although we haven't done it, but I think
+[0:52:27] Although we haven't done it, but I think you can show that most of these
+[0:52:29] you can show that most of these estimators if you do cross-fitting
+[0:52:30] estimators if you do cross-fitting carefully, you can get the efficiency
+[0:52:32] carefully, you can get the efficiency bound
+[0:52:34] bound because as I said, if you becomes
+[0:52:35] because as I said, if you becomes equivalent to the second-order influence
+[0:52:37] equivalent to the second-order influence function and that is attains the
+[0:52:38] function and that is attains the efficiency bound, so it is optimal in
+[0:52:40] efficiency bound, so it is optimal in that sense, even the integral best
+[0:52:42] that sense, even the integral best plug-in one. The second one when you
+[0:52:45] plug-in one. The second one when you look at the high-dimensional
+[0:52:46] look at the high-dimensional proportional asymptotic one,
+[0:52:48] proportional asymptotic one, there is no people do not know what an
+[0:52:50] there is no people do not know what an efficient estimator is because the
+[0:52:52] efficient estimator is because the people don't know what the best possible
+[0:52:55] people don't know what the best possible lower bound is. But since we are
+[0:52:57] lower bound is. But since we are deriving the exact asymptotic variance,
+[0:53:00] deriving the exact asymptotic variance, not only the rates, exactly the
+[0:53:01] not only the rates, exactly the constants, you can figure it out just by
+[0:53:03] constants, you can figure it out just by looking at the formula and optimizing
+[0:53:05] looking at the formula and optimizing over the lambda one and lambda two, you
+[0:53:06] over the lambda one and lambda two, you can figure out which one is the best
+[0:53:08] can figure out which one is the best one, but it then depends on whether your
+[0:53:12] one, but it then depends on whether your the ratio between sample size and
+[0:53:13] the ratio between sample size and dimension the dimension over sample size
+[0:53:15] dimension the dimension over sample size is less than one or bigger than one.
+[0:53:17] is less than one or bigger than one. That [snorts] also kicks in
+[0:53:19] That [snorts] also kicks in and and also it also depends very
+[0:53:21] and and also it also depends very crucially on the signal-to-noise ratio
+[0:53:23] crucially on the signal-to-noise ratio of the problem. That means that your
+[0:53:25] of the problem. That means that your parameters alpha and beta, it depends on
+[0:53:26] parameters alpha and beta, it depends on norm of alpha squared, norm of beta
+[0:53:28] norm of alpha squared, norm of beta squared, and the inner product of like
+[0:53:30] squared, and the inner product of like the what you're trying to estimate alpha
+[0:53:31] the what you're trying to estimate alpha and beta. So, depending on that, you can
+[0:53:34] and beta. So, depending on that, you can have a winner for any any one. So, you
+[0:53:38] have a winner for any any one. So, you can choose a sample splitting scheme,
+[0:53:39] can choose a sample splitting scheme, you can choose a particular estimator,
+[0:53:41] you can choose a particular estimator, and then choose a particular lambda,
+[0:53:43] and then choose a particular lambda, such that with some combination of
+[0:53:45] such that with some combination of signal to noise ratio and aspect ratio,
+[0:53:47] signal to noise ratio and aspect ratio, you can have a winner in any one of
+[0:53:48] you can have a winner in any one of them.
+[0:53:50] them. So, and because you do not have an
+[0:53:52] So, and because you do not have an efficiency theory in this part of the
+[0:53:54] efficiency theory in this part of the problem, I think one way that we were
+[0:53:57] problem, I think one way that we were thinking about might not be the exact
+[0:53:58] thinking about might not be the exact correct way is like
+[0:54:00] correct way is like you first
+[0:54:02] you first say, okay, this is the class of
+[0:54:03] say, okay, this is the class of estimators I'm going to work with.
+[0:54:05] estimators I'm going to work with. So, and the class is defined by your
+[0:54:07] So, and the class is defined by your sample splitting scheme, your choice of
+[0:54:09] sample splitting scheme, your choice of estimator, whether it's plug-in or
+[0:54:10] estimator, whether it's plug-in or first-order difference function, or what
+[0:54:12] first-order difference function, or what new Robins kind of stuff. And then you
+[0:54:15] new Robins kind of stuff. And then you tell me within that scheme, which is the
+[0:54:17] tell me within that scheme, which is the best one, and that we can talk about.
+[0:54:19] best one, and that we can talk about. But across schemes, we don't have a fair
+[0:54:20] But across schemes, we don't have a fair comparison at this point.
+[0:54:25] Yeah. I think there's a question.
+[0:54:26] I think there's a question. &gt;&gt; Thank you very much.
+[0:54:29] &gt;&gt; Thank you very much. Again, to Shunan and Rajarshi for a
+[0:54:33] Again, to Shunan and Rajarshi for a beautiful work,
+[0:54:34] beautiful work, a clear talk, and a good round of
+[0:54:37] a clear talk, and a good round of questions.
+[0:54:38] questions. We will call the seminar here, and I
+[0:54:41] We will call the seminar here, and I hope to see many of you also next week,
+[0:54:43] hope to see many of you also next week, when we'll have two student
+[0:54:45] when we'll have two student presentations. Have a good day and
+[0:54:47] presentations. Have a good day and afternoon.
+[0:54:48] afternoon. Thank you, everyone. Great. Thank you.

@@ -1,0 +1,1616 @@
+[0:00:06] Perfect. So, thanks so much again for coming to the online call infant
+[0:00:07] coming to the online call infant seminar. This week we're really excited
+[0:00:10] seminar. This week we're really excited to have Clarosi from University of
+[0:00:12] to have Clarosi from University of Washington. He's going to talk about
+[0:00:13] Washington. He's going to talk about long story short, omitted varable bias
+[0:00:16] long story short, omitted varable bias in coal machine learning and we're going
+[0:00:18] in coal machine learning and we're going to have discussion from Dominic at
+[0:00:21] to have discussion from Dominic at Stanford um after his talk and today S
+[0:00:24] Stanford um after his talk and today S is going to handle the questions. So
+[0:00:26] is going to handle the questions. So Sara
+[0:00:28] Sara &gt;&gt; yeah so um I just wanted to remind you
+[0:00:30] &gt;&gt; yeah so um I just wanted to remind you to please don't use the chat but instead
+[0:00:32] to please don't use the chat but instead use the Q&amp;A question and answers um
+[0:00:35] use the Q&amp;A question and answers um thing that is provided by Zoom. So I
+[0:00:37] thing that is provided by Zoom. So I will be reading the questions if there
+[0:00:39] will be reading the questions if there are questions that are quick and
+[0:00:40] are questions that are quick and clarifying I'll try to interrupt Carlos
+[0:00:42] clarifying I'll try to interrupt Carlos and ask him and otherwise for the longer
+[0:00:44] and ask him and otherwise for the longer more complicated questions we'll discuss
+[0:00:46] more complicated questions we'll discuss them after the discussion at the end. So
+[0:00:49] them after the discussion at the end. So this is for the questions and then I
+[0:00:50] this is for the questions and then I wanted to welcome Carlos to start the
+[0:00:53] wanted to welcome Carlos to start the talk.
+[0:00:56] talk. Okay, thank you. So, uh let me try to
+[0:00:59] Okay, thank you. So, uh let me try to share my screen here.
+[0:01:01] share my screen here. &gt;&gt; Mhm.
+[0:01:11] &gt;&gt; Looks good. &gt;&gt; All right. Looks good. All right. Great.
+[0:01:14] &gt;&gt; All right. Looks good. All right. Great. &gt;&gt; Well, so uh thanks for having me here.
+[0:01:17] &gt;&gt; Well, so uh thanks for having me here. It's a it's a great pleasure to to be
+[0:01:19] It's a it's a great pleasure to to be back uh to the as a as a speaker on the
+[0:01:23] back uh to the as a as a speaker on the online causing seminar.
+[0:01:25] online causing seminar. Uh so today I'm going to present about
+[0:01:28] Uh so today I'm going to present about uh this paper long story short bias in
+[0:01:30] uh this paper long story short bias in causal machine learning.
+[0:01:33] causal machine learning. Uh and this is joint work with uh Victor
+[0:01:36] Uh and this is joint work with uh Victor Chernosukov, Whitney Lua, Amit Sharma
+[0:01:38] Chernosukov, Whitney Lua, Amit Sharma and Vasil Kanes. So I have good news. Uh
+[0:01:42] and Vasil Kanes. So I have good news. Uh this paper has just recently been
+[0:01:43] this paper has just recently been accepted on the review of economic
+[0:01:45] accepted on the review of economic statistics. Uh so we're going to see a
+[0:01:49] statistics. Uh so we're going to see a new version uh most more up to-ate
+[0:01:51] new version uh most more up to-ate version uh soon.
+[0:01:53] version uh soon. So let's uh jump directly into a
+[0:01:55] So let's uh jump directly into a motivating example and throughout this
+[0:01:57] motivating example and throughout this example I'm going to give you uh some
+[0:02:01] example I'm going to give you uh some code with this R package DML sensemaker
+[0:02:04] code with this R package DML sensemaker that implements the methods we we have
+[0:02:06] that implements the methods we we have in the paper. Uh we also have uh the
+[0:02:10] in the paper. Uh we also have uh the double ML guys have this version in
+[0:02:11] double ML guys have this version in Python that if you prefer Python you can
+[0:02:14] Python that if you prefer Python you can also use uh but I'm going to not going
+[0:02:16] also use uh but I'm going to not going to show Python code here.
+[0:02:19] to show Python code here. So uh in this example we're interested
+[0:02:22] So uh in this example we're interested in estimating the causal impact of 401k
+[0:02:25] in estimating the causal impact of 401k eligibility on net financial assets. So
+[0:02:27] eligibility on net financial assets. So fork for those who do not know is a it's
+[0:02:31] fork for those who do not know is a it's a tax deferred savings option that
+[0:02:33] a tax deferred savings option that allows you to uh invest without paying
+[0:02:36] allows you to uh invest without paying taxes now and then just pay taxes in the
+[0:02:38] taxes now and then just pay taxes in the future and it's a very very good
+[0:02:40] future and it's a very very good instrument for for retirement. So what
+[0:02:42] instrument for for retirement. So what we want to know is that does it make
+[0:02:44] we want to know is that does it make individuals save more and by how much
+[0:02:47] individuals save more and by how much and our working assumption uh is going
+[0:02:50] and our working assumption uh is going to be that whether one is eligible for
+[0:02:53] to be that whether one is eligible for foreign eligibility. So, so whether one
+[0:02:56] foreign eligibility. So, so whether one works for a firm that offers this plan
+[0:02:58] works for a firm that offers this plan could could be taken as if random once
+[0:03:00] could could be taken as if random once we condition on income and other
+[0:03:01] we condition on income and other coariants. So, that's the usual
+[0:03:03] coariants. So, that's the usual conditioning ignorability assumption.
+[0:03:06] conditioning ignorability assumption. Uh, and I have here a direct graph to
+[0:03:10] Uh, and I have here a direct graph to illustrate this assumption. That's one
+[0:03:11] illustrate this assumption. That's one one way of illustrating it. So, can you
+[0:03:13] one way of illustrating it. So, can you guys see my my mouse? Yeah. So we have
+[0:03:16] guys see my my mouse? Yeah. So we have the treatment D here foreign eligibility
+[0:03:18] the treatment D here foreign eligibility the outcome Y here which is net
+[0:03:20] the outcome Y here which is net financial assets and the key assumption
+[0:03:23] financial assets and the key assumption uh for starting this analysis is that
+[0:03:25] uh for starting this analysis is that the observed coverates X which include
+[0:03:27] the observed coverates X which include many things such as age, income, family
+[0:03:29] many things such as age, income, family size is sufficient for control
+[0:03:31] size is sufficient for control confounding even if you have some latent
+[0:03:33] confounding even if you have some latent variables like L and U here. [snorts]
+[0:03:36] variables like L and U here. [snorts] Uh so under this assumption we can
+[0:03:38] Uh so under this assumption we can estimate then the average treatment
+[0:03:40] estimate then the average treatment effect by adjusting for the observed
+[0:03:42] effect by adjusting for the observed coariant specs and if we do that for
+[0:03:45] coariant specs and if we do that for example using modern machine learning
+[0:03:47] example using modern machine learning methods so we could use for random
+[0:03:49] methods so we could use for random forest uh and using the bias machine
+[0:03:51] forest uh and using the bias machine learning we get an estimate of roughly
+[0:03:54] learning we get an estimate of roughly $9,000. So foreign eligibility gives you
+[0:03:57] $9,000. So foreign eligibility gives you an extra four $9,000 in net financial
+[0:04:00] an extra four $9,000 in net financial assets. If we use a partially linear
+[0:04:02] assets. If we use a partially linear model or in a fully nonp parametric
+[0:04:05] model or in a fully nonp parametric model, you get roughly $8,000.
+[0:04:08] model, you get roughly $8,000. Uh you can do that in our package. So
+[0:04:11] Uh you can do that in our package. So I'm just going to show you the code
+[0:04:12] I'm just going to show you the code here. It's pretty simple. You just call
+[0:04:13] here. It's pretty simple. You just call the DML function. You give your
+[0:04:14] the DML function. You give your treatment Y, uh sorry, your outcome Y,
+[0:04:17] treatment Y, uh sorry, your outcome Y, your treatment D, your observed X. You
+[0:04:19] your treatment D, your observed X. You tell what is the target parameter you
+[0:04:21] tell what is the target parameter you want to estimate, such as the average
+[0:04:22] want to estimate, such as the average treatment effect, and whether you're
+[0:04:24] treatment effect, and whether you're making an assumption such as a partial
+[0:04:26] making an assumption such as a partial linear model, which we call PLM here.
+[0:04:28] linear model, which we call PLM here. That gives it a 9,000. And you can do
+[0:04:30] That gives it a 9,000. And you can do the same thing for example with a fully
+[0:04:32] the same thing for example with a fully no parametric model when you get the
+[0:04:34] no parametric model when you get the 8,000.
+[0:04:36] 8,000. Uh so so far uh we we estimated average
+[0:04:40] Uh so so far uh we we estimated average treatment effect but you could also see
+[0:04:42] treatment effect but you could also see how the effect differs if you are for
+[0:04:44] how the effect differs if you are for example rich or poor like in which
+[0:04:46] example rich or poor like in which income cortile group you are. Uh so to
+[0:04:49] income cortile group you are. Uh so to do that you can just give for example a
+[0:04:51] do that you can just give for example a vector of group indication
+[0:04:54] vector of group indication and you see that there's evidence of
+[0:04:56] and you see that there's evidence of effected trogenity and then the very the
+[0:04:59] effected trogenity and then the very the at varies substantially across groups
+[0:05:01] at varies substantially across groups ranging from like say $4,000 in the
+[0:05:04] ranging from like say $4,000 in the first quartile of income and $18,000 in
+[0:05:07] first quartile of income and $18,000 in the last quartile.
+[0:05:09] the last quartile. Right? So so these are the estimates
+[0:05:11] Right? So so these are the estimates under the ideal world that X is
+[0:05:12] under the ideal world that X is sufficient for control confounding. But
+[0:05:14] sufficient for control confounding. But of course these estimates may still be
+[0:05:16] of course these estimates may still be threatened by an observed confounders.
+[0:05:18] threatened by an observed confounders. And in this empirical example, we
+[0:05:21] And in this empirical example, we actually have a story
+[0:05:23] actually have a story uh a clear confounding story here. So
+[0:05:26] uh a clear confounding story here. So for example, employers often match a
+[0:05:29] for example, employers often match a proportion of the employees uh
+[0:05:32] proportion of the employees uh contribution like for example up to 5%
+[0:05:34] contribution like for example up to 5% of the employees salary. So we could
+[0:05:37] of the employees salary. So we could call this match amount here M. And if
+[0:05:40] call this match amount here M. And if you think that firm characteristics
+[0:05:42] you think that firm characteristics affect whether you work for a firm that
+[0:05:44] affect whether you work for a firm that offers 401k or not
+[0:05:47] offers 401k or not and of course firm characteristics also
+[0:05:50] and of course firm characteristics also affect whether these firms
+[0:05:53] affect whether these firms uh match or not do not match your 401k
+[0:05:56] uh match or not do not match your 401k contribution then now we have this uh
+[0:05:59] contribution then now we have this uh open back door path here from the
+[0:06:01] open back door path here from the treatment to the outcome. So adjusting
+[0:06:03] treatment to the outcome. So adjusting for X is not sufficient anymore. We need
+[0:06:05] for X is not sufficient anymore. We need to adjust for both X and this latent
+[0:06:07] to adjust for both X and this latent confounders U. So the key question here
+[0:06:10] confounders U. So the key question here is
+[0:06:12] is well how would this if I if I had
+[0:06:15] well how would this if I if I had included U on my analysis how would this
+[0:06:18] included U on my analysis how would this have changed my my previous conclusion
+[0:06:20] have changed my my previous conclusion so if I had done the same analysis but
+[0:06:23] so if I had done the same analysis but including not only X but X and this lat
+[0:06:25] including not only X but X and this lat founders U how would things have changed
+[0:06:28] founders U how would things have changed so that's what we're going to do in this
+[0:06:30] so that's what we're going to do in this paper uh we're going to try to provide
+[0:06:33] paper uh we're going to try to provide tools that allows us to to answer these
+[0:06:36] tools that allows us to to answer these types of questions so so our contrib
+[0:06:38] types of questions so so our contrib distribution here is we're going to
+[0:06:39] distribution here is we're going to develop a general theory of omitted
+[0:06:41] develop a general theory of omitted variable bias for a broad class of
+[0:06:44] variable bias for a broad class of common causal parameters. So for example
+[0:06:46] common causal parameters. So for example we we can work with average treatment
+[0:06:48] we we can work with average treatment effects average treatment effects on the
+[0:06:50] effects average treatment effects on the treated average cause derivatives and
+[0:06:52] treated average cause derivatives and there are many other examples um that we
+[0:06:54] there are many other examples um that we cover although here in the presentation
+[0:06:56] cover although here in the presentation I'm going to focus on the average
+[0:06:57] I'm going to focus on the average treatment effect. So more generally we
+[0:07:00] treatment effect. So more generally we can work with estimates that can be
+[0:07:02] can work with estimates that can be classified as linear functions of the
+[0:07:04] classified as linear functions of the conditional expectation function of the
+[0:07:05] conditional expectation function of the outcome.
+[0:07:07] outcome. uh and these two examples are are key
+[0:07:10] uh and these two examples are are key are
+[0:07:11] are are fit this bill right [snorts] and
+[0:07:15] are fit this bill right [snorts] and what we're going to show is that uh well
+[0:07:18] what we're going to show is that uh well by deriving this omitted variable bias
+[0:07:19] by deriving this omitted variable bias formula we're going to show that
+[0:07:20] formula we're going to show that actually simple plausibility judgments
+[0:07:22] actually simple plausibility judgments on the maximum explanatory power of
+[0:07:24] on the maximum explanatory power of omitted variables in explaining for
+[0:07:26] omitted variables in explaining for example treatment outcome variation are
+[0:07:28] example treatment outcome variation are going to be sufficient to place bounds
+[0:07:30] going to be sufficient to place bounds on confounding bias and this is uh this
+[0:07:35] on confounding bias and this is uh this is going to be both fully nonparametric
+[0:07:37] is going to be both fully nonparametric But also we're going to allow for same
+[0:07:39] But also we're going to allow for same parametric restrictions such as for
+[0:07:41] parametric restrictions such as for example if you want to make uh an
+[0:07:43] example if you want to make uh an assumption of a linear model or a
+[0:07:45] assumption of a linear model or a partial linear model or even if you're
+[0:07:47] partial linear model or even if you're not making this assumption if you're
+[0:07:48] not making this assumption if you're working with a linear projection a best
+[0:07:49] working with a linear projection a best linear predictor best partial linear
+[0:07:51] linear predictor best partial linear predictor we can also do that and you
+[0:07:53] predictor we can also do that and you can estimate those things uh using the
+[0:07:55] can estimate those things uh using the bias machine learning. So our goal is to
+[0:07:59] bias machine learning. So our goal is to provide
+[0:08:01] provide uh very simple interpretive tools for
+[0:08:04] uh very simple interpretive tools for you to do sensitivity analysis on this
+[0:08:06] you to do sensitivity analysis on this otherwise complex models that are you're
+[0:08:08] otherwise complex models that are you're using machine learning to estimate for
+[0:08:09] using machine learning to estimate for example.
+[0:08:12] example. So so the way this presentation is
+[0:08:14] So so the way this presentation is structured now I'm going to go I'm going
+[0:08:16] structured now I'm going to go I'm going to go to the theory
+[0:08:18] to go to the theory and then after we we cover all the
+[0:08:21] and then after we we cover all the theory and we're going to go back to
+[0:08:22] theory and we're going to go back to empirical example and have more applied
+[0:08:23] empirical example and have more applied discussion on how to deploy this in
+[0:08:25] discussion on how to deploy this in practice. So, so let's start now with
+[0:08:28] practice. So, so let's start now with this uh theory of omitted variable bias.
+[0:08:32] this uh theory of omitted variable bias. And to warm up, let's recap uh omitted
+[0:08:35] And to warm up, let's recap uh omitted variable bias in linear regression.
+[0:08:38] variable bias in linear regression. So, we're going to have what we're going
+[0:08:39] So, we're going to have what we're going to call a long linear regression. So,
+[0:08:42] to call a long linear regression. So, this long line regression is just the
+[0:08:43] this long line regression is just the linear regression of the outcome Y on
+[0:08:45] linear regression of the outcome Y on the treatment D and observed converts X
+[0:08:48] the treatment D and observed converts X and an observed confounders U. So this
+[0:08:50] and an observed confounders U. So this is a regression we wish we had run and
+[0:08:53] is a regression we wish we had run and our target of inference is this linear
+[0:08:55] our target of inference is this linear projection coefficient theta that's what
+[0:08:58] projection coefficient theta that's what we wish we had estimated but since we do
+[0:09:00] we wish we had estimated but since we do not observe you so for example just like
+[0:09:02] not observe you so for example just like in the example that I showed you what we
+[0:09:04] in the example that I showed you what we actually get to estimate is the linear
+[0:09:05] actually get to estimate is the linear regression of the of of the treatment on
+[0:09:08] regression of the of of the treatment on the outcome I just infer the observed x
+[0:09:10] the outcome I just infer the observed x only
+[0:09:12] only so our goal is to characterize the
+[0:09:14] so our goal is to characterize the difference between these two estimates
+[0:09:16] difference between these two estimates one including the unobserved confounder
+[0:09:17] one including the unobserved confounder and the other excluding the the
+[0:09:19] and the other excluding the the unobserved confer founder and you
+[0:09:22] unobserved confer founder and you probably have seen a familiar formula uh
+[0:09:25] probably have seen a familiar formula uh in in econometric textbooks or
+[0:09:27] in in econometric textbooks or statistics textbooks that they call the
+[0:09:30] statistics textbooks that they call the omitted verb bias formula and this is as
+[0:09:32] omitted verb bias formula and this is as follows. You can see that you can fully
+[0:09:33] follows. You can see that you can fully characterize this difference as this
+[0:09:35] characterize this difference as this inner product of of these two vector of
+[0:09:38] inner product of of these two vector of coefficients. The first one is saying
+[0:09:40] coefficients. The first one is saying what is the impact of you on the outcome
+[0:09:43] what is the impact of you on the outcome and the other one is regressing the
+[0:09:46] and the other one is regressing the treatment of the confounders. So it's
+[0:09:48] treatment of the confounders. So it's the imbalance of you on uh in levels of
+[0:09:51] the imbalance of you on uh in levels of the treatment [snorts] and this formula
+[0:09:53] the treatment [snorts] and this formula is often praised as a fundamental object
+[0:09:55] is often praised as a fundamental object in regression. So this is a quote from a
+[0:09:56] in regression. So this is a quote from a very famous textbook in econometric most
+[0:09:59] very famous textbook in econometric most econometrics. It's saying that although
+[0:10:01] econometrics. It's saying that although simple the formula is one of the most
+[0:10:03] simple the formula is one of the most important things to know about
+[0:10:04] important things to know about regression. However, this traditional
+[0:10:06] regression. However, this traditional formula is actually not quite
+[0:10:09] formula is actually not quite easy to work with if you want to do
+[0:10:10] easy to work with if you want to do sensitivity analysis where basically we
+[0:10:12] sensitivity analysis where basically we need to posit two vectors of of
+[0:10:15] need to posit two vectors of of coefficients here and work within a
+[0:10:17] coefficients here and work within a product. So, I'm going to show you a
+[0:10:19] product. So, I'm going to show you a useful reparization of this formula is
+[0:10:21] useful reparization of this formula is still within the realm of linear models.
+[0:10:23] still within the realm of linear models. So, so it turns out that no matter how
+[0:10:27] So, so it turns out that no matter how complicated the observed confounder is,
+[0:10:29] complicated the observed confounder is, simple possibility judgments on the
+[0:10:31] simple possibility judgments on the maximum explanatory power of this latent
+[0:10:33] maximum explanatory power of this latent variables are sufficient to bound the
+[0:10:34] variables are sufficient to bound the bias. So, if you just do some algebra,
+[0:10:36] bias. So, if you just do some algebra, you can show that that inner product can
+[0:10:38] you can show that that inner product can be expressed in this formula in this way
+[0:10:42] be expressed in this formula in this way uh which comprises the the the this
+[0:10:47] uh which comprises the the the this parameter. So we have first you need to
+[0:10:50] parameter. So we have first you need to tell me how much variation the
+[0:10:52] tell me how much variation the confounder explains of the outcome.
+[0:10:53] confounder explains of the outcome. Residual variation the confounder
+[0:10:55] Residual variation the confounder explains the outcome. How much residual
+[0:10:57] explains the outcome. How much residual variation the confounder explains of the
+[0:10:58] variation the confounder explains of the treatment. Then you have the scaling
+[0:11:01] treatment. Then you have the scaling factor which is estimate from the data.
+[0:11:02] factor which is estimate from the data. It's going to tell you what is the size
+[0:11:04] It's going to tell you what is the size of the bias. This is just the residual
+[0:11:06] of the bias. This is just the residual var observed residual variances of
+[0:11:07] var observed residual variances of treatment and the outcome
+[0:11:09] treatment and the outcome and
+[0:11:11] and uh the correlation of errors of of this
+[0:11:13] uh the correlation of errors of of this confounder. So, so this term here is
+[0:11:15] confounder. So, so this term here is telling you does the linear combination
+[0:11:17] telling you does the linear combination that enter the outcome equation is is
+[0:11:21] that enter the outcome equation is is the same as the linear combination that
+[0:11:22] the same as the linear combination that enter the treatment equation. So if they
+[0:11:24] enter the treatment equation. So if they are this is going to be one this is the
+[0:11:26] are this is going to be one this is the most adversarial case possible that you
+[0:11:27] most adversarial case possible that you could have. If they are not then this
+[0:11:31] could have. If they are not then this bias is going to be attenuated right
+[0:11:35] bias is going to be attenuated right um and what you what you can do with
+[0:11:37] um and what you what you can do with this formula so first we're now breaking
+[0:11:39] this formula so first we're now breaking down that
+[0:11:40] down that vector of the inner product of vectors
+[0:11:43] vector of the inner product of vectors into three three interpretable
+[0:11:45] into three three interpretable components
+[0:11:47] components uh just tell me how much variation the
+[0:11:49] uh just tell me how much variation the confounder explains of the outcome how
+[0:11:50] confounder explains of the outcome how much explain the treatment how
+[0:11:52] much explain the treatment how adversarious distinct this confounder is
+[0:11:54] adversarious distinct this confounder is so what we can do with this is we can
+[0:11:56] so what we can do with this is we can compute the bias given a postulated
+[0:11:58] compute the bias given a postulated strength of omitted variables. Uh we
+[0:12:00] strength of omitted variables. Uh we don't need to postulate many numbers. We
+[0:12:02] don't need to postulate many numbers. We just think about this two key numbers
+[0:12:04] just think about this two key numbers and the most important one is actually
+[0:12:06] and the most important one is actually just this guy. We can compute the
+[0:12:07] just this guy. We can compute the minimum strength of the confounder
+[0:12:09] minimum strength of the confounder necessary to invalidate conclusions and
+[0:12:11] necessary to invalidate conclusions and we can also bound the strength of the
+[0:12:13] we can also bound the strength of the confounders if they were strong as
+[0:12:14] confounders if they were strong as certain observed variates uh which we
+[0:12:16] certain observed variates uh which we discussed in the paper. We're not going
+[0:12:18] discussed in the paper. We're not going to actually show you the formula here.
+[0:12:21] to actually show you the formula here. Great. But now we're still talking about
+[0:12:24] Great. But now we're still talking about linear models. And in the empirical
+[0:12:25] linear models. And in the empirical example that I showed you, I was working
+[0:12:27] example that I showed you, I was working with random forest and the bias machine
+[0:12:29] with random forest and the bias machine learning. So how can we move beyond
+[0:12:31] learning. So how can we move beyond linear models like is there a general
+[0:12:34] linear models like is there a general formula
+[0:12:36] formula uh that work for any any model uh and
+[0:12:40] uh that work for any any model uh and this is just a special case of it and it
+[0:12:41] this is just a special case of it and it turns out that the answer is yes.
+[0:12:43] turns out that the answer is yes. [snorts]
+[0:12:44] [snorts] So now uh instead of starting from a
+[0:12:47] So now uh instead of starting from a linear a long linear regression a short
+[0:12:49] linear a long linear regression a short linear regression we're going to have a
+[0:12:51] linear regression we're going to have a long nonparametric regression and a
+[0:12:53] long nonparametric regression and a short nonparametric regression. They
+[0:12:55] short nonparametric regression. They could be of any shape.
+[0:12:58] could be of any shape. But of course we can also work with
+[0:12:59] But of course we can also work with actually projections of this condition
+[0:13:02] actually projections of this condition expectation functions. So for example,
+[0:13:04] expectation functions. So for example, if you want to recover the previous
+[0:13:06] if you want to recover the previous case, we would be working you can either
+[0:13:08] case, we would be working you can either assume that this condition expectation
+[0:13:10] assume that this condition expectation functions are actually linear or we
+[0:13:13] functions are actually linear or we could be you could be working with the
+[0:13:14] could be you could be working with the best linear approximation of this
+[0:13:16] best linear approximation of this conditional expectation functions.
+[0:13:19] conditional expectation functions. And now in this general framework, our
+[0:13:21] And now in this general framework, our long parameter is going to be a linear
+[0:13:24] long parameter is going to be a linear functional of the regression function.
+[0:13:26] functional of the regression function. And by analogy, but since we do not
+[0:13:29] And by analogy, but since we do not measure the long regression function
+[0:13:32] measure the long regression function because we do not have U, you only have
+[0:13:35] because we do not have U, you only have uh D and X,
+[0:13:38] uh D and X, uh our actual parameter that is made in
+[0:13:40] uh our actual parameter that is made in the data is going to be by analogy the
+[0:13:42] the data is going to be by analogy the same functional but just omitting U. So
+[0:13:45] same functional but just omitting U. So it's the same function applied to the
+[0:13:47] it's the same function applied to the short regression function.
+[0:13:50] short regression function. And then by the ris representation
+[0:13:52] And then by the ris representation theorem. So that's going to be a key
+[0:13:53] theorem. So that's going to be a key step for deriving the the the the
+[0:13:56] step for deriving the the the the general case. We can represent this
+[0:13:58] general case. We can represent this target parameter as inner products of
+[0:14:00] target parameter as inner products of these regression functions and these
+[0:14:02] these regression functions and these weights that we call ris representers.
+[0:14:06] weights that we call ris representers. And there's going to be a key property
+[0:14:08] And there's going to be a key property of the ris representer that is going to
+[0:14:10] of the ris representer that is going to allows us to derive the formula that I'm
+[0:14:12] allows us to derive the formula that I'm going to show you in the next slide
+[0:14:14] going to show you in the next slide which is that the short resenter is
+[0:14:17] which is that the short resenter is actually given by the projection of the
+[0:14:19] actually given by the projection of the long resenter
+[0:14:21] long resenter on the short subspace of coariants.
+[0:14:24] on the short subspace of coariants. So we have two things here. So first
+[0:14:26] So we have two things here. So first this one is easy just the uh you can see
+[0:14:29] this one is easy just the uh you can see that the short regression is the
+[0:14:31] that the short regression is the projection of the long regression on the
+[0:14:32] projection of the long regression on the short uh parameter space. But the same
+[0:14:36] short uh parameter space. But the same thing holds for the reserter. The short
+[0:14:38] thing holds for the reserter. The short represent is the projection of the long
+[0:14:39] represent is the projection of the long representer into the short parameter
+[0:14:41] representer into the short parameter space. Oh sorry coariant space not short
+[0:14:44] space. Oh sorry coariant space not short coariate space.
+[0:14:47] coariate space. Uh so this is easier to explain with an
+[0:14:50] Uh so this is easier to explain with an example. We could can look abstract. So
+[0:14:52] example. We could can look abstract. So let's look at the average treatment
+[0:14:54] let's look at the average treatment effect. So in the average treatment
+[0:14:55] effect. So in the average treatment effect our parameter
+[0:14:57] effect our parameter is the average of the difference of the
+[0:15:00] is the average of the difference of the condition expectation function evaluated
+[0:15:02] condition expectation function evaluated setting treatment to one and setting
+[0:15:04] setting treatment to one and setting treatment to zero. So in this case the
+[0:15:06] treatment to zero. So in this case the result presenter is the familiar inverse
+[0:15:08] result presenter is the familiar inverse probability of treatment weights that
+[0:15:10] probability of treatment weights that that your guys are used to
+[0:15:12] that your guys are used to uh given by this guy.
+[0:15:15] uh given by this guy. uh but since we do not observe you what
+[0:15:16] uh but since we do not observe you what we actually estimate is the the the
+[0:15:19] we actually estimate is the the the short functional and the ris representer
+[0:15:21] short functional and the ris representer here is again also the inverse
+[0:15:23] here is again also the inverse probability of treatment weights but
+[0:15:24] probability of treatment weights but omitting the latent variable u
+[0:15:28] omitting the latent variable u now I'm going to just rewrite this
+[0:15:30] now I'm going to just rewrite this inverse probability of treatment weights
+[0:15:31] inverse probability of treatment weights in this form I don't know if you're
+[0:15:32] in this form I don't know if you're familiar with this it's just some
+[0:15:33] familiar with this it's just some algebra but that's a very useful
+[0:15:34] algebra but that's a very useful representation for deriving some of keys
+[0:15:37] representation for deriving some of keys some of the interpretation of the
+[0:15:39] some of the interpretation of the parameters I'm going to show you next
+[0:15:41] parameters I'm going to show you next and what this keeper is telling you is
+[0:15:43] and what this keeper is telling you is that this guy here, the short IPW is
+[0:15:47] that this guy here, the short IPW is actually the conditional expectation of
+[0:15:50] actually the conditional expectation of this long IPW given WS. And this is not
+[0:15:53] this long IPW given WS. And this is not immediately obvious to see here because
+[0:15:55] immediately obvious to see here because you have this denominator, right? Uh but
+[0:15:58] you have this denominator, right? Uh but it turns out that you can actually
+[0:15:59] it turns out that you can actually derive this just using the base rule.
+[0:16:02] derive this just using the base rule. But what if then we make some parametric
+[0:16:04] But what if then we make some parametric assumptions or we're working with
+[0:16:06] assumptions or we're working with projections, right? So let's suppose
+[0:16:07] projections, right? So let's suppose that the regression function is linear
+[0:16:08] that the regression function is linear or partially linear just like in the
+[0:16:10] or partially linear just like in the linear regression example. So what
+[0:16:12] linear regression example. So what happens now is that the ris represent is
+[0:16:14] happens now is that the ris represent is now given by so let's suppose if if
+[0:16:17] now given by so let's suppose if if you're positing a partial model the ris
+[0:16:20] you're positing a partial model the ris represent is just going to be the
+[0:16:21] represent is just going to be the partially linear regression of the long
+[0:16:23] partially linear regression of the long of the IPW
+[0:16:26] of the IPW uh on the coariantss and the short ris
+[0:16:28] uh on the coariantss and the short ris represent is also going to be the
+[0:16:29] represent is also going to be the partial linear projection of the IPW on
+[0:16:32] partial linear projection of the IPW on the short coariantss.
+[0:16:35] the short coariantss. So with this with these properties now
+[0:16:37] So with this with these properties now we we're going to have two key
+[0:16:38] we we're going to have two key orthogonality conditions that are going
+[0:16:39] orthogonality conditions that are going to allows us to derive this omitted
+[0:16:42] to allows us to derive this omitted variable bias formula which is not by
+[0:16:44] variable bias formula which is not by coincidence is very similar to the
+[0:16:46] coincidence is very similar to the linear case and it is and that's the
+[0:16:48] linear case and it is and that's the case because the linear is a special
+[0:16:50] case because the linear is a special version of this.
+[0:16:52] version of this. So again uh to characterize the the
+[0:16:55] So again uh to characterize the the omitted variable bias all we need to to
+[0:16:57] omitted variable bias all we need to to do is to think about how much residual
+[0:17:00] do is to think about how much residual variation the confounder explains of the
+[0:17:02] variation the confounder explains of the outcome. how much variation it creates
+[0:17:05] outcome. how much variation it creates in the long r represent. We have this
+[0:17:08] in the long r represent. We have this scaling factor which is estim from the
+[0:17:10] scaling factor which is estim from the data that determines the size of the
+[0:17:11] data that determines the size of the bias and this correlation of errors. So
+[0:17:15] bias and this correlation of errors. So the way to think about how bias is
+[0:17:18] the way to think about how bias is created in our estimates is the
+[0:17:21] created in our estimates is the confounder can create errors in my
+[0:17:23] confounder can create errors in my outcome regression. The confiler can
+[0:17:25] outcome regression. The confiler can create errors in my weights on my visual
+[0:17:27] create errors in my weights on my visual representer and this true potential of
+[0:17:30] representer and this true potential of creating errors caps them the maximum
+[0:17:33] creating errors caps them the maximum amount of bias that the confiler can
+[0:17:34] amount of bias that the confiler can create. But in order for this to
+[0:17:36] create. But in order for this to actually materialize into the bias these
+[0:17:39] actually materialize into the bias these errors needs to be systematic. They need
+[0:17:40] errors needs to be systematic. They need to be moving the same direction and
+[0:17:42] to be moving the same direction and that's what is given by this row
+[0:17:44] that's what is given by this row correlation of errors over here.
+[0:17:46] correlation of errors over here. So uh if they're always moving the same
+[0:17:49] So uh if they're always moving the same direction a perfect relation this is the
+[0:17:50] direction a perfect relation this is the the worst case bias that you could get
+[0:17:53] the worst case bias that you could get and again with this we can compute a
+[0:17:55] and again with this we can compute a bias given postulated strength of mitted
+[0:17:57] bias given postulated strength of mitted variables compute the minimum strength
+[0:17:59] variables compute the minimum strength of the confounder necessary to
+[0:18:00] of the confounder necessary to invalidate conclusions and bound the
+[0:18:03] invalidate conclusions and bound the strength of confounders if they were as
+[0:18:04] strength of confounders if they were as strong as observed
+[0:18:06] strong as observed and I'm going to show you actually how
+[0:18:07] and I'm going to show you actually how to deploy this in practice in empirical
+[0:18:09] to deploy this in practice in empirical example just bear with me uh for a
+[0:18:12] example just bear with me uh for a second so now we have this this general
+[0:18:15] second so now we have this this general formula that works for uh any linear
+[0:18:18] formula that works for uh any linear functional. Um but I want to just dig
+[0:18:22] functional. Um but I want to just dig deeper on the interpretation of this
+[0:18:25] deeper on the interpretation of this sensitive parameter related to the reser
+[0:18:27] sensitive parameter related to the reser presenter because this is one of the key
+[0:18:29] presenter because this is one of the key well this is the key sensitive
+[0:18:30] well this is the key sensitive parameter. So one thing that is telling
+[0:18:32] parameter. So one thing that is telling us here is actually I'm going to go back
+[0:18:34] us here is actually I'm going to go back to this in a second is that different
+[0:18:36] to this in a second is that different estims respond differently to a measure
+[0:18:38] estims respond differently to a measure confounding and this is the key object
+[0:18:41] confounding and this is the key object to understand this and how does what
+[0:18:44] to understand this and how does what does this translate to in practice for
+[0:18:46] does this translate to in practice for the common estimates we work with like
+[0:18:48] the common estimates we work with like for example average treatment effect a
+[0:18:50] for example average treatment effect a regression coefficient or average
+[0:18:51] regression coefficient or average treatment effect on the treated so for
+[0:18:54] treatment effect on the treated so for example if you're working with a linear
+[0:18:55] example if you're working with a linear regression coefficient this guy is just
+[0:18:58] regression coefficient this guy is just the traditional R square is the gains in
+[0:19:00] the traditional R square is the gains in variance explained just like I showed
+[0:19:02] variance explained just like I showed you in the in the previous uh example
+[0:19:05] you in the in the previous uh example and if it's a partial linear model it's
+[0:19:06] and if it's a partial linear model it's the nonp parametric R square right
+[0:19:10] the nonp parametric R square right uh if you're not making any assumptions
+[0:19:12] uh if you're not making any assumptions of partial linearity like if if you have
+[0:19:14] of partial linearity like if if you have a binary treatment and working with
+[0:19:16] a binary treatment and working with every treatment effect uh itself
+[0:19:20] every treatment effect uh itself then this is very similar to the
+[0:19:22] then this is very similar to the previous interpretation but now instead
+[0:19:24] previous interpretation but now instead of quantifying explanatory power in
+[0:19:26] of quantifying explanatory power in terms of gains in various explain you're
+[0:19:29] terms of gains in various explain you're quantifying gains in average precision
+[0:19:31] quantifying gains in average precision So precision is the inverse of the
+[0:19:32] So precision is the inverse of the variance. And if you're working with
+[0:19:34] variance. And if you're working with average treating effect on the treated
+[0:19:37] average treating effect on the treated uh now this guy is the gain in average
+[0:19:39] uh now this guy is the gain in average odds. And I'm going to go back to this
+[0:19:41] odds. And I'm going to go back to this example because this has a a close
+[0:19:44] example because this has a a close connection to some of sensitivity models
+[0:19:45] connection to some of sensitivity models that people use uh uh other sensitivity
+[0:19:48] that people use uh uh other sensitivity models that people use.
+[0:19:51] models that people use. So again like uh the the general lesson
+[0:19:54] So again like uh the the general lesson here is that B uh if plausibility
+[0:19:57] here is that B uh if plausibility judgments of the maximum power of the
+[0:20:00] judgments of the maximum power of the unobserved confounder uh being gains in
+[0:20:03] unobserved confounder uh being gains in variance explained or gains in every
+[0:20:05] variance explained or gains in every precision or changing odds uh is
+[0:20:07] precision or changing odds uh is sufficient to bound the bias of your
+[0:20:10] sufficient to bound the bias of your your of the target estimate.
+[0:20:17] Right? So now so these are population results right? These are results are
+[0:20:18] results right? These are results are holding population. How can we do
+[0:20:20] holding population. How can we do statistical inference when you actually
+[0:20:22] statistical inference when you actually have the data?
+[0:20:24] have the data? So this is our uh uh
+[0:20:27] So this is our uh uh bounds for the target parameter like
+[0:20:29] bounds for the target parameter like you. So for example if you're adding the
+[0:20:32] you. So for example if you're adding the bias or subtracting the bias here uh so
+[0:20:37] bias or subtracting the bias here uh so first row cy and cd these are things
+[0:20:40] first row cy and cd these are things that are related to the unobserved
+[0:20:41] that are related to the unobserved confounder. So these are things you're
+[0:20:42] confounder. So these are things you're going to hypothesize. You're going to
+[0:20:45] going to hypothesize. You're going to give plausibility judgments on this. And
+[0:20:47] give plausibility judgments on this. And we have three components that we need to
+[0:20:48] we have three components that we need to actually estimate from the data. So one
+[0:20:50] actually estimate from the data. So one is the short parameter. For example,
+[0:20:52] is the short parameter. For example, this is the average sweetening effect
+[0:20:53] this is the average sweetening effect assuming conditional ignorability. The
+[0:20:56] assuming conditional ignorability. The norm of the short regression residuals
+[0:20:58] norm of the short regression residuals and the norm of the short ris
+[0:20:59] and the norm of the short ris representer
+[0:21:01] representer and we can estimate those guys using the
+[0:21:03] and we can estimate those guys using the bias machine learning. So here are the
+[0:21:05] bias machine learning. So here are the orthogonal scores. I'm not going to go
+[0:21:07] orthogonal scores. I'm not going to go over them um a lot but just as a
+[0:21:11] over them um a lot but just as a reminder for example this first guy here
+[0:21:14] reminder for example this first guy here in the case of the average treatment
+[0:21:15] in the case of the average treatment effect in nonparametric model with a
+[0:21:17] effect in nonparametric model with a binary treatment uh this is just the
+[0:21:19] binary treatment uh this is just the augmented uh IPW estimator
+[0:21:23] augmented uh IPW estimator or score.
+[0:21:25] or score. So this gives us a plug-in estimator for
+[0:21:26] So this gives us a plug-in estimator for the bounds and then if you just use the
+[0:21:28] the bounds and then if you just use the delta method with those uh
+[0:21:31] delta method with those uh with those influence functions then you
+[0:21:33] with those influence functions then you can get you can construct confidence
+[0:21:36] can get you can construct confidence bounds for the bounds
+[0:21:39] bounds for the bounds right.
+[0:21:41] right. Uh so now I have just three more slides
+[0:21:44] Uh so now I have just three more slides before going going back to empirical
+[0:21:47] before going going back to empirical example and I want to so these are new
+[0:21:49] example and I want to so these are new slides uh and these are focused on my
+[0:21:52] slides uh and these are focused on my fellow methodologists that also work in
+[0:21:54] fellow methodologists that also work in sensitivity analysis and I want to just
+[0:21:57] sensitivity analysis and I want to just bring up a little discussion on
+[0:21:59] bring up a little discussion on sensitivity models versus omitive verbal
+[0:22:01] sensitivity models versus omitive verbal bias and I'm going to make a connection
+[0:22:02] bias and I'm going to make a connection with margin sensitivity models.
+[0:22:06] with margin sensitivity models. So traditional approaches to sensitivity
+[0:22:08] So traditional approaches to sensitivity analysis they often start with some
+[0:22:09] analysis they often start with some assumption about the strength of
+[0:22:11] assumption about the strength of compounding and then determine how this
+[0:22:13] compounding and then determine how this assumption constrain the target
+[0:22:14] assumption constrain the target parameter of interest. Right? So for
+[0:22:16] parameter of interest. Right? So for example there's a very uh now popular uh
+[0:22:20] example there's a very uh now popular uh sensitivity model called margin
+[0:22:21] sensitivity model called margin sensitivity model that started with 10
+[0:22:24] sensitivity model that started with 10 in 2006.
+[0:22:26] in 2006. And here what you do is you posit that a
+[0:22:29] And here what you do is you posit that a measure confounders
+[0:22:30] measure confounders change the odds of treatment by at most
+[0:22:32] change the odds of treatment by at most some lambda. So you're saying that if I
+[0:22:34] some lambda. So you're saying that if I include the unobserved confounder u in
+[0:22:36] include the unobserved confounder u in my in my treatment uh regression in my
+[0:22:39] my in my treatment uh regression in my propensity score this is going to change
+[0:22:41] propensity score this is going to change the odds of treatment by as mo at most
+[0:22:43] the odds of treatment by as mo at most lambda
+[0:22:45] lambda and once you do that then you can
+[0:22:46] and once you do that then you can proceed to bound the average treatment
+[0:22:48] proceed to bound the average treatment effect or the average treatment effect
+[0:22:49] effect or the average treatment effect on the treated other causal pandas and
+[0:22:52] on the treated other causal pandas and actually sharp bounds under this model
+[0:22:55] actually sharp bounds under this model are a pretty recent result uh there's
+[0:22:57] are a pretty recent result uh there's like this very cool paper by dor and b
+[0:23:00] like this very cool paper by dor and b and jaza 2022
+[0:23:06] Uh so how does this relate to the omitted variable bias formula that I
+[0:23:07] omitted variable bias formula that I just show you? Well there what we're
+[0:23:10] just show you? Well there what we're doing is is is inverting the logic. So
+[0:23:12] doing is is is inverting the logic. So we're not starting from an assumption
+[0:23:14] we're not starting from an assumption about you and then deriving its logical
+[0:23:16] about you and then deriving its logical implications. What we're trying to
+[0:23:18] implications. What we're trying to understand is how does you affect the
+[0:23:21] understand is how does you affect the estim that I have. Uh so so what do I
+[0:23:24] estim that I have. Uh so so what do I need to know about you in order to
+[0:23:26] need to know about you in order to characterize the bias
+[0:23:28] characterize the bias and what and I think this is an
+[0:23:30] and what and I think this is an important question. on its own, right?
+[0:23:32] important question. on its own, right? Like uh so you can understand how how
+[0:23:36] Like uh so you can understand how how things change when you include
+[0:23:37] things change when you include coariants.
+[0:23:39] coariants. Uh and what this also shows why is this
+[0:23:42] Uh and what this also shows why is this useful? This shows for example that many
+[0:23:43] useful? This shows for example that many sensitivity models actually imposes
+[0:23:45] sensitivity models actually imposes stronger assumptions than what is needed
+[0:23:46] stronger assumptions than what is needed to bound the bias. That doesn't mean
+[0:23:48] to bound the bias. That doesn't mean it's bad or good, right? Like because if
+[0:23:50] it's bad or good, right? Like because if you have stronger assumptions, you can
+[0:23:51] you have stronger assumptions, you can get tighter bounds for example,
+[0:23:54] get tighter bounds for example, uh or you can get get more things out of
+[0:23:57] uh or you can get get more things out of it usually. But it does show that you're
+[0:24:00] it usually. But it does show that you're actually making more than you need for
+[0:24:01] actually making more than you need for for bounding the bias of each of those
+[0:24:04] for bounding the bias of each of those estimates separate. So so to illustrate
+[0:24:07] estimates separate. So so to illustrate this, let's consider the average treat
+[0:24:08] this, let's consider the average treat effect on the treated. So what I just
+[0:24:11] effect on the treated. So what I just showed you in a couple slides ago was
+[0:24:13] showed you in a couple slides ago was that the OVB formula is telling us that
+[0:24:15] that the OVB formula is telling us that in order to bound the bias, what we need
+[0:24:17] in order to bound the bias, what we need to bound is the change in average odds.
+[0:24:20] to bound is the change in average odds. And if you recall what the margin
+[0:24:22] And if you recall what the margin sensitivity model is asking you is to
+[0:24:24] sensitivity model is asking you is to bound the worst case change in odds.
+[0:24:27] bound the worst case change in odds. And so first the sensitive parameter is
+[0:24:29] And so first the sensitive parameter is actually quite similar right let's just
+[0:24:31] actually quite similar right let's just one is actually asking you to to bound
+[0:24:36] one is actually asking you to to bound the worst case change while the other
+[0:24:37] the worst case change while the other one is saying well it suffices to bound
+[0:24:40] one is saying well it suffices to bound the the average
+[0:24:42] the the average [snorts]
+[0:24:43] [snorts] but of course uh if you bound the worst
+[0:24:46] but of course uh if you bound the worst case change in odds you bound the
+[0:24:47] case change in odds you bound the average change in o the change in
+[0:24:49] average change in o the change in average odds but not the other way
+[0:24:50] average odds but not the other way around. So it's easy to create cases
+[0:24:52] around. So it's easy to create cases where the margin sensor model has an
+[0:24:54] where the margin sensor model has an informative bounds whereas the true bias
+[0:24:56] informative bounds whereas the true bias is not only finite but small.
+[0:25:00] is not only finite but small. So here uh I would argue that we are not
+[0:25:03] So here uh I would argue that we are not gaining a lot in terms of
+[0:25:04] gaining a lot in terms of interpretation. These are very similar
+[0:25:05] interpretation. These are very similar sensitive parameters. Uh it's just a
+[0:25:08] sensitive parameters. Uh it's just a different in strength of the assumption
+[0:25:10] different in strength of the assumption we're willing to make.
+[0:25:15] uh but the other thing that the OVB formula shows us is that different SM
+[0:25:17] formula shows us is that different SM respond different to a measure compound
+[0:25:19] respond different to a measure compound and have different sensitive parameters
+[0:25:20] and have different sensitive parameters in that sense. So for example, if you
+[0:25:22] in that sense. So for example, if you want to bound the average treatment
+[0:25:23] want to bound the average treatment effect now instead of bounding the key
+[0:25:26] effect now instead of bounding the key sensor parameter is not the change in in
+[0:25:29] sensor parameter is not the change in in average odds it's the gain in precision
+[0:25:31] average odds it's the gain in precision or if you want a linear regression
+[0:25:33] or if you want a linear regression coefficient now it's the the partial R
+[0:25:34] coefficient now it's the the partial R square.
+[0:25:37] square. So uh this man specific approach may be
+[0:25:39] So uh this man specific approach may be unfamiliar to some users right who are
+[0:25:42] unfamiliar to some users right who are custom with a single sensitive parameter
+[0:25:45] custom with a single sensitive parameter uh like in the mar sensitive model where
+[0:25:46] uh like in the mar sensitive model where you just bound one quantity and then you
+[0:25:47] you just bound one quantity and then you get the bounds on various causal
+[0:25:49] get the bounds on various causal quantities from that but in the paper we
+[0:25:52] quantities from that but in the paper we also show well uh you don't need to give
+[0:25:54] also show well uh you don't need to give that up. So for example and then we
+[0:25:56] that up. So for example and then we worked that out for the mig sensitivity
+[0:25:58] worked that out for the mig sensitivity model and people could maybe try to make
+[0:26:00] model and people could maybe try to make this connection with other sensitivity
+[0:26:02] this connection with other sensitivity models is that yeah let's suppose if
+[0:26:06] models is that yeah let's suppose if we're used to make a a judgment
+[0:26:08] we're used to make a a judgment possibility judgment on this lambda we
+[0:26:11] possibility judgment on this lambda we can take that lambda and and use it as a
+[0:26:14] can take that lambda and and use it as a heristic to calibrate possible values
+[0:26:16] heristic to calibrate possible values for the OVB parameters for various
+[0:26:18] for the OVB parameters for various estimates simultaneously.
+[0:26:20] estimates simultaneously. So just to give an illustration, if you
+[0:26:22] So just to give an illustration, if you tell me that the confounder can change
+[0:26:26] tell me that the confounder can change the odds by at most 50% which is a
+[0:26:28] the odds by at most 50% which is a lambda of 1.5 that logically implies
+[0:26:31] lambda of 1.5 that logically implies that this confounder cannot explain more
+[0:26:34] that this confounder cannot explain more than 4% of the residual variation of the
+[0:26:36] than 4% of the residual variation of the of the treatment and then once you make
+[0:26:39] of the treatment and then once you make that you you're going to get some R
+[0:26:40] that you you're going to get some R squares for various causal quantities.
+[0:26:44] squares for various causal quantities. uh and then you can start from there
+[0:26:45] uh and then you can start from there right so you don't need to marry this
+[0:26:47] right so you don't need to marry this worst case assumption you can switch to
+[0:26:48] worst case assumption you can switch to the average case assumption but you now
+[0:26:51] the average case assumption but you now you have some some starting point
+[0:26:54] you have some some starting point for for calibrating this judgment if you
+[0:26:56] for for calibrating this judgment if you if you prefer
+[0:26:59] if you prefer okay so that was a detour uh just
+[0:27:02] okay so that was a detour uh just connecting the omit variable s for some
+[0:27:04] connecting the omit variable s for some with a common sensitivity model so now
+[0:27:06] with a common sensitivity model so now let's go back to our empirical example
+[0:27:09] let's go back to our empirical example and let's perform a sensitivity analysis
+[0:27:12] and let's perform a sensitivity analysis and uh in the R package you to do most
+[0:27:15] and uh in the R package you to do most of the things I'm going to show you
+[0:27:16] of the things I'm going to show you here. You can get that just by running
+[0:27:17] here. You can get that just by running the function sense maker on your DML
+[0:27:20] the function sense maker on your DML model.
+[0:27:22] model. So I'm going to start with a minimal
+[0:27:23] So I'm going to start with a minimal sensitivity reporting. So what I'm going
+[0:27:25] sensitivity reporting. So what I'm going to have here is I'm just reproducing the
+[0:27:28] to have here is I'm just reproducing the previous results. These are the results
+[0:27:29] previous results. These are the results that we obtain assuming conditional
+[0:27:31] that we obtain assuming conditional ignorability so that X is sufficient for
+[0:27:34] ignorability so that X is sufficient for control of confounding. And now what I'm
+[0:27:36] control of confounding. And now what I'm asking you to compute is just this one
+[0:27:38] asking you to compute is just this one number called robustness value that's
+[0:27:40] number called robustness value that's going to tell you how robust these
+[0:27:43] going to tell you how robust these estimates are to the presence of an
+[0:27:45] estimates are to the presence of an observed confound. So just a key
+[0:27:47] observed confound. So just a key clarification, this number does not make
+[0:27:50] clarification, this number does not make any assumptions. This is a descriptive
+[0:27:52] any assumptions. This is a descriptive statistic just like a p value. This is
+[0:27:53] statistic just like a p value. This is telling you
+[0:27:55] telling you uh
+[0:27:57] uh well I'm going to explain what it's
+[0:27:58] well I'm going to explain what it's telling us uh in a second but it's
+[0:28:00] telling us uh in a second but it's telling you how how
+[0:28:04] telling you how how robust your estimate is to the inclusion
+[0:28:06] robust your estimate is to the inclusion of a coariant just like in uh we saw in
+[0:28:09] of a coariant just like in uh we saw in the omitted variable bias setup if you
+[0:28:12] the omitted variable bias setup if you run the same analysis including you this
+[0:28:14] run the same analysis including you this is how strong things need to be to break
+[0:28:16] is how strong things need to be to break down. So let's focus on the partial case
+[0:28:18] down. So let's focus on the partial case because the fully parametric case is
+[0:28:20] because the fully parametric case is very similar.
+[0:28:22] very similar. So what this robustness tell value of
+[0:28:24] So what this robustness tell value of 5.4% is telling us is that if an
+[0:28:28] 5.4% is telling us is that if an observed confounders explained less than
+[0:28:31] observed confounders explained less than 54 5.4% both of the residual variation
+[0:28:34] 54 5.4% both of the residual variation of the outcome and of the treatment then
+[0:28:36] of the outcome and of the treatment then these confounders are not sufficiently
+[0:28:38] these confounders are not sufficiently strong to explain away the observed
+[0:28:40] strong to explain away the observed effect at the five 5% significance
+[0:28:42] effect at the five 5% significance level. So this is giving you a quick
+[0:28:45] level. So this is giving you a quick summary of the minimum strength that
+[0:28:46] summary of the minimum strength that variables need to to have to achieve
+[0:28:50] variables need to to have to achieve uh sorry to have in order to explain
+[0:28:51] uh sorry to have in order to explain away the results. So uh if you think
+[0:28:54] away the results. So uh if you think about p values they're trying to
+[0:28:56] about p values they're trying to quantify
+[0:28:58] quantify how sensitive your estimate is to
+[0:29:00] how sensitive your estimate is to sampling errors. This is trying to
+[0:29:03] sampling errors. This is trying to quantify how sensitive or how robust
+[0:29:05] quantify how sensitive or how robust your estimate is to systematic errors
+[0:29:06] your estimate is to systematic errors instead of simpling errors. Right?
+[0:29:09] instead of simpling errors. Right? But is 5.4% a lot or not? So that's the
+[0:29:12] But is 5.4% a lot or not? So that's the difficult question for this. You need
+[0:29:13] difficult question for this. You need expert knowledge. And then here I'm
+[0:29:16] expert knowledge. And then here I'm going to tell you some back of the
+[0:29:18] going to tell you some back of the envelope calculation to construct a
+[0:29:20] envelope calculation to construct a scenario. And then we're going to see
+[0:29:22] scenario. And then we're going to see whether the scenario you're going to
+[0:29:23] whether the scenario you're going to construct is going to meet that minimal
+[0:29:25] construct is going to meet that minimal requirement or not. [snorts]
+[0:29:27] requirement or not. [snorts] So uh recall for example we're thinking
+[0:29:30] So uh recall for example we're thinking about this match amount as a confounder
+[0:29:32] about this match amount as a confounder that employers can match up to 5% of the
+[0:29:34] that employers can match up to 5% of the income of the employees salary.
+[0:29:38] income of the employees salary. uh
+[0:29:40] uh and
+[0:29:42] and let's suppose the latent variables
+[0:29:43] let's suppose the latent variables explain as much variation at financial
+[0:29:45] explain as much variation at financial assets as the total observed variation
+[0:29:47] assets as the total observed variation of the maximum match amount of income
+[0:29:49] of the maximum match amount of income over the period of three years. So if
+[0:29:51] over the period of three years. So if you do this calculation you're going to
+[0:29:53] you do this calculation you're going to see an increase in approximately 10%
+[0:29:56] see an increase in approximately 10% explanatory power the outcome that gives
+[0:29:58] explanatory power the outcome that gives us a partial square of of with the
+[0:30:00] us a partial square of of with the outcome of 4%. And if we use a similar
+[0:30:03] outcome of 4%. And if we use a similar but more conservative
+[0:30:05] but more conservative gain exploratory power the treatment uh
+[0:30:08] gain exploratory power the treatment uh we obtain a partial square of of 3%. And
+[0:30:11] we obtain a partial square of of 3%. And since both of these numbers are below
+[0:30:13] since both of these numbers are below the robustness value of 5%. We can
+[0:30:15] the robustness value of 5%. We can immediately conclude that this back of
+[0:30:17] immediately conclude that this back of the envelope confounding scenario is not
+[0:30:19] the envelope confounding scenario is not sufficially strong to explain away as so
+[0:30:22] sufficially strong to explain away as so I'm not saying that this is the truth
+[0:30:24] I'm not saying that this is the truth but you can see how sensitive analysis
+[0:30:26] but you can see how sensitive analysis raises the bar for everyone now. So if
+[0:30:29] raises the bar for everyone now. So if you're presenting this paper in a
+[0:30:30] you're presenting this paper in a conference and someone said hey but what
+[0:30:32] conference and someone said hey but what about a matched amount couldn't this uh
+[0:30:36] about a matched amount couldn't this uh completely nullify your your results and
+[0:30:39] completely nullify your your results and then you can ask the person okay but how
+[0:30:41] then you can ask the person okay but how do you think how much matched amount
+[0:30:43] do you think how much matched amount could explain of the treatment outcome
+[0:30:45] could explain of the treatment outcome then you sit down you do some exercise
+[0:30:47] then you sit down you do some exercise and if you do this exercise here in this
+[0:30:49] and if you do this exercise here in this particular example you would conclude
+[0:30:50] particular example you would conclude well actually in this particular example
+[0:30:53] well actually in this particular example this would still not be sufficient to
+[0:30:54] this would still not be sufficient to fully explain away our as of course
+[0:30:57] fully explain away our as of course there could be other confounders and
+[0:30:59] there could be other confounders and stuff like that.
+[0:31:01] stuff like that. So now another tool I'm going to show
+[0:31:02] So now another tool I'm going to show you uh is are this sensitivity contour
+[0:31:05] you uh is are this sensitivity contour plots and this is going to give you the
+[0:31:07] plots and this is going to give you the full picture of the sensitivity of your
+[0:31:10] full picture of the sensitivity of your estimate against an unmeasured
+[0:31:11] estimate against an unmeasured confounders. So what we have in the
+[0:31:13] confounders. So what we have in the x-axis here is how much residual
+[0:31:16] x-axis here is how much residual variation the confounder explains of the
+[0:31:18] variation the confounder explains of the treatment.
+[0:31:19] treatment. Um in the y- axis how much residual
+[0:31:22] Um in the y- axis how much residual variation the confounder explains of the
+[0:31:24] variation the confounder explains of the outcome. And in this corner here I have
+[0:31:27] outcome. And in this corner here I have the lower limit of the confidence bound
+[0:31:30] the lower limit of the confidence bound assuming the ideal world that there's no
+[0:31:31] assuming the ideal world that there's no observe. Right? So that's that's why you
+[0:31:34] observe. Right? So that's that's why you report in a regression table uh
+[0:31:37] report in a regression table uh traditionally. So and as you move along
+[0:31:39] traditionally. So and as you move along the di the diagonal here you're positing
+[0:31:41] the di the diagonal here you're positing you're hypothesizing confounding with
+[0:31:43] you're hypothesizing confounding with increasing strength that will reduce the
+[0:31:45] increasing strength that will reduce the lower limit of the confidence bound and
+[0:31:47] lower limit of the confidence bound and eventually would reach zero or even
+[0:31:49] eventually would reach zero or even cross zero and be negative.
+[0:31:53] cross zero and be negative. And this max match scenario here is the
+[0:31:55] And this max match scenario here is the scenario that I just described before,
+[0:31:58] scenario that I just described before, right? And as as we had concluded from
+[0:32:00] right? And as as we had concluded from the robustness value, it is not strong
+[0:32:02] the robustness value, it is not strong enough to bring the estimate to zero.
+[0:32:04] enough to bring the estimate to zero. And here we can actually see exactly how
+[0:32:06] And here we can actually see exactly how much it brings down the estimate. It
+[0:32:08] much it brings down the estimate. It brings the lower limit from 6,000 to
+[0:32:10] brings the lower limit from 6,000 to roughly $2.5,000.
+[0:32:14] roughly $2.5,000. And uh now here's a confounder that
+[0:32:16] And uh now here's a confounder that actually would be sufficient to kill the
+[0:32:19] actually would be sufficient to kill the estimate which is income. So in this
+[0:32:21] estimate which is income. So in this case for example if you think about if
+[0:32:23] case for example if you think about if there is a confounder as strong as
+[0:32:25] there is a confounder as strong as income
+[0:32:27] income and there's a precise meaning of what as
+[0:32:30] and there's a precise meaning of what as strong as income mean uh which I'm not
+[0:32:32] strong as income mean uh which I'm not going to go over here but we have in the
+[0:32:33] going to go over here but we have in the in the paper in the appendix
+[0:32:35] in the paper in the appendix so a compiler like this would be
+[0:32:37] so a compiler like this would be sufficiently strong to to not only bring
+[0:32:41] sufficiently strong to to not only bring the estimate to zero but also bring the
+[0:32:43] the estimate to zero but also bring the estimate to to to negative right which
+[0:32:45] estimate to to to negative right which is not very positive but now if I think
+[0:32:48] is not very positive but now if I think about it what is income here so income
+[0:32:50] about it what is income here so income income is definitely one of the key
+[0:32:52] income is definitely one of the key components of determining whether you
+[0:32:53] components of determining whether you work for a firm or not, right? The
+[0:32:55] work for a firm or not, right? The salary and also it's one of the key
+[0:32:57] salary and also it's one of the key components of determining how much you
+[0:32:59] components of determining how much you save like if you've invest or not. So,
+[0:33:03] save like if you've invest or not. So, uh you could argue that it's very
+[0:33:04] uh you could argue that it's very unlikely to think about it's very
+[0:33:06] unlikely to think about it's very unlikely to imagine a confounder that is
+[0:33:08] unlikely to imagine a confounder that is as strong as income in in deciding
+[0:33:11] as strong as income in in deciding whether you work for the firm and also
+[0:33:13] whether you work for the firm and also how much you save. And if you think
+[0:33:15] how much you save. And if you think about that and if you consider other
+[0:33:17] about that and if you consider other coariants for example confounder as
+[0:33:18] coariants for example confounder as strong as whether you have two earners
+[0:33:20] strong as whether you have two earners on your household or something uh 1/4 as
+[0:33:24] on your household or something uh 1/4 as strong as income these scenarios here
+[0:33:27] strong as income these scenarios here would not be sufficient to cure asthma.
+[0:33:29] would not be sufficient to cure asthma. Now to adjudicate between the two now
+[0:33:31] Now to adjudicate between the two now you need economic theory and you need to
+[0:33:33] you need economic theory and you need to discuss. So that's the point of
+[0:33:34] discuss. So that's the point of sensitivity. It's to to bring the debate
+[0:33:38] sensitivity. It's to to bring the debate uh this debate to the table and all
+[0:33:41] uh this debate to the table and all these scenarios here. Yes.
+[0:33:43] these scenarios here. Yes. Oh, sorry, Carlos. I wanted to just ask
+[0:33:45] Oh, sorry, Carlos. I wanted to just ask you a few questions. Um, I'm not sure
+[0:33:47] you a few questions. Um, I'm not sure it's the right moment. I was trying to
+[0:33:49] it's the right moment. I was trying to figure out a good moment, but we have
+[0:33:51] figure out a good moment, but we have accumulated for questions that I think
+[0:33:52] accumulated for questions that I think maybe are good for you to answer.
+[0:33:54] maybe are good for you to answer. &gt;&gt; Is it okay?
+[0:33:56] &gt;&gt; Is it okay? &gt;&gt; Yes.
+[0:33:56] &gt;&gt; Yes. &gt;&gt; So, we have the next plot and I
+[0:33:59] &gt;&gt; So, we have the next plot and I &gt;&gt; Okay, sure. Next plot. Yes. Sorry about
+[0:34:00] &gt;&gt; Okay, sure. Next plot. Yes. Sorry about that.
+[0:34:01] that. &gt;&gt; Yeah. Well, this plot here. So all these
+[0:34:03] &gt;&gt; Yeah. Well, this plot here. So all these all these scenarios were considering the
+[0:34:05] all these scenarios were considering the the most adversarial case where the
+[0:34:07] the most adversarial case where the confounders are perfectly align affects
+[0:34:10] confounders are perfectly align affects both the treatment outcome equation but
+[0:34:12] both the treatment outcome equation but perfectly aligned. So that's the most
+[0:34:14] perfectly aligned. So that's the most adversarial confounding. Uh if you
+[0:34:16] adversarial confounding. Uh if you consider a more uh less adversarial
+[0:34:19] consider a more uh less adversarial confounding which is common in nonlinear
+[0:34:21] confounding which is common in nonlinear models. So for example, if you compute
+[0:34:23] models. So for example, if you compute the observed row of these coariantss,
+[0:34:25] the observed row of these coariantss, they are much less than than one half,
+[0:34:28] they are much less than than one half, then even a confounder as strong as
+[0:34:30] then even a confounder as strong as income would not be sufficient
+[0:34:32] income would not be sufficient sufficiently strong to bring the
+[0:34:33] sufficiently strong to bring the estimate to zero.
+[0:34:35] estimate to zero. Uh all right. So where do I see the
+[0:34:38] Uh all right. So where do I see the questions here?
+[0:34:39] questions here? &gt;&gt; I can ask them for you if you want. So
+[0:34:40] &gt;&gt; I can ask them for you if you want. So there is there is a a more general
+[0:34:43] there is there is a a more general question that I have already said I will
+[0:34:45] question that I have already said I will ask you later. So if you want we can
+[0:34:47] ask you later. So if you want we can discuss longer. But there is a question
+[0:34:49] discuss longer. But there is a question about whether the main innovation of
+[0:34:50] about whether the main innovation of your method compared to previous methods
+[0:34:52] your method compared to previous methods such as Austster 2019 is that you
+[0:34:55] such as Austster 2019 is that you generalize it for nonparametric
+[0:34:57] generalize it for nonparametric specifications or there is also
+[0:34:59] specifications or there is also something else.
+[0:35:00] something else. &gt;&gt; Yeah, there is something else. This
+[0:35:01] &gt;&gt; Yeah, there is something else. This formula is different from Auster's
+[0:35:03] formula is different from Auster's formula.
+[0:35:04] formula. &gt;&gt; Yeah. Uh so I would suggest actually
+[0:35:06] &gt;&gt; Yeah. Uh so I would suggest actually regarding the the in the linear case if
+[0:35:09] regarding the the in the linear case if you want to compare Auster's formula
+[0:35:11] you want to compare Auster's formula with this formula the linear formula I
+[0:35:13] with this formula the linear formula I showed you the I would suggest reading
+[0:35:16] showed you the I would suggest reading the JSSB paper before this one that just
+[0:35:19] the JSSB paper before this one that just works
+[0:35:20] works &gt;&gt; I think yeah I think the person asked
+[0:35:22] &gt;&gt; I think yeah I think the person asked the question a bit earlier than maybe
+[0:35:24] the question a bit earlier than maybe some other things were shown but so I
+[0:35:26] some other things were shown but so I hope it works. There is another question
+[0:35:28] hope it works. There is another question on uh how would one should one who
+[0:35:31] on uh how would one should one who worries about conditioning on you
+[0:35:33] worries about conditioning on you opening additional paths with embias how
+[0:35:36] opening additional paths with embias how would they use your approach or would
+[0:35:37] would they use your approach or would this matter?
+[0:35:39] this matter? &gt;&gt; No. So in this case uh you would not
+[0:35:42] &gt;&gt; No. So in this case uh you would not think about that u. So the U they need
+[0:35:45] think about that u. So the U they need to think about is a U that is sufficient
+[0:35:47] to think about is a U that is sufficient for control. Right?
+[0:35:49] for control. Right? &gt;&gt; Because what the formula tells us is
+[0:35:51] &gt;&gt; Because what the formula tells us is what happens if you include U. But you
+[0:35:53] what happens if you include U. But you need to think about a U that gives you
+[0:35:55] need to think about a U that gives you the estimate that you want, right? Uh
+[0:35:57] the estimate that you want, right? Uh and if you do not want the unbiased
+[0:35:59] and if you do not want the unbiased estimate, then you should think about an
+[0:36:01] estimate, then you should think about an actual U that is sufficient for control
+[0:36:03] actual U that is sufficient for control profile.
+[0:36:05] profile. &gt;&gt; Fair enough. Then there's like just a
+[0:36:06] &gt;&gt; Fair enough. Then there's like just a short question asking if explain away I
+[0:36:09] short question asking if explain away I think you mentioned it before. Does it
+[0:36:10] think you mentioned it before. Does it mean that you make the effect not
+[0:36:12] mean that you make the effect not significant?
+[0:36:14] significant? &gt;&gt; Correct. Well, you can define explain
+[0:36:16] &gt;&gt; Correct. Well, you can define explain away different ways, right? like uh
+[0:36:18] away different ways, right? like uh basically the way that we define it is
+[0:36:21] basically the way that we define it is it bring the estimate to a certain
+[0:36:23] it bring the estimate to a certain threshold at a certain significance
+[0:36:24] threshold at a certain significance level. So here we chose the threshold to
+[0:36:27] level. So here we chose the threshold to be zero and the significance level to be
+[0:36:28] be zero and the significance level to be 5%. But you could change that. So for
+[0:36:31] 5%. But you could change that. So for example if you think that bring down the
+[0:36:33] example if you think that bring down the estimate to half it would be bad enough.
+[0:36:36] estimate to half it would be bad enough. Uh then you could say what is the
+[0:36:38] Uh then you could say what is the minimum strength of compounding to bring
+[0:36:40] minimum strength of compounding to bring my lower limit of the compens bound to
+[0:36:42] my lower limit of the compens bound to half of what it what it is uh or to
+[0:36:45] half of what it what it is uh or to $1,000. So, so the the actual threshold
+[0:36:48] $1,000. So, so the the actual threshold is user defined and actually in the in
+[0:36:51] is user defined and actually in the in the appendix we have an empirical
+[0:36:52] the appendix we have an empirical example where the number one is is a is
+[0:36:56] example where the number one is is a is a a threshold of interest because we're
+[0:36:58] a a threshold of interest because we're talking about elasticity and elasticity
+[0:37:00] talking about elasticity and elasticity of one is is the relevant number instead
+[0:37:03] of one is is the relevant number instead of zero for
+[0:37:05] of zero for &gt;&gt; okay then we have a question about how
+[0:37:08] &gt;&gt; okay then we have a question about how is this related to the E value by Tyler
+[0:37:10] is this related to the E value by Tyler and Pank
+[0:37:12] and Pank &gt;&gt; it's a different uh omitted variable
+[0:37:14] &gt;&gt; it's a different uh omitted variable bias formula and different sensitive
+[0:37:16] bias formula and different sensitive parameters right so the eval is more
+[0:37:19] parameters right so the eval is more akin to the margin sensitivity model in
+[0:37:21] akin to the margin sensitivity model in terms of the sensitive parameter in the
+[0:37:23] terms of the sensitive parameter in the sense that it's working with worst case
+[0:37:26] sense that it's working with worst case bounding the worst case ratio although I
+[0:37:27] bounding the worst case ratio although I actually have seen on Google Scholar
+[0:37:29] actually have seen on Google Scholar announcement of an average value so I
+[0:37:32] announcement of an average value so I need to see what it is but I think it's
+[0:37:33] need to see what it is but I think it's a simp parameter uh and also it's
+[0:37:36] a simp parameter uh and also it's parameterizing the violation of a
+[0:37:38] parameterizing the violation of a confounders in terms of risk ratios
+[0:37:41] confounders in terms of risk ratios uh instead of for example um in in in
+[0:37:47] uh instead of for example um in in in terms of odds ratios or in terms of uh R
+[0:37:51] terms of odds ratios or in terms of uh R squares.
+[0:37:53] squares. &gt;&gt; Okay. Um then there is a bit of a longer
+[0:37:56] &gt;&gt; Okay. Um then there is a bit of a longer question. It's uh you emphasize that the
+[0:37:59] question. It's uh you emphasize that the sensitivity parameters depend on the
+[0:38:00] sensitivity parameters depend on the estimate. How does this change the
+[0:38:03] estimate. How does this change the interpretation of the RV? For instance,
+[0:38:07] interpretation of the RV? For instance, for the partially linear model, the true
+[0:38:09] for the partially linear model, the true sensitivity parameters are partial R
+[0:38:11] sensitivity parameters are partial R choose which is fine. But for another
+[0:38:13] choose which is fine. But for another estimate
+[0:38:15] estimate um one of the sensitivity parameter by
+[0:38:18] um one of the sensitivity parameter by the change sorry I'm misunderstand but
+[0:38:21] the change sorry I'm misunderstand but for the question
+[0:38:22] for the question &gt;&gt; another estim okay change yeah
+[0:38:24] &gt;&gt; another estim okay change yeah &gt;&gt; yes it change they all they all are
+[0:38:27] &gt;&gt; yes it change they all they all are spare so those guys even though they
+[0:38:29] spare so those guys even though they have this this interpretation of the
+[0:38:32] have this this interpretation of the gain average odds the gain in variance
+[0:38:34] gain average odds the gain in variance explained and the gain in average
+[0:38:36] explained and the gain in average precision
+[0:38:37] precision uh they still are squares uh they are
+[0:38:40] uh they still are squares uh they are the how much variation
+[0:38:42] the how much variation uh the the long reser presenter expend
+[0:38:45] uh the the long reser presenter expend with the sharp reser presenter or how
+[0:38:47] with the sharp reser presenter or how much the compound creates on the reser
+[0:38:49] much the compound creates on the reser presenter uh it's just that if you want
+[0:38:51] presenter uh it's just that if you want to translate that to a more
+[0:38:52] to translate that to a more interpretable pending there are going to
+[0:38:54] interpretable pending there are going to be these R square like measures
+[0:38:57] be these R square like measures uh using this
+[0:39:00] uh using this uh either variance or odds or precision
+[0:39:02] uh either variance or odds or precision depending on this man of interest. So
+[0:39:05] depending on this man of interest. So here in the partial linear case this
+[0:39:06] here in the partial linear case this this x this x-axis would be the gains in
+[0:39:11] this x this x-axis would be the gains in variance explained in the nonparametric
+[0:39:14] variance explained in the nonparametric case this this x-axis is the gain in
+[0:39:19] case this this x-axis is the gain in uh precision and the at would be the
+[0:39:22] uh precision and the at would be the gain of but it's the two r square is
+[0:39:24] gain of but it's the two r square is bounded between one in that sense
+[0:39:28] bounded between one in that sense &gt;&gt; we have a very quick question about if
+[0:39:30] &gt;&gt; we have a very quick question about if you have these counter plots on a log
+[0:39:32] you have these counter plots on a log scale but you know yes sir No, I guess
+[0:39:35] scale but you know yes sir No, I guess &gt;&gt; I I don't.
+[0:39:37] &gt;&gt; I I don't. &gt;&gt; Okay, good. And then last question and
+[0:39:39] &gt;&gt; Okay, good. And then last question and then I'll let you continue. Um, if you
+[0:39:42] then I'll let you continue. Um, if you should think of you as a vector, not a
+[0:39:45] should think of you as a vector, not a scalar. Um, then why do we compare the
+[0:39:48] scalar. Um, then why do we compare the strengths of the other individual
+[0:39:49] strengths of the other individual observed coalates?
+[0:39:52] observed coalates? &gt;&gt; Uh, yeah, great question. Yes. Uh well,
+[0:39:56] &gt;&gt; Uh, yeah, great question. Yes. Uh well, I think it's still useful to see the
+[0:39:58] I think it's still useful to see the individual ones because that that gives
+[0:40:01] individual ones because that that gives you some notion of
+[0:40:05] you some notion of like how strong things are and and you
+[0:40:07] like how strong things are and and you can think about mechanisms, but you
+[0:40:09] can think about mechanisms, but you could also group them in terms
+[0:40:11] could also group them in terms especially if you if you have a common
+[0:40:12] especially if you if you have a common mechanisms like income related
+[0:40:14] mechanisms like income related variables, right? Variables are related
+[0:40:16] variables, right? Variables are related to income or variables are related to to
+[0:40:18] to income or variables are related to to marriage or or household or employment.
+[0:40:21] marriage or or household or employment. Uh and you could do this exercise. You
+[0:40:23] Uh and you could do this exercise. You could definitely do the same exercise by
+[0:40:25] could definitely do the same exercise by using a group of provers instead of
+[0:40:27] using a group of provers instead of individual ones. Uh I we just didn't do
+[0:40:29] individual ones. Uh I we just didn't do it here but we could do and see what
+[0:40:31] it here but we could do and see what happens. Uh I don't think it would
+[0:40:34] happens. Uh I don't think it would change a lot because these are these
+[0:40:35] change a lot because these are these provers are weak.
+[0:40:38] provers are weak. Uh
+[0:40:39] Uh so in this particular example it
+[0:40:41] so in this particular example it wouldn't change a lot the the the main
+[0:40:43] wouldn't change a lot the the the main conclusion like the key thing is ruling
+[0:40:45] conclusion like the key thing is ruling out something as strong as in terms or
+[0:40:48] out something as strong as in terms or arguing that nonlinearities
+[0:40:51] arguing that nonlinearities uh
+[0:40:53] uh are common which are common in this case
+[0:40:56] are common which are common in this case and the more coherence you have usually
+[0:40:57] and the more coherence you have usually this row also
+[0:41:01] this row also as
+[0:41:01] as &gt;&gt; okay we receive yep sorry there is like
+[0:41:05] &gt;&gt; okay we receive yep sorry there is like I said it was the last question but okay
+[0:41:06] I said it was the last question but okay there is one last question now and the
+[0:41:09] there is one last question now and the question is about if you were to go from
+[0:41:10] question is about if you were to go from semi north parametrics to baian semi and
+[0:41:13] semi north parametrics to baian semi and nonp parametric um would there be a way
+[0:41:16] nonp parametric um would there be a way to go that
+[0:41:17] to go that &gt;&gt; it's a great question I've been thinking
+[0:41:18] &gt;&gt; it's a great question I've been thinking a lot about that I don't know yet uh but
+[0:41:21] a lot about that I don't know yet uh but we should definitely have this version
+[0:41:24] we should definitely have this version I've been working on the linear basin
+[0:41:27] I've been working on the linear basin version um more uh for the same
+[0:41:30] version um more uh for the same parametric not I don't know yet so
+[0:41:32] parametric not I don't know yet so that's an interesting
+[0:41:36] that's an interesting work to
+[0:41:38] work to Okay. So I propose now we continue and
+[0:41:40] Okay. So I propose now we continue and maybe we have questions later again.
+[0:41:42] maybe we have questions later again. &gt;&gt; Okay. Great. Uh
+[0:41:45] &gt;&gt; Okay. Great. Uh all right. Uh so this is the contour
+[0:41:48] all right. Uh so this is the contour plots. It gives you like a big picture
+[0:41:49] plots. It gives you like a big picture of a map of the sensitivity of our
+[0:41:53] of a map of the sensitivity of our asthma to basically any hypothesized
+[0:41:56] asthma to basically any hypothesized strength of an obser compounder. And we
+[0:41:58] strength of an obser compounder. And we can have these benchmarks to help you
+[0:42:00] can have these benchmarks to help you guide whether certain strength is
+[0:42:02] guide whether certain strength is plausible or not.
+[0:42:05] plausible or not. Uh now I'm going to just show you one
+[0:42:08] Uh now I'm going to just show you one last plot. So actually the this
+[0:42:09] last plot. So actually the this questions came at the right time because
+[0:42:11] questions came at the right time because almost done actually. So remember we did
+[0:42:14] almost done actually. So remember we did this effect of 1380 uh
+[0:42:18] this effect of 1380 uh study we computed the the treatment
+[0:42:20] study we computed the the treatment effect for different income cartiles. So
+[0:42:23] effect for different income cartiles. So if we pick our favorite scenario the max
+[0:42:25] if we pick our favorite scenario the max match scenario we can compute confidence
+[0:42:28] match scenario we can compute confidence bounds on that as well. So here I have
+[0:42:30] bounds on that as well. So here I have my original estimate. Here is the point
+[0:42:32] my original estimate. Here is the point estimate of the bounds. Right? So this
+[0:42:34] estimate of the bounds. Right? So this is just plugging in the bounds plugging
+[0:42:36] is just plugging in the bounds plugging estimate of the bounds and this is the
+[0:42:38] estimate of the bounds and this is the confidence bounds on the bounds. And you
+[0:42:40] confidence bounds on the bounds. And you can see that for that particular
+[0:42:42] can see that for that particular confounding scenario that we had, we
+[0:42:44] confounding scenario that we had, we still also have evidence of effect
+[0:42:47] still also have evidence of effect although it's of course attenuated by by
+[0:42:49] although it's of course attenuated by by a bit uh but uh we still have evidence
+[0:42:54] a bit uh but uh we still have evidence of effective
+[0:42:56] of effective and this is again considering the most
+[0:42:58] and this is again considering the most conservative scenario of a perfectly
+[0:43:01] conservative scenario of a perfectly aligned.
+[0:43:06] All right. So to conclude, so that's that's why I said there was perfect
+[0:43:08] that's why I said there was perfect timing for the questions. Uh
+[0:43:12] timing for the questions. Uh so the main the main focus here is
+[0:43:14] so the main the main focus here is moving from this qualitative to a more
+[0:43:17] moving from this qualitative to a more quantitative quantitative discussion
+[0:43:18] quantitative quantitative discussion about compounding. So instead of arguing
+[0:43:21] about compounding. So instead of arguing whether zero compound is possible or
+[0:43:22] whether zero compound is possible or not, we should be transparent about the
+[0:43:24] not, we should be transparent about the amount of compounding necessary to
+[0:43:26] amount of compounding necessary to change our conclusions. So if you want
+[0:43:28] change our conclusions. So if you want to do this, we need to have general
+[0:43:29] to do this, we need to have general tools that make it easy to assess the
+[0:43:30] tools that make it easy to assess the robustness of our estimates to violation
+[0:43:32] robustness of our estimates to violation of causal assumptions. And our goal was
+[0:43:35] of causal assumptions. And our goal was to to do that. And here providing a
+[0:43:37] to to do that. And here providing a general theory of omitted varable bias
+[0:43:39] general theory of omitted varable bias for a broad class of comical parameters
+[0:43:40] for a broad class of comical parameters all for general parametric problem.
+[0:43:44] all for general parametric problem. uh and hopefully what I showed you is
+[0:43:46] uh and hopefully what I showed you is that even though the math can get quite
+[0:43:48] that even though the math can get quite involved but once you learn actually the
+[0:43:51] involved but once you learn actually the derivations are simple after you learn
+[0:43:52] derivations are simple after you learn the key facts it's just leveraging some
+[0:43:55] the key facts it's just leveraging some automatic conditions and uh partial
+[0:43:58] automatic conditions and uh partial correlations
+[0:44:00] correlations that we can still do simple
+[0:44:01] that we can still do simple interpretable sensitive analysis even if
+[0:44:03] interpretable sensitive analysis even if we're using a parametric models and
+[0:44:05] we're using a parametric models and otherwise uh nonlinear models
+[0:44:08] otherwise uh nonlinear models uh with causal machine
+[0:44:11] uh with causal machine uh but of course there's still a lot to
+[0:44:12] uh but of course there's still a lot to be done so for example
+[0:44:15] be done so for example uh we can extend this to nonlinear
+[0:44:17] uh we can extend this to nonlinear functions of the CF and we're working on
+[0:44:19] functions of the CF and we're working on that right now. So for example, if you
+[0:44:21] that right now. So for example, if you think about the traditional IV estand
+[0:44:23] think about the traditional IV estand that's a ratio of two cause effects
+[0:44:24] that's a ratio of two cause effects that's not a linear functional anymore.
+[0:44:27] that's not a linear functional anymore. How can we use these tools or can we
+[0:44:30] How can we use these tools or can we extend these tools or do a simple trick
+[0:44:32] extend these tools or do a simple trick to apply this to that est and there are
+[0:44:34] to apply this to that est and there are many other things that you can do. I saw
+[0:44:37] many other things that you can do. I saw some other folks also applying this
+[0:44:39] some other folks also applying this framework to to different estimates u uh
+[0:44:43] framework to to different estimates u uh so for example I saw on on on Google
+[0:44:46] so for example I saw on on on Google scholar announcement uh survival
+[0:44:48] scholar announcement uh survival analysis some mediation analysis so
+[0:44:50] analysis some mediation analysis so there's still a lot of things that you
+[0:44:52] there's still a lot of things that you can do with this and of course this is
+[0:44:54] can do with this and of course this is going to require some work to do this
+[0:44:56] going to require some work to do this extension but I think it's very
+[0:44:57] extension but I think it's very promising
+[0:44:59] promising and uh as I said you can already apply
+[0:45:03] and uh as I said you can already apply this so if you're more applied person
+[0:45:05] this so if you're more applied person you want to test this in empirical
+[0:45:07] you want to test this in empirical examples. You can already test this
+[0:45:09] examples. You can already test this today
+[0:45:10] today uh with our package DML sense maker and
+[0:45:14] uh with our package DML sense maker and also if you use Python there is the
+[0:45:15] also if you use Python there is the double ML package which is very
+[0:45:17] double ML package which is very carefully written package and uh also
+[0:45:20] carefully written package and uh also this is also implemented in the piy
+[0:45:24] this is also implemented in the piy and everything that I showed you here is
+[0:45:26] and everything that I showed you here is also on my website and that's it. Thank
+[0:45:29] also on my website and that's it. Thank you.
+[0:45:37] Thank you. Uh Dominic, do you want to start the
+[0:45:39] Uh Dominic, do you want to start the discussion or should I read? There are
+[0:45:41] discussion or should I read? There are two questions right now, but there may
+[0:45:42] two questions right now, but there may be more, but we can start with this two.
+[0:45:45] be more, but we can start with this two. &gt;&gt; Um
+[0:45:47] &gt;&gt; Um &gt;&gt; maybe maybe let's do the discussion and
+[0:45:48] &gt;&gt; maybe maybe let's do the discussion and then let's
+[0:45:49] then let's &gt;&gt; Okay, sounds good. Yeah.
+[0:45:51] &gt;&gt; Okay, sounds good. Yeah. &gt;&gt; Thank you.
+[0:45:54] &gt;&gt; Thank you. All right. Well, first uh thank you so
+[0:45:56] All right. Well, first uh thank you so much Carlos for a very nice talk and uh
+[0:46:00] much Carlos for a very nice talk and uh yeah, thanks for giving me the
+[0:46:01] yeah, thanks for giving me the opportunity to to discuss it here today.
+[0:46:03] opportunity to to discuss it here today. Um I also want to thank uh Kevin G who
+[0:46:07] Um I also want to thank uh Kevin G who uh discussed the paper with me yesterday
+[0:46:09] uh discussed the paper with me yesterday evening at 10 p.m. So shout out shout
+[0:46:13] evening at 10 p.m. So shout out shout out for for that. Um all right, so let's
+[0:46:17] out for for that. Um all right, so let's quickly just like recap what we uh saw.
+[0:46:19] quickly just like recap what we uh saw. So we're going to talk about omitted
+[0:46:21] So we're going to talk about omitted variable bias. And like classically what
+[0:46:23] variable bias. And like classically what this means is I run a regression of an
+[0:46:26] this means is I run a regression of an outcome on a treatment and coariantss.
+[0:46:29] outcome on a treatment and coariantss. But maybe I would have ideally liked to
+[0:46:31] But maybe I would have ideally liked to run a regression on more coariantss. So
+[0:46:33] run a regression on more coariantss. So let's say I would have liked to run it
+[0:46:35] let's say I would have liked to run it on Y treatment X and then some
+[0:46:37] on Y treatment X and then some additional variables U that I currently
+[0:46:39] additional variables U that I currently don't observe. And now the question is
+[0:46:41] don't observe. And now the question is can I bound this bias? And there's an
+[0:46:43] can I bound this bias? And there's an interpretable omitted variable bias
+[0:46:46] interpretable omitted variable bias formula. Carlos also has some very nice
+[0:46:48] formula. Carlos also has some very nice work on this. But today what we saw is
+[0:46:50] work on this. But today what we saw is okay so let's go a little bit further
+[0:46:52] okay so let's go a little bit further quite often today now you run AIPW or
+[0:46:55] quite often today now you run AIPW or other types of machine learning tools
+[0:46:56] other types of machine learning tools and again you have an input Y treatment
+[0:46:59] and again you have an input Y treatment coariantss and you can ask what is the
+[0:47:02] coariantss and you can ask what is the difference if I would have instead run
+[0:47:03] difference if I would have instead run it with a additional set of coariantss
+[0:47:06] it with a additional set of coariantss uh u that I would have liked to include
+[0:47:08] uh u that I would have liked to include it and then like even more broadly you
+[0:47:10] it and then like even more broadly you can ask what about average partial
+[0:47:12] can ask what about average partial effects cause effects and distribution
+[0:47:13] effects cause effects and distribution shifts and so on. So there are lots of
+[0:47:15] shifts and so on. So there are lots of estimates that we we target these days
+[0:47:19] estimates that we we target these days and of course there's a ton of related
+[0:47:21] and of course there's a ton of related work. I just want to briefly mention two
+[0:47:24] work. I just want to briefly mention two lines of work. Uh first there's a long
+[0:47:26] lines of work. Uh first there's a long history of sensitivity analysis.
+[0:47:28] history of sensitivity analysis. Cornfield Rosenbal. Um I would say quite
+[0:47:32] Cornfield Rosenbal. Um I would say quite popular these days are also these
+[0:47:33] popular these days are also these marginal sensitivity models. Carlos
+[0:47:35] marginal sensitivity models. Carlos mentioned them briefly. Essentially what
+[0:47:36] mentioned them briefly. Essentially what you do is you put a bound on the
+[0:47:38] you do is you put a bound on the treatment odds ratios and they have some
+[0:47:40] treatment odds ratios and they have some very favorable uh theoretical
+[0:47:42] very favorable uh theoretical properties. So recently it has been
+[0:47:44] properties. So recently it has been shown that they're doubly sharp doubly
+[0:47:46] shown that they're doubly sharp doubly robust uh that that you can get
+[0:47:48] robust uh that that you can get inference on these bounds doubly doubly
+[0:47:50] inference on these bounds doubly doubly robust. Um another line of work that has
+[0:47:53] robust. Um another line of work that has started appearing over the past few
+[0:47:55] started appearing over the past few years is uh yeah variance sensitivity
+[0:47:57] years is uh yeah variance sensitivity bounds where you have some sort of R2
+[0:48:00] bounds where you have some sort of R2 style upper bounds. Um for example you
+[0:48:03] style upper bounds. Um for example you can have a variance of the weight arrows
+[0:48:04] can have a variance of the weight arrows or weight variance of the propensity
+[0:48:07] or weight variance of the propensity score ratio. And the the summary is
+[0:48:10] score ratio. And the the summary is essentially that if you use variance
+[0:48:12] essentially that if you use variance based bounds you might get tighter
+[0:48:15] based bounds you might get tighter intervals because in the end what you're
+[0:48:17] intervals because in the end what you're doing is you're checking average case
+[0:48:19] doing is you're checking average case robustness instead of worst case uh
+[0:48:21] robustness instead of worst case uh soupnorm style sensitivity model. So
+[0:48:23] soupnorm style sensitivity model. So there's a lot to like uh about this uh
+[0:48:25] there's a lot to like uh about this uh this this line of work. So what Carlos
+[0:48:28] this this line of work. So what Carlos presented today I would say fits into
+[0:48:30] presented today I would say fits into this uh to this world of variance based
+[0:48:32] this uh to this world of variance based formulas. But what in addition what they
+[0:48:34] formulas. But what in addition what they have as a a nice pro is that it also
+[0:48:37] have as a a nice pro is that it also works for a wide range of SMS and
+[0:48:40] works for a wide range of SMS and machine learning setups. So that's a big
+[0:48:42] machine learning setups. So that's a big selling point. Okay, let's dive into one
+[0:48:44] selling point. Okay, let's dive into one quick example to just see how this
+[0:48:46] quick example to just see how this works. And this is just the average
+[0:48:48] works. And this is just the average treatment effect under ignorability. So
+[0:48:50] treatment effect under ignorability. So if you had ignorability for the full set
+[0:48:52] if you had ignorability for the full set of variables and
+[0:48:54] of variables and under binary treatment in that case if
+[0:48:57] under binary treatment in that case if you have infinite data you can write the
+[0:48:59] you have infinite data you can write the target parameter theta as a product of
+[0:49:01] target parameter theta as a product of two terms. So there is a re representer
+[0:49:04] two terms. So there is a re representer here and then there's an outcome model
+[0:49:06] here and then there's an outcome model here. So if you have infinite data um
+[0:49:09] here. So if you have infinite data um modern machine learning uh procedures
+[0:49:11] modern machine learning uh procedures will converge to this parameter under a
+[0:49:13] will converge to this parameter under a bunch of assumptions. Uh but now you
+[0:49:15] bunch of assumptions. Uh but now you might be worried okay what if I don't
+[0:49:17] might be worried okay what if I don't have the full set of variables. Uh
+[0:49:19] have the full set of variables. Uh essentially what happens you're just
+[0:49:20] essentially what happens you're just crossing out all of the use all of the
+[0:49:22] crossing out all of the use all of the unobserved variables from this formula
+[0:49:24] unobserved variables from this formula and you're actually getting uh so what
+[0:49:26] and you're actually getting uh so what you're getting is the thing at the
+[0:49:27] you're getting is the thing at the bottom what you like is the thing on the
+[0:49:29] bottom what you like is the thing on the top and in the end you just want to find
+[0:49:31] top and in the end you just want to find the difference between the two. So now
+[0:49:34] the difference between the two. So now you can look at the difference and uh
+[0:49:36] you can look at the difference and uh what they showed is that it essentially
+[0:49:38] what they showed is that it essentially is a product of two errors. there is an
+[0:49:41] is a product of two errors. there is an arrow in the outcome regression and then
+[0:49:43] arrow in the outcome regression and then there is an error in the re representer
+[0:49:45] there is an error in the re representer and then you can rewrite it in terms of
+[0:49:47] and then you can rewrite it in terms of a correlation parameter between these
+[0:49:49] a correlation parameter between these two arrows and uh essentially like the
+[0:49:52] two arrows and uh essentially like the variance of the arrows. Okay, this is
+[0:49:56] variance of the arrows. Okay, this is not super interpretable yet. So what
+[0:49:58] not super interpretable yet. So what they further do is they're rewriting
+[0:50:01] they further do is they're rewriting particularly this variance of the re
+[0:50:04] particularly this variance of the re representer in a in a more interpretable
+[0:50:06] representer in a in a more interpretable fashion. So you're going to have these
+[0:50:08] fashion. So you're going to have these uh four terms in this bound you have how
+[0:50:11] uh four terms in this bound you have how much variance in y is explained by you
+[0:50:14] much variance in y is explained by you and then how much in variance in the re
+[0:50:17] and then how much in variance in the re representer is essentially or in the the
+[0:50:19] representer is essentially or in the the waiting is uh explained by you. There's
+[0:50:23] waiting is uh explained by you. There's again the correlation that tells you how
+[0:50:25] again the correlation that tells you how adversarily those two errors can be
+[0:50:27] adversarily those two errors can be aligned and then there's a scaling
+[0:50:29] aligned and then there's a scaling factor that can be estimated um with
+[0:50:32] factor that can be estimated um with double machine learning tools. And now
+[0:50:34] double machine learning tools. And now what you can do is you can uh look at
+[0:50:36] what you can do is you can uh look at those quantities and you can give upper
+[0:50:39] those quantities and you can give upper bounds for 1 2 3. For example, one way
+[0:50:43] bounds for 1 2 3. For example, one way to do this is you can say like okay I'm
+[0:50:45] to do this is you can say like okay I'm going to make the assumption that the
+[0:50:46] going to make the assumption that the unobserved confounder is not stronger
+[0:50:47] unobserved confounder is not stronger than some other observed confounder.
+[0:50:50] than some other observed confounder. Okay. So this is a way to kind of
+[0:50:51] Okay. So this is a way to kind of calibrate these bounds.
+[0:50:53] calibrate these bounds. Okay. Um now one advantage I already
+[0:50:58] Okay. Um now one advantage I already mentioned before is that you now get
+[0:51:00] mentioned before is that you now get this OBB type formula for machine
+[0:51:03] this OBB type formula for machine learning based estimators uh similar to
+[0:51:05] learning based estimators uh similar to the linear case but uh essentially uh
+[0:51:07] the linear case but uh essentially uh valid in a much broader world average
+[0:51:10] valid in a much broader world average causal derivatives coariant shift type
+[0:51:12] causal derivatives coariant shift type of parameters and so on and I think one
+[0:51:15] of parameters and so on and I think one thing that's very nice about this is
+[0:51:16] thing that's very nice about this is then now that practitioners hopefully
+[0:51:18] then now that practitioners hopefully don't have to learn sensitivity analysis
+[0:51:21] don't have to learn sensitivity analysis on a case-by case basis but like ideally
+[0:51:23] on a case-by case basis but like ideally you have a set of tools that work
+[0:51:24] you have a set of tools that work broadly uh without uh without large
+[0:51:27] broadly uh without uh without large changes. Okay, now let's uh let's let's
+[0:51:30] changes. Okay, now let's uh let's let's get to questions.
+[0:51:32] get to questions. So first of all, nice work. Um you have
+[0:51:36] So first of all, nice work. Um you have this correlation parameter row and uh
+[0:51:39] this correlation parameter row and uh one uh question here is should we just
+[0:51:42] one uh question here is should we just think often in practice as row equal one
+[0:51:44] think often in practice as row equal one as the worst case or is there for some
+[0:51:47] as the worst case or is there for some examples a plausible story why a row is
+[0:51:49] examples a plausible story why a row is 1/2 or one quarter? Um now for
+[0:51:54] 1/2 or one quarter? Um now for practitioners that's the second question
+[0:51:57] practitioners that's the second question even with the best sensitivity analysis
+[0:51:59] even with the best sensitivity analysis often your bounds might be large or
+[0:52:01] often your bounds might be large or uninformative. So in that case what
+[0:52:03] uninformative. So in that case what would you recommend them as a next step?
+[0:52:05] would you recommend them as a next step? Are there particular assumptions in your
+[0:52:08] Are there particular assumptions in your sensitivity analysis framework that
+[0:52:10] sensitivity analysis framework that would help to sharpen the bounds or um
+[0:52:13] would help to sharpen the bounds or um is there particular like data that you
+[0:52:15] is there particular like data that you ask would ask them to collect?
+[0:52:18] ask would ask them to collect? Um uh third question and that is I think
+[0:52:20] Um uh third question and that is I think also something that came up in uh other
+[0:52:23] also something that came up in uh other variance based uh bounds. So if you have
+[0:52:28] variance based uh bounds. So if you have additional a special case so binary
+[0:52:30] additional a special case so binary treatment binary outcome uh is this
+[0:52:32] treatment binary outcome uh is this upper bound sharp or can it be improved
+[0:52:34] upper bound sharp or can it be improved further? Um do you have a sense of how
+[0:52:36] further? Um do you have a sense of how much it potentially can be improved?
+[0:52:39] much it potentially can be improved? Um and last but not least and this is
+[0:52:42] Um and last but not least and this is something that I'm also very interested
+[0:52:43] something that I'm also very interested in. Um let's say you have a bunch of
+[0:52:46] in. Um let's say you have a bunch of historical data. Let's say you have
+[0:52:48] historical data. Let's say you have historical data where you have some
+[0:52:50] historical data where you have some observational studies and maybe for some
+[0:52:52] observational studies and maybe for some of them you also have experiments and uh
+[0:52:56] of them you also have experiments and uh ideally what I would like to see is that
+[0:53:00] ideally what I would like to see is that you kind of like that we look at this
+[0:53:01] you kind of like that we look at this historical data and we get a little bit
+[0:53:03] historical data and we get a little bit of a sense of you know like how much
+[0:53:05] of a sense of you know like how much robustness value like how large is a
+[0:53:08] robustness value like how large is a robustness value that would give us 95%
+[0:53:10] robustness value that would give us 95% coverage on historical data just so that
+[0:53:12] coverage on historical data just so that we have a little bit of a sense of a
+[0:53:13] we have a little bit of a sense of a ballpark uh of how we should reason
+[0:53:16] ballpark uh of how we should reason about things. So, so yeah, anything any
+[0:53:18] about things. So, so yeah, anything any thoughts that you have like how this
+[0:53:20] thoughts that you have like how this should be done or whether this should be
+[0:53:22] should be done or whether this should be done would be appreciated. Um, again,
+[0:53:24] done would be appreciated. Um, again, yeah, thank you very very nice talk and
+[0:53:26] yeah, thank you very very nice talk and uh yeah, I'll I'll give it back to you.
+[0:53:29] uh yeah, I'll I'll give it back to you. &gt;&gt; Uh thank thank you Dominic uh for the
+[0:53:32] &gt;&gt; Uh thank thank you Dominic uh for the nice discussion and uh yeah, these are
+[0:53:34] nice discussion and uh yeah, these are great questions uh all of them. So uh
+[0:53:38] great questions uh all of them. So uh let's start with the grow parameter. So
+[0:53:41] let's start with the grow parameter. So uh we've been evolving our reasoning
+[0:53:44] uh we've been evolving our reasoning about it too. So I think I think you
+[0:53:46] about it too. So I think I think you should always start with equals one just
+[0:53:48] should always start with equals one just to see what happens right because that's
+[0:53:50] to see what happens right because that's the most adversarial case possible.
+[0:53:54] the most adversarial case possible. uh but as we have been applying this
+[0:53:56] uh but as we have been applying this method to different data sets we can
+[0:53:59] method to different data sets we can compute the empirical the empirical row
+[0:54:01] compute the empirical the empirical row right like imagine you didn't observe
+[0:54:03] right like imagine you didn't observe one of the coariantss on your data
+[0:54:05] one of the coariantss on your data that's because that was the compounder
+[0:54:07] that's because that was the compounder uh that you didn't observe and I can say
+[0:54:09] uh that you didn't observe and I can say okay what would be the row in this case
+[0:54:10] okay what would be the row in this case and it turns out that especially when
+[0:54:12] and it turns out that especially when you move to well so first let's step a
+[0:54:15] you move to well so first let's step a step back in the linear world if you
+[0:54:16] step back in the linear world if you have one compounder this row is also is
+[0:54:18] have one compounder this row is also is always one right so you have a a linear
+[0:54:21] always one right so you have a a linear single compounder that row is always
+[0:54:24] single compounder that row is always Uh so that's why it's a useful
+[0:54:25] Uh so that's why it's a useful benchmark. But as soon as you have
+[0:54:27] benchmark. But as soon as you have multiple confounders, it turns out that
+[0:54:30] multiple confounders, it turns out that multiple confounders are actually less
+[0:54:31] multiple confounders are actually less adversal because now you need all
+[0:54:34] adversal because now you need all confounders to be entering the outcome
+[0:54:36] confounders to be entering the outcome and treatment equation in this exactly
+[0:54:37] and treatment equation in this exactly same way. So the errors are
+[0:54:39] same way. So the errors are systematically removed. And so even in
+[0:54:42] systematically removed. And so even in the linear world when you have multiple
+[0:54:43] the linear world when you have multiple confounders now the row is less than one
+[0:54:45] confounders now the row is less than one usually. And in the nonlinear world the
+[0:54:48] usually. And in the nonlinear world the row usually reduces as well. So as we've
+[0:54:52] row usually reduces as well. So as we've been applying this method to different
+[0:54:54] been applying this method to different data sets using machine learning or
+[0:54:57] data sets using machine learning or nonparametric models, we have been
+[0:54:59] nonparametric models, we have been seeing that row is substantially less
+[0:55:00] seeing that row is substantially less than one in many cases. So in this
+[0:55:02] than one in many cases. So in this empirical example that we have uh for
+[0:55:05] empirical example that we have uh for example the rows the empirical rows are
+[0:55:08] example the rows the empirical rows are much less than 1/2.
+[0:55:11] much less than 1/2. uh
+[0:55:13] uh so to try to answer is that yes I think
+[0:55:17] so to try to answer is that yes I think you should start with equals one because
+[0:55:18] you should start with equals one because sometimes you can even have a result
+[0:55:21] sometimes you can even have a result that is robust to this most adversary
+[0:55:23] that is robust to this most adversary case but uh we also need to start
+[0:55:26] case but uh we also need to start thinking more systematically
+[0:55:29] thinking more systematically uh what we should expect about under
+[0:55:31] uh what we should expect about under different data
+[0:55:33] different data we still don't have a good answer for
+[0:55:35] we still don't have a good answer for that but the but empirically
+[0:55:39] that but the but empirically uh it is it turns that it seems to be
+[0:55:41] uh it is it turns that it seems to be much less than one and I think
+[0:55:43] much less than one and I think understanding that and exploiting that
+[0:55:45] understanding that and exploiting that is very useful uh and we should do more
+[0:55:50] is very useful uh and we should do more uh so at least you should look at the
+[0:55:52] uh so at least you should look at the row in your data right but of course
+[0:55:53] row in your data right but of course like just like in investments past
+[0:55:55] like just like in investments past returns don't guarantee future return
+[0:55:58] returns don't guarantee future return [clears throat]
+[0:55:58] [clears throat] past compounding does not guarantee
+[0:56:01] past compounding does not guarantee observe compound does not guarantee
+[0:56:02] observe compound does not guarantee observe an observed compounding the same
+[0:56:05] observe an observed compounding the same right they can give you some guidance
+[0:56:10] right they can give you some guidance Uh so question two uh if the bounds are
+[0:56:13] Uh so question two uh if the bounds are larger on informative what's the next
+[0:56:14] larger on informative what's the next step so I think like uh if the bounds
+[0:56:18] step so I think like uh if the bounds are larger and informative that's that's
+[0:56:21] are larger and informative that's that's is still informative in the sense that
+[0:56:23] is still informative in the sense that you know you don't know right so uh
+[0:56:26] you know you don't know right so uh because before doing the calculations
+[0:56:28] because before doing the calculations you could fool yourself and think okay I
+[0:56:30] you could fool yourself and think okay I have a robust result or I have something
+[0:56:32] have a robust result or I have something that I can make policy recommendations
+[0:56:34] that I can make policy recommendations on something that I trust but then after
+[0:56:36] on something that I trust but then after you do the sensitivity analysis and you
+[0:56:38] you do the sensitivity analysis and you put something that you think it's a
+[0:56:39] put something that you think it's a plausible value of the confounding and
+[0:56:41] plausible value of the confounding and then I get these large bounds or an
+[0:56:42] then I get these large bounds or an informative result then you realize that
+[0:56:45] informative result then you realize that okay actually things are trickier than I
+[0:56:46] okay actually things are trickier than I thought so I think that's still
+[0:56:48] thought so I think that's still informative in that sense right like
+[0:56:50] informative in that sense right like it's informative that you know that the
+[0:56:53] it's informative that you know that the extent of your domain knowledge is not
+[0:56:56] extent of your domain knowledge is not enough so the next step is going back to
+[0:56:59] enough so the next step is going back to the drawing board right like it's
+[0:57:01] the drawing board right like it's thinking about okay yeah just like what
+[0:57:04] thinking about okay yeah just like what kind of knowledge could I get so what is
+[0:57:05] kind of knowledge could I get so what is it how can I rule out compounding of
+[0:57:07] it how can I rule out compounding of this this magnitude maybe I can't rule
+[0:57:10] this this magnitude maybe I can't rule out confounding of this magnitude. So
+[0:57:14] out confounding of this magnitude. So studies in different populations
+[0:57:16] studies in different populations uh using the observed variants right to
+[0:57:20] uh using the observed variants right to to to
+[0:57:21] to to have better sense of how possible things
+[0:57:24] have better sense of how possible things are uh randomized trials. So like I
+[0:57:28] are uh randomized trials. So like I think we don't have it formalized yet
+[0:57:30] think we don't have it formalized yet how to combine all these different
+[0:57:31] how to combine all these different sources of evidence
+[0:57:34] sources of evidence uh to to do the benchmarking just like
+[0:57:36] uh to to do the benchmarking just like we do with observe coariants in the same
+[0:57:38] we do with observe coariants in the same data set.
+[0:57:40] data set. uh but uh this can can be done right and
+[0:57:45] uh but uh this can can be done right and should be done and perhaps in the
+[0:57:47] should be done and perhaps in the beginning formally as we develop more
+[0:57:49] beginning formally as we develop more for this and there actually some
+[0:57:51] for this and there actually some interesting papers that have been doing
+[0:57:53] interesting papers that have been doing kind of like this types of exercises uh
+[0:57:57] kind of like this types of exercises uh well this this is kind of related to our
+[0:57:59] well this this is kind of related to our last question as well right is there
+[0:58:00] last question as well right is there data we can collect better
+[0:58:03] data we can collect better so for example there's this very
+[0:58:04] so for example there's this very interesting paper on sensitivity of
+[0:58:06] interesting paper on sensitivity of instrumental variable as that takes many
+[0:58:09] instrumental variable as that takes many uh
+[0:58:12] uh papers that use rainfall as IVs as
+[0:58:16] papers that use rainfall as IVs as variables. And if you think about it
+[0:58:18] variables. And if you think about it like you need to satisfy the exclusion
+[0:58:19] like you need to satisfy the exclusion restriction, but if you're using
+[0:58:21] restriction, but if you're using rainfall as IV for one treatment and
+[0:58:23] rainfall as IV for one treatment and rainfall as IV for another treatment,
+[0:58:25] rainfall as IV for another treatment, that rainfall as IV for the other
+[0:58:27] that rainfall as IV for the other treatment might as well be a violation
+[0:58:29] treatment might as well be a violation of the exclusion restriction for this
+[0:58:30] of the exclusion restriction for this other treatment. So then uh this paper
+[0:58:33] other treatment. So then uh this paper collects like many different uh studies
+[0:58:36] collects like many different uh studies that have many potential violations of
+[0:58:38] that have many potential violations of exclusion restriction and tries to make
+[0:58:39] exclusion restriction and tries to make sense of all of them together right so
+[0:58:41] sense of all of them together right so like if we look at the collection of
+[0:58:43] like if we look at the collection of studies in a sense how much violation of
+[0:58:45] studies in a sense how much violation of exclusion restriction could be happening
+[0:58:47] exclusion restriction could be happening here uh we still don't have like a very
+[0:58:50] here uh we still don't have like a very formal theory how to combine this in a
+[0:58:52] formal theory how to combine this in a very uh systematic way uh but we can
+[0:58:56] very uh systematic way uh but we can already start doing these kind of things
+[0:58:57] already start doing these kind of things and I think that's by doing these things
+[0:58:59] and I think that's by doing these things we we will turn
+[0:59:01] we we will turn uh well now we I think having the
+[0:59:04] uh well now we I think having the omitive variable formula we know what to
+[0:59:05] omitive variable formula we know what to look after right like these are the
+[0:59:07] look after right like these are the things that drive the bias so this is
+[0:59:10] things that drive the bias so this is kind of like what I should be trying to
+[0:59:12] kind of like what I should be trying to constrain and then now we can think of
+[0:59:14] constrain and then now we can think of different ideas or different data
+[0:59:15] different ideas or different data sources to start calibrating this this
+[0:59:23] right and then regarding the third the case the answer is yes uh the bomb can
+[0:59:25] case the answer is yes uh the bomb can be proved in special cases so for
+[0:59:26] be proved in special cases so for example binary treatment Um if if the
+[0:59:30] example binary treatment Um if if the parameters since the parameters are
+[0:59:32] parameters since the parameters are large enough the the bound cannot be
+[0:59:34] large enough the the bound cannot be sharp. If you just take the verb formula
+[0:59:37] sharp. If you just take the verb formula there are going to be some parameter
+[0:59:39] there are going to be some parameter values that are not possible in the
+[0:59:40] values that are not possible in the binary treatment case but that formula
+[0:59:42] binary treatment case but that formula is unbounded right and the binary
+[0:59:45] is unbounded right and the binary treatment treatment effect is naturally
+[0:59:47] treatment treatment effect is naturally bounded even without any constraint on
+[0:59:50] bounded even without any constraint on the on the compound.
+[0:59:52] the on the compound. I've started working on this now to see
+[0:59:54] I've started working on this now to see how we can characterize the sharp bounds
+[0:59:56] how we can characterize the sharp bounds on the binary frequency.
+[0:59:59] on the binary frequency. Uh
+[1:00:01] Uh yeah and I think unfortunately we need
+[1:00:04] yeah and I think unfortunately we need to do this case by case. So any
+[1:00:06] to do this case by case. So any different kind of constraint you put on
+[1:00:08] different kind of constraint you put on the outcome.
+[1:00:10] the outcome. Uh
+[1:00:12] Uh so for example now it's categorical or
+[1:00:14] so for example now it's categorical or now just binary like it's continuous but
+[1:00:17] now just binary like it's continuous but bounded. We're going to have to work it
+[1:00:19] bounded. We're going to have to work it out. Okay, how do we sharpen the bounds
+[1:00:22] out. Okay, how do we sharpen the bounds using exact
+[1:00:24] using exact uh
+[1:00:26] uh I'm not sure there there's going to be a
+[1:00:27] I'm not sure there there's going to be a general problem for all type of
+[1:00:30] general problem for all type of treatments and outcomes although of
+[1:00:32] treatments and outcomes although of course you could just set up the
+[1:00:33] course you could just set up the generalization problem and solve it in
+[1:00:36] generalization problem and solve it in there
+[1:00:42] I think we are running up uh running out of the time so maybe actually like Sarah
+[1:00:44] of the time so maybe actually like Sarah I think like we can just send the the
+[1:00:46] I think like we can just send the the remaining questions to Carlos so uh
+[1:00:48] remaining questions to Carlos so uh thanks for all the questions uh in the
+[1:00:50] thanks for all the questions uh in the chat and then uh we're going to make
+[1:00:52] chat and then uh we're going to make sure that Carlos will get the older
+[1:00:53] sure that Carlos will get the older questions. Um so thank you so much
+[1:00:56] questions. Um so thank you so much everyone for coming uh and then maybe I
+[1:00:59] everyone for coming uh and then maybe I don't need to share the screen because
+[1:01:01] don't need to share the screen because um uh this was the last seminar uh
+[1:01:04] um uh this was the last seminar uh series for this semester and so
+[1:01:07] series for this semester and so hopefully we're going to see you again
+[1:01:08] hopefully we're going to see you again in next semester. So thank you so much
+[1:01:10] in next semester. So thank you so much Carlos and thanks so much Dominic for
+[1:01:12] Carlos and thanks so much Dominic for the discussion but um happy new year
+[1:01:15] the discussion but um happy new year everyone.
+[1:01:17] everyone. &gt;&gt; Thank you. Happy new year soon.
+[1:01:19] &gt;&gt; Thank you. Happy new year soon. &gt;&gt; Thanks.
+[1:01:20] &gt;&gt; Thanks. &gt;&gt; Bye.
+[1:01:21] &gt;&gt; Bye. &gt;&gt; Thanks, Carlos. It was interesting.
+[1:01:23] &gt;&gt; Thanks, Carlos. It was interesting. &gt;&gt; Yeah. Thank you, Car.
+[1:01:25] &gt;&gt; Yeah. Thank you, Car. &gt;&gt; Thank you. You have still some questions
+[1:01:27] &gt;&gt; Thank you. You have still some questions if you're curious.
+[1:01:29] if you're curious. Otherwise, we'll send it to you.

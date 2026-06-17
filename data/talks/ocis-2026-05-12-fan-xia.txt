@@ -1,0 +1,1220 @@
+[0:00:02] And how do you want me to divide? You're gonna open.
+[0:00:05] gonna open. Okay.
+[0:00:07] Okay. &gt;&gt; Okay. Can I Sorry.
+[0:00:09] &gt;&gt; Okay. Can I Sorry. &gt;&gt; No, no, no. Just wait, wait, wait, wait.
+[0:00:11] &gt;&gt; No, no, no. Just wait, wait, wait, wait. Sorry. [laughter]
+[0:00:12] Sorry. [laughter] Um, the people are coming in. Um,
+[0:00:15] Um, the people are coming in. Um, &gt;&gt; okay.
+[0:00:16] &gt;&gt; okay. &gt;&gt; The online attendees are coming. Just
+[0:00:19] &gt;&gt; The online attendees are coming. Just give it a minute.
+[0:00:21] give it a minute. &gt;&gt; Okay.
+[0:00:22] &gt;&gt; Okay. &gt;&gt; Sometimes it takes them a while to
+[0:00:24] &gt;&gt; Sometimes it takes them a while to connect.
+[0:00:33] question.
+[0:01:02] So at the end &gt;&gt; yeah at the end you just
+[0:01:18] &gt;&gt; okay um let's get started now um so this week uh we have Dr. F sh from UCSF and
+[0:01:24] week uh we have Dr. F sh from UCSF and Gary Chan from University of Washington
+[0:01:26] Gary Chan from University of Washington giving the online causal inference
+[0:01:27] giving the online causal inference seminar slash the as institute seminar.
+[0:01:32] seminar slash the as institute seminar. Um it will be on robust and efficient
+[0:01:34] Um it will be on robust and efficient semi parametric inference for selfwatch
+[0:01:36] semi parametric inference for selfwatch design. I think f you're going to start
+[0:01:39] design. I think f you're going to start first. So
+[0:01:40] first. So &gt;&gt; yes
+[0:01:43] &gt;&gt; yes um
+[0:01:45] um &gt;&gt; okay thank you for the introduction.
+[0:01:48] &gt;&gt; okay thank you for the introduction. Today Gary and I will be talking about
+[0:01:50] Today Gary and I will be talking about robust and efficient semiptric inference
+[0:01:52] robust and efficient semiptric inference for stepwise designs. This is joint work
+[0:01:55] for stepwise designs. This is joint work with Jim Hughes, Patrick Hagerty, Abby
+[0:01:57] with Jim Hughes, Patrick Hagerty, Abby Kenny and Emily Bodto.
+[0:02:02] Kenny and Emily Bodto. Um stepwise designs are used to evaluate
+[0:02:05] Um stepwise designs are used to evaluate interventions delivered at the cluster
+[0:02:07] interventions delivered at the cluster level over time. They can be viewed as
+[0:02:09] level over time. They can be viewed as sitting between cluster randomized
+[0:02:11] sitting between cluster randomized trials and crossover trials. A practical
+[0:02:14] trials and crossover trials. A practical appeal is that the intervention can be
+[0:02:15] appeal is that the intervention can be rolled out in phases which is often more
+[0:02:18] rolled out in phases which is often more physible than implementing it everywhere
+[0:02:20] physible than implementing it everywhere at once. Another advantage is that
+[0:02:23] at once. Another advantage is that design naturally allows us uh to study
+[0:02:26] design naturally allows us uh to study treatment manifact that may vary with
+[0:02:27] treatment manifact that may vary with time since intervention initiation.
+[0:02:31] time since intervention initiation. Uh for those of you who are not so
+[0:02:33] Uh for those of you who are not so familiar with this design, I'll give a
+[0:02:35] familiar with this design, I'll give a brief introduction. So in the classic
+[0:02:38] brief introduction. So in the classic stepwise design all clusters begin in
+[0:02:40] stepwise design all clusters begin in the control condition. At different time
+[0:02:43] the control condition. At different time points clusters cross over to the
+[0:02:45] points clusters cross over to the intervention condition and once they
+[0:02:46] intervention condition and once they receive the intervention they remain
+[0:02:48] receive the intervention they remain under intervention until the end of the
+[0:02:50] under intervention until the end of the study. The key randomized component is
+[0:02:53] study. The key randomized component is the crossover time or equivalently the
+[0:02:56] the crossover time or equivalently the treatment sequence assigned to each
+[0:02:58] treatment sequence assigned to each cluster. This is different from
+[0:03:00] cluster. This is different from sequential randomization such as in
+[0:03:02] sequential randomization such as in smart trials where treatment decisions
+[0:03:04] smart trials where treatment decisions may be randomized repeatedly over time
+[0:03:06] may be randomized repeatedly over time based on evolving information. Here the
+[0:03:08] based on evolving information. Here the full roll out sequence is randomized at
+[0:03:10] full roll out sequence is randomized at the design stage.
+[0:03:16] Uh a natural question is whether data from stepwart designs can simply be
+[0:03:18] from stepwart designs can simply be treated as usual clustered longitudinal
+[0:03:20] treated as usual clustered longitudinal data. The answer is partly yes and
+[0:03:23] data. The answer is partly yes and partly no. Because observations are
+[0:03:25] partly no. Because observations are clustered and repeated over time, mixed
+[0:03:27] clustered and repeated over time, mixed models are natural and widely used.
+[0:03:30] models are natural and widely used. Standard linear mix model are popular,
+[0:03:32] Standard linear mix model are popular, but their validity depends on correctly
+[0:03:34] but their validity depends on correctly specifying both fixed effects and random
+[0:03:36] specifying both fixed effects and random effects. In randomized trials, we often
+[0:03:39] effects. In randomized trials, we often want inference that relies as much as
+[0:03:41] want inference that relies as much as possible on the randomization itself and
+[0:03:43] possible on the randomization itself and as little as possible on the outcome
+[0:03:44] as little as possible on the outcome model assumption.
+[0:03:47] model assumption. Uh stepwise designs bring several
+[0:03:49] Uh stepwise designs bring several additional challenges. First, because
+[0:03:51] additional challenges. First, because treatment roll out happens over time,
+[0:03:53] treatment roll out happens over time, intervention effects are intrinsically
+[0:03:55] intervention effects are intrinsically entangled with secular time trends. If
+[0:03:58] entangled with secular time trends. If outcomes improves or worsen over
+[0:04:00] outcomes improves or worsen over calendar time for reasons unrelated to
+[0:04:02] calendar time for reasons unrelated to treatment, we need to separate those
+[0:04:04] treatment, we need to separate those trends from the effect of the
+[0:04:06] trends from the effect of the intervention. Second, uh time trends may
+[0:04:09] intervention. Second, uh time trends may differ across clusters. Third, the
+[0:04:12] differ across clusters. Third, the correlation structure can be complex
+[0:04:14] correlation structure can be complex because observations are nested within
+[0:04:16] because observations are nested within clusters and repeated over time. And
+[0:04:18] clusters and repeated over time. And finally, many stepwise trials like any
+[0:04:22] finally, many stepwise trials like any cluster randomized trials have a small
+[0:04:24] cluster randomized trials have a small number of clusters. In that setting,
+[0:04:26] number of clusters. In that setting, balance assignment is often desirable.
+[0:04:28] balance assignment is often desirable. But balance randomization creates
+[0:04:30] But balance randomization creates dependence across cluster assignments.
+[0:04:32] dependence across cluster assignments. Additionally, a syntoic appro
+[0:04:34] Additionally, a syntoic appro approximation is inappropriate for
+[0:04:36] approximation is inappropriate for standard error estimation and we may
+[0:04:38] standard error estimation and we may have chance imbalance of baseline
+[0:04:40] have chance imbalance of baseline precision variables.
+[0:04:43] precision variables. Let me introduce the notations. We index
+[0:04:46] Let me introduce the notations. We index clusters by I, time periods by J, and
+[0:04:50] clusters by I, time periods by J, and individuals by K. Depending on the
+[0:04:52] individuals by K. Depending on the study, individuals may be newly sampled
+[0:04:54] study, individuals may be newly sampled at each period, which we call a
+[0:04:56] at each period, which we call a cross-sectional design, or the same
+[0:04:59] cross-sectional design, or the same individuals may be followed
+[0:05:00] individuals may be followed longitudally, which we call cohort
+[0:05:02] longitudally, which we call cohort design. Uh, the cluster period size is
+[0:05:05] design. Uh, the cluster period size is denoted by We use capital N for the
+[0:05:08] denoted by We use capital N for the number of clusters and capital T for the
+[0:05:10] number of clusters and capital T for the number of time periods. The treatment
+[0:05:12] number of time periods. The treatment assigned to cluster I at period J is XIG
+[0:05:16] assigned to cluster I at period J is XIG and XIG bar denotes the treatment
+[0:05:18] and XIG bar denotes the treatment history up to time J. The potential
+[0:05:21] history up to time J. The potential outcome Yig J K XIT bar is the outcome
+[0:05:24] outcome Yig J K XIT bar is the outcome that would be observed for individual K
+[0:05:27] that would be observed for individual K in cluster I at period J under a
+[0:05:30] in cluster I at period J under a particular treatment history XIT bar.
+[0:05:34] particular treatment history XIT bar. Any questions so far? Okay, I'll go on.
+[0:05:38] Any questions so far? Okay, I'll go on. Under no anticipation, future treatment
+[0:05:41] Under no anticipation, future treatment assignments do not affect past outcomes.
+[0:05:44] assignments do not affect past outcomes. This means that at time J, the relevant
+[0:05:46] This means that at time J, the relevant potential outcome depends only on the
+[0:05:48] potential outcome depends only on the treatment history up to time J, not on
+[0:05:50] treatment history up to time J, not on future roll out. Because the treatment
+[0:05:52] future roll out. Because the treatment sequence is randomized, we get an
+[0:05:54] sequence is randomized, we get an exchangeability condition between the
+[0:05:56] exchangeability condition between the potential outcomes and the treatment
+[0:05:57] potential outcomes and the treatment history. In other words, at a given time
+[0:06:00] history. In other words, at a given time point, the comparison between treated
+[0:06:02] point, the comparison between treated and untreated clusters is protected by
+[0:06:05] and untreated clusters is protected by randomization. This motivates vertical
+[0:06:07] randomization. This motivates vertical comparisons within the same calendar
+[0:06:09] comparisons within the same calendar time. However, purely vertical
+[0:06:12] time. However, purely vertical comparisons may be inefficient,
+[0:06:14] comparisons may be inefficient, especially when we believe the treatment
+[0:06:15] especially when we believe the treatment effect has some structure that allows us
+[0:06:17] effect has some structure that allows us to pull information across time.
+[0:06:21] to pull information across time. [snorts]
+[0:06:22] [snorts] &gt;&gt; Can I ask a question about the set? So
+[0:06:26] &gt;&gt; Can I ask a question about the set? So do you assume the outcome is measured at
+[0:06:30] do you assume the outcome is measured at the same time that you've given them
+[0:06:33] the same time that you've given them treatment or
+[0:06:35] treatment or &gt;&gt; uh it's uh there is like a slight lag.
+[0:06:37] &gt;&gt; uh it's uh there is like a slight lag. So if you look at sorry it's the wrong
+[0:06:39] So if you look at sorry it's the wrong direction. So if you look at this uh uh
+[0:06:43] direction. So if you look at this uh uh this uh matrix or uh I don't know how to
+[0:06:46] this uh matrix or uh I don't know how to call it but then this illustration you
+[0:06:49] call it but then this illustration you can see the dark area the ones uh are
+[0:06:51] can see the dark area the ones uh are the at the uh cluster periods where the
+[0:06:54] the at the uh cluster periods where the clusters are under treatment and then
+[0:06:56] clusters are under treatment and then the light periods are there when they're
+[0:06:58] the light periods are there when they're under control. So um at each time you
+[0:07:01] under control. So um at each time you can think of the outcome being measured
+[0:07:03] can think of the outcome being measured at here where they've already been
+[0:07:06] at here where they've already been exposed to the treatment for like for
+[0:07:09] exposed to the treatment for like for example here for for the outcome
+[0:07:11] example here for for the outcome measurements they've been exposed
+[0:07:13] measurements they've been exposed already for this period. So there is a
+[0:07:16] already for this period. So there is a lag. So the treatment uh although they
+[0:07:19] lag. So the treatment uh although they we use the same time to denote them
+[0:07:21] we use the same time to denote them there is actually a temporal order in
+[0:07:24] there is actually a temporal order in terms of treatment outcome. But from the
+[0:07:27] terms of treatment outcome. But from the available data, do you see outcomes uh
+[0:07:30] available data, do you see outcomes uh longitudinally? Do you see outcomes each
+[0:07:32] longitudinally? Do you see outcomes each time?
+[0:07:32] time? &gt;&gt; Yeah.
+[0:07:33] &gt;&gt; Yeah. &gt;&gt; Yeah. Yeah. For at at the very least for
+[0:07:36] &gt;&gt; Yeah. Yeah. For at at the very least for this uh project we see it alone.
+[0:07:39] this uh project we see it alone. &gt;&gt; Okay.
+[0:07:39] &gt;&gt; Okay. &gt;&gt; So you can think of the design as like
+[0:07:42] &gt;&gt; So you can think of the design as like uh for example each time period is three
+[0:07:44] uh for example each time period is three months and then people uh are followed
+[0:07:47] months and then people uh are followed up every three months. So for each
+[0:07:49] up every three months. So for each cluster we would collect data every
+[0:07:52] cluster we would collect data every three months. That that would be the
+[0:07:53] three months. That that would be the data structure.
+[0:07:55] data structure. And you mentioned this cross-sectional
+[0:07:57] And you mentioned this cross-sectional design versus cohort design. Are you
+[0:07:59] design versus cohort design. Are you going to do the use the same model, same
+[0:08:02] going to do the use the same model, same method for these two different designs
+[0:08:04] method for these two different designs or just
+[0:08:06] or just &gt;&gt; uh so our proposal works for both
+[0:08:08] &gt;&gt; uh so our proposal works for both designs. Uh there's no specific
+[0:08:11] designs. Uh there's no specific treatment for uh uh for for each of the
+[0:08:15] treatment for uh uh for for each of the design. It's like a universal solution
+[0:08:18] design. It's like a universal solution for for both. there would be a working
+[0:08:19] for for both. there would be a working correlation that would uh
+[0:08:21] correlation that would uh &gt;&gt; yeah there would be a working
+[0:08:22] &gt;&gt; yeah there would be a working correlation that takes care of the
+[0:08:24] correlation that takes care of the different correlation structure because
+[0:08:25] different correlation structure because if you have cross-sectional data then
+[0:08:28] if you have cross-sectional data then you have within cluster uh within
+[0:08:30] you have within cluster uh within cluster uh correlation and that's what
+[0:08:33] cluster uh correlation and that's what you need to over time that's what you
+[0:08:34] you need to over time that's what you need to account for in the in your
+[0:08:36] need to account for in the in your working correlation structure but if you
+[0:08:38] working correlation structure but if you have the same individual uh followed
+[0:08:41] have the same individual uh followed over time then you also have a within
+[0:08:43] over time then you also have a within individual correlation in their outcome
+[0:08:45] individual correlation in their outcome that you need to take care of so that's
+[0:08:47] that you need to take care of so that's the only difference.
+[0:08:54] &gt;&gt; Any other [clears throat] questions? &gt;&gt; No, we're good. Thank you.
+[0:08:56] &gt;&gt; No, we're good. Thank you. &gt;&gt; Great. Thank you.
+[0:08:58] &gt;&gt; Great. Thank you. &gt;&gt; I believe I was here. Okay. Okay. So, we
+[0:09:03] &gt;&gt; I believe I was here. Okay. Okay. So, we were talking about how we want to borrow
+[0:09:04] were talking about how we want to borrow information across time using when we
+[0:09:07] information across time using when we believe there are some structure to a
+[0:09:09] believe there are some structure to a treatment effect. And with a treatment
+[0:09:11] treatment effect. And with a treatment effect structure, the most common
+[0:09:13] effect structure, the most common analysis uses a linear mix model. In
+[0:09:16] analysis uses a linear mix model. In this model, the outcome is decomposed
+[0:09:18] this model, the outcome is decomposed into a treatment effect component, a
+[0:09:20] into a treatment effect component, a control time trend, random effects, and
+[0:09:22] control time trend, random effects, and individual level noise. The term G delta
+[0:09:25] individual level noise. The term G delta XJ bar is the treatment effect model,
+[0:09:28] XJ bar is the treatment effect model, which is our main object of interest.
+[0:09:30] which is our main object of interest. The term M gamma J captures the secular
+[0:09:33] The term M gamma J captures the secular time trend under control. The random
+[0:09:36] time trend under control. The random effects account for within cluster
+[0:09:38] effects account for within cluster dependence and possibly cluster specific
+[0:09:40] dependence and possibly cluster specific deviations over time. This framework is
+[0:09:43] deviations over time. This framework is flexible uh but it also makes clear that
+[0:09:45] flexible uh but it also makes clear that the conventional inference depends on
+[0:09:48] the conventional inference depends on correctly specifying several nuisance
+[0:09:49] correctly specifying several nuisance components not only the treatment
+[0:09:51] components not only the treatment effect.
+[0:09:54] effect. Um two common choices for the treatment
+[0:09:56] Um two common choices for the treatment effect component are shown here. The
+[0:09:58] effect component are shown here. The first is the instantaneous treatment
+[0:10:00] first is the instantaneous treatment effect model. In this case once the
+[0:10:02] effect model. In this case once the cluster is treated the full treatment
+[0:10:04] cluster is treated the full treatment effect appears immediately and remains
+[0:10:07] effect appears immediately and remains constant over time. The second is the
+[0:10:09] constant over time. The second is the exposure time indicator model. Here the
+[0:10:12] exposure time indicator model. Here the effect depends on how long the cluster
+[0:10:14] effect depends on how long the cluster has been exposed to the intervention.
+[0:10:16] has been exposed to the intervention. For example, the effect after one period
+[0:10:18] For example, the effect after one period of exposure may differ from the effect
+[0:10:20] of exposure may differ from the effect after two or three periods. This model
+[0:10:23] after two or three periods. This model is useful when we expect delayed or
+[0:10:25] is useful when we expect delayed or accumulating effects after
+[0:10:26] accumulating effects after implementation.
+[0:10:32] The linear mix model implies a marginal mean model. The expected outcome is the
+[0:10:34] mean model. The expected outcome is the sum of the treatment effect component
+[0:10:36] sum of the treatment effect component and the control time trend. Our
+[0:10:38] and the control time trend. Our parameter of interest is delta while the
+[0:10:40] parameter of interest is delta while the time trend and coarance structure are
+[0:10:42] time trend and coarance structure are nuisance. The key is the key issue is
+[0:10:45] nuisance. The key is the key issue is that even if we only use the margin
+[0:10:47] that even if we only use the margin model, we still need to correctly
+[0:10:48] model, we still need to correctly specify both the treatment effect model
+[0:10:50] specify both the treatment effect model and the control time trend. If we
+[0:10:53] and the control time trend. If we incorrectly assume for example that the
+[0:10:55] incorrectly assume for example that the control mean is constant over time then
+[0:10:57] control mean is constant over time then we can create bias similar to omitting a
+[0:10:59] we can create bias similar to omitting a confounder as time affects both the
+[0:11:02] confounder as time affects both the probability of receiving treatment and
+[0:11:04] probability of receiving treatment and likely also the outcome distribution.
+[0:11:07] likely also the outcome distribution. &gt;&gt; Any questions here?
+[0:11:10] &gt;&gt; Any questions here? &gt;&gt; I have a question actually about the
+[0:11:12] &gt;&gt; I have a question actually about the previous slide where you you you
+[0:11:15] previous slide where you you you introduce this model. I mean let's say I
+[0:11:17] introduce this model. I mean let's say I have in one case a individual repeatedly
+[0:11:21] have in one case a individual repeatedly been mean they enter the study at the
+[0:11:23] been mean they enter the study at the beginning and then there you get
+[0:11:24] beginning and then there you get repeated measurements
+[0:11:26] repeated measurements uh another design where a new individual
+[0:11:31] uh another design where a new individual enters u new individuals enter at every
+[0:11:34] enters u new individuals enter at every time point uh and you just give them a
+[0:11:36] time point uh and you just give them a treatment or not at that point. So
+[0:11:40] treatment or not at that point. So &gt;&gt; I want to clarify so for step version
+[0:11:42] &gt;&gt; I want to clarify so for step version usually the intervention is not on the
+[0:11:44] usually the intervention is not on the individual level it's usually on the
+[0:11:46] individual level it's usually on the cluster level for example training a
+[0:11:49] cluster level for example training a hospital so if you train the hospital
+[0:11:51] hospital so if you train the hospital then um at each time point if the if the
+[0:11:55] then um at each time point if the if the hospital is already trained then the
+[0:11:57] hospital is already trained then the individuals coming in they're under
+[0:12:00] individuals coming in they're under exposure
+[0:12:02] exposure &gt;&gt; right I don't understand but I I thought
+[0:12:03] &gt;&gt; right I don't understand but I I thought there's a difference for example for so
+[0:12:06] there's a difference for example for so so you could be if you think about this
+[0:12:08] so you could be if you think about this scenario where one person come in
+[0:12:12] scenario where one person come in uh at at this particular time t and then
+[0:12:16] uh at at this particular time t and then they did not get treatment and someone
+[0:12:19] they did not get treatment and someone else who come in to another cluster at
+[0:12:22] else who come in to another cluster at an early time point and they haven't
+[0:12:24] an early time point and they haven't received treatment until this time t
+[0:12:27] received treatment until this time t that seems to be to me as two different
+[0:12:30] that seems to be to me as two different scenarios
+[0:12:31] scenarios but how do you kind of distinguish them
+[0:12:35] but how do you kind of distinguish them in your treatment effect model
+[0:12:39] in your treatment effect model or is it distinguished in in that model?
+[0:12:42] or is it distinguished in in that model? Maybe that's somewhere in this treatment
+[0:12:45] Maybe that's somewhere in this treatment history that I don't quite
+[0:12:48] history that I don't quite understand.
+[0:12:50] understand. Um
+[0:12:51] Um &gt;&gt; um
+[0:12:52] &gt;&gt; um &gt;&gt; what does treatment models are mean,
+[0:12:54] &gt;&gt; what does treatment models are mean, right? Like it's on the mean level. So
+[0:12:57] right? Like it's on the mean level. So you could you you you well you could
+[0:13:00] you could you you you well you could assume I mean like for for
+[0:13:03] assume I mean like for for cross-sectional or or for for for
+[0:13:05] cross-sectional or or for for for product design you you you can assume
+[0:13:08] product design you you you can assume either of them. I guess it just depends
+[0:13:10] either of them. I guess it just depends on the science but but a lot of times
+[0:13:12] on the science but but a lot of times you do see like delay defects and like I
+[0:13:16] you do see like delay defects and like I can take effects. [clears throat]
+[0:13:19] can take effects. [clears throat] &gt;&gt; Okay.
+[0:13:19] &gt;&gt; Okay. &gt;&gt; So I think
+[0:13:21] &gt;&gt; So I think &gt;&gt; I think what you're asking
+[0:13:27] &gt;&gt; just clarify my question. So in other words if if I have someone who just
+[0:13:29] words if if I have someone who just entered at time t what would be its
+[0:13:33] entered at time t what would be its treatment history?
+[0:13:35] treatment history? Would would it be blank or would it be
+[0:13:39] Would would it be blank or would it be the history of the cluster? The
+[0:13:41] the history of the cluster? The &gt;&gt; history of the cluster
+[0:13:42] &gt;&gt; history of the cluster &gt;&gt; is it would be the history of the
+[0:13:43] &gt;&gt; is it would be the history of the cluster. Yeah. Yeah. Unless uh I I guess
+[0:13:47] cluster. Yeah. Yeah. Unless uh I I guess some of the question is like oh if I'm
+[0:13:50] some of the question is like oh if I'm for example if I go to this hospital all
+[0:13:52] for example if I go to this hospital all the time I'm familiar with this hospital
+[0:13:54] the time I'm familiar with this hospital how it functions then I may have a
+[0:13:56] how it functions then I may have a different baseline uh trend in terms of
+[0:13:59] different baseline uh trend in terms of my outcome without intervention compared
+[0:14:01] my outcome without intervention compared to others. And that's something that we
+[0:14:04] to others. And that's something that we kind of allow in our situation because
+[0:14:06] kind of allow in our situation because we allow the time trend to be different
+[0:14:08] we allow the time trend to be different across clusters. But because the
+[0:14:10] across clusters. But because the intervention is not on the on the
+[0:14:13] intervention is not on the on the individual level, it's on the cluster
+[0:14:14] individual level, it's on the cluster level. So uh no matter when they enter,
+[0:14:17] level. So uh no matter when they enter, they would uh inherit the treatment
+[0:14:20] they would uh inherit the treatment history of the cluster instead of their
+[0:14:22] history of the cluster instead of their own history because that that would be
+[0:14:24] own history because that that would be difficult to also define what that
+[0:14:26] difficult to also define what that history means, right?
+[0:14:28] history means, right? But they were not exposed for the uh for
+[0:14:31] But they were not exposed for the uh for for sure if if they were if they enter
+[0:14:34] for sure if if they were if they enter at the time where their cluster was not
+[0:14:36] at the time where their cluster was not exposed. Right.
+[0:14:39] exposed. Right. &gt;&gt; Okay.
+[0:14:39] &gt;&gt; Okay. &gt;&gt; So I I have another question. If you go
+[0:14:41] &gt;&gt; So I I have another question. If you go back to to the model, the linear mix
+[0:14:44] back to to the model, the linear mix model, um you have a a random effect and
+[0:14:47] model, um you have a a random effect and should I interpret this equation as a
+[0:14:50] should I interpret this equation as a structural equation like uh is this
+[0:14:54] structural equation like uh is this telling me how the factual data is
+[0:14:57] telling me how the factual data is generated or how the counterfactual data
+[0:15:01] generated or how the counterfactual data would be generated if I replace the
+[0:15:03] would be generated if I replace the capital Xbar with a little XAR? And if
+[0:15:07] capital Xbar with a little XAR? And if so, what is the meaning of Zigj? I'm I'm
+[0:15:11] so, what is the meaning of Zigj? I'm I'm you know I'm always struggling with the
+[0:15:12] you know I'm always struggling with the random effects what they mean in terms
+[0:15:15] random effects what they mean in terms of a dag you know where do I place those
+[0:15:19] of a dag you know where do I place those um yeah so
+[0:15:21] um yeah so &gt;&gt; so when I intro when I introduced this
+[0:15:23] &gt;&gt; so when I intro when I introduced this model this is not the model that we're
+[0:15:25] model this is not the model that we're proposing we haven't gotten to that part
+[0:15:27] proposing we haven't gotten to that part yet and then
+[0:15:29] yet and then &gt;&gt; this is not a structural model because I
+[0:15:31] &gt;&gt; this is not a structural model because I mean it's difficult to tell whether it's
+[0:15:33] mean it's difficult to tell whether it's a structural model because of the
+[0:15:34] a structural model because of the history of like how mixed model are
+[0:15:37] history of like how mixed model are invented right they they were not
+[0:15:38] invented right they they were not invented under framework of causal
+[0:15:40] invented under framework of causal inference. So maybe you could call it a
+[0:15:42] inference. So maybe you could call it a structural model if you believe that the
+[0:15:44] structural model if you believe that the data is actually generated this way like
+[0:15:46] data is actually generated this way like the potential outcomes actually uh is
+[0:15:48] the potential outcomes actually uh is generated this way. Um so it's not it's
+[0:15:51] generated this way. Um so it's not it's not a struct I wouldn't call it a
+[0:15:52] not a struct I wouldn't call it a structural model. Uh is the reason why
+[0:15:54] structural model. Uh is the reason why we introduced this model is is the most
+[0:15:56] we introduced this model is is the most widely used model for this type of data.
+[0:15:59] widely used model for this type of data. So I just wanted to use it as like um
+[0:16:02] So I just wanted to use it as like um starting point um starting point where
+[0:16:04] starting point um starting point where we uh where we built our work upon I
+[0:16:08] we uh where we built our work upon I guess.
+[0:16:09] guess. Okay, thank you.
+[0:16:10] Okay, thank you. &gt;&gt; Okay. Um, then I'll move on to
+[0:16:15] &gt;&gt; Okay. Um, then I'll move on to um Okay, I'll move on to this part. So,
+[0:16:19] um Okay, I'll move on to this part. So, this is uh getting closer to our
+[0:16:21] this is uh getting closer to our proposed method. Um, and so instead of
+[0:16:25] proposed method. Um, and so instead of fully specifying uh the outcome mean, we
+[0:16:29] fully specifying uh the outcome mean, we focus on the semiparametric causal
+[0:16:31] focus on the semiparametric causal contrast model. The model specify only
+[0:16:33] contrast model. The model specify only the average difference between the
+[0:16:34] the average difference between the potential outcome under a treatment
+[0:16:36] potential outcome under a treatment history and the potential outcome under
+[0:16:38] history and the potential outcome under the all control history. This contrast
+[0:16:41] the all control history. This contrast is represented by G delta XIG bar which
+[0:16:44] is represented by G delta XIG bar which we used the same notation before as the
+[0:16:46] we used the same notation before as the treatment effect model. Uh under
+[0:16:48] treatment effect model. Uh under exchangeability this causal contrast
+[0:16:50] exchangeability this causal contrast model can be rewritten as a restriction
+[0:16:52] model can be rewritten as a restriction on the observed data. So this is the
+[0:16:54] on the observed data. So this is the restriction on the observed data. After
+[0:16:57] restriction on the observed data. After subtracting the treatment effect
+[0:16:58] subtracting the treatment effect component, the remaining outcome has the
+[0:17:01] component, the remaining outcome has the same mean across treatment history.
+[0:17:03] same mean across treatment history. Intuitively, once the causal treatment
+[0:17:05] Intuitively, once the causal treatment effect is removed, the residual mean
+[0:17:07] effect is removed, the residual mean should no longer depend on the
+[0:17:08] should no longer depend on the randomized treatment sequence. Uh, this
+[0:17:11] randomized treatment sequence. Uh, this is this restriction is also implied by
+[0:17:13] is this restriction is also implied by the linear mix model that I just
+[0:17:14] the linear mix model that I just introduced.
+[0:17:20] Um, deriving the efficient score is more complicated here than the standard iid
+[0:17:22] complicated here than the standard iid setting because of the following
+[0:17:24] setting because of the following reasons. uh cluster clusters are not
+[0:17:26] reasons. uh cluster clusters are not necessarily random uh randomized
+[0:17:28] necessarily random uh randomized independently especially under balance
+[0:17:30] independently especially under balance or restricted randomization.
+[0:17:33] or restricted randomization. In addition, cluster level outcomes need
+[0:17:35] In addition, cluster level outcomes need not be identically distributed because
+[0:17:37] not be identically distributed because the clusters may have different sizes,
+[0:17:39] the clusters may have different sizes, different time structures or different
+[0:17:41] different time structures or different coariance patterns. For that reason, the
+[0:17:44] coariance patterns. For that reason, the efficiency bound is formulated along a
+[0:17:46] efficiency bound is formulated along a sequence of finite sample designs, each
+[0:17:48] sequence of finite sample designs, each inducing a joint distribution of
+[0:17:50] inducing a joint distribution of nonidentically distributed clusters. Uh
+[0:17:52] nonidentically distributed clusters. Uh we now use uh stack vector notations. Uh
+[0:17:55] we now use uh stack vector notations. Uh y i is the full outcome vector for
+[0:17:57] y i is the full outcome vector for cluster i. x i is the stack treatment
+[0:18:00] cluster i. x i is the stack treatment sequence. Um g delta uh underline xi is
+[0:18:04] sequence. Um g delta uh underline xi is the stacked uh oh underline xi is the
+[0:18:07] the stacked uh oh underline xi is the treatment uh stack treatment sequence
+[0:18:09] treatment uh stack treatment sequence and g delta underline xi is the stacked
+[0:18:12] and g delta underline xi is the stacked treatment effect component. mi t is the
+[0:18:16] treatment effect component. mi t is the stack time component and the dot g delta
+[0:18:19] stack time component and the dot g delta is the derivative of g delta with
+[0:18:20] is the derivative of g delta with respect to delta.
+[0:18:27] Um so under the se parametric treatment uh contrast model the the efficient
+[0:18:30] uh contrast model the the efficient estimator solves an estimating equation
+[0:18:32] estimator solves an estimating equation based on the efficient score. This may
+[0:18:34] based on the efficient score. This may look familiar to some of you as it
+[0:18:37] look familiar to some of you as it resembles the efficient score for a semi
+[0:18:39] resembles the efficient score for a semi semiparametric regression model. The
+[0:18:42] semiparametric regression model. The equation looks busy but we will explain
+[0:18:45] equation looks busy but we will explain features of this estimating equation in
+[0:18:47] features of this estimating equation in the next few slides and hopefully it
+[0:18:48] the next few slides and hopefully it will become more intuitive.
+[0:18:52] will become more intuitive. Um the efficient score involves unknown
+[0:18:55] Um the efficient score involves unknown nuisance quantities including wi and mi.
+[0:18:58] nuisance quantities including wi and mi. In practice replace we replace them with
+[0:19:01] In practice replace we replace them with working counterparts tawi and ta mi. the
+[0:19:04] working counterparts tawi and ta mi. the working matrix uh ta wii can be viewed
+[0:19:07] working matrix uh ta wii can be viewed as the inverse of an arbitrary working
+[0:19:10] as the inverse of an arbitrary working correlation or coariance matrix. So this
+[0:19:12] correlation or coariance matrix. So this is where the coariance matrix working
+[0:19:14] is where the coariance matrix working corre uh correlation structure comes in.
+[0:19:17] corre uh correlation structure comes in. You can specify based on what what type
+[0:19:19] You can specify based on what what type of design you have. Um and then the
+[0:19:23] of design you have. Um and then the working mean ta mi represents the
+[0:19:26] working mean ta mi represents the control cluster period mean or baseline
+[0:19:28] control cluster period mean or baseline time trend. Uh the proposed estimator is
+[0:19:30] time trend. Uh the proposed estimator is obtained by solving the resulting
+[0:19:31] obtained by solving the resulting estimating equation after the
+[0:19:34] estimating equation after the substitution.
+[0:19:44] &gt;&gt; The proposed estimator is consistent and asytoically normal regardless of whether
+[0:19:46] asytoically normal regardless of whether the working cores matrix uh or the
+[0:19:49] the working cores matrix uh or the working baseline time trend is correct.
+[0:19:51] working baseline time trend is correct. If both nuisance components are
+[0:19:53] If both nuisance components are correctly specified, then the estimator
+[0:19:55] correctly specified, then the estimator achieves the semiparametric efficiency
+[0:19:57] achieves the semiparametric efficiency bound under the semi semiparametric
+[0:19:59] bound under the semi semiparametric treatment contrast model. So the working
+[0:20:01] treatment contrast model. So the working models plays the role we want them to
+[0:20:03] models plays the role we want them to play. They affect efficiency but not
+[0:20:05] play. They affect efficiency but not validity. This is the central
+[0:20:07] validity. This is the central distinction from standard mixed model
+[0:20:09] distinction from standard mixed model analysis where misspecifying the time
+[0:20:11] analysis where misspecifying the time trend or coarience structure can
+[0:20:13] trend or coarience structure can directly compromise inference. So uh so
+[0:20:16] directly compromise inference. So uh so this is uh this is also one of the
+[0:20:19] this is uh this is also one of the reasons why we introduced the mix model
+[0:20:20] reasons why we introduced the mix model because uh because of these property
+[0:20:23] because uh because of these property differences.
+[0:20:26] differences. Uh to see why the estimator is robust.
+[0:20:28] Uh to see why the estimator is robust. Let's take a closer look at the
+[0:20:30] Let's take a closer look at the estimating equation. The key is the
+[0:20:32] estimating equation. The key is the center term ta li because the treatment
+[0:20:36] center term ta li because the treatment assignment distribution is known from
+[0:20:37] assignment distribution is known from the randomization. The expectation of
+[0:20:40] the randomization. The expectation of this pro uh product term in blue is
+[0:20:43] this pro uh product term in blue is always zero. Under the semi
+[0:20:45] always zero. Under the semi semiparametric contrast model after
+[0:20:47] semiparametric contrast model after subtracting the true treatment effect,
+[0:20:50] subtracting the true treatment effect, the conditional mean of the residual
+[0:20:52] the conditional mean of the residual does not depend on the treatment
+[0:20:53] does not depend on the treatment sequence. Therefore, even if TAMI is not
+[0:20:56] sequence. Therefore, even if TAMI is not the true baseline mean, the estimating
+[0:20:58] the true baseline mean, the estimating equation remains unbiased as long as the
+[0:21:00] equation remains unbiased as long as the TAMI itself does not depend on the
+[0:21:03] TAMI itself does not depend on the treatment assignment. In short, for the
+[0:21:06] treatment assignment. In short, for the proposed method, the treatment effect
+[0:21:07] proposed method, the treatment effect model G delta XI is the only component
+[0:21:10] model G delta XI is the only component that must be correctly specified.
+[0:21:17] &gt;&gt; Any questions here? Okay, then I'll move on. Um,
+[0:21:19] on. Um, &gt;&gt; wait, wait.
+[0:21:20] &gt;&gt; wait, wait. &gt;&gt; Oh, sorry.
+[0:21:21] &gt;&gt; Oh, sorry. &gt;&gt; I'm very confused. So, so to me, you
+[0:21:24] &gt;&gt; I'm very confused. So, so to me, you have like a um a GS a a structural
+[0:21:30] have like a um a GS a a structural nested mean model. Um and you have like
+[0:21:33] nested mean model. Um and you have like the multivariate version of
+[0:21:35] the multivariate version of semiparametric regression. Is there
+[0:21:38] semiparametric regression. Is there something else going on here
+[0:21:41] something else going on here &gt;&gt; other than that? Um and what is going to
+[0:21:44] &gt;&gt; other than that? Um and what is going to infinity? The number of clusters when
+[0:21:46] infinity? The number of clusters when you talk about efficiency how do I think
+[0:21:48] you talk about efficiency how do I think about
+[0:21:51] about &gt;&gt; the number of clusters goes to infinity
+[0:21:53] &gt;&gt; the number of clusters goes to infinity and it it resembles a structure estimate
+[0:22:00] the class. &gt;&gt; Yeah. The cluster size
+[0:22:01] &gt;&gt; Yeah. The cluster size &gt;&gt; topics the cluster sizes remain bound.
+[0:22:03] &gt;&gt; topics the cluster sizes remain bound. &gt;&gt; Yeah.
+[0:22:04] &gt;&gt; Yeah. &gt;&gt; Yeah. The cluster size is actually we do
+[0:22:06] &gt;&gt; Yeah. The cluster size is actually we do not uh uh so we think of cluster size is
+[0:22:10] not uh uh so we think of cluster size is an intrinsic feature of the clusters
+[0:22:12] an intrinsic feature of the clusters that we have at hands. So all of the all
+[0:22:15] that we have at hands. So all of the all of the our analysis we do not assume the
+[0:22:17] of the our analysis we do not assume the cluster size are the same or the cluster
+[0:22:19] cluster size are the same or the cluster size follows some kind of iid super
+[0:22:22] size follows some kind of iid super population distribution. Uh it's just
+[0:22:24] population distribution. Uh it's just like the feature of the cluster. So but
+[0:22:26] like the feature of the cluster. So but then yeah we we don't allow it to go to
+[0:22:28] then yeah we we don't allow it to go to infinity. we uh the asytoics are
+[0:22:31] infinity. we uh the asytoics are established for uh a big n which is the
+[0:22:34] established for uh a big n which is the number of clusters that goes to infinity
+[0:22:36] number of clusters that goes to infinity and then it is a uh sorry
+[0:22:39] and then it is a uh sorry &gt;&gt; no because that's where the information
+[0:22:41] &gt;&gt; no because that's where the information comes from I mean from from the number
+[0:22:43] comes from I mean from from the number of clusters going to infinity because if
+[0:22:46] of clusters going to infinity because if there was a lot of correlation within
+[0:22:47] there was a lot of correlation within the cluster it's like having almost one
+[0:22:50] the cluster it's like having almost one or two people inside the cluster so you
+[0:22:53] or two people inside the cluster so you need
+[0:22:53] need &gt;&gt; yeah we need the cluster number to go to
+[0:22:56] &gt;&gt; yeah we need the cluster number to go to infinity
+[0:22:58] infinity Um and then in terms of the connection
+[0:23:00] Um and then in terms of the connection with structural nest mean model sorry
+[0:23:03] with structural nest mean model sorry was there anyone talking
+[0:23:05] was there anyone talking &gt;&gt; sorry I have another related question
+[0:23:07] &gt;&gt; sorry I have another related question which is I think there's a I'm a bit
+[0:23:09] which is I think there's a I'm a bit confused that you have this clust the
+[0:23:11] confused that you have this clust the number of cluster going to infinity but
+[0:23:13] number of cluster going to infinity but at some point you said you're going to
+[0:23:14] at some point you said you're going to treat the clusters differently.
+[0:23:16] treat the clusters differently. &gt;&gt; Yeah.
+[0:23:17] &gt;&gt; Yeah. &gt;&gt; Um so then
+[0:23:19] &gt;&gt; Um so then &gt;&gt; it's uh so it's an triangular array type
+[0:23:21] &gt;&gt; it's uh so it's an triangular array type of statement. So we have a sequence uh
+[0:23:25] of statement. So we have a sequence uh because within so for all of the
+[0:23:28] because within so for all of the clusters we already said that these
+[0:23:29] clusters we already said that these clusters may have different sizes and
+[0:23:31] clusters may have different sizes and then they may not distribute it uh the
+[0:23:33] then they may not distribute it uh the same. So it's it's kind of like uh we we
+[0:23:36] same. So it's it's kind of like uh we we treat it like a triangular array and
+[0:23:38] treat it like a triangular array and then in terms of establishing uh uh asic
+[0:23:41] then in terms of establishing uh uh asic properties we have to invoke uh central
+[0:23:44] properties we have to invoke uh central limit theorem like the uh Linderberg
+[0:23:46] limit theorem like the uh Linderberg type of or leopard type of central limit
+[0:23:49] type of or leopard type of central limit theorem instead of iid. Does that make
+[0:23:52] theorem instead of iid. Does that make sense?
+[0:23:53] sense? &gt;&gt; Yeah, that's kind of viewing you're
+[0:23:56] &gt;&gt; Yeah, that's kind of viewing you're thinking about this empirical average of
+[0:23:59] thinking about this empirical average of the clusters in some sense still kind of
+[0:24:00] the clusters in some sense still kind of converges, right?
+[0:24:02] converges, right? &gt;&gt; Yeah. Yeah.
+[0:24:04] &gt;&gt; Yeah. Yeah. &gt;&gt; Okay.
+[0:24:06] &gt;&gt; Okay. uh in terms of the connection I want to
+[0:24:08] uh in terms of the connection I want to talk about the connection with structure
+[0:24:10] talk about the connection with structure model because it it has a very similar
+[0:24:12] model because it it has a very similar structure but there is a um there is a
+[0:24:15] structure but there is a um there is a difference because uh like I said at the
+[0:24:18] difference because uh like I said at the beginning structure uh uh the stepwatch
+[0:24:21] beginning structure uh uh the stepwatch designs the roll out the treatment
+[0:24:23] designs the roll out the treatment sequence is determined at the at time of
+[0:24:25] sequence is determined at the at time of roll out so it's at is determined the
+[0:24:27] roll out so it's at is determined the entire sequence is determined at the
+[0:24:29] entire sequence is determined at the beginning of the at the beginning of the
+[0:24:31] beginning of the at the beginning of the trial so it's not like sequentially
+[0:24:33] trial so it's not like sequentially determined so So this estimating
+[0:24:35] determined so So this estimating equation actually resembles the if you
+[0:24:38] equation actually resembles the if you apply structure estimating model to uh
+[0:24:41] apply structure estimating model to uh &gt;&gt; to a yeah just one allocation of
+[0:24:45] &gt;&gt; to a yeah just one allocation of treatment instead of sequentially
+[0:24:48] treatment instead of sequentially applying it to to to it. I guess the uh
+[0:24:51] applying it to to to it. I guess the uh when we construct the estimating
+[0:24:53] when we construct the estimating equation try to derive the results it
+[0:24:56] equation try to derive the results it was actually we were motivated by the
+[0:24:58] was actually we were motivated by the structure the structure of the
+[0:25:00] structure the structure of the structural estimating model but then
+[0:25:01] structural estimating model but then when we prove the uh the theoretical
+[0:25:04] when we prove the uh the theoretical results we realize okay this is cluster
+[0:25:06] results we realize okay this is cluster data and then we also don't have
+[0:25:07] data and then we also don't have identically distributed clusters and
+[0:25:09] identically distributed clusters and then we also want to take care of the qu
+[0:25:12] then we also want to take care of the qu uh the dependence between clusters
+[0:25:14] uh the dependence between clusters induced by restricted randomization in
+[0:25:17] induced by restricted randomization in the sense that we want to allocate
+[0:25:20] the sense that we want to allocate the equal amount of clusters to each of
+[0:25:22] the equal amount of clusters to each of the treatment sequence. So those kind of
+[0:25:25] the treatment sequence. So those kind of create some trouble in terms of proving
+[0:25:27] create some trouble in terms of proving um so the theoretical proof is not that
+[0:25:31] um so the theoretical proof is not that uh straightforward as in the uh
+[0:25:33] uh straightforward as in the uh [clears throat] structured SME model. We
+[0:25:35] [clears throat] structured SME model. We did not just adopt their results. Um
+[0:25:38] did not just adopt their results. Um okay so great I will move on to the next
+[0:25:42] okay so great I will move on to the next slide. Um so this is a comparison with
+[0:25:46] slide. Um so this is a comparison with the usual mixed model or GE. So the
+[0:25:49] the usual mixed model or GE. So the robustness that we have for our proposed
+[0:25:51] robustness that we have for our proposed method does not generally hold for
+[0:25:53] method does not generally hold for standard linear mix models or GE using
+[0:25:55] standard linear mix models or GE using the same mean structure. Their
+[0:25:57] the same mean structure. Their estimation uh equation uses G delta
+[0:26:00] estimation uh equation uses G delta directly without the same centering step
+[0:26:03] directly without the same centering step and as a result the estimating equation
+[0:26:05] and as a result the estimating equation is unbiased only if the full mean model
+[0:26:07] is unbiased only if the full mean model is correctly specified uh including the
+[0:26:09] is correctly specified uh including the nuisance time trend. This is why linear
+[0:26:12] nuisance time trend. This is why linear mix models and GE analysis of stepwise
+[0:26:14] mix models and GE analysis of stepwise trials can be sensitive to mean
+[0:26:16] trials can be sensitive to mean specification of secular trends. The
+[0:26:18] specification of secular trends. The proposed approach separate the causal
+[0:26:20] proposed approach separate the causal contrast from the nuisance time trend
+[0:26:22] contrast from the nuisance time trend more carefully. So the valid validity of
+[0:26:25] more carefully. So the valid validity of inference for delta does not require
+[0:26:27] inference for delta does not require correct modeling of the entire outcome
+[0:26:29] correct modeling of the entire outcome mean model.
+[0:26:31] mean model. &gt;&gt; Okay. Do we have any questions?
+[0:26:35] &gt;&gt; Okay. Do we have any questions? If not then I will hand over to Gary to
+[0:26:38] If not then I will hand over to Gary to continue.
+[0:26:40] continue. Okay. So thanks fun and uh for actually
+[0:26:43] Okay. So thanks fun and uh for actually presenting the hardworking part I'm
+[0:26:45] presenting the hardworking part I'm going to present fun part. [laughter] So
+[0:26:47] going to present fun part. [laughter] So uh next slide please
+[0:26:50] uh next slide please uh can you
+[0:26:53] uh can you uh f can you okay so but we so for
+[0:26:58] uh f can you okay so but we so for inference actually like we really want
+[0:27:00] inference actually like we really want to be u well I guess the methods to be
+[0:27:05] to be u well I guess the methods to be useful for small number of clusters. So
+[0:27:08] useful for small number of clusters. So um you know that's actually creates some
+[0:27:10] um you know that's actually creates some challenges right because um well first
+[0:27:14] challenges right because um well first of all like you know large sample
+[0:27:16] of all like you know large sample arguments may not work well we said but
+[0:27:19] arguments may not work well we said but uh of course like we we still I mean I
+[0:27:22] uh of course like we we still I mean I guess the part that we um discuss was of
+[0:27:26] guess the part that we um discuss was of same prime efficiency theory we have to
+[0:27:28] same prime efficiency theory we have to so like consider large sample but we
+[0:27:31] so like consider large sample but we also want this to work well in small
+[0:27:33] also want this to work well in small sample. Okay. So uh and also like a
+[0:27:37] sample. Okay. So uh and also like a related but more subtle consideration
+[0:27:39] related but more subtle consideration for inference is actually to ensure the
+[0:27:41] for inference is actually to ensure the validity of inference procedure when the
+[0:27:44] validity of inference procedure when the working time frame is misspecified. That
+[0:27:46] working time frame is misspecified. That actually creates some additional issues
+[0:27:48] actually creates some additional issues here because so if everything is
+[0:27:52] here because so if everything is correctly specified then you can just
+[0:27:53] correctly specified then you can just use the inference function like
+[0:27:55] use the inference function like efficient inference function base as um
+[0:27:58] efficient inference function base as um uh uh construction and there's no
+[0:28:01] uh uh construction and there's no problem but then actually the mispens m
+[0:28:05] problem but then actually the mispens m actually creates additional problem okay
+[0:28:07] actually creates additional problem okay so we um look at a um subclass of the
+[0:28:12] so we um look at a um subclass of the model where um the g delta actually can
+[0:28:15] model where um the g delta actually can be written as um sort of uh linear in
+[0:28:18] be written as um sort of uh linear in the parameters. In this this case, we do
+[0:28:21] the parameters. In this this case, we do have a close form estimator for delta.
+[0:28:23] have a close form estimator for delta. Uh we do this because we actually it
+[0:28:26] Uh we do this because we actually it allows us to investigate the exact final
+[0:28:28] allows us to investigate the exact final sample variability. But this subclass uh
+[0:28:32] sample variability. But this subclass uh covers the uh two major models that f
+[0:28:36] covers the uh two major models that f introduced earlier. So we find cases uh
+[0:28:40] introduced earlier. So we find cases uh uh that covers the the the practical
+[0:28:44] uh that covers the the the practical cases. Next slide please.
+[0:28:48] cases. Next slide please. So uh okay so in terms of the exact uh
+[0:28:52] So uh okay so in terms of the exact uh finite sample areas. So first you know
+[0:28:55] finite sample areas. So first you know the pseudo residual ta y uh this is I
+[0:28:59] the pseudo residual ta y uh this is I call pseudo res because the expectation
+[0:29:02] call pseudo res because the expectation might not be uh it might not have mean
+[0:29:04] might not be uh it might not have mean zero if uh uh t m is actually
+[0:29:07] zero if uh uh t m is actually incorrectly specified. And we can show
+[0:29:10] incorrectly specified. And we can show that the exact variance of the closed
+[0:29:12] that the exact variance of the closed form estimator uh is the sum of these
+[0:29:15] form estimator uh is the sum of these two terms where both terms involve an
+[0:29:18] two terms where both terms involve an out expectation and inner expectation.
+[0:29:20] out expectation and inner expectation. The out expectation taken with respect
+[0:29:22] The out expectation taken with respect to treatment assignment distribution and
+[0:29:24] to treatment assignment distribution and the inner expectation taken with respect
+[0:29:26] the inner expectation taken with respect to a conditional distribution of outcome
+[0:29:29] to a conditional distribution of outcome treatments. Like the first term is the
+[0:29:32] treatments. Like the first term is the usual term that you see in this uh
+[0:29:34] usual term that you see in this uh conventional sandwich estimator. Uh the
+[0:29:36] conventional sandwich estimator. Uh the middle part only have the sum over
+[0:29:38] middle part only have the sum over clusters. But the second you have a
+[0:29:41] clusters. But the second you have a cross term that actually sums over pairs
+[0:29:44] cross term that actually sums over pairs of clusters here which actually exists
+[0:29:49] of clusters here which actually exists uh for two reasons. One is like the um s
+[0:29:53] uh for two reasons. One is like the um s residuals may not have mean zero um due
+[0:29:57] residuals may not have mean zero um due to mis uh misspecification and also the
+[0:30:00] to mis uh misspecification and also the constraint randomization induced
+[0:30:02] constraint randomization induced correlation across clusters. So actually
+[0:30:05] correlation across clusters. So actually the expectation of L till the I l to the
+[0:30:08] the expectation of L till the I l to the I prime is not zero. So uh this actually
+[0:30:13] I prime is not zero. So uh this actually uh uh and then this second term actually
+[0:30:17] uh uh and then this second term actually uh is usually negative. So um you know
+[0:30:22] uh is usually negative. So um you know we we I mean if you just um targets your
+[0:30:26] we we I mean if you just um targets your variance estimation for the first time
+[0:30:28] variance estimation for the first time is you actually have coverage.
+[0:30:31] is you actually have coverage. Um okay, next slide. Uh yeah we can uh
+[0:30:35] Um okay, next slide. Uh yeah we can uh estimate the exact variance using
+[0:30:37] estimate the exact variance using empirical analogy which average over
+[0:30:39] empirical analogy which average over possible treatment assignments. Uh we
+[0:30:42] possible treatment assignments. Uh we show that the variance estimate is
+[0:30:43] show that the variance estimate is consistent to the target regardless of
+[0:30:45] consistent to the target regardless of whether mild is correctly specified. Uh
+[0:30:49] whether mild is correctly specified. Uh well this is caveat because we do have
+[0:30:51] well this is caveat because we do have nuisance function that we plug in. So we
+[0:30:54] nuisance function that we plug in. So we specify we show consistency and then the
+[0:30:58] specify we show consistency and then the estimation of nuisance functions uh
+[0:31:00] estimation of nuisance functions uh which are the um weight um you know the
+[0:31:05] which are the um weight um you know the the um working weights and also the
+[0:31:07] the um working weights and also the working mean model does not affect the
+[0:31:10] working mean model does not affect the variance due to the proportity.
+[0:31:14] variance due to the proportity. uh but then you still have to plug in
+[0:31:18] uh but then you still have to plug in like the the nuisance functions and also
+[0:31:20] like the the nuisance functions and also you have to also plug in the unknown
+[0:31:22] you have to also plug in the unknown delta in constructing the um pseudo
+[0:31:26] delta in constructing the um pseudo residuals for the variance estimations.
+[0:31:29] residuals for the variance estimations. So uh if you actually plug in the um
+[0:31:32] So uh if you actually plug in the um estimated
+[0:31:34] estimated um delta then there is actually some
+[0:31:37] um delta then there is actually some negative bias term that we actually can
+[0:31:40] negative bias term that we actually can avoid by using a one correction. So we
+[0:31:44] avoid by using a one correction. So we actually would use uh in the
+[0:31:46] actually would use uh in the construction we do use uh uh say for the
+[0:31:50] construction we do use uh uh say for the pseudo um residuals for I cluster we
+[0:31:53] pseudo um residuals for I cluster we actually use a estimator that's if that
+[0:31:56] actually use a estimator that's if that cluster I observe.
+[0:31:59] cluster I observe. So next slide please.
+[0:32:01] So next slide please. Okay, so that's sort of the part that um
+[0:32:05] Okay, so that's sort of the part that um about the variance estimation. But
+[0:32:06] about the variance estimation. But there's also one very interesting um
+[0:32:10] there's also one very interesting um phenomenon that's actually happens when
+[0:32:13] phenomenon that's actually happens when you have small number of clusters. So
+[0:32:15] you have small number of clusters. So when you actually randomize small number
+[0:32:18] when you actually randomize small number of clusters that imbalance of baseline
+[0:32:21] of clusters that imbalance of baseline code varies by chance is actually more
+[0:32:22] code varies by chance is actually more likely and uh well I mean this well we
+[0:32:28] likely and uh well I mean this well we know that in randomization
+[0:32:30] know that in randomization on average the treatment effect is
+[0:32:33] on average the treatment effect is independent of the um baseline coariants
+[0:32:36] independent of the um baseline coariants any baseline coaries but when the
+[0:32:39] any baseline coaries but when the baseline coariant is a precision
+[0:32:41] baseline coariant is a precision variable and you also observe in sample
+[0:32:45] variable and you also observe in sample imbalance across the crossover times
+[0:32:48] imbalance across the crossover times then this has an effect that's is very
+[0:32:51] then this has an effect that's is very similar to confounding but at the sample
+[0:32:53] similar to confounding but at the sample level but when average over assignment
+[0:32:58] level but when average over assignment that's sort of bias is average out so
+[0:33:02] that's sort of bias is average out so they think like just the estimator with
+[0:33:04] they think like just the estimator with a small bias but still with a huge
+[0:33:08] a small bias but still with a huge variability so I'm going to show it uh
+[0:33:10] variability so I'm going to show it uh in a figure next so maybe next slide
+[0:33:13] in a figure next so maybe next slide please Okay. So I think this sort of
+[0:33:15] please Okay. So I think this sort of illustrates the point that I want to
+[0:33:17] illustrates the point that I want to make. This is from simulations. Uh I
+[0:33:20] make. This is from simulations. Uh I have two estimator. One is the LMM
+[0:33:23] have two estimator. One is the LMM estimator. We're going to be specified
+[0:33:24] estimator. We're going to be specified outcome adjustments.
+[0:33:26] outcome adjustments. Uh and then uh proposed estimator with a
+[0:33:30] Uh and then uh proposed estimator with a design base and also like outcome
+[0:33:33] design base and also like outcome adjustments. So but I'm going to talk
+[0:33:35] adjustments. So but I'm going to talk about what the adjustment looks like uh
+[0:33:37] about what the adjustment looks like uh uh next. But I just want to sort of um
+[0:33:41] uh next. But I just want to sort of um illustrate the point I just made in the
+[0:33:43] illustrate the point I just made in the [snorts] previous slide that if you
+[0:33:45] [snorts] previous slide that if you actually observe like in sample
+[0:33:48] actually observe like in sample correlation because of chance. Now uh
+[0:33:51] correlation because of chance. Now uh here like the number of clusters 10. So
+[0:33:53] here like the number of clusters 10. So you randomize 10 clusters into you know
+[0:33:56] you randomize 10 clusters into you know five uh actually four five um of
+[0:34:00] five uh actually four five um of crossover time then you basically have a
+[0:34:02] crossover time then you basically have a lot uh have a high chance that you
+[0:34:04] lot uh have a high chance that you actually have a you know negative or
+[0:34:07] actually have a you know negative or positive correlation but the correlation
+[0:34:10] positive correlation but the correlation if you average over all the 10,000
+[0:34:13] if you average over all the 10,000 simulations it would be around zero but
+[0:34:15] simulations it would be around zero but uh like for for a particular so small
+[0:34:19] uh like for for a particular so small sample you actually do observe some
+[0:34:22] sample you actually do observe some extreme correlation
+[0:34:23] extreme correlation And if you actually can see that the
+[0:34:26] And if you actually can see that the LMFM estimates actually
+[0:34:29] LMFM estimates actually linearly related to the um sort of
+[0:34:32] linearly related to the um sort of correlation and you do see a bias um
+[0:34:36] correlation and you do see a bias um that's
+[0:34:38] that's in sample bias say if you sort of uh
+[0:34:41] in sample bias say if you sort of uh draw some vertical lines uh and then you
+[0:34:44] draw some vertical lines uh and then you basically will see that the LM which is
+[0:34:47] basically will see that the LM which is the uh red dot uh sorry black dots are
+[0:34:50] the uh red dot uh sorry black dots are actually have biased Of course, if you
+[0:34:54] actually have biased Of course, if you average over all the assignments like
+[0:34:57] average over all the assignments like the bias will be uh you know it would be
+[0:35:01] the bias will be uh you know it would be average to around zero but you see a
+[0:35:04] average to around zero but you see a huge variability.
+[0:35:06] huge variability. Uh but the proposed methods after we do
+[0:35:09] Uh but the proposed methods after we do a design based um adjustment we actually
+[0:35:12] a design based um adjustment we actually can um so reduce or make the bias to be
+[0:35:17] can um so reduce or make the bias to be very um small across like the um you
+[0:35:22] very um small across like the um you know uh sort of sim simulated um data
+[0:35:26] know uh sort of sim simulated um data sets. Uh so that's also like a that's an
+[0:35:30] sets. Uh so that's also like a that's an advantage of the process. Uh let's s of
+[0:35:33] advantage of the process. Uh let's s of take a look at what's I mean by the uh
+[0:35:36] take a look at what's I mean by the uh design uh adjustment. Next slide please.
+[0:35:40] design uh adjustment. Next slide please. Okay. So uh in randomiz literature there
+[0:35:44] Okay. So uh in randomiz literature there are two major categories of adjustment
+[0:35:46] are two major categories of adjustment for balance baseline. One is design bas
+[0:35:49] for balance baseline. One is design bas is outcome based like our estimator
+[0:35:52] is outcome based like our estimator actually can do both because we actually
+[0:35:55] actually can do both because we actually can do an adjustment for L the L prime.
+[0:35:59] can do an adjustment for L the L prime. Uh so it's the till the end part which
+[0:36:01] Uh so it's the till the end part which is the design based adjustment and then
+[0:36:04] is the design based adjustment and then it's also you can do adjustment
+[0:36:06] it's also you can do adjustment at the till the end part which is the
+[0:36:09] at the till the end part which is the outcome adjustment the till the end part
+[0:36:11] outcome adjustment the till the end part is basically just like LM you can
+[0:36:13] is basically just like LM you can actually put you can adjust for um you
+[0:36:16] actually put you can adjust for um you know uh baseline coariants right by by
+[0:36:19] know uh baseline coariants right by by adding you know coarience in the outcome
+[0:36:22] adding you know coarience in the outcome the design part is actually to center
+[0:36:25] the design part is actually to center the um L parts
+[0:36:29] the um L parts by a um by an estimate
+[0:36:32] by a um by an estimate uh based on modeling of stratification
+[0:36:34] uh based on modeling of stratification using the observed K and which actually
+[0:36:37] using the observed K and which actually depends just solely on the um um
+[0:36:41] depends just solely on the um um treatment coarience without using the
+[0:36:43] treatment coarience without using the outcome data. So, so this is sort of the
+[0:36:46] outcome data. So, so this is sort of the the design part is actually you know
+[0:36:50] the design part is actually you know you know uh using the so variance for
+[0:36:55] you know uh using the so variance for for for adjusting the centering time and
+[0:36:58] for for adjusting the centering time and of course we can do like the uh
+[0:37:00] of course we can do like the uh adjustment in both parts. Next slide
+[0:37:03] adjustment in both parts. Next slide please.
+[0:37:05] please. So the sign based adjustment actually
+[0:37:07] So the sign based adjustment actually have a very close connection with
+[0:37:09] have a very close connection with postification
+[0:37:11] postification that is used very frequently for you
+[0:37:14] that is used very frequently for you know um random mass trials. So uh in
+[0:37:18] know um random mass trials. So uh in fact for categorical
+[0:37:21] fact for categorical coarience a connection between the
+[0:37:23] coarience a connection between the proposed estimate and the designbased
+[0:37:25] proposed estimate and the designbased adjustment
+[0:37:27] adjustment uh and postification estimate is
+[0:37:29] uh and postification estimate is established. for example when well I
+[0:37:32] established. for example when well I guess this is a a certain specification
+[0:37:36] guess this is a a certain specification uh which is say if you don't have
+[0:37:38] uh which is say if you don't have outcome adjustment uh like identity
+[0:37:41] outcome adjustment uh like identity working matrix and then uh t equals to
+[0:37:44] working matrix and then uh t equals to three but it is just for like expressing
+[0:37:46] three but it is just for like expressing things in a you know simple
+[0:37:50] things in a you know simple 16 simple uh uh representation but then
+[0:37:54] 16 simple uh uh representation but then the proposed estimator has the closed
+[0:37:56] the proposed estimator has the closed form which is very closely related to
+[0:37:58] form which is very closely related to the post fabrication estimator which is
+[0:38:00] the post fabrication estimator which is at the following formula. So it is
+[0:38:04] at the following formula. So it is basically like um summing up sort of a
+[0:38:07] basically like um summing up sort of a weighted um well with a certain way the
+[0:38:12] weighted um well with a certain way the difference uh between cluster means
+[0:38:17] difference uh between cluster means the weights are different but uh they
+[0:38:20] the weights are different but uh they basically are trying to do similar
+[0:38:22] basically are trying to do similar things for design based adjustments.
+[0:38:26] things for design based adjustments. So I pause here for questions.
+[0:38:35] Okay. So, uh, please. Okay. I guess then there are some
+[0:38:37] Okay. I guess then there are some numerical results that we just want to
+[0:38:40] numerical results that we just want to sort of pinpoint some of the uh I guess
+[0:38:44] sort of pinpoint some of the uh I guess uh practical performance. So, we have 10
+[0:38:47] uh practical performance. So, we have 10 clusters, five time points. So two or
+[0:38:49] clusters, five time points. So two or three clusters uh per sequence uh
+[0:38:53] three clusters uh per sequence uh bearing cluster period size and then we
+[0:38:55] bearing cluster period size and then we generate the outcome using a um yeah we
+[0:39:01] generate the outcome using a um yeah we generate outcome use
+[0:39:03] generate outcome use using
+[0:39:06] using you know linear mix effects model but
+[0:39:07] you know linear mix effects model but with nonlinear basel I mean
+[0:39:09] with nonlinear basel I mean instantaneous treatment effects and uh
+[0:39:12] instantaneous treatment effects and uh like dependent errors but with
+[0:39:15] like dependent errors but with &gt;&gt; I have a question because I'm I'm
+[0:39:17] &gt;&gt; I have a question because I'm I'm getting lost if you have 10 clusters and
+[0:39:20] getting lost if you have 10 clusters and five points. How can you have three
+[0:39:22] five points. How can you have three clusters per second?
+[0:39:24] clusters per second? &gt;&gt; Okay. Well, I I guess we um five time
+[0:39:28] &gt;&gt; Okay. Well, I I guess we um five time points and then the first one is um uh
+[0:39:30] points and then the first one is um uh or
+[0:39:31] or &gt;&gt; zero. Yeah. So So then two or three
+[0:39:34] &gt;&gt; zero. Yeah. So So then two or three actually
+[0:39:34] actually &gt;&gt; you will have three. Okay. I see.
+[0:39:37] &gt;&gt; you will have three. Okay. I see. &gt;&gt; Okay.
+[0:39:39] &gt;&gt; Okay. &gt;&gt; It's actually four crossover.
+[0:39:41] &gt;&gt; It's actually four crossover. &gt;&gt; Okay. Four. Okay.
+[0:39:44] &gt;&gt; Okay. Four. Okay. &gt;&gt; Next slide please.
+[0:39:48] &gt;&gt; Next slide please. Okay. So the simulation results actually
+[0:39:50] Okay. So the simulation results actually highlights what we expect. Uh first of
+[0:39:54] highlights what we expect. Uh first of all if um well we have two working
+[0:39:56] all if um well we have two working models. One is for the um correlation
+[0:39:59] models. One is for the um correlation one is for the baseline mean. So if the
+[0:40:01] one is for the baseline mean. So if the baseline mean is but the baseline mean
+[0:40:04] baseline mean is but the baseline mean is nonlinear and for so the working
+[0:40:07] is nonlinear and for so the working models media.
+[0:40:10] models media. So uh basically like uh the LM will have
+[0:40:14] So uh basically like uh the LM will have some bias when like the mean model is
+[0:40:17] some bias when like the mean model is not fully specified and also will have
+[0:40:21] not fully specified and also will have some uh problem with coverage when the
+[0:40:25] some uh problem with coverage when the um your correlation is not correctly
+[0:40:27] um your correlation is not correctly specified. Uh but the proposed methods
+[0:40:31] specified. Uh but the proposed methods actually do pretty well um well across
+[0:40:35] actually do pretty well um well across of the different working models. Of
+[0:40:37] of the different working models. Of course, I mean, if the uh working models
+[0:40:40] course, I mean, if the uh working models are correct, then the proposed estimator
+[0:40:44] are correct, then the proposed estimator um the standard error is like smallest,
+[0:40:47] um the standard error is like smallest, but then you can also see actually the
+[0:40:49] but then you can also see actually the um standard error is actually the same
+[0:40:51] um standard error is actually the same as the mm in this case.
+[0:40:55] as the mm in this case. uh and then the well the sandwich
+[0:40:58] uh and then the well the sandwich coariance which actually used the first
+[0:41:00] coariance which actually used the first of the two terms that I showed um
+[0:41:03] of the two terms that I showed um earlier and then the permutation
+[0:41:06] earlier and then the permutation coariance is the permutation with lift
+[0:41:08] coariance is the permutation with lift one out that actually uses both terms uh
+[0:41:12] one out that actually uses both terms uh so that's s of our proposal but I just
+[0:41:15] so that's s of our proposal but I just want to compare it to sandwich so
+[0:41:18] want to compare it to sandwich so sandwich coariance actually uh has
+[0:41:20] sandwich coariance actually uh has something interesting because you miss
+[0:41:22] something interesting because you miss the second term
+[0:41:24] the second term And the second terms actually only kicks
+[0:41:27] And the second terms actually only kicks in when the baseline or or the baseline
+[0:41:31] in when the baseline or or the baseline mean model is specified. So with ours
+[0:41:34] mean model is specified. So with ours actually the um so [clears throat]
+[0:41:37] actually the um so [clears throat] taking into account of the second term
+[0:41:39] taking into account of the second term actually the sandwich estimator is
+[0:41:41] actually the sandwich estimator is actually overestimating the values. But
+[0:41:44] actually overestimating the values. But then when M2
+[0:41:47] then when M2 is corrects then the second term the
+[0:41:50] is corrects then the second term the theoretical value for the second term
+[0:41:52] theoretical value for the second term the variance is actually uh zero but
+[0:41:55] the variance is actually uh zero but then savage coariance actually have the
+[0:41:57] then savage coariance actually have the usual cover of for the um you know for
+[0:42:00] usual cover of for the um you know for for GD type of
+[0:42:03] for GD type of your applications.
+[0:42:05] your applications. Anyway, like the proposed methods um do
+[0:42:08] Anyway, like the proposed methods um do pretty well across the different
+[0:42:10] pretty well across the different specification settings in terms of cover
+[0:42:14] specification settings in terms of cover uh coverage problem
+[0:42:16] uh coverage problem and there's some fail uh about cases
+[0:42:19] and there's some fail uh about cases which basically uh the LM may fail to
+[0:42:22] which basically uh the LM may fail to converge because you only have 10
+[0:42:24] converge because you only have 10 clusters and then you're running say you
+[0:42:28] clusters and then you're running say you know model with random intercept slopes.
+[0:42:31] know model with random intercept slopes. So it could actually u
+[0:42:34] So it could actually u &gt;&gt; I I I have a question if if you have um
+[0:42:37] &gt;&gt; I I I have a question if if you have um in your clusters how much correlation
+[0:42:40] in your clusters how much correlation did you have intracluster correlation
+[0:42:42] did you have intracluster correlation because to me if you have you know if
+[0:42:46] because to me if you have you know if the clusters are barely correlated the
+[0:42:48] the clusters are barely correlated the intracluster correlation is very small
+[0:42:51] intracluster correlation is very small &gt;&gt; then it's almost like having iid data
+[0:42:53] &gt;&gt; then it's almost like having iid data and in that case you don't worry about
+[0:42:55] and in that case you don't worry about all of this because you know you really
+[0:42:58] all of this because you know you really have a large sample size basically I
+[0:43:01] have a large sample size basically I mean you don't pay a price for
+[0:43:02] mean you don't pay a price for estimating the correlation and you know
+[0:43:05] estimating the correlation and you know you have a large sample size so this
+[0:43:09] you have a large sample size so this whole thing shouldn't matter that much
+[0:43:11] whole thing shouldn't matter that much it's basically when you have a large
+[0:43:13] it's basically when you have a large intracluster correlation that you have
+[0:43:15] intracluster correlation that you have very little information that you have to
+[0:43:17] very little information that you have to worry what what was the correlation in
+[0:43:19] worry what what was the correlation in your simulation
+[0:43:22] your simulation the intracluster correlation I mean I
+[0:43:24] the intracluster correlation I mean I don't know how you simulated the data
+[0:43:26] don't know how you simulated the data exactly
+[0:43:26] exactly &gt;&gt; so so fun you ask this question I uh
+[0:43:32] &gt;&gt; so so fun you ask this question I uh Yeah.
+[0:43:32] Yeah. &gt;&gt; Yeah. Okay.
+[0:43:33] &gt;&gt; Yeah. Okay. &gt;&gt; But uh I
+[0:43:35] &gt;&gt; But uh I &gt;&gt; I I'll check and get back.
+[0:43:38] &gt;&gt; I I'll check and get back. &gt;&gt; Yeah.
+[0:43:40] &gt;&gt; Yeah. &gt;&gt; But but yeah. Yeah. Yeah. Yeah. Your
+[0:43:41] &gt;&gt; But but yeah. Yeah. Yeah. Yeah. Your view is
+[0:43:42] view is &gt;&gt; I mean because it's not just the fact
+[0:43:43] &gt;&gt; I mean because it's not just the fact that you have few clusters. It's the
+[0:43:46] that you have few clusters. It's the fact that you have few clusters and
+[0:43:48] fact that you have few clusters and there's a huge intracluster correlation
+[0:43:51] there's a huge intracluster correlation because intuitively if the clusters if
+[0:43:54] because intuitively if the clusters if the individuals within clusters are are
+[0:43:57] the individuals within clusters are are independent that's it. you know it's
+[0:43:59] independent that's it. you know it's like you have a large sample size
+[0:44:01] like you have a large sample size &gt;&gt; no longer
+[0:44:03] &gt;&gt; no longer &gt;&gt; problematic. Yeah, thanks for that
+[0:44:05] &gt;&gt; problematic. Yeah, thanks for that question.
+[0:44:06] question. &gt;&gt; So uh okay so maybe we can move on.
+[0:44:10] &gt;&gt; So uh okay so maybe we can move on. There's actually something interesting
+[0:44:11] There's actually something interesting about what's uh about actually the
+[0:44:15] about what's uh about actually the proposed under the um uh like correctly
+[0:44:20] proposed under the um uh like correctly specified model you know you actually uh
+[0:44:24] specified model you know you actually uh but I guess maybe next slides will I
+[0:44:27] but I guess maybe next slides will I guess uh we'll have a
+[0:44:31] guess uh we'll have a some okay so um if you think about the
+[0:44:36] some okay so um if you think about the robust method that we proposed There is
+[0:44:40] robust method that we proposed There is actually some data not may not be used
+[0:44:42] actually some data not may not be used in the estimator. Uh the robustness is
+[0:44:46] in the estimator. Uh the robustness is achieved by centering the li term but
+[0:44:50] achieved by centering the li term but doing so may lead to certain data not
+[0:44:52] doing so may lead to certain data not used because certain elements when when
+[0:44:55] used because certain elements when when actually zero so the whole thing like
+[0:44:58] actually zero so the whole thing like the whole term will actually cancel out
+[0:45:00] the whole term will actually cancel out so it's that the data will not be used.
+[0:45:03] so it's that the data will not be used. So when you have uh like t- minus one
+[0:45:06] So when you have uh like t- minus one sequence and then you know uh the weight
+[0:45:10] sequence and then you know uh the weight is not trimally depend uh dependent and
+[0:45:13] is not trimally depend uh dependent and under the instantaneous treatment effect
+[0:45:15] under the instantaneous treatment effect model then you can actually show that
+[0:45:17] model then you can actually show that the centering time is zero for all
+[0:45:19] the centering time is zero for all cluster that are treated on the tree
+[0:45:21] cluster that are treated on the tree because you have basically like when
+[0:45:23] because you have basically like when clusters all cluster are treated at that
+[0:45:26] clusters all cluster are treated at that time point like you know uh your um x is
+[0:45:30] time point like you know uh your um x is zero and then your centering time source
+[0:45:33] zero and then your centering time source zero. So, so, so basically and they they
+[0:45:35] zero. So, so, so basically and they they are all treated with the like it's one
+[0:45:38] are all treated with the like it's one minus one basically. So, so you actually
+[0:45:41] minus one basically. So, so you actually have some clusters that actually does
+[0:45:43] have some clusters that actually does not enter. Um, but that actually doesn't
+[0:45:47] not enter. Um, but that actually doesn't matter. Well, in in a way uh so you
+[0:45:51] matter. Well, in in a way uh so you might think this is uh actually losing
+[0:45:53] might think this is uh actually losing some information but if you are just
+[0:45:56] some information but if you are just looking at the contrast model this is
+[0:45:59] looking at the contrast model this is actually what's uh the information is
+[0:46:02] actually what's uh the information is actually not relevant to the contrast
+[0:46:04] actually not relevant to the contrast model. So you actually don't see
+[0:46:06] model. So you actually don't see efficiency loss compared to LMLM
+[0:46:09] efficiency loss compared to LMLM actually uses this data but LMI actually
+[0:46:12] actually uses this data but LMI actually even they use data but they actually
+[0:46:15] even they use data but they actually have additional time specific parameters
+[0:46:17] have additional time specific parameters in the AM pass. So you actually have
+[0:46:19] in the AM pass. So you actually have more parameters to estimates. So I just
+[0:46:23] more parameters to estimates. So I just want to select this observation. So next
+[0:46:27] want to select this observation. So next slide please.
+[0:46:29] slide please. Okay. The second simulation setting is
+[0:46:32] Okay. The second simulation setting is uh have similarities in uh the setting
+[0:46:36] uh have similarities in uh the setting one. But I also uh you know include a
+[0:46:40] one. But I also uh you know include a precision variable that is that could be
+[0:46:44] precision variable that is that could be um you know imbalance by chance. And
+[0:46:48] um you know imbalance by chance. And then the precision variables actually
+[0:46:50] then the precision variables actually have a nonlinear effects uh with time.
+[0:46:54] have a nonlinear effects uh with time. And then we actually use a working model
+[0:46:57] And then we actually use a working model that includes only linear function of
+[0:47:00] that includes only linear function of the precision variable which is uh uh
+[0:47:03] the precision variable which is uh uh which is misspecified.
+[0:47:05] which is misspecified. This is actually um the simulation
+[0:47:07] This is actually um the simulation setting under which the uh graph that I
+[0:47:10] setting under which the uh graph that I showed before uh was drawn. So next
+[0:47:12] showed before uh was drawn. So next slide please.
+[0:47:16] slide please. So you're basically going to see like
+[0:47:18] So you're basically going to see like the M is uh specify in this case because
+[0:47:21] the M is uh specify in this case because we don't uh correctly specify how the
+[0:47:25] we don't uh correctly specify how the precision variable is actually related
+[0:47:27] precision variable is actually related to the outcome. Uh and then you well you
+[0:47:31] to the outcome. Uh and then you well you see spice is relatively small because it
+[0:47:34] see spice is relatively small because it average out but then the standard error
+[0:47:36] average out but then the standard error is really huge and then the model
+[0:47:38] is really huge and then the model coverage uh uh of the um sort of uh
+[0:47:44] coverage uh uh of the um sort of uh confidence interval is really low. But
+[0:47:46] confidence interval is really low. But in our case, we can still maintain a
+[0:47:48] in our case, we can still maintain a very um tight um uh standard error and
+[0:47:53] very um tight um uh standard error and also well performed contesting
+[0:47:58] this.
+[0:48:05] Okay. Yeah. And then we we apply to uh the trial that actually um well for uh
+[0:48:11] the trial that actually um well for uh basically to to look at like uh
+[0:48:15] basically to to look at like uh sexually transmitted uh disease outcomes
+[0:48:18] sexually transmitted uh disease outcomes and then we have 22 clusters, five time
+[0:48:20] and then we have 22 clusters, five time points and then the baseline cluster
+[0:48:22] points and then the baseline cluster size they are actually clinics and then
+[0:48:24] size they are actually clinics and then the size is quite a bit uh and in this
+[0:48:29] the size is quite a bit uh and in this data actually chance in violence the
+[0:48:32] data actually chance in violence the large cluster size tends to cross over
+[0:48:35] large cluster size tends to cross over sooner and then uh we compare the boost
+[0:48:38] sooner and then uh we compare the boost methods uh with two uh linear mix model
+[0:48:43] methods uh with two uh linear mix model with different um random events
+[0:48:46] with different um random events specification. So next slide please.
+[0:48:54] We do see that actually the estimates well here are the estimates and this uh
+[0:48:57] well here are the estimates and this uh uh model base like standard error and
+[0:49:00] uh model base like standard error and the uh confidence interval for the LM I
+[0:49:03] the uh confidence interval for the LM I actually uh go back the model base and
+[0:49:07] actually uh go back the model base and also the bootstrap confidence interval.
+[0:49:09] also the bootstrap confidence interval. Okay. [snorts] So you're going to see
+[0:49:12] Okay. [snorts] So you're going to see that first of all if you look at
+[0:49:14] that first of all if you look at compared to two LMM they actually have
+[0:49:16] compared to two LMM they actually have the same mean model but they have a
+[0:49:18] the same mean model but they have a different like ovarian structure and
+[0:49:20] different like ovarian structure and then the estimates actually well but
+[0:49:24] then the estimates actually well but although both are kind of small the
+[0:49:26] although both are kind of small the model based conference interf actually
+[0:49:28] model based conference interf actually do not cover the other estimates. So the
+[0:49:32] do not cover the other estimates. So the model base in this case like the the two
+[0:49:35] model base in this case like the the two LM actually
+[0:49:37] LM actually um shows bit of like different results.
+[0:49:41] um shows bit of like different results. Of course, I mean if we do bootstrap
+[0:49:43] Of course, I mean if we do bootstrap then you can actually see that like the
+[0:49:46] then you can actually see that like the um you know the model based compens
+[0:49:55] uh to you know well I I I guess give gives you a two
+[0:49:57] well I I I guess give gives you a two scar conf but the proposed methods
+[0:50:00] scar conf but the proposed methods actually uh do
+[0:50:04] actually uh do have a have a higher SC but this is also
+[0:50:07] have a have a higher SC but this is also um you know
+[0:50:10] um you know reflects
+[0:50:11] reflects better these sort of true variability.
+[0:50:16] better these sort of true variability. Uh well you might actually ask a
+[0:50:19] Uh well you might actually ask a question why you don't see uh I mean
+[0:50:22] question why you don't see uh I mean this trans imbalance but you don't see
+[0:50:24] this trans imbalance but you don't see actually very huge difference between
+[0:50:26] actually very huge difference between the estimate of LMM uh part of the
+[0:50:29] the estimate of LMM uh part of the reason is because uh uh the cluster size
+[0:50:33] reason is because uh uh the cluster size is in balance but it is not the uh
+[0:50:36] is in balance but it is not the uh precision variable so you basically
+[0:50:38] precision variable so you basically don't see that. So we have that much of
+[0:50:40] don't see that. So we have that much of the uh example confounded.
+[0:50:44] the uh example confounded. Next slides.
+[0:50:51] So to summarize um uh this work established designs varants of cluster
+[0:50:54] established designs varants of cluster randomized trials with oneway crossover
+[0:50:57] randomized trials with oneway crossover from controls to treatment at different
+[0:50:59] from controls to treatment at different time using conventional mix methods uh
+[0:51:02] time using conventional mix methods uh mix models. uh likelihood based
+[0:51:05] mix models. uh likelihood based inference for treatment contrast require
+[0:51:07] inference for treatment contrast require additional modeling for nuisance um mean
+[0:51:11] additional modeling for nuisance um mean uh like control cluster period uh mean
+[0:51:15] uh like control cluster period uh mean and also the coariance between
+[0:51:17] and also the coariance between observations
+[0:51:18] observations uh so I guess like which might be
+[0:51:22] uh so I guess like which might be problematic and we study a semi-prime
+[0:51:26] problematic and we study a semi-prime causal contrast model and just look at
+[0:51:28] causal contrast model and just look at the um contrast well it's like the um
+[0:51:32] the um contrast well it's like the um the average basically uh contrast and uh
+[0:51:36] the average basically uh contrast and uh develops um you know estimation and
+[0:51:39] develops um you know estimation and inference robust the specification of
+[0:51:42] inference robust the specification of distance functions and we do have a uh
+[0:51:46] distance functions and we do have a uh premutation based error estimator that
+[0:51:48] premutation based error estimator that targets the exact finite sample variance
+[0:51:52] targets the exact finite sample variance and possible misspecification
+[0:51:54] and possible misspecification and then we have also like um additional
+[0:51:57] and then we have also like um additional um correction for bias and um imbalance
+[0:52:04] um correction for bias and um imbalance uh by chance
+[0:52:07] uh by chance uh in like some randomizing like small
+[0:52:10] uh in like some randomizing like small number of clusters also handled by
+[0:52:12] number of clusters also handled by design outcome for the adjustments this
+[0:52:14] design outcome for the adjustments this work so that's concludes my presentation
+[0:52:18] work so that's concludes my presentation and thank you
+[0:52:24] &gt;&gt; so in terms of the ICC question because we have a random slope for time it's not
+[0:52:28] we have a random slope for time it's not a fixed number for all the time periods.
+[0:52:32] a fixed number for all the time periods. So if you think about cluster time
+[0:52:33] So if you think about cluster time periods, the ICC can range from very
+[0:52:36] periods, the ICC can range from very small which is closer to 0 let me check
+[0:52:40] small which is closer to 0 let me check uh closer to 0.06 all the way to 0.5. So
+[0:52:45] uh closer to 0.06 all the way to 0.5. So it's a range uh of intracluster
+[0:52:47] it's a range uh of intracluster correlation and then also the uh cluster
+[0:52:50] correlation and then also the uh cluster autocorrelation is also a range and it
+[0:52:54] autocorrelation is also a range and it can be uh as large as 0.5. That's the I
+[0:52:59] can be uh as large as 0.5. That's the I hope that answers the question about
+[0:53:00] hope that answers the question about ICC.
+[0:53:01] ICC. &gt;&gt; Yeah, that's okay. Thank you.
+[0:53:05] &gt;&gt; Yeah, that's okay. Thank you. &gt;&gt; As long as the audience raises the hand.
+[0:53:10] &gt;&gt; As long as the audience raises the hand. Um
+[0:53:21] well, so any any other questions uh for Gary and the F?
+[0:53:29] We still have like a few minutes for the questions.
+[0:53:38] Um well I I'll ask another question but I I I don't understand when you say your
+[0:53:41] I I I don't understand when you say your permutationbased inference
+[0:53:44] permutationbased inference um that you say it's for finite sample
+[0:53:47] um that you say it's for finite sample &gt;&gt; but how do I think I mean is is it
+[0:53:50] &gt;&gt; but how do I think I mean is is it because typically permutationbased is
+[0:53:53] because typically permutationbased is just for that sample it's not you know
+[0:53:56] just for that sample it's not you know it's not that I'm thinking of repeating
+[0:53:59] it's not that I'm thinking of repeating sampling okay and thinking of samples
+[0:54:03] sampling okay and thinking of samples always of the same size. I'm just
+[0:54:05] always of the same size. I'm just thinking that sample if I had had a
+[0:54:09] thinking that sample if I had had a different allocation of treatments.
+[0:54:12] different allocation of treatments. &gt;&gt; Uh so what kind of inference do I have
+[0:54:16] &gt;&gt; Uh so what kind of inference do I have to think about here? I mean what is the
+[0:54:19] to think about here? I mean what is the the frequent the the frequentist or is
+[0:54:22] the frequent the the frequentist or is there a frequentist interpretation of
+[0:54:24] there a frequentist interpretation of your inference?
+[0:54:25] your inference? &gt;&gt; Yeah. Okay. So I I guess the quick
+[0:54:29] &gt;&gt; Yeah. Okay. So I I guess the quick answer to this is uh I think that might
+[0:54:33] answer to this is uh I think that might well but first of all what we say per
+[0:54:36] well but first of all what we say per permutation basis actually we use a
+[0:54:39] permutation basis actually we use a permutation argument in well uh to well
+[0:54:45] permutation argument in well uh to well I I guess we this is an average
+[0:54:47] I I guess we this is an average basically like the the the um the exact
+[0:54:50] basically like the the the um the exact closed form estimator but the like when
+[0:54:53] closed form estimator but the like when you take the average you're taking
+[0:54:55] you take the average you're taking average for the whole factor of X which
+[0:55:00] average for the whole factor of X which is which has a certain permutation
+[0:55:02] is which has a certain permutation distribution. So we actually just uh
+[0:55:04] distribution. So we actually just uh replace this expectation by the by all
+[0:55:08] replace this expectation by the by all the different permutations. So, so this
+[0:55:10] the different permutations. So, so this is this is the way we had to make this
+[0:55:14] is this is the way we had to make this &gt;&gt; but but not actually using this as the
+[0:55:17] &gt;&gt; but but not actually using this as the usual.
+[0:55:18] usual. &gt;&gt; Okay.
+[0:55:19] &gt;&gt; Okay. &gt;&gt; Yeah. Yeah. Yeah.
+[0:55:21] &gt;&gt; Yeah. Yeah. Yeah. &gt;&gt; Yeah.
+[0:55:22] &gt;&gt; Yeah. &gt;&gt; Thank you.
+[0:55:23] &gt;&gt; Thank you. &gt;&gt; Um any other questions?
+[0:55:27] &gt;&gt; Um any other questions? &gt;&gt; Um if there's no question then let's
+[0:55:29] &gt;&gt; Um if there's no question then let's thank our speaker and Gary again for the
+[0:55:38] thank you all for joining uh this center. So, um going to end now. Um
+[0:55:41] center. So, um going to end now. Um thank you. Thank you. Bye. Bye.

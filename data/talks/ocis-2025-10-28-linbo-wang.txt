@@ -1,0 +1,1550 @@
+[0:00:06] Hi everyone, welcome to a new week of online cousin inference seminar. So
+[0:00:08] online cousin inference seminar. So today we are very pleased to have
+[0:00:10] today we are very pleased to have professor Limbo Wong from University of
+[0:00:13] professor Limbo Wong from University of Toronto to present the synthetic
+[0:00:16] Toronto to present the synthetic instrument from sparse association to
+[0:00:19] instrument from sparse association to sparse causation. So we also have the
+[0:00:21] sparse causation. So we also have the collaborator uh Dinka Wong um to handle
+[0:00:23] collaborator uh Dinka Wong um to handle some of the questions. Um we also have
+[0:00:26] some of the questions. Um we also have professor from Chan University as our
+[0:00:30] professor from Chan University as our discussant. So the questions today will
+[0:00:32] discussant. So the questions today will be handled by Sarah. So Sarah, do you
+[0:00:35] be handled by Sarah. So Sarah, do you want to introduce this a little bit?
+[0:00:37] want to introduce this a little bit? &gt;&gt; Yeah, I just wanted to remind you to
+[0:00:39] &gt;&gt; Yeah, I just wanted to remind you to please use the Q&amp;A section instead of
+[0:00:41] please use the Q&amp;A section instead of the chat to ask the questions and then
+[0:00:44] the chat to ask the questions and then Dinkke will be answering them while
+[0:00:46] Dinkke will be answering them while you're while during the talk and in the
+[0:00:48] you're while during the talk and in the end of the talk if there will be still
+[0:00:50] end of the talk if there will be still some questions maybe we can discuss them
+[0:00:51] some questions maybe we can discuss them also with Lingbo. So
+[0:00:55] also with Lingbo. So thank you for this and then I wanted to
+[0:00:56] thank you for this and then I wanted to invite Limbo to start the presentation.
+[0:00:59] invite Limbo to start the presentation. &gt;&gt; Okay, great. Let me share my screen. Uh
+[0:01:04] &gt;&gt; Okay, great. Let me share my screen. Uh okay, I think it's this one.
+[0:01:13] Okay. Uh this is look good. &gt;&gt; Yes.
+[0:01:14] &gt;&gt; Yes. &gt;&gt; Okay,
+[0:01:15] &gt;&gt; Okay, &gt;&gt; this is good.
+[0:01:15] &gt;&gt; this is good. &gt;&gt; Great. All right. Uh great. So uh thank
+[0:01:18] &gt;&gt; Great. All right. Uh great. So uh thank you very much uh for the introduction
+[0:01:20] you very much uh for the introduction and invitation. I'm very pleased to be
+[0:01:22] and invitation. I'm very pleased to be here. I think for the second time uh to
+[0:01:24] here. I think for the second time uh to share my uh ongoing work uh on causal
+[0:01:27] share my uh ongoing work uh on causal inference with uh high or multivaried
+[0:01:30] inference with uh high or multivaried data.
+[0:01:32] data. So this is based on joint work with uh
+[0:01:34] So this is based on joint work with uh Dinkotang at University of Ottawa who
+[0:01:37] Dinkotang at University of Ottawa who will be at Q&amp;A with us today and my
+[0:01:39] will be at Q&amp;A with us today and my colleague Dhan Kong at University of
+[0:01:41] colleague Dhan Kong at University of Toronto.
+[0:01:43] Toronto. So to get things started uh I would like
+[0:01:45] So to get things started uh I would like to uh first introduce our friend Zoe
+[0:01:48] to uh first introduce our friend Zoe here who is a biologist and an expert in
+[0:01:51] here who is a biologist and an expert in mouse research and Zoe is particularly
+[0:01:54] mouse research and Zoe is particularly interested in estimating the
+[0:01:57] interested in estimating the relationship between gene expressions
+[0:01:59] relationship between gene expressions and mouse body weight. Now specifically
+[0:02:01] and mouse body weight. Now specifically the scientific question she wants to
+[0:02:03] the scientific question she wants to answer is um when it comes to regulating
+[0:02:07] answer is um when it comes to regulating the mouse body weight what are the key
+[0:02:09] the mouse body weight what are the key players among the thousands of genes uh
+[0:02:12] players among the thousands of genes uh that uh we can measure in a in a mouse.
+[0:02:15] that uh we can measure in a in a mouse. So to answer this data, she collects
+[0:02:17] So to answer this data, she collects expression data on 3,000 genes from 300
+[0:02:20] expression data on 3,000 genes from 300 m. And based on her biological
+[0:02:23] m. And based on her biological knowledge, uh she's confident to say
+[0:02:26] knowledge, uh she's confident to say that only a subset of these genes will
+[0:02:29] that only a subset of these genes will be important for regulating the mouse
+[0:02:31] be important for regulating the mouse body weight. Okay. So she has this data
+[0:02:35] body weight. Okay. So she has this data and now she needs to run analysis to uh
+[0:02:38] and now she needs to run analysis to uh find out what these genes are. So she's
+[0:02:41] find out what these genes are. So she's she doesn't have a lot of background in
+[0:02:43] she doesn't have a lot of background in statistics. So instead what she did is
+[0:02:45] statistics. So instead what she did is uh she took a crash course in
+[0:02:47] uh she took a crash course in statistical learning and from this crash
+[0:02:50] statistical learning and from this crash course she found this one method that's
+[0:02:52] course she found this one method that's particularly suitable for this kind of
+[0:02:54] particularly suitable for this kind of problems where you have large p small a
+[0:02:56] problems where you have large p small a and you have a sparity assumption
+[0:02:59] and you have a sparity assumption and then this is commonly known as a
+[0:03:01] and then this is commonly known as a lasso model right so you first regress
+[0:03:04] lasso model right so you first regress your outcome which is a body weight here
+[0:03:06] your outcome which is a body weight here on this gene expressions and based on
+[0:03:08] on this gene expressions and based on the output from the lasso and she can
+[0:03:11] the output from the lasso and she can conclude that genes xyz are important
+[0:03:13] conclude that genes xyz are important for regulation of mouse body weight and
+[0:03:16] for regulation of mouse body weight and these genes XYZ will correspond to the
+[0:03:18] these genes XYZ will correspond to the genes that have non zero coefficients in
+[0:03:20] genes that have non zero coefficients in the model.
+[0:03:23] the model. So of course for this audience there's
+[0:03:24] So of course for this audience there's no need to say that uh this is uh quite
+[0:03:27] no need to say that uh this is uh quite a problematic approach right in
+[0:03:29] a problematic approach right in particular there can be some confounders
+[0:03:31] particular there can be some confounders that will confound the relationship
+[0:03:33] that will confound the relationship between G expressions and the mouse body
+[0:03:35] between G expressions and the mouse body weight right so these confounders can be
+[0:03:37] weight right so these confounders can be for example the diet this mouse is uh
+[0:03:40] for example the diet this mouse is uh having or whether or not they are active
+[0:03:43] having or whether or not they are active or some batch effects right we know that
+[0:03:45] or some batch effects right we know that this can introduce spirious correlations
+[0:03:48] this can introduce spirious correlations between gene expressions and the mouse
+[0:03:50] between gene expressions and the mouse body weight and a lot of these
+[0:03:51] body weight and a lot of these confounders we are being honest will be
+[0:03:54] confounders we are being honest will be latent.
+[0:03:56] latent. So uh the association that Zoe observed
+[0:03:59] So uh the association that Zoe observed in the data between gene expressions and
+[0:04:02] in the data between gene expressions and the body weight will come from two main
+[0:04:04] the body weight will come from two main sources. So one is what we call
+[0:04:06] sources. So one is what we call causation right some of the genes will
+[0:04:08] causation right some of the genes will actually be causal uh
+[0:04:11] actually be causal uh genes for this uh body weight. So we
+[0:04:14] genes for this uh body weight. So we might there some part of this
+[0:04:16] might there some part of this association might to might be due to
+[0:04:18] association might to might be due to this uh true causation and another part
+[0:04:21] this uh true causation and another part of this may be due to this uh
+[0:04:23] of this may be due to this uh confounding right some latent factors uh
+[0:04:26] confounding right some latent factors uh may introduce a spirious correlations
+[0:04:28] may introduce a spirious correlations between g expressions and body weight so
+[0:04:32] between g expressions and body weight so this of course brings up the well-known
+[0:04:35] this of course brings up the well-known problem that causation is not
+[0:04:36] problem that causation is not association but I want to emphasize that
+[0:04:39] association but I want to emphasize that in this problem there's a second layer
+[0:04:41] in this problem there's a second layer of uh problem which is uh uh remember
+[0:04:46] of uh problem which is uh uh remember our friend Zoe here is willing to make a
+[0:04:48] our friend Zoe here is willing to make a sparity assumption but the sparity
+[0:04:50] sparity assumption but the sparity assumption is on the causation right in
+[0:04:53] assumption is on the causation right in in that only a subset of the strings
+[0:04:56] in that only a subset of the strings will be will cause affect the body
+[0:04:58] will be will cause affect the body weight
+[0:05:00] weight whereas our lasso model is actually
+[0:05:03] whereas our lasso model is actually making this assumption of sparse
+[0:05:05] making this assumption of sparse association
+[0:05:07] association so the difference between them is the
+[0:05:09] so the difference between them is the confounding factor but if we think about
+[0:05:12] confounding factor but if we think about this problem Right? If this confounders
+[0:05:14] this problem Right? If this confounders come from some environmental factors
+[0:05:16] come from some environmental factors such as, you know, temperature or
+[0:05:18] such as, you know, temperature or humidity in the lab, something like
+[0:05:20] humidity in the lab, something like this, if they affect the expressions of
+[0:05:23] this, if they affect the expressions of genes, then this is likely to going to
+[0:05:25] genes, then this is likely to going to affect the expressions of all the genes
+[0:05:28] affect the expressions of all the genes or at least a majority of the genes. And
+[0:05:31] or at least a majority of the genes. And if they also affect body weight, then
+[0:05:33] if they also affect body weight, then this is going to induce spirit
+[0:05:35] this is going to induce spirit correlations between every one of these
+[0:05:38] correlations between every one of these gene expressions or every one of these
+[0:05:39] gene expressions or every one of these exposure and outcome.
+[0:05:42] exposure and outcome. So the association due to this
+[0:05:43] So the association due to this confounding is typically quite dense.
+[0:05:47] confounding is typically quite dense. So what less means for us is the
+[0:05:50] So what less means for us is the assumption of sparse causation is
+[0:05:53] assumption of sparse causation is usually not the same as the assumption
+[0:05:55] usually not the same as the assumption of sparse association. And in fact if
+[0:05:58] of sparse association. And in fact if the confounding stance these two
+[0:05:59] the confounding stance these two assumption will not be compatible with
+[0:06:01] assumption will not be compatible with each other.
+[0:06:03] each other. So what it means for this lasso output
+[0:06:05] So what it means for this lasso output is it's well known that this is not
+[0:06:07] is it's well known that this is not going to give us the right causation.
+[0:06:09] going to give us the right causation. But in this case it's not even going to
+[0:06:12] But in this case it's not even going to give us the right association because
+[0:06:14] give us the right association because it's assuming that the assoc association
+[0:06:17] it's assuming that the assoc association sparse whereas in this case uh we know
+[0:06:20] sparse whereas in this case uh we know that it's not
+[0:06:23] that it's not right. So this uh here's a quick recap
+[0:06:25] right. So this uh here's a quick recap of the problem here which is uh so our
+[0:06:28] of the problem here which is uh so our friend Zoe is a willing assume that
+[0:06:29] friend Zoe is a willing assume that causation sparse in that not all the
+[0:06:32] causation sparse in that not all the genes will have uh uh will regulate body
+[0:06:36] genes will have uh uh will regulate body weight
+[0:06:38] weight and she's also happy to assume that
+[0:06:39] and she's also happy to assume that everything is nice and linear. Okay,
+[0:06:41] everything is nice and linear. Okay, this can be a simplifying assumption but
+[0:06:43] this can be a simplifying assumption but uh in many uh cases apply people are
+[0:06:47] uh in many uh cases apply people are quite happy with just a similar models
+[0:06:49] quite happy with just a similar models and uh go away. So now there are two uh
+[0:06:54] and uh go away. So now there are two uh main questions here. First is about
+[0:06:56] main questions here. First is about identification. But is it even possible
+[0:06:58] identification. But is it even possible to estimate causal effects in this case
+[0:07:02] to estimate causal effects in this case where you only have the measurements of
+[0:07:04] where you only have the measurements of the exposures and the outcome
+[0:07:07] the exposures and the outcome and nothing else?
+[0:07:09] and nothing else? And if it is uh possible or if the uh
+[0:07:13] And if it is uh possible or if the uh causal effects is identifiable then is
+[0:07:16] causal effects is identifiable then is there a simple estimator that will allow
+[0:07:18] there a simple estimator that will allow her to estimate this causal effects.
+[0:07:21] her to estimate this causal effects. So these will be the two questions that
+[0:07:22] So these will be the two questions that we're going to focus on today.
+[0:07:25] we're going to focus on today. So before doing that uh let's take a
+[0:07:27] So before doing that uh let's take a step back and look at uh and look at the
+[0:07:31] step back and look at uh and look at the uh setup here. So here uh we're
+[0:07:35] uh setup here. So here uh we're considering a problem where we have uh
+[0:07:38] considering a problem where we have uh multivaried exposure a pdimensional
+[0:07:40] multivaried exposure a pdimensional exposure let's say x1 to xp and a scalar
+[0:07:43] exposure let's say x1 to xp and a scalar y. So you can think of these exposures
+[0:07:45] y. So you can think of these exposures as a gene expressions and outcome as a
+[0:07:48] as a gene expressions and outcome as a body weight. So this is known as the
+[0:07:51] body weight. So this is known as the multicourse setting in the literature
+[0:07:52] multicourse setting in the literature and has been uh uh I think taken off in
+[0:07:56] and has been uh uh I think taken off in the uh last decade.
+[0:08:04] Can I move this? Okay. Yes, I can move this. Okay. And our goal here will be uh
+[0:08:08] this. Okay. And our goal here will be uh going to try to estimate the causal
+[0:08:10] going to try to estimate the causal effects of this exposures X1 through XP
+[0:08:12] effects of this exposures X1 through XP on Y. And to do that we're going to
+[0:08:15] on Y. And to do that we're going to assume that we have a structure equation
+[0:08:16] assume that we have a structure equation model with independent error in that uh
+[0:08:19] model with independent error in that uh both the exposures x1 through xp and y
+[0:08:22] both the exposures x1 through xp and y will be affected by some confounders e
+[0:08:25] will be affected by some confounders e that uh we assume to be latent. So we
+[0:08:28] that uh we assume to be latent. So we don't observe this e.
+[0:08:30] don't observe this e. So here uh this e we assume this to be q
+[0:08:34] So here uh this e we assume this to be q dimensional and q is a number that's
+[0:08:35] dimensional and q is a number that's smaller than p.
+[0:08:37] smaller than p. Okay. And to make things even simpler,
+[0:08:40] Okay. And to make things even simpler, we're going to assume that we have a
+[0:08:42] we're going to assume that we have a linear structure equation models, right?
+[0:08:44] linear structure equation models, right? In that everything is linear. We can
+[0:08:46] In that everything is linear. We can talk about how to relax the linearity
+[0:08:48] talk about how to relax the linearity assumptions later, but to focus on the
+[0:08:50] assumptions later, but to focus on the main idea, let's first look at a case
+[0:08:52] main idea, let's first look at a case where everything's nice and linear.
+[0:08:55] where everything's nice and linear. And so this will come back to this
+[0:08:58] And so this will come back to this canonical problem of uh observational
+[0:09:00] canonical problem of uh observational studies with unmeasured confounding. And
+[0:09:03] studies with unmeasured confounding. And then we know that due to this measured
+[0:09:05] then we know that due to this measured confounding in general this causal
+[0:09:07] confounding in general this causal effects beta will not be identifiable
+[0:09:10] effects beta will not be identifiable but even if we have this uh linear
+[0:09:12] but even if we have this uh linear models
+[0:09:15] models so before talking about uh our approach
+[0:09:17] so before talking about uh our approach so let me first reveal what are the
+[0:09:19] so let me first reveal what are the canonical approaches to deal with this
+[0:09:21] canonical approaches to deal with this problem right so because this is a
+[0:09:23] problem right so because this is a problem with a magic confounding so I
+[0:09:26] problem with a magic confounding so I think the most celebrated approach is
+[0:09:28] think the most celebrated approach is soal instrumental variables
+[0:09:30] soal instrumental variables right so if we want to estimate causal
+[0:09:32] right so if we want to estimate causal effect of X1 or Y here then this
+[0:09:35] effect of X1 or Y here then this approach will tell you go and find an
+[0:09:37] approach will tell you go and find an instrument Z1. If you can find such an
+[0:09:40] instrument Z1. If you can find such an instrument then it's easy to estimate
+[0:09:42] instrument then it's easy to estimate this uh beta one you can just run two s
+[0:09:46] this uh beta one you can just run two s squares right in the first stage you
+[0:09:48] squares right in the first stage you regress your x1 your exposure the first
+[0:09:51] regress your x1 your exposure the first exposure on your instrument you get your
+[0:09:53] exposure on your instrument you get your x1 hat in the second stage you regress
+[0:09:56] x1 hat in the second stage you regress your y on x1 hat to get a consistent
+[0:09:59] your y on x1 hat to get a consistent estimate of beta one right so this is u
+[0:10:03] estimate of beta one right so this is u this approach has been for more than a
+[0:10:05] this approach has been for more than a century now okay Um but there's also a
+[0:10:10] century now okay Um but there's also a caveat to this approach is uh once you
+[0:10:12] caveat to this approach is uh once you have instrument then uh it's great right
+[0:10:15] have instrument then uh it's great right uh as long as you believe in the linear
+[0:10:17] uh as long as you believe in the linear models then you can just run two linear
+[0:10:19] models then you can just run two linear regressions and you'll be fine
+[0:10:22] regressions and you'll be fine but in practice it can be quite
+[0:10:24] but in practice it can be quite challenging to find the instrument and
+[0:10:27] challenging to find the instrument and uh remember in this case right because
+[0:10:29] uh remember in this case right because we have P treatments so in general we
+[0:10:31] we have P treatments so in general we need to find P instruments right so
+[0:10:34] need to find P instruments right so finding one instrument can already be
+[0:10:36] finding one instrument can already be quite challenging and finding P
+[0:10:37] quite challenging and finding P instruments can be uh quite non-trivial
+[0:10:47] and an alternative approach uh for this uh latent confounding that's recently
+[0:10:48] uh latent confounding that's recently taken off uh uh in the caus community is
+[0:10:52] taken off uh uh in the caus community is called native controls right so there's
+[0:10:54] called native controls right so there's some more general versions but I'm
+[0:10:56] some more general versions but I'm looking at the simplest version where uh
+[0:10:58] looking at the simplest version where uh the basic assumption here says
+[0:11:01] the basic assumption here says we assume we know a priority there are
+[0:11:04] we assume we know a priority there are some treatments that have zero effects
+[0:11:07] some treatments that have zero effects on outcome
+[0:11:09] on outcome So suppose the outcome the confounded
+[0:11:11] So suppose the outcome the confounded use is of Q dimensional then this
+[0:11:14] use is of Q dimensional then this negative control approach requires you
+[0:11:16] negative control approach requires you to find Q treatments or Q exposures to
+[0:11:20] to find Q treatments or Q exposures to have zero effects on the outcome. So for
+[0:11:23] have zero effects on the outcome. So for Zoe, this will requires uh her to have
+[0:11:26] Zoe, this will requires uh her to have some prior knowledge based on her
+[0:11:30] some prior knowledge based on her biological backgrounds telling us this Q
+[0:11:34] biological backgrounds telling us this Q uh genes will have no effect on outcome
+[0:11:36] uh genes will have no effect on outcome on boss body weight.
+[0:11:40] on boss body weight. But this assumption uh in practice can
+[0:11:43] But this assumption uh in practice can sometimes also be quite demanding. For
+[0:11:45] sometimes also be quite demanding. For example, our friend Zoe may say, "But I
+[0:11:47] example, our friend Zoe may say, "But I don't know which genes have zero
+[0:11:49] don't know which genes have zero effects." But this is what she wants to
+[0:11:50] effects." But this is what she wants to find out.
+[0:11:53] find out. All she can say is some of the genes
+[0:11:55] All she can say is some of the genes have zero effects but she doesn't know
+[0:11:58] have zero effects but she doesn't know which one.
+[0:12:00] which one. Right? So this brings up back to the
+[0:12:02] Right? So this brings up back to the problem of causal inference under sparse
+[0:12:04] problem of causal inference under sparse causation. And then these are our uh two
+[0:12:08] causation. And then these are our uh two main results. So the first uh result is
+[0:12:10] main results. So the first uh result is about identification. It says that under
+[0:12:12] about identification. It says that under some additional regulatory conditions uh
+[0:12:14] some additional regulatory conditions uh which I'm uh going to talk about later
+[0:12:17] which I'm uh going to talk about later uh the cause effects identifiable if and
+[0:12:21] uh the cause effects identifiable if and only if this uh cause effect itself beta
+[0:12:24] only if this uh cause effect itself beta is sparse enough
+[0:12:26] is sparse enough and how sparse we needed to uh the L0
+[0:12:29] and how sparse we needed to uh the L0 norm so number of nonzero elements in
+[0:12:31] norm so number of nonzero elements in beta to be less than or equal to p minus
+[0:12:34] beta to be less than or equal to p minus q minus one. So p is the number of uh
+[0:12:37] q minus one. So p is the number of uh exposures. Q is the number of is the
+[0:12:40] exposures. Q is the number of is the dimension of the measured compound u.
+[0:12:44] dimension of the measured compound u. And if we do have such a sparse causal
+[0:12:48] And if we do have such a sparse causal effect then we uh also provide a simple
+[0:12:52] effect then we uh also provide a simple estimation procedure that will allow you
+[0:12:54] estimation procedure that will allow you to find a consistent estimator of the
+[0:12:56] to find a consistent estimator of the causal effects. So these are just our
+[0:12:59] causal effects. So these are just our two uh main results.
+[0:13:02] two uh main results. Uh I don't know if there are any
+[0:13:03] Uh I don't know if there are any questions. Uh okay, looks like it's
+[0:13:05] questions. Uh okay, looks like it's okay.
+[0:13:07] okay. Okay. So, uh right. So, if we look at
+[0:13:10] Okay. So, uh right. So, if we look at this result for a second, uh we realize
+[0:13:13] this result for a second, uh we realize that this is uh making a pretty bold
+[0:13:16] that this is uh making a pretty bold claim, right? So, we're saying that uh
+[0:13:19] claim, right? So, we're saying that uh remember we only have access to the
+[0:13:21] remember we only have access to the exposures and outcome, right? Uh and the
+[0:13:24] exposures and outcome, right? Uh and the only or the key assumption we're making
+[0:13:26] only or the key assumption we're making here is just a sparity assumption which
+[0:13:28] here is just a sparity assumption which many people seem to believe that it's
+[0:13:30] many people seem to believe that it's quite weak.
+[0:13:32] quite weak. But we can use this uh to deal with the
+[0:13:35] But we can use this uh to deal with the problem to uh of unmeasured confounding.
+[0:13:38] problem to uh of unmeasured confounding. We can get away with unmeasured
+[0:13:39] We can get away with unmeasured confounding by just using uh the spacy
+[0:13:43] confounding by just using uh the spacy assumption.
+[0:13:45] assumption. So this seems uh the claim seems to be
+[0:13:47] So this seems uh the claim seems to be uh pretty remarkable. So uh to first
+[0:13:51] uh pretty remarkable. So uh to first convince you that this is not entirely
+[0:13:53] convince you that this is not entirely magic uh let me first talk about uh this
+[0:13:56] magic uh let me first talk about uh this is actually identifiable.
+[0:13:59] is actually identifiable. So I'm going to focus on very simple
+[0:14:00] So I'm going to focus on very simple model where I only have three exposures
+[0:14:04] model where I only have three exposures and one latent confounder e and uh uh
+[0:14:08] and one latent confounder e and uh uh again our y is also scala. So we're
+[0:14:12] again our y is also scala. So we're going to assume linear models here but
+[0:14:13] going to assume linear models here but these are not crucial and our effect of
+[0:14:16] these are not crucial and our effect of interest or parameter of interest will
+[0:14:18] interest or parameter of interest will be uh beta 1 23. So these are the causal
+[0:14:21] be uh beta 1 23. So these are the causal effects of this x123 on y.
+[0:14:26] effects of this x123 on y. And the key assumption we're going to
+[0:14:27] And the key assumption we're going to make here is the sparse causation
+[0:14:29] make here is the sparse causation assumption. Right? The L0 norm of beta
+[0:14:31] assumption. Right? The L0 norm of beta is less than or equal to one. So in
+[0:14:33] is less than or equal to one. So in other words, among this three uh
+[0:14:36] other words, among this three uh potential causal effects, beta 1 to
+[0:14:38] potential causal effects, beta 1 to three, at most one of them is non zero,
+[0:14:41] three, at most one of them is non zero, but we don't know which one.
+[0:14:44] but we don't know which one. Okay. So this is the sparse causation
+[0:14:46] Okay. So this is the sparse causation assumption.
+[0:14:48] assumption. So this is a a pretty difficult problem.
+[0:14:51] So this is a a pretty difficult problem. So the strategy we're going to uh uh use
+[0:14:54] So the strategy we're going to uh uh use is the so-called voting strategy, right?
+[0:14:56] is the so-called voting strategy, right? We're not going to solve this problem by
+[0:14:58] We're not going to solve this problem by ourselves. Uh we're going to invite
+[0:15:00] ourselves. Uh we're going to invite three experts uh to help us solve
+[0:15:03] three experts uh to help us solve [snorts] this problem all together. So
+[0:15:05] [snorts] this problem all together. So this is a very popular strategy. We did
+[0:15:07] this is a very popular strategy. We did not invent this strategy. Uh I think uh
+[0:15:10] not invent this strategy. Uh I think uh I first learned about this strategy um
+[0:15:12] I first learned about this strategy um from my former PhD advisor Andrew Joe uh
+[0:15:15] from my former PhD advisor Andrew Joe uh in the context of traditional Chinese
+[0:15:17] in the context of traditional Chinese medicine and then um al so I think in
+[0:15:20] medicine and then um al so I think in the causal inference literature u the
+[0:15:22] the causal inference literature u the first time I saw it was from Zen's 2018
+[0:15:27] first time I saw it was from Zen's 2018 JSP paper um use voting strategy in the
+[0:15:30] JSP paper um use voting strategy in the context of invalid IBS
+[0:15:32] context of invalid IBS and I think this is a very powerful
+[0:15:34] and I think this is a very powerful strategy and so let me explain. So now
+[0:15:37] strategy and so let me explain. So now we have three experts for us and each of
+[0:15:40] we have three experts for us and each of these expert is going to assume that uh
+[0:15:43] these expert is going to assume that uh one of this beta is zero. Okay. And so
+[0:15:47] one of this beta is zero. Okay. And so first expert assume beta 1 is zero.
+[0:15:49] first expert assume beta 1 is zero. Second expert assume beta 2 is zero.
+[0:15:51] Second expert assume beta 2 is zero. Third aspert assume beta 3 is zero.
+[0:15:55] Third aspert assume beta 3 is zero. Now uh from this uh for each of these
+[0:15:59] Now uh from this uh for each of these aspects from the negative control
+[0:16:01] aspects from the negative control literature we know that for the first
+[0:16:03] literature we know that for the first aspect since he assumes that beta one is
+[0:16:06] aspect since he assumes that beta one is zero so she knows that the first
+[0:16:08] zero so she knows that the first treatment x1 is a negative control
+[0:16:10] treatment x1 is a negative control treatment and because our e here is also
+[0:16:13] treatment and because our e here is also one-dimensional so that information is
+[0:16:16] one-dimensional so that information is enough for him to uh derive the causal
+[0:16:19] enough for him to uh derive the causal effects for beta 2 and beta 3. So
+[0:16:22] effects for beta 2 and beta 3. So putting this together she will he will
+[0:16:25] putting this together she will he will be able to get a causal effect estimate
+[0:16:28] be able to get a causal effect estimate for the whole vector beta 1 beta 3 beta
+[0:16:30] for the whole vector beta 1 beta 3 beta beta 2 beta 3 uh which we call here beta
+[0:16:33] beta 2 beta 3 uh which we call here beta 2 expert one.
+[0:16:36] 2 expert one. Okay similarly the second aspert she
+[0:16:39] Okay similarly the second aspert she assumed that beta 2 is equal to zero. So
+[0:16:41] assumed that beta 2 is equal to zero. So she can use this information also to get
+[0:16:43] she can use this information also to get an estimate of the full uh causal effect
+[0:16:46] an estimate of the full uh causal effect uh vector
+[0:16:48] uh vector similar with beta 3 uh with the third
+[0:16:51] similar with beta 3 uh with the third expert.
+[0:16:54] expert. Okay. Now here comes our assumption. Our
+[0:16:55] Okay. Now here comes our assumption. Our assumption says at most one of this beta
+[0:16:58] assumption says at most one of this beta is non zero. Right? So now let's just
+[0:17:01] is non zero. Right? So now let's just assume that beta 3 is non zero. Okay. So
+[0:17:04] assume that beta 3 is non zero. Okay. So if this is the case then what will
+[0:17:07] if this is the case then what will happen is that the estimate from estate
+[0:17:09] happen is that the estimate from estate one will be very close to the true cause
+[0:17:11] one will be very close to the true cause effect the estimate from two will also
+[0:17:14] effect the estimate from two will also be very close to a true cause effect
+[0:17:16] be very close to a true cause effect because the assumptions they are making
+[0:17:18] because the assumptions they are making are correct
+[0:17:20] are correct but for expert 3 because he's making a
+[0:17:23] but for expert 3 because he's making a wrong assumption so it's likely that his
+[0:17:25] wrong assumption so it's likely that his estimate will be uh can be uh far away
+[0:17:29] estimate will be uh can be uh far away from the truth.
+[0:17:32] from the truth. So of course as uh outside as analysts
+[0:17:35] So of course as uh outside as analysts we don't observe this uh uh underlying
+[0:17:38] we don't observe this uh uh underlying truth right so all we observe will be
+[0:17:41] truth right so all we observe will be the estimates from the three experts
+[0:17:44] the estimates from the three experts this is all we obser have access to
+[0:17:46] this is all we obser have access to right we don't know which aspect is
+[0:17:47] right we don't know which aspect is correct which aspect is wrong
+[0:17:50] correct which aspect is wrong but our sparity assumption tells us that
+[0:17:54] but our sparity assumption tells us that in this case at most one of this as uh
+[0:17:58] in this case at most one of this as uh at most one of these beta is non zero
+[0:18:01] at most one of these beta is non zero which means
+[0:18:02] which means If we translate to here will tells us at
+[0:18:05] If we translate to here will tells us at most one of these expert can be
+[0:18:08] most one of these expert can be incorrect.
+[0:18:09] incorrect. So in other words at least two out of
+[0:18:11] So in other words at least two out of these three experts will be correct and
+[0:18:14] these three experts will be correct and they will give you the same cause effect
+[0:18:16] they will give you the same cause effect estimate.
+[0:18:18] estimate. So obvious strategy to uh pick among
+[0:18:21] So obvious strategy to uh pick among these experts is to use a voting
+[0:18:23] these experts is to use a voting strategy. Right? So in this case because
+[0:18:26] strategy. Right? So in this case because our spicy assumption tells us that the
+[0:18:30] our spicy assumption tells us that the majority among the experts are always
+[0:18:31] majority among the experts are always correct. So we can use let these experts
+[0:18:34] correct. So we can use let these experts vote against each other uh to figure out
+[0:18:37] vote against each other uh to figure out who is correct who is wrong. Right? So
+[0:18:40] who is correct who is wrong. Right? So the spy assumption here very
+[0:18:42] the spy assumption here very interestingly actually translates to the
+[0:18:45] interestingly actually translates to the assumption that the voting strategy will
+[0:18:48] assumption that the voting strategy will always work.
+[0:18:54] And in a general case uh I mean this can be make much more general uh uh so this
+[0:18:57] be make much more general uh uh so this in a general case we have P treatments
+[0:19:00] in a general case we have P treatments we have Q are major confounders then uh
+[0:19:03] we have Q are major confounders then uh what we show that is under some
+[0:19:05] what we show that is under some additional regulatory conditions in the
+[0:19:08] additional regulatory conditions in the uh specifically uh we're going to
+[0:19:11] uh specifically uh we're going to generalize this majority rule to a
+[0:19:13] generalize this majority rule to a so-called priority rule uh but these are
+[0:19:15] so-called priority rule uh but these are some details uh but we under assumptions
+[0:19:19] some details uh but we under assumptions [clears throat]
+[0:19:19] [clears throat] uh we're able to show that
+[0:19:23] uh we're able to show that [clears throat]
+[0:19:24] [clears throat] this uh cause effect cause effect of X
+[0:19:28] this uh cause effect cause effect of X on Y will be identifiable
+[0:19:31] on Y will be identifiable if at least Q + one uh treatment effects
+[0:19:34] if at least Q + one uh treatment effects are zero.
+[0:19:36] are zero. Okay. So uh this Q number Q + one is the
+[0:19:40] Okay. So uh this Q number Q + one is the short bound. This is the best you can
+[0:19:42] short bound. This is the best you can get, right? It's both necessary and
+[0:19:43] get, right? It's both necessary and sufficient.
+[0:19:45] sufficient. Uh so in other words, if you only have Q
+[0:19:48] Uh so in other words, if you only have Q treatment effects that are zero, then
+[0:19:50] treatment effects that are zero, then you cannot identify the cause of effect.
+[0:19:52] you cannot identify the cause of effect. And this makes sense because uh remember
+[0:19:55] And this makes sense because uh remember in the negative control setting, right?
+[0:19:58] in the negative control setting, right? In a case where you know who are the
+[0:20:01] In a case where you know who are the which are the uh negative control
+[0:20:04] which are the uh negative control treatments, in that case you need Q uh
+[0:20:09] treatments, in that case you need Q uh treatment effects to be zero. So now
+[0:20:12] treatment effects to be zero. So now we're in a case where we don't know
+[0:20:14] we're in a case where we don't know which humans have zero effects. So uh of
+[0:20:17] which humans have zero effects. So uh of course Q is not enough but Q plus one is
+[0:20:20] course Q is not enough but Q plus one is already enough. So this is why this is
+[0:20:23] already enough. So this is why this is necessarily not sufficient.
+[0:20:25] necessarily not sufficient. And I think what's more remarkable is
+[0:20:27] And I think what's more remarkable is that later we're going to show uh this
+[0:20:29] that later we're going to show uh this number this threshold is actually
+[0:20:31] number this threshold is actually testable from data. So in other words uh
+[0:20:34] testable from data. So in other words uh we can use data to tell us whether or
+[0:20:37] we can use data to tell us whether or not your causal effect is sparse enough
+[0:20:40] not your causal effect is sparse enough right? So you don't have to guess uh
+[0:20:42] right? So you don't have to guess uh something like this. Uh of course you
+[0:20:44] something like this. Uh of course you have to first tell me what Q is but
+[0:20:46] have to first tell me what Q is but after that I can use data to tell you
+[0:20:48] after that I can use data to tell you whether or not your cause effect is uh
+[0:20:51] whether or not your cause effect is uh sparse enough under of course under some
+[0:20:53] sparse enough under of course under some additional modeling assumptions
+[0:20:56] additional modeling assumptions and I also want to connect this result
+[0:20:59] and I also want to connect this result to the so-called multiply robust or
+[0:21:01] to the so-called multiply robust or double robust literature. Um I think
+[0:21:04] double robust literature. Um I think this is quite an interesting there's a
+[0:21:05] this is quite an interesting there's a quite interesting connection here. Um so
+[0:21:08] quite interesting connection here. Um so for I think for the audience here a lot
+[0:21:10] for I think for the audience here a lot of us are familiar with the so-called
+[0:21:12] of us are familiar with the so-called double robust or multiple robust
+[0:21:14] double robust or multiple robust estimation procedures right so in that
+[0:21:17] estimation procedures right so in that kind of procedures you commit to a
+[0:21:18] kind of procedures you commit to a single cause of model right for example
+[0:21:20] single cause of model right for example in double machine learning you commit to
+[0:21:22] in double machine learning you commit to the assumption of no amicure confounding
+[0:21:25] the assumption of no amicure confounding then you specify multiple observed data
+[0:21:28] then you specify multiple observed data models
+[0:21:30] models and in the end you say your estimator
+[0:21:32] and in the end you say your estimator will be uh consistent or or um the
+[0:21:36] will be uh consistent or or um the symptomic normal uh as long as any one
+[0:21:39] symptomic normal uh as long as any one of this observed data model is right and
+[0:21:41] of this observed data model is right and you don't need to know which one
+[0:21:44] you don't need to know which one but I think this uh our assumption our
+[0:21:47] but I think this uh our assumption our results here and in general any results
+[0:21:50] results here and in general any results using the sparity assumption can be
+[0:21:53] using the sparity assumption can be formulated as some sort of multiple
+[0:21:55] formulated as some sort of multiple robust identification results
+[0:21:58] robust identification results right so
+[0:22:00] right so which means this results robust under
+[0:22:03] which means this results robust under multiple causal models that involves the
+[0:22:06] multiple causal models that involves the unobserved data. So our identification
+[0:22:10] unobserved data. So our identification result or our identification formula
+[0:22:12] result or our identification formula will hold
+[0:22:14] will hold if the first Q uh treatment effect is
+[0:22:18] if the first Q uh treatment effect is zero or the next Q treatment effect zero
+[0:22:21] zero or the next Q treatment effect zero or any Q out of this P treatment effect
+[0:22:23] or any Q out of this P treatment effect are zero. Right? These are different
+[0:22:25] are zero. Right? These are different causal models but they all give us the
+[0:22:27] causal models but they all give us the same identification result. So I think
+[0:22:30] same identification result. So I think this is there's an interesting
+[0:22:31] this is there's an interesting connection or comparison with a multiple
+[0:22:34] connection or comparison with a multiple robust uh estimation literature.
+[0:22:38] robust uh estimation literature. Okay, let's aside um anyway so uh I
+[0:22:42] Okay, let's aside um anyway so uh I think voting is great uh especially for
+[0:22:44] think voting is great uh especially for sparity for sparse models.
+[0:22:48] sparity for sparse models. Um but uh we're only halfway uh through
+[0:22:51] Um but uh we're only halfway uh through so there must be some problems with
+[0:22:53] so there must be some problems with voting and I think a general problem
+[0:22:55] voting and I think a general problem with voting is uh uh uh it can be uh
+[0:23:00] with voting is uh uh uh it can be uh when when there are many experts then
+[0:23:03] when when there are many experts then the voting strategy can become uh quite
+[0:23:05] the voting strategy can become uh quite challenging uh both computationally and
+[0:23:08] challenging uh both computationally and statistically. So if we think about the
+[0:23:11] statistically. So if we think about the uh general case right we have uh P
+[0:23:15] uh general case right we have uh P treatments and the Q are metric
+[0:23:16] treatments and the Q are metric confounded. So in this case uh each
+[0:23:20] confounded. So in this case uh each aspert we need to assume that Q
+[0:23:22] aspert we need to assume that Q treatment effects are zero.
+[0:23:25] treatment effects are zero. So how many possible experts we can have
+[0:23:27] So how many possible experts we can have right we have P treatments each one
+[0:23:29] right we have P treatments each one assume Q is Q of flame is zero. So in
+[0:23:32] assume Q is Q of flame is zero. So in general we can have P choose the number
+[0:23:33] general we can have P choose the number of Q experts.
+[0:23:36] of Q experts. So if we want to actually do this uh
+[0:23:38] So if we want to actually do this uh voting procedure then we need to for
+[0:23:40] voting procedure then we need to for each of these expert we need to evaluate
+[0:23:42] each of these expert we need to evaluate the causal effect based on their
+[0:23:44] the causal effect based on their assumption. Then I think what's uh more
+[0:23:47] assumption. Then I think what's uh more challenging is that at the end of the
+[0:23:49] challenging is that at the end of the day we need to compare the causal effect
+[0:23:52] day we need to compare the causal effect estimates
+[0:23:53] estimates across these pictures and number of Q uh
+[0:23:56] across these pictures and number of Q uh esters
+[0:23:58] esters and because we are now in a finite
+[0:23:59] and because we are now in a finite sample case uh we are we still we also
+[0:24:03] sample case uh we are we still we also need to deal with this u estimation uh
+[0:24:06] need to deal with this u estimation uh error or estimation uncertainty.
+[0:24:09] error or estimation uncertainty. So which this will mean we need to
+[0:24:11] So which this will mean we need to compare P choose the number of Q pd
+[0:24:15] compare P choose the number of Q pd dimensional estimates and figure out
+[0:24:18] dimensional estimates and figure out whether or not they agree with each
+[0:24:19] whether or not they agree with each other.
+[0:24:22] other. So this can uh can become quite
+[0:24:25] So this can uh can become quite challenging uh if at all uh feasible
+[0:24:29] challenging uh if at all uh feasible and there's also of course the
+[0:24:31] and there's also of course the statistical challenge of inference after
+[0:24:32] statistical challenge of inference after model selection uh because we first uh
+[0:24:35] model selection uh because we first uh figure out which asperts are correct
+[0:24:37] figure out which asperts are correct then base our uh inference on this
+[0:24:40] then base our uh inference on this correct correct experts uh so this is a
+[0:24:43] correct correct experts uh so this is a canonical problem of inference after
+[0:24:45] canonical problem of inference after model selection.
+[0:24:51] So uh our solution uh this is uh in the talk of the in the title of the talk is
+[0:24:54] talk of the in the title of the talk is called a synthetic instrument. So we
+[0:24:56] called a synthetic instrument. So we need to make some additional assumption
+[0:24:58] need to make some additional assumption and this assumption is a factor model on
+[0:25:00] and this assumption is a factor model on a treatment on a treatment X. So X
+[0:25:04] a treatment on a treatment X. So X equals lambda U plus epsilon X. So this
+[0:25:07] equals lambda U plus epsilon X. So this is nothing but a standard factor model.
+[0:25:09] is nothing but a standard factor model. So uh here we observe a pd dimensional
+[0:25:12] So uh here we observe a pd dimensional vector x and we assume that this uh have
+[0:25:14] vector x and we assume that this uh have a vector model according to you
+[0:25:18] a vector model according to you and then we also assume that we have
+[0:25:20] and then we also assume that we have access to a good estimator of lambda
+[0:25:24] access to a good estimator of lambda right so here we don't make any uh
+[0:25:26] right so here we don't make any uh particular assumptions of epsilon x as
+[0:25:28] particular assumptions of epsilon x as long as uh we are still able to obtain
+[0:25:32] long as uh we are still able to obtain uh to be able to estimate lambda. So uh
+[0:25:36] uh to be able to estimate lambda. So uh I think the the standard uh uh approach
+[0:25:40] I think the the standard uh uh approach uh this back to Anderson and the Ruby uh
+[0:25:43] uh this back to Anderson and the Ruby uh is to assume that this we have a
+[0:25:45] is to assume that this we have a diagonal structure. So all these epsilon
+[0:25:48] diagonal structure. So all these epsilon x are independent uncorrelated with each
+[0:25:50] x are independent uncorrelated with each other. lane. Uh,
+[0:25:53] other. lane. Uh, of course we can uh estimate lambda when
+[0:25:56] of course we can uh estimate lambda when Q is uh smaller than I think uh
+[0:26:01] Q is uh smaller than I think uh I like Q smaller smaller uh small
+[0:26:04] I like Q smaller smaller uh small relative to P. But there are also some
+[0:26:06] relative to P. But there are also some more recent advances uh that allow us to
+[0:26:09] more recent advances uh that allow us to estimate lambda even when we have a
+[0:26:12] estimate lambda even when we have a dependence among this uh error structure
+[0:26:14] dependence among this uh error structure and uh X can be high dimensional. So I'm
+[0:26:18] and uh X can be high dimensional. So I'm not going to details of that literature
+[0:26:20] not going to details of that literature but I'm just going to assume that
+[0:26:21] but I'm just going to assume that whatever they do they make sense they
+[0:26:23] whatever they do they make sense they are going to give me a good enough uh
+[0:26:24] are going to give me a good enough uh estimate of lambda
+[0:26:27] estimate of lambda and as a return what we can uh provide
+[0:26:31] and as a return what we can uh provide is uh what we call multiple robust
+[0:26:33] is uh what we call multiple robust causal inference that are valid
+[0:26:35] causal inference that are valid regardless of which sets of the experts
+[0:26:36] regardless of which sets of the experts are correct.
+[0:26:39] are correct. Comp compared with the knife approach
+[0:26:40] Comp compared with the knife approach where you first identify the set of
+[0:26:43] where you first identify the set of correct experts and then do per section
+[0:26:45] correct experts and then do per section inference using a sector set. Our
+[0:26:48] inference using a sector set. Our approach tries to bypass the model
+[0:26:50] approach tries to bypass the model section step all together. Right? So in
+[0:26:52] section step all together. Right? So in other uh or if you want to think about
+[0:26:55] other uh or if you want to think about another way we can we do this selection
+[0:26:57] another way we can we do this selection and estimation in the same step.
+[0:27:01] and estimation in the same step. So uh here's the main idea. So again
+[0:27:03] So uh here's the main idea. So again let's focus on the simple setting where
+[0:27:05] let's focus on the simple setting where we have three exposures and the scalar
+[0:27:08] we have three exposures and the scalar magic confounded u. So in this case our
+[0:27:12] magic confounded u. So in this case our vector model for X will just be X1=
+[0:27:15] vector model for X will just be X1= alpha 1 U plus epsilon 1 X2 = alpha 2 U
+[0:27:19] alpha 1 U plus epsilon 1 X2 = alpha 2 U plus epsilon 2 and X3= alpha 3 U plus
+[0:27:22] plus epsilon 2 and X3= alpha 3 U plus epsilon 3 right everything here in these
+[0:27:24] epsilon 3 right everything here in these models are scalar right there's no
+[0:27:26] models are scalar right there's no vector here and using standard vector
+[0:27:28] vector here and using standard vector analysis we can already identify this uh
+[0:27:32] analysis we can already identify this uh coefficients alpha 1 alpha 2 alpha 3.
+[0:27:39] Now uh the idea of this synthetic instrument is that uh we first realize
+[0:27:43] instrument is that uh we first realize what's causing the problem here is the
+[0:27:45] what's causing the problem here is the yield is a confounded yield right so we
+[0:27:49] yield is a confounded yield right so we try to get rid of you and how we get rid
+[0:27:52] try to get rid of you and how we get rid of you is we can if we just to let's say
+[0:27:56] of you is we can if we just to let's say if you just look at the uh first two
+[0:27:58] if you just look at the uh first two equations here you'll quickly realize
+[0:28:00] equations here you'll quickly realize that in order to get rid of you you just
+[0:28:02] that in order to get rid of you you just need to uh take linear combinations of
+[0:28:05] need to uh take linear combinations of x1 and x2 X2 and in particular if you
+[0:28:08] x1 and x2 X2 and in particular if you take S1 minus alpha 1 / alpha 2 * X2
+[0:28:12] take S1 minus alpha 1 / alpha 2 * X2 then this U term will cancels out and
+[0:28:15] then this U term will cancels out and you are left with this epsom term here
+[0:28:18] you are left with this epsom term here okay this is what we call synthetic
+[0:28:20] okay this is what we call synthetic instrument and similarly if you do two
+[0:28:23] instrument and similarly if you do two and three you can similarly get another
+[0:28:26] and three you can similarly get another synthetic instrument
+[0:28:29] synthetic instrument so this synthetic instrument although
+[0:28:31] so this synthetic instrument although they are just functions of x they no
+[0:28:34] they are just functions of x they no longer depend on y they are purely
+[0:28:36] longer depend on y they are purely noise.
+[0:28:38] noise. So and we know that noise are the best
+[0:28:41] So and we know that noise are the best instruments we can get uh for these
+[0:28:44] instruments we can get uh for these treatments and uh we can regularly this
+[0:28:47] treatments and uh we can regularly this show that uh these are synthetic
+[0:28:49] show that uh these are synthetic instruments these are indeed valid
+[0:28:51] instruments these are indeed valid instruments for X
+[0:28:53] instruments for X for treatments
+[0:28:55] for treatments but unlike standard instruments right
+[0:28:57] but unlike standard instruments right here uh this important uh difference
+[0:29:00] here uh this important uh difference between a synthetic instrument and the
+[0:29:02] between a synthetic instrument and the usual instrument that people using is
+[0:29:04] usual instrument that people using is that this our synthetic instruments are
+[0:29:06] that this our synthetic instruments are synthetic Right? You don't need to go
+[0:29:10] synthetic Right? You don't need to go anywhere else. You don't need to go to
+[0:29:12] anywhere else. You don't need to go to your domain experts. You don't need to
+[0:29:14] your domain experts. You don't need to uh in the case of mandate randomization
+[0:29:17] uh in the case of mandate randomization you collect additional data. Right? Uh
+[0:29:19] you collect additional data. Right? Uh to find the instruments here you just uh
+[0:29:23] to find the instruments here you just uh construct you get some instruments uh
+[0:29:25] construct you get some instruments uh from the treatments themselves.
+[0:29:28] from the treatments themselves. Okay. So these are called synthetic
+[0:29:30] Okay. So these are called synthetic instrument.
+[0:29:36] And uh after you have this synthetic instruments and these are just then you
+[0:29:38] instruments and these are just then you can use this just as any other
+[0:29:39] can use this just as any other instrument okay you can run your two s
+[0:29:42] instrument okay you can run your two s squares. So in particular in the first
+[0:29:44] squares. So in particular in the first stage you regress your treatments on
+[0:29:46] stage you regress your treatments on this synthetic instrument. In the second
+[0:29:48] this synthetic instrument. In the second stage uh and get a x hat in the second
+[0:29:51] stage uh and get a x hat in the second stage you regress a y on xhat.
+[0:29:57] Of course, if you look at this uh there's still one caveat here because uh
+[0:30:00] there's still one caveat here because uh the treatment is in this case three
+[0:30:02] the treatment is in this case three dimensional and the synthetic instrument
+[0:30:05] dimensional and the synthetic instrument in this case is only two dimensional.
+[0:30:08] in this case is only two dimensional. So yeah u in general you cannot uh the
+[0:30:12] So yeah u in general you cannot uh the second stage uh you will have some
+[0:30:14] second stage uh you will have some colinearity problem here uh because you
+[0:30:16] colinearity problem here uh because you cannot identify three treatment effects
+[0:30:18] cannot identify three treatment effects with just two instrument
+[0:30:21] with just two instrument but don't forget we also have this
+[0:30:23] but don't forget we also have this sparity constraint right our sparity
+[0:30:26] sparity constraint right our sparity constraint says in this case at most one
+[0:30:28] constraint says in this case at most one of these beta is non zero and with this
+[0:30:31] of these beta is non zero and with this additional sparity constraint then the
+[0:30:33] additional sparity constraint then the whole thing works right uh we can the
+[0:30:35] whole thing works right uh we can the second stage we can this a unique
+[0:30:37] second stage we can this a unique solution Yeah.
+[0:30:40] solution Yeah. Um so here's here are the main result uh
+[0:30:43] Um so here's here are the main result uh finding viability under this model
+[0:30:45] finding viability under this model assumptions. Uh so under our model
+[0:30:48] assumptions. Uh so under our model assumptions the following three
+[0:30:49] assumptions the following three statements are equivalent. The first one
+[0:30:51] statements are equivalent. The first one says the treatment effect beta is fast
+[0:30:54] says the treatment effect beta is fast enough.
+[0:30:56] enough. The second statement says a beta the
+[0:30:59] The second statement says a beta the cause effect beta is identifiable from
+[0:31:02] cause effect beta is identifiable from this two square I just described to you.
+[0:31:06] this two square I just described to you. And the third assumption condition says
+[0:31:09] And the third assumption condition says uh the most sparse z square solution to
+[0:31:12] uh the most sparse z square solution to a second stage regression uh has l norms
+[0:31:15] a second stage regression uh has l norms smaller than p minus q. So uh in other
+[0:31:18] smaller than p minus q. So uh in other words you run the second stage
+[0:31:20] words you run the second stage regression you find the most sparse v
+[0:31:22] regression you find the most sparse v squar solution and you compare the l0
+[0:31:25] squar solution and you compare the l0 norm of your solution uh with p minus q.
+[0:31:31] norm of your solution uh with p minus q. So the last condition here is uh
+[0:31:33] So the last condition here is uh testable right it entirely depends on
+[0:31:35] testable right it entirely depends on the observed data
+[0:31:38] the observed data and because all of these equivalent this
+[0:31:40] and because all of these equivalent this tells you that uh you can from observed
+[0:31:43] tells you that uh you can from observed data run this regressions and tell if
+[0:31:47] data run this regressions and tell if your causal effect is sparse enough and
+[0:31:49] your causal effect is sparse enough and if your causal effect identifiable.
+[0:31:53] if your causal effect identifiable. So this will be the full uh synthetic
+[0:31:55] So this will be the full uh synthetic two-stage square estimator. So in the
+[0:31:57] two-stage square estimator. So in the first stage you regress a treatment on a
+[0:31:59] first stage you regress a treatment on a synthetic instrument you get x hat. In
+[0:32:02] synthetic instrument you get x hat. In the second stage you regress the y on x
+[0:32:05] the second stage you regress the y on x hat subject to some sparity constraint
+[0:32:08] hat subject to some sparity constraint and then you can select the tuning
+[0:32:10] and then you can select the tuning parameter using your favorite technique
+[0:32:13] parameter using your favorite technique and you're going to estimate a sparity
+[0:32:15] and you're going to estimate a sparity level for your beta.
+[0:32:17] level for your beta. In the third step, you compare the
+[0:32:20] In the third step, you compare the sparity level of beta which I call S hat
+[0:32:23] sparity level of beta which I call S hat here versus P minus Q hat.
+[0:32:27] here versus P minus Q hat. If S had smaller than P minus Q hat then
+[0:32:30] If S had smaller than P minus Q hat then you report the estimate of beta
+[0:32:32] you report the estimate of beta otherwise you report that beta is not
+[0:32:34] otherwise you report that beta is not identifiable.
+[0:32:41] Okay. And we also have some uh theoretical results. These are uh in the
+[0:32:44] theoretical results. These are uh in the very similar to uh the the same [snorts]
+[0:32:47] very similar to uh the the same [snorts] uh very similar result to that you get
+[0:32:50] uh very similar result to that you get for the lasso model. Um so I'm going to
+[0:32:52] for the lasso model. Um so I'm going to skip here and just uh go to the uh see
+[0:32:56] skip here and just uh go to the uh see how these things play out in the obesity
+[0:32:58] how these things play out in the obesity data set in the motivating example I
+[0:33:00] data set in the motivating example I mentioned to you.
+[0:33:03] mentioned to you. So uh we have data from 334 mice fed on
+[0:33:07] So uh we have data from 334 mice fed on a western diet for 16 weeks and we also
+[0:33:09] a western diet for 16 weeks and we also have gene expression data of the liver
+[0:33:11] have gene expression data of the liver tissues for about 23,000 genes and we
+[0:33:14] tissues for about 23,000 genes and we also have measurements of their body
+[0:33:16] also have measurements of their body weight.
+[0:33:17] weight. So uh this is all we need right this is
+[0:33:20] So uh this is all we need right this is uh the first three lines or or actually
+[0:33:22] uh the first three lines or or actually these two lines is uh all the data we
+[0:33:25] these two lines is uh all the data we use for our analysis
+[0:33:27] use for our analysis but this data set also happen to have
+[0:33:29] but this data set also happen to have some genotype data
+[0:33:32] some genotype data about a thousand snips. So you can
+[0:33:34] about a thousand snips. So you can actually also run mandian randomization
+[0:33:36] actually also run mandian randomization and uh le in 2015 JASA paper actually uh
+[0:33:41] and uh le in 2015 JASA paper actually uh apply mand randomization to this data
+[0:33:43] apply mand randomization to this data set. So this like 17 genes that are
+[0:33:46] set. So this like 17 genes that are likely to affect mouse body weight. So
+[0:33:49] likely to affect mouse body weight. So what we are going to do is that we are
+[0:33:50] what we are going to do is that we are going to replicate this analysis but we
+[0:33:52] going to replicate this analysis but we are going to ignore this genotype data
+[0:33:54] are going to ignore this genotype data because you you don't always have access
+[0:33:57] because you you don't always have access to the genotype data. We're only going
+[0:33:58] to the genotype data. We're only going to use this gene expression data and the
+[0:34:00] to use this gene expression data and the body weight and to see what we can get.
+[0:34:04] body weight and to see what we can get. So we're going to follow the same
+[0:34:06] So we're going to follow the same quality control procedure. So we're left
+[0:34:08] quality control procedure. So we're left with about 300 mice and expression data
+[0:34:11] with about 300 mice and expression data of 2800 genes. and adjust for sex. So
+[0:34:15] of 2800 genes. and adjust for sex. So the way we did this is we first use
+[0:34:17] the way we did this is we first use factor analysis to estimate the number
+[0:34:19] factor analysis to estimate the number of factors and this will give us a Q
+[0:34:23] of factors and this will give us a Q head equals three.
+[0:34:26] head equals three. Then we run this synthetic instrument
+[0:34:28] Then we run this synthetic instrument and this synthetic instrument will uh
+[0:34:30] and this synthetic instrument will uh identify five genes u for us. So before
+[0:34:34] identify five genes u for us. So before looking at what these five genes are we
+[0:34:36] looking at what these five genes are we first check the u the identification
+[0:34:39] first check the u the identification assumptions. So remember identification
+[0:34:42] assumptions. So remember identification assumption says the spacy level five
+[0:34:45] assumption says the spacy level five here needs to be smaller than P minus Q.
+[0:34:49] here needs to be smaller than P minus Q. So our P here is almost 3,000 and our Q
+[0:34:52] So our P here is almost 3,000 and our Q here is three. Right? So what we get is
+[0:34:56] here is three. Right? So what we get is five is less than 3,00 minus 3. So you
+[0:35:00] five is less than 3,00 minus 3. So you can see that usually and this is very
+[0:35:02] can see that usually and this is very common in a lot of other data sets we
+[0:35:04] common in a lot of other data sets we try this identification assumption are
+[0:35:06] try this identification assumption are very weak and it's very easy to satisfy
+[0:35:09] very weak and it's very easy to satisfy uh you can even if I miss I I I get a
+[0:35:15] uh you can even if I miss I I I get a conservative estimate of Q hat to be 300
+[0:35:19] conservative estimate of Q hat to be 300 it's still going to u to be within this
+[0:35:22] it's still going to u to be within this identifiability range
+[0:35:25] identifiability range so usually identifiability is not a
+[0:35:27] so usually identifiability is not a problem Um and then okay and coming back
+[0:35:30] problem Um and then okay and coming back to this uh this synthetic two-stage
+[0:35:32] to this uh this synthetic two-stage square identify five genes. Um the first
+[0:35:35] square identify five genes. Um the first gene is I think brief this is called uh
+[0:35:38] gene is I think brief this is called uh uh insulin growth factor binding protein
+[0:35:41] uh insulin growth factor binding protein 2 gene. Um so this is a gene that's
+[0:35:43] 2 gene. Um so this is a gene that's known to prevent the development of
+[0:35:45] known to prevent the development of obesity and protect against insulin
+[0:35:47] obesity and protect against insulin resistance. And this one is the one with
+[0:35:50] resistance. And this one is the one with the largest effect size and it is al
+[0:35:53] the largest effect size and it is al also the only overlap uh between our
+[0:35:55] also the only overlap uh between our results and the MR results.
+[0:35:59] results and the MR results. So we also find uh four other genes. Um
+[0:36:02] So we also find uh four other genes. Um among these four there are three that we
+[0:36:04] among these four there are three that we found some evidence from the literature
+[0:36:06] found some evidence from the literature that this is actually uh this is going
+[0:36:08] that this is actually uh this is going to have some effects on the body weight.
+[0:36:10] to have some effects on the body weight. Uh we cannot confirm the effect size but
+[0:36:13] Uh we cannot confirm the effect size but at least the direction of this effects
+[0:36:16] at least the direction of this effects uh will be consistent with what we
+[0:36:18] uh will be consistent with what we already know. There's only one gene that
+[0:36:21] already know. There's only one gene that uh seems to be new uh to the research.
+[0:36:30] Okay. So I think I'm going to have a quick summary here. So I think uh
+[0:36:34] quick summary here. So I think uh uh I think people now realize that
+[0:36:36] uh I think people now realize that sparity is a common feature of modern
+[0:36:38] sparity is a common feature of modern data sets or even if the sparing is not
+[0:36:42] data sets or even if the sparing is not true. I like what uh in elements of
+[0:36:45] true. I like what uh in elements of statistical learning there's what they
+[0:36:47] statistical learning there's what they call a bet on sparity principle right?
+[0:36:50] call a bet on sparity principle right? So you use a procedure that performs
+[0:36:52] So you use a procedure that performs well in sparse settings since no
+[0:36:54] well in sparse settings since no procedure performs well in dense
+[0:36:56] procedure performs well in dense settings.
+[0:36:58] settings. But I think there's a key difference
+[0:37:00] But I think there's a key difference between the approach we're taking here
+[0:37:02] between the approach we're taking here and the classical highdimensional
+[0:37:03] and the classical highdimensional statistics literature. In the classical
+[0:37:06] statistics literature. In the classical high dimensional statistic literature
+[0:37:07] high dimensional statistic literature often assume that the associations are
+[0:37:10] often assume that the associations are sparse. Uh but I think in a lot of cases
+[0:37:13] sparse. Uh but I think in a lot of cases uh you know because sparity comes from
+[0:37:16] uh you know because sparity comes from assumptions made by humans and uh in a
+[0:37:19] assumptions made by humans and uh in a lot of cases uh human can most uh uh
+[0:37:23] lot of cases uh human can most uh uh reason about causation. So sparse
+[0:37:25] reason about causation. So sparse causation will often be more plausible.
+[0:37:35] uh and so we look at the problem of causal inference under a sparse
+[0:37:37] causal inference under a sparse causation and I think spar state
+[0:37:39] causation and I think spar state combined with the voting strategy is a
+[0:37:41] combined with the voting strategy is a very powerful tool for causal
+[0:37:42] very powerful tool for causal identification. it will replace a lot of
+[0:37:45] identification. it will replace a lot of uh some conventional uh strong
+[0:37:48] uh some conventional uh strong conditional independence assumptions
+[0:37:50] conditional independence assumptions into this simpler structure
+[0:37:53] into this simpler structure and usually once you adopt this strategy
+[0:37:56] and usually once you adopt this strategy I think you usually almost always get
+[0:37:59] I think you usually almost always get some multiple robustness for free as as
+[0:38:01] some multiple robustness for free as as I said
+[0:38:04] I said because sparity the assumption of spasti
+[0:38:07] because sparity the assumption of spasti itself is a multiply robust assumption
+[0:38:10] itself is a multiply robust assumption because it doesn't specify which of
+[0:38:13] because it doesn't specify which of these coefficient coefficients are zero,
+[0:38:15] these coefficient coefficients are zero, right? U but in the end it will give you
+[0:38:18] right? U but in the end it will give you the same identification result.
+[0:38:21] the same identification result. U but I think uh one uh challenge to uh
+[0:38:26] U but I think uh one uh challenge to uh using this voting across any kind of uh
+[0:38:29] using this voting across any kind of uh cause identification problem is
+[0:38:31] cause identification problem is estimation problem.
+[0:38:34] estimation problem. So uh in uh in particular if you want to
+[0:38:37] So uh in uh in particular if you want to use voting you need to compare estimates
+[0:38:39] use voting you need to compare estimates among different experts and this can be
+[0:38:42] among different experts and this can be challenging if you are in in a finite
+[0:38:45] challenging if you are in in a finite sample setting uh and if you have a lot
+[0:38:47] sample setting uh and if you have a lot of experts to to deal with
+[0:38:51] of experts to to deal with and I think the multicourse problem that
+[0:38:53] and I think the multicourse problem that we consider here has a very nice
+[0:38:55] we consider here has a very nice structure that allow us to develop the
+[0:38:57] structure that allow us to develop the so-cal synthetic instrument as a
+[0:38:59] so-cal synthetic instrument as a powerful tool for estimation. So this
+[0:39:02] powerful tool for estimation. So this bypass the selection uh among the
+[0:39:05] bypass the selection uh among the multiple asperts.
+[0:39:07] multiple asperts. So it give you a procedure that's very
+[0:39:09] So it give you a procedure that's very easy to implement uh and computitionally
+[0:39:12] easy to implement uh and computitionally it's quite efficient and we also have a
+[0:39:14] it's quite efficient and we also have a package if you are interested in trying
+[0:39:16] package if you are interested in trying it out.
+[0:39:19] it out. So finally uh I would like to discuss as
+[0:39:22] So finally uh I would like to discuss as promised some extensions uh to nonlinear
+[0:39:25] promised some extensions uh to nonlinear models right uh because uh I want to see
+[0:39:29] models right uh because uh I want to see what's the limit of this approach
+[0:39:32] what's the limit of this approach right so for now we are assuming both
+[0:39:35] right so for now we are assuming both the treatment and uh outcome models are
+[0:39:37] the treatment and uh outcome models are linear right so what are we doing at the
+[0:39:40] linear right so what are we doing at the end of the day right if we take a step
+[0:39:41] end of the day right if we take a step back think about if you come from
+[0:39:43] back think about if you come from instrumental variable model perspective
+[0:39:46] instrumental variable model perspective all we are doing is we use the first
+[0:39:48] all we are doing is we use the first spectrum model to create P minus Q
+[0:39:52] spectrum model to create P minus Q instruments.
+[0:39:54] instruments. That's all we are doing, right? So
+[0:39:58] That's all we are doing, right? So there are multiple ways to get
+[0:39:59] there are multiple ways to get instrumental variables. You can go to
+[0:40:02] instrumental variables. You can go to your nest door experts or you can
+[0:40:05] your nest door experts or you can collect a lot of uh uh genetics data set
+[0:40:10] collect a lot of uh uh genetics data set or you can just assume a factor model
+[0:40:14] or you can just assume a factor model and assuming a factor model on P
+[0:40:16] and assuming a factor model on P treatments will can give you P minus Q
+[0:40:20] treatments will can give you P minus Q instrument
+[0:40:25] and then you can use this P minus Q instruments to identify the treatment
+[0:40:28] instruments to identify the treatment effects. Of course, you cannot use this
+[0:40:29] effects. Of course, you cannot use this to identify the original P treatments
+[0:40:32] to identify the original P treatments because P minus Q will always be less
+[0:40:34] because P minus Q will always be less than P.
+[0:40:36] than P. But as long as the spacy level of your
+[0:40:39] But as long as the spacy level of your treatment effect uh S is less than P
+[0:40:42] treatment effect uh S is less than P minus Q, then you're good.
+[0:40:46] minus Q, then you're good. You can always use your P minus Q
+[0:40:48] You can always use your P minus Q instruments to identify S stream
+[0:40:51] instruments to identify S stream effects. as long as S is smaller than P
+[0:40:53] effects. as long as S is smaller than P minus Q and there's no need to collect
+[0:40:56] minus Q and there's no need to collect additional data to go to anyone else. Uh
+[0:40:59] additional data to go to anyone else. Uh you just assume a factor model and seems
+[0:41:01] you just assume a factor model and seems that people are very happy with factor
+[0:41:03] that people are very happy with factor models. Uh we have been assuming that
+[0:41:05] models. Uh we have been assuming that for for more than a century now.
+[0:41:08] for for more than a century now. Um, of course the way uh you uh if you
+[0:41:11] Um, of course the way uh you uh if you want to take this one step further is
+[0:41:13] want to take this one step further is now you can consider some nonparametric
+[0:41:15] now you can consider some nonparametric factor analysis right if you want to um
+[0:41:18] factor analysis right if you want to um because at the end of the day you're
+[0:41:19] because at the end of the day you're trying to get rid of you that's the key
+[0:41:22] trying to get rid of you that's the key idea right as long as you can get rid of
+[0:41:24] idea right as long as you can get rid of you then uh you can get the instruments
+[0:41:32] so uh if you want to do this although I think this can be uh I can be
+[0:41:34] think this can be uh I can be non-trivial at least I don't know how to
+[0:41:36] non-trivial at least I don't know how to do it right now is in uh more general
+[0:41:39] do it right now is in uh more general case how do you find the f uh such that
+[0:41:42] case how do you find the f uh such that f of x uh doesn't depend on u
+[0:41:51] okay so if you instead come from a factor model uh perspective
+[0:41:54] factor model uh perspective where can this take you
+[0:41:57] where can this take you right so
+[0:41:59] right so the
+[0:42:00] the uh this structural model uh approach uh
+[0:42:03] uh this structural model uh approach uh actually uh so the key assumption here
+[0:42:05] actually uh so the key assumption here uh uh we're making here is the epsilon x
+[0:42:09] uh uh we're making here is the epsilon x is independent of u compared with the
+[0:42:12] is independent of u compared with the standard factor model. Right? In the
+[0:42:14] standard factor model. Right? In the standard factor model you usually only
+[0:42:16] standard factor model you usually only assume the epsilon x is uncorrelated
+[0:42:18] assume the epsilon x is uncorrelated with you. But here if you treat this
+[0:42:21] with you. But here if you treat this model as a causal model then usually in
+[0:42:24] model as a causal model then usually in a structure in a nonparametric structure
+[0:42:25] a structure in a nonparametric structure equation model you assume that the
+[0:42:27] equation model you assume that the errors independent. So you go from the
+[0:42:30] errors independent. So you go from the uh uncorrelatedness to independence
+[0:42:34] uh uncorrelatedness to independence and this seamless small step will give
+[0:42:36] and this seamless small step will give you a lot of uh identification power
+[0:42:40] you a lot of uh identification power because this leng we can account for
+[0:42:43] because this leng we can account for arbitrary dependence between u and y.
+[0:42:47] arbitrary dependence between u and y. It's a based on very simple fact that as
+[0:42:50] It's a based on very simple fact that as long as you assume that epsilon x ind
+[0:42:52] long as you assume that epsilon x ind dependent of u then any function of
+[0:42:56] dependent of u then any function of epsilon x will be independent of any
+[0:42:59] epsilon x will be independent of any function of u.
+[0:43:03] function of u. Right? So this is for CO people this is
+[0:43:05] Right? So this is for CO people this is not surprising right because we know
+[0:43:07] not surprising right because we know that one of the main advantage of uh of
+[0:43:11] that one of the main advantage of uh of uh instrumental variable is that it can
+[0:43:13] uh instrumental variable is that it can deal with arbitrary uh dependence on you
+[0:43:17] deal with arbitrary uh dependence on you and you don't need to know the specific
+[0:43:19] and you don't need to know the specific form of you. So for composal people if
+[0:43:21] form of you. So for composal people if you look at this problem from a causal
+[0:43:23] you look at this problem from a causal inference perspective this is not
+[0:43:24] inference perspective this is not surprising at all. But for people from a
+[0:43:27] surprising at all. But for people from a factor model perspective and just as a
+[0:43:29] factor model perspective and just as a background a lot of uh people a lot of
+[0:43:32] background a lot of uh people a lot of experts from the high dimensional uh
+[0:43:34] experts from the high dimensional uh estimation or the um factor model
+[0:43:38] estimation or the um factor model literature they also investigate this
+[0:43:40] literature they also investigate this problem
+[0:43:42] problem but they also always have trouble uh
+[0:43:46] but they also always have trouble uh dealing with case where this G is
+[0:43:49] dealing with case where this G is nonlinear.
+[0:43:52] nonlinear. Okay, almost if you look at this paper
+[0:43:54] Okay, almost if you look at this paper almost always they they assume that y
+[0:43:56] almost always they they assume that y will depends linearly on on you and this
+[0:43:59] will depends linearly on on you and this seems to be a major problem of how to
+[0:44:01] seems to be a major problem of how to extend this uh from a factor model
+[0:44:03] extend this uh from a factor model perspective
+[0:44:05] perspective but from a cause inference perspective
+[0:44:07] but from a cause inference perspective this is almost trivial or as long or at
+[0:44:10] this is almost trivial or as long or at least as long as you are willing to
+[0:44:11] least as long as you are willing to assume the epsilon x independent of you
+[0:44:14] assume the epsilon x independent of you then you will get any function of
+[0:44:16] then you will get any function of epsilon x function of you
+[0:44:20] epsilon x function of you so we can account for any nonlinear
+[0:44:23] so we can account for any nonlinear causal effects, right? Because now we
+[0:44:26] causal effects, right? Because now we have instrument
+[0:44:28] have instrument and we know that instruments can help us
+[0:44:30] and we know that instruments can help us to identify causal effects not only for
+[0:44:32] to identify causal effects not only for linear causal effects but also for
+[0:44:34] linear causal effects but also for nonlinear causal effects. Okay. So we
+[0:44:37] nonlinear causal effects. Okay. So we can look at GRM where this uh uh with a
+[0:44:41] can look at GRM where this uh uh with a non-link function. We can also make this
+[0:44:45] non-link function. We can also make this more uh general with single index model
+[0:44:48] more uh general with single index model or we can make this as additive models.
+[0:44:51] or we can make this as additive models. But because at the end of the day we
+[0:44:52] But because at the end of the day we have instrument we can do what other
+[0:44:55] have instrument we can do what other instruments can do.
+[0:44:58] instruments can do. This is uh what [clears throat] okay uh
+[0:45:01] This is uh what [clears throat] okay uh the paper is archive uh package is also
+[0:45:04] the paper is archive uh package is also online. Uh you can get a link here or if
+[0:45:07] online. Uh you can get a link here or if you go to my website there's a link for
+[0:45:09] you go to my website there's a link for the uh app package. Yeah and uh yeah I
+[0:45:13] the uh app package. Yeah and uh yeah I will stop here and happy to take
+[0:45:15] will stop here and happy to take questions.
+[0:45:17] questions. &gt;&gt; Thank you so much Limbo for the very
+[0:45:19] &gt;&gt; Thank you so much Limbo for the very nice talk. Um uh actually we received a
+[0:45:22] nice talk. Um uh actually we received a lot of questions but I just wanted to
+[0:45:23] lot of questions but I just wanted to shout out to uh Dinko on doing a
+[0:45:26] shout out to uh Dinko on doing a fantastic job in quickly addressing many
+[0:45:28] fantastic job in quickly addressing many of them. So uh this gives us
+[0:45:30] of them. So uh this gives us opportunities to like stay on time and
+[0:45:32] opportunities to like stay on time and we can probably transition to our
+[0:45:34] we can probably transition to our discussion at this point and our um uh
+[0:45:39] discussion at this point and our um uh speaker and the uh Q&amp;A uh moderator can
+[0:45:43] speaker and the uh Q&amp;A uh moderator can uh continue with answering some of the
+[0:45:45] uh continue with answering some of the questions from the audience.
+[0:45:47] questions from the audience. &gt;&gt; Okay.
+[0:45:48] &gt;&gt; Okay. &gt;&gt; Thank you so much. Maybe
+[0:45:49] &gt;&gt; Thank you so much. Maybe &gt;&gt; we should stop sharing. Um
+[0:45:58] &gt;&gt; yeah, feel free to uh share your screen. Uh I I can still see Limbo's uh screen.
+[0:46:03] Uh I I can still see Limbo's uh screen. &gt;&gt; Uh wait. Okay. Yes. Sorry.
+[0:46:12] &gt;&gt; Okay. I think now I can &gt;&gt; Good. Okay.
+[0:46:13] &gt;&gt; Good. Okay. &gt;&gt; Okay. Uh
+[0:46:16] &gt;&gt; Okay. Uh so you can see my slides, right? So
+[0:46:19] so you can see my slides, right? So &gt;&gt; yeah.
+[0:46:20] &gt;&gt; yeah. &gt;&gt; Also try to move in. So now it's a full
+[0:46:23] &gt;&gt; Also try to move in. So now it's a full screen. Is it?
+[0:46:25] screen. Is it? &gt;&gt; Yes.
+[0:46:26] &gt;&gt; Yes. &gt;&gt; Okay. Yeah. Um thank you everyone uh for
+[0:46:29] &gt;&gt; Okay. Yeah. Um thank you everyone uh for having me here and also I first would
+[0:46:31] having me here and also I first would like to uh congratulate uh Limbo and his
+[0:46:34] like to uh congratulate uh Limbo and his co-authors for a very nice paper. So
+[0:46:36] co-authors for a very nice paper. So another very nice paper from uh Limbo
+[0:46:38] another very nice paper from uh Limbo and I I read se several of them before
+[0:46:41] and I I read se several of them before and I'm very honored I can discuss his
+[0:46:43] and I'm very honored I can discuss his his work today. So um in the my
+[0:46:46] his work today. So um in the my discussion I will first uh uh sorry it's
+[0:46:48] discussion I will first uh uh sorry it's not moving on. Okay I'll divide in two
+[0:46:52] not moving on. Okay I'll divide in two parts. In the first part I'll summarize
+[0:46:53] parts. In the first part I'll summarize a bit what limbo is doing. is basically
+[0:46:55] a bit what limbo is doing. is basically like uh what I get from reading his
+[0:46:58] like uh what I get from reading his paper and also the the slides he sent to
+[0:47:00] paper and also the the slides he sent to me. Uh and this is basically repeating
+[0:47:02] me. Uh and this is basically repeating what Limbo is doing has done and then I
+[0:47:05] what Limbo is doing has done and then I will do a bit discussion and also
+[0:47:06] will do a bit discussion and also connection to some existing literature
+[0:47:08] connection to some existing literature and also um I will ask some questions
+[0:47:11] and also um I will ask some questions like just from my my own view may not be
+[0:47:13] like just from my my own view may not be the best question. Okay. So um this is
+[0:47:17] the best question. Okay. So um this is uh the model that limbo is considering
+[0:47:19] uh the model that limbo is considering like this hidden confounding model and x
+[0:47:21] like this hidden confounding model and x is the treatment the the multi-dimension
+[0:47:23] is the treatment the the multi-dimension exposure and u is a measure confounder
+[0:47:25] exposure and u is a measure confounder and they link together by this factor
+[0:47:27] and they link together by this factor model and I'm just looking at the
+[0:47:29] model and I'm just looking at the simplest one assuming all the effect
+[0:47:31] simplest one assuming all the effect that they're linear and I very much like
+[0:47:34] that they're linear and I very much like their paper like they have a very good
+[0:47:36] their paper like they have a very good example they say uh let's just consider
+[0:47:38] example they say uh let's just consider there are three exposures and then
+[0:47:39] there are three exposures and then there's one hidden vector so just u is
+[0:47:41] there's one hidden vector so just u is one dimension and x is three dimension
+[0:47:43] one dimension and x is three dimension so this is just enough to illustrate the
+[0:47:46] so this is just enough to illustrate the main point and doesn't make the problem
+[0:47:48] main point and doesn't make the problem too complicated. Okay, so that's my uh
+[0:47:50] too complicated. Okay, so that's my uh main way of looking at the problem. So
+[0:47:52] main way of looking at the problem. So uh I think the first part I uh find very
+[0:47:55] uh I think the first part I uh find very interesting is uh they do a co coariance
+[0:47:58] interesting is uh they do a co coariance between xj and y and then if you just
+[0:48:00] between xj and y and then if you just plug in the outcome model y there are
+[0:48:02] plug in the outcome model y there are three coariants and some unasure
+[0:48:04] three coariants and some unasure confounder then they can have this
+[0:48:05] confounder then they can have this system of equations. Okay and if you
+[0:48:08] system of equations. Okay and if you look at this carefully then beta 1 beta
+[0:48:10] look at this carefully then beta 1 beta 2 and beta 3 and that they are very
+[0:48:12] 2 and beta 3 and that they are very naturally coming out and this lambda j
+[0:48:15] naturally coming out and this lambda j is coming out just because of this
+[0:48:17] is coming out just because of this measure compounder. Okay. And we can
+[0:48:19] measure compounder. Okay. And we can imagine we do this uh like a system of
+[0:48:21] imagine we do this uh like a system of equations. So like three times and then
+[0:48:24] equations. So like three times and then we just have three equations because we
+[0:48:25] we just have three equations because we have three coariantss and then like but
+[0:48:27] have three coariantss and then like but we now have four like unknowns like beta
+[0:48:29] we now have four like unknowns like beta 1 to beta 3 and also the gamma. So
+[0:48:32] 1 to beta 3 and also the gamma. So that's why like that's why motivates
+[0:48:34] that's why like that's why motivates limbo to make this uh uh like sparity
+[0:48:37] limbo to make this uh uh like sparity assumption or or it's very natural as he
+[0:48:39] assumption or or it's very natural as he explained to make this sparity
+[0:48:41] explained to make this sparity assumption and also like to help us to
+[0:48:43] assumption and also like to help us to do identification. Okay. So by the way I
+[0:48:45] do identification. Okay. So by the way I would like to clarify that to to be very
+[0:48:47] would like to clarify that to to be very precise I do a few screenshot from
+[0:48:50] precise I do a few screenshot from Limba's paper. So this is the exact
+[0:48:52] Limba's paper. So this is the exact screenshot. Okay and then uh here is the
+[0:48:56] screenshot. Okay and then uh here is the their voting mechanism motivated by the
+[0:48:58] their voting mechanism motivated by the previous slide. They say um there are
+[0:49:00] previous slide. They say um there are more equations there are less equations
+[0:49:02] more equations there are less equations than the parameter they want to
+[0:49:03] than the parameter they want to estimate. Then one way is to leverage
+[0:49:05] estimate. Then one way is to leverage the sparse assumption. So as limbo
+[0:49:08] the sparse assumption. So as limbo explained they can first assume the beta
+[0:49:10] explained they can first assume the beta 1 equal to zero and then they solve the
+[0:49:12] 1 equal to zero and then they solve the system equation because now they only
+[0:49:13] system equation because now they only have three parameters three free
+[0:49:14] have three parameters three free parameters and three equations. So they
+[0:49:16] parameters and three equations. So they can solve like this uh uh beta 2 and
+[0:49:19] can solve like this uh uh beta 2 and also beta 3 and then it runs by like run
+[0:49:22] also beta 3 and then it runs by like run beta 2 and then they can solve like beta
+[0:49:24] beta 2 and then they can solve like beta 1 and beta 3 and then uh they can run
+[0:49:27] 1 and beta 3 and then uh they can run like this beta 3 then they can put the
+[0:49:29] like this beta 3 then they can put the beta 3 equal to zero. They they solve
+[0:49:31] beta 3 equal to zero. They they solve beta 1 and beta 2. Okay. So if you're
+[0:49:33] beta 1 and beta 2. Okay. So if you're just looking at this voting matrix we
+[0:49:35] just looking at this voting matrix we can uh very easily see the pattern that
+[0:49:37] can uh very easily see the pattern that uh uh for the first two like they align
+[0:49:39] uh uh for the first two like they align very well and that's why like it's also
+[0:49:42] very well and that's why like it's also like explan as limbo explained it's uh
+[0:49:45] like explan as limbo explained it's uh this could give us a way to identify
+[0:49:47] this could give us a way to identify like uh which uh like treatment has zero
+[0:49:51] like uh which uh like treatment has zero effect and which does not okay and uh
+[0:49:54] effect and which does not okay and uh this two uh actually like it's a very
+[0:49:56] this two uh actually like it's a very clever use of this sparity and also the
+[0:49:59] clever use of this sparity and also the one like really give me a very good
+[0:50:00] one like really give me a very good surprise and learn quite a bit is this
+[0:50:02] surprise and learn quite a bit is this uh uh the sparsity also can help us
+[0:50:05] uh uh the sparsity also can help us construct the synthetic instrument.
+[0:50:07] construct the synthetic instrument. Okay. And this is the part I like the
+[0:50:10] Okay. And this is the part I like the most. So um they consider setting like
+[0:50:13] most. So um they consider setting like the x2 does not have direct effect on y
+[0:50:15] the x2 does not have direct effect on y and in this case uh so the uh this x2
+[0:50:18] and in this case uh so the uh this x2 actually have some very special use and
+[0:50:20] actually have some very special use and as I explained here as as I wrote down
+[0:50:22] as I explained here as as I wrote down here so x2 is equal to lamb 2 plus
+[0:50:25] here so x2 is equal to lamb 2 plus epsilon 2. Okay so epsilon 2 is pretty
+[0:50:27] epsilon 2. Okay so epsilon 2 is pretty good. It's very organic. it does not
+[0:50:29] good. It's very organic. it does not like directly affect outcome Y and also
+[0:50:32] like directly affect outcome Y and also is not associated with unmeasured
+[0:50:33] is not associated with unmeasured compounder U. So that's the like a very
+[0:50:36] compounder U. So that's the like a very nice property of epsilon 2 and also for
+[0:50:38] nice property of epsilon 2 and also for here like for the factor model x1 also
+[0:50:41] here like for the factor model x1 also have such a decomposition and epsilon
+[0:50:43] have such a decomposition and epsilon one is even better because uh it's uh
+[0:50:46] one is even better because uh it's uh only affect y through the treatment x1
+[0:50:48] only affect y through the treatment x1 and is not associated with unmeasured
+[0:50:50] and is not associated with unmeasured confounder it's a like by design it's in
+[0:50:54] confounder it's a like by design it's in variable but unfortunately without
+[0:50:56] variable but unfortunately without epsilon 2 we cannot even identify
+[0:50:58] epsilon 2 we cannot even identify epsilon one because epsilon one just the
+[0:51:00] epsilon one because epsilon one just the noise or the error of the factor model
+[0:51:02] noise or the error of the factor model so what they uh use very cleverly. they
+[0:51:05] so what they uh use very cleverly. they do a little bit cancellation of this two
+[0:51:07] do a little bit cancellation of this two two u by after the estimating lambda one
+[0:51:09] two u by after the estimating lambda one and lambda 2 and then uh they can cancel
+[0:51:12] and lambda 2 and then uh they can cancel this u and then uh they can construct
+[0:51:14] this u and then uh they can construct this linear combination of epsilon one
+[0:51:16] this linear combination of epsilon one and eps so that's naturally a instrument
+[0:51:19] and eps so that's naturally a instrument um but it also but this one cannot be
+[0:51:22] um but it also but this one cannot be really be uh observed from data but left
+[0:51:24] really be uh observed from data but left hand side can actually be observed from
+[0:51:26] hand side can actually be observed from data so that's a synthetic instrument
+[0:51:28] data so that's a synthetic instrument idea and uh uh as I'm repeating myself I
+[0:51:31] idea and uh uh as I'm repeating myself I I like it very much okay and um they
+[0:51:34] I like it very much okay and um they actually they can just combine this uh
+[0:51:36] actually they can just combine this uh voting and synthetic instrument at least
+[0:51:39] voting and synthetic instrument at least that's that's well help us like enabled
+[0:51:41] that's that's well help us like enabled identification but actually as limbo
+[0:51:43] identification but actually as limbo explained it's a lot of computation and
+[0:51:45] explained it's a lot of computation and also um there could be a bit issue of
+[0:51:49] also um there could be a bit issue of this post selection or testing uh so
+[0:51:51] this post selection or testing uh so this is a clever way so they find that
+[0:51:54] this is a clever way so they find that they can just construct some synthetic
+[0:51:55] they can just construct some synthetic instruments instead of um doing this
+[0:51:58] instruments instead of um doing this going through this uh enumeration which
+[0:52:00] going through this uh enumeration which which beta is zero which beta is not
+[0:52:02] which beta is zero which beta is not zero and they can construct this and
+[0:52:04] zero and they can construct this and then they use this constraint
+[0:52:05] then they use this constraint optimization uh to solve this uh like
+[0:52:08] optimization uh to solve this uh like give a estimation of the beta hat. Okay.
+[0:52:11] give a estimation of the beta hat. Okay. And here I just want to recall that for
+[0:52:13] And here I just want to recall that for the construction of synthetic instrument
+[0:52:14] the construction of synthetic instrument it needs a very good estimator of lambda
+[0:52:16] it needs a very good estimator of lambda hat. So that's the like the parameter
+[0:52:19] hat. So that's the like the parameter for this for the factor model. Okay. So
+[0:52:21] for this for the factor model. Okay. So this is a bit my takeaway and uh it's
+[0:52:23] this is a bit my takeaway and uh it's not the whole logical story but it's
+[0:52:25] not the whole logical story but it's some very nice point I I have learned
+[0:52:27] some very nice point I I have learned from this paper and the following I
+[0:52:29] from this paper and the following I would like to provide a bit discussion
+[0:52:31] would like to provide a bit discussion and connection uh to something Limbo
+[0:52:33] and connection uh to something Limbo also mentioned that also I have been
+[0:52:34] also mentioned that also I have been working on for a while. So the first one
+[0:52:37] working on for a while. So the first one is related to dense confounding. So um
+[0:52:40] is related to dense confounding. So um in dense confounding is something it's
+[0:52:42] in dense confounding is something it's very similar to what limbo is
+[0:52:44] very similar to what limbo is considering here. So the x actually has
+[0:52:46] considering here. So the x actually has some effect on y and the effect could be
+[0:52:48] some effect on y and the effect could be sparse. So that means the beta is sparse
+[0:52:50] sparse. So that means the beta is sparse and then U is a measure confounder. It
+[0:52:52] and then U is a measure confounder. It can directly affect Y and also there's a
+[0:52:54] can directly affect Y and also there's a key assumption is this a measure
+[0:52:56] key assumption is this a measure confounder U is densely affected with
+[0:52:58] confounder U is densely affected with XI. Okay, for example, this U could be
+[0:53:00] XI. Okay, for example, this U could be like the location or the origin of this
+[0:53:03] like the location or the origin of this population and in a lot of cases that's
+[0:53:05] population and in a lot of cases that's a dense confounding on the XI is a gene
+[0:53:08] a dense confounding on the XI is a gene expression level. So there's a many
+[0:53:10] expression level. So there's a many background about that. So this is the uh
+[0:53:13] background about that. So this is the uh the dense confounding model and I think
+[0:53:14] the dense confounding model and I think the actual assumption we make here is
+[0:53:16] the actual assumption we make here is we're assuming that xi and ui so their
+[0:53:19] we're assuming that xi and ui so their association is connected by dense vector
+[0:53:21] association is connected by dense vector or dense matrix. So that's a key
+[0:53:23] or dense matrix. So that's a key assumption and then uh as limbo also
+[0:53:26] assumption and then uh as limbo also pointed like Peter uh Domov and Nicola
+[0:53:30] pointed like Peter uh Domov and Nicola they have this very cute idea of the
+[0:53:32] they have this very cute idea of the special deconing. So what they do is
+[0:53:34] special deconing. So what they do is they uh do a singular value
+[0:53:36] they uh do a singular value decommodation on X and then they remove
+[0:53:38] decommodation on X and then they remove the top singular values and that's
+[0:53:40] the top singular values and that's actually effectively remove the hidden
+[0:53:41] actually effectively remove the hidden compounding and if this is a bit too
+[0:53:44] compounding and if this is a bit too much so you can just think about uh they
+[0:53:46] much so you can just think about uh they essentially they provide a proxy or
+[0:53:48] essentially they provide a proxy or provide estimate of U and then they
+[0:53:50] provide estimate of U and then they adjust this they put this they estimate
+[0:53:53] adjust this they put this they estimate the U from the factor model leveraging
+[0:53:55] the U from the factor model leveraging this dense confounding assumption and
+[0:53:56] this dense confounding assumption and then they put the U to the outcome model
+[0:53:58] then they put the U to the outcome model and basically that's the way of
+[0:54:00] and basically that's the way of adjusting this measure confounder okay
+[0:54:02] adjusting this measure confounder okay but But this uh trimming idea is is
+[0:54:05] but But this uh trimming idea is is actually much better in a sense it's
+[0:54:07] actually much better in a sense it's very robust. So even though we cannot
+[0:54:09] very robust. So even though we cannot estimate a factor model well we cannot
+[0:54:11] estimate a factor model well we cannot estimate how many factors are here and
+[0:54:13] estimate how many factors are here and also how good like we cannot estimate
+[0:54:14] also how good like we cannot estimate the lambda and u well so they they still
+[0:54:17] the lambda and u well so they they still have quite a bit of room to to make it
+[0:54:18] have quite a bit of room to to make it work well. I mean rigorously in theory.
+[0:54:21] work well. I mean rigorously in theory. Okay. And my first actually my first
+[0:54:23] Okay. And my first actually my first question to limbo is uh I think some
+[0:54:25] question to limbo is uh I think some someone also asked in the uh in the Q&amp;A
+[0:54:28] someone also asked in the uh in the Q&amp;A or in the chat. So can we simply
+[0:54:30] or in the chat. So can we simply estimate U because now you assuming you
+[0:54:32] estimate U because now you assuming you estimate lambda. So can we simply
+[0:54:34] estimate lambda. So can we simply estimate U and then use something
+[0:54:36] estimate U and then use something putting this U here uh and then include
+[0:54:39] putting this U here uh and then include that estimator U in the outcome
+[0:54:41] that estimator U in the outcome regression. Okay. And the second one is
+[0:54:43] regression. Okay. And the second one is as a main advantage of the special
+[0:54:45] as a main advantage of the special decompounding I know it makes different
+[0:54:47] decompounding I know it makes different assumption. So um I think things gets a
+[0:54:50] assumption. So um I think things gets a bit robust in the sense even though the
+[0:54:52] bit robust in the sense even though the how many factors we have and how many uh
+[0:54:55] how many factors we have and how many uh what's the like the factor model like
+[0:54:57] what's the like the factor model like sorry what's the real measure compounder
+[0:54:59] sorry what's the real measure compounder even though we don't estimate that well
+[0:55:01] even though we don't estimate that well especially this number of factors so the
+[0:55:05] especially this number of factors so the special deconing is still quite quite
+[0:55:07] special deconing is still quite quite flexible it doesn't really require those
+[0:55:09] flexible it doesn't really require those estimation okay so that's my question is
+[0:55:11] estimation okay so that's my question is the robustness of the current proposal
+[0:55:13] the robustness of the current proposal scheme and uh I just have one more
+[0:55:16] scheme and uh I just have one more question um and This is also limbo
+[0:55:19] question um and This is also limbo talked a bit but didn't uh provide the
+[0:55:21] talked a bit but didn't uh provide the formula I think. So this is the the
+[0:55:23] formula I think. So this is the the robust instrument. It means like we have
+[0:55:25] robust instrument. It means like we have multiple instruments. So it's very
+[0:55:27] multiple instruments. So it's very common uh in millennial randomization
+[0:55:29] common uh in millennial randomization and in this case uh we can allow that
+[0:55:31] and in this case uh we can allow that some instruments are invalid. It means
+[0:55:33] some instruments are invalid. It means uh they uh affect they affect a major
+[0:55:36] uh they uh affect they affect a major confounder or they directly affect
+[0:55:38] confounder or they directly affect outcome mode. Okay. So in this case like
+[0:55:41] outcome mode. Okay. So in this case like one way to do the identification is uh
+[0:55:44] one way to do the identification is uh like this voting mechanism or majority
+[0:55:46] like this voting mechanism or majority rule. We assume that the large
+[0:55:48] rule. We assume that the large proportion of the instruments are valid
+[0:55:49] proportion of the instruments are valid but we don't know which are. So that's
+[0:55:51] but we don't know which are. So that's uh uh very related to what Limbo is
+[0:55:54] uh uh very related to what Limbo is talking about today. And then uh we
+[0:55:56] talking about today. And then uh we leverage this voting mechanism. For
+[0:55:58] leverage this voting mechanism. For example, here we got six instruments and
+[0:56:00] example, here we got six instruments and then uh like we we let them vote for
+[0:56:02] then uh like we we let them vote for each other by solving the similar system
+[0:56:04] each other by solving the similar system equation and then uh we can see that the
+[0:56:07] equation and then uh we can see that the SNIP one um and SNIP two and SNIP three
+[0:56:10] SNIP one um and SNIP two and SNIP three they always vote for each other. So
+[0:56:12] they always vote for each other. So we'll choose them um because that's the
+[0:56:15] we'll choose them um because that's the largest group we can find that's agree
+[0:56:17] largest group we can find that's agree with each other and then we can do this
+[0:56:19] with each other and then we can do this uh like voting and doing the selection.
+[0:56:21] uh like voting and doing the selection. Uh so it's uh proposing this paper I'm
+[0:56:24] Uh so it's uh proposing this paper I'm listing here. Um but the part bothers us
+[0:56:27] listing here. Um but the part bothers us quite a bit uh is uh how do we construct
+[0:56:30] quite a bit uh is uh how do we construct confidence interval okay so it may be a
+[0:56:32] confidence interval okay so it may be a different problem that limbo is talking
+[0:56:33] different problem that limbo is talking about because he's emphasize again the
+[0:56:35] about because he's emphasize again the estimation but what I want to say is
+[0:56:38] estimation but what I want to say is like in causal we always want to at
+[0:56:40] like in causal we always want to at least do a bit causal sorry confidence
+[0:56:43] least do a bit causal sorry confidence interval and the question is how do we
+[0:56:45] interval and the question is how do we con construct confidence interval and
+[0:56:47] con construct confidence interval and the challenge is uh if you're just
+[0:56:49] the challenge is uh if you're just implementing this naive or this very
+[0:56:52] implementing this naive or this very intuitive like selection procedure as I
+[0:56:54] intuitive like selection procedure as I described in the previous figure. So you
+[0:56:56] described in the previous figure. So you can easily see the coverage drops quite
+[0:56:58] can easily see the coverage drops quite a bit if the instruments are very hard
+[0:57:00] a bit if the instruments are very hard to to separate. I mean the good
+[0:57:02] to to separate. I mean the good instruments and bad instruments are very
+[0:57:04] instruments and bad instruments are very hard to separate and then uh I got a bit
+[0:57:06] hard to separate and then uh I got a bit I made a bit progress by doing some like
+[0:57:08] I made a bit progress by doing some like a uniformly valid confidence interval um
+[0:57:11] a uniformly valid confidence interval um like not relying on the correctness of
+[0:57:13] like not relying on the correctness of spicing the instrument and actually my
+[0:57:16] spicing the instrument and actually my question is like uh maybe more generally
+[0:57:18] question is like uh maybe more generally like about uncertain quantification of
+[0:57:20] like about uncertain quantification of the estimator that limbo and the
+[0:57:22] the estimator that limbo and the collaborators have proposed uh and
+[0:57:24] collaborators have proposed uh and finally I would like to thank the
+[0:57:25] finally I would like to thank the opportunity for me to uh to give a
+[0:57:27] opportunity for me to uh to give a discussion and I would like to uh
+[0:57:29] discussion and I would like to uh congrat limber and the collaborator
+[0:57:31] congrat limber and the collaborator again for their very nice paper. Yeah,
+[0:57:33] again for their very nice paper. Yeah, thank you.
+[0:57:35] thank you. &gt;&gt; Thank you Zen for the very nice
+[0:57:37] &gt;&gt; Thank you Zen for the very nice discussion. Uh Liber, do you want to uh
+[0:57:39] discussion. Uh Liber, do you want to uh respond and continue the the discussion?
+[0:57:42] respond and continue the the discussion? &gt;&gt; Yeah, sure. So, yeah, first I'd like to
+[0:57:45] &gt;&gt; Yeah, sure. So, yeah, first I'd like to thank the Z for a lot of insightful
+[0:57:47] thank the Z for a lot of insightful comments. Um so I think there are
+[0:57:49] comments. Um so I think there are several main points. Um so I first want
+[0:57:52] several main points. Um so I first want to uh comment on the dense confounding
+[0:57:54] to uh comment on the dense confounding uh model. Yeah. Uh
+[0:57:56] uh model. Yeah. Uh &gt;&gt; so yeah indeed we have some uh uh some
+[0:58:00] &gt;&gt; so yeah indeed we have some uh uh some assumptions on the lambda on the true
+[0:58:02] assumptions on the lambda on the true value of lambda in particular we assume
+[0:58:04] value of lambda in particular we assume that I think any q by q sub matrix of
+[0:58:08] that I think any q by q sub matrix of the lambda or scaled version of the
+[0:58:10] the lambda or scaled version of the lambda is invertible. So I think this
+[0:58:13] lambda is invertible. So I think this will correspond to your dense
+[0:58:14] will correspond to your dense confounding assumption. Um so let's said
+[0:58:18] confounding assumption. Um so let's said I think our later we found out that our
+[0:58:21] I think our later we found out that our synthetic instrument may still work uh
+[0:58:24] synthetic instrument may still work uh under some cases uh even if the this
+[0:58:27] under some cases uh even if the this assumption fails uh for example so if we
+[0:58:30] assumption fails uh for example so if we have some treatments that are not
+[0:58:32] have some treatments that are not confounded but we don't know okay so we
+[0:58:35] confounded but we don't know okay so we just uh include it in the model then you
+[0:58:38] just uh include it in the model then you can still run this synthetic instrument
+[0:58:40] can still run this synthetic instrument procedure in this case the confounding
+[0:58:42] procedure in this case the confounding will not be dense because uh some rows
+[0:58:45] will not be dense because uh some rows uh I some corance of that lambda matrix
+[0:58:47] uh I some corance of that lambda matrix will be all zero. Uh but uh if you run
+[0:58:52] will be all zero. Uh but uh if you run this synthetic instrument you will find
+[0:58:55] this synthetic instrument you will find out that those treatment that are not
+[0:58:57] out that those treatment that are not confounded will appear in the synthetic
+[0:59:00] confounded will appear in the synthetic instrument.
+[0:59:01] instrument. So they will become part of the
+[0:59:03] So they will become part of the synthetic instruments.
+[0:59:05] synthetic instruments. So when you run your uh 2D square right
+[0:59:08] So when you run your uh 2D square right in the first stage you regress your X on
+[0:59:11] in the first stage you regress your X on this synthetic instrument. So your x hat
+[0:59:13] this synthetic instrument. So your x hat will also be those original x
+[0:59:15] will also be those original x unconfounded x. So uh when in your
+[0:59:19] unconfounded x. So uh when in your second stage you will regress your y on
+[0:59:21] second stage you will regress your y on those unconfined x and still get your
+[0:59:23] those unconfined x and still get your causal effect estimate. Right? So uh I
+[0:59:26] causal effect estimate. Right? So uh I think we mentioned this in in the paper.
+[0:59:28] think we mentioned this in in the paper. So if you're interested but uh yeah the
+[0:59:31] So if you're interested but uh yeah the short answer is yes. Uh in general we do
+[0:59:33] short answer is yes. Uh in general we do need this dense confounding structure
+[0:59:35] need this dense confounding structure but uh in some special cases uh we might
+[0:59:39] but uh in some special cases uh we might be able to get away with it.
+[0:59:41] be able to get away with it. Uh so now coming to your questions the
+[0:59:44] Uh so now coming to your questions the first one is uh yeah it's a great
+[0:59:45] first one is uh yeah it's a great question. Um
+[0:59:47] question. Um so uh so can we I think this a first
+[0:59:51] so uh so can we I think this a first natural question can we first just get a
+[0:59:53] natural question can we first just get a U hat and then then just regress Y on X
+[0:59:56] U hat and then then just regress Y on X and your hat right uh I think this uh
+[1:00:00] and your hat right uh I think this uh and this is approach I think taken by a
+[1:00:02] and this is approach I think taken by a lot of people in some various ways uh I
+[1:00:05] lot of people in some various ways uh I think the main approach I think uh just
+[1:00:07] think the main approach I think uh just from a causal influence perspective uh
+[1:00:10] from a causal influence perspective uh this fundamental difference between
+[1:00:11] this fundamental difference between approach we are taking and approach that
+[1:00:13] approach we are taking and approach that this you had approach uh is that
+[1:00:17] this you had approach uh is that we uh essentially use the instrumental
+[1:00:19] we uh essentially use the instrumental variable approach
+[1:00:22] variable approach right so in other words we don't care
+[1:00:24] right so in other words we don't care about how y depend on u we don't care
+[1:00:26] about how y depend on u we don't care about how y depend on x uh as long
+[1:00:29] about how y depend on x uh as long whenever instruments can work our
+[1:00:31] whenever instruments can work our methods can work
+[1:00:34] methods can work now coming back to this uhat method so
+[1:00:37] now coming back to this uhat method so we did a little bit investigation under
+[1:00:39] we did a little bit investigation under this uhat method it turns out that this
+[1:00:41] this uhat method it turns out that this had method will only work if uh y
+[1:00:46] had method will only work if uh y depends uh the model the dependence
+[1:00:48] depends uh the model the dependence between y and x is linear.
+[1:00:53] between y and x is linear. So so basically in so consider model
+[1:00:55] So so basically in so consider model let's say y = x beta plus u cubit times
+[1:01:00] let's say y = x beta plus u cubit times gamma.
+[1:01:02] gamma. So uh I think due to some uh special
+[1:01:06] So uh I think due to some uh special structure of linear models we actually
+[1:01:08] structure of linear models we actually you can show that uh if you just regress
+[1:01:11] you can show that uh if you just regress y or x and u hat then you will still be
+[1:01:14] y or x and u hat then you will still be able to get a consistent estimate
+[1:01:18] able to get a consistent estimate but not if you regress y or x and uhat
+[1:01:21] but not if you regress y or x and uhat cubic
+[1:01:28] okay so it's it's interesting that no matter uh doesn't matter how y depends
+[1:01:30] matter uh doesn't matter how y depends on u let's say y depends are used
+[1:01:32] on u let's say y depends are used through a cubic or Q square term, right?
+[1:01:35] through a cubic or Q square term, right? You still need to plug in the q u hat
+[1:01:38] You still need to plug in the q u hat and you will still be able to uh get a
+[1:01:40] and you will still be able to uh get a consistent estimate of beta. But this is
+[1:01:43] consistent estimate of beta. But this is only true if y depends linearly on x.
+[1:01:48] only true if y depends linearly on x. So if y the dependence between y and x
+[1:01:51] So if y the dependence between y and x is nonlinear, right? Let's say this
+[1:01:53] is nonlinear, right? Let's say this becomes you know it's exponential or
+[1:01:55] becomes you know it's exponential or some other forms then you can still use
+[1:01:58] some other forms then you can still use iv use a nonpric IV to uh get rid of
+[1:02:01] iv use a nonpric IV to uh get rid of you, right? this uh the logic will still
+[1:02:03] you, right? this uh the logic will still work because IV will work for nonlinear
+[1:02:05] work because IV will work for nonlinear linear causal effects but this uh method
+[1:02:08] linear causal effects but this uh method will no longer work. So in the paper we
+[1:02:11] will no longer work. So in the paper we actually have some simulations showing
+[1:02:13] actually have some simulations showing comparing our method SIV and this uhat
+[1:02:16] comparing our method SIV and this uhat method and you will see that uh this
+[1:02:20] method and you will see that uh this method will uh will fail to work when
+[1:02:23] method will uh will fail to work when the dependence between y and x is
+[1:02:25] the dependence between y and x is nonlinear.
+[1:02:28] nonlinear. And then coming to the second question
+[1:02:30] And then coming to the second question of this uh robustness to U and Q. Uh of
+[1:02:34] of this uh robustness to U and Q. Uh of course we don't estimate U. So so
+[1:02:35] course we don't estimate U. So so there's no no estimation of U here. So
+[1:02:39] there's no no estimation of U here. So we do need to estimate Q. But I think
+[1:02:41] we do need to estimate Q. But I think our method uh in any practical cases
+[1:02:45] our method uh in any practical cases will be very robust to Q in the sense
+[1:02:47] will be very robust to Q in the sense that uh you can always take a
+[1:02:50] that uh you can always take a conservative estimate of Q.
+[1:02:53] conservative estimate of Q. All right. Because the identification
+[1:02:55] All right. Because the identification assumption says uh your S needs to less
+[1:02:58] assumption says uh your S needs to less than P minus Q. Right? So if you are not
+[1:03:02] than P minus Q. Right? So if you are not sure about the estimate of Q, uh you can
+[1:03:05] sure about the estimate of Q, uh you can play it safe and get uh to to get the
+[1:03:08] play it safe and get uh to to get the most conservative estimate of Q
+[1:03:11] most conservative estimate of Q multiplied by 100.
+[1:03:15] multiplied by 100. Okay? And usually will still work,
+[1:03:17] Okay? And usually will still work, right? If in the data example I show
+[1:03:18] right? If in the data example I show you, right? S is five, P is 3,000.
+[1:03:23] you, right? S is five, P is 3,000. Our estimation of Q is three, right? If
+[1:03:25] Our estimation of Q is three, right? If you're not comfortable with three, you
+[1:03:26] you're not comfortable with three, you can call it three 300.
+[1:03:29] can call it three 300. You will still uh figure out five is
+[1:03:32] You will still uh figure out five is less than 3,000 minus 300.
+[1:03:37] less than 3,000 minus 300. So we have a lot of uh rooms uh uh uh to
+[1:03:42] So we have a lot of uh rooms uh uh uh to make mistakes about Q.
+[1:03:45] make mistakes about Q. This is because usually the distance
+[1:03:46] This is because usually the distance between S and P minus Q is very large.
+[1:03:50] between S and P minus Q is very large. And uh now let me quickly comment on
+[1:03:52] And uh now let me quickly comment on your last question about the inference
+[1:03:55] your last question about the inference procedure here. Uh yeah I think this is
+[1:03:58] procedure here. Uh yeah I think this is very interesting work. uh and I think
+[1:03:59] very interesting work. uh and I think actually uh when we thought about how to
+[1:04:03] actually uh when we thought about how to construct confidence interval but uh
+[1:04:05] construct confidence interval but uh after uh hearing about your comments I
+[1:04:07] after uh hearing about your comments I think this can be a promising uh
+[1:04:09] think this can be a promising uh direction uh because event essentially
+[1:04:12] direction uh because event essentially uh so to to talk about post-section
+[1:04:15] uh so to to talk about post-section influence right you worry about the
+[1:04:17] influence right you worry about the locally the local alternatives right so
+[1:04:20] locally the local alternatives right so let's say uh let's say if some betas are
+[1:04:25] let's say uh let's say if some betas are non zero but they're very close to zero
+[1:04:26] non zero but they're very close to zero at a certain rate Right? So this uh let
+[1:04:29] at a certain rate Right? So this uh let me call this a locally invalid native
+[1:04:31] me call this a locally invalid native control treatments.
+[1:04:33] control treatments. Right? So by the way we construct the
+[1:04:36] Right? So by the way we construct the syntactic instrument.
+[1:04:38] syntactic instrument. This will translate to the instruments
+[1:04:42] This will translate to the instruments some of the instruments corresponding to
+[1:04:44] some of the instruments corresponding to that treatment being locally invalid
+[1:04:47] that treatment being locally invalid because any uh effect from this uh
+[1:04:52] because any uh effect from this uh uh from this treatment to outcome will
+[1:04:55] uh from this treatment to outcome will translate into direct effect from the
+[1:04:57] translate into direct effect from the instrument to the outcome.
+[1:05:00] instrument to the outcome. Right? If you think about uh our let's
+[1:05:02] Right? If you think about uh our let's say if you think about our case let's
+[1:05:04] say if you think about our case let's say if uh if x2 has no effect on y right
+[1:05:08] say if uh if x2 has no effect on y right this beta 2 is zero then x1 minus uh
+[1:05:12] this beta 2 is zero then x1 minus uh whatever alpha 1 divid alpha 2 x2 will
+[1:05:15] whatever alpha 1 divid alpha 2 x2 will be a valid instrument.
+[1:05:17] be a valid instrument. Now if x2 has a non-zero effect on y
+[1:05:21] Now if x2 has a non-zero effect on y then the same thing will be invalid is
+[1:05:23] then the same thing will be invalid is true
+[1:05:24] true and uh the degree of uh invalidness
+[1:05:28] and uh the degree of uh invalidness will be exactly correspond to the effect
+[1:05:31] will be exactly correspond to the effect size of x2 on y because that's a direct
+[1:05:34] size of x2 on y because that's a direct effect from instrument to y
+[1:05:37] effect from instrument to y &gt;&gt; I see. So I think uh we in some degree I
+[1:05:41] &gt;&gt; I see. So I think uh we in some degree I think there is a correspondence between
+[1:05:42] think there is a correspondence between our setting and the setting you consider
+[1:05:44] our setting and the setting you consider here right because I think you are
+[1:05:47] here right because I think you are considering locally invalid instruments.
+[1:05:49] considering locally invalid instruments. Uh yeah
+[1:05:52] Uh yeah &gt;&gt; and I think here uh if we think about we
+[1:05:55] &gt;&gt; and I think here uh if we think about we need to consider locally invalid native
+[1:05:57] need to consider locally invalid native control treatments and I think uh there
+[1:05:59] control treatments and I think uh there is a correspondence so I'm happy to
+[1:06:02] is a correspondence so I'm happy to think about this further and maybe we
+[1:06:04] think about this further and maybe we can talk more.
+[1:06:06] can talk more. Yeah, thank you so much for the
+[1:06:08] Yeah, thank you so much for the insightful comments.
+[1:06:09] insightful comments. &gt;&gt; Yeah, thanks a lot. Yeah,
+[1:06:12] &gt;&gt; Yeah, thanks a lot. Yeah, &gt;&gt; that was
+[1:06:14] &gt;&gt; that was &gt;&gt; so good. Yeah, thank you so much again
+[1:06:16] &gt;&gt; so good. Yeah, thank you so much again uh Lingo for the very nice talk and for
+[1:06:19] uh Lingo for the very nice talk and for the insightful discussion and also I
+[1:06:21] the insightful discussion and also I think Dinka for handling the many
+[1:06:23] think Dinka for handling the many interesting questions. So I think it's a
+[1:06:25] interesting questions. So I think it's a good time to wrap up uh today's seminar.
+[1:06:29] good time to wrap up uh today's seminar. Let me uh before we wrap up, let me
+[1:06:31] Let me uh before we wrap up, let me share my screen again and introduce our
+[1:06:34] share my screen again and introduce our next.
+[1:06:35] next. So next week we are pleased to have uh
+[1:06:38] So next week we are pleased to have uh professor uh Tinka from USC Marshall to
+[1:06:42] professor uh Tinka from USC Marshall to talk about explanability and analysis of
+[1:06:45] talk about explanability and analysis of variance and as our discussant we will
+[1:06:47] variance and as our discussant we will have professor Art Owen from Stanford.
+[1:06:49] have professor Art Owen from Stanford. Uh we look forward to seeing you again
+[1:06:51] Uh we look forward to seeing you again next week. Thank you so much. vaccine.
