@@ -190,13 +190,16 @@ def test_structured_captures_abstract_and_discussant():
         "- Title:\nA Talk\n"
         "- Abstract:\nWe study double robustness under weak overlap.\n"
         "- Discussant:\nBob Roe <https://y>\n(CMU)\n"
+        "[\nSlides <https://drive.google.com/file/d/XYZ/view>\n]"
         "[\nVideo <https://youtu.be/abc>\n]"
     )
     r = ocis.parse_talks_structured(block)[0]
     assert r["abstract"] == "We study double robustness under weak overlap."
     assert r["discussant"] == "Bob Roe"          # affiliation + url stripped
+    assert "drive.google.com/file/d/XYZ" in r["slides"]
     e = ocis.row_to_talk_entry(r)
     assert e["abstract"].startswith("We study") and e["discussant"] == "Bob Roe"
+    assert e["slides"].endswith("/view")
 
 
 def test_merge_talk_entries_enriches(tmp_path):

@@ -334,6 +334,7 @@ def row_to_talk_entry(row: dict) -> dict | None:
         "language": "en",
         "discussant": (row.get("discussant") or "").strip() or None,
         "abstract": (row.get("abstract") or "").strip() or None,
+        "slides": (row.get("slides") or "").strip() or None,
     }
     aid = arxiv_id_from_url(row.get("arxiv") or "")
     if aid:

@@ -53,6 +53,9 @@ TALKS_DIR = DOCS_DIR / "talks"
 TALKS_INDEX = Path("data/talks_index.json")
 TRANSCRIPTS_DIR = Path("data/talks")
 AUDIO_DIR = TRANSCRIPTS_DIR / "audio"
+SLIDES_DIR = TRANSCRIPTS_DIR / "slides"
+# How much extracted slide text to feed the read (decks are usually short).
+MAX_SLIDES_CHARS = 20_000
 
 # Long structured read like a deep-read → default to the reasoning model.
 TALK_MODEL = os.environ.get("TALK_MODEL", os.environ.get("DEEP_READ_MODEL", "deepseek-reasoner"))
@@ -94,6 +97,7 @@ def _talk_from_raw(raw: dict) -> Talk | None:
         segments=list(raw.get("segments") or []),
         abstract=raw.get("abstract"),
         discussant=raw.get("discussant"),
+        slides=raw.get("slides"),
     )
 
 
@@ -373,10 +377,50 @@ def build_user_message(
     )
 
 
+_DRIVE_ID_RE = re.compile(r"/file/d/([^/]+)|[?&]id=([^&]+)")
+
+
+def _drive_pdf_url(url: str) -> str:
+    """Turn a Google Drive 'file/d/<id>/view' (or '?id=') link into a direct
+    download URL; pass other URLs through (a direct .pdf works as-is)."""
+    m = _DRIVE_ID_RE.search(url or "")
+    if m:
+        fid = m.group(1) or m.group(2)
+        return f"https://drive.google.com/uc?export=download&id={fid}"
+    return url
+
+
+def fetch_slides_text(talk: Talk, *, max_chars: int = MAX_SLIDES_CHARS) -> str:
+    """Download the talk's slide deck (best-effort) and extract its text. Cached
+    at data/talks/slides/<id>.pdf. Returns '' on any failure (no slides, a Drive
+    permission/scan page, a non-PDF, etc.)."""
+    if not talk.slides:
+        return ""
+    import httpx
+
+    from .deep_read import extract_pdf_text
+    SLIDES_DIR.mkdir(parents=True, exist_ok=True)
+    dest = SLIDES_DIR / f"{_slug(talk.id)}.pdf"
+    if not dest.exists():
+        try:
+            with httpx.Client(timeout=60, follow_redirects=True,
+                              headers={"User-Agent": "research-news/0.1"}) as c:
+                r = c.get(_drive_pdf_url(talk.slides))
+                r.raise_for_status()
+            if not r.content.startswith(b"%PDF-"):
+                log.info("slides for %s not a PDF (Drive scan/permission page?) — skipping", talk.id)
+                return ""
+            dest.write_bytes(r.content)
+        except Exception as e:  # noqa: BLE001
+            log.info("slides fetch failed for %s: %s", talk.id, e)
+            return ""
+    return extract_pdf_text(dest, max_chars=max_chars)
+
+
 def ground_truth_context(talk: Talk) -> str:
-    """Authoritative, ASR-error-free context for the read: the talk's own OCIS
-    abstract plus the abstract(s) of its arXiv paper(s). Best-effort — arXiv is
-    fetched live, so failures are skipped silently."""
+    """Authoritative, ASR-error-free material to read *alongside* the transcript:
+    the talk's OCIS abstract, its arXiv paper abstract(s), and its slide deck.
+    All best-effort (arXiv + slides are fetched live; failures are skipped)."""
     blocks: list[str] = []
     if talk.abstract:
         blocks.append(
@@ -396,6 +440,15 @@ def ground_truth_context(talk: Talk) -> str:
                 f"## 对应论文摘要（arXiv {pid}，权威）\nTitle: {p.title}\n"
                 f"Authors: {authors}\nAbstract: {p.abstract}"
             )
+    try:
+        slides = fetch_slides_text(talk)
+    except Exception:  # noqa: BLE001
+        slides = ""
+    if slides:
+        blocks.append(
+            "## 讲者幻灯片（文字抽取，权威——含报告的结构 / 公式 / 关键结果，"
+            "可能有 OCR/排版噪声）\n" + slides
+        )
     return "\n\n".join(blocks)
 
 
@@ -461,7 +514,10 @@ def _render_talk_page(
     if talk.date:
         lines.append(f"**日期**: {talk.date}  ")
     lines.append(f"**主题**: {topic_label}  ")
-    lines.append(f"**视频**: <{talk.url}>\n")
+    video_line = f"**视频**: <{talk.url}>"
+    if talk.slides:
+        video_line += f" · [幻灯片]({talk.slides})"
+    lines.append(video_line + "\n")
     if talk.abstract:
         lines.append(f"> **官方摘要**：{talk.abstract}\n")
     lines.append(

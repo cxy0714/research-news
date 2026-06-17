@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field, asdict
-from datetime import date, datetime
 from typing import Any
 
 
@@ -93,6 +92,9 @@ class Talk:
     # ground truth fed into the read; the discussant is shown for context.
     abstract: str | None = None
     discussant: str | None = None
+    # Slide deck URL (e.g. Google Drive PDF). Its extracted text is fed into the
+    # read as another authoritative source alongside transcript + abstract + paper.
+    slides: str | None = None
     # One of llm.prompts.TOPICS — used to slot the talk into the archive's topic
     # grouping. Defaults to "other" when unset.
     topic: str | None = None

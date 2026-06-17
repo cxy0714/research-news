@@ -268,6 +268,12 @@ def test_prefer_subs_skips_instead_of_asr(tmp_path, monkeypatch):
     assert not (tmp_path / "nocaps.txt").exists()
 
 
+def test_drive_pdf_url():
+    assert talks._drive_pdf_url("https://drive.google.com/file/d/ABC123/view?usp=sharing") == \
+        "https://drive.google.com/uc?export=download&id=ABC123"
+    assert talks._drive_pdf_url("https://example.com/deck.pdf") == "https://example.com/deck.pdf"
+
+
 def test_ground_truth_context_includes_abstract():
     # No papers → no network call; just the OCIS abstract block.
     t = talks.Talk(id="x", url="u", abstract="The talk is about proximal causal inference.")
