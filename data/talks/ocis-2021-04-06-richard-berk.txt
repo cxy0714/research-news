@@ -1,1700 +1,1543 @@
 [0:00:04] all right welcome to the online causal inference seminar today we're excited to
-[0:00:06] inference seminar today we're excited to have richard burke from the university
-[0:00:08] have richard burke from the university of pennsylvania
-[0:00:09] of pennsylvania talk about firearms sales in california
-[0:00:11] talk about firearms sales in california through the myopic vision of an
-[0:00:12] through the myopic vision of an interrupted time
-[0:00:13] interrupted time series causal analysis if you have any
-[0:00:16] series causal analysis if you have any questions about the talk please submit
-[0:00:17] questions about the talk please submit them in q a today we have support by
-[0:00:20] them in q a today we have support by susan and aaron we're happy to answer
-[0:00:21] susan and aaron we're happy to answer your questions
+[0:00:06] have richard burke from the university
+[0:00:08] of pennsylvania
+[0:00:09] talk about firearms sales in california
+[0:00:11] through the myopic vision of an
+[0:00:12] interrupted time
+[0:00:13] series causal analysis if you have any
+[0:00:16] questions about the talk please submit
+[0:00:17] them in q a today we have support by
+[0:00:20] susan and aaron we're happy to answer
+[0:00:21] your questions
 [0:00:26] also if you participate please keep in mind that the talk
-[0:00:27] mind that the talk will is recorded after the talk we'll
-[0:00:30] will is recorded after the talk we'll have a discussion by
-[0:00:31] have a discussion by john donoghue and then after that we
-[0:00:34] john donoghue and then after that we will we will
-[0:00:35] will we will take some questions live okay thank you
-[0:00:38] take some questions live okay thank you all for coming
-[0:00:39] all for coming questions today will be handled by
-[0:00:41] questions today will be handled by guillaume so i'm switching over to him
-[0:00:44] guillaume so i'm switching over to him now
+[0:00:27] will is recorded after the talk we'll
+[0:00:30] have a discussion by
+[0:00:31] john donoghue and then after that we
+[0:00:34] will we will
+[0:00:35] take some questions live okay thank you
+[0:00:38] all for coming
+[0:00:39] questions today will be handled by
+[0:00:41] guillaume so i'm switching over to him
+[0:00:44] now
 [0:00:49] thanks dominique so today we will try to keep questions to a minimum
-[0:00:51] keep questions to a minimum uh questions asked live to a minimum so
-[0:00:53] uh questions asked live to a minimum so um
+[0:00:51] uh questions asked live to a minimum so
 [0:00:54] um uh rnn susan will still help in the in
-[0:00:57] uh rnn susan will still help in the in the q a so please do submit your
-[0:00:59] the q a so please do submit your questions there but we will
-[0:01:00] questions there but we will uh keep the uh the questions live
-[0:01:03] uh keep the uh the questions live uh for the end so um that's how it's
-[0:01:06] uh for the end so um that's how it's gonna work today
-[0:01:07] gonna work today um that's all for me richard feel free
-[0:01:10] um that's all for me richard feel free to start whenever you're ready
-[0:01:11] to start whenever you're ready okay
+[0:00:57] the q a so please do submit your
+[0:00:59] questions there but we will
+[0:01:00] uh keep the uh the questions live
+[0:01:03] uh for the end so um that's how it's
+[0:01:06] gonna work today
+[0:01:07] um that's all for me richard feel free
+[0:01:10] to start whenever you're ready
+[0:01:11] okay
 [0:01:23] i assume this is now visible to everybody
 [0:01:24] everybody first of all i'd like to thank the
-[0:01:26] first of all i'd like to thank the organizers of this online
-[0:01:28] organizers of this online seminar series i'm really pleased to be
-[0:01:30] seminar series i'm really pleased to be able to present this work here today
-[0:01:32] able to present this work here today um the talks before this one have really
-[0:01:35] um the talks before this one have really been terrific and so i also need to
-[0:01:36] been terrific and so i also need to thank the organizers
-[0:01:38] thank the organizers for placing me in such good company um
-[0:01:41] for placing me in such good company um the work i'm going to talk about was
-[0:01:43] the work i'm going to talk about was significantly helped by arun and susan
-[0:01:46] significantly helped by arun and susan roon for a lot of technical issues that
-[0:01:49] roon for a lot of technical issues that have come up
-[0:01:49] have come up and susan for the subject matter and
-[0:01:52] and susan for the subject matter and they'll be available to handle the q a
-[0:01:55] they'll be available to handle the q a now motivating a talk like this at the
-[0:01:58] now motivating a talk like this at the moment sadly
-[0:01:59] moment sadly is very easy in the last several weeks
-[0:02:02] is very easy in the last several weeks we've had a number of mass shootings
-[0:02:04] we've had a number of mass shootings i opened up the newspaper this morning
-[0:02:06] i opened up the newspaper this morning to learn about another one
-[0:02:08] to learn about another one just north of dallas and the suburbs
-[0:02:11] just north of dallas and the suburbs so it's pretty clear that we have a
-[0:02:14] so it's pretty clear that we have a serious problem on our hands
-[0:02:17] serious problem on our hands but it's not the whole story and that's
-[0:02:19] but it's not the whole story and that's really important to emphasize at the
-[0:02:20] really important to emphasize at the beginning
+[0:01:26] organizers of this online
+[0:01:28] seminar series i'm really pleased to be
+[0:01:30] able to present this work here today
+[0:01:32] um the talks before this one have really
+[0:01:35] been terrific and so i also need to
+[0:01:36] thank the organizers
+[0:01:38] for placing me in such good company um
+[0:01:41] the work i'm going to talk about was
+[0:01:43] significantly helped by arun and susan
+[0:01:46] roon for a lot of technical issues that
+[0:01:49] have come up
+[0:01:49] and susan for the subject matter and
+[0:01:52] they'll be available to handle the q a
+[0:01:55] now motivating a talk like this at the
+[0:01:58] moment sadly
+[0:01:59] is very easy in the last several weeks
+[0:02:02] we've had a number of mass shootings
+[0:02:04] i opened up the newspaper this morning
+[0:02:06] to learn about another one
+[0:02:08] just north of dallas and the suburbs
+[0:02:11] so it's pretty clear that we have a
+[0:02:14] serious problem on our hands
+[0:02:17] but it's not the whole story and that's
+[0:02:19] really important to emphasize at the
 [0:02:21] beginning mass shootings are just the tip of the
-[0:02:24] mass shootings are just the tip of the iceberg
 [0:02:25] iceberg if you look at deaths from firearms in
-[0:02:27] if you look at deaths from firearms in the united states in 2018
-[0:02:30] the united states in 2018 there's approximately two firearm deaths
-[0:02:33] there's approximately two firearm deaths from suicides
-[0:02:34] from suicides for every firearm death for homicides so
-[0:02:37] for every firearm death for homicides so it's clearly a public health issue
-[0:02:39] it's clearly a public health issue way beyond just a criminal justice issue
-[0:02:43] way beyond just a criminal justice issue they're also what we think of as
-[0:02:46] they're also what we think of as part in the term garden variety
-[0:02:48] part in the term garden variety homicides i don't like that term because
-[0:02:50] homicides i don't like that term because every homicide is tragic but it's a
-[0:02:53] every homicide is tragic but it's a commonly used idea
-[0:02:54] commonly used idea where i live in philadelphia for example
-[0:02:57] where i live in philadelphia for example last year we had about 10
-[0:02:59] last year we had about 10 homicides per week most of those by
-[0:03:02] homicides per week most of those by firearms
+[0:02:27] the united states in 2018
+[0:02:30] there's approximately two firearm deaths
+[0:02:33] from suicides
+[0:02:34] for every firearm death for homicides so
+[0:02:37] it's clearly a public health issue
+[0:02:39] way beyond just a criminal justice issue
+[0:02:43] they're also what we think of as
+[0:02:46] part in the term garden variety
+[0:02:48] homicides i don't like that term because
+[0:02:50] every homicide is tragic but it's a
+[0:02:53] commonly used idea
+[0:02:54] where i live in philadelphia for example
+[0:02:57] last year we had about 10
+[0:02:59] homicides per week most of those by
 [0:03:03] firearms and about 40 individuals shot per week
-[0:03:06] and about 40 individuals shot per week that's like having two or three mass
-[0:03:08] that's like having two or three mass shootings per week
-[0:03:09] shootings per week for these garden variety homicides so
-[0:03:12] for these garden variety homicides so the problem is not just
-[0:03:13] the problem is not just mass shootings although they seem to
-[0:03:15] mass shootings although they seem to garner a lot of the media attention
-[0:03:17] garner a lot of the media attention it's far broader than that
-[0:03:20] it's far broader than that i'm going to cover basically four topics
-[0:03:23] i'm going to cover basically four topics today
+[0:03:06] that's like having two or three mass
+[0:03:08] shootings per week
+[0:03:09] for these garden variety homicides so
+[0:03:12] the problem is not just
+[0:03:13] mass shootings although they seem to
+[0:03:15] garner a lot of the media attention
+[0:03:17] it's far broader than that
+[0:03:20] i'm going to cover basically four topics
 [0:03:24] today first i'm going to give you a quick
-[0:03:26] first i'm going to give you a quick introduction to the canonical way in
-[0:03:28] introduction to the canonical way in which
+[0:03:26] introduction to the canonical way in
 [0:03:28] which time series modeling is done when you
-[0:03:31] time series modeling is done when you have an interrupted time series
-[0:03:32] have an interrupted time series formulation
-[0:03:34] formulation uh it's going to be canonical because
-[0:03:35] uh it's going to be canonical because there are many variants on it we
-[0:03:37] there are many variants on it we certainly don't have time to go into
-[0:03:38] certainly don't have time to go into them
+[0:03:31] have an interrupted time series
+[0:03:32] formulation
+[0:03:34] uh it's going to be canonical because
+[0:03:35] there are many variants on it we
+[0:03:37] certainly don't have time to go into
 [0:03:39] them but it's going to be the one i'm going
-[0:03:40] but it's going to be the one i'm going to apply because there are some
-[0:03:42] to apply because there are some important lessons
-[0:03:44] important lessons to be learned from that approach i'm
-[0:03:47] to be learned from that approach i'm going to apply the
-[0:03:48] going to apply the uh the methods to gun sales in
-[0:03:49] uh the methods to gun sales in california and particularly to an
-[0:03:52] california and particularly to an assault weapon ban
-[0:03:54] assault weapon ban that was introduced and tried to
-[0:03:55] that was introduced and tried to determine whether that assault weapon
-[0:03:57] determine whether that assault weapon ban
+[0:03:40] to apply because there are some
+[0:03:42] important lessons
+[0:03:44] to be learned from that approach i'm
+[0:03:47] going to apply the
+[0:03:48] uh the methods to gun sales in
+[0:03:49] california and particularly to an
+[0:03:52] assault weapon ban
+[0:03:54] that was introduced and tried to
+[0:03:55] determine whether that assault weapon
 [0:03:57] ban made any difference that in turn is
-[0:04:00] made any difference that in turn is going to raise some important questions
-[0:04:01] going to raise some important questions about model cherry picking
-[0:04:03] about model cherry picking which introduces a multiple testing
-[0:04:05] which introduces a multiple testing problem but people sometimes call post
-[0:04:07] problem but people sometimes call post selection inference
-[0:04:09] selection inference i'm going to offer some solutions i
-[0:04:11] i'm going to offer some solutions i quote it because
-[0:04:12] quote it because they're not really solutions they're
-[0:04:14] they're not really solutions they're more like aspirations
-[0:04:17] more like aspirations they're going to turn to the nature of
-[0:04:18] they're going to turn to the nature of the intervention that is this assault
-[0:04:20] the intervention that is this assault weapon ban
-[0:04:21] weapon ban um there's some real questions about how
-[0:04:22] um there's some real questions about how we define interventions and this is
-[0:04:24] we define interventions and this is going to be
-[0:04:25] going to be a good example of the difficulties that
-[0:04:27] a good example of the difficulties that can arise
+[0:04:00] going to raise some important questions
+[0:04:01] about model cherry picking
+[0:04:03] which introduces a multiple testing
+[0:04:05] problem but people sometimes call post
+[0:04:07] selection inference
+[0:04:09] i'm going to offer some solutions i
+[0:04:11] quote it because
+[0:04:12] they're not really solutions they're
+[0:04:14] more like aspirations
+[0:04:17] they're going to turn to the nature of
+[0:04:18] the intervention that is this assault
+[0:04:20] weapon ban
+[0:04:21] um there's some real questions about how
+[0:04:22] we define interventions and this is
+[0:04:24] going to be
+[0:04:25] a good example of the difficulties that
 [0:04:29] can arise and then i'm going to finish with some
-[0:04:30] and then i'm going to finish with some general comments about gun policies and
-[0:04:33] general comments about gun policies and what can be learned
-[0:04:34] what can be learned where i'm going to emphasize that maybe
-[0:04:36] where i'm going to emphasize that maybe we need to think about aspirations
-[0:04:37] we need to think about aspirations rather than actual accomplishments
-[0:04:41] rather than actual accomplishments last week uh elizabeth stewart gave a
-[0:04:44] last week uh elizabeth stewart gave a wonderful talk and i was really taken by
-[0:04:46] wonderful talk and i was really taken by her last slide
-[0:04:47] her last slide as a summary of the challenges that were
-[0:04:50] as a summary of the challenges that were faced in the kind of work that she does
-[0:04:52] faced in the kind of work that she does so i looked around tried to come up with
-[0:04:54] so i looked around tried to come up with something and came upon this
-[0:04:56] something and came upon this i think it actually uh characterizes
-[0:04:58] i think it actually uh characterizes quite well
-[0:04:59] quite well the difficulty that the data that's
-[0:05:01] the difficulty that the data that's available for gun policy research
-[0:05:04] available for gun policy research is a significant challenge for existing
-[0:05:06] is a significant challenge for existing statistical tools
-[0:05:08] statistical tools and there are a number of really
-[0:05:09] and there are a number of really important unsolved problems
-[0:05:11] important unsolved problems i'm going to talk about some of those
-[0:05:12] i'm going to talk about some of those shortly so
-[0:05:16] shortly so let's get started with something that i
-[0:05:18] let's get started with something that i found in the economist which i think by
-[0:05:20] found in the economist which i think by the way is a fabulous
-[0:05:21] the way is a fabulous magazine several weeks ago um what you
-[0:05:24] magazine several weeks ago um what you see here
+[0:04:30] general comments about gun policies and
+[0:04:33] what can be learned
+[0:04:34] where i'm going to emphasize that maybe
+[0:04:36] we need to think about aspirations
+[0:04:37] rather than actual accomplishments
+[0:04:41] last week uh elizabeth stewart gave a
+[0:04:44] wonderful talk and i was really taken by
+[0:04:46] her last slide
+[0:04:47] as a summary of the challenges that were
+[0:04:50] faced in the kind of work that she does
+[0:04:52] so i looked around tried to come up with
+[0:04:54] something and came upon this
+[0:04:56] i think it actually uh characterizes
+[0:04:58] quite well
+[0:04:59] the difficulty that the data that's
+[0:05:01] available for gun policy research
+[0:05:04] is a significant challenge for existing
+[0:05:06] statistical tools
+[0:05:08] and there are a number of really
+[0:05:09] important unsolved problems
+[0:05:11] i'm going to talk about some of those
+[0:05:12] shortly so
+[0:05:16] let's get started with something that i
+[0:05:18] found in the economist which i think by
+[0:05:20] the way is a fabulous
+[0:05:21] magazine several weeks ago um what you
 [0:05:26] see here is monthly firearm background checks in
-[0:05:28] is monthly firearm background checks in the millions
-[0:05:29] the millions um for the united states for 20 years
-[0:05:33] um for the united states for 20 years 2000 and 2020. background checks as i'll
-[0:05:37] 2000 and 2020. background checks as i'll make clear
-[0:05:38] make clear shortly are often a pretty good proxy
-[0:05:41] shortly are often a pretty good proxy for sales
+[0:05:28] the millions
+[0:05:29] um for the united states for 20 years
+[0:05:33] 2000 and 2020. background checks as i'll
+[0:05:37] make clear
+[0:05:38] shortly are often a pretty good proxy
 [0:05:43] for sales and what you have with the light blue
-[0:05:46] and what you have with the light blue line is the actual sales per month
-[0:05:50] line is the actual sales per month and what you have with the heavier line
-[0:05:51] and what you have with the heavier line is smoother and what's significant about
-[0:05:54] is smoother and what's significant about the smoother is that you can see some
-[0:05:55] the smoother is that you can see some peaks and valleys
-[0:05:57] peaks and valleys and associated with some of the peaks
-[0:05:59] and associated with some of the peaks are important historical events
-[0:06:01] are important historical events like for example the obama elections
-[0:06:04] like for example the obama elections sandy hook shooting
-[0:06:05] sandy hook shooting the san bernardino shooting and so on
-[0:06:08] the san bernardino shooting and so on these
+[0:05:46] line is the actual sales per month
+[0:05:50] and what you have with the heavier line
+[0:05:51] is smoother and what's significant about
+[0:05:54] the smoother is that you can see some
+[0:05:55] peaks and valleys
+[0:05:57] and associated with some of the peaks
+[0:05:59] are important historical events
+[0:06:01] like for example the obama elections
+[0:06:04] sandy hook shooting
+[0:06:05] the san bernardino shooting and so on
 [0:06:09] these marks for historical events are commonly
-[0:06:13] marks for historical events are commonly cited in discussions of gun sales and
-[0:06:16] cited in discussions of gun sales and there's lots of speculation about what's
-[0:06:17] there's lots of speculation about what's be going on what's been going on
-[0:06:20] be going on what's been going on some of it plausible some but not
-[0:06:21] some of it plausible some but not there's not a lot of great research on
-[0:06:23] there's not a lot of great research on this however
-[0:06:24] this however which i think will become more apparent
-[0:06:26] which i think will become more apparent as we proceed
-[0:06:28] as we proceed now to analyze such a series
-[0:06:32] now to analyze such a series let's talk about the canonical
-[0:06:34] let's talk about the canonical interrupted time series approach
-[0:06:37] interrupted time series approach it starts with an assumed general linear
-[0:06:39] it starts with an assumed general linear process
+[0:06:13] cited in discussions of gun sales and
+[0:06:16] there's lots of speculation about what's
+[0:06:17] be going on what's been going on
+[0:06:20] some of it plausible some but not
+[0:06:21] there's not a lot of great research on
+[0:06:23] this however
+[0:06:24] which i think will become more apparent
+[0:06:26] as we proceed
+[0:06:28] now to analyze such a series
+[0:06:32] let's talk about the canonical
+[0:06:34] interrupted time series approach
+[0:06:37] it starts with an assumed general linear
 [0:06:40] process such that y in this case background
-[0:06:42] such that y in this case background checks
 [0:06:43] checks is a function of a limitless number of
-[0:06:45] is a function of a limitless number of prior white noise perturbations each
-[0:06:48] prior white noise perturbations each with a weight
-[0:06:50] with a weight the perturbations are treated as white
-[0:06:51] the perturbations are treated as white noise
+[0:06:45] prior white noise perturbations each
+[0:06:48] with a weight
+[0:06:50] the perturbations are treated as white
 [0:06:53] noise the coefficients associated with each
-[0:06:56] the coefficients associated with each perturbation
-[0:06:58] perturbation are assumed to meet certain requirements
-[0:07:00] are assumed to meet certain requirements usually something like
-[0:07:02] usually something like the fact that the sum of their squared
-[0:07:03] the fact that the sum of their squared values is bounded
-[0:07:05] values is bounded that in turn leads to a form of weak
-[0:07:07] that in turn leads to a form of weak stationarity such that the mean
-[0:07:10] stationarity such that the mean is constant usually centered at zero
-[0:07:13] is constant usually centered at zero and the covariance between any two
-[0:07:15] and the covariance between any two observations
-[0:07:16] observations is determined solely by the distance
-[0:07:18] is determined solely by the distance between them
-[0:07:20] between them not where they are in the time series
-[0:07:21] not where they are in the time series itself now this is obviously
-[0:07:24] itself now this is obviously quite an abstraction and i have to
-[0:07:27] quite an abstraction and i have to emphasize that when we start dealing
-[0:07:28] emphasize that when we start dealing with these kinds of abstractions
-[0:07:30] with these kinds of abstractions we must not lose sight of the context
-[0:07:33] we must not lose sight of the context in which these abstractions are being
-[0:07:35] in which these abstractions are being made so here are a few historical
-[0:07:37] made so here are a few historical footnotes
+[0:06:56] perturbation
+[0:06:58] are assumed to meet certain requirements
+[0:07:00] usually something like
+[0:07:02] the fact that the sum of their squared
+[0:07:03] values is bounded
+[0:07:05] that in turn leads to a form of weak
+[0:07:07] stationarity such that the mean
+[0:07:10] is constant usually centered at zero
+[0:07:13] and the covariance between any two
+[0:07:15] observations
+[0:07:16] is determined solely by the distance
+[0:07:18] between them
+[0:07:20] not where they are in the time series
+[0:07:21] itself now this is obviously
+[0:07:24] quite an abstraction and i have to
+[0:07:27] emphasize that when we start dealing
+[0:07:28] with these kinds of abstractions
+[0:07:30] we must not lose sight of the context
+[0:07:33] in which these abstractions are being
+[0:07:35] made so here are a few historical
 [0:07:39] footnotes if you think about gun sales year by
-[0:07:41] if you think about gun sales year by year and you go back 175 years
-[0:07:44] year and you go back 175 years here are some of the things you have to
-[0:07:45] here are some of the things you have to face 175 by the way of course
-[0:07:48] face 175 by the way of course is not going back limitlessly in time
-[0:07:51] is not going back limitlessly in time california was annexed from mexico in
-[0:07:53] california was annexed from mexico in 1848 became a state in 1850
-[0:07:56] 1848 became a state in 1850 during the gold rush there was no
-[0:07:58] during the gold rush there was no california to regulate
-[0:07:59] california to regulate firearms before then and even for a
-[0:08:02] firearms before then and even for a couple of decades thereafter
-[0:08:04] couple of decades thereafter the state government was weak and
-[0:08:06] the state government was weak and ineffective
-[0:08:08] ineffective if you want to regulate something you
-[0:08:09] if you want to regulate something you have to determine what that something is
-[0:08:12] have to determine what that something is here are some examples
-[0:08:13] here are some examples the colt 45 which is the weapon that you
-[0:08:16] the colt 45 which is the weapon that you commonly see in
-[0:08:17] commonly see in westerns in american television and
-[0:08:20] westerns in american television and movies
+[0:07:41] year and you go back 175 years
+[0:07:44] here are some of the things you have to
+[0:07:45] face 175 by the way of course
+[0:07:48] is not going back limitlessly in time
+[0:07:51] california was annexed from mexico in
+[0:07:53] 1848 became a state in 1850
+[0:07:56] during the gold rush there was no
+[0:07:58] california to regulate
+[0:07:59] firearms before then and even for a
+[0:08:02] couple of decades thereafter
+[0:08:04] the state government was weak and
+[0:08:06] ineffective
+[0:08:08] if you want to regulate something you
+[0:08:09] have to determine what that something is
+[0:08:12] here are some examples
+[0:08:13] the colt 45 which is the weapon that you
+[0:08:16] commonly see in
+[0:08:17] westerns in american television and
 [0:08:20] movies uh was a post-civil war invention
-[0:08:23] uh was a post-civil war invention actually was invented during the civil
-[0:08:25] actually was invented during the civil war
+[0:08:23] actually was invented during the civil
 [0:08:25] war but became available to the public
-[0:08:27] but became available to the public afterwards and you can see it
-[0:08:29] afterwards and you can see it prominently in the famous movie gone
-[0:08:31] prominently in the famous movie gone with the wind
-[0:08:32] with the wind the soviet ak-47
-[0:08:35] the soviet ak-47 is a post-world war ii phenomenon
-[0:08:39] is a post-world war ii phenomenon it's the first assault weapon that was
-[0:08:41] it's the first assault weapon that was widely available you can see that in an
-[0:08:43] widely available you can see that in an apocalypse now
-[0:08:45] apocalypse now it's carried by the vietcong the m16
-[0:08:49] it's carried by the vietcong the m16 was a response to that by the united
-[0:08:51] was a response to that by the united states developed
-[0:08:52] states developed uh during the war in vietnam perhaps a
-[0:08:56] uh during the war in vietnam perhaps a little earlier
-[0:08:57] little earlier it became the model for the ar-15
-[0:09:00] it became the model for the ar-15 assault rifle
-[0:09:01] assault rifle which is the most popular assault rifle
-[0:09:03] which is the most popular assault rifle available today
-[0:09:05] available today and you can see that displayed in the
-[0:09:06] and you can see that displayed in the movie rambo
-[0:09:08] movie rambo the iconic clock handgun series
-[0:09:11] the iconic clock handgun series is a 1980s phenomenon i mentioned it
-[0:09:14] is a 1980s phenomenon i mentioned it because it was rapidly adopted by
-[0:09:16] because it was rapidly adopted by law enforcement and then became
-[0:09:18] law enforcement and then became available widely to the public
-[0:09:20] available widely to the public there are many other brands of
-[0:09:22] there are many other brands of semi-automatic handguns
-[0:09:24] semi-automatic handguns but this one sort of caught the public
-[0:09:25] but this one sort of caught the public attention in part because it appeared in
-[0:09:27] attention in part because it appeared in the very popular tv show
-[0:09:29] the very popular tv show miami vice any discussion of
-[0:09:33] miami vice any discussion of general linear processes i think needs
-[0:09:35] general linear processes i think needs to be understood in a context like this
-[0:09:39] to be understood in a context like this turns out that a general linear process
-[0:09:42] turns out that a general linear process cannot be
+[0:08:27] afterwards and you can see it
+[0:08:29] prominently in the famous movie gone
+[0:08:31] with the wind
+[0:08:32] the soviet ak-47
+[0:08:35] is a post-world war ii phenomenon
+[0:08:39] it's the first assault weapon that was
+[0:08:41] widely available you can see that in an
+[0:08:43] apocalypse now
+[0:08:45] it's carried by the vietcong the m16
+[0:08:49] was a response to that by the united
+[0:08:51] states developed
+[0:08:52] uh during the war in vietnam perhaps a
+[0:08:56] little earlier
+[0:08:57] it became the model for the ar-15
+[0:09:00] assault rifle
+[0:09:01] which is the most popular assault rifle
+[0:09:03] available today
+[0:09:05] and you can see that displayed in the
+[0:09:06] movie rambo
+[0:09:08] the iconic clock handgun series
+[0:09:11] is a 1980s phenomenon i mentioned it
+[0:09:14] because it was rapidly adopted by
+[0:09:16] law enforcement and then became
+[0:09:18] available widely to the public
+[0:09:20] there are many other brands of
+[0:09:22] semi-automatic handguns
+[0:09:24] but this one sort of caught the public
+[0:09:25] attention in part because it appeared in
+[0:09:27] the very popular tv show
+[0:09:29] miami vice any discussion of
+[0:09:33] general linear processes i think needs
+[0:09:35] to be understood in a context like this
+[0:09:39] turns out that a general linear process
 [0:09:42] cannot be directly estimated because those white
-[0:09:44] directly estimated because those white noise perturbations are not visible
-[0:09:47] noise perturbations are not visible what you get to see is the time series
-[0:09:50] what you get to see is the time series itself yt
+[0:09:44] noise perturbations are not visible
+[0:09:47] what you get to see is the time series
 [0:09:51] itself yt in our case background checks
-[0:09:54] in our case background checks the claim is made that we can make
-[0:09:56] the claim is made that we can make progress by working with approximations
-[0:09:59] progress by working with approximations of that general linear process and
-[0:10:02] of that general linear process and that's
+[0:09:54] the claim is made that we can make
+[0:09:56] progress by working with approximations
+[0:09:59] of that general linear process and
 [0:10:02] that's very important because we're
-[0:10:04] very important because we're acknowledging from the get-go there is
-[0:10:05] acknowledging from the get-go there is no right model
-[0:10:07] no right model everything we deal with is
-[0:10:08] everything we deal with is approximations going forward
-[0:10:10] approximations going forward and we don't even know a priori what a
-[0:10:12] and we don't even know a priori what a good approximation should be
-[0:10:14] good approximation should be we're going to develop that
-[0:10:15] we're going to develop that approximation inductively by looking at
-[0:10:18] approximation inductively by looking at the data
+[0:10:04] acknowledging from the get-go there is
+[0:10:05] no right model
+[0:10:07] everything we deal with is
+[0:10:08] approximations going forward
+[0:10:10] and we don't even know a priori what a
+[0:10:12] good approximation should be
+[0:10:14] we're going to develop that
+[0:10:15] approximation inductively by looking at
 [0:10:19] the data the approximation will have two
-[0:10:21] the approximation will have two components there's a mean function
-[0:10:24] components there's a mean function which includes the parameters the
-[0:10:25] which includes the parameters the interventions and time
-[0:10:27] interventions and time the interventions are not formally
-[0:10:29] the interventions are not formally defined
+[0:10:21] components there's a mean function
+[0:10:24] which includes the parameters the
+[0:10:25] interventions and time
+[0:10:27] the interventions are not formally
 [0:10:30] defined mostly to define by example usually as a
-[0:10:33] mostly to define by example usually as a step function or a pulse
-[0:10:35] step function or a pulse um the time process though is pretty
-[0:10:38] um the time process though is pretty clearly defined
-[0:10:39] clearly defined although not completely
-[0:10:43] although not completely and it's thought to be an armor process
-[0:10:45] and it's thought to be an armor process of some sort
-[0:10:47] of some sort which i show near the bottom of the
-[0:10:48] which i show near the bottom of the slide and for those of you who have
-[0:10:50] slide and for those of you who have forgotten or never worked with backward
-[0:10:52] forgotten or never worked with backward shift operators
-[0:10:53] shift operators uh there's an illustration at the bottom
-[0:10:56] uh there's an illustration at the bottom so we've got an approximation with a
-[0:10:57] so we've got an approximation with a mean function
-[0:10:59] mean function and a noise function the noise
-[0:11:01] and a noise function the noise function's job is to pick up dependence
-[0:11:03] function's job is to pick up dependence and disturbances
-[0:11:05] and disturbances the mean function though is where we get
-[0:11:06] the mean function though is where we get our story for an interrupted time series
-[0:11:09] our story for an interrupted time series analysis
+[0:10:33] step function or a pulse
+[0:10:35] um the time process though is pretty
+[0:10:38] clearly defined
+[0:10:39] although not completely
+[0:10:43] and it's thought to be an armor process
+[0:10:45] of some sort
+[0:10:47] which i show near the bottom of the
+[0:10:48] slide and for those of you who have
+[0:10:50] forgotten or never worked with backward
+[0:10:52] shift operators
+[0:10:53] uh there's an illustration at the bottom
+[0:10:56] so we've got an approximation with a
+[0:10:57] mean function
+[0:10:59] and a noise function the noise
+[0:11:01] function's job is to pick up dependence
+[0:11:03] and disturbances
+[0:11:05] the mean function though is where we get
+[0:11:06] our story for an interrupted time series
+[0:11:09] analysis
 [0:11:13] so let's look at those mean function possibilities um
-[0:11:15] possibilities um you can see here some plots and little
-[0:11:18] you can see here some plots and little simulations
-[0:11:20] simulations the intervention can be either a step
-[0:11:21] the intervention can be either a step represented by s
-[0:11:23] represented by s or it can be a pulse represented by p
-[0:11:26] or it can be a pulse represented by p reading from left to right
-[0:11:28] reading from left to right you can have a mean function that
-[0:11:30] you can have a mean function that captures the change in level
-[0:11:32] captures the change in level you can capture a spike you can capture
-[0:11:35] you can capture a spike you can capture a change in slope
-[0:11:37] a change in slope you can capture a spike followed by an
-[0:11:39] you can capture a spike followed by an exponential decline
-[0:11:41] exponential decline and you can follow you can capture also
-[0:11:43] and you can follow you can capture also a gradual
+[0:11:15] you can see here some plots and little
+[0:11:18] simulations
+[0:11:20] the intervention can be either a step
+[0:11:21] represented by s
+[0:11:23] or it can be a pulse represented by p
+[0:11:26] reading from left to right
+[0:11:28] you can have a mean function that
+[0:11:30] captures the change in level
+[0:11:32] you can capture a spike you can capture
+[0:11:35] a change in slope
+[0:11:37] you can capture a spike followed by an
+[0:11:39] exponential decline
+[0:11:41] and you can follow you can capture also
 [0:11:44] a gradual increase to a new level this is not
-[0:11:47] increase to a new level this is not exhaustive these are very simple mean
-[0:11:49] exhaustive these are very simple mean functions
+[0:11:47] exhaustive these are very simple mean
 [0:11:50] functions typically going into an analysis like
-[0:11:52] typically going into an analysis like this you don't know which one you want
-[0:11:54] this you don't know which one you want to use
+[0:11:52] this you don't know which one you want
 [0:11:55] to use generally you try several very rarely is
-[0:11:58] generally you try several very rarely is there explicit
-[0:11:59] there explicit subject matter theory or past research
-[0:12:02] subject matter theory or past research that provides the guidance
-[0:12:03] that provides the guidance but once you decide on the main function
-[0:12:05] but once you decide on the main function you like it's quite easy to specify
+[0:11:58] there explicit
+[0:11:59] subject matter theory or past research
+[0:12:02] that provides the guidance
+[0:12:03] but once you decide on the main function
+[0:12:05] you like it's quite easy to specify
 [0:12:12] the noise model is uh somewhat more complicated or at least
-[0:12:14] complicated or at least in practice it turns out to be um
-[0:12:16] in practice it turns out to be um commonly people use a multiplicative
-[0:12:18] commonly people use a multiplicative arima model
-[0:12:20] arima model with a seasonal component as you can see
-[0:12:23] with a seasonal component as you can see in the example i put out here
-[0:12:25] in the example i put out here i have a difference in the existing
-[0:12:28] i have a difference in the existing arima model and a difference in the
-[0:12:30] arima model and a difference in the seasonal model at a lag of seven
-[0:12:32] seasonal model at a lag of seven that's the capture days of the week it's
-[0:12:35] that's the capture days of the week it's multiplicative which means it's
-[0:12:36] multiplicative which means it's interaction
-[0:12:37] interaction which is to say an effect an association
-[0:12:41] which is to say an effect an association let's say at a lag of one
-[0:12:43] let's say at a lag of one depends upon day of the week which makes
-[0:12:45] depends upon day of the week which makes sense
+[0:12:14] in practice it turns out to be um
+[0:12:16] commonly people use a multiplicative
+[0:12:18] arima model
+[0:12:20] with a seasonal component as you can see
+[0:12:23] in the example i put out here
+[0:12:25] i have a difference in the existing
+[0:12:28] arima model and a difference in the
+[0:12:30] seasonal model at a lag of seven
+[0:12:32] that's the capture days of the week it's
+[0:12:35] multiplicative which means it's
+[0:12:36] interaction
+[0:12:37] which is to say an effect an association
+[0:12:41] let's say at a lag of one
+[0:12:43] depends upon day of the week which makes
 [0:12:46] sense sunday's for gun sales is very different
-[0:12:48] sunday's for gun sales is very different for instance
-[0:12:49] for instance from sales of guns let's say on friday
-[0:12:53] from sales of guns let's say on friday it makes however interpretation of the
-[0:12:55] it makes however interpretation of the results very
-[0:12:56] results very taxing because we've with the
-[0:12:58] taxing because we've with the differencing
-[0:12:59] differencing we're bringing across the equal sign to
-[0:13:02] we're bringing across the equal sign to the outcome variable
-[0:13:04] the outcome variable all of the earlier interventions and
-[0:13:07] all of the earlier interventions and they're
+[0:12:48] for instance
+[0:12:49] from sales of guns let's say on friday
+[0:12:53] it makes however interpretation of the
+[0:12:55] results very
+[0:12:56] taxing because we've with the
+[0:12:58] differencing
+[0:12:59] we're bringing across the equal sign to
+[0:13:02] the outcome variable
+[0:13:04] all of the earlier interventions and
 [0:13:07] they're aggregated in complicated ways and i
-[0:13:10] aggregated in complicated ways and i don't know anybody who seriously
-[0:13:12] don't know anybody who seriously interprets
-[0:13:13] interprets the noise model it's there basically to
-[0:13:15] the noise model it's there basically to mop up the disturbances
-[0:13:16] mop up the disturbances so that we get something approximating
-[0:13:18] so that we get something approximating white noise when we finish the analysis
-[0:13:21] white noise when we finish the analysis and i have an example below of a
-[0:13:23] and i have an example below of a multiplicative differencing
-[0:13:25] multiplicative differencing procedure again for those of you who
-[0:13:26] procedure again for those of you who aren't familiar
-[0:13:28] aren't familiar uh who want to just sort of follow
-[0:13:30] uh who want to just sort of follow better what's going on with the model
-[0:13:32] better what's going on with the model it's there also for people who load the
-[0:13:34] it's there also for people who load the slides uh after the talk is completed
-[0:13:38] slides uh after the talk is completed so at this point i can pause if there
-[0:13:40] so at this point i can pause if there are uh questions
-[0:13:42] are uh questions but i'd rather proceed with the data
-[0:13:45] but i'd rather proceed with the data there are no questions at the moment so
-[0:13:46] there are no questions at the moment so you can you can go on
-[0:13:48] you can you can go on okay uh these are the data and
-[0:13:51] okay uh these are the data and uh you don't have to be experienced
-[0:13:54] uh you don't have to be experienced studying gun sales
-[0:13:56] studying gun sales to appreciate that this is a mess these
-[0:13:59] to appreciate that this is a mess these are daily
+[0:13:10] don't know anybody who seriously
+[0:13:12] interprets
+[0:13:13] the noise model it's there basically to
+[0:13:15] mop up the disturbances
+[0:13:16] so that we get something approximating
+[0:13:18] white noise when we finish the analysis
+[0:13:21] and i have an example below of a
+[0:13:23] multiplicative differencing
+[0:13:25] procedure again for those of you who
+[0:13:26] aren't familiar
+[0:13:28] uh who want to just sort of follow
+[0:13:30] better what's going on with the model
+[0:13:32] it's there also for people who load the
+[0:13:34] slides uh after the talk is completed
+[0:13:38] so at this point i can pause if there
+[0:13:40] are uh questions
+[0:13:42] but i'd rather proceed with the data
+[0:13:45] there are no questions at the moment so
+[0:13:46] you can you can go on
+[0:13:48] okay uh these are the data and
+[0:13:51] uh you don't have to be experienced
+[0:13:54] studying gun sales
+[0:13:56] to appreciate that this is a mess these
 [0:14:00] are daily and i stress daily gun sales in
-[0:14:02] and i stress daily gun sales in california
-[0:14:03] california from 1996 to 2018
-[0:14:06] from 1996 to 2018 that's 8 400 observations
-[0:14:09] that's 8 400 observations you can see that there are peaks and
-[0:14:11] you can see that there are peaks and valleys you can see white space near the
-[0:14:13] valleys you can see white space near the bottom
+[0:14:02] california
+[0:14:03] from 1996 to 2018
+[0:14:06] that's 8 400 observations
+[0:14:09] you can see that there are peaks and
+[0:14:11] valleys you can see white space near the
 [0:14:14] bottom i'll move my cursor to where this is
-[0:14:16] i'll move my cursor to where this is going on
 [0:14:17] going on i suspect that's a problem in the way
-[0:14:19] i suspect that's a problem in the way the data are accumulated
-[0:14:21] the data are accumulated but i have no strong evidence for that
-[0:14:24] but i have no strong evidence for that um i don't think it probably matters in
-[0:14:26] um i don't think it probably matters in this case
+[0:14:19] the data are accumulated
+[0:14:21] but i have no strong evidence for that
+[0:14:24] um i don't think it probably matters in
 [0:14:27] this case but it's an issue we might return to
-[0:14:30] but it's an issue we might return to notice that the mean
-[0:14:31] notice that the mean gun sales per day is i think are
-[0:14:33] gun sales per day is i think are remarkable 729
-[0:14:36] remarkable 729 but there's enormous variability the
-[0:14:38] but there's enormous variability the standard deviation is
-[0:14:40] standard deviation is 467. this is what our response variable
-[0:14:43] 467. this is what our response variable looks like
-[0:14:46] looks like you can also represent those data as a
-[0:14:48] you can also represent those data as a histogram just to emphasize that
-[0:14:50] histogram just to emphasize that on most days sales are between let's say
-[0:14:53] on most days sales are between let's say about 500
+[0:14:30] notice that the mean
+[0:14:31] gun sales per day is i think are
+[0:14:33] remarkable 729
+[0:14:36] but there's enormous variability the
+[0:14:38] standard deviation is
+[0:14:40] 467. this is what our response variable
+[0:14:43] looks like
+[0:14:46] you can also represent those data as a
+[0:14:48] histogram just to emphasize that
+[0:14:50] on most days sales are between let's say
 [0:14:55] about 500 and 800 firearms per day
-[0:14:58] and 800 firearms per day i stress that these are handgun sales
-[0:15:01] i stress that these are handgun sales but we have some curious outliers i mean
-[0:15:04] but we have some curious outliers i mean we have some days
-[0:15:05] we have some days where over 4 000 handguns are sold
-[0:15:09] where over 4 000 handguns are sold and it's very common to have over a
-[0:15:11] and it's very common to have over a thousand sold per day
-[0:15:13] thousand sold per day so it's a long tail distribution which
-[0:15:15] so it's a long tail distribution which is going to create some issues for us
-[0:15:17] is going to create some issues for us going forward so
-[0:15:20] going forward so what variables are we going to use i
-[0:15:22] what variables are we going to use i have to stress that there are
-[0:15:23] have to stress that there are many many more than i list here these
-[0:15:26] many many more than i list here these are the candidates that sort of made the
-[0:15:28] are the candidates that sort of made the first cut
+[0:14:58] i stress that these are handgun sales
+[0:15:01] but we have some curious outliers i mean
+[0:15:04] we have some days
+[0:15:05] where over 4 000 handguns are sold
+[0:15:09] and it's very common to have over a
+[0:15:11] thousand sold per day
+[0:15:13] so it's a long tail distribution which
+[0:15:15] is going to create some issues for us
+[0:15:17] going forward so
+[0:15:20] what variables are we going to use i
+[0:15:22] have to stress that there are
+[0:15:23] many many more than i list here these
+[0:15:26] are the candidates that sort of made the
 [0:15:30] first cut and we can't even consider all of these
-[0:15:33] and we can't even consider all of these if you look down the left side it starts
-[0:15:35] if you look down the left side it starts with the sales
-[0:15:37] with the sales again which is background checks i
-[0:15:39] again which is background checks i should mention
-[0:15:40] should mention that the background checks are in
-[0:15:42] that the background checks are in california universal background checks
-[0:15:45] california universal background checks which means they pick up private sales
-[0:15:47] which means they pick up private sales as well because they have to be
-[0:15:49] as well because they have to be funneled through a licensed firearm
-[0:15:50] funneled through a licensed firearm dealer
+[0:15:33] if you look down the left side it starts
+[0:15:35] with the sales
+[0:15:37] again which is background checks i
+[0:15:39] should mention
+[0:15:40] that the background checks are in
+[0:15:42] california universal background checks
+[0:15:45] which means they pick up private sales
+[0:15:47] as well because they have to be
+[0:15:49] funneled through a licensed firearm
+[0:15:50] dealer
 [0:15:55] the other variables in the left column are potential regressors
-[0:15:57] are potential regressors we have a ban on assault weapons you can
-[0:16:00] we have a ban on assault weapons you can see it's a military style weapon
-[0:16:02] see it's a military style weapon um they are semi-automatic but that
-[0:16:05] um they are semi-automatic but that means if you keep pulling the trigger
-[0:16:06] means if you keep pulling the trigger you can fire two to three rounds per
-[0:16:09] you can fire two to three rounds per second
+[0:15:57] we have a ban on assault weapons you can
+[0:16:00] see it's a military style weapon
+[0:16:02] um they are semi-automatic but that
+[0:16:05] means if you keep pulling the trigger
+[0:16:06] you can fire two to three rounds per
 [0:16:10] second the next is a 50 caliber rifle this
-[0:16:12] the next is a 50 caliber rifle this particular one
-[0:16:13] particular one was also banned all 50 caliber rifles
-[0:16:16] was also banned all 50 caliber rifles were banned
-[0:16:17] were banned commonly used in sniper attacks
-[0:16:20] commonly used in sniper attacks um in the in afghanistan and iraq
-[0:16:24] um in the in afghanistan and iraq this can be fatal from a mile away
-[0:16:28] this can be fatal from a mile away uh the third is rimfire pistols they
-[0:16:30] uh the third is rimfire pistols they fire very small cartridges
-[0:16:32] fire very small cartridges which you think wouldn't be a problem
-[0:16:34] which you think wouldn't be a problem but because the cartridges
-[0:16:35] but because the cartridges the bullets are small you can load them
-[0:16:38] the bullets are small you can load them in a high capacity magazine
-[0:16:40] in a high capacity magazine and this little handgun can be quite
-[0:16:42] and this little handgun can be quite deadly even though the slugs are small
-[0:16:45] deadly even though the slugs are small following that is what's called the hera
-[0:16:47] following that is what's called the hera decision the herod decision
-[0:16:49] decision the herod decision was meant to clarify the assault weapon
-[0:16:52] was meant to clarify the assault weapon ban
+[0:16:12] particular one
+[0:16:13] was also banned all 50 caliber rifles
+[0:16:16] were banned
+[0:16:17] commonly used in sniper attacks
+[0:16:20] um in the in afghanistan and iraq
+[0:16:24] this can be fatal from a mile away
+[0:16:28] uh the third is rimfire pistols they
+[0:16:30] fire very small cartridges
+[0:16:32] which you think wouldn't be a problem
+[0:16:34] but because the cartridges
+[0:16:35] the bullets are small you can load them
+[0:16:38] in a high capacity magazine
+[0:16:40] and this little handgun can be quite
+[0:16:42] deadly even though the slugs are small
+[0:16:45] following that is what's called the hera
+[0:16:47] decision the herod decision
+[0:16:49] was meant to clarify the assault weapon
 [0:16:53] ban and required that for an assault weapon
-[0:16:55] and required that for an assault weapon to be banned the model and make
-[0:16:57] to be banned the model and make had to be specified you just couldn't
-[0:17:00] had to be specified you just couldn't describe for example the length of the
-[0:17:01] describe for example the length of the barrel
+[0:16:55] to be banned the model and make
+[0:16:57] had to be specified you just couldn't
+[0:17:00] describe for example the length of the
 [0:17:02] barrel as a defining characteristic following
-[0:17:06] as a defining characteristic following that
 [0:17:06] that there are three mass shootings las vegas
-[0:17:08] there are three mass shootings las vegas san bernardino and orlando
-[0:17:10] san bernardino and orlando um these are picked out of many
-[0:17:13] um these are picked out of many possibilities sadly many possibilities
-[0:17:15] possibilities sadly many possibilities um the las vegas shooting stands out in
-[0:17:18] um the las vegas shooting stands out in particular
-[0:17:19] particular because there were 60 fatalities and
-[0:17:21] because there were 60 fatalities and over 400 injuries
-[0:17:23] over 400 injuries from firearms from firearms um
-[0:17:27] from firearms from firearms um uh the emphasis here is going to be on
-[0:17:30] uh the emphasis here is going to be on the san bernardino shooting
-[0:17:31] the san bernardino shooting because that took place in california
-[0:17:34] because that took place in california following that there's the
-[0:17:35] following that there's the presidential term of obama the
-[0:17:37] presidential term of obama the presidential term of trump
-[0:17:39] presidential term of trump days of the week and holidays clearly
-[0:17:43] days of the week and holidays clearly there's a real likelihood that gun sales
-[0:17:45] there's a real likelihood that gun sales will reduce dramatically in holidays
-[0:17:47] will reduce dramatically in holidays because
+[0:17:08] san bernardino and orlando
+[0:17:10] um these are picked out of many
+[0:17:13] possibilities sadly many possibilities
+[0:17:15] um the las vegas shooting stands out in
+[0:17:18] particular
+[0:17:19] because there were 60 fatalities and
+[0:17:21] over 400 injuries
+[0:17:23] from firearms from firearms um
+[0:17:27] uh the emphasis here is going to be on
+[0:17:30] the san bernardino shooting
+[0:17:31] because that took place in california
+[0:17:34] following that there's the
+[0:17:35] presidential term of obama the
+[0:17:37] presidential term of trump
+[0:17:39] days of the week and holidays clearly
+[0:17:43] there's a real likelihood that gun sales
+[0:17:45] will reduce dramatically in holidays
 [0:17:48] because many firearm dealers will not be open
 [0:17:55] these could all not be included i had to be selective from the get-go
-[0:17:58] be selective from the get-go um and i was uh the predictors i used
-[0:18:01] um and i was uh the predictors i used for this
+[0:17:58] um and i was uh the predictors i used
 [0:18:02] for this uh talk was the assault weapon ban
-[0:18:05] uh talk was the assault weapon ban the mass shooting in san bernardino the
-[0:18:08] the mass shooting in san bernardino the obama presidency the trump presidency
-[0:18:10] obama presidency the trump presidency and holidays
-[0:18:12] and holidays what you have in front of you is the
-[0:18:14] what you have in front of you is the fitted values in red
-[0:18:16] fitted values in red overlaid on the blue values which are
-[0:18:18] overlaid on the blue values which are the actual
-[0:18:19] the actual sales measured by background checks
-[0:18:22] sales measured by background checks this doesn't prove anything in this line
-[0:18:26] this doesn't prove anything in this line of work
+[0:18:05] the mass shooting in san bernardino the
+[0:18:08] obama presidency the trump presidency
+[0:18:10] and holidays
+[0:18:12] what you have in front of you is the
+[0:18:14] fitted values in red
+[0:18:16] overlaid on the blue values which are
+[0:18:18] the actual
+[0:18:19] sales measured by background checks
+[0:18:22] this doesn't prove anything in this line
 [0:18:27] of work you often want to start with a sanity
-[0:18:28] you often want to start with a sanity check i've had experiences where there's
-[0:18:31] check i've had experiences where there's almost no overlap between the fitted
-[0:18:32] almost no overlap between the fitted values
+[0:18:28] check i've had experiences where there's
+[0:18:31] almost no overlap between the fitted
 [0:18:33] values and the actual values here
-[0:18:36] and the actual values here it looks promising it looks like we have
-[0:18:38] it looks promising it looks like we have something going on that's captured
-[0:18:40] something going on that's captured at least the trends we've captured some
-[0:18:43] at least the trends we've captured some peaks we've captured some valleys
-[0:18:46] peaks we've captured some valleys it makes sense there to proceed with the
-[0:18:48] it makes sense there to proceed with the analysis
+[0:18:36] it looks promising it looks like we have
+[0:18:38] something going on that's captured
+[0:18:40] at least the trends we've captured some
+[0:18:43] peaks we've captured some valleys
+[0:18:46] it makes sense there to proceed with the
+[0:18:48] analysis
 [0:18:53] common diagnostic in this area something called an autocorrelation plot which
-[0:18:55] called an autocorrelation plot which plots the auto correlations
-[0:18:57] plots the auto correlations in the residuals as you can see none of
-[0:19:01] in the residuals as you can see none of the auto correlations here
-[0:19:02] the auto correlations here are above 0.1 they're all very small
-[0:19:06] are above 0.1 they're all very small we do have those horizontal lines those
-[0:19:09] we do have those horizontal lines those dotted blue lines
-[0:19:10] dotted blue lines which are meant to represent two
-[0:19:12] which are meant to represent two standard errors
-[0:19:13] standard errors above and below zero um i wouldn't take
-[0:19:17] above and below zero um i wouldn't take them too seriously
-[0:19:18] them too seriously and the reason is that with 8 400
-[0:19:21] and the reason is that with 8 400 observations
-[0:19:22] observations these bands are very narrow and
-[0:19:24] these bands are very narrow and ridiculously narrow
-[0:19:26] ridiculously narrow and they really don't tell us much
-[0:19:28] and they really don't tell us much because of the craft lore
-[0:19:31] because of the craft lore and certainly my experience is that if
-[0:19:33] and certainly my experience is that if you have auto correlations under about
-[0:19:35] you have auto correlations under about 0.2
+[0:18:55] plots the auto correlations
+[0:18:57] in the residuals as you can see none of
+[0:19:01] the auto correlations here
+[0:19:02] are above 0.1 they're all very small
+[0:19:06] we do have those horizontal lines those
+[0:19:09] dotted blue lines
+[0:19:10] which are meant to represent two
+[0:19:12] standard errors
+[0:19:13] above and below zero um i wouldn't take
+[0:19:17] them too seriously
+[0:19:18] and the reason is that with 8 400
+[0:19:21] observations
+[0:19:22] these bands are very narrow and
+[0:19:24] ridiculously narrow
+[0:19:26] and they really don't tell us much
+[0:19:28] because of the craft lore
+[0:19:31] and certainly my experience is that if
+[0:19:33] you have auto correlations under about
 [0:19:37] 0.2 it doesn't really make any difference
-[0:19:38] it doesn't really make any difference you don't have any visible or material
-[0:19:40] you don't have any visible or material change in the results if you try to
-[0:19:42] change in the results if you try to adjust for them
-[0:19:44] adjust for them and i should add trying to adjust for
-[0:19:46] and i should add trying to adjust for them in this circumstance
-[0:19:48] them in this circumstance is a bit like playing whack-a-mole you
-[0:19:50] is a bit like playing whack-a-mole you knock down one spike and another spike
-[0:19:52] knock down one spike and another spike pops up somewhere else
-[0:19:54] pops up somewhere else so normally this is considered to be
-[0:19:57] so normally this is considered to be evidence in support of white noise
-[0:19:59] evidence in support of white noise residuals
+[0:19:38] you don't have any visible or material
+[0:19:40] change in the results if you try to
+[0:19:42] adjust for them
+[0:19:44] and i should add trying to adjust for
+[0:19:46] them in this circumstance
+[0:19:48] is a bit like playing whack-a-mole you
+[0:19:50] knock down one spike and another spike
+[0:19:52] pops up somewhere else
+[0:19:54] so normally this is considered to be
+[0:19:57] evidence in support of white noise
 [0:20:00] residuals which is sort of the gold standard
-[0:20:02] which is sort of the gold standard allowing you to proceed
-[0:20:04] allowing you to proceed we're not saying this tells you the
-[0:20:05] we're not saying this tells you the model is right it's clearly an
-[0:20:07] model is right it's clearly an approximation
-[0:20:08] approximation it also turns out that several different
-[0:20:10] it also turns out that several different models can produce acceptable white
-[0:20:12] models can produce acceptable white noise residuals
-[0:20:14] noise residuals but of course you can't know this until
-[0:20:16] but of course you can't know this until you look at a large number of models
-[0:20:19] you look at a large number of models and find those that pass this white
-[0:20:21] and find those that pass this white noise residual test
-[0:20:23] noise residual test there are additional diagnostics that
-[0:20:24] there are additional diagnostics that you can use but in this case they all
-[0:20:26] you can use but in this case they all led to the same
-[0:20:27] led to the same conclusion and by and large i don't want
-[0:20:30] conclusion and by and large i don't want to spend a lot of time on them here
-[0:20:32] to spend a lot of time on them here but this is one encouraging note um we
-[0:20:35] but this is one encouraging note um we use the bootstrap
-[0:20:36] use the bootstrap which i will talk about later if i have
-[0:20:38] which i will talk about later if i have time this is the sampling distribution
-[0:20:41] time this is the sampling distribution of the parameter estimates for the
-[0:20:44] of the parameter estimates for the assault weapon ban
-[0:20:46] assault weapon ban uh eyeballing that it's a normal qq plot
-[0:20:49] uh eyeballing that it's a normal qq plot we're pretty close to a straight line
-[0:20:51] we're pretty close to a straight line which suggests the sampling distribution
-[0:20:53] which suggests the sampling distribution thankfully is approximately normal
-[0:20:56] thankfully is approximately normal so we're good to go where do we go
-[0:21:00] so we're good to go where do we go here are some results this is a table
-[0:21:03] here are some results this is a table please focus on the red numbers first
-[0:21:07] please focus on the red numbers first if you look at the coefficients
-[0:21:10] if you look at the coefficients for the model that i chose um
-[0:21:13] for the model that i chose um during the obama administration there
-[0:21:15] during the obama administration there were about 6 462
-[0:21:17] were about 6 462 additional gun sales handgun sales per
-[0:21:21] additional gun sales handgun sales per day
+[0:20:02] allowing you to proceed
+[0:20:04] we're not saying this tells you the
+[0:20:05] model is right it's clearly an
+[0:20:07] approximation
+[0:20:08] it also turns out that several different
+[0:20:10] models can produce acceptable white
+[0:20:12] noise residuals
+[0:20:14] but of course you can't know this until
+[0:20:16] you look at a large number of models
+[0:20:19] and find those that pass this white
+[0:20:21] noise residual test
+[0:20:23] there are additional diagnostics that
+[0:20:24] you can use but in this case they all
+[0:20:26] led to the same
+[0:20:27] conclusion and by and large i don't want
+[0:20:30] to spend a lot of time on them here
+[0:20:32] but this is one encouraging note um we
+[0:20:35] use the bootstrap
+[0:20:36] which i will talk about later if i have
+[0:20:38] time this is the sampling distribution
+[0:20:41] of the parameter estimates for the
+[0:20:44] assault weapon ban
+[0:20:46] uh eyeballing that it's a normal qq plot
+[0:20:49] we're pretty close to a straight line
+[0:20:51] which suggests the sampling distribution
+[0:20:53] thankfully is approximately normal
+[0:20:56] so we're good to go where do we go
+[0:21:00] here are some results this is a table
+[0:21:03] please focus on the red numbers first
+[0:21:07] if you look at the coefficients
+[0:21:10] for the model that i chose um
+[0:21:13] during the obama administration there
+[0:21:15] were about 6 462
+[0:21:17] additional gun sales handgun sales per
 [0:21:22] day for trump there was no effect 42 more um
-[0:21:25] for trump there was no effect 42 more um is hardly noticeable given the patterns
-[0:21:28] is hardly noticeable given the patterns on holidays there were about 714
-[0:21:31] on holidays there were about 714 fewer sales per day the san bernardino
-[0:21:34] fewer sales per day the san bernardino shooting
+[0:21:25] is hardly noticeable given the patterns
+[0:21:28] on holidays there were about 714
+[0:21:31] fewer sales per day the san bernardino
 [0:21:35] shooting there were 838 sales i should mention
-[0:21:38] there were 838 sales i should mention that the obama
-[0:21:39] that the obama trump and holiday variables were
-[0:21:42] trump and holiday variables were indicator variables
-[0:21:43] indicator variables treated as step functions
-[0:21:46] treated as step functions um and well actually holidays with
-[0:21:49] um and well actually holidays with spikes but
-[0:21:49] spikes but many spikes a san bernardino was a pulse
-[0:21:52] many spikes a san bernardino was a pulse or a spike
-[0:21:54] or a spike and obviously had a strong association
-[0:21:56] and obviously had a strong association the assault weapon ban
-[0:21:58] the assault weapon ban so it appears reduced sales by 633
-[0:22:02] so it appears reduced sales by 633 handguns per day if you look at the t
-[0:22:05] handguns per day if you look at the t statistics
-[0:22:06] statistics with the exception of the trump
-[0:22:07] with the exception of the trump presidency they're all
-[0:22:09] presidency they're all large they certainly are larger than the
-[0:22:12] large they certainly are larger than the usual threshold of something like plus
-[0:22:14] usual threshold of something like plus or minus
+[0:21:38] that the obama
+[0:21:39] trump and holiday variables were
+[0:21:42] indicator variables
+[0:21:43] treated as step functions
+[0:21:46] um and well actually holidays with
+[0:21:49] spikes but
+[0:21:49] many spikes a san bernardino was a pulse
+[0:21:52] or a spike
+[0:21:54] and obviously had a strong association
+[0:21:56] the assault weapon ban
+[0:21:58] so it appears reduced sales by 633
+[0:22:02] handguns per day if you look at the t
+[0:22:05] statistics
+[0:22:06] with the exception of the trump
+[0:22:07] presidency they're all
+[0:22:09] large they certainly are larger than the
+[0:22:12] usual threshold of something like plus
 [0:22:15] or minus two but at that point if you stop and
-[0:22:20] two but at that point if you stop and think a bit
-[0:22:21] think a bit it's clear there are some complications
-[0:22:23] it's clear there are some complications i looked at a large number of models
-[0:22:25] i looked at a large number of models 27 models and this is my cherry pick
-[0:22:27] 27 models and this is my cherry pick model
+[0:22:20] think a bit
+[0:22:21] it's clear there are some complications
+[0:22:23] i looked at a large number of models
+[0:22:25] 27 models and this is my cherry pick
 [0:22:29] model so i've got a post selection inference
-[0:22:31] so i've got a post selection inference problem on my hands
-[0:22:33] problem on my hands a quick but very conservative adjustment
-[0:22:36] a quick but very conservative adjustment is to apply the bonfroni correction that
-[0:22:39] is to apply the bonfroni correction that would give us
-[0:22:40] would give us a target threshold of about 2.87 plus or
-[0:22:44] a target threshold of about 2.87 plus or minus
+[0:22:31] problem on my hands
+[0:22:33] a quick but very conservative adjustment
+[0:22:36] is to apply the bonfroni correction that
+[0:22:39] would give us
+[0:22:40] a target threshold of about 2.87 plus or
 [0:22:46] minus it turns out that in this instance all
-[0:22:48] it turns out that in this instance all of our t statistics
-[0:22:50] of our t statistics greatly exceed that as well so even with
-[0:22:52] greatly exceed that as well so even with the bonferroni correction
-[0:22:54] the bonferroni correction which is very conservative we still pass
-[0:22:58] which is very conservative we still pass muster
+[0:22:48] of our t statistics
+[0:22:50] greatly exceed that as well so even with
+[0:22:52] the bonferroni correction
+[0:22:54] which is very conservative we still pass
 [0:22:59] muster one would as they say reject the null
-[0:23:02] one would as they say reject the null hypothesis
-[0:23:02] hypothesis and call these results with the
-[0:23:04] and call these results with the exception of the trump presidency
-[0:23:06] exception of the trump presidency statistically significant all of these
-[0:23:08] statistically significant all of these results are also
-[0:23:10] results are also consistent with aspirations and actually
-[0:23:13] consistent with aspirations and actually with
+[0:23:02] hypothesis
+[0:23:02] and call these results with the
+[0:23:04] exception of the trump presidency
+[0:23:06] statistically significant all of these
+[0:23:08] results are also
+[0:23:10] consistent with aspirations and actually
 [0:23:14] with expectations um there's lots of craft
-[0:23:17] expectations um there's lots of craft law
 [0:23:17] law lots of anecdotal evidence for example
-[0:23:20] lots of anecdotal evidence for example that gun sales increased during the
-[0:23:22] that gun sales increased during the obama
+[0:23:20] that gun sales increased during the
 [0:23:22] obama presidency and that gun sales
-[0:23:26] presidency and that gun sales increased for a period of time after the
-[0:23:28] increased for a period of time after the san bernardino mass shooting
-[0:23:30] san bernardino mass shooting that's no surprise the assault weapon
-[0:23:33] that's no surprise the assault weapon effect is at this point mostly
-[0:23:35] effect is at this point mostly aspirational but for many people
-[0:23:37] aspirational but for many people that seemed like an obvious thing to
-[0:23:40] that seemed like an obvious thing to anticipate
-[0:23:41] anticipate now there's other ways of making these
-[0:23:43] now there's other ways of making these post selection
-[0:23:44] post selection inference adjustments i have in the
-[0:23:47] inference adjustments i have in the right column
-[0:23:48] right column max t thresholds which i'll just briefly
-[0:23:51] max t thresholds which i'll just briefly allude to
+[0:23:26] increased for a period of time after the
+[0:23:28] san bernardino mass shooting
+[0:23:30] that's no surprise the assault weapon
+[0:23:33] effect is at this point mostly
+[0:23:35] aspirational but for many people
+[0:23:37] that seemed like an obvious thing to
+[0:23:40] anticipate
+[0:23:41] now there's other ways of making these
+[0:23:43] post selection
+[0:23:44] inference adjustments i have in the
+[0:23:47] right column
+[0:23:48] max t thresholds which i'll just briefly
 [0:23:52] allude to we could run a whole session on this
-[0:23:55] we could run a whole session on this this kind of correction
-[0:23:57] this kind of correction um the basic idea is this the problem or
-[0:24:00] um the basic idea is this the problem or one problem with the bonferroni
-[0:24:02] one problem with the bonferroni correction
-[0:24:03] correction is that it assumes a normal sampling
-[0:24:06] is that it assumes a normal sampling distribution
-[0:24:07] distribution and that may not be true particularly
-[0:24:09] and that may not be true particularly for the sample sizes that one might have
-[0:24:11] for the sample sizes that one might have i should stress that 8400 sounds big but
-[0:24:14] i should stress that 8400 sounds big but there's a lot of dependence
-[0:24:15] there's a lot of dependence in the sales data over time so actually
-[0:24:19] in the sales data over time so actually the effective sample is probably
-[0:24:21] the effective sample is probably much smaller this is an attempt to
-[0:24:23] much smaller this is an attempt to actually estimate
-[0:24:24] actually estimate sampling distribution of these t
-[0:24:26] sampling distribution of these t statistics
+[0:23:55] this kind of correction
+[0:23:57] um the basic idea is this the problem or
+[0:24:00] one problem with the bonferroni
+[0:24:02] correction
+[0:24:03] is that it assumes a normal sampling
+[0:24:06] distribution
+[0:24:07] and that may not be true particularly
+[0:24:09] for the sample sizes that one might have
+[0:24:11] i should stress that 8400 sounds big but
+[0:24:14] there's a lot of dependence
+[0:24:15] in the sales data over time so actually
+[0:24:19] the effective sample is probably
+[0:24:21] much smaller this is an attempt to
+[0:24:23] actually estimate
+[0:24:24] sampling distribution of these t
+[0:24:26] statistics
 [0:24:32] for example you use a bootstrap here because as dependent data we use the
-[0:24:34] because as dependent data we use the wild bootstraps with a bartlett kernel
-[0:24:36] wild bootstraps with a bartlett kernel we can talk about that more if people
-[0:24:37] we can talk about that more if people wish with the bootstrap sample you
-[0:24:40] wish with the bootstrap sample you estimate
+[0:24:34] wild bootstraps with a bartlett kernel
+[0:24:36] we can talk about that more if people
+[0:24:37] wish with the bootstrap sample you
 [0:24:41] estimate the parameter of interest in this case
-[0:24:43] the parameter of interest in this case i'm focusing solely
-[0:24:45] i'm focusing solely on the assault weapon ban you get 24
-[0:24:49] on the assault weapon ban you get 24 t values and you select the t value
-[0:24:53] t values and you select the t value that's the largest then you construct
-[0:24:55] that's the largest then you construct the second bootstrap sample
-[0:24:57] the second bootstrap sample proceed through all 27 models that i
-[0:24:59] proceed through all 27 models that i looked at
+[0:24:43] i'm focusing solely
+[0:24:45] on the assault weapon ban you get 24
+[0:24:49] t values and you select the t value
+[0:24:53] that's the largest then you construct
+[0:24:55] the second bootstrap sample
+[0:24:57] proceed through all 27 models that i
 [0:25:00] looked at again select the maximum t value you do
-[0:25:03] again select the maximum t value you do that 100 times
-[0:25:04] that 100 times you could do it more if you wish so you
-[0:25:06] you could do it more if you wish so you have 100 maximum t's
-[0:25:08] have 100 maximum t's over models you then can
-[0:25:12] over models you then can calibrate that any way you wish if
-[0:25:14] calibrate that any way you wish if you're doing a one-tailed test
-[0:25:16] you're doing a one-tailed test for example at the o5 level you can use
-[0:25:18] for example at the o5 level you can use a quantile
-[0:25:20] a quantile which is the 0.95 quantile for that
-[0:25:24] which is the 0.95 quantile for that max t distribution and that gives you a
-[0:25:26] max t distribution and that gives you a new threshold that's what you see
-[0:25:29] new threshold that's what you see on the right hand side here now in this
-[0:25:31] on the right hand side here now in this particular case the reasons to be
-[0:25:33] particular case the reasons to be uneasy with this i can go more into it a
-[0:25:36] uneasy with this i can go more into it a bit later
+[0:25:03] that 100 times
+[0:25:04] you could do it more if you wish so you
+[0:25:06] have 100 maximum t's
+[0:25:08] over models you then can
+[0:25:12] calibrate that any way you wish if
+[0:25:14] you're doing a one-tailed test
+[0:25:16] for example at the o5 level you can use
+[0:25:18] a quantile
+[0:25:20] which is the 0.95 quantile for that
+[0:25:24] max t distribution and that gives you a
+[0:25:26] new threshold that's what you see
+[0:25:29] on the right hand side here now in this
+[0:25:31] particular case the reasons to be
+[0:25:33] uneasy with this i can go more into it a
 [0:25:37] bit later but my point is that there's a better
-[0:25:38] but my point is that there's a better way to do it if you're prepared to
-[0:25:41] way to do it if you're prepared to take on the computational burdens in
-[0:25:43] take on the computational burdens in this case in both cases
-[0:25:45] this case in both cases the bonferroni correction and the max t
-[0:25:48] the bonferroni correction and the max t we reject the null without any problems
-[0:25:51] we reject the null without any problems so we might be feeling sort of smug at
-[0:25:53] so we might be feeling sort of smug at this point
-[0:25:54] this point and i can promise you that if i wrote
-[0:25:55] and i can promise you that if i wrote this up and submitted it to any of the
-[0:25:57] this up and submitted it to any of the major
+[0:25:38] way to do it if you're prepared to
+[0:25:41] take on the computational burdens in
+[0:25:43] this case in both cases
+[0:25:45] the bonferroni correction and the max t
+[0:25:48] we reject the null without any problems
+[0:25:51] so we might be feeling sort of smug at
+[0:25:53] this point
+[0:25:54] and i can promise you that if i wrote
+[0:25:55] this up and submitted it to any of the
 [0:25:58] major social science journals that are
-[0:26:00] social science journals that are interested in this kind of material
-[0:26:02] interested in this kind of material i would likely get the paper rapidly
-[0:26:04] i would likely get the paper rapidly accepted
+[0:26:00] interested in this kind of material
+[0:26:02] i would likely get the paper rapidly
 [0:26:05] accepted but let's look deeper
 [0:26:12] if you think about those 27 models and the estimate for the assault weapon
-[0:26:14] and the estimate for the assault weapon ban
 [0:26:16] ban the s demand is defined by whatever else
-[0:26:19] the s demand is defined by whatever else is in the model
-[0:26:21] is in the model so i have 27 different s demands
-[0:26:24] so i have 27 different s demands which means i have 27 different
-[0:26:26] which means i have 27 different definitions
-[0:26:27] definitions of the causal effect yet i'm looking at
-[0:26:31] of the causal effect yet i'm looking at the
+[0:26:19] is in the model
+[0:26:21] so i have 27 different s demands
+[0:26:24] which means i have 27 different
+[0:26:26] definitions
+[0:26:27] of the causal effect yet i'm looking at
 [0:26:31] the impact of a single real world
-[0:26:33] impact of a single real world intervention
-[0:26:35] intervention it's not at all clear how you get from
-[0:26:37] it's not at all clear how you get from
+[0:26:33] intervention
+[0:26:35] it's not at all clear how you get from
 [0:26:41] different s demands which means you have 27 different
-[0:26:43] 27 different representations of a causal effect this
-[0:26:46] representations of a causal effect this is on sampling error now this is coming
-[0:26:48] is on sampling error now this is coming from the fact
-[0:26:48] from the fact that the models are different how you
-[0:26:51] that the models are different how you get from those
-[0:26:52] get from those 27 different definitions to a single
-[0:26:55] 27 different definitions to a single s demand or an even an estimate for
-[0:26:59] s demand or an even an estimate for the intervention you care about um with
-[0:27:02] the intervention you care about um with my colleagues at penn we've been talking
-[0:27:03] my colleagues at penn we've been talking about this and related issues
-[0:27:05] about this and related issues um my sense is that we haven't made a
-[0:27:08] um my sense is that we haven't made a lot of progress
-[0:27:09] lot of progress it's a tough problem perhaps some of you
-[0:27:11] it's a tough problem perhaps some of you are listening have a solution
-[0:27:13] are listening have a solution if so i'd love to hear it um we haven't
-[0:27:15] if so i'd love to hear it um we haven't come up with anything
-[0:27:16] come up with anything credible that we like at least so far
-[0:27:19] credible that we like at least so far but that's
-[0:27:20] but that's just the first step of the problem again
-[0:27:23] just the first step of the problem again the results that i showed you i could
-[0:27:25] the results that i showed you i could probably publish but it'll be a mistake
-[0:27:27] probably publish but it'll be a mistake this is one reason another reason
-[0:27:31] this is one reason another reason there's really very little theory on the
-[0:27:34] there's really very little theory on the mechanisms behind
-[0:27:35] mechanisms behind the assault weapon ban and its effect
-[0:27:39] the assault weapon ban and its effect i did i skimmed over it kind of setting
-[0:27:41] i did i skimmed over it kind of setting everybody up
-[0:27:42] everybody up we have a ban on assault weapons the
-[0:27:45] we have a ban on assault weapons the data are for handgun sales
-[0:27:48] data are for handgun sales why a ban on assault weapons would
-[0:27:51] why a ban on assault weapons would affect handgun sales
-[0:27:53] affect handgun sales is unclear it's easy to speculate and
-[0:27:55] is unclear it's easy to speculate and there's all kinds of speculations around
-[0:27:57] there's all kinds of speculations around about people being concerned about the
-[0:28:00] about people being concerned about the government coming and taking my guns
-[0:28:02] government coming and taking my guns um but those are speculations and
-[0:28:03] um but those are speculations and there's no science there yet
-[0:28:05] there's no science there yet um that means that for this particular
-[0:28:08] um that means that for this particular intervention if we try to explain
-[0:28:09] intervention if we try to explain why there would be a causal effect we've
-[0:28:12] why there would be a causal effect we've got a tough problem
-[0:28:13] got a tough problem and it gets still worse we don't really
-[0:28:17] and it gets still worse we don't really know
+[0:26:43] representations of a causal effect this
+[0:26:46] is on sampling error now this is coming
+[0:26:48] from the fact
+[0:26:48] that the models are different how you
+[0:26:51] get from those
+[0:26:52] 27 different definitions to a single
+[0:26:55] s demand or an even an estimate for
+[0:26:59] the intervention you care about um with
+[0:27:02] my colleagues at penn we've been talking
+[0:27:03] about this and related issues
+[0:27:05] um my sense is that we haven't made a
+[0:27:08] lot of progress
+[0:27:09] it's a tough problem perhaps some of you
+[0:27:11] are listening have a solution
+[0:27:13] if so i'd love to hear it um we haven't
+[0:27:15] come up with anything
+[0:27:16] credible that we like at least so far
+[0:27:19] but that's
+[0:27:20] just the first step of the problem again
+[0:27:23] the results that i showed you i could
+[0:27:25] probably publish but it'll be a mistake
+[0:27:27] this is one reason another reason
+[0:27:31] there's really very little theory on the
+[0:27:34] mechanisms behind
+[0:27:35] the assault weapon ban and its effect
+[0:27:39] i did i skimmed over it kind of setting
+[0:27:41] everybody up
+[0:27:42] we have a ban on assault weapons the
+[0:27:45] data are for handgun sales
+[0:27:48] why a ban on assault weapons would
+[0:27:51] affect handgun sales
+[0:27:53] is unclear it's easy to speculate and
+[0:27:55] there's all kinds of speculations around
+[0:27:57] about people being concerned about the
+[0:28:00] government coming and taking my guns
+[0:28:02] um but those are speculations and
+[0:28:03] there's no science there yet
+[0:28:05] um that means that for this particular
+[0:28:08] intervention if we try to explain
+[0:28:09] why there would be a causal effect we've
+[0:28:12] got a tough problem
+[0:28:13] and it gets still worse we don't really
 [0:28:17] know when the intervention occurred if you
-[0:28:20] when the intervention occurred if you think about these kinds of hot button
-[0:28:22] think about these kinds of hot button issues
+[0:28:20] think about these kinds of hot button
 [0:28:23] issues they are widely discussed in the popular
-[0:28:25] they are widely discussed in the popular media well before there's any
-[0:28:27] media well before there's any legislative action
-[0:28:28] legislative action in the case of assault weapon bans
-[0:28:31] in the case of assault weapon bans around this time
-[0:28:32] around this time there was national publicity as well as
-[0:28:34] there was national publicity as well as publicity in the state
-[0:28:36] publicity in the state lively conversations on the internet and
-[0:28:39] lively conversations on the internet and in
+[0:28:25] media well before there's any
+[0:28:27] legislative action
+[0:28:28] in the case of assault weapon bans
+[0:28:31] around this time
+[0:28:32] there was national publicity as well as
+[0:28:34] publicity in the state
+[0:28:36] lively conversations on the internet and
 [0:28:39] in talk radio and in major news outlets
-[0:28:43] talk radio and in major news outlets and this started well before the
-[0:28:45] and this started well before the legislation was even introduced
-[0:28:47] legislation was even introduced then the legislation is introduced there
-[0:28:49] then the legislation is introduced there are hearings there are debates
-[0:28:51] are hearings there are debates lots of media coverage lots of advocacy
-[0:28:54] lots of media coverage lots of advocacy groups making their points of view
-[0:28:56] groups making their points of view known then in this case the legislation
-[0:28:59] known then in this case the legislation passes
+[0:28:43] and this started well before the
+[0:28:45] legislation was even introduced
+[0:28:47] then the legislation is introduced there
+[0:28:49] are hearings there are debates
+[0:28:51] lots of media coverage lots of advocacy
+[0:28:54] groups making their points of view
+[0:28:56] known then in this case the legislation
 [0:29:00] passes but it must be signed by the governor so
-[0:29:01] but it must be signed by the governor so there's another lag
-[0:29:03] there's another lag that may take several months or maybe
-[0:29:05] that may take several months or maybe just several weeks
-[0:29:07] just several weeks and then there's usually a lag between
-[0:29:08] and then there's usually a lag between the time the governor signs off on
-[0:29:10] the time the governor signs off on legislation
-[0:29:11] legislation and it is actually implemented often
-[0:29:14] and it is actually implemented often legislation is implemented at the
-[0:29:16] legislation is implemented at the beginning of the calendar year
-[0:29:17] beginning of the calendar year but sometimes not until the beginning of
-[0:29:19] but sometimes not until the beginning of the fiscal year
-[0:29:21] the fiscal year so for this particular intervention
-[0:29:23] so for this particular intervention which is clearly controversial
-[0:29:25] which is clearly controversial we don't know really what the
-[0:29:26] we don't know really what the intervention is
-[0:29:28] intervention is is it literally when the legislation was
-[0:29:31] is it literally when the legislation was implemented
-[0:29:32] implemented or is the intervention all of the
-[0:29:33] or is the intervention all of the concerns that were raised
-[0:29:35] concerns that were raised as the intervention was being discussed
-[0:29:38] as the intervention was being discussed and because of that
-[0:29:39] and because of that we could have the intervention located
-[0:29:42] we could have the intervention located anywhere
+[0:29:01] there's another lag
+[0:29:03] that may take several months or maybe
+[0:29:05] just several weeks
+[0:29:07] and then there's usually a lag between
+[0:29:08] the time the governor signs off on
+[0:29:10] legislation
+[0:29:11] and it is actually implemented often
+[0:29:14] legislation is implemented at the
+[0:29:16] beginning of the calendar year
+[0:29:17] but sometimes not until the beginning of
+[0:29:19] the fiscal year
+[0:29:21] so for this particular intervention
+[0:29:23] which is clearly controversial
+[0:29:25] we don't know really what the
+[0:29:26] intervention is
+[0:29:28] is it literally when the legislation was
+[0:29:31] implemented
+[0:29:32] or is the intervention all of the
+[0:29:33] concerns that were raised
+[0:29:35] as the intervention was being discussed
+[0:29:38] and because of that
+[0:29:39] we could have the intervention located
 [0:29:43] anywhere plus or minus six months from when the
-[0:29:46] plus or minus six months from when the legislation was actually implemented
-[0:29:48] legislation was actually implemented and to pursue that i moved the start
-[0:29:50] and to pursue that i moved the start date back and forth several months
-[0:29:53] date back and forth several months and re-ran the model and the negative
-[0:29:55] and re-ran the model and the negative effect disappeared basically it became a
-[0:29:57] effect disappeared basically it became a null finding
-[0:29:59] null finding i can't tell you why we got a particular
-[0:30:01] i can't tell you why we got a particular effect
+[0:29:46] legislation was actually implemented
+[0:29:48] and to pursue that i moved the start
+[0:29:50] date back and forth several months
+[0:29:53] and re-ran the model and the negative
+[0:29:55] effect disappeared basically it became a
+[0:29:57] null finding
+[0:29:59] i can't tell you why we got a particular
 [0:30:02] effect by placing the intervention at january
-[0:30:04] by placing the intervention at january 1st
 [0:30:05] 1st although i have some speculations after
-[0:30:07] although i have some speculations after looking at the data
-[0:30:08] looking at the data but the bottom line is really pretty
-[0:30:10] but the bottom line is really pretty clear we don't understand
-[0:30:11] clear we don't understand why this would be a causal effect and we
-[0:30:14] why this would be a causal effect and we don't even really know when this occurs
-[0:30:16] don't even really know when this occurs moreover after this particular piece of
-[0:30:19] moreover after this particular piece of legislation
-[0:30:20] legislation there were a number of other statutes
-[0:30:22] there were a number of other statutes that were debated and passed
-[0:30:24] that were debated and passed by the california legislature over 50.
-[0:30:28] by the california legislature over 50. um susan and i went through those and
-[0:30:30] um susan and i went through those and tried to figure out
-[0:30:31] tried to figure out which were the most credibly uh causal
-[0:30:34] which were the most credibly uh causal for firearm sales or handgun sales in
-[0:30:37] for firearm sales or handgun sales in particular
-[0:30:38] particular and that's arguable for example if we
-[0:30:40] and that's arguable for example if we ban high capacity magazines
-[0:30:43] ban high capacity magazines is that going to affect handgun sales
-[0:30:45] is that going to affect handgun sales nevertheless
-[0:30:47] nevertheless it's reasonable to speculate that
-[0:30:49] it's reasonable to speculate that whatever the hot button issues are
-[0:30:51] whatever the hot button issues are that could affect handgun sales they
-[0:30:54] that could affect handgun sales they were kept alive
-[0:30:56] were kept alive through debates and actual statutes in
-[0:30:59] through debates and actual statutes in the subsequent several years
-[0:31:01] the subsequent several years again it's hard to know what the
-[0:31:02] again it's hard to know what the intervention is or when it occurred
-[0:31:05] intervention is or when it occurred also if you look at the data you will
-[0:31:07] also if you look at the data you will see unanticipated spikes
-[0:31:09] see unanticipated spikes which are effectively outliers and
-[0:31:11] which are effectively outliers and easily found by outliers
-[0:31:13] easily found by outliers you can see them they're outlier
-[0:31:15] you can see them they're outlier diagnostic tools available i applied
-[0:31:18] diagnostic tools available i applied them
+[0:30:07] looking at the data
+[0:30:08] but the bottom line is really pretty
+[0:30:10] clear we don't understand
+[0:30:11] why this would be a causal effect and we
+[0:30:14] don't even really know when this occurs
+[0:30:16] moreover after this particular piece of
+[0:30:19] legislation
+[0:30:20] there were a number of other statutes
+[0:30:22] that were debated and passed
+[0:30:24] by the california legislature over 50.
+[0:30:28] um susan and i went through those and
+[0:30:30] tried to figure out
+[0:30:31] which were the most credibly uh causal
+[0:30:34] for firearm sales or handgun sales in
+[0:30:37] particular
+[0:30:38] and that's arguable for example if we
+[0:30:40] ban high capacity magazines
+[0:30:43] is that going to affect handgun sales
+[0:30:45] nevertheless
+[0:30:47] it's reasonable to speculate that
+[0:30:49] whatever the hot button issues are
+[0:30:51] that could affect handgun sales they
+[0:30:54] were kept alive
+[0:30:56] through debates and actual statutes in
+[0:30:59] the subsequent several years
+[0:31:01] again it's hard to know what the
+[0:31:02] intervention is or when it occurred
+[0:31:05] also if you look at the data you will
+[0:31:07] see unanticipated spikes
+[0:31:09] which are effectively outliers and
+[0:31:11] easily found by outliers
+[0:31:13] you can see them they're outlier
+[0:31:15] diagnostic tools available i applied
 [0:31:18] them and yes indeed those are strange
-[0:31:20] and yes indeed those are strange observations if you put in indicator
-[0:31:22] observations if you put in indicator variables for those spikes
-[0:31:24] variables for those spikes even if you don't know why they're there
-[0:31:26] even if you don't know why they're there you can change the results
-[0:31:29] you can change the results for reasons that we simply don't have
-[0:31:31] for reasons that we simply don't have the information
-[0:31:32] the information to explain at this point in addition
-[0:31:35] to explain at this point in addition even though it seems a bit
-[0:31:37] even though it seems a bit counter-intuitive even with the very
-[0:31:39] counter-intuitive even with the very simple model that i used
-[0:31:43] simple model that i used there can be very strong co-linearity
-[0:31:45] there can be very strong co-linearity because the lag
-[0:31:46] because the lag y's bring over to the subsequent y
-[0:31:50] y's bring over to the subsequent y the impact of interventions that
-[0:31:53] the impact of interventions that set affinity values becomes more and
-[0:31:55] set affinity values becomes more and more dependent over time
-[0:31:57] more dependent over time and so in the literature they call it a
-[0:31:59] and so in the literature they call it a problem of redundant
-[0:32:00] problem of redundant predictors they're very hard to spot in
-[0:32:03] predictors they're very hard to spot in fact sometimes effectively impossible
-[0:32:05] fact sometimes effectively impossible to spot all you know is that your
-[0:32:07] to spot all you know is that your results are very unstable
-[0:32:09] results are very unstable and it's often extremely difficult to
-[0:32:11] and it's often extremely difficult to get the
+[0:31:20] observations if you put in indicator
+[0:31:22] variables for those spikes
+[0:31:24] even if you don't know why they're there
+[0:31:26] you can change the results
+[0:31:29] for reasons that we simply don't have
+[0:31:31] the information
+[0:31:32] to explain at this point in addition
+[0:31:35] even though it seems a bit
+[0:31:37] counter-intuitive even with the very
+[0:31:39] simple model that i used
+[0:31:43] there can be very strong co-linearity
+[0:31:45] because the lag
+[0:31:46] y's bring over to the subsequent y
+[0:31:50] the impact of interventions that
+[0:31:53] set affinity values becomes more and
+[0:31:55] more dependent over time
+[0:31:57] and so in the literature they call it a
+[0:31:59] problem of redundant
+[0:32:00] predictors they're very hard to spot in
+[0:32:03] fact sometimes effectively impossible
+[0:32:05] to spot all you know is that your
+[0:32:07] results are very unstable
+[0:32:09] and it's often extremely difficult to
 [0:32:12] get the fitting algorithms to converge as it is
-[0:32:16] fitting algorithms to converge as it is the results are unstable even though
-[0:32:18] the results are unstable even though the results i'm reporting are a product
-[0:32:20] the results i'm reporting are a product of convergence
-[0:32:22] of convergence and then finally i want to emphasize
-[0:32:23] and then finally i want to emphasize again that the model that i
-[0:32:25] again that the model that i chose is not unique it's clearly an
-[0:32:28] chose is not unique it's clearly an approximation
-[0:32:29] approximation i'm not claiming it's right and there
-[0:32:32] i'm not claiming it's right and there are other models that other people
-[0:32:34] are other models that other people looking at the results
-[0:32:35] looking at the results with the same sort of performance with
-[0:32:37] with the same sort of performance with the white noise residuals
-[0:32:39] the white noise residuals would also claim are satisfactory so
-[0:32:43] would also claim are satisfactory so where do we wind up conclusions
-[0:32:46] where do we wind up conclusions i worry that we have a bridge to nowhere
-[0:32:49] i worry that we have a bridge to nowhere first of all as i've just emphasized
-[0:32:52] first of all as i've just emphasized on the adult on the assault weapon ban
-[0:32:54] on the adult on the assault weapon ban you really can't tell
-[0:32:56] you really can't tell you're pretty it's pretty clear that the
-[0:32:58] you're pretty it's pretty clear that the result is not
-[0:33:00] result is not um detrimental
-[0:33:03] um detrimental but who knows and you certainly can't
-[0:33:06] but who knows and you certainly can't can claim
+[0:32:16] the results are unstable even though
+[0:32:18] the results i'm reporting are a product
+[0:32:20] of convergence
+[0:32:22] and then finally i want to emphasize
+[0:32:23] again that the model that i
+[0:32:25] chose is not unique it's clearly an
+[0:32:28] approximation
+[0:32:29] i'm not claiming it's right and there
+[0:32:32] are other models that other people
+[0:32:34] looking at the results
+[0:32:35] with the same sort of performance with
+[0:32:37] the white noise residuals
+[0:32:39] would also claim are satisfactory so
+[0:32:43] where do we wind up conclusions
+[0:32:46] i worry that we have a bridge to nowhere
+[0:32:49] first of all as i've just emphasized
+[0:32:52] on the adult on the assault weapon ban
+[0:32:54] you really can't tell
+[0:32:56] you're pretty it's pretty clear that the
+[0:32:58] result is not
+[0:33:00] um detrimental
+[0:33:03] but who knows and you certainly can't
 [0:33:07] can claim claim that the result is effective
-[0:33:10] claim that the result is effective we have no understanding of the causal
-[0:33:12] we have no understanding of the causal mechanisms little knowledge of the
-[0:33:13] mechanisms little knowledge of the legislative history
-[0:33:15] legislative history and related publicity at least in a form
-[0:33:17] and related publicity at least in a form that we could build in
-[0:33:18] that we could build in to our procedures um we have these
-[0:33:22] to our procedures um we have these post-selection inference complications
-[0:33:24] post-selection inference complications even with just 27 models
-[0:33:26] even with just 27 models you can imagine as often happens in
-[0:33:28] you can imagine as often happens in practice there's a lot more data
-[0:33:30] practice there's a lot more data snooping going on
-[0:33:32] snooping going on i showed you a few moments ago a plot of
-[0:33:34] i showed you a few moments ago a plot of the time series data
-[0:33:36] the time series data i looked at that and said oh my goodness
-[0:33:38] i looked at that and said oh my goodness looks like i have some non-stationarity
-[0:33:40] looks like i have some non-stationarity i have an upward trend and you can bet
-[0:33:43] i have an upward trend and you can bet that led me to
-[0:33:44] that led me to difference the data before i even
-[0:33:46] difference the data before i even modeled
+[0:33:10] we have no understanding of the causal
+[0:33:12] mechanisms little knowledge of the
+[0:33:13] legislative history
+[0:33:15] and related publicity at least in a form
+[0:33:17] that we could build in
+[0:33:18] to our procedures um we have these
+[0:33:22] post-selection inference complications
+[0:33:24] even with just 27 models
+[0:33:26] you can imagine as often happens in
+[0:33:28] practice there's a lot more data
+[0:33:30] snooping going on
+[0:33:32] i showed you a few moments ago a plot of
+[0:33:34] the time series data
+[0:33:36] i looked at that and said oh my goodness
+[0:33:38] looks like i have some non-stationarity
+[0:33:40] i have an upward trend and you can bet
+[0:33:43] that led me to
+[0:33:44] difference the data before i even
 [0:33:47] modeled i said well you know it looks like i'm
-[0:33:49] i said well you know it looks like i'm going to difference that's model
-[0:33:50] going to difference that's model snooping and that isn't even built into
-[0:33:52] snooping and that isn't even built into the bonferroni
-[0:33:53] the bonferroni correction because i did other data
-[0:33:55] correction because i did other data snooping
+[0:33:49] going to difference that's model
+[0:33:50] snooping and that isn't even built into
+[0:33:52] the bonferroni
+[0:33:53] correction because i did other data
 [0:33:56] snooping along the way i stressed that data
-[0:33:58] along the way i stressed that data snooping is
-[0:34:00] snooping is actually uh encouraged in this
-[0:34:02] actually uh encouraged in this literature and in lots of other
-[0:34:04] literature and in lots of other literatures
-[0:34:05] literatures if you were doing an exploratory
-[0:34:06] if you were doing an exploratory analysis that's perfectly fine
-[0:34:09] analysis that's perfectly fine if you're trying to confirm what you
-[0:34:11] if you're trying to confirm what you expect to be there
-[0:34:13] expect to be there that's not fine
+[0:33:58] snooping is
+[0:34:00] actually uh encouraged in this
+[0:34:02] literature and in lots of other
+[0:34:04] literatures
+[0:34:05] if you were doing an exploratory
+[0:34:06] analysis that's perfectly fine
+[0:34:09] if you're trying to confirm what you
+[0:34:11] expect to be there
+[0:34:13] that's not fine
 [0:34:18] there are other modeling approaches that are out there i list several
-[0:34:20] are out there i list several authors they're very sophisticated
-[0:34:23] authors they're very sophisticated the authors are very smart and doing
-[0:34:25] the authors are very smart and doing very powerful things
-[0:34:26] very powerful things i wish i could use those ideas but i
-[0:34:30] i wish i could use those ideas but i just don't know enough about this
-[0:34:31] just don't know enough about this particular setting in these data
-[0:34:34] particular setting in these data to transport these useful ideas
-[0:34:37] to transport these useful ideas to this setting and i really do have to
-[0:34:39] to this setting and i really do have to wonder
+[0:34:20] authors they're very sophisticated
+[0:34:23] the authors are very smart and doing
+[0:34:25] very powerful things
+[0:34:26] i wish i could use those ideas but i
+[0:34:30] just don't know enough about this
+[0:34:31] particular setting in these data
+[0:34:34] to transport these useful ideas
+[0:34:37] to this setting and i really do have to
 [0:34:40] wonder whether the experience that i'm having
-[0:34:43] whether the experience that i'm having is unique to
-[0:34:44] is unique to gun sales in california or whether it's
-[0:34:46] gun sales in california or whether it's a more general problem with the
-[0:34:47] a more general problem with the application
-[0:34:49] application of time series data to efforts to
-[0:34:51] of time series data to efforts to introduce
+[0:34:43] is unique to
+[0:34:44] gun sales in california or whether it's
+[0:34:46] a more general problem with the
+[0:34:47] application
+[0:34:49] of time series data to efforts to
 [0:34:52] introduce causal inference to the impact of
-[0:34:55] causal inference to the impact of intervention
-[0:34:56] intervention so where do i wind up i'm not ready to
-[0:34:58] so where do i wind up i'm not ready to fold up my tent and go home
-[0:35:00] fold up my tent and go home but i am ready to settle for reduced
-[0:35:02] but i am ready to settle for reduced aspirations
-[0:35:03] aspirations by reduced aspirations i mean i'd be
-[0:35:06] by reduced aspirations i mean i'd be pretty happy if i could settle
-[0:35:07] pretty happy if i could settle on just a credible sign for the impact
-[0:35:10] on just a credible sign for the impact of assault weapons
-[0:35:12] of assault weapons bans on assault weapons do they make
-[0:35:14] bans on assault weapons do they make things worse
-[0:35:16] things worse do they make things better if i could in
-[0:35:18] do they make things better if i could in a credible way arrive at a conclusion
-[0:35:20] a credible way arrive at a conclusion about that
-[0:35:21] about that i'd be very happy to try to get an
-[0:35:23] i'd be very happy to try to get an incredible estimate of the size of the
-[0:35:26] incredible estimate of the size of the causal effect
-[0:35:27] causal effect i think that's probably too hard that's
-[0:35:30] i think that's probably too hard that's where i wind up and i think that's
-[0:35:32] where i wind up and i think that's enough for now and i'm
-[0:35:33] enough for now and i'm happy to have either questions or john's
-[0:35:36] happy to have either questions or john's commentary
+[0:34:55] intervention
+[0:34:56] so where do i wind up i'm not ready to
+[0:34:58] fold up my tent and go home
+[0:35:00] but i am ready to settle for reduced
+[0:35:02] aspirations
+[0:35:03] by reduced aspirations i mean i'd be
+[0:35:06] pretty happy if i could settle
+[0:35:07] on just a credible sign for the impact
+[0:35:10] of assault weapons
+[0:35:12] bans on assault weapons do they make
+[0:35:14] things worse
+[0:35:16] do they make things better if i could in
+[0:35:18] a credible way arrive at a conclusion
+[0:35:20] about that
+[0:35:21] i'd be very happy to try to get an
+[0:35:23] incredible estimate of the size of the
+[0:35:26] causal effect
+[0:35:27] i think that's probably too hard that's
+[0:35:30] where i wind up and i think that's
+[0:35:32] enough for now and i'm
+[0:35:33] happy to have either questions or john's
+[0:35:36] commentary
 [0:35:42] thanks for the great talk richard kim should we take questions now or should
-[0:35:44] should we take questions now or should we do
 [0:35:44] we do them at the end what do you prefer
 [0:35:51] guillaume i can't hear you yeah let's wait until after
-[0:35:52] wait until after john's um presentation and then we can
-[0:35:54] john's um presentation and then we can take all the questions
-[0:35:56] take all the questions all right so now stop screen sharing
-[0:35:58] all right so now stop screen sharing then yeah please stop screen sharing and
-[0:36:01] then yeah please stop screen sharing and richard you will have the opportunity to
-[0:36:02] richard you will have the opportunity to respond to uh
-[0:36:04] respond to uh john's discussion all right john
-[0:36:07] john's discussion all right john whenever you're ready hey
-[0:36:11] whenever you're ready hey um all right let's see if i can bring
-[0:36:14] um all right let's see if i can bring this
+[0:35:52] john's um presentation and then we can
+[0:35:54] take all the questions
+[0:35:56] all right so now stop screen sharing
+[0:35:58] then yeah please stop screen sharing and
+[0:36:01] richard you will have the opportunity to
+[0:36:02] respond to uh
+[0:36:04] john's discussion all right john
+[0:36:07] whenever you're ready hey
+[0:36:11] um all right let's see if i can bring
 [0:36:15] this up
 [0:36:24] okay so thank you very much uh i'm really uh delighted to be able to
-[0:36:26] really uh delighted to be able to learn learn from richard as i always try
-[0:36:29] learn learn from richard as i always try to do and i have that opportunity
+[0:36:26] learn learn from richard as i always try
+[0:36:29] to do and i have that opportunity
 [0:36:34] [Music] and so there are many many broad issues
-[0:36:37] and so there are many many broad issues that are raised by
-[0:36:38] that are raised by richard's talk obviously he was very
-[0:36:41] richard's talk obviously he was very heavily focused on the methodological
-[0:36:43] heavily focused on the methodological issue but the substantive issue is
-[0:36:46] issue but the substantive issue is incredibly important
-[0:36:47] incredibly important he also touches upon these
-[0:36:49] he also touches upon these epistemological questions
-[0:36:51] epistemological questions and for me since i'm very wrapped up in
-[0:36:53] and for me since i'm very wrapped up in a lot of gun
-[0:36:54] a lot of gun litigation right now the legal and
-[0:36:56] litigation right now the legal and practical concerns are great
-[0:36:58] practical concerns are great so obviously two big questions we're
-[0:37:01] so obviously two big questions we're interested in is can we explain
-[0:37:02] interested in is can we explain pattern of gun sales perhaps in response
-[0:37:05] pattern of gun sales perhaps in response to things like
-[0:37:06] to things like the adoption of an assault weapon ban uh
-[0:37:09] the adoption of an assault weapon ban uh and then ultimately we're going to be
-[0:37:10] and then ultimately we're going to be interested in knowing what the
-[0:37:11] interested in knowing what the impact on crime and of course as richard
-[0:37:14] impact on crime and of course as richard mentioned
+[0:36:37] that are raised by
+[0:36:38] richard's talk obviously he was very
+[0:36:41] heavily focused on the methodological
+[0:36:43] issue but the substantive issue is
+[0:36:46] incredibly important
+[0:36:47] he also touches upon these
+[0:36:49] epistemological questions
+[0:36:51] and for me since i'm very wrapped up in
+[0:36:53] a lot of gun
+[0:36:54] litigation right now the legal and
+[0:36:56] practical concerns are great
+[0:36:58] so obviously two big questions we're
+[0:37:01] interested in is can we explain
+[0:37:02] pattern of gun sales perhaps in response
+[0:37:05] to things like
+[0:37:06] the adoption of an assault weapon ban uh
+[0:37:09] and then ultimately we're going to be
+[0:37:10] interested in knowing what the
+[0:37:11] impact on crime and of course as richard
 [0:37:15] mentioned crime is a very capacious category uh
-[0:37:18] crime is a very capacious category uh there's a big difference between uh you
-[0:37:21] there's a big difference between uh you know
+[0:37:18] there's a big difference between uh you
 [0:37:21] know sort of standard street crime and the
-[0:37:23] sort of standard street crime and the public mass shootings that are often the
-[0:37:26] public mass shootings that are often the uh things that motivate adoption of
-[0:37:28] uh things that motivate adoption of things like the assault weapon ban
-[0:37:30] things like the assault weapon ban so pulling information about the causal
-[0:37:33] so pulling information about the causal effect of
+[0:37:23] public mass shootings that are often the
+[0:37:26] uh things that motivate adoption of
+[0:37:28] things like the assault weapon ban
+[0:37:30] so pulling information about the causal
 [0:37:34] effect of legal interventions and other events
-[0:37:36] legal interventions and other events from
 [0:37:37] from time series analysis is a big challenge
-[0:37:40] time series analysis is a big challenge i mean
 [0:37:40] i mean uh jim heckman and i wrote a paper about
-[0:37:43] uh jim heckman and i wrote a paper about the
 [0:37:44] the impact of the civil rights laws in the
-[0:37:46] impact of the civil rights laws in the 1960s
 [0:37:47] 1960s and when you're dealing with national
-[0:37:50] and when you're dealing with national laws
 [0:37:51] laws and and don't have good
-[0:37:54] and and don't have good counterfactuals it's very very tricky
-[0:37:58] counterfactuals it's very very tricky but if the data is rich enough and the
-[0:38:00] but if the data is rich enough and the intervention is clear
-[0:38:01] intervention is clear and not overly confounded with
-[0:38:04] and not overly confounded with simultaneous
-[0:38:05] simultaneous uh other relevant events uh i think
-[0:38:09] uh other relevant events uh i think there have been
-[0:38:10] there have been examples of some time series analysis of
-[0:38:13] examples of some time series analysis of the type that richard is doing
-[0:38:15] the type that richard is doing my colleague here at stanford
-[0:38:18] my colleague here at stanford studdard has a nice paper trying to
-[0:38:22] studdard has a nice paper trying to use this same data and pick out a couple
-[0:38:24] use this same data and pick out a couple of uh
+[0:37:54] counterfactuals it's very very tricky
+[0:37:58] but if the data is rich enough and the
+[0:38:00] intervention is clear
+[0:38:01] and not overly confounded with
+[0:38:04] simultaneous
+[0:38:05] uh other relevant events uh i think
+[0:38:09] there have been
+[0:38:10] examples of some time series analysis of
+[0:38:13] the type that richard is doing
+[0:38:15] my colleague here at stanford
+[0:38:18] studdard has a nice paper trying to
+[0:38:22] use this same data and pick out a couple
 [0:38:25] of uh mass shootings that might be thought to
-[0:38:27] mass shootings that might be thought to have stimulated
-[0:38:29] have stimulated uh sales um so
-[0:38:32] uh sales um so richard has offered us some improved
-[0:38:35] richard has offered us some improved techniques and i'll be interested to see
-[0:38:37] techniques and i'll be interested to see how those are implemented in the future
-[0:38:39] how those are implemented in the future uh but they're as i mentioned they're
-[0:38:41] uh but they're as i mentioned they're also vexing
-[0:38:42] also vexing legal issues when courts must assess
-[0:38:46] legal issues when courts must assess what gun regulations can survive second
-[0:38:49] what gun regulations can survive second amendment attack
-[0:38:50] amendment attack and i'm always i'm always nervous when i
-[0:38:53] and i'm always i'm always nervous when i think
+[0:38:27] have stimulated
+[0:38:29] uh sales um so
+[0:38:32] richard has offered us some improved
+[0:38:35] techniques and i'll be interested to see
+[0:38:37] how those are implemented in the future
+[0:38:39] uh but they're as i mentioned they're
+[0:38:41] also vexing
+[0:38:42] legal issues when courts must assess
+[0:38:46] what gun regulations can survive second
+[0:38:49] amendment attack
+[0:38:50] and i'm always i'm always nervous when i
 [0:38:54] think sensible uh evidence is brought to bear
-[0:38:58] sensible uh evidence is brought to bear in legal contexts and the other side can
-[0:39:01] in legal contexts and the other side can can sort of rehearse the arguments about
-[0:39:04] can sort of rehearse the arguments about why this isn't really tightly identified
-[0:39:06] why this isn't really tightly identified and
+[0:38:58] in legal contexts and the other side can
+[0:39:01] can sort of rehearse the arguments about
+[0:39:04] why this isn't really tightly identified
 [0:39:07] and uh you should throw out this information
-[0:39:10] uh you should throw out this information because
 [0:39:10] because when one thinks about you know type one
-[0:39:12] when one thinks about you know type one and type two error
-[0:39:13] and type two error in the gun realm it probably is the case
-[0:39:17] in the gun realm it probably is the case that you want to have a
-[0:39:19] that you want to have a much more relaxed standard for
-[0:39:22] much more relaxed standard for establishing the value of some of these
-[0:39:24] establishing the value of some of these interventions
-[0:39:26] interventions given the relative costs of
-[0:39:29] given the relative costs of error so right now virtually
-[0:39:33] error so right now virtually every gun regulation in america is under
-[0:39:35] every gun regulation in america is under assault
+[0:39:12] and type two error
+[0:39:13] in the gun realm it probably is the case
+[0:39:17] that you want to have a
+[0:39:19] much more relaxed standard for
+[0:39:22] establishing the value of some of these
+[0:39:24] interventions
+[0:39:26] given the relative costs of
+[0:39:29] error so right now virtually
+[0:39:33] every gun regulation in america is under
 [0:39:36] assault in in federal court uh all around
-[0:39:39] in in federal court uh all around america and certainly in california
-[0:39:41] america and certainly in california so it does raise a question if you're
-[0:39:44] so it does raise a question if you're interested in
-[0:39:45] interested in what what what was the effect of the
-[0:39:46] what what what was the effect of the federal assault weapon been so this is a
-[0:39:48] federal assault weapon been so this is a tricky
+[0:39:39] america and certainly in california
+[0:39:41] so it does raise a question if you're
+[0:39:44] interested in
+[0:39:45] what what what was the effect of the
+[0:39:46] federal assault weapon been so this is a
 [0:39:49] tricky problem that it applied for the entire
-[0:39:51] problem that it applied for the entire nation was in effect for 10 years
-[0:39:54] nation was in effect for 10 years and you do see a drop in the number and
-[0:39:56] and you do see a drop in the number and deaths
+[0:39:51] nation was in effect for 10 years
+[0:39:54] and you do see a drop in the number and
 [0:39:57] deaths from mass shootings and then a very
-[0:39:59] from mass shootings and then a very sharp rise
-[0:40:00] sharp rise afterwards and interestingly
-[0:40:04] afterwards and interestingly that large drop followed by the large
-[0:40:07] that large drop followed by the large increase
+[0:39:59] sharp rise
+[0:40:00] afterwards and interestingly
+[0:40:04] that large drop followed by the large
 [0:40:08] increase came at a time when overall violent
-[0:40:11] came at a time when overall violent crime was trending down so this uh
-[0:40:14] crime was trending down so this uh purple dotted line shows you violent
-[0:40:16] purple dotted line shows you violent crime trended down over this entire
-[0:40:19] crime trended down over this entire period
+[0:40:11] crime was trending down so this uh
+[0:40:14] purple dotted line shows you violent
+[0:40:16] crime trended down over this entire
 [0:40:19] period and yet shootings
-[0:40:22] and yet shootings we still see your first slide currently
-[0:40:26] we still see your first slide currently can you press escape maybe oh my
-[0:40:29] can you press escape maybe oh my goodness now
-[0:40:29] goodness now you haven't been seeing my my slides as
-[0:40:32] you haven't been seeing my my slides as i've been going through
-[0:40:33] i've been going through at least i haven't oh okay so now
-[0:40:37] at least i haven't oh okay so now what could be explaining that if you
-[0:40:40] what could be explaining that if you stop
+[0:40:22] we still see your first slide currently
+[0:40:26] can you press escape maybe oh my
+[0:40:29] goodness now
+[0:40:29] you haven't been seeing my my slides as
+[0:40:32] i've been going through
+[0:40:33] at least i haven't oh okay so now
+[0:40:37] what could be explaining that if you
 [0:40:40] stop just stop the slideshow and then if you
-[0:40:43] just stop the slideshow and then if you just on the left-hand side click through
-[0:40:44] just on the left-hand side click through the slides maybe we see that
-[0:40:46] the slides maybe we see that okay uh sorry about that i don't know
-[0:40:49] okay uh sorry about that i don't know [Music]
+[0:40:43] just on the left-hand side click through
+[0:40:44] the slides maybe we see that
+[0:40:46] okay uh sorry about that i don't know
 [0:40:51] [Music] why
 [0:40:57] oh yeah no now it moves then now you can click through i think and then we would
-[0:40:59] click through i think and then we would yeah so so this is where i was so
-[0:41:02] yeah so so this is where i was so so this uh this figure is just giving
-[0:41:06] so this uh this figure is just giving you national time
-[0:41:07] you national time series uh uh evidence
-[0:41:10] series uh uh evidence on what happened to violent crime over
-[0:41:12] on what happened to violent crime over this period trending down
-[0:41:13] this period trending down what happened to uh incidents and deaths
-[0:41:17] what happened to uh incidents and deaths from
+[0:40:59] yeah so so this is where i was so
+[0:41:02] so this uh this figure is just giving
+[0:41:06] you national time
+[0:41:07] series uh uh evidence
+[0:41:10] on what happened to violent crime over
+[0:41:12] this period trending down
+[0:41:13] what happened to uh incidents and deaths
 [0:41:17] from assault weapon from public mass
-[0:41:20] assault weapon from public mass shootings
 [0:41:21] shootings uh and you see there was the drop during
-[0:41:23] uh and you see there was the drop during the federal assault weapon ban
-[0:41:24] the federal assault weapon ban and the increases thereafter so
-[0:41:27] and the increases thereafter so virtually no statistician would look at
-[0:41:29] virtually no statistician would look at this and say oh i proved the causal
-[0:41:31] this and say oh i proved the causal effect of the federal assault weapon ban
-[0:41:33] effect of the federal assault weapon ban but if you're a federal judge being
-[0:41:35] but if you're a federal judge being asked to determine whether this is
-[0:41:37] asked to determine whether this is unconstitutional or not
-[0:41:39] unconstitutional or not do you want a statistician coming in and
-[0:41:41] do you want a statistician coming in and telling you there's
-[0:41:42] telling you there's there's no evidence here from which you
-[0:41:44] there's no evidence here from which you could conclude a federal assault weapon
-[0:41:46] could conclude a federal assault weapon ban
+[0:41:23] the federal assault weapon ban
+[0:41:24] and the increases thereafter so
+[0:41:27] virtually no statistician would look at
+[0:41:29] this and say oh i proved the causal
+[0:41:31] effect of the federal assault weapon ban
+[0:41:33] but if you're a federal judge being
+[0:41:35] asked to determine whether this is
+[0:41:37] unconstitutional or not
+[0:41:39] do you want a statistician coming in and
+[0:41:41] telling you there's
+[0:41:42] there's no evidence here from which you
+[0:41:44] could conclude a federal assault weapon
 [0:41:47] ban was useful or not or do you want them to
-[0:41:50] was useful or not or do you want them to say
 [0:41:52] say hey consider type 1 and type 2 error
-[0:41:55] hey consider type 1 and type 2 error here
 [0:41:56] here do we really want to be striking down as
-[0:41:57] do we really want to be striking down as a constitutional matter
-[0:41:59] a constitutional matter that you cannot have a assault weapon
-[0:42:02] that you cannot have a assault weapon ban in place
-[0:42:03] ban in place which is obviously the goal of the gun
-[0:42:05] which is obviously the goal of the gun lobby in the nra right now
+[0:41:57] a constitutional matter
+[0:41:59] that you cannot have a assault weapon
+[0:42:02] ban in place
+[0:42:03] which is obviously the goal of the gun
+[0:42:05] lobby in the nra right now
 [0:42:10] because this evidence isn't strong enough here's a little more evidence you
-[0:42:12] enough here's a little more evidence you can see that
-[0:42:13] can see that that's per incident dropped during the
-[0:42:16] that's per incident dropped during the federal assault weapon ban and rose
-[0:42:17] federal assault weapon ban and rose thereafter
-[0:42:18] thereafter and essentially that's from mass
-[0:42:20] and essentially that's from mass shootings have been growing at about 10
-[0:42:23] shootings have been growing at about 10 per year so it's a fairly high growth
-[0:42:26] per year so it's a fairly high growth rate since the
-[0:42:27] rate since the end of the federal assault weapon ban so
-[0:42:29] end of the federal assault weapon ban so now we're switching over to
-[0:42:31] now we're switching over to to where richard's data came from in
-[0:42:33] to where richard's data came from in california
-[0:42:34] california it's not a typical state uh because
-[0:42:37] it's not a typical state uh because california has
-[0:42:38] california has a 10-day waiting period no there's no
-[0:42:41] a 10-day waiting period no there's no comparable
-[0:42:42] comparable national 10-day waiting period even
-[0:42:43] national 10-day waiting period even though this is under attack
-[0:42:45] though this is under attack california has no right to carry law
-[0:42:47] california has no right to carry law sort of an automatic right
-[0:42:49] sort of an automatic right for any citizen to get a permit to carry
-[0:42:53] for any citizen to get a permit to carry concealed weapons again this is under
-[0:42:55] concealed weapons again this is under attack
+[0:42:12] can see that
+[0:42:13] that's per incident dropped during the
+[0:42:16] federal assault weapon ban and rose
+[0:42:17] thereafter
+[0:42:18] and essentially that's from mass
+[0:42:20] shootings have been growing at about 10
+[0:42:23] per year so it's a fairly high growth
+[0:42:26] rate since the
+[0:42:27] end of the federal assault weapon ban so
+[0:42:29] now we're switching over to
+[0:42:31] to where richard's data came from in
+[0:42:33] california
+[0:42:34] it's not a typical state uh because
+[0:42:37] california has
+[0:42:38] a 10-day waiting period no there's no
+[0:42:41] comparable
+[0:42:42] national 10-day waiting period even
+[0:42:43] though this is under attack
+[0:42:45] california has no right to carry law
+[0:42:47] sort of an automatic right
+[0:42:49] for any citizen to get a permit to carry
+[0:42:53] concealed weapons again this is under
 [0:42:56] attack california prohibits open carry of guns
-[0:42:59] california prohibits open carry of guns against
 [0:42:59] against that's under legal attack right now uh
-[0:43:02] that's under legal attack right now uh and california prohibits assault weapons
-[0:43:05] and california prohibits assault weapons as
+[0:43:02] and california prohibits assault weapons
 [0:43:05] as richard notes uh and also large capacity
-[0:43:09] richard notes uh and also large capacity magazines
 [0:43:10] magazines uh just yesterday 22 states asked the
-[0:43:14] uh just yesterday 22 states asked the full 9th circuit court of appeals here
-[0:43:16] full 9th circuit court of appeals here to
+[0:43:14] full 9th circuit court of appeals here
+[0:43:16] to
 [0:43:21] reinstate the earlier decision of a federal court
-[0:43:22] federal court to ban california's high-capacity
-[0:43:26] to ban california's high-capacity magazine
+[0:43:22] to ban california's high-capacity
 [0:43:26] magazine restrictions california also restricts
-[0:43:29] restrictions california also restricts sales to those who are
-[0:43:31] sales to those who are 21. that is under legal attack right now
-[0:43:34] 21. that is under legal attack right now and i'm working on all of those cases
-[0:43:37] and i'm working on all of those cases and you can see california has other
-[0:43:39] and you can see california has other restrictions it limits purchases of
-[0:43:41] restrictions it limits purchases of handguns to one per person per month
-[0:43:45] handguns to one per person per month and has various safety standards
-[0:43:48] and has various safety standards now you might say well have these
-[0:43:50] now you might say well have these california restrictions had any impact
-[0:43:53] california restrictions had any impact again just to give you some context
-[0:43:56] again just to give you some context it's sort of worth knowing that
-[0:44:01] it's sort of worth knowing that california traditionally had much higher
-[0:44:03] california traditionally had much higher firearm homicides than the rest of the
-[0:44:05] firearm homicides than the rest of the country
+[0:43:29] sales to those who are
+[0:43:31] 21. that is under legal attack right now
+[0:43:34] and i'm working on all of those cases
+[0:43:37] and you can see california has other
+[0:43:39] restrictions it limits purchases of
+[0:43:41] handguns to one per person per month
+[0:43:45] and has various safety standards
+[0:43:48] now you might say well have these
+[0:43:50] california restrictions had any impact
+[0:43:53] again just to give you some context
+[0:43:56] it's sort of worth knowing that
+[0:44:01] california traditionally had much higher
+[0:44:03] firearm homicides than the rest of the
 [0:44:06] country and you can see over time with the
-[0:44:08] and you can see over time with the adoption of these
-[0:44:09] adoption of these laws contemporaneously we do see a
-[0:44:12] laws contemporaneously we do see a downward trend in firearm debts in
-[0:44:14] downward trend in firearm debts in california
-[0:44:15] california and no comparable effect in the rest of
-[0:44:19] and no comparable effect in the rest of the nation so at least some
-[0:44:20] the nation so at least some uh you know interesting potential
-[0:44:23] uh you know interesting potential evidence and the same pattern for
-[0:44:24] evidence and the same pattern for homicides
+[0:44:08] adoption of these
+[0:44:09] laws contemporaneously we do see a
+[0:44:12] downward trend in firearm debts in
+[0:44:14] california
+[0:44:15] and no comparable effect in the rest of
+[0:44:19] the nation so at least some
+[0:44:20] uh you know interesting potential
+[0:44:23] evidence and the same pattern for
 [0:44:26] homicides california used to be well above the
-[0:44:28] california used to be well above the homicide rate of the rest of the country
-[0:44:30] homicide rate of the rest of the country now is uh pretty much well below
-[0:44:31] now is uh pretty much well below and none of the typical explanatory
-[0:44:34] and none of the typical explanatory variables that you think
-[0:44:35] variables that you think might be confounding that would would
-[0:44:38] might be confounding that would would explain that
-[0:44:39] explain that now to get back to richard's task
-[0:44:43] now to get back to richard's task the data that he first showed you was
-[0:44:46] the data that he first showed you was national
+[0:44:28] homicide rate of the rest of the country
+[0:44:30] now is uh pretty much well below
+[0:44:31] and none of the typical explanatory
+[0:44:34] variables that you think
+[0:44:35] might be confounding that would would
+[0:44:38] explain that
+[0:44:39] now to get back to richard's task
+[0:44:43] the data that he first showed you was
 [0:44:46] national background check data and there are
-[0:44:49] background check data and there are there's there are some interesting
-[0:44:52] there's there are some interesting problems with the the national
-[0:44:54] problems with the the national background check data that aren't
-[0:44:55] background check data that aren't available
+[0:44:49] there's there are some interesting
+[0:44:52] problems with the the national
+[0:44:54] background check data that aren't
 [0:44:56] available that aren't uh infecting the california
-[0:45:00] that aren't uh infecting the california data
 [0:45:01] data that richard had and this is what he
-[0:45:02] that richard had and this is what he showed you but
-[0:45:04] showed you but as i look at this i have a
-[0:45:07] as i look at this i have a sort of different sense about some of
-[0:45:10] sort of different sense about some of the things that are
-[0:45:11] the things that are are happening here you notice that this
-[0:45:14] are happening here you notice that this early period
-[0:45:15] early period is a fairly significant downward trend
-[0:45:20] is a fairly significant downward trend in gun sales and then it starts going up
-[0:45:23] in gun sales and then it starts going up now could that be the federal assault
-[0:45:26] now could that be the federal assault weapon
+[0:45:02] showed you but
+[0:45:04] as i look at this i have a
+[0:45:07] sort of different sense about some of
+[0:45:10] the things that are
+[0:45:11] are happening here you notice that this
+[0:45:14] early period
+[0:45:15] is a fairly significant downward trend
+[0:45:20] in gun sales and then it starts going up
+[0:45:23] now could that be the federal assault
 [0:45:27] weapon or the the assault weapon ban of
-[0:45:29] or the the assault weapon ban of california remember
-[0:45:31] california remember from 1994 to 2004 there was a federal
-[0:45:34] from 1994 to 2004 there was a federal assault weapon ban
-[0:45:35] assault weapon ban in place so over this downward trend
-[0:45:38] in place so over this downward trend there already was a federal assault
-[0:45:40] there already was a federal assault weapon ban
-[0:45:41] weapon ban and we're overlaying on top of that a
-[0:45:44] and we're overlaying on top of that a california federal state assault weapon
-[0:45:48] california federal state assault weapon ban
+[0:45:29] california remember
+[0:45:31] from 1994 to 2004 there was a federal
+[0:45:34] assault weapon ban
+[0:45:35] in place so over this downward trend
+[0:45:38] there already was a federal assault
+[0:45:40] weapon ban
+[0:45:41] and we're overlaying on top of that a
+[0:45:44] california federal state assault weapon
 [0:45:48] ban so would we expect there to be an
-[0:45:51] so would we expect there to be an additional
-[0:45:52] additional impact over this period when there
-[0:45:54] impact over this period when there already was a federal assault weapon ban
-[0:45:56] already was a federal assault weapon ban in place
+[0:45:51] additional
+[0:45:52] impact over this period when there
+[0:45:54] already was a federal assault weapon ban
 [0:45:57] in place obviously in 2004 when the federal ban
-[0:46:01] obviously in 2004 when the federal ban went away you still had the state ban
-[0:46:03] went away you still had the state ban but you can see sort of gun sales
-[0:46:06] but you can see sort of gun sales trended up
-[0:46:06] trended up after that point so so just some
-[0:46:09] after that point so so just some complexities in the modeling
-[0:46:11] complexities in the modeling here's one thing that i think is is very
-[0:46:14] here's one thing that i think is is very very
+[0:46:01] went away you still had the state ban
+[0:46:03] but you can see sort of gun sales
+[0:46:06] trended up
+[0:46:06] after that point so so just some
+[0:46:09] complexities in the modeling
+[0:46:11] here's one thing that i think is is very
 [0:46:14] very relevant to gun sales now notice uh
-[0:46:17] relevant to gun sales now notice uh you see the light green line shows you
-[0:46:21] you see the light green line shows you this
+[0:46:17] you see the light green line shows you
 [0:46:22] this really extraordinary socioeconomic
-[0:46:25] really extraordinary socioeconomic effect
 [0:46:26] effect which was the drop in violent crime very
-[0:46:28] which was the drop in violent crime very strongly
 [0:46:29] strongly during the you know eight years of the
-[0:46:31] during the you know eight years of the clinton administration
-[0:46:32] clinton administration i'm not assessing cause there just the
-[0:46:36] i'm not assessing cause there just the contemporaneous drop from 1993
-[0:46:39] contemporaneous drop from 1993 to about 2000 was really one of the most
-[0:46:42] to about 2000 was really one of the most extraordinary
-[0:46:43] extraordinary socioeconomic events in american history
-[0:46:45] socioeconomic events in american history that enormous drop in violent crime
-[0:46:48] that enormous drop in violent crime and you you see that
-[0:46:52] and you you see that most americans were quite uh
-[0:46:56] most americans were quite uh inaccurate in their sense about what was
-[0:46:58] inaccurate in their sense about what was happening in crime so five years into
-[0:47:00] happening in crime so five years into the greatest drop
-[0:47:01] the greatest drop in crime in american history and almost
-[0:47:03] in crime in american history and almost world history
-[0:47:04] world history uh 71 of americans were
-[0:47:08] uh 71 of americans were saying that crime had risen in the last
-[0:47:10] saying that crime had risen in the last year
+[0:46:31] clinton administration
+[0:46:32] i'm not assessing cause there just the
+[0:46:36] contemporaneous drop from 1993
+[0:46:39] to about 2000 was really one of the most
+[0:46:42] extraordinary
+[0:46:43] socioeconomic events in american history
+[0:46:45] that enormous drop in violent crime
+[0:46:48] and you you see that
+[0:46:52] most americans were quite uh
+[0:46:56] inaccurate in their sense about what was
+[0:46:58] happening in crime so five years into
+[0:47:00] the greatest drop
+[0:47:01] in crime in american history and almost
+[0:47:03] world history
+[0:47:04] uh 71 of americans were
+[0:47:08] saying that crime had risen in the last
 [0:47:11] year and so what drives gun sales is both
-[0:47:14] and so what drives gun sales is both crime and also perceptions
-[0:47:16] crime and also perceptions about crime and you can see that
-[0:47:20] about crime and you can see that for most of this early period
-[0:47:24] for most of this early period people had strong misperceptions but at
-[0:47:26] people had strong misperceptions but at least they were getting better
-[0:47:28] least they were getting better and then around 2001 suddenly things
-[0:47:31] and then around 2001 suddenly things shift and now you start seeing people
-[0:47:36] shift and now you start seeing people increasing their sense that crime is
-[0:47:38] increasing their sense that crime is going up even though
-[0:47:39] going up even though crime continues to fall so
-[0:47:43] crime continues to fall so it shows that the difficulty of the
-[0:47:46] it shows that the difficulty of the modeling process because you
-[0:47:48] modeling process because you you do have these sort of underlying
-[0:47:50] you do have these sort of underlying factors that are driving
-[0:47:51] factors that are driving gun sales one of them being crime itself
-[0:47:55] gun sales one of them being crime itself but then also expectations and fear of
-[0:47:57] but then also expectations and fear of crime
+[0:47:14] crime and also perceptions
+[0:47:16] about crime and you can see that
+[0:47:20] for most of this early period
+[0:47:24] people had strong misperceptions but at
+[0:47:26] least they were getting better
+[0:47:28] and then around 2001 suddenly things
+[0:47:31] shift and now you start seeing people
+[0:47:36] increasing their sense that crime is
+[0:47:38] going up even though
+[0:47:39] crime continues to fall so
+[0:47:43] it shows that the difficulty of the
+[0:47:46] modeling process because you
+[0:47:48] you do have these sort of underlying
+[0:47:50] factors that are driving
+[0:47:51] gun sales one of them being crime itself
+[0:47:55] but then also expectations and fear of
 [0:47:58] crime are independently uh influencing gun
-[0:48:01] are independently uh influencing gun sales and it's hard to know how to
-[0:48:03] sales and it's hard to know how to how to measure those uh accurately
-[0:48:06] how to measure those uh accurately in any given situation let me just say
-[0:48:10] in any given situation let me just say um politicians know you can you can get
-[0:48:13] um politicians know you can you can get a lot of benefit by scaring people about
-[0:48:15] a lot of benefit by scaring people about crime and the gun lobby has certainly
-[0:48:17] crime and the gun lobby has certainly learned this as well
-[0:48:18] learned this as well just a couple of quotes from uh trump
-[0:48:21] just a couple of quotes from uh trump before and after he was elected
-[0:48:22] before and after he was elected president he
-[0:48:23] president he he started to say we have the highest
-[0:48:25] he started to say we have the highest murder rate in this country in 45 years
-[0:48:27] murder rate in this country in 45 years you don't hear that from these people
-[0:48:28] you don't hear that from these people they don't want to talk about it
-[0:48:30] they don't want to talk about it of course you don't hear that because it
-[0:48:32] of course you don't hear that because it was completely wrong this was after this
-[0:48:35] was completely wrong this was after this enormous drop in crime and it was
-[0:48:37] enormous drop in crime and it was nowhere near
-[0:48:38] nowhere near the highest murder rate it was much
-[0:48:40] the highest murder rate it was much closer to the lowest murder rate in 45
-[0:48:42] closer to the lowest murder rate in 45 years
+[0:48:01] sales and it's hard to know how to
+[0:48:03] how to measure those uh accurately
+[0:48:06] in any given situation let me just say
+[0:48:10] um politicians know you can you can get
+[0:48:13] a lot of benefit by scaring people about
+[0:48:15] crime and the gun lobby has certainly
+[0:48:17] learned this as well
+[0:48:18] just a couple of quotes from uh trump
+[0:48:21] before and after he was elected
+[0:48:22] president he
+[0:48:23] he started to say we have the highest
+[0:48:25] murder rate in this country in 45 years
+[0:48:27] you don't hear that from these people
+[0:48:28] they don't want to talk about it
+[0:48:30] of course you don't hear that because it
+[0:48:32] was completely wrong this was after this
+[0:48:35] enormous drop in crime and it was
+[0:48:37] nowhere near
+[0:48:38] the highest murder rate it was much
+[0:48:40] closer to the lowest murder rate in 45
 [0:48:43] years after he was elected president he
-[0:48:45] after he was elected president he invited sheriffs to the white house
-[0:48:48] invited sheriffs to the white house repeated the same claim that it was the
-[0:48:50] repeated the same claim that it was the highest murder rate in 47 years the
-[0:48:52] highest murder rate in 47 years the sheriff's gushed all over trump so you
-[0:48:54] sheriff's gushed all over trump so you know thank god we have a
-[0:48:56] know thank god we have a president who cares about these issues
-[0:48:58] president who cares about these issues but not one sheriff
-[0:48:59] but not one sheriff corrected him i don't know if they had
-[0:49:01] corrected him i don't know if they had any idea that crime had dropped
-[0:49:04] any idea that crime had dropped enormously precipitously over this
-[0:49:05] enormously precipitously over this period but these are the things that
-[0:49:08] period but these are the things that can influence gun sales another thing
-[0:49:10] can influence gun sales another thing that was very important over this period
-[0:49:12] that was very important over this period especially if you're talking about
-[0:49:14] especially if you're talking about sales of handguns is
-[0:49:18] sales of handguns is that because gun sales fell so sharply
-[0:49:22] that because gun sales fell so sharply during the clinton years the
-[0:49:25] during the clinton years the gun lobby decided how can we get more
-[0:49:28] gun lobby decided how can we get more gun sales
+[0:48:45] invited sheriffs to the white house
+[0:48:48] repeated the same claim that it was the
+[0:48:50] highest murder rate in 47 years the
+[0:48:52] sheriff's gushed all over trump so you
+[0:48:54] know thank god we have a
+[0:48:56] president who cares about these issues
+[0:48:58] but not one sheriff
+[0:48:59] corrected him i don't know if they had
+[0:49:01] any idea that crime had dropped
+[0:49:04] enormously precipitously over this
+[0:49:05] period but these are the things that
+[0:49:08] can influence gun sales another thing
+[0:49:10] that was very important over this period
+[0:49:12] especially if you're talking about
+[0:49:14] sales of handguns is
+[0:49:18] that because gun sales fell so sharply
+[0:49:22] during the clinton years the
+[0:49:25] gun lobby decided how can we get more
 [0:49:29] gun sales to offset the enormous the
-[0:49:33] to offset the enormous the you know depressing effect on gun sales
-[0:49:35] you know depressing effect on gun sales of that enormous drop in crime in the
-[0:49:38] of that enormous drop in crime in the clinton years
-[0:49:39] clinton years and one of the goals was to allow
-[0:49:42] and one of the goals was to allow citizens to
-[0:49:43] citizens to carry concealed handguns so you can see
-[0:49:45] carry concealed handguns so you can see in 1986
+[0:49:33] you know depressing effect on gun sales
+[0:49:35] of that enormous drop in crime in the
+[0:49:38] clinton years
+[0:49:39] and one of the goals was to allow
+[0:49:42] citizens to
+[0:49:43] carry concealed handguns so you can see
 [0:49:46] in 1986 in much of the country you were not
-[0:49:48] in much of the country you were not allowed to carry concealed handguns
-[0:49:51] allowed to carry concealed handguns that's the red line and the yellow lines
-[0:49:53] that's the red line and the yellow lines were saying
-[0:49:54] were saying you may be able to but you got to prove
-[0:49:56] you may be able to but you got to prove to some
+[0:49:48] allowed to carry concealed handguns
+[0:49:51] that's the red line and the yellow lines
+[0:49:53] were saying
+[0:49:54] you may be able to but you got to prove
 [0:49:57] to some government authority that you're a
-[0:49:59] government authority that you're a responsible person so it was a little
-[0:50:01] responsible person so it was a little bit hard to get a gun
-[0:50:02] bit hard to get a gun in much of the country to carry
-[0:50:06] in much of the country to carry uh so if you could turn that around
-[0:50:09] uh so if you could turn that around you could uh you know sell a lot more
-[0:50:12] you could uh you know sell a lot more guns because you need a small gun that's
-[0:50:14] guns because you need a small gun that's concealable
-[0:50:15] concealable and you can see an enormous legislative
-[0:50:18] and you can see an enormous legislative effort was made all around the country
-[0:50:21] effort was made all around the country to change
+[0:49:59] responsible person so it was a little
+[0:50:01] bit hard to get a gun
+[0:50:02] in much of the country to carry
+[0:50:06] uh so if you could turn that around
+[0:50:09] you could uh you know sell a lot more
+[0:50:12] guns because you need a small gun that's
+[0:50:14] concealable
+[0:50:15] and you can see an enormous legislative
+[0:50:18] effort was made all around the country
 [0:50:22] to change the right to carry guns that had a very
-[0:50:26] the right to carry guns that had a very big
 [0:50:26] big stimulating effect because now people
-[0:50:28] stimulating effect because now people have to run out and buy new guns that
-[0:50:30] have to run out and buy new guns that they could carry
+[0:50:28] have to run out and buy new guns that
+[0:50:30] they could carry
 [0:50:37] indeed the the light green lines are places where the state has gone even
-[0:50:39] places where the state has gone even further and they say you have a
-[0:50:40] further and they say you have a constitutional right that no government
-[0:50:42] constitutional right that no government can impede to carry a gun you don't even
-[0:50:44] can impede to carry a gun you don't even need a permit
-[0:50:45] need a permit and right now in federal court
-[0:50:49] and right now in federal court marching its way to the supreme court is
-[0:50:51] marching its way to the supreme court is the issue of whether indeed
-[0:50:53] the issue of whether indeed you don't need a permit to carry because
-[0:50:55] you don't need a permit to carry because it's a constitutional right under the
-[0:50:57] it's a constitutional right under the second amendment
-[0:50:58] second amendment to carry so that's the goal of the
-[0:51:00] to carry so that's the goal of the second of the
-[0:51:01] second of the of the gun lobby to be able to strike
-[0:51:04] of the gun lobby to be able to strike these down that will obviously
-[0:51:05] these down that will obviously uh generate many more gun sales if it's
-[0:51:08] uh generate many more gun sales if it's successful
-[0:51:10] successful so getting back to that point about the
-[0:51:13] so getting back to that point about the the national background check data
-[0:51:15] the national background check data versus the data that richard has
-[0:51:18] versus the data that richard has for california the next state is in
-[0:51:21] for california the next state is in imper
+[0:50:39] further and they say you have a
+[0:50:40] constitutional right that no government
+[0:50:42] can impede to carry a gun you don't even
+[0:50:44] need a permit
+[0:50:45] and right now in federal court
+[0:50:49] marching its way to the supreme court is
+[0:50:51] the issue of whether indeed
+[0:50:53] you don't need a permit to carry because
+[0:50:55] it's a constitutional right under the
+[0:50:57] second amendment
+[0:50:58] to carry so that's the goal of the
+[0:51:00] second of the
+[0:51:01] of the gun lobby to be able to strike
+[0:51:04] these down that will obviously
+[0:51:05] uh generate many more gun sales if it's
+[0:51:08] successful
+[0:51:10] so getting back to that point about the
+[0:51:13] the national background check data
+[0:51:15] versus the data that richard has
+[0:51:18] for california the next state is in
 [0:51:22] imper imperfect because that data doesn't
-[0:51:25] imperfect because that data doesn't require uh information
-[0:51:29] require uh information that doesn't go through a background
-[0:51:30] that doesn't go through a background check so in other words the federal
-[0:51:33] check so in other words the federal system
+[0:51:25] require uh information
+[0:51:29] that doesn't go through a background
+[0:51:30] check so in other words the federal
 [0:51:34] system does not impose any requirement for
-[0:51:37] does not impose any requirement for private transactions
-[0:51:39] private transactions to be conducted with a background check
-[0:51:42] to be conducted with a background check also a single background check could
-[0:51:46] also a single background check could be part of a multiple firearm
-[0:51:49] be part of a multiple firearm transaction at the national level so
-[0:51:51] transaction at the national level so again there's some mismatch between
-[0:51:54] again there's some mismatch between the background check and the number of
-[0:51:55] the background check and the number of gun sales
+[0:51:37] private transactions
+[0:51:39] to be conducted with a background check
+[0:51:42] also a single background check could
+[0:51:46] be part of a multiple firearm
+[0:51:49] transaction at the national level so
+[0:51:51] again there's some mismatch between
+[0:51:54] the background check and the number of
 [0:51:57] gun sales also some states uh
-[0:52:00] also some states uh try to routinely determine whether
-[0:52:02] try to routinely determine whether somebody that they've given
-[0:52:03] somebody that they've given a permit to a gun to has
-[0:52:07] a permit to a gun to has maintained their eligibility so they
-[0:52:09] maintained their eligibility so they will constantly
-[0:52:11] will constantly rerun background checks on those
-[0:52:12] rerun background checks on those individuals to see if their
-[0:52:14] individuals to see if their gun permits should be maintained
-[0:52:17] gun permits should be maintained so you are getting these background
-[0:52:19] so you are getting these background checks that are going through
-[0:52:21] checks that are going through without an accompanying sale uh
-[0:52:24] without an accompanying sale uh and of course the knicks data is uh
-[0:52:27] and of course the knicks data is uh doesn't come in the
-[0:52:28] doesn't come in the daily format that uh richards california
-[0:52:32] daily format that uh richards california data hat so
-[0:52:33] data hat so so one question is um you know can you
-[0:52:36] so one question is um you know can you use that
+[0:52:00] try to routinely determine whether
+[0:52:02] somebody that they've given
+[0:52:03] a permit to a gun to has
+[0:52:07] maintained their eligibility so they
+[0:52:09] will constantly
+[0:52:11] rerun background checks on those
+[0:52:12] individuals to see if their
+[0:52:14] gun permits should be maintained
+[0:52:17] so you are getting these background
+[0:52:19] checks that are going through
+[0:52:21] without an accompanying sale uh
+[0:52:24] and of course the knicks data is uh
+[0:52:27] doesn't come in the
+[0:52:28] daily format that uh richards california
+[0:52:32] data hat so
+[0:52:33] so one question is um you know can you
 [0:52:37] use that uh effectively stuttered uh
-[0:52:40] uh effectively stuttered uh i think used richard's data to at least
-[0:52:44] i think used richard's data to at least tell us what was the impact of the new
-[0:52:46] tell us what was the impact of the new town shooting in 2012 so an event
-[0:52:49] town shooting in 2012 so an event outside california on california gun
-[0:52:52] outside california on california gun sales
+[0:52:40] i think used richard's data to at least
+[0:52:44] tell us what was the impact of the new
+[0:52:46] town shooting in 2012 so an event
+[0:52:49] outside california on california gun
 [0:52:52] sales and they found a big impact and also for
-[0:52:55] and they found a big impact and also for the san bernardino
-[0:52:56] the san bernardino killing now what was different about
-[0:52:59] killing now what was different about what they did was
-[0:53:00] what they did was they were looking at very discreet
-[0:53:04] they were looking at very discreet uh you know mass shooting events not
-[0:53:06] uh you know mass shooting events not trying to do something that richard was
-[0:53:08] trying to do something that richard was doing which is looking at something like
-[0:53:09] doing which is looking at something like the assault weapon ban
-[0:53:11] the assault weapon ban in california where as he pointed out
-[0:53:14] in california where as he pointed out it's it's
+[0:52:55] the san bernardino
+[0:52:56] killing now what was different about
+[0:52:59] what they did was
+[0:53:00] they were looking at very discreet
+[0:53:04] uh you know mass shooting events not
+[0:53:06] trying to do something that richard was
+[0:53:08] doing which is looking at something like
+[0:53:09] the assault weapon ban
+[0:53:11] in california where as he pointed out
 [0:53:14] it's it's unclear uh you know the temporal
-[0:53:18] unclear uh you know the temporal uh method of of evaluation of that
-[0:53:21] uh method of of evaluation of that impact also you you do have the
-[0:53:23] impact also you you do have the confounder of the federal assault weapon
-[0:53:25] confounder of the federal assault weapon ban in place
-[0:53:26] ban in place and then being eliminated so it's a it's
-[0:53:28] and then being eliminated so it's a it's a tougher nut
-[0:53:29] a tougher nut to crack um
-[0:53:33] to crack um but one thing that i thought was
-[0:53:34] but one thing that i thought was interesting from the stuttered paper is
-[0:53:37] interesting from the stuttered paper is uh you can see that um
-[0:53:41] uh you can see that um and and this part is that is the the
-[0:53:44] and and this part is that is the the data that
+[0:53:18] uh method of of evaluation of that
+[0:53:21] impact also you you do have the
+[0:53:23] confounder of the federal assault weapon
+[0:53:25] ban in place
+[0:53:26] and then being eliminated so it's a it's
+[0:53:28] a tougher nut
+[0:53:29] to crack um
+[0:53:33] but one thing that i thought was
+[0:53:34] interesting from the stuttered paper is
+[0:53:37] uh you can see that um
+[0:53:41] and and this part is that is the the
 [0:53:45] data that is similar to the data that richard is
-[0:53:47] is similar to the data that richard is using it's california
-[0:53:49] using it's california handgun sales but if you line it up
-[0:53:52] handgun sales but if you line it up with california handgun sales at a rate
-[0:53:55] with california handgun sales at a rate per
+[0:53:47] using it's california
+[0:53:49] handgun sales but if you line it up
+[0:53:52] with california handgun sales at a rate
 [0:53:55] per 10 000 persons and show the knicks
-[0:53:59] 10 000 persons and show the knicks background check
-[0:54:00] background check system for the nation uh with
-[0:54:03] system for the nation uh with the um as a rate as well
-[0:54:06] the um as a rate as well you can see that the patterns do look
-[0:54:09] you can see that the patterns do look very similar except the national data is
-[0:54:12] very similar except the national data is at a much higher level
-[0:54:14] at a much higher level so it either means that what's driving
-[0:54:17] so it either means that what's driving sales is sort of similar in the two
-[0:54:20] sales is sort of similar in the two settings california versus the nation as
-[0:54:22] settings california versus the nation as a whole
+[0:53:59] background check
+[0:54:00] system for the nation uh with
+[0:54:03] the um as a rate as well
+[0:54:06] you can see that the patterns do look
+[0:54:09] very similar except the national data is
+[0:54:12] at a much higher level
+[0:54:14] so it either means that what's driving
+[0:54:17] sales is sort of similar in the two
+[0:54:20] settings california versus the nation as
 [0:54:23] a whole but it's either that there's a lot more
-[0:54:26] but it's either that there's a lot more gun sales
 [0:54:27] gun sales outside california or those other
-[0:54:30] outside california or those other factors that i told you that
-[0:54:32] factors that i told you that uh differentiate sales versus background
-[0:54:34] uh differentiate sales versus background checks may be explaining
-[0:54:36] checks may be explaining some of that difference as well so
-[0:54:39] some of that difference as well so uh one just
-[0:54:42] uh one just small thing that i'll i'll end with is
-[0:54:46] small thing that i'll i'll end with is that there is an important difference
-[0:54:48] that there is an important difference between dealer sales
-[0:54:50] between dealer sales and private party transfers so let's say
-[0:54:53] and private party transfers so let's say that
+[0:54:30] factors that i told you that
+[0:54:32] uh differentiate sales versus background
+[0:54:34] checks may be explaining
+[0:54:36] some of that difference as well so
+[0:54:39] uh one just
+[0:54:42] small thing that i'll i'll end with is
+[0:54:46] that there is an important difference
+[0:54:48] between dealer sales
+[0:54:50] and private party transfers so let's say
 [0:54:55] that some some guy decides i want to buy
-[0:54:59] some some guy decides i want to buy a gun for the first time if they buy
-[0:55:02] a gun for the first time if they buy that
+[0:54:59] a gun for the first time if they buy
 [0:55:02] that through a private party transfer we do
-[0:55:04] through a private party transfer we do see that in the california data
-[0:55:06] see that in the california data and you can see it's a fairly large
-[0:55:09] and you can see it's a fairly large number
+[0:55:04] see that in the california data
+[0:55:06] and you can see it's a fairly large
 [0:55:10] number of private party transfers that would
-[0:55:12] of private party transfers that would not be seen
-[0:55:13] not be seen in the national mix data because you
-[0:55:15] in the national mix data because you wouldn't be going through a background
-[0:55:17] wouldn't be going through a background check
+[0:55:12] not be seen
+[0:55:13] in the national mix data because you
+[0:55:15] wouldn't be going through a background
 [0:55:17] check but does show up in california and
-[0:55:21] but does show up in california and and that is differentiated from these
-[0:55:23] and that is differentiated from these dealer sales where you're going to
-[0:55:24] dealer sales where you're going to walmart or something and buying
-[0:55:26] walmart or something and buying a gun and uh
-[0:55:29] a gun and uh it but it does raise a question so so
-[0:55:31] it but it does raise a question so so let's say that
-[0:55:33] let's say that some guy decides i want a fancier gun so
-[0:55:36] some guy decides i want a fancier gun so he goes to buy a gun and then he sells
-[0:55:38] he goes to buy a gun and then he sells his existing gun in a private transfer
-[0:55:41] his existing gun in a private transfer there's only been one actual increase
-[0:55:44] there's only been one actual increase in the number of people with guns but
-[0:55:47] in the number of people with guns but under richards california data you would
-[0:55:49] under richards california data you would have
+[0:55:21] and that is differentiated from these
+[0:55:23] dealer sales where you're going to
+[0:55:24] walmart or something and buying
+[0:55:26] a gun and uh
+[0:55:29] it but it does raise a question so so
+[0:55:31] let's say that
+[0:55:33] some guy decides i want a fancier gun so
+[0:55:36] he goes to buy a gun and then he sells
+[0:55:38] his existing gun in a private transfer
+[0:55:41] there's only been one actual increase
+[0:55:44] in the number of people with guns but
+[0:55:47] under richards california data you would
 [0:55:50] have observed two transactions there
-[0:55:53] observed two transactions there because you had the private sale getting
-[0:55:55] because you had the private sale getting rid of the old gun
-[0:55:56] rid of the old gun and the new dealer sale so again there's
-[0:55:59] and the new dealer sale so again there's a mismatch between
-[0:56:00] a mismatch between the actual augmentation of the gun stock
-[0:56:04] the actual augmentation of the gun stock and and the counts in these data so just
-[0:56:07] and and the counts in these data so just a couple of uh
-[0:56:08] a couple of uh small points to throw into the analysis
-[0:56:10] small points to throw into the analysis and let me stop there because i want to
-[0:56:12] and let me stop there because i want to hear the
+[0:55:53] because you had the private sale getting
+[0:55:55] rid of the old gun
+[0:55:56] and the new dealer sale so again there's
+[0:55:59] a mismatch between
+[0:56:00] the actual augmentation of the gun stock
+[0:56:04] and and the counts in these data so just
+[0:56:07] a couple of uh
+[0:56:08] small points to throw into the analysis
+[0:56:10] and let me stop there because i want to
 [0:56:12] hear the discussion thanks john yeah richard if
-[0:56:17] discussion thanks john yeah richard if you want to quickly respond
+[0:56:17] you want to quickly respond
 [0:56:21] we can't hear you currently
 [0:56:25] can you mute yourself
 [0:56:37] can you hear me now yeah now we can hear you oh good okay
-[0:56:38] you oh good okay just literally two three sentences um i
-[0:56:41] just literally two three sentences um i agree wholeheartedly with the points
-[0:56:43] agree wholeheartedly with the points that john made
-[0:56:45] that john made and it serves to emphasize i guess it
-[0:56:47] and it serves to emphasize i guess it was my third slide
-[0:56:48] was my third slide of sisyphus pushing the rock up the hill
-[0:56:52] of sisyphus pushing the rock up the hill it further illustrates how difficult it
-[0:56:54] it further illustrates how difficult it is
+[0:56:38] just literally two three sentences um i
+[0:56:41] agree wholeheartedly with the points
+[0:56:43] that john made
+[0:56:45] and it serves to emphasize i guess it
+[0:56:47] was my third slide
+[0:56:48] of sisyphus pushing the rock up the hill
+[0:56:52] it further illustrates how difficult it
 [0:56:55] is to do compelling work on gun policy if
-[0:56:58] to do compelling work on gun policy if you're trying to pull out causal effects
+[0:56:58] you're trying to pull out causal effects
 [0:57:11] thanks maybe we can ask a few of the questions that were
-[0:57:12] questions that were um that were raised in the in the q a um
-[0:57:15] um that were raised in the in the q a um so uh i'm i'm just gonna select
-[0:57:18] so uh i'm i'm just gonna select two that i thought might be relevant um
-[0:57:21] two that i thought might be relevant um so uh one person asked about like from a
-[0:57:24] so uh one person asked about like from a causal perspective the
-[0:57:26] causal perspective the of the variables that you included in
-[0:57:28] of the variables that you included in your model some of them
-[0:57:29] your model some of them kind of have an effect on each other as
-[0:57:31] kind of have an effect on each other as well so you know you may imagine for
-[0:57:33] well so you know you may imagine for instance that
-[0:57:34] instance that the um a gun shooting may have an effect
-[0:57:37] the um a gun shooting may have an effect on whether a certain
-[0:57:38] on whether a certain um a certain gun restriction law will be
-[0:57:41] um a certain gun restriction law will be enacted
+[0:57:12] um that were raised in the in the q a um
+[0:57:15] so uh i'm i'm just gonna select
+[0:57:18] two that i thought might be relevant um
+[0:57:21] so uh one person asked about like from a
+[0:57:24] causal perspective the
+[0:57:26] of the variables that you included in
+[0:57:28] your model some of them
+[0:57:29] kind of have an effect on each other as
+[0:57:31] well so you know you may imagine for
+[0:57:33] instance that
+[0:57:34] the um a gun shooting may have an effect
+[0:57:37] on whether a certain
+[0:57:38] um a certain gun restriction law will be
 [0:57:42] enacted uh and that from a from a causal
-[0:57:44] uh and that from a from a causal perspective this kind of complicates the
-[0:57:46] perspective this kind of complicates the um the the analysis including uh post
-[0:57:49] um the the analysis including uh post treatment coverage in your model
-[0:57:50] treatment coverage in your model um may lead to uh to funky business
-[0:57:54] um may lead to uh to funky business um is that something that you've that
-[0:57:55] um is that something that you've that you've thought about sure um
-[0:57:57] you've thought about sure um there are two major advantages however
-[0:57:59] there are two major advantages however to this approach
-[0:58:00] to this approach one is time is on your side
-[0:58:03] one is time is on your side that how you can causally order uh
-[0:58:06] that how you can causally order uh various effects
-[0:58:07] various effects and the second is this is essentially a
-[0:58:09] and the second is this is essentially a reduced form explanation
-[0:58:11] reduced form explanation this is not a full structural model so
-[0:58:14] this is not a full structural model so in the reduced form context
-[0:58:16] in the reduced form context you're usually in pretty good shape i
-[0:58:18] you're usually in pretty good shape i guess i can mention a third point which
-[0:58:20] guess i can mention a third point which is
+[0:57:44] perspective this kind of complicates the
+[0:57:46] um the the analysis including uh post
+[0:57:49] treatment coverage in your model
+[0:57:50] um may lead to uh to funky business
+[0:57:54] um is that something that you've that
+[0:57:55] you've thought about sure um
+[0:57:57] there are two major advantages however
+[0:57:59] to this approach
+[0:58:00] one is time is on your side
+[0:58:03] that how you can causally order uh
+[0:58:06] various effects
+[0:58:07] and the second is this is essentially a
+[0:58:09] reduced form explanation
+[0:58:11] this is not a full structural model so
+[0:58:14] in the reduced form context
+[0:58:16] you're usually in pretty good shape i
+[0:58:18] guess i can mention a third point which
 [0:58:21] is the only confounders that i'm really
-[0:58:22] the only confounders that i'm really worried about are those that are abrupt
-[0:58:25] worried about are those that are abrupt around the same time as an intervention
-[0:58:27] around the same time as an intervention slowly changing causal variables are
-[0:58:30] slowly changing causal variables are picked up in the differencing
-[0:58:32] picked up in the differencing and in the noise and you notice that
-[0:58:34] and in the noise and you notice that there's no structure in the residuals
-[0:58:36] there's no structure in the residuals here
+[0:58:22] worried about are those that are abrupt
+[0:58:25] around the same time as an intervention
+[0:58:27] slowly changing causal variables are
+[0:58:30] picked up in the differencing
+[0:58:32] and in the noise and you notice that
+[0:58:34] there's no structure in the residuals
 [0:58:36] here left so you have to explain why you have
-[0:58:38] left so you have to explain why you have residuals with no structure
-[0:58:40] residuals with no structure if you've got bad confounding yeah that
-[0:58:43] if you've got bad confounding yeah that makes sense thanks
-[0:58:45] makes sense thanks um another question um
-[0:58:48] um another question um asked about the uh kind of like more
-[0:58:51] asked about the uh kind of like more localized geography
-[0:58:53] localized geography of of what is happening and whether um
-[0:58:55] of of what is happening and whether um uh
+[0:58:38] residuals with no structure
+[0:58:40] if you've got bad confounding yeah that
+[0:58:43] makes sense thanks
+[0:58:45] um another question um
+[0:58:48] asked about the uh kind of like more
+[0:58:51] localized geography
+[0:58:53] of of what is happening and whether um
 [0:58:56] uh for instance the the effect of certain
-[0:58:59] for instance the the effect of certain um
 [0:58:59] um uh variables might be larger
-[0:59:02] uh variables might be larger say in uh like may affect say the sales
-[0:59:06] say in uh like may affect say the sales in urban areas
-[0:59:07] in urban areas uh versus sale sales in non-urban areas
-[0:59:10] uh versus sale sales in non-urban areas differently
-[0:59:10] differently uh and of course all of the problems
-[0:59:12] uh and of course all of the problems that you presented are
-[0:59:14] that you presented are are likely to remain the same but maybe
-[0:59:16] are likely to remain the same but maybe things would be starker
-[0:59:18] things would be starker when looking at kind of like more
-[0:59:21] when looking at kind of like more heterogeneous effects i guess
-[0:59:23] heterogeneous effects i guess that's a really good point and i agree
-[0:59:25] that's a really good point and i agree with it it's not clear to me that i
-[0:59:26] with it it's not clear to me that i would have data to do that in a credible
-[0:59:28] would have data to do that in a credible way
+[0:59:02] say in uh like may affect say the sales
+[0:59:06] in urban areas
+[0:59:07] uh versus sale sales in non-urban areas
+[0:59:10] differently
+[0:59:10] uh and of course all of the problems
+[0:59:12] that you presented are
+[0:59:14] are likely to remain the same but maybe
+[0:59:16] things would be starker
+[0:59:18] when looking at kind of like more
+[0:59:21] heterogeneous effects i guess
+[0:59:23] that's a really good point and i agree
+[0:59:25] with it it's not clear to me that i
+[0:59:26] would have data to do that in a credible
 [0:59:29] way because i'm really cutting down you know
-[0:59:31] because i'm really cutting down you know the number of gun sales that i have to
-[0:59:33] the number of gun sales that i have to work with
+[0:59:31] the number of gun sales that i have to
 [0:59:34] work with um there are probably are people who are
-[0:59:36] um there are probably are people who are doing that but also keep in mind that
-[0:59:38] doing that but also keep in mind that the policies we're talking about are
-[0:59:40] the policies we're talking about are either statewide
-[0:59:41] either statewide or national and so you have to have a
-[0:59:44] or national and so you have to have a pretty complicated theory to explain
-[0:59:46] pretty complicated theory to explain why it would be let's say in in one
-[0:59:48] why it would be let's say in in one county versus another
-[0:59:50] county versus another that the effects would differ but it's
-[0:59:51] that the effects would differ but it's certainly worth exploring
-[0:59:54] certainly worth exploring now let me just jump in and say stutters
-[0:59:56] now let me just jump in and say stutters paper
+[0:59:36] doing that but also keep in mind that
+[0:59:38] the policies we're talking about are
+[0:59:40] either statewide
+[0:59:41] or national and so you have to have a
+[0:59:44] pretty complicated theory to explain
+[0:59:46] why it would be let's say in in one
+[0:59:48] county versus another
+[0:59:50] that the effects would differ but it's
+[0:59:51] certainly worth exploring
+[0:59:54] now let me just jump in and say stutters
 [0:59:57] paper did try to see whether the san
-[1:00:00] did try to see whether the san bernardino effect
-[1:00:01] bernardino effect uh was more profound in san bernardino
-[1:00:05] uh was more profound in san bernardino county
+[1:00:00] bernardino effect
+[1:00:01] uh was more profound in san bernardino
 [1:00:06] county and while it did have a statewide effect
-[1:00:08] and while it did have a statewide effect in increasing gun sales
-[1:00:09] in increasing gun sales he he did conclude it was a bigger
-[1:00:12] he he did conclude it was a bigger effect within that
-[1:00:13] effect within that local geographic area
+[1:00:08] in increasing gun sales
+[1:00:09] he he did conclude it was a bigger
+[1:00:12] effect within that
+[1:00:13] local geographic area
 [1:00:30] there's a question from uh uh from ed george
 [1:00:31] george asking um so um hi ed
-[1:00:35] asking um so um hi ed um so he says um interesting of course
-[1:00:37] um so he says um interesting of course to look at the effect of crime on gun
-[1:00:39] to look at the effect of crime on gun sales but what about the reverse what is
-[1:00:41] sales but what about the reverse what is the effect of sales on crime
-[1:00:43] the effect of sales on crime shouldn't there be a feedback component
-[1:00:44] shouldn't there be a feedback component in these models
-[1:00:46] in these models well remember time is my ally in this
-[1:00:49] well remember time is my ally in this and so i'm looking at effects
-[1:00:51] and so i'm looking at effects subsequent to the intervention if you
-[1:00:54] subsequent to the intervention if you want a structural model which looks at
-[1:00:55] want a structural model which looks at the interplay
-[1:00:56] the interplay between let's say crime violent crime
-[1:00:59] between let's say crime violent crime and gun sales
-[1:01:00] and gun sales yeah you've got two-way causation to
-[1:01:02] yeah you've got two-way causation to worry about and you're fundamentally
-[1:01:03] worry about and you're fundamentally screwed unless you have
-[1:01:05] screwed unless you have time as an ally
+[1:00:35] um so he says um interesting of course
+[1:00:37] to look at the effect of crime on gun
+[1:00:39] sales but what about the reverse what is
+[1:00:41] the effect of sales on crime
+[1:00:43] shouldn't there be a feedback component
+[1:00:44] in these models
+[1:00:46] well remember time is my ally in this
+[1:00:49] and so i'm looking at effects
+[1:00:51] subsequent to the intervention if you
+[1:00:54] want a structural model which looks at
+[1:00:55] the interplay
+[1:00:56] between let's say crime violent crime
+[1:00:59] and gun sales
+[1:01:00] yeah you've got two-way causation to
+[1:01:02] worry about and you're fundamentally
+[1:01:03] screwed unless you have
+[1:01:05] time as an ally
 [1:01:12] thanks um i think that's that's pretty much it and we're kind of running out of
-[1:01:13] much it and we're kind of running out of time
 [1:01:14] time um so um i think
-[1:01:17] um so um i think we can stop the questions here um
-[1:01:18] we can stop the questions here um dominique you wanna yeah i'll wrap up
-[1:01:21] dominique you wanna yeah i'll wrap up yeah first thank you so much richard for
-[1:01:22] yeah first thank you so much richard for a fantastic talk and john for a very
-[1:01:24] a fantastic talk and john for a very nice
+[1:01:17] we can stop the questions here um
+[1:01:18] dominique you wanna yeah i'll wrap up
+[1:01:21] yeah first thank you so much richard for
+[1:01:22] a fantastic talk and john for a very
 [1:01:25] nice discussion also thank you arun
-[1:01:28] discussion also thank you arun and susan for for helping out in q a
-[1:01:31] and susan for for helping out in q a today
+[1:01:28] and susan for for helping out in q a
 [1:01:32] today and next time we'll have andrea rodnicki
-[1:01:34] and next time we'll have andrea rodnicki from titella university in buenos aires
-[1:01:36] from titella university in buenos aires and harvard to talk about optimal
-[1:01:38] and harvard to talk about optimal adjustments that's in non-parametric
-[1:01:40] adjustments that's in non-parametric graphical models yeah thank you all for
-[1:01:42] graphical models yeah thank you all for coming and
-[1:01:43] coming and hope you have a great week and see you
-[1:01:44] hope you have a great week and see you next time
+[1:01:34] from titella university in buenos aires
+[1:01:36] and harvard to talk about optimal
+[1:01:38] adjustments that's in non-parametric
+[1:01:40] graphical models yeah thank you all for
+[1:01:42] coming and
+[1:01:43] hope you have a great week and see you
 [1:01:46] next time thank you nice job richard thanks for

@@ -1,1416 +1,1403 @@
 [0:00:06] okay great hi everyone uh welcome to another online caal inference seminar uh
-[0:00:08] another online caal inference seminar uh so today we have a special guest so
-[0:00:11] so today we have a special guest so Sarah Magan one of our uh hosts and
-[0:00:15] Sarah Magan one of our uh hosts and Philip Lipa from University of Amsterdam
-[0:00:17] Philip Lipa from University of Amsterdam will be presenting together on their
-[0:00:18] will be presenting together on their project called biscuit caal
-[0:00:21] project called biscuit caal representation learning from binary
-[0:00:22] representation learning from binary interaction so we look forward to BR
-[0:00:25] interaction so we look forward to BR this St and afterwards we'll have a
-[0:00:28] this St and afterwards we'll have a discussion from Sebastian La Chappelle
-[0:00:29] discussion from Sebastian La Chappelle from s sale and so we look forward to
-[0:00:32] from s sale and so we look forward to that as well uh today the questions will
-[0:00:35] that as well uh today the questions will be handled by y so I'll just quickly let
-[0:00:38] be handled by y so I'll just quickly let her explain how that is done thank you
-[0:00:41] her explain how that is done thank you Emma so as usual please submit your
-[0:00:43] Emma so as usual please submit your questions through the Q&amp;A section uh you
-[0:00:45] questions through the Q&amp;A section uh you can click the btom at the bottom of the
-[0:00:47] can click the btom at the bottom of the zoom window and type in your questions
-[0:00:50] zoom window and type in your questions um I'll probably bring uh some
-[0:00:52] um I'll probably bring uh some clarification questions during the talk
-[0:00:55] clarification questions during the talk and leave bigger ones as Sarah and
-[0:00:57] and leave bigger ones as Sarah and Philip pause probably um and pleas
-[0:01:00] Philip pause probably um and pleas please do submit questions as soon as
-[0:01:02] please do submit questions as soon as you have them don't wait for us to ask
-[0:01:04] you have them don't wait for us to ask you to submit questions and basically
-[0:01:07] you to submit questions and basically that's it that's sorry for to take
-[0:01:10] that's it that's sorry for to take over okay thank you very much let me try
-[0:01:13] over okay thank you very much let me try to share the
+[0:00:08] so today we have a special guest so
+[0:00:11] Sarah Magan one of our uh hosts and
+[0:00:15] Philip Lipa from University of Amsterdam
+[0:00:17] will be presenting together on their
+[0:00:18] project called biscuit caal
+[0:00:21] representation learning from binary
+[0:00:22] interaction so we look forward to BR
+[0:00:25] this St and afterwards we'll have a
+[0:00:28] discussion from Sebastian La Chappelle
+[0:00:29] from s sale and so we look forward to
+[0:00:32] that as well uh today the questions will
+[0:00:35] be handled by y so I'll just quickly let
+[0:00:38] her explain how that is done thank you
+[0:00:41] Emma so as usual please submit your
+[0:00:43] questions through the Q&A section uh you
+[0:00:45] can click the btom at the bottom of the
+[0:00:47] zoom window and type in your questions
+[0:00:50] um I'll probably bring uh some
+[0:00:52] clarification questions during the talk
+[0:00:55] and leave bigger ones as Sarah and
+[0:00:57] Philip pause probably um and pleas
+[0:01:00] please do submit questions as soon as
+[0:01:02] you have them don't wait for us to ask
+[0:01:04] you to submit questions and basically
+[0:01:07] that's it that's sorry for to take
+[0:01:10] over okay thank you very much let me try
+[0:01:13] to share the
 [0:01:21] screen okay yeah so we're
 [0:01:30] here okay so first uh I guess I should thank the organizers for inviting us can
-[0:01:31] thank the organizers for inviting us can you hear us everything's good yes yes
-[0:01:35] you hear us everything's good yes yes okay great um so we decided to split our
-[0:01:40] okay great um so we decided to split our um talk in two parts so I'll do the
-[0:01:42] um talk in two parts so I'll do the first part so I'll shortly introduce a
-[0:01:45] first part so I'll shortly introduce a bit of the context of biscuits so I talk
-[0:01:47] bit of the context of biscuits so I talk about C representation learning in
-[0:01:48] about C representation learning in temporal settings and then later Philip
-[0:01:51] temporal settings and then later Philip will do the second part and he will be
-[0:01:53] will do the second part and he will be talking about biscuit so I'll start a
-[0:01:56] talking about biscuit so I'll start a bit with the motivation on C
-[0:01:58] bit with the motivation on C representation learning in temporal
-[0:01:59] representation learning in temporal settings so the temporal settings we're
-[0:02:02] settings so the temporal settings we're considering are like settings in which
-[0:02:04] considering are like settings in which we have an environment and we do actions
-[0:02:07] we have an environment and we do actions in this environment and we have a
-[0:02:09] in this environment and we have a sequence of observations in time and we
-[0:02:11] sequence of observations in time and we also have some actions and so you can
-[0:02:13] also have some actions and so you can imagine that this is a natural setting
-[0:02:15] imagine that this is a natural setting for learning from interventions because
-[0:02:17] for learning from interventions because we often observe the before State and
-[0:02:19] we often observe the before State and action and the after state so this uh
-[0:02:23] action and the after state so this uh leans very well to learning from
-[0:02:25] leans very well to learning from interventions so some example of these
-[0:02:27] interventions so some example of these settings are uh settings with sequ
-[0:02:30] settings are uh settings with sequ decision making for example
-[0:02:31] decision making for example reinforcement learning planning a lot of
-[0:02:34] reinforcement learning planning a lot of different tasks in robotics and you can
-[0:02:36] different tasks in robotics and you can imagine that in all of these settings it
-[0:02:38] imagine that in all of these settings it would be beneficial to have a cal model
-[0:02:41] would be beneficial to have a cal model uh that we want to use to choose the
-[0:02:42] uh that we want to use to choose the best actions and so sometimes in these
-[0:02:45] best actions and so sometimes in these settings we have as input so the
-[0:02:48] settings we have as input so the observations we have of the environment
-[0:02:50] observations we have of the environment images or sequences of images and so our
-[0:02:53] images or sequences of images and so our first task will be to actually extract
-[0:02:56] first task will be to actually extract Cal variables or caal features from
-[0:02:59] Cal variables or caal features from images in an supervised way so for
-[0:03:02] images in an supervised way so for example we want to learn the position of
-[0:03:03] example we want to learn the position of an object the state of an object from an
-[0:03:05] an object the state of an object from an image directly and so this is something
-[0:03:09] image directly and so this is something that c representation learning or crl uh
-[0:03:13] that c representation learning or crl uh does so first I'll take a bit of a step
-[0:03:16] does so first I'll take a bit of a step back just to introduce some of the
-[0:03:18] back just to introduce some of the terminology and notation so I'll talk
-[0:03:21] terminology and notation so I'll talk about the more classic way to represent
-[0:03:23] about the more classic way to represent causality in temporal settings so these
-[0:03:25] causality in temporal settings so these are Dynamic based networks or dbms so
-[0:03:29] are Dynamic based networks or dbms so this is an extension basian networks to
-[0:03:31] this is an extension basian networks to temporal settings and you can also see
-[0:03:33] temporal settings and you can also see them as a type of template graphs so
-[0:03:36] them as a type of template graphs so template is a template of a graph that
-[0:03:38] template is a template of a graph that repeats across instances so in this case
-[0:03:40] repeats across instances so in this case it repeats across pairs of time
-[0:03:44] it repeats across pairs of time steps so some of the common assumptions
-[0:03:46] steps so some of the common assumptions for dynamic based networks are the one
-[0:03:49] for dynamic based networks are the one mark of assumption which says that the
-[0:03:51] mark of assumption which says that the variables at times dep T so let's say
-[0:03:53] variables at times dep T so let's say the present can only be cost at most by
-[0:03:56] the present can only be cost at most by variables at time step T minus one so
-[0:03:59] variables at time step T minus one so just one time step back
-[0:04:00] just one time step back so this is the one mark of assumption
-[0:04:02] so this is the one mark of assumption another typical assumption in Dynamic
-[0:04:04] another typical assumption in Dynamic based networks is stational which means
-[0:04:07] based networks is stational which means that the transition model or in other
-[0:04:09] that the transition model or in other words the edges between the variables
-[0:04:12] words the edges between the variables from time step T minus one to time step
-[0:04:15] from time step T minus one to time step T so these edges repeat across every
-[0:04:18] T so these edges repeat across every possible pair of adjacent time steps and
-[0:04:21] possible pair of adjacent time steps and then we have another assumption that I
-[0:04:23] then we have another assumption that I will use for most of the talk except for
-[0:04:25] will use for most of the talk except for a few slides which is that there is no
-[0:04:28] a few slides which is that there is no instantaneous effects so there are no
-[0:04:30] instantaneous effects so there are no edges between the variables at the same
-[0:04:32] edges between the variables at the same time step so this is an example of a
-[0:04:35] time step so this is an example of a dynamic Bas Network so we have three
-[0:04:37] dynamic Bas Network so we have three variables S1 S2 S3 this is time step T
-[0:04:42] variables S1 S2 S3 this is time step T minus one and here we have the same
-[0:04:44] minus one and here we have the same variables at time step T and so these
-[0:04:46] variables at time step T and so these are these edges here represent the cause
-[0:04:49] are these edges here represent the cause relations so the variable is One ATM tus
-[0:04:52] relations so the variable is One ATM tus one causes the variable S1 at M S2 at Mt
-[0:04:57] one causes the variable S1 at M S2 at Mt and S3 at Mt Etc
-[0:05:00] and S3 at Mt Etc so I throw this with this box here so
-[0:05:03] so I throw this with this box here so this is also called the template
-[0:05:05] this is also called the template notation because this box means that
-[0:05:08] notation because this box means that this graph here repeats for every T and
-[0:05:12] this graph here repeats for every T and T goes from one to let's say the last
-[0:05:16] T goes from one to let's say the last time step Big T So to give an idea I'm
-[0:05:19] time step Big T So to give an idea I'm going to take this Dynamic basic Network
-[0:05:21] going to take this Dynamic basic Network and unroll it in time so let's say we
-[0:05:23] and unroll it in time so let's say we have just three time steps one two three
-[0:05:26] have just three time steps one two three and so this Dynamic basing Network for
-[0:05:28] and so this Dynamic basing Network for these three time steps will look like
-[0:05:30] these three time steps will look like this and as you can see this part here
-[0:05:33] this and as you can see this part here and this part here repeat so Dynamic
-[0:05:36] and this part here repeat so Dynamic based network is just a concise way to
-[0:05:38] based network is just a concise way to represent Bas in Network in Time and
-[0:05:42] represent Bas in Network in Time and this is what we'll be
-[0:05:43] this is what we'll be learning so this is a teaser for the
-[0:05:46] learning so this is a teaser for the second part of the top but just to give
-[0:05:47] second part of the top but just to give you an idea of the setting we consider
-[0:05:49] you an idea of the setting we consider so we have an environment in this
-[0:05:52] so we have an environment in this example we have a kitchen environment
-[0:05:54] example we have a kitchen environment and we are an agent and we're doing
-[0:05:56] and we are an agent and we're doing actions we're just kind of uh pressing
-[0:05:59] actions we're just kind of uh pressing things
+[0:01:31] you hear us everything's good yes yes
+[0:01:35] okay great um so we decided to split our
+[0:01:40] um talk in two parts so I'll do the
+[0:01:42] first part so I'll shortly introduce a
+[0:01:45] bit of the context of biscuits so I talk
+[0:01:47] about C representation learning in
+[0:01:48] temporal settings and then later Philip
+[0:01:51] will do the second part and he will be
+[0:01:53] talking about biscuit so I'll start a
+[0:01:56] bit with the motivation on C
+[0:01:58] representation learning in temporal
+[0:01:59] settings so the temporal settings we're
+[0:02:02] considering are like settings in which
+[0:02:04] we have an environment and we do actions
+[0:02:07] in this environment and we have a
+[0:02:09] sequence of observations in time and we
+[0:02:11] also have some actions and so you can
+[0:02:13] imagine that this is a natural setting
+[0:02:15] for learning from interventions because
+[0:02:17] we often observe the before State and
+[0:02:19] action and the after state so this uh
+[0:02:23] leans very well to learning from
+[0:02:25] interventions so some example of these
+[0:02:27] settings are uh settings with sequ
+[0:02:30] decision making for example
+[0:02:31] reinforcement learning planning a lot of
+[0:02:34] different tasks in robotics and you can
+[0:02:36] imagine that in all of these settings it
+[0:02:38] would be beneficial to have a cal model
+[0:02:41] uh that we want to use to choose the
+[0:02:42] best actions and so sometimes in these
+[0:02:45] settings we have as input so the
+[0:02:48] observations we have of the environment
+[0:02:50] images or sequences of images and so our
+[0:02:53] first task will be to actually extract
+[0:02:56] Cal variables or caal features from
+[0:02:59] images in an supervised way so for
+[0:03:02] example we want to learn the position of
+[0:03:03] an object the state of an object from an
+[0:03:05] image directly and so this is something
+[0:03:09] that c representation learning or crl uh
+[0:03:13] does so first I'll take a bit of a step
+[0:03:16] back just to introduce some of the
+[0:03:18] terminology and notation so I'll talk
+[0:03:21] about the more classic way to represent
+[0:03:23] causality in temporal settings so these
+[0:03:25] are Dynamic based networks or dbms so
+[0:03:29] this is an extension basian networks to
+[0:03:31] temporal settings and you can also see
+[0:03:33] them as a type of template graphs so
+[0:03:36] template is a template of a graph that
+[0:03:38] repeats across instances so in this case
+[0:03:40] it repeats across pairs of time
+[0:03:44] steps so some of the common assumptions
+[0:03:46] for dynamic based networks are the one
+[0:03:49] mark of assumption which says that the
+[0:03:51] variables at times dep T so let's say
+[0:03:53] the present can only be cost at most by
+[0:03:56] variables at time step T minus one so
+[0:03:59] just one time step back
+[0:04:00] so this is the one mark of assumption
+[0:04:02] another typical assumption in Dynamic
+[0:04:04] based networks is stational which means
+[0:04:07] that the transition model or in other
+[0:04:09] words the edges between the variables
+[0:04:12] from time step T minus one to time step
+[0:04:15] T so these edges repeat across every
+[0:04:18] possible pair of adjacent time steps and
+[0:04:21] then we have another assumption that I
+[0:04:23] will use for most of the talk except for
+[0:04:25] a few slides which is that there is no
+[0:04:28] instantaneous effects so there are no
+[0:04:30] edges between the variables at the same
+[0:04:32] time step so this is an example of a
+[0:04:35] dynamic Bas Network so we have three
+[0:04:37] variables S1 S2 S3 this is time step T
+[0:04:42] minus one and here we have the same
+[0:04:44] variables at time step T and so these
+[0:04:46] are these edges here represent the cause
+[0:04:49] relations so the variable is One ATM tus
+[0:04:52] one causes the variable S1 at M S2 at Mt
+[0:04:57] and S3 at Mt Etc
+[0:05:00] so I throw this with this box here so
+[0:05:03] this is also called the template
+[0:05:05] notation because this box means that
+[0:05:08] this graph here repeats for every T and
+[0:05:12] T goes from one to let's say the last
+[0:05:16] time step Big T So to give an idea I'm
+[0:05:19] going to take this Dynamic basic Network
+[0:05:21] and unroll it in time so let's say we
+[0:05:23] have just three time steps one two three
+[0:05:26] and so this Dynamic basing Network for
+[0:05:28] these three time steps will look like
+[0:05:30] this and as you can see this part here
+[0:05:33] and this part here repeat so Dynamic
+[0:05:36] based network is just a concise way to
+[0:05:38] represent Bas in Network in Time and
+[0:05:42] this is what we'll be
+[0:05:43] learning so this is a teaser for the
+[0:05:46] second part of the top but just to give
+[0:05:47] you an idea of the setting we consider
+[0:05:49] so we have an environment in this
+[0:05:52] example we have a kitchen environment
+[0:05:54] and we are an agent and we're doing
+[0:05:56] actions we're just kind of uh pressing
 [0:06:00] things switching on things Etc we don't know
-[0:06:02] switching on things Etc we don't know exactly what we're doing but what we
-[0:06:04] exactly what we're doing but what we want is we want to learn from these
-[0:06:06] want is we want to learn from these images and the actions that we do we
-[0:06:08] images and the actions that we do we want to learn a dynamic Bas Network that
-[0:06:11] want to learn a dynamic Bas Network that represents the Cal model of the
-[0:06:12] represents the Cal model of the environment for example from the image
-[0:06:15] environment for example from the image we first want to be able to identify in
-[0:06:18] we first want to be able to identify in which state is the microwave is it
-[0:06:20] which state is the microwave is it switched on is it switched off is the
-[0:06:23] switched on is it switched off is the door open is door not open so here we
-[0:06:25] door open is door not open so here we have example an egg so we want to know
-[0:06:27] have example an egg so we want to know if the egg is cooked it's uncooked we
-[0:06:30] if the egg is cooked it's uncooked we have a potato we have some stoves which
-[0:06:32] have a potato we have some stoves which are switched on or off Etc so from each
-[0:06:35] are switched on or off Etc so from each image in a sequence of image we want to
-[0:06:37] image in a sequence of image we want to extract this kind of semantic or coal
-[0:06:41] extract this kind of semantic or coal variables the second part we want to do
-[0:06:43] variables the second part we want to do is from these variables we want to learn
-[0:06:46] is from these variables we want to learn their Cal relations for example a
-[0:06:49] their Cal relations for example a microwave can cook a potato if we put
-[0:06:52] microwave can cook a potato if we put the potato in the microwave Etc so we
-[0:06:54] the potato in the microwave Etc so we have these edges that represent Cal
-[0:06:56] have these edges that represent Cal relations that we would like to learn
-[0:06:58] relations that we would like to learn and another thing we want to learn
-[0:07:00] and another thing we want to learn is we have an agent doing actions and we
-[0:07:02] is we have an agent doing actions and we want to be able uh to kind of translate
-[0:07:05] want to be able uh to kind of translate these actions to um effects on the Cal
-[0:07:09] these actions to um effects on the Cal variables so these are the things we
-[0:07:11] variables so these are the things we want to learn just from images and
-[0:07:15] want to learn just from images and actions so just to give you a bit of an
-[0:07:17] actions so just to give you a bit of an overview there are many works that do
-[0:07:20] overview there are many works that do temporal C representation learning so I
-[0:07:22] temporal C representation learning so I just selected a few of those so U the
-[0:07:26] just selected a few of those so U the first one I selected is IV by K Metal
-[0:07:29] first one I selected is IV by K Metal 2020 so this is it can be used in
-[0:07:32] 2020 so this is it can be used in temporal C representation learning and
-[0:07:34] temporal C representation learning and Philip will show you how it also
-[0:07:36] Philip will show you how it also performs compared to the other
-[0:07:38] performs compared to the other methods um but it's a more general
-[0:07:40] methods um but it's a more general setting because it's able to um assume
-[0:07:44] setting because it's able to um assume so it's based on the assumption that
-[0:07:46] so it's based on the assumption that there exists an aity variable
-[0:07:48] there exists an aity variable U such that the latent variables which
-[0:07:52] U such that the latent variables which are the causal variables we're trying to
-[0:07:54] are the causal variables we're trying to learn are conditionally independent
-[0:07:56] learn are conditionally independent given this variable U so this could be
-[0:07:58] given this variable U so this could be for example the previous state
-[0:08:00] for example the previous state a Time index a state and an action so
-[0:08:03] a Time index a state and an action so this LS to many interpretations
-[0:08:05] this LS to many interpretations including in temporary C representation
-[0:08:07] including in temporary C representation learning uh so IV is more General but it
-[0:08:10] learning uh so IV is more General but it has some more strict parametric
-[0:08:12] has some more strict parametric assumptions for example the conditional
-[0:08:15] assumptions for example the conditional exponential family prior and also a few
-[0:08:17] exponential family prior and also a few other assumptions that are a bit more
-[0:08:19] other assumptions that are a bit more Technical and it assumes a sufficient
-[0:08:22] Technical and it assumes a sufficient variability of the data so uh DMS VI by
-[0:08:26] variability of the data so uh DMS VI by Chapel atal 2022 so our discussant
-[0:08:30] Chapel atal 2022 so our discussant uh relaxes some of the assumptions from
-[0:08:33] uh relaxes some of the assumptions from Iva uh but it still has an exponential
-[0:08:35] Iva uh but it still has an exponential family assumption it has a similar
-[0:08:38] family assumption it has a similar sufficient
-[0:08:39] sufficient variability um sufficient variability
-[0:08:43] variability um sufficient variability condition so there are some requirements
-[0:08:45] condition so there are some requirements and the fact that variables should
-[0:08:47] and the fact that variables should change both in time and based on action
-[0:08:50] change both in time and based on action in a sense sufficiently and there are
-[0:08:53] in a sense sufficiently and there are some assumption on the types of graphs
-[0:08:56] some assumption on the types of graphs that you can you are able to identify
-[0:08:58] that you can you are able to identify fully so you're able to to completely
-[0:09:00] fully so you're able to to completely disentangle the Cal variables from the
-[0:09:02] disentangle the Cal variables from the images just very recently lell
-[0:09:06] images just very recently lell 2024 yes uh extended this work to the
-[0:09:09] 2024 yes uh extended this work to the nonparametric case and also showed that
-[0:09:12] nonparametric case and also showed that if some of these graphical assumptions
-[0:09:14] if some of these graphical assumptions do not hold we're still able to get a
-[0:09:17] do not hold we're still able to get a certain identifiability but we're not
-[0:09:19] certain identifiability but we're not able to possibly potentially identify
-[0:09:22] able to possibly potentially identify each of the individual Cal variables and
-[0:09:24] each of the individual Cal variables and then I wanted to also mention this other
-[0:09:26] then I wanted to also mention this other work leap byal 20 22 uh which leverages
-[0:09:32] work leap byal 20 22 uh which leverages nonstationarity uh it's nonparametric so
-[0:09:35] nonstationarity uh it's nonparametric so this is a nice property uh but it also
-[0:09:38] this is a nice property uh but it also has a sufficient variability assumption
-[0:09:40] has a sufficient variability assumption across regimes or environments and so if
-[0:09:42] across regimes or environments and so if there is no stationarity if we have a
-[0:09:43] there is no stationarity if we have a stationary system it's not able to work
-[0:09:47] stationary system it's not able to work and so all of these methods are able to
-[0:09:50] and so all of these methods are able to work on both um settings in which we
-[0:09:53] work on both um settings in which we have interventions in time and settings
-[0:09:55] have interventions in time and settings which also have only observations so now
-[0:09:58] which also have only observations so now I'm going to focus on a set Works which
-[0:10:00] I'm going to focus on a set Works which only focus when we which only works when
-[0:10:03] only focus when we which only works when we have interventions so I'm going to
-[0:10:05] we have interventions so I'm going to talk about some of our previous work and
-[0:10:08] talk about some of our previous work and then uh this works form a bit the basis
-[0:10:11] then uh this works form a bit the basis on how we extended them to develop
-[0:10:13] on how we extended them to develop biscuit so I'm going to talk about this
-[0:10:16] biscuit so I'm going to talk about this setting threes so temporal intervene
-[0:10:18] setting threes so temporal intervene sequences so this is a setting of our
-[0:10:21] sequences so this is a setting of our earlier work in this setting uh we had
-[0:10:24] earlier work in this setting uh we had similarly to before we had a set of a
-[0:10:27] similarly to before we had a set of a sequence of images XT xt+ one Etc so
-[0:10:32] sequence of images XT xt+ one Etc so these were some kind of high dimensional
-[0:10:34] these were some kind of high dimensional data that represented some kind of
-[0:10:36] data that represented some kind of entangle measurements of the Cal
-[0:10:38] entangle measurements of the Cal variables C1 C2 Etc to
-[0:10:42] variables C1 C2 Etc to CK so then we assumed there was a damic
-[0:10:46] CK so then we assumed there was a damic ban Network on these variables C1 to CK
-[0:10:50] ban Network on these variables C1 to CK which were unobserved that we wanted to
-[0:10:53] which were unobserved that we wanted to reconstruct and then uh the idea here
-[0:10:56] reconstruct and then uh the idea here was that we had the AIS would be
-[0:10:59] was that we had the AIS would be potentially noisy measurements of the C
-[0:11:02] potentially noisy measurements of the C the C
+[0:06:02] exactly what we're doing but what we
+[0:06:04] want is we want to learn from these
+[0:06:06] images and the actions that we do we
+[0:06:08] want to learn a dynamic Bas Network that
+[0:06:11] represents the Cal model of the
+[0:06:12] environment for example from the image
+[0:06:15] we first want to be able to identify in
+[0:06:18] which state is the microwave is it
+[0:06:20] switched on is it switched off is the
+[0:06:23] door open is door not open so here we
+[0:06:25] have example an egg so we want to know
+[0:06:27] if the egg is cooked it's uncooked we
+[0:06:30] have a potato we have some stoves which
+[0:06:32] are switched on or off Etc so from each
+[0:06:35] image in a sequence of image we want to
+[0:06:37] extract this kind of semantic or coal
+[0:06:41] variables the second part we want to do
+[0:06:43] is from these variables we want to learn
+[0:06:46] their Cal relations for example a
+[0:06:49] microwave can cook a potato if we put
+[0:06:52] the potato in the microwave Etc so we
+[0:06:54] have these edges that represent Cal
+[0:06:56] relations that we would like to learn
+[0:06:58] and another thing we want to learn
+[0:07:00] is we have an agent doing actions and we
+[0:07:02] want to be able uh to kind of translate
+[0:07:05] these actions to um effects on the Cal
+[0:07:09] variables so these are the things we
+[0:07:11] want to learn just from images and
+[0:07:15] actions so just to give you a bit of an
+[0:07:17] overview there are many works that do
+[0:07:20] temporal C representation learning so I
+[0:07:22] just selected a few of those so U the
+[0:07:26] first one I selected is IV by K Metal
+[0:07:29] 2020 so this is it can be used in
+[0:07:32] temporal C representation learning and
+[0:07:34] Philip will show you how it also
+[0:07:36] performs compared to the other
+[0:07:38] methods um but it's a more general
+[0:07:40] setting because it's able to um assume
+[0:07:44] so it's based on the assumption that
+[0:07:46] there exists an aity variable
+[0:07:48] U such that the latent variables which
+[0:07:52] are the causal variables we're trying to
+[0:07:54] learn are conditionally independent
+[0:07:56] given this variable U so this could be
+[0:07:58] for example the previous state
+[0:08:00] a Time index a state and an action so
+[0:08:03] this LS to many interpretations
+[0:08:05] including in temporary C representation
+[0:08:07] learning uh so IV is more General but it
+[0:08:10] has some more strict parametric
+[0:08:12] assumptions for example the conditional
+[0:08:15] exponential family prior and also a few
+[0:08:17] other assumptions that are a bit more
+[0:08:19] Technical and it assumes a sufficient
+[0:08:22] variability of the data so uh DMS VI by
+[0:08:26] Chapel atal 2022 so our discussant
+[0:08:30] uh relaxes some of the assumptions from
+[0:08:33] Iva uh but it still has an exponential
+[0:08:35] family assumption it has a similar
+[0:08:38] sufficient
+[0:08:39] variability um sufficient variability
+[0:08:43] condition so there are some requirements
+[0:08:45] and the fact that variables should
+[0:08:47] change both in time and based on action
+[0:08:50] in a sense sufficiently and there are
+[0:08:53] some assumption on the types of graphs
+[0:08:56] that you can you are able to identify
+[0:08:58] fully so you're able to to completely
+[0:09:00] disentangle the Cal variables from the
+[0:09:02] images just very recently lell
+[0:09:06] 2024 yes uh extended this work to the
+[0:09:09] nonparametric case and also showed that
+[0:09:12] if some of these graphical assumptions
+[0:09:14] do not hold we're still able to get a
+[0:09:17] certain identifiability but we're not
+[0:09:19] able to possibly potentially identify
+[0:09:22] each of the individual Cal variables and
+[0:09:24] then I wanted to also mention this other
+[0:09:26] work leap byal 20 22 uh which leverages
+[0:09:32] nonstationarity uh it's nonparametric so
+[0:09:35] this is a nice property uh but it also
+[0:09:38] has a sufficient variability assumption
+[0:09:40] across regimes or environments and so if
+[0:09:42] there is no stationarity if we have a
+[0:09:43] stationary system it's not able to work
+[0:09:47] and so all of these methods are able to
+[0:09:50] work on both um settings in which we
+[0:09:53] have interventions in time and settings
+[0:09:55] which also have only observations so now
+[0:09:58] I'm going to focus on a set Works which
+[0:10:00] only focus when we which only works when
+[0:10:03] we have interventions so I'm going to
+[0:10:05] talk about some of our previous work and
+[0:10:08] then uh this works form a bit the basis
+[0:10:11] on how we extended them to develop
+[0:10:13] biscuit so I'm going to talk about this
+[0:10:16] setting threes so temporal intervene
+[0:10:18] sequences so this is a setting of our
+[0:10:21] earlier work in this setting uh we had
+[0:10:24] similarly to before we had a set of a
+[0:10:27] sequence of images XT xt+ one Etc so
+[0:10:32] these were some kind of high dimensional
+[0:10:34] data that represented some kind of
+[0:10:36] entangle measurements of the Cal
+[0:10:38] variables C1 C2 Etc to
+[0:10:42] CK so then we assumed there was a damic
+[0:10:46] ban Network on these variables C1 to CK
+[0:10:50] which were unobserved that we wanted to
+[0:10:53] reconstruct and then uh the idea here
+[0:10:56] was that we had the AIS would be
+[0:10:59] potentially noisy measurements of the C
 [0:11:03] the C variables another thing that we assume
-[0:11:05] variables another thing that we assume so this part here is kind of standard is
-[0:11:08] so this part here is kind of standard is the one that most of the methods assume
-[0:11:10] the one that most of the methods assume but we had an extra assumption and the
-[0:11:12] but we had an extra assumption and the extra assumption is that we also
-[0:11:14] extra assumption is that we also observed some intervention variables
-[0:11:17] observed some intervention variables which were a set of binary variables i1
-[0:11:21] which were a set of binary variables i1 I2 Etc to ik each one paired with one
-[0:11:25] I2 Etc to ik each one paired with one causal variable and these variables
-[0:11:27] causal variable and these variables represented if a cal variable was inter
-[0:11:30] represented if a cal variable was inter or not in a specific time step so this
-[0:11:34] or not in a specific time step so this we what we assume we observed and we had
-[0:11:37] we what we assume we observed and we had also some kind of potential uh
-[0:11:39] also some kind of potential uh dependencies between these
-[0:11:40] dependencies between these variables and then uh for this setting
-[0:11:44] variables and then uh for this setting we developed this method we call C3 Cal
-[0:11:47] we developed this method we call C3 Cal identifiability from temporal intervene
-[0:11:50] identifiability from temporal intervene sequences and this method was based on a
-[0:11:53] sequences and this method was based on a variation on out encoder setup in which
-[0:11:56] variation on out encoder setup in which we had as inputs an image at time T an
-[0:11:59] we had as inputs an image at time T an image time t + one and a vector of
-[0:12:03] image time t + one and a vector of intervention targets so intervention
-[0:12:06] intervention targets so intervention variables this was one if the first
-[0:12:09] variables this was one if the first variable was intervened and zero for
-[0:12:11] variable was intervened and zero for example if the second variable was not
-[0:12:13] example if the second variable was not intervened so given these inputs we were
-[0:12:16] intervened so given these inputs we were able to reconstruct in the latent space
-[0:12:19] able to reconstruct in the latent space u Vector Z and then by enforcing a
-[0:12:23] u Vector Z and then by enforcing a transition prior that was factorized
-[0:12:26] transition prior that was factorized based on an assignment that we learnign
-[0:12:30] based on an assignment that we learnign side we're able essentially to assign
-[0:12:31] side we're able essentially to assign these latent variables to different Cal
-[0:12:34] these latent variables to different Cal factors and so this is what we were
-[0:12:36] factors and so this is what we were learning so just to give you an idea
-[0:12:38] learning so just to give you an idea here uh we assumed so Citrus in the
-[0:12:42] here uh we assumed so Citrus in the Citrus work we assumed that we had
-[0:12:44] Citrus work we assumed that we had multi-dimensional C factors so we want
-[0:12:46] multi-dimensional C factors so we want it to be a bit more General than the
-[0:12:47] it to be a bit more General than the standard case in which there was only
-[0:12:49] standard case in which there was only one lat variable per Cal Factor so here
-[0:12:52] one lat variable per Cal Factor so here we have multiple um variables for Cal
-[0:12:55] we have multiple um variables for Cal factor and therefore we have to learn an
-[0:12:57] factor and therefore we have to learn an assignment function s and then we had
-[0:13:00] assignment function s and then we had some identifiability proofs I'm just
-[0:13:02] some identifiability proofs I'm just going to go relatively quickly because
-[0:13:05] going to go relatively quickly because Philip will explain much more in detail
-[0:13:08] Philip will explain much more in detail what happens in biscuit but in Citrus we
-[0:13:10] what happens in biscuit but in Citrus we needed two strong assumptions and one is
-[0:13:13] needed two strong assumptions and one is particularly strong so we needed to
-[0:13:15] particularly strong so we needed to assume that we are observing this
-[0:13:17] assume that we are observing this intervention targets
-[0:13:19] intervention targets it and another assumption that is
-[0:13:21] it and another assumption that is somehow also related to what happens in
-[0:13:24] somehow also related to what happens in biscuit we needed to assume that each
-[0:13:26] biscuit we needed to assume that each intervention variable IIT was not a
-[0:13:30] intervention variable IIT was not a deterministic function of a different
-[0:13:32] deterministic function of a different intervention variable I JT so this is
-[0:13:35] intervention variable I JT so this is for the variable Cal variable CI and
-[0:13:38] for the variable Cal variable CI and this is for the Cal variable CJ and then
-[0:13:41] this is for the Cal variable CJ and then given some other assumptions so these
-[0:13:43] given some other assumptions so these are in a sense assumptions on the fact
-[0:13:46] are in a sense assumptions on the fact that there are enough interventions we
-[0:13:48] that there are enough interventions we were able to show that under some
-[0:13:51] were able to show that under some assumption we're able to identify the
-[0:13:53] assumption we're able to identify the Cal variables up to invertible component
-[0:13:56] Cal variables up to invertible component twise Transformations this were the
-[0:13:58] twise Transformations this were the results from C
-[0:14:00] results from C just to give you an idea we also had an
-[0:14:02] just to give you an idea we also had an extension to instantaneous effects so
-[0:14:05] extension to instantaneous effects so this would be the case I mentioned in
-[0:14:08] this would be the case I mentioned in which we can now just for this example
-[0:14:10] which we can now just for this example have causal effects from one variable to
-[0:14:12] have causal effects from one variable to another variable in the same time steps
-[0:14:15] another variable in the same time steps so here this became a bit more
-[0:14:17] so here this became a bit more complicated so we needed some partially
-[0:14:19] complicated so we needed some partially perfect interventions while before we
-[0:14:21] perfect interventions while before we allowed uh for soft interventions as
-[0:14:24] allowed uh for soft interventions as well now we had a bit more specific
-[0:14:26] well now we had a bit more specific interventions and we call this
-[0:14:28] interventions and we call this methodis
+[0:11:05] so this part here is kind of standard is
+[0:11:08] the one that most of the methods assume
+[0:11:10] but we had an extra assumption and the
+[0:11:12] extra assumption is that we also
+[0:11:14] observed some intervention variables
+[0:11:17] which were a set of binary variables i1
+[0:11:21] I2 Etc to ik each one paired with one
+[0:11:25] causal variable and these variables
+[0:11:27] represented if a cal variable was inter
+[0:11:30] or not in a specific time step so this
+[0:11:34] we what we assume we observed and we had
+[0:11:37] also some kind of potential uh
+[0:11:39] dependencies between these
+[0:11:40] variables and then uh for this setting
+[0:11:44] we developed this method we call C3 Cal
+[0:11:47] identifiability from temporal intervene
+[0:11:50] sequences and this method was based on a
+[0:11:53] variation on out encoder setup in which
+[0:11:56] we had as inputs an image at time T an
+[0:11:59] image time t + one and a vector of
+[0:12:03] intervention targets so intervention
+[0:12:06] variables this was one if the first
+[0:12:09] variable was intervened and zero for
+[0:12:11] example if the second variable was not
+[0:12:13] intervened so given these inputs we were
+[0:12:16] able to reconstruct in the latent space
+[0:12:19] u Vector Z and then by enforcing a
+[0:12:23] transition prior that was factorized
+[0:12:26] based on an assignment that we learnign
+[0:12:30] side we're able essentially to assign
+[0:12:31] these latent variables to different Cal
+[0:12:34] factors and so this is what we were
+[0:12:36] learning so just to give you an idea
+[0:12:38] here uh we assumed so Citrus in the
+[0:12:42] Citrus work we assumed that we had
+[0:12:44] multi-dimensional C factors so we want
+[0:12:46] it to be a bit more General than the
+[0:12:47] standard case in which there was only
+[0:12:49] one lat variable per Cal Factor so here
+[0:12:52] we have multiple um variables for Cal
+[0:12:55] factor and therefore we have to learn an
+[0:12:57] assignment function s and then we had
+[0:13:00] some identifiability proofs I'm just
+[0:13:02] going to go relatively quickly because
+[0:13:05] Philip will explain much more in detail
+[0:13:08] what happens in biscuit but in Citrus we
+[0:13:10] needed two strong assumptions and one is
+[0:13:13] particularly strong so we needed to
+[0:13:15] assume that we are observing this
+[0:13:17] intervention targets
+[0:13:19] it and another assumption that is
+[0:13:21] somehow also related to what happens in
+[0:13:24] biscuit we needed to assume that each
+[0:13:26] intervention variable IIT was not a
+[0:13:30] deterministic function of a different
+[0:13:32] intervention variable I JT so this is
+[0:13:35] for the variable Cal variable CI and
+[0:13:38] this is for the Cal variable CJ and then
+[0:13:41] given some other assumptions so these
+[0:13:43] are in a sense assumptions on the fact
+[0:13:46] that there are enough interventions we
+[0:13:48] were able to show that under some
+[0:13:51] assumption we're able to identify the
+[0:13:53] Cal variables up to invertible component
+[0:13:56] twise Transformations this were the
+[0:13:58] results from C
+[0:14:00] just to give you an idea we also had an
+[0:14:02] extension to instantaneous effects so
+[0:14:05] this would be the case I mentioned in
+[0:14:08] which we can now just for this example
+[0:14:10] have causal effects from one variable to
+[0:14:12] another variable in the same time steps
+[0:14:15] so here this became a bit more
+[0:14:17] complicated so we needed some partially
+[0:14:19] perfect interventions while before we
+[0:14:21] allowed uh for soft interventions as
+[0:14:24] well now we had a bit more specific
+[0:14:26] interventions and we call this
 [0:14:30] methodis and one of the points of Isis was that
-[0:14:32] and one of the points of Isis was that now we needed to estimate both the graph
-[0:14:35] now we needed to estimate both the graph and the C of variables jointly why in
-[0:14:38] and the C of variables jointly why in CIS a lot of the work that we did was to
-[0:14:41] CIS a lot of the work that we did was to estimate the Cal variables and then the
-[0:14:43] estimate the Cal variables and then the graph was relatively easy because we
-[0:14:46] graph was relatively easy because we could do it a
-[0:14:47] could do it a posterior so these were the two methods
-[0:14:50] posterior so these were the two methods we have developed for
-[0:14:52] we have developed for interventions and here is just kind of a
-[0:14:54] interventions and here is just kind of a summary also to maybe lead to the
-[0:14:57] summary also to maybe lead to the discussion and the slides from Philip
-[0:15:00] discussion and the slides from Philip so the pr of these methods were that we
-[0:15:02] so the pr of these methods were that we had multi-dimensional caer valubles
-[0:15:04] had multi-dimensional caer valubles which allow us to have a better
-[0:15:07] which allow us to have a better reconstruction and um kind of a bit more
-[0:15:11] reconstruction and um kind of a bit more realistic Cal variables we didn't have
-[0:15:14] realistic Cal variables we didn't have any parametric assumptions we are able
-[0:15:17] any parametric assumptions we are able to work also with arbitrary and
-[0:15:19] to work also with arbitrary and arbitrarily dense graphs potentially
-[0:15:22] arbitrarily dense graphs potentially also with distant tenous effects and we
-[0:15:25] also with distant tenous effects and we had identifiability up to component wise
-[0:15:27] had identifiability up to component wise Transformations so slightly more than
-[0:15:30] Transformations so slightly more than other methods which also needed like d
-[0:15:32] other methods which also needed like d permutation but so this is the good part
-[0:15:35] permutation but so this is the good part but the bad part we had some several
-[0:15:37] but the bad part we had some several important cons one was that we needed
-[0:15:40] important cons one was that we needed sufficiently diverse Interventional data
-[0:15:42] sufficiently diverse Interventional data this is a bit similar to the sufficient
-[0:15:44] this is a bit similar to the sufficient variability assumptions of the other
-[0:15:46] variability assumptions of the other methods uh we only work on a temporal
-[0:15:48] methods uh we only work on a temporal setting but that's also fine but our
-[0:15:51] setting but that's also fine but our main cons was that we needed to know the
-[0:15:54] main cons was that we needed to know the intervention targets and our whole set
-[0:15:58] intervention targets and our whole set of uh questions was can we get rid of
-[0:16:00] of uh questions was can we get rid of this assumption and this is what led to
-[0:16:04] this assumption and this is what led to the development of bis so now I'll
-[0:16:07] the development of bis so now I'll conclude here and I'll switch to
+[0:14:32] now we needed to estimate both the graph
+[0:14:35] and the C of variables jointly why in
+[0:14:38] CIS a lot of the work that we did was to
+[0:14:41] estimate the Cal variables and then the
+[0:14:43] graph was relatively easy because we
+[0:14:46] could do it a
+[0:14:47] posterior so these were the two methods
+[0:14:50] we have developed for
+[0:14:52] interventions and here is just kind of a
+[0:14:54] summary also to maybe lead to the
+[0:14:57] discussion and the slides from Philip
+[0:15:00] so the pr of these methods were that we
+[0:15:02] had multi-dimensional caer valubles
+[0:15:04] which allow us to have a better
+[0:15:07] reconstruction and um kind of a bit more
+[0:15:11] realistic Cal variables we didn't have
+[0:15:14] any parametric assumptions we are able
+[0:15:17] to work also with arbitrary and
+[0:15:19] arbitrarily dense graphs potentially
+[0:15:22] also with distant tenous effects and we
+[0:15:25] had identifiability up to component wise
+[0:15:27] Transformations so slightly more than
+[0:15:30] other methods which also needed like d
+[0:15:32] permutation but so this is the good part
+[0:15:35] but the bad part we had some several
+[0:15:37] important cons one was that we needed
+[0:15:40] sufficiently diverse Interventional data
+[0:15:42] this is a bit similar to the sufficient
+[0:15:44] variability assumptions of the other
+[0:15:46] methods uh we only work on a temporal
+[0:15:48] setting but that's also fine but our
+[0:15:51] main cons was that we needed to know the
+[0:15:54] intervention targets and our whole set
+[0:15:58] of uh questions was can we get rid of
+[0:16:00] this assumption and this is what led to
+[0:16:04] the development of bis so now I'll
+[0:16:07] conclude here and I'll switch to
 [0:16:12] Phillip perfect there thank you sir let
 [0:16:23] me all right I think yeah thank you um yeah thanks sah
-[0:16:28] think yeah thank you um yeah thanks sah for the introduction Al thanks for our
-[0:16:30] for the introduction Al thanks for our organizer for inviting us um so I want
-[0:16:33] organizer for inviting us um so I want to pick up uh where we just left with
-[0:16:36] to pick up uh where we just left with Sarah to give you an overview of a
-[0:16:37] Sarah to give you an overview of a temple cation learning and what also
-[0:16:40] temple cation learning and what also motivated us to actually now come up
-[0:16:42] motivated us to actually now come up with our recent work on biscuit uh C
-[0:16:46] with our recent work on biscuit uh C representation learning for binary
-[0:16:47] representation learning for binary interactions which we presented last
-[0:16:49] interactions which we presented last year at
+[0:16:28] for the introduction Al thanks for our
+[0:16:30] organizer for inviting us um so I want
+[0:16:33] to pick up uh where we just left with
+[0:16:36] Sarah to give you an overview of a
+[0:16:37] temple cation learning and what also
+[0:16:40] motivated us to actually now come up
+[0:16:42] with our recent work on biscuit uh C
+[0:16:46] representation learning for binary
+[0:16:47] interactions which we presented last
 [0:16:51] year at uii so the a problem setup that kind of
-[0:16:54] uii so the a problem setup that kind of motivated us uh in this case is
-[0:16:57] motivated us uh in this case is essentially what you often have in
-[0:16:59] essentially what you often have in reinforcement learning you have an agent
-[0:17:01] reinforcement learning you have an agent you have an environment the agent can
-[0:17:03] you have an environment the agent can perform actions on the environment but
-[0:17:05] perform actions on the environment but often what you actually want to do is
-[0:17:07] often what you actually want to do is you want first to learn a representation
-[0:17:10] you want first to learn a representation of his environment because we rarely
-[0:17:12] of his environment because we rarely want to work actually on this High
-[0:17:13] want to work actually on this High dimensional representation and one case
-[0:17:17] dimensional representation and one case is that this representation could be
-[0:17:19] is that this representation could be causal so there is basically a potential
-[0:17:22] causal so there is basically a potential use case for CA representation learning
-[0:17:25] use case for CA representation learning so you're asking basically in this
-[0:17:27] so you're asking basically in this specific setting how could we learn
-[0:17:29] specific setting how could we learn basically Cal representation
-[0:17:31] basically Cal representation here as we have seen uh in s's talk
-[0:17:36] here as we have seen uh in s's talk essentially in a temple setting what we
-[0:17:38] essentially in a temple setting what we want to learn is a dbn in the case of we
-[0:17:41] want to learn is a dbn in the case of we have some CA variables here at time t uh
-[0:17:44] have some CA variables here at time t uh that have then some causal connections
-[0:17:46] that have then some causal connections to
+[0:16:54] motivated us uh in this case is
+[0:16:57] essentially what you often have in
+[0:16:59] reinforcement learning you have an agent
+[0:17:01] you have an environment the agent can
+[0:17:03] perform actions on the environment but
+[0:17:05] often what you actually want to do is
+[0:17:07] you want first to learn a representation
+[0:17:10] of his environment because we rarely
+[0:17:12] want to work actually on this High
+[0:17:13] dimensional representation and one case
+[0:17:17] is that this representation could be
+[0:17:19] causal so there is basically a potential
+[0:17:22] use case for CA representation learning
+[0:17:25] so you're asking basically in this
+[0:17:27] specific setting how could we learn
+[0:17:29] basically Cal representation
+[0:17:31] here as we have seen uh in s's talk
+[0:17:36] essentially in a temple setting what we
+[0:17:38] want to learn is a dbn in the case of we
+[0:17:41] have some CA variables here at time t uh
+[0:17:44] that have then some causal connections
 [0:17:47] to t+1 um and essentially we want to
-[0:17:50] t+1 um and essentially we want to identify the caal variables as well as
-[0:17:52] identify the caal variables as well as the graph the special case that we
-[0:17:54] the graph the special case that we really consider here is that essentially
-[0:17:56] really consider here is that essentially there's also an agent which can perform
-[0:17:58] there's also an agent which can perform action
+[0:17:50] identify the caal variables as well as
+[0:17:52] the graph the special case that we
+[0:17:54] really consider here is that essentially
+[0:17:56] there's also an agent which can perform
 [0:17:59] action and we will want to use these actions to
-[0:18:02] and we will want to use these actions to now actually learn the disentanglement
-[0:18:05] now actually learn the disentanglement of these different
-[0:18:07] of these different vals so just as a very quick uh context
-[0:18:11] vals so just as a very quick uh context again there are already a lot of
-[0:18:13] again there are already a lot of different tempal citation learning works
-[0:18:15] different tempal citation learning works as we have seen in service talk
-[0:18:17] as we have seen in service talk different assumptions like parametric
-[0:18:19] different assumptions like parametric exponential families or graphical
-[0:18:21] exponential families or graphical assumptions and the key part that we are
-[0:18:23] assumptions and the key part that we are basically trying here so on the one hand
-[0:18:26] basically trying here so on the one hand that we are non-parametric we support
-[0:18:28] that we are non-parametric we support arbitrary graphs
-[0:18:29] arbitrary graphs but crucially compared to cus before we
-[0:18:32] but crucially compared to cus before we basically do not observe intervention
-[0:18:34] basically do not observe intervention targets but instead assume that these
-[0:18:37] targets but instead assume that these are basically latent and these can be
-[0:18:39] are basically latent and these can be described as binary interactions what
-[0:18:42] described as binary interactions what that really means with binary
-[0:18:43] that really means with binary interactions is what we will look at
-[0:18:46] interactions is what we will look at next so essentially a biner interaction
-[0:18:49] next so essentially a biner interaction what we refer to is that the interaction
-[0:18:51] what we refer to is that the interaction between the agent and a specific cause
-[0:18:53] between the agent and a specific cause of veral can be just described by a
-[0:18:55] of veral can be just described by a binary varal so this is often also seen
-[0:18:57] binary varal so this is often also seen for instance as a interaction or
-[0:18:59] for instance as a interaction or intervention variable that you can
-[0:19:01] intervention variable that you can assume can switch between two different
-[0:19:04] assume can switch between two different mechanisms so for instance if we are at
-[0:19:06] mechanisms so for instance if we are at time step T where you have for instance
-[0:19:08] time step T where you have for instance here the microwave as a state we could
-[0:19:11] here the microwave as a state we could have one mechanism which describes the
-[0:19:13] have one mechanism which describes the observational case which basically means
-[0:19:15] observational case which basically means the agent is not interacting with a
-[0:19:18] the agent is not interacting with a object or with a cause available here so
-[0:19:20] object or with a cause available here so in that case for instance the state of a
-[0:19:22] in that case for instance the state of a microwave might not change but we even
-[0:19:25] microwave might not change but we even have a second mechanism that can happen
-[0:19:28] have a second mechanism that can happen namely if a aent decides to interact or
-[0:19:31] namely if a aent decides to interact or here intervene on this cause verbal
-[0:19:33] here intervene on this cause verbal which essentially in this specific case
-[0:19:35] which essentially in this specific case would for instance open the microwave or
-[0:19:37] would for instance open the microwave or turn on the microwave or similar so
-[0:19:40] turn on the microwave or similar so essentially each cause avable can now be
-[0:19:42] essentially each cause avable can now be described by two mechanisms which are
-[0:19:45] described by two mechanisms which are very decided by the agent so whether
-[0:19:47] very decided by the agent so whether it's observational or
-[0:19:50] it's observational or Interventional Al Another example where
-[0:19:53] Interventional Al Another example where we for instance have an object where
-[0:19:56] we for instance have an object where again if for instance paent is not
-[0:19:57] again if for instance paent is not deciding anything we have observational
-[0:19:59] deciding anything we have observational mechanism which in this case again can
-[0:20:02] mechanism which in this case again can also keep a c variable fixed but still
-[0:20:05] also keep a c variable fixed but still we also support a stochastic variations
-[0:20:08] we also support a stochastic variations so for instance in the interaction we
-[0:20:11] so for instance in the interaction we might have that the action of agent is
-[0:20:13] might have that the action of agent is to pick up a plate but it is
-[0:20:15] to pick up a plate but it is stochastically sampled where we actually
-[0:20:17] stochastically sampled where we actually pick it up so V location is a stochastic
-[0:20:20] pick it up so V location is a stochastic process so therefore your mechanism is
-[0:20:22] process so therefore your mechanism is still a stochastic part you just decide
-[0:20:24] still a stochastic part you just decide between which of these two mechanisms is
-[0:20:27] between which of these two mechanisms is actually happening
-[0:20:30] actually happening so also just to summarize these CA
-[0:20:32] so also just to summarize these CA variables as well can be basically
-[0:20:34] variables as well can be basically continuous so just in the specific case
-[0:20:36] continuous so just in the specific case before some of them might be also
-[0:20:38] before some of them might be also discreet and they are still evolving
-[0:20:40] discreet and they are still evolving over time so there are also maybe other
-[0:20:42] over time so there are also maybe other effects like for instance if there's
-[0:20:43] effects like for instance if there's another agent that could do also actions
-[0:20:46] another agent that could do also actions like these can still evolve with other
-[0:20:49] like these can still evolve with other means um we know that there will be some
-[0:20:52] means um we know that there will be some actions that perform interventions on
-[0:20:54] actions that perform interventions on these C verbals however we don't
-[0:20:56] these C verbals however we don't actually know these inter or which
-[0:20:59] actually know these inter or which actions cause which interventions so
-[0:21:01] actions cause which interventions so basically in C we had these observed to
-[0:21:03] basically in C we had these observed to know okay between this time step for of
-[0:21:06] know okay between this time step for of microwave is intervened but in this case
-[0:21:09] microwave is intervened but in this case here we just know basically an action at
-[0:21:11] here we just know basically an action at location XY has been performed and from
-[0:21:14] location XY has been performed and from that we would need to also infer
-[0:21:16] that we would need to also infer actually which intervention that
-[0:21:18] actually which intervention that corresponds to and this might be also a
-[0:21:21] corresponds to and this might be also a bit more realistic and like
-[0:21:22] bit more realistic and like reinforcement learning environments
-[0:21:24] reinforcement learning environments where you have basically an environment
-[0:21:26] where you have basically an environment which just evolves over time by itself
-[0:21:28] which just evolves over time by itself so Bic if you don't do anything there
-[0:21:30] so Bic if you don't do anything there are still things happening but you still
-[0:21:33] are still things happening but you still have an option to actually interact with
-[0:21:35] have an option to actually interact with environment since you probably want to
-[0:21:37] environment since you probably want to solve a specific task and this is
-[0:21:39] solve a specific task and this is essentially the Interventional part that
-[0:21:41] essentially the Interventional part that you can introduce so you can basically
-[0:21:43] you can introduce so you can basically as a agent interact with the variables
-[0:21:45] as a agent interact with the variables to cause these
+[0:18:02] now actually learn the disentanglement
+[0:18:05] of these different
+[0:18:07] vals so just as a very quick uh context
+[0:18:11] again there are already a lot of
+[0:18:13] different tempal citation learning works
+[0:18:15] as we have seen in service talk
+[0:18:17] different assumptions like parametric
+[0:18:19] exponential families or graphical
+[0:18:21] assumptions and the key part that we are
+[0:18:23] basically trying here so on the one hand
+[0:18:26] that we are non-parametric we support
+[0:18:28] arbitrary graphs
+[0:18:29] but crucially compared to cus before we
+[0:18:32] basically do not observe intervention
+[0:18:34] targets but instead assume that these
+[0:18:37] are basically latent and these can be
+[0:18:39] described as binary interactions what
+[0:18:42] that really means with binary
+[0:18:43] interactions is what we will look at
+[0:18:46] next so essentially a biner interaction
+[0:18:49] what we refer to is that the interaction
+[0:18:51] between the agent and a specific cause
+[0:18:53] of veral can be just described by a
+[0:18:55] binary varal so this is often also seen
+[0:18:57] for instance as a interaction or
+[0:18:59] intervention variable that you can
+[0:19:01] assume can switch between two different
+[0:19:04] mechanisms so for instance if we are at
+[0:19:06] time step T where you have for instance
+[0:19:08] here the microwave as a state we could
+[0:19:11] have one mechanism which describes the
+[0:19:13] observational case which basically means
+[0:19:15] the agent is not interacting with a
+[0:19:18] object or with a cause available here so
+[0:19:20] in that case for instance the state of a
+[0:19:22] microwave might not change but we even
+[0:19:25] have a second mechanism that can happen
+[0:19:28] namely if a aent decides to interact or
+[0:19:31] here intervene on this cause verbal
+[0:19:33] which essentially in this specific case
+[0:19:35] would for instance open the microwave or
+[0:19:37] turn on the microwave or similar so
+[0:19:40] essentially each cause avable can now be
+[0:19:42] described by two mechanisms which are
+[0:19:45] very decided by the agent so whether
+[0:19:47] it's observational or
+[0:19:50] Interventional Al Another example where
+[0:19:53] we for instance have an object where
+[0:19:56] again if for instance paent is not
+[0:19:57] deciding anything we have observational
+[0:19:59] mechanism which in this case again can
+[0:20:02] also keep a c variable fixed but still
+[0:20:05] we also support a stochastic variations
+[0:20:08] so for instance in the interaction we
+[0:20:11] might have that the action of agent is
+[0:20:13] to pick up a plate but it is
+[0:20:15] stochastically sampled where we actually
+[0:20:17] pick it up so V location is a stochastic
+[0:20:20] process so therefore your mechanism is
+[0:20:22] still a stochastic part you just decide
+[0:20:24] between which of these two mechanisms is
+[0:20:27] actually happening
+[0:20:30] so also just to summarize these CA
+[0:20:32] variables as well can be basically
+[0:20:34] continuous so just in the specific case
+[0:20:36] before some of them might be also
+[0:20:38] discreet and they are still evolving
+[0:20:40] over time so there are also maybe other
+[0:20:42] effects like for instance if there's
+[0:20:43] another agent that could do also actions
+[0:20:46] like these can still evolve with other
+[0:20:49] means um we know that there will be some
+[0:20:52] actions that perform interventions on
+[0:20:54] these C verbals however we don't
+[0:20:56] actually know these inter or which
+[0:20:59] actions cause which interventions so
+[0:21:01] basically in C we had these observed to
+[0:21:03] know okay between this time step for of
+[0:21:06] microwave is intervened but in this case
+[0:21:09] here we just know basically an action at
+[0:21:11] location XY has been performed and from
+[0:21:14] that we would need to also infer
+[0:21:16] actually which intervention that
+[0:21:18] corresponds to and this might be also a
+[0:21:21] bit more realistic and like
+[0:21:22] reinforcement learning environments
+[0:21:24] where you have basically an environment
+[0:21:26] which just evolves over time by itself
+[0:21:28] so Bic if you don't do anything there
+[0:21:30] are still things happening but you still
+[0:21:33] have an option to actually interact with
+[0:21:35] environment since you probably want to
+[0:21:37] solve a specific task and this is
+[0:21:39] essentially the Interventional part that
+[0:21:41] you can introduce so you can basically
+[0:21:43] as a agent interact with the variables
+[0:21:45] to cause these
 [0:21:50] interventions as a causal graph to become a bit more formal on this
-[0:21:52] become a bit more formal on this essentially what we consider is that we
-[0:21:54] essentially what we consider is that we have a set of CA of variables up here so
-[0:21:57] have a set of CA of variables up here so essentially C1 to CK
-[0:21:59] essentially C1 to CK that evolve over time so essentially
-[0:22:01] that evolve over time so essentially here we have a temporal CA relations
-[0:22:04] here we have a temporal CA relations that go from T minus one to T or
-[0:22:06] that go from T minus one to T or potentially more time steps depending on
-[0:22:08] potentially more time steps depending on how many we might
-[0:22:10] how many we might want then these called variables are B
-[0:22:13] want then these called variables are B observed in an image or an observation X
-[0:22:16] observed in an image or an observation X so each time step we now have
-[0:22:18] so each time step we now have observation which is the injective
-[0:22:19] observation which is the injective function of all of these cor varable so
-[0:22:22] function of all of these cor varable so essentially we know that there will be
-[0:22:24] essentially we know that there will be the information of all of them in the
-[0:22:26] the information of all of them in the observation and then we have regime
-[0:22:29] observation and then we have regime variable down here so essentially the
-[0:22:31] variable down here so essentially the regime variable will be the interactions
-[0:22:33] regime variable will be the interactions for the action information that the
-[0:22:35] for the action information that the agent has performed the crucial part
-[0:22:38] agent has performed the crucial part that we introduce are essentially these
-[0:22:40] that we introduce are essentially these interaction variables so basically now
-[0:22:43] interaction variables so basically now these you can consider as binary
-[0:22:45] these you can consider as binary variables which are zero basically in
-[0:22:47] variables which are zero basically in case we have for observational
-[0:22:49] case we have for observational mechanisms and one if essentially this
-[0:22:51] mechanisms and one if essentially this action here this RT would cause an
-[0:22:54] action here this RT would cause an intervention on a specific cause
-[0:22:57] intervention on a specific cause of and just to complete basically the
-[0:23:00] of and just to complete basically the picture from also before so the XTS
-[0:23:02] picture from also before so the XTS would be here the visual observations as
-[0:23:04] would be here the visual observations as from the environment and the RT is
-[0:23:07] from the environment and the RT is essentially whatever action information
-[0:23:09] essentially whatever action information we have as for agent especially if we
-[0:23:12] we have as for agent especially if we control we choose for Action to perform
-[0:23:15] control we choose for Action to perform it is reasonable to assume actually you
-[0:23:16] it is reasonable to assume actually you have access to action information but
-[0:23:18] have access to action information but not give Interventional information on
-[0:23:20] not give Interventional information on the lower
+[0:21:52] essentially what we consider is that we
+[0:21:54] have a set of CA of variables up here so
+[0:21:57] essentially C1 to CK
+[0:21:59] that evolve over time so essentially
+[0:22:01] here we have a temporal CA relations
+[0:22:04] that go from T minus one to T or
+[0:22:06] potentially more time steps depending on
+[0:22:08] how many we might
+[0:22:10] want then these called variables are B
+[0:22:13] observed in an image or an observation X
+[0:22:16] so each time step we now have
+[0:22:18] observation which is the injective
+[0:22:19] function of all of these cor varable so
+[0:22:22] essentially we know that there will be
+[0:22:24] the information of all of them in the
+[0:22:26] observation and then we have regime
+[0:22:29] variable down here so essentially the
+[0:22:31] regime variable will be the interactions
+[0:22:33] for the action information that the
+[0:22:35] agent has performed the crucial part
+[0:22:38] that we introduce are essentially these
+[0:22:40] interaction variables so basically now
+[0:22:43] these you can consider as binary
+[0:22:45] variables which are zero basically in
+[0:22:47] case we have for observational
+[0:22:49] mechanisms and one if essentially this
+[0:22:51] action here this RT would cause an
+[0:22:54] intervention on a specific cause
+[0:22:57] of and just to complete basically the
+[0:23:00] picture from also before so the XTS
+[0:23:02] would be here the visual observations as
+[0:23:04] from the environment and the RT is
+[0:23:07] essentially whatever action information
+[0:23:09] we have as for agent especially if we
+[0:23:12] control we choose for Action to perform
+[0:23:15] it is reasonable to assume actually you
+[0:23:16] have access to action information but
+[0:23:18] not give Interventional information on
 [0:23:22] the lower level so you might also ask okay why
-[0:23:24] level so you might also ask okay why would it actually help um to know that
-[0:23:27] would it actually help um to know that these uh things can be actually
-[0:23:29] these uh things can be actually expressed as a binary varable and this
-[0:23:31] expressed as a binary varable and this is often that we actually see that um
-[0:23:34] is often that we actually see that um just knowing that there's actually two
-[0:23:36] just knowing that there's actually two different mechanisms or they help you to
-[0:23:38] different mechanisms or they help you to identify sometimes difficult cases so
-[0:23:41] identify sometimes difficult cases so one case which often is excluded in
-[0:23:44] one case which often is excluded in assumptions is an additive caution noise
-[0:23:46] assumptions is an additive caution noise setting where you essentially have a c
-[0:23:48] setting where you essentially have a c varable which follows a potentially
-[0:23:50] varable which follows a potentially nonlinear mean function but basally we
-[0:23:54] nonlinear mean function but basally we just add some gion noise with a fixed
-[0:23:57] just add some gion noise with a fixed variance there often tricky because
-[0:23:59] variance there often tricky because essentially if you would have let's say
-[0:24:01] essentially if you would have let's say we ignore the whole Temple setting just
-[0:24:05] we ignore the whole Temple setting just if you have cautions essentially in
-[0:24:06] if you have cautions essentially in these you can rotate around if you have
-[0:24:09] these you can rotate around if you have same fixed variance uh and model the
-[0:24:11] same fixed variance uh and model the same distribution such that often in
-[0:24:14] same distribution such that often in this case you cannot identify the actual
-[0:24:16] this case you cannot identify the actual cause ofs but if you now know that
-[0:24:19] cause ofs but if you now know that actually in your data you might have
-[0:24:22] actually in your data you might have basically different means so essentially
-[0:24:23] basically different means so essentially your intervention changes the mean then
-[0:24:26] your intervention changes the mean then if you take the two CA variables down
-[0:24:28] if you take the two CA variables down here in this graph of C1 and C2 these
-[0:24:31] here in this graph of C1 and C2 these different interventions basically cause
-[0:24:33] different interventions basically cause different means for these two variables
-[0:24:35] different means for these two variables if if you have for joint intervention it
-[0:24:38] if if you have for joint intervention it would just basically uh map the mean to
-[0:24:41] would just basically uh map the mean to the same mean as the two Interventional
-[0:24:43] the same mean as the two Interventional cases individually so essentially each
-[0:24:46] cases individually so essentially each of these C aables can be described by
-[0:24:48] of these C aables can be described by two mechanisms basically observational
-[0:24:51] two mechanisms basically observational which is the of Orin for Simplicity and
-[0:24:53] which is the of Orin for Simplicity and Intervention which is basically a shift
-[0:24:56] Intervention which is basically a shift but if you now start to rotate this
-[0:24:58] but if you now start to rotate this coordinate system
-[0:24:59] coordinate system which is often kind of uh what is
-[0:25:01] which is often kind of uh what is invariant in these caution settings you
-[0:25:04] invariant in these caution settings you actually start to notice that when the
-[0:25:06] actually start to notice that when the number of means or the number of
-[0:25:08] number of means or the number of mechanisms that each of his C varable
-[0:25:10] mechanisms that each of his C varable needs is growing larger than two namely
-[0:25:14] needs is growing larger than two namely that for instance now if I intervene on
-[0:25:16] that for instance now if I intervene on variable one I see that my rotated
-[0:25:18] variable one I see that my rotated variable changes its mean but if I would
-[0:25:21] variable changes its mean but if I would now intervene on varable two then it has
-[0:25:23] now intervene on varable two then it has a third mean so it's basically not
-[0:25:25] a third mean so it's basically not anymore describable by a binary ver and
-[0:25:28] anymore describable by a binary ver and and this is kind of a key idea that we
-[0:25:30] and this is kind of a key idea that we use because essentially as you continue
-[0:25:32] use because essentially as you continue to rotate the only things you can now
-[0:25:35] to rotate the only things you can now not identify anymore are like 90 degree
-[0:25:38] not identify anymore are like 90 degree rotations basically 90 180 270 and a 90
-[0:25:42] rotations basically 90 180 270 and a 90 degree rotation is nothing else than
-[0:25:44] degree rotation is nothing else than permuting the two variables and
-[0:25:46] permuting the two variables and eventually flipping with a sign so this
-[0:25:48] eventually flipping with a sign so this is nothing else than again the uh
-[0:25:51] is nothing else than again the uh identifiability class up to permutation
-[0:25:54] identifiability class up to permutation and up to elementwise Transformations as
-[0:25:56] and up to elementwise Transformations as we have seen in s talk before
+[0:23:24] would it actually help um to know that
+[0:23:27] these uh things can be actually
+[0:23:29] expressed as a binary varable and this
+[0:23:31] is often that we actually see that um
+[0:23:34] just knowing that there's actually two
+[0:23:36] different mechanisms or they help you to
+[0:23:38] identify sometimes difficult cases so
+[0:23:41] one case which often is excluded in
+[0:23:44] assumptions is an additive caution noise
+[0:23:46] setting where you essentially have a c
+[0:23:48] varable which follows a potentially
+[0:23:50] nonlinear mean function but basally we
+[0:23:54] just add some gion noise with a fixed
+[0:23:57] variance there often tricky because
+[0:23:59] essentially if you would have let's say
+[0:24:01] we ignore the whole Temple setting just
+[0:24:05] if you have cautions essentially in
+[0:24:06] these you can rotate around if you have
+[0:24:09] same fixed variance uh and model the
+[0:24:11] same distribution such that often in
+[0:24:14] this case you cannot identify the actual
+[0:24:16] cause ofs but if you now know that
+[0:24:19] actually in your data you might have
+[0:24:22] basically different means so essentially
+[0:24:23] your intervention changes the mean then
+[0:24:26] if you take the two CA variables down
+[0:24:28] here in this graph of C1 and C2 these
+[0:24:31] different interventions basically cause
+[0:24:33] different means for these two variables
+[0:24:35] if if you have for joint intervention it
+[0:24:38] would just basically uh map the mean to
+[0:24:41] the same mean as the two Interventional
+[0:24:43] cases individually so essentially each
+[0:24:46] of these C aables can be described by
+[0:24:48] two mechanisms basically observational
+[0:24:51] which is the of Orin for Simplicity and
+[0:24:53] Intervention which is basically a shift
+[0:24:56] but if you now start to rotate this
+[0:24:58] coordinate system
+[0:24:59] which is often kind of uh what is
+[0:25:01] invariant in these caution settings you
+[0:25:04] actually start to notice that when the
+[0:25:06] number of means or the number of
+[0:25:08] mechanisms that each of his C varable
+[0:25:10] needs is growing larger than two namely
+[0:25:14] that for instance now if I intervene on
+[0:25:16] variable one I see that my rotated
+[0:25:18] variable changes its mean but if I would
+[0:25:21] now intervene on varable two then it has
+[0:25:23] a third mean so it's basically not
+[0:25:25] anymore describable by a binary ver and
+[0:25:28] and this is kind of a key idea that we
+[0:25:30] use because essentially as you continue
+[0:25:32] to rotate the only things you can now
+[0:25:35] not identify anymore are like 90 degree
+[0:25:38] rotations basically 90 180 270 and a 90
+[0:25:42] degree rotation is nothing else than
+[0:25:44] permuting the two variables and
+[0:25:46] eventually flipping with a sign so this
+[0:25:48] is nothing else than again the uh
+[0:25:51] identifiability class up to permutation
+[0:25:54] and up to elementwise Transformations as
+[0:25:56] we have seen in s talk before
 [0:26:04] of course like besid just knowing that these interactions can be described by
-[0:26:06] these interactions can be described by binary vers it will be not enough uh to
-[0:26:08] binary vers it will be not enough uh to fully guarantee that we identify the
-[0:26:10] fully guarantee that we identify the variables and the first thing we have to
-[0:26:12] variables and the first thing we have to also assume is for instance that we have
-[0:26:15] also assume is for instance that we have sufficient variability in the
-[0:26:17] sufficient variability in the interactions per varable you can
-[0:26:19] interactions per varable you can consider if for instance we would have a
-[0:26:21] consider if for instance we would have a single interaction which basically
-[0:26:24] single interaction which basically switches all of these mechanisms of a c
-[0:26:26] switches all of these mechanisms of a c verus to an Interventional case then
-[0:26:29] verus to an Interventional case then there's very little actually for us to
-[0:26:30] there's very little actually for us to gain because all of these cause vares
-[0:26:32] gain because all of these cause vares change at the same time so in the end we
-[0:26:36] change at the same time so in the end we wouldn't be able to actually identify
-[0:26:38] wouldn't be able to actually identify these CA veres as separate so what we
-[0:26:41] these CA veres as separate so what we also want to see so that we can use
-[0:26:44] also want to see so that we can use these interactions is essentially having
-[0:26:46] these interactions is essentially having a distinct interaction pattern so for
-[0:26:48] a distinct interaction pattern so for inst there are some actions which
-[0:26:50] inst there are some actions which intervene on CA of verbal one but not
-[0:26:52] intervene on CA of verbal one but not cause of ver to and there might be some
-[0:26:55] cause of ver to and there might be some actions that do vice versa or for
-[0:26:57] actions that do vice versa or for instance that we then have a joint
-[0:26:58] instance that we then have a joint intervention on the two cause verbals
-[0:27:01] intervention on the two cause verbals but it's not that these two Bas or any
-[0:27:03] but it's not that these two Bas or any two CA verbals always go together into
-[0:27:06] two CA verbals always go together into observational or Interventional regime
-[0:27:09] observational or Interventional regime in case that is essentially you might
-[0:27:12] in case that is essentially you might have again partial identifiability so
-[0:27:14] have again partial identifiability so that you can identify others but not
-[0:27:16] that you can identify others but not these two as
-[0:27:18] these two as together and the result that we also
-[0:27:21] together and the result that we also have here is actually what we also would
-[0:27:23] have here is actually what we also would be able to transfer from citus namely
-[0:27:26] be able to transfer from citus namely that the number of interactions diverse
-[0:27:29] that the number of interactions diverse interactions you need scales logarithmic
-[0:27:31] interactions you need scales logarithmic with a number of C vales so that's quite
-[0:27:34] with a number of C vales so that's quite nice to have because if you now start to
-[0:27:36] nice to have because if you now start to scale actually to larger systems to more
-[0:27:38] scale actually to larger systems to more complex systems we don't require that we
-[0:27:40] complex systems we don't require that we actually have like uh single node
-[0:27:43] actually have like uh single node interventions on all of these different
-[0:27:44] interventions on all of these different C of vars but we support much more like
-[0:27:47] C of vars but we support much more like some uh interventions can be even joined
-[0:27:50] some uh interventions can be even joined on multiple interventions so that you
-[0:27:52] on multiple interventions so that you have just less restrictions on like the
-[0:27:55] have just less restrictions on like the power of agent and what it can really
-[0:27:57] power of agent and what it can really influence and what it can just uh build
-[0:28:00] influence and what it can just uh build intact on together and this also leads
-[0:28:03] intact on together and this also leads you to to the case that actually often
-[0:28:05] you to to the case that actually often an agent with a random policy is already
-[0:28:07] an agent with a random policy is already enough here so essentially if you just
-[0:28:09] enough here so essentially if you just start to click around on an environment
-[0:28:11] start to click around on an environment or similar you may be able to already uh
-[0:28:14] or similar you may be able to already uh get enough distinct interaction pattern
-[0:28:16] get enough distinct interaction pattern without knowing anything about the
-[0:28:18] without knowing anything about the environment without knowing anything
-[0:28:19] environment without knowing anything about the CA ofs in the first
-[0:28:23] about the CA ofs in the first place as a third assumption as we also
-[0:28:26] place as a third assumption as we also have seen in s's talk um is also a
-[0:28:29] have seen in s's talk um is also a rather common one in the temple setting
-[0:28:31] rather common one in the temple setting namely that we don't consider
-[0:28:33] namely that we don't consider instantaneous effects and instead assume
-[0:28:35] instantaneous effects and instead assume that the ca relations here can be
-[0:28:37] that the ca relations here can be resolved over time so we always have the
-[0:28:40] resolved over time so we always have the cross relations from time T to t plus
-[0:28:42] cross relations from time T to t plus one but for Simplicity ignore now causal
-[0:28:46] one but for Simplicity ignore now causal relations from t+1 within the time step
-[0:28:49] relations from t+1 within the time step um also we have seen there can exist
-[0:28:51] um also we have seen there can exist some extensions also to that
-[0:28:54] some extensions also to that setting and finally um again we need to
-[0:28:58] setting and finally um again we need to take bit of assumption of actually what
-[0:29:00] take bit of assumption of actually what these interactions cause or what also
-[0:29:02] these interactions cause or what also these variables change over time um
-[0:29:05] these variables change over time um since essentially what you could also
-[0:29:07] since essentially what you could also assume if the observational mechanism
-[0:29:09] assume if the observational mechanism and the Interventional mechanisms are
-[0:29:11] and the Interventional mechanisms are identical then essentially it's the same
-[0:29:14] identical then essentially it's the same as if you wouldn't have any interaction
-[0:29:16] as if you wouldn't have any interaction so you need to make sure that actually
-[0:29:18] so you need to make sure that actually interaction causes a change in the
-[0:29:21] interaction causes a change in the mechanism so that these two mechanisms
-[0:29:23] mechanism so that these two mechanisms are not
+[0:26:06] binary vers it will be not enough uh to
+[0:26:08] fully guarantee that we identify the
+[0:26:10] variables and the first thing we have to
+[0:26:12] also assume is for instance that we have
+[0:26:15] sufficient variability in the
+[0:26:17] interactions per varable you can
+[0:26:19] consider if for instance we would have a
+[0:26:21] single interaction which basically
+[0:26:24] switches all of these mechanisms of a c
+[0:26:26] verus to an Interventional case then
+[0:26:29] there's very little actually for us to
+[0:26:30] gain because all of these cause vares
+[0:26:32] change at the same time so in the end we
+[0:26:36] wouldn't be able to actually identify
+[0:26:38] these CA veres as separate so what we
+[0:26:41] also want to see so that we can use
+[0:26:44] these interactions is essentially having
+[0:26:46] a distinct interaction pattern so for
+[0:26:48] inst there are some actions which
+[0:26:50] intervene on CA of verbal one but not
+[0:26:52] cause of ver to and there might be some
+[0:26:55] actions that do vice versa or for
+[0:26:57] instance that we then have a joint
+[0:26:58] intervention on the two cause verbals
+[0:27:01] but it's not that these two Bas or any
+[0:27:03] two CA verbals always go together into
+[0:27:06] observational or Interventional regime
+[0:27:09] in case that is essentially you might
+[0:27:12] have again partial identifiability so
+[0:27:14] that you can identify others but not
+[0:27:16] these two as
+[0:27:18] together and the result that we also
+[0:27:21] have here is actually what we also would
+[0:27:23] be able to transfer from citus namely
+[0:27:26] that the number of interactions diverse
+[0:27:29] interactions you need scales logarithmic
+[0:27:31] with a number of C vales so that's quite
+[0:27:34] nice to have because if you now start to
+[0:27:36] scale actually to larger systems to more
+[0:27:38] complex systems we don't require that we
+[0:27:40] actually have like uh single node
+[0:27:43] interventions on all of these different
+[0:27:44] C of vars but we support much more like
+[0:27:47] some uh interventions can be even joined
+[0:27:50] on multiple interventions so that you
+[0:27:52] have just less restrictions on like the
+[0:27:55] power of agent and what it can really
+[0:27:57] influence and what it can just uh build
+[0:28:00] intact on together and this also leads
+[0:28:03] you to to the case that actually often
+[0:28:05] an agent with a random policy is already
+[0:28:07] enough here so essentially if you just
+[0:28:09] start to click around on an environment
+[0:28:11] or similar you may be able to already uh
+[0:28:14] get enough distinct interaction pattern
+[0:28:16] without knowing anything about the
+[0:28:18] environment without knowing anything
+[0:28:19] about the CA ofs in the first
+[0:28:23] place as a third assumption as we also
+[0:28:26] have seen in s's talk um is also a
+[0:28:29] rather common one in the temple setting
+[0:28:31] namely that we don't consider
+[0:28:33] instantaneous effects and instead assume
+[0:28:35] that the ca relations here can be
+[0:28:37] resolved over time so we always have the
+[0:28:40] cross relations from time T to t plus
+[0:28:42] one but for Simplicity ignore now causal
+[0:28:46] relations from t+1 within the time step
+[0:28:49] um also we have seen there can exist
+[0:28:51] some extensions also to that
+[0:28:54] setting and finally um again we need to
+[0:28:58] take bit of assumption of actually what
+[0:29:00] these interactions cause or what also
+[0:29:02] these variables change over time um
+[0:29:05] since essentially what you could also
+[0:29:07] assume if the observational mechanism
+[0:29:09] and the Interventional mechanisms are
+[0:29:11] identical then essentially it's the same
+[0:29:14] as if you wouldn't have any interaction
+[0:29:16] so you need to make sure that actually
+[0:29:18] interaction causes a change in the
+[0:29:21] mechanism so that these two mechanisms
 [0:29:24] are not identical and this is essentially uh two
-[0:29:27] identical and this is essentially uh two variabilities
-[0:29:28] variabilities that we could find so on one hand we can
-[0:29:31] that we could find so on one hand we can either assume that CH or just
-[0:29:34] either assume that CH or just interaction changes um the mechanism in
-[0:29:38] interaction changes um the mechanism in a more complex way so this is basic
-[0:29:40] a more complex way so this is basic Dynamics variability which considers
-[0:29:42] Dynamics variability which considers that when this change is twice
-[0:29:45] that when this change is twice differentiable uh and B give a common
-[0:29:48] differentiable uh and B give a common case is there is if you for instance
-[0:29:49] case is there is if you for instance have a gorion distribution but with a
-[0:29:52] have a gorion distribution but with a changing standard deviation so if you
-[0:29:54] changing standard deviation so if you would have a constant standard deviation
-[0:29:56] would have a constant standard deviation as in the additive caution noise the
-[0:29:59] as in the additive caution noise the assumption a would for instance not be
-[0:30:01] assumption a would for instance not be valid but if you would have now a
-[0:30:03] valid but if you would have now a changing standard deviation this would
-[0:30:06] changing standard deviation this would be valid again but then again actually
-[0:30:08] be valid again but then again actually if you have additive caution noise
-[0:30:10] if you have additive caution noise setting then we can still identify it if
-[0:30:13] setting then we can still identify it if a Time varability holds so essentially
-[0:30:15] a Time varability holds so essentially it means that over time the changes that
-[0:30:18] it means that over time the changes that are caused by these interactions are not
-[0:30:20] are caused by these interactions are not linearly dependent between CA variables
-[0:30:23] linearly dependent between CA variables so essentially not that two variables
-[0:30:25] so essentially not that two variables change exactly the same way soent change
-[0:30:28] change exactly the same way soent change the mean in the exact same way all the
-[0:30:30] the mean in the exact same way all the time uh since then you might not be able
-[0:30:33] time uh since then you might not be able to disentangle these two up to linear
-[0:30:36] to disentangle these two up to linear dependency so essentially one of these
-[0:30:38] dependency so essentially one of these two varability holds with that
-[0:30:41] two varability holds with that essentially we can complete our
-[0:30:43] essentially we can complete our assumption list so we have these bin
-[0:30:46] assumption list so we have these bin variables for interactions we have a
-[0:30:49] variables for interactions we have a distinct interaction patterns we have a
-[0:30:51] distinct interaction patterns we have a c relations that can be resolved over
-[0:30:53] c relations that can be resolved over time and finally the varability and
-[0:30:56] time and finally the varability and under that we can show that we can
-[0:30:58] under that we can show that we can identify these CA vares up to
-[0:31:00] identify these CA vares up to permutation and ele element wise
-[0:31:02] permutation and ele element wise Transformations so again like the
-[0:31:04] Transformations so again like the classical case that you might be
-[0:31:06] classical case that you might be interested in at the
-[0:31:08] interested in at the end of course this is basically all in
-[0:31:11] end of course this is basically all in theory so it's always good to have this
-[0:31:13] theory so it's always good to have this thetical backing in terms of what we can
-[0:31:16] thetical backing in terms of what we can really achieve but then of course
-[0:31:18] really achieve but then of course there's also the second part which is of
-[0:31:20] there's also the second part which is of interest can we actually Implement these
-[0:31:22] interest can we actually Implement these identifiability results in practice and
-[0:31:24] identifiability results in practice and can we build a learning algorithm that
-[0:31:27] can we build a learning algorithm that can now identify it on for instance
-[0:31:29] can now identify it on for instance practical
+[0:29:27] variabilities
+[0:29:28] that we could find so on one hand we can
+[0:29:31] either assume that CH or just
+[0:29:34] interaction changes um the mechanism in
+[0:29:38] a more complex way so this is basic
+[0:29:40] Dynamics variability which considers
+[0:29:42] that when this change is twice
+[0:29:45] differentiable uh and B give a common
+[0:29:48] case is there is if you for instance
+[0:29:49] have a gorion distribution but with a
+[0:29:52] changing standard deviation so if you
+[0:29:54] would have a constant standard deviation
+[0:29:56] as in the additive caution noise the
+[0:29:59] assumption a would for instance not be
+[0:30:01] valid but if you would have now a
+[0:30:03] changing standard deviation this would
+[0:30:06] be valid again but then again actually
+[0:30:08] if you have additive caution noise
+[0:30:10] setting then we can still identify it if
+[0:30:13] a Time varability holds so essentially
+[0:30:15] it means that over time the changes that
+[0:30:18] are caused by these interactions are not
+[0:30:20] linearly dependent between CA variables
+[0:30:23] so essentially not that two variables
+[0:30:25] change exactly the same way soent change
+[0:30:28] the mean in the exact same way all the
+[0:30:30] time uh since then you might not be able
+[0:30:33] to disentangle these two up to linear
+[0:30:36] dependency so essentially one of these
+[0:30:38] two varability holds with that
+[0:30:41] essentially we can complete our
+[0:30:43] assumption list so we have these bin
+[0:30:46] variables for interactions we have a
+[0:30:49] distinct interaction patterns we have a
+[0:30:51] c relations that can be resolved over
+[0:30:53] time and finally the varability and
+[0:30:56] under that we can show that we can
+[0:30:58] identify these CA vares up to
+[0:31:00] permutation and ele element wise
+[0:31:02] Transformations so again like the
+[0:31:04] classical case that you might be
+[0:31:06] interested in at the
+[0:31:08] end of course this is basically all in
+[0:31:11] theory so it's always good to have this
+[0:31:13] thetical backing in terms of what we can
+[0:31:16] really achieve but then of course
+[0:31:18] there's also the second part which is of
+[0:31:20] interest can we actually Implement these
+[0:31:22] identifiability results in practice and
+[0:31:24] can we build a learning algorithm that
+[0:31:27] can now identify it on for instance
 [0:31:31] practical environments and this is essentially
-[0:31:33] environments and this is essentially what we will now look at so as a
-[0:31:35] what we will now look at so as a reminder first of all essentially we
-[0:31:38] reminder first of all essentially we will try to also reimplement this Cal
-[0:31:40] will try to also reimplement this Cal model in our architecture essentially we
-[0:31:43] model in our architecture essentially we will have as inputs the observations
-[0:31:46] will have as inputs the observations here as like XT our images and our agent
-[0:31:50] here as like XT our images and our agent information basic action information and
-[0:31:53] information basic action information and what we will want to learn is a latent
-[0:31:55] what we will want to learn is a latent space so essentially we want to encode
-[0:31:57] space so essentially we want to encode these images in to Laten space in which
-[0:32:00] these images in to Laten space in which we can then identify these different C
-[0:32:03] we can then identify these different C variables and again we will then try to
-[0:32:06] variables and again we will then try to make use of these this idea of Bin
-[0:32:08] make use of these this idea of Bin interaction variables to actually guide
-[0:32:10] interaction variables to actually guide this identification
-[0:32:14] this identification process so we start very simple in terms
-[0:32:16] process so we start very simple in terms of having these for Simplicity here I
-[0:32:19] of having these for Simplicity here I show two time steps so essentially a
-[0:32:22] show two time steps so essentially a Time step T minus one and T and we first
-[0:32:25] Time step T minus one and T and we first start with basically applying an encoder
-[0:32:27] start with basically applying an encoder so this could be any possible
-[0:32:29] so this could be any possible architecture which basically reduces our
-[0:32:31] architecture which basically reduces our high dimensional state to a much lower
-[0:32:33] high dimensional state to a much lower dimensional state for instance a single
-[0:32:36] dimensional state for instance a single Vector with something like 32 latent
-[0:32:37] Vector with something like 32 latent Dimensions
-[0:32:38] Dimensions possible on this we
-[0:32:41] possible on this we essentially create a prior so this is
-[0:32:44] essentially create a prior so this is essentially a ve variational out encoder
-[0:32:47] essentially a ve variational out encoder which reduces our input to a small
-[0:32:49] which reduces our input to a small Dimension and on this we Define a
-[0:32:51] Dimension and on this we Define a distribution which we will then look at
-[0:32:54] distribution which we will then look at uh soon basically this will be our key
-[0:32:56] uh soon basically this will be our key part on actually making this
-[0:32:58] part on actually making this identification possible of course we
-[0:33:01] identification possible of course we also need to make sure that this latent
-[0:33:03] also need to make sure that this latent code still contains all information of
-[0:33:06] code still contains all information of our observations so we are not losing
-[0:33:08] our observations so we are not losing any c vars and for that we do build a
-[0:33:11] any c vars and for that we do build a decoder to also reconstruct so this
-[0:33:12] decoder to also reconstruct so this classical vae
-[0:33:15] classical vae objective and to integrate the action
-[0:33:17] objective and to integrate the action essentially what we will have is that we
-[0:33:20] essentially what we will have is that we add the action and a previous time step
-[0:33:22] add the action and a previous time step into a small MLP or also other
-[0:33:25] into a small MLP or also other architectures as we would need to and we
-[0:33:28] architectures as we would need to and we want that this model or this small new
-[0:33:31] want that this model or this small new network will predict when binary
-[0:33:33] network will predict when binary variables so these are these binary
-[0:33:34] variables so these are these binary interaction variables between the agent
-[0:33:37] interaction variables between the agent and individual latent variables and as
-[0:33:40] and individual latent variables and as these latent variables are supposed to
-[0:33:41] these latent variables are supposed to be identifying different cause variables
-[0:33:44] be identifying different cause variables essentially we will also correspondingly
-[0:33:46] essentially we will also correspondingly identify these interactions or
-[0:33:48] identify these interactions or interventions on the individual
-[0:33:51] interventions on the individual vers so in terms of like loss function
-[0:33:54] vers so in terms of like loss function to do it again a bit more formally we
-[0:33:57] to do it again a bit more formally we will have our encoder which is shown
-[0:33:59] will have our encoder which is shown here as a distribution or conditional
-[0:34:02] here as a distribution or conditional distribution of a latent Z given X our
-[0:34:05] distribution of a latent Z given X our observation we have our decoder which
-[0:34:07] observation we have our decoder which essentially tce to inverted so Tes to
-[0:34:09] essentially tce to inverted so Tes to predict x given Z and we have here our
-[0:34:13] predict x given Z and we have here our prior which essentially is now over time
-[0:34:15] prior which essentially is now over time so we try to predict the next time step
-[0:34:17] so we try to predict the next time step given the previous one and our actions
-[0:34:20] given the previous one and our actions that our agent has
-[0:34:22] that our agent has performed and this objective is
-[0:34:24] performed and this objective is essentially the classical e objective of
-[0:34:26] essentially the classical e objective of having a reconstruction so the first
-[0:34:28] having a reconstruction so the first part essentially ensures that all
-[0:34:30] part essentially ensures that all information is in the Laten spas in the
-[0:34:33] information is in the Laten spas in the second part is the more interesting one
-[0:34:35] second part is the more interesting one of the prior modeling so here we now try
-[0:34:37] of the prior modeling so here we now try to actually enforce that our model or
-[0:34:39] to actually enforce that our model or our latence follow a certain
-[0:34:42] our latence follow a certain distribution namely the prior
-[0:34:44] distribution namely the prior essentially which follows over time in
-[0:34:46] essentially which follows over time in this prior distribution we can now
-[0:34:48] this prior distribution we can now choose to follow exactly what we had in
-[0:34:50] choose to follow exactly what we had in our causal setup so essentially what we
-[0:34:53] our causal setup so essentially what we want is that this distribution of our
-[0:34:56] want is that this distribution of our latent factor wise
-[0:34:58] latent factor wise essentially for all of them so we can
-[0:35:00] essentially for all of them so we can just write it as a product over each
-[0:35:02] just write it as a product over each individual latent varable given the
-[0:35:05] individual latent varable given the previous time step and now essentially
-[0:35:08] previous time step and now essentially function which takes us input the agent
-[0:35:12] function which takes us input the agent uh information the previous time step
-[0:35:14] uh information the previous time step and essentially outputs a biner variable
-[0:35:16] and essentially outputs a biner variable so this is uh indeed this bin
-[0:35:19] so this is uh indeed this bin interaction variable which we now try to
-[0:35:22] interaction variable which we now try to predict of course here also to noce when
-[0:35:25] predict of course here also to noce when this binary function is still
-[0:35:27] this binary function is still unsupervised so we still have to uh do
-[0:35:30] unsupervised so we still have to uh do it unsupervised Without Really labels of
-[0:35:31] it unsupervised Without Really labels of saying this is an intervention or not so
-[0:35:34] saying this is an intervention or not so therefore we actually need to make an
-[0:35:36] therefore we actually need to make an objective that we can also take
-[0:35:38] objective that we can also take gradients or end to end meaning that we
-[0:35:41] gradients or end to end meaning that we want to have it fully
-[0:35:43] want to have it fully differentiably and this is a bit more of
-[0:35:45] differentiably and this is a bit more of a tricky part to set it up in an
-[0:35:47] a tricky part to set it up in an optimization setting since it's if you
-[0:35:50] optimization setting since it's if you just for instance predict a discrete
-[0:35:51] just for instance predict a discrete variable you will not be able to nicely
-[0:35:54] variable you will not be able to nicely propagate gradients back so instead what
-[0:35:57] propagate gradients back so instead what we found to work better is a continuous
-[0:35:59] we found to work better is a continuous relaxation so essentially instead of
-[0:36:01] relaxation so essentially instead of predicting directly discrete variables
-[0:36:03] predicting directly discrete variables or Zer or one we instead predict
-[0:36:06] or Zer or one we instead predict continuous variables so essentially this
-[0:36:08] continuous variables so essentially this is like a ton H function which predicts
-[0:36:11] is like a ton H function which predicts a continuous spectrum between minus one
-[0:36:13] a continuous spectrum between minus one and one and just over time of a training
-[0:36:17] and one and just over time of a training we essentially start to enforce more and
-[0:36:18] we essentially start to enforce more and more that this becomes like a step
-[0:36:20] more that this becomes like a step function so essentially we decrease our
-[0:36:23] function so essentially we decrease our temperature which essentially makes the
-[0:36:25] temperature which essentially makes the ton H stronger and stronger until you
-[0:36:27] ton H stronger and stronger until you have this classical step function and
-[0:36:29] have this classical step function and essentially become discrete and that
-[0:36:33] essentially become discrete and that just helps because the ton age is nicely
-[0:36:35] just helps because the ton age is nicely differentiable so the model can easily
-[0:36:37] differentiable so the model can easily start learning in the beginning and over
-[0:36:40] start learning in the beginning and over time we can really try to enforce our
-[0:36:42] time we can really try to enforce our constraint of having this discrete step
-[0:36:47] constraint of having this discrete step function so if that all in place um we
-[0:36:50] function so if that all in place um we also tested it on various environments
-[0:36:52] also tested it on various environments to show basically where also this
-[0:36:54] to show basically where also this algorithm might be applicable and how
-[0:36:56] algorithm might be applicable and how well it might also scale to more complex
-[0:36:58] well it might also scale to more complex environments so essentially first
-[0:37:00] environments so essentially first consider a synthetic environment very
-[0:37:02] consider a synthetic environment very simple to essentially just validate our
-[0:37:05] simple to essentially just validate our assumption see basically what works and
-[0:37:08] assumption see basically what works and how it works comparatively to previous
-[0:37:10] how it works comparatively to previous works and then uh two more settings that
-[0:37:14] works and then uh two more settings that might be more fitting also in terms of
-[0:37:16] might be more fitting also in terms of realistic settings to our theoretic
-[0:37:19] realistic settings to our theoretic setting then me CA the world where you
-[0:37:21] setting then me CA the world where you have a tri finger which can for instance
-[0:37:23] have a tri finger which can for instance do random interactions with different
-[0:37:25] do random interactions with different objects in its Arena and in in an
-[0:37:28] objects in its Arena and in in an embodied AI setting which is the I4
-[0:37:32] embodied AI setting which is the I4 simulator where an agent can also
-[0:37:34] simulator where an agent can also perform different actions with different
-[0:37:36] perform different actions with different objects in an
-[0:37:37] objects in an environment so let's first start with in
-[0:37:40] environment so let's first start with in synthetic environment so essentially
-[0:37:42] synthetic environment so essentially here we just create random Cal graphs um
-[0:37:46] here we just create random Cal graphs um which we then with map in a nonlinear
-[0:37:49] which we then with map in a nonlinear fashion to an image and essentially try
-[0:37:52] fashion to an image and essentially try to then revert this process with
-[0:37:53] to then revert this process with different methods the many of them you
-[0:37:56] different methods the many of them you have already seen in Sarah talks so we
-[0:37:58] have already seen in Sarah talks so we compared it to IV leap and DMS from
-[0:38:02] compared it to IV leap and DMS from Sebastian um and in these settings for
-[0:38:05] Sebastian um and in these settings for instance of course we also checked that
-[0:38:08] instance of course we also checked that for instance our assumptions hold
-[0:38:10] for instance our assumptions hold because we also use here additive
-[0:38:12] because we also use here additive caution noise model so the more tricky
-[0:38:14] caution noise model so the more tricky theoretical setting in these parts but
-[0:38:17] theoretical setting in these parts but we still also Ure for instance
-[0:38:18] we still also Ure for instance sufficient interactions and we find that
-[0:38:21] sufficient interactions and we find that um as also our assumptions so our method
-[0:38:25] um as also our assumptions so our method performs very well so this R2 score here
-[0:38:27] performs very well so this R2 score here basically show how well you identify
-[0:38:29] basically show how well you identify these individual CA variables and we
-[0:38:32] these individual CA variables and we also find that like different number of
-[0:38:33] also find that like different number of CA variables or different number of
-[0:38:35] CA variables or different number of interactions so essentially this minimal
-[0:38:37] interactions so essentially this minimal interactions takes takes this log K into
-[0:38:40] interactions takes takes this log K into account and both in both cases we still
-[0:38:43] account and both in both cases we still able to identify the ca ofes quite well
-[0:38:47] able to identify the ca ofes quite well well then other for other methods some
-[0:38:49] well then other for other methods some assumptions might be actually broken
-[0:38:50] assumptions might be actually broken here such as um basically V score is of
-[0:38:54] here such as um basically V score is of course much harder now to identify these
-[0:38:56] course much harder now to identify these CA veres
+[0:31:33] what we will now look at so as a
+[0:31:35] reminder first of all essentially we
+[0:31:38] will try to also reimplement this Cal
+[0:31:40] model in our architecture essentially we
+[0:31:43] will have as inputs the observations
+[0:31:46] here as like XT our images and our agent
+[0:31:50] information basic action information and
+[0:31:53] what we will want to learn is a latent
+[0:31:55] space so essentially we want to encode
+[0:31:57] these images in to Laten space in which
+[0:32:00] we can then identify these different C
+[0:32:03] variables and again we will then try to
+[0:32:06] make use of these this idea of Bin
+[0:32:08] interaction variables to actually guide
+[0:32:10] this identification
+[0:32:14] process so we start very simple in terms
+[0:32:16] of having these for Simplicity here I
+[0:32:19] show two time steps so essentially a
+[0:32:22] Time step T minus one and T and we first
+[0:32:25] start with basically applying an encoder
+[0:32:27] so this could be any possible
+[0:32:29] architecture which basically reduces our
+[0:32:31] high dimensional state to a much lower
+[0:32:33] dimensional state for instance a single
+[0:32:36] Vector with something like 32 latent
+[0:32:37] Dimensions
+[0:32:38] possible on this we
+[0:32:41] essentially create a prior so this is
+[0:32:44] essentially a ve variational out encoder
+[0:32:47] which reduces our input to a small
+[0:32:49] Dimension and on this we Define a
+[0:32:51] distribution which we will then look at
+[0:32:54] uh soon basically this will be our key
+[0:32:56] part on actually making this
+[0:32:58] identification possible of course we
+[0:33:01] also need to make sure that this latent
+[0:33:03] code still contains all information of
+[0:33:06] our observations so we are not losing
+[0:33:08] any c vars and for that we do build a
+[0:33:11] decoder to also reconstruct so this
+[0:33:12] classical vae
+[0:33:15] objective and to integrate the action
+[0:33:17] essentially what we will have is that we
+[0:33:20] add the action and a previous time step
+[0:33:22] into a small MLP or also other
+[0:33:25] architectures as we would need to and we
+[0:33:28] want that this model or this small new
+[0:33:31] network will predict when binary
+[0:33:33] variables so these are these binary
+[0:33:34] interaction variables between the agent
+[0:33:37] and individual latent variables and as
+[0:33:40] these latent variables are supposed to
+[0:33:41] be identifying different cause variables
+[0:33:44] essentially we will also correspondingly
+[0:33:46] identify these interactions or
+[0:33:48] interventions on the individual
+[0:33:51] vers so in terms of like loss function
+[0:33:54] to do it again a bit more formally we
+[0:33:57] will have our encoder which is shown
+[0:33:59] here as a distribution or conditional
+[0:34:02] distribution of a latent Z given X our
+[0:34:05] observation we have our decoder which
+[0:34:07] essentially tce to inverted so Tes to
+[0:34:09] predict x given Z and we have here our
+[0:34:13] prior which essentially is now over time
+[0:34:15] so we try to predict the next time step
+[0:34:17] given the previous one and our actions
+[0:34:20] that our agent has
+[0:34:22] performed and this objective is
+[0:34:24] essentially the classical e objective of
+[0:34:26] having a reconstruction so the first
+[0:34:28] part essentially ensures that all
+[0:34:30] information is in the Laten spas in the
+[0:34:33] second part is the more interesting one
+[0:34:35] of the prior modeling so here we now try
+[0:34:37] to actually enforce that our model or
+[0:34:39] our latence follow a certain
+[0:34:42] distribution namely the prior
+[0:34:44] essentially which follows over time in
+[0:34:46] this prior distribution we can now
+[0:34:48] choose to follow exactly what we had in
+[0:34:50] our causal setup so essentially what we
+[0:34:53] want is that this distribution of our
+[0:34:56] latent factor wise
+[0:34:58] essentially for all of them so we can
+[0:35:00] just write it as a product over each
+[0:35:02] individual latent varable given the
+[0:35:05] previous time step and now essentially
+[0:35:08] function which takes us input the agent
+[0:35:12] uh information the previous time step
+[0:35:14] and essentially outputs a biner variable
+[0:35:16] so this is uh indeed this bin
+[0:35:19] interaction variable which we now try to
+[0:35:22] predict of course here also to noce when
+[0:35:25] this binary function is still
+[0:35:27] unsupervised so we still have to uh do
+[0:35:30] it unsupervised Without Really labels of
+[0:35:31] saying this is an intervention or not so
+[0:35:34] therefore we actually need to make an
+[0:35:36] objective that we can also take
+[0:35:38] gradients or end to end meaning that we
+[0:35:41] want to have it fully
+[0:35:43] differentiably and this is a bit more of
+[0:35:45] a tricky part to set it up in an
+[0:35:47] optimization setting since it's if you
+[0:35:50] just for instance predict a discrete
+[0:35:51] variable you will not be able to nicely
+[0:35:54] propagate gradients back so instead what
+[0:35:57] we found to work better is a continuous
+[0:35:59] relaxation so essentially instead of
+[0:36:01] predicting directly discrete variables
+[0:36:03] or Zer or one we instead predict
+[0:36:06] continuous variables so essentially this
+[0:36:08] is like a ton H function which predicts
+[0:36:11] a continuous spectrum between minus one
+[0:36:13] and one and just over time of a training
+[0:36:17] we essentially start to enforce more and
+[0:36:18] more that this becomes like a step
+[0:36:20] function so essentially we decrease our
+[0:36:23] temperature which essentially makes the
+[0:36:25] ton H stronger and stronger until you
+[0:36:27] have this classical step function and
+[0:36:29] essentially become discrete and that
+[0:36:33] just helps because the ton age is nicely
+[0:36:35] differentiable so the model can easily
+[0:36:37] start learning in the beginning and over
+[0:36:40] time we can really try to enforce our
+[0:36:42] constraint of having this discrete step
+[0:36:47] function so if that all in place um we
+[0:36:50] also tested it on various environments
+[0:36:52] to show basically where also this
+[0:36:54] algorithm might be applicable and how
+[0:36:56] well it might also scale to more complex
+[0:36:58] environments so essentially first
+[0:37:00] consider a synthetic environment very
+[0:37:02] simple to essentially just validate our
+[0:37:05] assumption see basically what works and
+[0:37:08] how it works comparatively to previous
+[0:37:10] works and then uh two more settings that
+[0:37:14] might be more fitting also in terms of
+[0:37:16] realistic settings to our theoretic
+[0:37:19] setting then me CA the world where you
+[0:37:21] have a tri finger which can for instance
+[0:37:23] do random interactions with different
+[0:37:25] objects in its Arena and in in an
+[0:37:28] embodied AI setting which is the I4
+[0:37:32] simulator where an agent can also
+[0:37:34] perform different actions with different
+[0:37:36] objects in an
+[0:37:37] environment so let's first start with in
+[0:37:40] synthetic environment so essentially
+[0:37:42] here we just create random Cal graphs um
+[0:37:46] which we then with map in a nonlinear
+[0:37:49] fashion to an image and essentially try
+[0:37:52] to then revert this process with
+[0:37:53] different methods the many of them you
+[0:37:56] have already seen in Sarah talks so we
+[0:37:58] compared it to IV leap and DMS from
+[0:38:02] Sebastian um and in these settings for
+[0:38:05] instance of course we also checked that
+[0:38:08] for instance our assumptions hold
+[0:38:10] because we also use here additive
+[0:38:12] caution noise model so the more tricky
+[0:38:14] theoretical setting in these parts but
+[0:38:17] we still also Ure for instance
+[0:38:18] sufficient interactions and we find that
+[0:38:21] um as also our assumptions so our method
+[0:38:25] performs very well so this R2 score here
+[0:38:27] basically show how well you identify
+[0:38:29] these individual CA variables and we
+[0:38:32] also find that like different number of
+[0:38:33] CA variables or different number of
+[0:38:35] interactions so essentially this minimal
+[0:38:37] interactions takes takes this log K into
+[0:38:40] account and both in both cases we still
+[0:38:43] able to identify the ca ofes quite well
+[0:38:47] well then other for other methods some
+[0:38:49] assumptions might be actually broken
+[0:38:50] here such as um basically V score is of
+[0:38:54] course much harder now to identify these
 [0:38:59] CA veres and but of course a bit more interesting
-[0:39:01] and but of course a bit more interesting is now if you would try to apply it to a
-[0:39:03] is now if you would try to apply it to a bit more realistic setting in like
-[0:39:05] bit more realistic setting in like reinforcement learning so we took here
-[0:39:08] reinforcement learning so we took here this environment which has a try finger
-[0:39:10] this environment which has a try finger so essentially where agent can control
-[0:39:12] so essentially where agent can control each of these fingers individually by uh
-[0:39:15] each of these fingers individually by uh setting a certain torque on all of these
-[0:39:17] setting a certain torque on all of these motors and essentially accelerate the
-[0:39:19] motors and essentially accelerate the fingers around um but we use a random
-[0:39:22] fingers around um but we use a random policy so essentially you can see here
-[0:39:24] policy so essentially you can see here the fingers are just doing random things
-[0:39:26] the fingers are just doing random things around um and the action information
-[0:39:29] around um and the action information that we give our model is essentially
-[0:39:31] that we give our model is essentially these nine dimensional motor angle
-[0:39:33] these nine dimensional motor angle information that the agent basally tries
-[0:39:35] information that the agent basally tries to do as an
-[0:39:37] to do as an action um and then from these
-[0:39:40] action um and then from these observations here on the right we
-[0:39:42] observations here on the right we essentially see that um if we plug it
-[0:39:44] essentially see that um if we plug it into our um setup that biscuit is still
-[0:39:48] into our um setup that biscuit is still able to identify these Cod vares quite
-[0:39:50] able to identify these Cod vares quite accurately um so essentially we are able
-[0:39:53] accurately um so essentially we are able to disentangle for instance the object
-[0:39:55] to disentangle for instance the object as the cube uh the background the
-[0:39:58] as the cube uh the background the different colors of the fingers and so
-[0:40:00] different colors of the fingers and so on so essentially that is just also a
-[0:40:03] on so essentially that is just also a proof of concept that as you scale up
-[0:40:05] proof of concept that as you scale up for instance the observation function it
-[0:40:07] for instance the observation function it still works actually quite
-[0:40:09] still works actually quite well another interesting thing in such
-[0:40:12] well another interesting thing in such environments is also know that we can
-[0:40:14] environments is also know that we can Val validate actually what interaction
-[0:40:16] Val validate actually what interaction variables have we learned because we
-[0:40:17] variables have we learned because we explicitly learn these inter
-[0:40:19] explicitly learn these inter interactions or intervention settings
-[0:40:22] interactions or intervention settings and of course in the simulators because
-[0:40:24] and of course in the simulators because that's also a simulat environment we can
-[0:40:27] that's also a simulat environment we can uh observe or will record the ground to
-[0:40:30] uh observe or will record the ground to interactions and if we compare that we
-[0:40:33] interactions and if we compare that we actually find that we have a very
-[0:40:35] actually find that we have a very accurate correlation between essentially
-[0:40:37] accurate correlation between essentially what we identify as an action versus
-[0:40:40] what we identify as an action versus what our model predicted um and
-[0:40:43] what our model predicted um and essentially where this a bit less
-[0:40:45] essentially where this a bit less accurate is in the specific finger to
-[0:40:47] accurate is in the specific finger to cube interactions so you can imagine
-[0:40:50] cube interactions so you can imagine that essentially it's actually quite
-[0:40:52] that essentially it's actually quite difficult from an image to say for 100%
-[0:40:55] difficult from an image to say for 100% whether the finger will hit with this
-[0:40:57] whether the finger will hit with this specific in the the cube in the next
-[0:40:59] specific in the the cube in the next time frame or not so that's why we
-[0:41:01] time frame or not so that's why we actually found that model is bit more
-[0:41:03] actually found that model is bit more uncertain there but then other
-[0:41:04] uncertain there but then other interactions which are more static
-[0:41:06] interactions which are more static rather than easier to
-[0:41:09] rather than easier to identify and the final setting that I
-[0:41:11] identify and the final setting that I wanted to highlight is essentially this
-[0:41:12] wanted to highlight is essentially this embodied AI environment so there are
-[0:41:15] embodied AI environment so there are basically various different CA varable
-[0:41:18] basically various different CA varable or also objects around so we for
-[0:41:21] or also objects around so we for instance here have 10 different C vares
-[0:41:23] instance here have 10 different C vares of like toaster can being turned on or
-[0:41:26] of like toaster can being turned on or off or for instance where position
-[0:41:27] off or for instance where position whether it's cooked and so on and the
-[0:41:29] whether it's cooked and so on and the actions here are simply represented by
-[0:41:32] actions here are simply represented by the XY coordinates of an agent clicking
-[0:41:35] the XY coordinates of an agent clicking so all we get to just like for instance
-[0:41:37] so all we get to just like for instance action on Pixel 510 from which we would
-[0:41:40] action on Pixel 510 from which we would have to then infer that actually this
-[0:41:42] have to then infer that actually this corresponds to for inst the cabinet and
-[0:41:44] corresponds to for inst the cabinet and this corresponds to opening the cabinet
-[0:41:45] this corresponds to opening the cabinet and so and again like in in these
-[0:41:48] and so and again like in in these numbers we find that it actually works
-[0:41:50] numbers we find that it actually works quite well but what is then also more
-[0:41:52] quite well but what is then also more interesting is if you start to for
-[0:41:54] interesting is if you start to for instance now visualize these different
-[0:41:55] instance now visualize these different interaction variables you actually find
-[0:41:57] interaction variables you actually find that we quite accurately segment these
-[0:41:59] that we quite accurately segment these different objects so you can also use it
-[0:42:01] different objects so you can also use it now for different task for instance to
-[0:42:03] now for different task for instance to know if I would now want to open the
-[0:42:05] know if I would now want to open the microwave what action would I for
-[0:42:07] microwave what action would I for instance have to do and
-[0:42:10] instance have to do and so um and as a last one um to also for
-[0:42:13] so um and as a last one um to also for instance per to validate what can we do
-[0:42:15] instance per to validate what can we do with these caal um variables is
-[0:42:18] with these caal um variables is essentially that we can now try to
-[0:42:21] essentially that we can now try to generate um new compositions of CA vares
-[0:42:24] generate um new compositions of CA vares so for instance if you have given an
-[0:42:25] so for instance if you have given an input image one and you find say okay
-[0:42:28] input image one and you find say okay what would this image look like if we
-[0:42:30] what would this image look like if we set the cabinet to open if we turn on
-[0:42:32] set the cabinet to open if we turn on the microwave we we could take another
-[0:42:35] the microwave we we could take another image where these two CES have a
-[0:42:37] image where these two CES have a specific value encode them into a latent
-[0:42:40] specific value encode them into a latent space and since we identifi b c veres
-[0:42:44] space and since we identifi b c veres just choose the corresponding latent
-[0:42:46] just choose the corresponding latent dimensions of these two two images so
-[0:42:48] dimensions of these two two images so essentially take the cabinet and the
-[0:42:51] essentially take the cabinet and the microwave from image two added to our
-[0:42:53] microwave from image two added to our image one and decode and then you
-[0:42:56] image one and decode and then you essentially see that we actually able to
-[0:42:58] essentially see that we actually able to manipulate now these images while
-[0:43:00] manipulate now these images while keeping all of our CES fixed so for
-[0:43:03] keeping all of our CES fixed so for instance here if we have image one and
-[0:43:05] instance here if we have image one and we want to open the microwave we can
-[0:43:07] we want to open the microwave we can encode image two where all of the other
-[0:43:09] encode image two where all of the other cors veres differ and just changing that
-[0:43:11] cors veres differ and just changing that lat varable gives you actually now an
-[0:43:13] lat varable gives you actually now an output where just the micro have changed
-[0:43:16] output where just the micro have changed and we can also actually generate Now
-[0:43:18] and we can also actually generate Now settings which are not um done before in
-[0:43:22] settings which are not um done before in our training data set in the simulator
-[0:43:24] our training data set in the simulator so for instance here we usually have
-[0:43:26] so for instance here we usually have observed that as soon as the egg is in
-[0:43:28] observed that as soon as the egg is in the pan and return on the stove it
-[0:43:30] the pan and return on the stove it directly gets cooked but since in this
-[0:43:33] directly gets cooked but since in this compositional generation we basically
-[0:43:34] compositional generation we basically fix all cause avbl besides the ones that
-[0:43:37] fix all cause avbl besides the ones that we take from another image we can for
-[0:43:40] we take from another image we can for instance Force the uh blat R station to
-[0:43:43] instance Force the uh blat R station to say that the egg is uncooked but we can
-[0:43:46] say that the egg is uncooked but we can turn on the stove so since we do not
-[0:43:48] turn on the stove so since we do not propagate here the causal relation so we
-[0:43:50] propagate here the causal relation so we essentially intervene on everything like
-[0:43:53] essentially intervene on everything like the graph is Bally empty we can still
-[0:43:55] the graph is Bally empty we can still decode uh the new setting and see that
-[0:43:58] decode uh the new setting and see that we actually generalize also the decoder
-[0:43:59] we actually generalize also the decoder generalizes actually to that setting
-[0:44:02] generalizes actually to that setting while we haven't seen a tool in the
-[0:44:03] while we haven't seen a tool in the training data set so this might be also
-[0:44:05] training data set so this might be also helpful to now imagine for instance new
-[0:44:07] helpful to now imagine for instance new setups that you haven't seen during the
-[0:44:10] setups that you haven't seen during the train and also if you want to test it
-[0:44:12] train and also if you want to test it out but we also build a bit of a demo to
-[0:44:15] out but we also build a bit of a demo to also play around or to get more insights
-[0:44:17] also play around or to get more insights of what might be going well with a model
-[0:44:19] of what might be going well with a model and where it starts to actually break
-[0:44:22] and where it starts to actually break down so with that uh let me just
-[0:44:25] down so with that uh let me just conclude essentially with me of biscuit
-[0:44:28] conclude essentially with me of biscuit we have used to identify cause avable in
-[0:44:31] we have used to identify cause avable in such interactive environments where you
-[0:44:33] such interactive environments where you have an agent and the key assumption we
-[0:44:35] have an agent and the key assumption we took here is essentially that the
-[0:44:37] took here is essentially that the interaction between the agents and the
-[0:44:39] interaction between the agents and the cause of vers it's nothing else than
-[0:44:41] cause of vers it's nothing else than switching a mechanism from observation
-[0:44:43] switching a mechanism from observation to Interventional so meaning that we
-[0:44:45] to Interventional so meaning that we have here a binary uh varable
-[0:44:47] have here a binary uh varable essentially and we found that it's quite
-[0:44:49] essentially and we found that it's quite applicable to various environments that
-[0:44:51] applicable to various environments that could be robotics embodied AI or
-[0:44:53] could be robotics embodied AI or reinforcement learning and we could also
-[0:44:55] reinforcement learning and we could also use when such algorithms to identify
-[0:44:58] use when such algorithms to identify which actions actually to per perform
-[0:45:00] which actions actually to per perform certain interventions down there with
-[0:45:03] certain interventions down there with that let me also thank uh our
-[0:45:06] that let me also thank uh our collaborators um with which we wrote
-[0:45:08] collaborators um with which we wrote this paper and also finish then on some
-[0:45:11] this paper and also finish then on some references thank
+[0:39:01] is now if you would try to apply it to a
+[0:39:03] bit more realistic setting in like
+[0:39:05] reinforcement learning so we took here
+[0:39:08] this environment which has a try finger
+[0:39:10] so essentially where agent can control
+[0:39:12] each of these fingers individually by uh
+[0:39:15] setting a certain torque on all of these
+[0:39:17] motors and essentially accelerate the
+[0:39:19] fingers around um but we use a random
+[0:39:22] policy so essentially you can see here
+[0:39:24] the fingers are just doing random things
+[0:39:26] around um and the action information
+[0:39:29] that we give our model is essentially
+[0:39:31] these nine dimensional motor angle
+[0:39:33] information that the agent basally tries
+[0:39:35] to do as an
+[0:39:37] action um and then from these
+[0:39:40] observations here on the right we
+[0:39:42] essentially see that um if we plug it
+[0:39:44] into our um setup that biscuit is still
+[0:39:48] able to identify these Cod vares quite
+[0:39:50] accurately um so essentially we are able
+[0:39:53] to disentangle for instance the object
+[0:39:55] as the cube uh the background the
+[0:39:58] different colors of the fingers and so
+[0:40:00] on so essentially that is just also a
+[0:40:03] proof of concept that as you scale up
+[0:40:05] for instance the observation function it
+[0:40:07] still works actually quite
+[0:40:09] well another interesting thing in such
+[0:40:12] environments is also know that we can
+[0:40:14] Val validate actually what interaction
+[0:40:16] variables have we learned because we
+[0:40:17] explicitly learn these inter
+[0:40:19] interactions or intervention settings
+[0:40:22] and of course in the simulators because
+[0:40:24] that's also a simulat environment we can
+[0:40:27] uh observe or will record the ground to
+[0:40:30] interactions and if we compare that we
+[0:40:33] actually find that we have a very
+[0:40:35] accurate correlation between essentially
+[0:40:37] what we identify as an action versus
+[0:40:40] what our model predicted um and
+[0:40:43] essentially where this a bit less
+[0:40:45] accurate is in the specific finger to
+[0:40:47] cube interactions so you can imagine
+[0:40:50] that essentially it's actually quite
+[0:40:52] difficult from an image to say for 100%
+[0:40:55] whether the finger will hit with this
+[0:40:57] specific in the the cube in the next
+[0:40:59] time frame or not so that's why we
+[0:41:01] actually found that model is bit more
+[0:41:03] uncertain there but then other
+[0:41:04] interactions which are more static
+[0:41:06] rather than easier to
+[0:41:09] identify and the final setting that I
+[0:41:11] wanted to highlight is essentially this
+[0:41:12] embodied AI environment so there are
+[0:41:15] basically various different CA varable
+[0:41:18] or also objects around so we for
+[0:41:21] instance here have 10 different C vares
+[0:41:23] of like toaster can being turned on or
+[0:41:26] off or for instance where position
+[0:41:27] whether it's cooked and so on and the
+[0:41:29] actions here are simply represented by
+[0:41:32] the XY coordinates of an agent clicking
+[0:41:35] so all we get to just like for instance
+[0:41:37] action on Pixel 510 from which we would
+[0:41:40] have to then infer that actually this
+[0:41:42] corresponds to for inst the cabinet and
+[0:41:44] this corresponds to opening the cabinet
+[0:41:45] and so and again like in in these
+[0:41:48] numbers we find that it actually works
+[0:41:50] quite well but what is then also more
+[0:41:52] interesting is if you start to for
+[0:41:54] instance now visualize these different
+[0:41:55] interaction variables you actually find
+[0:41:57] that we quite accurately segment these
+[0:41:59] different objects so you can also use it
+[0:42:01] now for different task for instance to
+[0:42:03] know if I would now want to open the
+[0:42:05] microwave what action would I for
+[0:42:07] instance have to do and
+[0:42:10] so um and as a last one um to also for
+[0:42:13] instance per to validate what can we do
+[0:42:15] with these caal um variables is
+[0:42:18] essentially that we can now try to
+[0:42:21] generate um new compositions of CA vares
+[0:42:24] so for instance if you have given an
+[0:42:25] input image one and you find say okay
+[0:42:28] what would this image look like if we
+[0:42:30] set the cabinet to open if we turn on
+[0:42:32] the microwave we we could take another
+[0:42:35] image where these two CES have a
+[0:42:37] specific value encode them into a latent
+[0:42:40] space and since we identifi b c veres
+[0:42:44] just choose the corresponding latent
+[0:42:46] dimensions of these two two images so
+[0:42:48] essentially take the cabinet and the
+[0:42:51] microwave from image two added to our
+[0:42:53] image one and decode and then you
+[0:42:56] essentially see that we actually able to
+[0:42:58] manipulate now these images while
+[0:43:00] keeping all of our CES fixed so for
+[0:43:03] instance here if we have image one and
+[0:43:05] we want to open the microwave we can
+[0:43:07] encode image two where all of the other
+[0:43:09] cors veres differ and just changing that
+[0:43:11] lat varable gives you actually now an
+[0:43:13] output where just the micro have changed
+[0:43:16] and we can also actually generate Now
+[0:43:18] settings which are not um done before in
+[0:43:22] our training data set in the simulator
+[0:43:24] so for instance here we usually have
+[0:43:26] observed that as soon as the egg is in
+[0:43:28] the pan and return on the stove it
+[0:43:30] directly gets cooked but since in this
+[0:43:33] compositional generation we basically
+[0:43:34] fix all cause avbl besides the ones that
+[0:43:37] we take from another image we can for
+[0:43:40] instance Force the uh blat R station to
+[0:43:43] say that the egg is uncooked but we can
+[0:43:46] turn on the stove so since we do not
+[0:43:48] propagate here the causal relation so we
+[0:43:50] essentially intervene on everything like
+[0:43:53] the graph is Bally empty we can still
+[0:43:55] decode uh the new setting and see that
+[0:43:58] we actually generalize also the decoder
+[0:43:59] generalizes actually to that setting
+[0:44:02] while we haven't seen a tool in the
+[0:44:03] training data set so this might be also
+[0:44:05] helpful to now imagine for instance new
+[0:44:07] setups that you haven't seen during the
+[0:44:10] train and also if you want to test it
+[0:44:12] out but we also build a bit of a demo to
+[0:44:15] also play around or to get more insights
+[0:44:17] of what might be going well with a model
+[0:44:19] and where it starts to actually break
+[0:44:22] down so with that uh let me just
+[0:44:25] conclude essentially with me of biscuit
+[0:44:28] we have used to identify cause avable in
+[0:44:31] such interactive environments where you
+[0:44:33] have an agent and the key assumption we
+[0:44:35] took here is essentially that the
+[0:44:37] interaction between the agents and the
+[0:44:39] cause of vers it's nothing else than
+[0:44:41] switching a mechanism from observation
+[0:44:43] to Interventional so meaning that we
+[0:44:45] have here a binary uh varable
+[0:44:47] essentially and we found that it's quite
+[0:44:49] applicable to various environments that
+[0:44:51] could be robotics embodied AI or
+[0:44:53] reinforcement learning and we could also
+[0:44:55] use when such algorithms to identify
+[0:44:58] which actions actually to per perform
+[0:45:00] certain interventions down there with
+[0:45:03] that let me also thank uh our
+[0:45:06] collaborators um with which we wrote
+[0:45:08] this paper and also finish then on some
+[0:45:11] references thank
 [0:45:21] you thanks so much Phillip um okay great so there were a few questions in the
-[0:45:23] so there were a few questions in the Q&amp;A and you and Sarah answered all of
-[0:45:26] Q&amp;A and you and Sarah answered all of them we don't have any open questions
-[0:45:28] them we don't have any open questions for now so maybe we should switch to the
-[0:45:30] for now so maybe we should switch to the discussion um and then you will have a
-[0:45:33] discussion um and then you will have a chance to discuss with Sebastian and
-[0:45:35] chance to discuss with Sebastian and maybe some other questions if they come
-[0:45:36] maybe some other questions if they come up if you still have questions please
-[0:45:38] up if you still have questions please feel free to ask them in the Q&amp;A and
-[0:45:40] feel free to ask them in the Q&amp;A and yeah feel free to go
+[0:45:23] Q&A and you and Sarah answered all of
+[0:45:26] them we don't have any open questions
+[0:45:28] for now so maybe we should switch to the
+[0:45:30] discussion um and then you will have a
+[0:45:33] chance to discuss with Sebastian and
+[0:45:35] maybe some other questions if they come
+[0:45:36] up if you still have questions please
+[0:45:38] feel free to ask them in the Q&A and
+[0:45:40] yeah feel free to go
 [0:45:48] ahead right um yeah thank you for the presentation SAR and philli um so my
-[0:45:51] presentation SAR and philli um so my name is Sebastian a Chappelle I will be
-[0:45:53] name is Sebastian a Chappelle I will be the discussant for this for this session
-[0:45:56] the discussant for this for this session um so I prepared the three questions we
-[0:46:00] um so I prepared the three questions we can cover all of them or not it's really
-[0:46:03] can cover all of them or not it's really up to you just pick and choose um also I
-[0:46:06] up to you just pick and choose um also I should say I have a cold right now so
-[0:46:09] should say I have a cold right now so excuse me in advance if I have to
-[0:46:11] excuse me in advance if I have to sneeze but um yeah okay so the first
-[0:46:15] sneeze but um yeah okay so the first question is um the following so
-[0:46:18] question is um the following so basically um I think it's clear right
-[0:46:20] basically um I think it's clear right now that uh learning this entangle
-[0:46:23] now that uh learning this entangle representation is uh like a good thing
-[0:46:26] representation is uh like a good thing from an interpretability point point of
-[0:46:27] from an interpretability point point of view right so I think you showed it
-[0:46:29] view right so I think you showed it nicely with your with with with your
-[0:46:32] nicely with your with with with your application to sort of robotic and and
-[0:46:35] application to sort of robotic and and like the the tri the tri finger um data
-[0:46:38] like the the tri the tri finger um data set you can really have like a nice view
-[0:46:41] set you can really have like a nice view of like what these different latent
-[0:46:43] of like what these different latent variables um mean basically I think an
-[0:46:47] variables um mean basically I think an interesting question for for future work
-[0:46:50] interesting question for for future work is to um see if this integr or Cal
-[0:46:54] is to um see if this integr or Cal representation learning can have some
-[0:46:55] representation learning can have some Advantage uh for Downstream performance
-[0:46:58] Advantage uh for Downstream performance so for instance in reinforcement
-[0:46:59] so for instance in reinforcement learning so for instance do you have
-[0:47:02] learning so for instance do you have like some ideas of how these kinds of
-[0:47:04] like some ideas of how these kinds of ideas could be beneficial really in
-[0:47:06] ideas could be beneficial really in terms of performance maybe in planning
-[0:47:08] terms of performance maybe in planning maybe to learn faster with sparse reward
-[0:47:12] maybe to learn faster with sparse reward I don't know so this is something that
-[0:47:13] I don't know so this is something that I'm currently thinking about so I'd like
-[0:47:15] I'm currently thinking about so I'd like to have maybe your thoughts on
-[0:47:17] to have maybe your thoughts on that um maybe I can just like review the
-[0:47:21] that um maybe I can just like review the questions and you can answer after as as
-[0:47:24] questions and you can answer after as as you prefer um so yeah I think
-[0:47:28] you prefer um so yeah I think another uh point is that uh so in the
-[0:47:32] another uh point is that uh so in the last years I think we sort of like the
-[0:47:34] last years I think we sort of like the community in caal representation
-[0:47:36] community in caal representation learning sort of con convince ourselves
-[0:47:38] learning sort of con convince ourselves that we convince ourselves that like
-[0:47:40] that we convince ourselves that like learning these caal representation is is
-[0:47:42] learning these caal representation is is possible right we have like thetical
-[0:47:44] possible right we have like thetical result now that shows this is this is
-[0:47:46] result now that shows this is this is possible I think a few years ago it was
-[0:47:48] possible I think a few years ago it was was not even clear that this was like
-[0:47:52] was not even clear that this was like something possible in theory uh I think
-[0:47:55] something possible in theory uh I think an important direction is to sort of
-[0:47:57] an important direction is to sort of move move these these theortical result
-[0:47:59] move move these these theortical result to to applied settings and I think
-[0:48:02] to to applied settings and I think that's what biscuit is is doing so I
-[0:48:04] that's what biscuit is is doing so I think it's very very nice work um and
-[0:48:06] think it's very very nice work um and you know I I'm just wondering like do
-[0:48:08] you know I I'm just wondering like do you have like you know um useful
-[0:48:11] you have like you know um useful engineering tricks that you'd like to to
-[0:48:13] engineering tricks that you'd like to to share with us or maybe discuss uh you
-[0:48:16] share with us or maybe discuss uh you know some kind of mismatch between the
-[0:48:18] know some kind of mismatch between the theory that we have and the data that uh
-[0:48:20] theory that we have and the data that uh we we we should apply these methods on
-[0:48:23] we we we should apply these methods on uh so again this is a bit open you can
-[0:48:25] uh so again this is a bit open you can can pick and choose um and and yeah also
-[0:48:28] can pick and choose um and and yeah also the last question is more next step
-[0:48:31] the last question is more next step right so uh so so so so what is missing
-[0:48:35] right so uh so so so so what is missing to to bring these these approaches to uh
-[0:48:38] to to bring these these approaches to uh to more ambitious uh applications like
-[0:48:40] to more ambitious uh applications like in autonomous driving for instance is it
-[0:48:42] in autonomous driving for instance is it a matter of having more realistic Theory
-[0:48:45] a matter of having more realistic Theory uh is it a matter of you know having
-[0:48:47] uh is it a matter of you know having more engineering work Engineers working
-[0:48:50] more engineering work Engineers working on this um on this project on on this
-[0:48:54] on this um on this project on on this direction uh so so yeah I'll just leave
-[0:48:57] direction uh so so yeah I'll just leave there and up to you to like choose
-[0:48:59] there and up to you to like choose something in
-[0:49:02] something in there thanks so much SE there very
-[0:49:05] there thanks so much SE there very really great questions um let me maybe
-[0:49:07] really great questions um let me maybe try to just go from top to bottom and so
-[0:49:11] try to just go from top to bottom and so feel free to also chime in here um so in
-[0:49:14] feel free to also chime in here um so in terms of Downstream performance uh one
-[0:49:16] terms of Downstream performance uh one thing that I also really see is that
-[0:49:18] thing that I also really see is that since you have these C varable separated
-[0:49:20] since you have these C varable separated once if you now have a certain task
-[0:49:22] once if you now have a certain task which has also F the reward you can
-[0:49:24] which has also F the reward you can first of all find the of that relate to
-[0:49:27] first of all find the of that relate to your certain rewards so for instance in
-[0:49:30] your certain rewards so for instance in the kitchen environment if you're
-[0:49:31] the kitchen environment if you're interested in cooking the egg you might
-[0:49:33] interested in cooking the egg you might not be interested in now opening the
-[0:49:35] not be interested in now opening the cabinet 10 times because you know it
-[0:49:37] cabinet 10 times because you know it will have no impact actually on the
-[0:49:39] will have no impact actually on the other course vares and your uh reward in
-[0:49:43] other course vares and your uh reward in the end so this can be used for for on
-[0:49:45] the end so this can be used for for on one hand to reduce basically your search
-[0:49:47] one hand to reduce basically your search space but on the other hand also
-[0:49:49] space but on the other hand also hopefully to be a bit more robust so now
-[0:49:51] hopefully to be a bit more robust so now if for instance some mechanisms change
-[0:49:53] if for instance some mechanisms change that actually have nothing to do with
-[0:49:55] that actually have nothing to do with your specific t ask then you might also
-[0:49:58] your specific t ask then you might also actually can ignore it because in the
-[0:50:00] actually can ignore it because in the end basically you know that this doesn't
-[0:50:03] end basically you know that this doesn't really impact your case at least in a
-[0:50:05] really impact your case at least in a caal
+[0:45:51] name is Sebastian a Chappelle I will be
+[0:45:53] the discussant for this for this session
+[0:45:56] um so I prepared the three questions we
+[0:46:00] can cover all of them or not it's really
+[0:46:03] up to you just pick and choose um also I
+[0:46:06] should say I have a cold right now so
+[0:46:09] excuse me in advance if I have to
+[0:46:11] sneeze but um yeah okay so the first
+[0:46:15] question is um the following so
+[0:46:18] basically um I think it's clear right
+[0:46:20] now that uh learning this entangle
+[0:46:23] representation is uh like a good thing
+[0:46:26] from an interpretability point point of
+[0:46:27] view right so I think you showed it
+[0:46:29] nicely with your with with with your
+[0:46:32] application to sort of robotic and and
+[0:46:35] like the the tri the tri finger um data
+[0:46:38] set you can really have like a nice view
+[0:46:41] of like what these different latent
+[0:46:43] variables um mean basically I think an
+[0:46:47] interesting question for for future work
+[0:46:50] is to um see if this integr or Cal
+[0:46:54] representation learning can have some
+[0:46:55] Advantage uh for Downstream performance
+[0:46:58] so for instance in reinforcement
+[0:46:59] learning so for instance do you have
+[0:47:02] like some ideas of how these kinds of
+[0:47:04] ideas could be beneficial really in
+[0:47:06] terms of performance maybe in planning
+[0:47:08] maybe to learn faster with sparse reward
+[0:47:12] I don't know so this is something that
+[0:47:13] I'm currently thinking about so I'd like
+[0:47:15] to have maybe your thoughts on
+[0:47:17] that um maybe I can just like review the
+[0:47:21] questions and you can answer after as as
+[0:47:24] you prefer um so yeah I think
+[0:47:28] another uh point is that uh so in the
+[0:47:32] last years I think we sort of like the
+[0:47:34] community in caal representation
+[0:47:36] learning sort of con convince ourselves
+[0:47:38] that we convince ourselves that like
+[0:47:40] learning these caal representation is is
+[0:47:42] possible right we have like thetical
+[0:47:44] result now that shows this is this is
+[0:47:46] possible I think a few years ago it was
+[0:47:48] was not even clear that this was like
+[0:47:52] something possible in theory uh I think
+[0:47:55] an important direction is to sort of
+[0:47:57] move move these these theortical result
+[0:47:59] to to applied settings and I think
+[0:48:02] that's what biscuit is is doing so I
+[0:48:04] think it's very very nice work um and
+[0:48:06] you know I I'm just wondering like do
+[0:48:08] you have like you know um useful
+[0:48:11] engineering tricks that you'd like to to
+[0:48:13] share with us or maybe discuss uh you
+[0:48:16] know some kind of mismatch between the
+[0:48:18] theory that we have and the data that uh
+[0:48:20] we we we should apply these methods on
+[0:48:23] uh so again this is a bit open you can
+[0:48:25] can pick and choose um and and yeah also
+[0:48:28] the last question is more next step
+[0:48:31] right so uh so so so so what is missing
+[0:48:35] to to bring these these approaches to uh
+[0:48:38] to more ambitious uh applications like
+[0:48:40] in autonomous driving for instance is it
+[0:48:42] a matter of having more realistic Theory
+[0:48:45] uh is it a matter of you know having
+[0:48:47] more engineering work Engineers working
+[0:48:50] on this um on this project on on this
+[0:48:54] direction uh so so yeah I'll just leave
+[0:48:57] there and up to you to like choose
+[0:48:59] something in
+[0:49:02] there thanks so much SE there very
+[0:49:05] really great questions um let me maybe
+[0:49:07] try to just go from top to bottom and so
+[0:49:11] feel free to also chime in here um so in
+[0:49:14] terms of Downstream performance uh one
+[0:49:16] thing that I also really see is that
+[0:49:18] since you have these C varable separated
+[0:49:20] once if you now have a certain task
+[0:49:22] which has also F the reward you can
+[0:49:24] first of all find the of that relate to
+[0:49:27] your certain rewards so for instance in
+[0:49:30] the kitchen environment if you're
+[0:49:31] interested in cooking the egg you might
+[0:49:33] not be interested in now opening the
+[0:49:35] cabinet 10 times because you know it
+[0:49:37] will have no impact actually on the
+[0:49:39] other course vares and your uh reward in
+[0:49:43] the end so this can be used for for on
+[0:49:45] one hand to reduce basically your search
+[0:49:47] space but on the other hand also
+[0:49:49] hopefully to be a bit more robust so now
+[0:49:51] if for instance some mechanisms change
+[0:49:53] that actually have nothing to do with
+[0:49:55] your specific t ask then you might also
+[0:49:58] actually can ignore it because in the
+[0:50:00] end basically you know that this doesn't
+[0:50:03] really impact your case at least in a
 [0:50:06] caal sense um in terms of realistic
-[0:50:10] sense um in terms of realistic applications so it we indeed often find
-[0:50:14] applications so it we indeed often find that the theory and the data sets or the
-[0:50:17] that the theory and the data sets or the environments we consider there's always
-[0:50:19] environments we consider there's always some mismatch so for instance this in B
-[0:50:22] some mismatch so for instance this in B setting also in the tri finger we had
-[0:50:24] setting also in the tri finger we had that some interactions are actually
-[0:50:26] that some interactions are actually deterministic so for instance if you hit
-[0:50:29] deterministic so for instance if you hit a cube in a certain velocity from a
-[0:50:31] a cube in a certain velocity from a direction it is quite accurately going
-[0:50:34] direction it is quite accurately going exactly in that direction and might not
-[0:50:35] exactly in that direction and might not be suddenly teleporting to anywhere else
-[0:50:38] be suddenly teleporting to anywhere else um in that case some assumptions are
-[0:50:41] um in that case some assumptions are always broken but we find that often
-[0:50:44] always broken but we find that often like as long as you don't start to break
-[0:50:46] like as long as you don't start to break actually like 20 assumptions um as long
-[0:50:49] actually like 20 assumptions um as long as you can actually say it's
-[0:50:50] as you can actually say it's approximately still valid we often find
-[0:50:53] approximately still valid we often find that these methods still generalize to
-[0:50:54] that these methods still generalize to the setting um and in terms of
-[0:50:57] the setting um and in terms of engineering tricks so one thing that we
-[0:51:00] engineering tricks so one thing that we just saw also across other methods is
-[0:51:03] just saw also across other methods is that you really need to make sure that
-[0:51:04] that you really need to make sure that your whole model is nicely
-[0:51:06] your whole model is nicely differentiable so we often have some
-[0:51:09] differentiable so we often have some discreetness in our settings so whether
-[0:51:11] discreetness in our settings so whether we learn a graph whether we have to
-[0:51:13] we learn a graph whether we have to learn our binary interaction variables
-[0:51:15] learn our binary interaction variables as we had um so when we try to
-[0:51:18] as we had um so when we try to essentially just learn them as discrete
-[0:51:20] essentially just learn them as discrete variables the model essentially failed
-[0:51:22] variables the model essentially failed very quickly so the model runs into
-[0:51:24] very quickly so the model runs into local Minima and it's basically stuck
-[0:51:26] local Minima and it's basically stuck there
+[0:50:10] applications so it we indeed often find
+[0:50:14] that the theory and the data sets or the
+[0:50:17] environments we consider there's always
+[0:50:19] some mismatch so for instance this in B
+[0:50:22] setting also in the tri finger we had
+[0:50:24] that some interactions are actually
+[0:50:26] deterministic so for instance if you hit
+[0:50:29] a cube in a certain velocity from a
+[0:50:31] direction it is quite accurately going
+[0:50:34] exactly in that direction and might not
+[0:50:35] be suddenly teleporting to anywhere else
+[0:50:38] um in that case some assumptions are
+[0:50:41] always broken but we find that often
+[0:50:44] like as long as you don't start to break
+[0:50:46] actually like 20 assumptions um as long
+[0:50:49] as you can actually say it's
+[0:50:50] approximately still valid we often find
+[0:50:53] that these methods still generalize to
+[0:50:54] the setting um and in terms of
+[0:50:57] engineering tricks so one thing that we
+[0:51:00] just saw also across other methods is
+[0:51:03] that you really need to make sure that
+[0:51:04] your whole model is nicely
+[0:51:06] differentiable so we often have some
+[0:51:09] discreetness in our settings so whether
+[0:51:11] we learn a graph whether we have to
+[0:51:13] learn our binary interaction variables
+[0:51:15] as we had um so when we try to
+[0:51:18] essentially just learn them as discrete
+[0:51:20] variables the model essentially failed
+[0:51:22] very quickly so the model runs into
+[0:51:24] local Minima and it's basically stuck
 [0:51:27] there but if you try to actually use these um
-[0:51:30] but if you try to actually use these um a bit more continuous relations the
-[0:51:32] a bit more continuous relations the model optimal is much smoother so in in
-[0:51:36] model optimal is much smoother so in in that sense there will be also a bit more
-[0:51:38] that sense there will be also a bit more engineering needed so essentially a bit
-[0:51:40] engineering needed so essentially a bit more Synergy between Theory essentially
-[0:51:43] more Synergy between Theory essentially setups that we can also prove where we
-[0:51:46] setups that we can also prove where we can actually find Now settings that work
-[0:51:49] can actually find Now settings that work but also to have in our back of our mind
-[0:51:51] but also to have in our back of our mind we still need to actually build a model
-[0:51:53] we still need to actually build a model that nicely optimizes so there will be I
-[0:51:56] that nicely optimizes so there will be I think still Sweet Spot in between so
-[0:51:58] think still Sweet Spot in between so that we actually find also Theory or
-[0:52:01] that we actually find also Theory or theoretical settings assumptions that we
-[0:52:03] theoretical settings assumptions that we know could also work in the end and that
-[0:52:05] know could also work in the end and that would be one part that I think is still
-[0:52:07] would be one part that I think is still a bit missing for real world but there's
-[0:52:11] a bit missing for real world but there's still also a bit more Fury I think like
-[0:52:13] still also a bit more Fury I think like for instance we still have a bit of
-[0:52:15] for instance we still have a bit of problem if our um observation function
-[0:52:18] problem if our um observation function is non injective so for instance some
-[0:52:19] is non injective so for instance some cause vares happen to disappear so an
-[0:52:23] cause vares happen to disappear so an object can go out of frame and might
-[0:52:25] object can go out of frame and might reappear we might have a actually also
-[0:52:27] reappear we might have a actually also once the agent is moving around so you
-[0:52:30] once the agent is moving around so you change perspectives so there are more
-[0:52:32] change perspectives so there are more things that we might also actually need
-[0:52:33] things that we might also actually need to take into account for both Theory and
-[0:52:36] to take into account for both Theory and potentially lat alsoo
+[0:51:30] a bit more continuous relations the
+[0:51:32] model optimal is much smoother so in in
+[0:51:36] that sense there will be also a bit more
+[0:51:38] engineering needed so essentially a bit
+[0:51:40] more Synergy between Theory essentially
+[0:51:43] setups that we can also prove where we
+[0:51:46] can actually find Now settings that work
+[0:51:49] but also to have in our back of our mind
+[0:51:51] we still need to actually build a model
+[0:51:53] that nicely optimizes so there will be I
+[0:51:56] think still Sweet Spot in between so
+[0:51:58] that we actually find also Theory or
+[0:52:01] theoretical settings assumptions that we
+[0:52:03] know could also work in the end and that
+[0:52:05] would be one part that I think is still
+[0:52:07] a bit missing for real world but there's
+[0:52:11] still also a bit more Fury I think like
+[0:52:13] for instance we still have a bit of
+[0:52:15] problem if our um observation function
+[0:52:18] is non injective so for instance some
+[0:52:19] cause vares happen to disappear so an
+[0:52:23] object can go out of frame and might
+[0:52:25] reappear we might have a actually also
+[0:52:27] once the agent is moving around so you
+[0:52:30] change perspectives so there are more
+[0:52:32] things that we might also actually need
+[0:52:33] to take into account for both Theory and
+[0:52:36] potentially lat alsoo
 [0:52:43] engineering okay yeah thank you for sharing this um so also so from like a
-[0:52:48] sharing this um so also so from like a more maybe engineering point of view I
-[0:52:50] more maybe engineering point of view I think the there there might be some kind
-[0:52:52] think the there there might be some kind of tension between ease of optimization
-[0:52:56] of tension between ease of optimization and identify
-[0:52:57] and identify I think there are a few Works in in deep
-[0:52:59] I think there are a few Works in in deep learning showing that over
-[0:53:02] learning showing that over parameterization helps you for um in
-[0:53:05] parameterization helps you for um in terms of optimization makes the the
-[0:53:07] terms of optimization makes the the somehow the optimization problem easier
-[0:53:10] somehow the optimization problem easier and I think there might be some kind of
-[0:53:12] and I think there might be some kind of of tension there where when we are you
-[0:53:15] of tension there where when we are you know making the the the the model
-[0:53:17] know making the the the the model identifiable we're sort of making it uh
-[0:53:20] identifiable we're sort of making it uh not overparameterized right so just so I
-[0:53:23] not overparameterized right so just so I think I think that there there's a maybe
-[0:53:24] think I think that there there's a maybe a tension there that will be interesting
-[0:53:26] a tension there that will be interesting to in the future um so uh so so so yeah
-[0:53:32] to in the future um so uh so so so yeah I don't really have more points if if
-[0:53:35] I don't really have more points if if someone wants to react this wait wait a
-[0:53:37] someone wants to react this wait wait a second so I also wanted to say something
-[0:53:40] second so I also wanted to say something about the first point and there was just
-[0:53:42] about the first point and there was just a question uh in the Q&amp;A which is
-[0:53:45] a question uh in the Q&amp;A which is related to the first point so there was
-[0:53:47] related to the first point so there was a question about um integrating like
-[0:53:50] a question about um integrating like biscuit with more traditional agents for
-[0:53:52] biscuit with more traditional agents for re enforcement learning to improve its
-[0:53:54] re enforcement learning to improve its because representation in a particular
-[0:53:56] because representation in a particular environment
-[0:53:57] environment so in general yes I do agree that so I
-[0:54:00] so in general yes I do agree that so I think it's clear that this entanglement
-[0:54:02] think it's clear that this entanglement would help representation learning to
-[0:54:03] would help representation learning to generalize and I think also presentation
-[0:54:05] generalize and I think also presentation learning sorry reinforcement learning
-[0:54:07] learning sorry reinforcement learning and enforcement learning could help also
-[0:54:09] and enforcement learning could help also biscuit to learn better presentation so
-[0:54:11] biscuit to learn better presentation so I think the question the answer is yes
-[0:54:14] I think the question the answer is yes that would be nice and also I wanted to
-[0:54:16] that would be nice and also I wanted to point out that what Philip said about uh
-[0:54:19] point out that what Philip said about uh finding which part of the representation
-[0:54:22] finding which part of the representation is useful for the reward or which part
-[0:54:23] is useful for the reward or which part of the representation is useful for the
-[0:54:25] of the representation is useful for the transition so there are some works for
-[0:54:28] transition so there are some works for example there is this learning word
-[0:54:30] example there is this learning word models with identifiable factorization
-[0:54:32] models with identifiable factorization by Li Al from
-[0:54:34] by Li Al from 2023 uh from the group of kunzang and
-[0:54:37] 2023 uh from the group of kunzang and others so in that work they already
-[0:54:39] others so in that work they already started doing this kind of
-[0:54:41] started doing this kind of identifiability in that case more for
-[0:54:43] identifiability in that case more for blocks of variables um but they already
-[0:54:46] blocks of variables um but they already started to use it to kind of improve
-[0:54:47] started to use it to kind of improve reinforcement learning so I do think the
-[0:54:50] reinforcement learning so I do think the first part it seems pretty clear that um
-[0:54:53] first part it seems pretty clear that um if we had the right match between the
-[0:54:57] if we had the right match between the Theory the assumptions in the theory and
-[0:54:59] Theory the assumptions in the theory and the reement learning kind of setting and
-[0:55:02] the reement learning kind of setting and I think biscuit is one of the methods
-[0:55:04] I think biscuit is one of the methods that is going there and you know D msv
-[0:55:06] that is going there and you know D msv as well so these kind of methods I think
-[0:55:09] as well so these kind of methods I think could be used with reinforcement
-[0:55:11] could be used with reinforcement learning we still haven't figured out
-[0:55:13] learning we still haven't figured out exactly how but we're working on it so
-[0:55:16] exactly how but we're working on it so first part second part engineering
-[0:55:18] first part second part engineering tricks that's for philli completely
-[0:55:20] tricks that's for philli completely agree with whatever he said uh third
-[0:55:23] agree with whatever he said uh third part for the autonomous driving sounds a
-[0:55:25] part for the autonomous driving sounds a bit uh isue was driving in
-[0:55:28] bit uh isue was driving in general um so I think we're a bit far
-[0:55:31] general um so I think we're a bit far since as Philip kind of mentioned we
-[0:55:34] since as Philip kind of mentioned we already cannot do things that disappear
-[0:55:36] already cannot do things that disappear from the frame or different viewpoints
-[0:55:38] from the frame or different viewpoints so it seems that autonomous driving may
-[0:55:40] so it seems that autonomous driving may be out of the reach for both the theory
-[0:55:42] be out of the reach for both the theory and Engineering for now so I think we
-[0:55:45] and Engineering for now so I think we still need to do a bit more
-[0:55:47] still need to do a bit more work but you know we can never say never
-[0:55:50] work but you know we can never say never right
+[0:52:48] more maybe engineering point of view I
+[0:52:50] think the there there might be some kind
+[0:52:52] of tension between ease of optimization
+[0:52:56] and identify
+[0:52:57] I think there are a few Works in in deep
+[0:52:59] learning showing that over
+[0:53:02] parameterization helps you for um in
+[0:53:05] terms of optimization makes the the
+[0:53:07] somehow the optimization problem easier
+[0:53:10] and I think there might be some kind of
+[0:53:12] of tension there where when we are you
+[0:53:15] know making the the the the model
+[0:53:17] identifiable we're sort of making it uh
+[0:53:20] not overparameterized right so just so I
+[0:53:23] think I think that there there's a maybe
+[0:53:24] a tension there that will be interesting
+[0:53:26] to in the future um so uh so so so yeah
+[0:53:32] I don't really have more points if if
+[0:53:35] someone wants to react this wait wait a
+[0:53:37] second so I also wanted to say something
+[0:53:40] about the first point and there was just
+[0:53:42] a question uh in the Q&A which is
+[0:53:45] related to the first point so there was
+[0:53:47] a question about um integrating like
+[0:53:50] biscuit with more traditional agents for
+[0:53:52] re enforcement learning to improve its
+[0:53:54] because representation in a particular
+[0:53:56] environment
+[0:53:57] so in general yes I do agree that so I
+[0:54:00] think it's clear that this entanglement
+[0:54:02] would help representation learning to
+[0:54:03] generalize and I think also presentation
+[0:54:05] learning sorry reinforcement learning
+[0:54:07] and enforcement learning could help also
+[0:54:09] biscuit to learn better presentation so
+[0:54:11] I think the question the answer is yes
+[0:54:14] that would be nice and also I wanted to
+[0:54:16] point out that what Philip said about uh
+[0:54:19] finding which part of the representation
+[0:54:22] is useful for the reward or which part
+[0:54:23] of the representation is useful for the
+[0:54:25] transition so there are some works for
+[0:54:28] example there is this learning word
+[0:54:30] models with identifiable factorization
+[0:54:32] by Li Al from
+[0:54:34] 2023 uh from the group of kunzang and
+[0:54:37] others so in that work they already
+[0:54:39] started doing this kind of
+[0:54:41] identifiability in that case more for
+[0:54:43] blocks of variables um but they already
+[0:54:46] started to use it to kind of improve
+[0:54:47] reinforcement learning so I do think the
+[0:54:50] first part it seems pretty clear that um
+[0:54:53] if we had the right match between the
+[0:54:57] Theory the assumptions in the theory and
+[0:54:59] the reement learning kind of setting and
+[0:55:02] I think biscuit is one of the methods
+[0:55:04] that is going there and you know D msv
+[0:55:06] as well so these kind of methods I think
+[0:55:09] could be used with reinforcement
+[0:55:11] learning we still haven't figured out
+[0:55:13] exactly how but we're working on it so
+[0:55:16] first part second part engineering
+[0:55:18] tricks that's for philli completely
+[0:55:20] agree with whatever he said uh third
+[0:55:23] part for the autonomous driving sounds a
+[0:55:25] bit uh isue was driving in
+[0:55:28] general um so I think we're a bit far
+[0:55:31] since as Philip kind of mentioned we
+[0:55:34] already cannot do things that disappear
+[0:55:36] from the frame or different viewpoints
+[0:55:38] so it seems that autonomous driving may
+[0:55:40] be out of the reach for both the theory
+[0:55:42] and Engineering for now so I think we
+[0:55:45] still need to do a bit more
+[0:55:47] work but you know we can never say never
+[0:55:50] right
 [0:55:53] so okay anything else you want to
 [0:56:02] add um it maybe just shortly to also Sebastian's point on over peration
-[0:56:05] Sebastian's point on over peration that's indeed basically also what we
-[0:56:07] that's indeed basically also what we found like most of these models or
-[0:56:09] found like most of these models or results that we showed uh are also for
-[0:56:12] results that we showed uh are also for over parameterized models um and also
-[0:56:15] over parameterized models um and also for Bally there are some papers on
-[0:56:18] for Bally there are some papers on partial
+[0:56:05] that's indeed basically also what we
+[0:56:07] found like most of these models or
+[0:56:09] results that we showed uh are also for
+[0:56:12] over parameterized models um and also
+[0:56:15] for Bally there are some papers on
 [0:56:19] partial identifiability and I think these
-[0:56:21] identifiability and I think these connect very nicely to this overprized
-[0:56:23] connect very nicely to this overprized idea because you can basically add more
-[0:56:26] idea because you can basically add more dimension so essentially some veral
-[0:56:28] dimension so essentially some veral might not be anti or or identified in a
-[0:56:32] might not be anti or or identified in a single late veral but into multiple um
-[0:56:34] single late veral but into multiple um and I think like this direction might be
-[0:56:37] and I think like this direction might be also nice to really settle for instance
-[0:56:39] also nice to really settle for instance that we can also theoretically over
-[0:56:42] that we can also theoretically over parameterize and work well in like
-[0:56:44] parameterize and work well in like settings where you know deep learning
-[0:56:45] settings where you know deep learning actually also works
+[0:56:21] connect very nicely to this overprized
+[0:56:23] idea because you can basically add more
+[0:56:26] dimension so essentially some veral
+[0:56:28] might not be anti or or identified in a
+[0:56:32] single late veral but into multiple um
+[0:56:34] and I think like this direction might be
+[0:56:37] also nice to really settle for instance
+[0:56:39] that we can also theoretically over
+[0:56:42] parameterize and work well in like
+[0:56:44] settings where you know deep learning
+[0:56:45] actually also works
 [0:56:57] well I don't have more discussion points if
-[0:57:00] I don't have more discussion points if someone wants to chime in and ask more
+[0:57:00] someone wants to chime in and ask more
 [0:57:13] questions right if there's no more questions I think we wrap up so yeah
-[0:57:17] questions I think we wrap up so yeah thank you all for uh coming and giving
-[0:57:20] thank you all for uh coming and giving your talks and discussing um I
-[0:57:24] your talks and discussing um I think yeah seems like that's said uh
-[0:57:26] think yeah seems like that's said uh Sebastian could you please stop sharing
-[0:57:28] Sebastian could you please stop sharing your
-[0:57:35] screen all right oh there is actually a new question in I guess the Q&amp;A I guess
-[0:57:38] new question in I guess the Q&amp;A I guess if Sarah Philip you have more minutes so
-[0:57:42] if Sarah Philip you have more minutes so the question was what would be the first
-[0:57:44] the question was what would be the first the biggest challenge integrating
-[0:57:45] the biggest challenge integrating biscuit with reinforcement
-[0:57:48] biscuit with reinforcement learning what do you want to say
-[0:57:51] learning what do you want to say Philip um well I think on on the one
-[0:57:54] Philip um well I think on on the one hand it's also to find now a nice
-[0:57:56] hand it's also to find now a nice environment where we can actually also
-[0:57:58] environment where we can actually also have a nice task which makes sense but
-[0:58:00] have a nice task which makes sense but for instance in the body environment
-[0:58:02] for instance in the body environment there's actually not many tasks that
-[0:58:06] there's actually not many tasks that require you of like a deep cause
-[0:58:07] require you of like a deep cause understanding so these environments
-[0:58:09] understanding so these environments often have like relocate or find find
-[0:58:13] often have like relocate or find find the Apple for environment which is not
-[0:58:15] the Apple for environment which is not really where we aim for for CA
-[0:58:18] really where we aim for for CA obstination um and of course it's also
-[0:58:21] obstination um and of course it's also always a bit tricky find environments
-[0:58:23] always a bit tricky find environments where your assumptions really hold so
-[0:58:26] where your assumptions really hold so often we have like deterministic
-[0:58:27] often we have like deterministic relations we are a bit limited so we
-[0:58:30] relations we are a bit limited so we still trying to actually find the
-[0:58:31] still trying to actually find the perfect setting of this reinforcement
-[0:58:33] perfect setting of this reinforcement environment where we also know like
-[0:58:35] environment where we also know like biscuit and L sides really make sense
+[0:57:17] thank you all for uh coming and giving
+[0:57:20] your talks and discussing um I
+[0:57:24] think yeah seems like that's said uh
+[0:57:26] Sebastian could you please stop sharing
+[0:57:28] your
+[0:57:35] screen all right oh there is actually a new question in I guess the Q&A I guess
+[0:57:38] if Sarah Philip you have more minutes so
+[0:57:42] the question was what would be the first
+[0:57:44] the biggest challenge integrating
+[0:57:45] biscuit with reinforcement
+[0:57:48] learning what do you want to say
+[0:57:51] Philip um well I think on on the one
+[0:57:54] hand it's also to find now a nice
+[0:57:56] environment where we can actually also
+[0:57:58] have a nice task which makes sense but
+[0:58:00] for instance in the body environment
+[0:58:02] there's actually not many tasks that
+[0:58:06] require you of like a deep cause
+[0:58:07] understanding so these environments
+[0:58:09] often have like relocate or find find
+[0:58:13] the Apple for environment which is not
+[0:58:15] really where we aim for for CA
+[0:58:18] obstination um and of course it's also
+[0:58:21] always a bit tricky find environments
+[0:58:23] where your assumptions really hold so
+[0:58:26] often we have like deterministic
+[0:58:27] relations we are a bit limited so we
+[0:58:30] still trying to actually find the
+[0:58:31] perfect setting of this reinforcement
+[0:58:33] environment where we also know like
+[0:58:35] biscuit and L sides really make sense
 [0:58:44] you sounds good perfect okay great all right I'll
-[0:58:49] good perfect okay great all right I'll on
+[0:58:49] on
 [0:58:54] to right there we go very nice okay okay uh yes just
-[0:58:59] go very nice okay okay uh yes just wanted to once
-[0:59:02] wanted to once again thank our speakers specifically
-[0:59:06] again thank our speakers specifically Phillip and Sarah for uh giving this
-[0:59:10] Phillip and Sarah for uh giving this very nice joint talk and sesan for
-[0:59:13] very nice joint talk and sesan for discussing um it's been interesting to
-[0:59:16] discussing um it's been interesting to see a different uh flavor to what we
-[0:59:19] see a different uh flavor to what we usually do but a fun talk and thank you
-[0:59:21] usually do but a fun talk and thank you also for the audience for asking
-[0:59:23] also for the audience for asking interesting questions I hope that we all
-[0:59:26] interesting questions I hope that we all see you again next week next week we'll
-[0:59:29] see you again next week next week we'll have a talk by Cal mend from sispa so
-[0:59:33] have a talk by Cal mend from sispa so looking forward to seeing you all there
-[0:59:36] looking forward to seeing you all there thank
+[0:58:59] wanted to once
+[0:59:02] again thank our speakers specifically
+[0:59:06] Phillip and Sarah for uh giving this
+[0:59:10] very nice joint talk and sesan for
+[0:59:13] discussing um it's been interesting to
+[0:59:16] see a different uh flavor to what we
+[0:59:19] usually do but a fun talk and thank you
+[0:59:21] also for the audience for asking
+[0:59:23] interesting questions I hope that we all
+[0:59:26] see you again next week next week we'll
+[0:59:29] have a talk by Cal mend from sispa so
+[0:59:33] looking forward to seeing you all there
+[0:59:36] thank
 [0:59:39] you thank you

@@ -1,1505 +1,1380 @@
 [0:00:05] all right welcome to the online course inference seminar today we're excited to
-[0:00:06] inference seminar today we're excited to have mona azadka from
-[0:00:09] have mona azadka from eth zurich who will talk about a fast
-[0:00:11] eth zurich who will talk about a fast non-parametric approach for causal
-[0:00:13] non-parametric approach for causal structure learning in poetries in q a
-[0:00:15] structure learning in poetries in q a we'll have our mean so if you have any
-[0:00:17] we'll have our mean so if you have any questions please put them there after
-[0:00:20] questions please put them there after that we'll have a discussion by brian
-[0:00:22] that we'll have a discussion by brian aragom
+[0:00:06] have mona azadka from
+[0:00:09] eth zurich who will talk about a fast
+[0:00:11] non-parametric approach for causal
+[0:00:13] structure learning in poetries in q a
+[0:00:15] we'll have our mean so if you have any
+[0:00:17] questions please put them there after
+[0:00:20] that we'll have a discussion by brian
 [0:00:23] aragom questions today will be handled by ying
-[0:00:25] questions today will be handled by ying so i'll switch over to her
+[0:00:25] so i'll switch over to her
 [0:00:30] well now you very much
 [0:00:33] what happened here
 [0:00:41] now i can share okay thank you very much hello everyone thank you for having me
-[0:00:43] hello everyone thank you for having me today uh so
+[0:00:43] today uh so
 [0:00:50] okay now i think you can see my slides i'm excited to share uh
-[0:00:53] i'm excited to share uh one new work with my colleagues about
-[0:00:57] one new work with my colleagues about fast non-parametric approach for local
-[0:00:59] fast non-parametric approach for local causal structure learning uh this is a
-[0:01:02] causal structure learning uh this is a work done by by peter bolman and armin
-[0:01:05] work done by by peter bolman and armin tayeb and armin today is here and will
-[0:01:08] tayeb and armin today is here and will help us in a q a if you have any
-[0:01:11] help us in a q a if you have any questions please feel free to ask him
-[0:01:13] questions please feel free to ask him so
+[0:00:53] one new work with my colleagues about
+[0:00:57] fast non-parametric approach for local
+[0:00:59] causal structure learning uh this is a
+[0:01:02] work done by by peter bolman and armin
+[0:01:05] tayeb and armin today is here and will
+[0:01:08] help us in a q a if you have any
+[0:01:11] questions please feel free to ask him
 [0:01:14] so let's jump into the problem so let's
-[0:01:16] let's jump into the problem so let's assume that we have a set of given
-[0:01:19] assume that we have a set of given variables and we are particularly
-[0:01:21] variables and we are particularly interested in one of them let's consider
-[0:01:24] interested in one of them let's consider that one as y
-[0:01:26] that one as y and we want to see whether that given
-[0:01:27] and we want to see whether that given observation on theta is it possible to
-[0:01:30] observation on theta is it possible to figure out the set of patterns of this
-[0:01:33] figure out the set of patterns of this node of special interest in this example
-[0:01:36] node of special interest in this example x1 x2 and x3
-[0:01:39] x1 x2 and x3 so um i'm just gonna start with going
-[0:01:42] so um i'm just gonna start with going through some definitions hopefully we
-[0:01:45] through some definitions hopefully we will go through them quickly so that you
-[0:01:47] will go through them quickly so that you don't get bored so um in in general to
-[0:01:51] don't get bored so um in in general to kind of uh
-[0:01:53] kind of uh model this problem in a more
-[0:01:54] model this problem in a more mathematical way we assume that we can
-[0:01:58] mathematical way we assume that we can describe the relationship between our
-[0:02:00] describe the relationship between our variables using the uh the directed
-[0:02:03] variables using the uh the directed graphs which we call the dag which a bit
-[0:02:06] graphs which we call the dag which a bit with a bunch of node variables which one
-[0:02:09] with a bunch of node variables which one of them we again is
-[0:02:11] of them we again is of important to us which we show it by y
-[0:02:14] of important to us which we show it by y and a bunch of
-[0:02:16] and a bunch of edges now there is some causal
-[0:02:18] edges now there is some causal relationship between the nodes in this
-[0:02:20] relationship between the nodes in this graph that we are considering and i'm
-[0:02:22] graph that we are considering and i'm going to show that relationship oops
-[0:02:25] going to show that relationship oops sorry
+[0:01:16] assume that we have a set of given
+[0:01:19] variables and we are particularly
+[0:01:21] interested in one of them let's consider
+[0:01:24] that one as y
+[0:01:26] and we want to see whether that given
+[0:01:27] observation on theta is it possible to
+[0:01:30] figure out the set of patterns of this
+[0:01:33] node of special interest in this example
+[0:01:36] x1 x2 and x3
+[0:01:39] so um i'm just gonna start with going
+[0:01:42] through some definitions hopefully we
+[0:01:45] will go through them quickly so that you
+[0:01:47] don't get bored so um in in general to
+[0:01:51] kind of uh
+[0:01:53] model this problem in a more
+[0:01:54] mathematical way we assume that we can
+[0:01:58] describe the relationship between our
+[0:02:00] variables using the uh the directed
+[0:02:03] graphs which we call the dag which a bit
+[0:02:06] with a bunch of node variables which one
+[0:02:09] of them we again is
+[0:02:11] of important to us which we show it by y
+[0:02:14] and a bunch of
+[0:02:16] edges now there is some causal
+[0:02:18] relationship between the nodes in this
+[0:02:20] graph that we are considering and i'm
+[0:02:22] going to show that relationship oops
 [0:02:26] sorry i'm going to show that
-[0:02:28] i'm going to show that that relationship in in this shape that
-[0:02:30] that relationship in in this shape that the note x i is a function of a bunch of
-[0:02:34] the note x i is a function of a bunch of other notes and some noise variable
-[0:02:37] other notes and some noise variable through this talk we will assume that
-[0:02:39] through this talk we will assume that these noise variables are independent of
-[0:02:41] these noise variables are independent of each other and also we will assume that
-[0:02:44] each other and also we will assume that this function f i is a measurable
-[0:02:46] this function f i is a measurable function
+[0:02:28] that relationship in in this shape that
+[0:02:30] the note x i is a function of a bunch of
+[0:02:34] other notes and some noise variable
+[0:02:37] through this talk we will assume that
+[0:02:39] these noise variables are independent of
+[0:02:41] each other and also we will assume that
+[0:02:44] this function f i is a measurable
 [0:02:47] function just
 [0:02:48] just note that we are just putting this
-[0:02:50] note that we are just putting this measurability assumption and
-[0:02:54] measurability assumption and no particular assumption on the for
-[0:02:57] no particular assumption on the for example whether the noise is additive or
-[0:02:59] example whether the noise is additive or something on that shape
-[0:03:02] something on that shape uh so
+[0:02:50] measurability assumption and
+[0:02:54] no particular assumption on the for
+[0:02:57] example whether the noise is additive or
+[0:02:59] something on that shape
 [0:03:04] uh so in general in a dag we
-[0:03:07] in general in a dag we for a given node y we defined a set of
-[0:03:10] for a given node y we defined a set of patterns of this node y
-[0:03:12] patterns of this node y as this as those set of variables that
-[0:03:16] as this as those set of variables that are connected directly
-[0:03:18] are connected directly to that variable y and
-[0:03:20] to that variable y and the with an edge and the direction of is
-[0:03:23] the with an edge and the direction of is that edge is too wide y
-[0:03:26] that edge is too wide y and we here we denote the the set of
-[0:03:28] and we here we denote the the set of parents in this shape with p a of pi
-[0:03:33] parents in this shape with p a of pi there's quite a bit of background noise
-[0:03:35] there's quite a bit of background noise right now
+[0:03:07] for a given node y we defined a set of
+[0:03:10] patterns of this node y
+[0:03:12] as this as those set of variables that
+[0:03:16] are connected directly
+[0:03:18] to that variable y and
+[0:03:20] the with an edge and the direction of is
+[0:03:23] that edge is too wide y
+[0:03:26] and we here we denote the the set of
+[0:03:28] parents in this shape with p a of pi
+[0:03:33] there's quite a bit of background noise
 [0:03:36] right now yeah i'm actually hearing it
-[0:03:40] yeah i'm actually hearing it um the problem is that
-[0:03:43] um the problem is that let's see whether i have anything so if
-[0:03:45] let's see whether i have anything so if you know how you can fix it
-[0:03:48] you know how you can fix it yeah i don't have
-[0:03:50] yeah i don't have let me just
-[0:03:52] let me just tweet all the
-[0:03:53] tweet all the google chrome tabs i have but i don't
-[0:03:56] google chrome tabs i have but i don't have any other thing that is running so
-[0:03:59] have any other thing that is running so i think just my computer just kept quiet
-[0:04:02] i think just my computer just kept quiet sorry about it
-[0:04:03] sorry about it um so
+[0:03:40] um the problem is that
+[0:03:43] let's see whether i have anything so if
+[0:03:45] you know how you can fix it
+[0:03:48] yeah i don't have
+[0:03:50] let me just
+[0:03:52] tweet all the
+[0:03:53] google chrome tabs i have but i don't
+[0:03:56] have any other thing that is running so
+[0:03:59] i think just my computer just kept quiet
+[0:04:02] sorry about it
 [0:04:05] um so so as we have we defined the set of
-[0:04:07] so as we have we defined the set of parents in this shape and then we have
-[0:04:09] parents in this shape and then we have similarly we have the set of children
-[0:04:11] similarly we have the set of children which i show it by c h of y and as the
-[0:04:15] which i show it by c h of y and as the set of children on those nodes that are
-[0:04:18] set of children on those nodes that are again directly connected to y but this
-[0:04:20] again directly connected to y but this time the direction of edge is coming
-[0:04:23] time the direction of edge is coming from by to those children and then at
-[0:04:26] from by to those children and then at the end we have the set of spouses of
-[0:04:28] the end we have the set of spouses of why which we show it by sp which are
-[0:04:31] why which we show it by sp which are basically those nodes that share the
-[0:04:33] basically those nodes that share the some same children with y so x i is a
-[0:04:38] some same children with y so x i is a spouse of y if we have this kind of a
-[0:04:41] spouse of y if we have this kind of a relationship in the dag somewhere for
-[0:04:43] relationship in the dag somewhere for example in this toy example that we have
-[0:04:46] example in this toy example that we have here this red notes are all parents of y
-[0:04:50] here this red notes are all parents of y the orange notes are all children of y
-[0:04:53] the orange notes are all children of y and this blue note is the spouse of y
-[0:04:58] and this blue note is the spouse of y uh so
+[0:04:07] parents in this shape and then we have
+[0:04:09] similarly we have the set of children
+[0:04:11] which i show it by c h of y and as the
+[0:04:15] set of children on those nodes that are
+[0:04:18] again directly connected to y but this
+[0:04:20] time the direction of edge is coming
+[0:04:23] from by to those children and then at
+[0:04:26] the end we have the set of spouses of
+[0:04:28] why which we show it by sp which are
+[0:04:31] basically those nodes that share the
+[0:04:33] some same children with y so x i is a
+[0:04:38] spouse of y if we have this kind of a
+[0:04:41] relationship in the dag somewhere for
+[0:04:43] example in this toy example that we have
+[0:04:46] here this red notes are all parents of y
+[0:04:50] the orange notes are all children of y
+[0:04:53] and this blue note is the spouse of y
 [0:04:59] uh so at the end of the day understanding
-[0:05:02] at the end of the day understanding these causal relationships between the
-[0:05:04] these causal relationships between the nodes using this probabilistic notion is
-[0:05:07] nodes using this probabilistic notion is basically understanding the this joint
-[0:05:11] basically understanding the this joint probability distribution between the
-[0:05:13] probability distribution between the variables that we have
-[0:05:15] variables that we have and
+[0:05:02] these causal relationships between the
+[0:05:04] nodes using this probabilistic notion is
+[0:05:07] basically understanding the this joint
+[0:05:11] probability distribution between the
+[0:05:13] variables that we have
 [0:05:16] and boiling it down to some directed graph
-[0:05:20] boiling it down to some directed graph somehow is too much of simplification
-[0:05:22] somehow is too much of simplification because we may actually not be able to
-[0:05:25] because we may actually not be able to just pick one graph
-[0:05:27] just pick one graph what i mean is that there might be for a
-[0:05:30] what i mean is that there might be for a joint probability distribution on a
-[0:05:32] joint probability distribution on a bunch of variables there might be
-[0:05:33] bunch of variables there might be actually more than one graph that can
-[0:05:36] actually more than one graph that can capture that distribution and that is
-[0:05:39] capture that distribution and that is something that we
-[0:05:41] something that we define it or characterize it as the
-[0:05:44] define it or characterize it as the notion of markov equivalence class and
-[0:05:46] notion of markov equivalence class and basically a markov
-[0:05:48] basically a markov equivalence class is the set of all
-[0:05:51] equivalence class is the set of all tags that capture the same conditional
-[0:05:53] tags that capture the same conditional independencies
-[0:05:55] independencies so for example we may have
-[0:05:57] so for example we may have d1 to dl
+[0:05:20] somehow is too much of simplification
+[0:05:22] because we may actually not be able to
+[0:05:25] just pick one graph
+[0:05:27] what i mean is that there might be for a
+[0:05:30] joint probability distribution on a
+[0:05:32] bunch of variables there might be
+[0:05:33] actually more than one graph that can
+[0:05:36] capture that distribution and that is
+[0:05:39] something that we
+[0:05:41] define it or characterize it as the
+[0:05:44] notion of markov equivalence class and
+[0:05:46] basically a markov
+[0:05:48] equivalence class is the set of all
+[0:05:51] tags that capture the same conditional
+[0:05:53] independencies
+[0:05:55] so for example we may have
 [0:05:59] d1 to dl different tags that are actually all of
-[0:06:02] different tags that are actually all of them are capturing the same
-[0:06:04] them are capturing the same conditional independence
-[0:06:06] conditional independence between the variables that we have
-[0:06:09] between the variables that we have we're caring for
-[0:06:11] we're caring for but there is some easy way to
-[0:06:12] but there is some easy way to distinguish
-[0:06:14] distinguish whether two dags are equivalent or not
-[0:06:16] whether two dags are equivalent or not and that is if they share the same
-[0:06:18] and that is if they share the same skeleton by skeleton i mean just
-[0:06:21] skeleton by skeleton i mean just take the dag remove the directions and
-[0:06:24] take the dag remove the directions and the remaining undirected graph is going
-[0:06:26] the remaining undirected graph is going to be a skeleton so if they have the
-[0:06:28] to be a skeleton so if they have the same a skeleton and if they have the
-[0:06:30] same a skeleton and if they have the same vs structures and by vs structure i
-[0:06:33] same vs structures and by vs structure i mean if you have uh
-[0:06:35] mean if you have uh two edges that are directing to the same
-[0:06:38] two edges that are directing to the same um
+[0:06:02] them are capturing the same
+[0:06:04] conditional independence
+[0:06:06] between the variables that we have
+[0:06:09] we're caring for
+[0:06:11] but there is some easy way to
+[0:06:12] distinguish
+[0:06:14] whether two dags are equivalent or not
+[0:06:16] and that is if they share the same
+[0:06:18] skeleton by skeleton i mean just
+[0:06:21] take the dag remove the directions and
+[0:06:24] the remaining undirected graph is going
+[0:06:26] to be a skeleton so if they have the
+[0:06:28] same a skeleton and if they have the
+[0:06:30] same vs structures and by vs structure i
+[0:06:33] mean if you have uh
+[0:06:35] two edges that are directing to the same
 [0:06:39] um node so if they share this via structure
-[0:06:42] node so if they share this via structure and skeleton the dags are going to be
-[0:06:45] and skeleton the dags are going to be equivalent to each other so now assume
-[0:06:48] equivalent to each other so now assume that we are in this situation that we
-[0:06:49] that we are in this situation that we have some
+[0:06:42] and skeleton the dags are going to be
+[0:06:45] equivalent to each other so now assume
+[0:06:48] that we are in this situation that we
 [0:06:51] have some a bunch of different dags that are
-[0:06:53] a bunch of different dags that are actually equivalent to each other and
-[0:06:55] actually equivalent to each other and capture the same conditional
-[0:06:56] capture the same conditional independencies that our data uh shows
-[0:07:00] independencies that our data uh shows so for each of these tags i'm going to
-[0:07:02] so for each of these tags i'm going to look at this node y that i was
-[0:07:04] look at this node y that i was interested in and i'm going to look at
-[0:07:06] interested in and i'm going to look at the patterns of this node y
-[0:07:09] the patterns of this node y and i'm going to
-[0:07:11] and i'm going to put these parents in
-[0:07:13] put these parents in in a set if i do the same thing for all
-[0:07:16] in a set if i do the same thing for all of these tags i will end up having a
-[0:07:18] of these tags i will end up having a collection of all the set of patterns
-[0:07:21] collection of all the set of patterns that are actually each of these sets are
-[0:07:23] that are actually each of these sets are going to be the pattern set of y in one
-[0:07:26] going to be the pattern set of y in one of these equivalence situations and i'm
-[0:07:29] of these equivalence situations and i'm going to show that with this kelly p of
-[0:07:31] going to show that with this kelly p of y so kelly pfy is going to be the all
-[0:07:35] y so kelly pfy is going to be the all the possible
-[0:07:37] the possible set of patterns of what in different
-[0:07:39] set of patterns of what in different scenarios
+[0:06:53] actually equivalent to each other and
+[0:06:55] capture the same conditional
+[0:06:56] independencies that our data uh shows
+[0:07:00] so for each of these tags i'm going to
+[0:07:02] look at this node y that i was
+[0:07:04] interested in and i'm going to look at
+[0:07:06] the patterns of this node y
+[0:07:09] and i'm going to
+[0:07:11] put these parents in
+[0:07:13] in a set if i do the same thing for all
+[0:07:16] of these tags i will end up having a
+[0:07:18] collection of all the set of patterns
+[0:07:21] that are actually each of these sets are
+[0:07:23] going to be the pattern set of y in one
+[0:07:26] of these equivalence situations and i'm
+[0:07:29] going to show that with this kelly p of
+[0:07:31] y so kelly pfy is going to be the all
+[0:07:35] the possible
+[0:07:37] set of patterns of what in different
 [0:07:41] scenarios uh and note that this is we have some
-[0:07:43] uh and note that this is we have some properties here the first property is
-[0:07:45] properties here the first property is that
+[0:07:43] properties here the first property is
 [0:07:46] that uh
 [0:07:48] uh this collection of parents is usually
-[0:07:51] this collection of parents is usually only one
 [0:07:52] only one so basically i will only have one
-[0:07:54] so basically i will only have one possible set of parents
-[0:07:56] possible set of parents and
+[0:07:54] possible set of parents
 [0:07:57] and that is when we have a v structure that
-[0:08:00] that is when we have a v structure that is pointing at y so if i have this node
-[0:08:03] is pointing at y so if i have this node of y and if i have at least two patterns
-[0:08:06] of y and if i have at least two patterns for y so let's say that i have x1 and x2
-[0:08:09] for y so let's say that i have x1 and x2 parents of y because the of equivalent
-[0:08:12] parents of y because the of equivalent tags should
-[0:08:14] tags should share this uh review structure then all
-[0:08:17] share this uh review structure then all of them in all of the markov equivalence
-[0:08:20] of them in all of the markov equivalence tags i will have x1 and x2 as a set of
-[0:08:23] tags i will have x1 and x2 as a set of patterns so at the end of the day
-[0:08:26] patterns so at the end of the day in all these different dags that capture
-[0:08:29] in all these different dags that capture the structure of my dependencies i will
-[0:08:31] the structure of my dependencies i will have the same set of patterns
-[0:08:34] have the same set of patterns but it can happen that actually y only
-[0:08:37] but it can happen that actually y only has for example one parent in some
-[0:08:39] has for example one parent in some scenario
+[0:08:00] is pointing at y so if i have this node
+[0:08:03] of y and if i have at least two patterns
+[0:08:06] for y so let's say that i have x1 and x2
+[0:08:09] parents of y because the of equivalent
+[0:08:12] tags should
+[0:08:14] share this uh review structure then all
+[0:08:17] of them in all of the markov equivalence
+[0:08:20] tags i will have x1 and x2 as a set of
+[0:08:23] patterns so at the end of the day
+[0:08:26] in all these different dags that capture
+[0:08:29] the structure of my dependencies i will
+[0:08:31] have the same set of patterns
+[0:08:34] but it can happen that actually y only
+[0:08:37] has for example one parent in some
 [0:08:41] scenario so if i have this situation
-[0:08:44] so if i have this situation i i can also have this other situation
-[0:08:49] i i can also have this other situation that x2 is actually pointing to
-[0:08:53] that x2 is actually pointing to y and i cannot distinguish uh these two
-[0:08:57] y and i cannot distinguish uh these two situations so i i at the end what i can
-[0:09:00] situations so i i at the end what i can say that is that i have a case that i
-[0:09:02] say that is that i have a case that i call x one the parent of y and i have it
-[0:09:06] call x one the parent of y and i have it i have a situation in which i would call
-[0:09:08] i have a situation in which i would call x 2 the parent of y but this is at the
-[0:09:12] x 2 the parent of y but this is at the level of observational data we cannot go
-[0:09:14] level of observational data we cannot go further than that
+[0:08:44] i i can also have this other situation
+[0:08:49] that x2 is actually pointing to
+[0:08:53] y and i cannot distinguish uh these two
+[0:08:57] situations so i i at the end what i can
+[0:09:00] say that is that i have a case that i
+[0:09:02] call x one the parent of y and i have it
+[0:09:06] i have a situation in which i would call
+[0:09:08] x 2 the parent of y but this is at the
+[0:09:12] level of observational data we cannot go
+[0:09:14] further than that
 [0:09:19] so and then the last definition that i need to tell
-[0:09:22] the last definition that i need to tell you is just about the mark of blanket
-[0:09:24] you is just about the mark of blanket and mark of boundaries so for a given
-[0:09:26] and mark of boundaries so for a given set of for for a given node y
-[0:09:30] set of for for a given node y a set i will call a subset of the
-[0:09:33] a set i will call a subset of the variables the remaining variables that i
-[0:09:36] variables the remaining variables that i have i would call it a markov blanket or
-[0:09:38] have i would call it a markov blanket or a sufficient set
-[0:09:40] a sufficient set if given those
-[0:09:42] if given those variables
+[0:09:22] you is just about the mark of blanket
+[0:09:24] and mark of boundaries so for a given
+[0:09:26] set of for for a given node y
+[0:09:30] a set i will call a subset of the
+[0:09:33] variables the remaining variables that i
+[0:09:36] have i would call it a markov blanket or
+[0:09:38] a sufficient set
+[0:09:40] if given those
 [0:09:44] variables i have this independence of y with the
-[0:09:47] i have this independence of y with the rest of the variables so basically a
-[0:09:49] rest of the variables so basically a markov blanket or a sufficient set is
-[0:09:52] markov blanket or a sufficient set is the set of all those variables that
-[0:09:53] the set of all those variables that knowing them
-[0:09:55] knowing them is enough to gain any information about
-[0:09:58] is enough to gain any information about why and i do not need to assume anything
-[0:10:00] why and i do not need to assume anything further than the mark of the anklet
-[0:10:05] further than the mark of the anklet a mark of blankets
-[0:10:07] a mark of blankets if exists is not necessarily unique
-[0:10:10] if exists is not necessarily unique and
+[0:09:47] rest of the variables so basically a
+[0:09:49] markov blanket or a sufficient set is
+[0:09:52] the set of all those variables that
+[0:09:53] knowing them
+[0:09:55] is enough to gain any information about
+[0:09:58] why and i do not need to assume anything
+[0:10:00] further than the mark of the anklet
+[0:10:05] a mark of blankets
+[0:10:07] if exists is not necessarily unique
 [0:10:12] and it can vary in size for example if you
-[0:10:14] it can vary in size for example if you have a set that is markov blanket adding
-[0:10:16] have a set that is markov blanket adding any variable would would not uh
-[0:10:19] any variable would would not uh basically lose this property of being
-[0:10:21] basically lose this property of being markov blanket but reducing any
-[0:10:24] markov blanket but reducing any any variable would actually you may not
-[0:10:27] any variable would actually you may not be a mark of blanket anymore so in this
-[0:10:30] be a mark of blanket anymore so in this sense we can define a minimal markov
-[0:10:32] sense we can define a minimal markov blanket and we call a minimal markov
-[0:10:34] blanket and we call a minimal markov blanket a mark of boundary and in this
-[0:10:37] blanket a mark of boundary and in this work i will show the markov boundary of
-[0:10:39] work i will show the markov boundary of my node y with this
-[0:10:42] my node y with this mb of y
+[0:10:14] have a set that is markov blanket adding
+[0:10:16] any variable would would not uh
+[0:10:19] basically lose this property of being
+[0:10:21] markov blanket but reducing any
+[0:10:24] any variable would actually you may not
+[0:10:27] be a mark of blanket anymore so in this
+[0:10:30] sense we can define a minimal markov
+[0:10:32] blanket and we call a minimal markov
+[0:10:34] blanket a mark of boundary and in this
+[0:10:37] work i will show the markov boundary of
+[0:10:39] my node y with this
+[0:10:42] mb of y
 [0:10:48] so now let's get back to the business now we are done with the definitions and
-[0:10:50] now we are done with the definitions and i can actually tell you that what we are
-[0:10:52] i can actually tell you that what we are what we want to do so what we wanted to
-[0:10:54] what we want to do so what we wanted to do is that we wanted to figure out for a
-[0:10:57] do is that we wanted to figure out for a given node y
-[0:10:58] given node y what are the set of nodes that are
-[0:11:01] what are the set of nodes that are parents of y
-[0:11:03] parents of y so the problem is that i had this nodes
-[0:11:06] so the problem is that i had this nodes x 1 to x p and i wanted to search over x
-[0:11:09] x 1 to x p and i wanted to search over x 1 to x b for the set of nodes that are
-[0:11:12] 1 to x b for the set of nodes that are parents of y and if p is large enough
-[0:11:15] parents of y and if p is large enough the space of this variable that i'm
-[0:11:17] the space of this variable that i'm doing my search over might be huge so is
-[0:11:20] doing my search over might be huge so is there a way to actually reduce the size
-[0:11:22] there a way to actually reduce the size of my searching environment and the
-[0:11:25] of my searching environment and the answer is fortunately yes and that's by
-[0:11:28] answer is fortunately yes and that's by looking at this equality so
-[0:11:31] looking at this equality so basically we can write down the markov
-[0:11:34] basically we can write down the markov boundary of a given node y as the union
-[0:11:36] boundary of a given node y as the union of the set of parents the set of
-[0:11:38] of the set of parents the set of children and the set of spouses
-[0:11:41] children and the set of spouses so
+[0:10:50] i can actually tell you that what we are
+[0:10:52] what we want to do so what we wanted to
+[0:10:54] do is that we wanted to figure out for a
+[0:10:57] given node y
+[0:10:58] what are the set of nodes that are
+[0:11:01] parents of y
+[0:11:03] so the problem is that i had this nodes
+[0:11:06] x 1 to x p and i wanted to search over x
+[0:11:09] 1 to x b for the set of nodes that are
+[0:11:12] parents of y and if p is large enough
+[0:11:15] the space of this variable that i'm
+[0:11:17] doing my search over might be huge so is
+[0:11:20] there a way to actually reduce the size
+[0:11:22] of my searching environment and the
+[0:11:25] answer is fortunately yes and that's by
+[0:11:28] looking at this equality so
+[0:11:31] basically we can write down the markov
+[0:11:34] boundary of a given node y as the union
+[0:11:36] of the set of parents the set of
+[0:11:38] children and the set of spouses
 [0:11:43] so if we somehow now can get to the markov
-[0:11:45] if we somehow now can get to the markov boundary of y
-[0:11:47] boundary of y we can forget about all the other stuff
-[0:11:50] we can forget about all the other stuff all the other nodes in the tag and just
-[0:11:53] all the other nodes in the tag and just focus our search among the variables
-[0:11:55] focus our search among the variables that are in the markov boundary of y
-[0:11:58] that are in the markov boundary of y and now the question is that how should
-[0:12:01] and now the question is that how should we do that how should we go about
-[0:12:02] we do that how should we go about finding the markov boundary
-[0:12:06] finding the markov boundary is there any question so far
-[0:12:09] is there any question so far um there is no question so far
-[0:12:12] um there is no question so far we can continue things okay okay
-[0:12:15] we can continue things okay okay so
+[0:11:45] boundary of y
+[0:11:47] we can forget about all the other stuff
+[0:11:50] all the other nodes in the tag and just
+[0:11:53] focus our search among the variables
+[0:11:55] that are in the markov boundary of y
+[0:11:58] and now the question is that how should
+[0:12:01] we do that how should we go about
+[0:12:02] finding the markov boundary
+[0:12:06] is there any question so far
+[0:12:09] um there is no question so far
+[0:12:12] we can continue things okay okay
 [0:12:17] so now for the markov boundary stage we are
-[0:12:19] now for the markov boundary stage we are going to use an algorithm called foci
-[0:12:22] going to use an algorithm called foci so fosi is a forward step-by-step
-[0:12:25] so fosi is a forward step-by-step selection algorithm which is based on a
-[0:12:28] selection algorithm which is based on a non-parametric measure of conditional
-[0:12:30] non-parametric measure of conditional dependence introduced by
-[0:12:32] dependence introduced by myself and my phd advisor sure of
-[0:12:35] myself and my phd advisor sure of chatterjee which we call it codec
-[0:12:38] chatterjee which we call it codec fossil has some nice properties one of
-[0:12:41] fossil has some nice properties one of them being that it is uh it has a
-[0:12:44] them being that it is uh it has a natural stopping rule and therefore no
-[0:12:46] natural stopping rule and therefore no one you don't in order to use it you do
-[0:12:48] one you don't in order to use it you do not need to have a tuning parameter uh
-[0:12:51] not need to have a tuning parameter uh so it makes it particularly interesting
-[0:12:54] so it makes it particularly interesting and so let me tell you what is foci and
-[0:12:56] and so let me tell you what is foci and how does it work so given any measure of
-[0:13:00] how does it work so given any measure of dependence
-[0:13:02] dependence one can implement a very
-[0:13:05] one can implement a very simple
+[0:12:19] going to use an algorithm called foci
+[0:12:22] so fosi is a forward step-by-step
+[0:12:25] selection algorithm which is based on a
+[0:12:28] non-parametric measure of conditional
+[0:12:30] dependence introduced by
+[0:12:32] myself and my phd advisor sure of
+[0:12:35] chatterjee which we call it codec
+[0:12:38] fossil has some nice properties one of
+[0:12:41] them being that it is uh it has a
+[0:12:44] natural stopping rule and therefore no
+[0:12:46] one you don't in order to use it you do
+[0:12:48] not need to have a tuning parameter uh
+[0:12:51] so it makes it particularly interesting
+[0:12:54] and so let me tell you what is foci and
+[0:12:56] how does it work so given any measure of
+[0:13:00] dependence
+[0:13:02] one can implement a very
 [0:13:06] simple stepwise algorithm for variable
-[0:13:08] stepwise algorithm for variable selection
 [0:13:10] selection but what makes fosa particularly
-[0:13:12] but what makes fosa particularly interesting is that the measure that it
-[0:13:14] interesting is that the measure that it is used that fosa is using is
-[0:13:17] is used that fosa is using is non-parametric with some
-[0:13:19] non-parametric with some nice properties
-[0:13:21] nice properties and it can be implemented super quickly
-[0:13:24] and it can be implemented super quickly so let's first
-[0:13:26] so let's first look at the measure that we are using
-[0:13:29] look at the measure that we are using so the measure is defined in this way i
-[0:13:32] so the measure is defined in this way i just want
+[0:13:12] interesting is that the measure that it
+[0:13:14] is used that fosa is using is
+[0:13:17] non-parametric with some
+[0:13:19] nice properties
+[0:13:21] and it can be implemented super quickly
+[0:13:24] so let's first
+[0:13:26] look at the measure that we are using
+[0:13:29] so the measure is defined in this way i
 [0:13:33] just want to emphasize that please don't get lost
-[0:13:36] to emphasize that please don't get lost by the definition of the measure because
-[0:13:38] by the definition of the measure because he today we're just using it as a black
-[0:13:41] he today we're just using it as a black box but i just put the definition here
-[0:13:44] box but i just put the definition here if you want to look at it but this
-[0:13:46] if you want to look at it but this measure so here y and z given x is
-[0:13:49] measure so here y and z given x is basically going to tell us how much y
-[0:13:52] basically going to tell us how much y depends on a vector of variable z
-[0:13:55] depends on a vector of variable z given a vector of variables x so it is a
-[0:13:58] given a vector of variables x so it is a conditional measure of dependence with
-[0:14:00] conditional measure of dependence with some properties what are these
-[0:14:02] some properties what are these properties first of all it is a bounded
-[0:14:05] properties first of all it is a bounded measure so it's always between 0 and 1
-[0:14:07] measure so it's always between 0 and 1 and this boundedness particularly today
-[0:14:09] and this boundedness particularly today we're going to use this boundedness
-[0:14:12] we're going to use this boundedness implicitly in the algorithm
-[0:14:14] implicitly in the algorithm and at the end of this a spectrum one
-[0:14:17] and at the end of this a spectrum one and zero they have a specific meanings
-[0:14:20] and zero they have a specific meanings in the sense that the measure of
-[0:14:22] in the sense that the measure of dependence is going to be one if and
-[0:14:24] dependence is going to be one if and only y is a function of z given x and it
-[0:14:28] only y is a function of z given x and it is equal to zero if and only y is
-[0:14:30] is equal to zero if and only y is independent of z given x
-[0:14:33] independent of z given x now just by a quick look at the
-[0:14:35] now just by a quick look at the definition of this measure you may be
-[0:14:37] definition of this measure you may be like okay
+[0:13:36] by the definition of the measure because
+[0:13:38] he today we're just using it as a black
+[0:13:41] box but i just put the definition here
+[0:13:44] if you want to look at it but this
+[0:13:46] measure so here y and z given x is
+[0:13:49] basically going to tell us how much y
+[0:13:52] depends on a vector of variable z
+[0:13:55] given a vector of variables x so it is a
+[0:13:58] conditional measure of dependence with
+[0:14:00] some properties what are these
+[0:14:02] properties first of all it is a bounded
+[0:14:05] measure so it's always between 0 and 1
+[0:14:07] and this boundedness particularly today
+[0:14:09] we're going to use this boundedness
+[0:14:12] implicitly in the algorithm
+[0:14:14] and at the end of this a spectrum one
+[0:14:17] and zero they have a specific meanings
+[0:14:20] in the sense that the measure of
+[0:14:22] dependence is going to be one if and
+[0:14:24] only y is a function of z given x and it
+[0:14:28] is equal to zero if and only y is
+[0:14:30] independent of z given x
+[0:14:33] now just by a quick look at the
+[0:14:35] definition of this measure you may be
 [0:14:38] like okay it seems a little bit complicated
-[0:14:40] it seems a little bit complicated because there is some integration
-[0:14:42] because there is some integration involved there's some conditional
-[0:14:44] involved there's some conditional expectation i don't have the
-[0:14:46] expectation i don't have the distribution of my variables a priori so
-[0:14:49] distribution of my variables a priori so actually how am i gonna
-[0:14:51] actually how am i gonna calculate this all this stuff
-[0:14:53] calculate this all this stuff fortunately
-[0:14:55] fortunately it comes with an estimator that actually
-[0:14:57] it comes with an estimator that actually do not necro
-[0:14:59] do not necro do not require to actually calculate
-[0:15:01] do not require to actually calculate these integrals and expectation and as
-[0:15:04] these integrals and expectation and as much makes our life much easier so the
-[0:15:06] much makes our life much easier so the definition of this estimator here i
-[0:15:09] definition of this estimator here i again put it here for you
-[0:15:11] again put it here for you but the
+[0:14:40] because there is some integration
+[0:14:42] involved there's some conditional
+[0:14:44] expectation i don't have the
+[0:14:46] distribution of my variables a priori so
+[0:14:49] actually how am i gonna
+[0:14:51] calculate this all this stuff
+[0:14:53] fortunately
+[0:14:55] it comes with an estimator that actually
+[0:14:57] do not necro
+[0:14:59] do not require to actually calculate
+[0:15:01] these integrals and expectation and as
+[0:15:04] much makes our life much easier so the
+[0:15:06] definition of this estimator here i
+[0:15:09] again put it here for you
 [0:15:13] but the the point that you just need to take out
-[0:15:15] the point that you just need to take out from this slide is that the estimator
-[0:15:18] from this slide is that the estimator requires calculating three things three
-[0:15:22] requires calculating three things three ingredients some nearest neighbors in
-[0:15:24] ingredients some nearest neighbors in this search and some ranking and both
-[0:15:28] this search and some ranking and both finding the ranking and this nearest
-[0:15:31] finding the ranking and this nearest neighbor search all of this can be done
-[0:15:34] neighbor search all of this can be done super quickly in n log and time for
-[0:15:36] super quickly in n log and time for nearest neighbor stage in fixed
-[0:15:38] nearest neighbor stage in fixed dimension their algorithms can can do it
-[0:15:41] dimension their algorithms can can do it in n log in time and for finding the
-[0:15:43] in n log in time and for finding the ranks of our variable y
-[0:15:45] ranks of our variable y it's just sorting the variable y so it's
-[0:15:48] it's just sorting the variable y so it's super quickly and therefore the the this
-[0:15:51] super quickly and therefore the the this estimator of our measure of dependence
-[0:15:54] estimator of our measure of dependence is super quick computationally
-[0:15:57] is super quick computationally and also it does not require us to
-[0:16:00] and also it does not require us to know have any knowledge on the disjoint
-[0:16:03] know have any knowledge on the disjoint probability distribution or estimate the
-[0:16:06] probability distribution or estimate the probability distribution which is a hard
-[0:16:08] probability distribution which is a hard task so at the end we have an estimator
-[0:16:12] task so at the end we have an estimator that
+[0:15:15] from this slide is that the estimator
+[0:15:18] requires calculating three things three
+[0:15:22] ingredients some nearest neighbors in
+[0:15:24] this search and some ranking and both
+[0:15:28] finding the ranking and this nearest
+[0:15:31] neighbor search all of this can be done
+[0:15:34] super quickly in n log and time for
+[0:15:36] nearest neighbor stage in fixed
+[0:15:38] dimension their algorithms can can do it
+[0:15:41] in n log in time and for finding the
+[0:15:43] ranks of our variable y
+[0:15:45] it's just sorting the variable y so it's
+[0:15:48] super quickly and therefore the the this
+[0:15:51] estimator of our measure of dependence
+[0:15:54] is super quick computationally
+[0:15:57] and also it does not require us to
+[0:16:00] know have any knowledge on the disjoint
+[0:16:03] probability distribution or estimate the
+[0:16:06] probability distribution which is a hard
+[0:16:08] task so at the end we have an estimator
 [0:16:13] that can capture the conditional dependency
-[0:16:16] can capture the conditional dependency between some variables super quickly and
-[0:16:19] between some variables super quickly and how are we going to use this
-[0:16:22] how are we going to use this now let's get to the fossa
-[0:16:24] now let's get to the fossa so what foster does is that basically we
-[0:16:28] so what foster does is that basically we have n sample of our variables y and
-[0:16:30] have n sample of our variables y and this x1 to xp
-[0:16:33] this x1 to xp at the beginning we have a set which we
-[0:16:35] at the beginning we have a set which we just let it be equal to the empty set
-[0:16:38] just let it be equal to the empty set and i'm going to go step by step and put
-[0:16:41] and i'm going to go step by step and put some variables into this set s and uh
-[0:16:44] some variables into this set s and uh increase its size
-[0:16:46] increase its size and let's see how how do we do that
-[0:16:49] and let's see how how do we do that so in the first step of four side
-[0:16:52] so in the first step of four side basically what we do is that we
-[0:16:54] basically what we do is that we calculate the dependency of y on each of
-[0:16:58] calculate the dependency of y on each of these single variables x 1 to x t
-[0:17:01] these single variables x 1 to x t and then we see which one of them is
-[0:17:03] and then we see which one of them is going to maximize this dependency the
-[0:17:06] going to maximize this dependency the one that is going to maximize we're
-[0:17:08] one that is going to maximize we're going to put it into our set as hat
-[0:17:11] going to put it into our set as hat now let's go to the second step in the
-[0:17:14] now let's go to the second step in the second step i've already chosen this one
-[0:17:17] second step i've already chosen this one xj1 as the in the previous step now i'm
-[0:17:20] xj1 as the in the previous step now i'm going to see okay conditional on the
-[0:17:22] going to see okay conditional on the variable that i've already picked that's
-[0:17:24] variable that i've already picked that's selected
+[0:16:16] between some variables super quickly and
+[0:16:19] how are we going to use this
+[0:16:22] now let's get to the fossa
+[0:16:24] so what foster does is that basically we
+[0:16:28] have n sample of our variables y and
+[0:16:30] this x1 to xp
+[0:16:33] at the beginning we have a set which we
+[0:16:35] just let it be equal to the empty set
+[0:16:38] and i'm going to go step by step and put
+[0:16:41] some variables into this set s and uh
+[0:16:44] increase its size
+[0:16:46] and let's see how how do we do that
+[0:16:49] so in the first step of four side
+[0:16:52] basically what we do is that we
+[0:16:54] calculate the dependency of y on each of
+[0:16:58] these single variables x 1 to x t
+[0:17:01] and then we see which one of them is
+[0:17:03] going to maximize this dependency the
+[0:17:06] one that is going to maximize we're
+[0:17:08] going to put it into our set as hat
+[0:17:11] now let's go to the second step in the
+[0:17:14] second step i've already chosen this one
+[0:17:17] xj1 as the in the previous step now i'm
+[0:17:20] going to see okay conditional on the
+[0:17:22] variable that i've already picked that's
 [0:17:26] selected what are the which which other variable
-[0:17:28] what are the which which other variable is going to maximize this dependency
-[0:17:31] is going to maximize this dependency with y i'm going to pick that one as a
-[0:17:34] with y i'm going to pick that one as a as
+[0:17:28] is going to maximize this dependency
+[0:17:31] with y i'm going to pick that one as a
 [0:17:35] as the second variable j2 and add it to my
-[0:17:38] the second variable j2 and add it to my set
 [0:17:39] set this the next step is similar so i've
-[0:17:42] this the next step is similar so i've already picked xj1 and xj2 conditional
-[0:17:46] already picked xj1 and xj2 conditional on xj1 and xj2 i'm gonna see which one
-[0:17:50] on xj1 and xj2 i'm gonna see which one of the remaining variables is going to
-[0:17:52] of the remaining variables is going to have the highest amount of dependency
-[0:17:55] have the highest amount of dependency with y and pick that index and put it
-[0:17:57] with y and pick that index and put it into my set
-[0:17:59] into my set now you may ask that okay when are you
-[0:18:01] now you may ask that okay when are you going to stop because this procedure may
-[0:18:04] going to stop because this procedure may continue until i run out of all the
-[0:18:06] continue until i run out of all the remaining variables but fortunately the
-[0:18:08] remaining variables but fortunately the algorithm tells us when we need to stop
-[0:18:11] algorithm tells us when we need to stop note that
+[0:17:42] already picked xj1 and xj2 conditional
+[0:17:46] on xj1 and xj2 i'm gonna see which one
+[0:17:50] of the remaining variables is going to
+[0:17:52] have the highest amount of dependency
+[0:17:55] with y and pick that index and put it
+[0:17:57] into my set
+[0:17:59] now you may ask that okay when are you
+[0:18:01] going to stop because this procedure may
+[0:18:04] continue until i run out of all the
+[0:18:06] remaining variables but fortunately the
+[0:18:08] algorithm tells us when we need to stop
 [0:18:12] note that the what this algorithm is doing is
-[0:18:14] the what this algorithm is doing is basically doing that okay i have
-[0:18:16] basically doing that okay i have selected a bunch of variables
-[0:18:18] selected a bunch of variables is there any of the remaining variables
-[0:18:21] is there any of the remaining variables um
+[0:18:14] basically doing that okay i have
+[0:18:16] selected a bunch of variables
+[0:18:18] is there any of the remaining variables
 [0:18:22] um worthy to add to my setup
-[0:18:25] worthy to add to my setup to this sentence had and by worthy
-[0:18:28] to this sentence had and by worthy what i mean is that conditional on the
-[0:18:31] what i mean is that conditional on the set that i have already selected is
-[0:18:34] set that i have already selected is there any xk remaining such that this
-[0:18:37] there any xk remaining such that this value is positive
-[0:18:40] value is positive and if the answer to this question is no
-[0:18:43] and if the answer to this question is no in the sense that there's no variable
-[0:18:45] in the sense that there's no variable that
+[0:18:25] to this sentence had and by worthy
+[0:18:28] what i mean is that conditional on the
+[0:18:31] set that i have already selected is
+[0:18:34] there any xk remaining such that this
+[0:18:37] value is positive
+[0:18:40] and if the answer to this question is no
+[0:18:43] in the sense that there's no variable
 [0:18:46] that has positive dependency with y given the
-[0:18:50] has positive dependency with y given the selected set of variables i need to stop
-[0:18:53] selected set of variables i need to stop because it's basically saying that given
-[0:18:55] because it's basically saying that given the set of variables that i have already
-[0:18:57] the set of variables that i have already selected there is no dependency with the
-[0:18:59] selected there is no dependency with the rest of the variables
-[0:19:01] rest of the variables so this is the
-[0:19:02] so this is the what our foresight does
-[0:19:05] what our foresight does so within these settings basically
-[0:19:08] so within these settings basically we have shown that with uh with some
-[0:19:12] we have shown that with uh with some under very mild assumptions basically
-[0:19:14] under very mild assumptions basically this set is hat that fosi selects is a
-[0:19:18] this set is hat that fosi selects is a mark of blankets means that
-[0:19:20] mark of blankets means that uh given this set y is independent of
-[0:19:24] uh given this set y is independent of all the rest of the variables but note
-[0:19:26] all the rest of the variables but note that basically this
-[0:19:29] that basically this this result does not make any claim on
-[0:19:32] this result does not make any claim on the size of this markov blanket
-[0:19:34] the size of this markov blanket particularly it does not say that this
-[0:19:37] particularly it does not say that this is the minimal mark of blanket or this
-[0:19:39] is the minimal mark of blanket or this is the mark of boundary what we need was
-[0:19:42] is the mark of boundary what we need was the mark of boundary basically
+[0:18:50] selected set of variables i need to stop
+[0:18:53] because it's basically saying that given
+[0:18:55] the set of variables that i have already
+[0:18:57] selected there is no dependency with the
+[0:18:59] rest of the variables
+[0:19:01] so this is the
+[0:19:02] what our foresight does
+[0:19:05] so within these settings basically
+[0:19:08] we have shown that with uh with some
+[0:19:12] under very mild assumptions basically
+[0:19:14] this set is hat that fosi selects is a
+[0:19:18] mark of blankets means that
+[0:19:20] uh given this set y is independent of
+[0:19:24] all the rest of the variables but note
+[0:19:26] that basically this
+[0:19:29] this result does not make any claim on
+[0:19:32] the size of this markov blanket
+[0:19:34] particularly it does not say that this
+[0:19:37] is the minimal mark of blanket or this
+[0:19:39] is the mark of boundary what we need was
+[0:19:42] the mark of boundary basically
 [0:19:49] and note that foci is a greedy algorithm because in each step it was basically
-[0:19:51] because in each step it was basically looking at the variable that that was
-[0:19:54] looking at the variable that that was that was making the dependency the
-[0:19:56] that was making the dependency the highest and this greediness always
-[0:19:59] highest and this greediness always caused a problem and here it's not no
-[0:20:02] caused a problem and here it's not no exception here also the greediness of
-[0:20:05] exception here also the greediness of fosi can make problems and actually here
-[0:20:08] fosi can make problems and actually here i can show you an example that how
-[0:20:10] i can show you an example that how easily we can find situations that the
-[0:20:14] easily we can find situations that the greediness of foci
-[0:20:16] greediness of foci makes it
+[0:19:51] looking at the variable that that was
+[0:19:54] that was making the dependency the
+[0:19:56] highest and this greediness always
+[0:19:59] caused a problem and here it's not no
+[0:20:02] exception here also the greediness of
+[0:20:05] fosi can make problems and actually here
+[0:20:08] i can show you an example that how
+[0:20:10] easily we can find situations that the
+[0:20:14] greediness of foci
 [0:20:17] makes it basically not go into the optimal
-[0:20:20] basically not go into the optimal direction so in this example i have my
-[0:20:24] direction so in this example i have my uh
+[0:20:20] direction so in this example i have my
 [0:20:25] uh variable y and these two red
-[0:20:28] variable y and these two red variables x 1 and x 2 are the parents
-[0:20:31] variables x 1 and x 2 are the parents and x 3 is the grandparent
-[0:20:33] and x 3 is the grandparent and then what i did
-[0:20:35] and then what i did i just considered a simple example
-[0:20:38] i just considered a simple example in which
+[0:20:28] variables x 1 and x 2 are the parents
+[0:20:31] and x 3 is the grandparent
+[0:20:33] and then what i did
+[0:20:35] i just considered a simple example
 [0:20:39] in which i have these relationships between x1 x2
-[0:20:43] i have these relationships between x1 x2 x3 and y
 [0:20:45] x3 and y so for example you can take x3 as a
-[0:20:48] so for example you can take x3 as a normal random variable and then let x1
-[0:20:51] normal random variable and then let x1 be the sine of x3 from some noise and x2
-[0:20:55] be the sine of x3 from some noise and x2 the absolute value of x3 plus some noise
-[0:20:57] the absolute value of x3 plus some noise and y be the x1 times x2
-[0:21:01] and y be the x1 times x2 so note that if the
-[0:21:04] so note that if the strength of noise here that i control it
-[0:21:07] strength of noise here that i control it with this value of alpha if i take the
-[0:21:09] with this value of alpha if i take the if i if i assume that alpha this alpha
-[0:21:12] if i if i assume that alpha this alpha is small enough
-[0:21:14] is small enough what i'm trying to do with making alpha
-[0:21:16] what i'm trying to do with making alpha is small is that
-[0:21:18] is small is that i'm
+[0:20:48] normal random variable and then let x1
+[0:20:51] be the sine of x3 from some noise and x2
+[0:20:55] the absolute value of x3 plus some noise
+[0:20:57] and y be the x1 times x2
+[0:21:01] so note that if the
+[0:21:04] strength of noise here that i control it
+[0:21:07] with this value of alpha if i take the
+[0:21:09] if i if i assume that alpha this alpha
+[0:21:12] is small enough
+[0:21:14] what i'm trying to do with making alpha
+[0:21:16] is small is that
 [0:21:19] i'm emboldening the role of extreme this
-[0:21:22] emboldening the role of extreme this example what will happen is that x3
-[0:21:25] example what will happen is that x3 would contribute more than x1 and x2 to
-[0:21:28] would contribute more than x1 and x2 to the dependence to the to the structure
-[0:21:31] the dependence to the to the structure of y and therefore y will end up having
-[0:21:34] of y and therefore y will end up having higher dependency with x3 rather than
-[0:21:37] higher dependency with x3 rather than higher dependency with x1 and x2
-[0:21:41] higher dependency with x1 and x2 so what will happen is that if i choose
-[0:21:43] so what will happen is that if i choose alpha is small enough
-[0:21:45] alpha is small enough my this four-star algorithm is going to
-[0:21:47] my this four-star algorithm is going to first pick x3
-[0:21:49] first pick x3 of course because i i still have this
-[0:21:52] of course because i i still have this noise variables epsilon and epsilon 2
-[0:21:54] noise variables epsilon and epsilon 2 which contribute to y first i would
-[0:21:57] which contribute to y first i would select
+[0:21:22] example what will happen is that x3
+[0:21:25] would contribute more than x1 and x2 to
+[0:21:28] the dependence to the to the structure
+[0:21:31] of y and therefore y will end up having
+[0:21:34] higher dependency with x3 rather than
+[0:21:37] higher dependency with x1 and x2
+[0:21:41] so what will happen is that if i choose
+[0:21:43] alpha is small enough
+[0:21:45] my this four-star algorithm is going to
+[0:21:47] first pick x3
+[0:21:49] of course because i i still have this
+[0:21:52] noise variables epsilon and epsilon 2
+[0:21:54] which contribute to y first i would
 [0:21:58] select x2 and x1 at the end but it is actually
-[0:22:02] x2 and x1 at the end but it is actually selecting a set that is a superset of
-[0:22:04] selecting a set that is a superset of the markov boundary so i will end up
-[0:22:07] the markov boundary so i will end up having x1 x2 and x3 so this x3 thing is
-[0:22:10] having x1 x2 and x3 so this x3 thing is going to be an extra variable and
-[0:22:13] going to be an extra variable and therefore i will not get the mark of
-[0:22:15] therefore i will not get the mark of boundary and that is
-[0:22:17] boundary and that is troublemaking so
-[0:22:19] troublemaking so can we somehow
-[0:22:21] can we somehow uh characterize this problem in a way to
-[0:22:26] uh characterize this problem in a way to like in
+[0:22:02] selecting a set that is a superset of
+[0:22:04] the markov boundary so i will end up
+[0:22:07] having x1 x2 and x3 so this x3 thing is
+[0:22:10] going to be an extra variable and
+[0:22:13] therefore i will not get the mark of
+[0:22:15] boundary and that is
+[0:22:17] troublemaking so
+[0:22:19] can we somehow
+[0:22:21] uh characterize this problem in a way to
 [0:22:27] like in a mathematical way and find situations
-[0:22:29] a mathematical way and find situations when we can say that okay in this
-[0:22:31] when we can say that okay in this situation we are sure that this problem
-[0:22:33] situation we are sure that this problem does is not occurring
-[0:22:36] does is not occurring so
+[0:22:29] when we can say that okay in this
+[0:22:31] situation we are sure that this problem
+[0:22:33] does is not occurring
 [0:22:36] so note that what was causing the problem
-[0:22:39] note that what was causing the problem basically the problem was coming from
-[0:22:41] basically the problem was coming from the fact that this x3 which is not part
-[0:22:43] the fact that this x3 which is not part of the mark of boundary
-[0:22:45] of the mark of boundary was contributing to the depend to the uh
-[0:22:49] was contributing to the depend to the uh dependency structure more than the
-[0:22:52] dependency structure more than the variables that are actually in the
-[0:22:53] variables that are actually in the markov boundary so if i want to
-[0:22:56] markov boundary so if i want to mathematically write this down i first
-[0:22:59] mathematically write this down i first need to have this definition so define q
-[0:23:03] need to have this definition so define q as this
+[0:22:39] basically the problem was coming from
+[0:22:41] the fact that this x3 which is not part
+[0:22:43] of the mark of boundary
+[0:22:45] was contributing to the depend to the uh
+[0:22:49] dependency structure more than the
+[0:22:52] variables that are actually in the
+[0:22:53] markov boundary so if i want to
+[0:22:56] mathematically write this down i first
+[0:22:59] need to have this definition so define q
 [0:23:05] as this value basically you don't really need to
-[0:23:08] value basically you don't really need to actually uh care about the
-[0:23:11] actually uh care about the precise definition of it because you can
-[0:23:13] precise definition of it because you can actually think of q as the numerator of
-[0:23:15] actually think of q as the numerator of this measure of dependence codec
-[0:23:18] this measure of dependence codec remember that codec was a
-[0:23:21] remember that codec was a ratio of two integrals which the
-[0:23:23] ratio of two integrals which the denominator is actually a normalizing
-[0:23:26] denominator is actually a normalizing constant so we cannot only care about
-[0:23:28] constant so we cannot only care about the numerator of it so define a q of y
-[0:23:33] the numerator of it so define a q of y and x s in this sense which basically is
-[0:23:35] and x s in this sense which basically is trying to say how much
-[0:23:38] trying to say how much uh this vector x is
-[0:23:40] uh this vector x is uh causes dependency of y
-[0:23:43] uh causes dependency of y and so
+[0:23:08] actually uh care about the
+[0:23:11] precise definition of it because you can
+[0:23:13] actually think of q as the numerator of
+[0:23:15] this measure of dependence codec
+[0:23:18] remember that codec was a
+[0:23:21] ratio of two integrals which the
+[0:23:23] denominator is actually a normalizing
+[0:23:26] constant so we cannot only care about
+[0:23:28] the numerator of it so define a q of y
+[0:23:33] and x s in this sense which basically is
+[0:23:35] trying to say how much
+[0:23:38] uh this vector x is
+[0:23:40] uh causes dependency of y
 [0:23:45] and so to mathematically write down what
-[0:23:48] to mathematically write down what what what what do we need to avoid
-[0:23:51] what what what do we need to avoid foresight
+[0:23:48] what what what do we need to avoid
 [0:23:52] foresight to
 [0:23:53] to um
 [0:23:54] um like add extra uh variables to the set
-[0:23:58] like add extra uh variables to the set as hand
 [0:24:00] as hand we basically need to say that okay given
-[0:24:02] we basically need to say that okay given any set
 [0:24:04] any set that is a subset of the markov boundary
-[0:24:07] that is a subset of the markov boundary if i pick a
-[0:24:09] if i pick a variable from the markov boundary so i
-[0:24:12] variable from the markov boundary so i is from the markov foundry and a
-[0:24:14] is from the markov foundry and a variable that is not from the mark of
-[0:24:16] variable that is not from the mark of boundary q of s
-[0:24:20] boundary q of s and r is going to be more than q of s
-[0:24:24] and r is going to be more than q of s and j
+[0:24:07] if i pick a
+[0:24:09] variable from the markov boundary so i
+[0:24:12] is from the markov foundry and a
+[0:24:14] variable that is not from the mark of
+[0:24:16] boundary q of s
+[0:24:20] and r is going to be more than q of s
 [0:24:25] and j by this value of delta what i'm trying
-[0:24:27] by this value of delta what i'm trying to say here is that
+[0:24:27] to say here is that
 [0:24:34] variables that are from the markov boundary
 [0:24:35] boundary are go um need to contribute
-[0:24:38] are go um need to contribute to uh why
 [0:24:40] to uh why uh
 [0:24:42] uh with amount of delta more than the
-[0:24:44] with amount of delta more than the variables that are outside of the mark
-[0:24:46] variables that are outside of the mark of boundary and this is just a way of
-[0:24:48] of boundary and this is just a way of writing things down not really important
-[0:24:52] writing things down not really important so
+[0:24:44] variables that are outside of the mark
+[0:24:46] of boundary and this is just a way of
+[0:24:48] writing things down not really important
 [0:24:53] so clearly because i defined it this way
-[0:24:56] clearly because i defined it this way now if we assume that
-[0:24:58] now if we assume that our structure has this property which we
-[0:25:02] our structure has this property which we call it a delta gap property delta gap
-[0:25:04] call it a delta gap property delta gap in the sense that the gap of dependency
-[0:25:07] in the sense that the gap of dependency of y with the variables in the markov
-[0:25:09] of y with the variables in the markov boundary is delta more than the
-[0:25:12] boundary is delta more than the variables outside of the mark of
-[0:25:14] variables outside of the mark of boundary if i have this delta gap
-[0:25:17] boundary if i have this delta gap the delta markov cap property then
-[0:25:19] the delta markov cap property then obviously fosa is actually going to give
-[0:25:22] obviously fosa is actually going to give us the markov boundary with high
-[0:25:24] us the markov boundary with high probability and it will not give us an
-[0:25:26] probability and it will not give us an over a super set of the mark of pantry
-[0:25:29] over a super set of the mark of pantry but
+[0:24:56] now if we assume that
+[0:24:58] our structure has this property which we
+[0:25:02] call it a delta gap property delta gap
+[0:25:04] in the sense that the gap of dependency
+[0:25:07] of y with the variables in the markov
+[0:25:09] boundary is delta more than the
+[0:25:12] variables outside of the mark of
+[0:25:14] boundary if i have this delta gap
+[0:25:17] the delta markov cap property then
+[0:25:19] obviously fosa is actually going to give
+[0:25:22] us the markov boundary with high
+[0:25:24] probability and it will not give us an
+[0:25:26] over a super set of the mark of pantry
 [0:25:30] but okay here you may say that it's all
-[0:25:33] okay here you may say that it's all seems a little bit artificial you just
-[0:25:35] seems a little bit artificial you just say that you need to have something and
-[0:25:38] say that you need to have something and then you write it down mathematically
-[0:25:40] then you write it down mathematically and then you defined it as a property
-[0:25:42] and then you defined it as a property but
+[0:25:33] seems a little bit artificial you just
+[0:25:35] say that you need to have something and
+[0:25:38] then you write it down mathematically
+[0:25:40] and then you defined it as a property
 [0:25:43] but at the end of the day we don't really
-[0:25:45] at the end of the day we don't really have the markov boundary so i cannot
-[0:25:48] have the markov boundary so i cannot really check this property so what all
-[0:25:51] really check this property so what all this story is about but i agree this all
-[0:25:55] this story is about but i agree this all is a bit weird but we can for example
-[0:25:58] is a bit weird but we can for example say what are the scenarios that hundred
-[0:26:01] say what are the scenarios that hundred percent even without checking i'm sure
-[0:26:04] percent even without checking i'm sure that this property will hold and one of
-[0:26:08] that this property will hold and one of them
+[0:25:45] have the markov boundary so i cannot
+[0:25:48] really check this property so what all
+[0:25:51] this story is about but i agree this all
+[0:25:55] is a bit weird but we can for example
+[0:25:58] say what are the scenarios that hundred
+[0:26:01] percent even without checking i'm sure
+[0:26:04] that this property will hold and one of
 [0:26:09] them we we call it three neighborhoods so
-[0:26:11] we we call it three neighborhoods so what's what do i mean by tree
-[0:26:12] what's what do i mean by tree neighborhood is that if you look at the
-[0:26:15] neighborhood is that if you look at the neighborhood of y in the tag there's
-[0:26:17] neighborhood of y in the tag there's basically no cycle going through the
-[0:26:21] basically no cycle going through the elements of the markov boundary of y so
-[0:26:24] elements of the markov boundary of y so the neighborhood of y in the tag would
-[0:26:26] the neighborhood of y in the tag would look like actually a tree
-[0:26:29] look like actually a tree and it is easy to show that if i have
-[0:26:32] and it is easy to show that if i have this tree neighborhood property then i
-[0:26:35] this tree neighborhood property then i have a delta such that i have this delta
-[0:26:38] have a delta such that i have this delta markov gap property
-[0:26:42] markov gap property so
+[0:26:11] what's what do i mean by tree
+[0:26:12] neighborhood is that if you look at the
+[0:26:15] neighborhood of y in the tag there's
+[0:26:17] basically no cycle going through the
+[0:26:21] elements of the markov boundary of y so
+[0:26:24] the neighborhood of y in the tag would
+[0:26:26] look like actually a tree
+[0:26:29] and it is easy to show that if i have
+[0:26:32] this tree neighborhood property then i
+[0:26:35] have a delta such that i have this delta
+[0:26:38] markov gap property
 [0:26:43] so any questions
 [0:26:49] um i think armen did a great job and answering the questions yeah
 [0:26:59] now okay just a recap of what i said so what we wanted to do was finding the set
-[0:27:01] what we wanted to do was finding the set of parents we said that okay let's
-[0:27:04] of parents we said that okay let's make
+[0:27:01] of parents we said that okay let's
 [0:27:06] make the sets that we are searching over a
-[0:27:08] the sets that we are searching over a little bit smaller so we said that okay
-[0:27:11] little bit smaller so we said that okay it's enough to look at the markov
-[0:27:12] it's enough to look at the markov boundary we found a way to find the
-[0:27:14] boundary we found a way to find the markov boundary and now i have the mark
-[0:27:17] markov boundary and now i have the mark of boundary which means that i have this
-[0:27:19] of boundary which means that i have this extra stuff children and a spouse is
-[0:27:21] extra stuff children and a spouse is there a way that i can get rid of this
-[0:27:23] there a way that i can get rid of this extra stuff and just get to the point
-[0:27:25] extra stuff and just get to the point that i wanted to
-[0:27:28] that i wanted to have at the beginning just a set of
-[0:27:29] have at the beginning just a set of parents
+[0:27:08] little bit smaller so we said that okay
+[0:27:11] it's enough to look at the markov
+[0:27:12] boundary we found a way to find the
+[0:27:14] markov boundary and now i have the mark
+[0:27:17] of boundary which means that i have this
+[0:27:19] extra stuff children and a spouse is
+[0:27:21] there a way that i can get rid of this
+[0:27:23] extra stuff and just get to the point
+[0:27:25] that i wanted to
+[0:27:28] have at the beginning just a set of
 [0:27:30] parents and how do we do that
-[0:27:32] and how do we do that so
 [0:27:33] so we we have we just with some of them we
-[0:27:36] we we have we just with some of them we have some observations that help us to
-[0:27:39] have some observations that help us to have the next step of the algorithm to
-[0:27:41] have the next step of the algorithm to get to the set of parents
-[0:27:43] get to the set of parents so first of all note that
-[0:27:45] so first of all note that if x i and x j both of them are parents
-[0:27:49] if x i and x j both of them are parents of y
+[0:27:36] have some observations that help us to
+[0:27:39] have the next step of the algorithm to
+[0:27:41] get to the set of parents
+[0:27:43] so first of all note that
+[0:27:45] if x i and x j both of them are parents
 [0:27:50] of y then if i find the markov boundary of x
-[0:27:53] then if i find the markov boundary of x i and x j they belong to each other so
-[0:27:57] i and x j they belong to each other so x i belong to
-[0:28:00] x i belong to the markov that basically the index i
-[0:28:02] the markov that basically the index i belongs to the markov boundary of
-[0:28:05] belongs to the markov boundary of x j and j also belongs to the markov
-[0:28:08] x j and j also belongs to the markov boundary of x i this is because
-[0:28:10] boundary of x i this is because parents
+[0:27:53] i and x j they belong to each other so
+[0:27:57] x i belong to
+[0:28:00] the markov that basically the index i
+[0:28:02] belongs to the markov boundary of
+[0:28:05] x j and j also belongs to the markov
+[0:28:08] boundary of x i this is because
 [0:28:11] parents have to share the same children which is
-[0:28:14] have to share the same children which is why actually so they have this kind of a
-[0:28:18] why actually so they have this kind of a symmetric relationship of being in each
-[0:28:21] symmetric relationship of being in each other's mark of boundary this always
-[0:28:23] other's mark of boundary this always happens this is always the case
-[0:28:25] happens this is always the case and if we have the tree neighborhood
-[0:28:28] and if we have the tree neighborhood property
+[0:28:14] why actually so they have this kind of a
+[0:28:18] symmetric relationship of being in each
+[0:28:21] other's mark of boundary this always
+[0:28:23] happens this is always the case
+[0:28:25] and if we have the tree neighborhood
 [0:28:29] property we have some one extra uh we can make
-[0:28:32] we have some one extra uh we can make one extra observation that comes handy
-[0:28:35] one extra observation that comes handy and that's it so take a note which is in
-[0:28:39] and that's it so take a note which is in the mark of boundary but it's not a
-[0:28:41] the mark of boundary but it's not a parent so it's either a children or it's
-[0:28:44] parent so it's either a children or it's a spouse
+[0:28:32] one extra observation that comes handy
+[0:28:35] and that's it so take a note which is in
+[0:28:39] the mark of boundary but it's not a
+[0:28:41] parent so it's either a children or it's
 [0:28:45] a spouse then find the mark of boundary of that
-[0:28:48] then find the mark of boundary of that non-parental notify and note that there
-[0:28:52] non-parental notify and note that there is no
+[0:28:48] non-parental notify and note that there
 [0:28:53] is no intersection with the set of patterns of
-[0:28:55] intersection with the set of patterns of y so
 [0:28:57] y so marco foundry of any non-parental node
-[0:29:00] marco foundry of any non-parental node does not contain any parent of y and
-[0:29:04] does not contain any parent of y and that's because y is blocking the
-[0:29:07] that's because y is blocking the information between the set of parents
-[0:29:09] information between the set of parents and the set of children and the spouses
-[0:29:12] and the set of children and the spouses now with these two observations we are
-[0:29:15] now with these two observations we are gonna do something
-[0:29:16] gonna do something so
+[0:29:00] does not contain any parent of y and
+[0:29:04] that's because y is blocking the
+[0:29:07] information between the set of parents
+[0:29:09] and the set of children and the spouses
+[0:29:12] now with these two observations we are
+[0:29:15] gonna do something
 [0:29:18] so uh
 [0:29:19] uh here is this my toy example
-[0:29:22] here is this my toy example from this toy example i want to tell you
-[0:29:24] from this toy example i want to tell you what i'm gonna do so note that these are
-[0:29:26] what i'm gonna do so note that these are these these red nodes are the set of
-[0:29:30] these these red nodes are the set of patterns right
-[0:29:31] patterns right and i said that
-[0:29:33] and i said that always we know that if i calculate the
-[0:29:35] always we know that if i calculate the markov boundary of parents they belong
-[0:29:38] markov boundary of parents they belong to each other's markov boundary
-[0:29:40] to each other's markov boundary so from this observation i'm going to
-[0:29:42] so from this observation i'm going to make an undirected graph which i'm going
-[0:29:45] make an undirected graph which i'm going to just going to call it gs star of y in
-[0:29:48] to just going to call it gs star of y in this way the node set of these
-[0:29:51] this way the node set of these undirected graph is going to contain all
-[0:29:54] undirected graph is going to contain all the nodes in the markov boundary of y
-[0:29:56] the nodes in the markov boundary of y and how i'm gonna
-[0:29:58] and how i'm gonna make the h set the h set is going to
-[0:30:01] make the h set the h set is going to consist of
-[0:30:03] consist of all pairs of i and j such that they
-[0:30:06] all pairs of i and j such that they belong to each other's mark of boundary
-[0:30:09] belong to each other's mark of boundary so in this story example i will end up
-[0:30:11] so in this story example i will end up having this undirected graph
-[0:30:15] having this undirected graph so note that all the patterns are
-[0:30:17] so note that all the patterns are connected to each other
-[0:30:19] connected to each other here because x6 is the is the parent of
-[0:30:24] here because x6 is the is the parent of x5 i will have this component and here
-[0:30:27] x5 i will have this component and here x4
+[0:29:22] from this toy example i want to tell you
+[0:29:24] what i'm gonna do so note that these are
+[0:29:26] these these red nodes are the set of
+[0:29:30] patterns right
+[0:29:31] and i said that
+[0:29:33] always we know that if i calculate the
+[0:29:35] markov boundary of parents they belong
+[0:29:38] to each other's markov boundary
+[0:29:40] so from this observation i'm going to
+[0:29:42] make an undirected graph which i'm going
+[0:29:45] to just going to call it gs star of y in
+[0:29:48] this way the node set of these
+[0:29:51] undirected graph is going to contain all
+[0:29:54] the nodes in the markov boundary of y
+[0:29:56] and how i'm gonna
+[0:29:58] make the h set the h set is going to
+[0:30:01] consist of
+[0:30:03] all pairs of i and j such that they
+[0:30:06] belong to each other's mark of boundary
+[0:30:09] so in this story example i will end up
+[0:30:11] having this undirected graph
+[0:30:15] so note that all the patterns are
+[0:30:17] connected to each other
+[0:30:19] here because x6 is the is the parent of
+[0:30:24] x5 i will have this component and here
 [0:30:28] x4 does not have any overlap the markov
-[0:30:31] does not have any overlap the markov boundary of x4 does not have any overlap
-[0:30:33] boundary of x4 does not have any overlap with the other so it would be this
-[0:30:35] with the other so it would be this isolated single tone a site
-[0:30:39] isolated single tone a site so
+[0:30:31] boundary of x4 does not have any overlap
+[0:30:33] with the other so it would be this
+[0:30:35] isolated single tone a site
 [0:30:40] so basically what i did was that i created
-[0:30:43] basically what i did was that i created this
 [0:30:44] this undirected graph which is telling me
-[0:30:47] undirected graph which is telling me something this undirected graph
-[0:30:49] something this undirected graph is consist of some
-[0:30:51] is consist of some components notice that each component is
-[0:30:54] components notice that each component is a full
+[0:30:47] something this undirected graph
+[0:30:49] is consist of some
+[0:30:51] components notice that each component is
 [0:30:55] a full uh is a fully connected sub graph like
-[0:30:58] uh is a fully connected sub graph like this or this these are all fully
-[0:30:59] this or this these are all fully connected
+[0:30:58] this or this these are all fully
 [0:31:00] connected and then so after after getting these
-[0:31:04] and then so after after getting these fully connected sub graphs that are
-[0:31:07] fully connected sub graphs that are disjoint of each other basically i can
-[0:31:09] disjoint of each other basically i can focus on each of these
-[0:31:12] focus on each of these sub graphs and search within those sub
-[0:31:15] sub graphs and search within those sub graphs you can see here that one of
-[0:31:17] graphs you can see here that one of these subgraphs contains all the set of
-[0:31:20] these subgraphs contains all the set of patterns and how how am i going to get
-[0:31:22] patterns and how how am i going to get to that
+[0:31:04] fully connected sub graphs that are
+[0:31:07] disjoint of each other basically i can
+[0:31:09] focus on each of these
+[0:31:12] sub graphs and search within those sub
+[0:31:15] graphs you can see here that one of
+[0:31:17] these subgraphs contains all the set of
+[0:31:20] patterns and how how am i going to get
 [0:31:25] to that so
 [0:31:30] note that if i again have this three neighborhood property
-[0:31:33] neighborhood property there is at most one of these components
-[0:31:37] there is at most one of these components of disconnected components of this
-[0:31:40] of disconnected components of this undirected graph such that
-[0:31:43] undirected graph such that all the pairwise
-[0:31:46] all the pairwise nodes in this
-[0:31:48] nodes in this sub graph are independent of each other
-[0:31:51] sub graph are independent of each other so for example here x1 x2 and x3 if you
-[0:31:56] so for example here x1 x2 and x3 if you do independence tests between any two of
-[0:31:59] do independence tests between any two of them they are all going to be
-[0:32:00] them they are all going to be independent of each other but these
-[0:32:02] independent of each other but these components x 5 and x is are actually
-[0:32:05] components x 5 and x is are actually dependent on each other so
-[0:32:07] dependent on each other so if you do a test of independence you're
-[0:32:10] if you do a test of independence you're going to reject the hypothesis
-[0:32:13] going to reject the hypothesis and uh so if i have a three neighborhood
-[0:32:17] and uh so if i have a three neighborhood assumption what will happen is that
-[0:32:19] assumption what will happen is that exactly exactly one of these uh
-[0:32:23] exactly exactly one of these uh gi's the the
-[0:32:25] gi's the the um
+[0:31:33] there is at most one of these components
+[0:31:37] of disconnected components of this
+[0:31:40] undirected graph such that
+[0:31:43] all the pairwise
+[0:31:46] nodes in this
+[0:31:48] sub graph are independent of each other
+[0:31:51] so for example here x1 x2 and x3 if you
+[0:31:56] do independence tests between any two of
+[0:31:59] them they are all going to be
+[0:32:00] independent of each other but these
+[0:32:02] components x 5 and x is are actually
+[0:32:05] dependent on each other so
+[0:32:07] if you do a test of independence you're
+[0:32:10] going to reject the hypothesis
+[0:32:13] and uh so if i have a three neighborhood
+[0:32:17] assumption what will happen is that
+[0:32:19] exactly exactly one of these uh
+[0:32:23] gi's the the
 [0:32:27] um that this fully connected uh the
-[0:32:30] that this fully connected uh the connected components of gl star is going
-[0:32:33] connected components of gl star is going to have this property that all the
-[0:32:35] to have this property that all the pairwise independence tests are going to
-[0:32:38] pairwise independence tests are going to be accepted and that component is going
-[0:32:41] be accepted and that component is going to be the set of fans so to summarize
-[0:32:44] to be the set of fans so to summarize what i've said is we have this algorithm
-[0:32:47] what i've said is we have this algorithm so let's say that i have a sample of
-[0:32:49] so let's say that i have a sample of size n of my variables what i need to do
-[0:32:52] size n of my variables what i need to do is to
+[0:32:30] connected components of gl star is going
+[0:32:33] to have this property that all the
+[0:32:35] pairwise independence tests are going to
+[0:32:38] be accepted and that component is going
+[0:32:41] to be the set of fans so to summarize
+[0:32:44] what i've said is we have this algorithm
+[0:32:47] so let's say that i have a sample of
+[0:32:49] size n of my variables what i need to do
 [0:32:54] is to basically figure out the markov boundary
-[0:32:56] basically figure out the markov boundary of y and the markov boundary of each
-[0:32:59] of y and the markov boundary of each node in the markov boundary of y so uh i
-[0:33:03] node in the markov boundary of y so uh i i find the micro boundary of y for each
-[0:33:06] i find the micro boundary of y for each member in the micro boundary of y i
-[0:33:08] member in the micro boundary of y i calculate the markov boundary then i
-[0:33:11] calculate the markov boundary then i now i'm in this position to create this
-[0:33:13] now i'm in this position to create this undirected gstar graph to create
-[0:33:16] undirected gstar graph to create non-directed geostar graph i add the
-[0:33:18] non-directed geostar graph i add the edges with this relationship and then
-[0:33:22] edges with this relationship and then to find that connected component that is
-[0:33:24] to find that connected component that is representing the parents i'm gonna do
-[0:33:27] representing the parents i'm gonna do pairwise independence test
-[0:33:30] pairwise independence test and note that so far i haven't done any
-[0:33:33] and note that so far i haven't done any conditional independence testing or
-[0:33:35] conditional independence testing or anything else like that
-[0:33:37] anything else like that thanks to the assumption of three
-[0:33:39] thanks to the assumption of three neighborhood property that i'm doing
-[0:33:42] neighborhood property that i'm doing so at the beginning i talked about
-[0:33:45] so at the beginning i talked about this
+[0:32:56] of y and the markov boundary of each
+[0:32:59] node in the markov boundary of y so uh i
+[0:33:03] i find the micro boundary of y for each
+[0:33:06] member in the micro boundary of y i
+[0:33:08] calculate the markov boundary then i
+[0:33:11] now i'm in this position to create this
+[0:33:13] undirected gstar graph to create
+[0:33:16] non-directed geostar graph i add the
+[0:33:18] edges with this relationship and then
+[0:33:22] to find that connected component that is
+[0:33:24] representing the parents i'm gonna do
+[0:33:27] pairwise independence test
+[0:33:30] and note that so far i haven't done any
+[0:33:33] conditional independence testing or
+[0:33:35] anything else like that
+[0:33:37] thanks to the assumption of three
+[0:33:39] neighborhood property that i'm doing
+[0:33:42] so at the beginning i talked about
 [0:33:47] this a mark of equivalence class stuff but
-[0:33:50] a mark of equivalence class stuff but after that you didn't hear anything
-[0:33:52] after that you didn't hear anything about it now it's the time that we talk
-[0:33:55] about it now it's the time that we talk about it again so what will happen is
-[0:33:58] about it again so what will happen is that there are situations in which
-[0:34:00] that there are situations in which actually i cannot identify exactly for
-[0:34:04] actually i cannot identify exactly for 100 that for example this is the set of
-[0:34:07] 100 that for example this is the set of parents and that situation occurs when
-[0:34:10] parents and that situation occurs when why has
+[0:33:50] after that you didn't hear anything
+[0:33:52] about it now it's the time that we talk
+[0:33:55] about it again so what will happen is
+[0:33:58] that there are situations in which
+[0:34:00] actually i cannot identify exactly for
+[0:34:04] 100 that for example this is the set of
+[0:34:07] parents and that situation occurs when
 [0:34:12] why has um one parent and a bunch of children
-[0:34:16] um one parent and a bunch of children that don't have spouses for example
-[0:34:18] that don't have spouses for example consider this situation that i have y
-[0:34:21] consider this situation that i have y and i have x1 as parent and i have a
-[0:34:25] and i have x1 as parent and i have a bunch of childs that they don't have any
-[0:34:28] bunch of childs that they don't have any other patterns
-[0:34:29] other patterns that's 3x4
-[0:34:31] that's 3x4 in this situation you can have this
-[0:34:33] in this situation you can have this graph as the as your true uh as as your
-[0:34:38] graph as the as your true uh as as your as the dag that you are interested in or
-[0:34:40] as the dag that you are interested in or you can have this graph
-[0:34:42] you can have this graph it's like
+[0:34:16] that don't have spouses for example
+[0:34:18] consider this situation that i have y
+[0:34:21] and i have x1 as parent and i have a
+[0:34:25] bunch of childs that they don't have any
+[0:34:28] other patterns
+[0:34:29] that's 3x4
+[0:34:31] in this situation you can have this
+[0:34:33] graph as the as your true uh as as your
+[0:34:38] as the dag that you are interested in or
+[0:34:40] you can have this graph
 [0:34:44] it's like did not put that much space too
-[0:34:47] did not put that much space too and let's draw it here you can have this
-[0:34:49] and let's draw it here you can have this one
+[0:34:47] and let's draw it here you can have this
 [0:34:51] one why
 [0:34:53] why this one i want to say that okay x2 is
-[0:34:55] this one i want to say that okay x2 is the parent
+[0:34:55] the parent
 [0:35:05] right so any of these two can be this it can be the solution so here x1 is the
-[0:35:07] it can be the solution so here x1 is the parent but in this equivalent that x2 is
-[0:35:10] parent but in this equivalent that x2 is the parent so what am i going to do is
-[0:35:13] the parent so what am i going to do is that my algorithm basically is instead
-[0:35:16] that my algorithm basically is instead of
+[0:35:07] parent but in this equivalent that x2 is
+[0:35:10] the parent so what am i going to do is
+[0:35:13] that my algorithm basically is instead
 [0:35:16] of uh outputting just one set and claiming
-[0:35:20] uh outputting just one set and claiming that this is the set of hand is going to
-[0:35:22] that this is the set of hand is going to output a collection of sets that say
-[0:35:25] output a collection of sets that say that okay if actually the set of
-[0:35:27] that okay if actually the set of patterns are not identifiable you may
-[0:35:30] patterns are not identifiable you may have this situation this situation this
-[0:35:32] have this situation this situation this situation so i will output as a
-[0:35:34] situation so i will output as a collection of sets of patterns and um
-[0:35:39] collection of sets of patterns and um yeah that's it
-[0:35:40] yeah that's it and we'll just let me tell you that okay
-[0:35:42] and we'll just let me tell you that okay actually can we give you some guarantees
-[0:35:45] actually can we give you some guarantees for this algorithm whether it actually
-[0:35:47] for this algorithm whether it actually works in practice or not and the answer
-[0:35:50] works in practice or not and the answer is fortunately yes so these are some
-[0:35:52] is fortunately yes so these are some assumptions that we need we can go back
-[0:35:54] assumptions that we need we can go back to it
+[0:35:20] that this is the set of hand is going to
+[0:35:22] output a collection of sets that say
+[0:35:25] that okay if actually the set of
+[0:35:27] patterns are not identifiable you may
+[0:35:30] have this situation this situation this
+[0:35:32] situation so i will output as a
+[0:35:34] collection of sets of patterns and um
+[0:35:39] yeah that's it
+[0:35:40] and we'll just let me tell you that okay
+[0:35:42] actually can we give you some guarantees
+[0:35:45] for this algorithm whether it actually
+[0:35:47] works in practice or not and the answer
+[0:35:50] is fortunately yes so these are some
+[0:35:52] assumptions that we need we can go back
 [0:35:56] to it but i'm just going to tell you what they
-[0:35:57] but i'm just going to tell you what they are saying the first assumption is just
-[0:35:59] are saying the first assumption is just telling us
-[0:36:00] telling us that at the
-[0:36:02] that at the conditional probability distribution of
-[0:36:04] conditional probability distribution of y given the variables of given the other
-[0:36:07] y given the variables of given the other variables need to be
-[0:36:09] variables need to be smooth in the sense that it needs to be
-[0:36:10] smooth in the sense that it needs to be kind of follows a lip sheets-ness
-[0:36:13] kind of follows a lip sheets-ness property if i change the variable that
-[0:36:15] property if i change the variable that i'm conditioning on the probability
-[0:36:17] i'm conditioning on the probability distribution of y should not change
-[0:36:19] distribution of y should not change drastically the other assumption is
-[0:36:21] drastically the other assumption is basically just
-[0:36:23] basically just making sure that the support the size of
-[0:36:25] making sure that the support the size of the support of
-[0:36:27] the support of my variables is not crazy big i can
-[0:36:29] my variables is not crazy big i can bound them somehow
-[0:36:31] bound them somehow and the last property is the delta
-[0:36:33] and the last property is the delta markov gaap property that we talked
-[0:36:35] markov gaap property that we talked about so given these three assumptions
-[0:36:39] about so given these three assumptions the first guarantee that we have is that
-[0:36:42] the first guarantee that we have is that if we have these three assumptions in
-[0:36:46] if we have these three assumptions in clue and the tree neighborhood property
-[0:36:49] clue and the tree neighborhood property for y
+[0:35:57] are saying the first assumption is just
+[0:35:59] telling us
+[0:36:00] that at the
+[0:36:02] conditional probability distribution of
+[0:36:04] y given the variables of given the other
+[0:36:07] variables need to be
+[0:36:09] smooth in the sense that it needs to be
+[0:36:10] kind of follows a lip sheets-ness
+[0:36:13] property if i change the variable that
+[0:36:15] i'm conditioning on the probability
+[0:36:17] distribution of y should not change
+[0:36:19] drastically the other assumption is
+[0:36:21] basically just
+[0:36:23] making sure that the support the size of
+[0:36:25] the support of
+[0:36:27] my variables is not crazy big i can
+[0:36:29] bound them somehow
+[0:36:31] and the last property is the delta
+[0:36:33] markov gaap property that we talked
+[0:36:35] about so given these three assumptions
+[0:36:39] the first guarantee that we have is that
+[0:36:42] if we have these three assumptions in
+[0:36:46] clue and the tree neighborhood property
 [0:36:50] for y then with high probability the output of
-[0:36:53] then with high probability the output of force i
 [0:36:54] force i actually consists of all the parent
-[0:36:57] actually consists of all the parent offsets so we we can actually with high
-[0:37:00] offsets so we we can actually with high probability capture all those sets that
-[0:37:03] probability capture all those sets that are parents of what
-[0:37:05] are parents of what the next result is
-[0:37:08] the next result is okay
+[0:36:57] offsets so we we can actually with high
+[0:37:00] probability capture all those sets that
+[0:37:03] are parents of what
+[0:37:05] the next result is
 [0:37:09] okay i don't know whether i have the tree
-[0:37:11] i don't know whether i have the tree neighborhood assumption or uh property
-[0:37:14] neighborhood assumption or uh property or not and honestly in reality there are
-[0:37:17] or not and honestly in reality there are many situations that you cannot test i
-[0:37:19] many situations that you cannot test i mean you can't really test whether
-[0:37:22] mean you can't really test whether a data set that you have followed the
-[0:37:24] a data set that you have followed the history neighborhood property or not
-[0:37:27] history neighborhood property or not what can we say in that case if we do
-[0:37:29] what can we say in that case if we do not know anything about property under
-[0:37:31] not know anything about property under again those same assumptions but this
-[0:37:34] again those same assumptions but this time without assuming that y has this
-[0:37:36] time without assuming that y has this three neighborhood property we can say
-[0:37:39] three neighborhood property we can say that okay the output of foci does not
-[0:37:42] that okay the output of foci does not make any false discoveries in the with
-[0:37:44] make any false discoveries in the with high probability in the sense that i
-[0:37:46] high probability in the sense that i would output a bunch of sets
-[0:37:49] would output a bunch of sets and with high probability
-[0:37:50] and with high probability i assure you that none of these stats
-[0:37:53] i assure you that none of these stats contain any non-parental set so in in
-[0:37:57] contain any non-parental set so in in distance we have sort of a conservative
-[0:37:59] distance we have sort of a conservative algorithm that makes sure that okay i
-[0:38:03] algorithm that makes sure that okay i may not give you any set but if i give
-[0:38:07] may not give you any set but if i give you any it will not contain anything
-[0:38:09] you any it will not contain anything extra
+[0:37:11] neighborhood assumption or uh property
+[0:37:14] or not and honestly in reality there are
+[0:37:17] many situations that you cannot test i
+[0:37:19] mean you can't really test whether
+[0:37:22] a data set that you have followed the
+[0:37:24] history neighborhood property or not
+[0:37:27] what can we say in that case if we do
+[0:37:29] not know anything about property under
+[0:37:31] again those same assumptions but this
+[0:37:34] time without assuming that y has this
+[0:37:36] three neighborhood property we can say
+[0:37:39] that okay the output of foci does not
+[0:37:42] make any false discoveries in the with
+[0:37:44] high probability in the sense that i
+[0:37:46] would output a bunch of sets
+[0:37:49] and with high probability
+[0:37:50] i assure you that none of these stats
+[0:37:53] contain any non-parental set so in in
+[0:37:57] distance we have sort of a conservative
+[0:37:59] algorithm that makes sure that okay i
+[0:38:03] may not give you any set but if i give
+[0:38:07] you any it will not contain anything
 [0:38:10] extra uh
 [0:38:12] uh so
 [0:38:13] so sorry to interrupt you just to remind
-[0:38:14] sorry to interrupt you just to remind you of the time you have around 10
-[0:38:16] you of the time you have around 10 minutes
+[0:38:14] you of the time you have around 10
 [0:38:18] minutes so now let's uh just see in like with
-[0:38:22] so now let's uh just see in like with the simulated example how this
-[0:38:24] the simulated example how this whole algorithm actually works so here
-[0:38:27] whole algorithm actually works so here consider this graph i'm going to focus
-[0:38:30] consider this graph i'm going to focus on these two nodes
-[0:38:31] on these two nodes 6 and x 11
-[0:38:33] 6 and x 11 so note that the patterns of x x are x 2
-[0:38:36] so note that the patterns of x x are x 2 x 3 and x 4 and the patterns of x 11 are
-[0:38:40] x 3 and x 4 and the patterns of x 11 are x 6 x 8 and x 2 just
-[0:38:42] x 6 x 8 and x 2 just have the whole picture in mind it's
-[0:38:44] have the whole picture in mind it's nothing and important and i have created
-[0:38:47] nothing and important and i have created this graph in a way that i'm sure that
-[0:38:49] this graph in a way that i'm sure that it satisfies this tree neighborhood
-[0:38:51] it satisfies this tree neighborhood property that i wanted and the
-[0:38:53] property that i wanted and the relationship i'm just just going to
-[0:38:55] relationship i'm just just going to generate a bunch of samples from
-[0:38:58] generate a bunch of samples from this graph using these relationships
-[0:39:01] this graph using these relationships that you can see here and just note that
-[0:39:04] that you can see here and just note that i
+[0:38:22] the simulated example how this
+[0:38:24] whole algorithm actually works so here
+[0:38:27] consider this graph i'm going to focus
+[0:38:30] on these two nodes
+[0:38:31] 6 and x 11
+[0:38:33] so note that the patterns of x x are x 2
+[0:38:36] x 3 and x 4 and the patterns of x 11 are
+[0:38:40] x 6 x 8 and x 2 just
+[0:38:42] have the whole picture in mind it's
+[0:38:44] nothing and important and i have created
+[0:38:47] this graph in a way that i'm sure that
+[0:38:49] it satisfies this tree neighborhood
+[0:38:51] property that i wanted and the
+[0:38:53] relationship i'm just just going to
+[0:38:55] generate a bunch of samples from
+[0:38:58] this graph using these relationships
+[0:39:01] that you can see here and just note that
 [0:39:05] i i randomly actually honestly picked
-[0:39:07] i randomly actually honestly picked these relationships so they are not
-[0:39:10] these relationships so they are not really linear i even
-[0:39:12] really linear i even added some situations where the noise is
-[0:39:15] added some situations where the noise is not additive so it's it's as crazy as
-[0:39:19] not additive so it's it's as crazy as you can imagine
-[0:39:20] you can imagine and so what i'm gonna do is that i'm
-[0:39:22] and so what i'm gonna do is that i'm gonna uh
+[0:39:07] these relationships so they are not
+[0:39:10] really linear i even
+[0:39:12] added some situations where the noise is
+[0:39:15] not additive so it's it's as crazy as
+[0:39:19] you can imagine
+[0:39:20] and so what i'm gonna do is that i'm
 [0:39:24] gonna uh see what how is the performance of my
-[0:39:26] see what how is the performance of my algorithm using the jacquard index so
-[0:39:28] algorithm using the jacquard index so jacquard index what this does is that
-[0:39:31] jacquard index what this does is that if you want to see how much two sets
-[0:39:34] if you want to see how much two sets overlap you can use jacquard index which
-[0:39:36] overlap you can use jacquard index which is the size of the intersection of those
-[0:39:39] is the size of the intersection of those two sets
+[0:39:26] algorithm using the jacquard index so
+[0:39:28] jacquard index what this does is that
+[0:39:31] if you want to see how much two sets
+[0:39:34] overlap you can use jacquard index which
+[0:39:36] is the size of the intersection of those
 [0:39:40] two sets divided by the size of the union and
-[0:39:42] divided by the size of the union and it's going to be between zero and one
-[0:39:45] it's going to be between zero and one if it's near one means that these two
-[0:39:47] if it's near one means that these two sets actually are hundred percent
-[0:39:48] sets actually are hundred percent overlapping and it's if it's close to
-[0:39:51] overlapping and it's if it's close to zero means that the overlap is small and
-[0:39:53] zero means that the overlap is small and it's also take
-[0:39:54] it's also take takes into account if you add too much
-[0:39:57] takes into account if you add too much stuff to your set
-[0:39:59] stuff to your set so if you if you have a lot of extra uh
-[0:40:02] so if you if you have a lot of extra uh elements then the digital card
-[0:40:05] elements then the digital card index tends to be near zero
-[0:40:07] index tends to be near zero so here
+[0:39:42] it's going to be between zero and one
+[0:39:45] if it's near one means that these two
+[0:39:47] sets actually are hundred percent
+[0:39:48] overlapping and it's if it's close to
+[0:39:51] zero means that the overlap is small and
+[0:39:53] it's also take
+[0:39:54] takes into account if you add too much
+[0:39:57] stuff to your set
+[0:39:59] so if you if you have a lot of extra uh
+[0:40:02] elements then the digital card
+[0:40:05] index tends to be near zero
 [0:40:09] so here is how my
 [0:40:11] is how my algorithm behaves so i have
-[0:40:14] algorithm behaves so i have created situations with sample size from
-[0:40:18] created situations with sample size from 2000 to 10 000 and here you can see that
-[0:40:21] 2000 to 10 000 and here you can see that the jacquard index is increasing
-[0:40:25] the jacquard index is increasing with this with the growing sample size
-[0:40:28] with this with the growing sample size and um
+[0:40:14] created situations with sample size from
+[0:40:18] 2000 to 10 000 and here you can see that
+[0:40:21] the jacquard index is increasing
+[0:40:25] with this with the growing sample size
 [0:40:30] and um yeah so you can check the other uh
-[0:40:32] yeah so you can check the other uh ingredients of this table later if you
-[0:40:34] ingredients of this table later if you are interested but let's go to the next
-[0:40:38] are interested but let's go to the next um
+[0:40:32] ingredients of this table later if you
+[0:40:34] are interested but let's go to the next
 [0:40:40] um slide which is actually a comparison of
-[0:40:43] slide which is actually a comparison of the performance of our algorithm with
-[0:40:45] the performance of our algorithm with the other existing algorithms
-[0:40:48] the other existing algorithms in the literature so here i picked the
-[0:40:51] in the literature so here i picked the sample size of 10 to the 4 and what i
-[0:40:54] sample size of 10 to the 4 and what i did i
+[0:40:43] the performance of our algorithm with
+[0:40:45] the other existing algorithms
+[0:40:48] in the literature so here i picked the
+[0:40:51] sample size of 10 to the 4 and what i
 [0:40:56] did i compared our algorithm which we call it
-[0:40:58] compared our algorithm which we call it dag foci with pc using partial
-[0:41:02] dag foci with pc using partial correlation as the test of conditional
-[0:41:04] correlation as the test of conditional independence pc using hilbert
-[0:41:07] independence pc using hilbert uh independence criterion hill climbing
-[0:41:10] uh independence criterion hill climbing which is a bayesian
-[0:41:12] which is a bayesian approach for
-[0:41:14] approach for finding that like estimating the tax a
-[0:41:17] finding that like estimating the tax a causal additive model
-[0:41:20] causal additive model and this one is by tickering but i
-[0:41:23] and this one is by tickering but i forgot what is the abbreviation for
-[0:41:25] forgot what is the abbreviation for so
+[0:40:58] dag foci with pc using partial
+[0:41:02] correlation as the test of conditional
+[0:41:04] independence pc using hilbert
+[0:41:07] uh independence criterion hill climbing
+[0:41:10] which is a bayesian
+[0:41:12] approach for
+[0:41:14] finding that like estimating the tax a
+[0:41:17] causal additive model
+[0:41:20] and this one is by tickering but i
+[0:41:23] forgot what is the abbreviation for
 [0:41:27] so so here you can see that in this case
-[0:41:30] so here you can see that in this case when we had x6
-[0:41:32] when we had x6 which is actually a situation in which
-[0:41:35] which is actually a situation in which the signal and noise are all additive pc
-[0:41:38] the signal and noise are all additive pc with h6 is doing the best but our
-[0:41:41] with h6 is doing the best but our algorithm is
-[0:41:42] algorithm is doing the second best compared to the
-[0:41:44] doing the second best compared to the other methods and in this situation with
-[0:41:47] other methods and in this situation with x 11
+[0:41:30] when we had x6
+[0:41:32] which is actually a situation in which
+[0:41:35] the signal and noise are all additive pc
+[0:41:38] with h6 is doing the best but our
+[0:41:41] algorithm is
+[0:41:42] doing the second best compared to the
+[0:41:44] other methods and in this situation with
 [0:41:49] x 11 the relationship was more crazy so it
-[0:41:51] the relationship was more crazy so it was not really additive uh
-[0:41:54] was not really additive uh the x
+[0:41:51] was not really additive uh
 [0:41:55] the x x 11 was not the additive function of
-[0:41:57] x 11 was not the additive function of the other signal variables an algorithm
-[0:42:00] the other signal variables an algorithm is doing the best in terms of
-[0:42:02] is doing the best in terms of exact recovery and jacquard index but
-[0:42:06] exact recovery and jacquard index but not in terms of
-[0:42:08] not in terms of missing edges
-[0:42:10] missing edges so
+[0:41:57] the other signal variables an algorithm
+[0:42:00] is doing the best in terms of
+[0:42:02] exact recovery and jacquard index but
+[0:42:06] not in terms of
+[0:42:08] missing edges
 [0:42:12] so to me it seems that it's doing sort of a
-[0:42:14] to me it seems that it's doing sort of a good job and
-[0:42:17] good job and so to summarize what we have done we
-[0:42:19] so to summarize what we have done we have a computationally efficient
-[0:42:21] have a computationally efficient algorithm to identify the set of parents
-[0:42:24] algorithm to identify the set of parents of a variable of interest we have finite
-[0:42:27] of a variable of interest we have finite sample guarantees we have very little
-[0:42:30] sample guarantees we have very little distributional assumptions we did not
-[0:42:33] distributional assumptions we did not require any conditional independence
-[0:42:35] require any conditional independence testing which was thanked to the
-[0:42:36] testing which was thanked to the assumption that we made the tree
-[0:42:38] assumption that we made the tree neighborhood assumption and it is
-[0:42:40] neighborhood assumption and it is somehow conservative in the sense that
-[0:42:42] somehow conservative in the sense that it may not output something but if it
-[0:42:45] it may not output something but if it output it does not contain any false
-[0:42:48] output it does not contain any false discoveries
-[0:42:49] discoveries uh and what we would love to do is that
-[0:42:52] uh and what we would love to do is that okay there are many situations that we
-[0:42:54] okay there are many situations that we can actually do
-[0:42:56] can actually do this stuff
-[0:42:57] this stuff improve our um
-[0:42:59] improve our um method way better if we incorporate
-[0:43:02] method way better if we incorporate actually the test of conditional
-[0:43:04] actually the test of conditional independence we have not considered a
-[0:43:06] independence we have not considered a situation in which there is latent
-[0:43:09] situation in which there is latent confounding variables and that's uh that
-[0:43:11] confounding variables and that's uh that would be amazing if we can study that
-[0:43:14] would be amazing if we can study that area and also in situations where we do
-[0:43:17] area and also in situations where we do not have the delta mark of gaap property
-[0:43:20] not have the delta mark of gaap property is there a smart way of doing doing some
-[0:43:22] is there a smart way of doing doing some pruning to get to the markov boundary
-[0:43:24] pruning to get to the markov boundary and do the rest of this stuff with these
-[0:43:26] and do the rest of this stuff with these things
+[0:42:14] good job and
+[0:42:17] so to summarize what we have done we
+[0:42:19] have a computationally efficient
+[0:42:21] algorithm to identify the set of parents
+[0:42:24] of a variable of interest we have finite
+[0:42:27] sample guarantees we have very little
+[0:42:30] distributional assumptions we did not
+[0:42:33] require any conditional independence
+[0:42:35] testing which was thanked to the
+[0:42:36] assumption that we made the tree
+[0:42:38] neighborhood assumption and it is
+[0:42:40] somehow conservative in the sense that
+[0:42:42] it may not output something but if it
+[0:42:45] output it does not contain any false
+[0:42:48] discoveries
+[0:42:49] uh and what we would love to do is that
+[0:42:52] okay there are many situations that we
+[0:42:54] can actually do
+[0:42:56] this stuff
+[0:42:57] improve our um
+[0:42:59] method way better if we incorporate
+[0:43:02] actually the test of conditional
+[0:43:04] independence we have not considered a
+[0:43:06] situation in which there is latent
+[0:43:09] confounding variables and that's uh that
+[0:43:11] would be amazing if we can study that
+[0:43:14] area and also in situations where we do
+[0:43:17] not have the delta mark of gaap property
+[0:43:20] is there a smart way of doing doing some
+[0:43:22] pruning to get to the markov boundary
+[0:43:24] and do the rest of this stuff with these
 [0:43:27] things thank you very much and yes
 [0:43:33] all right yeah thanks thanks for the very nice talk and we're
-[0:43:34] thanks for the very nice talk and we're gonna now move to the discussion
-[0:43:37] gonna now move to the discussion so we'll have brian present some slides
-[0:43:39] so we'll have brian present some slides and after that uh you'll have to the
-[0:43:41] and after that uh you'll have to the opportunity to respond
-[0:43:42] opportunity to respond [Music]
+[0:43:34] gonna now move to the discussion
+[0:43:37] so we'll have brian present some slides
+[0:43:39] and after that uh you'll have to the
+[0:43:41] opportunity to respond
 [0:43:43] [Music] all right yeah brian whenever you're
-[0:43:45] all right yeah brian whenever you're ready
+[0:43:45] ready
 [0:43:50] all right let me just get my slides up here
 [0:44:03] here we go all right can you all see the slides
 [0:44:08] um yep now we can see it yep
-[0:44:10] yep now we can see it yep there we go
-[0:44:11] there we go all right
+[0:44:10] there we go
 [0:44:13] all right uh so uh first of all i just want to
-[0:44:15] uh so uh first of all i just want to thank the organizers for inviting me to
-[0:44:18] thank the organizers for inviting me to give this discussion uh and thanks mona
-[0:44:20] give this discussion uh and thanks mona for the really great presentation on a
-[0:44:22] for the really great presentation on a topic that is
-[0:44:24] topic that is quite near and dear to my heart so i'm
-[0:44:26] quite near and dear to my heart so i'm excited to be giving uh this discussion
-[0:44:28] excited to be giving uh this discussion this is a problem that i've sort of
-[0:44:29] this is a problem that i've sort of thought a lot about uh over the past few
-[0:44:32] thought a lot about uh over the past few years
+[0:44:15] thank the organizers for inviting me to
+[0:44:18] give this discussion uh and thanks mona
+[0:44:20] for the really great presentation on a
+[0:44:22] topic that is
+[0:44:24] quite near and dear to my heart so i'm
+[0:44:26] excited to be giving uh this discussion
+[0:44:28] this is a problem that i've sort of
+[0:44:29] thought a lot about uh over the past few
 [0:44:33] years uh and i also have to give credit uh to
-[0:44:35] uh and i also have to give credit uh to my student ming gao who helped me uh put
-[0:44:37] my student ming gao who helped me uh put together uh some of the discussion here
-[0:44:39] together uh some of the discussion here uh so the way i'm gonna structure this
-[0:44:41] uh so the way i'm gonna structure this discussion is i'll start by giving just
-[0:44:43] discussion is i'll start by giving just like a quick summary of sort of my main
-[0:44:45] like a quick summary of sort of my main takeaways uh from this paper uh and then
-[0:44:48] takeaways uh from this paper uh and then to sort of uh maybe provide some support
-[0:44:51] to sort of uh maybe provide some support for why i think this is an interesting
-[0:44:53] for why i think this is an interesting problem i want to walk through some of
-[0:44:56] problem i want to walk through some of the history
-[0:44:57] the history of structure learning and particularly
-[0:44:59] of structure learning and particularly particularly focused on non-parametric
-[0:45:02] particularly focused on non-parametric aspects
+[0:44:35] my student ming gao who helped me uh put
+[0:44:37] together uh some of the discussion here
+[0:44:39] uh so the way i'm gonna structure this
+[0:44:41] discussion is i'll start by giving just
+[0:44:43] like a quick summary of sort of my main
+[0:44:45] takeaways uh from this paper uh and then
+[0:44:48] to sort of uh maybe provide some support
+[0:44:51] for why i think this is an interesting
+[0:44:53] problem i want to walk through some of
+[0:44:56] the history
+[0:44:57] of structure learning and particularly
+[0:44:59] focused on non-parametric
 [0:45:03] aspects uh and then uh with that sort of uh
-[0:45:05] uh and then uh with that sort of uh backdrop i'll kind of circle back and um
-[0:45:08] backdrop i'll kind of circle back and um discuss some of the assumptions and ask
-[0:45:11] discuss some of the assumptions and ask some questions from mona and we can uh
-[0:45:13] some questions from mona and we can uh discuss from there
-[0:45:14] discuss from there uh so
+[0:45:05] backdrop i'll kind of circle back and um
+[0:45:08] discuss some of the assumptions and ask
+[0:45:11] some questions from mona and we can uh
+[0:45:13] discuss from there
 [0:45:16] uh so um
 [0:45:16] um my sort of overall impression from this
-[0:45:18] my sort of overall impression from this paper is that really uh the basic idea
-[0:45:21] paper is that really uh the basic idea is trying to better understand the
-[0:45:23] is trying to better understand the statistical properties of structure
-[0:45:25] statistical properties of structure learning
+[0:45:18] paper is that really uh the basic idea
+[0:45:21] is trying to better understand the
+[0:45:23] statistical properties of structure
 [0:45:26] learning without making parametric assumptions
-[0:45:29] without making parametric assumptions so
 [0:45:30] so the the overall idea is causal structure
-[0:45:32] the the overall idea is causal structure learning with minimal assumptions on the
-[0:45:34] learning with minimal assumptions on the functional relationships and noise so
-[0:45:36] functional relationships and noise so not having to make assumptions like
-[0:45:37] not having to make assumptions like additive independent noise that are very
-[0:45:39] additive independent noise that are very common in the literature uh and
-[0:45:40] common in the literature uh and particularly uh proposing an algorithm
-[0:45:43] particularly uh proposing an algorithm to return the parents of a specific node
-[0:45:46] to return the parents of a specific node in a causal dag as opposed to returning
-[0:45:48] in a causal dag as opposed to returning the entire dag which i think is a
-[0:45:50] the entire dag which i think is a interesting simplification
-[0:45:52] interesting simplification uh and uh if you haven't taken a look at
-[0:45:54] uh and uh if you haven't taken a look at this previous work uh that mona and her
-[0:45:57] this previous work uh that mona and her collaborators have worked on on this
-[0:45:59] collaborators have worked on on this codec measure i highly encourage you to
-[0:46:01] codec measure i highly encourage you to so there's been a lot of follow-up work
-[0:46:02] so there's been a lot of follow-up work and interest on this
-[0:46:04] and interest on this on finding fast uh and simple measures
-[0:46:08] on finding fast uh and simple measures of conditional independence
-[0:46:10] of conditional independence uh and what i think was maybe the most
-[0:46:12] uh and what i think was maybe the most interesting takeaway that i got was this
-[0:46:14] interesting takeaway that i got was this result that mona mentioned on
-[0:46:16] result that mona mentioned on conservative false discovery control
-[0:46:18] conservative false discovery control when the model assumptions were violated
-[0:46:21] when the model assumptions were violated uh so if i got anything wrong there
-[0:46:24] uh so if i got anything wrong there please jump in and let me know
-[0:46:26] please jump in and let me know but
+[0:45:32] learning with minimal assumptions on the
+[0:45:34] functional relationships and noise so
+[0:45:36] not having to make assumptions like
+[0:45:37] additive independent noise that are very
+[0:45:39] common in the literature uh and
+[0:45:40] particularly uh proposing an algorithm
+[0:45:43] to return the parents of a specific node
+[0:45:46] in a causal dag as opposed to returning
+[0:45:48] the entire dag which i think is a
+[0:45:50] interesting simplification
+[0:45:52] uh and uh if you haven't taken a look at
+[0:45:54] this previous work uh that mona and her
+[0:45:57] collaborators have worked on on this
+[0:45:59] codec measure i highly encourage you to
+[0:46:01] so there's been a lot of follow-up work
+[0:46:02] and interest on this
+[0:46:04] on finding fast uh and simple measures
+[0:46:08] of conditional independence
+[0:46:10] uh and what i think was maybe the most
+[0:46:12] interesting takeaway that i got was this
+[0:46:14] result that mona mentioned on
+[0:46:16] conservative false discovery control
+[0:46:18] when the model assumptions were violated
+[0:46:21] uh so if i got anything wrong there
+[0:46:24] please jump in and let me know
 [0:46:27] but let me start by saying by asking a
-[0:46:29] let me start by saying by asking a simple question which is what do we
-[0:46:31] simple question which is what do we already know about the statistical
-[0:46:32] already know about the statistical properties of nonparametric structure
-[0:46:34] properties of nonparametric structure learning i think this will uh help us
-[0:46:35] learning i think this will uh help us sort of uh situate uh what i think the
-[0:46:38] sort of uh situate uh what i think the most interesting aspects of this work
-[0:46:40] most interesting aspects of this work are a little bit better
-[0:46:41] are a little bit better so um before we get to the
-[0:46:43] so um before we get to the non-parametric part let's start uh take
-[0:46:46] non-parametric part let's start uh take a step back and just ask what do we know
-[0:46:47] a step back and just ask what do we know about the statistical properties of
-[0:46:49] about the statistical properties of structural learning algorithms of course
-[0:46:50] structural learning algorithms of course the answer is a whole lot this
-[0:46:52] the answer is a whole lot this literature dates back at least four
-[0:46:54] literature dates back at least four decades you could argue it dates back uh
-[0:46:56] decades you could argue it dates back uh a century
+[0:46:29] simple question which is what do we
+[0:46:31] already know about the statistical
+[0:46:32] properties of nonparametric structure
+[0:46:34] learning i think this will uh help us
+[0:46:35] sort of uh situate uh what i think the
+[0:46:38] most interesting aspects of this work
+[0:46:40] are a little bit better
+[0:46:41] so um before we get to the
+[0:46:43] non-parametric part let's start uh take
+[0:46:46] a step back and just ask what do we know
+[0:46:47] about the statistical properties of
+[0:46:49] structural learning algorithms of course
+[0:46:50] the answer is a whole lot this
+[0:46:52] literature dates back at least four
+[0:46:54] decades you could argue it dates back uh
 [0:46:58] a century some of the early results
-[0:47:00] some of the early results on identifiability focused on
-[0:47:03] on identifiability focused on things like faithfulness learning the
-[0:47:05] things like faithfulness learning the markov equivalence class through things
-[0:47:07] markov equivalence class through things like pc algorithm
-[0:47:09] like pc algorithm ges
+[0:47:00] on identifiability focused on
+[0:47:03] things like faithfulness learning the
+[0:47:05] markov equivalence class through things
+[0:47:07] like pc algorithm
 [0:47:11] ges and then in the 2000s
-[0:47:13] and then in the 2000s there were results that showed how to
-[0:47:16] there were results that showed how to identify the actual dag itself so of
-[0:47:18] identify the actual dag itself so of course as many of you are certainly
-[0:47:20] course as many of you are certainly aware the markov equivalence class does
-[0:47:22] aware the markov equivalence class does not identify the dag itself but there
-[0:47:24] not identify the dag itself but there was a series of results on
-[0:47:27] was a series of results on linear non-gaussian models additive
-[0:47:30] linear non-gaussian models additive noise models post non-linear models
-[0:47:33] noise models post non-linear models and more recently equal or known
-[0:47:35] and more recently equal or known variance models that do in fact identify
-[0:47:39] variance models that do in fact identify um the exact dag itself there's also
-[0:47:42] um the exact dag itself there's also recent work um from uhler and colleagues
-[0:47:45] recent work um from uhler and colleagues on the sparse's markov assumption
-[0:47:47] on the sparse's markov assumption these are all uh sort of pretty well
-[0:47:49] these are all uh sort of pretty well known identifiability results at this
-[0:47:51] known identifiability results at this point uh and one of the things that i i
-[0:47:54] point uh and one of the things that i i think is important to emphasize maybe
-[0:47:56] think is important to emphasize maybe from a statistical perspective uh with
-[0:47:59] from a statistical perspective uh with apologies to the statisticians that know
-[0:48:01] apologies to the statisticians that know of the counter examples to what i'm
-[0:48:02] of the counter examples to what i'm about to say i'm sort of uh
-[0:48:05] about to say i'm sort of uh glossing over some technical details
-[0:48:07] glossing over some technical details here but under very weak conditions uh
-[0:48:10] here but under very weak conditions uh assuming your model isn't uh completely
-[0:48:12] assuming your model isn't uh completely pathological uh deriving point wise
-[0:48:15] pathological uh deriving point wise consistent estimators uh is generally
-[0:48:17] consistent estimators uh is generally guaranteed automatically and in fact if
-[0:48:19] guaranteed automatically and in fact if you look at a lot of the literature
-[0:48:21] you look at a lot of the literature uh that i mentioned above um
-[0:48:24] uh that i mentioned above um the
+[0:47:13] there were results that showed how to
+[0:47:16] identify the actual dag itself so of
+[0:47:18] course as many of you are certainly
+[0:47:20] aware the markov equivalence class does
+[0:47:22] not identify the dag itself but there
+[0:47:24] was a series of results on
+[0:47:27] linear non-gaussian models additive
+[0:47:30] noise models post non-linear models
+[0:47:33] and more recently equal or known
+[0:47:35] variance models that do in fact identify
+[0:47:39] um the exact dag itself there's also
+[0:47:42] recent work um from uhler and colleagues
+[0:47:45] on the sparse's markov assumption
+[0:47:47] these are all uh sort of pretty well
+[0:47:49] known identifiability results at this
+[0:47:51] point uh and one of the things that i i
+[0:47:54] think is important to emphasize maybe
+[0:47:56] from a statistical perspective uh with
+[0:47:59] apologies to the statisticians that know
+[0:48:01] of the counter examples to what i'm
+[0:48:02] about to say i'm sort of uh
+[0:48:05] glossing over some technical details
+[0:48:07] here but under very weak conditions uh
+[0:48:10] assuming your model isn't uh completely
+[0:48:12] pathological uh deriving point wise
+[0:48:15] consistent estimators uh is generally
+[0:48:17] guaranteed automatically and in fact if
+[0:48:19] you look at a lot of the literature
+[0:48:21] uh that i mentioned above um
 [0:48:25] the consistent estimators essentially come
-[0:48:27] consistent estimators essentially come from a constructive identification proof
-[0:48:29] from a constructive identification proof um which is relatively uh
-[0:48:31] um which is relatively uh straightforward so the interesting thing
-[0:48:33] straightforward so the interesting thing was in in 2003 uh and this may have been
-[0:48:36] was in in 2003 uh and this may have been pointed out earlier i'm not sure but the
-[0:48:38] pointed out earlier i'm not sure but the the first uh result that i'm aware of uh
-[0:48:41] the first uh result that i'm aware of uh was from uh robins and collaborators
-[0:48:43] was from uh robins and collaborators pointing out that under the faithfulness
-[0:48:45] pointing out that under the faithfulness assumption um that there cannot be
-[0:48:47] assumption um that there cannot be uniformly consistent estimators of
-[0:48:50] uniformly consistent estimators of markovic's class
-[0:48:52] markovic's class and around the same time there were
-[0:48:53] and around the same time there were results this is where the strong
-[0:48:54] results this is where the strong faithfulness assumption came from
-[0:48:57] faithfulness assumption came from um that showed that okay if you
-[0:48:58] um that showed that okay if you strengthen the faithfulness assumption
-[0:49:00] strengthen the faithfulness assumption uh in a uniform way then you can regain
-[0:49:03] uh in a uniform way then you can regain uniform consistency and then uh a few
-[0:49:06] uniform consistency and then uh a few years later there was follow-up work uh
-[0:49:09] years later there was follow-up work uh on the geometry of the strong
-[0:49:10] on the geometry of the strong fatefulness assumption by uhler and
-[0:49:12] fatefulness assumption by uhler and colleagues
-[0:49:13] colleagues that showed that the strong faith in
-[0:49:15] that showed that the strong faith in this assumption can be hard to satisfy
-[0:49:18] this assumption can be hard to satisfy in a particular sense um so
-[0:49:21] in a particular sense um so the point here is is basically to
-[0:49:22] the point here is is basically to emphasize that there's been a lot of
-[0:49:24] emphasize that there's been a lot of work on identifiability and consistency
-[0:49:27] work on identifiability and consistency uh
+[0:48:27] from a constructive identification proof
+[0:48:29] um which is relatively uh
+[0:48:31] straightforward so the interesting thing
+[0:48:33] was in in 2003 uh and this may have been
+[0:48:36] pointed out earlier i'm not sure but the
+[0:48:38] the first uh result that i'm aware of uh
+[0:48:41] was from uh robins and collaborators
+[0:48:43] pointing out that under the faithfulness
+[0:48:45] assumption um that there cannot be
+[0:48:47] uniformly consistent estimators of
+[0:48:50] markovic's class
+[0:48:52] and around the same time there were
+[0:48:53] results this is where the strong
+[0:48:54] faithfulness assumption came from
+[0:48:57] um that showed that okay if you
+[0:48:58] strengthen the faithfulness assumption
+[0:49:00] uh in a uniform way then you can regain
+[0:49:03] uniform consistency and then uh a few
+[0:49:06] years later there was follow-up work uh
+[0:49:09] on the geometry of the strong
+[0:49:10] fatefulness assumption by uhler and
+[0:49:12] colleagues
+[0:49:13] that showed that the strong faith in
+[0:49:15] this assumption can be hard to satisfy
+[0:49:18] in a particular sense um so
+[0:49:21] the point here is is basically to
+[0:49:22] emphasize that there's been a lot of
+[0:49:24] work on identifiability and consistency
 [0:49:28] uh largely in parametric models but some in
-[0:49:30] largely in parametric models but some in non-parametric models uh but these are
-[0:49:33] non-parametric models uh but these are really only the most basic statistical
-[0:49:35] really only the most basic statistical properties that we could ask for right
-[0:49:37] properties that we could ask for right you can really go a lot deeper than this
-[0:49:40] you can really go a lot deeper than this so for example what about things like
-[0:49:42] so for example what about things like finite sample properties
-[0:49:44] finite sample properties so
+[0:49:30] non-parametric models uh but these are
+[0:49:33] really only the most basic statistical
+[0:49:35] properties that we could ask for right
+[0:49:37] you can really go a lot deeper than this
+[0:49:40] so for example what about things like
+[0:49:42] finite sample properties
 [0:49:44] so um one of the earliest results that i'm
-[0:49:47] um one of the earliest results that i'm aware of uh is a result
-[0:49:50] aware of uh is a result in the 2000s on the pc algorithm due to
-[0:49:53] in the 2000s on the pc algorithm due to peter bulman
-[0:49:54] peter bulman and collaborators on uniform consistency
-[0:49:57] and collaborators on uniform consistency of the pc algorithm under strong
-[0:49:58] of the pc algorithm under strong faithfulness assumptions
-[0:50:00] faithfulness assumptions and then this was followed up by a lot
-[0:50:03] and then this was followed up by a lot of work on say like non-paranormal
-[0:50:05] of work on say like non-paranormal models uh maximum likelihood estimator
-[0:50:08] models uh maximum likelihood estimator in gaussian and linear sem models then
-[0:50:11] in gaussian and linear sem models then there was results on equal variances
-[0:50:14] there was results on equal variances lingam models and more recently uh there
-[0:50:16] lingam models and more recently uh there have been several uh minimax optimality
-[0:50:18] have been several uh minimax optimality results and lower balance for this type
-[0:50:20] results and lower balance for this type of problem so
-[0:50:21] of problem so um
+[0:49:47] aware of uh is a result
+[0:49:50] in the 2000s on the pc algorithm due to
+[0:49:53] peter bulman
+[0:49:54] and collaborators on uniform consistency
+[0:49:57] of the pc algorithm under strong
+[0:49:58] faithfulness assumptions
+[0:50:00] and then this was followed up by a lot
+[0:50:03] of work on say like non-paranormal
+[0:50:05] models uh maximum likelihood estimator
+[0:50:08] in gaussian and linear sem models then
+[0:50:11] there was results on equal variances
+[0:50:14] lingam models and more recently uh there
+[0:50:16] have been several uh minimax optimality
+[0:50:18] results and lower balance for this type
+[0:50:20] of problem so
 [0:50:23] um i don't i'm not listing out specific
-[0:50:24] i don't i'm not listing out specific papers here because at this point there
-[0:50:26] papers here because at this point there have been sort of a lot of work along
-[0:50:27] have been sort of a lot of work along these lines but you'll notice that it's
-[0:50:28] these lines but you'll notice that it's certainly a lot more recent
-[0:50:30] certainly a lot more recent um than the earlier work i had on the
-[0:50:32] um than the earlier work i had on the previous slide
-[0:50:34] previous slide and then of course the other direction
-[0:50:35] and then of course the other direction to bring us back to
-[0:50:37] to bring us back to lona's presentation is so what about
-[0:50:39] lona's presentation is so what about non-parametric models and here i think
-[0:50:42] non-parametric models and here i think um sort of the point that i want to
-[0:50:44] um sort of the point that i want to emphasize is that while there is plenty
-[0:50:46] emphasize is that while there is plenty of work it's there's certainly a lot
-[0:50:47] of work it's there's certainly a lot less um and so um i mentioned the
-[0:50:50] less um and so um i mentioned the non-paranormal pc paper there's the work
-[0:50:53] non-paranormal pc paper there's the work on causal additive models and partially
-[0:50:55] on causal additive models and partially linear models uh from peter bulman's
-[0:50:57] linear models uh from peter bulman's group uh
+[0:50:24] papers here because at this point there
+[0:50:26] have been sort of a lot of work along
+[0:50:27] these lines but you'll notice that it's
+[0:50:28] certainly a lot more recent
+[0:50:30] um than the earlier work i had on the
+[0:50:32] previous slide
+[0:50:34] and then of course the other direction
+[0:50:35] to bring us back to
+[0:50:37] lona's presentation is so what about
+[0:50:39] non-parametric models and here i think
+[0:50:42] um sort of the point that i want to
+[0:50:44] emphasize is that while there is plenty
+[0:50:46] of work it's there's certainly a lot
+[0:50:47] less um and so um i mentioned the
+[0:50:50] non-paranormal pc paper there's the work
+[0:50:53] on causal additive models and partially
+[0:50:55] linear models uh from peter bulman's
 [0:50:59] group uh work on generalized score functions uh
-[0:51:02] work on generalized score functions uh uh
 [0:51:03] uh in relation to uh generalized equivalent
-[0:51:06] in relation to uh generalized equivalent search
 [0:51:07] search uh and then um
-[0:51:10] uh and then um uh more recently i have a paper uh with
-[0:51:13] uh more recently i have a paper uh with ming on entropic assumptions which we'll
-[0:51:15] ming on entropic assumptions which we'll i'll mention in just a second
-[0:51:17] i'll mention in just a second um
+[0:51:10] uh more recently i have a paper uh with
+[0:51:13] ming on entropic assumptions which we'll
+[0:51:15] i'll mention in just a second
 [0:51:18] um so so
 [0:51:20] so so the point is sort of to emphasize that
-[0:51:21] the point is sort of to emphasize that there's still a lot that we have to look
-[0:51:23] there's still a lot that we have to look here um and which is one of the things
-[0:51:25] here um and which is one of the things that i think um the the presentation
-[0:51:28] that i think um the the presentation today i think makes it so interesting
-[0:51:30] today i think makes it so interesting now one thing one caveat i have to put
-[0:51:32] now one thing one caveat i have to put here is of course in principle uh
-[0:51:35] here is of course in principle uh algorithms like the pc algorithm are
-[0:51:38] algorithms like the pc algorithm are non-parametric and always were
-[0:51:39] non-parametric and always were non-parametric they only needed a
-[0:51:41] non-parametric they only needed a consistent conditional independence test
-[0:51:43] consistent conditional independence test uh however developing finite sample
-[0:51:45] uh however developing finite sample guarantees for non-parametric
-[0:51:47] guarantees for non-parametric conditional independence tests is a hard
-[0:51:49] conditional independence tests is a hard problem
+[0:51:21] there's still a lot that we have to look
+[0:51:23] here um and which is one of the things
+[0:51:25] that i think um the the presentation
+[0:51:28] today i think makes it so interesting
+[0:51:30] now one thing one caveat i have to put
+[0:51:32] here is of course in principle uh
+[0:51:35] algorithms like the pc algorithm are
+[0:51:38] non-parametric and always were
+[0:51:39] non-parametric they only needed a
+[0:51:41] consistent conditional independence test
+[0:51:43] uh however developing finite sample
+[0:51:45] guarantees for non-parametric
+[0:51:47] conditional independence tests is a hard
 [0:51:51] problem and this is where some of the work of
-[0:51:52] and this is where some of the work of mona and her collaborators comes into
-[0:51:54] mona and her collaborators comes into play
+[0:51:52] mona and her collaborators comes into
 [0:51:55] play recently there's been lots of progress
-[0:51:57] recently there's been lots of progress on for example
-[0:51:59] on for example minimax optimal tests for discrete and
-[0:52:01] minimax optimal tests for discrete and continuous distributions
-[0:52:03] continuous distributions results on the hardness of testing
-[0:52:06] results on the hardness of testing without assumptions and then of course
-[0:52:08] without assumptions and then of course uh the codec algorithm uh that mona
-[0:52:10] uh the codec algorithm uh that mona mentioned uh in her presentation uh
-[0:52:13] mentioned uh in her presentation uh which is what um today's presentation
-[0:52:15] which is what um today's presentation built upon
-[0:52:16] built upon okay so one more slide on history
-[0:52:18] okay so one more slide on history uh since today's uh presentation focused
-[0:52:21] uh since today's uh presentation focused a lot on learning markov boundaries um i
-[0:52:24] a lot on learning markov boundaries um i thought it would be good to to point out
-[0:52:26] thought it would be good to to point out um uh
+[0:51:57] on for example
+[0:51:59] minimax optimal tests for discrete and
+[0:52:01] continuous distributions
+[0:52:03] results on the hardness of testing
+[0:52:06] without assumptions and then of course
+[0:52:08] uh the codec algorithm uh that mona
+[0:52:10] mentioned uh in her presentation uh
+[0:52:13] which is what um today's presentation
+[0:52:15] built upon
+[0:52:16] okay so one more slide on history
+[0:52:18] uh since today's uh presentation focused
+[0:52:21] a lot on learning markov boundaries um i
+[0:52:24] thought it would be good to to point out
 [0:52:28] um uh what we sort of know about this problem
-[0:52:29] what we sort of know about this problem as well so of course just like with uh
-[0:52:32] as well so of course just like with uh learning bayesian networks there's also
-[0:52:34] learning bayesian networks there's also uh decades of work on algorithms for
-[0:52:36] uh decades of work on algorithms for learning markov blankets um i put some
-[0:52:40] learning markov blankets um i put some of them maybe some of the more
-[0:52:41] of them maybe some of the more well-known algorithms here uh with
-[0:52:42] well-known algorithms here uh with apologies to
-[0:52:44] apologies to the many many algorithms that i left out
-[0:52:46] the many many algorithms that i left out here things like gs
-[0:52:48] here things like gs uh i am heightened these types of
-[0:52:50] uh i am heightened these types of algorithms um
-[0:52:52] algorithms um the interesting thing that sort of stood
-[0:52:54] the interesting thing that sort of stood out uh when i worked on this a little
-[0:52:56] out uh when i worked on this a little while ago was that there didn't seem to
-[0:52:58] while ago was that there didn't seem to be very much finite sample work
-[0:53:00] be very much finite sample work and so in this paper that i mentioned
-[0:53:03] and so in this paper that i mentioned just a minute ago we
-[0:53:05] just a minute ago we ming and i gave some finite sample
-[0:53:07] ming and i gave some finite sample guarantees for learning markup
-[0:53:09] guarantees for learning markup boundaries under very similar conditions
-[0:53:11] boundaries under very similar conditions to the conditions that
-[0:53:13] to the conditions that mona and her collaborators provided
-[0:53:15] mona and her collaborators provided essentially this delta markov gap
-[0:53:17] essentially this delta markov gap condition essentially that's really what
-[0:53:19] condition essentially that's really what you need uh and
-[0:53:21] you need uh and the the idea in all of these algorithms
-[0:53:23] the the idea in all of these algorithms not just um uh the recent work but also
-[0:53:26] not just um uh the recent work but also even the older work if you go back to
-[0:53:28] even the older work if you go back to things like grow to shrink it's all the
-[0:53:29] things like grow to shrink it's all the same idea you're greedily adding
-[0:53:31] same idea you're greedily adding variables that have the highest
-[0:53:32] variables that have the highest association um and i think so so moana
-[0:53:36] association um and i think so so moana you had mentioned um trying to find
-[0:53:38] you had mentioned um trying to find conditions where you could maybe get rid
-[0:53:41] conditions where you could maybe get rid of the gap condition and do pruning so
-[0:53:43] of the gap condition and do pruning so it's sort of there are these like
-[0:53:44] it's sort of there are these like backward phases um that i'm sure you're
-[0:53:46] backward phases um that i'm sure you're familiar with um that will also provably
-[0:53:49] familiar with um that will also provably um recover um the markov boundary now
-[0:53:52] um recover um the markov boundary now the precise conditions that are needed
-[0:53:53] the precise conditions that are needed in finite samples um that's also
-[0:53:55] in finite samples um that's also something um that that definitely needs
-[0:53:58] something um that that definitely needs more work
+[0:52:29] as well so of course just like with uh
+[0:52:32] learning bayesian networks there's also
+[0:52:34] uh decades of work on algorithms for
+[0:52:36] learning markov blankets um i put some
+[0:52:40] of them maybe some of the more
+[0:52:41] well-known algorithms here uh with
+[0:52:42] apologies to
+[0:52:44] the many many algorithms that i left out
+[0:52:46] here things like gs
+[0:52:48] uh i am heightened these types of
+[0:52:50] algorithms um
+[0:52:52] the interesting thing that sort of stood
+[0:52:54] out uh when i worked on this a little
+[0:52:56] while ago was that there didn't seem to
+[0:52:58] be very much finite sample work
+[0:53:00] and so in this paper that i mentioned
+[0:53:03] just a minute ago we
+[0:53:05] ming and i gave some finite sample
+[0:53:07] guarantees for learning markup
+[0:53:09] boundaries under very similar conditions
+[0:53:11] to the conditions that
+[0:53:13] mona and her collaborators provided
+[0:53:15] essentially this delta markov gap
+[0:53:17] condition essentially that's really what
+[0:53:19] you need uh and
+[0:53:21] the the idea in all of these algorithms
+[0:53:23] not just um uh the recent work but also
+[0:53:26] even the older work if you go back to
+[0:53:28] things like grow to shrink it's all the
+[0:53:29] same idea you're greedily adding
+[0:53:31] variables that have the highest
+[0:53:32] association um and i think so so moana
+[0:53:36] you had mentioned um trying to find
+[0:53:38] conditions where you could maybe get rid
+[0:53:41] of the gap condition and do pruning so
+[0:53:43] it's sort of there are these like
+[0:53:44] backward phases um that i'm sure you're
+[0:53:46] familiar with um that will also provably
+[0:53:49] um recover um the markov boundary now
+[0:53:52] the precise conditions that are needed
+[0:53:53] in finite samples um that's also
+[0:53:55] something um that that definitely needs
 [0:53:59] more work okay
 [0:54:00] okay so with that sort of historical
-[0:54:02] so with that sort of historical perspective i hope this sort of um
-[0:54:06] perspective i hope this sort of um serves to illustrate um that there's uh
-[0:54:09] serves to illustrate um that there's uh while there's a lot that's known about
-[0:54:10] while there's a lot that's known about structure learning in general what's
-[0:54:12] structure learning in general what's known about finite sample non-parametric
-[0:54:14] known about finite sample non-parametric properties uh
-[0:54:16] properties uh this is sort of much less well studied
-[0:54:19] this is sort of much less well studied and so um i think uh this makes the work
-[0:54:22] and so um i think uh this makes the work from
+[0:54:02] perspective i hope this sort of um
+[0:54:06] serves to illustrate um that there's uh
+[0:54:09] while there's a lot that's known about
+[0:54:10] structure learning in general what's
+[0:54:12] known about finite sample non-parametric
+[0:54:14] properties uh
+[0:54:16] this is sort of much less well studied
+[0:54:19] and so um i think uh this makes the work
 [0:54:23] from mona and her collaborator is
-[0:54:25] mona and her collaborator is particularly important and significant
-[0:54:27] particularly important and significant um so i'm not going to go through all of
-[0:54:29] um so i'm not going to go through all of these assumptions here because i talked
-[0:54:30] these assumptions here because i talked about them but i thought it'd be good to
-[0:54:32] about them but i thought it'd be good to kind of put all the assumptions on on
-[0:54:33] kind of put all the assumptions on on one slide because i was sort of curious
-[0:54:35] one slide because i was sort of curious myself what what this would look like
-[0:54:37] myself what what this would look like and it's hard to say you know these are
-[0:54:38] and it's hard to say you know these are uh genuinely non-parametric conditions
-[0:54:41] uh genuinely non-parametric conditions um
+[0:54:25] particularly important and significant
+[0:54:27] um so i'm not going to go through all of
+[0:54:29] these assumptions here because i talked
+[0:54:30] about them but i thought it'd be good to
+[0:54:32] kind of put all the assumptions on on
+[0:54:33] one slide because i was sort of curious
+[0:54:35] myself what what this would look like
+[0:54:37] and it's hard to say you know these are
+[0:54:38] uh genuinely non-parametric conditions
 [0:54:42] um my sense is uh and please feel free to
-[0:54:45] my sense is uh and please feel free to jump in uh if i missed something here
-[0:54:47] jump in uh if i missed something here that really the two operative conditions
-[0:54:50] that really the two operative conditions the really important ones uh are this
-[0:54:53] the really important ones uh are this sort of tree-like properties this
-[0:54:55] sort of tree-like properties this neighborhood tree neighborhood property
-[0:54:57] neighborhood tree neighborhood property i believe you called it and the delta
-[0:54:58] i believe you called it and the delta markov gap condition uh so this delta
-[0:55:01] markov gap condition uh so this delta markup markov gap condition has appeared
-[0:55:03] markup markov gap condition has appeared in previous work uh in slightly
-[0:55:05] in previous work uh in slightly different context uh and it's been shown
-[0:55:08] different context uh and it's been shown previously and again when i sort of
-[0:55:10] previously and again when i sort of talked about this in the presentation
-[0:55:11] talked about this in the presentation that when you have some type of treaty
-[0:55:13] that when you have some type of treaty like condition this condition will
-[0:55:15] like condition this condition will always be satisfied so an interesting
-[0:55:16] always be satisfied so an interesting question would be um under what other
-[0:55:19] question would be um under what other conditions you can guarantee that this
-[0:55:22] conditions you can guarantee that this forward greedy search procedure is
-[0:55:24] forward greedy search procedure is sufficient um to recover the markup
-[0:55:26] sufficient um to recover the markup boundary now interestingly one so i
-[0:55:28] boundary now interestingly one so i one of the things that i i thought was
-[0:55:30] one of the things that i i thought was uh most interesting from this paper was
-[0:55:32] uh most interesting from this paper was that to go beyond this um
-[0:55:35] that to go beyond this um uh
+[0:54:45] jump in uh if i missed something here
+[0:54:47] that really the two operative conditions
+[0:54:50] the really important ones uh are this
+[0:54:53] sort of tree-like properties this
+[0:54:55] neighborhood tree neighborhood property
+[0:54:57] i believe you called it and the delta
+[0:54:58] markov gap condition uh so this delta
+[0:55:01] markup markov gap condition has appeared
+[0:55:03] in previous work uh in slightly
+[0:55:05] different context uh and it's been shown
+[0:55:08] previously and again when i sort of
+[0:55:10] talked about this in the presentation
+[0:55:11] that when you have some type of treaty
+[0:55:13] like condition this condition will
+[0:55:15] always be satisfied so an interesting
+[0:55:16] question would be um under what other
+[0:55:19] conditions you can guarantee that this
+[0:55:22] forward greedy search procedure is
+[0:55:24] sufficient um to recover the markup
+[0:55:26] boundary now interestingly one so i
+[0:55:28] one of the things that i i thought was
+[0:55:30] uh most interesting from this paper was
+[0:55:32] that to go beyond this um
 [0:55:36] uh this paper showed that you can get some
-[0:55:38] this paper showed that you can get some type of false discovery control when the
-[0:55:41] type of false discovery control when the tree-like assumptions are violated so i
-[0:55:43] tree-like assumptions are violated so i thought this was quite interesting
-[0:55:45] thought this was quite interesting okay
+[0:55:38] type of false discovery control when the
+[0:55:41] tree-like assumptions are violated so i
+[0:55:43] thought this was quite interesting
 [0:55:46] okay um so
 [0:55:48] um so uh to summarize uh and and
-[0:55:51] uh to summarize uh and and maybe ask some questions uh i hope i've
-[0:55:54] maybe ask some questions uh i hope i've sort of managed to sort of uh give a
-[0:55:56] sort of managed to sort of uh give a little bit of context behind why
-[0:55:58] little bit of context behind why non-parametric structure learning is an
-[0:56:00] non-parametric structure learning is an important and perhaps understudy problem
-[0:56:02] important and perhaps understudy problem uh and
+[0:55:51] maybe ask some questions uh i hope i've
+[0:55:54] sort of managed to sort of uh give a
+[0:55:56] little bit of context behind why
+[0:55:58] non-parametric structure learning is an
+[0:56:00] important and perhaps understudy problem
 [0:56:04] uh and mona's presentation today
-[0:56:06] mona's presentation today and the paper uh certainly makes
-[0:56:08] and the paper uh certainly makes noteworthy progress in this problem it's
-[0:56:09] noteworthy progress in this problem it's genuinely non-parametric it makes very
-[0:56:11] genuinely non-parametric it makes very weak assumptions compared to existing
-[0:56:13] weak assumptions compared to existing work there's no tuning parameters which
-[0:56:15] work there's no tuning parameters which uh also was quite surprising to me
-[0:56:19] uh also was quite surprising to me it's high dimensional and um there's
-[0:56:21] it's high dimensional and um there's also some in the in the paper i thought
-[0:56:23] also some in the in the paper i thought there's really nice discussion of
-[0:56:25] there's really nice discussion of what happens in the case of
-[0:56:26] what happens in the case of interventions as well so i have a bunch
-[0:56:28] interventions as well so i have a bunch of questions here uh i don't know that
-[0:56:30] of questions here uh i don't know that we'll have enough time to go through
-[0:56:31] we'll have enough time to go through them all so i highlighted what i think
-[0:56:32] them all so i highlighted what i think are the two most important ones the rest
-[0:56:34] are the two most important ones the rest are kind of like more technical ones uh
-[0:56:36] are kind of like more technical ones uh but i'll leave them for mona in case
-[0:56:38] but i'll leave them for mona in case she's interested but the two main
-[0:56:40] she's interested but the two main questions that i wanted to ask are um so
-[0:56:42] questions that i wanted to ask are um so to come back to this discussion about uh
-[0:56:44] to come back to this discussion about uh existing markup boundary learning
-[0:56:46] existing markup boundary learning algorithms um do you think there's any
-[0:56:48] algorithms um do you think there's any fundamental differences between foci and
-[0:56:51] fundamental differences between foci and these existing approaches uh based on
-[0:56:53] these existing approaches uh based on forward greedy search um so my
-[0:56:55] forward greedy search um so my impression was that it's very similar
-[0:56:57] impression was that it's very similar just you're using a different uh
-[0:56:59] just you're using a different uh dependence measure but maybe i missed
-[0:57:00] dependence measure but maybe i missed something and the second question
-[0:57:03] something and the second question was um so briefly you had mentioned that
-[0:57:06] was um so briefly you had mentioned that the second step only involves pairwise
-[0:57:09] the second step only involves pairwise marginal testing uh and given the fact
-[0:57:11] marginal testing uh and given the fact that there's this tree-like assumption
-[0:57:12] that there's this tree-like assumption this kind of sounds a lot like a chalu
-[0:57:14] this kind of sounds a lot like a chalu type uh approach and i was wondering if
-[0:57:16] type uh approach and i was wondering if there's if there if you found any
-[0:57:18] there's if there if you found any connections between this approach and
-[0:57:20] connections between this approach and the chao algorithm uh i won't uh we can
-[0:57:23] the chao algorithm uh i won't uh we can continue the discussion from there i'll
-[0:57:24] continue the discussion from there i'll start with just those two questions
+[0:56:06] and the paper uh certainly makes
+[0:56:08] noteworthy progress in this problem it's
+[0:56:09] genuinely non-parametric it makes very
+[0:56:11] weak assumptions compared to existing
+[0:56:13] work there's no tuning parameters which
+[0:56:15] uh also was quite surprising to me
+[0:56:19] it's high dimensional and um there's
+[0:56:21] also some in the in the paper i thought
+[0:56:23] there's really nice discussion of
+[0:56:25] what happens in the case of
+[0:56:26] interventions as well so i have a bunch
+[0:56:28] of questions here uh i don't know that
+[0:56:30] we'll have enough time to go through
+[0:56:31] them all so i highlighted what i think
+[0:56:32] are the two most important ones the rest
+[0:56:34] are kind of like more technical ones uh
+[0:56:36] but i'll leave them for mona in case
+[0:56:38] she's interested but the two main
+[0:56:40] questions that i wanted to ask are um so
+[0:56:42] to come back to this discussion about uh
+[0:56:44] existing markup boundary learning
+[0:56:46] algorithms um do you think there's any
+[0:56:48] fundamental differences between foci and
+[0:56:51] these existing approaches uh based on
+[0:56:53] forward greedy search um so my
+[0:56:55] impression was that it's very similar
+[0:56:57] just you're using a different uh
+[0:56:59] dependence measure but maybe i missed
+[0:57:00] something and the second question
+[0:57:03] was um so briefly you had mentioned that
+[0:57:06] the second step only involves pairwise
+[0:57:09] marginal testing uh and given the fact
+[0:57:11] that there's this tree-like assumption
+[0:57:12] this kind of sounds a lot like a chalu
+[0:57:14] type uh approach and i was wondering if
+[0:57:16] there's if there if you found any
+[0:57:18] connections between this approach and
+[0:57:20] the chao algorithm uh i won't uh we can
+[0:57:23] continue the discussion from there i'll
+[0:57:24] start with just those two questions
 [0:57:32] thank you very much thank you okay so how much time do i have
-[0:57:35] okay so how much time do i have yeah like two three minutes
-[0:57:37] yeah like two three minutes okay
+[0:57:35] yeah like two three minutes
 [0:57:38] okay yeah so for the first question yeah as
-[0:57:41] yeah so for the first question yeah as you as you mentioned clearly um the
-[0:57:44] you as you mentioned clearly um the the
+[0:57:41] you as you mentioned clearly um the
 [0:57:46] the the foci and other greedy based
-[0:57:49] the foci and other greedy based algorithms for markov boundary research
-[0:57:52] algorithms for markov boundary research are basically the same fosa is nothing
-[0:57:54] are basically the same fosa is nothing fancy at all it's just using this
-[0:57:57] fancy at all it's just using this measure of conditional independence and
-[0:57:58] measure of conditional independence and all of the properties that it carries on
-[0:58:00] all of the properties that it carries on it's basically thanks to the measure so
-[0:58:02] it's basically thanks to the measure so the algorithm itself is nothing new so
-[0:58:05] the algorithm itself is nothing new so we tell you actually unfortunately i
-[0:58:08] we tell you actually unfortunately i would say that i it's a bit dusty
-[0:58:11] would say that i it's a bit dusty or mean if you
-[0:58:12] or mean if you have any comments because i know that
-[0:58:14] have any comments because i know that you are more familiar with it if you can
-[0:58:16] you are more familiar with it if you can jump in and help me in this
-[0:58:19] jump in and help me in this uh i unfortunately i cannot help it's
-[0:58:22] uh i unfortunately i cannot help it's also a question that i had thought about
-[0:58:24] also a question that i had thought about but i could not resolve completely what
-[0:58:26] but i could not resolve completely what the connection to chow is because of
-[0:58:28] the connection to chow is because of course that's a very famous algorithm
-[0:58:31] course that's a very famous algorithm for
+[0:57:49] algorithms for markov boundary research
+[0:57:52] are basically the same fosa is nothing
+[0:57:54] fancy at all it's just using this
+[0:57:57] measure of conditional independence and
+[0:57:58] all of the properties that it carries on
+[0:58:00] it's basically thanks to the measure so
+[0:58:02] the algorithm itself is nothing new so
+[0:58:05] we tell you actually unfortunately i
+[0:58:08] would say that i it's a bit dusty
+[0:58:11] or mean if you
+[0:58:12] have any comments because i know that
+[0:58:14] you are more familiar with it if you can
+[0:58:16] jump in and help me in this
+[0:58:19] uh i unfortunately i cannot help it's
+[0:58:22] also a question that i had thought about
+[0:58:24] but i could not resolve completely what
+[0:58:26] the connection to chow is because of
+[0:58:28] course that's a very famous algorithm
 [0:58:32] for learning um with the tree assumption but
-[0:58:35] learning um with the tree assumption but i don't quite know the
-[0:58:38] i don't quite know the connection
-[0:58:40] connection yeah
+[0:58:35] i don't quite know the
+[0:58:38] connection
 [0:58:42] yeah yes sorry i i
-[0:58:44] yes sorry i i somehow i don't remember the exactly
-[0:58:46] somehow i don't remember the exactly this so i cannot answer that question
+[0:58:44] somehow i don't remember the exactly
+[0:58:46] this so i cannot answer that question
 [0:58:52] no worries uh it's just one of the random thoughts i had uh as i was
-[0:58:55] random thoughts i had uh as i was reading the paper
-[0:58:56] reading the paper uh one other thing that i i i was
-[0:58:58] uh one other thing that i i i was wondering about
-[0:58:59] wondering about certain this is the fifth question that
-[0:59:01] certain this is the fifth question that i have here is that there i noticed in
-[0:59:02] i have here is that there i noticed in several places in the paper that you
-[0:59:04] several places in the paper that you mentioned that the algorithm was
-[0:59:05] mentioned that the algorithm was efficient uh and i noticed so the the
-[0:59:08] efficient uh and i noticed so the the foci algorithm runs in n log n time but
-[0:59:12] foci algorithm runs in n log n time but was there a discussion of the
-[0:59:13] was there a discussion of the computational complexity of the entire
-[0:59:15] computational complexity of the entire procedure including learning the parents
-[0:59:18] procedure including learning the parents i mean maybe i missed that
-[0:59:20] i mean maybe i missed that yeah i know no actually i i i didn't
-[0:59:22] yeah i know no actually i i i didn't mention it so basically you need to run
-[0:59:24] mention it so basically you need to run fosi for the variable y and then after
-[0:59:28] fosi for the variable y and then after you figure out the markov boundary of y
-[0:59:30] you figure out the markov boundary of y you need to run foci for each of the
-[0:59:32] you need to run foci for each of the single elements in the markov boundary
-[0:59:34] single elements in the markov boundary so basically you need to do mark of
-[0:59:36] so basically you need to do mark of boundary plus one times foci so if the
-[0:59:39] boundary plus one times foci so if the size of the markov boundary is not small
-[0:59:42] size of the markov boundary is not small you will end up having doing like this n
-[0:59:45] you will end up having doing like this n log n time many times uh which might be
-[0:59:48] log n time many times uh which might be too much but yeah that depends how how
-[0:59:51] too much but yeah that depends how how large how how connected basically y is
-[0:59:53] large how how connected basically y is to the rest of the nodes
-[0:59:56] to the rest of the nodes i see great thanks
-[0:59:59] i see great thanks um uh yeah i think the rest of the
-[1:00:01] um uh yeah i think the rest of the questions maybe we can we can discuss
-[1:00:03] questions maybe we can we can discuss offline uh i don't want to take up too
-[1:00:05] offline uh i don't want to take up too much more time how do we have any do we
-[1:00:07] much more time how do we have any do we have much more time or i can just
-[1:00:09] have much more time or i can just quickly wrap up and then you can
-[1:00:10] quickly wrap up and then you can continue a little bit more sure sure
-[1:00:12] continue a little bit more sure sure sounds good
-[1:00:13] sounds good all right yeah first wait one second
-[1:00:17] all right yeah first wait one second first yeah thank you so much mona for
-[1:00:19] first yeah thank you so much mona for the very nice talk thank you brian for
-[1:00:21] the very nice talk thank you brian for the for the interesting discussion also
-[1:00:23] the for the interesting discussion also thank you to armen for helping out in q
-[1:00:25] thank you to armen for helping out in q a uh next week we're going to have amir
-[1:00:28] a uh next week we're going to have amir ahmad kazami from transhop john hopkins
-[1:00:30] ahmad kazami from transhop john hopkins university who will talk about combining
-[1:00:32] university who will talk about combining experimental and observational data for
-[1:00:34] experimental and observational data for identification and estimation of
-[1:00:36] identification and estimation of long-term causal effects
-[1:00:38] long-term causal effects thank you all for coming i hope you have
-[1:00:39] thank you all for coming i hope you have a great week and see you next time
+[0:58:55] reading the paper
+[0:58:56] uh one other thing that i i i was
+[0:58:58] wondering about
+[0:58:59] certain this is the fifth question that
+[0:59:01] i have here is that there i noticed in
+[0:59:02] several places in the paper that you
+[0:59:04] mentioned that the algorithm was
+[0:59:05] efficient uh and i noticed so the the
+[0:59:08] foci algorithm runs in n log n time but
+[0:59:12] was there a discussion of the
+[0:59:13] computational complexity of the entire
+[0:59:15] procedure including learning the parents
+[0:59:18] i mean maybe i missed that
+[0:59:20] yeah i know no actually i i i didn't
+[0:59:22] mention it so basically you need to run
+[0:59:24] fosi for the variable y and then after
+[0:59:28] you figure out the markov boundary of y
+[0:59:30] you need to run foci for each of the
+[0:59:32] single elements in the markov boundary
+[0:59:34] so basically you need to do mark of
+[0:59:36] boundary plus one times foci so if the
+[0:59:39] size of the markov boundary is not small
+[0:59:42] you will end up having doing like this n
+[0:59:45] log n time many times uh which might be
+[0:59:48] too much but yeah that depends how how
+[0:59:51] large how how connected basically y is
+[0:59:53] to the rest of the nodes
+[0:59:56] i see great thanks
+[0:59:59] um uh yeah i think the rest of the
+[1:00:01] questions maybe we can we can discuss
+[1:00:03] offline uh i don't want to take up too
+[1:00:05] much more time how do we have any do we
+[1:00:07] have much more time or i can just
+[1:00:09] quickly wrap up and then you can
+[1:00:10] continue a little bit more sure sure
+[1:00:12] sounds good
+[1:00:13] all right yeah first wait one second
+[1:00:17] first yeah thank you so much mona for
+[1:00:19] the very nice talk thank you brian for
+[1:00:21] the for the interesting discussion also
+[1:00:23] thank you to armen for helping out in q
+[1:00:25] a uh next week we're going to have amir
+[1:00:28] ahmad kazami from transhop john hopkins
+[1:00:30] university who will talk about combining
+[1:00:32] experimental and observational data for
+[1:00:34] identification and estimation of
+[1:00:36] long-term causal effects
+[1:00:38] thank you all for coming i hope you have
+[1:00:39] a great week and see you next time

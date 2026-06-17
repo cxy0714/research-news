@@ -1,1304 +1,1262 @@
 [0:00:03] Our last speaker is professor Victor
-[0:00:04] last speaker is professor Victor Chonuzukov. He's a professor of
-[0:00:06] Chonuzukov. He's a professor of economics and also a center of
-[0:00:09] economics and also a center of statistics at MIT. Uh Victor has done
-[0:00:12] statistics at MIT. Uh Victor has done incredible work on uh not only cause of
-[0:00:14] incredible work on uh not only cause of inference and econometrics but in high
-[0:00:16] inference and econometrics but in high definition statistics, high dimensional
-[0:00:17] definition statistics, high dimensional probability and very well known for his
-[0:00:20] probability and very well known for his work on gausian approximation and also
-[0:00:22] work on gausian approximation and also double machine learning. So today we are
-[0:00:24] double machine learning. So today we are going to hear about adventures in demand
-[0:00:26] going to hear about adventures in demand analysis using AI. The talk will be
-[0:00:28] analysis using AI. The talk will be roughly 1 hour and we'll try to keep the
-[0:00:31] roughly 1 hour and we'll try to keep the questions till the end and there are
-[0:00:33] questions till the end and there are also people online for the online causal
-[0:00:34] also people online for the online causal inference. So, but we'll prioritize
-[0:00:36] inference. So, but we'll prioritize questions in the audience here first and
-[0:00:38] questions in the audience here first and then we'll move on to the talks on uh
-[0:00:40] then we'll move on to the talks on uh the questions online. So, welcome.
-[0:00:43] the questions online. So, welcome. &gt;&gt; Thank you very much. [clears throat]
-[0:00:45] &gt;&gt; Thank you very much. [clears throat] Uh yeah, it's a a pleasure to be here.
-[0:00:49] Uh yeah, it's a a pleasure to be here. Actually, a pleasure to be able to
-[0:00:51] Actually, a pleasure to be able to travel after some uh three years break
-[0:00:54] travel after some uh three years break from uh from from all of these
-[0:00:56] from uh from from all of these activities.
-[0:00:58] activities. Um
+[0:00:04] Chonuzukov. He's a professor of
+[0:00:06] economics and also a center of
+[0:00:09] statistics at MIT. Uh Victor has done
+[0:00:12] incredible work on uh not only cause of
+[0:00:14] inference and econometrics but in high
+[0:00:16] definition statistics, high dimensional
+[0:00:17] probability and very well known for his
+[0:00:20] work on gausian approximation and also
+[0:00:22] double machine learning. So today we are
+[0:00:24] going to hear about adventures in demand
+[0:00:26] analysis using AI. The talk will be
+[0:00:28] roughly 1 hour and we'll try to keep the
+[0:00:31] questions till the end and there are
+[0:00:33] also people online for the online causal
+[0:00:34] inference. So, but we'll prioritize
+[0:00:36] questions in the audience here first and
+[0:00:38] then we'll move on to the talks on uh
+[0:00:40] the questions online. So, welcome.
+[0:00:43] >> Thank you very much. [clears throat]
+[0:00:45] Uh yeah, it's a a pleasure to be here.
+[0:00:49] Actually, a pleasure to be able to
+[0:00:51] travel after some uh three years break
+[0:00:54] from uh from from all of these
+[0:00:56] activities.
+[0:00:58] Um
 [0:01:04] so yeah and this talk is it's it's about the advent all all kinds of adventures
-[0:01:06] the advent all all kinds of adventures that we had uh trying to use
-[0:01:09] that we had uh trying to use AI and also like transformer transformer
-[0:01:12] AI and also like transformer transformer based embeddings and um in various tasks
-[0:01:17] based embeddings and um in various tasks related to demand demand estimation and
-[0:01:19] related to demand demand estimation and so this particular talk is heavily based
-[0:01:22] so this particular talk is heavily based on a paper that we wrote together with a
-[0:01:25] on a paper that we wrote together with a wonderful team team of collaborators
-[0:01:27] wonderful team team of collaborators Philips and Yan Martin and Suhush
+[0:01:06] that we had uh trying to use
+[0:01:09] AI and also like transformer transformer
+[0:01:12] based embeddings and um in various tasks
+[0:01:17] related to demand demand estimation and
+[0:01:19] so this particular talk is heavily based
+[0:01:22] on a paper that we wrote together with a
+[0:01:25] wonderful team team of collaborators
+[0:01:27] Philips and Yan Martin and Suhush
 [0:01:36] and um the paper there were several motivation uh for doing this paper. One
-[0:01:39] motivation uh for doing this paper. One of them was teaching motivation. I
-[0:01:41] of them was teaching motivation. I needed something pedagogical for my my
-[0:01:43] needed something pedagogical for my my course. So I'll get back to the teaching
-[0:01:45] course. So I'll get back to the teaching motivation. Another motivation was well
-[0:01:49] motivation. Another motivation was well the JASA announced a special issue of u
-[0:01:53] the JASA announced a special issue of u on statistics and AI and we said oh
-[0:01:55] on statistics and AI and we said oh that's a really good uh u opportunity
-[0:01:59] that's a really good uh u opportunity and so when I was looked back at what
-[0:02:02] and so when I was looked back at what JASA did 100 years ago I actually
-[0:02:04] JASA did 100 years ago I actually realized that Jasa started the whole
-[0:02:06] realized that Jasa started the whole empirical demand literature in fact JASA
-[0:02:09] empirical demand literature in fact JASA started econometrics
-[0:02:11] started econometrics as a field which which is the defined as
-[0:02:14] as a field which which is the defined as an intersection of economics statistics
-[0:02:18] an intersection of economics statistics it's not a separate field it's like
-[0:02:19] it's not a separate field it's like intersection right so um and so the back
-[0:02:24] intersection right so um and so the back back 100 years 100 years ago
-[0:02:28] back 100 years 100 years ago it JASA published uh uh works by Philip
-[0:02:33] it JASA published uh uh works by Philip Wright Hbert working and and others like
-[0:02:36] Wright Hbert working and and others like incredible names
-[0:02:38] incredible names that uh that like all of the studies
-[0:02:42] that uh that like all of the studies that moved economics towards it like
-[0:02:44] that moved economics towards it like empirical empirical ical quantitative
-[0:02:47] empirical empirical ical quantitative measurements, right? And and
-[0:02:50] measurements, right? And and uh help us better inform economic models
-[0:02:53] uh help us better inform economic models and all that. So that was that was
-[0:02:55] and all that. So that was that was really really really uh deep and
-[0:02:58] really really really uh deep and interesting literature. And then you
-[0:02:59] interesting literature. And then you know of course later on like
-[0:03:00] know of course later on like econometrica came about in 1944
-[0:03:03] econometrica came about in 1944 something like that and then some of
-[0:03:05] something like that and then some of that work shifted over but but it was u
-[0:03:08] that work shifted over but but it was u like the early just tradition was was
-[0:03:12] like the early just tradition was was tremendous and quite inspiring.
-[0:03:15] tremendous and quite inspiring. Then another [clears throat] motivation
-[0:03:18] Then another [clears throat] motivation for this line of work is literature on
-[0:03:21] for this line of work is literature on hyonic modeling. Basically hedonic in um
-[0:03:25] hyonic modeling. Basically hedonic in um in hedonic modeling we we model
-[0:03:28] in hedonic modeling we we model [clears throat]
-[0:03:29] [clears throat] the product prices and product demand in
-[0:03:32] the product prices and product demand in terms of product characteristics
-[0:03:34] terms of product characteristics right and so that literature started by
-[0:03:37] right and so that literature started by Lancaster and Gikis and also continued
-[0:03:40] Lancaster and Gikis and also continued through the work of Ariel Pis and
-[0:03:42] through the work of Ariel Pis and especially Pat Bayari who recent like
-[0:03:44] especially Pat Bayari who recent like was a chief chief economist at Amazon
-[0:03:47] was a chief chief economist at Amazon and also prominent ao economist who
-[0:03:50] and also prominent ao economist who recently passed way and um so some of
-[0:03:53] recently passed way and um so some of the work that we uh some of this work
-[0:03:56] the work that we uh some of this work that I'm describing today is actually
-[0:03:58] that I'm describing today is actually kind of is is directly inspired by by by
-[0:04:03] kind of is is directly inspired by by by earlier work we did with spot bayari
-[0:04:05] earlier work we did with spot bayari right so in that early work we were
-[0:04:07] right so in that early work we were using kind of um yeah AI tools to do
-[0:04:11] using kind of um yeah AI tools to do hidonings to do inflation measurements
-[0:04:13] hidonings to do inflation measurements and and all of this and so the to
-[0:04:15] and and all of this and so the to continue this uh this work we will
-[0:04:19] continue this uh this work we will uh we will um again use this AI tools to
-[0:04:23] uh we will um again use this AI tools to to to to look at demand estimation and
-[0:04:26] to to to look at demand estimation and more like from a causal point of view
-[0:04:28] more like from a causal point of view specifically we're going to be looking
-[0:04:29] specifically we're going to be looking at the price uh sensitivity or price
-[0:04:32] at the price uh sensitivity or price elasticity of of of demand.
-[0:04:36] elasticity of of of demand. So basically in uh like to summarize
-[0:04:39] So basically in uh like to summarize today with all this AI revolution uh we
-[0:04:43] today with all this AI revolution uh we we
+[0:01:39] of them was teaching motivation. I
+[0:01:41] needed something pedagogical for my my
+[0:01:43] course. So I'll get back to the teaching
+[0:01:45] motivation. Another motivation was well
+[0:01:49] the JASA announced a special issue of u
+[0:01:53] on statistics and AI and we said oh
+[0:01:55] that's a really good uh u opportunity
+[0:01:59] and so when I was looked back at what
+[0:02:02] JASA did 100 years ago I actually
+[0:02:04] realized that Jasa started the whole
+[0:02:06] empirical demand literature in fact JASA
+[0:02:09] started econometrics
+[0:02:11] as a field which which is the defined as
+[0:02:14] an intersection of economics statistics
+[0:02:18] it's not a separate field it's like
+[0:02:19] intersection right so um and so the back
+[0:02:24] back 100 years 100 years ago
+[0:02:28] it JASA published uh uh works by Philip
+[0:02:33] Wright Hbert working and and others like
+[0:02:36] incredible names
+[0:02:38] that uh that like all of the studies
+[0:02:42] that moved economics towards it like
+[0:02:44] empirical empirical ical quantitative
+[0:02:47] measurements, right? And and
+[0:02:50] uh help us better inform economic models
+[0:02:53] and all that. So that was that was
+[0:02:55] really really really uh deep and
+[0:02:58] interesting literature. And then you
+[0:02:59] know of course later on like
+[0:03:00] econometrica came about in 1944
+[0:03:03] something like that and then some of
+[0:03:05] that work shifted over but but it was u
+[0:03:08] like the early just tradition was was
+[0:03:12] tremendous and quite inspiring.
+[0:03:15] Then another [clears throat] motivation
+[0:03:18] for this line of work is literature on
+[0:03:21] hyonic modeling. Basically hedonic in um
+[0:03:25] in hedonic modeling we we model
+[0:03:28] [clears throat]
+[0:03:29] the product prices and product demand in
+[0:03:32] terms of product characteristics
+[0:03:34] right and so that literature started by
+[0:03:37] Lancaster and Gikis and also continued
+[0:03:40] through the work of Ariel Pis and
+[0:03:42] especially Pat Bayari who recent like
+[0:03:44] was a chief chief economist at Amazon
+[0:03:47] and also prominent ao economist who
+[0:03:50] recently passed way and um so some of
+[0:03:53] the work that we uh some of this work
+[0:03:56] that I'm describing today is actually
+[0:03:58] kind of is is directly inspired by by by
+[0:04:03] earlier work we did with spot bayari
+[0:04:05] right so in that early work we were
+[0:04:07] using kind of um yeah AI tools to do
+[0:04:11] hidonings to do inflation measurements
+[0:04:13] and and all of this and so the to
+[0:04:15] continue this uh this work we will
+[0:04:19] uh we will um again use this AI tools to
+[0:04:23] to to to look at demand estimation and
+[0:04:26] more like from a causal point of view
+[0:04:28] specifically we're going to be looking
+[0:04:29] at the price uh sensitivity or price
+[0:04:32] elasticity of of of demand.
+[0:04:36] So basically in uh like to summarize
+[0:04:39] today with all this AI revolution uh we
 [0:04:44] we have like good opportunities to to to to
-[0:04:47] have like good opportunities to to to to revisit the foundations right and
-[0:04:51] revisit the foundations right and and that's what we're trying to do. So
-[0:04:53] and that's what we're trying to do. So we're going to look at the um Amazon
-[0:04:56] we're going to look at the um Amazon application. We're going to use the toy
-[0:04:59] application. We're going to use the toy toy data. I said I want something
-[0:05:00] toy data. I said I want something pedagogical. So it has to be toy toy
-[0:05:03] pedagogical. So it has to be toy toy example. So, it's literally going to be
-[0:05:05] example. So, it's literally going to be toy example, right? Uh, so we're going
-[0:05:08] toy example, right? Uh, so we're going to use toy toy car sale ranks and prices
-[0:05:11] to use toy toy car sale ranks and prices from amazon.com.
-[0:05:13] from amazon.com. It's publicly available data, so there's
-[0:05:17] It's publicly available data, so there's no private data here.
-[0:05:19] no private data here. Um
+[0:04:47] revisit the foundations right and
+[0:04:51] and that's what we're trying to do. So
+[0:04:53] we're going to look at the um Amazon
+[0:04:56] application. We're going to use the toy
+[0:04:59] toy data. I said I want something
+[0:05:00] pedagogical. So it has to be toy toy
+[0:05:03] example. So, it's literally going to be
+[0:05:05] toy example, right? Uh, so we're going
+[0:05:08] to use toy toy car sale ranks and prices
+[0:05:11] from amazon.com.
+[0:05:13] It's publicly available data, so there's
+[0:05:17] no private data here.
 [0:05:21] Um and uh the the the the the paper um uh
-[0:05:26] and uh the the the the the paper um uh the paper is going to demonstrate how
-[0:05:29] the paper is going to demonstrate how this uh like uh transformerbased models
-[0:05:34] this uh like uh transformerbased models for text images and and tabular data
-[0:05:36] for text images and and tabular data generate demand relevant and price
-[0:05:39] generate demand relevant and price relevant embeddings or characteristics.
-[0:05:41] relevant embeddings or characteristics. So these embeddings are going to be
-[0:05:43] So these embeddings are going to be powerful predictors of both prices and
-[0:05:45] powerful predictors of both prices and quantities and they they're going to
-[0:05:47] quantities and they they're going to play an important role in the price
-[0:05:48] play an important role in the price sensitivity analysis.
+[0:05:26] the paper is going to demonstrate how
+[0:05:29] this uh like uh transformerbased models
+[0:05:34] for text images and and tabular data
+[0:05:36] generate demand relevant and price
+[0:05:39] relevant embeddings or characteristics.
+[0:05:41] So these embeddings are going to be
+[0:05:43] powerful predictors of both prices and
+[0:05:45] quantities and they they're going to
+[0:05:47] play an important role in the price
+[0:05:48] sensitivity analysis.
 [0:05:54] Um so so yeah so we will establish that we
-[0:05:57] so so yeah so we will establish that we will also the main goal of course is to
-[0:05:59] will also the main goal of course is to analyze the price elasticity
-[0:06:02] analyze the price elasticity and we will see that these AI embeddings
-[0:06:05] and we will see that these AI embeddings tend to like well seem to be the key
-[0:06:07] tend to like well seem to be the key determinants of the price sensitivity
-[0:06:10] determinants of the price sensitivity uh or elasticity of the demand. So in
-[0:06:12] uh or elasticity of the demand. So in particular they tend to be effect
-[0:06:14] particular they tend to be effect modifiers.
-[0:06:16] modifiers. So the elasticity is going to depend a
-[0:06:18] So the elasticity is going to depend a lot on what you know what the product is
-[0:06:22] lot on what you know what the product is but but they also tend to be weak
-[0:06:24] but but they also tend to be weak confounders once we like once we in
-[0:06:27] confounders once we like once we in incorporate the past visibility signals
-[0:06:30] incorporate the past visibility signals and prices as u as controls right so
-[0:06:33] and prices as u as controls right so once we control for those observed
-[0:06:36] once we control for those observed confounders these these uh embeddings
-[0:06:39] confounders these these uh embeddings they are strong effect modifiers but
-[0:06:41] they are strong effect modifiers but they are not essentially they're not
-[0:06:43] they are not essentially they're not confounders they don't they don't
-[0:06:45] confounders they don't they don't contribute to the confound confounded
-[0:06:48] contribute to the confound confounded and so these are the findings that I'm
-[0:06:50] and so these are the findings that I'm I'm going to report on uh today.
-[0:06:54] I'm going to report on uh today. So in terms of the papers, I I mentioned
-[0:06:56] So in terms of the papers, I I mentioned the prior work with Pat Bayari. Um it's
-[0:07:00] the prior work with Pat Bayari. Um it's um it's a it's a it's actually a project
-[0:07:03] um it's a it's a it's actually a project that we did uh using internal Amazon
-[0:07:06] that we did uh using internal Amazon data which like it was incredible to
-[0:07:09] data which like it was incredible to have to to to work with that data and
-[0:07:12] have to to to work with that data and use like AI tools um there because we
-[0:07:16] use like AI tools um there because we were um
+[0:05:57] will also the main goal of course is to
+[0:05:59] analyze the price elasticity
+[0:06:02] and we will see that these AI embeddings
+[0:06:05] tend to like well seem to be the key
+[0:06:07] determinants of the price sensitivity
+[0:06:10] uh or elasticity of the demand. So in
+[0:06:12] particular they tend to be effect
+[0:06:14] modifiers.
+[0:06:16] So the elasticity is going to depend a
+[0:06:18] lot on what you know what the product is
+[0:06:22] but but they also tend to be weak
+[0:06:24] confounders once we like once we in
+[0:06:27] incorporate the past visibility signals
+[0:06:30] and prices as u as controls right so
+[0:06:33] once we control for those observed
+[0:06:36] confounders these these uh embeddings
+[0:06:39] they are strong effect modifiers but
+[0:06:41] they are not essentially they're not
+[0:06:43] confounders they don't they don't
+[0:06:45] contribute to the confound confounded
+[0:06:48] and so these are the findings that I'm
+[0:06:50] I'm going to report on uh today.
+[0:06:54] So in terms of the papers, I I mentioned
+[0:06:56] the prior work with Pat Bayari. Um it's
+[0:07:00] um it's a it's a it's actually a project
+[0:07:03] that we did uh using internal Amazon
+[0:07:06] data which like it was incredible to
+[0:07:09] have to to to work with that data and
+[0:07:12] use like AI tools um there because we
 [0:07:18] were um uh able to estimate very uh very deep
-[0:07:21] uh able to estimate very uh very deep literally very deep models um that um
-[0:07:25] literally very deep models um that um that show that these kind of AI
-[0:07:27] that show that these kind of AI embeddings are able to predict the
-[0:07:29] embeddings are able to predict the prices like fair market prices like very
-[0:07:31] prices like fair market prices like very very accurately with our squares like
-[0:07:34] very accurately with our squares like out of sample our squares close to 90%
-[0:07:37] out of sample our squares close to 90% was for the soft lines and we use that
-[0:07:40] was for the soft lines and we use that uh that technology to to show how we
-[0:07:42] uh that technology to to show how we [cough] can build modern quality
-[0:07:44] [cough] can build modern quality adjusted price indices to measure
-[0:07:46] adjusted price indices to measure inflation kind of do it at scale right
-[0:07:49] inflation kind of do it at scale right like without the traditional price
-[0:07:52] like without the traditional price surveys and so on you just go get
-[0:07:54] surveys and so on you just go get electronic data you you run the hedonic
-[0:07:56] electronic data you you run the hedonic regressions and then you you measure
-[0:07:58] regressions and then you you measure inflation in that way. And so finally we
-[0:08:00] inflation in that way. And so finally we managed to publish the paper came out uh
-[0:08:03] managed to publish the paper came out uh came out in journal of econometrics last
-[0:08:05] came out in journal of econometrics last year although it was circulated like for
-[0:08:08] year although it was circulated like for like five or more years right um it's a
-[0:08:12] like five or more years right um it's a usual sort of publication I mean it's
-[0:08:14] usual sort of publication I mean it's actually four or five years publication
-[0:08:16] actually four or five years publication lag in economics is not that bad you
-[0:08:18] lag in economics is not that bad you know uh maybe around medium um and uh
-[0:08:23] know uh maybe around medium um and uh the paper today is uh is this paper it's
-[0:08:26] the paper today is uh is this paper it's available in ariv um adventure and
-[0:08:30] available in ariv um adventure and demand analysis using AI. It's it's yeah
-[0:08:33] demand analysis using AI. It's it's yeah it's uh yeah you can look at this in
-[0:08:35] it's uh yeah you can look at this in arrive and also just want to mention
-[0:08:37] arrive and also just want to mention that u the data that I I will describe
-[0:08:40] that u the data that I I will describe today as well as the analysis going to
-[0:08:42] today as well as the analysis going to be part part of this online online book
-[0:08:45] be part part of this online online book that we have which uh uh that which
-[0:08:48] that we have which uh uh that which comes together well with each chapter
-[0:08:50] comes together well with each chapter comes with the notebooks that one can
-[0:08:52] comes with the notebooks that one can run and so on. So that's all going to be
-[0:08:54] run and so on. So that's all going to be a available
-[0:08:57] a available uh soon uh via this [clears throat] coal
-[0:08:59] uh soon uh via this [clears throat] coal causal mlbook.org site.
-[0:09:04] causal mlbook.org site. So here's the here's our typical toy toy
-[0:09:06] So here's the here's our typical toy toy example.
+[0:07:21] literally very deep models um that um
+[0:07:25] that show that these kind of AI
+[0:07:27] embeddings are able to predict the
+[0:07:29] prices like fair market prices like very
+[0:07:31] very accurately with our squares like
+[0:07:34] out of sample our squares close to 90%
+[0:07:37] was for the soft lines and we use that
+[0:07:40] uh that technology to to show how we
+[0:07:42] [cough] can build modern quality
+[0:07:44] adjusted price indices to measure
+[0:07:46] inflation kind of do it at scale right
+[0:07:49] like without the traditional price
+[0:07:52] surveys and so on you just go get
+[0:07:54] electronic data you you run the hedonic
+[0:07:56] regressions and then you you measure
+[0:07:58] inflation in that way. And so finally we
+[0:08:00] managed to publish the paper came out uh
+[0:08:03] came out in journal of econometrics last
+[0:08:05] year although it was circulated like for
+[0:08:08] like five or more years right um it's a
+[0:08:12] usual sort of publication I mean it's
+[0:08:14] actually four or five years publication
+[0:08:16] lag in economics is not that bad you
+[0:08:18] know uh maybe around medium um and uh
+[0:08:23] the paper today is uh is this paper it's
+[0:08:26] available in ariv um adventure and
+[0:08:30] demand analysis using AI. It's it's yeah
+[0:08:33] it's uh yeah you can look at this in
+[0:08:35] arrive and also just want to mention
+[0:08:37] that u the data that I I will describe
+[0:08:40] today as well as the analysis going to
+[0:08:42] be part part of this online online book
+[0:08:45] that we have which uh uh that which
+[0:08:48] comes together well with each chapter
+[0:08:50] comes with the notebooks that one can
+[0:08:52] run and so on. So that's all going to be
+[0:08:54] a available
+[0:08:57] uh soon uh via this [clears throat] coal
+[0:08:59] causal mlbook.org site.
+[0:09:04] So here's the here's our typical toy toy
 [0:09:09] example. So uh so this is this is what our data
-[0:09:13] So uh so this is this is what our data looks like. You have a you have a you
-[0:09:16] looks like. You have a you have a you have an image um you have product title.
-[0:09:19] have an image um you have product title. you have a product description, price,
-[0:09:22] you have a product description, price, reviews.
+[0:09:13] looks like. You have a you have a you
+[0:09:16] have an image um you have product title.
+[0:09:19] you have a product description, price,
 [0:09:24] reviews. Um, you also don't see it, but you also
-[0:09:26] Um, you also don't see it, but you also get like browse node data, which is some
-[0:09:28] get like browse node data, which is some form of like internal uh catalog.
-[0:09:32] form of like internal uh catalog. Um,
+[0:09:26] get like browse node data, which is some
+[0:09:28] form of like internal uh catalog.
+[0:09:32] Um,
 [0:09:35] and
 [0:09:41] how do we get this data? So, as I mentioned, it's a public data. It's
-[0:09:42] mentioned, it's a public data. It's scrape data. We use uh we use the
-[0:09:45] scrape data. We use uh we use the professional scraper like scrapers
-[0:09:48] professional scraper like scrapers keepa.com to get the data.
-[0:09:52] keepa.com to get the data. Um so we record the
-[0:09:55] Um so we record the sale sales run for each item I time
-[0:09:58] sale sales run for each item I time point t uh list price actually it's
-[0:10:02] point t uh list price actually it's going to be buy the so-called buy box
-[0:10:04] going to be buy the so-called buy box price kind of the best price available
-[0:10:07] price kind of the best price available at the at the time for this item.
-[0:10:11] at the at the time for this item. um text description, image uh and then
-[0:10:15] um text description, image uh and then yeah the the tabular features which are
-[0:10:17] yeah the the tabular features which are just ratings and browse uh browse node
-[0:10:20] just ratings and browse uh browse node uh data.
+[0:09:42] scrape data. We use uh we use the
+[0:09:45] professional scraper like scrapers
+[0:09:48] keepa.com to get the data.
+[0:09:52] Um so we record the
+[0:09:55] sale sales run for each item I time
+[0:09:58] point t uh list price actually it's
+[0:10:02] going to be buy the so-called buy box
+[0:10:04] price kind of the best price available
+[0:10:07] at the at the time for this item.
+[0:10:11] um text description, image uh and then
+[0:10:15] yeah the the tabular features which are
+[0:10:17] just ratings and browse uh browse node
 [0:10:23] uh data. Then using this data we construct the
-[0:10:26] Then using this data we construct the what we call the quantity signal and the
-[0:10:28] what we call the quantity signal and the price signal.
-[0:10:30] price signal. So for the quantity uh for the quantity
-[0:10:34] So for the quantity uh for the quantity signal we
+[0:10:26] what we call the quantity signal and the
+[0:10:28] price signal.
+[0:10:30] So for the quantity uh for the quantity
 [0:10:36] signal we um
 [0:10:41] the way we construct quantity signal is going to be log of yeah it's going to be
-[0:10:44] going to be log of yeah it's going to be log inverse rank. So specifically it's
-[0:10:46] log inverse rank. So specifically it's going to be log of of one divided by
-[0:10:49] going to be log of of one divided by time [snorts] average sale rank of uh
-[0:10:53] time [snorts] average sale rank of uh item I period t a price signal is going
-[0:10:57] item I period t a price signal is going to be constructed an analogously it's
-[0:10:59] to be constructed an analogously it's going to be log of the time of each
-[0:11:01] going to be log of the time of each price of i period t.
-[0:11:04] price of i period t. So each period here is going to to span
-[0:11:07] So each period here is going to to span four weeks.
-[0:11:09] four weeks. So roughly at one month and we will look
-[0:11:13] So roughly at one month and we will look at 12 periods in total. So roughly one
-[0:11:16] at 12 periods in total. So roughly one one year worth of data.
-[0:11:19] one year worth of data. Then we we can also look at at the
-[0:11:21] Then we we can also look at at the temporal changes in some of these
-[0:11:23] temporal changes in some of these analysis. So the the deltas here would
-[0:11:25] analysis. So the the deltas here would mean the temporal temporal differences.
-[0:11:29] mean the temporal temporal differences. So we call this log inverse rank the
-[0:11:32] So we call this log inverse rank the quantity signal.
+[0:10:44] log inverse rank. So specifically it's
+[0:10:46] going to be log of of one divided by
+[0:10:49] time [snorts] average sale rank of uh
+[0:10:53] item I period t a price signal is going
+[0:10:57] to be constructed an analogously it's
+[0:10:59] going to be log of the time of each
+[0:11:01] price of i period t.
+[0:11:04] So each period here is going to to span
+[0:11:07] four weeks.
+[0:11:09] So roughly at one month and we will look
+[0:11:13] at 12 periods in total. So roughly one
+[0:11:16] one year worth of data.
+[0:11:19] Then we we can also look at at the
+[0:11:21] temporal changes in some of these
+[0:11:23] analysis. So the the deltas here would
+[0:11:25] mean the temporal temporal differences.
+[0:11:29] So we call this log inverse rank the
+[0:11:32] quantity signal.
 [0:11:38] And the reason we call this quantity signal well it's it's well it's fairly
-[0:11:41] signal well it's it's well it's fairly intuitive right? Well, we don't see the
-[0:11:42] intuitive right? Well, we don't see the quantity directly, but the but the sale
-[0:11:47] quantity directly, but the but the sale sales rank informs us potentially
-[0:11:50] sales rank informs us potentially informs us about what the quantity is.
-[0:11:53] informs us about what the quantity is. And so what what some of the IO
-[0:11:55] And so what what some of the IO economists did they actually they said
-[0:11:57] economists did they actually they said oh they who had the access to like the
-[0:11:59] oh they who had the access to like the internal uh sales data. They they fitted
-[0:12:03] internal uh sales data. They they fitted they fitted models for the sales and
-[0:12:05] they fitted models for the sales and said oh the the the sales follow follow
-[0:12:09] said oh the the the sales follow follow power laws or pareta laws for for uh for
-[0:12:12] power laws or pareta laws for for uh for at least the active items. Right? And so
-[0:12:15] at least the active items. Right? And so once you have this power load, you could
-[0:12:17] once you have this power load, you could use the [clears throat] you could
-[0:12:19] use the [clears throat] you could translate the the this sale rank data
-[0:12:21] translate the the this sale rank data into the quantity data
-[0:12:24] into the quantity data approximately again for the active items
-[0:12:26] approximately again for the active items only. And in our context relevant
-[0:12:29] only. And in our context relevant translation is going to be a constant of
-[0:12:31] translation is going to be a constant of two a constant of two. So any any
-[0:12:34] two a constant of two. So any any elasticity that I will estimate it you
-[0:12:37] elasticity that I will estimate it you have to multiply it by two to get the
-[0:12:39] have to multiply it by two to get the demand elasticity.
-[0:12:41] demand elasticity. And so that's uh that's okay. Any anyway
-[0:12:44] And so that's uh that's okay. Any anyway so that's the reason we call this the
-[0:12:46] so that's the reason we call this the quantity signal. I ideally we want to
-[0:12:48] quantity signal. I ideally we want to have the access to the quantity signal
-[0:12:50] have the access to the quantity signal but it's it's private data. Uh we again
-[0:12:54] but it's it's private data. Uh we again for teaching we want to have something
-[0:12:56] for teaching we want to have something public right and and publicly available
-[0:12:58] public right and and publicly available data.
+[0:11:41] intuitive right? Well, we don't see the
+[0:11:42] quantity directly, but the but the sale
+[0:11:47] sales rank informs us potentially
+[0:11:50] informs us about what the quantity is.
+[0:11:53] And so what what some of the IO
+[0:11:55] economists did they actually they said
+[0:11:57] oh they who had the access to like the
+[0:11:59] internal uh sales data. They they fitted
+[0:12:03] models for the sales and
+[0:12:05] said oh the the the sales follow follow
+[0:12:09] power laws or pareta laws for for uh for
+[0:12:12] at least the active items. Right? And so
+[0:12:15] once you have this power load, you could
+[0:12:17] use the [clears throat] you could
+[0:12:19] translate the the this sale rank data
+[0:12:21] into the quantity data
+[0:12:24] approximately again for the active items
+[0:12:26] only. And in our context relevant
+[0:12:29] translation is going to be a constant of
+[0:12:31] two a constant of two. So any any
+[0:12:34] elasticity that I will estimate it you
+[0:12:37] have to multiply it by two to get the
+[0:12:39] demand elasticity.
+[0:12:41] And so that's uh that's okay. Any anyway
+[0:12:44] so that's the reason we call this the
+[0:12:46] quantity signal. I ideally we want to
+[0:12:48] have the access to the quantity signal
+[0:12:50] but it's it's private data. Uh we again
+[0:12:54] for teaching we want to have something
+[0:12:56] public right and and publicly available
+[0:12:58] data.
 [0:13:05] Um so yeah so the short story is that uh under the power law log of the actual
-[0:13:07] under the power law log of the actual say is proportional to the log inverse
-[0:13:09] say is proportional to the log inverse of Frank. So that's what we are using
-[0:13:11] of Frank. So that's what we are using here.
+[0:13:07] say is proportional to the log inverse
+[0:13:09] of Frank. So that's what we are using
 [0:13:14] here. So here's how the typical uh prices and
-[0:13:17] So here's how the typical uh prices and sales uh sales uh rank series look like
-[0:13:21] sales uh sales uh rank series look like for two example products. Well, you have
-[0:13:24] for two example products. Well, you have this uh
+[0:13:17] sales uh sales uh rank series look like
+[0:13:21] for two example products. Well, you have
+[0:13:24] this uh
 [0:13:30] so the prices they follow this peacewise constant trajectories
-[0:13:33] constant trajectories in economics we call it sticky prices
-[0:13:36] in economics we call it sticky prices right so meaning like well there are
-[0:13:37] right so meaning like well there are price stickers it's kind of costly to
-[0:13:39] price stickers it's kind of costly to change them I don't know like well
-[0:13:41] change them I don't know like well online it's not that costly to change
-[0:13:43] online it's not that costly to change them but they the prices nonetheless are
-[0:13:46] them but they the prices nonetheless are are sticky so [clears throat]
-[0:13:49] are sticky so [clears throat] so they like this uh they they're sticky
-[0:13:53] so they like this uh they they're sticky In contrast, well, you have kind of a
-[0:13:55] In contrast, well, you have kind of a lot of movements in in the ranks, right?
-[0:13:59] lot of movements in in the ranks, right? And um this price stickiness actually is
-[0:14:02] And um this price stickiness actually is important for the identification
-[0:14:04] important for the identification argument or at least approximate
-[0:14:06] argument or at least approximate identification argument that that we
-[0:14:08] identification argument that that we make later. So because what we're saying
-[0:14:10] make later. So because what we're saying is that the prices actually don't
-[0:14:13] is that the prices actually don't instantaneously
-[0:14:15] instantaneously um react to the changes in in like to
-[0:14:19] um react to the changes in in like to the demand shocks. So it's going to be
-[0:14:21] the demand shocks. So it's going to be very important for identification
-[0:14:23] very important for identification otherwise
+[0:13:33] in economics we call it sticky prices
+[0:13:36] right so meaning like well there are
+[0:13:37] price stickers it's kind of costly to
+[0:13:39] change them I don't know like well
+[0:13:41] online it's not that costly to change
+[0:13:43] them but they the prices nonetheless are
+[0:13:46] are sticky so [clears throat]
+[0:13:49] so they like this uh they they're sticky
+[0:13:53] In contrast, well, you have kind of a
+[0:13:55] lot of movements in in the ranks, right?
+[0:13:59] And um this price stickiness actually is
+[0:14:02] important for the identification
+[0:14:04] argument or at least approximate
+[0:14:06] identification argument that that we
+[0:14:08] make later. So because what we're saying
+[0:14:10] is that the prices actually don't
+[0:14:13] instantaneously
+[0:14:15] um react to the changes in in like to
+[0:14:19] the demand shocks. So it's going to be
+[0:14:21] very important for identification
 [0:14:25] otherwise uh
 [0:14:26] uh lots of things can go wrong as Philip
-[0:14:28] lots of things can go wrong as Philip Pride indicated and 100 years ago right
-[0:14:30] Pride indicated and 100 years ago right and just
+[0:14:28] Pride indicated and 100 years ago right
 [0:14:33] and just uh
 [0:14:36] uh and so um
 [0:14:38] and so um so what we're going to do next so to
-[0:14:41] so what we're going to do next so to study the relationship between price
-[0:14:43] study the relationship between price signals and quantity signals we we will
-[0:14:47] signals and quantity signals we we will uh rely on numerical representations of
-[0:14:51] uh rely on numerical representations of the products and these numerical
-[0:14:52] the products and these numerical representations are generated by using
-[0:14:56] representations are generated by using like various like transformer
-[0:14:57] like various like transformer architectures. So specifically we're
-[0:15:00] architectures. So specifically we're going to take this product data and
-[0:15:03] going to take this product data and convert the product data into into um
-[0:15:07] convert the product data into into um into numerical vectors
-[0:15:09] into numerical vectors by using
+[0:14:41] study the relationship between price
+[0:14:43] signals and quantity signals we we will
+[0:14:47] uh rely on numerical representations of
+[0:14:51] the products and these numerical
+[0:14:52] representations are generated by using
+[0:14:56] like various like transformer
+[0:14:57] architectures. So specifically we're
+[0:15:00] going to take this product data and
+[0:15:03] convert the product data into into um
+[0:15:07] into numerical vectors
 [0:15:11] by using transformers everywhere. So uh for text
-[0:15:15] transformers everywhere. So uh for text we will use u bird
-[0:15:19] we will use u bird or version of bird uh for image it's
-[0:15:22] or version of bird uh for image it's going to be bait model for even for
-[0:15:24] going to be bait model for even for tabular data we we use transformers
-[0:15:29] tabular data we we use transformers well you could say why but well for
-[0:15:31] well you could say why but well for pedagogical purposes
-[0:15:35] pedagogical purposes uh so that's a saint uh the the saint uh
-[0:15:37] uh so that's a saint uh the the saint uh the saint model and what
-[0:15:41] the saint model and what &gt;&gt; [clears throat]
-[0:15:43] &gt;&gt; Yeah. And um
+[0:15:15] we will use u bird
+[0:15:19] or version of bird uh for image it's
+[0:15:22] going to be bait model for even for
+[0:15:24] tabular data we we use transformers
+[0:15:29] well you could say why but well for
+[0:15:31] pedagogical purposes
+[0:15:35] uh so that's a saint uh the the saint uh
+[0:15:37] the saint model and what
+[0:15:41] >> [clears throat]
+[0:15:43] >> Yeah. And um
 [0:15:48] so yeah, we use the transformers
 [0:15:57] and the question is what's the like well like not the
-[0:15:59] what's the like well like not the question but I I wanted to summarize
-[0:16:01] question but I I wanted to summarize just in one slide what's like the the
-[0:16:03] just in one slide what's like the the main ideas behind this uh be behind this
-[0:16:07] main ideas behind this uh be behind this approach right?
-[0:16:08] approach right? So like transformers actually was a
-[0:16:10] So like transformers actually was a revolutionary idea that like it they
-[0:16:13] revolutionary idea that like it they like all the modern lol lamps and their
-[0:16:16] like all the modern lol lamps and their they rely on this transformer
-[0:16:18] they rely on this transformer architecture. So it was revolutionary
-[0:16:20] architecture. So it was revolutionary idea that in in turn relied on several
-[0:16:23] idea that in in turn relied on several several ideas actually. So so one of
-[0:16:25] several ideas actually. So so one of them was self-supervision especially in
-[0:16:28] them was self-supervision especially in in the context of text but it it made it
-[0:16:32] in the context of text but it it made it its way to to to uh to other domains as
-[0:16:34] its way to to to uh to other domains as well. Another idea was attention
-[0:16:36] well. Another idea was attention mechanism and another important idea was
-[0:16:41] mechanism and another important idea was the idea of fine fine-tuning.
+[0:15:59] question but I I wanted to summarize
+[0:16:01] just in one slide what's like the the
+[0:16:03] main ideas behind this uh be behind this
+[0:16:07] approach right?
+[0:16:08] So like transformers actually was a
+[0:16:10] revolutionary idea that like it they
+[0:16:13] like all the modern lol lamps and their
+[0:16:16] they rely on this transformer
+[0:16:18] architecture. So it was revolutionary
+[0:16:20] idea that in in turn relied on several
+[0:16:23] several ideas actually. So so one of
+[0:16:25] them was self-supervision especially in
+[0:16:28] in the context of text but it it made it
+[0:16:32] its way to to to uh to other domains as
+[0:16:34] well. Another idea was attention
+[0:16:36] mechanism and another important idea was
+[0:16:41] the idea of fine fine-tuning.
 [0:16:50] Um so the idea of self self supervision came about when uh like in in text in
-[0:16:53] came about when uh like in in text in text analysis. So typically I mean
-[0:16:55] text analysis. So typically I mean ultimately you're interested in some
-[0:16:57] ultimately you're interested in some downstream task but then like for the
-[0:16:59] downstream task but then like for the particular downstream task like the
-[0:17:01] particular downstream task like the amount of label data is is quite small
-[0:17:04] amount of label data is is quite small for example in our in our like in our we
-[0:17:07] for example in our in our like in our we get 10,000 observations that are very by
-[0:17:10] get 10,000 observations that are very by CS standards it's a very tiny tiny data
-[0:17:12] CS standards it's a very tiny tiny data set and the idea of self-s supervision
-[0:17:15] set and the idea of self-s supervision well you look at your like text data and
-[0:17:18] well you look at your like text data and you say I'm just going to make up make
-[0:17:21] you say I'm just going to make up make up label data how well The way they they
-[0:17:24] up label data how well The way they they did it was to say, okay, if you have if
-[0:17:27] did it was to say, okay, if you have if you have uh
-[0:17:29] you have uh if you have sentences of this form, you
-[0:17:31] if you have sentences of this form, you can mask words in those sentences
-[0:17:34] can mask words in those sentences and generate lots of examples where you
-[0:17:36] and generate lots of examples where you could say I'm going to this is a mask
-[0:17:38] could say I'm going to this is a mask version of the sentence. I could try to
-[0:17:40] version of the sentence. I could try to reconstruct the original
-[0:17:43] reconstruct the original sentence from from this mask corrupted
-[0:17:45] sentence from from this mask corrupted version, right?
-[0:17:48] version, right? So that original sentence becomes my Y
-[0:17:51] So that original sentence becomes my Y and this W becomes my Cavari that I want
-[0:17:54] and this W becomes my Cavari that I want to predict. In this way I could generate
-[0:17:56] to predict. In this way I could generate lots and like tons and tons of data,
-[0:17:58] lots and like tons and tons of data, right? And so they they started to train
-[0:18:01] right? And so they they started to train uh train these models using neural
-[0:18:03] uh train these models using neural networks. Neural networks are very
-[0:18:04] networks. Neural networks are very impressive and you use the hidden layers
-[0:18:07] impressive and you use the hidden layers of these neural networks as the
-[0:18:09] of these neural networks as the embeddings. But that was not like and
-[0:18:12] embeddings. But that was not like and that's yeah that's how like wordtovex
-[0:18:15] that's yeah that's how like wordtovex started and and similar other ideas but
-[0:18:18] started and and similar other ideas but another key innovation was a attention
-[0:18:21] another key innovation was a attention mechanisms that that arise in
-[0:18:22] mechanisms that that arise in transformers and attention mechanisms
-[0:18:25] transformers and attention mechanisms they allow you basically
-[0:18:29] they allow you basically to create the embeddings that are like
-[0:18:31] to create the embeddings that are like that capture the context. For example,
-[0:18:34] that capture the context. For example, if you look at the at the at the word
-[0:18:37] if you look at the at the at the word truck, truck well trucks truck means
-[0:18:39] truck, truck well trucks truck means real truck, but it also mean a toy
-[0:18:41] real truck, but it also mean a toy truck. And over here, it's a well, it
-[0:18:43] truck. And over here, it's a well, it says model truck. So, it changes the
-[0:18:45] says model truck. So, it changes the meaning of the word. So, tension like
-[0:18:47] meaning of the word. So, tension like so, these are tension models. They they
-[0:18:49] so, these are tension models. They they keep keep uh keep track. So they they
-[0:18:53] keep keep uh keep track. So they they sort of or this interaction between
-[0:18:55] sort of or this interaction between words and they um they are able to
-[0:19:00] words and they um they are able to capture like this nuance nuanced context
-[0:19:03] capture like this nuance nuanced context context that um that you see in um in in
-[0:19:08] context that um that you see in um in in uh in the in these in these sentences
-[0:19:10] uh in the in these in these sentences and it was like a yeah it's attention is
-[0:19:13] and it was like a yeah it's attention is all you need is one of these
-[0:19:14] all you need is one of these revolutionary papers that led to the um
-[0:19:19] revolutionary papers that led to the um led to the uh to this u uh very
-[0:19:22] led to the uh to this u uh very successful several set of architectures.
-[0:19:25] successful several set of architectures. So another um important idea was
-[0:19:27] So another um important idea was [snorts] fine-tuning. So once you get
-[0:19:29] [snorts] fine-tuning. So once you get these embeddings from um
-[0:19:33] these embeddings from um from this self self supervision, you
-[0:19:35] from this self self supervision, you might want to change them, tweak them a
-[0:19:37] might want to change them, tweak them a little bit so they perform better on
-[0:19:39] little bit so they perform better on your downstream task. So in our context
-[0:19:42] your downstream task. So in our context we we are interested in high quality
-[0:19:44] we we are interested in high quality predictions of quantities and prices and
-[0:19:47] predictions of quantities and prices and um and the reason is that well um
-[0:19:49] um and the reason is that well um ultimately we will estimate the
-[0:19:51] ultimately we will estimate the elasticity or causal effects through um
-[0:19:56] elasticity or causal effects through um through this residual on residual
-[0:19:57] through this residual on residual regression
-[0:19:59] regression wall right and uh so for that we need
-[0:20:03] wall right and uh so for that we need high quality residuals and so we need to
-[0:20:05] high quality residuals and so we need to predict the quantities [snorts] and
-[0:20:06] predict the quantities [snorts] and prices like very well right so we we're
-[0:20:10] prices like very well right so we we're going to fine-tune this embeddings to do
-[0:20:11] going to fine-tune this embeddings to do that. And because the the downstream
-[0:20:15] that. And because the the downstream task is is is causal inference. Well, we
-[0:20:19] task is is is causal inference. Well, we we can call this quote unquote causal
-[0:20:21] we can call this quote unquote causal causal finetuning, but it's really like
-[0:20:23] causal finetuning, but it's really like yeah finetuning on the prediction tasks
-[0:20:25] yeah finetuning on the prediction tasks that are related to to the causal
-[0:20:28] that are related to to the causal inference. Right? So these are u these
-[0:20:31] inference. Right? So these are u these are the key ideas in in in just one uh
-[0:20:34] are the key ideas in in in just one uh one one slide. So di in in terms of the
-[0:20:38] one one slide. So di in in terms of the diagram this uh this workflow works like
-[0:20:42] diagram this uh this workflow works like this. So you
-[0:20:44] this. So you you you uh you you ingest your text uh
-[0:20:48] you you uh you you ingest your text uh text and image. You uh you apply the
-[0:20:50] text and image. You uh you apply the neural neural map uh e you create a
-[0:20:54] neural neural map uh e you create a vector of uh embeddings.
-[0:20:59] vector of uh embeddings. Um
+[0:16:53] text analysis. So typically I mean
+[0:16:55] ultimately you're interested in some
+[0:16:57] downstream task but then like for the
+[0:16:59] particular downstream task like the
+[0:17:01] amount of label data is is quite small
+[0:17:04] for example in our in our like in our we
+[0:17:07] get 10,000 observations that are very by
+[0:17:10] CS standards it's a very tiny tiny data
+[0:17:12] set and the idea of self-s supervision
+[0:17:15] well you look at your like text data and
+[0:17:18] you say I'm just going to make up make
+[0:17:21] up label data how well The way they they
+[0:17:24] did it was to say, okay, if you have if
+[0:17:27] you have uh
+[0:17:29] if you have sentences of this form, you
+[0:17:31] can mask words in those sentences
+[0:17:34] and generate lots of examples where you
+[0:17:36] could say I'm going to this is a mask
+[0:17:38] version of the sentence. I could try to
+[0:17:40] reconstruct the original
+[0:17:43] sentence from from this mask corrupted
+[0:17:45] version, right?
+[0:17:48] So that original sentence becomes my Y
+[0:17:51] and this W becomes my Cavari that I want
+[0:17:54] to predict. In this way I could generate
+[0:17:56] lots and like tons and tons of data,
+[0:17:58] right? And so they they started to train
+[0:18:01] uh train these models using neural
+[0:18:03] networks. Neural networks are very
+[0:18:04] impressive and you use the hidden layers
+[0:18:07] of these neural networks as the
+[0:18:09] embeddings. But that was not like and
+[0:18:12] that's yeah that's how like wordtovex
+[0:18:15] started and and similar other ideas but
+[0:18:18] another key innovation was a attention
+[0:18:21] mechanisms that that arise in
+[0:18:22] transformers and attention mechanisms
+[0:18:25] they allow you basically
+[0:18:29] to create the embeddings that are like
+[0:18:31] that capture the context. For example,
+[0:18:34] if you look at the at the at the word
+[0:18:37] truck, truck well trucks truck means
+[0:18:39] real truck, but it also mean a toy
+[0:18:41] truck. And over here, it's a well, it
+[0:18:43] says model truck. So, it changes the
+[0:18:45] meaning of the word. So, tension like
+[0:18:47] so, these are tension models. They they
+[0:18:49] keep keep uh keep track. So they they
+[0:18:53] sort of or this interaction between
+[0:18:55] words and they um they are able to
+[0:19:00] capture like this nuance nuanced context
+[0:19:03] context that um that you see in um in in
+[0:19:08] uh in the in these in these sentences
+[0:19:10] and it was like a yeah it's attention is
+[0:19:13] all you need is one of these
+[0:19:14] revolutionary papers that led to the um
+[0:19:19] led to the uh to this u uh very
+[0:19:22] successful several set of architectures.
+[0:19:25] So another um important idea was
+[0:19:27] [snorts] fine-tuning. So once you get
+[0:19:29] these embeddings from um
+[0:19:33] from this self self supervision, you
+[0:19:35] might want to change them, tweak them a
+[0:19:37] little bit so they perform better on
+[0:19:39] your downstream task. So in our context
+[0:19:42] we we are interested in high quality
+[0:19:44] predictions of quantities and prices and
+[0:19:47] um and the reason is that well um
+[0:19:49] ultimately we will estimate the
+[0:19:51] elasticity or causal effects through um
+[0:19:56] through this residual on residual
+[0:19:57] regression
+[0:19:59] wall right and uh so for that we need
+[0:20:03] high quality residuals and so we need to
+[0:20:05] predict the quantities [snorts] and
+[0:20:06] prices like very well right so we we're
+[0:20:10] going to fine-tune this embeddings to do
+[0:20:11] that. And because the the downstream
+[0:20:15] task is is is causal inference. Well, we
+[0:20:19] we can call this quote unquote causal
+[0:20:21] causal finetuning, but it's really like
+[0:20:23] yeah finetuning on the prediction tasks
+[0:20:25] that are related to to the causal
+[0:20:28] inference. Right? So these are u these
+[0:20:31] are the key ideas in in in just one uh
+[0:20:34] one one slide. So di in in terms of the
+[0:20:38] diagram this uh this workflow works like
+[0:20:42] this. So you
+[0:20:44] you you uh you you ingest your text uh
+[0:20:48] text and image. You uh you apply the
+[0:20:50] neural neural map uh e you create a
+[0:20:54] vector of uh embeddings.
 [0:21:01] Um uh the way this map itself is created
-[0:21:03] uh the way this map itself is created well it's it's created on by uh by by
-[0:21:07] well it's it's created on by uh by by creating these auxiliary labels
-[0:21:10] creating these auxiliary labels through through through masking exercise
-[0:21:12] through through through masking exercise and then trying to predict those labels
-[0:21:14] and then trying to predict those labels so that that that
-[0:21:17] so that that that uh generates this uh initial mapping E
-[0:21:20] uh generates this uh initial mapping E and then for the downstream task we
-[0:21:22] and then for the downstream task we build another uh neural map M uh that
-[0:21:26] build another uh neural map M uh that takes these embeddings and creates a
-[0:21:28] takes these embeddings and creates a vector of outputs which are the
-[0:21:29] vector of outputs which are the quantities and prices in all the periods
-[0:21:32] quantities and prices in all the periods that we're interested in. And then
-[0:21:35] that we're interested in. And then moreover like in in the fine-tuning step
-[0:21:38] moreover like in in the fine-tuning step you could say okay now now I have this
-[0:21:42] you could say okay now now I have this downstream task of predicting quantities
-[0:21:45] downstream task of predicting quantities and prices and what I can do I can I can
-[0:21:48] and prices and what I can do I can I can um bake propagate the information from
-[0:21:52] um bake propagate the information from the errors I make here into and update
-[0:21:55] the errors I make here into and update this initial mapping a just a little bit
-[0:21:58] this initial mapping a just a little bit not a lot because this is this has
-[0:22:01] not a lot because this is this has billions of parameters so you don't want
-[0:22:03] billions of parameters so you don't want to update the like the whole billions of
-[0:22:05] to update the like the whole billions of parameters, but typically people just
-[0:22:07] parameters, but typically people just update a few just a just a few a few
-[0:22:10] update a few just a just a few a few parameters
-[0:22:12] parameters uh through this. Um and so all of this
-[0:22:15] uh through this. Um and so all of this uh u and we do all of this kind of in in
-[0:22:20] uh u and we do all of this kind of in in uh in in this uh in this example
-[0:22:24] uh in in this uh in this example uh or in this paper.
-[0:22:28] uh or in this paper. So next so we get these embeddings
-[0:22:30] So next so we get these embeddings fine-tune embeddings and we're going to
-[0:22:32] fine-tune embeddings and we're going to try to understand whether they useful or
-[0:22:34] try to understand whether they useful or not. So first of all like what what what
-[0:22:37] not. So first of all like what what what we're going to do we're going to we're
-[0:22:38] we're going to do we're going to we're going to put them together
-[0:22:41] going to put them together actually the way this this worked for
-[0:22:43] actually the way this this worked for us. So we we kind of played around with
-[0:22:47] us. So we we kind of played around with different architectures and we chose our
-[0:22:49] different architectures and we chose our dimension dimension of the bedding
-[0:22:52] dimension dimension of the bedding vector to be 256 dimensional. Right?
-[0:22:56] vector to be 256 dimensional. Right? So it's a 256 dimensional vector. We're
-[0:22:59] So it's a 256 dimensional vector. We're going to center it like center the
-[0:23:02] going to center it like center the embeddings and normalize them to have
-[0:23:04] embeddings and normalize them to have unit norm so that the products leave on
-[0:23:07] unit norm so that the products leave on sphere. So we create this hotening
-[0:23:09] sphere. So we create this hotening hotening sphere hypersphere where the
-[0:23:12] hotening sphere hypersphere where the products leave.
-[0:23:14] products leave. So each product is then um a point on
-[0:23:17] So each product is then um a point on the sphere
-[0:23:19] the sphere and then we ask uh
-[0:23:22] and then we ask uh qualitative and the quantitative
-[0:23:24] qualitative and the quantitative questions. Um so qualitatively we will
-[0:23:27] questions. Um so qualitatively we will examine
+[0:21:03] well it's it's created on by uh by by
+[0:21:07] creating these auxiliary labels
+[0:21:10] through through through masking exercise
+[0:21:12] and then trying to predict those labels
+[0:21:14] so that that that
+[0:21:17] uh generates this uh initial mapping E
+[0:21:20] and then for the downstream task we
+[0:21:22] build another uh neural map M uh that
+[0:21:26] takes these embeddings and creates a
+[0:21:28] vector of outputs which are the
+[0:21:29] quantities and prices in all the periods
+[0:21:32] that we're interested in. And then
+[0:21:35] moreover like in in the fine-tuning step
+[0:21:38] you could say okay now now I have this
+[0:21:42] downstream task of predicting quantities
+[0:21:45] and prices and what I can do I can I can
+[0:21:48] um bake propagate the information from
+[0:21:52] the errors I make here into and update
+[0:21:55] this initial mapping a just a little bit
+[0:21:58] not a lot because this is this has
+[0:22:01] billions of parameters so you don't want
+[0:22:03] to update the like the whole billions of
+[0:22:05] parameters, but typically people just
+[0:22:07] update a few just a just a few a few
+[0:22:10] parameters
+[0:22:12] uh through this. Um and so all of this
+[0:22:15] uh u and we do all of this kind of in in
+[0:22:20] uh in in this uh in this example
+[0:22:24] uh or in this paper.
+[0:22:28] So next so we get these embeddings
+[0:22:30] fine-tune embeddings and we're going to
+[0:22:32] try to understand whether they useful or
+[0:22:34] not. So first of all like what what what
+[0:22:37] we're going to do we're going to we're
+[0:22:38] going to put them together
+[0:22:41] actually the way this this worked for
+[0:22:43] us. So we we kind of played around with
+[0:22:47] different architectures and we chose our
+[0:22:49] dimension dimension of the bedding
+[0:22:52] vector to be 256 dimensional. Right?
+[0:22:56] So it's a 256 dimensional vector. We're
+[0:22:59] going to center it like center the
+[0:23:02] embeddings and normalize them to have
+[0:23:04] unit norm so that the products leave on
+[0:23:07] sphere. So we create this hotening
+[0:23:09] hotening sphere hypersphere where the
+[0:23:12] products leave.
+[0:23:14] So each product is then um a point on
+[0:23:17] the sphere
+[0:23:19] and then we ask uh
+[0:23:22] qualitative and the quantitative
+[0:23:24] questions. Um so qualitatively we will
 [0:23:29] examine um clusters of product with similar
-[0:23:32] um clusters of product with similar embeddings and see if this if this
-[0:23:35] embeddings and see if this if this induced AI similarity of product is
-[0:23:38] induced AI similarity of product is close to the
-[0:23:40] close to the uh hi similarity the human intelligence
-[0:23:43] uh hi similarity the human intelligence similarity right so like whether the AI
-[0:23:46] similarity right so like whether the AI and human humans agree on on on on
-[0:23:49] and human humans agree on on on on things on things that are similar or not
-[0:23:52] things on things that are similar or not so this going to be this is going to be
-[0:23:54] so this going to be this is going to be set of qualit ative checks and there's
-[0:23:57] set of qualit ative checks and there's going to be also quantitative exercise
-[0:23:59] going to be also quantitative exercise where we will check whether the AI
-[0:24:02] where we will check whether the AI embeddings improve predictions of price
-[0:24:05] embeddings improve predictions of price and quantity signals relative to to the
-[0:24:08] and quantity signals relative to to the traditional tabular tabular features
-[0:24:12] traditional tabular tabular features and both tasks are quite important for
-[0:24:14] and both tasks are quite important for for demand analysis.
-[0:24:17] for demand analysis. So the um they are important for
-[0:24:21] So the um they are important for computation of hedonic prices. [snorts]
-[0:24:23] computation of hedonic prices. [snorts] So hedonic price simply the price is a
-[0:24:25] So hedonic price simply the price is a function of characteristics. It's very
-[0:24:27] function of characteristics. It's very very kind of [snorts] regression
-[0:24:29] very kind of [snorts] regression definition of the hedonics. Um
-[0:24:33] definition of the hedonics. Um uh then you could use that for inflation
-[0:24:35] uh then you could use that for inflation measurement.
-[0:24:38] measurement. Uh you could predict uh demand and
-[0:24:40] Uh you could predict uh demand and prices of new products in this way. And
-[0:24:43] prices of new products in this way. And finally you could predict changes in
-[0:24:45] finally you could predict changes in demand due to exogenous changes in
-[0:24:47] demand due to exogenous changes in price. This is the the the causal
-[0:24:51] price. This is the the the causal inference task that we are I'm going to
-[0:24:53] inference task that we are I'm going to attack attack later.
-[0:24:56] attack attack later. So first we begin by plotting and of
-[0:24:59] So first we begin by plotting and of course it's it's hard to plot things in
-[0:25:01] course it's it's hard to plot things in 25 56 dimensions. So what we do we're
-[0:25:04] 25 56 dimensions. So what we do we're going to plot things in in three
-[0:25:05] going to plot things in in three dimensions but by plotting principal
-[0:25:07] dimensions but by plotting principal components. So this we're plotting uh
-[0:25:11] components. So this we're plotting uh just the the principal components of
-[0:25:14] just the the principal components of these vectors the first three principal
-[0:25:16] these vectors the first three principal components
+[0:23:32] embeddings and see if this if this
+[0:23:35] induced AI similarity of product is
+[0:23:38] close to the
+[0:23:40] uh hi similarity the human intelligence
+[0:23:43] similarity right so like whether the AI
+[0:23:46] and human humans agree on on on on
+[0:23:49] things on things that are similar or not
+[0:23:52] so this going to be this is going to be
+[0:23:54] set of qualit ative checks and there's
+[0:23:57] going to be also quantitative exercise
+[0:23:59] where we will check whether the AI
+[0:24:02] embeddings improve predictions of price
+[0:24:05] and quantity signals relative to to the
+[0:24:08] traditional tabular tabular features
+[0:24:12] and both tasks are quite important for
+[0:24:14] for demand analysis.
+[0:24:17] So the um they are important for
+[0:24:21] computation of hedonic prices. [snorts]
+[0:24:23] So hedonic price simply the price is a
+[0:24:25] function of characteristics. It's very
+[0:24:27] very kind of [snorts] regression
+[0:24:29] definition of the hedonics. Um
+[0:24:33] uh then you could use that for inflation
+[0:24:35] measurement.
+[0:24:38] Uh you could predict uh demand and
+[0:24:40] prices of new products in this way. And
+[0:24:43] finally you could predict changes in
+[0:24:45] demand due to exogenous changes in
+[0:24:47] price. This is the the the causal
+[0:24:51] inference task that we are I'm going to
+[0:24:53] attack attack later.
+[0:24:56] So first we begin by plotting and of
+[0:24:59] course it's it's hard to plot things in
+[0:25:01] 25 56 dimensions. So what we do we're
+[0:25:04] going to plot things in in three
+[0:25:05] dimensions but by plotting principal
+[0:25:07] components. So this we're plotting uh
+[0:25:11] just the the principal components of
+[0:25:14] these vectors the first three principal
+[0:25:16] components
 [0:25:22] um and then um you see also there there are
-[0:25:24] and then um you see also there there are colors different colors here
-[0:25:28] colors different colors here so yellow green and so on. So this these
-[0:25:32] so yellow green and so on. So this these colors they correspond to the five
-[0:25:34] colors they correspond to the five clusters of products. So we did C means
-[0:25:37] clusters of products. So we did C means clustering on the original embeddings
-[0:25:40] clustering on the original embeddings and not only we plotting like each you
-[0:25:43] and not only we plotting like each you know the projection of each of each
-[0:25:45] know the projection of each of each embeddings we're also projecting
-[0:25:46] embeddings we're also projecting plotting the projections of those
-[0:25:48] plotting the projections of those clusters and you see that like even in
-[0:25:51] clusters and you see that like even in three dimensions these clusters seem to
-[0:25:54] three dimensions these clusters seem to be nicely adjacent to each other. They
-[0:25:56] be nicely adjacent to each other. They don't they don't like they don't don't
-[0:25:59] don't they don't like they don't don't seem to overlap and they seem to be
-[0:26:01] seem to overlap and they seem to be nicely adjust
-[0:26:04] nicely adjust a adjacent.
-[0:26:07] a adjacent. So there's also like left plot and right
-[0:26:09] So there's also like left plot and right plot. In the left plot, we use all of
-[0:26:11] plot. In the left plot, we use all of the information [clears throat]
-[0:26:13] the information [clears throat] including images. In the right plot, we
-[0:26:16] including images. In the right plot, we are uh excluding images. So excluding
-[0:26:19] are uh excluding images. So excluding image information and there's a
-[0:26:22] image information and there's a difference between the two plots. So so
-[0:26:24] difference between the two plots. So so here, so here
-[0:26:27] here, so here you see this shape. It's full like it's
-[0:26:30] you see this shape. It's full like it's it's it's kind of like a
-[0:26:32] it's it's kind of like a uh it's kind of an ellipse with the uh
-[0:26:35] uh it's kind of an ellipse with the uh with where the interior is filled with
-[0:26:38] with where the interior is filled with points.
+[0:25:24] colors different colors here
+[0:25:28] so yellow green and so on. So this these
+[0:25:32] colors they correspond to the five
+[0:25:34] clusters of products. So we did C means
+[0:25:37] clustering on the original embeddings
+[0:25:40] and not only we plotting like each you
+[0:25:43] know the projection of each of each
+[0:25:45] embeddings we're also projecting
+[0:25:46] plotting the projections of those
+[0:25:48] clusters and you see that like even in
+[0:25:51] three dimensions these clusters seem to
+[0:25:54] be nicely adjacent to each other. They
+[0:25:56] don't they don't like they don't don't
+[0:25:59] seem to overlap and they seem to be
+[0:26:01] nicely adjust
+[0:26:04] a adjacent.
+[0:26:07] So there's also like left plot and right
+[0:26:09] plot. In the left plot, we use all of
+[0:26:11] the information [clears throat]
+[0:26:13] including images. In the right plot, we
+[0:26:16] are uh excluding images. So excluding
+[0:26:19] image information and there's a
+[0:26:22] difference between the two plots. So so
+[0:26:24] here, so here
+[0:26:27] you see this shape. It's full like it's
+[0:26:30] it's it's kind of like a
+[0:26:32] uh it's kind of an ellipse with the uh
+[0:26:35] with where the interior is filled with
 [0:26:40] points. And here
 [0:26:42] And here here in this plot the interior is kind
-[0:26:45] here in this plot the interior is kind of missing. So it's it it looks like a
-[0:26:48] of missing. So it's it it looks like a lower dimensional structure. So to us
-[0:26:51] lower dimensional structure. So to us that suggested well the images somehow
-[0:26:53] that suggested well the images somehow convey a fairly distinct information
-[0:26:56] convey a fairly distinct information than the text. So there's something in
-[0:26:58] than the text. So there's something in the images that the text doesn't convey.
-[0:27:02] the images that the text doesn't convey. [clears throat] Um anyway, uh so that
-[0:27:05] [clears throat] Um anyway, uh so that was a kind of the first uh the first
-[0:27:07] was a kind of the first uh the first hint at what
-[0:27:10] hint at what what is going to happen next. So next
-[0:27:13] what is going to happen next. So next what we do we we look at similar
-[0:27:15] what we do we we look at similar products. So in particular here we just
-[0:27:17] products. So in particular here we just look at the products that are closest to
-[0:27:20] look at the products that are closest to the cluster centroid. So we ran the K
-[0:27:22] the cluster centroid. So we ran the K means algorithm to figure out five
-[0:27:24] means algorithm to figure out five clusters and we're plotting the products
-[0:27:26] clusters and we're plotting the products that are closest to the centroidids.
-[0:27:28] that are closest to the centroidids. Right. So this is cluster zero, cluster
-[0:27:31] Right. So this is cluster zero, cluster two, cluster four.
+[0:26:45] of missing. So it's it it looks like a
+[0:26:48] lower dimensional structure. So to us
+[0:26:51] that suggested well the images somehow
+[0:26:53] convey a fairly distinct information
+[0:26:56] than the text. So there's something in
+[0:26:58] the images that the text doesn't convey.
+[0:27:02] [clears throat] Um anyway, uh so that
+[0:27:05] was a kind of the first uh the first
+[0:27:07] hint at what
+[0:27:10] what is going to happen next. So next
+[0:27:13] what we do we we look at similar
+[0:27:15] products. So in particular here we just
+[0:27:17] look at the products that are closest to
+[0:27:20] the cluster centroid. So we ran the K
+[0:27:22] means algorithm to figure out five
+[0:27:24] clusters and we're plotting the products
+[0:27:26] that are closest to the centroidids.
+[0:27:28] Right. So this is cluster zero, cluster
+[0:27:31] two, cluster four.
 [0:27:37] Right.
 [0:27:42] And so yeah, I would say arguably this these products are quite quite similar.
-[0:27:44] these products are quite quite similar. So, so I agree this agrees with the
-[0:27:47] So, so I agree this agrees with the human human
-[0:27:49] human human notions of similarity or at least with
-[0:27:51] notions of similarity or at least with my notion of similarity. And then so
-[0:27:55] my notion of similarity. And then so over here we are using all of the
-[0:27:57] over here we are using all of the information topic text and image.
-[0:28:00] information topic text and image. Next thing we do we're going to drop the
-[0:28:03] Next thing we do we're going to drop the image information and see what what sort
-[0:28:05] image information and see what what sort of clusters clusters and troys um we're
-[0:28:08] of clusters clusters and troys um we're going to get. And we get clusters and
-[0:28:11] going to get. And we get clusters and troids that are much more
-[0:28:13] troids that are much more that are much more heterogeneous, right?
-[0:28:16] that are much more heterogeneous, right? Like over here you like just what for
-[0:28:19] Like over here you like just what for example in cluster number two. So you
-[0:28:22] example in cluster number two. So you have these cars but you have car roads
-[0:28:24] have these cars but you have car roads as well. And then these are supposed to
-[0:28:27] as well. And then these are supposed to be s quote and similar. So somehow the
-[0:28:30] be s quote and similar. So somehow the text embedding is not able to like based
-[0:28:33] text embedding is not able to like based on the text embeddings you're saying
-[0:28:34] on the text embeddings you're saying that this object like this object is
-[0:28:36] that this object like this object is similar. But if we look at the images,
-[0:28:40] similar. But if we look at the images, the objects are very very different.
-[0:28:42] the objects are very very different. Right? So um and this is not happening
-[0:28:45] Right? So um and this is not happening in um uh when we use the full
-[0:28:48] in um uh when we use the full information to to to construct similar
-[0:28:52] information to to to construct similar similar products,
-[0:28:55] similar products, right? And so another exercise that we
-[0:28:58] right? And so another exercise that we did was to say, okay, so now we got we
-[0:29:00] did was to say, okay, so now we got we we got this cluster centroidids and we
-[0:29:03] we got this cluster centroidids and we got images.
-[0:29:05] got images. Can we uh can we create a product
-[0:29:09] Can we uh can we create a product catalog like automatically out of that?
-[0:29:12] catalog like automatically out of that? So in particular we ask jai to to
-[0:29:15] So in particular we ask jai to to describe what these clusters are and
-[0:29:17] describe what these clusters are and generate the images and it it's really
-[0:29:19] generate the images and it it's really good at describing what these clusters
-[0:29:22] good at describing what these clusters are and then generating representative
-[0:29:25] are and then generating representative images and it it just all makes like
-[0:29:27] images and it it just all makes like more like kind of all makes sense.
-[0:29:30] more like kind of all makes sense. Um so if you if you ever have to start
-[0:29:33] Um so if you if you ever have to start your own like catalog
-[0:29:35] your own like catalog uh for products that you sell, you could
-[0:29:37] uh for products that you sell, you could just do that in in this way. Um
-[0:29:40] just do that in in this way. Um as an as an application creating good
-[0:29:43] as an as an application creating good catalog is actually like u is a is a
-[0:29:47] catalog is actually like u is a is a pretty good applied uh problem. Anyway,
-[0:29:51] pretty good applied uh problem. Anyway, and so so this was uh this was a kind of
-[0:29:53] and so so this was uh this was a kind of a fun part.
+[0:27:44] So, so I agree this agrees with the
+[0:27:47] human human
+[0:27:49] notions of similarity or at least with
+[0:27:51] my notion of similarity. And then so
+[0:27:55] over here we are using all of the
+[0:27:57] information topic text and image.
+[0:28:00] Next thing we do we're going to drop the
+[0:28:03] image information and see what what sort
+[0:28:05] of clusters clusters and troys um we're
+[0:28:08] going to get. And we get clusters and
+[0:28:11] troids that are much more
+[0:28:13] heterogeneous, right?
+[0:28:16] Like over here you like just what for
+[0:28:19] example in cluster number two. So you
+[0:28:22] have these cars but you have car roads
+[0:28:24] as well. And then these are supposed to
+[0:28:27] be s quote and similar. So somehow the
+[0:28:30] text embedding is not able to like based
+[0:28:33] on the text embeddings you're saying
+[0:28:34] that this object like this object is
+[0:28:36] similar. But if we look at the images,
+[0:28:40] the objects are very very different.
+[0:28:42] Right? So um and this is not happening
+[0:28:45] in um uh when we use the full
+[0:28:48] information to to to construct similar
+[0:28:52] similar products,
+[0:28:55] right? And so another exercise that we
+[0:28:58] did was to say, okay, so now we got we
+[0:29:00] we got this cluster centroidids and we
+[0:29:03] got images.
+[0:29:05] Can we uh can we create a product
+[0:29:09] catalog like automatically out of that?
+[0:29:12] So in particular we ask jai to to
+[0:29:15] describe what these clusters are and
+[0:29:17] generate the images and it it's really
+[0:29:19] good at describing what these clusters
+[0:29:22] are and then generating representative
+[0:29:25] images and it it just all makes like
+[0:29:27] more like kind of all makes sense.
+[0:29:30] Um so if you if you ever have to start
+[0:29:33] your own like catalog
+[0:29:35] uh for products that you sell, you could
+[0:29:37] just do that in in this way. Um
+[0:29:40] as an as an application creating good
+[0:29:43] catalog is actually like u is a is a
+[0:29:47] pretty good applied uh problem. Anyway,
+[0:29:51] and so so this was uh this was a kind of
+[0:29:53] a fun part.
 [0:30:00] And so this is all about quantitative checks. So let's do some qualitative
-[0:30:02] checks. So let's do some qualitative checks. Um so first exercise we will uh
-[0:30:06] checks. Um so first exercise we will uh we will do is about prediction. So we'll
-[0:30:09] we will do is about prediction. So we'll predict the we will predict the label y
-[0:30:13] predict the we will predict the label y using uh using this embeddings
-[0:30:18] using uh using this embeddings and the y is going to be either quantity
-[0:30:21] and the y is going to be either quantity price or the total changes
-[0:30:22] price or the total changes [clears throat] in quantities and and
-[0:30:24] [clears throat] in quantities and and prices.
+[0:30:02] checks. Um so first exercise we will uh
+[0:30:06] we will do is about prediction. So we'll
+[0:30:09] predict the we will predict the label y
+[0:30:13] using uh using this embeddings
+[0:30:18] and the y is going to be either quantity
+[0:30:21] price or the total changes
+[0:30:22] [clears throat] in quantities and and
 [0:30:27] prices. And if I have to focus on just it's a
-[0:30:30] And if I have to focus on just it's a big t well it's it's big table but I'm
-[0:30:33] big t well it's it's big table but I'm just going to focus on the first row and
-[0:30:35] just going to focus on the first row and the last row. Okay.
-[0:30:38] the last row. Okay. So let's say we start out with
-[0:30:42] So let's say we start out with just the tabular tabular features and we
-[0:30:45] just the tabular tabular features and we use linear regression for prediction.
-[0:30:48] use linear regression for prediction. The R squar out of sample R squares that
-[0:30:51] The R squar out of sample R squares that we get for predicting price and quantity
-[0:30:57] we get for predicting price and quantity they are 20 and 15%. Not no not not
-[0:31:00] they are 20 and 15%. Not no not not good. Basically you could improve these
-[0:31:03] good. Basically you could improve these numbers quite a bit by using nonlinear
-[0:31:06] numbers quite a bit by using nonlinear uh things like boosted trees. So at
-[0:31:09] uh things like boosted trees. So at least for quantity you you could get up
-[0:31:12] least for quantity you you could get up the the R square to 47 but for price it
-[0:31:15] the the R square to 47 but for price it doesn't move much
-[0:31:17] doesn't move much if if if you do the embed if you do this
-[0:31:19] if if if you do the embed if you do this embeddings and you do you do the uh this
-[0:31:23] embeddings and you do you do the uh this deep learning uh all the way just the
-[0:31:26] deep learning uh all the way just the way I described it in diagram you get
-[0:31:29] way I described it in diagram you get this predictive performance out of
-[0:31:30] this predictive performance out of sample to be uh like quite nice so 66%
-[0:31:36] sample to be uh like quite nice so 66% for predicting
-[0:31:38] for predicting uh price and uh almost 60% for
-[0:31:41] uh price and uh almost 60% for predicting quantities. Right? So in the
-[0:31:44] predicting quantities. Right? So in the work with spot bay for for the for the
-[0:31:47] work with spot bay for for the for the um softline products we uh we uh we got
-[0:31:51] um softline products we uh we uh we got this number up to 90%. But there we we
-[0:31:54] this number up to 90%. But there we we worked with with millions and millions
-[0:31:56] worked with with millions and millions of observations.
-[0:31:58] of observations. So much more data allows you to to to to
-[0:32:01] So much more data allows you to to to to to do even better to do it even [snorts]
-[0:32:04] to do even better to do it even [snorts] better. The
-[0:32:06] better. The &gt;&gt; image doesn't really seem to help. The
-[0:32:08] &gt;&gt; image doesn't really seem to help. The images don't really seem to help here.
-[0:32:10] images don't really seem to help here. &gt;&gt; That's right. That was interesting. But
-[0:32:12] &gt;&gt; That's right. That was interesting. But I I think you really need to
-[0:32:17] I I think you really need to I I I think they really help uh with
-[0:32:20] I I I think they really help uh with centroidids, but but to really establish
-[0:32:24] centroidids, but but to really establish the improvement or not uh you we really
-[0:32:28] the improvement or not uh you we really need millions of data points. And here
-[0:32:30] need millions of data points. And here it's like just a
-[0:32:32] it's like just a around 17,000 data points, something
-[0:32:35] around 17,000 data points, something like that. uh I forgot the exact number
-[0:32:37] like that. uh I forgot the exact number of data points that we have but on the
-[0:32:39] of data points that we have but on the order of thousands not in the order of
-[0:32:41] order of thousands not in the order of millions
+[0:30:30] big t well it's it's big table but I'm
+[0:30:33] just going to focus on the first row and
+[0:30:35] the last row. Okay.
+[0:30:38] So let's say we start out with
+[0:30:42] just the tabular tabular features and we
+[0:30:45] use linear regression for prediction.
+[0:30:48] The R squar out of sample R squares that
+[0:30:51] we get for predicting price and quantity
+[0:30:57] they are 20 and 15%. Not no not not
+[0:31:00] good. Basically you could improve these
+[0:31:03] numbers quite a bit by using nonlinear
+[0:31:06] uh things like boosted trees. So at
+[0:31:09] least for quantity you you could get up
+[0:31:12] the the R square to 47 but for price it
+[0:31:15] doesn't move much
+[0:31:17] if if if you do the embed if you do this
+[0:31:19] embeddings and you do you do the uh this
+[0:31:23] deep learning uh all the way just the
+[0:31:26] way I described it in diagram you get
+[0:31:29] this predictive performance out of
+[0:31:30] sample to be uh like quite nice so 66%
+[0:31:36] for predicting
+[0:31:38] uh price and uh almost 60% for
+[0:31:41] predicting quantities. Right? So in the
+[0:31:44] work with spot bay for for the for the
+[0:31:47] um softline products we uh we uh we got
+[0:31:51] this number up to 90%. But there we we
+[0:31:54] worked with with millions and millions
+[0:31:56] of observations.
+[0:31:58] So much more data allows you to to to to
+[0:32:01] to do even better to do it even [snorts]
+[0:32:04] better. The
+[0:32:06] >> image doesn't really seem to help. The
+[0:32:08] images don't really seem to help here.
+[0:32:10] >> That's right. That was interesting. But
+[0:32:12] I I think you really need to
+[0:32:17] I I I think they really help uh with
+[0:32:20] centroidids, but but to really establish
+[0:32:24] the improvement or not uh you we really
+[0:32:28] need millions of data points. And here
+[0:32:30] it's like just a
+[0:32:32] around 17,000 data points, something
+[0:32:35] like that. uh I forgot the exact number
+[0:32:37] of data points that we have but on the
+[0:32:39] order of thousands not in the order of
 [0:32:44] millions and um
 [0:32:46] and um uh so interestingly enough and maybe
-[0:32:48] uh so interestingly enough and maybe it's not surprising as well like for
-[0:32:50] it's not surprising as well like for predicting like say price changes you
-[0:32:53] predicting like say price changes you don't get anything out of the embeddings
+[0:32:48] it's not surprising as well like for
+[0:32:50] predicting like say price changes you
+[0:32:53] don't get anything out of the embeddings
 [0:32:59] and and it's very interesting because the later on the price sensitivity
-[0:33:03] the later on the price sensitivity parameters elasticity parameters they
-[0:33:05] parameters elasticity parameters they would be uh identified by uh by from the
-[0:33:10] would be uh identified by uh by from the temporal price changes,
-[0:33:13] temporal price changes, right? And what this suggests me like
-[0:33:17] right? And what this suggests me like before doing any of the analysis that
-[0:33:19] before doing any of the analysis that the these embeddings they are good for
-[0:33:21] the these embeddings they are good for predicting levels but they're going to
-[0:33:23] predicting levels but they're going to be less important for for like as
-[0:33:26] be less important for for like as confounders because they don't you know
-[0:33:28] confounders because they don't you know they don't confound the price changes or
-[0:33:30] they don't confound the price changes or if if there is confounding it's very
-[0:33:32] if if there is confounding it's very small right um so that's uh that's an
-[0:33:36] small right um so that's uh that's an observation to to keep in mind uh for
-[0:33:39] observation to to keep in mind uh for later
-[0:33:41] later &gt;&gt; but also the all the embeddings are time
-[0:33:43] &gt;&gt; but also the all the embeddings are time in varants themselves, right?
-[0:33:46] in varants themselves, right? &gt;&gt; That's not not all except some. Yeah.
-[0:33:49] &gt;&gt; That's not not all except some. Yeah. But I I I don't want to get into the
-[0:33:52] But I I I don't want to get into the fine econometric details. Yeah.
-[0:33:57] fine econometric details. Yeah. Okay. So,
+[0:33:03] parameters elasticity parameters they
+[0:33:05] would be uh identified by uh by from the
+[0:33:10] temporal price changes,
+[0:33:13] right? And what this suggests me like
+[0:33:17] before doing any of the analysis that
+[0:33:19] the these embeddings they are good for
+[0:33:21] predicting levels but they're going to
+[0:33:23] be less important for for like as
+[0:33:26] confounders because they don't you know
+[0:33:28] they don't confound the price changes or
+[0:33:30] if if there is confounding it's very
+[0:33:32] small right um so that's uh that's an
+[0:33:36] observation to to keep in mind uh for
+[0:33:41] later >> but also the all the embeddings are time
+[0:33:43] in varants themselves, right?
+[0:33:46] >> That's not not all except some. Yeah.
+[0:33:49] But I I I don't want to get into the
+[0:33:52] fine econometric details. Yeah.
 [0:34:00] Okay. So, so another quantitative assessment that
-[0:34:02] so another quantitative assessment that we do we did and it was good for like
-[0:34:05] we do we did and it was good for like building the downstream models was to do
-[0:34:07] building the downstream models was to do some kind of dimension reduction. So, we
-[0:34:08] some kind of dimension reduction. So, we have this 256 dimensional embedding.
-[0:34:12] have this 256 dimensional embedding. question is can we reduce it to
-[0:34:14] question is can we reduce it to something smaller. So the traditional
-[0:34:16] something smaller. So the traditional reduction would would would deploy the
-[0:34:18] reduction would would would deploy the principal components. So for example
-[0:34:22] principal components. So for example we could take five like five principal
-[0:34:25] we could take five like five principal components
-[0:34:27] components um so that's done by taking this
-[0:34:30] um so that's done by taking this highdimensional projection and uh and
-[0:34:32] highdimensional projection and uh and sorry highdimensional embedding and
-[0:34:35] sorry highdimensional embedding and projecting it on on the igen vectors of
-[0:34:37] projecting it on on the igen vectors of the cavalian matrix. So it's a
-[0:34:40] the cavalian matrix. So it's a traditional PCA.
-[0:34:42] traditional PCA. We could we we also uh use another
-[0:34:46] We could we we also uh use another another dimension reduction which
-[0:34:48] another dimension reduction which [snorts] we call centroidid
-[0:34:49] [snorts] we call centroidid similarities. And here you take this
-[0:34:51] similarities. And here you take this impeding and then you project it on on
-[0:34:55] impeding and then you project it on on the centroidids centroidids that you
-[0:34:58] the centroidids centroidids that you found through the clustering.
-[0:35:00] found through the clustering. Um
+[0:34:02] we do we did and it was good for like
+[0:34:05] building the downstream models was to do
+[0:34:07] some kind of dimension reduction. So, we
+[0:34:08] have this 256 dimensional embedding.
+[0:34:12] question is can we reduce it to
+[0:34:14] something smaller. So the traditional
+[0:34:16] reduction would would would deploy the
+[0:34:18] principal components. So for example
+[0:34:22] we could take five like five principal
+[0:34:25] components
+[0:34:27] um so that's done by taking this
+[0:34:30] highdimensional projection and uh and
+[0:34:32] sorry highdimensional embedding and
+[0:34:35] projecting it on on the igen vectors of
+[0:34:37] the cavalian matrix. So it's a
+[0:34:40] traditional PCA.
+[0:34:42] We could we we also uh use another
+[0:34:46] another dimension reduction which
+[0:34:48] [snorts] we call centroidid
+[0:34:49] similarities. And here you take this
+[0:34:51] impeding and then you project it on on
+[0:34:55] the centroidids centroidids that you
+[0:34:58] found through the clustering.
 [0:35:02] Um and you could yeah um and so we we we we
-[0:35:07] and you could yeah um and so we we we we thought that this is kind of much more
-[0:35:08] thought that this is kind of much more intuitive
+[0:35:07] thought that this is kind of much more
 [0:35:10] intuitive approach than using PCAS
-[0:35:13] approach than using PCAS and and the reason you you could you
-[0:35:15] and and the reason you you could you could think of that as a as a soft
-[0:35:18] could think of that as a as a soft clustering. You're using clustering only
-[0:35:20] clustering. You're using clustering only to inform where you are in the product
-[0:35:22] to inform where you are in the product space but you're not really chopping up
-[0:35:24] space but you're not really chopping up things in group. So any product is going
-[0:35:27] things in group. So any product is going to is is like is going to be uh
-[0:35:30] to is is like is going to be uh determined by like a well you could you
-[0:35:32] determined by like a well you could you could model the product by by its
-[0:35:34] could model the product by by its similarities to these five five centers
-[0:35:36] similarities to these five five centers but [snorts] you don't have to commit to
-[0:35:38] but [snorts] you don't have to commit to to just to these five groups which would
-[0:35:41] to just to these five groups which would be very crude. So this is kind of a
-[0:35:43] be very crude. So this is kind of a continuous continuous grouping
-[0:35:47] continuous continuous grouping and so [clears throat] yeah we we kind
-[0:35:49] and so [clears throat] yeah we we kind of like this one this approach better
-[0:35:51] of like this one this approach better than the principal components in um
-[0:35:54] than the principal components in um [snorts] in terms of
-[0:35:57] [snorts] in terms of uh um in terms of dimension reduction.
-[0:36:00] uh um in terms of dimension reduction. It turns out that using either five
-[0:36:02] It turns out that using either five centroidid similarities or five PCAs is
-[0:36:05] centroidid similarities or five PCAs is almost as good as using the full 256
-[0:36:08] almost as good as using the full 256 dimensional vectors for this hedonics uh
-[0:36:10] dimensional vectors for this hedonics uh exercises. So in particular if we
-[0:36:14] exercises. So in particular if we compare because I don't want to go over
-[0:36:16] compare because I don't want to go over all numbers but these two rows like well
-[0:36:19] all numbers but these two rows like well if we
+[0:35:13] and and the reason you you could you
+[0:35:15] could think of that as a as a soft
+[0:35:18] clustering. You're using clustering only
+[0:35:20] to inform where you are in the product
+[0:35:22] space but you're not really chopping up
+[0:35:24] things in group. So any product is going
+[0:35:27] to is is like is going to be uh
+[0:35:30] determined by like a well you could you
+[0:35:32] could model the product by by its
+[0:35:34] similarities to these five five centers
+[0:35:36] but [snorts] you don't have to commit to
+[0:35:38] to just to these five groups which would
+[0:35:41] be very crude. So this is kind of a
+[0:35:43] continuous continuous grouping
+[0:35:47] and so [clears throat] yeah we we kind
+[0:35:49] of like this one this approach better
+[0:35:51] than the principal components in um
+[0:35:54] [snorts] in terms of
+[0:35:57] uh um in terms of dimension reduction.
+[0:36:00] It turns out that using either five
+[0:36:02] centroidid similarities or five PCAs is
+[0:36:05] almost as good as using the full 256
+[0:36:08] dimensional vectors for this hedonics uh
+[0:36:10] exercises. So in particular if we
+[0:36:14] compare because I don't want to go over
+[0:36:16] all numbers but these two rows like well
 [0:36:21] if we um if we use five similarities
-[0:36:24] um if we use five similarities the R square for predicting price is 62
-[0:36:30] the R square for predicting price is 62 quantity 52%.
-[0:36:32] quantity 52%. That's using boosted trees, right? Um
-[0:36:35] That's using boosted trees, right? Um and then o over here like if we you if
-[0:36:38] and then o over here like if we you if you use like all of the embeddings
-[0:36:40] you use like all of the embeddings together, you get uh you just get about
-[0:36:42] together, you get uh you just get about the same performance. Uh
-[0:36:46] the same performance. Uh a little bit better but not not not
-[0:36:50] a little bit better but not not not a lot better.
-[0:36:52] a lot better. So what this what this does it actually
-[0:36:55] So what this what this does it actually allows us to simplify the like the
-[0:36:58] allows us to simplify the like the downstream causal analysis.
-[0:37:01] downstream causal analysis. Um in in in our application we will be
-[0:37:04] Um in in in our application we will be modeling elasticity as a function
-[0:37:08] modeling elasticity as a function of the centroidid similarities. So just
-[0:37:11] of the centroidid similarities. So just five features
-[0:37:12] five features instead of 256 features, right?
-[0:37:17] instead of 256 features, right? Um so that's going to be like a much
-[0:37:19] Um so that's going to be like a much more manageable, easier to work model
-[0:37:21] more manageable, easier to work model and also like very r like very fast to
-[0:37:24] and also like very r like very fast to reestimate, right? Like with with um
-[0:37:27] reestimate, right? Like with with um with like all of like kitchen sync of uh
-[0:37:30] with like all of like kitchen sync of uh embeddings, it's much harder to to to to
-[0:37:32] embeddings, it's much harder to to to to manage this downstream model. and with
-[0:37:35] manage this downstream model. and with with this dimension reduced approach
-[0:37:37] with this dimension reduced approach like it's much easier to to manage the
-[0:37:40] like it's much easier to to manage the the model.
-[0:37:42] the model. So so far okay so to summarize the
-[0:37:44] So so far okay so to summarize the findings so far so we uh
-[0:37:49] findings so far so we uh so we
+[0:36:24] the R square for predicting price is 62
+[0:36:30] quantity 52%.
+[0:36:32] That's using boosted trees, right? Um
+[0:36:35] and then o over here like if we you if
+[0:36:38] you use like all of the embeddings
+[0:36:40] together, you get uh you just get about
+[0:36:42] the same performance. Uh
+[0:36:46] a little bit better but not not not
+[0:36:50] a lot better.
+[0:36:52] So what this what this does it actually
+[0:36:55] allows us to simplify the like the
+[0:36:58] downstream causal analysis.
+[0:37:01] Um in in in our application we will be
+[0:37:04] modeling elasticity as a function
+[0:37:08] of the centroidid similarities. So just
+[0:37:11] five features
+[0:37:12] instead of 256 features, right?
+[0:37:17] Um so that's going to be like a much
+[0:37:19] more manageable, easier to work model
+[0:37:21] and also like very r like very fast to
+[0:37:24] reestimate, right? Like with with um
+[0:37:27] with like all of like kitchen sync of uh
+[0:37:30] embeddings, it's much harder to to to to
+[0:37:32] manage this downstream model. and with
+[0:37:35] with this dimension reduced approach
+[0:37:37] like it's much easier to to manage the
+[0:37:40] the model.
+[0:37:42] So so far okay so to summarize the
+[0:37:44] findings so far so we uh
 [0:37:51] so we we believe that these AI at least in our
-[0:37:54] we believe that these AI at least in our application they this AI generated
-[0:37:56] application they this AI generated representations seem to understand the
-[0:37:58] representations seem to understand the products quite well
-[0:38:00] products quite well um and they provide remarkable boost in
-[0:38:03] um and they provide remarkable boost in in predictive performance for price and
-[0:38:05] in predictive performance for price and quantity signal.
-[0:38:08] quantity signal. So the [snorts] next uh the next point
-[0:38:10] So the [snorts] next uh the next point is going to be to study the price
-[0:38:12] is going to be to study the price sensitivity. So so here we would like to
-[0:38:16] sensitivity. So so here we would like to to infer the causal effect of changing
-[0:38:19] to infer the causal effect of changing uh log price exogenously on on the log
-[0:38:22] uh log price exogenously on on the log inverse rank and we will begin this
-[0:38:25] inverse rank and we will begin this exercise by
-[0:38:27] exercise by uh not causally but by just running a
-[0:38:30] uh not causally but by just running a predictive model. So, so let's let's
-[0:38:32] predictive model. So, so let's let's start by projecting quantity signal on
-[0:38:36] start by projecting quantity signal on on prices and um
-[0:38:39] on prices and um and the the the product product
-[0:38:42] and the the the product product characteristics
-[0:38:44] characteristics and it's going to be partially linear
-[0:38:46] and it's going to be partially linear projection. So, we're going to be
-[0:38:47] projection. So, we're going to be projecting. So, L here denotes the
-[0:38:49] projecting. So, L here denotes the projection of Y onto the space of
-[0:38:51] projection of Y onto the space of partially linear prediction rules.
-[0:38:55] partially linear prediction rules. So if we do this,
-[0:38:58] So if we do this, we get this price sensitivity uh number
-[0:39:01] we get this price sensitivity uh number to be pretty close to zero,
-[0:39:04] to be pretty close to zero, [snorts] right?
-[0:39:07] [snorts] right? And
+[0:37:54] application they this AI generated
+[0:37:56] representations seem to understand the
+[0:37:58] products quite well
+[0:38:00] um and they provide remarkable boost in
+[0:38:03] in predictive performance for price and
+[0:38:05] quantity signal.
+[0:38:08] So the [snorts] next uh the next point
+[0:38:10] is going to be to study the price
+[0:38:12] sensitivity. So so here we would like to
+[0:38:16] to infer the causal effect of changing
+[0:38:19] uh log price exogenously on on the log
+[0:38:22] inverse rank and we will begin this
+[0:38:25] exercise by
+[0:38:27] uh not causally but by just running a
+[0:38:30] predictive model. So, so let's let's
+[0:38:32] start by projecting quantity signal on
+[0:38:36] on prices and um
+[0:38:39] and the the the product product
+[0:38:42] characteristics
+[0:38:44] and it's going to be partially linear
+[0:38:46] projection. So, we're going to be
+[0:38:47] projecting. So, L here denotes the
+[0:38:49] projection of Y onto the space of
+[0:38:51] partially linear prediction rules.
+[0:38:55] So if we do this,
+[0:38:58] we get this price sensitivity uh number
+[0:39:01] to be pretty close to zero,
+[0:39:04] [snorts] right?
 [0:39:09] And and of course that immediately like to
-[0:39:11] and of course that immediately like to to to economists that's very
-[0:39:13] to to economists that's very disappointing because no no economist
-[0:39:15] disappointing because no no economist would call it elasticity.
-[0:39:18] would call it elasticity. Uh and the reason is that be well if if
-[0:39:20] Uh and the reason is that be well if if you have elicity of zero it just means
-[0:39:22] you have elicity of zero it just means literally you could
-[0:39:25] literally you could you know you could double uh you could
-[0:39:27] you know you could double uh you could double the prices and make tons of money
-[0:39:29] double the prices and make tons of money right and so it just doesn't make sense
-[0:39:31] right and so it just doesn't make sense elasticity of zero doesn't make sense it
-[0:39:34] elasticity of zero doesn't make sense it kind of goes back to this point that
-[0:39:36] kind of goes back to this point that Philip Wright made in 100 years ago
-[0:39:38] Philip Wright made in 100 years ago because he was criticizing an empirical
-[0:39:40] because he was criticizing an empirical study where they had empirical upward
-[0:39:43] study where they had empirical upward sloping curves so he said why don't you
-[0:39:45] sloping curves so he said why don't you just double the prices because
-[0:39:47] just double the prices because you're going to make a lot of money in
-[0:39:49] you're going to make a lot of money in that way, right? And um so it's kind of
-[0:39:51] that way, right? And um so it's kind of an obvious uh obviously uh bad model. So
-[0:39:54] an obvious uh obviously uh bad model. So so what's missing here? Well
-[0:39:58] so what's missing here? Well uh what's missing here are are are
-[0:40:02] uh what's missing here are are are variables such as
-[0:40:05] variables such as uh past sales which proxy the visibility
-[0:40:08] uh past sales which proxy the visibility and quality of the product as well as
-[0:40:11] and quality of the product as well as well as the past prices. [snorts] So why
-[0:40:13] well as the past prices. [snorts] So why is visibility is important? Well, you
-[0:40:16] is visibility is important? Well, you can't buy the product if you don't see
-[0:40:17] can't buy the product if you don't see it, right? And how do recommener systems
-[0:40:21] it, right? And how do recommener systems work?
+[0:39:11] to to economists that's very
+[0:39:13] disappointing because no no economist
+[0:39:15] would call it elasticity.
+[0:39:18] Uh and the reason is that be well if if
+[0:39:20] you have elicity of zero it just means
+[0:39:22] literally you could
+[0:39:25] you know you could double uh you could
+[0:39:27] double the prices and make tons of money
+[0:39:29] right and so it just doesn't make sense
+[0:39:31] elasticity of zero doesn't make sense it
+[0:39:34] kind of goes back to this point that
+[0:39:36] Philip Wright made in 100 years ago
+[0:39:38] because he was criticizing an empirical
+[0:39:40] study where they had empirical upward
+[0:39:43] sloping curves so he said why don't you
+[0:39:45] just double the prices because
+[0:39:47] you're going to make a lot of money in
+[0:39:49] that way, right? And um so it's kind of
+[0:39:51] an obvious uh obviously uh bad model. So
+[0:39:54] so what's missing here? Well
+[0:39:58] uh what's missing here are are are
+[0:40:02] variables such as
+[0:40:05] uh past sales which proxy the visibility
+[0:40:08] and quality of the product as well as
+[0:40:11] well as the past prices. [snorts] So why
+[0:40:13] is visibility is important? Well, you
+[0:40:16] can't buy the product if you don't see
+[0:40:17] it, right? And how do recommener systems
 [0:40:23] work? Well, they just look at essentially they
-[0:40:26] Well, they just look at essentially they look at past sales and they're going to
-[0:40:27] look at past sales and they're going to recommend you whatever sold very well in
-[0:40:30] recommend you whatever sold very well in in the previous periods, right? Just
-[0:40:32] in the previous periods, right? Just like in a in if you if you go to a
-[0:40:34] like in a in if you if you go to a traditional physical store store, what
-[0:40:36] traditional physical store store, what you see on like in the prime shelf space
-[0:40:38] you see on like in the prime shelf space is something that sells well, right? if
-[0:40:42] is something that sells well, right? if something is is in the in the in the in
-[0:40:45] something is is in the in the in the in in the back room like you're just not
-[0:40:46] in the back room like you're just not going to you're not going to see it and
-[0:40:48] going to you're not going to see it and not going to buy. So it's obvious that
-[0:40:50] not going to buy. So it's obvious that if the price
-[0:40:52] if the price [snorts]
+[0:40:26] look at past sales and they're going to
+[0:40:27] recommend you whatever sold very well in
+[0:40:30] in the previous periods, right? Just
+[0:40:32] like in a in if you if you go to a
+[0:40:34] traditional physical store store, what
+[0:40:36] you see on like in the prime shelf space
+[0:40:38] is something that sells well, right? if
+[0:40:42] something is is in the in the in the in
+[0:40:45] in the back room like you're just not
+[0:40:46] going to you're not going to see it and
+[0:40:48] not going to buy. So it's obvious that
+[0:40:50] if the price
 [0:40:52] [snorts] uh the the the the past sales should be
-[0:40:55] uh the the the the past sales should be a part of the state vector that uh that
-[0:40:58] a part of the state vector that uh that we should be controlling for and past
-[0:40:59] we should be controlling for and past prices as well. This past prices we saw
-[0:41:02] prices as well. This past prices we saw it's very strong predictor for the price
-[0:41:04] it's very strong predictor for the price itself. And so emitting emitting these
-[0:41:08] itself. And so emitting emitting these variables from the model creates this
-[0:41:10] variables from the model creates this huge immediate variable bias and results
-[0:41:12] huge immediate variable bias and results in this u uh implausibly small
-[0:41:16] in this u uh implausibly small elasticity uh estimates
-[0:41:20] elasticity uh estimates and so um so the diagrammatically in
-[0:41:24] and so um so the diagrammatically in terms of the causal dice looks like
-[0:41:27] terms of the causal dice looks like this. So we think okay so there's this
-[0:41:29] this. So we think okay so there's this quantity uh quantity is determined by
-[0:41:32] quantity uh quantity is determined by the price and by the state vector sit
-[0:41:36] the price and by the state vector sit the state vector is determined by the
-[0:41:38] the state vector is determined by the previous quantity and by the previous
-[0:41:40] previous quantity and by the previous price and so on and so forth.
-[0:41:43] price and so on and so forth. So this is a dog um
-[0:41:46] So this is a dog um um for this dynamic dynamic model. And
-[0:41:50] um for this dynamic dynamic model. And if if if this DAG is right then um
-[0:41:54] if if if this DAG is right then um then we could uh interpret
-[0:41:58] then we could uh interpret interpret well we could we could uh uh
-[0:42:02] interpret well we could we could uh uh run the regressions of this sort and
-[0:42:04] run the regressions of this sort and then uh claim a causal interpretation
-[0:42:07] then uh claim a causal interpretation for this delta.
-[0:42:10] for this delta. Uh one thing one important thing here is
-[0:42:12] Uh one thing one important thing here is to realize that well there's going to be
-[0:42:15] to realize that well there's going to be there's a latent confounder sitting here
-[0:42:17] there's a latent confounder sitting here with the error like pointing to QIT and
-[0:42:21] with the error like pointing to QIT and PIT potentially and that confounder is
-[0:42:24] PIT potentially and that confounder is the demand like demand shock but I'm I'm
-[0:42:27] the demand like demand shock but I'm I'm going to come back to that confounder
-[0:42:29] going to come back to that confounder later um and I'm just going to show you
-[0:42:32] later um and I'm just going to show you some results uh with uh without that
-[0:42:35] some results uh with uh without that confounder first.
+[0:40:55] a part of the state vector that uh that
+[0:40:58] we should be controlling for and past
+[0:40:59] prices as well. This past prices we saw
+[0:41:02] it's very strong predictor for the price
+[0:41:04] itself. And so emitting emitting these
+[0:41:08] variables from the model creates this
+[0:41:10] huge immediate variable bias and results
+[0:41:12] in this u uh implausibly small
+[0:41:16] elasticity uh estimates
+[0:41:20] and so um so the diagrammatically in
+[0:41:24] terms of the causal dice looks like
+[0:41:27] this. So we think okay so there's this
+[0:41:29] quantity uh quantity is determined by
+[0:41:32] the price and by the state vector sit
+[0:41:36] the state vector is determined by the
+[0:41:38] previous quantity and by the previous
+[0:41:40] price and so on and so forth.
+[0:41:43] So this is a dog um
+[0:41:46] um for this dynamic dynamic model. And
+[0:41:50] if if if this DAG is right then um
+[0:41:54] then we could uh interpret
+[0:41:58] interpret well we could we could uh uh
+[0:42:02] run the regressions of this sort and
+[0:42:04] then uh claim a causal interpretation
+[0:42:07] for this delta.
+[0:42:10] Uh one thing one important thing here is
+[0:42:12] to realize that well there's going to be
+[0:42:15] there's a latent confounder sitting here
+[0:42:17] with the error like pointing to QIT and
+[0:42:21] PIT potentially and that confounder is
+[0:42:24] the demand like demand shock but I'm I'm
+[0:42:27] going to come back to that confounder
+[0:42:29] later um and I'm just going to show you
+[0:42:32] some results uh with uh without that
+[0:42:35] confounder first.
 [0:42:42] So next next step that we do so we we create a state vector that includes the
-[0:42:45] create a state vector that includes the previous uh uh u embeddings for the
-[0:42:49] previous uh uh u embeddings for the products and then you have u lacked
-[0:42:51] products and then you have u lacked quantities and prices
-[0:42:54] quantities and prices and now you you get the rank elasticity
-[0:42:57] and now you you get the rank elasticity of minus.7 as I mentioned at the
-[0:42:59] of minus.7 as I mentioned at the beginning to get the demand elasticity
-[0:43:02] beginning to get the demand elasticity you need to multiply it by by two so you
-[0:43:05] you need to multiply it by by two so you you get uh you get the here you get the
-[0:43:07] you get uh you get the here you get the elasticity minus 1.4
-[0:43:11] elasticity minus 1.4 which is you know which is which which
-[0:43:13] which is you know which is which which makes sense like empirically uh this
-[0:43:16] makes sense like empirically uh this type of elasticity. So yeah it seems it
-[0:43:19] type of elasticity. So yeah it seems it seems plausible at least. So so this is
-[0:43:24] seems plausible at least. So so this is this is what happens and I have this
-[0:43:27] this is what happens and I have this table um that has a lot of entries but
-[0:43:32] table um that has a lot of entries but the story there is simple. So we could
-[0:43:36] the story there is simple. So we could we could
+[0:42:45] previous uh uh u embeddings for the
+[0:42:49] products and then you have u lacked
+[0:42:51] quantities and prices
+[0:42:54] and now you you get the rank elasticity
+[0:42:57] of minus.7 as I mentioned at the
+[0:42:59] beginning to get the demand elasticity
+[0:43:02] you need to multiply it by by two so you
+[0:43:05] you get uh you get the here you get the
+[0:43:07] elasticity minus 1.4
+[0:43:11] which is you know which is which which
+[0:43:13] makes sense like empirically uh this
+[0:43:16] type of elasticity. So yeah it seems it
+[0:43:19] seems plausible at least. So so this is
+[0:43:24] this is what happens and I have this
+[0:43:27] table um that has a lot of entries but
+[0:43:32] the story there is simple. So we could
 [0:43:38] we could um we could vary the way we estimate
-[0:43:41] um we could vary the way we estimate this G here. So it could be just a
-[0:43:43] this G here. So it could be just a linear adjustment function or nonlinear
-[0:43:45] linear adjustment function or nonlinear estimated via boosted trees. We could
-[0:43:47] estimated via boosted trees. We could also vary the state here. So we could
-[0:43:50] also vary the state here. So we could either have very basic specification
-[0:43:52] either have very basic specification where we just dump all of this
-[0:43:54] where we just dump all of this embeddings that I talked about for the
-[0:43:56] embeddings that I talked about for the first half hour
-[0:43:58] first half hour get the estimate in this way or we can
-[0:44:00] get the estimate in this way or we can include them and uh so these are the
-[0:44:02] include them and uh so these are the results that we get. So in the simplest
-[0:44:04] results that we get. So in the simplest model, so this is the like if we if we
-[0:44:08] model, so this is the like if we if we travel back in time 100 years ago and do
-[0:44:11] travel back in time 100 years ago and do the the linear regression like use the
-[0:44:13] the the linear regression like use the technology of that time, we're going to
-[0:44:14] technology of that time, we're going to get elasticity of minus.7
-[0:44:17] get elasticity of minus.7 and if we use all of this modern
-[0:44:18] and if we use all of this modern technology, we get elasticity of
-[0:44:20] technology, we get elasticity of minus.7.
+[0:43:41] this G here. So it could be just a
+[0:43:43] linear adjustment function or nonlinear
+[0:43:45] estimated via boosted trees. We could
+[0:43:47] also vary the state here. So we could
+[0:43:50] either have very basic specification
+[0:43:52] where we just dump all of this
+[0:43:54] embeddings that I talked about for the
+[0:43:56] first half hour
+[0:43:58] get the estimate in this way or we can
+[0:44:00] include them and uh so these are the
+[0:44:02] results that we get. So in the simplest
+[0:44:04] model, so this is the like if we if we
+[0:44:08] travel back in time 100 years ago and do
+[0:44:11] the the linear regression like use the
+[0:44:13] technology of that time, we're going to
+[0:44:14] get elasticity of minus.7
+[0:44:17] and if we use all of this modern
+[0:44:18] technology, we get elasticity of
 [0:44:22] minus.7. So why did I bother with all these
-[0:44:24] So why did I bother with all these embeddings, right? Um so as I said the
-[0:44:28] embeddings, right? Um so as I said the embeddings are not are not strong. Well,
-[0:44:30] embeddings are not are not strong. Well, I mean, I said a priority that they they
-[0:44:32] I mean, I said a priority that they they look to be very weakened farmers. So,
-[0:44:34] look to be very weakened farmers. So, they don't they don't move they don't
-[0:44:37] they don't they don't move they don't they they're not able to predict changes
-[0:44:38] they they're not able to predict changes in prices which makes absolute sense
-[0:44:41] in prices which makes absolute sense from no arbitrage point of view,
-[0:44:45] from no arbitrage point of view, right? And so it it sounds like a
-[0:44:49] right? And so it it sounds like a disappointment but not yet. Right. So,
-[0:44:51] disappointment but not yet. Right. So, so the next step is to is to go ahead
-[0:44:54] so the next step is to is to go ahead and say oh now let's try to
-[0:44:57] and say oh now let's try to uh
+[0:44:24] embeddings, right? Um so as I said the
+[0:44:28] embeddings are not are not strong. Well,
+[0:44:30] I mean, I said a priority that they they
+[0:44:32] look to be very weakened farmers. So,
+[0:44:34] they don't they don't move they don't
+[0:44:37] they they're not able to predict changes
+[0:44:38] in prices which makes absolute sense
+[0:44:41] from no arbitrage point of view,
+[0:44:45] right? And so it it sounds like a
+[0:44:49] disappointment but not yet. Right. So,
+[0:44:51] so the next step is to is to go ahead
+[0:44:54] and say oh now let's try to
 [0:44:59] uh to model the effect modification. So
-[0:45:02] to model the effect modification. So this is elasticity and now it's going to
-[0:45:04] this is elasticity and now it's going to be elasticity is going to be varying
-[0:45:08] be elasticity is going to be varying with product characteristics. So in
-[0:45:09] with product characteristics. So in particular it's going to be varying with
-[0:45:11] particular it's going to be varying with the similarity similarity uh centroid
-[0:45:15] the similarity similarity uh centroid similarities features. So there are five
-[0:45:19] similarities features. So there are five centroidid similarity features and also
-[0:45:22] centroidid similarity features and also could be varying with the past price and
-[0:45:24] could be varying with the past price and quantity. So for example products that
-[0:45:27] quantity. So for example products that are more visible and have higher prices
-[0:45:30] are more visible and have higher prices maybe the elasticity is higher for them.
-[0:45:33] maybe the elasticity is higher for them. If something is is less visible probably
-[0:45:35] If something is is less visible probably elasticity is is is lower.
+[0:45:02] this is elasticity and now it's going to
+[0:45:04] be elasticity is going to be varying
+[0:45:08] with product characteristics. So in
+[0:45:09] particular it's going to be varying with
+[0:45:11] the similarity similarity uh centroid
+[0:45:15] similarities features. So there are five
+[0:45:19] centroidid similarity features and also
+[0:45:22] could be varying with the past price and
+[0:45:24] quantity. So for example products that
+[0:45:27] are more visible and have higher prices
+[0:45:30] maybe the elasticity is higher for them.
+[0:45:33] If something is is less visible probably
+[0:45:35] elasticity is is is lower.
 [0:45:42] Right. [snorts] And what we find is that this uh this
-[0:45:45] And what we find is that this uh this delta the this delta function indeed is
-[0:45:49] delta the this delta function indeed is um uh heterogeneous.
-[0:45:53] um uh heterogeneous. So this um delta so it's a function of
-[0:45:57] So this um delta so it's a function of seven variables.
-[0:45:59] seven variables. uh I'll actually plot it as a function
-[0:46:01] uh I'll actually plot it as a function of a single variable by sorting sorting
-[0:46:04] of a single variable by sorting sorting the estimate
+[0:45:45] delta the this delta function indeed is
+[0:45:49] um uh heterogeneous.
+[0:45:53] So this um delta so it's a function of
+[0:45:57] seven variables.
+[0:45:59] uh I'll actually plot it as a function
+[0:46:01] of a single variable by sorting sorting
+[0:46:04] the estimate
 [0:46:09] from from the lowest to the highest. So we call the sorted effects and I can put
-[0:46:12] we call the sorted effects and I can put the confidence bands how well we have a
-[0:46:15] the confidence bands how well we have a separate econometric paper that says how
-[0:46:17] separate econometric paper that says how you put the confidence bands on sorted
-[0:46:19] you put the confidence bands on sorted effects
+[0:46:12] the confidence bands how well we have a
+[0:46:15] separate econometric paper that says how
+[0:46:17] you put the confidence bands on sorted
 [0:46:21] effects and so here we we get this hogenity. So
-[0:46:24] and so here we we get this hogenity. So the estimated effects varies from about
-[0:46:26] the estimated effects varies from about minus.25 25 to about minus 1.5. So if
-[0:46:31] minus.25 25 to about minus 1.5. So if you multiply multiply it by by two, you
-[0:46:34] you multiply multiply it by by two, you get you get kind of equivalent uh demand
-[0:46:37] get you get kind of equivalent uh demand uh demand elasticities.
-[0:46:40] uh demand elasticities. And um it it really it kind of it
-[0:46:45] And um it it really it kind of it doesn't matter as much whether we use
-[0:46:46] doesn't matter as much whether we use linear or partially linear specification
-[0:46:49] linear or partially linear specification with boosted trees to estimate the
-[0:46:52] with boosted trees to estimate the control control function.
-[0:46:54] control control function. uh I mean it matters a little bit but
-[0:46:56] uh I mean it matters a little bit but not a whole lot. Um
-[0:46:59] not a whole lot. Um and so this is uh so you get this
-[0:47:01] and so this is uh so you get this hetrogenity and you can also formally
-[0:47:03] hetrogenity and you can also formally test for the like whether these effect
-[0:47:05] test for the like whether these effect modifiers are uh significant or not. So
-[0:47:08] modifiers are uh significant or not. So if you if you test um
-[0:47:12] if you if you test um if you if you effect if you test the
-[0:47:16] if you if you effect if you test the uh uh if you test the significance of
-[0:47:18] uh uh if you test the significance of all the modifiers well you just reject
-[0:47:20] all the modifiers well you just reject that uh easily. If you uh if you test
-[0:47:24] that uh easily. If you uh if you test the significance of similarities uh only
-[0:47:26] the significance of similarities uh only you also reject that. So
-[0:47:29] you also reject that. So um so either way like this uh this seems
-[0:47:33] um so either way like this uh this seems to confirm that
-[0:47:36] to confirm that uh there is heterogeneity is happening
-[0:47:40] uh there is heterogeneity is happening and what contributes to this
-[0:47:42] and what contributes to this heterogeneity is not not only this
-[0:47:44] heterogeneity is not not only this traditional features but also this
-[0:47:46] traditional features but also this constructed features that we constructed
-[0:47:49] constructed features that we constructed uh using uh using transformers right so
-[0:47:53] uh using uh using transformers right so that uh so that uh that was good um And
-[0:47:58] that uh so that uh that was good um And finally we come to the limitations. So
-[0:48:00] finally we come to the limitations. So in the limitations um we worry about
-[0:48:05] in the limitations um we worry about immediate confounder specifically we
-[0:48:07] immediate confounder specifically we worry about the immediate confounder
-[0:48:10] worry about the immediate confounder that Philip Pride
-[0:48:12] that Philip Pride wrote about in in his 1928 paper that
-[0:48:15] wrote about in in his 1928 paper that was never published because it was too
-[0:48:17] was never published because it was too advanced for the time. So we we finally
-[0:48:20] advanced for the time. So we we finally published it in econometric journal this
-[0:48:21] published it in econometric journal this year this past year. So he you know he
-[0:48:25] year this past year. So he you know he was like hundred years ago. Uh so you
-[0:48:27] was like hundred years ago. Uh so you know yeah uh like he was far ahead like
-[0:48:30] know yeah uh like he was far ahead like maybe 20 years ahead of his time. So it
-[0:48:32] maybe 20 years ahead of his time. So it was like there was a lesson to be
-[0:48:36] was like there was a lesson to be learned there right. Um anyway
-[0:48:39] learned there right. Um anyway uh so yeah so you have this uh demand uh
-[0:48:42] uh so yeah so you have this uh demand uh demand shock and if if prices and
-[0:48:46] demand shock and if if prices and quantities were simultaneously
-[0:48:47] quantities were simultaneously determined the demand shock would be
-[0:48:49] determined the demand shock would be entering the equations for both a
-[0:48:50] entering the equations for both a quantity and the price and so that would
-[0:48:54] quantity and the price and so that would would that would destroy our
-[0:48:56] would that would destroy our identification strategy.
-[0:48:58] identification strategy. But remember I I said at the beginning
-[0:49:00] But remember I I said at the beginning the prices tend to be sticky. So maybe
-[0:49:03] the prices tend to be sticky. So maybe this link from epsilon it
-[0:49:06] this link from epsilon it uh is not that strong. Maybe it's small.
-[0:49:10] uh is not that strong. Maybe it's small. So in the limit world this link is
-[0:49:11] So in the limit world this link is absent. Well that this is not actually a
-[0:49:13] absent. Well that this is not actually a confounder. So the previous analysis
-[0:49:17] confounder. So the previous analysis applies.
+[0:46:24] the estimated effects varies from about
+[0:46:26] minus.25 25 to about minus 1.5. So if
+[0:46:31] you multiply multiply it by by two, you
+[0:46:34] get you get kind of equivalent uh demand
+[0:46:37] uh demand elasticities.
+[0:46:40] And um it it really it kind of it
+[0:46:45] doesn't matter as much whether we use
+[0:46:46] linear or partially linear specification
+[0:46:49] with boosted trees to estimate the
+[0:46:52] control control function.
+[0:46:54] uh I mean it matters a little bit but
+[0:46:56] not a whole lot. Um
+[0:46:59] and so this is uh so you get this
+[0:47:01] hetrogenity and you can also formally
+[0:47:03] test for the like whether these effect
+[0:47:05] modifiers are uh significant or not. So
+[0:47:08] if you if you test um
+[0:47:12] if you if you effect if you test the
+[0:47:16] uh uh if you test the significance of
+[0:47:18] all the modifiers well you just reject
+[0:47:20] that uh easily. If you uh if you test
+[0:47:24] the significance of similarities uh only
+[0:47:26] you also reject that. So
+[0:47:29] um so either way like this uh this seems
+[0:47:33] to confirm that
+[0:47:36] uh there is heterogeneity is happening
+[0:47:40] and what contributes to this
+[0:47:42] heterogeneity is not not only this
+[0:47:44] traditional features but also this
+[0:47:46] constructed features that we constructed
+[0:47:49] uh using uh using transformers right so
+[0:47:53] that uh so that uh that was good um And
+[0:47:58] finally we come to the limitations. So
+[0:48:00] in the limitations um we worry about
+[0:48:05] immediate confounder specifically we
+[0:48:07] worry about the immediate confounder
+[0:48:10] that Philip Pride
+[0:48:12] wrote about in in his 1928 paper that
+[0:48:15] was never published because it was too
+[0:48:17] advanced for the time. So we we finally
+[0:48:20] published it in econometric journal this
+[0:48:21] year this past year. So he you know he
+[0:48:25] was like hundred years ago. Uh so you
+[0:48:27] know yeah uh like he was far ahead like
+[0:48:30] maybe 20 years ahead of his time. So it
+[0:48:32] was like there was a lesson to be
+[0:48:36] learned there right. Um anyway
+[0:48:39] uh so yeah so you have this uh demand uh
+[0:48:42] demand shock and if if prices and
+[0:48:46] quantities were simultaneously
+[0:48:47] determined the demand shock would be
+[0:48:49] entering the equations for both a
+[0:48:50] quantity and the price and so that would
+[0:48:54] would that would destroy our
+[0:48:56] identification strategy.
+[0:48:58] But remember I I said at the beginning
+[0:49:00] the prices tend to be sticky. So maybe
+[0:49:03] this link from epsilon it
+[0:49:06] uh is not that strong. Maybe it's small.
+[0:49:10] So in the limit world this link is
+[0:49:11] absent. Well that this is not actually a
+[0:49:13] confounder. So the previous analysis
 [0:49:18] applies. But what if this link is present here
-[0:49:21] But what if this link is present here but but it is
-[0:49:24] but but it is it is uh
+[0:49:21] but but it is
 [0:49:27] it is uh what if the link is present there? Maybe
-[0:49:29] what if the link is present there? Maybe it's not big but it's present. What can
-[0:49:31] it's not big but it's present. What can I do? So in that case I can do I can do
-[0:49:34] I do? So in that case I can do I can do two things. I can do instrumental
-[0:49:36] two things. I can do instrumental variables which Philip pride invented
-[0:49:38] variables which Philip pride invented 100 years ago. Unfortunately there's no
-[0:49:39] 100 years ago. Unfortunately there's no good instrument here right but um or I
-[0:49:44] good instrument here right but um or I can do bounds analysis. So here we will
-[0:49:46] can do bounds analysis. So here we will apply this uh technology from the paper
-[0:49:49] apply this uh technology from the paper we wrote together with Carlos Selli
-[0:49:51] we wrote together with Carlos Selli Whitney Newi
-[0:49:54] Whitney Newi Vasilis Saranas and Amit Sharma. And so
-[0:49:57] Vasilis Saranas and Amit Sharma. And so here we we just gonna posite a scenario
-[0:50:00] here we we just gonna posite a scenario where
+[0:49:29] it's not big but it's present. What can
+[0:49:31] I do? So in that case I can do I can do
+[0:49:34] two things. I can do instrumental
+[0:49:36] variables which Philip pride invented
+[0:49:38] 100 years ago. Unfortunately there's no
+[0:49:39] good instrument here right but um or I
+[0:49:44] can do bounds analysis. So here we will
+[0:49:46] apply this uh technology from the paper
+[0:49:49] we wrote together with Carlos Selli
+[0:49:51] Whitney Newi
+[0:49:54] Vasilis Saranas and Amit Sharma. And so
+[0:49:57] here we we just gonna posite a scenario
 [0:50:02] where where we say okay this uh demand shock
-[0:50:05] where we say okay this uh demand shock let's suppose the demand shock explains
-[0:50:07] let's suppose the demand shock explains up to 5% of residual variation
-[0:50:10] up to 5% of residual variation in uh quantities and prices. So that's
-[0:50:13] in uh quantities and prices. So that's the residual variation that is left
-[0:50:14] the residual variation that is left after controlling for past quantity and
-[0:50:17] after controlling for past quantity and and past price.
-[0:50:20] and past price. So I I I I would argue that this is a
-[0:50:23] So I I I I would argue that this is a fairly conservative scenario given uh
-[0:50:26] fairly conservative scenario given uh given some benchmarking.
-[0:50:29] given some benchmarking. Um so under this scenario what we get we
-[0:50:32] Um so under this scenario what we get we get the u the estimated
-[0:50:35] get the u the estimated bound for the average elasticity varying
-[0:50:37] bound for the average elasticity varying from minus.9 to minus.47 and we can also
-[0:50:41] from minus.9 to minus.47 and we can also put the confidence bounds on the bounds.
-[0:50:43] put the confidence bounds on the bounds. So the confidence bound is from like
-[0:50:46] So the confidence bound is from like minus.97
+[0:50:05] let's suppose the demand shock explains
+[0:50:07] up to 5% of residual variation
+[0:50:10] in uh quantities and prices. So that's
+[0:50:13] the residual variation that is left
+[0:50:14] after controlling for past quantity and
+[0:50:17] and past price.
+[0:50:20] So I I I I would argue that this is a
+[0:50:23] fairly conservative scenario given uh
+[0:50:26] given some benchmarking.
+[0:50:29] Um so under this scenario what we get we
+[0:50:32] get the u the estimated
+[0:50:35] bound for the average elasticity varying
+[0:50:37] from minus.9 to minus.47 and we can also
+[0:50:41] put the confidence bounds on the bounds.
+[0:50:43] So the confidence bound is from like
 [0:50:47] minus.97 to minus
 [0:50:50] to minus 409. So again, this is this is a fairly
-[0:50:53] 409. So again, this is this is a fairly plausible range for the elasticities.
-[0:50:56] plausible range for the elasticities. Uh we don't have a point estimate
-[0:50:59] Uh we don't have a point estimate anymore. It's an interval estimate, but
-[0:51:01] anymore. It's an interval estimate, but so what, right? We again like we're
-[0:51:04] so what, right? We again like we're pretty used to to the interval estimates
-[0:51:06] pretty used to to the interval estimates anyway. They're called confidence
-[0:51:07] anyway. They're called confidence intervals, right? Um and so that's uh
-[0:51:10] intervals, right? Um and so that's uh that's that's the sensitivity uh
-[0:51:12] that's that's the sensitivity uh analysis part. And then um what I'm
-[0:51:15] analysis part. And then um what I'm going to do I'm going to conclude at
-[0:51:17] going to do I'm going to conclude at this point and then take questions. The
-[0:51:19] this point and then take questions. The conclusion is that well this AI
-[0:51:22] conclusion is that well this AI generated representations especially the
-[0:51:25] generated representations especially the fine-tuned ones they um
-[0:51:28] fine-tuned ones they um they seem to understand
-[0:51:31] they seem to understand the products.
-[0:51:34] the products. Um they provide remarkable boosts in uh
-[0:51:38] Um they provide remarkable boosts in uh prediction of price and quantity
-[0:51:40] prediction of price and quantity signals.
+[0:50:53] plausible range for the elasticities.
+[0:50:56] Uh we don't have a point estimate
+[0:50:59] anymore. It's an interval estimate, but
+[0:51:01] so what, right? We again like we're
+[0:51:04] pretty used to to the interval estimates
+[0:51:06] anyway. They're called confidence
+[0:51:07] intervals, right? Um and so that's uh
+[0:51:10] that's that's the sensitivity uh
+[0:51:12] analysis part. And then um what I'm
+[0:51:15] going to do I'm going to conclude at
+[0:51:17] this point and then take questions. The
+[0:51:19] conclusion is that well this AI
+[0:51:22] generated representations especially the
+[0:51:25] fine-tuned ones they um
+[0:51:28] they seem to understand
+[0:51:31] the products.
+[0:51:34] Um they provide remarkable boosts in uh
+[0:51:38] prediction of price and quantity
 [0:51:43] signals. And these representations they play an
-[0:51:45] And these representations they play an important role in predicting uh price
-[0:51:47] important role in predicting uh price sensitivities or um elasticities.
-[0:51:52] sensitivities or um elasticities. And hopefully
-[0:51:54] And hopefully uh like like all of this work is is
-[0:51:57] uh like like all of this work is is useful for for informing other works
-[0:52:00] useful for for informing other works using using this AI uh representation.
-[0:52:04] using using this AI uh representation. So the these are the conclusions and uh
-[0:52:06] So the these are the conclusions and uh um I guess I'm happy to take questions
-[0:52:09] um I guess I'm happy to take questions at this point. [applause]
-[0:52:16] &gt;&gt; Can you take questions from the room first?
-[0:52:17] first? &gt;&gt; Yeah, thank you so much for this very
-[0:52:18] &gt;&gt; Yeah, thank you so much for this very interesting talk. I have a kind of a
-[0:52:20] interesting talk. I have a kind of a side question that is related to the
-[0:52:22] side question that is related to the last part of the sensitivity analysis.
-[0:52:24] last part of the sensitivity analysis. So in the kind of in the linear case
-[0:52:26] So in the kind of in the linear case it's easy to benchmark with the observed
-[0:52:28] it's easy to benchmark with the observed coariantss right and you say this
-[0:52:29] coariantss right and you say this unobserved confounder can be as strong
-[0:52:32] unobserved confounder can be as strong as these other coariant but how do you
-[0:52:34] as these other coariant but how do you think about that with the constructed
-[0:52:35] think about that with the constructed features in which you can have like kind
-[0:52:37] features in which you can have like kind of this embeddings or then some
-[0:52:39] of this embeddings or then some dimension reduction on the embeddings
-[0:52:40] dimension reduction on the embeddings and you have like very few variables
-[0:52:42] and you have like very few variables that are like super powerfully
-[0:52:44] that are like super powerfully predicted. So it feels like it's kind of
-[0:52:46] predicted. So it feels like it's kind of misleading to benchmark with stuff,
-[0:52:47] misleading to benchmark with stuff, right? Because you can say yes and an an
-[0:52:49] right? Because you can say yes and an an unobserved confounding is possible
-[0:52:51] unobserved confounding is possible because with very little variables you
-[0:52:53] because with very little variables you can explain a lot, right? So how do you
-[0:52:56] can explain a lot, right? So how do you &gt;&gt; No, I I was uh actually I was not
-[0:52:59] &gt;&gt; No, I I was uh actually I was not referring to benchmarking against the uh
-[0:53:03] referring to benchmarking against the uh predictive power of the embeddings. I
-[0:53:06] predictive power of the embeddings. I was benchmarking against predictive
-[0:53:09] was benchmarking against predictive power against like tabular tabular
-[0:53:12] power against like tabular tabular features.
-[0:53:16] Um &gt;&gt; but basically as in practice you would
-[0:53:19] &gt;&gt; but basically as in practice you would like suggest this basically like kind of
-[0:53:21] like suggest this basically like kind of &gt;&gt; in practice you have to be like this
-[0:53:23] &gt;&gt; in practice you have to be like this sensitivity analysis like in practice
-[0:53:26] sensitivity analysis like in practice like uh in practice sensitivity analysis
-[0:53:29] like uh in practice sensitivity analysis is a very uh careful exercise that has
-[0:53:32] is a very uh careful exercise that has to be very context specific.
-[0:53:35] to be very context specific. you you you you you have to look at the
-[0:53:38] you you you you you have to look at the problem and then you have to conf like
-[0:53:40] problem and then you have to conf like you you have to defend your confounding
-[0:53:42] you you have to defend your confounding scenarios, right? Uh there's no uh
-[0:53:46] scenarios, right? Uh there's no uh there's no like algorithm uh
-[0:53:50] there's no like algorithm uh three uh do this and boom, you're done
-[0:53:52] three uh do this and boom, you're done and it's all good, right? Uh you you
-[0:53:55] and it's all good, right? Uh you you have to define your like confounding
-[0:53:58] have to define your like confounding scenarios and and so on. So um
-[0:54:02] scenarios and and so on. So um um I I'll just leave it at that and uh
-[0:54:06] um I I'll just leave it at that and uh we we have a whole paper on on on this
-[0:54:08] we we have a whole paper on on on this and
-[0:54:17] &gt;&gt; so one thing you could put on the right hand
+[0:51:45] important role in predicting uh price
+[0:51:47] sensitivities or um elasticities.
+[0:51:52] And hopefully
+[0:51:54] uh like like all of this work is is
+[0:51:57] useful for for informing other works
+[0:52:00] using using this AI uh representation.
+[0:52:04] So the these are the conclusions and uh
+[0:52:06] um I guess I'm happy to take questions
+[0:52:09] at this point. [applause]
+[0:52:16] >> Can you take questions from the room first?
+[0:52:17] first? >> Yeah, thank you so much for this very
+[0:52:18] interesting talk. I have a kind of a
+[0:52:20] side question that is related to the
+[0:52:22] last part of the sensitivity analysis.
+[0:52:24] So in the kind of in the linear case
+[0:52:26] it's easy to benchmark with the observed
+[0:52:28] coariantss right and you say this
+[0:52:29] unobserved confounder can be as strong
+[0:52:32] as these other coariant but how do you
+[0:52:34] think about that with the constructed
+[0:52:35] features in which you can have like kind
+[0:52:37] of this embeddings or then some
+[0:52:39] dimension reduction on the embeddings
+[0:52:40] and you have like very few variables
+[0:52:42] that are like super powerfully
+[0:52:44] predicted. So it feels like it's kind of
+[0:52:46] misleading to benchmark with stuff,
+[0:52:47] right? Because you can say yes and an an
+[0:52:49] unobserved confounding is possible
+[0:52:51] because with very little variables you
+[0:52:53] can explain a lot, right? So how do you
+[0:52:56] >> No, I I was uh actually I was not
+[0:52:59] referring to benchmarking against the uh
+[0:53:03] predictive power of the embeddings. I
+[0:53:06] was benchmarking against predictive
+[0:53:09] power against like tabular tabular
+[0:53:12] features.
+[0:53:16] Um >> but basically as in practice you would
+[0:53:19] like suggest this basically like kind of
+[0:53:21] >> in practice you have to be like this
+[0:53:23] sensitivity analysis like in practice
+[0:53:26] like uh in practice sensitivity analysis
+[0:53:29] is a very uh careful exercise that has
+[0:53:32] to be very context specific.
+[0:53:35] you you you you you have to look at the
+[0:53:38] problem and then you have to conf like
+[0:53:40] you you have to defend your confounding
+[0:53:42] scenarios, right? Uh there's no uh
+[0:53:46] there's no like algorithm uh
+[0:53:50] three uh do this and boom, you're done
+[0:53:52] and it's all good, right? Uh you you
+[0:53:55] have to define your like confounding
+[0:53:58] scenarios and and so on. So um
+[0:54:02] um I I'll just leave it at that and uh
+[0:54:06] we we have a whole paper on on on this
+[0:54:08] and
+[0:54:17] >> so one thing you could put on the right hand
 [0:54:29] normally put the price of all the substitutes on the right hand side as
-[0:54:31] substitutes on the right hand side as well.
-[0:54:33] well. &gt;&gt; You can imagine that when you know my
-[0:54:35] &gt;&gt; You can imagine that when you know my price increases price.
-[0:54:37] price increases price. &gt;&gt; Yeah. Yeah.
-[0:54:38] &gt;&gt; Yeah. Yeah. &gt;&gt; Let me paraphrase the question. So
-[0:54:40] &gt;&gt; Let me paraphrase the question. So basically why why aren't prices of
-[0:54:42] basically why why aren't prices of substitutes
-[0:54:44] substitutes aren't in the equation for estimating
-[0:54:46] aren't in the equation for estimating the demand. Actually they are in an in
-[0:54:48] the demand. Actually they are in an in some appendix. [snorts]
-[0:54:50] some appendix. [snorts] [laughter]
-[0:54:52] [laughter] You'll see the appendix like we're going
-[0:54:53] You'll see the appendix like we're going to upload the paper. I was just waiting
-[0:54:54] to upload the paper. I was just waiting for the seminar to to to um to see if we
-[0:54:59] for the seminar to to to um to see if we we had get extra comments. Um it's it's
-[0:55:02] we had get extra comments. Um it's it's in the appendix of the paper. You
-[0:55:04] in the appendix of the paper. You construct the uh
-[0:55:07] construct the uh kind of a price index for the
-[0:55:08] kind of a price index for the substitutes put it in in the regression.
-[0:55:11] substitutes put it in in the regression. Results don't change at all. I mean just
-[0:55:14] Results don't change at all. I mean just a tiny bit. Right? So we did uh we did
-[0:55:18] a tiny bit. Right? So we did uh we did take take we we did attempt at putting
-[0:55:20] take take we we did attempt at putting the prices of substitutes in the in the
-[0:55:22] the prices of substitutes in the in the regression
-[0:55:24] regression models but they they don't matter as as
-[0:55:26] models but they they don't matter as as as much
-[0:55:28] as much &gt;&gt; like you would imagine that if the price
-[0:55:30] &gt;&gt; like you would imagine that if the price change the data comes from supply the
-[0:55:33] change the data comes from supply the supply side
-[0:55:34] supply side &gt;&gt; yeah I I it's uh
-[0:55:38] &gt;&gt; yeah I I it's uh we can get into the details of of that
-[0:55:40] we can get into the details of of that like for for like for like I'm I'm just
-[0:55:42] like for for like for like I'm I'm just telling you what happens empirically
-[0:55:45] telling you what happens empirically Right. Empirically, it doesn't seem to
-[0:55:48] Right. Empirically, it doesn't seem to matter.
+[0:54:33] well. >> You can imagine that when you know my
+[0:54:35] price increases price.
+[0:54:37] >> Yeah. Yeah.
+[0:54:38] >> Let me paraphrase the question. So
+[0:54:40] basically why why aren't prices of
+[0:54:42] substitutes
+[0:54:44] aren't in the equation for estimating
+[0:54:46] the demand. Actually they are in an in
+[0:54:48] some appendix. [snorts]
+[0:54:50] [laughter]
+[0:54:52] You'll see the appendix like we're going
+[0:54:53] to upload the paper. I was just waiting
+[0:54:54] for the seminar to to to um to see if we
+[0:54:59] we had get extra comments. Um it's it's
+[0:55:02] in the appendix of the paper. You
+[0:55:04] construct the uh
+[0:55:07] kind of a price index for the
+[0:55:08] substitutes put it in in the regression.
+[0:55:11] Results don't change at all. I mean just
+[0:55:14] a tiny bit. Right? So we did uh we did
+[0:55:18] take take we we did attempt at putting
+[0:55:20] the prices of substitutes in the in the
+[0:55:22] regression
+[0:55:24] models but they they don't matter as as
+[0:55:28] as much >> like you would imagine that if the price
+[0:55:30] change the data comes from supply the
+[0:55:33] supply side
+[0:55:34] >> yeah I I it's uh
+[0:55:38] we can get into the details of of that
+[0:55:40] like for for like for like I'm I'm just
+[0:55:42] telling you what happens empirically
+[0:55:45] Right. Empirically, it doesn't seem to
 [0:55:49] matter. Uh but I I I agree completely.
-[0:55:51] Uh but I I I agree completely. Theoretically, anything can happen. You
-[0:55:53] Theoretically, anything can happen. You you could have a like the the prices of
-[0:55:56] you could have a like the the prices of the substitutes having a very strong
-[0:55:58] the substitutes having a very strong effect on
+[0:55:51] Theoretically, anything can happen. You
+[0:55:53] you could have a like the the prices of
+[0:55:56] the substitutes having a very strong
 [0:56:00] effect on on on the demand. But here it's not it
-[0:56:03] on on the demand. But here it's not it doesn't seem to be the case.
-[0:56:06] doesn't seem to be the case. &gt;&gt; Can you question here?
-[0:56:09] &gt;&gt; Can you question here? &gt;&gt; Oh, yeah.
-[0:56:11] &gt;&gt; Oh, yeah. &gt;&gt; Yeah. So, I have a question about the
-[0:56:12] &gt;&gt; Yeah. So, I have a question about the representation. So, Have you tried
-[0:56:14] representation. So, Have you tried finding them? So basically finding
-[0:56:16] finding them? So basically finding embeddings that have like really high
-[0:56:19] embeddings that have like really high rank and really high price. So how
-[0:56:21] rank and really high price. So how robust are they to that sort of tweaking
-[0:56:24] robust are they to that sort of tweaking in the representations and can that help
-[0:56:26] in the representations and can that help you design products?
+[0:56:03] doesn't seem to be the case.
+[0:56:06] >> Can you question here?
+[0:56:09] >> Oh, yeah.
+[0:56:11] >> Yeah. So, I have a question about the
+[0:56:12] representation. So, Have you tried
+[0:56:14] finding them? So basically finding
+[0:56:16] embeddings that have like really high
+[0:56:19] rank and really high price. So how
+[0:56:21] robust are they to that sort of tweaking
+[0:56:24] in the representations and can that help
+[0:56:26] you design products?
 [0:56:35] Well, we did try one thing but I don't know if it's if it's going to answer
-[0:56:38] know if it's if it's going to answer your question. We did try to directly
-[0:56:41] your question. We did try to directly so like I talked about the dimension
-[0:56:43] so like I talked about the dimension reduction was more like oh okay like we
-[0:56:45] reduction was more like oh okay like we have this embeddings but we're just
-[0:56:46] have this embeddings but we're just going to collapse them to be to be
-[0:56:48] going to collapse them to be to be five-dimensional using
-[0:56:51] five-dimensional using using either PCA or using similarities
-[0:56:54] using either PCA or using similarities why not just use the neural network
-[0:56:56] why not just use the neural network directly to create this fivedimensional
-[0:56:59] directly to create this fivedimensional vector we we did try that we have
-[0:57:02] vector we we did try that we have another appendix on on that and um and
-[0:57:06] another appendix on on that and um and it gives it's going to give similar
-[0:57:07] it gives it's going to give similar results
+[0:56:38] your question. We did try to directly
+[0:56:41] so like I talked about the dimension
+[0:56:43] reduction was more like oh okay like we
+[0:56:45] have this embeddings but we're just
+[0:56:46] going to collapse them to be to be
+[0:56:48] five-dimensional using
+[0:56:51] using either PCA or using similarities
+[0:56:54] why not just use the neural network
+[0:56:56] directly to create this fivedimensional
+[0:56:59] vector we we did try that we have
+[0:57:02] another appendix on on that and um and
+[0:57:06] it gives it's going to give similar
 [0:57:08] results Um
 [0:57:15] um again like which approach is better I don't I don't know I think the um at
-[0:57:18] don't I don't know I think the um at least well in in in this application it
-[0:57:21] least well in in in this application it wouldn't probably matter that much but
-[0:57:23] wouldn't probably matter that much but uh but maybe with more data we can my
-[0:57:27] uh but maybe with more data we can my sense probably with a lot more data you
-[0:57:29] sense probably with a lot more data you you could probably use just deep
-[0:57:31] you could probably use just deep learning to to create [clears throat] uh
-[0:57:33] learning to to create [clears throat] uh the the the embeddings of the right
-[0:57:35] the the the embeddings of the right dimension that you want and and use
-[0:57:38] dimension that you want and and use them. But uh
-[0:57:41] them. But uh anyway, we we did what we what we did as
-[0:57:43] anyway, we we did what we what we did as preferred approach. That's where we are.
-[0:57:46] preferred approach. That's where we are. &gt;&gt; One last question.
-[0:57:48] &gt;&gt; One last question. &gt;&gt; Thanks for the great talk. I just wanted
-[0:57:49] &gt;&gt; Thanks for the great talk. I just wanted to ask about I guess your empirical
-[0:57:50] to ask about I guess your empirical experience with this data. You you said
-[0:57:52] experience with this data. You you said that you translated the original tabular
-[0:57:54] that you translated the original tabular data into an embedding and then trained
-[0:57:56] data into an embedding and then trained it natural
-[0:57:59] it natural way the 100 years ago way would be to
-[0:58:01] way the 100 years ago way would be to just use the tabular data as is. I just
-[0:58:04] just use the tabular data as is. I just wanted to ask why you made that choice
-[0:58:06] wanted to ask why you made that choice and why you think it's better or worse.
-[0:58:09] and why you think it's better or worse. &gt;&gt; I didn't make that choice. my co-authors
-[0:58:10] &gt;&gt; I didn't make that choice. my co-authors made the choice and I just went along
-[0:58:13] made the choice and I just went along and I did
+[0:57:18] least well in in in this application it
+[0:57:21] wouldn't probably matter that much but
+[0:57:23] uh but maybe with more data we can my
+[0:57:27] sense probably with a lot more data you
+[0:57:29] you could probably use just deep
+[0:57:31] learning to to create [clears throat] uh
+[0:57:33] the the the embeddings of the right
+[0:57:35] dimension that you want and and use
+[0:57:38] them. But uh
+[0:57:41] anyway, we we did what we what we did as
+[0:57:43] preferred approach. That's where we are.
+[0:57:46] >> One last question.
+[0:57:48] >> Thanks for the great talk. I just wanted
+[0:57:49] to ask about I guess your empirical
+[0:57:50] experience with this data. You you said
+[0:57:52] that you translated the original tabular
+[0:57:54] data into an embedding and then trained
+[0:57:56] it natural
+[0:57:59] way the 100 years ago way would be to
+[0:58:01] just use the tabular data as is. I just
+[0:58:04] wanted to ask why you made that choice
+[0:58:06] and why you think it's better or worse.
+[0:58:09] >> I didn't make that choice. my co-authors
+[0:58:10] made the choice and I just went along
 [0:58:16] and I did I don't I I I mean honestly I don't
-[0:58:18] I don't I I I mean honestly I don't think it it matters for this application
-[0:58:20] think it it matters for this application but uh but it's yeah it's a good it's a
-[0:58:24] but uh but it's yeah it's a good it's a good good question like overall like why
-[0:58:26] good good question like overall like why would you want to
-[0:58:29] would you want to especially like if the number of tabular
-[0:58:30] especially like if the number of tabular features is small like why wouldn't like
-[0:58:33] features is small like why wouldn't like why would you want to do embedding there
-[0:58:35] why would you want to do embedding there like no no reason to but um I guess my
-[0:58:38] like no no reason to but um I guess my co my collaboration is wanted to uh to
-[0:58:41] co my collaboration is wanted to uh to kind of illustrate the whole workflow.
-[0:58:43] kind of illustrate the whole workflow. &gt;&gt; I see.
-[0:58:44] &gt;&gt; I see. &gt;&gt; Yeah.
-[0:58:44] &gt;&gt; Yeah. &gt;&gt; I guess one side comment here is I
-[0:58:47] &gt;&gt; I guess one side comment here is I thought it's generally harder to
-[0:58:49] thought it's generally harder to generate tabular data from the embedding
-[0:58:51] generate tabular data from the embedding compared to generating an image from the
-[0:58:53] compared to generating an image from the embedding
+[0:58:18] think it it matters for this application
+[0:58:20] but uh but it's yeah it's a good it's a
+[0:58:24] good good question like overall like why
+[0:58:26] would you want to
+[0:58:29] especially like if the number of tabular
+[0:58:30] features is small like why wouldn't like
+[0:58:33] why would you want to do embedding there
+[0:58:35] like no no reason to but um I guess my
+[0:58:38] co my collaboration is wanted to uh to
+[0:58:41] kind of illustrate the whole workflow.
+[0:58:44] >> I see. >> Yeah.
+[0:58:44] >> Yeah. >> I guess one side comment here is I
+[0:58:47] thought it's generally harder to
+[0:58:49] generate tabular data from the embedding
+[0:58:51] compared to generating an image from the
 [0:58:55] embedding because of the structure of the tabular
-[0:58:57] because of the structure of the tabular data. I mean we can talk offline.
-[0:58:59] data. I mean we can talk offline. &gt;&gt; Yeah, let's talk offline. Yeah.
-[0:59:01] &gt;&gt; Yeah, let's talk offline. Yeah. &gt;&gt; Okay. I think that's it for now and
-[0:59:05] &gt;&gt; Okay. I think that's it for now and let's thank the speaker and we can take
-[0:59:07] let's thank the speaker and we can take other questions outside if people are
-[0:59:08] other questions outside if people are interested.
-[0:59:10] interested. [applause]
+[0:58:57] data. I mean we can talk offline.
+[0:58:59] >> Yeah, let's talk offline. Yeah.
+[0:59:01] >> Okay. I think that's it for now and
+[0:59:05] let's thank the speaker and we can take
+[0:59:07] other questions outside if people are
+[0:59:08] interested.
+[0:59:10] [applause]

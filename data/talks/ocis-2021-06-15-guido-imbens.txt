@@ -1,1698 +1,1561 @@
 [0:00:04] and welcome to the online causal inference seminar today we
-[0:00:06] online causal inference seminar today we are very excited to have a guido
-[0:00:08] are very excited to have a guido who is also an organizer who will talk
-[0:00:10] who is also an organizer who will talk about the using experiments
-[0:00:12] about the using experiments to correct for selection in
-[0:00:13] to correct for selection in observational studies
+[0:00:06] are very excited to have a guido
+[0:00:08] who is also an organizer who will talk
+[0:00:10] about the using experiments
+[0:00:12] to correct for selection in
+[0:00:13] observational studies
 [0:00:19] you can just submit questions at any point and we will
-[0:00:20] point and we will bring them forward to a guido discussion
-[0:00:24] bring them forward to a guido discussion after that we will have a discussion by
-[0:00:25] after that we will have a discussion by uh nathan nathan kellis and then
-[0:00:27] uh nathan nathan kellis and then if we have some more time we'll we'll
-[0:00:30] if we have some more time we'll we'll take some more questions
-[0:00:31] take some more questions uh questions today will be handled by
-[0:00:34] uh questions today will be handled by michael
+[0:00:20] bring them forward to a guido discussion
+[0:00:24] after that we will have a discussion by
+[0:00:25] uh nathan nathan kellis and then
+[0:00:27] if we have some more time we'll we'll
+[0:00:30] take some more questions
+[0:00:31] uh questions today will be handled by
 [0:00:36] michael uh thanks dominic so uh we have uh
-[0:00:40] uh thanks dominic so uh we have uh no co-authors today uh helping with
-[0:00:41] no co-authors today uh helping with questions so we're just gonna direct all
-[0:00:43] questions so we're just gonna direct all of them tahito please
-[0:00:45] of them tahito please submit your questions through the q a
-[0:00:47] submit your questions through the q a box not the chat
-[0:00:48] box not the chat box the chat box can be used if you have
-[0:00:51] box the chat box can be used if you have something specific you want to ask the
-[0:00:54] something specific you want to ask the panelists about
-[0:00:56] panelists about but the questions about the content of
-[0:00:57] but the questions about the content of the talk should should come through q a
-[0:01:00] the talk should should come through q a um and i may ask you to uh if you'd like
-[0:01:03] um and i may ask you to uh if you'd like to ask your question live uh in which
-[0:01:05] to ask your question live uh in which case
+[0:00:40] no co-authors today uh helping with
+[0:00:41] questions so we're just gonna direct all
+[0:00:43] of them tahito please
+[0:00:45] submit your questions through the q a
+[0:00:47] box not the chat
+[0:00:48] box the chat box can be used if you have
+[0:00:51] something specific you want to ask the
+[0:00:54] panelists about
+[0:00:56] but the questions about the content of
+[0:00:57] the talk should should come through q a
+[0:01:00] um and i may ask you to uh if you'd like
+[0:01:03] to ask your question live uh in which
 [0:01:05] case just keep in mind that the talk is being
-[0:01:07] just keep in mind that the talk is being recorded uh with that guido please
-[0:01:09] recorded uh with that guido please take it take it away whenever you're
-[0:01:11] take it take it away whenever you're ready
+[0:01:07] recorded uh with that guido please
+[0:01:09] take it take it away whenever you're
 [0:01:12] ready okay let me um share my screen
 [0:01:25] it still says i i'm not allowed to you have to stop scaring your screen i
-[0:01:27] you have to stop scaring your screen i think there we go
+[0:01:27] think there we go
 [0:01:41] okay um thanks very much very happy to uh to give this talk first
-[0:01:43] very happy to uh to give this talk first of all as you say this is uh
-[0:01:45] of all as you say this is uh joint uh work with uh
-[0:01:49] joint uh work with uh susan uh athey who's also here at
-[0:01:51] susan uh athey who's also here at stamford
+[0:01:43] of all as you say this is uh
+[0:01:45] joint uh work with uh
+[0:01:49] susan uh athey who's also here at
 [0:01:52] stamford uh and wright's chatty who used to be at
-[0:01:55] uh and wright's chatty who used to be at stanford uh
-[0:01:55] stanford uh but then went back to uh to harvard uh
-[0:01:58] but then went back to uh to harvard uh to the economics department there
-[0:02:00] to the economics department there and so um in this project
-[0:02:03] and so um in this project and really there's kind of two papers
-[0:02:05] and really there's kind of two papers here that i'm just going to talk about
-[0:02:06] here that i'm just going to talk about uh
+[0:01:55] stanford uh
+[0:01:55] but then went back to uh to harvard uh
+[0:01:58] to the economics department there
+[0:02:00] and so um in this project
+[0:02:03] and really there's kind of two papers
+[0:02:05] here that i'm just going to talk about
 [0:02:07] uh one here today kind of in general we're
-[0:02:10] one here today kind of in general we're thinking about how to combine
-[0:02:13] thinking about how to combine different uh types of data
-[0:02:16] different uh types of data when you're estimating uh causal effects
-[0:02:18] when you're estimating uh causal effects because in particular we kind of we're
-[0:02:20] because in particular we kind of we're thinking about settings
-[0:02:22] thinking about settings where we may have some experimental data
-[0:02:24] where we may have some experimental data but those experimental data may have
-[0:02:26] but those experimental data may have limitations
-[0:02:27] limitations they may not have have a lot of
-[0:02:29] they may not have have a lot of information they may
-[0:02:31] information they may be relatively small and at the same time
-[0:02:34] be relatively small and at the same time we
+[0:02:10] thinking about how to combine
+[0:02:13] different uh types of data
+[0:02:16] when you're estimating uh causal effects
+[0:02:18] because in particular we kind of we're
+[0:02:20] thinking about settings
+[0:02:22] where we may have some experimental data
+[0:02:24] but those experimental data may have
+[0:02:26] limitations
+[0:02:27] they may not have have a lot of
+[0:02:29] information they may
+[0:02:31] be relatively small and at the same time
 [0:02:35] we do have observational data which often
-[0:02:38] do have observational data which often are very rich in terms of the variables
-[0:02:41] are very rich in terms of the variables we observe but they may not be
-[0:02:44] we observe but they may not be quite so good in terms of uh internal
-[0:02:47] quite so good in terms of uh internal validity
+[0:02:38] are very rich in terms of the variables
+[0:02:41] we observe but they may not be
+[0:02:44] quite so good in terms of uh internal
 [0:02:49] validity there may be lots of selection going on
-[0:02:51] there may be lots of selection going on in the
 [0:02:52] in the treatments there and the observations in
-[0:02:54] treatments there and the observations in the units we see in the
-[0:02:55] the units we see in the in the observational sample and so what
-[0:02:58] in the observational sample and so what we're trying to do
-[0:02:59] we're trying to do in general is going to try to come up
-[0:03:02] in general is going to try to come up develop systematic ways of combining
-[0:03:06] develop systematic ways of combining experimental observational data
-[0:03:08] experimental observational data to get the best out of uh both types of
-[0:03:11] to get the best out of uh both types of of data and unlike kind of some other
-[0:03:14] of data and unlike kind of some other problems
+[0:02:54] the units we see in the
+[0:02:55] in the observational sample and so what
+[0:02:58] we're trying to do
+[0:02:59] in general is going to try to come up
+[0:03:02] develop systematic ways of combining
+[0:03:06] experimental observational data
+[0:03:08] to get the best out of uh both types of
+[0:03:11] of data and unlike kind of some other
 [0:03:16] problems in calls or inference some which have
-[0:03:18] in calls or inference some which have worked on kind of
-[0:03:20] worked on kind of for example estimating average treatment
-[0:03:22] for example estimating average treatment effects and unconfoundingness
-[0:03:24] effects and unconfoundingness here there's not one there's not one
-[0:03:26] here there's not one there's not one single setting that is of interest
-[0:03:28] single setting that is of interest there's lots of different uh versions of
-[0:03:31] there's lots of different uh versions of these problems that may come
-[0:03:32] these problems that may come up in particular cases and so here
-[0:03:36] up in particular cases and so here at some level this is kind of a fairly
-[0:03:38] at some level this is kind of a fairly narrow talk
-[0:03:39] narrow talk where there's going to be a very
-[0:03:40] where there's going to be a very specific setting we look at
-[0:03:43] specific setting we look at but we thought this was an interesting
-[0:03:45] but we thought this was an interesting setting um
-[0:03:46] setting um and we'll try and make the case for that
-[0:03:48] and we'll try and make the case for that uh and that's sort of
-[0:03:49] uh and that's sort of interesting at least from our
-[0:03:51] interesting at least from our perspective results uh for that
-[0:03:53] perspective results uh for that particular setting uh
-[0:03:55] particular setting uh and so this this may be helpful more
-[0:03:57] and so this this may be helpful more generally kind of for thinking about how
-[0:03:59] generally kind of for thinking about how to uh
+[0:03:18] worked on kind of
+[0:03:20] for example estimating average treatment
+[0:03:22] effects and unconfoundingness
+[0:03:24] here there's not one there's not one
+[0:03:26] single setting that is of interest
+[0:03:28] there's lots of different uh versions of
+[0:03:31] these problems that may come
+[0:03:32] up in particular cases and so here
+[0:03:36] at some level this is kind of a fairly
+[0:03:38] narrow talk
+[0:03:39] where there's going to be a very
+[0:03:40] specific setting we look at
+[0:03:43] but we thought this was an interesting
+[0:03:45] setting um
+[0:03:46] and we'll try and make the case for that
+[0:03:48] uh and that's sort of
+[0:03:49] interesting at least from our
+[0:03:51] perspective results uh for that
+[0:03:53] particular setting uh
+[0:03:55] and so this this may be helpful more
+[0:03:57] generally kind of for thinking about how
 [0:04:00] to uh combine observational and experimental
-[0:04:02] combine observational and experimental data in
 [0:04:03] data in in other settings and so
-[0:04:07] in other settings and so the hope is that by by finding
-[0:04:09] the hope is that by by finding systematic solutions for this
-[0:04:10] systematic solutions for this we can make experiments more valuable
-[0:04:14] we can make experiments more valuable by extending their value beyond the
-[0:04:16] by extending their value beyond the narrow questions they were intended for
-[0:04:20] narrow questions they were intended for and will make their observational
-[0:04:21] and will make their observational studies more more
-[0:04:23] studies more more valuable more credible by kind of
-[0:04:24] valuable more credible by kind of grounding them by kind of forcing them
-[0:04:26] grounding them by kind of forcing them to be consistent with uh results from uh
-[0:04:29] to be consistent with uh results from uh from experimental data
-[0:04:32] from experimental data and so the specific uh setting
-[0:04:37] and so the specific uh setting mentioned two specific settings kind of
-[0:04:39] mentioned two specific settings kind of the one the uh
-[0:04:40] the one the uh we study here and a slightly different
-[0:04:43] we study here and a slightly different one
+[0:04:07] the hope is that by by finding
+[0:04:09] systematic solutions for this
+[0:04:10] we can make experiments more valuable
+[0:04:14] by extending their value beyond the
+[0:04:16] narrow questions they were intended for
+[0:04:20] and will make their observational
+[0:04:21] studies more more
+[0:04:23] valuable more credible by kind of
+[0:04:24] grounding them by kind of forcing them
+[0:04:26] to be consistent with uh results from uh
+[0:04:29] from experimental data
+[0:04:32] and so the specific uh setting
+[0:04:37] mentioned two specific settings kind of
+[0:04:39] the one the uh
+[0:04:40] we study here and a slightly different
 [0:04:44] one so here we're looking at a setting but
-[0:04:45] so here we're looking at a setting but observational data the problem with the
-[0:04:47] observational data the problem with the observational data
-[0:04:49] observational data is that they they have limited uh
-[0:04:51] is that they they have limited uh internal validity
-[0:04:52] internal validity we're looking at a setting but we're
-[0:04:53] we're looking at a setting but we're interested in the causal effect of class
-[0:04:56] interested in the causal effect of class size
+[0:04:45] observational data the problem with the
+[0:04:47] observational data
+[0:04:49] is that they they have limited uh
+[0:04:51] internal validity
+[0:04:52] we're looking at a setting but we're
+[0:04:53] interested in the causal effect of class
 [0:04:57] size and we have the informational students
-[0:05:00] and we have the informational students uh
 [0:05:00] uh we either went to big classes or small
-[0:05:04] we either went to big classes or small classes
 [0:05:05] classes and then we we observed some outcomes uh
-[0:05:08] and then we we observed some outcomes uh kind of then to be specific here we
-[0:05:11] kind of then to be specific here we observed
+[0:05:08] kind of then to be specific here we
 [0:05:11] observed some early test scores and some final
-[0:05:14] some early test scores and some final test scores
-[0:05:16] test scores but we're worried that the people who
-[0:05:17] but we're worried that the people who went to the big the students who went to
-[0:05:19] went to the big the students who went to the big classes versus the small classes
-[0:05:21] the big classes versus the small classes may be different in lots of ways that we
-[0:05:23] may be different in lots of ways that we didn't observe in the
-[0:05:25] didn't observe in the in the data so we may have some
-[0:05:26] in the data so we may have some coherence but it may
-[0:05:28] coherence but it may not be enough to deal with all the
-[0:05:30] not be enough to deal with all the selection issues
-[0:05:32] selection issues the plaguing comparisons between
-[0:05:36] the plaguing comparisons between small and big class size students and so
-[0:05:39] small and big class size students and so then in addition we have the
-[0:05:41] then in addition we have the experimental data
-[0:05:43] experimental data but there we don't the experimental data
-[0:05:46] but there we don't the experimental data is not quite as rich as the
-[0:05:48] is not quite as rich as the observational data we only have
-[0:05:49] observational data we only have information on class size
-[0:05:51] information on class size and early test scores and what we're
-[0:05:53] and early test scores and what we're really interested in
-[0:05:54] really interested in is the effect of the class size on the
-[0:05:57] is the effect of the class size on the on the final test scores
-[0:05:59] on the final test scores and so we do from the experimental data
-[0:06:02] and so we do from the experimental data get good estimates
-[0:06:04] get good estimates on the effect on early test scores
-[0:06:07] on the effect on early test scores but we don't get anything directly
-[0:06:10] but we don't get anything directly from the experimental data about the
-[0:06:11] from the experimental data about the effect of final test scores
-[0:06:13] effect of final test scores and we so we're going to try combine
-[0:06:16] and we so we're going to try combine these two data sets
-[0:06:17] these two data sets to address the concerns that just
-[0:06:19] to address the concerns that just comparing treaty and controls in the
-[0:06:21] comparing treaty and controls in the observational data
-[0:06:22] observational data is not going to give us the right
-[0:06:25] is not going to give us the right results
+[0:05:14] test scores
+[0:05:16] but we're worried that the people who
+[0:05:17] went to the big the students who went to
+[0:05:19] the big classes versus the small classes
+[0:05:21] may be different in lots of ways that we
+[0:05:23] didn't observe in the
+[0:05:25] in the data so we may have some
+[0:05:26] coherence but it may
+[0:05:28] not be enough to deal with all the
+[0:05:30] selection issues
+[0:05:32] the plaguing comparisons between
+[0:05:36] small and big class size students and so
+[0:05:39] then in addition we have the
+[0:05:41] experimental data
+[0:05:43] but there we don't the experimental data
+[0:05:46] is not quite as rich as the
+[0:05:48] observational data we only have
+[0:05:49] information on class size
+[0:05:51] and early test scores and what we're
+[0:05:53] really interested in
+[0:05:54] is the effect of the class size on the
+[0:05:57] on the final test scores
+[0:05:59] and so we do from the experimental data
+[0:06:02] get good estimates
+[0:06:04] on the effect on early test scores
+[0:06:07] but we don't get anything directly
+[0:06:10] from the experimental data about the
+[0:06:11] effect of final test scores
+[0:06:13] and we so we're going to try combine
+[0:06:16] these two data sets
+[0:06:17] to address the concerns that just
+[0:06:19] comparing treaty and controls in the
+[0:06:21] observational data
+[0:06:22] is not going to give us the right
 [0:06:27] results and so a kind of slightly different
-[0:06:29] and so a kind of slightly different example
 [0:06:30] example is where in the observational data
-[0:06:34] is where in the observational data we don't have the the
-[0:06:37] we don't have the the intermediate variable the the early
-[0:06:39] intermediate variable the the early outcome the
-[0:06:41] outcome the early test score and so that is a
-[0:06:44] early test score and so that is a setting
+[0:06:34] we don't have the the
+[0:06:37] intermediate variable the the early
+[0:06:39] outcome the
+[0:06:41] early test score and so that is a
 [0:06:45] setting that is typically referred to as
-[0:06:47] that is typically referred to as surrogacy where we have a data set an
-[0:06:49] surrogacy where we have a data set an experimental data set
-[0:06:52] experimental data set that is just like the first setting
-[0:06:53] that is just like the first setting where we have information on the
-[0:06:55] where we have information on the treatment
+[0:06:47] surrogacy where we have a data set an
+[0:06:49] experimental data set
+[0:06:52] that is just like the first setting
+[0:06:53] where we have information on the
 [0:06:56] treatment and an initial outcome a secondary
-[0:06:58] and an initial outcome a secondary outcome
 [0:06:59] outcome but observational data contain
-[0:07:02] but observational data contain information
-[0:07:02] information only on the early outcome and the late
-[0:07:05] only on the early outcome and the late outcome but not on the treatment
-[0:07:08] outcome but not on the treatment and so in in a paper with
-[0:07:11] and so in in a paper with with also hyun sun khan can we look at
-[0:07:15] with also hyun sun khan can we look at that setting kind of we tied it in with
-[0:07:18] that setting kind of we tied it in with some of the earlier literature on the on
-[0:07:21] some of the earlier literature on the on surrogacy
+[0:07:02] information
+[0:07:02] only on the early outcome and the late
+[0:07:05] outcome but not on the treatment
+[0:07:08] and so in in a paper with
+[0:07:11] with also hyun sun khan can we look at
+[0:07:15] that setting kind of we tied it in with
+[0:07:18] some of the earlier literature on the on
 [0:07:22] surrogacy but so today i'm going to just look at
-[0:07:25] but so today i'm going to just look at this particular case and so the
-[0:07:28] this particular case and so the application i'm going to use
-[0:07:30] application i'm going to use is from it's an educational one
-[0:07:33] is from it's an educational one where the treatment is class size and
-[0:07:36] where the treatment is class size and we're interested in some
-[0:07:38] we're interested in some later educational outcome and we have
-[0:07:41] later educational outcome and we have some early
-[0:07:43] some early test scores in both their observational
-[0:07:45] test scores in both their observational and the experimental data
-[0:07:48] and the experimental data and kind of to make that uh specific so
-[0:07:51] and kind of to make that uh specific so here
+[0:07:25] this particular case and so the
+[0:07:28] application i'm going to use
+[0:07:30] is from it's an educational one
+[0:07:33] where the treatment is class size and
+[0:07:36] we're interested in some
+[0:07:38] later educational outcome and we have
+[0:07:41] some early
+[0:07:43] test scores in both their observational
+[0:07:45] and the experimental data
+[0:07:48] and kind of to make that uh specific so
 [0:07:51] here the observational data and kind of the
-[0:07:54] the observational data and kind of the data we're
-[0:07:55] data we're in the end most interested in is from
-[0:07:57] in the end most interested in is from new york we have information on a whole
-[0:07:59] new york we have information on a whole bunch of students
-[0:08:00] bunch of students uh whether they were in big or small
-[0:08:02] uh whether they were in big or small classes uh
-[0:08:04] classes uh and we see the average outcome the
-[0:08:07] and we see the average outcome the average test score
-[0:08:08] average test score in third grade and an eighth grade for
-[0:08:10] in third grade and an eighth grade for these
+[0:07:54] data we're
+[0:07:55] in the end most interested in is from
+[0:07:57] new york we have information on a whole
+[0:07:59] bunch of students
+[0:08:00] uh whether they were in big or small
+[0:08:02] classes uh
+[0:08:04] and we see the average outcome the
+[0:08:07] average test score
+[0:08:08] in third grade and an eighth grade for
 [0:08:11] these these students and so if we just compare
-[0:08:14] these students and so if we just compare the average test scores in third grade
-[0:08:17] the average test scores in third grade for
+[0:08:14] the average test scores in third grade
 [0:08:18] for the small class and the the
-[0:08:21] the small class and the the regular class size we see that uh the
-[0:08:24] regular class size we see that uh the effect
+[0:08:21] regular class size we see that uh the
 [0:08:25] effect in the difference in new york is uh
-[0:08:28] in the difference in new york is uh quite substantial and and highly
-[0:08:31] quite substantial and and highly significant and negative
-[0:08:32] significant and negative so it looks like uh if you're taking
-[0:08:35] so it looks like uh if you're taking that at face value as an estimate of the
-[0:08:36] that at face value as an estimate of the calls the fact
-[0:08:37] calls the fact that there's a big negative effect of
-[0:08:40] that there's a big negative effect of being in a small class
-[0:08:41] being in a small class and the same for
-[0:08:46] the same for eighth grade there's a big negative effect of being in a small
-[0:08:48] negative effect of being in a small class size early on so
-[0:08:50] class size early on so the treatment is being in a smaller big
-[0:08:51] the treatment is being in a smaller big class size early on in
-[0:08:54] class size early on in before third grade and
-[0:08:57] before third grade and here these comparisons kind of look a
-[0:08:59] here these comparisons kind of look a little counter-intuitive
-[0:09:00] little counter-intuitive it looks like being in a small class
-[0:09:02] it looks like being in a small class size is actually really bad for these
-[0:09:04] size is actually really bad for these these students because there's concern
-[0:09:06] these students because there's concern that this is an observational study
-[0:09:09] that this is an observational study and that these uh students are not
-[0:09:11] and that these uh students are not directly uh
-[0:09:12] directly uh comparable and in fact this
-[0:09:15] comparable and in fact this this very direct evidence of that from
-[0:09:18] this very direct evidence of that from the second data set uh
-[0:09:20] the second data set uh this is a experimental study project
-[0:09:23] this is a experimental study project star
+[0:08:28] quite substantial and and highly
+[0:08:31] significant and negative
+[0:08:32] so it looks like uh if you're taking
+[0:08:35] that at face value as an estimate of the
+[0:08:36] calls the fact
+[0:08:37] that there's a big negative effect of
+[0:08:40] being in a small class
+[0:08:41] and the same for
+[0:08:46] eighth grade there's a big negative effect of being in a small
+[0:08:48] class size early on so
+[0:08:50] the treatment is being in a smaller big
+[0:08:51] class size early on in
+[0:08:54] before third grade and
+[0:08:57] here these comparisons kind of look a
+[0:08:59] little counter-intuitive
+[0:09:00] it looks like being in a small class
+[0:09:02] size is actually really bad for these
+[0:09:04] these students because there's concern
+[0:09:06] that this is an observational study
+[0:09:09] and that these uh students are not
+[0:09:11] directly uh
+[0:09:12] comparable and in fact this
+[0:09:15] this very direct evidence of that from
+[0:09:18] the second data set uh
+[0:09:20] this is a experimental study project
 [0:09:25] star where the students were randomly
-[0:09:28] where the students were randomly assigned to be in a
-[0:09:29] assigned to be in a small regular class and we
-[0:09:32] small regular class and we observed the same test scores in uh
-[0:09:35] observed the same test scores in uh but just in third grade and now we see
-[0:09:39] but just in third grade and now we see that in fact being in a small class
-[0:09:43] that in fact being in a small class is much better for the students in terms
-[0:09:45] is much better for the students in terms of test scores the students in the small
-[0:09:47] of test scores the students in the small classes
+[0:09:28] assigned to be in a
+[0:09:29] small regular class and we
+[0:09:32] observed the same test scores in uh
+[0:09:35] but just in third grade and now we see
+[0:09:39] that in fact being in a small class
+[0:09:43] is much better for the students in terms
+[0:09:45] of test scores the students in the small
 [0:09:48] classes do much better than the students in the
-[0:09:52] do much better than the students in the in the regular class but here
-[0:09:55] in the regular class but here and this is kind of slightly artificial
-[0:09:57] and this is kind of slightly artificial uh here what we
-[0:09:59] uh here what we were interested in it is not what's
-[0:10:00] were interested in it is not what's happening in the third grade we want to
-[0:10:03] happening in the third grade we want to know what's happening in uh
-[0:10:04] know what's happening in uh in eighth grade and we don't see that in
-[0:10:06] in eighth grade and we don't see that in uh in project star
-[0:10:08] uh in project star we didn't we didn't follow the the
-[0:10:10] we didn't we didn't follow the the students there long enough
-[0:10:13] students there long enough to do that and the more realistic
-[0:10:14] to do that and the more realistic setting is you may actually
-[0:10:16] setting is you may actually we're not really interested in test
-[0:10:18] we're not really interested in test scores at all we're interested in
-[0:10:20] scores at all we're interested in how these students do in the labor
-[0:10:21] how these students do in the labor market so something much longer term
-[0:10:24] market so something much longer term where we you're never going to be able
-[0:10:26] where we you're never going to be able to wait long enough to get the
-[0:10:28] to wait long enough to get the experimental results but given that
-[0:10:32] experimental results but given that given these uh these three pieces of the
-[0:10:35] given these uh these three pieces of the puzzle the
-[0:10:36] puzzle the third grade the outcomes
-[0:10:39] third grade the outcomes in the experiment and both the third
-[0:10:42] in the experiment and both the third grade and eighth grade outcomes
-[0:10:43] grade and eighth grade outcomes in uh in new york question is how
-[0:10:47] in uh in new york question is how how do we estimate kind of the
-[0:10:50] how do we estimate kind of the causal effect of a small class
-[0:10:53] causal effect of a small class in um how do we estimate the cost effect
-[0:10:57] in um how do we estimate the cost effect of uh
+[0:09:52] in the regular class but here
+[0:09:55] and this is kind of slightly artificial
+[0:09:57] uh here what we
+[0:09:59] were interested in it is not what's
+[0:10:00] happening in the third grade we want to
+[0:10:03] know what's happening in uh
+[0:10:04] in eighth grade and we don't see that in
+[0:10:06] uh in project star
+[0:10:08] we didn't we didn't follow the the
+[0:10:10] students there long enough
+[0:10:13] to do that and the more realistic
+[0:10:14] setting is you may actually
+[0:10:16] we're not really interested in test
+[0:10:18] scores at all we're interested in
+[0:10:20] how these students do in the labor
+[0:10:21] market so something much longer term
+[0:10:24] where we you're never going to be able
+[0:10:26] to wait long enough to get the
+[0:10:28] experimental results but given that
+[0:10:32] given these uh these three pieces of the
+[0:10:35] puzzle the
+[0:10:36] third grade the outcomes
+[0:10:39] in the experiment and both the third
+[0:10:42] grade and eighth grade outcomes
+[0:10:43] in uh in new york question is how
+[0:10:47] how do we estimate kind of the
+[0:10:50] causal effect of a small class
+[0:10:53] in um how do we estimate the cost effect
 [0:10:57] of uh a small class for eighth grade and so we
-[0:11:00] a small class for eighth grade and so we could
 [0:11:01] could just say well the the experimental data
-[0:11:04] just say well the the experimental data are not relevant because they don't have
-[0:11:05] are not relevant because they don't have information on that and so we just go
-[0:11:07] information on that and so we just go with the
+[0:11:04] are not relevant because they don't have
+[0:11:05] information on that and so we just go
+[0:11:07] with the
 [0:11:14] minus 0.118 from the observational data but it doesn't leak
-[0:11:15] but it doesn't leak that doesn't seem very plausible given
-[0:11:17] that doesn't seem very plausible given that we see
-[0:11:19] that we see in uh for the third grade given that we
-[0:11:21] in uh for the third grade given that we see such a big difference
-[0:11:23] see such a big difference in the effect of small class size
-[0:11:27] in the effect of small class size it doesn't seem very plausible that the
-[0:11:30] it doesn't seem very plausible that the minus point one one
-[0:11:31] minus point one one eight is really credible uh that that we
-[0:11:34] eight is really credible uh that that we should
+[0:11:15] that doesn't seem very plausible given
+[0:11:17] that we see
+[0:11:19] in uh for the third grade given that we
+[0:11:21] see such a big difference
+[0:11:23] in the effect of small class size
+[0:11:27] it doesn't seem very plausible that the
+[0:11:30] minus point one one
+[0:11:31] eight is really credible uh that that we
 [0:11:34] should should believe that as a co estimate of
-[0:11:36] should believe that as a co estimate of the causal effect
-[0:11:38] the causal effect and so that as soon kind of the rest of
-[0:11:42] and so that as soon kind of the rest of the analysis
-[0:11:42] the analysis is just trying to make that precise and
-[0:11:44] is just trying to make that precise and kind of be clear about the assumptions
-[0:11:46] kind of be clear about the assumptions we're going to need
-[0:11:47] we're going to need to improve on that estimate of minus
-[0:11:49] to improve on that estimate of minus 0.118
+[0:11:36] the causal effect
+[0:11:38] and so that as soon kind of the rest of
+[0:11:42] the analysis
+[0:11:42] is just trying to make that precise and
+[0:11:44] kind of be clear about the assumptions
+[0:11:46] we're going to need
+[0:11:47] to improve on that estimate of minus
 [0:11:51] 0.118 and essentially what we're going to do
-[0:11:54] and essentially what we're going to do is we're going to interpret
-[0:11:56] is we're going to interpret the difference between the project star
-[0:11:58] the difference between the project star estimate for third grade
-[0:12:00] estimate for third grade the 0.201 and the new york estimate for
-[0:12:03] the 0.201 and the new york estimate for third grade
-[0:12:04] third grade the minus 0.138 we're going to interpret
-[0:12:08] the minus 0.138 we're going to interpret that as evidence that a selection in new
-[0:12:10] that as evidence that a selection in new york
+[0:11:54] is we're going to interpret
+[0:11:56] the difference between the project star
+[0:11:58] estimate for third grade
+[0:12:00] the 0.201 and the new york estimate for
+[0:12:03] third grade
+[0:12:04] the minus 0.138 we're going to interpret
+[0:12:08] that as evidence that a selection in new
 [0:12:12] york rather than and that would be in
-[0:12:14] rather than and that would be in principle perfectly valid
-[0:12:15] principle perfectly valid alternative interpretation we could
-[0:12:17] alternative interpretation we could interpret this people in new york are
-[0:12:18] interpret this people in new york are just different and the calls or facts
-[0:12:20] just different and the calls or facts are different
-[0:12:21] are different it's perfectly possible that minus 0.138
-[0:12:25] it's perfectly possible that minus 0.138 is the causal effect in new york and it
-[0:12:27] is the causal effect in new york and it just differs from what it is in project
-[0:12:29] just differs from what it is in project star
+[0:12:14] principle perfectly valid
+[0:12:15] alternative interpretation we could
+[0:12:17] interpret this people in new york are
+[0:12:18] just different and the calls or facts
+[0:12:20] are different
+[0:12:21] it's perfectly possible that minus 0.138
+[0:12:25] is the causal effect in new york and it
+[0:12:27] just differs from what it is in project
 [0:12:30] star but we're going to assume that in fact
-[0:12:33] but we're going to assume that in fact the reason for this difference is not
-[0:12:34] the reason for this difference is not that these populations are different
-[0:12:37] that these populations are different but solely that the selection is
-[0:12:40] but solely that the selection is different
+[0:12:33] the reason for this difference is not
+[0:12:34] that these populations are different
+[0:12:37] but solely that the selection is
 [0:12:41] different in new york and project star and project
-[0:12:43] in new york and project star and project style we know what it is
-[0:12:44] style we know what it is it's random there and so this is a call
-[0:12:47] it's random there and so this is a call so in fact
-[0:12:48] so in fact we're going to interpret this difference
-[0:12:50] we're going to interpret this difference as coming from the fact
-[0:12:51] as coming from the fact that in new york the selection was
-[0:12:53] that in new york the selection was confounded that there's
-[0:12:55] confounded that there's unobserved confounders that made this
-[0:12:57] unobserved confounders that made this minus 0.138
-[0:12:59] minus 0.138 different from the 0.21 and moreover
-[0:13:03] different from the 0.21 and moreover we're going to assume that whatever the
-[0:13:06] we're going to assume that whatever the selection
+[0:12:43] style we know what it is
+[0:12:44] it's random there and so this is a call
+[0:12:47] so in fact
+[0:12:48] we're going to interpret this difference
+[0:12:50] as coming from the fact
+[0:12:51] that in new york the selection was
+[0:12:53] confounded that there's
+[0:12:55] unobserved confounders that made this
+[0:12:57] minus 0.138
+[0:12:59] different from the 0.21 and moreover
+[0:13:03] we're going to assume that whatever the
 [0:13:07] selection was into the small and big class sizes
-[0:13:11] was into the small and big class sizes that invalidates this estimate
-[0:13:14] that invalidates this estimate that is exactly the same as the
-[0:13:16] that is exactly the same as the unobserved confounder that is
-[0:13:18] unobserved confounder that is invalidating this estimate
-[0:13:20] invalidating this estimate and so we're going to be able to
-[0:13:22] and so we're going to be able to leverage
+[0:13:11] that invalidates this estimate
+[0:13:14] that is exactly the same as the
+[0:13:16] unobserved confounder that is
+[0:13:18] invalidating this estimate
+[0:13:20] and so we're going to be able to
 [0:13:23] leverage the difference between these estimates
-[0:13:25] the difference between these estimates to get a better estimate for eighth
-[0:13:27] to get a better estimate for eighth grade
+[0:13:25] to get a better estimate for eighth
 [0:13:29] grade here we have a question yes what are the
-[0:13:32] here we have a question yes what are the units of the test scores and the range
-[0:13:35] units of the test scores and the range um so the test scores are normalized
-[0:13:38] um so the test scores are normalized so so for some population there the mean
-[0:13:42] so so for some population there the mean zero
+[0:13:32] units of the test scores and the range
+[0:13:35] um so the test scores are normalized
+[0:13:38] so so for some population there the mean
 [0:13:43] zero and standard deviation one
-[0:13:49] and standard deviation one i don't i think they're normalized kind
-[0:13:51] i don't i think they're normalized kind of for the new york
-[0:13:52] of for the new york data yeah so but
-[0:13:55] data yeah so but it's it's the same test score in
-[0:13:58] it's it's the same test score in principle and
-[0:13:59] principle and so they're but they're normalized so
-[0:14:02] so they're but they're normalized so the the units themselves don't don't
-[0:14:04] the the units themselves don't don't really mean very much
-[0:14:06] really mean very much other sort of their standard deviations
-[0:14:08] other sort of their standard deviations of uh of the test score
+[0:13:49] i don't i think they're normalized kind
+[0:13:51] of for the new york
+[0:13:52] data yeah so but
+[0:13:55] it's it's the same test score in
+[0:13:58] principle and
+[0:13:59] so they're but they're normalized so
+[0:14:02] the the units themselves don't don't
+[0:14:04] really mean very much
+[0:14:06] other sort of their standard deviations
+[0:14:08] of uh of the test score
 [0:14:15] okay and uh just one more question from emily mcglynn
-[0:14:16] emily mcglynn uh it's reads just out of curiosity i
-[0:14:18] uh it's reads just out of curiosity i expected an opposite bias from
-[0:14:19] expected an opposite bias from unobserved variables in this problem
-[0:14:21] unobserved variables in this problem that students selected into smaller
-[0:14:22] that students selected into smaller class sizes at higher likelihood of a
-[0:14:24] class sizes at higher likelihood of a good test or
-[0:14:25] good test or just curious what's going on here well
-[0:14:27] just curious what's going on here well so this is
-[0:14:28] so this is this is just a public school so there's
-[0:14:30] this is just a public school so there's kind of a whole bunch of different
-[0:14:33] kind of a whole bunch of different selection things going on and so
-[0:14:36] selection things going on and so they may dedicate more
-[0:14:39] they may dedicate more teachers and as a result smaller
-[0:14:41] teachers and as a result smaller classrooms to
-[0:14:43] classrooms to schools that have more challenging
-[0:14:46] schools that have more challenging environments
+[0:14:16] uh it's reads just out of curiosity i
+[0:14:18] expected an opposite bias from
+[0:14:19] unobserved variables in this problem
+[0:14:21] that students selected into smaller
+[0:14:22] class sizes at higher likelihood of a
+[0:14:24] good test or
+[0:14:25] just curious what's going on here well
+[0:14:27] so this is
+[0:14:28] this is just a public school so there's
+[0:14:30] kind of a whole bunch of different
+[0:14:33] selection things going on and so
+[0:14:36] they may dedicate more
+[0:14:39] teachers and as a result smaller
+[0:14:41] classrooms to
+[0:14:43] schools that have more challenging
+[0:14:46] environments
 [0:14:52] okay maybe uh maybe you can go on for now
 [0:14:53] now okay yeah so in terms of uh
-[0:14:58] okay yeah so in terms of uh graphical representation kind of what
-[0:15:00] graphical representation kind of what we're thinking about here
-[0:15:01] we're thinking about here is having these two data sets uh where
-[0:15:04] is having these two data sets uh where what we're interested in
-[0:15:06] what we're interested in kind of the main the
-[0:15:09] kind of the main the object of interest is the effect of
-[0:15:11] object of interest is the effect of class size
-[0:15:12] class size on eighth grade scores then
-[0:15:15] on eighth grade scores then but there's a problem that there's this
-[0:15:17] but there's a problem that there's this unobserved confounder
-[0:15:19] unobserved confounder that affects both classroom size and
-[0:15:22] that affects both classroom size and then eighth grade scores then that we
-[0:15:26] then eighth grade scores then that we can't adjust for because it's uh
-[0:15:28] can't adjust for because it's uh it's not observed but what and what
-[0:15:31] it's not observed but what and what we're going to do
-[0:15:32] we're going to do is exploit the fact that we have a
-[0:15:34] is exploit the fact that we have a second data set
-[0:15:36] second data set set this experimental data where we've
-[0:15:39] set this experimental data where we've gotten rid of the link between the
-[0:15:41] gotten rid of the link between the unobserved confounder
-[0:15:43] unobserved confounder and classroom size because classroom
-[0:15:44] and classroom size because classroom size is uh randomly assigned
-[0:15:47] size is uh randomly assigned but there the problem is we don't see
-[0:15:49] but there the problem is we don't see the eighth grade
-[0:15:51] the eighth grade scores and so what we're going to do is
-[0:15:54] scores and so what we're going to do is estimate
+[0:14:58] graphical representation kind of what
+[0:15:00] we're thinking about here
+[0:15:01] is having these two data sets uh where
+[0:15:04] what we're interested in
+[0:15:06] kind of the main the
+[0:15:09] object of interest is the effect of
+[0:15:11] class size
+[0:15:12] on eighth grade scores then
+[0:15:15] but there's a problem that there's this
+[0:15:17] unobserved confounder
+[0:15:19] that affects both classroom size and
+[0:15:22] then eighth grade scores then that we
+[0:15:26] can't adjust for because it's uh
+[0:15:28] it's not observed but what and what
+[0:15:31] we're going to do
+[0:15:32] is exploit the fact that we have a
+[0:15:34] second data set
+[0:15:36] set this experimental data where we've
+[0:15:39] gotten rid of the link between the
+[0:15:41] unobserved confounder
+[0:15:43] and classroom size because classroom
+[0:15:44] size is uh randomly assigned
+[0:15:47] but there the problem is we don't see
+[0:15:49] the eighth grade
+[0:15:51] scores and so what we're going to do is
 [0:15:55] estimate the causal fact of classroom size on
-[0:15:59] the causal fact of classroom size on an eighth grade scores and use that
-[0:16:02] an eighth grade scores and use that information
-[0:16:03] information to learn something about the unobserved
-[0:16:05] to learn something about the unobserved confounder
-[0:16:06] confounder and the part that's kind of not
-[0:16:07] and the part that's kind of not completely captured here in this graph
-[0:16:10] completely captured here in this graph is the fact
-[0:16:11] is the fact that really this is the same thing that
-[0:16:14] that really this is the same thing that any
+[0:15:59] an eighth grade scores and use that
+[0:16:02] information
+[0:16:03] to learn something about the unobserved
+[0:16:05] confounder
+[0:16:06] and the part that's kind of not
+[0:16:07] completely captured here in this graph
+[0:16:10] is the fact
+[0:16:11] that really this is the same thing that
 [0:16:14] any effect of the unobserved confounder on
-[0:16:17] effect of the unobserved confounder on third grade
-[0:16:18] third grade is on eighth grade is also going to show
-[0:16:21] is on eighth grade is also going to show up
+[0:16:17] third grade
+[0:16:18] is on eighth grade is also going to show
 [0:16:21] up on in the effect on third grade and that
-[0:16:25] on in the effect on third grade and that helps us leverage the difference in
-[0:16:27] helps us leverage the difference in estimates on third grade
-[0:16:29] estimates on third grade to adjust the the eighth grade uh scores
-[0:16:35] to adjust the the eighth grade uh scores and so the starting point is that the re
-[0:16:37] and so the starting point is that the re we think
+[0:16:25] helps us leverage the difference in
+[0:16:27] estimates on third grade
+[0:16:29] to adjust the the eighth grade uh scores
+[0:16:35] and so the starting point is that the re
 [0:16:38] we think the minus 0.118 is not not credible
-[0:16:43] the minus 0.118 is not not credible even though we can't directly test for
-[0:16:45] even though we can't directly test for that but
+[0:16:43] even though we can't directly test for
 [0:16:46] that but the intuitively the reason is
-[0:16:49] the intuitively the reason is that we see this big difference between
-[0:16:51] that we see this big difference between the minus 0.138 and the 0.201 for the
-[0:16:54] the minus 0.138 and the 0.201 for the third grade
-[0:16:55] third grade and we interpret that as evidence that
-[0:16:57] and we interpret that as evidence that there is a
+[0:16:49] that we see this big difference between
+[0:16:51] the minus 0.138 and the 0.201 for the
+[0:16:54] third grade
+[0:16:55] and we interpret that as evidence that
+[0:16:57] there is a
 [0:17:03] an observed confounder compromising the comparisons
-[0:17:05] comparisons in in new york rather than some
-[0:17:07] in in new york rather than some fundamental difference
-[0:17:09] fundamental difference between students in new york and
-[0:17:12] between students in new york and students in project star because there
-[0:17:14] students in project star because there may be some of those differences
-[0:17:15] may be some of those differences but we're going to hope we're going to
-[0:17:17] but we're going to hope we're going to assume that we can control for that
-[0:17:18] assume that we can control for that using observed
-[0:17:19] using observed uh coverts
+[0:17:05] in in new york rather than some
+[0:17:07] fundamental difference
+[0:17:09] between students in new york and
+[0:17:12] students in project star because there
+[0:17:14] may be some of those differences
+[0:17:15] but we're going to hope we're going to
+[0:17:17] assume that we can control for that
+[0:17:18] using observed
+[0:17:19] uh coverts
 [0:17:25] now so the very naive thing to do would be to say well
-[0:17:28] be to say well we we see this eighth grade
-[0:17:31] we we see this eighth grade uh estimate in new york we don't trust
-[0:17:34] uh estimate in new york we don't trust that because we
-[0:17:35] that because we we see this difference in uh in third
-[0:17:37] we see this difference in uh in third grade estimates
-[0:17:38] grade estimates so we could just subtract the third
-[0:17:40] so we could just subtract the third grade difference uh
-[0:17:42] grade difference uh between the two but that's kind of
-[0:17:44] between the two but that's kind of that's that's a very
-[0:17:46] that's that's a very specific uh somewhat ad hoc solution
-[0:17:49] specific uh somewhat ad hoc solution because it clearly depends on
-[0:17:51] because it clearly depends on on the third grade test scores and then
-[0:17:53] on the third grade test scores and then the eighth grade test scores
-[0:17:55] the eighth grade test scores to be measured on the same scale that
-[0:17:57] to be measured on the same scale that wouldn't really work
-[0:17:59] wouldn't really work if the outcome we're interested in was
-[0:18:01] if the outcome we're interested in was some actual labor market outcome say
-[0:18:03] some actual labor market outcome say earnings or something like that
-[0:18:05] earnings or something like that or even if we had multiple secondary
-[0:18:07] or even if we had multiple secondary outcomes suppose we had great
-[0:18:09] outcomes suppose we had great the tests of course in third and fourth
-[0:18:12] the tests of course in third and fourth grade
+[0:17:28] we we see this eighth grade
+[0:17:31] uh estimate in new york we don't trust
+[0:17:34] that because we
+[0:17:35] we see this difference in uh in third
+[0:17:37] grade estimates
+[0:17:38] so we could just subtract the third
+[0:17:40] grade difference uh
+[0:17:42] between the two but that's kind of
+[0:17:44] that's that's a very
+[0:17:46] specific uh somewhat ad hoc solution
+[0:17:49] because it clearly depends on
+[0:17:51] on the third grade test scores and then
+[0:17:53] the eighth grade test scores
+[0:17:55] to be measured on the same scale that
+[0:17:57] wouldn't really work
+[0:17:59] if the outcome we're interested in was
+[0:18:01] some actual labor market outcome say
+[0:18:03] earnings or something like that
+[0:18:05] or even if we had multiple secondary
+[0:18:07] outcomes suppose we had great
+[0:18:09] the tests of course in third and fourth
 [0:18:12] grade we could it wouldn't be clear how we
-[0:18:15] we could it wouldn't be clear how we would generalize this
-[0:18:17] would generalize this uh this linear model version of the
-[0:18:19] uh this linear model version of the adjustment
-[0:18:20] adjustment the to that case and so here what we're
-[0:18:22] the to that case and so here what we're going to do is
-[0:18:23] going to do is is look for more general way of doing
-[0:18:25] is look for more general way of doing that adjustment
-[0:18:26] that adjustment that is uh that allows for multiple
-[0:18:29] that is uh that allows for multiple secondary outcomes as well as a
-[0:18:30] secondary outcomes as well as a completely different scale
+[0:18:15] would generalize this
+[0:18:17] uh this linear model version of the
+[0:18:19] adjustment
+[0:18:20] the to that case and so here what we're
+[0:18:22] going to do is
+[0:18:23] is look for more general way of doing
+[0:18:25] that adjustment
+[0:18:26] that is uh that allows for multiple
+[0:18:29] secondary outcomes as well as a
+[0:18:30] completely different scale
 [0:18:36] and so i uh interrupt with a few more questions yeah
-[0:18:38] questions yeah uh so there's a question that reads just
-[0:18:39] uh so there's a question that reads just to clarify the difference between the
-[0:18:41] to clarify the difference between the surrogacy setting mentioned
-[0:18:42] surrogacy setting mentioned earlier in this setting is that you
-[0:18:43] earlier in this setting is that you don't have information on treatment
-[0:18:45] don't have information on treatment status in the observation group in the
-[0:18:46] status in the observation group in the surrogacy setting but you do in this
-[0:18:47] surrogacy setting but you do in this setting
+[0:18:38] uh so there's a question that reads just
+[0:18:39] to clarify the difference between the
+[0:18:41] surrogacy setting mentioned
+[0:18:42] earlier in this setting is that you
+[0:18:43] don't have information on treatment
+[0:18:45] status in the observation group in the
+[0:18:46] surrogacy setting but you do in this
 [0:18:48] setting yes yes okay so i'll come back to that
-[0:18:51] yes yes okay so i'll come back to that in a second but yes
-[0:18:53] in a second but yes so actually let me show that here so
-[0:18:56] so actually let me show that here so here this is what uh
+[0:18:51] in a second but yes
+[0:18:53] so actually let me show that here so
+[0:18:56] here this is what uh
 [0:19:04] we observe here we see by example unit is from we see the treatment
-[0:19:07] unit is from we see the treatment for both samples we see the primary
-[0:19:10] for both samples we see the primary outcome
+[0:19:07] for both samples we see the primary
 [0:19:11] outcome only in the observational sample
-[0:19:14] only in the observational sample and not in the experimental sample we
-[0:19:17] and not in the experimental sample we see the secondary
-[0:19:18] see the secondary outcome in uh in both samples and in the
-[0:19:21] outcome in uh in both samples and in the surrogacy case
-[0:19:22] surrogacy case we would not see the treatment in the
-[0:19:25] we would not see the treatment in the observational samples
-[0:19:26] observational samples this this would be uh be missing
+[0:19:14] and not in the experimental sample we
+[0:19:17] see the secondary
+[0:19:18] outcome in uh in both samples and in the
+[0:19:21] surrogacy case
+[0:19:22] we would not see the treatment in the
+[0:19:25] observational samples
+[0:19:26] this this would be uh be missing
 [0:19:33] okay and another question is could you improve the causal inference from the
-[0:19:34] improve the causal inference from the observational study by using two stage
-[0:19:36] observational study by using two stage least squares with an instrumental
-[0:19:38] least squares with an instrumental variable no because there's no
-[0:19:42] variable no because there's no well so in the set this setting we are
-[0:19:45] well so in the set this setting we are we're not
+[0:19:34] observational study by using two stage
+[0:19:36] least squares with an instrumental
+[0:19:38] variable no because there's no
+[0:19:42] well so in the set this setting we are
 [0:19:46] we're not we don't have a variable that we we
-[0:19:49] we don't have a variable that we we serve as an instrument uh there's
-[0:19:51] serve as an instrument uh there's nothing
+[0:19:49] serve as an instrument uh there's
 [0:19:52] nothing that is randomly assigned in new york
-[0:19:55] that is randomly assigned in new york that would allow us
-[0:19:56] that would allow us uh yeah to do that though what we're
-[0:19:59] uh yeah to do that though what we're going to do or sort of one
-[0:20:01] going to do or sort of one interpretation of what we're doing is a
-[0:20:02] interpretation of what we're doing is a control variable setting and that
-[0:20:04] control variable setting and that that can itself be used in instrumental
-[0:20:06] that can itself be used in instrumental variable settings as well
-[0:20:08] variable settings as well but there's no direct instrument here
+[0:19:55] that would allow us
+[0:19:56] uh yeah to do that though what we're
+[0:19:59] going to do or sort of one
+[0:20:01] interpretation of what we're doing is a
+[0:20:02] control variable setting and that
+[0:20:04] that can itself be used in instrumental
+[0:20:06] variable settings as well
+[0:20:08] but there's no direct instrument here
 [0:20:14] and one one further quick question is uh is it
 [0:20:15] is it is is it adjusted for clustering so i
-[0:20:18] is is it adjusted for clustering so i guess the
 [0:20:19] guess the analysis you're presenting here so
-[0:20:21] analysis you're presenting here so clearly the standard errors
-[0:20:23] clearly the standard errors there should be adjusted for clustering
-[0:20:25] there should be adjusted for clustering and i said i'm not going to
-[0:20:27] and i said i'm not going to pay that much attention to the to the
-[0:20:29] pay that much attention to the to the standard errors here
-[0:20:30] standard errors here but nah but given that in new york it's
-[0:20:34] but nah but given that in new york it's a very large sample that doesn't
-[0:20:35] a very large sample that doesn't actually
+[0:20:21] clearly the standard errors
+[0:20:23] there should be adjusted for clustering
+[0:20:25] and i said i'm not going to
+[0:20:27] pay that much attention to the to the
+[0:20:29] standard errors here
+[0:20:30] but nah but given that in new york it's
+[0:20:34] a very large sample that doesn't
+[0:20:35] actually
 [0:20:39] matter all that much we have a lot of precision here
 [0:20:46] so yeah so to uh preview the results so
-[0:20:50] preview the results so we had this unadjusted estimate in in
-[0:20:53] we had this unadjusted estimate in in new york of minus point one one eight
-[0:20:56] new york of minus point one one eight for eighth grade and
-[0:20:57] for eighth grade and minus point one three eight for uh third
-[0:21:00] minus point one three eight for uh third grade
+[0:20:50] we had this unadjusted estimate in in
+[0:20:53] new york of minus point one one eight
+[0:20:56] for eighth grade and
+[0:20:57] minus point one three eight for uh third
 [0:21:01] grade if we do the adjustment based on and i
-[0:21:03] if we do the adjustment based on and i haven't said
-[0:21:05] haven't said exactly how we do that but once we do
-[0:21:06] exactly how we do that but once we do the adjustment that
-[0:21:08] the adjustment that forces the third grade estimates to be
-[0:21:11] forces the third grade estimates to be the same
+[0:21:03] haven't said
+[0:21:05] exactly how we do that but once we do
+[0:21:06] the adjustment that
+[0:21:08] forces the third grade estimates to be
 [0:21:12] the same in the experimental and the
-[0:21:13] in the experimental and the observational studies so we get 0.201 by
-[0:21:16] observational studies so we get 0.201 by construction there and then applying
-[0:21:19] construction there and then applying that adjustment to the eighth grade
-[0:21:21] that adjustment to the eighth grade scores
+[0:21:13] observational studies so we get 0.201 by
+[0:21:16] construction there and then applying
+[0:21:19] that adjustment to the eighth grade
 [0:21:22] scores we now get a positive estimate of 0.057
-[0:21:27] we now get a positive estimate of 0.057 so is that is that reasonable is that
-[0:21:29] so is that is that reasonable is that then
+[0:21:27] so is that is that reasonable is that
+[0:21:29] then
 [0:21:34] we get we get a different number but how do we know that that's actually uh
-[0:21:36] do we know that that's actually uh better or could it be worse than than
-[0:21:39] better or could it be worse than than the minus 0.118
-[0:21:41] the minus 0.118 well it turns out actually i lied
-[0:21:43] well it turns out actually i lied earlier
+[0:21:36] better or could it be worse than than
+[0:21:39] the minus 0.118
+[0:21:41] well it turns out actually i lied
 [0:21:44] earlier because we do actually have in project
-[0:21:46] because we do actually have in project star the eighth grade scores
-[0:21:49] star the eighth grade scores and so there if we look at the
-[0:21:51] and so there if we look at the experimental estimates
-[0:21:52] experimental estimates we get the 0.085 we don't use that here
-[0:21:56] we get the 0.085 we don't use that here and so this estimate is based just
-[0:22:00] and so this estimate is based just on the third grade data and the
-[0:22:03] on the third grade data and the the new york data not using the the
-[0:22:06] the new york data not using the the eighth grade data from project star
-[0:22:08] eighth grade data from project star and so the fact that we get so close to
-[0:22:11] and so the fact that we get so close to the eighth grade
-[0:22:12] the eighth grade estimates is uh it's very encouraging
-[0:22:15] estimates is uh it's very encouraging because that still doesn't mean that
-[0:22:17] because that still doesn't mean that that necessarily is what you would see
-[0:22:18] that necessarily is what you would see in new york for eighth grade for the
-[0:22:20] in new york for eighth grade for the causal fact
-[0:22:21] causal fact but at least our the adjustment is
-[0:22:23] but at least our the adjustment is giving us
+[0:21:46] star the eighth grade scores
+[0:21:49] and so there if we look at the
+[0:21:51] experimental estimates
+[0:21:52] we get the 0.085 we don't use that here
+[0:21:56] and so this estimate is based just
+[0:22:00] on the third grade data and the
+[0:22:03] the new york data not using the the
+[0:22:06] eighth grade data from project star
+[0:22:08] and so the fact that we get so close to
+[0:22:11] the eighth grade
+[0:22:12] estimates is uh it's very encouraging
+[0:22:15] because that still doesn't mean that
+[0:22:17] that necessarily is what you would see
+[0:22:18] in new york for eighth grade for the
+[0:22:20] causal fact
+[0:22:21] but at least our the adjustment is
 [0:22:24] giving us the credible good estimates of what
-[0:22:27] the credible good estimates of what what's happening
-[0:22:29] what's happening in project star in eighth grade and in
-[0:22:32] in project star in eighth grade and in fact
+[0:22:27] what's happening
+[0:22:29] in project star in eighth grade and in
 [0:22:33] fact we don't just have third grade and
-[0:22:34] we don't just have third grade and eighth grade scores
-[0:22:37] eighth grade scores we have scores from um third to eighth
-[0:22:40] we have scores from um third to eighth grade
+[0:22:34] eighth grade scores
+[0:22:37] we have scores from um third to eighth
 [0:22:42] grade and so here kind of this this the
-[0:22:45] and so here kind of this this the three lines the turquoise one is the
-[0:22:49] three lines the turquoise one is the project star
-[0:22:50] project star experimental estimates the orange one is
-[0:22:53] experimental estimates the orange one is the
+[0:22:45] three lines the turquoise one is the
+[0:22:49] project star
+[0:22:50] experimental estimates the orange one is
 [0:22:53] the new york the observational estimates
-[0:22:57] new york the observational estimates which are all negative kind of from
-[0:22:59] which are all negative kind of from third to eighth grade
-[0:23:00] third to eighth grade and then the purple line gives the
-[0:23:03] and then the purple line gives the adjusted
+[0:22:57] which are all negative kind of from
+[0:22:59] third to eighth grade
+[0:23:00] and then the purple line gives the
 [0:23:04] adjusted the observational estimates where all we
-[0:23:07] the observational estimates where all we do is adjust for
-[0:23:08] do is adjust for the for third grade scores
-[0:23:12] the for third grade scores and we see that after that that
-[0:23:15] and we see that after that that adjustment
-[0:23:16] adjustment the the adjusted estimates track quite
-[0:23:18] the the adjusted estimates track quite well
+[0:23:07] do is adjust for
+[0:23:08] the for third grade scores
+[0:23:12] and we see that after that that
+[0:23:15] adjustment
+[0:23:16] the the adjusted estimates track quite
 [0:23:19] well the experimental estimates
-[0:23:23] the experimental estimates and so th this to us is kind of the main
-[0:23:25] and so th this to us is kind of the main piece of evidence that this is actually
-[0:23:27] piece of evidence that this is actually really working
-[0:23:28] really working in this case adjusting for the selection
-[0:23:30] in this case adjusting for the selection in third grade
-[0:23:31] in third grade does seem to give you credible estimates
-[0:23:34] does seem to give you credible estimates for the
+[0:23:23] and so th this to us is kind of the main
+[0:23:25] piece of evidence that this is actually
+[0:23:27] really working
+[0:23:28] in this case adjusting for the selection
+[0:23:30] in third grade
+[0:23:31] does seem to give you credible estimates
 [0:23:35] for the the them for
-[0:23:37] the them for subsequent uh scores
-[0:23:41] subsequent uh scores so now let me um kind of give a little
-[0:23:44] so now let me um kind of give a little bit more detail on what we actually do
-[0:23:46] bit more detail on what we actually do so the setup and i just briefly went
-[0:23:48] so the setup and i just briefly went over this slide before
-[0:23:49] over this slide before setup is one where for the the project
-[0:23:52] setup is one where for the the project star the experimental estimates
-[0:23:53] star the experimental estimates we see the treatment we see the third
-[0:23:56] we see the treatment we see the third grade scores
-[0:23:56] grade scores and we see the uh but we don't see the
-[0:24:00] and we see the uh but we don't see the eighth grade scores
-[0:24:01] eighth grade scores in the observational data we see all of
-[0:24:03] in the observational data we see all of these uh these variables
-[0:24:05] these uh these variables and so this setting kind of this
-[0:24:07] and so this setting kind of this observation scheme
-[0:24:09] observation scheme has been considered and in other papers
-[0:24:11] has been considered and in other papers there are people have made different
-[0:24:12] there are people have made different assumptions
-[0:24:14] assumptions about how these two samples relate and
-[0:24:16] about how these two samples relate and it's kind of that's that's going to be
-[0:24:18] it's kind of that's that's going to be key
+[0:23:37] subsequent uh scores
+[0:23:41] so now let me um kind of give a little
+[0:23:44] bit more detail on what we actually do
+[0:23:46] so the setup and i just briefly went
+[0:23:48] over this slide before
+[0:23:49] setup is one where for the the project
+[0:23:52] star the experimental estimates
+[0:23:53] we see the treatment we see the third
+[0:23:56] grade scores
+[0:23:56] and we see the uh but we don't see the
+[0:24:00] eighth grade scores
+[0:24:01] in the observational data we see all of
+[0:24:03] these uh these variables
+[0:24:05] and so this setting kind of this
+[0:24:07] observation scheme
+[0:24:09] has been considered and in other papers
+[0:24:11] there are people have made different
+[0:24:12] assumptions
+[0:24:14] about how these two samples relate and
+[0:24:16] it's kind of that's that's going to be
 [0:24:18] key you can make and i'll come back to kind
-[0:24:20] you can make and i'll come back to kind of specifically what assumptions we make
-[0:24:23] of specifically what assumptions we make and what what alternatives may be about
-[0:24:26] and what what alternatives may be about why in our case for these projects star
-[0:24:29] why in our case for these projects star in new york day that we think our
-[0:24:30] in new york day that we think our sums is in their natural setting
-[0:24:34] sums is in their natural setting so then in terms of notation we we have
-[0:24:37] so then in terms of notation we we have this indicator for a group
-[0:24:38] this indicator for a group we have a binary treatment indicator we
-[0:24:41] we have a binary treatment indicator we have the primary outcome
-[0:24:43] have the primary outcome the eighth grade scores we have the
-[0:24:45] the eighth grade scores we have the third grade scores that are the
-[0:24:46] third grade scores that are the secondary outcome
-[0:24:48] secondary outcome and what we're interested in is the
-[0:24:51] and what we're interested in is the effect
+[0:24:20] of specifically what assumptions we make
+[0:24:23] and what what alternatives may be about
+[0:24:26] why in our case for these projects star
+[0:24:29] in new york day that we think our
+[0:24:30] sums is in their natural setting
+[0:24:34] so then in terms of notation we we have
+[0:24:37] this indicator for a group
+[0:24:38] we have a binary treatment indicator we
+[0:24:41] have the primary outcome
+[0:24:43] the eighth grade scores we have the
+[0:24:45] third grade scores that are the
+[0:24:46] secondary outcome
+[0:24:48] and what we're interested in is the
 [0:24:52] effect of uh the treatment of small class sizes
-[0:24:54] of uh the treatment of small class sizes on eighth grade scores
-[0:24:55] on eighth grade scores in in new york
+[0:24:54] on eighth grade scores
+[0:24:55] in in new york
 [0:25:02] now um we're going to make a couple of assumptions uh
-[0:25:04] assumptions uh first essentially definitional we think
-[0:25:06] first essentially definitional we think that observational samples and random
-[0:25:08] that observational samples and random samples the population of interest uh
-[0:25:10] samples the population of interest uh we're going to be looking for the
-[0:25:12] we're going to be looking for the average cause of fact in uh in new york
-[0:25:15] average cause of fact in uh in new york the second assumption is also
-[0:25:19] the second assumption is also not very controversial we're going to
-[0:25:21] not very controversial we're going to assume that in the
-[0:25:22] assume that in the project star we have random assignment
-[0:25:26] project star we have random assignment of
+[0:25:04] first essentially definitional we think
+[0:25:06] that observational samples and random
+[0:25:08] samples the population of interest uh
+[0:25:10] we're going to be looking for the
+[0:25:12] average cause of fact in uh in new york
+[0:25:15] the second assumption is also
+[0:25:19] not very controversial we're going to
+[0:25:21] assume that in the
+[0:25:22] project star we have random assignment
 [0:25:26] of uh of the treatment uh and so
-[0:25:30] uh of the treatment uh and so we can directly get the causal facts and
-[0:25:32] we can directly get the causal facts and project start by comparing outcomes for
-[0:25:34] project start by comparing outcomes for the treatment and control group
-[0:25:36] the treatment and control group other than we don't see the eighth grade
-[0:25:38] other than we don't see the eighth grade score so we can't do that
-[0:25:39] score so we can't do that directly we can effect weaken that
-[0:25:43] directly we can effect weaken that and still use the the same approach by
-[0:25:46] and still use the the same approach by assuming that
-[0:25:48] assuming that it's only conditional and some
-[0:25:49] it's only conditional and some covariates that we have the
-[0:25:51] covariates that we have the assign unconfounded assignment uh
-[0:25:53] assign unconfounded assignment uh assignment that's as good as random
-[0:25:55] assignment that's as good as random now this is a place where you could make
-[0:25:58] now this is a place where you could make alternative assumptions uh
-[0:25:59] alternative assumptions uh and so nathan and xiao mao
-[0:26:03] and so nathan and xiao mao assume that uh unconfoundedness
-[0:26:06] assume that uh unconfoundedness is in the combined sample rather than in
-[0:26:08] is in the combined sample rather than in one of the samples uh
-[0:26:10] one of the samples uh on its own so either of the sample on
-[0:26:12] on its own so either of the sample on their own
+[0:25:30] we can directly get the causal facts and
+[0:25:32] project start by comparing outcomes for
+[0:25:34] the treatment and control group
+[0:25:36] other than we don't see the eighth grade
+[0:25:38] score so we can't do that
+[0:25:39] directly we can effect weaken that
+[0:25:43] and still use the the same approach by
+[0:25:46] assuming that
+[0:25:48] it's only conditional and some
+[0:25:49] covariates that we have the
+[0:25:51] assign unconfounded assignment uh
+[0:25:53] assignment that's as good as random
+[0:25:55] now this is a place where you could make
+[0:25:58] alternative assumptions uh
+[0:25:59] and so nathan and xiao mao
+[0:26:03] assume that uh unconfoundedness
+[0:26:06] is in the combined sample rather than in
+[0:26:08] one of the samples uh
+[0:26:10] on its own so either of the sample on
 [0:26:14] their own they're not necessarily unconfounded but
-[0:26:16] they're not necessarily unconfounded but the combined sample is
-[0:26:18] the combined sample is that's that's different that's not
-[0:26:19] that's that's different that's not stronger or weaker than what we're
-[0:26:21] stronger or weaker than what we're assuming here but it's different
-[0:26:23] assuming here but it's different here we're assuming that
-[0:26:25] here we're assuming that unconfoundedness holds
-[0:26:27] unconfoundedness holds in the experimental sample but not in
-[0:26:29] in the experimental sample but not in the
+[0:26:16] the combined sample is
+[0:26:18] that's that's different that's not
+[0:26:19] stronger or weaker than what we're
+[0:26:21] assuming here but it's different
+[0:26:23] here we're assuming that
+[0:26:25] unconfoundedness holds
+[0:26:27] in the experimental sample but not in
 [0:26:30] the combined sample or in the observational
-[0:26:33] combined sample or in the observational sample
+[0:26:33] sample
 [0:26:39] the third assumption is is more controversial
-[0:26:42] is more controversial we're assuming that the two populations
-[0:26:47] we're assuming that the two populations in the experimental and the
-[0:26:49] in the experimental and the observational sample
-[0:26:50] observational sample are comparable that um and we
-[0:26:54] are comparable that um and we again we can do this condition on set of
-[0:26:56] again we can do this condition on set of observed uh
-[0:26:57] observed uh covariates we're assuming that the my
-[0:26:59] covariates we're assuming that the my that the joint distribution of the
-[0:27:01] that the joint distribution of the potential outcomes
-[0:27:02] potential outcomes is the same in the two populations and
-[0:27:05] is the same in the two populations and the implication is
-[0:27:07] the implication is that the reason that has an implication
-[0:27:10] that the reason that has an implication for the interpretation
-[0:27:11] for the interpretation of that difference between the minus
-[0:27:13] of that difference between the minus 0.138
+[0:26:42] we're assuming that the two populations
+[0:26:47] in the experimental and the
+[0:26:49] observational sample
+[0:26:50] are comparable that um and we
+[0:26:54] again we can do this condition on set of
+[0:26:56] observed uh
+[0:26:57] covariates we're assuming that the my
+[0:26:59] that the joint distribution of the
+[0:27:01] potential outcomes
+[0:27:02] is the same in the two populations and
+[0:27:05] the implication is
+[0:27:07] that the reason that has an implication
+[0:27:10] for the interpretation
+[0:27:11] of that difference between the minus
 [0:27:14] 0.138 and the 0.201 namely that that's not
-[0:27:17] and the 0.201 namely that that's not coming
 [0:27:18] coming from these populations being different
-[0:27:20] from these populations being different is be but it's
-[0:27:21] is be but it's coming purely because there's unobserved
-[0:27:23] coming purely because there's unobserved confounders in uh
-[0:27:24] confounders in uh in new york
+[0:27:20] is be but it's
+[0:27:21] coming purely because there's unobserved
+[0:27:23] confounders in uh
+[0:27:24] in new york
 [0:27:29] so this this is a very strong assumption and a lot of cases that may not be
-[0:27:31] and a lot of cases that may not be reasonable but still this on its own is
-[0:27:34] reasonable but still this on its own is not sufficient
-[0:27:35] not sufficient uh to get the cause of fact we're
-[0:27:38] uh to get the cause of fact we're interested in uh
+[0:27:31] reasonable but still this on its own is
+[0:27:34] not sufficient
+[0:27:35] uh to get the cause of fact we're
+[0:27:38] interested in uh
 [0:27:45] and so we need to we need to still make an additional assumption i said
-[0:27:47] make an additional assumption i said what we don't want to assume
-[0:27:48] what we don't want to assume is that in the observational study we
-[0:27:52] is that in the observational study we have unconfoundedness again
-[0:27:54] have unconfoundedness again we could weaken this to be conditional
-[0:27:56] we could weaken this to be conditional instead of axis
-[0:27:57] instead of axis but we don't want to make this
-[0:27:58] but we don't want to make this assumption that we directly solve our
-[0:28:00] assumption that we directly solve our problems
+[0:27:47] what we don't want to assume
+[0:27:48] is that in the observational study we
+[0:27:52] have unconfoundedness again
+[0:27:54] we could weaken this to be conditional
+[0:27:56] instead of axis
+[0:27:57] but we don't want to make this
+[0:27:58] assumption that we directly solve our
 [0:28:01] problems but then we there really would be no
-[0:28:02] but then we there really would be no role as far as
-[0:28:04] role as far as identification is concerned there would
-[0:28:06] identification is concerned there would be no role for the experimental sample
-[0:28:08] be no role for the experimental sample we wouldn't need the experimental sample
-[0:28:10] we wouldn't need the experimental sample we could just solve things directly
-[0:28:12] we could just solve things directly in the using the observational data
-[0:28:17] in the using the observational data and so what we do and this is really the
-[0:28:21] and so what we do and this is really the most the kind of the novel assumption
-[0:28:24] most the kind of the novel assumption we're going to assume
-[0:28:26] we're going to assume make it an unconfoundedness type
-[0:28:28] make it an unconfoundedness type assumption where
-[0:28:30] assumption where conditional
+[0:28:02] role as far as
+[0:28:04] identification is concerned there would
+[0:28:06] be no role for the experimental sample
+[0:28:08] we wouldn't need the experimental sample
+[0:28:10] we could just solve things directly
+[0:28:12] in the using the observational data
+[0:28:17] and so what we do and this is really the
+[0:28:21] most the kind of the novel assumption
+[0:28:24] we're going to assume
+[0:28:26] make it an unconfoundedness type
+[0:28:28] assumption where
+[0:28:30] conditional
 [0:28:36] um on third grade scores in a low classroom
-[0:28:39] third grade scores in a low classroom whether you were in a bigger small
-[0:28:41] whether you were in a bigger small classroom is not related
-[0:28:44] classroom is not related to eighth grade uh small classroom
-[0:28:46] to eighth grade uh small classroom outcomes
+[0:28:39] whether you were in a bigger small
+[0:28:41] classroom is not related
+[0:28:44] to eighth grade uh small classroom
 [0:28:48] outcomes and this is capturing the idea that
-[0:28:50] and this is capturing the idea that whatever the unobserved confounder is
-[0:28:53] whatever the unobserved confounder is for eighth grade scores it's the same as
-[0:28:56] for eighth grade scores it's the same as what it is
-[0:28:57] what it is for third grade scores
+[0:28:50] whatever the unobserved confounder is
+[0:28:53] for eighth grade scores it's the same as
+[0:28:56] what it is
+[0:28:57] for third grade scores
 [0:29:04] and so and that that's kind of uh captured by the this these comments
-[0:29:07] uh captured by the this these comments kind of whatever the reason is
-[0:29:08] kind of whatever the reason is this assumption doesn't hold it's the
-[0:29:10] this assumption doesn't hold it's the same as the reason that the
-[0:29:13] same as the reason that the eighth grade scores we have don't have
-[0:29:16] eighth grade scores we have don't have unconfoundedness for eighth grade uh
-[0:29:18] unconfoundedness for eighth grade uh scores now the problem with this
-[0:29:21] scores now the problem with this assumption
-[0:29:22] assumption even though it sort of looks like a very
-[0:29:24] even though it sort of looks like a very standard and confoundedness assumption
-[0:29:27] standard and confoundedness assumption the problem is we can't use it directly
+[0:29:07] kind of whatever the reason is
+[0:29:08] this assumption doesn't hold it's the
+[0:29:10] same as the reason that the
+[0:29:13] eighth grade scores we have don't have
+[0:29:16] unconfoundedness for eighth grade uh
+[0:29:18] scores now the problem with this
+[0:29:21] assumption
+[0:29:22] even though it sort of looks like a very
+[0:29:24] standard and confoundedness assumption
+[0:29:27] the problem is we can't use it directly
 [0:29:33] given this assumption we can in principle estimate the conditional
-[0:29:35] principle estimate the conditional expectation of eight grade scores
-[0:29:39] expectation of eight grade scores given a small classroom conditional on
-[0:29:42] given a small classroom conditional on these these right hand side variables
-[0:29:44] these these right hand side variables but the way we typically use
-[0:29:45] but the way we typically use unconfoundedness to
-[0:29:47] unconfoundedness to derive estimators that adjust for these
-[0:29:49] derive estimators that adjust for these differences
-[0:29:50] differences is we would then need to average over
-[0:29:52] is we would then need to average over the marginal distribution of the
-[0:29:54] the marginal distribution of the right-hand side variables
-[0:29:56] right-hand side variables but we can't do that because we can't
-[0:29:58] but we can't do that because we can't get the marginal distribution of the
-[0:30:00] get the marginal distribution of the third grade test scores in new york
-[0:30:02] third grade test scores in new york because we only see
-[0:30:04] because we only see third grade test scores in the small
-[0:30:05] third grade test scores in the small classrooms if in fact the kids are in
-[0:30:07] classrooms if in fact the kids are in the small classroom
-[0:30:09] the small classroom so we can't directly exploit this
-[0:30:12] so we can't directly exploit this unconfounded in this assumption
+[0:29:35] expectation of eight grade scores
+[0:29:39] given a small classroom conditional on
+[0:29:42] these these right hand side variables
+[0:29:44] but the way we typically use
+[0:29:45] unconfoundedness to
+[0:29:47] derive estimators that adjust for these
+[0:29:49] differences
+[0:29:50] is we would then need to average over
+[0:29:52] the marginal distribution of the
+[0:29:54] right-hand side variables
+[0:29:56] but we can't do that because we can't
+[0:29:58] get the marginal distribution of the
+[0:30:00] third grade test scores in new york
+[0:30:02] because we only see
+[0:30:04] third grade test scores in the small
+[0:30:05] classrooms if in fact the kids are in
+[0:30:07] the small classroom
+[0:30:09] so we can't directly exploit this
+[0:30:12] unconfounded in this assumption
 [0:30:18] i said what do we do this is the point where the the
-[0:30:20] where the the experimental data come in
-[0:30:23] experimental data come in we can estimate this relationship from
-[0:30:25] we can estimate this relationship from the observational data
-[0:30:26] the observational data but then to average over the marginal
-[0:30:28] but then to average over the marginal distribution of
-[0:30:30] distribution of the third grade potential outcome we
-[0:30:32] the third grade potential outcome we need to know the distribution of that
-[0:30:34] need to know the distribution of that and that's something we can estimate
-[0:30:36] and that's something we can estimate from the experimental sample
-[0:30:38] from the experimental sample and so that gets us around the
-[0:30:42] and so that gets us around the problem that we can't directly exploit
-[0:30:44] problem that we can't directly exploit this unconfoundedness assumption
-[0:30:47] this unconfoundedness assumption because now we know the distribution we
-[0:30:48] because now we know the distribution we can average over that
-[0:30:50] can average over that and get the marginal expectation of uh
-[0:30:53] and get the marginal expectation of uh eight great
-[0:30:54] eight great potential outcomes uh under in a small
-[0:30:57] potential outcomes uh under in a small and big
+[0:30:20] experimental data come in
+[0:30:23] we can estimate this relationship from
+[0:30:25] the observational data
+[0:30:26] but then to average over the marginal
+[0:30:28] distribution of
+[0:30:30] the third grade potential outcome we
+[0:30:32] need to know the distribution of that
+[0:30:34] and that's something we can estimate
+[0:30:36] from the experimental sample
+[0:30:38] and so that gets us around the
+[0:30:42] problem that we can't directly exploit
+[0:30:44] this unconfoundedness assumption
+[0:30:47] because now we know the distribution we
+[0:30:48] can average over that
+[0:30:50] and get the marginal expectation of uh
+[0:30:53] eight great
+[0:30:54] potential outcomes uh under in a small
 [0:30:58] and big classroom and so
-[0:31:02] classroom and so can i interrupt some questions
-[0:31:05] can i interrupt some questions uh so we have a clarifying question uh
-[0:31:07] uh so we have a clarifying question uh are we interested in the effect of small
-[0:31:09] are we interested in the effect of small classrooms for third graders on their
-[0:31:10] classrooms for third graders on their later eighth grade scores or the effect
-[0:31:12] later eighth grade scores or the effect of small classrooms for eighth graders
-[0:31:13] of small classrooms for eighth graders on their eighth grade scores
+[0:31:02] can i interrupt some questions
+[0:31:05] uh so we have a clarifying question uh
+[0:31:07] are we interested in the effect of small
+[0:31:09] classrooms for third graders on their
+[0:31:10] later eighth grade scores or the effect
+[0:31:12] of small classrooms for eighth graders
+[0:31:13] on their eighth grade scores
 [0:31:21] so so we're not interested in in third grade scores sort of
-[0:31:24] in third grade scores sort of at all kind of systematically what we're
-[0:31:28] at all kind of systematically what we're interested in
-[0:31:29] interested in is for the entire population of uh
-[0:31:32] is for the entire population of uh students in the new york system
-[0:31:34] students in the new york system what is the average effect of being in a
-[0:31:36] what is the average effect of being in a small classroom versus a
-[0:31:38] small classroom versus a big classroom on their eighth grade
-[0:31:40] big classroom on their eighth grade scores and kind of
-[0:31:42] scores and kind of beyond that really what the policy
-[0:31:45] beyond that really what the policy question of interest is so what would be
-[0:31:47] question of interest is so what would be the average effect
-[0:31:48] the average effect on later labor market outcomes for
-[0:31:51] on later labor market outcomes for everybody
+[0:31:24] at all kind of systematically what we're
+[0:31:28] interested in
+[0:31:29] is for the entire population of uh
+[0:31:32] students in the new york system
+[0:31:34] what is the average effect of being in a
+[0:31:36] small classroom versus a
+[0:31:38] big classroom on their eighth grade
+[0:31:40] scores and kind of
+[0:31:42] beyond that really what the policy
+[0:31:45] question of interest is so what would be
+[0:31:47] the average effect
+[0:31:48] on later labor market outcomes for
 [0:31:52] everybody if they were if everybody wasn't small
-[0:31:54] if they were if everybody wasn't small rather than their big classrooms
-[0:31:57] rather than their big classrooms so i guess the issue is is the student
-[0:31:59] so i guess the issue is is the student in the small classroom
-[0:32:00] in the small classroom in third grade or eighth grade no no
-[0:32:03] in third grade or eighth grade no no sorry
+[0:31:54] rather than their big classrooms
+[0:31:57] so i guess the issue is is the student
+[0:31:59] in the small classroom
+[0:32:00] in third grade or eighth grade no no
 [0:32:03] sorry small classrooms are before that that
-[0:32:06] small classrooms are before that that there is in first
-[0:32:07] there is in first the second grade so so it's
-[0:32:10] the second grade so so it's it's an early childhood the defensive
-[0:32:13] it's an early childhood the defensive question is whether at that point
-[0:32:14] question is whether at that point it um that has any long-term effects
-[0:32:18] it um that has any long-term effects because you could imagine it has effects
-[0:32:21] because you could imagine it has effects on
+[0:32:06] there is in first
+[0:32:07] the second grade so so it's
+[0:32:10] it's an early childhood the defensive
+[0:32:13] question is whether at that point
+[0:32:14] it um that has any long-term effects
+[0:32:18] because you could imagine it has effects
 [0:32:21] on on how how much kids enjoy the the
-[0:32:24] on how how much kids enjoy the the school and stuff
-[0:32:26] school and stuff but from for
-[0:32:29] but from for policymakers it may be of more interest
-[0:32:31] policymakers it may be of more interest kind of to know whether that has some
-[0:32:32] kind of to know whether that has some long-term effects
-[0:32:34] long-term effects on uh on
+[0:32:24] school and stuff
+[0:32:26] but from for
+[0:32:29] policymakers it may be of more interest
+[0:32:31] kind of to know whether that has some
+[0:32:32] long-term effects
 [0:32:37] on uh on things associated with education and
-[0:32:40] things associated with education and labor market outcomes i see
-[0:32:44] labor market outcomes i see one more question is how does it matter
-[0:32:46] one more question is how does it matter in terms of what effect is being
-[0:32:47] in terms of what effect is being identified in the long run
-[0:32:49] identified in the long run if the tests themselves differ greatly
-[0:32:51] if the tests themselves differ greatly across contexts both in third and eighth
-[0:32:55] across contexts both in third and eighth grade
+[0:32:40] labor market outcomes i see
+[0:32:44] one more question is how does it matter
+[0:32:46] in terms of what effect is being
+[0:32:47] identified in the long run
+[0:32:49] if the tests themselves differ greatly
+[0:32:51] across contexts both in third and eighth
 [0:32:57] grade so so here i'm using eighth grade kind
-[0:33:00] so so here i'm using eighth grade kind of
 [0:33:01] of just to illustrate how these these
-[0:33:04] just to illustrate how these these things work
-[0:33:05] things work in in the end you would like to apply
-[0:33:08] in in the end you would like to apply this to settings for the observational
-[0:33:09] this to settings for the observational data
+[0:33:04] things work
+[0:33:05] in in the end you would like to apply
+[0:33:08] this to settings for the observational
 [0:33:10] data also had labor market outcomes and you
-[0:33:12] also had labor market outcomes and you would like
-[0:33:13] would like to estimate
-[0:33:16] to estimate the effects of small classrooms on on
-[0:33:19] the effects of small classrooms on on labor market outcomes that's
-[0:33:20] labor market outcomes that's in some sense the most policy relevant
-[0:33:23] in some sense the most policy relevant object
+[0:33:12] would like
+[0:33:13] to estimate
+[0:33:16] the effects of small classrooms on on
+[0:33:19] labor market outcomes that's
+[0:33:20] in some sense the most policy relevant
 [0:33:24] object there it's very difficult to validate
-[0:33:28] there it's very difficult to validate whether this is actually working because
-[0:33:30] whether this is actually working because there would be no experimental
-[0:33:32] there would be no experimental data to uh to compare things to so i'm
-[0:33:34] data to uh to compare things to so i'm using 8th grade
-[0:33:36] using 8th grade just as a stand-in for some longer-term
-[0:33:38] just as a stand-in for some longer-term outcome
+[0:33:28] whether this is actually working because
+[0:33:30] there would be no experimental
+[0:33:32] data to uh to compare things to so i'm
+[0:33:34] using 8th grade
+[0:33:36] just as a stand-in for some longer-term
 [0:33:40] outcome and can we use data on initial outcomes
-[0:33:44] and can we use data on initial outcomes in combination with observational data
-[0:33:46] in combination with observational data to get
+[0:33:44] in combination with observational data
 [0:33:47] to get to get incredible estimates of these
-[0:33:49] to get incredible estimates of these effects on these long-term
-[0:33:51] effects on these long-term outcomes
+[0:33:49] effects on these long-term
+[0:33:51] outcomes
 [0:33:55] so uh yeah maybe you can continue
 [0:34:03] so under this the assumptions kind of so the
 [0:34:04] the external validity of the observational
-[0:34:06] external validity of the observational data the
 [0:34:08] data the random assignment in the experimental
-[0:34:09] random assignment in the experimental data and this the
-[0:34:11] data and this the condition like external validity and
-[0:34:13] condition like external validity and then this latent and confoundedness
-[0:34:15] then this latent and confoundedness then we can identify the average effect
-[0:34:19] then we can identify the average effect of the treatment on the primary
-[0:34:21] of the treatment on the primary outcome and in fact it's just that
-[0:34:24] outcome and in fact it's just that identified
-[0:34:25] identified there's no testable restrictions uh
-[0:34:28] there's no testable restrictions uh coming out of this
-[0:34:30] coming out of this and so how would we actually go about
-[0:34:32] and so how would we actually go about the estimating this uh
-[0:34:34] the estimating this uh so one way is uh what is known in the
-[0:34:37] so one way is uh what is known in the exomatics literature
-[0:34:38] exomatics literature as a control function approach
-[0:34:42] as a control function approach so we first look at the
+[0:34:09] data and this the
+[0:34:11] condition like external validity and
+[0:34:13] then this latent and confoundedness
+[0:34:15] then we can identify the average effect
+[0:34:19] of the treatment on the primary
+[0:34:21] outcome and in fact it's just that
+[0:34:24] identified
+[0:34:25] there's no testable restrictions uh
+[0:34:28] coming out of this
+[0:34:30] and so how would we actually go about
+[0:34:32] the estimating this uh
+[0:34:34] so one way is uh what is known in the
+[0:34:37] exomatics literature
+[0:34:38] as a control function approach
+[0:34:42] so we first look at the
 [0:34:50] distribution of third grade the scores in the project start data
-[0:34:55] scores in the project start data separately for the the treated and
-[0:34:58] separately for the the treated and controls then we evaluate that
-[0:35:03] controls then we evaluate that for each student in the
+[0:34:55] separately for the the treated and
+[0:34:58] controls then we evaluate that
+[0:35:03] for each student in the
 [0:35:09] first in the project started we evaluated for each student
-[0:35:11] evaluated for each student at the actual third grade score but
-[0:35:13] at the actual third grade score but construction
-[0:35:15] construction therefore the control variable is going
-[0:35:17] therefore the control variable is going to have a uniform distribution
-[0:35:19] to have a uniform distribution in the the project star data
-[0:35:24] in the the project star data but then we can also calculate so
-[0:35:27] but then we can also calculate so we can calculate that same variable
-[0:35:31] we can calculate that same variable so using this function estimated on
-[0:35:33] so using this function estimated on project start
-[0:35:34] project start we can calculate that same variable in
-[0:35:37] we can calculate that same variable in the new york data
-[0:35:38] the new york data and if it so happened to be the case
-[0:35:40] and if it so happened to be the case that it still had a uniform distribution
-[0:35:43] that it still had a uniform distribution that would suggest assignment was
-[0:35:44] that would suggest assignment was unconfounded in the observational sample
-[0:35:47] unconfounded in the observational sample but deviations from the uniform
-[0:35:50] but deviations from the uniform distribution for ada
-[0:35:51] distribution for ada capture violations of of
-[0:35:53] capture violations of of unconfoundedness
-[0:35:55] unconfoundedness and in fact the latent unconfoundedness
-[0:35:57] and in fact the latent unconfoundedness assumption
-[0:35:58] assumption says that it captures all the violations
-[0:36:00] says that it captures all the violations of unconfoundedness
-[0:36:02] of unconfoundedness any dva any thing we see there is enough
-[0:36:05] any dva any thing we see there is enough to adjust for the the for the selection
-[0:36:10] to adjust for the the for the selection and so the
-[0:36:13] and so the what we going to do then
-[0:36:16] what we going to do then is where we started off with this latent
-[0:36:20] is where we started off with this latent unconfoundedness condition that required
-[0:36:22] unconfoundedness condition that required us to adjust
-[0:36:23] us to adjust for something that we didn't always see
-[0:36:25] for something that we didn't always see which made it infeasible
-[0:36:27] which made it infeasible now with the other assumptions the
-[0:36:30] now with the other assumptions the implication is
-[0:36:31] implication is that it's sufficient that we have
-[0:36:33] that it's sufficient that we have unconfounded in this
-[0:36:34] unconfounded in this conditional on this control variable a
-[0:36:36] conditional on this control variable a to i
+[0:35:11] at the actual third grade score but
+[0:35:13] construction
+[0:35:15] therefore the control variable is going
+[0:35:17] to have a uniform distribution
+[0:35:19] in the the project star data
+[0:35:24] but then we can also calculate so
+[0:35:27] we can calculate that same variable
+[0:35:31] so using this function estimated on
+[0:35:33] project start
+[0:35:34] we can calculate that same variable in
+[0:35:37] the new york data
+[0:35:38] and if it so happened to be the case
+[0:35:40] that it still had a uniform distribution
+[0:35:43] that would suggest assignment was
+[0:35:44] unconfounded in the observational sample
+[0:35:47] but deviations from the uniform
+[0:35:50] distribution for ada
+[0:35:51] capture violations of of
+[0:35:53] unconfoundedness
+[0:35:55] and in fact the latent unconfoundedness
+[0:35:57] assumption
+[0:35:58] says that it captures all the violations
+[0:36:00] of unconfoundedness
+[0:36:02] any dva any thing we see there is enough
+[0:36:05] to adjust for the the for the selection
+[0:36:10] and so the
+[0:36:13] what we going to do then
+[0:36:16] is where we started off with this latent
+[0:36:20] unconfoundedness condition that required
+[0:36:22] us to adjust
+[0:36:23] for something that we didn't always see
+[0:36:25] which made it infeasible
+[0:36:27] now with the other assumptions the
+[0:36:30] implication is
+[0:36:31] that it's sufficient that we have
+[0:36:33] unconfounded in this
+[0:36:34] conditional on this control variable a
 [0:36:38] to i and since that's something we can
-[0:36:39] and since that's something we can estimate using the
-[0:36:41] estimate using the first the experimental data and then
-[0:36:42] first the experimental data and then evaluating it at the new york data
-[0:36:45] evaluating it at the new york data now we have something setting where we
-[0:36:47] now we have something setting where we can apply
+[0:36:39] estimate using the
+[0:36:41] first the experimental data and then
+[0:36:42] evaluating it at the new york data
+[0:36:45] now we have something setting where we
 [0:36:48] can apply standards the methods for estimating
-[0:36:51] standards the methods for estimating average treatment effect under
-[0:36:53] average treatment effect under unconfoundedness
-[0:36:54] unconfoundedness just using this control variable as an
-[0:36:57] just using this control variable as an additional
-[0:36:59] additional control and so now kind of we just use
-[0:37:03] control and so now kind of we just use standard adjustment the methods using
-[0:37:06] standard adjustment the methods using the propensity score or using regression
-[0:37:09] the propensity score or using regression type methods or double robust methods
-[0:37:11] type methods or double robust methods but using this
-[0:37:13] but using this additional control variable in addition
-[0:37:17] additional control variable in addition to any other covariates we
-[0:37:18] to any other covariates we may we may want to adjust for
-[0:37:22] may we may want to adjust for now you could also do it in a different
-[0:37:24] now you could also do it in a different way and so in principle the set of
-[0:37:26] way and so in principle the set of assumptions
-[0:37:28] assumptions we make the latent unconfoundedness of
-[0:37:30] we make the latent unconfoundedness of conditional external validity
-[0:37:32] conditional external validity implies that we can view the
-[0:37:35] implies that we can view the primary outcome as missing at random
-[0:37:40] primary outcome as missing at random conditional on the secondary outcome
-[0:37:42] conditional on the secondary outcome condition on the treatment
-[0:37:44] condition on the treatment and conditional on the sample you're in
-[0:37:47] and conditional on the sample you're in and so an alternative would be to build
-[0:37:50] and so an alternative would be to build a model relating the primary outcome
-[0:37:52] a model relating the primary outcome directly to the secondary outcome
-[0:37:53] directly to the secondary outcome treatment indicator and pre-treatment
-[0:37:55] treatment indicator and pre-treatment variables and then impute that for the
-[0:37:57] variables and then impute that for the experimental data
-[0:37:59] experimental data and then use that the imputed value to
-[0:38:01] and then use that the imputed value to estimate the
-[0:38:02] estimate the average effect in the experimental
-[0:38:05] average effect in the experimental sample
+[0:36:51] average treatment effect under
+[0:36:53] unconfoundedness
+[0:36:54] just using this control variable as an
+[0:36:57] additional
+[0:36:59] control and so now kind of we just use
+[0:37:03] standard adjustment the methods using
+[0:37:06] the propensity score or using regression
+[0:37:09] type methods or double robust methods
+[0:37:11] but using this
+[0:37:13] additional control variable in addition
+[0:37:17] to any other covariates we
+[0:37:18] may we may want to adjust for
+[0:37:22] now you could also do it in a different
+[0:37:24] way and so in principle the set of
+[0:37:26] assumptions
+[0:37:28] we make the latent unconfoundedness of
+[0:37:30] conditional external validity
+[0:37:32] implies that we can view the
+[0:37:35] primary outcome as missing at random
+[0:37:40] conditional on the secondary outcome
+[0:37:42] condition on the treatment
+[0:37:44] and conditional on the sample you're in
+[0:37:47] and so an alternative would be to build
+[0:37:50] a model relating the primary outcome
+[0:37:52] directly to the secondary outcome
+[0:37:53] treatment indicator and pre-treatment
+[0:37:55] variables and then impute that for the
+[0:37:57] experimental data
+[0:37:59] and then use that the imputed value to
+[0:38:01] estimate the
+[0:38:02] average effect in the experimental
 [0:38:06] sample and because the model is just identified
-[0:38:09] and because the model is just identified that's going to give you the same
-[0:38:12] that's going to give you the same results in large samples as the control
-[0:38:15] results in large samples as the control function i
-[0:38:15] function i i just described a third way of
-[0:38:20] i just described a third way of of estimating the average effect is to
-[0:38:23] of estimating the average effect is to focus uh on the observational sample
-[0:38:27] focus uh on the observational sample but construct some weights so that the
-[0:38:31] but construct some weights so that the weight that in the weighted
-[0:38:33] weight that in the weighted observational sample
-[0:38:34] observational sample we get the same causal effect on third
-[0:38:36] we get the same causal effect on third grade as in the experimental sample
-[0:38:40] grade as in the experimental sample and then given those weights apply those
-[0:38:43] and then given those weights apply those weights to the eighth grade outcome
-[0:38:44] weights to the eighth grade outcome and get estimates of the the causal
-[0:38:48] and get estimates of the the causal effect
+[0:38:09] that's going to give you the same
+[0:38:12] results in large samples as the control
+[0:38:15] function i
+[0:38:15] i just described a third way of
+[0:38:20] of estimating the average effect is to
+[0:38:23] focus uh on the observational sample
+[0:38:27] but construct some weights so that the
+[0:38:31] weight that in the weighted
+[0:38:33] observational sample
+[0:38:34] we get the same causal effect on third
+[0:38:36] grade as in the experimental sample
+[0:38:40] and then given those weights apply those
+[0:38:43] weights to the eighth grade outcome
+[0:38:44] and get estimates of the the causal
 [0:38:49] effect on them on eighth grade outcomes using
-[0:38:51] on them on eighth grade outcomes using these waves
-[0:38:52] these waves and again in light samples and principle
-[0:38:54] and again in light samples and principle that's going to give us the same results
-[0:38:56] that's going to give us the same results as the the control function approach
-[0:39:00] as the the control function approach or the the imputation uh approach
-[0:39:03] or the the imputation uh approach but in finite samples then maybe
-[0:39:06] but in finite samples then maybe there may obviously be differences
-[0:39:09] there may obviously be differences so all right let me uh wrap up then so
-[0:39:12] so all right let me uh wrap up then so here
+[0:38:51] these waves
+[0:38:52] and again in light samples and principle
+[0:38:54] that's going to give us the same results
+[0:38:56] as the the control function approach
+[0:39:00] or the the imputation uh approach
+[0:39:03] but in finite samples then maybe
+[0:39:06] there may obviously be differences
+[0:39:09] so all right let me uh wrap up then so
 [0:39:13] here in this in a very specific setting where
-[0:39:15] in this in a very specific setting where we
 [0:39:16] we have this observational study that is
-[0:39:18] have this observational study that is where
 [0:39:19] where we're concerned about uh internal
-[0:39:21] we're concerned about uh internal validity where we're concerned about
-[0:39:22] validity where we're concerned about uh selection problems where we have
-[0:39:25] uh selection problems where we have richer data
-[0:39:27] richer data we're looking to combine that with
-[0:39:28] we're looking to combine that with experimental data
-[0:39:30] experimental data they give us credible estimates on
-[0:39:33] they give us credible estimates on things
+[0:39:21] validity where we're concerned about
+[0:39:22] uh selection problems where we have
+[0:39:25] richer data
+[0:39:27] we're looking to combine that with
+[0:39:28] experimental data
+[0:39:30] they give us credible estimates on
 [0:39:33] things we're not directly interested in but we
-[0:39:36] we're not directly interested in but we can use that
-[0:39:38] can use that those credible estimates of the things
-[0:39:39] those credible estimates of the things we're not interested in to get better
-[0:39:41] we're not interested in to get better estimates
+[0:39:36] can use that
+[0:39:38] those credible estimates of the things
+[0:39:39] we're not interested in to get better
 [0:39:43] estimates on the the outcomes we are
-[0:39:46] on the the outcomes we are actually interested in and so we
-[0:39:49] actually interested in and so we apply that kind of to this uh project
-[0:39:51] apply that kind of to this uh project star and new york data
-[0:39:53] star and new york data and it seemed to improve things
-[0:39:54] and it seemed to improve things considerably over just using the
-[0:39:56] considerably over just using the observational data
-[0:39:58] observational data because it improved things directly over
-[0:40:00] because it improved things directly over just using the experimental data because
-[0:40:02] just using the experimental data because the experimental data was silent about
-[0:40:04] the experimental data was silent about the
+[0:39:46] actually interested in and so we
+[0:39:49] apply that kind of to this uh project
+[0:39:51] star and new york data
+[0:39:53] and it seemed to improve things
+[0:39:54] considerably over just using the
+[0:39:56] observational data
+[0:39:58] because it improved things directly over
+[0:40:00] just using the experimental data because
+[0:40:02] the experimental data was silent about
 [0:40:05] the directly about the effect on uh on
-[0:40:07] directly about the effect on uh on eighth grade
-[0:40:08] eighth grade test scores but as i start off saying
-[0:40:12] test scores but as i start off saying i think this is kind of just one example
-[0:40:14] i think this is kind of just one example where you can systematically
-[0:40:16] where you can systematically leverage the strength of observational
-[0:40:18] leverage the strength of observational and experimental data
-[0:40:20] and experimental data and there's a lot of other cases where
-[0:40:22] and there's a lot of other cases where it would be useful
-[0:40:23] it would be useful to do the same and kind of come up with
-[0:40:25] to do the same and kind of come up with methods uh
-[0:40:26] methods uh that exploit the strength of uh of both
-[0:40:30] that exploit the strength of uh of both to get more than what each of the data
-[0:40:34] to get more than what each of the data sets on their own
-[0:40:35] sets on their own can can deliver so let me
-[0:40:39] can can deliver so let me stop here and i'll see if there's any
-[0:40:42] stop here and i'll see if there's any question and turn it over to nathan
-[0:40:45] question and turn it over to nathan all right thank you so much for the very
-[0:40:46] all right thank you so much for the very nice talk yeah i think we can
-[0:40:48] nice talk yeah i think we can take one quick question before we go to
-[0:40:51] take one quick question before we go to the discussion
-[0:40:52] the discussion um yeah so maybe the
-[0:40:56] um yeah so maybe the you know now it quickly vanished sorry
-[0:40:58] you know now it quickly vanished sorry so
+[0:40:07] eighth grade
+[0:40:08] test scores but as i start off saying
+[0:40:12] i think this is kind of just one example
+[0:40:14] where you can systematically
+[0:40:16] leverage the strength of observational
+[0:40:18] and experimental data
+[0:40:20] and there's a lot of other cases where
+[0:40:22] it would be useful
+[0:40:23] to do the same and kind of come up with
+[0:40:25] methods uh
+[0:40:26] that exploit the strength of uh of both
+[0:40:30] to get more than what each of the data
+[0:40:34] sets on their own
+[0:40:35] can can deliver so let me
+[0:40:39] stop here and i'll see if there's any
+[0:40:42] question and turn it over to nathan
+[0:40:45] all right thank you so much for the very
+[0:40:46] nice talk yeah i think we can
+[0:40:48] take one quick question before we go to
+[0:40:51] the discussion
+[0:40:52] um yeah so maybe the
+[0:40:56] you know now it quickly vanished sorry
 [0:40:59] so the first one here isn't it a strong
-[0:41:01] the first one here isn't it a strong assumption
-[0:41:02] assumption to make to that you assume that the
-[0:41:04] to make to that you assume that the effect is the same between the two
-[0:41:05] effect is the same between the two studies at the third grade level
-[0:41:08] studies at the third grade level um yes and so so you can weaken that
-[0:41:12] um yes and so so you can weaken that by assuming that it's there the same
-[0:41:15] by assuming that it's there the same after adjusting
-[0:41:16] after adjusting for for observed covariance because
-[0:41:19] for for observed covariance because that's
+[0:41:01] assumption
+[0:41:02] to make to that you assume that the
+[0:41:04] effect is the same between the two
+[0:41:05] studies at the third grade level
+[0:41:08] um yes and so so you can weaken that
+[0:41:12] by assuming that it's there the same
+[0:41:15] after adjusting
+[0:41:16] for for observed covariance because
 [0:41:19] that's that's the slightly weaker assumption
-[0:41:21] that's the slightly weaker assumption that's still very strong
-[0:41:22] that's still very strong but it in in order to combine the
-[0:41:25] but it in in order to combine the observational
-[0:41:26] observational data and the experimental data in
-[0:41:29] data and the experimental data in principle
+[0:41:21] that's still very strong
+[0:41:22] but it in in order to combine the
+[0:41:25] observational
+[0:41:26] data and the experimental data in
 [0:41:30] principle i think i think in all cases um
-[0:41:33] i think i think in all cases um you need to assume that some things are
-[0:41:35] you need to assume that some things are the same in the two
-[0:41:37] the same in the two data sets and some things are different
-[0:41:40] data sets and some things are different so
+[0:41:33] you need to assume that some things are
+[0:41:35] the same in the two
+[0:41:37] data sets and some things are different
 [0:41:40] so here we're very sure that the
-[0:41:44] here we're very sure that the the assignment was random in
-[0:41:47] the assignment was random in the experimental data so that's sort of
-[0:41:49] the experimental data so that's sort of one place where you there
-[0:41:51] one place where you there where we're allowing things to be
-[0:41:53] where we're allowing things to be different between the two data sets
-[0:41:56] different between the two data sets but we do need to somewhere link them
-[0:41:59] but we do need to somewhere link them and assuming something is invariant to
-[0:42:00] and assuming something is invariant to these two data sets and in this case
-[0:42:03] these two data sets and in this case we're saying let's assume that at least
-[0:42:06] we're saying let's assume that at least conditional covariates these populations
-[0:42:08] conditional covariates these populations are the same
-[0:42:09] are the same or at least something we can adjust for
-[0:42:11] or at least something we can adjust for we know how to adjust for
-[0:42:12] we know how to adjust for and that the part we didn't know how to
-[0:42:14] and that the part we didn't know how to deal with without the experimental data
-[0:42:16] deal with without the experimental data is purely the selection effect we're
-[0:42:19] is purely the selection effect we're finding some ways
-[0:42:20] finding some ways where maybe it's a mix of those two i
-[0:42:22] where maybe it's a mix of those two i think that would be very interesting
-[0:42:24] think that would be very interesting and we haven't really thought through
-[0:42:26] and we haven't really thought through how that would uh
-[0:42:27] how that would uh that would work all right
-[0:42:30] that would work all right thank you i think in the interest of
-[0:42:31] thank you i think in the interest of time we'll now switch over to the
-[0:42:32] time we'll now switch over to the discussion so we'll have
-[0:42:34] discussion so we'll have nathan kalis and after nathan's
-[0:42:37] nathan kalis and after nathan's discussion uh
-[0:42:38] discussion uh hido will have the opportunity to
-[0:42:40] hido will have the opportunity to respond uh
-[0:42:41] respond uh nathan whenever you're ready
+[0:41:44] the assignment was random in
+[0:41:47] the experimental data so that's sort of
+[0:41:49] one place where you there
+[0:41:51] where we're allowing things to be
+[0:41:53] different between the two data sets
+[0:41:56] but we do need to somewhere link them
+[0:41:59] and assuming something is invariant to
+[0:42:00] these two data sets and in this case
+[0:42:03] we're saying let's assume that at least
+[0:42:06] conditional covariates these populations
+[0:42:08] are the same
+[0:42:09] or at least something we can adjust for
+[0:42:11] we know how to adjust for
+[0:42:12] and that the part we didn't know how to
+[0:42:14] deal with without the experimental data
+[0:42:16] is purely the selection effect we're
+[0:42:19] finding some ways
+[0:42:20] where maybe it's a mix of those two i
+[0:42:22] think that would be very interesting
+[0:42:24] and we haven't really thought through
+[0:42:26] how that would uh
+[0:42:27] that would work all right
+[0:42:30] thank you i think in the interest of
+[0:42:31] time we'll now switch over to the
+[0:42:32] discussion so we'll have
+[0:42:34] nathan kalis and after nathan's
+[0:42:37] discussion uh
+[0:42:38] hido will have the opportunity to
+[0:42:40] respond uh
+[0:42:41] nathan whenever you're ready
 [0:42:49] okay can you hear me yeah yeah okay so first i want to congratulate credo
-[0:42:53] so first i want to congratulate credo and his co-author susan and raj
-[0:42:56] and his co-author susan and raj for really awesome work uh i'm a really
-[0:42:59] for really awesome work uh i'm a really big fan of this
-[0:43:00] big fan of this work and i'm also a really really big
-[0:43:02] work and i'm also a really really big fan of the online causal infant seminar
-[0:43:03] fan of the online causal infant seminar so
+[0:42:53] and his co-author susan and raj
+[0:42:56] for really awesome work uh i'm a really
+[0:42:59] big fan of this
+[0:43:00] work and i'm also a really really big
+[0:43:02] fan of the online causal infant seminar
 [0:43:04] so it's a really big honor to uh be here
-[0:43:07] it's a really big honor to uh be here and give the discussion so i want to
-[0:43:09] and give the discussion so i want to thank you for the invitation um so
-[0:43:12] thank you for the invitation um so my discussion uh will i also want to
-[0:43:16] my discussion uh will i also want to recognize a
-[0:43:17] recognize a helpful uh input and feedback from
-[0:43:19] helpful uh input and feedback from charges in making my discussion
-[0:43:21] charges in making my discussion and my agenda for today is to kind of
-[0:43:25] and my agenda for today is to kind of talk about the greater length about the
-[0:43:28] talk about the greater length about the context
+[0:43:07] and give the discussion so i want to
+[0:43:09] thank you for the invitation um so
+[0:43:12] my discussion uh will i also want to
+[0:43:16] recognize a
+[0:43:17] helpful uh input and feedback from
+[0:43:19] charges in making my discussion
+[0:43:21] and my agenda for today is to kind of
+[0:43:25] talk about the greater length about the
 [0:43:29] context around data combination i think shido
-[0:43:30] around data combination i think shido did an excellent job talking about
-[0:43:32] did an excellent job talking about uh their paper which i'm going to refer
-[0:43:34] uh their paper which i'm going to refer to as the at all 21
-[0:43:37] to as the at all 21 and my thought was going to be to maybe
-[0:43:40] and my thought was going to be to maybe talk a little bit about
-[0:43:41] talk a little bit about you know what are the other types of
-[0:43:43] you know what are the other types of uses for data combination
-[0:43:45] uses for data combination identification uh is what hito's
-[0:43:49] identification uh is what hito's primary focus was uh kind of how do we
-[0:43:52] primary focus was uh kind of how do we deal with the issue that
-[0:43:53] deal with the issue that the estimates we care about is not
-[0:43:55] the estimates we care about is not really identified from the observational
-[0:43:57] really identified from the observational data
+[0:43:30] did an excellent job talking about
+[0:43:32] uh their paper which i'm going to refer
+[0:43:34] to as the at all 21
+[0:43:37] and my thought was going to be to maybe
+[0:43:40] talk a little bit about
+[0:43:41] you know what are the other types of
+[0:43:43] uses for data combination
+[0:43:45] identification uh is what hito's
+[0:43:49] primary focus was uh kind of how do we
+[0:43:52] deal with the issue that
+[0:43:53] the estimates we care about is not
+[0:43:55] really identified from the observational
 [0:43:57] data and use another data set to bring in and
-[0:44:00] and use another data set to bring in and um
 [0:44:01] um and make that possible and there's some
-[0:44:03] and make that possible and there's some other uh papers in that space
-[0:44:05] other uh papers in that space and that i'll try and compare and
-[0:44:07] and that i'll try and compare and contrast to and then
-[0:44:09] contrast to and then i'll also try and talk about different
-[0:44:11] i'll also try and talk about different uses for data combinations such as
-[0:44:13] uses for data combinations such as how can you bring in another data set to
-[0:44:15] how can you bring in another data set to increase efficiency
-[0:44:16] increase efficiency so in these papers you do have a data
-[0:44:20] so in these papers you do have a data set that does identify your s demand
-[0:44:24] set that does identify your s demand but maybe the data set is small so you
-[0:44:26] but maybe the data set is small so you want to use another data set that
-[0:44:28] want to use another data set that doesn't identify it
-[0:44:29] doesn't identify it but actually can help you a little bit
-[0:44:31] but actually can help you a little bit gain efficiency and reduce
-[0:44:33] gain efficiency and reduce the variance in your estimates and
-[0:44:35] the variance in your estimates and finally i'll mention quickly
-[0:44:38] finally i'll mention quickly uh this idea of using data combination
-[0:44:40] uh this idea of using data combination for partial identification
-[0:44:42] for partial identification maybe that speaks a little bit to the
-[0:44:44] maybe that speaks a little bit to the thought hito ended on
-[0:44:45] thought hito ended on which is you know what's in between what
-[0:44:47] which is you know what's in between what if we don't want to make all these
-[0:44:48] if we don't want to make all these different assumptions
-[0:44:49] different assumptions so there's stuff around you know well
-[0:44:51] so there's stuff around you know well how do we actually use extra data
-[0:44:53] how do we actually use extra data to you know make the identification
-[0:44:56] to you know make the identification uh intervals smaller but not point to
-[0:44:58] uh intervals smaller but not point to identify something
-[0:45:00] identify something so first i want to talk about um
-[0:45:04] so first i want to talk about um starting with identification i was
-[0:45:06] starting with identification i was actually going to start talking about
-[0:45:07] actually going to start talking about talking about
-[0:45:08] talking about uh rido's uh and his co-author's earlier
-[0:45:10] uh rido's uh and his co-author's earlier paper
+[0:44:03] other uh papers in that space
+[0:44:05] and that i'll try and compare and
+[0:44:07] contrast to and then
+[0:44:09] i'll also try and talk about different
+[0:44:11] uses for data combinations such as
+[0:44:13] how can you bring in another data set to
+[0:44:15] increase efficiency
+[0:44:16] so in these papers you do have a data
+[0:44:20] set that does identify your s demand
+[0:44:24] but maybe the data set is small so you
+[0:44:26] want to use another data set that
+[0:44:28] doesn't identify it
+[0:44:29] but actually can help you a little bit
+[0:44:31] gain efficiency and reduce
+[0:44:33] the variance in your estimates and
+[0:44:35] finally i'll mention quickly
+[0:44:38] uh this idea of using data combination
+[0:44:40] for partial identification
+[0:44:42] maybe that speaks a little bit to the
+[0:44:44] thought hito ended on
+[0:44:45] which is you know what's in between what
+[0:44:47] if we don't want to make all these
+[0:44:48] different assumptions
+[0:44:49] so there's stuff around you know well
+[0:44:51] how do we actually use extra data
+[0:44:53] to you know make the identification
+[0:44:56] uh intervals smaller but not point to
+[0:44:58] identify something
+[0:45:00] so first i want to talk about um
+[0:45:04] starting with identification i was
+[0:45:06] actually going to start talking about
+[0:45:08] uh rido's uh and his co-author's earlier
 [0:45:11] paper uh on using surrogates uh the paper is
-[0:45:14] uh on using surrogates uh the paper is called the the surrogate index if i call
-[0:45:16] called the the surrogate index if i call correctly
+[0:45:14] called the the surrogate index if i call
 [0:45:17] correctly so hiro kind of mentioned it in passing
-[0:45:18] so hiro kind of mentioned it in passing so i wanted to give a little bit more
-[0:45:20] so i wanted to give a little bit more context here maybe connect it to hideo's
-[0:45:22] context here maybe connect it to hideo's paper today
-[0:45:23] paper today uh and in this paper what they do is
-[0:45:25] uh and in this paper what they do is they again look at two data sets
-[0:45:27] they again look at two data sets and i'm going to go call them here label
-[0:45:29] and i'm going to go call them here label and unlabeled because it's less so about
-[0:45:31] and unlabeled because it's less so about observational versus experimental
-[0:45:32] observational versus experimental in the label data set we do observe the
-[0:45:35] in the label data set we do observe the primary outcome of interest
-[0:45:37] primary outcome of interest and then the unlabeled data set we don't
-[0:45:39] and then the unlabeled data set we don't observe it
-[0:45:40] observe it but when we observe the primary outcome
-[0:45:42] but when we observe the primary outcome of interest we don't observe
-[0:45:44] of interest we don't observe the assignment to treatment right so uh
-[0:45:47] the assignment to treatment right so uh either
+[0:45:18] so i wanted to give a little bit more
+[0:45:20] context here maybe connect it to hideo's
+[0:45:22] paper today
+[0:45:23] uh and in this paper what they do is
+[0:45:25] they again look at two data sets
+[0:45:27] and i'm going to go call them here label
+[0:45:29] and unlabeled because it's less so about
+[0:45:31] observational versus experimental
+[0:45:32] in the label data set we do observe the
+[0:45:35] primary outcome of interest
+[0:45:37] and then the unlabeled data set we don't
+[0:45:39] observe it
+[0:45:40] but when we observe the primary outcome
+[0:45:42] of interest we don't observe
+[0:45:44] the assignment to treatment right so uh
 [0:45:48] either data set by itself is not enough and we
-[0:45:50] data set by itself is not enough and we have to combine them and i'm gonna call
-[0:45:51] have to combine them and i'm gonna call the surrogate outcome
-[0:45:52] the surrogate outcome s and the primary outcome y just so we
-[0:45:55] s and the primary outcome y just so we have
+[0:45:50] have to combine them and i'm gonna call
+[0:45:51] the surrogate outcome
+[0:45:52] s and the primary outcome y just so we
 [0:45:55] have fewer superscripts so here
-[0:45:59] fewer superscripts so here i mean do you in order to get something
-[0:46:01] i mean do you in order to get something out of this you have to make some
-[0:46:02] out of this you have to make some assumptions so the assumption they make
-[0:46:04] assumptions so the assumption they make in this paper
-[0:46:05] in this paper is the so-called surrogacy condition
-[0:46:07] is the so-called surrogacy condition which allows us to stitch things
-[0:46:08] which allows us to stitch things together so it's essentially
-[0:46:10] together so it's essentially saying that the treatment is only
-[0:46:12] saying that the treatment is only affecting the outcome
-[0:46:13] affecting the outcome via the surrogate so then we can stitch
-[0:46:15] via the surrogate so then we can stitch these two data sets along
-[0:46:17] these two data sets along the surrogate to get the outcome and one
-[0:46:19] the surrogate to get the outcome and one of the really cool
-[0:46:20] of the really cool contributions of this paper and why it's
-[0:46:23] contributions of this paper and why it's called the index in a sense
-[0:46:24] called the index in a sense is that it allows for multi-dimensional
-[0:46:26] is that it allows for multi-dimensional circuits in order to make this condition
-[0:46:28] circuits in order to make this condition a bit more plausible
-[0:46:31] a bit more plausible but still it can be quite fragile so
-[0:46:33] but still it can be quite fragile so when i talk about
-[0:46:34] when i talk about hito's paper they talked about today
-[0:46:36] hito's paper they talked about today this will kind of show
-[0:46:38] this will kind of show the importance of shedding the surrogacy
-[0:46:40] the importance of shedding the surrogacy condition because um
-[0:46:43] condition because um yeah so let me try and explain it in
-[0:46:45] yeah so let me try and explain it in this example so the idea is
-[0:46:47] this example so the idea is we want to say know what the effect is
-[0:46:49] we want to say know what the effect is of class size on lifetime earnings
-[0:46:52] of class size on lifetime earnings uh and we're going to use test score as
-[0:46:54] uh and we're going to use test score as a surrogate
-[0:46:55] a surrogate but there may be some um unmediate
-[0:46:58] but there may be some um unmediate effects
+[0:45:59] i mean do you in order to get something
+[0:46:01] out of this you have to make some
+[0:46:02] assumptions so the assumption they make
+[0:46:04] in this paper
+[0:46:05] is the so-called surrogacy condition
+[0:46:07] which allows us to stitch things
+[0:46:08] together so it's essentially
+[0:46:10] saying that the treatment is only
+[0:46:12] affecting the outcome
+[0:46:13] via the surrogate so then we can stitch
+[0:46:15] these two data sets along
+[0:46:17] the surrogate to get the outcome and one
+[0:46:19] of the really cool
+[0:46:20] contributions of this paper and why it's
+[0:46:23] called the index in a sense
+[0:46:24] is that it allows for multi-dimensional
+[0:46:26] circuits in order to make this condition
+[0:46:28] a bit more plausible
+[0:46:31] but still it can be quite fragile so
+[0:46:33] when i talk about
+[0:46:34] hito's paper they talked about today
+[0:46:36] this will kind of show
+[0:46:38] the importance of shedding the surrogacy
+[0:46:40] condition because um
+[0:46:43] yeah so let me try and explain it in
+[0:46:45] this example so the idea is
+[0:46:47] we want to say know what the effect is
+[0:46:49] of class size on lifetime earnings
+[0:46:52] uh and we're going to use test score as
+[0:46:54] a surrogate
+[0:46:55] but there may be some um unmediate
 [0:46:59] effects uh direct effects or some confounding
-[0:47:01] uh direct effects or some confounding between these two things
-[0:47:02] between these two things and then this would fail the surrogacy
-[0:47:04] and then this would fail the surrogacy conditions so the idea from this earlier
-[0:47:06] conditions so the idea from this earlier paper
+[0:47:01] between these two things
+[0:47:02] and then this would fail the surrogacy
+[0:47:04] conditions so the idea from this earlier
 [0:47:07] paper is to just control for more things in
-[0:47:08] is to just control for more things in the surrogates right so not just use
-[0:47:10] the surrogates right so not just use test scores assertive but also use
-[0:47:12] test scores assertive but also use college attendance and earnings early in
-[0:47:15] college attendance and earnings early in adulthood
+[0:47:08] the surrogates right so not just use
+[0:47:10] test scores assertive but also use
+[0:47:12] college attendance and earnings early in
 [0:47:16] adulthood and maybe then we can more plausibly say
-[0:47:18] and maybe then we can more plausibly say that this arrow doesn't exist
-[0:47:20] that this arrow doesn't exist the issue is that the surrogacy
-[0:47:23] the issue is that the surrogacy condition can still be violated
-[0:47:25] condition can still be violated if the surrogate outcome in the primary
-[0:47:28] if the surrogate outcome in the primary outcome
+[0:47:18] that this arrow doesn't exist
+[0:47:20] the issue is that the surrogacy
+[0:47:23] condition can still be violated
+[0:47:25] if the surrogate outcome in the primary
 [0:47:29] outcome are confounded by a common cause like
-[0:47:31] are confounded by a common cause like maybe
 [0:47:32] maybe a person's underlying intelligence or
-[0:47:34] a person's underlying intelligence or any sort of other
-[0:47:35] any sort of other kind of variable and then even if this
-[0:47:39] kind of variable and then even if this there are many many surrogates it's
-[0:47:40] there are many many surrogates it's plausible
+[0:47:34] any sort of other
+[0:47:35] kind of variable and then even if this
+[0:47:39] there are many many surrogates it's
 [0:47:42] plausible uh that such a common confounder exists
-[0:47:45] uh that such a common confounder exists and even
 [0:47:46] and even if it seems as though class size has no
-[0:47:48] if it seems as though class size has no direct effect on lifetime earnings and
-[0:47:50] direct effect on lifetime earnings and it's only immediately
-[0:47:51] it's only immediately via the circuits this can actually still
-[0:47:53] via the circuits this can actually still violate the condition
-[0:47:55] violate the condition so what's really nice about the paper
-[0:47:56] so what's really nice about the paper that hito talked about today is that it
-[0:47:58] that hito talked about today is that it sheds this completely
-[0:47:59] sheds this completely but also kind of deals with a different
-[0:48:01] but also kind of deals with a different problem the problem that krito talked
-[0:48:03] problem the problem that krito talked about which has a similar missingness
-[0:48:05] about which has a similar missingness pattern
+[0:47:48] direct effect on lifetime earnings and
+[0:47:50] it's only immediately
+[0:47:51] via the circuits this can actually still
+[0:47:53] violate the condition
+[0:47:55] so what's really nice about the paper
+[0:47:56] that hito talked about today is that it
+[0:47:58] sheds this completely
+[0:47:59] but also kind of deals with a different
+[0:48:01] problem the problem that krito talked
+[0:48:03] about which has a similar missingness
 [0:48:05] pattern except that in one of the data sets we
-[0:48:07] except that in one of the data sets we also observe
-[0:48:09] also observe the treatment indicator and
-[0:48:12] the treatment indicator and now we're going to call this the
-[0:48:13] now we're going to call this the observational or o data set and here the
-[0:48:15] observational or o data set and here the problem is that the
-[0:48:16] problem is that the observational data set is confounded so
-[0:48:19] observational data set is confounded so the usual way to deal with this
-[0:48:21] the usual way to deal with this is to just assume okay x accounts for
-[0:48:23] is to just assume okay x accounts for all the confounders we can just control
-[0:48:24] all the confounders we can just control for x
+[0:48:07] also observe
+[0:48:09] the treatment indicator and
+[0:48:12] now we're going to call this the
+[0:48:13] observational or o data set and here the
+[0:48:15] problem is that the
+[0:48:16] observational data set is confounded so
+[0:48:19] the usual way to deal with this
+[0:48:21] is to just assume okay x accounts for
+[0:48:23] all the confounders we can just control
 [0:48:25] for x but as hito mentioned that can be you
-[0:48:27] but as hito mentioned that can be you know highly
-[0:48:28] know highly uh questionable so what redo did is
-[0:48:32] uh questionable so what redo did is using this uh experimental data set uh
-[0:48:36] using this uh experimental data set uh he allowed us to
-[0:48:36] he allowed us to relax on confoundness and replace it
-[0:48:38] relax on confoundness and replace it with latent unconfoundedness which can
-[0:48:40] with latent unconfoundedness which can really be a lot more plausible
-[0:48:41] really be a lot more plausible as we saw he got pretty good estimates
-[0:48:44] as we saw he got pretty good estimates in the project star case
-[0:48:45] in the project star case and there's no surrogacy condition so we
-[0:48:48] and there's no surrogacy condition so we heard it all
-[0:48:48] heard it all all about it today so i don't have too
-[0:48:51] all about it today so i don't have too much to say about this
-[0:48:53] much to say about this i just have a few comments one is that
-[0:48:57] i just have a few comments one is that in this assumption on the
-[0:49:00] in this assumption on the external validity that the assignment to
-[0:49:02] external validity that the assignment to study is essentially at random
-[0:49:04] study is essentially at random right so the assignment to whether your
-[0:49:06] right so the assignment to whether your observational experimental
-[0:49:07] observational experimental is independent of all the potential
-[0:49:09] is independent of all the potential outcomes condition on x
-[0:49:11] outcomes condition on x actually this can be relaxed so if you
-[0:49:13] actually this can be relaxed so if you care about
-[0:49:14] care about identifying identifying the ate on the
-[0:49:17] identifying identifying the ate on the observational
-[0:49:17] observational data set it's actually enough to just
-[0:49:19] data set it's actually enough to just have uh
+[0:48:27] know highly
+[0:48:28] uh questionable so what redo did is
+[0:48:32] using this uh experimental data set uh
+[0:48:36] he allowed us to
+[0:48:36] relax on confoundness and replace it
+[0:48:38] with latent unconfoundedness which can
+[0:48:40] really be a lot more plausible
+[0:48:41] as we saw he got pretty good estimates
+[0:48:44] in the project star case
+[0:48:45] and there's no surrogacy condition so we
+[0:48:48] heard it all
+[0:48:48] all about it today so i don't have too
+[0:48:51] much to say about this
+[0:48:53] i just have a few comments one is that
+[0:48:57] in this assumption on the
+[0:49:00] external validity that the assignment to
+[0:49:02] study is essentially at random
+[0:49:04] right so the assignment to whether your
+[0:49:06] observational experimental
+[0:49:07] is independent of all the potential
+[0:49:09] outcomes condition on x
+[0:49:11] actually this can be relaxed so if you
+[0:49:13] care about
+[0:49:14] identifying identifying the ate on the
+[0:49:17] observational
+[0:49:17] data set it's actually enough to just
 [0:49:22] have uh assignment at random with respect to the
-[0:49:24] assignment at random with respect to the surrogate outcome or
-[0:49:25] surrogate outcome or if you care about ate in the
-[0:49:26] if you care about ate in the experimental data set you have this
-[0:49:28] experimental data set you have this other relaxed assumption
-[0:49:29] other relaxed assumption but you know that's kind of minor
-[0:49:33] but you know that's kind of minor because it's hard to argue what's the
-[0:49:34] because it's hard to argue what's the difference between this and that
-[0:49:36] difference between this and that but it's something that you can actually
-[0:49:38] but it's something that you can actually relax something i think is maybe a bit
-[0:49:40] relax something i think is maybe a bit more important
-[0:49:41] more important is how we do estimation in an inference
-[0:49:43] is how we do estimation in an inference so
+[0:49:24] surrogate outcome or
+[0:49:25] if you care about ate in the
+[0:49:26] experimental data set you have this
+[0:49:28] other relaxed assumption
+[0:49:29] but you know that's kind of minor
+[0:49:33] because it's hard to argue what's the
+[0:49:34] difference between this and that
+[0:49:36] but it's something that you can actually
+[0:49:38] relax something i think is maybe a bit
+[0:49:40] more important
+[0:49:41] is how we do estimation in an inference
 [0:49:44] so frida mentioned these three different uh
-[0:49:47] frida mentioned these three different uh methods to do estimation and inference
-[0:49:50] methods to do estimation and inference in the paper and then in this
-[0:49:52] in the paper and then in this presentation
-[0:49:52] presentation and the thing that jumped up to me when
-[0:49:54] and the thing that jumped up to me when i saw this is
-[0:49:55] i saw this is like why this why not just do the
-[0:49:58] like why this why not just do the efficient thing
-[0:49:59] efficient thing um so i thought okay let me derive the
-[0:50:03] um so i thought okay let me derive the eaf
+[0:49:47] methods to do estimation and inference
+[0:49:50] in the paper and then in this
+[0:49:52] presentation
+[0:49:52] and the thing that jumped up to me when
+[0:49:54] i saw this is
+[0:49:55] like why this why not just do the
+[0:49:58] efficient thing
+[0:49:59] um so i thought okay let me derive the
 [0:50:04] eaf um it turned out to be a little bit
-[0:50:07] um it turned out to be a little bit harder uh i first i thought okay it's
-[0:50:09] harder uh i first i thought okay it's just like some simple projections i can
-[0:50:11] just like some simple projections i can do this real quick
-[0:50:12] do this real quick uh then i gave up then asked jose and
-[0:50:15] uh then i gave up then asked jose and jose this looks really simple right like
-[0:50:16] jose this looks really simple right like can't we do this and he said yeah this
-[0:50:18] can't we do this and he said yeah this is super easy give me 20 minutes i'll
-[0:50:19] is super easy give me 20 minutes i'll get back to you
-[0:50:20] get back to you he said no this is really hard we had to
-[0:50:23] he said no this is really hard we had to spend a little bit longer on it to be
-[0:50:24] spend a little bit longer on it to be able to get it um
-[0:50:27] able to get it um but we found it and we didn't have time
-[0:50:28] but we found it and we didn't have time to check all these things but we think
-[0:50:30] to check all these things but we think it's probably doubly robust and neiman
-[0:50:32] it's probably doubly robust and neiman orthogonal
-[0:50:33] orthogonal which means that in terms of estimation
-[0:50:35] which means that in terms of estimation you can get
-[0:50:36] you can get semi-parametric efficiency really easily
-[0:50:38] semi-parametric efficiency really easily just estimating all these nuisances with
-[0:50:39] just estimating all these nuisances with some black box machine learning method
-[0:50:41] some black box machine learning method but i think much more important is that
-[0:50:43] but i think much more important is that you get inference for free
-[0:50:44] you get inference for free so i didn't actually understand
-[0:50:48] so i didn't actually understand from the paper how the conference
-[0:50:51] from the paper how the conference intervals were generated i'm
-[0:50:53] intervals were generated i'm thinking maybe it's the control variant
-[0:50:54] thinking maybe it's the control variant method where you plug in this eta
-[0:50:56] method where you plug in this eta and then you rely on on standard methods
-[0:50:58] and then you rely on on standard methods there but i guess that wouldn't account
-[0:51:00] there but i guess that wouldn't account for the uncertainty in estimating eta
-[0:51:02] for the uncertainty in estimating eta itself
+[0:50:07] harder uh i first i thought okay it's
+[0:50:09] just like some simple projections i can
+[0:50:11] do this real quick
+[0:50:12] uh then i gave up then asked jose and
+[0:50:15] jose this looks really simple right like
+[0:50:16] can't we do this and he said yeah this
+[0:50:18] is super easy give me 20 minutes i'll
+[0:50:19] get back to you
+[0:50:20] he said no this is really hard we had to
+[0:50:23] spend a little bit longer on it to be
+[0:50:24] able to get it um
+[0:50:27] but we found it and we didn't have time
+[0:50:28] to check all these things but we think
+[0:50:30] it's probably doubly robust and neiman
+[0:50:32] orthogonal
+[0:50:33] which means that in terms of estimation
+[0:50:35] you can get
+[0:50:36] semi-parametric efficiency really easily
+[0:50:38] just estimating all these nuisances with
+[0:50:39] some black box machine learning method
+[0:50:41] but i think much more important is that
+[0:50:43] you get inference for free
+[0:50:44] so i didn't actually understand
+[0:50:48] from the paper how the conference
+[0:50:51] intervals were generated i'm
+[0:50:53] thinking maybe it's the control variant
+[0:50:54] method where you plug in this eta
+[0:50:56] and then you rely on on standard methods
+[0:50:58] there but i guess that wouldn't account
+[0:51:00] for the uncertainty in estimating eta
 [0:51:03] itself um so this would and here all we have to
-[0:51:05] um so this would and here all we have to do
 [0:51:06] do is take the standard deviation of this
-[0:51:08] is take the standard deviation of this influence function
-[0:51:10] influence function and divide it by square root of n and
-[0:51:12] and divide it by square root of n and get you know plus minus two of those
-[0:51:14] get you know plus minus two of those standard errors and we get
-[0:51:15] standard errors and we get uh valid confidence intervals so i think
-[0:51:17] uh valid confidence intervals so i think that's quite important kind of a nice
-[0:51:19] that's quite important kind of a nice addition
+[0:51:08] influence function
+[0:51:10] and divide it by square root of n and
+[0:51:12] get you know plus minus two of those
+[0:51:14] standard errors and we get
+[0:51:15] uh valid confidence intervals so i think
+[0:51:17] that's quite important kind of a nice
 [0:51:19] addition um to do the efficient thing here and
-[0:51:21] um to do the efficient thing here and also do uh get it
-[0:51:24] also do uh get it like a correct coverage uh out of it
-[0:51:27] like a correct coverage uh out of it um that's pretty much all i have to say
-[0:51:29] um that's pretty much all i have to say about that paper
-[0:51:30] about that paper just going back to talking about the
-[0:51:32] just going back to talking about the context uh
-[0:51:34] context uh you know yet another uh method for
-[0:51:37] you know yet another uh method for identification using data combination
-[0:51:39] identification using data combination this other paper i was involved with and
-[0:51:42] this other paper i was involved with and here again we have a
-[0:51:43] here again we have a observational data set that's confounded
-[0:51:46] observational data set that's confounded but we don't have circuits
-[0:51:48] but we don't have circuits instead what we have is we have an
-[0:51:49] instead what we have is we have an experimental data set
-[0:51:51] experimental data set that is you know assigned at random
-[0:51:55] that is you know assigned at random but it has the outcome we want but it
-[0:51:57] but it has the outcome we want but it violates
+[0:51:21] also do uh get it
+[0:51:24] like a correct coverage uh out of it
+[0:51:27] um that's pretty much all i have to say
+[0:51:29] about that paper
+[0:51:30] just going back to talking about the
+[0:51:32] context uh
+[0:51:34] you know yet another uh method for
+[0:51:37] identification using data combination
+[0:51:39] this other paper i was involved with and
+[0:51:42] here again we have a
+[0:51:43] observational data set that's confounded
+[0:51:46] but we don't have circuits
+[0:51:48] instead what we have is we have an
+[0:51:49] experimental data set
+[0:51:51] that is you know assigned at random
+[0:51:55] but it has the outcome we want but it
 [0:51:58] violates overlap with the population that we're
-[0:52:00] overlap with the population that we're interested in right so it doesn't
-[0:52:01] interested in right so it doesn't actually cover
-[0:52:02] actually cover the population we want to make
-[0:52:03] the population we want to make statements about so usually what you
-[0:52:05] statements about so usually what you would do in such a setting is you would
-[0:52:07] would do in such a setting is you would just
+[0:52:00] interested in right so it doesn't
+[0:52:01] actually cover
+[0:52:02] the population we want to make
+[0:52:03] statements about so usually what you
+[0:52:05] would do in such a setting is you would
 [0:52:07] just estimate a kate or conditional average
-[0:52:09] estimate a kate or conditional average treatment effect
-[0:52:10] treatment effect on the experimental data set assume it's
-[0:52:12] on the experimental data set assume it's linear or some sort of parametric and
-[0:52:14] linear or some sort of parametric and extrapolate it
-[0:52:16] extrapolate it um but that could fail if it's not
-[0:52:19] um but that could fail if it's not really linear and it's just
-[0:52:20] really linear and it's just extrapolating things they don't know
-[0:52:22] extrapolating things they don't know so instead we made a different
-[0:52:23] so instead we made a different assumption we argued this confounding
-[0:52:25] assumption we argued this confounding error
+[0:52:09] treatment effect
+[0:52:10] on the experimental data set assume it's
+[0:52:12] linear or some sort of parametric and
+[0:52:14] extrapolate it
+[0:52:16] um but that could fail if it's not
+[0:52:19] really linear and it's just
+[0:52:20] extrapolating things they don't know
+[0:52:22] so instead we made a different
+[0:52:23] assumption we argued this confounding
 [0:52:26] error what we called is some extrapolatable
-[0:52:28] what we called is some extrapolatable function and we circulated that instead
-[0:52:29] function and we circulated that instead and we made some arguments why that
-[0:52:30] and we made some arguments why that might be more plausible and some
-[0:52:32] might be more plausible and some examples
+[0:52:28] function and we circulated that instead
+[0:52:29] and we made some arguments why that
+[0:52:30] might be more plausible and some
+[0:52:32] examples
 [0:52:37] but yet you know a completely different use for for data combination
-[0:52:39] use for for data combination might be efficiency gains so you don't
-[0:52:41] might be efficiency gains so you don't mention the this paper of chaucer
-[0:52:44] mention the this paper of chaucer and mine so it does have the
-[0:52:48] and mine so it does have the you know if you look at the missingness
-[0:52:49] you know if you look at the missingness table kind of the pattern of how
-[0:52:52] table kind of the pattern of how the data is missing between the two data
-[0:52:53] the data is missing between the two data sets it looks the same but somehow
-[0:52:56] sets it looks the same but somehow it's kind of a fundamentally different
-[0:52:57] it's kind of a fundamentally different problem because here and here i'm
-[0:52:59] problem because here and here i'm calling it labeled and unlabeled
-[0:53:00] calling it labeled and unlabeled to connote that because here uh what we
-[0:53:03] to connote that because here uh what we dealt with is that the label data set
-[0:53:05] dealt with is that the label data set where you actually have
-[0:53:06] where you actually have labels for the outcomes that you care
-[0:53:08] labels for the outcomes that you care about it is unconfounded
-[0:53:10] about it is unconfounded you can just estimate things from it
-[0:53:12] you can just estimate things from it just by um
-[0:53:14] just by um controlling for the confounders maybe
-[0:53:16] controlling for the confounders maybe there's no confounders maybe this is
-[0:53:17] there's no confounders maybe this is just a small rct
-[0:53:19] just a small rct where you actually followed everybody
-[0:53:21] where you actually followed everybody and tracked all their outcomes
-[0:53:23] and tracked all their outcomes but it's small because it costs a lot of
-[0:53:24] but it's small because it costs a lot of money to track these long-term outcomes
-[0:53:26] money to track these long-term outcomes so maybe there's another unlabeled data
-[0:53:28] so maybe there's another unlabeled data set uh maybe it's a different data set
-[0:53:30] set uh maybe it's a different data set maybe it's a subset of your experiments
-[0:53:32] maybe it's a subset of your experiments where you didn't follow everybody
-[0:53:34] where you didn't follow everybody and track them uh and or did some really
-[0:53:37] and track them uh and or did some really expensive tests where you don't have
-[0:53:38] expensive tests where you don't have this uh
+[0:52:39] might be efficiency gains so you don't
+[0:52:41] mention the this paper of chaucer
+[0:52:44] and mine so it does have the
+[0:52:48] you know if you look at the missingness
+[0:52:49] table kind of the pattern of how
+[0:52:52] the data is missing between the two data
+[0:52:53] sets it looks the same but somehow
+[0:52:56] it's kind of a fundamentally different
+[0:52:57] problem because here and here i'm
+[0:52:59] calling it labeled and unlabeled
+[0:53:00] to connote that because here uh what we
+[0:53:03] dealt with is that the label data set
+[0:53:05] where you actually have
+[0:53:06] labels for the outcomes that you care
+[0:53:08] about it is unconfounded
+[0:53:10] you can just estimate things from it
+[0:53:12] just by um
+[0:53:14] controlling for the confounders maybe
+[0:53:16] there's no confounders maybe this is
+[0:53:17] just a small rct
+[0:53:19] where you actually followed everybody
+[0:53:21] and tracked all their outcomes
+[0:53:23] but it's small because it costs a lot of
+[0:53:24] money to track these long-term outcomes
+[0:53:26] so maybe there's another unlabeled data
+[0:53:28] set uh maybe it's a different data set
+[0:53:30] maybe it's a subset of your experiments
+[0:53:32] where you didn't follow everybody
+[0:53:34] and track them uh and or did some really
+[0:53:37] expensive tests where you don't have
 [0:53:39] this uh outcome so the idea is to
-[0:53:42] outcome so the idea is to instead of just using the small data set
-[0:53:45] instead of just using the small data set bring in this unlabeled data set
-[0:53:47] bring in this unlabeled data set to improve it to improve the efficiency
-[0:53:49] to improve it to improve the efficiency not the identification you only have
-[0:53:51] not the identification you only have identification from the label data set
-[0:53:52] identification from the label data set but to deal with the small samples um
-[0:53:55] but to deal with the small samples um and again no surrogacy conditions
-[0:53:57] and again no surrogacy conditions so again this is kind of similar
-[0:54:00] so again this is kind of similar missingness
-[0:54:01] missingness pattern and here the label data says
-[0:54:03] pattern and here the label data says kind of the
-[0:54:05] kind of the same thing as what krito called the
-[0:54:06] same thing as what krito called the observational data set
-[0:54:08] observational data set but here the labeled is small but
-[0:54:11] but here the labeled is small but ana confounded but for hito it was maybe
-[0:54:13] ana confounded but for hito it was maybe big but confounded
-[0:54:16] big but confounded so it's sort of kind of different right
-[0:54:18] so it's sort of kind of different right um
+[0:53:42] instead of just using the small data set
+[0:53:45] bring in this unlabeled data set
+[0:53:47] to improve it to improve the efficiency
+[0:53:49] not the identification you only have
+[0:53:51] identification from the label data set
+[0:53:52] but to deal with the small samples um
+[0:53:55] and again no surrogacy conditions
+[0:53:57] so again this is kind of similar
+[0:54:00] missingness
+[0:54:01] pattern and here the label data says
+[0:54:03] kind of the
+[0:54:05] same thing as what krito called the
+[0:54:06] observational data set
+[0:54:08] but here the labeled is small but
+[0:54:11] ana confounded but for hito it was maybe
+[0:54:13] big but confounded
+[0:54:16] so it's sort of kind of different right
 [0:54:19] um some other yeah and and what we
-[0:54:22] some other yeah and and what we really look at is kind of what is the
-[0:54:23] really look at is kind of what is the gain from doing this and
-[0:54:26] gain from doing this and we see that the gain from bringing in
-[0:54:28] we see that the gain from bringing in this unlabeled data set
-[0:54:29] this unlabeled data set and from observing uh this circuit that
-[0:54:32] and from observing uh this circuit that helps us
+[0:54:22] really look at is kind of what is the
+[0:54:23] gain from doing this and
+[0:54:26] we see that the gain from bringing in
+[0:54:28] this unlabeled data set
+[0:54:29] and from observing uh this circuit that
 [0:54:32] helps us leverage this unlabeled data set
-[0:54:36] leverage this unlabeled data set here's like a simplified version of this
-[0:54:38] here's like a simplified version of this where if we assume that
-[0:54:40] where if we assume that assignment to treatment an assignment to
-[0:54:42] assignment to treatment an assignment to experiment
-[0:54:43] experiment uh was both unconditionally random it
-[0:54:46] uh was both unconditionally random it would look something like this and the
-[0:54:47] would look something like this and the efficiency gain will be
-[0:54:48] efficiency gain will be roughly the ratio of the sizes of the
-[0:54:51] roughly the ratio of the sizes of the two samples
-[0:54:53] two samples and if you ask well what is the loss
-[0:54:54] and if you ask well what is the loss from not following everybody and
-[0:54:56] from not following everybody and recording the outcomes on
-[0:54:58] recording the outcomes on everybody then again you know it's some
-[0:55:01] everybody then again you know it's some sort of outcome and essentially you see
-[0:55:02] sort of outcome and essentially you see that the more predictive the surrogates
-[0:55:04] that the more predictive the surrogates are of the outcome
-[0:55:05] are of the outcome you know the more helpful it is as you
-[0:55:06] you know the more helpful it is as you would expect
-[0:55:09] would expect um some other papers that are looking at
-[0:55:11] um some other papers that are looking at efficiency gains
-[0:55:12] efficiency gains are this changidal paper which has a
-[0:55:15] are this changidal paper which has a similar missingness pattern
-[0:55:16] similar missingness pattern and similar kind of assumptions but they
-[0:55:18] and similar kind of assumptions but they focus on the missing completely at
-[0:55:19] focus on the missing completely at random setting
-[0:55:20] random setting and where the unlabeled data set has
-[0:55:23] and where the unlabeled data set has infinite size so it's distribution known
-[0:55:24] infinite size so it's distribution known as
+[0:54:36] here's like a simplified version of this
+[0:54:38] where if we assume that
+[0:54:40] assignment to treatment an assignment to
+[0:54:42] experiment
+[0:54:43] uh was both unconditionally random it
+[0:54:46] would look something like this and the
+[0:54:47] efficiency gain will be
+[0:54:48] roughly the ratio of the sizes of the
+[0:54:51] two samples
+[0:54:53] and if you ask well what is the loss
+[0:54:54] from not following everybody and
+[0:54:56] recording the outcomes on
+[0:54:58] everybody then again you know it's some
+[0:55:01] sort of outcome and essentially you see
+[0:55:02] that the more predictive the surrogates
+[0:55:04] are of the outcome
+[0:55:05] you know the more helpful it is as you
+[0:55:06] would expect
+[0:55:09] um some other papers that are looking at
+[0:55:11] efficiency gains
+[0:55:12] are this changidal paper which has a
+[0:55:15] similar missingness pattern
+[0:55:16] and similar kind of assumptions but they
+[0:55:18] focus on the missing completely at
+[0:55:19] random setting
+[0:55:20] and where the unlabeled data set has
+[0:55:23] infinite size so it's distribution known
 [0:55:25] as exactly and they focus on parametric
-[0:55:26] exactly and they focus on parametric estimation rather than all the same
-[0:55:28] estimation rather than all the same parametric efficiency stuff
-[0:55:30] parametric efficiency stuff there's uh zheng and bardik where they
-[0:55:33] there's uh zheng and bardik where they don't have surrogates so it's kind of a
-[0:55:35] don't have surrogates so it's kind of a semi-supervised setting where
-[0:55:37] semi-supervised setting where you only observe x's and w's for some
-[0:55:40] you only observe x's and w's for some people and you're trying to use that to
-[0:55:42] people and you're trying to use that to improve estimation and then there's yang
-[0:55:44] improve estimation and then there's yang and ding
+[0:55:26] estimation rather than all the same
+[0:55:28] parametric efficiency stuff
+[0:55:30] there's uh zheng and bardik where they
+[0:55:33] don't have surrogates so it's kind of a
+[0:55:35] semi-supervised setting where
+[0:55:37] you only observe x's and w's for some
+[0:55:40] people and you're trying to use that to
+[0:55:42] improve estimation and then there's yang
 [0:55:46] and ding where they're looking again no
-[0:55:47] where they're looking again no surrogates they're just using
-[0:55:49] surrogates they're just using the another data set that might not have
-[0:55:51] the another data set that might not have all the confounders so it's not
-[0:55:52] all the confounders so it's not unconfounded
-[0:55:54] unconfounded um i don't know how dominique can i
-[0:55:57] um i don't know how dominique can i mention like two slides on partial id do
-[0:56:00] mention like two slides on partial id do we have time for that
-[0:56:01] we have time for that sure yeah yeah okay i'll make it quick
-[0:56:04] sure yeah yeah okay i'll make it quick um yeah so another thing you could do as
-[0:56:07] um yeah so another thing you could do as i mentioned in the beginning is use
-[0:56:08] i mentioned in the beginning is use two data sets to try and uh
-[0:56:12] two data sets to try and uh and reduce the identification it will
-[0:56:13] and reduce the identification it will just get a little bit better but it
-[0:56:14] just get a little bit better but it might not be perfect
-[0:56:16] might not be perfect um so one really cool paper uh from 2014
-[0:56:20] um so one really cool paper uh from 2014 in econometrica
-[0:56:21] in econometrica fanata was looking at how to combine
-[0:56:24] fanata was looking at how to combine uh one what i'm going to call a primary
-[0:56:27] uh one what i'm going to call a primary data set that has your outcomes of
-[0:56:28] data set that has your outcomes of interest
+[0:55:47] surrogates they're just using
+[0:55:49] the another data set that might not have
+[0:55:51] all the confounders so it's not
+[0:55:52] unconfounded
+[0:55:54] um i don't know how dominique can i
+[0:55:57] mention like two slides on partial id do
+[0:56:00] we have time for that
+[0:56:01] sure yeah yeah okay i'll make it quick
+[0:56:04] um yeah so another thing you could do as
+[0:56:07] i mentioned in the beginning is use
+[0:56:08] two data sets to try and uh
+[0:56:12] and reduce the identification it will
+[0:56:13] just get a little bit better but it
+[0:56:14] might not be perfect
+[0:56:16] um so one really cool paper uh from 2014
+[0:56:20] in econometrica
+[0:56:21] fanata was looking at how to combine
+[0:56:24] uh one what i'm going to call a primary
+[0:56:27] data set that has your outcomes of
 [0:56:29] interest but doesn't have the confounders so you
-[0:56:31] but doesn't have the confounders so you can't control for them and you have an
-[0:56:33] can't control for them and you have an auxiliary data set
-[0:56:34] auxiliary data set that has the confounders but doesn't
-[0:56:36] that has the confounders but doesn't have the outcome
-[0:56:38] have the outcome and what they do is they give sharp
-[0:56:39] and what they do is they give sharp identification bounds and what's really
-[0:56:41] identification bounds and what's really cool about this paper is they kind of
-[0:56:43] cool about this paper is they kind of bring to the fore this uh inequality
-[0:56:46] bring to the fore this uh inequality uh that has existed the combine is
-[0:56:48] uh that has existed the combine is simon's stout inequality and really show
-[0:56:50] simon's stout inequality and really show how useful this inequality is
-[0:56:52] how useful this inequality is it's kind of a generalization you can
-[0:56:55] it's kind of a generalization you can use this inequality to also prove
-[0:56:58] use this inequality to also prove for shay huffting it's also kind of a a
-[0:57:01] for shay huffting it's also kind of a a stronger form of koshi schwartz because
-[0:57:03] stronger form of koshi schwartz because you could have also bounded this with
-[0:57:04] you could have also bounded this with kosher schwartz
-[0:57:05] kosher schwartz but under this data combination setting
-[0:57:07] but under this data combination setting this is sharp and kosher schwartz is not
-[0:57:08] this is sharp and kosher schwartz is not sure
+[0:56:31] can't control for them and you have an
+[0:56:33] auxiliary data set
+[0:56:34] that has the confounders but doesn't
+[0:56:36] have the outcome
+[0:56:38] and what they do is they give sharp
+[0:56:39] identification bounds and what's really
+[0:56:41] cool about this paper is they kind of
+[0:56:43] bring to the fore this uh inequality
+[0:56:46] uh that has existed the combine is
+[0:56:48] simon's stout inequality and really show
+[0:56:50] how useful this inequality is
+[0:56:52] it's kind of a generalization you can
+[0:56:55] use this inequality to also prove
+[0:56:58] for shay huffting it's also kind of a a
+[0:57:01] stronger form of koshi schwartz because
+[0:57:03] you could have also bounded this with
+[0:57:04] kosher schwartz
+[0:57:05] but under this data combination setting
+[0:57:07] this is sharp and kosher schwartz is not
 [0:57:10] sure um and in the paper uh that i was
-[0:57:13] um and in the paper uh that i was involved in
-[0:57:14] involved in we were looking at data combination to
-[0:57:15] we were looking at data combination to get sharp identification bounds for
-[0:57:17] get sharp identification bounds for fairness metrics
-[0:57:18] fairness metrics so here we're thinking about settings
-[0:57:20] so here we're thinking about settings like lending
-[0:57:22] like lending where you care about
+[0:57:13] involved in
+[0:57:14] we were looking at data combination to
+[0:57:15] get sharp identification bounds for
+[0:57:17] fairness metrics
+[0:57:18] so here we're thinking about settings
+[0:57:20] like lending
+[0:57:22] where you care about
 [0:57:28] about disparities like demographic disparity like what is
-[0:57:30] disparity like what is the average loan approval rate in one
-[0:57:33] the average loan approval rate in one group versus another group
-[0:57:34] group versus another group or uh the same thing but maybe we're
-[0:57:37] or uh the same thing but maybe we're going to control for
-[0:57:38] going to control for non-default right so this is called tpr
-[0:57:40] non-default right so this is called tpr disparity or opportunity disparity or
-[0:57:42] disparity or opportunity disparity or quality of opportunity
-[0:57:44] quality of opportunity and obviously you need to control for
-[0:57:46] and obviously you need to control for the protected attributes
-[0:57:47] the protected attributes a right so this could be race gender
-[0:57:50] a right so this could be race gender there's various protected attributes
-[0:57:52] there's various protected attributes defined
+[0:57:30] the average loan approval rate in one
+[0:57:33] group versus another group
+[0:57:34] or uh the same thing but maybe we're
+[0:57:37] going to control for
+[0:57:38] non-default right so this is called tpr
+[0:57:40] disparity or opportunity disparity or
+[0:57:42] quality of opportunity
+[0:57:44] and obviously you need to control for
+[0:57:46] the protected attributes
+[0:57:47] a right so this could be race gender
+[0:57:50] there's various protected attributes
 [0:57:53] defined for example by us laws different in
-[0:57:55] for example by us laws different in different contexts
-[0:57:57] different contexts usually don't actually observe these and
-[0:58:00] usually don't actually observe these and instead we show how to stitch these
-[0:58:01] instead we show how to stitch these together using proxies
-[0:58:03] together using proxies previously there's some literature on
-[0:58:04] previously there's some literature on point identifying it but you actually
-[0:58:06] point identifying it but you actually cannot
+[0:57:55] different contexts
+[0:57:57] usually don't actually observe these and
+[0:58:00] instead we show how to stitch these
+[0:58:01] together using proxies
+[0:58:03] previously there's some literature on
+[0:58:04] point identifying it but you actually
 [0:58:08] cannot so we instead say let's try and do
-[0:58:10] so we instead say let's try and do credible inference
-[0:58:12] credible inference using partial identification and sort of
-[0:58:14] using partial identification and sort of this orthogonalized
-[0:58:16] this orthogonalized double machine learning style inference
-[0:58:18] double machine learning style inference on these bounds
-[0:58:19] on these bounds so i'll just end here and kind of my
-[0:58:22] so i'll just end here and kind of my aim was to just add to frida's talk and
-[0:58:24] aim was to just add to frida's talk and kind of
+[0:58:10] credible inference
+[0:58:12] using partial identification and sort of
+[0:58:14] this orthogonalized
+[0:58:16] double machine learning style inference
+[0:58:18] on these bounds
+[0:58:19] so i'll just end here and kind of my
+[0:58:22] aim was to just add to frida's talk and
 [0:58:25] kind of you know give a larger picture
-[0:58:29] you know give a larger picture uh and hope it was helpful and
-[0:58:31] uh and hope it was helpful and instructive
-[0:58:33] instructive and thanks again for the invitation it
-[0:58:34] and thanks again for the invitation it was really a pleasure to be here
-[0:58:38] was really a pleasure to be here thanks for the very nice uh discussion
-[0:58:39] thanks for the very nice uh discussion uh guido do you wanna
-[0:58:42] uh guido do you wanna that was very impressive in particular
-[0:58:44] that was very impressive in particular the efficiency balance
-[0:58:46] the efficiency balance because we did we didn't think about it
-[0:58:48] because we did we didn't think about it but it looked very daunting
-[0:58:50] but it looked very daunting to to actually do that so i'm very
-[0:58:52] to to actually do that so i'm very impressed
+[0:58:29] uh and hope it was helpful and
+[0:58:31] instructive
+[0:58:33] and thanks again for the invitation it
+[0:58:34] was really a pleasure to be here
+[0:58:38] thanks for the very nice uh discussion
+[0:58:39] uh guido do you wanna
+[0:58:42] that was very impressive in particular
+[0:58:44] the efficiency balance
+[0:58:46] because we did we didn't think about it
+[0:58:48] but it looked very daunting
+[0:58:50] to to actually do that so i'm very
 [0:58:53] impressed you guys you know enjoy they managed to
-[0:58:55] you guys you know enjoy they managed to do that
 [0:58:57] do that at uh such short notice uh
-[0:59:00] at uh such short notice uh yeah and so i
-[0:59:03] yeah and so i i think i think all the other points are
-[0:59:05] i think i think all the other points are very well taken i i think what is
-[0:59:07] very well taken i i think what is exciting can about this whole area
-[0:59:09] exciting can about this whole area is just there's a whole bunch of
-[0:59:10] is just there's a whole bunch of different problems that i think are all
-[0:59:12] different problems that i think are all very relevant and are going to come up
-[0:59:14] very relevant and are going to come up in in practice
-[0:59:15] in in practice uh i actually like that terminology of
-[0:59:18] uh i actually like that terminology of kind of you're making assumptions that
-[0:59:20] kind of you're making assumptions that stitch these data sets together
-[0:59:21] stitch these data sets together that's really what it's all about and
-[0:59:23] that's really what it's all about and there's
+[0:59:00] yeah and so i
+[0:59:03] i think i think all the other points are
+[0:59:05] very well taken i i think what is
+[0:59:07] exciting can about this whole area
+[0:59:09] is just there's a whole bunch of
+[0:59:10] different problems that i think are all
+[0:59:12] very relevant and are going to come up
+[0:59:14] in in practice
+[0:59:15] uh i actually like that terminology of
+[0:59:18] kind of you're making assumptions that
+[0:59:20] stitch these data sets together
+[0:59:21] that's really what it's all about and
 [0:59:25] there's for the same data configuration there
-[0:59:28] for the same data configuration there maybe
 [0:59:28] maybe there are different ways of doing that
-[0:59:30] there are different ways of doing that and sometimes
-[0:59:31] and sometimes you may want to use a combination and
-[0:59:34] you may want to use a combination and look for bounce sometimes you want to
-[0:59:35] look for bounce sometimes you want to may want to lean very heavily on a
-[0:59:37] may want to lean very heavily on a particular one and
-[0:59:39] particular one and uh and make that because something is
-[0:59:41] uh and make that because something is particularly
-[0:59:42] particularly credible kind of like in this case we
-[0:59:44] credible kind of like in this case we had random assignment in one place
-[0:59:46] had random assignment in one place uh but another other times it's it's
-[0:59:49] uh but another other times it's it's much less clear
-[0:59:50] much less clear so i think this there's a lot of
-[0:59:53] so i think this there's a lot of potential for
-[0:59:54] potential for for new work here kind of building on
-[0:59:57] for new work here kind of building on on these papers kind of trying to come
-[0:59:59] on these papers kind of trying to come up with settings
-[1:00:01] up with settings where that works and how that
-[1:00:04] where that works and how that how to do that so this is great thanks
-[1:00:06] how to do that so this is great thanks very much
+[0:59:30] and sometimes
+[0:59:31] you may want to use a combination and
+[0:59:34] look for bounce sometimes you want to
+[0:59:35] may want to lean very heavily on a
+[0:59:37] particular one and
+[0:59:39] uh and make that because something is
+[0:59:41] particularly
+[0:59:42] credible kind of like in this case we
+[0:59:44] had random assignment in one place
+[0:59:46] uh but another other times it's it's
+[0:59:49] much less clear
+[0:59:50] so i think this there's a lot of
+[0:59:53] potential for
+[0:59:54] for new work here kind of building on
+[0:59:57] on these papers kind of trying to come
+[0:59:59] up with settings
+[1:00:01] where that works and how that
+[1:00:04] how to do that so this is great thanks
+[1:00:06] very much
 [1:00:11] all right thank you maybe one last question
 [1:00:12] question um so lihaolei asks do those assumptions
-[1:00:16] um so lihaolei asks do those assumptions have any testicle
-[1:00:18] have any testicle implications no so this
-[1:00:21] implications no so this the particular set of assumptions we're
-[1:00:23] the particular set of assumptions we're making has no testable implications so
-[1:00:26] making has no testable implications so in principle that can also make suggest
-[1:00:28] in principle that can also make suggest that kind of
-[1:00:29] that kind of all three of these estimation methods
-[1:00:31] all three of these estimation methods that are outlined
-[1:00:32] that are outlined should also be efficient even if they're
-[1:00:34] should also be efficient even if they're not kind of doubly robust
-[1:00:37] not kind of doubly robust but there's no there's no testable
-[1:00:40] but there's no there's no testable implications there
-[1:00:41] implications there so you can't free up any of the
-[1:00:43] so you can't free up any of the assumptions without
-[1:00:46] assumptions without making additional assumptions somewhere
-[1:00:47] making additional assumptions somewhere else or go towards
-[1:00:49] else or go towards partial identification all right
-[1:00:52] partial identification all right great thank you yeah i think then it's
-[1:00:54] great thank you yeah i think then it's now time to
-[1:00:56] now time to slowly wrap up first of all thank you so
-[1:00:57] slowly wrap up first of all thank you so much hido for a fantastic
-[1:01:00] much hido for a fantastic presentation and thank you very much
-[1:01:01] presentation and thank you very much nathan for a very interesting discussion
-[1:01:05] nathan for a very interesting discussion next time we're going to have a talk by
-[1:01:06] next time we're going to have a talk by stefan wager who will
-[1:01:08] stefan wager who will talk about treatment effects in market
-[1:01:10] talk about treatment effects in market equilibrium thank you all for joining
-[1:01:11] equilibrium thank you all for joining today i hope you have a great week and
-[1:01:13] today i hope you have a great week and see you next time
+[1:00:16] have any testicle
+[1:00:18] implications no so this
+[1:00:21] the particular set of assumptions we're
+[1:00:23] making has no testable implications so
+[1:00:26] in principle that can also make suggest
+[1:00:28] that kind of
+[1:00:29] all three of these estimation methods
+[1:00:31] that are outlined
+[1:00:32] should also be efficient even if they're
+[1:00:34] not kind of doubly robust
+[1:00:37] but there's no there's no testable
+[1:00:40] implications there
+[1:00:41] so you can't free up any of the
+[1:00:43] assumptions without
+[1:00:46] making additional assumptions somewhere
+[1:00:47] else or go towards
+[1:00:49] partial identification all right
+[1:00:52] great thank you yeah i think then it's
+[1:00:54] now time to
+[1:00:56] slowly wrap up first of all thank you so
+[1:00:57] much hido for a fantastic
+[1:01:00] presentation and thank you very much
+[1:01:01] nathan for a very interesting discussion
+[1:01:05] next time we're going to have a talk by
+[1:01:06] stefan wager who will
+[1:01:08] talk about treatment effects in market
+[1:01:10] equilibrium thank you all for joining
+[1:01:11] today i hope you have a great week and
+[1:01:13] see you next time

@@ -1,1579 +1,1495 @@
 [0:00:05] okay so welcome to the online console inference seminar this week we're very
-[0:00:07] inference seminar this week we're very fortunate to have a colleague forgotten
-[0:00:10] fortunate to have a colleague forgotten from mit
+[0:00:07] fortunate to have a colleague forgotten
 [0:00:12] from mit we'll talk about pre-pivoting in finite
-[0:00:14] we'll talk about pre-pivoting in finite population cost inference
-[0:00:17] population cost inference i think this is a joint work with his
-[0:00:19] i think this is a joint work with his student peter cohen
+[0:00:14] population cost inference
+[0:00:17] i think this is a joint work with his
+[0:00:19] student peter cohen
 [0:00:24] and i think dominic
-[0:00:25] i think dominic would explain how the q a works for
-[0:00:28] would explain how the q a works for today
+[0:00:25] would explain how the q a works for
 [0:00:30] today yeah as usual please submit your
-[0:00:31] yeah as usual please submit your questions in a q a
-[0:00:33] questions in a q a uh we don't have a collaborator in q a
-[0:00:35] uh we don't have a collaborator in q a today so what we're going to do is we're
-[0:00:37] today so what we're going to do is we're going to
+[0:00:31] questions in a q a
+[0:00:33] uh we don't have a collaborator in q a
+[0:00:35] today so what we're going to do is we're
 [0:00:38] going to either read your question to colin or
-[0:00:41] either read your question to colin or if we have more time we will unmute you
-[0:00:43] if we have more time we will unmute you and you will be able to directly discuss
-[0:00:44] and you will be able to directly discuss your question with colin
-[0:00:46] your question with colin if you participate during this amount
-[0:00:48] if you participate during this amount please keep in mind that the talk will
-[0:00:49] please keep in mind that the talk will be recorded um yeah that's all from our
-[0:00:52] be recorded um yeah that's all from our side uh colin
+[0:00:41] if we have more time we will unmute you
+[0:00:43] and you will be able to directly discuss
+[0:00:44] your question with colin
+[0:00:46] if you participate during this amount
+[0:00:48] please keep in mind that the talk will
+[0:00:49] be recorded um yeah that's all from our
+[0:00:52] side uh colin
 [0:00:57] all right well thank you very much for the invitation to give this talk so my
-[0:00:59] the invitation to give this talk so my talk today is on pre-pivoting and finite
-[0:01:01] talk today is on pre-pivoting and finite population causal inference and this is
-[0:01:04] population causal inference and this is joint work with my doctoral student
-[0:01:06] joint work with my doctoral student peter cohen
-[0:01:08] peter cohen so i want to begin by maybe jumping back
-[0:01:11] so i want to begin by maybe jumping back in time to the 1920s 1930s when naaman
-[0:01:14] in time to the 1920s 1930s when naaman and fisher were embroiled in a fairly
-[0:01:16] and fisher were embroiled in a fairly acrimonious debate over what notion of
-[0:01:19] acrimonious debate over what notion of no treatment effect should be preferred
-[0:01:22] no treatment effect should be preferred now a definition attributed to fisher is
-[0:01:25] now a definition attributed to fisher is that when we think about what does it
-[0:01:26] that when we think about what does it mean for a treatment to have no effect
-[0:01:28] mean for a treatment to have no effect well in fisher's mind that meant that
-[0:01:30] well in fisher's mind that meant that the treatment should not have an effect
-[0:01:32] the treatment should not have an effect for any individual in the study
-[0:01:35] for any individual in the study and this notion of no treatment effect
-[0:01:37] and this notion of no treatment effect has come to be known as fischer
-[0:01:40] has come to be known as fischer let's contrast this with neyman who saw
-[0:01:42] let's contrast this with neyman who saw it and said that well maybe when we
-[0:01:43] it and said that well maybe when we think about a treatment having no effect
-[0:01:46] think about a treatment having no effect maybe the treatment affects some
-[0:01:47] maybe the treatment affects some individuals positively some negatively
-[0:01:50] individuals positively some negatively but that we should be interested in
-[0:01:51] but that we should be interested in seeing if on average the treatment has
-[0:01:54] seeing if on average the treatment has no effect for any individuals in the
-[0:01:57] no effect for any individuals in the study
+[0:00:59] talk today is on pre-pivoting and finite
+[0:01:01] population causal inference and this is
+[0:01:04] joint work with my doctoral student
+[0:01:06] peter cohen
+[0:01:08] so i want to begin by maybe jumping back
+[0:01:11] in time to the 1920s 1930s when naaman
+[0:01:14] and fisher were embroiled in a fairly
+[0:01:16] acrimonious debate over what notion of
+[0:01:19] no treatment effect should be preferred
+[0:01:22] now a definition attributed to fisher is
+[0:01:25] that when we think about what does it
+[0:01:26] mean for a treatment to have no effect
+[0:01:28] well in fisher's mind that meant that
+[0:01:30] the treatment should not have an effect
+[0:01:32] for any individual in the study
+[0:01:35] and this notion of no treatment effect
+[0:01:37] has come to be known as fischer
+[0:01:40] let's contrast this with neyman who saw
+[0:01:42] it and said that well maybe when we
+[0:01:43] think about a treatment having no effect
+[0:01:46] maybe the treatment affects some
+[0:01:47] individuals positively some negatively
+[0:01:50] but that we should be interested in
+[0:01:51] seeing if on average the treatment has
+[0:01:54] no effect for any individuals in the
 [0:01:58] study so obviously the truth of the sharp null
-[0:02:00] so obviously the truth of the sharp null implies truth of the weak no but more
-[0:02:03] implies truth of the weak no but more importantly these different operational
-[0:02:05] importantly these different operational definitions of no treatment effect give
-[0:02:07] definitions of no treatment effect give rise to very different modes of
-[0:02:09] rise to very different modes of inference
+[0:02:00] implies truth of the weak no but more
+[0:02:03] importantly these different operational
+[0:02:05] definitions of no treatment effect give
+[0:02:07] rise to very different modes of
 [0:02:10] inference under fissure sharp null randomization
-[0:02:13] under fissure sharp null randomization alone provides this reason basis for
-[0:02:15] alone provides this reason basis for inference and gives rise to hypothesis
-[0:02:18] inference and gives rise to hypothesis tests that look a lot like permutation
-[0:02:20] tests that look a lot like permutation tests we'll call it randomization test
-[0:02:22] tests we'll call it randomization test such that if one assumes the sharp null
-[0:02:24] such that if one assumes the sharp null one could get inference that's exactly
-[0:02:26] one could get inference that's exactly level alpha for any sample size
-[0:02:28] level alpha for any sample size now proceeding under neyman's weak null
-[0:02:31] now proceeding under neyman's weak null we instead get to tests that look a lot
-[0:02:33] we instead get to tests that look a lot more like the usual large sample test
-[0:02:35] more like the usual large sample test say compute a z statistic look at a
-[0:02:38] say compute a z statistic look at a normal approximation things of this sort
-[0:02:41] normal approximation things of this sort so there are a lot of philosophical
-[0:02:42] so there are a lot of philosophical reasons why one might prefer name and
-[0:02:44] reasons why one might prefer name and snow over uh fischer's null and vice
-[0:02:47] snow over uh fischer's null and vice versa but certainly contentis then
-[0:02:49] versa but certainly contentis then remains contentious now there's a nice
-[0:02:51] remains contentious now there's a nice blog post by andrew gellman if you're
-[0:02:53] blog post by andrew gellman if you're curious
+[0:02:13] alone provides this reason basis for
+[0:02:15] inference and gives rise to hypothesis
+[0:02:18] tests that look a lot like permutation
+[0:02:20] tests we'll call it randomization test
+[0:02:22] such that if one assumes the sharp null
+[0:02:24] one could get inference that's exactly
+[0:02:26] level alpha for any sample size
+[0:02:28] now proceeding under neyman's weak null
+[0:02:31] we instead get to tests that look a lot
+[0:02:33] more like the usual large sample test
+[0:02:35] say compute a z statistic look at a
+[0:02:38] normal approximation things of this sort
+[0:02:41] so there are a lot of philosophical
+[0:02:42] reasons why one might prefer name and
+[0:02:44] snow over uh fischer's null and vice
+[0:02:47] versa but certainly contentis then
+[0:02:49] remains contentious now there's a nice
+[0:02:51] blog post by andrew gellman if you're
 [0:02:54] curious and also as an advocate of fisher's know
-[0:02:57] and also as an advocate of fisher's know a lot of paul rosenbaum's work in his
-[0:02:59] a lot of paul rosenbaum's work in his textbooks has been a very articulate in
-[0:03:02] textbooks has been a very articulate in its support of fisher sharpnell but the
-[0:03:05] its support of fisher sharpnell but the main focus for me today is going to be
-[0:03:07] main focus for me today is going to be on whether or not this distinction has
-[0:03:08] on whether or not this distinction has practical implications
-[0:03:11] practical implications so as i said really randomization tests
-[0:03:14] so as i said really randomization tests can provide exact tests for sharp null
-[0:03:16] can provide exact tests for sharp null hypotheses and broadly these are
-[0:03:17] hypotheses and broadly these are hypotheses as i would say impute the
-[0:03:19] hypotheses as i would say impute the missing values for the potential
-[0:03:21] missing values for the potential outcomes under their truth
-[0:03:24] outcomes under their truth so the concern we're going to be focused
-[0:03:26] so the concern we're going to be focused on today is whether or not randomization
-[0:03:28] on today is whether or not randomization tests of sharp nulls are
-[0:03:30] tests of sharp nulls are prone to
+[0:02:57] a lot of paul rosenbaum's work in his
+[0:02:59] textbooks has been a very articulate in
+[0:03:02] its support of fisher sharpnell but the
+[0:03:05] main focus for me today is going to be
+[0:03:07] on whether or not this distinction has
+[0:03:08] practical implications
+[0:03:11] so as i said really randomization tests
+[0:03:14] can provide exact tests for sharp null
+[0:03:16] hypotheses and broadly these are
+[0:03:17] hypotheses as i would say impute the
+[0:03:19] missing values for the potential
+[0:03:21] outcomes under their truth
+[0:03:24] so the concern we're going to be focused
+[0:03:26] on today is whether or not randomization
+[0:03:28] tests of sharp nulls are
 [0:03:31] prone to misinterpretation by practitioners
-[0:03:34] misinterpretation by practitioners that is suppose a researcher kind of
-[0:03:35] that is suppose a researcher kind of hears all these nice things about fisher
-[0:03:38] hears all these nice things about fisher sharpnell about randomization tests
-[0:03:40] sharpnell about randomization tests about this exactness property
-[0:03:43] about this exactness property and wants to proceed using one but then
-[0:03:45] and wants to proceed using one but then after using
-[0:03:47] after using a test of the sharp null thinks that he
-[0:03:49] a test of the sharp null thinks that he or he has evidence for the existence of
-[0:03:51] or he has evidence for the existence of a positive average effect if it rejects
-[0:03:54] a positive average effect if it rejects in other words interpreting the
-[0:03:55] in other words interpreting the rejection of the sharp null as the
-[0:03:58] rejection of the sharp null as the rejection of name and sweep
-[0:04:00] rejection of name and sweep so suppose the practitioner actually has
-[0:04:02] so suppose the practitioner actually has in mind the null hypothesis of the
-[0:04:04] in mind the null hypothesis of the sample average effect equals zero
-[0:04:06] sample average effect equals zero but does so using a fischer
-[0:04:08] but does so using a fischer randomization test which you know is
-[0:04:10] randomization test which you know is valid for the sharp null
-[0:04:12] valid for the sharp null so a seemingly innocuous choice of test
-[0:04:14] so a seemingly innocuous choice of test statistic for this if i really wanted to
-[0:04:16] statistic for this if i really wanted to be focused on name and smell would be to
-[0:04:19] be focused on name and smell would be to do a randomization test based upon the
-[0:04:22] do a randomization test based upon the treated minus control difference in
-[0:04:23] treated minus control difference in means so assume the sharp null holds
-[0:04:26] means so assume the sharp null holds enumerate the randomization different
-[0:04:29] enumerate the randomization different distribution for the treated minus
-[0:04:30] distribution for the treated minus control difference in means
-[0:04:33] control difference in means unfortunately
-[0:04:34] unfortunately that test that fischer randomization
-[0:04:36] that test that fischer randomization test need not provide a valid test for
-[0:04:39] test need not provide a valid test for the weak null even
-[0:04:41] the weak null even asymptotically
-[0:04:42] asymptotically so even the seemingly benign choice of
-[0:04:45] so even the seemingly benign choice of test statistics the treated minus
-[0:04:46] test statistics the treated minus control difference in means if i use a
-[0:04:49] control difference in means if i use a fischer randomization test based upon
-[0:04:51] fischer randomization test based upon that test statistic can give me invalid
-[0:04:53] that test statistic can give me invalid inference asymptotically
-[0:04:56] inference asymptotically so a recent literature has really tried
-[0:04:58] so a recent literature has really tried to address some of these issues to try
-[0:05:00] to address some of these issues to try to focus on developing randomization
-[0:05:02] to focus on developing randomization tests that are simultaneously
-[0:05:04] tests that are simultaneously exact under fischer's shark though but
-[0:05:06] exact under fischer's shark though but also asymptotically conservative under
-[0:05:09] also asymptotically conservative under name and sweep though
-[0:05:10] name and sweep though and this conservativeness is not like a
-[0:05:12] and this conservativeness is not like a deficiency in the tests in any ways
-[0:05:14] deficiency in the tests in any ways rather it's a fundamental property of
-[0:05:16] rather it's a fundamental property of inference under the finite population
-[0:05:18] inference under the finite population model and in this talk i'll kind of
-[0:05:20] model and in this talk i'll kind of highlight why this comes up
-[0:05:23] highlight why this comes up so while the sharp nulls and weak nulls
-[0:05:25] so while the sharp nulls and weak nulls are different these kind of
-[0:05:26] are different these kind of randomization tests that have this
-[0:05:28] randomization tests that have this robustness property to the weak know
-[0:05:31] robustness property to the weak know kind of obviate the distinctions for
-[0:05:33] kind of obviate the distinctions for practitioners so that a pr if a
-[0:05:35] practitioners so that a pr if a practitioner uses a fischer
-[0:05:37] practitioner uses a fischer randomization test based on one of these
-[0:05:39] randomization test based on one of these test statistics they'll also be entitled
-[0:05:42] test statistics they'll also be entitled to that conclusion pertaining to the
-[0:05:44] to that conclusion pertaining to the average treatment effect
-[0:05:46] average treatment effect so there's been a literature on this
-[0:05:48] so there's been a literature on this developing and a related literature has
-[0:05:50] developing and a related literature has also developed in the context of
-[0:05:52] also developed in the context of permutation tests
-[0:05:54] permutation tests so i think that said the existing
-[0:05:56] so i think that said the existing literature really provides resolutions
-[0:05:58] literature really provides resolutions on a case-by-case basis
-[0:06:01] on a case-by-case basis so what i mean by that is for a
-[0:06:02] so what i mean by that is for a particular experimental design let me
-[0:06:06] particular experimental design let me try my best to develop a test statistic
-[0:06:08] try my best to develop a test statistic that retains validity under the weak
-[0:06:10] that retains validity under the weak null hypothesis
-[0:06:12] null hypothesis so a an objective of this work was try
-[0:06:14] so a an objective of this work was try to take a step back from this really
-[0:06:16] to take a step back from this really kind of bespoke case-by-case approach
-[0:06:19] kind of bespoke case-by-case approach and really give us general methodology a
-[0:06:22] and really give us general methodology a big hammer for providing this resolution
-[0:06:25] big hammer for providing this resolution so the resolution i'll provide precisely
-[0:06:27] so the resolution i'll provide precisely recovers uh every known correction every
-[0:06:30] recovers uh every known correction every known resolution that i know of and
-[0:06:32] known resolution that i know of and furthermore provides new unifications in
-[0:06:34] furthermore provides new unifications in situations where the existing fixes can
-[0:06:37] situations where the existing fixes can fall short
-[0:06:38] fall short so before diving into the details i want
-[0:06:41] so before diving into the details i want to give you a loose sense of what the
-[0:06:42] to give you a loose sense of what the proposal is before we really dive into
-[0:06:45] proposal is before we really dive into the nuts and bolts
-[0:06:46] the nuts and bolts so kind of the ingredients you need so
-[0:06:49] so kind of the ingredients you need so let's suppose that we begin with a
-[0:06:50] let's suppose that we begin with a candidate p-value that provides
-[0:06:53] candidate p-value that provides asymptotically conservative inference
-[0:06:55] asymptotically conservative inference under heterogeneous effects
-[0:06:57] under heterogeneous effects so maybe a large sample p-value that i
-[0:06:59] so maybe a large sample p-value that i know is conservative for the weak
-[0:07:02] know is conservative for the weak but that furthermore is consistent in
-[0:07:04] but that furthermore is consistent in level under constant effects so if the
-[0:07:06] level under constant effects so if the effects are truly constant say if the
-[0:07:08] effects are truly constant say if the sharp null holds then the inference will
-[0:07:10] sharp null holds then the inference will be exactly level alpha
-[0:07:13] be exactly level alpha so what will then do in the usual
-[0:07:16] so what will then do in the usual framework if i'm just testing the weak
-[0:07:18] framework if i'm just testing the weak no of course i would just compare that
-[0:07:19] no of course i would just compare that p-value to alpha to make my conclusion
-[0:07:22] p-value to alpha to make my conclusion what we will do instead is to construct
-[0:07:25] what we will do instead is to construct the randomization distribution
-[0:07:27] the randomization distribution under the sharp null
-[0:07:29] under the sharp null of one minus this asymptotically valued
-[0:07:32] of one minus this asymptotically valued valid p-value
-[0:07:34] valid p-value so we're going to use one minus the
-[0:07:36] so we're going to use one minus the p-value itself as a test statistic
-[0:07:39] p-value itself as a test statistic within the randomization test so we'll
-[0:07:41] within the randomization test so we'll be enumerating this randomization
-[0:07:44] be enumerating this randomization distribution
-[0:07:45] distribution assuming that the sharp null holds
-[0:07:47] assuming that the sharp null holds so that is instead of comparing the
-[0:07:49] so that is instead of comparing the p-value to alpha to determine a
-[0:07:51] p-value to alpha to determine a rejection we instead compare one minus
-[0:07:54] rejection we instead compare one minus the p-value
-[0:07:55] the p-value value
+[0:03:34] that is suppose a researcher kind of
+[0:03:35] hears all these nice things about fisher
+[0:03:38] sharpnell about randomization tests
+[0:03:40] about this exactness property
+[0:03:43] and wants to proceed using one but then
+[0:03:45] after using
+[0:03:47] a test of the sharp null thinks that he
+[0:03:49] or he has evidence for the existence of
+[0:03:51] a positive average effect if it rejects
+[0:03:54] in other words interpreting the
+[0:03:55] rejection of the sharp null as the
+[0:03:58] rejection of name and sweep
+[0:04:00] so suppose the practitioner actually has
+[0:04:02] in mind the null hypothesis of the
+[0:04:04] sample average effect equals zero
+[0:04:06] but does so using a fischer
+[0:04:08] randomization test which you know is
+[0:04:10] valid for the sharp null
+[0:04:12] so a seemingly innocuous choice of test
+[0:04:14] statistic for this if i really wanted to
+[0:04:16] be focused on name and smell would be to
+[0:04:19] do a randomization test based upon the
+[0:04:22] treated minus control difference in
+[0:04:23] means so assume the sharp null holds
+[0:04:26] enumerate the randomization different
+[0:04:29] distribution for the treated minus
+[0:04:30] control difference in means
+[0:04:33] unfortunately
+[0:04:34] that test that fischer randomization
+[0:04:36] test need not provide a valid test for
+[0:04:39] the weak null even
+[0:04:41] asymptotically
+[0:04:42] so even the seemingly benign choice of
+[0:04:45] test statistics the treated minus
+[0:04:46] control difference in means if i use a
+[0:04:49] fischer randomization test based upon
+[0:04:51] that test statistic can give me invalid
+[0:04:53] inference asymptotically
+[0:04:56] so a recent literature has really tried
+[0:04:58] to address some of these issues to try
+[0:05:00] to focus on developing randomization
+[0:05:02] tests that are simultaneously
+[0:05:04] exact under fischer's shark though but
+[0:05:06] also asymptotically conservative under
+[0:05:09] name and sweep though
+[0:05:10] and this conservativeness is not like a
+[0:05:12] deficiency in the tests in any ways
+[0:05:14] rather it's a fundamental property of
+[0:05:16] inference under the finite population
+[0:05:18] model and in this talk i'll kind of
+[0:05:20] highlight why this comes up
+[0:05:23] so while the sharp nulls and weak nulls
+[0:05:25] are different these kind of
+[0:05:26] randomization tests that have this
+[0:05:28] robustness property to the weak know
+[0:05:31] kind of obviate the distinctions for
+[0:05:33] practitioners so that a pr if a
+[0:05:35] practitioner uses a fischer
+[0:05:37] randomization test based on one of these
+[0:05:39] test statistics they'll also be entitled
+[0:05:42] to that conclusion pertaining to the
+[0:05:44] average treatment effect
+[0:05:46] so there's been a literature on this
+[0:05:48] developing and a related literature has
+[0:05:50] also developed in the context of
+[0:05:52] permutation tests
+[0:05:54] so i think that said the existing
+[0:05:56] literature really provides resolutions
+[0:05:58] on a case-by-case basis
+[0:06:01] so what i mean by that is for a
+[0:06:02] particular experimental design let me
+[0:06:06] try my best to develop a test statistic
+[0:06:08] that retains validity under the weak
+[0:06:10] null hypothesis
+[0:06:12] so a an objective of this work was try
+[0:06:14] to take a step back from this really
+[0:06:16] kind of bespoke case-by-case approach
+[0:06:19] and really give us general methodology a
+[0:06:22] big hammer for providing this resolution
+[0:06:25] so the resolution i'll provide precisely
+[0:06:27] recovers uh every known correction every
+[0:06:30] known resolution that i know of and
+[0:06:32] furthermore provides new unifications in
+[0:06:34] situations where the existing fixes can
+[0:06:37] fall short
+[0:06:38] so before diving into the details i want
+[0:06:41] to give you a loose sense of what the
+[0:06:42] proposal is before we really dive into
+[0:06:45] the nuts and bolts
+[0:06:46] so kind of the ingredients you need so
+[0:06:49] let's suppose that we begin with a
+[0:06:50] candidate p-value that provides
+[0:06:53] asymptotically conservative inference
+[0:06:55] under heterogeneous effects
+[0:06:57] so maybe a large sample p-value that i
+[0:06:59] know is conservative for the weak
+[0:07:02] but that furthermore is consistent in
+[0:07:04] level under constant effects so if the
+[0:07:06] effects are truly constant say if the
+[0:07:08] sharp null holds then the inference will
+[0:07:10] be exactly level alpha
+[0:07:13] so what will then do in the usual
+[0:07:16] framework if i'm just testing the weak
+[0:07:18] no of course i would just compare that
+[0:07:19] p-value to alpha to make my conclusion
+[0:07:22] what we will do instead is to construct
+[0:07:25] the randomization distribution
+[0:07:27] under the sharp null
+[0:07:29] of one minus this asymptotically valued
+[0:07:32] valid p-value
+[0:07:34] so we're going to use one minus the
+[0:07:36] p-value itself as a test statistic
+[0:07:39] within the randomization test so we'll
+[0:07:41] be enumerating this randomization
+[0:07:44] distribution
+[0:07:45] assuming that the sharp null holds
+[0:07:47] so that is instead of comparing the
+[0:07:49] p-value to alpha to determine a
+[0:07:51] rejection we instead compare one minus
+[0:07:54] the p-value
 [0:07:56] value to the one minus alpha quantile
-[0:07:59] to the one minus alpha quantile of the reference distribution
-[0:08:01] of the reference distribution assuming the sharp note
-[0:08:03] assuming the sharp note and we'll talk about exactly why that
-[0:08:05] and we'll talk about exactly why that ends up providing this resolution but
-[0:08:08] ends up providing this resolution but say the big takeaways from this talk
-[0:08:10] say the big takeaways from this talk would be instead of simply enumerating
-[0:08:12] would be instead of simply enumerating the randomization distribution of a
-[0:08:14] the randomization distribution of a seemingly natural test statistic say the
-[0:08:17] seemingly natural test statistic say the difference in means if i want this
-[0:08:19] difference in means if i want this robustness property under the weak null
-[0:08:22] robustness property under the weak null what i want to do instead is to actually
-[0:08:24] what i want to do instead is to actually construct an asymptotically valid
-[0:08:26] construct an asymptotically valid p-value under the weak null based upon
-[0:08:29] p-value under the weak null based upon that test statistic
-[0:08:31] that test statistic and then enumerate the randomization
-[0:08:33] and then enumerate the randomization distribution of one minus the resulting
-[0:08:36] distribution of one minus the resulting p-value
+[0:07:59] of the reference distribution
+[0:08:01] assuming the sharp note
+[0:08:03] and we'll talk about exactly why that
+[0:08:05] ends up providing this resolution but
+[0:08:08] say the big takeaways from this talk
+[0:08:10] would be instead of simply enumerating
+[0:08:12] the randomization distribution of a
+[0:08:14] seemingly natural test statistic say the
+[0:08:17] difference in means if i want this
+[0:08:19] robustness property under the weak null
+[0:08:22] what i want to do instead is to actually
+[0:08:24] construct an asymptotically valid
+[0:08:26] p-value under the weak null based upon
+[0:08:29] that test statistic
+[0:08:31] and then enumerate the randomization
+[0:08:33] distribution of one minus the resulting
 [0:08:38] p-value so i'd say you know this provides this
-[0:08:39] so i'd say you know this provides this resolution and furthermore
-[0:08:42] resolution and furthermore you know even if i'm only interested in
-[0:08:44] you know even if i'm only interested in average effects if i'm only interested
-[0:08:46] average effects if i'm only interested in the weak mill
-[0:08:48] in the weak mill these pre-pivoted randomization tests
-[0:08:50] these pre-pivoted randomization tests provide an exact test under constant
-[0:08:52] provide an exact test under constant effects for free while still having the
-[0:08:55] effects for free while still having the same limiting power profiles as the
-[0:08:58] same limiting power profiles as the asymptotic test whose p-value is being
-[0:09:00] asymptotic test whose p-value is being permuted
+[0:08:39] resolution and furthermore
+[0:08:42] you know even if i'm only interested in
+[0:08:44] average effects if i'm only interested
+[0:08:46] in the weak mill
+[0:08:48] these pre-pivoted randomization tests
+[0:08:50] provide an exact test under constant
+[0:08:52] effects for free while still having the
+[0:08:55] same limiting power profiles as the
+[0:08:58] asymptotic test whose p-value is being
 [0:09:01] permuted so from my perspective modulo
-[0:09:03] so from my perspective modulo computation time there's very little
-[0:09:05] computation time there's very little reason not to proceed with a test like
-[0:09:07] reason not to proceed with a test like this it has the same limiting properties
-[0:09:10] this it has the same limiting properties as the usual large sample test but for
-[0:09:12] as the usual large sample test but for free except for monte carlo time to
-[0:09:14] free except for monte carlo time to generate the randomization distribution
-[0:09:17] generate the randomization distribution you also get exactness under the sharp
-[0:09:19] you also get exactness under the sharp null
+[0:09:03] computation time there's very little
+[0:09:05] reason not to proceed with a test like
+[0:09:07] this it has the same limiting properties
+[0:09:10] as the usual large sample test but for
+[0:09:12] free except for monte carlo time to
+[0:09:14] generate the randomization distribution
+[0:09:17] you also get exactness under the sharp
 [0:09:21] null so are there any questions before i dive
-[0:09:24] so are there any questions before i dive into the details i'm trying to look at
-[0:09:25] into the details i'm trying to look at the q and a no no we don't have
-[0:09:28] the q and a no no we don't have questions dominic i think okay all right
-[0:09:30] questions dominic i think okay all right great so dominic will you flag if
-[0:09:32] great so dominic will you flag if something comes up sure i will
-[0:09:35] something comes up sure i will okay thank you
-[0:09:38] okay thank you okay so let's dive into some notation
-[0:09:39] okay so let's dive into some notation now so there are n total individuals n1
-[0:09:43] now so there are n total individuals n1 receive the treatment and zero receive
-[0:09:45] receive the treatment and zero receive the control these are going to be my
-[0:09:47] the control these are going to be my treatment indicators i really love that
-[0:09:49] treatment indicators i really love that i can blow you know breathe through this
-[0:09:50] i can blow you know breathe through this slide with this group that uh why why i
-[0:09:53] slide with this group that uh why why i won and why i zero are potentially
-[0:09:55] won and why i zero are potentially multivariate potential outcomes
-[0:09:58] multivariate potential outcomes uh tau eyes are going to be the of
-[0:10:00] uh tau eyes are going to be the of course unobservable treatment effects
-[0:10:02] course unobservable treatment effects and talbar is going to be the sample
-[0:10:04] and talbar is going to be the sample average treatment effect and ultimately
-[0:10:07] average treatment effect and ultimately under the weak null this is going to be
-[0:10:09] under the weak null this is going to be the s demand for which inference is
-[0:10:11] the s demand for which inference is desired and further x i are a vector of
-[0:10:14] desired and further x i are a vector of pre-treatment covariates
-[0:10:17] pre-treatment covariates so what i observe i'll just say y-i-z-i
-[0:10:20] so what i observe i'll just say y-i-z-i is the observed outcome okay implicit in
-[0:10:23] is the observed outcome okay implicit in this notation i'll be assuming that sifo
-[0:10:25] this notation i'll be assuming that sifo holds
+[0:09:24] into the details i'm trying to look at
+[0:09:25] the q and a no no we don't have
+[0:09:28] questions dominic i think okay all right
+[0:09:30] great so dominic will you flag if
+[0:09:32] something comes up sure i will
+[0:09:35] okay thank you
+[0:09:38] okay so let's dive into some notation
+[0:09:39] now so there are n total individuals n1
+[0:09:43] receive the treatment and zero receive
+[0:09:45] the control these are going to be my
+[0:09:47] treatment indicators i really love that
+[0:09:49] i can blow you know breathe through this
+[0:09:50] slide with this group that uh why why i
+[0:09:53] won and why i zero are potentially
+[0:09:55] multivariate potential outcomes
+[0:09:58] uh tau eyes are going to be the of
+[0:10:00] course unobservable treatment effects
+[0:10:02] and talbar is going to be the sample
+[0:10:04] average treatment effect and ultimately
+[0:10:07] under the weak null this is going to be
+[0:10:09] the s demand for which inference is
+[0:10:11] desired and further x i are a vector of
+[0:10:14] pre-treatment covariates
+[0:10:17] so what i observe i'll just say y-i-z-i
+[0:10:20] is the observed outcome okay implicit in
+[0:10:23] this notation i'll be assuming that sifo
 [0:10:26] holds i'll let y of z be kind of a matrix of
-[0:10:28] i'll let y of z be kind of a matrix of observed responses
-[0:10:30] observed responses and let me just define a few kind of
-[0:10:32] and let me just define a few kind of functions tau hat y z and z
-[0:10:36] functions tau hat y z and z is going to be the observed treated
-[0:10:37] is going to be the observed treated minus control difference in means for
-[0:10:39] minus control difference in means for the outcomes
-[0:10:40] the outcomes okay and furthermore delta hat of x and
-[0:10:43] okay and furthermore delta hat of x and z is going to be the observed treatise
-[0:10:45] z is going to be the observed treatise minus control difference in means for
-[0:10:48] minus control difference in means for the covariance
-[0:10:50] the covariance now i'm going to be preceding this talk
-[0:10:52] now i'm going to be preceding this talk under the finite population model and
-[0:10:54] under the finite population model and now infinite population causal inference
-[0:10:56] now infinite population causal inference you can consider this as really
-[0:10:58] you can consider this as really inference conditional upon the
-[0:11:00] inference conditional upon the properties of the study under
-[0:11:02] properties of the study under investigation so the potential outcomes
-[0:11:04] investigation so the potential outcomes under treatment and control for those
-[0:11:06] under treatment and control for those individuals in addition to their
-[0:11:08] individuals in addition to their covariance
-[0:11:09] covariance so here the probabilistic statements i
-[0:11:11] so here the probabilistic statements i make are arriving solely due to
-[0:11:13] make are arriving solely due to randomness in the treatment assignment
-[0:11:15] randomness in the treatment assignment now i know that you know finite
-[0:11:17] now i know that you know finite population model kind of divides
-[0:11:20] population model kind of divides opinions so if you were of the mind that
-[0:11:22] opinions so if you were of the mind that we should succeed under super population
-[0:11:23] we should succeed under super population bottles i will say that these methods
-[0:11:25] bottles i will say that these methods today naturally extend to various
-[0:11:27] today naturally extend to various superpopulation formulations for
-[0:11:29] superpopulation formulations for inference for the pate if i assume y and
-[0:11:32] inference for the pate if i assume y and the x are both random or the case if i
-[0:11:34] the x are both random or the case if i view x as fixed and view the potential
-[0:11:36] view x as fixed and view the potential outcomes as random
-[0:11:38] outcomes as random so i'm going to let omega be the set of
-[0:11:40] so i'm going to let omega be the set of allowed randomizations in the design
-[0:11:43] allowed randomizations in the design and so we'll really be focusing on two
-[0:11:45] and so we'll really be focusing on two types
+[0:10:28] observed responses
+[0:10:30] and let me just define a few kind of
+[0:10:32] functions tau hat y z and z
+[0:10:36] is going to be the observed treated
+[0:10:37] minus control difference in means for
+[0:10:39] the outcomes
+[0:10:40] okay and furthermore delta hat of x and
+[0:10:43] z is going to be the observed treatise
+[0:10:45] minus control difference in means for
+[0:10:48] the covariance
+[0:10:50] now i'm going to be preceding this talk
+[0:10:52] under the finite population model and
+[0:10:54] now infinite population causal inference
+[0:10:56] you can consider this as really
+[0:10:58] inference conditional upon the
+[0:11:00] properties of the study under
+[0:11:02] investigation so the potential outcomes
+[0:11:04] under treatment and control for those
+[0:11:06] individuals in addition to their
+[0:11:08] covariance
+[0:11:09] so here the probabilistic statements i
+[0:11:11] make are arriving solely due to
+[0:11:13] randomness in the treatment assignment
+[0:11:15] now i know that you know finite
+[0:11:17] population model kind of divides
+[0:11:20] opinions so if you were of the mind that
+[0:11:22] we should succeed under super population
+[0:11:23] bottles i will say that these methods
+[0:11:25] today naturally extend to various
+[0:11:27] superpopulation formulations for
+[0:11:29] inference for the pate if i assume y and
+[0:11:32] the x are both random or the case if i
+[0:11:34] view x as fixed and view the potential
+[0:11:36] outcomes as random
+[0:11:38] so i'm going to let omega be the set of
+[0:11:40] allowed randomizations in the design
+[0:11:43] and so we'll really be focusing on two
 [0:11:46] types right we have one question i think a
-[0:11:47] right we have one question i think a clarification question about language so
-[0:11:50] clarification question about language so we have
+[0:11:47] clarification question about language so
 [0:11:51] we have fisher and style hypotheses referring
-[0:11:53] fisher and style hypotheses referring only to those of a constant additive
-[0:11:55] only to those of a constant additive effect or all sharp causal hypotheses in
-[0:11:57] effect or all sharp causal hypotheses in general
+[0:11:53] only to those of a constant additive
+[0:11:55] effect or all sharp causal hypotheses in
 [0:11:59] general oh excellent so i'm going to be focusing
-[0:12:02] oh excellent so i'm going to be focusing on you know kind of the the sharp null
-[0:12:04] on you know kind of the the sharp null being no effect at all and there are
-[0:12:06] being no effect at all and there are natural extensions to like constant
-[0:12:08] natural extensions to like constant effect models but you're right sharp
-[0:12:10] effect models but you're right sharp nulls in general i would view as more
-[0:12:12] nulls in general i would view as more broad like any any null hypothesis that
-[0:12:14] broad like any any null hypothesis that imputes the missing value for the
-[0:12:16] imputes the missing value for the potential outcomes
+[0:12:02] on you know kind of the the sharp null
+[0:12:04] being no effect at all and there are
+[0:12:06] natural extensions to like constant
+[0:12:08] effect models but you're right sharp
+[0:12:10] nulls in general i would view as more
+[0:12:12] broad like any any null hypothesis that
+[0:12:14] imputes the missing value for the
+[0:12:16] potential outcomes
 [0:12:22] yeah it's a great question thanks okay
 [0:12:24] okay so i'm going to let omega be the set of
-[0:12:26] so i'm going to let omega be the set of allowed randomizations so for example in
-[0:12:28] allowed randomizations so for example in a completely randomized experiment i'd
-[0:12:31] a completely randomized experiment i'd say omega cre
-[0:12:32] say omega cre would just be the set of treatment
-[0:12:34] would just be the set of treatment allocations where exactly n1 individuals
-[0:12:37] allocations where exactly n1 individuals are assigned i should mention i'm just
-[0:12:39] are assigned i should mention i'm just going to focus on two-arm experiments in
-[0:12:41] going to focus on two-arm experiments in this talk but again everything extends
-[0:12:43] this talk but again everything extends to the multi-arm case it just introduced
-[0:12:45] to the multi-arm case it just introduced a bit more notation that i wanted to
-[0:12:47] a bit more notation that i wanted to deal with in this talk
-[0:12:49] deal with in this talk um so we're going to talk about
-[0:12:51] um so we're going to talk about completely randomized designs we'll also
-[0:12:53] completely randomized designs we'll also talk a bit about re-randomized design
-[0:12:55] talk a bit about re-randomized design it's only because this was one type of
-[0:12:57] it's only because this was one type of design where up until this work it was
-[0:12:59] design where up until this work it was really unclear how to provide this exact
-[0:13:02] really unclear how to provide this exact and asymptotic conservative property
-[0:13:04] and asymptotic conservative property test randomization tests that are valid
-[0:13:06] test randomization tests that are valid for the weak mill so basically in a
-[0:13:08] for the weak mill so basically in a re-randomized design we just discard
-[0:13:11] re-randomized design we just discard randomizations that don't satisfy a
-[0:13:13] randomizations that don't satisfy a certain balance criterion the hope being
-[0:13:15] certain balance criterion the hope being that if the covariates are predictive of
-[0:13:18] that if the covariates are predictive of the potential outcomes and by ensuring
-[0:13:20] the potential outcomes and by ensuring balance there we should improve
-[0:13:22] balance there we should improve precision in the resulting inference
-[0:13:25] precision in the resulting inference so i'll just introduce a balanced
-[0:13:27] so i'll just introduce a balanced criterion so basically just takes his
-[0:13:29] criterion so basically just takes his input kind of the uh the covariance and
-[0:13:31] input kind of the uh the covariance and gives his output an indicator of whether
-[0:13:33] gives his output an indicator of whether or not balance was satisfied
-[0:13:35] or not balance was satisfied so there are various properties we need
-[0:13:37] so there are various properties we need closed convex neurosymmetric about the
-[0:13:40] closed convex neurosymmetric about the origin i'd say most natural
-[0:13:42] origin i'd say most natural balance criterion that exists in the
-[0:13:44] balance criterion that exists in the re-randomization literature satisfy this
-[0:13:47] re-randomization literature satisfy this property so an example would just be
-[0:13:50] property so an example would just be mahalanobis-based re-randomization where
-[0:13:53] mahalanobis-based re-randomization where what i do is kind of compute the
-[0:13:54] what i do is kind of compute the mahalanobis distance for that treated
-[0:13:57] mahalanobis distance for that treated minus control difference in covariance
-[0:13:59] minus control difference in covariance and i only accept randomizations where
-[0:14:02] and i only accept randomizations where that mahalanobis distance falls at or
-[0:14:04] that mahalanobis distance falls at or below a given value as one way to try to
-[0:14:08] below a given value as one way to try to exclude very imbalanced randomizations
+[0:12:26] allowed randomizations so for example in
+[0:12:28] a completely randomized experiment i'd
+[0:12:31] say omega cre
+[0:12:32] would just be the set of treatment
+[0:12:34] allocations where exactly n1 individuals
+[0:12:37] are assigned i should mention i'm just
+[0:12:39] going to focus on two-arm experiments in
+[0:12:41] this talk but again everything extends
+[0:12:43] to the multi-arm case it just introduced
+[0:12:45] a bit more notation that i wanted to
+[0:12:47] deal with in this talk
+[0:12:49] um so we're going to talk about
+[0:12:51] completely randomized designs we'll also
+[0:12:53] talk a bit about re-randomized design
+[0:12:55] it's only because this was one type of
+[0:12:57] design where up until this work it was
+[0:12:59] really unclear how to provide this exact
+[0:13:02] and asymptotic conservative property
+[0:13:04] test randomization tests that are valid
+[0:13:06] for the weak mill so basically in a
+[0:13:08] re-randomized design we just discard
+[0:13:11] randomizations that don't satisfy a
+[0:13:13] certain balance criterion the hope being
+[0:13:15] that if the covariates are predictive of
+[0:13:18] the potential outcomes and by ensuring
+[0:13:20] balance there we should improve
+[0:13:22] precision in the resulting inference
+[0:13:25] so i'll just introduce a balanced
+[0:13:27] criterion so basically just takes his
+[0:13:29] input kind of the uh the covariance and
+[0:13:31] gives his output an indicator of whether
+[0:13:33] or not balance was satisfied
+[0:13:35] so there are various properties we need
+[0:13:37] closed convex neurosymmetric about the
+[0:13:40] origin i'd say most natural
+[0:13:42] balance criterion that exists in the
+[0:13:44] re-randomization literature satisfy this
+[0:13:47] property so an example would just be
+[0:13:50] mahalanobis-based re-randomization where
+[0:13:53] what i do is kind of compute the
+[0:13:54] mahalanobis distance for that treated
+[0:13:57] minus control difference in covariance
+[0:13:59] and i only accept randomizations where
+[0:14:02] that mahalanobis distance falls at or
+[0:14:04] below a given value as one way to try to
+[0:14:08] exclude very imbalanced randomizations
 [0:14:16] okay so for now i'm going to let t y of z and z be a scalar test statistic at
-[0:14:19] z and z be a scalar test statistic at this point i'm not going to specify
-[0:14:20] this point i'm not going to specify anything about it beyond that it could
-[0:14:22] anything about it beyond that it could be a function of the observed treatment
-[0:14:24] be a function of the observed treatment assignment the outcomes and even the
-[0:14:26] assignment the outcomes and even the covariates themselves as desired
-[0:14:29] covariates themselves as desired so the randomization distribution for t
-[0:14:32] so the randomization distribution for t is then just written as follows so i
-[0:14:35] is then just written as follows so i look over all possible values of omega
-[0:14:38] look over all possible values of omega what would the observed outcome be the
-[0:14:40] what would the observed outcome be the observed matrix of outcomes b that would
-[0:14:42] observed matrix of outcomes b that would be y of w in this notation it could also
-[0:14:46] be y of w in this notation it could also be a function of w that test statistic
-[0:14:49] be a function of w that test statistic so basically what i'm doing here for all
-[0:14:51] so basically what i'm doing here for all possible out uh for all possible
-[0:14:53] possible out uh for all possible assignments enumerating what the test
-[0:14:55] assignments enumerating what the test statistics value would be
-[0:14:57] statistics value would be and that's going to give me this
-[0:14:59] and that's going to give me this randomization cdf
-[0:15:01] randomization cdf unfortunately this is generally not
-[0:15:03] unfortunately this is generally not known to us in practice because of its
-[0:15:06] known to us in practice because of its dependence on the missing potential
-[0:15:08] dependence on the missing potential outcome so we generally do not know why
-[0:15:11] outcome so we generally do not know why i of 1 minus c i so for that reason i
-[0:15:14] i of 1 minus c i so for that reason i can write down this object but i can't
-[0:15:16] can write down this object but i can't make use of it for inference in general
-[0:15:18] make use of it for inference in general without further assumptions
-[0:15:20] without further assumptions so now suppose we want to test the sharp
-[0:15:22] so now suppose we want to test the sharp null of no effect at all
-[0:15:25] null of no effect at all this fischer sharpnel
-[0:15:27] this fischer sharpnel so then under that null hypothesis
-[0:15:30] so then under that null hypothesis why isci okay the observed values of the
-[0:15:33] why isci okay the observed values of the potential outcomes then imputes that
-[0:15:35] potential outcomes then imputes that missing val that missing potential
-[0:15:37] missing val that missing potential outcome
+[0:14:19] this point i'm not going to specify
+[0:14:20] anything about it beyond that it could
+[0:14:22] be a function of the observed treatment
+[0:14:24] assignment the outcomes and even the
+[0:14:26] covariates themselves as desired
+[0:14:29] so the randomization distribution for t
+[0:14:32] is then just written as follows so i
+[0:14:35] look over all possible values of omega
+[0:14:38] what would the observed outcome be the
+[0:14:40] observed matrix of outcomes b that would
+[0:14:42] be y of w in this notation it could also
+[0:14:46] be a function of w that test statistic
+[0:14:49] so basically what i'm doing here for all
+[0:14:51] possible out uh for all possible
+[0:14:53] assignments enumerating what the test
+[0:14:55] statistics value would be
+[0:14:57] and that's going to give me this
+[0:14:59] randomization cdf
+[0:15:01] unfortunately this is generally not
+[0:15:03] known to us in practice because of its
+[0:15:06] dependence on the missing potential
+[0:15:08] outcome so we generally do not know why
+[0:15:11] i of 1 minus c i so for that reason i
+[0:15:14] can write down this object but i can't
+[0:15:16] make use of it for inference in general
+[0:15:18] without further assumptions
+[0:15:20] so now suppose we want to test the sharp
+[0:15:22] null of no effect at all
+[0:15:25] this fischer sharpnel
+[0:15:27] so then under that null hypothesis
+[0:15:30] why isci okay the observed values of the
+[0:15:33] potential outcomes then imputes that
+[0:15:35] missing val that missing potential
 [0:15:38] outcome so
 [0:15:39] so under the sharp null i actually do have
-[0:15:41] under the sharp null i actually do have access to this randomization
-[0:15:43] access to this randomization distribution so i could say what i do
-[0:15:45] distribution so i could say what i do know is y i of z and w that's just the
-[0:15:48] know is y i of z and w that's just the observed outcome
-[0:15:50] observed outcome the observed matrix of outcomes and then
-[0:15:52] the observed matrix of outcomes and then enumerate that over all possible
-[0:15:54] enumerate that over all possible assignments i know that under the sharp
-[0:15:56] assignments i know that under the sharp null that exactly equals
-[0:15:59] null that exactly equals this value here which is the
-[0:16:01] this value here which is the randomization distribution which is why
-[0:16:03] randomization distribution which is why you get this exactness property for
-[0:16:05] you get this exactness property for inference under the sharp
-[0:16:07] inference under the sharp null now suppose instead that only the
-[0:16:09] null now suppose instead that only the weak null holds okay but the researcher
-[0:16:12] weak null holds okay but the researcher nonetheless uses this script pt which is
-[0:16:15] nonetheless uses this script pt which is going to be my notation for the
-[0:16:17] going to be my notation for the reference distribution assuming the
-[0:16:19] reference distribution assuming the sharp null
-[0:16:20] sharp null so we're in this situation where only
-[0:16:22] so we're in this situation where only the weak null is assumed to hold but the
-[0:16:25] the weak null is assumed to hold but the researcher nonetheless wants to use the
-[0:16:27] researcher nonetheless wants to use the reference distribution to which they
-[0:16:29] reference distribution to which they would be entitled if the sharp null held
-[0:16:33] would be entitled if the sharp null held then in general of course i can compute
-[0:16:36] then in general of course i can compute this reference distribution because this
-[0:16:38] this reference distribution because this reference distribution really only
-[0:16:40] reference distribution really only depends on this y of c here so i know
-[0:16:42] depends on this y of c here so i know these values but it is not going to
-[0:16:44] these values but it is not going to align with the true randomization
-[0:16:46] align with the true randomization distribution
-[0:16:48] distribution so in fact under the weak no this p of t
-[0:16:51] so in fact under the weak no this p of t is a random measure for different values
-[0:16:53] is a random measure for different values of c i get different y z hence i get
-[0:16:56] of c i get different y z hence i get different values for script p of t in
-[0:17:00] different values for script p of t in the first place and it's not going to
-[0:17:01] the first place and it's not going to align with the randomization
-[0:17:03] align with the randomization distribution so there's ultimately this
-[0:17:05] distribution so there's ultimately this disconnect that can allow results in
-[0:17:08] disconnect that can allow results in randomization past assuming the sharp
-[0:17:09] randomization past assuming the sharp null
+[0:15:41] access to this randomization
+[0:15:43] distribution so i could say what i do
+[0:15:45] know is y i of z and w that's just the
+[0:15:48] observed outcome
+[0:15:50] the observed matrix of outcomes and then
+[0:15:52] enumerate that over all possible
+[0:15:54] assignments i know that under the sharp
+[0:15:56] null that exactly equals
+[0:15:59] this value here which is the
+[0:16:01] randomization distribution which is why
+[0:16:03] you get this exactness property for
+[0:16:05] inference under the sharp
+[0:16:07] null now suppose instead that only the
+[0:16:09] weak null holds okay but the researcher
+[0:16:12] nonetheless uses this script pt which is
+[0:16:15] going to be my notation for the
+[0:16:17] reference distribution assuming the
+[0:16:19] sharp null
+[0:16:20] so we're in this situation where only
+[0:16:22] the weak null is assumed to hold but the
+[0:16:25] researcher nonetheless wants to use the
+[0:16:27] reference distribution to which they
+[0:16:29] would be entitled if the sharp null held
+[0:16:33] then in general of course i can compute
+[0:16:36] this reference distribution because this
+[0:16:38] reference distribution really only
+[0:16:40] depends on this y of c here so i know
+[0:16:42] these values but it is not going to
+[0:16:44] align with the true randomization
+[0:16:46] distribution
+[0:16:48] so in fact under the weak no this p of t
+[0:16:51] is a random measure for different values
+[0:16:53] of c i get different y z hence i get
+[0:16:56] different values for script p of t in
+[0:17:00] the first place and it's not going to
+[0:17:01] align with the randomization
+[0:17:03] distribution so there's ultimately this
+[0:17:05] disconnect that can allow results in
+[0:17:08] randomization past assuming the sharp
 [0:17:11] null being invalid even in the limit if only
-[0:17:14] being invalid even in the limit if only the weak null is assumed to hold
-[0:17:17] the weak null is assumed to hold now to build towards kind of some
-[0:17:18] now to build towards kind of some desirable properties
-[0:17:20] desirable properties for ensuring validity under the weakness
-[0:17:23] for ensuring validity under the weakness let's just suppose that you know the
-[0:17:25] let's just suppose that you know the randomization distribution converges
-[0:17:27] randomization distribution converges weekly to some limits say rt infinity
-[0:17:30] weekly to some limits say rt infinity and furthermore the the reference
-[0:17:32] and furthermore the the reference distribution assuming the sharp null
-[0:17:35] distribution assuming the sharp null converges weakly in probability to some
-[0:17:37] converges weakly in probability to some limit pt infinity so this if you're not
-[0:17:41] limit pt infinity so this if you're not familiar with weak convergence and
-[0:17:42] familiar with weak convergence and probability just for all continuity
-[0:17:44] probability just for all continuity points of the cdf i get convergence and
-[0:17:47] points of the cdf i get convergence and probability and i need this just because
-[0:17:49] probability and i need this just because it's a random measure
-[0:17:51] it's a random measure so i'm going to introduce a property
-[0:17:53] so i'm going to introduce a property called asymptotic sharp dominance
-[0:17:56] called asymptotic sharp dominance so i'm going to say a test statistic t
-[0:17:58] so i'm going to say a test statistic t is called asymptotically sharp dominant
-[0:18:01] is called asymptotically sharp dominant if for all t
-[0:18:03] if for all t i end up getting that these are left
-[0:18:04] i end up getting that these are left tail probabilities so that the left tail
-[0:18:07] tail probabilities so that the left tail probability of that reference
-[0:18:08] probability of that reference distribution assuming the sharp null
-[0:18:11] distribution assuming the sharp null is bounded above by that true value
-[0:18:16] is bounded above by that true value under the randomization distribution in
-[0:18:18] under the randomization distribution in the limit so then flipping things around
-[0:18:21] the limit so then flipping things around if t is asymptotically sharp dominant
-[0:18:24] if t is asymptotically sharp dominant under the weak null
-[0:18:25] under the weak null then it's limiting upper tail
-[0:18:27] then it's limiting upper tail probabilities may be upper bounded by
-[0:18:30] probabilities may be upper bounded by those of pt infinity so what that would
-[0:18:33] those of pt infinity so what that would mean it would actually give me this kind
-[0:18:35] mean it would actually give me this kind of robustness property of a fissure
-[0:18:37] of robustness property of a fissure randomization test that would be saying
-[0:18:40] randomization test that would be saying that even
+[0:17:14] the weak null is assumed to hold
+[0:17:17] now to build towards kind of some
+[0:17:18] desirable properties
+[0:17:20] for ensuring validity under the weakness
+[0:17:23] let's just suppose that you know the
+[0:17:25] randomization distribution converges
+[0:17:27] weekly to some limits say rt infinity
+[0:17:30] and furthermore the the reference
+[0:17:32] distribution assuming the sharp null
+[0:17:35] converges weakly in probability to some
+[0:17:37] limit pt infinity so this if you're not
+[0:17:41] familiar with weak convergence and
+[0:17:42] probability just for all continuity
+[0:17:44] points of the cdf i get convergence and
+[0:17:47] probability and i need this just because
+[0:17:49] it's a random measure
+[0:17:51] so i'm going to introduce a property
+[0:17:53] called asymptotic sharp dominance
+[0:17:56] so i'm going to say a test statistic t
+[0:17:58] is called asymptotically sharp dominant
+[0:18:01] if for all t
+[0:18:03] i end up getting that these are left
+[0:18:04] tail probabilities so that the left tail
+[0:18:07] probability of that reference
+[0:18:08] distribution assuming the sharp null
+[0:18:11] is bounded above by that true value
+[0:18:16] under the randomization distribution in
+[0:18:18] the limit so then flipping things around
+[0:18:21] if t is asymptotically sharp dominant
+[0:18:24] under the weak null
+[0:18:25] then it's limiting upper tail
+[0:18:27] probabilities may be upper bounded by
+[0:18:30] those of pt infinity so what that would
+[0:18:33] mean it would actually give me this kind
+[0:18:35] of robustness property of a fissure
+[0:18:37] randomization test that would be saying
 [0:18:42] that even if i use the reference distribution
-[0:18:44] if i use the reference distribution under the sharp null for inference i
-[0:18:46] under the sharp null for inference i know that those resulting p-values are
-[0:18:49] know that those resulting p-values are going to kind of bound the true p-values
-[0:18:52] going to kind of bound the true p-values so the tail probabilities are going to
-[0:18:53] so the tail probabilities are going to bound the true
-[0:18:55] bound the true tail probabilities from the
-[0:18:56] tail probabilities from the randomization distribution so if i could
-[0:18:59] randomization distribution so if i could come up with a test statistic with this
-[0:19:00] come up with a test statistic with this property
+[0:18:44] under the sharp null for inference i
+[0:18:46] know that those resulting p-values are
+[0:18:49] going to kind of bound the true p-values
+[0:18:52] so the tail probabilities are going to
+[0:18:53] bound the true
+[0:18:55] tail probabilities from the
+[0:18:56] randomization distribution so if i could
+[0:18:59] come up with a test statistic with this
 [0:19:01] property i would be good to go as far as giving
-[0:19:04] i would be good to go as far as giving inference that is exact under the sharp
-[0:19:06] inference that is exact under the sharp null and asymptotically correct under
-[0:19:08] null and asymptotically correct under the weakness
-[0:19:11] the weakness so i'm just going to assume a few
-[0:19:12] so i'm just going to assume a few regularity conditions nothing
-[0:19:14] regularity conditions nothing mind-blowing here just need that the
-[0:19:16] mind-blowing here just need that the fraction of treatment individuals
-[0:19:18] fraction of treatment individuals converges to some constant t
-[0:19:20] converges to some constant t i'm just going to say that the means and
-[0:19:21] i'm just going to say that the means and covariances for potential outcomes and
-[0:19:24] covariances for potential outcomes and the covariates have limiting values
-[0:19:27] the covariates have limiting values and i'm further going to assume that the
-[0:19:30] and i'm further going to assume that the bounded force moments basically for the
-[0:19:31] bounded force moments basically for the potential outcomes and uh the covariance
-[0:19:34] potential outcomes and uh the covariance and i'm not focusing on the weakest
-[0:19:36] and i'm not focusing on the weakest regularity conditions here i believe
-[0:19:38] regularity conditions here i believe that two plus delta moments is likely
-[0:19:40] that two plus delta moments is likely fine there are just certain parts in the
-[0:19:42] fine there are just certain parts in the proof of what's happening with the
-[0:19:44] proof of what's happening with the reference distribution where both fourth
-[0:19:46] reference distribution where both fourth moments are very convenient
-[0:19:49] moments are very convenient uh so now in basically what i want to do
-[0:19:51] uh so now in basically what i want to do now is think about the distribution of
-[0:19:54] now is think about the distribution of the treated minus control difference in
-[0:19:56] the treated minus control difference in means
+[0:19:04] inference that is exact under the sharp
+[0:19:06] null and asymptotically correct under
+[0:19:08] the weakness
+[0:19:11] so i'm just going to assume a few
+[0:19:12] regularity conditions nothing
+[0:19:14] mind-blowing here just need that the
+[0:19:16] fraction of treatment individuals
+[0:19:18] converges to some constant t
+[0:19:20] i'm just going to say that the means and
+[0:19:21] covariances for potential outcomes and
+[0:19:24] the covariates have limiting values
+[0:19:27] and i'm further going to assume that the
+[0:19:30] bounded force moments basically for the
+[0:19:31] potential outcomes and uh the covariance
+[0:19:34] and i'm not focusing on the weakest
+[0:19:36] regularity conditions here i believe
+[0:19:38] that two plus delta moments is likely
+[0:19:40] fine there are just certain parts in the
+[0:19:42] proof of what's happening with the
+[0:19:44] reference distribution where both fourth
+[0:19:46] moments are very convenient
+[0:19:49] uh so now in basically what i want to do
+[0:19:51] now is think about the distribution of
+[0:19:54] the treated minus control difference in
 [0:19:57] means which is in general it's randomization
-[0:19:59] which is in general it's randomization distribution
-[0:20:00] distribution and compare that with the limiting
-[0:20:02] and compare that with the limiting behavior of the reference distribution
-[0:20:05] behavior of the reference distribution to try to get a sense of where is the
-[0:20:07] to try to get a sense of where is the disconnect coming in and then what can
-[0:20:09] disconnect coming in and then what can be done to overcome it
-[0:20:11] be done to overcome it so in completely randomized designs we
-[0:20:14] so in completely randomized designs we get this following a clt result
-[0:20:17] get this following a clt result that uh under the finite population
-[0:20:19] that uh under the finite population model this vector of treated minus
-[0:20:21] model this vector of treated minus control difference in means and
-[0:20:23] control difference in means and differences in covariates
-[0:20:25] differences in covariates will converge to it to a normal with a
-[0:20:28] will converge to it to a normal with a covariance structure of the following
-[0:20:30] covariance structure of the following form
+[0:19:59] distribution
+[0:20:00] and compare that with the limiting
+[0:20:02] behavior of the reference distribution
+[0:20:05] to try to get a sense of where is the
+[0:20:07] disconnect coming in and then what can
+[0:20:09] be done to overcome it
+[0:20:11] so in completely randomized designs we
+[0:20:14] get this following a clt result
+[0:20:17] that uh under the finite population
+[0:20:19] model this vector of treated minus
+[0:20:21] control difference in means and
+[0:20:23] differences in covariates
+[0:20:25] will converge to it to a normal with a
+[0:20:28] covariance structure of the following
 [0:20:31] form i'd say the most interesting thing to
-[0:20:33] i'd say the most interesting thing to note here is this v tau tau term this
-[0:20:36] note here is this v tau tau term this kind of variance in the upper left it
-[0:20:38] kind of variance in the upper left it depends upon the sigma tau now the sigma
-[0:20:40] depends upon the sigma tau now the sigma tau is the covariance for the treatment
-[0:20:42] tau is the covariance for the treatment effects and hence generally cannot be
-[0:20:44] effects and hence generally cannot be identified
-[0:20:46] identified as a result the upper left block here v
-[0:20:49] as a result the upper left block here v tau tau cannot be consistently estimated
-[0:20:52] tau tau cannot be consistently estimated it depends upon sigma tau infinity
-[0:20:55] it depends upon sigma tau infinity that said many variance estimators exist
-[0:20:58] that said many variance estimators exist that consistently estimate v tau delta
-[0:21:00] that consistently estimate v tau delta and v delta delta those other terms in
-[0:21:03] and v delta delta those other terms in that matrix and furthermore satisfy a
-[0:21:06] that matrix and furthermore satisfy a certain conservativeness property
-[0:21:09] certain conservativeness property such that the estimator minus v tau tau
-[0:21:12] such that the estimator minus v tau tau converges in probability to some value
-[0:21:14] converges in probability to some value that is greater than zero in the
-[0:21:16] that is greater than zero in the semi-definite sense
-[0:21:18] semi-definite sense so an example is just the usual variance
-[0:21:21] so an example is just the usual variance estimator in a you know when i've got id
-[0:21:24] estimator in a you know when i've got id sampling from two independent
-[0:21:26] sampling from two independent populations that would end up resulting
-[0:21:28] populations that would end up resulting in a variance estimator who's where v
-[0:21:31] in a variance estimator who's where v hat tau tau minus the truth converges in
-[0:21:34] hat tau tau minus the truth converges in probability to sigma tau
-[0:21:36] probability to sigma tau so for that reason
-[0:21:38] so for that reason i would end up having a conservative
-[0:21:39] i would end up having a conservative covariance estimator here
-[0:21:42] covariance estimator here i want to compare this property now or
-[0:21:45] i want to compare this property now or this kind of this behavior to what we
-[0:21:48] this kind of this behavior to what we end up seeing under the sharp mill
-[0:21:50] end up seeing under the sharp mill so when we use the sharp null we use
-[0:21:53] so when we use the sharp null we use this reference distribution this is just
-[0:21:55] this reference distribution this is just another way to write out what the
-[0:21:57] another way to write out what the reference distribution looks like when i
-[0:22:00] reference distribution looks like when i do inference enumerating assuming that
-[0:22:03] do inference enumerating assuming that the sharp null holds
-[0:22:05] the sharp null holds so in order to think about what happens
-[0:22:07] so in order to think about what happens asymptotically to any test statistic
-[0:22:09] asymptotically to any test statistic that is a function of the difference in
-[0:22:11] that is a function of the difference in means let's think about
-[0:22:13] means let's think about the behavior of this conditional
-[0:22:15] the behavior of this conditional distribution so this is in a sense
-[0:22:17] distribution so this is in a sense thinking about what happens when i
-[0:22:19] thinking about what happens when i assume the sharp null about basically
-[0:22:21] assume the sharp null about basically the reference distribution this
-[0:22:23] the reference distribution this conditional distribution for the
-[0:22:25] conditional distribution for the difference in means and the difference
-[0:22:27] difference in means and the difference in covariance
-[0:22:28] in covariance and by understanding the behavior of
-[0:22:30] and by understanding the behavior of this conditional distribution we will
-[0:22:33] this conditional distribution we will then be able to understand the behavior
-[0:22:36] then be able to understand the behavior of any test statistic that the function
-[0:22:38] of any test statistic that the function of the differences means so this is the
-[0:22:40] of the differences means so this is the theorem by wu and ding say we also get
-[0:22:43] theorem by wu and ding say we also get under weak condition under the
-[0:22:45] under weak condition under the conditions i've laid out convergence
-[0:22:47] conditions i've laid out convergence weekly and probability to a mean zero
-[0:22:49] weekly and probability to a mean zero gaussian with the following covariance
-[0:22:51] gaussian with the following covariance structure now obviously hard to absorb
-[0:22:54] structure now obviously hard to absorb everything here
-[0:22:55] everything here what i want to focus on is just a few
-[0:22:57] what i want to focus on is just a few discrepancies between the two results
-[0:22:59] discrepancies between the two results i've shown so far
-[0:23:01] i've shown so far so though looking first at the limiting
-[0:23:03] so though looking first at the limiting covariances for the randomization
-[0:23:05] covariances for the randomization distribution and comparing that to the
-[0:23:07] distribution and comparing that to the limiting covariances for the reference
-[0:23:09] limiting covariances for the reference distribution
-[0:23:11] distribution i see that in the upper left for example
-[0:23:13] i see that in the upper left for example compare v tau tau to v tilde's household
-[0:23:16] compare v tau tau to v tilde's household i end up seeing a discrepancy here in
-[0:23:19] i end up seeing a discrepancy here in terms of the limiting covariances
-[0:23:21] terms of the limiting covariances governing those random variables
-[0:23:23] governing those random variables the reason being you know in a sense the
-[0:23:26] the reason being you know in a sense the ps and the one minus ps here have been
-[0:23:28] ps and the one minus ps here have been switched for the uh for the true
-[0:23:31] switched for the uh for the true randomization distribution versus the
-[0:23:33] randomization distribution versus the reference distribution and i also have
-[0:23:35] reference distribution and i also have the subtraction here
-[0:23:37] the subtraction here the consequence is that generally v
-[0:23:39] the consequence is that generally v tilde does not equal z
-[0:23:41] tilde does not equal z and as most test statistics one would
-[0:23:43] and as most test statistics one would use
+[0:20:33] note here is this v tau tau term this
+[0:20:36] kind of variance in the upper left it
+[0:20:38] depends upon the sigma tau now the sigma
+[0:20:40] tau is the covariance for the treatment
+[0:20:42] effects and hence generally cannot be
+[0:20:44] identified
+[0:20:46] as a result the upper left block here v
+[0:20:49] tau tau cannot be consistently estimated
+[0:20:52] it depends upon sigma tau infinity
+[0:20:55] that said many variance estimators exist
+[0:20:58] that consistently estimate v tau delta
+[0:21:00] and v delta delta those other terms in
+[0:21:03] that matrix and furthermore satisfy a
+[0:21:06] certain conservativeness property
+[0:21:09] such that the estimator minus v tau tau
+[0:21:12] converges in probability to some value
+[0:21:14] that is greater than zero in the
+[0:21:16] semi-definite sense
+[0:21:18] so an example is just the usual variance
+[0:21:21] estimator in a you know when i've got id
+[0:21:24] sampling from two independent
+[0:21:26] populations that would end up resulting
+[0:21:28] in a variance estimator who's where v
+[0:21:31] hat tau tau minus the truth converges in
+[0:21:34] probability to sigma tau
+[0:21:36] so for that reason
+[0:21:38] i would end up having a conservative
+[0:21:39] covariance estimator here
+[0:21:42] i want to compare this property now or
+[0:21:45] this kind of this behavior to what we
+[0:21:48] end up seeing under the sharp mill
+[0:21:50] so when we use the sharp null we use
+[0:21:53] this reference distribution this is just
+[0:21:55] another way to write out what the
+[0:21:57] reference distribution looks like when i
+[0:22:00] do inference enumerating assuming that
+[0:22:03] the sharp null holds
+[0:22:05] so in order to think about what happens
+[0:22:07] asymptotically to any test statistic
+[0:22:09] that is a function of the difference in
+[0:22:11] means let's think about
+[0:22:13] the behavior of this conditional
+[0:22:15] distribution so this is in a sense
+[0:22:17] thinking about what happens when i
+[0:22:19] assume the sharp null about basically
+[0:22:21] the reference distribution this
+[0:22:23] conditional distribution for the
+[0:22:25] difference in means and the difference
+[0:22:27] in covariance
+[0:22:28] and by understanding the behavior of
+[0:22:30] this conditional distribution we will
+[0:22:33] then be able to understand the behavior
+[0:22:36] of any test statistic that the function
+[0:22:38] of the differences means so this is the
+[0:22:40] theorem by wu and ding say we also get
+[0:22:43] under weak condition under the
+[0:22:45] conditions i've laid out convergence
+[0:22:47] weekly and probability to a mean zero
+[0:22:49] gaussian with the following covariance
+[0:22:51] structure now obviously hard to absorb
+[0:22:54] everything here
+[0:22:55] what i want to focus on is just a few
+[0:22:57] discrepancies between the two results
+[0:22:59] i've shown so far
+[0:23:01] so though looking first at the limiting
+[0:23:03] covariances for the randomization
+[0:23:05] distribution and comparing that to the
+[0:23:07] limiting covariances for the reference
+[0:23:09] distribution
+[0:23:11] i see that in the upper left for example
+[0:23:13] compare v tau tau to v tilde's household
+[0:23:16] i end up seeing a discrepancy here in
+[0:23:19] terms of the limiting covariances
+[0:23:21] governing those random variables
+[0:23:23] the reason being you know in a sense the
+[0:23:26] ps and the one minus ps here have been
+[0:23:28] switched for the uh for the true
+[0:23:31] randomization distribution versus the
+[0:23:33] reference distribution and i also have
+[0:23:35] the subtraction here
+[0:23:37] the consequence is that generally v
+[0:23:39] tilde does not equal z
+[0:23:41] and as most test statistics one would
 [0:23:44] use when desiring inferences for the weak
-[0:23:46] when desiring inferences for the weak null are going to be functions of the
-[0:23:48] null are going to be functions of the treated minus control difference in
-[0:23:49] treated minus control difference in means they're really just going to be
-[0:23:51] means they're really just going to be push forwards of these measures that
-[0:23:53] push forwards of these measures that i've just talked about
-[0:23:55] i've just talked about so as a result the reference
-[0:23:57] so as a result the reference distribution is not going to align with
-[0:23:59] distribution is not going to align with the actual limiting distribution with
-[0:24:01] the actual limiting distribution with the exception if the sharp null holds
-[0:24:03] the exception if the sharp null holds this is the reason that in general
-[0:24:06] this is the reason that in general you know you have to be careful with
-[0:24:07] you know you have to be careful with which test statistic that you end up
-[0:24:09] which test statistic that you end up choosing
+[0:23:46] null are going to be functions of the
+[0:23:48] treated minus control difference in
+[0:23:49] means they're really just going to be
+[0:23:51] push forwards of these measures that
+[0:23:53] i've just talked about
+[0:23:55] so as a result the reference
+[0:23:57] distribution is not going to align with
+[0:23:59] the actual limiting distribution with
+[0:24:01] the exception if the sharp null holds
+[0:24:03] this is the reason that in general
+[0:24:06] you know you have to be careful with
+[0:24:07] which test statistic that you end up
 [0:24:11] choosing i'll now dive into some details for
-[0:24:13] i'll now dive into some details for thinking about generally how do i
-[0:24:15] thinking about generally how do i construct a test statistic with the
-[0:24:16] construct a test statistic with the desired robustness property
-[0:24:18] desired robustness property now i would say most test statistics for
-[0:24:20] now i would say most test statistics for the weak know can be expressed in the
-[0:24:23] the weak know can be expressed in the following form
-[0:24:24] following form okay i'm basically going to take some
-[0:24:26] okay i'm basically going to take some function
+[0:24:13] thinking about generally how do i
+[0:24:15] construct a test statistic with the
+[0:24:16] desired robustness property
+[0:24:18] now i would say most test statistics for
+[0:24:20] the weak know can be expressed in the
+[0:24:23] following form
+[0:24:24] okay i'm basically going to take some
 [0:24:28] function of the treated minus control difference
-[0:24:30] of the treated minus control difference in means
 [0:24:31] in means okay that function might depend upon
-[0:24:33] okay that function might depend upon some nuisance parameter say psi hat
-[0:24:36] some nuisance parameter say psi hat and i'm going to say put some conditions
-[0:24:38] and i'm going to say put some conditions down on this function
-[0:24:40] down on this function and on psi hat so i'm going to say this
-[0:24:42] and on psi hat so i'm going to say this function
+[0:24:33] some nuisance parameter say psi hat
+[0:24:36] and i'm going to say put some conditions
+[0:24:38] down on this function
+[0:24:40] and on psi hat so i'm going to say this
 [0:24:44] function is continuous quasi-convex meaning that
-[0:24:47] is continuous quasi-convex meaning that it has convex level sets
-[0:24:49] it has convex level sets and it's non-negative in mirror
-[0:24:51] and it's non-negative in mirror symmetric so i will be looking at kind
-[0:24:53] symmetric so i will be looking at kind of two-sided inference here but say
-[0:24:56] of two-sided inference here but say anything like the absolute difference in
-[0:24:57] anything like the absolute difference in means mahalanobis distance most of the
-[0:25:00] means mahalanobis distance most of the usual candidates you consider can be
-[0:25:02] usual candidates you consider can be written in this form with a function
-[0:25:05] written in this form with a function that satisfies these properties
-[0:25:07] that satisfies these properties so furthermore this nuisance parameter
-[0:25:10] so furthermore this nuisance parameter psi which will also often be like a
-[0:25:12] psi which will also often be like a variance estimator but it could be other
-[0:25:14] variance estimator but it could be other things as well
-[0:25:16] things as well um i need that basically this nuisance
-[0:25:18] um i need that basically this nuisance parameter basically has a limited
-[0:25:20] parameter basically has a limited probability both under the true
-[0:25:22] probability both under the true randomization distribution which is what
-[0:25:24] randomization distribution which is what i'm laying out here
-[0:25:26] i'm laying out here and also under the reference
-[0:25:28] and also under the reference distribution
-[0:25:29] distribution and these limits in probability can be
-[0:25:31] and these limits in probability can be different they just need to exist
-[0:25:33] different they just need to exist okay
+[0:24:47] it has convex level sets
+[0:24:49] and it's non-negative in mirror
+[0:24:51] symmetric so i will be looking at kind
+[0:24:53] of two-sided inference here but say
+[0:24:56] anything like the absolute difference in
+[0:24:57] means mahalanobis distance most of the
+[0:25:00] usual candidates you consider can be
+[0:25:02] written in this form with a function
+[0:25:05] that satisfies these properties
+[0:25:07] so furthermore this nuisance parameter
+[0:25:10] psi which will also often be like a
+[0:25:12] variance estimator but it could be other
+[0:25:14] things as well
+[0:25:16] um i need that basically this nuisance
+[0:25:18] parameter basically has a limited
+[0:25:20] probability both under the true
+[0:25:22] randomization distribution which is what
+[0:25:24] i'm laying out here
+[0:25:26] and also under the reference
+[0:25:28] distribution
+[0:25:29] and these limits in probability can be
+[0:25:31] different they just need to exist
+[0:25:33] okay
 [0:25:38] so we're further going to proceed using covariance estimators
-[0:25:40] covariance estimators such that i have this nice
-[0:25:41] such that i have this nice conservativeness property that if i look
-[0:25:44] conservativeness property that if i look under the true randomization
-[0:25:46] under the true randomization distribution
-[0:25:48] distribution then my variance estimator satisfies the
-[0:25:51] then my variance estimator satisfies the following limit and probability so
-[0:25:53] following limit and probability so basically it's going to be consistent
-[0:25:55] basically it's going to be consistent except for the that upper left that
-[0:25:57] except for the that upper left that pertains to kind of the very the
-[0:25:59] pertains to kind of the very the covariance for the different means of
-[0:26:01] covariance for the different means of the potential outcomes
-[0:26:03] the potential outcomes and it will then be you know kind of
-[0:26:05] and it will then be you know kind of conservative in general this delta being
-[0:26:08] conservative in general this delta being non-negative definite
-[0:26:10] non-negative definite okay and furthermore i'll assume that
-[0:26:12] okay and furthermore i'll assume that under the reference distribution
-[0:26:14] under the reference distribution this covariance estimator
-[0:26:17] this covariance estimator is consistent
-[0:26:19] is consistent and that ends up being true of most any
-[0:26:21] and that ends up being true of most any covariance estimator that has this
-[0:26:23] covariance estimator that has this conservativeness property they generally
-[0:26:25] conservativeness property they generally have the property that if treatment
-[0:26:27] have the property that if treatment effects are constant
-[0:26:29] effects are constant then the covariance estimator is
-[0:26:31] then the covariance estimator is consistent rather than conservative so
-[0:26:34] consistent rather than conservative so this is again not a strong assumption
-[0:26:36] this is again not a strong assumption and is you know satisfied by most any
-[0:26:38] and is you know satisfied by most any common variance estimator deployed in
-[0:26:40] common variance estimator deployed in practice
+[0:25:40] such that i have this nice
+[0:25:41] conservativeness property that if i look
+[0:25:44] under the true randomization
+[0:25:46] distribution
+[0:25:48] then my variance estimator satisfies the
+[0:25:51] following limit and probability so
+[0:25:53] basically it's going to be consistent
+[0:25:55] except for the that upper left that
+[0:25:57] pertains to kind of the very the
+[0:25:59] covariance for the different means of
+[0:26:01] the potential outcomes
+[0:26:03] and it will then be you know kind of
+[0:26:05] conservative in general this delta being
+[0:26:08] non-negative definite
+[0:26:10] okay and furthermore i'll assume that
+[0:26:12] under the reference distribution
+[0:26:14] this covariance estimator
+[0:26:17] is consistent
+[0:26:19] and that ends up being true of most any
+[0:26:21] covariance estimator that has this
+[0:26:23] conservativeness property they generally
+[0:26:25] have the property that if treatment
+[0:26:27] effects are constant
+[0:26:29] then the covariance estimator is
+[0:26:31] consistent rather than conservative so
+[0:26:34] this is again not a strong assumption
+[0:26:36] and is you know satisfied by most any
+[0:26:38] common variance estimator deployed in
 [0:26:41] practice and again just want to just want to
-[0:26:43] and again just want to just want to reintroduce these balance criterion that
-[0:26:45] reintroduce these balance criterion that will be underlying our use of
-[0:26:47] will be underlying our use of re-randomized designs so i'm only going
-[0:26:49] re-randomized designs so i'm only going to accept certain randomizations that
-[0:26:51] to accept certain randomizations that satisfy certain balance conditions
-[0:26:55] satisfy certain balance conditions so test statistics of this form
-[0:26:58] so test statistics of this form need not satisfy asymptotic sharp
-[0:27:00] need not satisfy asymptotic sharp dominance when the weak null holds that
-[0:27:02] dominance when the weak null holds that the sharp null does not
-[0:27:04] the sharp null does not so as if you know one of our motivating
-[0:27:06] so as if you know one of our motivating examples is the treated minus control
-[0:27:08] examples is the treated minus control difference in means and if outcomes are
-[0:27:11] difference in means and if outcomes are scalar and i just use root n
-[0:27:13] scalar and i just use root n times absolute tau hat
-[0:27:15] times absolute tau hat in a completely randomized design
-[0:27:18] in a completely randomized design the true distribution and the reference
-[0:27:20] the true distribution and the reference distributions well they both go to half
-[0:27:22] distributions well they both go to half normals but with different dispersion
-[0:27:24] normals but with different dispersion parameters and it can be the case that
-[0:27:26] parameters and it can be the case that the true dispersion parameter is larger
-[0:27:29] the true dispersion parameter is larger than the dispersion parameter of the
-[0:27:31] than the dispersion parameter of the reference distribution if that's the
-[0:27:33] reference distribution if that's the case you are going to get
-[0:27:35] case you are going to get anti-conservative inference
-[0:27:37] anti-conservative inference coming out of this
-[0:27:39] coming out of this so then what can be done to establish
-[0:27:40] so then what can be done to establish sharp dominance
-[0:27:42] sharp dominance and ultimately this is where the role of
-[0:27:44] and ultimately this is where the role of pre-pivoting comes in
-[0:27:46] pre-pivoting comes in the pre-pivoting
-[0:27:48] the pre-pivoting was introduced through a few seminal
-[0:27:49] was introduced through a few seminal papers by rudy barron in the late 80s
-[0:27:52] papers by rudy barron in the late 80s it's the act of transforming a test
-[0:27:54] it's the act of transforming a test statistic by an estimator of its
-[0:27:56] statistic by an estimator of its distribution function so come up with a
-[0:27:59] distribution function so come up with a sample-based cdf that estimates the cdf
-[0:28:02] sample-based cdf that estimates the cdf of the test statistic
-[0:28:04] of the test statistic and then apply that to the test
-[0:28:05] and then apply that to the test statistic as a transformation
-[0:28:09] statistic as a transformation so darren's original use of pre-pivoting
-[0:28:11] so darren's original use of pre-pivoting was in the context of the bootstrap and
-[0:28:14] was in the context of the bootstrap and what he realized is that if i look at
-[0:28:16] what he realized is that if i look at applying a bootstrap cdf to a test
-[0:28:20] applying a bootstrap cdf to a test statistic
+[0:26:43] reintroduce these balance criterion that
+[0:26:45] will be underlying our use of
+[0:26:47] re-randomized designs so i'm only going
+[0:26:49] to accept certain randomizations that
+[0:26:51] satisfy certain balance conditions
+[0:26:55] so test statistics of this form
+[0:26:58] need not satisfy asymptotic sharp
+[0:27:00] dominance when the weak null holds that
+[0:27:02] the sharp null does not
+[0:27:04] so as if you know one of our motivating
+[0:27:06] examples is the treated minus control
+[0:27:08] difference in means and if outcomes are
+[0:27:11] scalar and i just use root n
+[0:27:13] times absolute tau hat
+[0:27:15] in a completely randomized design
+[0:27:18] the true distribution and the reference
+[0:27:20] distributions well they both go to half
+[0:27:22] normals but with different dispersion
+[0:27:24] parameters and it can be the case that
+[0:27:26] the true dispersion parameter is larger
+[0:27:29] than the dispersion parameter of the
+[0:27:31] reference distribution if that's the
+[0:27:33] case you are going to get
+[0:27:35] anti-conservative inference
+[0:27:37] coming out of this
+[0:27:39] so then what can be done to establish
+[0:27:40] sharp dominance
+[0:27:42] and ultimately this is where the role of
+[0:27:44] pre-pivoting comes in
+[0:27:46] the pre-pivoting
+[0:27:48] was introduced through a few seminal
+[0:27:49] papers by rudy barron in the late 80s
+[0:27:52] it's the act of transforming a test
+[0:27:54] statistic by an estimator of its
+[0:27:56] distribution function so come up with a
+[0:27:59] sample-based cdf that estimates the cdf
+[0:28:02] of the test statistic
+[0:28:04] and then apply that to the test
+[0:28:05] statistic as a transformation
+[0:28:09] so darren's original use of pre-pivoting
+[0:28:11] was in the context of the bootstrap and
+[0:28:14] what he realized is that if i look at
+[0:28:16] applying a bootstrap cdf to a test
 [0:28:21] statistic i can through bootstrap iteration attain
-[0:28:23] i can through bootstrap iteration attain higher order corrections to the level of
-[0:28:25] higher order corrections to the level of tests and to confidence intervals yes it
-[0:28:28] tests and to confidence intervals yes it was mainly focused in higher order
-[0:28:30] was mainly focused in higher order improvements in the bootstrap through
-[0:28:31] improvements in the bootstrap through this use
+[0:28:23] higher order corrections to the level of
+[0:28:25] tests and to confidence intervals yes it
+[0:28:28] was mainly focused in higher order
+[0:28:30] improvements in the bootstrap through
 [0:28:33] this use so we'll be using pre-pivoting for a
-[0:28:34] so we'll be using pre-pivoting for a different reason to restore first order
-[0:28:37] different reason to restore first order correctness to test of the weak mill to
-[0:28:39] correctness to test of the weak mill to randomization test of the week no
-[0:28:42] randomization test of the week no so
+[0:28:34] different reason to restore first order
+[0:28:37] correctness to test of the weak mill to
+[0:28:39] randomization test of the week no
 [0:28:43] so here is just going to be kind of the
-[0:28:45] here is just going to be kind of the formulaic description of what this
-[0:28:47] formulaic description of what this transformation looks like i will try to
-[0:28:49] transformation looks like i will try to walk through it to make it make a little
-[0:28:51] walk through it to make it make a little more sense
-[0:28:52] more sense so if i start with a test statistic say
-[0:28:54] so if i start with a test statistic say t y of z and z that satisfies this
-[0:28:57] t y of z and z that satisfies this general form some function of the
-[0:29:00] general form some function of the treated minus control difference in
-[0:29:01] treated minus control difference in means
+[0:28:45] formulaic description of what this
+[0:28:47] transformation looks like i will try to
+[0:28:49] walk through it to make it make a little
+[0:28:51] more sense
+[0:28:52] so if i start with a test statistic say
+[0:28:54] t y of z and z that satisfies this
+[0:28:57] general form some function of the
+[0:29:00] treated minus control difference in
 [0:29:02] means let's consider the following
-[0:29:04] let's consider the following transformation
-[0:29:05] transformation so basically
-[0:29:07] so basically this uh this gamma mu sigma is just
-[0:29:09] this uh this gamma mu sigma is just going to be like kind of a gaussian
-[0:29:11] going to be like kind of a gaussian measure of a set b with these parameters
-[0:29:14] measure of a set b with these parameters so what i am imagining doing is thinking
-[0:29:16] so what i am imagining doing is thinking here okay let me think about a
-[0:29:19] here okay let me think about a multivariate normal with mean zero and
-[0:29:22] multivariate normal with mean zero and covariance equal to v hat so let me
-[0:29:24] covariance equal to v hat so let me imagine that my estimator is actually
-[0:29:26] imagine that my estimator is actually the true covariance just for this
-[0:29:28] the true covariance just for this computation
-[0:29:29] computation let me think now
-[0:29:31] let me think now what is the measure
-[0:29:33] what is the measure ascribed
+[0:29:04] transformation
+[0:29:05] so basically
+[0:29:07] this uh this gamma mu sigma is just
+[0:29:09] going to be like kind of a gaussian
+[0:29:11] measure of a set b with these parameters
+[0:29:14] so what i am imagining doing is thinking
+[0:29:16] here okay let me think about a
+[0:29:19] multivariate normal with mean zero and
+[0:29:22] covariance equal to v hat so let me
+[0:29:24] imagine that my estimator is actually
+[0:29:26] the true covariance just for this
+[0:29:28] computation
+[0:29:29] let me think now
+[0:29:31] what is the measure
 [0:29:34] ascribed to the area kind of that area of that
-[0:29:38] to the area kind of that area of that multivariate normal such that this
-[0:29:40] multivariate normal such that this function
+[0:29:38] multivariate normal such that this
 [0:29:41] function value falls at or below the observed
-[0:29:45] value falls at or below the observed value for the test statistic
-[0:29:47] value for the test statistic and that balance is satisfied
-[0:29:50] and that balance is satisfied divided by just the probability under
-[0:29:52] divided by just the probability under that
+[0:29:45] value for the test statistic
+[0:29:47] and that balance is satisfied
+[0:29:50] divided by just the probability under
 [0:29:53] that v hat that balance is going to be
-[0:29:54] v hat that balance is going to be satisfied so there's just that
-[0:29:56] satisfied so there's just that conditional kind of tail like uh
-[0:29:59] conditional kind of tail like uh the conditional cdf kind of a cdf for
-[0:30:03] the conditional cdf kind of a cdf for this test statistic kind of generated by
-[0:30:05] this test statistic kind of generated by a gaussian approximation
-[0:30:07] a gaussian approximation conditional upon balance being satisfied
-[0:30:10] conditional upon balance being satisfied so yeah i just stated in a few different
-[0:30:12] so yeah i just stated in a few different ways to try to wrap our minds around it
-[0:30:14] ways to try to wrap our minds around it so if i imagine
-[0:30:16] so if i imagine psy hat and b hat are fixed and i take a
-[0:30:19] psy hat and b hat are fixed and i take a and b to be jointly multivariate normal
-[0:30:21] and b to be jointly multivariate normal with a mean zero and a covariance v hat
-[0:30:25] with a mean zero and a covariance v hat of that form
-[0:30:27] of that form g y of z and z represents kind of that f
-[0:30:31] g y of z and z represents kind of that f phi push forward measure of a given phi
-[0:30:34] phi push forward measure of a given phi b equals one evaluated on that set so
-[0:30:37] b equals one evaluated on that set so that would be more of a probabilistic
-[0:30:38] that would be more of a probabilistic interpretation for what's going on here
-[0:30:41] interpretation for what's going on here but really when you stare at that
-[0:30:43] but really when you stare at that formula you realize it's just one minus
-[0:30:45] formula you realize it's just one minus the p-value of a large sample test for a
-[0:30:48] the p-value of a large sample test for a name and smell with t y of z and z as
-[0:30:52] name and smell with t y of z and z as the test statistic
-[0:30:53] the test statistic so i'm approximating the limiting
-[0:30:55] so i'm approximating the limiting distribution under name and snow
-[0:30:58] distribution under name and snow by replacing the unknowable v with its
-[0:31:01] by replacing the unknowable v with its consistent upper bound v hat
-[0:31:03] consistent upper bound v hat and i'm proceeding calculating say one
-[0:31:06] and i'm proceeding calculating say one minus the p value
-[0:31:08] minus the p value under that using that uh estimator
-[0:31:11] under that using that uh estimator so it evaluates the cdf of the large
-[0:31:13] so it evaluates the cdf of the large sample approximation at us at its
-[0:31:16] sample approximation at us at its observed value which is just 1 minus the
-[0:31:18] observed value which is just 1 minus the p value
+[0:29:54] satisfied so there's just that
+[0:29:56] conditional kind of tail like uh
+[0:29:59] the conditional cdf kind of a cdf for
+[0:30:03] this test statistic kind of generated by
+[0:30:05] a gaussian approximation
+[0:30:07] conditional upon balance being satisfied
+[0:30:10] so yeah i just stated in a few different
+[0:30:12] ways to try to wrap our minds around it
+[0:30:14] so if i imagine
+[0:30:16] psy hat and b hat are fixed and i take a
+[0:30:19] and b to be jointly multivariate normal
+[0:30:21] with a mean zero and a covariance v hat
+[0:30:25] of that form
+[0:30:27] g y of z and z represents kind of that f
+[0:30:31] phi push forward measure of a given phi
+[0:30:34] b equals one evaluated on that set so
+[0:30:37] that would be more of a probabilistic
+[0:30:38] interpretation for what's going on here
+[0:30:41] but really when you stare at that
+[0:30:43] formula you realize it's just one minus
+[0:30:45] the p-value of a large sample test for a
+[0:30:48] name and smell with t y of z and z as
+[0:30:52] the test statistic
+[0:30:53] so i'm approximating the limiting
+[0:30:55] distribution under name and snow
+[0:30:58] by replacing the unknowable v with its
+[0:31:01] consistent upper bound v hat
+[0:31:03] and i'm proceeding calculating say one
+[0:31:06] minus the p value
+[0:31:08] under that using that uh estimator
+[0:31:11] so it evaluates the cdf of the large
+[0:31:13] sample approximation at us at its
+[0:31:16] observed value which is just 1 minus the
 [0:31:20] p value so now usually when we just do name and
-[0:31:23] so now usually when we just do name and style inference we would stop there i've
-[0:31:25] style inference we would stop there i've got my large sample p value i'm going to
-[0:31:28] got my large sample p value i'm going to conduct inference and decide to reject
-[0:31:30] conduct inference and decide to reject them l or not based upon whether or not
-[0:31:32] them l or not based upon whether or not that p-value just exceeds alpha
-[0:31:34] that p-value just exceeds alpha what we'll do here is plug that one
-[0:31:37] what we'll do here is plug that one minus that p-value in
-[0:31:39] minus that p-value in and use one minus that p-value as a test
-[0:31:42] and use one minus that p-value as a test statistic
+[0:31:23] style inference we would stop there i've
+[0:31:25] got my large sample p value i'm going to
+[0:31:28] conduct inference and decide to reject
+[0:31:30] them l or not based upon whether or not
+[0:31:32] that p-value just exceeds alpha
+[0:31:34] what we'll do here is plug that one
+[0:31:37] minus that p-value in
+[0:31:39] and use one minus that p-value as a test
 [0:31:44] statistic assuming the sharp null and generate
-[0:31:47] assuming the sharp null and generate that reference distribution so that's
-[0:31:49] that reference distribution so that's what precisely what this reference
-[0:31:51] what precisely what this reference distribution is doing i'm using that 1
-[0:31:53] distribution is doing i'm using that 1 minus that p-value
-[0:31:55] minus that p-value that large sample p-value as a test
-[0:31:57] that large sample p-value as a test statistic and enumerating
-[0:32:00] statistic and enumerating that reference distribution
-[0:32:02] that reference distribution so of course the reference distribution
-[0:32:04] so of course the reference distribution and the randomization distribution are
-[0:32:07] and the randomization distribution are not going to align exactly
-[0:32:10] not going to align exactly but suppose that i decide to use this as
-[0:32:12] but suppose that i decide to use this as my test of the week no so i decide to
-[0:32:14] my test of the week no so i decide to reject while attempting to maintain the
-[0:32:17] reject while attempting to maintain the type 1 error rate at or below alpha if
-[0:32:19] type 1 error rate at or below alpha if the following holds if my the observed
-[0:32:21] the following holds if my the observed value for my test statistic is above say
-[0:32:24] value for my test statistic is above say the 1 minus alpha quantile of this
-[0:32:26] the 1 minus alpha quantile of this randomization distribution
-[0:32:29] randomization distribution okay and so the main theorem is that
-[0:32:32] okay and so the main theorem is that this ends up satisfying asymptotic sharp
-[0:32:34] this ends up satisfying asymptotic sharp dominance
+[0:31:47] that reference distribution so that's
+[0:31:49] what precisely what this reference
+[0:31:51] distribution is doing i'm using that 1
+[0:31:53] minus that p-value
+[0:31:55] that large sample p-value as a test
+[0:31:57] statistic and enumerating
+[0:32:00] that reference distribution
+[0:32:02] so of course the reference distribution
+[0:32:04] and the randomization distribution are
+[0:32:07] not going to align exactly
+[0:32:10] but suppose that i decide to use this as
+[0:32:12] my test of the week no so i decide to
+[0:32:14] reject while attempting to maintain the
+[0:32:17] type 1 error rate at or below alpha if
+[0:32:19] the following holds if my the observed
+[0:32:21] value for my test statistic is above say
+[0:32:24] the 1 minus alpha quantile of this
+[0:32:26] randomization distribution
+[0:32:29] okay and so the main theorem is that
+[0:32:32] this ends up satisfying asymptotic sharp
 [0:32:36] dominance and we'll kind of walk through kind of
-[0:32:37] and we'll kind of walk through kind of what what what exactly this all means
-[0:32:39] what what what exactly this all means here so under the weak null and under
-[0:32:42] here so under the weak null and under our regularity conditions
-[0:32:44] our regularity conditions then
+[0:32:37] what what what exactly this all means
+[0:32:39] here so under the weak null and under
+[0:32:42] our regularity conditions
 [0:32:45] then the true randomization distribution for
-[0:32:48] the true randomization distribution for g of y z and z
-[0:32:50] g of y z and z that's just one minus the p value
-[0:32:52] that's just one minus the p value converges in distribution to a random
-[0:32:54] converges in distribution to a random variable u tilde that is stochastically
-[0:32:58] variable u tilde that is stochastically dominated by a uniform distribution
-[0:33:02] dominated by a uniform distribution so for all values t
-[0:33:04] so for all values t the cdf for this random variable is
-[0:33:07] the cdf for this random variable is greater than or equal to t which means
-[0:33:08] greater than or equal to t which means it is stochastically dominated by a
-[0:33:11] it is stochastically dominated by a uniform
+[0:32:48] g of y z and z
+[0:32:50] that's just one minus the p value
+[0:32:52] converges in distribution to a random
+[0:32:54] variable u tilde that is stochastically
+[0:32:58] dominated by a uniform distribution
+[0:33:02] so for all values t
+[0:33:04] the cdf for this random variable is
+[0:33:07] greater than or equal to t which means
+[0:33:08] it is stochastically dominated by a
 [0:33:13] uniform furthermore if i think about the
-[0:33:15] furthermore if i think about the behavior of this reference distribution
-[0:33:17] behavior of this reference distribution now
+[0:33:15] behavior of this reference distribution
 [0:33:18] now the reference distribution
-[0:33:20] the reference distribution actually converges weekly in probability
-[0:33:23] actually converges weekly in probability to a uniform
-[0:33:25] to a uniform so the true randomization distribution
-[0:33:27] so the true randomization distribution is stochastically dominated by a uniform
-[0:33:30] is stochastically dominated by a uniform the reference distribution
-[0:33:32] the reference distribution converges weekly in probability to a
-[0:33:35] converges weekly in probability to a uniform
+[0:33:20] actually converges weekly in probability
+[0:33:23] to a uniform
+[0:33:25] so the true randomization distribution
+[0:33:27] is stochastically dominated by a uniform
+[0:33:30] the reference distribution
+[0:33:32] converges weekly in probability to a
 [0:33:36] uniform so as a result the reference
-[0:33:38] so as a result the reference distributions upper tail probabilities
-[0:33:41] distributions upper tail probabilities have bounded those of the true but
-[0:33:43] have bounded those of the true but unknowable randomization distributions
-[0:33:47] unknowable randomization distributions so the consequence here is that first of
-[0:33:49] so the consequence here is that first of all because i'm doing a a randomization
-[0:33:52] all because i'm doing a a randomization test i still get this wonderful
-[0:33:53] test i still get this wonderful exactness property if the sharp null
-[0:33:55] exactness property if the sharp null holds for any n i get this property okay
-[0:33:59] holds for any n i get this property okay that i i get size alpha
-[0:34:01] that i i get size alpha inference
+[0:33:38] distributions upper tail probabilities
+[0:33:41] have bounded those of the true but
+[0:33:43] unknowable randomization distributions
+[0:33:47] so the consequence here is that first of
+[0:33:49] all because i'm doing a a randomization
+[0:33:52] test i still get this wonderful
+[0:33:53] exactness property if the sharp null
+[0:33:55] holds for any n i get this property okay
+[0:33:59] that i i get size alpha
 [0:34:02] inference but under the weak no i furthermore get
-[0:34:06] but under the weak no i furthermore get the type 1 error rate has been
-[0:34:08] the type 1 error rate has been controlled
-[0:34:09] controlled when using this reference distribution
-[0:34:11] when using this reference distribution that i really should only be entitled to
-[0:34:12] that i really should only be entitled to under the sharp null
-[0:34:14] under the sharp null so again that conservative inference is
-[0:34:16] so again that conservative inference is just a fundamental property of inference
-[0:34:19] just a fundamental property of inference under the finite population model
-[0:34:21] under the finite population model so this kind of accomplishes the task i
-[0:34:24] so this kind of accomplishes the task i now have a single procedure
-[0:34:26] now have a single procedure where it is exact for the sharp null and
-[0:34:29] where it is exact for the sharp null and asymptotically conservative for the weak
-[0:34:31] asymptotically conservative for the weak no
+[0:34:06] the type 1 error rate has been
+[0:34:08] controlled
+[0:34:09] when using this reference distribution
+[0:34:11] that i really should only be entitled to
+[0:34:12] under the sharp null
+[0:34:14] so again that conservative inference is
+[0:34:16] just a fundamental property of inference
+[0:34:19] under the finite population model
+[0:34:21] so this kind of accomplishes the task i
+[0:34:24] now have a single procedure
+[0:34:26] where it is exact for the sharp null and
+[0:34:29] asymptotically conservative for the weak
 [0:34:32] no so in the time remaining uh we'll just
-[0:34:35] so in the time remaining uh we'll just go through a few examples just to first
-[0:34:37] go through a few examples just to first show that this actually precisely
-[0:34:39] show that this actually precisely recovers the known kind of corrections
-[0:34:41] recovers the known kind of corrections that exist in the literature
-[0:34:44] that exist in the literature and furthermore provides a whole new
-[0:34:46] and furthermore provides a whole new suite of resolutions a whole new suite
-[0:34:48] suite of resolutions a whole new suite of test statistics for designs where as
-[0:34:50] of test statistics for designs where as of yet we don't know how to do this how
-[0:34:52] of yet we don't know how to do this how to provide these robust randomization
-[0:34:54] to provide these robust randomization tests
+[0:34:35] go through a few examples just to first
+[0:34:37] show that this actually precisely
+[0:34:39] recovers the known kind of corrections
+[0:34:41] that exist in the literature
+[0:34:44] and furthermore provides a whole new
+[0:34:46] suite of resolutions a whole new suite
+[0:34:48] of test statistics for designs where as
+[0:34:50] of yet we don't know how to do this how
+[0:34:52] to provide these robust randomization
 [0:34:56] tests so as we talked about root n tau hat is
-[0:34:58] so as we talked about root n tau hat is not sharp dominant
-[0:35:01] not sharp dominant if i think about what happens when i
-[0:35:03] if i think about what happens when i apply gaussian pre-pivoting here well g
-[0:35:06] apply gaussian pre-pivoting here well g y z of z
+[0:34:58] not sharp dominant
+[0:35:01] if i think about what happens when i
+[0:35:03] apply gaussian pre-pivoting here well g
 [0:35:08] y z of z is just the following 1 minus 2 times
-[0:35:10] is just the following 1 minus 2 times this is the norm standard normalcdf
-[0:35:13] this is the norm standard normalcdf negative root n absolute tau hat over v
-[0:35:15] negative root n absolute tau hat over v hat tau tau to the one half
-[0:35:18] hat tau tau to the one half that's just the probability of say an
-[0:35:20] that's just the probability of say an absolute standard normal being less than
-[0:35:23] absolute standard normal being less than or equal to a given value t
-[0:35:26] or equal to a given value t evaluated at that value there
-[0:35:29] evaluated at that value there so what we want to observe here
-[0:35:32] so what we want to observe here this way and it's actually pretty
-[0:35:34] this way and it's actually pretty straightforward to show this is that
-[0:35:35] straightforward to show this is that when i think about
-[0:35:37] when i think about enumerating this reference distribution
-[0:35:39] enumerating this reference distribution for this statistic here think about what
-[0:35:41] for this statistic here think about what that reference distribution would look
-[0:35:43] that reference distribution would look like
+[0:35:10] this is the norm standard normalcdf
+[0:35:13] negative root n absolute tau hat over v
+[0:35:15] hat tau tau to the one half
+[0:35:18] that's just the probability of say an
+[0:35:20] absolute standard normal being less than
+[0:35:23] or equal to a given value t
+[0:35:26] evaluated at that value there
+[0:35:29] so what we want to observe here
+[0:35:32] this way and it's actually pretty
+[0:35:34] straightforward to show this is that
+[0:35:35] when i think about
+[0:35:37] enumerating this reference distribution
+[0:35:39] for this statistic here think about what
+[0:35:41] that reference distribution would look
 [0:35:44] like it turns out that it actually has
-[0:35:46] it turns out that it actually has perfect rank correlation
-[0:35:48] perfect rank correlation with
+[0:35:46] perfect rank correlation
 [0:35:49] with the usual student type test statistic
-[0:35:52] the usual student type test statistic so when enumerating that reference
-[0:35:54] so when enumerating that reference distribution over all possible omega
-[0:35:57] distribution over all possible omega under the assumption of a sharp null
-[0:35:59] under the assumption of a sharp null the pre-pivoted test statistic has
-[0:36:02] the pre-pivoted test statistic has perfect rank correlation with the
-[0:36:04] perfect rank correlation with the student type test statistic
-[0:36:06] student type test statistic so what that means is that the true rand
-[0:36:09] so what that means is that the true rand the two randomization distributions thus
-[0:36:12] the two randomization distributions thus furnish identical p-values
-[0:36:15] furnish identical p-values so the reference distribution of the
-[0:36:16] so the reference distribution of the pre-pivoted test statistic will furnace
-[0:36:18] pre-pivoted test statistic will furnace identical p-values for any z for any y
-[0:36:23] identical p-values for any z for any y as that obtained through
-[0:36:25] as that obtained through studentizing and studentization in cres
-[0:36:28] studentizing and studentization in cres has been shown to provide sharp
-[0:36:30] has been shown to provide sharp dominance by there's a a nice comment of
-[0:36:32] dominance by there's a a nice comment of a paper by pung dean by uh lo richardson
-[0:36:35] a paper by pung dean by uh lo richardson and robins that talk about this
-[0:36:38] and robins that talk about this so this is a known resolution
-[0:36:41] so this is a known resolution now move on to another test statistic
-[0:36:43] now move on to another test statistic where you know i'd say up until this
-[0:36:44] where you know i'd say up until this point we weren't really exactly sure how
-[0:36:47] point we weren't really exactly sure how to do or how to provide this resolution
-[0:36:50] to do or how to provide this resolution so suppose again we have a completely
-[0:36:52] so suppose again we have a completely randomized experiment
-[0:36:53] randomized experiment but instead suppose i've got
-[0:36:55] but instead suppose i've got multivariate potential outcomes
-[0:36:58] multivariate potential outcomes and i want to consider say the following
-[0:37:00] and i want to consider say the following very natural test statistic for the null
-[0:37:03] very natural test statistic for the null hypothesis that say you know the weak
-[0:37:06] hypothesis that say you know the weak null equals zero for all individuals
-[0:37:09] null equals zero for all individuals uh
+[0:35:52] so when enumerating that reference
+[0:35:54] distribution over all possible omega
+[0:35:57] under the assumption of a sharp null
+[0:35:59] the pre-pivoted test statistic has
+[0:36:02] perfect rank correlation with the
+[0:36:04] student type test statistic
+[0:36:06] so what that means is that the true rand
+[0:36:09] the two randomization distributions thus
+[0:36:12] furnish identical p-values
+[0:36:15] so the reference distribution of the
+[0:36:16] pre-pivoted test statistic will furnace
+[0:36:18] identical p-values for any z for any y
+[0:36:23] as that obtained through
+[0:36:25] studentizing and studentization in cres
+[0:36:28] has been shown to provide sharp
+[0:36:30] dominance by there's a a nice comment of
+[0:36:32] a paper by pung dean by uh lo richardson
+[0:36:35] and robins that talk about this
+[0:36:38] so this is a known resolution
+[0:36:41] now move on to another test statistic
+[0:36:43] where you know i'd say up until this
+[0:36:44] point we weren't really exactly sure how
+[0:36:47] to do or how to provide this resolution
+[0:36:50] so suppose again we have a completely
+[0:36:52] randomized experiment
+[0:36:53] but instead suppose i've got
+[0:36:55] multivariate potential outcomes
+[0:36:58] and i want to consider say the following
+[0:37:00] very natural test statistic for the null
+[0:37:03] hypothesis that say you know the weak
+[0:37:06] null equals zero for all individuals
 [0:37:10] uh the average treatment effect equals zero
-[0:37:11] the average treatment effect equals zero for all for all of the uh for all of the
-[0:37:14] for all for all of the uh for all of the outcomes rather so that would just be
-[0:37:16] outcomes rather so that would just be looking at the max t statistic
-[0:37:19] looking at the max t statistic okay
+[0:37:11] for all for all of the uh for all of the
+[0:37:14] outcomes rather so that would just be
+[0:37:16] looking at the max t statistic
 [0:37:20] okay so this is not asymptotically dominant
-[0:37:22] so this is not asymptotically dominant once i go from d equals one to b greater
-[0:37:24] once i go from d equals one to b greater than one the reason being is that the
-[0:37:26] than one the reason being is that the true randomization distribution depends
-[0:37:28] true randomization distribution depends upon the correlations embedded in z
-[0:37:31] upon the correlations embedded in z which is that limiting covariance
-[0:37:33] which is that limiting covariance for the true randomization distribution
-[0:37:36] for the true randomization distribution whereas the reference distributions
-[0:37:39] whereas the reference distributions limit depends upon the correlations
-[0:37:41] limit depends upon the correlations embedded in v tilde
-[0:37:43] embedded in v tilde and after studentization those
-[0:37:45] and after studentization those correlations can still be different so i
-[0:37:47] correlations can still be different so i can still get anti-conservative
-[0:37:48] can still get anti-conservative inference if i just use this test
-[0:37:50] inference if i just use this test statistic
+[0:37:22] once i go from d equals one to b greater
+[0:37:24] than one the reason being is that the
+[0:37:26] true randomization distribution depends
+[0:37:28] upon the correlations embedded in z
+[0:37:31] which is that limiting covariance
+[0:37:33] for the true randomization distribution
+[0:37:36] whereas the reference distributions
+[0:37:39] limit depends upon the correlations
+[0:37:41] embedded in v tilde
+[0:37:43] and after studentization those
+[0:37:45] correlations can still be different so i
+[0:37:47] can still get anti-conservative
+[0:37:48] inference if i just use this test
 [0:37:52] statistic so what gaussian pre-pivoting does
-[0:37:55] so what gaussian pre-pivoting does is it imagines that i take random
-[0:37:57] is it imagines that i take random variables a 1 to a b
-[0:38:00] variables a 1 to a b normal with 0 and with covariance v hat
-[0:38:04] normal with 0 and with covariance v hat tau tau
+[0:37:55] is it imagines that i take random
+[0:37:57] variables a 1 to a b
+[0:38:00] normal with 0 and with covariance v hat
 [0:38:05] tau tau and i just compute the probability that
-[0:38:08] and i just compute the probability that say
 [0:38:09] say absolute a j over v hat tau tau j j to
-[0:38:13] absolute a j over v hat tau tau j j to the one half
-[0:38:14] the one half falls at or below the observed value for
-[0:38:17] falls at or below the observed value for the test statistic
-[0:38:18] the test statistic again just using this large sample
-[0:38:20] again just using this large sample gaussian approximation
-[0:38:22] gaussian approximation and computing 1 minus the p-value under
-[0:38:25] and computing 1 minus the p-value under that approximation
-[0:38:27] that approximation and that ends up providing the
-[0:38:28] and that ends up providing the resolution there
-[0:38:30] resolution there so we'll wrap up now with just one more
-[0:38:32] so we'll wrap up now with just one more example looking at mahalanobis based
-[0:38:34] example looking at mahalanobis based re-randomization
-[0:38:36] re-randomization so in mahalanobis-based re-randomization
-[0:38:40] so in mahalanobis-based re-randomization we accept a randomization if the
-[0:38:42] we accept a randomization if the mahalanobis distance for the
-[0:38:45] mahalanobis distance for the treated minus the covariate difference
-[0:38:47] treated minus the covariate difference in means between treated and control
-[0:38:49] in means between treated and control falls at or below a given value c
-[0:38:52] falls at or below a given value c so let's say that i've got a univariate
-[0:38:54] so let's say that i've got a univariate outcome and i consider the studentized
-[0:38:57] outcome and i consider the studentized test statistic this might seem like a
-[0:38:58] test statistic this might seem like a very natural place to start the
-[0:39:01] very natural place to start the studentized test statistic after all is
-[0:39:03] studentized test statistic after all is sharp dominant for completely randomized
-[0:39:05] sharp dominant for completely randomized designs
+[0:38:13] the one half
+[0:38:14] falls at or below the observed value for
+[0:38:17] the test statistic
+[0:38:18] again just using this large sample
+[0:38:20] gaussian approximation
+[0:38:22] and computing 1 minus the p-value under
+[0:38:25] that approximation
+[0:38:27] and that ends up providing the
+[0:38:28] resolution there
+[0:38:30] so we'll wrap up now with just one more
+[0:38:32] example looking at mahalanobis based
+[0:38:34] re-randomization
+[0:38:36] so in mahalanobis-based re-randomization
+[0:38:40] we accept a randomization if the
+[0:38:42] mahalanobis distance for the
+[0:38:45] treated minus the covariate difference
+[0:38:47] in means between treated and control
+[0:38:49] falls at or below a given value c
+[0:38:52] so let's say that i've got a univariate
+[0:38:54] outcome and i consider the studentized
+[0:38:57] test statistic this might seem like a
+[0:38:58] very natural place to start the
+[0:39:01] studentized test statistic after all is
+[0:39:03] sharp dominant for completely randomized
 [0:39:06] designs maybe it's the case that studentization
-[0:39:08] maybe it's the case that studentization is the important thing here maybe
-[0:39:10] is the important thing here maybe studentization provides the resolution
-[0:39:13] studentization provides the resolution so this is just what the transformation
-[0:39:15] so this is just what the transformation gaussian pre-pivoting looks like
-[0:39:17] gaussian pre-pivoting looks like when applied here it's just using that
-[0:39:20] when applied here it's just using that v-hat my conservative covariance
-[0:39:23] v-hat my conservative covariance estimator to form an asymptotically
-[0:39:25] estimator to form an asymptotically conservative p-value
-[0:39:27] conservative p-value and then you know one minus that p-value
-[0:39:30] and then you know one minus that p-value is what's being shown in this equation
-[0:39:32] is what's being shown in this equation here
+[0:39:08] is the important thing here maybe
+[0:39:10] studentization provides the resolution
+[0:39:13] so this is just what the transformation
+[0:39:15] gaussian pre-pivoting looks like
+[0:39:17] when applied here it's just using that
+[0:39:20] v-hat my conservative covariance
+[0:39:23] estimator to form an asymptotically
+[0:39:25] conservative p-value
+[0:39:27] and then you know one minus that p-value
+[0:39:30] is what's being shown in this equation
 [0:39:33] here so unless the balance criterion's
-[0:39:35] so unless the balance criterion's vacuous what ends up being the case is
-[0:39:38] vacuous what ends up being the case is that the studentized test statistic and
-[0:39:40] that the studentized test statistic and the pre-pivoted test statistic no longer
-[0:39:43] the pre-pivoted test statistic no longer have perfect rank correlations when
-[0:39:45] have perfect rank correlations when enumerating their reference
-[0:39:47] enumerating their reference distributions
-[0:39:49] distributions so i'm just going to show a little
-[0:39:50] so i'm just going to show a little simulation to show that things can go
-[0:39:52] simulation to show that things can go haywire with just studentizing but that
-[0:39:55] haywire with just studentizing but that it's corrected after pre-pivoting i
-[0:39:57] it's corrected after pre-pivoting i wouldn't worry too much about the
-[0:39:59] wouldn't worry too much about the parameters here so maybe we'll just skip
-[0:40:00] parameters here so maybe we'll just skip over that but i'm just going to do a few
-[0:40:02] over that but i'm just going to do a few simulations
-[0:40:03] simulations both assuming the sharp note and only
-[0:40:06] both assuming the sharp note and only assuming the weak note
-[0:40:08] assuming the weak note and i'm going to say 20 receive
-[0:40:10] and i'm going to say 20 receive treatment 80 receive control and i'll
-[0:40:12] treatment 80 receive control and i'll consider a re-randomized design where i
-[0:40:15] consider a re-randomized design where i end up accepting a randomization if it's
-[0:40:17] end up accepting a randomization if it's mahalanobis distance falls at or below
-[0:40:20] mahalanobis distance falls at or below 1.
+[0:39:35] vacuous what ends up being the case is
+[0:39:38] that the studentized test statistic and
+[0:39:40] the pre-pivoted test statistic no longer
+[0:39:43] have perfect rank correlations when
+[0:39:45] enumerating their reference
+[0:39:47] distributions
+[0:39:49] so i'm just going to show a little
+[0:39:50] simulation to show that things can go
+[0:39:52] haywire with just studentizing but that
+[0:39:55] it's corrected after pre-pivoting i
+[0:39:57] wouldn't worry too much about the
+[0:39:59] parameters here so maybe we'll just skip
+[0:40:00] over that but i'm just going to do a few
+[0:40:02] simulations
+[0:40:03] both assuming the sharp note and only
+[0:40:06] assuming the weak note
+[0:40:08] and i'm going to say 20 receive
+[0:40:10] treatment 80 receive control and i'll
+[0:40:12] consider a re-randomized design where i
+[0:40:15] end up accepting a randomization if it's
+[0:40:17] mahalanobis distance falls at or below
 [0:40:21] 1. so i'm going to compare inference using
-[0:40:23] so i'm going to compare inference using three randomization tests the absolute
-[0:40:25] three randomization tests the absolute difference in means unstudentized the
-[0:40:28] difference in means unstudentized the absolute difference in means studentized
-[0:40:31] absolute difference in means studentized and after applying gaussian pre-pivoting
-[0:40:34] and after applying gaussian pre-pivoting to the absolute difference in means
-[0:40:36] to the absolute difference in means so and we're going to compare
-[0:40:37] so and we're going to compare performance also to the usual large
-[0:40:40] performance also to the usual large sample tests
-[0:40:42] sample tests so
+[0:40:23] three randomization tests the absolute
+[0:40:25] difference in means unstudentized the
+[0:40:28] absolute difference in means studentized
+[0:40:31] and after applying gaussian pre-pivoting
+[0:40:34] to the absolute difference in means
+[0:40:36] so and we're going to compare
+[0:40:37] performance also to the usual large
+[0:40:40] sample tests
 [0:40:43] so let's start by looking at the rows
-[0:40:45] let's start by looking at the rows corresponding to the sharp null and so
-[0:40:47] corresponding to the sharp null and so we see here of course the benefits of
-[0:40:49] we see here of course the benefits of using a randomization test if the sharp
-[0:40:52] using a randomization test if the sharp null holds then this is just modulo some
-[0:40:55] null holds then this is just modulo some sort of monte carlo error we get exact
-[0:40:57] sort of monte carlo error we get exact inference okay so the desired type one
-[0:41:00] inference okay so the desired type one error rate here is alpha equals 0.1 the
-[0:41:02] error rate here is alpha equals 0.1 the randomization tests you know except for
-[0:41:04] randomization tests you know except for uh monte carlo error accomplished that
-[0:41:07] uh monte carlo error accomplished that whereas the large sample test here
-[0:41:09] whereas the large sample test here especially at n equals 50 can be very
-[0:41:11] especially at n equals 50 can be very very far off the anti-conservative
-[0:41:13] very far off the anti-conservative relative to its desired size
-[0:41:16] relative to its desired size so these are the benefits of a
-[0:41:17] so these are the benefits of a motivation for using a randomization
-[0:41:19] motivation for using a randomization test in the first place
-[0:41:21] test in the first place now let's consider inference under the
-[0:41:23] now let's consider inference under the weak null
+[0:40:45] corresponding to the sharp null and so
+[0:40:47] we see here of course the benefits of
+[0:40:49] using a randomization test if the sharp
+[0:40:52] null holds then this is just modulo some
+[0:40:55] sort of monte carlo error we get exact
+[0:40:57] inference okay so the desired type one
+[0:41:00] error rate here is alpha equals 0.1 the
+[0:41:02] randomization tests you know except for
+[0:41:04] uh monte carlo error accomplished that
+[0:41:07] whereas the large sample test here
+[0:41:09] especially at n equals 50 can be very
+[0:41:11] very far off the anti-conservative
+[0:41:13] relative to its desired size
+[0:41:16] so these are the benefits of a
+[0:41:17] motivation for using a randomization
+[0:41:19] test in the first place
+[0:41:21] now let's consider inference under the
 [0:41:24] weak null n equals 50 and n equals 1 000.
-[0:41:28] n equals 50 and n equals 1 000. so what we end up seeing happen here
-[0:41:30] so what we end up seeing happen here is that studentization and no
-[0:41:33] is that studentization and no studentization
-[0:41:34] studentization continue to provide
-[0:41:36] continue to provide anti-conservative inference under the
-[0:41:38] anti-conservative inference under the weak mill so the randomization tests
-[0:41:41] weak mill so the randomization tests that use either the treated medicine
-[0:41:42] that use either the treated medicine control difference in means or that
-[0:41:44] control difference in means or that studentized
-[0:41:45] studentized are anti-conservatives and that
-[0:41:48] are anti-conservatives and that anti-conservativeness consists
-[0:41:50] anti-conservativeness consists asymptotically
-[0:41:51] asymptotically the reason being they aren't doing
-[0:41:53] the reason being they aren't doing pre-pivoting whereas this is the
-[0:41:55] pre-pivoting whereas this is the pre-pivoted randomization test and we
-[0:41:58] pre-pivoted randomization test and we see that we end up getting that
-[0:41:59] see that we end up getting that conservative inference under the weak
-[0:42:01] conservative inference under the weak null to return
-[0:42:03] null to return the other thing you want to note is that
-[0:42:05] the other thing you want to note is that as n increases you see that kind of the
-[0:42:08] as n increases you see that kind of the performance of the test kind of aligns
-[0:42:11] performance of the test kind of aligns with the performance of the large sample
-[0:42:13] with the performance of the large sample test which should make an awful lot of
-[0:42:14] test which should make an awful lot of sense i'm actually using the p-value
-[0:42:17] sense i'm actually using the p-value from a large sample test
-[0:42:19] from a large sample test as my test statistic
-[0:42:21] as my test statistic when conducting inference
-[0:42:23] when conducting inference and so that reference distribution
-[0:42:24] and so that reference distribution converges to a uniform
-[0:42:27] converges to a uniform whereas the randomization distribution
-[0:42:29] whereas the randomization distribution you know has its usual properties of the
-[0:42:30] you know has its usual properties of the true p value
-[0:42:32] true p value uh and you compare that with what you do
-[0:42:34] uh and you compare that with what you do in the usual large sample inference
-[0:42:35] in the usual large sample inference where you just compare in a sense to the
-[0:42:38] where you just compare in a sense to the quantile from the uniform in the first
-[0:42:40] quantile from the uniform in the first place
+[0:41:28] so what we end up seeing happen here
+[0:41:30] is that studentization and no
+[0:41:33] studentization
+[0:41:34] continue to provide
+[0:41:36] anti-conservative inference under the
+[0:41:38] weak mill so the randomization tests
+[0:41:41] that use either the treated medicine
+[0:41:42] control difference in means or that
+[0:41:44] studentized
+[0:41:45] are anti-conservatives and that
+[0:41:48] anti-conservativeness consists
+[0:41:50] asymptotically
+[0:41:51] the reason being they aren't doing
+[0:41:53] pre-pivoting whereas this is the
+[0:41:55] pre-pivoted randomization test and we
+[0:41:58] see that we end up getting that
+[0:41:59] conservative inference under the weak
+[0:42:01] null to return
+[0:42:03] the other thing you want to note is that
+[0:42:05] as n increases you see that kind of the
+[0:42:08] performance of the test kind of aligns
+[0:42:11] with the performance of the large sample
+[0:42:13] test which should make an awful lot of
+[0:42:14] sense i'm actually using the p-value
+[0:42:17] from a large sample test
+[0:42:19] as my test statistic
+[0:42:21] when conducting inference
+[0:42:23] and so that reference distribution
+[0:42:24] converges to a uniform
+[0:42:27] whereas the randomization distribution
+[0:42:29] you know has its usual properties of the
+[0:42:30] true p value
+[0:42:32] uh and you compare that with what you do
+[0:42:34] in the usual large sample inference
+[0:42:35] where you just compare in a sense to the
+[0:42:38] quantile from the uniform in the first
 [0:42:41] place so the performance in terms of power
-[0:42:43] so the performance in terms of power profiles aligns between
-[0:42:46] profiles aligns between the pre-pivoted randomization tests and
-[0:42:50] the pre-pivoted randomization tests and the large sample tests as well
-[0:42:53] the large sample tests as well so to wrap up i'd say pre-pivoting
-[0:42:54] so to wrap up i'd say pre-pivoting provides a general general recipe for
-[0:42:57] provides a general general recipe for restoring asymptotic solidity to
-[0:42:58] restoring asymptotic solidity to randomization tests under the weak milk
-[0:43:01] randomization tests under the weak milk i would say it uh you know subsumed
-[0:43:03] i would say it uh you know subsumed studentization in situations where
-[0:43:05] studentization in situations where studentization itself would provide a
-[0:43:07] studentization itself would provide a resolution
-[0:43:08] resolution it also highlights the importance of
-[0:43:10] it also highlights the importance of using a randomization distribution of a
-[0:43:13] using a randomization distribution of a pivotal quantity got to make sure you
-[0:43:15] pivotal quantity got to make sure you have a pivotal quantity
-[0:43:17] have a pivotal quantity and what's more pivotal than taking you
-[0:43:19] and what's more pivotal than taking you know a p-value in the first place
-[0:43:22] know a p-value in the first place so the general structure here kind of
-[0:43:24] so the general structure here kind of outlined extends very naturally to other
-[0:43:26] outlined extends very naturally to other designs paired blocked finely stratified
-[0:43:29] designs paired blocked finely stratified etc
+[0:42:43] profiles aligns between
+[0:42:46] the pre-pivoted randomization tests and
+[0:42:50] the large sample tests as well
+[0:42:53] so to wrap up i'd say pre-pivoting
+[0:42:54] provides a general general recipe for
+[0:42:57] restoring asymptotic solidity to
+[0:42:58] randomization tests under the weak milk
+[0:43:01] i would say it uh you know subsumed
+[0:43:03] studentization in situations where
+[0:43:05] studentization itself would provide a
+[0:43:07] resolution
+[0:43:08] it also highlights the importance of
+[0:43:10] using a randomization distribution of a
+[0:43:13] pivotal quantity got to make sure you
+[0:43:15] have a pivotal quantity
+[0:43:17] and what's more pivotal than taking you
+[0:43:19] know a p-value in the first place
+[0:43:22] so the general structure here kind of
+[0:43:24] outlined extends very naturally to other
+[0:43:26] designs paired blocked finely stratified
 [0:43:31] etc and extends naturally to studies with
-[0:43:33] and extends naturally to studies with more than two treatment arms as well
-[0:43:36] more than two treatment arms as well let's say uh thanks very much for having
-[0:43:38] let's say uh thanks very much for having me and here are a few references
+[0:43:33] more than two treatment arms as well
+[0:43:36] let's say uh thanks very much for having
+[0:43:38] me and here are a few references
 [0:43:51] all right thank you very much sorry jingling
 [0:43:58] okay uh sure um yeah let's switch to our uh
 [0:43:58] uh discus discussion to design club
-[0:44:01] discus discussion to design club we don't have uh
+[0:44:01] we don't have uh
 [0:44:04] do you think it's your turn let me
 [0:44:18] so i'll just share my screen
 [0:44:30] okay okay thank you uh very much
-[0:44:33] okay thank you uh very much dominic
 [0:44:34] dominic jingwan
 [0:44:35] jingwan and in for giving me this opportunity
-[0:44:37] and in for giving me this opportunity and uh thanks to colin uh
-[0:44:40] and uh thanks to colin uh for delivering a fantastic talk on an
-[0:44:42] for delivering a fantastic talk on an outstanding paper uh i really think this
-[0:44:44] outstanding paper uh i really think this paper is uh going to be among
-[0:44:47] paper is uh going to be among the landmark papers which
-[0:44:49] the landmark papers which really connects the
-[0:44:51] really connects the randomization test with the weak null
-[0:44:53] randomization test with the weak null hypothesis and in terms of setting up a
-[0:44:56] hypothesis and in terms of setting up a general recipe for
-[0:44:58] general recipe for doing these kind of things
-[0:45:00] doing these kind of things so uh i would just like to
-[0:45:03] so uh i would just like to recap some of the main points uh which
-[0:45:06] recap some of the main points uh which colin mentioned pretty clearly during
-[0:45:08] colin mentioned pretty clearly during his talk
+[0:44:37] and uh thanks to colin uh
+[0:44:40] for delivering a fantastic talk on an
+[0:44:42] outstanding paper uh i really think this
+[0:44:44] paper is uh going to be among
+[0:44:47] the landmark papers which
+[0:44:49] really connects the
+[0:44:51] randomization test with the weak null
+[0:44:53] hypothesis and in terms of setting up a
+[0:44:56] general recipe for
+[0:44:58] doing these kind of things
+[0:45:00] so uh i would just like to
+[0:45:03] recap some of the main points uh which
+[0:45:06] colin mentioned pretty clearly during
 [0:45:09] his talk uh so first of all uh whenever we talk
-[0:45:12] uh so first of all uh whenever we talk about fischer randomization test we
-[0:45:14] about fischer randomization test we always talk about the key advantage that
-[0:45:16] always talk about the key advantage that it can be conducted with any test
-[0:45:18] it can be conducted with any test statistic and it's always valid under
-[0:45:20] statistic and it's always valid under the sharpness
+[0:45:12] about fischer randomization test we
+[0:45:14] always talk about the key advantage that
+[0:45:16] it can be conducted with any test
+[0:45:18] statistic and it's always valid under
+[0:45:20] the sharpness
 [0:45:26] when we talk about the disadvantages we immediately think about its
-[0:45:27] immediately think about its applicability in the context of name and
-[0:45:30] applicability in the context of name and snug
+[0:45:27] applicability in the context of name and
 [0:45:31] snug so uh
 [0:45:32] so uh when we started kind of i started
-[0:45:35] when we started kind of i started teaching uh
-[0:45:36] teaching uh some of these topics with don rubin at
-[0:45:39] some of these topics with don rubin at harvard and uh quite often these
-[0:45:41] harvard and uh quite often these questions used to come
-[0:45:43] questions used to come in from students like facial
-[0:45:45] in from students like facial randomization test is interesting uh but
-[0:45:47] randomization test is interesting uh but the sharp null isn't quite so
-[0:45:49] the sharp null isn't quite so isn't the test of average equality of
-[0:45:52] isn't the test of average equality of averages more exciting uh and does the
-[0:45:54] averages more exciting uh and does the randomization test work under such kind
-[0:45:57] randomization test work under such kind of hypothesis
-[0:45:59] of hypothesis so so this was a question which actually
-[0:46:01] so so this was a question which actually bothered us for quite a while and of
-[0:46:03] bothered us for quite a while and of course at that point of time we had a
-[0:46:04] course at that point of time we had a very brilliant student bunk bing who's
-[0:46:08] very brilliant student bunk bing who's whose work uh colin mentioned uh so
-[0:46:12] whose work uh colin mentioned uh so and i discussed this quite a few times
-[0:46:14] and i discussed this quite a few times so we tried to come up with some ideas
-[0:46:16] so we tried to come up with some ideas and
+[0:45:35] teaching uh
+[0:45:36] some of these topics with don rubin at
+[0:45:39] harvard and uh quite often these
+[0:45:41] questions used to come
+[0:45:43] in from students like facial
+[0:45:45] randomization test is interesting uh but
+[0:45:47] the sharp null isn't quite so
+[0:45:49] isn't the test of average equality of
+[0:45:52] averages more exciting uh and does the
+[0:45:54] randomization test work under such kind
+[0:45:57] of hypothesis
+[0:45:59] so so this was a question which actually
+[0:46:01] bothered us for quite a while and of
+[0:46:03] course at that point of time we had a
+[0:46:04] very brilliant student bunk bing who's
+[0:46:08] whose work uh colin mentioned uh so
+[0:46:12] and i discussed this quite a few times
+[0:46:14] so we tried to come up with some ideas
 [0:46:18] and so initially we thought that we could
-[0:46:20] so initially we thought that we could probably come up with a solution for the
-[0:46:23] probably come up with a solution for the one-way type of anova setting
-[0:46:25] one-way type of anova setting where
+[0:46:20] probably come up with a solution for the
+[0:46:23] one-way type of anova setting
 [0:46:26] where if you use the usual f statistic uh to
-[0:46:30] if you use the usual f statistic uh to perform the fischer randomization test
-[0:46:32] perform the fischer randomization test that may not be a valid test for the
-[0:46:34] that may not be a valid test for the neyman's null so we came up with a new
-[0:46:37] neyman's null so we came up with a new test statistic uh called x square which
-[0:46:39] test statistic uh called x square which was some sort of a studentized
-[0:46:42] was some sort of a studentized test statistic taking into consideration
-[0:46:45] test statistic taking into consideration uh the heterogeneity possible
-[0:46:46] uh the heterogeneity possible heritability in the
-[0:46:48] heritability in the data in the potential outcomes
-[0:46:50] data in the potential outcomes and then we found its asymptotic
-[0:46:52] and then we found its asymptotic distribution and
-[0:46:54] distribution and so the key result which really helped us
-[0:46:57] so the key result which really helped us use that statistic for the neymanian
-[0:46:59] use that statistic for the neymanian null was the fact that uh it was
-[0:47:02] null was the fact that uh it was asymptotically uh dominated by uh a chi
-[0:47:05] asymptotically uh dominated by uh a chi square
+[0:46:30] perform the fischer randomization test
+[0:46:32] that may not be a valid test for the
+[0:46:34] neyman's null so we came up with a new
+[0:46:37] test statistic uh called x square which
+[0:46:39] was some sort of a studentized
+[0:46:42] test statistic taking into consideration
+[0:46:45] uh the heterogeneity possible
+[0:46:46] heritability in the
+[0:46:48] data in the potential outcomes
+[0:46:50] and then we found its asymptotic
+[0:46:52] distribution and
+[0:46:54] so the key result which really helped us
+[0:46:57] use that statistic for the neymanian
+[0:46:59] null was the fact that uh it was
+[0:47:02] asymptotically uh dominated by uh a chi
 [0:47:06] square so
 [0:47:07] so uh and as colin mentioned there were
-[0:47:09] uh and as colin mentioned there were similar work uh done by lowe at all and
-[0:47:11] similar work uh done by lowe at all and then who and bing of course did a much
-[0:47:15] then who and bing of course did a much better job in 2020 when i thought that
-[0:47:17] better job in 2020 when i thought that that was a generalization of many of
-[0:47:20] that was a generalization of many of these results but still i think most of
-[0:47:22] these results but still i think most of these work
-[0:47:24] these work were done on a case-by-case basis so we
-[0:47:27] were done on a case-by-case basis so we always thought that we have to think
-[0:47:28] always thought that we have to think about a specific design
-[0:47:30] about a specific design and then we would have to think about
-[0:47:32] and then we would have to think about how to deal with that particular
-[0:47:34] how to deal with that particular scenario in terms of using
-[0:47:37] scenario in terms of using asymptotics wisely to come up with a
-[0:47:39] asymptotics wisely to come up with a statistic which is also valid for new
-[0:47:40] statistic which is also valid for new manslaughter
-[0:47:42] manslaughter so this is where i think colin made a
-[0:47:44] so this is where i think colin made a major breakthrough so all of our work
-[0:47:46] major breakthrough so all of our work earlier has been incremental and i think
-[0:47:49] earlier has been incremental and i think this paper is going to make a major
-[0:47:51] this paper is going to make a major impact because whenever we think of
-[0:47:53] impact because whenever we think of literature which eventually kind of
-[0:47:56] literature which eventually kind of makes a huge impact are those which are
-[0:47:57] makes a huge impact are those which are at the top of the pyramid right so they
-[0:48:00] at the top of the pyramid right so they deliver results
-[0:48:02] deliver results of which most existing results are
-[0:48:04] of which most existing results are special cases and that is exactly what
-[0:48:06] special cases and that is exactly what this paper is doing
-[0:48:07] this paper is doing so colin has come up with a
-[0:48:10] so colin has come up with a unified framework which provides a very
-[0:48:12] unified framework which provides a very general recipe
-[0:48:15] general recipe for finding test statistics that are
-[0:48:17] for finding test statistics that are exact under the sharp null and are
-[0:48:19] exact under the sharp null and are asymptotically conservative under
-[0:48:20] asymptotically conservative under niemann's null
-[0:48:22] niemann's null uh so
+[0:47:09] similar work uh done by lowe at all and
+[0:47:11] then who and bing of course did a much
+[0:47:15] better job in 2020 when i thought that
+[0:47:17] that was a generalization of many of
+[0:47:20] these results but still i think most of
+[0:47:22] these work
+[0:47:24] were done on a case-by-case basis so we
+[0:47:27] always thought that we have to think
+[0:47:28] about a specific design
+[0:47:30] and then we would have to think about
+[0:47:32] how to deal with that particular
+[0:47:34] scenario in terms of using
+[0:47:37] asymptotics wisely to come up with a
+[0:47:39] statistic which is also valid for new
+[0:47:40] manslaughter
+[0:47:42] so this is where i think colin made a
+[0:47:44] major breakthrough so all of our work
+[0:47:46] earlier has been incremental and i think
+[0:47:49] this paper is going to make a major
+[0:47:51] impact because whenever we think of
+[0:47:53] literature which eventually kind of
+[0:47:56] makes a huge impact are those which are
+[0:47:57] at the top of the pyramid right so they
+[0:48:00] deliver results
+[0:48:02] of which most existing results are
+[0:48:04] special cases and that is exactly what
+[0:48:06] this paper is doing
+[0:48:07] so colin has come up with a
+[0:48:10] unified framework which provides a very
+[0:48:12] general recipe
+[0:48:15] for finding test statistics that are
+[0:48:17] exact under the sharp null and are
+[0:48:19] asymptotically conservative under
+[0:48:20] niemann's null
 [0:48:23] uh so specifically i think there are four
-[0:48:25] specifically i think there are four points which need to be mentioned so
-[0:48:26] points which need to be mentioned so first of all it provides valid
-[0:48:28] first of all it provides valid alternative procedures to existing
-[0:48:30] alternative procedures to existing solutions it provides solutions to new
-[0:48:32] solutions it provides solutions to new experimental design studies which are
-[0:48:34] experimental design studies which are not yet studied
-[0:48:35] not yet studied and as colin mentioned towards the end
-[0:48:37] and as colin mentioned towards the end of his talk uh it busts the implicit
-[0:48:40] of his talk uh it busts the implicit myth that if you use a spot
-[0:48:42] myth that if you use a spot studentization
-[0:48:43] studentization for each specific case you could solve
-[0:48:45] for each specific case you could solve this kind of a problem uh and colin
-[0:48:48] this kind of a problem uh and colin indeed shows that if studentization can
-[0:48:50] indeed shows that if studentization can provide a resolution it could be a
-[0:48:52] provide a resolution it could be a special case of the proposed framework
-[0:48:54] special case of the proposed framework uh so uh um so and once again i think
-[0:48:58] uh so uh um so and once again i think this revolves around the key concept is
-[0:49:00] this revolves around the key concept is finding this asymptotically sharp
-[0:49:02] finding this asymptotically sharp dominant test statistic using gaussian
-[0:49:05] dominant test statistic using gaussian pivoting as a primary tool so once again
-[0:49:08] pivoting as a primary tool so once again it has all the hallmarks of a great
-[0:49:09] it has all the hallmarks of a great paper so it is breakthrough it is
-[0:49:11] paper so it is breakthrough it is elegant it is deep rich insightful
-[0:49:13] elegant it is deep rich insightful educative tells a very nice story from
-[0:49:15] educative tells a very nice story from the beginning to the end and this is
-[0:49:17] the beginning to the end and this is this is something which
-[0:49:18] this is something which really makes makes a paper
-[0:49:21] really makes makes a paper i think a fantastic paper to read
-[0:49:24] i think a fantastic paper to read so amongst the major mathematical tools
-[0:49:26] so amongst the major mathematical tools of course we have finite population
-[0:49:28] of course we have finite population asymptotics and to all young researchers
-[0:49:31] asymptotics and to all young researchers i always would mention this if you want
-[0:49:33] i always would mention this if you want to work
+[0:48:25] points which need to be mentioned so
+[0:48:26] first of all it provides valid
+[0:48:28] alternative procedures to existing
+[0:48:30] solutions it provides solutions to new
+[0:48:32] experimental design studies which are
+[0:48:34] not yet studied
+[0:48:35] and as colin mentioned towards the end
+[0:48:37] of his talk uh it busts the implicit
+[0:48:40] myth that if you use a spot
+[0:48:42] studentization
+[0:48:43] for each specific case you could solve
+[0:48:45] this kind of a problem uh and colin
+[0:48:48] indeed shows that if studentization can
+[0:48:50] provide a resolution it could be a
+[0:48:52] special case of the proposed framework
+[0:48:54] uh so uh um so and once again i think
+[0:48:58] this revolves around the key concept is
+[0:49:00] finding this asymptotically sharp
+[0:49:02] dominant test statistic using gaussian
+[0:49:05] pivoting as a primary tool so once again
+[0:49:08] it has all the hallmarks of a great
+[0:49:09] paper so it is breakthrough it is
+[0:49:11] elegant it is deep rich insightful
+[0:49:13] educative tells a very nice story from
+[0:49:15] the beginning to the end and this is
+[0:49:17] this is something which
+[0:49:18] really makes makes a paper
+[0:49:21] i think a fantastic paper to read
+[0:49:24] so amongst the major mathematical tools
+[0:49:26] of course we have finite population
+[0:49:28] asymptotics and to all young researchers
+[0:49:31] i always would mention this if you want
 [0:49:34] to work in this area you should read
-[0:49:36] in this area you should read the paper by shinrangli and punding the
-[0:49:38] the paper by shinrangli and punding the jasa paper in 2017. it provides
-[0:49:41] jasa paper in 2017. it provides a very nice foundation
-[0:49:43] a very nice foundation of finite population asymptotics but
-[0:49:45] of finite population asymptotics but then
+[0:49:36] the paper by shinrangli and punding the
+[0:49:38] jasa paper in 2017. it provides
+[0:49:41] a very nice foundation
+[0:49:43] of finite population asymptotics but
 [0:49:46] then this was i think really the piece of
-[0:49:48] this was i think really the piece of work which was ingenious in in this
-[0:49:51] work which was ingenious in in this particular context bringing in the idea
-[0:49:53] particular context bringing in the idea or the notion of pre-pivoting
-[0:49:56] or the notion of pre-pivoting which essentially is transforming a test
-[0:49:58] which essentially is transforming a test statistic by an estimator of its
-[0:50:00] statistic by an estimator of its distribution function so this was
-[0:50:02] distribution function so this was brought in uh and combined with the
-[0:50:05] brought in uh and combined with the ideas of finite population asymptotics
-[0:50:07] ideas of finite population asymptotics and uh
+[0:49:48] work which was ingenious in in this
+[0:49:51] particular context bringing in the idea
+[0:49:53] or the notion of pre-pivoting
+[0:49:56] which essentially is transforming a test
+[0:49:58] statistic by an estimator of its
+[0:50:00] distribution function so this was
+[0:50:02] brought in uh and combined with the
+[0:50:05] ideas of finite population asymptotics
 [0:50:08] and uh the the results are of course very deep
-[0:50:10] the the results are of course very deep and
 [0:50:11] and the proofs are extremely rigorous uh but
-[0:50:14] the proofs are extremely rigorous uh but uh i think these are probably two
-[0:50:16] uh i think these are probably two pillars of on which all these things
-[0:50:18] pillars of on which all these things stand
+[0:50:14] uh i think these are probably two
+[0:50:16] pillars of on which all these things
 [0:50:19] stand so just a couple of thoughts
-[0:50:21] so just a couple of thoughts and this question uh i think again uh
-[0:50:23] and this question uh i think again uh i've
+[0:50:21] and this question uh i think again uh
 [0:50:25] i've been asked and i have also asked to
-[0:50:27] been asked and i have also asked to several people so if we just go back to
-[0:50:30] several people so if we just go back to fischer's sharp null uh we know that one
-[0:50:32] fischer's sharp null uh we know that one of the strengths of uh frt is the fact
-[0:50:35] of the strengths of uh frt is the fact that we can use any test statistic as uh
-[0:50:38] that we can use any test statistic as uh to conduct a valid fischer randomization
-[0:50:40] to conduct a valid fischer randomization test so should we really care about the
-[0:50:43] test so should we really care about the choice of test statistic
-[0:50:44] choice of test statistic uh
+[0:50:27] several people so if we just go back to
+[0:50:30] fischer's sharp null uh we know that one
+[0:50:32] of the strengths of uh frt is the fact
+[0:50:35] that we can use any test statistic as uh
+[0:50:38] to conduct a valid fischer randomization
+[0:50:40] test so should we really care about the
+[0:50:43] choice of test statistic
 [0:50:45] uh and of course
-[0:50:47] and of course if so how should we do that and whenever
-[0:50:49] if so how should we do that and whenever i've asked
-[0:50:50] i've asked this question to don rubin he says
-[0:50:52] this question to don rubin he says choose anything that makes sense fischer
-[0:50:54] choose anything that makes sense fischer didn't bother why should we
-[0:50:55] didn't bother why should we uh so and i remember when actually colin
-[0:50:59] uh so and i remember when actually colin was an undergrad student at harvard he
-[0:51:01] was an undergrad student at harvard he was also
+[0:50:47] if so how should we do that and whenever
+[0:50:49] i've asked
+[0:50:50] this question to don rubin he says
+[0:50:52] choose anything that makes sense fischer
+[0:50:54] didn't bother why should we
+[0:50:55] uh so and i remember when actually colin
+[0:50:59] was an undergrad student at harvard he
 [0:51:02] was also amongst those brilliant guys who who
-[0:51:04] amongst those brilliant guys who who occasionally asked this question and i
-[0:51:05] occasionally asked this question and i didn't have an answer then and i don't
-[0:51:07] didn't have an answer then and i don't have an answer at this point as well
-[0:51:10] have an answer at this point as well so and i'm asking this question once
-[0:51:12] so and i'm asking this question once again because recently in this jrssb
-[0:51:14] again because recently in this jrssb paper we just came out we found out some
-[0:51:19] paper we just came out we found out some sort of i would say results which are
-[0:51:21] sort of i would say results which are not very intuitive that studentization
-[0:51:24] not very intuitive that studentization may actually be bad for the sharp null
-[0:51:26] may actually be bad for the sharp null in fine finite samples uh this problem
-[0:51:28] in fine finite samples uh this problem is resolved asymptotically uh so i was
-[0:51:31] is resolved asymptotically uh so i was just wondering whether there is any
-[0:51:32] just wondering whether there is any connection to
-[0:51:33] connection to [Music]
+[0:51:04] occasionally asked this question and i
+[0:51:05] didn't have an answer then and i don't
+[0:51:07] have an answer at this point as well
+[0:51:10] so and i'm asking this question once
+[0:51:12] again because recently in this jrssb
+[0:51:14] paper we just came out we found out some
+[0:51:19] sort of i would say results which are
+[0:51:21] not very intuitive that studentization
+[0:51:24] may actually be bad for the sharp null
+[0:51:26] in fine finite samples uh this problem
+[0:51:28] is resolved asymptotically uh so i was
+[0:51:31] just wondering whether there is any
+[0:51:32] connection to
 [0:51:34] [Music] colin's work and
-[0:51:37] colin's work and the
 [0:51:38] the sort of the negative effects of
-[0:51:40] sort of the negative effects of studentization uh so that that
-[0:51:44] studentization uh so that that is potentially something which i would
-[0:51:45] is potentially something which i would like to think about
-[0:51:47] like to think about so that's all and once again thanks to
-[0:51:49] so that's all and once again thanks to everyone thanks to colin and on a great
-[0:51:52] everyone thanks to colin and on a great day for causal inference
-[0:51:54] day for causal inference thank you
+[0:51:40] studentization uh so that that
+[0:51:44] is potentially something which i would
+[0:51:45] like to think about
+[0:51:47] so that's all and once again thanks to
+[0:51:49] everyone thanks to colin and on a great
+[0:51:52] day for causal inference
+[0:51:54] thank you
 [0:52:01] colin would you like to respond to
 [0:52:09] sure thing yeah i'd just say yeah thank you very much to thank you for that for
-[0:52:10] you very much to thank you for that for the kind words i
-[0:52:12] the kind words i i would say that you know some of the
-[0:52:13] i would say that you know some of the some of the questions that you bring up
-[0:52:15] some of the questions that you bring up at the end are very interesting in
-[0:52:16] at the end are very interesting in particular this
-[0:52:18] particular this issue with studentization and i you're
-[0:52:20] issue with studentization and i you're probably referring to there are these
-[0:52:22] probably referring to there are these issues where after studentization you
-[0:52:23] issues where after studentization you don't get an effect increasing statistic
-[0:52:26] don't get an effect increasing statistic which is
+[0:52:10] the kind words i
+[0:52:12] i would say that you know some of the
+[0:52:13] questions that you bring up
+[0:52:15] at the end are very interesting in
+[0:52:16] particular this
+[0:52:18] issue with studentization and i you're
+[0:52:20] probably referring to there are these
+[0:52:22] issues where after studentization you
+[0:52:23] don't get an effect increasing statistic
 [0:52:27] which is kind of kind of odd and
-[0:52:29] kind of kind of odd and in fact i'll just plug that zinron lee
-[0:52:31] in fact i'll just plug that zinron lee is giving a talk in the seminar in a few
-[0:52:33] is giving a talk in the seminar in a few weeks and he's got this wonderful paper
-[0:52:35] weeks and he's got this wonderful paper about kind of a different approach to
-[0:52:37] about kind of a different approach to thinking about
-[0:52:39] thinking about other interpretations to test the sharp
-[0:52:41] other interpretations to test the sharp nulls is talking about tests of say
-[0:52:43] nulls is talking about tests of say bounded treatment effects which provides
-[0:52:46] bounded treatment effects which provides a really nice complement to kind of the
-[0:52:48] a really nice complement to kind of the approach that i took here
-[0:52:50] approach that i took here um in terms of ways to resolve these
-[0:52:53] um in terms of ways to resolve these issues in like in this context you know
-[0:52:55] issues in like in this context you know i i do think that's open at some level
-[0:52:57] i i do think that's open at some level like you need pre-pivoting is going to
-[0:53:00] like you need pre-pivoting is going to involve a covariance estimator at least
-[0:53:03] involve a covariance estimator at least as i formulated gaussian pre-pivoting
-[0:53:06] as i formulated gaussian pre-pivoting um there are some interesting things
-[0:53:07] um there are some interesting things that arise in thinking about
-[0:53:09] that arise in thinking about pre-pivoting in general that what you
-[0:53:11] pre-pivoting in general that what you really see is
-[0:53:13] really see is the the essential ingredient is to have
-[0:53:15] the the essential ingredient is to have kind of a p value that is like you know
-[0:53:17] kind of a p value that is like you know it's going to be asymptotically correct
-[0:53:20] it's going to be asymptotically correct under the sharp null and conservative
-[0:53:21] under the sharp null and conservative under the weak mill and the typical way
-[0:53:23] under the weak mill and the typical way that we thought about doing that is
-[0:53:25] that we thought about doing that is based upon gaussian approximation
-[0:53:27] based upon gaussian approximation but when you start thinking about it as
-[0:53:29] but when you start thinking about it as p values you can realize there are
-[0:53:30] p values you can realize there are probably other sampling schemas that can
-[0:53:33] probably other sampling schemas that can get you
+[0:52:29] in fact i'll just plug that zinron lee
+[0:52:31] is giving a talk in the seminar in a few
+[0:52:33] weeks and he's got this wonderful paper
+[0:52:35] about kind of a different approach to
+[0:52:37] thinking about
+[0:52:39] other interpretations to test the sharp
+[0:52:41] nulls is talking about tests of say
+[0:52:43] bounded treatment effects which provides
+[0:52:46] a really nice complement to kind of the
+[0:52:48] approach that i took here
+[0:52:50] um in terms of ways to resolve these
+[0:52:53] issues in like in this context you know
+[0:52:55] i i do think that's open at some level
+[0:52:57] like you need pre-pivoting is going to
+[0:53:00] involve a covariance estimator at least
+[0:53:03] as i formulated gaussian pre-pivoting
+[0:53:06] um there are some interesting things
+[0:53:07] that arise in thinking about
+[0:53:09] pre-pivoting in general that what you
+[0:53:11] really see is
+[0:53:13] the the essential ingredient is to have
+[0:53:15] kind of a p value that is like you know
+[0:53:17] it's going to be asymptotically correct
+[0:53:20] under the sharp null and conservative
+[0:53:21] under the weak mill and the typical way
+[0:53:23] that we thought about doing that is
+[0:53:25] based upon gaussian approximation
+[0:53:27] but when you start thinking about it as
+[0:53:29] p values you can realize there are
+[0:53:30] probably other sampling schemas that can
 [0:53:34] get you p-values that satisfy these properties
-[0:53:36] p-values that satisfy these properties so we have some follow-up works actually
-[0:53:37] so we have some follow-up works actually looking on the uh the use of various
-[0:53:39] looking on the uh the use of various bootstrap schema to to satisfy this so
-[0:53:43] bootstrap schema to to satisfy this so i'd be curious to look to see if you
-[0:53:44] i'd be curious to look to see if you know any of these alternative ways to
-[0:53:47] know any of these alternative ways to actually
+[0:53:36] so we have some follow-up works actually
+[0:53:37] looking on the uh the use of various
+[0:53:39] bootstrap schema to to satisfy this so
+[0:53:43] i'd be curious to look to see if you
+[0:53:44] know any of these alternative ways to
 [0:53:48] actually you know pivot
-[0:53:49] you know pivot beyond just using like studentization
-[0:53:51] beyond just using like studentization analytically
-[0:53:53] analytically still have these issues that you're
-[0:53:54] still have these issues that you're talking about but yeah i think that's
-[0:53:56] talking about but yeah i think that's super interesting and i don't have a
-[0:53:58] super interesting and i don't have a clear answer yet but you've given me a
-[0:53:59] clear answer yet but you've given me a few things to investigate
+[0:53:49] beyond just using like studentization
+[0:53:51] analytically
+[0:53:53] still have these issues that you're
+[0:53:54] talking about but yeah i think that's
+[0:53:56] super interesting and i don't have a
+[0:53:58] clear answer yet but you've given me a
+[0:53:59] few things to investigate
 [0:54:04] wonderful thank you so much
 [0:54:09] okay we still have
-[0:54:11] we still have five more minutes um there are no open
-[0:54:13] five more minutes um there are no open questions in the q a at the moment but
-[0:54:16] questions in the q a at the moment but i'd like to encourage the audience
-[0:54:18] i'd like to encourage the audience um to ask any questions they may have
-[0:54:21] um to ask any questions they may have [Music]
+[0:54:11] five more minutes um there are no open
+[0:54:13] questions in the q a at the moment but
+[0:54:16] i'd like to encourage the audience
+[0:54:18] um to ask any questions they may have
 [0:54:22] [Music] i actually do have a question for colin
-[0:54:25] i actually do have a question for colin uh which is a sort of a follow-up on and
-[0:54:27] uh which is a sort of a follow-up on and titanka's first question
-[0:54:29] titanka's first question uh so when you apply the sort of
-[0:54:32] uh so when you apply the sort of pivoting uh
-[0:54:33] pivoting uh transformation does that affect the
-[0:54:36] transformation does that affect the power of of your test um
-[0:54:39] power of of your test um for
+[0:54:25] uh which is a sort of a follow-up on and
+[0:54:27] titanka's first question
+[0:54:29] uh so when you apply the sort of
+[0:54:32] pivoting uh
+[0:54:33] transformation does that affect the
+[0:54:36] power of of your test um
+[0:54:39] for
 [0:54:42] yeah okay so what you end up getting is
-[0:54:45] okay so what you end up getting is exactly the same you know under pitman
-[0:54:47] exactly the same you know under pitman alternatives you get the same exact
-[0:54:48] alternatives you get the same exact performance as whatever p-value you've
-[0:54:51] performance as whatever p-value you've permuted so you know it like the
-[0:54:54] permuted so you know it like the ingredient you start with a large sample
-[0:54:55] ingredient you start with a large sample test right and then you you look at the
-[0:54:58] test right and then you you look at the randomization uh distribution of that
-[0:55:01] randomization uh distribution of that p-value it ends up inheriting the power
-[0:55:04] p-value it ends up inheriting the power performance of that
-[0:55:06] performance of that of of the test for the name and mill
-[0:55:09] of of the test for the name and mill so i mean it would affect it relative to
-[0:55:11] so i mean it would affect it relative to not pre-pivoting but i would say if you
-[0:55:13] not pre-pivoting but i would say if you see a discrepancy in the power profiles
-[0:55:15] see a discrepancy in the power profiles that could be indicative of the fact
-[0:55:17] that could be indicative of the fact that whatever alternative test statistic
-[0:55:19] that whatever alternative test statistic is under consideration
-[0:55:21] is under consideration might not actually be valid under the
-[0:55:23] might not actually be valid under the weak mill in the first place which was
-[0:55:25] weak mill in the first place which was the point of applying the transformation
-[0:55:28] the point of applying the transformation i see so so you you lose a little bit
-[0:55:31] i see so so you you lose a little bit in that in that regard that because we
-[0:55:34] in that in that regard that because we we now have a have a test that's also
-[0:55:36] we now have a have a test that's also valid for for the weakness
-[0:55:38] valid for for the weakness we also lose a little bit of power when
-[0:55:40] we also lose a little bit of power when we just want to test the the sharp knot
-[0:55:44] we just want to test the the sharp knot did i get it yeah i also think there's
-[0:55:47] did i get it yeah i also think there's i mean potentially yeah but if you've if
-[0:55:50] i mean potentially yeah but if you've if you've lost power relative to the sharp
-[0:55:51] you've lost power relative to the sharp null that means that that test for the
-[0:55:53] null that means that that test for the sharp null doesn't have this nice
-[0:55:54] sharp null doesn't have this nice property of course um
-[0:55:56] property of course um yeah
+[0:54:45] exactly the same you know under pitman
+[0:54:47] alternatives you get the same exact
+[0:54:48] performance as whatever p-value you've
+[0:54:51] permuted so you know it like the
+[0:54:54] ingredient you start with a large sample
+[0:54:55] test right and then you you look at the
+[0:54:58] randomization uh distribution of that
+[0:55:01] p-value it ends up inheriting the power
+[0:55:04] performance of that
+[0:55:06] of of the test for the name and mill
+[0:55:09] so i mean it would affect it relative to
+[0:55:11] not pre-pivoting but i would say if you
+[0:55:13] see a discrepancy in the power profiles
+[0:55:15] that could be indicative of the fact
+[0:55:17] that whatever alternative test statistic
+[0:55:19] is under consideration
+[0:55:21] might not actually be valid under the
+[0:55:23] weak mill in the first place which was
+[0:55:25] the point of applying the transformation
+[0:55:28] i see so so you you lose a little bit
+[0:55:31] in that in that regard that because we
+[0:55:34] we now have a have a test that's also
+[0:55:36] valid for for the weakness
+[0:55:38] we also lose a little bit of power when
+[0:55:40] we just want to test the the sharp knot
+[0:55:44] did i get it yeah i also think there's
+[0:55:47] i mean potentially yeah but if you've if
+[0:55:50] you've lost power relative to the sharp
+[0:55:51] null that means that that test for the
+[0:55:53] sharp null doesn't have this nice
+[0:55:54] property of course um
 [0:55:57] yeah yeah yeah
 [0:55:58] yeah yeah i mean there are also i feel like some
-[0:56:00] i mean there are also i feel like some some open ways to think about combining
-[0:56:02] some open ways to think about combining sharp and weak mills and other
-[0:56:04] sharp and weak mills and other approaches like sequential hypothesis
-[0:56:06] approaches like sequential hypothesis testing you know if you if you test
-[0:56:07] testing you know if you if you test hypotheses in order to start with a
-[0:56:09] hypotheses in order to start with a sharp null
-[0:56:10] sharp null or start with a weak null if i reject
-[0:56:13] or start with a weak null if i reject grade if not check out the sharp null
-[0:56:15] grade if not check out the sharp null there are ways to actually do that but
-[0:56:17] there are ways to actually do that but maybe you could combine some of these
-[0:56:19] maybe you could combine some of these tests together and maybe they would have
-[0:56:20] tests together and maybe they would have interesting kind of performances
+[0:56:00] some open ways to think about combining
+[0:56:02] sharp and weak mills and other
+[0:56:04] approaches like sequential hypothesis
+[0:56:06] testing you know if you if you test
+[0:56:07] hypotheses in order to start with a
+[0:56:09] sharp null
+[0:56:10] or start with a weak null if i reject
+[0:56:13] grade if not check out the sharp null
+[0:56:15] there are ways to actually do that but
+[0:56:17] maybe you could combine some of these
+[0:56:19] tests together and maybe they would have
+[0:56:20] interesting kind of performances
 [0:56:27] okay um i think we may have a question
-[0:56:29] um i think we may have a question there's there's one in the chat yeah can
-[0:56:32] there's there's one in the chat yeah can you talk about it oh yes yes i i see it
-[0:56:35] you talk about it oh yes yes i i see it i i see it so i'll i'll read the
-[0:56:37] i i see it so i'll i'll read the question so the question is like can i
-[0:56:38] question so the question is like can i talk about generalizations to other
-[0:56:40] talk about generalizations to other randomization schemes beyond
-[0:56:41] randomization schemes beyond re-randomization or complete
-[0:56:43] re-randomization or complete randomization
-[0:56:44] randomization uh definitely so you know moving beyond
-[0:56:47] uh definitely so you know moving beyond these that the key ingredient for
-[0:56:50] these that the key ingredient for applying gaussian pre-pivoting is really
-[0:56:52] applying gaussian pre-pivoting is really just having that concern that that a
-[0:56:54] just having that concern that that a covariance estimator
-[0:56:56] covariance estimator that satisfies those required properties
-[0:56:59] that satisfies those required properties and so if you've got like well i guess
-[0:57:01] and so if you've got like well i guess you need asymptotic normality but you
-[0:57:03] you need asymptotic normality but you also need like the covariance estimator
-[0:57:05] also need like the covariance estimator should under heterogeneous effects be
-[0:57:07] should under heterogeneous effects be conservative
-[0:57:09] conservative under constant effects be consistent
-[0:57:11] under constant effects be consistent and so and then you know you have to
-[0:57:13] and so and then you know you have to combine that with some of the conditions
-[0:57:15] combine that with some of the conditions that i made on the test statistics
-[0:57:17] that i made on the test statistics because you need to somehow translate
-[0:57:19] because you need to somehow translate conservative covariance estimation into
-[0:57:22] conservative covariance estimation into conservative p-values and so there's a
-[0:57:24] conservative p-values and so there's a theorem called anderson's theorem that
-[0:57:26] theorem called anderson's theorem that is about concentration of normals with
-[0:57:29] is about concentration of normals with different covariances that ends up
-[0:57:31] different covariances that ends up allowing you to do that say okay i've
-[0:57:33] allowing you to do that say okay i've got a conservative covariance estimator
-[0:57:35] got a conservative covariance estimator therefore i have a conservative p-value
-[0:57:37] therefore i have a conservative p-value it's not always true but it's true under
-[0:57:40] it's not always true but it's true under a set of assumptions that many test
-[0:57:42] a set of assumptions that many test statistics hold
-[0:57:43] statistics hold so you know if
-[0:57:45] so you know if i've got any other scheme like paired
-[0:57:46] i've got any other scheme like paired experiments block randomized experiments
-[0:57:49] experiments block randomized experiments where i have a conservative covariance
-[0:57:51] where i have a conservative covariance estimator
+[0:56:29] there's there's one in the chat yeah can
+[0:56:32] you talk about it oh yes yes i i see it
+[0:56:35] so i'll i'll read the
+[0:56:37] question so the question is like can i
+[0:56:38] talk about generalizations to other
+[0:56:40] randomization schemes beyond
+[0:56:41] re-randomization or complete
+[0:56:43] randomization
+[0:56:44] uh definitely so you know moving beyond
+[0:56:47] these that the key ingredient for
+[0:56:50] applying gaussian pre-pivoting is really
+[0:56:52] just having that concern that that a
+[0:56:54] covariance estimator
+[0:56:56] that satisfies those required properties
+[0:56:59] and so if you've got like well i guess
+[0:57:01] you need asymptotic normality but you
+[0:57:03] also need like the covariance estimator
+[0:57:05] should under heterogeneous effects be
+[0:57:07] conservative
+[0:57:09] under constant effects be consistent
+[0:57:11] and so and then you know you have to
+[0:57:13] combine that with some of the conditions
+[0:57:15] that i made on the test statistics
+[0:57:17] because you need to somehow translate
+[0:57:19] conservative covariance estimation into
+[0:57:22] conservative p-values and so there's a
+[0:57:24] theorem called anderson's theorem that
+[0:57:26] is about concentration of normals with
+[0:57:29] different covariances that ends up
+[0:57:31] allowing you to do that say okay i've
+[0:57:33] got a conservative covariance estimator
+[0:57:35] therefore i have a conservative p-value
+[0:57:37] it's not always true but it's true under
+[0:57:40] a set of assumptions that many test
+[0:57:42] statistics hold
+[0:57:43] so you know if
+[0:57:45] i've got any other scheme like paired
+[0:57:46] experiments block randomized experiments
+[0:57:49] where i have a conservative covariance
 [0:57:52] estimator that's the crux of what you need
 [0:58:03] okay okay i think this is perhaps a good time to end
-[0:58:05] time to end our seminar today
-[0:58:07] our seminar today um
+[0:58:05] our seminar today
 [0:58:08] um so
 [0:58:09] so uh
 [0:58:10] uh next week
 [0:58:12] next week um
 [0:58:14] um please give me a second this is not
-[0:58:16] please give me a second this is not showing correctly
-[0:58:18] showing correctly okay so next week we will have uh two
-[0:58:21] okay so next week we will have uh two shorter talks
-[0:58:23] shorter talks sorry about
-[0:58:24] sorry about that uh
+[0:58:16] showing correctly
+[0:58:18] okay so next week we will have uh two
+[0:58:21] shorter talks
+[0:58:23] sorry about
 [0:58:25] that uh uh first talk will be by juan korea from
-[0:58:29] uh first talk will be by juan korea from columbia university
-[0:58:31] columbia university and i'm not going to test my
-[0:58:32] and i'm not going to test my pronunciation of spanish
-[0:58:36] pronunciation of spanish will talk about generalizing the effect
-[0:58:38] will talk about generalizing the effect of soft uh interventions
-[0:58:41] of soft uh interventions the second thought will be by nikola
-[0:58:43] the second thought will be by nikola naco from university of geneva
-[0:58:46] naco from university of geneva on puzzle discovery in habitat models
-[0:58:50] on puzzle discovery in habitat models so i hope i'll see everyone next week
+[0:58:29] columbia university
+[0:58:31] and i'm not going to test my
+[0:58:32] pronunciation of spanish
+[0:58:36] will talk about generalizing the effect
+[0:58:38] of soft uh interventions
+[0:58:41] the second thought will be by nikola
+[0:58:43] naco from university of geneva
+[0:58:46] on puzzle discovery in habitat models
+[0:58:50] so i hope i'll see everyone next week

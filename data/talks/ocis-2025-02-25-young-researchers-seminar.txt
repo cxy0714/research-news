@@ -1,690 +1,671 @@
 [0:00:06] hi everyone welcome to this week's online causal inference
-[0:00:08] online causal inference seminar uh sh it so today we are excited
-[0:00:12] seminar uh sh it so today we are excited to host a young researcher seminar where
-[0:00:14] to host a young researcher seminar where we feature uh two young researchers uh
-[0:00:18] we feature uh two young researchers uh so our first speaker will be Julius F Q
-[0:00:21] so our first speaker will be Julius F Q gan from uh etth zich uh he will be
-[0:00:24] gan from uh etth zich uh he will be talking about mod domain causal
-[0:00:26] talking about mod domain causal representation learning and in the Q&amp;A
-[0:00:29] representation learning and in the Q&amp;A we have uh the class Ator um Luigi
-[0:00:32] we have uh the class Ator um Luigi grazel um to to to handle some of the
-[0:00:35] grazel um to to to handle some of the questions um and for the second half our
-[0:00:38] questions um and for the second half our speaker is David Bron Smith from
-[0:00:41] speaker is David Bron Smith from Stanford University and he'll be talking
-[0:00:43] Stanford University and he'll be talking about augmented balancing weights as
-[0:00:45] about augmented balancing weights as linear regression uh today's Q&amp;A will be
-[0:00:47] linear regression uh today's Q&amp;A will be handled by uh chinen uh do you want to
-[0:00:51] handled by uh chinen uh do you want to um yes yeah so basically it's very
-[0:00:53] um yes yeah so basically it's very simple just use the Q&amp;A tab on the
-[0:00:56] simple just use the Q&amp;A tab on the bottom of your screen and submit your
-[0:00:59] bottom of your screen and submit your questions there so this will allow us to
-[0:01:01] questions there so this will allow us to keep track of the questions and it will
-[0:01:03] keep track of the questions and it will also allow Lui to uh you know answer
-[0:01:06] also allow Lui to uh you know answer those questions uh some um uh and we
-[0:01:10] those questions uh some um uh and we only sort of bring uh interest the most
-[0:01:13] only sort of bring uh interest the most interesting questions for open
-[0:01:15] interesting questions for open discussion later with the
-[0:01:17] discussion later with the speaker uh and that's pretty much it uh
-[0:01:21] speaker uh and that's pretty much it uh without further Ado uh Julius you want
-[0:01:24] without further Ado uh Julius you want to take it
-[0:01:26] to take it away sure yeah so um hello
-[0:01:31] away sure yeah so um hello everyone uh thank you to the organizers
-[0:01:34] everyone uh thank you to the organizers for inviting me I will talk today about
-[0:01:38] for inviting me I will talk today about uh multi-domain causal representation
+[0:00:08] seminar uh sh it so today we are excited
+[0:00:12] to host a young researcher seminar where
+[0:00:14] we feature uh two young researchers uh
+[0:00:18] so our first speaker will be Julius F Q
+[0:00:21] gan from uh etth zich uh he will be
+[0:00:24] talking about mod domain causal
+[0:00:26] representation learning and in the Q&A
+[0:00:29] we have uh the class Ator um Luigi
+[0:00:32] grazel um to to to handle some of the
+[0:00:35] questions um and for the second half our
+[0:00:38] speaker is David Bron Smith from
+[0:00:41] Stanford University and he'll be talking
+[0:00:43] about augmented balancing weights as
+[0:00:45] linear regression uh today's Q&A will be
+[0:00:47] handled by uh chinen uh do you want to
+[0:00:51] um yes yeah so basically it's very
+[0:00:53] simple just use the Q&A tab on the
+[0:00:56] bottom of your screen and submit your
+[0:00:59] questions there so this will allow us to
+[0:01:01] keep track of the questions and it will
+[0:01:03] also allow Lui to uh you know answer
+[0:01:06] those questions uh some um uh and we
+[0:01:10] only sort of bring uh interest the most
+[0:01:13] interesting questions for open
+[0:01:15] discussion later with the
+[0:01:17] speaker uh and that's pretty much it uh
+[0:01:21] without further Ado uh Julius you want
+[0:01:24] to take it
+[0:01:26] away sure yeah so um hello
+[0:01:31] everyone uh thank you to the organizers
+[0:01:34] for inviting me I will talk today about
+[0:01:38] uh multi-domain causal representation
 [0:01:47] learning okay so uh my talk will be based on uh these two papers here and um
-[0:01:51] based on uh these two papers here and um I want to start by just acknowledging my
-[0:01:53] I want to start by just acknowledging my uh wonderful coauthors in these works so
-[0:01:56] uh wonderful coauthors in these works so that's um Lang wendong Armen kich Simon
-[0:01:59] that's um Lang wendong Armen kich Simon buho
+[0:01:51] I want to start by just acknowledging my
+[0:01:53] uh wonderful coauthors in these works so
+[0:01:56] that's um Lang wendong Armen kich Simon
 [0:02:01] buho Michelle B Luigi G who was um
-[0:02:05] Michelle B Luigi G who was um instrumental in the first paper and
-[0:02:07] instrumental in the first paper and who's also here today to answer your
-[0:02:08] who's also here today to answer your questions in the chat and then Berard
-[0:02:11] questions in the chat and then Berard shov elas Barb and David
-[0:02:15] shov elas Barb and David BL so um there'll be roughly three parts
-[0:02:18] BL so um there'll be roughly three parts I'll start by um giving an overview of
-[0:02:21] I'll start by um giving an overview of the shared problem setting and some uh
-[0:02:23] the shared problem setting and some uh background and then we'll get into the
-[0:02:25] background and then we'll get into the details of these two different uh
-[0:02:29] details of these two different uh studies so in uh caal representation
-[0:02:32] studies so in uh caal representation learning the problem that we um mean is
-[0:02:37] learning the problem that we um mean is um the sort of data generating process
-[0:02:39] um the sort of data generating process that we typically assume is the one
-[0:02:41] that we typically assume is the one Illustrated here where we have some
-[0:02:44] Illustrated here where we have some observations X typically very high
-[0:02:47] observations X typically very high dimensional and that could be for
-[0:02:49] dimensional and that could be for example images or many many pixels and
-[0:02:53] example images or many many pixels and the idea is that these observations are
-[0:02:55] the idea is that these observations are in turn generated by some uh measurement
-[0:02:58] in turn generated by some uh measurement process or mixing function F applied to
-[0:03:02] process or mixing function F applied to a typically smaller number of abstract
-[0:03:05] a typically smaller number of abstract causal variables that are here denoted
-[0:03:07] causal variables that are here denoted Z1 up to
+[0:02:05] instrumental in the first paper and
+[0:02:07] who's also here today to answer your
+[0:02:08] questions in the chat and then Berard
+[0:02:11] shov elas Barb and David
+[0:02:15] BL so um there'll be roughly three parts
+[0:02:18] I'll start by um giving an overview of
+[0:02:21] the shared problem setting and some uh
+[0:02:23] background and then we'll get into the
+[0:02:25] details of these two different uh
+[0:02:29] studies so in uh caal representation
+[0:02:32] learning the problem that we um mean is
+[0:02:37] um the sort of data generating process
+[0:02:39] that we typically assume is the one
+[0:02:41] Illustrated here where we have some
+[0:02:44] observations X typically very high
+[0:02:47] dimensional and that could be for
+[0:02:49] example images or many many pixels and
+[0:02:53] the idea is that these observations are
+[0:02:55] in turn generated by some uh measurement
+[0:02:58] process or mixing function F applied to
+[0:03:02] a typically smaller number of abstract
+[0:03:05] causal variables that are here denoted
 [0:03:09] Z1 up to ZN and the uh goal is then given only
-[0:03:13] ZN and the uh goal is then given only observations of X how can we recover
-[0:03:16] observations of X how can we recover these latent causer variables and the
-[0:03:19] these latent causer variables and the causer graph that encodes their
-[0:03:22] causer graph that encodes their relations now you can think of this um
-[0:03:26] relations now you can think of this um this problem as a generalization of
-[0:03:29] this problem as a generalization of independent component analis is or
-[0:03:31] independent component analis is or I which um corresponds to the special
-[0:03:34] I which um corresponds to the special case where the causal graph G is assumed
-[0:03:36] case where the causal graph G is assumed to be the empty
-[0:03:38] to be the empty graph and um as an i and even more so um
-[0:03:42] graph and um as an i and even more so um for this more General problem here um
-[0:03:45] for this more General problem here um the problem is very highly
-[0:03:48] the problem is very highly non-unique so that means that we can
-[0:03:50] non-unique so that means that we can have many different generative processes
-[0:03:53] have many different generative processes that give rise to the same observed
-[0:03:55] that give rise to the same observed distributions and as a result we say
-[0:03:58] distributions and as a result we say that the model class is not identified
-[0:04:00] that the model class is not identified if
+[0:03:13] observations of X how can we recover
+[0:03:16] these latent causer variables and the
+[0:03:19] causer graph that encodes their
+[0:03:22] relations now you can think of this um
+[0:03:26] this problem as a generalization of
+[0:03:29] independent component analis is or
+[0:03:31] I which um corresponds to the special
+[0:03:34] case where the causal graph G is assumed
+[0:03:36] to be the empty
+[0:03:38] graph and um as an i and even more so um
+[0:03:42] for this more General problem here um
+[0:03:45] the problem is very highly
+[0:03:48] non-unique so that means that we can
+[0:03:50] have many different generative processes
+[0:03:53] that give rise to the same observed
+[0:03:55] distributions and as a result we say
+[0:03:58] that the model class is not identified
 [0:04:01] if iable and um identifiability so this
-[0:04:04] iable and um identifiability so this ability to provably recover parts of the
-[0:04:07] ability to provably recover parts of the generative process that's going to be
-[0:04:08] generative process that's going to be the main topic of the talk
-[0:04:10] the main topic of the talk today and um there have been of course
-[0:04:13] today and um there have been of course some or many many previous works that
-[0:04:16] some or many many previous works that try to study this or that study this
-[0:04:19] try to study this or that study this problem um in and I want to start by
-[0:04:22] problem um in and I want to start by giving an overview of some of the
-[0:04:23] giving an overview of some of the different assumptions that people have
-[0:04:24] different assumptions that people have explored in the literature so um first
-[0:04:27] explored in the literature so um first up is this sort of purely unsupervised
-[0:04:30] up is this sort of purely unsupervised setting where we learn from IID data and
-[0:04:33] setting where we learn from IID data and in causal terms we would think of that
-[0:04:35] in causal terms we would think of that as observational data and here to make
-[0:04:38] as observational data and here to make progress It's typically necessary to
-[0:04:41] progress It's typically necessary to impose some restrictions on both the
-[0:04:44] impose some restrictions on both the graph um as well as to impose some
-[0:04:46] graph um as well as to impose some parametric assumptions on the the caal
-[0:04:49] parametric assumptions on the the caal model and the measurement
-[0:04:51] model and the measurement process then there is the uh multidomain
-[0:04:54] process then there is the uh multidomain setting which I will also talk about um
-[0:04:57] setting which I will also talk about um today and there we have access to
-[0:04:59] today and there we have access to multiple data sets that are typically
-[0:05:02] multiple data sets that are typically not identically distributed and usually
-[0:05:05] not identically distributed and usually as we'll see this is formalized in
-[0:05:06] as we'll see this is formalized in Interventional terms and um here whereas
-[0:05:10] Interventional terms and um here whereas one can um consider arbitrary graphs uh
-[0:05:13] one can um consider arbitrary graphs uh most previous Works have focused on
-[0:05:15] most previous Works have focused on parametric settings as
-[0:05:17] parametric settings as well then there's the multi view
-[0:05:19] well then there's the multi view scenario where we have access to um
-[0:05:22] scenario where we have access to um pairs or tles of non-independent uh
-[0:05:26] pairs or tles of non-independent uh observations and this is often treated
-[0:05:28] observations and this is often treated as counterfactual data
-[0:05:31] as counterfactual data and so with this very rich information
-[0:05:33] and so with this very rich information it's possible to make progress um both
-[0:05:35] it's possible to make progress um both for arbitrary graphs and arbitrary um
-[0:05:37] for arbitrary graphs and arbitrary um nonparametric models and lastly the
-[0:05:40] nonparametric models and lastly the temporal case um also typically Falls
-[0:05:43] temporal case um also typically Falls between the observational Interventional
-[0:05:46] between the observational Interventional settings and um considers different
-[0:05:48] settings and um considers different types of non-id data uh depending for
-[0:05:51] types of non-id data uh depending for example on um non-stationarity and
-[0:05:54] example on um non-stationarity and autocorrelation
-[0:05:56] autocorrelation assumptions so as I said today I want to
-[0:05:59] assumptions so as I said today I want to focus on this multi-domain scenario and
-[0:06:02] focus on this multi-domain scenario and specifically on um generalizing or
-[0:06:05] specifically on um generalizing or extending previous results to the
-[0:06:07] extending previous results to the nonparametric
-[0:06:09] nonparametric case so uh just to give an idea of what
-[0:06:12] case so uh just to give an idea of what I mean by this multi-domain data um here
-[0:06:15] I mean by this multi-domain data um here the idea is that our data sets are
-[0:06:17] the idea is that our data sets are collected from different environments or
-[0:06:19] collected from different environments or different domains and for example our
-[0:06:22] different domains and for example our data might take the form um as seen here
-[0:06:26] data might take the form um as seen here of images of tissue samples and
-[0:06:29] of images of tissue samples and different domains could correspond to
-[0:06:31] different domains could correspond to different
+[0:04:04] ability to provably recover parts of the
+[0:04:07] generative process that's going to be
+[0:04:08] the main topic of the talk
+[0:04:10] today and um there have been of course
+[0:04:13] some or many many previous works that
+[0:04:16] try to study this or that study this
+[0:04:19] problem um in and I want to start by
+[0:04:22] giving an overview of some of the
+[0:04:23] different assumptions that people have
+[0:04:24] explored in the literature so um first
+[0:04:27] up is this sort of purely unsupervised
+[0:04:30] setting where we learn from IID data and
+[0:04:33] in causal terms we would think of that
+[0:04:35] as observational data and here to make
+[0:04:38] progress It's typically necessary to
+[0:04:41] impose some restrictions on both the
+[0:04:44] graph um as well as to impose some
+[0:04:46] parametric assumptions on the the caal
+[0:04:49] model and the measurement
+[0:04:51] process then there is the uh multidomain
+[0:04:54] setting which I will also talk about um
+[0:04:57] today and there we have access to
+[0:04:59] multiple data sets that are typically
+[0:05:02] not identically distributed and usually
+[0:05:05] as we'll see this is formalized in
+[0:05:06] Interventional terms and um here whereas
+[0:05:10] one can um consider arbitrary graphs uh
+[0:05:13] most previous Works have focused on
+[0:05:15] parametric settings as
+[0:05:17] well then there's the multi view
+[0:05:19] scenario where we have access to um
+[0:05:22] pairs or tles of non-independent uh
+[0:05:26] observations and this is often treated
+[0:05:28] as counterfactual data
+[0:05:31] and so with this very rich information
+[0:05:33] it's possible to make progress um both
+[0:05:35] for arbitrary graphs and arbitrary um
+[0:05:37] nonparametric models and lastly the
+[0:05:40] temporal case um also typically Falls
+[0:05:43] between the observational Interventional
+[0:05:46] settings and um considers different
+[0:05:48] types of non-id data uh depending for
+[0:05:51] example on um non-stationarity and
+[0:05:54] autocorrelation
+[0:05:56] assumptions so as I said today I want to
+[0:05:59] focus on this multi-domain scenario and
+[0:06:02] specifically on um generalizing or
+[0:06:05] extending previous results to the
+[0:06:07] nonparametric
+[0:06:09] case so uh just to give an idea of what
+[0:06:12] I mean by this multi-domain data um here
+[0:06:15] the idea is that our data sets are
+[0:06:17] collected from different environments or
+[0:06:19] different domains and for example our
+[0:06:22] data might take the form um as seen here
+[0:06:26] of images of tissue samples and
+[0:06:29] different domains could correspond to
+[0:06:31] different
 [0:06:36] hospitals and so this data is quite abundant and um we've seen or we know
-[0:06:39] abundant and um we've seen or we know from from other literature that it may
-[0:06:41] from from other literature that it may provide some useful learning signals for
-[0:06:43] provide some useful learning signals for causal inference and so it's sort of
-[0:06:45] causal inference and so it's sort of natural to also pursue the setting in a
-[0:06:48] natural to also pursue the setting in a caal representation learning
-[0:06:51] caal representation learning context now
-[0:06:54] context now um of course the use of having access to
-[0:06:58] um of course the use of having access to multiple data sets or multip domains is
-[0:07:02] multiple data sets or multip domains is um somehow the implicit assumption that
-[0:07:04] um somehow the implicit assumption that they're not completely unrelated but
-[0:07:05] they're not completely unrelated but that they share certain aspects
-[0:07:08] that they share certain aspects otherwise we could just is um analyze
-[0:07:10] otherwise we could just is um analyze each of them in isolation so instead we
-[0:07:13] each of them in isolation so instead we assume that actually these these domains
-[0:07:16] assume that actually these these domains um all share the same underlying causal
-[0:07:19] um all share the same underlying causal model and also the same measurement
-[0:07:22] model and also the same measurement process and the only differences across
-[0:07:24] process and the only differences across domains are the result of interventions
-[0:07:27] domains are the result of interventions on subsets of the nodes
-[0:07:30] on subsets of the nodes so that setting is um visualized here in
-[0:07:34] so that setting is um visualized here in the center of the slide where we have
-[0:07:36] the center of the slide where we have four different domains uh the very left
-[0:07:38] four different domains uh the very left one is an observational one and then we
-[0:07:41] one is an observational one and then we have three domains corresponding to uh
-[0:07:43] have three domains corresponding to uh interventions on noes one two and three
-[0:07:46] interventions on noes one two and three as uh shown by these Hammer
-[0:07:49] as uh shown by these Hammer symbols and uh more formally and more
-[0:07:52] symbols and uh more formally and more generally um we assume that for each
-[0:07:56] generally um we assume that for each domain our measurements uh X are result
-[0:08:00] domain our measurements uh X are result of the same mixing function f applied to
-[0:08:02] of the same mixing function f applied to our latent Vector
-[0:08:04] our latent Vector Z and the distribution of Z in each
-[0:08:07] Z and the distribution of Z in each environment is an Interventional
-[0:08:09] environment is an Interventional distribution from the same causal model
-[0:08:12] distribution from the same causal model where the subset of variables um
-[0:08:15] where the subset of variables um specified by this set of intervention
-[0:08:17] specified by this set of intervention targets uh calligraphic IE is
-[0:08:20] targets uh calligraphic IE is potentially perturbed um could be a
-[0:08:23] potentially perturbed um could be a stochastic intervention uh could be an
-[0:08:26] stochastic intervention uh could be an imperfect one we'll see more on that
-[0:08:28] imperfect one we'll see more on that later and all the other parts of the
-[0:08:30] later and all the other parts of the model are shared across domain so these
-[0:08:32] model are shared across domain so these uninter vened or base causal
+[0:06:39] from from other literature that it may
+[0:06:41] provide some useful learning signals for
+[0:06:43] causal inference and so it's sort of
+[0:06:45] natural to also pursue the setting in a
+[0:06:48] caal representation learning
+[0:06:51] context now
+[0:06:54] um of course the use of having access to
+[0:06:58] multiple data sets or multip domains is
+[0:07:02] um somehow the implicit assumption that
+[0:07:04] they're not completely unrelated but
+[0:07:05] that they share certain aspects
+[0:07:08] otherwise we could just is um analyze
+[0:07:10] each of them in isolation so instead we
+[0:07:13] assume that actually these these domains
+[0:07:16] um all share the same underlying causal
+[0:07:19] model and also the same measurement
+[0:07:22] process and the only differences across
+[0:07:24] domains are the result of interventions
+[0:07:27] on subsets of the nodes
+[0:07:30] so that setting is um visualized here in
+[0:07:34] the center of the slide where we have
+[0:07:36] four different domains uh the very left
+[0:07:38] one is an observational one and then we
+[0:07:41] have three domains corresponding to uh
+[0:07:43] interventions on noes one two and three
+[0:07:46] as uh shown by these Hammer
+[0:07:49] symbols and uh more formally and more
+[0:07:52] generally um we assume that for each
+[0:07:56] domain our measurements uh X are result
+[0:08:00] of the same mixing function f applied to
+[0:08:02] our latent Vector
+[0:08:04] Z and the distribution of Z in each
+[0:08:07] environment is an Interventional
+[0:08:09] distribution from the same causal model
+[0:08:12] where the subset of variables um
+[0:08:15] specified by this set of intervention
+[0:08:17] targets uh calligraphic IE is
+[0:08:20] potentially perturbed um could be a
+[0:08:23] stochastic intervention uh could be an
+[0:08:26] imperfect one we'll see more on that
+[0:08:28] later and all the other parts of the
+[0:08:30] model are shared across domain so these
+[0:08:32] uninter vened or base causal
 [0:08:38] mechanisms okay so that's sort of the the data generating process that we will
-[0:08:40] the data generating process that we will assume
 [0:08:41] assume throughout and um I've already alluded
-[0:08:43] throughout and um I've already alluded to the fact that there have been um
-[0:08:45] to the fact that there have been um other studies in this scenario and I
-[0:08:47] other studies in this scenario and I won't go into detail but um just to
-[0:08:50] won't go into detail but um just to highlight mostly they make um Place some
-[0:08:52] highlight mostly they make um Place some assumptions on either the mixing
-[0:08:55] assumptions on either the mixing function or on the caer model for
-[0:08:58] function or on the caer model for example assuming that this is linear or
-[0:09:01] example assuming that this is linear or or some simple parametric form makes it
-[0:09:04] or some simple parametric form makes it a lot easier to to study and to prove
-[0:09:06] a lot easier to to study and to prove identifiability and here we want to
-[0:09:08] identifiability and here we want to focus on the case in which both the
-[0:09:10] focus on the case in which both the mixing function and the caal model are
-[0:09:13] mixing function and the caal model are unconstrained and of course we need some
-[0:09:16] unconstrained and of course we need some technical assumptions so um just for
-[0:09:18] technical assumptions so um just for completeness the um these are that for
-[0:09:21] completeness the um these are that for the mixing function we assume that it is
-[0:09:23] the mixing function we assume that it is a diffu
+[0:08:43] to the fact that there have been um
+[0:08:45] other studies in this scenario and I
+[0:08:47] won't go into detail but um just to
+[0:08:50] highlight mostly they make um Place some
+[0:08:52] assumptions on either the mixing
+[0:08:55] function or on the caer model for
+[0:08:58] example assuming that this is linear or
+[0:09:01] or some simple parametric form makes it
+[0:09:04] a lot easier to to study and to prove
+[0:09:06] identifiability and here we want to
+[0:09:08] focus on the case in which both the
+[0:09:10] mixing function and the caal model are
+[0:09:13] unconstrained and of course we need some
+[0:09:16] technical assumptions so um just for
+[0:09:18] completeness the um these are that for
+[0:09:21] the mixing function we assume that it is
 [0:09:25] a diffu morphism um meaning roughly that it's
-[0:09:27] morphism um meaning roughly that it's sort of invertible and sufficient smooth
-[0:09:31] sort of invertible and sufficient smooth and U we also assume that all densities
-[0:09:34] and U we also assume that all densities are continuously differentiable and
-[0:09:35] are continuously differentiable and fully
+[0:09:27] sort of invertible and sufficient smooth
+[0:09:31] and U we also assume that all densities
+[0:09:34] are continuously differentiable and
 [0:09:36] fully supported but no further sort of
-[0:09:39] supported but no further sort of parametric form
-[0:09:41] parametric form assumed now the first setting that we uh
-[0:09:46] assumed now the first setting that we uh considered was basically um motivated by
-[0:09:49] considered was basically um motivated by trying to make the problem a little bit
-[0:09:51] trying to make the problem a little bit easier by asking first what can we
-[0:09:54] easier by asking first what can we actually do if we know the causal
-[0:09:57] actually do if we know the causal graph and we named this problem
-[0:10:00] graph and we named this problem um causal component analysis and we can
-[0:10:03] um causal component analysis and we can think of it as an intermediate problem
-[0:10:05] think of it as an intermediate problem between a and causal representation
-[0:10:08] between a and causal representation learning in the sense that um similar to
-[0:10:12] learning in the sense that um similar to a we also assume that the graph is
-[0:10:15] a we also assume that the graph is known but just as in causal
-[0:10:18] known but just as in causal representation learning this known graph
-[0:10:20] representation learning this known graph need not be the empty graph right so
-[0:10:22] need not be the empty graph right so there might be some edges some causal
-[0:10:24] there might be some edges some causal relationships amongst the latent
-[0:10:25] relationships amongst the latent variables that we're interested
-[0:10:28] variables that we're interested in so um
+[0:09:39] parametric form
+[0:09:41] assumed now the first setting that we uh
+[0:09:46] considered was basically um motivated by
+[0:09:49] trying to make the problem a little bit
+[0:09:51] easier by asking first what can we
+[0:09:54] actually do if we know the causal
+[0:09:57] graph and we named this problem
+[0:10:00] um causal component analysis and we can
+[0:10:03] think of it as an intermediate problem
+[0:10:05] between a and causal representation
+[0:10:08] learning in the sense that um similar to
+[0:10:12] a we also assume that the graph is
+[0:10:15] known but just as in causal
+[0:10:18] representation learning this known graph
+[0:10:20] need not be the empty graph right so
+[0:10:22] there might be some edges some causal
+[0:10:24] relationships amongst the latent
+[0:10:25] variables that we're interested
 [0:10:30] in so um as a generalization of the i
-[0:10:34] as a generalization of the i setting we can transfer any positive
-[0:10:38] setting we can transfer any positive results to um also give us um new
-[0:10:43] results to um also give us um new results for a as a special
-[0:10:46] results for a as a special case and at the same time any negative
-[0:10:49] case and at the same time any negative results or fundamental limitations that
-[0:10:51] results or fundamental limitations that we already encounter for this scenario
-[0:10:53] we already encounter for this scenario where the graph is known will also of
-[0:10:55] where the graph is known will also of course be limitations for the more
-[0:10:57] course be limitations for the more General case where the graph is not
-[0:10:58] General case where the graph is not known
+[0:10:34] setting we can transfer any positive
+[0:10:38] results to um also give us um new
+[0:10:43] results for a as a special
+[0:10:46] case and at the same time any negative
+[0:10:49] results or fundamental limitations that
+[0:10:51] we already encounter for this scenario
+[0:10:53] where the graph is known will also of
+[0:10:55] course be limitations for the more
+[0:10:57] General case where the graph is not
 [0:11:00] known so we start with this intermediate
-[0:11:02] so we start with this intermediate problem
 [0:11:03] problem here now um one of the main
-[0:11:08] here now um one of the main challenges is uh to
-[0:11:10] challenges is uh to identifiability is the existence of
-[0:11:13] identifiability is the existence of spurious
+[0:11:08] challenges is uh to
+[0:11:10] identifiability is the existence of
 [0:11:14] spurious Solutions so spurious Solutions um
-[0:11:18] Solutions so spurious Solutions um roughly means that we have different
-[0:11:21] roughly means that we have different models or different generative
-[0:11:23] models or different generative processes which generate the same
-[0:11:26] processes which generate the same observed
+[0:11:18] roughly means that we have different
+[0:11:21] models or different generative
+[0:11:23] processes which generate the same
 [0:11:27] observed distributions but which are not related
-[0:11:30] distributions but which are not related to each other in simple terms so here
-[0:11:32] to each other in simple terms so here usually what we're looking for is
-[0:11:34] usually what we're looking for is identification up to an elementwise
-[0:11:37] identification up to an elementwise reparameterization of the
-[0:11:39] reparameterization of the variables right so we want one toone
-[0:11:41] variables right so we want one toone correspondence between the learned and
-[0:11:43] correspondence between the learned and the true
+[0:11:30] to each other in simple terms so here
+[0:11:32] usually what we're looking for is
+[0:11:34] identification up to an elementwise
+[0:11:37] reparameterization of the
+[0:11:39] variables right so we want one toone
+[0:11:41] correspondence between the learned and
 [0:11:44] the true variables and if this is not the case we
-[0:11:46] variables and if this is not the case we will refer to a solution as
-[0:11:49] will refer to a solution as spurius and in the multi-domain setting
-[0:11:51] spurius and in the multi-domain setting that we're studying the learning signal
-[0:11:53] that we're studying the learning signal comes from these um distribution changes
-[0:11:57] comes from these um distribution changes that result from interventions
-[0:12:00] that result from interventions and it turns out that these
-[0:12:01] and it turns out that these interventions actually need to be
-[0:12:03] interventions actually need to be relatively powerful so specifically um
-[0:12:06] relatively powerful so specifically um they need to change the uninter vened
-[0:12:09] they need to change the uninter vened distribution uh almost everywhere and
-[0:12:13] distribution uh almost everywhere and the reason for that is is visualized
-[0:12:15] the reason for that is is visualized here on the slide so what happens if the
-[0:12:17] here on the slide so what happens if the intervened and the observational
-[0:12:19] intervened and the observational distribution are actually the same in
-[0:12:22] distribution are actually the same in some region of the domain so here in the
-[0:12:25] some region of the domain so here in the picture on the left let's say the blue
-[0:12:27] picture on the left let's say the blue one is the intervention distribution and
-[0:12:29] one is the intervention distribution and the green one is the observational
-[0:12:31] the green one is the observational distribution and they're constructed
-[0:12:33] distribution and they're constructed such that within the red region they
-[0:12:35] such that within the red region they overlap or they they
-[0:12:37] overlap or they they coincide then um what we can do is we
-[0:12:40] coincide then um what we can do is we can construct um this Solution on the
-[0:12:42] can construct um this Solution on the right plot so the middle one being let's
-[0:12:44] right plot so the middle one being let's say the ground truth and on the right we
-[0:12:47] say the ground truth and on the right we can within this red region apply a
-[0:12:49] can within this red region apply a measure preserving
-[0:12:51] measure preserving transformation which mixes the variables
-[0:12:54] transformation which mixes the variables but does not change the
-[0:12:57] but does not change the distribution um so this can for example
-[0:12:59] distribution um so this can for example be done by mapping to a gaussian then
-[0:13:01] be done by mapping to a gaussian then applying a rotation and then mapping
-[0:13:03] applying a rotation and then mapping back so this will give the same
-[0:13:05] back so this will give the same distribution but it will introduce some
-[0:13:07] distribution but it will introduce some mixing between the
-[0:13:09] mixing between the variables and we can always do this
-[0:13:11] variables and we can always do this unless we make this um Interventional
-[0:13:14] unless we make this um Interventional discrepancy
-[0:13:16] discrepancy assumption which states that um take any
-[0:13:19] assumption which states that um take any pair of uh uninter vene and intervene
-[0:13:22] pair of uh uninter vene and intervene densities then the gradient of their
-[0:13:26] densities then the gradient of their ratio needs to be nonzero almost
-[0:13:29] ratio needs to be nonzero almost everywhere
-[0:13:30] everywhere so formally that's sort of encoding this
-[0:13:32] so formally that's sort of encoding this notion that the intervention is
-[0:13:34] notion that the intervention is sufficiently
+[0:11:46] will refer to a solution as
+[0:11:49] spurius and in the multi-domain setting
+[0:11:51] that we're studying the learning signal
+[0:11:53] comes from these um distribution changes
+[0:11:57] that result from interventions
+[0:12:00] and it turns out that these
+[0:12:01] interventions actually need to be
+[0:12:03] relatively powerful so specifically um
+[0:12:06] they need to change the uninter vened
+[0:12:09] distribution uh almost everywhere and
+[0:12:13] the reason for that is is visualized
+[0:12:15] here on the slide so what happens if the
+[0:12:17] intervened and the observational
+[0:12:19] distribution are actually the same in
+[0:12:22] some region of the domain so here in the
+[0:12:25] picture on the left let's say the blue
+[0:12:27] one is the intervention distribution and
+[0:12:29] the green one is the observational
+[0:12:31] distribution and they're constructed
+[0:12:33] such that within the red region they
+[0:12:35] overlap or they they
+[0:12:37] coincide then um what we can do is we
+[0:12:40] can construct um this Solution on the
+[0:12:42] right plot so the middle one being let's
+[0:12:44] say the ground truth and on the right we
+[0:12:47] can within this red region apply a
+[0:12:49] measure preserving
+[0:12:51] transformation which mixes the variables
+[0:12:54] but does not change the
+[0:12:57] distribution um so this can for example
+[0:12:59] be done by mapping to a gaussian then
+[0:13:01] applying a rotation and then mapping
+[0:13:03] back so this will give the same
+[0:13:05] distribution but it will introduce some
+[0:13:07] mixing between the
+[0:13:09] variables and we can always do this
+[0:13:11] unless we make this um Interventional
+[0:13:14] discrepancy
+[0:13:16] assumption which states that um take any
+[0:13:19] pair of uh uninter vene and intervene
+[0:13:22] densities then the gradient of their
+[0:13:26] ratio needs to be nonzero almost
+[0:13:29] everywhere
+[0:13:30] so formally that's sort of encoding this
+[0:13:32] notion that the intervention is
+[0:13:34] sufficiently
 [0:13:41] strong okay so with this assumption and this sort of the key assumption and
-[0:13:44] this sort of the key assumption and another very important assumption is
-[0:13:45] another very important assumption is that we will assume that the
-[0:13:47] that we will assume that the intervention targets are
-[0:13:49] intervention targets are known and we then consider different
-[0:13:52] known and we then consider different combinations of um perfect or imperfect
-[0:13:56] combinations of um perfect or imperfect and of single or multi- Noe
-[0:13:58] and of single or multi- Noe interventions
-[0:14:00] interventions and um provide a whole Suite of uh
-[0:14:02] and um provide a whole Suite of uh different identifiability results and I
-[0:14:05] different identifiability results and I won't have time to cover them in in any
-[0:14:08] won't have time to cover them in in any detail but just to give like a a vague
-[0:14:11] detail but just to give like a a vague idea um if we have one perfect
-[0:14:15] idea um if we have one perfect intervention per node then we can
-[0:14:17] intervention per node then we can achieve the strongest type of
-[0:14:19] achieve the strongest type of identifiability this sort of one to one
-[0:14:22] identifiability this sort of one to one elementwise
-[0:14:23] elementwise reparameterization that's the second row
-[0:14:26] reparameterization that's the second row here highlighted in green um and uh also
-[0:14:29] here highlighted in green um and uh also consistent with prior results if we have
-[0:14:32] consistent with prior results if we have um one intervention per note but this
-[0:14:34] um one intervention per note but this intervention is imperfect meaning that
-[0:14:37] intervention is imperfect meaning that it doesn't completely break the
-[0:14:38] it doesn't completely break the dependence on the causal parents then we
-[0:14:41] dependence on the causal parents then we can only identify variables up to a
-[0:14:44] can only identify variables up to a mixing with their causal
+[0:13:44] another very important assumption is
+[0:13:45] that we will assume that the
+[0:13:47] intervention targets are
+[0:13:49] known and we then consider different
+[0:13:52] combinations of um perfect or imperfect
+[0:13:56] and of single or multi- Noe
+[0:13:58] interventions
+[0:14:00] and um provide a whole Suite of uh
+[0:14:02] different identifiability results and I
+[0:14:05] won't have time to cover them in in any
+[0:14:08] detail but just to give like a a vague
+[0:14:11] idea um if we have one perfect
+[0:14:15] intervention per node then we can
+[0:14:17] achieve the strongest type of
+[0:14:19] identifiability this sort of one to one
+[0:14:22] elementwise
+[0:14:23] reparameterization that's the second row
+[0:14:26] here highlighted in green um and uh also
+[0:14:29] consistent with prior results if we have
+[0:14:32] um one intervention per note but this
+[0:14:34] intervention is imperfect meaning that
+[0:14:37] it doesn't completely break the
+[0:14:38] dependence on the causal parents then we
+[0:14:41] can only identify variables up to a
+[0:14:44] mixing with their causal
 [0:14:53] ancestors now um as I mentioned we can also look at IA as a special case and in
-[0:14:56] also look at IA as a special case and in fact uh gain some some new insights or
-[0:14:59] fact uh gain some some new insights or some new results
-[0:15:00] some new results here and um again I just want to sort of
-[0:15:04] here and um again I just want to sort of summarize the the main takeaway here is
-[0:15:07] summarize the the main takeaway here is that by formalizing distribution shifts
-[0:15:11] that by formalizing distribution shifts through
+[0:14:56] fact uh gain some some new insights or
+[0:14:59] some new results
+[0:15:00] here and um again I just want to sort of
+[0:15:04] summarize the the main takeaway here is
+[0:15:07] that by formalizing distribution shifts
 [0:15:12] through interventions rather than talking about
-[0:15:14] interventions rather than talking about a shift in the entire joint distribution
-[0:15:17] a shift in the entire joint distribution as is usually done in
-[0:15:19] as is usually done in IA we gain efficiency in terms of the
-[0:15:23] IA we gain efficiency in terms of the number of domains
-[0:15:25] number of domains needed so if we compare the last two
-[0:15:27] needed so if we compare the last two rows here um we see that we only need um
-[0:15:31] rows here um we see that we only need um three environments in total if we have
-[0:15:33] three environments in total if we have single note interventions versus seven
-[0:15:36] single note interventions versus seven environments if the interventions are
-[0:15:38] environments if the interventions are sort of changing the all of the joint
-[0:15:41] sort of changing the all of the joint distribution okay and so basically this
-[0:15:43] distribution okay and so basically this localized Interventional nature of
-[0:15:45] localized Interventional nature of distribution changes gets us that
-[0:15:46] distribution changes gets us that additional learning signal to get away
-[0:15:48] additional learning signal to get away with fewer domains and so therefore this
-[0:15:51] with fewer domains and so therefore this perspective might even be interesting if
-[0:15:52] perspective might even be interesting if you're interesting if you're just uh
-[0:15:54] you're interesting if you're just uh looking at IC scenarios where your
-[0:15:56] looking at IC scenarios where your variables are independent
+[0:15:14] a shift in the entire joint distribution
+[0:15:17] as is usually done in
+[0:15:19] IA we gain efficiency in terms of the
+[0:15:23] number of domains
+[0:15:25] needed so if we compare the last two
+[0:15:27] rows here um we see that we only need um
+[0:15:31] three environments in total if we have
+[0:15:33] single note interventions versus seven
+[0:15:36] environments if the interventions are
+[0:15:38] sort of changing the all of the joint
+[0:15:41] distribution okay and so basically this
+[0:15:43] localized Interventional nature of
+[0:15:45] distribution changes gets us that
+[0:15:46] additional learning signal to get away
+[0:15:48] with fewer domains and so therefore this
+[0:15:51] perspective might even be interesting if
+[0:15:52] you're interesting if you're just uh
+[0:15:54] looking at IC scenarios where your
+[0:15:56] variables are independent
 [0:16:05] and uh we also formally show that um identifiability at least this sort of
-[0:16:07] identifiability at least this sort of elementwise identifiability is is not
-[0:16:10] elementwise identifiability is is not possible if uh any of these assumptions
-[0:16:13] possible if uh any of these assumptions here are violated so I already discussed
-[0:16:15] here are violated so I already discussed the Interventional discrepancy
-[0:16:17] the Interventional discrepancy assumption um but also we find that if
-[0:16:19] assumption um but also we find that if there's any variable that isn't
-[0:16:21] there's any variable that isn't intervened upon in the general case or
-[0:16:23] intervened upon in the general case or in the independent case two two
-[0:16:25] in the independent case two two variables or more that are not
-[0:16:26] variables or more that are not intervened upon then um the problem is
-[0:16:30] intervened upon then um the problem is not uh is not possible to solve and so
-[0:16:33] not uh is not possible to solve and so therefore these assumptions kind of also
-[0:16:35] therefore these assumptions kind of also show us the limits of what we definitely
-[0:16:37] show us the limits of what we definitely need especially now moving beyond the
-[0:16:40] need especially now moving beyond the causal component analysis setting to um
-[0:16:43] causal component analysis setting to um the scenario of uh CA of representation
-[0:16:46] the scenario of uh CA of representation learning where the graph is uh also
-[0:16:49] learning where the graph is uh also unknown uh before we get there I want to
-[0:16:52] unknown uh before we get there I want to just previous U briefly highlight uh one
-[0:16:55] just previous U briefly highlight uh one of our experimental
-[0:16:58] of our experimental findings so here um we simulated some
-[0:17:01] findings so here um we simulated some data and we then um trained a a a model
-[0:17:05] data and we then um trained a a a model to sort of estimate the ground truth
-[0:17:07] to sort of estimate the ground truth variables and what we did here
-[0:17:09] variables and what we did here specifically is a uh maximum likelihood
-[0:17:12] specifically is a uh maximum likelihood approach where we fit a normalizing flow
-[0:17:17] approach where we fit a normalizing flow to this multi-domain data and the
-[0:17:20] to this multi-domain data and the normalizing flow um the key difference
-[0:17:23] normalizing flow um the key difference to a vanilla flow is that the base
-[0:17:26] to a vanilla flow is that the base distribution is now um structured
-[0:17:28] distribution is now um structured according to the causal graph and some
-[0:17:31] according to the causal graph and some of the mechanisms that are not
-[0:17:33] of the mechanisms that are not intervened upon are shared between
-[0:17:35] intervened upon are shared between domains and if we then fit this this
-[0:17:38] domains and if we then fit this this type of model to the data and um
-[0:17:41] type of model to the data and um evaluate the similarity between the
-[0:17:43] evaluate the similarity between the inferred representation and the ground
-[0:17:46] inferred representation and the ground truth um that's Quantified here by the
-[0:17:49] truth um that's Quantified here by the mean correlation coefficient or MCC on
-[0:17:51] mean correlation coefficient or MCC on the Y
+[0:16:07] elementwise identifiability is is not
+[0:16:10] possible if uh any of these assumptions
+[0:16:13] here are violated so I already discussed
+[0:16:15] the Interventional discrepancy
+[0:16:17] assumption um but also we find that if
+[0:16:19] there's any variable that isn't
+[0:16:21] intervened upon in the general case or
+[0:16:23] in the independent case two two
+[0:16:25] variables or more that are not
+[0:16:26] intervened upon then um the problem is
+[0:16:30] not uh is not possible to solve and so
+[0:16:33] therefore these assumptions kind of also
+[0:16:35] show us the limits of what we definitely
+[0:16:37] need especially now moving beyond the
+[0:16:40] causal component analysis setting to um
+[0:16:43] the scenario of uh CA of representation
+[0:16:46] learning where the graph is uh also
+[0:16:49] unknown uh before we get there I want to
+[0:16:52] just previous U briefly highlight uh one
+[0:16:55] of our experimental
+[0:16:58] findings so here um we simulated some
+[0:17:01] data and we then um trained a a a model
+[0:17:05] to sort of estimate the ground truth
+[0:17:07] variables and what we did here
+[0:17:09] specifically is a uh maximum likelihood
+[0:17:12] approach where we fit a normalizing flow
+[0:17:17] to this multi-domain data and the
+[0:17:20] normalizing flow um the key difference
+[0:17:23] to a vanilla flow is that the base
+[0:17:26] distribution is now um structured
+[0:17:28] according to the causal graph and some
+[0:17:31] of the mechanisms that are not
+[0:17:33] intervened upon are shared between
+[0:17:35] domains and if we then fit this this
+[0:17:38] type of model to the data and um
+[0:17:41] evaluate the similarity between the
+[0:17:43] inferred representation and the ground
+[0:17:46] truth um that's Quantified here by the
+[0:17:49] mean correlation coefficient or MCC on
 [0:17:53] the Y AIS then we find that um as sort of as
-[0:17:56] AIS then we find that um as sort of as expected our method is um perform ing or
-[0:18:00] expected our method is um perform ing or recovering the true variables very
-[0:18:02] recovering the true variables very accurately even as the strength of caal
-[0:18:05] accurately even as the strength of caal relationships on the xaxis is increased
-[0:18:09] relationships on the xaxis is increased right so whereas the IC Baseline in
-[0:18:11] right so whereas the IC Baseline in yellow um still performs well if um the
-[0:18:15] yellow um still performs well if um the causal relationships are weak but as we
-[0:18:17] causal relationships are weak but as we increase the strength of causal
-[0:18:19] increase the strength of causal influence um the sort of misspecified
-[0:18:21] influence um the sort of misspecified model breaks down which of course is the
-[0:18:24] model breaks down which of course is the expected Behavior
-[0:18:26] expected Behavior here so it's more just a sort of Sanity
-[0:18:29] here so it's more just a sort of Sanity check that that indeed this is helpful
-[0:18:31] check that that indeed this is helpful and necessary if you have CA
-[0:18:32] and necessary if you have CA relationships to to encode them in order
-[0:18:34] relationships to to encode them in order to accurately recover the the underlying
+[0:17:56] expected our method is um perform ing or
+[0:18:00] recovering the true variables very
+[0:18:02] accurately even as the strength of caal
+[0:18:05] relationships on the xaxis is increased
+[0:18:09] right so whereas the IC Baseline in
+[0:18:11] yellow um still performs well if um the
+[0:18:15] causal relationships are weak but as we
+[0:18:17] increase the strength of causal
+[0:18:19] influence um the sort of misspecified
+[0:18:21] model breaks down which of course is the
+[0:18:24] expected Behavior
+[0:18:26] here so it's more just a sort of Sanity
+[0:18:29] check that that indeed this is helpful
+[0:18:31] and necessary if you have CA
+[0:18:32] relationships to to encode them in order
+[0:18:34] to accurately recover the the underlying
 [0:18:44] Concepts okay now um moving on to the Calla of representation learning setting
-[0:18:47] Calla of representation learning setting um just to refresh again what what we
-[0:18:50] um just to refresh again what what we have um what we're talking about we see
-[0:18:53] have um what we're talking about we see on the left here the unknown generative
-[0:18:56] on the left here the unknown generative process and now uh we ALS o need to
-[0:19:00] process and now uh we ALS o need to learn the graph and the intervention
-[0:19:05] learn the graph and the intervention targets so that's why um on the right of
-[0:19:08] targets so that's why um on the right of this plot you see that um we not only
-[0:19:10] this plot you see that um we not only have an encoder which maps to
-[0:19:12] have an encoder which maps to representation but we also have this
-[0:19:14] representation but we also have this this candidate graph G Prime which tells
-[0:19:17] this candidate graph G Prime which tells us how to factorize this encoded
-[0:19:20] us how to factorize this encoded distribution and we also need to learn
-[0:19:22] distribution and we also need to learn the intervention targets and so in
-[0:19:25] the intervention targets and so in principle they might not align with the
-[0:19:27] principle they might not align with the intervention Targets in the true
-[0:19:29] intervention Targets in the true generative process on the
+[0:18:47] um just to refresh again what what we
+[0:18:50] have um what we're talking about we see
+[0:18:53] on the left here the unknown generative
+[0:18:56] process and now uh we ALS o need to
+[0:19:00] learn the graph and the intervention
+[0:19:05] targets so that's why um on the right of
+[0:19:08] this plot you see that um we not only
+[0:19:10] have an encoder which maps to
+[0:19:12] representation but we also have this
+[0:19:14] this candidate graph G Prime which tells
+[0:19:17] us how to factorize this encoded
+[0:19:20] distribution and we also need to learn
+[0:19:22] the intervention targets and so in
+[0:19:25] principle they might not align with the
+[0:19:27] intervention Targets in the true
+[0:19:29] generative process on the
 [0:19:36] left and um now we will focus so this problem is of course a lot
-[0:19:38] problem is of course a lot harder um there's more things sort of
-[0:19:42] harder um there's more things sort of that are unknown more things to be
-[0:19:43] that are unknown more things to be learned and uh we will therefore Focus
-[0:19:46] learned and uh we will therefore Focus here mostly on this um by variate
-[0:19:48] here mostly on this um by variate setting and we'll also consider the uh
-[0:19:52] setting and we'll also consider the uh arguably unrealistic uh case of single
-[0:19:55] arguably unrealistic uh case of single node perfect interventions so where the
-[0:19:58] node perfect interventions so where the interventions completely remove the
-[0:20:00] interventions completely remove the influence on the
+[0:19:38] harder um there's more things sort of
+[0:19:42] that are unknown more things to be
+[0:19:43] learned and uh we will therefore Focus
+[0:19:46] here mostly on this um by variate
+[0:19:48] setting and we'll also consider the uh
+[0:19:52] arguably unrealistic uh case of single
+[0:19:55] node perfect interventions so where the
+[0:19:58] interventions completely remove the
+[0:20:00] influence on the
 [0:20:07] parents since there is more elements to be learned in particular we also need to
-[0:20:08] be learned in particular we also need to learn the graph now um let's define the
-[0:20:12] learn the graph now um let's define the equivalence class or the type of
-[0:20:14] equivalence class or the type of identifiability that we're actually
-[0:20:16] identifiability that we're actually after and so here what we say is that um
-[0:20:20] after and so here what we say is that um two solutions or two models consisting
-[0:20:22] two solutions or two models consisting of an encoder h and a graph
-[0:20:25] of an encoder h and a graph G are equivalent or indistinguishable
-[0:20:29] G are equivalent or indistinguishable if and only if they are related by a
-[0:20:32] if and only if they are related by a graph isomorphism so that's a
-[0:20:35] graph isomorphism so that's a permutation of the nodes which leaves
-[0:20:37] permutation of the nodes which leaves the edges
+[0:20:08] learn the graph now um let's define the
+[0:20:12] equivalence class or the type of
+[0:20:14] identifiability that we're actually
+[0:20:16] after and so here what we say is that um
+[0:20:20] two solutions or two models consisting
+[0:20:22] of an encoder h and a graph
+[0:20:25] G are equivalent or indistinguishable
+[0:20:29] if and only if they are related by a
+[0:20:32] graph isomorphism so that's a
+[0:20:35] permutation of the nodes which leaves
 [0:20:39] the edges unchanged and an element wise rescaling
-[0:20:42] unchanged and an element wise rescaling that we already saw
-[0:20:44] that we already saw before and so this um equivalence class
-[0:20:47] before and so this um equivalence class generalizes the similar or the analogous
-[0:20:50] generalizes the similar or the analogous analogous um equivalence class for I
-[0:20:54] analogous um equivalence class for I which is recovered if again if the graph
-[0:20:56] which is recovered if again if the graph is empty then we can sort of get
-[0:20:58] is empty then we can sort of get arbitrary permutation ation in
-[0:21:01] arbitrary permutation ation in determination and um what's also um good
-[0:21:05] determination and um what's also um good just to check is that this equivalence
-[0:21:09] just to check is that this equivalence notion is minimal in the sense that this
-[0:21:11] notion is minimal in the sense that this is really the best we can hope
-[0:21:13] is really the best we can hope for uh in the sense that we can always
-[0:21:17] for uh in the sense that we can always find um another solution within the
-[0:21:20] find um another solution within the equivalence class which exhibits equally
-[0:21:23] equivalence class which exhibits equally sparse
+[0:20:42] that we already saw
+[0:20:44] before and so this um equivalence class
+[0:20:47] generalizes the similar or the analogous
+[0:20:50] analogous um equivalence class for I
+[0:20:54] which is recovered if again if the graph
+[0:20:56] is empty then we can sort of get
+[0:20:58] arbitrary permutation ation in
+[0:21:01] determination and um what's also um good
+[0:21:05] just to check is that this equivalence
+[0:21:09] notion is minimal in the sense that this
+[0:21:11] is really the best we can hope
+[0:21:13] for uh in the sense that we can always
+[0:21:17] find um another solution within the
+[0:21:20] equivalence class which exhibits equally
+[0:21:23] sparse
 [0:21:29] interventions now um maybe natural first question is um how good is this type of
-[0:21:32] question is um how good is this type of identifiability actually so what what
-[0:21:36] identifiability actually so what what what use is it in the end um so for
-[0:21:39] what use is it in the end um so for example due to this uh scale
-[0:21:42] example due to this uh scale reparameterization we clearly cannot
-[0:21:44] reparameterization we clearly cannot interpret the absolute sizes of causal
-[0:21:47] interpret the absolute sizes of causal effects between different
-[0:21:48] effects between different representations but there are some
-[0:21:50] representations but there are some quantities that are preserved or that
-[0:21:52] quantities that are preserved or that are shared by all um elements in the
-[0:21:55] are shared by all um elements in the same equivalence class and one example
-[0:21:58] same equivalence class and one example of such a quantity
-[0:21:59] of such a quantity are these causal
-[0:22:01] are these causal influences um so these are um based on
-[0:22:05] influences um so these are um based on some some work by yaning and colleagues
-[0:22:08] some some work by yaning and colleagues where um the the notion like the the
-[0:22:12] where um the the notion like the the measure of causal influence of a node I
-[0:22:14] measure of causal influence of a node I on a node J is formalized in an
-[0:22:17] on a node J is formalized in an information theoretic sense as a KL
-[0:22:20] information theoretic sense as a KL Divergence between the uninter vened
-[0:22:23] Divergence between the uninter vened distribution and another distribution
-[0:22:25] distribution and another distribution which basically simulates an
-[0:22:27] which basically simulates an intervention on Zi
-[0:22:30] intervention on Zi and um we show that this measure of
-[0:22:33] and um we show that this measure of influence is preserved within our
-[0:22:35] influence is preserved within our equivalence class right so specifically
-[0:22:37] equivalence class right so specifically if we take any other representations at
-[0:22:40] if we take any other representations at had which is related to The Truth by
-[0:22:43] had which is related to The Truth by some isomorphism and pre
-[0:22:46] some isomorphism and pre parameterization then the influences are
-[0:22:49] parameterization then the influences are invariant to the rescaling and they're
-[0:22:52] invariant to the rescaling and they're equivariant to the
-[0:22:54] equivariant to the permutations and what this means in
-[0:22:56] permutations and what this means in practice is that we can actually somehow
-[0:22:58] practice is that we can actually somehow interpret these uh representations that
-[0:23:01] interpret these uh representations that we end up learning across different
-[0:23:02] we end up learning across different domains and describe some meaning to
-[0:23:04] domains and describe some meaning to these variables which is important for
-[0:23:06] these variables which is important for otherwise they basically just numbers
-[0:23:08] otherwise they basically just numbers that we get out of our computer and it's
-[0:23:11] that we get out of our computer and it's hard to really sort of interpret what's
-[0:23:12] hard to really sort of interpret what's going on
+[0:21:32] identifiability actually so what what
+[0:21:36] what use is it in the end um so for
+[0:21:39] example due to this uh scale
+[0:21:42] reparameterization we clearly cannot
+[0:21:44] interpret the absolute sizes of causal
+[0:21:47] effects between different
+[0:21:48] representations but there are some
+[0:21:50] quantities that are preserved or that
+[0:21:52] are shared by all um elements in the
+[0:21:55] same equivalence class and one example
+[0:21:58] of such a quantity
+[0:21:59] are these causal
+[0:22:01] influences um so these are um based on
+[0:22:05] some some work by yaning and colleagues
+[0:22:08] where um the the notion like the the
+[0:22:12] measure of causal influence of a node I
+[0:22:14] on a node J is formalized in an
+[0:22:17] information theoretic sense as a KL
+[0:22:20] Divergence between the uninter vened
+[0:22:23] distribution and another distribution
+[0:22:25] which basically simulates an
+[0:22:27] intervention on Zi
+[0:22:30] and um we show that this measure of
+[0:22:33] influence is preserved within our
+[0:22:35] equivalence class right so specifically
+[0:22:37] if we take any other representations at
+[0:22:40] had which is related to The Truth by
+[0:22:43] some isomorphism and pre
+[0:22:46] parameterization then the influences are
+[0:22:49] invariant to the rescaling and they're
+[0:22:52] equivariant to the
+[0:22:54] permutations and what this means in
+[0:22:56] practice is that we can actually somehow
+[0:22:58] interpret these uh representations that
+[0:23:01] we end up learning across different
+[0:23:02] domains and describe some meaning to
+[0:23:04] these variables which is important for
+[0:23:06] otherwise they basically just numbers
+[0:23:08] that we get out of our computer and it's
+[0:23:11] hard to really sort of interpret what's
 [0:23:13] going on there so hopefully that that gives at
-[0:23:16] there so hopefully that that gives at least some justification that this is an
-[0:23:18] least some justification that this is an interesting notion of identifiability to
-[0:23:20] interesting notion of identifiability to strive for and now I want to discuss um
-[0:23:24] strive for and now I want to discuss um our main result in this context which is
-[0:23:27] our main result in this context which is to show that indeed this level of
-[0:23:30] to show that indeed this level of identifiability is feasible in the fully
-[0:23:32] identifiability is feasible in the fully known parametric
-[0:23:34] known parametric setting um from again an observational
-[0:23:37] setting um from again an observational environment and one intervention per
-[0:23:40] environment and one intervention per note but crucially there are some Corner
-[0:23:43] note but crucially there are some Corner cases here that we need to rule out and
-[0:23:46] cases here that we need to rule out and we do that through this um genericity
-[0:23:48] we do that through this um genericity condition so basically we um we need to
-[0:23:52] condition so basically we um we need to ask that some notion of no fine tuning
-[0:23:56] ask that some notion of no fine tuning amongst the distributions is satisfied
-[0:23:59] amongst the distributions is satisfied and that's formalized by this condition
-[0:24:02] and that's formalized by this condition that you see here which basically asks
-[0:24:05] that you see here which basically asks that there exists some function fi which
-[0:24:08] that there exists some function fi which you can think of as a a witness function
-[0:24:10] you can think of as a a witness function of
+[0:23:16] least some justification that this is an
+[0:23:18] interesting notion of identifiability to
+[0:23:20] strive for and now I want to discuss um
+[0:23:24] our main result in this context which is
+[0:23:27] to show that indeed this level of
+[0:23:30] identifiability is feasible in the fully
+[0:23:32] known parametric
+[0:23:34] setting um from again an observational
+[0:23:37] environment and one intervention per
+[0:23:40] note but crucially there are some Corner
+[0:23:43] cases here that we need to rule out and
+[0:23:46] we do that through this um genericity
+[0:23:48] condition so basically we um we need to
+[0:23:52] ask that some notion of no fine tuning
+[0:23:56] amongst the distributions is satisfied
+[0:23:59] and that's formalized by this condition
+[0:24:02] that you see here which basically asks
+[0:24:05] that there exists some function fi which
+[0:24:08] you can think of as a a witness function
 [0:24:11] of genericity such that these two
-[0:24:13] genericity such that these two expectations here one with respect to
-[0:24:15] expectations here one with respect to the observation distribution one with
-[0:24:17] the observation distribution one with respect to the Interventional
-[0:24:18] respect to the Interventional Distribution on uh Z1 are
-[0:24:23] Distribution on uh Z1 are different and this is probably a little
-[0:24:25] different and this is probably a little bit hard to unpack so just to maybe give
-[0:24:27] bit hard to unpack so just to maybe give one example let's plug in some simple
-[0:24:30] one example let's plug in some simple function like X squ then we get this
-[0:24:32] function like X squ then we get this expression here at the bottom of the
-[0:24:34] expression here at the bottom of the screen and the main main thing you
-[0:24:36] screen and the main main thing you should take away from this is this is an
-[0:24:39] should take away from this is this is an expression that involves all of the
-[0:24:41] expression that involves all of the uninter vene and intervene densities
-[0:24:43] uninter vene and intervene densities right so the base and the intervene
-[0:24:46] right so the base and the intervene mechanisms and in general there's no
-[0:24:48] mechanisms and in general there's no reason to believe that this quantity
-[0:24:50] reason to believe that this quantity should always be zero right and so it
-[0:24:52] should always be zero right and so it will only be zero um for all such
-[0:24:55] will only be zero um for all such functions F in like very non-generic
-[0:24:59] functions F in like very non-generic Corner cases and so we we think of this
-[0:25:03] Corner cases and so we we think of this as a little bit um similar in spirit to
-[0:25:06] as a little bit um similar in spirit to uh comparable conditions for example in
-[0:25:08] uh comparable conditions for example in cause effect
-[0:25:10] cause effect inference um so if you're familiar with
-[0:25:13] inference um so if you're familiar with the U additive nonlinear additive noise
-[0:25:16] the U additive nonlinear additive noise model or the post nonlinear model there
-[0:25:19] model or the post nonlinear model there also sort of some Corner cases need to
-[0:25:21] also sort of some Corner cases need to be ruled out and there they sort of
-[0:25:23] be ruled out and there they sort of characterized by the solutions to a
-[0:25:25] characterized by the solutions to a system of differential equations so one
-[0:25:28] system of differential equations so one might think of this condition here as
-[0:25:29] might think of this condition here as similarly characterizing or specifying
-[0:25:32] similarly characterizing or specifying these or ruling out these Corner
+[0:24:13] expectations here one with respect to
+[0:24:15] the observation distribution one with
+[0:24:17] respect to the Interventional
+[0:24:18] Distribution on uh Z1 are
+[0:24:23] different and this is probably a little
+[0:24:25] bit hard to unpack so just to maybe give
+[0:24:27] one example let's plug in some simple
+[0:24:30] function like X squ then we get this
+[0:24:32] expression here at the bottom of the
+[0:24:34] screen and the main main thing you
+[0:24:36] should take away from this is this is an
+[0:24:39] expression that involves all of the
+[0:24:41] uninter vene and intervene densities
+[0:24:43] right so the base and the intervene
+[0:24:46] mechanisms and in general there's no
+[0:24:48] reason to believe that this quantity
+[0:24:50] should always be zero right and so it
+[0:24:52] will only be zero um for all such
+[0:24:55] functions F in like very non-generic
+[0:24:59] Corner cases and so we we think of this
+[0:25:03] as a little bit um similar in spirit to
+[0:25:06] uh comparable conditions for example in
+[0:25:08] cause effect
+[0:25:10] inference um so if you're familiar with
+[0:25:13] the U additive nonlinear additive noise
+[0:25:16] model or the post nonlinear model there
+[0:25:19] also sort of some Corner cases need to
+[0:25:21] be ruled out and there they sort of
+[0:25:23] characterized by the solutions to a
+[0:25:25] system of differential equations so one
+[0:25:28] might think of this condition here as
+[0:25:29] similarly characterizing or specifying
+[0:25:32] these or ruling out these Corner
 [0:25:39] cases okay so and except for these very weird situations um this setting is
-[0:25:43] weird situations um this setting is identifiable um from one intervention
-[0:25:45] identifiable um from one intervention per note even in the foty non parametric
-[0:25:48] per note even in the foty non parametric case and um we also have some results
-[0:25:52] case and um we also have some results for the U setting of more than two notes
-[0:25:57] for the U setting of more than two notes but I think I will skip this in the
-[0:25:59] but I think I will skip this in the interest of time um just to briefly
-[0:26:02] interest of time um just to briefly mention here things um we sort of make
-[0:26:05] mention here things um we sort of make our life a little bit easier by uh by
-[0:26:08] our life a little bit easier by uh by asking that we have actually more than
-[0:26:10] asking that we have actually more than one intervention per note and if we have
-[0:26:13] one intervention per note and if we have like multiple such data sets then then
-[0:26:15] like multiple such data sets then then things get a lot
-[0:26:17] things get a lot easier um and again I just want to
-[0:26:20] easier um and again I just want to highlight one experimental finding so
-[0:26:23] highlight one experimental finding so for this bivariate case that we that we
-[0:26:25] for this bivariate case that we that we also discussed the main result for um
-[0:26:28] also discussed the main result for um here here again we learned from from
-[0:26:30] here here again we learned from from three domains as uh required by the the
-[0:26:32] three domains as uh required by the the theory um an observational and one
-[0:26:35] theory um an observational and one intervention per note and what we now do
-[0:26:38] intervention per note and what we now do is since we also need to learn the graph
-[0:26:40] is since we also need to learn the graph and the intervention Targets in this
-[0:26:42] and the intervention Targets in this case it's very simple there's only four
-[0:26:44] case it's very simple there's only four possibilities so we just can enumerate
-[0:26:47] possibilities so we just can enumerate all
+[0:25:43] identifiable um from one intervention
+[0:25:45] per note even in the foty non parametric
+[0:25:48] case and um we also have some results
+[0:25:52] for the U setting of more than two notes
+[0:25:57] but I think I will skip this in the
+[0:25:59] interest of time um just to briefly
+[0:26:02] mention here things um we sort of make
+[0:26:05] our life a little bit easier by uh by
+[0:26:08] asking that we have actually more than
+[0:26:10] one intervention per note and if we have
+[0:26:13] like multiple such data sets then then
+[0:26:15] things get a lot
+[0:26:17] easier um and again I just want to
+[0:26:20] highlight one experimental finding so
+[0:26:23] for this bivariate case that we that we
+[0:26:25] also discussed the main result for um
+[0:26:28] here here again we learned from from
+[0:26:30] three domains as uh required by the the
+[0:26:32] theory um an observational and one
+[0:26:35] intervention per note and what we now do
+[0:26:38] is since we also need to learn the graph
+[0:26:40] and the intervention Targets in this
+[0:26:42] case it's very simple there's only four
+[0:26:44] possibilities so we just can enumerate
 [0:26:48] all combinations and once we fix the graph
-[0:26:50] combinations and once we fix the graph and the intervention targets we're back
-[0:26:52] and the intervention targets we're back in the causal component analysis setting
-[0:26:55] in the causal component analysis setting so we can run that approach and then we
-[0:26:57] so we can run that approach and then we can compare the different
-[0:26:59] can compare the different models and that's what's shown here so
-[0:27:01] models and that's what's shown here so the correct one is um shown in blue so
-[0:27:05] the correct one is um shown in blue so the correct graph and the correct choice
-[0:27:07] the correct graph and the correct choice of intervention
-[0:27:08] of intervention targets and on the right plot we see the
-[0:27:11] targets and on the right plot we see the difference in log likelihood to this
-[0:27:12] difference in log likelihood to this correct model for the other three and as
-[0:27:15] correct model for the other three and as we see this difference is almost always
-[0:27:16] we see this difference is almost always larger than zero which means that we can
-[0:27:19] larger than zero which means that we can do model selection and based on the log
-[0:27:22] do model selection and based on the log likelihood correctly pick the the right
-[0:27:24] likelihood correctly pick the the right graph and the right
-[0:27:25] graph and the right targets and if we then look at the um m
-[0:27:28] targets and if we then look at the um m CC value in the left plot we see that
-[0:27:30] CC value in the left plot we see that this correct model indeed recovers the
-[0:27:32] this correct model indeed recovers the true variables very
-[0:27:34] true variables very accurately okay so basically we can do
-[0:27:37] accurately okay so basically we can do model selection and if we select the
-[0:27:40] model selection and if we select the correct model this model also recovers
-[0:27:41] correct model this model also recovers the truth
+[0:26:50] and the intervention targets we're back
+[0:26:52] in the causal component analysis setting
+[0:26:55] so we can run that approach and then we
+[0:26:57] can compare the different
+[0:26:59] models and that's what's shown here so
+[0:27:01] the correct one is um shown in blue so
+[0:27:05] the correct graph and the correct choice
+[0:27:07] of intervention
+[0:27:08] targets and on the right plot we see the
+[0:27:11] difference in log likelihood to this
+[0:27:12] correct model for the other three and as
+[0:27:15] we see this difference is almost always
+[0:27:16] larger than zero which means that we can
+[0:27:19] do model selection and based on the log
+[0:27:22] likelihood correctly pick the the right
+[0:27:24] graph and the right
+[0:27:25] targets and if we then look at the um m
+[0:27:28] CC value in the left plot we see that
+[0:27:30] this correct model indeed recovers the
+[0:27:32] true variables very
+[0:27:34] accurately okay so basically we can do
+[0:27:37] model selection and if we select the
+[0:27:40] correct model this model also recovers
+[0:27:41] the truth
 [0:27:48] Faithfully so to wrap up just a few points I want to mention um one is this
-[0:27:50] points I want to mention um one is this genericity condition um we could only
-[0:27:53] genericity condition um we could only characterize it in the by variat
-[0:27:56] characterize it in the by variat setting um but that's not because we
-[0:27:58] setting um but that's not because we don't think the result would extend to
-[0:28:00] don't think the result would extend to larger n it's just things get a little
-[0:28:02] larger n it's just things get a little bit more tricky and there's probably
-[0:28:04] bit more tricky and there's probably multiple such conditions but we
-[0:28:06] multiple such conditions but we conjecture that also one intervention
-[0:28:08] conjecture that also one intervention per node should be sufficient in that
-[0:28:10] per node should be sufficient in that case and then um of course there are
-[0:28:13] case and then um of course there are several other limiting assumptions that
-[0:28:15] several other limiting assumptions that I made implicitly or explicitly such as
-[0:28:18] I made implicitly or explicitly such as that the number of variables that we're
-[0:28:20] that the number of variables that we're looking for is known which is not the
-[0:28:22] looking for is known which is not the case in practice um or that the mixing
-[0:28:25] case in practice um or that the mixing function is invertible etc etc um one
-[0:28:30] function is invertible etc etc um one also our our estimation procedure of
-[0:28:32] also our our estimation procedure of just enumerating graphs and targets is
-[0:28:34] just enumerating graphs and targets is not very scalable of course hard to do
-[0:28:37] not very scalable of course hard to do this for graphs with more than let's say
-[0:28:39] this for graphs with more than let's say three notes or four notes so um there's
-[0:28:42] three notes or four notes so um there's there's still lots of um open problems I
-[0:28:45] there's still lots of um open problems I would say and indeed this is like very
-[0:28:47] would say and indeed this is like very active area of research um if you're not
-[0:28:50] active area of research um if you're not so familiar with with this um with this
-[0:28:53] so familiar with with this um with this field there's been a lot of other
-[0:28:55] field there's been a lot of other interesting Works um around the same
-[0:28:57] interesting Works um around the same time or that have come out since that I
-[0:29:00] time or that have come out since that I encourage you to also uh check out and
-[0:29:03] encourage you to also uh check out and so with that let me uh conclude so what
-[0:29:06] so with that let me uh conclude so what I presented today was um identifiability
-[0:29:09] I presented today was um identifiability results for these two different problem
-[0:29:12] results for these two different problem settings caal component analysis and
-[0:29:14] settings caal component analysis and caal representation learning and in both
-[0:29:17] caal representation learning and in both cases we Leverage The Learning signal
-[0:29:19] cases we Leverage The Learning signal that comes from uh Interventional
-[0:29:21] that comes from uh Interventional multi-domain data with a specific focus
-[0:29:24] multi-domain data with a specific focus on the fully non parametric
-[0:29:27] on the fully non parametric case and as we showed um even in this in
-[0:29:31] case and as we showed um even in this in this case where these um mixing
-[0:29:34] this case where these um mixing functions and caal mechanisms are
-[0:29:36] functions and caal mechanisms are essentially infinite dimensional objects
-[0:29:39] essentially infinite dimensional objects or they're completely unconstrained we
-[0:29:41] or they're completely unconstrained we can still um provably learn them um just
-[0:29:46] can still um provably learn them um just from Interventional data if we have
-[0:29:48] from Interventional data if we have sufficiently uh Rich
-[0:29:50] sufficiently uh Rich interventions and so under the right
-[0:29:53] interventions and so under the right kind of conditions that this might be
-[0:29:55] kind of conditions that this might be seen as justifying um the use of like
-[0:29:57] seen as justifying um the use of like very Express
-[0:29:59] very Express machine learning and deep learning tools
-[0:30:01] machine learning and deep learning tools to learn these uh complicated densities
-[0:30:03] to learn these uh complicated densities and
+[0:27:50] genericity condition um we could only
+[0:27:53] characterize it in the by variat
+[0:27:56] setting um but that's not because we
+[0:27:58] don't think the result would extend to
+[0:28:00] larger n it's just things get a little
+[0:28:02] bit more tricky and there's probably
+[0:28:04] multiple such conditions but we
+[0:28:06] conjecture that also one intervention
+[0:28:08] per node should be sufficient in that
+[0:28:10] case and then um of course there are
+[0:28:13] several other limiting assumptions that
+[0:28:15] I made implicitly or explicitly such as
+[0:28:18] that the number of variables that we're
+[0:28:20] looking for is known which is not the
+[0:28:22] case in practice um or that the mixing
+[0:28:25] function is invertible etc etc um one
+[0:28:30] also our our estimation procedure of
+[0:28:32] just enumerating graphs and targets is
+[0:28:34] not very scalable of course hard to do
+[0:28:37] this for graphs with more than let's say
+[0:28:39] three notes or four notes so um there's
+[0:28:42] there's still lots of um open problems I
+[0:28:45] would say and indeed this is like very
+[0:28:47] active area of research um if you're not
+[0:28:50] so familiar with with this um with this
+[0:28:53] field there's been a lot of other
+[0:28:55] interesting Works um around the same
+[0:28:57] time or that have come out since that I
+[0:29:00] encourage you to also uh check out and
+[0:29:03] so with that let me uh conclude so what
+[0:29:06] I presented today was um identifiability
+[0:29:09] results for these two different problem
+[0:29:12] settings caal component analysis and
+[0:29:14] caal representation learning and in both
+[0:29:17] cases we Leverage The Learning signal
+[0:29:19] that comes from uh Interventional
+[0:29:21] multi-domain data with a specific focus
+[0:29:24] on the fully non parametric
+[0:29:27] case and as we showed um even in this in
+[0:29:31] this case where these um mixing
+[0:29:34] functions and caal mechanisms are
+[0:29:36] essentially infinite dimensional objects
+[0:29:39] or they're completely unconstrained we
+[0:29:41] can still um provably learn them um just
+[0:29:46] from Interventional data if we have
+[0:29:48] sufficiently uh Rich
+[0:29:50] interventions and so under the right
+[0:29:53] kind of conditions that this might be
+[0:29:55] seen as justifying um the use of like
+[0:29:57] very Express
+[0:29:59] machine learning and deep learning tools
+[0:30:01] to learn these uh complicated densities
 [0:30:04] and functions so um I leave you with that
-[0:30:07] functions so um I leave you with that and if you're interested in uh more I'm
-[0:30:09] and if you're interested in uh more I'm happy to answer questions and you can uh
-[0:30:11] happy to answer questions and you can uh find the papers on archive and our code
-[0:30:14] find the papers on archive and our code is also available on GitHub thank you
-[0:30:17] is also available on GitHub thank you very much thank you Julius for the great
-[0:30:20] very much thank you Julius for the great talk um we uh for the interest of the
-[0:30:23] talk um we uh for the interest of the time and because
-[0:30:25] time and because uh uh the collaborator has been
-[0:30:28] uh uh the collaborator has been answering the question in the Q&amp;A we
-[0:30:30] answering the question in the Q&amp;A we will uh just switch to David's talk uh
-[0:30:33] will uh just switch to David's talk uh feel free to take over
-[0:30:35] feel free to take over David yes and if you do have any
-[0:30:38] David yes and if you do have any questions uh from the audience please
-[0:30:40] questions uh from the audience please submit it uh through the Q&amp;A box thank
-[0:30:44] submit it uh through the Q&amp;A box thank you okay thanks
+[0:30:07] and if you're interested in uh more I'm
+[0:30:09] happy to answer questions and you can uh
+[0:30:11] find the papers on archive and our code
+[0:30:14] is also available on GitHub thank you
+[0:30:17] very much thank you Julius for the great
+[0:30:20] talk um we uh for the interest of the
+[0:30:23] time and because
+[0:30:25] uh uh the collaborator has been
+[0:30:28] answering the question in the Q&A we
+[0:30:30] will uh just switch to David's talk uh
+[0:30:33] feel free to take over
+[0:30:35] David yes and if you do have any
+[0:30:38] questions uh from the audience please
+[0:30:40] submit it uh through the Q&A box thank
+[0:30:44] you okay thanks

@@ -1,1612 +1,1477 @@
 [0:00:05] Hi everyone. Welcome to this week's online causal inference seminar. Uh
-[0:00:07] online causal inference seminar. Uh today we are excited to welcome a
-[0:00:09] today we are excited to welcome a Professor Francesco Locatello from
-[0:00:12] Professor Francesco Locatello from Institute of Science and Technology
-[0:00:14] Institute of Science and Technology Austria to present powering causality
-[0:00:18] Austria to present powering causality with machine learning discovery
-[0:00:20] with machine learning discovery representations and inference. And as
-[0:00:23] representations and inference. And as our discussant we will have
-[0:00:25] our discussant we will have uh Jason Hartford from University of
-[0:00:28] uh Jason Hartford from University of Manchester and Valence Lab. Um
-[0:00:31] Manchester and Valence Lab. Um So without further ado, the floor is
-[0:00:32] So without further ado, the floor is yours.
+[0:00:07] today we are excited to welcome a
+[0:00:09] Professor Francesco Locatello from
+[0:00:12] Institute of Science and Technology
+[0:00:14] Austria to present powering causality
+[0:00:18] with machine learning discovery
+[0:00:20] representations and inference. And as
+[0:00:23] our discussant we will have
+[0:00:25] uh Jason Hartford from University of
+[0:00:28] Manchester and Valence Lab. Um
+[0:00:31] So without further ado, the floor is
 [0:00:34] yours. Thank you so much. So thanks very much
-[0:00:35] Thank you so much. So thanks very much for the kind invitation.
-[0:00:37] for the kind invitation. Um
+[0:00:35] for the kind invitation.
 [0:00:39] Um let me quickly share the screen.
-[0:00:41] let me quickly share the screen. Oh, sorry. I forgot to mention that
-[0:00:44] Oh, sorry. I forgot to mention that today's Q&amp;A is handled by Sarah. So
-[0:00:46] today's Q&amp;A is handled by Sarah. So Sarah, please Sorry.
-[0:00:48] Sarah, please Sorry. Please quickly introduce how it works.
-[0:00:50] Please quickly introduce how it works. Thanks.
+[0:00:41] Oh, sorry. I forgot to mention that
+[0:00:44] today's Q&A is handled by Sarah. So
+[0:00:46] Sarah, please Sorry.
+[0:00:48] Please quickly introduce how it works.
 [0:00:51] Thanks. Oh, fair enough. Um I think people
-[0:00:53] Oh, fair enough. Um I think people already know, but just in case, please
-[0:00:55] already know, but just in case, please use question the Q&amp;A
-[0:00:57] use question the Q&amp;A function of Zoom to ask questions. And
-[0:01:00] function of Zoom to ask questions. And then we'll check your questions and if
-[0:01:02] then we'll check your questions and if they are quick and easy to clarify,
-[0:01:04] they are quick and easy to clarify, maybe we'll interrupt Francesco in the
-[0:01:06] maybe we'll interrupt Francesco in the middle. I will read them out. But most
-[0:01:08] middle. I will read them out. But most likely we'll kind of for longer
-[0:01:10] likely we'll kind of for longer questions wait until the end and then I
-[0:01:12] questions wait until the end and then I will ask Francesco, he'll answer, and if
-[0:01:14] will ask Francesco, he'll answer, and if there is some further clarifications,
-[0:01:16] there is some further clarifications, you can continue discussing in the Q&amp;A.
-[0:01:20] you can continue discussing in the Q&amp;A. So now Now without further ado, the
-[0:01:23] So now Now without further ado, the floor is yours, Francesco.
-[0:01:24] floor is yours, Francesco. Thank you so much. Thank you again for
-[0:01:26] Thank you so much. Thank you again for the invitation, yeah.
-[0:01:27] the invitation, yeah. Um yeah, very excited uh
-[0:01:30] Um yeah, very excited uh to uh
+[0:00:53] already know, but just in case, please
+[0:00:55] use question the Q&A
+[0:00:57] function of Zoom to ask questions. And
+[0:01:00] then we'll check your questions and if
+[0:01:02] they are quick and easy to clarify,
+[0:01:04] maybe we'll interrupt Francesco in the
+[0:01:06] middle. I will read them out. But most
+[0:01:08] likely we'll kind of for longer
+[0:01:10] questions wait until the end and then I
+[0:01:12] will ask Francesco, he'll answer, and if
+[0:01:14] there is some further clarifications,
+[0:01:16] you can continue discussing in the Q&A.
+[0:01:20] So now Now without further ado, the
+[0:01:23] floor is yours, Francesco.
+[0:01:24] Thank you so much. Thank you again for
+[0:01:26] the invitation, yeah.
+[0:01:27] Um yeah, very excited uh
 [0:01:31] to uh talk here.
-[0:01:33] talk here. Uh I've been following the the seminar
-[0:01:35] Uh I've been following the the seminar for a while and uh have been a
-[0:01:37] for a while and uh have been a discussant and it's very very nice
-[0:01:40] discussant and it's very very nice uh to receive this invitation. Um
-[0:01:43] uh to receive this invitation. Um yeah, so today I want to talk about
-[0:01:45] yeah, so today I want to talk about um
+[0:01:33] Uh I've been following the the seminar
+[0:01:35] for a while and uh have been a
+[0:01:37] discussant and it's very very nice
+[0:01:40] uh to receive this invitation. Um
+[0:01:43] yeah, so today I want to talk about
 [0:01:46] um some of the works that we have done in
-[0:01:49] some of the works that we have done in the past like three-ish years, uh but
-[0:01:52] the past like three-ish years, uh but mostly the past year, um on on powering
-[0:01:56] mostly the past year, um on on powering causality with machine learning
-[0:01:58] causality with machine learning and uh like really like looking at the
-[0:02:01] and uh like really like looking at the whole stack of of of causal areas like
-[0:02:04] whole stack of of of causal areas like starting from discoveries like
-[0:02:06] starting from discoveries like representations and and inference.
-[0:02:09] representations and and inference. So I want to start with a little
-[0:02:11] So I want to start with a little reflection on causal representation
-[0:02:13] reflection on causal representation which was also in a way how I personally
-[0:02:15] which was also in a way how I personally like approach causality.
-[0:02:17] like approach causality. And I want to start with the
-[0:02:19] And I want to start with the this this quote from the Towards Causal
-[0:02:22] this this quote from the Towards Causal Representation Learning like review
-[0:02:24] Representation Learning like review paper.
+[0:01:49] the past like three-ish years, uh but
+[0:01:52] mostly the past year, um on on powering
+[0:01:56] causality with machine learning
+[0:01:58] and uh like really like looking at the
+[0:02:01] whole stack of of of causal areas like
+[0:02:04] starting from discoveries like
+[0:02:06] representations and and inference.
+[0:02:09] So I want to start with a little
+[0:02:11] reflection on causal representation
+[0:02:13] which was also in a way how I personally
+[0:02:15] like approach causality.
+[0:02:17] And I want to start with the
+[0:02:19] this this quote from the Towards Causal
+[0:02:22] Representation Learning like review
 [0:02:25] paper. And
 [0:02:27] And this this comes from the abstract
-[0:02:29] this this comes from the abstract and and we said in this article we
-[0:02:31] and and we said in this article we review blah blah blah thereby assessing
-[0:02:34] review blah blah blah thereby assessing how causality can contribute to modern
-[0:02:36] how causality can contribute to modern machine learning research and this also
-[0:02:39] machine learning research and this also applies in the opposite direction.
-[0:02:42] applies in the opposite direction. We wrote this in 2021 and
-[0:02:46] We wrote this in 2021 and I think it's initially at least this
-[0:02:48] I think it's initially at least this direction of causality into machine
-[0:02:50] direction of causality into machine learning has seen like significantly
-[0:02:52] learning has seen like significantly more work within the causal
-[0:02:54] more work within the causal representation learning community. We
-[0:02:55] representation learning community. We didn't have
-[0:02:57] didn't have back then that many identifiability
-[0:02:59] back then that many identifiability results and people were
-[0:03:03] results and people were like generally trying like some
-[0:03:06] like generally trying like some causality inspired ideas and trying to
-[0:03:08] causality inspired ideas and trying to import them into machine learning and
-[0:03:10] import them into machine learning and and and like see what happens. Typically
-[0:03:13] and and like see what happens. Typically this resulted in in in like crazy
-[0:03:16] this resulted in in in like crazy architectures that didn't scale very
-[0:03:18] architectures that didn't scale very well and so
-[0:03:20] well and so um
+[0:02:29] and and we said in this article we
+[0:02:31] review blah blah blah thereby assessing
+[0:02:34] how causality can contribute to modern
+[0:02:36] machine learning research and this also
+[0:02:39] applies in the opposite direction.
+[0:02:42] We wrote this in 2021 and
+[0:02:46] I think it's initially at least this
+[0:02:48] direction of causality into machine
+[0:02:50] learning has seen like significantly
+[0:02:52] more work within the causal
+[0:02:54] representation learning community. We
+[0:02:55] didn't have
+[0:02:57] back then that many identifiability
+[0:02:59] results and people were
+[0:03:03] like generally trying like some
+[0:03:06] causality inspired ideas and trying to
+[0:03:08] import them into machine learning and
+[0:03:10] and and like see what happens. Typically
+[0:03:13] this resulted in in in like crazy
+[0:03:16] architectures that didn't scale very
+[0:03:18] well and so
 [0:03:22] um yeah it's perhaps not surprising that
 [0:03:29] that this direction hasn't really kept up with progress in in machine learning.
-[0:03:32] up with progress in in machine learning. um
 [0:03:33] um The other direction
-[0:03:36] The other direction how machine learning can can support
-[0:03:38] how machine learning can can support causality I would argue is comparatively
-[0:03:40] causality I would argue is comparatively understudied especially within the CRL
-[0:03:42] understudied especially within the CRL community. Of course there's a lot of
-[0:03:44] community. Of course there's a lot of people who think about both causality
-[0:03:45] people who think about both causality and machine learning but the causal
-[0:03:47] and machine learning but the causal representation learning like line of
-[0:03:50] representation learning like line of works like
-[0:03:52] works like um not really focused
-[0:03:54] um not really focused on
+[0:03:36] how machine learning can can support
+[0:03:38] causality I would argue is comparatively
+[0:03:40] understudied especially within the CRL
+[0:03:42] community. Of course there's a lot of
+[0:03:44] people who think about both causality
+[0:03:45] and machine learning but the causal
+[0:03:47] representation learning like line of
+[0:03:50] works like
+[0:03:52] um not really focused
 [0:03:55] on um like open problems in in causality.
-[0:03:59] um like open problems in in causality. Um and
 [0:04:02] Um and in the past couple of three two two
-[0:04:04] in the past couple of three two two three years I would say the biggest
-[0:04:06] three years I would say the biggest focus for causal representation learning
-[0:04:07] focus for causal representation learning has been on proving identifiability
-[0:04:10] has been on proving identifiability in in different settings.
-[0:04:14] in in different settings. Um in this talk I really want to
-[0:04:16] Um in this talk I really want to highlight
+[0:04:04] three years I would say the biggest
+[0:04:06] focus for causal representation learning
+[0:04:07] has been on proving identifiability
+[0:04:10] in in different settings.
+[0:04:14] Um in this talk I really want to
 [0:04:18] highlight three opportunities for machine learning
-[0:04:19] three opportunities for machine learning causality but but really like
-[0:04:23] causality but but really like covering I guess what to me are the big
-[0:04:25] covering I guess what to me are the big areas of causality research starting
-[0:04:28] areas of causality research starting from causal reasoning which is actually
-[0:04:29] from causal reasoning which is actually how I'm going to end the talk
-[0:04:31] how I'm going to end the talk like quantifying the effect of a known
-[0:04:33] like quantifying the effect of a known cause to an outcome knowing the graph.
-[0:04:36] cause to an outcome knowing the graph. I will start with causal discovery
-[0:04:39] I will start with causal discovery and sprinkle in causal representations
-[0:04:41] and sprinkle in causal representations like throughout.
-[0:04:43] like throughout. So
+[0:04:19] causality but but really like
+[0:04:23] covering I guess what to me are the big
+[0:04:25] areas of causality research starting
+[0:04:28] from causal reasoning which is actually
+[0:04:29] how I'm going to end the talk
+[0:04:31] like quantifying the effect of a known
+[0:04:33] cause to an outcome knowing the graph.
+[0:04:36] I will start with causal discovery
+[0:04:39] and sprinkle in causal representations
+[0:04:41] like throughout.
 [0:04:44] So if you want you can really see these
-[0:04:46] if you want you can really see these three areas as somewhat complementary
-[0:04:49] three areas as somewhat complementary like if you know the graph you can do
-[0:04:51] like if you know the graph you can do causal reasoning if you don't know the
-[0:04:52] causal reasoning if you don't know the graph but you know the variables you can
-[0:04:54] graph but you know the variables you can do causal discovery. If you don't know
-[0:04:56] do causal discovery. If you don't know the variables that's where causal
-[0:04:57] the variables that's where causal representation learning come in. And I
-[0:04:58] representation learning come in. And I think this is a nice in a way like
-[0:05:01] think this is a nice in a way like reference
+[0:04:46] three areas as somewhat complementary
+[0:04:49] like if you know the graph you can do
+[0:04:51] causal reasoning if you don't know the
+[0:04:52] graph but you know the variables you can
+[0:04:54] do causal discovery. If you don't know
+[0:04:56] the variables that's where causal
+[0:04:57] representation learning come in. And I
+[0:04:58] think this is a nice in a way like
 [0:05:03] reference for for what is to come.
-[0:05:06] for for what is to come. Okay. So
 [0:05:08] Okay. So the broad
 [0:05:09] the broad scope of this talk will be on on
-[0:05:11] scope of this talk will be on on powering causality with machine learning
-[0:05:14] powering causality with machine learning and
+[0:05:11] powering causality with machine learning
 [0:05:15] and question that I would like to explore is
-[0:05:17] question that I would like to explore is is at least that I've also been
-[0:05:18] is at least that I've also been exploring in in my research in the past
-[0:05:20] exploring in in my research in the past couple of years. How can learning
-[0:05:22] couple of years. How can learning algorithms discover causal structure and
-[0:05:24] algorithms discover causal structure and support causal reasoning?
-[0:05:25] support causal reasoning? Um I will start with causal discovery
-[0:05:28] Um I will start with causal discovery using score matching. This
-[0:05:31] using score matching. This doesn't really have much to do with
-[0:05:32] doesn't really have much to do with causal representation learning in the
-[0:05:33] causal representation learning in the way we intend it today but I still think
-[0:05:35] way we intend it today but I still think it's it's very interesting.
-[0:05:38] it's it's very interesting. Then I will move to causal
-[0:05:39] Then I will move to causal representation learning and in
-[0:05:41] representation learning and in particular the recent work that we've
-[0:05:43] particular the recent work that we've been doing in my group and conclude
-[0:05:47] been doing in my group and conclude um
+[0:05:17] is at least that I've also been
+[0:05:18] exploring in in my research in the past
+[0:05:20] couple of years. How can learning
+[0:05:22] algorithms discover causal structure and
+[0:05:24] support causal reasoning?
+[0:05:25] Um I will start with causal discovery
+[0:05:28] using score matching. This
+[0:05:31] doesn't really have much to do with
+[0:05:32] causal representation learning in the
+[0:05:33] way we intend it today but I still think
+[0:05:35] it's it's very interesting.
+[0:05:38] Then I will move to causal
+[0:05:39] representation learning and in
+[0:05:41] particular the recent work that we've
+[0:05:43] been doing in my group and conclude
 [0:05:48] um prediction power causal inference.
-[0:05:51] prediction power causal inference. Okay. So,
 [0:05:53] Okay. So, um in in causal discovery,
-[0:05:56] um in in causal discovery, uh the key idea that I've been exploring
-[0:06:00] uh the key idea that I've been exploring for the application of of machine
-[0:06:03] for the application of of machine learning in in into this this causal
-[0:06:05] learning in in into this this causal task
+[0:05:56] uh the key idea that I've been exploring
+[0:06:00] for the application of of machine
+[0:06:03] learning in in into this this causal
 [0:06:06] task um was to decouple
-[0:06:09] um was to decouple uh the problem of fitting some
-[0:06:11] uh the problem of fitting some statistical quantity um and then
-[0:06:14] statistical quantity um and then extracting causal knowledge from it. So,
-[0:06:16] extracting causal knowledge from it. So, in some sense, you can still think of it
-[0:06:18] in some sense, you can still think of it as a sort of like causal representation.
-[0:06:21] as a sort of like causal representation. Uh of course, in in a in a somewhat
-[0:06:23] Uh of course, in in a in a somewhat contrived way. Um the idea here is that
-[0:06:26] contrived way. Um the idea here is that uh you know, like we we have data and we
-[0:06:28] uh you know, like we we have data and we want to learn a model
-[0:06:30] want to learn a model uh which will learn a representation
-[0:06:31] uh which will learn a representation from the data. Um and uh we want to be
-[0:06:35] from the data. Um and uh we want to be able to extract the causal structure
-[0:06:38] able to extract the causal structure from from this model. And in particular,
-[0:06:41] from from this model. And in particular, um the the class of of models that I've
-[0:06:44] um the the class of of models that I've looked at
+[0:06:09] uh the problem of fitting some
+[0:06:11] statistical quantity um and then
+[0:06:14] extracting causal knowledge from it. So,
+[0:06:16] in some sense, you can still think of it
+[0:06:18] as a sort of like causal representation.
+[0:06:21] Uh of course, in in a in a somewhat
+[0:06:23] contrived way. Um the idea here is that
+[0:06:26] uh you know, like we we have data and we
+[0:06:28] want to learn a model
+[0:06:30] uh which will learn a representation
+[0:06:31] from the data. Um and uh we want to be
+[0:06:35] able to extract the causal structure
+[0:06:38] from from this model. And in particular,
+[0:06:41] um the the class of of models that I've
 [0:06:45] looked at um is uh models estimates the score of
-[0:06:49] um is uh models estimates the score of the data. So, the gradient of the log
-[0:06:50] the data. So, the gradient of the log likelihood, which is also a a very
-[0:06:53] likelihood, which is also a a very popular
+[0:06:49] the data. So, the gradient of the log
+[0:06:50] likelihood, which is also a a very
 [0:06:54] popular um
 [0:06:55] um term in in model generative modeling.
-[0:07:00] term in in model generative modeling. So, you can see here a little depiction,
-[0:07:02] So, you can see here a little depiction, like you would have two Gaussians uh and
-[0:07:04] like you would have two Gaussians uh and the score are the these arrows, like the
-[0:07:07] the score are the these arrows, like the gradients of the
-[0:07:09] gradients of the uh likelihood.
-[0:07:12] uh likelihood. And now, of course, like um we we we
-[0:07:15] And now, of course, like um we we we know that in general, causal discovery
-[0:07:17] know that in general, causal discovery um requires special care in terms of
-[0:07:19] um requires special care in terms of assumptions. And um I mostly focused
-[0:07:24] assumptions. And um I mostly focused in the setting where we can make
-[0:07:25] in the setting where we can make assumptions on the function class.
-[0:07:28] assumptions on the function class. In particular, in in this presentation,
-[0:07:30] In particular, in in this presentation, I will focus on
-[0:07:32] I will focus on uh nonlinear mechanisms with additive
-[0:07:34] uh nonlinear mechanisms with additive Gaussian noise, but but uh these
-[0:07:36] Gaussian noise, but but uh these assumptions can be relaxed.
-[0:07:39] assumptions can be relaxed. Okay.
+[0:07:00] So, you can see here a little depiction,
+[0:07:02] like you would have two Gaussians uh and
+[0:07:04] the score are the these arrows, like the
+[0:07:07] gradients of the
+[0:07:09] uh likelihood.
+[0:07:12] And now, of course, like um we we we
+[0:07:15] know that in general, causal discovery
+[0:07:17] um requires special care in terms of
+[0:07:19] assumptions. And um I mostly focused
+[0:07:24] in the setting where we can make
+[0:07:25] assumptions on the function class.
+[0:07:28] In particular, in in this presentation,
+[0:07:30] I will focus on
+[0:07:32] uh nonlinear mechanisms with additive
+[0:07:34] Gaussian noise, but but uh these
+[0:07:36] assumptions can be relaxed.
 [0:07:40] Okay. So, the key intuition for uh this
-[0:07:43] So, the key intuition for uh this methodology is that we want to exploit
-[0:07:46] methodology is that we want to exploit the structure in the score to deduce the
-[0:07:51] the structure in the score to deduce the causal structure.
-[0:07:53] causal structure. So the starting point is the score which
-[0:07:56] So the starting point is the score which we estimate without caring about
-[0:07:58] we estimate without caring about causality whatsoever. This is purely a
-[0:08:00] causality whatsoever. This is purely a statistical problem. We will obtain an
-[0:08:03] statistical problem. We will obtain an estimator of
-[0:08:05] estimator of the score and this approximate
-[0:08:07] the score and this approximate the log likelihood and here I'm writing
-[0:08:09] the log likelihood and here I'm writing it for a individual variable J.
-[0:08:12] it for a individual variable J. Now I can after I train the model,
-[0:08:16] Now I can after I train the model, I can bring in my causal assumptions and
-[0:08:20] I can bring in my causal assumptions and in as I said earlier in this talk I'm
-[0:08:23] in as I said earlier in this talk I'm I'm focusing on non-linear mechanisms F
-[0:08:27] I'm focusing on non-linear mechanisms F with additive Gaussian noise.
-[0:08:29] with additive Gaussian noise. Gaussianity is not actually necessary.
-[0:08:31] Gaussianity is not actually necessary. We we had done some follow-up works
-[0:08:34] We we had done some follow-up works um
+[0:07:43] methodology is that we want to exploit
+[0:07:46] the structure in the score to deduce the
+[0:07:51] causal structure.
+[0:07:53] So the starting point is the score which
+[0:07:56] we estimate without caring about
+[0:07:58] causality whatsoever. This is purely a
+[0:08:00] statistical problem. We will obtain an
+[0:08:03] estimator of
+[0:08:05] the score and this approximate
+[0:08:07] the log likelihood and here I'm writing
+[0:08:09] it for a individual variable J.
+[0:08:12] Now I can after I train the model,
+[0:08:16] I can bring in my causal assumptions and
+[0:08:20] in as I said earlier in this talk I'm
+[0:08:23] I'm focusing on non-linear mechanisms F
+[0:08:27] with additive Gaussian noise.
+[0:08:29] Gaussianity is not actually necessary.
+[0:08:31] We we had done some follow-up works
 [0:08:36] um like relaxing this assumption and the
-[0:08:38] like relaxing this assumption and the method is generally very robust to
-[0:08:39] method is generally very robust to assumption violations, but in this talk
-[0:08:42] assumption violations, but in this talk I will focus on the Gaussian exposition
-[0:08:44] I will focus on the Gaussian exposition because it's the cleanest and the
-[0:08:46] because it's the cleanest and the easiest to to follow.
-[0:08:48] easiest to to follow. um
+[0:08:38] method is generally very robust to
+[0:08:39] assumption violations, but in this talk
+[0:08:42] I will focus on the Gaussian exposition
+[0:08:44] because it's the cleanest and the
+[0:08:46] easiest to to follow.
 [0:08:49] um Okay. Now under this assumption,
-[0:08:52] Okay. Now under this assumption, I can actually compute
-[0:08:55] I can actually compute like in a parametric form what what my
-[0:08:57] like in a parametric form what what my likelihood would be like.
-[0:08:59] likelihood would be like. And now
+[0:08:52] I can actually compute
+[0:08:55] like in a parametric form what what my
+[0:08:57] likelihood would be like.
 [0:09:01] And now I also know how to take derivatives, so
-[0:09:03] I also know how to take derivatives, so I can actually compute what I expect the
-[0:09:06] I can actually compute what I expect the score of a certain variable XJ um to
-[0:09:10] score of a certain variable XJ um to look like.
-[0:09:12] look like. And and this is this is what we get
-[0:09:14] And and this is this is what we get which is really simply the derivative of
-[0:09:16] which is really simply the derivative of the log likelihood with respect to an
-[0:09:18] the log likelihood with respect to an individual variable XJ.
-[0:09:21] individual variable XJ. Now the interesting thing about about
-[0:09:23] Now the interesting thing about about this equation is that
-[0:09:25] this equation is that we can really like like view it as as
-[0:09:28] we can really like like view it as as these two separate terms. We have this
-[0:09:30] these two separate terms. We have this first term which directly depends on XJ
-[0:09:35] first term which directly depends on XJ and is linear in XJ. XJ is the variables
-[0:09:38] and is linear in XJ. XJ is the variables that we are considering.
-[0:09:40] that we are considering. Um
+[0:09:03] I can actually compute what I expect the
+[0:09:06] score of a certain variable XJ um to
+[0:09:10] look like.
+[0:09:12] And and this is this is what we get
+[0:09:14] which is really simply the derivative of
+[0:09:16] the log likelihood with respect to an
+[0:09:18] individual variable XJ.
+[0:09:21] Now the interesting thing about about
+[0:09:23] this equation is that
+[0:09:25] we can really like like view it as as
+[0:09:28] these two separate terms. We have this
+[0:09:30] first term which directly depends on XJ
+[0:09:35] and is linear in XJ. XJ is the variables
+[0:09:38] that we are considering.
 [0:09:41] Um then we have a
-[0:09:43] then we have a an additional term
-[0:09:45] an additional term which
+[0:09:43] an additional term
 [0:09:47] which contains a derivative
-[0:09:49] contains a derivative of the mechanism going into
-[0:09:53] of the mechanism going into um
+[0:09:49] of the mechanism going into
 [0:09:55] um XJ and it starts with the sum over the
-[0:09:57] XJ and it starts with the sum over the children of of XJ. So now
-[0:10:02] children of of XJ. So now actually the mechanism is going from XJ
-[0:10:03] actually the mechanism is going from XJ to to its children. Sorry.
-[0:10:06] to to its children. Sorry. Um
+[0:09:57] children of of XJ. So now
+[0:10:02] actually the mechanism is going from XJ
+[0:10:03] to to its children. Sorry.
 [0:10:07] Um the important thing to notice is yeah it
-[0:10:09] the important thing to notice is yeah it starts with the sum over the children of
-[0:10:11] starts with the sum over the children of XJ. So if a node has no children we
-[0:10:14] XJ. So if a node has no children we would not have this.
-[0:10:16] would not have this. Um
+[0:10:09] starts with the sum over the children of
+[0:10:11] XJ. So if a node has no children we
+[0:10:14] would not have this.
 [0:10:17] Um and further inside the sum we have this
-[0:10:19] and further inside the sum we have this derivative of the mechanism with respect
-[0:10:21] derivative of the mechanism with respect to XJ. So this
-[0:10:23] to XJ. So this overall term would be would be
-[0:10:25] overall term would be would be non-linear.
-[0:10:26] non-linear. Um
+[0:10:19] derivative of the mechanism with respect
+[0:10:21] to XJ. So this
+[0:10:23] overall term would be would be
+[0:10:25] non-linear.
 [0:10:27] Um so
 [0:10:28] so this gives us a way to tell whether
-[0:10:33] this gives us a way to tell whether a node just looking at the score would
-[0:10:35] a node just looking at the score would have
+[0:10:33] a node just looking at the score would
 [0:10:36] have children or or not.
-[0:10:39] children or or not. And this we can like test in many ways.
-[0:10:42] And this we can like test in many ways. What we explored in in the original
-[0:10:44] What we explored in in the original paper was simply
-[0:10:46] paper was simply taking another derivative which then for
-[0:10:49] taking another derivative which then for a leaf node would be constant and so the
-[0:10:52] a leaf node would be constant and so the variance over our
-[0:10:54] variance over our observed data should be zero.
-[0:10:58] observed data should be zero. Um
+[0:10:39] And this we can like test in many ways.
+[0:10:42] What we explored in in the original
+[0:10:44] paper was simply
+[0:10:46] taking another derivative which then for
+[0:10:49] a leaf node would be constant and so the
+[0:10:52] variance over our
+[0:10:54] observed data should be zero.
 [0:10:59] Um so
 [0:11:00] so um
 [0:11:01] um how does this give us the causal
-[0:11:04] how does this give us the causal structure? Well
-[0:11:06] structure? Well um the idea is that we're going to use
-[0:11:09] um the idea is that we're going to use this
+[0:11:04] structure? Well
+[0:11:06] um the idea is that we're going to use
 [0:11:10] this test which finds score leaves from from
-[0:11:13] test which finds score leaves from from the score
 [0:11:15] the score to iteratively
-[0:11:17] to iteratively find leaves and then removing them from
-[0:11:21] find leaves and then removing them from the from the graph. So let's say this is
-[0:11:23] the from the graph. So let's say this is the graph that we would like to
-[0:11:24] the graph that we would like to discover. We have observation from X1 to
-[0:11:27] discover. We have observation from X1 to X4. Of course we don't know the edges.
-[0:11:30] X4. Of course we don't know the edges. What we will do is to compute the our
-[0:11:35] What we will do is to compute the our like second derivative of the log
-[0:11:36] like second derivative of the log likelihood. We check the variance and
-[0:11:39] likelihood. We check the variance and then
+[0:11:17] find leaves and then removing them from
+[0:11:21] the from the graph. So let's say this is
+[0:11:23] the graph that we would like to
+[0:11:24] discover. We have observation from X1 to
+[0:11:27] X4. Of course we don't know the edges.
+[0:11:30] What we will do is to compute the our
+[0:11:35] like second derivative of the log
+[0:11:36] likelihood. We check the variance and
 [0:11:40] then uh
 [0:11:41] uh pick as a leaf the node that has like
-[0:11:43] pick as a leaf the node that has like the value closest to zero.
-[0:11:46] the value closest to zero. Now, um a question that we may be
-[0:11:48] Now, um a question that we may be interested in in in looking at
-[0:11:51] interested in in in looking at is well, when will we pick the right
-[0:11:53] is well, when will we pick the right node?
+[0:11:43] the value closest to zero.
+[0:11:46] Now, um a question that we may be
+[0:11:48] interested in in in looking at
+[0:11:51] is well, when will we pick the right
 [0:11:54] node? Um of course, this depends on how good
-[0:11:57] Um of course, this depends on how good our approximation of the score is.
-[0:11:59] our approximation of the score is. Um the nice thing about this method is
-[0:12:01] Um the nice thing about this method is that we can also give like very nice and
-[0:12:05] that we can also give like very nice and and somewhat intuitive uh sample
-[0:12:07] and somewhat intuitive uh sample complexity results.
-[0:12:09] complexity results. Like the important thing is that you
-[0:12:11] Like the important thing is that you know, we don't confuse the statistical
-[0:12:13] know, we don't confuse the statistical error in our score estimation um with um
-[0:12:18] error in our score estimation um with um uh
+[0:11:57] our approximation of the score is.
+[0:11:59] Um the nice thing about this method is
+[0:12:01] that we can also give like very nice and
+[0:12:05] and somewhat intuitive uh sample
+[0:12:07] complexity results.
+[0:12:09] Like the important thing is that you
+[0:12:11] know, we don't confuse the statistical
+[0:12:13] error in our score estimation um with um
 [0:12:19] uh the the variance
-[0:12:22] the the variance that comes from from uh like
-[0:12:26] that comes from from uh like that that uh node that is not a leaf
-[0:12:28] that that uh node that is not a leaf would would have. So, what we prove is
-[0:12:30] would would have. So, what we prove is that in this class of model, non-leaf
-[0:12:33] that in this class of model, non-leaf nodes have the variance which is of the
-[0:12:36] nodes have the variance which is of the of the derivative of of the score which
-[0:12:38] of the derivative of of the score which is sufficiently
-[0:12:39] is sufficiently uh bounded away from zero.
-[0:12:43] uh bounded away from zero. And and this constant CM will also tell
-[0:12:46] And and this constant CM will also tell us essentially how much error we can
-[0:12:48] us essentially how much error we can tolerate in our score estimation.
-[0:12:51] tolerate in our score estimation. This constant is also like somewhat
-[0:12:53] This constant is also like somewhat intuitive.
-[0:12:55] intuitive. It's defined as as the largest value
-[0:12:57] It's defined as as the largest value satisfying this this inequality
-[0:13:00] satisfying this this inequality uh which is relating the curvature of
-[0:13:01] uh which is relating the curvature of the mechanism with the uh variance on
-[0:13:05] the mechanism with the uh variance on the child node. You can think of it as a
-[0:13:07] the child node. You can think of it as a sort of like signal-to-noise ratio.
-[0:13:09] sort of like signal-to-noise ratio. Um this is intuitive because if the
-[0:13:11] Um this is intuitive because if the child node has a ton of variance, then
-[0:13:14] child node has a ton of variance, then uh
+[0:12:22] that comes from from uh like
+[0:12:26] that that uh node that is not a leaf
+[0:12:28] would would have. So, what we prove is
+[0:12:30] that in this class of model, non-leaf
+[0:12:33] nodes have the variance which is of the
+[0:12:36] of the derivative of of the score which
+[0:12:38] is sufficiently
+[0:12:39] uh bounded away from zero.
+[0:12:43] And and this constant CM will also tell
+[0:12:46] us essentially how much error we can
+[0:12:48] tolerate in our score estimation.
+[0:12:51] This constant is also like somewhat
+[0:12:53] intuitive.
+[0:12:55] It's defined as as the largest value
+[0:12:57] satisfying this this inequality
+[0:13:00] uh which is relating the curvature of
+[0:13:01] the mechanism with the uh variance on
+[0:13:05] the child node. You can think of it as a
+[0:13:07] sort of like signal-to-noise ratio.
+[0:13:09] Um this is intuitive because if the
+[0:13:11] child node has a ton of variance, then
 [0:13:15] uh uh in particular, like coming from from
-[0:13:17] uh in particular, like coming from from its noise,
-[0:13:19] its noise, um
+[0:13:17] its noise,
 [0:13:19] um then we would expect the statistical
-[0:13:22] then we would expect the statistical footprint from the parent to be hard to
-[0:13:24] footprint from the parent to be hard to detect, which will then ultimately
-[0:13:27] detect, which will then ultimately require more samples.
-[0:13:29] require more samples. Um also, like we expect the curvature of
-[0:13:31] Um also, like we expect the curvature of the mechanism to play a critical role
-[0:13:33] the mechanism to play a critical role because we are assuming additive
-[0:13:34] because we are assuming additive Gaussian noise. So, we know that if the
-[0:13:37] Gaussian noise. So, we know that if the mechanism was linear, even with infinite
-[0:13:39] mechanism was linear, even with infinite samples, we would not be able to uh
-[0:13:42] samples, we would not be able to uh like detect the cause from effect.
+[0:13:22] footprint from the parent to be hard to
+[0:13:24] detect, which will then ultimately
+[0:13:27] require more samples.
+[0:13:29] Um also, like we expect the curvature of
+[0:13:31] the mechanism to play a critical role
+[0:13:33] because we are assuming additive
+[0:13:34] Gaussian noise. So, we know that if the
+[0:13:37] mechanism was linear, even with infinite
+[0:13:39] samples, we would not be able to uh
+[0:13:42] like detect the cause from effect.
 [0:13:49] And so, with this we can give uh
 [0:13:50] uh like an error bound
-[0:13:52] like an error bound which depends on on this crucial
-[0:13:56] which depends on on this crucial constant CM, which we call like
-[0:13:57] constant CM, which we call like identifiability margin,
-[0:14:00] identifiability margin, um and
+[0:13:52] which depends on on this crucial
+[0:13:56] constant CM, which we call like
+[0:13:57] identifiability margin,
 [0:14:01] um and converges linearly in the in the number
-[0:14:03] converges linearly in the in the number of samples.
-[0:14:04] of samples. Okay. So, we can actually, you know,
-[0:14:08] Okay. So, we can actually, you know, with a decent probability identify
-[0:14:11] with a decent probability identify leaves.
+[0:14:03] of samples.
+[0:14:04] Okay. So, we can actually, you know,
+[0:14:08] with a decent probability identify
 [0:14:12] leaves. Um
 [0:14:13] Um and now, after we find the leaf, um it's
-[0:14:17] and now, after we find the leaf, um it's very easy to just
-[0:14:19] very easy to just uh
+[0:14:17] very easy to just
 [0:14:19] uh remove it from from the graph.
-[0:14:22] remove it from from the graph. Uh leaves have no causal effects on
-[0:14:24] Uh leaves have no causal effects on other nodes. Um so, we can just drop
-[0:14:27] other nodes. Um so, we can just drop them and then
-[0:14:29] them and then continue and and repeat our process.
-[0:14:33] continue and and repeat our process. So, now like we can find some other leaf
-[0:14:36] So, now like we can find some other leaf nodes. Let's say we discover X4 as a
-[0:14:39] nodes. Let's say we discover X4 as a leaf.
+[0:14:22] Uh leaves have no causal effects on
+[0:14:24] other nodes. Um so, we can just drop
+[0:14:27] them and then
+[0:14:29] continue and and repeat our process.
+[0:14:33] So, now like we can find some other leaf
+[0:14:36] nodes. Let's say we discover X4 as a
 [0:14:40] leaf. And and then continue until
-[0:14:42] And and then continue until um we fix the whole topological ordering
-[0:14:45] um we fix the whole topological ordering of the
+[0:14:42] um we fix the whole topological ordering
 [0:14:46] of the um of the graph.
-[0:14:48] um of the graph. Now, at this point,
-[0:14:50] Now, at this point, uh we don't have yet
-[0:14:53] uh we don't have yet uh the causal direction.
-[0:14:55] uh the causal direction. Um in fact, the graph potentially could
-[0:14:57] Um in fact, the graph potentially could be could be fully connected. Um
-[0:15:00] be could be fully connected. Um and what we do is to start with a fully
-[0:15:02] and what we do is to start with a fully connected graph and then start pruning
-[0:15:04] connected graph and then start pruning edges. Like this you can do in many
-[0:15:06] edges. Like this you can do in many ways. You could do sparse regression, or
-[0:15:08] ways. You could do sparse regression, or you could also, again, uh look at the at
-[0:15:11] you could also, again, uh look at the at the score. Uh because we know that
-[0:15:15] the score. Uh because we know that uh for a leaf node, we will only have
-[0:15:18] uh for a leaf node, we will only have uh this particular term in in the score
-[0:15:20] uh this particular term in in the score decomposition.
-[0:15:22] decomposition. Um so, it it's easy to see that
-[0:15:25] Um so, it it's easy to see that uh
+[0:14:48] Now, at this point,
+[0:14:50] uh we don't have yet
+[0:14:53] uh the causal direction.
+[0:14:55] Um in fact, the graph potentially could
+[0:14:57] be could be fully connected. Um
+[0:15:00] and what we do is to start with a fully
+[0:15:02] connected graph and then start pruning
+[0:15:04] edges. Like this you can do in many
+[0:15:06] ways. You could do sparse regression, or
+[0:15:08] you could also, again, uh look at the at
+[0:15:11] the score. Uh because we know that
+[0:15:15] uh for a leaf node, we will only have
+[0:15:18] uh this particular term in in the score
+[0:15:20] decomposition.
+[0:15:22] Um so, it it's easy to see that
 [0:15:26] uh a leaf node will depend non-linearly on
-[0:15:30] a leaf node will depend non-linearly on its parents
-[0:15:32] its parents in in the score. And so you can also
-[0:15:34] in in the score. And so you can also construct a similar
-[0:15:36] construct a similar test to detect
-[0:15:39] test to detect the
+[0:15:30] its parents
+[0:15:32] in in the score. And so you can also
+[0:15:34] construct a similar
+[0:15:36] test to detect
 [0:15:41] the parents of a of a leaf node. This is
-[0:15:44] parents of a of a leaf node. This is related to older work
-[0:15:46] related to older work on the identification of Markov networks
-[0:15:48] on the identification of Markov networks from the
+[0:15:44] related to older work
+[0:15:46] on the identification of Markov networks
 [0:15:53] from the score function. Like the key innovation here is that we are also able
-[0:15:56] innovation here is that we are also able to find
 [0:15:58] to find leaves because if you can find the
-[0:15:59] leaves because if you can find the skeleton of the graph but then you can
-[0:16:02] skeleton of the graph but then you can also find leaves, then you can orient
-[0:16:03] also find leaves, then you can orient all the edges.
-[0:16:06] all the edges. And and this method works fairly well.
-[0:16:09] And and this method works fairly well. It's compared Here I'm only going to
-[0:16:11] It's compared Here I'm only going to show you the
-[0:16:13] show you the SHT comparison with the
-[0:16:16] SHT comparison with the some standard approaches. We have like
-[0:16:19] some standard approaches. We have like extensive
+[0:15:59] skeleton of the graph but then you can
+[0:16:02] also find leaves, then you can orient
+[0:16:03] all the edges.
+[0:16:06] And and this method works fairly well.
+[0:16:09] It's compared Here I'm only going to
+[0:16:11] show you the
+[0:16:13] SHT comparison with the
+[0:16:16] some standard approaches. We have like
 [0:16:21] extensive comparison, especially when it comes to
-[0:16:22] comparison, especially when it comes to the the robustness to assumption
-[0:16:24] the the robustness to assumption violation in separate papers. But what I
-[0:16:27] violation in separate papers. But what I really want to focus here is is the
-[0:16:29] really want to focus here is is the scalability
-[0:16:30] scalability that is afforded by the use of of
-[0:16:34] that is afforded by the use of of scalable machine learning approaches.
-[0:16:36] scalable machine learning approaches. So we can very easily scale to thousands
-[0:16:39] So we can very easily scale to thousands of nodes
+[0:16:22] the the robustness to assumption
+[0:16:24] violation in separate papers. But what I
+[0:16:27] really want to focus here is is the
+[0:16:29] scalability
+[0:16:30] that is afforded by the use of of
+[0:16:34] scalable machine learning approaches.
+[0:16:36] So we can very easily scale to thousands
 [0:16:41] of nodes on just like a normal laptop. And the
-[0:16:44] on just like a normal laptop. And the overall total complexity of the
-[0:16:46] overall total complexity of the algorithm is only
-[0:16:48] algorithm is only squared in the number of variables.
+[0:16:44] overall total complexity of the
+[0:16:46] algorithm is only
+[0:16:48] squared in the number of variables.
 [0:16:54] So this a bit like the the the first work
-[0:16:57] this a bit like the the the first work that that I've done in in really
-[0:16:59] that that I've done in in really thinking about how how uh
-[0:17:01] thinking about how how uh machine learning can power some some
-[0:17:05] machine learning can power some some causality problems.
-[0:17:07] causality problems. Um and
+[0:16:57] that that I've done in in really
+[0:16:59] thinking about how how uh
+[0:17:01] machine learning can power some some
+[0:17:05] causality problems.
+[0:17:07] Um and
 [0:17:12] I I think this direction is is is interesting because it really enables
-[0:17:14] interesting because it really enables like state-of-the-art or scalable but
-[0:17:17] like state-of-the-art or scalable but also efficient algorithms. And you can
-[0:17:19] also efficient algorithms. And you can look at these quantities both from the
-[0:17:22] look at these quantities both from the computational perspective, but also
-[0:17:24] computational perspective, but also statistically.
+[0:17:14] like state-of-the-art or scalable but
+[0:17:17] also efficient algorithms. And you can
+[0:17:19] look at these quantities both from the
+[0:17:22] computational perspective, but also
+[0:17:24] statistically.
 [0:17:30] Okay. Now, to enter more like the core part of the talk, I want to start
-[0:17:33] part of the talk, I want to start talking about causal representation
-[0:17:36] talking about causal representation learning.
+[0:17:33] talking about causal representation
 [0:17:37] learning. And
 [0:17:38] And causal representation learning can
-[0:17:39] causal representation learning can really be thought as
-[0:17:42] really be thought as in a way the the natural extension to
-[0:17:44] in a way the the natural extension to the work that
-[0:17:47] the work that people were doing
-[0:17:49] people were doing in the late 2010s on disentangled
-[0:17:52] in the late 2010s on disentangled representations.
-[0:17:53] representations. In disentangled representations, we had
-[0:17:56] In disentangled representations, we had access to high-dimensional observations
-[0:17:59] access to high-dimensional observations that we assumed to be generated by some
-[0:18:01] that we assumed to be generated by some independent latent variables.
-[0:18:03] independent latent variables. And the goal was to
-[0:18:06] And the goal was to train a neural network for which the
-[0:18:09] train a neural network for which the representation aligned somewhat with
-[0:18:11] representation aligned somewhat with these latent variables. So, for example,
-[0:18:14] these latent variables. So, for example, if I if I did an intervention in in the
-[0:18:17] if I if I did an intervention in in the real world, for example, I would change
-[0:18:19] real world, for example, I would change the value of one latent variable, which
-[0:18:22] the value of one latent variable, which has a semantic meaning, in this case is
-[0:18:24] has a semantic meaning, in this case is the color of the floor in this simple
-[0:18:25] the color of the floor in this simple image, then I would get a corresponding
-[0:18:28] image, then I would get a corresponding like change a sparse change in my
-[0:18:30] like change a sparse change in my representation.
-[0:18:32] representation. This can be thought as in a way the
-[0:18:33] This can be thought as in a way the precursor of causal representation
-[0:18:35] precursor of causal representation learning because in a way it's it's the
-[0:18:37] learning because in a way it's it's the trivial causal graph where all the
-[0:18:38] trivial causal graph where all the variables are independent and there's no
-[0:18:42] variables are independent and there's no no edges, no latent edges.
-[0:18:45] no edges, no latent edges. Now, the problem
-[0:18:48] Now, the problem was that
+[0:17:39] really be thought as
+[0:17:42] in a way the the natural extension to
+[0:17:44] the work that
+[0:17:47] people were doing
+[0:17:49] in the late 2010s on disentangled
+[0:17:52] representations.
+[0:17:53] In disentangled representations, we had
+[0:17:56] access to high-dimensional observations
+[0:17:59] that we assumed to be generated by some
+[0:18:01] independent latent variables.
+[0:18:03] And the goal was to
+[0:18:06] train a neural network for which the
+[0:18:09] representation aligned somewhat with
+[0:18:11] these latent variables. So, for example,
+[0:18:14] if I if I did an intervention in in the
+[0:18:17] real world, for example, I would change
+[0:18:19] the value of one latent variable, which
+[0:18:22] has a semantic meaning, in this case is
+[0:18:24] the color of the floor in this simple
+[0:18:25] image, then I would get a corresponding
+[0:18:28] like change a sparse change in my
+[0:18:30] representation.
+[0:18:32] This can be thought as in a way the
+[0:18:33] precursor of causal representation
+[0:18:35] learning because in a way it's it's the
+[0:18:37] trivial causal graph where all the
+[0:18:38] variables are independent and there's no
+[0:18:42] no edges, no latent edges.
+[0:18:45] Now, the problem
 [0:18:49] was that even without latent causal connections,
-[0:18:53] even without latent causal connections, disentangled representations are are not
-[0:18:55] disentangled representations are are not identifiable without supervision or some
-[0:18:57] identifiable without supervision or some other inductive biases.
-[0:18:59] other inductive biases. Now, it turns out that this
-[0:19:00] Now, it turns out that this non-identifiability
-[0:19:02] non-identifiability is not that difficult to break, luckily.
-[0:19:06] is not that difficult to break, luckily. And the first idea that at least like I
-[0:19:10] And the first idea that at least like I I personally explored,
-[0:19:13] I personally explored, um,
+[0:18:53] disentangled representations are are not
+[0:18:55] identifiable without supervision or some
+[0:18:57] other inductive biases.
+[0:18:59] Now, it turns out that this
+[0:19:00] non-identifiability
+[0:19:02] is not that difficult to break, luckily.
+[0:19:06] And the first idea that at least like I
+[0:19:10] I personally explored,
 [0:19:14] um, it was the was having access to
-[0:19:18] it was the was having access to multiple observations at the same time,
-[0:19:20] multiple observations at the same time, which are now non-IID.
-[0:19:23] which are now non-IID. And while the two observations,
-[0:19:26] And while the two observations, may be quite different if we look at
-[0:19:29] may be quite different if we look at them from the pixel perspective, um, if
-[0:19:32] them from the pixel perspective, um, if we have an appropriate representation,
-[0:19:34] we have an appropriate representation, like their difference will be sparse.
-[0:19:36] like their difference will be sparse. And this was motivated by
-[0:19:39] And this was motivated by at least like the intuition that that
-[0:19:41] at least like the intuition that that such data would not be too hard to
-[0:19:43] such data would not be too hard to collect. For example, like if you have
-[0:19:46] collect. For example, like if you have like video of a robotic platform, then,
-[0:19:50] like video of a robotic platform, then, you know, like if the frames are
-[0:19:53] you know, like if the frames are relatively close to each other,
-[0:19:55] relatively close to each other, um, then you would expect not everything
-[0:19:57] um, then you would expect not everything to change.
-[0:19:58] to change. Um,
+[0:19:18] multiple observations at the same time,
+[0:19:20] which are now non-IID.
+[0:19:23] And while the two observations,
+[0:19:26] may be quite different if we look at
+[0:19:29] them from the pixel perspective, um, if
+[0:19:32] we have an appropriate representation,
+[0:19:34] like their difference will be sparse.
+[0:19:36] And this was motivated by
+[0:19:39] at least like the intuition that that
+[0:19:41] such data would not be too hard to
+[0:19:43] collect. For example, like if you have
+[0:19:46] like video of a robotic platform, then,
+[0:19:50] you know, like if the frames are
+[0:19:53] relatively close to each other,
+[0:19:55] um, then you would expect not everything
+[0:19:57] to change.
 [0:20:00] Um, Now, this is very easy to turn into a
-[0:20:02] Now, this is very easy to turn into a supervision signal.
-[0:20:04] supervision signal. Because we can,
-[0:20:05] Because we can, um, embed,
-[0:20:07] um, embed, um, these two images with the same
-[0:20:09] um, these two images with the same neural network, and then, um,
-[0:20:12] neural network, and then, um, essentially,
-[0:20:13] essentially, um, force our encoder to follow our
-[0:20:15] um, force our encoder to follow our assumption that these two images, um, in
-[0:20:18] assumption that these two images, um, in the
+[0:20:02] supervision signal.
+[0:20:04] Because we can,
+[0:20:05] um, embed,
+[0:20:07] um, these two images with the same
+[0:20:09] neural network, and then, um,
+[0:20:12] essentially,
+[0:20:13] um, force our encoder to follow our
+[0:20:15] assumption that these two images, um, in
 [0:20:19] the appropriate representation space, would
-[0:20:21] appropriate representation space, would be mostly similar. And so, for example,
-[0:20:24] be mostly similar. And so, for example, in this case, we are located
-[0:20:26] in this case, we are located a
+[0:20:21] be mostly similar. And so, for example,
+[0:20:24] in this case, we are located
 [0:20:27] a a little budget in terms of, for
-[0:20:28] a little budget in terms of, for example, a single dimension that is
-[0:20:30] example, a single dimension that is allowed to be different
-[0:20:32] allowed to be different between these two images.
-[0:20:35] between these two images. And now, um, the,
-[0:20:37] And now, um, the, like very similar idea, we also apply in
-[0:20:40] like very similar idea, we also apply in the setting where you have, at least
-[0:20:42] the setting where you have, at least like simple,
-[0:20:44] like simple, um, latent,
-[0:20:45] um, latent, um,
+[0:20:28] example, a single dimension that is
+[0:20:30] allowed to be different
+[0:20:32] between these two images.
+[0:20:35] And now, um, the,
+[0:20:37] like very similar idea, we also apply in
+[0:20:40] the setting where you have, at least
+[0:20:42] like simple,
+[0:20:44] um, latent,
 [0:20:46] um, causal relations.
-[0:20:48] causal relations. And and here is also where where we
-[0:20:50] And and here is also where where we define this notion of of block
-[0:20:52] define this notion of of block identifiability, which we'll come back,
-[0:20:55] identifiability, which we'll come back, uh, in the talk. So, here we are
-[0:20:58] uh, in the talk. So, here we are specifically focusing on recovering,
-[0:21:02] specifically focusing on recovering, um, this content variable. We assume
-[0:21:04] um, this content variable. We assume that the original observations,
-[0:21:06] that the original observations, um, are a function of some content
-[0:21:09] um, are a function of some content variable which we should recover and
-[0:21:11] variable which we should recover and some other style variables.
-[0:21:13] some other style variables. And uh, we can generate these paired
-[0:21:15] And uh, we can generate these paired observations by
-[0:21:17] observations by um,
+[0:20:48] And and here is also where where we
+[0:20:50] define this notion of of block
+[0:20:52] identifiability, which we'll come back,
+[0:20:55] uh, in the talk. So, here we are
+[0:20:58] specifically focusing on recovering,
+[0:21:02] um, this content variable. We assume
+[0:21:04] that the original observations,
+[0:21:06] um, are a function of some content
+[0:21:09] variable which we should recover and
+[0:21:11] some other style variables.
+[0:21:13] And uh, we can generate these paired
+[0:21:15] observations by
 [0:21:18] um, performing like uh, style change. Like
-[0:21:21] performing like uh, style change. Like if I manipulate the style variable and
-[0:21:23] if I manipulate the style variable and in particular we thought that data
-[0:21:25] in particular we thought that data augmentation could be a good way to do
-[0:21:26] augmentation could be a good way to do that.
+[0:21:21] if I manipulate the style variable and
+[0:21:23] in particular we thought that data
+[0:21:25] augmentation could be a good way to do
 [0:21:28] that. And our goal was to learn the content
-[0:21:30] And our goal was to learn the content variable in the sense um, that we
-[0:21:33] variable in the sense um, that we estimate some variable C hat which
-[0:21:36] estimate some variable C hat which contains only information about C and
-[0:21:39] contains only information about C and not of S. So, um, it's related to the
-[0:21:43] not of S. So, um, it's related to the true content
-[0:21:45] true content uh, by some unknown function H.
+[0:21:30] variable in the sense um, that we
+[0:21:33] estimate some variable C hat which
+[0:21:36] contains only information about C and
+[0:21:39] not of S. So, um, it's related to the
+[0:21:43] true content
+[0:21:45] uh, by some unknown function H.
 [0:21:52] Now, um, since then um, a lot of works have been
-[0:21:56] since then um, a lot of works have been uh, proposed to um,
-[0:21:59] uh, proposed to um, identify these causal representations
-[0:22:02] identify these causal representations like under different settings. These
-[0:22:04] like under different settings. These works have been typically arranged um,
-[0:22:07] works have been typically arranged um, in the different steps of Pearl's causal
-[0:22:10] in the different steps of Pearl's causal hierarchy although there are also some
-[0:22:12] hierarchy although there are also some some other works which is not at least
-[0:22:14] some other works which is not at least immediately clear where one would uh,
-[0:22:17] immediately clear where one would uh, place them.
-[0:22:19] place them. Now, before really starting to talk
-[0:22:21] Now, before really starting to talk about metals, I want to offer a slightly
-[0:22:23] about metals, I want to offer a slightly different perspective um, on on causal
-[0:22:26] different perspective um, on on causal representation which we um, recently um,
-[0:22:30] representation which we um, recently um, like formalized in a preprint um, which
-[0:22:34] like formalized in a preprint um, which is using the this like measurement
-[0:22:35] is using the this like measurement perspective of causal representation
-[0:22:37] perspective of causal representation learning. So, let's say we have uh,
-[0:22:40] learning. So, let's say we have uh, these three variables here
-[0:22:42] these three variables here um, which have some causal connection
-[0:22:45] um, which have some causal connection with each other.
-[0:22:46] with each other. Now, um, if I knew the variables of
-[0:22:48] Now, um, if I knew the variables of course like I could do causal discovery
-[0:22:51] course like I could do causal discovery and and find the edges.
-[0:22:53] and and find the edges. Uh, under suitable assumptions of
-[0:22:55] Uh, under suitable assumptions of course.
+[0:21:56] uh, proposed to um,
+[0:21:59] identify these causal representations
+[0:22:02] like under different settings. These
+[0:22:04] works have been typically arranged um,
+[0:22:07] in the different steps of Pearl's causal
+[0:22:10] hierarchy although there are also some
+[0:22:12] some other works which is not at least
+[0:22:14] immediately clear where one would uh,
+[0:22:17] place them.
+[0:22:19] Now, before really starting to talk
+[0:22:21] about metals, I want to offer a slightly
+[0:22:23] different perspective um, on on causal
+[0:22:26] representation which we um, recently um,
+[0:22:30] like formalized in a preprint um, which
+[0:22:34] is using the this like measurement
+[0:22:35] perspective of causal representation
+[0:22:37] learning. So, let's say we have uh,
+[0:22:40] these three variables here
+[0:22:42] um, which have some causal connection
+[0:22:45] with each other.
+[0:22:46] Now, um, if I knew the variables of
+[0:22:48] course like I could do causal discovery
+[0:22:51] and and find the edges.
+[0:22:53] Uh, under suitable assumptions of
 [0:22:56] course. Uh,
 [0:22:56] Uh, now, what what does it mean to know the
-[0:22:58] now, what what does it mean to know the variables?
-[0:22:59] variables? Um,
+[0:22:58] variables?
 [0:23:00] Um, knowing the variables means that you
-[0:23:02] knowing the variables means that you know, we are actually able to directly
-[0:23:04] know, we are actually able to directly measure what the value of of these
-[0:23:07] measure what the value of of these variables are in in individual
-[0:23:09] variables are in in individual realizations.
-[0:23:11] realizations. Um
+[0:23:02] know, we are actually able to directly
+[0:23:04] measure what the value of of these
+[0:23:07] variables are in in individual
+[0:23:09] realizations.
 [0:23:12] Um in causal representation learning, we we
-[0:23:14] in causal representation learning, we we are looking at the maybe a slightly
-[0:23:15] are looking at the maybe a slightly different settings where um the way we
-[0:23:17] different settings where um the way we measure our latent variables is is by
-[0:23:20] measure our latent variables is is by entangling them. We take a picture which
-[0:23:23] entangling them. We take a picture which tells me everything that is to know in
-[0:23:25] tells me everything that is to know in principle about these latent variables,
-[0:23:26] principle about these latent variables, but it's entangling their information.
-[0:23:28] but it's entangling their information. It's entangling their measurements into
-[0:23:30] It's entangling their measurements into some high-dimensional observations.
-[0:23:32] some high-dimensional observations. Now, this is not really changing
-[0:23:34] Now, this is not really changing anything into the way we do causal
-[0:23:36] anything into the way we do causal representation. We still
-[0:23:38] representation. We still uh take a neural network which is going
-[0:23:41] uh take a neural network which is going to learn a representation. We know that
-[0:23:43] to learn a representation. We know that uh
+[0:23:14] are looking at the maybe a slightly
+[0:23:15] different settings where um the way we
+[0:23:17] measure our latent variables is is by
+[0:23:20] entangling them. We take a picture which
+[0:23:23] tells me everything that is to know in
+[0:23:25] principle about these latent variables,
+[0:23:26] but it's entangling their information.
+[0:23:28] It's entangling their measurements into
+[0:23:30] some high-dimensional observations.
+[0:23:32] Now, this is not really changing
+[0:23:34] anything into the way we do causal
+[0:23:36] representation. We still
+[0:23:38] uh take a neural network which is going
+[0:23:41] to learn a representation. We know that
 [0:23:43] uh um like a causal representation exists
-[0:23:46] um like a causal representation exists and and the
-[0:23:47] and and the uh we want to align the representation
-[0:23:50] uh we want to align the representation of this model to to uh my latent
-[0:23:53] of this model to to uh my latent variables. And this we can do with this
-[0:23:55] variables. And this we can do with this notion of block identifiability that I
-[0:23:57] notion of block identifiability that I have I have just discussed.
-[0:23:59] have I have just discussed. However, this perspective also opens
-[0:24:01] However, this perspective also opens like a slightly different
-[0:24:02] like a slightly different interpretation.
-[0:24:04] interpretation. And and and here uh I'm really trying to
-[0:24:07] And and and here uh I'm really trying to be closer to the original idea of um
-[0:24:11] be closer to the original idea of um representation learning from from Joshua
-[0:24:14] representation learning from from Joshua over 10 years ago.
-[0:24:16] over 10 years ago. So, ultimately, what do we want out of a
-[0:24:18] So, ultimately, what do we want out of a of a representation? Uh especially like
-[0:24:20] of a representation? Uh especially like a causal representation. Well, we want
-[0:24:23] a causal representation. Well, we want that the representation makes it easier
-[0:24:25] that the representation makes it easier or possible at all since we are talking
-[0:24:27] or possible at all since we are talking about causality to extract some causal
-[0:24:30] about causality to extract some causal information using some downstream
-[0:24:31] information using some downstream estimator.
-[0:24:34] estimator. And uh um
+[0:23:46] and and the
+[0:23:47] uh we want to align the representation
+[0:23:50] of this model to to uh my latent
+[0:23:53] variables. And this we can do with this
+[0:23:55] notion of block identifiability that I
+[0:23:57] have I have just discussed.
+[0:23:59] However, this perspective also opens
+[0:24:01] like a slightly different
+[0:24:02] interpretation.
+[0:24:04] And and and here uh I'm really trying to
+[0:24:07] be closer to the original idea of um
+[0:24:11] representation learning from from Joshua
+[0:24:14] over 10 years ago.
+[0:24:16] So, ultimately, what do we want out of a
+[0:24:18] of a representation? Uh especially like
+[0:24:20] a causal representation. Well, we want
+[0:24:23] that the representation makes it easier
+[0:24:25] or possible at all since we are talking
+[0:24:27] about causality to extract some causal
+[0:24:30] information using some downstream
+[0:24:31] estimator.
 [0:24:36] And uh um we can really think of both the
-[0:24:38] we can really think of both the observations, but also the causal
-[0:24:40] observations, but also the causal representation at different measurements
-[0:24:44] representation at different measurements of these latent causal variables which
-[0:24:46] of these latent causal variables which potentially have different degrees of
-[0:24:48] potentially have different degrees of entanglement.
-[0:24:50] entanglement. So, we could start from you know, a
-[0:24:52] So, we could start from you know, a fully entangled measurement of my latent
-[0:24:54] fully entangled measurement of my latent variables and then you know, depending
-[0:24:56] variables and then you know, depending on the assumptions that that I can make
-[0:24:58] on the assumptions that that I can make or the data I can collect,
-[0:25:00] or the data I can collect, uh um I can either
-[0:25:02] uh um I can either perfectly measure the latent variables,
-[0:25:05] perfectly measure the latent variables, which means like I have individual parts
-[0:25:07] which means like I have individual parts of my representation that only measure
-[0:25:10] of my representation that only measure an individual latent variable, or some
-[0:25:12] an individual latent variable, or some latent variables will remain mixed.
-[0:25:15] latent variables will remain mixed. The nice thing about
-[0:25:17] The nice thing about like this perspective is that
-[0:25:20] like this perspective is that it also tells us nicely what are the
-[0:25:23] it also tells us nicely what are the conditions for what we call the causal
-[0:25:26] conditions for what we call the causal validity of of the representation for a
-[0:25:28] validity of of the representation for a downstream estimator.
-[0:25:30] downstream estimator. As we are formulating this, you know, in
-[0:25:33] As we are formulating this, you know, in in a causal diagram, we have some
-[0:25:35] in a causal diagram, we have some specific conditional independencies that
-[0:25:37] specific conditional independencies that we know should hold. For example, I hope
-[0:25:40] we know should hold. For example, I hope you can see my mouse in this example
-[0:25:42] you can see my mouse in this example here.
+[0:24:38] observations, but also the causal
+[0:24:40] representation at different measurements
+[0:24:44] of these latent causal variables which
+[0:24:46] potentially have different degrees of
+[0:24:48] entanglement.
+[0:24:50] So, we could start from you know, a
+[0:24:52] fully entangled measurement of my latent
+[0:24:54] variables and then you know, depending
+[0:24:56] on the assumptions that that I can make
+[0:24:58] or the data I can collect,
+[0:25:00] uh um I can either
+[0:25:02] perfectly measure the latent variables,
+[0:25:05] which means like I have individual parts
+[0:25:07] of my representation that only measure
+[0:25:10] an individual latent variable, or some
+[0:25:12] latent variables will remain mixed.
+[0:25:15] The nice thing about
+[0:25:17] like this perspective is that
+[0:25:20] it also tells us nicely what are the
+[0:25:23] conditions for what we call the causal
+[0:25:26] validity of of the representation for a
+[0:25:28] downstream estimator.
+[0:25:30] As we are formulating this, you know, in
+[0:25:33] in a causal diagram, we have some
+[0:25:35] specific conditional independencies that
+[0:25:37] we know should hold. For example, I hope
+[0:25:40] you can see my mouse in this example
 [0:25:43] here. If I condition on Z3, I'm blocking all
-[0:25:47] If I condition on Z3, I'm blocking all the paths that go into Z hat A3.
-[0:25:51] the paths that go into Z hat A3. And
+[0:25:47] the paths that go into Z hat A3.
 [0:25:52] And this gives me like a testable
-[0:25:55] this gives me like a testable implication for my measurement.
-[0:25:58] implication for my measurement. Now, having something like this is not
-[0:26:00] Now, having something like this is not sufficient yet for using the Z hats as a
-[0:26:04] sufficient yet for using the Z hats as a plug-in replacement for the causal
-[0:26:06] plug-in replacement for the causal variables because it depends a little
-[0:26:08] variables because it depends a little bit on what we want to do.
-[0:26:10] bit on what we want to do. So, the actual estimator that that we
-[0:26:12] So, the actual estimator that that we want to employ needs to be invariant to
-[0:26:15] want to employ needs to be invariant to our measurement function H.
-[0:26:18] our measurement function H. And this really depends on what you want
-[0:26:20] And this really depends on what you want to do. For example, if you want to
-[0:26:22] to do. For example, if you want to estimate treatment effects, then of
-[0:26:24] estimate treatment effects, then of course like
+[0:25:55] implication for my measurement.
+[0:25:58] Now, having something like this is not
+[0:26:00] sufficient yet for using the Z hats as a
+[0:26:04] plug-in replacement for the causal
+[0:26:06] variables because it depends a little
+[0:26:08] bit on what we want to do.
+[0:26:10] So, the actual estimator that that we
+[0:26:12] want to employ needs to be invariant to
+[0:26:15] our measurement function H.
+[0:26:18] And this really depends on what you want
+[0:26:20] to do. For example, if you want to
+[0:26:22] estimate treatment effects, then of
+[0:26:24] course like
 [0:26:31] in at least like the classical average treatment effects, like you
-[0:26:32] average treatment effects, like you actually need to get a point-wise
-[0:26:34] actually need to get a point-wise approximation of your Z. You cannot
-[0:26:36] approximation of your Z. You cannot re-parameterize it.
-[0:26:38] re-parameterize it. But the story is different if you are
-[0:26:41] But the story is different if you are trying to model confounding or
-[0:26:43] trying to model confounding or instrumental variables.
+[0:26:32] actually need to get a point-wise
+[0:26:34] approximation of your Z. You cannot
+[0:26:36] re-parameterize it.
+[0:26:38] But the story is different if you are
+[0:26:41] trying to model confounding or
+[0:26:43] instrumental variables.
 [0:26:48] So, what is the role of identifiability in in in this perspective?
-[0:26:51] in in in this perspective? Well, identifiability specify
-[0:26:54] Well, identifiability specify in a way an expectation that we have on
-[0:26:55] in a way an expectation that we have on our model. So, identifiability specify
-[0:26:59] our model. So, identifiability specify what we expect individual dimensions in
-[0:27:01] what we expect individual dimensions in our model to measure.
-[0:27:03] our model to measure. And
+[0:26:51] Well, identifiability specify
+[0:26:54] in a way an expectation that we have on
+[0:26:55] our model. So, identifiability specify
+[0:26:59] what we expect individual dimensions in
+[0:27:01] our model to measure.
 [0:27:05] And this conditional independencies which
-[0:27:07] this conditional independencies which are
 [0:27:09] are entailed by this measurement model can
-[0:27:10] entailed by this measurement model can also be numerically tested.
-[0:27:12] also be numerically tested. And so for this we also propose a score
-[0:27:15] And so for this we also propose a score which we call T-Max for test-based
-[0:27:17] which we call T-Max for test-based mutual exclusivity score,
-[0:27:20] mutual exclusivity score, which can be used to evaluate
-[0:27:23] which can be used to evaluate the quality of of your causal
-[0:27:26] the quality of of your causal representation addressing some of the
-[0:27:27] representation addressing some of the issues for the typical evaluation
-[0:27:30] issues for the typical evaluation metrics that are used in causal
-[0:27:31] metrics that are used in causal representation learning like the MCC and
-[0:27:34] representation learning like the MCC and and R-squared.
-[0:27:37] and R-squared. Uh,
+[0:27:10] also be numerically tested.
+[0:27:12] And so for this we also propose a score
+[0:27:15] which we call T-Max for test-based
+[0:27:17] mutual exclusivity score,
+[0:27:20] which can be used to evaluate
+[0:27:23] the quality of of your causal
+[0:27:26] representation addressing some of the
+[0:27:27] issues for the typical evaluation
+[0:27:30] metrics that are used in causal
+[0:27:31] representation learning like the MCC and
+[0:27:34] and R-squared.
 [0:27:38] Uh, the measurement models also tells us
-[0:27:41] the measurement models also tells us when a representation like can be used
-[0:27:43] when a representation like can be used as a valid proxy
-[0:27:45] as a valid proxy of
+[0:27:41] when a representation like can be used
+[0:27:43] as a valid proxy
 [0:27:47] of causal variables if you just want to,
-[0:27:49] causal variables if you just want to, you know, use some off-the-shelf
-[0:27:52] you know, use some off-the-shelf estimator and replace the true
-[0:27:54] estimator and replace the true measurement of the variable which of
-[0:27:55] measurement of the variable which of course you don't have with this
-[0:27:57] course you don't have with this representation.
-[0:27:59] representation. And this notion of causal validity I
-[0:28:01] And this notion of causal validity I like it because it also entail like a
-[0:28:04] like it because it also entail like a very natural notion of error
-[0:28:06] very natural notion of error which is now defined as as, you know,
-[0:28:09] which is now defined as as, you know, the error
+[0:27:49] you know, use some off-the-shelf
+[0:27:52] estimator and replace the true
+[0:27:54] measurement of the variable which of
+[0:27:55] course you don't have with this
+[0:27:57] representation.
+[0:27:59] And this notion of causal validity I
+[0:28:01] like it because it also entail like a
+[0:28:04] very natural notion of error
+[0:28:06] which is now defined as as, you know,
 [0:28:11] the error for your statistical approximation of a
-[0:28:13] for your statistical approximation of a causal estimate using the representation
-[0:28:15] causal estimate using the representation instead of the true variables. And we're
-[0:28:18] instead of the true variables. And we're going to talk a bit more about this
-[0:28:19] going to talk a bit more about this later on.
+[0:28:13] causal estimate using the representation
+[0:28:15] instead of the true variables. And we're
+[0:28:18] going to talk a bit more about this
 [0:28:21] later on. Okay.
 [0:28:22] Okay. So, this is at least like
-[0:28:24] So, this is at least like how I
 [0:28:26] how I think about causal representations
-[0:28:29] think about causal representations and we haven't discussed methods yet.
-[0:28:32] and we haven't discussed methods yet. Um, recently we looked we took a closer
-[0:28:35] Um, recently we looked we took a closer look
+[0:28:29] and we haven't discussed methods yet.
+[0:28:32] Um, recently we looked we took a closer
 [0:28:36] look at this landscape
-[0:28:39] at this landscape of causal representation learning
-[0:28:42] of causal representation learning research and attempted to unify these
-[0:28:45] research and attempted to unify these different settings using a single
-[0:28:47] different settings using a single language.
+[0:28:39] of causal representation learning
+[0:28:42] research and attempted to unify these
+[0:28:45] different settings using a single
 [0:28:49] language. And the language that we used
-[0:28:51] And the language that we used is that of invariance relationships.
-[0:28:54] is that of invariance relationships. So, we start by saying that uh
-[0:28:58] So, we start by saying that uh two like subsets of some vectors, which
-[0:29:01] two like subsets of some vectors, which would correspond to our um
-[0:29:05] would correspond to our um true latent variables, but also then our
-[0:29:07] true latent variables, but also then our representation, um are equivalent,
-[0:29:10] representation, um are equivalent, belong to the same equivalence class,
-[0:29:13] belong to the same equivalence class, um if they are equal after projection by
-[0:29:16] um if they are equal after projection by some arbitrary function iota.
-[0:29:18] some arbitrary function iota. Ultimately, to describe when when two
-[0:29:21] Ultimately, to describe when when two subvectors belong to the same
-[0:29:22] subvectors belong to the same equivalence class, it's sufficient to to
-[0:29:25] equivalence class, it's sufficient to to specify a discriminant which tells me
-[0:29:28] specify a discriminant which tells me whether two vectors are the same
-[0:29:30] whether two vectors are the same according to this equivalence
-[0:29:31] according to this equivalence relationship or are not the same.
-[0:29:35] relationship or are not the same. And so, we can interpret causal
-[0:29:37] And so, we can interpret causal representation learning in this way,
-[0:29:39] representation learning in this way, that we assume access to multiple
-[0:29:41] that we assume access to multiple non-IID groups of samples.
-[0:29:44] non-IID groups of samples. And we assume that all the samples in
-[0:29:45] And we assume that all the samples in the same group are equivalent in some
-[0:29:47] the same group are equivalent in some sense, and and this equivalence is
-[0:29:49] sense, and and this equivalence is specified by some equivalence
-[0:29:50] specified by some equivalence relationship.
-[0:29:52] relationship. And and what causal representation
-[0:29:54] And and what causal representation learning methods are doing is aligning
-[0:29:56] learning methods are doing is aligning the representation with these
-[0:29:57] the representation with these equivalences.
-[0:29:59] equivalences. And the reason why we do that is because
-[0:30:01] And the reason why we do that is because we believe this to be relevant to a task
-[0:30:03] we believe this to be relevant to a task and and connects to this like
-[0:30:05] and and connects to this like measurement model.
+[0:28:51] is that of invariance relationships.
+[0:28:54] So, we start by saying that uh
+[0:28:58] two like subsets of some vectors, which
+[0:29:01] would correspond to our um
+[0:29:05] true latent variables, but also then our
+[0:29:07] representation, um are equivalent,
+[0:29:10] belong to the same equivalence class,
+[0:29:13] um if they are equal after projection by
+[0:29:16] some arbitrary function iota.
+[0:29:18] Ultimately, to describe when when two
+[0:29:21] subvectors belong to the same
+[0:29:22] equivalence class, it's sufficient to to
+[0:29:25] specify a discriminant which tells me
+[0:29:28] whether two vectors are the same
+[0:29:30] according to this equivalence
+[0:29:31] relationship or are not the same.
+[0:29:35] And so, we can interpret causal
+[0:29:37] representation learning in this way,
+[0:29:39] that we assume access to multiple
+[0:29:41] non-IID groups of samples.
+[0:29:44] And we assume that all the samples in
+[0:29:45] the same group are equivalent in some
+[0:29:47] sense, and and this equivalence is
+[0:29:49] specified by some equivalence
+[0:29:50] relationship.
+[0:29:52] And and what causal representation
+[0:29:54] learning methods are doing is aligning
+[0:29:56] the representation with these
+[0:29:57] equivalences.
+[0:29:59] And the reason why we do that is because
+[0:30:01] we believe this to be relevant to a task
+[0:30:03] and and connects to this like
+[0:30:05] measurement model.
 [0:30:09] So, um just to show an example how this
-[0:30:11] um just to show an example how this would work. Like, here we have two
-[0:30:12] would work. Like, here we have two observations X1 and X2,
-[0:30:15] observations X1 and X2, and our assumption is that uh these two
-[0:30:19] and our assumption is that uh these two observations are the same in the sense
-[0:30:21] observations are the same in the sense that
+[0:30:11] would work. Like, here we have two
+[0:30:12] observations X1 and X2,
+[0:30:15] and our assumption is that uh these two
+[0:30:19] observations are the same in the sense
 [0:30:22] that um
 [0:30:23] um a part of
 [0:30:25] a part of uh the latent space is is the same
-[0:30:27] uh the latent space is is the same according to a particular equivalence
-[0:30:29] according to a particular equivalence relationship iota one.
-[0:30:32] relationship iota one. So, this could be a pointwise equality,
-[0:30:34] So, this could be a pointwise equality, but in general, like it's it's an
-[0:30:37] but in general, like it's it's an arbitrary equivalence relationship.
-[0:30:41] arbitrary equivalence relationship. Um
+[0:30:27] according to a particular equivalence
+[0:30:29] relationship iota one.
+[0:30:32] So, this could be a pointwise equality,
+[0:30:34] but in general, like it's it's an
+[0:30:37] arbitrary equivalence relationship.
 [0:30:42] Um then we could have, for example like
-[0:30:44] then we could have, for example like another observation extreme, um, which,
-[0:30:47] another observation extreme, um, which, um,
+[0:30:44] another observation extreme, um, which,
 [0:30:48] um, is in an equivalence class together
-[0:30:50] is in an equivalence class together with, um, X2 but not X1, um,
-[0:30:54] with, um, X2 but not X1, um, and, uh, they may share some different
-[0:30:57] and, uh, they may share some different latent variables,
-[0:30:58] latent variables, uh,
+[0:30:50] with, um, X2 but not X1, um,
+[0:30:54] and, uh, they may share some different
+[0:30:57] latent variables,
 [0:30:59] uh, perhaps according to, uh,
-[0:31:01] perhaps according to, uh, a different function iota two. And these
-[0:31:04] a different function iota two. And these two functions need not be the same.
+[0:31:01] a different function iota two. And these
+[0:31:04] two functions need not be the same.
 [0:31:12] So, um, how do we align, uh, the representation? Well, we do
-[0:31:14] uh, the representation? Well, we do exactly the same thing that we did in
-[0:31:15] exactly the same thing that we did in the disentanglement case. We force the
-[0:31:17] the disentanglement case. We force the representation to follow assumptions.
-[0:31:20] representation to follow assumptions. So, we we have some invariance
-[0:31:22] So, we we have some invariance assumptions on our observations, and and
-[0:31:24] assumptions on our observations, and and we translate them in our representation.
-[0:31:27] we translate them in our representation. So, we said that X1 and X2 should share
-[0:31:30] So, we said that X1 and X2 should share two variables, um, and so, uh, we
-[0:31:33] two variables, um, and so, uh, we formulate, uh, our invariant
-[0:31:35] formulate, uh, our invariant relationship in in a specific subset of
-[0:31:37] relationship in in a specific subset of the latent space.
-[0:31:39] the latent space. We do the same for X2 and X3,
-[0:31:41] We do the same for X2 and X3, and and, uh, and this is our invariance
-[0:31:44] and and, uh, and this is our invariance constraint. Now, this is of course not
-[0:31:47] constraint. Now, this is of course not yet enough for identifiability. What we
-[0:31:49] yet enough for identifiability. What we also want is that, uh, our
-[0:31:51] also want is that, uh, our representation is a lossless compression
-[0:31:53] representation is a lossless compression of the data. This can be, uh, this can
-[0:31:56] of the data. This can be, uh, this can be done in many ways. You could train a
-[0:31:57] be done in many ways. You could train a decoder which tries to reconstruct the
-[0:31:59] decoder which tries to reconstruct the data, um,
+[0:31:14] exactly the same thing that we did in
+[0:31:15] the disentanglement case. We force the
+[0:31:17] representation to follow assumptions.
+[0:31:20] So, we we have some invariance
+[0:31:22] assumptions on our observations, and and
+[0:31:24] we translate them in our representation.
+[0:31:27] So, we said that X1 and X2 should share
+[0:31:30] two variables, um, and so, uh, we
+[0:31:33] formulate, uh, our invariant
+[0:31:35] relationship in in a specific subset of
+[0:31:37] the latent space.
+[0:31:39] We do the same for X2 and X3,
+[0:31:41] and and, uh, and this is our invariance
+[0:31:44] constraint. Now, this is of course not
+[0:31:47] yet enough for identifiability. What we
+[0:31:49] also want is that, uh, our
+[0:31:51] representation is a lossless compression
+[0:31:53] of the data. This can be, uh, this can
+[0:31:56] be done in many ways. You could train a
+[0:31:57] decoder which tries to reconstruct the
 [0:32:01] data, um, like formally you can also just write it
-[0:32:03] like formally you can also just write it as trying to preserve the entropy, uh,
-[0:32:06] as trying to preserve the entropy, uh, of the data. Uh, so, since we assume
-[0:32:08] of the data. Uh, so, since we assume that the mapping from the latent
-[0:32:10] that the mapping from the latent variables to the observations X is
-[0:32:13] variables to the observations X is invertible, um,
-[0:32:14] invertible, um, we want the mutual information between,
-[0:32:17] we want the mutual information between, uh, the true latents and the recovered
-[0:32:19] uh, the true latents and the recovered latents to be the same as the entropy of
-[0:32:22] latents to be the same as the entropy of the true latents.
-[0:32:25] the true latents. And, um, if we can, uh,
-[0:32:27] And, um, if we can, uh, satisfy these two constraints, then then
-[0:32:30] satisfy these two constraints, then then we achieve block identifiability,
-[0:32:33] we achieve block identifiability, um, in in the in the definition that we
-[0:32:35] um, in in the in the definition that we had discussed earlier.
+[0:32:03] as trying to preserve the entropy, uh,
+[0:32:06] of the data. Uh, so, since we assume
+[0:32:08] that the mapping from the latent
+[0:32:10] variables to the observations X is
+[0:32:13] invertible, um,
+[0:32:14] we want the mutual information between,
+[0:32:17] uh, the true latents and the recovered
+[0:32:19] latents to be the same as the entropy of
+[0:32:22] the true latents.
+[0:32:25] And, um, if we can, uh,
+[0:32:27] satisfy these two constraints, then then
+[0:32:30] we achieve block identifiability,
+[0:32:33] um, in in the in the definition that we
+[0:32:35] had discussed earlier.
 [0:32:41] So, now a a question that at least I ask myself when when we like
-[0:32:44] at least I ask myself when when we like started working on this is is what is
-[0:32:46] started working on this is is what is actually causal about this.
-[0:32:48] actually causal about this. Um and
+[0:32:44] started working on this is is what is
+[0:32:46] actually causal about this.
 [0:32:50] Um and what is causal about this is that we
-[0:32:51] what is causal about this is that we assume that there are some causal
-[0:32:53] assume that there are some causal variables on which these invariances are
-[0:32:55] variables on which these invariances are defined.
+[0:32:51] assume that there are some causal
+[0:32:53] variables on which these invariances are
 [0:32:57] defined. Now, the specific source of this
-[0:32:59] Now, the specific source of this invariance
-[0:33:01] invariance may or may not directly follow from a
-[0:33:03] may or may not directly follow from a classical causal assumption. Like it
-[0:33:05] classical causal assumption. Like it could be an intervention, but it could
-[0:33:07] could be an intervention, but it could also be some other information that you
-[0:33:10] also be some other information that you can have.
+[0:32:59] invariance
+[0:33:01] may or may not directly follow from a
+[0:33:03] classical causal assumption. Like it
+[0:33:05] could be an intervention, but it could
+[0:33:07] also be some other information that you
 [0:33:11] can have. Um
 [0:33:12] Um again, this doesn't have to be strictly
-[0:33:14] again, this doesn't have to be strictly causal if you only want to learn the
-[0:33:16] causal if you only want to learn the variables, but don't need the graph.
-[0:33:20] variables, but don't need the graph. Yeah, if you also need the graph, then
-[0:33:21] Yeah, if you also need the graph, then of course like, you know, you need to be
-[0:33:24] of course like, you know, you need to be able to identify the variables
-[0:33:26] able to identify the variables and then you need
-[0:33:28] and then you need sufficient assumptions that allow you to
-[0:33:29] sufficient assumptions that allow you to identify the graph.
-[0:33:31] identify the graph. For example, like these additive noise
-[0:33:32] For example, like these additive noise models that we saw earlier.
-[0:33:35] models that we saw earlier. If your assumptions that that you need
-[0:33:37] If your assumptions that that you need for the causal representation are
-[0:33:39] for the causal representation are already in a way causal, then then you
-[0:33:41] already in a way causal, then then you know, you can combine.
-[0:33:44] know, you can combine. But but just to prove this point,
-[0:33:47] But but just to prove this point, we did a little numerical simulation
-[0:33:48] we did a little numerical simulation like defining like a different type of
-[0:33:50] like defining like a different type of intervention
-[0:33:53] intervention which changes the distribution of this
-[0:33:55] which changes the distribution of this example of two. It also cuts the
-[0:33:58] example of two. It also cuts the incoming edge from Z1,
-[0:34:01] incoming edge from Z1, but also has a as a shield in front of
-[0:34:03] but also has a as a shield in front of Z3. So, Z3 doesn't realize that an
-[0:34:06] Z3. So, Z3 doesn't realize that an intervention has happened and the values
-[0:34:09] intervention has happened and the values of the three are still sampled like
-[0:34:11] of the three are still sampled like thinking Z2 didn't change distribution.
-[0:34:15] thinking Z2 didn't change distribution. Of course, this this doesn't make a lot
-[0:34:16] Of course, this this doesn't make a lot of sense from a causal perspective, but
-[0:34:20] of sense from a causal perspective, but it still like
-[0:34:22] it still like entails like a notion of marginal
-[0:34:24] entails like a notion of marginal invariance so now on Z1 and Z3, which is
-[0:34:28] invariance so now on Z1 and Z3, which is very similar to like the signal that an
-[0:34:31] very similar to like the signal that an intervention will will pick up. And in
-[0:34:34] intervention will will pick up. And in fact, you can apply off-the-shelf
-[0:34:36] fact, you can apply off-the-shelf intervention called representation
-[0:34:38] intervention called representation learning methods, and then they do
-[0:34:39] learning methods, and then they do exactly what you would expect. They
-[0:34:41] exactly what you would expect. They block identify Z1 and Z3.
-[0:34:44] block identify Z1 and Z3. Because
+[0:33:14] causal if you only want to learn the
+[0:33:16] variables, but don't need the graph.
+[0:33:20] Yeah, if you also need the graph, then
+[0:33:21] of course like, you know, you need to be
+[0:33:24] able to identify the variables
+[0:33:26] and then you need
+[0:33:28] sufficient assumptions that allow you to
+[0:33:29] identify the graph.
+[0:33:31] For example, like these additive noise
+[0:33:32] models that we saw earlier.
+[0:33:35] If your assumptions that that you need
+[0:33:37] for the causal representation are
+[0:33:39] already in a way causal, then then you
+[0:33:41] know, you can combine.
+[0:33:44] But but just to prove this point,
+[0:33:47] we did a little numerical simulation
+[0:33:48] like defining like a different type of
+[0:33:50] intervention
+[0:33:53] which changes the distribution of this
+[0:33:55] example of two. It also cuts the
+[0:33:58] incoming edge from Z1,
+[0:34:01] but also has a as a shield in front of
+[0:34:03] Z3. So, Z3 doesn't realize that an
+[0:34:06] intervention has happened and the values
+[0:34:09] of the three are still sampled like
+[0:34:11] thinking Z2 didn't change distribution.
+[0:34:15] Of course, this this doesn't make a lot
+[0:34:16] of sense from a causal perspective, but
+[0:34:20] it still like
+[0:34:22] entails like a notion of marginal
+[0:34:24] invariance so now on Z1 and Z3, which is
+[0:34:28] very similar to like the signal that an
+[0:34:31] intervention will will pick up. And in
+[0:34:34] fact, you can apply off-the-shelf
+[0:34:36] intervention called representation
+[0:34:38] learning methods, and then they do
+[0:34:39] exactly what you would expect. They
+[0:34:41] block identify Z1 and Z3.
 [0:34:45] Because uh it doesn't matter that the source of
-[0:34:48] uh it doesn't matter that the source of this marginal invariance is is a
-[0:34:51] this marginal invariance is is a properly, you know, uh executed
-[0:34:53] properly, you know, uh executed intervention.
+[0:34:48] this marginal invariance is is a
+[0:34:51] properly, you know, uh executed
+[0:34:53] intervention.
 [0:34:59] Another example um is the intervention called
-[0:35:01] is the intervention called representation learning. Here I'm
-[0:35:02] representation learning. Here I'm showing
+[0:35:01] representation learning. Here I'm
 [0:35:04] showing um two coupled intervention per node
-[0:35:06] um two coupled intervention per node just for simplicity, but in the paper we
-[0:35:08] just for simplicity, but in the paper we go through uh many of these different
-[0:35:10] go through uh many of these different settings.
+[0:35:06] just for simplicity, but in the paper we
+[0:35:08] go through uh many of these different
 [0:35:11] settings. So here we can define the invariance
-[0:35:14] So here we can define the invariance looking at the uh score of the log
-[0:35:17] looking at the uh score of the log likelihood comparing
-[0:35:19] likelihood comparing um two intervention distributions. In
-[0:35:22] um two intervention distributions. In the two intervention distribution, only
-[0:35:23] the two intervention distribution, only one of the conditions will be different,
-[0:35:25] one of the conditions will be different, which is isolated by by this derivative.
-[0:35:28] which is isolated by by this derivative. Um and so it will be non-zero only on an
-[0:35:32] Um and so it will be non-zero only on an intervening node.
-[0:35:35] intervening node. And this also allow us to mix different
-[0:35:36] And this also allow us to mix different invariances, which also enables us to
-[0:35:38] invariances, which also enables us to prove new identifiability results if if
-[0:35:41] prove new identifiability results if if if you care about this.
-[0:35:44] if you care about this. Another um
-[0:35:45] Another um example is is for temporal causal
-[0:35:48] example is is for temporal causal representation learning,
-[0:35:50] representation learning, um
+[0:35:14] looking at the uh score of the log
+[0:35:17] likelihood comparing
+[0:35:19] um two intervention distributions. In
+[0:35:22] the two intervention distribution, only
+[0:35:23] one of the conditions will be different,
+[0:35:25] which is isolated by by this derivative.
+[0:35:28] Um and so it will be non-zero only on an
+[0:35:32] intervening node.
+[0:35:35] And this also allow us to mix different
+[0:35:36] invariances, which also enables us to
+[0:35:38] prove new identifiability results if if
+[0:35:41] if you care about this.
+[0:35:44] Another um
+[0:35:45] example is is for temporal causal
+[0:35:48] representation learning,
 [0:35:51] um which um
 [0:35:53] which um is is roughly as follows. Like you have
-[0:35:55] is is roughly as follows. Like you have a a sequence
-[0:35:57] a a sequence um
+[0:35:55] a a sequence
 [0:35:58] um of latent states which are measured in
-[0:36:01] of latent states which are measured in in observations. And
-[0:36:03] in observations. And uh now I'm talking only about like this
-[0:36:06] uh now I'm talking only about like this paper because this again the simplest to
-[0:36:07] paper because this again the simplest to explain. Uh we have the um
-[0:36:10] explain. Uh we have the um causal relations that unfold
-[0:36:13] causal relations that unfold um over time.
-[0:36:16] um over time. And then
+[0:36:01] in observations. And
+[0:36:03] uh now I'm talking only about like this
+[0:36:06] paper because this again the simplest to
+[0:36:07] explain. Uh we have the um
+[0:36:10] causal relations that unfold
+[0:36:13] um over time.
 [0:36:18] And then we have an agent which um is taking an
-[0:36:21] we have an agent which um is taking an action, and this action affects the
-[0:36:23] action, and this action affects the natural dynamics of these latent
-[0:36:25] natural dynamics of these latent variables in a way uh very similar to to
-[0:36:28] variables in a way uh very similar to to what the intervention would do.
-[0:36:31] what the intervention would do. Um the agent is also able to
-[0:36:34] Um the agent is also able to um predict in a way the counterfactual
-[0:36:36] um predict in a way the counterfactual trajectory as if it didn't
-[0:36:39] trajectory as if it didn't um perform the action and then can
-[0:36:41] um perform the action and then can compare
+[0:36:21] action, and this action affects the
+[0:36:23] natural dynamics of these latent
+[0:36:25] variables in a way uh very similar to to
+[0:36:28] what the intervention would do.
+[0:36:31] Um the agent is also able to
+[0:36:34] um predict in a way the counterfactual
+[0:36:36] trajectory as if it didn't
+[0:36:39] um perform the action and then can
 [0:36:42] compare um its expectation on the default
-[0:36:44] um its expectation on the default dynamics with what with what actually
-[0:36:46] dynamics with what with what actually happened. And and this gives you
-[0:36:49] happened. And and this gives you um the invariant that drives the
-[0:36:51] um the invariant that drives the disentanglement signal.
+[0:36:44] dynamics with what with what actually
+[0:36:46] happened. And and this gives you
+[0:36:49] um the invariant that drives the
+[0:36:51] disentanglement signal.
 [0:36:57] Okay. So, because of representation learning,
 [0:36:59] learning, um
 [0:37:00] um uh we can now very well like
-[0:37:02] uh we can now very well like theoretically characterize when
-[0:37:04] theoretically characterize when representations that yield causally
-[0:37:06] representations that yield causally valid estimates and also how do we learn
-[0:37:08] valid estimates and also how do we learn them. Because the identifiability
-[0:37:10] them. Because the identifiability results tell us, you know, what we
-[0:37:12] results tell us, you know, what we expect the causal representation to
-[0:37:14] expect the causal representation to measure and the measurement model tells
-[0:37:16] measure and the measurement model tells you, you know, which causal task can you
-[0:37:19] you, you know, which causal task can you do with a specific measurement function.
-[0:37:23] do with a specific measurement function. And now I want to um
-[0:37:25] And now I want to um conclude by um discussing the design of
-[0:37:28] conclude by um discussing the design of work which is tightly integrated with
-[0:37:30] work which is tightly integrated with with the previous ones on prediction
-[0:37:32] with the previous ones on prediction power causal inference.
-[0:37:35] power causal inference. So, here we are working um together with
-[0:37:37] So, here we are working um together with experimental ecologists here on campus.
-[0:37:40] experimental ecologists here on campus. And they're interested in um
-[0:37:42] And they're interested in um like ants' behaviors. So,
-[0:37:44] like ants' behaviors. So, um they study ants in in their daily
-[0:37:47] um they study ants in in their daily research. And in particular, they're
-[0:37:50] research. And in particular, they're interested in in understanding the like
-[0:37:52] interested in in understanding the like the social mechanism that governs like
-[0:37:54] the social mechanism that governs like ant colonies. Apparently, ants are
-[0:37:58] ant colonies. Apparently, ants are um very social animals that have very
-[0:38:00] um very social animals that have very complex policies, especially involving
-[0:38:03] complex policies, especially involving keeping their colony
-[0:38:05] keeping their colony uh free from from parasites, diseases,
-[0:38:08] uh free from from parasites, diseases, and and things like this.
-[0:38:10] and and things like this. So,
+[0:37:02] theoretically characterize when
+[0:37:04] representations that yield causally
+[0:37:06] valid estimates and also how do we learn
+[0:37:08] them. Because the identifiability
+[0:37:10] results tell us, you know, what we
+[0:37:12] expect the causal representation to
+[0:37:14] measure and the measurement model tells
+[0:37:16] you, you know, which causal task can you
+[0:37:19] do with a specific measurement function.
+[0:37:23] And now I want to um
+[0:37:25] conclude by um discussing the design of
+[0:37:28] work which is tightly integrated with
+[0:37:30] with the previous ones on prediction
+[0:37:32] power causal inference.
+[0:37:35] So, here we are working um together with
+[0:37:37] experimental ecologists here on campus.
+[0:37:40] And they're interested in um
+[0:37:42] like ants' behaviors. So,
+[0:37:44] um they study ants in in their daily
+[0:37:47] research. And in particular, they're
+[0:37:50] interested in in understanding the like
+[0:37:52] the social mechanism that governs like
+[0:37:54] ant colonies. Apparently, ants are
+[0:37:58] um very social animals that have very
+[0:38:00] complex policies, especially involving
+[0:38:03] keeping their colony
+[0:38:05] uh free from from parasites, diseases,
+[0:38:08] and and things like this.
 [0:38:11] So, as an ant goes in the world to to do ant
-[0:38:14] as an ant goes in the world to to do ant stuff,
 [0:38:15] stuff, uh you know, it may come in contact with
-[0:38:17] uh you know, it may come in contact with with things that should not be brought
-[0:38:18] with things that should not be brought back into the colony.
-[0:38:20] back into the colony. And so, the next mate, what they will do
-[0:38:22] And so, the next mate, what they will do is is realize that that um this ant has
-[0:38:25] is is realize that that um this ant has been exposed to something
-[0:38:27] been exposed to something that's potentially dangerous to the
-[0:38:29] that's potentially dangerous to the colony, and then they will groom off
-[0:38:31] colony, and then they will groom off this substance, which is basically they
-[0:38:32] this substance, which is basically they will eat it.
-[0:38:34] will eat it. Um
+[0:38:17] with things that should not be brought
+[0:38:18] back into the colony.
+[0:38:20] And so, the next mate, what they will do
+[0:38:22] is is realize that that um this ant has
+[0:38:25] been exposed to something
+[0:38:27] that's potentially dangerous to the
+[0:38:29] colony, and then they will groom off
+[0:38:31] this substance, which is basically they
+[0:38:32] will eat it.
 [0:38:36] Um And now,
 [0:38:38] And now, a specific question that our
-[0:38:39] a specific question that our collaborators are interested in is
-[0:38:43] collaborators are interested in is you know, like which substances do these
-[0:38:45] you know, like which substances do these ants like respond to? And what are the
-[0:38:47] ants like respond to? And what are the the the signals that that they pick up?
-[0:38:50] the the signals that that they pick up? So, now if you want to answer this type
-[0:38:52] So, now if you want to answer this type of question, then then what you would do
-[0:38:55] of question, then then what you would do is to design and conduct an experiment.
-[0:38:58] is to design and conduct an experiment. Um which means synthesizing some
-[0:39:02] Um which means synthesizing some substance that you want to test, having
-[0:39:03] substance that you want to test, having some control, and then you randomly
-[0:39:06] some control, and then you randomly split ants into treated and control
-[0:39:08] split ants into treated and control group. Um and then
-[0:39:11] group. Um and then treat the ants and put them together
-[0:39:14] treat the ants and put them together with nestmates, take a video, and see
-[0:39:16] with nestmates, take a video, and see what happens.
-[0:39:18] what happens. Now,
+[0:38:39] collaborators are interested in is
+[0:38:43] you know, like which substances do these
+[0:38:45] ants like respond to? And what are the
+[0:38:47] the the signals that that they pick up?
+[0:38:50] So, now if you want to answer this type
+[0:38:52] of question, then then what you would do
+[0:38:55] is to design and conduct an experiment.
+[0:38:58] Um which means synthesizing some
+[0:39:02] substance that you want to test, having
+[0:39:03] some control, and then you randomly
+[0:39:06] split ants into treated and control
+[0:39:08] group. Um and then
+[0:39:11] treat the ants and put them together
+[0:39:14] with nestmates, take a video, and see
+[0:39:16] what happens.
 [0:39:19] Now, of course, with everything that we've
-[0:39:21] of course, with everything that we've been discussing, like it's clear that we
-[0:39:22] been discussing, like it's clear that we don't want to have a PhD student to look
-[0:39:24] don't want to have a PhD student to look at this video and and determine whether
-[0:39:27] at this video and and determine whether there is a significant difference
-[0:39:29] there is a significant difference between the treated and the control
-[0:39:30] between the treated and the control group.
+[0:39:21] been discussing, like it's clear that we
+[0:39:22] don't want to have a PhD student to look
+[0:39:24] at this video and and determine whether
+[0:39:27] there is a significant difference
+[0:39:29] between the treated and the control
 [0:39:31] group. Um but this should be done by a machine
-[0:39:34] Um but this should be done by a machine learning model.
-[0:39:36] learning model. So,
+[0:39:34] learning model.
 [0:39:38] So, for this, we we curated and released the
-[0:39:41] for this, we we curated and released the IST dataset,
-[0:39:43] IST dataset, which is the first benchmark, at least
-[0:39:45] which is the first benchmark, at least to my knowledge, to estimate causal
-[0:39:46] to my knowledge, to estimate causal effects from real-world ecological
-[0:39:49] effects from real-world ecological videos that are collected within a
-[0:39:50] videos that are collected within a randomized control trial.
-[0:39:52] randomized control trial. Um Of course, like we we label every
-[0:39:56] Um Of course, like we we label every frames for this
-[0:39:58] frames for this grooming behavior
-[0:40:00] grooming behavior that that we're interested in. And then,
-[0:40:03] that that we're interested in. And then, the key difference between this dataset
-[0:40:05] the key difference between this dataset and and many other datasets that exist
-[0:40:08] and and many other datasets that exist also in ecology for behavior
-[0:40:09] also in ecology for behavior classification is that
-[0:40:13] classification is that other benchmarks stop at validating the
-[0:40:14] other benchmarks stop at validating the statistical accuracy of the models that
-[0:40:18] statistical accuracy of the models that you train.
-[0:40:20] you train. But but our question is slightly
-[0:40:21] But but our question is slightly different
+[0:39:41] IST dataset,
+[0:39:43] which is the first benchmark, at least
+[0:39:45] to my knowledge, to estimate causal
+[0:39:46] effects from real-world ecological
+[0:39:49] videos that are collected within a
+[0:39:50] randomized control trial.
+[0:39:52] Um Of course, like we we label every
+[0:39:56] frames for this
+[0:39:58] grooming behavior
+[0:40:00] that that we're interested in. And then,
+[0:40:03] the key difference between this dataset
+[0:40:05] and and many other datasets that exist
+[0:40:08] also in ecology for behavior
+[0:40:09] classification is that
+[0:40:13] other benchmarks stop at validating the
+[0:40:14] statistical accuracy of the models that
+[0:40:18] you train.
+[0:40:20] But but our question is slightly
 [0:40:23] different because our problem is that we want to
-[0:40:25] because our problem is that we want to estimate these causal effects.
-[0:40:28] estimate these causal effects. So the quantity that we want to estimate
-[0:40:31] So the quantity that we want to estimate is the average treatment effect.
-[0:40:33] is the average treatment effect. And since we have
-[0:40:37] And since we have you know, design the the data collection
-[0:40:41] you know, design the the data collection ourselves, we can nicely formulate this
-[0:40:43] ourselves, we can nicely formulate this into this measurement model as as we've
-[0:40:44] into this measurement model as as we've seen earlier.
-[0:40:45] seen earlier. So we have some experimental variables,
-[0:40:48] So we have some experimental variables, we have a treatment that cause
-[0:40:50] we have a treatment that cause the behavior, and then we measure
-[0:40:54] the behavior, and then we measure like an entangled view of of these three
-[0:40:57] like an entangled view of of these three variables.
-[0:40:58] variables. Now
+[0:40:25] estimate these causal effects.
+[0:40:28] So the quantity that we want to estimate
+[0:40:31] is the average treatment effect.
+[0:40:33] And since we have
+[0:40:37] you know, design the the data collection
+[0:40:41] ourselves, we can nicely formulate this
+[0:40:43] into this measurement model as as we've
+[0:40:44] seen earlier.
+[0:40:45] So we have some experimental variables,
+[0:40:48] we have a treatment that cause
+[0:40:50] the behavior, and then we measure
+[0:40:54] like an entangled view of of these three
+[0:40:57] variables.
 [0:41:00] Now our effect
-[0:41:02] our effect is is not fully observed and we have
-[0:41:04] is is not fully observed and we have some
+[0:41:02] is is not fully observed and we have
 [0:41:06] some selection variable which possibly
-[0:41:09] selection variable which possibly depending on the experimental conditions
-[0:41:10] depending on the experimental conditions tells us whether an individual frame
-[0:41:12] tells us whether an individual frame should be labeled by a PhD student or by
-[0:41:14] should be labeled by a PhD student or by a neural network.
+[0:41:09] depending on the experimental conditions
+[0:41:10] tells us whether an individual frame
+[0:41:12] should be labeled by a PhD student or by
+[0:41:14] a neural network.
 [0:41:19] Now importantly, this is a randomized control trial so
-[0:41:21] this is a randomized control trial so there is no edge from W to T.
-[0:41:26] there is no edge from W to T. So since it's randomized control trial,
-[0:41:28] So since it's randomized control trial, this average treatment effect can be
-[0:41:30] this average treatment effect can be just estimated by association
-[0:41:32] just estimated by association difference.
-[0:41:34] difference. And this obviously is is under the
-[0:41:36] And this obviously is is under the standard assumptions that that we have
-[0:41:38] standard assumptions that that we have positivity and and no confounding.
-[0:41:41] positivity and and no confounding. Now this is also under the assumption
-[0:41:43] Now this is also under the assumption that we actually can measure Y directly,
-[0:41:46] that we actually can measure Y directly, but but we cannot measure Y directly. We
-[0:41:49] but but we cannot measure Y directly. We can only measure Y through the neural
-[0:41:51] can only measure Y through the neural network.
+[0:41:21] there is no edge from W to T.
+[0:41:26] So since it's randomized control trial,
+[0:41:28] this average treatment effect can be
+[0:41:30] just estimated by association
+[0:41:32] difference.
+[0:41:34] And this obviously is is under the
+[0:41:36] standard assumptions that that we have
+[0:41:38] positivity and and no confounding.
+[0:41:41] Now this is also under the assumption
+[0:41:43] that we actually can measure Y directly,
+[0:41:46] but but we cannot measure Y directly. We
+[0:41:49] can only measure Y through the neural
 [0:41:53] network. And so the quantity that we look at is
-[0:41:56] And so the quantity that we look at is what we call the treatment effect bias,
-[0:41:58] what we call the treatment effect bias, which is is very simply the difference
-[0:42:00] which is is very simply the difference between the average treatment effect if
-[0:42:01] between the average treatment effect if you use Y or you use the model's
-[0:42:03] you use Y or you use the model's predictions f of x. And here we have
-[0:42:06] predictions f of x. And here we have simply rearranged the terms to show the
-[0:42:08] simply rearranged the terms to show the bias in the treatment population and and
-[0:42:11] bias in the treatment population and and the control population.
-[0:42:14] the control population. And the assumption we make in this paper
-[0:42:16] And the assumption we make in this paper is that we are allowed to use some of
-[0:42:18] is that we are allowed to use some of the data from the target experiments to
-[0:42:20] the data from the target experiments to train our model.
+[0:41:56] what we call the treatment effect bias,
+[0:41:58] which is is very simply the difference
+[0:42:00] between the average treatment effect if
+[0:42:01] you use Y or you use the model's
+[0:42:03] predictions f of x. And here we have
+[0:42:06] simply rearranged the terms to show the
+[0:42:08] bias in the treatment population and and
+[0:42:11] the control population.
+[0:42:14] And the assumption we make in this paper
+[0:42:16] is that we are allowed to use some of
+[0:42:18] the data from the target experiments to
+[0:42:20] train our model.
 [0:42:26] Okay. Um so still unfortunately a lot of things can can go wrong.
-[0:42:28] things can can go wrong. Um
 [0:42:29] Um the first non-obvious question is
-[0:42:32] the first non-obvious question is uh like what data we should label for
-[0:42:35] uh like what data we should label for transfer learning.
-[0:42:36] transfer learning. Now of course like as as machine
-[0:42:39] Now of course like as as machine learning and and causality researchers
-[0:42:42] learning and and causality researchers like we know we should label like random
-[0:42:44] like we know we should label like random samples. Like they should be as
-[0:42:46] samples. Like they should be as independent as possible.
-[0:42:48] independent as possible. Now the problem is is that uh our
-[0:42:50] Now the problem is is that uh our colleagues like don't really want to
-[0:42:52] colleagues like don't really want to label independent frames because it's
-[0:42:53] label independent frames because it's very difficult for them to do that.
-[0:42:56] very difficult for them to do that. Um they they really look at the video to
-[0:42:58] Um they they really look at the video to understand when this behavior start,
-[0:43:00] understand when this behavior start, when it ends, and and then they they
-[0:43:02] when it ends, and and then they they propagate
+[0:42:32] uh like what data we should label for
+[0:42:35] transfer learning.
+[0:42:36] Now of course like as as machine
+[0:42:39] learning and and causality researchers
+[0:42:42] like we know we should label like random
+[0:42:44] samples. Like they should be as
+[0:42:46] independent as possible.
+[0:42:48] Now the problem is is that uh our
+[0:42:50] colleagues like don't really want to
+[0:42:52] label independent frames because it's
+[0:42:53] very difficult for them to do that.
+[0:42:56] Um they they really look at the video to
+[0:42:58] understand when this behavior start,
+[0:43:00] when it ends, and and then they they
 [0:43:03] propagate um
 [0:43:04] um the labels in between.
-[0:43:06] the labels in between. And of course like any non-random choice
-[0:43:11] And of course like any non-random choice um
+[0:43:06] And of course like any non-random choice
 [0:43:11] um of
 [0:43:13] of uh labeling introduces a selection bias
-[0:43:15] uh labeling introduces a selection bias which then like transfers to our
-[0:43:18] which then like transfers to our predictive model.
-[0:43:19] predictive model. And this is interesting because then you
-[0:43:21] And this is interesting because then you know even though our data is perfect,
-[0:43:23] know even though our data is perfect, our data is randomized control trial,
-[0:43:25] our data is randomized control trial, the model is introducing
-[0:43:28] the model is introducing uh bias due to selection in in its
-[0:43:31] uh bias due to selection in in its training set in the transfer learning.
-[0:43:34] training set in the transfer learning. Um hi Francesco. Sorry for interrupt,
-[0:43:37] Um hi Francesco. Sorry for interrupt, but uh this is the
-[0:43:39] but uh this is the I'm limited. Do you have enough time for
-[0:43:41] I'm limited. Do you have enough time for a discussion? It would be nice if you
-[0:43:43] a discussion? It would be nice if you can wrap up in about like three or five
-[0:43:45] can wrap up in about like three or five minutes.
+[0:43:15] which then like transfers to our
+[0:43:18] predictive model.
+[0:43:19] And this is interesting because then you
+[0:43:21] know even though our data is perfect,
+[0:43:23] our data is randomized control trial,
+[0:43:25] the model is introducing
+[0:43:28] uh bias due to selection in in its
+[0:43:31] training set in the transfer learning.
+[0:43:34] Um hi Francesco. Sorry for interrupt,
+[0:43:37] but uh this is the
+[0:43:39] I'm limited. Do you have enough time for
+[0:43:41] a discussion? It would be nice if you
+[0:43:43] can wrap up in about like three or five
 [0:43:46] minutes. Yes, I I I would be able to.
-[0:43:49] Yes, I I I would be able to. Great, thank you.
-[0:43:50] Great, thank you. Uh
+[0:43:49] Great, thank you.
 [0:43:52] Uh Okay.
 [0:43:53] Okay. So um
 [0:43:54] So um now um we can use the invariance
-[0:43:58] now um we can use the invariance principle to debias
-[0:44:00] principle to debias um our model. For example, assuming that
-[0:44:02] um our model. For example, assuming that our representation stays invariant
-[0:44:04] our representation stays invariant across experiment settings.
-[0:44:06] across experiment settings. And so we can take a model which is uh
-[0:44:10] And so we can take a model which is uh training a bias design from selection
-[0:44:12] training a bias design from selection bias and and by increasing
-[0:44:14] bias and and by increasing regularization, we can
-[0:44:18] regularization, we can reduce the biasing in in the conclusion.
-[0:44:22] reduce the biasing in in the conclusion. And interestingly, this this model is
-[0:44:24] And interestingly, this this model is also using V-Rex to implement the
-[0:44:27] also using V-Rex to implement the invariance condition, and we see
-[0:44:30] invariance condition, and we see small deviation in accuracy, but a very
-[0:44:32] small deviation in accuracy, but a very strong effect in the reduction of the
-[0:44:34] strong effect in the reduction of the causal error.
-[0:44:37] causal error. The second problem is in the choice of
-[0:44:40] The second problem is in the choice of the model, and
-[0:44:42] the model, and here we can see first a scatter plot and
-[0:44:44] here we can see first a scatter plot and then some rank correlation between the
-[0:44:47] then some rank correlation between the balanced accuracy and the treatment
-[0:44:49] balanced accuracy and the treatment effect bias.
-[0:44:50] effect bias. And what we see very clearly is that
-[0:44:52] And what we see very clearly is that this is an underspecified setting, like
-[0:44:56] this is an underspecified setting, like we have many models that achieve like
-[0:44:58] we have many models that achieve like very high accuracy, but they are
-[0:44:59] very high accuracy, but they are arranged in kind of like these vertical
-[0:45:01] arranged in kind of like these vertical stripes in the scatter plot. So, these
-[0:45:04] stripes in the scatter plot. So, these models have very similar accuracy, but
-[0:45:06] models have very similar accuracy, but very different treatment effect bias.
-[0:45:10] very different treatment effect bias. So, the accuracy alone is not a good
-[0:45:11] So, the accuracy alone is not a good indicator of downstream causal
-[0:45:13] indicator of downstream causal performance. So, what you can do is to
-[0:45:16] performance. So, what you can do is to estimate treatment effect bias on a
-[0:45:17] estimate treatment effect bias on a validation set, but then again, you need
-[0:45:19] validation set, but then again, you need to be very careful on how you choose the
-[0:45:20] to be very careful on how you choose the validation set.
-[0:45:23] validation set. The other thing you could do is then to
-[0:45:24] The other thing you could do is then to go back to the measurement model. And
-[0:45:28] go back to the measurement model. And you know, on the left-hand side here, we
-[0:45:30] you know, on the left-hand side here, we have
+[0:43:58] principle to debias
+[0:44:00] um our model. For example, assuming that
+[0:44:02] our representation stays invariant
+[0:44:04] across experiment settings.
+[0:44:06] And so we can take a model which is uh
+[0:44:10] training a bias design from selection
+[0:44:12] bias and and by increasing
+[0:44:14] regularization, we can
+[0:44:18] reduce the biasing in in the conclusion.
+[0:44:22] And interestingly, this this model is
+[0:44:24] also using V-Rex to implement the
+[0:44:27] invariance condition, and we see
+[0:44:30] small deviation in accuracy, but a very
+[0:44:32] strong effect in the reduction of the
+[0:44:34] causal error.
+[0:44:37] The second problem is in the choice of
+[0:44:40] the model, and
+[0:44:42] here we can see first a scatter plot and
+[0:44:44] then some rank correlation between the
+[0:44:47] balanced accuracy and the treatment
+[0:44:49] effect bias.
+[0:44:50] And what we see very clearly is that
+[0:44:52] this is an underspecified setting, like
+[0:44:56] we have many models that achieve like
+[0:44:58] very high accuracy, but they are
+[0:44:59] arranged in kind of like these vertical
+[0:45:01] stripes in the scatter plot. So, these
+[0:45:04] models have very similar accuracy, but
+[0:45:06] very different treatment effect bias.
+[0:45:10] So, the accuracy alone is not a good
+[0:45:11] indicator of downstream causal
+[0:45:13] performance. So, what you can do is to
+[0:45:16] estimate treatment effect bias on a
+[0:45:17] validation set, but then again, you need
+[0:45:19] to be very careful on how you choose the
+[0:45:20] validation set.
+[0:45:23] The other thing you could do is then to
+[0:45:24] go back to the measurement model. And
+[0:45:28] you know, on the left-hand side here, we
 [0:45:32] have our original measurements, and on the
-[0:45:34] our original measurements, and on the right-hand side, we have what we wish to
-[0:45:37] right-hand side, we have what we wish to learn.
+[0:45:34] right-hand side, we have what we wish to
 [0:45:38] learn. And then and this gives us a a test
-[0:45:41] And then and this gives us a a test condition on Y, we want our predictions
-[0:45:43] condition on Y, we want our predictions to be independent of the treatment
-[0:45:45] to be independent of the treatment assignment, for example.
-[0:45:47] assignment, for example. And this
+[0:45:41] condition on Y, we want our predictions
+[0:45:43] to be independent of the treatment
+[0:45:45] assignment, for example.
 [0:45:48] And this can actually be implemented as a way to
-[0:45:50] can actually be implemented as a way to do model selection. The nice thing is
-[0:45:52] do model selection. The nice thing is that we don't need the data to to really
-[0:45:55] that we don't need the data to to really follow the trial distribution as long as
-[0:45:57] follow the trial distribution as long as this conditional independence still
-[0:45:59] this conditional independence still holds, which is which is quite nice.
-[0:46:02] holds, which is which is quite nice. Last thing that one should be careful is
-[0:46:04] Last thing that one should be careful is post-processing. Again, to be brief,
-[0:46:07] post-processing. Again, to be brief, uh one should not threshold the
-[0:46:09] uh one should not threshold the predictions to make them binary,
-[0:46:10] predictions to make them binary, otherwise it introduce bias.
-[0:46:13] otherwise it introduce bias. Um
+[0:45:50] do model selection. The nice thing is
+[0:45:52] that we don't need the data to to really
+[0:45:55] follow the trial distribution as long as
+[0:45:57] this conditional independence still
+[0:45:59] holds, which is which is quite nice.
+[0:46:02] Last thing that one should be careful is
+[0:46:04] post-processing. Again, to be brief,
+[0:46:07] uh one should not threshold the
+[0:46:09] predictions to make them binary,
+[0:46:10] otherwise it introduce bias.
 [0:46:15] Um Now, until now I've only, you know, just
-[0:46:17] Now, until now I've only, you know, just trained the models and then hope for the
-[0:46:19] trained the models and then hope for the best.
+[0:46:17] trained the models and then hope for the
 [0:46:20] best. Um, but we can actually
-[0:46:23] Um, but we can actually uh force our model to to be causally to
-[0:46:27] uh force our model to to be causally to yield causally valid measurements. And
-[0:46:29] yield causally valid measurements. And what we need to essentially force is is
-[0:46:31] what we need to essentially force is is this conditional calibration. Um, which
-[0:46:34] this conditional calibration. Um, which implies that if we then run IPW on the
-[0:46:37] implies that if we then run IPW on the predictions, we get
-[0:46:39] predictions, we get valid estimates with with the correct
-[0:46:41] valid estimates with with the correct confidence intervals.
-[0:46:44] confidence intervals. And to enforce this conditional
-[0:46:46] And to enforce this conditional calibration, we go back to this
-[0:46:47] calibration, we go back to this conditional independence constraint.
-[0:46:49] conditional independence constraint. Uh, so um
+[0:46:23] uh force our model to to be causally to
+[0:46:27] yield causally valid measurements. And
+[0:46:29] what we need to essentially force is is
+[0:46:31] this conditional calibration. Um, which
+[0:46:34] implies that if we then run IPW on the
+[0:46:37] predictions, we get
+[0:46:39] valid estimates with with the correct
+[0:46:41] confidence intervals.
+[0:46:44] And to enforce this conditional
+[0:46:46] calibration, we go back to this
+[0:46:47] conditional independence constraint.
 [0:46:52] Uh, so um we want that
-[0:46:54] we want that conditional on the observed labels, our
-[0:46:56] conditional on the observed labels, our prediction should be independent from
-[0:46:58] prediction should be independent from treatment assignments and other
-[0:47:00] treatment assignments and other covariates. And so literally, we just uh
-[0:47:03] covariates. And so literally, we just uh uh
+[0:46:54] conditional on the observed labels, our
+[0:46:56] prediction should be independent from
+[0:46:58] treatment assignments and other
+[0:47:00] covariates. And so literally, we just uh
 [0:47:04] uh fix this conditional independence as a
-[0:47:06] fix this conditional independence as a constraint for uh our transfer learning.
-[0:47:11] constraint for uh our transfer learning. Um, and now if the representation
-[0:47:13] Um, and now if the representation generalizes well, this is the last
-[0:47:15] generalizes well, this is the last results I want to show,
-[0:47:17] results I want to show, uh then we can also transfer well across
-[0:47:19] uh then we can also transfer well across across multiple experiments.
-[0:47:21] across multiple experiments. And so we tested it on different
-[0:47:22] And so we tested it on different iterations of our recording platform and
-[0:47:25] iterations of our recording platform and uh
+[0:47:06] constraint for uh our transfer learning.
+[0:47:11] Um, and now if the representation
+[0:47:13] generalizes well, this is the last
+[0:47:15] results I want to show,
+[0:47:17] uh then we can also transfer well across
+[0:47:19] across multiple experiments.
+[0:47:21] And so we tested it on different
+[0:47:22] iterations of our recording platform and
 [0:47:25] uh uh we have uh
-[0:47:27] uh we have uh theoretical results that uh guarantee
-[0:47:30] theoretical results that uh guarantee the causal validity of the model in in
-[0:47:33] the causal validity of the model in in the target population under the
-[0:47:36] the target population under the assumption that uh the representation
-[0:47:37] assumption that uh the representation transfers well and the causal lifting
-[0:47:40] transfers well and the causal lifting constraint is satisfied in the target
-[0:47:41] constraint is satisfied in the target population.
-[0:47:44] population. Um, this is the result. Derm is our
-[0:47:46] Um, this is the result. Derm is our method uh compared against ERM, V-Rex,
-[0:47:49] method uh compared against ERM, V-Rex, and IRM. And what we can observe is that
-[0:47:52] and IRM. And what we can observe is that uh our method always overlaps at least
-[0:47:54] uh our method always overlaps at least 33% with the true confidence interval,
-[0:47:57] 33% with the true confidence interval, but most importantly, never flips the
-[0:48:00] but most importantly, never flips the conclusion of our study.
-[0:48:02] conclusion of our study. So, we always conclude that the
-[0:48:04] So, we always conclude that the treatment increases the effect.
-[0:48:07] treatment increases the effect. So,
+[0:47:27] theoretical results that uh guarantee
+[0:47:30] the causal validity of the model in in
+[0:47:33] the target population under the
+[0:47:36] assumption that uh the representation
+[0:47:37] transfers well and the causal lifting
+[0:47:40] constraint is satisfied in the target
+[0:47:41] population.
+[0:47:44] Um, this is the result. Derm is our
+[0:47:46] method uh compared against ERM, V-Rex,
+[0:47:49] and IRM. And what we can observe is that
+[0:47:52] uh our method always overlaps at least
+[0:47:54] 33% with the true confidence interval,
+[0:47:57] but most importantly, never flips the
+[0:48:00] conclusion of our study.
+[0:48:02] So, we always conclude that the
+[0:48:04] treatment increases the effect.
 [0:48:09] So, this is also another area where
-[0:48:11] this is also another area where causality and machine learning can go
-[0:48:14] causality and machine learning can go very well together and we have the first
-[0:48:17] very well together and we have the first like I would say like really positive
-[0:48:19] like I would say like really positive results on on real-world problems.
-[0:48:22] results on on real-world problems. So, this is my last slide. To conclude,
-[0:48:25] So, this is my last slide. To conclude, I think overall machine learning has a
-[0:48:26] I think overall machine learning has a great opportunity in powering all of
-[0:48:29] great opportunity in powering all of causal analysis.
-[0:48:31] causal analysis. Um and there are really key applications
-[0:48:34] Um and there are really key applications in in scientific discovery.
-[0:48:37] in in scientific discovery. Um overall, like solving causal
-[0:48:39] Um overall, like solving causal questions is subtle and and sometimes
-[0:48:41] questions is subtle and and sometimes it's hard to tell when when we are
-[0:48:43] it's hard to tell when when we are successful, so it requires some care.
-[0:48:46] successful, so it requires some care. Um but definitely just chasing
-[0:48:47] Um but definitely just chasing predictive accuracy may may not then,
-[0:48:50] predictive accuracy may may not then, you know, lead to success
-[0:48:52] you know, lead to success if you care about the causal conclusions
-[0:48:54] if you care about the causal conclusions that are drawn from your predictions.
-[0:48:56] that are drawn from your predictions. And I would argue that this is
-[0:48:57] And I would argue that this is particularly important in AI for
-[0:48:59] particularly important in AI for science. Like if your question is
-[0:49:00] science. Like if your question is causal, then the question needs to be
-[0:49:02] causal, then the question needs to be part of the benchmark.
-[0:49:04] part of the benchmark. And the way I really am thinking about
-[0:49:06] And the way I really am thinking about causal representation learning these
-[0:49:07] causal representation learning these days is is that we want to learn
-[0:49:10] days is is that we want to learn representations that makes it easier or
-[0:49:11] representations that makes it easier or possible to extract causal information
-[0:49:14] possible to extract causal information downstream. And with this, I thank you
-[0:49:16] downstream. And with this, I thank you very much. I'm sorry that I went a
-[0:49:18] very much. I'm sorry that I went a little bit over time. I would like to
-[0:49:19] little bit over time. I would like to thank my group and also say that I'm
-[0:49:21] thank my group and also say that I'm looking for a postdoc, so
-[0:49:23] looking for a postdoc, so if someone in the audience is looking
-[0:49:25] if someone in the audience is looking for a postdoc and and like our research,
-[0:49:27] for a postdoc and and like our research, then feel free to reach out. Thank you.
+[0:48:11] causality and machine learning can go
+[0:48:14] very well together and we have the first
+[0:48:17] like I would say like really positive
+[0:48:19] results on on real-world problems.
+[0:48:22] So, this is my last slide. To conclude,
+[0:48:25] I think overall machine learning has a
+[0:48:26] great opportunity in powering all of
+[0:48:29] causal analysis.
+[0:48:31] Um and there are really key applications
+[0:48:34] in in scientific discovery.
+[0:48:37] Um overall, like solving causal
+[0:48:39] questions is subtle and and sometimes
+[0:48:41] it's hard to tell when when we are
+[0:48:43] successful, so it requires some care.
+[0:48:46] Um but definitely just chasing
+[0:48:47] predictive accuracy may may not then,
+[0:48:50] you know, lead to success
+[0:48:52] if you care about the causal conclusions
+[0:48:54] that are drawn from your predictions.
+[0:48:56] And I would argue that this is
+[0:48:57] particularly important in AI for
+[0:48:59] science. Like if your question is
+[0:49:00] causal, then the question needs to be
+[0:49:02] part of the benchmark.
+[0:49:04] And the way I really am thinking about
+[0:49:06] causal representation learning these
+[0:49:07] days is is that we want to learn
+[0:49:10] representations that makes it easier or
+[0:49:11] possible to extract causal information
+[0:49:14] downstream. And with this, I thank you
+[0:49:16] very much. I'm sorry that I went a
+[0:49:18] little bit over time. I would like to
+[0:49:19] thank my group and also say that I'm
+[0:49:21] looking for a postdoc, so
+[0:49:23] if someone in the audience is looking
+[0:49:25] for a postdoc and and like our research,
+[0:49:27] then feel free to reach out. Thank you.
 [0:49:33] Thank you so much, Francesco, for the great talk. Um
-[0:49:36] great talk. Um due to the interest of time, let's
-[0:49:39] due to the interest of time, let's directly move on to the discussion the
-[0:49:42] directly move on to the discussion the discussion by Jason.
+[0:49:36] due to the interest of time, let's
+[0:49:39] directly move on to the discussion the
+[0:49:42] discussion by Jason.
 [0:49:46] Cool. Um
 [0:49:48] Um Zoom keeps warning me that my internet's
-[0:49:49] Zoom keeps warning me that my internet's unstable, so please stop me if if you
-[0:49:51] unstable, so please stop me if if you can't hear me.
+[0:49:49] unstable, so please stop me if if you
+[0:49:51] can't hear me.
 [0:49:56] Okay, and I'll just jump straight into it.
 [0:49:57] it. Okay, so I'm going to give like
-[0:49:59] Okay, so I'm going to give like contextualize it from my perspective
-[0:50:01] contextualize it from my perspective where where this work lands just with my
-[0:50:04] where where this work lands just with my very oversimplified history of causality
-[0:50:05] very oversimplified history of causality in one slide.
-[0:50:07] in one slide. If we think of like a toolbox of causal
-[0:50:09] If we think of like a toolbox of causal inference
+[0:49:59] contextualize it from my perspective
+[0:50:01] where where this work lands just with my
+[0:50:04] very oversimplified history of causality
+[0:50:05] in one slide.
+[0:50:07] If we think of like a toolbox of causal
 [0:50:10] inference for the first 250 years, we had one tool
-[0:50:14] for the first 250 years, we had one tool and that was experimentation.
-[0:50:17] and that was experimentation. So so whether you were James Lind in the
-[0:50:18] So so whether you were James Lind in the 1700s you were figuring out scurvy
-[0:50:21] 1700s you were figuring out scurvy or John Snow in the late 1800s showing
-[0:50:25] or John Snow in the late 1800s showing that that cholera was caused by dirty
-[0:50:26] that that cholera was caused by dirty water, you used experiments to to show
-[0:50:29] water, you used experiments to to show to show that that this wasn't that true.
-[0:50:32] to show that that this wasn't that true. And it was really the 1950s debate
-[0:50:33] And it was really the 1950s debate around smoking and cancer that showed
-[0:50:36] around smoking and cancer that showed the need that we really needed causal
-[0:50:38] the need that we really needed causal causal inference from observational
-[0:50:39] causal inference from observational data.
+[0:50:14] and that was experimentation.
+[0:50:17] So so whether you were James Lind in the
+[0:50:18] 1700s you were figuring out scurvy
+[0:50:21] or John Snow in the late 1800s showing
+[0:50:25] that that cholera was caused by dirty
+[0:50:26] water, you used experiments to to show
+[0:50:29] to show that that this wasn't that true.
+[0:50:32] And it was really the 1950s debate
+[0:50:33] around smoking and cancer that showed
+[0:50:36] the need that we really needed causal
+[0:50:38] causal inference from observational
 [0:50:40] data. And the suite of tools that we have
-[0:50:41] And the suite of tools that we have today that was developed sort of from
-[0:50:43] today that was developed sort of from '70s to today excluding instrumental
-[0:50:45] '70s to today excluding instrumental variables
+[0:50:41] today that was developed sort of from
+[0:50:43] '70s to today excluding instrumental
 [0:50:46] variables gave us that suite of tools and it
-[0:50:48] gave us that suite of tools and it fundamentally changed how we do
-[0:50:50] fundamentally changed how we do like how a certain sciences do their
-[0:50:53] like how a certain sciences do their work, right? Like econ is completely
-[0:50:55] work, right? Like econ is completely changed how they from from a sort of
-[0:50:57] changed how they from from a sort of theory-driven field to
-[0:50:59] theory-driven field to kind of more empirical science through
-[0:51:01] kind of more empirical science through this process.
-[0:51:02] this process. Now, I would argue and I think I think
-[0:51:04] Now, I would argue and I think I think Francesco
+[0:50:48] fundamentally changed how we do
+[0:50:50] like how a certain sciences do their
+[0:50:53] work, right? Like econ is completely
+[0:50:55] changed how they from from a sort of
+[0:50:57] theory-driven field to
+[0:50:59] kind of more empirical science through
+[0:51:01] this process.
+[0:51:02] Now, I would argue and I think I think
 [0:51:06] Francesco work supports this really nicely that
-[0:51:09] work supports this really nicely that like if we could if we could develop
-[0:51:12] like if we could if we could develop tools that that allow us to do causal
-[0:51:13] tools that that allow us to do causal inference tasks from unstructured data
-[0:51:16] inference tasks from unstructured data like you know, Francesco presented or
-[0:51:19] like you know, Francesco presented or some of the work that we work with
-[0:51:22] some of the work that we work with with my colleagues at Valence,
-[0:51:24] with my colleagues at Valence, you know, this would just open up a new
-[0:51:25] you know, this would just open up a new set of tools that would open it would
-[0:51:27] set of tools that would open it would allow us to do new kinds of science,
-[0:51:29] allow us to do new kinds of science, right? So so I think that's I think it's
-[0:51:30] right? So so I think that's I think it's the sort of strongest motivation for
-[0:51:32] the sort of strongest motivation for like what we want to be doing here.
-[0:51:35] like what we want to be doing here. Now,
+[0:51:09] like if we could if we could develop
+[0:51:12] tools that that allow us to do causal
+[0:51:13] inference tasks from unstructured data
+[0:51:16] like you know, Francesco presented or
+[0:51:19] some of the work that we work with
+[0:51:22] with my colleagues at Valence,
+[0:51:24] you know, this would just open up a new
+[0:51:25] set of tools that would open it would
+[0:51:27] allow us to do new kinds of science,
+[0:51:29] right? So so I think that's I think it's
+[0:51:30] the sort of strongest motivation for
+[0:51:32] like what we want to be doing here.
 [0:51:36] Now, I kind of think
-[0:51:38] I kind of think again sort of revisionist history like
-[0:51:39] again sort of revisionist history like we think about this like path to that
-[0:51:41] we think about this like path to that point.
+[0:51:38] again sort of revisionist history like
+[0:51:39] we think about this like path to that
 [0:51:42] point. You could think like ICA literature in
-[0:51:44] You could think like ICA literature in the '90s
 [0:51:45] the '90s with linear ICA hey identifiability is
-[0:51:47] with linear ICA hey identifiability is possible if we assume non-Gaussian
-[0:51:50] possible if we assume non-Gaussian result.
+[0:51:47] possible if we assume non-Gaussian
 [0:51:51] result. Then we have a set of negative results
-[0:51:52] Then we have a set of negative results that show that that this is impossible
-[0:51:54] that show that that this is impossible in general from ID data, um, including
-[0:51:56] in general from ID data, um, including from from Francesco himself. Um, and
-[0:51:59] from from Francesco himself. Um, and then we've had this kind of chipping
-[0:52:00] then we've had this kind of chipping away of assumptions, right? We've had
-[0:52:01] away of assumptions, right? We've had sort of this this suite of assumptions
-[0:52:04] sort of this this suite of assumptions um, that have allowed us to to to get
-[0:52:06] um, that have allowed us to to to get closer and closer to well,
-[0:52:07] closer and closer to well, closer and closer up this hill, but
-[0:52:09] closer and closer up this hill, but like, you know, how far up the mountain
-[0:52:10] like, you know, how far up the mountain do we have to go? Um, and, you know, how
-[0:52:13] do we have to go? Um, and, you know, how far it is sort of question like how far
-[0:52:15] far it is sort of question like how far up that mountain we still have to climb
-[0:52:17] up that mountain we still have to climb in order to
-[0:52:18] in order to so we get to the point where we have
-[0:52:19] so we get to the point where we have actually useful causal representation
-[0:52:21] actually useful causal representation learning methods that are sort of
-[0:52:23] learning methods that are sort of powerful and and and applicable um, in
-[0:52:25] powerful and and and applicable um, in the sciences. Now, I think I think
-[0:52:27] the sciences. Now, I think I think Francesco's work with the ants data set
-[0:52:29] Francesco's work with the ants data set is a nice example of sort of where we
-[0:52:31] is a nice example of sort of where we can get to, but that's kind of going to
-[0:52:32] can get to, but that's kind of going to motivate my my first point of questions.
-[0:52:34] motivate my my first point of questions. So, I've got two kinds of questions, the
-[0:52:35] So, I've got two kinds of questions, the ones of kind of more specific to this
-[0:52:37] ones of kind of more specific to this talk and the ones are more speculative.
-[0:52:38] talk and the ones are more speculative. The next slide is more speculative and
-[0:52:40] The next slide is more speculative and I'm going to go quick cuz I know we're
-[0:52:41] I'm going to go quick cuz I know we're short on time.
-[0:52:42] short on time. Um, okay, so so traditionally like in
-[0:52:44] Um, okay, so so traditionally like in causal inference, effect estimation
-[0:52:46] causal inference, effect estimation tends to be easier in the sense that you
-[0:52:48] tends to be easier in the sense that you you need fewer assumptions than
-[0:52:49] you need fewer assumptions than discovery in order to in order to kind
-[0:52:52] discovery in order to in order to kind of have the algorithms work. Um, I'm
-[0:52:54] of have the algorithms work. Um, I'm curious Francesco whether you think that
-[0:52:56] curious Francesco whether you think that that the same holds for working from
-[0:52:58] that the same holds for working from unstructured data when we don't have
-[0:53:00] unstructured data when we don't have labels, right? So, in in in prediction
-[0:53:03] labels, right? So, in in in prediction powered inference, you assume that you
-[0:53:05] powered inference, you assume that you have access to this label that's given
-[0:53:06] have access to this label that's given to you that's a sort of labeled setting.
-[0:53:09] to you that's a sort of labeled setting. Um,
+[0:51:52] that show that that this is impossible
+[0:51:54] in general from ID data, um, including
+[0:51:56] from from Francesco himself. Um, and
+[0:51:59] then we've had this kind of chipping
+[0:52:00] away of assumptions, right? We've had
+[0:52:01] sort of this this suite of assumptions
+[0:52:04] um, that have allowed us to to to get
+[0:52:06] closer and closer to well,
+[0:52:07] closer and closer up this hill, but
+[0:52:09] like, you know, how far up the mountain
+[0:52:10] do we have to go? Um, and, you know, how
+[0:52:13] far it is sort of question like how far
+[0:52:15] up that mountain we still have to climb
+[0:52:17] in order to
+[0:52:18] so we get to the point where we have
+[0:52:19] actually useful causal representation
+[0:52:21] learning methods that are sort of
+[0:52:23] powerful and and and applicable um, in
+[0:52:25] the sciences. Now, I think I think
+[0:52:27] Francesco's work with the ants data set
+[0:52:29] is a nice example of sort of where we
+[0:52:31] can get to, but that's kind of going to
+[0:52:32] motivate my my first point of questions.
+[0:52:34] So, I've got two kinds of questions, the
+[0:52:35] ones of kind of more specific to this
+[0:52:37] talk and the ones are more speculative.
+[0:52:38] The next slide is more speculative and
+[0:52:40] I'm going to go quick cuz I know we're
+[0:52:41] short on time.
+[0:52:42] Um, okay, so so traditionally like in
+[0:52:44] causal inference, effect estimation
+[0:52:46] tends to be easier in the sense that you
+[0:52:48] you need fewer assumptions than
+[0:52:49] discovery in order to in order to kind
+[0:52:52] of have the algorithms work. Um, I'm
+[0:52:54] curious Francesco whether you think that
+[0:52:56] that the same holds for working from
+[0:52:58] unstructured data when we don't have
+[0:53:00] labels, right? So, in in in prediction
+[0:53:03] powered inference, you assume that you
+[0:53:05] have access to this label that's given
+[0:53:06] to you that's a sort of labeled setting.
 [0:53:10] Um, um, but then if we kind of didn't have
-[0:53:12] um, but then if we kind of didn't have that label, are we just back in the
-[0:53:13] that label, are we just back in the world of of um, of of representation
-[0:53:17] world of of um, of of representation learning um, from unstructured data? Um,
-[0:53:21] learning um, from unstructured data? Um, or is there sort of some kind of weaker
-[0:53:23] or is there sort of some kind of weaker setting in between
-[0:53:25] setting in between um, where we don't have,
-[0:53:26] um, where we don't have, you know, we don't have that we don't
-[0:53:27] you know, we don't have that we don't have the label, but it's but it's
-[0:53:29] have the label, but it's but it's nevertheless an easier problem than
-[0:53:30] nevertheless an easier problem than trying to sort of disentangle completely
-[0:53:32] trying to sort of disentangle completely and and do and effectively do causal
-[0:53:34] and and do and effectively do causal discovery um, on on the latent
-[0:53:36] discovery um, on on the latent variables. So,
-[0:53:38] variables. So, that class of questions and I I think
-[0:53:39] that class of questions and I I think I'm just going to go through and
-[0:53:41] I'm just going to go through and Francesco, you can choose which
-[0:53:41] Francesco, you can choose which questions which questions you want to
-[0:53:43] questions which questions you want to answer and and and we can uh,
-[0:53:45] answer and and and we can uh, you know, we'll go from there.
-[0:53:47] you know, we'll go from there. So the more speculative like bigger term
-[0:53:49] So the more speculative like bigger term is
+[0:53:12] that label, are we just back in the
+[0:53:13] world of of um, of of representation
+[0:53:17] learning um, from unstructured data? Um,
+[0:53:21] or is there sort of some kind of weaker
+[0:53:23] setting in between
+[0:53:25] um, where we don't have,
+[0:53:26] you know, we don't have that we don't
+[0:53:27] have the label, but it's but it's
+[0:53:29] nevertheless an easier problem than
+[0:53:30] trying to sort of disentangle completely
+[0:53:32] and and do and effectively do causal
+[0:53:34] discovery um, on on the latent
+[0:53:36] variables. So,
+[0:53:38] that class of questions and I I think
+[0:53:39] I'm just going to go through and
+[0:53:41] Francesco, you can choose which
+[0:53:41] questions which questions you want to
+[0:53:43] answer and and and we can uh,
+[0:53:45] you know, we'll go from there.
+[0:53:47] So the more speculative like bigger term
 [0:53:50] is uh question is is is I think like in
-[0:53:53] uh question is is is I think like in close representation learning we're kind
-[0:53:54] close representation learning we're kind of solving a much harder problem than
-[0:53:57] of solving a much harder problem than scientists are solving. We were so
-[0:53:58] scientists are solving. We were so motivated by scientists looking at ants
-[0:54:00] motivated by scientists looking at ants under a microscope. But we're not only
-[0:54:02] under a microscope. But we're not only trying to trying to sort of um
-[0:54:05] trying to trying to sort of um understand you know, trying to simulate
-[0:54:07] understand you know, trying to simulate the what the scientists do which is sort
-[0:54:09] the what the scientists do which is sort of understand these systems when they're
-[0:54:11] of understand these systems when they're looking at ants. Um but we're also
-[0:54:12] looking at ants. Um but we're also trying to learn how to see at the same
-[0:54:13] trying to learn how to see at the same time, right? We're sort of learning
-[0:54:15] time, right? We're sort of learning we're learning both the sort of encoder
-[0:54:18] we're learning both the sort of encoder from scratch. You know, we we don't come
-[0:54:20] from scratch. You know, we we don't come with any sort of pre-conceived notion of
-[0:54:22] with any sort of pre-conceived notion of objects, relations, you know, all the
-[0:54:24] objects, relations, you know, all the stuff that we learn you know, growing up
-[0:54:26] stuff that we learn you know, growing up from being toddlers to to adults. Um and
-[0:54:29] from being toddlers to to adults. Um and we also come to our data with a set of
-[0:54:31] we also come to our data with a set of scientific theories often that sort of
-[0:54:33] scientific theories often that sort of should explain how this data um
-[0:54:36] should explain how this data um exists in the world or how how this data
-[0:54:38] exists in the world or how how this data came to be. Um so you know, if you look
-[0:54:40] came to be. Um so you know, if you look at the work by Popper and his colleagues
-[0:54:41] at the work by Popper and his colleagues on theory-laden observations, that's a
-[0:54:43] on theory-laden observations, that's a sort of nice way of one way of thinking
-[0:54:45] sort of nice way of one way of thinking about that. Um so I'm asking so I
-[0:54:47] about that. Um so I'm asking so I thought of I'd ask you know, the sort of
-[0:54:49] thought of I'd ask you know, the sort of more general question is you know,
-[0:54:50] more general question is you know, should we be using kind of pre-existing
-[0:54:52] should we be using kind of pre-existing understanding of of the world in these
-[0:54:55] understanding of of the world in these scientific
-[0:54:56] scientific questions as we try and um
-[0:54:58] questions as we try and um adapt these methods.
-[0:55:00] adapt these methods. Um if so, you know, should we be using
-[0:55:02] Um if so, you know, should we be using kind of foundational models trained on
-[0:55:03] kind of foundational models trained on internet-scale observational data? You
-[0:55:05] internet-scale observational data? You know, do they have a role to play in
-[0:55:06] know, do they have a role to play in these kinds of questions or not? Um
-[0:55:10] these kinds of questions or not? Um and then separately kind of but perhaps
-[0:55:12] and then separately kind of but perhaps relatedly, um you've done you've done
-[0:55:14] relatedly, um you've done you've done work in in kind of relative
-[0:55:15] work in in kind of relative representations and the related ideas.
-[0:55:17] representations and the related ideas. This this these popular ideas around the
-[0:55:20] This this these popular ideas around the platonic uh representation hypothesis uh
-[0:55:22] platonic uh representation hypothesis uh which is again sort of saying you know,
-[0:55:24] which is again sort of saying you know, if when we do these large-scale models,
-[0:55:26] if when we do these large-scale models, um we actually get these pretty
-[0:55:27] um we actually get these pretty consistent representations up to
-[0:55:30] consistent representations up to transformations that you can get rid of.
-[0:55:32] transformations that you can get rid of. Um and curious how that could kind of
-[0:55:35] Um and curious how that could kind of tie back into into into the scientific
-[0:55:37] tie back into into into the scientific applications.
-[0:55:39] applications. So, that's a
+[0:53:53] close representation learning we're kind
+[0:53:54] of solving a much harder problem than
+[0:53:57] scientists are solving. We were so
+[0:53:58] motivated by scientists looking at ants
+[0:54:00] under a microscope. But we're not only
+[0:54:02] trying to trying to sort of um
+[0:54:05] understand you know, trying to simulate
+[0:54:07] the what the scientists do which is sort
+[0:54:09] of understand these systems when they're
+[0:54:11] looking at ants. Um but we're also
+[0:54:12] trying to learn how to see at the same
+[0:54:13] time, right? We're sort of learning
+[0:54:15] we're learning both the sort of encoder
+[0:54:18] from scratch. You know, we we don't come
+[0:54:20] with any sort of pre-conceived notion of
+[0:54:22] objects, relations, you know, all the
+[0:54:24] stuff that we learn you know, growing up
+[0:54:26] from being toddlers to to adults. Um and
+[0:54:29] we also come to our data with a set of
+[0:54:31] scientific theories often that sort of
+[0:54:33] should explain how this data um
+[0:54:36] exists in the world or how how this data
+[0:54:38] came to be. Um so you know, if you look
+[0:54:40] at the work by Popper and his colleagues
+[0:54:41] on theory-laden observations, that's a
+[0:54:43] sort of nice way of one way of thinking
+[0:54:45] about that. Um so I'm asking so I
+[0:54:47] thought of I'd ask you know, the sort of
+[0:54:49] more general question is you know,
+[0:54:50] should we be using kind of pre-existing
+[0:54:52] understanding of of the world in these
+[0:54:55] scientific
+[0:54:56] questions as we try and um
+[0:54:58] adapt these methods.
+[0:55:00] Um if so, you know, should we be using
+[0:55:02] kind of foundational models trained on
+[0:55:03] internet-scale observational data? You
+[0:55:05] know, do they have a role to play in
+[0:55:06] these kinds of questions or not? Um
+[0:55:10] and then separately kind of but perhaps
+[0:55:12] relatedly, um you've done you've done
+[0:55:14] work in in kind of relative
+[0:55:15] representations and the related ideas.
+[0:55:17] This this these popular ideas around the
+[0:55:20] platonic uh representation hypothesis uh
+[0:55:22] which is again sort of saying you know,
+[0:55:24] if when we do these large-scale models,
+[0:55:26] um we actually get these pretty
+[0:55:27] consistent representations up to
+[0:55:30] transformations that you can get rid of.
+[0:55:32] Um and curious how that could kind of
+[0:55:35] tie back into into into the scientific
+[0:55:37] applications.
+[0:55:39] So, that's a
 [0:55:45] Uh you're unmuted. Thank you, Jason, for the great
-[0:55:47] Thank you, Jason, for the great discussion. Uh we still have a few
-[0:55:48] discussion. Uh we still have a few minutes left. Uh so, Francesco, do you
-[0:55:50] minutes left. Uh so, Francesco, do you want to uh briefly respond and maybe you
-[0:55:53] want to uh briefly respond and maybe you can
+[0:55:47] discussion. Uh we still have a few
+[0:55:48] minutes left. Uh so, Francesco, do you
+[0:55:50] want to uh briefly respond and maybe you
 [0:55:53] can Yes, I would like to try to answer both
-[0:55:55] Yes, I would like to try to answer both questions. So, I don't see this PPCI
-[0:55:57] questions. So, I don't see this PPCI setting and causal representation
-[0:55:59] setting and causal representation setting to be fundamentally different in
-[0:56:01] setting to be fundamentally different in the sense that they both try to do the
-[0:56:03] the sense that they both try to do the same thing. They both try to like um
-[0:56:08] same thing. They both try to like um learn like a representation for some
-[0:56:11] learn like a representation for some like individual variables. And in the
-[0:56:13] like individual variables. And in the PPCI setting is is more direct like we
-[0:56:15] PPCI setting is is more direct like we just directly try to predict the the the
-[0:56:18] just directly try to predict the the the value of Y and we need labels for that.
-[0:56:22] value of Y and we need labels for that. Um but the reason why we do that is
-[0:56:23] Um but the reason why we do that is because we want to do like average
-[0:56:25] because we want to do like average treatment effects like in in for we like
-[0:56:28] treatment effects like in in for we like binary variables like Of course, like
-[0:56:31] binary variables like Of course, like you could do it differently. You could
-[0:56:33] you could do it differently. You could have like some estimator which is
-[0:56:35] have like some estimator which is invariant to like reparameterizations
-[0:56:38] invariant to like reparameterizations like design fusion only in
-[0:56:40] like design fusion only in transformation in CRL. There is some
-[0:56:41] transformation in CRL. There is some work from Dominic Janzing like 12 years
-[0:56:43] work from Dominic Janzing like 12 years ago or something like this that that
-[0:56:45] ago or something like this that that does that.
-[0:56:46] does that. Uh but but we wanted to stick closer to
-[0:56:48] Uh but but we wanted to stick closer to the like uh
+[0:55:55] questions. So, I don't see this PPCI
+[0:55:57] setting and causal representation
+[0:55:59] setting to be fundamentally different in
+[0:56:01] the sense that they both try to do the
+[0:56:03] same thing. They both try to like um
+[0:56:08] learn like a representation for some
+[0:56:11] like individual variables. And in the
+[0:56:13] PPCI setting is is more direct like we
+[0:56:15] just directly try to predict the the the
+[0:56:18] value of Y and we need labels for that.
+[0:56:22] Um but the reason why we do that is
+[0:56:23] because we want to do like average
+[0:56:25] treatment effects like in in for we like
+[0:56:28] binary variables like Of course, like
+[0:56:31] you could do it differently. You could
+[0:56:33] have like some estimator which is
+[0:56:35] invariant to like reparameterizations
+[0:56:38] like design fusion only in
+[0:56:40] transformation in CRL. There is some
+[0:56:41] work from Dominic Janzing like 12 years
+[0:56:43] ago or something like this that that
+[0:56:45] does that.
+[0:56:46] Uh but but we wanted to stick closer to
+[0:56:48] the like uh
 [0:56:54] like in in a way traditional traditional setting. So, I don't see it as as having
-[0:56:56] setting. So, I don't see it as as having like fundamentally different assumptions
-[0:56:58] like fundamentally different assumptions except that
-[0:57:00] except that in this prediction power causal
-[0:57:01] in this prediction power causal inference we are we are laser focused on
-[0:57:04] inference we are we are laser focused on on just one variable.
-[0:57:05] on just one variable. Um we have done other works which um
-[0:57:08] Um we have done other works which um I I uh did not have time to share where
-[0:57:11] I I uh did not have time to share where for example like we try to model
-[0:57:13] for example like we try to model confounding and there like uh non-linear
-[0:57:15] confounding and there like uh non-linear reparameterizations are fine.
-[0:57:17] reparameterizations are fine. Um
+[0:56:56] like fundamentally different assumptions
+[0:56:58] except that
+[0:57:00] in this prediction power causal
+[0:57:01] inference we are we are laser focused on
+[0:57:04] on just one variable.
+[0:57:05] Um we have done other works which um
+[0:57:08] I I uh did not have time to share where
+[0:57:11] for example like we try to model
+[0:57:13] confounding and there like uh non-linear
+[0:57:15] reparameterizations are fine.
 [0:57:19] Um Okay. Now, the second part on the
-[0:57:22] Okay. Now, the second part on the understanding how to see and and the
-[0:57:25] understanding how to see and and the role of
+[0:57:22] understanding how to see and and the
 [0:57:26] role of large engine models and and this like
-[0:57:28] large engine models and and this like platonic representation hypothesis and
-[0:57:30] platonic representation hypothesis and relative representations. So,
-[0:57:33] relative representations. So, um I I completely agree that we should
-[0:57:37] um I I completely agree that we should not be training these models from
-[0:57:38] not be training these models from scratch.
+[0:57:28] platonic representation hypothesis and
+[0:57:30] relative representations. So,
+[0:57:33] um I I completely agree that we should
+[0:57:37] not be training these models from
 [0:57:39] scratch. Uh
 [0:57:40] Uh especially because
-[0:57:42] especially because um
 [0:57:44] um like
 [0:57:45] like uh
 [0:57:46] uh if we think about if we think about like
-[0:57:48] if we think about if we think about like uh
 [0:57:49] uh even like the simple like instant
-[0:57:51] even like the simple like instant problem like
-[0:57:53] problem like uh
+[0:57:51] problem like
 [0:57:55] uh like existing existing foundation models
-[0:57:58] like existing existing foundation models are are pretty transferable.
-[0:58:00] are are pretty transferable. Um and
+[0:57:58] are are pretty transferable.
 [0:58:02] Um and uh if we are, you know, trying to like
-[0:58:04] uh if we are, you know, trying to like detect what is present in a video like
-[0:58:06] detect what is present in a video like we shouldn't just learn to see from
-[0:58:08] we shouldn't just learn to see from scratch on an individual example. Now,
-[0:58:11] scratch on an individual example. Now, the the difficult question is
-[0:58:14] the the difficult question is what happens at the interplay between,
-[0:58:16] what happens at the interplay between, you know, like the pre-training data
-[0:58:17] you know, like the pre-training data that now can bias my model
-[0:58:20] that now can bias my model uh in in uh now my much smaller like
-[0:58:23] uh in in uh now my much smaller like randomized trial. And I think that's the
-[0:58:25] randomized trial. And I think that's the key question. I I at least like what I'm
-[0:58:27] key question. I I at least like what I'm most in most excited about. There's a
-[0:58:30] most in most excited about. There's a lot of people who have done a lot of
-[0:58:31] lot of people who have done a lot of work on
+[0:58:04] detect what is present in a video like
+[0:58:06] we shouldn't just learn to see from
+[0:58:08] scratch on an individual example. Now,
+[0:58:11] the the difficult question is
+[0:58:14] what happens at the interplay between,
+[0:58:16] you know, like the pre-training data
+[0:58:17] that now can bias my model
+[0:58:20] uh in in uh now my much smaller like
+[0:58:23] randomized trial. And I think that's the
+[0:58:25] key question. I I at least like what I'm
+[0:58:27] most in most excited about. There's a
+[0:58:30] lot of people who have done a lot of
 [0:58:33] work on um trying to amortize uh in a way
-[0:58:36] um trying to amortize uh in a way existing algorithms like into
-[0:58:38] existing algorithms like into transformers and and foundation models.
-[0:58:41] transformers and and foundation models. This is not a direction that I'm
-[0:58:42] This is not a direction that I'm currently exploring. With the idea being
-[0:58:44] currently exploring. With the idea being that like we we know that the algorithms
-[0:58:47] that like we we know that the algorithms work and like I mean we have agents now.
-[0:58:50] work and like I mean we have agents now. So, you know, like as long as the agent
-[0:58:52] So, you know, like as long as the agent is is capable of picking whatever
-[0:58:54] is is capable of picking whatever algorithms like works then then, you
-[0:58:57] algorithms like works then then, you know, like
-[0:58:58] know, like uh it doesn't need to learn how to do
-[0:59:00] uh it doesn't need to learn how to do causal inference in the forward pass. Um
-[0:59:02] causal inference in the forward pass. Um it can just like learn to execute IPW in
-[0:59:05] it can just like learn to execute IPW in Python as long as you can give it
-[0:59:06] Python as long as you can give it predictions.
-[0:59:08] predictions. For the relative representations, I
-[0:59:09] For the relative representations, I think this is also very interesting. I
-[0:59:11] think this is also very interesting. I think there is a distinction that we
-[0:59:13] think there is a distinction that we haven't really explored much in causal
-[0:59:14] haven't really explored much in causal representation learning, which is like
-[0:59:17] representation learning, which is like like the models
-[0:59:18] like the models like seems to be identifiable in a
-[0:59:20] like seems to be identifiable in a statistical setting uh meaning that you
-[0:59:23] statistical setting uh meaning that you know, like you run them multiple times
-[0:59:25] know, like you run them multiple times and they learn similar parameters.
-[0:59:28] and they learn similar parameters. and then we can interpret
-[0:59:30] and then we can interpret like whatever they have learned
-[0:59:33] like whatever they have learned in in in a causal way using some
-[0:59:35] in in in a causal way using some additional assumptions.
-[0:59:38] additional assumptions. And and it seems like in in a way these
-[0:59:40] And and it seems like in in a way these two communities haven't haven't fully
-[0:59:43] two communities haven't haven't fully like bridged yet. But I think this is
-[0:59:45] like bridged yet. But I think this is the way to understand it.
-[0:59:47] the way to understand it. That these models like are are
-[0:59:50] That these models like are are identifiable in some sense
-[0:59:52] identifiable in some sense from like you know, they converge to the
-[0:59:53] from like you know, they converge to the same thing.
-[0:59:55] same thing. And and sometimes you can interpret what
-[0:59:58] And and sometimes you can interpret what these things is using the causality
-[1:00:00] these things is using the causality language. And again, sorry for going a
-[1:00:02] language. And again, sorry for going a bit over time.
+[0:58:36] existing algorithms like into
+[0:58:38] transformers and and foundation models.
+[0:58:41] This is not a direction that I'm
+[0:58:42] currently exploring. With the idea being
+[0:58:44] that like we we know that the algorithms
+[0:58:47] work and like I mean we have agents now.
+[0:58:50] So, you know, like as long as the agent
+[0:58:52] is is capable of picking whatever
+[0:58:54] algorithms like works then then, you
+[0:58:57] know, like
+[0:58:58] uh it doesn't need to learn how to do
+[0:59:00] causal inference in the forward pass. Um
+[0:59:02] it can just like learn to execute IPW in
+[0:59:05] Python as long as you can give it
+[0:59:06] predictions.
+[0:59:08] For the relative representations, I
+[0:59:09] think this is also very interesting. I
+[0:59:11] think there is a distinction that we
+[0:59:13] haven't really explored much in causal
+[0:59:14] representation learning, which is like
+[0:59:17] like the models
+[0:59:18] like seems to be identifiable in a
+[0:59:20] statistical setting uh meaning that you
+[0:59:23] know, like you run them multiple times
+[0:59:25] and they learn similar parameters.
+[0:59:28] and then we can interpret
+[0:59:30] like whatever they have learned
+[0:59:33] in in in a causal way using some
+[0:59:35] additional assumptions.
+[0:59:38] And and it seems like in in a way these
+[0:59:40] two communities haven't haven't fully
+[0:59:43] like bridged yet. But I think this is
+[0:59:45] the way to understand it.
+[0:59:47] That these models like are are
+[0:59:50] identifiable in some sense
+[0:59:52] from like you know, they converge to the
+[0:59:53] same thing.
+[0:59:55] And and sometimes you can interpret what
+[0:59:58] these things is using the causality
+[1:00:00] language. And again, sorry for going a
+[1:00:02] bit over time.
 [1:00:07] Totally no worries. Thank you so much for again for the nice talk and nice
-[1:00:09] for again for the nice talk and nice discussion. I also love the
-[1:00:12] discussion. I also love the the the the the the interaction
-[1:00:14] the the the the the interaction afterwards.
-[1:00:15] afterwards. So again, for the interest of time, we
-[1:00:17] So again, for the interest of time, we don't have enough time for uh doing the
-[1:00:19] don't have enough time for uh doing the Q&amp;A. We have uh
-[1:00:21] Q&amp;A. We have uh some what philosophical question, but we
-[1:00:24] some what philosophical question, but we will forward this question to our
-[1:00:26] will forward this question to our speaker. So let us wrap up this seminar
-[1:00:30] speaker. So let us wrap up this seminar by sharing
-[1:00:32] by sharing life for next week.
+[1:00:09] discussion. I also love the
+[1:00:12] the the the the the interaction
+[1:00:14] afterwards.
+[1:00:15] So again, for the interest of time, we
+[1:00:17] don't have enough time for uh doing the
+[1:00:19] Q&A. We have uh
+[1:00:21] some what philosophical question, but we
+[1:00:24] will forward this question to our
+[1:00:26] speaker. So let us wrap up this seminar
+[1:00:30] by sharing
+[1:00:32] life for next week.
 [1:00:43] So next week we will have I will candidate from Carnegie Mellon to
-[1:00:45] candidate from Carnegie Mellon to present causal inference with high
-[1:00:47] present causal inference with high dimensional treatments and we will we
-[1:00:49] dimensional treatments and we will we will have even Diaz from
-[1:00:52] will have even Diaz from NYU as our discussant and we hope to see
-[1:00:55] NYU as our discussant and we hope to see you all next week.
+[1:00:45] present causal inference with high
+[1:00:47] dimensional treatments and we will we
+[1:00:49] will have even Diaz from
+[1:00:52] NYU as our discussant and we hope to see
+[1:00:55] you all next week.
 [1:01:04] Thanks everyone. Sounds good. Thank you.
-[1:01:06] Sounds good. Thank you. Thank you.
-[1:01:06] Thank you. Thank you.

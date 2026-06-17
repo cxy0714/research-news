@@ -60,6 +60,24 @@ def test_clean_transcript_collapses_rolling_captions():
     assert tr.clean_transcript(text) == "[0:00:03] we study causality"
 
 
+def test_clean_transcript_collapses_rolling_overlap():
+    # YouTube's other pattern: each cue's head repeats the previous cue's tail.
+    text = (
+        "[0:00:13] seminar. Uh today we have Dylan from the\n"
+        "[0:00:15] Uh today we have Dylan from the University present\n"
+        "[0:00:17] University present testing a causal hypothesis"
+    )
+    assert tr.clean_transcript(text) == (
+        "[0:00:13] seminar. Uh today we have Dylan from the\n"
+        "[0:00:15] University present\n"
+        "[0:00:17] testing a causal hypothesis"
+    )
+
+
+def test_strip_inline_tags_decodes_entities():
+    assert tr.strip_inline_tags("Q&amp;A and 5 &lt; 6") == "Q&A and 5 < 6"
+
+
 def test_clean_transcript_strips_blank_and_tags():
     text = "[0:00:01] foo <00:00:01.500>bar\n\n   \n[0:00:02] baz"
     assert tr.clean_transcript(text) == "[0:00:01] foo bar\n[0:00:02] baz"

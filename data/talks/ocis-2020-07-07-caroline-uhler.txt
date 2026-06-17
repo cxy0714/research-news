@@ -1,1417 +1,1412 @@
 [0:00:04] welcome to the online causal inference seminar and today we have Caroline Euler
-[0:00:07] seminar and today we have Caroline Euler from MIT talk about a very important and
-[0:00:10] from MIT talk about a very important and current topic called inference in the
-[0:00:13] current topic called inference in the light of drug repurposing for SARS so
-[0:00:16] light of drug repurposing for SARS so forth coronavirus she will stop during
-[0:00:20] forth coronavirus she will stop during the talk to take some questions so
-[0:00:22] the talk to take some questions so please submit your questions by a Q&amp;A
-[0:00:24] please submit your questions by a Q&amp;A also after the talk we will allow for
-[0:00:27] also after the talk we will allow for some more questions all right thank you
-[0:00:30] some more questions all right thank you all for joining I will now switch over
-[0:00:34] all for joining I will now switch over to Caroline Caroline whenever you're
-[0:00:39] to Caroline Caroline whenever you're ready great thank you very much for the
-[0:00:44] ready great thank you very much for the invitation so let me open my slides okay
-[0:00:59] invitation so let me open my slides okay so if I don't hear anything that my
-[0:01:03] so if I don't hear anything that my slides are now showing up but you see a
-[0:01:04] slides are now showing up but you see a pointer perfect great so thank you
-[0:01:09] pointer perfect great so thank you particular to the organizers for putting
-[0:01:11] particular to the organizers for putting together this great lecture series and
-[0:01:14] together this great lecture series and for inviting me to speak here so I
-[0:01:17] for inviting me to speak here so I thought I would talk about causal
-[0:01:19] thought I would talk about causal inference and put it into the light of
-[0:01:21] inference and put it into the light of drug repurposing for carbon 19 given the
-[0:01:24] drug repurposing for carbon 19 given the current situation so for me what has
-[0:01:27] current situation so for me what has been or what has really excited me to
-[0:01:30] been or what has really excited me to work on causality since the beginning is
-[0:01:32] work on causality since the beginning is the availability of interventional data
-[0:01:34] the availability of interventional data that is really starting to become
-[0:01:36] that is really starting to become available in many different fields think
-[0:01:39] available in many different fields think of you know the advertisement industry
-[0:01:40] of you know the advertisement industry think of online education and where I
-[0:01:44] think of online education and where I come from I mainly interested in
-[0:01:46] come from I mainly interested in genomics kinds of applications where
-[0:01:49] genomics kinds of applications where more and more interventional data is
-[0:01:50] more and more interventional data is really becoming available and so that is
-[0:01:52] really becoming available and so that is of course unique for causality not just
-[0:01:55] of course unique for causality not just to test algorithms but also to ask
-[0:01:59] to test algorithms but also to ask completely new questions that maybe
-[0:02:00] completely new questions that maybe weren't there before so if you think of
-[0:02:05] weren't there before so if you think of causal inference traditionally it has
-[0:02:08] causal inference traditionally it has really been centered around observation
-[0:02:11] really been centered around observation randomized control trials have usually
-[0:02:13] randomized control trials have usually been considered unpractical on ethical
-[0:02:16] been considered unpractical on ethical or just super super expensive and I
-[0:02:18] or just super super expensive and I really think that is changing in many
-[0:02:19] really think that is changing in many different areas and as I said so I'm
-[0:02:22] different areas and as I said so I'm particularly interested in genomics here
-[0:02:25] particularly interested in genomics here what we've seen over the last years is
-[0:02:27] what we've seen over the last years is that high-throughput observational and
-[0:02:29] that high-throughput observational and interventional data is really becoming
-[0:02:31] interventional data is really becoming available even at the single cell level
-[0:02:33] available even at the single cell level and let me just talk about two different
-[0:02:36] and let me just talk about two different kinds of datasets one of them is on the
-[0:02:40] kinds of datasets one of them is on the expression site so if I talk about
-[0:02:42] expression site so if I talk about single cell expression data what I mean
-[0:02:44] single cell expression data what I mean as humans have 20,000 genes so the
-[0:02:47] as humans have 20,000 genes so the observations live in 20,000 dimensional
-[0:02:50] observations live in 20,000 dimensional space and every observation is a single
-[0:02:54] space and every observation is a single cell so it's the expression of every
-[0:02:55] cell so it's the expression of every gene in single cells now while you know
-[0:02:58] gene in single cells now while you know maybe 10 15 years ago or so Dee's
-[0:03:01] maybe 10 15 years ago or so Dee's datasets have maybe a hundred samples
-[0:03:03] datasets have maybe a hundred samples nowadays they have like a hundred
-[0:03:05] nowadays they have like a hundred thousand to a million okay so these are
-[0:03:07] thousand to a million okay so these are data matrices of size 20,000 times a
-[0:03:10] data matrices of size 20,000 times a hundred thousand to a million and not
-[0:03:13] hundred thousand to a million and not only can you observe these single cells
-[0:03:16] only can you observe these single cells but you can also intervene on any one of
-[0:03:19] but you can also intervene on any one of the genes you like so you have this
-[0:03:21] the genes you like so you have this 20,000 20,000 genes right so since the
-[0:03:25] 20,000 20,000 genes right so since the development of the CRISPR caste system
-[0:03:28] development of the CRISPR caste system you can actually knock out different
-[0:03:30] you can actually knock out different genes or you can also over express them
-[0:03:32] genes or you can also over express them in a knockout you're just setting the
-[0:03:34] in a knockout you're just setting the expression to zero because you're really
-[0:03:36] expression to zero because you're really removing the gene okay so you can
-[0:03:38] removing the gene okay so you can intervene on any of the genes even
-[0:03:39] intervene on any of the genes even combinations of genes and you can see
-[0:03:41] combinations of genes and you can see what happens to the cells how does the
-[0:03:43] what happens to the cells how does the expression change so that's one type of
-[0:03:46] expression change so that's one type of interventional data that are becoming
-[0:03:49] interventional data that are becoming you know more and more available
-[0:03:51] you know more and more available materials are freely available and I
-[0:03:53] materials are freely available and I show you some of them afterwards the
-[0:03:55] show you some of them afterwards the other type of experiments are more
-[0:03:57] other type of experiments are more imaging based or actually also
-[0:03:59] imaging based or actually also expression based but it's a very
-[0:04:02] expression based but it's a very different kind of intervention these are
-[0:04:04] different kind of intervention these are drug interventions and that's why those
-[0:04:06] drug interventions and that's why those are probably very interesting right now
-[0:04:08] are probably very interesting right now given that you know there is a big
-[0:04:10] given that you know there is a big search going on right for finding drugs
-[0:04:12] search going on right for finding drugs for repurposing against our scoff - so
-[0:04:15] for repurposing against our scoff - so there are these very very large-scale
-[0:04:17] there are these very very large-scale screens and I'll talk about them later
-[0:04:19] screens and I'll talk about them later in the talk where you have you know many
-[0:04:21] in the talk where you have you know many many different drugs
-[0:04:23] many different drugs which are just applied to different
-[0:04:25] which are just applied to different kinds of cell types and you get to see
-[0:04:28] kinds of cell types and you get to see the effect of this drug on the cell type
-[0:04:30] the effect of this drug on the cell type either by this image where each one of
-[0:04:32] either by this image where each one of these dots here is a single cell and you
-[0:04:34] these dots here is a single cell and you get to observe different kinds of
-[0:04:35] get to observe different kinds of protein levels or also again expression
-[0:04:38] protein levels or also again expression okay so where you apply a drug and you
-[0:04:40] okay so where you apply a drug and you get to observe what happens to the cell
-[0:04:42] get to observe what happens to the cell in terms of its expression so these are
-[0:04:45] in terms of its expression so these are just two of the you know different kinds
-[0:04:48] just two of the you know different kinds of data interventional datasets that are
-[0:04:50] of data interventional datasets that are available in genomics which I think
-[0:04:52] available in genomics which I think really lead to new questions but also
-[0:04:53] really lead to new questions but also new really new opportunities for
-[0:04:55] new really new opportunities for actually testing different kinds of
-[0:04:57] actually testing different kinds of causal inference algorithms and so what
-[0:05:00] causal inference algorithms and so what are the kinds of questions I want to be
-[0:05:02] are the kinds of questions I want to be talking about and so I'll talk about
-[0:05:04] talking about and so I'll talk about causal transportability questions in the
-[0:05:08] causal transportability questions in the first part so this is more about the
-[0:05:10] first part so this is more about the knockout experiments so if you think
-[0:05:14] knockout experiments so if you think about knock wrapped experiments and drug
-[0:05:15] about knock wrapped experiments and drug experiments in terms of interventions
-[0:05:17] experiments in terms of interventions they're actually quite different so a
-[0:05:19] they're actually quite different so a knockout experiment you could see it as
-[0:05:21] knockout experiment you could see it as you know not as an intervention on a
-[0:05:24] you know not as an intervention on a particular node or a subset of few nodes
-[0:05:28] particular node or a subset of few nodes and they're mostly known okay so if I
-[0:05:30] and they're mostly known okay so if I intervene on node a on gene a then
-[0:05:34] intervene on node a on gene a then usually I will actually get an
-[0:05:35] usually I will actually get an intervention on gene a and I might also
-[0:05:37] intervention on gene a and I might also get some off target effects that these
-[0:05:39] get some off target effects that these are not too many and yeah so so and also
-[0:05:44] are not too many and yeah so so and also you can do as I said combinations of
-[0:05:46] you can do as I said combinations of interventions but you cannot do too many
-[0:05:48] interventions but you cannot do too many because then a cell usually dies if you
-[0:05:49] because then a cell usually dies if you do too many interventions at the same
-[0:05:51] do too many interventions at the same time okay so see this as having
-[0:05:54] time okay so see this as having interventions on few nodes few
-[0:05:57] interventions on few nodes few well-defined nodes
-[0:05:58] well-defined nodes okay so now of course as I said you know
-[0:06:01] okay so now of course as I said you know we have 20,000 genes in human cells
-[0:06:05] we have 20,000 genes in human cells right so if you want to understand all
-[0:06:08] right so if you want to understand all say different kinds of effects of
-[0:06:10] say different kinds of effects of knockouts on two genes at the same time
-[0:06:13] knockouts on two genes at the same time that's 20,000 choose two experiments so
-[0:06:16] that's 20,000 choose two experiments so that's quite large right maybe you also
-[0:06:17] that's quite large right maybe you also want to do 20,000 choose three so you're
-[0:06:19] want to do 20,000 choose three so you're definitely not going to be able to do
-[0:06:21] definitely not going to be able to do that so one transportability question is
-[0:06:24] that so one transportability question is well can we given some interventional
-[0:06:27] well can we given some interventional data might say youngji one gene ten gene
-[0:06:30] data might say youngji one gene ten gene three and five together etc can you then
-[0:06:33] three and five together etc can you then predict the effect of interventions that
-[0:06:35] predict the effect of interventions that you have not yet
-[0:06:36] you have not yet see ok so here you see here I have an
-[0:06:38] see ok so here you see here I have an intervention on one gene I have some
-[0:06:39] intervention on one gene I have some data like this different kinds of genes
-[0:06:41] data like this different kinds of genes I want to be able to predict the effect
-[0:06:43] I want to be able to predict the effect of an intervention on a different gene
-[0:06:45] of an intervention on a different gene so that's I would call this a causal
-[0:06:48] so that's I would call this a causal transportability question but this is a
-[0:06:49] transportability question but this is a transportability
-[0:06:50] transportability from one intervention to an unknown
-[0:06:52] from one intervention to an unknown other intervention okay so and to do
-[0:06:55] other intervention okay so and to do this how we'll approach this is actually
-[0:06:57] this how we'll approach this is actually to learn so given the data that you have
-[0:07:00] to learn so given the data that you have so observational and interventional data
-[0:07:02] so observational and interventional data we'll try to learn the underlying causal
-[0:07:05] we'll try to learn the underlying causal graph and from this causal graph you can
-[0:07:07] graph and from this causal graph you can then try to learn to read off the effect
-[0:07:10] then try to learn to read off the effect of an unseen intervention so that's one
-[0:07:13] of an unseen intervention so that's one form of transporting so transporting
-[0:07:15] form of transporting so transporting from some interventions to an unseen
-[0:07:18] from some interventions to an unseen intervention now if you think of drugs
-[0:07:21] intervention now if you think of drugs as I said they're very different mainly
-[0:07:24] as I said they're very different mainly drugs they usually have so they are in
-[0:07:27] drugs they usually have so they are in interventions on many different targets
-[0:07:29] interventions on many different targets at the same time and these targets are
-[0:07:32] at the same time and these targets are mostly unknown ok so very different two
-[0:07:34] mostly unknown ok so very different two knockouts where it's few targets mostly
-[0:07:36] knockouts where it's few targets mostly known drugs have many targets mostly
-[0:07:39] known drugs have many targets mostly unknown ok and so here I'll be looking
-[0:07:42] unknown ok and so here I'll be looking at a different kind of work actually
-[0:07:44] at a different kind of work actually this is so traditionally if someone says
-[0:07:46] this is so traditionally if someone says a causal transportability question this
-[0:07:48] a causal transportability question this is what they mean so what I'll be
-[0:07:51] is what they mean so what I'll be looking at is this more maybe more
-[0:07:52] looking at is this more maybe more traditional causal transportability
-[0:07:54] traditional causal transportability question when I look at you know I look
-[0:07:57] question when I look at you know I look at a particular drug I know its effect
-[0:07:59] at a particular drug I know its effect on one cell type and I want to predict
-[0:08:02] on one cell type and I want to predict what is its effect on a different cell
-[0:08:04] what is its effect on a different cell type okay so same drug so that's what
-[0:08:06] type okay so same drug so that's what I'm showing here with these arrows so a
-[0:08:07] I'm showing here with these arrows so a drug has many different targets and I'm
-[0:08:10] drug has many different targets and I'm looking at this drug and I try to
-[0:08:12] looking at this drug and I try to predict it on a different cell type here
-[0:08:14] predict it on a different cell type here shown in blue ok so that's this question
-[0:08:18] shown in blue ok so that's this question I want to transport same intervention
-[0:08:22] I want to transport same intervention but between different environments or
-[0:08:24] but between different environments or between different cell types ok so how
-[0:08:27] between different cell types ok so how we're going to approach this problem is
-[0:08:30] we're going to approach this problem is using autoencoders and you'll see how
-[0:08:32] using autoencoders and you'll see how we'll do this so why is this interesting
-[0:08:35] we'll do this so why is this interesting from the perspective of starstuff - well
-[0:08:38] from the perspective of starstuff - well as I said you know there are these big
-[0:08:40] as I said you know there are these big SAR based drug screens and humans have
-[0:08:44] SAR based drug screens and humans have you know a couple of
-[0:08:44] you know a couple of during different cell types now
-[0:08:46] during different cell types now obviously not every drug has been tested
-[0:08:49] obviously not every drug has been tested on every cell type but drugs have very
-[0:08:51] on every cell type but drugs have very different effects of different cell
-[0:08:52] different effects of different cell types now for a particular disease you
-[0:08:54] types now for a particular disease you might actually care about a particular
-[0:08:56] might actually care about a particular cell type right so for example if you're
-[0:08:58] cell type right so for example if you're thinking of SARS cough - well it affects
-[0:09:00] thinking of SARS cough - well it affects our upper respiratory tract particularly
-[0:09:02] our upper respiratory tract particularly epithelial cells in there so what you
-[0:09:04] epithelial cells in there so what you really want to know is what is the
-[0:09:06] really want to know is what is the effect of all these drugs on these
-[0:09:07] effect of all these drugs on these particular cell types in order to then
-[0:09:10] particular cell types in order to then anti correlate them with the effect of
-[0:09:13] anti correlate them with the effect of the disease and try to figure out drugs
-[0:09:14] the disease and try to figure out drugs that actually would work well or our
-[0:09:16] that actually would work well or our candidates to map to move the disease
-[0:09:20] candidates to map to move the disease state back more - it's the normal state
-[0:09:23] state back more - it's the normal state so that's where the application will
-[0:09:25] so that's where the application will come in okay so I'll talk about these
-[0:09:27] come in okay so I'll talk about these very two very different transport
-[0:09:29] very two very different transport ability questions and I'll start with
-[0:09:31] ability questions and I'll start with this one up here which is more motivated
-[0:09:35] this one up here which is more motivated by these and knockout experiments okay
-[0:09:39] by these and knockout experiments okay so as I said so I'll be looking at this
-[0:09:41] so as I said so I'll be looking at this problem here from a causal network model
-[0:09:45] problem here from a causal network model perspective whereas down here I'm
-[0:09:47] perspective whereas down here I'm actually not going to use graphs in
-[0:09:49] actually not going to use graphs in order to solve this transportability
-[0:09:50] order to solve this transportability problem okay so up here so I'll take
-[0:09:53] problem okay so up here so I'll take this very standard framework that was
-[0:09:56] this very standard framework that was already developed in the 1920s of
-[0:09:58] already developed in the 1920s of structural equation models by Swilley
-[0:10:01] structural equation models by Swilley right I think everyone here is familiar
-[0:10:03] right I think everyone here is familiar with this so if I don't have any latent
-[0:10:06] with this so if I don't have any latent variables we will talk about latent
-[0:10:07] variables we will talk about latent variables beautifully afterwards if I
-[0:10:09] variables beautifully afterwards if I don't have any I will represent the
-[0:10:11] don't have any I will represent the causal relationships by a directed
-[0:10:13] causal relationships by a directed acyclic graph every node is associated
-[0:10:15] acyclic graph every node is associated to a random variable and every node is
-[0:10:18] to a random variable and every node is just some function of its parents and
-[0:10:21] just some function of its parents and some noise
-[0:10:21] some noise okay now important for genomics
-[0:10:25] okay now important for genomics applications I'm going to use this
-[0:10:26] applications I'm going to use this nonparametric framework so I'm not
-[0:10:29] nonparametric framework so I'm not making any assumptions on these
-[0:10:30] making any assumptions on these functions f so they might be nonlinear
-[0:10:33] functions f so they might be nonlinear I'm not making any assumptions on the
-[0:10:35] I'm not making any assumptions on the noise so they might in particular be no
-[0:10:37] noise so they might in particular be no one can see okay I'm really using this
-[0:10:40] one can see okay I'm really using this particular framework here now I want to
-[0:10:43] particular framework here now I want to reason about interventions so I'm going
-[0:10:46] reason about interventions so I'm going to use this framework that was already
-[0:10:49] to use this framework that was already introduced by Frederick Aberhart on
-[0:10:50] introduced by Frederick Aberhart on different kinds of reasoning about
-[0:10:52] different kinds of reasoning about different kinds of interventions and
-[0:10:53] different kinds of interventions and particular hard interventions are very
-[0:10:56] particular hard interventions are very or a particular kind of intervention
-[0:10:58] or a particular kind of intervention think of a gene knockout experiment this
-[0:11:01] think of a gene knockout experiment this would fall in here so a hard
-[0:11:03] would fall in here so a hard intervention I'm taking a particular
-[0:11:05] intervention I'm taking a particular note and I'm just I'm just putting it
-[0:11:09] note and I'm just I'm just putting it but let's think about the easiest
-[0:11:11] but let's think about the easiest setting first set say I'm just setting
-[0:11:13] setting first set say I'm just setting it to a particular constant so for
-[0:11:15] it to a particular constant so for example for a knockout experiment I'm
-[0:11:16] example for a knockout experiment I'm just setting it to zero I could also set
-[0:11:18] just setting it to zero I could also set it to some random value the important
-[0:11:20] it to some random value the important thing in a hard intervention is that
-[0:11:22] thing in a hard intervention is that that the value of x-two does not depend
-[0:11:25] that the value of x-two does not depend on the parents anymore okay I'm actually
-[0:11:27] on the parents anymore okay I'm actually cutting off this edge here and cutting
-[0:11:30] cutting off this edge here and cutting off all of the incoming edges so it's a
-[0:11:32] off all of the incoming edges so it's a very invasive intervention right if you
-[0:11:34] very invasive intervention right if you think of a knockout experiment where I'm
-[0:11:36] think of a knockout experiment where I'm just taking a gene and I'm setting its
-[0:11:37] just taking a gene and I'm setting its value to zero it doesn't matter anymore
-[0:11:40] value to zero it doesn't matter anymore what my parents do right there is no
-[0:11:42] what my parents do right there is no more effect on me actually this gene is
-[0:11:44] more effect on me actually this gene is not there anymore so it's just its
-[0:11:45] not there anymore so it's just its expression value is zero so I'm really
-[0:11:48] expression value is zero so I'm really changing the graph structure soft
-[0:11:50] changing the graph structure soft interventions are everything else I'm
-[0:11:52] interventions are everything else I'm not changing the graph structure by I am
-[0:11:53] not changing the graph structure by I am changing how node x1 acts on x2 what I'm
-[0:11:57] changing how node x1 acts on x2 what I'm also changing or I could be changing the
-[0:11:58] also changing or I could be changing the noise okay so this is everything else so
-[0:12:02] noise okay so this is everything else so these are the less invasive
-[0:12:02] these are the less invasive interventions if you want to think about
-[0:12:05] interventions if you want to think about something like a gene overexpression
-[0:12:07] something like a gene overexpression experiment will probably fall in here
-[0:12:09] experiment will probably fall in here okay so as I said so there has been a
-[0:12:12] okay so as I said so there has been a lot of research in terms of
-[0:12:14] lot of research in terms of observational I'm setting for learning
-[0:12:16] observational I'm setting for learning these graphs and then of course other
-[0:12:18] these graphs and then of course other questions of course of course as well
-[0:12:20] questions of course of course as well what I want to be thinking about is what
-[0:12:22] what I want to be thinking about is what can be done with interventional T and I
-[0:12:26] can be done with interventional T and I will want to look at approaches that
-[0:12:28] will want to look at approaches that learn this graph from a mix of
-[0:12:31] learn this graph from a mix of observational data and interventional
-[0:12:33] observational data and interventional signals okay so where are we so how do
-[0:12:38] signals okay so where are we so how do these approaches usually work okay so we
-[0:12:41] these approaches usually work okay so we know that if you have a causal model a
-[0:12:44] know that if you have a causal model a causal model implies certain conditional
-[0:12:46] causal model implies certain conditional independence relations through the
-[0:12:48] independence relations through the Markov property right so a particular
-[0:12:50] Markov property right so a particular missing edge corresponds to a particular
-[0:12:52] missing edge corresponds to a particular conditional independence relation which
-[0:12:54] conditional independence relation which I will write like this and you'll see
-[0:12:56] I will write like this and you'll see later on why I want to write it like
-[0:12:57] later on why I want to write it like this it corresponds to conditional
-[0:12:59] this it corresponds to conditional independence relation where node is
-[0:13:01] independence relation where node is independent of another node if when
-[0:13:03] independent of another node if when there is no no edge between them given
-[0:13:05] there is no no edge between them given everyone before in the graph okay so
-[0:13:09] everyone before in the graph okay so given all of the
-[0:13:10] given all of the sisters in the grass now of course if
-[0:13:12] sisters in the grass now of course if you want to learn the grass you have to
-[0:13:13] you want to learn the grass you have to go the other way around right so I don't
-[0:13:15] go the other way around right so I don't know the grass but what I can estimate
-[0:13:18] know the grass but what I can estimate or these different kinds of conditional
-[0:13:20] or these different kinds of conditional independence relations I can estimate
-[0:13:22] independence relations I can estimate them from data and so from this I want
-[0:13:24] them from data and so from this I want to learn the grass now if you don't have
-[0:13:27] to learn the grass now if you don't have any other assumptions on the model or on
-[0:13:29] any other assumptions on the model or on the noise this is not identifiable in
-[0:13:33] the noise this is not identifiable in fact there are different kinds of graphs
-[0:13:35] fact there are different kinds of graphs that correspond to the same conditional
-[0:13:36] that correspond to the same conditional independence relations these are known
-[0:13:38] independence relations these are known as Markov equivalence classes
-[0:13:40] as Markov equivalence classes ok so for example if you just have
-[0:13:42] ok so for example if you just have observational data of course you cannot
-[0:13:43] observational data of course you cannot tell and you don't have any other
-[0:13:45] tell and you don't have any other assumptions like no one galaxy Aniki
-[0:13:47] assumptions like no one galaxy Aniki nonlinearity etc you cannot tell whether
-[0:13:49] nonlinearity etc you cannot tell whether X causes Y or Y causes X you'll just see
-[0:13:51] X causes Y or Y causes X you'll just see that they're correlated of course the
-[0:13:53] that they're correlated of course the question is now you have interventional
-[0:13:55] question is now you have interventional data right so you have interventional
-[0:13:57] data right so you have interventional data so the question is can you now say
-[0:13:59] data so the question is can you now say more so say you have an interventional
-[0:14:02] more so say you have an interventional node X well then of course you know if I
-[0:14:04] node X well then of course you know if I intervene on X then the distribution of
-[0:14:07] intervene on X then the distribution of Y changes in this graph but if you
-[0:14:09] Y changes in this graph but if you intervene on X here the distribution of
-[0:14:10] intervene on X here the distribution of Y doesn't change right so you should
-[0:14:12] Y doesn't change right so you should expect that the interventional
-[0:14:13] expect that the interventional equivalence class are finer and then
-[0:14:16] equivalence class are finer and then these equivalence classes they're known
-[0:14:18] these equivalence classes they're known as interventional mark of equivalence
-[0:14:20] as interventional mark of equivalence classes and they have actually been
-[0:14:21] classes and they have actually been characterized okay so they have been
-[0:14:23] characterized okay so they have been characterized first for hard
-[0:14:26] characterized first for hard interventions here in this paper by
-[0:14:28] interventions here in this paper by housing and then what we showed in this
-[0:14:31] housing and then what we showed in this paper here is that in fact it doesn't
-[0:14:33] paper here is that in fact it doesn't matter whether the interventions are
-[0:14:34] matter whether the interventions are hard or soft so whether you have these
-[0:14:37] hard or soft so whether you have these very invasive interventions or actually
-[0:14:40] very invasive interventions or actually just general soft interventions in terms
-[0:14:43] just general soft interventions in terms of identifiability you just get the same
-[0:14:44] of identifiability you just get the same okay so you're actually not losing
-[0:14:47] okay so you're actually not losing anything with soft interventions which
-[0:14:49] anything with soft interventions which is important for genomics people were
-[0:14:52] is important for genomics people were doing hard interventions thinking that
-[0:14:53] doing hard interventions thinking that they would actually get more information
-[0:14:55] they would actually get more information about the underlying gene regulatory
-[0:14:56] about the underlying gene regulatory network
+[0:00:07] from MIT talk about a very important and
+[0:00:10] current topic called inference in the
+[0:00:13] light of drug repurposing for SARS so
+[0:00:16] forth coronavirus she will stop during
+[0:00:20] the talk to take some questions so
+[0:00:22] please submit your questions by a Q&A
+[0:00:24] also after the talk we will allow for
+[0:00:27] some more questions all right thank you
+[0:00:30] all for joining I will now switch over
+[0:00:34] to Caroline Caroline whenever you're
+[0:00:39] ready great thank you very much for the
+[0:00:44] invitation so let me open my slides okay
+[0:00:59] so if I don't hear anything that my
+[0:01:03] slides are now showing up but you see a
+[0:01:04] pointer perfect great so thank you
+[0:01:09] particular to the organizers for putting
+[0:01:11] together this great lecture series and
+[0:01:14] for inviting me to speak here so I
+[0:01:17] thought I would talk about causal
+[0:01:19] inference and put it into the light of
+[0:01:21] drug repurposing for carbon 19 given the
+[0:01:24] current situation so for me what has
+[0:01:27] been or what has really excited me to
+[0:01:30] work on causality since the beginning is
+[0:01:32] the availability of interventional data
+[0:01:34] that is really starting to become
+[0:01:36] available in many different fields think
+[0:01:39] of you know the advertisement industry
+[0:01:40] think of online education and where I
+[0:01:44] come from I mainly interested in
+[0:01:46] genomics kinds of applications where
+[0:01:49] more and more interventional data is
+[0:01:50] really becoming available and so that is
+[0:01:52] of course unique for causality not just
+[0:01:55] to test algorithms but also to ask
+[0:01:59] completely new questions that maybe
+[0:02:00] weren't there before so if you think of
+[0:02:05] causal inference traditionally it has
+[0:02:08] really been centered around observation
+[0:02:11] randomized control trials have usually
+[0:02:13] been considered unpractical on ethical
+[0:02:16] or just super super expensive and I
+[0:02:18] really think that is changing in many
+[0:02:19] different areas and as I said so I'm
+[0:02:22] particularly interested in genomics here
+[0:02:25] what we've seen over the last years is
+[0:02:27] that high-throughput observational and
+[0:02:29] interventional data is really becoming
+[0:02:31] available even at the single cell level
+[0:02:33] and let me just talk about two different
+[0:02:36] kinds of datasets one of them is on the
+[0:02:40] expression site so if I talk about
+[0:02:42] single cell expression data what I mean
+[0:02:44] as humans have 20,000 genes so the
+[0:02:47] observations live in 20,000 dimensional
+[0:02:50] space and every observation is a single
+[0:02:54] cell so it's the expression of every
+[0:02:55] gene in single cells now while you know
+[0:02:58] maybe 10 15 years ago or so Dee's
+[0:03:01] datasets have maybe a hundred samples
+[0:03:03] nowadays they have like a hundred
+[0:03:05] thousand to a million okay so these are
+[0:03:07] data matrices of size 20,000 times a
+[0:03:10] hundred thousand to a million and not
+[0:03:13] only can you observe these single cells
+[0:03:16] but you can also intervene on any one of
+[0:03:19] the genes you like so you have this
+[0:03:21] 20,000 20,000 genes right so since the
+[0:03:25] development of the CRISPR caste system
+[0:03:28] you can actually knock out different
+[0:03:30] genes or you can also over express them
+[0:03:32] in a knockout you're just setting the
+[0:03:34] expression to zero because you're really
+[0:03:36] removing the gene okay so you can
+[0:03:38] intervene on any of the genes even
+[0:03:39] combinations of genes and you can see
+[0:03:41] what happens to the cells how does the
+[0:03:43] expression change so that's one type of
+[0:03:46] interventional data that are becoming
+[0:03:49] you know more and more available
+[0:03:51] materials are freely available and I
+[0:03:53] show you some of them afterwards the
+[0:03:55] other type of experiments are more
+[0:03:57] imaging based or actually also
+[0:03:59] expression based but it's a very
+[0:04:02] different kind of intervention these are
+[0:04:04] drug interventions and that's why those
+[0:04:06] are probably very interesting right now
+[0:04:08] given that you know there is a big
+[0:04:10] search going on right for finding drugs
+[0:04:12] for repurposing against our scoff - so
+[0:04:15] there are these very very large-scale
+[0:04:17] screens and I'll talk about them later
+[0:04:19] in the talk where you have you know many
+[0:04:21] many different drugs
+[0:04:23] which are just applied to different
+[0:04:25] kinds of cell types and you get to see
+[0:04:28] the effect of this drug on the cell type
+[0:04:30] either by this image where each one of
+[0:04:32] these dots here is a single cell and you
+[0:04:34] get to observe different kinds of
+[0:04:35] protein levels or also again expression
+[0:04:38] okay so where you apply a drug and you
+[0:04:40] get to observe what happens to the cell
+[0:04:42] in terms of its expression so these are
+[0:04:45] just two of the you know different kinds
+[0:04:48] of data interventional datasets that are
+[0:04:50] available in genomics which I think
+[0:04:52] really lead to new questions but also
+[0:04:53] new really new opportunities for
+[0:04:55] actually testing different kinds of
+[0:04:57] causal inference algorithms and so what
+[0:05:00] are the kinds of questions I want to be
+[0:05:02] talking about and so I'll talk about
+[0:05:04] causal transportability questions in the
+[0:05:08] first part so this is more about the
+[0:05:10] knockout experiments so if you think
+[0:05:14] about knock wrapped experiments and drug
+[0:05:15] experiments in terms of interventions
+[0:05:17] they're actually quite different so a
+[0:05:19] knockout experiment you could see it as
+[0:05:21] you know not as an intervention on a
+[0:05:24] particular node or a subset of few nodes
+[0:05:28] and they're mostly known okay so if I
+[0:05:30] intervene on node a on gene a then
+[0:05:34] usually I will actually get an
+[0:05:35] intervention on gene a and I might also
+[0:05:37] get some off target effects that these
+[0:05:39] are not too many and yeah so so and also
+[0:05:44] you can do as I said combinations of
+[0:05:46] interventions but you cannot do too many
+[0:05:48] because then a cell usually dies if you
+[0:05:49] do too many interventions at the same
+[0:05:51] time okay so see this as having
+[0:05:54] interventions on few nodes few
+[0:05:57] well-defined nodes
+[0:05:58] okay so now of course as I said you know
+[0:06:01] we have 20,000 genes in human cells
+[0:06:05] right so if you want to understand all
+[0:06:08] say different kinds of effects of
+[0:06:10] knockouts on two genes at the same time
+[0:06:13] that's 20,000 choose two experiments so
+[0:06:16] that's quite large right maybe you also
+[0:06:17] want to do 20,000 choose three so you're
+[0:06:19] definitely not going to be able to do
+[0:06:21] that so one transportability question is
+[0:06:24] well can we given some interventional
+[0:06:27] data might say youngji one gene ten gene
+[0:06:30] three and five together etc can you then
+[0:06:33] predict the effect of interventions that
+[0:06:35] you have not yet
+[0:06:36] see ok so here you see here I have an
+[0:06:38] intervention on one gene I have some
+[0:06:39] data like this different kinds of genes
+[0:06:41] I want to be able to predict the effect
+[0:06:43] of an intervention on a different gene
+[0:06:45] so that's I would call this a causal
+[0:06:48] transportability question but this is a
+[0:06:49] transportability
+[0:06:50] from one intervention to an unknown
+[0:06:52] other intervention okay so and to do
+[0:06:55] this how we'll approach this is actually
+[0:06:57] to learn so given the data that you have
+[0:07:00] so observational and interventional data
+[0:07:02] we'll try to learn the underlying causal
+[0:07:05] graph and from this causal graph you can
+[0:07:07] then try to learn to read off the effect
+[0:07:10] of an unseen intervention so that's one
+[0:07:13] form of transporting so transporting
+[0:07:15] from some interventions to an unseen
+[0:07:18] intervention now if you think of drugs
+[0:07:21] as I said they're very different mainly
+[0:07:24] drugs they usually have so they are in
+[0:07:27] interventions on many different targets
+[0:07:29] at the same time and these targets are
+[0:07:32] mostly unknown ok so very different two
+[0:07:34] knockouts where it's few targets mostly
+[0:07:36] known drugs have many targets mostly
+[0:07:39] unknown ok and so here I'll be looking
+[0:07:42] at a different kind of work actually
+[0:07:44] this is so traditionally if someone says
+[0:07:46] a causal transportability question this
+[0:07:48] is what they mean so what I'll be
+[0:07:51] looking at is this more maybe more
+[0:07:52] traditional causal transportability
+[0:07:54] question when I look at you know I look
+[0:07:57] at a particular drug I know its effect
+[0:07:59] on one cell type and I want to predict
+[0:08:02] what is its effect on a different cell
+[0:08:04] type okay so same drug so that's what
+[0:08:06] I'm showing here with these arrows so a
+[0:08:07] drug has many different targets and I'm
+[0:08:10] looking at this drug and I try to
+[0:08:12] predict it on a different cell type here
+[0:08:14] shown in blue ok so that's this question
+[0:08:18] I want to transport same intervention
+[0:08:22] but between different environments or
+[0:08:24] between different cell types ok so how
+[0:08:27] we're going to approach this problem is
+[0:08:30] using autoencoders and you'll see how
+[0:08:32] we'll do this so why is this interesting
+[0:08:35] from the perspective of starstuff - well
+[0:08:38] as I said you know there are these big
+[0:08:40] SAR based drug screens and humans have
+[0:08:44] you know a couple of
+[0:08:44] during different cell types now
+[0:08:46] obviously not every drug has been tested
+[0:08:49] on every cell type but drugs have very
+[0:08:51] different effects of different cell
+[0:08:52] types now for a particular disease you
+[0:08:54] might actually care about a particular
+[0:08:56] cell type right so for example if you're
+[0:08:58] thinking of SARS cough - well it affects
+[0:09:00] our upper respiratory tract particularly
+[0:09:02] epithelial cells in there so what you
+[0:09:04] really want to know is what is the
+[0:09:06] effect of all these drugs on these
+[0:09:07] particular cell types in order to then
+[0:09:10] anti correlate them with the effect of
+[0:09:13] the disease and try to figure out drugs
+[0:09:14] that actually would work well or our
+[0:09:16] candidates to map to move the disease
+[0:09:20] state back more - it's the normal state
+[0:09:23] so that's where the application will
+[0:09:25] come in okay so I'll talk about these
+[0:09:27] very two very different transport
+[0:09:29] ability questions and I'll start with
+[0:09:31] this one up here which is more motivated
+[0:09:35] by these and knockout experiments okay
+[0:09:39] so as I said so I'll be looking at this
+[0:09:41] problem here from a causal network model
+[0:09:45] perspective whereas down here I'm
+[0:09:47] actually not going to use graphs in
+[0:09:49] order to solve this transportability
+[0:09:50] problem okay so up here so I'll take
+[0:09:53] this very standard framework that was
+[0:09:56] already developed in the 1920s of
+[0:09:58] structural equation models by Swilley
+[0:10:01] right I think everyone here is familiar
+[0:10:03] with this so if I don't have any latent
+[0:10:06] variables we will talk about latent
+[0:10:07] variables beautifully afterwards if I
+[0:10:09] don't have any I will represent the
+[0:10:11] causal relationships by a directed
+[0:10:13] acyclic graph every node is associated
+[0:10:15] to a random variable and every node is
+[0:10:18] just some function of its parents and
+[0:10:21] some noise
+[0:10:21] okay now important for genomics
+[0:10:25] applications I'm going to use this
+[0:10:26] nonparametric framework so I'm not
+[0:10:29] making any assumptions on these
+[0:10:30] functions f so they might be nonlinear
+[0:10:33] I'm not making any assumptions on the
+[0:10:35] noise so they might in particular be no
+[0:10:37] one can see okay I'm really using this
+[0:10:40] particular framework here now I want to
+[0:10:43] reason about interventions so I'm going
+[0:10:46] to use this framework that was already
+[0:10:49] introduced by Frederick Aberhart on
+[0:10:50] different kinds of reasoning about
+[0:10:52] different kinds of interventions and
+[0:10:53] particular hard interventions are very
+[0:10:56] or a particular kind of intervention
+[0:10:58] think of a gene knockout experiment this
+[0:11:01] would fall in here so a hard
+[0:11:03] intervention I'm taking a particular
+[0:11:05] note and I'm just I'm just putting it
+[0:11:09] but let's think about the easiest
+[0:11:11] setting first set say I'm just setting
+[0:11:13] it to a particular constant so for
+[0:11:15] example for a knockout experiment I'm
+[0:11:16] just setting it to zero I could also set
+[0:11:18] it to some random value the important
+[0:11:20] thing in a hard intervention is that
+[0:11:22] that the value of x-two does not depend
+[0:11:25] on the parents anymore okay I'm actually
+[0:11:27] cutting off this edge here and cutting
+[0:11:30] off all of the incoming edges so it's a
+[0:11:32] very invasive intervention right if you
+[0:11:34] think of a knockout experiment where I'm
+[0:11:36] just taking a gene and I'm setting its
+[0:11:37] value to zero it doesn't matter anymore
+[0:11:40] what my parents do right there is no
+[0:11:42] more effect on me actually this gene is
+[0:11:44] not there anymore so it's just its
+[0:11:45] expression value is zero so I'm really
+[0:11:48] changing the graph structure soft
+[0:11:50] interventions are everything else I'm
+[0:11:52] not changing the graph structure by I am
+[0:11:53] changing how node x1 acts on x2 what I'm
+[0:11:57] also changing or I could be changing the
+[0:11:58] noise okay so this is everything else so
+[0:12:02] these are the less invasive
+[0:12:02] interventions if you want to think about
+[0:12:05] something like a gene overexpression
+[0:12:07] experiment will probably fall in here
+[0:12:09] okay so as I said so there has been a
+[0:12:12] lot of research in terms of
+[0:12:14] observational I'm setting for learning
+[0:12:16] these graphs and then of course other
+[0:12:18] questions of course of course as well
+[0:12:20] what I want to be thinking about is what
+[0:12:22] can be done with interventional T and I
+[0:12:26] will want to look at approaches that
+[0:12:28] learn this graph from a mix of
+[0:12:31] observational data and interventional
+[0:12:33] signals okay so where are we so how do
+[0:12:38] these approaches usually work okay so we
+[0:12:41] know that if you have a causal model a
+[0:12:44] causal model implies certain conditional
+[0:12:46] independence relations through the
+[0:12:48] Markov property right so a particular
+[0:12:50] missing edge corresponds to a particular
+[0:12:52] conditional independence relation which
+[0:12:54] I will write like this and you'll see
+[0:12:56] later on why I want to write it like
+[0:12:57] this it corresponds to conditional
+[0:12:59] independence relation where node is
+[0:13:01] independent of another node if when
+[0:13:03] there is no no edge between them given
+[0:13:05] everyone before in the graph okay so
+[0:13:09] given all of the
+[0:13:10] sisters in the grass now of course if
+[0:13:12] you want to learn the grass you have to
+[0:13:13] go the other way around right so I don't
+[0:13:15] know the grass but what I can estimate
+[0:13:18] or these different kinds of conditional
+[0:13:20] independence relations I can estimate
+[0:13:22] them from data and so from this I want
+[0:13:24] to learn the grass now if you don't have
+[0:13:27] any other assumptions on the model or on
+[0:13:29] the noise this is not identifiable in
+[0:13:33] fact there are different kinds of graphs
+[0:13:35] that correspond to the same conditional
+[0:13:36] independence relations these are known
+[0:13:38] as Markov equivalence classes
+[0:13:40] ok so for example if you just have
+[0:13:42] observational data of course you cannot
+[0:13:43] tell and you don't have any other
+[0:13:45] assumptions like no one galaxy Aniki
+[0:13:47] nonlinearity etc you cannot tell whether
+[0:13:49] X causes Y or Y causes X you'll just see
+[0:13:51] that they're correlated of course the
+[0:13:53] question is now you have interventional
+[0:13:55] data right so you have interventional
+[0:13:57] data so the question is can you now say
+[0:13:59] more so say you have an interventional
+[0:14:02] node X well then of course you know if I
+[0:14:04] intervene on X then the distribution of
+[0:14:07] Y changes in this graph but if you
+[0:14:09] intervene on X here the distribution of
+[0:14:10] Y doesn't change right so you should
+[0:14:12] expect that the interventional
+[0:14:13] equivalence class are finer and then
+[0:14:16] these equivalence classes they're known
+[0:14:18] as interventional mark of equivalence
+[0:14:20] classes and they have actually been
+[0:14:21] characterized okay so they have been
+[0:14:23] characterized first for hard
+[0:14:26] interventions here in this paper by
+[0:14:28] housing and then what we showed in this
+[0:14:31] paper here is that in fact it doesn't
+[0:14:33] matter whether the interventions are
+[0:14:34] hard or soft so whether you have these
+[0:14:37] very invasive interventions or actually
+[0:14:40] just general soft interventions in terms
+[0:14:43] of identifiability you just get the same
+[0:14:44] okay so you're actually not losing
+[0:14:47] anything with soft interventions which
+[0:14:49] is important for genomics people were
+[0:14:52] doing hard interventions thinking that
+[0:14:53] they would actually get more information
+[0:14:55] about the underlying gene regulatory
 [0:14:57] network what is the advantage of soft
-[0:14:59] what is the advantage of soft interventions well as I said you know if
-[0:15:00] interventions well as I said you know if you do too many hard interventions in
-[0:15:02] you do too many hard interventions in one cell the cell guys in particular
-[0:15:05] one cell the cell guys in particular usually if you knock out more than 10
-[0:15:06] usually if you knock out more than 10 genes or so if they're not well chosen
-[0:15:08] genes or so if they're not well chosen and the cell will die but you can do an
-[0:15:10] and the cell will die but you can do an overexpression experiment where you know
-[0:15:12] overexpression experiment where you know where you overexpress many more genes
-[0:15:14] where you overexpress many more genes and the cell is still alive so you can
-[0:15:15] and the cell is still alive so you can actually study what happens with these
-[0:15:17] actually study what happens with these you know higher-order interventions when
-[0:15:19] you know higher-order interventions when you do soft interventions
-[0:15:22] you do soft interventions okay so this is known so it is at least
-[0:15:24] okay so this is known so it is at least known if the sample size goes to
-[0:15:26] known if the sample size goes to infinity what can I hope to learn okay
-[0:15:29] infinity what can I hope to learn okay so what can I hope to identify these are
-[0:15:31] so what can I hope to identify these are decided these interventional mark of
-[0:15:33] decided these interventional mark of equivalence classes so then the next
-[0:15:36] equivalence classes so then the next question once we know what we can
-[0:15:37] question once we know what we can identify your next question is you know
-[0:15:39] identify your next question is you know can we come up with algorithms to
-[0:15:40] can we come up with algorithms to actually do this right can we come up
-[0:15:42] actually do this right can we come up with algorithms that take in data which
-[0:15:45] with algorithms that take in data which is observational and interventional and
-[0:15:47] is observational and interventional and then output the interventional mark of
-[0:15:49] then output the interventional mark of equivalence class so it just learns all
-[0:15:51] equivalence class so it just learns all of the causal relationships that we can
-[0:15:53] of the causal relationships that we can possibly learn from this seed okay so
-[0:15:56] possibly learn from this seed okay so for that let me just very briefly give
-[0:15:59] for that let me just very briefly give an overview on what is available in
-[0:16:01] an overview on what is available in terms of just causal structure discovery
-[0:16:04] terms of just causal structure discovery from observational data so here the
-[0:16:06] from observational data so here the picture is actually very nice so this is
-[0:16:08] picture is actually very nice so this is without any interventions and for now
-[0:16:11] without any interventions and for now without any latent variables I'll talk
-[0:16:13] without any latent variables I'll talk briefly about what is available there as
-[0:16:14] briefly about what is available there as well okay so just observational data
-[0:16:17] well okay so just observational data everything observed so the picture is
-[0:16:20] everything observed so the picture is actually very nice because you can just
-[0:16:22] actually very nice because you can just think of two classes of algorithms all
-[0:16:24] think of two classes of algorithms all algorithms that are available or I join
-[0:16:25] algorithms that are available or I join one or the other or mix up the two
-[0:16:27] one or the other or mix up the two so what are these two classes so they
-[0:16:30] so what are these two classes so they are constraint based or score based okay
-[0:16:33] are constraint based or score based okay so what are constraint based approaches
-[0:16:34] so what are constraint based approaches so they treat causal structure discovery
-[0:16:37] so they treat causal structure discovery as a constraint satisfaction problem so
-[0:16:39] as a constraint satisfaction problem so they try to find the causal graph which
-[0:16:41] they try to find the causal graph which satisfies as many as possible of the
-[0:16:44] satisfies as many as possible of the given constraints and the constraints in
-[0:16:48] given constraints and the constraints in this case or conditional independence
-[0:16:49] this case or conditional independence relations okay score base is very
-[0:16:52] relations okay score base is very different score and I'm sorry I should
-[0:16:54] different score and I'm sorry I should say the most well-known example here is
-[0:16:56] say the most well-known example here is the PC algorithm which probably many of
-[0:16:58] the PC algorithm which probably many of you are familiar with the other class of
-[0:17:01] you are familiar with the other class of algorithms are score based approaches so
-[0:17:04] algorithms are score based approaches so here you take a particular score for
-[0:17:06] here you take a particular score for example P I see there are other scores
-[0:17:09] example P I see there are other scores as well that are consistent and then
-[0:17:12] as well that are consistent and then what you try to do is you okay so B I
-[0:17:15] what you try to do is you okay so B I see so yeah I mean if I could enumerate
-[0:17:16] see so yeah I mean if I could enumerate all graphs and okay fine I could just
-[0:17:19] all graphs and okay fine I could just use the score but you know this is the
-[0:17:21] use the score but you know this is the space of all causal models is huge even
-[0:17:23] space of all causal models is huge even if you do this over just Markoff
-[0:17:25] if you do this over just Markoff equivalence classes so you don't want to
-[0:17:26] equivalence classes so you don't want to enumerate them so usually what people do
-[0:17:28] enumerate them so usually what people do is a greedy search in this space okay
-[0:17:31] is a greedy search in this space okay here and the most well-known example is
-[0:17:33] here and the most well-known example is probably this greedy equivalent sir
-[0:17:34] probably this greedy equivalent sir GES algorithm which is a greedy search
-[0:17:37] GES algorithm which is a greedy search on the space of mark of equivalence
-[0:17:38] on the space of mark of equivalence classes okay so maybe briefly what are
-[0:17:41] classes okay so maybe briefly what are advantages and disadvantages of each
-[0:17:43] advantages and disadvantages of each class of models so any of you who has
-[0:17:46] class of models so any of you who has applied them and will know that for a
-[0:17:49] applied them and will know that for a given sample size or based approaches
-[0:17:51] given sample size or based approaches usually perform better than constraint
-[0:17:52] usually perform better than constraint based approaches here I just took some
-[0:17:54] based approaches here I just took some simulations from a paper from people at
-[0:17:58] simulations from a paper from people at ETH and you know just showing here for
-[0:18:02] ETH and you know just showing here for example GES vs. PC they had also other
-[0:18:05] example GES vs. PC they had also other algorithms in this paper but anyone and
-[0:18:07] algorithms in this paper but anyone and I'll have other simulations as well
-[0:18:08] I'll have other simulations as well anyone who has done this will see that
-[0:18:10] anyone who has done this will see that you know score based approaches for the
-[0:18:12] you know score based approaches for the Sam same sample size usually perform
-[0:18:14] Sam same sample size usually perform better than constraint based so what is
-[0:18:16] better than constraint based so what is the intuition for this well if you think
-[0:18:18] the intuition for this well if you think about it so how do constraint based
-[0:18:20] about it so how do constraint based approaches work so as I said so the
-[0:18:21] approaches work so as I said so the constraints usually correspond to
-[0:18:23] constraints usually correspond to conditional independence relations okay
-[0:18:25] conditional independence relations okay and what they do is you know when you
-[0:18:27] and what they do is you know when you see the constraint like a conditional
-[0:18:28] see the constraint like a conditional dependence relation you usually remove
-[0:18:30] dependence relation you usually remove an edge so of course if you you know the
-[0:18:34] an edge so of course if you you know the conditional defense relation since they
-[0:18:35] conditional defense relation since they are estimated from data there might be
-[0:18:36] are estimated from data there might be mistakes right so you know I might just
-[0:18:39] mistakes right so you know I might just I might find that there is a conditional
-[0:18:41] I might find that there is a conditional dependence relation although there
-[0:18:42] dependence relation although there shouldn't be one and then I'm doing the
-[0:18:43] shouldn't be one and then I'm doing the mistake of removing an edge and the
-[0:18:45] mistake of removing an edge and the problem is that you cannot correct
-[0:18:47] problem is that you cannot correct mistakes so mistakes just keep piling up
-[0:18:50] mistakes so mistakes just keep piling up so in the end I get graphs of have two
-[0:18:52] so in the end I get graphs of have two fewer edges than what they should have
-[0:18:53] fewer edges than what they should have where a score based approach is because
-[0:18:55] where a score based approach is because they're greedy right you know even if I
-[0:18:58] they're greedy right you know even if I don't get the search Direction
-[0:18:59] don't get the search Direction completely right you know in the end
-[0:19:00] completely right you know in the end hopefully out many times I can still
-[0:19:03] hopefully out many times I can still find the optimum although I'm not
-[0:19:05] find the optimum although I'm not getting it right every time
-[0:19:06] getting it right every time so this meanness of like going through
-[0:19:09] so this meanness of like going through the search space can actually help you
-[0:19:10] the search space can actually help you quite a bit and we looked at this in a
-[0:19:13] quite a bit and we looked at this in a geometric manner to understand this a
-[0:19:15] geometric manner to understand this a bit better but of course these
-[0:19:18] bit better but of course these constraint based approaches also have a
-[0:19:19] constraint based approaches also have a lot of advantages in particular they're
-[0:19:22] lot of advantages in particular they're you know like they are set up there
-[0:19:24] you know like they are set up there already a nonparametric right they just
-[0:19:26] already a nonparametric right they just they just they're just based on
-[0:19:29] they just they're just based on conditional independence testing so you
-[0:19:31] conditional independence testing so you know you can for example replace these
-[0:19:33] know you can for example replace these conditional independence tests instead
-[0:19:34] conditional independence tests instead of looking at partial correlations you
-[0:19:36] of looking at partial correlations you can use kernels for example for
-[0:19:38] can use kernels for example for estimating these etc the score base you
-[0:19:41] estimating these etc the score base you can also do this but it's you need to do
-[0:19:44] can also do this but it's you need to do an extra step usually people whose BICS
-[0:19:46] an extra step usually people whose BICS here so this is usually
-[0:19:48] here so this is usually based in addition how greedy equivalent
-[0:19:52] based in addition how greedy equivalent searches setup and decel show you here
-[0:19:54] searches setup and decel show you here as I said it's a greedy search over the
-[0:19:57] as I said it's a greedy search over the space of equivalence classes so it's
-[0:19:59] space of equivalence classes so it's very smart and that you know I mean it
-[0:20:01] very smart and that you know I mean it was a very hard proof to show to do it
-[0:20:03] was a very hard proof to show to do it to actually define a greedy search in
-[0:20:07] to actually define a greedy search in the space of marker for coolants classes
-[0:20:08] the space of marker for coolants classes are not in the space of a causal graphs
-[0:20:11] are not in the space of a causal graphs but still the space is huge and in fact
-[0:20:14] but still the space is huge and in fact this is an open problem to know like for
-[0:20:16] this is an open problem to know like for n nodes you know how long how many mark
-[0:20:18] n nodes you know how long how many mark of recurrence classes are there but at
-[0:20:20] of recurrence classes are there but at least like here in this paper where they
-[0:20:22] least like here in this paper where they just enumerated them all you see that
-[0:20:24] just enumerated them all you see that already for you know kind nodes there
-[0:20:26] already for you know kind nodes there are like 10 to the 19 many equivalence
-[0:20:28] are like 10 to the 19 many equivalence classes ok so you're doing this greedy
-[0:20:30] classes ok so you're doing this greedy search on this huge search space ok so
-[0:20:33] search on this huge search space ok so what I would like to do is somehow
-[0:20:35] what I would like to do is somehow overcome some of these problems so as I
-[0:20:37] overcome some of these problems so as I said so probably I would like to have a
-[0:20:39] said so probably I would like to have a score based approach I would like it to
-[0:20:40] score based approach I would like it to be nonparametric and if I can you know I
-[0:20:43] be nonparametric and if I can you know I would like it to overcome this big
-[0:20:45] would like it to overcome this big search space question here ok so that's
-[0:20:48] search space question here ok so that's what I'm going to propose as an
-[0:20:50] what I'm going to propose as an algorithm in addition you know this is
-[0:20:51] algorithm in addition you know this is all observational as I said I would
-[0:20:53] all observational as I said I would really like it to work with
-[0:20:54] really like it to work with interventional Davis I wanted to be
-[0:20:56] interventional Davis I wanted to be consistent with interventional data so
-[0:20:59] consistent with interventional data so they're also like what has been
-[0:21:00] they're also like what has been available in terms of with
-[0:21:02] available in terms of with interventional data so there has been
-[0:21:04] interventional data so there has been and I'll have to reference later on
-[0:21:06] and I'll have to reference later on there has been an interventional version
-[0:21:08] there has been an interventional version of this greedy equivalent search which
-[0:21:10] of this greedy equivalent search which is this Gies so I standing for
-[0:21:14] is this Gies so I standing for interventional version we proved that
-[0:21:16] interventional version we proved that that approach is that I mean it was
-[0:21:17] that approach is that I mean it was conjectured to be consistently proved
-[0:21:19] conjectured to be consistently proved it's not consistent and I can also give
-[0:21:22] it's not consistent and I can also give intuition for why it is not so there
-[0:21:24] intuition for why it is not so there hasn't been any consistent approach
-[0:21:26] hasn't been any consistent approach available so we'll prove that whatever
-[0:21:29] available so we'll prove that whatever we're going to propose it should
-[0:21:30] we're going to propose it should hopefully be also consistent when you
-[0:21:32] hopefully be also consistent when you have interventional data at least as the
-[0:21:33] have interventional data at least as the sample size goes to infinity you really
-[0:21:35] sample size goes to infinity you really want to be able to find the correct
-[0:21:36] want to be able to find the correct interventional mark of a firm's class
-[0:21:38] interventional mark of a firm's class and then also I said with latent
-[0:21:41] and then also I said with latent variables what is available so there
-[0:21:43] variables what is available so there it's I mean there are also other
-[0:21:45] it's I mean there are also other approaches but in terms of like with
-[0:21:47] approaches but in terms of like with different kinds of consistency
-[0:21:48] different kinds of consistency guarantees is usually just as FCI
-[0:21:50] guarantees is usually just as FCI algorithm and many different kinds of
-[0:21:52] algorithm and many different kinds of versions of FCI which is an extension of
-[0:21:55] versions of FCI which is an extension of the PC algorithms and the latent setting
-[0:21:57] the PC algorithms and the latent setting it's mainly constrained based approaches
-[0:21:59] it's mainly constrained based approaches of course given what I said right
-[0:22:01] of course given what I said right you know score based approaches at least
-[0:22:03] you know score based approaches at least when it's completely observational
-[0:22:04] when it's completely observational usually perform better dance constraint
-[0:22:06] usually perform better dance constraint based approaches what you would really
-[0:22:07] based approaches what you would really like to have is also score based
-[0:22:09] like to have is also score based approach that is proof will be
-[0:22:10] approach that is proof will be consistent when you also have when you
-[0:22:12] consistent when you also have when you have latent variables okay so that's
-[0:22:15] have latent variables okay so that's just a bit of an overview on you know
-[0:22:17] just a bit of an overview on you know causal structure discovery okay so let
-[0:22:19] causal structure discovery okay so let me try to propose and the intuition is
-[0:22:21] me try to propose and the intuition is super simple let me try to propose an
-[0:22:24] super simple let me try to propose an approach that is four based it uses
-[0:22:26] approach that is four based it uses conditional independence relations so it
-[0:22:28] conditional independence relations so it is nonparametric and it overcomes this
-[0:22:30] is nonparametric and it overcomes this it has a much smaller search space and
-[0:22:32] it has a much smaller search space and you know just all mark of equivalence
-[0:22:34] you know just all mark of equivalence classes and it will be consistent also
-[0:22:36] classes and it will be consistent also with interventional data and you can
-[0:22:37] with interventional data and you can also turn it into okay so how would you
-[0:22:43] also turn it into okay so how would you do this okay so the intuition is super
-[0:22:47] do this okay so the intuition is super simple okay so we want to learn DAGs so
-[0:22:52] simple okay so we want to learn DAGs so I'll just turn this problem of like
-[0:22:54] I'll just turn this problem of like thinking about learning a dag into a
-[0:22:56] thinking about learning a dag into a different problem of thinking of
-[0:22:58] different problem of thinking of learning an ordering of the variables
-[0:23:01] learning an ordering of the variables and an undirected graph okay that's good
-[0:23:04] and an undirected graph okay that's good enough right because if I give you an
-[0:23:06] enough right because if I give you an undirected graph and I tell you the
-[0:23:07] undirected graph and I tell you the ordering of the variables or a
-[0:23:08] ordering of the variables or a permutation I will just orient all of
-[0:23:11] permutation I will just orient all of the edges according to this permutation
-[0:23:13] the edges according to this permutation okay so if one if in this ordering node
-[0:23:16] okay so if one if in this ordering node a is smaller than node B and there is an
-[0:23:19] a is smaller than node B and there is an undirected edge between a B I'll just
-[0:23:20] undirected edge between a B I'll just orient it from a pointing to me because
-[0:23:23] orient it from a pointing to me because it's a dag this is good enough to do now
-[0:23:26] it's a dag this is good enough to do now the space of permutations again since we
-[0:23:28] the space of permutations again since we don't know how large the space of
-[0:23:30] don't know how large the space of Markovic rules classes is because this
-[0:23:33] Markovic rules classes is because this is there is no formal yet but at least
-[0:23:34] is there is no formal yet but at least it seems to be much smaller
-[0:23:36] it seems to be much smaller of course this needs to have a proof but
-[0:23:38] of course this needs to have a proof but you know at least some 10 knows it's
-[0:23:39] you know at least some 10 knows it's like 10 factorial is much simpler than
-[0:23:41] like 10 factorial is much simpler than 10 to the 19 okay so how does this work
-[0:23:46] 10 to the 19 okay so how does this work so I want to frame causal structure
-[0:23:48] so I want to frame causal structure discovery as just a search over
-[0:23:49] discovery as just a search over permutations because I want to argue
-[0:23:52] permutations because I want to argue that if I give you the correct
-[0:23:53] that if I give you the correct permutation it's actually very easy to
-[0:23:55] permutation it's actually very easy to find the corresponding deck okay and now
-[0:23:59] find the corresponding deck okay and now comes here how I wrote down the Markov
-[0:24:01] comes here how I wrote down the Markov property before just to make a
-[0:24:02] property before just to make a completely intuitive of like what we're
-[0:24:04] completely intuitive of like what we're going to do so how do you associate to a
-[0:24:07] going to do so how do you associate to a permutation of dag well I'll take the
-[0:24:10] permutation of dag well I'll take the permutation this is an ordering and I'll
-[0:24:12] permutation this is an ordering and I'll just put an edge
-[0:24:14] just put an edge between two nodes when they are
-[0:24:16] between two nodes when they are dependent given all the ancestors now in
-[0:24:19] dependent given all the ancestors now in the Markov property the ancestors are
-[0:24:20] the Markov property the ancestors are taken based on the graph but of course
-[0:24:22] taken based on the graph but of course we don't have a graph so we'll just do
-[0:24:24] we don't have a graph so we'll just do the next best thing which is just the
-[0:24:26] the next best thing which is just the ancestors in the ordering right you just
-[0:24:28] ancestors in the ordering right you just take all of the nodes that are smaller
-[0:24:30] take all of the nodes that are smaller in the ordering these two notes inj it's
-[0:24:33] in the ordering these two notes inj it's a super intuitive way of doing it so in
-[0:24:37] a super intuitive way of doing it so in this way I associate to every
-[0:24:38] this way I associate to every permutation a dag and now what we showed
-[0:24:43] permutation a dag and now what we showed here is that in fact if you just choose
-[0:24:46] here is that in fact if you just choose so for every permutation I have a dag if
-[0:24:49] so for every permutation I have a dag if you just choose the ordering that gives
-[0:24:50] you just choose the ordering that gives you this parse this graph that's in fact
-[0:24:52] you this parse this graph that's in fact the correct one okay as the sample size
-[0:24:55] the correct one okay as the sample size goes to infinity so if you just choose
-[0:24:57] goes to infinity so if you just choose the sparse this one this is in fact
-[0:24:59] the sparse this one this is in fact equivalent to the to the correct mark of
-[0:25:02] equivalent to the to the correct mark of equivalence class again I don't have
-[0:25:03] equivalence class again I don't have interventional data yet but we'll do
-[0:25:05] interventional data yet but we'll do this and also don't have any latency yet
-[0:25:07] this and also don't have any latency yet but we can extend all of this to that
-[0:25:09] but we can extend all of this to that setting as well now of course there's a
-[0:25:11] setting as well now of course there's a problem right so this is computationally
-[0:25:14] problem right so this is computationally a nightmare I don't want to be enumerate
-[0:25:16] a nightmare I don't want to be enumerate all permutations and then just choosing
-[0:25:18] all permutations and then just choosing sparse this one so again like 4GS or
-[0:25:23] sparse this one so again like 4GS or these score based approaches I would
-[0:25:25] these score based approaches I would like to do this kooky key okay I would
-[0:25:27] like to do this kooky key okay I would like to walk around the face of
-[0:25:29] like to walk around the face of permutations and just you know really
-[0:25:31] permutations and just you know really optimize this number the sparsity of my
-[0:25:33] optimize this number the sparsity of my graph and again this is nonparametric
-[0:25:36] graph and again this is nonparametric right my score is just a number of edges
-[0:25:38] right my score is just a number of edges okay so how do you do this
-[0:25:40] okay so how do you do this well how does greedy search work on the
-[0:25:43] well how does greedy search work on the space of permutations so the space of
-[0:25:46] space of permutations so the space of permutations is known if I just take the
-[0:25:50] permutations is known if I just take the convex also okay so you view every one
-[0:25:52] convex also okay so you view every one of your permutations so here is a
-[0:25:54] of your permutations so here is a permutation of length four okay if I'm
-[0:25:57] permutation of length four okay if I'm looking at four node graphs so I look at
-[0:26:00] looking at four node graphs so I look at all of my vectors all of the orderings
-[0:26:03] all of my vectors all of the orderings on length four and I just take these
-[0:26:05] on length four and I just take these vectors line are four I just take the
-[0:26:06] vectors line are four I just take the convex hull of these in fact that gives
-[0:26:09] convex hull of these in fact that gives me a polytope it's three dimensional
-[0:26:10] me a polytope it's three dimensional because the sum of all of these vectors
-[0:26:13] because the sum of all of these vectors is always constant right that's why you
-[0:26:15] is always constant right that's why you get a three-dimensional polytope this is
-[0:26:17] get a three-dimensional polytope this is known this poly tope is known as a
-[0:26:19] known this poly tope is known as a parameter he drew it has been studied a
-[0:26:21] parameter he drew it has been studied a lot in discrete geometry so this is a
-[0:26:23] lot in discrete geometry so this is a general facto case and if you take this
-[0:26:25] general facto case and if you take this even for permutations of links
-[0:26:28] even for permutations of links you'll get a p- 1 dimensional polytope
-[0:26:31] you'll get a p- 1 dimensional polytope which is known as a perimeter heater ok
-[0:26:33] which is known as a perimeter heater ok so if I want to do greedy search on the
-[0:26:36] so if I want to do greedy search on the space of permutations well then it's I
-[0:26:38] space of permutations well then it's I mean very intuitive to just walk around
-[0:26:40] mean very intuitive to just walk around and this polytope right so you just
-[0:26:43] and this polytope right so you just start in some random permutation say
-[0:26:45] start in some random permutation say this one here I construct the
-[0:26:48] this one here I construct the corresponding dag I look at how many
-[0:26:51] corresponding dag I look at how many edges it has I look at all my neighbors
-[0:26:53] edges it has I look at all my neighbors they also have corresponding tags and I
-[0:26:56] they also have corresponding tags and I just walk to it if it has at most as
-[0:26:58] just walk to it if it has at most as many edges is where I am now ok and so
-[0:27:02] many edges is where I am now ok and so you walk around this poly tope now the
-[0:27:03] you walk around this poly tope now the hard thing to prove is that you don't
-[0:27:05] hard thing to prove is that you don't get stuck ok now that if I just do this
-[0:27:08] get stuck ok now that if I just do this greedy search that in fact every local
-[0:27:10] greedy search that in fact every local minimum is a global minimum and that's
-[0:27:12] minimum is a global minimum and that's in fact the case ok so that's what we
-[0:27:14] in fact the case ok so that's what we proved here so again under under under
-[0:27:16] proved here so again under under under assumptions that are weaker than that
-[0:27:19] assumptions that are weaker than that faithfulness is what you can prove here
-[0:27:21] faithfulness is what you can prove here so as the sample size goes to infinity
-[0:27:22] so as the sample size goes to infinity at least you're not going to get stuck
-[0:27:24] at least you're not going to get stuck ok so you can actually just do greedy
-[0:27:27] ok so you can actually just do greedy search on the space of permutations
-[0:27:29] search on the space of permutations instead of the space of mark of
-[0:27:30] instead of the space of mark of equivalence classes you can just use the
-[0:27:32] equivalence classes you can just use the super simple score function which is
-[0:27:34] super simple score function which is just you know the number of edges and
-[0:27:37] just you know the number of edges and the corresponding dag and you have a
-[0:27:39] the corresponding dag and you have a provably consistent algorithm for causal
-[0:27:42] provably consistent algorithm for causal structure discovery ok so this is all
-[0:27:45] structure discovery ok so this is all just in the observational setting where
-[0:27:46] just in the observational setting where of course there were all these other
-[0:27:47] of course there were all these other algorithms available before but just to
-[0:27:50] algorithms available before but just to show you how it works I mean we prove
-[0:27:52] show you how it works I mean we prove that is consistent under strictly weaker
-[0:27:54] that is consistent under strictly weaker conditions and faithfulness and this is
-[0:27:55] conditions and faithfulness and this is also what you see here is it usually
-[0:27:57] also what you see here is it usually does perform better than you know
-[0:27:59] does perform better than you know something like a G yes or and of course
-[0:28:01] something like a G yes or and of course what I've also shown before is that G is
-[0:28:03] what I've also shown before is that G is usually performs better than the TC
-[0:28:04] usually performs better than the TC algorithms ok so that's good
-[0:28:08] algorithms ok so that's good in terms of can you scale it so here I'm
-[0:28:11] in terms of can you scale it so here I'm stealing a picture from Fredrik Aberhart
-[0:28:15] stealing a picture from Fredrik Aberhart stop unfortunately his talk is not yet
-[0:28:17] stop unfortunately his talk is not yet on line it's a super nice talk I
-[0:28:18] on line it's a super nice talk I encourage you all to watch his talk here
-[0:28:20] encourage you all to watch his talk here on line so I just took a screenshot of
-[0:28:22] on line so I just took a screenshot of his I'm slide so he has been working on
-[0:28:26] his I'm slide so he has been working on neuroscience applications where of
-[0:28:29] neuroscience applications where of course he needs these algorithms to
-[0:28:30] course he needs these algorithms to scale and so we have our our algorithm
-[0:28:33] scale and so we have our our algorithm is implemented here in Python package
-[0:28:36] is implemented here in Python package and so this is
-[0:28:38] and so this is GSP here despite
-[0:28:40] GSP here despite package and so we were very happy to see
-[0:28:42] package and so we were very happy to see that first of all others can use it
-[0:28:45] that first of all others can use it others that have not developed this and
-[0:28:48] others that have not developed this and also that you know of course it does not
-[0:28:51] also that you know of course it does not yet scale like he's highly optimized
-[0:28:54] yet scale like he's highly optimized like fast GS algorithm or PC that is
-[0:28:56] like fast GS algorithm or PC that is implemented in Tet rate etc which have
-[0:28:59] implemented in Tet rate etc which have many years of development just to
-[0:29:00] many years of development just to actually speed them up this is our first
-[0:29:02] actually speed them up this is our first Python implementation but we're already
-[0:29:04] Python implementation but we're already super happy that you can apply in two
-[0:29:06] super happy that you can apply in two notes with that graphs with thousands of
-[0:29:08] notes with that graphs with thousands of variables and also it's already faster
-[0:29:10] variables and also it's already faster than graphic Belleza so it's already
-[0:29:11] than graphic Belleza so it's already faster than a python implementation of
-[0:29:13] faster than a python implementation of actually an undirected graph which i
-[0:29:15] actually an undirected graph which i think is very nice so that's in terms of
-[0:29:18] think is very nice so that's in terms of scalability of course like hundred
-[0:29:20] scalability of course like hundred thousands of variables is still
-[0:29:21] thousands of variables is still difficult it needs to be super sparse if
-[0:29:23] difficult it needs to be super sparse if you want to do that but thousands okay
-[0:29:27] you want to do that but thousands okay this is all observational so
-[0:29:29] this is all observational so neuroscience they have observational
-[0:29:30] neuroscience they have observational data so now what about interventional
-[0:29:33] data so now what about interventional data in genomics okay so interventional
-[0:29:36] data in genomics okay so interventional data as I told you there is this other
-[0:29:38] data as I told you there is this other algorithm which is the interventional
-[0:29:40] algorithm which is the interventional version of greedy equivalent search by
-[0:29:43] version of greedy equivalent search by house I was conjectured it is consistent
-[0:29:47] house I was conjectured it is consistent we proved it is not consistent in this
-[0:29:48] we proved it is not consistent in this paper here so now how do you do this
-[0:29:52] paper here so now how do you do this greedy sparse this permutation search
-[0:29:54] greedy sparse this permutation search how do you do it interventional it's
-[0:29:55] how do you do it interventional it's actually also again completely intuitive
-[0:29:57] actually also again completely intuitive so it is provably consistent hard
-[0:30:00] so it is provably consistent hard intervention soft interventions even if
-[0:30:02] intervention soft interventions even if you don't know the intervention targets
-[0:30:03] you don't know the intervention targets maybe I give you some intuition of how
-[0:30:05] maybe I give you some intuition of how it works because it's really completely
-[0:30:07] it works because it's really completely intuitive so let's just do the hard
-[0:30:09] intuitive so let's just do the hard intervention setting so say I'm in some
-[0:30:13] intervention setting so say I'm in some permutation and I'm wondering whether I
-[0:30:15] permutation and I'm wondering whether I should walk into this direction this
-[0:30:16] should walk into this direction this direction or disjunction okay so for
-[0:30:19] direction or disjunction okay so for hard interventions so of course our
-[0:30:21] hard interventions so of course our score function is still just the
-[0:30:23] score function is still just the sparsity but i'm going to cut off some
-[0:30:25] sparsity but i'm going to cut off some search directions so i'm going to cut
-[0:30:29] search directions so i'm going to cut off search directions because for heart
-[0:30:30] off search directions because for heart interventions right i already know that
-[0:30:33] interventions right i already know that if i'm intervened on there can be nobody
-[0:30:36] if i'm intervened on there can be nobody pointing into me right because i'm
-[0:30:38] pointing into me right because i'm cutting off all of the incoming edges
-[0:30:39] cutting off all of the incoming edges well so if i'm looking here into this
-[0:30:42] well so if i'm looking here into this direction and i'm going to make a dag
-[0:30:45] direction and i'm going to make a dag where there is edges pointing into me
-[0:30:46] where there is edges pointing into me and i'm an intervention i already know
-[0:30:48] and i'm an intervention i already know i'm
+[0:14:59] interventions well as I said you know if
+[0:15:00] you do too many hard interventions in
+[0:15:02] one cell the cell guys in particular
+[0:15:05] usually if you knock out more than 10
+[0:15:06] genes or so if they're not well chosen
+[0:15:08] and the cell will die but you can do an
+[0:15:10] overexpression experiment where you know
+[0:15:12] where you overexpress many more genes
+[0:15:14] and the cell is still alive so you can
+[0:15:15] actually study what happens with these
+[0:15:17] you know higher-order interventions when
+[0:15:19] you do soft interventions
+[0:15:22] okay so this is known so it is at least
+[0:15:24] known if the sample size goes to
+[0:15:26] infinity what can I hope to learn okay
+[0:15:29] so what can I hope to identify these are
+[0:15:31] decided these interventional mark of
+[0:15:33] equivalence classes so then the next
+[0:15:36] question once we know what we can
+[0:15:37] identify your next question is you know
+[0:15:39] can we come up with algorithms to
+[0:15:40] actually do this right can we come up
+[0:15:42] with algorithms that take in data which
+[0:15:45] is observational and interventional and
+[0:15:47] then output the interventional mark of
+[0:15:49] equivalence class so it just learns all
+[0:15:51] of the causal relationships that we can
+[0:15:53] possibly learn from this seed okay so
+[0:15:56] for that let me just very briefly give
+[0:15:59] an overview on what is available in
+[0:16:01] terms of just causal structure discovery
+[0:16:04] from observational data so here the
+[0:16:06] picture is actually very nice so this is
+[0:16:08] without any interventions and for now
+[0:16:11] without any latent variables I'll talk
+[0:16:13] briefly about what is available there as
+[0:16:14] well okay so just observational data
+[0:16:17] everything observed so the picture is
+[0:16:20] actually very nice because you can just
+[0:16:22] think of two classes of algorithms all
+[0:16:24] algorithms that are available or I join
+[0:16:25] one or the other or mix up the two
+[0:16:27] so what are these two classes so they
+[0:16:30] are constraint based or score based okay
+[0:16:33] so what are constraint based approaches
+[0:16:34] so they treat causal structure discovery
+[0:16:37] as a constraint satisfaction problem so
+[0:16:39] they try to find the causal graph which
+[0:16:41] satisfies as many as possible of the
+[0:16:44] given constraints and the constraints in
+[0:16:48] this case or conditional independence
+[0:16:49] relations okay score base is very
+[0:16:52] different score and I'm sorry I should
+[0:16:54] say the most well-known example here is
+[0:16:56] the PC algorithm which probably many of
+[0:16:58] you are familiar with the other class of
+[0:17:01] algorithms are score based approaches so
+[0:17:04] here you take a particular score for
+[0:17:06] example P I see there are other scores
+[0:17:09] as well that are consistent and then
+[0:17:12] what you try to do is you okay so B I
+[0:17:15] see so yeah I mean if I could enumerate
+[0:17:16] all graphs and okay fine I could just
+[0:17:19] use the score but you know this is the
+[0:17:21] space of all causal models is huge even
+[0:17:23] if you do this over just Markoff
+[0:17:25] equivalence classes so you don't want to
+[0:17:26] enumerate them so usually what people do
+[0:17:28] is a greedy search in this space okay
+[0:17:31] here and the most well-known example is
+[0:17:33] probably this greedy equivalent sir
+[0:17:34] GES algorithm which is a greedy search
+[0:17:37] on the space of mark of equivalence
+[0:17:38] classes okay so maybe briefly what are
+[0:17:41] advantages and disadvantages of each
+[0:17:43] class of models so any of you who has
+[0:17:46] applied them and will know that for a
+[0:17:49] given sample size or based approaches
+[0:17:51] usually perform better than constraint
+[0:17:52] based approaches here I just took some
+[0:17:54] simulations from a paper from people at
+[0:17:58] ETH and you know just showing here for
+[0:18:02] example GES vs. PC they had also other
+[0:18:05] algorithms in this paper but anyone and
+[0:18:07] I'll have other simulations as well
+[0:18:08] anyone who has done this will see that
+[0:18:10] you know score based approaches for the
+[0:18:12] Sam same sample size usually perform
+[0:18:14] better than constraint based so what is
+[0:18:16] the intuition for this well if you think
+[0:18:18] about it so how do constraint based
+[0:18:20] approaches work so as I said so the
+[0:18:21] constraints usually correspond to
+[0:18:23] conditional independence relations okay
+[0:18:25] and what they do is you know when you
+[0:18:27] see the constraint like a conditional
+[0:18:28] dependence relation you usually remove
+[0:18:30] an edge so of course if you you know the
+[0:18:34] conditional defense relation since they
+[0:18:35] are estimated from data there might be
+[0:18:36] mistakes right so you know I might just
+[0:18:39] I might find that there is a conditional
+[0:18:41] dependence relation although there
+[0:18:42] shouldn't be one and then I'm doing the
+[0:18:43] mistake of removing an edge and the
+[0:18:45] problem is that you cannot correct
+[0:18:47] mistakes so mistakes just keep piling up
+[0:18:50] so in the end I get graphs of have two
+[0:18:52] fewer edges than what they should have
+[0:18:53] where a score based approach is because
+[0:18:55] they're greedy right you know even if I
+[0:18:58] don't get the search Direction
+[0:18:59] completely right you know in the end
+[0:19:00] hopefully out many times I can still
+[0:19:03] find the optimum although I'm not
+[0:19:05] getting it right every time
+[0:19:06] so this meanness of like going through
+[0:19:09] the search space can actually help you
+[0:19:10] quite a bit and we looked at this in a
+[0:19:13] geometric manner to understand this a
+[0:19:15] bit better but of course these
+[0:19:18] constraint based approaches also have a
+[0:19:19] lot of advantages in particular they're
+[0:19:22] you know like they are set up there
+[0:19:24] already a nonparametric right they just
+[0:19:26] they just they're just based on
+[0:19:29] conditional independence testing so you
+[0:19:31] know you can for example replace these
+[0:19:33] conditional independence tests instead
+[0:19:34] of looking at partial correlations you
+[0:19:36] can use kernels for example for
+[0:19:38] estimating these etc the score base you
+[0:19:41] can also do this but it's you need to do
+[0:19:44] an extra step usually people whose BICS
+[0:19:46] here so this is usually
+[0:19:48] based in addition how greedy equivalent
+[0:19:52] searches setup and decel show you here
+[0:19:54] as I said it's a greedy search over the
+[0:19:57] space of equivalence classes so it's
+[0:19:59] very smart and that you know I mean it
+[0:20:01] was a very hard proof to show to do it
+[0:20:03] to actually define a greedy search in
+[0:20:07] the space of marker for coolants classes
+[0:20:08] are not in the space of a causal graphs
+[0:20:11] but still the space is huge and in fact
+[0:20:14] this is an open problem to know like for
+[0:20:16] n nodes you know how long how many mark
+[0:20:18] of recurrence classes are there but at
+[0:20:20] least like here in this paper where they
+[0:20:22] just enumerated them all you see that
+[0:20:24] already for you know kind nodes there
+[0:20:26] are like 10 to the 19 many equivalence
+[0:20:28] classes ok so you're doing this greedy
+[0:20:30] search on this huge search space ok so
+[0:20:33] what I would like to do is somehow
+[0:20:35] overcome some of these problems so as I
+[0:20:37] said so probably I would like to have a
+[0:20:39] score based approach I would like it to
+[0:20:40] be nonparametric and if I can you know I
+[0:20:43] would like it to overcome this big
+[0:20:45] search space question here ok so that's
+[0:20:48] what I'm going to propose as an
+[0:20:50] algorithm in addition you know this is
+[0:20:51] all observational as I said I would
+[0:20:53] really like it to work with
+[0:20:54] interventional Davis I wanted to be
+[0:20:56] consistent with interventional data so
+[0:20:59] they're also like what has been
+[0:21:00] available in terms of with
+[0:21:02] interventional data so there has been
+[0:21:04] and I'll have to reference later on
+[0:21:06] there has been an interventional version
+[0:21:08] of this greedy equivalent search which
+[0:21:10] is this Gies so I standing for
+[0:21:14] interventional version we proved that
+[0:21:16] that approach is that I mean it was
+[0:21:17] conjectured to be consistently proved
+[0:21:19] it's not consistent and I can also give
+[0:21:22] intuition for why it is not so there
+[0:21:24] hasn't been any consistent approach
+[0:21:26] available so we'll prove that whatever
+[0:21:29] we're going to propose it should
+[0:21:30] hopefully be also consistent when you
+[0:21:32] have interventional data at least as the
+[0:21:33] sample size goes to infinity you really
+[0:21:35] want to be able to find the correct
+[0:21:36] interventional mark of a firm's class
+[0:21:38] and then also I said with latent
+[0:21:41] variables what is available so there
+[0:21:43] it's I mean there are also other
+[0:21:45] approaches but in terms of like with
+[0:21:47] different kinds of consistency
+[0:21:48] guarantees is usually just as FCI
+[0:21:50] algorithm and many different kinds of
+[0:21:52] versions of FCI which is an extension of
+[0:21:55] the PC algorithms and the latent setting
+[0:21:57] it's mainly constrained based approaches
+[0:21:59] of course given what I said right
+[0:22:01] you know score based approaches at least
+[0:22:03] when it's completely observational
+[0:22:04] usually perform better dance constraint
+[0:22:06] based approaches what you would really
+[0:22:07] like to have is also score based
+[0:22:09] approach that is proof will be
+[0:22:10] consistent when you also have when you
+[0:22:12] have latent variables okay so that's
+[0:22:15] just a bit of an overview on you know
+[0:22:17] causal structure discovery okay so let
+[0:22:19] me try to propose and the intuition is
+[0:22:21] super simple let me try to propose an
+[0:22:24] approach that is four based it uses
+[0:22:26] conditional independence relations so it
+[0:22:28] is nonparametric and it overcomes this
+[0:22:30] it has a much smaller search space and
+[0:22:32] you know just all mark of equivalence
+[0:22:34] classes and it will be consistent also
+[0:22:36] with interventional data and you can
+[0:22:37] also turn it into okay so how would you
+[0:22:43] do this okay so the intuition is super
+[0:22:47] simple okay so we want to learn DAGs so
+[0:22:52] I'll just turn this problem of like
+[0:22:54] thinking about learning a dag into a
+[0:22:56] different problem of thinking of
+[0:22:58] learning an ordering of the variables
+[0:23:01] and an undirected graph okay that's good
+[0:23:04] enough right because if I give you an
+[0:23:06] undirected graph and I tell you the
+[0:23:07] ordering of the variables or a
+[0:23:08] permutation I will just orient all of
+[0:23:11] the edges according to this permutation
+[0:23:13] okay so if one if in this ordering node
+[0:23:16] a is smaller than node B and there is an
+[0:23:19] undirected edge between a B I'll just
+[0:23:20] orient it from a pointing to me because
+[0:23:23] it's a dag this is good enough to do now
+[0:23:26] the space of permutations again since we
+[0:23:28] don't know how large the space of
+[0:23:30] Markovic rules classes is because this
+[0:23:33] is there is no formal yet but at least
+[0:23:34] it seems to be much smaller
+[0:23:36] of course this needs to have a proof but
+[0:23:38] you know at least some 10 knows it's
+[0:23:39] like 10 factorial is much simpler than
+[0:23:41] 10 to the 19 okay so how does this work
+[0:23:46] so I want to frame causal structure
+[0:23:48] discovery as just a search over
+[0:23:49] permutations because I want to argue
+[0:23:52] that if I give you the correct
+[0:23:53] permutation it's actually very easy to
+[0:23:55] find the corresponding deck okay and now
+[0:23:59] comes here how I wrote down the Markov
+[0:24:01] property before just to make a
+[0:24:02] completely intuitive of like what we're
+[0:24:04] going to do so how do you associate to a
+[0:24:07] permutation of dag well I'll take the
+[0:24:10] permutation this is an ordering and I'll
+[0:24:12] just put an edge
+[0:24:14] between two nodes when they are
+[0:24:16] dependent given all the ancestors now in
+[0:24:19] the Markov property the ancestors are
+[0:24:20] taken based on the graph but of course
+[0:24:22] we don't have a graph so we'll just do
+[0:24:24] the next best thing which is just the
+[0:24:26] ancestors in the ordering right you just
+[0:24:28] take all of the nodes that are smaller
+[0:24:30] in the ordering these two notes inj it's
+[0:24:33] a super intuitive way of doing it so in
+[0:24:37] this way I associate to every
+[0:24:38] permutation a dag and now what we showed
+[0:24:43] here is that in fact if you just choose
+[0:24:46] so for every permutation I have a dag if
+[0:24:49] you just choose the ordering that gives
+[0:24:50] you this parse this graph that's in fact
+[0:24:52] the correct one okay as the sample size
+[0:24:55] goes to infinity so if you just choose
+[0:24:57] the sparse this one this is in fact
+[0:24:59] equivalent to the to the correct mark of
+[0:25:02] equivalence class again I don't have
+[0:25:03] interventional data yet but we'll do
+[0:25:05] this and also don't have any latency yet
+[0:25:07] but we can extend all of this to that
+[0:25:09] setting as well now of course there's a
+[0:25:11] problem right so this is computationally
+[0:25:14] a nightmare I don't want to be enumerate
+[0:25:16] all permutations and then just choosing
+[0:25:18] sparse this one so again like 4GS or
+[0:25:23] these score based approaches I would
+[0:25:25] like to do this kooky key okay I would
+[0:25:27] like to walk around the face of
+[0:25:29] permutations and just you know really
+[0:25:31] optimize this number the sparsity of my
+[0:25:33] graph and again this is nonparametric
+[0:25:36] right my score is just a number of edges
+[0:25:38] okay so how do you do this
+[0:25:40] well how does greedy search work on the
+[0:25:43] space of permutations so the space of
+[0:25:46] permutations is known if I just take the
+[0:25:50] convex also okay so you view every one
+[0:25:52] of your permutations so here is a
+[0:25:54] permutation of length four okay if I'm
+[0:25:57] looking at four node graphs so I look at
+[0:26:00] all of my vectors all of the orderings
+[0:26:03] on length four and I just take these
+[0:26:05] vectors line are four I just take the
+[0:26:06] convex hull of these in fact that gives
+[0:26:09] me a polytope it's three dimensional
+[0:26:10] because the sum of all of these vectors
+[0:26:13] is always constant right that's why you
+[0:26:15] get a three-dimensional polytope this is
+[0:26:17] known this poly tope is known as a
+[0:26:19] parameter he drew it has been studied a
+[0:26:21] lot in discrete geometry so this is a
+[0:26:23] general facto case and if you take this
+[0:26:25] even for permutations of links
+[0:26:28] you'll get a p- 1 dimensional polytope
+[0:26:31] which is known as a perimeter heater ok
+[0:26:33] so if I want to do greedy search on the
+[0:26:36] space of permutations well then it's I
+[0:26:38] mean very intuitive to just walk around
+[0:26:40] and this polytope right so you just
+[0:26:43] start in some random permutation say
+[0:26:45] this one here I construct the
+[0:26:48] corresponding dag I look at how many
+[0:26:51] edges it has I look at all my neighbors
+[0:26:53] they also have corresponding tags and I
+[0:26:56] just walk to it if it has at most as
+[0:26:58] many edges is where I am now ok and so
+[0:27:02] you walk around this poly tope now the
+[0:27:03] hard thing to prove is that you don't
+[0:27:05] get stuck ok now that if I just do this
+[0:27:08] greedy search that in fact every local
+[0:27:10] minimum is a global minimum and that's
+[0:27:12] in fact the case ok so that's what we
+[0:27:14] proved here so again under under under
+[0:27:16] assumptions that are weaker than that
+[0:27:19] faithfulness is what you can prove here
+[0:27:21] so as the sample size goes to infinity
+[0:27:22] at least you're not going to get stuck
+[0:27:24] ok so you can actually just do greedy
+[0:27:27] search on the space of permutations
+[0:27:29] instead of the space of mark of
+[0:27:30] equivalence classes you can just use the
+[0:27:32] super simple score function which is
+[0:27:34] just you know the number of edges and
+[0:27:37] the corresponding dag and you have a
+[0:27:39] provably consistent algorithm for causal
+[0:27:42] structure discovery ok so this is all
+[0:27:45] just in the observational setting where
+[0:27:46] of course there were all these other
+[0:27:47] algorithms available before but just to
+[0:27:50] show you how it works I mean we prove
+[0:27:52] that is consistent under strictly weaker
+[0:27:54] conditions and faithfulness and this is
+[0:27:55] also what you see here is it usually
+[0:27:57] does perform better than you know
+[0:27:59] something like a G yes or and of course
+[0:28:01] what I've also shown before is that G is
+[0:28:03] usually performs better than the TC
+[0:28:04] algorithms ok so that's good
+[0:28:08] in terms of can you scale it so here I'm
+[0:28:11] stealing a picture from Fredrik Aberhart
+[0:28:15] stop unfortunately his talk is not yet
+[0:28:17] on line it's a super nice talk I
+[0:28:18] encourage you all to watch his talk here
+[0:28:20] on line so I just took a screenshot of
+[0:28:22] his I'm slide so he has been working on
+[0:28:26] neuroscience applications where of
+[0:28:29] course he needs these algorithms to
+[0:28:30] scale and so we have our our algorithm
+[0:28:33] is implemented here in Python package
+[0:28:36] and so this is
+[0:28:38] GSP here despite
+[0:28:40] package and so we were very happy to see
+[0:28:42] that first of all others can use it
+[0:28:45] others that have not developed this and
+[0:28:48] also that you know of course it does not
+[0:28:51] yet scale like he's highly optimized
+[0:28:54] like fast GS algorithm or PC that is
+[0:28:56] implemented in Tet rate etc which have
+[0:28:59] many years of development just to
+[0:29:00] actually speed them up this is our first
+[0:29:02] Python implementation but we're already
+[0:29:04] super happy that you can apply in two
+[0:29:06] notes with that graphs with thousands of
+[0:29:08] variables and also it's already faster
+[0:29:10] than graphic Belleza so it's already
+[0:29:11] faster than a python implementation of
+[0:29:13] actually an undirected graph which i
+[0:29:15] think is very nice so that's in terms of
+[0:29:18] scalability of course like hundred
+[0:29:20] thousands of variables is still
+[0:29:21] difficult it needs to be super sparse if
+[0:29:23] you want to do that but thousands okay
+[0:29:27] this is all observational so
+[0:29:29] neuroscience they have observational
+[0:29:30] data so now what about interventional
+[0:29:33] data in genomics okay so interventional
+[0:29:36] data as I told you there is this other
+[0:29:38] algorithm which is the interventional
+[0:29:40] version of greedy equivalent search by
+[0:29:43] house I was conjectured it is consistent
+[0:29:47] we proved it is not consistent in this
+[0:29:48] paper here so now how do you do this
+[0:29:52] greedy sparse this permutation search
+[0:29:54] how do you do it interventional it's
+[0:29:55] actually also again completely intuitive
+[0:29:57] so it is provably consistent hard
+[0:30:00] intervention soft interventions even if
+[0:30:02] you don't know the intervention targets
+[0:30:03] maybe I give you some intuition of how
+[0:30:05] it works because it's really completely
+[0:30:07] intuitive so let's just do the hard
+[0:30:09] intervention setting so say I'm in some
+[0:30:13] permutation and I'm wondering whether I
+[0:30:15] should walk into this direction this
+[0:30:16] direction or disjunction okay so for
+[0:30:19] hard interventions so of course our
+[0:30:21] score function is still just the
+[0:30:23] sparsity but i'm going to cut off some
+[0:30:25] search directions so i'm going to cut
+[0:30:29] off search directions because for heart
+[0:30:30] interventions right i already know that
+[0:30:33] if i'm intervened on there can be nobody
+[0:30:36] pointing into me right because i'm
+[0:30:38] cutting off all of the incoming edges
+[0:30:39] well so if i'm looking here into this
+[0:30:42] direction and i'm going to make a dag
+[0:30:45] where there is edges pointing into me
+[0:30:46] and i'm an intervention i already know
 [0:30:48] i'm and in fact you can prove that if you
-[0:30:50] and in fact you can prove that if you just cut off all of these search
-[0:30:52] just cut off all of these search directions that will lead you to these
-[0:30:54] directions that will lead you to these kinds of graphs you actually are still
-[0:30:56] kinds of graphs you actually are still consistent so you're going to end up in
-[0:30:58] consistent so you're going to end up in the correct more interventional mark of
-[0:31:00] the correct more interventional mark of equivalence class okay so that's for
-[0:31:03] equivalence class okay so that's for hard and then of course there's a bit
-[0:31:04] hard and then of course there's a bit different enter an intuition for soft
-[0:31:06] different enter an intuition for soft and unknown intervention targets but
-[0:31:08] and unknown intervention targets but it's so it's nice that interventions
-[0:31:10] it's so it's nice that interventions help you in two different ways right
-[0:31:12] help you in two different ways right they help you in terms of computation
-[0:31:14] they help you in terms of computation because you're where you're cutting off
-[0:31:16] because you're where you're cutting off search directions and it helps you in
-[0:31:18] search directions and it helps you in terms of identifiability because the
-[0:31:21] terms of identifiability because the interventional Markovic rules class is
-[0:31:23] interventional Markovic rules class is smaller than so you are able to identify
-[0:31:25] smaller than so you are able to identify more causal directions and more if you
-[0:31:28] more causal directions and more if you just have observational data okay now of
-[0:31:31] just have observational data okay now of course what happens with latent
-[0:31:32] course what happens with latent variables right latent variables is kind
-[0:31:34] variables right latent variables is kind of problematic if you do everything over
-[0:31:35] of problematic if you do everything over search of permutations
-[0:31:37] search of permutations because latent variables introduces
-[0:31:39] because latent variables introduces nodes that are uncomfortable so we just
-[0:31:42] nodes that are uncomfortable so we just recently showed that you can actually
-[0:31:46] recently showed that you can actually define the same thing as what we did up
-[0:31:48] define the same thing as what we did up here instead of a greedy search over
-[0:31:49] here instead of a greedy search over permutations you know do a greedy search
-[0:31:51] permutations you know do a greedy search over pull sets okay
-[0:31:53] over pull sets okay posix have this or partially ordered
-[0:31:55] posix have this or partially ordered sets so now I have certain nodes that
-[0:31:57] sets so now I have certain nodes that are not comparable this corresponds to
-[0:31:59] are not comparable this corresponds to latent variables and so they can deal
-[0:32:01] latent variables and so they can deal with latent confounders we show this
-[0:32:03] with latent confounders we show this this equivalent of this theorem here the
-[0:32:07] this equivalent of this theorem here the equivalent of this theorem is what we
-[0:32:09] equivalent of this theorem is what we prove so we prove that even when you
-[0:32:11] prove so we prove that even when you have latent variables the sparse list so
-[0:32:14] have latent variables the sparse list so we again have a map from posix to DS in
-[0:32:17] we again have a map from posix to DS in this case max is maximal ancestral
-[0:32:20] this case max is maximal ancestral aggressiveness or graphs with also by
-[0:32:22] aggressiveness or graphs with also by directed edges we show that the sparse
-[0:32:24] directed edges we show that the sparse one is actually the true one now what we
-[0:32:27] one is actually the true one now what we don't have yet is so we do have a
-[0:32:30] don't have yet is so we do have a definition of a greedy algorithm so
-[0:32:32] definition of a greedy algorithm so greedy search over the space of both
-[0:32:33] greedy search over the space of both sets what we don't have yet is this
-[0:32:36] sets what we don't have yet is this theorem that you never get stuck so we
-[0:32:38] theorem that you never get stuck so we applied it so computationally we've run
-[0:32:40] applied it so computationally we've run it by no probiem 30,000 different kinds
-[0:32:42] it by no probiem 30,000 different kinds of graphs we haven't found any counter
-[0:32:44] of graphs we haven't found any counter and counter example we don't have to
-[0:32:47] and counter example we don't have to prove yet that you know every local
-[0:32:49] prove yet that you know every local minimum is a global minimum when you're
-[0:32:51] minimum is a global minimum when you're doing a search over so this is where we
-[0:32:55] doing a search over so this is where we are for now again I can show you some
-[0:32:58] are for now again I can show you some some evaluations
-[0:33:02] some evaluations so now let's just do the interventional
-[0:33:04] so now let's just do the interventional setting so since I promised you know
-[0:33:06] setting so since I promised you know what we look at is these knockabout data
-[0:33:08] what we look at is these knockabout data set yes
+[0:30:50] just cut off all of these search
+[0:30:52] directions that will lead you to these
+[0:30:54] kinds of graphs you actually are still
+[0:30:56] consistent so you're going to end up in
+[0:30:58] the correct more interventional mark of
+[0:31:00] equivalence class okay so that's for
+[0:31:03] hard and then of course there's a bit
+[0:31:04] different enter an intuition for soft
+[0:31:06] and unknown intervention targets but
+[0:31:08] it's so it's nice that interventions
+[0:31:10] help you in two different ways right
+[0:31:12] they help you in terms of computation
+[0:31:14] because you're where you're cutting off
+[0:31:16] search directions and it helps you in
+[0:31:18] terms of identifiability because the
+[0:31:21] interventional Markovic rules class is
+[0:31:23] smaller than so you are able to identify
+[0:31:25] more causal directions and more if you
+[0:31:28] just have observational data okay now of
+[0:31:31] course what happens with latent
+[0:31:32] variables right latent variables is kind
+[0:31:34] of problematic if you do everything over
+[0:31:35] search of permutations
+[0:31:37] because latent variables introduces
+[0:31:39] nodes that are uncomfortable so we just
+[0:31:42] recently showed that you can actually
+[0:31:46] define the same thing as what we did up
+[0:31:48] here instead of a greedy search over
+[0:31:49] permutations you know do a greedy search
+[0:31:51] over pull sets okay
+[0:31:53] posix have this or partially ordered
+[0:31:55] sets so now I have certain nodes that
+[0:31:57] are not comparable this corresponds to
+[0:31:59] latent variables and so they can deal
+[0:32:01] with latent confounders we show this
+[0:32:03] this equivalent of this theorem here the
+[0:32:07] equivalent of this theorem is what we
+[0:32:09] prove so we prove that even when you
+[0:32:11] have latent variables the sparse list so
+[0:32:14] we again have a map from posix to DS in
+[0:32:17] this case max is maximal ancestral
+[0:32:20] aggressiveness or graphs with also by
+[0:32:22] directed edges we show that the sparse
+[0:32:24] one is actually the true one now what we
+[0:32:27] don't have yet is so we do have a
+[0:32:30] definition of a greedy algorithm so
+[0:32:32] greedy search over the space of both
+[0:32:33] sets what we don't have yet is this
+[0:32:36] theorem that you never get stuck so we
+[0:32:38] applied it so computationally we've run
+[0:32:40] it by no probiem 30,000 different kinds
+[0:32:42] of graphs we haven't found any counter
+[0:32:44] and counter example we don't have to
+[0:32:47] prove yet that you know every local
+[0:32:49] minimum is a global minimum when you're
+[0:32:51] doing a search over so this is where we
+[0:32:55] are for now again I can show you some
+[0:32:58] some evaluations
+[0:33:02] so now let's just do the interventional
+[0:33:04] setting so since I promised you know
+[0:33:06] what we look at is these knockabout data
 [0:33:09] set yes so this is so later this year there will
-[0:33:11] so this is so later this year there will be huge knockout data sets becoming
-[0:33:13] be huge knockout data sets becoming available for now this is a knockout
-[0:33:15] available for now this is a knockout data set where you have knockouts on 30
-[0:33:17] data set where you have knockouts on 30 different genes okay so you have data on
-[0:33:20] different genes okay so you have data on 20 so every sample is twenty thousand
-[0:33:22] 20 so every sample is twenty thousand dimensional and you have samples where
-[0:33:24] dimensional and you have samples where you knocked out g1 g2 g3 up to June 30
-[0:33:28] you knocked out g1 g2 g3 up to June 30 okay so 30 were chosen and they were
-[0:33:30] okay so 30 were chosen and they were knocked out and you get to observe what
-[0:33:32] knocked out and you get to observe what happens this is the standard Sachs data
-[0:33:35] happens this is the standard Sachs data center you have these on proteins where
-[0:33:38] center you have these on proteins where you also have different kinds of
-[0:33:39] you also have different kinds of interventional data on proteins um okay
-[0:33:42] interventional data on proteins um okay so how do you draw ROC curves so this is
-[0:33:45] so how do you draw ROC curves so this is what I was saying that we would like to
-[0:33:47] what I was saying that we would like to predict the effect of an unseen
-[0:33:48] predict the effect of an unseen intervention so how will you draw ROC
-[0:33:50] intervention so how will you draw ROC curves as you leave out so say I have
-[0:33:53] curves as you leave out so say I have observational data and interventional
-[0:33:54] observational data and interventional data and I leave out one of the
-[0:33:57] data and I leave out one of the interventions so let me do it for a
-[0:33:59] interventions so let me do it for a knockout so say I have interventions on
-[0:34:02] knockout so say I have interventions on genes 1 up to 20 I leave out the
-[0:34:04] genes 1 up to 20 I leave out the intervention for gene 20 okay so I use
-[0:34:06] intervention for gene 20 okay so I use all of the interventions of two gene 19
-[0:34:08] all of the interventions of two gene 19 plus the observational data I try to
-[0:34:10] plus the observational data I try to learn a causal graph and now in this
-[0:34:13] learn a causal graph and now in this causal graph I want to see you know so
-[0:34:15] causal graph I want to see you know so now I look at so I have intervention on
-[0:34:17] now I look at so I have intervention on June 20 so I look at all of the edges
-[0:34:20] June 20 so I look at all of the edges neighboring gene 20 if there is an edge
-[0:34:23] neighboring gene 20 if there is an edge pointing from June 22 June 21
-[0:34:26] pointing from June 22 June 21 well then if I knock out gene 20 and I
-[0:34:29] well then if I knock out gene 20 and I should see that the distribution changes
-[0:34:30] should see that the distribution changes on gene 21
-[0:34:32] on gene 21 if I do well if I have an edge there and
-[0:34:36] if I do well if I have an edge there and the distribution changes and I call that
-[0:34:37] the distribution changes and I call that a true positive otherwise that's a false
-[0:34:40] a true positive otherwise that's a false positive okay so that's how you can
-[0:34:42] positive okay so that's how you can actually drop ROC curves for how well
-[0:34:46] actually drop ROC curves for how well you're able to predict the effect and
-[0:34:48] you're able to predict the effect and how well you're able to estimate the
-[0:34:49] how well you're able to estimate the graph and you can do this also for the
-[0:34:51] graph and you can do this also for the intervention so here I do it for this is
-[0:34:54] intervention so here I do it for this is directed edges it's a skeleton without
-[0:34:56] directed edges it's a skeleton without taking directions into account this is
-[0:34:58] taking directions into account this is again without because then I can more
-[0:35:00] again without because then I can more easily draw with this to do random
-[0:35:03] easily draw with this to do random guessing okay so what is it what you see
-[0:35:06] guessing okay so what is it what you see so part of Secrets you want to kind of
-[0:35:08] so part of Secrets you want to kind of be here and here right so what do you
-[0:35:10] be here and here right so what do you see here so is processor di yes which we
-[0:35:13] see here so is processor di yes which we proved is not
-[0:35:14] proved is not consistent and the other two arrested I
-[0:35:16] consistent and the other two arrested I DSP is nonparametric right I can replace
-[0:35:20] DSP is nonparametric right I can replace instead of doing partial correlation
-[0:35:21] instead of doing partial correlation testing I can replace it by some kernel
-[0:35:23] testing I can replace it by some kernel independence tests which you know is
-[0:35:25] independence tests which you know is it's kind of helpful for often helpful
-[0:35:28] it's kind of helpful for often helpful for genomics applications also here it
-[0:35:31] for genomics applications also here it doesn't seem to because just the sample
-[0:35:32] doesn't seem to because just the sample size is too small I think for it to be
-[0:35:34] size is too small I think for it to be helpful but you see here nicely today
-[0:35:36] helpful but you see here nicely today you know when you have these kernel
-[0:35:38] you know when you have these kernel based tests alysom sometimes actually
-[0:35:40] based tests alysom sometimes actually quite often you actually can get a
-[0:35:42] quite often you actually can get a benefit of being able to do that instead
-[0:35:45] benefit of being able to do that instead of doing these partial correlation tests
-[0:35:47] of doing these partial correlation tests so that's how these things work and I
-[0:35:50] so that's how these things work and I think it's nice that we can actually
-[0:35:51] think it's nice that we can actually start to evaluate these kinds of
-[0:35:53] start to evaluate these kinds of algorithms now in terms of going forward
-[0:35:56] algorithms now in terms of going forward and what are the important questions I
-[0:35:58] and what are the important questions I just wanted to put up one reference
-[0:36:01] just wanted to put up one reference because I think this is like there is a
-[0:36:02] because I think this is like there is a whole lot of open questions in terms of
-[0:36:05] whole lot of open questions in terms of experimental design right so what we did
-[0:36:07] experimental design right so what we did here is in all these algorithms is that
-[0:36:09] here is in all these algorithms is that in all these methods if you come up with
-[0:36:11] in all these methods if you come up with algorithms that can take in
-[0:36:12] algorithms that can take in observational data interventional data
-[0:36:14] observational data interventional data and they can learn the graph but of
-[0:36:17] and they can learn the graph but of course you want to be able to ask well
-[0:36:20] course you want to be able to ask well which intervention I mean in the end I
-[0:36:22] which intervention I mean in the end I can choose right I and this is one of
-[0:36:24] can choose right I and this is one of the biggest questions that I'm asked I'm
-[0:36:26] the biggest questions that I'm asked I'm going to work with people at the broad
-[0:36:27] going to work with people at the broad for example well which interventions
-[0:36:29] for example well which interventions should we do
-[0:36:29] should we do right which interventions are the most
-[0:36:31] right which interventions are the most helpful in order to actually learn the
-[0:36:33] helpful in order to actually learn the underlying cause we'll graph the best
-[0:36:35] underlying cause we'll graph the best way and of course this is maybe a bit
-[0:36:38] way and of course this is maybe a bit different than you know when you do
-[0:36:39] different than you know when you do these things for ads because you know
-[0:36:42] these things for ads because you know here first of all it costs a lot I mean
-[0:36:45] here first of all it costs a lot I mean one sample still costs about $1 so you
-[0:36:47] one sample still costs about $1 so you have you need to take budget constraints
-[0:36:49] have you need to take budget constraints into account you also have time
-[0:36:51] into account you also have time constraints I mean usually you're in the
-[0:36:53] constraints I mean usually you're in the batch setting right I you know I cannot
-[0:36:55] batch setting right I you know I cannot just do like one I cannot just get one
-[0:36:57] just do like one I cannot just get one sample and then look at it and decide on
-[0:36:59] sample and then look at it and decide on the next sample because it's end the
-[0:37:02] the next sample because it's end the cycle poster for student performing
-[0:37:04] cycle poster for student performing these experiments to say you can maybe
-[0:37:05] these experiments to say you can maybe do four batches of experiments and so
-[0:37:07] do four batches of experiments and so the question is which intervention
-[0:37:09] the question is which intervention should you do in order to learn the most
-[0:37:10] should you do in order to learn the most about the underlying graph and so I
-[0:37:12] about the underlying graph and so I think here there's we just have one
-[0:37:14] think here there's we just have one paper here a whole lot of assumptions
-[0:37:16] paper here a whole lot of assumptions that are not met that need to be that
-[0:37:19] that are not met that need to be that need to be relaxed and
-[0:37:21] need to be relaxed and this area here is still very very wide
-[0:37:24] this area here is still very very wide open this experimental design questions
-[0:37:27] open this experimental design questions where I think it will be really great to
-[0:37:30] where I think it will be really great to get anyone's input okay so that brings
-[0:37:34] get anyone's input okay so that brings me back to the overview slide first part
-[0:37:39] me back to the overview slide first part on actually doing trying to predict the
-[0:37:41] on actually doing trying to predict the effect of any intervention from known
-[0:37:43] effect of any intervention from known interventions and I was asked to stop
-[0:37:46] interventions and I was asked to stop somewhere in the middle there's not
-[0:37:48] somewhere in the middle there's not quite the middle but I will stop here
-[0:37:50] quite the middle but I will stop here quickly and the second part is much
-[0:37:52] quickly and the second part is much shorter great thanks Caroline so we
-[0:37:57] shorter great thanks Caroline so we don't have questions in queue and yet
-[0:37:58] don't have questions in queue and yet but perhaps can have one so one question
-[0:38:03] but perhaps can have one so one question about your your application so how did
-[0:38:06] about your your application so how did you deal with statistical uncertainty so
-[0:38:08] you deal with statistical uncertainty so if you for example if you read sample
-[0:38:10] if you for example if you read sample you expect you might get a different
-[0:38:12] you expect you might get a different ordering how would you a granade across
-[0:38:14] ordering how would you a granade across those or yes so we so when we apply it
-[0:38:19] those or yes so we so when we apply it really we we do a lot of stability
-[0:38:20] really we we do a lot of stability selection kinds of applications so yes
-[0:38:23] selection kinds of applications so yes we always do that so you you actually
-[0:38:25] we always do that so you you actually sub sample the data and then you look at
-[0:38:27] sub sample the data and then you look at the edges that are present for many
-[0:38:30] the edges that are present for many times etc so yes here we didn't do it I
-[0:38:33] times etc so yes here we didn't do it I mean but when we actually apply it to
-[0:38:34] mean but when we actually apply it to important questions than we do it okay
-[0:38:36] important questions than we do it okay great thanks I think also Vito has a
-[0:38:39] great thanks I think also Vito has a question
+[0:33:11] be huge knockout data sets becoming
+[0:33:13] available for now this is a knockout
+[0:33:15] data set where you have knockouts on 30
+[0:33:17] different genes okay so you have data on
+[0:33:20] 20 so every sample is twenty thousand
+[0:33:22] dimensional and you have samples where
+[0:33:24] you knocked out g1 g2 g3 up to June 30
+[0:33:28] okay so 30 were chosen and they were
+[0:33:30] knocked out and you get to observe what
+[0:33:32] happens this is the standard Sachs data
+[0:33:35] center you have these on proteins where
+[0:33:38] you also have different kinds of
+[0:33:39] interventional data on proteins um okay
+[0:33:42] so how do you draw ROC curves so this is
+[0:33:45] what I was saying that we would like to
+[0:33:47] predict the effect of an unseen
+[0:33:48] intervention so how will you draw ROC
+[0:33:50] curves as you leave out so say I have
+[0:33:53] observational data and interventional
+[0:33:54] data and I leave out one of the
+[0:33:57] interventions so let me do it for a
+[0:33:59] knockout so say I have interventions on
+[0:34:02] genes 1 up to 20 I leave out the
+[0:34:04] intervention for gene 20 okay so I use
+[0:34:06] all of the interventions of two gene 19
+[0:34:08] plus the observational data I try to
+[0:34:10] learn a causal graph and now in this
+[0:34:13] causal graph I want to see you know so
+[0:34:15] now I look at so I have intervention on
+[0:34:17] June 20 so I look at all of the edges
+[0:34:20] neighboring gene 20 if there is an edge
+[0:34:23] pointing from June 22 June 21
+[0:34:26] well then if I knock out gene 20 and I
+[0:34:29] should see that the distribution changes
+[0:34:30] on gene 21
+[0:34:32] if I do well if I have an edge there and
+[0:34:36] the distribution changes and I call that
+[0:34:37] a true positive otherwise that's a false
+[0:34:40] positive okay so that's how you can
+[0:34:42] actually drop ROC curves for how well
+[0:34:46] you're able to predict the effect and
+[0:34:48] how well you're able to estimate the
+[0:34:49] graph and you can do this also for the
+[0:34:51] intervention so here I do it for this is
+[0:34:54] directed edges it's a skeleton without
+[0:34:56] taking directions into account this is
+[0:34:58] again without because then I can more
+[0:35:00] easily draw with this to do random
+[0:35:03] guessing okay so what is it what you see
+[0:35:06] so part of Secrets you want to kind of
+[0:35:08] be here and here right so what do you
+[0:35:10] see here so is processor di yes which we
+[0:35:13] proved is not
+[0:35:14] consistent and the other two arrested I
+[0:35:16] DSP is nonparametric right I can replace
+[0:35:20] instead of doing partial correlation
+[0:35:21] testing I can replace it by some kernel
+[0:35:23] independence tests which you know is
+[0:35:25] it's kind of helpful for often helpful
+[0:35:28] for genomics applications also here it
+[0:35:31] doesn't seem to because just the sample
+[0:35:32] size is too small I think for it to be
+[0:35:34] helpful but you see here nicely today
+[0:35:36] you know when you have these kernel
+[0:35:38] based tests alysom sometimes actually
+[0:35:40] quite often you actually can get a
+[0:35:42] benefit of being able to do that instead
+[0:35:45] of doing these partial correlation tests
+[0:35:47] so that's how these things work and I
+[0:35:50] think it's nice that we can actually
+[0:35:51] start to evaluate these kinds of
+[0:35:53] algorithms now in terms of going forward
+[0:35:56] and what are the important questions I
+[0:35:58] just wanted to put up one reference
+[0:36:01] because I think this is like there is a
+[0:36:02] whole lot of open questions in terms of
+[0:36:05] experimental design right so what we did
+[0:36:07] here is in all these algorithms is that
+[0:36:09] in all these methods if you come up with
+[0:36:11] algorithms that can take in
+[0:36:12] observational data interventional data
+[0:36:14] and they can learn the graph but of
+[0:36:17] course you want to be able to ask well
+[0:36:20] which intervention I mean in the end I
+[0:36:22] can choose right I and this is one of
+[0:36:24] the biggest questions that I'm asked I'm
+[0:36:26] going to work with people at the broad
+[0:36:27] for example well which interventions
+[0:36:29] should we do
+[0:36:29] right which interventions are the most
+[0:36:31] helpful in order to actually learn the
+[0:36:33] underlying cause we'll graph the best
+[0:36:35] way and of course this is maybe a bit
+[0:36:38] different than you know when you do
+[0:36:39] these things for ads because you know
+[0:36:42] here first of all it costs a lot I mean
+[0:36:45] one sample still costs about $1 so you
+[0:36:47] have you need to take budget constraints
+[0:36:49] into account you also have time
+[0:36:51] constraints I mean usually you're in the
+[0:36:53] batch setting right I you know I cannot
+[0:36:55] just do like one I cannot just get one
+[0:36:57] sample and then look at it and decide on
+[0:36:59] the next sample because it's end the
+[0:37:02] cycle poster for student performing
+[0:37:04] these experiments to say you can maybe
+[0:37:05] do four batches of experiments and so
+[0:37:07] the question is which intervention
+[0:37:09] should you do in order to learn the most
+[0:37:10] about the underlying graph and so I
+[0:37:12] think here there's we just have one
+[0:37:14] paper here a whole lot of assumptions
+[0:37:16] that are not met that need to be that
+[0:37:19] need to be relaxed and
+[0:37:21] this area here is still very very wide
+[0:37:24] open this experimental design questions
+[0:37:27] where I think it will be really great to
+[0:37:30] get anyone's input okay so that brings
+[0:37:34] me back to the overview slide first part
+[0:37:39] on actually doing trying to predict the
+[0:37:41] effect of any intervention from known
+[0:37:43] interventions and I was asked to stop
+[0:37:46] somewhere in the middle there's not
+[0:37:48] quite the middle but I will stop here
+[0:37:50] quickly and the second part is much
+[0:37:52] shorter great thanks Caroline so we
+[0:37:57] don't have questions in queue and yet
+[0:37:58] but perhaps can have one so one question
+[0:38:03] about your your application so how did
+[0:38:06] you deal with statistical uncertainty so
+[0:38:08] if you for example if you read sample
+[0:38:10] you expect you might get a different
+[0:38:12] ordering how would you a granade across
+[0:38:14] those or yes so we so when we apply it
+[0:38:19] really we we do a lot of stability
+[0:38:20] selection kinds of applications so yes
+[0:38:23] we always do that so you you actually
+[0:38:25] sub sample the data and then you look at
+[0:38:27] the edges that are present for many
+[0:38:30] times etc so yes here we didn't do it I
+[0:38:33] mean but when we actually apply it to
+[0:38:34] important questions than we do it okay
+[0:38:36] great thanks I think also Vito has a
+[0:38:39] question
 [0:38:45] the last part where you talk about selecting interventions are you focused
-[0:38:48] selecting interventions are you focused that kind of mainly on on trying to
-[0:38:51] that kind of mainly on on trying to figure out what the graph actually is as
-[0:38:55] figure out what the graph actually is as opposed to kind of doing both
-[0:38:57] opposed to kind of doing both exploration and exploitation like in
-[0:39:00] exploration and exploitation like in multi armed bandits and sort of more
-[0:39:03] multi armed bandits and sort of more generally can add Estes connect to the
-[0:39:06] generally can add Estes connect to the multi-armed bandit literature yep so
-[0:39:09] multi-armed bandit literature yep so that's I think something we're working
-[0:39:12] that's I think something we're working on right so here the question was what
-[0:39:14] on right so here the question was what are the best interventions in order to
-[0:39:15] are the best interventions in order to figure out the underlying graph of
-[0:39:17] figure out the underlying graph of course also there you have exploration
-[0:39:19] course also there you have exploration exploitation right because you know at
-[0:39:22] exploitation right because you know at the beginning you I mean anyway you want
-[0:39:24] the beginning you I mean anyway you want to get first first er there is so much
-[0:39:27] to get first first er there is so much uncertainty you actually need to sample
-[0:39:29] uncertainty you actually need to sample get interventions and many different
-[0:39:30] get interventions and many different kinds of places and then and then zone
-[0:39:33] kinds of places and then and then zone in so this is a Bayesian approach
-[0:39:34] in so this is a Bayesian approach it's very similar to that literature but
-[0:39:37] it's very similar to that literature but if you maybe a bit more in terms into
-[0:39:40] if you maybe a bit more in terms into maybe RL or something like that
-[0:39:41] maybe RL or something like that of course there the goal is always to
-[0:39:43] of course there the goal is always to push your system towards a particular
-[0:39:45] push your system towards a particular state so I think those are the next
-[0:39:47] state so I think those are the next questions that you know one wants to
-[0:39:49] questions that you know one wants to actually understand a bit better it's
-[0:39:50] actually understand a bit better it's not about learning the underlying graph
-[0:39:52] not about learning the underlying graph but maybe you know you have a particular
-[0:39:53] but maybe you know you have a particular state where you want to get to well then
-[0:39:55] state where you want to get to well then maybe you shouldn't learn the full
-[0:39:56] maybe you shouldn't learn the full underlying graph in order to figure out
-[0:39:58] underlying graph in order to figure out what is the best intervention in order
-[0:40:00] what is the best intervention in order to push your state back to normal state
-[0:40:02] to push your state back to normal state if you're in the disease states for
-[0:40:03] if you're in the disease states for example so yeah so I think there's just
-[0:40:07] example so yeah so I think there's just you know this is like one little paper
-[0:40:09] you know this is like one little paper there's a whole lot of stuff to be done
-[0:40:11] there's a whole lot of stuff to be done in this area just just to encourage
-[0:40:13] in this area just just to encourage people to actually do it this is only
-[0:40:15] people to actually do it this is only for hard interventions we have nothing
-[0:40:17] for hard interventions we have nothing for soft interventions there's whole lot
-[0:40:20] for soft interventions there's whole lot of open questions yeah great thanks I
-[0:40:24] of open questions yeah great thanks I think in the interest of time we want to
-[0:40:26] think in the interest of time we want to continue and so you have around 12 to 13
-[0:40:28] continue and so you have around 12 to 13 minutes left good okay so now what about
-[0:40:35] minutes left good okay so now what about drugs so now I'm looking at the more
-[0:40:39] drugs so now I'm looking at the more conventional causal transport question
-[0:40:42] conventional causal transport question where you know I have an intervention in
-[0:40:45] where you know I have an intervention in one setting say one cell type and I
-[0:40:47] one setting say one cell type and I would like to predict its effect in a
-[0:40:48] would like to predict its effect in a different cell type okay so if you're a
-[0:40:51] different cell type okay so if you're a machine so there is a whole lot of
-[0:40:53] machine so there is a whole lot of literature by alias barn going to the
-[0:40:55] literature by alias barn going to the pearl etc and collaborators on exactly
-[0:40:58] pearl etc and collaborators on exactly this question in the graphical setting
-[0:41:01] this question in the graphical setting right where I have where I'm assuming
-[0:41:03] right where I have where I'm assuming the graph is fixed and they actually
-[0:41:04] the graph is fixed and they actually have very very nice line of work and I
-[0:41:06] have very very nice line of work and I think I haven't not written oh yes here
-[0:41:10] think I haven't not written oh yes here they have a lot of really nice line of
-[0:41:12] they have a lot of really nice line of work of actually finding necessary and
-[0:41:14] work of actually finding necessary and sufficient conditions for exactly this
-[0:41:16] sufficient conditions for exactly this okay but I need to know younger line
-[0:41:17] okay but I need to know younger line graphed and we know exactly you know
-[0:41:18] graphed and we know exactly you know order necessary and sufficient
-[0:41:20] order necessary and sufficient conditions on where the intervention is
-[0:41:21] conditions on where the intervention is and where is the variables that are
-[0:41:23] and where is the variables that are changing between different cell types so
-[0:41:25] changing between different cell types so that I can actually do this
-[0:41:26] that I can actually do this transportability question now if you're
-[0:41:29] transportability question now if you're a machine learning person I don't think
-[0:41:31] a machine learning person I don't think this is the first way you would think
-[0:41:32] this is the first way you would think about solving this problem you will
-[0:41:36] about solving this problem you will probably think about style transfer
-[0:41:38] probably think about style transfer right so you know style transfer I mean
-[0:41:41] right so you know style transfer I mean they've been doing this for a long time
-[0:41:42] they've been doing this for a long time right and super successful so I have
-[0:41:44] right and super successful so I have people when
-[0:41:46] people when in the neutral face sand with a smiley
-[0:41:48] in the neutral face sand with a smiley face and I tried to generate the image
-[0:41:51] face and I tried to generate the image of how this particular person would look
-[0:41:52] of how this particular person would look like if he's smiling right and so how
-[0:41:55] like if he's smiling right and so how you do it this you're shown like using
-[0:41:57] you do it this you're shown like using an autoencoder I first have all my my
-[0:41:59] an autoencoder I first have all my my data that I have I all map it into the
-[0:42:02] data that I have I all map it into the lake and space so that you know I
-[0:42:04] lake and space so that you know I trained this alt encoder so that it's
-[0:42:06] trained this alt encoder so that it's good at reconstructing and the data that
-[0:42:08] good at reconstructing and the data that I have right I map it into the latent
-[0:42:11] I have right I map it into the latent space and so now I just try to figure
-[0:42:13] space and so now I just try to figure out well what is the direction from the
-[0:42:15] out well what is the direction from the data that I have I figure out what is
-[0:42:17] data that I have I figure out what is the direction the corresponds to adding
-[0:42:19] the direction the corresponds to adding a smile and then I just move this vector
-[0:42:22] a smile and then I just move this vector over to this oh sorry here is the vector
-[0:42:24] over to this oh sorry here is the vector I get I move it over to this person here
-[0:42:27] I get I move it over to this person here that I'm trying to make smile and I just
-[0:42:30] that I'm trying to make smile and I just take this point and I map it back into
-[0:42:32] take this point and I map it back into the image space and nicely enough you
-[0:42:34] the image space and nicely enough you know this person actually comes out to
-[0:42:35] know this person actually comes out to my ear
+[0:38:48] that kind of mainly on on trying to
+[0:38:51] figure out what the graph actually is as
+[0:38:55] opposed to kind of doing both
+[0:38:57] exploration and exploitation like in
+[0:39:00] multi armed bandits and sort of more
+[0:39:03] generally can add Estes connect to the
+[0:39:06] multi-armed bandit literature yep so
+[0:39:09] that's I think something we're working
+[0:39:12] on right so here the question was what
+[0:39:14] are the best interventions in order to
+[0:39:15] figure out the underlying graph of
+[0:39:17] course also there you have exploration
+[0:39:19] exploitation right because you know at
+[0:39:22] the beginning you I mean anyway you want
+[0:39:24] to get first first er there is so much
+[0:39:27] uncertainty you actually need to sample
+[0:39:29] get interventions and many different
+[0:39:30] kinds of places and then and then zone
+[0:39:33] in so this is a Bayesian approach
+[0:39:34] it's very similar to that literature but
+[0:39:37] if you maybe a bit more in terms into
+[0:39:40] maybe RL or something like that
+[0:39:41] of course there the goal is always to
+[0:39:43] push your system towards a particular
+[0:39:45] state so I think those are the next
+[0:39:47] questions that you know one wants to
+[0:39:49] actually understand a bit better it's
+[0:39:50] not about learning the underlying graph
+[0:39:52] but maybe you know you have a particular
+[0:39:53] state where you want to get to well then
+[0:39:55] maybe you shouldn't learn the full
+[0:39:56] underlying graph in order to figure out
+[0:39:58] what is the best intervention in order
+[0:40:00] to push your state back to normal state
+[0:40:02] if you're in the disease states for
+[0:40:03] example so yeah so I think there's just
+[0:40:07] you know this is like one little paper
+[0:40:09] there's a whole lot of stuff to be done
+[0:40:11] in this area just just to encourage
+[0:40:13] people to actually do it this is only
+[0:40:15] for hard interventions we have nothing
+[0:40:17] for soft interventions there's whole lot
+[0:40:20] of open questions yeah great thanks I
+[0:40:24] think in the interest of time we want to
+[0:40:26] continue and so you have around 12 to 13
+[0:40:28] minutes left good okay so now what about
+[0:40:35] drugs so now I'm looking at the more
+[0:40:39] conventional causal transport question
+[0:40:42] where you know I have an intervention in
+[0:40:45] one setting say one cell type and I
+[0:40:47] would like to predict its effect in a
+[0:40:48] different cell type okay so if you're a
+[0:40:51] machine so there is a whole lot of
+[0:40:53] literature by alias barn going to the
+[0:40:55] pearl etc and collaborators on exactly
+[0:40:58] this question in the graphical setting
+[0:41:01] right where I have where I'm assuming
+[0:41:03] the graph is fixed and they actually
+[0:41:04] have very very nice line of work and I
+[0:41:06] think I haven't not written oh yes here
+[0:41:10] they have a lot of really nice line of
+[0:41:12] work of actually finding necessary and
+[0:41:14] sufficient conditions for exactly this
+[0:41:16] okay but I need to know younger line
+[0:41:17] graphed and we know exactly you know
+[0:41:18] order necessary and sufficient
+[0:41:20] conditions on where the intervention is
+[0:41:21] and where is the variables that are
+[0:41:23] changing between different cell types so
+[0:41:25] that I can actually do this
+[0:41:26] transportability question now if you're
+[0:41:29] a machine learning person I don't think
+[0:41:31] this is the first way you would think
+[0:41:32] about solving this problem you will
+[0:41:36] probably think about style transfer
+[0:41:38] right so you know style transfer I mean
+[0:41:41] they've been doing this for a long time
+[0:41:42] right and super successful so I have
+[0:41:44] people when
+[0:41:46] in the neutral face sand with a smiley
+[0:41:48] face and I tried to generate the image
+[0:41:51] of how this particular person would look
+[0:41:52] like if he's smiling right and so how
+[0:41:55] you do it this you're shown like using
+[0:41:57] an autoencoder I first have all my my
+[0:41:59] data that I have I all map it into the
+[0:42:02] lake and space so that you know I
+[0:42:04] trained this alt encoder so that it's
+[0:42:06] good at reconstructing and the data that
+[0:42:08] I have right I map it into the latent
+[0:42:11] space and so now I just try to figure
+[0:42:13] out well what is the direction from the
+[0:42:15] data that I have I figure out what is
+[0:42:17] the direction the corresponds to adding
+[0:42:19] a smile and then I just move this vector
+[0:42:22] over to this oh sorry here is the vector
+[0:42:24] I get I move it over to this person here
+[0:42:27] that I'm trying to make smile and I just
+[0:42:30] take this point and I map it back into
+[0:42:32] the image space and nicely enough you
+[0:42:34] know this person actually comes out to
 [0:42:36] my ear okay so this has been applied hugely
-[0:42:38] okay so this has been applied hugely right in machine learning for style
-[0:42:40] right in machine learning for style transferred images its speech and all
-[0:42:43] transferred images its speech and all kinds of different applications so the
-[0:42:45] kinds of different applications so the question is whether you could just do
-[0:42:47] question is whether you could just do that to add a perturbation effect okay
-[0:42:50] that to add a perturbation effect okay so say and in fact I should say this was
-[0:42:52] so say and in fact I should say this was applied and it was applied here on two
-[0:42:55] applied and it was applied here on two cell types in one drug okay so say I
-[0:42:57] cell types in one drug okay so say I have so it's kind of this picture has
-[0:43:01] have so it's kind of this picture has four four different cell types but let's
-[0:43:02] four four different cell types but let's just say I have two cell types I have
-[0:43:04] just say I have two cell types I have you know this pink cell type here I have
-[0:43:06] you know this pink cell type here I have it's observational data I apply a drug
-[0:43:09] it's observational data I apply a drug and I know what happens to it and now I
-[0:43:11] and I know what happens to it and now I have a second cell type and I would like
-[0:43:13] have a second cell type and I would like to know what happens if I apply this
-[0:43:15] to know what happens if I apply this drug okay so I could map these three
-[0:43:18] drug okay so I could map these three different populations into the latent
-[0:43:20] different populations into the latent space I figure out what it means to
-[0:43:22] space I figure out what it means to apply the drug and the data that I have
-[0:43:24] apply the drug and the data that I have I just move this this vector over here
-[0:43:27] I just move this this vector over here and I just predict oh well you know
-[0:43:30] and I just predict oh well you know maybe this happens I map it back to
-[0:43:31] maybe this happens I map it back to expression space and I can actually do
-[0:43:33] expression space and I can actually do the experiment and it actually works
-[0:43:35] the experiment and it actually works kind of okay and well in this particular
-[0:43:37] kind of okay and well in this particular paper here okay now I think this is
-[0:43:40] paper here okay now I think this is quite surprising in particular because
-[0:43:42] quite surprising in particular because you know there are necessary and
-[0:43:43] you know there are necessary and sufficient conditions for doing this
-[0:43:45] sufficient conditions for doing this right so it's kind of surprising that
-[0:43:46] right so it's kind of surprising that this works also if you think about it
-[0:43:48] this works also if you think about it intuitively I mean this is like adding a
-[0:43:51] intuitively I mean this is like adding a smile is very different to trying to
-[0:43:53] smile is very different to trying to predict the effect of an intervention
-[0:43:55] predict the effect of an intervention right because smile is reversible right
-[0:43:57] right because smile is reversible right then
+[0:42:38] right in machine learning for style
+[0:42:40] transferred images its speech and all
+[0:42:43] kinds of different applications so the
+[0:42:45] question is whether you could just do
+[0:42:47] that to add a perturbation effect okay
+[0:42:50] so say and in fact I should say this was
+[0:42:52] applied and it was applied here on two
+[0:42:55] cell types in one drug okay so say I
+[0:42:57] have so it's kind of this picture has
+[0:43:01] four four different cell types but let's
+[0:43:02] just say I have two cell types I have
+[0:43:04] you know this pink cell type here I have
+[0:43:06] it's observational data I apply a drug
+[0:43:09] and I know what happens to it and now I
+[0:43:11] have a second cell type and I would like
+[0:43:13] to know what happens if I apply this
+[0:43:15] drug okay so I could map these three
+[0:43:18] different populations into the latent
+[0:43:20] space I figure out what it means to
+[0:43:22] apply the drug and the data that I have
+[0:43:24] I just move this this vector over here
+[0:43:27] and I just predict oh well you know
+[0:43:30] maybe this happens I map it back to
+[0:43:31] expression space and I can actually do
+[0:43:33] the experiment and it actually works
+[0:43:35] kind of okay and well in this particular
+[0:43:37] paper here okay now I think this is
+[0:43:40] quite surprising in particular because
+[0:43:42] you know there are necessary and
+[0:43:43] sufficient conditions for doing this
+[0:43:45] right so it's kind of surprising that
+[0:43:46] this works also if you think about it
+[0:43:48] intuitively I mean this is like adding a
+[0:43:51] smile is very different to trying to
+[0:43:53] predict the effect of an intervention
+[0:43:55] right because smile is reversible right
 [0:43:57] then I can easily go backwards but in an
-[0:43:59] I can easily go backwards but in an intervention like if I'm in the
-[0:44:01] intervention like if I'm in the interventional distribution I need to
-[0:44:02] interventional distribution I need to figure out an intervention that actually
-[0:44:04] figure out an intervention that actually puts me back into the observational
-[0:44:06] puts me back into the observational state and in general there is no
-[0:44:07] state and in general there is no interventional distribution that just
-[0:44:08] interventional distribution that just puts you back into the observational
-[0:44:10] puts you back into the observational distribution so it's very not reversible
-[0:44:13] distribution so it's very not reversible so okay it's quite I think it's quite
-[0:44:16] so okay it's quite I think it's quite surprising that this actually worked so
-[0:44:18] surprising that this actually worked so we wondered whether this works more
-[0:44:19] we wondered whether this works more generally and in particular for SARS
-[0:44:21] generally and in particular for SARS cough two applications we are looking at
-[0:44:23] cough two applications we are looking at these very large-scale drug screens okay
-[0:44:25] these very large-scale drug screens okay so this is the data where I'm going to
-[0:44:27] so this is the data where I'm going to apply it to so here you see this is
-[0:44:29] apply it to so here you see this is again everything is freely available
-[0:44:30] again everything is freely available anyone can use it so this is the C map
-[0:44:33] anyone can use it so this is the C map data set from the broad it has 1.2
-[0:44:35] data set from the broad it has 1.2 million samples these are again gene
-[0:44:37] million samples these are again gene expression samples they at this time
-[0:44:39] expression samples they at this time live in 1,000 I mention all space and
-[0:44:41] live in 1,000 I mention all space and the data set contains thousands of
-[0:44:43] the data set contains thousands of different perturbations knockouts over
-[0:44:45] different perturbations knockouts over expression and all kinds of drugs okay
-[0:44:47] expression and all kinds of drugs okay for SARS cough 2lb mainly face looking
-[0:44:51] for SARS cough 2lb mainly face looking at these fda-approved drugs but for now
-[0:44:53] at these fda-approved drugs but for now let's just look at the data set it's
-[0:44:55] let's just look at the data set it's applied to hundreds of different work
-[0:44:57] applied to hundreds of different work about 100 different cell types which you
-[0:44:59] about 100 different cell types which you see here at coloured and the dark points
-[0:45:02] see here at coloured and the dark points inside are all of the perturbation data
-[0:45:04] inside are all of the perturbation data okay so first of all what you see is
-[0:45:06] okay so first of all what you see is that the differences between cell types
-[0:45:08] that the differences between cell types is much bigger than whatever a
-[0:45:10] is much bigger than whatever a perturbation can be okay so here you
-[0:45:13] perturbation can be okay so here you know all of these black dots or
-[0:45:14] know all of these black dots or perturbations on these red dots okay or
-[0:45:17] perturbations on these red dots okay or here all of these dots are perturbations
-[0:45:19] here all of these dots are perturbations on the orange juice okay so this is a
-[0:45:21] on the orange juice okay so this is a data set so I would like to just test
-[0:45:23] data set so I would like to just test whether this works okay because you know
-[0:45:27] whether this works okay because you know there are many drugs here of course not
-[0:45:29] there are many drugs here of course not every drug was applied to every cell
-[0:45:30] every drug was applied to every cell type so just a lot of missing data but
-[0:45:33] type so just a lot of missing data but there are drugs that have been applied
-[0:45:34] there are drugs that have been applied to different cell types okay so I'll
-[0:45:37] to different cell types okay so I'll just take the two cell types that have
-[0:45:39] just take the two cell types that have the most interventions and they are
-[0:45:41] the most interventions and they are known as a 5-4 mm C of seven whatever
-[0:45:43] known as a 5-4 mm C of seven whatever these are just two cell types I take the
-[0:45:45] these are just two cell types I take the ones that have the most interventions
-[0:45:47] ones that have the most interventions and I just see whether as I go back
-[0:45:50] and I just see whether as I go back whether in the Latham space these
-[0:45:52] whether in the Latham space these vectors are aligned right this can only
-[0:45:54] vectors are aligned right this can only work if the vectors are actually aligned
-[0:45:56] work if the vectors are actually aligned in the latencies otherwise I cannot
-[0:45:58] in the latencies otherwise I cannot transport it by just doing this kind of
-[0:46:00] transport it by just doing this kind of nice vector arithmetic so that's what
-[0:46:03] nice vector arithmetic so that's what I'm going to do I'm going to do this
-[0:46:06] I'm going to do I'm going to do this all turn cold your business of embedding
-[0:46:08] all turn cold your business of embedding all of this data just going to look at
-[0:46:10] all of this data just going to look at the effect of these trem these
-[0:46:13] the effect of these trem these interventions and see if they're aligned
-[0:46:14] interventions and see if they're aligned in the latencies okay so in the previous
-[0:46:17] in the latencies okay so in the previous paper what they used is two standard
-[0:46:18] paper what they used is two standard autoencoders they go from usually opt
-[0:46:21] autoencoders they go from usually opt encoders are used for embedding into a
-[0:46:23] encoders are used for embedding into a lower dimensional space so they go from
-[0:46:25] lower dimensional space so they go from in this case 1,000 or 911 dimensional
-[0:46:28] in this case 1,000 or 911 dimensional space to something smaller dimensional
-[0:46:30] space to something smaller dimensional to something larger dimension that's the
-[0:46:32] to something larger dimension that's the standard auto encoder now we have been
-[0:46:35] standard auto encoder now we have been for a couple for a year or two now
-[0:46:37] for a couple for a year or two now interest in these strange autoencoders
-[0:46:40] interest in these strange autoencoders and I will moderate them they actually
-[0:46:42] and I will moderate them they actually do something which is very
-[0:46:43] do something which is very counterintuitive we're actually going
-[0:46:45] counterintuitive we're actually going from a 911 dimensional space where these
-[0:46:48] from a 911 dimensional space where these vectors Lyon we're going to go to a
-[0:46:50] vectors Lyon we're going to go to a higher dimensional space okay so the
-[0:46:52] higher dimensional space okay so the latent space is going to be higher
-[0:46:54] latent space is going to be higher dimensional it's very unintuitive
-[0:46:56] dimensional it's very unintuitive because you know a function that goes
-[0:46:58] because you know a function that goes from this space to it sells through a
-[0:47:01] from this space to it sells through a higher dimensional space well you would
-[0:47:02] higher dimensional space well you would expect if it's just trained to to match
-[0:47:06] expect if it's just trained to to match the images right to reconstruct the
-[0:47:08] the images right to reconstruct the images it could just be the identity map
-[0:47:10] images it could just be the identity map okay if it was the identity map this
-[0:47:12] okay if it was the identity map this wouldn't help at all right then the
-[0:47:14] wouldn't help at all right then the correlations in your original space and
-[0:47:16] correlations in your original space and in the latent space should just be the
-[0:47:17] in the latent space should just be the same but I'm giving you intuition from
-[0:47:20] same but I'm giving you intuition from why do I even did this here why we
-[0:47:22] why do I even did this here why we expected it to work on the next slide
-[0:47:24] expected it to work on the next slide but what you see here is this is the
-[0:47:27] but what you see here is this is the correlation so if I take a drug in one
-[0:47:29] correlation so if I take a drug in one cell type versus the other right same
-[0:47:30] cell type versus the other right same drug and I look at its correlation and
-[0:47:33] drug and I look at its correlation and the latent in the original space versus
-[0:47:35] the latent in the original space versus the latent space when I do this over
-[0:47:37] the latent space when I do this over parameterize business whereas what
-[0:47:39] parameterize business whereas what happens when I do it in the standard
-[0:47:41] happens when I do it in the standard auto encoder okay what you want is you
-[0:47:44] auto encoder okay what you want is you know these vectors should either be you
-[0:47:46] know these vectors should either be you know positive positive or negative right
-[0:47:48] know positive positive or negative right so what you see here what happens with
-[0:47:50] so what you see here what happens with this auto encoder is that they're all
-[0:47:52] this auto encoder is that they're all pushed out okay - I cap plus one or two
-[0:47:55] pushed out okay - I cap plus one or two minus one so you have to be much better
-[0:47:58] minus one so you have to be much better aligned in this latent space than in the
-[0:48:01] aligned in this latent space than in the original space and in fact much better
-[0:48:03] original space and in fact much better than you know when you use the standard
-[0:48:04] than you know when you use the standard autoencoders yes it can help sometimes
-[0:48:07] autoencoders yes it can help sometimes but in many places it actually doesn't
-[0:48:08] but in many places it actually doesn't help it we'll see whose D standard all
-[0:48:10] help it we'll see whose D standard all ten quarters now you can think okay I
-[0:48:12] ten quarters now you can think okay I could do PCA right I could just take the
-[0:48:14] could do PCA right I could just take the first two principal components well that
-[0:48:16] first two principal components well that would do the same
-[0:48:17] would do the same you would actually die in the drug so
-[0:48:18] you would actually die in the drug so the first principle
-[0:48:19] the first principle components are good directions but of
-[0:48:21] components are good directions but of course while you're doing that you know
-[0:48:23] course while you're doing that you know you're actually just throwing away a
-[0:48:25] you're actually just throwing away a whole lot of data by doing that okay so
-[0:48:27] whole lot of data by doing that okay so the author fool over primer try soft
-[0:48:29] the author fool over primer try soft encoder you actually keep all of the
-[0:48:31] encoder you actually keep all of the data right whereas you know under
-[0:48:34] data right whereas you know under standard auto encoders you're also
-[0:48:35] standard auto encoders you're also losing quite a bit of information but
-[0:48:36] losing quite a bit of information but here you keep all the data and you get
-[0:48:38] here you keep all the data and you get all of your alignment which is pretty
-[0:48:40] all of your alignment which is pretty nice right here we just show that this
-[0:48:42] nice right here we just show that this also works when you look at all other
-[0:48:43] also works when you look at all other cell types at the same time okay so now
-[0:48:48] cell types at the same time okay so now I have what five minutes no two minutes
-[0:48:51] I have what five minutes no two minutes five minutes are fine yeah okay five
-[0:48:55] five minutes are fine yeah okay five minutes so I just want to give you
-[0:48:57] minutes so I just want to give you intuition for why this works so we have
-[0:49:00] intuition for why this works so we have this work showing what is the inductive
-[0:49:01] this work showing what is the inductive bias by an inductive bias of
-[0:49:04] bias by an inductive bias of autoencoders over parameterize ultra
-[0:49:07] autoencoders over parameterize ultra encoders okay so if you go so I'm going
-[0:49:11] encoders okay so if you go so I'm going I'm going through an over parameterize
-[0:49:13] I'm going through an over parameterize so a larger layer in the middle okay so
-[0:49:16] so a larger layer in the middle okay so that means that I can definitely so I
-[0:49:18] that means that I can definitely so I have my training data
-[0:49:19] have my training data I can definitely reconstruct it okay I
-[0:49:22] I can definitely reconstruct it okay I can definitely train it to lost zero so
-[0:49:24] can definitely train it to lost zero so let's just look at points in r1 say my
-[0:49:27] let's just look at points in r1 say my images are in r1 okay and an Auton coder
-[0:49:30] images are in r1 okay and an Auton coder goes from r1 to r1 through some lowers
-[0:49:33] goes from r1 to r1 through some lowers through some higher dimensional space so
-[0:49:36] through some higher dimensional space so it really learns a map from R 1 to R 1
-[0:49:38] it really learns a map from R 1 to R 1 so I can trading it to lost zero so
-[0:49:41] so I can trading it to lost zero so definitely it is learning a function
-[0:49:43] definitely it is learning a function that is interpolating right so here I
-[0:49:44] that is interpolating right so here I have examples so say I have these three
-[0:49:47] have examples so say I have these three different training examples so there are
-[0:49:49] different training examples so there are there is one map is the identity map
-[0:49:52] there is one map is the identity map okay that interpolates the data and you
-[0:49:54] okay that interpolates the data and you could expect maybe that means that
-[0:49:55] could expect maybe that means that identity map comes out we saw on the
-[0:49:57] identity map comes out we saw on the previous slide that's not what is
-[0:49:58] previous slide that's not what is learned okay but however there are so
-[0:50:01] learned okay but however there are so many different functions that
-[0:50:02] many different functions that interpolate the data right I know I'll
-[0:50:04] interpolate the data right I know I'll get lost zero so it could be some crazy
-[0:50:06] get lost zero so it could be some crazy function like this it could be this
-[0:50:08] function like this it could be this function that is learned it could be
-[0:50:10] function that is learned it could be some random other function so the
-[0:50:12] some random other function so the question is what does gradient descent
-[0:50:14] question is what does gradient descent learn okay so what does break it doesn't
-[0:50:16] learn okay so what does break it doesn't learn when you are actually just trying
-[0:50:17] learn when you are actually just trying to minimize reconstruction error and so
-[0:50:20] to minimize reconstruction error and so how we showed it so what is the
-[0:50:24] how we showed it so what is the intuition for actually seeing that it
-[0:50:26] intuition for actually seeing that it actually learns a map that is
-[0:50:27] actually learns a map that is contractive at the training examples it
-[0:50:29] contractive at the training examples it actually learns something like
-[0:50:31] actually learns something like how you see this is if you know what is
-[0:50:33] how you see this is if you know what is nice about an altered culture is I can
-[0:50:35] nice about an altered culture is I can just iterate the map right so it goes
-[0:50:37] just iterate the map right so it goes from our D to our D well just whatever
-[0:50:40] from our D to our D well just whatever comes out let me plug it back in and I
-[0:50:42] comes out let me plug it back in and I can just iterate the map and if you do
-[0:50:44] can just iterate the map and if you do that and just apply it yourself you'll
-[0:50:47] that and just apply it yourself you'll see that whatever comes out is a
-[0:50:49] see that whatever comes out is a training example okay although if you do
-[0:50:51] training example okay although if you do it once then usually it's training if
-[0:50:53] it once then usually it's training if you're deep enough the training example
-[0:50:55] you're deep enough the training example will already come out when general the
-[0:50:56] will already come out when general the training example doesn't come out if you
-[0:50:58] training example doesn't come out if you iterate the map then in fact one of your
-[0:51:00] iterate the map then in fact one of your training examples comes out okay so what
-[0:51:03] training examples comes out okay so what an autoencoder does is in this case it
-[0:51:05] an autoencoder does is in this case it actually gets back training examples
-[0:51:08] actually gets back training examples through iteration so it makes them more
-[0:51:09] through iteration so it makes them more similar to training examples and so
-[0:51:12] similar to training examples and so that's where the intuition comes in that
-[0:51:13] that's where the intuition comes in that when you use these over parametrized
-[0:51:15] when you use these over parametrized altern coders they will actually align
-[0:51:17] altern coders they will actually align your drugs to the closest drugs right
-[0:51:19] your drugs to the closest drugs right and hopefully these are exactly ones
-[0:51:21] and hopefully these are exactly ones that are in different cell types so
-[0:51:23] that are in different cell types so that's where the intuition came in for
-[0:51:24] that's where the intuition came in for actually using this and it seems to work
-[0:51:26] actually using this and it seems to work quite well which is pretty nice here of
-[0:51:29] quite well which is pretty nice here of course there is something to prove which
-[0:51:31] course there is something to prove which we haven't proven yet we have just
-[0:51:32] we haven't proven yet we have just applied it to the Stars cuff to of
-[0:51:35] applied it to the Stars cuff to of course now if you want to find the drug
-[0:51:37] course now if you want to find the drug that is best aligned with the disease
-[0:51:39] that is best aligned with the disease vector that's exactly what we did and I
-[0:51:42] vector that's exactly what we did and I don't want to go through the specifics I
-[0:51:46] don't want to go through the specifics I mean you just find a drug that is best
-[0:51:47] mean you just find a drug that is best aligned with it you've got a whole lot
-[0:51:49] aligned with it you've got a whole lot of list of drugs you can again apply
-[0:51:52] of list of drugs you can again apply causal inference now to actually learn
-[0:51:54] causal inference now to actually learn the graph so that you can learn the
-[0:51:55] the graph so that you can learn the mechanism of these drugs figure out
-[0:51:58] mechanism of these drugs figure out which one you actually want to what to
-[0:52:01] which one you actually want to what to concentrate on you definitely want to
-[0:52:02] concentrate on you definitely want to take a drug that has edges pointing out
-[0:52:05] take a drug that has edges pointing out of it right because it should change
-[0:52:06] of it right because it should change that expression of these genes that are
-[0:52:08] that expression of these genes that are totally off and if you actually do that
-[0:52:11] totally off and if you actually do that you'll find out of all of this list of
-[0:52:13] you'll find out of all of this list of drugs you'll find one where we found one
-[0:52:15] drugs you'll find one where we found one that is exactly the one where we're now
-[0:52:18] that is exactly the one where we're now doing interventions on and has like very
-[0:52:20] doing interventions on and has like very nice biological meaning actually it's a
-[0:52:22] nice biological meaning actually it's a very nice protein that we found here
-[0:52:24] very nice protein that we found here that seems to be related to aging etc
-[0:52:26] that seems to be related to aging etc and of course will note it SARS cuff who
-[0:52:29] and of course will note it SARS cuff who has a lot of intersections with aging
-[0:52:31] has a lot of intersections with aging okay with that let me end so I talked
-[0:52:34] okay with that let me end so I talked about two different causal transport
-[0:52:36] about two different causal transport problems one between interventions one
-[0:52:38] problems one between interventions one of an intervention between different
-[0:52:40] of an intervention between different populations in this case cell types
-[0:52:43] populations in this case cell types and I think it is super important to
-[0:52:44] and I think it is super important to actually have a principle causal
-[0:52:46] actually have a principle causal framework when you're thinking about
-[0:52:47] framework when you're thinking about drug discovery because a drug is an
-[0:52:50] drug discovery because a drug is an intervention if you want to predict the
-[0:52:52] intervention if you want to predict the effect of a drug or choose drugs I think
-[0:52:54] effect of a drug or choose drugs I think one needs to have a principle causal
-[0:52:57] one needs to have a principle causal framework for doing that and with that
-[0:52:59] framework for doing that and with that let me end this work wouldn't have been
-[0:53:03] let me end this work wouldn't have been possible without really an amazing group
-[0:53:04] possible without really an amazing group of people collaborators and then of
-[0:53:06] of people collaborators and then of course a lot of funding from different
-[0:53:08] course a lot of funding from different sources and thank you all for listening
+[0:43:59] intervention like if I'm in the
+[0:44:01] interventional distribution I need to
+[0:44:02] figure out an intervention that actually
+[0:44:04] puts me back into the observational
+[0:44:06] state and in general there is no
+[0:44:07] interventional distribution that just
+[0:44:08] puts you back into the observational
+[0:44:10] distribution so it's very not reversible
+[0:44:13] so okay it's quite I think it's quite
+[0:44:16] surprising that this actually worked so
+[0:44:18] we wondered whether this works more
+[0:44:19] generally and in particular for SARS
+[0:44:21] cough two applications we are looking at
+[0:44:23] these very large-scale drug screens okay
+[0:44:25] so this is the data where I'm going to
+[0:44:27] apply it to so here you see this is
+[0:44:29] again everything is freely available
+[0:44:30] anyone can use it so this is the C map
+[0:44:33] data set from the broad it has 1.2
+[0:44:35] million samples these are again gene
+[0:44:37] expression samples they at this time
+[0:44:39] live in 1,000 I mention all space and
+[0:44:41] the data set contains thousands of
+[0:44:43] different perturbations knockouts over
+[0:44:45] expression and all kinds of drugs okay
+[0:44:47] for SARS cough 2lb mainly face looking
+[0:44:51] at these fda-approved drugs but for now
+[0:44:53] let's just look at the data set it's
+[0:44:55] applied to hundreds of different work
+[0:44:57] about 100 different cell types which you
+[0:44:59] see here at coloured and the dark points
+[0:45:02] inside are all of the perturbation data
+[0:45:04] okay so first of all what you see is
+[0:45:06] that the differences between cell types
+[0:45:08] is much bigger than whatever a
+[0:45:10] perturbation can be okay so here you
+[0:45:13] know all of these black dots or
+[0:45:14] perturbations on these red dots okay or
+[0:45:17] here all of these dots are perturbations
+[0:45:19] on the orange juice okay so this is a
+[0:45:21] data set so I would like to just test
+[0:45:23] whether this works okay because you know
+[0:45:27] there are many drugs here of course not
+[0:45:29] every drug was applied to every cell
+[0:45:30] type so just a lot of missing data but
+[0:45:33] there are drugs that have been applied
+[0:45:34] to different cell types okay so I'll
+[0:45:37] just take the two cell types that have
+[0:45:39] the most interventions and they are
+[0:45:41] known as a 5-4 mm C of seven whatever
+[0:45:43] these are just two cell types I take the
+[0:45:45] ones that have the most interventions
+[0:45:47] and I just see whether as I go back
+[0:45:50] whether in the Latham space these
+[0:45:52] vectors are aligned right this can only
+[0:45:54] work if the vectors are actually aligned
+[0:45:56] in the latencies otherwise I cannot
+[0:45:58] transport it by just doing this kind of
+[0:46:00] nice vector arithmetic so that's what
+[0:46:03] I'm going to do I'm going to do this
+[0:46:06] all turn cold your business of embedding
+[0:46:08] all of this data just going to look at
+[0:46:10] the effect of these trem these
+[0:46:13] interventions and see if they're aligned
+[0:46:14] in the latencies okay so in the previous
+[0:46:17] paper what they used is two standard
+[0:46:18] autoencoders they go from usually opt
+[0:46:21] encoders are used for embedding into a
+[0:46:23] lower dimensional space so they go from
+[0:46:25] in this case 1,000 or 911 dimensional
+[0:46:28] space to something smaller dimensional
+[0:46:30] to something larger dimension that's the
+[0:46:32] standard auto encoder now we have been
+[0:46:35] for a couple for a year or two now
+[0:46:37] interest in these strange autoencoders
+[0:46:40] and I will moderate them they actually
+[0:46:42] do something which is very
+[0:46:43] counterintuitive we're actually going
+[0:46:45] from a 911 dimensional space where these
+[0:46:48] vectors Lyon we're going to go to a
+[0:46:50] higher dimensional space okay so the
+[0:46:52] latent space is going to be higher
+[0:46:54] dimensional it's very unintuitive
+[0:46:56] because you know a function that goes
+[0:46:58] from this space to it sells through a
+[0:47:01] higher dimensional space well you would
+[0:47:02] expect if it's just trained to to match
+[0:47:06] the images right to reconstruct the
+[0:47:08] images it could just be the identity map
+[0:47:10] okay if it was the identity map this
+[0:47:12] wouldn't help at all right then the
+[0:47:14] correlations in your original space and
+[0:47:16] in the latent space should just be the
+[0:47:17] same but I'm giving you intuition from
+[0:47:20] why do I even did this here why we
+[0:47:22] expected it to work on the next slide
+[0:47:24] but what you see here is this is the
+[0:47:27] correlation so if I take a drug in one
+[0:47:29] cell type versus the other right same
+[0:47:30] drug and I look at its correlation and
+[0:47:33] the latent in the original space versus
+[0:47:35] the latent space when I do this over
+[0:47:37] parameterize business whereas what
+[0:47:39] happens when I do it in the standard
+[0:47:41] auto encoder okay what you want is you
+[0:47:44] know these vectors should either be you
+[0:47:46] know positive positive or negative right
+[0:47:48] so what you see here what happens with
+[0:47:50] this auto encoder is that they're all
+[0:47:52] pushed out okay - I cap plus one or two
+[0:47:55] minus one so you have to be much better
+[0:47:58] aligned in this latent space than in the
+[0:48:01] original space and in fact much better
+[0:48:03] than you know when you use the standard
+[0:48:04] autoencoders yes it can help sometimes
+[0:48:07] but in many places it actually doesn't
+[0:48:08] help it we'll see whose D standard all
+[0:48:10] ten quarters now you can think okay I
+[0:48:12] could do PCA right I could just take the
+[0:48:14] first two principal components well that
+[0:48:16] would do the same
+[0:48:17] you would actually die in the drug so
+[0:48:18] the first principle
+[0:48:19] components are good directions but of
+[0:48:21] course while you're doing that you know
+[0:48:23] you're actually just throwing away a
+[0:48:25] whole lot of data by doing that okay so
+[0:48:27] the author fool over primer try soft
+[0:48:29] encoder you actually keep all of the
+[0:48:31] data right whereas you know under
+[0:48:34] standard auto encoders you're also
+[0:48:35] losing quite a bit of information but
+[0:48:36] here you keep all the data and you get
+[0:48:38] all of your alignment which is pretty
+[0:48:40] nice right here we just show that this
+[0:48:42] also works when you look at all other
+[0:48:43] cell types at the same time okay so now
+[0:48:48] I have what five minutes no two minutes
+[0:48:51] five minutes are fine yeah okay five
+[0:48:55] minutes so I just want to give you
+[0:48:57] intuition for why this works so we have
+[0:49:00] this work showing what is the inductive
+[0:49:01] bias by an inductive bias of
+[0:49:04] autoencoders over parameterize ultra
+[0:49:07] encoders okay so if you go so I'm going
+[0:49:11] I'm going through an over parameterize
+[0:49:13] so a larger layer in the middle okay so
+[0:49:16] that means that I can definitely so I
+[0:49:18] have my training data
+[0:49:19] I can definitely reconstruct it okay I
+[0:49:22] can definitely train it to lost zero so
+[0:49:24] let's just look at points in r1 say my
+[0:49:27] images are in r1 okay and an Auton coder
+[0:49:30] goes from r1 to r1 through some lowers
+[0:49:33] through some higher dimensional space so
+[0:49:36] it really learns a map from R 1 to R 1
+[0:49:38] so I can trading it to lost zero so
+[0:49:41] definitely it is learning a function
+[0:49:43] that is interpolating right so here I
+[0:49:44] have examples so say I have these three
+[0:49:47] different training examples so there are
+[0:49:49] there is one map is the identity map
+[0:49:52] okay that interpolates the data and you
+[0:49:54] could expect maybe that means that
+[0:49:55] identity map comes out we saw on the
+[0:49:57] previous slide that's not what is
+[0:49:58] learned okay but however there are so
+[0:50:01] many different functions that
+[0:50:02] interpolate the data right I know I'll
+[0:50:04] get lost zero so it could be some crazy
+[0:50:06] function like this it could be this
+[0:50:08] function that is learned it could be
+[0:50:10] some random other function so the
+[0:50:12] question is what does gradient descent
+[0:50:14] learn okay so what does break it doesn't
+[0:50:16] learn when you are actually just trying
+[0:50:17] to minimize reconstruction error and so
+[0:50:20] how we showed it so what is the
+[0:50:24] intuition for actually seeing that it
+[0:50:26] actually learns a map that is
+[0:50:27] contractive at the training examples it
+[0:50:29] actually learns something like
+[0:50:31] how you see this is if you know what is
+[0:50:33] nice about an altered culture is I can
+[0:50:35] just iterate the map right so it goes
+[0:50:37] from our D to our D well just whatever
+[0:50:40] comes out let me plug it back in and I
+[0:50:42] can just iterate the map and if you do
+[0:50:44] that and just apply it yourself you'll
+[0:50:47] see that whatever comes out is a
+[0:50:49] training example okay although if you do
+[0:50:51] it once then usually it's training if
+[0:50:53] you're deep enough the training example
+[0:50:55] will already come out when general the
+[0:50:56] training example doesn't come out if you
+[0:50:58] iterate the map then in fact one of your
+[0:51:00] training examples comes out okay so what
+[0:51:03] an autoencoder does is in this case it
+[0:51:05] actually gets back training examples
+[0:51:08] through iteration so it makes them more
+[0:51:09] similar to training examples and so
+[0:51:12] that's where the intuition comes in that
+[0:51:13] when you use these over parametrized
+[0:51:15] altern coders they will actually align
+[0:51:17] your drugs to the closest drugs right
+[0:51:19] and hopefully these are exactly ones
+[0:51:21] that are in different cell types so
+[0:51:23] that's where the intuition came in for
+[0:51:24] actually using this and it seems to work
+[0:51:26] quite well which is pretty nice here of
+[0:51:29] course there is something to prove which
+[0:51:31] we haven't proven yet we have just
+[0:51:32] applied it to the Stars cuff to of
+[0:51:35] course now if you want to find the drug
+[0:51:37] that is best aligned with the disease
+[0:51:39] vector that's exactly what we did and I
+[0:51:42] don't want to go through the specifics I
+[0:51:46] mean you just find a drug that is best
+[0:51:47] aligned with it you've got a whole lot
+[0:51:49] of list of drugs you can again apply
+[0:51:52] causal inference now to actually learn
+[0:51:54] the graph so that you can learn the
+[0:51:55] mechanism of these drugs figure out
+[0:51:58] which one you actually want to what to
+[0:52:01] concentrate on you definitely want to
+[0:52:02] take a drug that has edges pointing out
+[0:52:05] of it right because it should change
+[0:52:06] that expression of these genes that are
+[0:52:08] totally off and if you actually do that
+[0:52:11] you'll find out of all of this list of
+[0:52:13] drugs you'll find one where we found one
+[0:52:15] that is exactly the one where we're now
+[0:52:18] doing interventions on and has like very
+[0:52:20] nice biological meaning actually it's a
+[0:52:22] very nice protein that we found here
+[0:52:24] that seems to be related to aging etc
+[0:52:26] and of course will note it SARS cuff who
+[0:52:29] has a lot of intersections with aging
+[0:52:31] okay with that let me end so I talked
+[0:52:34] about two different causal transport
+[0:52:36] problems one between interventions one
+[0:52:38] of an intervention between different
+[0:52:40] populations in this case cell types
+[0:52:43] and I think it is super important to
+[0:52:44] actually have a principle causal
+[0:52:46] framework when you're thinking about
+[0:52:47] drug discovery because a drug is an
+[0:52:50] intervention if you want to predict the
+[0:52:52] effect of a drug or choose drugs I think
+[0:52:54] one needs to have a principle causal
+[0:52:57] framework for doing that and with that
+[0:52:59] let me end this work wouldn't have been
+[0:53:03] possible without really an amazing group
+[0:53:04] of people collaborators and then of
+[0:53:06] course a lot of funding from different
+[0:53:08] sources and thank you all for listening
 [0:53:15] fantastic thanks for the great talk Caroline so will now take some more
-[0:53:19] Caroline so will now take some more questions from the audience we're going
-[0:53:21] questions from the audience we're going to do that slightly different than usual
-[0:53:23] to do that slightly different than usual so I will stop the recording now
+[0:53:19] questions from the audience we're going
+[0:53:21] to do that slightly different than usual
+[0:53:23] so I will stop the recording now

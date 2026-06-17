@@ -1,1467 +1,1451 @@
 [0:00:04] Okay, welcome back to the online causal inference seminar. Today we're excited
-[0:00:06] inference seminar. Today we're excited to have Katie Keith from Williams
-[0:00:08] to have Katie Keith from Williams College uh to talk about proximal causal
-[0:00:11] College uh to talk about proximal causal inference with text data. Uh one of our
-[0:00:13] inference with text data. Uh one of our collaborators is also in chat uh Roit.
-[0:00:16] collaborators is also in chat uh Roit. So if you have any questions yeah please
-[0:00:18] So if you have any questions yeah please don't hesitate uh to put in Q&amp;A. The
-[0:00:22] don't hesitate uh to put in Q&amp;A. The discussion today will be our own Naoki
-[0:00:24] discussion today will be our own Naoki Aami. We're looking forward to that too.
-[0:00:27] Aami. We're looking forward to that too. And questions today will be handled by
-[0:00:28] And questions today will be handled by Adita. Adita, do you want to say a few
-[0:00:31] Adita. Adita, do you want to say a few words? Um, sure. Uh, please submit your
-[0:00:33] words? Um, sure. Uh, please submit your questions as soon as you have them. And
-[0:00:35] questions as soon as you have them. And please use the Q&amp;A button uh at the
-[0:00:38] please use the Q&amp;A button uh at the bottom of the Zoom window instead of um
-[0:00:40] bottom of the Zoom window instead of um the chat. Uh so with that, Katy, the
-[0:00:43] the chat. Uh so with that, Katy, the floor is yours. Great. Let me share my
-[0:00:47] floor is yours. Great. Let me share my screen. Can you see that
-[0:00:49] screen. Can you see that screen? Okay, excellent. Thank you so
-[0:00:52] screen? Okay, excellent. Thank you so much for having me today. Uh so a lot of
-[0:00:55] much for having me today. Uh so a lot of my work focuses in the observational
-[0:00:58] my work focuses in the observational causal inference setting where we can't
-[0:00:59] causal inference setting where we can't run an experiment. So like many
-[0:01:02] run an experiment. So like many observational causal inference settings
-[0:01:03] observational causal inference settings we try to gather see all the confounders
-[0:01:06] we try to gather see all the confounders that we can observe but a major threat
-[0:01:08] that we can observe but a major threat to validity is any unobserved
-[0:01:10] to validity is any unobserved confounding variables U. So if we don't
-[0:01:14] confounding variables U. So if we don't have observations of you, we might have
-[0:01:15] have observations of you, we might have to stop or in certain settings we might
-[0:01:18] to stop or in certain settings we might be able to proceed if we have some other
-[0:01:21] be able to proceed if we have some other data data lying around like text data.
-[0:01:24] data data lying around like text data. So there's been an enormous number of
-[0:01:25] So there's been an enormous number of past studies that have tried to turn to
-[0:01:27] past studies that have tried to turn to text data um such as social media posts
-[0:01:30] text data um such as social media posts or looking at query logs from search or
-[0:01:34] or looking at query logs from search or journals from study participants or
-[0:01:36] journals from study participants or events in newspaper articles or clinical
-[0:01:39] events in newspaper articles or clinical notes and electron electronic health
-[0:01:41] notes and electron electronic health records. And a lot of this text could be
-[0:01:44] records. And a lot of this text could be a really rich source of events,
-[0:01:46] a really rich source of events, behaviors or observations that are
-[0:01:48] behaviors or observations that are somehow related to the unobserved
-[0:01:50] somehow related to the unobserved confounding variable that you care
-[0:01:52] confounding variable that you care about.
+[0:00:06] to have Katie Keith from Williams
+[0:00:08] College uh to talk about proximal causal
+[0:00:11] inference with text data. Uh one of our
+[0:00:13] collaborators is also in chat uh Roit.
+[0:00:16] So if you have any questions yeah please
+[0:00:18] don't hesitate uh to put in Q&A. The
+[0:00:22] discussion today will be our own Naoki
+[0:00:24] Aami. We're looking forward to that too.
+[0:00:27] And questions today will be handled by
+[0:00:28] Adita. Adita, do you want to say a few
+[0:00:31] words? Um, sure. Uh, please submit your
+[0:00:33] questions as soon as you have them. And
+[0:00:35] please use the Q&A button uh at the
+[0:00:38] bottom of the Zoom window instead of um
+[0:00:40] the chat. Uh so with that, Katy, the
+[0:00:43] floor is yours. Great. Let me share my
+[0:00:47] screen. Can you see that
+[0:00:49] screen? Okay, excellent. Thank you so
+[0:00:52] much for having me today. Uh so a lot of
+[0:00:55] my work focuses in the observational
+[0:00:58] causal inference setting where we can't
+[0:00:59] run an experiment. So like many
+[0:01:02] observational causal inference settings
+[0:01:03] we try to gather see all the confounders
+[0:01:06] that we can observe but a major threat
+[0:01:08] to validity is any unobserved
+[0:01:10] confounding variables U. So if we don't
+[0:01:14] have observations of you, we might have
+[0:01:15] to stop or in certain settings we might
+[0:01:18] be able to proceed if we have some other
+[0:01:21] data data lying around like text data.
+[0:01:24] So there's been an enormous number of
+[0:01:25] past studies that have tried to turn to
+[0:01:27] text data um such as social media posts
+[0:01:30] or looking at query logs from search or
+[0:01:34] journals from study participants or
+[0:01:36] events in newspaper articles or clinical
+[0:01:39] notes and electron electronic health
+[0:01:41] records. And a lot of this text could be
+[0:01:44] a really rich source of events,
+[0:01:46] behaviors or observations that are
+[0:01:48] somehow related to the unobserved
+[0:01:50] confounding variable that you care
 [0:01:54] about. Text is also really valuable because it
-[0:01:56] Text is also really valuable because it can sometimes be more expressive or
-[0:01:58] can sometimes be more expressive or flexible than structured data. So, for
-[0:02:01] flexible than structured data. So, for example, with electronic health records,
-[0:02:03] example, with electronic health records, a clinician uh may have observations for
-[0:02:06] a clinician uh may have observations for a patient that don't fit nice and neatly
-[0:02:08] a patient that don't fit nice and neatly in any checkboxes or predefined schema
-[0:02:11] in any checkboxes or predefined schema um in a structured data set. So, they'll
-[0:02:13] um in a structured data set. So, they'll probably write in natural language what
-[0:02:15] probably write in natural language what they actually observe.
-[0:02:17] they actually observe. And in fact, this is probably only
-[0:02:20] And in fact, this is probably only increasing the amount of unstructured
-[0:02:22] increasing the amount of unstructured text we see now that we have in recent
-[0:02:25] text we see now that we have in recent years the ability to record any
-[0:02:28] years the ability to record any interaction we have. For example, use a
-[0:02:30] interaction we have. For example, use a smartphone to record for clinicians to
-[0:02:33] smartphone to record for clinicians to record their conversations with
-[0:02:35] record their conversations with patients. More and more tech is coming
-[0:02:38] patients. More and more tech is coming out to try to automate things like uh
-[0:02:40] out to try to automate things like uh scribes for medical notes. So this
-[0:02:42] scribes for medical notes. So this unstructured text data is really
-[0:02:44] unstructured text data is really abundant in the real world, but it's
-[0:02:47] abundant in the real world, but it's often difficult to directly incorporate
-[0:02:49] often difficult to directly incorporate it into existing causal methods. So my
-[0:02:53] it into existing causal methods. So my goal today is to start out by giving you
-[0:02:55] goal today is to start out by giving you some background and motivation that
-[0:02:57] some background and motivation that leads up to a new method that um myself
-[0:03:01] leads up to a new method that um myself along with my collaborators Roit Bitaria
-[0:03:03] along with my collaborators Roit Bitaria and Jacob Chen um developed that
-[0:03:05] and Jacob Chen um developed that combines text data and proximal causal
-[0:03:08] combines text data and proximal causal inference. and we published this in
-[0:03:10] inference. and we published this in Nurups last year. So, starting out with
-[0:03:12] Nurups last year. So, starting out with some of the background and motivation.
-[0:03:15] some of the background and motivation. Um, I'm going to run I'm going to go
-[0:03:17] Um, I'm going to run I'm going to go through a a a illustrative example
-[0:03:20] through a a a illustrative example that's medical, but I just want to put
-[0:03:21] that's medical, but I just want to put the disclaimer that I am not a medical
-[0:03:23] the disclaimer that I am not a medical expert. Um, I will defer to the medical
-[0:03:26] expert. Um, I will defer to the medical experts in the room or watching this. My
-[0:03:29] experts in the room or watching this. My goal is to be less egregious than LLMs
-[0:03:33] goal is to be less egregious than LLMs who say you should use glue to make
-[0:03:34] who say you should use glue to make cheese stick to your pizza. So, that's
-[0:03:36] cheese stick to your pizza. So, that's the bar we're aiming for here. So my
-[0:03:38] the bar we're aiming for here. So my running example if we think about a
-[0:03:40] running example if we think about a population of stroke patients um and
-[0:03:43] population of stroke patients um and clinicians trying to decide between
-[0:03:44] clinicians trying to decide between these two treatments. So should they
-[0:03:46] these two treatments. So should they give the patients a blood thinner or a
-[0:03:49] give the patients a blood thinner or a clot bluster and they want to know what
-[0:03:51] clot bluster and they want to know what results in better patient health? Why?
-[0:03:54] results in better patient health? Why? So the goal is a goal of a lot of
-[0:03:57] So the goal is a goal of a lot of observational causal inference to
-[0:03:58] observational causal inference to estimate the average causal effect the
-[0:04:00] estimate the average causal effect the mean difference in these outcomes under
-[0:04:02] mean difference in these outcomes under these two different interventions.
-[0:04:05] these two different interventions. And of course without additional
-[0:04:06] And of course without additional assumptions the ACE is not identified as
-[0:04:09] assumptions the ACE is not identified as a function of observed data since we
-[0:04:11] a function of observed data since we never observe the same patient under
-[0:04:12] never observe the same patient under both treatments
-[0:04:14] both treatments simultaneously. And I use this
-[0:04:16] simultaneously. And I use this illustrative um setting because in this
-[0:04:19] illustrative um setting because in this setting it may be infeasible to actually
-[0:04:21] setting it may be infeasible to actually run an RCT in time to decide sort of the
-[0:04:25] run an RCT in time to decide sort of the blood thinner or clotbuster in this
-[0:04:27] blood thinner or clotbuster in this really um sort of highstake setting of
-[0:04:29] really um sort of highstake setting of stroke patients. So we can turn to
-[0:04:33] stroke patients. So we can turn to observational non-experimental data but
-[0:04:36] observational non-experimental data but we'll have to uh satisfy this no
-[0:04:38] we'll have to uh satisfy this no unobserved confounding. So if we assume
-[0:04:42] unobserved confounding. So if we assume we observe all confounding variable C in
-[0:04:44] we observe all confounding variable C in our data which in this example might be
-[0:04:46] our data which in this example might be things like the age of the patient, sex
-[0:04:49] things like the age of the patient, sex of the patient, severity of the disease,
-[0:04:52] of the patient, severity of the disease, family history, etc.
-[0:04:54] family history, etc. Then we can use backdoor
-[0:04:57] Then we can use backdoor adjustment with no unobserved content
-[0:04:59] adjustment with no unobserved content confounding and of course positivity and
-[0:05:01] confounding and of course positivity and consistency
-[0:05:02] consistency too. So this is all fine and good until
-[0:05:05] too. So this is all fine and good until we hit something like we have some
-[0:05:09] we hit something like we have some unobserved confounding variable u. So
-[0:05:12] unobserved confounding variable u. So extending this uh running example, our
-[0:05:15] extending this uh running example, our you might be something like atrial
-[0:05:16] you might be something like atrial fibrillation. So an irregular and often
-[0:05:19] fibrillation. So an irregular and often rapid heart rhythm. um that could both
-[0:05:22] rapid heart rhythm. um that could both affect what medications the the
-[0:05:25] affect what medications the the clinician decides to give as well as the
-[0:05:27] clinician decides to give as well as the patient's overall health. And of course,
-[0:05:29] patient's overall health. And of course, if we don't observe you but try to use
-[0:05:32] if we don't observe you but try to use backdoor adjustment with just C you um
-[0:05:36] backdoor adjustment with just C you um this will give biased estimates in the
-[0:05:38] this will give biased estimates in the ACE. So in this example, what we might
-[0:05:42] ACE. So in this example, what we might want to turn to is some sort of
-[0:05:44] want to turn to is some sort of clinician notes, an electronic health
-[0:05:46] clinician notes, an electronic health record in order to try to not just stop
-[0:05:49] record in order to try to not just stop once we've hit you, this unobserved uh
-[0:05:52] once we've hit you, this unobserved uh confounding variable. So the method that
-[0:05:55] confounding variable. So the method that I've turned to in my own work and I
-[0:05:57] I've turned to in my own work and I often point applied people to is um the
-[0:06:01] often point applied people to is um the effect restoration method uh which comes
-[0:06:03] effect restoration method uh which comes out of the work from Karoki and Pearl in
-[0:06:05] out of the work from Karoki and Pearl in 2014 and was really uh formalized for
-[0:06:09] 2014 and was really uh formalized for text and text classifiers by Zachwood
-[0:06:11] text and text classifiers by Zachwood Dodie and colleagues in 2018. So in this
-[0:06:14] Dodie and colleagues in 2018. So in this method uh if we have U partial so we
-[0:06:18] method uh if we have U partial so we have observations for some but not all
-[0:06:21] have observations for some but not all of U and we have text lying around uh
-[0:06:25] of U and we have text lying around uh the goal would be to create proxies
-[0:06:28] the goal would be to create proxies which I'm showing with these dash purple
-[0:06:30] which I'm showing with these dash purple lines with supervised text classifiers
-[0:06:33] lines with supervised text classifiers and then correct the ACE for measurement
-[0:06:35] and then correct the ACE for measurement error. So in a little bit more detail,
-[0:06:37] error. So in a little bit more detail, we train a supervised text
-[0:06:39] we train a supervised text classification class text classifier
-[0:06:41] classification class text classifier with the U's that we do have. Use that
-[0:06:44] with the U's that we do have. Use that train classifier for inference to get
-[0:06:46] train classifier for inference to get these U star which are all our proxy
-[0:06:49] these U star which are all our proxy proxies. Estimate this probability
-[0:06:51] proxies. Estimate this probability distribution between U star and U and
-[0:06:54] distribution between U star and U and then use a a plug-in formula to estimate
-[0:06:56] then use a a plug-in formula to estimate the
+[0:01:56] can sometimes be more expressive or
+[0:01:58] flexible than structured data. So, for
+[0:02:01] example, with electronic health records,
+[0:02:03] a clinician uh may have observations for
+[0:02:06] a patient that don't fit nice and neatly
+[0:02:08] in any checkboxes or predefined schema
+[0:02:11] um in a structured data set. So, they'll
+[0:02:13] probably write in natural language what
+[0:02:15] they actually observe.
+[0:02:17] And in fact, this is probably only
+[0:02:20] increasing the amount of unstructured
+[0:02:22] text we see now that we have in recent
+[0:02:25] years the ability to record any
+[0:02:28] interaction we have. For example, use a
+[0:02:30] smartphone to record for clinicians to
+[0:02:33] record their conversations with
+[0:02:35] patients. More and more tech is coming
+[0:02:38] out to try to automate things like uh
+[0:02:40] scribes for medical notes. So this
+[0:02:42] unstructured text data is really
+[0:02:44] abundant in the real world, but it's
+[0:02:47] often difficult to directly incorporate
+[0:02:49] it into existing causal methods. So my
+[0:02:53] goal today is to start out by giving you
+[0:02:55] some background and motivation that
+[0:02:57] leads up to a new method that um myself
+[0:03:01] along with my collaborators Roit Bitaria
+[0:03:03] and Jacob Chen um developed that
+[0:03:05] combines text data and proximal causal
+[0:03:08] inference. and we published this in
+[0:03:10] Nurups last year. So, starting out with
+[0:03:12] some of the background and motivation.
+[0:03:15] Um, I'm going to run I'm going to go
+[0:03:17] through a a a illustrative example
+[0:03:20] that's medical, but I just want to put
+[0:03:21] the disclaimer that I am not a medical
+[0:03:23] expert. Um, I will defer to the medical
+[0:03:26] experts in the room or watching this. My
+[0:03:29] goal is to be less egregious than LLMs
+[0:03:33] who say you should use glue to make
+[0:03:34] cheese stick to your pizza. So, that's
+[0:03:36] the bar we're aiming for here. So my
+[0:03:38] running example if we think about a
+[0:03:40] population of stroke patients um and
+[0:03:43] clinicians trying to decide between
+[0:03:44] these two treatments. So should they
+[0:03:46] give the patients a blood thinner or a
+[0:03:49] clot bluster and they want to know what
+[0:03:51] results in better patient health? Why?
+[0:03:54] So the goal is a goal of a lot of
+[0:03:57] observational causal inference to
+[0:03:58] estimate the average causal effect the
+[0:04:00] mean difference in these outcomes under
+[0:04:02] these two different interventions.
+[0:04:05] And of course without additional
+[0:04:06] assumptions the ACE is not identified as
+[0:04:09] a function of observed data since we
+[0:04:11] never observe the same patient under
+[0:04:12] both treatments
+[0:04:14] simultaneously. And I use this
+[0:04:16] illustrative um setting because in this
+[0:04:19] setting it may be infeasible to actually
+[0:04:21] run an RCT in time to decide sort of the
+[0:04:25] blood thinner or clotbuster in this
+[0:04:27] really um sort of highstake setting of
+[0:04:29] stroke patients. So we can turn to
+[0:04:33] observational non-experimental data but
+[0:04:36] we'll have to uh satisfy this no
+[0:04:38] unobserved confounding. So if we assume
+[0:04:42] we observe all confounding variable C in
+[0:04:44] our data which in this example might be
+[0:04:46] things like the age of the patient, sex
+[0:04:49] of the patient, severity of the disease,
+[0:04:52] family history, etc.
+[0:04:54] Then we can use backdoor
+[0:04:57] adjustment with no unobserved content
+[0:04:59] confounding and of course positivity and
+[0:05:01] consistency
+[0:05:02] too. So this is all fine and good until
+[0:05:05] we hit something like we have some
+[0:05:09] unobserved confounding variable u. So
+[0:05:12] extending this uh running example, our
+[0:05:15] you might be something like atrial
+[0:05:16] fibrillation. So an irregular and often
+[0:05:19] rapid heart rhythm. um that could both
+[0:05:22] affect what medications the the
+[0:05:25] clinician decides to give as well as the
+[0:05:27] patient's overall health. And of course,
+[0:05:29] if we don't observe you but try to use
+[0:05:32] backdoor adjustment with just C you um
+[0:05:36] this will give biased estimates in the
+[0:05:38] ACE. So in this example, what we might
+[0:05:42] want to turn to is some sort of
+[0:05:44] clinician notes, an electronic health
+[0:05:46] record in order to try to not just stop
+[0:05:49] once we've hit you, this unobserved uh
+[0:05:52] confounding variable. So the method that
+[0:05:55] I've turned to in my own work and I
+[0:05:57] often point applied people to is um the
+[0:06:01] effect restoration method uh which comes
+[0:06:03] out of the work from Karoki and Pearl in
+[0:06:05] 2014 and was really uh formalized for
+[0:06:09] text and text classifiers by Zachwood
+[0:06:11] Dodie and colleagues in 2018. So in this
+[0:06:14] method uh if we have U partial so we
+[0:06:18] have observations for some but not all
+[0:06:21] of U and we have text lying around uh
+[0:06:25] the goal would be to create proxies
+[0:06:28] which I'm showing with these dash purple
+[0:06:30] lines with supervised text classifiers
+[0:06:33] and then correct the ACE for measurement
+[0:06:35] error. So in a little bit more detail,
+[0:06:37] we train a supervised text
+[0:06:39] classification class text classifier
+[0:06:41] with the U's that we do have. Use that
+[0:06:44] train classifier for inference to get
+[0:06:46] these U star which are all our proxy
+[0:06:49] proxies. Estimate this probability
+[0:06:51] distribution between U star and U and
+[0:06:54] then use a a plug-in formula to estimate
 [0:06:57] the ACE. So in a lot of cases this um this
-[0:07:01] ACE. So in a lot of cases this um this is a successful path path forward. But
-[0:07:04] is a successful path path forward. But what it requires is that um oftent times
-[0:07:08] what it requires is that um oftent times we're actually labeling text to try to
-[0:07:11] we're actually labeling text to try to get our U's. So we really have to make
-[0:07:13] get our U's. So we really have to make sure this U partial is gold standard.
-[0:07:16] sure this U partial is gold standard. Typically it's humans labeling it. Um
-[0:07:19] Typically it's humans labeling it. Um and so there might actually be a whole
-[0:07:22] and so there might actually be a whole bunch of errors in introduced from human
-[0:07:24] bunch of errors in introduced from human labeling. They're not might not be
-[0:07:26] labeling. They're not might not be agreement. There might not there might
-[0:07:28] agreement. There might not there might be a lot of noise here. Um, and it might
-[0:07:30] be a lot of noise here. Um, and it might also just be really costly to actually
-[0:07:32] also just be really costly to actually get these
+[0:07:01] is a successful path path forward. But
+[0:07:04] what it requires is that um oftent times
+[0:07:08] we're actually labeling text to try to
+[0:07:11] get our U's. So we really have to make
+[0:07:13] sure this U partial is gold standard.
+[0:07:16] Typically it's humans labeling it. Um
+[0:07:19] and so there might actually be a whole
+[0:07:22] bunch of errors in introduced from human
+[0:07:24] labeling. They're not might not be
+[0:07:26] agreement. There might not there might
+[0:07:28] be a lot of noise here. Um, and it might
+[0:07:30] also just be really costly to actually
 [0:07:34] get these labels. We then also need this accurate
-[0:07:37] labels. We then also need this accurate estimate of P of U star in U. Sometimes
-[0:07:40] estimate of P of U star in U. Sometimes that's held out data, but we still need
-[0:07:41] that's held out data, but we still need a partial um observation of U. So these
-[0:07:47] a partial um observation of U. So these limitations with the requirements are
-[0:07:49] limitations with the requirements are one of the two directions that really
-[0:07:51] one of the two directions that really motivated our work. Right? So if we're
-[0:07:54] motivated our work. Right? So if we're going to use supervised text classifiers
-[0:07:56] going to use supervised text classifiers to create these proxies, U star, this
-[0:07:59] to create these proxies, U star, this observed subset could be inaccurate,
-[0:08:02] observed subset could be inaccurate, could be even infeasible in some
-[0:08:04] could be even infeasible in some settings to get this U uh partial,
-[0:08:07] settings to get this U uh partial, right? If we have really sensitive
-[0:08:09] right? If we have really sensitive private data like from electronic health
-[0:08:12] private data like from electronic health records, I can't just put that up on a
-[0:08:13] records, I can't just put that up on a crowdworking site and get labels. Um
-[0:08:16] crowdworking site and get labels. Um there might be privacy restrictions
-[0:08:18] there might be privacy restrictions here.
+[0:07:37] estimate of P of U star in U. Sometimes
+[0:07:40] that's held out data, but we still need
+[0:07:41] a partial um observation of U. So these
+[0:07:47] limitations with the requirements are
+[0:07:49] one of the two directions that really
+[0:07:51] motivated our work. Right? So if we're
+[0:07:54] going to use supervised text classifiers
+[0:07:56] to create these proxies, U star, this
+[0:07:59] observed subset could be inaccurate,
+[0:08:02] could be even infeasible in some
+[0:08:04] settings to get this U uh partial,
+[0:08:07] right? If we have really sensitive
+[0:08:09] private data like from electronic health
+[0:08:12] records, I can't just put that up on a
+[0:08:13] crowdworking site and get labels. Um
+[0:08:16] there might be privacy restrictions
 [0:08:20] here. So starting with this, what do we do in
-[0:08:22] So starting with this, what do we do in this setting where an applied person has
-[0:08:25] this setting where an applied person has some text has some unobserved
-[0:08:27] some text has some unobserved confounding and they still want to move
-[0:08:29] confounding and they still want to move forward with trying to estimate the
-[0:08:31] forward with trying to estimate the causal effects. Um, and so what we
-[0:08:33] causal effects. Um, and so what we turned to was proximal causal inference.
-[0:08:36] turned to was proximal causal inference. So proximal causal inference is a really
-[0:08:39] So proximal causal inference is a really rich literature that uses two proxies of
-[0:08:41] rich literature that uses two proxies of the unmeasured confounder for unbiased
-[0:08:44] the unmeasured confounder for unbiased assessments. So here C is still my
-[0:08:46] assessments. So here C is still my measured confounding variables. U is
-[0:08:49] measured confounding variables. U is specified but unmeasured confounding
-[0:08:51] specified but unmeasured confounding variable and I'm trying to get proxies Z
-[0:08:54] variable and I'm trying to get proxies Z and W of U. Um so this is my uh proximal
-[0:08:59] and W of U. Um so this is my uh proximal causal DAG that I'm going to use
-[0:09:01] causal DAG that I'm going to use throughout this presentation. Now in the
-[0:09:03] throughout this presentation. Now in the literature you could also add edges
-[0:09:05] literature you could also add edges between W and Y and Z and A. These are
-[0:09:09] between W and Y and Z and A. These are not going to show up in our setting. So
-[0:09:10] not going to show up in our setting. So I'm just going to drop them for now. But
-[0:09:13] I'm just going to drop them for now. But we have identification with proximal
-[0:09:15] we have identification with proximal causal inference and this DAG if we have
-[0:09:18] causal inference and this DAG if we have four conditions that are satisfied. So
-[0:09:20] four conditions that are satisfied. So the big one is we need the two proxies W
-[0:09:23] the big one is we need the two proxies W and Z to be conditionally independent
-[0:09:25] and Z to be conditionally independent given U and C. We also need one proxy
-[0:09:28] given U and C. We also need one proxy which we're going to call W independent
-[0:09:30] which we're going to call W independent of treatment and the other proxy Z
-[0:09:33] of treatment and the other proxy Z independent of outcome. And then finally
-[0:09:36] independent of outcome. And then finally the fourth condition is completeness. So
-[0:09:38] the fourth condition is completeness. So intuitively what completeness is is that
-[0:09:41] intuitively what completeness is is that W and Z must hold some predictive value
-[0:09:43] W and Z must hold some predictive value for U
+[0:08:22] this setting where an applied person has
+[0:08:25] some text has some unobserved
+[0:08:27] confounding and they still want to move
+[0:08:29] forward with trying to estimate the
+[0:08:31] causal effects. Um, and so what we
+[0:08:33] turned to was proximal causal inference.
+[0:08:36] So proximal causal inference is a really
+[0:08:39] rich literature that uses two proxies of
+[0:08:41] the unmeasured confounder for unbiased
+[0:08:44] assessments. So here C is still my
+[0:08:46] measured confounding variables. U is
+[0:08:49] specified but unmeasured confounding
+[0:08:51] variable and I'm trying to get proxies Z
+[0:08:54] and W of U. Um so this is my uh proximal
+[0:08:59] causal DAG that I'm going to use
+[0:09:01] throughout this presentation. Now in the
+[0:09:03] literature you could also add edges
+[0:09:05] between W and Y and Z and A. These are
+[0:09:09] not going to show up in our setting. So
+[0:09:10] I'm just going to drop them for now. But
+[0:09:13] we have identification with proximal
+[0:09:15] causal inference and this DAG if we have
+[0:09:18] four conditions that are satisfied. So
+[0:09:20] the big one is we need the two proxies W
+[0:09:23] and Z to be conditionally independent
+[0:09:25] given U and C. We also need one proxy
+[0:09:28] which we're going to call W independent
+[0:09:30] of treatment and the other proxy Z
+[0:09:33] independent of outcome. And then finally
+[0:09:36] the fourth condition is completeness. So
+[0:09:38] intuitively what completeness is is that
+[0:09:41] W and Z must hold some predictive value
 [0:09:44] for U here and with this identification is
-[0:09:47] here and with this identification is possible with the proximal G formula. Um
-[0:09:50] possible with the proximal G formula. Um so we get these pieces of the ACE. Um
-[0:09:53] so we get these pieces of the ACE. Um and in practice under linearity
-[0:09:56] and in practice under linearity assumptions we can estimate the proximal
-[0:09:58] assumptions we can estimate the proximal G formula using two-stage regression.
-[0:10:02] G formula using two-stage regression. So this is great except for in practice
-[0:10:06] So this is great except for in practice finding suitable proxies in a structured
-[0:10:09] finding suitable proxies in a structured data set can be difficult. So in our
-[0:10:11] data set can be difficult. So in our running example where U, our unobserved
-[0:10:14] running example where U, our unobserved confounding variable is atrial
-[0:10:16] confounding variable is atrial fibrillation. Maybe we look through our
-[0:10:18] fibrillation. Maybe we look through our structured data and we think okay a
-[0:10:21] structured data and we think okay a likely Z could be something like heart
-[0:10:23] likely Z could be something like heart palpitations and W could be something
-[0:10:25] palpitations and W could be something like shortness of breath. But in fact,
-[0:10:28] like shortness of breath. But in fact, if we try to use proxies like these, um,
-[0:10:32] if we try to use proxies like these, um, there's some edges that might exist that
-[0:10:34] there's some edges that might exist that violate proximal identification
-[0:10:35] violate proximal identification assumptions. So, for example, shortness
-[0:10:38] assumptions. So, for example, shortness of breath W could affect which med
-[0:10:41] of breath W could affect which med medication the clinician prescribes, A,
-[0:10:43] medication the clinician prescribes, A, and there'd be an edge between W and A,
-[0:10:45] and there'd be an edge between W and A, which would violate the proximal the
-[0:10:48] which would violate the proximal the second proximal uh identification
-[0:10:50] second proximal uh identification condition. There also could be an edge
-[0:10:53] condition. There also could be an edge between Z and and Y. shortness of breath
-[0:10:56] between Z and and Y. shortness of breath could be a symptom of heart palpitations
-[0:10:58] could be a symptom of heart palpitations which would violate this first condition
-[0:11:00] which would violate this first condition of
+[0:09:47] possible with the proximal G formula. Um
+[0:09:50] so we get these pieces of the ACE. Um
+[0:09:53] and in practice under linearity
+[0:09:56] assumptions we can estimate the proximal
+[0:09:58] G formula using two-stage regression.
+[0:10:02] So this is great except for in practice
+[0:10:06] finding suitable proxies in a structured
+[0:10:09] data set can be difficult. So in our
+[0:10:11] running example where U, our unobserved
+[0:10:14] confounding variable is atrial
+[0:10:16] fibrillation. Maybe we look through our
+[0:10:18] structured data and we think okay a
+[0:10:21] likely Z could be something like heart
+[0:10:23] palpitations and W could be something
+[0:10:25] like shortness of breath. But in fact,
+[0:10:28] if we try to use proxies like these, um,
+[0:10:32] there's some edges that might exist that
+[0:10:34] violate proximal identification
+[0:10:35] assumptions. So, for example, shortness
+[0:10:38] of breath W could affect which med
+[0:10:41] medication the clinician prescribes, A,
+[0:10:43] and there'd be an edge between W and A,
+[0:10:45] which would violate the proximal the
+[0:10:48] second proximal uh identification
+[0:10:50] condition. There also could be an edge
+[0:10:53] between Z and and Y. shortness of breath
+[0:10:56] could be a symptom of heart palpitations
+[0:10:58] which would violate this first condition
 [0:11:01] of proximal. So this really illustrates the
-[0:11:04] proximal. So this really illustrates the second direction that motivated our work
-[0:11:06] second direction that motivated our work is that if you're coming from the
-[0:11:07] is that if you're coming from the proximal causal inference side of
-[0:11:09] proximal causal inference side of things, it can be difficult in practice
-[0:11:12] things, it can be difficult in practice to find these suitable Z and W, these
-[0:11:15] to find these suitable Z and W, these proxies that satisfy all these
-[0:11:17] proxies that satisfy all these conditions you need. So coming from both
-[0:11:20] conditions you need. So coming from both directions um motivated our method which
-[0:11:23] directions um motivated our method which I'm going to spend the rest of uh my
-[0:11:26] I'm going to spend the rest of uh my time talking about. And what we're going
-[0:11:28] time talking about. And what we're going to do is when we have text data we're
-[0:11:31] to do is when we have text data we're going to try to construct our proxies C
-[0:11:33] going to try to construct our proxies C and W Z and W without supervised data
-[0:11:37] and W Z and W without supervised data using zeroot large language models which
-[0:11:39] using zeroot large language models which I'll explain in detail here in a few
-[0:11:41] I'll explain in detail here in a few slides. And we want to do so in such a
-[0:11:44] slides. And we want to do so in such a such a way that these proximal
-[0:11:45] such a way that these proximal assumptions hold by design. So that's
-[0:11:49] assumptions hold by design. So that's our overall goal. Um and I'm going to
-[0:11:52] our overall goal. Um and I'm going to now walk through all of these pieces
-[0:11:54] now walk through all of these pieces here um that are in detail in our paper.
-[0:11:57] here um that are in detail in our paper. Our paper has uh proofs and analysis.
-[0:12:00] Our paper has uh proofs and analysis. What I'll try to do in this talk for the
-[0:12:02] What I'll try to do in this talk for the sake of time is really talk about highle
-[0:12:05] sake of time is really talk about highle description and intuition as well as
-[0:12:07] description and intuition as well as give you some highlighted empirical
-[0:12:08] give you some highlighted empirical results here.
-[0:12:10] results here. So to set the stage um there's some
-[0:12:13] So to set the stage um there's some assumptions and restrictions on our
-[0:12:15] assumptions and restrictions on our method. So the first is that we have U
-[0:12:18] method. So the first is that we have U this unobserved uh confounding variable.
-[0:12:21] this unobserved uh confounding variable. We don't have any observations of U but
-[0:12:24] We don't have any observations of U but we have specified you meaning we know
-[0:12:26] we have specified you meaning we know it's atrial fibrillation that we would
-[0:12:28] it's atrial fibrillation that we would like to measure but we can't measure
-[0:12:30] like to measure but we can't measure because we don't have any observations
-[0:12:31] because we don't have any observations of
+[0:11:04] second direction that motivated our work
+[0:11:06] is that if you're coming from the
+[0:11:07] proximal causal inference side of
+[0:11:09] things, it can be difficult in practice
+[0:11:12] to find these suitable Z and W, these
+[0:11:15] proxies that satisfy all these
+[0:11:17] conditions you need. So coming from both
+[0:11:20] directions um motivated our method which
+[0:11:23] I'm going to spend the rest of uh my
+[0:11:26] time talking about. And what we're going
+[0:11:28] to do is when we have text data we're
+[0:11:31] going to try to construct our proxies C
+[0:11:33] and W Z and W without supervised data
+[0:11:37] using zeroot large language models which
+[0:11:39] I'll explain in detail here in a few
+[0:11:41] slides. And we want to do so in such a
+[0:11:44] such a way that these proximal
+[0:11:45] assumptions hold by design. So that's
+[0:11:49] our overall goal. Um and I'm going to
+[0:11:52] now walk through all of these pieces
+[0:11:54] here um that are in detail in our paper.
+[0:11:57] Our paper has uh proofs and analysis.
+[0:12:00] What I'll try to do in this talk for the
+[0:12:02] sake of time is really talk about highle
+[0:12:05] description and intuition as well as
+[0:12:07] give you some highlighted empirical
+[0:12:08] results here.
+[0:12:10] So to set the stage um there's some
+[0:12:13] assumptions and restrictions on our
+[0:12:15] method. So the first is that we have U
+[0:12:18] this unobserved uh confounding variable.
+[0:12:21] We don't have any observations of U but
+[0:12:24] we have specified you meaning we know
+[0:12:26] it's atrial fibrillation that we would
+[0:12:28] like to measure but we can't measure
+[0:12:30] because we don't have any observations
 [0:12:32] of it. Given C and U, we assume that they
-[0:12:36] it. Given C and U, we assume that they form a sufficient backdoor adjustment
-[0:12:38] form a sufficient backdoor adjustment set with respect to A and
-[0:12:40] set with respect to A and Y. We also assume that the text does not
-[0:12:44] Y. We also assume that the text does not cause other variables. It's just a
-[0:12:46] cause other variables. It's just a summary or record of event, which um
-[0:12:49] summary or record of event, which um will become really clear when we talk
-[0:12:50] will become really clear when we talk about the clinical notes in electronic
-[0:12:52] about the clinical notes in electronic health records. And finally, we're just
-[0:12:55] health records. And finally, we're just going to restrict you to being a binary
-[0:12:57] going to restrict you to being a binary or discrete variable. This is not
-[0:12:59] or discrete variable. This is not necessary in practice, but um will
-[0:13:02] necessary in practice, but um will become really helpful if we just focus
-[0:13:03] become really helpful if we just focus on classification at the estimation
-[0:13:07] on classification at the estimation stage. I also want to set the stage for
-[0:13:09] stage. I also want to set the stage for how we're actually going to do some of
-[0:13:11] how we're actually going to do some of the empirical evaluation because I'll
-[0:13:13] the empirical evaluation because I'll keep coming back to this as I describe
-[0:13:15] keep coming back to this as I describe our method and go through some
-[0:13:17] our method and go through some additional running uh running examples.
-[0:13:20] additional running uh running examples. So we use a semi-synthetic experimental
-[0:13:23] So we use a semi-synthetic experimental setup and this is because there's no
-[0:13:25] setup and this is because there's no ground truth in causal estimation
-[0:13:27] ground truth in causal estimation because we would need these counteract
-[0:13:29] because we would need these counteract counterfactual outcomes of an individual
-[0:13:32] counterfactual outcomes of an individual under multiple versions of the
-[0:13:33] under multiple versions of the treatment. So semi-synthetic experiments
-[0:13:37] treatment. So semi-synthetic experiments take um part of the data generating
-[0:13:40] take um part of the data generating process and use real data so that we can
-[0:13:43] process and use real data so that we can actually uh find where our method might
-[0:13:46] actually uh find where our method might not work but then specify synthetic
-[0:13:48] not work but then specify synthetic relationships for the remainder of the
-[0:13:50] relationships for the remainder of the data generating process and semiynthetic
-[0:13:53] data generating process and semiynthetic experimental setups have been used
-[0:13:55] experimental setups have been used extensively in other causal work. So
-[0:13:58] extensively in other causal work. So what we're going to use is a data set
-[0:14:01] what we're going to use is a data set called mimic 3 which is a deidentified
-[0:14:03] called mimic 3 which is a deidentified data set of patients in a large tertiary
-[0:14:07] data set of patients in a large tertiary care hospital. And why we use this is
-[0:14:11] care hospital. And why we use this is because we can actually use the real
-[0:14:13] because we can actually use the real clinical notes as the text data in our
-[0:14:16] clinical notes as the text data in our setup. Um so we also use a real
-[0:14:21] setup. Um so we also use a real confounder set. So we both use the age
-[0:14:23] confounder set. So we both use the age and gender of these patients from this
-[0:14:25] and gender of these patients from this deidentified data set. And for you,
-[0:14:28] deidentified data set. And for you, which will know you in our uh
-[0:14:31] which will know you in our uh semiynthetic setup, but won't have
-[0:14:32] semiynthetic setup, but won't have access to at inference time, we use real
-[0:14:35] access to at inference time, we use real ICD9 code diagnosis. So things like did
-[0:14:39] ICD9 code diagnosis. So things like did the patient patient have atrial
-[0:14:41] the patient patient have atrial fibrillation, hypertension,
-[0:14:44] fibrillation, hypertension, etc. The synthetic part of this
-[0:14:46] etc. The synthetic part of this semiynthetic setup is we synthetically
-[0:14:49] semiynthetic setup is we synthetically generate treatment and A and outcome Y
-[0:14:53] generate treatment and A and outcome Y given C and U which gives us access to
-[0:14:55] given C and U which gives us access to the ground truth ACE. So we can actually
-[0:14:57] the ground truth ACE. So we can actually compare our estimates to the ground
-[0:14:59] compare our estimates to the ground truth while at the same time allowing a
-[0:15:02] truth while at the same time allowing a lot of the real world complexity from
-[0:15:04] lot of the real world complexity from text to not be synthetic or
-[0:15:07] text to not be synthetic or contrived. So I want to give first an
-[0:15:11] contrived. So I want to give first an overview of the pipeline of our method
-[0:15:13] overview of the pipeline of our method and then I'll take time to go into some
-[0:15:15] and then I'll take time to go into some of the technical details of these
-[0:15:17] of the technical details of these various parts of the pipeline. So our
-[0:15:20] various parts of the pipeline. So our pipeline starts with text and the the
-[0:15:23] pipeline starts with text and the the example and semiynthetic experiments. we
-[0:15:26] example and semiynthetic experiments. we talk about uh use these clinical notes
-[0:15:28] talk about uh use these clinical notes from mimic 3. The output of this
-[0:15:30] from mimic 3. The output of this pipeline are these um uh components of
-[0:15:34] pipeline are these um uh components of the ACE. So estimating expected value of
-[0:15:36] the ACE. So estimating expected value of Y given changing the treatment here and
-[0:15:40] Y given changing the treatment here and the pipeline after we have all of this
-[0:15:42] the pipeline after we have all of this text the first thing we do is we filter
-[0:15:44] text the first thing we do is we filter to pre-treatment text. So for our mimic
-[0:15:47] to pre-treatment text. So for our mimic clinical notes, we actually have
-[0:15:49] clinical notes, we actually have timestamps and we can do things like
-[0:15:51] timestamps and we can do things like remove any discharge summaries which are
-[0:15:53] remove any discharge summaries which are happening after
-[0:15:56] happening after treatment. Then we look to metadata to
-[0:16:00] treatment. Then we look to metadata to find multiple instances of text for the
-[0:16:02] find multiple instances of text for the same patient. So in our mimic setting we
-[0:16:06] same patient. So in our mimic setting we have clinical note categories like echo
-[0:16:08] have clinical note categories like echo cardiogram and nursing notes and we can
-[0:16:11] cardiogram and nursing notes and we can have multiple instances of text for for
-[0:16:13] have multiple instances of text for for the exact same individual.
-[0:16:16] the exact same individual. Given these multiple instances of
-[0:16:18] Given these multiple instances of pre-treatment text, we then use two
-[0:16:20] pre-treatment text, we then use two different large language models. So I'll
-[0:16:23] different large language models. So I'll describe these in detail later, but the
-[0:16:25] describe these in detail later, but the ones we end up using are Google's FLN T5
-[0:16:28] ones we end up using are Google's FLN T5 and the Allen Institutees OLO. And we
-[0:16:32] and the Allen Institutees OLO. And we infer zeroot predictions for the proxies
-[0:16:35] infer zeroot predictions for the proxies Z and W on these two different instances
-[0:16:38] Z and W on these two different instances of text.
+[0:12:36] form a sufficient backdoor adjustment
+[0:12:38] set with respect to A and
+[0:12:40] Y. We also assume that the text does not
+[0:12:44] cause other variables. It's just a
+[0:12:46] summary or record of event, which um
+[0:12:49] will become really clear when we talk
+[0:12:50] about the clinical notes in electronic
+[0:12:52] health records. And finally, we're just
+[0:12:55] going to restrict you to being a binary
+[0:12:57] or discrete variable. This is not
+[0:12:59] necessary in practice, but um will
+[0:13:02] become really helpful if we just focus
+[0:13:03] on classification at the estimation
+[0:13:07] stage. I also want to set the stage for
+[0:13:09] how we're actually going to do some of
+[0:13:11] the empirical evaluation because I'll
+[0:13:13] keep coming back to this as I describe
+[0:13:15] our method and go through some
+[0:13:17] additional running uh running examples.
+[0:13:20] So we use a semi-synthetic experimental
+[0:13:23] setup and this is because there's no
+[0:13:25] ground truth in causal estimation
+[0:13:27] because we would need these counteract
+[0:13:29] counterfactual outcomes of an individual
+[0:13:32] under multiple versions of the
+[0:13:33] treatment. So semi-synthetic experiments
+[0:13:37] take um part of the data generating
+[0:13:40] process and use real data so that we can
+[0:13:43] actually uh find where our method might
+[0:13:46] not work but then specify synthetic
+[0:13:48] relationships for the remainder of the
+[0:13:50] data generating process and semiynthetic
+[0:13:53] experimental setups have been used
+[0:13:55] extensively in other causal work. So
+[0:13:58] what we're going to use is a data set
+[0:14:01] called mimic 3 which is a deidentified
+[0:14:03] data set of patients in a large tertiary
+[0:14:07] care hospital. And why we use this is
+[0:14:11] because we can actually use the real
+[0:14:13] clinical notes as the text data in our
+[0:14:16] setup. Um so we also use a real
+[0:14:21] confounder set. So we both use the age
+[0:14:23] and gender of these patients from this
+[0:14:25] deidentified data set. And for you,
+[0:14:28] which will know you in our uh
+[0:14:31] semiynthetic setup, but won't have
+[0:14:32] access to at inference time, we use real
+[0:14:35] ICD9 code diagnosis. So things like did
+[0:14:39] the patient patient have atrial
+[0:14:41] fibrillation, hypertension,
+[0:14:44] etc. The synthetic part of this
+[0:14:46] semiynthetic setup is we synthetically
+[0:14:49] generate treatment and A and outcome Y
+[0:14:53] given C and U which gives us access to
+[0:14:55] the ground truth ACE. So we can actually
+[0:14:57] compare our estimates to the ground
+[0:14:59] truth while at the same time allowing a
+[0:15:02] lot of the real world complexity from
+[0:15:04] text to not be synthetic or
+[0:15:07] contrived. So I want to give first an
+[0:15:11] overview of the pipeline of our method
+[0:15:13] and then I'll take time to go into some
+[0:15:15] of the technical details of these
+[0:15:17] various parts of the pipeline. So our
+[0:15:20] pipeline starts with text and the the
+[0:15:23] example and semiynthetic experiments. we
+[0:15:26] talk about uh use these clinical notes
+[0:15:28] from mimic 3. The output of this
+[0:15:30] pipeline are these um uh components of
+[0:15:34] the ACE. So estimating expected value of
+[0:15:36] Y given changing the treatment here and
+[0:15:40] the pipeline after we have all of this
+[0:15:42] text the first thing we do is we filter
+[0:15:44] to pre-treatment text. So for our mimic
+[0:15:47] clinical notes, we actually have
+[0:15:49] timestamps and we can do things like
+[0:15:51] remove any discharge summaries which are
+[0:15:53] happening after
+[0:15:56] treatment. Then we look to metadata to
+[0:16:00] find multiple instances of text for the
+[0:16:02] same patient. So in our mimic setting we
+[0:16:06] have clinical note categories like echo
+[0:16:08] cardiogram and nursing notes and we can
+[0:16:11] have multiple instances of text for for
+[0:16:13] the exact same individual.
+[0:16:16] Given these multiple instances of
+[0:16:18] pre-treatment text, we then use two
+[0:16:20] different large language models. So I'll
+[0:16:23] describe these in detail later, but the
+[0:16:25] ones we end up using are Google's FLN T5
+[0:16:28] and the Allen Institutees OLO. And we
+[0:16:32] infer zeroot predictions for the proxies
+[0:16:35] Z and W on these two different instances
 [0:16:40] of text. Once we have these, we really want to be
-[0:16:43] Once we have these, we really want to be able to guide analysts of whether we
-[0:16:45] able to guide analysts of whether we think some of these uh assumptions that
-[0:16:48] think some of these uh assumptions that are required for proximal causal
-[0:16:50] are required for proximal causal inference have been satisfied or not. So
-[0:16:52] inference have been satisfied or not. So we come up with this odds ratio heristic
-[0:16:55] we come up with this odds ratio heristic um which I'll explain in detail in a
-[0:16:57] um which I'll explain in detail in a little bit. If that heristic fails, we
-[0:16:59] little bit. If that heristic fails, we advise the analysts to stop and not go
-[0:17:01] advise the analysts to stop and not go any further. But if it passes, we can
-[0:17:05] any further. But if it passes, we can use the resulting um uh causal DAG with
-[0:17:09] use the resulting um uh causal DAG with the assumption satisfied and the
-[0:17:10] the assumption satisfied and the proximal G formula to get estimates of
-[0:17:13] proximal G formula to get estimates of the ACE that we want here. So that was
-[0:17:16] the ACE that we want here. So that was the highle overview. I now want to take
-[0:17:18] the highle overview. I now want to take some time and really explain what
-[0:17:21] some time and really explain what motivated our design and method here for
-[0:17:23] motivated our design and method here for these various parts and why some
-[0:17:26] these various parts and why some reasonable alternatives may fail here.
-[0:17:29] reasonable alternatives may fail here. So let's actually go to the middle of
-[0:17:31] So let's actually go to the middle of the pipeline first because I want to
-[0:17:33] the pipeline first because I want to talk about something that as an NLP
-[0:17:35] talk about something that as an NLP person has um become really prevalent
-[0:17:37] person has um become really prevalent but might not be as familiar to the
-[0:17:39] but might not be as familiar to the causal audience which is zeroot
-[0:17:42] causal audience which is zeroot classifiers. So zeroot classifiers
-[0:17:45] classifiers. So zeroot classifiers perform an unseen task with no
-[0:17:47] perform an unseen task with no supervised examples and they can do this
-[0:17:49] supervised examples and they can do this through transfer learning. So the
-[0:17:52] through transfer learning. So the typical pipeline like the one you see
-[0:17:54] typical pipeline like the one you see from the flan paper which was published
-[0:17:56] from the flan paper which was published in iclair in 2022 is take a large
-[0:17:59] in iclair in 2022 is take a large language model uh use some pre-training
-[0:18:03] language model uh use some pre-training uh language objective on a whole bunch
-[0:18:05] uh language objective on a whole bunch of uh raw text. So typically this is
-[0:18:07] of uh raw text. So typically this is next word prediction or masking words in
-[0:18:10] next word prediction or masking words in order to learn contextual
-[0:18:12] order to learn contextual representations of what the words mean.
-[0:18:15] representations of what the words mean. And then this second step has become
-[0:18:17] And then this second step has become really key in the last years. So folks
-[0:18:20] really key in the last years. So folks have taken hundreds even thousands of
-[0:18:23] have taken hundreds even thousands of supervised data sets that already exist
-[0:18:26] supervised data sets that already exist these input output pairs that have
-[0:18:29] these input output pairs that have typically been labeled by humans and
-[0:18:31] typically been labeled by humans and they turn them into text input text
-[0:18:33] they turn them into text input text output and additionally train the
-[0:18:35] output and additionally train the language models on it. So this is called
-[0:18:38] language models on it. So this is called instruction tuning. They're instruction
-[0:18:40] instruction tuning. They're instruction tuned on all this additional supervised
-[0:18:42] tuned on all this additional supervised data. And these together have allowed
-[0:18:45] data. And these together have allowed some pretty decent zeroot performance on
-[0:18:48] some pretty decent zeroot performance on unseen tasks. So to just give you a
-[0:18:50] unseen tasks. So to just give you a little taste of for example our FLAN
-[0:18:53] little taste of for example our FLAN model and what they did here, they took
-[0:18:55] model and what they did here, they took things like translation, common sense
-[0:18:57] things like translation, common sense reasoning, sentiment analysis, um any
-[0:19:00] reasoning, sentiment analysis, um any other binary classification task where
-[0:19:02] other binary classification task where we have supervised data, had the input
-[0:19:05] we have supervised data, had the input as natural language and the output is
-[0:19:08] as natural language and the output is now also natural language. So you can
-[0:19:10] now also natural language. So you can turn binary classification into
-[0:19:12] turn binary classification into something like yes no is not possible to
-[0:19:15] something like yes no is not possible to tell. So what we use in our pipeline is
-[0:19:18] tell. So what we use in our pipeline is a pretty simple zerosot prediction from
-[0:19:21] a pretty simple zerosot prediction from LLM setup for this proof of concept.
-[0:19:24] LLM setup for this proof of concept. This is probably something that we could
-[0:19:25] This is probably something that we could engineer for improvement in the future
-[0:19:27] engineer for improvement in the future as well. But we take this particular
-[0:19:30] as well. But we take this particular prompt template. So the actual text from
-[0:19:33] prompt template. So the actual text from the clinical notes and the natural
-[0:19:36] the clinical notes and the natural language form of you are unmeasured
-[0:19:38] language form of you are unmeasured confounding variable and this constraint
-[0:19:41] confounding variable and this constraint asking the LLM to generate yes or no. So
-[0:19:44] asking the LLM to generate yes or no. So here's a contrived example instance. I
-[0:19:47] here's a contrived example instance. I can't share an actual mimic text due to
-[0:19:48] can't share an actual mimic text due to the privacy restrictions here. But we
-[0:19:51] the privacy restrictions here. But we might have something like a text that is
-[0:19:54] might have something like a text that is talking about a patient having
-[0:19:55] talking about a patient having fluttering heartbeats or shortness of
-[0:19:57] fluttering heartbeats or shortness of breath. And then um the the natural
-[0:20:01] breath. And then um the the natural language form of our U in this case is
-[0:20:03] language form of our U in this case is atrial
+[0:16:43] able to guide analysts of whether we
+[0:16:45] think some of these uh assumptions that
+[0:16:48] are required for proximal causal
+[0:16:50] inference have been satisfied or not. So
+[0:16:52] we come up with this odds ratio heristic
+[0:16:55] um which I'll explain in detail in a
+[0:16:57] little bit. If that heristic fails, we
+[0:16:59] advise the analysts to stop and not go
+[0:17:01] any further. But if it passes, we can
+[0:17:05] use the resulting um uh causal DAG with
+[0:17:09] the assumption satisfied and the
+[0:17:10] proximal G formula to get estimates of
+[0:17:13] the ACE that we want here. So that was
+[0:17:16] the highle overview. I now want to take
+[0:17:18] some time and really explain what
+[0:17:21] motivated our design and method here for
+[0:17:23] these various parts and why some
+[0:17:26] reasonable alternatives may fail here.
+[0:17:29] So let's actually go to the middle of
+[0:17:31] the pipeline first because I want to
+[0:17:33] talk about something that as an NLP
+[0:17:35] person has um become really prevalent
+[0:17:37] but might not be as familiar to the
+[0:17:39] causal audience which is zeroot
+[0:17:42] classifiers. So zeroot classifiers
+[0:17:45] perform an unseen task with no
+[0:17:47] supervised examples and they can do this
+[0:17:49] through transfer learning. So the
+[0:17:52] typical pipeline like the one you see
+[0:17:54] from the flan paper which was published
+[0:17:56] in iclair in 2022 is take a large
+[0:17:59] language model uh use some pre-training
+[0:18:03] uh language objective on a whole bunch
+[0:18:05] of uh raw text. So typically this is
+[0:18:07] next word prediction or masking words in
+[0:18:10] order to learn contextual
+[0:18:12] representations of what the words mean.
+[0:18:15] And then this second step has become
+[0:18:17] really key in the last years. So folks
+[0:18:20] have taken hundreds even thousands of
+[0:18:23] supervised data sets that already exist
+[0:18:26] these input output pairs that have
+[0:18:29] typically been labeled by humans and
+[0:18:31] they turn them into text input text
+[0:18:33] output and additionally train the
+[0:18:35] language models on it. So this is called
+[0:18:38] instruction tuning. They're instruction
+[0:18:40] tuned on all this additional supervised
+[0:18:42] data. And these together have allowed
+[0:18:45] some pretty decent zeroot performance on
+[0:18:48] unseen tasks. So to just give you a
+[0:18:50] little taste of for example our FLAN
+[0:18:53] model and what they did here, they took
+[0:18:55] things like translation, common sense
+[0:18:57] reasoning, sentiment analysis, um any
+[0:19:00] other binary classification task where
+[0:19:02] we have supervised data, had the input
+[0:19:05] as natural language and the output is
+[0:19:08] now also natural language. So you can
+[0:19:10] turn binary classification into
+[0:19:12] something like yes no is not possible to
+[0:19:15] tell. So what we use in our pipeline is
+[0:19:18] a pretty simple zerosot prediction from
+[0:19:21] LLM setup for this proof of concept.
+[0:19:24] This is probably something that we could
+[0:19:25] engineer for improvement in the future
+[0:19:27] as well. But we take this particular
+[0:19:30] prompt template. So the actual text from
+[0:19:33] the clinical notes and the natural
+[0:19:36] language form of you are unmeasured
+[0:19:38] confounding variable and this constraint
+[0:19:41] asking the LLM to generate yes or no. So
+[0:19:44] here's a contrived example instance. I
+[0:19:47] can't share an actual mimic text due to
+[0:19:48] the privacy restrictions here. But we
+[0:19:51] might have something like a text that is
+[0:19:54] talking about a patient having
+[0:19:55] fluttering heartbeats or shortness of
+[0:19:57] breath. And then um the the natural
+[0:20:01] language form of our U in this case is
 [0:20:04] atrial fibrillation. We put this text as an
-[0:20:07] fibrillation. We put this text as an input to these pre-trained and
-[0:20:09] input to these pre-trained and instruction tuned large language models
-[0:20:11] instruction tuned large language models and they're going to generate a text
-[0:20:13] and they're going to generate a text output. So um flan or mo might generate
-[0:20:17] output. So um flan or mo might generate something like yes. And then we have a
-[0:20:20] something like yes. And then we have a deterministic answer extraction. So if
-[0:20:23] deterministic answer extraction. So if the the word yes is in the output, we
-[0:20:26] the the word yes is in the output, we assign the proxy w to be one. Otherwise,
-[0:20:29] assign the proxy w to be one. Otherwise, we do w equals z. And the same is for z
-[0:20:32] we do w equals z. And the same is for z um or uh if we're looking at z
-[0:20:35] um or uh if we're looking at z instead. So that's the middle chunk of
-[0:20:38] instead. So that's the middle chunk of this pipeline. How do we actually do
-[0:20:40] this pipeline. How do we actually do this zerosot predictions from large
-[0:20:43] this zerosot predictions from large language models? And the key here is
-[0:20:44] language models? And the key here is that we're doing all of this transfer
-[0:20:46] that we're doing all of this transfer learning so that even though we don't
-[0:20:48] learning so that even though we don't have observations of you itself, we can
-[0:20:51] have observations of you itself, we can still get some pretty decent
-[0:20:53] still get some pretty decent predictions. I'll come back to how
-[0:20:54] predictions. I'll come back to how decent they are when I get to the actual
-[0:20:56] decent they are when I get to the actual results here. But this is this is a key
-[0:20:59] results here. But this is this is a key component is these large language
-[0:21:01] component is these large language models. But now I actually want to go
-[0:21:03] models. But now I actually want to go move back to some of these early parts
-[0:21:05] move back to some of these early parts of the pipeline to explain why we need
-[0:21:08] of the pipeline to explain why we need pre-treatment text, why we need to split
-[0:21:10] pre-treatment text, why we need to split it up into these two instances and use
-[0:21:13] it up into these two instances and use two different language models
-[0:21:15] two different language models here. So first pre-treatment text. So
-[0:21:19] here. So first pre-treatment text. So here I'm showing a DAG on the right in
-[0:21:21] here I'm showing a DAG on the right in which there's this edge from Y the
-[0:21:24] which there's this edge from Y the outcome to T our text. And if we have
-[0:21:28] outcome to T our text. And if we have this right where we have this uh actual
-[0:21:31] this right where we have this uh actual post treatment text and we try to infer
-[0:21:34] post treatment text and we try to infer W and Z using zeroot models they're
-[0:21:37] W and Z using zeroot models they're going to violate either P2 or P3 our
-[0:21:41] going to violate either P2 or P3 our proximal identification uh assumptions
-[0:21:44] proximal identification uh assumptions or both. So starting with P3, what we
-[0:21:48] or both. So starting with P3, what we see is that there's a path from Y to T
-[0:21:51] see is that there's a path from Y to T to Z, which means that Z is not
-[0:21:53] to Z, which means that Z is not conditionally independent of Y, which
-[0:21:55] conditionally independent of Y, which would violate this P3. Um P2 similarly,
-[0:21:59] would violate this P3. Um P2 similarly, we have a path from A to Y to T to W. So
-[0:22:03] we have a path from A to Y to T to W. So W is not conditionally independent of A.
-[0:22:06] W is not conditionally independent of A. So if we use post treatment tax, this
-[0:22:08] So if we use post treatment tax, this would give bias when plugged into the
-[0:22:10] would give bias when plugged into the proximal G formula. So part of our
-[0:22:13] proximal G formula. So part of our method is just simplifying this and
-[0:22:15] method is just simplifying this and using um using timestamps to just use
-[0:22:18] using um using timestamps to just use pre-treatment
-[0:22:19] pre-treatment text. The second thing we contemplated
-[0:22:22] text. The second thing we contemplated is okay why do we need these multiple
-[0:22:25] is okay why do we need these multiple instances of text? Why do we need two
-[0:22:27] instances of text? Why do we need two instances for every individual?
-[0:22:30] instances for every individual? So now on the right I'm showing a DAG
-[0:22:33] So now on the right I'm showing a DAG where we're trying to infer W and Z with
-[0:22:37] where we're trying to infer W and Z with zero shot models on the same instance of
-[0:22:40] zero shot models on the same instance of pre-treatment text. And what we see here
-[0:22:43] pre-treatment text. And what we see here is that u P1 does not hold because we
-[0:22:47] is that u P1 does not hold because we have um T pre with an edge to Z and T
-[0:22:51] have um T pre with an edge to Z and T pre with an edge to W which means that W
-[0:22:54] pre with an edge to W which means that W is not conditionally independent of Z
-[0:22:56] is not conditionally independent of Z given U and C. So we need this
-[0:22:59] given U and C. So we need this conditional independence of the proxies
-[0:23:01] conditional independence of the proxies and if we don't have this this would
-[0:23:03] and if we don't have this this would also give bias when plugged into the
-[0:23:05] also give bias when plugged into the proximal G
-[0:23:07] proximal G formula. What this means in practice so
-[0:23:10] formula. What this means in practice so what we did with mimic mimic and the
-[0:23:11] what we did with mimic mimic and the clinical notes and we think might be
-[0:23:13] clinical notes and we think might be applicable for other settings as well is
-[0:23:15] applicable for other settings as well is that we looked at for each pair of note
-[0:23:19] that we looked at for each pair of note categories that we um are examining. So
-[0:23:22] categories that we um are examining. So for example, we have metadata that says
-[0:23:24] for example, we have metadata that says this is text that comes from a nurse or
-[0:23:28] this is text that comes from a nurse or this is text that comes from a
-[0:23:29] this is text that comes from a radiologist. We subset to patients who
-[0:23:31] radiologist. We subset to patients who have both those note categories for a
-[0:23:33] have both those note categories for a single visit. So each patient would have
-[0:23:35] single visit. So each patient would have both a nursing note and a radiology
-[0:23:37] both a nursing note and a radiology note. And we have to make this
-[0:23:40] note. And we have to make this assumption that notes written about
-[0:23:41] assumption that notes written about different aspects of clinical care could
-[0:23:44] different aspects of clinical care could satisfy this conditional independence we
-[0:23:46] satisfy this conditional independence we need. Right? Uh we find in practice this
-[0:23:49] need. Right? Uh we find in practice this occurs a lot. I will again come back to
-[0:23:52] occurs a lot. I will again come back to this assumption when we talk about some
-[0:23:53] this assumption when we talk about some of our uh results and error
-[0:23:56] of our uh results and error analysis. So we have pre-treatment text.
-[0:23:59] analysis. So we have pre-treatment text. We're going to use these two instances
-[0:24:02] We're going to use these two instances of text to infer our two
-[0:24:05] of text to infer our two proxies. Um we spent a lot of time
-[0:24:08] proxies. Um we spent a lot of time thinking about given this
-[0:24:10] thinking about given this setup, do we want to use just a single
-[0:24:13] setup, do we want to use just a single large language model or do we need to do
-[0:24:15] large language model or do we need to do something different? So in our paper um
-[0:24:18] something different? So in our paper um we show that using two large language
-[0:24:20] we show that using two large language models is not strictly necessary. But
-[0:24:23] models is not strictly necessary. But what we found in our semi-ynthetic
-[0:24:25] what we found in our semi-ynthetic experiments is that the same large
-[0:24:27] experiments is that the same large language model was often making the same
-[0:24:29] language model was often making the same predictions even on two independent
-[0:24:32] predictions even on two independent pieces of text. And our hypothesis here
-[0:24:34] pieces of text. And our hypothesis here was just that uh the pre-training and
-[0:24:36] was just that uh the pre-training and the transfer learning was probably um uh
-[0:24:40] the transfer learning was probably um uh sort of contributing a lot to a lot of
-[0:24:42] sort of contributing a lot to a lot of these correlations with the the same
-[0:24:44] these correlations with the the same large language model on the two pieces
-[0:24:46] large language model on the two pieces of text making the same predictions. So
-[0:24:48] of text making the same predictions. So we found in practice this can help
-[0:24:51] we found in practice this can help satisfy the conditions of proximal
-[0:24:54] satisfy the conditions of proximal here. So to to zoom out again I'll just
-[0:24:58] here. So to to zoom out again I'll just say it one more time. we get
-[0:25:00] say it one more time. we get pre-treatment hex these two instances
-[0:25:02] pre-treatment hex these two instances two zerosot uh predictions for proxies z
-[0:25:05] two zerosot uh predictions for proxies z and w and then we go to this odds ratio
-[0:25:08] and w and then we go to this odds ratio heristic. So we found that we really
-[0:25:11] heristic. So we found that we really wanted this because there's a whole
-[0:25:13] wanted this because there's a whole bunch of reasons that even if we've
-[0:25:15] bunch of reasons that even if we've satisfied sort of the conditions up
-[0:25:18] satisfied sort of the conditions up until this point there might be bias in
-[0:25:21] until this point there might be bias in the average causal effect. So, a couple
-[0:25:24] the average causal effect. So, a couple of reasons. Our actual proxies Z and W
-[0:25:27] of reasons. Our actual proxies Z and W that are coming zero shot from our large
-[0:25:29] that are coming zero shot from our large language models, they could not be
-[0:25:31] language models, they could not be accurate. They could not there's a
-[0:25:33] accurate. They could not there's a possibility they're not actually
-[0:25:34] possibility they're not actually predictive of you. It could also be the
-[0:25:38] predictive of you. It could also be the case that despite splitting our text um
-[0:25:42] case that despite splitting our text um with this metadata and looking at these
-[0:25:44] with this metadata and looking at these different instances that they are not
-[0:25:47] different instances that they are not conditionally independent given U and C.
-[0:25:50] conditionally independent given U and C. Or it could be that in a real world
-[0:25:52] Or it could be that in a real world inference setting, C and U are just not
-[0:25:54] inference setting, C and U are just not a sufficient backdoor adjustment
-[0:25:57] a sufficient backdoor adjustment set. So all of these necessary
-[0:25:59] set. So all of these necessary assumptions are untestable in general
-[0:26:01] assumptions are untestable in general because we don't have U. So our odds
-[0:26:04] because we don't have U. So our odds ratio falsification heristic, the goal
-[0:26:07] ratio falsification heristic, the goal is to flag when analysts should actually
-[0:26:09] is to flag when analysts should actually stop because we think one of these
-[0:26:11] stop because we think one of these conditions might be violated and not
-[0:26:14] conditions might be violated and not continue on um to to go on with the
-[0:26:17] continue on um to to go on with the estimations here.
-[0:26:19] estimations here. So the odds ratio is uh for binary W and
-[0:26:24] So the odds ratio is uh for binary W and Z is a non-parametric measure of
-[0:26:26] Z is a non-parametric measure of association that ranges between zero and
-[0:26:29] association that ranges between zero and infinity. And the reason it's useful to
-[0:26:32] infinity. And the reason it's useful to use the odds ratio, it's helpful because
-[0:26:35] use the odds ratio, it's helpful because what we want, which is W and Z
-[0:26:37] what we want, which is W and Z conditionally independent given U and C,
-[0:26:40] conditionally independent given U and C, that only happens if and only if um this
-[0:26:43] that only happens if and only if um this odds ratio of W and Z conditional on UN
-[0:26:46] odds ratio of W and Z conditional on UN and C is equal to one.
-[0:26:49] and C is equal to one. So this is what we want. It's still
-[0:26:51] So this is what we want. It's still untestable because u is unobserved for
-[0:26:54] untestable because u is unobserved for us. We don't have any access to it. So
-[0:26:57] us. We don't have any access to it. So our heristic instead tries to look at
-[0:27:01] our heristic instead tries to look at something that is observable which is
-[0:27:03] something that is observable which is this odds ratio of W and Z given only C
-[0:27:07] this odds ratio of W and Z given only C not C and U. So I'll talk about the
-[0:27:10] not C and U. So I'll talk about the upper bound and then I'll go into a
-[0:27:12] upper bound and then I'll go into a little bit more detail on this lower
-[0:27:13] little bit more detail on this lower bound. But the upper bound we make a uh
-[0:27:18] bound. But the upper bound we make a uh we actually set this and it's domain
-[0:27:20] we actually set this and it's domain specific and it's the max association
-[0:27:23] specific and it's the max association through a single path u and we set in
-[0:27:26] through a single path u and we set in our experiments a generous um upper
-[0:27:28] our experiments a generous um upper bound of two.
-[0:27:31] bound of two. On the lower bound side, one way of
-[0:27:34] On the lower bound side, one way of thinking whether Z and W are actually
-[0:27:36] thinking whether Z and W are actually good predictions of U is to require this
-[0:27:39] good predictions of U is to require this that this conditional probability of W
-[0:27:42] that this conditional probability of W or Z being the same value as U. So
-[0:27:44] or Z being the same value as U. So probability of W equals 1 conditional on
-[0:27:47] probability of W equals 1 conditional on W or on U equals 1 and C. We want that
-[0:27:51] W or on U equals 1 and C. We want that to be greater than the conditional
-[0:27:52] to be greater than the conditional probability of them being different
-[0:27:54] probability of them being different values. So greater than probability of W
-[0:27:56] values. So greater than probability of W equals 1 given U equals 0 and C.
-[0:27:59] equals 1 given U equals 0 and C. And so a graphical way to look at this
-[0:28:02] And so a graphical way to look at this is these signed edges with this little
-[0:28:04] is these signed edges with this little plus between U and Z and U and W. And
-[0:28:07] plus between U and Z and U and W. And here in the ST on the right, I'm
-[0:28:09] here in the ST on the right, I'm dropping text intermediates so that you
-[0:28:11] dropping text intermediates so that you can just look at it like that. If this
-[0:28:14] can just look at it like that. If this is the case, right, that we have these
-[0:28:17] is the case, right, that we have these um these signed edges and these good
-[0:28:20] um these signed edges and these good predictors of U from Z and
-[0:28:22] predictors of U from Z and W, we have that this odds ratio of W, C
-[0:28:26] W, we have that this odds ratio of W, C given W given Z and C that does not
-[0:28:29] given W given Z and C that does not condition on U is an overestimate for
-[0:28:31] condition on U is an overestimate for the one that does have U in it. So since
-[0:28:34] the one that does have U in it. So since the odds ratio of W given Z, U and C
-[0:28:38] the odds ratio of W given Z, U and C should be one, this gives us our final
-[0:28:40] should be one, this gives us our final bounds that what we can actually observe
-[0:28:42] bounds that what we can actually observe which is this observable um gamma of WZ.
-[0:28:46] which is this observable um gamma of WZ. C we want to be between one and the
-[0:28:48] C we want to be between one and the gamma high that we set.
-[0:28:52] gamma high that we set. If this condition holds, if if our
-[0:28:55] If this condition holds, if if our heristic is passed, we tell the analyst
-[0:28:58] heristic is passed, we tell the analyst they should go on and actually estimate
-[0:29:01] they should go on and actually estimate um uh the the ACE. But if not, we advise
-[0:29:05] um uh the the ACE. But if not, we advise stopping there uh when the odds ratio
-[0:29:08] stopping there uh when the odds ratio heristic
+[0:20:07] input to these pre-trained and
+[0:20:09] instruction tuned large language models
+[0:20:11] and they're going to generate a text
+[0:20:13] output. So um flan or mo might generate
+[0:20:17] something like yes. And then we have a
+[0:20:20] deterministic answer extraction. So if
+[0:20:23] the the word yes is in the output, we
+[0:20:26] assign the proxy w to be one. Otherwise,
+[0:20:29] we do w equals z. And the same is for z
+[0:20:32] um or uh if we're looking at z
+[0:20:35] instead. So that's the middle chunk of
+[0:20:38] this pipeline. How do we actually do
+[0:20:40] this zerosot predictions from large
+[0:20:43] language models? And the key here is
+[0:20:44] that we're doing all of this transfer
+[0:20:46] learning so that even though we don't
+[0:20:48] have observations of you itself, we can
+[0:20:51] still get some pretty decent
+[0:20:53] predictions. I'll come back to how
+[0:20:54] decent they are when I get to the actual
+[0:20:56] results here. But this is this is a key
+[0:20:59] component is these large language
+[0:21:01] models. But now I actually want to go
+[0:21:03] move back to some of these early parts
+[0:21:05] of the pipeline to explain why we need
+[0:21:08] pre-treatment text, why we need to split
+[0:21:10] it up into these two instances and use
+[0:21:13] two different language models
+[0:21:15] here. So first pre-treatment text. So
+[0:21:19] here I'm showing a DAG on the right in
+[0:21:21] which there's this edge from Y the
+[0:21:24] outcome to T our text. And if we have
+[0:21:28] this right where we have this uh actual
+[0:21:31] post treatment text and we try to infer
+[0:21:34] W and Z using zeroot models they're
+[0:21:37] going to violate either P2 or P3 our
+[0:21:41] proximal identification uh assumptions
+[0:21:44] or both. So starting with P3, what we
+[0:21:48] see is that there's a path from Y to T
+[0:21:51] to Z, which means that Z is not
+[0:21:53] conditionally independent of Y, which
+[0:21:55] would violate this P3. Um P2 similarly,
+[0:21:59] we have a path from A to Y to T to W. So
+[0:22:03] W is not conditionally independent of A.
+[0:22:06] So if we use post treatment tax, this
+[0:22:08] would give bias when plugged into the
+[0:22:10] proximal G formula. So part of our
+[0:22:13] method is just simplifying this and
+[0:22:15] using um using timestamps to just use
+[0:22:18] pre-treatment
+[0:22:19] text. The second thing we contemplated
+[0:22:22] is okay why do we need these multiple
+[0:22:25] instances of text? Why do we need two
+[0:22:27] instances for every individual?
+[0:22:30] So now on the right I'm showing a DAG
+[0:22:33] where we're trying to infer W and Z with
+[0:22:37] zero shot models on the same instance of
+[0:22:40] pre-treatment text. And what we see here
+[0:22:43] is that u P1 does not hold because we
+[0:22:47] have um T pre with an edge to Z and T
+[0:22:51] pre with an edge to W which means that W
+[0:22:54] is not conditionally independent of Z
+[0:22:56] given U and C. So we need this
+[0:22:59] conditional independence of the proxies
+[0:23:01] and if we don't have this this would
+[0:23:03] also give bias when plugged into the
+[0:23:05] proximal G
+[0:23:07] formula. What this means in practice so
+[0:23:10] what we did with mimic mimic and the
+[0:23:11] clinical notes and we think might be
+[0:23:13] applicable for other settings as well is
+[0:23:15] that we looked at for each pair of note
+[0:23:19] categories that we um are examining. So
+[0:23:22] for example, we have metadata that says
+[0:23:24] this is text that comes from a nurse or
+[0:23:28] this is text that comes from a
+[0:23:29] radiologist. We subset to patients who
+[0:23:31] have both those note categories for a
+[0:23:33] single visit. So each patient would have
+[0:23:35] both a nursing note and a radiology
+[0:23:37] note. And we have to make this
+[0:23:40] assumption that notes written about
+[0:23:41] different aspects of clinical care could
+[0:23:44] satisfy this conditional independence we
+[0:23:46] need. Right? Uh we find in practice this
+[0:23:49] occurs a lot. I will again come back to
+[0:23:52] this assumption when we talk about some
+[0:23:53] of our uh results and error
+[0:23:56] analysis. So we have pre-treatment text.
+[0:23:59] We're going to use these two instances
+[0:24:02] of text to infer our two
+[0:24:05] proxies. Um we spent a lot of time
+[0:24:08] thinking about given this
+[0:24:10] setup, do we want to use just a single
+[0:24:13] large language model or do we need to do
+[0:24:15] something different? So in our paper um
+[0:24:18] we show that using two large language
+[0:24:20] models is not strictly necessary. But
+[0:24:23] what we found in our semi-ynthetic
+[0:24:25] experiments is that the same large
+[0:24:27] language model was often making the same
+[0:24:29] predictions even on two independent
+[0:24:32] pieces of text. And our hypothesis here
+[0:24:34] was just that uh the pre-training and
+[0:24:36] the transfer learning was probably um uh
+[0:24:40] sort of contributing a lot to a lot of
+[0:24:42] these correlations with the the same
+[0:24:44] large language model on the two pieces
+[0:24:46] of text making the same predictions. So
+[0:24:48] we found in practice this can help
+[0:24:51] satisfy the conditions of proximal
+[0:24:54] here. So to to zoom out again I'll just
+[0:24:58] say it one more time. we get
+[0:25:00] pre-treatment hex these two instances
+[0:25:02] two zerosot uh predictions for proxies z
+[0:25:05] and w and then we go to this odds ratio
+[0:25:08] heristic. So we found that we really
+[0:25:11] wanted this because there's a whole
+[0:25:13] bunch of reasons that even if we've
+[0:25:15] satisfied sort of the conditions up
+[0:25:18] until this point there might be bias in
+[0:25:21] the average causal effect. So, a couple
+[0:25:24] of reasons. Our actual proxies Z and W
+[0:25:27] that are coming zero shot from our large
+[0:25:29] language models, they could not be
+[0:25:31] accurate. They could not there's a
+[0:25:33] possibility they're not actually
+[0:25:34] predictive of you. It could also be the
+[0:25:38] case that despite splitting our text um
+[0:25:42] with this metadata and looking at these
+[0:25:44] different instances that they are not
+[0:25:47] conditionally independent given U and C.
+[0:25:50] Or it could be that in a real world
+[0:25:52] inference setting, C and U are just not
+[0:25:54] a sufficient backdoor adjustment
+[0:25:57] set. So all of these necessary
+[0:25:59] assumptions are untestable in general
+[0:26:01] because we don't have U. So our odds
+[0:26:04] ratio falsification heristic, the goal
+[0:26:07] is to flag when analysts should actually
+[0:26:09] stop because we think one of these
+[0:26:11] conditions might be violated and not
+[0:26:14] continue on um to to go on with the
+[0:26:17] estimations here.
+[0:26:19] So the odds ratio is uh for binary W and
+[0:26:24] Z is a non-parametric measure of
+[0:26:26] association that ranges between zero and
+[0:26:29] infinity. And the reason it's useful to
+[0:26:32] use the odds ratio, it's helpful because
+[0:26:35] what we want, which is W and Z
+[0:26:37] conditionally independent given U and C,
+[0:26:40] that only happens if and only if um this
+[0:26:43] odds ratio of W and Z conditional on UN
+[0:26:46] and C is equal to one.
+[0:26:49] So this is what we want. It's still
+[0:26:51] untestable because u is unobserved for
+[0:26:54] us. We don't have any access to it. So
+[0:26:57] our heristic instead tries to look at
+[0:27:01] something that is observable which is
+[0:27:03] this odds ratio of W and Z given only C
+[0:27:07] not C and U. So I'll talk about the
+[0:27:10] upper bound and then I'll go into a
+[0:27:12] little bit more detail on this lower
+[0:27:13] bound. But the upper bound we make a uh
+[0:27:18] we actually set this and it's domain
+[0:27:20] specific and it's the max association
+[0:27:23] through a single path u and we set in
+[0:27:26] our experiments a generous um upper
+[0:27:28] bound of two.
+[0:27:31] On the lower bound side, one way of
+[0:27:34] thinking whether Z and W are actually
+[0:27:36] good predictions of U is to require this
+[0:27:39] that this conditional probability of W
+[0:27:42] or Z being the same value as U. So
+[0:27:44] probability of W equals 1 conditional on
+[0:27:47] W or on U equals 1 and C. We want that
+[0:27:51] to be greater than the conditional
+[0:27:52] probability of them being different
+[0:27:54] values. So greater than probability of W
+[0:27:56] equals 1 given U equals 0 and C.
+[0:27:59] And so a graphical way to look at this
+[0:28:02] is these signed edges with this little
+[0:28:04] plus between U and Z and U and W. And
+[0:28:07] here in the ST on the right, I'm
+[0:28:09] dropping text intermediates so that you
+[0:28:11] can just look at it like that. If this
+[0:28:14] is the case, right, that we have these
+[0:28:17] um these signed edges and these good
+[0:28:20] predictors of U from Z and
+[0:28:22] W, we have that this odds ratio of W, C
+[0:28:26] given W given Z and C that does not
+[0:28:29] condition on U is an overestimate for
+[0:28:31] the one that does have U in it. So since
+[0:28:34] the odds ratio of W given Z, U and C
+[0:28:38] should be one, this gives us our final
+[0:28:40] bounds that what we can actually observe
+[0:28:42] which is this observable um gamma of WZ.
+[0:28:46] C we want to be between one and the
+[0:28:48] gamma high that we set.
+[0:28:52] If this condition holds, if if our
+[0:28:55] heristic is passed, we tell the analyst
+[0:28:58] they should go on and actually estimate
+[0:29:01] um uh the the ACE. But if not, we advise
+[0:29:05] stopping there uh when the odds ratio
 [0:29:09] heristic fails. So last piece is estimating the
-[0:29:13] fails. So last piece is estimating the proximal G formula given everything
-[0:29:15] proximal G formula given everything we've done so far. Um I already
-[0:29:18] we've done so far. Um I already mentioned this general proximal G
-[0:29:20] mentioned this general proximal G formula. What we actually use for our
-[0:29:22] formula. What we actually use for our experiments is a two-stage linear
-[0:29:25] experiments is a two-stage linear regression estimator for
-[0:29:27] regression estimator for proximal. And what this allows us to do
-[0:29:29] proximal. And what this allows us to do is focus on the complications that are
-[0:29:32] is focus on the complications that are coming from text and these large
-[0:29:33] coming from text and these large language models rather than something
-[0:29:35] language models rather than something that would be um coming from the
-[0:29:38] that would be um coming from the nonlinearity. Future work would be to
-[0:29:40] nonlinearity. Future work would be to extend all of this um and make sure
-[0:29:43] extend all of this um and make sure everything uh works in a nonlinear
-[0:29:45] everything uh works in a nonlinear proximal estimator setting.
-[0:29:48] proximal estimator setting. So um some results highlights. So we
-[0:29:51] So um some results highlights. So we have um many settings in our paper but
-[0:29:54] have um many settings in our paper but what I want to highlight here is um one
-[0:29:58] what I want to highlight here is um one where the unobserved confounding
-[0:30:00] where the unobserved confounding variable u is ASIS and we're looking at
-[0:30:04] variable u is ASIS and we're looking at um instances of our text our
-[0:30:07] um instances of our text our pre-treatment text that comes from echo
-[0:30:09] pre-treatment text that comes from echo cardiograms and radiology notes. And
-[0:30:12] cardiograms and radiology notes. And what I'm showing on the y- axis is our
-[0:30:14] what I'm showing on the y- axis is our estimated ACE after we've gone through
-[0:30:16] estimated ACE after we've gone through our whole pipeline. And then I'm going
-[0:30:17] our whole pipeline. And then I'm going to show the three different methods here
-[0:30:20] to show the three different methods here on the x axis and their estimates. So
-[0:30:23] on the x axis and their estimates. So the first one is what if we just assume
-[0:30:27] the first one is what if we just assume uh w's fine w which we take one instance
-[0:30:31] uh w's fine w which we take one instance of pre-treatment text and send it
-[0:30:33] of pre-treatment text and send it through a large language model. Let's
-[0:30:35] through a large language model. Let's assume it's not a noisy proxy and let's
-[0:30:37] assume it's not a noisy proxy and let's just plug it directly into back door.
-[0:30:40] just plug it directly into back door. And what we find is what we would expect
-[0:30:42] And what we find is what we would expect that there's a large bias of just using
-[0:30:44] that there's a large bias of just using a noisy proxy as if it wasn't a proxy
-[0:30:47] a noisy proxy as if it wasn't a proxy and just a confounder directly in back
-[0:30:49] and just a confounder directly in back door. So here the true ACE is this
-[0:30:54] door. So here the true ACE is this dashed green line 1.3 and the estimated
-[0:30:57] dashed green line 1.3 and the estimated ACE here is 1.5 and I'm also showing 95%
-[0:31:00] ACE here is 1.5 and I'm also showing 95% confidence intervals from bootstrap
-[0:31:04] confidence intervals from bootstrap resampling. Um the other two columns. So
-[0:31:07] resampling. Um the other two columns. So the next column I'm going to show is if
-[0:31:09] the next column I'm going to show is if we just use a single large language
-[0:31:11] we just use a single large language model. So here we're just using flan
-[0:31:14] model. So here we're just using flan versus if we use two large language
-[0:31:16] versus if we use two large language models. So um if we're using flan uh and
-[0:31:19] models. So um if we're using flan uh and then mo uh for uh predicting z and
-[0:31:24] then mo uh for uh predicting z and w and in the color so in red I'm showing
-[0:31:28] w and in the color so in red I'm showing that it failed our odds ratio
-[0:31:30] that it failed our odds ratio heruristic. So if this was truly
-[0:31:32] heruristic. So if this was truly inference, we would advise the analysts
-[0:31:34] inference, we would advise the analysts to stop before they even got to these
-[0:31:36] to stop before they even got to these estimates. And uh in blue, we're showing
-[0:31:39] estimates. And uh in blue, we're showing one that passed our odds ratio heristic.
-[0:31:42] one that passed our odds ratio heristic. So what this shows us, the takeaways
-[0:31:44] So what this shows us, the takeaways here are um you know the using the one
-[0:31:48] here are um you know the using the one large language model, we did have bias,
-[0:31:50] large language model, we did have bias, but luckily the odds ratio heristic
-[0:31:53] but luckily the odds ratio heristic would have stopped an analyst before
-[0:31:54] would have stopped an analyst before they got to this stage and had a biased
-[0:31:57] they got to this stage and had a biased estimate.
+[0:29:13] proximal G formula given everything
+[0:29:15] we've done so far. Um I already
+[0:29:18] mentioned this general proximal G
+[0:29:20] formula. What we actually use for our
+[0:29:22] experiments is a two-stage linear
+[0:29:25] regression estimator for
+[0:29:27] proximal. And what this allows us to do
+[0:29:29] is focus on the complications that are
+[0:29:32] coming from text and these large
+[0:29:33] language models rather than something
+[0:29:35] that would be um coming from the
+[0:29:38] nonlinearity. Future work would be to
+[0:29:40] extend all of this um and make sure
+[0:29:43] everything uh works in a nonlinear
+[0:29:45] proximal estimator setting.
+[0:29:48] So um some results highlights. So we
+[0:29:51] have um many settings in our paper but
+[0:29:54] what I want to highlight here is um one
+[0:29:58] where the unobserved confounding
+[0:30:00] variable u is ASIS and we're looking at
+[0:30:04] um instances of our text our
+[0:30:07] pre-treatment text that comes from echo
+[0:30:09] cardiograms and radiology notes. And
+[0:30:12] what I'm showing on the y- axis is our
+[0:30:14] estimated ACE after we've gone through
+[0:30:16] our whole pipeline. And then I'm going
+[0:30:17] to show the three different methods here
+[0:30:20] on the x axis and their estimates. So
+[0:30:23] the first one is what if we just assume
+[0:30:27] uh w's fine w which we take one instance
+[0:30:31] of pre-treatment text and send it
+[0:30:33] through a large language model. Let's
+[0:30:35] assume it's not a noisy proxy and let's
+[0:30:37] just plug it directly into back door.
+[0:30:40] And what we find is what we would expect
+[0:30:42] that there's a large bias of just using
+[0:30:44] a noisy proxy as if it wasn't a proxy
+[0:30:47] and just a confounder directly in back
+[0:30:49] door. So here the true ACE is this
+[0:30:54] dashed green line 1.3 and the estimated
+[0:30:57] ACE here is 1.5 and I'm also showing 95%
+[0:31:00] confidence intervals from bootstrap
+[0:31:04] resampling. Um the other two columns. So
+[0:31:07] the next column I'm going to show is if
+[0:31:09] we just use a single large language
+[0:31:11] model. So here we're just using flan
+[0:31:14] versus if we use two large language
+[0:31:16] models. So um if we're using flan uh and
+[0:31:19] then mo uh for uh predicting z and
+[0:31:24] w and in the color so in red I'm showing
+[0:31:28] that it failed our odds ratio
+[0:31:30] heruristic. So if this was truly
+[0:31:32] inference, we would advise the analysts
+[0:31:34] to stop before they even got to these
+[0:31:36] estimates. And uh in blue, we're showing
+[0:31:39] one that passed our odds ratio heristic.
+[0:31:42] So what this shows us, the takeaways
+[0:31:44] here are um you know the using the one
+[0:31:48] large language model, we did have bias,
+[0:31:50] but luckily the odds ratio heristic
+[0:31:53] would have stopped an analyst before
+[0:31:54] they got to this stage and had a biased
 [0:31:58] estimate. uh the in practice, right, there's value
-[0:32:01] uh the in practice, right, there's value in having these two zeroot models and
-[0:32:04] in having these two zeroot models and that our odds ratio heristic does pass
-[0:32:07] that our odds ratio heristic does pass when we um have a a pretty unbiased
-[0:32:11] when we um have a a pretty unbiased estimate
+[0:32:01] in having these two zeroot models and
+[0:32:04] that our odds ratio heristic does pass
+[0:32:07] when we um have a a pretty unbiased
 [0:32:12] estimate here. So this is the setting that worked
-[0:32:15] here. So this is the setting that worked and worked well. Um but there are other
-[0:32:18] and worked well. Um but there are other settings where the odds ratio heristic
-[0:32:21] settings where the odds ratio heristic always failed and rightfully failed
-[0:32:23] always failed and rightfully failed meaning we had estimates that were
-[0:32:25] meaning we had estimates that were biased. So what I'm showing and
-[0:32:28] biased. So what I'm showing and highlighting here is the left is the
-[0:32:30] highlighting here is the left is the same as what we had but the right we
-[0:32:32] same as what we had but the right we have the same U the unobserved
-[0:32:35] have the same U the unobserved confounding variable ASIS but we have
-[0:32:37] confounding variable ASIS but we have different note categories. So remember
-[0:32:40] different note categories. So remember in our experimental setup we subset to
-[0:32:43] in our experimental setup we subset to patients that do have these same two
-[0:32:45] patients that do have these same two note categories. So these are actually
-[0:32:47] note categories. So these are actually two different subsets of our data as
-[0:32:49] two different subsets of our data as well. So on the right we're looking at
-[0:32:52] well. So on the right we're looking at um radiology and nursing here.
+[0:32:15] and worked well. Um but there are other
+[0:32:18] settings where the odds ratio heristic
+[0:32:21] always failed and rightfully failed
+[0:32:23] meaning we had estimates that were
+[0:32:25] biased. So what I'm showing and
+[0:32:28] highlighting here is the left is the
+[0:32:30] same as what we had but the right we
+[0:32:32] have the same U the unobserved
+[0:32:35] confounding variable ASIS but we have
+[0:32:37] different note categories. So remember
+[0:32:40] in our experimental setup we subset to
+[0:32:43] patients that do have these same two
+[0:32:45] note categories. So these are actually
+[0:32:47] two different subsets of our data as
+[0:32:49] well. So on the right we're looking at
+[0:32:52] um radiology and nursing here.
 [0:33:01] Um, if I go back to these three pieces that might result in the ACE bias,
-[0:33:04] that might result in the ACE bias, right? Is Z and W not actually
-[0:33:06] right? Is Z and W not actually predictive of you? Are the pieces of
-[0:33:08] predictive of you? Are the pieces of text not conditionally independent or CU
-[0:33:11] text not conditionally independent or CU not a sufficient backdoor adjustment
-[0:33:12] not a sufficient backdoor adjustment set? We wanted to dig into some of this
-[0:33:15] set? We wanted to dig into some of this error analysis by actually able to look
-[0:33:18] error analysis by actually able to look at the oracle. So here in our setup
-[0:33:21] at the oracle. So here in our setup because it's semiynthetic we know what U
-[0:33:24] because it's semiynthetic we know what U is and we can actually evaluate these.
-[0:33:27] is and we can actually evaluate these. In a real world inference setting we
-[0:33:29] In a real world inference setting we wouldn't know you and uh we would have
-[0:33:32] wouldn't know you and uh we would have to rely on the odds ratio heristic. But
-[0:33:35] to rely on the odds ratio heristic. But just to to give you a little coloring of
-[0:33:37] just to to give you a little coloring of what's happening in our semiynthetic
-[0:33:39] what's happening in our semiynthetic setup. So first of all, we know that C
-[0:33:42] setup. So first of all, we know that C and U are a sufficient backdoor
-[0:33:44] and U are a sufficient backdoor adjustment set because we generated that
-[0:33:46] adjustment set because we generated that in the the synthetic part of this
-[0:33:49] in the the synthetic part of this semiynthetic DGP. So we tried to isolate
-[0:33:52] semiynthetic DGP. So we tried to isolate whether it was one or two that was
-[0:33:53] whether it was one or two that was really resulting in this this biased
-[0:33:56] really resulting in this this biased aced estimate. So peeking at the oracle,
-[0:33:59] aced estimate. So peeking at the oracle, what I'm showing here is that here's the
-[0:34:02] what I'm showing here is that here's the accuracy when we actually know you and
-[0:34:04] accuracy when we actually know you and are are peing at you given the proxies
-[0:34:08] are are peing at you given the proxies W, which was generated zero shot from FL
-[0:34:10] W, which was generated zero shot from FL and large language model on radiology
-[0:34:12] and large language model on radiology notes and Z from Almo on nursing notes.
-[0:34:16] notes and Z from Almo on nursing notes. So notice they're not doing great,
-[0:34:17] So notice they're not doing great, right? The baseline, this is somewhat
-[0:34:19] right? The baseline, this is somewhat class imbalance. The majority class
-[0:34:21] class imbalance. The majority class accuracy is 73. uh these two large
-[0:34:24] accuracy is 73. uh these two large language models are doing slightly
-[0:34:26] language models are doing slightly better than majority class 78 and 75. So
-[0:34:30] better than majority class 78 and 75. So there is a little bit of predictive
-[0:34:31] there is a little bit of predictive signal here. It's not great and that's
-[0:34:33] signal here. It's not great and that's why the confidence intervals are likely
-[0:34:35] why the confidence intervals are likely as as as large as they are. Um but we
-[0:34:38] as as as large as they are. Um but we didn't think this was the primary
-[0:34:40] didn't think this was the primary culprit for why we were seeing um this
-[0:34:43] culprit for why we were seeing um this this very biased ACE estimate. So
-[0:34:46] this very biased ACE estimate. So instead, what we did was we did a whole
-[0:34:48] instead, what we did was we did a whole bunch of qualitative text analysis on
-[0:34:51] bunch of qualitative text analysis on this subset of text and we dug in and we
-[0:34:54] this subset of text and we dug in and we found that in this subset there were a
-[0:34:56] found that in this subset there were a bunch of patients that had lung cancer.
-[0:34:58] bunch of patients that had lung cancer. So this was a variable that was not in
-[0:35:00] So this was a variable that was not in C, our confounding variables, and it was
-[0:35:02] C, our confounding variables, and it was also not in U, but it really influenced
-[0:35:05] also not in U, but it really influenced the descriptions in both texts. So what
-[0:35:08] the descriptions in both texts. So what we found by doing this oracle error
-[0:35:10] we found by doing this oracle error analysis was that um we didn't these two
-[0:35:13] analysis was that um we didn't these two pieces of text were not conditionally
-[0:35:15] pieces of text were not conditionally independent despite our best efforts to
-[0:35:18] independent despite our best efforts to uh separate them uh with the metadata
-[0:35:21] uh separate them uh with the metadata and having the two instances. Luckily in
-[0:35:24] and having the two instances. Luckily in practice this is why our odds ratio
-[0:35:26] practice this is why our odds ratio heristic kind of goes along with our
-[0:35:28] heristic kind of goes along with our method and would hopefully stop an
-[0:35:30] method and would hopefully stop an analyst before they got to this point.
-[0:35:33] analyst before they got to this point. So I want to jump up a a little bit
-[0:35:36] So I want to jump up a a little bit beyond just results and our method and
-[0:35:38] beyond just results and our method and talk a little bit about sort of large
-[0:35:41] talk a little bit about sort of large language models in causal inference with
-[0:35:44] language models in causal inference with uh when we're trying to deal with text
-[0:35:46] uh when we're trying to deal with text and they're extremely helpful here but
-[0:35:48] and they're extremely helpful here but they're not sufficient. So what I just
-[0:35:51] they're not sufficient. So what I just showed you with that error analysis,
-[0:35:52] showed you with that error analysis, right, is that both this conditional
-[0:35:55] right, is that both this conditional independence uh of text that we need as
-[0:35:59] independence uh of text that we need as well as no unmeasured confounding in the
-[0:36:02] well as no unmeasured confounding in the real world. These are untestable
-[0:36:04] real world. These are untestable assumptions. They're difficult to
-[0:36:05] assumptions. They're difficult to satisfy and they often require a lot of
-[0:36:07] satisfy and they often require a lot of domain expertise to to be able to um to
-[0:36:11] domain expertise to to be able to um to know. So there's still a huge need for
-[0:36:15] know. So there's still a huge need for all this theory on causal identification
-[0:36:17] all this theory on causal identification estimation and especially for the
-[0:36:20] estimation and especially for the applied folks sensitivity analysis. So
-[0:36:22] applied folks sensitivity analysis. So our odds ratio heristic was was pretty
-[0:36:24] our odds ratio heristic was was pretty key on flagging when to stop or
-[0:36:27] key on flagging when to stop or proceed. On the more optimistic side,
-[0:36:29] proceed. On the more optimistic side, right, these large language models were
-[0:36:31] right, these large language models were really helpful. The fact that we can do
-[0:36:34] really helpful. The fact that we can do this kind of transfer learning, they
-[0:36:36] this kind of transfer learning, they have somewhat decent performance even
-[0:36:39] have somewhat decent performance even with any without any supervised
-[0:36:41] with any without any supervised examples, right, is is really essential
-[0:36:44] examples, right, is is really essential in this design. So it saves us a lot of
-[0:36:46] in this design. So it saves us a lot of cost with the labor of of human uh human
-[0:36:49] cost with the labor of of human uh human labeling um text and um and are really
-[0:36:54] labeling um text and um and are really uh necessary or helpful here. So
-[0:36:57] uh necessary or helpful here. So improved performance of the large
-[0:36:59] improved performance of the large language models as NLP practitioners and
-[0:37:02] language models as NLP practitioners and other folks continue to make these
-[0:37:04] other folks continue to make these better and better. Right? This is a sub
-[0:37:06] better and better. Right? This is a sub routine where we could plug in better
-[0:37:08] routine where we could plug in better large language models with better prompt
-[0:37:10] large language models with better prompt engineering, better answer extraction,
-[0:37:12] engineering, better answer extraction, everything and actually narrow hopefully
-[0:37:14] everything and actually narrow hopefully the confidence intervals of the ACE
-[0:37:16] the confidence intervals of the ACE estimates here.
-[0:37:19] estimates here. So, uh, future work, uh, we went through
-[0:37:23] So, uh, future work, uh, we went through all our experiments with electronic
-[0:37:25] all our experiments with electronic health records and clinical text, but
-[0:37:28] health records and clinical text, but there's other types of text data that
-[0:37:30] there's other types of text data that also might be applicable to this this
-[0:37:32] also might be applicable to this this method. So, political speeches, social
-[0:37:34] method. So, political speeches, social media posts, a whole bunch of those
-[0:37:37] media posts, a whole bunch of those settings. Um, we'd also like to look to
-[0:37:40] settings. Um, we'd also like to look to better datadriven ways of determining
-[0:37:42] better datadriven ways of determining the upper bound for the odds ratio.
-[0:37:44] the upper bound for the odds ratio. right now we just have a domain expert
-[0:37:46] right now we just have a domain expert set
+[0:33:04] right? Is Z and W not actually
+[0:33:06] predictive of you? Are the pieces of
+[0:33:08] text not conditionally independent or CU
+[0:33:11] not a sufficient backdoor adjustment
+[0:33:12] set? We wanted to dig into some of this
+[0:33:15] error analysis by actually able to look
+[0:33:18] at the oracle. So here in our setup
+[0:33:21] because it's semiynthetic we know what U
+[0:33:24] is and we can actually evaluate these.
+[0:33:27] In a real world inference setting we
+[0:33:29] wouldn't know you and uh we would have
+[0:33:32] to rely on the odds ratio heristic. But
+[0:33:35] just to to give you a little coloring of
+[0:33:37] what's happening in our semiynthetic
+[0:33:39] setup. So first of all, we know that C
+[0:33:42] and U are a sufficient backdoor
+[0:33:44] adjustment set because we generated that
+[0:33:46] in the the synthetic part of this
+[0:33:49] semiynthetic DGP. So we tried to isolate
+[0:33:52] whether it was one or two that was
+[0:33:53] really resulting in this this biased
+[0:33:56] aced estimate. So peeking at the oracle,
+[0:33:59] what I'm showing here is that here's the
+[0:34:02] accuracy when we actually know you and
+[0:34:04] are are peing at you given the proxies
+[0:34:08] W, which was generated zero shot from FL
+[0:34:10] and large language model on radiology
+[0:34:12] notes and Z from Almo on nursing notes.
+[0:34:16] So notice they're not doing great,
+[0:34:17] right? The baseline, this is somewhat
+[0:34:19] class imbalance. The majority class
+[0:34:21] accuracy is 73. uh these two large
+[0:34:24] language models are doing slightly
+[0:34:26] better than majority class 78 and 75. So
+[0:34:30] there is a little bit of predictive
+[0:34:31] signal here. It's not great and that's
+[0:34:33] why the confidence intervals are likely
+[0:34:35] as as as large as they are. Um but we
+[0:34:38] didn't think this was the primary
+[0:34:40] culprit for why we were seeing um this
+[0:34:43] this very biased ACE estimate. So
+[0:34:46] instead, what we did was we did a whole
+[0:34:48] bunch of qualitative text analysis on
+[0:34:51] this subset of text and we dug in and we
+[0:34:54] found that in this subset there were a
+[0:34:56] bunch of patients that had lung cancer.
+[0:34:58] So this was a variable that was not in
+[0:35:00] C, our confounding variables, and it was
+[0:35:02] also not in U, but it really influenced
+[0:35:05] the descriptions in both texts. So what
+[0:35:08] we found by doing this oracle error
+[0:35:10] analysis was that um we didn't these two
+[0:35:13] pieces of text were not conditionally
+[0:35:15] independent despite our best efforts to
+[0:35:18] uh separate them uh with the metadata
+[0:35:21] and having the two instances. Luckily in
+[0:35:24] practice this is why our odds ratio
+[0:35:26] heristic kind of goes along with our
+[0:35:28] method and would hopefully stop an
+[0:35:30] analyst before they got to this point.
+[0:35:33] So I want to jump up a a little bit
+[0:35:36] beyond just results and our method and
+[0:35:38] talk a little bit about sort of large
+[0:35:41] language models in causal inference with
+[0:35:44] uh when we're trying to deal with text
+[0:35:46] and they're extremely helpful here but
+[0:35:48] they're not sufficient. So what I just
+[0:35:51] showed you with that error analysis,
+[0:35:52] right, is that both this conditional
+[0:35:55] independence uh of text that we need as
+[0:35:59] well as no unmeasured confounding in the
+[0:36:02] real world. These are untestable
+[0:36:04] assumptions. They're difficult to
+[0:36:05] satisfy and they often require a lot of
+[0:36:07] domain expertise to to be able to um to
+[0:36:11] know. So there's still a huge need for
+[0:36:15] all this theory on causal identification
+[0:36:17] estimation and especially for the
+[0:36:20] applied folks sensitivity analysis. So
+[0:36:22] our odds ratio heristic was was pretty
+[0:36:24] key on flagging when to stop or
+[0:36:27] proceed. On the more optimistic side,
+[0:36:29] right, these large language models were
+[0:36:31] really helpful. The fact that we can do
+[0:36:34] this kind of transfer learning, they
+[0:36:36] have somewhat decent performance even
+[0:36:39] with any without any supervised
+[0:36:41] examples, right, is is really essential
+[0:36:44] in this design. So it saves us a lot of
+[0:36:46] cost with the labor of of human uh human
+[0:36:49] labeling um text and um and are really
+[0:36:54] uh necessary or helpful here. So
+[0:36:57] improved performance of the large
+[0:36:59] language models as NLP practitioners and
+[0:37:02] other folks continue to make these
+[0:37:04] better and better. Right? This is a sub
+[0:37:06] routine where we could plug in better
+[0:37:08] large language models with better prompt
+[0:37:10] engineering, better answer extraction,
+[0:37:12] everything and actually narrow hopefully
+[0:37:14] the confidence intervals of the ACE
+[0:37:16] estimates here.
+[0:37:19] So, uh, future work, uh, we went through
+[0:37:23] all our experiments with electronic
+[0:37:25] health records and clinical text, but
+[0:37:28] there's other types of text data that
+[0:37:30] also might be applicable to this this
+[0:37:32] method. So, political speeches, social
+[0:37:34] media posts, a whole bunch of those
+[0:37:37] settings. Um, we'd also like to look to
+[0:37:40] better datadriven ways of determining
+[0:37:42] the upper bound for the odds ratio.
+[0:37:44] right now we just have a domain expert
 [0:37:47] set it also looking to nonlinear estimators
-[0:37:50] it also looking to nonlinear estimators again we had those linearity assumptions
-[0:37:52] again we had those linearity assumptions and I think there could be a lot of
-[0:37:54] and I think there could be a lot of extensions into the nonlinear setting
-[0:37:57] extensions into the nonlinear setting and then finally I think um there's a a
-[0:38:01] and then finally I think um there's a a rich place for going beyond just this
-[0:38:03] rich place for going beyond just this unsupervised restriction so our
-[0:38:06] unsupervised restriction so our restriction was we had no observations
-[0:38:08] restriction was we had no observations of you in the real world typically when
-[0:38:11] of you in the real world typically when we are doing human labeling and have a
-[0:38:13] we are doing human labeling and have a partial subset of you that uh that we
-[0:38:16] partial subset of you that uh that we have labels for. These might have
-[0:38:19] have labels for. These might have uncertainty and might sort of be proxies
-[0:38:21] uncertainty and might sort of be proxies of proxies themselves. Um so I think
-[0:38:24] of proxies themselves. Um so I think there's a lot of rich work that could be
-[0:38:25] there's a lot of rich work that could be done there as
-[0:38:27] done there as well. Uh this was just an overview. So
-[0:38:30] well. Uh this was just an overview. So we have many additional proofs and
-[0:38:32] we have many additional proofs and analyses in our paper which I point uh
-[0:38:35] analyses in our paper which I point uh would point you to and our code is also
-[0:38:38] would point you to and our code is also publicly available. Um, so I'm a little
-[0:38:41] publicly available. Um, so I'm a little bit early, but I hope that leaves us
-[0:38:43] bit early, but I hope that leaves us more time for a discussion. So I will
-[0:38:45] more time for a discussion. So I will wrap it up there and I think I'm turning
-[0:38:47] wrap it up there and I think I'm turning it over to Naoki possibly for the
-[0:38:50] it over to Naoki possibly for the discussion. Yes, thank you. So we we had
-[0:38:53] discussion. Yes, thank you. So we we had some questions but Rohit has answered
-[0:38:56] some questions but Rohit has answered all of them and is actually currently
-[0:38:57] all of them and is actually currently answering the last one. So okay, working
-[0:38:59] answering the last one. So okay, working very well. Yeah. Uh, without further
-[0:39:01] very well. Yeah. Uh, without further ado, now whenever you're ready.
-[0:39:06] ado, now whenever you're ready. Okay, perfect. Let me share screen.
+[0:37:50] again we had those linearity assumptions
+[0:37:52] and I think there could be a lot of
+[0:37:54] extensions into the nonlinear setting
+[0:37:57] and then finally I think um there's a a
+[0:38:01] rich place for going beyond just this
+[0:38:03] unsupervised restriction so our
+[0:38:06] restriction was we had no observations
+[0:38:08] of you in the real world typically when
+[0:38:11] we are doing human labeling and have a
+[0:38:13] partial subset of you that uh that we
+[0:38:16] have labels for. These might have
+[0:38:19] uncertainty and might sort of be proxies
+[0:38:21] of proxies themselves. Um so I think
+[0:38:24] there's a lot of rich work that could be
+[0:38:25] done there as
+[0:38:27] well. Uh this was just an overview. So
+[0:38:30] we have many additional proofs and
+[0:38:32] analyses in our paper which I point uh
+[0:38:35] would point you to and our code is also
+[0:38:38] publicly available. Um, so I'm a little
+[0:38:41] bit early, but I hope that leaves us
+[0:38:43] more time for a discussion. So I will
+[0:38:45] wrap it up there and I think I'm turning
+[0:38:47] it over to Naoki possibly for the
+[0:38:50] discussion. Yes, thank you. So we we had
+[0:38:53] some questions but Rohit has answered
+[0:38:56] all of them and is actually currently
+[0:38:57] answering the last one. So okay, working
+[0:38:59] very well. Yeah. Uh, without further
+[0:39:01] ado, now whenever you're ready.
+[0:39:06] Okay, perfect. Let me share screen.
 [0:39:18] Do you see my screen? Okay, awesome. So, first of all, thanks
-[0:39:20] Okay, awesome. So, first of all, thanks so much for the uh interesting talk um
-[0:39:22] so much for the uh interesting talk um for Katie and Rahit. So, uh what I'm
-[0:39:25] for Katie and Rahit. So, uh what I'm going to do today is like just I'm going
-[0:39:26] going to do today is like just I'm going to start to do some little bit of
-[0:39:28] to start to do some little bit of overviews about cause inference text and
-[0:39:31] overviews about cause inference text and then move on to specific parts of this
-[0:39:34] then move on to specific parts of this paper. Okay. Um so the called inference
-[0:39:38] paper. Okay. Um so the called inference text is some some of the topic that has
-[0:39:40] text is some some of the topic that has been important in called inference but
-[0:39:42] been important in called inference but also I think in computer science and
-[0:39:44] also I think in computer science and especially in social sciences. The
-[0:39:46] especially in social sciences. The reason is that there's a abundance of
-[0:39:48] reason is that there's a abundance of the text and it actually creates some
-[0:39:50] the text and it actually creates some interesting methodological challenges
-[0:39:52] interesting methodological challenges and innovations in cause inference. So
-[0:39:55] and innovations in cause inference. So in particular the people have been
-[0:39:56] in particular the people have been discussing a variety of different ways
-[0:39:58] discussing a variety of different ways that you can use the text in a variety
-[0:40:01] that you can use the text in a variety of parts in cause imperance like people
-[0:40:03] of parts in cause imperance like people often define it as a Texas outcomes
-[0:40:06] often define it as a Texas outcomes Texas treatments and Texas confounders
-[0:40:08] Texas treatments and Texas confounders different settings and so for example
-[0:40:10] different settings and so for example Texas outcome is the case let's say if
-[0:40:12] Texas outcome is the case let's say if you do AB testing and then you try to do
-[0:40:15] you do AB testing and then you try to do the open-ended answers open-ended like
-[0:40:18] the open-ended answers open-ended like responses as the answers or you're in
-[0:40:20] responses as the answers or you're in industries you're going to do AB
-[0:40:21] industries you're going to do AB testings and you're not just interested
-[0:40:23] testings and you're not just interested in the outcome as the reviews stars but
-[0:40:26] in the outcome as the reviews stars but you're interested in actually the
-[0:40:27] you're interested in actually the contents of the what what people are
-[0:40:29] contents of the what what people are writing. So this is some of the kind of
-[0:40:31] writing. So this is some of the kind of the really common settings but often the
-[0:40:33] the really common settings but often the case we just try to get the numbers and
-[0:40:35] case we just try to get the numbers and then we going to proceed to the usual
-[0:40:37] then we going to proceed to the usual cause of inference but there's a rich
-[0:40:39] cause of inference but there's a rich information exist in the text and then
-[0:40:41] information exist in the text and then text treatment is again you're not just
-[0:40:43] text treatment is again you're not just interested whether you give the A ads or
-[0:40:45] interested whether you give the A ads or B ads but you might be interested in
-[0:40:47] B ads but you might be interested in more like which aspects of the text
-[0:40:50] more like which aspects of the text actually affecting the the the revenues
-[0:40:52] actually affecting the the the revenues or the voting behaviors and so on. But
-[0:40:55] or the voting behaviors and so on. But this paper is very interesting in a way
-[0:40:57] this paper is very interesting in a way that they view the text as confounders.
-[0:40:59] that they view the text as confounders. So text is the source to actually get
-[0:41:02] So text is the source to actually get the more informations about confounders
-[0:41:04] the more informations about confounders and there's a of course a rich set of
-[0:41:06] and there's a of course a rich set of work that have been done uh in this uh
-[0:41:09] work that have been done uh in this uh in this space um as Katie really nicely
-[0:41:12] in this space um as Katie really nicely reviewing the talk too but like the the
-[0:41:15] reviewing the talk too but like the the uh one really reasonable things to do is
-[0:41:17] uh one really reasonable things to do is to assume confounders observe at least
-[0:41:20] to assume confounders observe at least for a subset of the text because one of
-[0:41:22] for a subset of the text because one of the key task in Texas data settings is
-[0:41:25] the key task in Texas data settings is text annotation so it's pretty costly
-[0:41:27] text annotation so it's pretty costly you don't want to have experts to
-[0:41:29] you don't want to have experts to annotate all of them. So you won't be
-[0:41:30] annotate all of them. So you won't be able to annotate all of them but you
-[0:41:32] able to annotate all of them but you will be able to do a some of them and so
-[0:41:35] will be able to do a some of them and so you might use the Russian kish models to
-[0:41:37] you might use the Russian kish models to augment and then let nish models to
-[0:41:39] augment and then let nish models to annotate the rest right but here really
-[0:41:42] annotate the rest right but here really assuming at least some first some text
-[0:41:45] assuming at least some first some text you observe the the underlying uh
-[0:41:48] you observe the the underlying uh confounders and the other types of
-[0:41:50] confounders and the other types of research is okay going to the completely
-[0:41:53] research is okay going to the completely the different directions and saying okay
-[0:41:55] the different directions and saying okay I I'm not going to do any like directly
-[0:41:57] I I'm not going to do any like directly observing but at least you assume Some
-[0:42:00] observing but at least you assume Some of these confounders are directly
-[0:42:01] of these confounders are directly estimable from the text and under a
-[0:42:04] estimable from the text and under a variety of different types of
-[0:42:05] variety of different types of assumptions. People have used word
-[0:42:06] assumptions. People have used word embeddings or people use the topic
-[0:42:09] embeddings or people use the topic models and some people using the
-[0:42:10] models and some people using the generative AIS recently and compared to
-[0:42:14] generative AIS recently and compared to these type of works. I think this papers
-[0:42:16] these type of works. I think this papers from a broader perspective is
-[0:42:18] from a broader perspective is interesting because they view only the
-[0:42:21] interesting because they view only the text providing the proxies of unobserved
-[0:42:23] text providing the proxies of unobserved confounders. So we do not even assume
-[0:42:26] confounders. So we do not even assume that directly observe them or even do
-[0:42:28] that directly observe them or even do not assume directly estimable. So in
-[0:42:30] not assume directly estimable. So in some sense that this is so much weaker
-[0:42:33] some sense that this is so much weaker assumptions than what we have been
-[0:42:35] assumptions than what we have been operating the other settings and then
-[0:42:37] operating the other settings and then naturally speaking the proximal cause
-[0:42:39] naturally speaking the proximal cause inference is a natural way to you know
-[0:42:41] inference is a natural way to you know building on this like the nice intuition
-[0:42:43] building on this like the nice intuition behind it. And what I really like about
-[0:42:45] behind it. And what I really like about this paper is also they have principle
-[0:42:48] this paper is also they have principle approach um to construct the two
-[0:42:51] approach um to construct the two proxies. The proximal call inference is
-[0:42:53] proxies. The proximal call inference is amazing techniques but at the same time
-[0:42:55] amazing techniques but at the same time to have the credible inference you need
-[0:42:58] to have the credible inference you need to have embodied proxies which are not
-[0:43:00] to have embodied proxies which are not that easy to find in practice but they
-[0:43:03] that easy to find in practice but they actually have a nice guidelines and
-[0:43:05] actually have a nice guidelines and theoretical ideas about how to construct
-[0:43:08] theoretical ideas about how to construct them
+[0:39:20] so much for the uh interesting talk um
+[0:39:22] for Katie and Rahit. So, uh what I'm
+[0:39:25] going to do today is like just I'm going
+[0:39:26] to start to do some little bit of
+[0:39:28] overviews about cause inference text and
+[0:39:31] then move on to specific parts of this
+[0:39:34] paper. Okay. Um so the called inference
+[0:39:38] text is some some of the topic that has
+[0:39:40] been important in called inference but
+[0:39:42] also I think in computer science and
+[0:39:44] especially in social sciences. The
+[0:39:46] reason is that there's a abundance of
+[0:39:48] the text and it actually creates some
+[0:39:50] interesting methodological challenges
+[0:39:52] and innovations in cause inference. So
+[0:39:55] in particular the people have been
+[0:39:56] discussing a variety of different ways
+[0:39:58] that you can use the text in a variety
+[0:40:01] of parts in cause imperance like people
+[0:40:03] often define it as a Texas outcomes
+[0:40:06] Texas treatments and Texas confounders
+[0:40:08] different settings and so for example
+[0:40:10] Texas outcome is the case let's say if
+[0:40:12] you do AB testing and then you try to do
+[0:40:15] the open-ended answers open-ended like
+[0:40:18] responses as the answers or you're in
+[0:40:20] industries you're going to do AB
+[0:40:21] testings and you're not just interested
+[0:40:23] in the outcome as the reviews stars but
+[0:40:26] you're interested in actually the
+[0:40:27] contents of the what what people are
+[0:40:29] writing. So this is some of the kind of
+[0:40:31] the really common settings but often the
+[0:40:33] case we just try to get the numbers and
+[0:40:35] then we going to proceed to the usual
+[0:40:37] cause of inference but there's a rich
+[0:40:39] information exist in the text and then
+[0:40:41] text treatment is again you're not just
+[0:40:43] interested whether you give the A ads or
+[0:40:45] B ads but you might be interested in
+[0:40:47] more like which aspects of the text
+[0:40:50] actually affecting the the the revenues
+[0:40:52] or the voting behaviors and so on. But
+[0:40:55] this paper is very interesting in a way
+[0:40:57] that they view the text as confounders.
+[0:40:59] So text is the source to actually get
+[0:41:02] the more informations about confounders
+[0:41:04] and there's a of course a rich set of
+[0:41:06] work that have been done uh in this uh
+[0:41:09] in this space um as Katie really nicely
+[0:41:12] reviewing the talk too but like the the
+[0:41:15] uh one really reasonable things to do is
+[0:41:17] to assume confounders observe at least
+[0:41:20] for a subset of the text because one of
+[0:41:22] the key task in Texas data settings is
+[0:41:25] text annotation so it's pretty costly
+[0:41:27] you don't want to have experts to
+[0:41:29] annotate all of them. So you won't be
+[0:41:30] able to annotate all of them but you
+[0:41:32] will be able to do a some of them and so
+[0:41:35] you might use the Russian kish models to
+[0:41:37] augment and then let nish models to
+[0:41:39] annotate the rest right but here really
+[0:41:42] assuming at least some first some text
+[0:41:45] you observe the the underlying uh
+[0:41:48] confounders and the other types of
+[0:41:50] research is okay going to the completely
+[0:41:53] the different directions and saying okay
+[0:41:55] I I'm not going to do any like directly
+[0:41:57] observing but at least you assume Some
+[0:42:00] of these confounders are directly
+[0:42:01] estimable from the text and under a
+[0:42:04] variety of different types of
+[0:42:05] assumptions. People have used word
+[0:42:06] embeddings or people use the topic
+[0:42:09] models and some people using the
+[0:42:10] generative AIS recently and compared to
+[0:42:14] these type of works. I think this papers
+[0:42:16] from a broader perspective is
+[0:42:18] interesting because they view only the
+[0:42:21] text providing the proxies of unobserved
+[0:42:23] confounders. So we do not even assume
+[0:42:26] that directly observe them or even do
+[0:42:28] not assume directly estimable. So in
+[0:42:30] some sense that this is so much weaker
+[0:42:33] assumptions than what we have been
+[0:42:35] operating the other settings and then
+[0:42:37] naturally speaking the proximal cause
+[0:42:39] inference is a natural way to you know
+[0:42:41] building on this like the nice intuition
+[0:42:43] behind it. And what I really like about
+[0:42:45] this paper is also they have principle
+[0:42:48] approach um to construct the two
+[0:42:51] proxies. The proximal call inference is
+[0:42:53] amazing techniques but at the same time
+[0:42:55] to have the credible inference you need
+[0:42:58] to have embodied proxies which are not
+[0:43:00] that easy to find in practice but they
+[0:43:03] actually have a nice guidelines and
+[0:43:05] theoretical ideas about how to construct
 [0:43:09] them directly and I want to argue that this
-[0:43:11] directly and I want to argue that this is also interesting and important
-[0:43:14] is also interesting and important contribution because scutters are often
-[0:43:15] contribution because scutters are often I think reluctant to pay huge costs when
-[0:43:18] I think reluctant to pay huge costs when they're measured in confounders compared
-[0:43:21] they're measured in confounders compared to let's say when they're actually
-[0:43:22] to let's say when they're actually measuring the outcomes or treatment
-[0:43:24] measuring the outcomes or treatment because if outcomes or treatments are
-[0:43:25] because if outcomes or treatments are directly related to your research
-[0:43:27] directly related to your research questions and they know they going to go
-[0:43:29] questions and they know they going to go after this. So they are okay to like you
-[0:43:32] after this. So they are okay to like you know ask doctors or maybe not doctors
-[0:43:34] know ask doctors or maybe not doctors but experts to annotate and pay a lot of
-[0:43:37] but experts to annotate and pay a lot of cost to actually measure them carefully
-[0:43:39] cost to actually measure them carefully but a confounder is could be one of them
-[0:43:42] but a confounder is could be one of them and there are many potential confounders
-[0:43:44] and there are many potential confounders and you don't know whether it's actually
-[0:43:45] and you don't know whether it's actually going to be important confounders and
-[0:43:47] going to be important confounders and you don't want to use a huge amount of
-[0:43:49] you don't want to use a huge amount of money direct and and then you realize oh
-[0:43:52] money direct and and then you realize oh this is not something that I needed to
-[0:43:54] this is not something that I needed to actually annotate that's really sad
-[0:43:56] actually annotate that's really sad right so this is actually really nice
-[0:43:59] right so this is actually really nice settings are probably a lot of
-[0:44:00] settings are probably a lot of researchers wants to start with some
-[0:44:03] researchers wants to start with some like the more rough notions of the
-[0:44:05] like the more rough notions of the proxies. Um so I just want to very
-[0:44:08] proxies. Um so I just want to very quickly summarize what they did because
-[0:44:10] quickly summarize what they did because um Katie already has done really well.
-[0:44:12] um Katie already has done really well. So I'm not going to dwell on this too
-[0:44:15] So I'm not going to dwell on this too long. The first step is to just looking
-[0:44:17] long. The first step is to just looking at the pre-treatment text which is
-[0:44:19] at the pre-treatment text which is really simple and easy to do because
-[0:44:21] really simple and easy to do because most of the time you have time stamp of
-[0:44:23] most of the time you have time stamp of the text and then you're going to split
-[0:44:25] the text and then you're going to split the data uh the text data at the each
-[0:44:28] the data uh the text data at the each individual levels into the two separate
-[0:44:30] individual levels into the two separate text because you actually need the two
-[0:44:33] text because you actually need the two separate proxies later. And so in their
-[0:44:36] separate proxies later. And so in their examples they have this echo cardiogram
-[0:44:39] examples they have this echo cardiogram and nursing notes. So those are two
-[0:44:41] and nursing notes. So those are two separate types of notes. And then
-[0:44:43] separate types of notes. And then interestingly they apply different logic
-[0:44:46] interestingly they apply different logic models for each of them and then Kate
-[0:44:47] models for each of them and then Kate explained why that's necessary but
-[0:44:49] explained why that's necessary but that's also I think uh interesting but
-[0:44:51] that's also I think uh interesting but here interesting part of logic model
-[0:44:54] here interesting part of logic model prompting is that you directly
-[0:44:55] prompting is that you directly essentially ask what is likely the value
-[0:44:57] essentially ask what is likely the value of the U and asking large models to read
-[0:45:00] of the U and asking large models to read it um which is I think uh interesting
-[0:45:03] it um which is I think uh interesting and then you actually have zeros um kind
-[0:45:06] and then you actually have zeros um kind of practices of Z and W and then you
-[0:45:08] of practices of Z and W and then you have this old ratio heruristics as sort
-[0:45:10] have this old ratio heruristics as sort of the diagnostics before you proceed to
-[0:45:13] of the diagnostics before you proceed to the the actual identification and
-[0:45:15] the the actual identification and estimations where um you directly rely
-[0:45:17] estimations where um you directly rely on kind of the uh now kind of standard
-[0:45:20] on kind of the uh now kind of standard proximal um causal identification
-[0:45:24] proximal um causal identification estimation. Okay. And probably many of
-[0:45:28] estimation. Okay. And probably many of you are already familiar with this uh
-[0:45:30] you are already familiar with this uh things but I'll just do the quick uh
-[0:45:33] things but I'll just do the quick uh things of the proximal cause inference
-[0:45:35] things of the proximal cause inference that you're going to have laten
-[0:45:36] that you're going to have laten ignorability. So you don't observe you
-[0:45:38] ignorability. So you don't observe you you observe some of the control
-[0:45:40] you observe some of the control variables but you're not observing all
-[0:45:43] variables but you're not observing all of them and then three different types
-[0:45:45] of them and then three different types of proxies um assumptions the one is the
-[0:45:47] of proxies um assumptions the one is the outcome confounding proxies treatment
-[0:45:49] outcome confounding proxies treatment confounding proxies and especially first
-[0:45:52] confounding proxies and especially first two are I think could be really credible
-[0:45:55] two are I think could be really credible especially in their applications because
-[0:45:57] especially in their applications because those are the notes that are essentially
-[0:45:59] those are the notes that are essentially not something that doctors actually read
-[0:46:01] not something that doctors actually read when they decide um what they do in the
-[0:46:04] when they decide um what they do in the clinical decisions and these are
-[0:46:06] clinical decisions and these are probably notes that something that uh
-[0:46:08] probably notes that something that uh the patients cannot read. So these are
-[0:46:10] the patients cannot read. So these are only some summaries of what's happening.
-[0:46:12] only some summaries of what's happening. So these are not something can
-[0:46:14] So these are not something can potentially affect um the outcomes or
-[0:46:16] potentially affect um the outcomes or the treatment. So as they talk a lot
-[0:46:19] the treatment. So as they talk a lot more in the paper, this is this uh two
-[0:46:22] more in the paper, this is this uh two proxies are condition. This is some of
-[0:46:25] proxies are condition. This is some of like the potential uh violations can
-[0:46:28] like the potential uh violations can happen. But also it's a little bit more
-[0:46:30] happen. But also it's a little bit more technical but the completeness condition
-[0:46:32] technical but the completeness condition is actually most of the time it's a kind
-[0:46:34] is actually most of the time it's a kind of the
+[0:43:11] is also interesting and important
+[0:43:14] contribution because scutters are often
+[0:43:15] I think reluctant to pay huge costs when
+[0:43:18] they're measured in confounders compared
+[0:43:21] to let's say when they're actually
+[0:43:22] measuring the outcomes or treatment
+[0:43:24] because if outcomes or treatments are
+[0:43:25] directly related to your research
+[0:43:27] questions and they know they going to go
+[0:43:29] after this. So they are okay to like you
+[0:43:32] know ask doctors or maybe not doctors
+[0:43:34] but experts to annotate and pay a lot of
+[0:43:37] cost to actually measure them carefully
+[0:43:39] but a confounder is could be one of them
+[0:43:42] and there are many potential confounders
+[0:43:44] and you don't know whether it's actually
+[0:43:45] going to be important confounders and
+[0:43:47] you don't want to use a huge amount of
+[0:43:49] money direct and and then you realize oh
+[0:43:52] this is not something that I needed to
+[0:43:54] actually annotate that's really sad
+[0:43:56] right so this is actually really nice
+[0:43:59] settings are probably a lot of
+[0:44:00] researchers wants to start with some
+[0:44:03] like the more rough notions of the
+[0:44:05] proxies. Um so I just want to very
+[0:44:08] quickly summarize what they did because
+[0:44:10] um Katie already has done really well.
+[0:44:12] So I'm not going to dwell on this too
+[0:44:15] long. The first step is to just looking
+[0:44:17] at the pre-treatment text which is
+[0:44:19] really simple and easy to do because
+[0:44:21] most of the time you have time stamp of
+[0:44:23] the text and then you're going to split
+[0:44:25] the data uh the text data at the each
+[0:44:28] individual levels into the two separate
+[0:44:30] text because you actually need the two
+[0:44:33] separate proxies later. And so in their
+[0:44:36] examples they have this echo cardiogram
+[0:44:39] and nursing notes. So those are two
+[0:44:41] separate types of notes. And then
+[0:44:43] interestingly they apply different logic
+[0:44:46] models for each of them and then Kate
+[0:44:47] explained why that's necessary but
+[0:44:49] that's also I think uh interesting but
+[0:44:51] here interesting part of logic model
+[0:44:54] prompting is that you directly
+[0:44:55] essentially ask what is likely the value
+[0:44:57] of the U and asking large models to read
+[0:45:00] it um which is I think uh interesting
+[0:45:03] and then you actually have zeros um kind
+[0:45:06] of practices of Z and W and then you
+[0:45:08] have this old ratio heruristics as sort
+[0:45:10] of the diagnostics before you proceed to
+[0:45:13] the the actual identification and
+[0:45:15] estimations where um you directly rely
+[0:45:17] on kind of the uh now kind of standard
+[0:45:20] proximal um causal identification
+[0:45:24] estimation. Okay. And probably many of
+[0:45:28] you are already familiar with this uh
+[0:45:30] things but I'll just do the quick uh
+[0:45:33] things of the proximal cause inference
+[0:45:35] that you're going to have laten
+[0:45:36] ignorability. So you don't observe you
+[0:45:38] you observe some of the control
+[0:45:40] variables but you're not observing all
+[0:45:43] of them and then three different types
+[0:45:45] of proxies um assumptions the one is the
+[0:45:47] outcome confounding proxies treatment
+[0:45:49] confounding proxies and especially first
+[0:45:52] two are I think could be really credible
+[0:45:55] especially in their applications because
+[0:45:57] those are the notes that are essentially
+[0:45:59] not something that doctors actually read
+[0:46:01] when they decide um what they do in the
+[0:46:04] clinical decisions and these are
+[0:46:06] probably notes that something that uh
+[0:46:08] the patients cannot read. So these are
+[0:46:10] only some summaries of what's happening.
+[0:46:12] So these are not something can
+[0:46:14] potentially affect um the outcomes or
+[0:46:16] the treatment. So as they talk a lot
+[0:46:19] more in the paper, this is this uh two
+[0:46:22] proxies are condition. This is some of
+[0:46:25] like the potential uh violations can
+[0:46:28] happen. But also it's a little bit more
+[0:46:30] technical but the completeness condition
+[0:46:32] is actually most of the time it's a kind
 [0:46:35] of the hidden important part of the proximal
-[0:46:38] hidden important part of the proximal cause inference. Um because the
-[0:46:40] cause inference. Um because the conditions are typically technically
-[0:46:42] conditions are typically technically written so it's hard to understand but
-[0:46:44] written so it's hard to understand but especially when it's categorical cases
-[0:46:46] especially when it's categorical cases it at least requires that the levels the
-[0:46:49] it at least requires that the levels the number of the levels of the Z and W's
-[0:46:51] number of the levels of the Z and W's are at least larger than the number of
-[0:46:53] are at least larger than the number of levels in U. And here they assume that
-[0:46:55] levels in U. And here they assume that uh at least in the paper they work with
-[0:46:58] uh at least in the paper they work with the binary U even though the methology
-[0:47:00] the binary U even though the methology is not confined to that but uh for
-[0:47:02] is not confined to that but uh for binary you then this means that Z and W
-[0:47:04] binary you then this means that Z and W could be binary as well but this also
-[0:47:07] could be binary as well but this also required Z and W's are actually
-[0:47:09] required Z and W's are actually conditionally associated even after
-[0:47:11] conditionally associated even after conditioning on A and C which is sort of
-[0:47:14] conditioning on A and C which is sort of the um proxy assumptions.
-[0:47:17] the um proxy assumptions. Okay. And then under this assumptions
-[0:47:20] Okay. And then under this assumptions and consistency and positivity you can
-[0:47:22] and consistency and positivity you can identify the confounding bridge
-[0:47:23] identify the confounding bridge functions and you can guarantee the
-[0:47:26] functions and you can guarantee the existence with the additional um
-[0:47:29] existence with the additional um assumptions but especially when they're
-[0:47:31] assumptions but especially when they're working with the categorical case
-[0:47:33] working with the categorical case especially in this paper um the sheer
-[0:47:35] especially in this paper um the sheer all papers the JRCSP paper actually have
-[0:47:38] all papers the JRCSP paper actually have direct sufficient conditions to
-[0:47:40] direct sufficient conditions to establish the the completeness. So um I
-[0:47:44] establish the the completeness. So um I actually suggest it's interesting to do
-[0:47:46] actually suggest it's interesting to do the continuous case as well but within
-[0:47:48] the continuous case as well but within the framework that you you are in I
-[0:47:50] the framework that you you are in I think like you can have a little bit
-[0:47:52] think like you can have a little bit more sharper results too if you assume
-[0:47:54] more sharper results too if you assume the categorical case too um you have
-[0:47:57] the categorical case too um you have identifications and you assume that
-[0:48:00] identifications and you assume that confounding bridge um they use the
-[0:48:02] confounding bridge um they use the proximal to stagely squares which is I
-[0:48:04] proximal to stagely squares which is I think it's kind of stable in practice
-[0:48:06] think it's kind of stable in practice okay so I have bunch of small type of uh
-[0:48:09] okay so I have bunch of small type of uh questions slashcomments
-[0:48:12] questions slashcomments The first is I think in general proximal
-[0:48:15] The first is I think in general proximal cause inference in researchers needs to
-[0:48:18] cause inference in researchers needs to know what confounders are and this is
-[0:48:20] know what confounders are and this is like I think in pretty interesting and
-[0:48:21] like I think in pretty interesting and the the K already explained really well
-[0:48:23] the the K already explained really well it's kind of specified but un unobserved
-[0:48:26] it's kind of specified but un unobserved and this is a little bit different from
-[0:48:28] and this is a little bit different from let's say IB settings right in IB
-[0:48:30] let's say IB settings right in IB settings like typically you don't talk a
-[0:48:32] settings like typically you don't talk a lot about unmeasured confounding
-[0:48:33] lot about unmeasured confounding directly but you talk a lot about how IB
-[0:48:36] directly but you talk a lot about how IB could be exogenous related to treatment
-[0:48:39] could be exogenous related to treatment and then uh exclusion restrictions But
-[0:48:41] and then uh exclusion restrictions But in the proximal case because of the
-[0:48:43] in the proximal case because of the completeness conditions you need to
-[0:48:45] completeness conditions you need to actually have a good sense of what they
-[0:48:46] actually have a good sense of what they are and this is even more explicit I
-[0:48:49] are and this is even more explicit I think in this paper because researchers
-[0:48:51] think in this paper because researchers really need to know uh to write the
-[0:48:53] really need to know uh to write the prompts to ask what the use are and then
-[0:48:56] prompts to ask what the use are and then if like researchers have very bad ideas
-[0:48:58] if like researchers have very bad ideas then logic models will have no idea what
-[0:49:00] then logic models will have no idea what they are looking for. So you know this
-[0:49:03] they are looking for. So you know this part is actually even more explicit in
-[0:49:05] part is actually even more explicit in this paper and so I think this is good
-[0:49:07] this paper and so I think this is good for users to understand that this is the
-[0:49:10] for users to understand that this is the really the case when confounders are
-[0:49:11] really the case when confounders are known but it's hard to measure for every
-[0:49:14] known but it's hard to measure for every unit and this is something that um
-[0:49:17] unit and this is something that um important to understand
-[0:49:19] important to understand um I would suggest this is slash common
-[0:49:22] um I would suggest this is slash common stuff I think extensions to continuous
-[0:49:25] stuff I think extensions to continuous here like you know because I'm political
-[0:49:26] here like you know because I'm political scientist like political ideologies or
-[0:49:28] scientist like political ideologies or something would be quite useful and also
-[0:49:31] something would be quite useful and also straight forward even though some of the
-[0:49:33] straight forward even though some of the comments that I made is like oh if you
-[0:49:34] comments that I made is like oh if you do categorical everything becomes much
-[0:49:36] do categorical everything becomes much more cleaner but the reasons I'm doing
-[0:49:39] more cleaner but the reasons I'm doing this one I'm suggesting this one is this
-[0:49:41] this one I'm suggesting this one is this is exactly the setting where expert
-[0:49:43] is exactly the setting where expert annotations are also difficult and it's
-[0:49:45] annotations are also difficult and it's very likely to be a lot of measurement
-[0:49:47] very likely to be a lot of measurement errors so there's really the case where
-[0:49:49] errors so there's really the case where you can't believe that there is at least
-[0:49:52] you can't believe that there is at least the gold standard even for the subset of
-[0:49:54] the gold standard even for the subset of data so if you keep doing with the
-[0:49:57] data so if you keep doing with the categorical case it's um you know the
-[0:50:00] categorical case it's um you know the privacies And all these like kind of
-[0:50:02] privacies And all these like kind of like the reasons you can say that it's
-[0:50:04] like the reasons you can say that it's hard to do for all the use. But like
-[0:50:06] hard to do for all the use. But like when you move to continuous case it
-[0:50:08] when you move to continuous case it becomes so easy to to show like the most
-[0:50:11] becomes so easy to to show like the most of the latent variable models or
-[0:50:12] of the latent variable models or underlying underlying laten concepts are
-[0:50:15] underlying underlying laten concepts are used are continuous and then the reason
-[0:50:18] used are continuous and then the reason is that it's often the case very
-[0:50:19] is that it's often the case very difficult to have gold standard labels
-[0:50:22] difficult to have gold standard labels outside. Um I'm also curious what you
-[0:50:26] outside. Um I'm also curious what you think about the uh the relationship with
-[0:50:29] think about the uh the relationship with the other studies. Basically in other
-[0:50:31] the other studies. Basically in other type of work most of the time the one of
-[0:50:34] type of work most of the time the one of the key concern is the text contains a
-[0:50:36] the key concern is the text contains a lot of informations but these
-[0:50:38] lot of informations but these confounders are high dimensionals and
-[0:50:40] confounders are high dimensionals and there's a lot of lot of informations and
-[0:50:42] there's a lot of lot of informations and it won't be able to uh captures all of
-[0:50:44] it won't be able to uh captures all of them so they are tried to do board
-[0:50:46] them so they are tried to do board embeddings and all these things to try
-[0:50:48] embeddings and all these things to try to capture as much as possible. I think
-[0:50:51] to capture as much as possible. I think this is I think in a way interesting
-[0:50:53] this is I think in a way interesting relationship with the first point that I
-[0:50:54] relationship with the first point that I made is like this method is particularly
-[0:50:56] made is like this method is particularly useful when you actually know what they
-[0:50:58] useful when you actually know what they are and but the other type of work is
-[0:51:01] are and but the other type of work is essentially assuming that it's very hard
-[0:51:03] essentially assuming that it's very hard to know what they are right so so I'm
-[0:51:06] to know what they are right so so I'm I'm curious like how you you know
-[0:51:08] I'm curious like how you you know researchers needs to square out like
-[0:51:10] researchers needs to square out like what are the settings where your method
-[0:51:12] what are the settings where your method works better than when you assume that
-[0:51:15] works better than when you assume that some are estimable and like I think Roit
-[0:51:17] some are estimable and like I think Roit mentioned a little bit but I think It's
-[0:51:20] mentioned a little bit but I think It's um before this talk starts but I think
-[0:51:22] um before this talk starts but I think it's interesting to think about the
-[0:51:24] it's interesting to think about the combinations of these the work that try
-[0:51:26] combinations of these the work that try to actually estimate stuff some work
-[0:51:29] to actually estimate stuff some work that actually have a little bit of the
-[0:51:31] that actually have a little bit of the gold standards and then like you work
-[0:51:33] gold standards and then like you work and then what is the best way to combine
-[0:51:35] and then what is the best way to combine them because sometimes you can actually
-[0:51:37] them because sometimes you can actually do all of them because like the good
-[0:51:38] do all of them because like the good part of your method is actually it's
-[0:51:40] part of your method is actually it's applicable in almost all settings. Um
-[0:51:43] applicable in almost all settings. Um but it it it requires probably a little
-[0:51:46] but it it it requires probably a little bit more assumptions. um even though
-[0:51:49] bit more assumptions. um even though it's it's it is very duplicable and and
-[0:51:52] it's it's it is very duplicable and and then uh given the time I'll be quick
-[0:51:54] then uh given the time I'll be quick like so this uh conditions that the two
-[0:51:58] like so this uh conditions that the two sets of the texts are independent um I
-[0:52:02] sets of the texts are independent um I had two questions one is that why do we
-[0:52:05] had two questions one is that why do we need to split using the metadata so I
-[0:52:08] need to split using the metadata so I think it it makes sense uh um as a as a
-[0:52:11] think it it makes sense uh um as a as a easier rule to follow but I thought the
-[0:52:14] easier rule to follow but I thought the just separate independent documents are
-[0:52:16] just separate independent documents are enough but I'm I maybe I'm missing
-[0:52:18] enough but I'm I maybe I'm missing something. So I I wanted to know about
-[0:52:20] something. So I I wanted to know about this and I also felt that this is
-[0:52:22] this and I also felt that this is probably stronger than necessary because
-[0:52:25] probably stronger than necessary because what we care is like W and Z are
-[0:52:27] what we care is like W and Z are independent just given UN and C and
-[0:52:30] independent just given UN and C and there's a many parts of the text that's
-[0:52:32] there's a many parts of the text that's are going to be shared between two
-[0:52:35] are going to be shared between two different like nurses and then like the
-[0:52:38] different like nurses and then like the um chronological I don't know forget but
-[0:52:41] um chronological I don't know forget but the the different type of the text but
-[0:52:44] the the different type of the text but not all the kind of the shared
-[0:52:46] not all the kind of the shared informations are relevant for your
-[0:52:48] informations are relevant for your outcomes Right? So not all of them are
-[0:52:50] outcomes Right? So not all of them are actually the real confounders with
-[0:52:52] actually the real confounders with respect to the treatment and outcome
-[0:52:53] respect to the treatment and outcome relationship you have. So if you
-[0:52:55] relationship you have. So if you actually really want to have T pre P and
-[0:52:58] actually really want to have T pre P and T1 and T P2 independent, it's actually
-[0:53:03] T1 and T P2 independent, it's actually so much stronger than I think you really
-[0:53:05] so much stronger than I think you really need because not all the
-[0:53:09] need because not all the use you don't need to make the actually
-[0:53:11] use you don't need to make the actually the text in the pen, right? like you
-[0:53:13] the text in the pen, right? like you just need to have W and Z
-[0:53:15] just need to have W and Z independent and then like the the other
-[0:53:17] independent and then like the the other things are simpler like semi parametic
-[0:53:19] things are simpler like semi parametic estimation is possible. Um and then I
-[0:53:22] estimation is possible. Um and then I think that this falsification test is
-[0:53:24] think that this falsification test is super interesting. I actually have a
-[0:53:26] super interesting. I actually have a questions to the author is that like
-[0:53:28] questions to the author is that like this seems to be nothing special to the
-[0:53:31] this seems to be nothing special to the settings that you're in about the text
-[0:53:32] settings that you're in about the text case like so the method itself could be
-[0:53:34] case like so the method itself could be applied to the usual proximal setting as
-[0:53:37] applied to the usual proximal setting as well. So I'm curious to know what's the
-[0:53:40] well. So I'm curious to know what's the what's your perspective on this and also
-[0:53:43] what's your perspective on this and also I want to mention I didn't write it
-[0:53:44] I want to mention I didn't write it here. Um I also want to know about the
-[0:53:47] here. Um I also want to know about the post selection inference stuff. So you
-[0:53:50] post selection inference stuff. So you actually going to do the post uh
-[0:53:52] actually going to do the post uh conditioning on this like diagnostics.
-[0:53:54] conditioning on this like diagnostics. So you're going to have distorting the
-[0:53:56] So you're going to have distorting the uh the the the you know downstream
-[0:53:58] uh the the the you know downstream inferences. It's kind of typical
-[0:53:59] inferences. It's kind of typical questions. And the final things is that
-[0:54:02] questions. And the final things is that actually sometimes W and Z are strongly
-[0:54:05] actually sometimes W and Z are strongly correlated given C is a good things if
-[0:54:08] correlated given C is a good things if actually W and Z are independent given U
-[0:54:10] actually W and Z are independent given U and C right so actually that's the
-[0:54:13] and C right so actually that's the exactly the settings where the the
-[0:54:15] exactly the settings where the the proxies are really really strong and the
-[0:54:18] proxies are really really strong and the confounding is really really strong so
-[0:54:20] confounding is really really strong so this is actually something like a little
-[0:54:22] this is actually something like a little bit um I think it's uh counterintuitive
-[0:54:25] bit um I think it's uh counterintuitive part of proximal stuff is that a U is
-[0:54:28] part of proximal stuff is that a U is like really strongly related to W and Z
-[0:54:31] like really strongly related to W and Z it's likely that is a very strong
-[0:54:33] it's likely that is a very strong confounders but that is exactly the case
-[0:54:35] confounders but that is exactly the case that like the downstream estimation
-[0:54:38] that like the downstream estimation becomes much more stable if the
-[0:54:40] becomes much more stable if the relationship between you and W&amp;Z is
-[0:54:42] relationship between you and W&amp;Z is weaker actually it's harder to recover
-[0:54:44] weaker actually it's harder to recover what the US are so your upper bound is I
-[0:54:47] what the US are so your upper bound is I think it's inherently very difficult to
-[0:54:50] think it's inherently very difficult to pick because if this is bad actually
-[0:54:53] pick because if this is bad actually better to be pretty large but I also
-[0:54:57] better to be pretty large but I also understand that very large could come
-[0:54:59] understand that very large could come from the fact that you are missing some
-[0:55:01] from the fact that you are missing some of the actual use. So you actually still
-[0:55:03] of the actual use. So you actually still have the open back door pass between W
-[0:55:05] have the open back door pass between W and
+[0:46:38] cause inference. Um because the
+[0:46:40] conditions are typically technically
+[0:46:42] written so it's hard to understand but
+[0:46:44] especially when it's categorical cases
+[0:46:46] it at least requires that the levels the
+[0:46:49] number of the levels of the Z and W's
+[0:46:51] are at least larger than the number of
+[0:46:53] levels in U. And here they assume that
+[0:46:55] uh at least in the paper they work with
+[0:46:58] the binary U even though the methology
+[0:47:00] is not confined to that but uh for
+[0:47:02] binary you then this means that Z and W
+[0:47:04] could be binary as well but this also
+[0:47:07] required Z and W's are actually
+[0:47:09] conditionally associated even after
+[0:47:11] conditioning on A and C which is sort of
+[0:47:14] the um proxy assumptions.
+[0:47:17] Okay. And then under this assumptions
+[0:47:20] and consistency and positivity you can
+[0:47:22] identify the confounding bridge
+[0:47:23] functions and you can guarantee the
+[0:47:26] existence with the additional um
+[0:47:29] assumptions but especially when they're
+[0:47:31] working with the categorical case
+[0:47:33] especially in this paper um the sheer
+[0:47:35] all papers the JRCSP paper actually have
+[0:47:38] direct sufficient conditions to
+[0:47:40] establish the the completeness. So um I
+[0:47:44] actually suggest it's interesting to do
+[0:47:46] the continuous case as well but within
+[0:47:48] the framework that you you are in I
+[0:47:50] think like you can have a little bit
+[0:47:52] more sharper results too if you assume
+[0:47:54] the categorical case too um you have
+[0:47:57] identifications and you assume that
+[0:48:00] confounding bridge um they use the
+[0:48:02] proximal to stagely squares which is I
+[0:48:04] think it's kind of stable in practice
+[0:48:06] okay so I have bunch of small type of uh
+[0:48:09] questions slashcomments
+[0:48:12] The first is I think in general proximal
+[0:48:15] cause inference in researchers needs to
+[0:48:18] know what confounders are and this is
+[0:48:20] like I think in pretty interesting and
+[0:48:21] the the K already explained really well
+[0:48:23] it's kind of specified but un unobserved
+[0:48:26] and this is a little bit different from
+[0:48:28] let's say IB settings right in IB
+[0:48:30] settings like typically you don't talk a
+[0:48:32] lot about unmeasured confounding
+[0:48:33] directly but you talk a lot about how IB
+[0:48:36] could be exogenous related to treatment
+[0:48:39] and then uh exclusion restrictions But
+[0:48:41] in the proximal case because of the
+[0:48:43] completeness conditions you need to
+[0:48:45] actually have a good sense of what they
+[0:48:46] are and this is even more explicit I
+[0:48:49] think in this paper because researchers
+[0:48:51] really need to know uh to write the
+[0:48:53] prompts to ask what the use are and then
+[0:48:56] if like researchers have very bad ideas
+[0:48:58] then logic models will have no idea what
+[0:49:00] they are looking for. So you know this
+[0:49:03] part is actually even more explicit in
+[0:49:05] this paper and so I think this is good
+[0:49:07] for users to understand that this is the
+[0:49:10] really the case when confounders are
+[0:49:11] known but it's hard to measure for every
+[0:49:14] unit and this is something that um
+[0:49:17] important to understand
+[0:49:19] um I would suggest this is slash common
+[0:49:22] stuff I think extensions to continuous
+[0:49:25] here like you know because I'm political
+[0:49:26] scientist like political ideologies or
+[0:49:28] something would be quite useful and also
+[0:49:31] straight forward even though some of the
+[0:49:33] comments that I made is like oh if you
+[0:49:34] do categorical everything becomes much
+[0:49:36] more cleaner but the reasons I'm doing
+[0:49:39] this one I'm suggesting this one is this
+[0:49:41] is exactly the setting where expert
+[0:49:43] annotations are also difficult and it's
+[0:49:45] very likely to be a lot of measurement
+[0:49:47] errors so there's really the case where
+[0:49:49] you can't believe that there is at least
+[0:49:52] the gold standard even for the subset of
+[0:49:54] data so if you keep doing with the
+[0:49:57] categorical case it's um you know the
+[0:50:00] privacies And all these like kind of
+[0:50:02] like the reasons you can say that it's
+[0:50:04] hard to do for all the use. But like
+[0:50:06] when you move to continuous case it
+[0:50:08] becomes so easy to to show like the most
+[0:50:11] of the latent variable models or
+[0:50:12] underlying underlying laten concepts are
+[0:50:15] used are continuous and then the reason
+[0:50:18] is that it's often the case very
+[0:50:19] difficult to have gold standard labels
+[0:50:22] outside. Um I'm also curious what you
+[0:50:26] think about the uh the relationship with
+[0:50:29] the other studies. Basically in other
+[0:50:31] type of work most of the time the one of
+[0:50:34] the key concern is the text contains a
+[0:50:36] lot of informations but these
+[0:50:38] confounders are high dimensionals and
+[0:50:40] there's a lot of lot of informations and
+[0:50:42] it won't be able to uh captures all of
+[0:50:44] them so they are tried to do board
+[0:50:46] embeddings and all these things to try
+[0:50:48] to capture as much as possible. I think
+[0:50:51] this is I think in a way interesting
+[0:50:53] relationship with the first point that I
+[0:50:54] made is like this method is particularly
+[0:50:56] useful when you actually know what they
+[0:50:58] are and but the other type of work is
+[0:51:01] essentially assuming that it's very hard
+[0:51:03] to know what they are right so so I'm
+[0:51:06] I'm curious like how you you know
+[0:51:08] researchers needs to square out like
+[0:51:10] what are the settings where your method
+[0:51:12] works better than when you assume that
+[0:51:15] some are estimable and like I think Roit
+[0:51:17] mentioned a little bit but I think It's
+[0:51:20] um before this talk starts but I think
+[0:51:22] it's interesting to think about the
+[0:51:24] combinations of these the work that try
+[0:51:26] to actually estimate stuff some work
+[0:51:29] that actually have a little bit of the
+[0:51:31] gold standards and then like you work
+[0:51:33] and then what is the best way to combine
+[0:51:35] them because sometimes you can actually
+[0:51:37] do all of them because like the good
+[0:51:38] part of your method is actually it's
+[0:51:40] applicable in almost all settings. Um
+[0:51:43] but it it it requires probably a little
+[0:51:46] bit more assumptions. um even though
+[0:51:49] it's it's it is very duplicable and and
+[0:51:52] then uh given the time I'll be quick
+[0:51:54] like so this uh conditions that the two
+[0:51:58] sets of the texts are independent um I
+[0:52:02] had two questions one is that why do we
+[0:52:05] need to split using the metadata so I
+[0:52:08] think it it makes sense uh um as a as a
+[0:52:11] easier rule to follow but I thought the
+[0:52:14] just separate independent documents are
+[0:52:16] enough but I'm I maybe I'm missing
+[0:52:18] something. So I I wanted to know about
+[0:52:20] this and I also felt that this is
+[0:52:22] probably stronger than necessary because
+[0:52:25] what we care is like W and Z are
+[0:52:27] independent just given UN and C and
+[0:52:30] there's a many parts of the text that's
+[0:52:32] are going to be shared between two
+[0:52:35] different like nurses and then like the
+[0:52:38] um chronological I don't know forget but
+[0:52:41] the the different type of the text but
+[0:52:44] not all the kind of the shared
+[0:52:46] informations are relevant for your
+[0:52:48] outcomes Right? So not all of them are
+[0:52:50] actually the real confounders with
+[0:52:52] respect to the treatment and outcome
+[0:52:53] relationship you have. So if you
+[0:52:55] actually really want to have T pre P and
+[0:52:58] T1 and T P2 independent, it's actually
+[0:53:03] so much stronger than I think you really
+[0:53:05] need because not all the
+[0:53:09] use you don't need to make the actually
+[0:53:11] the text in the pen, right? like you
+[0:53:13] just need to have W and Z
+[0:53:15] independent and then like the the other
+[0:53:17] things are simpler like semi parametic
+[0:53:19] estimation is possible. Um and then I
+[0:53:22] think that this falsification test is
+[0:53:24] super interesting. I actually have a
+[0:53:26] questions to the author is that like
+[0:53:28] this seems to be nothing special to the
+[0:53:31] settings that you're in about the text
+[0:53:32] case like so the method itself could be
+[0:53:34] applied to the usual proximal setting as
+[0:53:37] well. So I'm curious to know what's the
+[0:53:40] what's your perspective on this and also
+[0:53:43] I want to mention I didn't write it
+[0:53:44] here. Um I also want to know about the
+[0:53:47] post selection inference stuff. So you
+[0:53:50] actually going to do the post uh
+[0:53:52] conditioning on this like diagnostics.
+[0:53:54] So you're going to have distorting the
+[0:53:56] uh the the the you know downstream
+[0:53:58] inferences. It's kind of typical
+[0:53:59] questions. And the final things is that
+[0:54:02] actually sometimes W and Z are strongly
+[0:54:05] correlated given C is a good things if
+[0:54:08] actually W and Z are independent given U
+[0:54:10] and C right so actually that's the
+[0:54:13] exactly the settings where the the
+[0:54:15] proxies are really really strong and the
+[0:54:18] confounding is really really strong so
+[0:54:20] this is actually something like a little
+[0:54:22] bit um I think it's uh counterintuitive
+[0:54:25] part of proximal stuff is that a U is
+[0:54:28] like really strongly related to W and Z
+[0:54:31] it's likely that is a very strong
+[0:54:33] confounders but that is exactly the case
+[0:54:35] that like the downstream estimation
+[0:54:38] becomes much more stable if the
+[0:54:40] relationship between you and W&Z is
+[0:54:42] weaker actually it's harder to recover
+[0:54:44] what the US are so your upper bound is I
+[0:54:47] think it's inherently very difficult to
+[0:54:50] pick because if this is bad actually
+[0:54:53] better to be pretty large but I also
+[0:54:57] understand that very large could come
+[0:54:59] from the fact that you are missing some
+[0:55:01] of the actual use. So you actually still
+[0:55:03] have the open back door pass between W
 [0:55:06] and Z but I just wanted to say that this
-[0:55:09] Z but I just wanted to say that this paper really opens up the another uh
-[0:55:11] paper really opens up the another uh areas where we can think about the Texas
-[0:55:14] areas where we can think about the Texas confounders. So thanks so much for the
-[0:55:16] confounders. So thanks so much for the talk and I'm looking forward to the
-[0:55:18] talk and I'm looking forward to the discussion.
+[0:55:09] paper really opens up the another uh
+[0:55:11] areas where we can think about the Texas
+[0:55:14] confounders. So thanks so much for the
+[0:55:16] talk and I'm looking forward to the
+[0:55:18] discussion.
 [0:55:23] Thank you so much for the nice discussion. Now Katie, do you want to
-[0:55:25] discussion. Now Katie, do you want to quickly respond? Yes, thank you Naoki.
-[0:55:28] quickly respond? Yes, thank you Naoki. This is very very detailed. Um maybe I
-[0:55:31] This is very very detailed. Um maybe I can start with number four. Right. So um
-[0:55:36] can start with number four. Right. So um we talked about this a lot. Uh why can
-[0:55:41] we talked about this a lot. Uh why can you see am I sharing? Can you see my
-[0:55:45] you see am I sharing? Can you see my screen? Yes. Okay. Um we talked yes we
-[0:55:49] screen? Yes. Okay. Um we talked yes we we talked about this a lot right of
-[0:55:52] we talked about this a lot right of right yes we do want W and Z to be
-[0:55:56] right yes we do want W and Z to be independent given you and C but if we if
-[0:55:59] independent given you and C but if we if we just look at the DAG if we use the
-[0:56:01] we just look at the DAG if we use the same pre-treatment text right it it
-[0:56:05] same pre-treatment text right it it really is the case that they're not um W
-[0:56:08] really is the case that they're not um W and C they're not conditionally
-[0:56:10] and C they're not conditionally independent given UNC right because the
-[0:56:13] independent given UNC right because the um we're we're conditioning on this
-[0:56:15] um we're we're conditioning on this pre-treatment text. Um, so we we found
-[0:56:20] pre-treatment text. Um, so we we found and and we we do have results which I
-[0:56:22] and and we we do have results which I didn't highlight here that when we use
-[0:56:23] didn't highlight here that when we use the same piece of pre-treatment text,
-[0:56:26] the same piece of pre-treatment text, keep everything else the same, it does
-[0:56:28] keep everything else the same, it does result in biased estimates too. Um, so I
-[0:56:30] result in biased estimates too. Um, so I would highlight that in our results of
-[0:56:32] would highlight that in our results of we we did look at using the same rather
-[0:56:35] we we did look at using the same rather than splitting as well. Um, so that was
-[0:56:39] than splitting as well. Um, so that was that piece. I think I also um I've
-[0:56:42] that piece. I think I also um I've thought a lot about your third question
-[0:56:44] thought a lot about your third question Naoki which is um if I stop sharing here
-[0:56:49] Naoki which is um if I stop sharing here uh your third question was about all
-[0:56:51] uh your third question was about all these other methods that look at sort of
-[0:56:54] these other methods that look at sort of text encodes everything it's super
-[0:56:56] text encodes everything it's super highdimensional this is great we want to
-[0:56:58] highdimensional this is great we want to try to get as much information as we can
-[0:57:01] try to get as much information as we can and in the applications I've worked on
-[0:57:04] and in the applications I've worked on and I've thought about this right it's
-[0:57:06] and I've thought about this right it's this sort of trade-off in tension
-[0:57:08] this sort of trade-off in tension between we're using text because we want
-[0:57:11] between we're using text because we want to satisfy known no unobserved
-[0:57:13] to satisfy known no unobserved confounding. We're hoping we get any
-[0:57:16] confounding. We're hoping we get any confounders there. But the trade-off is
-[0:57:19] confounders there. But the trade-off is the more highdimensional the confounders
-[0:57:21] the more highdimensional the confounders are, the less likely we are to satisfy
-[0:57:23] are, the less likely we are to satisfy positivity, right? That we actually have
-[0:57:27] positivity, right? That we actually have um sort of all the confounders in all
-[0:57:30] um sort of all the confounders in all their various settings for both um
-[0:57:33] their various settings for both um treated and
-[0:57:34] treated and untreated. And what I worry about cuz
-[0:57:37] untreated. And what I worry about cuz I've done the like let's just take text
-[0:57:39] I've done the like let's just take text and try to condition on everything. One
-[0:57:41] and try to condition on everything. One is we could be conditioning on colliders
-[0:57:43] is we could be conditioning on colliders if we're not thinking about it carefully
-[0:57:44] if we're not thinking about it carefully and we're just throwing everything uh
-[0:57:47] and we're just throwing everything uh with text into our estimates. And the
-[0:57:50] with text into our estimates. And the second thing is
-[0:57:52] second thing is um you know I think what we were
-[0:57:55] um you know I think what we were thinking about of having to really
-[0:57:57] thinking about of having to really specify what the unobserved confounding
-[0:58:00] specify what the unobserved confounding was right really makes you focus on
-[0:58:03] was right really makes you focus on where is that in in the DAG here so that
-[0:58:07] where is that in in the DAG here so that you're you're able to justify that it's
-[0:58:10] you're you're able to justify that it's actually a confounder and not a mediator
-[0:58:12] actually a confounder and not a mediator or a collider or something like that.
-[0:58:15] or a collider or something like that. Um, so I I think I agree with with the
-[0:58:18] Um, so I I think I agree with with the point you made, Naoki, about by being
-[0:58:20] point you made, Naoki, about by being forced to specify it because you have to
-[0:58:22] forced to specify it because you have to write sort of the natural language form
-[0:58:24] write sort of the natural language form of that unobserved confounder in the
-[0:58:26] of that unobserved confounder in the prompt. Hopefully you could also put
-[0:58:28] prompt. Hopefully you could also put that in the DAG with with your expertise
-[0:58:31] that in the DAG with with your expertise there. Um, maybe I'll pause there. Is
-[0:58:34] there. Um, maybe I'll pause there. Is this a back and forth? Does Nico, you
-[0:58:36] this a back and forth? Does Nico, you want to jump back in or should I go
-[0:58:38] want to jump back in or should I go through some of those other points?
-[0:58:41] through some of those other points? Um, it's typical. I think we're running
-[0:58:44] Um, it's typical. I think we're running out of the time, right, Dominic? Or like
-[0:58:46] out of the time, right, Dominic? Or like if you also want to talk. Yeah. Like,
-[0:58:50] if you also want to talk. Yeah. Like, uh, do you mind if I step in, Katie?
-[0:58:53] uh, do you mind if I step in, Katie? Yes, please go for it, Ro. Yeah. So, so
-[0:58:56] Yes, please go for it, Ro. Yeah. So, so Naoki, yeah, I I think what you
-[0:58:58] Naoki, yeah, I I think what you mentioned like T1 like the two pieces of
-[0:59:00] mentioned like T1 like the two pieces of text being independent is actually
-[0:59:02] text being independent is actually stricter than necessary. And there are
-[0:59:05] stricter than necessary. And there are certain conditions, but we think they're
-[0:59:07] certain conditions, but we think they're very unlikely conditions under which
-[0:59:09] very unlikely conditions under which even if you don't have independent
-[0:59:10] even if you don't have independent pieces of text, uh you'll get
-[0:59:13] pieces of text, uh you'll get independent proxies. Here's one extreme
-[0:59:15] independent proxies. Here's one extreme example. Let's say you have a piece of
-[0:59:17] example. Let's say you have a piece of text. You generate a bag of words
-[0:59:19] text. You generate a bag of words embedding for that piece of text. Now,
-[0:59:21] embedding for that piece of text. Now, you split that bag of words embedding
-[0:59:23] you split that bag of words embedding into half and half. And somehow you're
-[0:59:27] into half and half. And somehow you're able to ensure that the two uh the two
-[0:59:31] able to ensure that the two uh the two sets of vocabularies that you've
-[0:59:32] sets of vocabularies that you've generated by doing this split are
-[0:59:34] generated by doing this split are independent
-[0:59:36] independent vocabularies. Um and now if you apply
-[0:59:38] vocabularies. Um and now if you apply two zeros models that just focus on one
-[0:59:41] two zeros models that just focus on one subset of words and another that focuses
-[0:59:44] subset of words and another that focuses on just the other subset of words, you
-[0:59:46] on just the other subset of words, you could generate proxies from just one
-[0:59:48] could generate proxies from just one piece of text.
-[0:59:51] piece of text. Um that's I think that's a much more
-[0:59:54] Um that's I think that's a much more complicated condition to try and get to
-[0:59:56] complicated condition to try and get to hold than than trying to ensure the
-[0:59:58] hold than than trying to ensure the independence of text directly. Um yeah
-[1:00:02] independence of text directly. Um yeah and then to your odds ratio question it
-[1:00:04] and then to your odds ratio question it is generally applicable. You're right.
-[1:00:06] is generally applicable. You're right. It's not unique to to textbased proxies.
-[1:00:10] It's not unique to to textbased proxies. Um it's it's sort of more specialized
-[1:00:13] Um it's it's sort of more specialized for textbased proxies and this
-[1:00:15] for textbased proxies and this particular way in which we're doing it
-[1:00:16] particular way in which we're doing it because uh that bound of the odds ratio
-[1:00:20] because uh that bound of the odds ratio being uh greater the observed odds ratio
-[1:00:22] being uh greater the observed odds ratio being greater than one holds if uh both
-[1:00:26] being greater than one holds if uh both proxies are positively correlated with
-[1:00:28] proxies are positively correlated with you. Um in a general setting both
-[1:00:31] you. Um in a general setting both proxies may not be positively correlated
-[1:00:33] proxies may not be positively correlated with you. Uh but it's only because we're
-[1:00:36] with you. Uh but it's only because we're ensuring that these are predictions of
-[1:00:37] ensuring that these are predictions of you, they should both be positively
-[1:00:39] you, they should both be positively correlated that. Yeah. Awesome. Thank
-[1:00:43] correlated that. Yeah. Awesome. Thank you. I think we got to wrap up. Um
-[1:00:46] you. I think we got to wrap up. Um so yeah, thank you so much Katie for a
-[1:00:50] so yeah, thank you so much Katie for a very interesting talk. Rohit for helping
-[1:00:53] very interesting talk. Rohit for helping us out in Q&amp;A answering all of these
-[1:00:54] us out in Q&amp;A answering all of these questions. Thanks also Naoki for the
-[1:00:57] questions. Thanks also Naoki for the nice discussion. Thank you all for
-[1:00:59] nice discussion. Thank you all for coming. I just wanted to point out next
-[1:01:00] coming. I just wanted to point out next week we're going to have Alberto Abadi
-[1:01:02] week we're going to have Alberto Abadi from MI2 who will talk about synthetic
-[1:01:04] from MI2 who will talk about synthetic controls for experimental design. Thank
-[1:01:06] controls for experimental design. Thank you all for coming. I hope you have a
-[1:01:08] you all for coming. I hope you have a great week and see you next
-[1:01:11] great week and see you next time. Thank you.
+[0:55:25] quickly respond? Yes, thank you Naoki.
+[0:55:28] This is very very detailed. Um maybe I
+[0:55:31] can start with number four. Right. So um
+[0:55:36] we talked about this a lot. Uh why can
+[0:55:41] you see am I sharing? Can you see my
+[0:55:45] screen? Yes. Okay. Um we talked yes we
+[0:55:49] we talked about this a lot right of
+[0:55:52] right yes we do want W and Z to be
+[0:55:56] independent given you and C but if we if
+[0:55:59] we just look at the DAG if we use the
+[0:56:01] same pre-treatment text right it it
+[0:56:05] really is the case that they're not um W
+[0:56:08] and C they're not conditionally
+[0:56:10] independent given UNC right because the
+[0:56:13] um we're we're conditioning on this
+[0:56:15] pre-treatment text. Um, so we we found
+[0:56:20] and and we we do have results which I
+[0:56:22] didn't highlight here that when we use
+[0:56:23] the same piece of pre-treatment text,
+[0:56:26] keep everything else the same, it does
+[0:56:28] result in biased estimates too. Um, so I
+[0:56:30] would highlight that in our results of
+[0:56:32] we we did look at using the same rather
+[0:56:35] than splitting as well. Um, so that was
+[0:56:39] that piece. I think I also um I've
+[0:56:42] thought a lot about your third question
+[0:56:44] Naoki which is um if I stop sharing here
+[0:56:49] uh your third question was about all
+[0:56:51] these other methods that look at sort of
+[0:56:54] text encodes everything it's super
+[0:56:56] highdimensional this is great we want to
+[0:56:58] try to get as much information as we can
+[0:57:01] and in the applications I've worked on
+[0:57:04] and I've thought about this right it's
+[0:57:06] this sort of trade-off in tension
+[0:57:08] between we're using text because we want
+[0:57:11] to satisfy known no unobserved
+[0:57:13] confounding. We're hoping we get any
+[0:57:16] confounders there. But the trade-off is
+[0:57:19] the more highdimensional the confounders
+[0:57:21] are, the less likely we are to satisfy
+[0:57:23] positivity, right? That we actually have
+[0:57:27] um sort of all the confounders in all
+[0:57:30] their various settings for both um
+[0:57:33] treated and
+[0:57:34] untreated. And what I worry about cuz
+[0:57:37] I've done the like let's just take text
+[0:57:39] and try to condition on everything. One
+[0:57:41] is we could be conditioning on colliders
+[0:57:43] if we're not thinking about it carefully
+[0:57:44] and we're just throwing everything uh
+[0:57:47] with text into our estimates. And the
+[0:57:50] second thing is
+[0:57:52] um you know I think what we were
+[0:57:55] thinking about of having to really
+[0:57:57] specify what the unobserved confounding
+[0:58:00] was right really makes you focus on
+[0:58:03] where is that in in the DAG here so that
+[0:58:07] you're you're able to justify that it's
+[0:58:10] actually a confounder and not a mediator
+[0:58:12] or a collider or something like that.
+[0:58:15] Um, so I I think I agree with with the
+[0:58:18] point you made, Naoki, about by being
+[0:58:20] forced to specify it because you have to
+[0:58:22] write sort of the natural language form
+[0:58:24] of that unobserved confounder in the
+[0:58:26] prompt. Hopefully you could also put
+[0:58:28] that in the DAG with with your expertise
+[0:58:31] there. Um, maybe I'll pause there. Is
+[0:58:34] this a back and forth? Does Nico, you
+[0:58:36] want to jump back in or should I go
+[0:58:38] through some of those other points?
+[0:58:41] Um, it's typical. I think we're running
+[0:58:44] out of the time, right, Dominic? Or like
+[0:58:46] if you also want to talk. Yeah. Like,
+[0:58:50] uh, do you mind if I step in, Katie?
+[0:58:53] Yes, please go for it, Ro. Yeah. So, so
+[0:58:56] Naoki, yeah, I I think what you
+[0:58:58] mentioned like T1 like the two pieces of
+[0:59:00] text being independent is actually
+[0:59:02] stricter than necessary. And there are
+[0:59:05] certain conditions, but we think they're
+[0:59:07] very unlikely conditions under which
+[0:59:09] even if you don't have independent
+[0:59:10] pieces of text, uh you'll get
+[0:59:13] independent proxies. Here's one extreme
+[0:59:15] example. Let's say you have a piece of
+[0:59:17] text. You generate a bag of words
+[0:59:19] embedding for that piece of text. Now,
+[0:59:21] you split that bag of words embedding
+[0:59:23] into half and half. And somehow you're
+[0:59:27] able to ensure that the two uh the two
+[0:59:31] sets of vocabularies that you've
+[0:59:32] generated by doing this split are
+[0:59:34] independent
+[0:59:36] vocabularies. Um and now if you apply
+[0:59:38] two zeros models that just focus on one
+[0:59:41] subset of words and another that focuses
+[0:59:44] on just the other subset of words, you
+[0:59:46] could generate proxies from just one
+[0:59:48] piece of text.
+[0:59:51] Um that's I think that's a much more
+[0:59:54] complicated condition to try and get to
+[0:59:56] hold than than trying to ensure the
+[0:59:58] independence of text directly. Um yeah
+[1:00:02] and then to your odds ratio question it
+[1:00:04] is generally applicable. You're right.
+[1:00:06] It's not unique to to textbased proxies.
+[1:00:10] Um it's it's sort of more specialized
+[1:00:13] for textbased proxies and this
+[1:00:15] particular way in which we're doing it
+[1:00:16] because uh that bound of the odds ratio
+[1:00:20] being uh greater the observed odds ratio
+[1:00:22] being greater than one holds if uh both
+[1:00:26] proxies are positively correlated with
+[1:00:28] you. Um in a general setting both
+[1:00:31] proxies may not be positively correlated
+[1:00:33] with you. Uh but it's only because we're
+[1:00:36] ensuring that these are predictions of
+[1:00:37] you, they should both be positively
+[1:00:39] correlated that. Yeah. Awesome. Thank
+[1:00:43] you. I think we got to wrap up. Um
+[1:00:46] so yeah, thank you so much Katie for a
+[1:00:50] very interesting talk. Rohit for helping
+[1:00:53] us out in Q&A answering all of these
+[1:00:54] questions. Thanks also Naoki for the
+[1:00:57] nice discussion. Thank you all for
+[1:00:59] coming. I just wanted to point out next
+[1:01:00] week we're going to have Alberto Abadi
+[1:01:02] from MI2 who will talk about synthetic
+[1:01:04] controls for experimental design. Thank
+[1:01:06] you all for coming. I hope you have a
+[1:01:08] great week and see you next
+[1:01:11] time. Thank you.

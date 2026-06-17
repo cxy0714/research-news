@@ -1,1683 +1,1524 @@
 [0:00:04] so welcome to the online causal infant
-[0:00:06] welcome to the online causal infant seminar today we're very lucky to have
-[0:00:09] seminar today we're very lucky to have sarah magliacon from the university of
-[0:00:10] sarah magliacon from the university of amsterdam and mit
-[0:00:12] amsterdam and mit ibm watson ai lab
-[0:00:15] ibm watson ai lab uh she's gonna talk about actually the
-[0:00:17] uh she's gonna talk about actually the the title here has been
-[0:00:18] the title here has been uh updated it's domain adaptation by
-[0:00:20] uh updated it's domain adaptation by using causal inference to predict
-[0:00:22] using causal inference to predict very conditional uh distributions uh we
-[0:00:25] very conditional uh distributions uh we also have tom class and
-[0:00:26] also have tom class and uh yours moy and thais von omen in uh q
-[0:00:29] uh yours moy and thais von omen in uh q a and our
+[0:00:06] seminar today we're very lucky to have
+[0:00:09] sarah magliacon from the university of
+[0:00:10] amsterdam and mit
+[0:00:12] ibm watson ai lab
+[0:00:15] uh she's gonna talk about actually the
+[0:00:17] the title here has been
+[0:00:18] uh updated it's domain adaptation by
+[0:00:20] using causal inference to predict
+[0:00:22] very conditional uh distributions uh we
+[0:00:25] also have tom class and
+[0:00:26] uh yours moy and thais von omen in uh q
 [0:00:30] a and our discussion will be uh dominic uh
-[0:00:33] discussion will be uh dominic uh rothenhoussler guillaume is going to be
-[0:00:36] rothenhoussler guillaume is going to be handling q
-[0:00:37] handling q a so i'll hand it over to guillaume
+[0:00:33] rothenhoussler guillaume is going to be
+[0:00:36] handling q
+[0:00:37] a so i'll hand it over to guillaume
 [0:00:44] thank you michael um so as michael mentioned we are lucky to have tom
-[0:00:46] mentioned we are lucky to have tom and uh ties in the in the q a um
-[0:00:49] and uh ties in the in the q a um so they will be answering your question
-[0:00:51] so they will be answering your question uh tom
+[0:00:46] and uh ties in the in the q a um
+[0:00:49] so they will be answering your question
 [0:00:52] uh tom uh already did that uh a while back and
-[0:00:55] uh already did that uh a while back and he did a great job so
-[0:00:56] he did a great job so um you know expect good answers um we
-[0:00:59] um you know expect good answers um we will also select a few questions to ask
-[0:01:01] will also select a few questions to ask live to sarah um we'll probably keep the
-[0:01:04] live to sarah um we'll probably keep the questions for the end
-[0:01:05] questions for the end but uh you know feel free to ask them
-[0:01:07] but uh you know feel free to ask them nonetheless
-[0:01:08] nonetheless if your question is selected i will ask
-[0:01:09] if your question is selected i will ask you to raise your hand and i will unmute
-[0:01:11] you to raise your hand and i will unmute you so please do not raise your hand
-[0:01:13] you so please do not raise your hand until i've asked you to do so all right
-[0:01:15] until i've asked you to do so all right that's it from me
-[0:01:16] that's it from me i'm sarah whenever you're ready
+[0:00:55] he did a great job so
+[0:00:56] um you know expect good answers um we
+[0:00:59] will also select a few questions to ask
+[0:01:01] live to sarah um we'll probably keep the
+[0:01:04] questions for the end
+[0:01:05] but uh you know feel free to ask them
+[0:01:07] nonetheless
+[0:01:08] if your question is selected i will ask
+[0:01:09] you to raise your hand and i will unmute
+[0:01:11] you so please do not raise your hand
+[0:01:13] until i've asked you to do so all right
+[0:01:15] that's it from me
+[0:01:16] i'm sarah whenever you're ready
 [0:01:29] okay it works right okay so i think i'm supposed to say may the
-[0:01:31] so i think i'm supposed to say may the four to be with you
-[0:01:32] four to be with you that's first thing and then i wanted to
-[0:01:34] that's first thing and then i wanted to talk about our work on the main
-[0:01:36] talk about our work on the main adaptation by using causal difference to
-[0:01:38] adaptation by using causal difference to predict
+[0:01:31] four to be with you
+[0:01:32] that's first thing and then i wanted to
+[0:01:34] talk about our work on the main
+[0:01:36] adaptation by using causal difference to
 [0:01:38] predict invariant invariant features essentially
-[0:01:42] invariant invariant features essentially oops sorry about that
-[0:01:43] oops sorry about that just a second okay and this is john
-[0:01:46] just a second okay and this is john twerk
+[0:01:42] oops sorry about that
+[0:01:43] just a second okay and this is john
 [0:01:47] twerk with the tice who's here tom who's here
-[0:01:49] with the tice who's here tom who's here stefan bongers philippe verstev
-[0:01:51] stefan bongers philippe verstev and joris moy who are not here at the
-[0:01:53] and joris moy who are not here at the moment and
-[0:01:54] moment and um i'll start by first talking about
-[0:01:58] um i'll start by first talking about essentially the general context and the
-[0:02:00] essentially the general context and the general context is what can ideas from
-[0:02:02] general context is what can ideas from causality do for machine learning and um
-[0:02:06] causality do for machine learning and um i mean i think this is a bit like
-[0:02:08] i mean i think this is a bit like reaching to the to the choir
-[0:02:09] reaching to the to the choir but we know that real world machine
-[0:02:11] but we know that real world machine learning needs to deal also with bias
-[0:02:13] learning needs to deal also with bias data so fairness election bias
-[0:02:14] data so fairness election bias generalization
-[0:02:16] generalization heterogeneous data small samples missing
-[0:02:18] heterogeneous data small samples missing data
+[0:01:49] stefan bongers philippe verstev
+[0:01:51] and joris moy who are not here at the
+[0:01:53] moment and
+[0:01:54] um i'll start by first talking about
+[0:01:58] essentially the general context and the
+[0:02:00] general context is what can ideas from
+[0:02:02] causality do for machine learning and um
+[0:02:06] i mean i think this is a bit like
+[0:02:08] reaching to the to the choir
+[0:02:09] but we know that real world machine
+[0:02:11] learning needs to deal also with bias
+[0:02:13] data so fairness election bias
+[0:02:14] generalization
+[0:02:16] heterogeneous data small samples missing
 [0:02:19] data not id data and it usually uh is
-[0:02:22] not id data and it usually uh is requiring
 [0:02:22] requiring actionable insights so you want to make
-[0:02:24] actionable insights so you want to make decisions uh based on the data so
-[0:02:27] decisions uh based on the data so this is not something you can make with
-[0:02:28] this is not something you can make with correlations and
-[0:02:30] correlations and again preaching to the choir we know
-[0:02:32] again preaching to the choir we know that constant influence can actually
-[0:02:33] that constant influence can actually help with some of these questions
-[0:02:35] help with some of these questions and especially uh there are several ways
-[0:02:37] and especially uh there are several ways to do systematic data fusion and reuse
-[0:02:39] to do systematic data fusion and reuse with bias data and non-id
-[0:02:41] with bias data and non-id not id data and especially there is a
-[0:02:44] not id data and especially there is a systematic way to extract
-[0:02:46] systematic way to extract something i call actionable insights so
-[0:02:48] something i call actionable insights so insights which allow us to make
-[0:02:50] insights which allow us to make decisions but in this talk
-[0:02:53] decisions but in this talk i'm arguing like a bit of a middle
-[0:02:55] i'm arguing like a bit of a middle position so i'm arguing that full
-[0:02:57] position so i'm arguing that full causality sometimes is not necessary
-[0:02:59] causality sometimes is not necessary and as people who have worked on it know
-[0:03:02] and as people who have worked on it know it can be
+[0:02:24] decisions uh based on the data so
+[0:02:27] this is not something you can make with
+[0:02:28] correlations and
+[0:02:30] again preaching to the choir we know
+[0:02:32] that constant influence can actually
+[0:02:33] help with some of these questions
+[0:02:35] and especially uh there are several ways
+[0:02:37] to do systematic data fusion and reuse
+[0:02:39] with bias data and non-id
+[0:02:41] not id data and especially there is a
+[0:02:44] systematic way to extract
+[0:02:46] something i call actionable insights so
+[0:02:48] insights which allow us to make
+[0:02:50] decisions but in this talk
+[0:02:53] i'm arguing like a bit of a middle
+[0:02:55] position so i'm arguing that full
+[0:02:57] causality sometimes is not necessary
+[0:02:59] and as people who have worked on it know
 [0:03:03] it can be too expensive both computationally and
-[0:03:05] too expensive both computationally and sometimes also just
-[0:03:06] sometimes also just in the collection of data and
-[0:03:07] in the collection of data and experiments and so instead i'm
-[0:03:09] experiments and so instead i'm interested in something in the middle
-[0:03:11] interested in something in the middle which i've been calling
-[0:03:12] which i've been calling causality-inspired machine learning
-[0:03:14] causality-inspired machine learning and i think i'm several people have been
-[0:03:16] and i think i'm several people have been starting to look into this
-[0:03:18] starting to look into this domain and especially in this talk i
-[0:03:20] domain and especially in this talk i will just talk about one example
-[0:03:22] will just talk about one example and i will talk about unsupervised main
-[0:03:24] and i will talk about unsupervised main adaptation
-[0:03:25] adaptation so i'll start with like a general
-[0:03:28] so i'll start with like a general context of how transfer learning and
-[0:03:30] context of how transfer learning and because the influence are connected so
-[0:03:33] because the influence are connected so in general
-[0:03:33] in general in transfer learning uh we're interested
-[0:03:35] in transfer learning uh we're interested in answering the question
-[0:03:37] in answering the question how can i predict what happens when the
-[0:03:39] how can i predict what happens when the distribution changes
-[0:03:40] distribution changes for my model for example i can have a
-[0:03:42] for my model for example i can have a self-driving car that i have trained in
-[0:03:44] self-driving car that i have trained in the u.s
+[0:03:05] sometimes also just
+[0:03:06] in the collection of data and
+[0:03:07] experiments and so instead i'm
+[0:03:09] interested in something in the middle
+[0:03:11] which i've been calling
+[0:03:12] causality-inspired machine learning
+[0:03:14] and i think i'm several people have been
+[0:03:16] starting to look into this
+[0:03:18] domain and especially in this talk i
+[0:03:20] will just talk about one example
+[0:03:22] and i will talk about unsupervised main
+[0:03:24] adaptation
+[0:03:25] so i'll start with like a general
+[0:03:28] context of how transfer learning and
+[0:03:30] because the influence are connected so
+[0:03:33] in general
+[0:03:33] in transfer learning uh we're interested
+[0:03:35] in answering the question
+[0:03:37] how can i predict what happens when the
+[0:03:39] distribution changes
+[0:03:40] for my model for example i can have a
+[0:03:42] self-driving car that i have trained in
 [0:03:45] the u.s and i would like to also apply it in the
-[0:03:46] and i would like to also apply it in the uk but i need to be
-[0:03:48] uk but i need to be aware that in uk people drive on the
-[0:03:50] aware that in uk people drive on the other side of the road so i need to be
-[0:03:51] other side of the road so i need to be able to
+[0:03:46] uk but i need to be
+[0:03:48] aware that in uk people drive on the
+[0:03:50] other side of the road so i need to be
 [0:03:52] able to adapt my model uh to this different
-[0:03:54] adapt my model uh to this different setting
 [0:03:55] setting and in causal inference arguably we want
-[0:03:58] and in causal inference arguably we want to answer different
-[0:03:59] to answer different very similar question which is how can i
-[0:04:01] very similar question which is how can i predict what happens
-[0:04:03] predict what happens uh when the distribution changes after
-[0:04:05] uh when the distribution changes after an intervention
-[0:04:06] an intervention and generally people talk about perfect
-[0:04:07] and generally people talk about perfect interventions so that's like
-[0:04:10] interventions so that's like something that is very well treated in
-[0:04:13] something that is very well treated in the do calculus from birth
-[0:04:15] the do calculus from birth but in this talk i'm mostly interested
-[0:04:17] but in this talk i'm mostly interested in a soft intervention
-[0:04:18] in a soft intervention and in this case is essentially the
-[0:04:20] and in this case is essentially the distribution of a variable x
-[0:04:22] distribution of a variable x that is interlining given its parents
-[0:04:24] that is interlining given its parents changes
+[0:03:58] to answer different
+[0:03:59] very similar question which is how can i
+[0:04:01] predict what happens
+[0:04:03] uh when the distribution changes after
+[0:04:05] an intervention
+[0:04:06] and generally people talk about perfect
+[0:04:07] interventions so that's like
+[0:04:10] something that is very well treated in
+[0:04:13] the do calculus from birth
+[0:04:15] but in this talk i'm mostly interested
+[0:04:17] in a soft intervention
+[0:04:18] and in this case is essentially the
+[0:04:20] distribution of a variable x
+[0:04:22] that is interlining given its parents
 [0:04:25] changes and arguably this can model almost
-[0:04:29] and arguably this can model almost any type of change in distribution
-[0:04:32] any type of change in distribution and so we're not alone in thinking about
-[0:04:35] and so we're not alone in thinking about these ideas and we're also not the first
-[0:04:37] these ideas and we're also not the first so as far as i know this is one of the
-[0:04:40] so as far as i know this is one of the first papers
-[0:04:40] first papers that i found on connecting causality
-[0:04:44] that i found on connecting causality and transfer learning coverage achieved
-[0:04:46] and transfer learning coverage achieved concept shift
-[0:04:47] concept shift concept drift etc so and this is from
-[0:04:49] concept drift etc so and this is from html 2012
+[0:04:29] any type of change in distribution
+[0:04:32] and so we're not alone in thinking about
+[0:04:35] these ideas and we're also not the first
+[0:04:37] so as far as i know this is one of the
+[0:04:40] first papers
+[0:04:40] that i found on connecting causality
+[0:04:44] and transfer learning coverage achieved
+[0:04:46] concept shift
+[0:04:47] concept drift etc so and this is from
 [0:04:51] html 2012 and since then i think
-[0:04:55] and since then i think there has been a lot of work on this
-[0:04:56] there has been a lot of work on this topic so i start now by introducing some
-[0:04:59] topic so i start now by introducing some notation i'm going to use just so that
-[0:05:01] notation i'm going to use just so that maybe it's a bit clearer what i'm
-[0:05:02] maybe it's a bit clearer what i'm talking about
-[0:05:03] talking about so first i define what domain adaptation
-[0:05:05] so first i define what domain adaptation is
+[0:04:55] there has been a lot of work on this
+[0:04:56] topic so i start now by introducing some
+[0:04:59] notation i'm going to use just so that
+[0:05:01] maybe it's a bit clearer what i'm
+[0:05:02] talking about
+[0:05:03] so first i define what domain adaptation
 [0:05:06] is so let's assume we have uh some data so
-[0:05:09] so let's assume we have uh some data so some features
-[0:05:10] some features x of i and we have
-[0:05:13] x of i and we have features x and labels y and we have
-[0:05:16] features x and labels y and we have several samples in several possibly
-[0:05:19] several samples in several possibly several types of the
-[0:05:20] several types of the source domains and so they are
-[0:05:22] source domains and so they are distributed according to some
-[0:05:23] distributed according to some distribution p of s in each of the
-[0:05:25] distribution p of s in each of the domains there is a different p of s
-[0:05:27] domains there is a different p of s and then we have a target domain and in
-[0:05:30] and then we have a target domain and in general
+[0:05:09] some features
+[0:05:10] x of i and we have
+[0:05:13] features x and labels y and we have
+[0:05:16] several samples in several possibly
+[0:05:19] several types of the
+[0:05:20] source domains and so they are
+[0:05:22] distributed according to some
+[0:05:23] distribution p of s in each of the
+[0:05:25] domains there is a different p of s
+[0:05:27] and then we have a target domain and in
 [0:05:31] general in the target domain we again have the
-[0:05:33] in the target domain we again have the same features and the same labels but
-[0:05:35] same features and the same labels but they're distributed according to a
-[0:05:36] they're distributed according to a different distribution p of t
-[0:05:38] different distribution p of t which is different from the source
-[0:05:40] which is different from the source domain or the potentially several source
-[0:05:42] domain or the potentially several source domains
+[0:05:33] same features and the same labels but
+[0:05:35] they're distributed according to a
+[0:05:36] different distribution p of t
+[0:05:38] which is different from the source
+[0:05:40] domain or the potentially several source
 [0:05:43] domains and in general the idea is how can i
-[0:05:45] and in general the idea is how can i predict a label y
-[0:05:47] predict a label y in the target domain by also using
-[0:05:48] in the target domain by also using information from the search domain so
-[0:05:50] information from the search domain so this is the main adaptation
-[0:05:52] this is the main adaptation and specifically here i'm talking about
-[0:05:54] and specifically here i'm talking about the more complicated
-[0:05:56] the more complicated type of domain annotation and supervise
-[0:05:57] type of domain annotation and supervise them in adaptation so essentially it's
-[0:05:59] them in adaptation so essentially it's like a
+[0:05:45] predict a label y
+[0:05:47] in the target domain by also using
+[0:05:48] information from the search domain so
+[0:05:50] this is the main adaptation
+[0:05:52] and specifically here i'm talking about
+[0:05:54] the more complicated
+[0:05:56] type of domain annotation and supervise
+[0:05:57] them in adaptation so essentially it's
 [0:06:00] like a zero search learning if you want so
-[0:06:02] zero search learning if you want so there are no labels in the target domain
-[0:06:04] there are no labels in the target domain we only have the features
-[0:06:05] we only have the features x are distributed according to p of t
-[0:06:08] x are distributed according to p of t and no y in the target domain and so how
-[0:06:11] and no y in the target domain and so how do you work
-[0:06:12] do you work in this setting and maybe to give you
-[0:06:14] in this setting and maybe to give you like a more
-[0:06:16] like a more kind of concrete idea i'm giving here
-[0:06:19] kind of concrete idea i'm giving here some
+[0:06:02] there are no labels in the target domain
+[0:06:04] we only have the features
+[0:06:05] x are distributed according to p of t
+[0:06:08] and no y in the target domain and so how
+[0:06:11] do you work
+[0:06:12] in this setting and maybe to give you
+[0:06:14] like a more
+[0:06:16] kind of concrete idea i'm giving here
 [0:06:19] some running example i have with mice because
-[0:06:22] running example i have with mice because this is what we use in the
-[0:06:23] this is what we use in the in the paper so on the left we have
-[0:06:25] in the paper so on the left we have let's say some you know wild type mice
-[0:06:27] let's say some you know wild type mice so
+[0:06:22] this is what we use in the
+[0:06:23] in the paper so on the left we have
+[0:06:25] let's say some you know wild type mice
 [0:06:28] so mice which have not be been genetically
-[0:06:30] mice which have not be been genetically modified
 [0:06:31] modified and we have measured features x1 and x2
-[0:06:34] and we have measured features x1 and x2 and the outcome y
-[0:06:35] and the outcome y for each of the mice and each mouse is a
-[0:06:38] for each of the mice and each mouse is a row in the in this table on the left
-[0:06:42] row in the in this table on the left and then we have genetically modified
-[0:06:44] and then we have genetically modified mice in which a certain
-[0:06:46] mice in which a certain gene a has been knocked out and for each
-[0:06:49] gene a has been knocked out and for each of them
+[0:06:34] and the outcome y
+[0:06:35] for each of the mice and each mouse is a
+[0:06:38] row in the in this table on the left
+[0:06:42] and then we have genetically modified
+[0:06:44] mice in which a certain
+[0:06:46] gene a has been knocked out and for each
 [0:06:49] of them we do have the features x1 and x2 but we
-[0:06:52] we do have the features x1 and x2 but we never see the outcome y
-[0:06:53] never see the outcome y and we want to predict it and in order
-[0:06:55] and we want to predict it and in order to predict it
-[0:06:57] to predict it we want to use essentially what we know
-[0:06:59] we want to use essentially what we know from the normal mouse
-[0:07:00] from the normal mouse but we know that the distribution is not
-[0:07:01] but we know that the distribution is not the same so how do we do it
-[0:07:04] the same so how do we do it so in general we cannot do it and so in
-[0:07:06] so in general we cannot do it and so in this talk we will have
-[0:07:07] this talk we will have to make some assumptions and so one of
-[0:07:09] to make some assumptions and so one of the things
-[0:07:10] the things we're going to use we're going to
-[0:07:14] we're going to use we're going to represent domain adaptation we're going
-[0:07:16] represent domain adaptation we're going to see it from a graphical perspective
-[0:07:18] to see it from a graphical perspective so we will have essentially these two
-[0:07:21] so we will have essentially these two data sets with samples from these two
-[0:07:22] data sets with samples from these two distributions
-[0:07:24] distributions and then a simple thing we can do is we
-[0:07:26] and then a simple thing we can do is we can add a variable d
-[0:07:27] can add a variable d which just represents the domain so
-[0:07:29] which just represents the domain so which data set
-[0:07:30] which data set do the mice come from and then we can
-[0:07:33] do the mice come from and then we can put the data together
-[0:07:34] put the data together and consider them as coming from a
-[0:07:36] and consider them as coming from a single distribution p of x
-[0:07:38] single distribution p of x y and d and then we can represent
-[0:07:42] y and d and then we can represent we could represent these samples with a
-[0:07:45] we could represent these samples with a causal graph
-[0:07:46] causal graph that puts together the two distributions
-[0:07:48] that puts together the two distributions and this graph is potentially unknown so
-[0:07:50] and this graph is potentially unknown so this is how we will
-[0:07:52] this is how we will see this problem and so
-[0:07:55] see this problem and so again this is not an idea that we had so
-[0:07:57] again this is not an idea that we had so this is an idea that uh
-[0:07:58] this is an idea that uh kunsan and others have already described
-[0:08:00] kunsan and others have already described in 2013
+[0:06:52] never see the outcome y
+[0:06:53] and we want to predict it and in order
+[0:06:55] to predict it
+[0:06:57] we want to use essentially what we know
+[0:06:59] from the normal mouse
+[0:07:00] but we know that the distribution is not
+[0:07:01] the same so how do we do it
+[0:07:04] so in general we cannot do it and so in
+[0:07:06] this talk we will have
+[0:07:07] to make some assumptions and so one of
+[0:07:09] the things
+[0:07:10] we're going to use we're going to
+[0:07:14] represent domain adaptation we're going
+[0:07:16] to see it from a graphical perspective
+[0:07:18] so we will have essentially these two
+[0:07:21] data sets with samples from these two
+[0:07:22] distributions
+[0:07:24] and then a simple thing we can do is we
+[0:07:26] can add a variable d
+[0:07:27] which just represents the domain so
+[0:07:29] which data set
+[0:07:30] do the mice come from and then we can
+[0:07:33] put the data together
+[0:07:34] and consider them as coming from a
+[0:07:36] single distribution p of x
+[0:07:38] y and d and then we can represent
+[0:07:42] we could represent these samples with a
+[0:07:45] causal graph
+[0:07:46] that puts together the two distributions
+[0:07:48] and this graph is potentially unknown so
+[0:07:50] this is how we will
+[0:07:52] see this problem and so
+[0:07:55] again this is not an idea that we had so
+[0:07:57] this is an idea that uh
+[0:07:58] kunsan and others have already described
 [0:08:02] in 2013 and the way they use it uh they use it
-[0:08:04] and the way they use it uh they use it also
 [0:08:05] also to reason about um essentially
-[0:08:08] to reason about um essentially different assumptions which are very
-[0:08:10] different assumptions which are very common in transfer learning for example
-[0:08:12] common in transfer learning for example a very common assumption is
-[0:08:14] a very common assumption is the quality assumption which assumes
-[0:08:16] the quality assumption which assumes essentially that
-[0:08:18] essentially that the variable the label y is independent
-[0:08:22] the variable the label y is independent of the
+[0:08:08] different assumptions which are very
+[0:08:10] common in transfer learning for example
+[0:08:12] a very common assumption is
+[0:08:14] the quality assumption which assumes
+[0:08:16] essentially that
+[0:08:18] the variable the label y is independent
 [0:08:23] of the domain indicator given all of the
-[0:08:26] domain indicator given all of the features x
-[0:08:27] features x and there are also other types of
-[0:08:28] and there are also other types of assumptions so now in order to maybe
-[0:08:31] assumptions so now in order to maybe um explain why am i talking about
-[0:08:33] um explain why am i talking about independences
-[0:08:34] independences you know we have the graph what do
-[0:08:36] you know we have the graph what do independences you know how they are
-[0:08:37] independences you know how they are connected
+[0:08:26] features x
+[0:08:27] and there are also other types of
+[0:08:28] assumptions so now in order to maybe
+[0:08:31] um explain why am i talking about
+[0:08:33] independences
+[0:08:34] you know we have the graph what do
+[0:08:36] independences you know how they are
 [0:08:38] connected i'm going to just give a very very quick
-[0:08:41] i'm going to just give a very very quick and very
 [0:08:42] and very uh simplified version of um this
-[0:08:44] uh simplified version of um this separation so the separation is a
-[0:08:46] separation so the separation is a concept
+[0:08:44] separation so the separation is a
 [0:08:47] concept we started in bayesian networks and it's
-[0:08:49] we started in bayesian networks and it's using causality
-[0:08:50] using causality and it's a concept described among other
-[0:08:52] and it's a concept described among other things also in the kosaki book of
-[0:08:54] things also in the kosaki book of birth and the idea is it's a graphical
-[0:08:57] birth and the idea is it's a graphical criterion
+[0:08:49] using causality
+[0:08:50] and it's a concept described among other
+[0:08:52] things also in the kosaki book of
+[0:08:54] birth and the idea is it's a graphical
 [0:08:58] criterion which under certain conditions allows us
-[0:09:00] which under certain conditions allows us to read from a graph
-[0:09:02] to read from a graph the conditional dependencies which will
-[0:09:04] the conditional dependencies which will show up in the data
-[0:09:06] show up in the data and so the conditions that are used so
-[0:09:09] and so the conditions that are used so this is the technical there are two
-[0:09:10] this is the technical there are two conditions there is a causal macro
-[0:09:11] conditions there is a causal macro assumption and a causal fitness
-[0:09:13] assumption and a causal fitness assumption
-[0:09:13] assumption but the idea is that these two together
-[0:09:16] but the idea is that these two together uh which
+[0:09:00] to read from a graph
+[0:09:02] the conditional dependencies which will
+[0:09:04] show up in the data
+[0:09:06] and so the conditions that are used so
+[0:09:09] this is the technical there are two
+[0:09:10] conditions there is a causal macro
+[0:09:11] assumption and a causal fitness
+[0:09:13] assumption
+[0:09:13] but the idea is that these two together
 [0:09:17] uh which which is the way they're usually used
-[0:09:18] which is the way they're usually used together they would assume essentially
-[0:09:20] together they would assume essentially that
+[0:09:18] together they would assume essentially
 [0:09:20] that whatever is this separated is
-[0:09:22] whatever is this separated is conditionally independent in the data
-[0:09:25] conditionally independent in the data and so the idea is here i'm just giving
-[0:09:27] and so the idea is here i'm just giving you just
+[0:09:22] conditionally independent in the data
+[0:09:25] and so the idea is here i'm just giving
 [0:09:28] you just the short intuition so if you have two
-[0:09:30] the short intuition so if you have two variables x and y
-[0:09:32] variables x and y uh these variables are d connected which
-[0:09:35] uh these variables are d connected which is the opposite
-[0:09:35] is the opposite of this separated if there is a path
-[0:09:38] of this separated if there is a path between them so from x to z
-[0:09:39] between them so from x to z to y that is unblocked and
-[0:09:43] to y that is unblocked and and that's how uh in this specific case
-[0:09:46] and that's how uh in this specific case in which we don't have any conditioning
-[0:09:48] in which we don't have any conditioning and block just means there is no
-[0:09:49] and block just means there is no collider so there is no
-[0:09:51] collider so there is no structure in which there are two edges
-[0:09:53] structure in which there are two edges pointing together
-[0:09:55] pointing together into the same variable like this and so
-[0:09:58] into the same variable like this and so we represent the connectedness between x
-[0:10:00] we represent the connectedness between x and y with this symbol
-[0:10:03] and y with this symbol in red so on the left and we represent
-[0:10:05] in red so on the left and we represent the separation with the other symbol
-[0:10:07] the separation with the other symbol on the right and you see the symbol is
-[0:10:08] on the right and you see the symbol is very similar to conditional independence
-[0:10:10] very similar to conditional independence because you essentially assume that they
-[0:10:11] because you essentially assume that they are
+[0:09:30] variables x and y
+[0:09:32] uh these variables are d connected which
+[0:09:35] is the opposite
+[0:09:35] of this separated if there is a path
+[0:09:38] between them so from x to z
+[0:09:39] to y that is unblocked and
+[0:09:43] and that's how uh in this specific case
+[0:09:46] in which we don't have any conditioning
+[0:09:48] and block just means there is no
+[0:09:49] collider so there is no
+[0:09:51] structure in which there are two edges
+[0:09:53] pointing together
+[0:09:55] into the same variable like this and so
+[0:09:58] we represent the connectedness between x
+[0:10:00] and y with this symbol
+[0:10:03] in red so on the left and we represent
+[0:10:05] the separation with the other symbol
+[0:10:07] on the right and you see the symbol is
+[0:10:08] very similar to conditional independence
+[0:10:10] because you essentially assume that they
 [0:10:12] are the same under the usual assumptions
-[0:10:16] the same under the usual assumptions and so we have also kind of more
-[0:10:18] and so we have also kind of more complicated cases as well
-[0:10:19] complicated cases as well and in general uh up to now i've been
-[0:10:22] and in general uh up to now i've been talking about the unconditioned case so
-[0:10:24] talking about the unconditioned case so we just have a path that it's either
-[0:10:25] we just have a path that it's either blocked or unblocked
-[0:10:27] blocked or unblocked but in general you can also block ground
-[0:10:29] but in general you can also block ground block above when you condition
-[0:10:30] block above when you condition or in particular observe certain
-[0:10:32] or in particular observe certain variables so in this case in which you
-[0:10:34] variables so in this case in which you have a chain from x
-[0:10:35] have a chain from x to z to y uh usually x and y are
-[0:10:38] to z to y uh usually x and y are dependent
+[0:10:16] and so we have also kind of more
+[0:10:18] complicated cases as well
+[0:10:19] and in general uh up to now i've been
+[0:10:22] talking about the unconditioned case so
+[0:10:24] we just have a path that it's either
+[0:10:25] blocked or unblocked
+[0:10:27] but in general you can also block ground
+[0:10:29] block above when you condition
+[0:10:30] or in particular observe certain
+[0:10:32] variables so in this case in which you
+[0:10:34] have a chain from x
+[0:10:35] to z to y uh usually x and y are
 [0:10:39] dependent so they're deconnected but
-[0:10:42] so they're deconnected but when you observe that you essentially
-[0:10:44] when you observe that you essentially interrupt the influence of x
-[0:10:46] interrupt the influence of x to y and so x and y now if you know z
-[0:10:50] to y and so x and y now if you know z they become d separated or
-[0:10:53] they become d separated or what we assume they are conditionally
-[0:10:54] what we assume they are conditionally independent in the data
-[0:10:56] independent in the data and the kind of weird case is when you
-[0:10:59] and the kind of weird case is when you have a collider
-[0:11:00] have a collider you get the opposite so x and y used to
-[0:11:02] you get the opposite so x and y used to be independent but when you observe the
-[0:11:03] be independent but when you observe the collider you're essentially like
-[0:11:06] collider you're essentially like forming something that could be like
-[0:11:07] forming something that could be like seen as selection bias as well if you
-[0:11:09] seen as selection bias as well if you want
+[0:10:42] when you observe that you essentially
+[0:10:44] interrupt the influence of x
+[0:10:46] to y and so x and y now if you know z
+[0:10:50] they become d separated or
+[0:10:53] what we assume they are conditionally
+[0:10:54] independent in the data
+[0:10:56] and the kind of weird case is when you
+[0:10:59] have a collider
+[0:11:00] you get the opposite so x and y used to
+[0:11:02] be independent but when you observe the
+[0:11:03] collider you're essentially like
+[0:11:06] forming something that could be like
+[0:11:07] seen as selection bias as well if you
 [0:11:09] want so you form a correlation between x and
-[0:11:12] so you form a correlation between x and y or
 [0:11:13] y or dependence a conditional dependence
-[0:11:15] dependence a conditional dependence between x and y given that
-[0:11:17] between x and y given that and so i'm not going to go too much into
-[0:11:20] and so i'm not going to go too much into the details but there is a very nice
-[0:11:21] the details but there is a very nice interactive demo
-[0:11:22] interactive demo and since the slides will be online you
-[0:11:24] and since the slides will be online you can just click on this link
-[0:11:25] can just click on this link and you'll find the demo and if you're
-[0:11:26] and you'll find the demo and if you're curious about the separation i think
-[0:11:28] curious about the separation i think it's
+[0:11:15] between x and y given that
+[0:11:17] and so i'm not going to go too much into
+[0:11:20] the details but there is a very nice
+[0:11:21] interactive demo
+[0:11:22] and since the slides will be online you
+[0:11:24] can just click on this link
+[0:11:25] and you'll find the demo and if you're
+[0:11:26] curious about the separation i think
 [0:11:29] it's very worth to try and play with it
-[0:11:32] very worth to try and play with it so now i'm coming back so i'm talking
-[0:11:34] so now i'm coming back so i'm talking about this separation
-[0:11:36] about this separation uh i'm talking about this operation
-[0:11:37] uh i'm talking about this operation because we can also do this with the
-[0:11:39] because we can also do this with the domain variable
-[0:11:40] domain variable that i explained before we can have in
-[0:11:42] that i explained before we can have in the graph and why is this
-[0:11:44] the graph and why is this even useful so it's useful because okay
-[0:11:46] even useful so it's useful because okay so
+[0:11:32] so now i'm coming back so i'm talking
+[0:11:34] about this separation
+[0:11:36] uh i'm talking about this operation
+[0:11:37] because we can also do this with the
+[0:11:39] domain variable
+[0:11:40] that i explained before we can have in
+[0:11:42] the graph and why is this
+[0:11:44] even useful so it's useful because okay
 [0:11:47] so now i'm going to assume the standard
-[0:11:49] now i'm going to assume the standard condition so i'm going to remove the d
-[0:11:51] condition so i'm going to remove the d just for simplicity this is useful
-[0:11:53] just for simplicity this is useful because the conditional independences
-[0:11:55] because the conditional independences with this special variable d that
-[0:11:58] with this special variable d that represents the domain
-[0:11:59] represents the domain actually they mean they are talking
-[0:12:02] actually they mean they are talking about in variances
-[0:12:03] about in variances across the domains so if you have the
-[0:12:06] across the domains so if you have the outcome
+[0:11:49] condition so i'm going to remove the d
+[0:11:51] just for simplicity this is useful
+[0:11:53] because the conditional independences
+[0:11:55] with this special variable d that
+[0:11:58] represents the domain
+[0:11:59] actually they mean they are talking
+[0:12:02] about in variances
+[0:12:03] across the domains so if you have the
 [0:12:06] outcome or the label y is independent of d
-[0:12:10] or the label y is independent of d this means that the conditional
-[0:12:12] this means that the conditional distribution of y
-[0:12:13] distribution of y doesn't change across the d and if you
-[0:12:15] doesn't change across the d and if you have the the
-[0:12:17] have the the label y is conditionally independent of
-[0:12:19] label y is conditionally independent of d given x one
-[0:12:21] d given x one then the conditional distribution of y
-[0:12:23] then the conditional distribution of y given x1 doesn't change
-[0:12:25] given x1 doesn't change across the different domains and this is
-[0:12:27] across the different domains and this is what we're looking for
-[0:12:28] what we're looking for in variances and in general the idea is
-[0:12:31] in variances and in general the idea is that
+[0:12:10] this means that the conditional
+[0:12:12] distribution of y
+[0:12:13] doesn't change across the d and if you
+[0:12:15] have the the
+[0:12:17] label y is conditionally independent of
+[0:12:19] d given x one
+[0:12:21] then the conditional distribution of y
+[0:12:23] given x1 doesn't change
+[0:12:25] across the different domains and this is
+[0:12:27] what we're looking for
+[0:12:28] in variances and in general the idea is
 [0:12:31] that if you know how this separation works
-[0:12:33] if you know how this separation works and you have the graph
-[0:12:35] and you have the graph you can always find like separating sets
-[0:12:37] you can always find like separating sets or sets of features
-[0:12:38] or sets of features which will essentially transfer from one
-[0:12:40] which will essentially transfer from one domain to the other
-[0:12:42] domain to the other and so that allows us to reason about
-[0:12:44] and so that allows us to reason about imbalances in a principled way
-[0:12:46] imbalances in a principled way and one of the things uh that says
-[0:12:49] and one of the things uh that says several people are starting to work on
-[0:12:51] several people are starting to work on uh causality and the main adaptation one
-[0:12:54] uh causality and the main adaptation one of the things that people
-[0:12:55] of the things that people assume and this was a i hope slightly
-[0:12:58] assume and this was a i hope slightly less common misconception at this point
-[0:13:00] less common misconception at this point but it used to be a common misconception
-[0:13:03] but it used to be a common misconception recently
+[0:12:33] and you have the graph
+[0:12:35] you can always find like separating sets
+[0:12:37] or sets of features
+[0:12:38] which will essentially transfer from one
+[0:12:40] domain to the other
+[0:12:42] and so that allows us to reason about
+[0:12:44] imbalances in a principled way
+[0:12:46] and one of the things uh that says
+[0:12:49] several people are starting to work on
+[0:12:51] uh causality and the main adaptation one
+[0:12:54] of the things that people
+[0:12:55] assume and this was a i hope slightly
+[0:12:58] less common misconception at this point
+[0:13:00] but it used to be a common misconception
 [0:13:04] recently is that if something is invariant across
-[0:13:07] is that if something is invariant across several domains
-[0:13:08] several domains then it has to be causal and that's not
-[0:13:10] then it has to be causal and that's not necessarily true
-[0:13:12] necessarily true because it depends if it's invariant in
-[0:13:14] because it depends if it's invariant in which domains so if you have something
-[0:13:16] which domains so if you have something that is invariant across
-[0:13:17] that is invariant across all possible interventions then
-[0:13:19] all possible interventions then definitely that's true it's causal
-[0:13:20] definitely that's true it's causal but not in general and so in this case i
-[0:13:23] but not in general and so in this case i have just a graph
-[0:13:24] have just a graph and we can have a chat about it uh
-[0:13:26] and we can have a chat about it uh essentially showing
-[0:13:28] essentially showing um that x2 is uh so both
-[0:13:32] um that x2 is uh so both x1 and x2 are making um
-[0:13:35] x1 and x2 are making um the label y in variant of the domain d
-[0:13:38] the label y in variant of the domain d but this doesn't mean that x2 is a
-[0:13:39] but this doesn't mean that x2 is a parent
+[0:13:07] several domains
+[0:13:08] then it has to be causal and that's not
+[0:13:10] necessarily true
+[0:13:12] because it depends if it's invariant in
+[0:13:14] which domains so if you have something
+[0:13:16] that is invariant across
+[0:13:17] all possible interventions then
+[0:13:19] definitely that's true it's causal
+[0:13:20] but not in general and so in this case i
+[0:13:23] have just a graph
+[0:13:24] and we can have a chat about it uh
+[0:13:26] essentially showing
+[0:13:28] um that x2 is uh so both
+[0:13:32] x1 and x2 are making um
+[0:13:35] the label y in variant of the domain d
+[0:13:38] but this doesn't mean that x2 is a
 [0:13:40] parent or a you know a cause of y in this case
-[0:13:42] or a you know a cause of y in this case actually it's a child
-[0:13:44] actually it's a child and so invariant features across many
-[0:13:46] and so invariant features across many different dataset
-[0:13:47] different dataset depends how are they different these
-[0:13:50] depends how are they different these data sets
+[0:13:42] actually it's a child
+[0:13:44] and so invariant features across many
+[0:13:46] different dataset
+[0:13:47] depends how are they different these
 [0:13:50] data sets and so we generally need more
-[0:13:52] and so we generally need more assumptions and i think this is
-[0:13:54] assumptions and i think this is something that was mentioned in the iron
-[0:13:55] something that was mentioned in the iron paper but
+[0:13:52] assumptions and i think this is
+[0:13:54] something that was mentioned in the iron
 [0:13:56] paper but uh it wasn't very clear to the people
-[0:13:57] uh it wasn't very clear to the people who have followed the work so i wanted
-[0:13:59] who have followed the work so i wanted to
+[0:13:57] who have followed the work so i wanted
 [0:13:59] to just underline it and so there is
-[0:14:02] just underline it and so there is another
 [0:14:03] another uh work called the invalid causal
-[0:14:05] uh work called the invalid causal prediction which actually finds
-[0:14:06] prediction which actually finds uh features a subset of the parents
-[0:14:10] uh features a subset of the parents and in this case you have to do
-[0:14:11] and in this case you have to do something smarter so you need to do an
-[0:14:12] something smarter so you need to do an intersection or avoid
-[0:14:14] intersection or avoid um avoid the conditional independences
-[0:14:17] um avoid the conditional independences of y and d
-[0:14:17] of y and d given a sub s so you have to find the
-[0:14:19] given a sub s so you have to find the set s that is in intersection of all of
-[0:14:22] set s that is in intersection of all of these conditional independences
-[0:14:23] these conditional independences for example in the case above you have
-[0:14:25] for example in the case above you have um y is independent of the
-[0:14:27] um y is independent of the condition in x1 so we have x1 and y is
-[0:14:30] condition in x1 so we have x1 and y is independent of the
-[0:14:31] independent of the condition in x1 and x2 so the
-[0:14:33] condition in x1 and x2 so the intersection of x1 is true
-[0:14:35] intersection of x1 is true and x1 is x1 itself so in this case it
-[0:14:38] and x1 is x1 itself so in this case it works
+[0:14:05] prediction which actually finds
+[0:14:06] uh features a subset of the parents
+[0:14:10] and in this case you have to do
+[0:14:11] something smarter so you need to do an
+[0:14:12] intersection or avoid
+[0:14:14] um avoid the conditional independences
+[0:14:17] of y and d
+[0:14:17] given a sub s so you have to find the
+[0:14:19] set s that is in intersection of all of
+[0:14:22] these conditional independences
+[0:14:23] for example in the case above you have
+[0:14:25] um y is independent of the
+[0:14:27] condition in x1 so we have x1 and y is
+[0:14:30] independent of the
+[0:14:31] condition in x1 and x2 so the
+[0:14:33] intersection of x1 is true
+[0:14:35] and x1 is x1 itself so in this case it
 [0:14:39] works but sometimes it can be this method can
-[0:14:42] but sometimes it can be this method can be too conservative so it doesn't find
-[0:14:43] be too conservative so it doesn't find generally
+[0:14:42] be too conservative so it doesn't find
 [0:14:44] generally all of the parents it finds a subset of
-[0:14:46] all of the parents it finds a subset of the parents so in some cases like
-[0:14:48] the parents so in some cases like in this case uh it doesn't find any of
-[0:14:51] in this case uh it doesn't find any of the parents
-[0:14:51] the parents so it's a high precision method and no
-[0:14:54] so it's a high precision method and no recall
+[0:14:46] the parents so in some cases like
+[0:14:48] in this case uh it doesn't find any of
+[0:14:51] the parents
+[0:14:51] so it's a high precision method and no
 [0:14:55] recall and there is another misconception and
-[0:14:57] and there is another misconception and this is maybe
-[0:14:58] this is maybe possibly a bit worse is people think
-[0:15:02] possibly a bit worse is people think that in general okay i just take the
-[0:15:03] that in general okay i just take the causal parents
-[0:15:04] causal parents and then you know i'll be always fine
-[0:15:06] and then you know i'll be always fine and any intervention that happens
-[0:15:08] and any intervention that happens any kind of domain shift because their
-[0:15:11] any kind of domain shift because their parents will protect me against that
-[0:15:13] parents will protect me against that and that's true but not under latent
-[0:15:15] and that's true but not under latent confounding
-[0:15:16] confounding so if there are some hidden variables uh
-[0:15:19] so if there are some hidden variables uh a hidden common cause between x2
-[0:15:21] a hidden common cause between x2 and y which we represent with this
-[0:15:22] and y which we represent with this bi-directed edge then x2 is not
-[0:15:25] bi-directed edge then x2 is not more a good a stable predictor of y
-[0:15:28] more a good a stable predictor of y because it's biased instead one should
-[0:15:30] because it's biased instead one should use x1 and in this case it looks a bit
-[0:15:32] use x1 and in this case it looks a bit like a
+[0:14:57] this is maybe
+[0:14:58] possibly a bit worse is people think
+[0:15:02] that in general okay i just take the
+[0:15:03] causal parents
+[0:15:04] and then you know i'll be always fine
+[0:15:06] and any intervention that happens
+[0:15:08] any kind of domain shift because their
+[0:15:11] parents will protect me against that
+[0:15:13] and that's true but not under latent
+[0:15:15] confounding
+[0:15:16] so if there are some hidden variables uh
+[0:15:19] a hidden common cause between x2
+[0:15:21] and y which we represent with this
+[0:15:22] bi-directed edge then x2 is not
+[0:15:25] more a good a stable predictor of y
+[0:15:28] because it's biased instead one should
+[0:15:30] use x1 and in this case it looks a bit
 [0:15:33] like a instrumental value also i guess it makes
-[0:15:35] instrumental value also i guess it makes sense for a lot of you
-[0:15:36] sense for a lot of you that you should use x1 to predict y and
-[0:15:39] that you should use x1 to predict y and x1 will transfer across the domain so
-[0:15:41] x1 will transfer across the domain so why the probability of y given x1 is
-[0:15:44] why the probability of y given x1 is invariant
+[0:15:35] sense for a lot of you
+[0:15:36] that you should use x1 to predict y and
+[0:15:39] x1 will transfer across the domain so
+[0:15:41] why the probability of y given x1 is
 [0:15:44] invariant y given x2 is not and so this is
-[0:15:48] y given x2 is not and so this is some of the things that people in
-[0:15:50] some of the things that people in machine learning are kind of
-[0:15:52] machine learning are kind of some common misconceptions they're
-[0:15:54] some common misconceptions they're encountering and so the conclusion here
-[0:15:56] encountering and so the conclusion here is that
+[0:15:48] some of the things that people in
+[0:15:50] machine learning are kind of
+[0:15:52] some common misconceptions they're
+[0:15:54] encountering and so the conclusion here
 [0:15:56] is that causality or in this case using the
-[0:15:59] causality or in this case using the causal parents of y
-[0:16:00] causal parents of y is neither necessary because you know
-[0:16:02] is neither necessary because you know you can still
-[0:16:03] you can still use things to predict why which are not
-[0:16:05] use things to predict why which are not parents and also it's not necessarily
-[0:16:07] parents and also it's not necessarily sufficient if you have latent
-[0:16:09] sufficient if you have latent confounders like in this case they're
-[0:16:11] confounders like in this case they're not the parents are not enough
-[0:16:13] not the parents are not enough for transfer so instead we want to use
-[0:16:17] for transfer so instead we want to use some other uh definition and in this
-[0:16:20] some other uh definition and in this case
+[0:15:59] causal parents of y
+[0:16:00] is neither necessary because you know
+[0:16:02] you can still
+[0:16:03] use things to predict why which are not
+[0:16:05] parents and also it's not necessarily
+[0:16:07] sufficient if you have latent
+[0:16:09] confounders like in this case they're
+[0:16:11] not the parents are not enough
+[0:16:13] for transfer so instead we want to use
+[0:16:17] some other uh definition and in this
 [0:16:21] case i'm actually going to talk about some of
-[0:16:22] i'm actually going to talk about some of them so this is a
-[0:16:25] them so this is a set of things that i would like my let's
-[0:16:27] set of things that i would like my let's say because i inspire domain adaptation
-[0:16:29] say because i inspire domain adaptation method
+[0:16:22] them so this is a
+[0:16:25] set of things that i would like my let's
+[0:16:27] say because i inspire domain adaptation
 [0:16:29] method to satisfy and obviously spoiler alert
-[0:16:32] to satisfy and obviously spoiler alert uh
 [0:16:32] uh it's it's a bias list so obviously we
-[0:16:35] it's it's a bias list so obviously we satisfy all of this in the end but
-[0:16:37] satisfy all of this in the end but let's go through them anyway so one of
-[0:16:39] let's go through them anyway so one of the things is
-[0:16:40] the things is we have in some cases the graph between
-[0:16:44] we have in some cases the graph between x and y is assumed to be known so we
-[0:16:46] x and y is assumed to be known so we want to assume that we don't know the
-[0:16:48] want to assume that we don't know the graph
+[0:16:35] satisfy all of this in the end but
+[0:16:37] let's go through them anyway so one of
+[0:16:39] the things is
+[0:16:40] we have in some cases the graph between
+[0:16:44] x and y is assumed to be known so we
+[0:16:46] want to assume that we don't know the
 [0:16:49] graph so there is a graph of how the features
-[0:16:51] so there is a graph of how the features and why
 [0:16:52] and why are connected in the in the different
-[0:16:55] are connected in the in the different domains
 [0:16:56] domains but we don't know it we just assume
-[0:16:58] but we don't know it we just assume there is a certain
-[0:17:00] there is a certain graph we allow for latent confounders
-[0:17:02] graph we allow for latent confounders which is something that
-[0:17:03] which is something that very few methods do and we try to avoid
-[0:17:06] very few methods do and we try to avoid parametric assumptions
-[0:17:07] parametric assumptions uh for example a lot of methods assume
-[0:17:09] uh for example a lot of methods assume linearity we try to
-[0:17:11] linearity we try to not assume that and we delegate these
-[0:17:13] not assume that and we delegate these assumptions essentially to the
-[0:17:14] assumptions essentially to the conditional dependence tests
-[0:17:16] conditional dependence tests which in some cases assume linearity but
-[0:17:18] which in some cases assume linearity but they don't need to
-[0:17:20] they don't need to and another thing that we do which is
-[0:17:21] and another thing that we do which is similar to what was shown by
-[0:17:24] similar to what was shown by uh joris moy in the talk on joint cancer
-[0:17:26] uh joris moy in the talk on joint cancer influence
+[0:16:58] there is a certain
+[0:17:00] graph we allow for latent confounders
+[0:17:02] which is something that
+[0:17:03] very few methods do and we try to avoid
+[0:17:06] parametric assumptions
+[0:17:07] uh for example a lot of methods assume
+[0:17:09] linearity we try to
+[0:17:11] not assume that and we delegate these
+[0:17:13] assumptions essentially to the
+[0:17:14] conditional dependence tests
+[0:17:16] which in some cases assume linearity but
+[0:17:18] they don't need to
+[0:17:20] and another thing that we do which is
+[0:17:21] similar to what was shown by
+[0:17:24] uh joris moy in the talk on joint cancer
 [0:17:27] influence is because we actually do end up using
-[0:17:29] is because we actually do end up using joint counsel in france
-[0:17:32] joint counsel in france instead of modeling the changes between
-[0:17:34] instead of modeling the changes between each domain
-[0:17:35] each domain so instead of yeah instead of modeling
-[0:17:37] so instead of yeah instead of modeling the changes between each domain
-[0:17:39] the changes between each domain uh with the domain variable we use
-[0:17:41] uh with the domain variable we use context variables so that we can
-[0:17:42] context variables so that we can distinguish
-[0:17:43] distinguish the changes between the mixture of the
-[0:17:45] the changes between the mixture of the sources and the target so the target is
-[0:17:47] sources and the target so the target is singled out
-[0:17:48] singled out so we have some essentially we still
-[0:17:50] so we have some essentially we still having indicator variables for
-[0:17:52] having indicator variables for just one for each domain we have several
-[0:17:54] just one for each domain we have several indicator variables for each
-[0:17:56] indicator variables for each uh type of domain maybe this is a bit
-[0:17:58] uh type of domain maybe this is a bit better explained when i
-[0:18:00] better explained when i showed some examples another thing
-[0:18:03] showed some examples another thing is uh we want to avoid an assumption
-[0:18:06] is uh we want to avoid an assumption which has made by some of the methods
-[0:18:08] which has made by some of the methods that if something works
-[0:18:09] that if something works if a set of features x
-[0:18:13] if a set of features x works across multiple source domains
-[0:18:15] works across multiple source domains then it will work
-[0:18:16] then it will work also in any target domain so instead
-[0:18:20] also in any target domain so instead uh we want to uh focus on things that
-[0:18:22] uh we want to uh focus on things that are
+[0:17:29] joint counsel in france
+[0:17:32] instead of modeling the changes between
+[0:17:34] each domain
+[0:17:35] so instead of yeah instead of modeling
+[0:17:37] the changes between each domain
+[0:17:39] uh with the domain variable we use
+[0:17:41] context variables so that we can
+[0:17:42] distinguish
+[0:17:43] the changes between the mixture of the
+[0:17:45] sources and the target so the target is
+[0:17:47] singled out
+[0:17:48] so we have some essentially we still
+[0:17:50] having indicator variables for
+[0:17:52] just one for each domain we have several
+[0:17:54] indicator variables for each
+[0:17:56] uh type of domain maybe this is a bit
+[0:17:58] better explained when i
+[0:18:00] showed some examples another thing
+[0:18:03] is uh we want to avoid an assumption
+[0:18:06] which has made by some of the methods
+[0:18:08] that if something works
+[0:18:09] if a set of features x
+[0:18:13] works across multiple source domains
+[0:18:15] then it will work
+[0:18:16] also in any target domain so instead
+[0:18:20] uh we want to uh focus on things that
 [0:18:23] are um invalid in a specific target domain
-[0:18:26] um invalid in a specific target domain and so this is also something that is
-[0:18:27] and so this is also something that is assumed by matters i think that if
-[0:18:29] assumed by matters i think that if something is invariant then it means
-[0:18:30] something is invariant then it means it's causal
-[0:18:32] it's causal and so here i'm going to just restate
-[0:18:35] and so here i'm going to just restate the problem a bit
-[0:18:36] the problem a bit and we call it causal domain adaptation
-[0:18:39] and we call it causal domain adaptation in our 2018 paper
-[0:18:41] in our 2018 paper but in practice it's just unsupervised
-[0:18:44] but in practice it's just unsupervised multi-source domain adaptation
-[0:18:46] multi-source domain adaptation so it means unsupervised we don't have
-[0:18:48] so it means unsupervised we don't have labels in the target domain
-[0:18:49] labels in the target domain multi-source is we have multiple source
-[0:18:52] multi-source is we have multiple source domains potentially we don't need to but
-[0:18:54] domains potentially we don't need to but we can and similarly to some of the
-[0:18:59] we can and similarly to some of the like related work we interpret the
-[0:19:02] like related work we interpret the change in the target domain as a soft
-[0:19:04] change in the target domain as a soft intervention
-[0:19:05] intervention and so it's just a change in the um
-[0:19:09] and so it's just a change in the um conditional distribution of whatever is
-[0:19:11] conditional distribution of whatever is the target of the intervention given its
-[0:19:13] the target of the intervention given its parents
+[0:18:26] and so this is also something that is
+[0:18:27] assumed by matters i think that if
+[0:18:29] something is invariant then it means
+[0:18:30] it's causal
+[0:18:32] and so here i'm going to just restate
+[0:18:35] the problem a bit
+[0:18:36] and we call it causal domain adaptation
+[0:18:39] in our 2018 paper
+[0:18:41] but in practice it's just unsupervised
+[0:18:44] multi-source domain adaptation
+[0:18:46] so it means unsupervised we don't have
+[0:18:48] labels in the target domain
+[0:18:49] multi-source is we have multiple source
+[0:18:52] domains potentially we don't need to but
+[0:18:54] we can and similarly to some of the
+[0:18:59] like related work we interpret the
+[0:19:02] change in the target domain as a soft
+[0:19:04] intervention
+[0:19:05] and so it's just a change in the um
+[0:19:09] conditional distribution of whatever is
+[0:19:11] the target of the intervention given its
 [0:19:14] parents and an important thing that we have to
-[0:19:15] and an important thing that we have to assume because this we cannot do this in
-[0:19:17] assume because this we cannot do this in general
+[0:19:15] assume because this we cannot do this in
 [0:19:18] general is we assume that the label y is not
-[0:19:20] is we assume that the label y is not intervene upon directly
-[0:19:22] intervene upon directly in the target domain because we never
-[0:19:24] in the target domain because we never see why in the target domain so if it's
-[0:19:26] see why in the target domain so if it's intervene upon directly in the target
-[0:19:27] intervene upon directly in the target domain we would never see it
-[0:19:28] domain we would never see it change so we cannot do that but this
-[0:19:31] change so we cannot do that but this doesn't mean that the distribution of
-[0:19:32] doesn't mean that the distribution of the label that
-[0:19:33] the label that doesn't change it changes but mediate it
-[0:19:35] doesn't change it changes but mediate it through the features
-[0:19:37] through the features and so we're using uh this framework
-[0:19:39] and so we're using uh this framework called joint council influence from
-[0:19:41] called joint council influence from uh moy ital 2020
-[0:19:44] uh moy ital 2020 and uh there was a whole talk on this
-[0:19:48] and uh there was a whole talk on this framework a few months ago if you're
-[0:19:51] framework a few months ago if you're very interested but in general
-[0:19:52] very interested but in general i'm going to very much simplify it here
-[0:19:54] i'm going to very much simplify it here and the idea is just
-[0:19:56] and the idea is just um instead of having one domain variable
-[0:19:58] um instead of having one domain variable we have several context variables
-[0:20:00] we have several context variables and uh we have these different
-[0:20:02] and uh we have these different distributions and we put them together
-[0:20:04] distributions and we put them together in a single table i can
-[0:20:05] in a single table i can assuming they come from a single
-[0:20:06] assuming they come from a single distribution and we just have c1 and c2
-[0:20:09] distribution and we just have c1 and c2 which are context variables
-[0:20:11] which are context variables and if we know something about
-[0:20:12] and if we know something about interventions we can encode some domain
-[0:20:14] interventions we can encode some domain knowledge in c1 and c2
-[0:20:16] knowledge in c1 and c2 and if we don't we do the simplest thing
-[0:20:18] and if we don't we do the simplest thing and we just use them as indicator
-[0:20:20] and we just use them as indicator variables
+[0:19:20] intervene upon directly
+[0:19:22] in the target domain because we never
+[0:19:24] see why in the target domain so if it's
+[0:19:26] intervene upon directly in the target
+[0:19:27] domain we would never see it
+[0:19:28] change so we cannot do that but this
+[0:19:31] doesn't mean that the distribution of
+[0:19:32] the label that
+[0:19:33] doesn't change it changes but mediate it
+[0:19:35] through the features
+[0:19:37] and so we're using uh this framework
+[0:19:39] called joint council influence from
+[0:19:41] uh moy ital 2020
+[0:19:44] and uh there was a whole talk on this
+[0:19:48] framework a few months ago if you're
+[0:19:51] very interested but in general
+[0:19:52] i'm going to very much simplify it here
+[0:19:54] and the idea is just
+[0:19:56] um instead of having one domain variable
+[0:19:58] we have several context variables
+[0:20:00] and uh we have these different
+[0:20:02] distributions and we put them together
+[0:20:04] in a single table i can
+[0:20:05] assuming they come from a single
+[0:20:06] distribution and we just have c1 and c2
+[0:20:09] which are context variables
+[0:20:11] and if we know something about
+[0:20:12] interventions we can encode some domain
+[0:20:14] knowledge in c1 and c2
+[0:20:16] and if we don't we do the simplest thing
+[0:20:18] and we just use them as indicator
 [0:20:21] variables so c1 is zero in all of the data set
-[0:20:24] so c1 is zero in all of the data set except in the data set one and c2 is
-[0:20:27] except in the data set one and c2 is zero
+[0:20:24] except in the data set one and c2 is
 [0:20:28] zero in all of the data sets except in data
-[0:20:30] in all of the data sets except in data set two
 [0:20:31] set two so they're very simple variables and
-[0:20:34] so they're very simple variables and we're doing this because we want to
-[0:20:35] we're doing this because we want to represent everything together with a
-[0:20:36] represent everything together with a single
+[0:20:34] we're doing this because we want to
+[0:20:35] represent everything together with a
 [0:20:37] single unknown causal love and the ideas
-[0:20:41] unknown causal love and the ideas here of joint causal influence again i'm
-[0:20:43] here of joint causal influence again i'm going to very simplify it a lot but
-[0:20:46] going to very simplify it a lot but you can always see like
-[0:20:50] you can always see like the joint graph in the different domains
-[0:20:52] the joint graph in the different domains is just the union
-[0:20:53] is just the union of the graphs in the single domains and
-[0:20:56] of the graphs in the single domains and this graph could be
-[0:20:57] this graph could be these graphs could be potentially also
-[0:20:58] these graphs could be potentially also different so we could have
-[0:21:00] different so we could have x1 causing y and x2 is
-[0:21:03] x1 causing y and x2 is disconnected in one domain and in the
-[0:21:06] disconnected in one domain and in the other domain we have a chain
-[0:21:07] other domain we have a chain x1 causing y and y cosine is true and
-[0:21:10] x1 causing y and y cosine is true and when we put them together
-[0:21:11] when we put them together we get the result on the right in which
-[0:21:13] we get the result on the right in which we have also an arrow from
-[0:21:15] we have also an arrow from y to extrude because they're a union of
-[0:21:17] y to extrude because they're a union of both these graphs
-[0:21:19] both these graphs and the context variables are just
-[0:21:20] and the context variables are just modeling the differences between the
-[0:21:22] modeling the differences between the data sets so in this case
-[0:21:24] data sets so in this case one of the differences is that x2 is
-[0:21:25] one of the differences is that x2 is suddenly dependent
-[0:21:27] suddenly dependent and or independent in the true data sets
-[0:21:29] and or independent in the true data sets so
+[0:20:41] here of joint causal influence again i'm
+[0:20:43] going to very simplify it a lot but
+[0:20:46] you can always see like
+[0:20:50] the joint graph in the different domains
+[0:20:52] is just the union
+[0:20:53] of the graphs in the single domains and
+[0:20:56] this graph could be
+[0:20:57] these graphs could be potentially also
+[0:20:58] different so we could have
+[0:21:00] x1 causing y and x2 is
+[0:21:03] disconnected in one domain and in the
+[0:21:06] other domain we have a chain
+[0:21:07] x1 causing y and y cosine is true and
+[0:21:10] when we put them together
+[0:21:11] we get the result on the right in which
+[0:21:13] we have also an arrow from
+[0:21:15] y to extrude because they're a union of
+[0:21:17] both these graphs
+[0:21:19] and the context variables are just
+[0:21:20] modeling the differences between the
+[0:21:22] data sets so in this case
+[0:21:24] one of the differences is that x2 is
+[0:21:25] suddenly dependent
+[0:21:27] and or independent in the true data sets
 [0:21:30] so the c1 the context variable c1 has to
-[0:21:32] the c1 the context variable c1 has to represent
 [0:21:33] represent that change and in general in joint
-[0:21:37] that change and in general in joint council influence
-[0:21:38] council influence and uris has talked about it a lot we
-[0:21:40] and uris has talked about it a lot we also allow for latent confounders
-[0:21:42] also allow for latent confounders and also in general cyclic graphs and
-[0:21:46] and also in general cyclic graphs and in this talk we're not going to talk
-[0:21:47] in this talk we're not going to talk about that but if you're interested
-[0:21:49] about that but if you're interested one example of a this is one example of
-[0:21:51] one example of a this is one example of a cyclic graph if you have
-[0:21:53] a cyclic graph if you have x1 because in x2 in one domain and x2
-[0:21:56] x1 because in x2 in one domain and x2 causing x1 and the other domain when you
-[0:21:58] causing x1 and the other domain when you put them together they look like a cycle
-[0:22:01] put them together they look like a cycle so going back to uh the main adaptation
-[0:22:05] so going back to uh the main adaptation so we want to um actually the idea
-[0:22:08] so we want to um actually the idea cause an inference still is you put all
-[0:22:11] cause an inference still is you put all the data together
-[0:22:12] the data together and then you do essentially any standard
-[0:22:16] and then you do essentially any standard um constraint based household discovery
-[0:22:18] um constraint based household discovery algorithm
+[0:21:37] council influence
+[0:21:38] and uris has talked about it a lot we
+[0:21:40] also allow for latent confounders
+[0:21:42] and also in general cyclic graphs and
+[0:21:46] in this talk we're not going to talk
+[0:21:47] about that but if you're interested
+[0:21:49] one example of a this is one example of
+[0:21:51] a cyclic graph if you have
+[0:21:53] x1 because in x2 in one domain and x2
+[0:21:56] causing x1 and the other domain when you
+[0:21:58] put them together they look like a cycle
+[0:22:01] so going back to uh the main adaptation
+[0:22:05] so we want to um actually the idea
+[0:22:08] cause an inference still is you put all
+[0:22:11] the data together
+[0:22:12] and then you do essentially any standard
+[0:22:16] um constraint based household discovery
 [0:22:19] algorithm so what you do is you do these
-[0:22:21] so what you do is you do these conditional independence tests
-[0:22:22] conditional independence tests you treat the context variables as
-[0:22:25] you treat the context variables as random variables they aren't but
-[0:22:28] random variables they aren't but i think we can so there are some
-[0:22:29] i think we can so there are some assumptions to make it work essentially
-[0:22:32] assumptions to make it work essentially and if you add also maybe some extra
-[0:22:33] and if you add also maybe some extra knowledge for example you can add some
-[0:22:35] knowledge for example you can add some knowledge that
-[0:22:36] knowledge that uh the context variables are not caused
-[0:22:37] uh the context variables are not caused by the variables the the system
-[0:22:39] by the variables the the system variables so x1 and y and x2
-[0:22:42] variables so x1 and y and x2 then um essentially
-[0:22:45] then um essentially we can get something like a markov
-[0:22:48] we can get something like a markov clearance class of graphs in this case
-[0:22:51] clearance class of graphs in this case and now i'm going back to the castle
-[0:22:53] and now i'm going back to the castle domain adaptation because i've been
-[0:22:54] domain adaptation because i've been talking about joint cancer reference for
-[0:22:55] talking about joint cancer reference for a while just to summarize it
-[0:22:57] a while just to summarize it so for simplicity i'm going to talk
-[0:22:58] so for simplicity i'm going to talk about the very simple case in which we
-[0:23:00] about the very simple case in which we have only one source
-[0:23:01] have only one source one target we assume we know the causal
-[0:23:04] one target we assume we know the causal graph
+[0:22:21] conditional independence tests
+[0:22:22] you treat the context variables as
+[0:22:25] random variables they aren't but
+[0:22:28] i think we can so there are some
+[0:22:29] assumptions to make it work essentially
+[0:22:32] and if you add also maybe some extra
+[0:22:33] knowledge for example you can add some
+[0:22:35] knowledge that
+[0:22:36] uh the context variables are not caused
+[0:22:37] by the variables the the system
+[0:22:39] variables so x1 and y and x2
+[0:22:42] then um essentially
+[0:22:45] we can get something like a markov
+[0:22:48] clearance class of graphs in this case
+[0:22:51] and now i'm going back to the castle
+[0:22:53] domain adaptation because i've been
+[0:22:54] talking about joint cancer reference for
+[0:22:55] a while just to summarize it
+[0:22:57] so for simplicity i'm going to talk
+[0:22:58] about the very simple case in which we
+[0:23:00] have only one source
+[0:23:01] one target we assume we know the causal
 [0:23:05] graph and now i'm just this is just an example
-[0:23:07] and now i'm just this is just an example to show you
-[0:23:08] to show you how we which kind of variables we want
-[0:23:10] how we which kind of variables we want to select
+[0:23:07] to show you
+[0:23:08] how we which kind of variables we want
 [0:23:12] to select so let's assume we have this graph x1
-[0:23:14] so let's assume we have this graph x1 was in y and y cosine x2
-[0:23:16] was in y and y cosine x2 and a context variable c1 causing x1 and
-[0:23:18] and a context variable c1 causing x1 and x2
+[0:23:14] was in y and y cosine x2
+[0:23:16] and a context variable c1 causing x1 and
 [0:23:19] x2 so should i use x1 to predict why or
-[0:23:22] so should i use x1 to predict why or shall i use x
-[0:23:23] shall i use x to predict why and so what we're looking
-[0:23:26] to predict why and so what we're looking for
+[0:23:22] shall i use x
+[0:23:23] to predict why and so what we're looking
 [0:23:26] for is something that um again other people
-[0:23:29] is something that um again other people have defined before and i think people
-[0:23:30] have defined before and i think people are
+[0:23:29] have defined before and i think people
 [0:23:30] are continuously defining again you can call
-[0:23:33] continuously defining again you can call them stable features separating features
-[0:23:36] them stable features separating features in the end there are sets of features
-[0:23:37] in the end there are sets of features that deseparate
-[0:23:39] that deseparate y from the context variables you want or
-[0:23:42] y from the context variables you want or the domain variable
-[0:23:43] the domain variable in in the case in which you have a
-[0:23:45] in in the case in which you have a domain variables and non-context
-[0:23:47] domain variables and non-context variables
+[0:23:33] them stable features separating features
+[0:23:36] in the end there are sets of features
+[0:23:37] that deseparate
+[0:23:39] y from the context variables you want or
+[0:23:42] the domain variable
+[0:23:43] in in the case in which you have a
+[0:23:45] domain variables and non-context
 [0:23:48] variables and so in general there they're the
-[0:23:50] and so in general there they're the subset of all the features for which
-[0:23:52] subset of all the features for which provided
+[0:23:50] subset of all the features for which
 [0:23:53] provided the covalent chip assumption actually
-[0:23:54] the covalent chip assumption actually holds and so here i'm trying to
-[0:23:57] holds and so here i'm trying to show if we have plotted y
-[0:24:00] show if we have plotted y on the y axis and x1 on the x1 axis
-[0:24:04] on the y axis and x1 on the x1 axis so we choose x1 to predict y and we have
-[0:24:06] so we choose x1 to predict y and we have all the data in the source domain
-[0:24:08] all the data in the source domain so these are the green data points
-[0:24:11] so these are the green data points and we let's say we fit the line like
-[0:24:12] and we let's say we fit the line like something super simple we just
-[0:24:14] something super simple we just do linear regression we fit the line you
-[0:24:16] do linear regression we fit the line you can see that the line will also work for
-[0:24:18] can see that the line will also work for the target
-[0:24:19] the target uh points so essentially the
-[0:24:21] uh points so essentially the distribution is the same in the source
-[0:24:23] distribution is the same in the source and target the conditional distribution
-[0:24:24] and target the conditional distribution of y conditional
-[0:24:25] of y conditional x1 and this is something that if you
-[0:24:28] x1 and this is something that if you know this separation you can see from
-[0:24:29] know this separation you can see from the graph
+[0:23:54] holds and so here i'm trying to
+[0:23:57] show if we have plotted y
+[0:24:00] on the y axis and x1 on the x1 axis
+[0:24:04] so we choose x1 to predict y and we have
+[0:24:06] all the data in the source domain
+[0:24:08] so these are the green data points
+[0:24:11] and we let's say we fit the line like
+[0:24:12] something super simple we just
+[0:24:14] do linear regression we fit the line you
+[0:24:16] can see that the line will also work for
+[0:24:18] the target
+[0:24:19] uh points so essentially the
+[0:24:21] distribution is the same in the source
+[0:24:23] and target the conditional distribution
+[0:24:24] of y conditional
+[0:24:25] x1 and this is something that if you
+[0:24:28] know this separation you can see from
 [0:24:30] the graph because you can see that there is a path
-[0:24:32] because you can see that there is a path from c1 through x1 to y
-[0:24:34] from c1 through x1 to y and when you condition x1 you can block
-[0:24:36] and when you condition x1 you can block that path and there is another path
-[0:24:38] that path and there is another path growing from c1
-[0:24:39] growing from c1 through x2 to y that is blocked because
-[0:24:42] through x2 to y that is blocked because x2 is a collider so that's why this
-[0:24:44] x2 is a collider so that's why this separation is very useful
-[0:24:46] separation is very useful and in this case instead we try to pick
-[0:24:48] and in this case instead we try to pick x2
+[0:24:32] from c1 through x1 to y
+[0:24:34] and when you condition x1 you can block
+[0:24:36] that path and there is another path
+[0:24:38] growing from c1
+[0:24:39] through x2 to y that is blocked because
+[0:24:42] x2 is a collider so that's why this
+[0:24:44] separation is very useful
+[0:24:46] and in this case instead we try to pick
 [0:24:49] x2 and if we pick x2 and we fit our line
-[0:24:53] and if we pick x2 and we fit our line on the green dots on the source domain
-[0:24:55] on the green dots on the source domain it's completely wrong for the target
-[0:24:56] it's completely wrong for the target domain
+[0:24:53] on the green dots on the source domain
+[0:24:55] it's completely wrong for the target
 [0:24:57] domain and in our case we also wouldn't even
-[0:24:59] and in our case we also wouldn't even know that because in practice we have an
-[0:25:01] know that because in practice we have an unsupervised domain adaptation here so
-[0:25:03] unsupervised domain adaptation here so we'll be very wrong
-[0:25:04] we'll be very wrong without even knowing it and if you do
-[0:25:06] without even knowing it and if you do have the graph this is very simple to
-[0:25:07] have the graph this is very simple to see
+[0:24:59] know that because in practice we have an
+[0:25:01] unsupervised domain adaptation here so
+[0:25:03] we'll be very wrong
+[0:25:04] without even knowing it and if you do
+[0:25:06] have the graph this is very simple to
 [0:25:08] see because there is there are two open
-[0:25:10] because there is there are two open paths so both
-[0:25:12] paths so both c1 through x1 to y is open and also h2
-[0:25:14] c1 through x1 to y is open and also h2 is a collider and when you condition it
-[0:25:16] is a collider and when you condition it you even
+[0:25:10] paths so both
+[0:25:12] c1 through x1 to y is open and also h2
+[0:25:14] is a collider and when you condition it
 [0:25:17] you even bias it even more you open even more the
-[0:25:18] bias it even more you open even more the path so h2 is a very bad choice
-[0:25:21] path so h2 is a very bad choice and if we know the graph we can see that
-[0:25:26] and if we know the graph we can see that and so x1 is a separating feature set in
-[0:25:28] and so x1 is a separating feature set in this case
+[0:25:18] path so h2 is a very bad choice
+[0:25:21] and if we know the graph we can see that
+[0:25:26] and so x1 is a separating feature set in
 [0:25:29] this case and even x1 and x2 together are still
-[0:25:32] and even x1 and x2 together are still biased and collect
-[0:25:33] biased and collect to an arbitrary large error and
-[0:25:37] to an arbitrary large error and these separating features they don't
-[0:25:38] these separating features they don't need to be parents of y so they don't
-[0:25:40] need to be parents of y so they don't need to be causal
-[0:25:41] need to be causal for example we can have an x3 here and
-[0:25:43] for example we can have an x3 here and x3 is still a good feature
-[0:25:45] x3 is still a good feature um a stable feature separating feature
-[0:25:47] um a stable feature separating feature for y
+[0:25:32] biased and collect
+[0:25:33] to an arbitrary large error and
+[0:25:37] these separating features they don't
+[0:25:38] need to be parents of y so they don't
+[0:25:40] need to be causal
+[0:25:41] for example we can have an x3 here and
+[0:25:43] x3 is still a good feature
+[0:25:45] um a stable feature separating feature
 [0:25:48] for y and so this is like um i'm essentially
-[0:25:51] and so this is like um i'm essentially just
 [0:25:52] just restating something that has been
-[0:25:54] restating something that has been rediscovered a few times
-[0:25:55] rediscovered a few times in the past and now the most interesting
-[0:25:58] in the past and now the most interesting question is okay you know
-[0:26:00] question is okay you know we just do uh we just use the causal
-[0:26:02] we just do uh we just use the causal graph and we know which features are
-[0:26:04] graph and we know which features are good and we can transfer
-[0:26:05] good and we can transfer but what happens if we don't know the
-[0:26:07] but what happens if we don't know the cause of graph which is the context of
-[0:26:09] cause of graph which is the context of this paper so one idea is okay maybe i
-[0:26:11] this paper so one idea is okay maybe i can just do the conditional any palaces
-[0:26:13] can just do the conditional any palaces right so
+[0:25:54] rediscovered a few times
+[0:25:55] in the past and now the most interesting
+[0:25:58] question is okay you know
+[0:26:00] we just do uh we just use the causal
+[0:26:02] graph and we know which features are
+[0:26:04] good and we can transfer
+[0:26:05] but what happens if we don't know the
+[0:26:07] cause of graph which is the context of
+[0:26:09] this paper so one idea is okay maybe i
+[0:26:11] can just do the conditional any palaces
 [0:26:14] right so we set conditional dependencies and this
-[0:26:16] we set conditional dependencies and this separation are the same
-[0:26:17] separation are the same i can just wrong condition in the past
-[0:26:19] i can just wrong condition in the past and find which feature is good
-[0:26:21] and find which feature is good and that would be okay i guess but in
-[0:26:23] and that would be okay i guess but in our case we have
-[0:26:25] our case we have done supervised domain annotation case
-[0:26:26] done supervised domain annotation case so we have zero labels
-[0:26:29] so we have zero labels in the target domain so y is always
-[0:26:31] in the target domain so y is always missing when
-[0:26:32] missing when c one is one so we cannot test this
-[0:26:34] c one is one so we cannot test this because it's essentially unknowable
-[0:26:36] because it's essentially unknowable uh how the distribution of y condition
-[0:26:38] uh how the distribution of y condition x1 changes because we never see
-[0:26:40] x1 changes because we never see y in the tag domain so it's not missing
-[0:26:43] y in the tag domain so it's not missing a random it's missing
-[0:26:44] a random it's missing in a very specific way so the general
-[0:26:47] in a very specific way so the general idea of the work we did was
-[0:26:49] idea of the work we did was uh instead what happens if we use all of
-[0:26:52] uh instead what happens if we use all of the other
+[0:26:16] separation are the same
+[0:26:17] i can just wrong condition in the past
+[0:26:19] and find which feature is good
+[0:26:21] and that would be okay i guess but in
+[0:26:23] our case we have
+[0:26:25] done supervised domain annotation case
+[0:26:26] so we have zero labels
+[0:26:29] in the target domain so y is always
+[0:26:31] missing when
+[0:26:32] c one is one so we cannot test this
+[0:26:34] because it's essentially unknowable
+[0:26:36] uh how the distribution of y condition
+[0:26:38] x1 changes because we never see
+[0:26:40] y in the tag domain so it's not missing
+[0:26:43] a random it's missing
+[0:26:44] in a very specific way so the general
+[0:26:47] idea of the work we did was
+[0:26:49] uh instead what happens if we use all of
 [0:26:52] the other conditional impedance tests so what
-[0:26:55] conditional impedance tests so what happens if we know that x1 and x2
-[0:26:57] happens if we know that x1 and x2 are dependent across even in the mixture
-[0:27:00] are dependent across even in the mixture of the two
-[0:27:02] of the two distributions or what happens if we know
-[0:27:04] distributions or what happens if we know something about
-[0:27:05] something about x1 and x2 still being dependent even if
-[0:27:07] x1 and x2 still being dependent even if we take in each dataset separately
-[0:27:09] we take in each dataset separately etc and so uh in order to be able
-[0:27:13] etc and so uh in order to be able to make this work we had to make some
-[0:27:15] to make this work we had to make some assumptions
-[0:27:16] assumptions so one assumption that we made because
-[0:27:19] so one assumption that we made because we were using a previous
-[0:27:20] we were using a previous version of gene council inference is
-[0:27:22] version of gene council inference is that there is an acyclic of the graph
-[0:27:24] that there is an acyclic of the graph that fits the data
-[0:27:25] that fits the data another assumption i have already
-[0:27:27] another assumption i have already mentioned is that
-[0:27:28] mentioned is that y cannot be intervened upon directly and
-[0:27:31] y cannot be intervened upon directly and then there were some technical
-[0:27:32] then there were some technical assumptions
-[0:27:33] assumptions which boil down to saying that there are
-[0:27:35] which boil down to saying that there are no extra dependencies
-[0:27:36] no extra dependencies that involve y in the target domain
-[0:27:39] that involve y in the target domain because we don't actually
-[0:27:40] because we don't actually see y in the target domain so they
-[0:27:42] see y in the target domain so they cannot be excellent this is involving y
-[0:27:44] cannot be excellent this is involving y because we wouldn't be able to recover
-[0:27:46] because we wouldn't be able to recover them but there can be extra dependencies
-[0:27:48] them but there can be extra dependencies not involving white so with the other
-[0:27:49] not involving white so with the other features essentially
-[0:27:51] features essentially and uh essentially this is a good of an
-[0:27:54] and uh essentially this is a good of an idea that
+[0:26:55] happens if we know that x1 and x2
+[0:26:57] are dependent across even in the mixture
+[0:27:00] of the two
+[0:27:02] distributions or what happens if we know
+[0:27:04] something about
+[0:27:05] x1 and x2 still being dependent even if
+[0:27:07] we take in each dataset separately
+[0:27:09] etc and so uh in order to be able
+[0:27:13] to make this work we had to make some
+[0:27:15] assumptions
+[0:27:16] so one assumption that we made because
+[0:27:19] we were using a previous
+[0:27:20] version of gene council inference is
+[0:27:22] that there is an acyclic of the graph
+[0:27:24] that fits the data
+[0:27:25] another assumption i have already
+[0:27:27] mentioned is that
+[0:27:28] y cannot be intervened upon directly and
+[0:27:31] then there were some technical
+[0:27:32] assumptions
+[0:27:33] which boil down to saying that there are
+[0:27:35] no extra dependencies
+[0:27:36] that involve y in the target domain
+[0:27:39] because we don't actually
+[0:27:40] see y in the target domain so they
+[0:27:42] cannot be excellent this is involving y
+[0:27:44] because we wouldn't be able to recover
+[0:27:46] them but there can be extra dependencies
+[0:27:48] not involving white so with the other
+[0:27:49] features essentially
+[0:27:51] and uh essentially this is a good of an
 [0:27:54] idea that this doesn't mean that we actually
-[0:27:55] this doesn't mean that we actually assume anything related to the
-[0:27:57] assume anything related to the separating feature sets
-[0:27:59] separating feature sets and so we have an example in the paper
-[0:28:02] and so we have an example in the paper and if you're interested we can look at
-[0:28:03] and if you're interested we can look at it
+[0:27:55] assume anything related to the
+[0:27:57] separating feature sets
+[0:27:59] and so we have an example in the paper
+[0:28:02] and if you're interested we can look at
 [0:28:04] it very quickly and essentially you can do
-[0:28:06] very quickly and essentially you can do it by hand
-[0:28:08] it by hand okay uh sorry you can do it by hand by
-[0:28:11] okay uh sorry you can do it by hand by just using like
-[0:28:12] just using like three conditional panels test if the
-[0:28:14] three conditional panels test if the conditioning panes tests have this
-[0:28:16] conditioning panes tests have this result
+[0:28:06] it by hand
+[0:28:08] okay uh sorry you can do it by hand by
+[0:28:11] just using like
+[0:28:12] three conditional panels test if the
+[0:28:14] conditioning panes tests have this
 [0:28:16] result with the assumptions you can show that
-[0:28:18] with the assumptions you can show that there are there is a set of grounds
-[0:28:20] there are there is a set of grounds that fit um this condition dependencies
-[0:28:24] that fit um this condition dependencies and we can represent it with a summary
-[0:28:26] and we can represent it with a summary graph
+[0:28:18] there are there is a set of grounds
+[0:28:20] that fit um this condition dependencies
+[0:28:24] and we can represent it with a summary
 [0:28:27] graph like this in which the dotted lines are
-[0:28:29] like this in which the dotted lines are just
 [0:28:30] just they could or could not be there as
-[0:28:32] they could or could not be there as causal
 [0:28:33] causal relations but the important thing is
-[0:28:36] relations but the important thing is that even if there are several graphs so
-[0:28:37] that even if there are several graphs so we haven't identified the causal graph
-[0:28:40] we haven't identified the causal graph in all of them we can prove that
-[0:28:43] in all of them we can prove that untestable uh conditional independence
-[0:28:46] untestable uh conditional independence so that y is conditionally independent
-[0:28:47] so that y is conditionally independent of c one given x one
-[0:28:49] of c one given x one it's true in all of them because y is
-[0:28:52] it's true in all of them because y is uh d separated from x one uh so it's y
-[0:28:55] uh d separated from x one uh so it's y is d separated from
-[0:28:57] is d separated from c one given x1 and this is true in all
-[0:28:59] c one given x1 and this is true in all of the graphs
-[0:29:00] of the graphs it either there are the dotted lines or
-[0:29:02] it either there are the dotted lines or not in all of them this is true
-[0:29:05] not in all of them this is true and so here it's like a small point i
-[0:29:08] and so here it's like a small point i wanted to make
-[0:29:09] wanted to make and one of the things is that people
-[0:29:12] and one of the things is that people assume that
-[0:29:13] assume that if you have imbalances in the source
-[0:29:14] if you have imbalances in the source domains you can just assume a way that
-[0:29:17] domains you can just assume a way that this will work
-[0:29:18] this will work in the target domain if you have several
-[0:29:19] in the target domain if you have several source domains and that's not
-[0:29:21] source domains and that's not true in general so in this case we have
-[0:29:24] true in general so in this case we have essentially
-[0:29:25] essentially on the left we have let's say several
-[0:29:27] on the left we have let's say several source domains so
-[0:29:28] source domains so in this kind of yellow rectangle
-[0:29:32] in this kind of yellow rectangle that represents two source domains and
-[0:29:34] that represents two source domains and in all of them
-[0:29:35] in all of them essentially both x1
-[0:29:39] essentially both x1 x1 x2 and x1 x2 together are
-[0:29:42] x1 x2 and x1 x2 together are uh conditionally independent make um y
-[0:29:45] uh conditionally independent make um y and c2 conditional independent
-[0:29:47] and c2 conditional independent but this doesn't mean that they are
-[0:29:48] but this doesn't mean that they are actually transferable in the type of
-[0:29:50] actually transferable in the type of domain
+[0:28:36] that even if there are several graphs so
+[0:28:37] we haven't identified the causal graph
+[0:28:40] in all of them we can prove that
+[0:28:43] untestable uh conditional independence
+[0:28:46] so that y is conditionally independent
+[0:28:47] of c one given x one
+[0:28:49] it's true in all of them because y is
+[0:28:52] uh d separated from x one uh so it's y
+[0:28:55] is d separated from
+[0:28:57] c one given x1 and this is true in all
+[0:28:59] of the graphs
+[0:29:00] it either there are the dotted lines or
+[0:29:02] not in all of them this is true
+[0:29:05] and so here it's like a small point i
+[0:29:08] wanted to make
+[0:29:09] and one of the things is that people
+[0:29:12] assume that
+[0:29:13] if you have imbalances in the source
+[0:29:14] domains you can just assume a way that
+[0:29:17] this will work
+[0:29:18] in the target domain if you have several
+[0:29:19] source domains and that's not
+[0:29:21] true in general so in this case we have
+[0:29:24] essentially
+[0:29:25] on the left we have let's say several
+[0:29:27] source domains so
+[0:29:28] in this kind of yellow rectangle
+[0:29:32] that represents two source domains and
+[0:29:34] in all of them
+[0:29:35] essentially both x1
+[0:29:39] x1 x2 and x1 x2 together are
+[0:29:42] uh conditionally independent make um y
+[0:29:45] and c2 conditional independent
+[0:29:47] but this doesn't mean that they are
+[0:29:48] actually transferable in the type of
 [0:29:51] domain and so this is a bit intricate but if
-[0:29:53] and so this is a bit intricate but if you're interested we can have a
-[0:29:54] you're interested we can have a discussion on this
-[0:29:55] discussion on this and so in general um the idea
-[0:29:59] and so in general um the idea of our work was not just to use the data
-[0:30:01] of our work was not just to use the data from the source domains
-[0:30:03] from the source domains but also to actually reuse the data from
-[0:30:05] but also to actually reuse the data from the target the data from the features
-[0:30:07] the target the data from the features that are in the target
-[0:30:08] that are in the target in order to learn what is invariant
-[0:30:11] in order to learn what is invariant across the
-[0:30:12] across the essentially from the source domains to
-[0:30:14] essentially from the source domains to the target domain
-[0:30:16] the target domain so in the end this is the algorithm that
-[0:30:18] so in the end this is the algorithm that we proposed
-[0:30:19] we proposed so we have the query so we want to query
-[0:30:22] so we have the query so we want to query for example
-[0:30:22] for example if x1 is a separating set of features
-[0:30:25] if x1 is a separating set of features we have some assumptions we have all the
-[0:30:28] we have some assumptions we have all the conditional independences from data that
-[0:30:29] conditional independences from data that we are allowed to test so the ones which
-[0:30:31] we are allowed to test so the ones which don't have missing data
-[0:30:33] don't have missing data and then we use some work from heating
-[0:30:35] and then we use some work from heating and natal 2014
-[0:30:38] and natal 2014 in which they encoded this separation in
-[0:30:40] in which they encoded this separation in logic
+[0:29:53] you're interested we can have a
+[0:29:54] discussion on this
+[0:29:55] and so in general um the idea
+[0:29:59] of our work was not just to use the data
+[0:30:01] from the source domains
+[0:30:03] but also to actually reuse the data from
+[0:30:05] the target the data from the features
+[0:30:07] that are in the target
+[0:30:08] in order to learn what is invariant
+[0:30:11] across the
+[0:30:12] essentially from the source domains to
+[0:30:14] the target domain
+[0:30:16] so in the end this is the algorithm that
+[0:30:18] we proposed
+[0:30:19] so we have the query so we want to query
+[0:30:22] for example
+[0:30:22] if x1 is a separating set of features
+[0:30:25] we have some assumptions we have all the
+[0:30:28] conditional independences from data that
+[0:30:29] we are allowed to test so the ones which
+[0:30:31] don't have missing data
+[0:30:33] and then we use some work from heating
+[0:30:35] and natal 2014
+[0:30:38] in which they encoded this separation in
 [0:30:41] logic because this allows us to use
-[0:30:42] because this allows us to use essentially a theorem proverb and the
-[0:30:44] essentially a theorem proverb and the theorem proverbial gives us three types
-[0:30:45] theorem proverbial gives us three types of results
-[0:30:46] of results it can tell us you know x1 is probably
-[0:30:49] it can tell us you know x1 is probably separating so it separates in all
-[0:30:51] separating so it separates in all possible causal graphs
-[0:30:52] possible causal graphs or it's probably not separating so in
-[0:30:55] or it's probably not separating so in all possible causal graphs it's
-[0:30:56] all possible causal graphs it's it's a bad predictor it's biased or in
-[0:30:59] it's a bad predictor it's biased or in some cases and this happens empirically
-[0:31:01] some cases and this happens empirically in 30
+[0:30:42] essentially a theorem proverb and the
+[0:30:44] theorem proverbial gives us three types
+[0:30:45] of results
+[0:30:46] it can tell us you know x1 is probably
+[0:30:49] separating so it separates in all
+[0:30:51] possible causal graphs
+[0:30:52] or it's probably not separating so in
+[0:30:55] all possible causal graphs it's
+[0:30:56] it's a bad predictor it's biased or in
+[0:30:59] some cases and this happens empirically
 [0:31:02] in 30 of the cases it actually abstains and
-[0:31:04] of the cases it actually abstains and said i don't know
-[0:31:06] said i don't know because in some of the graphs it works
-[0:31:08] because in some of the graphs it works in some of the graphs it doesn't
-[0:31:10] in some of the graphs it doesn't i'm not sure which is the correct causal
-[0:31:11] i'm not sure which is the correct causal graph and actually i don't have interest
-[0:31:13] graph and actually i don't have interest in
+[0:31:04] said i don't know
+[0:31:06] because in some of the graphs it works
+[0:31:08] in some of the graphs it doesn't
+[0:31:10] i'm not sure which is the correct causal
+[0:31:11] graph and actually i don't have interest
 [0:31:13] in finding that so i'm just not going to
-[0:31:15] finding that so i'm just not going to answer this question
-[0:31:17] answer this question and so we use this um essentially this
-[0:31:20] and so we use this um essentially this setup of
+[0:31:15] answer this question
+[0:31:17] and so we use this um essentially this
 [0:31:21] setup of proving which features are separating in
-[0:31:24] proving which features are separating in something we call a causal feature
-[0:31:26] something we call a causal feature section
+[0:31:24] something we call a causal feature
 [0:31:26] section method it was a very simple brute force
-[0:31:29] method it was a very simple brute force type of method but we just wanted to see
-[0:31:31] type of method but we just wanted to see it used in practice and so in this case
-[0:31:34] it used in practice and so in this case we had like a standard visual selection
-[0:31:35] we had like a standard visual selection method
+[0:31:29] type of method but we just wanted to see
+[0:31:31] it used in practice and so in this case
+[0:31:34] we had like a standard visual selection
 [0:31:36] method random forest in this case and we
-[0:31:38] random forest in this case and we generated
 [0:31:39] generated subsets of features and we ordered them
-[0:31:42] subsets of features and we ordered them by
 [0:31:42] by the ones which were performing the best
-[0:31:44] the ones which were performing the best in the source domain
-[0:31:46] in the source domain for example we could have x1 and c2 or
-[0:31:48] for example we could have x1 and c2 or x1 and h2 and c2 etc so these were the
-[0:31:51] x1 and h2 and c2 etc so these were the subsets of features and then we tried to
-[0:31:55] subsets of features and then we tried to query
+[0:31:44] in the source domain
+[0:31:46] for example we could have x1 and c2 or
+[0:31:48] x1 and h2 and c2 etc so these were the
+[0:31:51] subsets of features and then we tried to
 [0:31:55] query the tier improver very in a very brute
-[0:31:58] the tier improver very in a very brute force way
 [0:31:58] force way because it was more a proof of concept
-[0:32:00] because it was more a proof of concept and we tried to find which of these
-[0:32:02] and we tried to find which of these sets of features was provably separating
-[0:32:05] sets of features was provably separating and let's say we did find uh probably
-[0:32:08] and let's say we did find uh probably separating sat
-[0:32:09] separating sat a then we trained the model f of a again
-[0:32:12] a then we trained the model f of a again with random forest
-[0:32:13] with random forest and we use it so we train this model to
-[0:32:17] and we use it so we train this model to predict y on the source domains
-[0:32:18] predict y on the source domains and then we apply it in the target
-[0:32:20] and then we apply it in the target domains essentially
+[0:32:00] and we tried to find which of these
+[0:32:02] sets of features was provably separating
+[0:32:05] and let's say we did find uh probably
+[0:32:08] separating sat
+[0:32:09] a then we trained the model f of a again
+[0:32:12] with random forest
+[0:32:13] and we use it so we train this model to
+[0:32:17] predict y on the source domains
+[0:32:18] and then we apply it in the target
+[0:32:20] domains essentially
 [0:32:25] and then we had some results showing some simulated data
-[0:32:27] some simulated data and on the simulated data our method was
-[0:32:29] and on the simulated data our method was essentially improving the
-[0:32:30] essentially improving the generalization loss we had some results
-[0:32:33] generalization loss we had some results on the real world data and that's why
-[0:32:35] on the real world data and that's why i was talking about all these mice so
-[0:32:37] i was talking about all these mice so there was a serum cancer refresh
-[0:32:38] there was a serum cancer refresh challenge in which we applied
-[0:32:40] challenge in which we applied these methods and in that case um they
-[0:32:43] these methods and in that case um they were very
+[0:32:27] and on the simulated data our method was
+[0:32:29] essentially improving the
+[0:32:30] generalization loss we had some results
+[0:32:33] on the real world data and that's why
+[0:32:35] i was talking about all these mice so
+[0:32:37] there was a serum cancer refresh
+[0:32:38] challenge in which we applied
+[0:32:40] these methods and in that case um they
 [0:32:44] were very very small sample data so we had around
-[0:32:47] very small sample data so we had around 13 mutant mice for each genocide
-[0:32:49] 13 mutant mice for each genocide and 400 essentially observational mice
-[0:32:52] and 400 essentially observational mice and we had only 16 phenotypes
-[0:32:54] and we had only 16 phenotypes and so in that case we tried to do
-[0:32:55] and so in that case we tried to do something we called causal class
-[0:32:57] something we called causal class validation
-[0:32:57] validation so we selected three phenotypes and two
-[0:33:00] so we selected three phenotypes and two nuclears
+[0:32:47] 13 mutant mice for each genocide
+[0:32:49] and 400 essentially observational mice
+[0:32:52] and we had only 16 phenotypes
+[0:32:54] and so in that case we tried to do
+[0:32:55] something we called causal class
+[0:32:57] validation
+[0:32:57] so we selected three phenotypes and two
 [0:33:01] nuclears and we generate a lot of data sets
-[0:33:03] and we generate a lot of data sets randomly and then we try to see if we
-[0:33:05] randomly and then we try to see if we can reconstruct
-[0:33:06] can reconstruct randomly one of the three phenotypes
-[0:33:08] randomly one of the three phenotypes from the others
-[0:33:09] from the others given all of these kind of source
-[0:33:11] given all of these kind of source domains and
-[0:33:13] domains and you know this is a bit uh disingenuous
-[0:33:15] you know this is a bit uh disingenuous because uh i wrote the business rather
-[0:33:17] because uh i wrote the business rather so we do feed a lot of the digital
-[0:33:19] so we do feed a lot of the digital and actually uh all of this with teeth
-[0:33:23] and actually uh all of this with teeth so this kind of unknown causal graph uh
-[0:33:26] so this kind of unknown causal graph uh changes between domains we fit it
-[0:33:27] changes between domains we fit it because of
-[0:33:28] because of the use of joint cancer difference and
-[0:33:30] the use of joint cancer difference and the last two we also fit and with it
-[0:33:32] the last two we also fit and with it because of the way we apply general
-[0:33:34] because of the way we apply general inference
+[0:33:03] randomly and then we try to see if we
+[0:33:05] can reconstruct
+[0:33:06] randomly one of the three phenotypes
+[0:33:08] from the others
+[0:33:09] given all of these kind of source
+[0:33:11] domains and
+[0:33:13] you know this is a bit uh disingenuous
+[0:33:15] because uh i wrote the business rather
+[0:33:17] so we do feed a lot of the digital
+[0:33:19] and actually uh all of this with teeth
+[0:33:23] so this kind of unknown causal graph uh
+[0:33:26] changes between domains we fit it
+[0:33:27] because of
+[0:33:28] the use of joint cancer difference and
+[0:33:30] the last two we also fit and with it
+[0:33:32] because of the way we apply general
 [0:33:34] inference in our kind of unsupervised domain
-[0:33:36] in our kind of unsupervised domain adaptation set
-[0:33:38] adaptation set and one important thing and this is i
-[0:33:40] and one important thing and this is i think more important than the method
-[0:33:42] think more important than the method itself is
+[0:33:36] adaptation set
+[0:33:38] and one important thing and this is i
+[0:33:40] think more important than the method
 [0:33:43] itself is we didn't need to find the causal graph
-[0:33:45] we didn't need to find the causal graph or even the equivalence class
-[0:33:47] or even the equivalence class we don't care we're searching for
-[0:33:48] we don't care we're searching for separating sets uh so essentially air
-[0:33:50] separating sets uh so essentially air conditional independence
-[0:33:52] conditional independence and i wanted just to point out uh some
-[0:33:55] and i wanted just to point out uh some other methods which is a similar idea
-[0:33:57] other methods which is a similar idea so yaris is here so in his group
-[0:34:00] so yaris is here so in his group they have been working on some causal
-[0:34:01] they have been working on some causal discovery for essentially causal bandits
-[0:34:04] discovery for essentially causal bandits and in this case as well
-[0:34:05] and in this case as well they don't need to find the causal graph
-[0:34:07] they don't need to find the causal graph or the causal requirements class
-[0:34:09] or the causal requirements class but they just need to find a separating
-[0:34:11] but they just need to find a separating set and so this is i think a very
-[0:34:13] set and so this is i think a very powerful idea and then just to finish
-[0:34:17] powerful idea and then just to finish up since i've been talking a lot i just
-[0:34:20] up since i've been talking a lot i just wanted to mention
-[0:34:21] wanted to mention some applications of this method
-[0:34:23] some applications of this method something i was talking mostly about
-[0:34:24] something i was talking mostly about theory
+[0:33:45] or even the equivalence class
+[0:33:47] we don't care we're searching for
+[0:33:48] separating sets uh so essentially air
+[0:33:50] conditional independence
+[0:33:52] and i wanted just to point out uh some
+[0:33:55] other methods which is a similar idea
+[0:33:57] so yaris is here so in his group
+[0:34:00] they have been working on some causal
+[0:34:01] discovery for essentially causal bandits
+[0:34:04] and in this case as well
+[0:34:05] they don't need to find the causal graph
+[0:34:07] or the causal requirements class
+[0:34:09] but they just need to find a separating
+[0:34:11] set and so this is i think a very
+[0:34:13] powerful idea and then just to finish
+[0:34:17] up since i've been talking a lot i just
+[0:34:20] wanted to mention
+[0:34:21] some applications of this method
+[0:34:23] something i was talking mostly about
 [0:34:25] theory uh but we have a new project with the
-[0:34:27] uh but we have a new project with the meteorbian
-[0:34:29] meteorbian watson erlap and so it's about cross
-[0:34:31] watson erlap and so it's about cross species translation
-[0:34:33] species translation specifically for vaccine treatment and
-[0:34:36] specifically for vaccine treatment and so it's with
-[0:34:37] so it's with this several people from i.t and from
-[0:34:39] this several people from i.t and from ibm
+[0:34:27] meteorbian
+[0:34:29] watson erlap and so it's about cross
+[0:34:31] species translation
+[0:34:33] specifically for vaccine treatment and
+[0:34:36] so it's with
+[0:34:37] this several people from i.t and from
 [0:34:41] ibm and the motivation there is that
-[0:34:43] and the motivation there is that essentially only 10 percent of the
-[0:34:46] essentially only 10 percent of the drugs that are developed and they're
-[0:34:48] drugs that are developed and they're successful in the
-[0:34:49] successful in the clinical studies so in mice only 10 of
-[0:34:52] clinical studies so in mice only 10 of the drugs that are successful in mice
-[0:34:54] the drugs that are successful in mice actually works on work on human too uh
-[0:34:57] actually works on work on human too uh and so we want to improve essentially
-[0:34:59] and so we want to improve essentially uh this development pipeline for drugs
-[0:35:01] uh this development pipeline for drugs right and the question is how do
-[0:35:03] right and the question is how do mice connect to humans and uh uh
-[0:35:06] mice connect to humans and uh uh one of the pi's of this project uh
-[0:35:08] one of the pi's of this project uh douglas rappenburger
-[0:35:09] douglas rappenburger wrote this science article in which uh
-[0:35:11] wrote this science article in which uh he's arguing that
-[0:35:13] he's arguing that while most of the current approach is
-[0:35:14] while most of the current approach is spoken of focus on commonalities so
-[0:35:16] spoken of focus on commonalities so you know genes that are um i think
-[0:35:19] you know genes that are um i think ortholog is name essentially ginseng
-[0:35:21] ortholog is name essentially ginseng mice that
+[0:34:43] essentially only 10 percent of the
+[0:34:46] drugs that are developed and they're
+[0:34:48] successful in the
+[0:34:49] clinical studies so in mice only 10 of
+[0:34:52] the drugs that are successful in mice
+[0:34:54] actually works on work on human too uh
+[0:34:57] and so we want to improve essentially
+[0:34:59] uh this development pipeline for drugs
+[0:35:01] right and the question is how do
+[0:35:03] mice connect to humans and uh uh
+[0:35:06] one of the pi's of this project uh
+[0:35:08] douglas rappenburger
+[0:35:09] wrote this science article in which uh
+[0:35:11] he's arguing that
+[0:35:13] while most of the current approach is
+[0:35:14] spoken of focus on commonalities so
+[0:35:16] you know genes that are um i think
+[0:35:19] ortholog is name essentially ginseng
 [0:35:22] mice that have similar behavior as genes in humans
-[0:35:25] have similar behavior as genes in humans and you focus on commonalities between
-[0:35:27] and you focus on commonalities between the two species
-[0:35:28] the two species uh instead in this case we want to do
-[0:35:30] uh instead in this case we want to do something computational and want to try
-[0:35:31] something computational and want to try to use these
-[0:35:32] to use these domain adaptation approaches and among
-[0:35:34] domain adaptation approaches and among these approaches
-[0:35:36] these approaches uh because i'm in the project two we are
-[0:35:38] uh because i'm in the project two we are going to use
-[0:35:39] going to use use it for an unsupervised adaptation
-[0:35:41] use it for an unsupervised adaptation setting once we have
-[0:35:43] setting once we have different mice and treated the untreated
-[0:35:46] different mice and treated the untreated mice and possibly some monkeys
-[0:35:48] mice and possibly some monkeys and we want to predict a certain outcome
-[0:35:50] and we want to predict a certain outcome on humans
+[0:35:25] and you focus on commonalities between
+[0:35:27] the two species
+[0:35:28] uh instead in this case we want to do
+[0:35:30] something computational and want to try
+[0:35:31] to use these
+[0:35:32] domain adaptation approaches and among
+[0:35:34] these approaches
+[0:35:36] uh because i'm in the project two we are
+[0:35:38] going to use
+[0:35:39] use it for an unsupervised adaptation
+[0:35:41] setting once we have
+[0:35:43] different mice and treated the untreated
+[0:35:46] mice and possibly some monkeys
+[0:35:48] and we want to predict a certain outcome
 [0:35:52] on humans and so the idea there is that we will
-[0:35:53] and so the idea there is that we will simplify
 [0:35:55] simplify and assume that there is some kind of
-[0:35:56] and assume that there is some kind of mapping between the different features
-[0:35:58] mapping between the different features of the species
-[0:35:59] of the species and we essentially use this um domain
-[0:36:02] and we essentially use this um domain adaptation house of the meditation setup
-[0:36:04] adaptation house of the meditation setup that we wrote about in 2018
-[0:36:07] that we wrote about in 2018 and we're going to use the tear improver
-[0:36:09] and we're going to use the tear improver and find which of the features are
-[0:36:10] and find which of the features are translatable and which are not
-[0:36:13] translatable and which are not and so i'm this is the last slide uh
-[0:36:16] and so i'm this is the last slide uh and so i'm going to step back a bit
-[0:36:20] and so i'm going to step back a bit and so i told you about how you know
-[0:36:23] and so i told you about how you know fantastic our method
-[0:36:24] fantastic our method is and you know uh all the good things
-[0:36:26] is and you know uh all the good things about it
+[0:35:56] mapping between the different features
+[0:35:58] of the species
+[0:35:59] and we essentially use this um domain
+[0:36:02] adaptation house of the meditation setup
+[0:36:04] that we wrote about in 2018
+[0:36:07] and we're going to use the tear improver
+[0:36:09] and find which of the features are
+[0:36:10] translatable and which are not
+[0:36:13] and so i'm this is the last slide uh
+[0:36:16] and so i'm going to step back a bit
+[0:36:20] and so i told you about how you know
+[0:36:23] fantastic our method
+[0:36:24] is and you know uh all the good things
 [0:36:27] about it but obviously there is still work to do
-[0:36:30] but obviously there is still work to do and so
 [0:36:31] and so there are some limitations of the
-[0:36:32] there are some limitations of the methods so one of them is a
-[0:36:35] methods so one of them is a potentially it's a bit too conservative
-[0:36:37] potentially it's a bit too conservative so you could
-[0:36:38] so you could throw away sets of features which are
-[0:36:41] throw away sets of features which are very predictive
-[0:36:42] very predictive because you cannot prove that they are
-[0:36:44] because you cannot prove that they are essentially transferable so it can be a
-[0:36:46] essentially transferable so it can be a bit conservative
-[0:36:47] bit conservative and so one of the things i'm i think
-[0:36:50] and so one of the things i'm i think we can think about is how can we use
-[0:36:53] we can think about is how can we use active learning or intervention design
-[0:36:55] active learning or intervention design to maybe decide which are some
-[0:36:56] to maybe decide which are some informative interventions in order to
-[0:36:58] informative interventions in order to find the separating sets of features
-[0:37:00] find the separating sets of features and another thing that it's maybe more
-[0:37:04] and another thing that it's maybe more related to
-[0:37:06] related to kind of more deep learning style machine
-[0:37:08] kind of more deep learning style machine learning is at the moment
-[0:37:10] learning is at the moment it doesn't really use transformational
-[0:37:12] it doesn't really use transformational features uh because
-[0:37:14] features uh because there are some kind of um technicalities
-[0:37:16] there are some kind of um technicalities with determinism
-[0:37:17] with determinism and so one of the questions is how can
-[0:37:19] and so one of the questions is how can it use transformations of features
-[0:37:22] it use transformations of features and the most important limitation of the
-[0:37:25] and the most important limitation of the approach is its scalability
-[0:37:27] approach is its scalability so as a lot of causal discovery methods
-[0:37:30] so as a lot of causal discovery methods also this method is not very scalable
-[0:37:32] also this method is not very scalable especially the methods based on logic
-[0:37:35] especially the methods based on logic unfortunately
-[0:37:36] unfortunately and so the question is how to make it
-[0:37:38] and so the question is how to make it more scalable and how to be medium
-[0:37:40] more scalable and how to be medium a bit less pedantic or a bit less
-[0:37:44] a bit less pedantic or a bit less correct and use approximate algorithms
-[0:37:47] correct and use approximate algorithms or how to combine it with
-[0:37:48] or how to combine it with low dimensional presentations in order
-[0:37:50] low dimensional presentations in order to make it more scalable and actually
-[0:37:52] to make it more scalable and actually applicable to more real-world cases
-[0:37:55] applicable to more real-world cases and the last thing we're working on at
-[0:37:57] and the last thing we're working on at the moment uh
-[0:37:59] the moment uh with the wave one from cmu is we're
-[0:38:01] with the wave one from cmu is we're trying to apply this to multi-task
-[0:38:03] trying to apply this to multi-task reinforcement learning
-[0:38:04] reinforcement learning these are in general these kind of ideas
-[0:38:06] these are in general these kind of ideas so if we have factored
-[0:38:08] so if we have factored market decision processes how can we use
-[0:38:10] market decision processes how can we use this kind of ideas to transfer the
-[0:38:12] this kind of ideas to transfer the policy from
-[0:38:13] policy from several search domains to a new target
-[0:38:15] several search domains to a new target domain
+[0:36:32] methods so one of them is a
+[0:36:35] potentially it's a bit too conservative
+[0:36:37] so you could
+[0:36:38] throw away sets of features which are
+[0:36:41] very predictive
+[0:36:42] because you cannot prove that they are
+[0:36:44] essentially transferable so it can be a
+[0:36:46] bit conservative
+[0:36:47] and so one of the things i'm i think
+[0:36:50] we can think about is how can we use
+[0:36:53] active learning or intervention design
+[0:36:55] to maybe decide which are some
+[0:36:56] informative interventions in order to
+[0:36:58] find the separating sets of features
+[0:37:00] and another thing that it's maybe more
+[0:37:04] related to
+[0:37:06] kind of more deep learning style machine
+[0:37:08] learning is at the moment
+[0:37:10] it doesn't really use transformational
+[0:37:12] features uh because
+[0:37:14] there are some kind of um technicalities
+[0:37:16] with determinism
+[0:37:17] and so one of the questions is how can
+[0:37:19] it use transformations of features
+[0:37:22] and the most important limitation of the
+[0:37:25] approach is its scalability
+[0:37:27] so as a lot of causal discovery methods
+[0:37:30] also this method is not very scalable
+[0:37:32] especially the methods based on logic
+[0:37:35] unfortunately
+[0:37:36] and so the question is how to make it
+[0:37:38] more scalable and how to be medium
+[0:37:40] a bit less pedantic or a bit less
+[0:37:44] correct and use approximate algorithms
+[0:37:47] or how to combine it with
+[0:37:48] low dimensional presentations in order
+[0:37:50] to make it more scalable and actually
+[0:37:52] applicable to more real-world cases
+[0:37:55] and the last thing we're working on at
+[0:37:57] the moment uh
+[0:37:59] with the wave one from cmu is we're
+[0:38:01] trying to apply this to multi-task
+[0:38:03] reinforcement learning
+[0:38:04] these are in general these kind of ideas
+[0:38:06] so if we have factored
+[0:38:08] market decision processes how can we use
+[0:38:10] this kind of ideas to transfer the
+[0:38:12] policy from
+[0:38:13] several search domains to a new target
 [0:38:17] domain and that's it thanks
 [0:38:23] well thanks sarah for a great talk um cam do you want to take some questions
-[0:38:26] cam do you want to take some questions yeah let's maybe
-[0:38:27] yeah let's maybe ask a few questions so um what one
-[0:38:29] ask a few questions so um what one question um
-[0:38:30] question um that um richard asked was um
-[0:38:34] that um richard asked was um let me read it so um
+[0:38:26] yeah let's maybe
+[0:38:27] ask a few questions so um what one
+[0:38:29] question um
+[0:38:30] that um richard asked was um
+[0:38:34] let me read it so um
 [0:38:42] yeah so when you use the word test uh what do you mean with real data
-[0:38:44] what do you mean with real data is it a kind of an eyeball test or a
-[0:38:46] is it a kind of an eyeball test or a formal statistical test
-[0:38:47] formal statistical test and it's no matter what assumptions you
-[0:38:51] and it's no matter what assumptions you need to make
-[0:38:51] need to make you mean a conditional independence test
-[0:38:53] you mean a conditional independence test or like
+[0:38:44] is it a kind of an eyeball test or a
+[0:38:46] formal statistical test
+[0:38:47] and it's no matter what assumptions you
+[0:38:51] need to make
+[0:38:51] you mean a conditional independence test
 [0:38:54] or like okay yes condition dependencies so in
-[0:38:57] okay yes condition dependencies so in practice
 [0:38:58] practice in a lot of the cases we used um
-[0:39:01] in a lot of the cases we used um partial partial regression or you know
-[0:39:03] partial partial regression or you know like very simple question it was linear
-[0:39:05] like very simple question it was linear gaussian so that's what we used
-[0:39:08] gaussian so that's what we used partial correlation so um
-[0:39:11] partial correlation so um but in general you could use any kind of
-[0:39:13] but in general you could use any kind of statistical independence test
-[0:39:16] statistical independence test okay make sense um and so
-[0:39:19] okay make sense um and so one additional question that i had was
-[0:39:21] one additional question that i had was um do you have so based on the
-[0:39:23] um do you have so based on the the limitation that that you laid out do
-[0:39:26] the limitation that that you laid out do you have a sense of um
-[0:39:28] you have a sense of um when is it it is going to be
-[0:39:30] when is it it is going to be conservative like what type of
-[0:39:32] conservative like what type of uh of of graphs is it gonna work well
-[0:39:35] uh of of graphs is it gonna work well for and what types of graph is it gonna
-[0:39:37] for and what types of graph is it gonna not be
+[0:39:01] partial partial regression or you know
+[0:39:03] like very simple question it was linear
+[0:39:05] gaussian so that's what we used
+[0:39:08] partial correlation so um
+[0:39:11] but in general you could use any kind of
+[0:39:13] statistical independence test
+[0:39:16] okay make sense um and so
+[0:39:19] one additional question that i had was
+[0:39:21] um do you have so based on the
+[0:39:23] the limitation that that you laid out do
+[0:39:26] you have a sense of um
+[0:39:28] when is it it is going to be
+[0:39:30] conservative like what type of
+[0:39:32] uh of of graphs is it gonna work well
+[0:39:35] for and what types of graph is it gonna
 [0:39:39] not be not work so well for and you have a
-[0:39:40] not work so well for and you have a sense of which one is
-[0:39:42] sense of which one is maybe prevalent in in in real world
-[0:39:45] maybe prevalent in in in real world settings or
-[0:39:45] settings or you know which one would you expect real
-[0:39:47] you know which one would you expect real world settings to look uh to look like
-[0:39:50] world settings to look uh to look like oh okay um i guess it depends on also
-[0:39:53] oh okay um i guess it depends on also how many
+[0:39:40] sense of which one is
+[0:39:42] maybe prevalent in in in real world
+[0:39:45] settings or
+[0:39:45] you know which one would you expect real
+[0:39:47] world settings to look uh to look like
+[0:39:50] oh okay um i guess it depends on also
 [0:39:54] how many different environments you have if you
-[0:39:55] different environments you have if you have a lot of environments then i think
-[0:39:57] have a lot of environments then i think it wouldn't be that much conservative
-[0:39:59] it wouldn't be that much conservative because it's
-[0:39:59] because it's um if you have potential if you had all
-[0:40:02] um if you have potential if you had all of the interventions you should be able
-[0:40:03] of the interventions you should be able to actually find the parents
-[0:40:05] to actually find the parents and therefore it should be very easy to
-[0:40:07] and therefore it should be very easy to find separating sets
-[0:40:09] find separating sets so the more experiments you have the
-[0:40:10] so the more experiments you have the better it is but otherwise i haven't
-[0:40:12] better it is but otherwise i haven't really
+[0:39:55] have a lot of environments then i think
+[0:39:57] it wouldn't be that much conservative
+[0:39:59] because it's
+[0:39:59] um if you have potential if you had all
+[0:40:02] of the interventions you should be able
+[0:40:03] to actually find the parents
+[0:40:05] and therefore it should be very easy to
+[0:40:07] find separating sets
+[0:40:09] so the more experiments you have the
+[0:40:10] better it is but otherwise i haven't
 [0:40:13] really thought about it but maybe one of my
-[0:40:15] thought about it but maybe one of my quarters went towards
+[0:40:15] quarters went towards
 [0:40:22] maybe not that's fine i think they're busy answering questions
-[0:40:23] busy answering questions yes exactly yeah they seem busy
-[0:40:26] yes exactly yeah they seem busy okay okay so maybe we can uh
-[0:40:29] okay okay so maybe we can uh we can move on to the to the discussion
-[0:40:31] we can move on to the to the discussion and then take questions pass
-[0:40:33] and then take questions pass back after that so stop sharing right
-[0:40:37] back after that so stop sharing right yes okay and uh and then dominic
-[0:40:39] yes okay and uh and then dominic whenever you're ready
-[0:40:40] whenever you're ready feel free to start one second
-[0:40:44] feel free to start one second [Music]
+[0:40:23] yes exactly yeah they seem busy
+[0:40:26] okay okay so maybe we can uh
+[0:40:29] we can move on to the to the discussion
+[0:40:31] and then take questions pass
+[0:40:33] back after that so stop sharing right
+[0:40:37] yes okay and uh and then dominic
+[0:40:39] whenever you're ready
+[0:40:40] feel free to start one second
 [0:40:45] [Music] uh can you see my ipad
-[0:40:49] uh can you see my ipad yes all right perfect so thank you first
-[0:40:52] yes all right perfect so thank you first thank you sir
-[0:40:53] thank you sir for uh for a great talk uh so
-[0:40:56] for uh for a great talk uh so it's fun to discuss these uh this kind
-[0:40:59] it's fun to discuss these uh this kind of work
+[0:40:49] yes all right perfect so thank you first
+[0:40:52] thank you sir
+[0:40:53] for uh for a great talk uh so
+[0:40:56] it's fun to discuss these uh this kind
 [0:41:00] of work um yeah so this this this talk actually
-[0:41:03] um yeah so this this this talk actually had
 [0:41:04] had two titles um the the other one was
-[0:41:08] two titles um the the other one was ask what can ideas from causality do for
-[0:41:10] ask what can ideas from causality do for machine learning
-[0:41:11] machine learning and i absolutely love that question
-[0:41:13] and i absolutely love that question because often people think about
-[0:41:15] because often people think about what machine learning can do for causal
-[0:41:17] what machine learning can do for causal inference and
-[0:41:18] inference and but there's also lots of stuff that can
-[0:41:20] but there's also lots of stuff that can be done in the other direction
-[0:41:22] be done in the other direction and this is an example of that okay so
-[0:41:25] and this is an example of that okay so we saw today uh domain adaptation so we
-[0:41:28] we saw today uh domain adaptation so we saw how causal inference can be used for
-[0:41:32] saw how causal inference can be used for for making robust predictions and i just
-[0:41:35] for making robust predictions and i just want to quickly take a step back and
-[0:41:36] want to quickly take a step back and motivate that again at least uh
-[0:41:38] motivate that again at least uh intuitively
-[0:41:39] intuitively why this should be why this should be
-[0:41:41] why this should be why this should be possible and the
-[0:41:43] possible and the the example that i've brought today is
-[0:41:45] the example that i've brought today is is maya and astronomy
-[0:41:46] is maya and astronomy so the mayans they were they were
-[0:41:48] so the mayans they were they were extremely good at predicting
-[0:41:50] extremely good at predicting uh astronomical phenomena and that was
-[0:41:52] uh astronomical phenomena and that was due to their religion they they wanted
-[0:41:54] due to their religion they they wanted to know at which point certain star
-[0:41:56] to know at which point certain star would appear
-[0:41:56] would appear like on their sky and uh so they had
-[0:42:00] like on their sky and uh so they had tables they had certain ways of doing
-[0:42:01] tables they had certain ways of doing that they had like these devices where
-[0:42:03] that they had like these devices where they looked at shadows
-[0:42:04] they looked at shadows and but like the way that they did it
-[0:42:06] and but like the way that they did it was uh was very particular to the
-[0:42:08] was uh was very particular to the location
+[0:41:08] ask what can ideas from causality do for
+[0:41:10] machine learning
+[0:41:11] and i absolutely love that question
+[0:41:13] because often people think about
+[0:41:15] what machine learning can do for causal
+[0:41:17] inference and
+[0:41:18] but there's also lots of stuff that can
+[0:41:20] be done in the other direction
+[0:41:22] and this is an example of that okay so
+[0:41:25] we saw today uh domain adaptation so we
+[0:41:28] saw how causal inference can be used for
+[0:41:32] for making robust predictions and i just
+[0:41:35] want to quickly take a step back and
+[0:41:36] motivate that again at least uh
+[0:41:38] intuitively
+[0:41:39] why this should be why this should be
+[0:41:41] possible and the
+[0:41:43] the example that i've brought today is
+[0:41:45] is maya and astronomy
+[0:41:46] so the mayans they were they were
+[0:41:48] extremely good at predicting
+[0:41:50] uh astronomical phenomena and that was
+[0:41:52] due to their religion they they wanted
+[0:41:54] to know at which point certain star
+[0:41:56] would appear
+[0:41:56] like on their sky and uh so they had
+[0:42:00] tables they had certain ways of doing
+[0:42:01] that they had like these devices where
+[0:42:03] they looked at shadows
+[0:42:04] and but like the way that they did it
+[0:42:06] was uh was very particular to the
 [0:42:09] location and to the time at which they were doing
-[0:42:11] and to the time at which they were doing it so if you would have taken their
-[0:42:12] it so if you would have taken their tables and their ways of
-[0:42:14] tables and their ways of like their methods to figuring these
-[0:42:15] like their methods to figuring these things out and you would have gone to
-[0:42:17] things out and you would have gone to europe or to some other location their
-[0:42:19] europe or to some other location their whole prediction model would have like
-[0:42:21] whole prediction model would have like fallen apart and the reason for that was
-[0:42:23] fallen apart and the reason for that was that
+[0:42:11] it so if you would have taken their
+[0:42:12] tables and their ways of
+[0:42:14] like their methods to figuring these
+[0:42:15] things out and you would have gone to
+[0:42:17] europe or to some other location their
+[0:42:19] whole prediction model would have like
+[0:42:21] fallen apart and the reason for that was
 [0:42:24] that what what what they thought was that the
-[0:42:26] what what what they thought was that the earth is in the end
-[0:42:28] earth is in the end is this the center of the universe and
-[0:42:29] is this the center of the universe and fix so they somehow had a wrong
-[0:42:32] fix so they somehow had a wrong wrong way of looking at things if they
-[0:42:33] wrong way of looking at things if they would have known that the earth the role
-[0:42:35] would have known that the earth the role evolves around the sun and if they would
-[0:42:37] evolves around the sun and if they would have had a more
-[0:42:39] have had a more a better model of that then they would
-[0:42:41] a better model of that then they would be able to make predictions that
-[0:42:42] be able to make predictions that actually work
-[0:42:43] actually work everywhere so if you make non-causal
-[0:42:45] everywhere so if you make non-causal predictions or if you don't take into
-[0:42:47] predictions or if you don't take into account
+[0:42:26] earth is in the end
+[0:42:28] is this the center of the universe and
+[0:42:29] fix so they somehow had a wrong
+[0:42:32] wrong way of looking at things if they
+[0:42:33] would have known that the earth the role
+[0:42:35] evolves around the sun and if they would
+[0:42:37] have had a more
+[0:42:39] a better model of that then they would
+[0:42:41] be able to make predictions that
+[0:42:42] actually work
+[0:42:43] everywhere so if you make non-causal
+[0:42:45] predictions or if you don't take into
 [0:42:48] account the causal structure of a problem then
-[0:42:50] the causal structure of a problem then whatever predictions you might
-[0:42:51] whatever predictions you might make might not be transferable might not
-[0:42:53] make might not be transferable might not work in in a different location
-[0:42:56] work in in a different location and you can also make that a little bit
-[0:42:58] and you can also make that a little bit more
+[0:42:50] whatever predictions you might
+[0:42:51] make might not be transferable might not
+[0:42:53] work in in a different location
+[0:42:56] and you can also make that a little bit
 [0:42:59] more a little bit more formal and that's what
-[0:43:01] a little bit more formal and that's what people have done over the
-[0:43:03] people have done over the over the past so uh you can show that if
-[0:43:05] over the past so uh you can show that if you have a causal model then you get an
-[0:43:07] you have a causal model then you get an invariance property
-[0:43:09] invariance property the proper the probability of a
-[0:43:11] the proper the probability of a distribution of y
-[0:43:12] distribution of y given its parents is invariant across
-[0:43:14] given its parents is invariant across distributions
-[0:43:16] distributions where here i'm looking at distributions
-[0:43:17] where here i'm looking at distributions that arise from interventions on
-[0:43:19] that arise from interventions on covariates and
-[0:43:20] covariates and i also additionally assume that there
-[0:43:22] i also additionally assume that there are no hidden variables
-[0:43:24] are no hidden variables so in some ways causal models are
-[0:43:27] so in some ways causal models are extremely robust
-[0:43:28] extremely robust across across distributions in a certain
-[0:43:31] across across distributions in a certain way
+[0:43:01] people have done over the
+[0:43:03] over the past so uh you can show that if
+[0:43:05] you have a causal model then you get an
+[0:43:07] invariance property
+[0:43:09] the proper the probability of a
+[0:43:11] distribution of y
+[0:43:12] given its parents is invariant across
+[0:43:14] distributions
+[0:43:16] where here i'm looking at distributions
+[0:43:17] that arise from interventions on
+[0:43:19] covariates and
+[0:43:20] i also additionally assume that there
+[0:43:22] are no hidden variables
+[0:43:24] so in some ways causal models are
+[0:43:27] extremely robust
+[0:43:28] across across distributions in a certain
 [0:43:32] way so now you can ask well okay well does
-[0:43:33] so now you can ask well okay well does that mean i should only make calls or
-[0:43:35] that mean i should only make calls or predictions
-[0:43:37] predictions and sarah says no and i completely agree
-[0:43:41] and sarah says no and i completely agree with her there
-[0:43:41] with her there so um causal models uh
-[0:43:45] so um causal models uh and it's the point that she made today
-[0:43:46] and it's the point that she made today they can protect against too much and
-[0:43:48] they can protect against too much and they're also cases where they actually
-[0:43:50] they're also cases where they actually protect
+[0:43:33] that mean i should only make calls or
+[0:43:35] predictions
+[0:43:37] and sarah says no and i completely agree
+[0:43:41] with her there
+[0:43:41] so um causal models uh
+[0:43:45] and it's the point that she made today
+[0:43:46] they can protect against too much and
+[0:43:48] they're also cases where they actually
 [0:43:50] protect against too little because they are
-[0:43:52] against too little because they are robust against
-[0:43:53] robust against all distributions that arise from
-[0:43:54] all distributions that arise from interventions and the target variables
-[0:43:57] interventions and the target variables and the the problem that we looked at
-[0:43:58] and the the problem that we looked at today was we want to predict on some
-[0:44:01] today was we want to predict on some target domain
-[0:44:02] target domain which might uh be similar in some sense
-[0:44:05] which might uh be similar in some sense to
+[0:43:52] robust against
+[0:43:53] all distributions that arise from
+[0:43:54] interventions and the target variables
+[0:43:57] and the the problem that we looked at
+[0:43:58] today was we want to predict on some
+[0:44:01] target domain
+[0:44:02] which might uh be similar in some sense
 [0:44:06] to actually it will probably be similar to
-[0:44:07] actually it will probably be similar to the source domain so not everything
-[0:44:09] the source domain so not everything will will change so we don't want
-[0:44:12] will will change so we don't want complete invariance but we have some
-[0:44:13] complete invariance but we have some sort of a
+[0:44:07] the source domain so not everything
+[0:44:09] will will change so we don't want
+[0:44:12] complete invariance but we have some
 [0:44:14] sort of a targeted invariance problem uh and
-[0:44:17] targeted invariance problem uh and that's what we formulated today we want
-[0:44:19] that's what we formulated today we want to find a separating set to set x tilde
-[0:44:21] to find a separating set to set x tilde so that the distribution of y given x
-[0:44:23] so that the distribution of y given x tilde in the in the source domain is the
-[0:44:26] tilde in the in the source domain is the same
+[0:44:17] that's what we formulated today we want
+[0:44:19] to find a separating set to set x tilde
+[0:44:21] so that the distribution of y given x
+[0:44:23] tilde in the in the source domain is the
 [0:44:26] same as in the target domain because if we
-[0:44:28] as in the target domain because if we have that that would mean we can just
-[0:44:30] have that that would mean we can just simply
+[0:44:28] have that that would mean we can just
 [0:44:30] simply uh train a prediction model here and use
-[0:44:33] uh train a prediction model here and use it here
 [0:44:34] it here without uh without completely messing up
-[0:44:37] without uh without completely messing up our predictions
-[0:44:38] our predictions so instead of complete invariance you
-[0:44:40] so instead of complete invariance you want some sort of targeted invariants
-[0:44:43] want some sort of targeted invariants okay so now if you want to search these
-[0:44:46] okay so now if you want to search these sets there is an issue
-[0:44:48] sets there is an issue and the problem is that the target
-[0:44:51] and the problem is that the target variable is not observed
-[0:44:52] variable is not observed uh on the target domain so i cannot i
-[0:44:55] uh on the target domain so i cannot i cannot
-[0:44:56] cannot i cannot actually test this relationship
-[0:44:59] i cannot actually test this relationship directly
+[0:44:37] our predictions
+[0:44:38] so instead of complete invariance you
+[0:44:40] want some sort of targeted invariants
+[0:44:43] okay so now if you want to search these
+[0:44:46] sets there is an issue
+[0:44:48] and the problem is that the target
+[0:44:51] variable is not observed
+[0:44:52] uh on the target domain so i cannot i
+[0:44:55] cannot
+[0:44:56] actually test this relationship
 [0:45:00] directly and now there is this this proposal by
-[0:45:02] and now there is this this proposal by sarah and her co-authors
-[0:45:04] sarah and her co-authors which which is a combination of
-[0:45:06] which which is a combination of different ideas
-[0:45:07] different ideas and she says well we can assume that
-[0:45:11] and she says well we can assume that any conditional independencies that
-[0:45:13] any conditional independencies that involve y in the source domain also
-[0:45:15] involve y in the source domain also holds in the target domain
-[0:45:16] holds in the target domain and i can also assume that c1 does not
-[0:45:19] and i can also assume that c1 does not have a direct effect on y
-[0:45:20] have a direct effect on y and in that case i can do a lot more
-[0:45:23] and in that case i can do a lot more because then uh using the joint causal
-[0:45:26] because then uh using the joint causal inference framework
-[0:45:28] inference framework i can infer some separating steps
-[0:45:31] i can infer some separating steps not always sometimes i will not be able
-[0:45:33] not always sometimes i will not be able to tell anything but
-[0:45:34] to tell anything but usually you know in some cases i will be
-[0:45:36] usually you know in some cases i will be able to infer the separating sex
-[0:45:38] able to infer the separating sex by feeding the observed conditional
-[0:45:40] by feeding the observed conditional dependencies so i use some
-[0:45:42] dependencies so i use some conditioning dependence tests on the
-[0:45:44] conditioning dependence tests on the source domain into a theorem prover
-[0:45:48] source domain into a theorem prover okay and then in the third step once
-[0:45:50] okay and then in the third step once i've found some of the separating sets
-[0:45:52] i've found some of the separating sets uh i can now also search for the one
-[0:45:55] uh i can now also search for the one that has the lowest prediction error on
-[0:45:56] that has the lowest prediction error on the source domain to make sure that
-[0:45:58] the source domain to make sure that that i'm that i'm transferring uh a
-[0:46:01] that i'm that i'm transferring uh a model that that has uh has a good
-[0:46:02] model that that has uh has a good prediction performance
-[0:46:04] prediction performance okay and then i can apply this on the
-[0:46:06] okay and then i can apply this on the target domain okay so that's
-[0:46:08] target domain okay so that's that's kind of roughly the the workflow
-[0:46:10] that's kind of roughly the the workflow that that we
-[0:46:11] that that we that we saw today and like
-[0:46:15] that we saw today and like this is great for a couple of reasons so
-[0:46:18] this is great for a couple of reasons so like roughly these are the advantages
-[0:46:20] like roughly these are the advantages there are also other advantages but
-[0:46:21] there are also other advantages but uh these are the the main ones in my
-[0:46:23] uh these are the the main ones in my opinion so the first one is we do not
-[0:46:25] opinion so the first one is we do not really need to know
-[0:46:26] really need to know much about the graph we do not have to
-[0:46:28] much about the graph we do not have to to estimate it
-[0:46:30] to estimate it uh we also do not have to make any
-[0:46:32] uh we also do not have to make any parametric assumptions so we can just
-[0:46:34] parametric assumptions so we can just use any
+[0:45:02] sarah and her co-authors
+[0:45:04] which which is a combination of
+[0:45:06] different ideas
+[0:45:07] and she says well we can assume that
+[0:45:11] any conditional independencies that
+[0:45:13] involve y in the source domain also
+[0:45:15] holds in the target domain
+[0:45:16] and i can also assume that c1 does not
+[0:45:19] have a direct effect on y
+[0:45:20] and in that case i can do a lot more
+[0:45:23] because then uh using the joint causal
+[0:45:26] inference framework
+[0:45:28] i can infer some separating steps
+[0:45:31] not always sometimes i will not be able
+[0:45:33] to tell anything but
+[0:45:34] usually you know in some cases i will be
+[0:45:36] able to infer the separating sex
+[0:45:38] by feeding the observed conditional
+[0:45:40] dependencies so i use some
+[0:45:42] conditioning dependence tests on the
+[0:45:44] source domain into a theorem prover
+[0:45:48] okay and then in the third step once
+[0:45:50] i've found some of the separating sets
+[0:45:52] uh i can now also search for the one
+[0:45:55] that has the lowest prediction error on
+[0:45:56] the source domain to make sure that
+[0:45:58] that i'm that i'm transferring uh a
+[0:46:01] model that that has uh has a good
+[0:46:02] prediction performance
+[0:46:04] okay and then i can apply this on the
+[0:46:06] target domain okay so that's
+[0:46:08] that's kind of roughly the the workflow
+[0:46:10] that that we
+[0:46:11] that we saw today and like
+[0:46:15] this is great for a couple of reasons so
+[0:46:18] like roughly these are the advantages
+[0:46:20] there are also other advantages but
+[0:46:21] uh these are the the main ones in my
+[0:46:23] opinion so the first one is we do not
+[0:46:25] really need to know
+[0:46:26] much about the graph we do not have to
+[0:46:28] to estimate it
+[0:46:30] uh we also do not have to make any
+[0:46:32] parametric assumptions so we can just
 [0:46:34] use any random forest model or whatever we want
-[0:46:36] random forest model or whatever we want to use as a prediction model
-[0:46:38] to use as a prediction model we're kind of not limited there and what
-[0:46:40] we're kind of not limited there and what we will get out of there
-[0:46:42] we will get out of there is uh much less conservative than if we
-[0:46:45] is uh much less conservative than if we would just make a causal prediction
-[0:46:47] would just make a causal prediction and what we saw today was that sometimes
-[0:46:51] and what we saw today was that sometimes we will use the children sometimes we
-[0:46:53] we will use the children sometimes we even might use
-[0:46:54] even might use parent not use the parents of of the
-[0:46:57] parent not use the parents of of the target variable
-[0:46:58] target variable which first is unintuitive for someone
-[0:47:00] which first is unintuitive for someone trained in causal inference but
-[0:47:02] trained in causal inference but there are there are definitely examples
-[0:47:04] there are there are definitely examples of that
+[0:46:36] to use as a prediction model
+[0:46:38] we're kind of not limited there and what
+[0:46:40] we will get out of there
+[0:46:42] is uh much less conservative than if we
+[0:46:45] would just make a causal prediction
+[0:46:47] and what we saw today was that sometimes
+[0:46:51] we will use the children sometimes we
+[0:46:53] even might use
+[0:46:54] parent not use the parents of of the
+[0:46:57] target variable
+[0:46:58] which first is unintuitive for someone
+[0:47:00] trained in causal inference but
+[0:47:02] there are there are definitely examples
 [0:47:05] of that and in the end and i think this is also
-[0:47:07] and in the end and i think this is also this is super important
-[0:47:08] this is super important the final model is tailored to the
-[0:47:10] the final model is tailored to the target distribution
-[0:47:12] target distribution so we're really kind of focusing on the
-[0:47:13] so we're really kind of focusing on the task attached not just trying to do some
-[0:47:15] task attached not just trying to do some like arbitrary invariants that
-[0:47:17] like arbitrary invariants that that might not work off too well
-[0:47:20] that might not work off too well okay so so that being said like in the
-[0:47:23] okay so so that being said like in the in the
+[0:47:07] this is super important
+[0:47:08] the final model is tailored to the
+[0:47:10] target distribution
+[0:47:12] so we're really kind of focusing on the
+[0:47:13] task attached not just trying to do some
+[0:47:15] like arbitrary invariants that
+[0:47:17] that might not work off too well
+[0:47:20] okay so so that being said like in the
 [0:47:24] in the like in the next few slides i want to
-[0:47:26] like in the next few slides i want to kind of like investigate a little bit
-[0:47:27] kind of like investigate a little bit kind of in which
-[0:47:28] kind of in which in which cases we want to we want to use
-[0:47:31] in which cases we want to we want to use this um
+[0:47:26] kind of like investigate a little bit
+[0:47:27] kind of in which
+[0:47:28] in which cases we want to we want to use
 [0:47:32] this um and for that i brought like a super
-[0:47:34] and for that i brought like a super simple example
-[0:47:36] simple example i actually assume for now that the graph
-[0:47:38] i actually assume for now that the graph is known so
-[0:47:39] is known so we we have some background knowledge and
-[0:47:41] we we have some background knowledge and this is also an example that sarah used
-[0:47:42] this is also an example that sarah used in her slides
-[0:47:44] in her slides so here i have my indicator of whether
-[0:47:46] so here i have my indicator of whether i'm in the source or in the target
-[0:47:47] i'm in the source or in the target domain
+[0:47:34] simple example
+[0:47:36] i actually assume for now that the graph
+[0:47:38] is known so
+[0:47:39] we we have some background knowledge and
+[0:47:41] this is also an example that sarah used
+[0:47:42] in her slides
+[0:47:44] so here i have my indicator of whether
+[0:47:46] i'm in the source or in the target
 [0:47:48] domain i have a covariate x1 that has an effect
-[0:47:50] i have a covariate x1 that has an effect on y y has an effect on
-[0:47:52] on y y has an effect on x2 and then i have a like a very simple
-[0:47:55] x2 and then i have a like a very simple structural equation model
-[0:47:56] structural equation model that that i put down now if you
-[0:47:59] that that i put down now if you i also have a parameter t that
-[0:48:02] i also have a parameter t that essentially tells me how much
-[0:48:03] essentially tells me how much the distribution shifts between source
-[0:48:06] the distribution shifts between source and and target domain so if i make this
-[0:48:07] and and target domain so if i make this t large there
-[0:48:08] t large there there will be a there will be a large
-[0:48:10] there will be a there will be a large shift now if you look at the
-[0:48:13] shift now if you look at the probability distributions and the
-[0:48:14] probability distributions and the conditional probabilities you're going
-[0:48:15] conditional probabilities you're going to see there's in
-[0:48:17] to see there's in y given x 1 is invariant of course and
-[0:48:20] y given x 1 is invariant of course and why given
+[0:47:50] on y y has an effect on
+[0:47:52] x2 and then i have a like a very simple
+[0:47:55] structural equation model
+[0:47:56] that that i put down now if you
+[0:47:59] i also have a parameter t that
+[0:48:02] essentially tells me how much
+[0:48:03] the distribution shifts between source
+[0:48:06] and and target domain so if i make this
+[0:48:07] t large there
+[0:48:08] there will be a there will be a large
+[0:48:10] shift now if you look at the
+[0:48:13] probability distributions and the
+[0:48:14] conditional probabilities you're going
+[0:48:15] to see there's in
+[0:48:17] y given x 1 is invariant of course and
 [0:48:20] why given x2 and x1 is not so uh
-[0:48:24] x2 and x1 is not so uh as if you want to use a separating set
-[0:48:26] as if you want to use a separating set you would use this
-[0:48:29] you would use this one okay but let's let's now
-[0:48:32] one okay but let's let's now plot the error of what happens if you if
-[0:48:35] plot the error of what happens if you if you actually do not use the separating
-[0:48:37] you actually do not use the separating set
+[0:48:24] as if you want to use a separating set
+[0:48:26] you would use this
+[0:48:29] one okay but let's let's now
+[0:48:32] plot the error of what happens if you if
+[0:48:35] you actually do not use the separating
 [0:48:39] set so here on the on the x axis i i have
-[0:48:42] so here on the on the x axis i i have the perturbation strength so how
-[0:48:43] the perturbation strength so how different source and target domain are
-[0:48:45] different source and target domain are and on the y
-[0:48:46] and on the y axis i just have the mean squared error
-[0:48:48] axis i just have the mean squared error and here the the green one that's the
-[0:48:50] and here the the green one that's the that's the that's the separating set and
-[0:48:52] that's the that's the separating set and x1 x2 that's just
-[0:48:54] x1 x2 that's just using everything essentially and just
-[0:48:56] using everything essentially and just completely ignoring
-[0:48:57] completely ignoring ignoring the shift and what you're what
-[0:49:00] ignoring the shift and what you're what you're gonna see is that
-[0:49:01] you're gonna see is that if you if you have a only a small shift
-[0:49:05] if you if you have a only a small shift then using all information possible and
-[0:49:09] then using all information possible and ignoring that will actually to smaller
-[0:49:11] ignoring that will actually to smaller prediction error
-[0:49:12] prediction error but then if you kind of the further you
-[0:49:14] but then if you kind of the further you go away kind of at some
-[0:49:16] go away kind of at some point there will you will cross the
-[0:49:18] point there will you will cross the threshold and using the separating set
-[0:49:20] threshold and using the separating set will be better
-[0:49:21] will be better so in some ways and that is also
-[0:49:23] so in some ways and that is also intuitive
+[0:48:42] the perturbation strength so how
+[0:48:43] different source and target domain are
+[0:48:45] and on the y
+[0:48:46] axis i just have the mean squared error
+[0:48:48] and here the the green one that's the
+[0:48:50] separating set and
+[0:48:52] x1 x2 that's just
+[0:48:54] using everything essentially and just
+[0:48:56] completely ignoring
+[0:48:57] ignoring the shift and what you're what
+[0:49:00] you're gonna see is that
+[0:49:01] if you if you have a only a small shift
+[0:49:05] then using all information possible and
+[0:49:09] ignoring that will actually to smaller
+[0:49:11] prediction error
+[0:49:12] but then if you kind of the further you
+[0:49:14] go away kind of at some
+[0:49:16] point there will you will cross the
+[0:49:18] threshold and using the separating set
+[0:49:20] will be better
+[0:49:21] so in some ways and that is also
 [0:49:25] intuitive the separating set does not pay off if
-[0:49:27] the separating set does not pay off if you have small distribution shifts and
-[0:49:29] you have small distribution shifts and that
+[0:49:27] you have small distribution shifts and
 [0:49:29] that i think that holds for any like for many
-[0:49:32] i think that holds for any like for many many of these methods that we're that
-[0:49:34] many of these methods that we're that we're doing here
-[0:49:35] we're doing here so the thing is really you're
-[0:49:37] so the thing is really you're essentially you're
-[0:49:38] essentially you're buying insurance and buying insurance
-[0:49:40] buying insurance and buying insurance does not always pay off
-[0:49:42] does not always pay off buying insurance only pays off if there
-[0:49:44] buying insurance only pays off if there is a there's a bigger
-[0:49:45] is a there's a bigger if there's a bigger difference and i
-[0:49:48] if there's a bigger difference and i think that also kind of has practical
-[0:49:49] think that also kind of has practical implications because it
-[0:49:50] implications because it it may make these methods difficult to
-[0:49:52] it may make these methods difficult to tune right
-[0:49:54] tune right you do your conditional dependence tests
-[0:49:56] you do your conditional dependence tests and you could do the independence tests
-[0:49:57] and you could do the independence tests with a different threshold
-[0:49:59] with a different threshold getting getting different separation
-[0:50:01] getting getting different separation sets and some of those separation sets
-[0:50:03] sets and some of those separation sets might now have a
-[0:50:04] might now have a drastically smaller means quite error
-[0:50:06] drastically smaller means quite error than the than the others
-[0:50:07] than the than the others so there is a bit of a trade-off between
-[0:50:09] so there is a bit of a trade-off between kind of how invariant you try to be how
-[0:50:12] kind of how invariant you try to be how strict
+[0:49:32] many of these methods that we're that
+[0:49:34] we're doing here
+[0:49:35] so the thing is really you're
+[0:49:37] essentially you're
+[0:49:38] buying insurance and buying insurance
+[0:49:40] does not always pay off
+[0:49:42] buying insurance only pays off if there
+[0:49:44] is a there's a bigger
+[0:49:45] if there's a bigger difference and i
+[0:49:48] think that also kind of has practical
+[0:49:49] implications because it
+[0:49:50] it may make these methods difficult to
+[0:49:52] tune right
+[0:49:54] you do your conditional dependence tests
+[0:49:56] and you could do the independence tests
+[0:49:57] with a different threshold
+[0:49:59] getting getting different separation
+[0:50:01] sets and some of those separation sets
+[0:50:03] might now have a
+[0:50:04] drastically smaller means quite error
+[0:50:06] than the than the others
+[0:50:07] so there is a bit of a trade-off between
+[0:50:09] kind of how invariant you try to be how
 [0:50:12] strict you are in in the in the stage where you
-[0:50:14] you are in in the in the stage where you select the separating set and kind of
-[0:50:16] select the separating set and kind of how
+[0:50:14] select the separating set and kind of
 [0:50:17] how how well you do how well you do later
-[0:50:20] how well you do how well you do later yeah
 [0:50:21] yeah um yeah so
-[0:50:24] um yeah so let me just uh quickly uh
-[0:50:27] let me just uh quickly uh put out some questions here i i really
-[0:50:29] put out some questions here i i really like his work i like the general
-[0:50:30] like his work i like the general direction
+[0:50:24] let me just uh quickly uh
+[0:50:27] put out some questions here i i really
+[0:50:29] like his work i like the general
 [0:50:31] direction i think there's lots of cool stuff that
-[0:50:33] i think there's lots of cool stuff that that can be done
-[0:50:34] that can be done um so yeah the the the main one that
-[0:50:37] um so yeah the the the main one that that i have like that i but that's also
-[0:50:39] that i have like that i but that's also a question i have with most of the other
-[0:50:41] a question i have with most of the other stuff in this literature
-[0:50:42] stuff in this literature how can we actually make sure that this
-[0:50:45] how can we actually make sure that this insurance that we pay pays off so
-[0:50:47] insurance that we pay pays off so can we somehow test or like have some
-[0:50:49] can we somehow test or like have some like checks
-[0:50:50] like checks to make sure that the distribution
-[0:50:51] to make sure that the distribution shifts are large enough so that this
-[0:50:53] shifts are large enough so that this protection is actually
-[0:50:54] protection is actually something that we that we should do um
-[0:50:57] something that we that we should do um that also means how
-[0:50:58] that also means how should i choose the tuning parameters in
-[0:51:00] should i choose the tuning parameters in this method or that also means
-[0:51:02] this method or that also means how do i choose how many source domains
-[0:51:05] how do i choose how many source domains i actually kind of put into the whole
-[0:51:07] i actually kind of put into the whole problem
+[0:50:33] that can be done
+[0:50:34] um so yeah the the the main one that
+[0:50:37] that i have like that i but that's also
+[0:50:39] a question i have with most of the other
+[0:50:41] stuff in this literature
+[0:50:42] how can we actually make sure that this
+[0:50:45] insurance that we pay pays off so
+[0:50:47] can we somehow test or like have some
+[0:50:49] like checks
+[0:50:50] to make sure that the distribution
+[0:50:51] shifts are large enough so that this
+[0:50:53] protection is actually
+[0:50:54] something that we that we should do um
+[0:50:57] that also means how
+[0:50:58] should i choose the tuning parameters in
+[0:51:00] this method or that also means
+[0:51:02] how do i choose how many source domains
+[0:51:05] i actually kind of put into the whole
 [0:51:07] problem um and another one is now
-[0:51:11] um and another one is now you have a robust model um can we
-[0:51:14] you have a robust model um can we somehow communicate
-[0:51:15] somehow communicate what we are robust against right if you
-[0:51:17] what we are robust against right if you have a graph
-[0:51:18] have a graph maybe it's easy to describe what kind of
-[0:51:21] maybe it's easy to describe what kind of distribution shifts we are now robust
-[0:51:23] distribution shifts we are now robust against
+[0:51:11] you have a robust model um can we
+[0:51:14] somehow communicate
+[0:51:15] what we are robust against right if you
+[0:51:17] have a graph
+[0:51:18] maybe it's easy to describe what kind of
+[0:51:21] distribution shifts we are now robust
 [0:51:23] against if you don't know a graph that seems to
-[0:51:25] if you don't know a graph that seems to be a lot
 [0:51:27] be a lot harder but it seems like in practice
-[0:51:29] harder but it seems like in practice some practitioners might want to know
-[0:51:30] some practitioners might want to know okay like this is a robust model
-[0:51:32] okay like this is a robust model what what can i do with this where else
-[0:51:35] what what can i do with this where else do you think this will work
-[0:51:37] do you think this will work um and the last one and this is not just
-[0:51:39] um and the last one and this is not just the question for sarah i think that
-[0:51:41] the question for sarah i think that it's also a bit of a question for for
-[0:51:43] it's also a bit of a question for for everyone here um
-[0:51:44] everyone here um so sarah asked what can ideas from
-[0:51:47] so sarah asked what can ideas from causality do for machine learning
-[0:51:49] causality do for machine learning and you can also similarly ask what can
-[0:51:51] and you can also similarly ask what can ideas from causality do for
-[0:51:53] ideas from causality do for generalizability and replicability of
-[0:51:55] generalizability and replicability of statistical findings
-[0:51:56] statistical findings because also there you want some sort of
-[0:51:58] because also there you want some sort of invariance sarah looked at
-[0:52:00] invariance sarah looked at in variance of predictions but you if
-[0:52:03] in variance of predictions but you if you want to replicate
-[0:52:04] you want to replicate findings you want invariance of uh
-[0:52:07] findings you want invariance of uh of estimator and in invariants of of
-[0:52:10] of estimator and in invariants of of certain
+[0:51:29] some practitioners might want to know
+[0:51:30] okay like this is a robust model
+[0:51:32] what what can i do with this where else
+[0:51:35] do you think this will work
+[0:51:37] um and the last one and this is not just
+[0:51:39] the question for sarah i think that
+[0:51:41] it's also a bit of a question for for
+[0:51:43] everyone here um
+[0:51:44] so sarah asked what can ideas from
+[0:51:47] causality do for machine learning
+[0:51:49] and you can also similarly ask what can
+[0:51:51] ideas from causality do for
+[0:51:53] generalizability and replicability of
+[0:51:55] statistical findings
+[0:51:56] because also there you want some sort of
+[0:51:58] invariance sarah looked at
+[0:52:00] in variance of predictions but you if
+[0:52:03] you want to replicate
+[0:52:04] findings you want invariance of uh
+[0:52:07] of estimator and in invariants of of
 [0:52:10] certain certain effects so i believe also there
-[0:52:12] certain effects so i believe also there like
 [0:52:14] like these separated sets and similar
-[0:52:16] these separated sets and similar concepts are very important
-[0:52:18] concepts are very important and i i see some work work in that
-[0:52:20] and i i see some work work in that direction popping up but i think it's
-[0:52:22] direction popping up but i think it's still uh
+[0:52:16] concepts are very important
+[0:52:18] and i i see some work work in that
+[0:52:20] direction popping up but i think it's
 [0:52:22] still uh understudied and there's tons of other
-[0:52:24] understudied and there's tons of other cool stuff that can be done
-[0:52:26] cool stuff that can be done um yeah anyways that's that's my
-[0:52:28] um yeah anyways that's that's my discussion and uh yeah i wanna
-[0:52:30] discussion and uh yeah i wanna hand it back to sarah and her co-authors
-[0:52:32] hand it back to sarah and her co-authors if they they want to
-[0:52:34] if they they want to respond great work okay thank you very
-[0:52:37] respond great work okay thank you very much
+[0:52:24] cool stuff that can be done
+[0:52:26] um yeah anyways that's that's my
+[0:52:28] discussion and uh yeah i wanna
+[0:52:30] hand it back to sarah and her co-authors
+[0:52:32] if they they want to
+[0:52:34] respond great work okay thank you very
 [0:52:38] much thank you so much yes sir if you want to
-[0:52:40] thank you so much yes sir if you want to respond
 [0:52:42] respond okay i know the questions but yeah
-[0:52:44] okay i know the questions but yeah especially i think
-[0:52:45] especially i think so i was very interested in that what
-[0:52:47] so i was very interested in that what can we be robust against so the middle
-[0:52:48] can we be robust against so the middle question
+[0:52:44] especially i think
+[0:52:45] so i was very interested in that what
+[0:52:47] can we be robust against so the middle
 [0:52:49] question and that one i had an idea that maybe
-[0:52:51] and that one i had an idea that maybe there is something that can be done
-[0:52:53] there is something that can be done even with the tier improver in order to
-[0:52:55] even with the tier improver in order to kind of try to see which of the things
-[0:52:57] kind of try to see which of the things you can which of the interventions you
-[0:52:59] you can which of the interventions you can be robust against
-[0:53:01] can be robust against so that's something i think this is a
-[0:53:03] so that's something i think this is a very interesting direction of work i
-[0:53:04] very interesting direction of work i haven't thought about yet so
-[0:53:06] haven't thought about yet so thank you for the suggestion and for the
-[0:53:09] thank you for the suggestion and for the first one i'm still
-[0:53:10] first one i'm still um it's a bit more difficult for me to
-[0:53:12] um it's a bit more difficult for me to think about it
-[0:53:13] think about it so the first question was um how can you
-[0:53:16] so the first question was um how can you know it pays off to you separating sets
-[0:53:19] know it pays off to you separating sets as opposed to non-separating sets
-[0:53:21] as opposed to non-separating sets and i think in that case it's a bit more
-[0:53:24] and i think in that case it's a bit more difficult
+[0:52:51] there is something that can be done
+[0:52:53] even with the tier improver in order to
+[0:52:55] kind of try to see which of the things
+[0:52:57] you can which of the interventions you
+[0:52:59] can be robust against
+[0:53:01] so that's something i think this is a
+[0:53:03] very interesting direction of work i
+[0:53:04] haven't thought about yet so
+[0:53:06] thank you for the suggestion and for the
+[0:53:09] first one i'm still
+[0:53:10] um it's a bit more difficult for me to
+[0:53:12] think about it
+[0:53:13] so the first question was um how can you
+[0:53:16] know it pays off to you separating sets
+[0:53:19] as opposed to non-separating sets
+[0:53:21] and i think in that case it's a bit more
+[0:53:24] difficult
 [0:53:28] so that's something was that the question right i think yeah yeah okay
-[0:53:31] question right i think yeah yeah okay that's something i still don't know yet
-[0:53:34] that's something i still don't know yet uh
+[0:53:31] that's something i still don't know yet
 [0:53:35] uh about what would be a good idea and also
-[0:53:37] about what would be a good idea and also in our setting we have an unsupervised
-[0:53:39] in our setting we have an unsupervised domain adaptation case
-[0:53:40] domain adaptation case so we assume we know nothing about the
-[0:53:43] so we assume we know nothing about the um
+[0:53:37] in our setting we have an unsupervised
+[0:53:39] domain adaptation case
+[0:53:40] so we assume we know nothing about the
 [0:53:43] um variable y in the target domain so in
-[0:53:45] variable y in the target domain so in that case you cannot really
-[0:53:47] that case you cannot really do much but maybe you have some the main
-[0:53:48] do much but maybe you have some the main knowledge that you could use
-[0:53:50] knowledge that you could use um yeah so that's that needs to be
-[0:53:52] um yeah so that's that needs to be investigated as well
+[0:53:45] that case you cannot really
+[0:53:47] do much but maybe you have some the main
+[0:53:48] knowledge that you could use
+[0:53:50] um yeah so that's that needs to be
+[0:53:52] investigated as well
 [0:53:57] yeah i i i agree we totally agree with you i think like yeah with the current
-[0:53:59] you i think like yeah with the current problem statement you will not be able
-[0:54:00] problem statement you will not be able to do that but like yeah making
-[0:54:02] to do that but like yeah making additional assumptions or
-[0:54:04] additional assumptions or having some additional background
-[0:54:05] having some additional background knowledge will probably
-[0:54:08] knowledge will probably allow you to target that
-[0:54:11] allow you to target that so sounds good and maybe some of my
-[0:54:13] so sounds good and maybe some of my coders want to add something let's say
-[0:54:15] coders want to add something let's say yours or
+[0:53:59] problem statement you will not be able
+[0:54:00] to do that but like yeah making
+[0:54:02] additional assumptions or
+[0:54:04] having some additional background
+[0:54:05] knowledge will probably
+[0:54:08] allow you to target that
+[0:54:11] so sounds good and maybe some of my
+[0:54:13] coders want to add something let's say
 [0:54:17] yours or something
 [0:54:22] no they say no okay let's just answer any questions
-[0:54:24] any questions okay okay they're too busy okay that
-[0:54:26] okay okay they're too busy okay that sounds good
-[0:54:28] sounds good all right so maybe we'll um we'll wrap
-[0:54:30] all right so maybe we'll um we'll wrap up so uh
+[0:54:24] okay okay they're too busy okay that
+[0:54:26] sounds good
+[0:54:28] all right so maybe we'll um we'll wrap
 [0:54:31] up so uh thanks sarah for a great talk and uh
-[0:54:33] thanks sarah for a great talk and uh thank you dominic for
-[0:54:34] thank you dominic for a great discussion um let me just share
-[0:54:38] a great discussion um let me just share my screen
+[0:54:33] thank you dominic for
+[0:54:34] a great discussion um let me just share
+[0:54:38] my screen
 [0:54:44] so uh next week we're going to have corwinz zigler from the university of
-[0:54:46] corwinz zigler from the university of texas at austin
-[0:54:47] texas at austin austin who he will tell us about
-[0:54:49] austin who he will tell us about bipartite inference into air pollution
-[0:54:51] bipartite inference into air pollution transport estimating
-[0:54:52] transport estimating health effects of power plant
-[0:54:53] health effects of power plant interventions we're looking forward to
-[0:54:55] interventions we're looking forward to that talk and we hope you will
-[0:54:57] that talk and we hope you will join us thank you
+[0:54:46] texas at austin
+[0:54:47] austin who he will tell us about
+[0:54:49] bipartite inference into air pollution
+[0:54:51] transport estimating
+[0:54:52] health effects of power plant
+[0:54:53] interventions we're looking forward to
+[0:54:55] that talk and we hope you will
+[0:54:57] join us thank you

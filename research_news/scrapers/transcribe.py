@@ -18,6 +18,7 @@ live only on disk.
 from __future__ import annotations
 
 import importlib
+import html
 import logging
 import os
 import re
@@ -57,9 +58,10 @@ def format_ts(seconds: float) -> str:
 
 def strip_inline_tags(text: str) -> str:
     """Drop WebVTT inline timing tags (<00:00:00.480>, <c>...</c>) and any other
-    angle-bracket markup, then collapse whitespace."""
+    angle-bracket markup, decode HTML entities (&amp; → &), collapse whitespace."""
     text = re.sub(r"<\d{1,2}:\d{2}:\d{2}[.,]\d{3}>", "", text)
     text = re.sub(r"<[^>]+>", "", text)
+    text = html.unescape(text)
     return re.sub(r"[ \t]+", " ", text).strip()
 
 
@@ -131,30 +133,58 @@ def _split_line(line: str) -> tuple[str | None, str]:
     return None, line
 
 
-def clean_transcript(text: str) -> str:
-    """Collapse the duplication ASR / auto-captions produce.
+def _overlap(prev: str, cur: str, min_len: int = 10) -> int:
+    """Largest k (>= min_len) with prev[-k:] == cur[:k] — the overlap YouTube's
+    rolling captions leave between consecutive cues. 0 if none that long."""
+    for k in range(min(len(prev), len(cur)), min_len - 1, -1):
+        if prev[-k:] == cur[:k]:
+            return k
+    return 0
+
+
+def clean_transcript(text: str, max_passes: int = 5) -> str:
+    """Collapse the duplication ASR / auto-captions produce, to a fixed point.
 
     - drops blank lines and inline timing tags;
     - drops a line identical to the one before it (Whisper repetition loops);
-    - collapses rolling captions where each line extends the previous one
-      (keeps the longest), the classic YouTube auto-sub pattern.
-    Timestamps (if present) are preserved on the kept line.
+    - a line that *extends* the previous one (prefix growth) replaces it;
+    - a line whose start *overlaps* the previous line's end keeps only its new
+      tail — the classic YouTube rolling-caption pattern, which otherwise repeats
+      every phrase twice.
+    A single pass can leave a little residual once lines become newly adjacent,
+    so we repeat until stable (usually 2 passes). Timestamps are preserved.
     """
+    for _ in range(max_passes):
+        cleaned = _clean_pass(text)
+        if cleaned == text:
+            break
+        text = cleaned
+    return text
+
+
+def _clean_pass(text: str) -> str:
     out: list[str] = []
     prev = ""
     for raw in text.splitlines():
         ts, body = _split_line(raw.rstrip())
         body = strip_inline_tags(body)
-        if not body:
+        if not body or body == prev:
             continue
         rendered = f"[{ts}] {body}" if ts else body
-        if body == prev:
-            continue
         # rolling growth: previous kept line is a prefix of this one → replace it
         if prev and out and body.startswith(prev) and len(body) > len(prev):
             out[-1] = rendered
             prev = body
             continue
+        # rolling overlap: this line's head repeats the previous line's tail
+        if prev:
+            k = _overlap(prev, body)
+            if k:
+                tail = body[k:].strip()
+                prev = body
+                if tail:
+                    out.append(f"[{ts}] {tail}" if ts else tail)
+                continue
         out.append(rendered)
         prev = body
     return "\n".join(out)

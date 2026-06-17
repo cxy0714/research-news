@@ -1,1278 +1,1267 @@
 [0:00:02] you okay welcome to the online calls
-[0:00:05] okay welcome to the online calls inference in you now today we have a
-[0:00:06] inference in you now today we have a time back sheet from Facebook core data
-[0:00:09] time back sheet from Facebook core data science he will talk about efficient
-[0:00:11] science he will talk about efficient experimentation and inference for large
-[0:00:13] experimentation and inference for large decision spaces you're very excited to
-[0:00:16] decision spaces you're very excited to have him here he will stop from time to
-[0:00:18] have him here he will stop from time to time to take questions from the audience
-[0:00:20] time to take questions from the audience so please submit your questions by a QA
-[0:00:23] so please submit your questions by a QA then as a discussion we have Dean Echols
-[0:00:26] then as a discussion we have Dean Echols from MIT and after the discussion an
-[0:00:30] from MIT and after the discussion an attempt actually will also will will
-[0:00:33] attempt actually will also will will again take some questions from the
-[0:00:35] again take some questions from the audience if we have take half time all
-[0:00:37] audience if we have take half time all right
+[0:00:05] inference in you now today we have a
+[0:00:06] time back sheet from Facebook core data
+[0:00:09] science he will talk about efficient
+[0:00:11] experimentation and inference for large
+[0:00:13] decision spaces you're very excited to
+[0:00:16] have him here he will stop from time to
+[0:00:18] time to take questions from the audience
+[0:00:20] so please submit your questions by a QA
+[0:00:23] then as a discussion we have Dean Echols
+[0:00:26] from MIT and after the discussion an
+[0:00:30] attempt actually will also will will
+[0:00:33] again take some questions from the
+[0:00:35] audience if we have take half time all
 [0:00:37] right I'm now switching over to Dion who will
-[0:00:39] I'm now switching over to Dion who will let handle questions in queue a
+[0:00:39] let handle questions in queue a
 [0:00:46] exterminate so other mix ed for questions to a time
-[0:00:49] so other mix ed for questions to a time please submit them via the Q&amp;A and we do
-[0:00:52] please submit them via the Q&amp;A and we do not have a co-author so we'll basically
-[0:00:56] not have a co-author so we'll basically just trust me two questions to a time
-[0:00:58] just trust me two questions to a time during the breaks and if they're
-[0:01:00] during the breaks and if they're selected so I will ask you to raise your
-[0:01:03] selected so I will ask you to raise your hand if your question is selected please
-[0:01:05] hand if your question is selected please don't raise your hand until I've asked
-[0:01:07] don't raise your hand until I've asked you to do it it makes everything more
-[0:01:09] you to do it it makes everything more complicated all right that's it on my
-[0:01:12] complicated all right that's it on my end it and whenever you're ready okay
-[0:01:20] end it and whenever you're ready okay great
+[0:00:49] please submit them via the Q&A and we do
+[0:00:52] not have a co-author so we'll basically
+[0:00:56] just trust me two questions to a time
+[0:00:58] during the breaks and if they're
+[0:01:00] selected so I will ask you to raise your
+[0:01:03] hand if your question is selected please
+[0:01:05] don't raise your hand until I've asked
+[0:01:07] you to do it it makes everything more
+[0:01:09] complicated all right that's it on my
+[0:01:12] end it and whenever you're ready okay
 [0:01:21] great ready to go
 [0:01:27] my screen being shared or I have to do that no not yet
 [0:01:44] yes now we can see okay and it's showing the correct set of slides
 [0:01:52] perfect I'm a Tom Bakshi I'm a research scientist at Facebook and I'm gonna talk
-[0:01:56] scientist at Facebook and I'm gonna talk today about some research that my group
-[0:01:59] today about some research that my group has been doing over the years so I'm
-[0:02:02] has been doing over the years so I'm going to start off by giving some
-[0:02:04] going to start off by giving some general empirical context for the work
-[0:02:07] general empirical context for the work and how we got into doing this work and
-[0:02:10] and how we got into doing this work and then I'm going to talk about the
-[0:02:11] then I'm going to talk about the application of Bayesian optimization for
-[0:02:13] application of Bayesian optimization for Felix field experiments so Bayesian
-[0:02:16] Felix field experiments so Bayesian optimization is a technique that's used
-[0:02:18] optimization is a technique that's used for efficient global optimization of
-[0:02:20] for efficient global optimization of things like computer simulations or
-[0:02:23] things like computer simulations or machine learning models but we've been
-[0:02:25] machine learning models but we've been adapting it to work for kind of
-[0:02:27] adapting it to work for kind of real-world Internet experiments and it
-[0:02:29] real-world Internet experiments and it could be used really for any kind of
-[0:02:31] could be used really for any kind of field experiment and then I'm going to
-[0:02:34] field experiment and then I'm going to talk about some extensions to this work
-[0:02:36] talk about some extensions to this work including how we could leverage biased
-[0:02:38] including how we could leverage biased simulations to improve the sample
-[0:02:40] simulations to improve the sample efficiency of these methods and then I'm
-[0:02:43] efficiency of these methods and then I'm going to talk about the use of
-[0:02:44] going to talk about the use of statistical surrogacy for targeting long
-[0:02:47] statistical surrogacy for targeting long term outcomes through the use of
-[0:02:48] term outcomes through the use of meta-analysis so I first came to
-[0:02:54] meta-analysis so I first came to Facebook about nine years ago or 10
-[0:02:57] Facebook about nine years ago or 10 years ago if you caught my internship to
-[0:02:59] years ago if you caught my internship to run randomized experiments internet
-[0:03:02] run randomized experiments internet companies are a great place to to run
-[0:03:04] companies are a great place to to run experiments it's it's relatively easy
-[0:03:07] experiments it's it's relatively easy and a lot of decisions are informed
-[0:03:10] and a lot of decisions are informed through the use of randomized
-[0:03:12] through the use of randomized experiments but on such a large platform
-[0:03:17] experiments but on such a large platform with so many different products and
-[0:03:20] with so many different products and different people it can actually be hard
-[0:03:23] different people it can actually be hard to figure out you know what are the
-[0:03:25] to figure out you know what are the different treatments or interventions or
-[0:03:28] different treatments or interventions or policies that we should be considering
-[0:03:30] policies that we should be considering so how should we make inferences in
-[0:03:32] so how should we make inferences in these spaces and how do we go about
-[0:03:35] these spaces and how do we go about optimizing the various objectives that
-[0:03:38] optimizing the various objectives that the firm may have so about four years
-[0:03:46] the firm may have so about four years ago I formed my own research group
-[0:03:48] ago I formed my own research group called the adaptive experimentation team
-[0:03:51] called the adaptive experimentation team and our goal has been to radically
-[0:03:54] and our goal has been to radically change the way that we run experiments
-[0:03:56] change the way that we run experiments and develop software and we do both
-[0:04:00] and develop software and we do both pure applied work within the company but
-[0:04:03] pure applied work within the company but we also published papers and try to
-[0:04:06] we also published papers and try to contribute to to more substantial
-[0:04:09] contribute to to more substantial generalizable knowledge and so you know
-[0:04:11] generalizable knowledge and so you know part of our principles are just
-[0:04:13] part of our principles are just randomizing more we feel that randomized
-[0:04:15] randomizing more we feel that randomized experiments even though they're very
-[0:04:17] experiments even though they're very prevalent at Facebook are still
-[0:04:19] prevalent at Facebook are still underutilized and that a lot of
-[0:04:21] underutilized and that a lot of experimentation is done without
-[0:04:24] experimentation is done without particular goals in mind the sounds kind
-[0:04:27] particular goals in mind the sounds kind of funny but I think the reality is that
-[0:04:29] of funny but I think the reality is that when people are running experiments and
-[0:04:32] when people are running experiments and in these real-world situations it's not
-[0:04:34] in these real-world situations it's not just some a single outcome that one
-[0:04:36] just some a single outcome that one cares about there's an entire ecosystem
-[0:04:38] cares about there's an entire ecosystem that one has to consider and this can
-[0:04:41] that one has to consider and this can introduce all kinds of issues in terms
-[0:04:45] introduce all kinds of issues in terms of modeling and how we want to do our
-[0:04:47] of modeling and how we want to do our exploration the other is that we're
-[0:04:50] exploration the other is that we're making the analysis more rigorous in
-[0:04:54] making the analysis more rigorous in part through the use of more advanced
-[0:04:55] part through the use of more advanced statistical models or machine learning
-[0:04:58] statistical models or machine learning and with the aid of causal inference and
-[0:05:02] and with the aid of causal inference and these tools were able to identify
-[0:05:04] these tools were able to identify optimal treatments or policies and more
-[0:05:07] optimal treatments or policies and more rigorously explore large decision spaces
-[0:05:10] rigorously explore large decision spaces and so we largely operate in a very
-[0:05:16] and so we largely operate in a very integrated model where we might work
-[0:05:18] integrated model where we might work hand in hand with teams to develop
-[0:05:20] hand in hand with teams to develop experiments or develop methods but at
-[0:05:23] experiments or develop methods but at the same time we're building software
-[0:05:24] the same time we're building software and we're building these methods and so
-[0:05:26] and we're building these methods and so this is really kind of a full full stack
-[0:05:29] this is really kind of a full full stack operation where all of the work that
-[0:05:31] operation where all of the work that we're doing is very empirical II
-[0:05:33] we're doing is very empirical II motivated now a lot of people think
-[0:05:37] motivated now a lot of people think about banded optimization or Bayesian
-[0:05:39] about banded optimization or Bayesian optimization as a fully automated thing
-[0:05:42] optimization as a fully automated thing but there's oftentimes a wide gap
-[0:05:44] but there's oftentimes a wide gap between the present practice of
-[0:05:49] between the present practice of experimentation and the notion that we
-[0:05:52] experimentation and the notion that we can just automatically get magic and so
-[0:05:57] can just automatically get magic and so there's there's a whole spectrum of use
-[0:05:59] there's there's a whole spectrum of use cases including ad hoc use by experts
-[0:06:03] cases including ad hoc use by experts and machine learning ranking engineers
-[0:06:05] and machine learning ranking engineers or researchers - people who are just
-[0:06:08] or researchers - people who are just trained up on it on these tools to
-[0:06:11] trained up on it on these tools to various self-serve tools to tools that
-[0:06:13] various self-serve tools to tools that require note
-[0:06:14] require note an intervention so that might be
-[0:06:16] an intervention so that might be something like if we're running
-[0:06:18] something like if we're running marketing campaigns we could run various
-[0:06:21] marketing campaigns we could run various factorial designs to optimize creatives
-[0:06:26] factorial designs to optimize creatives for promotions using banded optimization
+[0:01:56] today about some research that my group
+[0:01:59] has been doing over the years so I'm
+[0:02:02] going to start off by giving some
+[0:02:04] general empirical context for the work
+[0:02:07] and how we got into doing this work and
+[0:02:10] then I'm going to talk about the
+[0:02:11] application of Bayesian optimization for
+[0:02:13] Felix field experiments so Bayesian
+[0:02:16] optimization is a technique that's used
+[0:02:18] for efficient global optimization of
+[0:02:20] things like computer simulations or
+[0:02:23] machine learning models but we've been
+[0:02:25] adapting it to work for kind of
+[0:02:27] real-world Internet experiments and it
+[0:02:29] could be used really for any kind of
+[0:02:31] field experiment and then I'm going to
+[0:02:34] talk about some extensions to this work
+[0:02:36] including how we could leverage biased
+[0:02:38] simulations to improve the sample
+[0:02:40] efficiency of these methods and then I'm
+[0:02:43] going to talk about the use of
+[0:02:44] statistical surrogacy for targeting long
+[0:02:47] term outcomes through the use of
+[0:02:48] meta-analysis so I first came to
+[0:02:54] Facebook about nine years ago or 10
+[0:02:57] years ago if you caught my internship to
+[0:02:59] run randomized experiments internet
+[0:03:02] companies are a great place to to run
+[0:03:04] experiments it's it's relatively easy
+[0:03:07] and a lot of decisions are informed
+[0:03:10] through the use of randomized
+[0:03:12] experiments but on such a large platform
+[0:03:17] with so many different products and
+[0:03:20] different people it can actually be hard
+[0:03:23] to figure out you know what are the
+[0:03:25] different treatments or interventions or
+[0:03:28] policies that we should be considering
+[0:03:30] so how should we make inferences in
+[0:03:32] these spaces and how do we go about
+[0:03:35] optimizing the various objectives that
+[0:03:38] the firm may have so about four years
+[0:03:46] ago I formed my own research group
+[0:03:48] called the adaptive experimentation team
+[0:03:51] and our goal has been to radically
+[0:03:54] change the way that we run experiments
+[0:03:56] and develop software and we do both
+[0:04:00] pure applied work within the company but
+[0:04:03] we also published papers and try to
+[0:04:06] contribute to to more substantial
+[0:04:09] generalizable knowledge and so you know
+[0:04:11] part of our principles are just
+[0:04:13] randomizing more we feel that randomized
+[0:04:15] experiments even though they're very
+[0:04:17] prevalent at Facebook are still
+[0:04:19] underutilized and that a lot of
+[0:04:21] experimentation is done without
+[0:04:24] particular goals in mind the sounds kind
+[0:04:27] of funny but I think the reality is that
+[0:04:29] when people are running experiments and
+[0:04:32] in these real-world situations it's not
+[0:04:34] just some a single outcome that one
+[0:04:36] cares about there's an entire ecosystem
+[0:04:38] that one has to consider and this can
+[0:04:41] introduce all kinds of issues in terms
+[0:04:45] of modeling and how we want to do our
+[0:04:47] exploration the other is that we're
+[0:04:50] making the analysis more rigorous in
+[0:04:54] part through the use of more advanced
+[0:04:55] statistical models or machine learning
+[0:04:58] and with the aid of causal inference and
+[0:05:02] these tools were able to identify
+[0:05:04] optimal treatments or policies and more
+[0:05:07] rigorously explore large decision spaces
+[0:05:10] and so we largely operate in a very
+[0:05:16] integrated model where we might work
+[0:05:18] hand in hand with teams to develop
+[0:05:20] experiments or develop methods but at
+[0:05:23] the same time we're building software
+[0:05:24] and we're building these methods and so
+[0:05:26] this is really kind of a full full stack
+[0:05:29] operation where all of the work that
+[0:05:31] we're doing is very empirical II
+[0:05:33] motivated now a lot of people think
+[0:05:37] about banded optimization or Bayesian
+[0:05:39] optimization as a fully automated thing
+[0:05:42] but there's oftentimes a wide gap
+[0:05:44] between the present practice of
+[0:05:49] experimentation and the notion that we
+[0:05:52] can just automatically get magic and so
+[0:05:57] there's there's a whole spectrum of use
+[0:05:59] cases including ad hoc use by experts
+[0:06:03] and machine learning ranking engineers
+[0:06:05] or researchers - people who are just
+[0:06:08] trained up on it on these tools to
+[0:06:11] various self-serve tools to tools that
+[0:06:13] require note
+[0:06:14] an intervention so that might be
+[0:06:16] something like if we're running
+[0:06:18] marketing campaigns we could run various
+[0:06:21] factorial designs to optimize creatives
+[0:06:26] for promotions using banded optimization
 [0:06:35] what I'm going to focus on in particular throughout the talk is Bayesian
-[0:06:37] throughout the talk is Bayesian optimization and the idea here is that
-[0:06:41] optimization and the idea here is that we have very large continuous action
-[0:06:43] we have very large continuous action spaces and we wish to optimize multiple
-[0:06:47] spaces and we wish to optimize multiple objectives within this action space and
-[0:06:51] objectives within this action space and so the motivating example for us had
-[0:06:56] so the motivating example for us had been the this problem of trying to make
-[0:06:59] been the this problem of trying to make Facebook work better in emerging markets
-[0:07:02] Facebook work better in emerging markets do you think about the over 2 billion
-[0:07:06] do you think about the over 2 billion active users that Facebook has people
-[0:07:09] active users that Facebook has people are connecting from a really great
-[0:07:10] are connecting from a really great quality networks to networks that might
-[0:07:13] quality networks to networks that might be 2g or might just have a really spotty
-[0:07:16] be 2g or might just have a really spotty inter minute an intermittent internet
-[0:07:18] inter minute an intermittent internet connection or really low end mobile
-[0:07:21] connection or really low end mobile phones from 2011 or 2010 and so it's a
-[0:07:26] phones from 2011 or 2010 and so it's a real challenge to develop software that
-[0:07:28] real challenge to develop software that works well across all of these different
-[0:07:30] works well across all of these different contexts so for about about four years
-[0:07:35] contexts so for about about four years ago this this team of engineers on the
-[0:07:37] ago this this team of engineers on the Android emerging market team Alex cube
-[0:07:39] Android emerging market team Alex cube as they were referred to internally had
-[0:07:43] as they were referred to internally had this idea of saying okay well when when
-[0:07:46] this idea of saying okay well when when people are loading stories or I guess
-[0:07:50] people are loading stories or I guess now they're when people are loading
-[0:07:53] now they're when people are loading posts on their mobile phone should we
-[0:07:57] posts on their mobile phone should we really be fetching 10 posts every time
-[0:08:01] really be fetching 10 posts every time the user Scrolls down to the bottom of
-[0:08:02] the user Scrolls down to the bottom of the page and so the idea is that some
-[0:08:07] the page and so the idea is that some users might have a really good internet
-[0:08:10] users might have a really good internet connection and so we could grab more
-[0:08:12] connection and so we could grab more data and that way they can have kind of
-[0:08:15] data and that way they can have kind of a smoother scrolling experience and
-[0:08:17] a smoother scrolling experience and they're not having to wait and we know
-[0:08:18] they're not having to wait and we know that the more people wait and the more
-[0:08:20] that the more people wait and the more people are frustrated they're less the
-[0:08:23] people are frustrated they're less the less they use these these applications
-[0:08:24] less they use these these applications and of all of the metrics the company
-[0:08:27] and of all of the metrics the company cares about goes
-[0:08:28] cares about goes so we might imagine that okay if they
-[0:08:31] so we might imagine that okay if they have a better internet connection we can
-[0:08:33] have a better internet connection we can learn more if they have poor let's load
-[0:08:35] learn more if they have poor let's load less because it takes less time but you
-[0:08:38] less because it takes less time but you could also imagine other scenarios where
-[0:08:40] could also imagine other scenarios where if the internet connection is very good
-[0:08:42] if the internet connection is very good then you can always retrieve more posts
-[0:08:46] then you can always retrieve more posts really fast whereas if you have a poor
-[0:08:48] really fast whereas if you have a poor in an intermittent connection maybe we
-[0:08:51] in an intermittent connection maybe we should be more aggressive about getting
-[0:08:54] should be more aggressive about getting as much data as we possibly can because
-[0:08:56] as much data as we possibly can because we don't know if we'll be able to
-[0:08:58] we don't know if we'll be able to retrieve those in the future and so this
-[0:09:01] retrieve those in the future and so this is an example of a personalized policy
-[0:09:03] is an example of a personalized policy that maps a particular configuration how
-[0:09:08] that maps a particular configuration how many posts the to fetch as the use of
-[0:09:11] many posts the to fetch as the use of Scrolls down the newsfeed according to
-[0:09:13] Scrolls down the newsfeed according to what type of internet connection the
-[0:09:15] what type of internet connection the user is on and there are a lot of
-[0:09:17] user is on and there are a lot of different options here and it's you can
-[0:09:23] different options here and it's you can see that it's it's virtually impossible
-[0:09:26] see that it's it's virtually impossible to consider all possible combinations I
-[0:09:29] to consider all possible combinations I [Music]
+[0:06:37] optimization and the idea here is that
+[0:06:41] we have very large continuous action
+[0:06:43] spaces and we wish to optimize multiple
+[0:06:47] objectives within this action space and
+[0:06:51] so the motivating example for us had
+[0:06:56] been the this problem of trying to make
+[0:06:59] Facebook work better in emerging markets
+[0:07:02] do you think about the over 2 billion
+[0:07:06] active users that Facebook has people
+[0:07:09] are connecting from a really great
+[0:07:10] quality networks to networks that might
+[0:07:13] be 2g or might just have a really spotty
+[0:07:16] inter minute an intermittent internet
+[0:07:18] connection or really low end mobile
+[0:07:21] phones from 2011 or 2010 and so it's a
+[0:07:26] real challenge to develop software that
+[0:07:28] works well across all of these different
+[0:07:30] contexts so for about about four years
+[0:07:35] ago this this team of engineers on the
+[0:07:37] Android emerging market team Alex cube
+[0:07:39] as they were referred to internally had
+[0:07:43] this idea of saying okay well when when
+[0:07:46] people are loading stories or I guess
+[0:07:50] now they're when people are loading
+[0:07:53] posts on their mobile phone should we
+[0:07:57] really be fetching 10 posts every time
+[0:08:01] the user Scrolls down to the bottom of
+[0:08:02] the page and so the idea is that some
+[0:08:07] users might have a really good internet
+[0:08:10] connection and so we could grab more
+[0:08:12] data and that way they can have kind of
+[0:08:15] a smoother scrolling experience and
+[0:08:17] they're not having to wait and we know
+[0:08:18] that the more people wait and the more
+[0:08:20] people are frustrated they're less the
+[0:08:23] less they use these these applications
+[0:08:24] and of all of the metrics the company
+[0:08:27] cares about goes
+[0:08:28] so we might imagine that okay if they
+[0:08:31] have a better internet connection we can
+[0:08:33] learn more if they have poor let's load
+[0:08:35] less because it takes less time but you
+[0:08:38] could also imagine other scenarios where
+[0:08:40] if the internet connection is very good
+[0:08:42] then you can always retrieve more posts
+[0:08:46] really fast whereas if you have a poor
+[0:08:48] in an intermittent connection maybe we
+[0:08:51] should be more aggressive about getting
+[0:08:54] as much data as we possibly can because
+[0:08:56] we don't know if we'll be able to
+[0:08:58] retrieve those in the future and so this
+[0:09:01] is an example of a personalized policy
+[0:09:03] that maps a particular configuration how
+[0:09:08] many posts the to fetch as the use of
+[0:09:11] Scrolls down the newsfeed according to
+[0:09:13] what type of internet connection the
+[0:09:15] user is on and there are a lot of
+[0:09:17] different options here and it's you can
+[0:09:23] see that it's it's virtually impossible
+[0:09:26] to consider all possible combinations I
 [0:09:30] [Music] think there's something like 200,000
-[0:09:34] think there's something like 200,000 possible combinations that are valid if
-[0:09:37] possible combinations that are valid if we consider reasonable ranges and the
-[0:09:41] we consider reasonable ranges and the approach that we're going to be taking
-[0:09:43] approach that we're going to be taking is figuring out how to map these
-[0:09:44] is figuring out how to map these policies into vectors which one we can
-[0:09:47] policies into vectors which one we can then model it through some kind of
-[0:09:51] then model it through some kind of nonparametric models such as a Gaussian
-[0:09:53] nonparametric models such as a Gaussian process and there are a lot of places
-[0:09:57] process and there are a lot of places where these types of contextual policies
-[0:10:00] where these types of contextual policies or multi-dimensional treatments come up
-[0:10:02] or multi-dimensional treatments come up so for example if we had some sort of
-[0:10:06] so for example if we had some sort of online game maybe you could have a
-[0:10:09] online game maybe you could have a mapping of certain skill levels to a
-[0:10:13] mapping of certain skill levels to a handicap and this might help increase
-[0:10:15] handicap and this might help increase engagement and help people progress
-[0:10:18] engagement and help people progress through the game at different rates
-[0:10:21] through the game at different rates according to their hand-eye coordination
-[0:10:23] according to their hand-eye coordination or whatever inherent latent abilities
+[0:09:34] possible combinations that are valid if
+[0:09:37] we consider reasonable ranges and the
+[0:09:41] approach that we're going to be taking
+[0:09:43] is figuring out how to map these
+[0:09:44] policies into vectors which one we can
+[0:09:47] then model it through some kind of
+[0:09:51] nonparametric models such as a Gaussian
+[0:09:53] process and there are a lot of places
+[0:09:57] where these types of contextual policies
+[0:10:00] or multi-dimensional treatments come up
+[0:10:02] so for example if we had some sort of
+[0:10:06] online game maybe you could have a
+[0:10:09] mapping of certain skill levels to a
+[0:10:13] handicap and this might help increase
+[0:10:15] engagement and help people progress
+[0:10:18] through the game at different rates
+[0:10:21] according to their hand-eye coordination
+[0:10:23] or whatever inherent latent abilities
 [0:10:31] may be if you have some kind of mobile app you might want to have various
-[0:10:35] app you might want to have various marketing campaigns or notifications I
-[0:10:38] marketing campaigns or notifications I you might want to limit these
-[0:10:39] you might want to limit these notifications based on their usage
-[0:10:42] notifications based on their usage patterns so in some cases we might have
-[0:10:45] patterns so in some cases we might have a machine learning model that makes some
-[0:10:46] a machine learning model that makes some prediction about the individual and
-[0:10:49] prediction about the individual and maybe we want to personalize the
-[0:10:52] maybe we want to personalize the threshold at which we actually send the
-[0:10:54] threshold at which we actually send the notification based on their usage so
-[0:10:57] notification based on their usage so this could be represented as say an
-[0:10:59] this could be represented as say an eight dimensional policy you can also
-[0:11:02] eight dimensional policy you can also think of incentives as a type of
-[0:11:06] think of incentives as a type of multi-dimensional treatment or policy
-[0:11:07] multi-dimensional treatment or policy perhaps you have a different
-[0:11:09] perhaps you have a different consideration for use and so for those
-[0:11:11] consideration for use and so for those with low consideration we should offer
-[0:11:13] with low consideration we should offer them more money we can also view things
-[0:11:19] them more money we can also view things like menus of donation amounts as one of
-[0:11:22] like menus of donation amounts as one of these these vectors as well
+[0:10:35] marketing campaigns or notifications I
+[0:10:38] you might want to limit these
+[0:10:39] notifications based on their usage
+[0:10:42] patterns so in some cases we might have
+[0:10:45] a machine learning model that makes some
+[0:10:46] prediction about the individual and
+[0:10:49] maybe we want to personalize the
+[0:10:52] threshold at which we actually send the
+[0:10:54] notification based on their usage so
+[0:10:57] this could be represented as say an
+[0:10:59] eight dimensional policy you can also
+[0:11:02] think of incentives as a type of
+[0:11:06] multi-dimensional treatment or policy
+[0:11:07] perhaps you have a different
+[0:11:09] consideration for use and so for those
+[0:11:11] with low consideration we should offer
+[0:11:13] them more money we can also view things
+[0:11:19] like menus of donation amounts as one of
+[0:11:22] these these vectors as well
 [0:11:32] now one of the most common types of tuning experiments that we use at
-[0:11:35] tuning experiments that we use at Facebook are these these ranking
-[0:11:40] Facebook are these these ranking functions we call these value models the
-[0:11:43] functions we call these value models the idea is that you have some way of
-[0:11:44] idea is that you have some way of scoring content when you're ranking them
-[0:11:47] scoring content when you're ranking them what's in news feed or Instagram or
-[0:11:49] what's in news feed or Instagram or search results or friend recommendations
-[0:11:52] search results or friend recommendations we have a bunch of predictive models of
-[0:11:56] we have a bunch of predictive models of whether users going to click on the
-[0:11:57] whether users going to click on the content maybe what is the strength of
-[0:12:01] content maybe what is the strength of the relationship between these
-[0:12:03] the relationship between these individuals what do we know about the
-[0:12:05] individuals what do we know about the producer of the content maybe we're
-[0:12:08] producer of the content maybe we're trying to stimulate certain aspects of
-[0:12:10] trying to stimulate certain aspects of the ecosystem and boost individuals who
-[0:12:12] the ecosystem and boost individuals who don't have enough friends or engagement
-[0:12:14] don't have enough friends or engagement so these all enter additively into this
-[0:12:19] so these all enter additively into this what we call value model and there are
-[0:12:22] what we call value model and there are these just black box coefficients that
-[0:12:24] these just black box coefficients that we somehow have to tune and and previous
-[0:12:27] we somehow have to tune and and previous to the work that we have and are
-[0:12:29] to the work that we have and are presenting here people were tuning this
-[0:12:31] presenting here people were tuning this just manually by hand
-[0:12:33] just manually by hand [Music]
+[0:11:35] Facebook are these these ranking
+[0:11:40] functions we call these value models the
+[0:11:43] idea is that you have some way of
+[0:11:44] scoring content when you're ranking them
+[0:11:47] what's in news feed or Instagram or
+[0:11:49] search results or friend recommendations
+[0:11:52] we have a bunch of predictive models of
+[0:11:56] whether users going to click on the
+[0:11:57] content maybe what is the strength of
+[0:12:01] the relationship between these
+[0:12:03] individuals what do we know about the
+[0:12:05] producer of the content maybe we're
+[0:12:08] trying to stimulate certain aspects of
+[0:12:10] the ecosystem and boost individuals who
+[0:12:12] don't have enough friends or engagement
+[0:12:14] so these all enter additively into this
+[0:12:19] what we call value model and there are
+[0:12:22] these just black box coefficients that
+[0:12:24] we somehow have to tune and and previous
+[0:12:27] to the work that we have and are
+[0:12:29] presenting here people were tuning this
+[0:12:31] just manually by hand
+[0:12:33] [Music]
 [0:12:42] now okay well I mean this still doesn't really solve the problem they're just
-[0:12:43] really solve the problem they're just done up a bunch of numbers so how could
-[0:12:46] done up a bunch of numbers so how could we actually model a response surface so
-[0:12:51] we actually model a response surface so that we can make inferences about
-[0:12:53] that we can make inferences about configurations we haven't yet tried
-[0:12:55] configurations we haven't yet tried right because we couldn't possibly
-[0:12:56] right because we couldn't possibly enumerate the infinite number of
-[0:12:59] enumerate the infinite number of possible settings in our value model
-[0:13:03] possible settings in our value model what we arrived at was was the use of a
-[0:13:07] what we arrived at was was the use of a Gaussian process the idea behind a
-[0:13:08] Gaussian process the idea behind a Gaussian process is that it's a prior
-[0:13:10] Gaussian process is that it's a prior over smooth functions and so as we
-[0:13:15] over smooth functions and so as we manipulate a particular treatment
-[0:13:17] manipulate a particular treatment parameter we might expect the result
-[0:13:19] parameter we might expect the result response to change in some smooth way
-[0:13:21] response to change in some smooth way and so that's something that's like in a
-[0:13:24] and so that's something that's like in a very intuitive inductive bias that we
-[0:13:26] very intuitive inductive bias that we might want to leverage and this first
-[0:13:31] might want to leverage and this first plot here shows two draws from a
-[0:13:33] plot here shows two draws from a Gaussian process prior and so this
-[0:13:36] Gaussian process prior and so this guessing process has a long length scale
-[0:13:39] guessing process has a long length scale which means you have kind of a very long
-[0:13:43] which means you have kind of a very long long correlation between points
-[0:13:46] long correlation between points spatially so there's a high correlation
-[0:13:48] spatially so there's a high correlation from one point to the next as we kind of
-[0:13:51] from one point to the next as we kind of move down the input dimension this is
-[0:13:54] move down the input dimension this is the output dimension here if our prior
-[0:13:58] the output dimension here if our prior has a short length scale which specifies
-[0:14:00] has a short length scale which specifies again the smoothness or the correlation
-[0:14:03] again the smoothness or the correlation we get these more Wiggly functions once
-[0:14:09] we get these more Wiggly functions once we have observed data we can condition
-[0:14:11] we have observed data we can condition on that data and obtain a posterior and
-[0:14:15] on that data and obtain a posterior and so here are two noisy data points and so
-[0:14:18] so here are two noisy data points and so this gives an example of what a draws
-[0:14:21] this gives an example of what a draws from our Gaussian process look like so
-[0:14:23] from our Gaussian process look like so possible functions that are compatible
-[0:14:24] possible functions that are compatible with these two noisy observations we've
-[0:14:27] with these two noisy observations we've observed so it really constrains the
-[0:14:29] observed so it really constrains the space at least locally around the points
-[0:14:32] space at least locally around the points now that we've observed and depending on
-[0:14:35] now that we've observed and depending on this this hyper parameter of the length
-[0:14:37] this this hyper parameter of the length scale we might see different behaviors
-[0:14:40] scale we might see different behaviors of the function so for example if the
-[0:14:42] of the function so for example if the correlation along with short links go
-[0:14:44] correlation along with short links go means that you have less correlation
-[0:14:48] means that you have less correlation as a function of just instance so you
-[0:14:50] as a function of just instance so you can see that you have more uncertainty
-[0:14:51] can see that you have more uncertainty between these points that your
-[0:14:53] between these points that your uncertainty really starts to blow up
-[0:14:56] uncertainty really starts to blow up farther away
+[0:12:43] done up a bunch of numbers so how could
+[0:12:46] we actually model a response surface so
+[0:12:51] that we can make inferences about
+[0:12:53] configurations we haven't yet tried
+[0:12:55] right because we couldn't possibly
+[0:12:56] enumerate the infinite number of
+[0:12:59] possible settings in our value model
+[0:13:03] what we arrived at was was the use of a
+[0:13:07] Gaussian process the idea behind a
+[0:13:08] Gaussian process is that it's a prior
+[0:13:10] over smooth functions and so as we
+[0:13:15] manipulate a particular treatment
+[0:13:17] parameter we might expect the result
+[0:13:19] response to change in some smooth way
+[0:13:21] and so that's something that's like in a
+[0:13:24] very intuitive inductive bias that we
+[0:13:26] might want to leverage and this first
+[0:13:31] plot here shows two draws from a
+[0:13:33] Gaussian process prior and so this
+[0:13:36] guessing process has a long length scale
+[0:13:39] which means you have kind of a very long
+[0:13:43] long correlation between points
+[0:13:46] spatially so there's a high correlation
+[0:13:48] from one point to the next as we kind of
+[0:13:51] move down the input dimension this is
+[0:13:54] the output dimension here if our prior
+[0:13:58] has a short length scale which specifies
+[0:14:00] again the smoothness or the correlation
+[0:14:03] we get these more Wiggly functions once
+[0:14:09] we have observed data we can condition
+[0:14:11] on that data and obtain a posterior and
+[0:14:15] so here are two noisy data points and so
+[0:14:18] this gives an example of what a draws
+[0:14:21] from our Gaussian process look like so
+[0:14:23] possible functions that are compatible
+[0:14:24] with these two noisy observations we've
+[0:14:27] observed so it really constrains the
+[0:14:29] space at least locally around the points
+[0:14:32] now that we've observed and depending on
+[0:14:35] this this hyper parameter of the length
+[0:14:37] scale we might see different behaviors
+[0:14:40] of the function so for example if the
+[0:14:42] correlation along with short links go
+[0:14:44] means that you have less correlation
+[0:14:48] as a function of just instance so you
+[0:14:50] can see that you have more uncertainty
+[0:14:51] between these points that your
+[0:14:53] uncertainty really starts to blow up
+[0:14:56] farther away
 [0:15:06] what we can then do is either infer the most likely values of these hyper
-[0:15:08] most likely values of these hyper parameters the length scale and then
-[0:15:10] parameters the length scale and then there's also another high program etre
-[0:15:11] there's also another high program etre which is how how much the function
-[0:15:13] which is how how much the function varies in total the variance and we can
-[0:15:16] varies in total the variance and we can integrate that out through likely values
-[0:15:20] integrate that out through likely values of the length scale so we could either
-[0:15:21] of the length scale so we could either use Mathis Commission or we could use
-[0:15:24] use Mathis Commission or we could use full Bayesian inference and these types
-[0:15:28] full Bayesian inference and these types of models tend to work really well in
-[0:15:31] of models tend to work really well in practice when we run experiments that
-[0:15:33] practice when we run experiments that aren't you know totally noise that have
-[0:15:36] aren't you know totally noise that have a reasonable signal-to-noise ratio for
-[0:15:41] a reasonable signal-to-noise ratio for most classes of experiments that we
-[0:15:43] most classes of experiments that we we've considered we see really nice
-[0:15:45] we've considered we see really nice performance so this gives an example of
-[0:15:46] performance so this gives an example of leave one out cross validation where
-[0:15:49] leave one out cross validation where here is the actual outcome so these dots
-[0:15:51] here is the actual outcome so these dots represent an arm in the experiment and
-[0:15:53] represent an arm in the experiment and these vertical bars are the 95 percent
-[0:15:58] these vertical bars are the 95 percent confidence interval to standard errors
-[0:15:59] confidence interval to standard errors the mean and then the dot and then its Y
-[0:16:04] the mean and then the dot and then its Y position is they leave one out
-[0:16:06] position is they leave one out prediction and the posterior predictive
-[0:16:09] prediction and the posterior predictive interval and so you can see that you not
-[0:16:14] interval and so you can see that you not only make pretty nice predictions but
-[0:16:16] only make pretty nice predictions but you also get some variance reduction as
-[0:16:18] you also get some variance reduction as well because you're able to borrow
-[0:16:19] well because you're able to borrow strength across nearby points
-[0:16:23] strength across nearby points and something that's pretty desirable
-[0:16:26] and something that's pretty desirable from a decision-making perspective is
-[0:16:29] from a decision-making perspective is that you get some automatic shrinkage
-[0:16:31] that you get some automatic shrinkage and so if you have very noisy outcomes
-[0:16:33] and so if you have very noisy outcomes what you'll often see in practice is
-[0:16:35] what you'll often see in practice is people get really excited about the
-[0:16:36] people get really excited about the results they'll want to ship it and tell
-[0:16:39] results they'll want to ship it and tell everybody about how how great their
-[0:16:42] everybody about how how great their treatment arm is but the reality is that
-[0:16:45] treatment arm is but the reality is that you can get all kinds of em type errors
-[0:16:46] you can get all kinds of em type errors if you do have these really noisy
-[0:16:50] if you do have these really noisy underpowered experiments so you get some
-[0:16:52] underpowered experiments so you get some nice regularization as a result of using
-[0:16:54] nice regularization as a result of using these guys in processes so given this
-[0:17:00] these guys in processes so given this model and some objective how do we go
-[0:17:02] model and some objective how do we go about actually optimizing here's an
-[0:17:06] about actually optimizing here's an example of a Gaussian
-[0:17:11] example of a Gaussian process fit to five data points noisy
-[0:17:14] process fit to five data points noisy data points with a mean function and a
-[0:17:17] data points with a mean function and a posterior predictive interval and this
-[0:17:23] posterior predictive interval and this gray line right here represents the
-[0:17:25] gray line right here represents the unobserved true function
+[0:15:08] parameters the length scale and then
+[0:15:10] there's also another high program etre
+[0:15:11] which is how how much the function
+[0:15:13] varies in total the variance and we can
+[0:15:16] integrate that out through likely values
+[0:15:20] of the length scale so we could either
+[0:15:21] use Mathis Commission or we could use
+[0:15:24] full Bayesian inference and these types
+[0:15:28] of models tend to work really well in
+[0:15:31] practice when we run experiments that
+[0:15:33] aren't you know totally noise that have
+[0:15:36] a reasonable signal-to-noise ratio for
+[0:15:41] most classes of experiments that we
+[0:15:43] we've considered we see really nice
+[0:15:45] performance so this gives an example of
+[0:15:46] leave one out cross validation where
+[0:15:49] here is the actual outcome so these dots
+[0:15:51] represent an arm in the experiment and
+[0:15:53] these vertical bars are the 95 percent
+[0:15:58] confidence interval to standard errors
+[0:15:59] the mean and then the dot and then its Y
+[0:16:04] position is they leave one out
+[0:16:06] prediction and the posterior predictive
+[0:16:09] interval and so you can see that you not
+[0:16:14] only make pretty nice predictions but
+[0:16:16] you also get some variance reduction as
+[0:16:18] well because you're able to borrow
+[0:16:19] strength across nearby points
+[0:16:23] and something that's pretty desirable
+[0:16:26] from a decision-making perspective is
+[0:16:29] that you get some automatic shrinkage
+[0:16:31] and so if you have very noisy outcomes
+[0:16:33] what you'll often see in practice is
+[0:16:35] people get really excited about the
+[0:16:36] results they'll want to ship it and tell
+[0:16:39] everybody about how how great their
+[0:16:42] treatment arm is but the reality is that
+[0:16:45] you can get all kinds of em type errors
+[0:16:46] if you do have these really noisy
+[0:16:50] underpowered experiments so you get some
+[0:16:52] nice regularization as a result of using
+[0:16:54] these guys in processes so given this
+[0:17:00] model and some objective how do we go
+[0:17:02] about actually optimizing here's an
+[0:17:06] example of a Gaussian
+[0:17:11] process fit to five data points noisy
+[0:17:14] data points with a mean function and a
+[0:17:17] posterior predictive interval and this
+[0:17:23] gray line right here represents the
+[0:17:25] unobserved true function
 [0:17:35] and our goal here is to maximize the objective function and one of the
-[0:17:37] objective function and one of the acquisition functions that's used in
-[0:17:40] acquisition functions that's used in Bayesian optimization is called expected
-[0:17:42] Bayesian optimization is called expected improvement and it's just the area that
-[0:17:44] improvement and it's just the area that lies above the best point observed so
-[0:17:47] lies above the best point observed so far and so for example the value of
-[0:17:53] far and so for example the value of expected improvement over here is just
-[0:17:55] expected improvement over here is just the area above that lies above this
-[0:18:00] the area above that lies above this point so it's like the integral of of
-[0:18:04] point so it's like the integral of of this right here and so you can see that
-[0:18:09] this right here and so you can see that given this data the next point we're
-[0:18:11] given this data the next point we're gonna pick is over here and we can
-[0:18:14] gonna pick is over here and we can proceed sequentially and if you're
-[0:18:17] proceed sequentially and if you're optimizing a machine learning model or a
-[0:18:18] optimizing a machine learning model or a simulation you would just do this purely
-[0:18:21] simulation you would just do this purely sequentially so you pick a point you
-[0:18:23] sequentially so you pick a point you observe the data the model Peiper
-[0:18:26] observe the data the model Peiper parameters gets updated we have new
-[0:18:30] parameters gets updated we have new beliefs about where the best a point
-[0:18:33] beliefs about where the best a point could possibly be and then we keep
-[0:18:35] could possibly be and then we keep iterating and expected improvement is is
-[0:18:40] iterating and expected improvement is is optimal under the condition that all we
-[0:18:44] optimal under the condition that all we want to do is pick the next point and
-[0:18:46] want to do is pick the next point and we're gonna stop so it's a myopic
-[0:18:50] we're gonna stop so it's a myopic acquisition function and it does a
-[0:18:52] acquisition function and it does a really nice job of maximizing the
-[0:18:55] really nice job of maximizing the response surface there are also batch
-[0:18:58] response surface there are also batch versions of this that I can describe in
-[0:19:03] versions of this that I can describe in more detail at some point in time but it
-[0:19:05] more detail at some point in time but it is possible to select multiple design
-[0:19:08] is possible to select multiple design points simultaneously and this is what
-[0:19:10] points simultaneously and this is what we would typically do in a field
-[0:19:11] we would typically do in a field experiment because when you're running
-[0:19:13] experiment because when you're running an experiment things are changing over
-[0:19:16] an experiment things are changing over time and so you want your experimental
-[0:19:19] time and so you want your experimental treatment to start at the exact same
-[0:19:21] treatment to start at the exact same time for all individuals and it's just
-[0:19:24] time for all individuals and it's just as easy to deploy 64 treatment
-[0:19:26] as easy to deploy 64 treatment conditions at least on the Internet as
-[0:19:28] conditions at least on the Internet as it is to deploy one so you might as well
-[0:19:32] it is to deploy one so you might as well do multiple at the same time and so this
-[0:19:37] do multiple at the same time and so this is an example of expected improvement
-[0:19:38] is an example of expected improvement and practice so this is an Instagram
-[0:19:42] and practice so this is an Instagram [Music]
+[0:17:37] acquisition functions that's used in
+[0:17:40] Bayesian optimization is called expected
+[0:17:42] improvement and it's just the area that
+[0:17:44] lies above the best point observed so
+[0:17:47] far and so for example the value of
+[0:17:53] expected improvement over here is just
+[0:17:55] the area above that lies above this
+[0:18:00] point so it's like the integral of of
+[0:18:04] this right here and so you can see that
+[0:18:09] given this data the next point we're
+[0:18:11] gonna pick is over here and we can
+[0:18:14] proceed sequentially and if you're
+[0:18:17] optimizing a machine learning model or a
+[0:18:18] simulation you would just do this purely
+[0:18:21] sequentially so you pick a point you
+[0:18:23] observe the data the model Peiper
+[0:18:26] parameters gets updated we have new
+[0:18:30] beliefs about where the best a point
+[0:18:33] could possibly be and then we keep
+[0:18:35] iterating and expected improvement is is
+[0:18:40] optimal under the condition that all we
+[0:18:44] want to do is pick the next point and
+[0:18:46] we're gonna stop so it's a myopic
+[0:18:50] acquisition function and it does a
+[0:18:52] really nice job of maximizing the
+[0:18:55] response surface there are also batch
+[0:18:58] versions of this that I can describe in
+[0:19:03] more detail at some point in time but it
+[0:19:05] is possible to select multiple design
+[0:19:08] points simultaneously and this is what
+[0:19:10] we would typically do in a field
+[0:19:11] experiment because when you're running
+[0:19:13] an experiment things are changing over
+[0:19:16] time and so you want your experimental
+[0:19:19] treatment to start at the exact same
+[0:19:21] time for all individuals and it's just
+[0:19:24] as easy to deploy 64 treatment
+[0:19:26] conditions at least on the Internet as
+[0:19:28] it is to deploy one so you might as well
+[0:19:32] do multiple at the same time and so this
+[0:19:37] is an example of expected improvement
+[0:19:38] and practice so this is an Instagram
 [0:19:43] [Music] ranking related experiment and so this
-[0:19:47] ranking related experiment and so this shows the change in a particular outcome
-[0:19:49] shows the change in a particular outcome for just some random initialization so
-[0:19:53] for just some random initialization so oftentimes when we run these experiments
-[0:19:54] oftentimes when we run these experiments we start with some quasi random
-[0:19:56] we start with some quasi random initialization and the this line right
-[0:20:01] initialization and the this line right here represents the mean of all of these
-[0:20:03] here represents the mean of all of these arms you see that some some arms are
-[0:20:06] arms you see that some some arms are worse than the status quo status quo is
-[0:20:10] worse than the status quo status quo is this gray line so this is the zero
-[0:20:12] this gray line so this is the zero percent change and when we generate a
-[0:20:17] percent change and when we generate a new round of arms using batch expected
-[0:20:21] new round of arms using batch expected improvement you can see that almost all
-[0:20:22] improvement you can see that almost all of the arms are better than the best arm
-[0:20:26] of the arms are better than the best arm we observed than the previous batch and
-[0:20:28] we observed than the previous batch and so we can proceed in batches to maximize
-[0:20:33] so we can proceed in batches to maximize the objective
-[0:20:36] the objective you
+[0:19:47] shows the change in a particular outcome
+[0:19:49] for just some random initialization so
+[0:19:53] oftentimes when we run these experiments
+[0:19:54] we start with some quasi random
+[0:19:56] initialization and the this line right
+[0:20:01] here represents the mean of all of these
+[0:20:03] arms you see that some some arms are
+[0:20:06] worse than the status quo status quo is
+[0:20:10] this gray line so this is the zero
+[0:20:12] percent change and when we generate a
+[0:20:17] new round of arms using batch expected
+[0:20:21] improvement you can see that almost all
+[0:20:22] of the arms are better than the best arm
+[0:20:26] we observed than the previous batch and
+[0:20:28] so we can proceed in batches to maximize
+[0:20:33] the objective
+[0:20:36] you
 [0:20:43] okay so this this makes a lot of sense if we just have one outcome that we care
-[0:20:46] if we just have one outcome that we care about and you know maybe we're just
-[0:20:48] about and you know maybe we're just interested in improving voter turnout
-[0:20:51] interested in improving voter turnout rates or something and have a single
-[0:20:53] rates or something and have a single objective but for for most firms and
-[0:20:57] objective but for for most firms and probably in a lot of policy situations
-[0:21:01] probably in a lot of policy situations we have multiple competing objectives
-[0:21:04] we have multiple competing objectives when somebody runs an experiment at
-[0:21:07] when somebody runs an experiment at Facebook they often use a tool that
-[0:21:10] Facebook they often use a tool that looks something like this the tool
-[0:21:12] looks something like this the tool actually looks a little bit nicer than
-[0:21:13] actually looks a little bit nicer than this now or these days but the idea is
-[0:21:17] this now or these days but the idea is that you can look at many many different
-[0:21:19] that you can look at many many different metrics at once and see how much these
-[0:21:23] metrics at once and see how much these metrics are changing so this shows zero
-[0:21:26] metrics are changing so this shows zero percent change and this shows like a
-[0:21:29] percent change and this shows like a mean estimate and a 95% confidence
-[0:21:31] mean estimate and a 95% confidence interval this experiment is a wonderful
-[0:21:35] interval this experiment is a wonderful experiment because there aren't any
-[0:21:37] experiment because there aren't any statistically significant changes in
-[0:21:40] statistically significant changes in general this kind of thing is a false
-[0:21:42] general this kind of thing is a false positive machine but people do need to
-[0:21:45] positive machine but people do need to consider multiple objectives when when
-[0:21:48] consider multiple objectives when when running their experiments and so if we
-[0:21:52] running their experiments and so if we didn't want to automate experimentation
-[0:21:55] didn't want to automate experimentation in some way to find what we consider to
-[0:21:59] in some way to find what we consider to be an optimal treatment a lot of things
-[0:22:02] be an optimal treatment a lot of things could potentially go wrong if we're not
-[0:22:04] could potentially go wrong if we're not doing what the human does which is
-[0:22:07] doing what the human does which is considering a lot of metrics
-[0:22:09] considering a lot of metrics simultaneously and so for example if our
-[0:22:14] simultaneously and so for example if our goal for the newsfeed experiment was to
-[0:22:17] goal for the newsfeed experiment was to actually reduce load on our servers or
-[0:22:20] actually reduce load on our servers or load on the network what might happen is
-[0:22:22] load on the network what might happen is we might fetch less stories and that
-[0:22:28] we might fetch less stories and that that could be good for one outcome but
-[0:22:32] that could be good for one outcome but then it could actually end up taking
-[0:22:34] then it could actually end up taking another outcome so here I've put two
-[0:22:36] another outcome so here I've put two outcomes one is the increase in
-[0:22:40] outcomes one is the increase in engagement so how much people are using
-[0:22:41] engagement so how much people are using Facebook and the other is the decrease
-[0:22:44] Facebook and the other is the decrease in server CPU utilization so by
-[0:22:46] in server CPU utilization so by maximizing this we're saving with me and
-[0:22:51] maximizing this we're saving with me and these dots represents a particular
-[0:22:52] these dots represents a particular configuration in this case these are
-[0:22:56] configuration in this case these are random configurations that we tried and
-[0:22:59] random configurations that we tried and by looking at this initial random batch
-[0:23:02] by looking at this initial random batch you can the first thing you can see is
-[0:23:04] you can the first thing you can see is that there are only a few points that
-[0:23:06] that there are only a few points that are rational right there's only a few
-[0:23:08] are rational right there's only a few points on this Pareto frontier where if
-[0:23:10] points on this Pareto frontier where if you had where if your preference was any
-[0:23:12] you had where if your preference was any convex combination of these two you
-[0:23:15] convex combination of these two you would only choose one of these four
-[0:23:18] would only choose one of these four points so the the first idea that I had
-[0:23:22] points so the the first idea that I had was to just ask experimenters directly
-[0:23:25] was to just ask experimenters directly for some convex combination of these
-[0:23:27] for some convex combination of these these outcomes it's like well why can't
-[0:23:29] these outcomes it's like well why can't you just tell us how much you value this
-[0:23:31] you just tell us how much you value this this is actually a very hard task for
-[0:23:34] this is actually a very hard task for decision makers especially engineers and
-[0:23:40] decision makers especially engineers and so one of the things we settled on was
-[0:23:41] so one of the things we settled on was this constrained optimization framework
-[0:23:44] this constrained optimization framework or the idea is that you say okay I want
-[0:23:48] or the idea is that you say okay I want to maximize one particular objective but
-[0:23:51] to maximize one particular objective but I don't want to hurt all of these other
-[0:23:53] I don't want to hurt all of these other objectives in that we don't want it to
-[0:23:57] objectives in that we don't want it to deviate from the status quo by more than
-[0:23:59] deviate from the status quo by more than some amount and this was really
-[0:24:01] some amount and this was really intuitive and so we made a number of
-[0:24:04] intuitive and so we made a number of extensions and produce this new
-[0:24:06] extensions and produce this new acquisition function called noisy GI
-[0:24:09] acquisition function called noisy GI which integrates over the uncertainty in
-[0:24:11] which integrates over the uncertainty in the observed data so while expected
-[0:24:14] the observed data so while expected improvement assumes that you know what
-[0:24:15] improvement assumes that you know what the best function value is so it's
-[0:24:18] the best function value is so it's really designed to work for
-[0:24:20] really designed to work for deterministic settings if you have a
-[0:24:23] deterministic settings if you have a really low signal-to-noise ratios you do
-[0:24:25] really low signal-to-noise ratios you do with a field experiment a lot of that
-[0:24:27] with a field experiment a lot of that falls apart and so we've we've developed
-[0:24:29] falls apart and so we've we've developed noise EEI to address that and then it
-[0:24:31] noise EEI to address that and then it also supports batch computation which is
-[0:24:35] also supports batch computation which is necessary for field experiments as well
-[0:24:38] necessary for field experiments as well as constraints so this is available in
-[0:24:41] as constraints so this is available in Bayesian analysis so constraint
-[0:24:48] Bayesian analysis so constraint optimization is really nice and that
-[0:24:51] optimization is really nice and that it's easy to understand and it generally
-[0:24:53] it's easy to understand and it generally maps onto decision-makers mental models
-[0:24:57] maps onto decision-makers mental models of what they want they usually can very
-[0:25:00] of what they want they usually can very clearly articulate ok I don't want to
-[0:25:02] clearly articulate ok I don't want to hurt this but I do want to increase this
-[0:25:05] hurt this but I do want to increase this but really they're a hack people do care
-[0:25:10] but really they're a hack people do care about optimizing multiple objectives
-[0:25:13] about optimizing multiple objectives people do have multiple objectives in
-[0:25:15] people do have multiple objectives in reality and they're not really flexible
-[0:25:21] reality and they're not really flexible enough to account for unexpected
-[0:25:23] enough to account for unexpected trade-offs so for example somebody might
-[0:25:25] trade-offs so for example somebody might say okay I'm not willing to let this one
-[0:25:29] say okay I'm not willing to let this one outcome be reduced by this amount but
-[0:25:31] outcome be reduced by this amount but then you showed them a result and
-[0:25:32] then you showed them a result and they're like wow I can do eight times
-[0:25:37] they're like wow I can do eight times better in terms of optimizing this
-[0:25:39] better in terms of optimizing this outcome if I just relax this constraint
-[0:25:41] outcome if I just relax this constraint a little bit and so we've been thinking
-[0:25:46] a little bit and so we've been thinking a little bit about developing
-[0:25:47] a little bit about developing alternatives to this one alternative is
-[0:25:50] alternatives to this one alternative is preference learning and so the idea here
-[0:25:52] preference learning and so the idea here is that we generate sets of plausible
-[0:25:57] is that we generate sets of plausible experiments based off of historical
-[0:26:00] experiments based off of historical gaussian process model fits and so we're
-[0:26:02] gaussian process model fits and so we're able to generate kind of realistic
-[0:26:04] able to generate kind of realistic trade-offs between outcomes and then we
-[0:26:07] trade-offs between outcomes and then we can use active learning and Bayesian
-[0:26:09] can use active learning and Bayesian optimization to give individuals
-[0:26:15] optimization to give individuals pairwise comparisons between two
-[0:26:17] pairwise comparisons between two different experiments to learn their
-[0:26:21] different experiments to learn their utility function and so we can do this
-[0:26:24] utility function and so we can do this using a linear model it turns out using
-[0:26:26] using a linear model it turns out using a Gaussian process as this latent
-[0:26:28] a Gaussian process as this latent function tends to work really well and
-[0:26:33] function tends to work really well and it helps us achieve really nice outcomes
-[0:26:36] it helps us achieve really nice outcomes so this is a project that I did with a
-[0:26:39] so this is a project that I did with a former intern former and current intern
-[0:26:42] former intern former and current intern jerry lynn and adam open another
-[0:26:46] jerry lynn and adam open another alternative is just full Pareto front
-[0:26:48] alternative is just full Pareto front optimization so we just released a paper
-[0:26:52] optimization so we just released a paper on archive on a general is
-[0:26:55] on archive on a general is generalization of expected improvement
-[0:26:57] generalization of expected improvement where we're improving the hypervolume
-[0:26:59] where we're improving the hypervolume and so the idea is that when you run
-[0:27:03] and so the idea is that when you run your experiment you have a particular
-[0:27:05] your experiment you have a particular set of non dominated points and you want
-[0:27:09] set of non dominated points and you want to push forward the volume of the non
-[0:27:15] to push forward the volume of the non dominated area
+[0:20:46] about and you know maybe we're just
+[0:20:48] interested in improving voter turnout
+[0:20:51] rates or something and have a single
+[0:20:53] objective but for for most firms and
+[0:20:57] probably in a lot of policy situations
+[0:21:01] we have multiple competing objectives
+[0:21:04] when somebody runs an experiment at
+[0:21:07] Facebook they often use a tool that
+[0:21:10] looks something like this the tool
+[0:21:12] actually looks a little bit nicer than
+[0:21:13] this now or these days but the idea is
+[0:21:17] that you can look at many many different
+[0:21:19] metrics at once and see how much these
+[0:21:23] metrics are changing so this shows zero
+[0:21:26] percent change and this shows like a
+[0:21:29] mean estimate and a 95% confidence
+[0:21:31] interval this experiment is a wonderful
+[0:21:35] experiment because there aren't any
+[0:21:37] statistically significant changes in
+[0:21:40] general this kind of thing is a false
+[0:21:42] positive machine but people do need to
+[0:21:45] consider multiple objectives when when
+[0:21:48] running their experiments and so if we
+[0:21:52] didn't want to automate experimentation
+[0:21:55] in some way to find what we consider to
+[0:21:59] be an optimal treatment a lot of things
+[0:22:02] could potentially go wrong if we're not
+[0:22:04] doing what the human does which is
+[0:22:07] considering a lot of metrics
+[0:22:09] simultaneously and so for example if our
+[0:22:14] goal for the newsfeed experiment was to
+[0:22:17] actually reduce load on our servers or
+[0:22:20] load on the network what might happen is
+[0:22:22] we might fetch less stories and that
+[0:22:28] that could be good for one outcome but
+[0:22:32] then it could actually end up taking
+[0:22:34] another outcome so here I've put two
+[0:22:36] outcomes one is the increase in
+[0:22:40] engagement so how much people are using
+[0:22:41] Facebook and the other is the decrease
+[0:22:44] in server CPU utilization so by
+[0:22:46] maximizing this we're saving with me and
+[0:22:51] these dots represents a particular
+[0:22:52] configuration in this case these are
+[0:22:56] random configurations that we tried and
+[0:22:59] by looking at this initial random batch
+[0:23:02] you can the first thing you can see is
+[0:23:04] that there are only a few points that
+[0:23:06] are rational right there's only a few
+[0:23:08] points on this Pareto frontier where if
+[0:23:10] you had where if your preference was any
+[0:23:12] convex combination of these two you
+[0:23:15] would only choose one of these four
+[0:23:18] points so the the first idea that I had
+[0:23:22] was to just ask experimenters directly
+[0:23:25] for some convex combination of these
+[0:23:27] these outcomes it's like well why can't
+[0:23:29] you just tell us how much you value this
+[0:23:31] this is actually a very hard task for
+[0:23:34] decision makers especially engineers and
+[0:23:40] so one of the things we settled on was
+[0:23:41] this constrained optimization framework
+[0:23:44] or the idea is that you say okay I want
+[0:23:48] to maximize one particular objective but
+[0:23:51] I don't want to hurt all of these other
+[0:23:53] objectives in that we don't want it to
+[0:23:57] deviate from the status quo by more than
+[0:23:59] some amount and this was really
+[0:24:01] intuitive and so we made a number of
+[0:24:04] extensions and produce this new
+[0:24:06] acquisition function called noisy GI
+[0:24:09] which integrates over the uncertainty in
+[0:24:11] the observed data so while expected
+[0:24:14] improvement assumes that you know what
+[0:24:15] the best function value is so it's
+[0:24:18] really designed to work for
+[0:24:20] deterministic settings if you have a
+[0:24:23] really low signal-to-noise ratios you do
+[0:24:25] with a field experiment a lot of that
+[0:24:27] falls apart and so we've we've developed
+[0:24:29] noise EEI to address that and then it
+[0:24:31] also supports batch computation which is
+[0:24:35] necessary for field experiments as well
+[0:24:38] as constraints so this is available in
+[0:24:41] Bayesian analysis so constraint
+[0:24:48] optimization is really nice and that
+[0:24:51] it's easy to understand and it generally
+[0:24:53] maps onto decision-makers mental models
+[0:24:57] of what they want they usually can very
+[0:25:00] clearly articulate ok I don't want to
+[0:25:02] hurt this but I do want to increase this
+[0:25:05] but really they're a hack people do care
+[0:25:10] about optimizing multiple objectives
+[0:25:13] people do have multiple objectives in
+[0:25:15] reality and they're not really flexible
+[0:25:21] enough to account for unexpected
+[0:25:23] trade-offs so for example somebody might
+[0:25:25] say okay I'm not willing to let this one
+[0:25:29] outcome be reduced by this amount but
+[0:25:31] then you showed them a result and
+[0:25:32] they're like wow I can do eight times
+[0:25:37] better in terms of optimizing this
+[0:25:39] outcome if I just relax this constraint
+[0:25:41] a little bit and so we've been thinking
+[0:25:46] a little bit about developing
+[0:25:47] alternatives to this one alternative is
+[0:25:50] preference learning and so the idea here
+[0:25:52] is that we generate sets of plausible
+[0:25:57] experiments based off of historical
+[0:26:00] gaussian process model fits and so we're
+[0:26:02] able to generate kind of realistic
+[0:26:04] trade-offs between outcomes and then we
+[0:26:07] can use active learning and Bayesian
+[0:26:09] optimization to give individuals
+[0:26:15] pairwise comparisons between two
+[0:26:17] different experiments to learn their
+[0:26:21] utility function and so we can do this
+[0:26:24] using a linear model it turns out using
+[0:26:26] a Gaussian process as this latent
+[0:26:28] function tends to work really well and
+[0:26:33] it helps us achieve really nice outcomes
+[0:26:36] so this is a project that I did with a
+[0:26:39] former intern former and current intern
+[0:26:42] jerry lynn and adam open another
+[0:26:46] alternative is just full Pareto front
+[0:26:48] optimization so we just released a paper
+[0:26:52] on archive on a general is
+[0:26:55] generalization of expected improvement
+[0:26:57] where we're improving the hypervolume
+[0:26:59] and so the idea is that when you run
+[0:27:03] your experiment you have a particular
+[0:27:05] set of non dominated points and you want
+[0:27:09] to push forward the volume of the non
+[0:27:15] dominated area
 [0:27:27] okay so we can take a break now for questions
 [0:27:34] um I think we don't have any questions at the moment yeah sorry I just break
-[0:27:39] at the moment yeah sorry I just break broke out of the the Mutina have that
-[0:27:43] broke out of the the Mutina have that internet at the moment no I don't think
-[0:27:45] internet at the moment no I don't think we have questions right now so can I ask
-[0:27:49] we have questions right now so can I ask a quick question so you if you have
-[0:27:51] a quick question so you if you have especially many ARMs
-[0:27:53] especially many ARMs in your experimental setting do you like
-[0:27:56] in your experimental setting do you like to use I expect you to see some curse of
-[0:27:58] to use I expect you to see some curse of dimensionality that like I don't know
-[0:28:00] dimensionality that like I don't know after like five six seven ten it kind of
-[0:28:03] after like five six seven ten it kind of breaks down do you see that and what
-[0:28:05] breaks down do you see that and what what is kind of the limit how much can
-[0:28:06] what is kind of the limit how much can you handle
-[0:28:08] you handle yeah so we should distinguish between
-[0:28:14] yeah so we should distinguish between the number of arms which is the number
-[0:28:16] the number of arms which is the number of unique design points that you're
-[0:28:18] of unique design points that you're testing and the dimensionality of your
-[0:28:20] testing and the dimensionality of your search space so how many treatment
-[0:28:23] search space so how many treatment dimensions that you have with the
-[0:28:26] dimensions that you have with the standard RBF kernel you do suffer from
-[0:28:32] standard RBF kernel you do suffer from the the curse of dimensionality once you
-[0:28:34] the the curse of dimensionality once you get to something like between let's say
-[0:28:39] get to something like between let's say eighteen and twenty two treatment
-[0:28:41] eighteen and twenty two treatment dimensions and the next set of slides is
-[0:28:46] dimensions and the next set of slides is going to be talking about addressing
-[0:28:48] going to be talking about addressing that problem okay great
-[0:28:51] that problem okay great Thanks oh you have around fifteen to
-[0:28:54] Thanks oh you have around fifteen to twenty minutes left okay great
-[0:29:01] twenty minutes left okay great so these guessing processes are really
-[0:29:04] so these guessing processes are really nice in that they're they're fully
-[0:29:06] nice in that they're they're fully nonparametric you could use them for any
-[0:29:09] nonparametric you could use them for any type of policy where the policy might
-[0:29:14] type of policy where the policy might affect the state distribution and the
-[0:29:17] affect the state distribution and the states might affect the outcomes and
-[0:29:18] states might affect the outcomes and other states so they're super flexible
-[0:29:23] other states so they're super flexible and it works really nicely even on
-[0:29:25] and it works really nicely even on entirely aggregate sufficient statistics
-[0:29:27] entirely aggregate sufficient statistics but in some cases we might want to
-[0:29:30] but in some cases we might want to consider much higher dimensional
-[0:29:32] consider much higher dimensional policies and in order to do that we
-[0:29:36] policies and in order to do that we might have to use some some other tricks
-[0:29:39] might have to use some some other tricks and and leverage assumptions based on
-[0:29:42] and and leverage assumptions based on previous experiments or based on
-[0:29:45] previous experiments or based on stronger parametric assumptions so one
-[0:29:49] stronger parametric assumptions so one idea is to use additional domain
-[0:29:50] idea is to use additional domain knowledge for the this contextual policy
-[0:29:54] knowledge for the this contextual policy optimization and this is a paper that I
-[0:30:00] optimization and this is a paper that I can share with folks if they're they're
-[0:30:01] can share with folks if they're they're interested in the idea here is that we
-[0:30:05] interested in the idea here is that we observe an aggregate outcome and we have
-[0:30:08] observe an aggregate outcome and we have some mixture of states within the
-[0:30:13] some mixture of states within the population and we learn what that
-[0:30:16] population and we learn what that mixture of states is and then we assume
-[0:30:19] mixture of states is and then we assume that across each different context or
-[0:30:25] that across each different context or state the smoothness of each of the the
-[0:30:30] state the smoothness of each of the the treatment parameters is the same and
-[0:30:37] treatment parameters is the same and that's the model and so we have a
-[0:30:39] that's the model and so we have a version of that where you just strictly
-[0:30:42] version of that where you just strictly have this this additive model and then
-[0:30:45] have this this additive model and then we have another one where we leverage an
-[0:30:48] we have another one where we leverage an embedding that actually gives us some
-[0:30:54] embedding that actually gives us some kind of relationship between the
-[0:30:55] kind of relationship between the different contexts and how correlated
-[0:30:58] different contexts and how correlated the contacts are now obviously this adds
-[0:31:02] the contacts are now obviously this adds additional assumptions but these
-[0:31:04] additional assumptions but these assumptions might be pretty plausible
-[0:31:06] assumptions might be pretty plausible and practice and this gives us an
-[0:31:08] and practice and this gives us an example of a policy that's it's thirty
-[0:31:11] example of a policy that's it's thirty dimensional this is the leave one out
-[0:31:13] dimensional this is the leave one out cross validation if we just fit it to
-[0:31:15] cross validation if we just fit it to real data we see we're just predicting
-[0:31:17] real data we see we're just predicting the mean and it's garbage and with this
-[0:31:19] the mean and it's garbage and with this model we're actually able to make pretty
-[0:31:21] model we're actually able to make pretty reasonable predictions including pretty
-[0:31:26] reasonable predictions including pretty reasonable probabilistic predictions in
-[0:31:32] reasonable probabilistic predictions in our in practice it works pretty well in
-[0:31:37] our in practice it works pretty well in simulations it also works well so we
-[0:31:39] simulations it also works well so we have an example of how to personalize
-[0:31:42] have an example of how to personalize video playback controller so we have a
-[0:31:45] video playback controller so we have a simulated testbed for video playback and
-[0:31:50] simulated testbed for video playback and these this red and blue lines indicate
-[0:31:56] these this red and blue lines indicate are meant
+[0:27:39] broke out of the the Mutina have that
+[0:27:43] internet at the moment no I don't think
+[0:27:45] we have questions right now so can I ask
+[0:27:49] a quick question so you if you have
+[0:27:51] especially many ARMs
+[0:27:53] in your experimental setting do you like
+[0:27:56] to use I expect you to see some curse of
+[0:27:58] dimensionality that like I don't know
+[0:28:00] after like five six seven ten it kind of
+[0:28:03] breaks down do you see that and what
+[0:28:05] what is kind of the limit how much can
+[0:28:06] you handle
+[0:28:08] yeah so we should distinguish between
+[0:28:14] the number of arms which is the number
+[0:28:16] of unique design points that you're
+[0:28:18] testing and the dimensionality of your
+[0:28:20] search space so how many treatment
+[0:28:23] dimensions that you have with the
+[0:28:26] standard RBF kernel you do suffer from
+[0:28:32] the the curse of dimensionality once you
+[0:28:34] get to something like between let's say
+[0:28:39] eighteen and twenty two treatment
+[0:28:41] dimensions and the next set of slides is
+[0:28:46] going to be talking about addressing
+[0:28:48] that problem okay great
+[0:28:51] Thanks oh you have around fifteen to
+[0:28:54] twenty minutes left okay great
+[0:29:01] so these guessing processes are really
+[0:29:04] nice in that they're they're fully
+[0:29:06] nonparametric you could use them for any
+[0:29:09] type of policy where the policy might
+[0:29:14] affect the state distribution and the
+[0:29:17] states might affect the outcomes and
+[0:29:18] other states so they're super flexible
+[0:29:23] and it works really nicely even on
+[0:29:25] entirely aggregate sufficient statistics
+[0:29:27] but in some cases we might want to
+[0:29:30] consider much higher dimensional
+[0:29:32] policies and in order to do that we
+[0:29:36] might have to use some some other tricks
+[0:29:39] and and leverage assumptions based on
+[0:29:42] previous experiments or based on
+[0:29:45] stronger parametric assumptions so one
+[0:29:49] idea is to use additional domain
+[0:29:50] knowledge for the this contextual policy
+[0:29:54] optimization and this is a paper that I
+[0:30:00] can share with folks if they're they're
+[0:30:01] interested in the idea here is that we
+[0:30:05] observe an aggregate outcome and we have
+[0:30:08] some mixture of states within the
+[0:30:13] population and we learn what that
+[0:30:16] mixture of states is and then we assume
+[0:30:19] that across each different context or
+[0:30:25] state the smoothness of each of the the
+[0:30:30] treatment parameters is the same and
+[0:30:37] that's the model and so we have a
+[0:30:39] version of that where you just strictly
+[0:30:42] have this this additive model and then
+[0:30:45] we have another one where we leverage an
+[0:30:48] embedding that actually gives us some
+[0:30:54] kind of relationship between the
+[0:30:55] different contexts and how correlated
+[0:30:58] the contacts are now obviously this adds
+[0:31:02] additional assumptions but these
+[0:31:04] assumptions might be pretty plausible
+[0:31:06] and practice and this gives us an
+[0:31:08] example of a policy that's it's thirty
+[0:31:11] dimensional this is the leave one out
+[0:31:13] cross validation if we just fit it to
+[0:31:15] real data we see we're just predicting
+[0:31:17] the mean and it's garbage and with this
+[0:31:19] model we're actually able to make pretty
+[0:31:21] reasonable predictions including pretty
+[0:31:26] reasonable probabilistic predictions in
+[0:31:32] our in practice it works pretty well in
+[0:31:37] simulations it also works well so we
+[0:31:39] have an example of how to personalize
+[0:31:42] video playback controller so we have a
+[0:31:45] simulated testbed for video playback and
+[0:31:50] these this red and blue lines indicate
 [0:31:56] are meant the versus various other
-[0:31:59] the versus various other state-of-the-art high dimensional basing
-[0:32:01] state-of-the-art high dimensional basing optimization methods that either assume
-[0:32:05] optimization methods that either assume and an even more structure or assume
-[0:32:08] and an even more structure or assume kind of other types of structure like
-[0:32:11] kind of other types of structure like low dimensional embedding spaces and as
-[0:32:15] low dimensional embedding spaces and as a result of this contextual optimization
-[0:32:17] a result of this contextual optimization were able to achieve not just better
-[0:32:20] were able to achieve not just better results on average but for every single
-[0:32:23] results on average but for every single outcome where every single context were
-[0:32:26] outcome where every single context were able to achieve better outcomes in this
-[0:32:29] able to achieve better outcomes in this case the quality of service quality of
-[0:32:33] case the quality of service quality of experience outcome before each context
-[0:32:38] experience outcome before each context so no matter if you're on a core
-[0:32:40] so no matter if you're on a core internet connection or a good internet
-[0:32:42] internet connection or a good internet connection this contextual Bayes opt
-[0:32:44] connection this contextual Bayes opt ends up giving you better outcomes that
-[0:32:47] ends up giving you better outcomes that and then the non contextual policy so in
-[0:32:50] and then the non contextual policy so in the sense it's more fair I'm going to
-[0:32:55] the sense it's more fair I'm going to breeze through this one really quick to
-[0:32:58] breeze through this one really quick to get to something that's a little bit
-[0:32:59] get to something that's a little bit more causal infancy so as I mentioned
-[0:33:03] more causal infancy so as I mentioned before we use these value models for
-[0:33:05] before we use these value models for ranking in some cases the
-[0:33:07] ranking in some cases the signal-to-noise ratio is just too low to
-[0:33:11] signal-to-noise ratio is just too low to really deploy the necessary number of
-[0:33:14] really deploy the necessary number of arms you really need at least something
-[0:33:16] arms you really need at least something like three arms per dimension at least
-[0:33:19] like three arms per dimension at least to be doing these experiments so the
-[0:33:24] to be doing these experiments so the newsfeed team at some point had
-[0:33:26] newsfeed team at some point had developed a simulator so that they
-[0:33:27] developed a simulator so that they wouldn't have to run experiments it
-[0:33:30] wouldn't have to run experiments it turns out that that simulator was highly
-[0:33:32] turns out that that simulator was highly biased and the amount of bias in the
-[0:33:34] biased and the amount of bias in the simulation really depended on the type
-[0:33:36] simulation really depended on the type of intervention that they're running and
-[0:33:39] of intervention that they're running and the particular outcome of interest and
-[0:33:41] the particular outcome of interest and so it wasn't really possible to just
-[0:33:44] so it wasn't really possible to just come up with a simple model to devious
-[0:33:46] come up with a simple model to devious these simulations but it turned out if
-[0:33:49] these simulations but it turned out if you looked at these plots and there was
-[0:33:51] you looked at these plots and there was a clear correlation between the outcomes
-[0:33:55] a clear correlation between the outcomes which means that
-[0:33:57] which means that somehow capturing the structure in some
-[0:33:59] somehow capturing the structure in some way and one of the techniques that has
-[0:34:05] way and one of the techniques that has been used in the past in the efficient
-[0:34:07] been used in the past in the efficient global optimization base in optimization
-[0:34:09] global optimization base in optimization literature is the idea of multitask
-[0:34:13] literature is the idea of multitask bayesian optimization where you have two
-[0:34:16] bayesian optimization where you have two related tasks and we can assume some
-[0:34:19] related tasks and we can assume some shared structures so in this case were
-[0:34:21] shared structures so in this case were similarly assuming that the link scale
-[0:34:23] similarly assuming that the link scale how Wiggly the function is with respect
-[0:34:25] how Wiggly the function is with respect to your treatment parameter is shared
-[0:34:28] to your treatment parameter is shared across the two tasks and so by using
-[0:34:31] across the two tasks and so by using these kernels what we can do is run many
-[0:34:38] these kernels what we can do is run many different simulated experiments and then
-[0:34:41] different simulated experiments and then just a few real experiments and we're
-[0:34:45] just a few real experiments and we're able to achieve quite good model
-[0:34:49] able to achieve quite good model performance for all outcomes we consider
-[0:34:53] performance for all outcomes we consider we end up lowering the MSE we have some
-[0:34:57] we end up lowering the MSE we have some tricks for dealing with non stationarity
-[0:35:00] tricks for dealing with non stationarity and the simulator and the experiments
-[0:35:04] and the simulator and the experiments and we have a particular method that
-[0:35:07] and we have a particular method that we've developed that allows us to
-[0:35:09] we've developed that allows us to alternate between running these real
-[0:35:13] alternate between running these real experiments and these simulations to
-[0:35:16] experiments and these simulations to produce successively greater
-[0:35:19] produce successively greater improvements in our outcomes and this
-[0:35:22] improvements in our outcomes and this constrained optimization framework so
-[0:35:28] constrained optimization framework so I'll be giving a link to that at the end
-[0:35:30] I'll be giving a link to that at the end of the talk it's publishing jml R we
-[0:35:34] of the talk it's publishing jml R we have some other work that's a little bit
-[0:35:38] have some other work that's a little bit more causal that is related to
-[0:35:41] more causal that is related to accelerating experimentation one of the
-[0:35:44] accelerating experimentation one of the difficulties with these sequential
-[0:35:46] difficulties with these sequential experiments is that they might just take
-[0:35:48] experiments is that they might just take more time and because of that folks you
-[0:35:52] more time and because of that folks you may may be less likely to use such
-[0:35:54] may may be less likely to use such designs because they're really
-[0:35:56] designs because they're really interested in in targeting some kind of
-[0:35:58] interested in in targeting some kind of longer-term outcome
+[0:31:59] state-of-the-art high dimensional basing
+[0:32:01] optimization methods that either assume
+[0:32:05] and an even more structure or assume
+[0:32:08] kind of other types of structure like
+[0:32:11] low dimensional embedding spaces and as
+[0:32:15] a result of this contextual optimization
+[0:32:17] were able to achieve not just better
+[0:32:20] results on average but for every single
+[0:32:23] outcome where every single context were
+[0:32:26] able to achieve better outcomes in this
+[0:32:29] case the quality of service quality of
+[0:32:33] experience outcome before each context
+[0:32:38] so no matter if you're on a core
+[0:32:40] internet connection or a good internet
+[0:32:42] connection this contextual Bayes opt
+[0:32:44] ends up giving you better outcomes that
+[0:32:47] and then the non contextual policy so in
+[0:32:50] the sense it's more fair I'm going to
+[0:32:55] breeze through this one really quick to
+[0:32:58] get to something that's a little bit
+[0:32:59] more causal infancy so as I mentioned
+[0:33:03] before we use these value models for
+[0:33:05] ranking in some cases the
+[0:33:07] signal-to-noise ratio is just too low to
+[0:33:11] really deploy the necessary number of
+[0:33:14] arms you really need at least something
+[0:33:16] like three arms per dimension at least
+[0:33:19] to be doing these experiments so the
+[0:33:24] newsfeed team at some point had
+[0:33:26] developed a simulator so that they
+[0:33:27] wouldn't have to run experiments it
+[0:33:30] turns out that that simulator was highly
+[0:33:32] biased and the amount of bias in the
+[0:33:34] simulation really depended on the type
+[0:33:36] of intervention that they're running and
+[0:33:39] the particular outcome of interest and
+[0:33:41] so it wasn't really possible to just
+[0:33:44] come up with a simple model to devious
+[0:33:46] these simulations but it turned out if
+[0:33:49] you looked at these plots and there was
+[0:33:51] a clear correlation between the outcomes
+[0:33:55] which means that
+[0:33:57] somehow capturing the structure in some
+[0:33:59] way and one of the techniques that has
+[0:34:05] been used in the past in the efficient
+[0:34:07] global optimization base in optimization
+[0:34:09] literature is the idea of multitask
+[0:34:13] bayesian optimization where you have two
+[0:34:16] related tasks and we can assume some
+[0:34:19] shared structures so in this case were
+[0:34:21] similarly assuming that the link scale
+[0:34:23] how Wiggly the function is with respect
+[0:34:25] to your treatment parameter is shared
+[0:34:28] across the two tasks and so by using
+[0:34:31] these kernels what we can do is run many
+[0:34:38] different simulated experiments and then
+[0:34:41] just a few real experiments and we're
+[0:34:45] able to achieve quite good model
+[0:34:49] performance for all outcomes we consider
+[0:34:53] we end up lowering the MSE we have some
+[0:34:57] tricks for dealing with non stationarity
+[0:35:00] and the simulator and the experiments
+[0:35:04] and we have a particular method that
+[0:35:07] we've developed that allows us to
+[0:35:09] alternate between running these real
+[0:35:13] experiments and these simulations to
+[0:35:16] produce successively greater
+[0:35:19] improvements in our outcomes and this
+[0:35:22] constrained optimization framework so
+[0:35:28] I'll be giving a link to that at the end
+[0:35:30] of the talk it's publishing jml R we
+[0:35:34] have some other work that's a little bit
+[0:35:38] more causal that is related to
+[0:35:41] accelerating experimentation one of the
+[0:35:44] difficulties with these sequential
+[0:35:46] experiments is that they might just take
+[0:35:48] more time and because of that folks you
+[0:35:52] may may be less likely to use such
+[0:35:54] designs because they're really
+[0:35:56] interested in in targeting some kind of
+[0:35:58] longer-term outcome
 [0:36:07] and if we were to just look at the results of an experiment after one day
-[0:36:10] results of an experiment after one day or just after two or three days four
-[0:36:13] or just after two or three days four days even these results may not reflect
-[0:36:16] days even these results may not reflect what's what's gonna happen after let's
-[0:36:19] what's what's gonna happen after let's say a week or two weeks this might be
-[0:36:23] say a week or two weeks this might be due to seasonality it could be due to
-[0:36:25] due to seasonality it could be due to learning effects or novelties there
-[0:36:28] learning effects or novelties there might be some actual non-stationarity
-[0:36:30] might be some actual non-stationarity and the treatment effect itself not just
-[0:36:31] and the treatment effect itself not just the outcomes or there might be
-[0:36:34] the outcomes or there might be population shift so for example more
-[0:36:36] population shift so for example more active users or particular individuals
-[0:36:39] active users or particular individuals might be more likely to use the service
-[0:36:41] might be more likely to use the service and so this sample average treatment
-[0:36:45] and so this sample average treatment effect is not representative of the
-[0:36:47] effect is not representative of the population average treatment effect that
-[0:36:48] population average treatment effect that we care about now of course we can
-[0:36:50] we care about now of course we can adjust all of these things at least for
-[0:36:55] adjust all of these things at least for one and three but number two could be
-[0:36:57] one and three but number two could be pretty hard you know obviously people
-[0:37:03] pretty hard you know obviously people want to run experiments faster in fact
-[0:37:07] want to run experiments faster in fact most people run experiments at least for
-[0:37:09] most people run experiments at least for news feed at the time that we did this
-[0:37:11] news feed at the time that we did this for a very short period of time and so
-[0:37:15] for a very short period of time and so what we did is we constructed this
-[0:37:16] what we did is we constructed this corpus of over a hundred newsfeed
-[0:37:18] corpus of over a hundred newsfeed experiments on average they lasted for
-[0:37:23] experiments on average they lasted for four days and the maximum duration and
-[0:37:27] four days and the maximum duration and the the dias that was seven days now if
-[0:37:31] the the dias that was seven days now if we looked at the treatment effect as a
-[0:37:33] we looked at the treatment effect as a function of time on an hourly basis we
-[0:37:36] function of time on an hourly basis we would see something like this for an
-[0:37:37] would see something like this for an experiment so this is an experiment with
-[0:37:39] experiment so this is an experiment with many different arms and you can see that
-[0:37:42] many different arms and you can see that initially when we first turn it on we
-[0:37:44] initially when we first turn it on we might see a 200% increase and the
-[0:37:47] might see a 200% increase and the outcome of interest but then after about
-[0:37:52] outcome of interest but then after about a hundred twenty hours we're in a
-[0:37:54] a hundred twenty hours we're in a territory where everything had a
-[0:37:55] territory where everything had a negative treatment effect and so if
-[0:37:58] negative treatment effect and so if we're just iterating really fast and
-[0:38:00] we're just iterating really fast and we're not waiting the sufficient number
-[0:38:02] we're not waiting the sufficient number of days bad things can happen
-[0:38:04] of days bad things can happen and so how can we go about accelerating
-[0:38:06] and so how can we go about accelerating this process so the approach that we
-[0:38:10] this process so the approach that we took is a statistical surrogacy approach
-[0:38:13] took is a statistical surrogacy approach and we did this through a meta-analysis
-[0:38:18] and we did this through a meta-analysis of these prior experiments and so the
-[0:38:22] of these prior experiments and so the idea is that we train a machine learning
-[0:38:24] idea is that we train a machine learning model that maps between the short-term
-[0:38:26] model that maps between the short-term effects so let's say the effects of the
-[0:38:29] effects so let's say the effects of the experiment for a vector of outcomes for
-[0:38:33] experiment for a vector of outcomes for the first one to two days and then we
-[0:38:36] the first one to two days and then we make a prediction about the outcomes
-[0:38:38] make a prediction about the outcomes let's say seven days later
+[0:36:10] or just after two or three days four
+[0:36:13] days even these results may not reflect
+[0:36:16] what's what's gonna happen after let's
+[0:36:19] say a week or two weeks this might be
+[0:36:23] due to seasonality it could be due to
+[0:36:25] learning effects or novelties there
+[0:36:28] might be some actual non-stationarity
+[0:36:30] and the treatment effect itself not just
+[0:36:31] the outcomes or there might be
+[0:36:34] population shift so for example more
+[0:36:36] active users or particular individuals
+[0:36:39] might be more likely to use the service
+[0:36:41] and so this sample average treatment
+[0:36:45] effect is not representative of the
+[0:36:47] population average treatment effect that
+[0:36:48] we care about now of course we can
+[0:36:50] adjust all of these things at least for
+[0:36:55] one and three but number two could be
+[0:36:57] pretty hard you know obviously people
+[0:37:03] want to run experiments faster in fact
+[0:37:07] most people run experiments at least for
+[0:37:09] news feed at the time that we did this
+[0:37:11] for a very short period of time and so
+[0:37:15] what we did is we constructed this
+[0:37:16] corpus of over a hundred newsfeed
+[0:37:18] experiments on average they lasted for
+[0:37:23] four days and the maximum duration and
+[0:37:27] the the dias that was seven days now if
+[0:37:31] we looked at the treatment effect as a
+[0:37:33] function of time on an hourly basis we
+[0:37:36] would see something like this for an
+[0:37:37] experiment so this is an experiment with
+[0:37:39] many different arms and you can see that
+[0:37:42] initially when we first turn it on we
+[0:37:44] might see a 200% increase and the
+[0:37:47] outcome of interest but then after about
+[0:37:52] a hundred twenty hours we're in a
+[0:37:54] territory where everything had a
+[0:37:55] negative treatment effect and so if
+[0:37:58] we're just iterating really fast and
+[0:38:00] we're not waiting the sufficient number
+[0:38:02] of days bad things can happen
+[0:38:04] and so how can we go about accelerating
+[0:38:06] this process so the approach that we
+[0:38:10] took is a statistical surrogacy approach
+[0:38:13] and we did this through a meta-analysis
+[0:38:18] of these prior experiments and so the
+[0:38:22] idea is that we train a machine learning
+[0:38:24] model that maps between the short-term
+[0:38:26] effects so let's say the effects of the
+[0:38:29] experiment for a vector of outcomes for
+[0:38:33] the first one to two days and then we
+[0:38:36] make a prediction about the outcomes
+[0:38:38] let's say seven days later
 [0:38:45] and then we can use this this surrogate model to then make decisions if we
-[0:38:46] model to then make decisions if we wanted to but this is all kind of
-[0:38:51] wanted to but this is all kind of standard stuff that I don't have time to
-[0:38:54] standard stuff that I don't have time to get into but there's the original paper
-[0:38:59] get into but there's the original paper by it by Prentice at all and some nice
-[0:39:03] by it by Prentice at all and some nice work by Susan and he dough and and Raj
-[0:39:07] work by Susan and he dough and and Raj Chetty and others on surrogate indices
-[0:39:10] Chetty and others on surrogate indices that has recently come out as well I
-[0:39:15] that has recently come out as well I think a lot of these assumptions are
-[0:39:17] think a lot of these assumptions are very plausible and in this meta-analysis
-[0:39:21] very plausible and in this meta-analysis perspective especially when we have a
-[0:39:24] perspective especially when we have a large population of these kind of
-[0:39:25] large population of these kind of related interventions in our particular
-[0:39:34] related interventions in our particular case we we train a gradient boosted
-[0:39:37] case we we train a gradient boosted regression tree to predict the outcomes
-[0:39:40] regression tree to predict the outcomes after a certain number of days we end up
-[0:39:45] after a certain number of days we end up being able to make pretty accurate
-[0:39:47] being able to make pretty accurate predictions are quite accurate
-[0:39:49] predictions are quite accurate predictions about the seven-day outcomes
-[0:39:51] predictions about the seven-day outcomes just using the first few days and we
-[0:39:55] just using the first few days and we actually have a lower MSE than just
-[0:39:59] actually have a lower MSE than just using kind of the raw data itself so it
-[0:40:03] using kind of the raw data itself so it also provides some shrinkage I'm happy
-[0:40:06] also provides some shrinkage I'm happy to talk about details later on all of
-[0:40:09] to talk about details later on all of this looks like one of the issues that
-[0:40:13] this looks like one of the issues that can come up which to be honest hasn't
-[0:40:17] can come up which to be honest hasn't been that much of an issue but we've
-[0:40:19] been that much of an issue but we've thought a little bit about it if we do
-[0:40:21] thought a little bit about it if we do end up doing earlier termination as a
-[0:40:24] end up doing earlier termination as a result of using these surrogates this
-[0:40:27] result of using these surrogates this can bias the result because you start
-[0:40:29] can bias the result because you start getting a bunch of right sensor we
-[0:40:34] getting a bunch of right sensor we people feel comfortable stopping the
-[0:40:35] people feel comfortable stopping the experiment short and so one solution
-[0:40:41] experiment short and so one solution that we came up with is applying a
-[0:40:43] that we came up with is applying a stochastic decision rule where you have
-[0:40:45] stochastic decision rule where you have some kind of utility function on how bad
-[0:40:48] some kind of utility function on how bad the outcome is and that maps to some
-[0:40:51] the outcome is and that maps to some probability of tournament terminating
-[0:40:53] probability of tournament terminating the experiment and then you could just
-[0:40:55] the experiment and then you could just use kind of simple props for weighting
-[0:40:58] use kind of simple props for weighting with this known propensity score there
-[0:41:06] with this known propensity score there are a lot of extensions that one can
-[0:41:07] are a lot of extensions that one can consider including treatment effect
-[0:41:09] consider including treatment effect heterogeneity if you had access to
-[0:41:11] heterogeneity if you had access to individual level co-variants one could
-[0:41:14] individual level co-variants one could leverage information about the
-[0:41:16] leverage information about the similarity of the treatments who's
-[0:41:18] similarity of the treatments who's running the experiments if they're using
-[0:41:19] running the experiments if they're using Bayesian optimization maybe we could
-[0:41:22] Bayesian optimization maybe we could come up with some kind of embedding and
-[0:41:26] come up with some kind of embedding and another thing that I think is going to
-[0:41:28] another thing that I think is going to be important is dealing with domain
-[0:41:31] be important is dealing with domain shift since the types of interventions
-[0:41:33] shift since the types of interventions that people are running over time are
-[0:41:35] that people are running over time are changing the circusy conditions may or
-[0:41:42] changing the circusy conditions may or may not hold as well so some kind of
-[0:41:46] may not hold as well so some kind of rewriting could be really helpful there
-[0:41:49] rewriting could be really helpful there so finally I just wanted to give a
-[0:41:51] so finally I just wanted to give a shameless plug of some of the tools my
-[0:41:54] shameless plug of some of the tools my team has developed so if you're
-[0:41:56] team has developed so if you're interested in running these adaptive
-[0:41:57] interested in running these adaptive experimentation using these adaptive
-[0:42:00] experimentation using these adaptive experimentation methods in your own
-[0:42:02] experimentation methods in your own research we have a package called X and
-[0:42:07] research we have a package called X and we also have a package called blowtorch
-[0:42:09] we also have a package called blowtorch for doing research in Bayesian
-[0:42:11] for doing research in Bayesian optimization and both torture achieves
-[0:42:14] optimization and both torture achieves seem to be our performance relative to
-[0:42:16] seem to be our performance relative to other packages when so ax is intended to
-[0:42:21] other packages when so ax is intended to be used by organizations and software
-[0:42:25] be used by organizations and software developers and it can deploy to a
-[0:42:27] developers and it can deploy to a variety of settings and a lot of that is
-[0:42:32] variety of settings and a lot of that is then translated on the back end to boats
-[0:42:35] then translated on the back end to boats which to actually do the modeling and
-[0:42:37] which to actually do the modeling and select the candidates so
-[0:42:43] select the candidates so I want to thank the anonymous were so
-[0:42:48] I want to thank the anonymous were so far anonymous audience and the
-[0:42:51] far anonymous audience and the organizers as well as my co-authors here
-[0:42:54] organizers as well as my co-authors here are some references to the papers that I
-[0:42:57] are some references to the papers that I discussed in the talk more publications
-[0:43:01] discussed in the talk more publications related to this general area can be
-[0:43:04] related to this general area can be found at my website it's on github do ya
-[0:43:09] found at my website it's on github do ya and feel free to reach out to me at any
-[0:43:13] and feel free to reach out to me at any one time
+[0:38:46] wanted to but this is all kind of
+[0:38:51] standard stuff that I don't have time to
+[0:38:54] get into but there's the original paper
+[0:38:59] by it by Prentice at all and some nice
+[0:39:03] work by Susan and he dough and and Raj
+[0:39:07] Chetty and others on surrogate indices
+[0:39:10] that has recently come out as well I
+[0:39:15] think a lot of these assumptions are
+[0:39:17] very plausible and in this meta-analysis
+[0:39:21] perspective especially when we have a
+[0:39:24] large population of these kind of
+[0:39:25] related interventions in our particular
+[0:39:34] case we we train a gradient boosted
+[0:39:37] regression tree to predict the outcomes
+[0:39:40] after a certain number of days we end up
+[0:39:45] being able to make pretty accurate
+[0:39:47] predictions are quite accurate
+[0:39:49] predictions about the seven-day outcomes
+[0:39:51] just using the first few days and we
+[0:39:55] actually have a lower MSE than just
+[0:39:59] using kind of the raw data itself so it
+[0:40:03] also provides some shrinkage I'm happy
+[0:40:06] to talk about details later on all of
+[0:40:09] this looks like one of the issues that
+[0:40:13] can come up which to be honest hasn't
+[0:40:17] been that much of an issue but we've
+[0:40:19] thought a little bit about it if we do
+[0:40:21] end up doing earlier termination as a
+[0:40:24] result of using these surrogates this
+[0:40:27] can bias the result because you start
+[0:40:29] getting a bunch of right sensor we
+[0:40:34] people feel comfortable stopping the
+[0:40:35] experiment short and so one solution
+[0:40:41] that we came up with is applying a
+[0:40:43] stochastic decision rule where you have
+[0:40:45] some kind of utility function on how bad
+[0:40:48] the outcome is and that maps to some
+[0:40:51] probability of tournament terminating
+[0:40:53] the experiment and then you could just
+[0:40:55] use kind of simple props for weighting
+[0:40:58] with this known propensity score there
+[0:41:06] are a lot of extensions that one can
+[0:41:07] consider including treatment effect
+[0:41:09] heterogeneity if you had access to
+[0:41:11] individual level co-variants one could
+[0:41:14] leverage information about the
+[0:41:16] similarity of the treatments who's
+[0:41:18] running the experiments if they're using
+[0:41:19] Bayesian optimization maybe we could
+[0:41:22] come up with some kind of embedding and
+[0:41:26] another thing that I think is going to
+[0:41:28] be important is dealing with domain
+[0:41:31] shift since the types of interventions
+[0:41:33] that people are running over time are
+[0:41:35] changing the circusy conditions may or
+[0:41:42] may not hold as well so some kind of
+[0:41:46] rewriting could be really helpful there
+[0:41:49] so finally I just wanted to give a
+[0:41:51] shameless plug of some of the tools my
+[0:41:54] team has developed so if you're
+[0:41:56] interested in running these adaptive
+[0:41:57] experimentation using these adaptive
+[0:42:00] experimentation methods in your own
+[0:42:02] research we have a package called X and
+[0:42:07] we also have a package called blowtorch
+[0:42:09] for doing research in Bayesian
+[0:42:11] optimization and both torture achieves
+[0:42:14] seem to be our performance relative to
+[0:42:16] other packages when so ax is intended to
+[0:42:21] be used by organizations and software
+[0:42:25] developers and it can deploy to a
+[0:42:27] variety of settings and a lot of that is
+[0:42:32] then translated on the back end to boats
+[0:42:35] which to actually do the modeling and
+[0:42:37] select the candidates so
+[0:42:43] I want to thank the anonymous were so
+[0:42:48] far anonymous audience and the
+[0:42:51] organizers as well as my co-authors here
+[0:42:54] are some references to the papers that I
+[0:42:57] discussed in the talk more publications
+[0:43:01] related to this general area can be
+[0:43:04] found at my website it's on github do ya
+[0:43:09] and feel free to reach out to me at any
 [0:43:14] one time Thanks all right thanks for the great
-[0:43:18] Thanks all right thanks for the great talk
 [0:43:18] talk it's and I learned a lot we're now
-[0:43:21] it's and I learned a lot we're now switching over to discussions so we have
-[0:43:23] switching over to discussions so we have dean will present some slides and then a
-[0:43:27] dean will present some slides and then a ton can respond and if he wants and then
-[0:43:30] ton can respond and if he wants and then if we have somewhat time left we can
-[0:43:32] if we have somewhat time left we can take some questions all right Dean great
-[0:43:40] take some questions all right Dean great great it's a real pleasure to to comment
-[0:43:43] great it's a real pleasure to to comment on on this work so so I'm going to keep
-[0:43:47] on on this work so so I'm going to keep this brief but there was a lot of
-[0:43:49] this brief but there was a lot of interesting material in there so the
-[0:43:51] interesting material in there so the first thing I wanted to mention I think
-[0:43:54] first thing I wanted to mention I think it's interesting is just a lot of the
-[0:43:56] it's interesting is just a lot of the literature that you might read about
-[0:43:59] literature that you might read about kind of adaptive experimentation the
-[0:44:02] kind of adaptive experimentation the contextual bandit literature etc often
-[0:44:04] contextual bandit literature etc often presumes that we're gonna update our
-[0:44:08] presumes that we're gonna update our design the probabilities according to
-[0:44:10] design the probabilities according to which units are assigned to these
-[0:44:12] which units are assigned to these different arms after each observation
-[0:44:15] different arms after each observation and I think one of the things that that
-[0:44:18] and I think one of the things that that agent Scott highlighted was how this
-[0:44:21] agent Scott highlighted was how this isn't really how things work in practice
-[0:44:23] isn't really how things work in practice and so a lot of what he discussed was
-[0:44:26] and so a lot of what he discussed was focused on this case of some sort of
-[0:44:27] focused on this case of some sort of batch updating where actually were we're
-[0:44:33] batch updating where actually were we're running some some selection of arms
-[0:44:37] running some some selection of arms observing results and then updating in a
-[0:44:40] observing results and then updating in a batch mode and so why why is that and I
-[0:44:43] batch mode and so why why is that and I think that's a useful thing to kind of
-[0:44:45] think that's a useful thing to kind of reflect on as also maybe some of the
-[0:44:47] reflect on as also maybe some of the theory should should more accurately
-[0:44:49] theory should should more accurately match what has to happen in practice and
-[0:44:52] match what has to happen in practice and so one big reason is just that that aids
-[0:44:55] so one big reason is just that that aids on mentioned is that
-[0:44:57] on mentioned is that humans are in the loop right that that
-[0:45:03] humans are in the loop right that that some of this decision-making though we
-[0:45:05] some of this decision-making though we maybe would like to imagine that there's
-[0:45:07] maybe would like to imagine that there's some scalar ization of exactly the
-[0:45:09] some scalar ization of exactly the objective that's not how it really works
-[0:45:11] objective that's not how it really works and so humans remain in the
-[0:45:13] and so humans remain in the decision-making process and the outcomes
-[0:45:17] decision-making process and the outcomes are not immediately observed right so we
-[0:45:20] are not immediately observed right so we may have to wait some time to know how
-[0:45:22] may have to wait some time to know how some experiment affected the outcomes
-[0:45:24] some experiment affected the outcomes which we care about and it's not even
-[0:45:26] which we care about and it's not even necessarily the case that we're getting
-[0:45:28] necessarily the case that we're getting continuous feedback right you would
-[0:45:30] continuous feedback right you would imagine in some settings okay maybe we
-[0:45:33] imagine in some settings okay maybe we care about patient survival and the only
-[0:45:35] care about patient survival and the only observed patient survival up to some
-[0:45:37] observed patient survival up to some time right but actually in practice say
-[0:45:41] time right but actually in practice say at Facebook on the timescale that
-[0:45:42] at Facebook on the timescale that they're working on a lot of their
-[0:45:44] they're working on a lot of their standard data analysis pipelines may
-[0:45:46] standard data analysis pipelines may want to wait for a whole day to complete
-[0:45:49] want to wait for a whole day to complete to compute the outcome for an individual
-[0:45:51] to compute the outcome for an individual user for that day so you're not gonna
-[0:45:53] user for that day so you're not gonna update within the day another reason you
-[0:45:55] update within the day another reason you may not want to do that is because
-[0:45:56] may not want to do that is because there's huge periodic variations in user
-[0:45:59] there's huge periodic variations in user behavior that have to do with when
-[0:46:01] behavior that have to do with when different people in different parts of
-[0:46:03] different people in different parts of the world are online what they're doing
-[0:46:05] the world are online what they're doing on weekdays versus weekends etc so
-[0:46:07] on weekdays versus weekends etc so actually trying to update really rapidly
-[0:46:10] actually trying to update really rapidly may not be desirable actually at all and
-[0:46:15] may not be desirable actually at all and so I guess to me that suggests it's sort
-[0:46:17] so I guess to me that suggests it's sort of a call for some of the Bandit
-[0:46:19] of a call for some of the Bandit literature to more accurately reflect
-[0:46:21] literature to more accurately reflect the big practical benefits to a more
-[0:46:24] the big practical benefits to a more batch updating and that will end up
-[0:46:26] batch updating and that will end up changing the kinds of designs that you'd
-[0:46:28] changing the kinds of designs that you'd want to use because if you are going to
-[0:46:31] want to use because if you are going to send a whole bunch of people to a new
-[0:46:35] send a whole bunch of people to a new design before you observe the outcomes
-[0:46:38] design before you observe the outcomes then maybe less randomization is
-[0:46:40] then maybe less randomization is required than if you were sequentially
-[0:46:42] required than if you were sequentially observing outcomes because that
-[0:46:44] observing outcomes because that exploration you're not going to reap the
-[0:46:46] exploration you're not going to reap the rewards of that exponent exploration
-[0:46:48] rewards of that exponent exploration hell after say a large number of people
-[0:46:51] hell after say a large number of people have been assigned to arms according to
-[0:46:53] have been assigned to arms according to that design so I think that's you know
-[0:46:58] that design so I think that's you know one of the nice things about thinking
-[0:46:59] one of the nice things about thinking about how all this actually works in
-[0:47:01] about how all this actually works in practice even as a very very
-[0:47:03] practice even as a very very sophisticated firm you know and sort of
-[0:47:05] sophisticated firm you know and sort of at the cutting edge within that firm is
-[0:47:08] at the cutting edge within that firm is that there's reasons why thatching makes
-[0:47:10] that there's reasons why thatching makes sense
+[0:43:21] switching over to discussions so we have
+[0:43:23] dean will present some slides and then a
+[0:43:27] ton can respond and if he wants and then
+[0:43:30] if we have somewhat time left we can
+[0:43:32] take some questions all right Dean great
+[0:43:40] great it's a real pleasure to to comment
+[0:43:43] on on this work so so I'm going to keep
+[0:43:47] this brief but there was a lot of
+[0:43:49] interesting material in there so the
+[0:43:51] first thing I wanted to mention I think
+[0:43:54] it's interesting is just a lot of the
+[0:43:56] literature that you might read about
+[0:43:59] kind of adaptive experimentation the
+[0:44:02] contextual bandit literature etc often
+[0:44:04] presumes that we're gonna update our
+[0:44:08] design the probabilities according to
+[0:44:10] which units are assigned to these
+[0:44:12] different arms after each observation
+[0:44:15] and I think one of the things that that
+[0:44:18] agent Scott highlighted was how this
+[0:44:21] isn't really how things work in practice
+[0:44:23] and so a lot of what he discussed was
+[0:44:26] focused on this case of some sort of
+[0:44:27] batch updating where actually were we're
+[0:44:33] running some some selection of arms
+[0:44:37] observing results and then updating in a
+[0:44:40] batch mode and so why why is that and I
+[0:44:43] think that's a useful thing to kind of
+[0:44:45] reflect on as also maybe some of the
+[0:44:47] theory should should more accurately
+[0:44:49] match what has to happen in practice and
+[0:44:52] so one big reason is just that that aids
+[0:44:55] on mentioned is that
+[0:44:57] humans are in the loop right that that
+[0:45:03] some of this decision-making though we
+[0:45:05] maybe would like to imagine that there's
+[0:45:07] some scalar ization of exactly the
+[0:45:09] objective that's not how it really works
+[0:45:11] and so humans remain in the
+[0:45:13] decision-making process and the outcomes
+[0:45:17] are not immediately observed right so we
+[0:45:20] may have to wait some time to know how
+[0:45:22] some experiment affected the outcomes
+[0:45:24] which we care about and it's not even
+[0:45:26] necessarily the case that we're getting
+[0:45:28] continuous feedback right you would
+[0:45:30] imagine in some settings okay maybe we
+[0:45:33] care about patient survival and the only
+[0:45:35] observed patient survival up to some
+[0:45:37] time right but actually in practice say
+[0:45:41] at Facebook on the timescale that
+[0:45:42] they're working on a lot of their
+[0:45:44] standard data analysis pipelines may
+[0:45:46] want to wait for a whole day to complete
+[0:45:49] to compute the outcome for an individual
+[0:45:51] user for that day so you're not gonna
+[0:45:53] update within the day another reason you
+[0:45:55] may not want to do that is because
+[0:45:56] there's huge periodic variations in user
+[0:45:59] behavior that have to do with when
+[0:46:01] different people in different parts of
+[0:46:03] the world are online what they're doing
+[0:46:05] on weekdays versus weekends etc so
+[0:46:07] actually trying to update really rapidly
+[0:46:10] may not be desirable actually at all and
+[0:46:15] so I guess to me that suggests it's sort
+[0:46:17] of a call for some of the Bandit
+[0:46:19] literature to more accurately reflect
+[0:46:21] the big practical benefits to a more
+[0:46:24] batch updating and that will end up
+[0:46:26] changing the kinds of designs that you'd
+[0:46:28] want to use because if you are going to
+[0:46:31] send a whole bunch of people to a new
+[0:46:35] design before you observe the outcomes
+[0:46:38] then maybe less randomization is
+[0:46:40] required than if you were sequentially
+[0:46:42] observing outcomes because that
+[0:46:44] exploration you're not going to reap the
+[0:46:46] rewards of that exponent exploration
+[0:46:48] hell after say a large number of people
+[0:46:51] have been assigned to arms according to
+[0:46:53] that design so I think that's you know
+[0:46:58] one of the nice things about thinking
+[0:46:59] about how all this actually works in
+[0:47:01] practice even as a very very
+[0:47:03] sophisticated firm you know and sort of
+[0:47:05] at the cutting edge within that firm is
+[0:47:08] that there's reasons why thatching makes
 [0:47:12] sense okay the other thing I wanted to comment
-[0:47:15] okay the other thing I wanted to comment on was that a lot of the approach that
-[0:47:20] on was that a lot of the approach that Ehsan described a little bit different
-[0:47:22] Ehsan described a little bit different than what you might be familiar with if
-[0:47:24] than what you might be familiar with if you're familiar with the contextual
-[0:47:25] you're familiar with the contextual bandit or dynamic treatment regime
-[0:47:27] bandit or dynamic treatment regime literature
-[0:47:28] literature so in those literature's we often when
-[0:47:32] so in those literature's we often when we're trying to think about evaluating a
-[0:47:34] we're trying to think about evaluating a policy that allocates people to arms
-[0:47:38] policy that allocates people to arms based on their characteristics X or
-[0:47:41] based on their characteristics X or context X we're gonna look at cases
-[0:47:44] context X we're gonna look at cases where some policy of interest does what
-[0:47:48] where some policy of interest does what actually happened in some some observe
-[0:47:50] actually happened in some some observe data right so we're gonna look at okay
-[0:47:53] data right so we're gonna look at okay of all the observations we have some
-[0:47:55] of all the observations we have some experiment we're only gonna look at
-[0:47:57] experiment we're only gonna look at those where what happened in the
-[0:47:59] those where what happened in the experiment matches what some policy of
-[0:48:01] experiment matches what some policy of interests would do okay and so this
-[0:48:05] interests would do okay and so this results in estimator is kind of of this
-[0:48:08] results in estimator is kind of of this form like so here's a harmless Thompson
-[0:48:09] form like so here's a harmless Thompson estimator where we're going to look at
-[0:48:12] estimator where we're going to look at observations and and wheat them
-[0:48:16] observations and and wheat them according to the probability that the
-[0:48:17] according to the probability that the policy of interest PI would have
-[0:48:20] policy of interest PI would have actually assigned that unit to the
-[0:48:23] actually assigned that unit to the observed treatment zi given their
-[0:48:25] observed treatment zi given their context X I that this could be a
-[0:48:28] context X I that this could be a deterministic policy in which case that
-[0:48:30] deterministic policy in which case that that numerator is either a one or a zero
-[0:48:33] that numerator is either a one or a zero and that's a zero
-[0:48:34] and that's a zero that data is not contributing to our
-[0:48:35] that data is not contributing to our evaluation okay so this just plays a key
-[0:48:40] evaluation okay so this just plays a key role in all the standard kind of policy
-[0:48:42] role in all the standard kind of policy evaluation estimators in this context
-[0:48:44] evaluation estimators in this context one of the things that's nice about this
-[0:48:47] one of the things that's nice about this kind of approach is our statistical
-[0:48:48] kind of approach is our statistical inference say for comparing two policies
-[0:48:51] inference say for comparing two policies just one policy better than the other
-[0:48:52] just one policy better than the other policy can account for cancellation when
-[0:48:57] policy can account for cancellation when two policies agree with each other a lot
-[0:48:58] two policies agree with each other a lot of the time so if two policies agree
-[0:49:01] of the time so if two policies agree with what to do with somebody who has a
-[0:49:03] with what to do with somebody who has a particular value of x then we're always
-[0:49:06] particular value of x then we're always going to know that that what happens to
-[0:49:10] going to know that that what happens to those people who have that value of x is
-[0:49:13] those people who have that value of x is not informative about the difference
-[0:49:15] not informative about the difference between those two policies so so that's
-[0:49:22] between those two policies so so that's kind of a nice thing about actually
-[0:49:24] kind of a nice thing about actually conditioning
-[0:49:24] conditioning the context in using that explicitly in
-[0:49:26] the context in using that explicitly in our analysis okay but this is different
-[0:49:32] our analysis okay but this is different than what H on talked about which is
-[0:49:35] than what H on talked about which is using Bayesian optimization to try to
-[0:49:37] using Bayesian optimization to try to directly optimize the parameters that
-[0:49:40] directly optimize the parameters that define the policy so some policy PI is
-[0:49:43] define the policy so some policy PI is going to be defined by you know this
-[0:49:45] going to be defined by you know this this say rules that map from the context
-[0:49:49] this say rules that map from the context to what action you take for somebody in
-[0:49:51] to what action you take for somebody in that context right and then we're just
-[0:49:53] that context right and then we're just going to optimize over the parameters
-[0:49:55] going to optimize over the parameters that define that policy that may define
-[0:49:58] that define that policy that may define some decision boundaries or they defined
-[0:50:00] some decision boundaries or they defined how many news feed stories to
-[0:50:02] how many news feed stories to automatically fetch depending on
-[0:50:03] automatically fetch depending on somebody's connection type right and so
-[0:50:06] somebody's connection type right and so my my sense is that there could be
-[0:50:08] my my sense is that there could be pretty substantial efficiency losses
-[0:50:10] pretty substantial efficiency losses here compared with actually accounting
-[0:50:13] here compared with actually accounting for you know what context is realized
-[0:50:17] for you know what context is realized but I'm not sure exactly how to
-[0:50:19] but I'm not sure exactly how to characterize those efficiency losses so
-[0:50:21] characterize those efficiency losses so I thought that was kind of interesting
-[0:50:22] I thought that was kind of interesting point to think about and also just to
-[0:50:25] point to think about and also just to note that again there might be really
-[0:50:27] note that again there might be really good practical reasons why the approach
-[0:50:30] good practical reasons why the approach that h on is taking to do this bayesian
-[0:50:32] that h on is taking to do this bayesian optimization directly in the parameters
-[0:50:33] optimization directly in the parameters instead of having to keep track of what
-[0:50:35] instead of having to keep track of what everybody's context was at every time
-[0:50:37] everybody's context was at every time etcetera and the context might be
-[0:50:39] etcetera and the context might be changing within the same unit I might go
-[0:50:41] changing within the same unit I might go from a high quality connection to a low
-[0:50:43] from a high quality connection to a low quality connection and so how does that
-[0:50:45] quality connection and so how does that get represented here that there's good
-[0:50:47] get represented here that there's good practical reasons for what they're doing
-[0:50:49] practical reasons for what they're doing and so it'd be interesting to think
-[0:50:50] and so it'd be interesting to think about how can we bound or reduce the
-[0:50:53] about how can we bound or reduce the efficiency loss from this and then
-[0:50:57] efficiency loss from this and then finally one of the things that h on
-[0:50:59] finally one of the things that h on talked about was using some kind of a
-[0:51:02] talked about was using some kind of a biased model to improve precision right
-[0:51:08] biased model to improve precision right and so you just read this as simulations
-[0:51:11] and so you just read this as simulations and the surrogacy I could think of these
-[0:51:12] and the surrogacy I could think of these as both different cases of some model
-[0:51:14] as both different cases of some model that might be wrong so in the
-[0:51:15] that might be wrong so in the simulations he described really where
-[0:51:17] simulations he described really where this is though there's some model that
-[0:51:19] this is though there's some model that involves many parametric or independence
-[0:51:21] involves many parametric or independence assumptions so the example he had was
-[0:51:22] assumptions so the example he had was that we might say that the total actions
-[0:51:25] that we might say that the total actions by some user are just going to be
-[0:51:27] by some user are just going to be aggregations of the predicted actions
-[0:51:30] aggregations of the predicted actions for that user for each item in their
-[0:51:31] for that user for each item in their newsfeed so how many things is this user
-[0:51:34] newsfeed so how many things is this user going to like in their newsfeed
-[0:51:36] going to like in their newsfeed well we're just going to look at some
-[0:51:38] well we're just going to look at some how
+[0:47:15] on was that a lot of the approach that
+[0:47:20] Ehsan described a little bit different
+[0:47:22] than what you might be familiar with if
+[0:47:24] you're familiar with the contextual
+[0:47:25] bandit or dynamic treatment regime
+[0:47:27] literature
+[0:47:28] so in those literature's we often when
+[0:47:32] we're trying to think about evaluating a
+[0:47:34] policy that allocates people to arms
+[0:47:38] based on their characteristics X or
+[0:47:41] context X we're gonna look at cases
+[0:47:44] where some policy of interest does what
+[0:47:48] actually happened in some some observe
+[0:47:50] data right so we're gonna look at okay
+[0:47:53] of all the observations we have some
+[0:47:55] experiment we're only gonna look at
+[0:47:57] those where what happened in the
+[0:47:59] experiment matches what some policy of
+[0:48:01] interests would do okay and so this
+[0:48:05] results in estimator is kind of of this
+[0:48:08] form like so here's a harmless Thompson
+[0:48:09] estimator where we're going to look at
+[0:48:12] observations and and wheat them
+[0:48:16] according to the probability that the
+[0:48:17] policy of interest PI would have
+[0:48:20] actually assigned that unit to the
+[0:48:23] observed treatment zi given their
+[0:48:25] context X I that this could be a
+[0:48:28] deterministic policy in which case that
+[0:48:30] that numerator is either a one or a zero
+[0:48:33] and that's a zero
+[0:48:34] that data is not contributing to our
+[0:48:35] evaluation okay so this just plays a key
+[0:48:40] role in all the standard kind of policy
+[0:48:42] evaluation estimators in this context
+[0:48:44] one of the things that's nice about this
+[0:48:47] kind of approach is our statistical
+[0:48:48] inference say for comparing two policies
+[0:48:51] just one policy better than the other
+[0:48:52] policy can account for cancellation when
+[0:48:57] two policies agree with each other a lot
+[0:48:58] of the time so if two policies agree
+[0:49:01] with what to do with somebody who has a
+[0:49:03] particular value of x then we're always
+[0:49:06] going to know that that what happens to
+[0:49:10] those people who have that value of x is
+[0:49:13] not informative about the difference
+[0:49:15] between those two policies so so that's
+[0:49:22] kind of a nice thing about actually
+[0:49:24] conditioning
+[0:49:24] the context in using that explicitly in
+[0:49:26] our analysis okay but this is different
+[0:49:32] than what H on talked about which is
+[0:49:35] using Bayesian optimization to try to
+[0:49:37] directly optimize the parameters that
+[0:49:40] define the policy so some policy PI is
+[0:49:43] going to be defined by you know this
+[0:49:45] this say rules that map from the context
+[0:49:49] to what action you take for somebody in
+[0:49:51] that context right and then we're just
+[0:49:53] going to optimize over the parameters
+[0:49:55] that define that policy that may define
+[0:49:58] some decision boundaries or they defined
+[0:50:00] how many news feed stories to
+[0:50:02] automatically fetch depending on
+[0:50:03] somebody's connection type right and so
+[0:50:06] my my sense is that there could be
+[0:50:08] pretty substantial efficiency losses
+[0:50:10] here compared with actually accounting
+[0:50:13] for you know what context is realized
+[0:50:17] but I'm not sure exactly how to
+[0:50:19] characterize those efficiency losses so
+[0:50:21] I thought that was kind of interesting
+[0:50:22] point to think about and also just to
+[0:50:25] note that again there might be really
+[0:50:27] good practical reasons why the approach
+[0:50:30] that h on is taking to do this bayesian
+[0:50:32] optimization directly in the parameters
+[0:50:33] instead of having to keep track of what
+[0:50:35] everybody's context was at every time
+[0:50:37] etcetera and the context might be
+[0:50:39] changing within the same unit I might go
+[0:50:41] from a high quality connection to a low
+[0:50:43] quality connection and so how does that
+[0:50:45] get represented here that there's good
+[0:50:47] practical reasons for what they're doing
+[0:50:49] and so it'd be interesting to think
+[0:50:50] about how can we bound or reduce the
+[0:50:53] efficiency loss from this and then
+[0:50:57] finally one of the things that h on
+[0:50:59] talked about was using some kind of a
+[0:51:02] biased model to improve precision right
+[0:51:08] and so you just read this as simulations
+[0:51:11] and the surrogacy I could think of these
+[0:51:12] as both different cases of some model
+[0:51:14] that might be wrong so in the
+[0:51:15] simulations he described really where
+[0:51:17] this is though there's some model that
+[0:51:19] involves many parametric or independence
+[0:51:21] assumptions so the example he had was
+[0:51:22] that we might say that the total actions
+[0:51:25] by some user are just going to be
+[0:51:27] aggregations of the predicted actions
+[0:51:30] for that user for each item in their
+[0:51:31] newsfeed so how many things is this user
+[0:51:34] going to like in their newsfeed
+[0:51:36] well we're just going to look at some
 [0:51:38] how and say what would it show them in
-[0:51:40] and say what would it show them in newsfeed and how much what's our
-[0:51:43] newsfeed and how much what's our predicted probability for them liking
-[0:51:44] predicted probability for them liking each of those things in newsfeed and
-[0:51:46] each of those things in newsfeed and then will sum up those predicted
-[0:51:48] then will sum up those predicted probabilities right and so clearly
-[0:51:52] probabilities right and so clearly that's that model is wrong has a whole
-[0:51:54] that's that model is wrong has a whole bunch of independence assumptions and it
-[0:51:55] bunch of independence assumptions and it could be wrong and a whole bunch of
-[0:51:56] could be wrong and a whole bunch of other ways you also discuss the use of
-[0:51:58] other ways you also discuss the use of some kind of surrogacy assumptions where
-[0:52:00] some kind of surrogacy assumptions where we think some short rent effects you're
-[0:52:02] we think some short rent effects you're gonna translate the longer-run effects
-[0:52:03] gonna translate the longer-run effects and this would be a more kind of just
-[0:52:05] and this would be a more kind of just sort of reduced form or black box kind
-[0:52:08] sort of reduced form or black box kind of ml model that maps from short-run
-[0:52:09] of ml model that maps from short-run effects the long-run effects but I think
-[0:52:13] effects the long-run effects but I think in practice despite actually maybe
-[0:52:15] in practice despite actually maybe having some stochastic stock being rule
-[0:52:20] having some stochastic stock being rule on selection into the samples of
-[0:52:22] on selection into the samples of experiment the sample of experience that
-[0:52:24] experiment the sample of experience that run long enough is determined by the
-[0:52:26] run long enough is determined by the short-run effect so if an experiment
-[0:52:28] short-run effect so if an experiment looks like it has really negative
-[0:52:30] looks like it has really negative effects and a short run people probably
-[0:52:32] effects and a short run people probably are not going to run it for long enough
-[0:52:35] are not going to run it for long enough to see what its long-run effects would
-[0:52:37] to see what its long-run effects would be right and different parts of an
-[0:52:40] be right and different parts of an organization or different people might
-[0:52:42] organization or different people might be more or less patient or more
-[0:52:43] be more or less patient or more sensitive to periodic or seasonal
-[0:52:45] sensitive to periodic or seasonal factors and so may run their experiments
-[0:52:48] factors and so may run their experiments longer or shorter so we probably want to
-[0:52:50] longer or shorter so we probably want to correct for this in some way using some
-[0:52:52] correct for this in some way using some kind of inverse probability weighted
-[0:52:54] kind of inverse probability weighted estimator so one of the questions that
-[0:52:56] estimator so one of the questions that this prompted especially in the case
-[0:52:57] this prompted especially in the case where we have both simulations and
-[0:52:58] where we have both simulations and surrogate models and both might be wrong
-[0:53:00] surrogate models and both might be wrong is there some way to construct multiple
-[0:53:03] is there some way to construct multiple robust estimators that combine multiple
-[0:53:05] robust estimators that combine multiple of these models and are going to perform
-[0:53:07] of these models and are going to perform well even if all but one of them is
-[0:53:11] well even if all but one of them is incorrect
+[0:51:40] newsfeed and how much what's our
+[0:51:43] predicted probability for them liking
+[0:51:44] each of those things in newsfeed and
+[0:51:46] then will sum up those predicted
+[0:51:48] probabilities right and so clearly
+[0:51:52] that's that model is wrong has a whole
+[0:51:54] bunch of independence assumptions and it
+[0:51:55] could be wrong and a whole bunch of
+[0:51:56] other ways you also discuss the use of
+[0:51:58] some kind of surrogacy assumptions where
+[0:52:00] we think some short rent effects you're
+[0:52:02] gonna translate the longer-run effects
+[0:52:03] and this would be a more kind of just
+[0:52:05] sort of reduced form or black box kind
+[0:52:08] of ml model that maps from short-run
+[0:52:09] effects the long-run effects but I think
+[0:52:13] in practice despite actually maybe
+[0:52:15] having some stochastic stock being rule
+[0:52:20] on selection into the samples of
+[0:52:22] experiment the sample of experience that
+[0:52:24] run long enough is determined by the
+[0:52:26] short-run effect so if an experiment
+[0:52:28] looks like it has really negative
+[0:52:30] effects and a short run people probably
+[0:52:32] are not going to run it for long enough
+[0:52:35] to see what its long-run effects would
+[0:52:37] be right and different parts of an
+[0:52:40] organization or different people might
+[0:52:42] be more or less patient or more
+[0:52:43] sensitive to periodic or seasonal
+[0:52:45] factors and so may run their experiments
+[0:52:48] longer or shorter so we probably want to
+[0:52:50] correct for this in some way using some
+[0:52:52] kind of inverse probability weighted
+[0:52:54] estimator so one of the questions that
+[0:52:56] this prompted especially in the case
+[0:52:57] where we have both simulations and
+[0:52:58] surrogate models and both might be wrong
+[0:53:00] is there some way to construct multiple
+[0:53:03] robust estimators that combine multiple
+[0:53:05] of these models and are going to perform
+[0:53:07] well even if all but one of them is
 [0:53:13] incorrect so it seems like there's an opportunity
-[0:53:16] so it seems like there's an opportunity for some recent developments in
-[0:53:18] for some recent developments in constructing multiple robust estimators
-[0:53:21] constructing multiple robust estimators to apply in this setting so overall this
-[0:53:25] to apply in this setting so overall this is very interesting I was familiar a lot
-[0:53:27] is very interesting I was familiar a lot of this work a sauna and I used to work
-[0:53:29] of this work a sauna and I used to work together on Facebook but there was also
-[0:53:30] together on Facebook but there was also some new pieces and so I think it's
-[0:53:34] some new pieces and so I think it's really great to have this view from
-[0:53:36] really great to have this view from research driven practice in this seminar
-[0:53:40] research driven practice in this seminar so thanks for sharing anything fantastic
-[0:53:45] so thanks for sharing anything fantastic thanks Dean for their great discussion a
-[0:53:48] thanks Dean for their great discussion a ton do you want to respond
-[0:53:51] ton do you want to respond uh yeah I'll just respond briefly so
-[0:53:57] uh yeah I'll just respond briefly so that we can get to the the questions I
-[0:54:00] that we can get to the the questions I do think that Bayesian optimization is
-[0:54:05] do think that Bayesian optimization is not appropriate for all cases my team
-[0:54:08] not appropriate for all cases my team also works on on contextual bandits one
-[0:54:11] also works on on contextual bandits one thing that we've observed though is
-[0:54:13] thing that we've observed though is implementing things like bandits and
-[0:54:15] implementing things like bandits and especially reinforcement learning is
-[0:54:17] especially reinforcement learning is really hard to do well in practice
-[0:54:20] really hard to do well in practice there's a lot of instrumentation there's
-[0:54:22] there's a lot of instrumentation there's a lot that can go wrong logging
-[0:54:25] a lot that can go wrong logging everything correctly it could be really
-[0:54:27] everything correctly it could be really really hard and this really sad steps
-[0:54:30] really hard and this really sad steps all of it and things like off policy
-[0:54:35] all of it and things like off policy evaluation work reasonably well but in
-[0:54:39] evaluation work reasonably well but in our experience are still pretty by it
-[0:54:40] our experience are still pretty by it can be quite biased for bandits and
-[0:54:44] can be quite biased for bandits and really not well at all for for
-[0:54:45] really not well at all for for reinforcement learning yet with Bayesian
-[0:54:49] reinforcement learning yet with Bayesian optimization we are able to do direct
-[0:54:55] optimization we are able to do direct policy search for reinforcement learning
-[0:54:57] policy search for reinforcement learning type problems so that's the I would say
-[0:55:01] type problems so that's the I would say that the simplicity and the practicality
-[0:55:04] that the simplicity and the practicality is is what we find to be the most
-[0:55:08] is is what we find to be the most compelling about it but certainly there
-[0:55:12] compelling about it but certainly there are advantages of other approaches and
-[0:55:14] are advantages of other approaches and for I do think that there's a large
-[0:55:18] for I do think that there's a large space that's a little bit more
-[0:55:19] space that's a little bit more intermediate where for now we've we've
-[0:55:21] intermediate where for now we've we've really focused I'm just having these
-[0:55:22] really focused I'm just having these aggregate sufficient statistics but if
-[0:55:25] aggregate sufficient statistics but if you have some decomposition among the
-[0:55:27] you have some decomposition among the states you can do a little bit better
-[0:55:31] states you can do a little bit better and you can do kind of more
-[0:55:33] and you can do kind of more counterfactual policy evaluation and do
-[0:55:35] counterfactual policy evaluation and do some amounts of additional stimulation
-[0:55:39] some amounts of additional stimulation from that and yeah I totally agree with
-[0:55:44] from that and yeah I totally agree with respect to the W robust estimation for
-[0:55:46] respect to the W robust estimation for the surrogacy stuff we should catch up
-[0:55:49] the surrogacy stuff we should catch up about that later
+[0:53:16] for some recent developments in
+[0:53:18] constructing multiple robust estimators
+[0:53:21] to apply in this setting so overall this
+[0:53:25] is very interesting I was familiar a lot
+[0:53:27] of this work a sauna and I used to work
+[0:53:29] together on Facebook but there was also
+[0:53:30] some new pieces and so I think it's
+[0:53:34] really great to have this view from
+[0:53:36] research driven practice in this seminar
+[0:53:40] so thanks for sharing anything fantastic
+[0:53:45] thanks Dean for their great discussion a
+[0:53:48] ton do you want to respond
+[0:53:51] uh yeah I'll just respond briefly so
+[0:53:57] that we can get to the the questions I
+[0:54:00] do think that Bayesian optimization is
+[0:54:05] not appropriate for all cases my team
+[0:54:08] also works on on contextual bandits one
+[0:54:11] thing that we've observed though is
+[0:54:13] implementing things like bandits and
+[0:54:15] especially reinforcement learning is
+[0:54:17] really hard to do well in practice
+[0:54:20] there's a lot of instrumentation there's
+[0:54:22] a lot that can go wrong logging
+[0:54:25] everything correctly it could be really
+[0:54:27] really hard and this really sad steps
+[0:54:30] all of it and things like off policy
+[0:54:35] evaluation work reasonably well but in
+[0:54:39] our experience are still pretty by it
+[0:54:40] can be quite biased for bandits and
+[0:54:44] really not well at all for for
+[0:54:45] reinforcement learning yet with Bayesian
+[0:54:49] optimization we are able to do direct
+[0:54:55] policy search for reinforcement learning
+[0:54:57] type problems so that's the I would say
+[0:55:01] that the simplicity and the practicality
+[0:55:04] is is what we find to be the most
+[0:55:08] compelling about it but certainly there
+[0:55:12] are advantages of other approaches and
+[0:55:14] for I do think that there's a large
+[0:55:18] space that's a little bit more
+[0:55:19] intermediate where for now we've we've
+[0:55:21] really focused I'm just having these
+[0:55:22] aggregate sufficient statistics but if
+[0:55:25] you have some decomposition among the
+[0:55:27] states you can do a little bit better
+[0:55:31] and you can do kind of more
+[0:55:33] counterfactual policy evaluation and do
+[0:55:35] some amounts of additional stimulation
+[0:55:39] from that and yeah I totally agree with
+[0:55:44] respect to the W robust estimation for
+[0:55:46] the surrogacy stuff we should catch up
+[0:55:49] about that later
 [0:55:57] okay cool so we have a few questions the people who asked them did not reply to
-[0:56:00] people who asked them did not reply to me so I will just ask their questions to
-[0:56:03] me so I will just ask their questions to them and they shall remain anonymous
-[0:56:05] them and they shall remain anonymous so first question is how do you deal
-[0:56:08] so first question is how do you deal with feedback loops and when decisions
-[0:56:10] with feedback loops and when decisions made influenced the underlying
-[0:56:11] made influenced the underlying population behavior models etc for
-[0:56:14] population behavior models etc for example choosing an optimal public
-[0:56:15] example choosing an optimal public policy changes the population or the
-[0:56:18] policy changes the population or the response of those segments of some
-[0:56:19] response of those segments of some segments
+[0:56:00] me so I will just ask their questions to
+[0:56:03] them and they shall remain anonymous
+[0:56:05] so first question is how do you deal
+[0:56:08] with feedback loops and when decisions
+[0:56:10] made influenced the underlying
+[0:56:11] population behavior models etc for
+[0:56:14] example choosing an optimal public
+[0:56:15] policy changes the population or the
+[0:56:18] response of those segments of some
 [0:56:21] segments that's the question makes sense to you
 [0:56:33] [Music] Eitan I think you're still needed you
-[0:56:36] Eitan I think you're still needed you know yeah it makes some sense so the the
-[0:56:44] know yeah it makes some sense so the the contextual model that I described
-[0:56:48] contextual model that I described towards the end where we have that
-[0:56:50] towards the end where we have that additive decomposition I would say is
-[0:56:52] additive decomposition I would say is like most sensitive to the feedback
-[0:56:54] like most sensitive to the feedback loops phasing optimization in general is
-[0:56:58] loops phasing optimization in general is a lot less sensitive to that these
-[0:57:00] a lot less sensitive to that these feedback loops provided you can let that
-[0:57:03] feedback loops provided you can let that policy run for for a long time now if a
-[0:57:08] policy run for for a long time now if a particular treatment generates set
-[0:57:11] particular treatment generates set violations then that's like a whole
-[0:57:15] violations then that's like a whole other can of worms that is really not
-[0:57:18] other can of worms that is really not related to Bayesian optimization in
-[0:57:21] related to Bayesian optimization in particular this would be an issue for
-[0:57:24] particular this would be an issue for any kind of experiments or reinforcement
-[0:57:27] any kind of experiments or reinforcement learning algorithm that you would have
+[0:56:36] know yeah it makes some sense so the the
+[0:56:44] contextual model that I described
+[0:56:48] towards the end where we have that
+[0:56:50] additive decomposition I would say is
+[0:56:52] like most sensitive to the feedback
+[0:56:54] loops phasing optimization in general is
+[0:56:58] a lot less sensitive to that these
+[0:57:00] feedback loops provided you can let that
+[0:57:03] policy run for for a long time now if a
+[0:57:08] particular treatment generates set
+[0:57:11] violations then that's like a whole
+[0:57:15] other can of worms that is really not
+[0:57:18] related to Bayesian optimization in
+[0:57:21] particular this would be an issue for
+[0:57:24] any kind of experiments or reinforcement
+[0:57:27] learning algorithm that you would have
 [0:57:35] another question / clarification was about the kind of the the surrogate part
-[0:57:38] about the kind of the the surrogate part and so how far ahead are you are you
-[0:57:40] and so how far ahead are you are you predicting are you trying to predict
-[0:57:42] predicting are you trying to predict yeah the baby affect that seven days
-[0:57:45] yeah the baby affect that seven days seven days out or kind of like the long
-[0:57:48] seven days out or kind of like the long term like very long term effect so for
-[0:57:52] term like very long term effect so for the work that will since I and I did
-[0:57:56] the work that will since I and I did with max Banda a few years ago we were
-[0:58:00] with max Banda a few years ago we were just looking at seven and 14-day
-[0:58:02] just looking at seven and 14-day outcomes because that's what we had the
-[0:58:05] outcomes because that's what we had the most data for we are certainly
-[0:58:08] most data for we are certainly interested in outcomes that are much
-[0:58:11] interested in outcomes that are much longer timescales
-[0:58:13] longer timescales one of the disadvantages of the
-[0:58:16] one of the disadvantages of the meta-analysis approach is that the
-[0:58:18] meta-analysis approach is that the number of experiments that run for 30
-[0:58:20] number of experiments that run for 30 days is quite small and that those
-[0:58:24] days is quite small and that those classes of experiments tend to be
-[0:58:26] classes of experiments tend to be different than the routine class of
-[0:58:28] different than the routine class of experiments that might be kind of
-[0:58:29] experiments that might be kind of holdout experiments that evaluate all
-[0:58:31] holdout experiments that evaluate all changes that have accumulated over the
-[0:58:34] changes that have accumulated over the past several months so using the
-[0:58:38] past several months so using the particular modeling approach that I
-[0:58:40] particular modeling approach that I presented it would be hard to do
-[0:58:42] presented it would be hard to do something that is much longer than the
-[0:58:44] something that is much longer than the time horizon that people are actually
-[0:58:46] time horizon that people are actually running experiments but certainly it's
-[0:58:50] running experiments but certainly it's possible but ambitious could you longer
-[0:58:53] possible but ambitious could you longer term modeling and that with something
-[0:58:55] term modeling and that with something that we're actively looking into with
-[0:58:58] that we're actively looking into with more individual level approaches that
-[0:59:01] more individual level approaches that are kind of a little bit more standard
-[0:59:05] are kind of a little bit more standard okay and if I can I just run one more
-[0:59:08] okay and if I can I just run one more questions on on this surrogate problem
-[0:59:10] questions on on this surrogate problem so that knowing that you're going to use
-[0:59:12] so that knowing that you're going to use a surrogate approach to to predict the
-[0:59:15] a surrogate approach to to predict the outcomes seven days out we do to design
-[0:59:18] outcomes seven days out we do to design the experiment differently or do you
-[0:59:22] the experiment differently or do you just use the standard experimentation
-[0:59:24] just use the standard experimentation approach and you just tack the surrogate
-[0:59:26] approach and you just tack the surrogate approach on top of that yeah I don't
-[0:59:35] approach on top of that yeah I don't think we would do I mean there are
-[0:59:42] think we would do I mean there are things that one could do potentially and
-[0:59:47] things that one could do potentially and do differently
-[0:59:48] do differently so for example you could imagine kind of
-[0:59:53] so for example you could imagine kind of learning how to D by us your surrogate
-[0:59:55] learning how to D by us your surrogate by continuing to run your first batch
-[0:59:58] by continuing to run your first batch and looking at the extent to which your
-[1:00:02] and looking at the extent to which your your surrogate is miscalibrated
-[1:00:04] your surrogate is miscalibrated so you launch your next batch and then
-[1:00:08] so you launch your next batch and then you can can kind of keep iterating that
-[1:00:12] you can can kind of keep iterating that way we've also found that multitask
-[1:00:15] way we've also found that multitask Gaussian processes in general can work
-[1:00:18] Gaussian processes in general can work pretty well for modeling the long term
-[1:00:19] pretty well for modeling the long term outcomes so you can imagine you run your
-[1:00:23] outcomes so you can imagine you run your initial simple sequence your initial
-[1:00:25] initial simple sequence your initial batch you let that run for some
-[1:00:29] batch you let that run for some reasonable number of days and then you
-[1:00:31] reasonable number of days and then you select some new arms and you keep
-[1:00:34] select some new arms and you keep running that experiment and then what
-[1:00:36] running that experiment and then what you do is you use a multi task model to
-[1:00:38] you do is you use a multi task model to borrow strength across these these two
-[1:00:40] borrow strength across these these two and you make predictions for your
-[1:00:43] and you make predictions for your original batch and so they're
-[1:00:46] original batch and so they're essentially borrowing strength and and
-[1:00:49] essentially borrowing strength and and kind of learning about relevant parts of
-[1:00:51] kind of learning about relevant parts of the space but you're also able to kind
-[1:00:53] the space but you're also able to kind of adjust indy bias using that
-[1:00:55] of adjust indy bias using that longer running experiment so that's
-[1:00:58] longer running experiment so that's something that we definitely want to
-[1:00:59] something that we definitely want to explore as well so I think there are
-[1:01:01] explore as well so I think there are ways that you can change the
-[1:01:04] ways that you can change the experimentation model as well okay
-[1:01:08] experimentation model as well okay thanks those are helpful I think there
-[1:01:12] thanks those are helpful I think there are enough times for yes yeah I think we
-[1:01:15] are enough times for yes yeah I think we now should slowly wrap up one second
-[1:01:21] now should slowly wrap up one second first let's thank our thank you to our
-[1:01:25] first let's thank our thank you to our volunteers today so thank you to a them
-[1:01:27] volunteers today so thank you to a them for a fantastic talk and Dean for a
-[1:01:29] for a fantastic talk and Dean for a great discussion and next Tuesday we'll
-[1:01:34] great discussion and next Tuesday we'll have Molly's madhouse from ETH Zurich
-[1:01:36] have Molly's madhouse from ETH Zurich talked about total causal effect
-[1:01:38] talked about total causal effect estimation by combining causal structure
-[1:01:40] estimation by combining causal structure learning and covariant adjustment we're
-[1:01:42] learning and covariant adjustment we're all very much involved about talk and we
-[1:01:45] all very much involved about talk and we hope to see you all there again thanks
-[1:01:48] hope to see you all there again thanks for coming and hope to see you all next
-[1:01:50] for coming and hope to see you all next week stay safe Thanks
+[0:57:38] and so how far ahead are you are you
+[0:57:40] predicting are you trying to predict
+[0:57:42] yeah the baby affect that seven days
+[0:57:45] out or kind of like the long
+[0:57:48] term like very long term effect so for
+[0:57:52] the work that will since I and I did
+[0:57:56] with max Banda a few years ago we were
+[0:58:00] just looking at seven and 14-day
+[0:58:02] outcomes because that's what we had the
+[0:58:05] most data for we are certainly
+[0:58:08] interested in outcomes that are much
+[0:58:11] longer timescales
+[0:58:13] one of the disadvantages of the
+[0:58:16] meta-analysis approach is that the
+[0:58:18] number of experiments that run for 30
+[0:58:20] days is quite small and that those
+[0:58:24] classes of experiments tend to be
+[0:58:26] different than the routine class of
+[0:58:28] experiments that might be kind of
+[0:58:29] holdout experiments that evaluate all
+[0:58:31] changes that have accumulated over the
+[0:58:34] past several months so using the
+[0:58:38] particular modeling approach that I
+[0:58:40] presented it would be hard to do
+[0:58:42] something that is much longer than the
+[0:58:44] time horizon that people are actually
+[0:58:46] running experiments but certainly it's
+[0:58:50] possible but ambitious could you longer
+[0:58:53] term modeling and that with something
+[0:58:55] that we're actively looking into with
+[0:58:58] more individual level approaches that
+[0:59:01] are kind of a little bit more standard
+[0:59:05] okay and if I can I just run one more
+[0:59:08] questions on on this surrogate problem
+[0:59:10] so that knowing that you're going to use
+[0:59:12] a surrogate approach to to predict the
+[0:59:15] outcomes seven days out we do to design
+[0:59:18] the experiment differently or do you
+[0:59:22] just use the standard experimentation
+[0:59:24] approach and you just tack the surrogate
+[0:59:26] approach on top of that yeah I don't
+[0:59:35] think we would do I mean there are
+[0:59:42] things that one could do potentially and
+[0:59:47] do differently
+[0:59:48] so for example you could imagine kind of
+[0:59:53] learning how to D by us your surrogate
+[0:59:55] by continuing to run your first batch
+[0:59:58] and looking at the extent to which your
+[1:00:02] your surrogate is miscalibrated
+[1:00:04] so you launch your next batch and then
+[1:00:08] you can can kind of keep iterating that
+[1:00:12] way we've also found that multitask
+[1:00:15] Gaussian processes in general can work
+[1:00:18] pretty well for modeling the long term
+[1:00:19] outcomes so you can imagine you run your
+[1:00:23] initial simple sequence your initial
+[1:00:25] batch you let that run for some
+[1:00:29] reasonable number of days and then you
+[1:00:31] select some new arms and you keep
+[1:00:34] running that experiment and then what
+[1:00:36] you do is you use a multi task model to
+[1:00:38] borrow strength across these these two
+[1:00:40] and you make predictions for your
+[1:00:43] original batch and so they're
+[1:00:46] essentially borrowing strength and and
+[1:00:49] kind of learning about relevant parts of
+[1:00:51] the space but you're also able to kind
+[1:00:53] of adjust indy bias using that
+[1:00:55] longer running experiment so that's
+[1:00:58] something that we definitely want to
+[1:00:59] explore as well so I think there are
+[1:01:01] ways that you can change the
+[1:01:04] experimentation model as well okay
+[1:01:08] thanks those are helpful I think there
+[1:01:12] are enough times for yes yeah I think we
+[1:01:15] now should slowly wrap up one second
+[1:01:21] first let's thank our thank you to our
+[1:01:25] volunteers today so thank you to a them
+[1:01:27] for a fantastic talk and Dean for a
+[1:01:29] great discussion and next Tuesday we'll
+[1:01:34] have Molly's madhouse from ETH Zurich
+[1:01:36] talked about total causal effect
+[1:01:38] estimation by combining causal structure
+[1:01:40] learning and covariant adjustment we're
+[1:01:42] all very much involved about talk and we
+[1:01:45] hope to see you all there again thanks
+[1:01:48] for coming and hope to see you all next
+[1:01:50] week stay safe Thanks

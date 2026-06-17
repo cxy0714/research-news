@@ -1,775 +1,734 @@
 [0:00:01] yeah yes got it um all right thank you for
-[0:00:03] yes got it um all right thank you for inviting me to the talk and thank you
-[0:00:05] inviting me to the talk and thank you all for coming um the work that i'm
-[0:00:07] all for coming um the work that i'm about to present to you is work that
-[0:00:08] about to present to you is work that i've done in collaboration with folks at
-[0:00:10] i've done in collaboration with folks at google brain including alex de moore who
-[0:00:12] google brain including alex de moore who is one of the panelists
+[0:00:03] inviting me to the talk and thank you
+[0:00:05] all for coming um the work that i'm
+[0:00:07] about to present to you is work that
+[0:00:08] i've done in collaboration with folks at
+[0:00:10] google brain including alex de moore who
+[0:00:12] is one of the panelists
 [0:00:21] all right here we go uh i'm going to quickly give you an overview of the
-[0:00:23] quickly give you an overview of the whole talk so that you can place this
-[0:00:24] whole talk so that you can place this work in sort of a sea of related work
-[0:00:27] work in sort of a sea of related work um the narrative that we've seen in the
-[0:00:29] um the narrative that we've seen in the last few years has been that we can
-[0:00:30] last few years has been that we can build these super accurate models and
-[0:00:32] build these super accurate models and specifically deep learning deep neural
-[0:00:35] specifically deep learning deep neural networks that are great at making these
-[0:00:37] networks that are great at making these predictions
-[0:00:38] predictions but what we've seen is that
-[0:00:40] but what we've seen is that they're increasingly reliant on
-[0:00:42] they're increasingly reliant on shortcuts
+[0:00:23] whole talk so that you can place this
+[0:00:24] work in sort of a sea of related work
+[0:00:27] um the narrative that we've seen in the
+[0:00:29] last few years has been that we can
+[0:00:30] build these super accurate models and
+[0:00:32] specifically deep learning deep neural
+[0:00:35] networks that are great at making these
+[0:00:37] predictions
+[0:00:38] but what we've seen is that
+[0:00:40] they're increasingly reliant on
 [0:00:43] shortcuts and for now we'll say that shortcuts are
-[0:00:45] and for now we'll say that shortcuts are spurious correlations that exist in the
-[0:00:47] spurious correlations that exist in the data
+[0:00:45] spurious correlations that exist in the
 [0:00:48] data and when these various correlations
-[0:00:50] and when these various correlations break the model is no longer able to
-[0:00:51] break the model is no longer able to give these like stellar accuracies that
-[0:00:53] give these like stellar accuracies that we see at training time so for example
-[0:00:55] we see at training time so for example we're unable to identify a cow that
-[0:00:58] we're unable to identify a cow that appears on unusual backgrounds like sand
-[0:01:00] appears on unusual backgrounds like sand or we're unable to predict that an
-[0:01:02] or we're unable to predict that an individual is healthy just because it's
-[0:01:04] individual is healthy just because it's a female
+[0:00:50] break the model is no longer able to
+[0:00:51] give these like stellar accuracies that
+[0:00:53] we see at training time so for example
+[0:00:55] we're unable to identify a cow that
+[0:00:58] appears on unusual backgrounds like sand
+[0:01:00] or we're unable to predict that an
+[0:01:02] individual is healthy just because it's
 [0:01:06] a female so the challenge that we're going to
-[0:01:08] so the challenge that we're going to tackle is how do we build in variances
-[0:01:10] tackle is how do we build in variances to a single shortcut of course there can
-[0:01:13] to a single shortcut of course there can be multiple shortcuts in real life but
-[0:01:15] be multiple shortcuts in real life but we're not trying to be exhausted
-[0:01:18] we're not trying to be exhausted and the key idea here is that we're
-[0:01:19] and the key idea here is that we're going to approach this problem and look
-[0:01:21] going to approach this problem and look at it from the lens of causality and
-[0:01:23] at it from the lens of causality and we're going to try to pull ideas from
-[0:01:25] we're going to try to pull ideas from causality to improve this prediction
-[0:01:27] causality to improve this prediction task
+[0:01:08] tackle is how do we build in variances
+[0:01:10] to a single shortcut of course there can
+[0:01:13] be multiple shortcuts in real life but
+[0:01:15] we're not trying to be exhausted
+[0:01:18] and the key idea here is that we're
+[0:01:19] going to approach this problem and look
+[0:01:21] at it from the lens of causality and
+[0:01:23] we're going to try to pull ideas from
+[0:01:25] causality to improve this prediction
 [0:01:29] task and we'll see that this approach takes
-[0:01:30] and we'll see that this approach takes us to a solution that looks similar to
-[0:01:33] us to a solution that looks similar to recently suggested work
-[0:01:34] recently suggested work where we end up minimizing something
-[0:01:36] where we end up minimizing something like the logistic loss while imposing an
-[0:01:38] like the logistic loss while imposing an invariance penalty but there will be key
-[0:01:41] invariance penalty but there will be key distinctions that are motivated by
-[0:01:43] distinctions that are motivated by causal arguments
-[0:01:45] causal arguments let's look with a bit more detail at
-[0:01:47] let's look with a bit more detail at this cal classification example which
-[0:01:49] this cal classification example which i'll use throughout as sort of a
-[0:01:50] i'll use throughout as sort of a motivating example
-[0:01:52] motivating example here we have images and we want a
-[0:01:54] here we have images and we want a predictor to tell us if the foreground
-[0:01:56] predictor to tell us if the foreground object is a cow or a camp
-[0:01:58] object is a cow or a camp at training time we have the images and
-[0:01:59] at training time we have the images and their labels so the label y is one if
-[0:02:02] their labels so the label y is one if it's a cow and zero
-[0:02:04] it's a cow and zero we'll also assume that we have the label
-[0:02:07] we'll also assume that we have the label of the background at training time and
-[0:02:09] of the background at training time and we'll call that the auxiliary label v so
-[0:02:12] we'll call that the auxiliary label v so v is one of the background is grass and
-[0:02:14] v is one of the background is grass and zero if it's
-[0:02:15] zero if it's at training time the majority of camels
-[0:02:18] at training time the majority of camels are on sand backgrounds and the cows are
-[0:02:20] are on sand backgrounds and the cows are mostly on grass backgrounds and the
-[0:02:22] mostly on grass backgrounds and the other two categories have a non-zero
-[0:02:24] other two categories have a non-zero probability so we can observe some of
-[0:02:26] probability so we can observe some of them but they are very underrepresented
-[0:02:30] them but they are very underrepresented and what we see is that at test time
-[0:02:31] and what we see is that at test time we're unable to identify the cows that
-[0:02:33] we're unable to identify the cows that exist on sand
-[0:02:35] exist on sand and we'll say here the model has learned
-[0:02:37] and we'll say here the model has learned a shortcut and what we mean by that is
-[0:02:39] a shortcut and what we mean by that is that the model uses the background as a
-[0:02:41] that the model uses the background as a shortcut to predict the foreground
-[0:02:43] shortcut to predict the foreground object at test time so if you get a
-[0:02:46] object at test time so if you get a testing distribution that is different
-[0:02:47] testing distribution that is different from the training distribution in that
-[0:02:49] from the training distribution in that there are a lot of cows on sand and
-[0:02:51] there are a lot of cows on sand and camels on grass
-[0:02:53] camels on grass then your average accuracy deteriorates
-[0:02:55] then your average accuracy deteriorates by a lot
+[0:01:30] us to a solution that looks similar to
+[0:01:33] recently suggested work
+[0:01:34] where we end up minimizing something
+[0:01:36] like the logistic loss while imposing an
+[0:01:38] invariance penalty but there will be key
+[0:01:41] distinctions that are motivated by
+[0:01:43] causal arguments
+[0:01:45] let's look with a bit more detail at
+[0:01:47] this cal classification example which
+[0:01:49] i'll use throughout as sort of a
+[0:01:50] motivating example
+[0:01:52] here we have images and we want a
+[0:01:54] predictor to tell us if the foreground
+[0:01:56] object is a cow or a camp
+[0:01:58] at training time we have the images and
+[0:01:59] their labels so the label y is one if
+[0:02:02] it's a cow and zero
+[0:02:04] we'll also assume that we have the label
+[0:02:07] of the background at training time and
+[0:02:09] we'll call that the auxiliary label v so
+[0:02:12] v is one of the background is grass and
+[0:02:14] zero if it's
+[0:02:15] at training time the majority of camels
+[0:02:18] are on sand backgrounds and the cows are
+[0:02:20] mostly on grass backgrounds and the
+[0:02:22] other two categories have a non-zero
+[0:02:24] probability so we can observe some of
+[0:02:26] them but they are very underrepresented
+[0:02:30] and what we see is that at test time
+[0:02:31] we're unable to identify the cows that
+[0:02:33] exist on sand
+[0:02:35] and we'll say here the model has learned
+[0:02:37] a shortcut and what we mean by that is
+[0:02:39] that the model uses the background as a
+[0:02:41] shortcut to predict the foreground
+[0:02:43] object at test time so if you get a
+[0:02:46] testing distribution that is different
+[0:02:47] from the training distribution in that
+[0:02:49] there are a lot of cows on sand and
+[0:02:51] camels on grass
+[0:02:53] then your average accuracy deteriorates
 [0:02:56] by a lot and we've seen the scenario happening a
-[0:02:58] and we've seen the scenario happening a lot recently
-[0:02:59] lot recently um and before jumping into the meat of
-[0:03:02] um and before jumping into the meat of the talk i wanted to sort of give you a
-[0:03:04] the talk i wanted to sort of give you a road map that will guide the
-[0:03:05] road map that will guide the conversation
-[0:03:06] conversation we'll start by defining the problem from
-[0:03:08] we'll start by defining the problem from a causal perspective and then we'll look
-[0:03:11] a causal perspective and then we'll look at asymptotic and finite sample
-[0:03:13] at asymptotic and finite sample guarantees that we can get because of
-[0:03:14] guarantees that we can get because of our causal perspective
-[0:03:16] our causal perspective and this all will help us spell out a
-[0:03:19] and this all will help us spell out a specific objective to optimize
-[0:03:21] specific objective to optimize and the last thing we'll do is we will
-[0:03:23] and the last thing we'll do is we will look at the empirical performance of our
-[0:03:25] look at the empirical performance of our approach
+[0:02:58] lot recently
+[0:02:59] um and before jumping into the meat of
+[0:03:02] the talk i wanted to sort of give you a
+[0:03:04] road map that will guide the
+[0:03:05] conversation
+[0:03:06] we'll start by defining the problem from
+[0:03:08] a causal perspective and then we'll look
+[0:03:11] at asymptotic and finite sample
+[0:03:13] guarantees that we can get because of
+[0:03:14] our causal perspective
+[0:03:16] and this all will help us spell out a
+[0:03:19] specific objective to optimize
+[0:03:21] and the last thing we'll do is we will
+[0:03:23] look at the empirical performance of our
 [0:03:27] approach so what does it mean to look at the
-[0:03:28] so what does it mean to look at the problem from a causal perspective
-[0:03:30] problem from a causal perspective we'll start by defining the causal dag
-[0:03:33] we'll start by defining the causal dag or directed acyclic graph and i think
-[0:03:35] or directed acyclic graph and i think most people here know that the dag is a
-[0:03:37] most people here know that the dag is a graph where the solid arrows encode
-[0:03:39] graph where the solid arrows encode causal relationships between variables
-[0:03:41] causal relationships between variables shaded nodes on the graph mean that the
-[0:03:43] shaded nodes on the graph mean that the variable is observed white nodes are
-[0:03:45] variable is observed white nodes are unobserved
-[0:03:46] unobserved we've already introduced x y and v
-[0:03:49] we've already introduced x y and v the new variable here is x star and we
-[0:03:52] the new variable here is x star and we see that the main label affects the
-[0:03:54] see that the main label affects the image x through this x star and you can
-[0:03:56] image x through this x star and you can sort of intuitively think about this x
-[0:03:58] sort of intuitively think about this x star as the spots of the cow or the
-[0:04:00] star as the spots of the cow or the mouth of the camel
-[0:04:02] mouth of the camel the other thing we'll see here is that
-[0:04:04] the other thing we'll see here is that there is a dashed bi-directional arrow
-[0:04:06] there is a dashed bi-directional arrow that shows that the two variables are
-[0:04:08] that shows that the two variables are correlated but not causally related
-[0:04:11] correlated but not causally related and what we want is a predictor that is
-[0:04:13] and what we want is a predictor that is invariant to any correlation between v
-[0:04:15] invariant to any correlation between v and y
+[0:03:28] problem from a causal perspective
+[0:03:30] we'll start by defining the causal dag
+[0:03:33] or directed acyclic graph and i think
+[0:03:35] most people here know that the dag is a
+[0:03:37] graph where the solid arrows encode
+[0:03:39] causal relationships between variables
+[0:03:41] shaded nodes on the graph mean that the
+[0:03:43] variable is observed white nodes are
+[0:03:45] unobserved
+[0:03:46] we've already introduced x y and v
+[0:03:49] the new variable here is x star and we
+[0:03:52] see that the main label affects the
+[0:03:54] image x through this x star and you can
+[0:03:56] sort of intuitively think about this x
+[0:03:58] star as the spots of the cow or the
+[0:04:00] mouth of the camel
+[0:04:02] the other thing we'll see here is that
+[0:04:04] there is a dashed bi-directional arrow
+[0:04:06] that shows that the two variables are
+[0:04:08] correlated but not causally related
+[0:04:11] and what we want is a predictor that is
+[0:04:13] invariant to any correlation between v
 [0:04:17] and y to define things a bit more formally we
-[0:04:19] to define things a bit more formally we have a source distribution ps and we
-[0:04:21] have a source distribution ps and we want a predictor f which is the
-[0:04:23] want a predictor f which is the composition of a learned representation
-[0:04:25] composition of a learned representation p and the final classification or
-[0:04:28] p and the final classification or classifier h
-[0:04:30] classifier h and we want this f to be accurate and we
-[0:04:32] and we want this f to be accurate and we want it to have the same performance
-[0:04:35] want it to have the same performance across all members of this family of
-[0:04:37] across all members of this family of target distributions
-[0:04:39] target distributions members of this family are the same as
-[0:04:41] members of this family are the same as the source distribution except that they
-[0:04:44] the source distribution except that they have different correlations between b
-[0:04:46] have different correlations between b and y
+[0:04:19] have a source distribution ps and we
+[0:04:21] want a predictor f which is the
+[0:04:23] composition of a learned representation
+[0:04:25] p and the final classification or
+[0:04:28] classifier h
+[0:04:30] and we want this f to be accurate and we
+[0:04:32] want it to have the same performance
+[0:04:35] across all members of this family of
+[0:04:37] target distributions
+[0:04:39] members of this family are the same as
+[0:04:41] the source distribution except that they
+[0:04:44] have different correlations between b
 [0:04:48] and y so the first advantage that we can get
-[0:04:51] so the first advantage that we can get um by looking at the problem through the
-[0:04:53] um by looking at the problem through the causal lens is that this allows us to
-[0:04:55] causal lens is that this allows us to define a set of naturally occurring
-[0:04:58] define a set of naturally occurring distribution shifts that we want to be
-[0:05:00] distribution shifts that we want to be robust against and sort of should be
-[0:05:02] robust against and sort of should be robust against
-[0:05:04] robust against so what we've just seen is that looking
-[0:05:06] so what we've just seen is that looking at the prediction problem from the
-[0:05:08] at the prediction problem from the causal perspective allows us to define a
-[0:05:10] causal perspective allows us to define a set of distributions that we should be
-[0:05:12] set of distributions that we should be robust against
-[0:05:13] robust against and next we're going to um look at this
-[0:05:16] and next we're going to um look at this problem as defined through the causal
-[0:05:18] problem as defined through the causal lens and now we're going to look at like
-[0:05:20] lens and now we're going to look at like the solution as defined through the
-[0:05:21] the solution as defined through the causal lens as well and the first thing
-[0:05:24] causal lens as well and the first thing that we are going to arrive at is an
-[0:05:26] that we are going to arrive at is an asymptotic argument
-[0:05:28] asymptotic argument what we found is that there exists an
-[0:05:30] what we found is that there exists an ideal distribution where this
-[0:05:32] ideal distribution where this correlation between v and y does not
-[0:05:34] correlation between v and y does not exist so you'll see here that the
-[0:05:36] exist so you'll see here that the bi-directional arrow between y and v is
-[0:05:39] bi-directional arrow between y and v is no longer in the dag
-[0:05:40] no longer in the dag and we'll call this distribution p
-[0:05:42] and we'll call this distribution p circle
+[0:04:51] um by looking at the problem through the
+[0:04:53] causal lens is that this allows us to
+[0:04:55] define a set of naturally occurring
+[0:04:58] distribution shifts that we want to be
+[0:05:00] robust against and sort of should be
+[0:05:02] robust against
+[0:05:04] so what we've just seen is that looking
+[0:05:06] at the prediction problem from the
+[0:05:08] causal perspective allows us to define a
+[0:05:10] set of distributions that we should be
+[0:05:12] robust against
+[0:05:13] and next we're going to um look at this
+[0:05:16] problem as defined through the causal
+[0:05:18] lens and now we're going to look at like
+[0:05:20] the solution as defined through the
+[0:05:21] causal lens as well and the first thing
+[0:05:24] that we are going to arrive at is an
+[0:05:26] asymptotic argument
+[0:05:28] what we found is that there exists an
+[0:05:30] ideal distribution where this
+[0:05:32] correlation between v and y does not
+[0:05:34] exist so you'll see here that the
+[0:05:36] bi-directional arrow between y and v is
+[0:05:39] no longer in the dag
+[0:05:40] and we'll call this distribution p
 [0:05:43] circle so intuitively this is the distribution
-[0:05:45] so intuitively this is the distribution where you're equally likely to observe a
-[0:05:47] where you're equally likely to observe a cow on sand or grass
-[0:05:49] cow on sand or grass if our source distribution
-[0:05:51] if our source distribution is this ideal distribution p circle our
-[0:05:54] is this ideal distribution p circle our estimator what we found is that our
-[0:05:56] estimator what we found is that our estimator is robust asymptotically
-[0:05:59] estimator is robust asymptotically and very briefly this is sort of easy to
-[0:06:02] and very briefly this is sort of easy to prove because you'll notice that there's
-[0:06:03] prove because you'll notice that there's no back door between x and y where that
-[0:06:06] no back door between x and y where that x star d separates those two variables
-[0:06:09] x star d separates those two variables and i think this this crowd will also
-[0:06:11] and i think this this crowd will also appreciate the fact that this
-[0:06:13] appreciate the fact that this distribution is sort of similar in
-[0:06:15] distribution is sort of similar in spirit to the distribution of a
-[0:06:16] spirit to the distribution of a randomized control trial
-[0:06:18] randomized control trial because it has some nice independencies
-[0:06:20] because it has some nice independencies that lead to unbiased estimators
-[0:06:23] that lead to unbiased estimators okay so we have a nice asymptotic
-[0:06:26] okay so we have a nice asymptotic property for robustness we want to go
-[0:06:28] property for robustness we want to go ahead and look at the finite sample
-[0:06:30] ahead and look at the finite sample efficiency
-[0:06:31] efficiency specifically for the first couple of
-[0:06:32] specifically for the first couple of slides we'll assume that we've sort of
-[0:06:35] slides we'll assume that we've sort of hit jackpot and that we've sampled from
-[0:06:37] hit jackpot and that we've sampled from the ideal distribution where we're
-[0:06:39] the ideal distribution where we're equally likely to observe a cow on grass
-[0:06:41] equally likely to observe a cow on grass or on sand
-[0:06:43] or on sand we should perhaps like start by asking
-[0:06:46] we should perhaps like start by asking what um what kind of finite sample
-[0:06:48] what um what kind of finite sample results do we want
-[0:06:50] results do we want what we really want to know is how does
-[0:06:53] what we really want to know is how does the risk and the observed data from some
-[0:06:55] the risk and the observed data from some source distribution relate to the risk
-[0:06:58] source distribution relate to the risk on any unseen target distribution
-[0:07:01] on any unseen target distribution and we'll use r with a subscript pt to
-[0:07:04] and we'll use r with a subscript pt to denote the unseen risk or unseen error
-[0:07:06] denote the unseen risk or unseen error on a distribution uh pt
-[0:07:09] on a distribution uh pt and this is the probability of
-[0:07:10] and this is the probability of misclassifying an example
-[0:07:13] misclassifying an example and we'll compare that to the error we
-[0:07:16] and we'll compare that to the error we are minimizing at training time which we
-[0:07:18] are minimizing at training time which we denote by r hat and since we're assuming
-[0:07:20] denote by r hat and since we're assuming that we're
-[0:07:21] that we're sampling the training data from the
-[0:07:23] sampling the training data from the ideal distribution we're going to index
-[0:07:26] ideal distribution we're going to index that r hat with p circle
-[0:07:28] that r hat with p circle and i'll refer to this difference as the
-[0:07:30] and i'll refer to this difference as the generalization gap
-[0:07:32] generalization gap ideally we want the difference between
-[0:07:34] ideally we want the difference between the two to be as small as possible and
-[0:07:37] the two to be as small as possible and that would mean that minimizing the
-[0:07:38] that would mean that minimizing the training error also minimizes the risk
-[0:07:40] training error also minimizes the risk that we care about
-[0:07:42] that we care about and of course we can't empirically
-[0:07:44] and of course we can't empirically estimate this difference because we
-[0:07:45] estimate this difference because we never observe the expected risk which is
-[0:07:48] never observe the expected risk which is the first term here
-[0:07:49] the first term here so even if the just to really drive this
-[0:07:52] so even if the just to really drive this home even if the test data is sampled
-[0:07:54] home even if the test data is sampled from the same distribution as the one
-[0:07:56] from the same distribution as the one that we observe at training time we
-[0:07:58] that we observe at training time we still would not be able to estimate this
-[0:08:00] still would not be able to estimate this difference
-[0:08:01] difference so the best that we can do is to give
-[0:08:03] so the best that we can do is to give some theoretical bound and the smaller
-[0:08:05] some theoretical bound and the smaller that difference is for the smaller that
-[0:08:07] that difference is for the smaller that we theorize the differences the better
-[0:08:09] we theorize the differences the better off we are
-[0:08:10] off we are so if we say that this question mark is
-[0:08:12] so if we say that this question mark is a small term then we are in a better
-[0:08:14] a small term then we are in a better place
+[0:05:45] where you're equally likely to observe a
+[0:05:47] cow on sand or grass
+[0:05:49] if our source distribution
+[0:05:51] is this ideal distribution p circle our
+[0:05:54] estimator what we found is that our
+[0:05:56] estimator is robust asymptotically
+[0:05:59] and very briefly this is sort of easy to
+[0:06:02] prove because you'll notice that there's
+[0:06:03] no back door between x and y where that
+[0:06:06] x star d separates those two variables
+[0:06:09] and i think this this crowd will also
+[0:06:11] appreciate the fact that this
+[0:06:13] distribution is sort of similar in
+[0:06:15] spirit to the distribution of a
+[0:06:16] randomized control trial
+[0:06:18] because it has some nice independencies
+[0:06:20] that lead to unbiased estimators
+[0:06:23] okay so we have a nice asymptotic
+[0:06:26] property for robustness we want to go
+[0:06:28] ahead and look at the finite sample
+[0:06:30] efficiency
+[0:06:31] specifically for the first couple of
+[0:06:32] slides we'll assume that we've sort of
+[0:06:35] hit jackpot and that we've sampled from
+[0:06:37] the ideal distribution where we're
+[0:06:39] equally likely to observe a cow on grass
+[0:06:41] or on sand
+[0:06:43] we should perhaps like start by asking
+[0:06:46] what um what kind of finite sample
+[0:06:48] results do we want
+[0:06:50] what we really want to know is how does
+[0:06:53] the risk and the observed data from some
+[0:06:55] source distribution relate to the risk
+[0:06:58] on any unseen target distribution
+[0:07:01] and we'll use r with a subscript pt to
+[0:07:04] denote the unseen risk or unseen error
+[0:07:06] on a distribution uh pt
+[0:07:09] and this is the probability of
+[0:07:10] misclassifying an example
+[0:07:13] and we'll compare that to the error we
+[0:07:16] are minimizing at training time which we
+[0:07:18] denote by r hat and since we're assuming
+[0:07:20] that we're
+[0:07:21] sampling the training data from the
+[0:07:23] ideal distribution we're going to index
+[0:07:26] that r hat with p circle
+[0:07:28] and i'll refer to this difference as the
+[0:07:30] generalization gap
+[0:07:32] ideally we want the difference between
+[0:07:34] the two to be as small as possible and
+[0:07:37] that would mean that minimizing the
+[0:07:38] training error also minimizes the risk
+[0:07:40] that we care about
+[0:07:42] and of course we can't empirically
+[0:07:44] estimate this difference because we
+[0:07:45] never observe the expected risk which is
+[0:07:48] the first term here
+[0:07:49] so even if the just to really drive this
+[0:07:52] home even if the test data is sampled
+[0:07:54] from the same distribution as the one
+[0:07:56] that we observe at training time we
+[0:07:58] still would not be able to estimate this
+[0:08:00] difference
+[0:08:01] so the best that we can do is to give
+[0:08:03] some theoretical bound and the smaller
+[0:08:05] that difference is for the smaller that
+[0:08:07] we theorize the differences the better
+[0:08:09] off we are
+[0:08:10] so if we say that this question mark is
+[0:08:12] a small term then we are in a better
 [0:08:16] place to analyze this generalization gap we
-[0:08:18] to analyze this generalization gap we did this fun thing where we add and
-[0:08:20] did this fun thing where we add and subtract by the same value in here we
-[0:08:23] subtract by the same value in here we added and subtracted
-[0:08:24] added and subtracted the unseen risk on the same distribution
-[0:08:27] the unseen risk on the same distribution as the training distribution
-[0:08:28] as the training distribution and this allows us to separate different
-[0:08:30] and this allows us to separate different components of the generalization gap
-[0:08:32] components of the generalization gap that we can then analyze separately
-[0:08:35] that we can then analyze separately the first component is the structural
-[0:08:37] the first component is the structural risk gap
+[0:08:18] did this fun thing where we add and
+[0:08:20] subtract by the same value in here we
+[0:08:23] added and subtracted
+[0:08:24] the unseen risk on the same distribution
+[0:08:27] as the training distribution
+[0:08:28] and this allows us to separate different
+[0:08:30] components of the generalization gap
+[0:08:32] that we can then analyze separately
+[0:08:35] the first component is the structural
 [0:08:39] risk gap and this tells us how much of our
-[0:08:40] and this tells us how much of our generalization gap is coming from the
-[0:08:42] generalization gap is coming from the fact that we're training on one
-[0:08:44] fact that we're training on one distribution that is the circle and then
-[0:08:46] distribution that is the circle and then testing on another distribution that is
-[0:08:49] testing on another distribution that is some pt from the family of distributions
-[0:08:51] some pt from the family of distributions that we want to be robust against
-[0:08:54] that we want to be robust against the second comp the component in this
-[0:08:56] the second comp the component in this gap is due to the fact that we're
-[0:08:58] gap is due to the fact that we're learning from limited data and this is
-[0:09:00] learning from limited data and this is sort of the usual generalization gap
-[0:09:02] sort of the usual generalization gap that you see and enter to statistical
-[0:09:03] that you see and enter to statistical learning theory um and it will depend
-[0:09:06] learning theory um and it will depend largely on the complexity of the
-[0:09:08] largely on the complexity of the function class we are considering
-[0:09:10] function class we are considering and we're going to go through those two
-[0:09:12] and we're going to go through those two terms but
+[0:08:40] generalization gap is coming from the
+[0:08:42] fact that we're training on one
+[0:08:44] distribution that is the circle and then
+[0:08:46] testing on another distribution that is
+[0:08:49] some pt from the family of distributions
+[0:08:51] that we want to be robust against
+[0:08:54] the second comp the component in this
+[0:08:56] gap is due to the fact that we're
+[0:08:58] learning from limited data and this is
+[0:09:00] sort of the usual generalization gap
+[0:09:02] that you see and enter to statistical
+[0:09:03] learning theory um and it will depend
+[0:09:06] largely on the complexity of the
+[0:09:08] function class we are considering
+[0:09:10] and we're going to go through those two
 [0:09:14] terms but um in order to do that we're going to
-[0:09:16] um in order to do that we're going to need some way to measure distances
-[0:09:18] need some way to measure distances between distributions that will prove to
-[0:09:20] between distributions that will prove to be useful in our theory
-[0:09:23] be useful in our theory what we're going to use to measure these
-[0:09:25] what we're going to use to measure these distances is the maximum mean
-[0:09:26] distances is the maximum mean discrepancy or mmd the mmd is just one
-[0:09:29] discrepancy or mmd the mmd is just one way to do this we use it because it made
-[0:09:31] way to do this we use it because it made for elegant math but it's likely the
-[0:09:33] for elegant math but it's likely the case that you can use things like
-[0:09:35] case that you can use things like wasserstein distances and other things
-[0:09:37] wasserstein distances and other things can probably be used here
-[0:09:40] can probably be used here the mmd measures how dissimilar two
-[0:09:41] the mmd measures how dissimilar two distributions are by measuring the
-[0:09:43] distributions are by measuring the distance between them in some embedding
-[0:09:45] distance between them in some embedding space omega
-[0:09:47] space omega and we will take that embedding space to
-[0:09:49] and we will take that embedding space to be
+[0:09:16] need some way to measure distances
+[0:09:18] between distributions that will prove to
+[0:09:20] be useful in our theory
+[0:09:23] what we're going to use to measure these
+[0:09:25] distances is the maximum mean
+[0:09:26] discrepancy or mmd the mmd is just one
+[0:09:29] way to do this we use it because it made
+[0:09:31] for elegant math but it's likely the
+[0:09:33] case that you can use things like
+[0:09:35] wasserstein distances and other things
+[0:09:37] can probably be used here
+[0:09:40] the mmd measures how dissimilar two
+[0:09:41] distributions are by measuring the
+[0:09:43] distance between them in some embedding
+[0:09:45] space omega
+[0:09:47] and we will take that embedding space to
 [0:09:50] be the rkhs or the reproducing kernel
-[0:09:52] the rkhs or the reproducing kernel hilbert space
-[0:09:53] hilbert space um we made that choice because because
-[0:09:55] um we made that choice because because it gave us some nice unbiased estimators
-[0:09:57] it gave us some nice unbiased estimators and sort of nice non-parametric flexible
-[0:10:01] and sort of nice non-parametric flexible so it was that was a good choice
-[0:10:03] so it was that was a good choice um what what this math is telling us is
-[0:10:06] um what what this math is telling us is that the way we compute the mmd is by
-[0:10:08] that the way we compute the mmd is by picking the embedding function that
-[0:10:10] picking the embedding function that maximizes the difference between the two
-[0:10:12] maximizes the difference between the two distributions and then you estimate the
-[0:10:14] distributions and then you estimate the norm in that
-[0:10:15] norm in that under that sort of embedding function
-[0:10:18] under that sort of embedding function and specifically in this work we'll be
-[0:10:20] and specifically in this work we'll be looking at how the similar are the
-[0:10:22] looking at how the similar are the distributions of the representations of
-[0:10:25] distributions of the representations of images with sand backgrounds and images
-[0:10:27] images with sand backgrounds and images with grass backgrounds and i will use
-[0:10:30] with grass backgrounds and i will use this p with a subscript v0 to denote the
-[0:10:33] this p with a subscript v0 to denote the representation or rather the
-[0:10:34] representation or rather the distribution over the representation for
-[0:10:36] distribution over the representation for images with backgrounds and similarly
-[0:10:39] images with backgrounds and similarly we'll use p with a subscript v1
-[0:10:42] we'll use p with a subscript v1 to denote the representations of the
-[0:10:44] to denote the representations of the sand backgrounds
-[0:10:46] sand backgrounds and we want those two distributions over
-[0:10:49] and we want those two distributions over the the two representations to be
-[0:10:51] the the two representations to be similar
+[0:09:52] hilbert space
+[0:09:53] um we made that choice because because
+[0:09:55] it gave us some nice unbiased estimators
+[0:09:57] and sort of nice non-parametric flexible
+[0:10:01] so it was that was a good choice
+[0:10:03] um what what this math is telling us is
+[0:10:06] that the way we compute the mmd is by
+[0:10:08] picking the embedding function that
+[0:10:10] maximizes the difference between the two
+[0:10:12] distributions and then you estimate the
+[0:10:14] norm in that
+[0:10:15] under that sort of embedding function
+[0:10:18] and specifically in this work we'll be
+[0:10:20] looking at how the similar are the
+[0:10:22] distributions of the representations of
+[0:10:25] images with sand backgrounds and images
+[0:10:27] with grass backgrounds and i will use
+[0:10:30] this p with a subscript v0 to denote the
+[0:10:33] representation or rather the
+[0:10:34] distribution over the representation for
+[0:10:36] images with backgrounds and similarly
+[0:10:39] we'll use p with a subscript v1
+[0:10:42] to denote the representations of the
+[0:10:44] sand backgrounds
+[0:10:46] and we want those two distributions over
+[0:10:49] the the two representations to be
 [0:10:52] similar intuitively if they are dissimilar then
-[0:10:54] intuitively if they are dissimilar then the representation encodes information
-[0:10:56] the representation encodes information about the shortcut that is the
-[0:10:58] about the shortcut that is the background so it's no good
-[0:11:00] background so it's no good so to give you a visual um the two plots
-[0:11:02] so to give you a visual um the two plots on the bottom of the slide here show you
-[0:11:05] on the bottom of the slide here show you the values of a one-dimensional
-[0:11:07] the values of a one-dimensional representation on the x-axis
-[0:11:09] representation on the x-axis and the y-axis shows the two probability
-[0:11:12] and the y-axis shows the two probability distributions that correspond to them
-[0:11:15] distributions that correspond to them the plot on the left shows two
-[0:11:17] the plot on the left shows two distributions that are relatively
-[0:11:18] distributions that are relatively similar to each other so their mmd is
-[0:11:20] similar to each other so their mmd is small the one on the right shows two
-[0:11:23] small the one on the right shows two distributions that are dissimilar so
-[0:11:25] distributions that are dissimilar so their mmd is sort of large
-[0:11:28] their mmd is sort of large um that was sort of the end of a sidebar
-[0:11:30] um that was sort of the end of a sidebar or a tangent where we defined measures
-[0:11:33] or a tangent where we defined measures on distributions uh let's go back to our
-[0:11:35] on distributions uh let's go back to our problem
+[0:10:54] the representation encodes information
+[0:10:56] about the shortcut that is the
+[0:10:58] background so it's no good
+[0:11:00] so to give you a visual um the two plots
+[0:11:02] on the bottom of the slide here show you
+[0:11:05] the values of a one-dimensional
+[0:11:07] representation on the x-axis
+[0:11:09] and the y-axis shows the two probability
+[0:11:12] distributions that correspond to them
+[0:11:15] the plot on the left shows two
+[0:11:17] distributions that are relatively
+[0:11:18] similar to each other so their mmd is
+[0:11:20] small the one on the right shows two
+[0:11:23] distributions that are dissimilar so
+[0:11:25] their mmd is sort of large
+[0:11:28] um that was sort of the end of a sidebar
+[0:11:30] or a tangent where we defined measures
+[0:11:33] on distributions uh let's go back to our
 [0:11:36] problem remember that what we want is to bound
-[0:11:38] remember that what we want is to bound the difference between the empirical
-[0:11:40] the difference between the empirical error that we observe at training time
-[0:11:42] error that we observe at training time on data sampled from the ideal
-[0:11:43] on data sampled from the ideal distribution versus the unseen risk on
-[0:11:46] distribution versus the unseen risk on an unknown target distribution
-[0:11:49] an unknown target distribution and we broke that down into two terms
-[0:11:52] and we broke that down into two terms we'll start by looking at the structural
-[0:11:54] we'll start by looking at the structural risk yet
+[0:11:38] the difference between the empirical
+[0:11:40] error that we observe at training time
+[0:11:42] on data sampled from the ideal
+[0:11:43] distribution versus the unseen risk on
+[0:11:46] an unknown target distribution
+[0:11:49] and we broke that down into two terms
+[0:11:52] we'll start by looking at the structural
 [0:11:55] risk yet and what we found is that the structural
-[0:11:58] and what we found is that the structural risk gap can be bounded by the value of
-[0:12:00] risk gap can be bounded by the value of the mmp so when the mmd between the
-[0:12:03] the mmp so when the mmd between the distribution of the representations of
-[0:12:05] distribution of the representations of sand images and the distribution of the
-[0:12:07] sand images and the distribution of the representation of grass images is less
-[0:12:10] representation of grass images is less than some value tau
-[0:12:11] than some value tau the difference between the risk on the
-[0:12:13] the difference between the risk on the target distribution and the risk on the
-[0:12:15] target distribution and the risk on the ideal distribution is less than two tau
-[0:12:18] ideal distribution is less than two tau remember that in order to get good
-[0:12:20] remember that in order to get good models that generalize well we want the
-[0:12:22] models that generalize well we want the structural risk gap to be small
-[0:12:25] structural risk gap to be small so the smaller this tau the better
-[0:12:27] so the smaller this tau the better and if you're sort of starting to think
-[0:12:29] and if you're sort of starting to think oh a good objective should minimize this
-[0:12:31] oh a good objective should minimize this mmd you are thinking of the rate
-[0:12:35] mmd you are thinking of the rate so that was the first term in our
-[0:12:36] so that was the first term in our generalization gap let's look at the
-[0:12:38] generalization gap let's look at the learning gap which is the second
-[0:12:40] learning gap which is the second component of the generalization gap and
-[0:12:42] component of the generalization gap and remember that the learning gap is the
-[0:12:44] remember that the learning gap is the part of the generalization gap that is
-[0:12:46] part of the generalization gap that is due to the fact that we are learning
-[0:12:48] due to the fact that we are learning from limited data
-[0:12:51] from limited data and what we found is that by imposing an
-[0:12:53] and what we found is that by imposing an mmd penalty in our learning objective
-[0:12:57] mmd penalty in our learning objective which implicitly encourages our model to
-[0:12:59] which implicitly encourages our model to encode independencies implied by the dag
-[0:13:02] encode independencies implied by the dag this leads to more efficient estimators
-[0:13:04] this leads to more efficient estimators without introducing bias we'll look in a
-[0:13:07] without introducing bias we'll look in a second at how exactly we sort of
-[0:13:09] second at how exactly we sort of implement or enforce that penalty but
-[0:13:11] implement or enforce that penalty but before getting there what does this
-[0:13:13] before getting there what does this proposition like really mean
-[0:13:16] proposition like really mean think of a simple example where we have
-[0:13:18] think of a simple example where we have two features the first one affects the
-[0:13:20] two features the first one affects the value of the auxiliary label v and the
-[0:13:23] value of the auxiliary label v and the other affects the value of the main
-[0:13:25] other affects the value of the main label y
+[0:11:58] risk gap can be bounded by the value of
+[0:12:00] the mmp so when the mmd between the
+[0:12:03] distribution of the representations of
+[0:12:05] sand images and the distribution of the
+[0:12:07] representation of grass images is less
+[0:12:10] than some value tau
+[0:12:11] the difference between the risk on the
+[0:12:13] target distribution and the risk on the
+[0:12:15] ideal distribution is less than two tau
+[0:12:18] remember that in order to get good
+[0:12:20] models that generalize well we want the
+[0:12:22] structural risk gap to be small
+[0:12:25] so the smaller this tau the better
+[0:12:27] and if you're sort of starting to think
+[0:12:29] oh a good objective should minimize this
+[0:12:31] mmd you are thinking of the rate
+[0:12:35] so that was the first term in our
+[0:12:36] generalization gap let's look at the
+[0:12:38] learning gap which is the second
+[0:12:40] component of the generalization gap and
+[0:12:42] remember that the learning gap is the
+[0:12:44] part of the generalization gap that is
+[0:12:46] due to the fact that we are learning
+[0:12:48] from limited data
+[0:12:51] and what we found is that by imposing an
+[0:12:53] mmd penalty in our learning objective
+[0:12:57] which implicitly encourages our model to
+[0:12:59] encode independencies implied by the dag
+[0:13:02] this leads to more efficient estimators
+[0:13:04] without introducing bias we'll look in a
+[0:13:07] second at how exactly we sort of
+[0:13:09] implement or enforce that penalty but
+[0:13:11] before getting there what does this
+[0:13:13] proposition like really mean
+[0:13:16] think of a simple example where we have
+[0:13:18] two features the first one affects the
+[0:13:20] value of the auxiliary label v and the
+[0:13:23] other affects the value of the main
 [0:13:26] label y and again to keep things simple suppose
-[0:13:29] and again to keep things simple suppose we're only considering linear
-[0:13:30] we're only considering linear representations fee and the final
-[0:13:32] representations fee and the final classifier is just a sigmoid
-[0:13:34] classifier is just a sigmoid transformation
-[0:13:35] transformation spoiler this is basically a logistic
-[0:13:38] spoiler this is basically a logistic regression
-[0:13:39] regression so
+[0:13:29] we're only considering linear
+[0:13:30] representations fee and the final
+[0:13:32] classifier is just a sigmoid
+[0:13:34] transformation
+[0:13:35] spoiler this is basically a logistic
+[0:13:38] regression
 [0:13:40] so we know that the optimal weights wv are
-[0:13:43] we know that the optimal weights wv are zero so the real function space that we
-[0:13:46] zero so the real function space that we want to consider
-[0:13:47] want to consider is this one which allows wy to take on
-[0:13:51] is this one which allows wy to take on non-zero values but it sets wv to be
-[0:13:54] non-zero values but it sets wv to be zero
+[0:13:43] zero so the real function space that we
+[0:13:46] want to consider
+[0:13:47] is this one which allows wy to take on
+[0:13:51] non-zero values but it sets wv to be
 [0:13:56] zero so what happens if we decide to do l2
-[0:13:58] so what happens if we decide to do l2 regularization if we do that our
-[0:14:00] regularization if we do that our candidate function space becomes this
-[0:14:02] candidate function space becomes this yellow circle
-[0:14:04] yellow circle and instead what we're going to do
-[0:14:06] and instead what we're going to do we're going to enforce this causally
-[0:14:08] we're going to enforce this causally motivated regularization that penalizes
-[0:14:11] motivated regularization that penalizes the learned representations that encode
-[0:14:14] the learned representations that encode information about v
-[0:14:15] information about v and in doing so we reduce the complexity
-[0:14:18] and in doing so we reduce the complexity of the function class that we are
-[0:14:19] of the function class that we are considering
-[0:14:21] considering so by imposing this independence penalty
-[0:14:24] so by imposing this independence penalty or like this causally motivated
-[0:14:25] or like this causally motivated independent independence penalty we can
-[0:14:27] independent independence penalty we can reduce the function space to something
-[0:14:29] reduce the function space to something that roughly speaking looks like this
-[0:14:31] that roughly speaking looks like this blue
+[0:13:58] regularization if we do that our
+[0:14:00] candidate function space becomes this
+[0:14:02] yellow circle
+[0:14:04] and instead what we're going to do
+[0:14:06] we're going to enforce this causally
+[0:14:08] motivated regularization that penalizes
+[0:14:11] the learned representations that encode
+[0:14:14] information about v
+[0:14:15] and in doing so we reduce the complexity
+[0:14:18] of the function class that we are
+[0:14:19] considering
+[0:14:21] so by imposing this independence penalty
+[0:14:24] or like this causally motivated
+[0:14:25] independent independence penalty we can
+[0:14:27] reduce the function space to something
+[0:14:29] that roughly speaking looks like this
 [0:14:32] blue this penalty allows us to reduce the
-[0:14:34] this penalty allows us to reduce the hypothesis space without introducing
-[0:14:37] hypothesis space without introducing bias which then translates into smaller
-[0:14:39] bias which then translates into smaller learning gap
-[0:14:41] learning gap so this means that causally motivated
-[0:14:43] so this means that causally motivated regularization schemes give us not only
-[0:14:46] regularization schemes give us not only robustness but also finite sample
-[0:14:48] robustness but also finite sample efficiency and i think this was sort of
-[0:14:50] efficiency and i think this was sort of one of the big
-[0:14:51] one of the big key takeaways at least for me in this
-[0:14:53] key takeaways at least for me in this work is that we not only are gaining
-[0:14:55] work is that we not only are gaining robustness but we are also gaining
-[0:14:56] robustness but we are also gaining efficiency when we try to build models
-[0:14:59] efficiency when we try to build models that conform to the causal debt
-[0:15:02] that conform to the causal debt so in the actual paper we'll talk about
-[0:15:04] so in the actual paper we'll talk about this more formally and we show the upper
-[0:15:06] this more formally and we show the upper bound on the rottermocker complexity of
-[0:15:08] bound on the rottermocker complexity of this causally motivated or causally
-[0:15:11] this causally motivated or causally regularized function space is smaller
-[0:15:13] regularized function space is smaller and the smaller the tau is the smaller
-[0:15:16] and the smaller the tau is the smaller our mmd is the better off we are
-[0:15:19] our mmd is the better off we are so to quickly recap this part of the
-[0:15:22] so to quickly recap this part of the finite sample analysis we found that
-[0:15:24] finite sample analysis we found that when sampling from the ideal
-[0:15:27] when sampling from the ideal distribution estimators that we learned
-[0:15:29] distribution estimators that we learned there have a smaller mmd
-[0:15:32] there have a smaller mmd or rather the ones that have a smaller
-[0:15:34] or rather the ones that have a smaller mmd also have a smaller generalization
-[0:15:37] mmd also have a smaller generalization gap
+[0:14:34] hypothesis space without introducing
+[0:14:37] bias which then translates into smaller
+[0:14:39] learning gap
+[0:14:41] so this means that causally motivated
+[0:14:43] regularization schemes give us not only
+[0:14:46] robustness but also finite sample
+[0:14:48] efficiency and i think this was sort of
+[0:14:50] one of the big
+[0:14:51] key takeaways at least for me in this
+[0:14:53] work is that we not only are gaining
+[0:14:55] robustness but we are also gaining
+[0:14:56] efficiency when we try to build models
+[0:14:59] that conform to the causal debt
+[0:15:02] so in the actual paper we'll talk about
+[0:15:04] this more formally and we show the upper
+[0:15:06] bound on the rottermocker complexity of
+[0:15:08] this causally motivated or causally
+[0:15:11] regularized function space is smaller
+[0:15:13] and the smaller the tau is the smaller
+[0:15:16] our mmd is the better off we are
+[0:15:19] so to quickly recap this part of the
+[0:15:22] finite sample analysis we found that
+[0:15:24] when sampling from the ideal
+[0:15:27] distribution estimators that we learned
+[0:15:29] there have a smaller mmd
+[0:15:32] or rather the ones that have a smaller
+[0:15:34] mmd also have a smaller generalization
 [0:15:38] gap and remembers that remember that
-[0:15:40] and remembers that remember that estimators that have a smaller mmd more
-[0:15:42] estimators that have a smaller mmd more closely conform with the causal dag
-[0:15:44] closely conform with the causal dag since they don't encode spurious
-[0:15:46] since they don't encode spurious correlation
-[0:15:47] correlation so this makes us conclude that
-[0:15:50] so this makes us conclude that estimators which conform to the causal
-[0:15:52] estimators which conform to the causal bag are more efficient
-[0:15:54] bag are more efficient so this means that a reasonable strategy
-[0:15:56] so this means that a reasonable strategy here would be to say well let's
-[0:15:58] here would be to say well let's build models that force this or
-[0:16:00] build models that force this or encourage mmd to go to zero
-[0:16:03] encourage mmd to go to zero the challenge that we run into is that
-[0:16:05] the challenge that we run into is that none of this holds when the data is
-[0:16:07] none of this holds when the data is sampled from any distribution that is
-[0:16:08] sampled from any distribution that is not the ideal distribution
-[0:16:10] not the ideal distribution so you can actually introduce bias to
-[0:16:12] so you can actually introduce bias to your estimator if you push the mmd to
-[0:16:14] your estimator if you push the mmd to zero when your data is sampled from
-[0:16:17] zero when your data is sampled from non-ideal
+[0:15:40] estimators that have a smaller mmd more
+[0:15:42] closely conform with the causal dag
+[0:15:44] since they don't encode spurious
+[0:15:46] correlation
+[0:15:47] so this makes us conclude that
+[0:15:50] estimators which conform to the causal
+[0:15:52] bag are more efficient
+[0:15:54] so this means that a reasonable strategy
+[0:15:56] here would be to say well let's
+[0:15:58] build models that force this or
+[0:16:00] encourage mmd to go to zero
+[0:16:03] the challenge that we run into is that
+[0:16:05] none of this holds when the data is
+[0:16:07] sampled from any distribution that is
+[0:16:08] not the ideal distribution
+[0:16:10] so you can actually introduce bias to
+[0:16:12] your estimator if you push the mmd to
+[0:16:14] zero when your data is sampled from
 [0:16:18] non-ideal distributions
-[0:16:21] distributions so we turned again to ideas from
-[0:16:22] so we turned again to ideas from causality to address this issue
-[0:16:24] causality to address this issue in causality we see this a lot we we
-[0:16:27] in causality we see this a lot we we have a notion of an ideal distribution
-[0:16:29] have a notion of an ideal distribution which is the distribution of a
-[0:16:30] which is the distribution of a randomized control trial and we often
-[0:16:33] randomized control trial and we often re-weight the data to mimic the
-[0:16:35] re-weight the data to mimic the independencies that exist in a
-[0:16:36] independencies that exist in a randomized control trial
-[0:16:38] randomized control trial and we did something similar here where
-[0:16:40] and we did something similar here where we used weighting to map us onto a
-[0:16:43] we used weighting to map us onto a distribution that looks like the ideal
-[0:16:44] distribution that looks like the ideal distribution
-[0:16:46] distribution and this helps us recover the
-[0:16:47] and this helps us recover the independencies from the ideal data so
-[0:16:50] independencies from the ideal data so it's great but the caveat here is that
-[0:16:53] it's great but the caveat here is that um
+[0:16:21] so we turned again to ideas from
+[0:16:22] causality to address this issue
+[0:16:24] in causality we see this a lot we we
+[0:16:27] have a notion of an ideal distribution
+[0:16:29] which is the distribution of a
+[0:16:30] randomized control trial and we often
+[0:16:33] re-weight the data to mimic the
+[0:16:35] independencies that exist in a
+[0:16:36] randomized control trial
+[0:16:38] and we did something similar here where
+[0:16:40] we used weighting to map us onto a
+[0:16:43] distribution that looks like the ideal
+[0:16:44] distribution
+[0:16:46] and this helps us recover the
+[0:16:47] independencies from the ideal data so
+[0:16:50] it's great but the caveat here is that
 [0:16:54] um weighting leads to higher variance
-[0:16:56] weighting leads to higher variance estimators so we're not exactly at the
-[0:16:58] estimators so we're not exactly at the same place as we would have if we had
-[0:17:00] same place as we would have if we had sampled from the ideal data but we're
-[0:17:03] sampled from the ideal data but we're sort of like close enough
-[0:17:06] sort of like close enough all right so
-[0:17:07] all right so let's look at how all these insides
-[0:17:09] let's look at how all these insides translate into an objective to optimize
-[0:17:14] translate into an objective to optimize so our objective will be to minimize the
-[0:17:16] so our objective will be to minimize the weighted logistic loss and a penalty
-[0:17:18] weighted logistic loss and a penalty term
+[0:16:56] estimators so we're not exactly at the
+[0:16:58] same place as we would have if we had
+[0:17:00] sampled from the ideal data but we're
+[0:17:03] sort of like close enough
+[0:17:06] all right so
+[0:17:07] let's look at how all these insides
+[0:17:09] translate into an objective to optimize
+[0:17:14] so our objective will be to minimize the
+[0:17:16] weighted logistic loss and a penalty
 [0:17:19] term alpha here is a hybrid parameter that
-[0:17:21] alpha here is a hybrid parameter that we're going to pick during
-[0:17:23] we're going to pick during cross validation and this penalty term
-[0:17:26] cross validation and this penalty term is an estimate of the mmd
-[0:17:28] is an estimate of the mmd so if the mmd is zero
-[0:17:30] so if the mmd is zero that means that there is no information
-[0:17:32] that means that there is no information encoded about b or the shortcut um in
-[0:17:35] encoded about b or the shortcut um in the representation and that is a good
-[0:17:38] the representation and that is a good so the lower the mmd the better off we
-[0:17:40] so the lower the mmd the better off we are
+[0:17:21] we're going to pick during
+[0:17:23] cross validation and this penalty term
+[0:17:26] is an estimate of the mmd
+[0:17:28] so if the mmd is zero
+[0:17:30] that means that there is no information
+[0:17:32] encoded about b or the shortcut um in
+[0:17:35] the representation and that is a good
+[0:17:38] so the lower the mmd the better off we
 [0:17:41] are and when we define the mmd to be
-[0:17:43] and when we define the mmd to be the sort of family of bounded functions
-[0:17:45] the sort of family of bounded functions on rkhs we get this nice estimator where
-[0:17:49] on rkhs we get this nice estimator where k is the radial basis function
-[0:17:51] k is the radial basis function so this is really computing the norm in
-[0:17:53] so this is really computing the norm in rkhs or
+[0:17:43] the sort of family of bounded functions
+[0:17:45] on rkhs we get this nice estimator where
+[0:17:49] k is the radial basis function
+[0:17:51] so this is really computing the norm in
 [0:17:55] rkhs or rather to be more explicit it is the
-[0:17:57] rather to be more explicit it is the weighted norm in rkhs
-[0:18:00] weighted norm in rkhs so it's important to note that both this
-[0:18:02] so it's important to note that both this mmd and the logistic loss are weighted
-[0:18:05] mmd and the logistic loss are weighted by u which is the set of weights that we
-[0:18:07] by u which is the set of weights that we use to sort of like map us on to the
-[0:18:09] use to sort of like map us on to the ideal distribution otherwise we might
-[0:18:12] ideal distribution otherwise we might end up with a bias estimator that is
-[0:18:13] end up with a bias estimator that is sort of overly conservative in the way
-[0:18:16] sort of overly conservative in the way that it imposes these
-[0:18:17] that it imposes these in variance penalty
-[0:18:20] in variance penalty great so how does this all perform in
-[0:18:23] great so how does this all perform in practice
+[0:17:57] weighted norm in rkhs
+[0:18:00] so it's important to note that both this
+[0:18:02] mmd and the logistic loss are weighted
+[0:18:05] by u which is the set of weights that we
+[0:18:07] use to sort of like map us on to the
+[0:18:09] ideal distribution otherwise we might
+[0:18:12] end up with a bias estimator that is
+[0:18:13] sort of overly conservative in the way
+[0:18:16] that it imposes these
+[0:18:17] in variance penalty
+[0:18:20] great so how does this all perform in
 [0:18:25] practice we wanted a data set where we can
-[0:18:26] we wanted a data set where we can control the correlation between y and b
-[0:18:29] control the correlation between y and b both at training and test time so
-[0:18:31] both at training and test time so instead of using naturally occurring
-[0:18:33] instead of using naturally occurring images we simulated a data
-[0:18:36] images we simulated a data where we looked at images of land or
-[0:18:38] where we looked at images of land or water birds and superimposed them on
-[0:18:41] water birds and superimposed them on land or water backgrounds as you see in
-[0:18:43] land or water backgrounds as you see in the slides so it's really semi-simulated
+[0:18:26] control the correlation between y and b
+[0:18:29] both at training and test time so
+[0:18:31] instead of using naturally occurring
+[0:18:33] images we simulated a data
+[0:18:36] where we looked at images of land or
+[0:18:38] water birds and superimposed them on
+[0:18:41] land or water backgrounds as you see in
+[0:18:43] the slides so it's really semi-simulated
 [0:18:49] our task here is to predict whether the bird in the picture is a land or water
-[0:18:51] bird in the picture is a land or water bird so the main label
-[0:18:53] bird so the main label y is the type of bird
-[0:18:55] y is the type of bird and the auxiliary label b is a type of
-[0:18:58] and the auxiliary label b is a type of background
-[0:18:59] background it's either land or water
-[0:19:01] it's either land or water and we're going to fix the training or
-[0:19:03] and we're going to fix the training or source distribution and look at the
-[0:19:05] source distribution and look at the performance across many test
-[0:19:07] performance across many test distributions
-[0:19:10] distributions looking at the results we have on the
-[0:19:12] looking at the results we have on the x-axis is the correlation between the
-[0:19:14] x-axis is the correlation between the background label and the main label at
-[0:19:17] background label and the main label at test time
+[0:18:51] bird so the main label
+[0:18:53] y is the type of bird
+[0:18:55] and the auxiliary label b is a type of
+[0:18:58] background
+[0:18:59] it's either land or water
+[0:19:01] and we're going to fix the training or
+[0:19:03] source distribution and look at the
+[0:19:05] performance across many test
+[0:19:07] distributions
+[0:19:10] looking at the results we have on the
+[0:19:12] x-axis is the correlation between the
+[0:19:14] background label and the main label at
 [0:19:18] test time and this dashed line shows
-[0:19:20] and this dashed line shows where the training distribution is or
-[0:19:22] where the training distribution is or like the the conditional probability
-[0:19:25] like the the conditional probability during training time
-[0:19:27] during training time the y-axis will look at the auroc at
-[0:19:30] the y-axis will look at the auroc at test
+[0:19:20] where the training distribution is or
+[0:19:22] like the the conditional probability
+[0:19:25] during training time
+[0:19:27] the y-axis will look at the auroc at
 [0:19:31] test both our suggested approach and all the
-[0:19:34] both our suggested approach and all the benchmarks that i'm going to present are
-[0:19:36] benchmarks that i'm going to present are all resnets and we will compare our
-[0:19:39] all resnets and we will compare our model to an l2 regularized model so this
-[0:19:41] model to an l2 regularized model so this is simply a resnet where you add weight
-[0:19:43] is simply a resnet where you add weight decay
+[0:19:34] benchmarks that i'm going to present are
+[0:19:36] all resnets and we will compare our
+[0:19:39] model to an l2 regularized model so this
+[0:19:41] is simply a resnet where you add weight
 [0:19:45] decay and we also will look at wl2 is a
-[0:19:48] and we also will look at wl2 is a weighted l2 regularized model
-[0:19:50] weighted l2 regularized model which it uses the same weights that we
-[0:19:53] which it uses the same weights that we use but it doesn't have the mmd penalty
-[0:19:56] use but it doesn't have the mmd penalty and the final model is a model that does
-[0:19:58] and the final model is a model that does random occupations so it augments the
-[0:20:01] random occupations so it augments the data at training time by introducing
-[0:20:03] data at training time by introducing transformations such as random crops
-[0:20:06] transformations such as random crops rotation
+[0:19:48] weighted l2 regularized model
+[0:19:50] which it uses the same weights that we
+[0:19:53] use but it doesn't have the mmd penalty
+[0:19:56] and the final model is a model that does
+[0:19:58] random occupations so it augments the
+[0:20:01] data at training time by introducing
+[0:20:03] transformations such as random crops
 [0:20:08] rotation brightness
-[0:20:09] brightness sort of augment the data at trading time
-[0:20:12] sort of augment the data at trading time and what we see is that our approach has
-[0:20:14] and what we see is that our approach has a better auroc at every target or every
-[0:20:17] a better auroc at every target or every test distribution
-[0:20:19] test distribution i've also added results from a model
-[0:20:21] i've also added results from a model that enforces this mmd constraint or the
-[0:20:24] that enforces this mmd constraint or the invariance constraint without doing the
-[0:20:25] invariance constraint without doing the waiting scheme that we did
-[0:20:27] waiting scheme that we did and what this model is sort of doing is
-[0:20:30] and what this model is sort of doing is that it's it's blindly applying the mmd
-[0:20:32] that it's it's blindly applying the mmd constraint and what it does is it ends
-[0:20:35] constraint and what it does is it ends up being overly conservative it loses
-[0:20:37] up being overly conservative it loses information that we need to make good
-[0:20:39] information that we need to make good predictions
-[0:20:40] predictions but the general takeaway from the slide
-[0:20:42] but the general takeaway from the slide is that building models that are
-[0:20:44] is that building models that are consistent with causal structure leads
-[0:20:46] consistent with causal structure leads to robustness to distributions
-[0:20:49] to robustness to distributions but this next part is the part that was
-[0:20:51] but this next part is the part that was somewhat surprising to me um when i sort
-[0:20:54] somewhat surprising to me um when i sort of like went through this project um
-[0:20:56] of like went through this project um though it is confirmed by the theory
-[0:20:58] though it is confirmed by the theory that i um just presented
-[0:21:00] that i um just presented we redid this experiment and we looked
-[0:21:03] we redid this experiment and we looked at data that was sampled from the ideal
-[0:21:05] at data that was sampled from the ideal distribution so you see this dashed line
-[0:21:07] distribution so you see this dashed line where is where the training data is
-[0:21:08] where is where the training data is sampled from meaning at training time
-[0:21:11] sampled from meaning at training time you're equally likely to observe a water
-[0:21:13] you're equally likely to observe a water bird on a water background or a land
-[0:21:16] bird on a water background or a land background
-[0:21:18] background and what was surprising here is that
-[0:21:19] and what was surprising here is that even when there's no biased sampling at
-[0:21:21] even when there's no biased sampling at trading time we do better by enforcing
-[0:21:24] trading time we do better by enforcing these causally motivated regularization
-[0:21:26] these causally motivated regularization systems
+[0:20:09] sort of augment the data at trading time
+[0:20:12] and what we see is that our approach has
+[0:20:14] a better auroc at every target or every
+[0:20:17] test distribution
+[0:20:19] i've also added results from a model
+[0:20:21] that enforces this mmd constraint or the
+[0:20:24] invariance constraint without doing the
+[0:20:25] waiting scheme that we did
+[0:20:27] and what this model is sort of doing is
+[0:20:30] that it's it's blindly applying the mmd
+[0:20:32] constraint and what it does is it ends
+[0:20:35] up being overly conservative it loses
+[0:20:37] information that we need to make good
+[0:20:39] predictions
+[0:20:40] but the general takeaway from the slide
+[0:20:42] is that building models that are
+[0:20:44] consistent with causal structure leads
+[0:20:46] to robustness to distributions
+[0:20:49] but this next part is the part that was
+[0:20:51] somewhat surprising to me um when i sort
+[0:20:54] of like went through this project um
+[0:20:56] though it is confirmed by the theory
+[0:20:58] that i um just presented
+[0:21:00] we redid this experiment and we looked
+[0:21:03] at data that was sampled from the ideal
+[0:21:05] distribution so you see this dashed line
+[0:21:07] where is where the training data is
+[0:21:08] sampled from meaning at training time
+[0:21:11] you're equally likely to observe a water
+[0:21:13] bird on a water background or a land
+[0:21:16] background
+[0:21:18] and what was surprising here is that
+[0:21:19] even when there's no biased sampling at
+[0:21:21] trading time we do better by enforcing
+[0:21:24] these causally motivated regularization
 [0:21:27] systems and sort of even if there's no
-[0:21:28] and sort of even if there's no distribution shift we get more efficient
-[0:21:31] distribution shift we get more efficient models that do better within
-[0:21:33] models that do better within distribution so
-[0:21:35] distribution so yeah so this is to say like
-[0:21:37] yeah so this is to say like even if you don't think that there will
-[0:21:38] even if you don't think that there will be a distribution shift in your setting
-[0:21:40] be a distribution shift in your setting you're better off doing doing this
-[0:21:42] you're better off doing doing this causally motivated regularization then
-[0:21:44] causally motivated regularization then healthy regularization
-[0:21:46] healthy regularization and you can see that by looking here at
-[0:21:48] and you can see that by looking here at this point the training data and the
-[0:21:50] this point the training data and the testing data come from the same
-[0:21:52] testing data come from the same distribution but still we do better than
-[0:21:54] distribution but still we do better than the normal regularization or
-[0:21:56] the normal regularization or augmentation
+[0:21:28] distribution shift we get more efficient
+[0:21:31] models that do better within
+[0:21:33] distribution so
+[0:21:35] yeah so this is to say like
+[0:21:37] even if you don't think that there will
+[0:21:38] be a distribution shift in your setting
+[0:21:40] you're better off doing doing this
+[0:21:42] causally motivated regularization then
+[0:21:44] healthy regularization
+[0:21:46] and you can see that by looking here at
+[0:21:48] this point the training data and the
+[0:21:50] testing data come from the same
+[0:21:52] distribution but still we do better than
+[0:21:54] the normal regularization or
+[0:21:56] augmentation
 [0:22:01] really quick um i'll show some results on a less contrived data set um here we
-[0:22:04] on a less contrived data set um here we use a data set of chest x-rays
-[0:22:07] use a data set of chest x-rays x-rays
+[0:22:04] use a data set of chest x-rays
 [0:22:08] x-rays and we down-sampled the females who have
-[0:22:10] and we down-sampled the females who have pneumonia at training time and the task
-[0:22:13] pneumonia at training time and the task here is to predict the onset of
-[0:22:14] here is to predict the onset of pneumonia which is our main label
-[0:22:17] pneumonia which is our main label and we want to make sure that sex is not
-[0:22:20] and we want to make sure that sex is not a shortcut
-[0:22:21] a shortcut and again we see that our approach has a
-[0:22:23] and again we see that our approach has a better aurc when there is a distribution
-[0:22:25] better aurc when there is a distribution shift which is sort of the first row on
-[0:22:27] shift which is sort of the first row on that table you see
-[0:22:29] that table you see and even within distribution we do
-[0:22:31] and even within distribution we do roughly as well as the best
-[0:22:34] roughly as well as the best so to sum things up what i showed you is
-[0:22:37] so to sum things up what i showed you is that causally motivated regularization
-[0:22:39] that causally motivated regularization schemes lead to robustness against
-[0:22:42] schemes lead to robustness against distribution shift and even when there
-[0:22:44] distribution shift and even when there is no correlation in the data or no
-[0:22:46] is no correlation in the data or no distribution shifts
-[0:22:47] distribution shifts enforcing these regularization schemes
-[0:22:49] enforcing these regularization schemes that are consistent with the causal dag
-[0:22:52] that are consistent with the causal dag can lead to more efficient estimators
-[0:22:53] can lead to more efficient estimators and that's again that's my favorite part
-[0:22:55] and that's again that's my favorite part of this work at least
-[0:22:57] of this work at least but these causally motivated
-[0:22:58] but these causally motivated regularization schemes have to be
-[0:23:00] regularization schemes have to be implemented with some knowledge of the
-[0:23:02] implemented with some knowledge of the underlying dag
-[0:23:04] underlying dag in the spurious correlations in the
-[0:23:06] in the spurious correlations in the sample data otherwise you might end up
-[0:23:08] sample data otherwise you might end up with overly conservative and biased
-[0:23:10] with overly conservative and biased estimators
-[0:23:12] estimators so if you're interested to dig into this
-[0:23:14] so if you're interested to dig into this more the work is up on archive and i am
-[0:23:17] more the work is up on archive and i am going to stop now for questions
+[0:22:10] pneumonia at training time and the task
+[0:22:13] here is to predict the onset of
+[0:22:14] pneumonia which is our main label
+[0:22:17] and we want to make sure that sex is not
+[0:22:20] a shortcut
+[0:22:21] and again we see that our approach has a
+[0:22:23] better aurc when there is a distribution
+[0:22:25] shift which is sort of the first row on
+[0:22:27] that table you see
+[0:22:29] and even within distribution we do
+[0:22:31] roughly as well as the best
+[0:22:34] so to sum things up what i showed you is
+[0:22:37] that causally motivated regularization
+[0:22:39] schemes lead to robustness against
+[0:22:42] distribution shift and even when there
+[0:22:44] is no correlation in the data or no
+[0:22:46] distribution shifts
+[0:22:47] enforcing these regularization schemes
+[0:22:49] that are consistent with the causal dag
+[0:22:52] can lead to more efficient estimators
+[0:22:53] and that's again that's my favorite part
+[0:22:55] of this work at least
+[0:22:57] but these causally motivated
+[0:22:58] regularization schemes have to be
+[0:23:00] implemented with some knowledge of the
+[0:23:02] underlying dag
+[0:23:04] in the spurious correlations in the
+[0:23:06] sample data otherwise you might end up
+[0:23:08] with overly conservative and biased
+[0:23:10] estimators
+[0:23:12] so if you're interested to dig into this
+[0:23:14] more the work is up on archive and i am
+[0:23:17] going to stop now for questions
 [0:23:25] so uh we don't currently have any questions maybe we can wait a few
-[0:23:27] questions maybe we can wait a few seconds to see if any come in
-[0:23:30] seconds to see if any come in that means i was either very confusing
-[0:23:32] that means i was either very confusing or very clear one or the other
+[0:23:27] seconds to see if any come in
+[0:23:30] that means i was either very confusing
+[0:23:32] or very clear one or the other
 [0:23:41] so feel free to submit your questions if you have any
 [0:23:49] i think probably someone can also raise their
-[0:23:51] probably someone can also raise their head
 [0:23:52] head there's a question there is a question
-[0:23:54] there's a question there is a question so um
 [0:23:56] so um the question reads besides the
-[0:23:57] the question reads besides the background are there other examples of
-[0:23:59] background are there other examples of spurious correlations that you have
-[0:24:00] spurious correlations that you have encountered
-[0:24:02] encountered yeah i think the the checks for the the
-[0:24:05] yeah i think the the checks for the the chest x-ray x-rays um example is
-[0:24:09] chest x-ray x-rays um example is is one where there's no like background
-[0:24:11] is one where there's no like background uh shift it is like you tend to um
-[0:24:14] uh shift it is like you tend to um like if you see a a female then you are
-[0:24:17] like if you see a a female then you are more likely to
-[0:24:19] more likely to predict that it's
-[0:24:20] predict that it's it's pneumonia or it's not pneumonia um
-[0:24:23] it's pneumonia or it's not pneumonia um just based on the shortcut that is the
-[0:24:25] just based on the shortcut that is the sex of the patient as opposed to like
-[0:24:27] sex of the patient as opposed to like actual disease
-[0:24:29] actual disease but there's also actually
-[0:24:31] but there's also actually go ahead oh sorry yeah i mean this that
-[0:24:34] go ahead oh sorry yeah i mean this that particular example i think is highly
-[0:24:35] particular example i think is highly relevant given some discussion that's
-[0:24:37] relevant given some discussion that's been going on recently about uh what i
-[0:24:41] been going on recently about uh what i uh
+[0:23:57] background are there other examples of
+[0:23:59] spurious correlations that you have
+[0:24:00] encountered
+[0:24:02] yeah i think the the checks for the the
+[0:24:05] chest x-ray x-rays um example is
+[0:24:09] is one where there's no like background
+[0:24:11] uh shift it is like you tend to um
+[0:24:14] like if you see a a female then you are
+[0:24:17] more likely to
+[0:24:19] predict that it's
+[0:24:20] it's pneumonia or it's not pneumonia um
+[0:24:23] just based on the shortcut that is the
+[0:24:25] sex of the patient as opposed to like
+[0:24:27] actual disease
+[0:24:29] but there's also actually
+[0:24:31] go ahead oh sorry yeah i mean this that
+[0:24:34] particular example i think is highly
+[0:24:35] relevant given some discussion that's
+[0:24:37] been going on recently about uh what i
 [0:24:42] uh you know uh patient characteristics can
-[0:24:44] you know uh patient characteristics can actually be read off of something like
-[0:24:46] actually be read off of something like an x-ray
+[0:24:44] actually be read off of something like
 [0:24:47] an x-ray uh right so there's currently some work
-[0:24:49] uh right so there's currently some work also saying that uh a vacation
-[0:24:51] also saying that uh a vacation self-reported race is uh something that
-[0:24:54] self-reported race is uh something that that you could recover uh with quite
-[0:24:56] that you could recover uh with quite high fidelity from
-[0:24:58] high fidelity from uh these these kinds of images right and
-[0:25:01] uh these these kinds of images right and again there i think that there are
-[0:25:03] again there i think that there are concerns about uh the potential for uh
-[0:25:07] concerns about uh the potential for uh machine learning models to learn
-[0:25:08] machine learning models to learn shortcuts
+[0:24:49] also saying that uh a vacation
+[0:24:51] self-reported race is uh something that
+[0:24:54] that you could recover uh with quite
+[0:24:56] high fidelity from
+[0:24:58] uh these these kinds of images right and
+[0:25:01] again there i think that there are
+[0:25:03] concerns about uh the potential for uh
+[0:25:07] machine learning models to learn
+[0:25:08] shortcuts
 [0:25:14] great thank you we got another question or a couple
-[0:25:16] we got another question or a couple questions coming in so uh this one and
-[0:25:18] questions coming in so uh this one and as emma said uh you should feel free to
-[0:25:20] as emma said uh you should feel free to also raise your hand and then maybe we
-[0:25:22] also raise your hand and then maybe we can unmute you
-[0:25:24] can unmute you um
+[0:25:16] questions coming in so uh this one and
+[0:25:18] as emma said uh you should feel free to
+[0:25:20] also raise your hand and then maybe we
+[0:25:22] can unmute you
 [0:25:25] um okay the first question reads does this
-[0:25:26] okay the first question reads does this idea of removing an arrow to avoid
-[0:25:28] idea of removing an arrow to avoid shortcuts have any relationship to the
-[0:25:30] shortcuts have any relationship to the fairness work done by nabi spitzer
-[0:25:32] fairness work done by nabi spitzer others who also talk about eliminating
-[0:25:34] others who also talk about eliminating an error to recover a fair world
-[0:25:37] an error to recover a fair world yes this work has a lot of relevance to
-[0:25:40] yes this work has a lot of relevance to fairness work in general because
-[0:25:42] fairness work in general because fairness work also tends to fall in like
-[0:25:44] fairness work also tends to fall in like in the some kind of work where you have
-[0:25:46] in the some kind of work where you have an invariance penalty
-[0:25:48] an invariance penalty um i would say that the objectives of
-[0:25:51] um i would say that the objectives of the two kinds of work are very very
-[0:25:55] the two kinds of work are very very you end up with a similar looking
-[0:25:56] you end up with a similar looking solution but the the way to get there
-[0:25:58] solution but the the way to get there and the objective of the of the study is
-[0:26:01] and the objective of the of the study is very different in that for example in
-[0:26:03] very different in that for example in fairness work you will you typically
-[0:26:05] fairness work you will you typically want to make sure that the invariance
-[0:26:08] want to make sure that the invariance penalty or the invariance property is
-[0:26:10] penalty or the invariance property is satisfied to the best of your ability
-[0:26:12] satisfied to the best of your ability whereas our objective here was to make
-[0:26:14] whereas our objective here was to make sure that we have good accuracy and good
-[0:26:16] sure that we have good accuracy and good generalization so sort of the
-[0:26:18] generalization so sort of the theoretical approach of these two
-[0:26:20] theoretical approach of these two kinds of work is dissimilar the other
-[0:26:23] kinds of work is dissimilar the other thing is because this objective or the
-[0:26:26] thing is because this objective or the final goal is not
-[0:26:28] final goal is not that similar
-[0:26:30] that similar you
+[0:25:26] idea of removing an arrow to avoid
+[0:25:28] shortcuts have any relationship to the
+[0:25:30] fairness work done by nabi spitzer
+[0:25:32] others who also talk about eliminating
+[0:25:34] an error to recover a fair world
+[0:25:37] yes this work has a lot of relevance to
+[0:25:40] fairness work in general because
+[0:25:42] fairness work also tends to fall in like
+[0:25:44] in the some kind of work where you have
+[0:25:46] an invariance penalty
+[0:25:48] um i would say that the objectives of
+[0:25:51] the two kinds of work are very very
+[0:25:55] you end up with a similar looking
+[0:25:56] solution but the the way to get there
+[0:25:58] and the objective of the of the study is
+[0:26:01] very different in that for example in
+[0:26:03] fairness work you will you typically
+[0:26:05] want to make sure that the invariance
+[0:26:08] penalty or the invariance property is
+[0:26:10] satisfied to the best of your ability
+[0:26:12] whereas our objective here was to make
+[0:26:14] sure that we have good accuracy and good
+[0:26:16] generalization so sort of the
+[0:26:18] theoretical approach of these two
+[0:26:20] kinds of work is dissimilar the other
+[0:26:23] thing is because this objective or the
+[0:26:26] final goal is not
+[0:26:28] that similar
 [0:26:31] you you don't need to do the re-weighting
-[0:26:33] you don't need to do the re-weighting scheme or you might not need to do the
-[0:26:34] scheme or you might not need to do the re-weighting scheme if all you need
-[0:26:37] re-weighting scheme if all you need is to make sure that this invariance
-[0:26:39] is to make sure that this invariance penalty is is um satisfied but
-[0:26:42] penalty is is um satisfied but if your end goal is to generalize
-[0:26:46] if your end goal is to generalize beyond this observed distribution you
-[0:26:48] beyond this observed distribution you might you will have to do this um
-[0:26:51] might you will have to do this um waiting scheme alex and i have been
-[0:26:53] waiting scheme alex and i have been talking about this a lot recently so i
-[0:26:55] talking about this a lot recently so i don't know if if you want to add to that
-[0:26:58] don't know if if you want to add to that i just think one one other interesting
-[0:27:00] i just think one one other interesting thing is that uh like a a point that's
-[0:27:02] thing is that uh like a a point that's made in uh you know rosie and ilya's
-[0:27:05] made in uh you know rosie and ilya's work there uh is that there's a lot of
-[0:27:08] work there uh is that there's a lot of judgment that goes into deciding which
-[0:27:10] judgment that goes into deciding which pathways you uh think are relevant or
-[0:27:12] pathways you uh think are relevant or not um and you know deciding what's fair
-[0:27:16] not um and you know deciding what's fair or not
+[0:26:33] scheme or you might not need to do the
+[0:26:34] re-weighting scheme if all you need
+[0:26:37] is to make sure that this invariance
+[0:26:39] penalty is is um satisfied but
+[0:26:42] if your end goal is to generalize
+[0:26:46] beyond this observed distribution you
+[0:26:48] might you will have to do this um
+[0:26:51] waiting scheme alex and i have been
+[0:26:53] talking about this a lot recently so i
+[0:26:55] don't know if if you want to add to that
+[0:26:58] i just think one one other interesting
+[0:27:00] thing is that uh like a a point that's
+[0:27:02] made in uh you know rosie and ilya's
+[0:27:05] work there uh is that there's a lot of
+[0:27:08] judgment that goes into deciding which
+[0:27:10] pathways you uh think are relevant or
+[0:27:12] not um and you know deciding what's fair
 [0:27:17] or not um and i think quite similarly here uh
-[0:27:19] um and i think quite similarly here uh there's a lot of judgment that has to go
-[0:27:20] there's a lot of judgment that has to go into which kinds of pathways for
-[0:27:24] into which kinds of pathways for correlation or for dependents
-[0:27:26] correlation or for dependents you would like to remove or you'd like
-[0:27:28] you would like to remove or you'd like to preserve in the problem
+[0:27:19] there's a lot of judgment that has to go
+[0:27:20] into which kinds of pathways for
+[0:27:24] correlation or for dependents
+[0:27:26] you would like to remove or you'd like
+[0:27:28] to preserve in the problem
 [0:27:34] okay maybe we can just do one more quick question uh so uh the question is what
-[0:27:37] question uh so uh the question is what if we use kl divergence or symmetrized
-[0:27:39] if we use kl divergence or symmetrized kl instead of mmd would that be worse
-[0:27:43] kl instead of mmd would that be worse i that's a great question i we have not
-[0:27:45] i that's a great question i we have not i have not played with the kl divergence
-[0:27:46] i have not played with the kl divergence i suspect that you can add different
-[0:27:50] i suspect that you can add different measures over uh distributions and you
-[0:27:52] measures over uh distributions and you may even end up with like slightly
-[0:27:54] may even end up with like slightly different guarantees like finite sample
-[0:27:56] different guarantees like finite sample guarantees that would be very
-[0:27:57] guarantees that would be very interesting to look at i have not um
-[0:27:59] interesting to look at i have not um i've not played with that myself but
-[0:28:02] i've not played with that myself but yeah
+[0:27:37] if we use kl divergence or symmetrized
+[0:27:39] kl instead of mmd would that be worse
+[0:27:43] i that's a great question i we have not
+[0:27:45] i have not played with the kl divergence
+[0:27:46] i suspect that you can add different
+[0:27:50] measures over uh distributions and you
+[0:27:52] may even end up with like slightly
+[0:27:54] different guarantees like finite sample
+[0:27:56] guarantees that would be very
+[0:27:57] interesting to look at i have not um
+[0:27:59] i've not played with that myself but
 [0:28:03] yeah theoretically other
-[0:28:05] theoretically other measures over distances are um
-[0:28:09] measures over distances are um are plausible
+[0:28:05] measures over distances are um
+[0:28:09] are plausible
 [0:28:14] okay great thanks so much for the great talk

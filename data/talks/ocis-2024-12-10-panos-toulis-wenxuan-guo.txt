@@ -1,1295 +1,1281 @@
 [0:00:04] okay welcome to the online calls inference seminar today we're excited to
-[0:00:06] inference seminar today we're excited to have Panos tulis and won guo from the
-[0:00:09] have Panos tulis and won guo from the University of Chicago who will talk
-[0:00:11] University of Chicago who will talk about machine learning assisted
-[0:00:12] about machine learning assisted randomization tests for complex
-[0:00:14] randomization tests for complex treatment effects in AP experiments uh
-[0:00:17] treatment effects in AP experiments uh to disc cussion today will be shinran
-[0:00:19] to disc cussion today will be shinran Lee also from the University Chicago and
-[0:00:23] Lee also from the University Chicago and uh questions today will be handled by in
-[0:00:25] uh questions today will be handled by in in do you want to say a few words thank
-[0:00:28] in do you want to say a few words thank you Dominic uh so as usual please
-[0:00:30] you Dominic uh so as usual please familiar questions in the Q&amp;A section
-[0:00:32] familiar questions in the Q&amp;A section for us to track them more easily uh it's
-[0:00:35] for us to track them more easily uh it's at the bottom of the zoom window and
-[0:00:37] at the bottom of the zoom window and today we have the collaborator of the
-[0:00:39] today we have the collaborator of the speakers uh Jun Le to answer questions
-[0:00:42] speakers uh Jun Le to answer questions during the talk uh we will also raise
-[0:00:44] during the talk uh we will also raise clarification questions sometimes to the
-[0:00:46] clarification questions sometimes to the speakers during the talk and leave
-[0:00:48] speakers during the talk and leave bigger ones to the end of it uh and
-[0:00:51] bigger ones to the end of it uh and finally we encourage you to submit your
-[0:00:53] finally we encourage you to submit your questions as soon as we have them
-[0:00:55] questions as soon as we have them instead of waiting for us to ask for
-[0:00:57] instead of waiting for us to ask for questions uh so without further Ado uh p
-[0:01:00] questions uh so without further Ado uh p please feel free to take
+[0:00:06] have Panos tulis and won guo from the
+[0:00:09] University of Chicago who will talk
+[0:00:11] about machine learning assisted
+[0:00:12] randomization tests for complex
+[0:00:14] treatment effects in AP experiments uh
+[0:00:17] to disc cussion today will be shinran
+[0:00:19] Lee also from the University Chicago and
+[0:00:23] uh questions today will be handled by in
+[0:00:25] in do you want to say a few words thank
+[0:00:28] you Dominic uh so as usual please
+[0:00:30] familiar questions in the Q&A section
+[0:00:32] for us to track them more easily uh it's
+[0:00:35] at the bottom of the zoom window and
+[0:00:37] today we have the collaborator of the
+[0:00:39] speakers uh Jun Le to answer questions
+[0:00:42] during the talk uh we will also raise
+[0:00:44] clarification questions sometimes to the
+[0:00:46] speakers during the talk and leave
+[0:00:48] bigger ones to the end of it uh and
+[0:00:51] finally we encourage you to submit your
+[0:00:53] questions as soon as we have them
+[0:00:55] instead of waiting for us to ask for
+[0:00:57] questions uh so without further Ado uh p
+[0:01:00] please feel free to take
 [0:01:16] over okay uh can you see my slides yeah awesome thanks so much uh
-[0:01:19] slides yeah awesome thanks so much uh thanks to the organizers uh for
-[0:01:21] thanks to the organizers uh for concluding this amazing uh set of causal
-[0:01:24] concluding this amazing uh set of causal inference uh talks this this quarter uh
-[0:01:27] inference uh talks this this quarter uh and we we'll try to to rise to the
-[0:01:28] and we we'll try to to rise to the occasion uh from from from our side okay
-[0:01:31] occasion uh from from from our side okay so this work a few words first uh about
-[0:01:34] so this work a few words first uh about two two great students one is wan go at
-[0:01:37] two two great students one is wan go at at booth and duon Lee who's at CMU stats
-[0:01:41] at booth and duon Lee who's at CMU stats and and public policy um and um Wan will
-[0:01:45] and and public policy um and um Wan will join you will hear from Wan at the
-[0:01:47] join you will hear from Wan at the second part of this of this presentation
-[0:01:50] second part of this of this presentation you will not hear from from junho but
-[0:01:52] you will not hear from from junho but he'll be around and I'm sure you will
-[0:01:53] he'll be around and I'm sure you will hear from him like a cal talk by him
-[0:01:56] hear from him like a cal talk by him soon in some other
-[0:01:58] soon in some other occasion okay so what are we doing so
-[0:02:00] occasion okay so what are we doing so first of all the setting is randomized
-[0:02:02] first of all the setting is randomized experiments which you know if done
-[0:02:04] experiments which you know if done correctly they's still the uh the the
-[0:02:06] correctly they's still the uh the the gold standard for causal inference um
-[0:02:09] gold standard for causal inference um specifically like in online tech uh and
-[0:02:12] specifically like in online tech uh and in recent years um the uh AB experiments
-[0:02:15] in recent years um the uh AB experiments the ab tests as they call them is is the
-[0:02:17] the ab tests as they call them is is the one on one version of this they're used
-[0:02:20] one on one version of this they're used in in massive scale to compare between
-[0:02:22] in in massive scale to compare between two versions let's say of a website of a
-[0:02:24] two versions let's say of a website of a product or or
-[0:02:26] product or or service and this you know they are as as
-[0:02:30] service and this you know they are as as I said they're kind of widely popular
-[0:02:31] I said they're kind of widely popular right now and they're they're kind of
-[0:02:33] right now and they're they're kind of increasing in their um adoption uh and
-[0:02:35] increasing in their um adoption uh and there are several methods to analyze
-[0:02:37] there are several methods to analyze these kinds of experiments and the fact
-[0:02:38] these kinds of experiments and the fact that the treatment was randomized make
-[0:02:40] that the treatment was randomized make make it easier uh for example a
-[0:02:42] make it easier uh for example a classical method is a t test or some
-[0:02:44] classical method is a t test or some kind of regression uh model which is
-[0:02:47] kind of regression uh model which is totally totally fine and valid because
-[0:02:49] totally totally fine and valid because as I said the treatment was was
-[0:02:51] as I said the treatment was was randomized um and um however despite
-[0:02:56] randomized um and um however despite that it's it's even though it's it's
-[0:02:58] that it's it's even though it's it's valid in in many settings it tends to be
-[0:03:00] valid in in many settings it tends to be be limited to marinal effects and if you
-[0:03:03] be limited to marinal effects and if you have more complex experimental designs
-[0:03:05] have more complex experimental designs or more complex thre effects then it it
-[0:03:07] or more complex thre effects then it it can be an issue right they they might be
-[0:03:09] can be an issue right they they might be limited um so today we will talk about a
-[0:03:12] limited um so today we will talk about a method that Tred to unifies uh simple
-[0:03:16] method that Tred to unifies uh simple both simple and more complex ritten
-[0:03:18] both simple and more complex ritten effects um the method of choice for us
-[0:03:20] effects um the method of choice for us will be the so-called fisherian rization
-[0:03:23] will be the so-called fisherian rization test which is very similar uh to uh what
-[0:03:26] test which is very similar uh to uh what is known as a permutation test and this
-[0:03:28] is known as a permutation test and this will also be the foundation for for our
-[0:03:30] will also be the foundation for for our methods today now these types of methods
-[0:03:33] methods today now these types of methods are still popular they are applied and
-[0:03:35] are still popular they are applied and the um the great benefit is that they're
-[0:03:38] the um the great benefit is that they're finite sample valid um in practice
-[0:03:41] finite sample valid um in practice however they tend to use Simple
-[0:03:43] however they tend to use Simple statistics like difference and means uh
-[0:03:45] statistics like difference and means uh and so they tend to yield very similar
-[0:03:47] and so they tend to yield very similar results to the classical T Test um now
-[0:03:51] results to the classical T Test um now for today uh we will use ferian this
-[0:03:54] for today uh we will use ferian this this visan rization test but we will
-[0:03:56] this visan rization test but we will extend them to utilize more complex test
-[0:03:58] extend them to utilize more complex test statistics like beyond the the simple
-[0:04:00] statistics like beyond the the simple difference in means
-[0:04:03] difference in means specifically um now there are other
-[0:04:05] specifically um now there are other methods like an NOA based methods um
-[0:04:07] methods like an NOA based methods um that are can be more flexible but still
-[0:04:09] that are can be more flexible but still they're also used more standard test
-[0:04:11] they're also used more standard test statistics because they were developed
-[0:04:12] statistics because they were developed in in the context of linear models and
-[0:04:14] in in the context of linear models and we'll we'll talk about that um later as
-[0:04:17] we'll we'll talk about that um later as well we'll try to make a as a as a
-[0:04:19] well we'll try to make a as a as a thorough comparison as as possible
-[0:04:21] thorough comparison as as possible specifically for f oranization tests um
-[0:04:24] specifically for f oranization tests um the idea if you haven't seen it before
-[0:04:26] the idea if you haven't seen it before uh the idea is actually quite simple if
-[0:04:28] uh the idea is actually quite simple if you have an experimental study the idea
-[0:04:31] you have an experimental study the idea is when you analyze the data is to just
-[0:04:33] is when you analyze the data is to just randomize the treatment okay according
-[0:04:35] randomize the treatment okay according to how the treatment was was assigned
-[0:04:37] to how the treatment was was assigned and then whatever statistic you're
-[0:04:39] and then whatever statistic you're you're focusing on you instead of trying
-[0:04:42] you're focusing on you instead of trying to come up with it sampling distribution
-[0:04:44] to come up with it sampling distribution you use this randomization distribution
-[0:04:46] you use this randomization distribution U for for for the analysis okay so
-[0:04:48] U for for for the analysis okay so you're using the randomization
-[0:04:49] you're using the randomization distribution as a substitute for the for
-[0:04:51] distribution as a substitute for the for the sampling distribution um it's very
-[0:04:53] the sampling distribution um it's very similar in spirit to the to the
-[0:04:55] similar in spirit to the to the bootstrap but the fer rization test is
-[0:04:57] bootstrap but the fer rization test is exact because you're randomizing things
-[0:04:59] exact because you're randomizing things ACC according to how how they were
-[0:05:01] ACC according to how how they were assigned now in an AB experiment the fr
-[0:05:04] assigned now in an AB experiment the fr frt the feran normalization test is in
-[0:05:07] frt the feran normalization test is in many cases it's is exactly the same as a
-[0:05:09] many cases it's is exactly the same as a permutation test so I will today I will
-[0:05:11] permutation test so I will today I will use these terms uh interchangeably
-[0:05:13] use these terms uh interchangeably however these are not the same
-[0:05:14] however these are not the same procedures and historically they were
-[0:05:16] procedures and historically they were developed in in in different contexts so
-[0:05:18] developed in in in different contexts so they can they can diverge as well now
-[0:05:22] they can they can diverge as well now for us the important feature of the Ft
-[0:05:24] for us the important feature of the Ft procedure is that it's finite sample
-[0:05:26] procedure is that it's finite sample valid uh which is which is great for
-[0:05:28] valid uh which is which is great for robust causal inference um it's possible
-[0:05:30] robust causal inference um it's possible in experimental studies and we we'll try
-[0:05:32] in experimental studies and we we'll try to to get this this grade property and
-[0:05:35] to to get this this grade property and extend it to for more complex
-[0:05:37] extend it to for more complex experiments and more complex effects and
-[0:05:39] experiments and more complex effects and Designs that's that's really the the
-[0:05:41] Designs that's that's really the the goal
+[0:01:19] thanks to the organizers uh for
+[0:01:21] concluding this amazing uh set of causal
+[0:01:24] inference uh talks this this quarter uh
+[0:01:27] and we we'll try to to rise to the
+[0:01:28] occasion uh from from from our side okay
+[0:01:31] so this work a few words first uh about
+[0:01:34] two two great students one is wan go at
+[0:01:37] at booth and duon Lee who's at CMU stats
+[0:01:41] and and public policy um and um Wan will
+[0:01:45] join you will hear from Wan at the
+[0:01:47] second part of this of this presentation
+[0:01:50] you will not hear from from junho but
+[0:01:52] he'll be around and I'm sure you will
+[0:01:53] hear from him like a cal talk by him
+[0:01:56] soon in some other
+[0:01:58] occasion okay so what are we doing so
+[0:02:00] first of all the setting is randomized
+[0:02:02] experiments which you know if done
+[0:02:04] correctly they's still the uh the the
+[0:02:06] gold standard for causal inference um
+[0:02:09] specifically like in online tech uh and
+[0:02:12] in recent years um the uh AB experiments
+[0:02:15] the ab tests as they call them is is the
+[0:02:17] one on one version of this they're used
+[0:02:20] in in massive scale to compare between
+[0:02:22] two versions let's say of a website of a
+[0:02:24] product or or
+[0:02:26] service and this you know they are as as
+[0:02:30] I said they're kind of widely popular
+[0:02:31] right now and they're they're kind of
+[0:02:33] increasing in their um adoption uh and
+[0:02:35] there are several methods to analyze
+[0:02:37] these kinds of experiments and the fact
+[0:02:38] that the treatment was randomized make
+[0:02:40] make it easier uh for example a
+[0:02:42] classical method is a t test or some
+[0:02:44] kind of regression uh model which is
+[0:02:47] totally totally fine and valid because
+[0:02:49] as I said the treatment was was
+[0:02:51] randomized um and um however despite
+[0:02:56] that it's it's even though it's it's
+[0:02:58] valid in in many settings it tends to be
+[0:03:00] be limited to marinal effects and if you
+[0:03:03] have more complex experimental designs
+[0:03:05] or more complex thre effects then it it
+[0:03:07] can be an issue right they they might be
+[0:03:09] limited um so today we will talk about a
+[0:03:12] method that Tred to unifies uh simple
+[0:03:16] both simple and more complex ritten
+[0:03:18] effects um the method of choice for us
+[0:03:20] will be the so-called fisherian rization
+[0:03:23] test which is very similar uh to uh what
+[0:03:26] is known as a permutation test and this
+[0:03:28] will also be the foundation for for our
+[0:03:30] methods today now these types of methods
+[0:03:33] are still popular they are applied and
+[0:03:35] the um the great benefit is that they're
+[0:03:38] finite sample valid um in practice
+[0:03:41] however they tend to use Simple
+[0:03:43] statistics like difference and means uh
+[0:03:45] and so they tend to yield very similar
+[0:03:47] results to the classical T Test um now
+[0:03:51] for today uh we will use ferian this
+[0:03:54] this visan rization test but we will
+[0:03:56] extend them to utilize more complex test
+[0:03:58] statistics like beyond the the simple
+[0:04:00] difference in means
+[0:04:03] specifically um now there are other
+[0:04:05] methods like an NOA based methods um
+[0:04:07] that are can be more flexible but still
+[0:04:09] they're also used more standard test
+[0:04:11] statistics because they were developed
+[0:04:12] in in the context of linear models and
+[0:04:14] we'll we'll talk about that um later as
+[0:04:17] well we'll try to make a as a as a
+[0:04:19] thorough comparison as as possible
+[0:04:21] specifically for f oranization tests um
+[0:04:24] the idea if you haven't seen it before
+[0:04:26] uh the idea is actually quite simple if
+[0:04:28] you have an experimental study the idea
+[0:04:31] is when you analyze the data is to just
+[0:04:33] randomize the treatment okay according
+[0:04:35] to how the treatment was was assigned
+[0:04:37] and then whatever statistic you're
+[0:04:39] you're focusing on you instead of trying
+[0:04:42] to come up with it sampling distribution
+[0:04:44] you use this randomization distribution
+[0:04:46] U for for for the analysis okay so
+[0:04:48] you're using the randomization
+[0:04:49] distribution as a substitute for the for
+[0:04:51] the sampling distribution um it's very
+[0:04:53] similar in spirit to the to the
+[0:04:55] bootstrap but the fer rization test is
+[0:04:57] exact because you're randomizing things
+[0:04:59] ACC according to how how they were
+[0:05:01] assigned now in an AB experiment the fr
+[0:05:04] frt the feran normalization test is in
+[0:05:07] many cases it's is exactly the same as a
+[0:05:09] permutation test so I will today I will
+[0:05:11] use these terms uh interchangeably
+[0:05:13] however these are not the same
+[0:05:14] procedures and historically they were
+[0:05:16] developed in in in different contexts so
+[0:05:18] they can they can diverge as well now
+[0:05:22] for us the important feature of the Ft
+[0:05:24] procedure is that it's finite sample
+[0:05:26] valid uh which is which is great for
+[0:05:28] robust causal inference um it's possible
+[0:05:30] in experimental studies and we we'll try
+[0:05:32] to to get this this grade property and
+[0:05:35] extend it to for more complex
+[0:05:37] experiments and more complex effects and
+[0:05:39] Designs that's that's really the the
 [0:05:42] goal here so what is our proposal The
-[0:05:44] here so what is our proposal The Proposal is to take this randomization
-[0:05:46] Proposal is to take this randomization tests and then utilize um test
-[0:05:49] tests and then utilize um test statistics that that depend on machine
-[0:05:51] statistics that that depend on machine learning uh and especially the
-[0:05:53] learning uh and especially the prediction error of machine learning
-[0:05:54] prediction error of machine learning models uh so the key novelty here is is
-[0:05:58] models uh so the key novelty here is is is inside the uh is in this idea of
-[0:06:00] is inside the uh is in this idea of using test statistics that are um kind
-[0:06:02] using test statistics that are um kind of are based on on machine learning
-[0:06:05] of are based on on machine learning methods um our the our main theoretical
-[0:06:07] methods um our the our main theoretical result will be that this better
-[0:06:09] result will be that this better flexibility this better prediction power
-[0:06:11] flexibility this better prediction power from ml can translates immediately into
-[0:06:13] from ml can translates immediately into higher statistical power for testing um
-[0:06:15] higher statistical power for testing um for tests of certain uh causal effects
-[0:06:18] for tests of certain uh causal effects um in doing so uh even though we kind of
-[0:06:20] um in doing so uh even though we kind of using these complex models we retain the
-[0:06:22] using these complex models we retain the finite sample validity of the
-[0:06:24] finite sample validity of the randomization test or permutation tests
-[0:06:26] randomization test or permutation tests uh and we apply that to test for complex
-[0:06:28] uh and we apply that to test for complex ritten effects including hogen
-[0:06:30] ritten effects including hogen uh spillovers under interference and so
-[0:06:32] uh spillovers under interference and so on uh there are other practical uses
-[0:06:35] on uh there are other practical uses let's say for taking coed balance or for
-[0:06:37] let's say for taking coed balance or for model selection but today we don't have
-[0:06:38] model selection but today we don't have the time to to get into there but the
-[0:06:40] the time to to get into there but the you'll see that the idea is flexible
-[0:06:42] you'll see that the idea is flexible enough to be applied in uh for for
-[0:06:44] enough to be applied in uh for for different different questions of
-[0:06:46] different different questions of Interest okay so the outline for today
-[0:06:49] Interest okay so the outline for today is the following I will set up some um
-[0:06:51] is the following I will set up some um notation just to um kind of make
-[0:06:53] notation just to um kind of make concrete what we're talking about here I
-[0:06:55] concrete what we're talking about here I will describe the main procedure and
-[0:06:57] will describe the main procedure and briefly mention the finance validity
-[0:07:00] briefly mention the finance validity um then I will talk about the type two
-[0:07:02] um then I will talk about the type two error analysis which is our key
-[0:07:03] error analysis which is our key theoretical contribution here uh and
-[0:07:06] theoretical contribution here uh and then we will talk about the uh the
-[0:07:08] then we will talk about the uh the various applications including the
-[0:07:09] various applications including the global null heterogen and and spillovers
-[0:07:12] global null heterogen and and spillovers um all of them under a unifying
-[0:07:13] um all of them under a unifying framework as as we will see uh today uh
-[0:07:17] framework as as we will see uh today uh and then we'll we'll finish with
-[0:07:18] and then we'll we'll finish with simulations and at some point w will U
-[0:07:21] simulations and at some point w will U we we take
-[0:07:23] we we take over okay um at this point is it is it
-[0:07:26] over okay um at this point is it is it clear kind of are there any questions I
-[0:07:28] clear kind of are there any questions I can take a look at the chat to see all
-[0:07:30] can take a look at the chat to see all right there was a a comment about slides
-[0:07:32] right there was a a comment about slides please let me know if there are any
-[0:07:33] please let me know if there are any questions if anything is is unclear but
-[0:07:35] questions if anything is is unclear but at this point I can can proceed to uh
-[0:07:37] at this point I can can proceed to uh describe first the um the model and then
-[0:07:39] describe first the um the model and then if um I will introduce quite a lot of
-[0:07:41] if um I will introduce quite a lot of not notation here if there are any
-[0:07:43] not notation here if there are any questions please feel free to ask on the
-[0:07:45] questions please feel free to ask on the chat or or or um at any
-[0:07:48] chat or or or um at any point okay so the setup is the following
-[0:07:51] point okay so the setup is the following we have binary treatments uh Z is the
-[0:07:54] we have binary treatments uh Z is the entire treatment Vector Z1 Z2 are the
-[0:07:57] entire treatment Vector Z1 Z2 are the individual treatments and the treatment
-[0:07:59] individual treatments and the treatment assignment is known
-[0:08:00] assignment is known because we are in experimental study uh
-[0:08:03] because we are in experimental study uh the Y is the vector of outcomes and then
-[0:08:05] the Y is the vector of outcomes and then X is the vector of coari which can be
-[0:08:10] X is the vector of coari which can be multi-dimensional now the outcome model
-[0:08:12] multi-dimensional now the outcome model is as follows and we Define an outcome
-[0:08:14] is as follows and we Define an outcome model um even though in causal inference
-[0:08:17] model um even though in causal inference we tend to start from the causal from
-[0:08:19] we tend to start from the causal from the potential outcomes right here we
-[0:08:20] the potential outcomes right here we will start from the from the model uh
-[0:08:22] will start from the from the model uh and then back out what this means for
-[0:08:24] and then back out what this means for the potential outcomes and we do this in
-[0:08:26] the potential outcomes and we do this in order to to unify all the different
-[0:08:28] order to to unify all the different hypothesis and tests we will we will we
-[0:08:31] hypothesis and tests we will we will we will consider so the ARA Model includes
-[0:08:33] will consider so the ARA Model includes a baseline effect this B function here
-[0:08:36] a baseline effect this B function here um a direct effect this H function and
-[0:08:38] um a direct effect this H function and then a spillover effect G which depends
-[0:08:41] then a spillover effect G which depends on the coari X but also depends on the
-[0:08:43] on the coari X but also depends on the treatment of other of units other than I
-[0:08:46] treatment of other of units other than I as you can see here this notation Z
-[0:08:47] as you can see here this notation Z minus I implies that the outcome of unit
-[0:08:50] minus I implies that the outcome of unit I might depend on others treatment on
-[0:08:51] I might depend on others treatment on other unit treatment okay which is the
-[0:08:53] other unit treatment okay which is the the definition of interference or or or
-[0:08:55] the definition of interference or or or spill L effect the Epsilon part is
-[0:08:58] spill L effect the Epsilon part is independent on noise and in this this
-[0:09:00] independent on noise and in this this definition uh we kind of follow try to
-[0:09:02] definition uh we kind of follow try to follow the causal ml literature um where
-[0:09:06] follow the causal ml literature um where it it's it's usual it's common to Define
-[0:09:09] it it's it's usual it's common to Define this fun this B and H and Z this
-[0:09:11] this fun this B and H and Z this functions to be some kind of General
-[0:09:14] functions to be some kind of General functions arbitrary functions from some
-[0:09:16] functions arbitrary functions from some some some flexible uh function class
-[0:09:19] some some flexible uh function class okay so we'll try to follow that
-[0:09:20] okay so we'll try to follow that literature in the in in our
-[0:09:23] literature in the in in our setup okay so B will be the Baseline H
-[0:09:26] setup okay so B will be the Baseline H will be the direct effect and then G
-[0:09:27] will be the direct effect and then G will be the uh the spillover effect and
-[0:09:30] will be the uh the spillover effect and we're going to start with a simple null
-[0:09:32] we're going to start with a simple null hypothesis that the treatment has no
-[0:09:33] hypothesis that the treatment has no effect right suppose you're in situation
-[0:09:35] effect right suppose you're in situation like an online uh tech company uh
-[0:09:37] like an online uh tech company uh there's you have a very complex model um
-[0:09:40] there's you have a very complex model um that's a lot of covariates um a lot of
-[0:09:43] that's a lot of covariates um a lot of treatments happening and you would just
-[0:09:44] treatments happening and you would just like to know whether the treatment has
-[0:09:46] like to know whether the treatment has any effect at all right whatever this
-[0:09:48] any effect at all right whatever this new VAR varant variation that you
-[0:09:50] new VAR varant variation that you included this new feature affected the
-[0:09:53] included this new feature affected the outcome in any particular way and by the
-[0:09:55] outcome in any particular way and by the way I should mention here that these
-[0:09:56] way I should mention here that these functions H and G it could include time
-[0:09:59] functions H and G it could include time as well this is not a cross-sectional
-[0:10:01] as well this is not a cross-sectional study only there could be a panel data
-[0:10:03] study only there could be a panel data and there could be temporal effects okay
-[0:10:06] and there could be temporal effects okay as as well so um that's that that can be
-[0:10:09] as as well so um that's that that can be important so suppose you have this very
-[0:10:11] important so suppose you have this very complex model that you might be thinking
-[0:10:13] complex model that you might be thinking um and there might be some complex
-[0:10:14] um and there might be some complex treatments and you'd like to know
-[0:10:15] treatments and you'd like to know whether treatment has any effect how do
-[0:10:18] whether treatment has any effect how do will you translate this into an all
-[0:10:19] will you translate this into an all hypothesis where basically the not here
-[0:10:21] hypothesis where basically the not here will be that the H and G functions are
-[0:10:23] will be that the H and G functions are zero okay and then um if we want to
-[0:10:26] zero okay and then um if we want to assume that there are no spill over
-[0:10:28] assume that there are no spill over effect then we can set G to be zero
-[0:10:30] effect then we can set G to be zero again again in the alternative but then
-[0:10:32] again again in the alternative but then in the alternative we might want to
-[0:10:33] in the alternative we might want to check whether H is not zero okay now
-[0:10:37] check whether H is not zero okay now because we don't assume interference or
-[0:10:38] because we don't assume interference or spillovers this is very similar to what
-[0:10:40] spillovers this is very similar to what is known as the Fisher SARP null or like
-[0:10:43] is known as the Fisher SARP null or like a weaker version of this where you're
-[0:10:44] a weaker version of this where you're testing whether the y z y1 potential
-[0:10:47] testing whether the y z y1 potential outcomes um I have the same are draws
-[0:10:49] outcomes um I have the same are draws from the same independent draws from the
-[0:10:51] from the same independent draws from the same distribution okay this this
-[0:10:53] same distribution okay this this definitions are
-[0:10:54] definitions are equivalent right so here you can see
-[0:10:56] equivalent right so here you can see that by setting H and Z to be zero these
-[0:10:59] that by setting H and Z to be zero these functions to be zero essentially we're
-[0:11:01] functions to be zero essentially we're canceling out the effect of the
-[0:11:02] canceling out the effect of the treatment
+[0:05:44] Proposal is to take this randomization
+[0:05:46] tests and then utilize um test
+[0:05:49] statistics that that depend on machine
+[0:05:51] learning uh and especially the
+[0:05:53] prediction error of machine learning
+[0:05:54] models uh so the key novelty here is is
+[0:05:58] is inside the uh is in this idea of
+[0:06:00] using test statistics that are um kind
+[0:06:02] of are based on on machine learning
+[0:06:05] methods um our the our main theoretical
+[0:06:07] result will be that this better
+[0:06:09] flexibility this better prediction power
+[0:06:11] from ml can translates immediately into
+[0:06:13] higher statistical power for testing um
+[0:06:15] for tests of certain uh causal effects
+[0:06:18] um in doing so uh even though we kind of
+[0:06:20] using these complex models we retain the
+[0:06:22] finite sample validity of the
+[0:06:24] randomization test or permutation tests
+[0:06:26] uh and we apply that to test for complex
+[0:06:28] ritten effects including hogen
+[0:06:30] uh spillovers under interference and so
+[0:06:32] on uh there are other practical uses
+[0:06:35] let's say for taking coed balance or for
+[0:06:37] model selection but today we don't have
+[0:06:38] the time to to get into there but the
+[0:06:40] you'll see that the idea is flexible
+[0:06:42] enough to be applied in uh for for
+[0:06:44] different different questions of
+[0:06:46] Interest okay so the outline for today
+[0:06:49] is the following I will set up some um
+[0:06:51] notation just to um kind of make
+[0:06:53] concrete what we're talking about here I
+[0:06:55] will describe the main procedure and
+[0:06:57] briefly mention the finance validity
+[0:07:00] um then I will talk about the type two
+[0:07:02] error analysis which is our key
+[0:07:03] theoretical contribution here uh and
+[0:07:06] then we will talk about the uh the
+[0:07:08] various applications including the
+[0:07:09] global null heterogen and and spillovers
+[0:07:12] um all of them under a unifying
+[0:07:13] framework as as we will see uh today uh
+[0:07:17] and then we'll we'll finish with
+[0:07:18] simulations and at some point w will U
+[0:07:21] we we take
+[0:07:23] over okay um at this point is it is it
+[0:07:26] clear kind of are there any questions I
+[0:07:28] can take a look at the chat to see all
+[0:07:30] right there was a a comment about slides
+[0:07:32] please let me know if there are any
+[0:07:33] questions if anything is is unclear but
+[0:07:35] at this point I can can proceed to uh
+[0:07:37] describe first the um the model and then
+[0:07:39] if um I will introduce quite a lot of
+[0:07:41] not notation here if there are any
+[0:07:43] questions please feel free to ask on the
+[0:07:45] chat or or or um at any
+[0:07:48] point okay so the setup is the following
+[0:07:51] we have binary treatments uh Z is the
+[0:07:54] entire treatment Vector Z1 Z2 are the
+[0:07:57] individual treatments and the treatment
+[0:07:59] assignment is known
+[0:08:00] because we are in experimental study uh
+[0:08:03] the Y is the vector of outcomes and then
+[0:08:05] X is the vector of coari which can be
+[0:08:10] multi-dimensional now the outcome model
+[0:08:12] is as follows and we Define an outcome
+[0:08:14] model um even though in causal inference
+[0:08:17] we tend to start from the causal from
+[0:08:19] the potential outcomes right here we
+[0:08:20] will start from the from the model uh
+[0:08:22] and then back out what this means for
+[0:08:24] the potential outcomes and we do this in
+[0:08:26] order to to unify all the different
+[0:08:28] hypothesis and tests we will we will we
+[0:08:31] will consider so the ARA Model includes
+[0:08:33] a baseline effect this B function here
+[0:08:36] um a direct effect this H function and
+[0:08:38] then a spillover effect G which depends
+[0:08:41] on the coari X but also depends on the
+[0:08:43] treatment of other of units other than I
+[0:08:46] as you can see here this notation Z
+[0:08:47] minus I implies that the outcome of unit
+[0:08:50] I might depend on others treatment on
+[0:08:51] other unit treatment okay which is the
+[0:08:53] the definition of interference or or or
+[0:08:55] spill L effect the Epsilon part is
+[0:08:58] independent on noise and in this this
+[0:09:00] definition uh we kind of follow try to
+[0:09:02] follow the causal ml literature um where
+[0:09:06] it it's it's usual it's common to Define
+[0:09:09] this fun this B and H and Z this
+[0:09:11] functions to be some kind of General
+[0:09:14] functions arbitrary functions from some
+[0:09:16] some some flexible uh function class
+[0:09:19] okay so we'll try to follow that
+[0:09:20] literature in the in in our
+[0:09:23] setup okay so B will be the Baseline H
+[0:09:26] will be the direct effect and then G
+[0:09:27] will be the uh the spillover effect and
+[0:09:30] we're going to start with a simple null
+[0:09:32] hypothesis that the treatment has no
+[0:09:33] effect right suppose you're in situation
+[0:09:35] like an online uh tech company uh
+[0:09:37] there's you have a very complex model um
+[0:09:40] that's a lot of covariates um a lot of
+[0:09:43] treatments happening and you would just
+[0:09:44] like to know whether the treatment has
+[0:09:46] any effect at all right whatever this
+[0:09:48] new VAR varant variation that you
+[0:09:50] included this new feature affected the
+[0:09:53] outcome in any particular way and by the
+[0:09:55] way I should mention here that these
+[0:09:56] functions H and G it could include time
+[0:09:59] as well this is not a cross-sectional
+[0:10:01] study only there could be a panel data
+[0:10:03] and there could be temporal effects okay
+[0:10:06] as as well so um that's that that can be
+[0:10:09] important so suppose you have this very
+[0:10:11] complex model that you might be thinking
+[0:10:13] um and there might be some complex
+[0:10:14] treatments and you'd like to know
+[0:10:15] whether treatment has any effect how do
+[0:10:18] will you translate this into an all
+[0:10:19] hypothesis where basically the not here
+[0:10:21] will be that the H and G functions are
+[0:10:23] zero okay and then um if we want to
+[0:10:26] assume that there are no spill over
+[0:10:28] effect then we can set G to be zero
+[0:10:30] again again in the alternative but then
+[0:10:32] in the alternative we might want to
+[0:10:33] check whether H is not zero okay now
+[0:10:37] because we don't assume interference or
+[0:10:38] spillovers this is very similar to what
+[0:10:40] is known as the Fisher SARP null or like
+[0:10:43] a weaker version of this where you're
+[0:10:44] testing whether the y z y1 potential
+[0:10:47] outcomes um I have the same are draws
+[0:10:49] from the same independent draws from the
+[0:10:51] same distribution okay this this
+[0:10:53] definitions are
+[0:10:54] equivalent right so here you can see
+[0:10:56] that by setting H and Z to be zero these
+[0:10:59] functions to be zero essentially we're
+[0:11:01] canceling out the effect of the
 [0:11:04] treatment completely okay now how do we test a
-[0:11:06] completely okay now how do we test a null hypothesis like that how can we
-[0:11:08] null hypothesis like that how can we test that Z has no has no effect at all
-[0:11:11] test that Z has no has no effect at all um there is one existing approach which
-[0:11:13] um there is one existing approach which we can extend to include to include ml
-[0:11:16] we can extend to include to include ml models uh which we call the residualized
-[0:11:18] models uh which we call the residualized test approach uh it's based on the um
-[0:11:22] test approach uh it's based on the um seminal work of rosenb in in
-[0:11:24] seminal work of rosenb in in randomization in randomization test test
-[0:11:26] randomization in randomization test test for causal inference and the idea goes
-[0:11:28] for causal inference and the idea goes as follows it says make take do two
-[0:11:31] as follows it says make take do two tests one sorry two steps One Step will
-[0:11:34] tests one sorry two steps One Step will be to fit a model of Y on
-[0:11:36] be to fit a model of Y on X um and then take the residuals and
-[0:11:39] X um and then take the residuals and then perform a permutation test on the
-[0:11:41] then perform a permutation test on the residuals okay so this this takes care
-[0:11:43] residuals okay so this this takes care of the B function the Baseline effect on
-[0:11:45] of the B function the Baseline effect on the from the conv variance now I should
-[0:11:48] the from the conv variance now I should say that the original method was
-[0:11:49] say that the original method was developed uh in for conver adjustment in
-[0:11:52] developed uh in for conver adjustment in linear models so it doesn't talk about
-[0:11:54] linear models so it doesn't talk about ml methods but it's very simple
-[0:11:55] ml methods but it's very simple straightforward to uh uh to include in
-[0:11:58] straightforward to uh uh to include in Step One a flexible ml ml model and even
-[0:12:02] Step One a flexible ml ml model and even though you use a flexible ml method it
-[0:12:04] though you use a flexible ml method it still will retain the finance validity
-[0:12:06] still will retain the finance validity in step two by by virtu of
-[0:12:09] in step two by by virtu of randomization now we will call this
-[0:12:11] randomization now we will call this residualized test and we will refer to
-[0:12:13] residualized test and we will refer to this as a baseline we will consider this
-[0:12:15] this as a baseline we will consider this to be a baseline because anecdotally we
-[0:12:17] to be a baseline because anecdotally we hear that it's being applied in the
-[0:12:18] hear that it's being applied in the literature uh sorry in the literature
-[0:12:21] literature uh sorry in the literature and in the the the idea exists in the
-[0:12:23] and in the the the idea exists in the literature but also anecdotally we hear
-[0:12:24] literature but also anecdotally we hear that it also uh is is applied in the
-[0:12:27] that it also uh is is applied in the industry uh we haven't seen this idea
-[0:12:29] industry uh we haven't seen this idea written down concretely um using ml
-[0:12:31] written down concretely um using ml methods but if people know uh in the
-[0:12:34] methods but if people know uh in the audience they they know about this we
-[0:12:35] audience they they know about this we we'll be very happy to to um to to know
-[0:12:38] we'll be very happy to to um to to know about it so we will refer to this as a
-[0:12:42] about it so we will refer to this as a residualized approach and then we will
-[0:12:44] residualized approach and then we will we will see whether we can do something
-[0:12:46] we will see whether we can do something better um and for our test our argument
-[0:12:48] better um and for our test our argument is that yes we we can potentially do
-[0:12:50] is that yes we we can potentially do something better because in in the nth
-[0:12:53] something better because in in the nth hypothesis we're trying to test we only
-[0:12:55] hypothesis we're trying to test we only want to detect an effect of the
-[0:12:57] want to detect an effect of the treatment right we want we don't want to
-[0:12:59] treatment right we want we don't want to do anything else we want don't want to
-[0:13:01] do anything else we want don't want to quantify uh we want don't we don't want
-[0:13:03] quantify uh we want don't we don't want to do inference we only want to detect
-[0:13:06] to do inference we only want to detect whether there is any any type of complex
-[0:13:08] whether there is any any type of complex put in effect and our proposal is the
-[0:13:11] put in effect and our proposal is the following we will We The Proposal will
-[0:13:14] following we will We The Proposal will be to just use two models one will be a
-[0:13:17] be to just use two models one will be a baseline model that that fits uh y on X
-[0:13:21] baseline model that that fits uh y on X and then another model M1 will be to
-[0:13:23] and then another model M1 will be to include the treatment as well okay so
-[0:13:26] include the treatment as well okay so we're going to fit a model of Y on
-[0:13:28] we're going to fit a model of Y on outcome uh uh sorry the outcome on the
-[0:13:31] outcome uh uh sorry the outcome on the on the treatments and the and the coari
-[0:13:34] on the treatments and the and the coari and the test statistic is going to be a
-[0:13:35] and the test statistic is going to be a difference in the C validation errors
-[0:13:37] difference in the C validation errors between these two models right the m0
-[0:13:40] between these two models right the m0 that doesn't include the treatment and
-[0:13:41] that doesn't include the treatment and then M1 that includes the
-[0:13:44] then M1 that includes the treatment intuitively this type of test
-[0:13:47] treatment intuitively this type of test statistic it measures whether Z is
-[0:13:49] statistic it measures whether Z is predictive of the outcome okay and so it
-[0:13:52] predictive of the outcome okay and so it can allow for if the models are complex
-[0:13:55] can allow for if the models are complex it allows for complex dependencies
-[0:13:57] it allows for complex dependencies between treatment and outcome um as as
-[0:14:00] between treatment and outcome um as as much as they can be captured by my model
-[0:14:03] much as they can be captured by my model M1 however we should point out a
-[0:14:05] M1 however we should point out a limitation here is that we this is only
-[0:14:08] limitation here is that we this is only meant to test for a TRD effect right no
-[0:14:11] meant to test for a TRD effect right no matter how complex it is it could be
-[0:14:12] matter how complex it is it could be from a spillover it could be from a
-[0:14:14] from a spillover it could be from a temporal effect it could be from from a
-[0:14:16] temporal effect it could be from from a direct effect uh but it's it's it's
-[0:14:19] direct effect uh but it's it's it's supposed to for to detect the Tre effect
-[0:14:21] supposed to for to detect the Tre effect not to not to quantify it and this where
-[0:14:23] not to not to quantify it and this where we we think we can do better than a a
-[0:14:26] we we think we can do better than a a method like the residualized approach
-[0:14:29] method like the residualized approach okay and also emphasize here that our
-[0:14:31] okay and also emphasize here that our the here's also the key novelty of our
-[0:14:33] the here's also the key novelty of our method as as we think about it is that
-[0:14:36] method as as we think about it is that we're utilizing a test statistic that
-[0:14:38] we're utilizing a test statistic that takes two complex models and also uses
-[0:14:40] takes two complex models and also uses the cross validation errors from from
-[0:14:42] the cross validation errors from from these two from these two models right so
-[0:14:44] these two from these two models right so it's a complex it has it has probably a
-[0:14:47] it's a complex it has it has probably a complex and probably intractable samp
-[0:14:49] complex and probably intractable samp distribution but by using randomization
-[0:14:51] distribution but by using randomization Theory we can use randomization
-[0:14:53] Theory we can use randomization distribution instead of coming up with
-[0:14:55] distribution instead of coming up with the sounding distribution of this
-[0:14:57] the sounding distribution of this complex uh statistic
-[0:15:00] complex uh statistic now probably you have identified also
-[0:15:03] now probably you have identified also that this idea is is quite um it's it's
-[0:15:07] that this idea is is quite um it's it's intuitive right in the sense that it's
-[0:15:09] intuitive right in the sense that it's it defines an anova type of statistic um
-[0:15:12] it defines an anova type of statistic um by comparing to different models and in
-[0:15:14] by comparing to different models and in fact in the in their semal paper sorry
-[0:15:16] fact in the in their semal paper sorry seminal textbook on field experiments
-[0:15:18] seminal textbook on field experiments Gerber and green they do describe a very
-[0:15:20] Gerber and green they do describe a very similar procedure where you have a
-[0:15:22] similar procedure where you have a randomization test but you compare the
-[0:15:24] randomization test but you compare the the stand you you compare the Fest
-[0:15:25] the stand you you compare the Fest essentially between between one model
-[0:15:27] essentially between between one model with a treatment and another model
-[0:15:28] with a treatment and another model without a treat
-[0:15:30] without a treat so we kind of take this idea and and
-[0:15:32] so we kind of take this idea and and extend it to to using complex uh uh
-[0:15:35] extend it to to using complex uh uh sorry complex machine learning models um
-[0:15:38] sorry complex machine learning models um this idea also is related to variable
-[0:15:41] this idea also is related to variable importance measures um in in the machine
-[0:15:43] importance measures um in in the machine learning literature because essentially
-[0:15:45] learning literature because essentially we're we're trying to to understand how
-[0:15:47] we're we're trying to to understand how much the treatment is predictive of the
-[0:15:49] much the treatment is predictive of the of the outcome and we will see assume
-[0:15:52] of the outcome and we will see assume that the power of our test is
-[0:15:53] that the power of our test is characterized by a variable important
-[0:15:55] characterized by a variable important measure as as you see um as you see
-[0:15:57] measure as as you see um as you see above
+[0:11:06] null hypothesis like that how can we
+[0:11:08] test that Z has no has no effect at all
+[0:11:11] um there is one existing approach which
+[0:11:13] we can extend to include to include ml
+[0:11:16] models uh which we call the residualized
+[0:11:18] test approach uh it's based on the um
+[0:11:22] seminal work of rosenb in in
+[0:11:24] randomization in randomization test test
+[0:11:26] for causal inference and the idea goes
+[0:11:28] as follows it says make take do two
+[0:11:31] tests one sorry two steps One Step will
+[0:11:34] be to fit a model of Y on
+[0:11:36] X um and then take the residuals and
+[0:11:39] then perform a permutation test on the
+[0:11:41] residuals okay so this this takes care
+[0:11:43] of the B function the Baseline effect on
+[0:11:45] the from the conv variance now I should
+[0:11:48] say that the original method was
+[0:11:49] developed uh in for conver adjustment in
+[0:11:52] linear models so it doesn't talk about
+[0:11:54] ml methods but it's very simple
+[0:11:55] straightforward to uh uh to include in
+[0:11:58] Step One a flexible ml ml model and even
+[0:12:02] though you use a flexible ml method it
+[0:12:04] still will retain the finance validity
+[0:12:06] in step two by by virtu of
+[0:12:09] randomization now we will call this
+[0:12:11] residualized test and we will refer to
+[0:12:13] this as a baseline we will consider this
+[0:12:15] to be a baseline because anecdotally we
+[0:12:17] hear that it's being applied in the
+[0:12:18] literature uh sorry in the literature
+[0:12:21] and in the the the idea exists in the
+[0:12:23] literature but also anecdotally we hear
+[0:12:24] that it also uh is is applied in the
+[0:12:27] industry uh we haven't seen this idea
+[0:12:29] written down concretely um using ml
+[0:12:31] methods but if people know uh in the
+[0:12:34] audience they they know about this we
+[0:12:35] we'll be very happy to to um to to know
+[0:12:38] about it so we will refer to this as a
+[0:12:42] residualized approach and then we will
+[0:12:44] we will see whether we can do something
+[0:12:46] better um and for our test our argument
+[0:12:48] is that yes we we can potentially do
+[0:12:50] something better because in in the nth
+[0:12:53] hypothesis we're trying to test we only
+[0:12:55] want to detect an effect of the
+[0:12:57] treatment right we want we don't want to
+[0:12:59] do anything else we want don't want to
+[0:13:01] quantify uh we want don't we don't want
+[0:13:03] to do inference we only want to detect
+[0:13:06] whether there is any any type of complex
+[0:13:08] put in effect and our proposal is the
+[0:13:11] following we will We The Proposal will
+[0:13:14] be to just use two models one will be a
+[0:13:17] baseline model that that fits uh y on X
+[0:13:21] and then another model M1 will be to
+[0:13:23] include the treatment as well okay so
+[0:13:26] we're going to fit a model of Y on
+[0:13:28] outcome uh uh sorry the outcome on the
+[0:13:31] on the treatments and the and the coari
+[0:13:34] and the test statistic is going to be a
+[0:13:35] difference in the C validation errors
+[0:13:37] between these two models right the m0
+[0:13:40] that doesn't include the treatment and
+[0:13:41] then M1 that includes the
+[0:13:44] treatment intuitively this type of test
+[0:13:47] statistic it measures whether Z is
+[0:13:49] predictive of the outcome okay and so it
+[0:13:52] can allow for if the models are complex
+[0:13:55] it allows for complex dependencies
+[0:13:57] between treatment and outcome um as as
+[0:14:00] much as they can be captured by my model
+[0:14:03] M1 however we should point out a
+[0:14:05] limitation here is that we this is only
+[0:14:08] meant to test for a TRD effect right no
+[0:14:11] matter how complex it is it could be
+[0:14:12] from a spillover it could be from a
+[0:14:14] temporal effect it could be from from a
+[0:14:16] direct effect uh but it's it's it's
+[0:14:19] supposed to for to detect the Tre effect
+[0:14:21] not to not to quantify it and this where
+[0:14:23] we we think we can do better than a a
+[0:14:26] method like the residualized approach
+[0:14:29] okay and also emphasize here that our
+[0:14:31] the here's also the key novelty of our
+[0:14:33] method as as we think about it is that
+[0:14:36] we're utilizing a test statistic that
+[0:14:38] takes two complex models and also uses
+[0:14:40] the cross validation errors from from
+[0:14:42] these two from these two models right so
+[0:14:44] it's a complex it has it has probably a
+[0:14:47] complex and probably intractable samp
+[0:14:49] distribution but by using randomization
+[0:14:51] Theory we can use randomization
+[0:14:53] distribution instead of coming up with
+[0:14:55] the sounding distribution of this
+[0:14:57] complex uh statistic
+[0:15:00] now probably you have identified also
+[0:15:03] that this idea is is quite um it's it's
+[0:15:07] intuitive right in the sense that it's
+[0:15:09] it defines an anova type of statistic um
+[0:15:12] by comparing to different models and in
+[0:15:14] fact in the in their semal paper sorry
+[0:15:16] seminal textbook on field experiments
+[0:15:18] Gerber and green they do describe a very
+[0:15:20] similar procedure where you have a
+[0:15:22] randomization test but you compare the
+[0:15:24] the stand you you compare the Fest
+[0:15:25] essentially between between one model
+[0:15:27] with a treatment and another model
+[0:15:28] without a treat
+[0:15:30] so we kind of take this idea and and
+[0:15:32] extend it to to using complex uh uh
+[0:15:35] sorry complex machine learning models um
+[0:15:38] this idea also is related to variable
+[0:15:41] importance measures um in in the machine
+[0:15:43] learning literature because essentially
+[0:15:45] we're we're trying to to understand how
+[0:15:47] much the treatment is predictive of the
+[0:15:49] of the outcome and we will see assume
+[0:15:52] that the power of our test is
+[0:15:53] characterized by a variable important
+[0:15:55] measure as as you see um as you see
 [0:16:00] above so the procedure is the following it's
-[0:16:01] so the procedure is the following it's quite simple so we take the test
-[0:16:03] quite simple so we take the test statistic as defined before this Delta
-[0:16:05] statistic as defined before this Delta in the C validations we randomize the
-[0:16:07] in the C validations we randomize the treatments uh we recalculate the test
-[0:16:09] treatments uh we recalculate the test statistic and then we calculate the P
-[0:16:11] statistic and then we calculate the P value based on that okay and now this is
-[0:16:13] value based on that okay and now this is still um under the all hypothesis of of
-[0:16:16] still um under the all hypothesis of of no trib effect this is still finite s
-[0:16:18] no trib effect this is still finite s valid regardless of how complex these
-[0:16:20] valid regardless of how complex these these models are following the standard
-[0:16:22] these models are following the standard randomization Theory okay so um fin
-[0:16:25] randomization Theory okay so um fin validity is retained even though we're
-[0:16:28] validity is retained even though we're using this this of defin the complex
-[0:16:30] using this this of defin the complex definition of the of the tested Sy now
-[0:16:34] definition of the of the tested Sy now of course it we have aity essentially
-[0:16:36] of course it we have aity essentially for free from the experiment but what
-[0:16:37] for free from the experiment but what about the uh the type two error bound
-[0:16:40] about the uh the type two error bound and in order to make the analysis here
-[0:16:42] and in order to make the analysis here um we make the following simplifying
-[0:16:43] um we make the following simplifying assumptions we assume that we have a
-[0:16:45] assumptions we assume that we have a simple beri design uh we have make some
-[0:16:48] simple beri design uh we have make some assumptions about the the the properties
-[0:16:49] assumptions about the the the properties of the um the coat and the and the
-[0:16:51] of the um the coat and the and the errors and we also assume uniformly
-[0:16:53] errors and we also assume uniformly bounded
+[0:16:01] quite simple so we take the test
+[0:16:03] statistic as defined before this Delta
+[0:16:05] in the C validations we randomize the
+[0:16:07] treatments uh we recalculate the test
+[0:16:09] statistic and then we calculate the P
+[0:16:11] value based on that okay and now this is
+[0:16:13] still um under the all hypothesis of of
+[0:16:16] no trib effect this is still finite s
+[0:16:18] valid regardless of how complex these
+[0:16:20] these models are following the standard
+[0:16:22] randomization Theory okay so um fin
+[0:16:25] validity is retained even though we're
+[0:16:28] using this this of defin the complex
+[0:16:30] definition of the of the tested Sy now
+[0:16:34] of course it we have aity essentially
+[0:16:36] for free from the experiment but what
+[0:16:37] about the uh the type two error bound
+[0:16:40] and in order to make the analysis here
+[0:16:42] um we make the following simplifying
+[0:16:43] assumptions we assume that we have a
+[0:16:45] simple beri design uh we have make some
+[0:16:48] assumptions about the the the properties
+[0:16:49] of the um the coat and the and the
+[0:16:51] errors and we also assume uniformly
 [0:16:54] bounded outcomes and the definition of script F
-[0:16:57] outcomes and the definition of script F will be the function class for the full
-[0:16:59] will be the function class for the full Model F not will be the function class
-[0:17:01] Model F not will be the function class for the reduced model so suppose we're
-[0:17:04] for the reduced model so suppose we're searching in these in these function
-[0:17:06] searching in these in these function classes and would like to test the the
-[0:17:08] classes and would like to test the the understand the power of our test against
-[0:17:10] understand the power of our test against the alternative hypothesis where the the
-[0:17:12] the alternative hypothesis where the the function H is not is not identical as
-[0:17:15] function H is not is not identical as zero and here's our main theoretical
-[0:17:19] zero and here's our main theoretical results the type two error under certain
-[0:17:22] results the type two error under certain assumptions depends of course on the
-[0:17:24] assumptions depends of course on the number of samples that you have n it
-[0:17:27] number of samples that you have n it depends on the number of uh folds that
-[0:17:28] depends on the number of uh folds that you're using and the the the bound on
-[0:17:30] you're using and the the the bound on the outcomes but it also depends
-[0:17:32] the outcomes but it also depends crucially on this Delta parameter this
-[0:17:34] crucially on this Delta parameter this Delta Square as you can see over there
-[0:17:36] Delta Square as you can see over there the Delta is a measure that that that
-[0:17:40] the Delta is a measure that that that tries to U quantify the variable
-[0:17:42] tries to U quantify the variable importance of the treatment right it
-[0:17:43] importance of the treatment right it compares the prediction error from the
-[0:17:45] compares the prediction error from the m0 minus the prediction error from the
-[0:17:48] m0 minus the prediction error from the from M1 uh the reduced model and then
-[0:17:50] from M1 uh the reduced model and then the full model for example in a linear
-[0:17:53] the full model for example in a linear model where T is the coefficient for the
-[0:17:54] model where T is the coefficient for the for the treatment this is this Delta is
-[0:17:56] for the treatment this is this Delta is T Square okay it's um and
-[0:17:59] T Square okay it's um and and this the the stronger the treatment
-[0:18:01] and this the the stronger the treatment effect is the the the more the higher
-[0:18:04] effect is the the the more the higher the power is so the the takeaway here is
-[0:18:07] the power is so the the takeaway here is that by using better predictive models
-[0:18:10] that by using better predictive models you kind of get a larger Delta quantity
-[0:18:12] you kind of get a larger Delta quantity a more U you kind of if if the treatment
-[0:18:14] a more U you kind of if if the treatment is important you're going to capture
-[0:18:16] is important you're going to capture that that better and that leads to more
-[0:18:18] that that better and that leads to more High higher power for testing um um
-[0:18:22] High higher power for testing um um causal
+[0:16:57] will be the function class for the full
+[0:16:59] Model F not will be the function class
+[0:17:01] for the reduced model so suppose we're
+[0:17:04] searching in these in these function
+[0:17:06] classes and would like to test the the
+[0:17:08] understand the power of our test against
+[0:17:10] the alternative hypothesis where the the
+[0:17:12] function H is not is not identical as
+[0:17:15] zero and here's our main theoretical
+[0:17:19] results the type two error under certain
+[0:17:22] assumptions depends of course on the
+[0:17:24] number of samples that you have n it
+[0:17:27] depends on the number of uh folds that
+[0:17:28] you're using and the the the bound on
+[0:17:30] the outcomes but it also depends
+[0:17:32] crucially on this Delta parameter this
+[0:17:34] Delta Square as you can see over there
+[0:17:36] the Delta is a measure that that that
+[0:17:40] tries to U quantify the variable
+[0:17:42] importance of the treatment right it
+[0:17:43] compares the prediction error from the
+[0:17:45] m0 minus the prediction error from the
+[0:17:48] from M1 uh the reduced model and then
+[0:17:50] the full model for example in a linear
+[0:17:53] model where T is the coefficient for the
+[0:17:54] for the treatment this is this Delta is
+[0:17:56] T Square okay it's um and
+[0:17:59] and this the the stronger the treatment
+[0:18:01] effect is the the the more the higher
+[0:18:04] the power is so the the takeaway here is
+[0:18:07] that by using better predictive models
+[0:18:10] you kind of get a larger Delta quantity
+[0:18:12] a more U you kind of if if the treatment
+[0:18:14] is important you're going to capture
+[0:18:16] that that better and that leads to more
+[0:18:18] High higher power for testing um um
+[0:18:22] causal
 [0:18:28] hypothesis uh and finally a comparison to the residualized approach which from
-[0:18:30] to the residualized approach which from anecdotally we we hear that it's being
-[0:18:32] anecdotally we we hear that it's being used in the literature which to remind
-[0:18:34] used in the literature which to remind you first uh fits a model and then
-[0:18:36] you first uh fits a model and then performs a randomization test in the
-[0:18:38] performs a randomization test in the residuals uh we can also quantify the
-[0:18:40] residuals uh we can also quantify the difference between what this is doing
-[0:18:42] difference between what this is doing and what we are doing uh and to do that
-[0:18:44] and what we are doing uh and to do that we'll just calculate the Delta
-[0:18:46] we'll just calculate the Delta quantities for these two approaches um
-[0:18:48] quantities for these two approaches um and the because the power difference com
-[0:18:51] and the because the power difference com is really the difference in this the
-[0:18:52] is really the difference in this the power difference between these two
-[0:18:54] power difference between these two approaches is depends on the and the
-[0:18:56] approaches is depends on the and the difference between these Delta
-[0:18:57] difference between these Delta quantities and we can show that the
-[0:19:00] quantities and we can show that the under the our Theory assumptions that
-[0:19:03] under the our Theory assumptions that this this difference is proportional to
-[0:19:06] this this difference is proportional to the variance in the H function the hogen
-[0:19:08] the variance in the H function the hogen theer effect so if there are no
-[0:19:10] theer effect so if there are no hetrogeneous effects then these methods
-[0:19:12] hetrogeneous effects then these methods will be identical but if there's some
-[0:19:15] will be identical but if there's some some form of heterogenity then there
-[0:19:17] some form of heterogenity then there will be a difference uh in the power
-[0:19:18] will be a difference uh in the power between these two um two
+[0:18:30] anecdotally we we hear that it's being
+[0:18:32] used in the literature which to remind
+[0:18:34] you first uh fits a model and then
+[0:18:36] performs a randomization test in the
+[0:18:38] residuals uh we can also quantify the
+[0:18:40] difference between what this is doing
+[0:18:42] and what we are doing uh and to do that
+[0:18:44] we'll just calculate the Delta
+[0:18:46] quantities for these two approaches um
+[0:18:48] and the because the power difference com
+[0:18:51] is really the difference in this the
+[0:18:52] power difference between these two
+[0:18:54] approaches is depends on the and the
+[0:18:56] difference between these Delta
+[0:18:57] quantities and we can show that the
+[0:19:00] under the our Theory assumptions that
+[0:19:03] this this difference is proportional to
+[0:19:06] the variance in the H function the hogen
+[0:19:08] theer effect so if there are no
+[0:19:10] hetrogeneous effects then these methods
+[0:19:12] will be identical but if there's some
+[0:19:15] some form of heterogenity then there
+[0:19:17] will be a difference uh in the power
+[0:19:18] between these two um two
 [0:19:26] approaches okay so that concludes the um our main theoretical result and then
-[0:19:27] our main theoretical result and then going forward when one can take over and
-[0:19:29] going forward when one can take over and can and can talk to you about how we
-[0:19:31] can and can talk to you about how we take this idea even further and apply it
-[0:19:34] take this idea even further and apply it to testing heterogenous effects and and
-[0:19:36] to testing heterogenous effects and and spillover effects so which one and uh
-[0:19:39] spillover effects so which one and uh please please please take over and uh
-[0:19:42] please please please take over and uh I'll try to answer some questions on the
-[0:19:44] I'll try to answer some questions on the on the chat as well okay sounds good uh
-[0:19:48] on the chat as well okay sounds good uh thank you Panos and let me share my
-[0:19:50] thank you Panos and let me share my screen now
+[0:19:27] going forward when one can take over and
+[0:19:29] can and can talk to you about how we
+[0:19:31] take this idea even further and apply it
+[0:19:34] to testing heterogenous effects and and
+[0:19:36] spillover effects so which one and uh
+[0:19:39] please please please take over and uh
+[0:19:42] I'll try to answer some questions on the
+[0:19:44] on the chat as well okay sounds good uh
+[0:19:48] thank you Panos and let me share my
+[0:19:50] screen now
 [0:20:11] can you see my screen just to confirm okay cool uh hello everyone I'm wian and
-[0:20:14] okay cool uh hello everyone I'm wian and I will continue from here and discuss
-[0:20:16] I will continue from here and discuss other applications of our ml assisted
-[0:20:19] other applications of our ml assisted randomization test for different
-[0:20:21] randomization test for different hypothesis beyond the global known case
-[0:20:23] hypothesis beyond the global known case that Panos just
-[0:20:25] that Panos just introduced and uh the first case we want
-[0:20:27] introduced and uh the first case we want to consider is this treatment effect
-[0:20:30] to consider is this treatment effect hogen you know in many applied
-[0:20:32] hogen you know in many applied researches people are more and more
-[0:20:34] researches people are more and more interested to understand whether and how
-[0:20:37] interested to understand whether and how the treatment effect vary across
-[0:20:39] the treatment effect vary across different units and um under our outcome
-[0:20:42] different units and um under our outcome model uh the N hypothesis of homogeneous
-[0:20:45] model uh the N hypothesis of homogeneous treatment effect or we say uh no
-[0:20:48] treatment effect or we say uh no heterogenity can be formulated as
-[0:20:51] heterogenity can be formulated as testing HX equals to T where to is some
-[0:20:55] testing HX equals to T where to is some unknown constant and accordingly the
-[0:20:57] unknown constant and accordingly the alternative hypothesis can be formulated
-[0:21:00] alternative hypothesis can be formulated as HX does not equal to T for any
-[0:21:03] as HX does not equal to T for any constant
+[0:20:14] I will continue from here and discuss
+[0:20:16] other applications of our ml assisted
+[0:20:19] randomization test for different
+[0:20:21] hypothesis beyond the global known case
+[0:20:23] that Panos just
+[0:20:25] introduced and uh the first case we want
+[0:20:27] to consider is this treatment effect
+[0:20:30] hogen you know in many applied
+[0:20:32] researches people are more and more
+[0:20:34] interested to understand whether and how
+[0:20:37] the treatment effect vary across
+[0:20:39] different units and um under our outcome
+[0:20:42] model uh the N hypothesis of homogeneous
+[0:20:45] treatment effect or we say uh no
+[0:20:48] heterogenity can be formulated as
+[0:20:51] testing HX equals to T where to is some
+[0:20:55] unknown constant and accordingly the
+[0:20:57] alternative hypothesis can be formulated
+[0:21:00] as HX does not equal to T for any
 [0:21:04] constant T and under this now hypothesis we can
-[0:21:07] T and under this now hypothesis we can write the outcome as Mu plus bxi plus
-[0:21:11] write the outcome as Mu plus bxi plus the additional term to capturing the
-[0:21:14] the additional term to capturing the constent treatment effect and compared
-[0:21:16] constent treatment effect and compared to the previous Global Now setup we have
-[0:21:19] to the previous Global Now setup we have this additional concentr treatment
-[0:21:21] this additional concentr treatment effect which makes us cannot directly
-[0:21:24] effect which makes us cannot directly apply our procedure one the previous
-[0:21:27] apply our procedure one the previous procedure it is because now naely
-[0:21:29] procedure it is because now naely randomizing the treatment assignment Z
-[0:21:31] randomizing the treatment assignment Z and this new setup will wash out the
-[0:21:34] and this new setup will wash out the constant treatment effect and leads to
-[0:21:36] constant treatment effect and leads to invalid P values for the for this hn
-[0:21:40] invalid P values for the for this hn hypothesis and our main idea to resolve
-[0:21:43] hypothesis and our main idea to resolve this
+[0:21:07] write the outcome as Mu plus bxi plus
+[0:21:11] the additional term to capturing the
+[0:21:14] constent treatment effect and compared
+[0:21:16] to the previous Global Now setup we have
+[0:21:19] this additional concentr treatment
+[0:21:21] effect which makes us cannot directly
+[0:21:24] apply our procedure one the previous
+[0:21:27] procedure it is because now naely
+[0:21:29] randomizing the treatment assignment Z
+[0:21:31] and this new setup will wash out the
+[0:21:34] constant treatment effect and leads to
+[0:21:36] invalid P values for the for this hn
+[0:21:40] hypothesis and our main idea to resolve
+[0:21:43] this
 [0:21:50] issue uh uh yes our main idea to resolve is this issue is to uh major Rize the
-[0:21:54] is this issue is to uh major Rize the test over the unknown to
+[0:21:54] test over the unknown to
 [0:22:02] okay here is a concrete testing procedure first we compute a transformed
-[0:22:04] procedure first we compute a transformed outcome by subtracting a constant
-[0:22:06] outcome by subtracting a constant treatment effect to zero here to zero is
-[0:22:09] treatment effect to zero here to zero is not necessarily the true to but it can
-[0:22:12] not necessarily the true to but it can be a specified constant
-[0:22:15] be a specified constant to and the second we apply procedure one
-[0:22:18] to and the second we apply procedure one on this transformed data set uh with a
-[0:22:22] on this transformed data set uh with a new outcome to obtain a corresponding P
-[0:22:24] new outcome to obtain a corresponding P value and lastly our P value star is
-[0:22:29] value and lastly our P value star is obtained by Computing the P value over
-[0:22:31] obtained by Computing the P value over all possible to zero and computationally
-[0:22:35] all possible to zero and computationally this can be achieved by searching over a
-[0:22:37] this can be achieved by searching over a set of grid
-[0:22:38] set of grid points so this is the uh testing
-[0:22:41] points so this is the uh testing procedure and you can see the high level
-[0:22:43] procedure and you can see the high level idea is quite simple by modifying the uh
-[0:22:46] idea is quite simple by modifying the uh our original uh procedure one so the
-[0:22:50] our original uh procedure one so the main idea is just to meize the P value
-[0:22:52] main idea is just to meize the P value in procedure one by enumerating all
-[0:22:54] in procedure one by enumerating all possible values for to and uh in terms
-[0:22:58] possible values for to and uh in terms of the validity it also enjoys the final
-[0:23:00] of the validity it also enjoys the final sample validity the reason is that under
-[0:23:03] sample validity the reason is that under the N hypothesis the P for the true
-[0:23:08] the N hypothesis the P for the true constant effect will be a finite sample
-[0:23:11] constant effect will be a finite sample valid P value and therefore our P value
-[0:23:13] valid P value and therefore our P value star the the accessible P value obtained
-[0:23:17] star the the accessible P value obtained from the mization will also be finite
-[0:23:20] from the mization will also be finite sample valid and this has been approved
-[0:23:23] sample valid and this has been approved in uh in previous works and in our
-[0:23:26] in uh in previous works and in our simulations we will concretely discuss
-[0:23:29] simulations we will concretely discuss its performance and compared to other
-[0:23:30] its performance and compared to other state-ofthe-art
+[0:22:04] outcome by subtracting a constant
+[0:22:06] treatment effect to zero here to zero is
+[0:22:09] not necessarily the true to but it can
+[0:22:12] be a specified constant
+[0:22:15] to and the second we apply procedure one
+[0:22:18] on this transformed data set uh with a
+[0:22:22] new outcome to obtain a corresponding P
+[0:22:24] value and lastly our P value star is
+[0:22:29] obtained by Computing the P value over
+[0:22:31] all possible to zero and computationally
+[0:22:35] this can be achieved by searching over a
+[0:22:37] set of grid
+[0:22:38] points so this is the uh testing
+[0:22:41] procedure and you can see the high level
+[0:22:43] idea is quite simple by modifying the uh
+[0:22:46] our original uh procedure one so the
+[0:22:50] main idea is just to meize the P value
+[0:22:52] in procedure one by enumerating all
+[0:22:54] possible values for to and uh in terms
+[0:22:58] of the validity it also enjoys the final
+[0:23:00] sample validity the reason is that under
+[0:23:03] the N hypothesis the P for the true
+[0:23:08] constant effect will be a finite sample
+[0:23:11] valid P value and therefore our P value
+[0:23:13] star the the accessible P value obtained
+[0:23:17] from the mization will also be finite
+[0:23:20] sample valid and this has been approved
+[0:23:23] in uh in previous works and in our
+[0:23:26] simulations we will concretely discuss
+[0:23:29] its performance and compared to other
+[0:23:30] state-ofthe-art
 [0:23:41] method okay and yeah if you have any questions feel free to um ask in the
-[0:23:44] questions feel free to um ask in the Q&amp;A uh so so this is for the
-[0:23:47] Q&amp;A uh so so this is for the hogen and next is for the
-[0:23:50] hogen and next is for the spillover spillover effect can occur
-[0:23:53] spillover spillover effect can occur when treatment on unit influences the
-[0:23:55] when treatment on unit influences the outcome of other units as we show in our
-[0:23:59] outcome of other units as we show in our uh outcome model here and this type of
-[0:24:02] uh outcome model here and this type of result can be very common in um this
-[0:24:05] result can be very common in um this type of effect can be very common in
-[0:24:07] type of effect can be very common in online social networks and many other
-[0:24:09] online social networks and many other field experiments if we fail to detect
-[0:24:12] field experiments if we fail to detect such experiment uh to sorry uh if we
-[0:24:15] such experiment uh to sorry uh if we fail to detect such effect it can lead
-[0:24:17] fail to detect such effect it can lead to biased estimations or conclusions
-[0:24:20] to biased estimations or conclusions therefore it is quite important to have
-[0:24:22] therefore it is quite important to have a diagnostic test to check whether such
-[0:24:25] a diagnostic test to check whether such effect exists or not on a given data set
-[0:24:29] effect exists or not on a given data set so under our outcome model the now
-[0:24:32] so under our outcome model the now hypothesis of no spillover effect can be
-[0:24:35] hypothesis of no spillover effect can be formulated as g equals to zero and
-[0:24:38] formulated as g equals to zero and accordingly the alternative is G not
-[0:24:40] accordingly the alternative is G not equal to zero to test this now
-[0:24:44] equal to zero to test this now hypothesis we will Define a new CV based
-[0:24:46] hypothesis we will Define a new CV based statistic and modify the procedure one
-[0:24:49] statistic and modify the procedure one to perform a conditional randomization
-[0:24:52] to perform a conditional randomization following the idea of certain previous
-[0:24:54] following the idea of certain previous words
+[0:23:44] Q&A uh so so this is for the
+[0:23:47] hogen and next is for the
+[0:23:50] spillover spillover effect can occur
+[0:23:53] when treatment on unit influences the
+[0:23:55] outcome of other units as we show in our
+[0:23:59] uh outcome model here and this type of
+[0:24:02] result can be very common in um this
+[0:24:05] type of effect can be very common in
+[0:24:07] online social networks and many other
+[0:24:09] field experiments if we fail to detect
+[0:24:12] such experiment uh to sorry uh if we
+[0:24:15] fail to detect such effect it can lead
+[0:24:17] to biased estimations or conclusions
+[0:24:20] therefore it is quite important to have
+[0:24:22] a diagnostic test to check whether such
+[0:24:25] effect exists or not on a given data set
+[0:24:29] so under our outcome model the now
+[0:24:32] hypothesis of no spillover effect can be
+[0:24:35] formulated as g equals to zero and
+[0:24:38] accordingly the alternative is G not
+[0:24:40] equal to zero to test this now
+[0:24:44] hypothesis we will Define a new CV based
+[0:24:46] statistic and modify the procedure one
+[0:24:49] to perform a conditional randomization
+[0:24:52] following the idea of certain previous
+[0:24:54] words
 [0:25:04] okay so here is the concrete Pro uh test statistic we also um follow the the
-[0:25:07] statistic we also um follow the the previous idea to consider a reduced
-[0:25:09] previous idea to consider a reduced model and a full model in the reduced
-[0:25:12] model and a full model in the reduced model m0 we take the Z and XI as the
-[0:25:16] model m0 we take the Z and XI as the inputs for the for to feed the model and
-[0:25:20] inputs for the for to feed the model and in the full model M1 we take Z AI
-[0:25:24] in the full model M1 we take Z AI transpose Z and X as inputs and our
-[0:25:28] transpose Z and X as inputs and our final has the statistic will be the
-[0:25:30] final has the statistic will be the difference of these two CV errors
-[0:25:33] difference of these two CV errors defined in equation four here and uh in
-[0:25:37] defined in equation four here and uh in our definition this a is the observe the
-[0:25:41] our definition this a is the observe the adjacency Matrix between the units to
-[0:25:44] adjacency Matrix between the units to help us capture the spillover effect and
-[0:25:47] help us capture the spillover effect and therefore in model one the term AI
-[0:25:50] therefore in model one the term AI transposing basically Returns the number
-[0:25:53] transposing basically Returns the number of treaten neighbors for a given
-[0:25:56] of treaten neighbors for a given unit and you can clearly see that this
-[0:25:59] unit and you can clearly see that this type of um test statistic will work in
-[0:26:03] type of um test statistic will work in the spillover setup because if spillover
-[0:26:06] the spillover setup because if spillover effects exist they can be partially
-[0:26:09] effects exist they can be partially captured by the model M1 through the
-[0:26:12] captured by the model M1 through the additional term AI transpose Z and X but
-[0:26:15] additional term AI transpose Z and X but they will not be captured by m0 and
-[0:26:17] they will not be captured by m0 and therefore we can tell the
-[0:26:20] therefore we can tell the difference and our testing procedure
-[0:26:22] difference and our testing procedure roughly speaking we be following the
-[0:26:24] roughly speaking we be following the procedure one but as we mentioned we
-[0:26:27] procedure one but as we mentioned we need an additional conditional
-[0:26:28] need an additional conditional randomization trick roughly speaking we
-[0:26:31] randomization trick roughly speaking we will focus on subset of uh experimental
-[0:26:34] will focus on subset of uh experimental units and randomize the treatment
-[0:26:36] units and randomize the treatment assignment Z by conditioning a sub
-[0:26:38] assignment Z by conditioning a sub Vector of treatment which is denoted by
-[0:26:40] Vector of treatment which is denoted by Z here of course in the conditional
-[0:26:43] Z here of course in the conditional randomization there are some technical
-[0:26:45] randomization there are some technical details and caveats in in implementing
-[0:26:49] details and caveats in in implementing this conditional randomization but uh we
-[0:26:51] this conditional randomization but uh we will not go to those details here and
-[0:26:55] will not go to those details here and the the high level takeaway is that we
-[0:26:57] the the high level takeaway is that we can incorporate those machine learning
-[0:26:59] can incorporate those machine learning models uh to detect the spillover effect
-[0:27:04] models uh to detect the spillover effect and it also enjoys the finite sample
-[0:27:06] and it also enjoys the finite sample validity uh because of this conditional
-[0:27:09] validity uh because of this conditional randomization
+[0:25:07] previous idea to consider a reduced
+[0:25:09] model and a full model in the reduced
+[0:25:12] model m0 we take the Z and XI as the
+[0:25:16] inputs for the for to feed the model and
+[0:25:20] in the full model M1 we take Z AI
+[0:25:24] transpose Z and X as inputs and our
+[0:25:28] final has the statistic will be the
+[0:25:30] difference of these two CV errors
+[0:25:33] defined in equation four here and uh in
+[0:25:37] our definition this a is the observe the
+[0:25:41] adjacency Matrix between the units to
+[0:25:44] help us capture the spillover effect and
+[0:25:47] therefore in model one the term AI
+[0:25:50] transposing basically Returns the number
+[0:25:53] of treaten neighbors for a given
+[0:25:56] unit and you can clearly see that this
+[0:25:59] type of um test statistic will work in
+[0:26:03] the spillover setup because if spillover
+[0:26:06] effects exist they can be partially
+[0:26:09] captured by the model M1 through the
+[0:26:12] additional term AI transpose Z and X but
+[0:26:15] they will not be captured by m0 and
+[0:26:17] therefore we can tell the
+[0:26:20] difference and our testing procedure
+[0:26:22] roughly speaking we be following the
+[0:26:24] procedure one but as we mentioned we
+[0:26:27] need an additional conditional
+[0:26:28] randomization trick roughly speaking we
+[0:26:31] will focus on subset of uh experimental
+[0:26:34] units and randomize the treatment
+[0:26:36] assignment Z by conditioning a sub
+[0:26:38] Vector of treatment which is denoted by
+[0:26:40] Z here of course in the conditional
+[0:26:43] randomization there are some technical
+[0:26:45] details and caveats in in implementing
+[0:26:49] this conditional randomization but uh we
+[0:26:51] will not go to those details here and
+[0:26:55] the the high level takeaway is that we
+[0:26:57] can incorporate those machine learning
+[0:26:59] models uh to detect the spillover effect
+[0:27:04] and it also enjoys the finite sample
+[0:27:06] validity uh because of this conditional
+[0:27:09] randomization
 [0:27:23] trick okay next um so so so far we have discussed a set of different ml assisted
-[0:27:26] discussed a set of different ml assisted test and uh now I will show some
-[0:27:30] test and uh now I will show some concrete simulation
-[0:27:32] concrete simulation results the first case is a hog genous
-[0:27:36] results the first case is a hog genous treatment effect where we consider a
-[0:27:38] treatment effect where we consider a similar setup as consoles paper we
-[0:27:40] similar setup as consoles paper we consider ID Bly design and we generate
-[0:27:43] consider ID Bly design and we generate ID coari and
-[0:27:46] ID coari and errors and uh importantly we consider
-[0:27:49] errors and uh importantly we consider two types of hetrogeneous
-[0:27:51] two types of hetrogeneous effect um in first in setup a we
-[0:27:55] effect um in first in setup a we consider a linear hetrogeneous treatment
-[0:27:57] consider a linear hetrogeneous treatment effect which is captured by the XI
-[0:28:00] effect which is captured by the XI transpose beta 1 here in the middle of
-[0:28:03] transpose beta 1 here in the middle of this
+[0:27:26] test and uh now I will show some
+[0:27:30] concrete simulation
+[0:27:32] results the first case is a hog genous
+[0:27:36] treatment effect where we consider a
+[0:27:38] similar setup as consoles paper we
+[0:27:40] consider ID Bly design and we generate
+[0:27:43] ID coari and
+[0:27:46] errors and uh importantly we consider
+[0:27:49] two types of hetrogeneous
+[0:27:51] effect um in first in setup a we
+[0:27:55] consider a linear hetrogeneous treatment
+[0:27:57] effect which is captured by the XI
+[0:28:00] transpose beta 1 here in the middle of
 [0:28:04] this equation and in the second setup we
-[0:28:07] equation and in the second setup we consider a nonlinear complex treatment
-[0:28:09] consider a nonlinear complex treatment effect a heterogeneous treatment effect
-[0:28:12] effect a heterogeneous treatment effect which is captured by those combinations
-[0:28:14] which is captured by those combinations of indicator functions and in both
-[0:28:17] of indicator functions and in both setups as you can see the blue parameter
-[0:28:20] setups as you can see the blue parameter tell s controls the degree of
-[0:28:22] tell s controls the degree of heterogenity and when t s equals to zero
-[0:28:26] heterogenity and when t s equals to zero um it it means no heterogenity and we
-[0:28:30] um it it means no heterogenity and we reduce the problem to a n
+[0:28:07] consider a nonlinear complex treatment
+[0:28:09] effect a heterogeneous treatment effect
+[0:28:12] which is captured by those combinations
+[0:28:14] of indicator functions and in both
+[0:28:17] setups as you can see the blue parameter
+[0:28:20] tell s controls the degree of
+[0:28:22] heterogenity and when t s equals to zero
+[0:28:26] um it it means no heterogenity and we
+[0:28:30] reduce the problem to a n
 [0:28:40] hypothesis so here are the rejection rates of different method over the t s
-[0:28:44] rates of different method over the t s uh to test for the
-[0:28:46] uh to test for the hyrogen we Implement two versions of our
-[0:28:49] hyrogen we Implement two versions of our method which is MLF frt and M LM F frt
-[0:28:55] method which is MLF frt and M LM F frt they in this two model uh in these two
-[0:28:57] they in this two model uh in these two methods we use
-[0:28:59] methods we use uh the random forest and linear model as
-[0:29:02] uh the random forest and linear model as our model class to feed the data so to
-[0:29:05] our model class to feed the data so to clarify here by using the ml ft we are
-[0:29:08] clarify here by using the ml ft we are not proposing any new machine learning
-[0:29:10] not proposing any new machine learning models we are just using those of the
-[0:29:13] models we are just using those of the Shelf machine learning models and uh we
-[0:29:15] Shelf machine learning models and uh we can do that because our method allows
-[0:29:18] can do that because our method allows the the the combination of frt and
-[0:29:22] the the the combination of frt and arbitrary of the Shelf machine learning
-[0:29:26] arbitrary of the Shelf machine learning models and uh two other state-ofthe-art
-[0:29:29] models and uh two other state-ofthe-art method compared here is VR and is SKS
-[0:29:33] method compared here is VR and is SKS they are proposed in dings paper and
-[0:29:35] they are proposed in dings paper and they are also finite sample valid VR
-[0:29:38] they are also finite sample valid VR uses a ratio of variances as a test
-[0:29:41] uses a ratio of variances as a test statistic and SKS uses a chog smof test
-[0:29:47] statistic and SKS uses a chog smof test statistics and in the linear setup we
-[0:29:49] statistics and in the linear setup we observe that the red curve which is the
-[0:29:52] observe that the red curve which is the which is the LM ft uh has the best power
-[0:29:56] which is the LM ft uh has the best power and is triled by the blue curve which is
-[0:29:59] and is triled by the blue curve which is MLF frt so both these are our method
-[0:30:02] MLF frt so both these are our method with different specification of the
-[0:30:04] with different specification of the model
+[0:28:44] uh to test for the
+[0:28:46] hyrogen we Implement two versions of our
+[0:28:49] method which is MLF frt and M LM F frt
+[0:28:55] they in this two model uh in these two
+[0:28:57] methods we use
+[0:28:59] uh the random forest and linear model as
+[0:29:02] our model class to feed the data so to
+[0:29:05] clarify here by using the ml ft we are
+[0:29:08] not proposing any new machine learning
+[0:29:10] models we are just using those of the
+[0:29:13] Shelf machine learning models and uh we
+[0:29:15] can do that because our method allows
+[0:29:18] the the the combination of frt and
+[0:29:22] arbitrary of the Shelf machine learning
+[0:29:26] models and uh two other state-ofthe-art
+[0:29:29] method compared here is VR and is SKS
+[0:29:33] they are proposed in dings paper and
+[0:29:35] they are also finite sample valid VR
+[0:29:38] uses a ratio of variances as a test
+[0:29:41] statistic and SKS uses a chog smof test
+[0:29:47] statistics and in the linear setup we
+[0:29:49] observe that the red curve which is the
+[0:29:52] LM ft uh has the best power
+[0:29:56] and is triled by the blue curve which is
+[0:29:59] MLF frt so both these are our method
+[0:30:02] with different specification of the
 [0:30:06] model classes when we go to the nonlinear case
-[0:30:08] classes when we go to the nonlinear case we observe that the blue curve is now
-[0:30:11] we observe that the blue curve is now have the best power and is slightly Tred
-[0:30:14] have the best power and is slightly Tred by the red curve which is the lmf
-[0:30:18] by the red curve which is the lmf frt so here in our simulation we want to
-[0:30:21] frt so here in our simulation we want to highlight the relation between the red
-[0:30:24] highlight the relation between the red curve and the blue curve across these
-[0:30:26] curve and the blue curve across these two different setups because somehow
-[0:30:28] two different setups because somehow aligns with our Theory uh on the power
-[0:30:32] aligns with our Theory uh on the power uh in setup a which is a linear setup um
-[0:30:37] uh in setup a which is a linear setup um a correctly a specified linear model
-[0:30:40] a correctly a specified linear model considered in lmf frt should have the
-[0:30:43] considered in lmf frt should have the best prediction power as you can imagine
-[0:30:45] best prediction power as you can imagine because it's correctly specified and we
-[0:30:48] because it's correctly specified and we can see that it's indeed the case
-[0:30:49] can see that it's indeed the case because the red line
-[0:30:51] because the red line dominates and uh in the nonlinear case
-[0:30:54] dominates and uh in the nonlinear case we observe that the relation reverses
-[0:30:57] we observe that the relation reverses and it is because as suggested by our
-[0:30:59] and it is because as suggested by our power theory in in this nonlinear
-[0:31:02] power theory in in this nonlinear treatment effect the the renom forest
-[0:31:05] treatment effect the the renom forest can have a better prediction power and
-[0:31:07] can have a better prediction power and therefore it leads to higher test power
-[0:31:10] therefore it leads to higher test power in the in our plot so therefore the
-[0:31:14] in the in our plot so therefore the observation is that indeed uh the better
-[0:31:17] observation is that indeed uh the better prediction of the machine learning model
-[0:31:19] prediction of the machine learning model can lead to better test power and we
-[0:31:22] can lead to better test power and we will see the similar pattern in our
-[0:31:24] will see the similar pattern in our later simulations as well
+[0:30:08] we observe that the blue curve is now
+[0:30:11] have the best power and is slightly Tred
+[0:30:14] by the red curve which is the lmf
+[0:30:18] frt so here in our simulation we want to
+[0:30:21] highlight the relation between the red
+[0:30:24] curve and the blue curve across these
+[0:30:26] two different setups because somehow
+[0:30:28] aligns with our Theory uh on the power
+[0:30:32] uh in setup a which is a linear setup um
+[0:30:37] a correctly a specified linear model
+[0:30:40] considered in lmf frt should have the
+[0:30:43] best prediction power as you can imagine
+[0:30:45] because it's correctly specified and we
+[0:30:48] can see that it's indeed the case
+[0:30:49] because the red line
+[0:30:51] dominates and uh in the nonlinear case
+[0:30:54] we observe that the relation reverses
+[0:30:57] and it is because as suggested by our
+[0:30:59] power theory in in this nonlinear
+[0:31:02] treatment effect the the renom forest
+[0:31:05] can have a better prediction power and
+[0:31:07] therefore it leads to higher test power
+[0:31:10] in the in our plot so therefore the
+[0:31:14] observation is that indeed uh the better
+[0:31:17] prediction of the machine learning model
+[0:31:19] can lead to better test power and we
+[0:31:22] will see the similar pattern in our
+[0:31:24] later simulations as well
 [0:31:34] okay now let's go to uh spillover setup we consider the setting in bus and Fs
-[0:31:37] we consider the setting in bus and Fs paper uh and uh specifically they
-[0:31:40] paper uh and uh specifically they consider a two-stage randomization
-[0:31:42] consider a two-stage randomization experiment which is quite common in the
-[0:31:46] experiment which is quite common in the um in the study of spillover effects in
-[0:31:50] um in the study of spillover effects in stage one we select a random half of
-[0:31:52] stage one we select a random half of clusters which are households and in
-[0:31:55] clusters which are households and in stage two we assign one unit in each
-[0:31:57] stage two we assign one unit in each chosen clust to get
-[0:31:59] chosen clust to get treated we also consider a cluster
-[0:32:02] treated we also consider a cluster interference meaning that the adjacency
-[0:32:05] interference meaning that the adjacency Matrix a is this setup has a block
-[0:32:07] Matrix a is this setup has a block structure so basically units within
-[0:32:11] structure so basically units within within a cluster are connected but units
-[0:32:14] within a cluster are connected but units uh in different clusters are not
+[0:31:37] paper uh and uh specifically they
+[0:31:40] consider a two-stage randomization
+[0:31:42] experiment which is quite common in the
+[0:31:46] um in the study of spillover effects in
+[0:31:50] stage one we select a random half of
+[0:31:52] clusters which are households and in
+[0:31:55] stage two we assign one unit in each
+[0:31:57] chosen clust to get
+[0:31:59] treated we also consider a cluster
+[0:32:02] interference meaning that the adjacency
+[0:32:05] Matrix a is this setup has a block
+[0:32:07] structure so basically units within
+[0:32:11] within a cluster are connected but units
+[0:32:14] uh in different clusters are not
 [0:32:21] connected and then it naturally induces this R which is the neighborhood
-[0:32:24] this R which is the neighborhood treatment indicator when RZ equals to
-[0:32:27] treatment indicator when RZ equals to one it means that this unit has a
-[0:32:30] one it means that this unit has a treaten neighbor otherwise the unit does
-[0:32:33] treaten neighbor otherwise the unit does not have a Trea
-[0:32:34] not have a Trea neighbor and uh this is the setup for
-[0:32:37] neighbor and uh this is the setup for our design under this set up you can see
-[0:32:40] our design under this set up you can see we have three possible treatment
-[0:32:41] we have three possible treatment statuses treated spillover and control
-[0:32:45] statuses treated spillover and control so for people who are more familiar with
-[0:32:47] so for people who are more familiar with interference then we can also call this
-[0:32:50] interference then we can also call this as different exposures three exposures
-[0:32:52] as different exposures three exposures and our interest is to test the
-[0:32:54] and our interest is to test the spillover effect under this setup
+[0:32:24] treatment indicator when RZ equals to
+[0:32:27] one it means that this unit has a
+[0:32:30] treaten neighbor otherwise the unit does
+[0:32:33] not have a Trea
+[0:32:34] neighbor and uh this is the setup for
+[0:32:37] our design under this set up you can see
+[0:32:40] we have three possible treatment
+[0:32:41] statuses treated spillover and control
+[0:32:45] so for people who are more familiar with
+[0:32:47] interference then we can also call this
+[0:32:50] as different exposures three exposures
+[0:32:52] and our interest is to test the
+[0:32:54] spillover effect under this setup
 [0:33:05] so we consider two data generating process for the spillover effect here
-[0:33:08] process for the spillover effect here the first one is a constant spillover
-[0:33:10] the first one is a constant spillover effect um defined here and this is
-[0:33:13] effect um defined here and this is exactly the same setup as a paper by bus
-[0:33:16] exactly the same setup as a paper by bus and fer uh the second setup here is a
-[0:33:19] and fer uh the second setup here is a more complex nonlinear uh spillover
-[0:33:21] more complex nonlinear uh spillover effect captured by this uh combination
-[0:33:24] effect captured by this uh combination of indicator functions and we also
-[0:33:26] of indicator functions and we also consider some like a complex
-[0:33:29] consider some like a complex heteroscedastic structure in the noise
-[0:33:31] heteroscedastic structure in the noise in order to create a very like complex
-[0:33:33] in order to create a very like complex data
+[0:33:08] the first one is a constant spillover
+[0:33:10] effect um defined here and this is
+[0:33:13] exactly the same setup as a paper by bus
+[0:33:16] and fer uh the second setup here is a
+[0:33:19] more complex nonlinear uh spillover
+[0:33:21] effect captured by this uh combination
+[0:33:24] of indicator functions and we also
+[0:33:26] consider some like a complex
+[0:33:29] heteroscedastic structure in the noise
+[0:33:31] in order to create a very like complex
+[0:33:33] data
 [0:33:43] structure okay so here are the results for the interference
 [0:33:49] case oh sorry so in this case we make our
-[0:33:53] sorry so in this case we make our comparison to a method called ELC
-[0:33:55] comparison to a method called ELC proposed in A's paper uh
-[0:33:58] proposed in A's paper uh basically so roughly speaking ELC is
-[0:34:00] basically so roughly speaking ELC is also a finite sample valid test for the
-[0:34:03] also a finite sample valid test for the Slover effect and they use the so-called
-[0:34:06] Slover effect and they use the so-called uh Edge level contrast statistic uh to
-[0:34:09] uh Edge level contrast statistic uh to to run the test and this statistic
-[0:34:12] to run the test and this statistic roughly speaking acts like a
-[0:34:14] roughly speaking acts like a differencing means for the spell l
-[0:34:17] differencing means for the spell l effect in the constant setup we observe
-[0:34:20] effect in the constant setup we observe that um all method have a similar power
-[0:34:25] that um all method have a similar power however when we go to the nonlinear
-[0:34:27] however when we go to the nonlinear setup we observe that the blue curve
-[0:34:29] setup we observe that the blue curve have a dominating power and the other
-[0:34:31] have a dominating power and the other two no longer maintain the power in the
-[0:34:34] two no longer maintain the power in the in the constant
-[0:34:36] in the constant case so the observation here is
-[0:34:38] case so the observation here is consistent with our previous uh
-[0:34:40] consistent with our previous uh simulation and also our Theory uh and
-[0:34:44] simulation and also our Theory uh and from this figure D it seems suggests
-[0:34:46] from this figure D it seems suggests that um when there's complex nonlinear
-[0:34:50] that um when there's complex nonlinear treatment effect the flexible machine
-[0:34:52] treatment effect the flexible machine learning can really uh have a better uh
-[0:34:55] learning can really uh have a better uh predictive power compared to other uh
-[0:34:58] predictive power compared to other uh like standard method and the predictive
-[0:35:00] like standard method and the predictive power will translate into higher test
-[0:35:03] power will translate into higher test power and this is our key observation
-[0:35:06] power and this is our key observation for this
+[0:33:53] comparison to a method called ELC
+[0:33:55] proposed in A's paper uh
+[0:33:58] basically so roughly speaking ELC is
+[0:34:00] also a finite sample valid test for the
+[0:34:03] Slover effect and they use the so-called
+[0:34:06] uh Edge level contrast statistic uh to
+[0:34:09] to run the test and this statistic
+[0:34:12] roughly speaking acts like a
+[0:34:14] differencing means for the spell l
+[0:34:17] effect in the constant setup we observe
+[0:34:20] that um all method have a similar power
+[0:34:25] however when we go to the nonlinear
+[0:34:27] setup we observe that the blue curve
+[0:34:29] have a dominating power and the other
+[0:34:31] two no longer maintain the power in the
+[0:34:34] in the constant
+[0:34:36] case so the observation here is
+[0:34:38] consistent with our previous uh
+[0:34:40] simulation and also our Theory uh and
+[0:34:44] from this figure D it seems suggests
+[0:34:46] that um when there's complex nonlinear
+[0:34:50] treatment effect the flexible machine
+[0:34:52] learning can really uh have a better uh
+[0:34:55] predictive power compared to other uh
+[0:34:58] like standard method and the predictive
+[0:35:00] power will translate into higher test
+[0:35:03] power and this is our key observation
+[0:35:06] for this
 [0:35:16] simulation okay to summarize we have introduced a set of ml assisted
-[0:35:19] introduced a set of ml assisted randomization test to test for various
-[0:35:22] randomization test to test for various treatment effects and randomized
-[0:35:25] treatment effects and randomized experiments and the proposed tests are
-[0:35:28] experiments and the proposed tests are Finance sample valid uh by following the
-[0:35:30] Finance sample valid uh by following the nature of randomization from fisheran
-[0:35:33] nature of randomization from fisheran type of randomization test and they also
-[0:35:36] type of randomization test and they also have a guaranteed power for capturing
-[0:35:38] have a guaranteed power for capturing complex treatment effect by leveraging
-[0:35:40] complex treatment effect by leveraging the ML and non parametric models this is
-[0:35:43] the ML and non parametric models this is uh supported by both our Theory and our
-[0:35:46] uh supported by both our Theory and our simulation results and also this kind of
-[0:35:50] simulation results and also this kind of idea is very general um we just uh
-[0:35:54] idea is very general um we just uh construct the test statistic by fitting
-[0:35:57] construct the test statistic by fitting two models with and without the effect
-[0:35:59] two models with and without the effect of interest and this framework can
-[0:36:01] of interest and this framework can actually be extended to test other kinds
-[0:36:04] actually be extended to test other kinds of effects and we're currently exploring
+[0:35:19] randomization test to test for various
+[0:35:22] treatment effects and randomized
+[0:35:25] experiments and the proposed tests are
+[0:35:28] Finance sample valid uh by following the
+[0:35:30] nature of randomization from fisheran
+[0:35:33] type of randomization test and they also
+[0:35:36] have a guaranteed power for capturing
+[0:35:38] complex treatment effect by leveraging
+[0:35:40] the ML and non parametric models this is
+[0:35:43] uh supported by both our Theory and our
+[0:35:46] simulation results and also this kind of
+[0:35:50] idea is very general um we just uh
+[0:35:54] construct the test statistic by fitting
+[0:35:57] two models with and without the effect
+[0:35:59] of interest and this framework can
+[0:36:01] actually be extended to test other kinds
+[0:36:04] of effects and we're currently exploring
 [0:36:13] that so so lastly there are some clarifications and the future directions
-[0:36:16] clarifications and the future directions uh in practice we view our test as some
-[0:36:19] uh in practice we view our test as some initial screening tools so as we
-[0:36:22] initial screening tools so as we mentioned before our test can detect the
-[0:36:25] mentioned before our test can detect the certain effect but we don't return this
-[0:36:27] certain effect but we don't return this spefic specific scale of those effect
-[0:36:30] spefic specific scale of those effect therefore our method and those asmt
-[0:36:33] therefore our method and those asmt based estimation method are
-[0:36:35] based estimation method are complementary to each other and
-[0:36:37] complementary to each other and potentially synergistic in practice uh
-[0:36:40] potentially synergistic in practice uh the practitioners can combine our method
-[0:36:44] the practitioners can combine our method for testing and those method for
-[0:36:46] for testing and those method for estimation to analyze the data
-[0:36:49] estimation to analyze the data set and second the randomization test
-[0:36:53] set and second the randomization test can be computational demanding but we
-[0:36:56] can be computational demanding but we have some ideas of about improve the
-[0:36:59] have some ideas of about improve the scalability by leveraging some online
-[0:37:02] scalability by leveraging some online learning
+[0:36:16] uh in practice we view our test as some
+[0:36:19] initial screening tools so as we
+[0:36:22] mentioned before our test can detect the
+[0:36:25] certain effect but we don't return this
+[0:36:27] spefic specific scale of those effect
+[0:36:30] therefore our method and those asmt
+[0:36:33] based estimation method are
+[0:36:35] complementary to each other and
+[0:36:37] potentially synergistic in practice uh
+[0:36:40] the practitioners can combine our method
+[0:36:44] for testing and those method for
+[0:36:46] estimation to analyze the data
+[0:36:49] set and second the randomization test
+[0:36:53] can be computational demanding but we
+[0:36:56] have some ideas of about improve the
+[0:36:59] scalability by leveraging some online
 [0:37:03] learning techniques also we expected to apply our
-[0:37:06] techniques also we expected to apply our method uh to more General designs such
-[0:37:09] method uh to more General designs such as factorial exper experiment in those
-[0:37:12] as factorial exper experiment in those setups it's really hard to have a high
-[0:37:14] setups it's really hard to have a high test power due to this factorial nature
-[0:37:17] test power due to this factorial nature and therefore the machine the use of
-[0:37:20] and therefore the machine the use of machine learning model maybe can change
-[0:37:21] machine learning model maybe can change the story over there
+[0:37:06] method uh to more General designs such
+[0:37:09] as factorial exper experiment in those
+[0:37:12] setups it's really hard to have a high
+[0:37:14] test power due to this factorial nature
+[0:37:17] and therefore the machine the use of
+[0:37:20] machine learning model maybe can change
+[0:37:21] the story over there
 [0:37:31] okay uh that's it for our talk uh thank you for your listening I think uh I end
-[0:37:35] you for your listening I think uh I end early a little bit but yeah we have more
-[0:37:38] early a little bit but yeah we have more time to discuss about the um to hear
-[0:37:41] time to discuss about the um to hear about Shan and also uh answer your
-[0:37:45] about Shan and also uh answer your questions yeah thank you so much for
-[0:37:47] questions yeah thank you so much for listening thank you thank you so much
-[0:37:50] listening thank you thank you so much Panos and Venton for very interesting
-[0:37:52] Panos and Venton for very interesting discussion uh sorry for a very
-[0:37:54] discussion uh sorry for a very interesting talk currently I think Panos
-[0:37:56] interesting talk currently I think Panos is like tackling a lot questions in Q&amp;A
-[0:37:59] is like tackling a lot questions in Q&amp;A so if you have yeah it's great questions
-[0:38:01] so if you have yeah it's great questions uh thanks everybody I'm I'm trying to
-[0:38:04] uh thanks everybody I'm I'm trying to address as many as I
-[0:38:06] address as many as I can so if you have any further please
-[0:38:08] can so if you have any further please submit them there um in the meantime I
-[0:38:10] submit them there um in the meantime I think maybe let's switch over to the
-[0:38:12] think maybe let's switch over to the discussion shinran whenever you're ready
-[0:38:15] discussion shinran whenever you're ready sure let me share my
+[0:37:35] early a little bit but yeah we have more
+[0:37:38] time to discuss about the um to hear
+[0:37:41] about Shan and also uh answer your
+[0:37:45] questions yeah thank you so much for
+[0:37:47] listening thank you thank you so much
+[0:37:50] Panos and Venton for very interesting
+[0:37:52] discussion uh sorry for a very
+[0:37:54] interesting talk currently I think Panos
+[0:37:56] is like tackling a lot questions in Q&A
+[0:37:59] so if you have yeah it's great questions
+[0:38:01] uh thanks everybody I'm I'm trying to
+[0:38:04] address as many as I
+[0:38:06] can so if you have any further please
+[0:38:08] submit them there um in the meantime I
+[0:38:10] think maybe let's switch over to the
+[0:38:12] discussion shinran whenever you're ready
+[0:38:15] sure let me share my
 [0:38:24] screen uh to full screen
 [0:38:32] oh can you see my
 [0:38:38] slides great oh first I want to thank panel and W for the very nice uh
-[0:38:41] panel and W for the very nice uh presentation which integrates the model
-[0:38:43] presentation which integrates the model machine learning with the classical v
-[0:38:45] machine learning with the classical v randomization
-[0:38:47] randomization test so here I'm I'm just going to give
-[0:38:50] test so here I'm I'm just going to give a very brief discussion so I will first
-[0:38:53] a very brief discussion so I will first talk about the advantage of the
-[0:38:55] talk about the advantage of the randomization based inference framework
-[0:38:57] randomization based inference framework which is a foundation in today's talk
-[0:39:00] which is a foundation in today's talk then I will briefly review the facial
-[0:39:02] then I will briefly review the facial randomization test and the extension
-[0:39:05] randomization test and the extension with machine learning proposed by panels
-[0:39:07] with machine learning proposed by panels intervention
-[0:39:09] intervention and uh then since since a key component
-[0:39:13] and uh then since since a key component in the machine learning based approach
-[0:39:15] in the machine learning based approach is the use of covariates I will briefly
-[0:39:18] is the use of covariates I will briefly review the literature on using
-[0:39:20] review the literature on using covariates in the design analysis of
-[0:39:22] covariates in the design analysis of randomized experiments finally I want to
-[0:39:24] randomized experiments finally I want to discuss possible extensions of
-[0:39:26] discuss possible extensions of randomization tests for nonsharp non
-[0:39:29] randomization tests for nonsharp non hypothesis I think in today's talk uh uh
-[0:39:32] hypothesis I think in today's talk uh uh n already touch upon nonsharp uh non
-[0:39:36] n already touch upon nonsharp uh non Shar non
+[0:38:41] presentation which integrates the model
+[0:38:43] machine learning with the classical v
+[0:38:45] randomization
+[0:38:47] test so here I'm I'm just going to give
+[0:38:50] a very brief discussion so I will first
+[0:38:53] talk about the advantage of the
+[0:38:55] randomization based inference framework
+[0:38:57] which is a foundation in today's talk
+[0:39:00] then I will briefly review the facial
+[0:39:02] randomization test and the extension
+[0:39:05] with machine learning proposed by panels
+[0:39:07] intervention
+[0:39:09] and uh then since since a key component
+[0:39:13] in the machine learning based approach
+[0:39:15] is the use of covariates I will briefly
+[0:39:18] review the literature on using
+[0:39:20] covariates in the design analysis of
+[0:39:22] randomized experiments finally I want to
+[0:39:24] discuss possible extensions of
+[0:39:26] randomization tests for nonsharp non
+[0:39:29] hypothesis I think in today's talk uh uh
+[0:39:32] n already touch upon nonsharp uh non
 [0:39:38] Shar non hypothesis so so the randomization based
-[0:39:41] hypothesis so so the randomization based inference is also called the design
-[0:39:43] inference is also called the design based inference and find them population
-[0:39:45] based inference and find them population inference and under this inference
-[0:39:47] inference and under this inference framework all the potential outcomes and
-[0:39:49] framework all the potential outcomes and coari are viewed as fixed constants and
-[0:39:52] coari are viewed as fixed constants and this is equivalent to conditional
-[0:39:54] this is equivalent to conditional inference conditioning all potential
-[0:39:56] inference conditioning all potential outcomes and coari
-[0:39:59] outcomes and coari uh the the randomization based inference
-[0:40:01] uh the the randomization based inference uh use mainly the randomization of
-[0:40:04] uh use mainly the randomization of treatment assignment as a rent
-[0:40:07] treatment assignment as a rent basis a key advantage of a randomization
-[0:40:10] basis a key advantage of a randomization based inference is that it requires no
-[0:40:13] based inference is that it requires no distribution or model assumptions on the
-[0:40:15] distribution or model assumptions on the potential outcomes and the co varat for
-[0:40:17] potential outcomes and the co varat for example we do not need to assume the
-[0:40:19] example we do not need to assume the units are random samples or ID samples
-[0:40:22] units are random samples or ID samples from a super
-[0:40:24] from a super population because in practice this
-[0:40:26] population because in practice this random sample assump may not be
-[0:40:28] random sample assump may not be reasonable because many experiments
-[0:40:31] reasonable because many experiments often involve convenience
-[0:40:34] often involve convenience samples uh in in particular uh
-[0:40:37] samples uh in in particular uh furthermore we do not need to specify
-[0:40:40] furthermore we do not need to specify how the potential outcomes depend on Co
-[0:40:41] how the potential outcomes depend on Co variat because such dependence can be
-[0:40:44] variat because such dependence can be complicated and we we allow the
-[0:40:46] complicated and we we allow the distributions of the potential outcomes
-[0:40:48] distributions of the potential outcomes CO varat as as well as their
-[0:40:51] CO varat as as well as their relationship to be heterogeneous across
-[0:40:53] relationship to be heterogeneous across units so I think the randomization based
-[0:40:56] units so I think the randomization based inference can be specially useful in
-[0:40:58] inference can be specially useful in settings with unknown and complex
-[0:41:01] settings with unknown and complex dependence among units for example even
-[0:41:04] dependence among units for example even in the simple treatment control
-[0:41:05] in the simple treatment control experiments units potential outcomes may
-[0:41:08] experiments units potential outcomes may be correlated or depend on each other
-[0:41:10] be correlated or depend on each other due to some unknown observed factors for
-[0:41:13] due to some unknown observed factors for example in the model discussed in the uh
-[0:41:16] example in the model discussed in the uh in today's talk the residuales can be
-[0:41:19] in today's talk the residuales can be can also have some correlations across
-[0:41:22] can also have some correlations across units and when we have interference uh
-[0:41:25] units and when we have interference uh specifying the outcome distribution
-[0:41:28] specifying the outcome distribution including the the interference structure
-[0:41:30] including the the interference structure can be even more challenging and and in
-[0:41:32] can be even more challenging and and in the interference setting units po
-[0:41:34] the interference setting units po outcomes are also likely to be
+[0:39:41] inference is also called the design
+[0:39:43] based inference and find them population
+[0:39:45] inference and under this inference
+[0:39:47] framework all the potential outcomes and
+[0:39:49] coari are viewed as fixed constants and
+[0:39:52] this is equivalent to conditional
+[0:39:54] inference conditioning all potential
+[0:39:56] outcomes and coari
+[0:39:59] uh the the randomization based inference
+[0:40:01] uh use mainly the randomization of
+[0:40:04] treatment assignment as a rent
+[0:40:07] basis a key advantage of a randomization
+[0:40:10] based inference is that it requires no
+[0:40:13] distribution or model assumptions on the
+[0:40:15] potential outcomes and the co varat for
+[0:40:17] example we do not need to assume the
+[0:40:19] units are random samples or ID samples
+[0:40:22] from a super
+[0:40:24] population because in practice this
+[0:40:26] random sample assump may not be
+[0:40:28] reasonable because many experiments
+[0:40:31] often involve convenience
+[0:40:34] samples uh in in particular uh
+[0:40:37] furthermore we do not need to specify
+[0:40:40] how the potential outcomes depend on Co
+[0:40:41] variat because such dependence can be
+[0:40:44] complicated and we we allow the
+[0:40:46] distributions of the potential outcomes
+[0:40:48] CO varat as as well as their
+[0:40:51] relationship to be heterogeneous across
+[0:40:53] units so I think the randomization based
+[0:40:56] inference can be specially useful in
+[0:40:58] settings with unknown and complex
+[0:41:01] dependence among units for example even
+[0:41:04] in the simple treatment control
+[0:41:05] experiments units potential outcomes may
+[0:41:08] be correlated or depend on each other
+[0:41:10] due to some unknown observed factors for
+[0:41:13] example in the model discussed in the uh
+[0:41:16] in today's talk the residuales can be
+[0:41:19] can also have some correlations across
+[0:41:22] units and when we have interference uh
+[0:41:25] specifying the outcome distribution
+[0:41:28] including the the interference structure
+[0:41:30] can be even more challenging and and in
+[0:41:32] the interference setting units po
+[0:41:34] outcomes are also likely to be
 [0:41:43] cored so uh in in today's talk panels and extended the uh classical fure
-[0:41:45] and extended the uh classical fure randomization test which was uh proposed
-[0:41:48] randomization test which was uh proposed to test a Sharon
-[0:41:50] to test a Sharon hypothesis so the vicious test actually
-[0:41:53] hypothesis so the vicious test actually works uh works with any choice of test
-[0:41:55] works uh works with any choice of test statistics in in particular the test
-[0:41:58] statistics in in particular the test statistics can be any functions of the
-[0:42:00] statistics can be any functions of the potential outcomes coar and the
-[0:42:02] potential outcomes coar and the treatment assignments and this is
-[0:42:04] treatment assignments and this is because this is mainly due to two
-[0:42:06] because this is mainly due to two reasons so first is we can know all the
-[0:42:09] reasons so first is we can know all the potential outcomes particular those
-[0:42:11] potential outcomes particular those missing potential outcomes from the
-[0:42:13] missing potential outcomes from the observe the data and the non
-[0:42:15] observe the data and the non hypothesis second so this enable us to
-[0:42:19] hypothesis second so this enable us to calc to to calculate the value of a test
-[0:42:21] calc to to calculate the value of a test the statistics under any possible
-[0:42:24] the statistics under any possible treatment
+[0:41:45] randomization test which was uh proposed
+[0:41:48] to test a Sharon
+[0:41:50] hypothesis so the vicious test actually
+[0:41:53] works uh works with any choice of test
+[0:41:55] statistics in in particular the test
+[0:41:58] statistics can be any functions of the
+[0:42:00] potential outcomes coar and the
+[0:42:02] treatment assignments and this is
+[0:42:04] because this is mainly due to two
+[0:42:06] reasons so first is we can know all the
+[0:42:09] potential outcomes particular those
+[0:42:11] missing potential outcomes from the
+[0:42:13] observe the data and the non
+[0:42:15] hypothesis second so this enable us to
+[0:42:19] calc to to calculate the value of a test
+[0:42:21] the statistics under any possible
 [0:42:25] treatment assignments second the distribution of a
-[0:42:27] assignments second the distribution of a treatment assignments is know exactly
-[0:42:30] treatment assignments is know exactly because uh we are considering a
-[0:42:31] because uh we are considering a randomized experiments we design the
-[0:42:33] randomized experiments we design the distribution of Z ourselves so therefore
-[0:42:36] distribution of Z ourselves so therefore the non distribution of a test
-[0:42:38] the non distribution of a test statistics is known exactly and and can
-[0:42:41] statistics is known exactly and and can often be approximated by monar
-[0:42:44] often be approximated by monar Method as panel and mentioned I think
-[0:42:48] Method as panel and mentioned I think the the classic the conventional choice
-[0:42:50] the the classic the conventional choice of a test statistics is a difference in
-[0:42:53] of a test statistics is a difference in means and I think the intuition there is
-[0:42:55] means and I think the intuition there is that a difference in means can often be
-[0:42:57] that a difference in means can often be good estimator for the effect for for
-[0:42:59] good estimator for the effect for for the treatment effect often the average
-[0:43:01] the treatment effect often the average treatment effect other conventional
-[0:43:04] treatment effect other conventional Choice other choices of a test
-[0:43:06] Choice other choices of a test statistics including those commonly used
-[0:43:09] statistics including those commonly used statistics for two sample comparisons
-[0:43:11] statistics for two sample comparisons such as wils and rank sums all the T
-[0:43:15] such as wils and rank sums all the T statistics and in today's talk uh panel
-[0:43:18] statistics and in today's talk uh panel propos this machine learning based test
-[0:43:20] propos this machine learning based test statistics I think in a simple setting
-[0:43:23] statistics I think in a simple setting for testing the direct causal effect
-[0:43:26] for testing the direct causal effect they compare two models uh one include
-[0:43:28] they compare two models uh one include oal varats and the other includes
-[0:43:31] oal varats and the other includes Additionally the treatment assignments
-[0:43:33] Additionally the treatment assignments they they use cross validation to
-[0:43:35] they they use cross validation to evaluate model feeding and compare the
-[0:43:38] evaluate model feeding and compare the cross validation losses of these two
-[0:43:40] cross validation losses of these two models uh they use this uh as the test
-[0:43:43] models uh they use this uh as the test the statistics which intuitively uh uh
-[0:43:47] the statistics which intuitively uh uh uh measure how predictive is the treat
-[0:43:49] uh measure how predictive is the treat how predictive the treatment assignment
-[0:43:51] how predictive the treatment assignment is for for the
-[0:43:54] is for for the outcomes and as I mentioned I think a
-[0:43:56] outcomes and as I mentioned I think a key uh
+[0:42:27] treatment assignments is know exactly
+[0:42:30] because uh we are considering a
+[0:42:31] randomized experiments we design the
+[0:42:33] distribution of Z ourselves so therefore
+[0:42:36] the non distribution of a test
+[0:42:38] statistics is known exactly and and can
+[0:42:41] often be approximated by monar
+[0:42:44] Method as panel and mentioned I think
+[0:42:48] the the classic the conventional choice
+[0:42:50] of a test statistics is a difference in
+[0:42:53] means and I think the intuition there is
+[0:42:55] that a difference in means can often be
+[0:42:57] good estimator for the effect for for
+[0:42:59] the treatment effect often the average
+[0:43:01] treatment effect other conventional
+[0:43:04] Choice other choices of a test
+[0:43:06] statistics including those commonly used
+[0:43:09] statistics for two sample comparisons
+[0:43:11] such as wils and rank sums all the T
+[0:43:15] statistics and in today's talk uh panel
+[0:43:18] propos this machine learning based test
+[0:43:20] statistics I think in a simple setting
+[0:43:23] for testing the direct causal effect
+[0:43:26] they compare two models uh one include
+[0:43:28] oal varats and the other includes
+[0:43:31] Additionally the treatment assignments
+[0:43:33] they they use cross validation to
+[0:43:35] evaluate model feeding and compare the
+[0:43:38] cross validation losses of these two
+[0:43:40] models uh they use this uh as the test
+[0:43:43] the statistics which intuitively uh uh
+[0:43:47] uh measure how predictive is the treat
+[0:43:49] how predictive the treatment assignment
+[0:43:51] is for for the
+[0:43:54] outcomes and as I mentioned I think a
 [0:43:58] key uh advantage of the machine learning
-[0:44:00] advantage of the machine learning approach is is that it it utilize the
-[0:44:03] approach is is that it it utilize the covert information in experiments and
-[0:44:05] covert information in experiments and there's actually a long history on using
-[0:44:07] there's actually a long history on using karates in the design and Analysis of
-[0:44:10] karates in the design and Analysis of experiments so I I will just briefly
-[0:44:13] experiments so I I will just briefly review them here so for the discrete C
-[0:44:16] review them here so for the discrete C varat fish propos the ranking almost 100
-[0:44:19] varat fish propos the ranking almost 100 years ago and uh the post scarification
-[0:44:23] years ago and uh the post scarification is a is a way to analyze the experiment
-[0:44:26] is a is a way to analyze the experiment as if it was br
-[0:44:28] as if it was br uh there has been this has in the last
-[0:44:30] uh there has been this has in the last decade this has been extended to
-[0:44:32] decade this has been extended to generical bars for example in the design
-[0:44:35] generical bars for example in the design stage we can consider
-[0:44:38] stage we can consider rerandomization gramme work design the
-[0:44:40] rerandomization gramme work design the recently proposed one and the mat pair
-[0:44:43] recently proposed one and the mat pair the the purpose of this design is to
-[0:44:45] the the purpose of this design is to have better coverent balance in the in
-[0:44:48] have better coverent balance in the in in the experiment and therefore can
-[0:44:50] in the experiment and therefore can improve the the estimation efficiency
-[0:44:53] improve the the estimation efficiency for the average treatment
-[0:44:55] for the average treatment effect in in analysis is in particular
-[0:44:58] effect in in analysis is in particular for
+[0:44:00] approach is is that it it utilize the
+[0:44:03] covert information in experiments and
+[0:44:05] there's actually a long history on using
+[0:44:07] karates in the design and Analysis of
+[0:44:10] experiments so I I will just briefly
+[0:44:13] review them here so for the discrete C
+[0:44:16] varat fish propos the ranking almost 100
+[0:44:19] years ago and uh the post scarification
+[0:44:23] is a is a way to analyze the experiment
+[0:44:26] as if it was br
+[0:44:28] uh there has been this has in the last
+[0:44:30] decade this has been extended to
+[0:44:32] generical bars for example in the design
+[0:44:35] stage we can consider
+[0:44:38] rerandomization gramme work design the
+[0:44:40] recently proposed one and the mat pair
+[0:44:43] the the purpose of this design is to
+[0:44:45] have better coverent balance in the in
+[0:44:48] in the experiment and therefore can
+[0:44:50] improve the the estimation efficiency
+[0:44:53] for the average treatment
+[0:44:55] effect in in analysis is in particular
 [0:44:59] for estimation people have proposed a linear
-[0:45:02] estimation people have proposed a linear and a non nonlinear regression
-[0:45:04] and a non nonlinear regression adjustment and these are all model
-[0:45:06] adjustment and these are all model assist approach similar to the model
-[0:45:08] assist approach similar to the model assisted machine learning approach these
-[0:45:10] assisted machine learning approach these models do not need to be correctly
-[0:45:12] models do not need to be correctly specified and the inference is mainly
-[0:45:15] specified and the inference is mainly justified by the randomization of
-[0:45:17] justified by the randomization of treatment
+[0:45:02] and a non nonlinear regression
+[0:45:04] adjustment and these are all model
+[0:45:06] assist approach similar to the model
+[0:45:08] assisted machine learning approach these
+[0:45:10] models do not need to be correctly
+[0:45:12] specified and the inference is mainly
+[0:45:15] justified by the randomization of
 [0:45:18] treatment assignment in in the context of FAL
-[0:45:20] assignment in in the context of FAL randomization test uh I think people
-[0:45:23] randomization test uh I think people have also proposed a varable ways to
-[0:45:25] have also proposed a varable ways to incorporate covariates uh the first
-[0:45:27] incorporate covariates uh the first first one is just the first one is use a
-[0:45:30] first one is just the first one is use a covert adjusted uh estimator as a test
-[0:45:33] covert adjusted uh estimator as a test statistics the intuition is that this
-[0:45:35] statistics the intuition is that this cover adjusted estimator can be a better
-[0:45:38] cover adjusted estimator can be a better estimator than the usual differen in
-[0:45:40] estimator than the usual differen in means the second one is mentioned in in
-[0:45:44] means the second one is mentioned in in today's talk which is proposed by rosom
-[0:45:47] today's talk which is proposed by rosom bone uh in particular he proposed to use
-[0:45:50] bone uh in particular he proposed to use the residual from uh a regression of
-[0:45:54] the residual from uh a regression of control poti outomes on coar to to
-[0:45:57] control poti outomes on coar to to replace the original coar and we can we
-[0:46:00] replace the original coar and we can we can for example use the difference means
-[0:46:02] can for example use the difference means of the residual potential outcomes the
-[0:46:05] of the residual potential outcomes the third one is a conditional randomization
-[0:46:07] third one is a conditional randomization test condition on some functions of the
-[0:46:10] test condition on some functions of the assignment and coar such as a coar
-[0:46:13] assignment and coar such as a coar imbalance in principle we could also
-[0:46:16] imbalance in principle we could also condition on potential outcomes and in
-[0:46:18] condition on potential outcomes and in today's talk I think uh in a simple
-[0:46:22] today's talk I think uh in a simple setting panels and which propose to
-[0:46:24] setting panels and which propose to compare these two models uh to like why
-[0:46:27] compare these two models uh to like why on X and Y on Z and X I think this is
-[0:46:31] on X and Y on Z and X I think this is already mentioned the question I list
-[0:46:33] already mentioned the question I list here is already discussed in today's
-[0:46:35] here is already discussed in today's talk so uh my question is whether we can
-[0:46:39] talk so uh my question is whether we can extend this uh this existing approach
-[0:46:42] extend this uh this existing approach which mainly focus on linear models or
-[0:46:44] which mainly focus on linear models or simple parametric models to to
-[0:46:47] simple parametric models to to incorporate the general machine learning
-[0:46:49] incorporate the general machine learning uh uh tools I think one one the one I I
-[0:46:53] uh uh tools I think one one the one I I was thinking about which has been
-[0:46:55] was thinking about which has been discussed in panels and when talk is the
-[0:46:57] discussed in panels and when talk is the the rosom bombs approach where we use
-[0:46:59] the rosom bombs approach where we use say some cross validation residual from
-[0:47:02] say some cross validation residual from the regression of y z on X using some
-[0:47:05] the regression of y z on X using some machine learning models as I think as
-[0:47:08] machine learning models as I think as demonstrated in their talk their their
-[0:47:11] demonstrated in their talk their their test statistics can have higher power
-[0:47:14] test statistics can have higher power but I think the r this approach might
-[0:47:16] but I think the r this approach might have some computational Advantage
-[0:47:18] have some computational Advantage because the model only needs to be
-[0:47:20] because the model only needs to be fitted once and in particular we do not
-[0:47:22] fitted once and in particular we do not need to repat the model when we draw a
-[0:47:24] need to repat the model when we draw a new assignment in the randomization test
+[0:45:20] randomization test uh I think people
+[0:45:23] have also proposed a varable ways to
+[0:45:25] incorporate covariates uh the first
+[0:45:27] first one is just the first one is use a
+[0:45:30] covert adjusted uh estimator as a test
+[0:45:33] statistics the intuition is that this
+[0:45:35] cover adjusted estimator can be a better
+[0:45:38] estimator than the usual differen in
+[0:45:40] means the second one is mentioned in in
+[0:45:44] today's talk which is proposed by rosom
+[0:45:47] bone uh in particular he proposed to use
+[0:45:50] the residual from uh a regression of
+[0:45:54] control poti outomes on coar to to
+[0:45:57] replace the original coar and we can we
+[0:46:00] can for example use the difference means
+[0:46:02] of the residual potential outcomes the
+[0:46:05] third one is a conditional randomization
+[0:46:07] test condition on some functions of the
+[0:46:10] assignment and coar such as a coar
+[0:46:13] imbalance in principle we could also
+[0:46:16] condition on potential outcomes and in
+[0:46:18] today's talk I think uh in a simple
+[0:46:22] setting panels and which propose to
+[0:46:24] compare these two models uh to like why
+[0:46:27] on X and Y on Z and X I think this is
+[0:46:31] already mentioned the question I list
+[0:46:33] here is already discussed in today's
+[0:46:35] talk so uh my question is whether we can
+[0:46:39] extend this uh this existing approach
+[0:46:42] which mainly focus on linear models or
+[0:46:44] simple parametric models to to
+[0:46:47] incorporate the general machine learning
+[0:46:49] uh uh tools I think one one the one I I
+[0:46:53] was thinking about which has been
+[0:46:55] discussed in panels and when talk is the
+[0:46:57] the rosom bombs approach where we use
+[0:46:59] say some cross validation residual from
+[0:47:02] the regression of y z on X using some
+[0:47:05] machine learning models as I think as
+[0:47:08] demonstrated in their talk their their
+[0:47:11] test statistics can have higher power
+[0:47:14] but I think the r this approach might
+[0:47:16] have some computational Advantage
+[0:47:18] because the model only needs to be
+[0:47:20] fitted once and in particular we do not
+[0:47:22] need to repat the model when we draw a
+[0:47:24] new assignment in the randomization test
 [0:47:34] uh so lastly I want to uh talk about uh some possible extensions of a
-[0:47:35] some possible extensions of a randomization test in particular the
-[0:47:38] randomization test in particular the machine learning based one for nonsharp
-[0:47:40] machine learning based one for nonsharp non hypothesis I think the author have
-[0:47:42] non hypothesis I think the author have already talked about two two two
-[0:47:44] already talked about two two two extensions for nonar non hypothy one is
-[0:47:46] extensions for nonar non hypothy one is for the constant effect the other is for
-[0:47:48] for the constant effect the other is for The Spar over
-[0:47:50] The Spar over effects in general I think the testing
-[0:47:52] effects in general I think the testing Shar now is useful when we are
-[0:47:55] Shar now is useful when we are interested in in whether a treatment has
-[0:47:57] interested in in whether a treatment has effect has any effect at all and I think
-[0:48:01] effect has any effect at all and I think this this Shar now the Shar now itself
-[0:48:03] this this Shar now the Shar now itself can be scientifically meaningful in many
-[0:48:06] can be scientifically meaningful in many applications and in general case uh
-[0:48:09] applications and in general case uh testing for Shar now is still useful as
-[0:48:11] testing for Shar now is still useful as a preliminary step to determine where
-[0:48:14] a preliminary step to determine where further analysis is warranted as
-[0:48:16] further analysis is warranted as commented in the Ros sorry as commented
-[0:48:19] commented in the Ros sorry as commented in the in and rubin's
-[0:48:21] in the in and rubin's book so my my question here is can we
-[0:48:24] book so my my question here is can we generalize or extend this U machine
-[0:48:27] generalize or extend this U machine learning based or assisted randomization
-[0:48:29] learning based or assisted randomization test for more General sharen hypothesis
-[0:48:32] test for more General sharen hypothesis I think in in in recent decades there
-[0:48:35] I think in in in recent decades there has been uh many extensions along this
-[0:48:38] has been uh many extensions along this line people have extended the the
-[0:48:40] line people have extended the the randomization test to test uh to infer
-[0:48:44] randomization test to test uh to infer average treatment effects attributable
-[0:48:46] average treatment effects attributable effects abund the non hypothesis and the
-[0:48:48] effects abund the non hypothesis and the Quant of individual treatment effects I
-[0:48:51] Quant of individual treatment effects I think some some some of them relies a
-[0:48:54] think some some some of them relies a similar idea as as panels and V
-[0:48:58] similar idea as as panels and V uh test for the constant effects that is
-[0:49:00] uh test for the constant effects that is we we need to take maximization of over
-[0:49:04] we we need to take maximization of over some uh hypothesized
-[0:49:07] some uh hypothesized effects and also there has the
-[0:49:10] effects and also there has the conditional randomization test is
-[0:49:12] conditional randomization test is mentioned in today's talk as well which
-[0:49:14] mentioned in today's talk as well which is useful for testing nonsharp non
-[0:49:16] is useful for testing nonsharp non hypothesis in in settings with
-[0:49:20] hypothesis in in settings with interference lastly I want to mention
-[0:49:23] interference lastly I want to mention some existing work uh trying to
-[0:49:25] some existing work uh trying to incorporate uh a flexible machine
-[0:49:28] incorporate uh a flexible machine learning algorithms similar in spirit to
-[0:49:30] learning algorithms similar in spirit to today's talk I think the the first case
-[0:49:33] today's talk I think the the first case is a case where we have some prr models
-[0:49:36] is a case where we have some prr models using external samples and in this case
-[0:49:38] using external samples and in this case we can simply use this pre-trend models
-[0:49:41] we can simply use this pre-trend models to transform the
-[0:49:43] to transform the coari and this transform coari might be
-[0:49:46] coari and this transform coari might be more predictive of the outcome under say
-[0:49:49] more predictive of the outcome under say a simple linear
-[0:49:51] a simple linear model the other ways is to use sample
-[0:49:54] model the other ways is to use sample speeding or crossfeeding when the
-[0:49:56] speeding or crossfeeding when the treatment is especially when the
-[0:49:57] treatment is especially when the treatment assignments are mutually
-[0:49:59] treatment assignments are mutually independent across uh units but in order
-[0:50:03] independent across uh units but in order to fully utilize the data we need to uh
-[0:50:06] to fully utilize the data we need to uh take care of the dependence across
-[0:50:07] take care of the dependence across different subsets of
-[0:50:10] different subsets of data oh one one more thing I forgot to
-[0:50:13] data oh one one more thing I forgot to mention I think in the current extension
-[0:50:15] mention I think in the current extension of uh randomization test for nonsharp n
-[0:50:17] of uh randomization test for nonsharp n hypothesis they all require specific
-[0:50:20] hypothesis they all require specific forms of test statistics and some even
-[0:50:22] forms of test statistics and some even require specific designs I think the
-[0:50:25] require specific designs I think the machine learning based test proposed in
-[0:50:27] machine learning based test proposed in today's talk works for any design and
-[0:50:30] today's talk works for any design and works for like more General forms of
-[0:50:32] works for like more General forms of test statistics and I think it's an open
-[0:50:35] test statistics and I think it's an open question whether uh it's an open
-[0:50:37] question whether uh it's an open question but it's interesting if we can
-[0:50:39] question but it's interesting if we can extend this machine learning based test
-[0:50:42] extend this machine learning based test to to this non shal
-[0:50:44] to to this non shal hypothesis I think that's all for my
-[0:50:46] hypothesis I think that's all for my discussion today and these are some
-[0:50:48] discussion today and these are some references yeah thank
+[0:47:35] randomization test in particular the
+[0:47:38] machine learning based one for nonsharp
+[0:47:40] non hypothesis I think the author have
+[0:47:42] already talked about two two two
+[0:47:44] extensions for nonar non hypothy one is
+[0:47:46] for the constant effect the other is for
+[0:47:48] The Spar over
+[0:47:50] effects in general I think the testing
+[0:47:52] Shar now is useful when we are
+[0:47:55] interested in in whether a treatment has
+[0:47:57] effect has any effect at all and I think
+[0:48:01] this this Shar now the Shar now itself
+[0:48:03] can be scientifically meaningful in many
+[0:48:06] applications and in general case uh
+[0:48:09] testing for Shar now is still useful as
+[0:48:11] a preliminary step to determine where
+[0:48:14] further analysis is warranted as
+[0:48:16] commented in the Ros sorry as commented
+[0:48:19] in the in and rubin's
+[0:48:21] book so my my question here is can we
+[0:48:24] generalize or extend this U machine
+[0:48:27] learning based or assisted randomization
+[0:48:29] test for more General sharen hypothesis
+[0:48:32] I think in in in recent decades there
+[0:48:35] has been uh many extensions along this
+[0:48:38] line people have extended the the
+[0:48:40] randomization test to test uh to infer
+[0:48:44] average treatment effects attributable
+[0:48:46] effects abund the non hypothesis and the
+[0:48:48] Quant of individual treatment effects I
+[0:48:51] think some some some of them relies a
+[0:48:54] similar idea as as panels and V
+[0:48:58] uh test for the constant effects that is
+[0:49:00] we we need to take maximization of over
+[0:49:04] some uh hypothesized
+[0:49:07] effects and also there has the
+[0:49:10] conditional randomization test is
+[0:49:12] mentioned in today's talk as well which
+[0:49:14] is useful for testing nonsharp non
+[0:49:16] hypothesis in in settings with
+[0:49:20] interference lastly I want to mention
+[0:49:23] some existing work uh trying to
+[0:49:25] incorporate uh a flexible machine
+[0:49:28] learning algorithms similar in spirit to
+[0:49:30] today's talk I think the the first case
+[0:49:33] is a case where we have some prr models
+[0:49:36] using external samples and in this case
+[0:49:38] we can simply use this pre-trend models
+[0:49:41] to transform the
+[0:49:43] coari and this transform coari might be
+[0:49:46] more predictive of the outcome under say
+[0:49:49] a simple linear
+[0:49:51] model the other ways is to use sample
+[0:49:54] speeding or crossfeeding when the
+[0:49:56] treatment is especially when the
+[0:49:57] treatment assignments are mutually
+[0:49:59] independent across uh units but in order
+[0:50:03] to fully utilize the data we need to uh
+[0:50:06] take care of the dependence across
+[0:50:07] different subsets of
+[0:50:10] data oh one one more thing I forgot to
+[0:50:13] mention I think in the current extension
+[0:50:15] of uh randomization test for nonsharp n
+[0:50:17] hypothesis they all require specific
+[0:50:20] forms of test statistics and some even
+[0:50:22] require specific designs I think the
+[0:50:25] machine learning based test proposed in
+[0:50:27] today's talk works for any design and
+[0:50:30] works for like more General forms of
+[0:50:32] test statistics and I think it's an open
+[0:50:35] question whether uh it's an open
+[0:50:37] question but it's interesting if we can
+[0:50:39] extend this machine learning based test
+[0:50:42] to to this non shal
+[0:50:44] hypothesis I think that's all for my
+[0:50:46] discussion today and these are some
+[0:50:48] references yeah thank
 [0:50:56] you thank you shinran for the interesting discussion Panos do you want
-[0:50:59] interesting discussion Panos do you want to respond or wi yeah I can I can add
-[0:51:03] to respond or wi yeah I can I can add some thoughts and then Winan can can
-[0:51:05] some thoughts and then Winan can can follow up um uh so yeah s thanks a lot
-[0:51:09] follow up um uh so yeah s thanks a lot this is very very nice first of all uh
-[0:51:12] this is very very nice first of all uh introduction of rization inference and
-[0:51:14] introduction of rization inference and its and its advantages and also some
-[0:51:16] its and its advantages and also some some key open problems I agree on on all
-[0:51:19] some key open problems I agree on on all I agree on all counts uh these are and
-[0:51:22] I agree on all counts uh these are and and you know you're also at the for
-[0:51:23] and you know you're also at the for Forefront of that of that research where
-[0:51:25] Forefront of that of that research where we uh we try to to extend the um um the
-[0:51:29] we uh we try to to extend the um um the the reach let's say the application of
-[0:51:31] the reach let's say the application of rization tests to to this week n
-[0:51:34] rization tests to to this week n hypothesis um um so basically going from
-[0:51:37] hypothesis um um so basically going from the sharp effect to the to the average
-[0:51:39] the sharp effect to the to the average effect now the suggestion about the um
-[0:51:43] effect now the suggestion about the um fitting the model on the on the control
-[0:51:45] fitting the model on the on the control outcomes and then so that you can kind
-[0:51:46] outcomes and then so that you can kind of fit the model once is is great and
-[0:51:49] of fit the model once is is great and and I think the we we will also agree
-[0:51:51] and I think the we we will also agree that if computation is an issue that's
-[0:51:53] that if computation is an issue that's this type of approach is probably the
-[0:51:55] this type of approach is probably the best I think in practice
-[0:51:57] best I think in practice um but if you can refit the model uh
-[0:52:00] um but if you can refit the model uh then you probably are going to get a
-[0:52:02] then you probably are going to get a little more U more power like more
-[0:52:04] little more U more power like more leverage from uh from kind of refitting
-[0:52:06] leverage from uh from kind of refitting refitting the model especially if there
-[0:52:08] refitting the model especially if there are complex interactions so um there's
-[0:52:10] are complex interactions so um there's an interesting computational trade-off
-[0:52:12] an interesting computational trade-off um yes here here here for sure um I
-[0:52:15] um yes here here here for sure um I think you're you're exactly right that
-[0:52:17] think you're you're exactly right that when we try to extend to testing for
-[0:52:20] when we try to extend to testing for average written effects um then it's
-[0:52:22] average written effects um then it's really the The crucial property is the
-[0:52:24] really the The crucial property is the test statistic like what can we what can
-[0:52:26] test statistic like what can we what can we prove about the test statistic right
-[0:52:28] we prove about the test statistic right for example uh suiz right like it's a
-[0:52:31] for example uh suiz right like it's a it's a common trick that it's a very
-[0:52:33] it's a common trick that it's a very effective trick that people use to go
-[0:52:35] effective trick that people use to go from testing sharp NS to testing like
-[0:52:37] from testing sharp NS to testing like testing sharp effects to average RM
-[0:52:39] testing sharp effects to average RM effects so you take a test statistic and
-[0:52:41] effects so you take a test statistic and then you studenti it essentially um now
-[0:52:45] then you studenti it essentially um now that can work for difference in means
-[0:52:48] that can work for difference in means and regression for simp yeah but if we
-[0:52:51] and regression for simp yeah but if we have cross validation based test
-[0:52:52] have cross validation based test statistic is is I think it's a it's
-[0:52:55] statistic is is I think it's a it's really might be like very challenging to
-[0:52:57] really might be like very challenging to cize it correctly so that's that's I
-[0:52:59] cize it correctly so that's that's I think that's a that's a great U research
-[0:53:01] think that's a that's a great U research question but it's it it should be very
-[0:53:03] question but it's it it should be very hard to to tackle uh bounding NS uh you
-[0:53:07] hard to to tackle uh bounding NS uh you you know know that that area much much
-[0:53:09] you know know that that area much much better also requires properties for the
-[0:53:11] better also requires properties for the test statistics and it's an open
-[0:53:13] test statistics and it's an open question whether cross validation based
-[0:53:16] question whether cross validation based um uh St statistics can satisfy those
-[0:53:19] um uh St statistics can satisfy those properties and and so that we can extend
-[0:53:21] properties and and so that we can extend to this bounding NS testing for
-[0:53:24] to this bounding NS testing for monotonicity of TR effects um so yeah uh
-[0:53:27] monotonicity of TR effects um so yeah uh all of that is crucially like what can
-[0:53:29] all of that is crucially like what can we say about cross validation based test
-[0:53:30] we say about cross validation based test statistics right like which is you know
-[0:53:32] statistics right like which is you know it's a useful measure but how what do we
-[0:53:35] it's a useful measure but how what do we know about it uh theoretically I think
-[0:53:37] know about it uh theoretically I think that's the that's really the key
-[0:53:38] that's the that's really the key question and regarding the last point
-[0:53:40] question and regarding the last point about coar coar transformation I hope
-[0:53:43] about coar coar transformation I hope that you know that can be um can be can
-[0:53:46] that you know that can be um can be can be dealt with with using like a flexible
-[0:53:48] be dealt with with using like a flexible machine learning model right so we don't
-[0:53:50] machine learning model right so we don't have to to make to to to fancy
-[0:53:53] have to to make to to to fancy Transformations uh before we we fit
-[0:53:55] Transformations uh before we we fit anything like hopefully we use like a
-[0:53:56] anything like hopefully we use like a flexible model that can that can do this
-[0:53:59] flexible model that can that can do this transformation for us so um hopefully
-[0:54:01] transformation for us so um hopefully that can be less of an issue than the
-[0:54:03] that can be less of an issue than the yeah the um than the nor sharp NS um so
-[0:54:06] yeah the um than the nor sharp NS um so yeah these are my thoughts thanks these
-[0:54:08] yeah these are my thoughts thanks these are all great great and valid points Wan
-[0:54:11] are all great great and valid points Wan did you have any any thoughts listening
-[0:54:13] did you have any any thoughts listening to
+[0:50:59] to respond or wi yeah I can I can add
+[0:51:03] some thoughts and then Winan can can
+[0:51:05] follow up um uh so yeah s thanks a lot
+[0:51:09] this is very very nice first of all uh
+[0:51:12] introduction of rization inference and
+[0:51:14] its and its advantages and also some
+[0:51:16] some key open problems I agree on on all
+[0:51:19] I agree on all counts uh these are and
+[0:51:22] and you know you're also at the for
+[0:51:23] Forefront of that of that research where
+[0:51:25] we uh we try to to extend the um um the
+[0:51:29] the reach let's say the application of
+[0:51:31] rization tests to to this week n
+[0:51:34] hypothesis um um so basically going from
+[0:51:37] the sharp effect to the to the average
+[0:51:39] effect now the suggestion about the um
+[0:51:43] fitting the model on the on the control
+[0:51:45] outcomes and then so that you can kind
+[0:51:46] of fit the model once is is great and
+[0:51:49] and I think the we we will also agree
+[0:51:51] that if computation is an issue that's
+[0:51:53] this type of approach is probably the
+[0:51:55] best I think in practice
+[0:51:57] um but if you can refit the model uh
+[0:52:00] then you probably are going to get a
+[0:52:02] little more U more power like more
+[0:52:04] leverage from uh from kind of refitting
+[0:52:06] refitting the model especially if there
+[0:52:08] are complex interactions so um there's
+[0:52:10] an interesting computational trade-off
+[0:52:12] um yes here here here for sure um I
+[0:52:15] think you're you're exactly right that
+[0:52:17] when we try to extend to testing for
+[0:52:20] average written effects um then it's
+[0:52:22] really the The crucial property is the
+[0:52:24] test statistic like what can we what can
+[0:52:26] we prove about the test statistic right
+[0:52:28] for example uh suiz right like it's a
+[0:52:31] it's a common trick that it's a very
+[0:52:33] effective trick that people use to go
+[0:52:35] from testing sharp NS to testing like
+[0:52:37] testing sharp effects to average RM
+[0:52:39] effects so you take a test statistic and
+[0:52:41] then you studenti it essentially um now
+[0:52:45] that can work for difference in means
+[0:52:48] and regression for simp yeah but if we
+[0:52:51] have cross validation based test
+[0:52:52] statistic is is I think it's a it's
+[0:52:55] really might be like very challenging to
+[0:52:57] cize it correctly so that's that's I
+[0:52:59] think that's a that's a great U research
+[0:53:01] question but it's it it should be very
+[0:53:03] hard to to tackle uh bounding NS uh you
+[0:53:07] you know know that that area much much
+[0:53:09] better also requires properties for the
+[0:53:11] test statistics and it's an open
+[0:53:13] question whether cross validation based
+[0:53:16] um uh St statistics can satisfy those
+[0:53:19] properties and and so that we can extend
+[0:53:21] to this bounding NS testing for
+[0:53:24] monotonicity of TR effects um so yeah uh
+[0:53:27] all of that is crucially like what can
+[0:53:29] we say about cross validation based test
+[0:53:30] statistics right like which is you know
+[0:53:32] it's a useful measure but how what do we
+[0:53:35] know about it uh theoretically I think
+[0:53:37] that's the that's really the key
+[0:53:38] question and regarding the last point
+[0:53:40] about coar coar transformation I hope
+[0:53:43] that you know that can be um can be can
+[0:53:46] be dealt with with using like a flexible
+[0:53:48] machine learning model right so we don't
+[0:53:50] have to to make to to to fancy
+[0:53:53] Transformations uh before we we fit
+[0:53:55] anything like hopefully we use like a
+[0:53:56] flexible model that can that can do this
+[0:53:59] transformation for us so um hopefully
+[0:54:01] that can be less of an issue than the
+[0:54:03] yeah the um than the nor sharp NS um so
+[0:54:06] yeah these are my thoughts thanks these
+[0:54:08] are all great great and valid points Wan
+[0:54:11] did you have any any thoughts listening
+[0:54:13] to
 [0:54:20] sh uh yes uh thanks for thanks shm for the wonderful discussion and uh yeah I
-[0:54:23] the wonderful discussion and uh yeah I have some like similar uh um feelings
-[0:54:27] have some like similar uh um feelings with with panels so I think it's uh yeah
-[0:54:30] with with panels so I think it's uh yeah as you mentioned it's quite interesting
-[0:54:33] as you mentioned it's quite interesting to St to study how we can apply this
-[0:54:36] to St to study how we can apply this kind of Fisher fisheran randomization
-[0:54:39] kind of Fisher fisheran randomization test to more General non-sharp uh
-[0:54:43] test to more General non-sharp uh hypothesis and U there are a lot of
-[0:54:46] hypothesis and U there are a lot of Works in this line and basically as you
-[0:54:49] Works in this line and basically as you mentioned there are two directions one
-[0:54:51] mentioned there are two directions one is what kind of test statistic we can
-[0:54:54] is what kind of test statistic we can use and the other one is what kind of uh
-[0:54:58] use and the other one is what kind of uh n nonsharp n hypothesis we can tackle
-[0:55:01] n nonsharp n hypothesis we can tackle using randomization or using some
-[0:55:03] using randomization or using some modification of the randomization and uh
-[0:55:06] modification of the randomization and uh I find it quite interesting and I'm
-[0:55:08] I find it quite interesting and I'm curious about the um how how much or or
-[0:55:13] curious about the um how how much or or or like push the boundary to the to
-[0:55:17] or like push the boundary to the to extend the application of feature
-[0:55:19] extend the application of feature randomization test and I think our work
-[0:55:21] randomization test and I think our work in some sense answerers this question by
-[0:55:24] in some sense answerers this question by using a quite flexible machine learning
-[0:55:26] using a quite flexible machine learning model
+[0:54:23] have some like similar uh um feelings
+[0:54:27] with with panels so I think it's uh yeah
+[0:54:30] as you mentioned it's quite interesting
+[0:54:33] to St to study how we can apply this
+[0:54:36] kind of Fisher fisheran randomization
+[0:54:39] test to more General non-sharp uh
+[0:54:43] hypothesis and U there are a lot of
+[0:54:46] Works in this line and basically as you
+[0:54:49] mentioned there are two directions one
+[0:54:51] is what kind of test statistic we can
+[0:54:54] use and the other one is what kind of uh
+[0:54:58] n nonsharp n hypothesis we can tackle
+[0:55:01] using randomization or using some
+[0:55:03] modification of the randomization and uh
+[0:55:06] I find it quite interesting and I'm
+[0:55:08] curious about the um how how much or or
+[0:55:13] or like push the boundary to the to
+[0:55:17] extend the application of feature
+[0:55:19] randomization test and I think our work
+[0:55:21] in some sense answerers this question by
+[0:55:24] using a quite flexible machine learning
 [0:55:27] model and in terms of the uh I think if we
-[0:55:31] and in terms of the uh I think if we want to extend our method to um to other
-[0:55:35] want to extend our method to um to other nonsharp type of non hypothesis then
-[0:55:37] nonsharp type of non hypothesis then basically this is related to the
-[0:55:40] basically this is related to the interpretability of our test statistics
-[0:55:43] interpretability of our test statistics so our test statistic is just the
-[0:55:45] so our test statistic is just the prediction power the difference in
-[0:55:47] prediction power the difference in prediction power so how does it relate
-[0:55:49] prediction power so how does it relate it to specific caal quantities and I
-[0:55:52] it to specific caal quantities and I think this is
-[0:55:54] think this is a yeah this is a very interesting
-[0:55:57] a yeah this is a very interesting question and uh yeah we yeah we are
-[0:56:00] question and uh yeah we yeah we are going to like Explore More on this um
-[0:56:03] going to like Explore More on this um yeah on this
-[0:56:05] yeah on this direction thank
-[0:56:07] direction thank you thank
+[0:55:31] want to extend our method to um to other
+[0:55:35] nonsharp type of non hypothesis then
+[0:55:37] basically this is related to the
+[0:55:40] interpretability of our test statistics
+[0:55:43] so our test statistic is just the
+[0:55:45] prediction power the difference in
+[0:55:47] prediction power so how does it relate
+[0:55:49] it to specific caal quantities and I
+[0:55:52] think this is
+[0:55:54] a yeah this is a very interesting
+[0:55:57] question and uh yeah we yeah we are
+[0:56:00] going to like Explore More on this um
+[0:56:03] yeah on this
+[0:56:05] direction thank
+[0:56:07] you thank
 [0:56:14] you awesome yeah yeah thank you thank you again Panos and Winan for a very
-[0:56:16] you again Panos and Winan for a very interesting talk and shinran for a great
-[0:56:19] interesting talk and shinran for a great discussion I think it's uh time to uh
-[0:56:22] discussion I think it's uh time to uh wrap up so first of all yeah thank you
-[0:56:25] wrap up so first of all yeah thank you all for coming um
-[0:56:27] all for coming um next week uh we will not have a online
-[0:56:30] next week uh we will not have a online call to inference seminar we will now go
-[0:56:32] call to inference seminar we will now go on winter break the seminar will resume
-[0:56:35] on winter break the seminar will resume in January until then we hope you have a
-[0:56:37] in January until then we hope you have a great break and yeah see you in January
-[0:56:40] great break and yeah see you in January thank you all for coming thanks
-[0:56:42] thank you all for coming thanks everybody happy all
-[0:56:44] everybody happy all this than
+[0:56:16] interesting talk and shinran for a great
+[0:56:19] discussion I think it's uh time to uh
+[0:56:22] wrap up so first of all yeah thank you
+[0:56:25] all for coming um
+[0:56:27] next week uh we will not have a online
+[0:56:30] call to inference seminar we will now go
+[0:56:32] on winter break the seminar will resume
+[0:56:35] in January until then we hope you have a
+[0:56:37] great break and yeah see you in January
+[0:56:40] thank you all for coming thanks
+[0:56:42] everybody happy all
+[0:56:44] this than

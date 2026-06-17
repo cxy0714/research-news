@@ -1,1659 +1,1542 @@
 [0:00:05] Welcome to the causal inference seminar. Today we are excited to have Peng Ding
-[0:00:07] Today we are excited to have Peng Ding from UC Berkeley. We'll talk about
-[0:00:09] from UC Berkeley. We'll talk about randomization and regression adjustment.
-[0:00:12] randomization and regression adjustment. Uh in Q&amp;A we have support by uh his
-[0:00:14] Uh in Q&amp;A we have support by uh his collaborator Xinran Li. Uh also Peng
-[0:00:17] collaborator Xinran Li. Uh also Peng Ding will uh stop in the middle uh for
-[0:00:20] Ding will uh stop in the middle uh for some questions, so please submit your
-[0:00:22] some questions, so please submit your questions in Q&amp;A.
-[0:00:25] questions in Q&amp;A. Uh after the talk we will have a
-[0:00:26] Uh after the talk we will have a discussion by Tirthankar Dasgupta.
-[0:00:29] discussion by Tirthankar Dasgupta. And then if we have some more time we
-[0:00:31] And then if we have some more time we will
+[0:00:07] from UC Berkeley. We'll talk about
+[0:00:09] randomization and regression adjustment.
+[0:00:12] Uh in Q&A we have support by uh his
+[0:00:14] collaborator Xinran Li. Uh also Peng
+[0:00:17] Ding will uh stop in the middle uh for
+[0:00:20] some questions, so please submit your
+[0:00:22] questions in Q&A.
+[0:00:25] Uh after the talk we will have a
+[0:00:26] discussion by Tirthankar Dasgupta.
+[0:00:29] And then if we have some more time we
 [0:00:32] will uh we'll take some more questions.
-[0:00:34] uh we'll take some more questions. Um questions today will be handled by uh
-[0:00:37] Um questions today will be handled by uh Guillaume.
-[0:00:39] Guillaume. Michael. Michael will do it.
-[0:00:40] Michael. Michael will do it. Michael? All right, Michael. Michael I'm
-[0:00:42] Michael? All right, Michael. Michael I'm switching over to you.
+[0:00:34] Um questions today will be handled by uh
+[0:00:37] Guillaume.
+[0:00:39] Michael. Michael will do it.
+[0:00:40] Michael? All right, Michael. Michael I'm
+[0:00:42] switching over to you.
 [0:00:48] Okay. Um so uh yeah we're very lucky to have uh Xinran Li here today to help
-[0:00:51] have uh Xinran Li here today to help with questions, so submit your
-[0:00:53] with questions, so submit your uh your questions through
-[0:00:54] uh your questions through uh Q&amp;A. Uh Peng will pause during the
-[0:00:56] uh Q&amp;A. Uh Peng will pause during the middle of his talk to take some
-[0:00:58] middle of his talk to take some questions live, so uh we also may ask
-[0:01:00] questions live, so uh we also may ask you
+[0:00:51] with questions, so submit your
+[0:00:53] uh your questions through
+[0:00:54] uh Q&A. Uh Peng will pause during the
+[0:00:56] middle of his talk to take some
+[0:00:58] questions live, so uh we also may ask
 [0:01:01] you uh if you'd like to ask him uh his
-[0:01:03] uh if you'd like to ask him uh his questions live then ask you at that
-[0:01:04] questions live then ask you at that point to
+[0:01:03] questions live then ask you at that
 [0:01:05] point to uh raise your hand so we can more uh
-[0:01:07] uh raise your hand so we can more uh easily unmute you. Uh so with that Peng
-[0:01:11] easily unmute you. Uh so with that Peng uh feel free to start whenever you're
-[0:01:12] uh feel free to start whenever you're ready.
+[0:01:07] easily unmute you. Uh so with that Peng
+[0:01:11] uh feel free to start whenever you're
+[0:01:12] ready.
 [0:01:25] Okay. Does it work? Yes.
 [0:01:26] Yes. Okay, good.
 [0:01:31] Uh hello everybody. It's my pleasure to be here presenting my uh recent work
-[0:01:33] be here presenting my uh recent work with my collaborator Xinran Li on a very
-[0:01:36] with my collaborator Xinran Li on a very classical uh statistics topic, uh
-[0:01:38] classical uh statistics topic, uh rerandomization and ANCOVA. So from the
-[0:01:41] rerandomization and ANCOVA. So from the title you can see it's related to uh
-[0:01:43] title you can see it's related to uh experimental design and inference. So I
-[0:01:45] experimental design and inference. So I will explain what is rerandomization and
-[0:01:48] will explain what is rerandomization and hope everybody knows what is ANCOVA and
-[0:01:50] hope everybody knows what is ANCOVA and this like in in statistics we usually
-[0:01:53] this like in in statistics we usually teach uh analysis of variance and
-[0:01:55] teach uh analysis of variance and analysis of covariance, that's ANCOVA.
-[0:01:59] analysis of covariance, that's ANCOVA. Okay, this is a two
-[0:02:01] Okay, this is a two a recent paper published in
-[0:02:03] a recent paper published in GRSSP.
+[0:01:33] with my collaborator Xinran Li on a very
+[0:01:36] classical uh statistics topic, uh
+[0:01:38] rerandomization and ANCOVA. So from the
+[0:01:41] title you can see it's related to uh
+[0:01:43] experimental design and inference. So I
+[0:01:45] will explain what is rerandomization and
+[0:01:48] hope everybody knows what is ANCOVA and
+[0:01:50] this like in in statistics we usually
+[0:01:53] teach uh analysis of variance and
+[0:01:55] analysis of covariance, that's ANCOVA.
+[0:01:59] Okay, this is a two
+[0:02:01] a recent paper published in
+[0:02:03] GRSSP.
 [0:02:11] Randomized experiments have a long history statistics and 100
-[0:02:14] have a long history statistics and 100 years starting from Neman Fishers
-[0:02:17] years starting from Neman Fishers seminal work in agricultural and
-[0:02:19] seminal work in agricultural and biological sciences followed by many
-[0:02:22] biological sciences followed by many other statisticians. For example,
-[0:02:24] other statisticians. For example, Kempson.
+[0:02:14] years starting from Neman Fishers
+[0:02:17] seminal work in agricultural and
+[0:02:19] biological sciences followed by many
+[0:02:22] other statisticians. For example,
 [0:02:26] Kempson. And it was
-[0:02:27] And it was later widely used in medical studies.
-[0:02:30] later widely used in medical studies. For example, FDA
-[0:02:32] For example, FDA approves drugs based on randomized
-[0:02:34] approves drugs based on randomized controlled trials.
-[0:02:37] controlled trials. And later Box, and Hamada summarized
-[0:02:41] And later Box, and Hamada summarized the applications of randomized
-[0:02:43] the applications of randomized experiments in engineering and industry
-[0:02:45] experiments in engineering and industry and in recent
-[0:02:47] and in recent 15 or 20 years randomized experiments
-[0:02:50] 15 or 20 years randomized experiments are very popular in social science. The
-[0:02:52] are very popular in social science. The Nobel Prize winner
-[0:02:55] Nobel Prize winner last year was
-[0:02:56] last year was given to
+[0:02:27] later widely used in medical studies.
+[0:02:30] For example, FDA
+[0:02:32] approves drugs based on randomized
+[0:02:34] controlled trials.
+[0:02:37] And later Box, and Hamada summarized
+[0:02:41] the applications of randomized
+[0:02:43] experiments in engineering and industry
+[0:02:45] and in recent
+[0:02:47] 15 or 20 years randomized experiments
+[0:02:50] are very popular in social science. The
+[0:02:52] Nobel Prize winner
+[0:02:55] last year was
 [0:02:58] given to Professor Duflo and her co-authors.
-[0:03:00] Professor Duflo and her co-authors. And there are several review papers and
-[0:03:02] And there are several review papers and the books summarizing the applications
-[0:03:05] the books summarizing the applications of experiments in social sciences. And
-[0:03:07] of experiments in social sciences. And in Silicon Valley, randomized
-[0:03:09] in Silicon Valley, randomized experiments have a different name called
-[0:03:11] experiments have a different name called AB tests.
+[0:03:00] And there are several review papers and
+[0:03:02] the books summarizing the applications
+[0:03:05] of experiments in social sciences. And
+[0:03:07] in Silicon Valley, randomized
+[0:03:09] experiments have a different name called
 [0:03:13] AB tests. So those tech companies
-[0:03:15] So those tech companies run experiments trying to improve their
-[0:03:18] run experiments trying to improve their revenues.
+[0:03:15] run experiments trying to improve their
+[0:03:18] revenues.
 [0:03:23] And I will use the potential outcome framework to
-[0:03:26] potential outcome framework to describe the
-[0:03:28] describe the the problem
-[0:03:30] the problem that is
+[0:03:26] describe the
+[0:03:28] the problem
 [0:03:32] that is Okay, the problem of interest today. We
-[0:03:34] Okay, the problem of interest today. We have a finite population of N units.
-[0:03:37] have a finite population of N units. For simplicity, we consider an
-[0:03:38] For simplicity, we consider an experiment with two treatment levels,
-[0:03:41] experiment with two treatment levels, one for treatment, zero for control. And
-[0:03:43] one for treatment, zero for control. And using Neman's
-[0:03:45] using Neman's framework, for every unit I, we have
-[0:03:48] framework, for every unit I, we have two potential outcomes, one under
-[0:03:49] two potential outcomes, one under treatment and the other under control.
-[0:03:51] treatment and the other under control. So, those potential outcomes
-[0:03:54] So, those potential outcomes uh
+[0:03:34] have a finite population of N units.
+[0:03:37] For simplicity, we consider an
+[0:03:38] experiment with two treatment levels,
+[0:03:41] one for treatment, zero for control. And
+[0:03:43] using Neman's
+[0:03:45] framework, for every unit I, we have
+[0:03:48] two potential outcomes, one under
+[0:03:49] treatment and the other under control.
+[0:03:51] So, those potential outcomes
 [0:03:55] uh exist even before the experiment. They
-[0:03:57] exist even before the experiment. They are the attributes of the units. Because
-[0:04:00] are the attributes of the units. Because uh if we introduce the potential
-[0:04:01] uh if we introduce the potential outcomes, we can define
-[0:04:04] outcomes, we can define the average treatment effect tau as the
-[0:04:06] the average treatment effect tau as the simple average over all the individual
-[0:04:09] simple average over all the individual treatment effects or
-[0:04:11] treatment effects or the difference between two averages by
-[0:04:13] the difference between two averages by linearity.
-[0:04:14] linearity. And for simplicity, let's start with a
-[0:04:17] And for simplicity, let's start with a completely randomized experiment, CRE,
-[0:04:20] completely randomized experiment, CRE, where N1 units are treated and N0 units
-[0:04:24] where N1 units are treated and N0 units are
+[0:03:57] are the attributes of the units. Because
+[0:04:00] uh if we introduce the potential
+[0:04:01] outcomes, we can define
+[0:04:04] the average treatment effect tau as the
+[0:04:06] simple average over all the individual
+[0:04:09] treatment effects or
+[0:04:11] the difference between two averages by
+[0:04:13] linearity.
+[0:04:14] And for simplicity, let's start with a
+[0:04:17] completely randomized experiment, CRE,
+[0:04:20] where N1 units are treated and N0 units
 [0:04:24] are uh control. And the treatment indicator
-[0:04:28] uh control. And the treatment indicator uh random permutations of N1 ones and N0
-[0:04:31] uh random permutations of N1 ones and N0 zeros.
+[0:04:28] uh random permutations of N1 ones and N0
 [0:04:33] zeros. And
 [0:04:34] And the observed outcome, that's the usual
-[0:04:35] the observed outcome, that's the usual outcome, uh we wrote YI is a function of
-[0:04:39] outcome, uh we wrote YI is a function of the potential outcomes and the treatment
-[0:04:41] the potential outcomes and the treatment indicator. Okay. So, it's a
-[0:04:43] indicator. Okay. So, it's a deterministic function.
-[0:04:45] deterministic function. And we will use randomization-based
-[0:04:47] And we will use randomization-based inference, uh fix the potential
-[0:04:49] inference, uh fix the potential outcomes, or if you think they're
-[0:04:50] outcomes, or if you think they're random, condition on them. So, the only
-[0:04:53] random, condition on them. So, the only random
+[0:04:35] outcome, uh we wrote YI is a function of
+[0:04:39] the potential outcomes and the treatment
+[0:04:41] indicator. Okay. So, it's a
+[0:04:43] deterministic function.
+[0:04:45] And we will use randomization-based
+[0:04:47] inference, uh fix the potential
+[0:04:49] outcomes, or if you think they're
+[0:04:50] random, condition on them. So, the only
 [0:04:54] random component in this problem is Z vector.
-[0:04:57] component in this problem is Z vector. It's a permutation of one and zero
-[0:04:59] It's a permutation of one and zero labels.
+[0:04:57] It's a permutation of one and zero
 [0:05:01] labels. In Neyman's original paper, he also he
-[0:05:03] In Neyman's original paper, he also he not only proposed the potential outcomes
-[0:05:04] not only proposed the potential outcomes framework, he also showed difference in
-[0:05:06] framework, he also showed difference in means, the simple estimator, the mean
-[0:05:08] means, the simple estimator, the mean under treatment and the mean under
-[0:05:11] under treatment and the mean under control is unbiased for the true average
-[0:05:14] control is unbiased for the true average causal effect tau defined in last slide.
-[0:05:16] causal effect tau defined in last slide. And this is a little unusual, it's not
-[0:05:18] And this is a little unusual, it's not the usual two-sample problem, like two
-[0:05:20] the usual two-sample problem, like two We have IID draw for treatment group and
-[0:05:22] We have IID draw for treatment group and IID draw for control group. This is
-[0:05:24] IID draw for control group. This is unbiased for over the the discrete
-[0:05:27] unbiased for over the the discrete distribution induced by randomization of
-[0:05:29] distribution induced by randomization of Z. So, N choose N1 possible
-[0:05:32] Z. So, N choose N1 possible randomizations, N choose N1 possible
-[0:05:34] randomizations, N choose N1 possible values of this tau-hat.
-[0:05:36] values of this tau-hat. And he also computed
-[0:05:38] And he also computed its variance. It has three terms.
-[0:05:40] its variance. It has three terms. The first two leading terms are the
-[0:05:42] The first two leading terms are the usual
+[0:05:03] not only proposed the potential outcomes
+[0:05:04] framework, he also showed difference in
+[0:05:06] means, the simple estimator, the mean
+[0:05:08] under treatment and the mean under
+[0:05:11] control is unbiased for the true average
+[0:05:14] causal effect tau defined in last slide.
+[0:05:16] And this is a little unusual, it's not
+[0:05:18] the usual two-sample problem, like two
+[0:05:20] We have IID draw for treatment group and
+[0:05:22] IID draw for control group. This is
+[0:05:24] unbiased for over the the discrete
+[0:05:27] distribution induced by randomization of
+[0:05:29] Z. So, N choose N1 possible
+[0:05:32] randomizations, N choose N1 possible
+[0:05:34] values of this tau-hat.
+[0:05:36] And he also computed
+[0:05:38] its variance. It has three terms.
+[0:05:40] The first two leading terms are the
 [0:05:43] usual uh
 [0:05:44] uh formula, and he also showed there is an
-[0:05:46] formula, and he also showed there is an additional term.
-[0:05:48] additional term. So, depending on the variance of Y1,
-[0:05:50] So, depending on the variance of Y1, variance of Y0, and the variance of tau,
-[0:05:53] variance of Y0, and the variance of tau, the last term cannot be identified
-[0:05:54] the last term cannot be identified because because we can never identify
-[0:05:57] because because we can never identify the individual treatment effect. So, we
-[0:05:59] the individual treatment effect. So, we cannot identify
-[0:06:01] cannot identify its variance.
-[0:06:03] its variance. But, anyway, in the end we dropped last
-[0:06:05] But, anyway, in the end we dropped last term and construct conservative variance
-[0:06:07] term and construct conservative variance estimator only estimating the first two
-[0:06:10] estimator only estimating the first two leading terms. This gives us the same
-[0:06:12] leading terms. This gives us the same procedure as the classical two-sample
-[0:06:14] procedure as the classical two-sample problem or the branch official problem
-[0:06:16] problem or the branch official problem in
+[0:05:46] additional term.
+[0:05:48] So, depending on the variance of Y1,
+[0:05:50] variance of Y0, and the variance of tau,
+[0:05:53] the last term cannot be identified
+[0:05:54] because because we can never identify
+[0:05:57] the individual treatment effect. So, we
+[0:05:59] cannot identify
+[0:06:01] its variance.
+[0:06:03] But, anyway, in the end we dropped last
+[0:06:05] term and construct conservative variance
+[0:06:07] estimator only estimating the first two
+[0:06:10] leading terms. This gives us the same
+[0:06:12] procedure as the classical two-sample
+[0:06:14] problem or the branch official problem
 [0:06:17] in the asymptotic confidence interval.
-[0:06:20] the asymptotic confidence interval. Okay. Some people may challenge me
-[0:06:22] Okay. Some people may challenge me saying, "Why do we care about the
-[0:06:24] saying, "Why do we care about the randomization based inference?"
-[0:06:26] randomization based inference?" It impose very weak assumptions on the
-[0:06:28] It impose very weak assumptions on the outcome generating process. And it force
-[0:06:31] outcome generating process. And it force us to focus on the design of the
-[0:06:33] us to focus on the design of the experiments. So, sometimes this is
-[0:06:35] experiments. So, sometimes this is called design-based inference or
-[0:06:37] called design-based inference or randomization-based inference
-[0:06:39] randomization-based inference or finite population inference. So,
-[0:06:41] or finite population inference. So, standard approach
-[0:06:43] standard approach also use survey sampling starting from
-[0:06:45] also use survey sampling starting from Neyman's original paper.
-[0:06:48] Neyman's original paper. There's some recent interest in
-[0:06:50] There's some recent interest in economics like Young in a recent paper
-[0:06:53] economics like Young in a recent paper advocated using Fisher randomization
-[0:06:55] advocated using Fisher randomization tests to analyze field experiments in
-[0:06:58] tests to analyze field experiments in economics.
-[0:07:00] economics. And and I classify it to the Fisherian
-[0:07:03] And and I classify it to the Fisherian perspective for testing. And Abadie et
-[0:07:05] perspective for testing. And Abadie et al.'s recent Econometrica paper uh
-[0:07:08] al.'s recent Econometrica paper uh highlights the difference between the
-[0:07:10] highlights the difference between the the design-based and the sample-based
-[0:07:11] the design-based and the sample-based uncertainties in regression. And
-[0:07:14] uncertainties in regression. And I classify this to the Neyman
-[0:07:15] I classify this to the Neyman perspective. And today I will focus on
-[0:07:17] perspective. And today I will focus on the Neyman perspective as the Abadie et
-[0:07:20] the Neyman perspective as the Abadie et al. paper.
+[0:06:20] Okay. Some people may challenge me
+[0:06:22] saying, "Why do we care about the
+[0:06:24] randomization based inference?"
+[0:06:26] It impose very weak assumptions on the
+[0:06:28] outcome generating process. And it force
+[0:06:31] us to focus on the design of the
+[0:06:33] experiments. So, sometimes this is
+[0:06:35] called design-based inference or
+[0:06:37] randomization-based inference
+[0:06:39] or finite population inference. So,
+[0:06:41] standard approach
+[0:06:43] also use survey sampling starting from
+[0:06:45] Neyman's original paper.
+[0:06:48] There's some recent interest in
+[0:06:50] economics like Young in a recent paper
+[0:06:53] advocated using Fisher randomization
+[0:06:55] tests to analyze field experiments in
+[0:06:58] economics.
+[0:07:00] And and I classify it to the Fisherian
+[0:07:03] perspective for testing. And Abadie et
+[0:07:05] al.'s recent Econometrica paper uh
+[0:07:08] highlights the difference between the
+[0:07:10] the design-based and the sample-based
+[0:07:11] uncertainties in regression. And
+[0:07:14] I classify this to the Neyman
+[0:07:15] perspective. And today I will focus on
+[0:07:17] the Neyman perspective as the Abadie et
+[0:07:20] al. paper.
 [0:07:26] Okay. So, the Neyman perspective is this slide from Neyman's original
-[0:07:28] slide from Neyman's original uh paper.
 [0:07:30] uh paper. Okay. This is a very simple two-sample
-[0:07:32] Okay. This is a very simple two-sample problem. Can we do Can we do better?
-[0:07:35] problem. Can we do Can we do better? With covariates because in
-[0:07:37] With covariates because in most experiments we have covariates and
-[0:07:40] most experiments we have covariates and And want to use them to improve
-[0:07:41] And want to use them to improve efficiency and at least.
-[0:07:44] efficiency and at least. Under a complete randomization, we
-[0:07:46] Under a complete randomization, we assume W I's are the covariates
-[0:07:48] assume W I's are the covariates available to the analyzer. For
-[0:07:49] available to the analyzer. For simplicity, L is finite dimension with
-[0:07:52] simplicity, L is finite dimension with uh
+[0:07:32] problem. Can we do Can we do better?
+[0:07:35] With covariates because in
+[0:07:37] most experiments we have covariates and
+[0:07:40] And want to use them to improve
+[0:07:41] efficiency and at least.
+[0:07:44] Under a complete randomization, we
+[0:07:46] assume W I's are the covariates
+[0:07:48] available to the analyzer. For
+[0:07:49] simplicity, L is finite dimension with
 [0:07:53] uh L coordinates and assume W centered with
-[0:07:56] L coordinates and assume W centered with mean zero for simplicity.
-[0:07:59] mean zero for simplicity. And we consider this class of estimator
-[0:08:02] And we consider this class of estimator is a linearly adjusted estimator.
-[0:08:04] is a linearly adjusted estimator. The same difference in means of the
-[0:08:06] The same difference in means of the outcome, but it is adjusted outcome. So,
-[0:08:09] outcome, but it is adjusted outcome. So, we take out some
-[0:08:12] we take out some linear combination of W
-[0:08:14] linear combination of W under the treatment and some linear
-[0:08:15] under the treatment and some linear combination of W under control. Hope the
-[0:08:18] combination of W under control. Hope the residual
+[0:07:56] mean zero for simplicity.
+[0:07:59] And we consider this class of estimator
+[0:08:02] is a linearly adjusted estimator.
+[0:08:04] The same difference in means of the
+[0:08:06] outcome, but it is adjusted outcome. So,
+[0:08:09] we take out some
+[0:08:12] linear combination of W
+[0:08:14] under the treatment and some linear
+[0:08:15] combination of W under control. Hope the
 [0:08:19] residual has a smaller variance, then we can
-[0:08:21] has a smaller variance, then we can improve efficiency.
-[0:08:23] improve efficiency. Okay. So, this is the general definition
-[0:08:26] Okay. So, this is the general definition and using some algebra, we can show this
-[0:08:29] and using some algebra, we can show this is in
+[0:08:21] improve efficiency.
+[0:08:23] Okay. So, this is the general definition
+[0:08:26] and using some algebra, we can show this
 [0:08:30] is in in
 [0:08:30] in linear combination of
-[0:08:32] linear combination of tau hat, difference in means of Y, and
-[0:08:35] tau hat, difference in means of Y, and tau W, difference in means of
-[0:08:36] tau W, difference in means of covariates.
-[0:08:38] covariates. With this coefficient. Okay, a
-[0:08:40] With this coefficient. Okay, a combination of beta one and beta zero.
-[0:08:43] combination of beta one and beta zero. Or can define this coefficient as gamma
-[0:08:46] Or can define this coefficient as gamma prime.
+[0:08:32] tau hat, difference in means of Y, and
+[0:08:35] tau W, difference in means of
+[0:08:36] covariates.
+[0:08:38] With this coefficient. Okay, a
+[0:08:40] combination of beta one and beta zero.
+[0:08:43] Or can define this coefficient as gamma
 [0:08:48] prime. Okay, this coefficient looks like looks
-[0:08:50] Okay, this coefficient looks like looks like a typo. So, 0 1 1 0, but that's a
-[0:08:53] like a typo. So, 0 1 1 0, but that's a mathematics.
-[0:08:55] mathematics. Okay.
+[0:08:50] like a typo. So, 0 1 1 0, but that's a
+[0:08:53] mathematics.
 [0:08:56] Okay. Hopefully, notations are clear.
-[0:08:58] Hopefully, notations are clear. Difference in means and a proportions of
-[0:09:00] Difference in means and a proportions of units.
+[0:08:58] Difference in means and a proportions of
 [0:09:01] units. R1 R0 notation and gamma is a
-[0:09:03] R1 R0 notation and gamma is a combination. So, this formula
-[0:09:07] combination. So, this formula immediately tells us
-[0:09:08] immediately tells us the choice of beta one and beta zero are
-[0:09:11] the choice of beta one and beta zero are not unique because what matters in the
-[0:09:13] not unique because what matters in the end is gamma.
-[0:09:14] end is gamma. There are many ways to choose the same
-[0:09:17] There are many ways to choose the same uh gamma with different uh beta one and
-[0:09:19] uh gamma with different uh beta one and beta zero.
+[0:09:03] combination. So, this formula
+[0:09:07] immediately tells us
+[0:09:08] the choice of beta one and beta zero are
+[0:09:11] not unique because what matters in the
+[0:09:13] end is gamma.
+[0:09:14] There are many ways to choose the same
+[0:09:17] uh gamma with different uh beta one and
+[0:09:19] beta zero.
 [0:09:24] Okay, uh some history. Uh Fisher's proposal
 [0:09:25] proposal Fisher's ANCOVA is choose beta one and
-[0:09:28] Fisher's ANCOVA is choose beta one and beta zero as the coefficient of W in
-[0:09:30] beta zero as the coefficient of W in this least squares fit. That's a
-[0:09:32] this least squares fit. That's a textbook uh recommendation. This is
-[0:09:34] textbook uh recommendation. This is equivalent to choose uh
-[0:09:38] equivalent to choose uh coefficient of Z in this
-[0:09:40] coefficient of Z in this least square fit as the estimate
-[0:09:42] least square fit as the estimate according to tau F hat.
-[0:09:44] according to tau F hat. It's widely used in statistics and
-[0:09:46] It's widely used in statistics and economics, but unfortunately, David
-[0:09:49] economics, but unfortunately, David Freedman wrote a paper criticizing
-[0:09:51] Freedman wrote a paper criticizing Fisher's ANCOVA. It could be a bad idea.
-[0:09:54] Fisher's ANCOVA. It could be a bad idea. Uh for example, ANCOVA estimator can be
-[0:09:58] Uh for example, ANCOVA estimator can be even less efficient than tau hat
-[0:09:59] even less efficient than tau hat theoretically. And the standard error
-[0:10:01] theoretically. And the standard error from the least square fit can be
-[0:10:03] from the least square fit can be inconsistent for the true standard error
-[0:10:06] inconsistent for the true standard error under the randomization model.
-[0:10:08] under the randomization model. If you believe the linear model is
-[0:10:10] If you believe the linear model is correct, of course, Fisher's ANCOVA
-[0:10:12] correct, of course, Fisher's ANCOVA works. But what if the model is wrong?
-[0:10:14] works. But what if the model is wrong? And the way evaluate tau F hat under
-[0:10:16] And the way evaluate tau F hat under randomization model.
-[0:10:18] randomization model. Allowing for heterogeneity, allowing for
-[0:10:21] Allowing for heterogeneity, allowing for uh
+[0:09:28] beta zero as the coefficient of W in
+[0:09:30] this least squares fit. That's a
+[0:09:32] textbook uh recommendation. This is
+[0:09:34] equivalent to choose uh
+[0:09:38] coefficient of Z in this
+[0:09:40] least square fit as the estimate
+[0:09:42] according to tau F hat.
+[0:09:44] It's widely used in statistics and
+[0:09:46] economics, but unfortunately, David
+[0:09:49] Freedman wrote a paper criticizing
+[0:09:51] Fisher's ANCOVA. It could be a bad idea.
+[0:09:54] Uh for example, ANCOVA estimator can be
+[0:09:58] even less efficient than tau hat
+[0:09:59] theoretically. And the standard error
+[0:10:01] from the least square fit can be
+[0:10:03] inconsistent for the true standard error
+[0:10:06] under the randomization model.
+[0:10:08] If you believe the linear model is
+[0:10:10] correct, of course, Fisher's ANCOVA
+[0:10:12] works. But what if the model is wrong?
+[0:10:14] And the way evaluate tau F hat under
+[0:10:16] randomization model.
+[0:10:18] Allowing for heterogeneity, allowing for
 [0:10:22] uh unequal sample size. Heterogeneity means
-[0:10:24] unequal sample size. Heterogeneity means the treatment effect can be a function
-[0:10:26] the treatment effect can be a function of X of W, the covariates.
-[0:10:30] of X of W, the covariates. Okay, this is the Freedman's critique.
-[0:10:33] Okay, this is the Freedman's critique. And the link
-[0:10:34] And the link uh in his PhD thesis from Berkeley,
-[0:10:37] uh in his PhD thesis from Berkeley, he uh proposed a very simple fix to
-[0:10:39] he uh proposed a very simple fix to Freedman's uh critique. So, he he choose
-[0:10:42] Freedman's uh critique. So, he he choose beta one and beta zero as the least
-[0:10:44] beta one and beta zero as the least square coefficient of the potential
-[0:10:46] square coefficient of the potential outcome on W. It means we choose two
-[0:10:48] outcome on W. It means we choose two different coefficients, not the same
-[0:10:51] different coefficients, not the same coefficient as in Fisher's ANCOVA. Okay,
-[0:10:53] coefficient as in Fisher's ANCOVA. Okay, this is equivalent to run a least square
-[0:10:56] this is equivalent to run a least square fit of Y on ZW with full interaction and
-[0:11:00] fit of Y on ZW with full interaction and choose the coefficient Z two because
-[0:11:02] choose the coefficient Z two because there's an intercept. Okay, coefficient
-[0:11:04] there's an intercept. Okay, coefficient of Z
+[0:10:24] the treatment effect can be a function
+[0:10:26] of X of W, the covariates.
+[0:10:30] Okay, this is the Freedman's critique.
+[0:10:33] And the link
+[0:10:34] uh in his PhD thesis from Berkeley,
+[0:10:37] he uh proposed a very simple fix to
+[0:10:39] Freedman's uh critique. So, he he choose
+[0:10:42] beta one and beta zero as the least
+[0:10:44] square coefficient of the potential
+[0:10:46] outcome on W. It means we choose two
+[0:10:48] different coefficients, not the same
+[0:10:51] coefficient as in Fisher's ANCOVA. Okay,
+[0:10:53] this is equivalent to run a least square
+[0:10:56] fit of Y on ZW with full interaction and
+[0:11:00] choose the coefficient Z two because
+[0:11:02] there's an intercept. Okay, coefficient
 [0:11:05] of Z uh we call it tau L hat.
-[0:11:07] uh we call it tau L hat. And we can show it's optimal within the
-[0:11:10] And we can show it's optimal within the family of linearly adjusted estimator.
-[0:11:12] family of linearly adjusted estimator. It's very easy to implement. Standard
-[0:11:15] It's very easy to implement. Standard software package can implement this. And
-[0:11:17] software package can implement this. And moreover, this uh the Eicker-Huber-White
-[0:11:20] moreover, this uh the Eicker-Huber-White standard error, the robust standard
-[0:11:22] standard error, the robust standard error, or the sandwich standard error is
-[0:11:24] error, or the sandwich standard error is conservative for the randomization-based
-[0:11:27] conservative for the randomization-based standard error. Okay, so Lin uh fixed
-[0:11:30] standard error. Okay, so Lin uh fixed many problems
-[0:11:31] many problems of uh ANCOVA. And the results above do
-[0:11:35] of uh ANCOVA. And the results above do not rely on linear model assumption. It
-[0:11:37] not rely on linear model assumption. It it
+[0:11:07] And we can show it's optimal within the
+[0:11:10] family of linearly adjusted estimator.
+[0:11:12] It's very easy to implement. Standard
+[0:11:15] software package can implement this. And
+[0:11:17] moreover, this uh the Eicker-Huber-White
+[0:11:20] standard error, the robust standard
+[0:11:22] error, or the sandwich standard error is
+[0:11:24] conservative for the randomization-based
+[0:11:27] standard error. Okay, so Lin uh fixed
+[0:11:30] many problems
+[0:11:31] of uh ANCOVA. And the results above do
+[0:11:35] not rely on linear model assumption. It
 [0:11:38] it because there's no linear model. There's
-[0:11:39] because there's no linear model. There's only randomness induced by Z.
-[0:11:43] only randomness induced by Z. Okay.
+[0:11:39] only randomness induced by Z.
 [0:11:44] Okay. And at the same time, we can ask you
-[0:11:47] And at the same time, we can ask you already have covariates. Why not use
-[0:11:49] already have covariates. Why not use them in the design stage? Or can we do
-[0:11:51] them in the design stage? Or can we do better with covariates in design? The
-[0:11:53] better with covariates in design? The answer is yes. In the design stage,
-[0:11:55] answer is yes. In the design stage, let's assume we have covariates X. And
-[0:11:58] let's assume we have covariates X. And for simplicity, we assume X has
-[0:12:01] for simplicity, we assume X has dimension K and also centered at zero.
-[0:12:03] dimension K and also centered at zero. And
+[0:11:47] already have covariates. Why not use
+[0:11:49] them in the design stage? Or can we do
+[0:11:51] better with covariates in design? The
+[0:11:53] answer is yes. In the design stage,
+[0:11:55] let's assume we have covariates X. And
+[0:11:58] for simplicity, we assume X has
+[0:12:01] dimension K and also centered at zero.
 [0:12:04] And we allow general theory. So, X and W can
-[0:12:07] we allow general theory. So, X and W can be different. The the designer and
-[0:12:09] be different. The the designer and analyzer can have different covariates.
-[0:12:12] analyzer can have different covariates. And the Rubin Morgan Rubin's proposal is
-[0:12:15] And the Rubin Morgan Rubin's proposal is to use re-randomization in the design
-[0:12:17] to use re-randomization in the design stage because you you may observe uh
-[0:12:19] stage because you you may observe uh covariate imbalance even in completely
-[0:12:22] covariate imbalance even in completely randomized experiment. Then you know in
-[0:12:24] randomized experiment. Then you know in that case, your experiment is not
-[0:12:26] that case, your experiment is not ideal.
+[0:12:07] be different. The the designer and
+[0:12:09] analyzer can have different covariates.
+[0:12:12] And the Rubin Morgan Rubin's proposal is
+[0:12:15] to use re-randomization in the design
+[0:12:17] stage because you you may observe uh
+[0:12:19] covariate imbalance even in completely
+[0:12:22] randomized experiment. Then you know in
+[0:12:24] that case, your experiment is not
 [0:12:28] ideal. It's not good until it is in covariate
-[0:12:29] It's not good until it is in covariate balance.
 [0:12:30] balance. Okay. So, so this is a very old idea uh
-[0:12:34] Okay. So, so this is a very old idea uh proposed by Fisher and and a lot of
-[0:12:35] proposed by Fisher and and a lot of other people like uh Cox.
-[0:12:38] other people like uh Cox. Very simple idea. We draw a treatment
-[0:12:40] Very simple idea. We draw a treatment vector until it satisfies some balance
-[0:12:44] vector until it satisfies some balance criteria. This balance criteria can be
-[0:12:46] criteria. This balance criteria can be general. It's a function of the
-[0:12:48] general. It's a function of the treatment vector and covariate matrix.
-[0:12:51] treatment vector and covariate matrix. You can define whatever covariate
-[0:12:53] You can define whatever covariate balance criteria you like. And in this
-[0:12:55] balance criteria you like. And in this talk, uh I will focus on some simple
-[0:12:57] talk, uh I will focus on some simple criteria, but in general,
-[0:12:59] criteria, but in general, this is just a phi function.
-[0:13:02] this is just a phi function. Okay.
+[0:12:34] proposed by Fisher and and a lot of
+[0:12:35] other people like uh Cox.
+[0:12:38] Very simple idea. We draw a treatment
+[0:12:40] vector until it satisfies some balance
+[0:12:44] criteria. This balance criteria can be
+[0:12:46] general. It's a function of the
+[0:12:48] treatment vector and covariate matrix.
+[0:12:51] You can define whatever covariate
+[0:12:53] balance criteria you like. And in this
+[0:12:55] talk, uh I will focus on some simple
+[0:12:57] criteria, but in general,
+[0:12:59] this is just a phi function.
 [0:13:04] Okay. And blocking, which is widely used uh
-[0:13:07] And blocking, which is widely used uh and even now there's is a special case
-[0:13:09] and even now there's is a special case because you can view uh
-[0:13:11] because you can view uh blocking with stratification
-[0:13:13] blocking with stratification as uh
+[0:13:07] and even now there's is a special case
+[0:13:09] because you can view uh
+[0:13:11] blocking with stratification
 [0:13:14] as uh re-randomization getting rid of some
-[0:13:17] re-randomization getting rid of some unlucky draws. This This is a
-[0:13:19] unlucky draws. This This is a mathematical fact.
-[0:13:22] mathematical fact. But uh
+[0:13:17] unlucky draws. This This is a
+[0:13:19] mathematical fact.
 [0:13:23] But uh there there is a recent paper in
-[0:13:25] there there is a recent paper in economics reviewing
-[0:13:27] economics reviewing uh a lot of experiments. The point is
-[0:13:29] uh a lot of experiments. The point is re-randomization uh
-[0:13:32] re-randomization uh was already used in practice, although
-[0:13:35] was already used in practice, although it's not clearly documented. So, people
-[0:13:37] it's not clearly documented. So, people because people reported their covariate
-[0:13:39] because people reported their covariate balance table in the papers, and most of
-[0:13:41] balance table in the papers, and most of papers have very good covariate balance.
-[0:13:44] papers have very good covariate balance. This clearly violates the probability
-[0:13:46] This clearly violates the probability rule if you are really running complete
-[0:13:48] rule if you are really running complete randomization. We know with some chance
-[0:13:51] randomization. We know with some chance we will reject covariate balance, but
-[0:13:53] we will reject covariate balance, but they they didn't reject. Why?
-[0:13:56] they they didn't reject. Why? There was re-randomization already in
-[0:13:58] There was re-randomization already in practice.
+[0:13:25] economics reviewing
+[0:13:27] uh a lot of experiments. The point is
+[0:13:29] re-randomization uh
+[0:13:32] was already used in practice, although
+[0:13:35] it's not clearly documented. So, people
+[0:13:37] because people reported their covariate
+[0:13:39] balance table in the papers, and most of
+[0:13:41] papers have very good covariate balance.
+[0:13:44] This clearly violates the probability
+[0:13:46] rule if you are really running complete
+[0:13:48] randomization. We know with some chance
+[0:13:51] we will reject covariate balance, but
+[0:13:53] they they didn't reject. Why?
+[0:13:56] There was re-randomization already in
 [0:13:59] practice. Okay.
 [0:14:00] Okay. For theoretical
-[0:14:03] For theoretical reason, we want to give you a beautiful
-[0:14:05] reason, we want to give you a beautiful theory and like clear geometry, so we
-[0:14:07] theory and like clear geometry, so we focus on re-randomization
-[0:14:10] focus on re-randomization uh based on Mahalanobis distance. We
-[0:14:12] uh based on Mahalanobis distance. We call it RUM.
-[0:14:14] call it RUM. We accept the Z vector
-[0:14:17] We accept the Z vector if and only if the Mahalanobis distance
-[0:14:20] if and only if the Mahalanobis distance or squared Mahalanobis distance squared
-[0:14:22] or squared Mahalanobis distance squared between two
-[0:14:23] between two uh treatment groups is smaller than or
-[0:14:26] uh treatment groups is smaller than or equal to some predetermined threshold A,
-[0:14:28] equal to some predetermined threshold A, fixed threshold. So, tau X hat is the
-[0:14:31] fixed threshold. So, tau X hat is the difference in means of covariates. In
-[0:14:33] difference in means of covariates. In the middle is the covariate covariance
-[0:14:36] the middle is the covariate covariance matrix of
+[0:14:03] reason, we want to give you a beautiful
+[0:14:05] theory and like clear geometry, so we
+[0:14:07] focus on re-randomization
+[0:14:10] uh based on Mahalanobis distance. We
+[0:14:12] call it RUM.
+[0:14:14] We accept the Z vector
+[0:14:17] if and only if the Mahalanobis distance
+[0:14:20] or squared Mahalanobis distance squared
+[0:14:22] between two
+[0:14:23] uh treatment groups is smaller than or
+[0:14:26] equal to some predetermined threshold A,
+[0:14:28] fixed threshold. So, tau X hat is the
+[0:14:31] difference in means of covariates. In
+[0:14:33] the middle is the covariate covariance
 [0:14:37] matrix of tau X hat. So, we standardize this uh
-[0:14:39] tau X hat. So, we standardize this uh difference.
+[0:14:39] difference.
 [0:14:44] If this Mahalanobis distance is small enough,
 [0:14:45] enough, we run the physical experiment.
-[0:14:47] we run the physical experiment. Otherwise, we redraw another covariate
-[0:14:49] Otherwise, we redraw another covariate matrix.
+[0:14:47] Otherwise, we redraw another covariate
 [0:14:50] matrix. So, this happens before the real
-[0:14:52] So, this happens before the real experiment.
-[0:14:54] experiment. Uh if A is infinity, this is completely
-[0:14:56] Uh if A is infinity, this is completely randomized experiment. If A is zero,
-[0:14:58] randomized experiment. If A is zero, this gives you the a deterministic
-[0:15:00] this gives you the a deterministic design. We don't want a deterministic
-[0:15:02] design. We don't want a deterministic design because otherwise there's no
-[0:15:04] design because otherwise there's no randomness. There's no randomization
-[0:15:06] randomness. There's no randomization based inference. So, A must be something
-[0:15:08] based inference. So, A must be something in the middle.
-[0:15:09] in the middle. For example, um
-[0:15:11] For example, um uh Morgan and Rubin
-[0:15:12] uh Morgan and Rubin suggested A equals 0.01. It's small, but
-[0:15:15] suggested A equals 0.01. It's small, but still allow for enough uh randomness.
-[0:15:18] still allow for enough uh randomness. But but this is a little uh arbitrary.
-[0:15:21] But but this is a little uh arbitrary. Uh
+[0:14:52] experiment.
+[0:14:54] Uh if A is infinity, this is completely
+[0:14:56] randomized experiment. If A is zero,
+[0:14:58] this gives you the a deterministic
+[0:15:00] design. We don't want a deterministic
+[0:15:02] design because otherwise there's no
+[0:15:04] randomness. There's no randomization
+[0:15:06] based inference. So, A must be something
+[0:15:08] in the middle.
+[0:15:09] For example, um
+[0:15:11] uh Morgan and Rubin
+[0:15:12] suggested A equals 0.01. It's small, but
+[0:15:15] still allow for enough uh randomness.
+[0:15:18] But but this is a little uh arbitrary.
 [0:15:22] Uh our focus is not on the choice of A.
-[0:15:25] our focus is not on the choice of A. It's if you choose an A, how to analyze
-[0:15:28] It's if you choose an A, how to analyze the experiment. That's our focus today.
-[0:15:31] the experiment. That's our focus today. And we can do theory for other criteria,
-[0:15:33] And we can do theory for other criteria, but uh, the notation will be more
-[0:15:35] but uh, the notation will be more complex.
+[0:15:25] It's if you choose an A, how to analyze
+[0:15:28] the experiment. That's our focus today.
+[0:15:31] And we can do theory for other criteria,
+[0:15:33] but uh, the notation will be more
 [0:15:37] complex. Now, some elementary theory uh, for
-[0:15:39] Now, some elementary theory uh, for re-randomization before. Uh, so in our
-[0:15:42] re-randomization before. Uh, so in our previous paper, we show in diff- the
-[0:15:44] previous paper, we show in diff- the difference-in-means estimator
-[0:15:45] difference-in-means estimator standardized by uh, the
-[0:15:48] standardized by uh, the standardized version converge to a
-[0:15:50] standardized version converge to a non-Gaussian
-[0:15:52] non-Gaussian uh, limiting distribution under
-[0:15:53] uh, limiting distribution under re-randomization. And we know under
-[0:15:55] re-randomization. And we know under complete randomization,
-[0:15:56] complete randomization, uh, it's normal asymptotically, but
-[0:15:58] uh, it's normal asymptotically, but under re-randomization it's not.
-[0:16:01] under re-randomization it's not. But we can also show tau hat is more
-[0:16:03] But we can also show tau hat is more concentrated and the true parameter. So,
-[0:16:06] concentrated and the true parameter. So, the the the variance and the quantile
-[0:16:08] the the the variance and the quantile ranges are smaller.
-[0:16:10] ranges are smaller. And if A is small enough, the threshold
-[0:16:13] And if A is small enough, the threshold is small, then we can show the
-[0:16:15] is small, then we can show the distribution of tau hat under
-[0:16:18] distribution of tau hat under re-randomization
-[0:16:19] re-randomization is almost identical or is identical to
-[0:16:22] is almost identical or is identical to Lin's estimator under complete
-[0:16:23] Lin's estimator under complete randomization.
+[0:15:39] re-randomization before. Uh, so in our
+[0:15:42] previous paper, we show in diff- the
+[0:15:44] difference-in-means estimator
+[0:15:45] standardized by uh, the
+[0:15:48] standardized version converge to a
+[0:15:50] non-Gaussian
+[0:15:52] uh, limiting distribution under
+[0:15:53] re-randomization. And we know under
+[0:15:55] complete randomization,
+[0:15:56] uh, it's normal asymptotically, but
+[0:15:58] under re-randomization it's not.
+[0:16:01] But we can also show tau hat is more
+[0:16:03] concentrated and the true parameter. So,
+[0:16:06] the the the variance and the quantile
+[0:16:08] ranges are smaller.
+[0:16:10] And if A is small enough, the threshold
+[0:16:13] is small, then we can show the
+[0:16:15] distribution of tau hat under
+[0:16:18] re-randomization
+[0:16:19] is almost identical or is identical to
+[0:16:22] Lin's estimator under complete
+[0:16:23] randomization.
 [0:16:30] That's why we called REM and regression adjustment as duos.
-[0:16:34] REM and regression adjustment as duos. The duos
 [0:16:36] The duos uh,
 [0:16:40] in experimental design, one use covariates in the design stage and the
-[0:16:42] covariates in the design stage and the other use covariates in the analysis
-[0:16:44] other use covariates in the analysis stage.
+[0:16:42] other use covariates in the analysis
 [0:16:45] stage. This is very similar to blocking in the
-[0:16:47] This is very similar to blocking in the design and post-stratification in the
-[0:16:50] design and post-stratification in the analysis. It's also similar to survey
-[0:16:53] analysis. It's also similar to survey sampling. In the design stage, we can
-[0:16:55] sampling. In the design stage, we can use rejective sampling. We only use
-[0:16:57] use rejective sampling. We only use those
+[0:16:47] design and post-stratification in the
+[0:16:50] analysis. It's also similar to survey
+[0:16:53] sampling. In the design stage, we can
+[0:16:55] use rejective sampling. We only use
 [0:16:58] those uh, simple random samples with good
 [0:17:07] your covariate mean is close to the sensors mean.
-[0:17:08] sensors mean. And rejective sampling and the
-[0:17:10] And rejective sampling and the regression estimator. And the actual
-[0:17:12] regression estimator. And the actual Lin's estimator was motivated by the
-[0:17:14] Lin's estimator was motivated by the regression estimator from survey
-[0:17:15] regression estimator from survey sampling. Okay, that that's three
-[0:17:18] sampling. Okay, that that's three uh, pairs of deals and we will focus on
-[0:17:21] uh, pairs of deals and we will focus on this.
+[0:17:08] And rejective sampling and the
+[0:17:10] regression estimator. And the actual
+[0:17:12] Lin's estimator was motivated by the
+[0:17:14] regression estimator from survey
+[0:17:15] sampling. Okay, that that's three
+[0:17:18] uh, pairs of deals and we will focus on
 [0:17:23] this. And the theory can be extended to this
-[0:17:25] And the theory can be extended to this these two deals, too.
+[0:17:25] these two deals, too.
 [0:17:30] Okay. This is a summary
-[0:17:32] This is a summary slide.
 [0:17:34] slide. Because we show re-randomization and
-[0:17:36] Because we show re-randomization and regression adjustments are both good
-[0:17:39] regression adjustments are both good to improve efficiency in experiments,
-[0:17:41] to improve efficiency in experiments, why not use both of them?
-[0:17:43] why not use both of them? We use re-randomization in design and
-[0:17:46] We use re-randomization in design and regression adjustment in analysis.
-[0:17:49] regression adjustment in analysis. Seems intuitive. Seems
-[0:17:52] Seems intuitive. Seems PhD
+[0:17:36] regression adjustments are both good
+[0:17:39] to improve efficiency in experiments,
+[0:17:41] why not use both of them?
+[0:17:43] We use re-randomization in design and
+[0:17:46] regression adjustment in analysis.
+[0:17:49] Seems intuitive. Seems
 [0:17:53] PhD course work. You can assign this to your
-[0:17:55] course work. You can assign this to your students
 [0:17:57] students as a homework problem combining two
-[0:17:59] as a homework problem combining two ideas.
 [0:18:01] ideas. But there are some some subtle
-[0:18:02] But there are some some subtle questions. For example, how do we
-[0:18:04] questions. For example, how do we conduct statistical inference if you
-[0:18:06] conduct statistical inference if you combine two? We have to understand the
-[0:18:08] combine two? We have to understand the asymptotic distribution of
-[0:18:10] asymptotic distribution of of the regression adjusted estimator
-[0:18:12] of the regression adjusted estimator under re-randomization.
-[0:18:14] under re-randomization. Oh,
+[0:18:02] questions. For example, how do we
+[0:18:04] conduct statistical inference if you
+[0:18:06] combine two? We have to understand the
+[0:18:08] asymptotic distribution of
+[0:18:10] of the regression adjusted estimator
+[0:18:12] under re-randomization.
 [0:18:15] Oh, the slides before focused on the case
-[0:18:17] the slides before focused on the case with fixed beta one, beta zero. How do
-[0:18:20] with fixed beta one, beta zero. How do we choose them? Or what is the best way
-[0:18:22] we choose them? Or what is the best way to choose them?
-[0:18:25] to choose them? Or
+[0:18:17] with fixed beta one, beta zero. How do
+[0:18:20] we choose them? Or what is the best way
+[0:18:22] to choose them?
 [0:18:26] Or oh
 [0:18:27] oh To
 [0:18:28] To to to quantify this, we have to
-[0:18:30] to to quantify this, we have to um
 [0:18:31] um propose criteria to to measure
-[0:18:33] propose criteria to to measure optimality. What do we mean by
-[0:18:35] optimality. What do we mean by optimality?
-[0:18:37] optimality? And then the final question is how do we
-[0:18:38] And then the final question is how do we quantify the gain from the design and
-[0:18:40] quantify the gain from the design and the analysis? There are several
-[0:18:42] the analysis? There are several theoretical questions. I will answer the
-[0:18:44] theoretical questions. I will answer the first two. Last one will be quantified a
-[0:18:47] first two. Last one will be quantified a little bit but the details are in the
-[0:18:49] little bit but the details are in the details are in the paper.
+[0:18:33] optimality. What do we mean by
+[0:18:35] optimality?
+[0:18:37] And then the final question is how do we
+[0:18:38] quantify the gain from the design and
+[0:18:40] the analysis? There are several
+[0:18:42] theoretical questions. I will answer the
+[0:18:44] first two. Last one will be quantified a
+[0:18:47] little bit but the details are in the
+[0:18:49] paper.
 [0:18:54] There are some theoretical findings. Let me summarize
-[0:18:56] theoretical findings. Let me summarize our our theory because after this slide
-[0:19:00] our our theory because after this slide things will be pretty technical.
-[0:19:03] things will be pretty technical. Okay.
+[0:18:56] our our theory because after this slide
+[0:19:00] things will be pretty technical.
 [0:19:04] Okay. Some some findings. First, based on
-[0:19:06] Some some findings. First, based on asymptotic analysis
-[0:19:08] asymptotic analysis given an estimator, this estimator may
-[0:19:10] given an estimator, this estimator may be
+[0:19:06] asymptotic analysis
+[0:19:08] given an estimator, this estimator may
 [0:19:11] be uh simplest estimator or regression
-[0:19:13] uh simplest estimator or regression adjusted estimator.
-[0:19:15] adjusted estimator. Fix the estimator.
-[0:19:17] Fix the estimator. The The design re-randomization never
-[0:19:20] The The design re-randomization never hurts either the sampling or estimated
-[0:19:23] hurts either the sampling or estimated precision.
-[0:19:24] precision. First conclusion. Second, given the
-[0:19:26] First conclusion. Second, given the design, either is complete randomization
-[0:19:28] design, either is complete randomization or re-randomization,
-[0:19:30] or re-randomization, regression adjustment never hurts the
-[0:19:32] regression adjustment never hurts the estimated the precision.
-[0:19:35] estimated the precision. Okay. It may It may be a little puzzle.
-[0:19:36] Okay. It may It may be a little puzzle. Why do we care about sampling and the
-[0:19:38] Why do we care about sampling and the estimated precision? In classical
-[0:19:40] estimated precision? In classical statistics, we don't care because
-[0:19:43] statistics, we don't care because for some estimator you derive the
-[0:19:44] for some estimator you derive the asymptotic distribution, asymptotic
-[0:19:46] asymptotic distribution, asymptotic variance. Usually you can find a
-[0:19:48] variance. Usually you can find a consistent estimator for that asymptotic
-[0:19:51] consistent estimator for that asymptotic variance. Then you can construct
-[0:19:53] variance. Then you can construct a confidence interval, and there is no
-[0:19:54] a confidence interval, and there is no difference
-[0:19:56] difference asymptotically entities between a
-[0:19:58] asymptotically entities between a sampling distribution, the true
-[0:19:59] sampling distribution, the true distribution, and then the estimated
-[0:20:01] distribution, and then the estimated distribution. They're the same.
-[0:20:03] distribution. They're the same. But here in finite sample inference and
-[0:20:05] But here in finite sample inference and in our framework, these two things may
-[0:20:07] in our framework, these two things may be different. That's why we have to
-[0:20:09] be different. That's why we have to distinguish these two precision. So the
-[0:20:11] distinguish these two precision. So the sampling precision is the true
-[0:20:13] sampling precision is the true precision, but actually depends on the
-[0:20:15] precision, but actually depends on the unknown potential outcomes. The
-[0:20:16] unknown potential outcomes. The estimated the precision is the precision
-[0:20:18] estimated the precision is the precision we reported in confidence intervals. So
-[0:20:21] we reported in confidence intervals. So that's maybe that's more real
-[0:20:24] that's maybe that's more real precision.
-[0:20:25] precision. Now, I will I will make it more precise
-[0:20:28] Now, I will I will make it more precise later.
+[0:19:13] adjusted estimator.
+[0:19:15] Fix the estimator.
+[0:19:17] The The design re-randomization never
+[0:19:20] hurts either the sampling or estimated
+[0:19:23] precision.
+[0:19:24] First conclusion. Second, given the
+[0:19:26] design, either is complete randomization
+[0:19:28] or re-randomization,
+[0:19:30] regression adjustment never hurts the
+[0:19:32] estimated the precision.
+[0:19:35] Okay. It may It may be a little puzzle.
+[0:19:36] Why do we care about sampling and the
+[0:19:38] estimated precision? In classical
+[0:19:40] statistics, we don't care because
+[0:19:43] for some estimator you derive the
+[0:19:44] asymptotic distribution, asymptotic
+[0:19:46] variance. Usually you can find a
+[0:19:48] consistent estimator for that asymptotic
+[0:19:51] variance. Then you can construct
+[0:19:53] a confidence interval, and there is no
+[0:19:54] difference
+[0:19:56] asymptotically entities between a
+[0:19:58] sampling distribution, the true
+[0:19:59] distribution, and then the estimated
+[0:20:01] distribution. They're the same.
+[0:20:03] But here in finite sample inference and
+[0:20:05] in our framework, these two things may
+[0:20:07] be different. That's why we have to
+[0:20:09] distinguish these two precision. So the
+[0:20:11] sampling precision is the true
+[0:20:13] precision, but actually depends on the
+[0:20:15] unknown potential outcomes. The
+[0:20:16] estimated the precision is the precision
+[0:20:18] we reported in confidence intervals. So
+[0:20:21] that's maybe that's more real
+[0:20:24] precision.
+[0:20:25] Now, I will I will make it more precise
 [0:20:29] later. And there is a subtle issue at least.
-[0:20:32] And there is a subtle issue at least. And our final recommendation is to
-[0:20:35] And our final recommendation is to always use re-randomization and apply
-[0:20:37] always use re-randomization and apply links estimator.
-[0:20:39] links estimator. Okay.
+[0:20:32] And our final recommendation is to
+[0:20:35] always use re-randomization and apply
+[0:20:37] links estimator.
 [0:20:41] Okay. That's our final conclusion. Why Why do
-[0:20:43] That's our final conclusion. Why Why do we recommend this? We have to uh provide
-[0:20:45] we recommend this? We have to uh provide some justifications.
-[0:20:47] some justifications. There's some theoretical tools to
-[0:20:48] There's some theoretical tools to quantify the above uh statements.
-[0:20:51] quantify the above uh statements. First, uh repeated sampling property,
-[0:20:53] First, uh repeated sampling property, asymptotics for this estimator under
-[0:20:55] asymptotics for this estimator under re-randomization, and some theory for uh
-[0:20:59] re-randomization, and some theory for uh optimal choice
-[0:21:00] optimal choice based sampling precision and estimated
-[0:21:02] based sampling precision and estimated precision. Okay. This is the summary of
-[0:21:05] precision. Okay. This is the summary of our findings.
-[0:21:06] our findings. And I will go to uh technical details,
-[0:21:09] And I will go to uh technical details, but before going to the technical
-[0:21:10] but before going to the technical details, I will stop here for questions.
+[0:20:43] we recommend this? We have to uh provide
+[0:20:45] some justifications.
+[0:20:47] There's some theoretical tools to
+[0:20:48] quantify the above uh statements.
+[0:20:51] First, uh repeated sampling property,
+[0:20:53] asymptotics for this estimator under
+[0:20:55] re-randomization, and some theory for uh
+[0:20:59] optimal choice
+[0:21:00] based sampling precision and estimated
+[0:21:02] precision. Okay. This is the summary of
+[0:21:05] our findings.
+[0:21:06] And I will go to uh technical details,
+[0:21:09] but before going to the technical
+[0:21:10] details, I will stop here for questions.
 [0:21:18] I don't think we have any questions at this time, so maybe you can just go on.
-[0:21:19] this time, so maybe you can just go on. Okay, I can go on.
-[0:21:22] Okay, I can go on. Hope I didn't lose anybody.
-[0:21:24] Hope I didn't lose anybody. So if if if I have lost you, this is the
-[0:21:27] So if if if I have lost you, this is the slide to remember.
+[0:21:19] Okay, I can go on.
+[0:21:22] Hope I didn't lose anybody.
+[0:21:24] So if if if I have lost you, this is the
+[0:21:27] slide to remember.
 [0:21:33] Or this line is the conclusion to remember.
 [0:21:36] remember. Some theory.
-[0:21:37] Some theory. This this slide
-[0:21:39] This this slide is the basic tool of the asymptotic
-[0:21:41] is the basic tool of the asymptotic normality under complete randomized
-[0:21:43] normality under complete randomized experiment.
-[0:21:44] experiment. We can show the difference in means of
-[0:21:46] We can show the difference in means of the outcome covariates. X and W has mean
-[0:21:49] the outcome covariates. X and W has mean zero and some covariates. This This does
-[0:21:51] zero and some covariates. This This does not matter. You just need to remember
-[0:21:54] not matter. You just need to remember it's normal, but some notations are
-[0:21:56] it's normal, but some notations are important. Whenever you see S, it means
-[0:21:59] important. Whenever you see S, it means a finite population variance or
-[0:22:01] a finite population variance or covariance
-[0:22:02] covariance covariance matrix.
-[0:22:04] covariance matrix. This holds under mild moment conditions.
-[0:22:07] This holds under mild moment conditions. There are some subtle issues for finite
-[0:22:09] There are some subtle issues for finite population asymptotics. I'm not going to
-[0:22:11] population asymptotics. I'm not going to explain the meaning, but it's a
-[0:22:14] explain the meaning, but it's a standard in survey sampling, but there
-[0:22:16] standard in survey sampling, but there are some technical things we need to
-[0:22:19] are some technical things we need to explain.
+[0:21:37] This this slide
+[0:21:39] is the basic tool of the asymptotic
+[0:21:41] normality under complete randomized
+[0:21:43] experiment.
+[0:21:44] We can show the difference in means of
+[0:21:46] the outcome covariates. X and W has mean
+[0:21:49] zero and some covariates. This This does
+[0:21:51] not matter. You just need to remember
+[0:21:54] it's normal, but some notations are
+[0:21:56] important. Whenever you see S, it means
+[0:21:59] a finite population variance or
+[0:22:02] covariance matrix.
+[0:22:04] This holds under mild moment conditions.
+[0:22:07] There are some subtle issues for finite
+[0:22:09] population asymptotics. I'm not going to
+[0:22:11] explain the meaning, but it's a
+[0:22:14] standard in survey sampling, but there
+[0:22:16] are some technical things we need to
 [0:22:20] explain. But let's assume it's normal.
-[0:22:23] But let's assume it's normal. Okay,
 [0:22:24] Okay, another two theoretical tools we have to
-[0:22:27] another two theoretical tools we have to use
 [0:22:28] use geometric intuition or projections.
-[0:22:31] geometric intuition or projections. First projection, projecting potential
-[0:22:33] First projection, projecting potential outcome YZ
-[0:22:34] outcome YZ on covariate
-[0:22:36] on covariate uh covariates W. This is a projection
-[0:22:39] uh covariates W. This is a projection coefficient here.
-[0:22:41] coefficient here. Uh with tilde means the true
-[0:22:43] Uh with tilde means the true coefficient. Later we will put hats on
-[0:22:46] coefficient. Later we will put hats on those coefficients means estimators.
-[0:22:48] those coefficients means estimators. Beta Z, the projection coefficients. And
-[0:22:50] Beta Z, the projection coefficients. And we can also define
-[0:22:52] we can also define uh the variance of the projections and
-[0:22:55] uh the variance of the projections and the variance of the residuals.
-[0:22:57] the variance of the residuals. Okay. First projection, second
-[0:22:58] Okay. First projection, second projection.
-[0:23:00] projection. The projection of tau hat on tau W hat.
-[0:23:03] The projection of tau hat on tau W hat. This is the coefficient gamma tilde.
-[0:23:06] This is the coefficient gamma tilde. We use
+[0:22:31] First projection, projecting potential
+[0:22:33] outcome YZ
+[0:22:34] on covariate
+[0:22:36] uh covariates W. This is a projection
+[0:22:39] coefficient here.
+[0:22:41] Uh with tilde means the true
+[0:22:43] coefficient. Later we will put hats on
+[0:22:46] those coefficients means estimators.
+[0:22:48] Beta Z, the projection coefficients. And
+[0:22:50] we can also define
+[0:22:52] uh the variance of the projections and
+[0:22:55] the variance of the residuals.
+[0:22:57] Okay. First projection, second
+[0:22:58] projection.
+[0:23:00] The projection of tau hat on tau W hat.
+[0:23:03] This is the coefficient gamma tilde.
 [0:23:07] We use project and the residual as this uh
-[0:23:11] project and the residual as this uh projection and residual. And be careful,
-[0:23:13] projection and residual. And be careful, this is these are projection
-[0:23:15] this is these are projection of fixed quantities, the projection
-[0:23:17] of fixed quantities, the projection linear algebra sense.
-[0:23:20] linear algebra sense. Here is a projection of random variables
-[0:23:22] Here is a projection of random variables under complete randomization,
-[0:23:24] under complete randomization, slightly different. We can We can show
-[0:23:28] slightly different. We can We can show uh this gamma coefficient equals a
-[0:23:30] uh this gamma coefficient equals a linear combination of these two
-[0:23:31] linear combination of these two coefficients.
-[0:23:33] coefficients. This reminds us the our uniqueness issue
-[0:23:35] This reminds us the our uniqueness issue I mentioned before, because what matters
-[0:23:38] I mentioned before, because what matters in the end is the projection of random
-[0:23:39] in the end is the projection of random variables, not the projection of the
-[0:23:41] variables, not the projection of the potential outcomes.
+[0:23:11] projection and residual. And be careful,
+[0:23:13] this is these are projection
+[0:23:15] of fixed quantities, the projection
+[0:23:17] linear algebra sense.
+[0:23:20] Here is a projection of random variables
+[0:23:22] under complete randomization,
+[0:23:24] slightly different. We can We can show
+[0:23:28] uh this gamma coefficient equals a
+[0:23:30] linear combination of these two
+[0:23:31] coefficients.
+[0:23:33] This reminds us the our uniqueness issue
+[0:23:35] I mentioned before, because what matters
+[0:23:38] in the end is the projection of random
+[0:23:39] variables, not the projection of the
+[0:23:41] potential outcomes.
 [0:23:47] Okay. With this notation, we can uh define adjusted potential outcomes,
-[0:23:49] uh define adjusted potential outcomes, just um
 [0:23:50] just um potential outcome minus linear
-[0:23:52] potential outcome minus linear combination of covariates.
-[0:23:54] combination of covariates. The we can define adjusted individual
-[0:23:57] The we can define adjusted individual effect tau I minus Well, take difference
-[0:24:00] effect tau I minus Well, take difference between Y1 version and Y0 version, we
-[0:24:02] between Y1 version and Y0 version, we get the adjusted individual effect. And
-[0:24:06] get the adjusted individual effect. And average over those individual effect, we
-[0:24:08] average over those individual effect, we have
+[0:23:52] combination of covariates.
+[0:23:54] The we can define adjusted individual
+[0:23:57] effect tau I minus Well, take difference
+[0:24:00] between Y1 version and Y0 version, we
+[0:24:02] get the adjusted individual effect. And
+[0:24:06] average over those individual effect, we
 [0:24:09] have we have tau, the parameter of interest.
-[0:24:11] we have tau, the parameter of interest. That's why we center W, because if we
-[0:24:13] That's why we center W, because if we center W, the average of this term goes
-[0:24:15] center W, the average of this term goes away.
+[0:24:11] That's why we center W, because if we
+[0:24:13] center W, the average of this term goes
+[0:24:15] away.
 [0:24:19] Uh we can write uh the regression adjusted estimator as the difference in
-[0:24:21] adjusted estimator as the difference in means of the adjusted outcomes.
-[0:24:24] means of the adjusted outcomes. So, its property must be simple because
-[0:24:26] So, its property must be simple because it's difference in means of something.
-[0:24:29] it's difference in means of something. For simplicity, we first fix uh beta one
-[0:24:31] For simplicity, we first fix uh beta one and beta zero.
-[0:24:34] and beta zero. And apply Neyman's classical result, we
-[0:24:36] And apply Neyman's classical result, we can
+[0:24:21] means of the adjusted outcomes.
+[0:24:24] So, its property must be simple because
+[0:24:26] it's difference in means of something.
+[0:24:29] For simplicity, we first fix uh beta one
+[0:24:31] and beta zero.
+[0:24:34] And apply Neyman's classical result, we
 [0:24:37] can uh derive the variance of this estimator
-[0:24:40] uh derive the variance of this estimator because it's difference in means.
-[0:24:43] because it's difference in means. We don't care the formula, but this is
-[0:24:45] We don't care the formula, but this is the notation for its variance.
-[0:24:47] the notation for its variance. And we can also uh derive the R squared,
-[0:24:49] And we can also uh derive the R squared, the multiple correlation coefficient
-[0:24:51] the multiple correlation coefficient between this scalar random variable and
-[0:24:53] between this scalar random variable and this random vector. This is R squared.
-[0:24:56] this random vector. This is R squared. And again, you can write it down more
-[0:24:57] And again, you can write it down more explicitly, but it does not matter for
-[0:25:00] explicitly, but it does not matter for our discussion here.
-[0:25:02] our discussion here. These two quantities will be very
-[0:25:04] These two quantities will be very important for us because
-[0:25:08] important for us because because re-randomization is basically
-[0:25:10] because re-randomization is basically uh complete re-randomization
-[0:25:12] uh complete re-randomization conditioning on this M being smaller
-[0:25:14] conditioning on this M being smaller than or equal to
-[0:25:15] than or equal to this threshold A. This M is the
-[0:25:17] this threshold A. This M is the Mahalanobis distance. Okay, this is
-[0:25:20] Mahalanobis distance. Okay, this is it's basically a conditional
-[0:25:22] it's basically a conditional uh distribution.
-[0:25:24] uh distribution. That's why uh
-[0:25:26] That's why uh the R-squared
-[0:25:27] the R-squared plays a central role later.
-[0:25:30] plays a central role later. Okay, the first theorem, the asymptotic
-[0:25:33] Okay, the first theorem, the asymptotic distribution of this uh estimator under
-[0:25:35] distribution of this uh estimator under re-randomization can be written as
-[0:25:38] re-randomization can be written as something like this. This is the
-[0:25:40] something like this. This is the uh scaling factor, the variance of tau
-[0:25:43] uh scaling factor, the variance of tau hat beta one beta zero under complete
-[0:25:45] hat beta one beta zero under complete re-randomization without this
-[0:25:46] re-randomization without this restriction.
-[0:25:48] restriction. The scaling factor, and here epsilon is
-[0:25:51] The scaling factor, and here epsilon is standard normal. This L is the truncated
-[0:25:54] standard normal. This L is the truncated normal.
+[0:24:40] because it's difference in means.
+[0:24:43] We don't care the formula, but this is
+[0:24:45] the notation for its variance.
+[0:24:47] And we can also uh derive the R squared,
+[0:24:49] the multiple correlation coefficient
+[0:24:51] between this scalar random variable and
+[0:24:53] this random vector. This is R squared.
+[0:24:56] And again, you can write it down more
+[0:24:57] explicitly, but it does not matter for
+[0:25:00] our discussion here.
+[0:25:02] These two quantities will be very
+[0:25:04] important for us because
+[0:25:08] because re-randomization is basically
+[0:25:10] uh complete re-randomization
+[0:25:12] conditioning on this M being smaller
+[0:25:14] than or equal to
+[0:25:15] this threshold A. This M is the
+[0:25:17] Mahalanobis distance. Okay, this is
+[0:25:20] it's basically a conditional
+[0:25:22] uh distribution.
+[0:25:24] That's why uh
+[0:25:26] the R-squared
+[0:25:27] plays a central role later.
+[0:25:30] Okay, the first theorem, the asymptotic
+[0:25:33] distribution of this uh estimator under
+[0:25:35] re-randomization can be written as
+[0:25:38] something like this. This is the
+[0:25:40] uh scaling factor, the variance of tau
+[0:25:43] hat beta one beta zero under complete
+[0:25:45] re-randomization without this
+[0:25:46] restriction.
+[0:25:48] The scaling factor, and here epsilon is
+[0:25:51] standard normal. This L is the truncated
 [0:25:55] normal. It's a little unusual. It's the first
-[0:25:57] It's a little unusual. It's the first coordinate of this multivariate normal,
-[0:26:00] coordinate of this multivariate normal, standard multivariate normal random
-[0:26:01] standard multivariate normal random vector
+[0:25:57] coordinate of this multivariate normal,
+[0:26:00] standard multivariate normal random
 [0:26:03] vector under this constraint. So, this mimics
-[0:26:05] under this constraint. So, this mimics the Mahalanobis distance. Because other
-[0:26:08] the Mahalanobis distance. Because other after some standardization, Mahalanobis
-[0:26:10] after some standardization, Mahalanobis distance can be written as uh
-[0:26:13] distance can be written as uh chi-squared or the the norm squared of a
-[0:26:16] chi-squared or the the norm squared of a standard normal vector. So, this is
-[0:26:19] standard normal vector. So, this is uh due to re-randomization. And these
-[0:26:21] uh due to re-randomization. And these two things are independent.
-[0:26:23] two things are independent. And this limiting distribution is not
-[0:26:25] And this limiting distribution is not normal. It's a combination of normal and
-[0:26:27] normal. It's a combination of normal and a truncated normal with some
-[0:26:29] a truncated normal with some coefficient, like
-[0:26:31] coefficient, like uh
+[0:26:05] the Mahalanobis distance. Because other
+[0:26:08] after some standardization, Mahalanobis
+[0:26:10] distance can be written as uh
+[0:26:13] chi-squared or the the norm squared of a
+[0:26:16] standard normal vector. So, this is
+[0:26:19] uh due to re-randomization. And these
+[0:26:21] two things are independent.
+[0:26:23] And this limiting distribution is not
+[0:26:25] normal. It's a combination of normal and
+[0:26:27] a truncated normal with some
+[0:26:29] coefficient, like
 [0:26:32] uh the coefficient uh have very clear
-[0:26:34] the coefficient uh have very clear geometry because the R-squared is
-[0:26:36] geometry because the R-squared is basically the
-[0:26:37] basically the R-squared's
-[0:26:39] R-squared's is the cosine
-[0:26:40] is the cosine of uh this random vector and tau X hat.
-[0:26:44] of uh this random vector and tau X hat. Okay, let me give you some geometry.
-[0:26:47] Okay, let me give you some geometry. Uh we fix the scaling factor to be one,
-[0:26:49] Uh we fix the scaling factor to be one, ignore it.
-[0:26:50] ignore it. This is the random vector of interest,
-[0:26:53] This is the random vector of interest, tau hat. And this is the random vector
-[0:26:55] tau hat. And this is the random vector tau x hat.
-[0:26:57] tau x hat. This is the linear span.
-[0:26:59] This is the linear span. All the all the linear combinations, the
-[0:27:02] All the all the linear combinations, the linear space.
-[0:27:04] linear space. If you do projection, project this
-[0:27:06] If you do projection, project this random variable variable onto the linear
-[0:27:09] random variable variable onto the linear space.
+[0:26:34] geometry because the R-squared is
+[0:26:36] basically the
+[0:26:37] R-squared's
+[0:26:39] is the cosine
+[0:26:40] of uh this random vector and tau X hat.
+[0:26:44] Okay, let me give you some geometry.
+[0:26:47] Uh we fix the scaling factor to be one,
+[0:26:49] ignore it.
+[0:26:50] This is the random vector of interest,
+[0:26:53] tau hat. And this is the random vector
+[0:26:55] tau x hat.
+[0:26:57] This is the linear span.
+[0:26:59] All the all the linear combinations, the
+[0:27:02] linear space.
+[0:27:04] If you do projection, project this
+[0:27:06] random variable variable onto the linear
 [0:27:10] space. This is the projection. This is the
-[0:27:12] This is the projection. This is the orthogonal residual. So, the
-[0:27:14] orthogonal residual. So, the re-randomization is restricting
-[0:27:16] re-randomization is restricting tau hat x.
-[0:27:18] tau hat x. So, no matter what you do, you cannot
-[0:27:20] So, no matter what you do, you cannot change the residual. It's always there.
-[0:27:22] change the residual. It's always there. Okay. But, you can change the linear
-[0:27:24] Okay. But, you can change the linear projection. You you force it to be
-[0:27:26] projection. You you force it to be smaller. Because tau x hat is not
-[0:27:29] smaller. Because tau x hat is not arbitrary anymore. It's it's like a
-[0:27:31] arbitrary anymore. It's it's like a restricted version. It's a it's shorter.
-[0:27:33] restricted version. It's a it's shorter. So, it's in this region. So, this is the
-[0:27:35] So, it's in this region. So, this is the truncated normal with some coefficient.
-[0:27:38] truncated normal with some coefficient. This coefficient, this is the angle. The
-[0:27:41] This coefficient, this is the angle. The angle is the cosine.
-[0:27:43] angle is the cosine. Uh r squared is the cosine of this
-[0:27:45] Uh r squared is the cosine of this angle. This angle is the angle between
-[0:27:47] angle. This angle is the angle between this vector and this vector. Okay,
-[0:27:49] this vector and this vector. Okay, that's the geometry of the r squared.
-[0:27:51] that's the geometry of the r squared. That's why the epsilon
-[0:27:54] That's why the epsilon uh
+[0:27:12] orthogonal residual. So, the
+[0:27:14] re-randomization is restricting
+[0:27:16] tau hat x.
+[0:27:18] So, no matter what you do, you cannot
+[0:27:20] change the residual. It's always there.
+[0:27:22] Okay. But, you can change the linear
+[0:27:24] projection. You you force it to be
+[0:27:26] smaller. Because tau x hat is not
+[0:27:29] arbitrary anymore. It's it's like a
+[0:27:31] restricted version. It's a it's shorter.
+[0:27:33] So, it's in this region. So, this is the
+[0:27:35] truncated normal with some coefficient.
+[0:27:38] This coefficient, this is the angle. The
+[0:27:41] angle is the cosine.
+[0:27:43] Uh r squared is the cosine of this
+[0:27:45] angle. This angle is the angle between
+[0:27:47] this vector and this vector. Okay,
+[0:27:49] that's the geometry of the r squared.
+[0:27:51] That's why the epsilon
 [0:27:54] uh component is 1 minus r squared. It's the
-[0:27:57] component is 1 minus r squared. It's the sine of of of this angle. This is the
-[0:28:00] sine of of of this angle. This is the square root of r squared, the cosine of
-[0:28:02] square root of r squared, the cosine of this angle. So, that's the geometry in
-[0:28:05] this angle. So, that's the geometry in this formula. If if you get the
-[0:28:06] this formula. If if you get the geometry, the proof shouldn't be too
-[0:28:08] geometry, the proof shouldn't be too hard.
+[0:27:57] sine of of of this angle. This is the
+[0:28:00] square root of r squared, the cosine of
+[0:28:02] this angle. So, that's the geometry in
+[0:28:05] this formula. If if you get the
+[0:28:06] geometry, the proof shouldn't be too
 [0:28:10] hard. Okay.
 [0:28:15] Some special cases. Uh for example, if a is infinity, then there's no truncation
-[0:28:17] is infinity, then there's no truncation at all. This reduced to uh regression
-[0:28:20] at all. This reduced to uh regression adjustment under complete randomization.
-[0:28:22] adjustment under complete randomization. This is the Lin's result.
-[0:28:24] This is the Lin's result. But, if a is infinity, this distribution
-[0:28:27] But, if a is infinity, this distribution is more dispersed than re-randomization.
-[0:28:30] is more dispersed than re-randomization. And uh this also implies a result for
-[0:28:33] And uh this also implies a result for regression
-[0:28:34] regression of re-randomization with difference in
-[0:28:36] of re-randomization with difference in means, beta 1 beta 0 equals 0. This is
-[0:28:39] means, beta 1 beta 0 equals 0. This is our previous paper. Okay.
-[0:28:42] our previous paper. Okay. And other choices of coefficients can
-[0:28:44] And other choices of coefficients can give us better precision.
-[0:28:48] give us better precision. Okay. The key issue the key issue is
-[0:28:50] Okay. The key issue the key issue is what do we mean by optimality?
-[0:28:52] what do we mean by optimality? First, optimality can
-[0:28:55] First, optimality can be defined based on the true
-[0:28:56] be defined based on the true distribution. If you give me
-[0:28:58] distribution. If you give me two estimators, we can compare their
-[0:28:59] two estimators, we can compare their true distributions. Here the imaging
-[0:29:01] true distributions. Here the imaging distribution is not normal. We cannot
-[0:29:03] distribution is not normal. We cannot compare the variance. We have to compare
-[0:29:05] compare the variance. We have to compare the quantile range. Okay.
-[0:29:08] the quantile range. Okay. An estimator
-[0:29:09] An estimator is S-optimal, S for sampling
-[0:29:11] is S-optimal, S for sampling distribution, if asymptotically it has
-[0:29:14] distribution, if asymptotically it has the shortest sampling quantile range for
-[0:29:17] the shortest sampling quantile range for all quantiles.
-[0:29:19] all quantiles. Second,
+[0:28:17] at all. This reduced to uh regression
+[0:28:20] adjustment under complete randomization.
+[0:28:22] This is the Lin's result.
+[0:28:24] But, if a is infinity, this distribution
+[0:28:27] is more dispersed than re-randomization.
+[0:28:30] And uh this also implies a result for
+[0:28:33] regression
+[0:28:34] of re-randomization with difference in
+[0:28:36] means, beta 1 beta 0 equals 0. This is
+[0:28:39] our previous paper. Okay.
+[0:28:42] And other choices of coefficients can
+[0:28:44] give us better precision.
+[0:28:48] Okay. The key issue the key issue is
+[0:28:50] what do we mean by optimality?
+[0:28:52] First, optimality can
+[0:28:55] be defined based on the true
+[0:28:56] distribution. If you give me
+[0:28:58] two estimators, we can compare their
+[0:28:59] true distributions. Here the imaging
+[0:29:01] distribution is not normal. We cannot
+[0:29:03] compare the variance. We have to compare
+[0:29:05] the quantile range. Okay.
+[0:29:08] An estimator
+[0:29:09] is S-optimal, S for sampling
+[0:29:11] distribution, if asymptotically it has
+[0:29:14] the shortest sampling quantile range for
+[0:29:17] all quantiles.
 [0:29:20] Second, based on confidence intervals, we call
-[0:29:22] based on confidence intervals, we call it C-optimality,
-[0:29:24] it C-optimality, because in the end you you report a
-[0:29:25] because in the end you you report a confidence interval for for the
-[0:29:27] confidence interval for for the parameter. An estimator is C-optimal is
-[0:29:30] parameter. An estimator is C-optimal is if asymptotically its estimated sampling
-[0:29:32] if asymptotically its estimated sampling distribution has the shortest quantile
-[0:29:34] distribution has the shortest quantile range. Okay.
-[0:29:36] range. Okay. These two optimality can differ.
-[0:29:39] These two optimality can differ. And
+[0:29:22] it C-optimality,
+[0:29:24] because in the end you you report a
+[0:29:25] confidence interval for for the
+[0:29:27] parameter. An estimator is C-optimal is
+[0:29:30] if asymptotically its estimated sampling
+[0:29:32] distribution has the shortest quantile
+[0:29:34] range. Okay.
+[0:29:36] These two optimality can differ.
 [0:29:40] And this is due to the this fact, we cannot
-[0:29:42] this is due to the this fact, we cannot estimate the sampling distribution
-[0:29:44] estimate the sampling distribution consistently in general. Okay, let me
-[0:29:47] consistently in general. Okay, let me start with S-optimality.
-[0:29:50] start with S-optimality. But I have to introduce more notation.
-[0:29:52] But I have to introduce more notation. So
+[0:29:42] estimate the sampling distribution
+[0:29:44] consistently in general. Okay, let me
+[0:29:47] start with S-optimality.
+[0:29:50] But I have to introduce more notation.
 [0:29:52] So this notation is projection we defined
-[0:29:54] this notation is projection we defined before. Now we define projection under
-[0:29:56] before. Now we define projection under projection. So projection of this first
-[0:29:59] projection. So projection of this first projection onto the second projection
-[0:30:01] projection onto the second projection with coefficient a gamma tilde
-[0:30:04] with coefficient a gamma tilde and a r squared.
-[0:30:06] and a r squared. And we also define the projection of the
-[0:30:08] And we also define the projection of the residual on the residual. The
-[0:30:10] residual on the residual. The coefficient is gamma
-[0:30:11] coefficient is gamma residual tilde and r squared residual r
-[0:30:14] residual tilde and r squared residual r squared.
+[0:29:54] before. Now we define projection under
+[0:29:56] projection. So projection of this first
+[0:29:59] projection onto the second projection
+[0:30:01] with coefficient a gamma tilde
+[0:30:04] and a r squared.
+[0:30:06] And we also define the projection of the
+[0:30:08] residual on the residual. The
+[0:30:10] coefficient is gamma
+[0:30:11] residual tilde and r squared residual r
 [0:30:16] squared. Why do we care about them?
-[0:30:17] Why do we care about them? Because projecting onto a tau x is due
-[0:30:20] Because projecting onto a tau x is due to design. If we use x in the design
-[0:30:24] to design. If we use x in the design stage by re-randomization, we we we
-[0:30:26] stage by re-randomization, we we we already
+[0:30:17] Because projecting onto a tau x is due
+[0:30:20] to design. If we use x in the design
+[0:30:24] stage by re-randomization, we we we
 [0:30:27] already take out some influence of x. That's
-[0:30:30] take out some influence of x. That's that can be quantified by projection
-[0:30:32] that can be quantified by projection onto tau x hat.
-[0:30:33] onto tau x hat. And later
+[0:30:30] that can be quantified by projection
+[0:30:32] onto tau x hat.
 [0:30:35] And later in the analysis stage,
-[0:30:37] in the analysis stage, we adjust for w. That's the influence of
-[0:30:40] we adjust for w. That's the influence of tau w hat.
-[0:30:42] tau w hat. We further
-[0:30:43] We further project onto those
-[0:30:45] project onto those uh W
+[0:30:37] we adjust for w. That's the influence of
+[0:30:40] tau w hat.
+[0:30:42] We further
+[0:30:43] project onto those
 [0:30:46] uh W and that W hat.
-[0:30:49] and that W hat. Okay, that's why I have two two steps of
-[0:30:51] Okay, that's why I have two two steps of projection, but this notation is not
-[0:30:53] projection, but this notation is not useful for us.
-[0:30:56] useful for us. Okay, we rewrite the theorem making it
-[0:30:58] Okay, we rewrite the theorem making it more complicated in some sense, but
-[0:31:00] more complicated in some sense, but actually it's a simplification because
-[0:31:03] actually it's a simplification because depends on some uh fixed quantities we
-[0:31:05] depends on some uh fixed quantities we cannot change. And the second term for
-[0:31:07] cannot change. And the second term for this two coefficients depends on the
-[0:31:10] this two coefficients depends on the gamma parameter. Gamma is the linear
-[0:31:11] gamma parameter. Gamma is the linear combination of beta. And the theoretical
-[0:31:14] combination of beta. And the theoretical quantities
-[0:31:15] quantities uh gamma tilde residual and gamma
-[0:31:17] uh gamma tilde residual and gamma projection residual. These are the
-[0:31:20] projection residual. These are the residuals uh
-[0:31:22] residuals uh uh these are the coefficients defined
-[0:31:23] uh these are the coefficients defined here. Okay.
-[0:31:25] here. Okay. If we rewrite it in this way, we can
-[0:31:27] If we rewrite it in this way, we can immediately see this is a quadratic
-[0:31:29] immediately see this is a quadratic function quadratic function. How do we
-[0:31:31] function quadratic function. How do we minimize quadratic function?
-[0:31:34] minimize quadratic function? Uh to reduce the variability. So, here
-[0:31:36] Uh to reduce the variability. So, here uh the optimal choice is of gamma is
-[0:31:39] uh the optimal choice is of gamma is gamma residual tilde. Here, the optimal
-[0:31:41] gamma residual tilde. Here, the optimal choice of gamma is gamma projection
-[0:31:43] choice of gamma is gamma projection tilde. Unfortunately,
-[0:31:45] tilde. Unfortunately, uh these two coefficients attain minimum
-[0:31:47] uh these two coefficients attain minimum value in different uh gamma
-[0:31:49] value in different uh gamma coefficients.
-[0:31:52] coefficients. Okay, it's not easy. There's some easy
-[0:31:54] Okay, it's not easy. There's some easy case. First case, the analyzer uh has no
-[0:31:58] case. First case, the analyzer uh has no less
+[0:30:49] Okay, that's why I have two two steps of
+[0:30:51] projection, but this notation is not
+[0:30:53] useful for us.
+[0:30:56] Okay, we rewrite the theorem making it
+[0:30:58] more complicated in some sense, but
+[0:31:00] actually it's a simplification because
+[0:31:03] depends on some uh fixed quantities we
+[0:31:05] cannot change. And the second term for
+[0:31:07] this two coefficients depends on the
+[0:31:10] gamma parameter. Gamma is the linear
+[0:31:11] combination of beta. And the theoretical
+[0:31:14] quantities
+[0:31:15] uh gamma tilde residual and gamma
+[0:31:17] projection residual. These are the
+[0:31:20] residuals uh
+[0:31:22] uh these are the coefficients defined
+[0:31:23] here. Okay.
+[0:31:25] If we rewrite it in this way, we can
+[0:31:27] immediately see this is a quadratic
+[0:31:29] function quadratic function. How do we
+[0:31:31] minimize quadratic function?
+[0:31:34] Uh to reduce the variability. So, here
+[0:31:36] uh the optimal choice is of gamma is
+[0:31:39] gamma residual tilde. Here, the optimal
+[0:31:41] choice of gamma is gamma projection
+[0:31:43] tilde. Unfortunately,
+[0:31:45] uh these two coefficients attain minimum
+[0:31:47] value in different uh gamma
+[0:31:49] coefficients.
+[0:31:52] Okay, it's not easy. There's some easy
+[0:31:54] case. First case, the analyzer uh has no
 [0:31:59] less information corresponding to the case
-[0:32:01] information corresponding to the case after the design the analyzer may
-[0:32:03] after the design the analyzer may uh get access to some other covariates.
-[0:32:06] uh get access to some other covariates. Uh that's a real case. So, X is a subset
-[0:32:08] Uh that's a real case. So, X is a subset of W. In this case, we can simplify the
-[0:32:11] of W. In this case, we can simplify the sampling
+[0:32:01] after the design the analyzer may
+[0:32:03] uh get access to some other covariates.
+[0:32:06] Uh that's a real case. So, X is a subset
+[0:32:08] of W. In this case, we can simplify the
 [0:32:12] sampling uh distribution uh
-[0:32:14] uh distribution uh like this. So,
-[0:32:16] like this. So, two coefficients both relies on uh
-[0:32:19] two coefficients both relies on uh gamma tilde. This gamma tilde in this
-[0:32:21] gamma tilde. This gamma tilde in this case equals
-[0:32:23] case equals uh these two coefficients are the same,
-[0:32:25] uh these two coefficients are the same, so it does not matter.
-[0:32:26] so it does not matter. Uh so, the obvious choice is gamma
-[0:32:29] Uh so, the obvious choice is gamma equals gamma tilde.
+[0:32:14] like this. So,
+[0:32:16] two coefficients both relies on uh
+[0:32:19] gamma tilde. This gamma tilde in this
+[0:32:21] case equals
+[0:32:23] uh these two coefficients are the same,
+[0:32:25] so it does not matter.
+[0:32:26] Uh so, the obvious choice is gamma
+[0:32:29] equals gamma tilde.
 [0:32:34] For estimability. Although, the choice of beta is not unique because what
-[0:32:36] of beta is not unique because what matters is a linear combination. We
-[0:32:38] matters is a linear combination. We still use least estimator because it's
-[0:32:40] still use least estimator because it's it's a a-optimal choice and it's easy to
-[0:32:44] it's a a-optimal choice and it's easy to implement.
-[0:32:46] implement. And if you choose gamma to be gamma
-[0:32:47] And if you choose gamma to be gamma tilde, you kill this term and you kill
-[0:32:50] tilde, you kill this term and you kill this term. The limiting distribution is
-[0:32:52] this term. The limiting distribution is quite simple. It's just this multiplied
-[0:32:54] quite simple. It's just this multiplied by epsilon. It's normal.
-[0:32:57] by epsilon. It's normal. And interestingly, the asymptotic
-[0:32:59] And interestingly, the asymptotic distribution here does not depend on X.
-[0:33:02] distribution here does not depend on X. Does not depend on A. So the role of
-[0:33:04] Does not depend on A. So the role of design disappears. And the role of X
-[0:33:07] design disappears. And the role of X converts uselessly in design disappears.
-[0:33:10] converts uselessly in design disappears. Because in the analysis stage, we use
-[0:33:12] Because in the analysis stage, we use more covariates. We use more We use W. W
-[0:33:15] more covariates. We use more We use W. W includes X. That's why the analyzer
-[0:33:17] includes X. That's why the analyzer cleans up everything happening in the
-[0:33:20] cleans up everything happening in the design.
+[0:32:36] matters is a linear combination. We
+[0:32:38] still use least estimator because it's
+[0:32:40] it's a a-optimal choice and it's easy to
+[0:32:44] implement.
+[0:32:46] And if you choose gamma to be gamma
+[0:32:47] tilde, you kill this term and you kill
+[0:32:50] this term. The limiting distribution is
+[0:32:52] quite simple. It's just this multiplied
+[0:32:54] by epsilon. It's normal.
+[0:32:57] And interestingly, the asymptotic
+[0:32:59] distribution here does not depend on X.
+[0:33:02] Does not depend on A. So the role of
+[0:33:04] design disappears. And the role of X
+[0:33:07] converts uselessly in design disappears.
+[0:33:10] Because in the analysis stage, we use
+[0:33:12] more covariates. We use more We use W. W
+[0:33:15] includes X. That's why the analyzer
+[0:33:17] cleans up everything happening in the
 [0:33:21] design. That's why the limiting distribution is
-[0:33:23] That's why the limiting distribution is the same as the regression adjusted
-[0:33:25] the same as the regression adjusted estimator under complete randomization.
-[0:33:27] estimator under complete randomization. As if re-randomization didn't happen.
-[0:33:30] As if re-randomization didn't happen. Okay. This includes the special case,
-[0:33:32] Okay. This includes the special case, the ideal case X equals W. You know, in
-[0:33:35] the ideal case X equals W. You know, in the ideal case, the analyzer and the
-[0:33:37] the ideal case, the analyzer and the designer
+[0:33:23] the same as the regression adjusted
+[0:33:25] estimator under complete randomization.
+[0:33:27] As if re-randomization didn't happen.
+[0:33:30] Okay. This includes the special case,
+[0:33:32] the ideal case X equals W. You know, in
+[0:33:35] the ideal case, the analyzer and the
 [0:33:39] designer communicate.
-[0:33:40] communicate. Okay. The designer gives all the
-[0:33:41] Okay. The designer gives all the information to the analyzer. This should
-[0:33:44] information to the analyzer. This should be done in practice. But sometimes
-[0:33:47] be done in practice. But sometimes it's not ideal. The
-[0:33:49] it's not ideal. The analyzer has no more information or has
-[0:33:52] analyzer has no more information or has has less information because the
-[0:33:53] has less information because the designer
+[0:33:40] Okay. The designer gives all the
+[0:33:41] information to the analyzer. This should
+[0:33:44] be done in practice. But sometimes
+[0:33:47] it's not ideal. The
+[0:33:49] analyzer has no more information or has
+[0:33:52] has less information because the
 [0:33:55] designer didn't give all the covariates to the
-[0:33:56] didn't give all the covariates to the analyzer. The analyzer didn't know how
-[0:33:58] analyzer. The analyzer didn't know how to incorporate the design information.
-[0:34:01] to incorporate the design information. So in that case, this is the case we can
-[0:34:03] So in that case, this is the case we can derive the
-[0:34:05] derive the asymptotic distribution with
-[0:34:08] asymptotic distribution with different form. But
+[0:33:56] analyzer. The analyzer didn't know how
+[0:33:58] to incorporate the design information.
+[0:34:01] So in that case, this is the case we can
+[0:34:03] derive the
+[0:34:05] asymptotic distribution with
+[0:34:08] different form. But
 [0:34:13] first coefficient does not depend on gamma. The second coefficient depends on
-[0:34:15] gamma. The second coefficient depends on gamma and equals gamma projection.
-[0:34:19] gamma and equals gamma projection. For this gamma tilde, it equals gamma
-[0:34:20] For this gamma tilde, it equals gamma projection.
-[0:34:23] projection. Again, it's simple how to minimize the
-[0:34:25] Again, it's simple how to minimize the second term. Just choose gamma to be
-[0:34:27] second term. Just choose gamma to be gamma tilde.
-[0:34:29] gamma tilde. Again, least estimator is S-optimal and
-[0:34:32] Again, least estimator is S-optimal and we can
+[0:34:15] gamma and equals gamma projection.
+[0:34:19] For this gamma tilde, it equals gamma
+[0:34:20] projection.
+[0:34:23] Again, it's simple how to minimize the
+[0:34:25] second term. Just choose gamma to be
+[0:34:27] gamma tilde.
+[0:34:29] Again, least estimator is S-optimal and
 [0:34:33] we can derive the the asymptotic distribution.
-[0:34:35] derive the the asymptotic distribution. It's not normal, but it's
-[0:34:38] It's not normal, but it's but it has a formula here. Okay. Does
-[0:34:40] but it has a formula here. Okay. Does not matter, but we can derive the
-[0:34:42] not matter, but we can derive the formula.
+[0:34:35] It's not normal, but it's
+[0:34:38] but it has a formula here. Okay. Does
+[0:34:40] not matter, but we can derive the
 [0:34:44] formula. This two nested cases are
-[0:34:46] This two nested cases are are nice. It has a
-[0:34:48] are nice. It has a clean theory, but in general, if the
-[0:34:50] clean theory, but in general, if the design and the analyzer do not
-[0:34:52] design and the analyzer do not communicate, X and W are not nested.
-[0:34:55] communicate, X and W are not nested. This is definitely the band statistics,
-[0:34:56] This is definitely the band statistics, but unfortunately, common in practice.
-[0:34:59] but unfortunately, common in practice. There's a review paper on this issue.
-[0:35:01] There's a review paper on this issue. There's a recent paper by by by Heckman
-[0:35:03] There's a recent paper by by by Heckman and the co-author
-[0:35:05] and the co-author reanalyzing this Perry Preschool
-[0:35:07] reanalyzing this Perry Preschool project. It is a project with
-[0:35:09] project. It is a project with re-randomization, but there's no clear
-[0:35:10] re-randomization, but there's no clear document.
+[0:34:46] are nice. It has a
+[0:34:48] clean theory, but in general, if the
+[0:34:50] design and the analyzer do not
+[0:34:52] communicate, X and W are not nested.
+[0:34:55] This is definitely the band statistics,
+[0:34:56] but unfortunately, common in practice.
+[0:34:59] There's a review paper on this issue.
+[0:35:01] There's a recent paper by by by Heckman
+[0:35:03] and the co-author
+[0:35:05] reanalyzing this Perry Preschool
+[0:35:07] project. It is a project with
+[0:35:09] re-randomization, but there's no clear
+[0:35:10] document.
 [0:35:16] And the conclusions are not uh not clean. Okay, we can show S-optimal
-[0:35:19] not clean. Okay, we can show S-optimal regression-adjusted estimator may not
-[0:35:21] regression-adjusted estimator may not exist. But nevertheless, uh given a
-[0:35:25] exist. But nevertheless, uh given a regression-adjusted estimator, fixing
-[0:35:27] regression-adjusted estimator, fixing that estimator,
-[0:35:28] that estimator, uh re-randomization always helps.
-[0:35:30] uh re-randomization always helps. The design will not hurt. But
-[0:35:33] The design will not hurt. But unfortunately, the analyzer, regression
-[0:35:35] unfortunately, the analyzer, regression adjustment may hurt
-[0:35:37] adjustment may hurt the the efficient efficiency. Because if
-[0:35:39] the the efficient efficiency. Because if you do regression adjustment, it's it's
-[0:35:41] you do regression adjustment, it's it's possible you're you're
-[0:35:43] possible you're you're uh decreasing the efficiency in general
-[0:35:45] uh decreasing the efficiency in general in this uh annoying case. Okay.
+[0:35:19] regression-adjusted estimator may not
+[0:35:21] exist. But nevertheless, uh given a
+[0:35:25] regression-adjusted estimator, fixing
+[0:35:27] that estimator,
+[0:35:28] uh re-randomization always helps.
+[0:35:30] The design will not hurt. But
+[0:35:33] unfortunately, the analyzer, regression
+[0:35:35] adjustment may hurt
+[0:35:37] the the efficient efficiency. Because if
+[0:35:39] you do regression adjustment, it's it's
+[0:35:41] possible you're you're
+[0:35:43] uh decreasing the efficiency in general
+[0:35:45] in this uh annoying case. Okay.
 [0:35:52] Okay, there's a uh There's a numeric example, but due due
-[0:35:54] There's a numeric example, but due due to the time uh limit, I will revisit
-[0:35:57] to the time uh limit, I will revisit this example later, but just shows it's
-[0:35:59] this example later, but just shows it's possible uh re- regression adjustment
-[0:36:02] possible uh re- regression adjustment hurts the efficiency. In in some case,
-[0:36:05] hurts the efficiency. In in some case, it's uh it improves efficiency, but in
-[0:36:07] it's uh it improves efficiency, but in some other cases, it decrease. So, I
-[0:36:10] some other cases, it decrease. So, I will omit this example.
-[0:36:13] will omit this example. Because I want to uh finish the second
-[0:36:15] Because I want to uh finish the second part,
+[0:35:54] to the time uh limit, I will revisit
+[0:35:57] this example later, but just shows it's
+[0:35:59] possible uh re- regression adjustment
+[0:36:02] hurts the efficiency. In in some case,
+[0:36:05] it's uh it improves efficiency, but in
+[0:36:07] some other cases, it decrease. So, I
+[0:36:10] will omit this example.
+[0:36:13] Because I want to uh finish the second
 [0:36:17] part, inference. How do we conduct inference,
-[0:36:19] inference. How do we conduct inference, and how do we define S-optimal uh
-[0:36:22] and how do we define S-optimal uh regression-adjusted estimator?
-[0:36:25] regression-adjusted estimator? How do we uh conduct inference? We have
-[0:36:26] How do we uh conduct inference? We have to estimate the uh sampling
-[0:36:29] to estimate the uh sampling distribution. So, here just replace all
-[0:36:31] distribution. So, here just replace all the quantities by their sample analog,
-[0:36:33] the quantities by their sample analog, putting hats on all the quantities.
+[0:36:19] and how do we define S-optimal uh
+[0:36:22] regression-adjusted estimator?
+[0:36:25] How do we uh conduct inference? We have
+[0:36:26] to estimate the uh sampling
+[0:36:29] distribution. So, here just replace all
+[0:36:31] the quantities by their sample analog,
+[0:36:33] putting hats on all the quantities.
 [0:36:40] The the explicit formulas do not matter, but
-[0:36:43] the explicit formulas do not matter, but you know it's moment estimator.
+[0:36:43] you know it's moment estimator.
 [0:36:49] Okay, includes some special case like regression adjustment under complete
-[0:36:51] regression adjustment under complete randomization. This is uh Lin's result
-[0:36:54] randomization. This is uh Lin's result again, and it also uh includes the
-[0:36:57] again, and it also uh includes the uh the
+[0:36:51] randomization. This is uh Lin's result
+[0:36:54] again, and it also uh includes the
 [0:36:58] uh the the case we discussed before in
-[0:37:00] the case we discussed before in rerandomization, difference in means,
-[0:37:02] rerandomization, difference in means, just take beta to be zero.
+[0:37:00] rerandomization, difference in means,
+[0:37:02] just take beta to be zero.
 [0:37:07] Okay, first case. Oh, by the way, this formula is
-[0:37:09] Oh, by the way, this formula is meaningful only if we can estimate those
-[0:37:12] meaningful only if we can estimate those quantities. For example, we can't
-[0:37:14] quantities. For example, we can't estimate S squared. We can't
-[0:37:17] estimate S squared. We can't obtain A. If the designer didn't tell
-[0:37:19] obtain A. If the designer didn't tell you the
+[0:37:09] meaningful only if we can estimate those
+[0:37:12] quantities. For example, we can't
+[0:37:14] estimate S squared. We can't
+[0:37:17] obtain A. If the designer didn't tell
 [0:37:22] you the the covariates used in design, you
-[0:37:24] the covariates used in design, you cannot compute this term. If the
-[0:37:25] cannot compute this term. If the designer didn't tell you the
-[0:37:27] designer didn't tell you the rerandomization rule, you cannot compute
-[0:37:29] rerandomization rule, you cannot compute this term. So, this is meaningful only
-[0:37:32] this term. So, this is meaningful only when the analyzer knows everything in
-[0:37:35] when the analyzer knows everything in the design, knows the rule of
-[0:37:36] the design, knows the rule of rerandomization, and knows all the
-[0:37:38] rerandomization, and knows all the covariates. Okay, so that's a
-[0:37:41] covariates. Okay, so that's a a big assumption because otherwise those
-[0:37:43] a big assumption because otherwise those quantities cannot be computed.
-[0:37:46] quantities cannot be computed. In this case, we can uh because the
-[0:37:48] In this case, we can uh because the estimated distribution is a random
-[0:37:50] estimated distribution is a random variable, so we find its limit.
-[0:37:52] variable, so we find its limit. So, its limit
-[0:37:54] So, its limit can be written in this form. It's It's
-[0:37:56] can be written in this form. It's It's more complicated than the sampling
-[0:37:58] more complicated than the sampling distribution we discussed before when
-[0:38:00] distribution we discussed before when designer has all the informa- when the
-[0:38:02] designer has all the informa- when the analyzer has all the information of the
-[0:38:03] analyzer has all the information of the designer because
-[0:38:05] designer because of the conservativeness issue, there's
-[0:38:07] of the conservativeness issue, there's additional term we cannot estimate. We
-[0:38:09] additional term we cannot estimate. We can only estimate the
-[0:38:11] can only estimate the the variance uh conservatively.
-[0:38:14] the variance uh conservatively. But we cannot uh get rid of this term.
-[0:38:17] But we cannot uh get rid of this term. And again, these two terms uh
-[0:38:20] And again, these two terms uh similar to was before wait.
-[0:38:23] similar to was before wait. And we know uh
-[0:38:25] And we know uh the S-optimal
-[0:38:26] the S-optimal estimator is to choose gamma equals
-[0:38:29] estimator is to choose gamma equals gamma tilde, for example, Link's
-[0:38:30] gamma tilde, for example, Link's estimator, killing these two terms, and
-[0:38:33] estimator, killing these two terms, and the sampling distribution
-[0:38:34] the sampling distribution uh and its limit
-[0:38:37] uh and its limit the limit of the estimated sampling
-[0:38:39] the limit of the estimated sampling distribution uh have this normal uh form
-[0:38:44] distribution uh have this normal uh form this uh with this conservative term.
-[0:38:48] this uh with this conservative term. This is a nice case.
-[0:38:50] This is a nice case. And the conclusion is simple. Use uh
-[0:38:52] And the conclusion is simple. Use uh Link's estimator.
-[0:38:54] Link's estimator. Okay, the second case is not that ideal.
-[0:38:56] Okay, the second case is not that ideal. The analyzer either didn't know the
-[0:38:59] The analyzer either didn't know the covariates used in design, we cannot
-[0:39:01] covariates used in design, we cannot compute R squared, or he didn't know uh
-[0:39:04] compute R squared, or he didn't know uh the threshold uh
-[0:39:05] the threshold uh we cannot compute the LKA term in the
-[0:39:08] we cannot compute the LKA term in the asymptotic uh distribution. What can we
-[0:39:10] asymptotic uh distribution. What can we do? This is terrible statistics,
-[0:39:13] do? This is terrible statistics, obviously.
-[0:39:14] obviously. And
+[0:37:24] cannot compute this term. If the
+[0:37:25] designer didn't tell you the
+[0:37:27] rerandomization rule, you cannot compute
+[0:37:29] this term. So, this is meaningful only
+[0:37:32] when the analyzer knows everything in
+[0:37:35] the design, knows the rule of
+[0:37:36] rerandomization, and knows all the
+[0:37:38] covariates. Okay, so that's a
+[0:37:41] a big assumption because otherwise those
+[0:37:43] quantities cannot be computed.
+[0:37:46] In this case, we can uh because the
+[0:37:48] estimated distribution is a random
+[0:37:50] variable, so we find its limit.
+[0:37:52] So, its limit
+[0:37:54] can be written in this form. It's It's
+[0:37:56] more complicated than the sampling
+[0:37:58] distribution we discussed before when
+[0:38:00] designer has all the informa- when the
+[0:38:02] analyzer has all the information of the
+[0:38:03] designer because
+[0:38:05] of the conservativeness issue, there's
+[0:38:07] additional term we cannot estimate. We
+[0:38:09] can only estimate the
+[0:38:11] the variance uh conservatively.
+[0:38:14] But we cannot uh get rid of this term.
+[0:38:17] And again, these two terms uh
+[0:38:20] similar to was before wait.
+[0:38:23] And we know uh
+[0:38:25] the S-optimal
+[0:38:26] estimator is to choose gamma equals
+[0:38:29] gamma tilde, for example, Link's
+[0:38:30] estimator, killing these two terms, and
+[0:38:33] the sampling distribution
+[0:38:34] uh and its limit
+[0:38:37] the limit of the estimated sampling
+[0:38:39] distribution uh have this normal uh form
+[0:38:44] this uh with this conservative term.
+[0:38:48] This is a nice case.
+[0:38:50] And the conclusion is simple. Use uh
+[0:38:52] Link's estimator.
+[0:38:54] Okay, the second case is not that ideal.
+[0:38:56] The analyzer either didn't know the
+[0:38:59] covariates used in design, we cannot
+[0:39:01] compute R squared, or he didn't know uh
+[0:39:04] the threshold uh
+[0:39:05] we cannot compute the LKA term in the
+[0:39:08] asymptotic uh distribution. What can we
+[0:39:10] do? This is terrible statistics,
+[0:39:13] obviously.
 [0:39:15] And uh but at least we could propose some
-[0:39:17] uh but at least we could propose some method guarantees coverage or coverage
-[0:39:20] method guarantees coverage or coverage in the frequentist sense, cover uh the
-[0:39:22] in the frequentist sense, cover uh the confidence interval, cover the true
-[0:39:24] confidence interval, cover the true parameter with probability at least as
-[0:39:27] parameter with probability at least as large as uh 1 minus alpha. So, we allow
-[0:39:29] large as uh 1 minus alpha. So, we allow conservative procedure. So, because we
-[0:39:31] conservative procedure. So, because we don't know covariates in the design, we
-[0:39:34] don't know covariates in the design, we have to choose the worst case R squared,
-[0:39:36] have to choose the worst case R squared, which is zero. So, there's no
-[0:39:38] which is zero. So, there's no covariates, or those covariates are
-[0:39:40] covariates, or those covariates are terrible predictors of the outcome,
-[0:39:42] terrible predictors of the outcome, there's no information. Which may not be
-[0:39:44] there's no information. Which may not be true in practice, but that's the
-[0:39:46] true in practice, but that's the conservative choice.
-[0:39:48] conservative choice. If we choose this,
-[0:39:50] If we choose this, the asymptotic distribution becomes much
-[0:39:51] the asymptotic distribution becomes much simpler. So, if you choose R squared P
-[0:39:54] simpler. So, if you choose R squared P to be zero, this goes away, it's normal.
-[0:39:57] to be zero, this goes away, it's normal. Okay, this is normal because we cannot
-[0:39:59] Okay, this is normal because we cannot get to the right asymptotic
-[0:40:01] get to the right asymptotic distribution.
-[0:40:02] distribution. Okay, the this is the
-[0:40:05] Okay, the this is the conservative estimator of this
-[0:40:06] conservative estimator of this distribution.
-[0:40:08] distribution. And
+[0:39:17] method guarantees coverage or coverage
+[0:39:20] in the frequentist sense, cover uh the
+[0:39:22] confidence interval, cover the true
+[0:39:24] parameter with probability at least as
+[0:39:27] large as uh 1 minus alpha. So, we allow
+[0:39:29] conservative procedure. So, because we
+[0:39:31] don't know covariates in the design, we
+[0:39:34] have to choose the worst case R squared,
+[0:39:36] which is zero. So, there's no
+[0:39:38] covariates, or those covariates are
+[0:39:40] terrible predictors of the outcome,
+[0:39:42] there's no information. Which may not be
+[0:39:44] true in practice, but that's the
+[0:39:46] conservative choice.
+[0:39:48] If we choose this,
+[0:39:50] the asymptotic distribution becomes much
+[0:39:51] simpler. So, if you choose R squared P
+[0:39:54] to be zero, this goes away, it's normal.
+[0:39:57] Okay, this is normal because we cannot
+[0:39:59] get to the right asymptotic
+[0:40:01] distribution.
+[0:40:02] Okay, the this is the
+[0:40:05] conservative estimator of this
+[0:40:06] distribution.
 [0:40:09] And of course, it includes many special
-[0:40:11] of course, it includes many special cases.
 [0:40:13] cases. Including Neyman's result.
-[0:40:15] Including Neyman's result. So, what's going on here? Here, it
-[0:40:17] So, what's going on here? Here, it basically says
-[0:40:19] basically says even though in the design stage you have
-[0:40:21] even though in the design stage you have re-randomization, in the analysis stage
-[0:40:24] re-randomization, in the analysis stage we pretend the experiment is a
-[0:40:26] we pretend the experiment is a completely randomized experiment.
-[0:40:28] completely randomized experiment. Completely ignore the design, losing the
-[0:40:31] Completely ignore the design, losing the benefit of re-randomization, making the
-[0:40:33] benefit of re-randomization, making the whole procedure very conservative. Okay.
-[0:40:35] whole procedure very conservative. Okay. Because of this
-[0:40:37] Because of this uh
+[0:40:15] So, what's going on here? Here, it
+[0:40:17] basically says
+[0:40:19] even though in the design stage you have
+[0:40:21] re-randomization, in the analysis stage
+[0:40:24] we pretend the experiment is a
+[0:40:26] completely randomized experiment.
+[0:40:28] Completely ignore the design, losing the
+[0:40:31] benefit of re-randomization, making the
+[0:40:33] whole procedure very conservative. Okay.
+[0:40:35] Because of this
 [0:40:38] uh uh incomplete information.
 [0:40:47] We're not recommending this in practice, but we're saying even this happens,
-[0:40:49] but we're saying even this happens, using regression adjustment
-[0:40:51] using regression adjustment uh is still a good idea. Okay. Because
-[0:40:54] uh is still a good idea. Okay. Because the estimated uh distribution can be
-[0:40:56] the estimated uh distribution can be written in this way in the limit. It's
-[0:40:59] written in this way in the limit. It's normal, and how to minimize this
-[0:41:00] normal, and how to minimize this coefficient again is the same set. Least
-[0:41:02] coefficient again is the same set. Least estimator achieves uh optimality with a
-[0:41:05] estimator achieves uh optimality with a normal asymptotic uh distribution uh
-[0:41:09] normal asymptotic uh distribution uh in the limit.
-[0:41:11] in the limit. So, for S-optimality, the theory is
-[0:41:14] So, for S-optimality, the theory is actually simpler. No matter whether the
-[0:41:16] actually simpler. No matter whether the analyzer knows the design or not, our
-[0:41:19] analyzer knows the design or not, our recommendation is the same. Always use
-[0:41:21] recommendation is the same. Always use least estimator. Always adjust for uh
-[0:41:24] least estimator. Always adjust for uh the covariates you have.
-[0:41:26] the covariates you have. So, in in S-optimality section, the
-[0:41:29] So, in in S-optimality section, the theory is not very clean because it
-[0:41:31] theory is not very clean because it depends on
-[0:41:32] depends on whether the designer has more
-[0:41:34] whether the designer has more information or less information or
-[0:41:36] information or less information or or
+[0:40:49] using regression adjustment
+[0:40:51] uh is still a good idea. Okay. Because
+[0:40:54] the estimated uh distribution can be
+[0:40:56] written in this way in the limit. It's
+[0:40:59] normal, and how to minimize this
+[0:41:00] coefficient again is the same set. Least
+[0:41:02] estimator achieves uh optimality with a
+[0:41:05] normal asymptotic uh distribution uh
+[0:41:09] in the limit.
+[0:41:11] So, for S-optimality, the theory is
+[0:41:14] actually simpler. No matter whether the
+[0:41:16] analyzer knows the design or not, our
+[0:41:19] recommendation is the same. Always use
+[0:41:21] least estimator. Always adjust for uh
+[0:41:24] the covariates you have.
+[0:41:26] So, in in S-optimality section, the
+[0:41:29] theory is not very clean because it
+[0:41:31] depends on
+[0:41:32] whether the designer has more
+[0:41:34] information or less information or
 [0:41:38] or whether analyzer knows the criteria of
-[0:41:39] whether analyzer knows the criteria of the design. And depends on those things.
-[0:41:42] the design. And depends on those things. Uh
+[0:41:39] the design. And depends on those things.
 [0:41:44] Uh regression adjustment can be optimal,
-[0:41:45] regression adjustment can be optimal, can be suboptimal. But in terms of
-[0:41:48] can be suboptimal. But in terms of C-optimality, in terms of confidence
-[0:41:50] C-optimality, in terms of confidence interval uh constructed based on uh the
-[0:41:52] interval uh constructed based on uh the estimated distribution,
-[0:41:55] estimated distribution, uh the recommendation is simple. Use
-[0:41:57] uh the recommendation is simple. Use regression adjustment.
-[0:41:59] regression adjustment. Okay. So, this is the uh example. I will
-[0:42:01] Okay. So, this is the uh example. I will omit the example because uh it's simple,
-[0:42:04] omit the example because uh it's simple, just showing you uh there is a
-[0:42:06] just showing you uh there is a discrepancy between uh estimated
-[0:42:08] discrepancy between uh estimated distribution and sampling distribution.
-[0:42:10] distribution and sampling distribution. The theory is not fixed theory. Okay.
-[0:42:12] The theory is not fixed theory. Okay. You can You can check the the the the
-[0:42:14] You can You can check the the the the numerical example. Because I want to
-[0:42:16] numerical example. Because I want to tell you the final recommendation, the
-[0:42:18] tell you the final recommendation, the final summary. Okay. The final two
-[0:42:20] final summary. Okay. The final two slides in two minutes.
-[0:42:23] slides in two minutes. Let me summarize what's happening in in
-[0:42:25] Let me summarize what's happening in in the past almost 100 years design of and
-[0:42:29] the past almost 100 years design of and analysis of randomized experiments. In
-[0:42:31] analysis of randomized experiments. In the design stage, we can use complete
-[0:42:33] the design stage, we can use complete randomization or re-randomization. In
-[0:42:36] randomization or re-randomization. In analysis stage, we can use difference in
-[0:42:37] analysis stage, we can use difference in means or regression adjusted estimators.
-[0:42:40] means or regression adjusted estimators. So, we have a 2 by 2 table summarizing
-[0:42:42] So, we have a 2 by 2 table summarizing to four cases.
-[0:42:43] to four cases. This is name as original paper. In
-[0:42:45] This is name as original paper. In complete randomization, use difference
-[0:42:47] complete randomization, use difference in means. This is classical paper. And
-[0:42:50] in means. This is classical paper. And the links paper is to improve
-[0:42:54] the links paper is to improve tau hat by regression adjusted estimator
-[0:42:56] tau hat by regression adjusted estimator in complete randomization. This is arrow
-[0:42:58] in complete randomization. This is arrow one. And they show this improves
-[0:43:00] one. And they show this improves efficiency.
-[0:43:02] efficiency. Even the linear model is wrong. And our
-[0:43:04] Even the linear model is wrong. And our previous paper is to improve the design.
-[0:43:08] previous paper is to improve the design. We propose to use re-randomization
-[0:43:11] We propose to use re-randomization compared to complete randomization, but
-[0:43:12] compared to complete randomization, but we still use
-[0:43:14] we still use tau hat, the difference in means. We
-[0:43:15] tau hat, the difference in means. We show it improves
-[0:43:18] show it improves efficiency. Okay.
-[0:43:20] efficiency. Okay. And these two are the deals in design
-[0:43:22] And these two are the deals in design and analysis. But both of them are
-[0:43:24] and analysis. But both of them are sub-optimal because they can combine
-[0:43:26] sub-optimal because they can combine re-randomization and
-[0:43:28] re-randomization and regression adjustment. This is arrow
-[0:43:29] regression adjustment. This is arrow three and arrow four. This is our
-[0:43:31] three and arrow four. This is our contribution.
-[0:43:33] contribution. And we have shown for for any regression
-[0:43:36] And we have shown for for any regression estimator, the design always improves
-[0:43:39] estimator, the design always improves something and the estimated
-[0:43:40] something and the estimated distributions
-[0:43:42] distributions or something and estimated precisions.
-[0:43:44] or something and estimated precisions. And and we we show
-[0:43:47] And and we we show Oh, sorry. This is arrow three. So, if
-[0:43:49] Oh, sorry. This is arrow three. So, if we if we uh
-[0:43:52] we if we uh fix
+[0:41:45] can be suboptimal. But in terms of
+[0:41:48] C-optimality, in terms of confidence
+[0:41:50] interval uh constructed based on uh the
+[0:41:52] estimated distribution,
+[0:41:55] uh the recommendation is simple. Use
+[0:41:57] regression adjustment.
+[0:41:59] Okay. So, this is the uh example. I will
+[0:42:01] omit the example because uh it's simple,
+[0:42:04] just showing you uh there is a
+[0:42:06] discrepancy between uh estimated
+[0:42:08] distribution and sampling distribution.
+[0:42:10] The theory is not fixed theory. Okay.
+[0:42:12] You can You can check the the the the
+[0:42:14] numerical example. Because I want to
+[0:42:16] tell you the final recommendation, the
+[0:42:18] final summary. Okay. The final two
+[0:42:20] slides in two minutes.
+[0:42:23] Let me summarize what's happening in in
+[0:42:25] the past almost 100 years design of and
+[0:42:29] analysis of randomized experiments. In
+[0:42:31] the design stage, we can use complete
+[0:42:33] randomization or re-randomization. In
+[0:42:36] analysis stage, we can use difference in
+[0:42:37] means or regression adjusted estimators.
+[0:42:40] So, we have a 2 by 2 table summarizing
+[0:42:42] to four cases.
+[0:42:43] This is name as original paper. In
+[0:42:45] complete randomization, use difference
+[0:42:47] in means. This is classical paper. And
+[0:42:50] the links paper is to improve
+[0:42:54] tau hat by regression adjusted estimator
+[0:42:56] in complete randomization. This is arrow
+[0:42:58] one. And they show this improves
+[0:43:00] efficiency.
+[0:43:02] Even the linear model is wrong. And our
+[0:43:04] previous paper is to improve the design.
+[0:43:08] We propose to use re-randomization
+[0:43:11] compared to complete randomization, but
+[0:43:12] we still use
+[0:43:14] tau hat, the difference in means. We
+[0:43:15] show it improves
+[0:43:18] efficiency. Okay.
+[0:43:20] And these two are the deals in design
+[0:43:22] and analysis. But both of them are
+[0:43:24] sub-optimal because they can combine
+[0:43:26] re-randomization and
+[0:43:28] regression adjustment. This is arrow
+[0:43:29] three and arrow four. This is our
+[0:43:31] contribution.
+[0:43:33] And we have shown for for any regression
+[0:43:36] estimator, the design always improves
+[0:43:39] something and the estimated
+[0:43:40] distributions
+[0:43:42] or something and estimated precisions.
+[0:43:44] And and we we show
+[0:43:47] Oh, sorry. This is arrow three. So, if
+[0:43:49] we if we uh
 [0:43:53] fix any estimator, the
-[0:43:55] any estimator, the the
 [0:43:56] the the design
-[0:43:57] the design improves uh
-[0:44:00] improves uh Okay. Sorry. This is a little confusing.
-[0:44:02] Okay. Sorry. This is a little confusing. So, regression adjustment increases
-[0:44:05] So, regression adjustment increases estimated precision. This is the arrow
-[0:44:07] estimated precision. This is the arrow three, and arrow four is
-[0:44:09] three, and arrow four is re-randomization increases both sampling
-[0:44:11] re-randomization increases both sampling and estimated precision. That's our
-[0:44:13] and estimated precision. That's our conclusion before.
-[0:44:15] conclusion before. Summarized in this table.
-[0:44:17] Summarized in this table. Okay. So, the final slide. This this is
-[0:44:19] Okay. So, the final slide. This this is for practitioners. What what what should
-[0:44:22] for practitioners. What what what should be done in practice? So, this is our uh
-[0:44:25] be done in practice? So, this is our uh recommendation. Use uh re-randomization
-[0:44:27] recommendation. Use uh re-randomization in design, and then use uh regression
-[0:44:29] in design, and then use uh regression adjustment in analysis. This can be uh
-[0:44:32] adjustment in analysis. This can be uh conveniently implemented by least square
-[0:44:35] conveniently implemented by least square from least square of Y on Z
-[0:44:37] from least square of Y on Z and W and their interaction. And the
-[0:44:39] and W and their interaction. And the report the accurate Huber-White robust
-[0:44:42] report the accurate Huber-White robust standard error. It's consistent It's
-[0:44:44] standard error. It's consistent It's conservative for the true standard
-[0:44:46] conservative for the true standard error. No matter whether the analyzer
-[0:44:48] error. No matter whether the analyzer knows all the information of the design
-[0:44:50] knows all the information of the design or not.
+[0:43:57] improves uh
+[0:44:00] Okay. Sorry. This is a little confusing.
+[0:44:02] So, regression adjustment increases
+[0:44:05] estimated precision. This is the arrow
+[0:44:07] three, and arrow four is
+[0:44:09] re-randomization increases both sampling
+[0:44:11] and estimated precision. That's our
+[0:44:13] conclusion before.
+[0:44:15] Summarized in this table.
+[0:44:17] Okay. So, the final slide. This this is
+[0:44:19] for practitioners. What what what should
+[0:44:22] be done in practice? So, this is our uh
+[0:44:25] recommendation. Use uh re-randomization
+[0:44:27] in design, and then use uh regression
+[0:44:29] adjustment in analysis. This can be uh
+[0:44:32] conveniently implemented by least square
+[0:44:35] from least square of Y on Z
+[0:44:37] and W and their interaction. And the
+[0:44:39] report the accurate Huber-White robust
+[0:44:42] standard error. It's consistent It's
+[0:44:44] conservative for the true standard
+[0:44:46] error. No matter whether the analyzer
+[0:44:48] knows all the information of the design
 [0:44:51] or not. Some subtle technical issues. Make sure
-[0:44:53] Some subtle technical issues. Make sure you center your covariates W, and make
-[0:44:56] you center your covariates W, and make sure uh
+[0:44:53] you center your covariates W, and make
 [0:44:57] sure uh the covariates in design is a subset of
-[0:44:59] the covariates in design is a subset of covariates in analysis, if possible.
-[0:45:02] covariates in analysis, if possible. This may not be I as optimal, but it's
-[0:45:04] This may not be I as optimal, but it's always C optimal. That's why we
-[0:45:06] always C optimal. That's why we recommend uh this procedure. Okay.
-[0:45:09] recommend uh this procedure. Okay. Sorry, I used
-[0:45:10] Sorry, I used 2 minutes of Tatang. So, I will stop
-[0:45:13] 2 minutes of Tatang. So, I will stop here.
+[0:44:59] covariates in analysis, if possible.
+[0:45:02] This may not be I as optimal, but it's
+[0:45:04] always C optimal. That's why we
+[0:45:06] recommend uh this procedure. Okay.
+[0:45:09] Sorry, I used
+[0:45:10] 2 minutes of Tatang. So, I will stop
+[0:45:13] here.
 [0:45:18] Fantastic. Thanks for the great talk, Peng. We're now going to switch over to
-[0:45:20] Peng. We're now going to switch over to discussion. We will have Tatang
-[0:45:23] discussion. We will have Tatang uh some slides, and after that Peng Ding
-[0:45:25] uh some slides, and after that Peng Ding can quickly respond if he wants.
-[0:45:28] can quickly respond if he wants. I'm switching over to you now.
-[0:45:30] I'm switching over to you now. All right.
+[0:45:20] discussion. We will have Tatang
+[0:45:23] uh some slides, and after that Peng Ding
+[0:45:25] can quickly respond if he wants.
+[0:45:28] I'm switching over to you now.
+[0:45:30] All right.
 [0:45:45] Can you see the screen? Yeah.
 [0:45:46] Yeah. Okay.
 [0:45:47] Okay. Well, uh
 [0:45:48] Well, uh thanks again to the organizers for
-[0:45:51] thanks again to the organizers for giving me this opportunity, and uh
-[0:45:53] giving me this opportunity, and uh mm it's a real pleasure to discuss this
-[0:45:56] mm it's a real pleasure to discuss this uh piece of work by uh Shenran and Peng.
-[0:45:59] uh piece of work by uh Shenran and Peng. Uh
+[0:45:51] giving me this opportunity, and uh
+[0:45:53] mm it's a real pleasure to discuss this
+[0:45:56] uh piece of work by uh Shenran and Peng.
 [0:45:59] Uh and uh I would like to start by saying
-[0:46:02] and uh I would like to start by saying that I'm a big fan of their work. Not
-[0:46:04] that I'm a big fan of their work. Not only this, but uh
-[0:46:05] only this, but uh uh all the previous work that has led to
-[0:46:07] uh all the previous work that has led to this work.
-[0:46:08] this work. So,
+[0:46:02] that I'm a big fan of their work. Not
+[0:46:04] only this, but uh
+[0:46:05] uh all the previous work that has led to
+[0:46:07] this work.
 [0:46:09] So, just a quick uh
-[0:46:11] just a quick uh review of the background and the
-[0:46:13] review of the background and the motivation and uh why the paper I think
-[0:46:15] motivation and uh why the paper I think is pretty important uh
-[0:46:17] is pretty important uh standing today. Uh
-[0:46:20] standing today. Uh randomized designs uh have gradually
-[0:46:22] randomized designs uh have gradually gained in importance in recent times.
-[0:46:24] gained in importance in recent times. And as Pong mentioned, uh
-[0:46:27] And as Pong mentioned, uh particularly because these days we do
-[0:46:29] particularly because these days we do have a lot of covariates that uh which
-[0:46:31] have a lot of covariates that uh which we didn't have in many classical
-[0:46:32] we didn't have in many classical experiments. Uh and we do have an
-[0:46:35] experiments. Uh and we do have an increasing application from all fields.
-[0:46:37] increasing application from all fields. Uh
+[0:46:11] review of the background and the
+[0:46:13] motivation and uh why the paper I think
+[0:46:15] is pretty important uh
+[0:46:17] standing today. Uh
+[0:46:20] randomized designs uh have gradually
+[0:46:22] gained in importance in recent times.
+[0:46:24] And as Pong mentioned, uh
+[0:46:27] particularly because these days we do
+[0:46:29] have a lot of covariates that uh which
+[0:46:31] we didn't have in many classical
+[0:46:32] experiments. Uh and we do have an
+[0:46:35] increasing application from all fields.
 [0:46:38] Uh We didn't have as many applications uh
-[0:46:40] We didn't have as many applications uh in social sciences as we do have these
-[0:46:42] in social sciences as we do have these days. Uh
+[0:46:40] in social sciences as we do have these
 [0:46:43] days. Uh So, this is really very encouraging.
-[0:46:46] So, this is really very encouraging. Uh blocking is very old. Uh something
-[0:46:49] Uh blocking is very old. Uh something which Fisher recommended and has been
-[0:46:51] which Fisher recommended and has been used extensively by uh
-[0:46:54] used extensively by uh practitioners and researchers over a
-[0:46:56] practitioners and researchers over a century. But it's not intuitive when we
-[0:46:59] century. But it's not intuitive when we have many covariates. And that is one of
-[0:47:01] have many covariates. And that is one of the reasons why rerandomization again uh
-[0:47:04] the reasons why rerandomization again uh is uh gaining in popularity and it is
-[0:47:06] is uh gaining in popularity and it is emerging as a pretty popular strategy.
-[0:47:09] emerging as a pretty popular strategy. Uh
+[0:46:46] Uh blocking is very old. Uh something
+[0:46:49] which Fisher recommended and has been
+[0:46:51] used extensively by uh
+[0:46:54] practitioners and researchers over a
+[0:46:56] century. But it's not intuitive when we
+[0:46:59] have many covariates. And that is one of
+[0:47:01] the reasons why rerandomization again uh
+[0:47:04] is uh gaining in popularity and it is
+[0:47:06] emerging as a pretty popular strategy.
 [0:47:10] Uh but when it comes to uh adjustment of
-[0:47:13] but when it comes to uh adjustment of analysis in the presence of covariates,
-[0:47:16] analysis in the presence of covariates, uh
+[0:47:13] analysis in the presence of covariates,
 [0:47:16] uh for randomized designs, there indeed is
-[0:47:19] for randomized designs, there indeed is very little existing theory. And Pong
-[0:47:20] very little existing theory. And Pong has pointed out all of them. So,
-[0:47:23] has pointed out all of them. So, uh Freedman was the first to uh indicate
-[0:47:26] uh Freedman was the first to uh indicate that uh this analysis of covariates may
-[0:47:28] that uh this analysis of covariates may not really be a very good idea. But then
-[0:47:31] not really be a very good idea. But then uh this work by Lin uh
-[0:47:33] uh this work by Lin uh really showed that it it can be provided
-[0:47:36] really showed that it it can be provided you uh adjust your uh estimator
-[0:47:39] you uh adjust your uh estimator uh by
+[0:47:19] very little existing theory. And Pong
+[0:47:20] has pointed out all of them. So,
+[0:47:23] uh Freedman was the first to uh indicate
+[0:47:26] that uh this analysis of covariates may
+[0:47:28] not really be a very good idea. But then
+[0:47:31] uh this work by Lin uh
+[0:47:33] really showed that it it can be provided
+[0:47:36] you uh adjust your uh estimator
 [0:47:41] uh by uh using that interaction term between
-[0:47:43] uh using that interaction term between the treatment and the covariate. So, so
-[0:47:45] the treatment and the covariate. So, so this was pretty much what we had. Uh
-[0:47:48] this was pretty much what we had. Uh So, coming to this paper,
-[0:47:50] So, coming to this paper, uh first of all, I I just want to uh say
-[0:47:52] uh first of all, I I just want to uh say a couple of words about the writing
-[0:47:54] a couple of words about the writing style. And uh if I know there probably
-[0:47:56] style. And uh if I know there probably are many young researchers listening to
-[0:47:59] are many young researchers listening to this talk and uh uh
-[0:48:00] this talk and uh uh uh it's always I think writing a paper
-[0:48:03] uh it's always I think writing a paper again has various different aspects, the
-[0:48:06] again has various different aspects, the technical contents, the presentation. Uh
-[0:48:09] technical contents, the presentation. Uh if if you are really kind of thinking of
-[0:48:11] if if you are really kind of thinking of writing good papers which make good
-[0:48:13] writing good papers which make good contributions uh
-[0:48:15] contributions uh both in terms of richness of theory and
-[0:48:18] both in terms of richness of theory and the way in which it tells a very nice
-[0:48:20] the way in which it tells a very nice story keeping in mind the historical
-[0:48:22] story keeping in mind the historical developments and read Bunch's papers,
-[0:48:24] developments and read Bunch's papers, not only this but some other papers. So,
-[0:48:26] not only this but some other papers. So, I was just thinking about some of the
-[0:48:28] I was just thinking about some of the adjectives which I wrote down after
-[0:48:30] adjectives which I wrote down after reading this paper, elegant, lucid,
-[0:48:31] reading this paper, elegant, lucid, deep, rich, insightful, and educated.
-[0:48:34] deep, rich, insightful, and educated. Uh so, what I like about this is they
-[0:48:37] Uh so, what I like about this is they have really kind of incorporated a
-[0:48:40] have really kind of incorporated a factorial structure of investigation.
-[0:48:42] factorial structure of investigation. So, like design and analysis are the two
-[0:48:44] So, like design and analysis are the two factors, right? And both has a treatment
-[0:48:46] factors, right? And both has a treatment and a control. Like in design,
-[0:48:48] and a control. Like in design, incorporate covariates, that's that's a
-[0:48:50] incorporate covariates, that's that's a treatment. Ignore covariates, that's a
-[0:48:52] treatment. Ignore covariates, that's a control, right? Similarly, in analysis,
-[0:48:54] control, right? Similarly, in analysis, ignore covariates, that's the control.
-[0:48:56] ignore covariates, that's the control. Incorporate covariates, that's the
-[0:48:57] Incorporate covariates, that's the treatment. So, they they study this in
-[0:48:59] treatment. So, they they study this in this
+[0:47:43] the treatment and the covariate. So, so
+[0:47:45] this was pretty much what we had. Uh
+[0:47:48] So, coming to this paper,
+[0:47:50] uh first of all, I I just want to uh say
+[0:47:52] a couple of words about the writing
+[0:47:54] style. And uh if I know there probably
+[0:47:56] are many young researchers listening to
+[0:47:59] this talk and uh uh
+[0:48:00] uh it's always I think writing a paper
+[0:48:03] again has various different aspects, the
+[0:48:06] technical contents, the presentation. Uh
+[0:48:09] if if you are really kind of thinking of
+[0:48:11] writing good papers which make good
+[0:48:13] contributions uh
+[0:48:15] both in terms of richness of theory and
+[0:48:18] the way in which it tells a very nice
+[0:48:20] story keeping in mind the historical
+[0:48:22] developments and read Bunch's papers,
+[0:48:24] not only this but some other papers. So,
+[0:48:26] I was just thinking about some of the
+[0:48:28] adjectives which I wrote down after
+[0:48:30] reading this paper, elegant, lucid,
+[0:48:31] deep, rich, insightful, and educated.
+[0:48:34] Uh so, what I like about this is they
+[0:48:37] have really kind of incorporated a
+[0:48:40] factorial structure of investigation.
+[0:48:42] So, like design and analysis are the two
+[0:48:44] factors, right? And both has a treatment
+[0:48:46] and a control. Like in design,
+[0:48:48] incorporate covariates, that's that's a
+[0:48:50] treatment. Ignore covariates, that's a
+[0:48:52] control, right? Similarly, in analysis,
+[0:48:54] ignore covariates, that's the control.
+[0:48:56] Incorporate covariates, that's the
+[0:48:57] treatment. So, they they study this in
 [0:49:01] this two square factorial framework and that
-[0:49:02] two square factorial framework and that was a two by two table which Bunch
-[0:49:04] was a two by two table which Bunch showed
+[0:49:02] was a two by two table which Bunch
 [0:49:05] showed in his slide 36, I believe.
-[0:49:07] in his slide 36, I believe. Uh
 [0:49:08] Uh and then try to understand like
-[0:49:11] and then try to understand like what we gain or
-[0:49:13] what we gain or what perhaps we lose. And I also like
-[0:49:16] what perhaps we lose. And I also like the way in which they have really
-[0:49:18] the way in which they have really considered the role of sharing of
-[0:49:21] considered the role of sharing of covariate information between the
-[0:49:22] covariate information between the designer and designer and analyst
-[0:49:24] designer and designer and analyst because this is something which is very
-[0:49:26] because this is something which is very practical when it comes to
-[0:49:28] practical when it comes to interactions between the person who
-[0:49:30] interactions between the person who designed the experiment and the person
-[0:49:31] designed the experiment and the person who analyzed the experiment. Uh when
-[0:49:34] who analyzed the experiment. Uh when they showed that when there is a nested
-[0:49:36] they showed that when there is a nested structure,
-[0:49:37] structure, uh that is either the covariate
-[0:49:39] uh that is either the covariate available to the analyst is a subset of
-[0:49:42] available to the analyst is a subset of of the information which was available
-[0:49:44] of the information which was available to the designer or the other way around,
-[0:49:46] to the designer or the other way around, a nested structure, then things are
-[0:49:48] a nested structure, then things are okay. If it's non-nested, things can get
-[0:49:50] okay. If it's non-nested, things can get a a complicated. So, they do a very
-[0:49:52] a a complicated. So, they do a very careful asymptotic analysis. They
-[0:49:54] careful asymptotic analysis. They compared these four cases
-[0:49:56] compared these four cases and basically once again
-[0:49:59] and basically once again Punk just concluded by saying this
-[0:50:01] Punk just concluded by saying this also in his slide 13 uh
-[0:50:03] also in his slide 13 uh that incorporating covariates and design
-[0:50:06] that incorporating covariates and design never hurts. Incorporating covariates
-[0:50:09] never hurts. Incorporating covariates and analysis almost never hurts
-[0:50:11] and analysis almost never hurts and except for the those non-nested
-[0:50:13] and except for the those non-nested situations where
-[0:50:15] situations where the sampling precision may not
-[0:50:16] the sampling precision may not necessarily improve, but they show that
-[0:50:18] necessarily improve, but they show that the estimation precision from an
-[0:50:20] the estimation precision from an asymptotic perspective always increases
-[0:50:23] asymptotic perspective always increases uh improves.
-[0:50:24] uh improves. Uh there is also this nice contribution
-[0:50:26] Uh there is also this nice contribution of bringing in two notions of
-[0:50:28] of bringing in two notions of optimality, one related to the sampling
-[0:50:31] optimality, one related to the sampling and one related to the eventual length
-[0:50:34] and one related to the eventual length of the the width of the confidence
-[0:50:36] of the the width of the confidence interval because this is something as
-[0:50:38] interval because this is something as Punk mentioned this never comes up in
-[0:50:39] Punk mentioned this never comes up in traditional statistical analysis because
-[0:50:41] traditional statistical analysis because typically we can always find a
-[0:50:42] typically we can always find a consistent estimator and this is again a
-[0:50:45] consistent estimator and this is again a case which is violated when we have
-[0:50:47] case which is violated when we have these kind of non-nested situations. And
-[0:50:49] these kind of non-nested situations. And at the end of the day um most of Punk's
-[0:50:51] at the end of the day um most of Punk's paper give a practical recommendation
-[0:50:54] paper give a practical recommendation for the practitioner. So, if you want to
-[0:50:55] for the practitioner. So, if you want to ignore
+[0:49:11] what we gain or
+[0:49:13] what perhaps we lose. And I also like
+[0:49:16] the way in which they have really
+[0:49:18] considered the role of sharing of
+[0:49:21] covariate information between the
+[0:49:22] designer and designer and analyst
+[0:49:24] because this is something which is very
+[0:49:26] practical when it comes to
+[0:49:28] interactions between the person who
+[0:49:30] designed the experiment and the person
+[0:49:31] who analyzed the experiment. Uh when
+[0:49:34] they showed that when there is a nested
+[0:49:36] structure,
+[0:49:37] uh that is either the covariate
+[0:49:39] available to the analyst is a subset of
+[0:49:42] of the information which was available
+[0:49:44] to the designer or the other way around,
+[0:49:46] a nested structure, then things are
+[0:49:48] okay. If it's non-nested, things can get
+[0:49:50] a a complicated. So, they do a very
+[0:49:52] careful asymptotic analysis. They
+[0:49:54] compared these four cases
+[0:49:56] and basically once again
+[0:49:59] Punk just concluded by saying this
+[0:50:01] also in his slide 13 uh
+[0:50:03] that incorporating covariates and design
+[0:50:06] never hurts. Incorporating covariates
+[0:50:09] and analysis almost never hurts
+[0:50:11] and except for the those non-nested
+[0:50:13] situations where
+[0:50:15] the sampling precision may not
+[0:50:16] necessarily improve, but they show that
+[0:50:18] the estimation precision from an
+[0:50:20] asymptotic perspective always increases
+[0:50:23] uh improves.
+[0:50:24] Uh there is also this nice contribution
+[0:50:26] of bringing in two notions of
+[0:50:28] optimality, one related to the sampling
+[0:50:31] and one related to the eventual length
+[0:50:34] of the the width of the confidence
+[0:50:36] interval because this is something as
+[0:50:38] Punk mentioned this never comes up in
+[0:50:39] traditional statistical analysis because
+[0:50:41] typically we can always find a
+[0:50:42] consistent estimator and this is again a
+[0:50:45] case which is violated when we have
+[0:50:47] these kind of non-nested situations. And
+[0:50:49] at the end of the day um most of Punk's
+[0:50:51] paper give a practical recommendation
+[0:50:54] for the practitioner. So, if you want to
 [0:50:56] ignore everything else and just want to
-[0:50:57] everything else and just want to understand like how do we do this? There
-[0:50:59] understand like how do we do this? There is a very clear recommendation at the
-[0:51:01] is a very clear recommendation at the end, right? So, so that that's really
-[0:51:03] end, right? So, so that that's really very nice.
-[0:51:04] very nice. Uh
+[0:50:57] understand like how do we do this? There
+[0:50:59] is a very clear recommendation at the
+[0:51:01] end, right? So, so that that's really
+[0:51:03] very nice.
 [0:51:06] Uh for again for researchers who really
-[0:51:08] for again for researchers who really want to work in this area
-[0:51:10] want to work in this area uh I think Punk already described this,
-[0:51:12] uh I think Punk already described this, but I I think the work done in this
-[0:51:15] but I I think the work done in this paper and the related papers has two
-[0:51:18] paper and the related papers has two major kind of mathematical foundations.
-[0:51:21] major kind of mathematical foundations. One is this very beautiful paper again
-[0:51:24] One is this very beautiful paper again by the same author Shen Run and Punk
-[0:51:26] by the same author Shen Run and Punk in 2017 JASA. It's on finite population
-[0:51:30] in 2017 JASA. It's on finite population asymptotics and that is basically the
-[0:51:31] asymptotics and that is basically the key tool really to uh
-[0:51:34] key tool really to uh which describes how this finite
-[0:51:37] which describes how this finite population central limit theorem can be
-[0:51:39] population central limit theorem can be applied in various types of
-[0:51:41] applied in various types of randomization based inference. So, this
-[0:51:42] randomization based inference. So, this is a very very rich paper
-[0:51:45] is a very very rich paper I think which is going to really
-[0:51:48] I think which is going to really be cited a lot and used a lot by
-[0:51:50] be cited a lot and used a lot by researchers when it comes to
-[0:51:51] researchers when it comes to doing asymptotics in a finite population
-[0:51:53] doing asymptotics in a finite population setting with applications to causal
-[0:51:55] setting with applications to causal inference. And the other piece of
-[0:51:58] inference. And the other piece of the set of tools are related to the
-[0:52:00] the set of tools are related to the theory of projections and orthogonal
-[0:52:02] theory of projections and orthogonal decompositions and all the geometric
-[0:52:04] decompositions and all the geometric insights which also play a major role in
-[0:52:07] insights which also play a major role in least square theory. So I thought these
-[0:52:09] least square theory. So I thought these were the two foundations which made this
-[0:52:13] were the two foundations which made this which led to the developments in this
-[0:52:14] which led to the developments in this paper.
+[0:51:08] want to work in this area
+[0:51:10] uh I think Punk already described this,
+[0:51:12] but I I think the work done in this
+[0:51:15] paper and the related papers has two
+[0:51:18] major kind of mathematical foundations.
+[0:51:21] One is this very beautiful paper again
+[0:51:24] by the same author Shen Run and Punk
+[0:51:26] in 2017 JASA. It's on finite population
+[0:51:30] asymptotics and that is basically the
+[0:51:31] key tool really to uh
+[0:51:34] which describes how this finite
+[0:51:37] population central limit theorem can be
+[0:51:39] applied in various types of
+[0:51:41] randomization based inference. So, this
+[0:51:42] is a very very rich paper
+[0:51:45] I think which is going to really
+[0:51:48] be cited a lot and used a lot by
+[0:51:50] researchers when it comes to
+[0:51:51] doing asymptotics in a finite population
+[0:51:53] setting with applications to causal
+[0:51:55] inference. And the other piece of
+[0:51:58] the set of tools are related to the
+[0:52:00] theory of projections and orthogonal
+[0:52:02] decompositions and all the geometric
+[0:52:04] insights which also play a major role in
+[0:52:07] least square theory. So I thought these
+[0:52:09] were the two foundations which made this
+[0:52:13] which led to the developments in this
 [0:52:15] paper. Uh
 [0:52:16] Uh Uh
 [0:52:17] Uh this is something which I would like a
-[0:52:19] this is something which I would like a little more intuition on and I I think
-[0:52:21] little more intuition on and I I think there
+[0:52:19] little more intuition on and I I think
 [0:52:22] there someone was asking very pertinent
-[0:52:24] someone was asking very pertinent questions during the talk and which was
-[0:52:27] questions during the talk and which was really related to the role of blocking
-[0:52:30] really related to the role of blocking in improving the precision of
-[0:52:31] in improving the precision of experiments. Now,
-[0:52:32] experiments. Now, one thing which I'm not I may be missing
-[0:52:35] one thing which I'm not I may be missing this part and probably can explain even
-[0:52:38] this part and probably can explain even better is
+[0:52:24] questions during the talk and which was
+[0:52:27] really related to the role of blocking
+[0:52:30] in improving the precision of
+[0:52:31] experiments. Now,
+[0:52:32] one thing which I'm not I may be missing
+[0:52:35] this part and probably can explain even
 [0:52:39] better is whether the role of this prognostic
-[0:52:41] whether the role of this prognostic ability of covariates in the inferences
-[0:52:43] ability of covariates in the inferences completely accounted for. Uh so why I
-[0:52:46] completely accounted for. Uh so why I ask this is because
-[0:52:48] ask this is because we we know that at small samples
-[0:52:50] we we know that at small samples blocking can hurt and this is
-[0:52:52] blocking can hurt and this is incidentally one of the questions which
-[0:52:53] incidentally one of the questions which one of our
-[0:52:56] one of our one of the members of the audience
-[0:52:57] one of the members of the audience brought up.
-[0:52:58] brought up. So
+[0:52:41] ability of covariates in the inferences
+[0:52:43] completely accounted for. Uh so why I
+[0:52:46] ask this is because
+[0:52:48] we we know that at small samples
+[0:52:50] blocking can hurt and this is
+[0:52:52] incidentally one of the questions which
+[0:52:53] one of our
+[0:52:56] one of the members of the audience
+[0:52:57] brought up.
 [0:52:59] So Uh there is something which is called
-[0:53:01] Uh there is something which is called the inherent error, right? So in this
-[0:53:04] the inherent error, right? So in this equation
+[0:53:01] the inherent error, right? So in this
 [0:53:05] equation this for example this V tau tau beta one
-[0:53:07] this for example this V tau tau beta one beta zero that reflects something like
-[0:53:10] beta zero that reflects something like the inherent error. So if the covariates
-[0:53:13] the inherent error. So if the covariates did not play a role and this R squared
-[0:53:15] did not play a role and this R squared was zero then that was essentially the
-[0:53:16] was zero then that was essentially the contribution. But
-[0:53:19] contribution. But we know that
-[0:53:20] we know that in a in a finite sample at least like we
-[0:53:22] in a in a finite sample at least like we lose degrees of freedom when we block,
-[0:53:25] lose degrees of freedom when we block, right? So a randomized block experiment
-[0:53:28] right? So a randomized block experiment gives you less degrees of freedom let's
-[0:53:30] gives you less degrees of freedom let's say n minus p or something like that.
-[0:53:33] say n minus p or something like that. So so depending on the number of blocks,
-[0:53:35] So so depending on the number of blocks, right? And so that leads to a reduced
-[0:53:37] right? And so that leads to a reduced precision of estimation of this inherent
-[0:53:40] precision of estimation of this inherent error, right? So how do we really
-[0:53:43] error, right? So how do we really account for this? We assume that we
-[0:53:45] account for this? We assume that we understand that in this particular case
-[0:53:47] understand that in this particular case the asymptotics is is based on
-[0:53:51] the asymptotics is is based on is is conducted in a finite sample
-[0:53:52] is is conducted in a finite sample setup. But then
-[0:53:55] setup. But then it's a question of whether the number of
-[0:53:56] it's a question of whether the number of blocks also increase asymptotically or
-[0:53:59] blocks also increase asymptotically or they are considered fixed. And there
-[0:54:00] they are considered fixed. And there might be kind of an implicit connection
-[0:54:03] might be kind of an implicit connection to randomization. So, that's why I think
-[0:54:06] to randomization. So, that's why I think once again there's been a recent paper
-[0:54:08] once again there's been a recent paper by Nicole Pashley and Luke Miratrix
-[0:54:11] by Nicole Pashley and Luke Miratrix which essentially focuses on this aspect
-[0:54:13] which essentially focuses on this aspect whether blocking ever hurts. And they
-[0:54:14] whether blocking ever hurts. And they and they show
-[0:54:16] and they show that in a finite
-[0:54:18] that in a finite population scenario for for small
-[0:54:20] population scenario for for small samples it can
-[0:54:23] samples it can depending on the type of blocking which
-[0:54:25] depending on the type of blocking which you use, right? And what what they
-[0:54:27] you use, right? And what what they conclude is the type of blocking which
-[0:54:29] conclude is the type of blocking which they consider permits the number of
-[0:54:31] they consider permits the number of blocks to go to infinity as the sample
-[0:54:34] blocks to go to infinity as the sample size goes to infinity. And I think there
-[0:54:36] size goes to infinity. And I think there may be a connection here because in
-[0:54:37] may be a connection here because in rerandomization you are fixing A as
-[0:54:39] rerandomization you are fixing A as 0.001, right? So, that means intuitively
-[0:54:43] 0.001, right? So, that means intuitively you're thinking, right? The ratio of the
-[0:54:44] you're thinking, right? The ratio of the number of blocks and and the sample size
-[0:54:47] number of blocks and and the sample size probably you're trying to hold it
-[0:54:48] probably you're trying to hold it constant, right? So,
-[0:54:50] constant, right? So, is there a consequence of that
-[0:54:52] is there a consequence of that in terms of or is there a connection to
-[0:54:54] in terms of or is there a connection to this degrees of freedom thing? So, this
-[0:54:56] this degrees of freedom thing? So, this is something which I would like to get a
-[0:54:57] is something which I would like to get a little more insight on.
-[0:54:59] little more insight on. And whether we should be worried about
-[0:55:01] And whether we should be worried about the parsimony of these models and
-[0:55:03] the parsimony of these models and especially when the covariate dimension
-[0:55:05] especially when the covariate dimension is pretty large.
-[0:55:06] is pretty large. So, this is this is my only thought
-[0:55:08] So, this is this is my only thought where I would like to understand a
-[0:55:10] where I would like to understand a little more about how these things kind
-[0:55:12] little more about how these things kind of factor out in in the center
-[0:55:14] of factor out in in the center conclusions.
-[0:55:16] conclusions. Uh
+[0:53:07] beta zero that reflects something like
+[0:53:10] the inherent error. So if the covariates
+[0:53:13] did not play a role and this R squared
+[0:53:15] was zero then that was essentially the
+[0:53:16] contribution. But
+[0:53:19] we know that
+[0:53:20] in a in a finite sample at least like we
+[0:53:22] lose degrees of freedom when we block,
+[0:53:25] right? So a randomized block experiment
+[0:53:28] gives you less degrees of freedom let's
+[0:53:30] say n minus p or something like that.
+[0:53:33] So so depending on the number of blocks,
+[0:53:35] right? And so that leads to a reduced
+[0:53:37] precision of estimation of this inherent
+[0:53:40] error, right? So how do we really
+[0:53:43] account for this? We assume that we
+[0:53:45] understand that in this particular case
+[0:53:47] the asymptotics is is based on
+[0:53:51] is is conducted in a finite sample
+[0:53:52] setup. But then
+[0:53:55] it's a question of whether the number of
+[0:53:56] blocks also increase asymptotically or
+[0:53:59] they are considered fixed. And there
+[0:54:00] might be kind of an implicit connection
+[0:54:03] to randomization. So, that's why I think
+[0:54:06] once again there's been a recent paper
+[0:54:08] by Nicole Pashley and Luke Miratrix
+[0:54:11] which essentially focuses on this aspect
+[0:54:13] whether blocking ever hurts. And they
+[0:54:14] and they show
+[0:54:16] that in a finite
+[0:54:18] population scenario for for small
+[0:54:20] samples it can
+[0:54:23] depending on the type of blocking which
+[0:54:25] you use, right? And what what they
+[0:54:27] conclude is the type of blocking which
+[0:54:29] they consider permits the number of
+[0:54:31] blocks to go to infinity as the sample
+[0:54:34] size goes to infinity. And I think there
+[0:54:36] may be a connection here because in
+[0:54:37] rerandomization you are fixing A as
+[0:54:39] 0.001, right? So, that means intuitively
+[0:54:43] you're thinking, right? The ratio of the
+[0:54:44] number of blocks and and the sample size
+[0:54:47] probably you're trying to hold it
+[0:54:48] constant, right? So,
+[0:54:50] is there a consequence of that
+[0:54:52] in terms of or is there a connection to
+[0:54:54] this degrees of freedom thing? So, this
+[0:54:56] is something which I would like to get a
+[0:54:57] little more insight on.
+[0:54:59] And whether we should be worried about
+[0:55:01] the parsimony of these models and
+[0:55:03] especially when the covariate dimension
+[0:55:05] is pretty large.
+[0:55:06] So, this is this is my only thought
+[0:55:08] where I would like to understand a
+[0:55:10] little more about how these things kind
+[0:55:12] of factor out in in the center
+[0:55:14] conclusions.
 [0:55:17] Uh I see quite a few interesting potential
-[0:55:18] I see quite a few interesting potential extensions.
-[0:55:20] extensions. Actually, Shen Run and Peng has a very
-[0:55:21] Actually, Shen Run and Peng has a very nice paper about extending
-[0:55:24] nice paper about extending rerandomization to factorial designs.
-[0:55:26] rerandomization to factorial designs. So, obviously I can visualize
-[0:55:29] So, obviously I can visualize a straightforward extension of
-[0:55:31] a straightforward extension of covariate adjustment in factorial
-[0:55:33] covariate adjustment in factorial designs as well.
-[0:55:35] designs as well. Of Of in this case in a factorial
-[0:55:36] Of Of in this case in a factorial design, the number of interactions will
-[0:55:39] design, the number of interactions will be pretty large once again. So,
-[0:55:42] be pretty large once again. So, that might create a little bit of a
-[0:55:44] that might create a little bit of a problem when it comes to taking these
-[0:55:46] problem when it comes to taking these interaction terms. Uh one of the things
-[0:55:48] interaction terms. Uh one of the things which I really think is very pertinent
-[0:55:50] which I really think is very pertinent in terms of applications is uh
-[0:55:53] in terms of applications is uh handling nominal or ordinal response and
-[0:55:56] handling nominal or ordinal response and covariates uh
-[0:55:57] covariates uh uh
+[0:55:18] extensions.
+[0:55:20] Actually, Shen Run and Peng has a very
+[0:55:21] nice paper about extending
+[0:55:24] rerandomization to factorial designs.
+[0:55:26] So, obviously I can visualize
+[0:55:29] a straightforward extension of
+[0:55:31] covariate adjustment in factorial
+[0:55:33] designs as well.
+[0:55:35] Of Of in this case in a factorial
+[0:55:36] design, the number of interactions will
+[0:55:39] be pretty large once again. So,
+[0:55:42] that might create a little bit of a
+[0:55:44] problem when it comes to taking these
+[0:55:46] interaction terms. Uh one of the things
+[0:55:48] which I really think is very pertinent
+[0:55:50] in terms of applications is uh
+[0:55:53] handling nominal or ordinal response and
+[0:55:56] covariates uh
 [0:55:59] uh of course, in in re-randomization
-[0:56:01] of course, in in re-randomization everything works when you eventually
-[0:56:02] everything works when you eventually average and uh you know, in in terms of
-[0:56:05] average and uh you know, in in terms of asymptotic normality, uh
-[0:56:07] asymptotic normality, uh pretty much
-[0:56:09] pretty much everything works, but uh
-[0:56:11] everything works, but uh whether that would be really practically
-[0:56:13] whether that would be really practically useful when we think about uh covariates
-[0:56:16] useful when we think about uh covariates which are ordinal or response which is
-[0:56:19] which are ordinal or response which is ordinal. And I'm sure uh when we talk
-[0:56:22] ordinal. And I'm sure uh when we talk about the large P cases,
-[0:56:24] about the large P cases, uh there would be people who would be
-[0:56:26] uh there would be people who would be interested in bringing in some sort of
-[0:56:28] interested in bringing in some sort of regularization when it comes to
-[0:56:29] regularization when it comes to covariate adjustment. So,
-[0:56:31] covariate adjustment. So, uh that that might be something to think
-[0:56:33] uh that that might be something to think about. Uh so, that's that's all I think.
-[0:56:36] about. Uh so, that's that's all I think. Once again, thanks Paul and and Shinran
-[0:56:38] Once again, thanks Paul and and Shinran for writing an excellent paper and I'm
-[0:56:40] for writing an excellent paper and I'm I'm really happy to uh read this and
-[0:56:42] I'm really happy to uh read this and also to have this opportunity to to talk
-[0:56:45] also to have this opportunity to to talk about it. Thank you very much.
-[0:56:48] about it. Thank you very much. Uh thanks for the greatest discussion,
-[0:56:50] Uh thanks for the greatest discussion, Tirthankar. Uh Peng, do you want to
-[0:56:52] Tirthankar. Uh Peng, do you want to respond quickly?
+[0:56:01] everything works when you eventually
+[0:56:02] average and uh you know, in in terms of
+[0:56:05] asymptotic normality, uh
+[0:56:07] pretty much
+[0:56:09] everything works, but uh
+[0:56:11] whether that would be really practically
+[0:56:13] useful when we think about uh covariates
+[0:56:16] which are ordinal or response which is
+[0:56:19] ordinal. And I'm sure uh when we talk
+[0:56:22] about the large P cases,
+[0:56:24] uh there would be people who would be
+[0:56:26] interested in bringing in some sort of
+[0:56:28] regularization when it comes to
+[0:56:29] covariate adjustment. So,
+[0:56:31] uh that that might be something to think
+[0:56:33] about. Uh so, that's that's all I think.
+[0:56:36] Once again, thanks Paul and and Shinran
+[0:56:38] for writing an excellent paper and I'm
+[0:56:40] I'm really happy to uh read this and
+[0:56:42] also to have this opportunity to to talk
+[0:56:45] about it. Thank you very much.
+[0:56:48] Uh thanks for the greatest discussion,
+[0:56:50] Tirthankar. Uh Peng, do you want to
+[0:56:52] respond quickly?
 [0:57:01] Peng? Oh, yes. Uh Tirthankar, can you still
-[0:57:04] Oh, yes. Uh Tirthankar, can you still open your slides? I want to respond to
-[0:57:06] open your slides? I want to respond to your page five
-[0:57:08] your page five and page six.
+[0:57:04] open your slides? I want to respond to
+[0:57:06] your page five
+[0:57:08] and page six.
 [0:57:31] Yeah, the first comment was um the relationship between uh re-randomization
-[0:57:33] relationship between uh re-randomization and blocking. The actual one Shiro and I
-[0:57:35] and blocking. The actual one Shiro and I were writing this paper re-
-[0:57:38] were writing this paper re- re-randomization and regression
-[0:57:39] re-randomization and regression adjustment, we were imagining a second
-[0:57:41] adjustment, we were imagining a second paper called block stratification and
-[0:57:43] paper called block stratification and post stratification. So, that's on the
-[0:57:45] post stratification. So, that's on the way.
+[0:57:33] and blocking. The actual one Shiro and I
+[0:57:35] were writing this paper re-
+[0:57:38] re-randomization and regression
+[0:57:39] adjustment, we were imagining a second
+[0:57:41] paper called block stratification and
+[0:57:43] post stratification. So, that's on the
 [0:57:46] way. There are some serious similar to to the
-[0:57:49] There are some serious similar to to the story here.
-[0:57:50] story here. As the total number of saying in
-[0:57:52] As the total number of saying in Fisher's classical work, he already
-[0:57:53] Fisher's classical work, he already pointed out although blocking is an
-[0:57:56] pointed out although blocking is an intuitive idea to improve efficiency, we
-[0:57:58] intuitive idea to improve efficiency, we cannot go to extreme. For example, if we
-[0:58:01] cannot go to extreme. For example, if we keep on blocking on the units, in the
-[0:58:03] keep on blocking on the units, in the most extreme case, we have a matched
-[0:58:05] most extreme case, we have a matched pair design. Within each Within each
-[0:58:07] pair design. Within each Within each block, we have only one treated unit,
-[0:58:09] block, we have only one treated unit, only one control unit. That's the most
-[0:58:11] only one control unit. That's the most extreme case. And if we do theory to
-[0:58:13] extreme case. And if we do theory to compare
+[0:57:49] story here.
+[0:57:50] As the total number of saying in
+[0:57:52] Fisher's classical work, he already
+[0:57:53] pointed out although blocking is an
+[0:57:56] intuitive idea to improve efficiency, we
+[0:57:58] cannot go to extreme. For example, if we
+[0:58:01] keep on blocking on the units, in the
+[0:58:03] most extreme case, we have a matched
+[0:58:05] pair design. Within each Within each
+[0:58:07] block, we have only one treated unit,
+[0:58:09] only one control unit. That's the most
+[0:58:11] extreme case. And if we do theory to
 [0:58:15] compare complete randomization and a matched
-[0:58:16] complete randomization and a matched pair, there's no guarantee matched pair
-[0:58:18] pair, there's no guarantee matched pair is always better. It's better under some
-[0:58:20] is always better. It's better under some conditions. If the pairing indicator is
-[0:58:23] conditions. If the pairing indicator is very predictive to the outcomes. But but
-[0:58:25] very predictive to the outcomes. But but but that that the mathematics not very
-[0:58:27] but that that the mathematics not very elegant. There there is a paper written
-[0:58:29] elegant. There there is a paper written by Kosuke in my Quantify this possible
-[0:58:32] by Kosuke in my Quantify this possible gain. But that's that tells us something
-[0:58:34] gain. But that's that tells us something in the middle. We can
-[0:58:36] in the middle. We can So so if if in the limit, there's no
-[0:58:38] So so if if in the limit, there's no guarantee efficiency. So, when should we
-[0:58:40] guarantee efficiency. So, when should we stop? How many blocks should we choose?
-[0:58:43] stop? How many blocks should we choose? For me, that's a very difficult question
-[0:58:45] For me, that's a very difficult question because
+[0:58:16] pair, there's no guarantee matched pair
+[0:58:18] is always better. It's better under some
+[0:58:20] conditions. If the pairing indicator is
+[0:58:23] very predictive to the outcomes. But but
+[0:58:25] but that that the mathematics not very
+[0:58:27] elegant. There there is a paper written
+[0:58:29] by Kosuke in my Quantify this possible
+[0:58:32] gain. But that's that tells us something
+[0:58:34] in the middle. We can
+[0:58:36] So so if if in the limit, there's no
+[0:58:38] guarantee efficiency. So, when should we
+[0:58:40] stop? How many blocks should we choose?
+[0:58:43] For me, that's a very difficult question
 [0:58:46] because uh in the design state, we do not know
-[0:58:48] uh in the design state, we do not know the outcome model. We don't know the
-[0:58:49] the outcome model. We don't know the outcome. So, how can we make a decision?
-[0:58:51] outcome. So, how can we make a decision? For example, if the covariates are
-[0:58:53] For example, if the covariates are completely noise,
-[0:58:55] completely noise, no matter what we do,
-[0:58:57] no matter what we do, um in the blocking stage, we are hurting
-[0:58:59] um in the blocking stage, we are hurting the finite sample uh properties. So, all
-[0:59:01] the finite sample uh properties. So, all the theory here are asymptotics. So, in
-[0:59:04] the theory here are asymptotics. So, in finite sample, Fisher proposed some uh
-[0:59:07] finite sample, Fisher proposed some uh correction for degrees of freedom, but
-[0:59:09] correction for degrees of freedom, but here is uh a little unclear to me how do
-[0:59:11] here is uh a little unclear to me how do we do degrees of freedom correction for
-[0:59:13] we do degrees of freedom correction for uh re-randomization.
-[0:59:15] uh re-randomization. But it's definitely a very interesting
-[0:59:17] But it's definitely a very interesting uh question to look into. I I know uh
-[0:59:20] uh question to look into. I I know uh this Miratrix paper. Yeah. I think we
-[0:59:23] this Miratrix paper. Yeah. I think we don't have very clear answer now. I
-[0:59:25] don't have very clear answer now. I mean, even from Fisher's
-[0:59:27] mean, even from Fisher's statistics, statistical method of a
-[0:59:29] statistics, statistical method of a research workers, he has some
-[0:59:31] research workers, he has some heuristics, but I don't think there
-[0:59:33] heuristics, but I don't think there there is any rigorous theory about
-[0:59:35] there is any rigorous theory about choosing the number of blocks.
-[0:59:37] choosing the number of blocks. And the next question is uh
-[0:59:41] And the next question is uh high dimension. Actually, there are some
-[0:59:42] high dimension. Actually, there are some already some theoretical papers on high
-[0:59:45] already some theoretical papers on high dimensional case, like JS and Bing Yu
-[0:59:47] dimensional case, like JS and Bing Yu has a
+[0:58:48] the outcome model. We don't know the
+[0:58:49] outcome. So, how can we make a decision?
+[0:58:51] For example, if the covariates are
+[0:58:53] completely noise,
+[0:58:55] no matter what we do,
+[0:58:57] um in the blocking stage, we are hurting
+[0:58:59] the finite sample uh properties. So, all
+[0:59:01] the theory here are asymptotics. So, in
+[0:59:04] finite sample, Fisher proposed some uh
+[0:59:07] correction for degrees of freedom, but
+[0:59:09] here is uh a little unclear to me how do
+[0:59:11] we do degrees of freedom correction for
+[0:59:13] uh re-randomization.
+[0:59:15] But it's definitely a very interesting
+[0:59:17] uh question to look into. I I know uh
+[0:59:20] this Miratrix paper. Yeah. I think we
+[0:59:23] don't have very clear answer now. I
+[0:59:25] mean, even from Fisher's
+[0:59:27] statistics, statistical method of a
+[0:59:29] research workers, he has some
+[0:59:31] heuristics, but I don't think there
+[0:59:33] there is any rigorous theory about
+[0:59:35] choosing the number of blocks.
+[0:59:37] And the next question is uh
+[0:59:41] high dimension. Actually, there are some
+[0:59:42] already some theoretical papers on high
+[0:59:45] dimensional case, like JS and Bing Yu
 [0:59:49] has a PNAS paper replacing Winsorized
-[0:59:52] PNAS paper replacing Winsorized regression
-[0:59:53] regression estimator, replacing least squares by
-[0:59:55] estimator, replacing least squares by lasso. And they have very nice theory
-[0:59:58] lasso. And they have very nice theory analyzing this lasso procedure. And
-[1:00:00] analyzing this lasso procedure. And there are conjectures
-[1:00:02] there are conjectures we can extend it here. But it's not that
-[1:00:05] we can extend it here. But it's not that obvious. Again, in the design stage, you
-[1:00:07] obvious. Again, in the design stage, you have many covariates. You don't have
-[1:00:09] have many covariates. You don't have outcome response. You don't have a lasso
-[1:00:11] outcome response. You don't have a lasso to run. So, how do you select those
-[1:00:13] to run. So, how do you select those covariates? In the design in the
-[1:00:15] covariates? In the design in the definition of Mahalanobis distance, it's
-[1:00:17] definition of Mahalanobis distance, it's degenerate. That's why there's another
-[1:00:20] degenerate. That's why there's another recent paper by
-[1:00:22] recent paper by Zack Branson from
-[1:00:24] Zack Branson from CMU called a ridge re-randomization. In
-[1:00:27] CMU called a ridge re-randomization. In the design stage, we change the
-[1:00:29] the design stage, we change the Mahalanobis distance
-[1:00:31] Mahalanobis distance to to to be a penalized version. It's
-[1:00:33] to to to be a penalized version. It's penalized the covariance matrix. It's
-[1:00:36] penalized the covariance matrix. It's called a ridge re-randomization. So,
-[1:00:38] called a ridge re-randomization. So, that may be a
-[1:00:39] that may be a a way to go.
-[1:00:42] a way to go. And yes, we can extend this to factorial
-[1:00:45] And yes, we can extend this to factorial design and other outcomes. And the
-[1:00:47] design and other outcomes. And the Guillaume and Kevin from Stanford has a
-[1:00:50] Guillaume and Kevin from Stanford has a paper on binary outcome. I think that's
-[1:00:52] paper on binary outcome. I think that's a direction to go. How to deal with
-[1:00:55] a direction to go. How to deal with generalized linear models.
-[1:00:57] generalized linear models. These are my response to your comments.
-[1:01:01] These are my response to your comments. Thank you so much. Yeah, that's very
-[1:01:03] Thank you so much. Yeah, that's very very helpful.
-[1:01:05] very helpful. Fantastic. Thanks, Peng. I think we now
-[1:01:09] Fantastic. Thanks, Peng. I think we now it's now time to slowly wrap up. So,
-[1:01:11] it's now time to slowly wrap up. So, first of all,
-[1:01:13] first of all, yeah, thanks, Peng, for the for the
-[1:01:15] yeah, thanks, Peng, for the for the great presentation. Thanks to thank our
-[1:01:17] great presentation. Thanks to thank our for a very interesting discussion. And
-[1:01:20] for a very interesting discussion. And thanks Jinran for for helping out in
-[1:01:23] thanks Jinran for for helping out in Q&amp;A.
-[1:01:24] Q&amp;A. Um so next time we're going to do things
-[1:01:27] Um so next time we're going to do things a little bit differently. We will have
-[1:01:28] a little bit differently. We will have an, uh, interview. So this will be the
-[1:01:30] an, uh, interview. So this will be the first one in, uh, yeah, in a series. Uh,
-[1:01:33] first one in, uh, yeah, in a series. Uh, we're going to start with interviewing,
-[1:01:35] we're going to start with interviewing, uh, Esther Duflo who has done some, uh,
-[1:01:37] uh, Esther Duflo who has done some, uh, great work running experiments to
-[1:01:39] great work running experiments to alleviate
+[0:59:52] regression
+[0:59:53] estimator, replacing least squares by
+[0:59:55] lasso. And they have very nice theory
+[0:59:58] analyzing this lasso procedure. And
+[1:00:00] there are conjectures
+[1:00:02] we can extend it here. But it's not that
+[1:00:05] obvious. Again, in the design stage, you
+[1:00:07] have many covariates. You don't have
+[1:00:09] outcome response. You don't have a lasso
+[1:00:11] to run. So, how do you select those
+[1:00:13] covariates? In the design in the
+[1:00:15] definition of Mahalanobis distance, it's
+[1:00:17] degenerate. That's why there's another
+[1:00:20] recent paper by
+[1:00:22] Zack Branson from
+[1:00:24] CMU called a ridge re-randomization. In
+[1:00:27] the design stage, we change the
+[1:00:29] Mahalanobis distance
+[1:00:31] to to to be a penalized version. It's
+[1:00:33] penalized the covariance matrix. It's
+[1:00:36] called a ridge re-randomization. So,
+[1:00:38] that may be a
+[1:00:39] a way to go.
+[1:00:42] And yes, we can extend this to factorial
+[1:00:45] design and other outcomes. And the
+[1:00:47] Guillaume and Kevin from Stanford has a
+[1:00:50] paper on binary outcome. I think that's
+[1:00:52] a direction to go. How to deal with
+[1:00:55] generalized linear models.
+[1:00:57] These are my response to your comments.
+[1:01:01] Thank you so much. Yeah, that's very
+[1:01:03] very helpful.
+[1:01:05] Fantastic. Thanks, Peng. I think we now
+[1:01:09] it's now time to slowly wrap up. So,
+[1:01:11] first of all,
+[1:01:13] yeah, thanks, Peng, for the for the
+[1:01:15] great presentation. Thanks to thank our
+[1:01:17] for a very interesting discussion. And
+[1:01:20] thanks Jinran for for helping out in
+[1:01:24] Q&A. Um so next time we're going to do things
+[1:01:27] a little bit differently. We will have
+[1:01:28] an, uh, interview. So this will be the
+[1:01:30] first one in, uh, yeah, in a series. Uh,
+[1:01:33] we're going to start with interviewing,
+[1:01:35] uh, Esther Duflo who has done some, uh,
+[1:01:37] great work running experiments to
 [1:01:40] alleviate poverty around the world.
-[1:01:42] poverty around the world. Uh, she recently received the Nobel
-[1:01:44] Uh, she recently received the Nobel Prize for that jointly with some other
-[1:01:45] Prize for that jointly with some other co-workers. So we're very excited to
-[1:01:47] co-workers. So we're very excited to interview her. That interview will be
-[1:01:49] interview her. That interview will be next Monday. So we'll have a dif-
-[1:01:51] next Monday. So we'll have a dif- slightly different time.
-[1:01:53] slightly different time. And we will soon, uh, send out an email
-[1:01:55] And we will soon, uh, send out an email to, uh, ask for questions, uh, that so
-[1:01:58] to, uh, ask for questions, uh, that so you can contribute questions that we
-[1:01:59] you can contribute questions that we will ask during that interview.
-[1:02:01] will ask during that interview. Um, until then, uh, thanks all for
-[1:02:03] Um, until then, uh, thanks all for joining and, uh, hope to see you all
-[1:02:05] joining and, uh, hope to see you all next week.
-[1:02:06] next week. Thanks.
+[1:01:42] Uh, she recently received the Nobel
+[1:01:44] Prize for that jointly with some other
+[1:01:45] co-workers. So we're very excited to
+[1:01:47] interview her. That interview will be
+[1:01:49] next Monday. So we'll have a dif-
+[1:01:51] slightly different time.
+[1:01:53] And we will soon, uh, send out an email
+[1:01:55] to, uh, ask for questions, uh, that so
+[1:01:58] you can contribute questions that we
+[1:01:59] will ask during that interview.
+[1:02:01] Um, until then, uh, thanks all for
+[1:02:03] joining and, uh, hope to see you all
+[1:02:05] next week.
+[1:02:06] Thanks.

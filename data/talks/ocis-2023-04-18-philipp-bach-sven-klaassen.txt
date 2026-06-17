@@ -1,1640 +1,1543 @@
 [0:00:05] Hi everyone. Welcome to the online causal inference seminar.
-[0:00:07] causal inference seminar. Um, nice to have you here. So, today we
-[0:00:09] Um, nice to have you here. So, today we have a tutorial uh um
-[0:00:11] have a tutorial uh um from Philip Bach and Sven Klaassen from
-[0:00:14] from Philip Bach and Sven Klaassen from University of Hamburg uh on double ML,
-[0:00:17] University of Hamburg uh on double ML, uh state-of-the-art framework for double
-[0:00:19] uh state-of-the-art framework for double machine learning in Python and R. We
-[0:00:22] machine learning in Python and R. We look forward to getting a lot of
-[0:00:23] look forward to getting a lot of questions from you throughout the
-[0:00:24] questions from you throughout the seminar. So, because it's a tutorial,
-[0:00:26] seminar. So, because it's a tutorial, there will be no discussion, so the full
-[0:00:28] there will be no discussion, so the full hour is dedicated to the tutorial. So,
-[0:00:30] hour is dedicated to the tutorial. So, please feel free to ask questions. I'll
-[0:00:33] please feel free to ask questions. I'll now pass it on to you who is handling
-[0:00:35] now pass it on to you who is handling the questions during the talk. So, uh
-[0:00:37] the questions during the talk. So, uh she will explain what you can do.
-[0:00:39] she will explain what you can do. Thank you, Emma. So, as usual, please
-[0:00:41] Thank you, Emma. So, as usual, please submit your questions through the Q&amp;A.
-[0:00:44] submit your questions through the Q&amp;A. Um, and uh it helps us to
-[0:00:47] Um, and uh it helps us to uh monitor the questions more easily and
-[0:00:49] uh monitor the questions more easily and keep track of it. If you haven't used it
-[0:00:51] keep track of it. If you haven't used it before, it is a button at the bottom of
-[0:00:54] before, it is a button at the bottom of the Zoom window. Um, please submit your
-[0:00:57] the Zoom window. Um, please submit your question as soon as you have them, and
-[0:01:01] question as soon as you have them, and uh I think that's it. Um, Philip, please
-[0:01:04] uh I think that's it. Um, Philip, please feel free to take over.
-[0:01:06] feel free to take over. Okay.
+[0:00:07] Um, nice to have you here. So, today we
+[0:00:09] have a tutorial uh um
+[0:00:11] from Philip Bach and Sven Klaassen from
+[0:00:14] University of Hamburg uh on double ML,
+[0:00:17] uh state-of-the-art framework for double
+[0:00:19] machine learning in Python and R. We
+[0:00:22] look forward to getting a lot of
+[0:00:23] questions from you throughout the
+[0:00:24] seminar. So, because it's a tutorial,
+[0:00:26] there will be no discussion, so the full
+[0:00:28] hour is dedicated to the tutorial. So,
+[0:00:30] please feel free to ask questions. I'll
+[0:00:33] now pass it on to you who is handling
+[0:00:35] the questions during the talk. So, uh
+[0:00:37] she will explain what you can do.
+[0:00:39] Thank you, Emma. So, as usual, please
+[0:00:41] submit your questions through the Q&A.
+[0:00:44] Um, and uh it helps us to
+[0:00:47] uh monitor the questions more easily and
+[0:00:49] keep track of it. If you haven't used it
+[0:00:51] before, it is a button at the bottom of
+[0:00:54] the Zoom window. Um, please submit your
+[0:00:57] question as soon as you have them, and
+[0:01:01] uh I think that's it. Um, Philip, please
+[0:01:04] feel free to take over.
 [0:01:07] Okay. Uh I think you have to stop sharing the
-[0:01:08] Uh I think you have to stop sharing the screen. Yes.
+[0:01:08] screen. Yes.
 [0:01:17] Can you see my slides? Yes, we can. Okay, great. So,
-[0:01:21] Yes, we can. Okay, great. So, uh thank you first of all uh for the
-[0:01:23] uh thank you first of all uh for the organizers of the seminar for the kind
-[0:01:26] organizers of the seminar for the kind invitation that we have the opportunity
-[0:01:28] invitation that we have the opportunity to present our project here.
-[0:01:31] to present our project here. Um, maybe one note and also welcome from
-[0:01:34] Um, maybe one note and also welcome from my side to this uh talk. So, today my
-[0:01:37] my side to this uh talk. So, today my colleague Sven and I we will present
-[0:01:39] colleague Sven and I we will present this joint project which is uh joint
-[0:01:42] this joint project which is uh joint work with Victor Chernozhukov, Malte
-[0:01:43] work with Victor Chernozhukov, Malte Kourtz, and uh Martin Spindler
-[0:01:47] Kourtz, and uh Martin Spindler um uh on the double ML package for
-[0:01:49] um uh on the double ML package for Python and R.
-[0:01:51] Python and R. Um,
+[0:01:21] uh thank you first of all uh for the
+[0:01:23] organizers of the seminar for the kind
+[0:01:26] invitation that we have the opportunity
+[0:01:28] to present our project here.
+[0:01:31] Um, maybe one note and also welcome from
+[0:01:34] my side to this uh talk. So, today my
+[0:01:37] colleague Sven and I we will present
+[0:01:39] this joint project which is uh joint
+[0:01:42] work with Victor Chernozhukov, Malte
+[0:01:43] Kourtz, and uh Martin Spindler
+[0:01:47] um uh on the double ML package for
+[0:01:49] Python and R.
 [0:01:52] Um, maybe one note ahead uh for the
-[0:01:56] maybe one note ahead uh for the structure of the talk. As Emma said,
-[0:01:58] structure of the talk. As Emma said, it's kind of a tutorial, so what we are
-[0:02:00] it's kind of a tutorial, so what we are going to do is we will
-[0:02:02] going to do is we will uh kind of focus on the implementation
-[0:02:04] uh kind of focus on the implementation and try to guide you through our like
-[0:02:06] and try to guide you through our like the interface, how we can use double
-[0:02:09] the interface, how we can use double machine learning. And for that, we are
-[0:02:10] machine learning. And for that, we are going to introduce the double machine
-[0:02:12] going to introduce the double machine learning approach as the theoretical
-[0:02:14] learning approach as the theoretical framework, but we will do it in a very
-[0:02:15] framework, but we will do it in a very general way. So, we will not kind of
-[0:02:17] general way. So, we will not kind of cover the entire literature on
-[0:02:20] cover the entire literature on post-regularization inference and all
-[0:02:22] post-regularization inference and all that stuff. So, we kind of we are brief
-[0:02:23] that stuff. So, we kind of we are brief on this,
+[0:01:56] structure of the talk. As Emma said,
+[0:01:58] it's kind of a tutorial, so what we are
+[0:02:00] going to do is we will
+[0:02:02] uh kind of focus on the implementation
+[0:02:04] and try to guide you through our like
+[0:02:06] the interface, how we can use double
+[0:02:09] machine learning. And for that, we are
+[0:02:10] going to introduce the double machine
+[0:02:12] learning approach as the theoretical
+[0:02:14] framework, but we will do it in a very
+[0:02:15] general way. So, we will not kind of
+[0:02:17] cover the entire literature on
+[0:02:20] post-regularization inference and all
+[0:02:22] that stuff. So, we kind of we are brief
 [0:02:25] on this, but we have reference in the paper where
-[0:02:26] but we have reference in the paper where you can uh in our presentation where you
-[0:02:28] you can uh in our presentation where you can kind of look up the details.
-[0:02:31] can kind of look up the details. Okay. So, um
-[0:02:34] Okay. So, um I think you should have access to the
-[0:02:36] I think you should have access to the slides, so you can follow them. And
-[0:02:37] slides, so you can follow them. And also, when the code examples come, you
-[0:02:38] also, when the code examples come, you can copy-paste code and run it
-[0:02:40] can copy-paste code and run it immediately in your Python or R console.
-[0:02:43] immediately in your Python or R console. Um, also if you have questions, feel
-[0:02:45] Um, also if you have questions, feel free to post them
-[0:02:47] free to post them uh as we present. We try to uh
-[0:02:50] uh as we present. We try to uh answer them immediately or maybe discuss
-[0:02:52] answer them immediately or maybe discuss them at the end or in between as as we
-[0:02:54] them at the end or in between as as we go.
+[0:02:26] you can uh in our presentation where you
+[0:02:28] can kind of look up the details.
+[0:02:31] Okay. So, um
+[0:02:34] I think you should have access to the
+[0:02:36] slides, so you can follow them. And
+[0:02:37] also, when the code examples come, you
+[0:02:38] can copy-paste code and run it
+[0:02:40] immediately in your Python or R console.
+[0:02:43] Um, also if you have questions, feel
+[0:02:45] free to post them
+[0:02:47] uh as we present. We try to uh
+[0:02:50] answer them immediately or maybe discuss
+[0:02:52] them at the end or in between as as we
 [0:02:56] go. Okay. So, let me just start with a brief
-[0:02:58] Okay. So, let me just start with a brief motivation. So, um double ML is
-[0:03:00] motivation. So, um double ML is basically library for causal machine
-[0:03:02] basically library for causal machine learning. So, maybe it's good to start
-[0:03:05] learning. So, maybe it's good to start with a basic motivation of causal
-[0:03:06] with a basic motivation of causal machine learning. So, over the last
-[0:03:07] machine learning. So, over the last decades, there has been tremendous
-[0:03:10] decades, there has been tremendous innovations and improvements in the
-[0:03:13] innovations and improvements in the machine learning uh literature, mainly
-[0:03:15] machine learning uh literature, mainly in terms of predictive
-[0:03:17] in terms of predictive uh
+[0:02:58] motivation. So, um double ML is
+[0:03:00] basically library for causal machine
+[0:03:02] learning. So, maybe it's good to start
+[0:03:05] with a basic motivation of causal
+[0:03:06] machine learning. So, over the last
+[0:03:07] decades, there has been tremendous
+[0:03:10] innovations and improvements in the
+[0:03:13] machine learning uh literature, mainly
+[0:03:15] in terms of predictive
 [0:03:18] uh predictive tools. Like you have you
-[0:03:21] predictive tools. Like you have you typically uh metrics X or some data X
-[0:03:24] typically uh metrics X or some data X and you want to
-[0:03:26] and you want to try to get a very accurate prediction on
-[0:03:28] try to get a very accurate prediction on your outcome variable Y.
-[0:03:30] your outcome variable Y. And relationship of these kind of
-[0:03:32] And relationship of these kind of variables is complex, so there has been
-[0:03:36] variables is complex, so there has been uh new approaches theoretically and also
-[0:03:38] uh new approaches theoretically and also like practically from a from software
-[0:03:40] like practically from a from software perspective, there have been tools
-[0:03:42] perspective, there have been tools developed in order to tackle this
-[0:03:44] developed in order to tackle this predictive challenge.
-[0:03:46] predictive challenge. On the other hand,
-[0:03:48] On the other hand, uh there's literature on causal
-[0:03:49] uh there's literature on causal inference uh pioneered by work by Pearl,
-[0:03:52] inference uh pioneered by work by Pearl, Rubin, also Guido Imbens who
-[0:03:55] Rubin, also Guido Imbens who uh was awarded the Nobel Prize 2 years
-[0:03:57] uh was awarded the Nobel Prize 2 years ago.
+[0:03:21] typically uh metrics X or some data X
+[0:03:24] and you want to
+[0:03:26] try to get a very accurate prediction on
+[0:03:28] your outcome variable Y.
+[0:03:30] And relationship of these kind of
+[0:03:32] variables is complex, so there has been
+[0:03:36] uh new approaches theoretically and also
+[0:03:38] like practically from a from software
+[0:03:40] perspective, there have been tools
+[0:03:42] developed in order to tackle this
+[0:03:44] predictive challenge.
+[0:03:46] On the other hand,
+[0:03:48] uh there's literature on causal
+[0:03:49] inference uh pioneered by work by Pearl,
+[0:03:52] Rubin, also Guido Imbens who
+[0:03:55] uh was awarded the Nobel Prize 2 years
 [0:03:58] ago. So, the causal inference literature is
-[0:04:00] So, the causal inference literature is more concerned
-[0:04:02] more concerned with uh assessing causal relationships
-[0:04:04] with uh assessing causal relationships in the data.
-[0:04:05] in the data. So, we kind of move beyond the
-[0:04:08] So, we kind of move beyond the correlation or association-based
-[0:04:10] correlation or association-based prediction, but rather want to
-[0:04:11] prediction, but rather want to understand the causal impact of one
-[0:04:14] understand the causal impact of one variable on another, for example.
-[0:04:18] variable on another, for example. So, causal machine learning is kind of
-[0:04:19] So, causal machine learning is kind of the intersection of these two
-[0:04:21] the intersection of these two literatures. So, you want to kind of
-[0:04:24] literatures. So, you want to kind of ex-
+[0:04:00] more concerned
+[0:04:02] with uh assessing causal relationships
+[0:04:04] in the data.
+[0:04:05] So, we kind of move beyond the
+[0:04:08] correlation or association-based
+[0:04:10] prediction, but rather want to
+[0:04:11] understand the causal impact of one
+[0:04:14] variable on another, for example.
+[0:04:18] So, causal machine learning is kind of
+[0:04:19] the intersection of these two
+[0:04:21] literatures. So, you want to kind of
 [0:04:25] ex- uh exploit the great performance of
-[0:04:26] uh exploit the great performance of machine learning predictive tools, but
-[0:04:28] machine learning predictive tools, but also
+[0:04:26] machine learning predictive tools, but
 [0:04:29] also uh understand causal relationships. So,
-[0:04:32] uh understand causal relationships. So, we will present our library double ML
-[0:04:35] we will present our library double ML which is an implementation of this
-[0:04:36] which is an implementation of this so-called double or debiased machine
-[0:04:38] so-called double or debiased machine learning approach.
-[0:04:40] learning approach. It's one approach for causal machine
-[0:04:41] It's one approach for causal machine learning, so there are also other
-[0:04:43] learning, so there are also other approaches how to tackle kind of this
-[0:04:45] approaches how to tackle kind of this challenge.
-[0:04:47] challenge. Um, and we chose to implement double
-[0:04:50] Um, and we chose to implement double machine learning because it is a very
-[0:04:51] machine learning because it is a very general framework for causal inference
-[0:04:54] general framework for causal inference and estimation on causal parameters,
-[0:04:56] and estimation on causal parameters, where we base estimation of some parts
-[0:04:58] where we base estimation of some parts of our causal models on machine
-[0:05:00] of our causal models on machine learning.
+[0:04:32] we will present our library double ML
+[0:04:35] which is an implementation of this
+[0:04:36] so-called double or debiased machine
+[0:04:38] learning approach.
+[0:04:40] It's one approach for causal machine
+[0:04:41] learning, so there are also other
+[0:04:43] approaches how to tackle kind of this
+[0:04:45] challenge.
+[0:04:47] Um, and we chose to implement double
+[0:04:50] machine learning because it is a very
+[0:04:51] general framework for causal inference
+[0:04:54] and estimation on causal parameters,
+[0:04:56] where we base estimation of some parts
+[0:04:58] of our causal models on machine
 [0:05:01] learning. It is a rich literature, and uh there
-[0:05:04] It is a rich literature, and uh there has been one paper by Victor
-[0:05:06] has been one paper by Victor Chernozhukov and co-authors in 2018 in
-[0:05:08] Chernozhukov and co-authors in 2018 in the Econometrics Journal
-[0:05:09] the Econometrics Journal that
+[0:05:04] has been one paper by Victor
+[0:05:06] Chernozhukov and co-authors in 2018 in
+[0:05:08] the Econometrics Journal
+[0:05:09] that
 [0:05:15] summarizes and kind of sets up the approach, and it's very related to our
-[0:05:17] approach, and it's very related to our implementation as you will see.
-[0:05:20] implementation as you will see. Double machine learning kind of combines
-[0:05:22] Double machine learning kind of combines the strength of machine learning and
-[0:05:24] the strength of machine learning and econometrics as I said before. So, from
-[0:05:26] econometrics as I said before. So, from practical perspective, you have the
-[0:05:29] practical perspective, you have the software implementations on predictive
-[0:05:30] software implementations on predictive algorithms like you most of you probably
-[0:05:34] algorithms like you most of you probably know scikit-learn and implementations of
-[0:05:37] know scikit-learn and implementations of lasso estimators. There are tree-based
-[0:05:39] lasso estimators. There are tree-based methods like random forest, gradient
-[0:05:42] methods like random forest, gradient boosting, and all that stuff. They are
-[0:05:43] boosting, and all that stuff. They are kind of tools to tackle the predictive
-[0:05:45] kind of tools to tackle the predictive challenge. On the other hand, there is a
-[0:05:47] challenge. On the other hand, there is a very rich and mature literature on
-[0:05:49] very rich and mature literature on causal inference in the statistics and
-[0:05:52] causal inference in the statistics and also econometrics
-[0:05:54] also econometrics literature.
-[0:05:56] literature. So, there you have theoretical work on
-[0:05:58] So, there you have theoretical work on identification of causal effect, on
-[0:06:01] identification of causal effect, on analysis of asymptotic properties of
-[0:06:03] analysis of asymptotic properties of estimators, and we can use this in a use
-[0:06:06] estimators, and we can use this in a use case in empirical analysis in terms of
-[0:06:09] case in empirical analysis in terms of applying a hypothesis test and also
-[0:06:12] applying a hypothesis test and also estimation of confidence intervals,
-[0:06:14] estimation of confidence intervals, getting point intervals, point
-[0:06:15] getting point intervals, point estimates, and all that stuff.
-[0:06:17] estimates, and all that stuff. So, double machine as I said is one
-[0:06:19] So, double machine as I said is one approach for causal analysis based on
-[0:06:22] approach for causal analysis based on machine learning,
-[0:06:24] machine learning, and you can expect it
-[0:06:26] and you can expect it like uh to output a point estimate
-[0:06:29] like uh to output a point estimate together with some uncertainty
-[0:06:31] together with some uncertainty um assessment like uh standard errors,
-[0:06:35] um assessment like uh standard errors, uh t-statistics, confidence intervals,
-[0:06:37] uh t-statistics, confidence intervals, and all that.
+[0:05:17] implementation as you will see.
+[0:05:20] Double machine learning kind of combines
+[0:05:22] the strength of machine learning and
+[0:05:24] econometrics as I said before. So, from
+[0:05:26] practical perspective, you have the
+[0:05:29] software implementations on predictive
+[0:05:30] algorithms like you most of you probably
+[0:05:34] know scikit-learn and implementations of
+[0:05:37] lasso estimators. There are tree-based
+[0:05:39] methods like random forest, gradient
+[0:05:42] boosting, and all that stuff. They are
+[0:05:43] kind of tools to tackle the predictive
+[0:05:45] challenge. On the other hand, there is a
+[0:05:47] very rich and mature literature on
+[0:05:49] causal inference in the statistics and
+[0:05:52] also econometrics
+[0:05:54] literature.
+[0:05:56] So, there you have theoretical work on
+[0:05:58] identification of causal effect, on
+[0:06:01] analysis of asymptotic properties of
+[0:06:03] estimators, and we can use this in a use
+[0:06:06] case in empirical analysis in terms of
+[0:06:09] applying a hypothesis test and also
+[0:06:12] estimation of confidence intervals,
+[0:06:14] getting point intervals, point
+[0:06:15] estimates, and all that stuff.
+[0:06:17] So, double machine as I said is one
+[0:06:19] approach for causal analysis based on
+[0:06:22] machine learning,
+[0:06:24] and you can expect it
+[0:06:26] like uh to output a point estimate
+[0:06:29] together with some uncertainty
+[0:06:31] um assessment like uh standard errors,
+[0:06:35] uh t-statistics, confidence intervals,
+[0:06:37] and all that.
 [0:06:42] Maybe a motivating example for the beginning. So, consider like a partial
-[0:06:44] beginning. So, consider like a partial linear regression model. And here I try
-[0:06:46] linear regression model. And here I try to illustrate for what reason we want to
-[0:06:49] to illustrate for what reason we want to use um causal machine uh double machine
-[0:06:51] use um causal machine uh double machine learning.
+[0:06:44] linear regression model. And here I try
+[0:06:46] to illustrate for what reason we want to
+[0:06:49] use um causal machine uh double machine
 [0:06:52] learning. So, consider a treatment variable D
-[0:06:55] So, consider a treatment variable D where we are interested in this effect
-[0:06:56] where we are interested in this effect of D on the outcome variable Y. And in
-[0:06:58] of D on the outcome variable Y. And in order to identify this effect, we have
-[0:07:00] order to identify this effect, we have to take into account confounding
-[0:07:02] to take into account confounding variables X. So, this is a causal
-[0:07:04] variables X. So, this is a causal diagram illustrating this causal
-[0:07:07] diagram illustrating this causal problem. So, once we include the X's in
-[0:07:09] problem. So, once we include the X's in the regression
-[0:07:10] the regression model, we are able to estimate theta
-[0:07:13] model, we are able to estimate theta not. So,
+[0:06:55] where we are interested in this effect
+[0:06:56] of D on the outcome variable Y. And in
+[0:06:58] order to identify this effect, we have
+[0:07:00] to take into account confounding
+[0:07:02] variables X. So, this is a causal
+[0:07:04] diagram illustrating this causal
+[0:07:07] problem. So, once we include the X's in
+[0:07:09] the regression
+[0:07:10] model, we are able to estimate theta
 [0:07:14] not. So, and now the idea is okay,
-[0:07:17] and now the idea is okay, how does X enter this relationship? So,
-[0:07:19] how does X enter this relationship? So, it could be that it's just like entering
-[0:07:21] it could be that it's just like entering it in a very non-linear way. So, we want
-[0:07:23] it in a very non-linear way. So, we want to estimate this part G, so this
-[0:07:26] to estimate this part G, so this function that's a non-linear function.
-[0:07:27] function that's a non-linear function. We want to estimate it by some
-[0:07:30] We want to estimate it by some tree-based methods like random forest or
-[0:07:32] tree-based methods like random forest or something. Could also be
-[0:07:34] something. Could also be high-dimensional, so we want to use like
-[0:07:36] high-dimensional, so we want to use like penalized estimation like lasso
-[0:07:38] penalized estimation like lasso estimation.
-[0:07:39] estimation. Okay. So, now the challenge is to what
-[0:07:41] Okay. So, now the challenge is to what extent are we able to estimate or how
-[0:07:43] extent are we able to estimate or how are we able to estimate this coefficient
-[0:07:45] are we able to estimate this coefficient theta not? So, it's the quantity of
-[0:07:47] theta not? So, it's the quantity of interest, the causal estimate or
-[0:07:48] interest, the causal estimate or parameter that we really want to
-[0:07:50] parameter that we really want to estimate, for which we also want to
-[0:07:51] estimate, for which we also want to obtain confidence intervals.
-[0:07:54] obtain confidence intervals. One approach, a simple and naive
-[0:07:56] One approach, a simple and naive approach, and as you might see maybe
-[0:07:59] approach, and as you might see maybe from the beginning,
-[0:08:00] from the beginning, not very uh
-[0:08:02] not very uh successful approach, is by okay, let's
-[0:08:04] successful approach, is by okay, let's just apply a machine learning tool, so
-[0:08:07] just apply a machine learning tool, so estimate G hat by random forest or lasso
-[0:08:09] estimate G hat by random forest or lasso estimator, and let plug it in the
-[0:08:11] estimator, and let plug it in the prediction into this uh let us plug in
-[0:08:13] prediction into this uh let us plug in these predictions into this regression
-[0:08:15] these predictions into this regression estimator, and then in the second
-[0:08:16] estimator, and then in the second regression step, just estimate the
-[0:08:19] regression step, just estimate the regression coefficient on D.
-[0:08:21] regression coefficient on D. So, what is the result here is we will
-[0:08:24] So, what is the result here is we will see that this estimator is neither
-[0:08:26] see that this estimator is neither consistent
-[0:08:27] consistent uh nor does it have an asymptotically
-[0:08:29] uh nor does it have an asymptotically normal distribution.
-[0:08:31] normal distribution. And the reason why this is the case is
-[0:08:33] And the reason why this is the case is that basically any kind of machine
-[0:08:35] that basically any kind of machine learning estimator that we use
-[0:08:37] learning estimator that we use introduces some form of regularization.
-[0:08:39] introduces some form of regularization. And this way this is kind of nice to
-[0:08:42] And this way this is kind of nice to have when you are interested in
-[0:08:43] have when you are interested in generating
-[0:08:45] generating uh prediction because it kind of helps
-[0:08:47] uh prediction because it kind of helps to resolve
-[0:08:48] to resolve uh the bias-variance trade-off,
-[0:08:51] uh the bias-variance trade-off, but introducing bias here will also
-[0:08:53] but introducing bias here will also effectively distort the estimate on
-[0:08:56] effectively distort the estimate on theta not.
-[0:08:58] theta not. So, this is the reason why we will get
-[0:08:59] So, this is the reason why we will get kind of this biased empirical
-[0:09:01] kind of this biased empirical distribution. So, this is a simulated
-[0:09:03] distribution. So, this is a simulated example. You can click on this link and
-[0:09:05] example. You can click on this link and play around with the parameters of this
-[0:09:08] play around with the parameters of this uh simulation study. So, you have access
-[0:09:10] uh simulation study. So, you have access to these slides, and then you can also
-[0:09:11] to these slides, and then you can also click on this link. So, it's just like a
-[0:09:13] click on this link. So, it's just like a little toy example on
-[0:09:15] little toy example on how to see how double machine learning
-[0:09:17] how to see how double machine learning works.
+[0:07:17] how does X enter this relationship? So,
+[0:07:19] it could be that it's just like entering
+[0:07:21] it in a very non-linear way. So, we want
+[0:07:23] to estimate this part G, so this
+[0:07:26] function that's a non-linear function.
+[0:07:27] We want to estimate it by some
+[0:07:30] tree-based methods like random forest or
+[0:07:32] something. Could also be
+[0:07:34] high-dimensional, so we want to use like
+[0:07:36] penalized estimation like lasso
+[0:07:38] estimation.
+[0:07:39] Okay. So, now the challenge is to what
+[0:07:41] extent are we able to estimate or how
+[0:07:43] are we able to estimate this coefficient
+[0:07:45] theta not? So, it's the quantity of
+[0:07:47] interest, the causal estimate or
+[0:07:48] parameter that we really want to
+[0:07:50] estimate, for which we also want to
+[0:07:51] obtain confidence intervals.
+[0:07:54] One approach, a simple and naive
+[0:07:56] approach, and as you might see maybe
+[0:07:59] from the beginning,
+[0:08:00] not very uh
+[0:08:02] successful approach, is by okay, let's
+[0:08:04] just apply a machine learning tool, so
+[0:08:07] estimate G hat by random forest or lasso
+[0:08:09] estimator, and let plug it in the
+[0:08:11] prediction into this uh let us plug in
+[0:08:13] these predictions into this regression
+[0:08:15] estimator, and then in the second
+[0:08:16] regression step, just estimate the
+[0:08:19] regression coefficient on D.
+[0:08:21] So, what is the result here is we will
+[0:08:24] see that this estimator is neither
+[0:08:26] consistent
+[0:08:27] uh nor does it have an asymptotically
+[0:08:29] normal distribution.
+[0:08:31] And the reason why this is the case is
+[0:08:33] that basically any kind of machine
+[0:08:35] learning estimator that we use
+[0:08:37] introduces some form of regularization.
+[0:08:39] And this way this is kind of nice to
+[0:08:42] have when you are interested in
+[0:08:43] generating
+[0:08:45] uh prediction because it kind of helps
+[0:08:47] to resolve
+[0:08:48] uh the bias-variance trade-off,
+[0:08:51] but introducing bias here will also
+[0:08:53] effectively distort the estimate on
+[0:08:56] theta not.
+[0:08:58] So, this is the reason why we will get
+[0:08:59] kind of this biased empirical
+[0:09:01] distribution. So, this is a simulated
+[0:09:03] example. You can click on this link and
+[0:09:05] play around with the parameters of this
+[0:09:08] uh simulation study. So, you have access
+[0:09:10] to these slides, and then you can also
+[0:09:11] click on this link. So, it's just like a
+[0:09:13] little toy example on
+[0:09:15] how to see how double machine learning
 [0:09:19] works. Okay.
 [0:09:20] Okay. To illustrate the idea behind double
-[0:09:22] To illustrate the idea behind double machine learning, it's maybe nice to
-[0:09:24] machine learning, it's maybe nice to illustrate the core idea. And the
-[0:09:27] illustrate the core idea. And the most important part characterizing this
-[0:09:29] most important part characterizing this approach is kind of orthogonalization.
-[0:09:32] approach is kind of orthogonalization. And some of you might remember the
-[0:09:33] And some of you might remember the Frisch-Waugh Lovell theorem in linear
-[0:09:35] Frisch-Waugh Lovell theorem in linear regression model
-[0:09:37] regression model where it's possible to estimate the
-[0:09:39] where it's possible to estimate the theta not in uh
-[0:09:41] theta not in uh another way. So, the first I first
-[0:09:44] another way. So, the first I first approach I think to estimate theta not
-[0:09:47] approach I think to estimate theta not in this regression model would just
-[0:09:48] in this regression model would just apply linear regression and interpret
-[0:09:50] apply linear regression and interpret the coefficient on D. All right.
-[0:09:53] the coefficient on D. All right. However, it would also be possible
-[0:09:55] However, it would also be possible to obtain this estimate from uh
-[0:09:58] to obtain this estimate from uh regression of residuals on residuals. So
-[0:10:00] regression of residuals on residuals. So we kind of partial out the influence of
-[0:10:02] we kind of partial out the influence of X and Y
+[0:09:22] machine learning, it's maybe nice to
+[0:09:24] illustrate the core idea. And the
+[0:09:27] most important part characterizing this
+[0:09:29] approach is kind of orthogonalization.
+[0:09:32] And some of you might remember the
+[0:09:33] Frisch-Waugh Lovell theorem in linear
+[0:09:35] regression model
+[0:09:37] where it's possible to estimate the
+[0:09:39] theta not in uh
+[0:09:41] another way. So, the first I first
+[0:09:44] approach I think to estimate theta not
+[0:09:47] in this regression model would just
+[0:09:48] apply linear regression and interpret
+[0:09:50] the coefficient on D. All right.
+[0:09:53] However, it would also be possible
+[0:09:55] to obtain this estimate from uh
+[0:09:58] regression of residuals on residuals. So
+[0:10:00] we kind of partial out the influence of
 [0:10:04] X and Y and the influence of X on D through some
-[0:10:07] and the influence of X on D through some auxiliary regression steps
-[0:10:10] auxiliary regression steps and eventually regress the residuals on
-[0:10:13] and eventually regress the residuals on Y and residuals on D and we effectively
-[0:10:16] Y and residuals on D and we effectively get exactly the same estimate on theta
-[0:10:18] get exactly the same estimate on theta naught.
+[0:10:07] auxiliary regression steps
+[0:10:10] and eventually regress the residuals on
+[0:10:13] Y and residuals on D and we effectively
+[0:10:16] get exactly the same estimate on theta
 [0:10:20] naught. And this partialing out or
-[0:10:22] And this partialing out or orthogonalization step
-[0:10:24] orthogonalization step will
+[0:10:22] orthogonalization step
 [0:10:25] will be very helpful when we use
-[0:10:28] be very helpful when we use machine learning tools because as I said
-[0:10:30] machine learning tools because as I said the machine learning estimate is the
-[0:10:32] the machine learning estimate is the introduce regularization bias by
-[0:10:34] introduce regularization bias by partialing out or by orthogonalizing
-[0:10:38] partialing out or by orthogonalizing the estimation framework we kind of get
-[0:10:40] the estimation framework we kind of get some robustness against this
-[0:10:42] some robustness against this regularization bias. So in the end we
-[0:10:44] regularization bias. So in the end we are able to uncover to get
-[0:10:47] are able to uncover to get consistent and asymptotically normally
-[0:10:49] consistent and asymptotically normally distributed estimator.
-[0:10:51] distributed estimator. This is illustrated in the same uh
-[0:10:54] This is illustrated in the same uh simulation example here on this
-[0:10:56] simulation example here on this uh
+[0:10:28] machine learning tools because as I said
+[0:10:30] the machine learning estimate is the
+[0:10:32] introduce regularization bias by
+[0:10:34] partialing out or by orthogonalizing
+[0:10:38] the estimation framework we kind of get
+[0:10:40] some robustness against this
+[0:10:42] regularization bias. So in the end we
+[0:10:44] are able to uncover to get
+[0:10:47] consistent and asymptotically normally
+[0:10:49] distributed estimator.
+[0:10:51] This is illustrated in the same uh
+[0:10:54] simulation example here on this
 [0:10:57] uh slide. So we have empirical density of
-[0:11:00] slide. So we have empirical density of this estimator which is
-[0:11:02] this estimator which is very similar to standard normal
-[0:11:03] very similar to standard normal distribution and also we have more or
-[0:11:06] distribution and also we have more or less unbiased estimate.
-[0:11:10] less unbiased estimate. So to sum up
-[0:11:11] So to sum up or to pave the way to the next
-[0:11:15] or to pave the way to the next kind of
+[0:11:00] this estimator which is
+[0:11:02] very similar to standard normal
+[0:11:03] distribution and also we have more or
+[0:11:06] less unbiased estimate.
+[0:11:10] So to sum up
+[0:11:11] or to pave the way to the next
 [0:11:16] kind of summary of the double machine learning
-[0:11:17] summary of the double machine learning approach let's restate our estimation
-[0:11:21] approach let's restate our estimation approach the naive simple plug-in
-[0:11:22] approach the naive simple plug-in approach as compared to the orthogonal
-[0:11:25] approach as compared to the orthogonal or partialing out approach.
-[0:11:27] or partialing out approach. And we can do this by
-[0:11:30] And we can do this by writing down the moment condition that's
-[0:11:32] writing down the moment condition that's actually used to identification of theta
-[0:11:34] actually used to identification of theta naught.
+[0:11:17] approach let's restate our estimation
+[0:11:21] approach the naive simple plug-in
+[0:11:22] approach as compared to the orthogonal
+[0:11:25] or partialing out approach.
+[0:11:27] And we can do this by
+[0:11:30] writing down the moment condition that's
+[0:11:32] actually used to identification of theta
 [0:11:37] naught. And on the right hand side we see these
-[0:11:39] And on the right hand side we see these residuals showing up inside the score
-[0:11:42] residuals showing up inside the score function
+[0:11:39] residuals showing up inside the score
 [0:11:43] function and on the other hand we don't have this
-[0:11:44] and on the other hand we don't have this kind of shape here.
-[0:11:46] kind of shape here. So what we will do in double machine
-[0:11:49] So what we will do in double machine learning is we will restate our
-[0:11:51] learning is we will restate our estimation problem in terms of a moment
-[0:11:52] estimation problem in terms of a moment condition and this moment condition
-[0:11:54] condition and this moment condition satisfies certain properties so called
-[0:11:56] satisfies certain properties so called name orthogonality
-[0:11:58] name orthogonality which is effectively implemented by
-[0:12:00] which is effectively implemented by using this fresh water of a
-[0:12:02] using this fresh water of a partialing out.
-[0:12:04] partialing out. So we will kind of formulate our
-[0:12:06] So we will kind of formulate our estimation problem in terms of this
-[0:12:07] estimation problem in terms of this score function psi
-[0:12:09] score function psi and in this psi there are some nuisance
-[0:12:11] and in this psi there are some nuisance component
+[0:11:44] kind of shape here.
+[0:11:46] So what we will do in double machine
+[0:11:49] learning is we will restate our
+[0:11:51] estimation problem in terms of a moment
+[0:11:52] condition and this moment condition
+[0:11:54] satisfies certain properties so called
+[0:11:56] name orthogonality
+[0:11:58] which is effectively implemented by
+[0:12:00] using this fresh water of a
+[0:12:02] partialing out.
+[0:12:04] So we will kind of formulate our
+[0:12:06] estimation problem in terms of this
+[0:12:07] score function psi
+[0:12:09] and in this psi there are some nuisance
 [0:12:13] component contained and these are exactly the
-[0:12:14] contained and these are exactly the parts of the model that we are going to
-[0:12:16] parts of the model that we are going to estimate by machine learning methods. So
-[0:12:18] estimate by machine learning methods. So here this is the prediction on Y given X
-[0:12:21] here this is the prediction on Y given X and the prediction of the treatment
-[0:12:22] and the prediction of the treatment given X.
+[0:12:14] parts of the model that we are going to
+[0:12:16] estimate by machine learning methods. So
+[0:12:18] here this is the prediction on Y given X
+[0:12:21] and the prediction of the treatment
 [0:12:24] given X. So now that was motivating example let's
-[0:12:27] So now that was motivating example let's continue with the introduction to double
-[0:12:28] continue with the introduction to double machine learning approach.
-[0:12:30] machine learning approach. So the double machine learning approach
-[0:12:33] So the double machine learning approach can be summarized in terms of mainly
-[0:12:34] can be summarized in terms of mainly three ingredients. So the very first one
-[0:12:38] three ingredients. So the very first one is so called name orthogonality and that
-[0:12:40] is so called name orthogonality and that was the idea that I tried to motivate or
-[0:12:42] was the idea that I tried to motivate or illustrate in the beginning.
-[0:12:44] illustrate in the beginning. In a formal way
-[0:12:46] In a formal way this can be written down as on the
-[0:12:48] this can be written down as on the slide. So the identification of our
-[0:12:50] slide. So the identification of our estimate so it's theta naught it's a
-[0:12:52] estimate so it's theta naught it's a causal parameter we want to estimate is
-[0:12:54] causal parameter we want to estimate is based on this method of moment
-[0:12:57] based on this method of moment estimate. It basically is a method of
-[0:12:59] estimate. It basically is a method of moment estimator with a score function
-[0:13:01] moment estimator with a score function psi
+[0:12:27] continue with the introduction to double
+[0:12:28] machine learning approach.
+[0:12:30] So the double machine learning approach
+[0:12:33] can be summarized in terms of mainly
+[0:12:34] three ingredients. So the very first one
+[0:12:38] is so called name orthogonality and that
+[0:12:40] was the idea that I tried to motivate or
+[0:12:42] illustrate in the beginning.
+[0:12:44] In a formal way
+[0:12:46] this can be written down as on the
+[0:12:48] slide. So the identification of our
+[0:12:50] estimate so it's theta naught it's a
+[0:12:52] causal parameter we want to estimate is
+[0:12:54] based on this method of moment
+[0:12:57] estimate. It basically is a method of
+[0:12:59] moment estimator with a score function
 [0:13:02] psi that satisfies a certain property so
-[0:13:04] that satisfies a certain property so called name orthogonality. And
-[0:13:06] called name orthogonality. And orthogonality can be stated in terms of
-[0:13:10] orthogonality can be stated in terms of this theoretical requirement but we also
-[0:13:13] this theoretical requirement but we also have a verbal description saying that
-[0:13:15] have a verbal description saying that name orthogonality makes sure that the
-[0:13:17] name orthogonality makes sure that the moment condition that is used for
-[0:13:18] moment condition that is used for identification of theta naught
-[0:13:20] identification of theta naught is kind of robust against perturbations
-[0:13:24] is kind of robust against perturbations of the nuisance function eta around eta
-[0:13:27] of the nuisance function eta around eta naught. So remember this eta kind of
-[0:13:29] naught. So remember this eta kind of specifies what kind of part what parts
-[0:13:31] specifies what kind of part what parts of the model we are estimating by
-[0:13:33] of the model we are estimating by machine learning estimate measures. So
-[0:13:36] machine learning estimate measures. So this is the part where this
-[0:13:37] this is the part where this regularization bias enters
-[0:13:39] regularization bias enters the estimation framework
-[0:13:42] the estimation framework and by implementing or by using name and
-[0:13:45] and by implementing or by using name and orthogonal scores we kind of make sure
-[0:13:47] orthogonal scores we kind of make sure that these first order biases do not
-[0:13:50] that these first order biases do not translate into bias of our causal
-[0:13:52] translate into bias of our causal estimate at the end.
-[0:13:54] estimate at the end. Okay?
+[0:13:04] called name orthogonality. And
+[0:13:06] orthogonality can be stated in terms of
+[0:13:10] this theoretical requirement but we also
+[0:13:13] have a verbal description saying that
+[0:13:15] name orthogonality makes sure that the
+[0:13:17] moment condition that is used for
+[0:13:18] identification of theta naught
+[0:13:20] is kind of robust against perturbations
+[0:13:24] of the nuisance function eta around eta
+[0:13:27] naught. So remember this eta kind of
+[0:13:29] specifies what kind of part what parts
+[0:13:31] of the model we are estimating by
+[0:13:33] machine learning estimate measures. So
+[0:13:36] this is the part where this
+[0:13:37] regularization bias enters
+[0:13:39] the estimation framework
+[0:13:42] and by implementing or by using name and
+[0:13:45] orthogonal scores we kind of make sure
+[0:13:47] that these first order biases do not
+[0:13:50] translate into bias of our causal
+[0:13:52] estimate at the end.
 [0:13:55] Okay? So this is kind of my attempt to
-[0:13:58] So this is kind of my attempt to describe the concept of name
-[0:13:59] describe the concept of name orthogonality and I hope maybe you can
-[0:14:01] orthogonality and I hope maybe you can kind of follow. I mean it's pretty
-[0:14:03] kind of follow. I mean it's pretty technical thing but just like to see
-[0:14:05] technical thing but just like to see that regularization bias is kind of
-[0:14:07] that regularization bias is kind of introducing or it's creating a challenge
-[0:14:09] introducing or it's creating a challenge and this is one way to
-[0:14:11] and this is one way to mitigate that.
-[0:14:13] mitigate that. The second ingredient to double machine
-[0:14:15] The second ingredient to double machine learning approach is the use of high
-[0:14:17] learning approach is the use of high quality machine learning methods. Of
-[0:14:19] quality machine learning methods. Of course machine learning is so popular
-[0:14:21] course machine learning is so popular because we know it is kind of working
-[0:14:24] because we know it is kind of working well in many cases
-[0:14:26] well in many cases but in terms of a theoretical
-[0:14:27] but in terms of a theoretical requirement
-[0:14:29] requirement this amounts to requirement on the rate
-[0:14:31] this amounts to requirement on the rate of convergence of the nuisance component
-[0:14:34] of convergence of the nuisance component learners so that they are kind of
-[0:14:36] learners so that they are kind of converging to the true value of the
-[0:14:37] converging to the true value of the nuisance component. So here we have this
-[0:14:40] nuisance component. So here we have this conditional expectation that we are
-[0:14:42] conditional expectation that we are estimating fast enough.
-[0:14:45] estimating fast enough. And we can
-[0:14:47] And we can get these we can get these rate uh rate
-[0:14:52] get these we can get these rate uh rate results for some learners based on some
-[0:14:55] results for some learners based on some structural assumption for example
-[0:14:56] structural assumption for example sparsity like opening the stage for
-[0:15:01] sparsity like opening the stage for L1 penalized estimates. But they are
-[0:15:03] L1 penalized estimates. But they are like explicitly stated in this
-[0:15:05] like explicitly stated in this paper and the kind of rate requirement
-[0:15:08] paper and the kind of rate requirement depends on the causal model considered
-[0:15:11] depends on the causal model considered but also on the score function that is
-[0:15:13] but also on the score function that is effectively chosen.
+[0:13:58] describe the concept of name
+[0:13:59] orthogonality and I hope maybe you can
+[0:14:01] kind of follow. I mean it's pretty
+[0:14:03] technical thing but just like to see
+[0:14:05] that regularization bias is kind of
+[0:14:07] introducing or it's creating a challenge
+[0:14:09] and this is one way to
+[0:14:11] mitigate that.
+[0:14:13] The second ingredient to double machine
+[0:14:15] learning approach is the use of high
+[0:14:17] quality machine learning methods. Of
+[0:14:19] course machine learning is so popular
+[0:14:21] because we know it is kind of working
+[0:14:24] well in many cases
+[0:14:26] but in terms of a theoretical
+[0:14:27] requirement
+[0:14:29] this amounts to requirement on the rate
+[0:14:31] of convergence of the nuisance component
+[0:14:34] learners so that they are kind of
+[0:14:36] converging to the true value of the
+[0:14:37] nuisance component. So here we have this
+[0:14:40] conditional expectation that we are
+[0:14:42] estimating fast enough.
+[0:14:45] And we can
+[0:14:47] get these we can get these rate uh rate
+[0:14:52] results for some learners based on some
+[0:14:55] structural assumption for example
+[0:14:56] sparsity like opening the stage for
+[0:15:01] L1 penalized estimates. But they are
+[0:15:03] like explicitly stated in this
+[0:15:05] paper and the kind of rate requirement
+[0:15:08] depends on the causal model considered
+[0:15:11] but also on the score function that is
+[0:15:13] effectively chosen.
 [0:15:19] So we come to the last to the third ingredient which is then sample
-[0:15:20] ingredient which is then sample splitting.
-[0:15:22] splitting. So this is also known from machine
-[0:15:23] So this is also known from machine learning literature that we kind of use
-[0:15:25] learning literature that we kind of use sample splitting to overcome
-[0:15:28] sample splitting to overcome overfitting bias that's also common in
-[0:15:30] overfitting bias that's also common in many statistical approaches.
-[0:15:33] many statistical approaches. So what we actually do is we have a kind
-[0:15:36] So what we actually do is we have a kind of illustration down here but you can
-[0:15:37] of illustration down here but you can you can click on it and look at on watch
-[0:15:39] you can click on it and look at on watch it on YouTube. I don't show it now but I
-[0:15:42] it on YouTube. I don't show it now but I just want to give it in there. So on one
-[0:15:44] just want to give it in there. So on one hand side so we split the data into two
-[0:15:47] hand side so we split the data into two samples say.
-[0:15:48] samples say. On one hand side we train the machine
-[0:15:51] On one hand side we train the machine learning tools
-[0:15:52] learning tools like the estimators random forest and
-[0:15:53] like the estimators random forest and lasso on the training sample and then we
-[0:15:56] lasso on the training sample and then we generate out of sample predictions for
-[0:15:58] generate out of sample predictions for hold out data.
-[0:16:01] hold out data. These hold out predictions they are then
-[0:16:03] These hold out predictions they are then plugged in to this orthogonal score
-[0:16:05] plugged in to this orthogonal score function which is then solved for the
-[0:16:07] function which is then solved for the causal parameter theta naught.
-[0:16:10] causal parameter theta naught. Okay. If we do this 50/50 and only split
-[0:16:13] Okay. If we do this 50/50 and only split once then kind of we lose 50% of the
-[0:16:16] once then kind of we lose 50% of the data because we evaluate our score only
-[0:16:18] data because we evaluate our score only on 50% of the data on the hold out
-[0:16:20] on 50% of the data on the hold out sample.
+[0:15:20] splitting.
+[0:15:22] So this is also known from machine
+[0:15:23] learning literature that we kind of use
+[0:15:25] sample splitting to overcome
+[0:15:28] overfitting bias that's also common in
+[0:15:30] many statistical approaches.
+[0:15:33] So what we actually do is we have a kind
+[0:15:36] of illustration down here but you can
+[0:15:37] you can click on it and look at on watch
+[0:15:39] it on YouTube. I don't show it now but I
+[0:15:42] just want to give it in there. So on one
+[0:15:44] hand side so we split the data into two
+[0:15:47] samples say.
+[0:15:48] On one hand side we train the machine
+[0:15:51] learning tools
+[0:15:52] like the estimators random forest and
+[0:15:53] lasso on the training sample and then we
+[0:15:56] generate out of sample predictions for
+[0:15:58] hold out data.
+[0:16:01] These hold out predictions they are then
+[0:16:03] plugged in to this orthogonal score
+[0:16:05] function which is then solved for the
+[0:16:07] causal parameter theta naught.
+[0:16:10] Okay. If we do this 50/50 and only split
+[0:16:13] once then kind of we lose 50% of the
+[0:16:16] data because we evaluate our score only
+[0:16:18] on 50% of the data on the hold out
 [0:16:21] sample. So what we could do is we could swap the
-[0:16:23] So what we could do is we could swap the roles of the sample so we use the hold
-[0:16:25] roles of the sample so we use the hold out sample first which was used as a
-[0:16:27] out sample first which was used as a hold out sample first as a training
-[0:16:29] hold out sample first as a training sample in the second estimation step and
-[0:16:31] sample in the second estimation step and then we generate
-[0:16:32] then we generate out of sample predictions for the
-[0:16:34] out of sample predictions for the initial training set. So this is kind of
-[0:16:36] initial training set. So this is kind of cross validation idea and it's called
-[0:16:39] cross validation idea and it's called cross fitting and you can extend it to K
-[0:16:41] cross fitting and you can extend it to K fold cross fitting like
-[0:16:43] fold cross fitting like swapping the role like dividing the
-[0:16:45] swapping the role like dividing the sample. Here in this illustration we
-[0:16:46] sample. Here in this illustration we have like four partitions and we kind of
-[0:16:49] have like four partitions and we kind of iterate through these partition.
-[0:16:53] iterate through these partition. And by swapping the roles we are
-[0:16:55] And by swapping the roles we are actually using the entire sample for our
-[0:16:57] actually using the entire sample for our prediction and estimation of the causal
-[0:16:58] prediction and estimation of the causal effect so we kind of can gain something
-[0:17:03] effect so we kind of can gain something in terms of efficiency.
-[0:17:06] in terms of efficiency. So once so this is very non-technical
-[0:17:08] So once so this is very non-technical high level summary of the double machine
-[0:17:11] high level summary of the double machine learning approach so once we kind of
-[0:17:14] learning approach so once we kind of take care for these three
-[0:17:17] take care for these three um
+[0:16:23] roles of the sample so we use the hold
+[0:16:25] out sample first which was used as a
+[0:16:27] hold out sample first as a training
+[0:16:29] sample in the second estimation step and
+[0:16:31] then we generate
+[0:16:32] out of sample predictions for the
+[0:16:34] initial training set. So this is kind of
+[0:16:36] cross validation idea and it's called
+[0:16:39] cross fitting and you can extend it to K
+[0:16:41] fold cross fitting like
+[0:16:43] swapping the role like dividing the
+[0:16:45] sample. Here in this illustration we
+[0:16:46] have like four partitions and we kind of
+[0:16:49] iterate through these partition.
+[0:16:53] And by swapping the roles we are
+[0:16:55] actually using the entire sample for our
+[0:16:57] prediction and estimation of the causal
+[0:16:58] effect so we kind of can gain something
+[0:17:03] in terms of efficiency.
+[0:17:06] So once so this is very non-technical
+[0:17:08] high level summary of the double machine
+[0:17:11] learning approach so once we kind of
+[0:17:14] take care for these three
 [0:17:17] um key ingredients it's possible to get
-[0:17:19] key ingredients it's possible to get this main result stated
-[0:17:21] this main result stated Victor Chernozhukov and co-authors 2018
-[0:17:25] Victor Chernozhukov and co-authors 2018 that
+[0:17:19] this main result stated
+[0:17:21] Victor Chernozhukov and co-authors 2018
 [0:17:26] that the resulting double machine learning
-[0:17:28] the resulting double machine learning estimator is consistent and
-[0:17:30] estimator is consistent and asymptotically normally distributed so
-[0:17:32] asymptotically normally distributed so we can
+[0:17:28] estimator is consistent and
+[0:17:30] asymptotically normally distributed so
 [0:17:34] we can set up tests and confidence levels all
-[0:17:36] set up tests and confidence levels all that stuff.
-[0:17:38] that stuff. And the expression
-[0:17:39] And the expression for the confidence intervals or for the
-[0:17:41] for the confidence intervals or for the standard error they are all based on
-[0:17:44] standard error they are all based on this very general formulation psi. So
-[0:17:46] this very general formulation psi. So this is something that we kind of
-[0:17:49] this is something that we kind of use in our implementation too. So this
-[0:17:51] use in our implementation too. So this entire result here we do not talk about
-[0:17:54] entire result here we do not talk about any specific causal model but just any
-[0:17:56] any specific causal model but just any kind of causal model that fits into this
-[0:17:58] kind of causal model that fits into this orthogonal kind of framework.
-[0:18:01] orthogonal kind of framework. Okay.
+[0:17:36] that stuff.
+[0:17:38] And the expression
+[0:17:39] for the confidence intervals or for the
+[0:17:41] standard error they are all based on
+[0:17:44] this very general formulation psi. So
+[0:17:46] this is something that we kind of
+[0:17:49] use in our implementation too. So this
+[0:17:51] entire result here we do not talk about
+[0:17:54] any specific causal model but just any
+[0:17:56] kind of causal model that fits into this
+[0:17:58] orthogonal kind of framework.
 [0:18:03] Okay. So let's talk now about implementation.
-[0:18:06] So let's talk now about implementation. So when we planned or when we started
-[0:18:08] So when we planned or when we started this project
-[0:18:10] this project we wanted to have a very general
-[0:18:12] we wanted to have a very general implementation of the double machine
-[0:18:14] implementation of the double machine learning approach which makes it
-[0:18:15] learning approach which makes it possible to use kind of any state of the
-[0:18:18] possible to use kind of any state of the art machine learning tool.
-[0:18:20] art machine learning tool. So in Python it was pretty easy because
-[0:18:21] So in Python it was pretty easy because scikit-learn has an API that's pretty
-[0:18:23] scikit-learn has an API that's pretty common and also used by other libraries.
-[0:18:26] common and also used by other libraries. So you can basically use any kind of
-[0:18:28] So you can basically use any kind of scikit learner scikit-learn estimation
-[0:18:30] scikit learner scikit-learn estimation model or
+[0:18:06] So when we planned or when we started
+[0:18:08] this project
+[0:18:10] we wanted to have a very general
+[0:18:12] implementation of the double machine
+[0:18:14] learning approach which makes it
+[0:18:15] possible to use kind of any state of the
+[0:18:18] art machine learning tool.
+[0:18:20] So in Python it was pretty easy because
+[0:18:21] scikit-learn has an API that's pretty
+[0:18:23] common and also used by other libraries.
+[0:18:26] So you can basically use any kind of
+[0:18:28] scikit learner scikit-learn estimation
 [0:18:32] model or any learner with a similar interface
-[0:18:33] any learner with a similar interface face like XGBoost or LightGBM they all
-[0:18:36] face like XGBoost or LightGBM they all have a similar interface. So they have a
-[0:18:38] have a similar interface. So they have a train and predict function.
-[0:18:40] train and predict function. You can also create your own custom
-[0:18:42] You can also create your own custom learners if
-[0:18:43] learners if specific library doesn't have this
-[0:18:46] specific library doesn't have this interface.
-[0:18:47] interface. In R it's a bit different because in R
-[0:18:50] In R it's a bit different because in R we have
+[0:18:33] face like XGBoost or LightGBM they all
+[0:18:36] have a similar interface. So they have a
+[0:18:38] train and predict function.
+[0:18:40] You can also create your own custom
+[0:18:42] learners if
+[0:18:43] specific library doesn't have this
+[0:18:46] interface.
+[0:18:47] In R it's a bit different because in R
 [0:18:52] we have less unified interface for machine
-[0:18:54] less unified interface for machine learning tools so all are kind of
-[0:18:56] learning tools so all are kind of different but we base our implementation
-[0:18:59] different but we base our implementation on the MLR3 package which actually does
-[0:19:01] on the MLR3 package which actually does this. It kind of takes this painful
-[0:19:05] this. It kind of takes this painful does this painful work to kind of unify
-[0:19:07] does this painful work to kind of unify the interfaces of most common of the
-[0:19:10] the interfaces of most common of the most common ML libraries and there are
-[0:19:12] most common ML libraries and there are extensions package available which are
-[0:19:13] extensions package available which are all usable and you can also create your
-[0:19:16] all usable and you can also create your own custom learners. Importantly so we
-[0:19:18] own custom learners. Importantly so we also have more dependencies but they are
-[0:19:20] also have more dependencies but they are kind of standard libraries from for
-[0:19:23] kind of standard libraries from for Python and also in R we have standard
-[0:19:24] Python and also in R we have standard libraries but
-[0:19:26] libraries but to mention what it's worth to mention R6
-[0:19:29] to mention what it's worth to mention R6 because it kind of enables object
-[0:19:31] because it kind of enables object oriented implementation. You can install
-[0:19:34] oriented implementation. You can install the packages from all common sources and
-[0:19:36] the packages from all common sources and also install the development version. So
-[0:19:38] also install the development version. So one if you're interested you can just
-[0:19:39] one if you're interested you can just copy paste these lines there's copy
-[0:19:42] copy paste these lines there's copy paste button and just run it on your
-[0:19:44] paste button and just run it on your machine.
+[0:18:54] learning tools so all are kind of
+[0:18:56] different but we base our implementation
+[0:18:59] on the MLR3 package which actually does
+[0:19:01] this. It kind of takes this painful
+[0:19:05] does this painful work to kind of unify
+[0:19:07] the interfaces of most common of the
+[0:19:10] most common ML libraries and there are
+[0:19:12] extensions package available which are
+[0:19:13] all usable and you can also create your
+[0:19:16] own custom learners. Importantly so we
+[0:19:18] also have more dependencies but they are
+[0:19:20] kind of standard libraries from for
+[0:19:23] Python and also in R we have standard
+[0:19:24] libraries but
+[0:19:26] to mention what it's worth to mention R6
+[0:19:29] because it kind of enables object
+[0:19:31] oriented implementation. You can install
+[0:19:34] the packages from all common sources and
+[0:19:36] also install the development version. So
+[0:19:38] one if you're interested you can just
+[0:19:39] copy paste these lines there's copy
+[0:19:42] paste button and just run it on your
+[0:19:44] machine.
 [0:19:50] In case you're interested to know more about it and to follow this tutorial in
-[0:19:52] about it and to follow this tutorial in more detail, feel free to consider our
-[0:19:55] more detail, feel free to consider our packages. So, we have uh papers. So, we
-[0:19:58] packages. So, we have uh papers. So, we have uh papers for the R package and
-[0:20:01] have uh papers for the R package and also for the Python package.
-[0:20:03] also for the Python package. And this one here, the first one for the
-[0:20:04] And this one here, the first one for the R package, is very, very general and it
-[0:20:07] R package, is very, very general and it also has a non-technical introduction to
-[0:20:09] also has a non-technical introduction to double machine learning, similar to the
-[0:20:10] double machine learning, similar to the presentation here, actually.
-[0:20:12] presentation here, actually. You can find our source code here
-[0:20:14] You can find our source code here on GitHub via these links and also the
-[0:20:17] on GitHub via these links and also the documentation containing user guide and
-[0:20:19] documentation containing user guide and also extensive examples on our website.
-[0:20:22] also extensive examples on our website. And the examples Sven is going to show
-[0:20:24] And the examples Sven is going to show in this tutorial, they are also
-[0:20:26] in this tutorial, they are also available from our website. There's an
-[0:20:28] available from our website. There's an example gallery and you can click on it
-[0:20:30] example gallery and you can click on it and find most of them, most of the
-[0:20:32] and find most of them, most of the examples there.
-[0:20:35] examples there. Let's come to the class fraction. So,
-[0:20:36] Let's come to the class fraction. So, what we have
-[0:20:38] what we have in our package, we have a object
-[0:20:41] in our package, we have a object oriented implementation. And by this
-[0:20:43] oriented implementation. And by this object oriented implementation, we
-[0:20:45] object oriented implementation, we wanted to kind of mirror the general the
-[0:20:47] wanted to kind of mirror the general the general style of the double machine
-[0:20:50] general style of the double machine learning approach. So, what we have as I
-[0:20:53] learning approach. So, what we have as I presented the main result from the paper
-[0:20:55] presented the main result from the paper by Chernozhukov and co-authors,
-[0:20:57] by Chernozhukov and co-authors, um
+[0:19:52] more detail, feel free to consider our
+[0:19:55] packages. So, we have uh papers. So, we
+[0:19:58] have uh papers for the R package and
+[0:20:01] also for the Python package.
+[0:20:03] And this one here, the first one for the
+[0:20:04] R package, is very, very general and it
+[0:20:07] also has a non-technical introduction to
+[0:20:09] double machine learning, similar to the
+[0:20:10] presentation here, actually.
+[0:20:12] You can find our source code here
+[0:20:14] on GitHub via these links and also the
+[0:20:17] documentation containing user guide and
+[0:20:19] also extensive examples on our website.
+[0:20:22] And the examples Sven is going to show
+[0:20:24] in this tutorial, they are also
+[0:20:26] available from our website. There's an
+[0:20:28] example gallery and you can click on it
+[0:20:30] and find most of them, most of the
+[0:20:32] examples there.
+[0:20:35] Let's come to the class fraction. So,
+[0:20:36] what we have
+[0:20:38] in our package, we have a object
+[0:20:41] oriented implementation. And by this
+[0:20:43] object oriented implementation, we
+[0:20:45] wanted to kind of mirror the general the
+[0:20:47] general style of the double machine
+[0:20:50] learning approach. So, what we have as I
+[0:20:53] presented the main result from the paper
+[0:20:55] by Chernozhukov and co-authors,
 [0:20:59] um the overall result was stated in a very
-[0:21:01] the overall result was stated in a very general way, only relating to the score
-[0:21:04] general way, only relating to the score of a causal model.
-[0:21:05] of a causal model. So, what we have is we have implemented
-[0:21:07] So, what we have is we have implemented the abstract base class implementing
-[0:21:09] the abstract base class implementing everything like estimation of the target
-[0:21:11] everything like estimation of the target coefficient,
-[0:21:13] coefficient, uh also causal parameter, also
-[0:21:14] uh also causal parameter, also estimation of confidence intervals and
-[0:21:16] estimation of confidence intervals and all that stuff
-[0:21:18] all that stuff in abstract base class for very general
-[0:21:20] in abstract base class for very general form of the score psi.
-[0:21:22] form of the score psi. And then, we have specific model classes
-[0:21:25] And then, we have specific model classes that inherit from this base class and
-[0:21:27] that inherit from this base class and then they specify causal model specific
-[0:21:31] then they specify causal model specific parts. Like in the partial linear
-[0:21:32] parts. Like in the partial linear regression model we've seen before,
-[0:21:34] regression model we've seen before, there's this partial linear partialing
-[0:21:36] there's this partial linear partialing out score
+[0:21:01] general way, only relating to the score
+[0:21:04] of a causal model.
+[0:21:05] So, what we have is we have implemented
+[0:21:07] the abstract base class implementing
+[0:21:09] everything like estimation of the target
+[0:21:11] coefficient,
+[0:21:13] uh also causal parameter, also
+[0:21:14] estimation of confidence intervals and
+[0:21:16] all that stuff
+[0:21:18] in abstract base class for very general
+[0:21:20] form of the score psi.
+[0:21:22] And then, we have specific model classes
+[0:21:25] that inherit from this base class and
+[0:21:27] then they specify causal model specific
+[0:21:31] parts. Like in the partial linear
+[0:21:32] regression model we've seen before,
+[0:21:34] there's this partial linear partialing
 [0:21:37] out score and this is something that we can
-[0:21:38] and this is something that we can implement there in this class, also
-[0:21:41] implement there in this class, also estimate like how effectively estimate
-[0:21:44] estimate like how effectively estimate this kind of components of the score
-[0:21:46] this kind of components of the score there, what is the nuisance part, all
-[0:21:47] there, what is the nuisance part, all that stuff, which is specified and
-[0:21:49] that stuff, which is specified and implementing also more like nuisance
-[0:21:52] implementing also more like nuisance tuning
+[0:21:38] implement there in this class, also
+[0:21:41] estimate like how effectively estimate
+[0:21:44] this kind of components of the score
+[0:21:46] there, what is the nuisance part, all
+[0:21:47] that stuff, which is specified and
+[0:21:49] implementing also more like nuisance
 [0:21:53] tuning functionalities
-[0:21:55] functionalities for tuning machine learning tools and
-[0:21:56] for tuning machine learning tools and stuff.
+[0:21:55] for tuning machine learning tools and
 [0:21:58] stuff. And currently we have implemented these
-[0:22:00] And currently we have implemented these like basic classes for
-[0:22:03] like basic classes for partial linear regression model
-[0:22:05] partial linear regression model and also instrumental variables for
-[0:22:07] and also instrumental variables for partial linear regression model. And
-[0:22:09] partial linear regression model. And also we have non-parametric models for
-[0:22:10] also we have non-parametric models for average treatment effect, average
-[0:22:12] average treatment effect, average treatment effect on the treated and
-[0:22:14] treatment effect on the treated and local average treatment effect and local
-[0:22:15] local average treatment effect and local average treatment effect on the treated.
-[0:22:17] average treatment effect on the treated. And
+[0:22:00] like basic classes for
+[0:22:03] partial linear regression model
+[0:22:05] and also instrumental variables for
+[0:22:07] partial linear regression model. And
+[0:22:09] also we have non-parametric models for
+[0:22:10] average treatment effect, average
+[0:22:12] treatment effect on the treated and
+[0:22:14] local average treatment effect and local
+[0:22:15] average treatment effect on the treated.
 [0:22:18] And Sven will say a bit more on the stuff
-[0:22:22] Sven will say a bit more on the stuff that shows up on the right-hand side.
-[0:22:24] that shows up on the right-hand side. So, we are actually extending it
-[0:22:25] So, we are actually extending it currently.
+[0:22:22] that shows up on the right-hand side.
+[0:22:24] So, we are actually extending it
+[0:22:25] currently.
 [0:22:32] So, what I what what are reasons that we that led us to this object oriented
-[0:22:33] that led us to this object oriented implementation? We wanted to have a
-[0:22:35] implementation? We wanted to have a package that's kind of flexible, so you
-[0:22:37] package that's kind of flexible, so you can kind of vary many components of your
-[0:22:40] can kind of vary many components of your causal model like the choice of
-[0:22:42] causal model like the choice of learners, the resampling schemes and
-[0:22:44] learners, the resampling schemes and that's something that you can actually
-[0:22:45] that's something that you can actually adjust pretty easily.
-[0:22:47] adjust pretty easily. But more importantly,
-[0:22:49] But more importantly, this general implementation by using
-[0:22:51] this general implementation by using this base class makes it possible to
-[0:22:53] this base class makes it possible to extend new model classes pretty easily
-[0:22:56] extend new model classes pretty easily because general estimation framework is
-[0:22:58] because general estimation framework is already implemented, so it's already
-[0:23:00] already implemented, so it's already there.
+[0:22:33] implementation? We wanted to have a
+[0:22:35] package that's kind of flexible, so you
+[0:22:37] can kind of vary many components of your
+[0:22:40] causal model like the choice of
+[0:22:42] learners, the resampling schemes and
+[0:22:44] that's something that you can actually
+[0:22:45] adjust pretty easily.
+[0:22:47] But more importantly,
+[0:22:49] this general implementation by using
+[0:22:51] this base class makes it possible to
+[0:22:53] extend new model classes pretty easily
+[0:22:56] because general estimation framework is
+[0:22:58] already implemented, so it's already
 [0:23:01] there. But what
 [0:23:02] But what what if you want to add a new model
-[0:23:04] what if you want to add a new model class, what you would have to do
-[0:23:06] class, what you would have to do is to add
+[0:23:04] class, what you would have to do
 [0:23:08] is to add um
 [0:23:09] um like to specify the model specific
-[0:23:11] like to specify the model specific parts. Like what is the exact the exact
-[0:23:14] parts. Like what is the exact the exact orthogonal score for this model
-[0:23:16] orthogonal score for this model and all that stuff. So, that's a that's
-[0:23:18] and all that stuff. So, that's a that's the thing you have to do when you want
-[0:23:19] the thing you have to do when you want to add model classes and
-[0:23:21] to add model classes and Sven is going to show you some examples
-[0:23:23] Sven is going to show you some examples in what he did.
-[0:23:25] in what he did. So, that's my part
-[0:23:26] So, that's my part uh so far. I hand over to my colleague
-[0:23:29] uh so far. I hand over to my colleague Sven. In case you have any question I
-[0:23:31] Sven. In case you have any question I should answer right now, I can do it.
-[0:23:32] should answer right now, I can do it. Otherwise, uh we can also do it at the
-[0:23:35] Otherwise, uh we can also do it at the end. So, I stop sharing my screen and
-[0:23:37] end. So, I stop sharing my screen and Sven, I think you can
-[0:23:38] Sven, I think you can take over.
-[0:23:44] Perfect. Thanks. Yeah, there there's a bunch of questions in the Q&amp;A.
-[0:23:47] bunch of questions in the Q&amp;A. Um Sven has
-[0:23:49] Um Sven has heroically answered a bunch of them. But
-[0:23:51] heroically answered a bunch of them. But Sven, if you have some that you think
-[0:23:53] Sven, if you have some that you think can be answered live now, you can
-[0:23:56] can be answered live now, you can Um
+[0:23:11] parts. Like what is the exact the exact
+[0:23:14] orthogonal score for this model
+[0:23:16] and all that stuff. So, that's a that's
+[0:23:18] the thing you have to do when you want
+[0:23:19] to add model classes and
+[0:23:21] Sven is going to show you some examples
+[0:23:23] in what he did.
+[0:23:25] So, that's my part
+[0:23:26] uh so far. I hand over to my colleague
+[0:23:29] Sven. In case you have any question I
+[0:23:31] should answer right now, I can do it.
+[0:23:32] Otherwise, uh we can also do it at the
+[0:23:35] end. So, I stop sharing my screen and
+[0:23:37] Sven, I think you can
+[0:23:38] take over.
+[0:23:44] Perfect. Thanks. Yeah, there there's a bunch of questions in the Q&A.
+[0:23:47] Um Sven has
+[0:23:49] heroically answered a bunch of them. But
+[0:23:51] Sven, if you have some that you think
+[0:23:53] can be answered live now, you can
 [0:23:57] Um let us know or Okay. Okay, yeah. Um I
-[0:24:00] let us know or Okay. Okay, yeah. Um I I've not read all of them until now. So,
-[0:24:02] I've not read all of them until now. So, so um yeah, um also considering other
-[0:24:06] so um yeah, um also considering other implementations, at the moment it's
-[0:24:08] implementations, at the moment it's yeah, we are still we are still needing
-[0:24:10] yeah, we are still we are still needing time to follow up with the the R version
-[0:24:12] time to follow up with the the R version up to the Python version. So, starting I
-[0:24:15] up to the Python version. So, starting I think a
+[0:24:00] I've not read all of them until now. So,
+[0:24:02] so um yeah, um also considering other
+[0:24:06] implementations, at the moment it's
+[0:24:08] yeah, we are still we are still needing
+[0:24:10] time to follow up with the the R version
+[0:24:12] up to the Python version. So, starting I
 [0:24:16] think a Julia version would be nice, but
-[0:24:18] Julia version would be nice, but starting with a new Julia version at the
-[0:24:20] starting with a new Julia version at the moment would be I think
-[0:24:22] moment would be I think uh too too much. So, so for for for us
-[0:24:25] uh too too much. So, so for for for us to to sort of implement.
-[0:24:27] to to sort of implement. But in case you're interested and you
-[0:24:28] But in case you're interested and you want to do it, we can kind of support
-[0:24:30] want to do it, we can kind of support you on this.
-[0:24:32] you on this. Yeah, um
+[0:24:18] starting with a new Julia version at the
+[0:24:20] moment would be I think
+[0:24:22] uh too too much. So, so for for for us
+[0:24:25] to to sort of implement.
+[0:24:27] But in case you're interested and you
+[0:24:28] want to do it, we can kind of support
+[0:24:30] you on this.
 [0:24:34] Yeah, um All right, thank you.
-[0:24:35] All right, thank you. And
 [0:24:37] And the the the other ones, I think we
-[0:24:40] the the the other ones, I think we them at the end after you showed what
-[0:24:42] them at the end after you showed what you questions. After you showed the
-[0:24:44] you questions. After you showed the extension, maybe it makes sense to
-[0:24:45] extension, maybe it makes sense to answer them.
-[0:24:46] answer them. Yeah. But but mainly just the general
-[0:24:48] Yeah. But but mainly just the general point. So, so most of the settings on
-[0:24:50] point. So, so most of the settings on So, now it's it's it's base based on IID
-[0:24:53] So, now it's it's it's base based on IID data, so we don't have some some and
-[0:24:55] data, so we don't have some some and panel data. We are working on difference
-[0:24:57] panel data. We are working on difference in difference models and so on. So, so
-[0:24:59] in difference models and so on. So, so so all of this is mainly based on
-[0:25:02] so all of this is mainly based on um
+[0:24:40] them at the end after you showed what
+[0:24:42] you questions. After you showed the
+[0:24:44] extension, maybe it makes sense to
+[0:24:45] answer them.
+[0:24:46] Yeah. But but mainly just the general
+[0:24:48] point. So, so most of the settings on
+[0:24:50] So, now it's it's it's base based on IID
+[0:24:53] data, so we don't have some some and
+[0:24:55] panel data. We are working on difference
+[0:24:57] in difference models and so on. So, so
+[0:24:59] so all of this is mainly based on
 [0:25:03] um IID settings for for for data just I
-[0:25:05] IID settings for for for data just I think that that might cover some some of
-[0:25:08] think that that might cover some some of the questions of course.
-[0:25:10] the questions of course. Okay.
+[0:25:05] think that that might cover some some of
+[0:25:08] the questions of course.
 [0:25:11] Okay. Then um yeah,
-[0:25:12] Then um yeah, let's get started also with the code.
-[0:25:14] let's get started also with the code. So, so the basic idea Philip
-[0:25:17] So, so the basic idea Philip um presented the the the core
-[0:25:18] um presented the the the core ingredients and the basic concepts. And
-[0:25:21] ingredients and the basic concepts. And now we will use this to to um
-[0:25:24] now we will use this to to um show like what what if you want to
-[0:25:27] show like what what if you want to implement the basic model, I will start
-[0:25:29] implement the basic model, I will start with a very basic model. So, we will use
-[0:25:31] with a very basic model. So, we will use the partial linear regression model
-[0:25:33] the partial linear regression model as Philip used in the example before
-[0:25:35] as Philip used in the example before where you can maybe see what you really
-[0:25:37] where you can maybe see what you really need for for these examples and then
-[0:25:39] need for for these examples and then afterwards I will
-[0:25:40] afterwards I will come to maybe a bit more interesting
-[0:25:42] come to maybe a bit more interesting stuff for for extensions like clustered
-[0:25:45] stuff for for extensions like clustered standard errors or something like this.
-[0:25:48] standard errors or something like this. Um okay.
+[0:25:12] let's get started also with the code.
+[0:25:14] So, so the basic idea Philip
+[0:25:17] um presented the the the core
+[0:25:18] ingredients and the basic concepts. And
+[0:25:21] now we will use this to to um
+[0:25:24] show like what what if you want to
+[0:25:27] implement the basic model, I will start
+[0:25:29] with a very basic model. So, we will use
+[0:25:31] the partial linear regression model
+[0:25:33] as Philip used in the example before
+[0:25:35] where you can maybe see what you really
+[0:25:37] need for for these examples and then
+[0:25:39] afterwards I will
+[0:25:40] come to maybe a bit more interesting
+[0:25:42] stuff for for extensions like clustered
+[0:25:45] standard errors or something like this.
 [0:25:50] Um okay. So, what is it what be the typical
-[0:25:52] So, what is it what be the typical workflow
 [0:25:53] workflow for
 [0:25:54] for this
 [0:25:55] this um paper? Of course, you have to have
-[0:25:57] um paper? Of course, you have to have your data first. So, so we will for the
-[0:25:59] your data first. So, so we will for the presentation purposes work with CM401K
-[0:26:02] presentation purposes work with CM401K pension plan example. I think most of
-[0:26:05] pension plan example. I think most of you will will know this data. So, um we
-[0:26:09] you will will know this data. So, um we want to um
-[0:26:10] want to um estimate in our case here one uh for the
-[0:26:14] estimate in our case here one uh for the partial linear regression model an
-[0:26:15] partial linear regression model an intent to treat effect
-[0:26:17] intent to treat effect um for the also an average treatment
-[0:26:19] um for the also an average treatment effect of eligibility on the financial
-[0:26:22] effect of eligibility on the financial assets based on some covariates. And
-[0:26:24] assets based on some covariates. And what would be the first thing we have to
-[0:26:27] what would be the first thing we have to do? We have to specify in our data what
-[0:26:29] do? We have to specify in our data what essentially are our treatment, outcome
-[0:26:31] essentially are our treatment, outcome and control variables. And this is done
-[0:26:34] and control variables. And this is done since we are doing this all via object
-[0:26:36] since we are doing this all via object orientation um by constructing or
-[0:26:40] orientation um by constructing or initializing a double ML data class. So,
-[0:26:43] initializing a double ML data class. So, you have to specify your data um frame.
-[0:26:46] you have to specify your data um frame. It This is usually could be a pandas
-[0:26:48] It This is usually could be a pandas data frame, but you could also do this
-[0:26:50] data frame, but you could also do this by a numpy arrays and just set up which
-[0:26:52] by a numpy arrays and just set up which variables are you want to use as
-[0:26:54] variables are you want to use as outcome, which as treatment and
-[0:26:56] outcome, which as treatment and controls.
+[0:25:57] your data first. So, so we will for the
+[0:25:59] presentation purposes work with CM401K
+[0:26:02] pension plan example. I think most of
+[0:26:05] you will will know this data. So, um we
+[0:26:09] want to um
+[0:26:10] estimate in our case here one uh for the
+[0:26:14] partial linear regression model an
+[0:26:15] intent to treat effect
+[0:26:17] um for the also an average treatment
+[0:26:19] effect of eligibility on the financial
+[0:26:22] assets based on some covariates. And
+[0:26:24] what would be the first thing we have to
+[0:26:27] do? We have to specify in our data what
+[0:26:29] essentially are our treatment, outcome
+[0:26:31] and control variables. And this is done
+[0:26:34] since we are doing this all via object
+[0:26:36] orientation um by constructing or
+[0:26:40] initializing a double ML data class. So,
+[0:26:43] you have to specify your data um frame.
+[0:26:46] It This is usually could be a pandas
+[0:26:48] data frame, but you could also do this
+[0:26:50] by a numpy arrays and just set up which
+[0:26:52] variables are you want to use as
+[0:26:54] outcome, which as treatment and
 [0:26:58] controls. And um the same thing in R. So, if you
-[0:27:00] And um the same thing in R. So, if you want to switch to R,
-[0:27:02] want to switch to R, um you can see that this is this might
-[0:27:05] um you can see that this is this might be new like Philip mentioned for R6 if
-[0:27:07] be new like Philip mentioned for R6 if you're not familiar with object
-[0:27:10] you're not familiar with object orientation that you just construct here
-[0:27:12] orientation that you just construct here with this new method. So, you initialize
-[0:27:15] with this new method. So, you initialize a new object of the double ML data class
-[0:27:17] a new object of the double ML data class and just um this fills this object with
-[0:27:20] and just um this fills this object with values and you can then use some method
-[0:27:22] values and you can then use some method on it and or use this object. And the
-[0:27:26] on it and or use this object. And the code um the I think I've I've
-[0:27:28] code um the I think I've I've highlighted mostly the the lines which
-[0:27:30] highlighted mostly the the lines which are of interest. So, there are some
-[0:27:32] are of interest. So, there are some other further lines that the code will
-[0:27:33] other further lines that the code will run, but I think the the lines of which
-[0:27:36] run, but I think the the lines of which are interesting should be then
-[0:27:38] are interesting should be then highlighted that you you can really see
-[0:27:40] highlighted that you you can really see them in this these examples.
-[0:27:43] them in this these examples. The second step would be of course, so
-[0:27:45] The second step would be of course, so that had nothing really
-[0:27:48] that had nothing really um to do with programming, deciding on
-[0:27:50] um to do with programming, deciding on the model. So, we're already some
-[0:27:51] the model. So, we're already some questions about um
-[0:27:54] questions about um like what we are assuming of in in the
-[0:27:57] like what we are assuming of in in the for identification. Like in the partial
-[0:27:59] for identification. Like in the partial linear model, we are assuming
-[0:28:00] linear model, we are assuming conditional exogeneity. So, so you you
-[0:28:02] conditional exogeneity. So, so you you know or you you assume to know which
-[0:28:04] know or you you assume to know which variables are possible confounders and
-[0:28:06] variables are possible confounders and you try to adjust for them.
-[0:28:08] you try to adjust for them. And um in these settings also for
-[0:28:11] And um in these settings also for identification, we we assume conditional
-[0:28:14] identification, we we assume conditional exogeneity and then you also essentially
-[0:28:17] exogeneity and then you also essentially assume some form of
-[0:28:18] assume some form of structural model for um
-[0:28:22] structural model for um um
+[0:27:00] want to switch to R,
+[0:27:02] um you can see that this is this might
+[0:27:05] be new like Philip mentioned for R6 if
+[0:27:07] you're not familiar with object
+[0:27:10] orientation that you just construct here
+[0:27:12] with this new method. So, you initialize
+[0:27:15] a new object of the double ML data class
+[0:27:17] and just um this fills this object with
+[0:27:20] values and you can then use some method
+[0:27:22] on it and or use this object. And the
+[0:27:26] code um the I think I've I've
+[0:27:28] highlighted mostly the the lines which
+[0:27:30] are of interest. So, there are some
+[0:27:32] other further lines that the code will
+[0:27:33] run, but I think the the lines of which
+[0:27:36] are interesting should be then
+[0:27:38] highlighted that you you can really see
+[0:27:40] them in this these examples.
+[0:27:43] The second step would be of course, so
+[0:27:45] that had nothing really
+[0:27:48] um to do with programming, deciding on
+[0:27:50] the model. So, we're already some
+[0:27:51] questions about um
+[0:27:54] like what we are assuming of in in the
+[0:27:57] for identification. Like in the partial
+[0:27:59] linear model, we are assuming
+[0:28:00] conditional exogeneity. So, so you you
+[0:28:02] know or you you assume to know which
+[0:28:04] variables are possible confounders and
+[0:28:06] you try to adjust for them.
+[0:28:08] And um in these settings also for
+[0:28:11] identification, we we assume conditional
+[0:28:14] exogeneity and then you also essentially
+[0:28:17] assume some form of
+[0:28:18] structural model for um
 [0:28:23] um for either assuming a partially linear
-[0:28:25] for either assuming a partially linear model or an interactive or more complex
-[0:28:27] model or an interactive or more complex regression model. We have further
-[0:28:28] regression model. We have further models. So, so this is sort of the basic
-[0:28:30] models. So, so this is sort of the basic thing, but um yeah. And then you can
-[0:28:32] thing, but um yeah. And then you can decide whether you are either using
-[0:28:34] decide whether you are either using instruments for local effects or
-[0:28:36] instruments for local effects or something else. And in our case, we will
-[0:28:39] something else. And in our case, we will base this on the the
-[0:28:41] base this on the the partial linear model. So, we will use
-[0:28:42] partial linear model. So, we will use the double MLPLR class.
-[0:28:47] the double MLPLR class. And the one ingredient like Philip said
-[0:28:49] And the one ingredient like Philip said were the these machine learning
-[0:28:51] were the these machine learning algorithms, right? So, so high sort of
-[0:28:53] algorithms, right? So, so high sort of high quality machine learning
-[0:28:54] high quality machine learning algorithms. So, you have to define some
-[0:28:57] algorithms. So, you have to define some learners you want to use. And in the
-[0:28:58] learners you want to use. And in the partial linear regression model before,
-[0:29:00] partial linear regression model before, we had um sort of these two nuisance
-[0:29:02] we had um sort of these two nuisance parts, which one were the conditional
-[0:29:04] parts, which one were the conditional expectation of the outcome given the
-[0:29:07] expectation of the outcome given the your covariates or your controls and the
-[0:29:10] your covariates or your controls and the other one were the propensity score if
-[0:29:12] other one were the propensity score if the treatment is binary. So, so the
-[0:29:14] the treatment is binary. So, so the conditional expectation of the treatment
-[0:29:16] conditional expectation of the treatment conditional on your covariates, right?
-[0:29:18] conditional on your covariates, right? So, you have to specify two learners
-[0:29:20] So, you have to specify two learners which you want to use for for each of
-[0:29:22] which you want to use for for each of these. And you can see in Python like
-[0:29:25] these. And you can see in Python like Philip said, we are building up on the
-[0:29:27] Philip said, we are building up on the um
+[0:28:25] model or an interactive or more complex
+[0:28:27] regression model. We have further
+[0:28:28] models. So, so this is sort of the basic
+[0:28:30] thing, but um yeah. And then you can
+[0:28:32] decide whether you are either using
+[0:28:34] instruments for local effects or
+[0:28:36] something else. And in our case, we will
+[0:28:39] base this on the the
+[0:28:41] partial linear model. So, we will use
+[0:28:42] the double MLPLR class.
+[0:28:47] And the one ingredient like Philip said
+[0:28:49] were the these machine learning
+[0:28:51] algorithms, right? So, so high sort of
+[0:28:53] high quality machine learning
+[0:28:54] algorithms. So, you have to define some
+[0:28:57] learners you want to use. And in the
+[0:28:58] partial linear regression model before,
+[0:29:00] we had um sort of these two nuisance
+[0:29:02] parts, which one were the conditional
+[0:29:04] expectation of the outcome given the
+[0:29:07] your covariates or your controls and the
+[0:29:10] other one were the propensity score if
+[0:29:12] the treatment is binary. So, so the
+[0:29:14] conditional expectation of the treatment
+[0:29:16] conditional on your covariates, right?
+[0:29:18] So, you have to specify two learners
+[0:29:20] which you want to use for for each of
+[0:29:22] these. And you can see in Python like
+[0:29:25] Philip said, we are building up on the
 [0:29:28] um scikit-learn package. So, you for
-[0:29:30] scikit-learn package. So, you for example, you can use I think any learner
-[0:29:32] example, you can use I think any learner from the scikit-learn package. In this
-[0:29:34] from the scikit-learn package. In this case, maybe random forest and you
-[0:29:36] case, maybe random forest and you specify some hyper parameters and also
-[0:29:38] specify some hyper parameters and also initialize the learner. So, nothing is
-[0:29:40] initialize the learner. So, nothing is fitted. You just define this is your
-[0:29:42] fitted. You just define this is your learner and this we will use as input
-[0:29:45] learner and this we will use as input for our model.
-[0:29:46] for our model. And of course, since we want to like
-[0:29:49] And of course, since we want to like XGBoost or LightGBM are very popular for
-[0:29:52] XGBoost or LightGBM are very popular for tabular data, you can also use these
-[0:29:54] tabular data, you can also use these ones if because all of them have these
-[0:29:57] ones if because all of them have these SKlearn style API.
-[0:30:00] SKlearn style API. For R, this is similar. Here you can see
-[0:30:03] For R, this is similar. Here you can see that we are using, like Philip said, the
-[0:30:05] that we are using, like Philip said, the MLR3 syntax.
-[0:30:07] MLR3 syntax. So so you define learners
-[0:30:09] So so you define learners in these MLR3 learner package. You can
-[0:30:11] in these MLR3 learner package. You can There are learners defined which have
-[0:30:13] There are learners defined which have some specific also these type of
-[0:30:16] some specific also these type of structure like these methods you can use
-[0:30:18] structure like these methods you can use in them, and you can could also define
-[0:30:20] in them, and you can could also define your own learners, and then you can just
-[0:30:22] your own learners, and then you can just specify we want to use maybe the Ranger
-[0:30:25] specify we want to use maybe the Ranger random forest package random forest in
-[0:30:27] random forest package random forest in the Ranger package
-[0:30:29] the Ranger package just to as a regression for the the
-[0:30:31] just to as a regression for the the first part like the conditional
-[0:30:32] first part like the conditional expectation of the outcome, and for the
-[0:30:35] expectation of the outcome, and for the the propensity score we want to use a
-[0:30:37] the propensity score we want to use a classification classification tree.
-[0:30:39] classification classification tree. Also, of course, with XGBoost is also
-[0:30:42] Also, of course, with XGBoost is also possible in there.
-[0:30:44] possible in there. And then we will kind of finally sort of
-[0:30:47] And then we will kind of finally sort of construct our model because we have all
-[0:30:49] construct our model because we have all the inputs available, right? We have the
-[0:30:51] the inputs available, right? We have the our data defined which which variables
-[0:30:53] our data defined which which variables are treatment, which variables are
-[0:30:55] are treatment, which variables are outcome, and afterwards we can
-[0:30:58] outcome, and afterwards we can plug in our learners, and this is all
-[0:31:00] plug in our learners, and this is all the basic things we need for our object,
-[0:31:02] the basic things we need for our object, and this is just initializing this
-[0:31:04] and this is just initializing this partial linear regression object. It's
-[0:31:07] partial linear regression object. It's not not fitting, but just initializing
-[0:31:09] not not fitting, but just initializing the object so that there are some checks
-[0:31:11] the object so that there are some checks that the learners are sort of correct.
-[0:31:12] that the learners are sort of correct. It checks if they are classifiers or
-[0:31:14] It checks if they are classifiers or regressors and something like this.
-[0:31:16] regressors and something like this. And you can add some more hyper
-[0:31:18] And you can add some more hyper parameters so you can adjust the number
-[0:31:20] parameters so you can adjust the number of folds you want to use for cross
-[0:31:22] of folds you want to use for cross fitting or how many times you want to do
-[0:31:24] fitting or how many times you want to do this, and there are two different
-[0:31:26] this, and there are two different procedures like I can say the double
-[0:31:29] procedures like I can say the double machine learning one or two and like
-[0:31:31] machine learning one or two and like just how to aggregate the cross fitting
-[0:31:33] just how to aggregate the cross fitting procedures essentially.
-[0:31:35] procedures essentially. And always to showcase also the arc R
-[0:31:39] And always to showcase also the arc R part. So it's the same. So we have to
-[0:31:42] part. So it's the same. So we have to initialize this object. So we again call
-[0:31:44] initialize this object. So we again call the
+[0:29:30] example, you can use I think any learner
+[0:29:32] from the scikit-learn package. In this
+[0:29:34] case, maybe random forest and you
+[0:29:36] specify some hyper parameters and also
+[0:29:38] initialize the learner. So, nothing is
+[0:29:40] fitted. You just define this is your
+[0:29:42] learner and this we will use as input
+[0:29:45] for our model.
+[0:29:46] And of course, since we want to like
+[0:29:49] XGBoost or LightGBM are very popular for
+[0:29:52] tabular data, you can also use these
+[0:29:54] ones if because all of them have these
+[0:29:57] SKlearn style API.
+[0:30:00] For R, this is similar. Here you can see
+[0:30:03] that we are using, like Philip said, the
+[0:30:05] MLR3 syntax.
+[0:30:07] So so you define learners
+[0:30:09] in these MLR3 learner package. You can
+[0:30:11] There are learners defined which have
+[0:30:13] some specific also these type of
+[0:30:16] structure like these methods you can use
+[0:30:18] in them, and you can could also define
+[0:30:20] your own learners, and then you can just
+[0:30:22] specify we want to use maybe the Ranger
+[0:30:25] random forest package random forest in
+[0:30:27] the Ranger package
+[0:30:29] just to as a regression for the the
+[0:30:31] first part like the conditional
+[0:30:32] expectation of the outcome, and for the
+[0:30:35] the propensity score we want to use a
+[0:30:37] classification classification tree.
+[0:30:39] Also, of course, with XGBoost is also
+[0:30:42] possible in there.
+[0:30:44] And then we will kind of finally sort of
+[0:30:47] construct our model because we have all
+[0:30:49] the inputs available, right? We have the
+[0:30:51] our data defined which which variables
+[0:30:53] are treatment, which variables are
+[0:30:55] outcome, and afterwards we can
+[0:30:58] plug in our learners, and this is all
+[0:31:00] the basic things we need for our object,
+[0:31:02] and this is just initializing this
+[0:31:04] partial linear regression object. It's
+[0:31:07] not not fitting, but just initializing
+[0:31:09] the object so that there are some checks
+[0:31:11] that the learners are sort of correct.
+[0:31:12] It checks if they are classifiers or
+[0:31:14] regressors and something like this.
+[0:31:16] And you can add some more hyper
+[0:31:18] parameters so you can adjust the number
+[0:31:20] of folds you want to use for cross
+[0:31:22] fitting or how many times you want to do
+[0:31:24] this, and there are two different
+[0:31:26] procedures like I can say the double
+[0:31:29] machine learning one or two and like
+[0:31:31] just how to aggregate the cross fitting
+[0:31:33] procedures essentially.
+[0:31:35] And always to showcase also the arc R
+[0:31:39] part. So it's the same. So we have to
+[0:31:42] initialize this object. So we again call
 [0:31:45] the new method or the constructor to to to
-[0:31:47] new method or the constructor to to to just initialize the object, but all the
-[0:31:50] just initialize the object, but all the the input variables or all the input
-[0:31:52] the input variables or all the input parts
+[0:31:47] just initialize the object, but all the
+[0:31:50] the input variables or all the input
 [0:31:54] parts keep to be the same. So also the folds
-[0:31:56] keep to be the same. So also the folds and so on.
+[0:31:56] and so on.
 [0:32:02] And then if we we have our object, we can call the fit method, and this the
-[0:32:06] can call the fit method, and this the reason for this is that we wanted to
-[0:32:07] reason for this is that we wanted to stay also somewhat similar at least to
-[0:32:10] stay also somewhat similar at least to the SKlearn
-[0:32:11] the SKlearn style API so that is very common if you
-[0:32:14] style API so that is very common if you are familiar how to fit a random forest
-[0:32:16] are familiar how to fit a random forest in SKlearn that you do this in a very
-[0:32:18] in SKlearn that you do this in a very similar way. You You initialize your
-[0:32:20] similar way. You You initialize your object, you and then you call fit if you
-[0:32:23] object, you and then you call fit if you want to estimate your parameters and or
-[0:32:26] want to estimate your parameters and or your predictions and so on.
-[0:32:28] your predictions and so on. And if you call fit, and you you you can
-[0:32:31] And if you call fit, and you you you can see that afterwards this estimates
-[0:32:33] see that afterwards this estimates essentially internally
-[0:32:35] essentially internally on the different folds the corresponding
-[0:32:37] on the different folds the corresponding learners, uses the out of sample
-[0:32:39] learners, uses the out of sample predictions to create these these new
-[0:32:42] predictions to create these these new these scores, and solves the score
-[0:32:45] these scores, and solves the score solves the
-[0:32:46] solves the moment condition of these scores to to
-[0:32:49] moment condition of these scores to to to get your final estimate.
-[0:32:51] to get your final estimate. And then the estimate is available as
-[0:32:53] And then the estimate is available as for attributes and of course also
-[0:32:55] for attributes and of course also summaries
+[0:32:06] reason for this is that we wanted to
+[0:32:07] stay also somewhat similar at least to
+[0:32:10] the SKlearn
+[0:32:11] style API so that is very common if you
+[0:32:14] are familiar how to fit a random forest
+[0:32:16] in SKlearn that you do this in a very
+[0:32:18] similar way. You You initialize your
+[0:32:20] object, you and then you call fit if you
+[0:32:23] want to estimate your parameters and or
+[0:32:26] your predictions and so on.
+[0:32:28] And if you call fit, and you you you can
+[0:32:31] see that afterwards this estimates
+[0:32:33] essentially internally
+[0:32:35] on the different folds the corresponding
+[0:32:37] learners, uses the out of sample
+[0:32:39] predictions to create these these new
+[0:32:42] these scores, and solves the score
+[0:32:45] solves the
+[0:32:46] moment condition of these scores to to
+[0:32:49] to get your final estimate.
+[0:32:51] And then the estimate is available as
+[0:32:53] for attributes and of course also
 [0:32:56] summaries with standard errors, p-values, and
-[0:32:59] with standard errors, p-values, and confidence intervals.
-[0:33:01] confidence intervals. The same for R. You can see just call
-[0:33:04] The same for R. You can see just call fit
+[0:32:59] confidence intervals.
+[0:33:01] The same for R. You can see just call
 [0:33:05] fit again.
 [0:33:06] again. So just from from the basic structure,
-[0:33:08] So just from from the basic structure, and the summary
-[0:33:10] and the summary is now in the same structure as for
-[0:33:13] is now in the same structure as for linear models, right? You have p-values
-[0:33:16] linear models, right? You have p-values and your estimates. And as you can see
-[0:33:18] and your estimates. And as you can see the estimate here, it's it's done of
-[0:33:20] the estimate here, it's it's done of course with different packages, slightly
-[0:33:22] course with different packages, slightly different randomness in the random
-[0:33:23] different randomness in the random forest, and so on. This is very close to
-[0:33:26] forest, and so on. This is very close to to it's very similar for for both of
-[0:33:28] to it's very similar for for both of these packages. As it should should be
-[0:33:30] these packages. As it should should be if this
+[0:33:08] and the summary
+[0:33:10] is now in the same structure as for
+[0:33:13] linear models, right? You have p-values
+[0:33:16] and your estimates. And as you can see
+[0:33:18] the estimate here, it's it's done of
+[0:33:20] course with different packages, slightly
+[0:33:22] different randomness in the random
+[0:33:23] forest, and so on. This is very close to
+[0:33:26] to it's very similar for for both of
+[0:33:28] these packages. As it should should be
 [0:33:31] if this problem is
-[0:33:33] problem is nice. Okay. And also one other part if
-[0:33:36] nice. Okay. And also one other part if you want to have a nice summary then of
-[0:33:38] you want to have a nice summary then of your object, you
-[0:33:39] your object, you after you can also call this before, but
-[0:33:41] after you can also call this before, but then your learners are not fitted
-[0:33:43] then your learners are not fitted essentially, but then you can see a
-[0:33:44] essentially, but then you can see a summary which data you plugged in into
-[0:33:46] summary which data you plugged in into your problem from the observations, what
-[0:33:48] your problem from the observations, what you used maybe as instruments or
-[0:33:50] you used maybe as instruments or something else, and then what learners
-[0:33:53] something else, and then what learners you used, and also the out of sample
-[0:33:54] you used, and also the out of sample performance of your learners, right? So
-[0:33:56] performance of your learners, right? So you can really what what check in in
-[0:33:59] you can really what what check in in this how good your learners really
-[0:34:01] this how good your learners really performed out of sample in these
-[0:34:03] performed out of sample in these several estimation problems for the
-[0:34:05] several estimation problems for the outcome and so on, and what splitting
-[0:34:07] outcome and so on, and what splitting scheme you used, and the summary. The
-[0:34:10] scheme you used, and the summary. The same again for R.
+[0:33:33] nice. Okay. And also one other part if
+[0:33:36] you want to have a nice summary then of
+[0:33:38] your object, you
+[0:33:39] after you can also call this before, but
+[0:33:41] then your learners are not fitted
+[0:33:43] essentially, but then you can see a
+[0:33:44] summary which data you plugged in into
+[0:33:46] your problem from the observations, what
+[0:33:48] you used maybe as instruments or
+[0:33:50] something else, and then what learners
+[0:33:53] you used, and also the out of sample
+[0:33:54] performance of your learners, right? So
+[0:33:56] you can really what what check in in
+[0:33:59] this how good your learners really
+[0:34:01] performed out of sample in these
+[0:34:03] several estimation problems for the
+[0:34:05] outcome and so on, and what splitting
+[0:34:07] scheme you used, and the summary. The
+[0:34:10] same again for R.
 [0:34:17] And finally, if you you you have this, so then we have the basic workflow
-[0:34:19] so then we have the basic workflow done.
 [0:34:21] done. You You always
-[0:34:22] You You always You You mostly
-[0:34:24] You You mostly I think more we are mostly interested
-[0:34:26] I think more we are mostly interested also in in confidence intervals or
-[0:34:28] also in in confidence intervals or hypothesis testing. So So
-[0:34:31] hypothesis testing. So So you can construct confidence intervals
-[0:34:33] you can construct confidence intervals also with a confint method. So you just
-[0:34:35] also with a confint method. So you just have to supply some some level of
-[0:34:38] have to supply some some level of confidence, and then you get the
-[0:34:40] confidence, and then you get the corresponding confidence interval.
-[0:34:42] corresponding confidence interval. Um
+[0:34:22] You You mostly
+[0:34:24] I think more we are mostly interested
+[0:34:26] also in in confidence intervals or
+[0:34:28] hypothesis testing. So So
+[0:34:31] you can construct confidence intervals
+[0:34:33] also with a confint method. So you just
+[0:34:35] have to supply some some level of
+[0:34:38] confidence, and then you get the
+[0:34:40] corresponding confidence interval.
 [0:34:43] Um And what is a bit more interesting is of
-[0:34:45] And what is a bit more interesting is of course you can construct You can use
-[0:34:48] course you can construct You can use bootstrap, and then afterwards call a
-[0:34:50] bootstrap, and then afterwards call a jointly valid confidence interval if you
-[0:34:52] jointly valid confidence interval if you have multiple treatment effects. So you
-[0:34:54] have multiple treatment effects. So you can also estimate multiple treatment
-[0:34:56] can also estimate multiple treatment effects something on the partial linear
-[0:34:58] effects something on the partial linear model, and then you might be or you
-[0:35:02] model, and then you might be or you You can correct for multiple testing
-[0:35:06] You can correct for multiple testing or you
+[0:34:45] course you can construct You can use
+[0:34:48] bootstrap, and then afterwards call a
+[0:34:50] jointly valid confidence interval if you
+[0:34:52] have multiple treatment effects. So you
+[0:34:54] can also estimate multiple treatment
+[0:34:56] effects something on the partial linear
+[0:34:58] model, and then you might be or you
+[0:35:02] You can correct for multiple testing
 [0:35:07] or you adjust your confidence intervals for
-[0:35:08] adjust your confidence intervals for these
 [0:35:09] these to to to be jointly valid because you
-[0:35:13] to to to be jointly valid because you by just by using bootstrap because all
-[0:35:15] by just by using bootstrap because all of this is then based on a vector of
-[0:35:17] of this is then based on a vector of scores, and you can construct a
-[0:35:19] scores, and you can construct a multiplier bootstrap method to to to
-[0:35:21] multiplier bootstrap method to to to approximate the corresponding
-[0:35:24] approximate the corresponding quantiles of the the
-[0:35:26] quantiles of the the the the or critical values of of the
-[0:35:29] the the or critical values of of the asymptotic normal distribution.
-[0:35:32] asymptotic normal distribution. And the same for R.
-[0:35:34] And the same for R. So you can see
-[0:35:36] So you can see again the same syntax. We just call
-[0:35:38] again the same syntax. We just call different methods the confint method to
-[0:35:40] different methods the confint method to construct confidence intervals, and here
-[0:35:42] construct confidence intervals, and here for jointly valid. And in this case one
-[0:35:45] for jointly valid. And in this case one one can see it's it's it's similar of
-[0:35:46] one can see it's it's it's similar of course it's based on the bootstrap, but
-[0:35:49] course it's based on the bootstrap, but of course it's not um
-[0:35:51] of course it's not um not doesn't matter because it's only one
-[0:35:53] not doesn't matter because it's only one estimate if you call it jointly valid
-[0:35:55] estimate if you call it jointly valid confidence interval or or not.
+[0:35:13] by just by using bootstrap because all
+[0:35:15] of this is then based on a vector of
+[0:35:17] scores, and you can construct a
+[0:35:19] multiplier bootstrap method to to to
+[0:35:21] approximate the corresponding
+[0:35:24] quantiles of the the
+[0:35:26] the the or critical values of of the
+[0:35:29] asymptotic normal distribution.
+[0:35:32] And the same for R.
+[0:35:34] So you can see
+[0:35:36] again the same syntax. We just call
+[0:35:38] different methods the confint method to
+[0:35:40] construct confidence intervals, and here
+[0:35:42] for jointly valid. And in this case one
+[0:35:45] one can see it's it's it's similar of
+[0:35:46] course it's based on the bootstrap, but
+[0:35:49] of course it's not um
+[0:35:51] not doesn't matter because it's only one
+[0:35:53] estimate if you call it jointly valid
+[0:35:55] confidence interval or or not.
 [0:36:03] Okay. Um this is sort of the the basic workflow
 [0:36:04] workflow of double machine learning.
-[0:36:06] of double machine learning. Um
 [0:36:08] Um And now we will come to to to
-[0:36:10] And now we will come to to to extensions. Um I will
-[0:36:13] extensions. Um I will show and maybe we can if Philip says we
-[0:36:16] show and maybe we can if Philip says we we can discuss maybe if if there are
-[0:36:18] we can discuss maybe if if there are questions
+[0:36:10] extensions. Um I will
+[0:36:13] show and maybe we can if Philip says we
+[0:36:16] we can discuss maybe if if there are
 [0:36:19] questions which we should discuss now, or should
-[0:36:21] which we should discuss now, or should we
 [0:36:22] we continue with the extensions, Philip?
-[0:36:24] continue with the extensions, Philip? What would you say if you have read
-[0:36:26] What would you say if you have read them?
+[0:36:24] What would you say if you have read
+[0:36:26] them?
 [0:36:31] Um maybe maybe two comments I can give on the questions that I answered or I
-[0:36:33] on the questions that I answered or I tried to answer. So
-[0:36:36] tried to answer. So one was regarding the computation time
-[0:36:39] one was regarding the computation time and parallelization. So I think like
-[0:36:42] and parallelization. So I think like most important part in terms of
-[0:36:44] most important part in terms of computation
-[0:36:46] computation capacities
-[0:36:48] capacities refers to the implementation of the
-[0:36:49] refers to the implementation of the machine learning tools. So this is
-[0:36:50] machine learning tools. So this is something that we kind of employ under
-[0:36:52] something that we kind of employ under the hood. So it's possible to
-[0:36:54] the hood. So it's possible to uh
+[0:36:33] tried to answer. So
+[0:36:36] one was regarding the computation time
+[0:36:39] and parallelization. So I think like
+[0:36:42] most important part in terms of
+[0:36:44] computation
+[0:36:46] capacities
+[0:36:48] refers to the implementation of the
+[0:36:49] machine learning tools. So this is
+[0:36:50] something that we kind of employ under
+[0:36:52] the hood. So it's possible to
 [0:36:55] uh like this is a bottleneck I would say.
-[0:36:57] like this is a bottleneck I would say. So and we do not time it. And then there
-[0:36:59] So and we do not time it. And then there was another question
-[0:37:01] was another question if and to what extent this is related to
-[0:37:04] if and to what extent this is related to targeted machine learning.
-[0:37:06] targeted machine learning. And actually targeted machine learning
-[0:37:08] And actually targeted machine learning is kind of similar in spirit. So it
-[0:37:11] is kind of similar in spirit. So it shares some commonalities with double
-[0:37:13] shares some commonalities with double machine learning, but it's pretty
-[0:37:15] machine learning, but it's pretty different from the estimation.
-[0:37:17] different from the estimation. Uh so this is nothing that we do
-[0:37:20] Uh so this is nothing that we do or that we actually implement in our
-[0:37:22] or that we actually implement in our package. So I think this is maybe the
-[0:37:24] package. So I think this is maybe the most important part. And the remaining
-[0:37:26] most important part. And the remaining parts we can keep them for the final
-[0:37:28] parts we can keep them for the final discussion, I think.
-[0:37:31] discussion, I think. So please go on, Sven. Okay. Thanks.
-[0:37:35] So please go on, Sven. Okay. Thanks. Okay. For for extensions, so what do we
-[0:37:37] Okay. For for extensions, so what do we also have implemented apart from these
-[0:37:40] also have implemented apart from these basic models? So like I already
-[0:37:42] basic models? So like I already mentioned, of course,
-[0:37:44] mentioned, of course, multiple treatment treatments. So you
-[0:37:47] multiple treatment treatments. So you can create
-[0:37:48] can create simultaneous intervals for multiple
-[0:37:51] simultaneous intervals for multiple treatment effects, for example, in the
-[0:37:52] treatment effects, for example, in the partial linear model if you
-[0:37:55] partial linear model if you usually one is not only interested in a
-[0:37:57] usually one is not only interested in a in in one variable
-[0:37:59] in in one variable or has for a data set maybe multiple
-[0:38:02] or has for a data set maybe multiple variables that might be interesting or
-[0:38:04] variables that might be interesting or groups. So so you can create a
-[0:38:06] groups. So so you can create a simultaneous inference for that. And we
-[0:38:08] simultaneous inference for that. And we have clustered standard errors. I will
-[0:38:10] have clustered standard errors. I will also show this.
-[0:38:11] also show this. Um class for for any method we have
-[0:38:14] Um class for for any method we have here, they they all show work with
-[0:38:16] here, they they all show work with clustered standard errors.
-[0:38:18] clustered standard errors. And for treatment effect heterogeneity,
-[0:38:21] And for treatment effect heterogeneity, we have a group and conditional average
-[0:38:22] we have a group and conditional average treatment effects, which we will
-[0:38:24] treatment effects, which we will showcase, and also quantile treatment
-[0:38:26] showcase, and also quantile treatment effects. Um
-[0:38:29] effects. Um And also
+[0:36:57] So and we do not time it. And then there
+[0:36:59] was another question
+[0:37:01] if and to what extent this is related to
+[0:37:04] targeted machine learning.
+[0:37:06] And actually targeted machine learning
+[0:37:08] is kind of similar in spirit. So it
+[0:37:11] shares some commonalities with double
+[0:37:13] machine learning, but it's pretty
+[0:37:15] different from the estimation.
+[0:37:17] Uh so this is nothing that we do
+[0:37:20] or that we actually implement in our
+[0:37:22] package. So I think this is maybe the
+[0:37:24] most important part. And the remaining
+[0:37:26] parts we can keep them for the final
+[0:37:28] discussion, I think.
+[0:37:31] So please go on, Sven. Okay. Thanks.
+[0:37:35] Okay. For for extensions, so what do we
+[0:37:37] also have implemented apart from these
+[0:37:40] basic models? So like I already
+[0:37:42] mentioned, of course,
+[0:37:44] multiple treatment treatments. So you
+[0:37:47] can create
+[0:37:48] simultaneous intervals for multiple
+[0:37:51] treatment effects, for example, in the
+[0:37:52] partial linear model if you
+[0:37:55] usually one is not only interested in a
+[0:37:57] in in one variable
+[0:37:59] or has for a data set maybe multiple
+[0:38:02] variables that might be interesting or
+[0:38:04] groups. So so you can create a
+[0:38:06] simultaneous inference for that. And we
+[0:38:08] have clustered standard errors. I will
+[0:38:10] also show this.
+[0:38:11] Um class for for any method we have
+[0:38:14] here, they they all show work with
+[0:38:16] clustered standard errors.
+[0:38:18] And for treatment effect heterogeneity,
+[0:38:21] we have a group and conditional average
+[0:38:22] treatment effects, which we will
+[0:38:24] showcase, and also quantile treatment
+[0:38:26] effects. Um
 [0:38:30] And also conditional value at risks
-[0:38:32] conditional value at risks effects because this is very similar to
-[0:38:34] effects because this is very similar to quantiles, and that was very also
-[0:38:36] quantiles, and that was very also similar to to implement. And one can see
-[0:38:38] similar to to implement. And one can see or might see in these extensions that
-[0:38:42] or might see in these extensions that the the benefit of this object
-[0:38:44] the the benefit of this object orientated implementation will will be
-[0:38:47] orientated implementation will will be that we all these basic methods to to
-[0:38:50] that we all these basic methods to to construct these confidence intervals
-[0:38:52] construct these confidence intervals because they are always based on
-[0:38:54] because they are always based on the same type of score and common parts,
-[0:38:58] the same type of score and common parts, they they we we only sort of have to
-[0:39:01] they they we we only sort of have to implement these specific um
-[0:39:05] implement these specific um object how to estimate specific nuisance
-[0:39:07] object how to estimate specific nuisance parameters and create the score, and the
-[0:39:09] parameters and create the score, and the rest will be sort of done similar in a
-[0:39:11] rest will be sort of done similar in a similar way. And so so we have two
-[0:39:14] similar way. And so so we have two types, so linear and non-linear scores,
-[0:39:17] types, so linear and non-linear scores, and for example, quantile estimate
-[0:39:19] and for example, quantile estimate quantile effects will be based on on
-[0:39:22] quantile effects will be based on on non-linear scores and this so linear
-[0:39:24] non-linear scores and this so linear refers to the the the parameter of
-[0:39:27] refers to the the the parameter of interest, so theta essentially.
-[0:39:29] interest, so theta essentially. Okay. For the first part I want to show
-[0:39:32] Okay. For the first part I want to show is
+[0:38:32] effects because this is very similar to
+[0:38:34] quantiles, and that was very also
+[0:38:36] similar to to implement. And one can see
+[0:38:38] or might see in these extensions that
+[0:38:42] the the benefit of this object
+[0:38:44] orientated implementation will will be
+[0:38:47] that we all these basic methods to to
+[0:38:50] construct these confidence intervals
+[0:38:52] because they are always based on
+[0:38:54] the same type of score and common parts,
+[0:38:58] they they we we only sort of have to
+[0:39:01] implement these specific um
+[0:39:05] object how to estimate specific nuisance
+[0:39:07] parameters and create the score, and the
+[0:39:09] rest will be sort of done similar in a
+[0:39:11] similar way. And so so we have two
+[0:39:14] types, so linear and non-linear scores,
+[0:39:17] and for example, quantile estimate
+[0:39:19] quantile effects will be based on on
+[0:39:22] non-linear scores and this so linear
+[0:39:24] refers to the the the parameter of
+[0:39:27] interest, so theta essentially.
+[0:39:29] Okay. For the first part I want to show
 [0:39:33] is because I think this might be very
-[0:39:34] because I think this might be very interesting for a lot of researchers and
-[0:39:36] interesting for a lot of researchers and hopefully also industry
-[0:39:38] hopefully also industry how to
+[0:39:34] interesting for a lot of researchers and
+[0:39:36] hopefully also industry
 [0:39:39] how to cluster or to use clustering for for
-[0:39:42] cluster or to use clustering for for double ML.
-[0:39:44] double ML. So, um um
+[0:39:42] double ML.
 [0:39:46] So, um um this because we don't have cluster
-[0:39:48] this because we don't have cluster clusters in the these example data set
-[0:39:51] clusters in the these example data set from the 401k pension plan, this is done
-[0:39:55] from the 401k pension plan, this is done on simulated data. So, if you click on
-[0:39:57] on simulated data. So, if you click on this button, if you follow you can see I
-[0:39:59] this button, if you follow you can see I just you can see the rest of the the
-[0:40:01] just you can see the rest of the the code to simulate the data. I just hit it
-[0:40:04] code to simulate the data. I just hit it because we have more space than over
-[0:40:05] because we have more space than over here to to show this.
-[0:40:08] here to to show this. And the only thing you have to do is
-[0:40:10] And the only thing you have to do is essentially instead of defining um a
-[0:40:13] essentially instead of defining um a double ML data object, you have to
-[0:40:14] double ML data object, you have to define a double ML cluster data object,
-[0:40:17] define a double ML cluster data object, which also inherits from some double ML
-[0:40:19] which also inherits from some double ML base class, some basic properties, but
-[0:40:22] base class, some basic properties, but the the main difference is that we are
-[0:40:23] the the main difference is that we are defining some cluster variables here in
-[0:40:26] defining some cluster variables here in the same fashion as we define
-[0:40:28] the same fashion as we define instruments for example. And in this
-[0:40:30] instruments for example. And in this this generated data set, we have one
-[0:40:32] this generated data set, we have one instrument and we have two cluster
-[0:40:34] instrument and we have two cluster variables and you can see so so we
-[0:40:37] variables and you can see so so we support up to two-way clustering
-[0:40:40] support up to two-way clustering at the moment. It's like you you you can
-[0:40:42] at the moment. It's like you you you can use two clusters sort of at the same
-[0:40:45] use two clusters sort of at the same time.
+[0:39:48] clusters in the these example data set
+[0:39:51] from the 401k pension plan, this is done
+[0:39:55] on simulated data. So, if you click on
+[0:39:57] this button, if you follow you can see I
+[0:39:59] just you can see the rest of the the
+[0:40:01] code to simulate the data. I just hit it
+[0:40:04] because we have more space than over
+[0:40:05] here to to show this.
+[0:40:08] And the only thing you have to do is
+[0:40:10] essentially instead of defining um a
+[0:40:13] double ML data object, you have to
+[0:40:14] define a double ML cluster data object,
+[0:40:17] which also inherits from some double ML
+[0:40:19] base class, some basic properties, but
+[0:40:22] the the main difference is that we are
+[0:40:23] defining some cluster variables here in
+[0:40:26] the same fashion as we define
+[0:40:28] instruments for example. And in this
+[0:40:30] this generated data set, we have one
+[0:40:32] instrument and we have two cluster
+[0:40:34] variables and you can see so so we
+[0:40:37] support up to two-way clustering
+[0:40:40] at the moment. It's like you you you can
+[0:40:42] use two clusters sort of at the same
 [0:40:46] time. And afterwards, I I didn't highlight all
-[0:40:49] And afterwards, I I didn't highlight all of this. Um so, essentially because we
-[0:40:51] of this. Um so, essentially because we have an instrument, we fit a partial
-[0:40:53] have an instrument, we fit a partial linear IV model. And
-[0:40:56] linear IV model. And or initialize a partial linear IV model
-[0:40:57] or initialize a partial linear IV model and fit the
-[0:40:59] and fit the it it has exactly the same form as if
-[0:41:01] it it has exactly the same form as if you would use some double ML data data
-[0:41:04] you would use some double ML data data without um clustering. So, you just have
-[0:41:07] without um clustering. So, you just have to specify the clusters of course in in
-[0:41:09] to specify the clusters of course in in the data class.
-[0:41:10] the data class. And the what what is different for
-[0:41:12] And the what what is different for cluster data, of course you have to
-[0:41:14] cluster data, of course you have to adjust your standard errors.
-[0:41:16] adjust your standard errors. This is done sort of automatically and
-[0:41:18] This is done sort of automatically and also what you have to be careful here is
-[0:41:21] also what you have to be careful here is in essentially in the sample splitting
-[0:41:23] in essentially in the sample splitting for the cross-fitting
-[0:41:26] for the cross-fitting observations from the same cluster are
-[0:41:28] observations from the same cluster are not
+[0:40:49] of this. Um so, essentially because we
+[0:40:51] have an instrument, we fit a partial
+[0:40:53] linear IV model. And
+[0:40:56] or initialize a partial linear IV model
+[0:40:57] and fit the
+[0:40:59] it it has exactly the same form as if
+[0:41:01] you would use some double ML data data
+[0:41:04] without um clustering. So, you just have
+[0:41:07] to specify the clusters of course in in
+[0:41:09] the data class.
+[0:41:10] And the what what is different for
+[0:41:12] cluster data, of course you have to
+[0:41:14] adjust your standard errors.
+[0:41:16] This is done sort of automatically and
+[0:41:18] also what you have to be careful here is
+[0:41:21] in essentially in the sample splitting
+[0:41:23] for the cross-fitting
+[0:41:26] observations from the same cluster are
 [0:41:29] not either in the the training part for the
-[0:41:31] either in the the training part for the machine learning estimates or the the
-[0:41:33] machine learning estimates or the the evaluation part for the score. So, that
-[0:41:35] evaluation part for the score. So, that they don't share
-[0:41:36] they don't share observations across this sample
-[0:41:38] observations across this sample splitting scheme and that that gets more
-[0:41:40] splitting scheme and that that gets more complicated of course if you have like
-[0:41:42] complicated of course if you have like two-way clustering and so on. You can
-[0:41:44] two-way clustering and so on. You can you can find the reference here.
-[0:41:46] you can find the reference here. And if you see can if you see for this
-[0:41:49] And if you see can if you see for this example, take a look at the summary,
-[0:41:51] example, take a look at the summary, we we have the cluster variables here
-[0:41:54] we we have the cluster variables here and you can see that the resampling
-[0:41:55] and you can see that the resampling scheme is a bit different. So, we have
-[0:41:57] scheme is a bit different. So, we have now because five is a default value for
-[0:42:00] now because five is a default value for clustering for for k-fold sample
-[0:42:04] clustering for for k-fold sample splitting in this we have
-[0:42:06] splitting in this we have because it's two clusters, 25 folds
-[0:42:09] because it's two clusters, 25 folds which are used at the at the end. So, so
-[0:42:11] which are used at the at the end. So, so that's already a lot.
-[0:42:13] that's already a lot. So, that's
-[0:42:14] So, that's all for clustered standard errors.
-[0:42:17] all for clustered standard errors. And the next thing would be um
-[0:42:20] And the next thing would be um group and conditional treatment effects
-[0:42:22] group and conditional treatment effects or average treatment effects.
-[0:42:25] or average treatment effects. And this we build as methods upon the
-[0:42:28] And this we build as methods upon the interactive regression model because of
-[0:42:30] interactive regression model because of course in the the partial linear
-[0:42:32] course in the the partial linear regression model with with multiple
-[0:42:34] regression model with with multiple effects, you can um
-[0:42:37] effects, you can um you you can always model grouped a group
-[0:42:40] you you can always model grouped a group effects or conditional effects as
-[0:42:42] effects or conditional effects as interaction with other covariates. So,
-[0:42:45] interaction with other covariates. So, so um
+[0:41:31] machine learning estimates or the the
+[0:41:33] evaluation part for the score. So, that
+[0:41:35] they don't share
+[0:41:36] observations across this sample
+[0:41:38] splitting scheme and that that gets more
+[0:41:40] complicated of course if you have like
+[0:41:42] two-way clustering and so on. You can
+[0:41:44] you can find the reference here.
+[0:41:46] And if you see can if you see for this
+[0:41:49] example, take a look at the summary,
+[0:41:51] we we have the cluster variables here
+[0:41:54] and you can see that the resampling
+[0:41:55] scheme is a bit different. So, we have
+[0:41:57] now because five is a default value for
+[0:42:00] clustering for for k-fold sample
+[0:42:04] splitting in this we have
+[0:42:06] because it's two clusters, 25 folds
+[0:42:09] which are used at the at the end. So, so
+[0:42:11] that's already a lot.
+[0:42:13] So, that's
+[0:42:14] all for clustered standard errors.
+[0:42:17] And the next thing would be um
+[0:42:20] group and conditional treatment effects
+[0:42:22] or average treatment effects.
+[0:42:25] And this we build as methods upon the
+[0:42:28] interactive regression model because of
+[0:42:30] course in the the partial linear
+[0:42:32] regression model with with multiple
+[0:42:34] effects, you can um
+[0:42:37] you you can always model grouped a group
+[0:42:40] effects or conditional effects as
+[0:42:42] interaction with other covariates. So,
 [0:42:47] so um this is mainly done on the ER
-[0:42:51] this is mainly done on the ER interactive regression model so so and
-[0:42:53] interactive regression model so so and it's based essentially on the augmented
-[0:42:55] it's based essentially on the augmented inverse probability weighted
-[0:42:57] inverse probability weighted scores for these estimators.
-[0:43:00] scores for these estimators. And the first thing you have to do is
-[0:43:01] And the first thing you have to do is fit
+[0:42:51] interactive regression model so so and
+[0:42:53] it's based essentially on the augmented
+[0:42:55] inverse probability weighted
+[0:42:57] scores for these estimators.
+[0:43:00] And the first thing you have to do is
 [0:43:03] fit a double ML ERM object. And like before,
-[0:43:07] a double ML ERM object. And like before, you can see all of this and this gives
-[0:43:09] you can see all of this and this gives you the average treatment effect.
-[0:43:11] you the average treatment effect. Um and if you want then want to estimate
-[0:43:14] Um and if you want then want to estimate specific groups, you can do this
-[0:43:16] specific groups, you can do this afterwards and you take your object and
-[0:43:18] afterwards and you take your object and you can call the
-[0:43:20] you can call the gate method. And you have to specify
-[0:43:23] gate method. And you have to specify just how your groups are defined and you
-[0:43:26] just how your groups are defined and you just define your groups either to be
-[0:43:28] just define your groups either to be dummy coded as a data frame or to be
-[0:43:32] dummy coded as a data frame or to be just one column which
-[0:43:34] just one column which has some like like a factor variable
-[0:43:36] has some like like a factor variable where where you just say like it's
-[0:43:38] where where you just say like it's either group one, two, three and so on.
-[0:43:40] either group one, two, three and so on. And in this example, I just split the
-[0:43:42] And in this example, I just split the groups and and this is again now we are
-[0:43:44] groups and and this is again now we are back to the 401k pension data example.
-[0:43:48] back to the 401k pension data example. Um I just split the groups everyone
-[0:43:51] Um I just split the groups everyone below median income and everyone above
-[0:43:54] below median income and everyone above median income. And if you take a look at
-[0:43:56] median income. And if you take a look at the groups, you get course you can also
-[0:43:58] the groups, you get course you can also use confint to create confidence
-[0:44:00] use confint to create confidence intervals and then create you get your
-[0:44:03] intervals and then create you get your effect estimate
-[0:44:05] effect estimate and your um
-[0:44:07] and your um you you get your final corresponding
-[0:44:10] you you get your final corresponding effect estimate. And um
-[0:44:12] effect estimate. And um you can also create jointly valid
-[0:44:15] you can also create jointly valid confidence intervals. They're again
-[0:44:16] confidence intervals. They're again based then on bootstrap and you can see
-[0:44:18] based then on bootstrap and you can see that they're
-[0:44:19] that they're this sometimes changes a lot to to to
-[0:44:22] this sometimes changes a lot to to to change to to jointly valid confidence
-[0:44:24] change to to jointly valid confidence intervals.
-[0:44:26] intervals. And the next thing would be
-[0:44:28] And the next thing would be con- con- I wanted to show conditional
-[0:44:30] con- con- I wanted to show conditional average treatment effects and this is
-[0:44:31] average treatment effects and this is essentially the same as as group average
-[0:44:34] essentially the same as as group average treatment effects in this case.
-[0:44:36] treatment effects in this case. Um so, because this
-[0:44:38] Um so, because this if you want to maybe instead of having
-[0:44:40] if you want to maybe instead of having grouped effects
-[0:44:42] grouped effects condition on a continuous variable and
-[0:44:45] condition on a continuous variable and in our case we
-[0:44:46] in our case we we just took age as a variable and we
-[0:44:49] we just took age as a variable and we wanted to to estimate the effect
-[0:44:51] wanted to to estimate the effect conditionally on age, right? So, then
-[0:44:53] conditionally on age, right? So, then the idea is just to use the scores to to
-[0:44:57] the idea is just to use the scores to to lose to use a linear predictor of the
-[0:44:59] lose to use a linear predictor of the scores
+[0:43:07] you can see all of this and this gives
+[0:43:09] you the average treatment effect.
+[0:43:11] Um and if you want then want to estimate
+[0:43:14] specific groups, you can do this
+[0:43:16] afterwards and you take your object and
+[0:43:18] you can call the
+[0:43:20] gate method. And you have to specify
+[0:43:23] just how your groups are defined and you
+[0:43:26] just define your groups either to be
+[0:43:28] dummy coded as a data frame or to be
+[0:43:32] just one column which
+[0:43:34] has some like like a factor variable
+[0:43:36] where where you just say like it's
+[0:43:38] either group one, two, three and so on.
+[0:43:40] And in this example, I just split the
+[0:43:42] groups and and this is again now we are
+[0:43:44] back to the 401k pension data example.
+[0:43:48] Um I just split the groups everyone
+[0:43:51] below median income and everyone above
+[0:43:54] median income. And if you take a look at
+[0:43:56] the groups, you get course you can also
+[0:43:58] use confint to create confidence
+[0:44:00] intervals and then create you get your
+[0:44:03] effect estimate
+[0:44:05] and your um
+[0:44:07] you you get your final corresponding
+[0:44:10] effect estimate. And um
+[0:44:12] you can also create jointly valid
+[0:44:15] confidence intervals. They're again
+[0:44:16] based then on bootstrap and you can see
+[0:44:18] that they're
+[0:44:19] this sometimes changes a lot to to to
+[0:44:22] change to to jointly valid confidence
+[0:44:24] intervals.
+[0:44:26] And the next thing would be
+[0:44:28] con- con- I wanted to show conditional
+[0:44:30] average treatment effects and this is
+[0:44:31] essentially the same as as group average
+[0:44:34] treatment effects in this case.
+[0:44:36] Um so, because this
+[0:44:38] if you want to maybe instead of having
+[0:44:40] grouped effects
+[0:44:42] condition on a continuous variable and
+[0:44:45] in our case we
+[0:44:46] we just took age as a variable and we
+[0:44:49] wanted to to estimate the effect
+[0:44:51] conditionally on age, right? So, then
+[0:44:53] the idea is just to use the scores to to
+[0:44:57] lose to use a linear predictor of the
 [0:45:01] scores based on a design matrix. And the design
-[0:45:03] based on a design matrix. And the design matrix could contain something like just
-[0:45:06] matrix could contain something like just polynomial regression like linear and
-[0:45:08] polynomial regression like linear and polynomial functions of your age, right?
-[0:45:11] polynomial functions of your age, right? Or you can use something like B-splines
-[0:45:13] Or you can use something like B-splines over here. So, so this is using
-[0:45:15] over here. So, so this is using B-splines to construct a design matrix
-[0:45:17] B-splines to construct a design matrix as spline bases for as a data frame and
-[0:45:20] as spline bases for as a data frame and then the the thing there you can sort of
-[0:45:23] then the the thing there you can sort of think of anything you want as
-[0:45:24] think of anything you want as constructed features.
-[0:45:26] constructed features. And then you can use just a linear
-[0:45:28] And then you can use just a linear prediction essentially on on these
-[0:45:30] prediction essentially on on these scores via the the conditional average
-[0:45:32] scores via the the conditional average treatment effect method so GATE method.
-[0:45:35] treatment effect method so GATE method. And you get the corresponding
-[0:45:37] And you get the corresponding coefficients and standard errors. But of
-[0:45:39] coefficients and standard errors. But of course we are not really interested in
-[0:45:41] course we are not really interested in the the coefficients for these splines
-[0:45:43] the the coefficients for these splines usually and this is the the main
-[0:45:45] usually and this is the the main difference for the um
-[0:45:48] difference for the um uh to between group effects here and and
-[0:45:50] uh to between group effects here and and and conditional average treatment
-[0:45:52] and conditional average treatment effects, we want to evaluate the the the
-[0:45:54] effects, we want to evaluate the the the effect maybe on some specific value of
-[0:45:56] effect maybe on some specific value of age. So, you can just supply new grid of
-[0:46:00] age. So, you can just supply new grid of values where you want to evaluate your
-[0:46:02] values where you want to evaluate your conditional average treatment effect in
-[0:46:03] conditional average treatment effect in this case.
-[0:46:04] this case. And so, you in the confidence interval,
-[0:46:07] And so, you in the confidence interval, you can also supply these values and
-[0:46:10] you can also supply these values and then you get sort of new
-[0:46:13] then you get sort of new new estimates for your conditional
-[0:46:14] new estimates for your conditional average treatment effect. And you can
-[0:46:16] average treatment effect. And you can construct them either jointly, right? Or
-[0:46:19] construct them either jointly, right? Or or point-wise.
-[0:46:20] or point-wise. And if you want to take a look, this
-[0:46:22] And if you want to take a look, this will would look then something like this
-[0:46:24] will would look then something like this if you want to plot it, right? You can
-[0:46:25] if you want to plot it, right? You can see age here and this is now spline
-[0:46:28] see age here and this is now spline regression
-[0:46:29] regression on the corresponding treatment effect,
-[0:46:32] on the corresponding treatment effect, right? Either with a
-[0:46:33] right? Either with a um point-wise confidence interval or
-[0:46:35] um point-wise confidence interval or jointly valid confidence interval for
-[0:46:37] jointly valid confidence interval for for for in in this case.
-[0:46:40] for for in in this case. Um yeah, for for the examples.
-[0:46:44] Um yeah, for for the examples. Okay, this was the part um to to group
-[0:46:47] Okay, this was the part um to to group and conditional average treatment
-[0:46:48] and conditional average treatment effects and lastly we I will present
-[0:46:51] effects and lastly we I will present something to quantile treatment effects.
-[0:46:53] something to quantile treatment effects. Um for quantile treatment effects, um
-[0:46:56] Um for quantile treatment effects, um this is also done in
-[0:46:58] this is also done in it's not as a separate model so it was
-[0:47:01] it's not as a separate model so it was not under some some interactive
-[0:47:03] not under some some interactive regression model essentially. So, we
-[0:47:04] regression model essentially. So, we have a separate class double ML
-[0:47:07] have a separate class double ML um quantile treatment effect
-[0:47:09] um quantile treatment effect essentially. Um and this is done for
-[0:47:12] essentially. Um and this is done for binary treatments. So, so we have um
-[0:47:17] binary treatments. So, so we have um two potential outcome distributions
-[0:47:18] two potential outcome distributions either with or without treatment and the
-[0:47:21] either with or without treatment and the idea is to estimate the difference in
-[0:47:23] idea is to estimate the difference in quantiles of the corresponding potential
-[0:47:25] quantiles of the corresponding potential outcome distribution.
-[0:47:27] outcome distribution. And there's nice paper which shows how
-[0:47:30] And there's nice paper which shows how how to do this also and
-[0:47:33] how to do this also and how this is implemented, again you can
-[0:47:35] how this is implemented, again you can see this how this approach is somewhat
-[0:47:38] see this how this approach is somewhat nice to to extend. We we you you supply
-[0:47:41] nice to to extend. We we you you supply the same data, you you define which
-[0:47:44] the same data, you you define which learners you want to use. Of course in
-[0:47:45] learners you want to use. Of course in this case you you have to use
-[0:47:48] this case you you have to use um use some
-[0:47:50] um use some slightly different learners. So, we
-[0:47:52] slightly different learners. So, we still have to fit some propensity score,
-[0:47:54] still have to fit some propensity score, but this learner here is also a
-[0:47:56] but this learner here is also a classifier because for quantiles we we
-[0:47:58] classifier because for quantiles we we have to have some some
-[0:47:59] have to have some some um
+[0:45:03] matrix could contain something like just
+[0:45:06] polynomial regression like linear and
+[0:45:08] polynomial functions of your age, right?
+[0:45:11] Or you can use something like B-splines
+[0:45:13] over here. So, so this is using
+[0:45:15] B-splines to construct a design matrix
+[0:45:17] as spline bases for as a data frame and
+[0:45:20] then the the thing there you can sort of
+[0:45:23] think of anything you want as
+[0:45:24] constructed features.
+[0:45:26] And then you can use just a linear
+[0:45:28] prediction essentially on on these
+[0:45:30] scores via the the conditional average
+[0:45:32] treatment effect method so GATE method.
+[0:45:35] And you get the corresponding
+[0:45:37] coefficients and standard errors. But of
+[0:45:39] course we are not really interested in
+[0:45:41] the the coefficients for these splines
+[0:45:43] usually and this is the the main
+[0:45:45] difference for the um
+[0:45:48] uh to between group effects here and and
+[0:45:50] and conditional average treatment
+[0:45:52] effects, we want to evaluate the the the
+[0:45:54] effect maybe on some specific value of
+[0:45:56] age. So, you can just supply new grid of
+[0:46:00] values where you want to evaluate your
+[0:46:02] conditional average treatment effect in
+[0:46:03] this case.
+[0:46:04] And so, you in the confidence interval,
+[0:46:07] you can also supply these values and
+[0:46:10] then you get sort of new
+[0:46:13] new estimates for your conditional
+[0:46:14] average treatment effect. And you can
+[0:46:16] construct them either jointly, right? Or
+[0:46:19] or point-wise.
+[0:46:20] And if you want to take a look, this
+[0:46:22] will would look then something like this
+[0:46:24] if you want to plot it, right? You can
+[0:46:25] see age here and this is now spline
+[0:46:28] regression
+[0:46:29] on the corresponding treatment effect,
+[0:46:32] right? Either with a
+[0:46:33] um point-wise confidence interval or
+[0:46:35] jointly valid confidence interval for
+[0:46:37] for for in in this case.
+[0:46:40] Um yeah, for for the examples.
+[0:46:44] Okay, this was the part um to to group
+[0:46:47] and conditional average treatment
+[0:46:48] effects and lastly we I will present
+[0:46:51] something to quantile treatment effects.
+[0:46:53] Um for quantile treatment effects, um
+[0:46:56] this is also done in
+[0:46:58] it's not as a separate model so it was
+[0:47:01] not under some some interactive
+[0:47:03] regression model essentially. So, we
+[0:47:04] have a separate class double ML
+[0:47:07] um quantile treatment effect
+[0:47:09] essentially. Um and this is done for
+[0:47:12] binary treatments. So, so we have um
+[0:47:17] two potential outcome distributions
+[0:47:18] either with or without treatment and the
+[0:47:21] idea is to estimate the difference in
+[0:47:23] quantiles of the corresponding potential
+[0:47:25] outcome distribution.
+[0:47:27] And there's nice paper which shows how
+[0:47:30] how to do this also and
+[0:47:33] how this is implemented, again you can
+[0:47:35] see this how this approach is somewhat
+[0:47:38] nice to to extend. We we you you supply
+[0:47:41] the same data, you you define which
+[0:47:44] learners you want to use. Of course in
+[0:47:45] this case you you have to use
+[0:47:48] um use some
+[0:47:50] slightly different learners. So, we
+[0:47:52] still have to fit some propensity score,
+[0:47:54] but this learner here is also a
+[0:47:56] classifier because for quantiles we we
+[0:47:58] have to have some some
 [0:48:01] um put some indicator function essentially
-[0:48:03] put some indicator function essentially as as outcome here to some con-
-[0:48:05] as as outcome here to some con- conditional expectation of some
-[0:48:06] conditional expectation of some indicator function.
-[0:48:08] indicator function. And then you supply a vector of
-[0:48:10] And then you supply a vector of quantiles you want to estimate.
-[0:48:12] quantiles you want to estimate. And finally, sort of this is the
-[0:48:14] And finally, sort of this is the difference here if you use this model
-[0:48:16] difference here if you use this model and you call the fit function,
-[0:48:18] and you call the fit function, essentially it gives you again summary
-[0:48:20] essentially it gives you again summary the corresponding coefficients,
-[0:48:22] the corresponding coefficients, um p-values and so on and confidence
-[0:48:25] um p-values and so on and confidence intervals.
-[0:48:26] intervals. And just because
-[0:48:29] And just because we have not seen it enough, you can
-[0:48:30] we have not seen it enough, you can always again construct bootstrap and try
-[0:48:33] always again construct bootstrap and try to use jointly valid confidence
-[0:48:35] to use jointly valid confidence intervals for this. That is also fine.
-[0:48:38] intervals for this. That is also fine. And
+[0:48:03] as as outcome here to some con-
+[0:48:05] conditional expectation of some
+[0:48:06] indicator function.
+[0:48:08] And then you supply a vector of
+[0:48:10] quantiles you want to estimate.
+[0:48:12] And finally, sort of this is the
+[0:48:14] difference here if you use this model
+[0:48:16] and you call the fit function,
+[0:48:18] essentially it gives you again summary
+[0:48:20] the corresponding coefficients,
+[0:48:22] um p-values and so on and confidence
+[0:48:25] intervals.
+[0:48:26] And just because
+[0:48:29] we have not seen it enough, you can
+[0:48:30] always again construct bootstrap and try
+[0:48:33] to use jointly valid confidence
+[0:48:35] intervals for this. That is also fine.
 [0:48:39] And okay, if you want to plot it, might in
-[0:48:41] okay, if you want to plot it, might in this case look like something like this,
-[0:48:43] this case look like something like this, right? Um where you can see then for
-[0:48:45] right? Um where you can see then for each quantile the corresponding
-[0:48:47] each quantile the corresponding um
+[0:48:41] this case look like something like this,
+[0:48:43] right? Um where you can see then for
+[0:48:45] each quantile the corresponding
 [0:48:49] um treatment effect or estimated treatment
-[0:48:51] treatment effect or estimated treatment effect.
 [0:48:53] effect. Okay, this this is just an overview of a
-[0:48:55] Okay, this this is just an overview of a some of the these extensions and what
-[0:48:58] some of the these extensions and what what do we plan in the future? So, so we
-[0:49:00] what do we plan in the future? So, so we are currently working on a
-[0:49:01] are currently working on a implementation of
-[0:49:02] implementation of difference-in-difference models.
-[0:49:04] difference-in-difference models. Um
+[0:48:55] some of the these extensions and what
+[0:48:58] what do we plan in the future? So, so we
+[0:49:00] are currently working on a
+[0:49:01] implementation of
+[0:49:02] difference-in-difference models.
 [0:49:06] Um also for for this is so um
-[0:49:09] also for for this is so um to use to use then maybe something
-[0:49:11] to use to use then maybe something or condition to based on of course then
-[0:49:13] or condition to based on of course then for identification on conditional
-[0:49:14] for identification on conditional parallel trend assumptions.
-[0:49:16] parallel trend assumptions. Um also auto DML so so automated
-[0:49:19] Um also auto DML so so automated debiasing for for because we are all of
-[0:49:22] debiasing for for because we are all of this was based on these orthogonalized
-[0:49:24] this was based on these orthogonalized scores, right? For each of these
-[0:49:25] scores, right? For each of these implementations and maybe some
-[0:49:27] implementations and maybe some sensitivity analysis for omitted
-[0:49:29] sensitivity analysis for omitted variable biases or something for
-[0:49:32] variable biases or something for unstructured data.
-[0:49:33] unstructured data. And if you have
-[0:49:35] And if you have some some
+[0:49:09] to use to use then maybe something
+[0:49:11] or condition to based on of course then
+[0:49:13] for identification on conditional
+[0:49:14] parallel trend assumptions.
+[0:49:16] Um also auto DML so so automated
+[0:49:19] debiasing for for because we are all of
+[0:49:22] this was based on these orthogonalized
+[0:49:24] scores, right? For each of these
+[0:49:25] implementations and maybe some
+[0:49:27] sensitivity analysis for omitted
+[0:49:29] variable biases or something for
+[0:49:32] unstructured data.
+[0:49:33] And if you have
 [0:49:37] some some interesting and nice and they want to
-[0:49:38] interesting and nice and they want to contribute this so so on the contribute
-[0:49:41] contribute this so so on the contribute to this on on our GitHub page.
-[0:49:43] to this on on our GitHub page. We are always
-[0:49:44] We are always welcoming collaborators. So if you
-[0:49:47] welcoming collaborators. So if you know how if you want to know to how to
-[0:49:49] know how if you want to know to how to resolve some issues or want to submit
-[0:49:51] resolve some issues or want to submit some examples and so on. We have some
-[0:49:53] some examples and so on. We have some guidelines for contributing also for R
-[0:49:56] guidelines for contributing also for R and Python if you if you want to
-[0:49:58] and Python if you if you want to do something there. But you can always
-[0:50:00] do something there. But you can always also contact us.
-[0:50:03] also contact us. Here you have our addresses, email
-[0:50:05] Here you have our addresses, email addresses.
-[0:50:07] addresses. Yeah, that's that's mainly it.
+[0:49:38] contribute this so so on the contribute
+[0:49:41] to this on on our GitHub page.
+[0:49:43] We are always
+[0:49:44] welcoming collaborators. So if you
+[0:49:47] know how if you want to know to how to
+[0:49:49] resolve some issues or want to submit
+[0:49:51] some examples and so on. We have some
+[0:49:53] guidelines for contributing also for R
+[0:49:56] and Python if you if you want to
+[0:49:58] do something there. But you can always
+[0:50:00] also contact us.
+[0:50:03] Here you have our addresses, email
+[0:50:05] addresses.
+[0:50:07] Yeah, that's that's mainly it.
 [0:50:14] And if you want to have so so Philip said to me if you want to have
-[0:50:15] Philip said to me if you want to have some
 [0:50:16] some some sticker for of our double ML logo,
-[0:50:20] some sticker for of our double ML logo, you you you can
+[0:50:20] you you you can
 [0:50:24] fill in your address here and we will send it to you. Is it right, Philip?
-[0:50:27] send it to you. Is it right, Philip? Yes. Yeah. It's free.
-[0:50:31] Yes. Yeah. It's free. Yes. So also from my side, thanks a lot
-[0:50:33] Yes. So also from my side, thanks a lot for participating and all the many
-[0:50:36] for participating and all the many questions
+[0:50:27] Yes. Yeah. It's free.
+[0:50:31] Yes. So also from my side, thanks a lot
+[0:50:33] for participating and all the many
 [0:50:37] questions that you sent us so far and yes, in case
-[0:50:41] that you sent us so far and yes, in case you want to discuss something more
-[0:50:42] you want to discuss something more detail or if you
-[0:50:44] detail or if you want to raise some points, we are happy
-[0:50:47] want to raise some points, we are happy to discuss it now.
-[0:50:50] to discuss it now. I don't know if there are any questions
-[0:50:51] I don't know if there are any questions that we should take right now. Let me
-[0:50:53] that we should take right now. Let me see.
+[0:50:41] you want to discuss something more
+[0:50:42] detail or if you
+[0:50:44] want to raise some points, we are happy
+[0:50:47] to discuss it now.
+[0:50:50] I don't know if there are any questions
+[0:50:51] that we should take right now. Let me
+[0:50:53] see.
 [0:51:00] Are there any new ones? Yeah, so feel free to either answer any
-[0:51:02] Yeah, so feel free to either answer any of the sorry unanswered questions or if
-[0:51:04] of the sorry unanswered questions or if you would like to highlight something
-[0:51:06] you would like to highlight something that you answered, that's also good. For
-[0:51:09] that you answered, that's also good. For the participants, if you'd like to raise
-[0:51:11] the participants, if you'd like to raise your hands, that's would also be an
-[0:51:13] your hands, that's would also be an option at this point since we're taking
-[0:51:16] option at this point since we're taking questions now.
+[0:51:02] of the sorry unanswered questions or if
+[0:51:04] you would like to highlight something
+[0:51:06] that you answered, that's also good. For
+[0:51:09] the participants, if you'd like to raise
+[0:51:11] your hands, that's would also be an
+[0:51:13] option at this point since we're taking
+[0:51:16] questions now.
 [0:51:24] So there are very many questions out like
-[0:51:25] out like in the Q&amp;A that were all
-[0:51:28] in the Q&amp;A that were all very nice. I think the nicest one we
-[0:51:30] very nice. I think the nicest one we always get is what's the comparison to
-[0:51:32] always get is what's the comparison to Econ ML.
+[0:51:25] out like in the Q&A that were all
+[0:51:28] very nice. I think the nicest one we
+[0:51:30] always get is what's the comparison to
 [0:51:33] Econ ML. So it's really hard to say. So there's
-[0:51:35] So it's really hard to say. So there's another library by
+[0:51:35] another library by
 [0:51:40] some other co-authors of Victor Chernozhukov and Microsoft
-[0:51:42] Chernozhukov and Microsoft research who
-[0:51:44] research who provide tools
-[0:51:46] provide tools for heterogeneous treatment analysis
-[0:51:48] for heterogeneous treatment analysis treatment effect analysis based on
-[0:51:50] treatment effect analysis based on machine learning. So there are some
-[0:51:51] machine learning. So there are some commonalities but the design of the
-[0:51:53] commonalities but the design of the library is pretty different and they
-[0:51:55] library is pretty different and they really at least at least as far as I'm
-[0:51:57] really at least at least as far as I'm aware, they're really focusing on
-[0:51:59] aware, they're really focusing on heterogeneous treatment effect whereas
-[0:52:01] heterogeneous treatment effect whereas for us, we kind of focus on this double
-[0:52:04] for us, we kind of focus on this double machine learning approach. And I think
-[0:52:06] machine learning approach. And I think there's neither better one
-[0:52:09] there's neither better one among those. So it's
-[0:52:11] among those. So it's they're kind of different.
-[0:52:13] they're kind of different. Maybe
+[0:51:42] research who
+[0:51:44] provide tools
+[0:51:46] for heterogeneous treatment analysis
+[0:51:48] treatment effect analysis based on
+[0:51:50] machine learning. So there are some
+[0:51:51] commonalities but the design of the
+[0:51:53] library is pretty different and they
+[0:51:55] really at least at least as far as I'm
+[0:51:57] aware, they're really focusing on
+[0:51:59] heterogeneous treatment effect whereas
+[0:52:01] for us, we kind of focus on this double
+[0:52:04] machine learning approach. And I think
+[0:52:06] there's neither better one
+[0:52:09] among those. So it's
+[0:52:11] they're kind of different.
 [0:52:14] Maybe maybe it's nice
-[0:52:17] maybe it's nice nice to say again why we decided to do
-[0:52:20] nice to say again why we decided to do it for double machine learning because
-[0:52:22] it for double machine learning because like double machine learning approach is
-[0:52:23] like double machine learning approach is very general approach covering many
-[0:52:25] very general approach covering many different settings. So kind of if we
-[0:52:27] different settings. So kind of if we in the way we implement it right now, we
-[0:52:29] in the way we implement it right now, we kind of can extend it into certain
-[0:52:31] kind of can extend it into certain directions
-[0:52:33] directions as Sven presented like we can cover
-[0:52:35] as Sven presented like we can cover difference in difference, we can cover
-[0:52:36] difference in difference, we can cover like
+[0:52:17] nice to say again why we decided to do
+[0:52:20] it for double machine learning because
+[0:52:22] like double machine learning approach is
+[0:52:23] very general approach covering many
+[0:52:25] different settings. So kind of if we
+[0:52:27] in the way we implement it right now, we
+[0:52:29] kind of can extend it into certain
+[0:52:31] directions
+[0:52:33] as Sven presented like we can cover
+[0:52:35] difference in difference, we can cover
 [0:52:38] like quantile treatment effects just going
-[0:52:40] quantile treatment effects just going from this double machine learning
-[0:52:41] from this double machine learning approach. So kind of
-[0:52:43] approach. So kind of yes, that's nice about this but of
-[0:52:44] yes, that's nice about this but of course we have
-[0:52:46] course we have fewer features for estimation of
-[0:52:49] fewer features for estimation of treatment effects.
+[0:52:40] from this double machine learning
+[0:52:41] approach. So kind of
+[0:52:43] yes, that's nice about this but of
+[0:52:44] course we have
+[0:52:46] fewer features for estimation of
+[0:52:49] treatment effects.
 [0:52:59] So there was one question regarding clustered data and Sven, I think you
-[0:53:01] clustered data and Sven, I think you mentioned clustered clustered data
-[0:53:04] mentioned clustered clustered data and we have a notebook
-[0:53:07] and we have a notebook on it that goes through it step by step.
-[0:53:10] on it that goes through it step by step. So it really right really clarifies
-[0:53:14] So it really right really clarifies sample splitting that has to be adjusted
-[0:53:15] sample splitting that has to be adjusted not to the adjustment of the
+[0:53:01] mentioned clustered clustered data
+[0:53:04] and we have a notebook
+[0:53:07] on it that goes through it step by step.
+[0:53:10] So it really right really clarifies
+[0:53:14] sample splitting that has to be adjusted
+[0:53:15] not to the adjustment of the
 [0:53:20] standard error formula. So I'm going to
-[0:53:23] formula. So I'm going to just send it to you as a reply. I hope
-[0:53:25] just send it to you as a reply. I hope everyone can see it through who needs
-[0:53:27] everyone can see it through who needs it.
+[0:53:23] just send it to you as a reply. I hope
+[0:53:25] everyone can see it through who needs
 [0:53:29] it. This I sent the one for R but the same
-[0:53:31] This I sent the one for R but the same is it's the same for Python. You can
-[0:53:32] is it's the same for Python. You can find it.
+[0:53:31] is it's the same for Python. You can
 [0:53:34] find it. Where is it?
 [0:53:43] Sven, you can maybe elaborate on what's the difference between joint and
-[0:53:44] the difference between joint and pointwise confidence intervals. There
-[0:53:46] pointwise confidence intervals. There was one question. Okay, yeah. Um of
-[0:53:48] was one question. Okay, yeah. Um of course.
+[0:53:44] pointwise confidence intervals. There
+[0:53:46] was one question. Okay, yeah. Um of
 [0:53:49] course. For if you if you want like it's it's
-[0:53:51] For if you if you want like it's it's the same
 [0:53:52] the same multiple testing problem. If you if you
-[0:53:54] multiple testing problem. If you if you want to estimate a confidence interval
-[0:53:56] want to estimate a confidence interval generally, the probability of your
-[0:53:58] generally, the probability of your interval
+[0:53:54] want to estimate a confidence interval
+[0:53:56] generally, the probability of your
 [0:54:00] interval cover
 [0:54:02] cover your your interval before you estimate
-[0:54:04] your your interval before you estimate it covering the effect, right? Then it
-[0:54:06] it covering the effect, right? Then it is is 95% but if you estimate two
-[0:54:09] is is 95% but if you estimate two intervals at the same time,
-[0:54:11] intervals at the same time, you you usually want to that all the the
-[0:54:13] you you usually want to that all the the overall probability covering these
-[0:54:16] overall probability covering these effects is 95%. So
-[0:54:18] effects is 95%. So pointwise just means for each interval
-[0:54:20] pointwise just means for each interval has its specific probability
-[0:54:23] has its specific probability and uniformly means that the the overall
-[0:54:26] and uniformly means that the the overall intervals have have the corresponding
-[0:54:28] intervals have have the corresponding probability
-[0:54:29] probability to to cover your your estimates. For
-[0:54:31] to to cover your your estimates. For hypothesis testing, it means that the
-[0:54:33] hypothesis testing, it means that the probability that your
-[0:54:35] probability that your that a single hypothesis is essentially
-[0:54:38] that a single hypothesis is essentially correct is 95% where whereas if you have
-[0:54:41] correct is 95% where whereas if you have multiple hypotheses, this probability
-[0:54:43] multiple hypotheses, this probability that you make one error is
-[0:54:46] that you make one error is increases more and more if you have
-[0:54:48] increases more and more if you have specific
+[0:54:04] it covering the effect, right? Then it
+[0:54:06] is is 95% but if you estimate two
+[0:54:09] intervals at the same time,
+[0:54:11] you you usually want to that all the the
+[0:54:13] overall probability covering these
+[0:54:16] effects is 95%. So
+[0:54:18] pointwise just means for each interval
+[0:54:20] has its specific probability
+[0:54:23] and uniformly means that the the overall
+[0:54:26] intervals have have the corresponding
+[0:54:28] probability
+[0:54:29] to to cover your your estimates. For
+[0:54:31] hypothesis testing, it means that the
+[0:54:33] probability that your
+[0:54:35] that a single hypothesis is essentially
+[0:54:38] correct is 95% where whereas if you have
+[0:54:41] multiple hypotheses, this probability
+[0:54:43] that you make one error is
+[0:54:46] increases more and more if you have
 [0:54:49] specific number of hypotheses. Then there's one
-[0:54:51] number of hypotheses. Then there's one question regarding the validity
-[0:54:54] question regarding the validity of these approximate asymptotic results.
-[0:54:57] of these approximate asymptotic results. So is there a minimum number of
-[0:54:59] So is there a minimum number of observation we need for validity?
-[0:55:03] observation we need for validity? As these are all
-[0:55:05] As these are all as these are all
-[0:55:08] as these are all as
+[0:54:51] question regarding the validity
+[0:54:54] of these approximate asymptotic results.
+[0:54:57] So is there a minimum number of
+[0:54:59] observation we need for validity?
+[0:55:03] As these are all
+[0:55:05] as these are all
 [0:55:09] as the
 [0:55:10] the the the normal approximation is based on
-[0:55:13] the the normal approximation is based on is asymptotic properties. You will have
-[0:55:16] is asymptotic properties. You will have needs at least some
-[0:55:18] needs at least some sensible
+[0:55:13] is asymptotic properties. You will have
+[0:55:16] needs at least some
 [0:55:19] sensible data size but this also depends really
-[0:55:22] data size but this also depends really on your problem. How many
-[0:55:23] on your problem. How many covariates you want to control for, what
-[0:55:25] covariates you want to control for, what learners essentially are you using?
-[0:55:27] learners essentially are you using? Essentially, if you're using a a linear
-[0:55:29] Essentially, if you're using a a linear learner like a linear model and this is
-[0:55:31] learner like a linear model and this is essentially basing
+[0:55:22] on your problem. How many
+[0:55:23] covariates you want to control for, what
+[0:55:25] learners essentially are you using?
+[0:55:27] Essentially, if you're using a a linear
+[0:55:29] learner like a linear model and this is
+[0:55:31] essentially basing
 [0:55:35] staying in some sort of the linear regime and you're thinking this model
-[0:55:37] regime and you're thinking this model assumption is correct, then you will
-[0:55:39] assumption is correct, then you will need much less observations and if you
-[0:55:41] need much less observations and if you are
+[0:55:37] assumption is correct, then you will
+[0:55:39] need much less observations and if you
 [0:55:42] are using a very complex learner for for
-[0:55:44] using a very complex learner for for your problem and say you want to
-[0:55:46] your problem and say you want to be able to to to fit a very flexible
-[0:55:49] be able to to to fit a very flexible model for for a lot of
-[0:55:51] model for for a lot of possible interactions between your your
-[0:55:54] possible interactions between your your covariates and something like this. Yes.
-[0:55:56] covariates and something like this. Yes. I think that was
-[0:55:58] I think that was yes, nice to mention that you can also
-[0:56:00] yes, nice to mention that you can also just use parametric learners like
-[0:56:02] just use parametric learners like logistic regression and linear
-[0:56:03] logistic regression and linear regression.
-[0:56:04] regression. And then you're effectively kind of for
-[0:56:07] And then you're effectively kind of for example, estimating augmented inverse
-[0:56:09] example, estimating augmented inverse probability weighting.
-[0:56:10] probability weighting. So kind of these parametric models are
-[0:56:12] So kind of these parametric models are also available and also kind of hosted
-[0:56:15] also available and also kind of hosted as special special case of
-[0:56:18] as special special case of this estimation approach.
+[0:55:44] your problem and say you want to
+[0:55:46] be able to to to fit a very flexible
+[0:55:49] model for for a lot of
+[0:55:51] possible interactions between your your
+[0:55:54] covariates and something like this. Yes.
+[0:55:56] I think that was
+[0:55:58] yes, nice to mention that you can also
+[0:56:00] just use parametric learners like
+[0:56:02] logistic regression and linear
+[0:56:03] regression.
+[0:56:04] And then you're effectively kind of for
+[0:56:07] example, estimating augmented inverse
+[0:56:09] probability weighting.
+[0:56:10] So kind of these parametric models are
+[0:56:12] also available and also kind of hosted
+[0:56:15] as special special case of
+[0:56:18] this estimation approach.
 [0:56:24] So some of the questions are more kind of specific.
-[0:56:27] of specific. There is a question on the relation to
-[0:56:30] There is a question on the relation to double debiased machine learning. So I
-[0:56:32] double debiased machine learning. So I think like the terminology is kind of
-[0:56:34] think like the terminology is kind of not exclusive.
-[0:56:36] not exclusive. There is also literature on debiased
-[0:56:39] There is also literature on debiased Lasso for example. So there are some
-[0:56:41] Lasso for example. So there are some relations but
-[0:56:44] relations but yes, I think if you have a look at the
-[0:56:46] yes, I think if you have a look at the paper by Victor Chernozhukov and
-[0:56:48] paper by Victor Chernozhukov and co-authors like this main reference in
-[0:56:50] co-authors like this main reference in our presentation, they have a short
-[0:56:51] our presentation, they have a short discussion on this and also in the paper
-[0:56:54] discussion on this and also in the paper for our R package, we have a brief
-[0:56:57] for our R package, we have a brief relation to that literature. So it's
-[0:56:58] relation to that literature. So it's kind of the basic idea when you used L1
-[0:57:02] kind of the basic idea when you used L1 penalized learners, they were kind of
-[0:57:04] penalized learners, they were kind of some analogies but yeah.
-[0:57:07] some analogies but yeah. Or some cases where the learners are
-[0:57:09] Or some cases where the learners are very very similar.
-[0:57:11] very very similar. Yeah, I think I replied to this one.
-[0:57:15] Yeah, I think I replied to this one. One question whether to
-[0:57:18] One question whether to is it possible to use the same model on
-[0:57:20] is it possible to use the same model on several outcomes.
-[0:57:21] several outcomes. At the moment, all the models assume one
-[0:57:23] At the moment, all the models assume one single outcome. So so you you can reuse
-[0:57:26] single outcome. So so you you can reuse of course the model but
-[0:57:28] of course the model but or you can reuse the model and one
-[0:57:32] or you can reuse the model and one future plan for extension for us is it
-[0:57:34] future plan for extension for us is it that you that you might be able to
-[0:57:37] that you that you might be able to if you really want to predict use a
-[0:57:40] if you really want to predict use a machine learning algorithm outside of
-[0:57:41] machine learning algorithm outside of the model and just supply the
-[0:57:42] the model and just supply the predictions but then you have to do the
-[0:57:45] predictions but then you have to do the sample splitting on your own.
-[0:57:48] sample splitting on your own. And then you you you you might be able
-[0:57:50] And then you you you you might be able to share some some of your machine
-[0:57:52] to share some some of your machine learning models between separate double
-[0:57:55] learning models between separate double ML objects essentially.
-[0:57:58] ML objects essentially. If if you really want to but then
-[0:58:00] If if you really want to but then then you have to be somewhat careful
-[0:58:02] then you have to be somewhat careful like that you adjust for for the right
-[0:58:04] like that you adjust for for the right sample splitting and so on. Okay, so you
-[0:58:06] sample splitting and so on. Okay, so you understood it in this direction. I
-[0:58:07] understood it in this direction. I understood it maybe as in terms of the
-[0:58:09] understood it maybe as in terms of the multiple testing issues. If you test
-[0:58:11] multiple testing issues. If you test several outcomes at the same time, so
-[0:58:12] several outcomes at the same time, so there are also approaches out there to
-[0:58:14] there are also approaches out there to control for this but I think this should
-[0:58:16] control for this but I think this should also be possible to integrate it in the
-[0:58:19] also be possible to integrate it in the package but they are kind of not yet
-[0:58:22] package but they are kind of not yet built in.
+[0:56:27] There is a question on the relation to
+[0:56:30] double debiased machine learning. So I
+[0:56:32] think like the terminology is kind of
+[0:56:34] not exclusive.
+[0:56:36] There is also literature on debiased
+[0:56:39] Lasso for example. So there are some
+[0:56:41] relations but
+[0:56:44] yes, I think if you have a look at the
+[0:56:46] paper by Victor Chernozhukov and
+[0:56:48] co-authors like this main reference in
+[0:56:50] our presentation, they have a short
+[0:56:51] discussion on this and also in the paper
+[0:56:54] for our R package, we have a brief
+[0:56:57] relation to that literature. So it's
+[0:56:58] kind of the basic idea when you used L1
+[0:57:02] penalized learners, they were kind of
+[0:57:04] some analogies but yeah.
+[0:57:07] Or some cases where the learners are
+[0:57:09] very very similar.
+[0:57:11] Yeah, I think I replied to this one.
+[0:57:15] One question whether to
+[0:57:18] is it possible to use the same model on
+[0:57:20] several outcomes.
+[0:57:21] At the moment, all the models assume one
+[0:57:23] single outcome. So so you you can reuse
+[0:57:26] of course the model but
+[0:57:28] or you can reuse the model and one
+[0:57:32] future plan for extension for us is it
+[0:57:34] that you that you might be able to
+[0:57:37] if you really want to predict use a
+[0:57:40] machine learning algorithm outside of
+[0:57:41] the model and just supply the
+[0:57:42] predictions but then you have to do the
+[0:57:45] sample splitting on your own.
+[0:57:48] And then you you you you might be able
+[0:57:50] to share some some of your machine
+[0:57:52] learning models between separate double
+[0:57:55] ML objects essentially.
+[0:57:58] If if you really want to but then
+[0:58:00] then you have to be somewhat careful
+[0:58:02] like that you adjust for for the right
+[0:58:04] sample splitting and so on. Okay, so you
+[0:58:06] understood it in this direction. I
+[0:58:07] understood it maybe as in terms of the
+[0:58:09] multiple testing issues. If you test
+[0:58:11] several outcomes at the same time, so
+[0:58:12] there are also approaches out there to
+[0:58:14] control for this but I think this should
+[0:58:16] also be possible to integrate it in the
+[0:58:19] package but they are kind of not yet
 [0:58:23] built in. So I think how much time do we have?
-[0:58:26] So I think how much time do we have? Think
 [0:58:28] Think or Emma, are we still have about a
-[0:58:31] or Emma, are we still have about a minute more.
-[0:58:33] minute more. But I wish I'd answered so many
-[0:58:35] But I wish I'd answered so many questions. Gosh.
-[0:58:37] questions. Gosh. Yeah.
+[0:58:31] minute more.
+[0:58:33] But I wish I'd answered so many
+[0:58:35] questions. Gosh.
 [0:58:39] Yeah. So there was one question in relation to
-[0:58:42] So there was one question in relation to AIPW and target maximum likelihood
-[0:58:45] AIPW and target maximum likelihood estimation because they are kind of
-[0:58:46] estimation because they are kind of related estimation approaches
-[0:58:48] related estimation approaches and there is some overlap and also in
-[0:58:50] and there is some overlap and also in the package in the paper on the R
-[0:58:51] the package in the paper on the R package, we have added a brief
-[0:58:54] package, we have added a brief relation to the literature on target
-[0:58:56] relation to the literature on target maximum likelihood. So it's kind of
-[0:58:58] maximum likelihood. So it's kind of different estimation approach but it's
-[0:59:00] different estimation approach but it's also based on some debiasing
-[0:59:02] also based on some debiasing or exploiting this double robustness
-[0:59:04] or exploiting this double robustness property and
-[0:59:06] property and yeah, actually what we do in the
-[0:59:08] yeah, actually what we do in the non-parametric estimation model is we
-[0:59:10] non-parametric estimation model is we employ the double robust score that you
-[0:59:12] employ the double robust score that you know from AIPW. So basically, if you
-[0:59:14] know from AIPW. So basically, if you learn the nuisance components by linear
-[0:59:17] learn the nuisance components by linear logistic logistic regression for
-[0:59:18] logistic logistic regression for example, it would coincide with standard
-[0:59:21] example, it would coincide with standard AIPW.
+[0:58:42] AIPW and target maximum likelihood
+[0:58:45] estimation because they are kind of
+[0:58:46] related estimation approaches
+[0:58:48] and there is some overlap and also in
+[0:58:50] the package in the paper on the R
+[0:58:51] package, we have added a brief
+[0:58:54] relation to the literature on target
+[0:58:56] maximum likelihood. So it's kind of
+[0:58:58] different estimation approach but it's
+[0:59:00] also based on some debiasing
+[0:59:02] or exploiting this double robustness
+[0:59:04] property and
+[0:59:06] yeah, actually what we do in the
+[0:59:08] non-parametric estimation model is we
+[0:59:10] employ the double robust score that you
+[0:59:12] know from AIPW. So basically, if you
+[0:59:14] learn the nuisance components by linear
+[0:59:17] logistic logistic regression for
+[0:59:18] example, it would coincide with standard
 [0:59:23] AIPW. I think I got this.
-[0:59:25] I think I got this. Great. Yes, there is YouTube resources
-[0:59:28] Great. Yes, there is YouTube resources also on online. I just I briefly post
-[0:59:31] also on online. I just I briefly post them in the chat, but I think they would
-[0:59:32] them in the chat, but I think they would be
+[0:59:25] Great. Yes, there is YouTube resources
+[0:59:28] also on online. I just I briefly post
+[0:59:31] them in the chat, but I think they would
 [0:59:34] be uh,
 [0:59:35] uh, lost.
 [0:59:36] lost. Okay.
 [0:59:37] Okay. So, I think
-[0:59:37] So, I think Yeah.
 [0:59:39] Yeah. That's perfect. Okay, so let's, uh, wrap
-[0:59:41] That's perfect. Okay, so let's, uh, wrap up. We'll thank, uh, Philip and Sven.
-[0:59:44] up. We'll thank, uh, Philip and Sven. Uh, just letting you know, we will send
-[0:59:46] Uh, just letting you know, we will send you the list of questions and answers
-[0:59:48] you the list of questions and answers after the talk. So, Philip and Sven will
-[0:59:50] after the talk. So, Philip and Sven will have access to all the questions and
-[0:59:52] have access to all the questions and answers. And if you have follow-up
-[0:59:53] answers. And if you have follow-up questions,
-[0:59:55] questions, please reach out to them. The emails are
-[0:59:57] please reach out to them. The emails are still displayed, as you can see.
-[0:59:59] still displayed, as you can see. All right. I will, uh, now stop your
-[1:00:03] All right. I will, uh, now stop your screen sharing.
-[1:00:06] screen sharing. And
+[0:59:41] up. We'll thank, uh, Philip and Sven.
+[0:59:44] Uh, just letting you know, we will send
+[0:59:46] you the list of questions and answers
+[0:59:48] after the talk. So, Philip and Sven will
+[0:59:50] have access to all the questions and
+[0:59:52] answers. And if you have follow-up
+[0:59:53] questions,
+[0:59:55] please reach out to them. The emails are
+[0:59:57] still displayed, as you can see.
+[0:59:59] All right. I will, uh, now stop your
+[1:00:03] screen sharing.
+[1:00:06] And
 [1:00:12] share on. Okay.
 [1:00:18] All right. So, again, I just Oh, sorry, one more thing. All right.
-[1:00:21] Oh, sorry, one more thing. All right. Uh, so, one more time, I'd just like to
-[1:00:23] Uh, so, one more time, I'd just like to thank Sven and Philip for a great talk
-[1:00:25] thank Sven and Philip for a great talk and for answering so many questions from
-[1:00:26] and for answering so many questions from the audience. Uh, it's rare we get so
-[1:00:28] the audience. Uh, it's rare we get so many questions, so I also really thank
-[1:00:30] many questions, so I also really thank you, audience, for participating,
-[1:00:32] you, audience, for participating, uh,
+[1:00:21] Uh, so, one more time, I'd just like to
+[1:00:23] thank Sven and Philip for a great talk
+[1:00:25] and for answering so many questions from
+[1:00:26] the audience. Uh, it's rare we get so
+[1:00:28] many questions, so I also really thank
+[1:00:30] you, audience, for participating,
 [1:00:33] uh, in in this tutorial.
-[1:00:35] in in this tutorial. And next week, we have a talk by Matthew
-[1:00:37] And next week, we have a talk by Matthew Gentzkow from Stanford University. So,
-[1:00:40] Gentzkow from Stanford University. So, hope you all join us for that. And have
-[1:00:42] hope you all join us for that. And have a great rest of your week.
+[1:00:35] And next week, we have a talk by Matthew
+[1:00:37] Gentzkow from Stanford University. So,
+[1:00:40] hope you all join us for that. And have
+[1:00:42] a great rest of your week.
 [1:00:46] Thank you very much.
