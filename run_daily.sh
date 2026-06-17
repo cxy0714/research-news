@@ -1,8 +1,15 @@
 #!/usr/bin/env bash
-# Example wrapper for cron. Adjust paths to match your environment.
 set -euo pipefail
 
 cd "$(dirname "$0")"
+
+# ── Mutual-exclusion: bail if another instance is still running ──
+LOCKDIR=/tmp/research-news-daily.lock
+if ! mkdir "$LOCKDIR" 2>/dev/null; then
+  echo "[$(date -Iseconds)] Another instance is running (lockdir=$LOCKDIR). Exiting." >&2
+  exit 1
+fi
+trap 'rmdir "$LOCKDIR" 2>/dev/null' EXIT
 
 # Activate venv if you use one:
 # source .venv/bin/activate
@@ -13,9 +20,9 @@ python -m research_news.daily
 # blocks whose prose was cut off, and salvages clean prose for the rest.
 python -m research_news.rerun --date "$(date -I)"
 
-# Commit and push the new daily report.
-if [[ -n "$(git status --porcelain docs/)" ]]; then
-  git add docs/ data/
+# Commit and push all changes.
+git add -A
+if [[ -n "$(git status --porcelain)" ]]; then
   git commit -m "daily report $(date -I)"
   git push
 fi
