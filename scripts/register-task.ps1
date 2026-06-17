@@ -1,39 +1,54 @@
-# Register (or update) the daily research-news task in Windows Task Scheduler.
-# Run ONCE from the repo root in PowerShell:
-#   .\scripts\register-task.ps1                 # weekdays at 09:10
+# Register (or update) the research-news Task Scheduler jobs. Run ONCE from the
+# repo root in PowerShell:
+#   .\scripts\register-task.ps1                 # daily weekdays 09:10 + catch-up at logon
 #   .\scripts\register-task.ps1 -Time "08:30"
-# Re-running with -Force updates the existing task. If it complains about
-# permissions, run from an elevated (Admin) PowerShell.
+#   .\scripts\register-task.ps1 -NoCatchUp      # only the daily task
+# Re-running updates the existing tasks. If it complains about permissions, run
+# from an elevated (Admin) PowerShell.
 
 param(
     [datetime]$Time = "09:10",
-    [string]$TaskName = "research-news-daily"
+    [string]$TaskName = "research-news-daily",
+    [string]$CatchUpTaskName = "research-news-catchup",
+    [switch]$NoCatchUp
 )
 
-$repo   = Split-Path -Parent $PSScriptRoot          # repo root (script is in scripts\)
-$script = Join-Path $repo "run_daily.ps1"
-if (-not (Test-Path $script)) { throw "run_daily.ps1 not found at $script" }
+$repo = Split-Path -Parent $PSScriptRoot          # repo root (script is in scripts\)
 
-$action = New-ScheduledTaskAction -Execute "powershell.exe" `
-    -Argument "-NoProfile -ExecutionPolicy Bypass -File `"$script`"" `
-    -WorkingDirectory $repo
-
-$trigger = New-ScheduledTaskTrigger -Weekly `
-    -DaysOfWeek Monday, Tuesday, Wednesday, Thursday, Friday -At $Time
-
-# StartWhenAvailable: catch up a missed start (PC was off/asleep).
-# MultipleInstances IgnoreNew: never run two at once.
-# Battery flags: don't let a laptop's power state block the run.
+# Shared settings: catch up a missed start, never run two at once, ignore battery.
 $settings = New-ScheduledTaskSettingsSet `
     -StartWhenAvailable `
     -MultipleInstances IgnoreNew `
     -ExecutionTimeLimit (New-TimeSpan -Hours 6) `
     -DontStopIfGoingOnBatteries -AllowStartIfOnBatteries
 
-# Registers for the current user, "run only when logged on" (no stored password).
-Register-ScheduledTask -TaskName $TaskName -Action $action -Trigger $trigger `
-    -Settings $settings -Description "research-news daily pipeline" -Force | Out-Null
+function Register-RnTask([string]$name, [string]$scriptFile, $trigger, [string]$desc) {
+    $path = Join-Path $repo $scriptFile
+    if (-not (Test-Path $path)) { throw "$scriptFile not found at $path" }
+    $action = New-ScheduledTaskAction -Execute "powershell.exe" `
+        -Argument "-NoProfile -ExecutionPolicy Bypass -File `"$path`"" `
+        -WorkingDirectory $repo
+    # Current user, "run only when logged on" (no stored password).
+    Register-ScheduledTask -TaskName $name -Action $action -Trigger $trigger `
+        -Settings $settings -Description $desc -Force | Out-Null
+}
 
-Write-Host "Registered task '$TaskName' for weekdays at $($Time.ToString('HH:mm'))."
-Write-Host "Run it now to test:  Start-ScheduledTask -TaskName '$TaskName'"
-Write-Host "Watch it:            Get-ScheduledTaskInfo -TaskName '$TaskName'"
+# Daily report — weekdays at $Time.
+$dailyTrigger = New-ScheduledTaskTrigger -Weekly `
+    -DaysOfWeek Monday, Tuesday, Wednesday, Thursday, Friday -At $Time
+Register-RnTask $TaskName "run_daily.ps1" $dailyTrigger "research-news daily pipeline"
+Write-Host "Registered '$TaskName' for weekdays at $($Time.ToString('HH:mm'))."
+
+# Catch-up — at logon (covers a boot after a few days off), 3-min delay so the
+# desktop settles first. It only fills missing past weekdays; today stays the
+# daily task's job.
+if (-not $NoCatchUp) {
+    $logon = New-ScheduledTaskTrigger -AtLogOn
+    $logon.Delay = "PT3M"
+    Register-RnTask $CatchUpTaskName "scripts\catch-up.ps1" $logon "research-news catch-up missed days"
+    Write-Host "Registered '$CatchUpTaskName' to run at logon (+3 min)."
+}
+
+Write-Host ""
+Write-Host "Test now:  Start-ScheduledTask -TaskName '$TaskName'"
+Write-Host "Watch:     Get-ScheduledTaskInfo -TaskName '$TaskName'"
