@@ -395,6 +395,10 @@ def _drive_pdf_url(url: str) -> str:
 _PRESENTATION_RE = re.compile(r"docs\.google\.com/presentation/d/([^/?#]+)")
 
 
+def slides_path(talk_id: str) -> Path:
+    return SLIDES_DIR / f"{_slug(talk_id)}.pdf"
+
+
 def _slides_candidates(url: str) -> list[str]:
     """Ordered list of direct-download URLs to try for a slides link, by host:
     Google Drive file, Google Slides presentation (→ export/pdf), Dropbox
