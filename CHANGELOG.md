@@ -17,6 +17,12 @@
 ## [Unreleased]
 
 ### Added
+- **Windows 开机补齐缺天 `scripts\catch-up.ps1`**：台式机不会 24 小时开，关机会错过当天的
+  定时跑。catch-up 找到最新的 `docs\daily\<日期>.md`，把从那以后到**昨天**缺的**工作日**用
+  `daily --date <X>` 一次性补齐（跳过周末，今天留给 09:10 的 daily 任务）。靠 daily 的重跑
+  保护，已存在的报告不覆盖；与 daily **共用同一把锁**，排队不并行（等运行中的 daily 跑完
+  再补）；默认最多往前 14 天（`-MaxDays`）。`register-task.ps1` 现在同时注册 `research-news-daily`
+  （工作日 09:10）与 `research-news-catchup`（登录 +3 分钟），`-NoCatchUp` 可只装前者。
 - **期刊历史卷期回补 `run_journal_backfill.sh` + `ops/journal-backfill.md`**：把期刊积压的
   历史卷期节奏化补齐——每天 daily 后补一个单元（一本刊若干期），顺序、绝不并行。去重让
   「逐步加大 `--n-issues`」天然可续跑、重跑已覆盖单元零提交。脚本自动 pull → 抢锁（与 daily

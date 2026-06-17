@@ -617,13 +617,21 @@ daily 全流程交给 Windows 任务计划程序跑 `run_daily.ps1` 即可，**�
 **一条命令注册任务**（仓库根目录、PowerShell 里跑一次；提示权限不足就用管理员 PowerShell）：
 
 ```powershell
-.\scripts\register-task.ps1                 # 工作日 09:10
+.\scripts\register-task.ps1                 # 工作日 09:10 的 daily + 登录时的 catch-up
 .\scripts\register-task.ps1 -Time "08:30"   # 换时间
+.\scripts\register-task.ps1 -NoCatchUp      # 只注册 daily，不要 catch-up
 Start-ScheduledTask -TaskName research-news-daily   # 立刻测一次
 ```
 
-它已勾好这些关键项：**错过自动补跑**（`-StartWhenAvailable`，关机/睡眠错过的下次开机补一次）、
-**绝不并行**（`-MultipleInstances IgnoreNew`）、电池不挡。
+它注册**两个**任务，都勾好关键项（**错过自动补跑** `-StartWhenAvailable`、**绝不并行**
+`-MultipleInstances IgnoreNew`、电池不挡）：
+
+- `research-news-daily`：工作日 09:10 跑 `run_daily.ps1`。
+- `research-news-catchup`：**登录时**（+3 分钟）跑 `scripts\catch-up.ps1`——台式机不会 24 小时开，
+  开机后它会看最后一份日报是哪天，把**关机错过的工作日**用 `python -m research_news.daily --date <X>`
+  一次性补齐（跳过周末，今天留给 09:10 那个任务）。它和 daily **共用同一把锁**，所以会排队、不并行；
+  靠重跑保护，已存在的报告不会被覆盖。默认最多往前补 14 天（`-MaxDays` 调），手动跑：
+  `.\scripts\catch-up.ps1`。
 
 > 手动建任务的话：创建任务 → 触发器 周一至周五 09:10 → 操作
 > `powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\path\to\research-news\run_daily.ps1"`
@@ -631,8 +639,8 @@ Start-ScheduledTask -TaskName research-news-daily   # 立刻测一次
 
 落地前提：
 
-- 机器在 09:10 前后**开着、联网**；睡眠中错过没关系（补跑会追一次；关太久就用
-  `python -m research_news.daily --date YYYY-MM-DD` 补指定天）。
+- 机器在 09:10 前后**开着、联网**；睡眠中错过没关系（开机后 daily 补跑当天、catch-up 补齐之前
+  错过的工作日）。
 - 仓库目录里有 `.env`（`SJTU_API_KEY`）和 `.venv`。
 - **先手动 `git push` 一次**，让 Git Credential Manager（或 SSH key）缓存凭证——计划任务是
   无人值守跑的，push 不能弹窗。

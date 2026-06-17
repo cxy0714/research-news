@@ -211,12 +211,21 @@ def _lazy_import(name: str):
 
 _AUDIO_EXTS = (".m4a", ".mp3", ".wav", ".webm", ".opus", ".ogg", ".aac")
 
+# Heartbeat cadence for transcription progress, in seconds of *audio* processed.
+PROGRESS_EVERY_SECS = float(os.environ.get("WHISPER_PROGRESS_SECS", "120"))
+
 
 def download_audio(url: str, dest_dir: Path | str, talk_id: str) -> Path:
-    """Download the best audio track of `url` to dest_dir/<talk_id>.<ext> (yt-dlp)."""
-    yt_dlp = _lazy_import("yt_dlp")
+    """Download the best audio track of `url` to dest_dir/<talk_id>.<ext> (yt-dlp).
+    Reuses an already-downloaded file if present (no re-download)."""
     dest_dir = Path(dest_dir)
     dest_dir.mkdir(parents=True, exist_ok=True)
+    existing = [c for c in sorted(dest_dir.glob(f"{talk_id}.*"))
+                if c.suffix.lower() in _AUDIO_EXTS]
+    if existing:
+        log.info("audio already present, skipping download: %s", existing[0].name)
+        return existing[0]
+    yt_dlp = _lazy_import("yt_dlp")
     opts = {
         "format": "bestaudio/best",
         "outtmpl": str(dest_dir / f"{talk_id}.%(ext)s"),
@@ -289,11 +298,24 @@ def transcribe_audio(
         vad_filter=True,
         beam_size=5,
     )
+    total = float(getattr(info, "duration", 0.0) or 0.0)
+    log.info("transcribing %s of audio (language=%s) — heartbeat every %ds of audio",
+             format_ts(total) if total else "?", getattr(info, "language", "?"),
+             int(PROGRESS_EVERY_SECS))
     out: list[dict] = []
+    next_mark = PROGRESS_EVERY_SECS
     for seg in segments:
         txt = (seg.text or "").strip()
         if txt:
             out.append({"start": float(seg.start), "end": float(seg.end), "text": txt})
-    log.info("transcribed %d segments (detected language=%s)",
-             len(out), getattr(info, "language", "?"))
+        # Heartbeat keyed on audio time processed, so a long (or stuck) run is
+        # visible instead of a silent console.
+        if seg.end >= next_mark:
+            pct = f" ({min(100.0, seg.end / total * 100):.0f}%)" if total else ""
+            log.info("  … %s / %s%s — %d segments so far",
+                     format_ts(seg.end), format_ts(total) if total else "?", pct, len(out))
+            while next_mark <= seg.end:
+                next_mark += PROGRESS_EVERY_SECS
+    log.info("transcribed %d segments (%s of audio, language=%s)",
+             len(out), format_ts(total) if total else "?", getattr(info, "language", "?"))
     return out
