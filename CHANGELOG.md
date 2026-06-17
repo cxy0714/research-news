@@ -16,6 +16,30 @@
 
 ## [Unreleased]
 
+### Added
+- **每日报告展示全部论文 + 历史补全 `backfill_low_relevance`**：每日页不再只留阈值以上
+  的论文。够格的（score ≥ `score_threshold_show`）照旧分组 + 生成中文摘要；其余的（低于
+  阈值）汇到页尾 **🗂 其他论文** 一节，按评分由高到低排列，**只列 LLM 评分 + 一句简评，
+  不再生成摘要**——这些字段每篇打分时就存进 `data/llm_scores.jsonl`，所以零额外 LLM
+  调用。新增 `python -m research_news.backfill_low_relevance` 把过去报告里被遗漏的论文从
+  打分日志**就地补回**对应日期页（纯离线、幂等、按 source 过滤掉期刊管道写进同一日志的
+  非 arXiv 行）。
+
+- **历史摘要补全 `backfill_summaries`**：把上限取消前堆在历史页 🗂 里的过阈值论文，读
+  `data/llm_scores.jsonl` 里的摘要、补生成中文摘要，再整页重渲染、让它们归位到 📌/⭐ 主题
+  分组（需 API key）。既有摘要原样保留（只补没摘要的），只对那几篇花 token。带
+  `--self-check`：不提升、只把每页重渲染一遍逐字比对，确认页面解析器不会动到既有内容
+  （无需 API key，可先跑确认全绿）；解析对作者/机构等"列表拼接"字段整段保留、对摘要里的
+  杂散 CR / 换行也能逐字还原。
+
+### Changed
+- **取消单日摘要 25 篇上限**：过阈值的论文当天全部展开生成摘要，不再受篇数上限截断而漏到
+  🗂 区。（上限取消前的历史页仍有超限未展开的高分论文落在 🗂 里，评分仍标着；用上面的
+  `backfill_summaries` 可一次性补齐。）
+- **`render_daily` 新增 `papers_low` 参数**：渲染页尾 🗂 其他论文 一节；计数行加上
+  「· 其他 N 篇」。`format_daily_count_line` / `render_low_section` 抽出共享，供日跑与历史
+  补全复用，保证两条路径渲染一致。
+
 ### Fixed
 - **被引检索 / 机构查询失败显示真实状态码，404 不再重试**：`references.py`（Semantic
   Scholar）与 `affiliations.py`（OpenAlex）原先把异常被 `RetryError[HTTPStatusError]`
