@@ -1,14 +1,19 @@
 # Windows runner for the daily pipeline — invoke from Task Scheduler.
 # Mirrors run_daily.sh: single-instance lock -> sync -> daily -> fix garbled
-# summaries -> retry failed deep reads -> commit/push.
+# summaries -> retry failed deep reads -> commit/push. A transcript of the whole
+# run is written to logs\run-<date>.log and pushed with git add -A (alongside the
+# pipeline's own logs\<date>.log).
 #
 # One-time setup (easiest): from the repo root in PowerShell, run
 #   .\scripts\register-task.ps1
 # or set it up by hand — see the steps at the bottom of this file / the README.
 
-$ErrorActionPreference = "Stop"
 Set-Location -LiteralPath $PSScriptRoot
 $today = Get-Date -Format "yyyy-MM-dd"
+
+# Capture this run's console (wrapper + git + python) to a per-day transcript.
+New-Item -ItemType Directory -Force -Path "logs" | Out-Null
+Start-Transcript -Path "logs\run-$today.log" -Append -ErrorAction SilentlyContinue | Out-Null
 
 # ── single-instance lock (Windows equivalent of flock) ────────────────────────
 # A named mutex the OS releases automatically when this process exits, so two
@@ -18,7 +23,8 @@ $today = Get-Date -Format "yyyy-MM-dd"
 $mutex = New-Object System.Threading.Mutex($false, "Global\research-news-daily")
 if (-not $mutex.WaitOne(0)) {
     Write-Host "[$(Get-Date -Format o)] another run is already in progress - exiting"
-    exit 0
+    Stop-Transcript -ErrorAction SilentlyContinue | Out-Null
+    return
 }
 
 try {
@@ -37,21 +43,24 @@ try {
 
     # Regenerate any deep reads whose LLM call failed today (the '精读失败' stubs).
     python -m research_news.backfill_deep_reads --retry-stubs --date $today
-
-    # Commit + push everything (docs/ + data/ + logs/) if anything changed.
-    if (git status --porcelain) {
-        git add -A
-        git commit -m "daily report $today"
-        for ($i = 1; $i -le 4; $i++) {
-            git push
-            if ($LASTEXITCODE -eq 0) { break }
-            Start-Sleep -Seconds ([math]::Pow(2, $i))
-        }
-    }
 }
 finally {
     $mutex.ReleaseMutex()
     $mutex.Dispose()
+    # Close the transcript BEFORE git stages it, so the file isn't locked and the
+    # committed logs\run-<date>.log is complete through the pipeline steps.
+    Stop-Transcript -ErrorAction SilentlyContinue | Out-Null
+}
+
+# Commit + push everything (docs/ + data/ + logs/) if anything changed.
+if (git status --porcelain) {
+    git add -A
+    git commit -m "daily report $today"
+    for ($i = 1; $i -le 4; $i++) {
+        git push
+        if ($LASTEXITCODE -eq 0) { break }
+        Start-Sleep -Seconds ([math]::Pow(2, $i))
+    }
 }
 
 # ── Task Scheduler setup (manual alternative to register-task.ps1) ────────────

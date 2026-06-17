@@ -641,6 +641,11 @@ Start-ScheduledTask -TaskName research-news-daily   # 立刻测一次
 
 期刊回补按 `ops/journal-backfill.md` 手动 / 半自动跑即可，不用进每日任务。
 
+**日志会自动传 GitHub**：每次跑会写两份到 `logs\`——`logs\<日期>.log`（管道详细日志：抓取 /
+打分 / 摘要 / 精读 / 报错）和 `logs\run-<日期>.log`（整次运行的完整 transcript：含 git、锁、
+PowerShell 层输出）。`run_daily.ps1` 收尾 `git add -A` 会把 `logs\` 一并提交推送，所以在 GitHub
+上就能回看每天跑了什么、哪步失败（比如 429 限流）。无人值守也有记录可查。
+
 ## 部署到 GitHub Pages
 
 仓库 Settings → Pages → Source 选 `GitHub Actions`，已有 `.github/workflows/deploy-pages.yml` 自动构建 + 部署。
