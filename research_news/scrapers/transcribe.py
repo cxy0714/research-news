@@ -262,6 +262,11 @@ def fetch_subtitles(url: str, dest_dir: Path | str, talk_id: str,
         "outtmpl": str(dest_dir / f"{talk_id}.%(ext)s"),
         "quiet": True,
         "no_warnings": True,
+        # Be gentle with YouTube on bulk runs — back off on the 429s it throws
+        # after a burst of caption requests.
+        "retries": 5,
+        "extractor_retries": 5,
+        "sleep_interval_requests": 1,
     }
     with yt_dlp.YoutubeDL(opts) as ydl:
         ydl.download([url])

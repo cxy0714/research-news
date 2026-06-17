@@ -25,6 +25,7 @@ import json
 import logging
 import os
 import re
+import time
 from datetime import date
 from pathlib import Path
 from typing import TYPE_CHECKING
@@ -180,15 +181,22 @@ def ingest(
         segments = tr.parse_vtt(vtt)
         log.info("using subtitle file %s for %s (%d cues)", subs_file, talk.id, len(segments))
     elif prefer_subs:
+        # Subtitles ONLY — never silently fall back to ASR in a bulk run. If the
+        # video has no captions (or YouTube rate-limits us with a 429), skip and
+        # move on; a later `ingest` without --prefer-subs ASRs the leftovers.
         try:
             vtt = tr.fetch_subtitles(talk.url, AUDIO_DIR, talk.id, lang=talk.language or "en")
-            if vtt:
-                segments = tr.parse_vtt(vtt)
-                log.info("using existing subtitles for %s (%d cues)", talk.id, len(segments))
         except Exception as e:  # noqa: BLE001
-            log.warning("subtitle fetch failed for %s, falling back to ASR: %s", talk.id, e)
+            log.warning("subtitle fetch failed for %s: %s — skipping", talk.id, e)
+            return None
+        segments = tr.parse_vtt(vtt) if vtt else None
+        if not segments:
+            log.info("no captions for %s — skipping (run `ingest` without --prefer-subs to ASR it)",
+                     talk.id)
+            return None
+        log.info("using existing subtitles for %s (%d cues)", talk.id, len(segments))
 
-    if not segments:
+    if segments is None:
         log.info("downloading audio for %s ...", talk.id)
         audio = tr.download_audio(talk.url, AUDIO_DIR, talk.id)
         log.info("transcribing %s (this can take a while) ...", audio.name)
@@ -526,8 +534,11 @@ def run_ingest(
             status = "has transcript" if transcript_path(t.id).exists() else "needs transcript"
             log.info("  %s — %s (%s)", t.id, t.title or t.url, status)
         return []
+    # Space out caption fetches so YouTube doesn't 429 a long --prefer-subs batch.
+    subs_delay = float(os.environ.get("TALKS_SUBS_DELAY", "2"))
     out: list[Path] = []
     for i, t in enumerate(talks, 1):
+        already = transcript_path(t.id).exists()
         log.info("ingest %d/%d: %s", i, len(talks), t.id)
         try:
             p = ingest(t, asr_default, model_size=model_size,
@@ -536,6 +547,8 @@ def run_ingest(
                 out.append(p)
         except Exception as e:  # noqa: BLE001
             log.error("ingest failed for %s: %s", t.id, e)
+        if prefer_subs and not already and i < len(talks):
+            time.sleep(subs_delay)
     return out
 
 

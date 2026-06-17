@@ -234,6 +234,22 @@ def test_ingest_from_subs_file(tmp_path, monkeypatch):
     assert body.count("we study causal inference") == 1   # consecutive dup collapsed
 
 
+def test_prefer_subs_skips_instead_of_asr(tmp_path, monkeypatch):
+    # In a bulk --prefer-subs run, a caption miss/429 must SKIP the talk, never
+    # fall back to ASR (which would download audio + load a model).
+    monkeypatch.setattr(talks, "TRANSCRIPTS_DIR", tmp_path)
+    monkeypatch.setattr(talks.tr, "fetch_subtitles", lambda *a, **k: None)  # no captions
+
+    def _boom(*a, **k):
+        raise AssertionError("ASR must not run under --prefer-subs")
+    monkeypatch.setattr(talks.tr, "download_audio", _boom)
+    monkeypatch.setattr(talks.tr, "transcribe_audio", _boom)
+
+    t = talks.Talk(id="nocaps", url="https://youtu.be/x")
+    assert talks.ingest(t, prefer_subs=True) is None
+    assert not (tmp_path / "nocaps.txt").exists()
+
+
 def test_build_user_message_caps_and_includes(monkeypatch):
     monkeypatch.setattr(talks, "MAX_TRANSCRIPT_CHARS", 20)
     t = talks.Talk(id="x", url="u", title="T", papers=["2606.11421"])
