@@ -627,7 +627,7 @@ Start-ScheduledTask -TaskName research-news-daily   # 立刻测一次
 `-MultipleInstances IgnoreNew`、电池不挡）：
 
 - `research-news-daily`：工作日 09:10 跑 `run_daily.ps1`。
-- `research-news-catchup`：**登录时**（+3 分钟）跑 `scripts\catch-up.ps1`——台式机不会 24 小时开，
+- `research-news-catchup`：**登录时**（+10 分钟）跑 `scripts\catch-up.ps1`——台式机不会 24 小时开，
   开机后它会看最后一份日报是哪天，把**关机错过的工作日**用 `python -m research_news.daily --date <X>`
   一次性补齐（跳过周末，今天留给 09:10 那个任务）。它和 daily **共用同一把锁**，所以会排队、不并行；
   靠重跑保护，已存在的报告不会被覆盖。默认最多往前补 14 天（`-MaxDays` 调），手动跑：
