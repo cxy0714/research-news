@@ -1,0 +1,1681 @@
+[0:00:07] Um welcome everyone to this week's online causal inference seminar. Today
+[0:00:09] online causal inference seminar. Today we have um Professor Anne Helby Petersen
+[0:00:12] we have um Professor Anne Helby Petersen from University of Copenhagen
+[0:00:14] from University of Copenhagen giving us a talk
+[0:00:16] giving us a talk uh on what are we discovering? Two
+[0:00:18] uh on what are we discovering? Two perspectives on interpretable evaluation
+[0:00:21] perspectives on interpretable evaluation of causal discovery algorithms.
+[0:00:23] of causal discovery algorithms. Uh the discussion today will be Vanessa
+[0:00:26] Uh the discussion today will be Vanessa D'Souza um from the Lebanese Institute
+[0:00:28] D'Souza um from the Lebanese Institute for Prevention Research and uh
+[0:00:30] for Prevention Research and uh epidemiology.
+[0:00:32] epidemiology. Um the Q&amp;A will be handled by Sarah.
+[0:00:35] Um the Q&amp;A will be handled by Sarah. Um
+[0:00:36] Um Do you want to say a few words, Sarah,
+[0:00:38] Do you want to say a few words, Sarah, on the format?
+[0:00:39] on the format? Um okay. So if you have questions,
+[0:00:42] Um okay. So if you have questions, please use the Q&amp;A function instead of
+[0:00:44] please use the Q&amp;A function instead of the chat.
+[0:00:45] the chat. And then we will read the questions at
+[0:00:47] And then we will read the questions at the end.
+[0:00:48] the end. And um if there are some kind of
+[0:00:50] And um if there are some kind of follow-up discussion, that we may also
+[0:00:53] follow-up discussion, that we may also ask you to unmute yourself and you can
+[0:00:54] ask you to unmute yourself and you can discuss things
+[0:00:56] discuss things with the uh with Anne or with Vanessa.
+[0:00:59] with the uh with Anne or with Vanessa. Okay, perfect. So, Anne,
+[0:01:02] Okay, perfect. So, Anne, I'll let you start.
+[0:01:03] I'll let you start. The talk is all yours.
+[0:01:06] The talk is all yours. Anne, please.
+[0:01:08] Anne, please. I'll just share my slides.
+[0:01:11] I'll just share my slides. Um
+[0:01:18] I think I'm sharing the right thing. Yeah, if you could put it in full
+[0:01:20] Yeah, if you could put it in full screen.
+[0:01:21] screen. Wonderful. Yeah, wonderful.
+[0:01:22] Wonderful. Yeah, wonderful. All right. So um thanks for this
+[0:01:24] All right. So um thanks for this opportunity to uh talk a little bit
+[0:01:26] opportunity to uh talk a little bit about a topic that I've been very
+[0:01:28] about a topic that I've been very interested in for for a few years now.
+[0:01:31] interested in for for a few years now. Um so the overall topic of today is is
+[0:01:34] Um so the overall topic of today is is of course um causal discovery.
+[0:01:37] of course um causal discovery. Um so we're going to discuss how to
+[0:01:39] Um so we're going to discuss how to evaluate different procedures that uh
+[0:01:42] evaluate different procedures that uh aim to try to learn something about a
+[0:01:44] aim to try to learn something about a causal
+[0:01:45] causal data generating mechanism by analyzing
+[0:01:47] data generating mechanism by analyzing empirical data. So this is the general
+[0:01:49] empirical data. So this is the general setup. Um we have some data, we have
+[0:01:51] setup. Um we have some data, we have some fancy machine learning, and then we
+[0:01:53] some fancy machine learning, and then we want to learn maybe a bag, or more
+[0:01:55] want to learn maybe a bag, or more realistically often, we want to learn a
+[0:01:57] realistically often, we want to learn a equivalence class of DAGs.
+[0:01:59] equivalence class of DAGs. Um for the stuff I'll cover today, we're
+[0:02:02] Um for the stuff I'll cover today, we're going to assume that there's no
+[0:02:03] going to assume that there's no unobserved confounding and no unobserved
+[0:02:05] unobserved confounding and no unobserved selection. So, we're in a simple case
+[0:02:07] selection. So, we're in a simple case where everything is just a DAG.
+[0:02:10] where everything is just a DAG. Okay.
+[0:02:11] Okay. So, for this task, there are a lot of
+[0:02:14] So, for this task, there are a lot of different algorithms available. Um this
+[0:02:17] different algorithms available. Um this is one of the
+[0:02:18] is one of the classics in the field, the PC algorithm,
+[0:02:21] classics in the field, the PC algorithm, but there's been many proposals
+[0:02:23] but there's been many proposals throughout the year using different
+[0:02:25] throughout the year using different interesting ideas, different techniques
+[0:02:28] interesting ideas, different techniques um to sort of go at the same problem.
+[0:02:31] um to sort of go at the same problem. And I think
+[0:02:34] And I think a really a defining characteristic of
+[0:02:36] a really a defining characteristic of the causal discovery field is that it's
+[0:02:38] the causal discovery field is that it's a very productive group of especially um
+[0:02:41] a very productive group of especially um computer scientists who are
+[0:02:43] computer scientists who are um producing a lot of algorithms. And a
+[0:02:45] um producing a lot of algorithms. And a lot of them are um also have nice
+[0:02:48] lot of them are um also have nice properties. You can prove mathematically
+[0:02:50] properties. You can prove mathematically that they're sound, they're complete,
+[0:02:52] that they're sound, they're complete, and they work in um if you have infinite
+[0:02:55] and they work in um if you have infinite data.
+[0:02:56] data. But how do they then work in the real
+[0:02:58] But how do they then work in the real world? That is something we know less
+[0:03:00] world? That is something we know less about.
+[0:03:01] about. Or just in finite data even.
+[0:03:04] Or just in finite data even. Um if we look into the empirical
+[0:03:06] Um if we look into the empirical sciences, I think the uptake is um what
+[0:03:09] sciences, I think the uptake is um what we can call quite limited. This is a
+[0:03:11] we can call quite limited. This is a quick search on um PubMed, which um
+[0:03:14] quick search on um PubMed, which um covers a lot of medical and health
+[0:03:16] covers a lot of medical and health science publications. I've tried to
+[0:03:18] science publications. I've tried to limit the search to not include only
+[0:03:20] limit the search to not include only strictly methods papers, but something
+[0:03:22] strictly methods papers, but something that has at least some component and of
+[0:03:25] that has at least some component and of empirical data. And as you can see here,
+[0:03:28] empirical data. And as you can see here, um there's not a lot of publications. Um
+[0:03:31] um there's not a lot of publications. Um the the peak is in 2023, where there
+[0:03:33] the the peak is in 2023, where there were 12 publications using some of these
+[0:03:35] were 12 publications using some of these methods.
+[0:03:37] methods. Um
+[0:03:38] Um yeah.
+[0:03:39] yeah. And even not all of those are um
+[0:03:42] And even not all of those are um real empirical studies if you look into
+[0:03:44] real empirical studies if you look into them.
+[0:03:45] them. So, how does that compare with other
+[0:03:46] So, how does that compare with other machine learning um topics? Well, if we
+[0:03:49] machine learning um topics? Well, if we look at neural nets, um it's a little
+[0:03:51] look at neural nets, um it's a little bit of a different number. If you look
+[0:03:53] bit of a different number. If you look back to 1990, then we have 18
+[0:03:55] back to 1990, then we have 18 publications. So, causal discovery is
+[0:03:58] publications. So, causal discovery is pretty much as applied as neural
+[0:04:00] pretty much as applied as neural networks were in the beginning of the
+[0:04:02] networks were in the beginning of the '90s. So, that's um
+[0:04:04] '90s. So, that's um there's not a lot going on there. If we
+[0:04:07] there's not a lot going on there. If we if we can use this graph to extrapolate,
+[0:04:09] if we can use this graph to extrapolate, it's interesting though because then in
+[0:04:10] it's interesting though because then in 45 years we'll have um a lot of
+[0:04:13] 45 years we'll have um a lot of different um publications using these
+[0:04:15] different um publications using these algorithms in practice.
+[0:04:17] algorithms in practice. Um, but I think um as we'll also see
+[0:04:20] Um, but I think um as we'll also see some of the stuff I present today, maybe
+[0:04:23] some of the stuff I present today, maybe um there will there is still some work
+[0:04:25] um there will there is still some work needed before we we reach that goal.
+[0:04:28] needed before we we reach that goal. Um, other than not being used much in
+[0:04:31] Um, other than not being used much in practice, we also have some first signs
+[0:04:34] practice, we also have some first signs of what I will call a reproducibility
+[0:04:36] of what I will call a reproducibility crisis. There's a lot of interest in the
+[0:04:38] crisis. There's a lot of interest in the causal discovery um field for trying to
+[0:04:42] causal discovery um field for trying to understand why some of the algorithms
+[0:04:44] understand why some of the algorithms that first seemed very useful do not
+[0:04:46] that first seemed very useful do not perform very well when you um use them
+[0:04:49] perform very well when you um use them on new data. And especially some um very
+[0:04:53] on new data. And especially some um very interesting and very useful ideas about
+[0:04:54] interesting and very useful ideas about using continuous optimization to solve
+[0:04:56] using continuous optimization to solve the problem have had a lot of scrutiny
+[0:04:59] the problem have had a lot of scrutiny um afterwards. And there's been a lot of
+[0:05:01] um afterwards. And there's been a lot of literature on why that might not work as
+[0:05:03] literature on why that might not work as well as you have as you have would have
+[0:05:05] well as you have as you have would have wanted it to.
+[0:05:06] wanted it to. So, um how do we move forward from
+[0:05:09] So, um how do we move forward from there? We have a lot of procedures, we
+[0:05:11] there? We have a lot of procedures, we don't really know if they work in
+[0:05:12] don't really know if they work in practice.
+[0:05:13] practice. Um,
+[0:05:14] Um, and what I'll propose today is to think
+[0:05:17] and what I'll propose today is to think more about how we evaluate these methods
+[0:05:19] more about how we evaluate these methods and how we come to know what works and
+[0:05:22] and how we come to know what works and what what doesn't work.
+[0:05:25] what what doesn't work. So, I will um divide it into two
+[0:05:28] So, I will um divide it into two different evaluation questions. One is
+[0:05:31] different evaluation questions. One is how well do causal discovery algorithms
+[0:05:33] how well do causal discovery algorithms perform in an artificial controlled
+[0:05:35] perform in an artificial controlled environment where we know the true data
+[0:05:37] environment where we know the true data generating mechanism
+[0:05:38] generating mechanism and the other one is how do these
+[0:05:40] and the other one is how do these algorithms then provide information
+[0:05:43] algorithms then provide information um in real-world application and is that
+[0:05:45] um in real-world application and is that information useful? That's that's going
+[0:05:48] information useful? That's that's going to be the two different parts of this
+[0:05:49] to be the two different parts of this presentation.
+[0:05:51] presentation. So, starting with part one.
+[0:05:54] So, starting with part one. What happens in the controlled
+[0:05:55] What happens in the controlled environments in our our sort of in our
+[0:05:58] environments in our our sort of in our lab setting?
+[0:06:00] lab setting? Well, um in order to discuss that, I'll
+[0:06:02] Well, um in order to discuss that, I'll just briefly introduce how we actually
+[0:06:04] just briefly introduce how we actually do go about evaluating causal discovery
+[0:06:07] do go about evaluating causal discovery algorithms.
+[0:06:08] algorithms. The most common strategies is to either
+[0:06:11] The most common strategies is to either do a simulation study where you simulate
+[0:06:13] do a simulation study where you simulate some data from a known DAG. You simulate
+[0:06:15] some data from a known DAG. You simulate that, you draw some data from it. Maybe
+[0:06:16] that, you draw some data from it. Maybe it's linear, maybe it's Gaussian.
+[0:06:19] it's linear, maybe it's Gaussian. And um then you apply your causal
+[0:06:21] And um then you apply your causal discovery algorithm and you compare the
+[0:06:22] discovery algorithm and you compare the truth with what you um estimated.
+[0:06:27] truth with what you um estimated. A different approach um that's also
+[0:06:29] A different approach um that's also often combined with the first one is
+[0:06:31] often combined with the first one is also to apply causal discovery to a
+[0:06:33] also to apply causal discovery to a small selection of real-world data sets.
+[0:06:35] small selection of real-world data sets. There's sort of a list of data sets that
+[0:06:37] There's sort of a list of data sets that people often use. And these data sets,
+[0:06:39] people often use. And these data sets, there is some consensus about what the
+[0:06:41] there is some consensus about what the true data generating mechanism is. Maybe
+[0:06:43] true data generating mechanism is. Maybe it's been um
+[0:06:45] it's been um for some of them it's been um tested
+[0:06:47] for some of them it's been um tested experimentally. So, then you compare
+[0:06:48] experimentally. So, then you compare with a true DAG from that setting.
+[0:06:51] with a true DAG from that setting. And in either case, you need some sort
+[0:06:52] And in either case, you need some sort of metrics to do the comparison.
+[0:06:55] of metrics to do the comparison. Um what's very commonly used in this
+[0:06:57] Um what's very commonly used in this field is to focus on standard machine
+[0:06:59] field is to focus on standard machine learning prediction metrics then that's
+[0:07:01] learning prediction metrics then that's been adapted to fit sort of the graph um
+[0:07:04] been adapted to fit sort of the graph um graph measurement problem. That could be
+[0:07:07] graph measurement problem. That could be adjacency or edge orientation, precision
+[0:07:11] adjacency or edge orientation, precision and recall, or it could some of be some
+[0:07:13] and recall, or it could some of be some other metrics.
+[0:07:14] other metrics. There's also some focus on using
+[0:07:16] There's also some focus on using something that's specifically um
+[0:07:18] something that's specifically um developed for graphs. That could be the
+[0:07:19] developed for graphs. That could be the structural Hamming distance. I'm going
+[0:07:21] structural Hamming distance. I'm going to introduce the the first two here a
+[0:07:22] to introduce the the first two here a bit more in just a bit.
+[0:07:25] bit more in just a bit. And then finally, there have also been
+[0:07:27] And then finally, there have also been some proposals for metrics that are
+[0:07:29] some proposals for metrics that are specifically aimed at um sort of the
+[0:07:32] specifically aimed at um sort of the causal elements of causal discovery. So,
+[0:07:34] causal elements of causal discovery. So, something that tells you how much will
+[0:07:36] something that tells you how much will this impact your causal inference. I'm
+[0:07:38] this impact your causal inference. I'm not going to talk more about these
+[0:07:40] not going to talk more about these today, but I think a lot of
+[0:07:43] today, but I think a lot of um the methods that I discussed could
+[0:07:44] um the methods that I discussed could also be generalized to to apply to them
+[0:07:46] also be generalized to to apply to them and also some of the problems.
+[0:07:49] and also some of the problems. Okay.
+[0:07:50] Okay. So, the basic example. What do we want
+[0:07:53] So, the basic example. What do we want to do um when we want to evaluate a
+[0:07:55] to do um when we want to evaluate a causal discovery algorithms? Assume we
+[0:07:58] causal discovery algorithms? Assume we here have a true DAG and we have an
+[0:07:59] here have a true DAG and we have an estimate of it.
+[0:08:01] estimate of it. We want to compare them.
+[0:08:02] We want to compare them. So, one way to do it is to compute the
+[0:08:04] So, one way to do it is to compute the structural Hamming distance. This is a
+[0:08:06] structural Hamming distance. This is a measure that counts how many different
+[0:08:08] measure that counts how many different operations you need to do on the
+[0:08:09] operations you need to do on the estimated graph for in order to turn it
+[0:08:11] estimated graph for in order to turn it into the true DAG. So, in this case I've
+[0:08:14] into the true DAG. So, in this case I've marked that you need to add two edges in
+[0:08:17] marked that you need to add two edges in green.
+[0:08:18] green. You need to remove one
+[0:08:20] You need to remove one in orange, and then you need to reverse
+[0:08:23] in orange, and then you need to reverse the directions of two of them um that's
+[0:08:26] the directions of two of them um that's the yellow ones, and that gives you five
+[0:08:27] the yellow ones, and that gives you five different operations. So, it's quite an
+[0:08:29] different operations. So, it's quite an easy um and simple thing to do to just
+[0:08:32] easy um and simple thing to do to just count how many operations do you need to
+[0:08:34] count how many operations do you need to do to turn one into the other.
+[0:08:37] do to turn one into the other. Um
+[0:08:38] Um a different approach that's often also
+[0:08:40] a different approach that's often also used and that we will uh I'll discuss
+[0:08:42] used and that we will uh I'll discuss today is to focus on these metrics that
+[0:08:45] today is to focus on these metrics that come from machine learning. Um
+[0:08:47] come from machine learning. Um one is uh precision and recall. Here I
+[0:08:50] one is uh precision and recall. Here I call it adjacency precision, adjacency
+[0:08:52] call it adjacency precision, adjacency recall. And that's because we're now
+[0:08:54] recall. And that's because we're now comparing the graphs where I have
+[0:08:55] comparing the graphs where I have removed all the orientations. We're just
+[0:08:57] removed all the orientations. We're just talking about where the edges are and
+[0:09:00] talking about where the edges are and not which way they turn.
+[0:09:01] not which way they turn. Um
+[0:09:02] Um and if we want to do that, well, then
+[0:09:05] and if we want to do that, well, then again we need to see
+[0:09:07] again we need to see count on our estimate how many true
+[0:09:09] count on our estimate how many true positives are there, so how many edges
+[0:09:11] positives are there, so how many edges are correctly placed, how many are false
+[0:09:14] are correctly placed, how many are false positives, how many are there that
+[0:09:16] positives, how many are there that shouldn't have been there, how many are
+[0:09:17] shouldn't have been there, how many are true negatives, how many shouldn't be
+[0:09:19] true negatives, how many shouldn't be there and are not there, and then
+[0:09:21] there and are not there, and then finally how many are false negatives,
+[0:09:23] finally how many are false negatives, and those are the ones that should have
+[0:09:25] and those are the ones that should have been there but are not. So, we can we
+[0:09:27] been there but are not. So, we can we can uh compute or just count those
+[0:09:29] can uh compute or just count those numbers
+[0:09:30] numbers and then compute these metrics. So, we
+[0:09:33] and then compute these metrics. So, we find an adjacency precision here of
+[0:09:34] find an adjacency precision here of 0.86,
+[0:09:36] 0.86, a recall of 0.75, and that brings us to
+[0:09:40] a recall of 0.75, and that brings us to the important million-dollar question,
+[0:09:43] the important million-dollar question, are these big numbers or small numbers?
+[0:09:45] are these big numbers or small numbers? Is this Is it a good algorithm or a bad
+[0:09:47] Is this Is it a good algorithm or a bad algorithm?
+[0:09:48] algorithm? And um
+[0:09:50] And um that's really the key question that I'm
+[0:09:52] that's really the key question that I'm going to try to um address in the first
+[0:09:54] going to try to um address in the first part of this talk.
+[0:09:55] part of this talk. Um and I will be presenting some work
+[0:09:59] Um and I will be presenting some work from this paper um that's in archive
+[0:10:02] from this paper um that's in archive where we try to to sort of set a
+[0:10:04] where we try to to sort of set a baseline for comparing these numbers to.
+[0:10:12] And um this baseline will be based on random guessing. So, the idea is to
+[0:10:14] random guessing. So, the idea is to consider
+[0:10:15] consider um random guessing as a simple common
+[0:10:17] um random guessing as a simple common baseline for evaluating these
+[0:10:19] baseline for evaluating these algorithms. So, um in order to say if
+[0:10:21] algorithms. So, um in order to say if this is a big number or a small number,
+[0:10:23] this is a big number or a small number, we'll say, "Well, what would we get if
+[0:10:25] we'll say, "Well, what would we get if we just did a
+[0:10:27] we just did a performed some random um graph
+[0:10:30] performed some random um graph construction?" So, we just randomly drew
+[0:10:32] construction?" So, we just randomly drew a graph.
+[0:10:34] a graph. And the the motivation for doing this is
+[0:10:37] And the the motivation for doing this is that I think it makes it easier to
+[0:10:40] that I think it makes it easier to um
+[0:10:41] um first of all, consider what kind of
+[0:10:43] first of all, consider what kind of causal discovery problems are easy and
+[0:10:44] causal discovery problems are easy and which ones are hard.
+[0:10:46] which ones are hard. Um
+[0:10:47] Um maybe this one was an easy problem.
+[0:10:50] maybe this one was an easy problem. Maybe it's not that difficult getting a
+[0:10:51] Maybe it's not that difficult getting a high number. Or maybe it was a difficult
+[0:10:53] high number. Or maybe it was a difficult It was a hard causal discovery problem.
+[0:10:55] It was a hard causal discovery problem. It's difficult getting a high value, and
+[0:10:57] It's difficult getting a high value, and then we should be more impressed by an
+[0:10:59] then we should be more impressed by an algorithm that does it well.
+[0:11:01] algorithm that does it well. Um
+[0:11:02] Um I think it also increases
+[0:11:03] I think it also increases interpretability of the reported
+[0:11:05] interpretability of the reported metrics. If you compare different
+[0:11:06] metrics. If you compare different simulation study designs, each
+[0:11:08] simulation study designs, each simulation study has its own settings,
+[0:11:10] simulation study has its own settings, its own sort of graph uh types, and um
+[0:11:14] its own sort of graph uh types, and um by comparing them to to these um
+[0:11:17] by comparing them to to these um random guessing baselines, maybe that
+[0:11:19] random guessing baselines, maybe that will help um
+[0:11:21] will help um understand how we transport results from
+[0:11:23] understand how we transport results from one setting into another.
+[0:11:25] one setting into another. Um
+[0:11:27] Um and then finally, there's also an
+[0:11:28] and then finally, there's also an element of describing how informative a
+[0:11:30] element of describing how informative a given evaluation study is. Um
+[0:11:34] given evaluation study is. Um maybe in some cases, we can trivially
+[0:11:36] maybe in some cases, we can trivially attain high performance and then they're
+[0:11:38] attain high performance and then they're not that interesting for actually
+[0:11:39] not that interesting for actually understanding whether algorithm does
+[0:11:41] understanding whether algorithm does well or not.
+[0:11:43] well or not. And I'm going to describe it sort of as
+[0:11:44] And I'm going to describe it sort of as a negative control concept. This is
+[0:11:46] a negative control concept. This is something
+[0:11:47] something I personally am familiar with from
+[0:11:49] I personally am familiar with from epidemiology where it's it's it's a
+[0:11:52] epidemiology where it's it's it's a it's an approach to sort of understand
+[0:11:55] it's an approach to sort of understand all this complex
+[0:11:59] all this complex designs where you don't fully
+[0:12:02] designs where you don't fully can fully describe everything that's
+[0:12:03] can fully describe everything that's going on. So, instead of describing
+[0:12:06] going on. So, instead of describing exactly how hard the problem is, we'll
+[0:12:08] exactly how hard the problem is, we'll just compare it to something that has no
+[0:12:10] just compare it to something that has no knowledge about the
+[0:12:12] knowledge about the about the data generating mechanism.
+[0:12:15] about the data generating mechanism. All right.
+[0:12:16] All right. So, to give you a simple example of how
+[0:12:18] So, to give you a simple example of how you can do this using just simulation,
+[0:12:21] you can do this using just simulation, very simple simulations,
+[0:12:23] very simple simulations, let's consider this setting.
+[0:12:26] let's consider this setting. So, there is one of these infamous
+[0:12:29] So, there is one of these infamous causal discovery of variation data sets
+[0:12:31] causal discovery of variation data sets is the Sachs data set. It's a benchmark
+[0:12:33] is the Sachs data set. It's a benchmark data sets. It's something about protein
+[0:12:35] data sets. It's something about protein signaling and it has a true ground truth
+[0:12:38] signaling and it has a true ground truth bag with 11 nodes and 20 edges. It looks
+[0:12:41] bag with 11 nodes and 20 edges. It looks something like this. So, that's the
+[0:12:42] something like this. So, that's the ground truth. We have data on it and
+[0:12:45] ground truth. We have data on it and then we can use it to sort of
+[0:12:47] then we can use it to sort of see if a
+[0:12:48] see if a if a certain algorithm works well or
+[0:12:50] if a certain algorithm works well or not.
+[0:12:51] not. And I will specifically focus on the No
+[0:12:54] And I will specifically focus on the No Tears algorithm.
+[0:12:56] Tears algorithm. This is a causal discovery algorithm
+[0:12:58] This is a causal discovery algorithm that's been proposed in 2018 and it uses
+[0:13:01] that's been proposed in 2018 and it uses some continuous optimization things. So,
+[0:13:03] some continuous optimization things. So, as I already mentioned, this was a very
+[0:13:06] as I already mentioned, this was a very interesting algorithm when it was
+[0:13:07] interesting algorithm when it was proposed and it really has led to a lot
+[0:13:10] proposed and it really has led to a lot of very fruitful research, but there has
+[0:13:12] of very fruitful research, but there has also been some
+[0:13:13] also been some scrutiny and some some
+[0:13:16] scrutiny and some some interest in exploring when it doesn't
+[0:13:17] interest in exploring when it doesn't work well. So, um
+[0:13:19] work well. So, um yeah, that's No Tears.
+[0:13:21] yeah, that's No Tears. And in the original paper that I cite
+[0:13:23] And in the original paper that I cite down here,
+[0:13:25] down here, they include an application to the Sachs
+[0:13:26] they include an application to the Sachs data set as one of their evaluation
+[0:13:28] data set as one of their evaluation strategies.
+[0:13:30] strategies. And what they found was a dag with 16
+[0:13:33] And what they found was a dag with 16 edges and they had an S structural
+[0:13:36] edges and they had an S structural Hamming distance of 22 for that dag. And
+[0:13:38] Hamming distance of 22 for that dag. And they don't propose they don't show the
+[0:13:40] they don't propose they don't show the dag so I haven't included that but
+[0:13:42] dag so I haven't included that but that's what they report.
+[0:13:43] that's what they report. Oh.
+[0:13:45] Oh. Huh.
+[0:13:46] Huh. Something from my slides went away. Oh
+[0:13:48] Something from my slides went away. Oh well. You can compare that with pause
+[0:13:51] well. You can compare that with pause with a negative control
+[0:13:54] with a negative control and by simply simulating
+[0:13:56] and by simply simulating um a large number of dags with the same
+[0:13:59] um a large number of dags with the same number of edges as no tears found. I
+[0:14:01] number of edges as no tears found. I think I did it a thousand times and what
+[0:14:04] think I did it a thousand times and what you find is a structural Hamming
+[0:14:06] you find is a structural Hamming distance that's of the same range as
+[0:14:07] distance that's of the same range as this. I think it's about 25 and you can
+[0:14:10] this. I think it's about 25 and you can also use those simulations to obtain a
+[0:14:13] also use those simulations to obtain a confidence interval for that number. So
+[0:14:16] confidence interval for that number. So um just by looking at the distribution
+[0:14:18] um just by looking at the distribution you find in these or these simulations
+[0:14:20] you find in these or these simulations and then you actually find a 95%
+[0:14:22] and then you actually find a 95% confidence interval that has 22 as its
+[0:14:25] confidence interval that has 22 as its lower limit.
+[0:14:26] lower limit. So
+[0:14:27] So this suggests that maybe even from this
+[0:14:30] this suggests that maybe even from this simple evaluation you would actually end
+[0:14:32] simple evaluation you would actually end up concluding that um there is no
+[0:14:34] up concluding that um there is no significant difference from random
+[0:14:36] significant difference from random guessing on this specific application.
+[0:14:39] guessing on this specific application. And um and that's so so that can be a
+[0:14:41] And um and that's so so that can be a way to to sort of
+[0:14:43] way to to sort of understand how we should interpret the
+[0:14:45] understand how we should interpret the structural Hamming distance of 22.
+[0:14:49] structural Hamming distance of 22. All right.
+[0:14:50] All right. Um so that's how we can do it if we want
+[0:14:52] Um so that's how we can do it if we want to use simulation for it.
+[0:14:54] to use simulation for it. Um but if we are in the simple setting I
+[0:14:57] Um but if we are in the simple setting I also showed you before where we just
+[0:14:58] also showed you before where we just want to try to understand the
+[0:15:00] want to try to understand the differences in two
+[0:15:02] differences in two um graph skeletons so the adjacencies
+[0:15:04] um graph skeletons so the adjacencies without the orientations
+[0:15:06] without the orientations then we can actually um do it even
+[0:15:09] then we can actually um do it even simpler.
+[0:15:10] simpler. So this is the same example as before
+[0:15:12] So this is the same example as before and instead of just considering
+[0:15:14] and instead of just considering precision or recall we can describe the
+[0:15:16] precision or recall we can describe the full um adjacency no the confusion
+[0:15:19] full um adjacency no the confusion matrix here. Um so this says
+[0:15:22] matrix here. Um so this says uh what the truth is and what the
+[0:15:23] uh what the truth is and what the estimate is.
+[0:15:25] estimate is. And I'm just adding a bit of notation.
+[0:15:27] And I'm just adding a bit of notation. Um, we will call the total number of
+[0:15:31] Um, we will call the total number of estimated edges M est,
+[0:15:33] estimated edges M est, the total number of true edges M true,
+[0:15:36] the total number of true edges M true, and the maximum number of edges in the
+[0:15:38] and the maximum number of edges in the graph M max.
+[0:15:40] graph M max. And what I want you to note here is that
+[0:15:42] And what I want you to note here is that M max is a mathematical property of the
+[0:15:45] M max is a mathematical property of the graph. You can just say how many edges
+[0:15:46] graph. You can just say how many edges can there be. Um, it has this formula. D
+[0:15:50] can there be. Um, it has this formula. D is the number of nodes.
+[0:15:52] is the number of nodes. Um, and if there exists an unknown
+[0:15:54] Um, and if there exists an unknown ground truth, then I think it's also
+[0:15:56] ground truth, then I think it's also very reasonable to consider M true as a
+[0:15:59] very reasonable to consider M true as a fixed unknown number.
+[0:16:01] fixed unknown number. And then something that's maybe less
+[0:16:03] And then something that's maybe less intuitive, um,
+[0:16:05] intuitive, um, if you haven't worked a lot with causal
+[0:16:07] if you haven't worked a lot with causal discovery, is that the way most of these
+[0:16:10] discovery, is that the way most of these algorithms are being used in practice,
+[0:16:12] algorithms are being used in practice, um, M est is also something that's not
+[0:16:15] um, M est is also something that's not estimated. It's typically chosen
+[0:16:18] estimated. It's typically chosen implicitly using a test significance
+[0:16:20] implicitly using a test significance level in the constraint-based
+[0:16:22] level in the constraint-based algorithms, or using a penalty for your
+[0:16:24] algorithms, or using a penalty for your scores, um, for instance, if you use a
+[0:16:26] scores, um, for instance, if you use a BIC score in a score-based algorithm,
+[0:16:28] BIC score in a score-based algorithm, then there's a built-in, um,
+[0:16:31] then there's a built-in, um, choice of how many edges are going to
+[0:16:33] choice of how many edges are going to turn out. It's not something we
+[0:16:35] turn out. It's not something we typically tune the algorithms to,
+[0:16:38] typically tune the algorithms to, um, estimate. So, at least for now, we
+[0:16:41] um, estimate. So, at least for now, we will also consider M est fixed.
+[0:16:45] will also consider M est fixed. Then the key observation in in the
+[0:16:47] Then the key observation in in the article,
+[0:16:48] article, um, is simply that if we have random
+[0:16:52] um, is simply that if we have random edge placement, so if we're randomly
+[0:16:54] edge placement, so if we're randomly constructing a a graph, well, then we
+[0:16:57] constructing a a graph, well, then we actually have that the number of true
+[0:16:59] actually have that the number of true positives will be, um,
+[0:17:01] positives will be, um, uh,
+[0:17:02] uh, will follow a hypergeometric
+[0:17:04] will follow a hypergeometric distribution with these parameters. And
+[0:17:06] distribution with these parameters. And this is an exact distributional result
+[0:17:08] this is an exact distributional result that comes simply from having this
+[0:17:10] that comes simply from having this contingency table structure and
+[0:17:12] contingency table structure and conditioning on these totals. You can
+[0:17:16] conditioning on these totals. You can also provide an
+[0:17:17] also provide an an argument that um,
+[0:17:19] an argument that um, that uses sort of
+[0:17:21] that uses sort of an earn argument where you're sampling
+[0:17:22] an earn argument where you're sampling random edges
+[0:17:25] random edges independently and then you turn up at
+[0:17:27] independently and then you turn up at the same result.
+[0:17:29] the same result. So so we can actually describe what
+[0:17:32] So so we can actually describe what number of true positives we should get
+[0:17:34] number of true positives we should get under random guessing. And that leads to
+[0:17:36] under random guessing. And that leads to a number of
+[0:17:38] a number of I think useful
+[0:17:40] I think useful results.
+[0:17:41] results. So first of all, that means that we can
+[0:17:43] So first of all, that means that we can do an exact overall test of skeleton fit
+[0:17:46] do an exact overall test of skeleton fit simply by considering the null
+[0:17:49] simply by considering the null hypothesis that graph that we have
+[0:17:52] hypothesis that graph that we have estimated was obtained by randomly
+[0:17:54] estimated was obtained by randomly placing a number of edges. So note here
+[0:17:57] placing a number of edges. So note here that we're conditioning on the number of
+[0:17:58] that we're conditioning on the number of edges again. That's something we need
+[0:18:00] edges again. That's something we need for this result to work.
+[0:18:02] for this result to work. Then we can compute a one-sided p-value
+[0:18:05] Then we can compute a one-sided p-value for this hypothesis by simply looking at
+[0:18:08] for this hypothesis by simply looking at the probability for getting something
+[0:18:11] the probability for getting something that's at least as extreme, so bigger
+[0:18:13] that's at least as extreme, so bigger number of true positives than what we've
+[0:18:14] number of true positives than what we've observed when
+[0:18:17] observed when we have X is actually hypergeometrically
+[0:18:19] we have X is actually hypergeometrically distributed with these parameters.
+[0:18:22] distributed with these parameters. Okay.
+[0:18:23] Okay. So that's something we can very easily
+[0:18:25] So that's something we can very easily compute for a given setting.
+[0:18:29] compute for a given setting. And um
+[0:18:30] And um I want you to note again that this is an
+[0:18:32] I want you to note again that this is an exact test, so it will be conservative.
+[0:18:35] exact test, so it will be conservative. Um and especially if the if the graph is
+[0:18:38] Um and especially if the if the graph is small, it will be quite conservative
+[0:18:40] small, it will be quite conservative because of the discreteness of the the
+[0:18:42] because of the discreteness of the the whole thing. But it's also a very crude
+[0:18:45] whole thing. But it's also a very crude null hypothesis. Um so I would think
+[0:18:48] null hypothesis. Um so I would think that we generally want to be quite far
+[0:18:50] that we generally want to be quite far away from that hypothesis. So maybe it's
+[0:18:52] away from that hypothesis. So maybe it's not too bad to have a conservative test.
+[0:18:55] not too bad to have a conservative test. I will return to an example of this a
+[0:18:57] I will return to an example of this a little bit later.
+[0:18:59] little bit later. Okay. So what else can we do?
+[0:19:02] Okay. So what else can we do? We can also compute the expectations of
+[0:19:05] We can also compute the expectations of some of the different metrics that we
+[0:19:06] some of the different metrics that we get from this um
+[0:19:09] get from this um confusion matrix. We We at the precision
+[0:19:11] confusion matrix. We We at the precision before. If we look at that, um
+[0:19:14] before. If we look at that, um we can Oh.
+[0:19:16] we can Oh. We can use the fact that we know what
+[0:19:18] We can use the fact that we know what the the expectation is of the true
+[0:19:20] the the expectation is of the true positives because they follow this
+[0:19:22] positives because they follow this distribution. So, we have a formula for
+[0:19:24] distribution. So, we have a formula for that.
+[0:19:25] that. And then, since many of these different
+[0:19:27] And then, since many of these different machine learning metrics, they're
+[0:19:28] machine learning metrics, they're actually just linear transformation of
+[0:19:30] actually just linear transformation of the true positives when you condition on
+[0:19:32] the true positives when you condition on those things, then you can compute
+[0:19:34] those things, then you can compute expectations for them, and you can also
+[0:19:35] expectations for them, and you can also draw inference by using the quantiles
+[0:19:37] draw inference by using the quantiles from this distribution.
+[0:19:39] from this distribution. So, I have a small example with
+[0:19:42] So, I have a small example with precision.
+[0:19:43] precision. Precision has this formula. That's just
+[0:19:45] Precision has this formula. That's just standard definition.
+[0:19:47] standard definition. Um we can rewrite that as the number of
+[0:19:50] Um we can rewrite that as the number of true positives divided by the total
+[0:19:53] true positives divided by the total number of estimated edges.
+[0:19:57] number of estimated edges. And using that and inserting um the the
+[0:20:01] And using that and inserting um the the mean up here,
+[0:20:02] mean up here, we get a closed uh formula for what the
+[0:20:06] we get a closed uh formula for what the expected precision is
+[0:20:08] expected precision is um if you're just doing random guessing.
+[0:20:12] um if you're just doing random guessing. And we can also get a confidence
+[0:20:13] And we can also get a confidence interval for it by using the same logic
+[0:20:16] interval for it by using the same logic because of the linearity.
+[0:20:18] because of the linearity. Um
+[0:20:19] Um So, that's quite neat. Um we can do this
+[0:20:21] So, that's quite neat. Um we can do this very easily, and we don't even have to
+[0:20:23] very easily, and we don't even have to do simulations if we're just interested
+[0:20:25] do simulations if we're just interested in these scalar um
+[0:20:27] in these scalar um metrics. And I think, at least when you
+[0:20:29] metrics. And I think, at least when you look into what people are publishing,
+[0:20:31] look into what people are publishing, that's usually the first thing they they
+[0:20:33] that's usually the first thing they they look into.
+[0:20:35] look into. Um I've also computed the same thing for
+[0:20:38] Um I've also computed the same thing for some of the other standard machine
+[0:20:40] some of the other standard machine learning metrics. You can just do the
+[0:20:41] learning metrics. You can just do the same little
+[0:20:43] same little um exercise.
+[0:20:44] um exercise. And um I think there are some
+[0:20:47] And um I think there are some interesting points here.
+[0:20:49] interesting points here. First of all, we can note that when we
+[0:20:51] First of all, we can note that when we have This is the negative predictive
+[0:20:53] have This is the negative predictive value and specificity.
+[0:20:54] value and specificity. Um they don't really have extra
+[0:20:56] Um they don't really have extra information to bring when you're doing
+[0:20:58] information to bring when you're doing random guessing. Then they're just
+[0:21:00] random guessing. Then they're just simple sort of um they're equivalent to
+[0:21:02] simple sort of um they're equivalent to just reporting precision or recall
+[0:21:04] just reporting precision or recall because it's just one minus one or the
+[0:21:06] because it's just one minus one or the other.
+[0:21:07] other. So, so that's
+[0:21:09] So, so that's maybe you don't need that many different
+[0:21:10] maybe you don't need that many different numbers to to explain what's happening
+[0:21:12] numbers to to explain what's happening if you're doing random guessing.
+[0:21:14] if you're doing random guessing. Um another uh thing you don't get to say
+[0:21:17] Um another uh thing you don't get to say very often is that there are actually
+[0:21:19] very often is that there are actually free lunches here, and I think we should
+[0:21:21] free lunches here, and I think we should be very worried about that when we think
+[0:21:23] be very worried about that when we think about how we report causal discovery
+[0:21:25] about how we report causal discovery evaluations because precision and recall
+[0:21:28] evaluations because precision and recall they vary independently.
+[0:21:30] they vary independently. Um
+[0:21:31] Um and that means that the F1 score, which
+[0:21:33] and that means that the F1 score, which is uh uh which is sort of an average of
+[0:21:36] is uh uh which is sort of an average of them or I'm harmonic? Oh, I never know.
+[0:21:39] them or I'm harmonic? Oh, I never know. It's Anyway, it will be increasing in in
+[0:21:43] It's Anyway, it will be increasing in in either of them.
+[0:21:44] either of them. But just to show you what that looks
+[0:21:46] But just to show you what that looks like, here we have
+[0:21:48] like, here we have expected adjacency F1 score. This is the
+[0:21:50] expected adjacency F1 score. This is the setting where we have a five-node DAG.
+[0:21:53] setting where we have a five-node DAG. Um a five-node DAG can have one, two,
+[0:21:55] Um a five-node DAG can have one, two, three, four, whatever up to 10 edges.
+[0:21:58] three, four, whatever up to 10 edges. So, those are the true number of edges.
+[0:22:00] So, those are the true number of edges. And then we can choose to estimate one,
+[0:22:02] And then we can choose to estimate one, two, three, four up to 10 edges. And as
+[0:22:04] two, three, four up to 10 edges. And as you can see, we can optimize this simply
+[0:22:07] you can see, we can optimize this simply by putting in more edges. So, given a
+[0:22:10] by putting in more edges. So, given a certain level of the true number of
+[0:22:11] certain level of the true number of edges, the more edges we put in, the
+[0:22:13] edges, the more edges we put in, the bigger number we get out.
+[0:22:15] bigger number we get out. Um and that should be a little bit
+[0:22:17] Um and that should be a little bit worrying. Um I think because at least we
+[0:22:21] worrying. Um I think because at least we see here that there are some scenarios
+[0:22:22] see here that there are some scenarios where F1 will not be very informative.
+[0:22:25] where F1 will not be very informative. You can get very big um values by just
+[0:22:28] You can get very big um values by just doing random guessing.
+[0:22:33] Um I will also return now to uh the example
+[0:22:36] I will also return now to uh the example we saw just before. We wanted to know if
+[0:22:38] we saw just before. We wanted to know if these numbers are big, are they small?
+[0:22:41] these numbers are big, are they small? Um in the in the small five-node DAG
+[0:22:44] Um in the in the small five-node DAG example.
+[0:22:46] example. And um well, let's see what we get from
+[0:22:49] And um well, let's see what we get from the negative controls.
+[0:22:51] the negative controls. Uh expected precision on the random
+[0:22:52] Uh expected precision on the random guessing is 0.8.
+[0:22:55] guessing is 0.8. Um and we get a confidence interval from
+[0:22:58] Um and we get a confidence interval from 0.71 to 1. So, this is actually a
+[0:23:01] 0.71 to 1. So, this is actually a scenario where precision is not
+[0:23:02] scenario where precision is not informative. It's very common to get
+[0:23:05] informative. It's very common to get values that are one, which is the upper
+[0:23:07] values that are one, which is the upper limit of precision. So, you can't really
+[0:23:10] limit of precision. So, you can't really you can't have something that performs
+[0:23:12] you can't have something that performs better than random guessing
+[0:23:14] better than random guessing with a 95% confidence interval in this
+[0:23:16] with a 95% confidence interval in this setting.
+[0:23:18] setting. Um if we look at recall, then we get um
+[0:23:21] Um if we look at recall, then we get um 0.7.
+[0:23:23] 0.7. Um or we get a confidence interval that
+[0:23:25] Um or we get a confidence interval that does not include one. So, at least you
+[0:23:27] does not include one. So, at least you can say that something is better on
+[0:23:29] can say that something is better on recall than random guessing, but um
+[0:23:33] recall than random guessing, but um but uh you still get very large values
+[0:23:36] but uh you still get very large values just from random guessing.
+[0:23:38] just from random guessing. Um so, is this a good causal discovery
+[0:23:40] Um so, is this a good causal discovery method? Not really, and you might have
+[0:23:42] method? Not really, and you might have guessed at this point that it was in
+[0:23:43] guessed at this point that it was in fact just a random draw. Uh it did not
+[0:23:46] fact just a random draw. Uh it did not have any information about the DAG, and
+[0:23:48] have any information about the DAG, and I actually chose this specific example
+[0:23:50] I actually chose this specific example because it corresponds to how sort of
+[0:23:53] because it corresponds to how sort of the median graph differs from uh a true
+[0:23:56] the median graph differs from uh a true graph. So, this is this is a standard
+[0:23:58] graph. So, this is this is a standard scenario for this setting.
+[0:24:02] scenario for this setting. Um
+[0:24:03] Um Okay.
+[0:24:04] Okay. So, um
+[0:24:06] So, um I think this shows that maybe we need to
+[0:24:09] I think this shows that maybe we need to consider what we compare with in order
+[0:24:11] consider what we compare with in order to understand these um these different
+[0:24:13] to understand these um these different metrics.
+[0:24:15] metrics. One thing you might ask is is it
+[0:24:17] One thing you might ask is is it reasonable to really um condition on
+[0:24:20] reasonable to really um condition on this MS value, the number of estimated
+[0:24:23] this MS value, the number of estimated edges?
+[0:24:24] edges? And I want to acknowledge that maybe
+[0:24:27] And I want to acknowledge that maybe it's not always reasonable. If you're
+[0:24:29] it's not always reasonable. If you're actually tuning your algorithm into data
+[0:24:31] actually tuning your algorithm into data to get the right level of sparsity,
+[0:24:32] to get the right level of sparsity, density, whatever you want to call it,
+[0:24:34] density, whatever you want to call it, the right number of edges,
+[0:24:35] the right number of edges, then
+[0:24:36] then it's not something we condition on. It
+[0:24:38] it's not something we condition on. It should be included sort of in the
+[0:24:40] should be included sort of in the evaluation.
+[0:24:42] evaluation. Um the distributional results I showed
+[0:24:44] Um the distributional results I showed you here about the adjacency true
+[0:24:46] you here about the adjacency true positives, they don't hold anymore if
+[0:24:48] positives, they don't hold anymore if you're in this case, if you tuned it.
+[0:24:51] you're in this case, if you tuned it. I think you can still use some of this
+[0:24:52] I think you can still use some of this in relation-based ideas. Um
+[0:24:55] in relation-based ideas. Um a simple approach is just to draw from
+[0:24:57] a simple approach is just to draw from the appropriate distribution of these
+[0:24:59] the appropriate distribution of these estimated edges. So,
+[0:25:02] estimated edges. So, if you repeat your algorithm a lot of
+[0:25:03] if you repeat your algorithm a lot of times and count how many edges does it
+[0:25:05] times and count how many edges does it um
+[0:25:06] um does it put in, and then draw random
+[0:25:09] does it put in, and then draw random graphs from that with the same number of
+[0:25:12] graphs from that with the same number of edges from that distribution.
+[0:25:14] edges from that distribution. Um I think that strategy might favor
+[0:25:17] Um I think that strategy might favor algorithms that are being
+[0:25:19] algorithms that are being evaluated because it's it's tuned for
+[0:25:22] evaluated because it's it's tuned for for this kind of setting. Um but I I
+[0:25:25] for this kind of setting. Um but I I also want to reiterate a point I made
+[0:25:27] also want to reiterate a point I made just before. When we have such a crude
+[0:25:29] just before. When we have such a crude null hypothesis
+[0:25:31] null hypothesis and we have a confirmatory test, do we
+[0:25:33] and we have a confirmatory test, do we really care if we sort of favor a little
+[0:25:35] really care if we sort of favor a little bit the algorithm that we're trying to
+[0:25:37] bit the algorithm that we're trying to evaluate because we're not really hoping
+[0:25:39] evaluate because we're not really hoping for something that's borderline
+[0:25:40] for something that's borderline significant here. We would like to do
+[0:25:44] significant here. We would like to do um markedly better than random guessing.
+[0:25:46] um markedly better than random guessing. Otherwise, it feels like it's a waste of
+[0:25:48] Otherwise, it feels like it's a waste of time applying these methods.
+[0:25:50] time applying these methods. I write a little bit more about this in
+[0:25:52] I write a little bit more about this in the article and about how you might do
+[0:25:54] the article and about how you might do it in practice. There's an example of
+[0:25:55] it in practice. There's an example of that.
+[0:25:57] that. Okay.
+[0:25:58] Okay. So, that's more or less what I have to
+[0:26:00] So, that's more or less what I have to say about the first part about what we
+[0:26:02] say about the first part about what we do in the lab.
+[0:26:06] But we will I will return to some of the points and how they can also be used in
+[0:26:09] points and how they can also be used in in trying to understand what happens in
+[0:26:10] in trying to understand what happens in the real world.
+[0:26:12] the real world. Because in in the second part I will
+[0:26:15] Because in in the second part I will discuss
+[0:26:17] discuss this case study that we did with my
+[0:26:19] this case study that we did with my collaborators Klas Ekström and Peter
+[0:26:21] collaborators Klas Ekström and Peter Spirtes and Merete Olesen
+[0:26:23] Spirtes and Merete Olesen um where we tried to use uh causal
+[0:26:26] um where we tried to use uh causal discovery
+[0:26:27] discovery in practice in a a cohort study a life
+[0:26:31] in practice in a a cohort study a life course epidemiological cohort study
+[0:26:32] course epidemiological cohort study where we tried to understand why some
+[0:26:35] where we tried to understand why some people got depressed and why some people
+[0:26:37] people got depressed and why some people had heart disease.
+[0:26:39] had heart disease. And
+[0:26:41] And and we compared the causal discovery
+[0:26:42] and we compared the causal discovery output with
+[0:26:44] output with a traditionally constructed model which
+[0:26:47] a traditionally constructed model which was some experts trying to make a DAG.
+[0:26:50] was some experts trying to make a DAG. So, so the idea of this paper was to
+[0:26:52] So, so the idea of this paper was to sort of compare a man versus machine,
+[0:26:55] sort of compare a man versus machine, who can get out the the most correct
+[0:26:57] who can get out the the most correct model
+[0:26:59] model in some sense.
+[0:27:00] in some sense. So, just to show you how the data
+[0:27:01] So, just to show you how the data structure is here. Oh, we have um
+[0:27:06] structure is here. Oh, we have um different periods of time where we
+[0:27:07] different periods of time where we measure different things
+[0:27:09] measure different things um across the lifespan. We have some
+[0:27:10] um across the lifespan. We have some information from when the men were born,
+[0:27:12] information from when the men were born, childhood, youth, adulthood, and early
+[0:27:14] childhood, youth, adulthood, and early old age. And then what we want to do is
+[0:27:17] old age. And then what we want to do is construct a graph for this. So, we want
+[0:27:19] construct a graph for this. So, we want to um add some edges
+[0:27:22] to um add some edges um at reasonable places to understand
+[0:27:24] um at reasonable places to understand how the the causal flow is.
+[0:27:27] how the the causal flow is. Okay? So, the case study design
+[0:27:30] Okay? So, the case study design um as I said, we we consider the
+[0:27:32] um as I said, we we consider the specific case, and then we do a
+[0:27:34] specific case, and then we do a theory-based model construction where we
+[0:27:37] theory-based model construction where we have epidemiologists, who we will refer
+[0:27:39] have epidemiologists, who we will refer to as the experts,
+[0:27:40] to as the experts, um construct DAGs. They do not look at
+[0:27:43] um construct DAGs. They do not look at the data.
+[0:27:44] the data. Um and they both uh do individual
+[0:27:47] Um and they both uh do individual models, and then they also construct a
+[0:27:48] models, and then they also construct a joint consensus model from that.
+[0:27:51] joint consensus model from that. We also have a data-driven model
+[0:27:52] We also have a data-driven model construction method where we apply a
+[0:27:54] construction method where we apply a causal discovery algorithm to a data set
+[0:27:56] causal discovery algorithm to a data set based on a the Metropolitan Cohort um
+[0:28:00] based on a the Metropolitan Cohort um data set.
+[0:28:01] data set. And then we try to compare the two
+[0:28:03] And then we try to compare the two models, and our general um way of doing
+[0:28:06] models, and our general um way of doing that is to assume that the experts are
+[0:28:08] that is to assume that the experts are mostly correct, but possibly incomplete.
+[0:28:11] mostly correct, but possibly incomplete. Um and that the data-driven model may or
+[0:28:14] Um and that the data-driven model may or may not be correct, but maybe it's a
+[0:28:15] may not be correct, but maybe it's a little bit more complete. Maybe it has
+[0:28:17] little bit more complete. Maybe it has additional information that we
+[0:28:18] additional information that we overlooked. Looked
+[0:28:21] overlooked. Looked um
+[0:28:23] um So, just a few details about how we did
+[0:28:25] So, just a few details about how we did the theory-based model construction. Um
+[0:28:29] the theory-based model construction. Um so, we had experts in uh
+[0:28:32] so, we had experts in uh heart disease and psychia- psychiatry
+[0:28:34] heart disease and psychia- psychiatry epidemiology. They were given a list of
+[0:28:36] epidemiology. They were given a list of the variables without any data, but they
+[0:28:39] the variables without any data, but they were given the temporal information.
+[0:28:41] were given the temporal information. They were also given a little bit of
+[0:28:42] They were also given a little bit of information about the intended study
+[0:28:44] information about the intended study population. So, when were they born um
+[0:28:47] population. So, when were they born um and and and where.
+[0:28:50] and and and where. And then they were also given written
+[0:28:51] And then they were also given written instructions for doing these deck
+[0:28:53] instructions for doing these deck constructions.
+[0:28:55] constructions. We asked them to annotate each edge with
+[0:28:57] We asked them to annotate each edge with a label of confidence, either moderate
+[0:28:59] a label of confidence, either moderate or high, and then, um,
+[0:29:02] or high, and then, um, we had both individual models and a
+[0:29:04] we had both individual models and a joint model, as he just said.
+[0:29:06] joint model, as he just said. And just to give you an example of what
+[0:29:08] And just to give you an example of what that looks like, this is one of the
+[0:29:09] that looks like, this is one of the experts' graphs, their individual model.
+[0:29:12] experts' graphs, their individual model. They had a template and then they could
+[0:29:13] They had a template and then they could draw in their edges.
+[0:29:15] draw in their edges. Um, and that's a very time-consuming
+[0:29:17] Um, and that's a very time-consuming procedure. Um, I'm sure a lot of people
+[0:29:19] procedure. Um, I'm sure a lot of people here, uh, know.
+[0:29:21] here, uh, know. Okay, then what did we do for the
+[0:29:23] Okay, then what did we do for the data-driven model construction? Well, we
+[0:29:25] data-driven model construction? Well, we used the temporal, uh, PC algorithm,
+[0:29:27] used the temporal, uh, PC algorithm, which is a temporal, um, modification of
+[0:29:30] which is a temporal, um, modification of the standard PC algorithm that sort of
+[0:29:32] the standard PC algorithm that sort of makes use of this temporal data
+[0:29:34] makes use of this temporal data structure, where you have variables
+[0:29:36] structure, where you have variables assigned to different periods, so you
+[0:29:37] assigned to different periods, so you know there can't be any,
+[0:29:39] know there can't be any, um, causal links against the direction
+[0:29:41] um, causal links against the direction of time.
+[0:29:42] of time. There are different ways to use that
+[0:29:43] There are different ways to use that information in this specific
+[0:29:46] information in this specific implementation, um,
+[0:29:48] implementation, um, is available in in R in the causal disco
+[0:29:51] is available in in R in the causal disco package, and also in the TPC package in
+[0:29:53] package, and also in the TPC package in R, and there's also something in Tetrad,
+[0:29:56] R, and there's also something in Tetrad, which I think might be a little bit
+[0:29:58] which I think might be a little bit different, but I think it's the same
+[0:29:59] different, but I think it's the same overall ideas.
+[0:30:01] overall ideas. Um, so we used this procedure,
+[0:30:04] Um, so we used this procedure, and we, um, have to use choose a test
+[0:30:07] and we, um, have to use choose a test significance level because it's a
+[0:30:08] significance level because it's a constraint-based causal discovery
+[0:30:10] constraint-based causal discovery algorithm. So, what it does is to do a
+[0:30:11] algorithm. So, what it does is to do a lot of conditional independence tests,
+[0:30:14] lot of conditional independence tests, and the way we did that was to actually
+[0:30:16] and the way we did that was to actually tune the algorithm to have the same
+[0:30:17] tune the algorithm to have the same number of edges as what was proposed by
+[0:30:20] number of edges as what was proposed by the expert consensus model.
+[0:30:22] the expert consensus model. So, they had a number of edges, and we
+[0:30:23] So, they had a number of edges, and we just went for try to find something that
+[0:30:25] just went for try to find something that was the same.
+[0:30:27] was the same. Um, so here's just a little bit of code
+[0:30:29] Um, so here's just a little bit of code example to show you that this is
+[0:30:30] example to show you that this is something that's quite easy to use, and
+[0:30:32] something that's quite easy to use, and also, um,
+[0:30:34] also, um, easy to inspect. So, the final command
+[0:30:37] easy to inspect. So, the final command here produces, um, plots that look like
+[0:30:39] here produces, um, plots that look like what I have on the next
+[0:30:41] what I have on the next slide.
+[0:30:43] slide. Okay, so this is the result from the
+[0:30:45] Okay, so this is the result from the expert model.
+[0:30:46] expert model. Um and what you might note here is that
+[0:30:50] Um and what you might note here is that some of the edges are blue. Those are
+[0:30:52] some of the edges are blue. Those are their high confidence edges, so those
+[0:30:53] their high confidence edges, so those are the edges they have the most trust
+[0:30:55] are the edges they have the most trust in.
+[0:30:56] in. Um
+[0:30:58] Um and here
+[0:31:00] and here is the estimate from the causal
+[0:31:01] is the estimate from the causal discovery procedure.
+[0:31:03] discovery procedure. Um
+[0:31:06] Um and we can compare them in many
+[0:31:07] and we can compare them in many different ways. Look a little bit back
+[0:31:09] different ways. Look a little bit back and forth and they're not equal, but
+[0:31:11] and forth and they're not equal, but they're not that different. Um so we
+[0:31:13] they're not that different. Um so we might want to summarize that
+[0:31:14] might want to summarize that information. One thing we can do is to
+[0:31:17] information. One thing we can do is to look at this adjacency um confusion
+[0:31:19] look at this adjacency um confusion matrix, where we look at what the
+[0:31:21] matrix, where we look at what the experts put in and what the causal
+[0:31:23] experts put in and what the causal discovery algorithm put in.
+[0:31:25] discovery algorithm put in. And I just want to note before we look a
+[0:31:27] And I just want to note before we look a lot into those numbers, that this is
+[0:31:29] lot into those numbers, that this is actually most of the information there
+[0:31:31] actually most of the information there is about comparing at least edge wise uh
+[0:31:35] is about comparing at least edge wise uh compare these graphs edge by edge,
+[0:31:37] compare these graphs edge by edge, because they do not disagree on
+[0:31:38] because they do not disagree on orientation. There's only one edge where
+[0:31:41] orientation. There's only one edge where um the causal discovery algorithm does
+[0:31:43] um the causal discovery algorithm does not orient it, but the um
+[0:31:47] not orient it, but the um the experts do not orient it. I think
+[0:31:49] the experts do not orient it. I think it's this one
+[0:31:51] it's this one from weight to length. That's sort of
+[0:31:53] from weight to length. That's sort of the only difference in orientations. So
+[0:31:55] the only difference in orientations. So so it makes sense to mostly talk about
+[0:31:57] so it makes sense to mostly talk about these adjacencies.
+[0:32:00] these adjacencies. Um
+[0:32:02] Um so we see that uh
+[0:32:04] so we see that uh these two uh
+[0:32:06] these two uh the experts, they agree with the causal
+[0:32:09] the experts, they agree with the causal discovery about 10 edges.
+[0:32:11] discovery about 10 edges. Then there are 20 edges proposed by the
+[0:32:13] Then there are 20 edges proposed by the experts who are not in the causal
+[0:32:15] experts who are not in the causal discovery output. And there are 20 edges
+[0:32:18] discovery output. And there are 20 edges proposed by causal discovery that are
+[0:32:19] proposed by causal discovery that are not in the uh expert output.
+[0:32:23] not in the uh expert output. And the symmetry here is by
+[0:32:24] And the symmetry here is by construction, because we um tuned the
+[0:32:27] construction, because we um tuned the causal discovery algorithm to have the
+[0:32:28] causal discovery algorithm to have the same number of edges as as the experts
+[0:32:30] same number of edges as as the experts um had in their graph.
+[0:32:32] um had in their graph. Um if we look specifically at these high
+[0:32:35] Um if we look specifically at these high confidence edges, then six out of the
+[0:32:37] confidence edges, then six out of the seven are found again by the causal
+[0:32:39] seven are found again by the causal discovery procedure, so that's the blue
+[0:32:41] discovery procedure, so that's the blue ones.
+[0:32:42] ones. Um and I think the one that it misses is
+[0:32:47] Um and I think the one that it misses is No, that's not it.
+[0:32:49] No, that's not it. Oh.
+[0:32:50] Oh. Um
+[0:32:52] Um it misses only one.
+[0:32:54] it misses only one. Uh
+[0:32:55] Uh yeah.
+[0:32:56] yeah. So, um
+[0:32:58] So, um you can look at this and say
+[0:33:00] you can look at this and say well, that's a lot of correct
+[0:33:01] well, that's a lot of correct adjacencies and non-adjacencies. In some
+[0:33:03] adjacencies and non-adjacencies. In some sense, these 10 are correct and these
+[0:33:06] sense, these 10 are correct and these
+[0:33:09] 81 are also correct. Oh, that's the wrong number. But, how
+[0:33:11] Oh, that's the wrong number. But, how many of those should we have expected to
+[0:33:13] many of those should we have expected to be true if we actually just did random
+[0:33:14] be true if we actually just did random guessing? And that's is actually that
+[0:33:16] guessing? And that's is actually that question that motivated a a lot of this
+[0:33:18] question that motivated a a lot of this negative control work. What would we
+[0:33:20] negative control work. What would we have expected to find if we if we were
+[0:33:22] have expected to find if we if we were just randomly guessing here?
+[0:33:25] just randomly guessing here? So,
+[0:33:25] So, um let's have a look at it.
+[0:33:28] um let's have a look at it. Well,
+[0:33:29] Well, the observed precision and re- and
+[0:33:31] the observed precision and re- and recall we find here, and those are equal
+[0:33:33] recall we find here, and those are equal due to the symmetry in uh the true
+[0:33:35] due to the symmetry in uh the true number of edges and the estimated number
+[0:33:37] number of edges and the estimated number of edges,
+[0:33:38] of edges, um is 1/3. That's not a very big number.
+[0:33:41] um is 1/3. That's not a very big number. Usually, I would think for precision,
+[0:33:43] Usually, I would think for precision, but let's see.
+[0:33:44] but let's see. We can also compute the structural
+[0:33:46] We can also compute the structural Hamming distance. That's quite easy
+[0:33:48] Hamming distance. That's quite easy because we only have one edge um
+[0:33:50] because we only have one edge um sort of orientation that differs, and
+[0:33:52] sort of orientation that differs, and then we have 20 that are there but
+[0:33:56] then we have 20 that are there but shouldn't be,
+[0:33:57] shouldn't be, um and 20 the other way around.
+[0:34:01] um and 20 the other way around. So, that's 41 um operations.
+[0:34:04] So, that's 41 um operations. If you want to know if these numbers are
+[0:34:06] If you want to know if these numbers are high or low, we can use the method I
+[0:34:07] high or low, we can use the method I just showed you before.
+[0:34:09] just showed you before. Um we can find uh the expected precision
+[0:34:11] Um we can find uh the expected precision or recall under random guessing. That
+[0:34:13] or recall under random guessing. That would be
+[0:34:14] would be .13.
+[0:34:16] .13. We have a confidence interval for it,
+[0:34:17] We have a confidence interval for it, and we also have a test of oral skeleton
+[0:34:19] and we also have a test of oral skeleton fit where we find a quite small p-value.
+[0:34:22] fit where we find a quite small p-value. So, I would say this is an unlikely
+[0:34:24] So, I would say this is an unlikely estimate to find if we are just placing
+[0:34:27] estimate to find if we are just placing edges at random.
+[0:34:28] edges at random. So, at least that's nice for the causal
+[0:34:30] So, at least that's nice for the causal the procedure here. It doesn't look like
+[0:34:32] the procedure here. It doesn't look like it's just placing edges at random.
+[0:34:35] it's just placing edges at random. We can also using simulation find out
+[0:34:38] We can also using simulation find out what the expected structural Hamming
+[0:34:40] what the expected structural Hamming distance would have been under random
+[0:34:41] distance would have been under random guessing and then it would have been
+[0:34:43] guessing and then it would have been about 14 14 edges
+[0:34:46] about 14 14 edges extra. And we have the confidence
+[0:34:48] extra. And we have the confidence intervals for that as well. So that can
+[0:34:50] intervals for that as well. So that can help us understand what these numbers
+[0:34:51] help us understand what these numbers mean and how we should interpret them.
+[0:34:57] Um Then that's really not what we were
+[0:34:59] Then that's really not what we were talking about in this part of the of the
+[0:35:01] talking about in this part of the of the presentation. I wanted to know if the
+[0:35:03] presentation. I wanted to know if the discovery
+[0:35:04] discovery causal discovery insights are actually
+[0:35:06] causal discovery insights are actually useful.
+[0:35:07] useful. So in order to discuss that, I think the
+[0:35:09] So in order to discuss that, I think the main focus should be on the 20 edges
+[0:35:11] main focus should be on the 20 edges that the causal discovery procedure
+[0:35:13] that the causal discovery procedure proposes that the experts do not.
+[0:35:16] proposes that the experts do not. And what we can say about those.
+[0:35:18] And what we can say about those. And we tried to
+[0:35:20] And we tried to we tried to classify those post hoc
+[0:35:23] we tried to classify those post hoc so after the fact after we've seen them
+[0:35:26] so after the fact after we've seen them into three different categories by
+[0:35:28] into three different categories by revisiting the literature
+[0:35:31] revisiting the literature on the different
+[0:35:33] on the different proposed causal
+[0:35:34] proposed causal links.
+[0:35:35] links. And we found that three of them had low
+[0:35:38] And we found that three of them had low plausibility which meant that we could
+[0:35:40] plausibility which meant that we could not find anything that suggested they
+[0:35:42] not find anything that suggested they should be there
+[0:35:43] should be there and they did not go with existing
+[0:35:45] and they did not go with existing theory. Six of them were moderately
+[0:35:48] theory. Six of them were moderately plausible so we could find some
+[0:35:49] plausible so we could find some suggestions that they might be there and
+[0:35:51] suggestions that they might be there and some convincing arguments.
+[0:35:53] some convincing arguments. And actually 11 of them had high
+[0:35:55] And actually 11 of them had high plausibility so we could find several
+[0:35:57] plausibility so we could find several different sources that found them
+[0:35:59] different sources that found them plausible or and they fitted well with
+[0:36:01] plausible or and they fitted well with the existing theory.
+[0:36:03] the existing theory. Um so it seems like what we discover
+[0:36:05] Um so it seems like what we discover here might actually have some use and be
+[0:36:08] here might actually have some use and be something that the experts overlooked at
+[0:36:10] something that the experts overlooked at first.
+[0:36:12] first. I have two extra small examples of
+[0:36:16] I have two extra small examples of how you can also try to look closer into
+[0:36:18] how you can also try to look closer into a a model to understand what what comes
+[0:36:21] a a model to understand what what comes out of using
+[0:36:22] out of using causal discovery versus the expert
+[0:36:24] causal discovery versus the expert model. So how do they differ?
+[0:36:26] model. So how do they differ? Um
+[0:36:28] Um One uh is a random not random is an
+[0:36:31] One uh is a random not random is an example where we focus on socioeconomic
+[0:36:32] example where we focus on socioeconomic variables.
+[0:36:34] variables. So, we might have a specific type of
+[0:36:36] So, we might have a specific type of variables that we're interested in and
+[0:36:37] variables that we're interested in and then we can see how much do the models
+[0:36:39] then we can see how much do the models differ for that. And um
+[0:36:42] differ for that. And um in this case it's social variables so
+[0:36:44] in this case it's social variables so something that's associated with social
+[0:36:46] something that's associated with social economy.
+[0:36:47] economy. Um is stuff like low paternal social
+[0:36:50] Um is stuff like low paternal social class, marital status of the mother,
+[0:36:52] class, marital status of the mother, employment status, retirement,
+[0:36:53] employment status, retirement, cohabitation, education.
+[0:36:56] cohabitation, education. Then I mark all the edges going in and
+[0:36:58] Then I mark all the edges going in and out of those.
+[0:36:59] out of those. Um
+[0:37:01] Um and I can count here in the expert model
+[0:37:03] and I can count here in the expert model how many social edges are there? There
+[0:37:05] how many social edges are there? There are 10. And how many non-social edges
+[0:37:07] are 10. And how many non-social edges are there? There are 20.
+[0:37:09] are there? There are 20. All right. Let's do the same for the
+[0:37:11] All right. Let's do the same for the causal discovery procedure. We've marked
+[0:37:13] causal discovery procedure. We've marked them and we've marked all the edges
+[0:37:14] them and we've marked all the edges going in and out of social variables and
+[0:37:17] going in and out of social variables and you can see that there are a lot more of
+[0:37:18] you can see that there are a lot more of them in the causal discovery procedure.
+[0:37:20] them in the causal discovery procedure. We find actually 20 social edges. Um 15
+[0:37:25] We find actually 20 social edges. Um 15 of them are new so they were not
+[0:37:26] of them are new so they were not proposed by the experts and only two of
+[0:37:28] proposed by the experts and only two of those are implausible.
+[0:37:30] those are implausible. Um
+[0:37:32] Um so this is an example of how we can try
+[0:37:34] so this is an example of how we can try to understand what extra information the
+[0:37:36] to understand what extra information the causal discovery procedure brings to the
+[0:37:38] causal discovery procedure brings to the table and I think in this case it
+[0:37:40] table and I think in this case it suggests that our experts were not very
+[0:37:43] suggests that our experts were not very focused on social economy. They were
+[0:37:45] focused on social economy. They were maybe more focused on different kind of
+[0:37:47] maybe more focused on different kind of risk factors. Um
+[0:37:49] risk factors. Um so so um
+[0:37:52] so so um so at least that's a way to describe
+[0:37:54] so at least that's a way to describe that.
+[0:37:58] A different example of what you can do with this is to consider sort of the
+[0:38:00] with this is to consider sort of the structure of the graph. Here I'm
+[0:38:02] structure of the graph. Here I'm focusing on lag. So, that's how many
+[0:38:05] focusing on lag. So, that's how many periods a an edge skips. So, here would
+[0:38:08] periods a an edge skips. So, here would be an edge with lag zero and one with
+[0:38:12] be an edge with lag zero and one with lag one. One with lag two
+[0:38:15] lag one. One with lag two and three would be skipping more and so
+[0:38:17] and three would be skipping more and so on.
+[0:38:18] on. So, we can count in each of the edge
+[0:38:20] So, we can count in each of the edge each of the graphs how many different
+[0:38:22] each of the graphs how many different edges have different lags. Here are the
+[0:38:24] edges have different lags. Here are the experts, here are the causal discovery
+[0:38:26] experts, here are the causal discovery results.
+[0:38:28] results. Um
+[0:38:30] Um and one thing that pops out for me here
+[0:38:32] and one thing that pops out for me here is that the experts sure seem to like
+[0:38:34] is that the experts sure seem to like lag one. There's a lot of those and and
+[0:38:36] lag one. There's a lot of those and and lot more than there are in the causal
+[0:38:38] lot more than there are in the causal discovery procedure.
+[0:38:40] discovery procedure. Um the causal discovery procedure seems
+[0:38:42] Um the causal discovery procedure seems quite focused on lag zero, but I found
+[0:38:44] quite focused on lag zero, but I found this table to be a little bit difficult
+[0:38:46] this table to be a little bit difficult to interpret. So once again, we might
+[0:38:49] to interpret. So once again, we might use these negative controls to sort of
+[0:38:52] use these negative controls to sort of understand what how much of this
+[0:38:54] understand what how much of this information is just embedded in the
+[0:38:56] information is just embedded in the structure. We have this these different
+[0:38:58] structure. We have this these different tiers where they can be um different
+[0:39:01] tiers where they can be um different lags
+[0:39:02] lags um
+[0:39:03] um of diff- different number of lags and
+[0:39:05] of diff- different number of lags and how much is specific to this um
+[0:39:07] how much is specific to this um application.
+[0:39:09] application. So um we can compute these are averages
+[0:39:12] So um we can compute these are averages from negative controls. We can also
+[0:39:14] from negative controls. We can also um
+[0:39:15] um compute P values where we compare these
+[0:39:18] compute P values where we compare these numbers to that number and this number
+[0:39:20] numbers to that number and this number to that number. Those are the ones in
+[0:39:22] to that number. Those are the ones in the parenthesis. And in blue I've marked
+[0:39:24] the parenthesis. And in blue I've marked the ones that are uh significant at a
+[0:39:26] the ones that are uh significant at a say 5% level.
+[0:39:29] say 5% level. So what we can actually
+[0:39:30] So what we can actually conclude from this is that the experts
+[0:39:33] conclude from this is that the experts have a markedly different lag structure
+[0:39:35] have a markedly different lag structure than the negative control. Um but the
+[0:39:38] than the negative control. Um but the causal discovery algorithm actually does
+[0:39:40] causal discovery algorithm actually does not It has more uh It has significantly
+[0:39:43] not It has more uh It has significantly too many
+[0:39:44] too many um lag zero edges, but the rest of it is
+[0:39:47] um lag zero edges, but the rest of it is not different from negative control. So
+[0:39:50] not different from negative control. So um it seems like our experts, they have
+[0:39:52] um it seems like our experts, they have a distinct preference for for lags um of
+[0:39:56] a distinct preference for for lags um of size 20
+[0:39:57] size 20 um and too few of size two and three. Um
+[0:40:01] um and too few of size two and three. Um and and maybe that can give us some
+[0:40:03] and and maybe that can give us some insights into what kind of sort of um
+[0:40:06] insights into what kind of sort of um um preconceptions are included in how
+[0:40:08] um preconceptions are included in how the experts operate.
+[0:40:11] the experts operate. Um yeah.
+[0:40:13] Um yeah. So what would be the conclusive
+[0:40:14] So what would be the conclusive conclusion from this um application and
+[0:40:17] conclusion from this um application and the case study? I think it is that, um,
+[0:40:19] the case study? I think it is that, um, causal discovery can be a tool that can
+[0:40:21] causal discovery can be a tool that can help focus attention on something that's
+[0:40:23] help focus attention on something that's maybe overlooked in an expert dag, and
+[0:40:26] maybe overlooked in an expert dag, and it can be a good complement to to using
+[0:40:28] it can be a good complement to to using the traditional procedures. So, we
+[0:40:30] the traditional procedures. So, we should have man and machine going hand
+[0:40:31] should have man and machine going hand in hand and sharing their, um,
+[0:40:33] in hand and sharing their, um, perspectives.
+[0:40:36] perspectives. Okay. I think, um, we're reaching the
+[0:40:39] Okay. I think, um, we're reaching the the overall conclusions of this talk,
+[0:40:41] the overall conclusions of this talk, and they're going to be a little bit in,
+[0:40:43] and they're going to be a little bit in, um, in different directions. First of
+[0:40:46] um, in different directions. First of all, I think the first conclusion is
+[0:40:48] all, I think the first conclusion is that we need to be a little bit more
+[0:40:49] that we need to be a little bit more ambitious when we evaluate causal
+[0:40:51] ambitious when we evaluate causal discovery procedures in the lab, so in
+[0:40:53] discovery procedures in the lab, so in the simulation controlled environments.
+[0:40:55] the simulation controlled environments. We need to study, think about how we,
+[0:40:58] We need to study, think about how we, uh, design our simulation studies, um,
+[0:41:01] uh, design our simulation studies, um, because
+[0:41:02] because the results are incredibly sensitive to
+[0:41:05] the results are incredibly sensitive to some of the choices we make, especially
+[0:41:07] some of the choices we make, especially what I've shown here is how sparse the
+[0:41:09] what I've shown here is how sparse the true data generating mechanism is, so
+[0:41:12] true data generating mechanism is, so how many edges are in that, and also how
+[0:41:14] how many edges are in that, and also how sparse the estimated graph is. We can
+[0:41:16] sparse the estimated graph is. We can really get any any specific number out
+[0:41:19] really get any any specific number out of, uh, a lot of the metrics if we just,
+[0:41:21] of, uh, a lot of the metrics if we just, um,
+[0:41:22] um, change those factors. So, we need to
+[0:41:24] change those factors. So, we need to think about that.
+[0:41:26] think about that. I think we should also be, um,
+[0:41:29] I think we should also be, um, uh, cautious about how we're comparing
+[0:41:31] uh, cautious about how we're comparing different algorithms that's been
+[0:41:32] different algorithms that's been evaluated in their own separate
+[0:41:34] evaluated in their own separate simulation studies because we're really
+[0:41:36] simulation studies because we're really often comparing apples and oranges.
+[0:41:38] often comparing apples and oranges. Um, if they weren't the simulation
+[0:41:41] Um, if they weren't the simulation studies did not have the same estimated
+[0:41:44] studies did not have the same estimated and true sparsities, then the comparison
+[0:41:45] and true sparsities, then the comparison is really not that meaningful because
+[0:41:47] is really not that meaningful because some of them are hard questions, causal
+[0:41:49] some of them are hard questions, causal discovery questions, and some of them
+[0:41:50] discovery questions, and some of them are easy ones. So, so, it's difficult to
+[0:41:53] are easy ones. So, so, it's difficult to compare them.
+[0:41:55] compare them. Um, I think I also showed that some of
+[0:41:58] Um, I think I also showed that some of the custom-made evaluations you might
+[0:42:00] the custom-made evaluations you might use for a specific scenario, some, for
+[0:42:02] use for a specific scenario, some, for instance, the lag comparison, can also
+[0:42:04] instance, the lag comparison, can also be a little bit difficult to interpret
+[0:42:05] be a little bit difficult to interpret alone. So, maybe we can also think about
+[0:42:08] alone. So, maybe we can also think about how to help that kind of, um,
+[0:42:12] how to help that kind of, um, uh,
+[0:42:12] uh, evaluation. And and I think these
+[0:42:14] evaluation. And and I think these negative controls can help a lot. They
+[0:42:17] negative controls can help a lot. They don't say everything there is to say
+[0:42:19] don't say everything there is to say because it is a very crude null
+[0:42:20] because it is a very crude null hypothesis, but maybe we need to just
+[0:42:22] hypothesis, but maybe we need to just first check are we even doing better
+[0:42:24] first check are we even doing better than random guessing and how much so.
+[0:42:27] than random guessing and how much so. And they're very easy to do um
+[0:42:29] And they're very easy to do um and especially if you're in this uh
+[0:42:31] and especially if you're in this uh skeleton metric situation, you can just
+[0:42:33] skeleton metric situation, you can just use the close formula that I I provide.
+[0:42:36] use the close formula that I I provide. Um well, what about the real world? I
+[0:42:39] Um well, what about the real world? I think um here we need to be less
+[0:42:41] think um here we need to be less ambitious.
+[0:42:43] ambitious. Uh when we're considering how useful
+[0:42:45] Uh when we're considering how useful these algorithms are, I think we should
+[0:42:48] these algorithms are, I think we should think about where the relevant um
+[0:42:50] think about where the relevant um appropriate baseline it is. What is
+[0:42:52] appropriate baseline it is. What is treatment as usual? Um it's often it's
+[0:42:55] treatment as usual? Um it's often it's not oracle information. We never have
+[0:42:57] not oracle information. We never have that in practice. So, I don't think it's
+[0:43:00] that in practice. So, I don't think it's a fair or meaningful comparison to to um
+[0:43:03] a fair or meaningful comparison to to um talk about uh the true data generating
+[0:43:06] talk about uh the true data generating mechanism. Rather, we should see what
+[0:43:08] mechanism. Rather, we should see what are people doing now? Can we do better
+[0:43:10] are people doing now? Can we do better than that or just equally well?
+[0:43:13] than that or just equally well? Um yeah.
+[0:43:16] Um yeah. I think the Metrolinx case study
+[0:43:17] I think the Metrolinx case study provides an example where we actually
+[0:43:19] provides an example where we actually find some additional information by
+[0:43:20] find some additional information by doing causal discovery that could help
+[0:43:22] doing causal discovery that could help understand more about um
+[0:43:24] understand more about um that specific case.
+[0:43:26] that specific case. And I also think um using causal
+[0:43:29] And I also think um using causal discovery actually provides some
+[0:43:31] discovery actually provides some insights into the implicit
+[0:43:34] insights into the implicit preconceptions of these experts. They
+[0:43:35] preconceptions of these experts. They focus a lot on one period lags, on on
+[0:43:38] focus a lot on one period lags, on on social factors. Maybe this will broaden
+[0:43:40] social factors. Maybe this will broaden their view or at least they will know
+[0:43:42] their view or at least they will know what um sort of um implicit assumptions
+[0:43:45] what um sort of um implicit assumptions go into how they work with this.
+[0:43:48] go into how they work with this. Finally, um
+[0:43:51] Finally, um I I want to finish on a question that
+[0:43:53] I I want to finish on a question that I'm often asked and I I thought I would
+[0:43:55] I'm often asked and I I thought I would use this opportunity to try to answer
+[0:43:56] use this opportunity to try to answer it. Um are these causal discovery
+[0:43:58] it. Um are these causal discovery algorithms actually mature enough to be
+[0:44:00] algorithms actually mature enough to be used in the wild? Should we do it at
+[0:44:02] used in the wild? Should we do it at all? We don't know if they work really.
+[0:44:04] all? We don't know if they work really. And my answer to this is that I don't
+[0:44:06] And my answer to this is that I don't think they'll ever be if we don't start
+[0:44:07] think they'll ever be if we don't start using them in the wild. We really need
+[0:44:09] using them in the wild. We really need the insights that come from applying
+[0:44:11] the insights that come from applying these things to real real-world data and
+[0:44:14] these things to real real-world data and to understand what happens outside of
+[0:44:16] to understand what happens outside of the lab and also the limitations. I
+[0:44:18] the lab and also the limitations. I think for instance the Notears
+[0:44:20] think for instance the Notears algorithm, seeing that it does poorly on
+[0:44:23] algorithm, seeing that it does poorly on a real data set should have started some
+[0:44:25] a real data set should have started some alarm flags and then we could have
+[0:44:27] alarm flags and then we could have understood why is that happening? Why
+[0:44:29] understood why is that happening? Why doesn't it transport well?
+[0:44:32] doesn't it transport well? Um I think the algorithms also have a
+[0:44:34] Um I think the algorithms also have a lot to offer and and constructing DAGs
+[0:44:37] lot to offer and and constructing DAGs is difficult. So so there is a lot to
+[0:44:40] is difficult. So so there is a lot to gain here.
+[0:44:41] gain here. And I just want to also bring a few
+[0:44:43] And I just want to also bring a few resources on topic of actually trying to
+[0:44:45] resources on topic of actually trying to use these things in practice focused on
+[0:44:47] use these things in practice focused on health sciences because that's where
+[0:44:49] health sciences because that's where I've mostly um looked at it. Uh Vanessa
+[0:44:52] I've mostly um looked at it. Uh Vanessa D'Elous who will be doing the discussion
+[0:44:55] D'Elous who will be doing the discussion um has written a a very nice resource on
+[0:44:58] um has written a a very nice resource on all the different things that um are
+[0:45:00] all the different things that um are difficult when you want to do this in
+[0:45:02] difficult when you want to do this in practice. And we also have a comment on
+[0:45:04] practice. And we also have a comment on that and then a new uh article that
+[0:45:07] that and then a new uh article that tries to sort of bridge this with system
+[0:45:09] tries to sort of bridge this with system dynamics things and try to understand
+[0:45:12] dynamics things and try to understand how you you might use both in order to
+[0:45:14] how you you might use both in order to get a more robust result.
+[0:45:16] get a more robust result. And I think I will end on that and an
+[0:45:18] And I think I will end on that and an advertisement. We're looking for PhD
+[0:45:20] advertisement. We're looking for PhD students. So if you're interested in
+[0:45:21] students. So if you're interested in something like that, maybe on causal
+[0:45:23] something like that, maybe on causal discovery, then please check out this
+[0:45:25] discovery, then please check out this link. Thank you.
+[0:45:38] Thank you very much uh um for your very interesting talk. Um
+[0:45:40] um for your very interesting talk. Um Sarah, do you want to do the questions
+[0:45:42] Sarah, do you want to do the questions now or maybe after Vanessa's discussion?
+[0:45:45] now or maybe after Vanessa's discussion? Um maybe we can do one very quick one
+[0:45:48] Um maybe we can do one very quick one which I think is like one or two which
+[0:45:50] which I think is like one or two which are clarifying and then the others are
+[0:45:51] are clarifying and then the others are pretty long so maybe we can do them a
+[0:45:53] pretty long so maybe we can do them a bit later.
+[0:45:54] bit later. So I wanted to ask you first the
+[0:45:55] So I wanted to ask you first the clarifying question
+[0:45:57] clarifying question from Jakob Zeitler. So you can see the
+[0:45:58] from Jakob Zeitler. So you can see the questions in the Q&amp;A.
+[0:46:00] questions in the Q&amp;A. Uh Jakob is asking, "Did I understand
+[0:46:03] Uh Jakob is asking, "Did I understand correctly the algorithm was told how
+[0:46:04] correctly the algorithm was told how many edges there would be? This is in
+[0:46:06] many edges there would be? This is in the expert part. So therefore we got the
+[0:46:09] the expert part. So therefore we got the symmetry in the comparison matrix
+[0:46:11] symmetry in the comparison matrix through the experts.
+[0:46:12] through the experts. That is exactly correct. Yeah, so we
+[0:46:15] That is exactly correct. Yeah, so we told the algorithm
+[0:46:16] told the algorithm um that it it was going to have 30 edges
+[0:46:18] um that it it was going to have 30 edges and then we wanted to think find
+[0:46:20] and then we wanted to think find something that had the same level of
+[0:46:21] something that had the same level of information just to do a clean
+[0:46:22] information just to do a clean comparison.
+[0:46:24] comparison. Okay, there was another question which I
+[0:46:26] Okay, there was another question which I hope it's relatively quick.
+[0:46:28] hope it's relatively quick. Does this work for any type of dog or
+[0:46:30] Does this work for any type of dog or maybe it's not just like I think it's
+[0:46:31] maybe it's not just like I think it's mixed graphs. Like empty dogs, hippie
+[0:46:33] mixed graphs. Like empty dogs, hippie dogs, mug, bug, etc.
+[0:46:36] dogs, mug, bug, etc. Um well that depends what you want to
+[0:46:38] Um well that depends what you want to know. I don't think that's a quick
+[0:46:40] know. I don't think that's a quick question. Um maybe we need to return to
+[0:46:42] question. Um maybe we need to return to that one. So it doesn't work directly,
+[0:46:44] that one. So it doesn't work directly, it may need some more work. Well depends
+[0:46:46] it may need some more work. Well depends what what you want to do. You can always
+[0:46:48] what what you want to do. You can always do skeleton comparisons on any of them.
+[0:46:50] do skeleton comparisons on any of them. If you want to use some of the
+[0:46:51] If you want to use some of the orientation information,
+[0:46:53] orientation information, um
+[0:46:54] um I don't think uh it's often that
+[0:46:56] I don't think uh it's often that informative what you get out of doing
+[0:46:58] informative what you get out of doing the simulations. I tried on these
+[0:46:59] the simulations. I tried on these structures for instance and it doesn't
+[0:47:01] structures for instance and it doesn't nobody really those apparently.
+[0:47:04] nobody really those apparently. Um
+[0:47:05] Um yeah.
+[0:47:06] yeah. Okay, so then we should answer in the
+[0:47:09] Okay, so then we should answer in the Thanks for the answer in the interest of
+[0:47:11] Thanks for the answer in the interest of time. I think maybe it's good that
+[0:47:12] time. I think maybe it's good that Vanessa does this.
+[0:47:14] Vanessa does this. Starts Vanessa,
+[0:47:15] Starts Vanessa, whenever you're ready.
+[0:47:21] I think so um if you want to also quickly check
+[0:47:24] so um if you want to also quickly check the questions as well, you can check
+[0:47:26] the questions as well, you can check them.
+[0:47:27] them. Does it look okay?
+[0:47:29] Does it look okay? Yeah, I can see it.
+[0:47:31] Yeah, I can see it. And you can hear me.
+[0:47:32] And you can hear me. Okay, great. Thank you very much for the
+[0:47:34] Okay, great. Thank you very much for the talk and thanks for the opportunity to
+[0:47:36] talk and thanks for the opportunity to discuss this talk.
+[0:47:38] discuss this talk. Um
+[0:47:38] Um uh Anna was uh showing us some skeptical
+[0:47:42] uh Anna was uh showing us some skeptical and reproducibility crisis sort of
+[0:47:45] and reproducibility crisis sort of slides at the start and I want to um
+[0:47:49] slides at the start and I want to um I can't see everything on my own slides
+[0:47:52] I can't see everything on my own slides now.
+[0:47:54] now. Uh I want to um echo some of this and I
+[0:47:57] Uh I want to um echo some of this and I was reminded that there was um an
+[0:47:59] was reminded that there was um an interesting talk by Dominik Janzing
+[0:48:03] interesting talk by Dominik Janzing um last year at the UAI. Uh he said that
+[0:48:07] um last year at the UAI. Uh he said that uh all DAGs are wrong, but some are
+[0:48:08] uh all DAGs are wrong, but some are useful. Uh
+[0:48:10] useful. Uh Anna showed us some examples of how they
+[0:48:12] Anna showed us some examples of how they can be useful, but he also reflected a
+[0:48:15] can be useful, but he also reflected a bit disillusioned on his own experience
+[0:48:18] bit disillusioned on his own experience uh saying that uh causal discovery uh
+[0:48:21] uh saying that uh causal discovery uh not only that the results are often
+[0:48:23] not only that the results are often wrong, even worse, we rarely know
+[0:48:25] wrong, even worse, we rarely know whether they are wrong. So, this is
+[0:48:27] whether they are wrong. So, this is maybe where Anna's suggestions help. And
+[0:48:30] maybe where Anna's suggestions help. And even worse, we rarely understand what
+[0:48:32] even worse, we rarely understand what wrong means. I think maybe there we
+[0:48:34] wrong means. I think maybe there we still need to have more thought into
+[0:48:36] still need to have more thought into that still.
+[0:48:42] Um let me remind you of what is hard about validation in causal inference is
+[0:48:44] about validation in causal inference is we can't just use the same data or
+[0:48:46] we can't just use the same data or similar data because the ultimate
+[0:48:49] similar data because the ultimate validation is really about or causal
+[0:48:51] validation is really about or causal inference is about making claims about
+[0:48:53] inference is about making claims about other situations. So, the um changes in
+[0:48:56] other situations. So, the um changes in situations. The ultimate validation is
+[0:48:59] situations. The ultimate validation is carry out the relevant interventions and
+[0:49:01] carry out the relevant interventions and check if your causal claims hold up. And
+[0:49:03] check if your causal claims hold up. And there are only few, maybe in genetics I
+[0:49:06] there are only few, maybe in genetics I think there might be more examples, but
+[0:49:08] think there might be more examples, but there are only few real examples where
+[0:49:11] there are only few real examples where this can be done with causal discovery.
+[0:49:14] this can be done with causal discovery. Um and uh I recommend this nice paper.
+[0:49:18] Um and uh I recommend this nice paper. So, uh in many contexts this is not
+[0:49:21] So, uh in many contexts this is not possible. It may not even be meaningful,
+[0:49:24] possible. It may not even be meaningful, but then the question could also be if
+[0:49:26] but then the question could also be if it's not meaningful, why do we construct
+[0:49:28] it's not meaningful, why do we construct a causal DAG?
+[0:49:29] a causal DAG? Um in any case, we should choose the
+[0:49:31] Um in any case, we should choose the evaluation that matches the purpose of
+[0:49:33] evaluation that matches the purpose of the analysis.
+[0:49:36] the analysis. Um in a causal DAG, if we want to
+[0:49:39] Um in a causal DAG, if we want to validate this, we must intervene on very
+[0:49:41] validate this, we must intervene on very many nodes if we want to check the whole
+[0:49:43] many nodes if we want to check the whole DAG. So, it's not just uh that simple.
+[0:49:48] DAG. So, it's not just uh that simple. Um
+[0:49:49] Um So, what we use as simulations and
+[0:49:52] So, what we use as simulations and that's what Anna showed us uh in
+[0:49:54] that's what Anna showed us uh in simulations and uh what Anna proposes is
+[0:49:57] simulations and uh what Anna proposes is what is the baseline. Random guessing is
+[0:49:59] what is the baseline. Random guessing is probably the lowest bar. Um
+[0:50:02] probably the lowest bar. Um but this is easy to do and
+[0:50:05] but this is easy to do and I had the same question like one of the
+[0:50:07] I had the same question like one of the questions in the in the audience, why
+[0:50:09] questions in the in the audience, why don't we always just do this? It seems
+[0:50:11] don't we always just do this? It seems obvious, it's easy to include in
+[0:50:12] obvious, it's easy to include in simulations. And you might also choose
+[0:50:15] simulations. And you might also choose your own definition of what you think
+[0:50:17] your own definition of what you think random guessing is.
+[0:50:19] random guessing is. Um and it's also urgently needed because
+[0:50:21] Um and it's also urgently needed because there's a surge of new not always very
+[0:50:23] there's a surge of new not always very transparent methods around um that maybe
+[0:50:27] transparent methods around um that maybe need to be checked against this very low
+[0:50:29] need to be checked against this very low bar.
+[0:50:31] bar. Uh Anna proposed what she wanted was
+[0:50:33] Uh Anna proposed what she wanted was some sort of test of better than random
+[0:50:35] some sort of test of better than random guessing.
+[0:50:36] guessing. Um I'm I'm not so sure that I understand
+[0:50:39] Um I'm I'm not so sure that I understand the use of this test because when we're
+[0:50:41] the use of this test because when we're doing a simulation where we need to know
+[0:50:43] doing a simulation where we need to know the truth for the test, when we are not
+[0:50:46] the truth for the test, when we are not doing a simulation, we can repeat many
+[0:50:48] doing a simulation, we can repeat many times anyway, we don't need a uh a
+[0:50:50] times anyway, we don't need a uh a statistical test um and in other
+[0:50:53] statistical test um and in other situations, we don't know the truth.
+[0:50:56] situations, we don't know the truth. And I also think I still need to think a
+[0:50:58] And I also think I still need to think a bit more about whether
+[0:51:00] bit more about whether um
+[0:51:00] um there are
+[0:51:01] there are cases where we might not want to use
+[0:51:04] cases where we might not want to use this average many type random guess but
+[0:51:06] this average many type random guess but something else.
+[0:51:07] something else. Um
+[0:51:09] Um yes and and of course it as I already
+[0:51:11] yes and and of course it as I already mentioned and as
+[0:51:13] mentioned and as mentioned the real world ground truth is
+[0:51:15] mentioned the real world ground truth is very rarely available, so that's also
+[0:51:18] very rarely available, so that's also um we must be very lucky to have this
+[0:51:20] um we must be very lucky to have this for validation and causal inference.
+[0:51:23] for validation and causal inference. Um let's think a little bit about random
+[0:51:26] Um let's think a little bit about random guessing. We know from um
+[0:51:28] guessing. We know from um classification tasks
+[0:51:30] classification tasks when we draw ROC curves what the random
+[0:51:32] when we draw ROC curves what the random classifier does and this is also what
+[0:51:35] classifier does and this is also what you can um
+[0:51:36] you can um do in undirected graphs, so when you
+[0:51:38] do in undirected graphs, so when you evaluate skeletons and this is what is
+[0:51:40] evaluate skeletons and this is what is being done and in with many repetitions,
+[0:51:43] being done and in with many repetitions, um you would hope that you don't have so
+[0:51:45] um you would hope that you don't have so so randomness that you can draw the
+[0:51:48] so randomness that you can draw the expectations, but Anna wanted the
+[0:51:50] expectations, but Anna wanted the distribution
+[0:51:52] distribution and
+[0:51:53] and she also calculates precisions and
+[0:51:56] she also calculates precisions and recall graphs where also we know at
+[0:51:58] recall graphs where also we know at least in expectation what the random
+[0:52:01] least in expectation what the random guessing would give us,
+[0:52:03] guessing would give us, but this doesn't help with other
+[0:52:05] but this doesn't help with other measures and this is where I see the
+[0:52:07] measures and this is where I see the value on DAGs, other measures on DAGs
+[0:52:10] value on DAGs, other measures on DAGs like the structural Hamming distance for
+[0:52:12] like the structural Hamming distance for example. So
+[0:52:13] example. So looking at random guesses
+[0:52:16] looking at random guesses to evaluate other typical measures that
+[0:52:19] to evaluate other typical measures that are more geared toward towards the
+[0:52:21] are more geared toward towards the causal elements of the DAGs
+[0:52:24] causal elements of the DAGs and not just towards the skeleton.
+[0:52:27] and not just towards the skeleton. That's where I find this very
+[0:52:28] That's where I find this very interesting.
+[0:52:30] interesting. Anna described this as a negative
+[0:52:32] Anna described this as a negative control concept. Here I I disagree
+[0:52:35] control concept. Here I I disagree because unless it's a very different
+[0:52:37] because unless it's a very different usage of the word negative controls I
+[0:52:39] usage of the word negative controls I know as being
+[0:52:41] know as being about detecting or quantifying bias. I'm
+[0:52:44] about detecting or quantifying bias. I'm not sure whether this is about
+[0:52:46] not sure whether this is about quantifying bias. It's about comparing
+[0:52:49] quantifying bias. It's about comparing with a null hypothesis of
+[0:52:52] with a null hypothesis of you know, drawing some DAG that doesn't
+[0:52:53] you know, drawing some DAG that doesn't use information in the data. And they're
+[0:52:57] use information in the data. And they're two different things I think and oops,
+[0:53:00] two different things I think and oops, I'm sorry. I want to go back.
+[0:53:02] I'm sorry. I want to go back. No.
+[0:53:09] And um when a when a method does badly, we
+[0:53:11] when a when a method does badly, we don't know why it does badly.
+[0:53:13] don't know why it does badly. It's not necessarily bias I think. So it
+[0:53:15] It's not necessarily bias I think. So it could be that the assumptions are
+[0:53:17] could be that the assumptions are violated or would maybe in a way is
+[0:53:20] violated or would maybe in a way is bias, but we don't really know why it
+[0:53:22] bias, but we don't really know why it does badly.
+[0:53:24] does badly. There's another way of looking at random
+[0:53:27] There's another way of looking at random guessing and I came across this paper in
+[0:53:29] guessing and I came across this paper in preparing for
+[0:53:30] preparing for for today
+[0:53:32] for today also by Dominic Janzing where they want
+[0:53:36] also by Dominic Janzing where they want to evaluate a user given DAG against the
+[0:53:38] to evaluate a user given DAG against the data needing a random baseline and they
+[0:53:41] data needing a random baseline and they construct random draws by node
+[0:53:43] construct random draws by node permutations.
+[0:53:45] permutations. They do a bit more. It's not not really
+[0:53:47] They do a bit more. It's not not really the same sort of question as Anna's, um
+[0:53:49] the same sort of question as Anna's, um but they also show that they can use
+[0:53:51] but they also show that they can use this to evaluate some causal discovery
+[0:53:54] this to evaluate some causal discovery algorithms.
+[0:53:55] algorithms. Um and they as like Anna, they looked at
+[0:53:58] Um and they as like Anna, they looked at the Sachs data and the Notears algorithm
+[0:54:00] the Sachs data and the Notears algorithm and came to not very favorable um
+[0:54:03] and came to not very favorable um uh conclusions. Uh they say "In our
+[0:54:05] uh conclusions. Uh they say "In our experiments show that better than random
+[0:54:08] experiments show that better than random is a surprisingly high bar,
+[0:54:10] is a surprisingly high bar, uh and both domain experts and causal
+[0:54:12] uh and both domain experts and causal discovery algorithms fail to meet it in
+[0:54:14] discovery algorithms fail to meet it in many settings."
+[0:54:17] many settings." Um
+[0:54:19] Um one word of caution is that
+[0:54:21] one word of caution is that with all this evaluation, even against
+[0:54:23] with all this evaluation, even against some random guessing, this is still some
+[0:54:26] some random guessing, this is still some sort of statistical model fitting or
+[0:54:29] sort of statistical model fitting or looking at does it statistically differ
+[0:54:31] looking at does it statistically differ from random guessing, but it's not about
+[0:54:33] from random guessing, but it's not about the causal nature, which really needs
+[0:54:37] the causal nature, which really needs evaluation under some change, or
+[0:54:39] evaluation under some change, or something like intervention, some
+[0:54:41] something like intervention, some changing circumstances, distribution or
+[0:54:43] changing circumstances, distribution or shifts, natural experiments, etc.
+[0:54:47] shifts, natural experiments, etc. Um
+[0:54:48] Um about um the expert uh side of things
+[0:54:51] about um the expert uh side of things that Anna mentioned, there's this
+[0:54:53] that Anna mentioned, there's this critical article, which maybe was in
+[0:54:55] critical article, which maybe was in response to Anna's work, and they are a
+[0:54:57] response to Anna's work, and they are a bit more extreme because they say "Can
+[0:54:59] bit more extreme because they say "Can we replace expert knowledge uh by um
+[0:55:03] we replace expert knowledge uh by um algorithms?" Um and they are very very
+[0:55:06] algorithms?" Um and they are very very critical, but as we have seen, there's
+[0:55:08] critical, but as we have seen, there's also good reason to doubt expert
+[0:55:10] also good reason to doubt expert knowledge. Uh
+[0:55:11] knowledge. Uh uh lots of problems with um
+[0:55:14] uh lots of problems with um how experts construct their knowledge. I
+[0:55:16] how experts construct their knowledge. I think they find it difficult to think
+[0:55:18] think they find it difficult to think about edges because they are direct
+[0:55:21] about edges because they are direct causal effects relative to the other
+[0:55:23] causal effects relative to the other nodes, and that's always a difficult
+[0:55:25] nodes, and that's always a difficult operation for for experts to to do
+[0:55:28] operation for for experts to to do to do. They need a lot of um
+[0:55:31] to do. They need a lot of um um eliciting here.
+[0:55:34] um eliciting here. And the other problem is uh that we need
+[0:55:37] And the other problem is uh that we need to think about the nodes that are not
+[0:55:39] to think about the nodes that are not there and the edges that are not there,
+[0:55:41] there and the edges that are not there, which is also difficult usually in
+[0:55:43] which is also difficult usually in communicating with experts.
+[0:55:46] communicating with experts. Um, so I think
+[0:55:48] Um, so I think the way forward like Anna said is
+[0:55:50] the way forward like Anna said is combining experts and data to construct
+[0:55:53] combining experts and data to construct DAGs. There are many proposals already
+[0:55:56] DAGs. There are many proposals already in the literature, but again they are
+[0:55:57] in the literature, but again they are not very widely used perhaps because
+[0:56:00] not very widely used perhaps because often it's not the right form in which
+[0:56:02] often it's not the right form in which expert knowledge is available. It comes
+[0:56:05] expert knowledge is available. It comes in very different forms.
+[0:56:07] in very different forms. Uh, and this is the the important
+[0:56:09] Uh, and this is the the important challenge for the future to
+[0:56:12] challenge for the future to have good ways of combining different
+[0:56:15] have good ways of combining different types with different certainty and
+[0:56:18] types with different certainty and uncertainty about the edges, partial
+[0:56:20] uncertainty about the edges, partial knowledge of that experts have
+[0:56:23] knowledge of that experts have on direct or indirect relationships,
+[0:56:25] on direct or indirect relationships, etc. and to combine all of this with the
+[0:56:27] etc. and to combine all of this with the construction of DAGs.
+[0:56:30] construction of DAGs. I finish here and it was a pleasure to
+[0:56:32] I finish here and it was a pleasure to discuss this and a lot of fun. Thank
+[0:56:34] discuss this and a lot of fun. Thank you.
+[0:56:40] Thank you, Vanessa, for the nice discussion.
+[0:56:41] discussion. Um, do you want to respond to any points
+[0:56:45] Um, do you want to respond to any points and
+[0:56:46] and um
+[0:56:47] um on Vanessa's discussion?
+[0:56:49] on Vanessa's discussion? I think Vanessa makes a lot of very
+[0:56:52] I think Vanessa makes a lot of very important and good points.
+[0:56:55] important and good points. Um,
+[0:56:56] Um, I think
+[0:56:58] I think one one thing is about terminology on
+[0:57:00] one one thing is about terminology on these negative controls. Maybe we should
+[0:57:02] these negative controls. Maybe we should call them random controls or something
+[0:57:04] call them random controls or something like that. I think the motivation for
+[0:57:06] like that. I think the motivation for calling them that is because they're
+[0:57:07] calling them that is because they're supposed to happen in a setting where
+[0:57:09] supposed to happen in a setting where there should be no signal from what
+[0:57:11] there should be no signal from what we're trying to find. And I think that's
+[0:57:13] we're trying to find. And I think that's sort of the metaphor that goes back into
+[0:57:15] sort of the metaphor that goes back into how we also use in a different fields.
+[0:57:18] how we also use in a different fields. Um, having some something where there
+[0:57:20] Um, having some something where there really shouldn't be anything going on,
+[0:57:21] really shouldn't be anything going on, but it's not bias and I think that's a
+[0:57:23] but it's not bias and I think that's a very important point that it's it's
+[0:57:24] very important point that it's it's different from that and it's it's
+[0:57:26] different from that and it's it's cruder.
+[0:57:27] cruder. Um
+[0:57:28] Um Yeah.
+[0:57:36] Um, okay. Um, Sarah, do you want to go over some
+[0:57:39] Um, Sarah, do you want to go over some more questions perhaps? We have 2
+[0:57:41] more questions perhaps? We have 2 minutes.
+[0:57:41] minutes. Yeah.
+[0:57:43] Yeah. Yeah, my connection is a bit unstable,
+[0:57:44] Yeah, my connection is a bit unstable, but I hope it will work. So, I wanted to
+[0:57:47] but I hope it will work. So, I wanted to start with some questions from Karen
+[0:57:48] start with some questions from Karen Marston Marsband.
+[0:57:50] Marston Marsband. So, the first question was in some
+[0:57:53] So, the first question was in some fields, for example, meteorology, in
+[0:57:56] fields, for example, meteorology, in addition to comparing the contingency
+[0:57:57] addition to comparing the contingency table with a random contingency table,
+[0:57:59] table with a random contingency table, one also
+[0:58:08] Okay, looks like we're losing Sarah. Uh
+[0:58:10] Uh Okay, I can
+[0:58:10] Okay, I can Because I can continue.
+[0:58:12] Because I can continue. Yeah,
+[0:58:13] Yeah, and maybe we can wrap it up um from
+[0:58:15] and maybe we can wrap it up um from there.
+[0:58:16] there. So, this is a question from Karen
+[0:58:18] So, this is a question from Karen Marsband. So, in some fields, for
+[0:58:20] Marsband. So, in some fields, for example, meteorology, in addition to
+[0:58:23] example, meteorology, in addition to comparing the contingency table with a
+[0:58:25] comparing the contingency table with a random contingency table, one can also
+[0:58:27] random contingency table, one can also compare it with what it would be if all
+[0:58:30] compare it with what it would be if all predictions were for one class or the
+[0:58:33] predictions were for one class or the other class.
+[0:58:34] other class. Might it be useful to also study those
+[0:58:36] Might it be useful to also study those limits in this causal discovery context?
+[0:58:39] limits in this causal discovery context? I think it's basically like a full
+[0:58:41] I think it's basically like a full graph.
+[0:58:41] graph. Yeah. Yes, so that would be a full graph
+[0:58:43] Yeah. Yes, so that would be a full graph or completely empty graph. And I think
+[0:58:46] or completely empty graph. And I think we we can we can report that um and it's
+[0:58:49] we we can we can report that um and it's easy to see sort of what would happen
+[0:58:51] easy to see sort of what would happen for the different metrics in these
+[0:58:52] for the different metrics in these settings, but um I'm not sure that would
+[0:58:55] settings, but um I'm not sure that would bring extra information to evaluating a
+[0:58:57] bring extra information to evaluating a specific procedure. Um
+[0:59:00] specific procedure. Um But yeah, I showed a graph where we can
+[0:59:01] But yeah, I showed a graph where we can give uh trivially high of one score if
+[0:59:03] give uh trivially high of one score if we just put in all the edges and a
+[0:59:05] we just put in all the edges and a random guess.
+[0:59:07] random guess. Okay.
+[0:59:09] Okay. Um
+[0:59:11] Um This is
+[0:59:12] This is uh
+[0:59:13] uh another question. Maybe we'll do this
+[0:59:14] another question. Maybe we'll do this last one. Uh it's fairly long. I'm going
+[0:59:17] last one. Uh it's fairly long. I'm going to read it.
+[0:59:18] to read it. If a TPC discovered edge was deemed
+[0:59:23] If a TPC discovered edge was deemed highly plausible due to multiple
+[0:59:24] highly plausible due to multiple different sources of literature
+[0:59:26] different sources of literature supporting and fit well in the existing
+[0:59:28] supporting and fit well in the existing theory, why were they missed by
+[0:59:31] theory, why were they missed by theory-based model initially? A better
+[0:59:33] theory-based model initially? A better way to formulate the question is
+[0:59:35] way to formulate the question is how exactly were the moderately possible
+[0:59:37] how exactly were the moderately possible edge and highly possible edge
+[0:59:39] edge and highly possible edge differentiated? Was there an objective
+[0:59:42] differentiated? Was there an objective criterion or only a subjective
+[0:59:44] criterion or only a subjective criterion?
+[0:59:46] criterion? Yeah, um so I think why were they
+[0:59:48] Yeah, um so I think why were they different? And that's that's what
+[0:59:50] different? And that's that's what Vanessa says, right? This is not an
+[0:59:52] Vanessa says, right? This is not an exact science. It's difficult to do.
+[0:59:54] exact science. It's difficult to do. There are many things about how you
+[0:59:56] There are many things about how you understand what it means to construct
+[0:59:58] understand what it means to construct these uh graphs. We have tried to sort
+[1:00:00] these uh graphs. We have tried to sort of make it more formalized procedure by
+[1:00:02] of make it more formalized procedure by um having the experts have instructions
+[1:00:05] um having the experts have instructions for it, but it's still not um
+[1:00:07] for it, but it's still not um very easy to see if they get if they if
+[1:00:10] very easy to see if they get if they if they come to think of everything that
+[1:00:11] they come to think of everything that should be there. So, I think that's why
+[1:00:13] should be there. So, I think that's why they might differ. Um and the way we um
+[1:00:16] they might differ. Um and the way we um categorize them, we had some specific
+[1:00:18] categorize them, we had some specific rules for for when they should be
+[1:00:20] rules for for when they should be moderate and when they should be high. I
+[1:00:23] moderate and when they should be high. I As far as I remember, it was something
+[1:00:25] As far as I remember, it was something about having um both empirical and
+[1:00:28] about having um both empirical and theoretical evidence um
+[1:00:31] theoretical evidence um at least for the high one. And then for
+[1:00:33] at least for the high one. And then for the moderate, it had to have one or the
+[1:00:35] the moderate, it had to have one or the other.
+[1:00:36] other. Um but I am not completely sure of the
+[1:00:38] Um but I am not completely sure of the definition. It's in the paper.
+[1:00:41] definition. It's in the paper. Okay, thank you very much. I think uh
+[1:00:44] Okay, thank you very much. I think uh it's a good time to make a stop there.
+[1:00:46] it's a good time to make a stop there. More questions, I'll I'll send it to you
+[1:00:48] More questions, I'll I'll send it to you um after the seminar.
+[1:00:51] um after the seminar. Thank you.
+[1:00:52] Thank you. let's wrap up. Thank you again uh and
+[1:00:54] let's wrap up. Thank you again uh and and Vanessa for the very interesting
+[1:00:57] and Vanessa for the very interesting talk and discussion.
+[1:00:59] talk and discussion. Uh so next week we will have uh Michelle
+[1:01:02] Uh so next week we will have uh Michelle Kosar from Princeton University giving
+[1:01:05] Kosar from Princeton University giving uh a talk on evaluating counterfactual
+[1:01:07] uh a talk on evaluating counterfactual policies and instruments.
+[1:01:09] policies and instruments. Uh and we have a discussant Edward with
+[1:01:12] Uh and we have a discussant Edward with Lesse, I'm sorry about my pronunciation,
+[1:01:14] Lesse, I'm sorry about my pronunciation, from Yale University.
+[1:01:16] from Yale University. Um see you next week.
+[1:01:24] Uh Aditya, you might need to Yeah. stop
+[1:01:27] Aditya, you might need to Yeah. stop the recording actually.
+[1:01:29] the recording actually. Yeah. I don't uh
+[1:01:31] Yeah. I don't uh know how to stop recording.
+[1:01:33] know how to stop recording. I think I sent a record

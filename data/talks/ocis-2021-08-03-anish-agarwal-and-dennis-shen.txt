@@ -1,0 +1,1993 @@
+[0:00:04] welcome back to the online causal inference seminar
+[0:00:05] inference seminar today we are pleased to have anish
+[0:00:07] today we are pleased to have anish agarwal from mit and
+[0:00:09] agarwal from mit and dennis shannon from berkeley who will be
+[0:00:10] dennis shannon from berkeley who will be talking to us about synthetic
+[0:00:12] talking to us about synthetic interventions
+[0:00:13] interventions our discussion today will be jason
+[0:00:15] our discussion today will be jason poulos from harvard
+[0:00:17] poulos from harvard questions today will be handled by
+[0:00:18] questions today will be handled by dominic so now i'm switching over to him
+[0:00:22] dominic so now i'm switching over to him thank you georgia yeah as usual please
+[0:00:24] thank you georgia yeah as usual please submit your questions via q a
+[0:00:27] submit your questions via q a some of them will be selected to be
+[0:00:29] some of them will be selected to be answered live if you are selected
+[0:00:31] answered live if you are selected please raise your hand um and if you
+[0:00:34] please raise your hand um and if you participate
+[0:00:35] participate please keep in mind that the talk will
+[0:00:36] please keep in mind that the talk will be recorded yeah
+[0:00:38] be recorded yeah thank you all for coming and now that we
+[0:00:40] thank you all for coming and now that we switch over
+[0:00:41] switch over to our speaker
+[0:00:56] all right is my screen uh seeable okay all right so
+[0:00:59] okay all right so good morning everyone my name is anish
+[0:01:01] good morning everyone my name is anish agarwal i'm a fifth year phd student at
+[0:01:03] agarwal i'm a fifth year phd student at mit
+[0:01:04] mit i'm advised by professor alberto abadi
+[0:01:06] i'm advised by professor alberto abadi who is in mit economics
+[0:01:08] who is in mit economics uh moonzer daley and who are in mit ecs
+[0:01:12] uh moonzer daley and who are in mit ecs today
+[0:01:12] today me and dennis will be presenting our
+[0:01:14] me and dennis will be presenting our work synthetic interventions it's a
+[0:01:16] work synthetic interventions it's a joint work with devops
+[0:01:17] joint work with devops and denis shen who are also canvassed on
+[0:01:20] and denis shen who are also canvassed on this talk
+[0:01:21] this talk so thank you very much for having us and
+[0:01:23] so thank you very much for having us and i'd just like to say a special thank you
+[0:01:25] i'd just like to say a special thank you to the organizers of the seminar it's
+[0:01:26] to the organizers of the seminar it's been wonderful to attend
+[0:01:28] been wonderful to attend and michael in particular for helping
+[0:01:30] and michael in particular for helping organize
+[0:01:31] organize with with me so the top outline will be
+[0:01:34] with with me so the top outline will be in five steps we will first begin with a
+[0:01:37] in five steps we will first begin with a motivating example from
+[0:01:38] motivating example from covert 19 that will motivate the
+[0:01:40] covert 19 that will motivate the synthetic of the interventions framework
+[0:01:42] synthetic of the interventions framework and the estimator
+[0:01:43] and the estimator after that i'll actually present the
+[0:01:45] after that i'll actually present the synthetic interventions estimator
+[0:01:47] synthetic interventions estimator after that i'll present a causal
+[0:01:48] after that i'll present a causal framework for when and why as i
+[0:01:50] framework for when and why as i uh which i'll call in short for
+[0:01:52] uh which i'll call in short for synthetic inventions when it works
+[0:01:54] synthetic inventions when it works and then i'll hand it off to dennis
+[0:01:56] and then i'll hand it off to dennis we'll go through some of the key
+[0:01:57] we'll go through some of the key theoretical results we have
+[0:01:58] theoretical results we have and an interesting application of
+[0:02:00] and an interesting application of synthetic interventions which is
+[0:02:02] synthetic interventions which is synthetic a b testing
+[0:02:05] synthetic a b testing so let's begin with a covert 19
+[0:02:07] so let's begin with a covert 19 motivating example
+[0:02:09] motivating example so here we have a plot of the u.s
+[0:02:12] so here we have a plot of the u.s on the y-axis is the number of covet 19
+[0:02:14] on the y-axis is the number of covet 19 related debts that happened in america
+[0:02:17] related debts that happened in america on the x-axis is the day since
+[0:02:19] on the x-axis is the day since eight-year deaths
+[0:02:20] eight-year deaths so zero represents the day that america
+[0:02:22] so zero represents the day that america went through its eightieth death and
+[0:02:24] went through its eightieth death and many epidemiologists consider this the
+[0:02:26] many epidemiologists consider this the start of
+[0:02:27] start of a covenanting breakout in everybody in
+[0:02:29] a covenanting breakout in everybody in any country so as you can see that
+[0:02:31] any country so as you can see that before day zero the number of over 19
+[0:02:33] before day zero the number of over 19 deaths was relatively flat
+[0:02:35] deaths was relatively flat and after day zero there was this uh
+[0:02:37] and after day zero there was this uh exponential
+[0:02:38] exponential rise in the number of over 19 deaths
+[0:02:40] rise in the number of over 19 deaths that happened in the us
+[0:02:41] that happened in the us i think everyone agrees that there was
+[0:02:43] i think everyone agrees that there was um it was a tragic
+[0:02:45] um it was a tragic event that happened in the u.s which was
+[0:02:46] event that happened in the u.s which was the number of deaths that happened from
+[0:02:47] the number of deaths that happened from covert 19.
+[0:02:49] covert 19. i think what there's less agreement upon
+[0:02:51] i think what there's less agreement upon is what we could have done
+[0:02:52] is what we could have done so some people say well if we had really
+[0:02:54] so some people say well if we had really locked down the country then we could
+[0:02:56] locked down the country then we could have avoided a lot of cover 19 debts
+[0:02:58] have avoided a lot of cover 19 debts that happened needlessly other people
+[0:03:00] that happened needlessly other people say well if you shut down the economy
+[0:03:03] say well if you shut down the economy all that would have happened is that
+[0:03:04] all that would have happened is that left more economic hardship and would
+[0:03:06] left more economic hardship and would have made
+[0:03:07] have made really little difference to the number
+[0:03:08] really little difference to the number of kobe 19 debts we have
+[0:03:10] of kobe 19 debts we have and so part of the question is is there
+[0:03:12] and so part of the question is is there a way for us to think about the socio
+[0:03:15] a way for us to think about the socio the health and economic paid offs
+[0:03:17] the health and economic paid offs associated with cover 19 and is there a
+[0:03:19] associated with cover 19 and is there a framework to do so
+[0:03:20] framework to do so so that's going to be the motivating
+[0:03:22] so that's going to be the motivating example that we use for the next few
+[0:03:24] example that we use for the next few slides
+[0:03:25] slides now you can look at what happened across
+[0:03:27] now you can look at what happened across the globe and once covert 19 started
+[0:03:30] the globe and once covert 19 started different countries did very different
+[0:03:31] different countries did very different things so here on the left is a plot
+[0:03:33] things so here on the left is a plot that we pulled from
+[0:03:34] that we pulled from publicly available data from google so
+[0:03:36] publicly available data from google so they're the google mobility reports
+[0:03:39] they're the google mobility reports so the y-axis represents the average
+[0:03:42] so the y-axis represents the average reduction in mobility from january of
+[0:03:45] reduction in mobility from january of 2020 which was when there was really not
+[0:03:47] 2020 which was when there was really not covered
+[0:03:47] covered in in in most countries and the x-axis
+[0:03:50] in in in most countries and the x-axis is a variety of countries
+[0:03:51] is a variety of countries so you can see countries like the u.s uk
+[0:03:53] so you can see countries like the u.s uk spain where copenhagen is particularly
+[0:03:55] spain where copenhagen is particularly bad when it just started
+[0:03:57] bad when it just started there was almost no reduction mobility
+[0:03:59] there was almost no reduction mobility pre and post cover 19 breakout
+[0:04:01] pre and post cover 19 breakout and the other countries such as germany
+[0:04:04] and the other countries such as germany and brazil
+[0:04:05] and brazil there was a moderate drop in mobility
+[0:04:07] there was a moderate drop in mobility what we call a 5 to 35
+[0:04:08] what we call a 5 to 35 reduction mobility and there were
+[0:04:10] reduction mobility and there were countries where there was a significant
+[0:04:12] countries where there was a significant drop in mobility such as
+[0:04:13] drop in mobility such as india or denmark etc
+[0:04:16] india or denmark etc so this natural cluster at least roughly
+[0:04:19] so this natural cluster at least roughly speaking into three
+[0:04:20] speaking into three kinds of countries ones that are small
+[0:04:22] kinds of countries ones that are small reduction mobility a moderate one and a
+[0:04:23] reduction mobility a moderate one and a cbm of
+[0:04:24] cbm of reduction mobility from less than five
+[0:04:26] reduction mobility from less than five five to thirty five and greater than 35
+[0:04:30] five to thirty five and greater than 35 and so one natural question that you
+[0:04:31] and so one natural question that you could ask is what would have happened to
+[0:04:33] could ask is what would have happened to the u.s
+[0:04:34] the u.s say through appropriate policy um if it
+[0:04:36] say through appropriate policy um if it had gone through a low mobility
+[0:04:37] had gone through a low mobility restriction well this is actually what
+[0:04:39] restriction well this is actually what happened in reality
+[0:04:40] happened in reality a moderate mobility restriction which is
+[0:04:42] a moderate mobility restriction which is a 5 to 35 reduction
+[0:04:44] a 5 to 35 reduction or a high mobility restriction which is
+[0:04:46] or a high mobility restriction which is um
+[0:04:47] um yeah and the metric of interest is the
+[0:04:49] yeah and the metric of interest is the number of covert 19 related deaths would
+[0:04:51] number of covert 19 related deaths would have happened in the country
+[0:04:52] have happened in the country so the bottom two which is the moderate
+[0:04:53] so the bottom two which is the moderate and high are kind of factual us's that
+[0:04:55] and high are kind of factual us's that we want to ask this question about
+[0:04:59] we want to ask this question about so as i know is familiar to probably
+[0:05:01] so as i know is familiar to probably most people here is the
+[0:05:02] most people here is the potential outcomes frameworks this is
+[0:05:04] potential outcomes frameworks this is one way of thinking about this question
+[0:05:05] one way of thinking about this question or posing this question
+[0:05:07] or posing this question and the potential outcome framework
+[0:05:09] and the potential outcome framework basically posits that you know a country
+[0:05:11] basically posits that you know a country contains
+[0:05:11] contains many latent cells so the version of the
+[0:05:14] many latent cells so the version of the us under a low mobility restriction
+[0:05:16] us under a low mobility restriction a version of the us under a moderate one
+[0:05:17] a version of the us under a moderate one and a version of the us under a higher
+[0:05:19] and a version of the us under a higher one
+[0:05:20] one as we know a fundamental problem of
+[0:05:22] as we know a fundamental problem of causal inference is that we can only
+[0:05:23] causal inference is that we can only observe
+[0:05:24] observe the u.s under one of these policies but
+[0:05:26] the u.s under one of these policies but we want to know all possible outcomes
+[0:05:34] now one way of representing all the data that we care about is through what we
+[0:05:35] that we care about is through what we call a potential outcomes tensor
+[0:05:38] call a potential outcomes tensor so a tensor is nothing but a higher
+[0:05:40] so a tensor is nothing but a higher dimensional matrix so matrix can be
+[0:05:41] dimensional matrix so matrix can be considered an order two tensor
+[0:05:44] considered an order two tensor which has rows and columns and here what
+[0:05:46] which has rows and columns and here what we're presenting is an order three
+[0:05:48] we're presenting is an order three tensor so you have rows here
+[0:05:49] tensor so you have rows here representing countries
+[0:05:51] representing countries columns representing time and the third
+[0:05:54] columns representing time and the third dimension which we call slices of the
+[0:05:56] dimension which we call slices of the sensor represent different interventions
+[0:05:58] sensor represent different interventions so you can see that the arrow here
+[0:06:00] so you can see that the arrow here represents the us's mortality rate on
+[0:06:03] represents the us's mortality rate on day t
+[0:06:04] day t under the low mobility restriction now
+[0:06:06] under the low mobility restriction now the second arrow
+[0:06:07] the second arrow here we're keeping the us fixed and
+[0:06:09] here we're keeping the us fixed and we're keeping time fixed
+[0:06:10] we're keeping time fixed and we this particular entry of this
+[0:06:12] and we this particular entry of this tensor represents us's mortality rate
+[0:06:14] tensor represents us's mortality rate on deity under the moderate mobility
+[0:06:16] on deity under the moderate mobility restriction and similarly the us's
+[0:06:18] restriction and similarly the us's mortality rate under the high mobility
+[0:06:20] mortality rate under the high mobility restriction
+[0:06:21] restriction now if we had access to this entire
+[0:06:22] now if we had access to this entire tensor we'd be done we could answer any
+[0:06:24] tensor we'd be done we could answer any of the causal inference questions that
+[0:06:25] of the causal inference questions that might be of interest such as the us's
+[0:06:27] might be of interest such as the us's mortality rate
+[0:06:28] mortality rate under all the various interventions now
+[0:06:30] under all the various interventions now the problem of course is that we don't
+[0:06:32] the problem of course is that we don't actually get to observe that potential
+[0:06:33] actually get to observe that potential outcomes tensor what we observe
+[0:06:35] outcomes tensor what we observe is a very sparse version of this tensor
+[0:06:37] is a very sparse version of this tensor so here white represents missing entries
+[0:06:39] so here white represents missing entries and as we see you can represent you can
+[0:06:41] and as we see you can represent you can see this from the google mobility
+[0:06:43] see this from the google mobility reports
+[0:06:44] reports that pre covert 19 breaking out all
+[0:06:46] that pre covert 19 breaking out all countries were under had basically done
+[0:06:48] countries were under had basically done nothing
+[0:06:49] nothing and they were all under the low mobility
+[0:06:50] and they were all under the low mobility restriction so you see that pre-october
+[0:06:52] restriction so you see that pre-october 19 we observed the gray slice
+[0:06:54] 19 we observed the gray slice for all countries and the modern high
+[0:06:57] for all countries and the modern high slices are missing
+[0:06:58] slices are missing now once covered 19 broke out in these
+[0:07:00] now once covered 19 broke out in these various countries different countries
+[0:07:01] various countries different countries different things as we saw
+[0:07:03] different things as we saw so there's some countries that remain
+[0:07:04] so there's some countries that remain under low some countries are well under
+[0:07:06] under low some countries are well under moderate which represented by blue in
+[0:07:08] moderate which represented by blue in some countries
+[0:07:08] some countries represented by green but which went
+[0:07:10] represented by green but which went under high so
+[0:07:12] under high so for a country like the us that
+[0:07:13] for a country like the us that represented that remained under low we
+[0:07:15] represented that remained under low we do not get its observations under
+[0:07:16] do not get its observations under moderate and high
+[0:07:17] moderate and high and the first row for example is is
+[0:07:20] and the first row for example is is missing
+[0:07:21] missing similarly for countries that were under
+[0:07:22] similarly for countries that were under the blue intervention and in post cover
+[0:07:24] the blue intervention and in post cover 19 breakout we are missing their data
+[0:07:26] 19 breakout we are missing their data from low and high
+[0:07:27] from low and high and so on right so what we get
+[0:07:30] and so on right so what we get what we want to recover is this whole
+[0:07:32] what we want to recover is this whole tensor but we only get the sparse
+[0:07:33] tensor but we only get the sparse version of it
+[0:07:34] version of it and in some sense what we have um
+[0:07:38] and in some sense what we have um seen is that a lot of problems in causal
+[0:07:40] seen is that a lot of problems in causal inference can really be rewritten
+[0:07:41] inference can really be rewritten as a as a problem in fancy completion so
+[0:07:44] as a as a problem in fancy completion so say our goal was to do policy evaluation
+[0:07:46] say our goal was to do policy evaluation was to see what the effect of these
+[0:07:47] was to see what the effect of these different mobility restrictions were
+[0:07:49] different mobility restrictions were well we can observe these outcomes which
+[0:07:51] well we can observe these outcomes which can be represented through this sparse
+[0:07:52] can be represented through this sparse tensor
+[0:07:53] tensor and then you can ask a question like say
+[0:07:55] and then you can ask a question like say what would have happened to the u.s have
+[0:07:56] what would have happened to the u.s have it enacted the high mobility restriction
+[0:07:59] it enacted the high mobility restriction and that can if we had access to these
+[0:08:01] and that can if we had access to these missing entries which is represented by
+[0:08:02] missing entries which is represented by the shaded green and the top right
+[0:08:04] the shaded green and the top right image if we had access to the data then
+[0:08:06] image if we had access to the data then we could answer that question
+[0:08:09] we could answer that question and in some sense um you know people
+[0:08:11] and in some sense um you know people always say that causal inference
+[0:08:13] always say that causal inference is a missing data problem and in
+[0:08:16] is a missing data problem and in computer science
+[0:08:17] computer science um the hottest fields is tensor
+[0:08:18] um the hottest fields is tensor completion and they also say that
+[0:08:20] completion and they also say that uh tensor completion is a missing data
+[0:08:22] uh tensor completion is a missing data problem and i think there's
+[0:08:23] problem and i think there's a deep relationship between these two
+[0:08:25] a deep relationship between these two fields in terms
+[0:08:27] fields in terms of the types of goals you can solve a
+[0:08:29] of the types of goals you can solve a lot of the terms you have in causal
+[0:08:31] lot of the terms you have in causal inference
+[0:08:31] inference have an analogous term in tensor
+[0:08:33] have an analogous term in tensor completion for example
+[0:08:35] completion for example the notion of confounding and causal
+[0:08:36] the notion of confounding and causal inference can be thought of intensive
+[0:08:38] inference can be thought of intensive completion
+[0:08:39] completion as simply missing not random data and
+[0:08:42] as simply missing not random data and different
+[0:08:42] different observational experimental studies um
+[0:08:45] observational experimental studies um basically lead to different sparsity
+[0:08:47] basically lead to different sparsity patterns in your observed outcomes in
+[0:08:49] patterns in your observed outcomes in intense completion
+[0:08:50] intense completion and then the goal in causal influence is
+[0:08:52] and then the goal in causal influence is to estimate
+[0:08:53] to estimate count of actual potential outcomes and
+[0:08:56] count of actual potential outcomes and in terms of completion you can write
+[0:08:57] in terms of completion you can write that as
+[0:08:58] that as simply imputing specific missing entries
+[0:09:01] simply imputing specific missing entries so you can see there's this kind of
+[0:09:02] so you can see there's this kind of one-to-one mapping between problems
+[0:09:04] one-to-one mapping between problems intensive completion
+[0:09:05] intensive completion and causal inference at least for for
+[0:09:07] and causal inference at least for for discrete settings
+[0:09:10] discrete settings so now to actually go back to our goal
+[0:09:12] so now to actually go back to our goal so the goal is to learn
+[0:09:14] so the goal is to learn n times the causal parameters so here n
+[0:09:16] n times the causal parameters so here n represents
+[0:09:17] represents n units that you have for example n
+[0:09:19] n units that you have for example n countries and d
+[0:09:20] countries and d represents the various interventions you
+[0:09:22] represents the various interventions you have so in the cover 19 example
+[0:09:24] have so in the cover 19 example d equals to 3 because you have low
+[0:09:25] d equals to 3 because you have low moderate and high
+[0:09:27] moderate and high and each entry of this matrix represents
+[0:09:29] and each entry of this matrix represents some causal parameter of interest for
+[0:09:30] some causal parameter of interest for example
+[0:09:31] example the what's being pointed to by the arrow
+[0:09:33] the what's being pointed to by the arrow is the average post intervention outcome
+[0:09:35] is the average post intervention outcome of unit n under intervention d now the
+[0:09:39] of unit n under intervention d now the question is can we learn
+[0:09:40] question is can we learn all these n times d parameters despite
+[0:09:42] all these n times d parameters despite observations that are far less than n
+[0:09:44] observations that are far less than n times d
+[0:09:45] times d and second can we be able to do this
+[0:09:48] and second can we be able to do this despite unobserved confounding which
+[0:09:50] despite unobserved confounding which means that you're missing not random
+[0:09:51] means that you're missing not random data
+[0:09:52] data so that's going to be the goal of of
+[0:09:54] so that's going to be the goal of of this work
+[0:09:56] this work and kind of the key punch line of the
+[0:09:58] and kind of the key punch line of the synthetic interventions
+[0:09:59] synthetic interventions estimator is that you can learn these n
+[0:10:02] estimator is that you can learn these n times d causal parameters
+[0:10:03] times d causal parameters despite having access to simply n times
+[0:10:05] despite having access to simply n times two observations
+[0:10:07] two observations the key data requirement is that we need
+[0:10:10] the key data requirement is that we need to observe all the various
+[0:10:12] to observe all the various units and units under one intervention
+[0:10:14] units and units under one intervention that they're under common that's common
+[0:10:16] that they're under common that's common for example in the coca-19 example this
+[0:10:19] for example in the coca-19 example this would be the pre-intervention period
+[0:10:20] would be the pre-intervention period where they're all under the low mobility
+[0:10:22] where they're all under the low mobility restriction
+[0:10:23] restriction but this is more general it could be um
+[0:10:25] but this is more general it could be um just any intervention for which we
+[0:10:26] just any intervention for which we observe all the various units
+[0:10:28] observe all the various units and we can call that control for example
+[0:10:30] and we can call that control for example so that's the
+[0:10:31] so that's the in that of of of the work and and the
+[0:10:33] in that of of of the work and and the key takeaways that synthetic dimensions
+[0:10:35] key takeaways that synthetic dimensions lets you do this with n times two
+[0:10:36] lets you do this with n times two observations
+[0:10:41] so now um i'm gonna just show you the results of applying synthetic inventions
+[0:10:43] results of applying synthetic inventions on the cover 19 data
+[0:10:44] on the cover 19 data and afterwards i'll show you the
+[0:10:45] and afterwards i'll show you the estimator uh a major credit for
+[0:10:48] estimator uh a major credit for these running the simulation goes to
+[0:10:49] these running the simulation goes to abdullah alomar who is
+[0:10:51] abdullah alomar who is a was a master student in developers
+[0:10:54] a was a master student in developers group at mit
+[0:10:55] group at mit and is about to start his phd in eecs as
+[0:10:57] and is about to start his phd in eecs as well with development
+[0:11:00] well with development just recall this is how the data for the
+[0:11:01] just recall this is how the data for the u.s looked like um
+[0:11:04] u.s looked like um pre and post cover 19 breaking out now
+[0:11:06] pre and post cover 19 breaking out now using the synthetic interventions
+[0:11:08] using the synthetic interventions estimator we produce these three
+[0:11:09] estimator we produce these three synthetic trajectories
+[0:11:11] synthetic trajectories so the dotted gray line is the synthetic
+[0:11:13] so the dotted gray line is the synthetic us on the low
+[0:11:14] us on the low the dotted blue line is the synthetic us
+[0:11:16] the dotted blue line is the synthetic us and the moderate and the dr green line
+[0:11:17] and the moderate and the dr green line is the synthetic us
+[0:11:18] is the synthetic us under green is under the high mobility
+[0:11:20] under green is under the high mobility restriction
+[0:11:22] restriction and what we did is we held out the us's
+[0:11:24] and what we did is we held out the us's data up post coded
+[0:11:26] data up post coded so we held out the solid gray line post
+[0:11:29] so we held out the solid gray line post day zero
+[0:11:30] day zero and we saw whether we could recreate it
+[0:11:32] and we saw whether we could recreate it using the dark gray line
+[0:11:33] using the dark gray line and um as desired the dotted gray line
+[0:11:37] and um as desired the dotted gray line and solid gray line are close to each
+[0:11:38] and solid gray line are close to each other so that serves as some validation
+[0:11:40] other so that serves as some validation that the synthetic interventions
+[0:11:41] that the synthetic interventions estimate is doing something reasonable
+[0:11:43] estimate is doing something reasonable and then the other two lines the dotted
+[0:11:46] and then the other two lines the dotted blue and dotted green are kind of
+[0:11:47] blue and dotted green are kind of factors
+[0:11:48] factors and if you believe the estimates of the
+[0:11:50] and if you believe the estimates of the synthetic interventions estimator
+[0:11:52] synthetic interventions estimator then you can see that from the dotted
+[0:11:54] then you can see that from the dotted from synthetic low us
+[0:11:56] from synthetic low us the to the moderate us there's a sharp
+[0:11:57] the to the moderate us there's a sharp drop in the number of covert 19 deaths
+[0:12:00] drop in the number of covert 19 deaths and the marginal gain from the moderate
+[0:12:02] and the marginal gain from the moderate us to the
+[0:12:03] us to the high u.s is relatively small so which is
+[0:12:06] high u.s is relatively small so which is an interesting takeaway if you believe
+[0:12:07] an interesting takeaway if you believe these estimates
+[0:12:08] these estimates we recreate these results with all the
+[0:12:10] we recreate these results with all the different countries within the
+[0:12:11] different countries within the um the google mobility data set here's
+[0:12:14] um the google mobility data set here's another one under the heim
+[0:12:15] another one under the heim under the for the uk which was under a
+[0:12:18] under the for the uk which was under a low mobility restriction
+[0:12:19] low mobility restriction and again the solid gray line and the
+[0:12:21] and again the solid gray line and the dotted gray line are close to each other
+[0:12:23] dotted gray line are close to each other which serves as good validation because
+[0:12:24] which serves as good validation because we held out the uk solid gray line and
+[0:12:26] we held out the uk solid gray line and saw whether we could recreate it
+[0:12:28] saw whether we could recreate it and here you see though that the dotted
+[0:12:30] and here you see though that the dotted blue line and the dotted green line are
+[0:12:31] blue line and the dotted green line are further away from each other than was
+[0:12:33] further away from each other than was true for the us
+[0:12:34] true for the us and that kind of shows you the
+[0:12:35] and that kind of shows you the heterogeneity that is true across
+[0:12:37] heterogeneity that is true across different countries
+[0:12:39] different countries because these different countries react
+[0:12:40] because these different countries react differently to the same intervention
+[0:12:44] differently to the same intervention then we again did this for the various
+[0:12:46] then we again did this for the various countries under the different
+[0:12:47] countries under the different that did different things post covert
+[0:12:49] that did different things post covert for example brazil and turkey
+[0:12:50] for example brazil and turkey enacted a moderate mobility restriction
+[0:12:52] enacted a moderate mobility restriction and again pleasingly the solid blue line
+[0:12:54] and again pleasingly the solid blue line and the dotted blue line
+[0:12:56] and the dotted blue line are relatively close to each other and
+[0:12:58] are relatively close to each other and then we have a synthetic brazil
+[0:12:59] then we have a synthetic brazil under low mobility restriction and
+[0:13:00] under low mobility restriction and synthetic um
+[0:13:02] synthetic um brazil under the green mobility
+[0:13:03] brazil under the green mobility restriction and so on same thing for for
+[0:13:05] restriction and so on same thing for for turkey
+[0:13:06] turkey and again we did the same thing for uh
+[0:13:08] and again we did the same thing for uh countries that enacted a high mobility
+[0:13:10] countries that enacted a high mobility restriction in post covert
+[0:13:12] restriction in post covert so such as india and ireland and we see
+[0:13:14] so such as india and ireland and we see that a doctor green line the solid green
+[0:13:16] that a doctor green line the solid green line again close to each other
+[0:13:17] line again close to each other and you can see the kind of actual india
+[0:13:19] and you can see the kind of actual india under the various interventions and
+[0:13:21] under the various interventions and same for ireland and so the key takeaway
+[0:13:24] same for ireland and so the key takeaway for this part is that if you believe the
+[0:13:26] for this part is that if you believe the si estimate
+[0:13:26] si estimate it enables personalized policy or
+[0:13:29] it enables personalized policy or program evaluation
+[0:13:30] program evaluation with multiple treatments
+[0:13:37] so now i'll actually go through the synthetic interventions estimator and
+[0:13:39] synthetic interventions estimator and afterwards i'll explain when and why it
+[0:13:41] afterwards i'll explain when and why it works
+[0:13:43] works so the key intuition for the si
+[0:13:44] so the key intuition for the si estimator is that you want to
+[0:13:46] estimator is that you want to if you want to estimate let's say for
+[0:13:48] if you want to estimate let's say for the u.s what happens to it under the
+[0:13:49] the u.s what happens to it under the green intervention
+[0:13:50] green intervention you somehow want to leverage data for
+[0:13:52] you somehow want to leverage data for the other countries that actually went
+[0:13:53] the other countries that actually went through the intervention of interest
+[0:13:55] through the intervention of interest now the problem is all these various
+[0:13:57] now the problem is all these various countries are heterogeneous and that is
+[0:13:58] countries are heterogeneous and that is why you require all the units
+[0:14:00] why you require all the units to be under the same intervention for
+[0:14:02] to be under the same intervention for some number of measurements
+[0:14:04] some number of measurements and that having that common amount of in
+[0:14:05] and that having that common amount of in common measurements under the same
+[0:14:07] common measurements under the same intervention is what helps us deal with
+[0:14:08] intervention is what helps us deal with the unit heterogeneity
+[0:14:14] so the inspiration for synthetic interventions really comes from
+[0:14:16] interventions really comes from synthetic
+[0:14:16] synthetic controls which is now a incredibly
+[0:14:19] controls which is now a incredibly popular method
+[0:14:20] popular method and generally a field of study within
+[0:14:23] and generally a field of study within econometrics
+[0:14:24] econometrics this was invented by oberobadi and his
+[0:14:27] this was invented by oberobadi and his co-authors and
+[0:14:29] co-authors and through a variety of papers and it
+[0:14:30] through a variety of papers and it served as at least for me and dennis the
+[0:14:32] served as at least for me and dennis the uh a major source of inspiration for for
+[0:14:35] uh a major source of inspiration for for this work
+[0:14:37] this work the key goal in in synthetic controls is
+[0:14:39] the key goal in in synthetic controls is to estimate
+[0:14:40] to estimate counter factuals in the absence of
+[0:14:42] counter factuals in the absence of interventions in particular
+[0:14:43] interventions in particular under control so for example you could
+[0:14:45] under control so for example you could ask say brazil which did intervene and
+[0:14:48] ask say brazil which did intervene and did do something post covet
+[0:14:50] did do something post covet what would have happened to brazil had
+[0:14:51] what would have happened to brazil had it remain under low force cover 19.
+[0:14:54] it remain under low force cover 19. the basic idea is we're going to learn a
+[0:14:56] the basic idea is we're going to learn a model under control so z
+[0:14:58] model under control so z pre represents the data of the countries
+[0:15:01] pre represents the data of the countries that remain under control post cover 19
+[0:15:03] that remain under control post cover 19 breaking out their pre-intervention data
+[0:15:05] breaking out their pre-intervention data so i'm going to call that z pre y p
+[0:15:08] so i'm going to call that z pre y p represents brazil's pre-intervention
+[0:15:10] represents brazil's pre-intervention data
+[0:15:11] data or pre-covariating breakout data what
+[0:15:13] or pre-covariating breakout data what you're going to do is to learn a linear
+[0:15:15] you're going to do is to learn a linear model between y
+[0:15:16] model between y pre and z pre and the linear model is
+[0:15:18] pre and z pre and the linear model is going to be called w
+[0:15:19] going to be called w hat it's going to be regularized to live
+[0:15:22] hat it's going to be regularized to live within some space capital w and i'll
+[0:15:23] within some space capital w and i'll talk about that in a second
+[0:15:25] talk about that in a second now what you're going to do is you're
+[0:15:26] now what you're going to do is you're going to look at the post-event
+[0:15:28] going to look at the post-event intervention data of the countries that
+[0:15:29] intervention data of the countries that remain under control
+[0:15:31] remain under control when they call that data z post and it
+[0:15:33] when they call that data z post and it takes the post and the learned linear
+[0:15:35] takes the post and the learned linear model
+[0:15:36] model w hat apply them together and that gives
+[0:15:39] w hat apply them together and that gives you
+[0:15:39] you a estimate of the post-intervention data
+[0:15:42] a estimate of the post-intervention data for brazil had it remained under control
+[0:15:44] for brazil had it remained under control it's a beautifully simple method and
+[0:15:46] it's a beautifully simple method and that's why it's gained so much traction
+[0:15:47] that's why it's gained so much traction in the
+[0:15:48] in the in the in especially in applied
+[0:15:50] in the in especially in applied econometrics because you can apply this
+[0:15:51] econometrics because you can apply this you can see the many different
+[0:15:52] you can see the many different applications for it
+[0:15:54] applications for it now this w hat is what we call a
+[0:15:56] now this w hat is what we call a synthetic control
+[0:15:57] synthetic control and this now how do you regularize this
+[0:16:00] and this now how do you regularize this this
+[0:16:01] this the linear fit so balinese co-authors
+[0:16:04] the linear fit so balinese co-authors recommended w being the simplex so what
+[0:16:07] recommended w being the simplex so what that means is
+[0:16:08] that means is that the linear fit you have is going to
+[0:16:11] that the linear fit you have is going to be
+[0:16:11] be a non-negative and going to sum to one
+[0:16:15] a non-negative and going to sum to one and this has a variety of very
+[0:16:16] and this has a variety of very attractive properties for example one is
+[0:16:18] attractive properties for example one is you only interpolate so you do not go
+[0:16:20] you only interpolate so you do not go outside
+[0:16:21] outside the observed outcomes of all the
+[0:16:22] the observed outcomes of all the countries that remain under control
+[0:16:24] countries that remain under control secondly it has this nice interpretation
+[0:16:26] secondly it has this nice interpretation because you can say for example the
+[0:16:27] because you can say for example the brazil is 20
+[0:16:28] brazil is 20 the u.s 50 the uk 30 percent
+[0:16:32] the u.s 50 the uk 30 percent uh italy for example so it has this nice
+[0:16:34] uh italy for example so it has this nice interpretation as well
+[0:16:36] interpretation as well and also it actually by by forcing w hat
+[0:16:39] and also it actually by by forcing w hat to lie within
+[0:16:40] to lie within the simplex it enforces sparsity in the
+[0:16:42] the simplex it enforces sparsity in the learned model so most of the
+[0:16:44] learned model so most of the coefficients
+[0:16:44] coefficients will be zero and if you want to have a
+[0:16:48] will be zero and if you want to have a overview of synthetic controls in the
+[0:16:50] overview of synthetic controls in the state of the art of it alberto had
+[0:16:52] state of the art of it alberto had written has written a nice review of it
+[0:16:53] written has written a nice review of it in 2020 and the citation is at the
+[0:16:56] in 2020 and the citation is at the bottom of the slide
+[0:17:01] now towards synthetic interventions the goal in since that synthetic
+[0:17:02] goal in since that synthetic interventions is to estimate counter
+[0:17:04] interventions is to estimate counter factual
+[0:17:05] factual both in the absence and the presence of
+[0:17:07] both in the absence and the presence of interventions
+[0:17:09] interventions for example we can ask the question of
+[0:17:10] for example we can ask the question of what if the u.s had enacted the moderate
+[0:17:12] what if the u.s had enacted the moderate policy
+[0:17:13] policy postcove and team breaking out so the
+[0:17:15] postcove and team breaking out so the idea is going to be similar we're going
+[0:17:16] idea is going to be similar we're going to learn a model under control similarly
+[0:17:18] to learn a model under control similarly here now
+[0:17:19] here now z pre is going to represent the
+[0:17:21] z pre is going to represent the pre-intervention data
+[0:17:23] pre-intervention data of the of the countries that go under
+[0:17:25] of the of the countries that go under moderate mobility restriction and the
+[0:17:26] moderate mobility restriction and the post
+[0:17:27] post post cover 19 breaking out so we look at
+[0:17:29] post cover 19 breaking out so we look at the countries that go under the blue
+[0:17:30] the countries that go under the blue intervention and the post
+[0:17:32] intervention and the post in post-invention look at the
+[0:17:34] in post-invention look at the pre-intervention data and that's going
+[0:17:35] pre-intervention data and that's going to be called z-pre
+[0:17:36] to be called z-pre yp represents the pre-intervention data
+[0:17:38] yp represents the pre-intervention data of the u.s we learn the linear model
+[0:17:40] of the u.s we learn the linear model between y3 and z3 caller w hat
+[0:17:43] between y3 and z3 caller w hat now we look at the post-intervention
+[0:17:44] now we look at the post-intervention data of the u.s
+[0:17:46] data of the u.s in the and we're going to call sorry of
+[0:17:48] in the and we're going to call sorry of the countries that went under the blue
+[0:17:50] the countries that went under the blue intervention i'm going to call it z post
+[0:17:53] intervention i'm going to call it z post we can take z
+[0:17:53] we can take z post and w hat multiply them together
+[0:17:56] post and w hat multiply them together and that gives you
+[0:17:57] and that gives you the counter factual for the us under
+[0:17:59] the counter factual for the us under moderate mobility restriction
+[0:18:01] moderate mobility restriction and that's exactly what we did to
+[0:18:02] and that's exactly what we did to produce the synthetic trajectories of
+[0:18:04] produce the synthetic trajectories of the u.s under the
+[0:18:05] the u.s under the gray blue and green in the in the
+[0:18:07] gray blue and green in the in the preceding section
+[0:18:10] preceding section now let's say you want to find out what
+[0:18:11] now let's say you want to find out what happens to the us and the high
+[0:18:13] happens to the us and the high again you repeat the same process except
+[0:18:16] again you repeat the same process except now the difference is you look at the
+[0:18:17] now the difference is you look at the data of the countries
+[0:18:18] data of the countries that go through the green intervention
+[0:18:21] that go through the green intervention or high intervention what are you going
+[0:18:22] or high intervention what are you going to call it
+[0:18:23] to call it in the post-intervention period right so
+[0:18:25] in the post-intervention period right so all if you want to decide different
+[0:18:26] all if you want to decide different interventions you're
+[0:18:27] interventions you're simply picking out the right donor group
+[0:18:29] simply picking out the right donor group and the way you pick out the right donor
+[0:18:30] and the way you pick out the right donor group is by looking at what they do in
+[0:18:32] group is by looking at what they do in the first intervention period
+[0:18:34] the first intervention period and we call this w had a synthetic
+[0:18:36] and we call this w had a synthetic intervention
+[0:18:38] intervention so um in these previous works we saw
+[0:18:40] so um in these previous works we saw that they
+[0:18:41] that they they restrict w to capital w to be the
+[0:18:44] they restrict w to capital w to be the simplex
+[0:18:45] simplex in our case we we we propose that we
+[0:18:48] in our case we we we propose that we restrict
+[0:18:49] restrict w to lie within the space the linear
+[0:18:51] w to lie within the space the linear space spanned by
+[0:18:53] space spanned by the first k singular vectors of z pre
+[0:18:55] the first k singular vectors of z pre where k is a hyper parameter
+[0:18:57] where k is a hyper parameter so it's a linear constraint that we put
+[0:18:59] so it's a linear constraint that we put on the um
+[0:19:00] on the um on the on the model learned and i'll
+[0:19:03] on the on the model learned and i'll talk about in a second
+[0:19:04] talk about in a second why this is a good idea but you can see
+[0:19:06] why this is a good idea but you can see that
+[0:19:07] that restricting w to lie within the first
+[0:19:09] restricting w to lie within the first top k singular vectors of z pre
+[0:19:11] top k singular vectors of z pre could equivalently be thought of as
+[0:19:13] could equivalently be thought of as principle component regression
+[0:19:15] principle component regression so that means as you first do pca on z
+[0:19:17] so that means as you first do pca on z pre
+[0:19:18] pre take a low rank approximation of it and
+[0:19:20] take a low rank approximation of it and then learn a linear model on top of it
+[0:19:22] then learn a linear model on top of it and that's an equivalent formulation for
+[0:19:24] and that's an equivalent formulation for what we're doing
+[0:19:30] so why principal component regression or pcr rather than
+[0:19:32] pcr rather than a convex regression so as you can see
+[0:19:35] a convex regression so as you can see one benefit of learning um doing pcr is
+[0:19:39] one benefit of learning um doing pcr is that you're not restricting w hat
+[0:19:41] that you're not restricting w hat so it's allowed to be a linear model and
+[0:19:44] so it's allowed to be a linear model and versus
+[0:19:44] versus if you do convex regression or more
+[0:19:46] if you do convex regression or more recently some people have also been
+[0:19:47] recently some people have also been thinking about doing lasso
+[0:19:49] thinking about doing lasso that restricts the w hat learned to be
+[0:19:51] that restricts the w hat learned to be sparse
+[0:19:52] sparse now a linear model is obviously more
+[0:19:54] now a linear model is obviously more expressive but the problem is you might
+[0:19:55] expressive but the problem is you might have overfitting especially if you have
+[0:19:57] have overfitting especially if you have lots of donuts or lots of
+[0:19:58] lots of donuts or lots of units that you're running this
+[0:19:59] units that you're running this regression over so the question is how
+[0:20:02] regression over so the question is how do you prevent
+[0:20:03] do you prevent overfitting well what we do is you want
+[0:20:05] overfitting well what we do is you want to exploit the low rank structure that
+[0:20:06] to exploit the low rank structure that exists
+[0:20:07] exists in z pre so by doing pca on z3 what
+[0:20:10] in z pre so by doing pca on z3 what you're really doing is you're enforcing
+[0:20:12] you're really doing is you're enforcing spectral sparsity
+[0:20:13] spectral sparsity in z3 right so instead of enforcing
+[0:20:16] in z3 right so instead of enforcing sparsely and w hat you now enforce
+[0:20:18] sparsely and w hat you now enforce sparsity in the singular in the in the
+[0:20:21] sparsity in the singular in the in the spectral
+[0:20:21] spectral sense over the single values of z pre
+[0:20:24] sense over the single values of z pre and some additional benefits of doing so
+[0:20:26] and some additional benefits of doing so is that it becomes robust to noise and
+[0:20:28] is that it becomes robust to noise and missing values
+[0:20:29] missing values so if you look at the the data on the
+[0:20:32] so if you look at the the data on the the figure on the top right
+[0:20:34] the figure on the top right here is a plot of the singular values of
+[0:20:36] here is a plot of the singular values of some of the data that we just talked
+[0:20:37] some of the data that we just talked about
+[0:20:37] about so you can see there are a few singular
+[0:20:38] so you can see there are a few singular values that are very um
+[0:20:40] values that are very um large and most singular values are
+[0:20:42] large and most singular values are really small and so what we call those
+[0:20:44] really small and so what we call those few first two singular values to be
+[0:20:46] few first two singular values to be the signal and the remaining signal of
+[0:20:48] the signal and the remaining signal of the single values to be noise
+[0:20:49] the single values to be noise and you can see as we add more and more
+[0:20:51] and you can see as we add more and more noise to the data
+[0:20:53] noise to the data the noise respect really diffuse so in
+[0:20:55] the noise respect really diffuse so in some sense it doesn't really perturb the
+[0:20:57] some sense it doesn't really perturb the the first few single values and it
+[0:20:59] the first few single values and it affects all the singular values in an
+[0:21:00] affects all the singular values in an equal way
+[0:21:02] equal way and that's why by thresholding you're
+[0:21:04] and that's why by thresholding you're kind of cutting out this additional
+[0:21:05] kind of cutting out this additional noise in the data and it's becoming
+[0:21:07] noise in the data and it's becoming robust in noise and missing values and
+[0:21:09] robust in noise and missing values and this general field is called error
+[0:21:10] this general field is called error variables regression
+[0:21:11] variables regression for more details on why pcr is a good
+[0:21:14] for more details on why pcr is a good idea there are a couple of papers that
+[0:21:16] idea there are a couple of papers that me and my co-authors wrote and the
+[0:21:17] me and my co-authors wrote and the citation for that is on the bottom
+[0:21:19] citation for that is on the bottom right of the slide and the good thing
+[0:21:21] right of the slide and the good thing about
+[0:21:22] about doing pca is that you can verify whether
+[0:21:24] doing pca is that you can verify whether this low rank structure exists in
+[0:21:26] this low rank structure exists in practice you can always plot the
+[0:21:27] practice you can always plot the spectrum of z3
+[0:21:28] spectrum of z3 see whether it's low rank if it is then
+[0:21:30] see whether it's low rank if it is then apply a principal component regression
+[0:21:31] apply a principal component regression if it isn't then then don't apply it
+[0:21:33] if it isn't then then don't apply it and this is um good versus say something
+[0:21:36] and this is um good versus say something like
+[0:21:37] like lasso or convex you have to assume that
+[0:21:39] lasso or convex you have to assume that the the model itself is sparse
+[0:21:41] the the model itself is sparse which may or to verify in may
+[0:21:45] which may or to verify in may lastly i'll say in terms of algorithmic
+[0:21:47] lastly i'll say in terms of algorithmic fine print if you have covariates that
+[0:21:48] fine print if you have covariates that you want to add to your fit
+[0:21:50] you want to add to your fit we talk about how one can do so in the
+[0:21:52] we talk about how one can do so in the paper itself
+[0:21:58] and now lastly i'll go to the causal framework of when and why
+[0:22:00] framework of when and why s.i works before handing it off to
+[0:22:02] s.i works before handing it off to dennis talk with theoretical results
+[0:22:05] dennis talk with theoretical results so one thing that maybe is making you
+[0:22:07] so one thing that maybe is making you uncomfortable is that we learned this
+[0:22:08] uncomfortable is that we learned this model on the control
+[0:22:10] model on the control and then we applied it to make a
+[0:22:11] and then we applied it to make a prediction under intervention so we
+[0:22:13] prediction under intervention so we learned the model under one
+[0:22:14] learned the model under one interventional regime
+[0:22:15] interventional regime and applied it under a different
+[0:22:16] and applied it under a different interventional regime so you can ask the
+[0:22:18] interventional regime so you can ask the question of when can you learn a linear
+[0:22:20] question of when can you learn a linear model
+[0:22:20] model and transfer it between different
+[0:22:22] and transfer it between different interventions despite this missing not a
+[0:22:23] interventions despite this missing not a random data or despite making
+[0:22:25] random data or despite making confounding
+[0:22:26] confounding what i hope to convince you by the end
+[0:22:27] what i hope to convince you by the end of this section is that it is possible
+[0:22:28] of this section is that it is possible under a few key assumptions
+[0:22:32] under a few key assumptions so the first assumption we make is what
+[0:22:33] so the first assumption we make is what we call the tensor factor model
+[0:22:35] we call the tensor factor model so first to back up a lot of times in in
+[0:22:38] so first to back up a lot of times in in the panel data literature or the
+[0:22:39] the panel data literature or the interactive fixed effects literature in
+[0:22:41] interactive fixed effects literature in econometrics
+[0:22:42] econometrics to impose structure across units in time
+[0:22:45] to impose structure across units in time we assume that the data
+[0:22:46] we assume that the data is is low rank so for example instead of
+[0:22:49] is is low rank so for example instead of controls you assume that the data
+[0:22:50] controls you assume that the data associated with control
+[0:22:52] associated with control is it has a low rank representation here
+[0:22:55] is it has a low rank representation here r represents the rank of this matrix
+[0:22:57] r represents the rank of this matrix and then u and v represents the latent
+[0:22:59] and then u and v represents the latent unit time factors and the latent time
+[0:23:00] unit time factors and the latent time latent unit factors and the latent time
+[0:23:02] latent unit factors and the latent time factors
+[0:23:04] factors now if you want to add structure not
+[0:23:06] now if you want to add structure not just across units in time
+[0:23:07] just across units in time because we want to actually make individ
+[0:23:09] because we want to actually make individ estimations for different interventions
+[0:23:11] estimations for different interventions not just on the control
+[0:23:12] not just on the control we need to add structure across
+[0:23:14] we need to add structure across interventions as well
+[0:23:16] interventions as well and so now what we say is that there's a
+[0:23:17] and so now what we say is that there's a low rank tensor
+[0:23:19] low rank tensor and there's a a latent factor associated
+[0:23:21] and there's a a latent factor associated with intervention as well
+[0:23:24] with intervention as well okay so and this r now represents what
+[0:23:27] okay so and this r now represents what we call the cp rank of a tensor
+[0:23:29] we call the cp rank of a tensor and that's a well defined quantity
+[0:23:35] now to actually define the potential outcomes which are a stochastic quantity
+[0:23:38] outcomes which are a stochastic quantity we say that the sum of this so let's say
+[0:23:41] we say that the sum of this so let's say yntd
+[0:23:42] yntd represents the potential outcome of unit
+[0:23:44] represents the potential outcome of unit n
+[0:23:45] n at time t under intervention d
+[0:23:48] at time t under intervention d we're going to say that that can be
+[0:23:49] we're going to say that that can be written as the expected as the
+[0:23:51] written as the expected as the sum of the of the latent factors given
+[0:23:54] sum of the of the latent factors given by u
+[0:23:55] by u n bt and sd which are latent factors for
+[0:23:57] n bt and sd which are latent factors for unit n for time t
+[0:23:58] unit n for time t and intervention d plus the residual
+[0:24:00] and intervention d plus the residual term given by epsilon
+[0:24:02] term given by epsilon nt so epsilon np represents the residual
+[0:24:04] nt so epsilon np represents the residual that's not captured by the latent
+[0:24:06] that's not captured by the latent factors
+[0:24:07] factors right so the latent factors represent in
+[0:24:09] right so the latent factors represent in some sense the expected potential
+[0:24:10] some sense the expected potential outcomes
+[0:24:11] outcomes and the epsilon empty represents the
+[0:24:12] and the epsilon empty represents the remaining residual
+[0:24:19] so that's the first as key assumption we make is that this tensor factor model
+[0:24:21] make is that this tensor factor model exists
+[0:24:21] exists over the expected potential outcomes the
+[0:24:24] over the expected potential outcomes the second assumption we make is what we
+[0:24:26] second assumption we make is what we call
+[0:24:26] call linear scan inclusion which simply means
+[0:24:29] linear scan inclusion which simply means that
+[0:24:29] that for unit n let's say that's our target
+[0:24:31] for unit n let's say that's our target unit that we want to produce kind of
+[0:24:32] unit that we want to produce kind of factuals for
+[0:24:34] factuals for it has this particular structure what we
+[0:24:36] it has this particular structure what we call linear scan inclusion
+[0:24:38] call linear scan inclusion so let id represent the subgroup of
+[0:24:41] so let id represent the subgroup of units that received intervention d
+[0:24:43] units that received intervention d and what we're going to say is that the
+[0:24:45] and what we're going to say is that the latent factor source with unit n
+[0:24:47] latent factor source with unit n lies within the linear span of the units
+[0:24:50] lies within the linear span of the units that go through intervention b
+[0:24:52] that go through intervention b so j are the units that go through
+[0:24:53] so j are the units that go through intervention d let's look at all of
+[0:24:55] intervention d let's look at all of their latent factors and i want unit n's
+[0:24:57] their latent factors and i want unit n's latent factor to lie within the linear
+[0:24:58] latent factor to lie within the linear span
+[0:24:59] span of these particular factors now if your
+[0:25:01] of these particular factors now if your data is low rank then you can easily see
+[0:25:03] data is low rank then you can easily see that this condition is really quite
+[0:25:04] that this condition is really quite minor and almost always holds
+[0:25:10] so now i'm going to build this is the the only math we're going to do here so
+[0:25:12] the only math we're going to do here so i apologize in advance
+[0:25:13] i apologize in advance so what is this value this linear span
+[0:25:15] so what is this value this linear span inclusion in the tensor factor model
+[0:25:17] inclusion in the tensor factor model so let's look at the expected potential
+[0:25:19] so let's look at the expected potential outcome of unit n at time t
+[0:25:21] outcome of unit n at time t under dimension d prime so
+[0:25:24] under dimension d prime so by the tensor factor model we have the
+[0:25:25] by the tensor factor model we have the following representation of it that it
+[0:25:27] following representation of it that it has this low rank factor representation
+[0:25:29] has this low rank factor representation by unl vtl and sd prime l
+[0:25:32] by unl vtl and sd prime l for any td prime and this holds by the
+[0:25:34] for any td prime and this holds by the tensor factor model assumption one
+[0:25:37] tensor factor model assumption one then by the linear span inclusion which
+[0:25:38] then by the linear span inclusion which is assumption two we can write the u the
+[0:25:40] is assumption two we can write the u the latent factor for
+[0:25:42] latent factor for for unit n as a linear sum of the latent
+[0:25:44] for unit n as a linear sum of the latent factors
+[0:25:45] factors uh that for the units that go through
+[0:25:47] uh that for the units that go through intervention d
+[0:25:51] then again by the time the factor model we have that y and t d prime
+[0:25:54] we have that y and t d prime can be written as a linear sum of the
+[0:25:55] can be written as a linear sum of the expected potential outcomes
+[0:25:57] expected potential outcomes of the units j at that same time t under
+[0:26:00] of the units j at that same time t under intervention d prime
+[0:26:01] intervention d prime and the linear model which represents
+[0:26:03] and the linear model which represents the linear span inclusion
+[0:26:05] the linear span inclusion w and d is indeed is invariant across
+[0:26:08] w and d is indeed is invariant across time and interventions
+[0:26:09] time and interventions and so it's really the linear span
+[0:26:10] and so it's really the linear span inclusion in the tensor factor model
+[0:26:12] inclusion in the tensor factor model that lets you learn a model under
+[0:26:13] that lets you learn a model under control and apply that same linear model
+[0:26:15] control and apply that same linear model under intervention
+[0:26:21] and this is indeed why a synthetic intervention and also a synthetic
+[0:26:22] intervention and also a synthetic control exists
+[0:26:28] now lastly what kind of confounding is allowed i'm going to give you
+[0:26:29] allowed i'm going to give you a a causal dag perspective of this
+[0:26:33] a a causal dag perspective of this so here in this causal bag lf represents
+[0:26:36] so here in this causal bag lf represents all the latent factors for example all
+[0:26:38] all the latent factors for example all the collection of u ns vts and sds
+[0:26:41] the collection of u ns vts and sds d is a is a random variable which
+[0:26:44] d is a is a random variable which represents all the intervention
+[0:26:45] represents all the intervention assignments
+[0:26:46] assignments to all the various units
+[0:26:52] now what we need is that the potential outcome yn
+[0:26:53] outcome yn 1d for example is given the parametric
+[0:26:55] 1d for example is given the parametric form can be written as some function of
+[0:26:57] form can be written as some function of the latent factors
+[0:26:58] the latent factors and the residual epsilon n1 now the key
+[0:27:01] and the residual epsilon n1 now the key causal assumption we make is that the
+[0:27:03] causal assumption we make is that the intervention assignment does not have a
+[0:27:05] intervention assignment does not have a direct effect on the residual term
+[0:27:06] direct effect on the residual term epsilon n1
+[0:27:09] epsilon n1 okay so that that key arrow is missing
+[0:27:12] okay so that that key arrow is missing and that's really the key causal
+[0:27:13] and that's really the key causal assumption we're making
+[0:27:14] assumption we're making is that conditional on the latent
+[0:27:16] is that conditional on the latent factors the remaining randomness and the
+[0:27:18] factors the remaining randomness and the potential outcomes
+[0:27:19] potential outcomes is independent of treatment now what
+[0:27:21] is independent of treatment now what that means is that given this tensor
+[0:27:23] that means is that given this tensor factor model
+[0:27:24] factor model of the potential outcomes plus the
+[0:27:26] of the potential outcomes plus the assumption that conditional latent
+[0:27:27] assumption that conditional latent factors
+[0:27:28] factors the intervention assignment d and the
+[0:27:30] the intervention assignment d and the residuals are independent
+[0:27:32] residuals are independent that essentially applies implies that
+[0:27:34] that essentially applies implies that the interventions are independent of the
+[0:27:36] the interventions are independent of the potential outcomes conditional
+[0:27:37] potential outcomes conditional latent factors this is what we call
+[0:27:39] latent factors this is what we call assumption a3 which is selection on
+[0:27:41] assumption a3 which is selection on latent factors
+[0:27:43] latent factors and this can be thought of as an
+[0:27:44] and this can be thought of as an analogous to selection observables
+[0:27:45] analogous to selection observables except now they're relating factors
+[0:27:47] except now they're relating factors rather than observe today
+[0:27:52] so just to give some build some intuition from say the covert 19 example
+[0:27:54] intuition from say the covert 19 example here u n could represent things like say
+[0:27:57] here u n could represent things like say population demographics
+[0:27:58] population demographics the healthcare system it could also
+[0:28:00] the healthcare system it could also represent things that are just not
+[0:28:01] represent things that are just not available from data say
+[0:28:02] available from data say the cultural leanings of the country vt
+[0:28:05] the cultural leanings of the country vt for example could represent
+[0:28:06] for example could represent the number of days that scuba 19 began
+[0:28:08] the number of days that scuba 19 began it could also represent things like say
+[0:28:10] it could also represent things like say the global political trends
+[0:28:12] the global political trends an sd which is latent factor associated
+[0:28:14] an sd which is latent factor associated with the intervention
+[0:28:16] with the intervention could represent how the transmission
+[0:28:17] could represent how the transmission rate of covid is a function of the
+[0:28:18] rate of covid is a function of the mobility restriction
+[0:28:20] mobility restriction right which may or may not be available
+[0:28:22] right which may or may not be available and clearly you see here that the
+[0:28:24] and clearly you see here that the intervention assignment d
+[0:28:25] intervention assignment d is not independent of the potential
+[0:28:27] is not independent of the potential outcome right because the number of
+[0:28:28] outcome right because the number of elderly people in the u.s
+[0:28:30] elderly people in the u.s is going to affect both the mobility
+[0:28:32] is going to affect both the mobility restricting policy that he put in place
+[0:28:33] restricting policy that he put in place and the number of cover 19 debts but you
+[0:28:36] and the number of cover 19 debts but you the hope is that the latent factors are
+[0:28:38] the hope is that the latent factors are rich enough
+[0:28:38] rich enough a conditional on them the potential
+[0:28:40] a conditional on them the potential outcomes and the treatment assignments
+[0:28:42] outcomes and the treatment assignments become independent
+[0:28:45] become independent what we set out to ask in this in this
+[0:28:47] what we set out to ask in this in this section is when can we transfer a linear
+[0:28:49] section is when can we transfer a linear model between different interventions
+[0:28:51] model between different interventions despite latent compounding the three key
+[0:28:53] despite latent compounding the three key assumptions we're going to make
+[0:28:55] assumptions we're going to make is the existence of a tensor factor
+[0:28:56] is the existence of a tensor factor model across the unit's time and
+[0:28:58] model across the unit's time and interventions
+[0:28:59] interventions second is this linear span inclusion for
+[0:29:01] second is this linear span inclusion for the target units intervention target
+[0:29:03] the target units intervention target unit statement factor
+[0:29:04] unit statement factor and the donor units that receive
+[0:29:05] and the donor units that receive intervention b and lastly this lecture
+[0:29:07] intervention b and lastly this lecture in latin factors assumption which is the
+[0:29:09] in latin factors assumption which is the intervention assignments independent
+[0:29:10] intervention assignments independent potential outcomes
+[0:29:11] potential outcomes condition the latent factors now in the
+[0:29:13] condition the latent factors now in the next section uh
+[0:29:14] next section uh dennis is going to take us through the
+[0:29:17] dennis is going to take us through the key theoretical results
+[0:29:18] key theoretical results uh given these collection of assumptions
+[0:29:20] uh given these collection of assumptions so i'll pass it on to dennis
+[0:29:21] so i'll pass it on to dennis thank you again for your time
+[0:29:27] uh thanks anish and thanks again to everyone for being here uh my name is
+[0:29:29] everyone for being here uh my name is dennis and i'll be your tour guide for
+[0:29:31] dennis and i'll be your tour guide for the remainder of this talk
+[0:29:33] the remainder of this talk so in what follows i'm going to first
+[0:29:34] so in what follows i'm going to first formally define our causal estimate of
+[0:29:37] formally define our causal estimate of interest
+[0:29:38] interest then we're going to show that this
+[0:29:38] then we're going to show that this philosophical quantity can indeed
+[0:29:41] philosophical quantity can indeed be identified through observable
+[0:29:42] be identified through observable quantities i'll then present the
+[0:29:44] quantities i'll then present the statistical guarantees of our estimator
+[0:29:46] statistical guarantees of our estimator and then cap off our conversation with
+[0:29:48] and then cap off our conversation with one or two real world
+[0:29:49] one or two real world case studies depending on the time
+[0:29:52] case studies depending on the time so with that said we'll dive into the
+[0:29:54] so with that said we'll dive into the definition of our causal estimate
+[0:29:57] definition of our causal estimate so thanks uh towards this we will
+[0:30:00] so thanks uh towards this we will without loss of generality just consider
+[0:30:02] without loss of generality just consider a particular unit
+[0:30:03] a particular unit n an intervention deep pair so we're
+[0:30:05] n an intervention deep pair so we're going to represent this pictorially by
+[0:30:07] going to represent this pictorially by the first row in the blue color in the
+[0:30:09] the first row in the blue color in the tensor you see to your left
+[0:30:10] tensor you see to your left so in words we're going to define our
+[0:30:12] so in words we're going to define our causal estimate represented by theta nd
+[0:30:15] causal estimate represented by theta nd as unit and expected potential outcomes
+[0:30:17] as unit and expected potential outcomes under intervention d
+[0:30:19] under intervention d averaged over the post intervention
+[0:30:20] averaged over the post intervention period and conditioned on its latent
+[0:30:22] period and conditioned on its latent factors
+[0:30:23] factors pictorially this would just be the
+[0:30:25] pictorially this would just be the average over all entries you see in a
+[0:30:27] average over all entries you see in a highlighted
+[0:30:27] highlighted blue box and indeed the key causal a
+[0:30:31] blue box and indeed the key causal a challenge in estimating theta and in
+[0:30:32] challenge in estimating theta and in essence the fundamental problem of
+[0:30:34] essence the fundamental problem of causal inference
+[0:30:35] causal inference is that as anish had alluded to earlier
+[0:30:37] is that as anish had alluded to earlier is that we will likely only ever observe
+[0:30:39] is that we will likely only ever observe unit n under
+[0:30:40] unit n under one of the d interventions yet want to
+[0:30:42] one of the d interventions yet want to produce counterfactuals for unit and
+[0:30:43] produce counterfactuals for unit and under all possible d interventions
+[0:30:50] under all possible d interventions under our causal assumptions namely
+[0:30:52] under our causal assumptions namely tensor factor model linear span
+[0:30:54] tensor factor model linear span inclusion and selection on latent
+[0:30:55] inclusion and selection on latent factors
+[0:30:56] factors we established that we can express our
+[0:30:58] we established that we can express our causal estimate theta and d
+[0:31:00] causal estimate theta and d for any nd pair as a function of
+[0:31:01] for any nd pair as a function of empirical quantities
+[0:31:03] empirical quantities so more specifically theta and d can be
+[0:31:05] so more specifically theta and d can be written as the linear combination
+[0:31:06] written as the linear combination of the expected observed outcomes
+[0:31:09] of the expected observed outcomes associated with those units that
+[0:31:10] associated with those units that received intervention d
+[0:31:12] received intervention d averaged over the post-intervention
+[0:31:13] averaged over the post-intervention period where the conditioning is now
+[0:31:15] period where the conditioning is now both on the latent factors lf
+[0:31:17] both on the latent factors lf and the treatment assignments d as such
+[0:31:20] and the treatment assignments d as such the name of the game in estimating theta
+[0:31:22] the name of the game in estimating theta is to then first estimate the model
+[0:31:23] is to then first estimate the model parameter w of linear weights
+[0:31:25] parameter w of linear weights which is going to be specific to the
+[0:31:26] which is going to be specific to the target unit n and defined over the
+[0:31:29] target unit n and defined over the subgroup of units that receive the
+[0:31:30] subgroup of units that receive the target intervention d
+[0:31:31] target intervention d in the post-intervention period
+[0:31:37] so if we return to our covert example this really is just implying that we can
+[0:31:39] this really is just implying that we can predict the us's mortality rate
+[0:31:42] predict the us's mortality rate under moderate mobility in blue by
+[0:31:44] under moderate mobility in blue by taking a linear combination defined by w
+[0:31:46] taking a linear combination defined by w of the mortality rates for those
+[0:31:47] of the mortality rates for those countries that did enforce the moderate
+[0:31:49] countries that did enforce the moderate mobility
+[0:31:50] mobility in practice however it is unlikely that
+[0:31:52] in practice however it is unlikely that we're ever going to know w precisely
+[0:31:54] we're ever going to know w precisely in fact we may be learning w from
+[0:31:55] in fact we may be learning w from limited measurements under a single
+[0:31:57] limited measurements under a single interventional framework for instance a
+[0:31:59] interventional framework for instance a small pre-intervention
+[0:32:00] small pre-intervention period under control therefore the
+[0:32:02] period under control therefore the question we tackle next
+[0:32:04] question we tackle next is to understand the conditions that
+[0:32:05] is to understand the conditions that allow for faithful recovery of w
+[0:32:08] allow for faithful recovery of w so that we can make inferences beyond
+[0:32:09] so that we can make inferences beyond the pre-intervention period and so in
+[0:32:11] the pre-intervention period and so in the language of statistics emission
+[0:32:12] the language of statistics emission machine learning we often refer to this
+[0:32:14] machine learning we often refer to this as generalization from your
+[0:32:15] as generalization from your in-sample training to your out-of-sample
+[0:32:18] in-sample training to your out-of-sample testing data
+[0:32:23] to this end we establish a sufficient condition that guarantees successful
+[0:32:25] condition that guarantees successful counter-factual
+[0:32:26] counter-factual estimation intuitively this condition is
+[0:32:28] estimation intuitively this condition is really requiring that the complexity of
+[0:32:30] really requiring that the complexity of your post-intervention data
+[0:32:32] your post-intervention data denoted by z post used for prediction is
+[0:32:34] denoted by z post used for prediction is at most as complex as the
+[0:32:36] at most as complex as the pre-intervention data z3 used for
+[0:32:38] pre-intervention data z3 used for learning
+[0:32:39] learning so more specifically we're going to
+[0:32:42] so more specifically we're going to define complexity by the subspace span
+[0:32:45] define complexity by the subspace span by the pre and post intervention donor
+[0:32:47] by the pre and post intervention donor matrices and to gain a little stronger
+[0:32:49] matrices and to gain a little stronger intuition for this notion
+[0:32:50] intuition for this notion let's let you pre and you post and note
+[0:32:52] let's let you pre and you post and note the left singular vectors of z
+[0:32:54] the left singular vectors of z pre and z post respectively in words the
+[0:32:57] pre and z post respectively in words the rows of these two matrices are going to
+[0:32:58] rows of these two matrices are going to represent the latent
+[0:32:59] represent the latent factors associated with the donor units
+[0:33:01] factors associated with the donor units that received intervention d
+[0:33:03] that received intervention d during the post-intervention period
+[0:33:05] during the post-intervention period unless the dimension of your latent
+[0:33:06] unless the dimension of your latent space
+[0:33:06] space is characterized by the rank of the
+[0:33:08] is characterized by the rank of the respective matrices
+[0:33:10] respective matrices as such we're going to require the
+[0:33:11] as such we're going to require the subspace span by u post
+[0:33:13] subspace span by u post to lie within that of uproot in light of
+[0:33:15] to lie within that of uproot in light of this we're going to henceforth refer to
+[0:33:17] this we're going to henceforth refer to this condition as subspace
+[0:33:18] this condition as subspace inclusion now i want to note that this
+[0:33:21] inclusion now i want to note that this is a purely linear algebraic statement
+[0:33:23] is a purely linear algebraic statement in contrast standard generalization
+[0:33:24] in contrast standard generalization analyses typically make distributional
+[0:33:26] analyses typically make distributional assumptions
+[0:33:27] assumptions for instance a very common one is that
+[0:33:29] for instance a very common one is that the pre and post intervention samples
+[0:33:31] the pre and post intervention samples which correspond to your train and test
+[0:33:32] which correspond to your train and test samples
+[0:33:33] samples are drawn iid in the si framework
+[0:33:35] are drawn iid in the si framework however such an assumption may be
+[0:33:36] however such an assumption may be unrealistic
+[0:33:37] unrealistic since potential outcomes from different
+[0:33:39] since potential outcomes from different interventions are likely to arise from
+[0:33:41] interventions are likely to arise from different distributions
+[0:33:42] different distributions for instance in a clinical trial the
+[0:33:44] for instance in a clinical trial the health response of a patient under
+[0:33:46] health response of a patient under placebo
+[0:33:46] placebo is likely to follow a distribution under
+[0:33:49] is likely to follow a distribution under a well-designed drug
+[0:33:52] a well-designed drug and so without going to too much details
+[0:33:54] and so without going to too much details i just finished by remarking that this
+[0:33:55] i just finished by remarking that this condition may also have potential
+[0:33:57] condition may also have potential implications towards
+[0:33:58] implications towards a transfer learning learning with
+[0:33:59] a transfer learning learning with appropriate shift and causal
+[0:34:00] appropriate shift and causal transportability
+[0:34:02] transportability all of which models are learned under
+[0:34:03] all of which models are learned under one domain and then transferred to
+[0:34:05] one domain and then transferred to another
+[0:34:10] as an important intermediary result we note that if subspace inclusion holds in
+[0:34:13] note that if subspace inclusion holds in addition to the other causal assumptions
+[0:34:15] addition to the other causal assumptions then we can actually rewrite our
+[0:34:16] then we can actually rewrite our identification result in particular we
+[0:34:18] identification result in particular we can replace the model of parameter w
+[0:34:20] can replace the model of parameter w of which infinitely many of such exist
+[0:34:22] of which infinitely many of such exist in high dimensional settings for the
+[0:34:24] in high dimensional settings for the number of units far exceeds the number
+[0:34:26] number of units far exceeds the number of measurements
+[0:34:27] of measurements with the projection of any solution w
+[0:34:29] with the projection of any solution w onto the subspace span by upre
+[0:34:31] onto the subspace span by upre which we'll denote as w tilde and note
+[0:34:34] which we'll denote as w tilde and note that by definition this also corresponds
+[0:34:36] that by definition this also corresponds to the unique minimum norm solution
+[0:34:38] to the unique minimum norm solution within uproot
+[0:34:39] within uproot so in words this really means that if i
+[0:34:41] so in words this really means that if i want to make inferences for unit and
+[0:34:43] want to make inferences for unit and under intervention
+[0:34:44] under intervention d then i don't necessarily need to learn
+[0:34:46] d then i don't necessarily need to learn w entirely
+[0:34:47] w entirely instead under subspace inclusion i
+[0:34:50] instead under subspace inclusion i actually only need to learn the
+[0:34:51] actually only need to learn the component of w
+[0:34:52] component of w that lives in the span of my
+[0:34:53] that lives in the span of my pre-intervention you
+[0:34:56] pre-intervention you so now that we're fully armed with all
+[0:34:58] so now that we're fully armed with all of our key operating assumptions we're
+[0:35:00] of our key operating assumptions we're going to now present
+[0:35:01] going to now present our statistical guarantees however in
+[0:35:03] our statistical guarantees however in the interest of keeping things
+[0:35:05] the interest of keeping things as clean and simple as possible and so
+[0:35:07] as clean and simple as possible and so as to not distract from punch lines
+[0:35:08] as to not distract from punch lines i'm going to hide away some of the
+[0:35:10] i'm going to hide away some of the details such as our additional
+[0:35:11] details such as our additional assumptions on
+[0:35:12] assumptions on subgaussian noise or and instead invite
+[0:35:14] subgaussian noise or and instead invite the interested listener to see the paper
+[0:35:16] the interested listener to see the paper for the full formal state
+[0:35:23] so the first result that we have is one on model estimation
+[0:35:24] on model estimation in particular we established that pcr is
+[0:35:27] in particular we established that pcr is a
+[0:35:27] a consistent estimator of this unique
+[0:35:29] consistent estimator of this unique minimum norm solution w
+[0:35:31] minimum norm solution w tilde that is the l2 error scales with
+[0:35:33] tilde that is the l2 error scales with the minimum of the square root of t
+[0:35:35] the minimum of the square root of t naught which represents the number of
+[0:35:37] naught which represents the number of pre-intervention points or the sides of
+[0:35:39] pre-intervention points or the sides of our training data
+[0:35:40] our training data and nd which is the number of donor
+[0:35:42] and nd which is the number of donor units that we have
+[0:35:44] units that we have below we're going to consider a
+[0:35:45] below we're going to consider a simulation analyzing the parameter
+[0:35:47] simulation analyzing the parameter estimation of pcr
+[0:35:49] estimation of pcr with respect to the minimum normal
+[0:35:50] with respect to the minimum normal solution to the left and a random
+[0:35:52] solution to the left and a random solution to the right across varying
+[0:35:53] solution to the right across varying data sizes
+[0:35:54] data sizes and as we see the parameter estimation
+[0:35:56] and as we see the parameter estimation error with respect to minimum norm
+[0:35:58] error with respect to minimum norm solution
+[0:35:58] solution decays as the sample size increases but
+[0:36:01] decays as the sample size increases but remains stagnant with respect to a
+[0:36:03] remains stagnant with respect to a random solution
+[0:36:04] random solution and so this highlights the pcr performs
+[0:36:06] and so this highlights the pcr performs implicit regularization
+[0:36:08] implicit regularization by recovering this minimum normal
+[0:36:09] by recovering this minimum normal solution amongst all feasible solutions
+[0:36:14] solution amongst all feasible solutions next we establish that the si estimator
+[0:36:16] next we establish that the si estimator yields a consistent estimate of our
+[0:36:18] yields a consistent estimate of our causal estimate of interest
+[0:36:19] causal estimate of interest theta and d for any nd pair and that the
+[0:36:22] theta and d for any nd pair and that the estimation error decays
+[0:36:23] estimation error decays as the parameters t not t1 and nd
+[0:36:26] as the parameters t not t1 and nd increase
+[0:36:26] increase and here t1 is going to represent the
+[0:36:28] and here t1 is going to represent the number of post-intervention measurements
+[0:36:31] number of post-intervention measurements and similar to the previous slide we
+[0:36:32] and similar to the previous slide we also designed a simulation to reinforce
+[0:36:34] also designed a simulation to reinforce our theoretical findings and if you mind
+[0:36:38] our theoretical findings and if you mind clicking yes
+[0:36:39] clicking yes so here we plot the absolute
+[0:36:40] so here we plot the absolute counterfactual estimation error as the
+[0:36:43] counterfactual estimation error as the post-intervention period t1 increases
+[0:36:45] post-intervention period t1 increases so as the plot suggests the error shown
+[0:36:48] so as the plot suggests the error shown in blue
+[0:36:48] in blue gradually decays to zero and in fact
+[0:36:51] gradually decays to zero and in fact given our choice of t naught and nd the
+[0:36:53] given our choice of t naught and nd the other
+[0:36:53] other parameters we see that the simulated
+[0:36:55] parameters we see that the simulated decay right here
+[0:36:56] decay right here matches the theoretical rate of 1 over
+[0:36:58] matches the theoretical rate of 1 over square root t1 shown in plot
+[0:37:04] finally we proved that the error between our estimate and the true causal
+[0:37:06] our estimate and the true causal estimate once normalized by square
+[0:37:08] estimate once normalized by square root t1 over sigma which is the noise
+[0:37:10] root t1 over sigma which is the noise variance and the
+[0:37:12] variance and the l2 norm of the minimum norm w converges
+[0:37:15] l2 norm of the minimum norm w converges in distribution to a standard norm
+[0:37:17] in distribution to a standard norm in turn this then allows us to construct
+[0:37:19] in turn this then allows us to construct confidence intervals
+[0:37:20] confidence intervals for instance we can compute a 95
+[0:37:23] for instance we can compute a 95 confidence interval using the expression
+[0:37:24] confidence interval using the expression you see on the screen
+[0:37:26] you see on the screen where very importantly the quantities
+[0:37:28] where very importantly the quantities within our intervals are not only
+[0:37:29] within our intervals are not only tractable but also come with provable
+[0:37:31] tractable but also come with provable guarantees
+[0:37:32] guarantees the details of which can also be found
+[0:37:34] the details of which can also be found in the manuscript
+[0:37:40] okay so in order to really drive home the importance of subspace inclusion
+[0:37:42] the importance of subspace inclusion i'm now going to discuss two
+[0:37:44] i'm now going to discuss two illustrative simulations
+[0:37:45] illustrative simulations so for the first simulation our
+[0:37:47] so for the first simulation our objective is to recover the underlying
+[0:37:49] objective is to recover the underlying causal estimate under two different
+[0:37:51] causal estimate under two different scenarios
+[0:37:52] scenarios so in scenario one shown on your left
+[0:37:54] so in scenario one shown on your left the pre and post intervention potential
+[0:37:56] the pre and post intervention potential outcomes are going to obey the same
+[0:37:57] outcomes are going to obey the same distribution
+[0:37:58] distribution and so this may reflect the standard
+[0:38:00] and so this may reflect the standard panel data or synthetic control setting
+[0:38:01] panel data or synthetic control setting one may encounter
+[0:38:02] one may encounter where the aim is to estimate the average
+[0:38:04] where the aim is to estimate the average potential outcome under control
+[0:38:06] potential outcome under control for a treated unit in scenario 2 shown
+[0:38:09] for a treated unit in scenario 2 shown on the right the pre and post
+[0:38:11] on the right the pre and post intervention financial outcomes are now
+[0:38:12] intervention financial outcomes are now going to obey different
+[0:38:13] going to obey different distributions so this may now reflect
+[0:38:15] distributions so this may now reflect the opposite situation where
+[0:38:17] the opposite situation where you may want to estimate the average
+[0:38:19] you may want to estimate the average potential outcome under treatment for a
+[0:38:20] potential outcome under treatment for a control unit
+[0:38:22] control unit in both settings however subspace
+[0:38:24] in both settings however subspace inclusion is going to be enforced
+[0:38:26] inclusion is going to be enforced additionally we're going to allow the
+[0:38:27] additionally we're going to allow the two settings to share identical
+[0:38:29] two settings to share identical pre-intervention data
+[0:38:30] pre-intervention data and really only differ in their
+[0:38:31] and really only differ in their post-intervention data as such the same
+[0:38:34] post-intervention data as such the same linear model is going to be learned in
+[0:38:35] linear model is going to be learned in both settings
+[0:38:36] both settings nevertheless we're going to use this
+[0:38:38] nevertheless we're going to use this single linear model under two different
+[0:38:39] single linear model under two different interventional frameworks
+[0:38:41] interventional frameworks one in which the post-intervention
+[0:38:43] one in which the post-intervention outcomes are drawn from the same
+[0:38:44] outcomes are drawn from the same distribution as the pre-intervention
+[0:38:45] distribution as the pre-intervention potential outcomes on the left
+[0:38:47] potential outcomes on the left and the other on the right in which the
+[0:38:49] and the other on the right in which the two sets are going to follow different
+[0:38:50] two sets are going to follow different distributions
+[0:38:51] distributions and we find as shown on the plot you see
+[0:38:54] and we find as shown on the plot you see in the screen where the theoretical
+[0:38:55] in the screen where the theoretical normal distribution around the true
+[0:38:57] normal distribution around the true causal estimate is shown in black
+[0:38:59] causal estimate is shown in black while the histogram of estimates as per
+[0:39:01] while the histogram of estimates as per rsi algorithm is shown in blue
+[0:39:03] rsi algorithm is shown in blue and and again just to re-emphasize
+[0:39:04] and and again just to re-emphasize because the post-intervention data
+[0:39:06] because the post-intervention data differ in the two scenarios we have two
+[0:39:08] differ in the two scenarios we have two causal estimates
+[0:39:08] causal estimates so it's about minus 3.6 to the left and
+[0:39:11] so it's about minus 3.6 to the left and minus 1.5 to the right
+[0:39:13] minus 1.5 to the right and as our theory suggests our result
+[0:39:14] and as our theory suggests our result tells two narratives
+[0:39:16] tells two narratives the first is our estimates are normally
+[0:39:18] the first is our estimates are normally distributed around the true causal
+[0:39:19] distributed around the true causal estimate
+[0:39:20] estimate and the second is that these estimates
+[0:39:22] and the second is that these estimates remain normally distributed even when
+[0:39:24] remain normally distributed even when the pre and post-intervention potential
+[0:39:26] the pre and post-intervention potential outcomes follow different distributions
+[0:39:28] outcomes follow different distributions so in summary this simulation really
+[0:39:29] so in summary this simulation really supports our causal framework as it
+[0:39:31] supports our causal framework as it shows that it is indeed feasible to
+[0:39:33] shows that it is indeed feasible to learn a model under
+[0:39:34] learn a model under one intervention and setting and then
+[0:39:36] one intervention and setting and then transfer it to another one
+[0:39:37] transfer it to another one even if they obey different
+[0:39:42] distributions so in our second simulation we're now
+[0:39:44] so in our second simulation we're now going to violate subspace inclusion
+[0:39:46] going to violate subspace inclusion however we're going to allow the pre and
+[0:39:47] however we're going to allow the pre and post-intervention potential outcomes to
+[0:39:49] post-intervention potential outcomes to be drawn id
+[0:39:50] be drawn id and unlike the two plots from the
+[0:39:52] and unlike the two plots from the previous slide we now find that our
+[0:39:53] previous slide we now find that our estimates are not well approximated by
+[0:39:55] estimates are not well approximated by normal distribution
+[0:39:56] normal distribution anymore centered around the true causal
+[0:39:58] anymore centered around the true causal estimate and the juxtaposition of these
+[0:40:00] estimate and the juxtaposition of these experiments really reinforces the
+[0:40:01] experiments really reinforces the importance of subspace
+[0:40:03] importance of subspace inclusion for successful counter factual
+[0:40:04] inclusion for successful counter factual estimation
+[0:40:06] estimation and uh addition we also just want to
+[0:40:08] and uh addition we also just want to note that we hope that these studies may
+[0:40:09] note that we hope that these studies may also be of independent interest to those
+[0:40:11] also be of independent interest to those in the statistical learning community
+[0:40:13] in the statistical learning community since standard generalization techniques
+[0:40:15] since standard generalization techniques often rely heavily on id assumptions
+[0:40:17] often rely heavily on id assumptions and to the best of our knowledge
+[0:40:19] and to the best of our knowledge subspace like inclusion principles have
+[0:40:21] subspace like inclusion principles have not really been explored
+[0:40:24] not really been explored so in light of our revealing simulations
+[0:40:26] so in light of our revealing simulations i'm now going to describe a data-driven
+[0:40:28] i'm now going to describe a data-driven hypothesis test
+[0:40:29] hypothesis test to check when subspace inclusion holds
+[0:40:31] to check when subspace inclusion holds in practice to gain an intuition for
+[0:40:33] in practice to gain an intuition for this
+[0:40:33] this test let's consider the following two
+[0:40:35] test let's consider the following two hypotheses so
+[0:40:36] hypotheses so our null hypothesis h naught is that the
+[0:40:39] our null hypothesis h naught is that the span of u post is contained within that
+[0:40:41] span of u post is contained within that of u pre
+[0:40:42] of u pre and our alternative hypothesis h one is
+[0:40:44] and our alternative hypothesis h one is that it's not fully contained
+[0:40:46] that it's not fully contained now if i condition on h naught it
+[0:40:48] now if i condition on h naught it follows that
+[0:40:49] follows that u post is going to be orthogonal to the
+[0:40:51] u post is going to be orthogonal to the orthogonal complement of you pre
+[0:40:53] orthogonal complement of you pre represented by the identity
+[0:40:54] represented by the identity matrix i minus u preview pre-transpose
+[0:40:57] matrix i minus u preview pre-transpose hence the size of this projection is
+[0:40:58] hence the size of this projection is going to be exactly zero
+[0:41:00] going to be exactly zero in contrast if h1 holds then this value
+[0:41:02] in contrast if h1 holds then this value is going to be strictly positive
+[0:41:03] is going to be strictly positive therefore the size of the projection
+[0:41:05] therefore the size of the projection serves as a very natural test statistic
+[0:41:13] of course we're never going to fully observe you pre and you post perfectly
+[0:41:15] observe you pre and you post perfectly due to the stochasticity of our
+[0:41:16] due to the stochasticity of our observations induced by the epsilons
+[0:41:19] observations induced by the epsilons therefore as a niche and presented in
+[0:41:20] therefore as a niche and presented in the algorithm section we're going to use
+[0:41:22] the algorithm section we're going to use the top principal components of the
+[0:41:23] the top principal components of the observed donor matrices
+[0:41:25] observed donor matrices z pre and z post as proxies which we're
+[0:41:27] z pre and z post as proxies which we're going to denote as
+[0:41:28] going to denote as u pre hat and u post hat and so this
+[0:41:31] u pre hat and u post hat and so this yields the following test
+[0:41:33] yields the following test for any significance level alpha we're
+[0:41:35] for any significance level alpha we're going to retain our null hypothesis
+[0:41:37] going to retain our null hypothesis if tau hat is less than or equal to some
+[0:41:38] if tau hat is less than or equal to some critical value of alpha
+[0:41:40] critical value of alpha and we're going to reject our
+[0:41:41] and we're going to reject our non-hypothesis otherwise and again to
+[0:41:44] non-hypothesis otherwise and again to build some intuition just note that in
+[0:41:45] build some intuition just note that in the ideal setting
+[0:41:46] the ideal setting where you pre and you post are perfectly
+[0:41:48] where you pre and you post are perfectly observed tau of alpha is going to be
+[0:41:50] observed tau of alpha is going to be exactly zero
+[0:41:55] and using our choice statistic we can then um
+[0:41:57] then um control both the type 1 and type 2
+[0:41:58] control both the type 1 and type 2 errors that is for any significance
+[0:42:00] errors that is for any significance value alpha both errors occur with
+[0:42:02] value alpha both errors occur with probability at most alpha
+[0:42:03] probability at most alpha and our critical value vanishes with
+[0:42:06] and our critical value vanishes with increasing data
+[0:42:08] increasing data and before i move on to the periods i
+[0:42:09] and before i move on to the periods i just want to briefly mention that the
+[0:42:10] just want to briefly mention that the exact
+[0:42:11] exact constants of this tau can be found in
+[0:42:13] constants of this tau can be found in the paper as well as two other notes on
+[0:42:14] the paper as well as two other notes on how to compute it
+[0:42:15] how to compute it one is an exact computation and the
+[0:42:17] one is an exact computation and the other is a complementary practical
+[0:42:19] other is a complementary practical heuristic
+[0:42:23] all right so this really wraps up the primary aspects uh
+[0:42:25] primary aspects uh theoretical aspects of our work and so
+[0:42:27] theoretical aspects of our work and so next we'll continue our journey by
+[0:42:28] next we'll continue our journey by analyzing a real world case study
+[0:42:32] analyzing a real world case study but before i go into that i'd just like
+[0:42:34] but before i go into that i'd just like to take a quick step
+[0:42:35] to take a quick step back again and just recall one of our
+[0:42:38] back again and just recall one of our earlier primary goals
+[0:42:39] earlier primary goals in particular let's consider the setting
+[0:42:41] in particular let's consider the setting where we have n units and d
+[0:42:42] where we have n units and d interventions
+[0:42:43] interventions now in many real world applications
+[0:42:45] now in many real world applications randomized controlled trials or rcts
+[0:42:48] randomized controlled trials or rcts more compactly
+[0:42:49] more compactly are considered the gold standard
+[0:42:50] are considered the gold standard mechanism to draw causal conclusions
+[0:42:52] mechanism to draw causal conclusions unless they're heavily used in practice
+[0:42:54] unless they're heavily used in practice in general rcts only require n
+[0:42:56] in general rcts only require n experiments which is sample efficient
+[0:42:58] experiments which is sample efficient but they typically only prescribe
+[0:42:59] but they typically only prescribe one intervention across all units and
+[0:43:01] one intervention across all units and that's the one that corresponds to the
+[0:43:03] that's the one that corresponds to the best average treatment effect
+[0:43:05] best average treatment effect in contrast if we consider what we coin
+[0:43:07] in contrast if we consider what we coin as an ideal rct
+[0:43:08] as an ideal rct where each unit is exposed to all the
+[0:43:10] where each unit is exposed to all the interventions then we're going to know
+[0:43:12] interventions then we're going to know precisely
+[0:43:12] precisely the best intervention for every unit
+[0:43:14] the best intervention for every unit thus achieving a high level of
+[0:43:15] thus achieving a high level of personalization
+[0:43:16] personalization but this then comes at a cost of n times
+[0:43:18] but this then comes at a cost of n times the experiments which can be infeasible
+[0:43:20] the experiments which can be infeasible in many settings
+[0:43:22] in many settings so as we transition from the left to the
+[0:43:24] so as we transition from the left to the right personalization
+[0:43:25] right personalization increases at the expense of feasibility
+[0:43:27] increases at the expense of feasibility and so this begs the question can we
+[0:43:29] and so this begs the question can we design a framework that achieves a
+[0:43:31] design a framework that achieves a personalization of an ideal rct
+[0:43:33] personalization of an ideal rct it retain the feasibility of standard
+[0:43:35] it retain the feasibility of standard rcts
+[0:43:40] towards this challenge we discuss a case study that emerged from a collaboration
+[0:43:42] study that emerged from a collaboration with the e-commerce platform that
+[0:43:44] with the e-commerce platform that conducted a large-scale a b
+[0:43:45] conducted a large-scale a b test to match the right incentives to
+[0:43:47] test to match the right incentives to the right customer group
+[0:43:48] the right customer group in order to increase engagement overall
+[0:43:52] in order to increase engagement overall more specifically in this experiment the
+[0:43:53] more specifically in this experiment the company partitioned its customers into
+[0:43:55] company partitioned its customers into 25 groups with over 10 000 customers per
+[0:43:58] 25 groups with over 10 000 customers per group
+[0:43:58] group based on their historical expenditures
+[0:44:00] based on their historical expenditures characteristics etc
+[0:44:02] characteristics etc additionally the company considered
+[0:44:04] additionally the company considered three interventions corresponding to
+[0:44:06] three interventions corresponding to discounts of 10
+[0:44:07] discounts of 10 30 and 50 as well as a control where the
+[0:44:09] 30 and 50 as well as a control where the customers had to pay the standard fee
+[0:44:11] customers had to pay the standard fee and then the customer engagement levels
+[0:44:13] and then the customer engagement levels were then collected over eight days
+[0:44:18] and because of the large number of users within every subgroup the
+[0:44:20] within every subgroup the company then randomly partitioned the
+[0:44:22] company then randomly partitioned the users within every single one of the 25
+[0:44:24] users within every single one of the 25 groups into four
+[0:44:25] groups into four further subgroups where each of the
+[0:44:27] further subgroups where each of the subgroups then received one of the three
+[0:44:28] subgroups then received one of the three discounts for control
+[0:44:31] discounts for control and so from our perspective this setup
+[0:44:32] and so from our perspective this setup is perfect because this data set
+[0:44:34] is perfect because this data set effectively provides us access to the
+[0:44:36] effectively provides us access to the customer engagement levels
+[0:44:37] customer engagement levels for all user groups and all intervention
+[0:44:39] for all user groups and all intervention types
+[0:44:40] types in other words we have access to the
+[0:44:42] in other words we have access to the entire yeah
+[0:44:44] entire yeah sorry sorry to interrupt i just want to
+[0:44:45] sorry sorry to interrupt i just want to remind you of the time you have like
+[0:44:47] remind you of the time you have like could you wrap up in like three minutes
+[0:44:48] could you wrap up in like three minutes or so
+[0:44:49] or so yeah also i'll just wrap up at the end
+[0:44:51] yeah also i'll just wrap up at the end of this case study okay okay
+[0:44:53] of this case study okay okay thank you um so in other words we have
+[0:44:56] thank you um so in other words we have access to the entire ground truth tensor
+[0:44:57] access to the entire ground truth tensor of potential outcomes
+[0:44:58] of potential outcomes and so this case study really allows us
+[0:45:01] and so this case study really allows us to properly assess our framework and
+[0:45:02] to properly assess our framework and algorithm
+[0:45:03] algorithm specifically to address the challenges
+[0:45:04] specifically to address the challenges laid out in the previous slides
+[0:45:06] laid out in the previous slides and so hence to simulate a data
+[0:45:08] and so hence to simulate a data efficient trial what we're going to do
+[0:45:09] efficient trial what we're going to do is we're going to hold out part of this
+[0:45:10] is we're going to hold out part of this tensor as a test set
+[0:45:12] tensor as a test set in particular we're going to retain the
+[0:45:13] in particular we're going to retain the control data across all 25 groups
+[0:45:15] control data across all 25 groups but for every one of the groups we're
+[0:45:17] but for every one of the groups we're only going to have access to their
+[0:45:18] only going to have access to their engagement levels under one of the three
+[0:45:20] engagement levels under one of the three discounts
+[0:45:20] discounts and so this induces the following block
+[0:45:22] and so this induces the following block sparse tensor so in short our objective
+[0:45:24] sparse tensor so in short our objective is to recover the underlying tensor on
+[0:45:26] is to recover the underlying tensor on the left from the sparse observation
+[0:45:28] the left from the sparse observation center on the right that reflects a more
+[0:45:29] center on the right that reflects a more standard av testing setting
+[0:45:33] standard av testing setting and to quantify the utility of approach
+[0:45:35] and to quantify the utility of approach we're going to use the following
+[0:45:36] we're going to use the following modified r squared statistic
+[0:45:38] modified r squared statistic where the numerator is going to
+[0:45:39] where the numerator is going to represent our squared error associated
+[0:45:41] represent our squared error associated with the s diagram and the denominator
+[0:45:43] with the s diagram and the denominator represents the square error associated
+[0:45:44] represents the square error associated with the rct estimator
+[0:45:46] with the rct estimator which is really just going to take the
+[0:45:47] which is really just going to take the average outcome across all the customers
+[0:45:49] average outcome across all the customers that received
+[0:45:50] that received discount b so if the customers were
+[0:45:52] discount b so if the customers were homogeneous then the rct estimator will
+[0:45:54] homogeneous then the rct estimator will be a good predictor of the causal
+[0:45:55] be a good predictor of the causal estimate
+[0:45:56] estimate so as a result the denominator is going
+[0:45:58] so as a result the denominator is going to be small and the overall squared
+[0:45:59] to be small and the overall squared error will be small as well
+[0:46:01] error will be small as well in effect this metric captures the game
+[0:46:03] in effect this metric captures the game by personalizing prediction to your
+[0:46:05] by personalizing prediction to your target customer group and intervention
+[0:46:07] target customer group and intervention and so the more positive this value is
+[0:46:08] and so the more positive this value is and the closer it is to one the more
+[0:46:10] and the closer it is to one the more utility is to be gained by
+[0:46:11] utility is to be gained by personalization in the interest of time
+[0:46:14] personalization in the interest of time i'm going to skip over the verifying
+[0:46:16] i'm going to skip over the verifying causal assumptions and say
+[0:46:17] causal assumptions and say it is verified and just jump straight to
+[0:46:20] it is verified and just jump straight to the results instead
+[0:46:22] the results instead so in the middle column of our table
+[0:46:23] so in the middle column of our table we're going to first show our hypothesis
+[0:46:25] we're going to first show our hypothesis test results which passes for all
+[0:46:27] test results which passes for all discounts at a significance level of
+[0:46:29] discounts at a significance level of 0.05
+[0:46:31] 0.05 in addition across uh all discounts and
+[0:46:34] in addition across uh all discounts and over multiple iterations of the
+[0:46:35] over multiple iterations of the synthetic av testing setup described
+[0:46:37] synthetic av testing setup described previously we achieved average modified
+[0:46:40] previously we achieved average modified r squared of 0.98
+[0:46:42] r squared of 0.98 and a standard deviation of at most 0.04
+[0:46:44] and a standard deviation of at most 0.04 which is shown in the rightmost column
+[0:46:46] which is shown in the rightmost column of the table
+[0:46:47] of the table so in words these results are really
+[0:46:48] so in words these results are really just showing that the ssi
+[0:46:50] just showing that the ssi si algorithm is far outperforming the
+[0:46:53] si algorithm is far outperforming the rct algorithm
+[0:46:54] rct algorithm which indicates that there is
+[0:46:55] which indicates that there is significant heterogeneity amongst the
+[0:46:57] significant heterogeneity amongst the user groups and how they responded to
+[0:46:58] user groups and how they responded to their promotions
+[0:46:59] their promotions and this warrants the e-commerce company
+[0:47:02] and this warrants the e-commerce company in running separate a b tests for each
+[0:47:04] in running separate a b tests for each of the groups
+[0:47:05] of the groups which actually required a significant
+[0:47:06] which actually required a significant engineering effort on their part
+[0:47:08] engineering effort on their part to implement and costed a sizable amount
+[0:47:11] to implement and costed a sizable amount of money
+[0:47:12] of money and so this leads us to the second and
+[0:47:13] and so this leads us to the second and more important takeaway which is that
+[0:47:15] more important takeaway which is that this experiment showcases how si can
+[0:47:17] this experiment showcases how si can enable what we call data efficient
+[0:47:19] enable what we call data efficient trials
+[0:47:19] trials as a synthetic a b testing framework
+[0:47:21] as a synthetic a b testing framework only required 50 experiments
+[0:47:23] only required 50 experiments so one control and one discount for each
+[0:47:25] so one control and one discount for each of the 25 customer groups
+[0:47:26] of the 25 customer groups compared to the actual av testing
+[0:47:28] compared to the actual av testing framework which required all 100
+[0:47:30] framework which required all 100 experiments
+[0:47:30] experiments so one control and all three discounts
+[0:47:32] so one control and all three discounts for each of the 25 groups
+[0:47:34] for each of the 25 groups and more generally si only requires each
+[0:47:36] and more generally si only requires each unit to undergo at most
+[0:47:38] unit to undergo at most two interventions independent of the
+[0:47:40] two interventions independent of the number of interventions d
+[0:47:42] number of interventions d as in compared to the detents and
+[0:47:44] as in compared to the detents and experiments needed in what we call an
+[0:47:46] experiments needed in what we call an ideal a b testing scenario
+[0:47:48] ideal a b testing scenario and as previously after mentioned this
+[0:47:49] and as previously after mentioned this becomes more and more significant as
+[0:47:51] becomes more and more significant as number of interventions
+[0:47:52] number of interventions or the level of personalization growth
+[0:47:55] or the level of personalization growth and so i'll skip over this next case
+[0:47:58] and so i'll skip over this next case study
+[0:47:58] study and then just jump straight to uh
+[0:48:02] and then just jump straight to uh the the summary of this work and just
+[0:48:04] the the summary of this work and just say that as you know very quick summary
+[0:48:06] say that as you know very quick summary we
+[0:48:06] we in the very beginning we presented a
+[0:48:08] in the very beginning we presented a causal framework that reinterpreted the
+[0:48:10] causal framework that reinterpreted the language of potential outcomes
+[0:48:12] language of potential outcomes through the lens of tensors and this
+[0:48:13] through the lens of tensors and this perspective is really what enabled us to
+[0:48:15] perspective is really what enabled us to learn and predict under different
+[0:48:16] learn and predict under different interventions at a unit by unit
+[0:48:18] interventions at a unit by unit granularity
+[0:48:19] granularity despite the presence of latent
+[0:48:20] despite the presence of latent compounding we then arm this framework
+[0:48:22] compounding we then arm this framework with an algorithm that is robust to
+[0:48:24] with an algorithm that is robust to noise
+[0:48:24] noise offers more uh predictive juice and is
+[0:48:26] offers more uh predictive juice and is also not very data functional
+[0:48:28] also not very data functional additionally we provided statistical
+[0:48:30] additionally we provided statistical guarantees for this algorithm and showed
+[0:48:31] guarantees for this algorithm and showed how to produce
+[0:48:32] how to produce confidence intervals and how to furnish
+[0:48:34] confidence intervals and how to furnish a hypothesis
+[0:48:35] a hypothesis how we use a hypothesis test to verify
+[0:48:38] how we use a hypothesis test to verify when the algorithm can be safely applied
+[0:48:39] when the algorithm can be safely applied in practice
+[0:48:40] in practice and finally we discussed one real world
+[0:48:42] and finally we discussed one real world case study
+[0:48:43] case study um on how to enable data efficient
+[0:48:46] um on how to enable data efficient trials using synthetic
+[0:48:47] trials using synthetic testing so i just want to
+[0:48:51] testing so i just want to thank everyone again for for coming to
+[0:48:52] thank everyone again for for coming to this talk um
+[0:48:54] this talk um feel free to contact either myself
+[0:48:56] feel free to contact either myself anisha or devra
+[0:48:57] anisha or devra on the emails there and also just want
+[0:48:59] on the emails there and also just want to send a big shout out to
+[0:49:01] to send a big shout out to alberto body abdullah alamar romain
+[0:49:03] alberto body abdullah alamar romain khasan esther duflo
+[0:49:04] khasan esther duflo anna makushiva and singh for their
+[0:49:07] anna makushiva and singh for their invaluable help
+[0:49:08] invaluable help and fervent support thank you
+[0:49:11] and fervent support thank you thank you thank you dennis and danish
+[0:49:13] thank you thank you dennis and danish for the great talk
+[0:49:14] for the great talk i think we have time for uh one question
+[0:49:18] i think we have time for uh one question so we have a question by richard burke i
+[0:49:19] so we have a question by richard burke i am muting
+[0:49:21] am muting now richard yeah um
+[0:49:24] now richard yeah um this looks a lot like meta-analysis
+[0:49:27] this looks a lot like meta-analysis and a common problem with that is that
+[0:49:30] and a common problem with that is that interventions which
+[0:49:32] interventions which have the same name aren't really the
+[0:49:33] have the same name aren't really the same and so i wonder don't you have to
+[0:49:36] same and so i wonder don't you have to assume that the content
+[0:49:37] assume that the content of the intervention across countries
+[0:49:40] of the intervention across countries let's say lockdown
+[0:49:41] let's say lockdown is identical uh regardless of the
+[0:49:44] is identical uh regardless of the country that uses that name
+[0:49:46] country that uses that name i didn't see that in your assumptions
+[0:49:48] i didn't see that in your assumptions but maybe i missed it or maybe
+[0:49:50] but maybe i missed it or maybe i just don't understand yeah thanks for
+[0:49:53] i just don't understand yeah thanks for your
+[0:49:53] your question richard i am um i think that
+[0:49:56] question richard i am um i think that totally makes sense so one assumption
+[0:49:57] totally makes sense so one assumption that we
+[0:49:58] that we did not talk about is silva it simply
+[0:50:00] did not talk about is silva it simply says that the observation you're getting
+[0:50:02] says that the observation you're getting is exactly the the potential outcome
+[0:50:04] is exactly the the potential outcome under that potential under that
+[0:50:05] under that potential under that particular intervention
+[0:50:07] particular intervention and so for example in the covert study
+[0:50:09] and so for example in the covert study what we're saying is that what you're
+[0:50:10] what we're saying is that what you're observing
+[0:50:11] observing is the outcome for let's say the u.s
+[0:50:15] is the outcome for let's say the u.s where they had a five percent drop in in
+[0:50:17] where they had a five percent drop in in mobility compared to their baseline or
+[0:50:19] mobility compared to their baseline or for brazil a 20 to 35 percent drop in
+[0:50:22] for brazil a 20 to 35 percent drop in ability compared to their baseline
+[0:50:23] ability compared to their baseline and that's how we're defining the
+[0:50:25] and that's how we're defining the intervention
+[0:50:26] intervention but you don't know what the content of
+[0:50:28] but you don't know what the content of it is so
+[0:50:30] it is so sorry could you expand that a bit more
+[0:50:32] sorry could you expand that a bit more yeah i mean uh there's
+[0:50:34] yeah i mean uh there's yes something happened uh in the united
+[0:50:37] yes something happened uh in the united states and something happened let's say
+[0:50:39] states and something happened let's say in canada
+[0:50:40] in canada but you don't know what that something
+[0:50:41] but you don't know what that something is all you know is that it's called
+[0:50:43] is all you know is that it's called for example lockdown but lockdown in
+[0:50:46] for example lockdown but lockdown in canada is different from a lockdown in
+[0:50:47] canada is different from a lockdown in brazil
+[0:50:49] brazil oh absolutely yes i think in this case
+[0:50:51] oh absolutely yes i think in this case we are defining it
+[0:50:52] we are defining it simply in a data-driven way which is by
+[0:50:55] simply in a data-driven way which is by in
+[0:50:56] in the drop in mobility that was actually
+[0:50:58] the drop in mobility that was actually measured
+[0:50:59] measured by in this case google compared to the
+[0:51:01] by in this case google compared to the baseline so
+[0:51:02] baseline so we're not calling it a medium lockdown
+[0:51:04] we're not calling it a medium lockdown or high lockdown but we're defining it
+[0:51:06] or high lockdown but we're defining it in terms of that particular google
+[0:51:08] in terms of that particular google mobility report
+[0:51:10] mobility report which is says it's a five percent drop
+[0:51:12] which is says it's a five percent drop from their baseline
+[0:51:13] from their baseline from the data that they're collecting on
+[0:51:15] from the data that they're collecting on mobile phones of all their google users
+[0:51:17] mobile phones of all their google users throughout that country that's the way
+[0:51:18] throughout that country that's the way we're defining it
+[0:51:26] if you want to add something yeah so i think that's a great question and i
+[0:51:28] think that's a great question and i think it's something that we put a lot
+[0:51:30] think it's something that we put a lot of thought into because you're
+[0:51:31] of thought into because you're completely right you know different
+[0:51:32] completely right you know different um you know countries implement the
+[0:51:34] um you know countries implement the different policies and what one place
+[0:51:36] different policies and what one place calls a severe lockdown is different
+[0:51:37] calls a severe lockdown is different from another
+[0:51:38] from another but um what we saw is that all a lot of
+[0:51:41] but um what we saw is that all a lot of these
+[0:51:42] these different kind of um policies that were
+[0:51:44] different kind of um policies that were put in place were really trying to
+[0:51:46] put in place were really trying to limit mobility and so we're really using
+[0:51:48] limit mobility and so we're really using mobility as kind of like a proxy instead
+[0:51:50] mobility as kind of like a proxy instead and saying that you know we don't really
+[0:51:52] and saying that you know we don't really care about what the actual
+[0:51:54] care about what the actual policy that you implemented is we're
+[0:51:55] policy that you implemented is we're really just going to look at how did
+[0:51:56] really just going to look at how did that
+[0:51:57] that affect mobility in the very end and and
+[0:51:59] affect mobility in the very end and and as a nation that said that we use
+[0:52:01] as a nation that said that we use google's mobility reports to kind of see
+[0:52:04] google's mobility reports to kind of see the difference
+[0:52:04] the difference in you know drops after covid kind of
+[0:52:06] in you know drops after covid kind of really took off
+[0:52:07] really took off compared to what their national baseline
+[0:52:09] compared to what their national baseline was before kobe took off
+[0:52:15] all right thanks
+[0:52:21] thank you anish and dennis for your presentation we are now ready to switch
+[0:52:23] presentation we are now ready to switch over to discussion
+[0:52:25] over to discussion if you're ready jason
+[0:52:32] if you're ready jason okay so thank you nish and dennis for
+[0:52:35] okay so thank you nish and dennis for this uh
+[0:52:36] this uh excellent talk and this uh paper that i
+[0:52:39] excellent talk and this uh paper that i think does um
+[0:52:41] think does um contributes a lot to the synthetic
+[0:52:43] contributes a lot to the synthetic control literature and the
+[0:52:44] control literature and the causal panel data literature
+[0:52:47] causal panel data literature so i think there are three major
+[0:52:50] so i think there are three major contributions here
+[0:52:51] contributions here one is that the paper extends this
+[0:52:53] one is that the paper extends this latent factor model to the multiple
+[0:52:55] latent factor model to the multiple treatment setting
+[0:52:57] treatment setting and this is important because current
+[0:52:58] and this is important because current estimators are
+[0:53:00] estimators are uh squarely focused on estimating
+[0:53:03] uh squarely focused on estimating potential outcomes under control
+[0:53:04] potential outcomes under control for either a single or multiple units um
+[0:53:08] for either a single or multiple units um responding to uh one treatment but
+[0:53:12] responding to uh one treatment but as uh the authors point out we are
+[0:53:15] as uh the authors point out we are always interested in
+[0:53:16] always interested in situations where there might be multiple
+[0:53:19] situations where there might be multiple different treatments
+[0:53:23] in the paper they discuss there's a section on a connection to
+[0:53:25] section on a connection to tensor estimation where we could think
+[0:53:27] tensor estimation where we could think of potential outcomes as
+[0:53:29] of potential outcomes as a order three uh tensor where each
+[0:53:33] a order three uh tensor where each entry is a time unit or treatment
+[0:53:35] entry is a time unit or treatment potential outcome
+[0:53:37] potential outcome and this is like a very natural fit for
+[0:53:40] and this is like a very natural fit for this type of um uh
+[0:53:42] this type of um uh estimating potential outcomes we can
+[0:53:44] estimating potential outcomes we can think of it as a a
+[0:53:46] think of it as a a major or tensor completion problem
+[0:53:49] major or tensor completion problem so i think that's an exciting
+[0:53:50] so i think that's an exciting development and then um
+[0:53:53] development and then um lastly the the authors do a really good
+[0:53:55] lastly the the authors do a really good job connecting
+[0:53:56] job connecting the synthetic control literature to
+[0:53:58] the synthetic control literature to machine learning literature
+[0:54:00] machine learning literature and one of these connections is that the
+[0:54:03] and one of these connections is that the idea of counter
+[0:54:03] idea of counter factual estimation under distribution
+[0:54:06] factual estimation under distribution shift
+[0:54:06] shift so in the standard synthetic control
+[0:54:09] so in the standard synthetic control literature um
+[0:54:10] literature um where we typically assume that the
+[0:54:14] where we typically assume that the training and test sets so uh so the uh
+[0:54:17] training and test sets so uh so the uh distributions of the control units and
+[0:54:19] distributions of the control units and the treated units under potential
+[0:54:21] the treated units under potential potential outcomes under control
+[0:54:23] potential outcomes under control are drawn from a similar distribution
+[0:54:26] are drawn from a similar distribution but in this
+[0:54:27] but in this synthetic interventions framework
+[0:54:31] synthetic interventions framework we can have different treatments sampled
+[0:54:33] we can have different treatments sampled from different distributions
+[0:54:36] from different distributions and that is because we have these latent
+[0:54:38] and that is because we have these latent time and treatment
+[0:54:40] time and treatment factors that can be differently sampled
+[0:54:43] factors that can be differently sampled so that's an
+[0:54:44] so that's an important contribution and so there's a
+[0:54:47] important contribution and so there's a few things i want to point out with the
+[0:54:48] few things i want to point out with the latent factor model so the
+[0:54:51] latent factor model so the potential outcomes here is a function of
+[0:54:54] potential outcomes here is a function of these uh latent factors so the time and
+[0:54:57] these uh latent factors so the time and treatment specific coefficients
+[0:54:59] treatment specific coefficients and then uh latent factor loading so the
+[0:55:01] and then uh latent factor loading so the unit specific intercepts
+[0:55:04] unit specific intercepts plus this uh random noise
+[0:55:07] plus this uh random noise and so uh so so
+[0:55:10] and so uh so so i think one important thing to point out
+[0:55:12] i think one important thing to point out is that
+[0:55:13] is that um the rank r here
+[0:55:17] um the rank r here so the rank is the number of non-zero
+[0:55:18] so the rank is the number of non-zero singular values
+[0:55:20] singular values that are recovered from svd of this
+[0:55:23] that are recovered from svd of this product
+[0:55:25] product in the latent factor model typically we
+[0:55:29] in the latent factor model typically we just fix the rank r so we just assume
+[0:55:32] just fix the rank r so we just assume that we know what r
+[0:55:32] that we know what r is um in the matrix completion
+[0:55:34] is um in the matrix completion literature um which
+[0:55:36] literature um which i'll discuss later um we're
+[0:55:40] i'll discuss later um we're typically only assuming that this um uh
+[0:55:45] typically only assuming that this um uh this look this matrix here is uh low
+[0:55:47] this look this matrix here is uh low rank and so
+[0:55:50] rank and so my reading of this paper is that
+[0:55:56] the authors are kind of blending the inter the
+[0:55:57] inter the fix of latent factors models and the
+[0:55:59] fix of latent factors models and the matrix completion models
+[0:56:01] matrix completion models and assuming that that the rank is both
+[0:56:04] and assuming that that the rank is both fixed
+[0:56:05] fixed and low rank
+[0:56:12] another thing i want to point out is so they make the exogeneity assumption that
+[0:56:15] they make the exogeneity assumption that the errors are independent
+[0:56:17] the errors are independent of treatment assignment conditional on
+[0:56:19] of treatment assignment conditional on these latent factors and loadings
+[0:56:22] these latent factors and loadings and this sounds kind of weird because
+[0:56:26] and this sounds kind of weird because so we don't observe the latent factors
+[0:56:28] so we don't observe the latent factors in loading they're uh they're latent
+[0:56:34] and i just want to point out a similar assumption is made
+[0:56:35] assumption is made in uh this paper by zhu
+[0:56:39] in uh this paper by zhu in 2017 where he extends a
+[0:56:44] in 2017 where he extends a ipe model to synthetic control um
+[0:56:47] ipe model to synthetic control um and so there the conditioning set
+[0:56:50] and so there the conditioning set includes the latent factors and loadings
+[0:56:53] includes the latent factors and loadings and the covariates and this is kind of
+[0:56:55] and the covariates and this is kind of also similar to
+[0:56:57] also similar to unconfounded assumptions in
+[0:57:00] unconfounded assumptions in semi-parametric difference difference
+[0:57:02] semi-parametric difference difference estimators
+[0:57:03] estimators and then that in that case the
+[0:57:06] and then that in that case the conditioning set
+[0:57:08] conditioning set includes fixed effects which are meant
+[0:57:10] includes fixed effects which are meant to
+[0:57:11] to capture unmeasured confounding so i
+[0:57:14] capture unmeasured confounding so i think um
+[0:57:15] think um there's some precedent to this uh
+[0:57:17] there's some precedent to this uh assumption
+[0:57:18] assumption um and i think the authors could
+[0:57:21] um and i think the authors could maybe make more clear that
+[0:57:24] maybe make more clear that there's some precedent
+[0:57:31] so i just want to compare um past approaches with this approach
+[0:57:33] approaches with this approach uh my reading is that the synthetic
+[0:57:36] uh my reading is that the synthetic interventions framework is kind of a
+[0:57:38] interventions framework is kind of a blend of the two
+[0:57:39] blend of the two but borrows more from the
+[0:57:43] but borrows more from the interactive fixed effects models
+[0:57:46] interactive fixed effects models so i mentioned the paper by zoo which
+[0:57:49] so i mentioned the paper by zoo which kind of borrows from this earlier paper
+[0:57:50] kind of borrows from this earlier paper by by
+[0:57:52] by by and in this framework they assume that
+[0:57:54] and in this framework they assume that the
+[0:57:56] the um matrix has a lowering the matrix has
+[0:57:59] um matrix has a lowering the matrix has a fixed rank
+[0:58:00] a fixed rank and um there's a implicit regularization
+[0:58:03] and um there's a implicit regularization happening through um choosing the rank
+[0:58:07] happening through um choosing the rank um in the synthetic interventions
+[0:58:09] um in the synthetic interventions approach where
+[0:58:10] approach where typically they're assuming a fixed rank
+[0:58:13] typically they're assuming a fixed rank and a low rate
+[0:58:14] and a low rate matrix and they're also making making
+[0:58:16] matrix and they're also making making this additional assumption
+[0:58:17] this additional assumption on uh the uh smallest non
+[0:58:21] on uh the uh smallest non zero singular value um
+[0:58:30] and so one one thing that i also want to point out is
+[0:58:37] in comparison to the matrix completion approach um
+[0:58:38] approach um uh they're not fixing the matrix uh the
+[0:58:43] uh they're not fixing the matrix uh the the size of the rank they're just
+[0:58:44] the size of the rank they're just assuming that the
+[0:58:46] assuming that the um look the matrix uh
+[0:58:49] um look the matrix uh is lorenk
+[0:58:56] so just to offer some final thoughts uh i think the paper does a really good job
+[0:58:58] i think the paper does a really good job in verifying the assumptions uh that are
+[0:59:00] in verifying the assumptions uh that are made through simulations
+[0:59:02] made through simulations and empirical work um so i there's a lot
+[0:59:04] and empirical work um so i there's a lot of assumptions in this paper
+[0:59:06] of assumptions in this paper um so it's really important to point out
+[0:59:08] um so it's really important to point out um
+[0:59:09] um uh when the assumptions are met and when
+[0:59:11] uh when the assumptions are met and when they are failed and
+[0:59:13] they are failed and uh as authors point out in most of the
+[0:59:16] uh as authors point out in most of the in all the cases these assumptions are
+[0:59:18] in all the cases these assumptions are mets in the simulations
+[0:59:20] mets in the simulations and empirical application
+[0:59:24] and empirical application so one question is um is it possible to
+[0:59:27] so one question is um is it possible to extend
+[0:59:28] extend this framework to handle continuous
+[0:59:30] this framework to handle continuous treatments so we just
+[0:59:31] treatments so we just assume that uh the treatments d are
+[0:59:35] assume that uh the treatments d are a discrete number of treatments but uh
+[0:59:38] a discrete number of treatments but uh can they be
+[0:59:39] can they be a continuous value this would be like
+[0:59:42] a continuous value this would be like really interesting for instance
+[0:59:44] really interesting for instance in evaluating the efficacy of of drugs
+[0:59:48] in evaluating the efficacy of of drugs so drugs could take a continuous
+[0:59:51] so drugs could take a continuous value another
+[0:59:54] value another question is how do we incorporate a
+[0:59:57] question is how do we incorporate a treatment model into this approach so in
+[0:59:59] treatment model into this approach so in the
+[0:59:59] the paper by athey at all the majors
+[1:00:01] paper by athey at all the majors completion paper
+[1:00:03] completion paper they propose for instance weighting um
+[1:00:05] they propose for instance weighting um the the training loss by the
+[1:00:08] the the training loss by the inverse propensity score uh weights
+[1:00:11] inverse propensity score uh weights of the controls trying to um
+[1:00:15] of the controls trying to um correct for any distributional
+[1:00:16] correct for any distributional imbalances and so the
+[1:00:18] imbalances and so the ipw weights are estimated using a
+[1:00:20] ipw weights are estimated using a treatment model so i was wondering if
+[1:00:22] treatment model so i was wondering if maybe
+[1:00:23] maybe this framework could do something
+[1:00:26] this framework could do something similarly
+[1:00:27] similarly um
+[1:00:34] in the paper they do mention the idea of extending the paper extending the method
+[1:00:36] extending the paper extending the method to
+[1:00:37] to a staggered treatment scenario so i
+[1:00:40] a staggered treatment scenario so i think that is also really important i
+[1:00:42] think that is also really important i think that's
+[1:00:42] think that's a direction that most of these synthetic
+[1:00:45] a direction that most of these synthetic control
+[1:00:45] control estimators are going and so i think um
+[1:00:48] estimators are going and so i think um currently like not being able to handle
+[1:00:51] currently like not being able to handle uh varying
+[1:00:52] uh varying treatment times is a is a key limitation
+[1:00:55] treatment times is a is a key limitation of the paper
+[1:00:57] of the paper and lastly i want to point out that um
+[1:01:00] and lastly i want to point out that um there are connections made to the
+[1:01:03] there are connections made to the synthetic control
+[1:01:05] synthetic control and econometrics literature and the rct
+[1:01:08] and econometrics literature and the rct literature but there's also this
+[1:01:09] literature but there's also this potential connection to make
+[1:01:12] potential connection to make to the optimal treatment regimes
+[1:01:14] to the optimal treatment regimes literature
+[1:01:16] literature and so in this literature they're trying
+[1:01:19] and so in this literature they're trying to
+[1:01:21] to find what the optimal treatment is
+[1:01:25] find what the optimal treatment is for each individual corresponding to
+[1:01:28] for each individual corresponding to this individual's uh covariance
+[1:01:38] and so there's a idea of optimality that the treatment regime would would lead to
+[1:01:40] the treatment regime would would lead to the best uh outcome on average
+[1:01:42] the best uh outcome on average and so finally my question would be uh
+[1:01:46] and so finally my question would be uh in the synthetic interventions framework
+[1:01:48] in the synthetic interventions framework um
+[1:01:50] um we're considering estimating
+[1:01:52] we're considering estimating counterfactuals without
+[1:01:53] counterfactuals without covariates is there a way to
+[1:01:56] covariates is there a way to personalize treatment or what is the way
+[1:01:59] personalize treatment or what is the way that we can decide what the optimal or
+[1:02:03] that we can decide what the optimal or treatment is for an individual thank you
+[1:02:11] we're running out of time but uh anish and dennis if you want to
+[1:02:12] and dennis if you want to have a couple minutes to respond
+[1:02:20] firstly jason thank you very much for the thoughtful feedback i think
+[1:02:22] the thoughtful feedback i think uh i very much agree with um most things
+[1:02:25] uh i very much agree with um most things you
+[1:02:25] you everything you you say uh i think the
+[1:02:28] everything you you say uh i think the the point of covariates and continuous
+[1:02:30] the point of covariates and continuous treatments i think is a is a really good
+[1:02:32] treatments i think is a is a really good one
+[1:02:33] one and i think one way to get to continuous
+[1:02:35] and i think one way to get to continuous treatments is possibly by covalent
+[1:02:38] treatments is possibly by covalent so say you had covariate data about an
+[1:02:40] so say you had covariate data about an intervention
+[1:02:41] intervention um for example in medicine the
+[1:02:45] um for example in medicine the some coverage of other chemical
+[1:02:46] some coverage of other chemical compounds or the dosage levels
+[1:02:49] compounds or the dosage levels then you could use that information now
+[1:02:51] then you could use that information now to build a counterfactual for a
+[1:02:52] to build a counterfactual for a particular unit
+[1:02:53] particular unit under a dosage that has not been seen by
+[1:02:55] under a dosage that has not been seen by anyone
+[1:02:57] anyone so coverage will be one way of doing
+[1:02:58] so coverage will be one way of doing that and similarly covariates about the
+[1:03:00] that and similarly covariates about the units
+[1:03:01] units could help you ask it could help answer
+[1:03:02] could help you ask it could help answer the question of the counterfactual per
+[1:03:04] the question of the counterfactual per unit for which you observe no data
+[1:03:06] unit for which you observe no data so coverage could be a good way of
+[1:03:08] so coverage could be a good way of personalizing the things that i just
+[1:03:09] personalizing the things that i just have no data about all
+[1:03:10] have no data about all that can be captured by this particular
+[1:03:12] that can be captured by this particular tensor um
+[1:03:14] tensor um so i think that's a really good point i
+[1:03:16] so i think that's a really good point i think another use of covariates is
+[1:03:18] think another use of covariates is as you said is um possibly to make the
+[1:03:21] as you said is um possibly to make the identification argument
+[1:03:22] identification argument more believable because you said there's
+[1:03:24] more believable because you said there's latent factors museum makes a generality
+[1:03:26] latent factors museum makes a generality based on latin factors but maybe there's
+[1:03:28] based on latin factors but maybe there's only extra generally based on the latent
+[1:03:30] only extra generally based on the latent factors
+[1:03:30] factors and the covariates together and so you
+[1:03:32] and the covariates together and so you want to regress on both of them
+[1:03:34] want to regress on both of them in some sense and so we talked about
+[1:03:36] in some sense and so we talked about that in the paper and um
+[1:03:38] that in the paper and um yeah so i i just wanted to agree with
+[1:03:39] yeah so i i just wanted to agree with you then and thank you for the
+[1:03:45] references yeah i also just wanted to thank you
+[1:03:47] yeah i also just wanted to thank you jason i think uh this was extremely
+[1:03:48] jason i think uh this was extremely helpful and really appreciate you you're
+[1:03:50] helpful and really appreciate you you're doing this
+[1:03:51] doing this and anish is a lot more eloquent than me
+[1:03:53] and anish is a lot more eloquent than me so i think he already said everything
+[1:03:54] so i think he already said everything very well
+[1:03:55] very well but um also thank you for also the
+[1:03:57] but um also thank you for also the references i think we should
+[1:03:59] references i think we should we definitely do a better job in our
+[1:04:00] we definitely do a better job in our next iteration of putting in those other
+[1:04:02] next iteration of putting in those other citations as well thank you
+[1:04:10] all right thank you all for thank you both of nation danish for the
+[1:04:11] both of nation danish for the great presentation and jason for the
+[1:04:13] great presentation and jason for the discussion um
+[1:04:15] discussion um next week we have another one of our phd
+[1:04:17] next week we have another one of our phd days we will have two presenters
+[1:04:19] days we will have two presenters uh the first one will be maggie mccar
+[1:04:21] uh the first one will be maggie mccar from mit
+[1:04:22] from mit and the second will be xiao ji mao from
+[1:04:25] and the second will be xiao ji mao from cornell we look forward to seeing you
+[1:04:27] cornell we look forward to seeing you there
+[1:04:30] thank you again thank you thank you

@@ -1,0 +1,1527 @@
+[0:00:06] Hey uh welcome everyone to another session of online cos inference seminar.
+[0:00:08] session of online cos inference seminar. Today's format is a young researcher
+[0:00:10] Today's format is a young researcher seminar format where we would have two
+[0:00:12] seminar format where we would have two speakers each would have about 25 to 30
+[0:00:15] speakers each would have about 25 to 30 minutes um allowing for Q&amp;A and our
+[0:00:18] minutes um allowing for Q&amp;A and our first speaker is Drago Pledgeko from
+[0:00:21] first speaker is Drago Pledgeko from Columbia University talking about
+[0:00:22] Columbia University talking about monotonicity and graphical causal models
+[0:00:24] monotonicity and graphical causal models and algorithmic approach and our second
+[0:00:27] and algorithmic approach and our second speaker is Digo from Harvard University
+[0:00:29] speaker is Digo from Harvard University talking about harnessing causality in
+[0:00:31] talking about harnessing causality in online reinforcement learning for
+[0:00:32] online reinforcement learning for digital interventions. Today's Q&amp;A will
+[0:00:35] digital interventions. Today's Q&amp;A will be handled by Sarah, so I'll pass the
+[0:00:36] be handled by Sarah, so I'll pass the mic to her.
+[0:00:40] mic to her. Thank you, Razi. This is just to remind
+[0:00:41] Thank you, Razi. This is just to remind you to please use the Q&amp;A and we will um
+[0:00:45] you to please use the Q&amp;A and we will um I will read actually the Q&amp;A questions
+[0:00:48] I will read actually the Q&amp;A questions out loud at the end of the talks and
+[0:00:50] out loud at the end of the talks and then the speakers will answer them. So,
+[0:00:54] then the speakers will answer them. So, please use the Q&amp;A function. So, now
+[0:00:57] please use the Q&amp;A function. So, now without further ado, I will leave the
+[0:00:59] without further ado, I will leave the floor to
+[0:01:01] floor to Drago. Right.
+[0:01:04] Drago. Right. Good. Thank you. First of all, uh thanks
+[0:01:07] Good. Thank you. First of all, uh thanks for the invitation. It's very nice to be
+[0:01:09] for the invitation. It's very nice to be here and be speaking about our work on
+[0:01:11] here and be speaking about our work on monotonicity. So my name is Drago. I'm
+[0:01:13] monotonicity. So my name is Drago. I'm I'm currently a postoc in Colombia
+[0:01:16] I'm currently a postoc in Colombia computer science in the causal AI lab
+[0:01:19] computer science in the causal AI lab working with with professor leas baron
+[0:01:21] working with with professor leas baron boy. So uh I want to share two pointers
+[0:01:23] boy. So uh I want to share two pointers before I begin. So there are two two two
+[0:01:26] before I begin. So there are two two two sort of um technical reports that you
+[0:01:28] sort of um technical reports that you can look at. First is a technical note
+[0:01:30] can look at. First is a technical note which is very related to the
+[0:01:32] which is very related to the presentation today and the second is the
+[0:01:34] presentation today and the second is the full paper that came out in triple AI
+[0:01:36] full paper that came out in triple AI this year that has all of the formal
+[0:01:38] this year that has all of the formal results on
+[0:01:40] results on monotonicity. Okay, good. So the first
+[0:01:43] monotonicity. Okay, good. So the first thing that I want to discuss I want to
+[0:01:44] thing that I want to discuss I want to put a bit of context on the topic that
+[0:01:46] put a bit of context on the topic that we're studying and mention why we're
+[0:01:47] we're studying and mention why we're trying to study this and what is the
+[0:01:49] trying to study this and what is the sort of bigger picture behind behind all
+[0:01:51] sort of bigger picture behind behind all of this. And what I want to start with,
+[0:01:53] of this. And what I want to start with, I want to start with this very familiar
+[0:01:55] I want to start with this very familiar notion to a lot of people studying
+[0:01:56] notion to a lot of people studying causal inference of identifying causal
+[0:01:58] causal inference of identifying causal effects. And what I'm going to talk
+[0:02:00] effects. And what I'm going to talk about, I'm going to talk about the uh
+[0:02:02] about, I'm going to talk about the uh what I call an identification spectrum
+[0:02:04] what I call an identification spectrum and different types of classes of
+[0:02:06] and different types of classes of problems that exist in in
+[0:02:07] problems that exist in in identification. So what I'm going to
+[0:02:09] identification. So what I'm going to start with I'm going to start with
+[0:02:10] start with I'm going to start with nonparametric identification which which
+[0:02:13] nonparametric identification which which is a setting in which we avoid any
+[0:02:15] is a setting in which we avoid any assumption on the functional mechanisms
+[0:02:16] assumption on the functional mechanisms that we have. Right? We're trying to
+[0:02:18] that we have. Right? We're trying to place no functional assumptions at all
+[0:02:20] place no functional assumptions at all and perform causal effects on
+[0:02:22] and perform causal effects on identification in this setting. Right?
+[0:02:24] identification in this setting. Right? And there are some famous methods that
+[0:02:25] And there are some famous methods that have been developed over over the years
+[0:02:27] have been developed over over the years for this specific setting. One very
+[0:02:30] for this specific setting. One very well-known method that allows for
+[0:02:32] well-known method that allows for identification of causal effects in a
+[0:02:33] identification of causal effects in a nonparametric setting is is is
+[0:02:36] nonparametric setting is is is conditional ignorability, right?
+[0:02:37] conditional ignorability, right? Starting in the in the ' 70s. And there
+[0:02:39] Starting in the in the ' 70s. And there have been many many additional methods
+[0:02:41] have been many many additional methods related to the to conditional
+[0:02:43] related to the to conditional ignorability extending this in different
+[0:02:45] ignorability extending this in different settings. One worth mentioning is the
+[0:02:47] settings. One worth mentioning is the backd dooror criterion developed uh
+[0:02:49] backd dooror criterion developed uh developed by by Judea Pearl and of
+[0:02:51] developed by by Judea Pearl and of course further further graphical
+[0:02:52] course further further graphical extensions of this have been developed
+[0:02:54] extensions of this have been developed as well. For example, the front door
+[0:02:56] as well. For example, the front door criterion falls under this umbrella as
+[0:02:58] criterion falls under this umbrella as well. And generally the the rules of of
+[0:03:01] well. And generally the the rules of of do calculus developed in the '9s. They
+[0:03:03] do calculus developed in the '9s. They can also be thought of as tools for for
+[0:03:05] can also be thought of as tools for for allowing for nonparametric
+[0:03:07] allowing for nonparametric identification. Finally, nowadays we
+[0:03:09] identification. Finally, nowadays we know that we have complete algorithms,
+[0:03:11] know that we have complete algorithms, right? we we have several complete
+[0:03:13] right? we we have several complete algorithms for identification of of of
+[0:03:16] algorithms for identification of of of causal effects in this nonparametric
+[0:03:18] causal effects in this nonparametric identification setting. Uh so that's
+[0:03:20] identification setting. Uh so that's great. So this problem has been to a
+[0:03:21] great. So this problem has been to a large degree closed. Many of the results
+[0:03:23] large degree closed. Many of the results are known. They're interesting
+[0:03:24] are known. They're interesting estimation questions still. But the
+[0:03:26] estimation questions still. But the point of this talk is not not to go into
+[0:03:27] point of this talk is not not to go into estimation. We're going to be talking
+[0:03:29] estimation. We're going to be talking mainly about identification. Now on the
+[0:03:31] mainly about identification. Now on the opposite end of this spectrum, we have
+[0:03:33] opposite end of this spectrum, we have this setting in which we are placing as
+[0:03:35] this setting in which we are placing as many assumptions, the strongest
+[0:03:36] many assumptions, the strongest assumptions possible, right, on our
+[0:03:38] assumptions possible, right, on our functional mechanisms. And here I I
+[0:03:40] functional mechanisms. And here I I specifically want to mention the linear
+[0:03:42] specifically want to mention the linear Gaussian identification case. Right? So
+[0:03:44] Gaussian identification case. Right? So in this setting, one of the first
+[0:03:46] in this setting, one of the first methods going back even to Gaus I guess
+[0:03:48] methods going back even to Gaus I guess end of the end of the 18th century is
+[0:03:50] end of the end of the 18th century is just causal regression. Right? So if we
+[0:03:52] just causal regression. Right? So if we regress things properly and the
+[0:03:53] regress things properly and the mechanisms are linear, we can recover
+[0:03:55] mechanisms are linear, we can recover causal effects in a very simple way.
+[0:03:57] causal effects in a very simple way. Right? In the 50s in the econometrics
+[0:03:59] Right? In the 50s in the econometrics literature extensions of this for very
+[0:04:02] literature extensions of this for very interesting cases such as instrumental
+[0:04:04] interesting cases such as instrumental variables have been developed. Right? So
+[0:04:05] variables have been developed. Right? So this is another another tool that you
+[0:04:07] this is another another tool that you can think of for linear linear
+[0:04:09] can think of for linear linear identification. Um beyond this there
+[0:04:11] identification. Um beyond this there have been there has been a lot of work
+[0:04:13] have been there has been a lot of work actually on this topic in the in the in
+[0:04:14] actually on this topic in the in the in the in the graphical side in the
+[0:04:16] the in the graphical side in the graphical literature on causal
+[0:04:17] graphical literature on causal inference. So people have developed this
+[0:04:19] inference. So people have developed this methodology of instrumental sets. Uh
+[0:04:21] methodology of instrumental sets. Uh people have developed auxiliary
+[0:04:23] people have developed auxiliary variables and finally half tracks right
+[0:04:26] variables and finally half tracks right these are a couple of methods that are
+[0:04:27] these are a couple of methods that are very very powerful for linear effect
+[0:04:29] very very powerful for linear effect identification and actually this
+[0:04:31] identification and actually this question is almost close. So actually
+[0:04:34] question is almost close. So actually there's an algorithm that can recover
+[0:04:36] there's an algorithm that can recover that is complete but it is actually like
+[0:04:38] that is complete but it is actually like very slow computationally but in what
+[0:04:40] very slow computationally but in what what I'm trying to convey is there's a
+[0:04:42] what I'm trying to convey is there's a lot of work in in linear Gaussian
+[0:04:44] lot of work in in linear Gaussian identification on the other end of this
+[0:04:46] identification on the other end of this of this spectrum now the question is
+[0:04:48] of this spectrum now the question is what is in between right and has has
+[0:04:51] what is in between right and has has have the topics in between been studied
+[0:04:52] have the topics in between been studied well and and is there anything that we
+[0:04:54] well and and is there anything that we can do and what I want to mention there
+[0:04:56] can do and what I want to mention there h there are some topics that are in
+[0:04:58] h there are some topics that are in between which have been well studied for
+[0:05:00] between which have been well studied for example additive no noise models so
+[0:05:02] example additive no noise models so people have studied additive noise
+[0:05:03] people have studied additive noise models. But what what we really want to
+[0:05:05] models. But what what we really want to focus on in this talk, we want to talk
+[0:05:07] focus on in this talk, we want to talk about shape constraint identification
+[0:05:08] about shape constraint identification and interparticular monotonicity in our
+[0:05:10] and interparticular monotonicity in our context. And then there is a seed like
+[0:05:12] context. And then there is a seed like like previously there's a very
+[0:05:14] like previously there's a very well-known result from from 1995 from
+[0:05:17] well-known result from from 1995 from from Angress and Imbance and and the
+[0:05:19] from Angress and Imbance and and the latter author is actually one of the
+[0:05:20] latter author is actually one of the organizers of the of the of the online
+[0:05:22] organizers of the of the of the online causal inference seminar. So there
+[0:05:24] causal inference seminar. So there there's this notion of of of using
+[0:05:26] there's this notion of of of using monotonicity to estimate local average
+[0:05:28] monotonicity to estimate local average treatment effects, right? So this is one
+[0:05:29] treatment effects, right? So this is one of the key results that shows that we
+[0:05:31] of the key results that shows that we can use monotonicity to to to improve
+[0:05:34] can use monotonicity to to to improve causal effect identification. So in this
+[0:05:36] causal effect identification. So in this talk what we're going to do is we're
+[0:05:37] talk what we're going to do is we're going to try to extend these ideas of
+[0:05:39] going to try to extend these ideas of using monotonicity and create an
+[0:05:40] using monotonicity and create an algorithmic approach for doing so.
+[0:05:42] algorithmic approach for doing so. Right? This is our this is our whole
+[0:05:43] Right? This is our this is our whole goal. And before I go into the
+[0:05:45] goal. And before I go into the algorithmic approach I just want to
+[0:05:46] algorithmic approach I just want to recover this setting of local average
+[0:05:48] recover this setting of local average treatment effects or late and I just
+[0:05:50] treatment effects or late and I just want to give you an example for those in
+[0:05:52] want to give you an example for those in the audience who may not be familiar
+[0:05:53] the audience who may not be familiar with this. And I I I guess this is these
+[0:05:56] with this. And I I I guess this is these are these results are really wellnown
+[0:05:57] are these results are really wellnown but I will just recap them uh for for
+[0:06:00] but I will just recap them uh for for the for the completeness of the talk. So
+[0:06:02] the for the completeness of the talk. So what we're trying to do and I'll start
+[0:06:04] what we're trying to do and I'll start with an example. So what we're trying to
+[0:06:05] with an example. So what we're trying to analyze we're trying to analyze u
+[0:06:07] analyze we're trying to analyze u outcome an outcome which could be job
+[0:06:09] outcome an outcome which could be job performance or or a salary or something
+[0:06:11] performance or or a salary or something along these lines and we're interested
+[0:06:13] along these lines and we're interested in whether a participation in a job
+[0:06:15] in whether a participation in a job training program improves uh performance
+[0:06:17] training program improves uh performance or or or or the salary of the
+[0:06:19] or or or or the salary of the individual. Right? And so treatment X
+[0:06:22] individual. Right? And so treatment X participation is is is is is right
+[0:06:25] participation is is is is is right treatment X treatment is labeled X and
+[0:06:27] treatment X treatment is labeled X and the outcome is labeled Y. In this
+[0:06:29] the outcome is labeled Y. In this setting what what we have we have access
+[0:06:31] setting what what we have we have access to an instrument which tells us whether
+[0:06:33] to an instrument which tells us whether the person was invited to a job training
+[0:06:35] the person was invited to a job training program. Right? So it's not
+[0:06:36] program. Right? So it's not participation but an invitation. So what
+[0:06:38] participation but an invitation. So what this what this gives us it gives us this
+[0:06:39] this what this gives us it gives us this graph in the right. So zed is pointing
+[0:06:41] graph in the right. So zed is pointing to X and X is pointing to Y. Crucially
+[0:06:44] to X and X is pointing to Y. Crucially there could be unobserved confounders
+[0:06:45] there could be unobserved confounders between X and Y right that we don't have
+[0:06:47] between X and Y right that we don't have access to. And what we would ideally
+[0:06:49] access to. And what we would ideally want we we won't want to estimate some
+[0:06:51] want we we won't want to estimate some kind of a causal effect from from X to Y
+[0:06:53] kind of a causal effect from from X to Y in this in this IV setting. Now the
+[0:06:55] in this in this IV setting. Now the first result that we can mention we can
+[0:06:57] first result that we can mention we can look at the average treatment effect the
+[0:06:59] look at the average treatment effect the AT. So in my notation subscript denotes
+[0:07:02] AT. So in my notation subscript denotes the potential outcome. So this is a
+[0:07:04] the potential outcome. So this is a potential outcome of Y subscript X if if
+[0:07:07] potential outcome of Y subscript X if if we were setting X to be equal to one
+[0:07:10] we were setting X to be equal to one versus setting X to be equal to zero.
+[0:07:12] versus setting X to be equal to zero. Right? So with the first result that is
+[0:07:13] Right? So with the first result that is negative is that in this setting under
+[0:07:15] negative is that in this setting under in the fairly general setting we cannot
+[0:07:17] in the fairly general setting we cannot identify this average hidden effect
+[0:07:18] identify this average hidden effect right this is not doable. Now what what
+[0:07:21] right this is not doable. Now what what is sort of nice and what is the result
+[0:07:23] is sort of nice and what is the result of of of angress and imbance from 95 is
+[0:07:25] of of of angress and imbance from 95 is that actually for a subgroup of of the
+[0:07:27] that actually for a subgroup of of the population this can actually be
+[0:07:29] population this can actually be identified and there's a specific
+[0:07:30] identified and there's a specific subgroup that we that we will condition
+[0:07:32] subgroup that we that we will condition on for which the total effect can be
+[0:07:34] on for which the total effect can be identified right and this subgroup is
+[0:07:36] identified right and this subgroup is usually referred to as the compliers
+[0:07:37] usually referred to as the compliers group. So what that means it means that
+[0:07:39] group. So what that means it means that the potential outcome if we set uh zed
+[0:07:42] the potential outcome if we set uh zed to zero of x equals zero whereas if we
+[0:07:45] to zero of x equals zero whereas if we set zed to one uh x equals one right so
+[0:07:48] set zed to one uh x equals one right so what this means is that if people are uh
+[0:07:50] what this means is that if people are uh for for these individuals if people are
+[0:07:52] for for these individuals if people are invited to the job job training program
+[0:07:54] invited to the job job training program they will actually attend but if they're
+[0:07:56] they will actually attend but if they're not invited they will not attend right
+[0:07:57] not invited they will not attend right so this is the group of individuals and
+[0:07:59] so this is the group of individuals and now the key result is that this actually
+[0:08:01] now the key result is that this actually effect is identifiable but we need an
+[0:08:03] effect is identifiable but we need an additional assumption and this
+[0:08:04] additional assumption and this assumption is that the effect of zed on
+[0:08:06] assumption is that the effect of zed on x is actually monotonic And by monotonic
+[0:08:08] x is actually monotonic And by monotonic what we mean is that if we change zed
+[0:08:10] what we mean is that if we change zed from 0ero to one it can only increase
+[0:08:12] from 0ero to one it can only increase the value of x. Right? So as I mentioned
+[0:08:15] the value of x. Right? So as I mentioned previously this is where this is where
+[0:08:17] previously this is where this is where the the this result first appears in the
+[0:08:19] the the this result first appears in the literature. Now I want to roughly go and
+[0:08:23] literature. Now I want to roughly go and just to conclude right so what we see
+[0:08:25] just to conclude right so what we see here is that under monotonicity actually
+[0:08:27] here is that under monotonicity actually queries that are actually
+[0:08:28] queries that are actually nonidentifiable in general can become
+[0:08:30] nonidentifiable in general can become identifiable right which is very useful.
+[0:08:32] identifiable right which is very useful. So for these so these shape constraints
+[0:08:34] So for these so these shape constraints can help identification. Now what I want
+[0:08:36] can help identification. Now what I want to go through quickly just to give you
+[0:08:38] to go through quickly just to give you an idea of what is used in this proof. I
+[0:08:40] an idea of what is used in this proof. I just want to recap the proof of of of
+[0:08:41] just want to recap the proof of of of local average treatment effects. So how
+[0:08:43] local average treatment effects. So how do we show this and this proof is
+[0:08:44] do we show this and this proof is actually quite clever. You need to to be
+[0:08:47] actually quite clever. You need to to be able to spot this actually like is is a
+[0:08:49] able to spot this actually like is is a very good insight coming from the
+[0:08:51] very good insight coming from the literature. Now what we're going to
+[0:08:52] literature. Now what we're going to start with to identify this query Q in
+[0:08:54] start with to identify this query Q in the top we're going to look at this
+[0:08:56] the top we're going to look at this conditional difference of Y given Z
+[0:08:58] conditional difference of Y given Z equals 1 minus Y given Z equals 0. And
+[0:09:01] equals 1 minus Y given Z equals 0. And in the first step, we're just going to
+[0:09:02] in the first step, we're just going to use the consistency axiom to rewrite
+[0:09:04] use the consistency axiom to rewrite this to rewrite the y outcome. Right? So
+[0:09:06] this to rewrite the y outcome. Right? So this is using the consistency axum in
+[0:09:08] this is using the consistency axum in the first step which is which is which
+[0:09:10] the first step which is which is which is right. This is this is a well-known
+[0:09:13] is right. This is this is a well-known well-known well understood step the
+[0:09:15] well-known well understood step the consistency axium. Then after this uh
+[0:09:17] consistency axium. Then after this uh what we can do and this is actually an
+[0:09:19] what we can do and this is actually an assumption that is coming from the
+[0:09:20] assumption that is coming from the graphical model. So based on on some uh
+[0:09:23] graphical model. So based on on some uh conditional independencies in this case
+[0:09:24] conditional independencies in this case inclus exclusion restriction. So y subx
+[0:09:27] inclus exclusion restriction. So y subx and x subzed these these potential
+[0:09:30] and x subzed these these potential outcomes are actually independent from
+[0:09:32] outcomes are actually independent from from from zed uh itself. So we can see
+[0:09:35] from from zed uh itself. So we can see this derive this from the from the
+[0:09:36] this derive this from the from the graphical model or we can assume this
+[0:09:38] graphical model or we can assume this right which is which is also commonly
+[0:09:40] right which is which is also commonly done and then what that allows us to do
+[0:09:42] done and then what that allows us to do right this zed equals 1 and zed equals z
+[0:09:44] right this zed equals 1 and zed equals z behind the bar can be removed. uh after
+[0:09:47] behind the bar can be removed. uh after this we just need to rewrite this
+[0:09:48] this we just need to rewrite this expression right so this is just
+[0:09:50] expression right so this is just reorganizing and rewriting this
+[0:09:51] reorganizing and rewriting this expression in a specific way and then
+[0:09:53] expression in a specific way and then finally what we can do is we can just
+[0:09:55] finally what we can do is we can just use the law of total probability right
+[0:09:57] use the law of total probability right so what we have here we have a
+[0:09:58] so what we have here we have a multiplication right of of differences
+[0:10:00] multiplication right of of differences in potential outcome at x with
+[0:10:02] in potential outcome at x with differences in potential potential
+[0:10:03] differences in potential potential outcomes in y and what we can
+[0:10:05] outcomes in y and what we can distinguish we can distinguish two cases
+[0:10:07] distinguish we can distinguish two cases right when x subz 1 - x subz equals 1
+[0:10:11] right when x subz 1 - x subz equals 1 and when it equals minus one right
+[0:10:13] and when it equals minus one right because these are the only two cases
+[0:10:14] because these are the only two cases where this the this random variable
+[0:10:16] where this the this random variable inside the brackets is non zero and what
+[0:10:18] inside the brackets is non zero and what we can just use the the law of total
+[0:10:20] we can just use the the law of total probability right to do this and now is
+[0:10:22] probability right to do this and now is where the now is the crucial step in
+[0:10:24] where the now is the crucial step in which monotonicity takes sort of becomes
+[0:10:27] which monotonicity takes sort of becomes important. So what we can do is we can
+[0:10:29] important. So what we can do is we can see that this second term under
+[0:10:30] see that this second term under monotonicity is actually zero right
+[0:10:33] monotonicity is actually zero right because x subz 1 minus x subz can never
+[0:10:36] because x subz 1 minus x subz can never be negative because under the
+[0:10:37] be negative because under the monotonicity assumption we know that x
+[0:10:39] monotonicity assumption we know that x subz 1 is always always strictly greater
+[0:10:41] subz 1 is always always strictly greater than x subzero right so what that allows
+[0:10:44] than x subzero right so what that allows us to do is to remove this term entirely
+[0:10:46] us to do is to remove this term entirely and now what is nice we have our query
+[0:10:48] and now what is nice we have our query here right in in the in the right hand
+[0:10:50] here right in in the in the right hand side and what we just need to do is we
+[0:10:51] side and what we just need to do is we need to divide everything by by this so
+[0:10:53] need to divide everything by by this so what this implies that we get a very
+[0:10:55] what this implies that we get a very nice identification expression right for
+[0:10:57] nice identification expression right for the for the local average treatment
+[0:10:59] the for the local average treatment effect in this specific setting when we
+[0:11:01] effect in this specific setting when we use monotonicity through these steps
+[0:11:03] use monotonicity through these steps right the key question for us is like
+[0:11:05] right the key question for us is like can we generalize this right can we make
+[0:11:07] can we generalize this right can we make this proof technique automated and can
+[0:11:09] this proof technique automated and can we extend this to arbitrary
+[0:11:10] we extend this to arbitrary counterfactual queries under
+[0:11:12] counterfactual queries under monotonicity and the answer is yes which
+[0:11:14] monotonicity and the answer is yes which is very nice so I'm going to talk about
+[0:11:15] is very nice so I'm going to talk about talk about this next okay so so how do
+[0:11:19] talk about this next okay so so how do we how do we make this into a general
+[0:11:21] we how do we make this into a general algorithmic approach right so what are
+[0:11:22] algorithmic approach right so what are the key ingredients and how are we going
+[0:11:24] the key ingredients and how are we going to combine this to have a general
+[0:11:26] to combine this to have a general algorithmic approach identification
+[0:11:27] algorithmic approach identification under monotonicity. So let's introduce
+[0:11:29] under monotonicity. So let's introduce some notation. So let W be a binary
+[0:11:31] some notation. So let W be a binary variable. Uh T will be a set of
+[0:11:34] variable. Uh T will be a set of monotonic parents of S. I'm going to say
+[0:11:36] monotonic parents of S. I'm going to say in a second what that means. And S is a
+[0:11:38] in a second what that means. And S is a set of non-monotonic parents of W. Okay.
+[0:11:41] set of non-monotonic parents of W. Okay. So graphically this is exactly what is
+[0:11:42] So graphically this is exactly what is happening. So here S and T are are are
+[0:11:46] happening. So here S and T are are are possibly multi-dimensional. They don't
+[0:11:47] possibly multi-dimensional. They don't have to be univariat. And what what the
+[0:11:49] have to be univariat. And what what the plus here signifies it encodes a
+[0:11:51] plus here signifies it encodes a monotonicity constraint. Right? So in a
+[0:11:53] monotonicity constraint. Right? So in a graphical model we would add a plus over
+[0:11:55] graphical model we would add a plus over an edge to encode a monotonicity
+[0:11:56] an edge to encode a monotonicity constraint. Now what the monotonicity
+[0:11:58] constraint. Now what the monotonicity constraint says is the following right.
+[0:12:00] constraint says is the following right. So we are comparing two potential
+[0:12:01] So we are comparing two potential outcomes w
+[0:12:04] outcomes w subt versus w subt prime s right and
+[0:12:08] subt versus w subt prime s right and what is important is that t and t prime
+[0:12:10] what is important is that t and t prime we're thinking of these two values as
+[0:12:11] we're thinking of these two values as being ordered. So pointwise t is
+[0:12:13] being ordered. So pointwise t is actually smaller than t prime. Okay. And
+[0:12:16] actually smaller than t prime. Okay. And what we what monotonicity means the
+[0:12:18] what we what monotonicity means the assumption is en coding that there's an
+[0:12:20] assumption is en coding that there's an inequality right because t is smaller
+[0:12:22] inequality right because t is smaller than than t prime pointwise we always
+[0:12:24] than than t prime pointwise we always know that the potential outcome with t
+[0:12:27] know that the potential outcome with t is going to be smaller than the one with
+[0:12:28] is going to be smaller than the one with t prime right and what is important is
+[0:12:30] t prime right and what is important is this holds for every unit of the
+[0:12:32] this holds for every unit of the population right so u for us encodes a
+[0:12:34] population right so u for us encodes a unit of the population which you can
+[0:12:36] unit of the population which you can think of as an individual right so this
+[0:12:37] think of as an individual right so this is what the monotonicity uh constraint
+[0:12:40] is what the monotonicity uh constraint is encoding algebraically and this is
+[0:12:42] is encoding algebraically and this is how we're going to annotate this in the
+[0:12:44] how we're going to annotate this in the in the causal diagram with a us. Now,
+[0:12:46] in the causal diagram with a us. Now, what we what we can use and here is here
+[0:12:48] what we what we can use and here is here is the first sort of set of ideas of how
+[0:12:50] is the first sort of set of ideas of how to approach this is we're going to
+[0:12:52] to approach this is we're going to develop so-called monotonicity reduction
+[0:12:54] develop so-called monotonicity reduction rules. Okay? And I'm going to explain
+[0:12:56] rules. Okay? And I'm going to explain exactly what the two monotonicity
+[0:12:58] exactly what the two monotonicity reduction rules are. One is called the
+[0:13:00] reduction rules are. One is called the simplification rule and the second is
+[0:13:02] simplification rule and the second is called the difference rule. So they're
+[0:13:03] called the difference rule. So they're given here um in terms of uh in terms of
+[0:13:06] given here um in terms of uh in terms of the algebra which could be a bit a bit I
+[0:13:09] the algebra which could be a bit a bit I think hard to parse at first but let's
+[0:13:11] think hard to parse at first but let's look at this. actually these rules are
+[0:13:12] look at this. actually these rules are quite simple and we're going to provide
+[0:13:13] quite simple and we're going to provide the intuition to understand exactly what
+[0:13:15] the intuition to understand exactly what these rules are trying to say. So for
+[0:13:17] these rules are trying to say. So for let's look at simplification rules
+[0:13:18] let's look at simplification rules first. So there's two simplification
+[0:13:20] first. So there's two simplification rules and let's look at the
+[0:13:21] rules and let's look at the simplification rule number one. Okay. Uh
+[0:13:24] simplification rule number one. Okay. Uh so I'm I'm going to give you the
+[0:13:25] so I'm I'm going to give you the intuition for for for rule S1. So what
+[0:13:28] intuition for for for rule S1. So what we know uh under under this monotonicity
+[0:13:31] we know uh under under this monotonicity assumption actually we know that if w
+[0:13:35] assumption actually we know that if w subt is equal to zero we know that this
+[0:13:38] subt is equal to zero we know that this implies that w subt s is also equal to
+[0:13:42] implies that w subt s is also equal to zero. Okay so this is this is some kind
+[0:13:44] zero. Okay so this is this is some kind of some kind of a sandwiching of one of
+[0:13:46] of some kind of a sandwiching of one of the potential outcomes based on the
+[0:13:48] the potential outcomes based on the monotonicity constraint that we have
+[0:13:49] monotonicity constraint that we have right and what that allows us to do if
+[0:13:51] right and what that allows us to do if we go to the simplification rule number
+[0:13:53] we go to the simplification rule number one. So here y substar is an arbitrary
+[0:13:57] one. So here y substar is an arbitrary counterfactual right that has nothing to
+[0:13:59] counterfactual right that has nothing to do or doesn't have to do doesn't have to
+[0:14:01] do or doesn't have to do doesn't have to have anything to do with with w and what
+[0:14:03] have anything to do with with w and what we have here is we have a distribution
+[0:14:06] we have here is we have a distribution over the over the joint uh joint joint
+[0:14:09] over the over the joint uh joint joint outcomes right uh joint counterfactuals
+[0:14:12] outcomes right uh joint counterfactuals outcomes right now using this
+[0:14:13] outcomes right now using this implication here what we can do is we
+[0:14:15] implication here what we can do is we can drop one of these terms from the
+[0:14:17] can drop one of these terms from the from the from the probability term right
+[0:14:19] from the from the probability term right so this rule will allow us to reduce
+[0:14:22] so this rule will allow us to reduce this left hand side to the right hand
+[0:14:24] this left hand side to the right hand side, right? And an analogous
+[0:14:26] side, right? And an analogous monotonicity constraint actually can use
+[0:14:28] monotonicity constraint actually can use be rule used in the same way for S2,
+[0:14:30] be rule used in the same way for S2, right? So this is you can think of this
+[0:14:32] right? So this is you can think of this this as a simplification rule of of of
+[0:14:34] this as a simplification rule of of of of using monotonicity. Now the second
+[0:14:37] of using monotonicity. Now the second set of rules what we call the difference
+[0:14:39] set of rules what we call the difference rule are very similar but we're we're
+[0:14:41] rule are very similar but we're we're we're we're on top of on top of uh using
+[0:14:44] we're we're on top of on top of uh using monotonicity we're also just applying
+[0:14:46] monotonicity we're also just applying the law of total probability. Right? So
+[0:14:48] the law of total probability. Right? So what we know is we know that this term
+[0:14:50] what we know is we know that this term this term P of WT comma S= 1 and W T
+[0:14:55] this term P of WT comma S= 1 and W T prime comma S equals 0 that this is
+[0:14:57] prime comma S equals 0 that this is always zero right this is direct implica
+[0:15:00] always zero right this is direct implica sort of implication of of monotonicity
+[0:15:03] sort of implication of of monotonicity and by by by using this this insight
+[0:15:06] and by by by using this this insight that this this term is zero and using
+[0:15:08] that this this term is zero and using the law of total probability we can
+[0:15:10] the law of total probability we can actually prove the two difference rules
+[0:15:11] actually prove the two difference rules here right so what we're starting with
+[0:15:13] here right so what we're starting with we're starting on the left hand side
+[0:15:15] we're starting on the left hand side with a with a with a clause which has a
+[0:15:17] with a with a with a clause which has a joint distribution of a counterfactual
+[0:15:19] joint distribution of a counterfactual outcomes and we're using this this
+[0:15:21] outcomes and we're using this this difference rule to arrive at a
+[0:15:23] difference rule to arrive at a difference of two things where where
+[0:15:24] difference of two things where where this joint the distribution of a
+[0:15:26] this joint the distribution of a counterfactual outcomes disappears.
+[0:15:28] counterfactual outcomes disappears. Okay, which is very nice, right? So what
+[0:15:29] Okay, which is very nice, right? So what these rules allow us to do, they allow
+[0:15:31] these rules allow us to do, they allow us to go from the joint over
+[0:15:33] us to go from the joint over counterfactual outcomes which is very
+[0:15:35] counterfactual outcomes which is very very hard to identify, right? In general
+[0:15:37] very hard to identify, right? In general in causal inference and what we end up
+[0:15:39] in causal inference and what we end up with is a no joint, right? So this is
+[0:15:41] with is a no joint, right? So this is the this is in some sense the dream,
+[0:15:42] the this is in some sense the dream, right? So we're reducing these
+[0:15:44] right? So we're reducing these expressions into something that is more
+[0:15:46] expressions into something that is more easily identifiable. Now what is very
+[0:15:48] easily identifiable. Now what is very nice is that actually these monotonicity
+[0:15:50] nice is that actually these monotonicity reduction rules they interplay very
+[0:15:52] reduction rules they interplay very nicely with the general machinery for
+[0:15:54] nicely with the general machinery for counterfactual identification. I will
+[0:15:56] counterfactual identification. I will not go over all of the details in this.
+[0:15:58] not go over all of the details in this. I will give you like a highle summary of
+[0:16:00] I will give you like a highle summary of how counterfactual identification works.
+[0:16:03] how counterfactual identification works. So what we what we begin with we begin
+[0:16:05] So what we what we begin with we begin with a query Q and I what I'm going to
+[0:16:07] with a query Q and I what I'm going to look at I'm going to look at a specific
+[0:16:09] look at I'm going to look at a specific query that is directly related to to to
+[0:16:12] query that is directly related to to to local average treatment effects. Right?
+[0:16:13] local average treatment effects. Right? So let's assume that Y is actually
+[0:16:15] So let's assume that Y is actually binary for simplicity. It doesn't have
+[0:16:17] binary for simplicity. It doesn't have to be but let's assume this and what
+[0:16:19] to be but let's assume this and what we're trying to understand is we're
+[0:16:20] we're trying to understand is we're trying to compute the probability of y
+[0:16:21] trying to compute the probability of y subx1 being equal to one and comma the
+[0:16:25] subx1 being equal to one and comma the the the unit being a complier right and
+[0:16:28] the the unit being a complier right and what we start with in in this general
+[0:16:29] what we start with in in this general algorithmic approach there's a first
+[0:16:31] algorithmic approach there's a first step that is related to query cleaning
+[0:16:33] step that is related to query cleaning so there's a lot that you can read about
+[0:16:35] so there's a lot that you can read about this in in some some other papers coming
+[0:16:37] this in in some some other papers coming from the causal AI lab or some previous
+[0:16:38] from the causal AI lab or some previous papers as well but in our case actually
+[0:16:41] papers as well but in our case actually query cleaning is is void we don't
+[0:16:43] query cleaning is is void we don't really need to perform any query
+[0:16:44] really need to perform any query cleaning now in the second step what we
+[0:16:46] cleaning now in the second step what we can do is we can actually use the
+[0:16:48] can do is we can actually use the monotonicity reduction lema on this term
+[0:16:50] monotonicity reduction lema on this term that we have. Right? So what that's what
+[0:16:52] that we have. Right? So what that's what that's going to give us we're actually
+[0:16:53] that's going to give us we're actually going to break down this this this this
+[0:16:55] going to break down this this this this term that looks quite difficult into two
+[0:16:57] term that looks quite difficult into two terms. Right? One is uh the the
+[0:17:00] terms. Right? One is uh the the probability of y subx1 being equal to
+[0:17:02] probability of y subx1 being equal to one comma x subz1 being equal to one and
+[0:17:05] one comma x subz1 being equal to one and the second term is the same but x has a
+[0:17:08] the second term is the same but x has a subscript of zero. Right? So if you go
+[0:17:10] subscript of zero. Right? So if you go back to the previous slide, we're using
+[0:17:12] back to the previous slide, we're using the difference rule in this in this
+[0:17:14] the difference rule in this in this specific step, right? In this
+[0:17:15] specific step, right? In this monotonicity reduction lema. Now what is
+[0:17:17] monotonicity reduction lema. Now what is very nice is that actually after this
+[0:17:19] very nice is that actually after this step, we've used monotonicity. After
+[0:17:21] step, we've used monotonicity. After this step, essentially we're following
+[0:17:22] this step, essentially we're following exactly the same steps of the general
+[0:17:25] exactly the same steps of the general identification machinery for
+[0:17:26] identification machinery for counterfactuals. So I'm going to just
+[0:17:28] counterfactuals. So I'm going to just tell you what these steps are. So after
+[0:17:30] tell you what these steps are. So after this, what we really need to do is we
+[0:17:31] this, what we really need to do is we need to take our graph. We need to look
+[0:17:33] need to take our graph. We need to look at the C components. We need to do the
+[0:17:35] at the C components. We need to do the the step of so-called counterfactual
+[0:17:37] the step of so-called counterfactual factorization. So after this step
+[0:17:39] factorization. So after this step actually our our our our our queries of
+[0:17:42] actually our our our our our queries of interest look slightly differently and
+[0:17:44] interest look slightly differently and then in the final step we're actually
+[0:17:46] then in the final step we're actually just trying to send these queries into
+[0:17:49] just trying to send these queries into the this identify routine that I'm not
+[0:17:52] the this identify routine that I'm not going to explain in detail but this is
+[0:17:53] going to explain in detail but this is one of the routines that appears appears
+[0:17:55] one of the routines that appears appears in this 2002 paper from from Tian and
+[0:17:58] in this 2002 paper from from Tian and Pearl in which which in which they do
+[0:18:00] Pearl in which which in which they do algorithmic identification of
+[0:18:02] algorithmic identification of interventional quantities essentially
+[0:18:03] interventional quantities essentially right so these are the steps and you can
+[0:18:05] right so these are the steps and you can you can actually see in our example how
+[0:18:06] you can actually see in our example how this is reduced And what we end up with
+[0:18:09] this is reduced And what we end up with we either end up in this algorithm with
+[0:18:11] we either end up in this algorithm with an identification expression or a fail
+[0:18:13] an identification expression or a fail clause, right? That the query cannot be
+[0:18:15] clause, right? That the query cannot be identified. Okay, good. So this is this
+[0:18:18] identified. Okay, good. So this is this is the identification expression that we
+[0:18:19] is the identification expression that we get in the end. You can of course see
+[0:18:21] get in the end. You can of course see that this is exactly the same result
+[0:18:23] that this is exactly the same result that we get with late. But now what is
+[0:18:25] that we get with late. But now what is what is really nice for us is that this
+[0:18:27] what is really nice for us is that this machinery can pick an arbitrary query,
+[0:18:30] machinery can pick an arbitrary query, right? We don't need to have an IV
+[0:18:31] right? We don't need to have an IV graph. We can have different graphs. And
+[0:18:33] graph. We can have different graphs. And the second question, right, that I want
+[0:18:34] the second question, right, that I want to talk about briefly in this talk is
+[0:18:36] to talk about briefly in this talk is are there other interesting queries that
+[0:18:38] are there other interesting queries that are that are that we could be using this
+[0:18:40] are that are that we could be using this this method for, right? And I want to
+[0:18:42] this method for, right? And I want to give you an example. So we we're trying
+[0:18:44] give you an example. So we we're trying to find examples that would appeal to to
+[0:18:46] to find examples that would appeal to to to people in the econometrics literature
+[0:18:49] to people in the econometrics literature because they're they're they're very
+[0:18:50] because they're they're they're very interested about about using
+[0:18:51] interested about about using monotonicity in general. So actually
+[0:18:54] monotonicity in general. So actually we've looked at this data set uh which
+[0:18:56] we've looked at this data set uh which is called the 401k data set which is
+[0:18:58] is called the 401k data set which is which is I think very popular in the in
+[0:19:00] which is I think very popular in the in the econ literature. It is used I think
+[0:19:02] the econ literature. It is used I think in in some of these seminal papers of
+[0:19:04] in in some of these seminal papers of applying late for example Abodi 2003 I
+[0:19:07] applying late for example Abodi 2003 I think uses exactly the same data set. So
+[0:19:09] think uses exactly the same data set. So we're asking a slightly different
+[0:19:11] we're asking a slightly different question. So what we're asking is what
+[0:19:12] question. So what we're asking is what is the local average treatment effect of
+[0:19:14] is the local average treatment effect of 401k enrollment which is going to be
+[0:19:15] 401k enrollment which is going to be labeled X on total wealth Y for
+[0:19:18] labeled X on total wealth Y for different income income groups W and
+[0:19:21] different income income groups W and we're conditioning on the group of
+[0:19:22] we're conditioning on the group of compliers. Now what is what the query
+[0:19:25] compliers. Now what is what the query looks like? So this is some kind of a so
+[0:19:26] looks like? So this is some kind of a so this is the local average treatment
+[0:19:28] this is the local average treatment effect right that we saw previously.
+[0:19:29] effect right that we saw previously. We're conditioning on compliers, but
+[0:19:31] We're conditioning on compliers, but we're also conditioning on the income
+[0:19:33] we're also conditioning on the income group. Now, let's look at a graph. We're
+[0:19:35] group. Now, let's look at a graph. We're proposing a graph for the specific
+[0:19:37] proposing a graph for the specific setting, which is actually quite quite
+[0:19:38] setting, which is actually quite quite interesting and nice. So, let's let's
+[0:19:40] interesting and nice. So, let's let's look a bit about what's going on. So,
+[0:19:41] look a bit about what's going on. So, zed is is is meant to serve as an
+[0:19:44] zed is is is meant to serve as an instrument for for the for a 1K
+[0:19:46] instrument for for the for a 1K enrollment and and Y is the outcome of
+[0:19:49] enrollment and and Y is the outcome of of interest that we're looking at. Now
+[0:19:51] of interest that we're looking at. Now what we can see in this in this setting
+[0:19:53] what we can see in this in this setting is actually a lot of the assumptions
+[0:19:55] is actually a lot of the assumptions from the typical late late setting are
+[0:19:58] from the typical late late setting are violated right so for example zed is
+[0:20:01] violated right so for example zed is pointing to y right we're allowing the
+[0:20:03] pointing to y right we're allowing the edge from zed to y so exclusion
+[0:20:05] edge from zed to y so exclusion restriction is in some sense broken
+[0:20:06] restriction is in some sense broken right what we do have we have a
+[0:20:08] right what we do have we have a monotonicity constraint between zed and
+[0:20:09] monotonicity constraint between zed and x this is crucial for us so this stays
+[0:20:11] x this is crucial for us so this stays the same but what you can see as well is
+[0:20:13] the same but what you can see as well is there are different types of confounding
+[0:20:15] there are different types of confounding which we we were we think possibly makes
+[0:20:17] which we we were we think possibly makes sense right so occupation could be
+[0:20:19] sense right so occupation could be confounding for a 1k eligible ability,
+[0:20:21] confounding for a 1k eligible ability, income, and total wealth. Whereas
+[0:20:23] income, and total wealth. Whereas savings proclivity could confound the
+[0:20:26] savings proclivity could confound the the the the the relationship of
+[0:20:28] the the the the relationship of enrollment to to 401k and and and the
+[0:20:30] enrollment to to 401k and and and the person's assets, right? So, uh what is
+[0:20:33] person's assets, right? So, uh what is very interesting is that in this
+[0:20:35] very interesting is that in this specific setting, if we're using the
+[0:20:36] specific setting, if we're using the traditional set of tools, we can just
+[0:20:38] traditional set of tools, we can just give up, right? So, if we just try to
+[0:20:39] give up, right? So, if we just try to use late and apply late here, the the
+[0:20:41] use late and apply late here, the the the query is non idea, right? The the
+[0:20:43] the query is non idea, right? The the setting doesn't satisfy the assumptions,
+[0:20:46] setting doesn't satisfy the assumptions, right, that we want. Now what is very
+[0:20:47] right, that we want. Now what is very nice is if we actually plug this setting
+[0:20:49] nice is if we actually plug this setting into the algorithmic approach we can
+[0:20:51] into the algorithmic approach we can actually get an identification
+[0:20:52] actually get an identification expression right so this setting is ID
+[0:20:54] expression right so this setting is ID and if you think about how it's not
+[0:20:56] and if you think about how it's not super complex but if you think about the
+[0:20:58] super complex but if you think about the the number of violations of different
+[0:20:59] the number of violations of different assumptions compared to late in terms of
+[0:21:01] assumptions compared to late in terms of confounding in terms of exclusion
+[0:21:02] confounding in terms of exclusion restriction actually it's it's it's very
+[0:21:05] restriction actually it's it's it's very interesting that this setting is
+[0:21:06] interesting that this setting is identifiable right and what we've done
+[0:21:08] identifiable right and what we've done is we actually studied this sort of
+[0:21:09] is we actually studied this sort of empirically to see what what we can get
+[0:21:12] empirically to see what what we can get and one of the findings that we have is
+[0:21:14] and one of the findings that we have is that uh so what we did is we wanted to
+[0:21:17] that uh so what we did is we wanted to have a ground truth, right? To be able
+[0:21:19] have a ground truth, right? To be able to be able to to make a specific claim
+[0:21:21] to be able to to make a specific claim about this. So what we do is we
+[0:21:22] about this. So what we do is we construct a structural causal model
+[0:21:24] construct a structural causal model which matches the observational
+[0:21:25] which matches the observational distribution of the data set in some
+[0:21:27] distribution of the data set in some sense. Right? So this is step number
+[0:21:28] sense. Right? So this is step number one. And then what we're doing is now
+[0:21:30] one. And then what we're doing is now now that we have the ground truth, we
+[0:21:32] now that we have the ground truth, we can uh we can um estimate this
+[0:21:34] can uh we can um estimate this conditional local average treatment
+[0:21:36] conditional local average treatment effect. Right? So we can s even sort of
+[0:21:38] effect. Right? So we can s even sort of compute it exactly from the structural
+[0:21:39] compute it exactly from the structural causal model. we can use our
+[0:21:41] causal model. we can use our identification expression and what we
+[0:21:43] identification expression and what we did just for for for for
+[0:21:45] did just for for for for for interest of people familiar with
+[0:21:47] for interest of people familiar with late type of methods we compared other
+[0:21:50] late type of methods we compared other late type of methods that exist in the
+[0:21:52] late type of methods that exist in the literature right so there are some
+[0:21:53] literature right so there are some extensions of of of local a treatment
+[0:21:55] extensions of of of local a treatment effects in the literature but what you
+[0:21:57] effects in the literature but what you can see here there these these methods
+[0:21:58] can see here there these these methods are for example in blue in orange what
+[0:22:01] are for example in blue in orange what you can see is that none of these
+[0:22:02] you can see is that none of these methods actually capture the ground
+[0:22:04] methods actually capture the ground truth which is which is which is given
+[0:22:06] truth which is which is which is given in red right so what this shows is this
+[0:22:08] in red right so what this shows is this in this specific data set actually none
+[0:22:10] in this specific data set actually none of the methods that we that that we
+[0:22:12] of the methods that we that that we tried none of them can get the the
+[0:22:15] tried none of them can get the the correct answer whereas the the new
+[0:22:16] correct answer whereas the the new method that we that we propose actually
+[0:22:18] method that we that we propose actually can get this and of course uh we we want
+[0:22:21] can get this and of course uh we we want to mention there's like a lot of other
+[0:22:23] to mention there's like a lot of other settings and different variations of
+[0:22:24] settings and different variations of graphs that would probably be
+[0:22:26] graphs that would probably be interesting in studying right and uh so
+[0:22:29] interesting in studying right and uh so this is one one very interesting example
+[0:22:30] this is one one very interesting example that I want to mention and then after
+[0:22:32] that I want to mention and then after this I want to mention another sort of
+[0:22:34] this I want to mention another sort of complete class of problems in which
+[0:22:36] complete class of problems in which monotonicity happens this this actually
+[0:22:38] monotonicity happens this this actually is related to to my work in in fair
+[0:22:40] is related to to my work in in fair machine learning and actually Razia I
+[0:22:43] machine learning and actually Razia I think one of the organizers has worked
+[0:22:44] think one of the organizers has worked on this topic as well. So uh it's
+[0:22:47] on this topic as well. So uh it's interesting uh that if we actually place
+[0:22:49] interesting uh that if we actually place monotonicity assumptions on on different
+[0:22:52] monotonicity assumptions on on different edges right so here what we're trying to
+[0:22:54] edges right so here what we're trying to understand we want to know about what
+[0:22:56] understand we want to know about what would happen counterfactually for
+[0:22:57] would happen counterfactually for example if we manipulated a person's sex
+[0:23:01] example if we manipulated a person's sex how would there for example that how
+[0:23:03] how would there for example that how would that affect their uh their income
+[0:23:05] would that affect their uh their income and the mediator in this case m is is
+[0:23:08] and the mediator in this case m is is something like educational educational
+[0:23:10] something like educational educational level for example an indicator 01
+[0:23:12] level for example an indicator 01 whether the person has a PhD and what we
+[0:23:15] whether the person has a PhD and what we can show actually and I'm not going to
+[0:23:16] can show actually and I'm not going to go into the details in the interest of
+[0:23:18] go into the details in the interest of time. What we can show in this setting
+[0:23:20] time. What we can show in this setting actually is that these monotonistic
+[0:23:21] actually is that these monotonistic constraints can actually help us
+[0:23:23] constraints can actually help us identify some conditional queries. For
+[0:23:25] identify some conditional queries. For example, we could be interesting in the
+[0:23:27] example, we could be interesting in the conditional total effect of X on Y,
+[0:23:29] conditional total effect of X on Y, which is sort of interesting for people
+[0:23:31] which is sort of interesting for people studying fairness. We can look at this
+[0:23:33] studying fairness. We can look at this conditional on the educational level.
+[0:23:35] conditional on the educational level. Right? So what is specific about this
+[0:23:37] Right? So what is specific about this case? The specific thing is that we're
+[0:23:38] case? The specific thing is that we're conditioning on post treatment variables
+[0:23:40] conditioning on post treatment variables which in general this this cannot be
+[0:23:42] which in general this this cannot be done. Right? So conditioning from post
+[0:23:43] done. Right? So conditioning from post street variables is almost always
+[0:23:45] street variables is almost always nonidentifiable but under these mon
+[0:23:47] nonidentifiable but under these mon monotonistic constraints using our
+[0:23:49] monotonistic constraints using our algorithm we can actually get the ID
+[0:23:50] algorithm we can actually get the ID expression right in a completely
+[0:23:52] expression right in a completely different context. What I will mention
+[0:23:53] different context. What I will mention in passing is probabilities of uh
+[0:23:56] in passing is probabilities of uh probabilities of causation such as
+[0:23:57] probabilities of causation such as probabilities of sufficiency and
+[0:23:58] probabilities of sufficiency and necessity also fall under this umbrella
+[0:24:01] necessity also fall under this umbrella and our our our method is is is able to
+[0:24:04] and our our our method is is is able to capture these. So just to conclude so
+[0:24:06] capture these. So just to conclude so this is the second example that I want
+[0:24:08] this is the second example that I want to mention just to conclude and to say
+[0:24:10] to mention just to conclude and to say why we think this is important. So in
+[0:24:12] why we think this is important. So in this work what we show is that we can
+[0:24:13] this work what we show is that we can develop a sound algorithm for
+[0:24:16] develop a sound algorithm for incorporating shape shape constraints
+[0:24:18] incorporating shape shape constraints such as monotonicity and this can be
+[0:24:19] such as monotonicity and this can be incorporated in the general machinery
+[0:24:21] incorporated in the general machinery for counterfactual estimation which is
+[0:24:23] for counterfactual estimation which is which is really great. Uh what I want to
+[0:24:25] which is really great. Uh what I want to mention and I want to bring up this
+[0:24:27] mention and I want to bring up this quote and I want to sort of uh be
+[0:24:29] quote and I want to sort of uh be dancing around this potential outcomes
+[0:24:31] dancing around this potential outcomes versus graphical models debate. So I'm
+[0:24:33] versus graphical models debate. So I'm I'm bringing a quote from professor Imb
+[0:24:36] I'm bringing a quote from professor Imb which who who in his 2020 paper
+[0:24:38] which who who in his 2020 paper discusses differences between between PO
+[0:24:40] discusses differences between between PO and graphical approaches to to causality
+[0:24:43] and graphical approaches to to causality and he argues that models used in
+[0:24:45] and he argues that models used in econometrics use economic theory more
+[0:24:47] econometrics use economic theory more deeply than the current DAGs exploiting
+[0:24:49] deeply than the current DAGs exploiting monotonicity and other shape
+[0:24:51] monotonicity and other shape restrictions as well as other
+[0:24:52] restrictions as well as other implications of the theory that are not
+[0:24:54] implications of the theory that are not easily incorporated in DAGs in the
+[0:24:56] easily incorporated in DAGs in the attendant do calculus despite the claim
+[0:24:58] attendant do calculus despite the claim of the universality of DAGs. Right? So
+[0:25:00] of the universality of DAGs. Right? So in this work we actually show evidence
+[0:25:01] in this work we actually show evidence contrary to this claim right so we can
+[0:25:03] contrary to this claim right so we can refute this claim based on our work and
+[0:25:05] refute this claim based on our work and we provide the most general approach so
+[0:25:07] we provide the most general approach so far for encoding and leveraging
+[0:25:08] far for encoding and leveraging monotonicity which is which is very very
+[0:25:10] monotonicity which is which is very very nice and just to conclude actually with
+[0:25:13] nice and just to conclude actually with this it seems that the graphical
+[0:25:15] this it seems that the graphical approach has done has had a lot of
+[0:25:17] approach has done has had a lot of success in the nonparametric setting in
+[0:25:19] success in the nonparametric setting in the linear setting that I mentioned it
+[0:25:20] the linear setting that I mentioned it now we are start starting to add shape
+[0:25:22] now we are start starting to add shape constraints uh to this to this to this
+[0:25:25] constraints uh to this to this to this to this as well so this concludes my
+[0:25:27] to this as well so this concludes my talk and I'm happy to take any questions
+[0:25:30] talk and I'm happy to take any questions about about this and thanks for the
+[0:25:32] about about this and thanks for the time.
+[0:25:39] So, thank you for the talk, Drago. Um, there was already a few questions. There
+[0:25:42] there was already a few questions. There was a few questions I think from the
+[0:25:43] was a few questions I think from the same um person in the Q&amp;A and I think
+[0:25:47] same um person in the Q&amp;A and I think they were related to some question on
+[0:25:49] they were related to some question on the slide five if we understand
+[0:25:51] the slide five if we understand correctly. So, if you don't mind sharing
+[0:25:53] correctly. So, if you don't mind sharing it
+[0:25:54] it again, there were some clarification
+[0:25:57] again, there were some clarification questions. You were muted. Drago.
+[0:26:00] questions. You were muted. Drago. Oh, okay. I thought I was muted. Okay,
+[0:26:02] Oh, okay. I thought I was muted. Okay, good. You are muted. Drago. Drago,
+[0:26:05] good. You are muted. Drago. Drago, you're muted. Yeah. Yeah, I sorry. So,
+[0:26:07] you're muted. Yeah. Yeah, I sorry. So, let me just share. Let me reshare this
+[0:26:09] let me just share. Let me reshare this slide. I think there's a time. I think I
+[0:26:12] slide. I think there's a time. I think I think I need to flip in S1. I think I
+[0:26:14] think I need to flip in S1. I think I need to flip. I think someone is point
+[0:26:16] need to flip. I think someone is point to flip. Yes, I think somebody was
+[0:26:18] to flip. Yes, I think somebody was pointing you out at this. So, somebody I
+[0:26:21] pointing you out at this. So, somebody I think it's a typo. I think it's a typo,
+[0:26:23] think it's a typo. I think it's a typo, but I don't think I don't think things
+[0:26:25] but I don't think I don't think things collapse after we fix the typo. I think
+[0:26:27] collapse after we fix the typo. I think the claims are okay then let's do it
+[0:26:31] the claims are okay then let's do it like this. This is good and maybe this
+[0:26:33] like this. This is good and maybe this one I think if you want you can answer
+[0:26:36] one I think if you want you can answer also later you can write in the in the
+[0:26:39] also later you can write in the in the Q&amp;A chat if you want if you want to
+[0:26:40] Q&amp;A chat if you want if you want to double check you know with a bit of
+[0:26:42] double check you know with a bit of call. Uh and another person also asked
+[0:26:45] call. Uh and another person also asked would there be any difference if the
+[0:26:46] would there be any difference if the approach would be nonlinear? Yes. Yes.
+[0:26:49] approach would be nonlinear? Yes. Yes. Yes. So this is this is an important
+[0:26:50] Yes. So this is this is an important clarification. So the approach that we
+[0:26:52] clarification. So the approach that we have here actually is completely
+[0:26:54] have here actually is completely nonlinear. So we're not assuming
+[0:26:55] nonlinear. So we're not assuming linearity. We're only assuming
+[0:26:57] linearity. We're only assuming monotonicity. So going back to this
+[0:26:59] monotonicity. So going back to this spectrum here of identification. So what
+[0:27:02] spectrum here of identification. So what we have is we have right the
+[0:27:03] we have is we have right the nonparametric setting and the linear
+[0:27:05] nonparametric setting and the linear Gaussian setting and we're in somewhere
+[0:27:07] Gaussian setting and we're in somewhere in between right we're not placing
+[0:27:08] in between right we're not placing assumptions on the functional form we're
+[0:27:11] assumptions on the functional form we're only assuming monotonicity along these
+[0:27:13] only assuming monotonicity along these specific edges. So the approach is what
+[0:27:16] specific edges. So the approach is what is really required is and we do try to
+[0:27:19] is really required is and we do try to relax some of these things in the in the
+[0:27:22] relax some of these things in the in the in in the in the paper and you can you
+[0:27:23] in in the in the paper and you can you can read how to relax these but
+[0:27:25] can read how to relax these but currently for the main set of results W
+[0:27:28] currently for the main set of results W and T are you need to be binary
+[0:27:30] and T are you need to be binary variables right so the elements of T
+[0:27:32] variables right so the elements of T need to be binary and W needs to be
+[0:27:34] need to be binary and W needs to be binary because this is like for these
+[0:27:36] binary because this is like for these binary settings it's very easy to to say
+[0:27:38] binary settings it's very easy to to say what monotonicity is and how to define
+[0:27:40] what monotonicity is and how to define monotonicity moving beyond the binary
+[0:27:42] monotonicity moving beyond the binary case becomes more subtle I think we can
+[0:27:44] case becomes more subtle I think we can do it. I think we can do it, but it it
+[0:27:46] do it. I think we can do it, but it it requires a bit more a bit more work.
+[0:27:50] requires a bit more a bit more work. Yes. Okay. I think Razi has a question.
+[0:27:53] Yes. Okay. I think Razi has a question. Yes, please.
+[0:27:55] Yes, please. Thank you, Drago, for the great talk.
+[0:27:56] Thank you, Drago, for the great talk. So, I was just wondering if you could
+[0:27:58] So, I was just wondering if you could say a little bit more about like the
+[0:28:00] say a little bit more about like the generality of the query that you're
+[0:28:02] generality of the query that you're identifying. So as far as I understand
+[0:28:04] identifying. So as far as I understand so you're interested in some effects or
+[0:28:06] so you're interested in some effects or conditional effects among the compliers
+[0:28:09] conditional effects among the compliers but they're also like under these uh
+[0:28:11] but they're also like under these uh assumptions like effect among like other
+[0:28:16] assumptions like effect among like other principles stratum could also be
+[0:28:17] principles stratum could also be identified and I was wondering like how
+[0:28:19] identified and I was wondering like how general yeah so it's fully general
+[0:28:21] general yeah so it's fully general actually to be honest we actually think
+[0:28:23] actually to be honest we actually think the algorithm is complete we don't have
+[0:28:25] the algorithm is complete we don't have the proof yet and I can I can make
+[0:28:26] the proof yet and I can I can make comments offline about why completeness
+[0:28:28] comments offline about why completeness is in this specific setting difficult
+[0:28:30] is in this specific setting difficult but we actually think that I we believe
+[0:28:32] but we actually think that I we believe that the algorithm is actually complete.
+[0:28:34] that the algorithm is actually complete. So it is fully general. So in some sense
+[0:28:36] So it is fully general. So in some sense if you get a fail it actually most
+[0:28:38] if you get a fail it actually most likely means that that the query is non
+[0:28:40] likely means that that the query is non identifiable. So to go back to your
+[0:28:42] identifiable. So to go back to your specific question you could put any
+[0:28:43] specific question you could put any other principal stratum inside and the
+[0:28:45] other principal stratum inside and the and the method would work equally well
+[0:28:47] and the method would work equally well in principle. So there's no the
+[0:28:49] in principle. So there's no the generalities I think in conditional
+[0:28:50] generalities I think in conditional queries are acceptable. So in reality
+[0:28:54] queries are acceptable. So in reality anything goes in reality. There's no
+[0:28:56] anything goes in reality. There's no there's no restriction. I think these
+[0:28:57] there's no restriction. I think these monotonicity and in some kind of binary
+[0:29:00] monotonicity and in some kind of binary uh binary sort of uh binary variables
+[0:29:03] uh binary sort of uh binary variables along these between sorry at the start
+[0:29:06] along these between sorry at the start and the end of these monotonic edges
+[0:29:07] and the end of these monotonic edges this is actually where the assumptions
+[0:29:09] this is actually where the assumptions restrictions are in some sense but we
+[0:29:11] restrictions are in some sense but we can relax even these and this is done in
+[0:29:13] can relax even these and this is done in the appendix of our paper. Thanks that's
+[0:29:16] the appendix of our paper. Thanks that's great just a quick followup. So like
+[0:29:17] great just a quick followup. So like what complicates like the proof of
+[0:29:19] what complicates like the proof of completeness for of course of course I I
+[0:29:22] completeness for of course of course I I can I can be very specific. So if and
+[0:29:24] can I can be very specific. So if and I'm sure you're familiar with this with
+[0:29:26] I'm sure you're familiar with this with this literature but essentially what we
+[0:29:28] this literature but essentially what we what we do believe what we can sort of
+[0:29:30] what we do believe what we can sort of prove is we can prove that the reduction
+[0:29:32] prove is we can prove that the reduction from the query that you start with into
+[0:29:35] from the query that you start with into layer 2 so to to an interventional query
+[0:29:38] layer 2 so to to an interventional query we believe that this reduction is
+[0:29:39] we believe that this reduction is complete and we don't think that this is
+[0:29:41] complete and we don't think that this is super difficult to prove. Now what is
+[0:29:43] super difficult to prove. Now what is funny is that we don't have a very easy
+[0:29:45] funny is that we don't have a very easy way of saying that monotonicity could
+[0:29:48] way of saying that monotonicity could not help with identifying layer 2
+[0:29:50] not help with identifying layer 2 queries and we don't think that is the
+[0:29:52] queries and we don't think that is the case but we it's not easy to prove right
+[0:29:55] case but we it's not easy to prove right that we cannot come up with a query that
+[0:29:57] that we cannot come up with a query that monotonicity would in principle not be
+[0:29:58] monotonicity would in principle not be able to help. So in some sense you can
+[0:30:00] able to help. So in some sense you can think about two steps like completeness
+[0:30:02] think about two steps like completeness of the L3 so layer three counterfactual
+[0:30:04] of the L3 so layer three counterfactual to interventional reduction which we do
+[0:30:06] to interventional reduction which we do think is complete and we can show and
+[0:30:08] think is complete and we can show and then the second step is can monotonicity
+[0:30:10] then the second step is can monotonicity help in identifying interventional
+[0:30:12] help in identifying interventional queries. We believe the answer is no but
+[0:30:14] queries. We believe the answer is no but proving is proving is not trivial. If
+[0:30:16] proving is proving is not trivial. If you have the proof we're very happy to
+[0:30:18] you have the proof we're very happy to very happy to to to talk about about
+[0:30:21] very happy to to to talk about about this.
+[0:30:23] this. Wonderful. Thank you. Thanks.
+[0:30:28] Sounds good. Then let's move to da
+[0:30:40] sorry let me thank you please see yeah
+[0:30:50] okay um so today I'm going to talk about two of my projects which both leverages
+[0:30:53] two of my projects which both leverages causality in online reinforcement
+[0:30:55] causality in online reinforcement learning for digital interventions uh
+[0:30:57] learning for digital interventions uh this projects are joint work with Senu
+[0:31:00] this projects are joint work with Senu Ping and Luong who are postocs and
+[0:31:02] Ping and Luong who are postocs and interns summer lab and Pedra who's a
+[0:31:05] interns summer lab and Pedra who's a professor at the University of Michigan
+[0:31:07] professor at the University of Michigan and my postoc advisor professor Susan
+[0:31:09] and my postoc advisor professor Susan Murphy
+[0:31:11] Murphy um first let me introduce the scientific
+[0:31:14] um first let me introduce the scientific program that we are working on um on the
+[0:31:17] program that we are working on um on the high level our overarching goal is to
+[0:31:19] high level our overarching goal is to help users with cardiovascular disease
+[0:31:22] help users with cardiovascular disease to recover from their recent health
+[0:31:24] to recover from their recent health crisis um cardiovascular disease is the
+[0:31:27] crisis um cardiovascular disease is the major
+[0:31:28] major cause of death over worldwide but uh
+[0:31:31] cause of death over worldwide but uh most of it can be attributable to low
+[0:31:34] most of it can be attributable to low levels of healthpromoting
+[0:31:36] levels of healthpromoting behaviors. Um cardiac rehabilitation is
+[0:31:39] behaviors. Um cardiac rehabilitation is a supervised program where an experts
+[0:31:42] a supervised program where an experts help the patients to form a healthy and
+[0:31:44] help the patients to form a healthy and balanced lifestyle after their
+[0:31:46] balanced lifestyle after their cardiovascular events and it is shown
+[0:31:49] cardiovascular events and it is shown that this can be effective at reducing
+[0:31:51] that this can be effective at reducing the behavioral risks or mortality for
+[0:31:54] the behavioral risks or mortality for cardiovascular disease. But when the
+[0:31:56] cardiovascular disease. But when the program ends, the outside support from
+[0:31:59] program ends, the outside support from the experts disappears and the heart
+[0:32:02] the experts disappears and the heart healthy lifestyle and benefits for
+[0:32:04] healthy lifestyle and benefits for health uh starts to
+[0:32:06] health uh starts to decline. This is when mobile health
+[0:32:08] decline. This is when mobile health could be used to um help the users
+[0:32:11] could be used to um help the users sustain the lifestyle change that they
+[0:32:13] sustain the lifestyle change that they acquired during the CR program. Um
+[0:32:16] acquired during the CR program. Um mobile health uses mobile devices to
+[0:32:19] mobile health uses mobile devices to monitor and manage patients health
+[0:32:22] monitor and manage patients health through digital interventions. They are
+[0:32:24] through digital interventions. They are generally accessible and scalable and
+[0:32:27] generally accessible and scalable and they can provide ongoing support for
+[0:32:29] they can provide ongoing support for users in their everyday life. In this
+[0:32:32] users in their everyday life. In this specific work, we want to use mobile
+[0:32:35] specific work, we want to use mobile health to help users increase and
+[0:32:37] health to help users increase and maintain their physical activity
+[0:32:40] maintain their physical activity levels. So, hard steps is such a digital
+[0:32:43] levels. So, hard steps is such a digital intervention that focus on physical
+[0:32:45] intervention that focus on physical activity. There are multiple digital
+[0:32:48] activity. There are multiple digital intervention uh multiple components of
+[0:32:50] intervention uh multiple components of digital interventions including like uh
+[0:32:53] digital interventions including like uh message of the day, weekly goal setting
+[0:32:55] message of the day, weekly goal setting and anti-editary suggestions or walking
+[0:32:58] and anti-editary suggestions or walking suggestions. Anti-sedentary suggestions
+[0:33:01] suggestions. Anti-sedentary suggestions prompts the users to stand up and move
+[0:33:03] prompts the users to stand up and move around briefly for like one minute and
+[0:33:05] around briefly for like one minute and an algorithm is run every five minute to
+[0:33:08] an algorithm is run every five minute to detect whether a user has been sedentary
+[0:33:10] detect whether a user has been sedentary for a while. Walking suggestions on the
+[0:33:12] for a while. Walking suggestions on the contrary uh encourage the users to
+[0:33:15] contrary uh encourage the users to engage in short bouts of physical
+[0:33:17] engage in short bouts of physical activity like a 10-minute walk and uh
+[0:33:20] activity like a 10-minute walk and uh there are five predefined but user
+[0:33:22] there are five predefined but user specific decision times we can where
+[0:33:24] specific decision times we can where where we can choose whether to send a
+[0:33:26] where we can choose whether to send a walking suggestion or not. Um such
+[0:33:29] walking suggestion or not. Um such suggestions should be tailored to the
+[0:33:31] suggestions should be tailored to the evolving needs of the users. So we hope
+[0:33:34] evolving needs of the users. So we hope to intervene when the users are most
+[0:33:36] to intervene when the users are most receptive but do not want to intervene
+[0:33:38] receptive but do not want to intervene too much to disturb the users. Um the
+[0:33:42] too much to disturb the users. Um the contents of such suggestions are rule
+[0:33:44] contents of such suggestions are rule based and tailored to the current
+[0:33:46] based and tailored to the current context and uh our lab specifically
+[0:33:48] context and uh our lab specifically wants to find the best timing of sending
+[0:33:51] wants to find the best timing of sending the notifications. Specifically at each
+[0:33:53] the notifications. Specifically at each of the five decision times we decide
+[0:33:55] of the five decision times we decide whether to send a notification based on
+[0:33:58] whether to send a notification based on the current context like whether a user
+[0:34:00] the current context like whether a user is already exercising or not. Um so such
+[0:34:05] is already exercising or not. Um so such a policy can handle the heterogeneity
+[0:34:08] a policy can handle the heterogeneity within a user across time but to handle
+[0:34:11] within a user across time but to handle the heterogeneity across users we need
+[0:34:13] the heterogeneity across users we need to develop a personalized policy for
+[0:34:16] to develop a personalized policy for each user and that's why we need to
+[0:34:18] each user and that's why we need to online to use online reinforcement
+[0:34:20] online to use online reinforcement learning to sequentially update the
+[0:34:23] learning to sequentially update the personalized policy based on the
+[0:34:25] personalized policy based on the accumulating data of each specific
+[0:34:28] accumulating data of each specific user. Um so intuitively speaking online
+[0:34:32] user. Um so intuitively speaking online RL continuously update the personalized
+[0:34:36] RL continuously update the personalized policy by interacting with the users and
+[0:34:39] policy by interacting with the users and learn from the user's behavior. Uh in
+[0:34:42] learn from the user's behavior. Uh in the examples of hard steps the state can
+[0:34:44] the examples of hard steps the state can be the prior 30 minute stepcon yesterday
+[0:34:47] be the prior 30 minute stepcon yesterday stepcon etc. And the RL algorithm will
+[0:34:50] stepcon etc. And the RL algorithm will based on the state decide whether to
+[0:34:52] based on the state decide whether to send an um walking suggestion or not. uh
+[0:34:55] send an um walking suggestion or not. uh the user may or may not be receptive to
+[0:34:58] the user may or may not be receptive to the intervention in this uh current
+[0:35:00] the intervention in this uh current state and such signal is reflected in
+[0:35:03] state and such signal is reflected in the proximal outcome defined as the post
+[0:35:06] the proximal outcome defined as the post 30 minutes step count. The new state
+[0:35:08] 30 minutes step count. The new state action and proximal outcome will be
+[0:35:10] action and proximal outcome will be given back to the ARL algorithm to
+[0:35:13] given back to the ARL algorithm to update the personalized policy.
+[0:35:16] update the personalized policy. So in the previous implementations of
+[0:35:18] So in the previous implementations of hard steps, the reward using the ARL
+[0:35:21] hard steps, the reward using the ARL algorithm is just the the short-term
+[0:35:23] algorithm is just the the short-term step count. But remember that the health
+[0:35:26] step count. But remember that the health outcome that we want to achieve as the
+[0:35:28] outcome that we want to achieve as the long-term behavior change. But such um
+[0:35:31] long-term behavior change. But such um health outcome is too distal to be used
+[0:35:34] health outcome is too distal to be used in the RL algorithm for policy update.
+[0:35:37] in the RL algorithm for policy update. So that's why in this new clinical trial
+[0:35:39] So that's why in this new clinical trial we choose to use an intermediate outcome
+[0:35:42] we choose to use an intermediate outcome that is closer to the health outcome but
+[0:35:44] that is closer to the health outcome but is also efficient for policy learning.
+[0:35:49] is also efficient for policy learning. Um our scientific team defines the
+[0:35:52] Um our scientific team defines the reward as the commitment to physical
+[0:35:54] reward as the commitment to physical activity and the um such commitment to
+[0:35:58] activity and the um such commitment to PA is a strong predictor of the health
+[0:36:00] PA is a strong predictor of the health outcome. Um, on the other side, we know
+[0:36:04] outcome. Um, on the other side, we know that the walking suggestions directly
+[0:36:07] that the walking suggestions directly target um, immediately actionable tasks
+[0:36:10] target um, immediately actionable tasks like a 10-minute walk. So, the walking
+[0:36:12] like a 10-minute walk. So, the walking suggestion will uh, likely increase the
+[0:36:15] suggestion will uh, likely increase the short-term step count. But if the users
+[0:36:17] short-term step count. But if the users are receptive to to the interventions,
+[0:36:20] are receptive to to the interventions, they will keep their regular exercises
+[0:36:22] they will keep their regular exercises every day and it's likely that their
+[0:36:24] every day and it's likely that their commitment to physical activity will be
+[0:36:26] commitment to physical activity will be increased. So that's why uh we expect
+[0:36:29] increased. So that's why uh we expect the proximal outcome to be a mediator
+[0:36:32] the proximal outcome to be a mediator between the intervention and the reward.
+[0:36:35] between the intervention and the reward. Um such reward can be measured through
+[0:36:39] Um such reward can be measured through surveys where a user self-report their
+[0:36:41] surveys where a user self-report their feelings about physical
+[0:36:48] activities. So in general mobile health problems users behavior are really noisy
+[0:36:51] problems users behavior are really noisy because people's uh everyday life is
+[0:36:52] because people's uh everyday life is just noisy. And even if we use some
+[0:36:55] just noisy. And even if we use some intermediate outcome like commitment to
+[0:36:57] intermediate outcome like commitment to physical activity, such reward can be
+[0:36:59] physical activity, such reward can be sparse like we can at most obtain one
+[0:37:02] sparse like we can at most obtain one reward per day. So both of these require
+[0:37:04] reward per day. So both of these require a significant amount of data to learn a
+[0:37:08] a significant amount of data to learn a policy. But um we always have limited
+[0:37:11] policy. But um we always have limited user specific data in mobile house
+[0:37:13] user specific data in mobile house because for example a user might just
+[0:37:15] because for example a user might just stay in the trial for three months and
+[0:37:18] stay in the trial for three months and uh then there are at most 90 rewards in
+[0:37:22] uh then there are at most 90 rewards in total. And this problem is specifically
+[0:37:24] total. And this problem is specifically severe when the user just joined the
+[0:37:27] severe when the user just joined the trial. So that's why we try to use uh
+[0:37:30] trial. So that's why we try to use uh try to embed the behavioral theory in
+[0:37:32] try to embed the behavioral theory in the causal directed cyclic graph. This
+[0:37:35] the causal directed cyclic graph. This causal dag represents the strongest
+[0:37:37] causal dag represents the strongest causal relations among all and the
+[0:37:40] causal relations among all and the absence of an edge represents our
+[0:37:42] absence of an edge represents our assumptions of causal relations that are
+[0:37:45] assumptions of causal relations that are weak or does not exist. Then the
+[0:37:48] weak or does not exist. Then the conditional independencies implied by
+[0:37:50] conditional independencies implied by the causal deck will be used as the
+[0:37:52] the causal deck will be used as the assumptions in the RL algorithm. The
+[0:37:55] assumptions in the RL algorithm. The misspecified assumptions might increase
+[0:37:58] misspecified assumptions might increase the bias but we expect that using such
+[0:38:02] the bias but we expect that using such domain knowledge will help us to
+[0:38:04] domain knowledge will help us to significantly reduce the learning
+[0:38:06] significantly reduce the learning variance and also we will use the
+[0:38:08] variance and also we will use the previous data to construct the prior
+[0:38:11] previous data to construct the prior inhabation methods to warmart the
+[0:38:14] inhabation methods to warmart the algorithm. So jointly we use the cost
+[0:38:17] algorithm. So jointly we use the cost DAG and the previous data uh to improve
+[0:38:20] DAG and the previous data uh to improve sample efficiency meaning that we will
+[0:38:22] sample efficiency meaning that we will be able to learn a better personalized
+[0:38:24] be able to learn a better personalized policy with the same amount of
+[0:38:31] data. Um now let's go back to the example of hard steps. This causal deck
+[0:38:34] example of hard steps. This causal deck shows one day of um user in hard steps.
+[0:38:39] shows one day of um user in hard steps. There are five decision times per day.
+[0:38:42] There are five decision times per day. Um each action is whether to send a
+[0:38:45] Um each action is whether to send a walking suggestion or not and the
+[0:38:48] walking suggestion or not and the context can include the prior 30 minute
+[0:38:50] context can include the prior 30 minute step count, the yesterday step count,
+[0:38:51] step count, the yesterday step count, etc. The proximal outcome m is the
+[0:38:56] etc. The proximal outcome m is the poster 30 minute step count. And there
+[0:38:58] poster 30 minute step count. And there are two variables that are slowly
+[0:39:00] are two variables that are slowly evolving over time but um are the key
+[0:39:04] evolving over time but um are the key factors that um can capture the that
+[0:39:08] factors that um can capture the that that can be predictable of the long-term
+[0:39:10] that can be predictable of the long-term behavior change. The first one is the
+[0:39:13] behavior change. The first one is the reward defined as the daily commitment
+[0:39:16] reward defined as the daily commitment to physical activity. And as we
+[0:39:18] to physical activity. And as we mentioned before uh the walking
+[0:39:21] mentioned before uh the walking suggestions directly target the
+[0:39:22] suggestions directly target the short-term mediators but in uh increased
+[0:39:26] short-term mediators but in uh increased the mediators will jointly increase the
+[0:39:30] the mediators will jointly increase the reward commitment to PA. And another
+[0:39:32] reward commitment to PA. And another slowly evolving variable is the
+[0:39:34] slowly evolving variable is the engagement. uh if we send too many
+[0:39:37] engagement. uh if we send too many notifications the users will just
+[0:39:39] notifications the users will just disengage from the um interventions and
+[0:39:42] disengage from the um interventions and this decreased engagement will decrease
+[0:39:45] this decreased engagement will decrease their adherence to the interventions
+[0:39:47] their adherence to the interventions which will further uh reduce the reward.
+[0:39:50] which will further uh reduce the reward. So basically we expect the positive
+[0:39:53] So basically we expect the positive effects of the walking suggestions to go
+[0:39:56] effects of the walking suggestions to go through the step counts but expect the
+[0:39:58] through the step counts but expect the negative uh effects of the interventions
+[0:40:01] negative uh effects of the interventions to go through the
+[0:40:03] to go through the engagement. Um and the reward and
+[0:40:07] engagement. Um and the reward and engagement of the previous day and the
+[0:40:10] engagement of the previous day and the context may jointly affect the um
+[0:40:13] context may jointly affect the um receptiveness to the interventions and
+[0:40:15] receptiveness to the interventions and such the um proximal outcome.
+[0:40:26] M okay. So now let's talk about how to use cosod deck for state construction
+[0:40:28] use cosod deck for state construction and reward design in RL
+[0:40:35] algorithms. Notice that uh in this example of hard steps there is actually
+[0:40:37] example of hard steps there is actually a bag structure. So each bag represents
+[0:40:40] a bag structure. So each bag represents a day and contains five decision times
+[0:40:43] a day and contains five decision times but there is only one reward at the end
+[0:40:45] but there is only one reward at the end of the bag. we um denote the bottleneck
+[0:40:50] of the bag. we um denote the bottleneck variables that desparates the past bags
+[0:40:53] variables that desparates the past bags from the current bag as uh B tilda. And
+[0:40:57] from the current bag as uh B tilda. And in this example, this bottleneck
+[0:40:58] in this example, this bottleneck variables are RT and ET. We assume that
+[0:41:02] variables are RT and ET. We assume that given the bottleneck variables and fixed
+[0:41:04] given the bottleneck variables and fixed values of uh the actions, the
+[0:41:07] values of uh the actions, the distributions of everyable of all the
+[0:41:10] distributions of everyable of all the variables in the DAG is stationary or
+[0:41:12] variables in the DAG is stationary or crossbacks. So basically it means that
+[0:41:14] crossbacks. So basically it means that we put no assumption in the variables
+[0:41:18] we put no assumption in the variables within the bag but we assume that the
+[0:41:21] within the bag but we assume that the same bag structure will repeat over
+[0:41:25] same bag structure will repeat over time. Our goal is to maximize the
+[0:41:28] time. Our goal is to maximize the cumulative reward and the reward is back
+[0:41:31] cumulative reward and the reward is back specific reward uh given some discount
+[0:41:34] specific reward uh given some discount factor gamma bar.
+[0:41:37] factor gamma bar. Notice that here the transition are
+[0:41:39] Notice that here the transition are non-marovian because uh five actions
+[0:41:42] non-marovian because uh five actions jointly impact one reward at the end of
+[0:41:44] jointly impact one reward at the end of the bag. Besides the transitions are
+[0:41:46] the bag. Besides the transitions are also non-stationary
+[0:41:48] also non-stationary um because for example if we're choosing
+[0:41:51] um because for example if we're choosing the last action in a bag, we can use the
+[0:41:53] the last action in a bag, we can use the previous actions and mediators to uh
+[0:41:56] previous actions and mediators to uh construct the policy. But when we choose
+[0:41:58] construct the policy. But when we choose the first action in a bag, we cannot use
+[0:42:01] the first action in a bag, we cannot use the later actions to construct the
+[0:42:02] the later actions to construct the policy. So like there's non-stationerity
+[0:42:05] policy. So like there's non-stationerity within a bag. Therefore, uh this problem
+[0:42:08] within a bag. Therefore, uh this problem is not a standard mark of decision pro
+[0:42:11] is not a standard mark of decision pro process. Uh but utilizing the assumption
+[0:42:15] process. Uh but utilizing the assumption that the same back structure is repeated
+[0:42:17] that the same back structure is repeated over time. Uh we can notice that there
+[0:42:19] over time. Uh we can notice that there is actually a periodic structure here.
+[0:42:22] is actually a periodic structure here. So that's why we try to fit it into a
+[0:42:25] So that's why we try to fit it into a periodic mark of decision process. Uh
+[0:42:28] periodic mark of decision process. Uh intuitively speaking, K period periodic
+[0:42:32] intuitively speaking, K period periodic MTP allows non-stationity within a
+[0:42:35] MTP allows non-stationity within a period. So all the state space, action
+[0:42:38] period. So all the state space, action space, reward, discount factor um and
+[0:42:41] space, reward, discount factor um and transitional reward functions can all
+[0:42:44] transitional reward functions can all depend on the time index within a
+[0:42:46] depend on the time index within a period. But the same structure for a
+[0:42:49] period. But the same structure for a period will repeat over
+[0:42:51] period will repeat over time. Now to transform the problem of
+[0:42:54] time. Now to transform the problem of back decision times pro uh to a periodic
+[0:42:57] back decision times pro uh to a periodic MDP, we notice that the actions have
+[0:43:00] MDP, we notice that the actions have already been defined naturally and we
+[0:43:03] already been defined naturally and we will discuss how to construct the states
+[0:43:05] will discuss how to construct the states later.
+[0:43:07] later. Then and the first k minus one
+[0:43:09] Then and the first k minus one instantaneous rewards are actually zero
+[0:43:12] instantaneous rewards are actually zero because we do not observe the daily
+[0:43:14] because we do not observe the daily commitment to pa just after choosing the
+[0:43:17] commitment to pa just after choosing the first action and uh the last
+[0:43:20] first action and uh the last instantaneous reward is the backsp
+[0:43:22] instantaneous reward is the backsp specific reward. Similarly the first k
+[0:43:25] specific reward. Similarly the first k minus one discount factor is one but the
+[0:43:27] minus one discount factor is one but the last discount factor is the backsp
+[0:43:29] last discount factor is the backsp specific discount factor. In this way,
+[0:43:31] specific discount factor. In this way, we will be able to recover the value
+[0:43:33] we will be able to recover the value function needed for the back the
+[0:43:35] function needed for the back the decision times problem. And the value
+[0:43:37] decision times problem. And the value function is defined as the cumulative
+[0:43:39] function is defined as the cumulative reward given the current state. So if we
+[0:43:43] reward given the current state. So if we are able to identify a policy pi that
+[0:43:45] are able to identify a policy pi that maximizes the value function for every
+[0:43:48] maximizes the value function for every state, then we will be able to achieve
+[0:43:50] state, then we will be able to achieve our goal of maximizing the u expectation
+[0:43:53] our goal of maximizing the u expectation of cumulative reward
+[0:43:55] of cumulative reward overall. Now let's discuss how to
+[0:43:58] overall. Now let's discuss how to construct the states in this problem. uh
+[0:44:00] construct the states in this problem. uh note that to fit into the framework of a
+[0:44:02] note that to fit into the framework of a periodic MDP the state transition need
+[0:44:05] periodic MDP the state transition need to be
+[0:44:06] to be marovian and uh this will be achieved by
+[0:44:09] marovian and uh this will be achieved by reading the conditional independencies
+[0:44:12] reading the conditional independencies from a
+[0:44:14] from a DAG. Uh specifically we define a dynamic
+[0:44:18] DAG. Uh specifically we define a dynamic oation sufficient statistic such that
+[0:44:20] oation sufficient statistic such that given this sufficient statistic and the
+[0:44:23] given this sufficient statistic and the action all the previous rewards are
+[0:44:26] action all the previous rewards are independent of the history. So
+[0:44:28] independent of the history. So intuitively it means that a sufficient
+[0:44:31] intuitively it means that a sufficient statistic is the boundary of the
+[0:44:33] statistic is the boundary of the observed history that separates the
+[0:44:35] observed history that separates the history from all the future
+[0:44:38] history from all the future rewards and it is guaranteed that a
+[0:44:41] rewards and it is guaranteed that a sufficient statistic will have mark of
+[0:44:43] sufficient statistic will have mark of state transitions. Uh in this hard steps
+[0:44:46] state transitions. Uh in this hard steps example suppose we are choosing the last
+[0:44:49] example suppose we are choosing the last action in a bag then the state can be
+[0:44:53] action in a bag then the state can be used as the reward and engagement in the
+[0:44:57] used as the reward and engagement in the last bag. the mediator and action in the
+[0:45:01] last bag. the mediator and action in the current back but previous time points
+[0:45:03] current back but previous time points and the um current context C. Another
+[0:45:08] and the um current context C. Another sufficient statistic could also include
+[0:45:10] sufficient statistic could also include the previous
+[0:45:12] the previous contexts. However, notice that uh the
+[0:45:15] contexts. However, notice that uh the sufficient statistic is not the only one
+[0:45:17] sufficient statistic is not the only one that guarantees markup transitions.
+[0:45:20] that guarantees markup transitions. There are also other states that have
+[0:45:22] There are also other states that have markup transitions. For example, if we
+[0:45:24] markup transitions. For example, if we substitute the mediator in state S with
+[0:45:27] substitute the mediator in state S with the previous context, then the state S
+[0:45:30] the previous context, then the state S hat also have mark of
+[0:45:37] transitions. Uh in fact, all the previously defined three states have
+[0:45:39] previously defined three states have mark of transitions within and across
+[0:45:41] mark of transitions within and across bags. And uh although their uh state
+[0:45:44] bags. And uh although their uh state transition is non-stationary within a
+[0:45:47] transition is non-stationary within a bag, it's generally stationary across
+[0:45:49] bag, it's generally stationary across bags. So actually all of them can fit
+[0:45:52] bags. So actually all of them can fit into the framework of a periodic MDP.
+[0:45:55] into the framework of a periodic MDP. Then which state is the
+[0:45:57] Then which state is the best? Um in fact we prove that the
+[0:46:00] best? Um in fact we prove that the optimal value function based on a DBUS
+[0:46:03] optimal value function based on a DBUS is no less than the optimal value
+[0:46:05] is no less than the optimal value function based on a nonbus. So this
+[0:46:08] function based on a nonbus. So this means that in all the distributions
+[0:46:11] means that in all the distributions compatible with the DAG a DBUS always
+[0:46:13] compatible with the DAG a DBUS always generates the maximal optimal value
+[0:46:16] generates the maximal optimal value function. Uh so like it will have the uh
+[0:46:19] function. Uh so like it will have the uh maximum cumulative rewards but this does
+[0:46:22] maximum cumulative rewards but this does not hold true for a
+[0:46:23] not hold true for a non-debus. And in this example of hard
+[0:46:26] non-debus. And in this example of hard steps the inequality strictly holds when
+[0:46:30] steps the inequality strictly holds when uh for example two different values of
+[0:46:32] uh for example two different values of the mediator correspond to different
+[0:46:35] the mediator correspond to different optimal um actions. So if we use the
+[0:46:39] optimal um actions. So if we use the mediator to choose the action we will
+[0:46:41] mediator to choose the action we will know which action to choose based on
+[0:46:43] know which action to choose based on specific values of the mediators. But if
+[0:46:46] specific values of the mediators. But if we only use the context C to choose the
+[0:46:49] we only use the context C to choose the action, then we can only choose it based
+[0:46:51] action, then we can only choose it based on the conditional distribution of M
+[0:46:54] on the conditional distribution of M given the C. And the takeaway here is
+[0:46:57] given the C. And the takeaway here is that when we design a clinical trial, it
+[0:47:00] that when we design a clinical trial, it is helpful to identify the mediators of
+[0:47:04] is helpful to identify the mediators of uh previous actions that could
+[0:47:06] uh previous actions that could potentially help us construct a better
+[0:47:08] potentially help us construct a better personalized
+[0:47:15] policy. And another aspect to compare the states is the learning variance
+[0:47:17] the states is the learning variance because uh both the sufficient
+[0:47:19] because uh both the sufficient statistics yield the maximum optimal
+[0:47:21] statistics yield the maximum optimal value function. Uh this happens when we
+[0:47:24] value function. Uh this happens when we have infinite amount of data to actually
+[0:47:27] have infinite amount of data to actually learn the true optimal policy. But
+[0:47:29] learn the true optimal policy. But during the learning process we have uh
+[0:47:32] during the learning process we have uh we only have finite samples. Then the
+[0:47:34] we only have finite samples. Then the sufficient statistic with a smaller
+[0:47:36] sufficient statistic with a smaller dimension will have a smaller learning
+[0:47:38] dimension will have a smaller learning variance. um because in this example we
+[0:47:41] variance. um because in this example we know that um given other variables in S
+[0:47:45] know that um given other variables in S check actually the previous context C
+[0:47:48] check actually the previous context C are independent of the future rewards.
+[0:47:50] are independent of the future rewards. So in the true optimal policy the
+[0:47:52] So in the true optimal policy the coefficients for this context C are
+[0:47:55] coefficients for this context C are actually zero. Then when we have finite
+[0:47:57] actually zero. Then when we have finite samples it's not sample efficient to
+[0:47:59] samples it's not sample efficient to learn this uh zero coefficients if we
+[0:48:02] learn this uh zero coefficients if we already know the conditional
+[0:48:03] already know the conditional independency implied by the
+[0:48:07] independency implied by the DAG. Okay. So, uh based on the
+[0:48:10] DAG. Okay. So, uh based on the previously defined states, action and
+[0:48:12] previously defined states, action and rewards, we will be able to uh form an
+[0:48:15] rewards, we will be able to uh form an RL algorithm. But due to the time
+[0:48:17] RL algorithm. But due to the time limits, I will only go over the highle
+[0:48:20] limits, I will only go over the highle idea of this algorithm. So, we adapt um
+[0:48:24] idea of this algorithm. So, we adapt um algorithm called random randomized less
+[0:48:27] algorithm called random randomized less value iteration to the problem with back
+[0:48:30] value iteration to the problem with back the decision times. Um, RLSVI is a
+[0:48:34] the decision times. Um, RLSVI is a Bashian method that handles the
+[0:48:35] Bashian method that handles the exploration exploitation trade-off in RL
+[0:48:39] exploration exploitation trade-off in RL by sampling from the posterior
+[0:48:40] by sampling from the posterior distribution of the policy
+[0:48:44] distribution of the policy parameters. Um, remember that Q function
+[0:48:47] parameters. Um, remember that Q function is the cumulative rewards given the
+[0:48:50] is the cumulative rewards given the current state and
+[0:48:51] current state and action and the Bellman optimality
+[0:48:54] action and the Bellman optimality equations describes the relationship
+[0:48:56] equations describes the relationship between the optimal Q functions. And uh
+[0:49:00] between the optimal Q functions. And uh here uh this BMA optimality equations
+[0:49:03] here uh this BMA optimality equations are specifically for the problem with
+[0:49:05] are specifically for the problem with spec decision types.
+[0:49:08] spec decision types. Then we model the Q function as a linear
+[0:49:10] Then we model the Q function as a linear function uh in the basis functions fi.
+[0:49:13] function uh in the basis functions fi. The basis function fi can be flexible to
+[0:49:16] The basis function fi can be flexible to capture any
+[0:49:17] capture any nonlinearity and then using the bellman
+[0:49:20] nonlinearity and then using the bellman optimality equations we can estimate the
+[0:49:22] optimality equations we can estimate the qstar and then feed a bashian linear
+[0:49:25] qstar and then feed a bashian linear regression of the estimate of qstar on
+[0:49:28] regression of the estimate of qstar on the basis functions.
+[0:49:31] the basis functions. Then an estimate of the parameter beta
+[0:49:34] Then an estimate of the parameter beta is to draw from the posterior
+[0:49:36] is to draw from the posterior distribution of beta. And then the
+[0:49:39] distribution of beta. And then the optimal action will be the one that
+[0:49:41] optimal action will be the one that maximizes the estimate of Qstar based on
+[0:49:45] maximizes the estimate of Qstar based on the specific value of beta tilda. Um
+[0:49:48] the specific value of beta tilda. Um here we want to draw beta tilda from the
+[0:49:50] here we want to draw beta tilda from the posterior distribution because uh this
+[0:49:52] posterior distribution because uh this has been proven to be an efficient way
+[0:49:55] has been proven to be an efficient way of exploration in RL.
+[0:50:03] Um in the end we in the clinical trial we will um compare the personalized
+[0:50:06] we will um compare the personalized policy learned online with a randomized
+[0:50:09] policy learned online with a randomized policy which always send an intervention
+[0:50:11] policy which always send an intervention with a fixed probability and this trial
+[0:50:14] with a fixed probability and this trial will go into the field next year. But
+[0:50:16] will go into the field next year. But before that we need to verify that our
+[0:50:19] before that we need to verify that our proposed algorithm is working as
+[0:50:21] proposed algorithm is working as expected on a simulation test bed. This
+[0:50:25] expected on a simulation test bed. This simulation test bed is constructed using
+[0:50:27] simulation test bed is constructed using previous hard steps data based on the
+[0:50:30] previous hard steps data based on the causal model in this deck and it
+[0:50:33] causal model in this deck and it provides an estimate of counterfactual
+[0:50:35] provides an estimate of counterfactual outcomes. So we will be able to evaluate
+[0:50:37] outcomes. So we will be able to evaluate the cumulative rewards um for a policy
+[0:50:41] the cumulative rewards um for a policy that might be different from the policy
+[0:50:44] that might be different from the policy used to collect the previous
+[0:50:46] used to collect the previous data. Um we do not know what the users
+[0:50:49] data. Um we do not know what the users will be like after the trial actually
+[0:50:51] will be like after the trial actually starts. So what we can do is to create
+[0:50:53] starts. So what we can do is to create different variants of the test bed that
+[0:50:56] different variants of the test bed that actually represents different
+[0:50:57] actually represents different possibilities of the users in the new
+[0:50:59] possibilities of the users in the new trial. And uh we want to verify that our
+[0:51:03] trial. And uh we want to verify that our proposed algorithm
+[0:51:06] proposed algorithm um with the same hyperparameters works
+[0:51:08] um with the same hyperparameters works well across all the testb variants. So
+[0:51:11] well across all the testb variants. So it's stable for um different
+[0:51:13] it's stable for um different possibilities of users.
+[0:51:17] possibilities of users. So in addition to the uh vanilla test
+[0:51:20] So in addition to the uh vanilla test bed which is directly constructed from
+[0:51:22] bed which is directly constructed from the um data, we also adjust the positive
+[0:51:27] the um data, we also adjust the positive effect that goes through the step counts
+[0:51:29] effect that goes through the step counts and the negative effect that goes
+[0:51:30] and the negative effect that goes through the engagement to create
+[0:51:33] through the engagement to create different variants of the test bed. And
+[0:51:35] different variants of the test bed. And uh we can see that our proposed
+[0:51:37] uh we can see that our proposed algorithm the backed RSVI is always one
+[0:51:40] algorithm the backed RSVI is always one of the optimal algorithms across
+[0:51:42] of the optimal algorithms across different variants. And uh the baseline
+[0:51:46] different variants. And uh the baseline algorithms um cannot um the baseline
+[0:51:49] algorithms um cannot um the baseline algorithms are able to capture the
+[0:51:51] algorithms are able to capture the positive effects but they fail to
+[0:51:53] positive effects but they fail to capture the delayed negative effect
+[0:51:56] capture the delayed negative effect reflected in the
+[0:52:02] disengagement. And although in general we uh want to trust the behavioral
+[0:52:05] we uh want to trust the behavioral theory embedded in the DAG, we also want
+[0:52:08] theory embedded in the DAG, we also want to uh be robust to mild
+[0:52:10] to uh be robust to mild misspecifications
+[0:52:12] misspecifications uh in the of the assumptions in the DAG.
+[0:52:16] uh in the of the assumptions in the DAG. So we also create the different variants
+[0:52:19] So we also create the different variants that add different edges to the DAG to
+[0:52:22] that add different edges to the DAG to represent um different variants of the
+[0:52:25] represent um different variants of the test bed. Um for example when here shows
+[0:52:29] test bed. Um for example when here shows two variants when the contacts are not
+[0:52:30] two variants when the contacts are not exogenous or when the mediators are
+[0:52:33] exogenous or when the mediators are misspecified and we can also see that
+[0:52:36] misspecified and we can also see that the proposed algorithm is stable um
+[0:52:38] the proposed algorithm is stable um across the
+[0:52:45] variants. So um for state construction we use the cos deck to construct the
+[0:52:47] we use the cos deck to construct the states that guarantees mark of state
+[0:52:49] states that guarantees mark of state transition while ensuring that it has
+[0:52:52] transition while ensuring that it has the maximal optimal value function and
+[0:52:54] the maximal optimal value function and minimal learning variance and then I
+[0:52:57] minimal learning variance and then I will briefly introduce how to use cos
+[0:53:00] will briefly introduce how to use cos for reward
+[0:53:01] for reward design. For reward design, we start from
+[0:53:04] design. For reward design, we start from a very simple case of online contextual
+[0:53:07] a very simple case of online contextual bandit, which means that previous
+[0:53:09] bandit, which means that previous actions do not affect the future
+[0:53:12] actions do not affect the future states. Instead of optimizing the
+[0:53:15] states. Instead of optimizing the original reward in the algorithm, we
+[0:53:18] original reward in the algorithm, we optimize a surrogate reward art defined
+[0:53:21] optimize a surrogate reward art defined as the conditional expectation of the
+[0:53:23] as the conditional expectation of the original reward given the mediator and
+[0:53:26] original reward given the mediator and the
+[0:53:27] the state. The intuition is as follows. um a
+[0:53:31] state. The intuition is as follows. um a surrogacy assumption assumes that
+[0:53:32] surrogacy assumption assumes that there's no direct effect from the action
+[0:53:36] there's no direct effect from the action to the reward. So given the mediator and
+[0:53:39] to the reward. So given the mediator and the state, the reward is independent of
+[0:53:42] the state, the reward is independent of the action. When the surrogacy
+[0:53:45] the action. When the surrogacy assumption holds, the expectation of the
+[0:53:48] assumption holds, the expectation of the surrogate reward is the same as the
+[0:53:50] surrogate reward is the same as the expectation of the original reward, but
+[0:53:53] expectation of the original reward, but the variance of the surrogate reward is
+[0:53:55] the variance of the surrogate reward is smaller.
+[0:53:56] smaller. And uh we still have this advantage even
+[0:53:59] And uh we still have this advantage even if the reward is learned online um
+[0:54:02] if the reward is learned online um because we can pull across different
+[0:54:04] because we can pull across different actions to estimate the target reward
+[0:54:07] actions to estimate the target reward since the target reward do not depend on
+[0:54:10] since the target reward do not depend on the action. But in a standard contextual
+[0:54:12] the action. But in a standard contextual bandit we need to learn the average
+[0:54:14] bandit we need to learn the average reward of each different action. So
+[0:54:18] reward of each different action. So pulling across uh different actions will
+[0:54:21] pulling across uh different actions will increase the sample efficiency.
+[0:54:25] increase the sample efficiency. Um so we use a reward design agent which
+[0:54:28] Um so we use a reward design agent which uh use previous data to learn the
+[0:54:31] uh use previous data to learn the surrogate reward and then the surrogate
+[0:54:34] surrogate reward and then the surrogate reward will be fit into abandoned oracle
+[0:54:36] reward will be fit into abandoned oracle which chooses an action based on the
+[0:54:39] which chooses an action based on the current state. Then the new information
+[0:54:42] current state. Then the new information will be given to the reward design agent
+[0:54:45] will be given to the reward design agent to update the surrogate reward online.
+[0:54:50] to update the surrogate reward online. Um, a regret is a measure of the
+[0:54:53] Um, a regret is a measure of the difference between the cumulative
+[0:54:54] difference between the cumulative rewards given the true optimal actions
+[0:54:57] rewards given the true optimal actions and the actions we chose that we choose.
+[0:55:01] and the actions we chose that we choose. Um, we were able to prove that when all
+[0:55:04] Um, we were able to prove that when all the cost of models are linear,
+[0:55:05] the cost of models are linear, optimizing the surrogate reward has the
+[0:55:08] optimizing the surrogate reward has the lower regret under this condition. And
+[0:55:11] lower regret under this condition. And this condition means that um if the
+[0:55:14] this condition means that um if the dimension of the mediator is relatively
+[0:55:17] dimension of the mediator is relatively small compared to the dimension of the
+[0:55:19] small compared to the dimension of the state then there is a then there's a
+[0:55:22] state then there is a then there's a larger advantage of pulling across
+[0:55:25] larger advantage of pulling across actions to estimate the surrogate
+[0:55:27] actions to estimate the surrogate reward. And here we also allow um mild
+[0:55:32] reward. And here we also allow um mild violation of the surrogacy assumption
+[0:55:34] violation of the surrogacy assumption which is quantified through the E here
+[0:55:37] which is quantified through the E here as the surrogate
+[0:55:39] as the surrogate arrow. Okay. Okay, I will skip the uh
+[0:55:42] arrow. Okay. Okay, I will skip the uh simulation results um due to time limit
+[0:55:46] simulation results um due to time limit but okay so let's um provide a summary
+[0:55:49] but okay so let's um provide a summary we use the causal deck for state
+[0:55:51] we use the causal deck for state construction in problem respect the
+[0:55:54] construction in problem respect the decision times the causal deck helps us
+[0:55:57] decision times the causal deck helps us uh recognize the back structure and its
+[0:56:00] uh recognize the back structure and its connection with the periodic MDP based
+[0:56:03] connection with the periodic MDP based on the cos we construct the state that
+[0:56:05] on the cos we construct the state that has a mark of state transitions within
+[0:56:08] has a mark of state transitions within and the crossbacks besides
+[0:56:10] and the crossbacks besides uh help us uh recognize the sufficient
+[0:56:13] uh help us uh recognize the sufficient statistic of the history with the
+[0:56:15] statistic of the history with the smallest dimension so that we can
+[0:56:17] smallest dimension so that we can guarantee the maximum optimal value
+[0:56:19] guarantee the maximum optimal value function and minimal learning
+[0:56:22] function and minimal learning variance. When we use it for reward
+[0:56:24] variance. When we use it for reward design, uh we construct a surrogate
+[0:56:27] design, uh we construct a surrogate reward uh with the mediators and the
+[0:56:30] reward uh with the mediators and the target reward is updated online.
+[0:56:34] target reward is updated online. uh using the surrogate reward in
+[0:56:35] uh using the surrogate reward in learning will reduce the variance and
+[0:56:37] learning will reduce the variance and also increase sample efficiency. Um here
+[0:56:40] also increase sample efficiency. Um here are the QR codes for the two papers that
+[0:56:43] are the QR codes for the two papers that I mentioned in the talk and uh that's
+[0:56:46] I mentioned in the talk and uh that's all for my talk. Thank you.
+[0:56:55] Fantastic. Thank you Dai. Um so there are some questions in the Q&amp;A. I think
+[0:56:56] are some questions in the Q&amp;A. I think maybe one of them you kind of already
+[0:56:59] maybe one of them you kind of already answered but just to be sure I'll ask
+[0:57:01] answered but just to be sure I'll ask you a bit. So the first question is what
+[0:57:03] you a bit. So the first question is what do you lose from collecting the period
+[0:57:05] do you lose from collecting the period action or intermediate variables into
+[0:57:07] action or intermediate variables into one period. So the action would be for
+[0:57:09] one period. So the action would be for example the sum of actions or the
+[0:57:11] example the sum of actions or the average during the period. Um so what do
+[0:57:14] average during the period. Um so what do you lose from this?
+[0:57:17] you lose from this? Uh okay so that's a good question. Um
+[0:57:20] Uh okay so that's a good question. Um the so like an alternative is to treat
+[0:57:24] the so like an alternative is to treat all the actions in a bag as an action
+[0:57:27] all the actions in a bag as an action vector right? But uh in that way we can
+[0:57:31] vector right? But uh in that way we can only choose it at the beginning of the
+[0:57:32] only choose it at the beginning of the bag and uh we cannot use the real-time
+[0:57:36] bag and uh we cannot use the real-time information like the context when we uh
+[0:57:38] information like the context when we uh choose this actions and actually that's
+[0:57:41] choose this actions and actually that's one of the baselines that we use in our
+[0:57:43] one of the baselines that we use in our um simulation where we choose all the
+[0:57:46] um simulation where we choose all the actions uh as a vector and choose it at
+[0:57:49] actions uh as a vector and choose it at the beginning of the bag. Okay, nice.
+[0:57:52] the beginning of the bag. Okay, nice. And then there's another question which
+[0:57:54] And then there's another question which is a bit more general I think. what kind
+[0:57:56] is a bit more general I think. what kind of vis functions fi could you include?
+[0:58:00] of vis functions fi could you include? Um so in our simulation we uh use the um
+[0:58:07] Um so in our simulation we uh use the um basically a linear function which only
+[0:58:10] basically a linear function which only include the state and the interaction
+[0:58:12] include the state and the interaction between the action and the state and
+[0:58:14] between the action and the state and also to increase the sample efficiency
+[0:58:16] also to increase the sample efficiency we actually uh pulled across different
+[0:58:19] we actually uh pulled across different time points to estimate the main effect
+[0:58:22] time points to estimate the main effect of the state. uh because otherwise since
+[0:58:25] of the state. uh because otherwise since there are uh many decision times in a
+[0:58:27] there are uh many decision times in a bag uh we need multiple parameters to
+[0:58:31] bag uh we need multiple parameters to estimate that but we only have limited
+[0:58:33] estimate that but we only have limited data. So uh that's what we used um yeah
+[0:58:37] data. So uh that's what we used um yeah it's basically a consideration of the
+[0:58:39] it's basically a consideration of the sample efficiency here but if we want to
+[0:58:41] sample efficiency here but if we want to qu if but if you want to wanted to be
+[0:58:43] qu if but if you want to wanted to be flexible to capture the nonlinearity
+[0:58:45] flexible to capture the nonlinearity other basis functions like um gshian
+[0:58:48] other basis functions like um gshian kernels or other kernels could also be
+[0:58:50] kernels or other kernels could also be used.
+[0:58:52] used. Okay, sounds good.
+[0:59:00] Thank you. Great. Thank you, Drago and Dai, for your
+[0:59:02] Thank you, Drago and Dai, for your wonderful contributions. We are also
+[0:59:04] wonderful contributions. We are also right on time. That rarely happens. So,
+[0:59:06] right on time. That rarely happens. So, let me just share my screen to wrap up
+[0:59:09] let me just share my screen to wrap up by sharing information about next week's
+[0:59:11] by sharing information about next week's talk. Um so next week we will have
+[0:59:15] talk. Um so next week we will have Angela Xiao from University of Southern
+[0:59:17] Angela Xiao from University of Southern California talking about robust twed Q
+[0:59:20] California talking about robust twed Q evaluation and iterations under
+[0:59:21] evaluation and iterations under sequentially exogenous and unobserved
+[0:59:23] sequentially exogenous and unobserved confounders and we will have Chin Yuan
+[0:59:26] confounders and we will have Chin Yuan Xiao from University of Cambridge as the
+[0:59:28] Xiao from University of Cambridge as the discussant. So hope to see you all next
+[0:59:30] discussant. So hope to see you all next week.
+[0:59:31] week. Thanks for the time and temptation.

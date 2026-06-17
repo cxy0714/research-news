@@ -1,0 +1,1661 @@
+[0:00:05] Welcome to the online causal inference seminar. Today we're excited to have two
+[0:00:07] seminar. Today we're excited to have two speakers. We have Falco Stoffel from
+[0:00:10] speakers. We have Falco Stoffel from Harvard University who will talk about
+[0:00:12] Harvard University who will talk about causal rule ensemble interpretable
+[0:00:14] causal rule ensemble interpretable inference of heterogeneous treatment
+[0:00:16] inference of heterogeneous treatment effects.
+[0:00:17] effects. He will take questions at the very end
+[0:00:19] He will take questions at the very end of his talk.
+[0:00:21] of his talk. After that, we have Eli Ben-Michael from
+[0:00:24] After that, we have Eli Ben-Michael from UC Berkeley who will talk about
+[0:00:26] UC Berkeley who will talk about synthetic controls with staggered
+[0:00:27] synthetic controls with staggered adoption. Also, he will take questions
+[0:00:31] adoption. Also, he will take questions after after his talk.
+[0:00:33] after after his talk. Um questions
+[0:00:34] Um questions as usual will be handled by Guillaume,
+[0:00:36] as usual will be handled by Guillaume, so I will now switch over to
+[0:00:39] so I will now switch over to him.
+[0:00:45] Thank you Dominic. Um so today we don't have anybody minding the the Q&amp;A, so
+[0:00:49] have anybody minding the the Q&amp;A, so I will just collect questions and
+[0:00:51] I will just collect questions and select a few to ask to Falco and Eli at
+[0:00:54] select a few to ask to Falco and Eli at the end of their talk. So
+[0:00:56] the end of their talk. So please do ask questions
+[0:00:59] please do ask questions and um
+[0:01:00] and um yeah, that's it.
+[0:01:02] yeah, that's it. Eli, no, Falco,
+[0:01:04] Eli, no, Falco, whenever you're ready.
+[0:01:27] So thanks everyone. Thanks to the organizer for such amazing
+[0:01:30] Thanks to the organizer for such amazing seminar series on causal inference. I'm
+[0:01:33] seminar series on causal inference. I'm truly honored to be here today to
+[0:01:35] truly honored to be here today to present my work, which is actually the
+[0:01:38] present my work, which is actually the second paper of my PhD dissertation and
+[0:01:41] second paper of my PhD dissertation and it's a joint work together with
+[0:01:43] it's a joint work together with Professor Kwansang Lee at KKY and
+[0:01:46] Professor Kwansang Lee at KKY and Professor Francesca Dominici at Harvard
+[0:01:48] Professor Francesca Dominici at Harvard University. The
+[0:01:50] University. The The work is entitled causal rule
+[0:01:52] The work is entitled causal rule ensemble and in this work we develop a
+[0:01:55] ensemble and in this work we develop a novel methodology to draw interpretable
+[0:01:58] novel methodology to draw interpretable inference of heterogeneous treatment
+[0:02:00] inference of heterogeneous treatment effects.
+[0:02:02] effects. Just to give you a brief idea on why
+[0:02:06] Just to give you a brief idea on why such a methodology is critical,
+[0:02:09] such a methodology is critical, I'll start by introducing the motivating
+[0:02:11] I'll start by introducing the motivating application. There is an extensive
+[0:02:13] application. There is an extensive literature both in health and social and
+[0:02:16] literature both in health and social and economic science that found negative
+[0:02:19] economic science that found negative effects of air pollution on uh health
+[0:02:22] effects of air pollution on uh health outcomes such as mortality or an
+[0:02:24] outcomes such as mortality or an increased risk of cardiovascular
+[0:02:26] increased risk of cardiovascular disease.
+[0:02:27] disease. However, just a few contributions have
+[0:02:30] However, just a few contributions have investigated in detail
+[0:02:32] investigated in detail how the effects of pollution vary across
+[0:02:36] how the effects of pollution vary across different subpopulations.
+[0:02:37] different subpopulations. For instance, the contribution by D and
+[0:02:40] For instance, the contribution by D and Colver did so but in an ad hoc way
+[0:02:44] Colver did so but in an ad hoc way introducing ex ante the subpopulation
+[0:02:47] introducing ex ante the subpopulation for which they developed the
+[0:02:49] for which they developed the heterogeneous effects analysis.
+[0:02:51] heterogeneous effects analysis. So, in this paper, what we want to do is
+[0:02:53] So, in this paper, what we want to do is to develop a methodology that
+[0:02:55] to develop a methodology that data-drivenly discovers such subgroups.
+[0:02:59] data-drivenly discovers such subgroups. Uh moreover, understanding which are the
+[0:03:02] Uh moreover, understanding which are the population that would suffer the most
+[0:03:04] population that would suffer the most from higher
+[0:03:06] from higher exposure to air pollution
+[0:03:08] exposure to air pollution uh is critical on one side to improve
+[0:03:12] uh is critical on one side to improve current policies, on the other side to
+[0:03:14] current policies, on the other side to design policies that are
+[0:03:17] design policies that are aimed at protecting most vulnerable
+[0:03:19] aimed at protecting most vulnerable people.
+[0:03:20] people. From the methodological side,
+[0:03:23] From the methodological side, there is a potential trade-off between
+[0:03:25] there is a potential trade-off between accuracy of prediction and
+[0:03:26] accuracy of prediction and interpretability
+[0:03:28] interpretability uh both
+[0:03:29] uh both in
+[0:03:30] in in prediction scenario and in a causal
+[0:03:33] in prediction scenario and in a causal scenario.
+[0:03:34] scenario. In this plot, as you can see on the
+[0:03:35] In this plot, as you can see on the x-axis, we have plotted the
+[0:03:37] x-axis, we have plotted the interpretability ranging from low
+[0:03:39] interpretability ranging from low interpretability to high
+[0:03:41] interpretability to high and on the y-axis, the accuracy. And we
+[0:03:43] and on the y-axis, the accuracy. And we have a set of various potential models
+[0:03:46] have a set of various potential models to draw inference. As you can see on the
+[0:03:47] to draw inference. As you can see on the bottom right part, we have linear models
+[0:03:50] bottom right part, we have linear models and maybe regression which have provide
+[0:03:53] and maybe regression which have provide really high level of accuracy,
+[0:03:55] really high level of accuracy, but however, have lower levels sorry, a
+[0:03:59] but however, have lower levels sorry, a high level of interpretability, but
+[0:04:01] high level of interpretability, but lower levels of accuracy.
+[0:04:03] lower levels of accuracy. On the opposite side of the spectrum, on
+[0:04:05] On the opposite side of the spectrum, on the top left, we have ensemble methods
+[0:04:07] the top left, we have ensemble methods such as the one proposed by
+[0:04:11] such as the one proposed by Bager Stefan Bager and
+[0:04:13] Bager Stefan Bager and and Athey, their causal forest
+[0:04:15] and Athey, their causal forest algorithm, which have really high levels
+[0:04:18] algorithm, which have really high levels of accuracy,
+[0:04:20] of accuracy, but lower levels of of interpretability.
+[0:04:24] but lower levels of of interpretability. Hence, the goal of our methodology, our
+[0:04:27] Hence, the goal of our methodology, our causal woman sample, is to develop an
+[0:04:29] causal woman sample, is to develop an ensemble method to keep high level of
+[0:04:33] ensemble method to keep high level of accuracy while improving the
+[0:04:35] accuracy while improving the interpretability. And let me stress that
+[0:04:38] interpretability. And let me stress that such a methodology will be agnostic to
+[0:04:41] such a methodology will be agnostic to the choice on the method that will be
+[0:04:43] the choice on the method that will be used to estimate the individual
+[0:04:45] used to estimate the individual treatment effects, as we will see in a
+[0:04:47] treatment effects, as we will see in a in a couple of slides.
+[0:04:50] in a couple of slides. Uh the methodological
+[0:04:51] Uh the methodological motivation leads to drawing
+[0:04:53] motivation leads to drawing interpretable algorithm for
+[0:04:54] interpretable algorithm for heterogeneous causal effect with a high
+[0:04:56] heterogeneous causal effect with a high level of accuracy.
+[0:04:58] level of accuracy. Uh just let me go through the setup.
+[0:05:01] Uh just let me go through the setup. Uh we have a usual setup with a binary
+[0:05:04] Uh we have a usual setup with a binary treatment X and an outcome variable Y
+[0:05:08] treatment X and an outcome variable Y over a population of J units from 1 to
+[0:05:11] over a population of J units from 1 to N. Moreover, we have next
+[0:05:14] N. Moreover, we have next Y P-dimensional vector of covariates,
+[0:05:17] Y P-dimensional vector of covariates, and we will assume throughout the paper
+[0:05:20] and we will assume throughout the paper uh the so-called Rubin causal model, in
+[0:05:23] uh the so-called Rubin causal model, in which we postulate existence of a pair
+[0:05:25] which we postulate existence of a pair of potential outcome YI YJ1, which is
+[0:05:29] of potential outcome YI YJ1, which is the potential outcome under treatment,
+[0:05:30] the potential outcome under treatment, and YJ0, which is the potential outcome
+[0:05:33] and YJ0, which is the potential outcome under control. Uh as usual, the
+[0:05:37] under control. Uh as usual, the fundamental problem of such
+[0:05:39] fundamental problem of such such
+[0:05:40] such framework is that we cannot observe
+[0:05:43] framework is that we cannot observe simultaneously for the same unit both
+[0:05:45] simultaneously for the same unit both potential outcome under treatment and
+[0:05:47] potential outcome under treatment and under control.
+[0:05:49] under control. Throughout the paper, we will make a set
+[0:05:50] Throughout the paper, we will make a set of assumption
+[0:05:52] of assumption namely the stable unit treatment value
+[0:05:54] namely the stable unit treatment value assumption which will rule out the
+[0:05:57] assumption which will rule out the presence of interference and namely the
+[0:06:00] presence of interference and namely the fact that the assignment
+[0:06:04] fact that the assignment the treatment the treatment assigned to
+[0:06:05] the treatment the treatment assigned to a unit could potentially interfere with
+[0:06:07] a unit could potentially interfere with potential outcome of other units and
+[0:06:09] potential outcome of other units and moreover it also rules out the
+[0:06:12] moreover it also rules out the presence of hidden levels of the
+[0:06:14] presence of hidden levels of the treatment.
+[0:06:15] treatment. Second assumption is the usual
+[0:06:17] Second assumption is the usual unconfoundedness assumption which states
+[0:06:20] unconfoundedness assumption which states that conditional on the background of
+[0:06:22] that conditional on the background of covariates, the potential outcomes are
+[0:06:25] covariates, the potential outcomes are independent to the treatment.
+[0:06:27] independent to the treatment. Moreover, we will assume overlap where
+[0:06:30] Moreover, we will assume overlap where the propensity score is bounded away
+[0:06:33] the propensity score is bounded away from zero and one where the propensity
+[0:06:35] from zero and one where the propensity score is the probability of being
+[0:06:37] score is the probability of being treated conditional on a certain set of
+[0:06:40] treated conditional on a certain set of covariates.
+[0:06:41] covariates. Um
+[0:06:43] Um Again,
+[0:06:44] Again, the main problem
+[0:06:45] the main problem as explained by Holland is that the
+[0:06:48] as explained by Holland is that the treatment effects can never be observed
+[0:06:50] treatment effects can never be observed simultaneously for the same so the same
+[0:06:52] simultaneously for the same so the same units and what we can get out of from
+[0:06:55] units and what we can get out of from the data is
+[0:06:56] the data is the observed observed outcome which
+[0:07:00] the observed observed outcome which correspond to their realized treatment
+[0:07:01] correspond to their realized treatment level.
+[0:07:02] level. Throughout this paper, we will consider
+[0:07:04] Throughout this paper, we will consider the conditional average treatment effect
+[0:07:06] the conditional average treatment effect the CATE which is the expected value of
+[0:07:11] the CATE which is the expected value of potential outcome under treatment minus
+[0:07:13] potential outcome under treatment minus the potential outcome under control
+[0:07:14] the potential outcome under control conditional on a certain set of
+[0:07:16] conditional on a certain set of covariates where the average treatment
+[0:07:18] covariates where the average treatment effect is simply
+[0:07:19] effect is simply the expected value of CATE.
+[0:07:21] the expected value of CATE. Hence, assuming one to three to hold,
+[0:07:24] Hence, assuming one to three to hold, CATE can be identified as in in the
+[0:07:27] CATE can be identified as in in the formula in
+[0:07:29] formula in equation one.
+[0:07:31] equation one. Um
+[0:07:32] Um Why interpretability and how to get
+[0:07:34] Why interpretability and how to get interpretability?
+[0:07:36] interpretability? According to recent contribution by
+[0:07:39] According to recent contribution by Miller and Kim, they found out that they
+[0:07:42] Miller and Kim, they found out that they define interpretability as the degree to
+[0:07:44] define interpretability as the degree to which a human can understand the causes
+[0:07:48] which a human can understand the causes of a decision on one side and on the
+[0:07:49] of a decision on one side and on the other side
+[0:07:51] other side uh if a human can consistently predict
+[0:07:54] uh if a human can consistently predict the outcome of a certain decision. We
+[0:07:56] the outcome of a certain decision. We claim that decision rules that are based
+[0:07:59] claim that decision rules that are based on simple if-then statement regarding
+[0:08:02] on simple if-then statement regarding cellular condition provide a very nice
+[0:08:06] cellular condition provide a very nice framework for interpretability. As you
+[0:08:08] framework for interpretability. As you can see from this simple rule-based
+[0:08:12] can see from this simple rule-based example, we could draw a tree going from
+[0:08:15] example, we could draw a tree going from a total sample and performing splits on
+[0:08:18] a total sample and performing splits on two covariates in this case, whether
+[0:08:20] two covariates in this case, whether person is a a female or a male or
+[0:08:23] person is a a female or a male or whether this person is young or old and
+[0:08:26] whether this person is young or old and go from the total sample to subsamples
+[0:08:30] go from the total sample to subsamples defined by the splits where we would
+[0:08:32] defined by the splits where we would define as the rules the subpopulation
+[0:08:35] define as the rules the subpopulation contained within the different the
+[0:08:38] contained within the different the different nodes and leaves of this tree.
+[0:08:42] different nodes and leaves of this tree. Uh just to give you a brief idea on how
+[0:08:45] Uh just to give you a brief idea on how our methodology would work in a
+[0:08:47] our methodology would work in a nutshell,
+[0:08:49] nutshell, we would start by taking an honest
+[0:08:51] we would start by taking an honest inference approach
+[0:08:53] inference approach as the one introduced by Athey and
+[0:08:55] as the one introduced by Athey and Imbens in 2016 and we will divide the
+[0:08:58] Imbens in 2016 and we will divide the overall sample into a discovery and an
+[0:09:00] overall sample into a discovery and an inference sample and we'll do so to
+[0:09:02] inference sample and we'll do so to avoid potential discovery of a spurious
+[0:09:05] avoid potential discovery of a spurious heterogeneity.
+[0:09:06] heterogeneity. On the discovery subsample, we will use
+[0:09:09] On the discovery subsample, we will use in our application we will use Bayesian
+[0:09:11] in our application we will use Bayesian causal forest by Hahn and co-authors to
+[0:09:15] causal forest by Hahn and co-authors to estimate the conditional average
+[0:09:16] estimate the conditional average treatment effect
+[0:09:18] treatment effect at each unit level. However, again, let
+[0:09:21] at each unit level. However, again, let me stress that our the proposed
+[0:09:23] me stress that our the proposed methodology
+[0:09:25] methodology is agnostic on the choice of which uh
+[0:09:28] is agnostic on the choice of which uh on which
+[0:09:30] on which methodology to use for the for
+[0:09:33] methodology to use for the for for performing this step
+[0:09:36] for performing this step on the imputation of the unit level
+[0:09:38] on the imputation of the unit level treatment.
+[0:09:39] treatment. Moreover, once the unit level treatments
+[0:09:42] Moreover, once the unit level treatments are um
+[0:09:43] are um are fit, we will build as causal rules
+[0:09:46] are fit, we will build as causal rules by regressing tau x on the on the
+[0:09:50] by regressing tau x on the on the covariates using both random forest and
+[0:09:53] covariates using both random forest and gradient boosting, and we use both these
+[0:09:55] gradient boosting, and we use both these methodologies in order to get as wider
+[0:09:58] methodologies in order to get as wider sample as possible potential important
+[0:10:00] sample as possible potential important causal rules. And then, among the uh the
+[0:10:04] causal rules. And then, among the uh the causal rules that will be uh selected
+[0:10:06] causal rules that will be uh selected from this uh third step, we will use
+[0:10:10] from this uh third step, we will use stability selection ba- on based on
+[0:10:13] stability selection ba- on based on lasso to just select the most important
+[0:10:16] lasso to just select the most important rules, namely the one that uh really
+[0:10:18] rules, namely the one that uh really provide uh an interpretable inference on
+[0:10:21] provide uh an interpretable inference on the heterogeneous effect.
+[0:10:23] the heterogeneous effect. Uh in a second step, we will move to the
+[0:10:26] Uh in a second step, we will move to the inference subsample, and we will
+[0:10:28] inference subsample, and we will estimate the causal effect of the
+[0:10:30] estimate the causal effect of the conditional causal effect for the uh
+[0:10:33] conditional causal effect for the uh causal rules that were discovered in the
+[0:10:35] causal rules that were discovered in the previous step, and then we will also
+[0:10:37] previous step, and then we will also perform a sensitivity analysis for each
+[0:10:40] perform a sensitivity analysis for each rule.
+[0:10:41] rule. So, after the zoom out, let me uh zoom
+[0:10:43] So, after the zoom out, let me uh zoom in in how uh our methodology uh works.
+[0:10:47] in in how uh our methodology uh works. So, uh the discovery step has two main
+[0:10:50] So, uh the discovery step has two main parts. The first part is the rules
+[0:10:52] parts. The first part is the rules generation, in which we again run a
+[0:10:55] generation, in which we again run a Bayesian causal forest to
+[0:10:58] Bayesian causal forest to uh with the estimated propensity score
+[0:11:00] uh with the estimated propensity score to get the unit level uh treatments. And
+[0:11:03] to get the unit level uh treatments. And then, we would fit uh a random forest
+[0:11:05] then, we would fit uh a random forest and gradient boosting on the fitted
+[0:11:07] and gradient boosting on the fitted values uh for this prediction and on the
+[0:11:11] values uh for this prediction and on the covariate space. So, we will end up
+[0:11:13] covariate space. So, we will end up here, it's a simple example, with just
+[0:11:15] here, it's a simple example, with just five trees drawn from these
+[0:11:18] five trees drawn from these uh selection of random forest and
+[0:11:21] uh selection of random forest and gradient boosted forest trees, in which
+[0:11:23] gradient boosted forest trees, in which we have five uh simple uh trees with uh
+[0:11:26] we have five uh simple uh trees with uh an overall number of 13 potential causal
+[0:11:30] an overall number of 13 potential causal rule corresponding to the various nodes
+[0:11:32] rule corresponding to the various nodes and leaves of the tree.
+[0:11:34] and leaves of the tree. Uh hence again, it is important in order
+[0:11:37] Uh hence again, it is important in order to improve the interpretability of this
+[0:11:39] to improve the interpretability of this methodology to select just those rules
+[0:11:43] methodology to select just those rules that causal rules that are important.
+[0:11:46] that causal rules that are important. And we will do so in two steps. The
+[0:11:47] And we will do so in two steps. The first one we will consider following
+[0:11:50] first one we will consider following linear model again we will where we will
+[0:11:52] linear model again we will where we will regress
+[0:11:53] regress the predicted
+[0:11:55] the predicted unit level treatments
+[0:11:57] unit level treatments on the generated rules from the rules
+[0:12:00] on the generated rules from the rules generation step. And then we will employ
+[0:12:03] generation step. And then we will employ penalized regression to select just the
+[0:12:06] penalized regression to select just the important rules where
+[0:12:07] important rules where as you can see here we use lasso based
+[0:12:10] as you can see here we use lasso based stability selection. And again going
+[0:12:12] stability selection. And again going back to the figure, the
+[0:12:14] back to the figure, the selected rules would be just a subsample
+[0:12:18] selected rules would be just a subsample of the overall discovered rules in the
+[0:12:20] of the overall discovered rules in the simple case of the picture just the red
+[0:12:24] simple case of the picture just the red ones. So, the ones that have higher
+[0:12:26] ones. So, the ones that have higher levels of heterogeneity.
+[0:12:29] levels of heterogeneity. Uh then uh from the discovery step we
+[0:12:32] Uh then uh from the discovery step we will move to the inference step where
+[0:12:35] will move to the inference step where among the initially generated rules,
+[0:12:38] among the initially generated rules, uh we will uh define
+[0:12:41] uh we will uh define uh a
+[0:12:41] uh a matrix X containing only the selected
+[0:12:44] matrix X containing only the selected decision rules. So, in this matrix we
+[0:12:47] decision rules. So, in this matrix we will have as columns only the selected
+[0:12:49] will have as columns only the selected decision rules. And then we will employ
+[0:12:52] decision rules. And then we will employ a new vector uh tau star
+[0:12:55] a new vector uh tau star uh with which is just an intermediate
+[0:12:57] uh with which is just an intermediate value in the inference step uh which is
+[0:13:00] value in the inference step uh which is uh an estimation of the unit level
+[0:13:02] uh an estimation of the unit level treatment again.
+[0:13:04] treatment again. And the estimation can be viewed as an
+[0:13:06] And the estimation can be viewed as an observable quantity with some sampling
+[0:13:09] observable quantity with some sampling error
+[0:13:10] error uh where again tau star is the estimated
+[0:13:13] uh where again tau star is the estimated value. Then if we plug in three and two,
+[0:13:17] value. Then if we plug in three and two, the modified linear model that we would
+[0:13:19] the modified linear model that we would find is the one
+[0:13:21] find is the one uh in four where again uh X tilde
+[0:13:25] uh in four where again uh X tilde corresponds to the matrix containing the
+[0:13:27] corresponds to the matrix containing the selected rules and the beta coefficients
+[0:13:31] selected rules and the beta coefficients correspond to the treatment effect for
+[0:13:34] correspond to the treatment effect for these these rules. Hence, the
+[0:13:35] these these rules. Hence, the heterogeneous heterogeneous effects.
+[0:13:38] heterogeneous heterogeneous effects. Um just to provide a little bit more
+[0:13:40] Um just to provide a little bit more details on these inference step, uh the
+[0:13:42] details on these inference step, uh the model in four is uh
+[0:13:44] model in four is uh was considered in Lewis and Linzer that
+[0:13:47] was considered in Lewis and Linzer that found through simulation study that's uh
+[0:13:49] found through simulation study that's uh OLS estimator performs well. And
+[0:13:52] OLS estimator performs well. And moreover, since the error term is uh is
+[0:13:54] moreover, since the error term is uh is not homoscedastic, it was homoscedastic,
+[0:13:57] not homoscedastic, it was homoscedastic, we can consider
+[0:13:59] we can consider uh Efron and White heteroscedastic
+[0:14:01] uh Efron and White heteroscedastic consistent standard error.
+[0:14:04] consistent standard error. And based on this, we also consider the
+[0:14:07] And based on this, we also consider the OLS estimator for beta, which is the
+[0:14:09] OLS estimator for beta, which is the usual estimator where we plug in uh
+[0:14:11] usual estimator where we plug in uh tilde star. And uh the fitted values uh
+[0:14:15] tilde star. And uh the fitted values uh tau hat can be derived as in equation
+[0:14:18] tau hat can be derived as in equation six. Uh throughout the paper, we also
+[0:14:20] six. Uh throughout the paper, we also show that if the tau star that was
+[0:14:23] show that if the tau star that was employed to estimate individual
+[0:14:25] employed to estimate individual treatment effects um was in this
+[0:14:28] treatment effects um was in this inference step um is consistent and is
+[0:14:32] inference step um is consistent and is has a finite variance, then also the
+[0:14:35] has a finite variance, then also the estimated beta hats are consistent and
+[0:14:38] estimated beta hats are consistent and are also asymptotically normal.
+[0:14:40] are also asymptotically normal. Moreover, uh we can develop sensitivity
+[0:14:43] Moreover, uh we can develop sensitivity analysis on uh on such uh develop beta
+[0:14:47] analysis on uh on such uh develop beta hats. So, we can also assess how
+[0:14:50] hats. So, we can also assess how uh the effect of potential measured
+[0:14:52] uh the effect of potential measured confounder would uh change the estimated
+[0:14:56] confounder would uh change the estimated heterogeneous treatment effects.
+[0:14:59] heterogeneous treatment effects. Uh in order to assess the performance of
+[0:15:03] Uh in order to assess the performance of our methodology, we built a simulation
+[0:15:06] our methodology, we built a simulation study in which we uh generated
+[0:15:10] study in which we uh generated a series of data set, and in particular,
+[0:15:13] a series of data set, and in particular, we generated 10 different binary
+[0:15:15] we generated 10 different binary covariates sampling from a Bernoulli,
+[0:15:18] covariates sampling from a Bernoulli, uh an individual treatment X uh coming
+[0:15:22] uh an individual treatment X uh coming from a binomial where P, the uh
+[0:15:24] from a binomial where P, the uh probability, is a function again is a
+[0:15:27] probability, is a function again is a function of
+[0:15:29] function of a set of confounders. And then we will
+[0:15:31] a set of confounders. And then we will generate
+[0:15:33] generate a potential outcome sampling from a
+[0:15:36] a potential outcome sampling from a normal distribution for the potential
+[0:15:38] normal distribution for the potential outcome under control. And while the
+[0:15:41] outcome under control. And while the potential outcome under treatment will
+[0:15:42] potential outcome under treatment will be simply the potential outcome under
+[0:15:44] be simply the potential outcome under control plus some some effect which will
+[0:15:48] control plus some some effect which will will be set to be a thorough genius.
+[0:15:51] will be set to be a thorough genius. Finally, the we will generate the
+[0:15:52] Finally, the we will generate the observed outcome simply as a combination
+[0:15:54] observed outcome simply as a combination of the two, you know, previously
+[0:15:57] of the two, you know, previously generated potential outcomes plus some
+[0:16:01] generated potential outcomes plus some confounder which in this case will be
+[0:16:03] confounder which in this case will be set to be linear confounder. However, we
+[0:16:06] set to be linear confounder. However, we also make our simulation robust by
+[0:16:09] also make our simulation robust by introducing a linear confounder.
+[0:16:12] introducing a linear confounder. What we do then, we vary three factors,
+[0:16:15] What we do then, we vary three factors, namely the number of the score of causal
+[0:16:18] namely the number of the score of causal rules.
+[0:16:19] rules. The effect size for the heterogeneous
+[0:16:22] The effect size for the heterogeneous effects.
+[0:16:23] effects. And the sample size that's going to be
+[0:16:26] And the sample size that's going to be 1,000 data set and 2,000 data sets.
+[0:16:29] 1,000 data set and 2,000 data sets. Just to briefly introduce the two
+[0:16:32] Just to briefly introduce the two simulation scenario that I will show you
+[0:16:35] simulation scenario that I will show you the results for.
+[0:16:37] the results for. The first simulation scenario here you
+[0:16:39] The first simulation scenario here you can see tau as the heterogeneous effect
+[0:16:42] can see tau as the heterogeneous effect defined by the tree, by the splits in
+[0:16:44] defined by the tree, by the splits in the tree. Where as you can see, we have
+[0:16:47] the tree. Where as you can see, we have tau to be H. Again, H will vary between
+[0:16:51] tau to be H. Again, H will vary between zero and four.
+[0:16:53] zero and four. If the subpopulation is defined by X
+[0:16:57] If the subpopulation is defined by X being equal to zero, X1 being equal to
+[0:16:59] being equal to zero, X1 being equal to zero and X2 being equal to zero. And on
+[0:17:02] zero and X2 being equal to zero. And on the opposite side we'll have a
+[0:17:04] the opposite side we'll have a tau to be minus H if X1 is equal to one
+[0:17:08] tau to be minus H if X1 is equal to one and X2 is equal to one as well.
+[0:17:11] and X2 is equal to one as well. While for the overall population, the
+[0:17:13] While for the overall population, the effect will be constant and and equal to
+[0:17:16] effect will be constant and and equal to zero. In the more complex case, we will
+[0:17:19] zero. In the more complex case, we will set the rules to be four and we will
+[0:17:23] set the rules to be four and we will employ three splits, so we will employ
+[0:17:25] employ three splits, so we will employ one more level of complexity and we
+[0:17:28] one more level of complexity and we won't split just on X1 and X2, but we'll
+[0:17:30] won't split just on X1 and X2, but we'll also
+[0:17:31] also use X3 and we will add more complexity
+[0:17:34] use X3 and we will add more complexity by introducing four different
+[0:17:37] by introducing four different heterogeneous effect while again the
+[0:17:39] heterogeneous effect while again the average treatment effect is going to be
+[0:17:42] average treatment effect is going to be set to zero.
+[0:17:44] set to zero. Just to go through the results, I will
+[0:17:47] Just to go through the results, I will introduce two different sets of the
+[0:17:48] introduce two different sets of the results. The first results are the ones
+[0:17:51] results. The first results are the ones for the discovery steps and so how much
+[0:17:55] for the discovery steps and so how much times our algorithm, how many times our
+[0:17:57] times our algorithm, how many times our algorithm is able to discover all the
+[0:18:00] algorithm is able to discover all the correct rules. So as you can see from
+[0:18:01] correct rules. So as you can see from this plot in the first row, you can see
+[0:18:04] this plot in the first row, you can see the results from 1,000 observation on
+[0:18:07] the results from 1,000 observation on the left side
+[0:18:09] the left side here, you can see the two two lines, the
+[0:18:12] here, you can see the two two lines, the two true rules and with four true rules.
+[0:18:15] two true rules and with four true rules. And we compare our causal rule ensemble
+[0:18:18] And we compare our causal rule ensemble algorithm
+[0:18:19] algorithm with the honest causal tree that was
+[0:18:22] with the honest causal tree that was also the one employed by Lee in his the
+[0:18:26] also the one employed by Lee in his the novel discovery paper.
+[0:18:28] novel discovery paper. The red line is for the our causal rule
+[0:18:31] The red line is for the our causal rule ensemble while the blue line is for the
+[0:18:34] ensemble while the blue line is for the honest causal tree. And as you can see,
+[0:18:36] honest causal tree. And as you can see, the better performance is achieved when
+[0:18:39] the better performance is achieved when the algorithms would get to discover
+[0:18:42] the algorithms would get to discover both the two and four rules both in the
+[0:18:45] both the two and four rules both in the case of one thousand and two thousand
+[0:18:47] case of one thousand and two thousand observation. As you can see,
+[0:18:50] observation. As you can see, the red line, the causal rule ensemble,
+[0:18:52] the red line, the causal rule ensemble, seems to
+[0:18:54] seems to have a very good performance in getting
+[0:18:57] have a very good performance in getting to the correct identification of all the
+[0:18:59] to the correct identification of all the causal rules both in the case of
+[0:19:03] causal rules both in the case of two and four causal rules.
+[0:19:06] two and four causal rules. In this simple scenario, we had no
+[0:19:08] In this simple scenario, we had no overlap between the effect modifiers and
+[0:19:10] overlap between the effect modifiers and the confounders while in the second
+[0:19:12] the confounders while in the second scenario, we introduce confounding uh
+[0:19:15] scenario, we introduce confounding uh and we introduce sorry, overlap between
+[0:19:17] and we introduce sorry, overlap between the effect modifiers and the
+[0:19:18] the effect modifiers and the confounders. And this is a case that can
+[0:19:20] confounders. And this is a case that can also be thought to be quite relevant,
+[0:19:22] also be thought to be quite relevant, especially in air pollution analysis in
+[0:19:24] especially in air pollution analysis in which effect modifiers and confounders
+[0:19:27] which effect modifiers and confounders can be potentially the the same. And as
+[0:19:30] can be potentially the the same. And as you can see, the performance of our
+[0:19:32] you can see, the performance of our causal rule ensemble is consistent and
+[0:19:35] causal rule ensemble is consistent and it's again able as a function of the of
+[0:19:39] it's again able as a function of the of the effect size on the x-axis
+[0:19:42] the effect size on the x-axis to discover all the true rules.
+[0:19:46] to discover all the true rules. While the performance of the of this
+[0:19:48] While the performance of the of this causal tree seems to deteriorate a bit.
+[0:19:52] causal tree seems to deteriorate a bit. Moving to the estimation simulation, we
+[0:19:56] Moving to the estimation simulation, we use the first scenario, the one with two
+[0:19:58] use the first scenario, the one with two causal rules, to
+[0:20:01] causal rules, to see how
+[0:20:02] see how accurate are the prediction based on the
+[0:20:05] accurate are the prediction based on the mean square error on the root mean
+[0:20:07] mean square error on the root mean square error. And we employ different
+[0:20:11] square error. And we employ different splits between different ratio of the
+[0:20:14] splits between different ratio of the splits between the discovery and the
+[0:20:18] splits between the discovery and the inference sample. And as you can see
+[0:20:20] inference sample. And as you can see here, for instance, CRE 50 means that
+[0:20:24] here, for instance, CRE 50 means that 50% of observation are assigned to the
+[0:20:27] 50% of observation are assigned to the discovery set while the other 50% are
+[0:20:29] discovery set while the other 50% are assigned to the
+[0:20:31] assigned to the to the inference set.
+[0:20:33] to the inference set. And we compare our results with the ones
+[0:20:35] And we compare our results with the ones that would
+[0:20:36] that would that would be obtained through the
+[0:20:38] that would be obtained through the Bayesian causal forest. We find, and
+[0:20:41] Bayesian causal forest. We find, and this is consistent also with Lee, that
+[0:20:44] this is consistent also with Lee, that the split level that assigns 25%
+[0:20:48] the split level that assigns 25% to the discovery set and 75% to the
+[0:20:51] to the discovery set and 75% to the estimation set seems to be the one that
+[0:20:54] estimation set seems to be the one that performs best. And as you can see, the
+[0:20:56] performs best. And as you can see, the results from this estimation procedure
+[0:20:59] results from this estimation procedure are are quite accurate and they are
+[0:21:02] are are quite accurate and they are competitive to the one of the Bayesian
+[0:21:04] competitive to the one of the Bayesian causal forest
+[0:21:06] causal forest algorithm.
+[0:21:08] algorithm. Then we move to
+[0:21:10] Then we move to application
+[0:21:12] application where again the aim here is to
+[0:21:15] where again the aim here is to understand which are the subgroups,
+[0:21:18] understand which are the subgroups, meaning the subpopulations,
+[0:21:20] meaning the subpopulations, that are most vulnerable to the effects
+[0:21:23] that are most vulnerable to the effects of air pollution.
+[0:21:24] of air pollution. Uh in particular, we have data on
+[0:21:27] Uh in particular, we have data on 1,600,000
+[0:21:29] 1,600,000 Medicare beneficiaries in New England uh
+[0:21:32] Medicare beneficiaries in New England uh between 2000 and 2006 where Medicare
+[0:21:35] between 2000 and 2006 where Medicare beneficiaries are the elderly population
+[0:21:38] beneficiaries are the elderly population of of the United States.
+[0:21:40] of of the United States. And uh we set the treatment to be a
+[0:21:42] And uh we set the treatment to be a function of the 2-year average PM2.5
+[0:21:46] function of the 2-year average PM2.5 level where uh we set the binary
+[0:21:49] level where uh we set the binary threshold, namely
+[0:21:50] threshold, namely uh a county and person in the county is
+[0:21:53] uh a county and person in the county is going to be treated if the level of
+[0:21:55] going to be treated if the level of PM2.5 exceeds 12 microgram per cubic
+[0:21:59] PM2.5 exceeds 12 microgram per cubic meters, which was uh the level uh that
+[0:22:02] meters, which was uh the level uh that was set by national air quality standard
+[0:22:05] was set by national air quality standard uh committee.
+[0:22:06] uh committee. And uh the outcome that we consider is
+[0:22:09] And uh the outcome that we consider is 5-year mortality.
+[0:22:11] 5-year mortality. And we control for a set of
+[0:22:14] And we control for a set of individual-level covariates
+[0:22:16] individual-level covariates such as
+[0:22:17] such as uh sex, uh Medicare eligible, and uh uh
+[0:22:21] uh sex, uh Medicare eligible, and uh uh 10 county-level covariates. And
+[0:22:23] 10 county-level covariates. And moreover, to make our analysis
+[0:22:25] moreover, to make our analysis comparable to the one uh that was
+[0:22:28] comparable to the one uh that was performed on the same data by Lee and
+[0:22:30] performed on the same data by Lee and co-authors in 2018, we used the same
+[0:22:33] co-authors in 2018, we used the same matching procedure, uh namely exact
+[0:22:36] matching procedure, uh namely exact matching
+[0:22:37] matching on on the individual-level
+[0:22:39] on on the individual-level characteristics.
+[0:22:40] characteristics. And uh the final analysis is conducted
+[0:22:43] And uh the final analysis is conducted on final sample of 220,000
+[0:22:47] on final sample of 220,000 uh units.
+[0:22:48] uh units. Let me stress, as you can see from the A
+[0:22:50] Let me stress, as you can see from the A plot, that New England is quite an
+[0:22:52] plot, that New England is quite an interesting case study SARS. The level
+[0:22:55] interesting case study SARS. The level of pollution uh there are uh high uh in
+[0:22:59] of pollution uh there are uh high uh in some areas, while they also entail uh
+[0:23:02] some areas, while they also entail uh potential controls because uh
+[0:23:04] potential controls because uh uh we also have lower levels than 12.
+[0:23:08] uh we also have lower levels than 12. For the results are shown in these
+[0:23:12] For the results are shown in these in this table. Here we find that where
+[0:23:16] in this table. Here we find that where the intercept indicates the subgroup
+[0:23:19] the intercept indicates the subgroup which does not belong to the discovered
+[0:23:21] which does not belong to the discovered rules. We have four discovered rules.
+[0:23:24] rules. We have four discovered rules. R1 to R4 and
+[0:23:27] R1 to R4 and the intercept stands for
+[0:23:30] the intercept stands for the treatment effect for the subgroup of
+[0:23:32] the treatment effect for the subgroup of white people aged above 85 and
+[0:23:36] white people aged above 85 and white people between 85 81 and 85 that
+[0:23:40] white people between 85 81 and 85 that are also Medicaid eligible where
+[0:23:41] are also Medicaid eligible where Medicaid can stand as a proxy for for
+[0:23:45] Medicaid can stand as a proxy for for low income.
+[0:23:46] low income. As you can see from the
+[0:23:48] As you can see from the from these table the effects for such
+[0:23:51] from these table the effects for such subpopulation is 7% point increase of
+[0:23:55] subpopulation is 7% point increase of mortality rates for the subgroup and
+[0:23:58] mortality rates for the subgroup and this is again consistent with the
+[0:24:00] this is again consistent with the previous analysis by
+[0:24:02] previous analysis by and co-authors. Moreover, we find that
+[0:24:05] and co-authors. Moreover, we find that for all the other discovered rules there
+[0:24:07] for all the other discovered rules there is a slight decrease
+[0:24:10] is a slight decrease in the vulnerability meaning the
+[0:24:12] in the vulnerability meaning the coefficient estimated coefficient
+[0:24:15] coefficient estimated coefficient are the deviation from the from the
+[0:24:17] are the deviation from the from the intercept. For instance, for
+[0:24:19] intercept. For instance, for the subgroup R2 obtaining
+[0:24:22] the subgroup R2 obtaining non-white people aged above 85 and
+[0:24:25] non-white people aged above 85 and non-white Medicaid eligible people
+[0:24:27] non-white Medicaid eligible people between 81 and 85 we find there is a
+[0:24:30] between 81 and 85 we find there is a 6.2%
+[0:24:32] 6.2% increase which again is significant.
+[0:24:35] increase which again is significant. It's significant.
+[0:24:37] It's significant. However, we find that
+[0:24:39] However, we find that the other rules three, four and
+[0:24:43] the other rules three, four and sorry, R3 and R4 are significantly
+[0:24:46] sorry, R3 and R4 are significantly different from
+[0:24:48] different from from the intercept. So, these two
+[0:24:51] from the intercept. So, these two subpopulation are not as vulnerable as
+[0:24:54] subpopulation are not as vulnerable as the subpopulation defined by the by the
+[0:24:56] the subpopulation defined by the by the intercept but still they are they are
+[0:24:59] intercept but still they are they are cool.
+[0:25:01] cool. Moreover, we develop
+[0:25:04] Moreover, we develop these
+[0:25:06] these analysis for for sensitivity building on
+[0:25:10] analysis for for sensitivity building on the model proposed by Zhao Zhao and and
+[0:25:13] the model proposed by Zhao Zhao and and co-authors in 2019.
+[0:25:15] co-authors in 2019. And for each sensitivity parameter
+[0:25:17] And for each sensitivity parameter lambda, we run multiple times our
+[0:25:20] lambda, we run multiple times our analysis. And in the table, we show
+[0:25:23] analysis. And in the table, we show confident
+[0:25:24] confident the confidence intervals
+[0:25:26] the confidence intervals for lambda value varying between 0.101
+[0:25:31] for lambda value varying between 0.101 and 105, where 101 means that there
+[0:25:35] and 105, where 101 means that there would exist an unmeasured confounder
+[0:25:37] would exist an unmeasured confounder that could be could make the estimated
+[0:25:39] that could be could make the estimated propensity score deviated from the true
+[0:25:41] propensity score deviated from the true one by 101
+[0:25:44] one by 101 points in terms of odds ratio. And as
+[0:25:47] points in terms of odds ratio. And as again, you as you can see, the rules
+[0:25:50] again, you as you can see, the rules when the sensitivity parameters goes to
+[0:25:53] when the sensitivity parameters goes to 1.05
+[0:25:55] 1.05 are no more no more detective of
+[0:25:59] are no more no more detective of heterogeneous effects, while the
+[0:26:01] heterogeneous effects, while the intercept still entails heterogeneous
+[0:26:04] intercept still entails heterogeneous effects. So, we can we can claim that
+[0:26:07] effects. So, we can we can claim that the two populations that are most
+[0:26:09] the two populations that are most vulnerable are mainly eligible white
+[0:26:12] vulnerable are mainly eligible white people between 81 and 85, and uh
+[0:26:16] people between 81 and 85, and uh people white people aged above 85.
+[0:26:20] people white people aged above 85. As these results are also robust to our
+[0:26:24] As these results are also robust to our to our sensitivity analysis.
+[0:26:26] to our sensitivity analysis. To go through some concluding remarks in
+[0:26:29] To go through some concluding remarks in our
+[0:26:31] our algorithm, we we developed and
+[0:26:32] algorithm, we we developed and investigated a new approach
+[0:26:35] investigated a new approach for the detection of heterogeneous
+[0:26:38] for the detection of heterogeneous effects,
+[0:26:39] effects, which combines a high level of
+[0:26:42] which combines a high level of interpretability to the usage of causal
+[0:26:46] interpretability to the usage of causal rules,
+[0:26:47] rules, while combining a high precision for the
+[0:26:51] while combining a high precision for the estimation of the conditional effects
+[0:26:54] estimation of the conditional effects for each causal rule.
+[0:26:56] for each causal rule. Uh the key idea
+[0:26:58] Uh the key idea again was to improve interpretability of
+[0:27:01] again was to improve interpretability of high-performing causal machine learning
+[0:27:03] high-performing causal machine learning models to ensemble learning of causal
+[0:27:06] models to ensemble learning of causal rules
+[0:27:07] rules where our method is agnostic. Again, I
+[0:27:11] where our method is agnostic. Again, I want to stress this that we don't want
+[0:27:13] want to stress this that we don't want to have our methodology to be
+[0:27:15] to have our methodology to be in competition with other methodologies.
+[0:27:18] in competition with other methodologies. Our
+[0:27:19] Our causal ensemble can be performed by
+[0:27:22] causal ensemble can be performed by choosing different methodologies with
+[0:27:25] choosing different methodologies with different causal machine learning
+[0:27:26] different causal machine learning methodology for the imputation of both
+[0:27:29] methodology for the imputation of both for the imputation of unit level
+[0:27:30] for the imputation of unit level treatment effects and then for the
+[0:27:32] treatment effects and then for the estimation of the treatment effects in
+[0:27:35] estimation of the treatment effects in the inference phase. Um our causal rule
+[0:27:38] the inference phase. Um our causal rule ensemble methodology through the
+[0:27:39] ensemble methodology through the simulation
+[0:27:41] simulation showed high performance and ability to
+[0:27:44] showed high performance and ability to disentangle between confounders and
+[0:27:46] disentangle between confounders and effect modifiers,
+[0:27:48] effect modifiers, which we will investigate further, which
+[0:27:51] which we will investigate further, which is quite interesting in applications
+[0:27:53] is quite interesting in applications such as ours
+[0:27:55] such as ours on the effects of higher level of air
+[0:27:58] on the effects of higher level of air pollution on health outcomes. And
+[0:28:00] pollution on health outcomes. And moreover,
+[0:28:02] moreover, we employed additional sensitivity
+[0:28:04] we employed additional sensitivity analysis to discover causal rules to
+[0:28:07] analysis to discover causal rules to assess how unmeasured confounding could
+[0:28:10] assess how unmeasured confounding could potentially
+[0:28:13] potentially could potentially lead our
+[0:28:16] could potentially lead our treatment estimated heterogeneous
+[0:28:18] treatment estimated heterogeneous treatment effect to to be
+[0:28:21] treatment effect to to be Moreover, for future research, we will
+[0:28:25] Moreover, for future research, we will plan to develop
+[0:28:27] plan to develop fully Bayesian discovery of these rules
+[0:28:29] fully Bayesian discovery of these rules employing
+[0:28:31] employing Bayesian additive regression trees for
+[0:28:34] Bayesian additive regression trees for building the the rules.
+[0:28:36] building the the rules. And our paper is on archive and it was
+[0:28:39] And our paper is on archive and it was it was
+[0:28:40] it was just released on archive today. So, here
+[0:28:42] just released on archive today. So, here are some references for the
+[0:28:44] are some references for the presentation. And thank you again for
+[0:28:46] presentation. And thank you again for your attention for the invitation.
+[0:28:56] All right, thank you Falco. So, in the interest of time I think
+[0:28:59] So, in the interest of time I think you'll be able to address the questions
+[0:29:01] you'll be able to address the questions directly on the on the Q&amp;A.
+[0:29:03] directly on the on the Q&amp;A. But I think maybe two very high-level
+[0:29:06] But I think maybe two very high-level questions. One was about whether there
+[0:29:08] questions. One was about whether there was
+[0:29:09] was a reference that people could
+[0:29:12] a reference that people could could use to
+[0:29:13] could use to check your paper. And the other was
+[0:29:16] check your paper. And the other was whether you could clarify a little bit
+[0:29:18] whether you could clarify a little bit what you mean by
+[0:29:20] what you mean by create causal rules by regressing Taiwan
+[0:29:23] create causal rules by regressing Taiwan X using random forest and and gradient
+[0:29:25] X using random forest and and gradient boosting. There are a few other
+[0:29:27] boosting. There are a few other questions so you know you can you can
+[0:29:28] questions so you know you can you can answer them then but maybe start with
+[0:29:30] answer them then but maybe start with that.
+[0:29:32] that. So regarding the reference
+[0:29:36] So regarding the reference will send to the chat the reference. The
+[0:29:38] will send to the chat the reference. The paper is already on archive. It was
+[0:29:40] paper is already on archive. It was released today and
+[0:29:42] released today and it's uh
+[0:29:44] it's uh It's going to be It's going to be It's
+[0:29:46] It's going to be It's going to be It's available.
+[0:29:47] available. Regarding
+[0:29:49] Regarding how to do the causal rules discovery. So
+[0:29:53] how to do the causal rules discovery. So the
+[0:29:54] the the idea that comes from from this slide
+[0:29:56] the idea that comes from from this slide is
+[0:29:57] is to basically in the first step estimate
+[0:30:01] to basically in the first step estimate the unit level treatment so employ
+[0:30:04] the unit level treatment so employ Bayesian causal forest or generalized
+[0:30:07] Bayesian causal forest or generalized random forest or causal forest to have
+[0:30:10] random forest or causal forest to have an estimation for each unit in your
+[0:30:13] an estimation for each unit in your sample of the unit level treatment
+[0:30:16] sample of the unit level treatment effect.
+[0:30:17] effect. And then what do you could do by just
+[0:30:19] And then what do you could do by just using a simple tree is just to regress
+[0:30:23] using a simple tree is just to regress those
+[0:30:24] those those effects on your set of X's to find
+[0:30:28] those effects on your set of X's to find the heterogeneity effects meaning how
+[0:30:31] the heterogeneity effects meaning how the the treatment effect that are were
+[0:30:33] the the treatment effect that are were estimated in the first step are varying
+[0:30:35] estimated in the first step are varying based
+[0:30:37] based on on the discover on the on the
+[0:30:40] on on the discover on the on the covariates in your in your study. So
+[0:30:43] covariates in your in your study. So what we are doing here, we are simply
+[0:30:44] what we are doing here, we are simply extending that from a simple tree
+[0:30:47] extending that from a simple tree to multiple trees. So, we are
+[0:30:50] to multiple trees. So, we are fitting a random forest and the gradient
+[0:30:53] fitting a random forest and the gradient and gradient boosting
+[0:30:55] and gradient boosting to have a multiple set of trees. So,
+[0:30:58] to have a multiple set of trees. So, we would have we would extract from each
+[0:31:01] we would have we would extract from each from each tree the rules, namely in this
+[0:31:04] from each tree the rules, namely in this case as you can see here, we have the
+[0:31:07] case as you can see here, we have the root nodes are simply
+[0:31:09] root nodes are simply the average treatment effect, which is
+[0:31:11] the average treatment effect, which is simply collapsing doing the mean of all
+[0:31:14] simply collapsing doing the mean of all these treatment
+[0:31:16] these treatment individual treatment effects, while in
+[0:31:18] individual treatment effects, while in the in the nodes you would have the
+[0:31:20] the in the nodes you would have the conditional average treatment effect,
+[0:31:22] conditional average treatment effect, namely the various heterogeneous effect
+[0:31:26] namely the various heterogeneous effect based on on the splits found on on the
+[0:31:29] based on on the splits found on on the tree. Why did we decide to not use just
+[0:31:32] tree. Why did we decide to not use just one single tree but a multiplicity of
+[0:31:35] one single tree but a multiplicity of trees from a random forest and gradient
+[0:31:37] trees from a random forest and gradient boosting? We did so to keep the
+[0:31:39] boosting? We did so to keep the potential of discovery as large as
+[0:31:41] potential of discovery as large as possible. So, a single tree would have
+[0:31:45] possible. So, a single tree would have the potential
+[0:31:47] the potential drawback of just discovering the rules
+[0:31:49] drawback of just discovering the rules that would be
+[0:31:52] that would be designed through a tree, the rules that
+[0:31:54] designed through a tree, the rules that can be discovered through a single tree,
+[0:31:56] can be discovered through a single tree, while keeping a large number of trees
+[0:31:58] while keeping a large number of trees would allow us to also enlarge these
+[0:32:02] would allow us to also enlarge these potential number of selected rules and
+[0:32:04] potential number of selected rules and also rules that could not be selected
+[0:32:06] also rules that could not be selected just using a single tree. So,
+[0:32:09] just using a single tree. So, I hope that this answer your question.
+[0:32:18] All right, great. Thanks again.
+[0:32:19] Thanks again. Um
+[0:32:20] Um I think we should now move over to Eli.
+[0:32:24] I think we should now move over to Eli. Eli,
+[0:32:26] Eli, whenever you're ready.
+[0:32:28] whenever you're ready. Uh yep.
+[0:32:40] Okay, can see everything? Yep. Uh okay, cool. Um
+[0:32:42] Yep. Uh okay, cool. Um yeah, so hi, I'm Eli. Um I'm a stats
+[0:32:46] yeah, so hi, I'm Eli. Um I'm a stats PhD student at UC Berkeley. Um and today
+[0:32:49] PhD student at UC Berkeley. Um and today I'll be talking about synthetic controls
+[0:32:50] I'll be talking about synthetic controls of staggered adoption.
+[0:32:52] of staggered adoption. This is joint work with Avi Feller and
+[0:32:54] This is joint work with Avi Feller and Jesse Rothstein, both also at UC
+[0:32:56] Jesse Rothstein, both also at UC Berkeley. Um and I want to thank the
+[0:32:58] Berkeley. Um and I want to thank the organizers for having me and also
+[0:33:00] organizers for having me and also keeping up this
+[0:33:01] keeping up this uh seminar through these many months.
+[0:33:05] uh seminar through these many months. Um
+[0:33:06] Um okay.
+[0:33:07] okay. So, to begin with, I'll start by
+[0:33:10] So, to begin with, I'll start by um
+[0:33:11] um discussing uh an application that will
+[0:33:13] discussing uh an application that will guide us through the rest of the talk.
+[0:33:15] guide us through the rest of the talk. Um so, what we'll be looking at is
+[0:33:17] Um so, what we'll be looking at is trying to measure the impact of teacher
+[0:33:19] trying to measure the impact of teacher unionization on education spending.
+[0:33:22] unionization on education spending. Um and this is, you know, a particular
+[0:33:24] Um and this is, you know, a particular question that's part of a a more general
+[0:33:26] question that's part of a a more general set of questions about teacher unions or
+[0:33:29] set of questions about teacher unions or public sector unions um
+[0:33:31] public sector unions um that have become particularly important
+[0:33:33] that have become particularly important uh recently um with a Supreme Court
+[0:33:35] uh recently um with a Supreme Court decision in 2018 that significantly
+[0:33:37] decision in 2018 that significantly weakened public sector unions.
+[0:33:40] weakened public sector unions. So, the way we're going to try to answer
+[0:33:42] So, the way we're going to try to answer this question is by taking advantage of
+[0:33:44] this question is by taking advantage of um some changes in the policy landscape
+[0:33:46] um some changes in the policy landscape in the United States starting in the
+[0:33:48] in the United States starting in the '60s.
+[0:33:49] '60s. So,
+[0:33:50] So, before the 1960s, it was illegal to join
+[0:33:53] before the 1960s, it was illegal to join a public sector union.
+[0:33:55] a public sector union. But then, starting in 1960 and ending in
+[0:33:57] But then, starting in 1960 and ending in 1987,
+[0:33:58] 1987, 34 different states passed what are
+[0:34:00] 34 different states passed what are called mandatory collective bargaining
+[0:34:02] called mandatory collective bargaining laws. So, it was now legal to join a
+[0:34:05] laws. So, it was now legal to join a public sector union and it was mandated
+[0:34:07] public sector union and it was mandated that the government negotiate with the
+[0:34:09] that the government negotiate with the the union.
+[0:34:10] the union. Um the rest of the states either kept it
+[0:34:13] Um the rest of the states either kept it to be illegal or um passed non-mandatory
+[0:34:16] to be illegal or um passed non-mandatory collective bargaining laws.
+[0:34:19] collective bargaining laws. Um so,
+[0:34:22] Um so, What's going on?
+[0:34:22] What's going on? Okay, so there's been um
+[0:34:25] Okay, so there's been um a long literature trying to take
+[0:34:27] a long literature trying to take advantage of these differences to try to
+[0:34:29] advantage of these differences to try to measure this effect. Uh and there's a
+[0:34:31] measure this effect. Uh and there's a seminal study from the '90s that found
+[0:34:33] seminal study from the '90s that found that expenditures increased um by 12%,
+[0:34:36] that expenditures increased um by 12%, which is a a huge increase, um, but uh,
+[0:34:39] which is a a huge increase, um, but uh, the more recent literature kind of shows
+[0:34:42] the more recent literature kind of shows there's not really much of an effect at
+[0:34:43] there's not really much of an effect at all.
+[0:34:44] all. Um, so we should think, what should we
+[0:34:46] Um, so we should think, what should we believe here? And, you know, maybe can
+[0:34:48] believe here? And, you know, maybe can new methodology bring something to bear
+[0:34:50] new methodology bring something to bear here.
+[0:34:52] here. Um, this is a special case of a the
+[0:34:55] Um, this is a special case of a the particular setting for the methodology
+[0:34:57] particular setting for the methodology I'm going to talk about, which is
+[0:34:58] I'm going to talk about, which is estimating effects under staggered
+[0:34:59] estimating effects under staggered adoption. So, staggered adoption means
+[0:35:02] adoption. So, staggered adoption means that we have multiple units, in our case
+[0:35:04] that we have multiple units, in our case here, states adopting treatment, which
+[0:35:06] here, states adopting treatment, which in this case is passing this mandatory
+[0:35:08] in this case is passing this mandatory collective bargaining law over time. So,
+[0:35:10] collective bargaining law over time. So, at different years, right? So, um, it's
+[0:35:12] at different years, right? So, um, it's not the case that all states pass the
+[0:35:14] not the case that all states pass the same law at the same time. We actually
+[0:35:16] same law at the same time. We actually have this staggered rollout of these
+[0:35:18] have this staggered rollout of these laws.
+[0:35:20] laws. Um, so by far the the most common
+[0:35:23] Um, so by far the the most common workhorse, uh, way to estimate effects
+[0:35:26] workhorse, uh, way to estimate effects in this setting is, um, differences in
+[0:35:29] in this setting is, um, differences in differences, which basically you just
+[0:35:32] differences, which basically you just look at the difference, um, in states
+[0:35:35] look at the difference, um, in states that passed the law and states that
+[0:35:36] that passed the law and states that didn't after the law was passed, and
+[0:35:38] didn't after the law was passed, and then you compare that to the difference
+[0:35:39] then you compare that to the difference before the law was passed. You take the
+[0:35:41] before the law was passed. You take the difference in those differences, and
+[0:35:43] difference in those differences, and that, um, will give you the causal
+[0:35:45] that, um, will give you the causal effect under this parallel trends
+[0:35:47] effect under this parallel trends assumption, which essentially just says
+[0:35:50] assumption, which essentially just says that the, um,
+[0:35:52] that the, um, control units that never pass a law or
+[0:35:54] control units that never pass a law or never adopt a policy, their trends are a
+[0:35:56] never adopt a policy, their trends are a good proxy for the trends that we would
+[0:35:58] good proxy for the trends that we would have seen in the counterfactual world
+[0:36:00] have seen in the counterfactual world where, um,
+[0:36:01] where, um, you know, states didn't pass any laws.
+[0:36:04] you know, states didn't pass any laws. Um, so there's a good and healthy robust
+[0:36:06] Um, so there's a good and healthy robust literature on differences in
+[0:36:08] literature on differences in differences, and part of it is about
+[0:36:10] differences, and part of it is about trying to understand when you can maybe
+[0:36:13] trying to understand when you can maybe believe the parallel trends assumption,
+[0:36:14] believe the parallel trends assumption, and maybe when you can't. And often, um,
+[0:36:17] and maybe when you can't. And often, um, when you just try to do some sort of
+[0:36:20] when you just try to do some sort of policy analysis here, you just find,
+[0:36:21] policy analysis here, you just find, okay, I really can't believe the
+[0:36:23] okay, I really can't believe the parallel trends assumption based on
+[0:36:25] parallel trends assumption based on uh, pre-intervention data.
+[0:36:27] uh, pre-intervention data. So, a a different um, um
+[0:36:30] So, a a different um, um tactic uh different method that people
+[0:36:32] tactic uh different method that people use is called the synthetic control
+[0:36:34] use is called the synthetic control method, which I'll be discussing in
+[0:36:35] method, which I'll be discussing in detail.
+[0:36:36] detail. Um and the basic idea there is to say
+[0:36:38] Um and the basic idea there is to say for a single state that passes a law,
+[0:36:41] for a single state that passes a law, let's find uh
+[0:36:42] let's find uh a weighted average of other states that
+[0:36:44] a weighted average of other states that didn't pass the law to create this
+[0:36:47] didn't pass the law to create this synthetic control that we can now
+[0:36:48] synthetic control that we can now compare to.
+[0:36:50] compare to. Um but it turns out that if you just
+[0:36:52] Um but it turns out that if you just sort of naively apply this approach um
+[0:36:54] sort of naively apply this approach um to the setting with multiple treated
+[0:36:55] to the setting with multiple treated units and staggered adoption, you end up
+[0:36:58] units and staggered adoption, you end up um not actually getting what you want.
+[0:37:00] um not actually getting what you want. So, you may get decent individual
+[0:37:03] So, you may get decent individual synthetic controls that look good or
+[0:37:04] synthetic controls that look good or good enough for each state, but uh on
+[0:37:07] good enough for each state, but uh on average, you're not getting um a good
+[0:37:10] average, you're not getting um a good sort of synthetic uh cohort.
+[0:37:13] sort of synthetic uh cohort. Um so, what we propose to do in this
+[0:37:15] Um so, what we propose to do in this paper is uh what we call partially
+[0:37:17] paper is uh what we call partially pooled synthetic control method, um
+[0:37:20] pooled synthetic control method, um where you basically we do we're just
+[0:37:21] where you basically we do we're just monkeying around with the underlying
+[0:37:23] monkeying around with the underlying optimization problem as I'll show you to
+[0:37:25] optimization problem as I'll show you to try to do two different things. One is
+[0:37:27] try to do two different things. One is to get good um individual uh synthetic
+[0:37:30] to get good um individual uh synthetic comparison units for each state, and the
+[0:37:33] comparison units for each state, and the other one is to get a good um overall
+[0:37:35] other one is to get a good um overall synthetic comparison unit.
+[0:37:37] synthetic comparison unit. Um and then I I'll also talk about how
+[0:37:40] Um and then I I'll also talk about how we can account for level differences um
+[0:37:42] we can account for level differences um using some of the the best practices in
+[0:37:44] using some of the the best practices in literature by including an intercept in
+[0:37:46] literature by including an intercept in our optimization problem.
+[0:37:48] our optimization problem. Um so,
+[0:37:50] Um so, first I should talk about notation. Um
+[0:37:53] first I should talk about notation. Um so, we'll say we'll have N units, J of
+[0:37:56] so, we'll say we'll have N units, J of which are treated, and we'll be
+[0:37:59] which are treated, and we'll be observing outcomes for um
+[0:38:01] observing outcomes for um T different periods. And here for now,
+[0:38:04] T different periods. And here for now, we'll just say, "Okay, we're actually
+[0:38:05] we'll just say, "Okay, we're actually observing all the outcomes." So, this is
+[0:38:06] observing all the outcomes." So, this is a balanced panel.
+[0:38:08] a balanced panel. And we'll have J different treatment
+[0:38:10] And we'll have J different treatment times, T1 through TJ, with this infinite
+[0:38:12] times, T1 through TJ, with this infinite treatment time corresponding to um
+[0:38:16] treatment time corresponding to um uh states that never pass a law. So,
+[0:38:18] uh states that never pass a law. So, they're never treated units.
+[0:38:20] they're never treated units. Um and a key thing here is that we're
+[0:38:21] Um and a key thing here is that we're going to be indexing time relative to
+[0:38:24] going to be indexing time relative to when treatment was passed, so um what's
+[0:38:27] when treatment was passed, so um what's called event time. So, we'll be looking
+[0:38:29] called event time. So, we'll be looking at the outcome for unit I, K periods
+[0:38:33] at the outcome for unit I, K periods after unit J was treated. So, that's
+[0:38:35] after unit J was treated. So, that's what this Y I T J + K is.
+[0:38:38] what this Y I T J + K is. Um and with some assumptions uh that are
+[0:38:41] Um and with some assumptions uh that are like Sutva, um but generalized to this
+[0:38:44] like Sutva, um but generalized to this setting, so for instance, no
+[0:38:46] setting, so for instance, no anticipation of uh treatment, we can
+[0:38:48] anticipation of uh treatment, we can write down potential outcomes and we get
+[0:38:50] write down potential outcomes and we get to our basic building block um for our S
+[0:38:52] to our basic building block um for our S demand,
+[0:38:54] demand, which is the treatment effect on unit J
+[0:38:56] which is the treatment effect on unit J K periods after it's treatment treated.
+[0:38:58] K periods after it's treatment treated. So, that's the difference between two
+[0:38:59] So, that's the difference between two different potential outcomes for this
+[0:39:01] different potential outcomes for this contrast. Uh first, we look at the
+[0:39:03] contrast. Uh first, we look at the outcome for unit J K periods after it's
+[0:39:05] outcome for unit J K periods after it's treated uh when it's treated at time T
+[0:39:08] treated uh when it's treated at time T J,
+[0:39:09] J, and that's actually what we observe, and
+[0:39:11] and that's actually what we observe, and then uh the thing that we don't observe
+[0:39:13] then uh the thing that we don't observe um and you know, in the fundamental
+[0:39:14] um and you know, in the fundamental problem of causal inference, is that we
+[0:39:17] problem of causal inference, is that we don't observe what would have happened
+[0:39:18] don't observe what would have happened had the state never been treated.
+[0:39:21] had the state never been treated. And um what we're going to do with the
+[0:39:23] And um what we're going to do with the synthetic control method is try to
+[0:39:24] synthetic control method is try to impute that value by taking a weighted
+[0:39:27] impute that value by taking a weighted average of comparison states.
+[0:39:29] average of comparison states. Um and then uh with that basic building
+[0:39:32] Um and then uh with that basic building block, we're actually going to get our
+[0:39:33] block, we're actually going to get our our main S demand here, which is the
+[0:39:35] our main S demand here, which is the average treatment effect on the treated
+[0:39:36] average treatment effect on the treated at event time K,
+[0:39:38] at event time K, where we're just averaging up all these
+[0:39:39] where we're just averaging up all these individual treatment effects.
+[0:39:41] individual treatment effects. But, what's important here is that we're
+[0:39:42] But, what's important here is that we're still indexing everything according to
+[0:39:44] still indexing everything according to event time. So, we're not averaging
+[0:39:46] event time. So, we're not averaging according to the actual same calendar
+[0:39:48] according to the actual same calendar time. What we're doing is we're saying,
+[0:39:50] time. What we're doing is we're saying, "Okay, let's look K periods after
+[0:39:52] "Okay, let's look K periods after treatment for each treated unit and
+[0:39:54] treatment for each treated unit and average up that way." So, you end up
+[0:39:55] average up that way." So, you end up averaging in this sort of diagonal way,
+[0:39:57] averaging in this sort of diagonal way, which will be important.
+[0:40:00] which will be important. Okay. So, I'm going to first describe
+[0:40:02] Okay. So, I'm going to first describe how the synthetic control method works
+[0:40:03] how the synthetic control method works and then how we could try to just um
+[0:40:05] and then how we could try to just um extend it naively.
+[0:40:08] extend it naively. And to do that, I think it's best to do
+[0:40:09] And to do that, I think it's best to do it with pictures. So, here I've plotted
+[0:40:12] it with pictures. So, here I've plotted the log per pupil um education
+[0:40:14] the log per pupil um education expenditures in Ohio uh
+[0:40:17] expenditures in Ohio uh relative to time where here I've indexed
+[0:40:19] relative to time where here I've indexed time according to the year that Ohio
+[0:40:22] time according to the year that Ohio passed a mandatory collective bargaining
+[0:40:23] passed a mandatory collective bargaining law. So, year zero here is the first
+[0:40:25] law. So, year zero here is the first year um that Ohio passed this law.
+[0:40:29] year um that Ohio passed this law. So, um the way this works is we're going
+[0:40:31] So, um the way this works is we're going to take Ohio and then we're going to
+[0:40:32] to take Ohio and then we're going to take a set of comparison states where in
+[0:40:35] take a set of comparison states where in this case uh we're looking at treatment
+[0:40:37] this case uh we're looking at treatment effects up to 10 years out. So,
+[0:40:39] effects up to 10 years out. So, comparison states will be states that
+[0:40:41] comparison states will be states that never passed a mandatory collective
+[0:40:42] never passed a mandatory collective bargaining law or states that don't pass
+[0:40:45] bargaining law or states that don't pass a mandatory mandatory law until at least
+[0:40:47] a mandatory mandatory law until at least 10 years after Ohio did. So, this is our
+[0:40:49] 10 years after Ohio did. So, this is our set of comparison states and the basic
+[0:40:52] set of comparison states and the basic idea here is to say, "Okay, the average
+[0:40:54] idea here is to say, "Okay, the average of those comparison states may not be a
+[0:40:55] of those comparison states may not be a good proxy, but instead if I take a
+[0:40:58] good proxy, but instead if I take a weighted average of those comparison
+[0:40:59] weighted average of those comparison states, maybe I can find a good one."
+[0:41:01] states, maybe I can find a good one." So, what we'll do is we'll just create a
+[0:41:04] So, what we'll do is we'll just create a little uh vector of the difference
+[0:41:06] little uh vector of the difference between Ohio and a weighted average of
+[0:41:08] between Ohio and a weighted average of all the other states for each one of
+[0:41:09] all the other states for each one of these pre-intervention times.
+[0:41:12] these pre-intervention times. And we're going to solve uh a convex
+[0:41:14] And we're going to solve uh a convex optimization problem that just says
+[0:41:16] optimization problem that just says "Find me the best weights that are, you
+[0:41:18] "Find me the best weights that are, you know, non-negative and sum to one on
+[0:41:20] know, non-negative and sum to one on these comparison states such that the
+[0:41:23] these comparison states such that the difference between Ohio and the weighted
+[0:41:25] difference between Ohio and the weighted average of those comparison states is
+[0:41:27] average of those comparison states is small." And in this case, this is small
+[0:41:28] small." And in this case, this is small in like a a mean square error sense over
+[0:41:31] in like a a mean square error sense over pre-treatment times.
+[0:41:32] pre-treatment times. So, uh if we do that, we end up
+[0:41:34] So, uh if we do that, we end up weighting three different uh six
+[0:41:36] weighting three different uh six different states um and actually in
+[0:41:38] different states um and actually in general because of constrained
+[0:41:40] general because of constrained optimization, we expect this to be
+[0:41:42] optimization, we expect this to be relatively sparse.
+[0:41:44] relatively sparse. Um and when we took take our weighted
+[0:41:46] Um and when we took take our weighted average here, we get what we call the
+[0:41:48] average here, we get what we call the synthetic Ohio, which is uh the dashed
+[0:41:51] synthetic Ohio, which is uh the dashed line here.
+[0:41:52] line here. Um and this plot uh kind of hides some
+[0:41:55] Um and this plot uh kind of hides some of the differences because we're seeing
+[0:41:57] of the differences because we're seeing the trend. So, instead I'll plot uh the
+[0:42:00] the trend. So, instead I'll plot uh the difference between the observed outcomes
+[0:42:01] difference between the observed outcomes for Ohio and the uh outcomes for
+[0:42:05] for Ohio and the uh outcomes for synthetic Ohio, which is usually called
+[0:42:07] synthetic Ohio, which is usually called the gap plot.
+[0:42:09] the gap plot. So, then what we see here is something
+[0:42:11] So, then what we see here is something akin to uh a placebo test or um a test
+[0:42:15] akin to uh a placebo test or um a test for parallel trends in the sense that
+[0:42:17] for parallel trends in the sense that everything to the left of this dash line
+[0:42:19] everything to the left of this dash line is pre-treatment and the basic idea here
+[0:42:22] is pre-treatment and the basic idea here is that we want that to be zero, right?
+[0:42:24] is that we want that to be zero, right? We want to be estimating no effect
+[0:42:25] We want to be estimating no effect before treatment and then to the right
+[0:42:27] before treatment and then to the right of this line is um
+[0:42:30] of this line is um everything post-treatment and we can
+[0:42:31] everything post-treatment and we can call that our treatment effect. Um which
+[0:42:33] call that our treatment effect. Um which I'll elaborate on in a second.
+[0:42:36] I'll elaborate on in a second. So, this is how you do it for one state
+[0:42:39] So, this is how you do it for one state um and you can think okay, actually it's
+[0:42:41] um and you can think okay, actually it's pretty straightforward here now, right?
+[0:42:42] pretty straightforward here now, right? Um the way I would do it for another
+[0:42:43] Um the way I would do it for another state, say California, is I would just
+[0:42:46] state, say California, is I would just do do the whole same process of look at
+[0:42:49] do do the whole same process of look at California, look at its comparison
+[0:42:51] California, look at its comparison states, find a weighted average, etc.
+[0:42:53] states, find a weighted average, etc. and just make sure that I index
+[0:42:54] and just make sure that I index everything according to event time
+[0:42:56] everything according to event time accordingly. So, I can do that with
+[0:42:58] accordingly. So, I can do that with California and I get this over here. Um
+[0:43:01] California and I get this over here. Um I can actually do that with all of my
+[0:43:03] I can actually do that with all of my treated states and I get this sort of a
+[0:43:05] treated states and I get this sort of a mess of a plot over here where each one
+[0:43:07] mess of a plot over here where each one of these lines corresponds to the
+[0:43:09] of these lines corresponds to the difference between the treated state and
+[0:43:12] difference between the treated state and its synthetic control unit.
+[0:43:14] its synthetic control unit. Um and now that I've done this process,
+[0:43:17] Um and now that I've done this process, I can actually just try and estimate the
+[0:43:18] I can actually just try and estimate the effect
+[0:43:20] effect um by taking the average, which is this
+[0:43:21] um by taking the average, which is this pink line here, and we can actually see
+[0:43:24] pink line here, and we can actually see a problem. So, if we zoom in,
+[0:43:27] a problem. So, if we zoom in, we see that this uh separate synthetic
+[0:43:30] we see that this uh separate synthetic control approach where we just fit a
+[0:43:31] control approach where we just fit a separate one for each different uh
+[0:43:33] separate one for each different uh treated unit, once we average, we
+[0:43:35] treated unit, once we average, we actually get something that doesn't look
+[0:43:37] actually get something that doesn't look right. So, we are um but remember before
+[0:43:40] right. So, we are um but remember before we want to find effects that are close
+[0:43:41] we want to find effects that are close to zero before treatment, here we're
+[0:43:44] to zero before treatment, here we're actually estimating positive effects
+[0:43:46] actually estimating positive effects before treatment, right? So, if we think
+[0:43:47] before treatment, right? So, if we think about this as maybe like a balance plot,
+[0:43:49] about this as maybe like a balance plot, we're seeing imbalance on average.
+[0:43:52] we're seeing imbalance on average. Um which is a problem, right? Because
+[0:43:54] Um which is a problem, right? Because the thing that we're trying because we
+[0:43:56] the thing that we're trying because we can't actually say that our
+[0:43:57] can't actually say that our post-treatment effects are anything real
+[0:43:59] post-treatment effects are anything real if they're positive but also the
+[0:44:01] if they're positive but also the pre-treatment effects are also positive.
+[0:44:04] pre-treatment effects are also positive. Um so, how can we try to get around
+[0:44:06] Um so, how can we try to get around this?
+[0:44:07] this? Well, uh you know, if we stare at this
+[0:44:09] Well, uh you know, if we stare at this and we think, "Okay, what's going on
+[0:44:11] and we think, "Okay, what's going on here?" We see that it's a problem of the
+[0:44:12] here?" We see that it's a problem of the objective function in this optimization
+[0:44:14] objective function in this optimization problem.
+[0:44:15] problem. So, um
+[0:44:17] So, um what we're doing is we're say taking
+[0:44:19] what we're doing is we're say taking each treated state and trying to find a
+[0:44:22] each treated state and trying to find a synthetic control by finding the best
+[0:44:24] synthetic control by finding the best fit for that treated state.
+[0:44:25] fit for that treated state. But, in the end, we're actually looking
+[0:44:27] But, in the end, we're actually looking at the average um treated state. So, the
+[0:44:31] at the average um treated state. So, the way we can try to fix this, uh again,
+[0:44:33] way we can try to fix this, uh again, just by changing our objective function,
+[0:44:35] just by changing our objective function, is to take that summation
+[0:44:36] is to take that summation um that I have at the bottom, right?
+[0:44:38] um that I have at the bottom, right? Where we're basically just solving these
+[0:44:39] Where we're basically just solving these separate optimization problems that kind
+[0:44:41] separate optimization problems that kind of
+[0:44:42] of uh factorize.
+[0:44:44] uh factorize. And we can just push that summation
+[0:44:45] And we can just push that summation inside. So, what we're going to do is
+[0:44:46] inside. So, what we're going to do is we're going to try to find a good
+[0:44:47] we're going to try to find a good synthetic control for the average of
+[0:44:50] synthetic control for the average of treated states.
+[0:44:52] treated states. Where again, we have to make sure we're
+[0:44:53] Where again, we have to make sure we're averaging correctly according to event
+[0:44:54] averaging correctly according to event time.
+[0:44:56] time. So, uh we can do that. Um I'm just going
+[0:44:58] So, uh we can do that. Um I'm just going to call this thing now the average
+[0:45:00] to call this thing now the average balance, and we get what we call the
+[0:45:03] balance, and we get what we call the pooled synthetic control approach.
+[0:45:05] pooled synthetic control approach. So, here we can actually get um perfect
+[0:45:08] So, here we can actually get um perfect uh pre-treatment fit. And this is
+[0:45:10] uh pre-treatment fit. And this is because um we have a separate set of
+[0:45:11] because um we have a separate set of weights for each treated units. We have
+[0:45:13] weights for each treated units. We have a ton of degrees of freedom in this
+[0:45:14] a ton of degrees of freedom in this optimization problem.
+[0:45:16] optimization problem. Um and we can look at this and say,
+[0:45:18] Um and we can look at this and say, "Okay, hey,
+[0:45:20] "Okay, hey, we might be done here. We might have
+[0:45:21] we might be done here. We might have actually solved the problem, right?
+[0:45:23] actually solved the problem, right? Before, we weren't using the right
+[0:45:25] Before, we weren't using the right objective. Now we're using the right
+[0:45:26] objective. Now we're using the right objective, where we can get this perfect
+[0:45:29] objective, where we can get this perfect pre-treatment fit, and we're good to
+[0:45:30] pre-treatment fit, and we're good to go."
+[0:45:32] go." But, there's a problem.
+[0:45:33] But, there's a problem. And the problem is that even though this
+[0:45:34] And the problem is that even though this average balance is better, the
+[0:45:36] average balance is better, the state-specific fits are much worse. So,
+[0:45:39] state-specific fits are much worse. So, on this plot, on the x-axis, I have the
+[0:45:42] on this plot, on the x-axis, I have the state-specific fit for uh the separate
+[0:45:44] state-specific fit for uh the separate synthetic control approach, and the
+[0:45:46] synthetic control approach, and the y-axis, I have it for the pooled
+[0:45:47] y-axis, I have it for the pooled approach.
+[0:45:48] approach. And everything above this 45° line means
+[0:45:51] And everything above this 45° line means that the pooled approach gives you worse
+[0:45:53] that the pooled approach gives you worse fit um for that state than the separate
+[0:45:55] fit um for that state than the separate approach. So, first off, we should
+[0:45:57] approach. So, first off, we should expect, because we're not um
+[0:46:00] expect, because we're not um actually including the state-specific
+[0:46:01] actually including the state-specific fits in our objective, that they'll be
+[0:46:03] fits in our objective, that they'll be worse um each each one of these points
+[0:46:05] worse um each each one of these points will be above the 45° line, but we can
+[0:46:08] will be above the 45° line, but we can see that some of them are much worse.
+[0:46:09] see that some of them are much worse. So, if we look at Ohio over here,
+[0:46:12] So, if we look at Ohio over here, um
+[0:46:13] um um from before, we see that we're
+[0:46:14] um from before, we see that we're getting much much much worse fit for
+[0:46:17] getting much much much worse fit for Ohio.
+[0:46:18] Ohio. So, we sort of have this problem where
+[0:46:21] So, we sort of have this problem where with one objective, we're solving
+[0:46:24] with one objective, we're solving for the state specific fits and we're
+[0:46:26] for the state specific fits and we're getting good fits there, and for the
+[0:46:27] getting good fits there, and for the other one we're getting good fit for the
+[0:46:29] other one we're getting good fit for the average, but we're sort of having this
+[0:46:31] average, but we're sort of having this trade-off.
+[0:46:33] trade-off. Um so, let me take a second here to
+[0:46:35] Um so, let me take a second here to think about which one of these things
+[0:46:36] think about which one of these things might matter more.
+[0:46:38] might matter more. Um one way to try to answer this
+[0:46:39] Um one way to try to answer this question is to just use a
+[0:46:41] question is to just use a simple data generating process that we
+[0:46:44] simple data generating process that we can think of as a generalization of
+[0:46:45] can think of as a generalization of parallel trends, which is the linear
+[0:46:47] parallel trends, which is the linear factor model.
+[0:46:48] factor model. Um and the basic idea here is the never
+[0:46:50] Um and the basic idea here is the never treated outcome
+[0:46:52] treated outcome um for unit I at time T is going to be a
+[0:46:56] um for unit I at time T is going to be a linear combination of unobserved latent
+[0:47:00] linear combination of unobserved latent factors that are time varying, so there
+[0:47:01] factors that are time varying, so there are these sort of
+[0:47:03] are these sort of time series that exist in the world, and
+[0:47:06] time series that exist in the world, and for each unit, unit I, it's going to be
+[0:47:08] for each unit, unit I, it's going to be a particular linear combination of those
+[0:47:09] a particular linear combination of those factors plus additive noise.
+[0:47:12] factors plus additive noise. And this is the sort of DGP that's often
+[0:47:15] And this is the sort of DGP that's often used
+[0:47:16] used when thinking about synthetic control
+[0:47:17] when thinking about synthetic control methods like this.
+[0:47:20] methods like this. Um so, it turns out that if we
+[0:47:22] Um so, it turns out that if we look at just the ATT estimate here, and
+[0:47:25] look at just the ATT estimate here, and we look at the estimation error, we can
+[0:47:27] we look at the estimation error, we can see that it can be controlled by both
+[0:47:29] see that it can be controlled by both the state specific fits and the fit for
+[0:47:31] the state specific fits and the fit for the average.
+[0:47:33] the average. Um and this is sort of a lot here, but
+[0:47:35] Um and this is sort of a lot here, but the basic idea is that the relative
+[0:47:38] the basic idea is that the relative importance of them depends on the
+[0:47:40] importance of them depends on the structure of the factors.
+[0:47:42] structure of the factors. So, if
+[0:47:44] So, if this mu bar, which is the average factor
+[0:47:46] this mu bar, which is the average factor value, is large, then there's going to
+[0:47:49] value, is large, then there's going to be more importance given to the average
+[0:47:52] be more importance given to the average fit or the fit for the average.
+[0:47:55] fit or the fit for the average. Um and if there's a more variability,
+[0:47:59] Um and if there's a more variability, right? So, there's a higher standard
+[0:48:00] right? So, there's a higher standard deviation on these factors across the
+[0:48:01] deviation on these factors across the treatment times, then the state-specific
+[0:48:03] treatment times, then the state-specific fits will matter more.
+[0:48:04] fits will matter more. So, one extreme we can think about is a
+[0:48:07] So, one extreme we can think about is a simple unit fixed effects model
+[0:48:09] simple unit fixed effects model where there is just one single um factor
+[0:48:13] where there is just one single um factor and it's constant. And in that case, it
+[0:48:15] and it's constant. And in that case, it doesn't matter that we're averaging in
+[0:48:17] doesn't matter that we're averaging in sort of this weird diagonal way across
+[0:48:19] sort of this weird diagonal way across different times because kind of all time
+[0:48:21] different times because kind of all time periods look the same as as far as a
+[0:48:23] periods look the same as as far as a unit fixed effects model's concerned.
+[0:48:26] unit fixed effects model's concerned. And the other extreme, if we have a
+[0:48:27] And the other extreme, if we have a situation where these underlying factors
+[0:48:29] situation where these underlying factors are going all over the place and just
+[0:48:30] are going all over the place and just varying wildly, then the different
+[0:48:32] varying wildly, then the different treatment times that we're averaging
+[0:48:34] treatment times that we're averaging over or the, you know, K uh periods
+[0:48:36] over or the, you know, K uh periods afterwards are going to be all over the
+[0:48:39] afterwards are going to be all over the place, right? So, actually averaging um
+[0:48:42] place, right? So, actually averaging um these different time periods together
+[0:48:43] these different time periods together won't give us what we want.
+[0:48:45] won't give us what we want. So, in general, we want to control both
+[0:48:48] So, in general, we want to control both of these things and the relative
+[0:48:49] of these things and the relative importance depends on um you know,
+[0:48:51] importance depends on um you know, facets of the data generating process.
+[0:48:55] facets of the data generating process. Um, so again, I think a good way to look
+[0:48:57] Um, so again, I think a good way to look at this is uh via pictures.
+[0:48:59] at this is uh via pictures. So, here on the x-axis, I have the
+[0:49:02] So, here on the x-axis, I have the average state-level fit, right? So, this
+[0:49:05] average state-level fit, right? So, this is uh what's in the objective below.
+[0:49:07] is uh what's in the objective below. And on the y-axis, I have the fit for
+[0:49:09] And on the y-axis, I have the fit for the average.
+[0:49:10] the average. So, the separate synthetic control
+[0:49:12] So, the separate synthetic control approach is all the way to the left and
+[0:49:13] approach is all the way to the left and up, right? Because it's uh it's
+[0:49:15] up, right? Because it's uh it's objective function is minimizing this
+[0:49:17] objective function is minimizing this bottom term and it's ignoring uh the
+[0:49:20] bottom term and it's ignoring uh the y-axis.
+[0:49:21] y-axis. On the other uh extreme, we have the
+[0:49:23] On the other uh extreme, we have the pooled synthetic control approach which
+[0:49:26] pooled synthetic control approach which um completely ignores state-specific
+[0:49:28] um completely ignores state-specific fit, so it's all the way to the right,
+[0:49:29] fit, so it's all the way to the right, but then it optimizes for this fit for
+[0:49:31] but then it optimizes for this fit for the average, so it's all the way down.
+[0:49:34] the average, so it's all the way down. And um our proposal is to say, "Okay,
+[0:49:37] And um our proposal is to say, "Okay, well, why don't we do both?"
+[0:49:39] well, why don't we do both?" So, why don't we solve uh a way to an
+[0:49:43] So, why don't we solve uh a way to an an optimization problem that the
+[0:49:44] an optimization problem that the objective function is a weighted average
+[0:49:46] objective function is a weighted average of these two objectives
+[0:49:48] of these two objectives uh where we have some hyperparameter new
+[0:49:50] uh where we have some hyperparameter new between zero and one
+[0:49:52] between zero and one um that can just basically trace out a
+[0:49:54] um that can just basically trace out a curve from the separate approach to the
+[0:49:57] curve from the separate approach to the pooled approach,
+[0:49:58] pooled approach, which we call the balanced possibility
+[0:50:00] which we call the balanced possibility frontier because in some sense this is
+[0:50:02] frontier because in some sense this is the best you can get.
+[0:50:05] the best you can get. And the place that we want to be on this
+[0:50:07] And the place that we want to be on this line depends on
+[0:50:10] line depends on aspects of the data generating process,
+[0:50:13] aspects of the data generating process, but we can notice some interesting
+[0:50:15] but we can notice some interesting things kind of immediately.
+[0:50:17] things kind of immediately. One is if we just take a middle ground
+[0:50:19] One is if we just take a middle ground approach and say, you know what, equally
+[0:50:21] approach and say, you know what, equally weight both these objective functions,
+[0:50:24] weight both these objective functions, we actually get a a pretty decent result
+[0:50:26] we actually get a a pretty decent result here on this data where we get way
+[0:50:29] here on this data where we get way better state specific fits
+[0:50:31] better state specific fits than the pooled approach and much better
+[0:50:34] than the pooled approach and much better um
+[0:50:35] um average fit than the separate approach.
+[0:50:38] average fit than the separate approach. And actually if we look at it, even if
+[0:50:39] And actually if we look at it, even if you put just a little bit of weight on
+[0:50:41] you put just a little bit of weight on the state specific fits, so you set new
+[0:50:43] the state specific fits, so you set new very close to one, you can get huge
+[0:50:45] very close to one, you can get huge gains in the state specific fits at very
+[0:50:48] gains in the state specific fits at very very very little cost uh or almost no
+[0:50:51] very very little cost uh or almost no cost um
+[0:50:53] cost um to the fit for the average. And again,
+[0:50:54] to the fit for the average. And again, this is because we have so many degrees
+[0:50:56] this is because we have so many degrees of freedom that we can actually take
+[0:50:57] of freedom that we can actually take advantage of that here. So in general,
+[0:50:59] advantage of that here. So in general, we shouldn't want to be doing this
+[0:51:00] we shouldn't want to be doing this pooled approach, we should at least be
+[0:51:01] pooled approach, we should at least be putting some weight on the state
+[0:51:04] putting some weight on the state specific fits.
+[0:51:05] specific fits. And in our paper, we provide a sort of
+[0:51:08] And in our paper, we provide a sort of heuristic approach to choose new that
+[0:51:10] heuristic approach to choose new that depends on you know, just the triangle
+[0:51:11] depends on you know, just the triangle inequality,
+[0:51:13] inequality, which I can talk about if people have
+[0:51:14] which I can talk about if people have questions.
+[0:51:16] questions. Okay.
+[0:51:17] Okay. So if we look at the pooled approach,
+[0:51:19] So if we look at the pooled approach, again, here's the problem. We have
+[0:51:21] again, here's the problem. We have in this pink line, we have the average
+[0:51:24] in this pink line, we have the average and we see that that's totally on zero
+[0:51:26] and we see that that's totally on zero for almost the entire pre-intervention
+[0:51:28] for almost the entire pre-intervention period, but the state specific fits in
+[0:51:30] period, but the state specific fits in the black lines are all over the place
+[0:51:32] the black lines are all over the place and that's again just because all we're
+[0:51:33] and that's again just because all we're trying to do is average them up so that
+[0:51:35] trying to do is average them up so that they average to zero.
+[0:51:37] they average to zero. But if we solve this partially pooled
+[0:51:40] But if we solve this partially pooled approach where we put weight on both
+[0:51:42] approach where we put weight on both objective functions,
+[0:51:44] objective functions, we get something that looks a lot
+[0:51:45] we get something that looks a lot better.
+[0:51:46] better. So here we have good um fit for the
+[0:51:48] So here we have good um fit for the average, so the pink line is close to
+[0:51:50] average, so the pink line is close to zero, and the state-specific fits are
+[0:51:52] zero, and the state-specific fits are much better. Um you'll notice that some
+[0:51:54] much better. Um you'll notice that some of these are really quite bad. So, for
+[0:51:56] of these are really quite bad. So, for instance, the top two are New York and
+[0:51:58] instance, the top two are New York and Alaska, and they're just totally off the
+[0:51:59] Alaska, and they're just totally off the rails. Uh so, I'll address that in the
+[0:52:01] rails. Uh so, I'll address that in the last like minute or two of this talk.
+[0:52:04] last like minute or two of this talk. Um but, if we zoom in, we can say,
+[0:52:06] Um but, if we zoom in, we can say, "Okay,
+[0:52:07] "Okay, now we've solved some of this problem
+[0:52:10] now we've solved some of this problem where we are estimating near-zero
+[0:52:12] where we are estimating near-zero effects before treatment, and then after
+[0:52:14] effects before treatment, and then after treatment, we are um
+[0:52:16] treatment, we are um maybe we can actually start to believe
+[0:52:18] maybe we can actually start to believe these as treatment effects."
+[0:52:20] these as treatment effects." So, um in the time that I have left,
+[0:52:23] So, um in the time that I have left, just to talk about how we can try to fix
+[0:52:25] just to talk about how we can try to fix some of those problems, for instance,
+[0:52:26] some of those problems, for instance, for New York and Alaska, um
+[0:52:29] for New York and Alaska, um I'll talk about just uh
+[0:52:31] I'll talk about just uh using some of the the emerging best
+[0:52:33] using some of the the emerging best practices in literature, and one of them
+[0:52:35] practices in literature, and one of them is including an intercept shift in the
+[0:52:37] is including an intercept shift in the optimization problem.
+[0:52:39] optimization problem. So, the basic idea is that we can um
+[0:52:43] So, the basic idea is that we can um directly adjust for level differences
+[0:52:45] directly adjust for level differences between um
+[0:52:47] between um a a treated state and it the comparison
+[0:52:50] a a treated state and it the comparison states by adding an intercept to the
+[0:52:51] states by adding an intercept to the optimization problem. So, instead of
+[0:52:54] optimization problem. So, instead of just um imputing the counterfactual as a
+[0:52:56] just um imputing the counterfactual as a weighted average of comparison states,
+[0:52:59] weighted average of comparison states, we're going to impute it as some
+[0:53:02] we're going to impute it as some number alpha hat J plus a weighted
+[0:53:05] number alpha hat J plus a weighted average on that.
+[0:53:07] average on that. Um and it turns out that if you, you
+[0:53:09] Um and it turns out that if you, you know, just put in uh that intercept into
+[0:53:12] know, just put in uh that intercept into the optimization problem, it the
+[0:53:14] the optimization problem, it the solution is to essentially just demean
+[0:53:16] solution is to essentially just demean everything by the pre-treatment average.
+[0:53:18] everything by the pre-treatment average. Uh where you have to be careful about
+[0:53:20] Uh where you have to be careful about what pre-treatment means depending on
+[0:53:22] what pre-treatment means depending on the different treatment times. But,
+[0:53:23] the different treatment times. But, essentially, all you end up doing is for
+[0:53:26] essentially, all you end up doing is for each treatment time, you subtract out
+[0:53:29] each treatment time, you subtract out the average uh
+[0:53:30] the average uh outcome for that unit in the
+[0:53:33] outcome for that unit in the pre-intervention time before that
+[0:53:34] pre-intervention time before that pre-treatment time.
+[0:53:36] pre-treatment time. Um and what you get is uh
+[0:53:39] Um and what you get is uh actually a weighted
+[0:53:40] actually a weighted differences-in-differences estimator.
+[0:53:42] differences-in-differences estimator. So, your estimate um for the treatment
+[0:53:44] So, your estimate um for the treatment effect for unit J at time event time K
+[0:53:48] effect for unit J at time event time K is just the difference for that treated
+[0:53:51] is just the difference for that treated unit from its current outcome and its
+[0:53:54] unit from its current outcome and its pre-intervention average.
+[0:53:56] pre-intervention average. And then you weight those residuals for
+[0:53:59] And then you weight those residuals for the comparison units.
+[0:54:00] the comparison units. Um
+[0:54:02] Um and this is
+[0:54:04] and this is saying this looks like a way of
+[0:54:05] saying this looks like a way of difference and differences because if
+[0:54:07] difference and differences because if you have uniform weights here, you
+[0:54:10] you have uniform weights here, you um recover this stacked difference and
+[0:54:12] um recover this stacked difference and differences approach
+[0:54:13] differences approach where variance of that are are
+[0:54:16] where variance of that are are popping up all over the place as ways to
+[0:54:17] popping up all over the place as ways to fix problems with two-way fixed effects
+[0:54:20] fix problems with two-way fixed effects estimation which I won't have time to
+[0:54:22] estimation which I won't have time to talk about. Um but you can also see that
+[0:54:24] talk about. Um but you can also see that this has a similar form to different
+[0:54:26] this has a similar form to different propensity score weighted differences
+[0:54:28] propensity score weighted differences and differences approaches like
+[0:54:29] and differences approaches like semi-parametric diff-in-diff and so on.
+[0:54:32] semi-parametric diff-in-diff and so on. Um
+[0:54:33] Um Okay, I'm running out of time so I'll
+[0:54:34] Okay, I'm running out of time so I'll just do this and then finish up. So, if
+[0:54:37] just do this and then finish up. So, if we look back at our balanced possibility
+[0:54:38] we look back at our balanced possibility frontier plot, we have a separate
+[0:54:41] frontier plot, we have a separate synthetic control approach, the pooled
+[0:54:42] synthetic control approach, the pooled approach, and then this partially pooled
+[0:54:43] approach, and then this partially pooled approach which traces a curve between
+[0:54:45] approach which traces a curve between them.
+[0:54:46] them. Um we can look at what the implied value
+[0:54:49] Um we can look at what the implied value is for just the difference in
+[0:54:50] is for just the difference in differences where we just look at the
+[0:54:52] differences where we just look at the values after demeaning.
+[0:54:54] values after demeaning. And then we can look at what happens
+[0:54:55] And then we can look at what happens when we do this intercept shifted
+[0:54:57] when we do this intercept shifted partially pooled approach. So, again
+[0:54:59] partially pooled approach. So, again we'll have you know intercept shifted
+[0:55:00] we'll have you know intercept shifted separate synth and intercept intercept
+[0:55:03] separate synth and intercept intercept shifted
+[0:55:04] shifted pooled, right? And those are the two
+[0:55:05] pooled, right? And those are the two extremes of this line and then again we
+[0:55:07] extremes of this line and then again we can trace something out.
+[0:55:09] can trace something out. And we can just think about everything
+[0:55:11] And we can just think about everything that I just talked about as working on
+[0:55:13] that I just talked about as working on the the demeaned version of this data.
+[0:55:16] the the demeaned version of this data. And again, because we're adding an extra
+[0:55:18] And again, because we're adding an extra decision variable to our optimization
+[0:55:20] decision variable to our optimization problem, we see what we expect which is
+[0:55:22] problem, we see what we expect which is that we actually get a sort of an
+[0:55:24] that we actually get a sort of an improvement overall on the balance.
+[0:55:28] improvement overall on the balance. Um so, if we look at our partially
+[0:55:31] Um so, if we look at our partially pooled uh
+[0:55:32] pooled uh estimator, remember some of these um
+[0:55:35] estimator, remember some of these um individual state specific fits were
+[0:55:37] individual state specific fits were really quite bad, but if we account for
+[0:55:39] really quite bad, but if we account for level differences just by demeaning, we
+[0:55:42] level differences just by demeaning, we can get a much better estimator where
+[0:55:44] can get a much better estimator where the state specific fits are much better
+[0:55:46] the state specific fits are much better and our fit for the average in the pink
+[0:55:48] and our fit for the average in the pink line also still looks good.
+[0:55:50] line also still looks good. Um,
+[0:55:51] Um, this also ends up making the weights a
+[0:55:54] this also ends up making the weights a lot more diffuse, which I have pictures
+[0:55:56] lot more diffuse, which I have pictures for, but I won't talk about.
+[0:55:58] for, but I won't talk about. Um, and I'll just end right here. So, to
+[0:56:03] Um, and I'll just end right here. So, to recap,
+[0:56:04] recap, um, what we do in this paper is we
+[0:56:06] um, what we do in this paper is we extend the synthetic control method to
+[0:56:08] extend the synthetic control method to the case with staggered adoption and we
+[0:56:10] the case with staggered adoption and we do this again really just by messing
+[0:56:12] do this again really just by messing around with optimization problems to
+[0:56:14] around with optimization problems to find weights that control both the state
+[0:56:15] find weights that control both the state specific fits and the fit for the
+[0:56:17] specific fits and the fit for the average. Uh, we also
+[0:56:20] average. Uh, we also include an intercept to adjust for level
+[0:56:22] include an intercept to adjust for level differences to get a better estimator.
+[0:56:24] differences to get a better estimator. I didn't have time to talk about this,
+[0:56:26] I didn't have time to talk about this, but under the hood,
+[0:56:27] but under the hood, we can use the language of Lagrangian
+[0:56:29] we can use the language of Lagrangian duality to see that actually really
+[0:56:32] duality to see that actually really what's going on is just partial pooling
+[0:56:33] what's going on is just partial pooling or or shrinkage in this dual problem,
+[0:56:36] or or shrinkage in this dual problem, which is why we call it a partially
+[0:56:37] which is why we call it a partially pulled synthetic control method. Um, and
+[0:56:40] pulled synthetic control method. Um, and also there's some connections to
+[0:56:41] also there's some connections to generalized inverse propensity
+[0:56:42] generalized inverse propensity weighting.
+[0:56:44] weighting. Uh, some other stuff I didn't have time
+[0:56:45] Uh, some other stuff I didn't have time to talk about. We can also think about
+[0:56:46] to talk about. We can also think about incorporating auxiliary covariates
+[0:56:48] incorporating auxiliary covariates basically just by including them in
+[0:56:50] basically just by including them in parallel to the outcomes. And I was
+[0:56:53] parallel to the outcomes. And I was showing jackknife standard errors here,
+[0:56:55] showing jackknife standard errors here, but we're also working on looking at
+[0:56:57] but we're also working on looking at like weighted bootstrap approaches.
+[0:56:59] like weighted bootstrap approaches. And lastly, things that are sort of down
+[0:57:02] And lastly, things that are sort of down the pipe that I think are important for
+[0:57:04] the pipe that I think are important for practice is one is extending this to
+[0:57:05] practice is one is extending this to work for unbalanced panels where you
+[0:57:06] work for unbalanced panels where you don't observe all outcomes for all units
+[0:57:08] don't observe all outcomes for all units at all times. And second, which is
+[0:57:10] at all times. And second, which is extremely important as we saw in the
+[0:57:12] extremely important as we saw in the previous talk, too, is doing sensitivity
+[0:57:14] previous talk, too, is doing sensitivity analysis here.
+[0:57:16] analysis here. Um, so with that, thanks so much
+[0:57:18] Um, so with that, thanks so much for having me to the organizers. Thanks
+[0:57:20] for having me to the organizers. Thanks everyone for paying attention to me.
+[0:57:22] everyone for paying attention to me. Um,
+[0:57:23] Um, our paper is up on archive. I'd love
+[0:57:25] our paper is up on archive. I'd love comments and also everything that I've
+[0:57:27] comments and also everything that I've talked about is implemented in this
+[0:57:30] talked about is implemented in this our package where really I would love
+[0:57:32] our package where really I would love comments. So, if you use it and you
+[0:57:33] comments. So, if you use it and you think it sucks let me know and and tell
+[0:57:35] think it sucks let me know and and tell me how to fix it or if you use it and
+[0:57:37] me how to fix it or if you use it and you like it I would also like to hear
+[0:57:38] you like it I would also like to hear about that. So, thanks so much. Think
+[0:57:40] about that. So, thanks so much. Think I'll answer questions.
+[0:57:45] Thank you Eli. Um, so we have a few questions uh that that
+[0:57:48] so we have a few questions uh that that that maybe we can uh um go through. Um,
+[0:57:51] that maybe we can uh um go through. Um, so um
+[0:57:52] so um so let's see.
+[0:57:54] so let's see. Um, so one is about connections between
+[0:57:57] Um, so one is about connections between your your approach and uh some other
+[0:57:59] your your approach and uh some other works. So, um one is uh work that um the
+[0:58:03] works. So, um one is uh work that um the synthetic diff-in-diff that uh Guido's
+[0:58:05] synthetic diff-in-diff that uh Guido's been working on. Um, and there's also a
+[0:58:08] been working on. Um, and there's also a question of about whether um ideas from
+[0:58:11] question of about whether um ideas from um kind of like varying treatment in
+[0:58:13] um kind of like varying treatment in causal inference like the G formula
+[0:58:14] causal inference like the G formula whatever whether these these approaches
+[0:58:17] whatever whether these these approaches could be um could be used or how does
+[0:58:19] could be um could be used or how does does your method relate to these to
+[0:58:21] does your method relate to these to these approaches?
+[0:58:22] these approaches? Yeah, um so I think
+[0:58:25] Yeah, um so I think it's all all you know, there's only so
+[0:58:27] it's all all you know, there's only so many ways to skin a cat here. Um,
+[0:58:31] many ways to skin a cat here. Um, so as for the different kind of
+[0:58:33] so as for the different kind of synthetic control approaches um
+[0:58:37] synthetic control approaches um one difference here is that we're
+[0:58:38] one difference here is that we're actually just trying to mess around with
+[0:58:40] actually just trying to mess around with the optimization problem um in
+[0:58:42] the optimization problem um in particular for synthetic control. So, if
+[0:58:44] particular for synthetic control. So, if you think about um
+[0:58:45] you think about um synthetic diff-in-diff there's kind of
+[0:58:47] synthetic diff-in-diff there's kind of two aspects of that, right? There's the
+[0:58:49] two aspects of that, right? There's the synthetic control weights and then these
+[0:58:50] synthetic control weights and then these other set of weights that are time
+[0:58:51] other set of weights that are time weights. Um, and what we're doing here
+[0:58:54] weights. Um, and what we're doing here is really focusing on those synthetic
+[0:58:55] is really focusing on those synthetic control weights and how can we change
+[0:58:58] control weights and how can we change that optimization problem to work under
+[0:59:01] that optimization problem to work under staggered adoption in particular. And um
+[0:59:03] staggered adoption in particular. And um in principle um it would it would make
+[0:59:05] in principle um it would it would make for a a longer and I guess harder to
+[0:59:07] for a a longer and I guess harder to read paper but in principle you could
+[0:59:09] read paper but in principle you could just combine this with all sorts of
+[0:59:11] just combine this with all sorts of other approaches that use synthetic
+[0:59:13] other approaches that use synthetic control weights as a base and then do
+[0:59:14] control weights as a base and then do other stuff on top of that. Um,
+[0:59:17] other stuff on top of that. Um, how how to think about stuff like the G
+[0:59:18] how how to think about stuff like the G formula etc. Um, I think that there's
+[0:59:21] formula etc. Um, I think that there's also some similarities there with these
+[0:59:23] also some similarities there with these like double robust style ideas um
+[0:59:26] like double robust style ideas um and in in sort of bias correction, etc.
+[0:59:29] and in in sort of bias correction, etc. Which again, you would want to do in
+[0:59:32] Which again, you would want to do in conjunction with just the synthetic
+[0:59:34] conjunction with just the synthetic control weights in particular.
+[0:59:35] control weights in particular. Um, so again, we would take this as sort
+[0:59:37] Um, so again, we would take this as sort of like a base module of here's how we
+[0:59:40] of like a base module of here's how we fit these weights under standard
+[0:59:41] fit these weights under standard adoption, and now we can think about all
+[0:59:42] adoption, and now we can think about all sorts of stuff like bias correction or,
+[0:59:45] sorts of stuff like bias correction or, you know, with some way to think about
+[0:59:46] you know, with some way to think about like G computation, etc.
+[0:59:48] like G computation, etc. Um.
+[0:59:49] Um. So, yeah.
+[0:59:50] So, yeah. Yeah, thanks. That makes sense. Um,
+[0:59:52] Yeah, thanks. That makes sense. Um, maybe perhaps time for a um
+[0:59:55] maybe perhaps time for a um another question or two. Um, so one was
+[0:59:57] another question or two. Um, so one was about the the actual um the actual
+[0:59:59] about the the actual um the actual application. So, uh Matthew asks whether
+[1:00:02] application. So, uh Matthew asks whether um you've looked at uh teacher pay as a
+[1:00:04] um you've looked at uh teacher pay as a response instead of education spending.
+[1:00:08] response instead of education spending. Yeah, actually we have. Um, I just I
+[1:00:10] Yeah, actually we have. Um, I just I should have a slide on it. Um.
+[1:00:13] should have a slide on it. Um. Yeah, we looked at the teacher pay and
+[1:00:14] Yeah, we looked at the teacher pay and we kind of found the same thing, uh
+[1:00:16] we kind of found the same thing, uh which was also in the the previous
+[1:00:18] which was also in the the previous literature, which is that there's not
+[1:00:19] literature, which is that there's not much of an effect um that's discernible
+[1:00:21] much of an effect um that's discernible from I mean, in particular these like
+[1:00:24] from I mean, in particular these like mandatory collective bargaining laws as
+[1:00:26] mandatory collective bargaining laws as a proxy for teacher unionization. So,
+[1:00:29] a proxy for teacher unionization. So, um in line with other literature, we
+[1:00:30] um in line with other literature, we find that there's not really much of an
+[1:00:32] find that there's not really much of an effect um
+[1:00:33] effect um that we can discern for teacher salaries
+[1:00:36] that we can discern for teacher salaries and also expenditures. Um.
+[1:00:38] and also expenditures. Um. And uh a wide array of other um things I
+[1:00:41] And uh a wide array of other um things I would expect to given the literature.
+[1:00:47] Thanks. And so, maybe you can we can wrap up with one last question. So, um
+[1:00:48] wrap up with one last question. So, um Lihua asks whether um um so, it's a
+[1:00:52] Lihua asks whether um um so, it's a question about the estimate. So, um
+[1:00:54] question about the estimate. So, um he asks what uh how tau JK is defined if
+[1:00:58] he asks what uh how tau JK is defined if TJ plus K is greater than the max of the
+[1:01:02] TJ plus K is greater than the max of the TJs.
+[1:01:03] TJs. Okay, let's see.
+[1:01:06] Okay, let's see. Let's go on this ride here.
+[1:01:08] Let's go on this ride here. Um, so how teach TJK is defined if K is
+[1:01:12] Um, so how teach TJK is defined if K is greater than the max of the TJs?
+[1:01:14] greater than the max of the TJs? If tau JK uh how tau JK is, yeah, is is
+[1:01:17] If tau JK uh how tau JK is, yeah, is is defined. If TJ plus K. If TJ plus K is
+[1:01:21] defined. If TJ plus K. If TJ plus K is greater than
+[1:01:22] greater than T max TJ max of the TJs
+[1:01:26] T max TJ max of the TJs Oh, um that that part doesn't actually
+[1:01:27] Oh, um that that part doesn't actually matter because the the what we're
+[1:01:29] matter because the the what we're looking at is
+[1:01:31] looking at is the um treatment times T1 through TJ and
+[1:01:35] the um treatment times T1 through TJ and because we're looking at the average
+[1:01:36] because we're looking at the average treatment effect on the treated like the
+[1:01:39] treatment effect on the treated like the the way to think about that in this case
+[1:01:40] the way to think about that in this case is
+[1:01:41] is we're only looking at the treatment
+[1:01:43] we're only looking at the treatment effect for units under the the
+[1:01:45] effect for units under the the counterfactual world where either was
+[1:01:47] counterfactual world where either was treated at the time it was or it was
+[1:01:49] treated at the time it was or it was never treated.
+[1:01:50] never treated. And then the event time aspect of that
+[1:01:52] And then the event time aspect of that is just how many more time periods out
+[1:01:55] is just how many more time periods out are we looking at that? So how many um
+[1:01:57] are we looking at that? So how many um leads are we looking at to estimate our
+[1:01:58] leads are we looking at to estimate our treatment effect? So uh
+[1:02:01] treatment effect? So uh it actually doesn't depend on on the
+[1:02:02] it actually doesn't depend on on the particular treatment time. The issue I
+[1:02:05] particular treatment time. The issue I mean that you actually have here is
+[1:02:08] mean that you actually have here is your K the number of leads you have is
+[1:02:10] your K the number of leads you have is limited um
+[1:02:11] limited um so if you only observe, you know, 100
+[1:02:15] so if you only observe, you know, 100 outcomes uh 100 time periods so it's
+[1:02:17] outcomes uh 100 time periods so it's only but you observe 100 time periods
+[1:02:19] only but you observe 100 time periods and the last unit is treated at time 99
+[1:02:24] and the last unit is treated at time 99 then you can only observe um
+[1:02:27] then you can only observe um one post-treatment outcome.
+[1:02:29] one post-treatment outcome. Uh one post-treatment time period for
+[1:02:31] Uh one post-treatment time period for that unit. So that's where you run into
+[1:02:33] that unit. So that's where you run into particular problems. Um in our
+[1:02:35] particular problems. Um in our application we that ended up being um 10
+[1:02:38] application we that ended up being um 10 periods. So that's why we looked 10
+[1:02:39] periods. So that's why we looked 10 periods out.
+[1:02:44] Cool. I think uh I think we should wrap up now. We're we're a bit out of time
+[1:02:47] up now. We're we're a bit out of time but you can you can look at the Q&amp;A if
+[1:02:49] but you can you can look at the Q&amp;A if you want to see other questions.
+[1:02:51] you want to see other questions. Awesome. Great. Thanks.
+[1:02:53] Awesome. Great. Thanks. All right. Great. First
+[1:02:56] All right. Great. First uh thank you so much Falco and Eli for
+[1:02:58] uh thank you so much Falco and Eli for volunteering today and for your great
+[1:03:01] volunteering today and for your great talks.
+[1:03:02] talks. Um so today we're advertising two talks.
+[1:03:05] Um so today we're advertising two talks. The first one is in collaboration with
+[1:03:07] The first one is in collaboration with the Bayesian analysis webinar. So this
+[1:03:10] the Bayesian analysis webinar. So this Friday uh
+[1:03:12] Friday uh at 10:00 a.m. PT there's there's a talk
+[1:03:15] at 10:00 a.m. PT there's there's a talk by Richard Hahn, Jared and Carlos
+[1:03:18] by Richard Hahn, Jared and Carlos Carvalho about Bayesian regression tree
+[1:03:21] Carvalho about Bayesian regression tree models for causal inference,
+[1:03:22] models for causal inference, regularization, confounding, and
+[1:03:24] regularization, confounding, and heterogeneous effects. So, this is a
+[1:03:26] heterogeneous effects. So, this is a discussion paper, so there will also be
+[1:03:28] discussion paper, so there will also be a discussion. I highly recommend it.
+[1:03:30] a discussion. I highly recommend it. We'll post the link on our website.
+[1:03:33] We'll post the link on our website. Sorry, we already posted the link on the
+[1:03:34] Sorry, we already posted the link on the website, and we'll also send it to the
+[1:03:37] website, and we'll also send it to the to the mailing list.
+[1:03:39] to the mailing list. The other talk is regular online causal
+[1:03:41] The other talk is regular online causal inference seminar talk that's next week
+[1:03:43] inference seminar talk that's next week Tuesday, regular time, by Emma Perkovic
+[1:03:47] Tuesday, regular time, by Emma Perkovic from the University of Washington, who
+[1:03:49] from the University of Washington, who will speak about causal effects in a
+[1:03:51] will speak about causal effects in a maximally oriented partially directed
+[1:03:53] maximally oriented partially directed acyclic graphs, identification and
+[1:03:56] acyclic graphs, identification and efficient estimation. We very much
+[1:03:58] efficient estimation. We very much looking forward to that talk.
+[1:04:00] looking forward to that talk. Thomas Richardson will be a discussant
+[1:04:02] Thomas Richardson will be a discussant for that.
+[1:04:03] for that. Until then, thank you all for coming.
+[1:04:06] Until then, thank you all for coming. Hope you have a nice week, and see you
+[1:04:08] Hope you have a nice week, and see you next time. Thanks.

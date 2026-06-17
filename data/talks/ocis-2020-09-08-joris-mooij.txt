@@ -1,0 +1,1619 @@
+[0:00:05] Welcome to the online causal inference seminar. Today we have Yoris Mooi from
+[0:00:08] seminar. Today we have Yoris Mooi from the University of Amsterdam talk about
+[0:00:11] the University of Amsterdam talk about joint causal inference, a unifying
+[0:00:12] joint causal inference, a unifying perspective of causal discovery.
+[0:00:15] perspective of causal discovery. Uh
+[0:00:15] Uh we also have uh collaborators in Q&amp;A. We
+[0:00:18] we also have uh collaborators in Q&amp;A. We have Sara Magliacane and Tom Claassen.
+[0:00:21] have Sara Magliacane and Tom Claassen. So if you have any questions, please put
+[0:00:23] So if you have any questions, please put them in Q&amp;A.
+[0:00:24] them in Q&amp;A. Uh Yoris Mooi will also stop from time
+[0:00:27] Uh Yoris Mooi will also stop from time to time to take uh questions. After the
+[0:00:30] to time to take uh questions. After the talk, we will have a discussion by
+[0:00:32] talk, we will have a discussion by Philip Dawid. And then if we have time
+[0:00:34] Philip Dawid. And then if we have time more time afterwards, we will take some
+[0:00:36] more time afterwards, we will take some more questions.
+[0:00:38] more questions. All right. Thank you all for joining.
+[0:00:39] All right. Thank you all for joining. That's it from my side. Uh I'm now
+[0:00:41] That's it from my side. Uh I'm now handing over to Guillaume who will
+[0:00:43] handing over to Guillaume who will handle the questions.
+[0:00:48] Thanks Dominique. So as usual, questions will be handled through the Q&amp;A. So we
+[0:00:50] will be handled through the Q&amp;A. So we have Sara and Tom who will be manning
+[0:00:51] have Sara and Tom who will be manning the Q&amp;A, so um and answering your
+[0:00:53] the Q&amp;A, so um and answering your questions. So please do not hesitate to
+[0:00:55] questions. So please do not hesitate to ask them. Um we will also pause during
+[0:00:58] ask them. Um we will also pause during during the talk to ask um live questions
+[0:01:01] during the talk to ask um live questions to Yoris. So um if you have a question,
+[0:01:03] to Yoris. So um if you have a question, please submit it to the Q&amp;A. If we
+[0:01:05] please submit it to the Q&amp;A. If we select a question, I'll ask you to raise
+[0:01:07] select a question, I'll ask you to raise your hand and uh I will unmute you. Um
+[0:01:10] your hand and uh I will unmute you. Um so again, please do not uh raise your
+[0:01:12] so again, please do not uh raise your hand unless I've asked you to do so.
+[0:01:14] hand unless I've asked you to do so. All right. That's pretty much it uh from
+[0:01:17] All right. That's pretty much it uh from me. Uh
+[0:01:18] me. Uh Yoris, feel free to start whenever
+[0:01:19] Yoris, feel free to start whenever you're ready.
+[0:01:22] you're ready. Okay. Thank you very much. Um I will
+[0:01:24] Okay. Thank you very much. Um I will share my screen first.
+[0:01:28] Um yes.
+[0:01:36] So I think you should all be able to see my screen now.
+[0:01:38] my screen now. Um
+[0:01:39] Um So welcome everyone. Um
+[0:01:41] So welcome everyone. Um I will present um
+[0:01:44] I will present um our uh framework, joint causal
+[0:01:46] our uh framework, joint causal inference, uh which uh we think offers a
+[0:01:48] inference, uh which uh we think offers a nice unifying perspective on several
+[0:01:51] nice unifying perspective on several approaches to causal discovery.
+[0:01:53] approaches to causal discovery. And this is joint work with uh Sara
+[0:01:55] And this is joint work with uh Sara Magliacane and Tom Claassen.
+[0:01:58] Magliacane and Tom Claassen. So, um
+[0:02:00] So, um well, causal discovery is about
+[0:02:02] well, causal discovery is about establishing the absence and presence of
+[0:02:04] establishing the absence and presence of causal relations. And as we all know,
+[0:02:06] causal relations. And as we all know, this can be quite a tricky business
+[0:02:09] this can be quite a tricky business um due to all kinds of challenges. Um
+[0:02:12] um due to all kinds of challenges. Um for example, there may be latent
+[0:02:13] for example, there may be latent confounding, there could be feedback
+[0:02:15] confounding, there could be feedback loops, so causal cycles, or
+[0:02:18] loops, so causal cycles, or non-recursivity.
+[0:02:20] non-recursivity. Um there may be selection bias, so we
+[0:02:22] Um there may be selection bias, so we may only observe a subset of the
+[0:02:24] may only observe a subset of the samples.
+[0:02:25] samples. There could be temporal dependence that
+[0:02:27] There could be temporal dependence that we have to take into account. And last
+[0:02:29] we have to take into account. And last but not least, uh unlimited
+[0:02:31] but not least, uh unlimited experimentation is often not possible.
+[0:02:35] experimentation is often not possible. So, um in a recent paper in JMLR, we
+[0:02:38] So, um in a recent paper in JMLR, we introduced what we call joint causal
+[0:02:40] introduced what we call joint causal inference.
+[0:02:41] inference. And this is a a framework for causal
+[0:02:43] And this is a a framework for causal modeling and discovery that allows one
+[0:02:46] modeling and discovery that allows one to address these challenges in a
+[0:02:49] to address these challenges in a flexible way.
+[0:02:51] flexible way. Um before I will explain how joint
+[0:02:55] Um before I will explain how joint causal inference works,
+[0:02:56] causal inference works, um I will give a short introduction to
+[0:02:59] um I will give a short introduction to structural causal models
+[0:03:01] structural causal models because I um I don't think that everyone
+[0:03:04] because I um I don't think that everyone in the audience will be familiar with
+[0:03:07] in the audience will be familiar with structural causal models already.
+[0:03:09] structural causal models already. Um and the the reason we use structural
+[0:03:13] Um and the the reason we use structural causal models in this work is that this
+[0:03:16] causal models in this work is that this allows us to formulate everything in a
+[0:03:18] allows us to formulate everything in a very general setting where we can take
+[0:03:20] very general setting where we can take into account both latent confounding and
+[0:03:23] into account both latent confounding and cycles.
+[0:03:25] cycles. Okay, so structural causal models. Um in
+[0:03:28] Okay, so structural causal models. Um in the next few slides, I will explain
+[0:03:31] the next few slides, I will explain uh how all these objects that you can
+[0:03:33] uh how all these objects that you can see see here in this graph are related.
+[0:03:36] see see here in this graph are related. Um so, the the take-home message for now
+[0:03:39] Um so, the the take-home message for now is that at the center of this, we have
+[0:03:42] is that at the center of this, we have really the structural causal model. And
+[0:03:44] really the structural causal model. And this contains all the information that
+[0:03:46] this contains all the information that is
+[0:03:47] is needed to derive all these other
+[0:03:49] needed to derive all these other representations that we may be
+[0:03:51] representations that we may be interested in.
+[0:03:53] interested in. So, um the definition of a structural
+[0:03:56] So, um the definition of a structural causal model, um they are also known as
+[0:03:58] causal model, um they are also known as structural equation models, um and they
+[0:04:01] structural equation models, um and they trace back uh to uh the work of Sewall
+[0:04:03] trace back uh to uh the work of Sewall Wright almost a century ago.
+[0:04:06] Wright almost a century ago. Um
+[0:04:08] Um and here I give a kind of a modern
+[0:04:09] and here I give a kind of a modern version of the definition. So, um uh an
+[0:04:14] version of the definition. So, um uh an SEM is basically a tuple of uh different
+[0:04:17] SEM is basically a tuple of uh different objects. We have an index set,
+[0:04:19] objects. We have an index set, calligraphic I,
+[0:04:20] calligraphic I, um for the endogenous variables that
+[0:04:23] um for the endogenous variables that we're uh modeling. We have an index set
+[0:04:27] we're uh modeling. We have an index set J for latent exogenous variables um that
+[0:04:30] J for latent exogenous variables um that represent kind of noise terms or latent
+[0:04:33] represent kind of noise terms or latent common causes.
+[0:04:34] common causes. Um
+[0:04:36] Um we have spaces, so we have the uh XI,
+[0:04:40] we have spaces, so we have the uh XI, uh the space where variable where
+[0:04:41] uh the space where variable where endogenous variable XI lives in. We have
+[0:04:44] endogenous variable XI lives in. We have EJ for each uh latent exogenous variable
+[0:04:48] EJ for each uh latent exogenous variable J. These are standard measurable spaces.
+[0:04:51] J. These are standard measurable spaces. Um and this is basically all to set the
+[0:04:54] Um and this is basically all to set the scene for the heart of the model, which
+[0:04:57] scene for the heart of the model, which is given by um this measurable mapping,
+[0:05:00] is given by um this measurable mapping, uh which we call the causal mechanisms.
+[0:05:03] uh which we call the causal mechanisms. So, basically each component of this uh
+[0:05:05] So, basically each component of this uh mapping here uh specifies the causal
+[0:05:08] mapping here uh specifies the causal mechanism for uh one of the endogenous
+[0:05:11] mechanism for uh one of the endogenous variables.
+[0:05:13] variables. Um I'll say more about that in a minute.
+[0:05:15] Um I'll say more about that in a minute. And then we have to specify also uh the
+[0:05:19] And then we have to specify also uh the latent exogenous distribution,
+[0:05:21] latent exogenous distribution, which is a
+[0:05:23] which is a product probability measure on this uh
+[0:05:26] product probability measure on this uh latent space.
+[0:05:28] latent space. And um here we are assuming basically
+[0:05:30] And um here we are assuming basically that the latent exogenous variables are
+[0:05:32] that the latent exogenous variables are independent.
+[0:05:34] independent. Okay, now this is all just a bunch of
+[0:05:36] Okay, now this is all just a bunch of objects.
+[0:05:37] objects. Um
+[0:05:38] Um so, it gets more interesting once we
+[0:05:40] so, it gets more interesting once we define the solutions of a structural
+[0:05:42] define the solutions of a structural causal model.
+[0:05:43] causal model. So, we say that a pair of random
+[0:05:45] So, we say that a pair of random variables X, E that takes on values in
+[0:05:48] variables X, E that takes on values in the right spaces
+[0:05:50] the right spaces is a solution of a structural causal
+[0:05:51] is a solution of a structural causal model
+[0:05:52] model if um E is distributed according to this
+[0:05:55] if um E is distributed according to this latent exogenous distribution
+[0:05:58] latent exogenous distribution and importantly if the structural
+[0:06:00] and importantly if the structural equations hold almost surely.
+[0:06:03] equations hold almost surely. And this is a system of equations. We
+[0:06:06] And this is a system of equations. We have one equation for each endogenous
+[0:06:09] have one equation for each endogenous variable expressing it as a function of
+[0:06:12] variable expressing it as a function of the endogenous and exogenous variables.
+[0:06:16] the endogenous and exogenous variables. Now, um
+[0:06:17] Now, um this was maybe a bit formal. Here's an
+[0:06:19] this was maybe a bit formal. Here's an example.
+[0:06:21] example. In practice, we uh specify structural
+[0:06:23] In practice, we uh specify structural causal model more informally rather than
+[0:06:26] causal model more informally rather than giving this uh list of all these objects
+[0:06:29] giving this uh list of all these objects here. We specify the distributions of
+[0:06:32] here. We specify the distributions of the latent exogenous variables. Here we
+[0:06:34] the latent exogenous variables. Here we have four of them.
+[0:06:36] have four of them. And um we specify the structural
+[0:06:38] And um we specify the structural equations,
+[0:06:39] equations, one for each endogenous variable.
+[0:06:42] one for each endogenous variable. So, we express each endogenous variable
+[0:06:44] So, we express each endogenous variable as a function um
+[0:06:46] as a function um of all the variables.
+[0:06:48] of all the variables. And for example, you can see here that
+[0:06:51] And for example, you can see here that um this function typically does not
+[0:06:52] um this function typically does not depend on all the variables but only on
+[0:06:55] depend on all the variables but only on a particular subset.
+[0:06:57] a particular subset. So, here for example, the third
+[0:06:58] So, here for example, the third component F3 of the causal mechanism
+[0:07:01] component F3 of the causal mechanism mapping depends only on X1, X2, X5, and
+[0:07:04] mapping depends only on X1, X2, X5, and E3
+[0:07:06] E3 uh and not on the other variables.
+[0:07:08] uh and not on the other variables. And we can express these uh relations,
+[0:07:11] And we can express these uh relations, these these functional dependencies in a
+[0:07:13] these these functional dependencies in a graph,
+[0:07:15] graph, um for example, the augmented graph of
+[0:07:17] um for example, the augmented graph of the model
+[0:07:18] the model that contains all the variables as nodes
+[0:07:21] that contains all the variables as nodes and uh for example, it has directed
+[0:07:24] and uh for example, it has directed edges from X1 to X3, X2 to X3, and X5 to
+[0:07:28] edges from X1 to X3, X2 to X3, and X5 to X3
+[0:07:30] X3 um and from E3 to X3
+[0:07:33] um and from E3 to X3 expressing the fact that F3 depends on
+[0:07:35] expressing the fact that F3 depends on these four variables.
+[0:07:38] these four variables. Um
+[0:07:39] Um well, note that we can also have uh
+[0:07:41] well, note that we can also have uh cycles, cyclic dependencies. So, X3
+[0:07:44] cycles, cyclic dependencies. So, X3 depends on X5 and
+[0:07:47] depends on X5 and vice versa. So, you can see here that F3
+[0:07:50] vice versa. So, you can see here that F3 depends on X5 and F5 depends on X3. This
+[0:07:53] depends on X5 and F5 depends on X3. This is an example of a two cycle.
+[0:07:56] is an example of a two cycle. We can even have self cycles.
+[0:07:58] We can even have self cycles. F4 here depends on
+[0:08:00] F4 here depends on X4.
+[0:08:01] X4. So, that gives the self cycle here.
+[0:08:04] So, that gives the self cycle here. I will say more about cycles
+[0:08:06] I will say more about cycles in a few minutes.
+[0:08:08] in a few minutes. So, often we
+[0:08:10] So, often we don't want to draw the latent exogenous
+[0:08:12] don't want to draw the latent exogenous variables explicitly. So, we can also
+[0:08:16] variables explicitly. So, we can also omit them from the graph, but then we
+[0:08:18] omit them from the graph, but then we draw by directed edges for each pair of
+[0:08:21] draw by directed edges for each pair of endogenous variables
+[0:08:23] endogenous variables that share a
+[0:08:25] that share a common exogenous parent. So, for
+[0:08:27] common exogenous parent. So, for example, X1 and X2, they both depend on
+[0:08:30] example, X1 and X2, they both depend on E1.
+[0:08:32] E1. And this means that they get
+[0:08:35] And this means that they get this by directed edge
+[0:08:36] this by directed edge in the graph.
+[0:08:38] in the graph. And similarly for X2 and X3.
+[0:08:44] Okay, now so far
+[0:08:47] so far we haven't really discussed the causal
+[0:08:48] we haven't really discussed the causal interpretation of an SEM.
+[0:08:50] interpretation of an SEM. To do so, we
+[0:08:53] To do so, we we look at this class of interventions,
+[0:08:57] we look at this class of interventions, these perfect interventions.
+[0:09:01] And basically if we have structural causal
+[0:09:04] basically if we have structural causal model and a subset of the endogenous
+[0:09:07] model and a subset of the endogenous variables, you can think of those as the
+[0:09:08] variables, you can think of those as the intervention targets.
+[0:09:10] intervention targets. And we have a value psi i for these
+[0:09:13] And we have a value psi i for these variables.
+[0:09:15] variables. These are the intervention values.
+[0:09:17] These are the intervention values. Then we can define an intervened
+[0:09:19] Then we can define an intervened structural causal model.
+[0:09:21] structural causal model. This one here.
+[0:09:22] This one here. Which is actually the same as
+[0:09:25] Which is actually the same as the original SEM except that we modified
+[0:09:28] the original SEM except that we modified the causal mechanism.
+[0:09:34] And we only modified the components corresponding with the intervention
+[0:09:36] corresponding with the intervention targets.
+[0:09:37] targets. We just um replace these with the
+[0:09:39] We just um replace these with the constant values psi I.
+[0:09:42] constant values psi I. And we leave the other components
+[0:09:43] And we leave the other components invariant.
+[0:09:45] invariant. So, the interpretation of this is that
+[0:09:47] So, the interpretation of this is that we are completely overriding the default
+[0:09:49] we are completely overriding the default causal mechanisms that normally
+[0:09:52] causal mechanisms that normally determine the values of these
+[0:09:53] determine the values of these intervening variables,
+[0:09:55] intervening variables, and we leave the other causal mechanisms
+[0:09:57] and we leave the other causal mechanisms invariant.
+[0:10:03] Um so, here again an example. So, this is the At the top, you see the same
+[0:10:05] is the At the top, you see the same structural causal model as before. Um
+[0:10:07] structural causal model as before. Um so, this is the observational setting
+[0:10:09] so, this is the observational setting where no intervention has before has
+[0:10:11] where no intervention has before has been performed.
+[0:10:13] been performed. Suppose we now intervene to set X3 equal
+[0:10:16] Suppose we now intervene to set X3 equal to the value psi 3,
+[0:10:18] to the value psi 3, then uh the only thing that changes here
+[0:10:21] then uh the only thing that changes here is that we replace this structural
+[0:10:24] is that we replace this structural equation for X3 by the simple equation
+[0:10:27] equation for X3 by the simple equation X3 equals psi 3.
+[0:10:30] X3 equals psi 3. And on the graph, this has the effect of
+[0:10:32] And on the graph, this has the effect of removing all the incoming directed edges
+[0:10:35] removing all the incoming directed edges on X3, and also the bidirected edges
+[0:10:38] on X3, and also the bidirected edges that are connected to X3,
+[0:10:40] that are connected to X3, um which is kind of obvious because
+[0:10:43] um which is kind of obvious because um the third component F3 no longer
+[0:10:46] um the third component F3 no longer depends on these variables.
+[0:10:52] Okay. Um I already mentioned cycles before.
+[0:10:54] before. So, um it is known that in many
+[0:10:56] So, um it is known that in many dynamical systems, feedback loops uh can
+[0:10:59] dynamical systems, feedback loops uh can induce cyclic causality at equilibrium.
+[0:11:02] induce cyclic causality at equilibrium. And here is uh I think a nice example of
+[0:11:05] And here is uh I think a nice example of this.
+[0:11:06] this. Um
+[0:11:07] Um Suppose we have two masses, and they are
+[0:11:09] Suppose we have two masses, and they are connected by a spring, and they're
+[0:11:11] connected by a spring, and they're suspended from, let's say, the ceiling
+[0:11:13] suspended from, let's say, the ceiling by another spring.
+[0:11:15] by another spring. So, as illustrated here.
+[0:11:18] So, as illustrated here. And let us consider the equilibrium
+[0:11:20] And let us consider the equilibrium heights Q1 and Q2 as our endogenous
+[0:11:23] heights Q1 and Q2 as our endogenous variables that we would like to model.
+[0:11:26] variables that we would like to model. Then um I hope you will agree with me
+[0:11:29] Then um I hope you will agree with me that um
+[0:11:30] that um we have a cyclic causality
+[0:11:32] we have a cyclic causality uh in sense that Q1 causes Q2
+[0:11:35] uh in sense that Q1 causes Q2 and also Q2 causes Q1.
+[0:11:39] and also Q2 causes Q1. For example, if I
+[0:11:41] For example, if I change the position of the upper mass
+[0:11:44] change the position of the upper mass by pulling it down,
+[0:11:46] by pulling it down, then after the oscillations have damped
+[0:11:48] then after the oscillations have damped out,
+[0:11:49] out, we will see that the position of the
+[0:11:52] we will see that the position of the lower mass has also changed.
+[0:11:54] lower mass has also changed. Vice versa, if I change the position of
+[0:11:56] Vice versa, if I change the position of the lower mass, this will have an effect
+[0:11:58] the lower mass, this will have an effect on the position of the upper mass at
+[0:11:59] on the position of the upper mass at equilibrium.
+[0:12:02] equilibrium. So, the causal graph in this case will
+[0:12:05] So, the causal graph in this case will look like this.
+[0:12:07] look like this. And indeed, you can by using textbook
+[0:12:10] And indeed, you can by using textbook physics, you can arrive at this explicit
+[0:12:13] physics, you can arrive at this explicit um
+[0:12:14] um uh cyclic structural causal model
+[0:12:16] uh cyclic structural causal model representation of the system uh where
+[0:12:19] representation of the system uh where these two are equations are the
+[0:12:21] these two are equations are the structural equations and you see that Q1
+[0:12:24] structural equations and you see that Q1 indeed depends on Q2 and Q2 depends on
+[0:12:27] indeed depends on Q2 and Q2 depends on Q1.
+[0:12:28] Q1. And here are some other parameters
+[0:12:31] And here are some other parameters and they're both dependent upon.
+[0:12:33] and they're both dependent upon. Um another situation where you can
+[0:12:35] Um another situation where you can encounter
+[0:12:37] encounter cycles is in time series modeling uh
+[0:12:40] cycles is in time series modeling uh where fast dynamical interactions can
+[0:12:43] where fast dynamical interactions can lead to what is perceived as
+[0:12:45] lead to what is perceived as instantaneous causal cycles.
+[0:12:52] Um well, a large part of the literature on
+[0:12:53] on causal models focuses on the acyclic
+[0:12:56] causal models focuses on the acyclic case um and we say that a structural
+[0:12:59] case um and we say that a structural causal model is acyclic if its graph is
+[0:13:01] causal model is acyclic if its graph is acyclic. So, it doesn't contain any
+[0:13:03] acyclic. So, it doesn't contain any directed cycle.
+[0:13:05] directed cycle. Um
+[0:13:07] Um In other words, if you keep following
+[0:13:08] In other words, if you keep following the directed edges, you won't end up
+[0:13:12] the directed edges, you won't end up at your starting point.
+[0:13:14] at your starting point. Um
+[0:13:15] Um Now, this Well, here we would like to um
+[0:13:19] Now, this Well, here we would like to um to also
+[0:13:21] to also model possible
+[0:13:23] model possible cyclic systems.
+[0:13:25] cyclic systems. Um but if we were to use the general
+[0:13:28] Um but if we were to use the general class of SEMs without any restrictions,
+[0:13:32] class of SEMs without any restrictions, then this is actually a
+[0:13:35] then this is actually a very difficult class to work with.
+[0:13:38] very difficult class to work with. Uh the theory becomes very complicated.
+[0:13:41] Uh the theory becomes very complicated. Um so here we restrict ourselves to a
+[0:13:43] Um so here we restrict ourselves to a certain subclass.
+[0:13:44] certain subclass. The subclass of simple SEMs.
+[0:13:47] The subclass of simple SEMs. Um so we recently introduced this
+[0:13:50] Um so we recently introduced this subclass.
+[0:13:51] subclass. And um it is a nice subclass because it
+[0:13:55] And um it is a nice subclass because it extends the class of acyclic SEMs as you
+[0:13:58] extends the class of acyclic SEMs as you can see.
+[0:13:59] can see. Uh to allow for weak cyclic causal
+[0:14:01] Uh to allow for weak cyclic causal relations, but it preserves many of the
+[0:14:03] relations, but it preserves many of the convenient properties that acyclic SEMs
+[0:14:05] convenient properties that acyclic SEMs have.
+[0:14:06] have. In particular, they are simple to work
+[0:14:09] In particular, they are simple to work with, hence their name.
+[0:14:11] with, hence their name. Um here's a
+[0:14:13] Um here's a uh sketchy definition
+[0:14:15] uh sketchy definition uh of a simple SEM. We say that an SEM
+[0:14:18] uh of a simple SEM. We say that an SEM is simple if any subset of its
+[0:14:20] is simple if any subset of its structural equations can be solved
+[0:14:22] structural equations can be solved uniquely for its associated variables in
+[0:14:25] uniquely for its associated variables in terms of the other variables that appear
+[0:14:26] terms of the other variables that appear in these equations.
+[0:14:28] in these equations. And um one example of a simple SEM is
+[0:14:31] And um one example of a simple SEM is the harmonic oscillator example on the
+[0:14:33] the harmonic oscillator example on the previous slide.
+[0:14:34] previous slide. As you can easily check.
+[0:14:37] As you can easily check. Um in this presentation, I will mostly
+[0:14:39] Um in this presentation, I will mostly use acyclic SEMs, but um
+[0:14:42] use acyclic SEMs, but um basically everything that I say can be
+[0:14:44] basically everything that I say can be generalized and has been generalized uh
+[0:14:47] generalized and has been generalized uh to the class of simple SEMs.
+[0:14:55] Okay. Um the graph of an SEM has a intuitive causal interpretation.
+[0:14:57] intuitive causal interpretation. Um because each directed edge in the
+[0:14:59] Um because each directed edge in the graph can be interpreted as a direct
+[0:15:02] graph can be interpreted as a direct causal relation.
+[0:15:04] causal relation. Uh a directed path in the graph
+[0:15:06] Uh a directed path in the graph can be interpreted as a causal relation,
+[0:15:09] can be interpreted as a causal relation, and a bidirected edge in the graph
+[0:15:11] and a bidirected edge in the graph uh can be interpreted as a
+[0:15:14] uh can be interpreted as a uh the presence of a latent confounder
+[0:15:17] uh the presence of a latent confounder uh for I and J.
+[0:15:19] uh for I and J. And and this is why we refer to this
+[0:15:22] And and this is why we refer to this graph also as the causal graph.
+[0:15:25] graph also as the causal graph. By the way, this interpretation does not
+[0:15:27] By the way, this interpretation does not seem to make sense for the general class
+[0:15:29] seem to make sense for the general class of SCMs, but it is still valid for
+[0:15:31] of SCMs, but it is still valid for simple SCMs.
+[0:15:34] simple SCMs. Now, in addition to the causal
+[0:15:35] Now, in addition to the causal interpretation, the graph also has a
+[0:15:37] interpretation, the graph also has a what's
+[0:15:38] what's called a Markov interpretation.
+[0:15:41] called a Markov interpretation. So, to explain this, we need the notion
+[0:15:43] So, to explain this, we need the notion of d-separation.
+[0:15:45] of d-separation. So, I hope that most of you have already
+[0:15:47] So, I hope that most of you have already seen this
+[0:15:49] seen this uh notion. Um in further Yeah, in that
+[0:15:53] uh notion. Um in further Yeah, in that case, this slide may not be necessary.
+[0:15:56] case, this slide may not be necessary. For those of you that haven't seen it,
+[0:15:57] For those of you that haven't seen it, um I'm not going to explain this in
+[0:15:59] um I'm not going to explain this in detail. Just going to say that
+[0:16:02] detail. Just going to say that d-separation uh is a graph-theoretic
+[0:16:04] d-separation uh is a graph-theoretic notion that we can apply, for example,
+[0:16:07] notion that we can apply, for example, on a causal graph, and um
+[0:16:11] on a causal graph, and um So, if you have three subsets of the
+[0:16:14] So, if you have three subsets of the nodes, A, B, and Z, then uh we say that
+[0:16:18] nodes, A, B, and Z, then uh we say that uh A is d-separated from B given Z
+[0:16:22] uh A is d-separated from B given Z in this graph, and we write it like
+[0:16:24] in this graph, and we write it like this, if well, this whole condition
+[0:16:26] this, if well, this whole condition holds.
+[0:16:29] holds. Um
+[0:16:30] Um Why is this an important condition or an
+[0:16:32] Why is this an important condition or an important definition? That is because it
+[0:16:35] important definition? That is because it arises in uh the Markov property for
+[0:16:39] arises in uh the Markov property for acyclic SCMs.
+[0:16:41] acyclic SCMs. Uh and the Markov property basically
+[0:16:43] Uh and the Markov property basically allows one to read off conditional
+[0:16:45] allows one to read off conditional independencies between endogenous
+[0:16:47] independencies between endogenous variables directly from the graph.
+[0:16:51] variables directly from the graph. So, the This is also known as the
+[0:16:53] So, the This is also known as the d-separation criterion, and it says that
+[0:16:56] d-separation criterion, and it says that if you have an acyclic SCM, then for any
+[0:16:59] if you have an acyclic SCM, then for any subsets A, B, and Z of endogenous
+[0:17:01] subsets A, B, and Z of endogenous variables, if there is a d-separation uh
+[0:17:05] variables, if there is a d-separation uh between A and B given Z in the graph of
+[0:17:08] between A and B given Z in the graph of the SCM, then there must be a
+[0:17:11] the SCM, then there must be a conditional independence
+[0:17:13] conditional independence um
+[0:17:13] um of the corresponding components of any
+[0:17:17] of the corresponding components of any solution of the SCM.
+[0:17:19] solution of the SCM. Or if you wish, um
+[0:17:22] Or if you wish, um this conditional independence must be
+[0:17:24] this conditional independence must be present in the observational
+[0:17:25] present in the observational distribution of the SCM.
+[0:17:28] distribution of the SCM. Now, this is really an important result,
+[0:17:31] Now, this is really an important result, and it has many important consequences.
+[0:17:33] and it has many important consequences. For example, Pearl's do-calculus follows
+[0:17:36] For example, Pearl's do-calculus follows directly from this theorem.
+[0:17:39] directly from this theorem. Um adjustment criteria for estimating
+[0:17:41] Um adjustment criteria for estimating causal effects like parent adjustment or
+[0:17:44] causal effects like parent adjustment or the backdoor criterion,
+[0:17:46] the backdoor criterion, and also more general identification
+[0:17:49] and also more general identification algorithms for identifying causal
+[0:17:50] algorithms for identifying causal effects, um they all follow basically
+[0:17:53] effects, um they all follow basically from this Markov property.
+[0:17:57] from this Markov property. In causal discovery, at least in the
+[0:17:59] In causal discovery, at least in the constraint-based approach, we typically
+[0:18:01] constraint-based approach, we typically also assume the converse.
+[0:18:04] also assume the converse. Um so basically that any conditional
+[0:18:06] Um so basically that any conditional independence
+[0:18:08] independence in the distribution must be due to a
+[0:18:11] in the distribution must be due to a d-separation in the graph.
+[0:18:13] d-separation in the graph. And
+[0:18:14] And um
+[0:18:16] um it has been shown that uh for certain
+[0:18:18] it has been shown that uh for certain classes of structural causal models at
+[0:18:20] classes of structural causal models at least, faithfulness holds generically.
+[0:18:23] least, faithfulness holds generically. So that means uh for almost all the
+[0:18:26] So that means uh for almost all the uh values of the parameters.
+[0:18:29] uh values of the parameters. And
+[0:18:31] And um
+[0:18:32] um this is basically uh a motivation for
+[0:18:35] this is basically uh a motivation for assuming faithfulness, even though it
+[0:18:37] assuming faithfulness, even though it might might also be violated. For
+[0:18:39] might might also be violated. For example, if there are deterministic
+[0:18:41] example, if there are deterministic relations between variables.
+[0:18:43] relations between variables. And basically this faithfulness
+[0:18:45] And basically this faithfulness assumption uh it provides a particular
+[0:18:48] assumption uh it provides a particular form of Occam's razor.
+[0:18:54] Okay, um that was the introduction about SCMs. Now we can uh
+[0:18:57] SCMs. Now we can uh I will um introduce um
+[0:19:00] I will um introduce um three different approaches to causal
+[0:19:01] three different approaches to causal discovery.
+[0:19:03] discovery. Um the first is randomized controlled
+[0:19:06] Um the first is randomized controlled trials or AB testing.
+[0:19:09] trials or AB testing. Um and this is still the gold standard
+[0:19:12] Um and this is still the gold standard as of today for causal discovery and it
+[0:19:14] as of today for causal discovery and it goes back to the work of Fisher.
+[0:19:17] goes back to the work of Fisher. Um
+[0:19:18] Um so I hope you are all familiar with this
+[0:19:21] so I hope you are all familiar with this um
+[0:19:21] um the idea is that suppose we have a
+[0:19:24] the idea is that suppose we have a group of patients, then we randomly
+[0:19:27] group of patients, then we randomly divide
+[0:19:28] divide this group into two subgroups,
+[0:19:30] this group into two subgroups, um intervention group and the control
+[0:19:32] um intervention group and the control group.
+[0:19:33] group. Um we perform an intervention to the
+[0:19:37] Um we perform an intervention to the patients in the intervention group and
+[0:19:38] patients in the intervention group and we do not do this for the control group.
+[0:19:41] we do not do this for the control group. And then afterwards we measure a certain
+[0:19:44] And then afterwards we measure a certain outcome variable
+[0:19:45] outcome variable um for the patients in both groups.
+[0:19:48] um for the patients in both groups. And if the outcome is differently
+[0:19:49] And if the outcome is differently distributed in both groups, we conclude
+[0:19:52] distributed in both groups, we conclude that there must be a causal effect
+[0:19:54] that there must be a causal effect of the treatment on the outcome.
+[0:20:01] Um so statistically um
+[0:20:02] um we can uh
+[0:20:04] we can uh look at this from two different points
+[0:20:07] look at this from two different points of view, so we can either
+[0:20:09] of view, so we can either uh consider the two samples uh in the
+[0:20:12] uh consider the two samples uh in the two groups
+[0:20:13] two groups as separate data sets
+[0:20:15] as separate data sets and then uh the question uh
+[0:20:18] and then uh the question uh becomes a two-sample So we can use a
+[0:20:20] becomes a two-sample So we can use a two-sample test to test whether these
+[0:20:23] two-sample test to test whether these two distributions are the same or not.
+[0:20:26] two distributions are the same or not. Uh alternatively, we can um
+[0:20:29] Uh alternatively, we can um consider this to be a single data set
+[0:20:32] consider this to be a single data set where we uh add this
+[0:20:35] where we uh add this um context variable or this uh basically
+[0:20:38] um context variable or this uh basically which indicates the group for each
+[0:20:40] which indicates the group for each patient that they were assigned to.
+[0:20:42] patient that they were assigned to. Uh and then we can think about
+[0:20:45] Uh and then we can think about this as an independence test. Is X
+[0:20:48] this as an independence test. Is X independent of C
+[0:20:51] independent of C So this is um important conceptual step
+[0:20:54] So this is um important conceptual step to make um for what follows.
+[0:20:58] to make um for what follows. So I hope that this is clear.
+[0:21:01] So I hope that this is clear. Um well,
+[0:21:03] Um well, I usually took this idea of a randomized
+[0:21:05] I usually took this idea of a randomized control control trial kind of for
+[0:21:08] control control trial kind of for granted in the sense that it seemed
+[0:21:10] granted in the sense that it seemed obvious that this is a sensible thing to
+[0:21:12] obvious that this is a sensible thing to do.
+[0:21:13] do. Um but
+[0:21:15] Um but with within the framework of structural
+[0:21:17] with within the framework of structural causal models, we can actually give a
+[0:21:19] causal models, we can actually give a proof uh that this works.
+[0:21:22] proof uh that this works. Um so, this is the the following uh
+[0:21:25] Um so, this is the the following uh simple proposition.
+[0:21:27] simple proposition. Uh suppose we have an acyclic structural
+[0:21:29] Uh suppose we have an acyclic structural causal model M with two variables C and
+[0:21:31] causal model M with two variables C and X.
+[0:21:32] X. And um suppose that we somehow know that
+[0:21:37] And um suppose that we somehow know that there's no directed edge from X to C in
+[0:21:39] there's no directed edge from X to C in the causal graph.
+[0:21:41] the causal graph. And there's also no bidirectional edge
+[0:21:42] And there's also no bidirectional edge between the two.
+[0:21:44] between the two. So, the first one is uh basically the
+[0:21:47] So, the first one is uh basically the assumption that outcome does not cause
+[0:21:49] assumption that outcome does not cause treatment.
+[0:21:50] treatment. And this is in practice easily justified
+[0:21:53] And this is in practice easily justified because um treatments uh happens earlier
+[0:21:55] because um treatments uh happens earlier in time than outcome. So,
+[0:21:58] in time than outcome. So, uh
+[0:21:59] uh if there would be a causal relation,
+[0:22:01] if there would be a causal relation, then this would uh be only be possible
+[0:22:04] then this would uh be only be possible if time travel is possible.
+[0:22:06] if time travel is possible. And the second condition, um that's
+[0:22:08] And the second condition, um that's where the randomization comes in.
+[0:22:11] where the randomization comes in. Um
+[0:22:12] Um if uh
+[0:22:13] if uh the group that patients are assigned to
+[0:22:15] the group that patients are assigned to is decided by a coin flip, then um we
+[0:22:19] is decided by a coin flip, then um we usually assume
+[0:22:21] usually assume uh that there's no latent common cause
+[0:22:23] uh that there's no latent common cause of the outcome of the coin flip and of
+[0:22:26] of the outcome of the coin flip and of the outcome for the patient.
+[0:22:29] the outcome for the patient. So,
+[0:22:30] So, under these two assumptions, we can show
+[0:22:32] under these two assumptions, we can show that if there is uh if we observe a
+[0:22:34] that if there is uh if we observe a dependence
+[0:22:36] dependence between uh C and X,
+[0:22:38] between uh C and X, then um
+[0:22:40] then um C must cause X.
+[0:22:42] C must cause X. And the causal effect of C on X is
+[0:22:45] And the causal effect of C on X is obtained by uh
+[0:22:47] obtained by uh the by simply by conditioning on C.
+[0:22:50] the by simply by conditioning on C. The proof is uh really simple. We just
+[0:22:53] The proof is uh really simple. We just draw all the possible graphs for the uh
+[0:22:57] draw all the possible graphs for the uh structural causal model,
+[0:22:59] structural causal model, and we uh remove those that are not
+[0:23:01] and we uh remove those that are not compatible with the assumptions
+[0:23:04] compatible with the assumptions and we are only left with these two
+[0:23:05] and we are only left with these two possibilities then and by applying now
+[0:23:08] possibilities then and by applying now the Markov property and the do calculus
+[0:23:11] the Markov property and the do calculus we arrive at the conclusions.
+[0:23:16] Okay. That's very nice if you can do if you
+[0:23:18] That's very nice if you can do if you can set up such an experiment
+[0:23:20] can set up such an experiment but you cannot always do this and
+[0:23:23] but you cannot always do this and there's an intriguing alternative.
+[0:23:25] there's an intriguing alternative. This is the idea of causal discovery
+[0:23:28] This is the idea of causal discovery from purely observational data.
+[0:23:31] from purely observational data. So the hope is that experiments are not
+[0:23:33] So the hope is that experiments are not necessary
+[0:23:35] necessary to
+[0:23:36] to perform causal discovery.
+[0:23:38] perform causal discovery. There are basically two main approaches
+[0:23:41] There are basically two main approaches to this.
+[0:23:42] to this. The first is constraint based where we
+[0:23:44] The first is constraint based where we look for certain patterns of conditional
+[0:23:46] look for certain patterns of conditional independencies in the data
+[0:23:48] independencies in the data which constrain the possible causal
+[0:23:49] which constrain the possible causal graphs.
+[0:23:50] graphs. And the second is likelihood based where
+[0:23:52] And the second is likelihood based where we score likelihoods of different causal
+[0:23:54] we score likelihoods of different causal graphs and select the best ones.
+[0:23:57] graphs and select the best ones. And there's an important disclaimer
+[0:23:58] And there's an important disclaimer here. Um
+[0:24:00] here. Um So this these approaches basically only
+[0:24:03] So this these approaches basically only work under strong assumptions for
+[0:24:06] work under strong assumptions for including the the faithfulness
+[0:24:07] including the the faithfulness assumption
+[0:24:08] assumption and with possibly very large sample
+[0:24:10] and with possibly very large sample sizes.
+[0:24:15] So constraint based approaches to causal
+[0:24:16] constraint based approaches to causal discovery they basically follow this
+[0:24:20] discovery they basically follow this this scheme here.
+[0:24:22] this scheme here. We start with the data
+[0:24:25] We start with the data and we run statistical
+[0:24:27] and we run statistical tests to test for
+[0:24:30] tests to test for conditional independencies in the data
+[0:24:32] conditional independencies in the data and then we
+[0:24:34] and then we reason back to
+[0:24:37] reason back to which possible causal graphs would be
+[0:24:39] which possible causal graphs would be compatible with the observed conditional
+[0:24:41] compatible with the observed conditional independencies
+[0:24:42] independencies making use of the Markov property and
+[0:24:45] making use of the Markov property and the faithfulness assumption.
+[0:24:47] the faithfulness assumption. And surprisingly even in the presence of
+[0:24:50] And surprisingly even in the presence of possible in the possible presence of
+[0:24:52] possible in the possible presence of latent confounders
+[0:24:54] latent confounders we can get non-trivial conclusions about
+[0:24:56] we can get non-trivial conclusions about the possible causal graphs.
+[0:25:03] Now, um
+[0:25:05] um this reasoning this inverse problem to
+[0:25:07] this reasoning this inverse problem to reason back from conditional
+[0:25:09] reason back from conditional independencies to the possible causal
+[0:25:11] independencies to the possible causal graph
+[0:25:12] graph um this is actually a hard combinatorial
+[0:25:15] um this is actually a hard combinatorial problem.
+[0:25:16] problem. Um and you quickly run into a
+[0:25:19] Um and you quickly run into a combinatorial explosion.
+[0:25:21] combinatorial explosion. So, here in this figure you see the
+[0:25:23] So, here in this figure you see the number of DAGs with D nodes. Um
+[0:25:27] number of DAGs with D nodes. Um you can see that this uh
+[0:25:29] you can see that this uh uh grows super exponentially in the
+[0:25:31] uh grows super exponentially in the number of nodes. I took this figure from
+[0:25:34] number of nodes. I took this figure from the the book by Peters, Janzing, and
+[0:25:35] the the book by Peters, Janzing, and Schölkopf.
+[0:25:37] Schölkopf. Um
+[0:25:39] Um because I like this uh visual
+[0:25:42] because I like this uh visual uh well, visualization of the
+[0:25:44] uh well, visualization of the combinatorial explosion.
+[0:25:46] combinatorial explosion. And note that this is even worse when
+[0:25:49] And note that this is even worse when you allow for confounders and cycles.
+[0:25:52] you allow for confounders and cycles. Um so,
+[0:25:54] Um so, um
+[0:25:55] um a recently proposed algorithm
+[0:25:57] a recently proposed algorithm by Hitching and others that we refer to
+[0:25:59] by Hitching and others that we refer to as ASD
+[0:26:01] as ASD that solves this inverse problem by
+[0:26:02] that solves this inverse problem by using a general-purpose optimizer
+[0:26:05] using a general-purpose optimizer um and this um quickly runs into this
+[0:26:08] um and this um quickly runs into this problem.
+[0:26:10] problem. Um but it is still feasible for up to 10
+[0:26:12] Um but it is still feasible for up to 10 nodes or so, 12 nodes.
+[0:26:15] nodes or so, 12 nodes. Um
+[0:26:17] Um so, to deal with this uh more
+[0:26:19] so, to deal with this uh more sophisticated algorithms have been
+[0:26:21] sophisticated algorithms have been proposed. One
+[0:26:23] proposed. One particular highlight is the FCI
+[0:26:26] particular highlight is the FCI algorithm. It's one of the classical
+[0:26:27] algorithm. It's one of the classical algorithms um
+[0:26:30] algorithms um within this field.
+[0:26:31] within this field. Um I'm not going to explain how this
+[0:26:33] Um I'm not going to explain how this works.
+[0:26:34] works. Um here is just to give you an
+[0:26:36] Um here is just to give you an impression. It It consists of many
+[0:26:38] impression. It It consists of many different rules that are repeatedly
+[0:26:41] different rules that are repeatedly applied to represent the which is sort
+[0:26:44] applied to represent the which is sort of reason back from the conditional
+[0:26:45] of reason back from the conditional independencies to a set of possible
+[0:26:48] independencies to a set of possible causal graphs.
+[0:26:54] Um okay. Um, the final approach that I would like
+[0:26:57] Um, the final approach that I would like to
+[0:26:58] to to highlight is local causal discovery.
+[0:27:01] to highlight is local causal discovery. This was proposed by Cooper
+[0:27:03] This was proposed by Cooper um
+[0:27:05] um in 1997.
+[0:27:07] in 1997. And it works as follows. Suppose we have
+[0:27:10] And it works as follows. Suppose we have an acyclic and faithful structural
+[0:27:12] an acyclic and faithful structural causal model.
+[0:27:13] causal model. Um, and now if for any
+[0:27:15] Um, and now if for any uh three endogenous variables we
+[0:27:19] uh three endogenous variables we somehow already know that XJ and XK do
+[0:27:21] somehow already know that XJ and XK do not cause XI.
+[0:27:24] not cause XI. And we observe a certain pattern of
+[0:27:27] And we observe a certain pattern of these two marginal dependencies in this
+[0:27:29] these two marginal dependencies in this particular conditional independence in
+[0:27:31] particular conditional independence in the data,
+[0:27:32] the data, then we can conclude from this that XJ
+[0:27:34] then we can conclude from this that XJ causes XK and the causal effect of XJ on
+[0:27:37] causes XK and the causal effect of XJ on XK is obtained by conditioning.
+[0:27:41] XK is obtained by conditioning. Uh, the proof is again quite
+[0:27:43] Uh, the proof is again quite straightforward.
+[0:27:45] straightforward. The only
+[0:27:46] The only uh thing I didn't really explain yet is
+[0:27:50] uh thing I didn't really explain yet is this notion of marginalization. So, if
+[0:27:52] this notion of marginalization. So, if we have a structural causal model with a
+[0:27:54] we have a structural causal model with a certain number of endogenous variables,
+[0:27:57] certain number of endogenous variables, then we can
+[0:27:58] then we can marginalize it down
+[0:28:00] marginalize it down um, to a subset of the variables. So,
+[0:28:03] um, to a subset of the variables. So, here we marginalize it down to only
+[0:28:05] here we marginalize it down to only these three variables I, J, and K.
+[0:28:08] these three variables I, J, and K. And then we can draw all the possible
+[0:28:10] And then we can draw all the possible causal graphs
+[0:28:12] causal graphs of this marginalized SCM.
+[0:28:14] of this marginalized SCM. And the only ones that are compatible
+[0:28:17] And the only ones that are compatible with the background knowledge
+[0:28:19] with the background knowledge and these
+[0:28:21] and these independence patterns are these three.
+[0:28:24] independence patterns are these three. And note that they what they have in
+[0:28:25] And note that they what they have in common is that they have an edge from XJ
+[0:28:27] common is that they have an edge from XJ to XK,
+[0:28:29] to XK, um, but no bidirected edge between the
+[0:28:31] um, but no bidirected edge between the two.
+[0:28:32] two. So, by applying um
+[0:28:35] So, by applying um the do calculus we get the desired
+[0:28:37] the do calculus we get the desired conclusion.
+[0:28:42] So, here's a an example due to one of my master students, Philip Bocken,
+[0:28:44] master students, Philip Bocken, um, that I would like to share with you.
+[0:28:47] um, that I would like to share with you. So, suppose that C indicates a whether
+[0:28:50] So, suppose that C indicates a whether someone is a dentist, X whether this
+[0:28:54] someone is a dentist, X whether this person wears a face mask, and Y
+[0:28:57] person wears a face mask, and Y whether this person gets infected with
+[0:28:59] whether this person gets infected with COVID-19.
+[0:29:00] COVID-19. And then,
+[0:29:02] And then, I guess you will agree with me that we
+[0:29:04] I guess you will agree with me that we can
+[0:29:07] can assume the following background
+[0:29:08] assume the following background knowledge. Wearing a face mask does not
+[0:29:10] knowledge. Wearing a face mask does not cause being a dentist.
+[0:29:12] cause being a dentist. And also getting infected by COVID-19
+[0:29:14] And also getting infected by COVID-19 does not cause being a dentist.
+[0:29:16] does not cause being a dentist. And suppose now in data we see that
+[0:29:18] And suppose now in data we see that dentists are more likely to wear a face
+[0:29:20] dentists are more likely to wear a face mask than non-dentists.
+[0:29:22] mask than non-dentists. And also that there's a correlation
+[0:29:23] And also that there's a correlation between wearing a face mask and getting
+[0:29:26] between wearing a face mask and getting infected with COVID-19.
+[0:29:28] infected with COVID-19. Then, if we also observe this
+[0:29:31] Then, if we also observe this conditional independence between
+[0:29:34] conditional independence between C and Y given X,
+[0:29:37] C and Y given X, then we can actually conclude that
+[0:29:39] then we can actually conclude that wearing a face mask must be a cause of
+[0:29:41] wearing a face mask must be a cause of getting infected with COVID-19.
+[0:29:44] getting infected with COVID-19. And hopefully the causal strength is
+[0:29:45] And hopefully the causal strength is negative.
+[0:29:47] negative. Um so, this is one
+[0:29:49] Um so, this is one particular example of how you could
+[0:29:51] particular example of how you could apply LCD.
+[0:29:53] apply LCD. And this is
+[0:29:54] And this is You may note that this is similar but
+[0:29:56] You may note that this is similar but not
+[0:29:57] not identical to the instrumental variable
+[0:29:59] identical to the instrumental variable approach. In particular, here
+[0:30:01] approach. In particular, here uh with LCD we can have confounding
+[0:30:05] uh with LCD we can have confounding between C and X.
+[0:30:06] between C and X. And this is not
+[0:30:09] And this is not This is excluded in the instrumental
+[0:30:10] This is excluded in the instrumental variable approach.
+[0:30:12] variable approach. Um but we
+[0:30:14] Um but we only get to conclusion if there's no
+[0:30:16] only get to conclusion if there's no confounding between X and Y
+[0:30:18] confounding between X and Y uh for LCD.
+[0:30:20] uh for LCD. While in the instrumental variable
+[0:30:22] While in the instrumental variable approach, there might be confounding.
+[0:30:27] Okay. Um so, this was kind of the introduction
+[0:30:30] so, this was kind of the introduction to structural causal models and causal
+[0:30:33] to structural causal models and causal discovery.
+[0:30:34] discovery. So, before I continue with explaining
+[0:30:37] So, before I continue with explaining joint causal inference, are there any
+[0:30:38] joint causal inference, are there any questions so far?
+[0:30:41] questions so far? Um there were a couple questions, but
+[0:30:42] Um there were a couple questions, but they were uh handled in the Q&amp;A, so I
+[0:30:45] they were uh handled in the Q&amp;A, so I think we're good for now. Um, let's
+[0:30:47] think we're good for now. Um, let's perhaps keep some time at the end uh if
+[0:30:49] perhaps keep some time at the end uh if you have time to uh do more.
+[0:30:53] Okay.
+[0:31:02] Um, then uh oops, I'll continue with the next part and joint causal
+[0:31:03] the next part and joint causal inference. So,
+[0:31:05] inference. So, um these three approaches to causal
+[0:31:08] um these three approaches to causal discovery at first sight they might
+[0:31:11] discovery at first sight they might appear quite different in nature.
+[0:31:14] appear quite different in nature. But, uh
+[0:31:16] But, uh I will um I'll explain how we can view
+[0:31:18] I will um I'll explain how we can view them as special cases of
+[0:31:21] them as special cases of joint causal inference.
+[0:31:23] joint causal inference. So, basically the idea in joint of joint
+[0:31:26] So, basically the idea in joint of joint causal inference is that we are going to
+[0:31:28] causal inference is that we are going to generalize
+[0:31:30] generalize um the idea behind randomized controlled
+[0:31:32] um the idea behind randomized controlled trials to multiple contexts and system
+[0:31:35] trials to multiple contexts and system variables. So, remember that in the RCT
+[0:31:38] variables. So, remember that in the RCT we had one context variable, this is the
+[0:31:41] we had one context variable, this is the coin flip that decided which group a
+[0:31:43] coin flip that decided which group a patient was assigned to, and we had one
+[0:31:46] patient was assigned to, and we had one outcome variable uh that was called X.
+[0:31:49] outcome variable uh that was called X. Um, but um
+[0:31:52] Um, but um in in in in many situations in practice,
+[0:31:56] in in in in many situations in practice, we may want to distinguish multiple
+[0:31:58] we may want to distinguish multiple system variables. Like, there might be
+[0:31:59] system variables. Like, there might be multiple outcomes that we want to
+[0:32:01] multiple outcomes that we want to measure or to model, and there might
+[0:32:04] measure or to model, and there might also be multiple context variables.
+[0:32:07] also be multiple context variables. So, as an example, we can think of
+[0:32:09] So, as an example, we can think of different context variables. These could
+[0:32:11] different context variables. These could be discrete or continuous, that doesn't
+[0:32:13] be discrete or continuous, that doesn't really matter,
+[0:32:14] really matter, uh as for example, different treatments
+[0:32:17] uh as for example, different treatments that we could apply
+[0:32:18] that we could apply uh
+[0:32:19] uh uh using remdesivir or
+[0:32:21] uh using remdesivir or hydroxychloroquine,
+[0:32:23] hydroxychloroquine, or mechanical ventilation,
+[0:32:25] or mechanical ventilation, and we can also uh apply combinations of
+[0:32:28] and we can also uh apply combinations of these treatments to patients. So, we can
+[0:32:32] these treatments to patients. So, we can imagine that there is a big randomized
+[0:32:34] imagine that there is a big randomized controlled trial where
+[0:32:36] controlled trial where uh where a
+[0:32:37] uh where a uh
+[0:32:38] uh larger number of patient groups that are
+[0:32:40] larger number of patient groups that are exposed to different treatments.
+[0:32:43] exposed to different treatments. We can also look at uh different age or
+[0:32:46] We can also look at uh different age or gender of the patients. Um and um this
+[0:32:49] gender of the patients. Um and um this we can also think about as context
+[0:32:51] we can also think about as context variables.
+[0:32:53] variables. For system variables, we can think of uh
+[0:32:55] For system variables, we can think of uh different uh outcomes like blood sugar
+[0:32:57] different uh outcomes like blood sugar level, oxygen saturation, cytokine
+[0:33:00] level, oxygen saturation, cytokine levels, etc.
+[0:33:01] levels, etc. So, this is basically
+[0:33:03] So, this is basically uh an ideal setting for applying uh
+[0:33:06] uh an ideal setting for applying uh joint causal inference.
+[0:33:08] joint causal inference. Um
+[0:33:10] Um So, what is then the main idea?
+[0:33:12] So, what is then the main idea? Um the main idea is that we are going to
+[0:33:14] Um the main idea is that we are going to reduce um
+[0:33:16] reduce um modeling a system given its context to
+[0:33:20] modeling a system given its context to uh jointly modeling the system and the
+[0:33:22] uh jointly modeling the system and the context.
+[0:33:23] context. So, we are going to model the meta
+[0:33:27] So, we are going to model the meta system, if you wish, consisting of a
+[0:33:29] system, if you wish, consisting of a system system and its context.
+[0:33:32] system system and its context. Or uh in other words, more technically,
+[0:33:36] Or uh in other words, more technically, we are going to uh use a structural
+[0:33:38] we are going to uh use a structural causal model
+[0:33:39] causal model where all the context and all the system
+[0:33:41] where all the context and all the system variables uh appear as endogenous
+[0:33:44] variables uh appear as endogenous variables.
+[0:33:46] variables. And well, here I draw I drew this dash
+[0:33:49] And well, here I draw I drew this dash line to indicate the the boundary
+[0:33:51] line to indicate the the boundary between system and context.
+[0:33:54] between system and context. But if you think about it, this boundary
+[0:33:55] But if you think about it, this boundary is really uh arbitrary. It's a modeling
+[0:33:58] is really uh arbitrary. It's a modeling choice.
+[0:34:00] choice. And that also makes it uh slightly
+[0:34:03] And that also makes it uh slightly uh hard to explain what is exactly the
+[0:34:05] uh hard to explain what is exactly the difference between system and context.
+[0:34:06] difference between system and context. Well, in the end, this is arbitrary.
+[0:34:08] Well, in the end, this is arbitrary. But in practice, we often can make this
+[0:34:11] But in practice, we often can make this choice
+[0:34:12] choice uh in such a way that um
+[0:34:15] uh in such a way that um the JCI assumptions hold. So,
+[0:34:18] the JCI assumptions hold. So, um these JCI assumptions uh are the
+[0:34:21] um these JCI assumptions uh are the following.
+[0:34:22] following. Suppose we uh
+[0:34:25] Suppose we uh have the causal graph that includes both
+[0:34:26] have the causal graph that includes both system variables and the context
+[0:34:29] system variables and the context variables.
+[0:34:30] variables. Then, the first JCI assumption uh states
+[0:34:33] Then, the first JCI assumption uh states that the system does not affect its
+[0:34:35] that the system does not affect its context. Or more precisely, there's no
+[0:34:38] context. Or more precisely, there's no directed edge from any system variable
+[0:34:40] directed edge from any system variable to any context variable.
+[0:34:42] to any context variable. And the second JCI assumption states
+[0:34:45] And the second JCI assumption states that context and system are
+[0:34:46] that context and system are unconfounded. More precisely, there's no
+[0:34:49] unconfounded. More precisely, there's no bi-directed edge between any system and
+[0:34:51] bi-directed edge between any system and context variable in the causal graph of
+[0:34:54] context variable in the causal graph of the meta system.
+[0:34:56] the meta system. Um so, the first assumption is usually
+[0:34:59] Um so, the first assumption is usually easy to justify.
+[0:35:01] easy to justify. Um for example, because the measurements
+[0:35:04] Um for example, because the measurements of the system happen later in time than
+[0:35:07] of the system happen later in time than uh the measurement of the context or the
+[0:35:10] uh the measurement of the context or the choice of the context.
+[0:35:12] choice of the context. Um the second assumption can be harder
+[0:35:14] Um the second assumption can be harder to justify.
+[0:35:16] to justify. Um
+[0:35:17] Um for example, it may be violated if uh no
+[0:35:21] for example, it may be violated if uh no randomization is performed. Or if there
+[0:35:23] randomization is performed. Or if there are multiple context variables, it can
+[0:35:25] are multiple context variables, it can also be violated
+[0:35:27] also be violated if not all context variables
+[0:35:29] if not all context variables um have been considered. So, if there
+[0:35:31] um have been considered. So, if there are latent context variables.
+[0:35:34] are latent context variables. Um
+[0:35:35] Um so, if you think back about the
+[0:35:36] so, if you think back about the randomized controlled trial, then you
+[0:35:38] randomized controlled trial, then you can see that these two assumptions here
+[0:35:40] can see that these two assumptions here are direct extension of the assumptions
+[0:35:43] are direct extension of the assumptions we made for the randomized controlled
+[0:35:45] we made for the randomized controlled trial to a setting with multiple system
+[0:35:47] trial to a setting with multiple system and context variables.
+[0:35:50] and context variables. Um
+[0:35:55] yeah. Oh, yeah. I should say that
+[0:35:57] Oh, yeah. I should say that in practice we not always want to make
+[0:35:59] in practice we not always want to make both assumptions.
+[0:36:01] both assumptions. So, in many cases we uh we we can assume
+[0:36:04] So, in many cases we uh we we can assume that the first assumption holds, but the
+[0:36:06] that the first assumption holds, but the second one is can be considered as
+[0:36:09] second one is can be considered as optional.
+[0:36:10] optional. And even more generally, sometimes you
+[0:36:13] And even more generally, sometimes you might not even want to make the first
+[0:36:15] might not even want to make the first assumption.
+[0:36:16] assumption. Um
+[0:36:18] Um so, there's a kind of hierarchy to these
+[0:36:20] so, there's a kind of hierarchy to these assumptions.
+[0:36:24] Okay, now the question becomes how can we now
+[0:36:26] the question becomes how can we now infer this causal graph from data?
+[0:36:29] infer this causal graph from data? And the answer is now really simple.
+[0:36:31] And the answer is now really simple. Um we pull the data.
+[0:36:33] Um we pull the data. So, we make sure that we um
+[0:36:36] So, we make sure that we um uh
+[0:36:36] uh add the context variables
+[0:36:38] add the context variables uh as features in our data set. We pull
+[0:36:41] uh as features in our data set. We pull all the the data from different contexts
+[0:36:43] all the the data from different contexts together.
+[0:36:44] together. Uh we run conditional independence tests
+[0:36:46] Uh we run conditional independence tests on the pooled data, which may now
+[0:36:49] on the pooled data, which may now involve combinations of system and
+[0:36:50] involve combinations of system and context variables.
+[0:36:52] context variables. Uh and we apply constraint-based causal
+[0:36:55] Uh and we apply constraint-based causal discovery procedure to reason back about
+[0:36:57] discovery procedure to reason back about the
+[0:36:58] the possible causal graphs um on the
+[0:37:01] possible causal graphs um on the meta-system.
+[0:37:03] meta-system. And in doing so, we can take into
+[0:37:05] And in doing so, we can take into account the JCI assumptions
+[0:37:08] account the JCI assumptions as far as we were willing willing to
+[0:37:10] as far as we were willing willing to assume these.
+[0:37:16] Okay, so that's high-level uh the high-level overview of the joint
+[0:37:17] the high-level overview of the joint causal inference.
+[0:37:19] causal inference. Of course, if you implement this, then
+[0:37:21] Of course, if you implement this, then there are still many ways of doing this.
+[0:37:23] there are still many ways of doing this. And um
+[0:37:25] And um well, thinking back uh to the methods
+[0:37:28] well, thinking back uh to the methods that I introduced earlier on, we can
+[0:37:30] that I introduced earlier on, we can actually consider these now as special
+[0:37:32] actually consider these now as special cases within the JCI framework. So, the
+[0:37:35] cases within the JCI framework. So, the purely observational methods um they uh
+[0:37:39] purely observational methods um they uh assume zero context variables.
+[0:37:41] assume zero context variables. A randomized control trial had a single
+[0:37:43] A randomized control trial had a single context and single system variable.
+[0:37:46] context and single system variable. Uh LCD has one context and multiple
+[0:37:49] Uh LCD has one context and multiple system variables.
+[0:37:50] system variables. And uh invariant causal prediction and
+[0:37:53] And uh invariant causal prediction and recent methods by Peters and others um
+[0:37:57] recent methods by Peters and others um can also be viewed as a special case in
+[0:37:59] can also be viewed as a special case in this way with a single context variable.
+[0:38:02] this way with a single context variable. Um well, okay, it's nice if we can um
+[0:38:06] Um well, okay, it's nice if we can um um
+[0:38:08] um interpret these existing algorithms as
+[0:38:10] interpret these existing algorithms as special cases of a more general
+[0:38:12] special cases of a more general framework,
+[0:38:13] framework, but um in addition to this, uh this JCI
+[0:38:17] but um in addition to this, uh this JCI perspective also inspired novel methods.
+[0:38:19] perspective also inspired novel methods. So, in our paper, we uh propose uh two
+[0:38:22] So, in our paper, we uh propose uh two adaptations.
+[0:38:24] adaptations. Um
+[0:38:25] Um of existing methods. So, ASDJCI
+[0:38:29] of existing methods. So, ASDJCI and FCIJCI,
+[0:38:31] and FCIJCI, which are both adaptations of ASD and
+[0:38:34] which are both adaptations of ASD and FCI respectively to the JCI setting.
+[0:38:39] FCI respectively to the JCI setting. Let me see how I'm doing with the time.
+[0:38:44] Okay, so how well does it work?
+[0:38:51] In the paper we do extensive simulation experiments. Here I will only show you
+[0:38:54] experiments. Here I will only show you some highlights. So, here you see a
+[0:38:56] some highlights. So, here you see a precision recall curve for randomly
+[0:38:58] precision recall curve for randomly generated structural causal models with
+[0:39:00] generated structural causal models with four system variables and two context
+[0:39:02] four system variables and two context variables.
+[0:39:03] variables. And these upper four curves correspond
+[0:39:06] And these upper four curves correspond with JCI methods.
+[0:39:08] with JCI methods. And these two correspond with
+[0:39:11] And these two correspond with purely observational methods. And in
+[0:39:13] purely observational methods. And in particular, the yellow curve is ASD
+[0:39:15] particular, the yellow curve is ASD using only observational data.
+[0:39:17] using only observational data. And the red one is the JCI version of
+[0:39:20] And the red one is the JCI version of ASD using all the data. And you see that
+[0:39:23] ASD using all the data. And you see that this makes a
+[0:39:25] this makes a a dramatic improvement in the precision
+[0:39:28] a dramatic improvement in the precision we
+[0:39:34] use all the data in this JCI session.
+[0:39:36] session. Now, you might
+[0:39:38] Now, you might argue that if we use all the data, then
+[0:39:40] argue that if we use all the data, then we simply have more samples to work
+[0:39:42] we simply have more samples to work with.
+[0:39:43] with. So, it's it's not really fair to compare
+[0:39:46] So, it's it's not really fair to compare like this. But, you can also check that
+[0:39:49] like this. But, you can also check that for the purely observational methods, in
+[0:39:52] for the purely observational methods, in this case ASD obs, adding more samples
+[0:39:55] this case ASD obs, adding more samples doesn't really make that much of a
+[0:39:57] doesn't really make that much of a difference.
+[0:39:58] difference. Whereas, if we add
+[0:40:01] Whereas, if we add more samples and we also
+[0:40:04] more samples and we also at the same time increase the number of
+[0:40:06] at the same time increase the number of contexts,
+[0:40:07] contexts, where in each context we have a
+[0:40:09] where in each context we have a different perturbation of the system,
+[0:40:11] different perturbation of the system, then you can see actually a dramatic
+[0:40:13] then you can see actually a dramatic difference here going from purely
+[0:40:15] difference here going from purely observational, which is barely better
+[0:40:17] observational, which is barely better than I'm guessing to uh
+[0:40:20] than I'm guessing to uh using
+[0:40:21] using um five different contexts.
+[0:40:23] um five different contexts. So, we can see that perturbing the
+[0:40:25] So, we can see that perturbing the system is indeed extremely helpful for
+[0:40:28] system is indeed extremely helpful for understanding it.
+[0:40:29] understanding it. This is uh not really a big surprise,
+[0:40:32] This is uh not really a big surprise, but
+[0:40:33] but what is nice is that we can now
+[0:40:34] what is nice is that we can now systematically uh exploit this
+[0:40:37] systematically uh exploit this in more complicated experimental
+[0:40:39] in more complicated experimental designs.
+[0:40:41] designs. We also have some theory to prove the
+[0:40:44] We also have some theory to prove the consistency of AS and JCI, um which is
+[0:40:47] consistency of AS and JCI, um which is actually quite simple to prove, and of
+[0:40:50] actually quite simple to prove, and of FCI and JCI, which is a bit more work.
+[0:40:53] FCI and JCI, which is a bit more work. Uh this is a result from a from our
+[0:40:55] Uh this is a result from a from our recent UAI paper.
+[0:40:57] recent UAI paper. I'm not going to explain all these
+[0:40:59] I'm not going to explain all these technical details. Uh take-home message
+[0:41:01] technical details. Uh take-home message is FCI and JCI is consistent.
+[0:41:05] is FCI and JCI is consistent. And uh like I said before, we can we can
+[0:41:08] And uh like I said before, we can we can um
+[0:41:09] um extend the whole theory to allow for
+[0:41:10] extend the whole theory to allow for cycles, at least for the subclass of
+[0:41:13] cycles, at least for the subclass of simple SEMs.
+[0:41:15] simple SEMs. And for that, we we need to uh we obtain
+[0:41:18] And for that, we we need to uh we obtain a generalized Markov property, where we
+[0:41:20] a generalized Markov property, where we replace notion of D-separation with
+[0:41:22] replace notion of D-separation with sigma separation.
+[0:41:24] sigma separation. We retain the causal interpretation of
+[0:41:26] We retain the causal interpretation of the graph.
+[0:41:27] the graph. Uh
+[0:41:27] Uh we get these generalized do-calculus,
+[0:41:30] we get these generalized do-calculus, adjustment criteria, identifiability
+[0:41:32] adjustment criteria, identifiability algorithm.
+[0:41:33] algorithm. The JCI framework still applies in this
+[0:41:35] The JCI framework still applies in this setting. And um
+[0:41:37] setting. And um what was uh surprising to us is that we
+[0:41:40] what was uh surprising to us is that we can actually really easily generalize
+[0:41:42] can actually really easily generalize existing causal discovery algorithms
+[0:41:44] existing causal discovery algorithms that were designed for the acyclic case
+[0:41:46] that were designed for the acyclic case to the cyclic setting.
+[0:41:49] to the cyclic setting. Some of these even don't need to be
+[0:41:51] Some of these even don't need to be changed.
+[0:41:53] changed. Okay. Um
+[0:41:55] Okay. Um briefly,
+[0:41:56] briefly, what's the time? Yeah, a few minutes
+[0:41:58] what's the time? Yeah, a few minutes left.
+[0:41:59] left. Um
+[0:42:00] Um of course, in the end we uh are most
+[0:42:02] of course, in the end we uh are most interested in how this works on real
+[0:42:04] interested in how this works on real data. So, here we analyzed a uh famous
+[0:42:08] data. So, here we analyzed a uh famous flow cytometry data set,
+[0:42:10] flow cytometry data set, where where have uh
+[0:42:12] where where have uh measurements of 11 system variables, the
+[0:42:14] measurements of 11 system variables, the abundances of different proteins
+[0:42:17] abundances of different proteins in eight different contexts. So, the
+[0:42:19] in eight different contexts. So, the first one is an observational setting
+[0:42:21] first one is an observational setting and the other contexts are perturbations
+[0:42:25] and the other contexts are perturbations where different reagents have been added
+[0:42:27] where different reagents have been added to cells before measuring
+[0:42:29] to cells before measuring these protein expressions.
+[0:42:31] these protein expressions. And the task here is to analyze this
+[0:42:35] And the task here is to analyze this data or to to well, perform causal
+[0:42:37] data or to to well, perform causal discovery on this data
+[0:42:39] discovery on this data to
+[0:42:40] to infer the underlying causal graph.
+[0:42:43] infer the underlying causal graph. If we run
+[0:42:45] If we run FCI on the observational data only, then
+[0:42:48] FCI on the observational data only, then we don't get much out.
+[0:42:50] we don't get much out. But if we run
+[0:42:51] But if we run the JCI adaptation of FCI on all the
+[0:42:54] the JCI adaptation of FCI on all the data,
+[0:42:55] data, we get this result, which looks much
+[0:42:58] we get this result, which looks much more plausible.
+[0:42:59] more plausible. And
+[0:43:00] And interestingly, we can also now learn the
+[0:43:03] interestingly, we can also now learn the intervention targets from the data.
+[0:43:06] intervention targets from the data. And it's nice to see that we in this way
+[0:43:09] And it's nice to see that we in this way can learn that
+[0:43:10] can learn that that side deck originin, for example,
+[0:43:12] that side deck originin, for example, has a direct effect on PIP2,
+[0:43:15] has a direct effect on PIP2, which is indeed in line, as you can see
+[0:43:17] which is indeed in line, as you can see here, with what the biologists already
+[0:43:19] here, with what the biologists already knew about side deck side deck originin.
+[0:43:22] knew about side deck side deck originin. So, that is, I think, a nice promising
+[0:43:25] So, that is, I think, a nice promising result. But the ground truth
+[0:43:28] result. But the ground truth for this causal graph is not known. So,
+[0:43:32] for this causal graph is not known. So, it's not really
+[0:43:33] it's not really a validation.
+[0:43:35] a validation. But it's at least a promising result.
+[0:43:37] But it's at least a promising result. We also analyzed a large scale uh
+[0:43:42] We also analyzed a large scale uh gene knockouts microarray data set where
+[0:43:45] gene knockouts microarray data set where we can do a validation.
+[0:43:47] we can do a validation. Um
+[0:43:49] Um yeah, in view of the time, I will be
+[0:43:52] yeah, in view of the time, I will be brief.
+[0:43:53] brief. So, we have um
+[0:43:55] So, we have um microarray measurements of gene
+[0:43:56] microarray measurements of gene expressions. These are about 6,500
+[0:43:59] expressions. These are about 6,500 system variables.
+[0:44:01] system variables. Um we have many different contexts here.
+[0:44:05] Um we have many different contexts here. One context is an observational context.
+[0:44:08] One context is an observational context. It has 260 samples.
+[0:44:10] It has 260 samples. And then we have 1,500 interventional
+[0:44:13] And then we have 1,500 interventional contexts where with one sample each and
+[0:44:17] contexts where with one sample each and in each of these interventions a single
+[0:44:19] in each of these interventions a single gene was knocked out.
+[0:44:22] gene was knocked out. So the the challenge here is can we
+[0:44:24] So the the challenge here is can we predict from this data um which genes
+[0:44:28] predict from this data um which genes strongly change their expression when we
+[0:44:30] strongly change their expression when we knock out a particular gene?
+[0:44:32] knock out a particular gene? And um
+[0:44:34] And um the challenge is to do this without
+[0:44:36] the challenge is to do this without actually using any data corresponding to
+[0:44:38] actually using any data corresponding to that particular knockout experiment for
+[0:44:40] that particular knockout experiment for which we want to make our predictions.
+[0:44:45] which we want to make our predictions. Um so here uh
+[0:44:48] Um so here uh okay, so I'm not really going to explain
+[0:44:50] okay, so I'm not really going to explain these what you see here
+[0:44:52] these what you see here in view of the time.
+[0:44:54] in view of the time. Um but let me state that Meinshausen and
+[0:44:57] Um but let me state that Meinshausen and others
+[0:44:58] others in 2016 proposed to introduce a binary
+[0:45:01] in 2016 proposed to introduce a binary context variable.
+[0:45:03] context variable. Um so this is just an indicator whether
+[0:45:06] Um so this is just an indicator whether we are
+[0:45:07] we are uh whether the data sample comes from
+[0:45:09] uh whether the data sample comes from the observational context or from one of
+[0:45:12] the observational context or from one of the interventional contexts.
+[0:45:14] the interventional contexts. Um and with this context variable you
+[0:45:16] Um and with this context variable you can easily see that JCI assumption one
+[0:45:19] can easily see that JCI assumption one is justified.
+[0:45:21] is justified. So we can apply for example ICP or LCD.
+[0:45:26] So we can apply for example ICP or LCD. Um and that's what we did and you can
+[0:45:29] Um and that's what we did and you can see here the results as an ROC curve
+[0:45:32] see here the results as an ROC curve with true positives versus false
+[0:45:34] with true positives versus false positives. And um the conclusion is that
+[0:45:37] positives. And um the conclusion is that if you focus on the most confident
+[0:45:40] if you focus on the most confident predictions here then both ICP and a
+[0:45:43] predictions here then both ICP and a high-dimensional version of LCD uh
+[0:45:46] high-dimensional version of LCD uh work much better than you than
+[0:45:50] work much better than you than a random guessing baseline would do.
+[0:45:52] a random guessing baseline would do. So I think this is the first convincing
+[0:45:55] So I think this is the first convincing large-scale validation that um
+[0:45:57] large-scale validation that um we can
+[0:45:59] we can really perform causal discovery
+[0:46:03] really perform causal discovery and get out something meaningful
+[0:46:06] and get out something meaningful without using randomized control trials.
+[0:46:13] Okay, so to conclude, well, I think causality is an important
+[0:46:15] well, I think causality is an important notion in daily life and in science, but
+[0:46:17] notion in daily life and in science, but I think it's still under explored in
+[0:46:19] I think it's still under explored in statistics and machine learning.
+[0:46:22] statistics and machine learning. I feel that we still have a lot to a lot
+[0:46:24] I feel that we still have a lot to a lot of work to do here
+[0:46:27] of work to do here and this is only the beginning.
+[0:46:30] and this is only the beginning. And I discussed three approaches to
+[0:46:32] And I discussed three approaches to causal discovery and how we can view
+[0:46:34] causal discovery and how we can view these as special cases of this joint
+[0:46:37] these as special cases of this joint causal inference framework.
+[0:46:39] causal inference framework. And some nice features of this framework
+[0:46:42] And some nice features of this framework are that
+[0:46:43] are that we do not require any knowledge of the
+[0:46:45] we do not require any knowledge of the intervention targets and types contrary
+[0:46:47] intervention targets and types contrary to many other methods for combining
+[0:46:50] to many other methods for combining different data sets that have been
+[0:46:52] different data sets that have been proposed. It allows us to exploit the
+[0:46:55] proposed. It allows us to exploit the strong signal in experimental data
+[0:46:58] strong signal in experimental data contrary to methods that use purely
+[0:47:00] contrary to methods that use purely observational data.
+[0:47:02] observational data. It has inspired already novel algorithms
+[0:47:06] It has inspired already novel algorithms and it also works in case of cycles
+[0:47:09] and it also works in case of cycles assuming simple SCMs.
+[0:47:11] assuming simple SCMs. And for details,
+[0:47:13] And for details, you can see our JMLR paper.
+[0:47:16] you can see our JMLR paper. So, thank you all for your attention and
+[0:47:19] So, thank you all for your attention and I would also like to thank my
+[0:47:20] I would also like to thank my collaborators.
+[0:47:22] collaborators. So, Philip Versteeg and Stefan Bongers
+[0:47:25] So, Philip Versteeg and Stefan Bongers have contributed to
+[0:47:27] have contributed to to the material in this presentation as
+[0:47:30] to the material in this presentation as well as Patrick Forré and Sara Magliocca
+[0:47:33] well as Patrick Forré and Sara Magliocca and Tom Claassen.
+[0:47:34] and Tom Claassen. Thank you.
+[0:47:39] Fantastic thanks for the great talk Yoris. I think in the interest of time
+[0:47:41] Yoris. I think in the interest of time we'll now quickly switch to the
+[0:47:42] we'll now quickly switch to the discussion and then we'll have some more
+[0:47:44] discussion and then we'll have some more questions afterwards if time allows. All
+[0:47:46] questions afterwards if time allows. All right, for the discussion we have
+[0:47:50] right, for the discussion we have David. After the discussion Yoris can
+[0:47:53] David. After the discussion Yoris can can respond.
+[0:47:55] can respond. So, I'm now switching over to Philip.
+[0:48:08] Okay, I hope that you can see my screen. Good.
+[0:48:09] Good. Yes.
+[0:48:10] Yes. Right.
+[0:48:11] Right. Well, I'd like to say that I I'm very
+[0:48:13] Well, I'd like to say that I I'm very impressed by this whole body of work. So
+[0:48:15] impressed by this whole body of work. So thanks very much to Yoris and his
+[0:48:17] thanks very much to Yoris and his collaborators and also an excellent
+[0:48:20] collaborators and also an excellent presentation.
+[0:48:25] Now So that's that's my first like. I really
+[0:48:29] So that's that's my first like. I really like that.
+[0:48:30] like that. But I'm going to quibble just a little
+[0:48:32] But I'm going to quibble just a little bit with some of the ingredients.
+[0:48:35] bit with some of the ingredients. I do like DAGs
+[0:48:38] I do like DAGs directed acyclic graphs.
+[0:48:41] directed acyclic graphs. At least some of them. There are lots of
+[0:48:43] At least some of them. There are lots of different versions of DAGs that are used
+[0:48:45] different versions of DAGs that are used and I'll come on to some dislikes in a
+[0:48:47] and I'll come on to some dislikes in a moment.
+[0:48:50] moment. But I'm pretty familiar with using DAGs
+[0:48:52] But I'm pretty familiar with using DAGs and I must confess I'm less familiar
+[0:48:54] and I must confess I'm less familiar with the cyclic graphs that we've heard
+[0:48:57] with the cyclic graphs that we've heard a lot about today. So for reasons of
+[0:48:59] a lot about today. So for reasons of simplicity and also my own competence,
+[0:49:02] simplicity and also my own competence, I'm only going to talk about simple DAGs
+[0:49:05] I'm only going to talk about simple DAGs for the rest of this discussion.
+[0:49:08] for the rest of this discussion. What I don't like and I really must say
+[0:49:10] What I don't like and I really must say I really don't like
+[0:49:12] I really don't like structural causal models.
+[0:49:15] structural causal models. Um
+[0:49:16] Um I find them really rather baffling.
+[0:49:18] I find them really rather baffling. Um
+[0:49:19] Um Another version of structural causal
+[0:49:21] Another version of structural causal models is is the DAGs which
+[0:49:25] models is is the DAGs which annotated with exogenous error terms and
+[0:49:27] annotated with exogenous error terms and functional relationships. Um
+[0:49:30] functional relationships. Um And I must say
+[0:49:33] And I must say I just don't really understand what
+[0:49:34] I just don't really understand what these error terms are. What do they
+[0:49:36] these error terms are. What do they refer to in the real world? I have this
+[0:49:39] refer to in the real world? I have this belief that when we have modeling the
+[0:49:42] belief that when we have modeling the real world, we should have some idea of
+[0:49:44] real world, we should have some idea of what the terms in our model correspond
+[0:49:46] what the terms in our model correspond to and I don't really know what these
+[0:49:48] to and I don't really know what these error terms correspond to.
+[0:49:50] error terms correspond to. Um
+[0:49:51] Um but that being said, I really do like
+[0:49:53] but that being said, I really do like joint causal inference. And one of the
+[0:49:56] joint causal inference. And one of the reasons I like it is because it actually
+[0:49:58] reasons I like it is because it actually isn't necessary to include all the
+[0:50:00] isn't necessary to include all the ingredients that I've said I don't like.
+[0:50:03] ingredients that I've said I don't like. Um, so just to recap, the use of a
+[0:50:07] Um, so just to recap, the use of a directed acyclic graph for very simple
+[0:50:09] directed acyclic graph for very simple probabilistic modeling, nothing causal
+[0:50:12] probabilistic modeling, nothing causal whatsoever at this point.
+[0:50:14] whatsoever at this point. So, what do we do? A probabilistic DAG
+[0:50:18] So, what do we do? A probabilistic DAG involves relationships between random
+[0:50:21] involves relationships between random variables which are expressed by means
+[0:50:24] variables which are expressed by means of parent-child conditional
+[0:50:26] of parent-child conditional distributions. So, here we will specify
+[0:50:29] distributions. So, here we will specify the conditional distribution of C given
+[0:50:32] the conditional distribution of C given its parents A and B, likewise E given C
+[0:50:34] its parents A and B, likewise E given C and D.
+[0:50:36] and D. Um, those are the ingredients.
+[0:50:38] Um, those are the ingredients. There are no functional relationships.
+[0:50:41] There are no functional relationships. There are no error terms of any kind.
+[0:50:44] There are no error terms of any kind. It's pure probability theory.
+[0:50:47] It's pure probability theory. Uh, you don't have to draw a DAG to do
+[0:50:49] Uh, you don't have to draw a DAG to do that. You could just put it all down as
+[0:50:51] that. You could just put it all down as a joint probability distribution, but
+[0:50:53] a joint probability distribution, but you get wonderful extra leverage on the
+[0:50:55] you get wonderful extra leverage on the problem when you do have a DAG.
+[0:50:57] problem when you do have a DAG. For example, in particular, we can use
+[0:50:59] For example, in particular, we can use d-separation to understand
+[0:51:02] d-separation to understand the probabilistic causal
+[0:51:04] the probabilistic causal uh, probabilistic conditional
+[0:51:06] uh, probabilistic conditional independencies between variables such as
+[0:51:09] independencies between variables such as in the particular case of the DAG I've
+[0:51:12] in the particular case of the DAG I've drawn here, D is probabilistically
+[0:51:14] drawn here, D is probabilistically independent of the pair AB conditional
+[0:51:16] independent of the pair AB conditional on C.
+[0:51:17] on C. Uh,
+[0:51:19] Uh, and as I've pointed out, there is
+[0:51:21] and as I've pointed out, there is absolutely no need to represent this
+[0:51:23] absolutely no need to represent this with a structural causal model. There is
+[0:51:25] with a structural causal model. There is no need to introduce error terms, and
+[0:51:28] no need to introduce error terms, and there is no need to have functional
+[0:51:30] there is no need to have functional relationships between the variables.
+[0:51:32] relationships between the variables. It's purely, purely probabilistic.
+[0:51:36] It's purely, purely probabilistic. Well, I hear you say that's all right
+[0:51:37] Well, I hear you say that's all right for probabilistic model, but we do need
+[0:51:39] for probabilistic model, but we do need all those extra ingredients when we move
+[0:51:41] all those extra ingredients when we move to causal modeling. Well, do we?
+[0:51:45] to causal modeling. Well, do we? So, what are the fundamental assumptions
+[0:51:47] So, what are the fundamental assumptions that are made when we use a dag for
+[0:51:49] that are made when we use a dag for causal model.
+[0:51:51] causal model. Same picture, but different semantics,
+[0:51:53] Same picture, but different semantics, different interpretation.
+[0:51:55] different interpretation. So, the typical interpretation of that
+[0:51:58] So, the typical interpretation of that dag when it's used in a causal context
+[0:52:02] dag when it's used in a causal context is that the distribution of C given A
+[0:52:05] is that the distribution of C given A and B
+[0:52:06] and B uh
+[0:52:07] uh is the same, no matter whether A and B
+[0:52:10] is the same, no matter whether A and B arise naturally just by in an
+[0:52:13] arise naturally just by in an observational setting, or whether some
+[0:52:16] observational setting, or whether some intervention is made on either or both
+[0:52:18] intervention is made on either or both of A and B. What will matter is the
+[0:52:20] of A and B. What will matter is the values that A and B take, but not
+[0:52:23] values that A and B take, but not whether they came about by observation
+[0:52:26] whether they came about by observation or intervention. This is fundamentally
+[0:52:29] or intervention. This is fundamentally Pearl's uh in semantics for a causal
+[0:52:32] Pearl's uh in semantics for a causal dag.
+[0:52:34] dag. Um
+[0:52:35] Um but uh
+[0:52:37] but uh then you can ask, "Well, why?"
+[0:52:40] then you can ask, "Well, why?" We have a system which is modeled
+[0:52:41] We have a system which is modeled probabilistically. I now get that give
+[0:52:43] probabilistically. I now get that give that system a a few kicks by actually
+[0:52:47] that system a a few kicks by actually interfering with it and setting values
+[0:52:49] interfering with it and setting values for say A and B. Um
+[0:52:53] for say A and B. Um there's no reason why in the world
+[0:52:56] there's no reason why in the world things haven't changed and the
+[0:52:57] things haven't changed and the distribution of C given A and B hasn't
+[0:52:59] distribution of C given A and B hasn't changed, or everything could change when
+[0:53:01] changed, or everything could change when I kick the system.
+[0:53:03] I kick the system. So, I want to I would need to justify
+[0:53:06] So, I want to I would need to justify making such an important assumption.
+[0:53:09] making such an important assumption. And one of my problems with uh
+[0:53:11] And one of my problems with uh structural causal models and the whole
+[0:53:13] structural causal models and the whole um
+[0:53:14] um enterprise of causal discovery is it
+[0:53:16] enterprise of causal discovery is it basically takes this for granted because
+[0:53:18] basically takes this for granted because it has a semantics whereby
+[0:53:21] it has a semantics whereby uh we can read off um causal
+[0:53:25] uh we can read off um causal relationships, the effects of
+[0:53:26] relationships, the effects of interventions,
+[0:53:28] interventions, uh
+[0:53:28] uh and assume that they will work in the
+[0:53:30] and assume that they will work in the world. I don't want to assume that. I
+[0:53:33] world. I don't want to assume that. I want to have reasons for assuming that.
+[0:53:36] want to have reasons for assuming that. Uh and so, indeed, there may be good
+[0:53:38] Uh and so, indeed, there may be good reasons for assuming that, but we want
+[0:53:40] reasons for assuming that, but we want to make them explicit. And we want to be
+[0:53:42] to make them explicit. And we want to be very, very clear. And these will be a
+[0:53:45] very, very clear. And these will be a importantly very, very context-dependent
+[0:53:48] importantly very, very context-dependent and will depend on our understanding of
+[0:53:50] and will depend on our understanding of the particular applied problem that
+[0:53:52] the particular applied problem that we're working with.
+[0:53:55] we're working with. When we can justify them, we can do lots
+[0:53:57] When we can justify them, we can do lots of wonderful things. Now, what have we
+[0:54:00] of wonderful things. Now, what have we got when we do that? We have a
+[0:54:01] got when we do that? We have a modularity property. We say there is a
+[0:54:04] modularity property. We say there is a sort of modular component, say for
+[0:54:05] sort of modular component, say for example, the distribution of C given A
+[0:54:08] example, the distribution of C given A and B is an invariant, a modular
+[0:54:11] and B is an invariant, a modular invariant. It would be the same in
+[0:54:14] invariant. It would be the same in different circumstances. One, the
+[0:54:16] different circumstances. One, the circumstances where everything just
+[0:54:18] circumstances where everything just arises naturally and probabilistically.
+[0:54:21] arises naturally and probabilistically. And another quite different context
+[0:54:23] And another quite different context where A and B are set by some sort of
+[0:54:25] where A and B are set by some sort of moving a lever or kicking the system.
+[0:54:28] moving a lever or kicking the system. So,
+[0:54:29] So, that's an important property which
+[0:54:31] that's an important property which really, I would say,
+[0:54:33] really, I would say, gives meaning to causality.
+[0:54:36] gives meaning to causality. Causality is what is preserved when we
+[0:54:39] Causality is what is preserved when we move from one context to another.
+[0:54:41] move from one context to another. But there is something invariant. And uh
+[0:54:45] But there is something invariant. And uh importantly, in the context of what
+[0:54:47] importantly, in the context of what we've heard about today,
+[0:54:49] we've heard about today, uh I've just been talking about
+[0:54:51] uh I've just been talking about observation versus intervention. But
+[0:54:53] observation versus intervention. But again, you say causality, really, what
+[0:54:55] again, you say causality, really, what do I mean by it? I mean things which I
+[0:54:57] do I mean by it? I mean things which I can regard as pretty well stable under
+[0:55:00] can regard as pretty well stable under different contexts. Maybe
+[0:55:02] different contexts. Maybe um same behavior in different hospitals.
+[0:55:06] um same behavior in different hospitals. Um that's not an interventional thing,
+[0:55:08] Um that's not an interventional thing, but it's something I might call causal.
+[0:55:11] but it's something I might call causal. Um So, what we have then, uh
+[0:55:14] Um So, what we have then, uh when we can um make those assumptions
+[0:55:17] when we can um make those assumptions and justify those assumptions, is a
+[0:55:19] and justify those assumptions, is a relationship between models which are
+[0:55:22] relationship between models which are governed by different kinds of context
+[0:55:24] governed by different kinds of context and different interventions. What Pearl
+[0:55:26] and different interventions. What Pearl Yule is called a statistical causal
+[0:55:28] Yule is called a statistical causal model, SCM, and not the SCM which is a
+[0:55:31] model, SCM, and not the SCM which is a structural causal model. Quite
+[0:55:33] structural causal model. Quite definitely not.
+[0:55:35] definitely not. Um
+[0:55:37] Um Well, that's all very good and I like
+[0:55:39] Well, that's all very good and I like that a lot, but one thing I'm a little
+[0:55:42] that a lot, but one thing I'm a little bit bothered about that is that we have
+[0:55:45] bit bothered about that is that we have the same representation for the
+[0:55:48] the same representation for the probabilistic dad and the causal dad.
+[0:55:51] probabilistic dad and the causal dad. And that can be confusing
+[0:55:53] And that can be confusing particularly because if we don't have
+[0:55:55] particularly because if we don't have justification for the kind of things I'm
+[0:55:57] justification for the kind of things I'm saying are invariant, we can assume it
+[0:56:00] saying are invariant, we can assume it without having good reason.
+[0:56:02] without having good reason. So, what I like to do is to augment the
+[0:56:05] So, what I like to do is to augment the dad in a way which makes it very
+[0:56:07] dad in a way which makes it very explicit. This is not the same use of
+[0:56:09] explicit. This is not the same use of augmentation that Laurie has used. I'm
+[0:56:11] augmentation that Laurie has used. I'm not augmenting it with error variables,
+[0:56:14] not augmenting it with error variables, but with context indicators or
+[0:56:15] but with context indicators or intervention indicators.
+[0:56:18] intervention indicators. So,
+[0:56:19] So, I might put those in a square nodes
+[0:56:21] I might put those in a square nodes where FA for example is a non-stochastic
+[0:56:25] where FA for example is a non-stochastic variable with um
+[0:56:28] variable with um a number of values one of which is the
+[0:56:31] a number of values one of which is the idle value which is don't nothing
+[0:56:33] idle value which is don't nothing happens to A, we just observe it
+[0:56:34] happens to A, we just observe it naturally. And other values are possible
+[0:56:37] naturally. And other values are possible values for A, we say set A to such and
+[0:56:40] values for A, we say set A to such and such a value. So, these encode or their
+[0:56:43] such a value. So, these encode or their parameters encoding with particular
+[0:56:45] parameters encoding with particular constant context we're talking about. We
+[0:56:47] constant context we're talking about. We can have such intervention or context
+[0:56:49] can have such intervention or context variables everywhere or just at limited
+[0:56:51] variables everywhere or just at limited places as appropriate in the dad.
+[0:56:55] places as appropriate in the dad. Um
+[0:56:56] Um And when we when we do that, it's lovely
+[0:56:58] And when we when we do that, it's lovely that the same semantics that we use to
+[0:57:01] that the same semantics that we use to understand these
+[0:57:03] understand these conditional independence in the
+[0:57:04] conditional independence in the probabilistic dad can be used in this
+[0:57:06] probabilistic dad can be used in this extended dad.
+[0:57:08] extended dad. Uh so, for example, one thing we can
+[0:57:11] Uh so, for example, one thing we can read off is that C is independent of the
+[0:57:13] read off is that C is independent of the indicators
+[0:57:15] indicators FA and FB for the context once I know A
+[0:57:18] FA and FB for the context once I know A and B. That's a conditional
+[0:57:19] and B. That's a conditional independence.
+[0:57:20] independence. So, it says
+[0:57:22] So, it says uh exactly what I want to say. It
+[0:57:24] uh exactly what I want to say. It actually encodes my assumption that it
+[0:57:27] actually encodes my assumption that it doesn't matter whether those variables
+[0:57:29] doesn't matter whether those variables arise naturally or by intervention. In
+[0:57:31] arise naturally or by intervention. In other words, I can encode my assumptions
+[0:57:33] other words, I can encode my assumptions with conditional independence.
+[0:57:37] with conditional independence. Um
+[0:57:38] Um that diagram explicitly says what I am
+[0:57:40] that diagram explicitly says what I am assuming, uh and it can be criticized if
+[0:57:43] assuming, uh and it can be criticized if I don't believe that. Uh once I can do
+[0:57:46] I don't believe that. Uh once I can do that, it's very easy to move on to do
+[0:57:48] that, it's very easy to move on to do all the usual things we do with causal
+[0:57:49] all the usual things we do with causal reasoning, do calculus, G estimation,
+[0:57:52] reasoning, do calculus, G estimation, and so on.
+[0:57:54] and so on. Uh
+[0:57:56] Uh Now, an objection might be
+[0:57:58] Now, an objection might be we've used conditional independence, but
+[0:58:01] we've used conditional independence, but some of the variables are non-random.
+[0:58:03] some of the variables are non-random. Um Yule and collaborators have got
+[0:58:06] Um Yule and collaborators have got around this by actually assuming they
+[0:58:08] around this by actually assuming they are random.
+[0:58:09] are random. Um but actually it's not a problem if
+[0:58:10] Um but actually it's not a problem if they're not random, because the whole of
+[0:58:13] they're not random, because the whole of the theory of conditional independence
+[0:58:15] the theory of conditional independence extends to what I naturally call
+[0:58:16] extends to what I naturally call extended conditional independence, and
+[0:58:19] extended conditional independence, and that really allows us to
+[0:58:21] that really allows us to mix together random and non-random
+[0:58:23] mix together random and non-random terms, which are both intuitively
+[0:58:25] terms, which are both intuitively meaningful, here we are, and formally
+[0:58:28] meaningful, here we are, and formally meaningful. So, the whole theory of
+[0:58:31] meaningful. So, the whole theory of extended conditional independence we can
+[0:58:33] extended conditional independence we can use there.
+[0:58:34] use there. Uh we I I'm just to reiterate, none of
+[0:58:37] Uh we I I'm just to reiterate, none of this needs
+[0:58:39] this needs uh
+[0:58:39] uh a structural causal model, potential
+[0:58:41] a structural causal model, potential outcomes, error terms not needed. Okay.
+[0:58:45] outcomes, error terms not needed. Okay. Um that's
+[0:58:46] Um that's that's my alarm saying I'm nearly out of
+[0:58:48] that's my alarm saying I'm nearly out of time. Um so, going to joint causal
+[0:58:51] time. Um so, going to joint causal inference,
+[0:58:52] inference, uh I like it a lot, and the reason is
+[0:58:54] uh I like it a lot, and the reason is that it actually tackles the things of
+[0:58:56] that it actually tackles the things of interest. So, one of the things you can
+[0:58:58] interest. So, one of the things you can get out of joint causal inference would
+[0:59:00] get out of joint causal inference would be exactly such a conditional
+[0:59:02] be exactly such a conditional independence between C and these context
+[0:59:05] independence between C and these context variables given A and B, and that is
+[0:59:06] variables given A and B, and that is what I would say is targeting exactly
+[0:59:09] what I would say is targeting exactly the correct carriers of causal content.
+[0:59:12] the correct carriers of causal content. That's why it's performing so well. Um
+[0:59:15] That's why it's performing so well. Um we might want to combine it with further
+[0:59:17] we might want to combine it with further assumed conditional independence or
+[0:59:19] assumed conditional independence or extended conditional independence
+[0:59:21] extended conditional independence properties, fine, but I don't think we
+[0:59:23] properties, fine, but I don't think we absolutely need a structural causal
+[0:59:25] absolutely need a structural causal model. Um
+[0:59:27] model. Um And one nice thing, too, is that when we
+[0:59:30] And one nice thing, too, is that when we move to testing conditional
+[0:59:31] move to testing conditional independence, we often don't have to
+[0:59:33] independence, we often don't have to make any changes. And one nice example
+[0:59:35] make any changes. And one nice example of that, in the very simplest case of an
+[0:59:38] of that, in the very simplest case of an independence test, in a 2x2 contingency
+[0:59:41] independence test, in a 2x2 contingency table between two binary variables, you
+[0:59:44] table between two binary variables, you can also consider the the same thing as
+[0:59:46] can also consider the the same thing as dividing into two populations or
+[0:59:49] dividing into two populations or comparing the two binomial
+[0:59:51] comparing the two binomial probabilities, a two-sample test. And in
+[0:59:53] probabilities, a two-sample test. And in fact, it's well known that the identical
+[0:59:56] fact, it's well known that the identical statistical test, be it the Fisher exact
+[0:59:59] statistical test, be it the Fisher exact exact test or the chi-squared test, can
+[1:00:01] exact test or the chi-squared test, can be used unchanged in both cases. And I
+[1:00:03] be used unchanged in both cases. And I think Yoris has basically indicated that
+[1:00:06] think Yoris has basically indicated that that goes for much more complicated
+[1:00:07] that goes for much more complicated testing.
+[1:00:09] testing. So, uh
+[1:00:10] So, uh that's roughly all I have to say.
+[1:00:13] that's roughly all I have to say. There's a lot I would like to know more
+[1:00:14] There's a lot I would like to know more about in these non-recursive uh
+[1:00:17] about in these non-recursive uh representations of causality. I I don't
+[1:00:20] representations of causality. I I don't think I understand either formality or
+[1:00:22] think I understand either formality or the interpretation well enough, which is
+[1:00:23] the interpretation well enough, which is one good reason for not saying more
+[1:00:25] one good reason for not saying more about them. So, I've got homework to do.
+[1:00:27] about them. So, I've got homework to do. And I'd like to finish by thanking Yoris
+[1:00:30] And I'd like to finish by thanking Yoris for a very stimulating talk.
+[1:00:38] Fantastic. Thanks, Philip. Uh we're slowly running out of time, but Yoris,
+[1:00:40] slowly running out of time, but Yoris, perhaps, do you want to quickly respond
+[1:00:43] perhaps, do you want to quickly respond to the discussion?
+[1:00:44] to the discussion? Um yes, sure. Um so, um thanks a lot,
+[1:00:48] Um yes, sure. Um so, um thanks a lot, Philip, for your
+[1:00:49] Philip, for your interesting discussion um points.
+[1:00:53] interesting discussion um points. Um so, I I see two points to comment
+[1:00:55] Um so, I I see two points to comment upon here.
+[1:00:57] upon here. Uh the first one is
+[1:00:59] Uh the first one is that um well, you were uh you were
+[1:01:01] that um well, you were uh you were right. Uh we don't need structural
+[1:01:03] right. Uh we don't need structural causal models um to formulate this.
+[1:01:06] causal models um to formulate this. Um
+[1:01:08] Um the other formalisms you have uh
+[1:01:11] the other formalisms you have uh um mentioned, they can also be used.
+[1:01:13] um mentioned, they can also be used. Um we decided to nevertheless use
+[1:01:16] Um we decided to nevertheless use structural causal models here because
+[1:01:18] structural causal models here because um we can in that way deal with cycles
+[1:01:22] um we can in that way deal with cycles and with latent confounders.
+[1:01:25] and with latent confounders. And I think in particular the latent
+[1:01:27] And I think in particular the latent confounders um
+[1:01:30] confounders um I find them tricky to deal with. So, if
+[1:01:33] I find them tricky to deal with. So, if you have if you have um
+[1:01:35] you have if you have um confounding between uh system and
+[1:01:37] confounding between uh system and context variables,
+[1:01:39] context variables, then I don't directly see how you would
+[1:01:42] then I don't directly see how you would model this with non-random context
+[1:01:45] model this with non-random context variables. So, that is something I'm
+[1:01:48] variables. So, that is something I'm a bit puzzled about. Whereas, if you um
+[1:01:52] a bit puzzled about. Whereas, if you um consider your context variables to be
+[1:01:53] consider your context variables to be random, then we can also um
+[1:01:56] random, then we can also um deal with latent confounders of context
+[1:01:58] deal with latent confounders of context and system.
+[1:01:59] and system. And I'm not too sure how this works out
+[1:02:02] And I'm not too sure how this works out if you use non-random context variables.
+[1:02:05] if you use non-random context variables. Um
+[1:02:07] Um then
+[1:02:09] then um
+[1:02:10] um yeah, so I think that is basically my
+[1:02:12] yeah, so I think that is basically my reaction.
+[1:02:13] reaction. Um there are all kinds of technical
+[1:02:16] Um there are all kinds of technical things that we could discuss in detail.
+[1:02:19] things that we could discuss in detail. Um
+[1:02:20] Um But, I
+[1:02:22] But, I I think I agree with the most of the
+[1:02:24] I think I agree with the most of the things that you said.
+[1:02:26] things that you said. Um
+[1:02:28] Um But, for us it was So, so there's one
+[1:02:30] But, for us it was So, so there's one conceptual step here that we took, which
+[1:02:33] conceptual step here that we took, which is that um
+[1:02:34] is that um while you might want to view these
+[1:02:36] while you might want to view these context variables more like um kind of
+[1:02:38] context variables more like um kind of non-random parameters or action
+[1:02:41] non-random parameters or action variables like you do in influence
+[1:02:43] variables like you do in influence diagrams, um after you have uh
+[1:02:47] diagrams, um after you have uh gathered the data,
+[1:02:49] gathered the data, you can also think about them as random
+[1:02:51] you can also think about them as random variables. Um
+[1:02:54] variables. Um because there was some mechanism
+[1:02:56] because there was some mechanism that uh makes the choices of the actions
+[1:02:59] that uh makes the choices of the actions for us, and we can as well think that
+[1:03:01] for us, and we can as well think that there was some underlying uh stochastic
+[1:03:04] there was some underlying uh stochastic mechanism that did this. So, why not
+[1:03:05] mechanism that did this. So, why not just consider these to be random
+[1:03:07] just consider these to be random variables um and use the standard uh
+[1:03:10] variables um and use the standard uh probabilistic theory,
+[1:03:12] probabilistic theory, which would not require the extended
+[1:03:14] which would not require the extended notion of the independence.
+[1:03:17] notion of the independence. Um
+[1:03:18] Um I think both both uh both both options
+[1:03:21] I think both both uh both both options are interesting to pursue further. And I
+[1:03:24] are interesting to pursue further. And I my main question at this moment is how
+[1:03:27] my main question at this moment is how how one would deal with latent
+[1:03:28] how one would deal with latent confounding between
+[1:03:31] confounding between non-random context variables and system
+[1:03:32] non-random context variables and system variables.
+[1:03:41] Fantastic. Thanks, Joris. So, I think now slowly it's time to wrap up. We're
+[1:03:44] now slowly it's time to wrap up. We're out of time. First, let's thank Joris
+[1:03:46] out of time. First, let's thank Joris for a great and interesting talk. And
+[1:03:50] for a great and interesting talk. And also thank you, Philip, for for a very
+[1:03:54] also thank you, Philip, for for a very nice discussion.
+[1:03:55] nice discussion. Also, thanks to Tom Claassen and Sara
+[1:03:58] Also, thanks to Tom Claassen and Sara Magliacane for for
+[1:04:01] Magliacane for for helping out in in Q&amp;A. And last but not
+[1:04:04] helping out in in Q&amp;A. And last but not least, thank you all for joining. I I
+[1:04:06] least, thank you all for joining. I I hope you have a nice week, and please
+[1:04:09] hope you have a nice week, and please stay safe, and see you all next week.

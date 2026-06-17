@@ -1,0 +1,1479 @@
+[0:00:06] hi everyone uh welcome to the online causal inference seminar today we have
+[0:00:08] causal inference seminar today we have the pleasure of hearing a talk by
+[0:00:10] the pleasure of hearing a talk by jintyang from iowa state university on
+[0:00:13] jintyang from iowa state university on estimating identifiable causal effects
+[0:00:16] estimating identifiable causal effects through double machine learning
+[0:00:17] through double machine learning graph-based and data-driven approaches
+[0:00:20] graph-based and data-driven approaches our discussion today will be elia
+[0:00:21] our discussion today will be elia spitzer from johns hopkins university
+[0:00:24] spitzer from johns hopkins university and in the q a we have yonghan jung from
+[0:00:26] and in the q a we have yonghan jung from purdue university who will be answering
+[0:00:28] purdue university who will be answering some of your questions there so for
+[0:00:31] some of your questions there so for questions uh i will hand you over to
+[0:00:33] questions uh i will hand you over to dominic who will explain how that will
+[0:00:35] dominic who will explain how that will work
+[0:00:36] work today
+[0:00:37] today thank you emma so today we're trying
+[0:00:40] thank you emma so today we're trying something slightly different so first of
+[0:00:42] something slightly different so first of all as usual you can submit your
+[0:00:44] all as usual you can submit your question in q a and we have a
+[0:00:46] question in q a and we have a collaborator there helping you answer
+[0:00:48] collaborator there helping you answer there
+[0:00:50] there the other thing that we're going to do
+[0:00:51] the other thing that we're going to do is you can also directly raise your hand
+[0:00:53] is you can also directly raise your hand and if you raise your hand
+[0:00:55] and if you raise your hand i will try to unmute you at the next
+[0:00:58] i will try to unmute you at the next break
+[0:00:59] break like just as a warning if too many
+[0:01:00] like just as a warning if too many people raise their hand i will not be
+[0:01:02] people raise their hand i will not be able to unmute everyone so just a
+[0:01:04] able to unmute everyone so just a selection but
+[0:01:05] selection but yeah we'll we'll try that
+[0:01:07] yeah we'll we'll try that with that
+[0:01:08] with that let me hand over to jyn
+[0:01:09] let me hand over to jyn thank you for being here and
+[0:01:11] thank you for being here and the stage is yours
+[0:01:16] okay let me share my screen [Music]
+[0:01:22] ah can you say it
+[0:01:28] yep looks great uh okay first thank the organizers for
+[0:01:31] uh okay first thank the organizers for giving me this opportunity
+[0:01:34] giving me this opportunity today i will be talking about estimating
+[0:01:37] today i will be talking about estimating identifiable causal effects
+[0:01:40] identifiable causal effects through double machine learning so this
+[0:01:42] through double machine learning so this is joint work with young han jun and the
+[0:01:46] is joint work with young han jun and the alias bamboo
+[0:01:48] alias bamboo particularly
+[0:01:49] particularly did the most work
+[0:01:51] did the most work including preparing the slides
+[0:02:00] so i'll be talking about estimating causal effects
+[0:02:02] causal effects that is how the outcome y will change if
+[0:02:05] that is how the outcome y will change if we take an action on x formally the
+[0:02:09] we take an action on x formally the probability of y given 2x
+[0:02:16] specifically we are interested in estimating causal effect from purely
+[0:02:19] estimating causal effect from purely non-experimental data
+[0:02:22] non-experimental data this is
+[0:02:23] this is one of the major tasks in
+[0:02:25] one of the major tasks in empirical sciences since experiments are
+[0:02:28] empirical sciences since experiments are usually costly
+[0:02:30] usually costly may be unethical
+[0:02:32] may be unethical and often not feasible
+[0:02:40] in this talk i will be talking about two scenarios
+[0:02:42] scenarios the first one in addition to
+[0:02:45] the first one in addition to observational data
+[0:02:47] observational data i will assume we have some qualitative
+[0:02:51] i will assume we have some qualitative causal assumptions
+[0:02:52] causal assumptions in the form of a causal graph
+[0:02:56] in the form of a causal graph and i will call this scenario
+[0:02:58] and i will call this scenario graph based approach
+[0:03:01] graph based approach in the second
+[0:03:03] in the second scenario we're just going to assume we
+[0:03:06] scenario we're just going to assume we only have observational data
+[0:03:09] only have observational data in this case the rough idea is we are
+[0:03:12] in this case the rough idea is we are going to run a cause discovery
+[0:03:16] going to run a cause discovery algorithm
+[0:03:17] algorithm to attempting to learn a cartograph
+[0:03:20] to attempting to learn a cartograph but normally we will not be able to lend
+[0:03:23] but normally we will not be able to lend a unique underlying true causal graph
+[0:03:26] a unique underlying true causal graph instead we may be able to learn a markov
+[0:03:30] instead we may be able to learn a markov equivalent class of the consequence
+[0:03:33] equivalent class of the consequence so in the second scenario i will discuss
+[0:03:35] so in the second scenario i will discuss how to estimate causal effect even
+[0:03:38] how to estimate causal effect even markov equivalent class of course of
+[0:03:40] markov equivalent class of course of rights
+[0:03:47] some background so
+[0:03:48] so we are going to assume that the online
+[0:03:52] we are going to assume that the online model is a structured host model or
+[0:03:55] model is a structured host model or scm
+[0:03:57] scm normally we will not know the sm
+[0:04:01] normally we will not know the sm but some qualitative assumptions about
+[0:04:04] but some qualitative assumptions about the scm might be captured by a causal
+[0:04:08] the scm might be captured by a causal graph
+[0:04:10] graph a causal graph is a directed acyclic
+[0:04:13] a causal graph is a directed acyclic graph with bi-directed edges
+[0:04:17] graph with bi-directed edges so these bi-directed edges here
+[0:04:19] so these bi-directed edges here represent unmeasured confounders
+[0:04:27] and we have that the joint distribution
+[0:04:30] the joint distribution will factorize according to the markov
+[0:04:33] will factorize according to the markov properties of the graph
+[0:04:35] properties of the graph for example for this graph
+[0:04:37] for example for this graph well it's uh
+[0:04:39] well it's uh known as a napkin graph piper so i will
+[0:04:42] known as a napkin graph piper so i will call this graph the napkin graph
+[0:04:46] call this graph the napkin graph so that's the factorization according to
+[0:04:48] so that's the factorization according to the mapping graph
+[0:04:50] the mapping graph then the observed distribution can be
+[0:04:53] then the observed distribution can be obtained by marginalizing out the
+[0:04:56] obtained by marginalizing out the unobserved variables
+[0:05:06] the effect of do intervention on x is defined by
+[0:05:07] is defined by basically removing this corresponding
+[0:05:10] basically removing this corresponding factor for x
+[0:05:12] factor for x and assume
+[0:05:13] and assume x to be constant in all the other places
+[0:05:17] x to be constant in all the other places so this formally
+[0:05:19] so this formally represents the causal effect of 2x and
+[0:05:23] represents the causal effect of 2x and other variables
+[0:05:31] in the first scenario i'm going to assume that
+[0:05:33] assume that we know such a causal graph so based on
+[0:05:37] we know such a causal graph so based on the causal knowledge about the domain
+[0:05:40] the causal knowledge about the domain and additionally we assume we know the
+[0:05:43] and additionally we assume we know the precise observational distribution
+[0:05:47] precise observational distribution if we know this distribution
+[0:05:49] if we know this distribution we ask is a target cause effect
+[0:05:53] we ask is a target cause effect probability y
+[0:05:54] probability y even 2x
+[0:05:56] even 2x is it uniquely computable from kiwi
+[0:06:00] is it uniquely computable from kiwi this problem is known as the cause
+[0:06:03] this problem is known as the cause effect identification problem
+[0:06:12] so here if effect is themed unidentifiable it basically means there
+[0:06:15] unidentifiable it basically means there might exist two underlying scms
+[0:06:19] might exist two underlying scms such that they agree on the observed
+[0:06:22] such that they agree on the observed distribution
+[0:06:23] distribution but they disagree on the other effects
+[0:06:28] but they disagree on the other effects which means even if you collect the
+[0:06:30] which means even if you collect the infinite amount of observational data
+[0:06:33] infinite amount of observational data you will not be able to compute the
+[0:06:34] you will not be able to compute the consequence
+[0:06:37] consequence on the other hand if the causal effect
+[0:06:39] on the other hand if the causal effect is identifiable then we can express it
+[0:06:43] is identifiable then we can express it in terms of the joint distribution
+[0:06:46] in terms of the joint distribution for example in the napping graph even
+[0:06:48] for example in the napping graph even this graph we may ask
+[0:06:50] this graph we may ask is the effect of x and y uniquely
+[0:06:53] is the effect of x and y uniquely identified from the observed
+[0:06:55] identified from the observed distribution over x y and
+[0:06:58] distribution over x y and w r
+[0:07:06] now the cause effect identification problem has been extensively studied
+[0:07:09] problem has been extensively studied since the 1990s
+[0:07:12] since the 1990s so currently there exists a complete
+[0:07:15] so currently there exists a complete and sound and complete identification
+[0:07:18] and sound and complete identification algorithm
+[0:07:19] algorithm i will call this algorithm the id
+[0:07:21] i will call this algorithm the id algorithm
+[0:07:23] algorithm so it sounds complete in the sense that
+[0:07:27] so it sounds complete in the sense that if a cause effect is identifiable like
+[0:07:30] if a cause effect is identifiable like in this model
+[0:07:32] in this model then the id algorithm will express the
+[0:07:35] then the id algorithm will express the effects in terms of
+[0:07:37] effects in terms of distribution
+[0:07:39] distribution if the effect is not identifiable the id
+[0:07:42] if the effect is not identifiable the id algorithm will just output no
+[0:07:45] algorithm will just output no so it's a complete in this sense
+[0:07:53] now in the identification [Music]
+[0:07:55] [Music] results we assume we know the precise
+[0:07:58] results we assume we know the precise joint distribution
+[0:08:00] joint distribution here we are concerned with estimating
+[0:08:03] here we are concerned with estimating the
+[0:08:04] the identified distribution from the data
+[0:08:07] identified distribution from the data samples drawn from the distribution
+[0:08:10] samples drawn from the distribution though we are concerned with the
+[0:08:12] though we are concerned with the estimation problem
+[0:08:14] estimation problem for example in this mapping graph
+[0:08:17] for example in this mapping graph the id algorithm might output this
+[0:08:20] the id algorithm might output this expression
+[0:08:21] expression so then we are interested in estimating
+[0:08:25] so then we are interested in estimating this expression from finance samples
+[0:08:32] while best knowledge in general for arbitrary identifiable
+[0:08:35] in general for arbitrary identifiable causal effects
+[0:08:36] causal effects for some arbitrary causal functionals
+[0:08:40] for some arbitrary causal functionals the only general purpose algorithm
+[0:08:42] the only general purpose algorithm available is the blocking estimate
+[0:08:46] available is the blocking estimate in the plugin estimator
+[0:08:48] in the plugin estimator we estimate each conditional
+[0:08:51] we estimate each conditional distributions so they are called
+[0:08:53] distributions so they are called newnesses functions
+[0:08:55] newnesses functions we estimate those uses
+[0:08:58] we estimate those uses using some parametric model
+[0:09:01] using some parametric model then we plug in the
+[0:09:04] then we plug in the into the expression and estimate the
+[0:09:06] into the expression and estimate the cosine
+[0:09:08] cosine now this is okay for the low dimensional
+[0:09:11] now this is okay for the low dimensional data
+[0:09:13] data here we'll be concerned with high
+[0:09:16] here we'll be concerned with high dimensional data if we have many
+[0:09:18] dimensional data if we have many variables in the model
+[0:09:20] variables in the model or for this particular case if we say w
+[0:09:24] or for this particular case if we say w a is a high dimension
+[0:09:29] and then plugin as estimators have various issues
+[0:09:35] so we would like to design estimators that
+[0:09:38] design estimators that will have nicer statistical or
+[0:09:41] will have nicer statistical or computational properties
+[0:09:48] we draw our inspiration from the large literature on estimating causal effects
+[0:09:51] literature on estimating causal effects through covalent adjustment
+[0:09:54] through covalent adjustment which is currently the most common
+[0:09:57] which is currently the most common technique for causal effect estimation
+[0:10:01] technique for causal effect estimation here we assume there exists a set of
+[0:10:03] here we assume there exists a set of covalent c which satisfied the so-called
+[0:10:07] covalent c which satisfied the so-called backdoor criteria
+[0:10:10] backdoor criteria or the ignorability in the statistical
+[0:10:13] or the ignorability in the statistical community
+[0:10:15] community if they satisfy the backdoor criteria
+[0:10:18] if they satisfy the backdoor criteria then the cause effect acts on y can be
+[0:10:20] then the cause effect acts on y can be estimated by this covalent adjustment
+[0:10:24] estimated by this covalent adjustment and there is a large literature on
+[0:10:27] and there is a large literature on estimating this particular asteroid
+[0:10:34] for example we could estimate this expression
+[0:10:37] we could estimate this expression directly
+[0:10:38] directly by
+[0:10:39] by estimating this conditional distribution
+[0:10:43] estimating this conditional distribution y given x c or the outcome regression
+[0:10:47] y given x c or the outcome regression and then we plug in the to compute the
+[0:10:50] and then we plug in the to compute the expectation
+[0:10:55] in a different form something called the ipw
+[0:10:57] ipw we rewrite the expression in a different
+[0:11:00] we rewrite the expression in a different form
+[0:11:01] form and here the nuances of is probability
+[0:11:04] and here the nuances of is probability of x given z
+[0:11:07] of x given z i believe they are known as the
+[0:11:09] i believe they are known as the propensities for
+[0:11:11] propensities for so we compute we estimate this
+[0:11:13] so we compute we estimate this probability
+[0:11:14] probability then compute this expectation
+[0:11:23] now in both these estimators
+[0:11:25] estimators we require the nuances to be correctly
+[0:11:28] we require the nuances to be correctly estimated
+[0:11:29] estimated in order for the estimation to be
+[0:11:31] in order for the estimation to be correct
+[0:11:33] correct also
+[0:11:34] also for the
+[0:11:35] for the estimator to to achieve desire the
+[0:11:38] estimator to to achieve desire the square square square and consist square
+[0:11:41] square square square and consist square root of the inconsistency
+[0:11:43] root of the inconsistency with like the
+[0:11:45] with like the estimates for all the nuances also
+[0:11:48] estimates for all the nuances also converge at square root
+[0:11:57] so if if the estimates are misspecified then the estimation may not be correct
+[0:12:02] then the estimation may not be correct so that's known as the mis-specification
+[0:12:04] so that's known as the mis-specification problem
+[0:12:06] problem and also
+[0:12:08] and also if the estimates for the news is they do
+[0:12:11] if the estimates for the news is they do not converge fast enough
+[0:12:13] not converge fast enough then your overall estimates will not be
+[0:12:16] then your overall estimates will not be able to achieve square root
+[0:12:17] able to achieve square root inconsistencies
+[0:12:19] inconsistencies so why this is a concern
+[0:12:21] so why this is a concern because in recent years when we are
+[0:12:24] because in recent years when we are trying to deal with high dimensional
+[0:12:26] trying to deal with high dimensional complex data
+[0:12:28] complex data we are often going to use machine
+[0:12:30] we are often going to use machine learning models to estimate those
+[0:12:32] learning models to estimate those neurons
+[0:12:34] neurons for example those neural networks
+[0:12:37] for example those neural networks they random
+[0:12:38] they random known to converge slower than square
+[0:12:41] known to converge slower than square root
+[0:12:43] root so then your estimators
+[0:12:45] so then your estimators may not be behaved well
+[0:12:52] so in practice we have the potential issue of model miss specification in
+[0:12:54] issue of model miss specification in particular one the data generation
+[0:12:56] particular one the data generation process is complicated
+[0:13:00] process is complicated and we have the issue of slow
+[0:13:02] and we have the issue of slow convergence
+[0:13:04] convergence particularly if we want to use those
+[0:13:07] particularly if we want to use those flexible machine learning models
+[0:13:10] flexible machine learning models and the standard the plugin estimators
+[0:13:12] and the standard the plugin estimators for the general causal functional
+[0:13:14] for the general causal functional estimates will suffer the same issue
+[0:13:19] estimates will suffer the same issue to address this issue
+[0:13:21] to address this issue double machine learning estimators have
+[0:13:23] double machine learning estimators have been proposed
+[0:13:25] been proposed called the double the biased machine
+[0:13:27] called the double the biased machine learning estimate or dml estimate
+[0:13:30] learning estimate or dml estimate for this expression we use a
+[0:13:33] for this expression we use a different expression
+[0:13:35] different expression this is called the augmented ipw
+[0:13:38] this is called the augmented ipw estimate
+[0:13:40] estimate so if we use this expression it turns
+[0:13:42] so if we use this expression it turns out
+[0:13:44] out either one of
+[0:13:46] either one of p s given z or probability y given y z
+[0:13:50] p s given z or probability y given y z either one of those nuances
+[0:13:52] either one of those nuances is correctly estimated then the overall
+[0:13:55] is correctly estimated then the overall estimate can be correct correctly
+[0:13:57] estimate can be correct correctly estimated so this is known as a
+[0:14:00] estimated so this is known as a doubly robustness problem
+[0:14:04] doubly robustness problem and the further if we use something
+[0:14:06] and the further if we use something called the crossfitting technique
+[0:14:09] called the crossfitting technique that is
+[0:14:10] that is you the training of the nuances and the
+[0:14:14] you the training of the nuances and the samples for final evaluation if if you
+[0:14:17] samples for final evaluation if if you use two independent
+[0:14:20] use two independent sets of samples
+[0:14:22] sets of samples it's called cross-fitting then we may
+[0:14:24] it's called cross-fitting then we may achieve something called the bias in
+[0:14:26] achieve something called the bias in this property
+[0:14:28] this property so
+[0:14:29] so even if the nuances converge at a slower
+[0:14:32] even if the nuances converge at a slower rate like in this one
+[0:14:35] rate like in this one one quarter rate
+[0:14:37] one quarter rate then the
+[0:14:39] then the overall estimator can still achieve the
+[0:14:42] overall estimator can still achieve the square root and consistency
+[0:14:45] square root and consistency so the objective of this work is
+[0:14:49] so the objective of this work is we would like to develop dml style
+[0:14:52] we would like to develop dml style estimators for any causal effects
+[0:14:55] estimators for any causal effects identifiable from a given consequence
+[0:14:59] identifiable from a given consequence and we are going to assume that all
+[0:15:02] and we are going to assume that all these variables are discrete
+[0:15:05] these variables are discrete and all the conditional probabilities
+[0:15:07] and all the conditional probabilities are positive
+[0:15:13] we will follow the recipe given by the work in chennai
+[0:15:15] work in chennai cough
+[0:15:18] cough the idea is to construct the dml
+[0:15:21] the idea is to construct the dml estimator you first construct the even
+[0:15:24] estimator you first construct the even assaultness score of your target aspect
+[0:15:31] so the estimator will be constructed using this score
+[0:15:33] using this score and then we are going to use the
+[0:15:35] and then we are going to use the crossfading technique to actually
+[0:15:37] crossfading technique to actually estimate the
+[0:15:39] estimate the estimate
+[0:15:41] estimate so a dml estimator constructed in this
+[0:15:44] so a dml estimator constructed in this way
+[0:15:45] way achieves the device needs property
+[0:15:48] achieves the device needs property that is it achieves square root
+[0:15:50] that is it achieves square root inconsistency
+[0:15:52] inconsistency even if all the nuances converges in a
+[0:15:55] even if all the nuances converges in a slower rate
+[0:16:04] so that here is the general outline
+[0:16:06] general outline the first we study a special case of
+[0:16:09] the first we study a special case of this problem
+[0:16:11] this problem we consider a causal effects identified
+[0:16:14] we consider a causal effects identified on the so-called
+[0:16:16] on the so-called multi-outcome sequential back locator
+[0:16:19] multi-outcome sequential back locator msbd criteria
+[0:16:21] msbd criteria we will derive um
+[0:16:23] we will derive um among our softness score for cause
+[0:16:26] among our softness score for cause estimate under this quick theory
+[0:16:29] estimate under this quick theory and then we showed that
+[0:16:33] and then we showed that any identifiable cause of asthma output
+[0:16:36] any identifiable cause of asthma output by the id algorithm can be represented
+[0:16:40] by the id algorithm can be represented by a
+[0:16:41] by a multiplication division marginalization
+[0:16:45] multiplication division marginalization of the msbb as much
+[0:16:48] of the msbb as much we will call this operations
+[0:16:51] we will call this operations the arithmetic combination
+[0:16:54] the arithmetic combination now once we establish that we show that
+[0:16:58] now once we establish that we show that we can then derive an immune or softness
+[0:17:01] we can then derive an immune or softness score for the arbitrary estimate
+[0:17:05] score for the arbitrary estimate using the newman or certain score of the
+[0:17:07] using the newman or certain score of the mspds
+[0:17:09] mspds finally based on the score we construct
+[0:17:12] finally based on the score we construct a dml estimate
+[0:17:23] first let me review this msbd criteria so it's a extension of the
+[0:17:26] so it's a extension of the sequential backdoor criteria
+[0:17:29] sequential backdoor criteria and the sequential backdoor criteria is
+[0:17:31] and the sequential backdoor criteria is the extension of the backdoor criteria
+[0:17:34] the extension of the backdoor criteria to the sequential case
+[0:17:40] so roughly speaking we see a
+[0:17:41] we see a sequence a sequential of z variables
+[0:17:44] sequence a sequential of z variables satisfy the msbd criteria relevant to a
+[0:17:48] satisfy the msbd criteria relevant to a sequential of x variables and the
+[0:17:50] sequential of x variables and the sequential of var variables
+[0:17:53] sequential of var variables if all the non-causal paths between each
+[0:17:55] if all the non-causal paths between each x and y i are blocked by the i
+[0:17:58] x and y i are blocked by the i conditioned on all the previous ones
+[0:18:02] conditioned on all the previous ones so if
+[0:18:03] so if z satisfies such a criteria
+[0:18:06] z satisfies such a criteria then
+[0:18:07] then it can be shown that the causal effects
+[0:18:10] it can be shown that the causal effects can be expressed in this form
+[0:18:13] can be expressed in this form so we'll i will call this msbb
+[0:18:16] so we'll i will call this msbb adjustment form
+[0:18:18] adjustment form and i'm often going to use this operator
+[0:18:22] and i'm often going to use this operator to define this operator
+[0:18:24] to define this operator as a shorthand to represent this
+[0:18:26] as a shorthand to represent this expression
+[0:18:34] as an example in this model z1 z2 satisfy the msb decrypt here
+[0:18:37] z1 z2 satisfy the msb decrypt here relative to
+[0:18:38] relative to x and y
+[0:18:41] x and y oh okay the errors disappeared from this
+[0:18:44] oh okay the errors disappeared from this graph so basically the
+[0:18:47] graph so basically the order in this graph is z1
+[0:18:50] order in this graph is z1 x1 y1 then z2 x2 y2
+[0:18:54] x1 y1 then z2 x2 y2 so that the direction can be fixed by
+[0:18:57] so that the direction can be fixed by this order
+[0:18:59] this order so in this particular graph the causal
+[0:19:02] so in this particular graph the causal effects can be expressed in this form
+[0:19:08] here's another example because the effects of x1 x2 and y can
+[0:19:11] because the effects of x1 x2 and y can be expressed in this form
+[0:19:20] so we have
+[0:19:22] we have derived an email softness score for this
+[0:19:25] derived an email softness score for this mspd adjustment estimate
+[0:19:29] mspd adjustment estimate and the expression is given here
+[0:19:33] and the expression is given here it basically consists of two groups of
+[0:19:38] it basically consists of two groups of functions
+[0:19:39] functions the h i's expressed by this expression
+[0:19:43] the h i's expressed by this expression and the more details are here
+[0:19:45] and the more details are here so the nuances are those probability y
+[0:19:48] so the nuances are those probability y given the appraised one probability of z
+[0:19:51] given the appraised one probability of z given the previous one
+[0:19:53] given the previous one and the nuances for w of probability x
+[0:19:55] and the nuances for w of probability x given previous variable
+[0:20:01] and once we have this score we can explicitly construct a dml estimate
+[0:20:06] explicitly construct a dml estimate satisfied the
+[0:20:08] satisfied the doubly robustness property that
+[0:20:11] doubly robustness property that whenever the either the nuances in hi or
+[0:20:15] whenever the either the nuances in hi or the groups of nuances in wr are
+[0:20:18] the groups of nuances in wr are correctly estimated then the overall
+[0:20:21] correctly estimated then the overall estimate will be
+[0:20:23] estimate will be and
+[0:20:25] and they have the devices
+[0:20:31] so that's the result for a special case
+[0:20:34] result for a special case one the
+[0:20:35] one the causal effect can be identified by the
+[0:20:39] causal effect can be identified by the msbd criteria
+[0:20:42] msbd criteria i believe now is a
+[0:20:44] i believe now is a good time to pause to answer questions
+[0:20:48] good time to pause to answer questions thanks jin so let's see currently nobody
+[0:20:50] thanks jin so let's see currently nobody has raised their hand but if there's
+[0:20:52] has raised their hand but if there's anyone in the audience currently who has
+[0:20:53] anyone in the audience currently who has a question you can just raise your hand
+[0:20:56] a question you can just raise your hand and i'll unmute you
+[0:21:06] okay um there's one question that we just got
+[0:21:09] um there's one question that we just got in q a um
+[0:21:11] in q a um so we have one person asking does this
+[0:21:13] so we have one person asking does this imply that you can also get the
+[0:21:14] imply that you can also get the conditional average treatment effect
+[0:21:16] conditional average treatment effect estimate for any causal graft that is
+[0:21:18] estimate for any causal graft that is identifiable or do you only get the
+[0:21:19] identifiable or do you only get the average treatment effect
+[0:21:21] average treatment effect so what we get is actually the effect
+[0:21:24] so what we get is actually the effect it's a probability of y given 2x so once
+[0:21:28] it's a probability of y given 2x so once you have the distribution then yes i
+[0:21:31] you have the distribution then yes i believe you can then
+[0:21:33] believe you can then estimate the average effect
+[0:21:36] estimate the average effect so here we
+[0:21:38] so here we all the effect identification i'm
+[0:21:40] all the effect identification i'm talking about the probability of y given
+[0:21:43] talking about the probability of y given 2x
+[0:21:45] 2x the distribution itself
+[0:21:47] the distribution itself okay
+[0:21:48] okay i have one quick question
+[0:21:50] i have one quick question this might not be a good question but so
+[0:21:52] this might not be a good question but so are you also the the estimator that you
+[0:21:54] are you also the the estimator that you construct is it also efficient among all
+[0:21:57] construct is it also efficient among all the uh
+[0:21:59] the uh no
+[0:22:00] no we don't have the statistical efficiency
+[0:22:03] we don't have the statistical efficiency of
+[0:22:04] of now okay thanks yeah that would be other
+[0:22:07] now okay thanks yeah that would be other desired property but no yeah for the
+[0:22:10] desired property but no yeah for the chance to
+[0:22:13] chance to i believe that's still an open question
+[0:22:20] could i ask a short question about the mspd so this is a generalization of the
+[0:22:23] mspd so this is a generalization of the sequential backdoor to
+[0:22:25] sequential backdoor to a graph with hidden variables right
+[0:22:28] a graph with hidden variables right or
+[0:22:29] or oh i believe sequential vector also
+[0:22:31] oh i believe sequential vector also applicable to hidden the generalization
+[0:22:33] applicable to hidden the generalization is in y
+[0:22:34] is in y the outcomes the standard the sequential
+[0:22:37] the outcomes the standard the sequential vector y is assumed to be either
+[0:22:39] vector y is assumed to be either singleton or a group basically it cannot
+[0:22:43] singleton or a group basically it cannot be split i see the general idea is we
+[0:22:46] be split i see the general idea is we can have y one y two split in the middle
+[0:22:50] can have y one y two split in the middle okay uh
+[0:22:51] okay uh yeah
+[0:22:54] yeah all right thanks i currently don't see
+[0:22:56] all right thanks i currently don't see any raised hands so i think you can
+[0:22:58] any raised hands so i think you can continue
+[0:23:05] okay so next i will discuss the general case
+[0:23:06] case that is how to estimate the causal
+[0:23:09] that is how to estimate the causal effects that's identifiable by the id
+[0:23:12] effects that's identifiable by the id algorithm
+[0:23:14] algorithm first i will briefly revisit the id
+[0:23:18] first i will briefly revisit the id algorithm
+[0:23:20] algorithm so some important concept used in the id
+[0:23:23] so some important concept used in the id algorithm
+[0:23:24] algorithm first the concept of c component
+[0:23:28] first the concept of c component so a set of variables are set in a c
+[0:23:32] so a set of variables are set in a c component if you they are connected by a
+[0:23:34] component if you they are connected by a bi-directed path for example in this
+[0:23:37] bi-directed path for example in this graph we have we want v3 v5 in one c
+[0:23:40] graph we have we want v3 v5 in one c component we to refer in another c
+[0:23:43] component we to refer in another c component
+[0:23:45] component and we have the concept of c factor
+[0:23:49] and we have the concept of c factor that's uh defined over c
+[0:23:51] that's uh defined over c qc it represents
+[0:23:54] qc it represents the distribution of c under the
+[0:23:57] the distribution of c under the intervention on all the other variables
+[0:24:00] intervention on all the other variables so this is called a c factor
+[0:24:04] so this is called a c factor it turns out the joint distribution can
+[0:24:07] it turns out the joint distribution can be
+[0:24:08] be factorized accord into a product of the
+[0:24:12] factorized accord into a product of the c factors over the c components in the
+[0:24:15] c factors over the c components in the graph
+[0:24:17] graph so this essentially generalization of
+[0:24:19] so this essentially generalization of standard marker factorization
+[0:24:22] standard marker factorization into the model with hidden variables
+[0:24:30] and the basic operations we could do with the c-factors we have if w is
+[0:24:33] with the c-factors we have if w is ancestral in the graph
+[0:24:35] ancestral in the graph then we may estimate qw from the
+[0:24:39] then we may estimate qw from the qc
+[0:24:42] qc and in general for any qh which can be
+[0:24:45] and in general for any qh which can be factorized into a product of c factors
+[0:24:48] factorized into a product of c factors over the c components in the subgraph o
+[0:24:51] over the c components in the subgraph o h
+[0:24:53] h and each of the c factors will be
+[0:24:55] and each of the c factors will be identified in terms of this
+[0:24:58] identified in terms of this c vector qh
+[0:25:02] c vector qh so based on those properties
+[0:25:05] so based on those properties a complete algorithm for identifying
+[0:25:07] a complete algorithm for identifying causal effect have been developed called
+[0:25:10] causal effect have been developed called the id algorithm
+[0:25:12] the id algorithm so i will not discuss the id algorithm
+[0:25:15] so i will not discuss the id algorithm the basic idea is it recursively apply
+[0:25:19] the basic idea is it recursively apply those c-factor operations
+[0:25:23] those c-factor operations and in the end it will either output a
+[0:25:26] and in the end it will either output a expression for your target cause effect
+[0:25:30] expression for your target cause effect or
+[0:25:31] or if it's not identified it will output
+[0:25:33] if it's not identified it will output the fail
+[0:25:36] now our observation is that
+[0:25:45] for any given target effect the id algorithm actually output expression
+[0:25:49] algorithm actually output expression which
+[0:25:50] which is a arithmetic combination which means
+[0:25:53] is a arithmetic combination which means the
+[0:25:54] the product
+[0:25:55] product division and marginalization
+[0:25:59] division and marginalization over a set of
+[0:26:01] over a set of identified c factors
+[0:26:04] identified c factors for example for this napkin graph
+[0:26:06] for example for this napkin graph the id algorithm will
+[0:26:09] the id algorithm will output this expression is in fact
+[0:26:13] output this expression is in fact this expression is obtained from this
+[0:26:16] this expression is obtained from this expression so it's expressed as uh
+[0:26:19] expression so it's expressed as uh this is the c factor over w x and y
+[0:26:23] this is the c factor over w x and y it's expressed as marginalization and
+[0:26:25] it's expressed as marginalization and then a division
+[0:26:34] so this is our first observation then we realize that all those
+[0:26:38] then we realize that all those identified the c factors used in the id
+[0:26:41] identified the c factors used in the id algorithm
+[0:26:42] algorithm they can in fact
+[0:26:44] they can in fact express as a msbd adjustment form
+[0:26:49] express as a msbd adjustment form so what we have done is we basically
+[0:26:52] so what we have done is we basically modify the id algorithm
+[0:26:55] modify the id algorithm so we will call it dml id equity
+[0:26:58] so we will call it dml id equity such that
+[0:26:59] such that the output the identified
+[0:27:02] the output the identified how the s mount is expressed as a
+[0:27:05] how the s mount is expressed as a arithmetic combination of the
+[0:27:08] arithmetic combination of the msbd adjustments
+[0:27:12] msbd adjustments for example
+[0:27:17] in this model so basically each of this form is uh
+[0:27:20] so basically each of this form is uh expressed in a msbd adjustment which i
+[0:27:24] expressed in a msbd adjustment which i have defined previously
+[0:27:27] have defined previously in fact for this particular one each of
+[0:27:30] in fact for this particular one each of them
+[0:27:31] them is a backdoor adjustment
+[0:27:34] is a backdoor adjustment so msbt
+[0:27:35] so msbt adjustment in this case reduced to the
+[0:27:37] adjustment in this case reduced to the standard vector
+[0:27:39] standard vector this is in fact the causal effect of r
+[0:27:43] this is in fact the causal effect of r on x y with w as a covalent
+[0:27:47] on x y with w as a covalent the bottom one is the causal effect of
+[0:27:50] the bottom one is the causal effect of rrx adjust by pw
+[0:28:01] now with this observation given that we are able to derive
+[0:28:04] are able to derive email also known score for the msbd
+[0:28:07] email also known score for the msbd adjustment
+[0:28:08] adjustment we try to
+[0:28:10] we try to derive a
+[0:28:12] derive a email orthogonal score for the general
+[0:28:15] email orthogonal score for the general expression for the ending this
+[0:28:16] expression for the ending this arithmetic combination
+[0:28:18] arithmetic combination so basically based using this property
+[0:28:23] so basically based using this property so here this phi mi represents the
+[0:28:25] so here this phi mi represents the animal ostomy score of the msb eosi
+[0:28:29] animal ostomy score of the msb eosi adjustment so based on this property we
+[0:28:32] adjustment so based on this property we are able to develop a recursive accuracy
+[0:28:36] are able to develop a recursive accuracy so given this expression
+[0:28:38] so given this expression we develop a recursive algorithm that
+[0:28:41] we develop a recursive algorithm that will be able to derive a score
+[0:28:49] so in summary at this point what we have is we have a algorithm
+[0:28:51] is we have a algorithm given the target theory and the causal
+[0:28:54] given the target theory and the causal graph
+[0:28:55] graph our algorithm will systematically derive
+[0:28:59] our algorithm will systematically derive an immortal atmosphere
+[0:29:08] now based on the score we will construct a dml estimate
+[0:29:11] a dml estimate first we have that
+[0:29:13] first we have that pfi is the score of a derived
+[0:29:16] pfi is the score of a derived satisfy the property that it can be
+[0:29:19] satisfy the property that it can be expressed as um
+[0:29:22] expressed as um is function then known as um
+[0:29:25] is function then known as um center the influence function
+[0:29:27] center the influence function minus your target estimate
+[0:29:31] minus your target estimate so such that then the
+[0:29:33] so such that then the even the
+[0:29:35] even the estimator can be constructed by
+[0:29:38] estimator can be constructed by computing the empirical expectation over
+[0:29:41] computing the empirical expectation over the
+[0:29:42] the uncensored influence function
+[0:29:45] uncensored influence function and then we use the follow the standard
+[0:29:48] and then we use the follow the standard crossfading technique so we split the
+[0:29:51] crossfading technique so we split the samples into two halves randomly split
+[0:29:54] samples into two halves randomly split into two halves
+[0:29:56] into two halves use one half to
+[0:29:58] use one half to estimate the
+[0:30:00] estimate the oops
+[0:30:01] oops use one half to estimate the nuances
+[0:30:04] use one half to estimate the nuances and use the other half to
+[0:30:07] and use the other half to estimate the empirical expectation
+[0:30:11] estimate the empirical expectation so that's the dms meter we constructed
+[0:30:17] so the
+[0:30:23] propose that estimator will satisfy certain doubly robustness property
+[0:30:27] certain doubly robustness property that is it will be robust with
+[0:30:30] that is it will be robust with either one groups of
+[0:30:33] either one groups of nuances are correctly classified or
+[0:30:36] nuances are correctly classified or another group of unc cycles are
+[0:30:38] another group of unc cycles are correctly estimated
+[0:30:45] and we show that they have the devices property
+[0:30:47] property and also this estimator as we shown that
+[0:30:51] and also this estimator as we shown that it works for
+[0:30:52] it works for any identifiable causal as amount
+[0:30:56] any identifiable causal as amount given a causal graph
+[0:31:03] as a specific example for this mapping graph
+[0:31:06] for this mapping graph the causal effect
+[0:31:09] the causal effect even in this expression can be expressed
+[0:31:11] even in this expression can be expressed as a ratio of two
+[0:31:14] as a ratio of two msbd adjustments in fact the two
+[0:31:17] msbd adjustments in fact the two backdoor adjustments
+[0:31:18] backdoor adjustments expression
+[0:31:21] expression based on this expression
+[0:31:24] based on this expression now first we can derive the neiman
+[0:31:27] now first we can derive the neiman assortment score for the
+[0:31:29] assortment score for the for each of m1 and m2 for each of these
+[0:31:32] for each of m1 and m2 for each of these two expressions
+[0:31:34] two expressions and they are given here
+[0:31:37] and they are given here in fact they are in the familiar form of
+[0:31:40] in fact they are in the familiar form of augmented ipw
+[0:31:43] augmented ipw and then based on the
+[0:31:45] and then based on the ratio form we run our algorithm we
+[0:31:48] ratio form we run our algorithm we derive the neiman orthogonal score for
+[0:31:50] derive the neiman orthogonal score for the positive effect
+[0:31:52] the positive effect expressed in terms of the
+[0:31:55] expressed in terms of the horizontal score for the mis
+[0:31:58] horizontal score for the mis and here mus are the expected value of
+[0:32:02] and here mus are the expected value of those uncentered influences
+[0:32:05] those uncentered influences and the uncensored influence function
+[0:32:07] and the uncensored influence function itself
+[0:32:08] itself can also be computed like this
+[0:32:19] now for this particular estimate they satisfy the doubly robustness
+[0:32:22] they satisfy the doubly robustness property that
+[0:32:24] property that the estimate would be correct if either
+[0:32:26] the estimate would be correct if either the nuances for this
+[0:32:29] the nuances for this basically those are the news is required
+[0:32:32] basically those are the news is required for the standard plugin estimate
+[0:32:35] for the standard plugin estimate or the nuances for probability are given
+[0:32:38] or the nuances for probability are given w are correctly estimated
+[0:32:42] w are correctly estimated and it satisfied the devices
+[0:32:45] and it satisfied the devices that is all those nuances even if they
+[0:32:48] that is all those nuances even if they converge at uh and one quarter rate
+[0:32:52] converge at uh and one quarter rate the overall estimate is
+[0:32:54] the overall estimate is can still achieve square root and
+[0:32:56] can still achieve square root and consistency
+[0:33:00] so we have
+[0:33:06] run the simulated experiments to confirm these properties
+[0:33:08] these properties we have simulated the devices
+[0:33:13] we have simulated the devices and compared our estimator our estimator
+[0:33:16] and compared our estimator our estimator is this blue line with the standard
+[0:33:18] is this blue line with the standard black plugging estimator
+[0:33:21] black plugging estimator and this is basically the estimation
+[0:33:25] and this is basically the estimation error here we are estimating the
+[0:33:27] error here we are estimating the probability of y
+[0:33:30] probability of y y equal to 1 given x then compute
+[0:33:33] y equal to 1 given x then compute weighted average over x values for that
+[0:33:37] weighted average over x values for that and compute the your estimation minus
+[0:33:41] and compute the your estimation minus the true as the true value
+[0:33:43] the true as the true value since this is the simulated data
+[0:33:51] and this is when compare the devices problem
+[0:33:53] problem so we also simulated the double
+[0:33:55] so we also simulated the double robustness property
+[0:33:57] robustness property first we simulated to misspecified this
+[0:34:01] first we simulated to misspecified this nuances
+[0:34:03] nuances here we showed the plugin estimator will
+[0:34:06] here we showed the plugin estimator will not work working well because plugin
+[0:34:08] not work working well because plugin estimator actually
+[0:34:10] estimator actually using this news
+[0:34:12] using this news but our estimator still works well
+[0:34:16] but our estimator still works well now we also simulated what if the other
+[0:34:19] now we also simulated what if the other one the probability and w is
+[0:34:21] one the probability and w is misspecified
+[0:34:23] misspecified this one the estimator is comparable
+[0:34:25] this one the estimator is comparable with the plugin because plugging is not
+[0:34:27] with the plugin because plugging is not using this
+[0:34:30] using this nuances
+[0:34:32] nuances so that's the simulation
+[0:34:35] so that's the simulation okay i think
+[0:34:38] okay i think i should another time to pause and
+[0:34:41] i should another time to pause and answer questions
+[0:34:44] answer questions currently
+[0:34:46] graph based approach
+[0:34:54] yeah currently there are no open questions junghan has
+[0:34:56] questions junghan has answered all of them let's see what is
+[0:34:58] answered all of them let's see what is if someone has a question please raise
+[0:35:00] if someone has a question please raise your hand
+[0:35:08] nope there seems to be no question currently so i think okay then i will
+[0:35:12] currently so i think okay then i will move on to the second
+[0:35:15] move on to the second scenario yes quick reminder sorry you
+[0:35:17] scenario yes quick reminder sorry you have around 10 minutes left
+[0:35:19] have around 10 minutes left sorry for interrupting
+[0:35:21] sorry for interrupting what's that you have around 10 minutes
+[0:35:23] what's that you have around 10 minutes left sorry just a reminder of your time
+[0:35:33] so in the first scenario we have assumed that we know the causal
+[0:35:35] we have assumed that we know the causal graph
+[0:35:37] graph so in the second scenario
+[0:35:39] so in the second scenario we will consider a purely data-driven
+[0:35:42] we will consider a purely data-driven situation
+[0:35:43] situation so we only have the observational data
+[0:35:46] so we only have the observational data we do not have the concept
+[0:35:49] we do not have the concept so we are going to assume that we can
+[0:35:52] so we are going to assume that we can join some causal structure learning
+[0:35:55] join some causal structure learning algorithm
+[0:35:56] algorithm attempting to lend the underlying cause
+[0:35:59] attempting to lend the underlying cause of us
+[0:36:00] of us because the structure learning has been
+[0:36:02] because the structure learning has been well studied there's a large little
+[0:36:04] well studied there's a large little challenge
+[0:36:06] challenge now in general it's known that even
+[0:36:09] now in general it's known that even purely non-experimental data if we don't
+[0:36:12] purely non-experimental data if we don't make any other assumptions about the
+[0:36:15] make any other assumptions about the online causal mechanism
+[0:36:17] online causal mechanism we will not be able to learn the unique
+[0:36:20] we will not be able to learn the unique online true graph
+[0:36:23] online true graph instead we are able to learn a markov
+[0:36:26] instead we are able to learn a markov equivalence class of the online to graph
+[0:36:30] equivalence class of the online to graph basically a set of graphs which have the
+[0:36:34] basically a set of graphs which have the same markov properties or have the same
+[0:36:37] same markov properties or have the same or encode the same conditional
+[0:36:39] or encode the same conditional dependencies as the true path
+[0:36:42] dependencies as the true path specifically we will consider partial
+[0:36:46] specifically we will consider partial ancestral graph
+[0:36:47] ancestral graph which provides a graphic representation
+[0:36:51] which provides a graphic representation of markov equivalence class of graphs
+[0:36:55] of markov equivalence class of graphs and a pack could be learned from
+[0:36:58] and a pack could be learned from observational data by for example the
+[0:37:01] observational data by for example the fcis
+[0:37:03] fcis so in this approach we are going to
+[0:37:06] so in this approach we are going to assume we know the packs
+[0:37:10] assume we know the packs now for your information here are some
+[0:37:12] now for your information here are some example packs
+[0:37:14] example packs so packs represent a group of graphs so
+[0:37:19] so packs represent a group of graphs so we have in the graph we have those
+[0:37:21] we have in the graph we have those circles to represent structure
+[0:37:23] circles to represent structure uncertainty
+[0:37:25] uncertainty so a circle here essentially means it
+[0:37:27] so a circle here essentially means it could be either a directed error or
+[0:37:30] could be either a directed error or bi-directive
+[0:37:32] bi-directive also those areas itself they just
+[0:37:35] also those areas itself they just represent ancestral relationship
+[0:37:41] so there is a lot of uncertainty but there are group they represent a class
+[0:37:44] there are group they represent a class of concept
+[0:37:51] then if we assume that we have the
+[0:37:53] we have the hack
+[0:37:54] hack and we have the observational
+[0:37:57] and we have the observational distribution
+[0:38:00] distribution then the cause identification and this
+[0:38:02] then the cause identification and this situation asks is the causal effect
+[0:38:06] situation asks is the causal effect uniquely identifiable from the
+[0:38:08] uniquely identifiable from the distribution
+[0:38:10] distribution so if it's not identifiable from the
+[0:38:12] so if it's not identifiable from the distribution
+[0:38:13] distribution could mean that the
+[0:38:15] could mean that the in the underlying
+[0:38:17] in the underlying in the equivalence class there might be
+[0:38:19] in the equivalence class there might be different graphs which agree on pv but
+[0:38:23] different graphs which agree on pv but they disagree on the
+[0:38:26] they disagree on the positive effects if that they are
+[0:38:28] positive effects if that they are identifiable it means that in all the
+[0:38:32] identifiable it means that in all the causal graphs in the equivalent class
+[0:38:35] causal graphs in the equivalent class they both agree on the distribution
+[0:38:37] they both agree on the distribution and agree on the causal effect
+[0:38:41] and agree on the causal effect now this identification problem has
+[0:38:44] now this identification problem has recently been studied and again a
+[0:38:47] recently been studied and again a complete
+[0:38:48] complete if and only if identification algorithm
+[0:38:51] if and only if identification algorithm have been developed
+[0:38:53] have been developed algorithm called the idp
+[0:38:56] algorithm called the idp for example given this pack the idp
+[0:38:59] for example given this pack the idp algorithm will output this expression
+[0:39:03] algorithm will output this expression now here we are concerned with the
+[0:39:06] now here we are concerned with the estimation problem
+[0:39:08] estimation problem so given some arbitrary causal effects
+[0:39:12] so given some arbitrary causal effects estimate output by the idp algorithm
+[0:39:16] estimate output by the idp algorithm we would like to develop the dml style
+[0:39:20] we would like to develop the dml style estimators
+[0:39:21] estimators so that's all
+[0:39:28] so what we have done here i will not go to the detail give a graph outline
+[0:39:32] to the detail give a graph outline so what we have done is based on the idp
+[0:39:36] so what we have done is based on the idp algorithm
+[0:39:38] algorithm we have designed the algorithm
+[0:39:41] we have designed the algorithm which even attack
+[0:39:44] which even attack no given a pack given a target
+[0:39:48] no given a pack given a target other given a target has an effect
+[0:39:52] other given a target has an effect it will derive an email or something
+[0:39:54] it will derive an email or something score for the for the target cause
+[0:39:56] score for the for the target cause effect
+[0:40:02] and the based on the email assortment store we are able to develop a
+[0:40:05] store we are able to develop a dml estimate
+[0:40:07] dml estimate and we call algorithm dml idpx
+[0:40:17] so the algorithm will satisfy the device in its property that
+[0:40:20] satisfy the device in its property that is
+[0:40:21] is the estimator converges in square root
+[0:40:23] the estimator converges in square root and even if all the nuances converges
+[0:40:27] and even if all the nuances converges slower
+[0:40:28] slower also it satisfies a certain doubly
+[0:40:31] also it satisfies a certain doubly robustness property that is estimate is
+[0:40:34] robustness property that is estimate is consistent even when a portion of the
+[0:40:38] consistent even when a portion of the nuances could be misspecified
+[0:40:48] and i will show the opti with this particular example for
+[0:40:50] opti with this particular example for this graph
+[0:40:52] this graph this is the expression given by the idp
+[0:40:56] this is the expression given by the idp algorithm
+[0:40:57] algorithm and use our dml idp algorithm we have
+[0:41:01] and use our dml idp algorithm we have derived the estimate
+[0:41:04] derived the estimate and the detailed expression is to mask
+[0:41:08] and the detailed expression is to mask to messy to show so here i will
+[0:41:11] to messy to show so here i will show the double robustness properties
+[0:41:15] show the double robustness properties so double embossing properties basically
+[0:41:17] so double embossing properties basically says that our estimator will converge if
+[0:41:21] says that our estimator will converge if either
+[0:41:22] either this one or this group is converged
+[0:41:26] this one or this group is converged and
+[0:41:27] and this neurons what this group of
+[0:41:30] this neurons what this group of universes will converge
+[0:41:32] universes will converge well you can compare with the standard
+[0:41:34] well you can compare with the standard plugin which requires all these groups
+[0:41:37] plugin which requires all these groups of uses to be converged
+[0:41:41] so that's the doubly robustness problem
+[0:41:52] and also it satisfied the device in this property
+[0:42:01] also we have confirmed our results with simulation
+[0:42:03] simulation experiments
+[0:42:05] experiments over this graph
+[0:42:08] over this graph so we basically we simulated a structure
+[0:42:11] so we basically we simulated a structure generated structure causal model use it
+[0:42:13] generated structure causal model use it to generate simulated data
+[0:42:16] to generate simulated data so so here's the experiments on the
+[0:42:19] so so here's the experiments on the devices property
+[0:42:21] devices property compare again with the plugin estimator
+[0:42:24] compare again with the plugin estimator and our
+[0:42:25] and our dml estimate
+[0:42:28] dml estimate and see the marking estimator the
+[0:42:32] and see the marking estimator the variance is
+[0:42:34] variance is very large
+[0:42:35] very large so this shows the
+[0:42:37] so this shows the the biases
+[0:42:43] similarly for the doubling of boston's property we simulated two situations one
+[0:42:48] property we simulated two situations one is this this one nuisance is
+[0:42:50] is this this one nuisance is misspecified
+[0:42:52] misspecified all the others are correctly specified
+[0:42:56] all the others are correctly specified and it shows that the plugin estimator
+[0:43:00] and it shows that the plugin estimator has traveled because this news is
+[0:43:03] has traveled because this news is actually used in the plugin
+[0:43:07] actually used in the plugin but our estimator is still okay
+[0:43:10] but our estimator is still okay and we also simulate another situation
+[0:43:13] and we also simulate another situation these groups are mis specified and all
+[0:43:16] these groups are mis specified and all the others are correctly estimating
+[0:43:18] the others are correctly estimating the plugin estimator also uses these two
+[0:43:22] the plugin estimator also uses these two nuances so they will have a problem
+[0:43:25] nuances so they will have a problem and our estimator is still relatively
+[0:43:28] and our estimator is still relatively robust
+[0:43:36] okay conclusion
+[0:43:39] conclusion so we have developed pml estimators for
+[0:43:44] so we have developed pml estimators for hazard effects
+[0:43:46] hazard effects identifiable
+[0:43:48] identifiable even observational distribution
+[0:43:51] even observational distribution that enjoys double robustness against
+[0:43:55] that enjoys double robustness against certain model misspecification and the
+[0:43:58] certain model misspecification and the device needs against
+[0:44:00] device needs against biases in news function estimation
+[0:44:04] biases in news function estimation specifically i have presented the result
+[0:44:07] specifically i have presented the result on two scenarios
+[0:44:09] on two scenarios in the first scenario we assume
+[0:44:12] in the first scenario we assume we are given the causal graph
+[0:44:15] we are given the causal graph and the observational data
+[0:44:18] and the observational data we have developed a dml id average
+[0:44:21] we have developed a dml id average which will
+[0:44:23] which will give a dml estimator for any
+[0:44:26] give a dml estimator for any identifiable positive effects given this
+[0:44:30] identifiable positive effects given this other graph
+[0:44:33] other graph and we believe this is the
+[0:44:36] and we believe this is the first kind of result for the
+[0:44:40] first kind of result for the any identifiable cause effects
+[0:44:43] any identifiable cause effects in the second scenario
+[0:44:47] in the second scenario we assume that we have a given data we
+[0:44:51] we assume that we have a given data we also have a
+[0:44:53] also have a a pack
+[0:44:54] a pack a partial assessor graph which in
+[0:44:56] a partial assessor graph which in principle could be learned from the data
+[0:44:59] principle could be learned from the data so we call this the purely data driven
+[0:45:01] so we call this the purely data driven approach
+[0:45:03] approach now given data in the such a pack we
+[0:45:05] now given data in the such a pack we develop a dmri idp algorithm which will
+[0:45:10] develop a dmri idp algorithm which will construct a dml estimator for any causal
+[0:45:14] construct a dml estimator for any causal effects that
+[0:45:16] effects that are themed identifiable even the pack
+[0:45:19] are themed identifiable even the pack and the observational distribution
+[0:45:28] okay this concludes my talk thank you
+[0:45:31] okay
+[0:45:36] yeah some references
+[0:45:43] all right um
+[0:45:45] um great how many are there any questions
+[0:45:48] great how many are there any questions you'd like to
+[0:45:49] you'd like to write no i think junghan has answered
+[0:45:52] write no i think junghan has answered all of them or is currently answering
+[0:45:54] all of them or is currently answering them
+[0:46:01] okay well in that case let's move on to the discussion so
+[0:46:03] the discussion so and then we will have a short time
+[0:46:04] and then we will have a short time hopefully for questions after that
+[0:46:08] hopefully for questions after that so ilia feel free to take
+[0:46:18] uh can you see my slides okay yeah yes great
+[0:46:20] yeah yes great well uh thank you gian for a very
+[0:46:22] well uh thank you gian for a very interesting talk and uh thank you for
+[0:46:24] interesting talk and uh thank you for the organizers to the organizers for
+[0:46:26] the organizers to the organizers for giving me a chance to chat about this
+[0:46:28] giving me a chance to chat about this very interesting paper uh so i got
+[0:46:30] very interesting paper uh so i got excited made a bunch of slides it's
+[0:46:32] excited made a bunch of slides it's mostly i'll try to go through them fast
+[0:46:34] mostly i'll try to go through them fast uh it's mostly just history of ideas and
+[0:46:36] uh it's mostly just history of ideas and some questions for jin
+[0:46:38] some questions for jin um
+[0:46:39] um so and i wanted to acknowledge my
+[0:46:40] so and i wanted to acknowledge my colleagues so eric chatkinch who was
+[0:46:43] colleagues so eric chatkinch who was very helpfully discussed the history of
+[0:46:45] very helpfully discussed the history of ideas on estimation side with me i just
+[0:46:47] ideas on estimation side with me i just wanted to try to get that right and uh
+[0:46:50] wanted to try to get that right and uh robin evans and thomas richardson who
+[0:46:52] robin evans and thomas richardson who discussed the dml id algorithm with me
+[0:46:54] discussed the dml id algorithm with me and one of the examples i'm going to
+[0:46:56] and one of the examples i'm going to discuss later is basically a very minor
+[0:46:58] discuss later is basically a very minor tweak of robin's example
+[0:47:01] tweak of robin's example okay so uh this uh this is a causal
+[0:47:05] okay so uh this uh this is a causal inference talk uh so uh in causal
+[0:47:08] inference talk uh so uh in causal inference we have these this is sort of
+[0:47:09] inference we have these this is sort of the simplest interesting model the the
+[0:47:11] the simplest interesting model the the backdoor or the conditionally ignorable
+[0:47:13] backdoor or the conditionally ignorable model we have some covariates a
+[0:47:15] model we have some covariates a treatment and an outcome we want the
+[0:47:16] treatment and an outcome we want the average causal effect
+[0:47:18] average causal effect which happens to be identified uh by the
+[0:47:20] which happens to be identified uh by the adjustment formula or the g formula uh
+[0:47:23] adjustment formula or the g formula uh and the interesting thing with causal
+[0:47:24] and the interesting thing with causal inference uh is uh the target of
+[0:47:27] inference uh is uh the target of interest is a scalar but uh to get it we
+[0:47:30] interest is a scalar but uh to get it we need to estimate some nuisance models
+[0:47:32] need to estimate some nuisance models uh and so two big questions and causal
+[0:47:34] uh and so two big questions and causal inference that uh were sort of both
+[0:47:36] inference that uh were sort of both addressed
+[0:47:38] addressed by this talk is the first is under what
+[0:47:40] by this talk is the first is under what circumstances is the target parameter
+[0:47:42] circumstances is the target parameter identified as a function of the data in
+[0:47:44] identified as a function of the data in question two how do we get sort of a
+[0:47:45] question two how do we get sort of a nice estimator if we have
+[0:47:47] nice estimator if we have a low dimensional parameter with
+[0:47:49] a low dimensional parameter with nuisance models
+[0:47:50] nuisance models so just as a brief history
+[0:47:52] so just as a brief history on the identification end
+[0:47:54] on the identification end uh
+[0:47:55] uh you know this stratification or
+[0:47:57] you know this stratification or covariate adjustment formula is a very
+[0:47:58] covariate adjustment formula is a very old idea i'm actually not sure where it
+[0:48:00] old idea i'm actually not sure where it appeared first it definitely appeared in
+[0:48:02] appeared first it definitely appeared in epidemiology a long time ago
+[0:48:06] epidemiology a long time ago this was generalized uh
+[0:48:08] this was generalized uh to longitudinal data when you have time
+[0:48:10] to longitudinal data when you have time varying to the founders where we could
+[0:48:11] varying to the founders where we could sort of sequentially adjust uh to yield
+[0:48:14] sort of sequentially adjust uh to yield the g computation algorithm this is due
+[0:48:15] the g computation algorithm this is due to jamie's famous 1986 paper on the
+[0:48:19] to jamie's famous 1986 paper on the healthy worker survivor effect
+[0:48:20] healthy worker survivor effect um
+[0:48:22] um yuda pearl of course has done an
+[0:48:23] yuda pearl of course has done an enormous amount of work on this problem
+[0:48:25] enormous amount of work on this problem and he proposed that there are some
+[0:48:27] and he proposed that there are some counterintuitive situations where you
+[0:48:29] counterintuitive situations where you have unobserved common causes of the
+[0:48:31] have unobserved common causes of the treatment and an outcome where you're
+[0:48:32] treatment and an outcome where you're still identified such as the front or
+[0:48:34] still identified such as the front or criterion and eventually propose to do
+[0:48:36] criterion and eventually propose to do calculus as a general kind of deductive
+[0:48:38] calculus as a general kind of deductive inference scheme for getting
+[0:48:39] inference scheme for getting identification of course gin proposed
+[0:48:42] identification of course gin proposed the id algorithm
+[0:48:44] the id algorithm as a general approach to getting all
+[0:48:46] as a general approach to getting all identification and this was eventually
+[0:48:49] identification and this was eventually proved that this was indeed a complete
+[0:48:51] proved that this was indeed a complete algorithm
+[0:48:52] algorithm and there are lots and lots of
+[0:48:53] and there are lots and lots of extensions to conditional effects
+[0:48:55] extensions to conditional effects selection bias mediation
+[0:48:56] selection bias mediation transportability surrogates and all
+[0:48:58] transportability surrogates and all sorts of things by lots of authors
+[0:49:00] sorts of things by lots of authors including gin and elias of course
+[0:49:03] including gin and elias of course and uh on the double ml estimation end
+[0:49:06] and uh on the double ml estimation end uh of course this is all rooted in
+[0:49:08] uh of course this is all rooted in inference in statistical inference and
+[0:49:10] inference in statistical inference and semi-parametric models which is a very
+[0:49:12] semi-parametric models which is a very well established area in statistics so
+[0:49:14] well established area in statistics so you could consult
+[0:49:16] you could consult early books and papers by bickel and van
+[0:49:18] early books and papers by bickel and van der vaart and newey
+[0:49:20] der vaart and newey the use of semiparametric methods uh in
+[0:49:23] the use of semiparametric methods uh in particular influence function based
+[0:49:24] particular influence function based methods i think traces back to a paper
+[0:49:27] methods i think traces back to a paper by robin sritnitsky and zhao in 94 for a
+[0:49:30] by robin sritnitsky and zhao in 94 for a missing data problem
+[0:49:32] missing data problem uh
+[0:49:33] uh a little bit later it was realized there
+[0:49:36] a little bit later it was realized there are sort of product bias properties of
+[0:49:38] are sort of product bias properties of these estimators and you get double
+[0:49:40] these estimators and you get double robustness as i like to call it one out
+[0:49:42] robustness as i like to call it one out of two robustness i think it's more
+[0:49:43] of two robustness i think it's more intuitive what that means and this is
+[0:49:45] intuitive what that means and this is discussed in a number of places in shar
+[0:49:47] discussed in a number of places in shar cena on retinitsky and uh robbins and
+[0:49:49] cena on retinitsky and uh robbins and then robin says comment and robertson
+[0:49:51] then robin says comment and robertson ritansky's
+[0:49:53] ritansky's comment uh in the late 90s early 2000s
+[0:49:57] comment uh in the late 90s early 2000s so so a lot of this stuff with name
+[0:49:59] so so a lot of this stuff with name under finality kind of goes back to
+[0:50:02] under finality kind of goes back to these kinds of product bias influence
+[0:50:04] these kinds of product bias influence function based estimators from semi
+[0:50:05] function based estimators from semi parametric statistics and indeed using
+[0:50:08] parametric statistics and indeed using flexible nuisance models and
+[0:50:09] flexible nuisance models and crossfitting has been discussed before
+[0:50:11] crossfitting has been discussed before as well by jamie in the context of
+[0:50:14] as well by jamie in the context of sequential decisions
+[0:50:15] sequential decisions by eric and collaborators in the context
+[0:50:17] by eric and collaborators in the context of higher order influence functions and
+[0:50:19] of higher order influence functions and by mark wonderland
+[0:50:20] by mark wonderland by in the context of targeted learning
+[0:50:23] by in the context of targeted learning now uh and of course double ml paper the
+[0:50:26] now uh and of course double ml paper the famous paper by sharon zhukov and
+[0:50:28] famous paper by sharon zhukov and colleagues uh proposed name and
+[0:50:29] colleagues uh proposed name and orthogonality conditions and the use of
+[0:50:31] orthogonality conditions and the use of flexible ml to do inference on causal
+[0:50:34] flexible ml to do inference on causal effects
+[0:50:35] effects now in principle of course any moments
+[0:50:37] now in principle of course any moments or score that satisfies these conditions
+[0:50:39] or score that satisfies these conditions can work and can be adapted into this
+[0:50:40] can work and can be adapted into this double ml framework but in practice
+[0:50:42] double ml framework but in practice these moments or scores tend to be just
+[0:50:44] these moments or scores tend to be just influence functions
+[0:50:46] influence functions now uh zhang tian and berenboym
+[0:50:48] now uh zhang tian and berenboym developed a very interesting paper
+[0:50:50] developed a very interesting paper mirroring semi-parametric
+[0:50:52] mirroring semi-parametric estimation and graphical model based
+[0:50:54] estimation and graphical model based identification and so their
+[0:50:56] identification and so their contributions are an orthogonal score
+[0:50:58] contributions are an orthogonal score for what they call multi-outcome
+[0:51:00] for what they call multi-outcome sequential backdoor so msb decondition
+[0:51:03] sequential backdoor so msb decondition an orthogonal score satisfying name
+[0:51:05] an orthogonal score satisfying name endothermality for any interventional
+[0:51:07] endothermality for any interventional distribution identified by the id
+[0:51:09] distribution identified by the id algorithm
+[0:51:10] algorithm double robustness for these estimators
+[0:51:13] double robustness for these estimators based on these course and adaptation of
+[0:51:14] based on these course and adaptation of these methods for post-selection
+[0:51:16] these methods for post-selection inference and the orthogonal scores as
+[0:51:18] inference and the orthogonal scores as far as i could understand were obtained
+[0:51:19] far as i could understand were obtained by a functional derivative version of
+[0:51:21] by a functional derivative version of the chain rule
+[0:51:23] the chain rule so there are some questions posed by
+[0:51:25] so there are some questions posed by this work that i wanted to discuss uh
+[0:51:27] this work that i wanted to discuss uh which is relationship to prior work
+[0:51:29] which is relationship to prior work practical estimators efficient afs
+[0:51:31] practical estimators efficient afs uh
+[0:51:32] uh what kind of robustness do we really get
+[0:51:34] what kind of robustness do we really get and how do we incorporate model
+[0:51:35] and how do we incorporate model selection really
+[0:51:37] selection really so the first question for gin is it
+[0:51:39] so the first question for gin is it seems
+[0:51:40] seems correct me if i'm wrong that the
+[0:51:42] correct me if i'm wrong that the functional that you get by sequential
+[0:51:44] functional that you get by sequential uh backdoor is just the g formula given
+[0:51:47] uh backdoor is just the g formula given by the g computation although you have a
+[0:51:48] by the g computation although you have a graphical and that's really what it is
+[0:51:51] graphical and that's really what it is and once you're doing influence
+[0:51:52] and once you're doing influence functions really it's the functional
+[0:51:54] functions really it's the functional that matters not the graph and if this
+[0:51:56] that matters not the graph and if this is true the influence functions for
+[0:51:57] is true the influence functions for these have been known for very very long
+[0:51:59] these have been known for very very long time i don't think this is really
+[0:52:01] time i don't think this is really necessarily novel
+[0:52:02] necessarily novel uh
+[0:52:04] uh and of course uh once you fix the
+[0:52:05] and of course uh once you fix the functional the only relevance of the
+[0:52:07] functional the only relevance of the graph is for getting the constraints if
+[0:52:09] graph is for getting the constraints if you want to if you want to be efficient
+[0:52:10] you want to if you want to be efficient uh
+[0:52:11] uh because the graphs imply certain
+[0:52:13] because the graphs imply certain restrictions on the observed law and you
+[0:52:14] restrictions on the observed law and you could project and get a more efficient
+[0:52:16] could project and get a more efficient iaf
+[0:52:17] iaf okay so but maybe it's not quite the
+[0:52:20] okay so but maybe it's not quite the same as g competition i'm not quite sure
+[0:52:23] same as g competition i'm not quite sure all right so
+[0:52:24] all right so if we want to derive an af it might not
+[0:52:27] if we want to derive an af it might not by itself lead to a usable estimator in
+[0:52:29] by itself lead to a usable estimator in practice of course so for example even
+[0:52:31] practice of course so for example even in the sequential backdoor case we could
+[0:52:33] in the sequential backdoor case we could have many many many treatments and in
+[0:52:34] have many many many treatments and in which case we have to smooth because of
+[0:52:37] which case we have to smooth because of the usual curse of dimensionality
+[0:52:38] the usual curse of dimensionality reasons
+[0:52:39] reasons um there is a very rich literature on
+[0:52:41] um there is a very rich literature on the so-called structural models
+[0:52:44] the so-called structural models where basically you impose smoothness
+[0:52:46] where basically you impose smoothness and counterfactual quantities in the
+[0:52:47] and counterfactual quantities in the helpful way uh and there are lots of
+[0:52:50] helpful way uh and there are lots of papers and there's the one of the early
+[0:52:51] papers and there's the one of the early ones is by jamie on structural nested
+[0:52:53] ones is by jamie on structural nested models and marginal structural models
+[0:52:55] models and marginal structural models from 99
+[0:52:56] from 99 in addition it sort of seemed to me that
+[0:52:59] in addition it sort of seemed to me that you know i think there was this point
+[0:53:00] you know i think there was this point bullet point that assumed that
+[0:53:02] bullet point that assumed that everything is discrete and if everything
+[0:53:04] everything is discrete and if everything is discrete it seems like
+[0:53:06] is discrete it seems like you have a parametric model and the most
+[0:53:08] you have a parametric model and the most efficient estimator
+[0:53:10] efficient estimator or within a particular model is just the
+[0:53:13] or within a particular model is just the maximum likelihood plug-in derived from
+[0:53:15] maximum likelihood plug-in derived from a likelihood that
+[0:53:16] a likelihood that robin evans and thomas richardson came
+[0:53:19] robin evans and thomas richardson came up with in 2018 and you know if
+[0:53:22] up with in 2018 and you know if everything is discrete it's not actually
+[0:53:23] everything is discrete it's not actually clear what the if buys you it's
+[0:53:25] clear what the if buys you it's certainly not efficiency and it's
+[0:53:26] certainly not efficiency and it's certainly not uh robustness because you
+[0:53:29] certainly not uh robustness because you know you have tables and discrete cases
+[0:53:30] know you have tables and discrete cases you're not really specified unless
+[0:53:32] you're not really specified unless you're very high dimensional in which
+[0:53:34] you're very high dimensional in which case you have to smooth i guess
+[0:53:36] case you have to smooth i guess so the second question is can we say
+[0:53:38] so the second question is can we say something about what in what cases we
+[0:53:40] something about what in what cases we actually get something usable in the
+[0:53:42] actually get something usable in the kinds of cases the double ml paper was
+[0:53:44] kinds of cases the double ml paper was written for which is sort of high
+[0:53:45] written for which is sort of high dimensional continuous covariate cases
+[0:53:47] dimensional continuous covariate cases and there is some special
+[0:53:49] and there is some special case work on this stuff uh but not for
+[0:53:52] case work on this stuff uh but not for everything that the id algorithm does
+[0:53:55] everything that the id algorithm does okay so this was already i think
+[0:53:57] okay so this was already i think addressed by a question so i was going
+[0:53:58] addressed by a question so i was going to ask about efficient afs and it sounds
+[0:54:00] to ask about efficient afs and it sounds like the answer is uh this is not really
+[0:54:02] like the answer is uh this is not really going to give you the efficient af which
+[0:54:04] going to give you the efficient af which is fine
+[0:54:05] is fine it might be it sort of seems like it
+[0:54:07] it might be it sort of seems like it might be hard to do in general graphs
+[0:54:08] might be hard to do in general graphs that's been my experience at least for
+[0:54:10] that's been my experience at least for me
+[0:54:10] me uh if you have something that's uh
+[0:54:12] uh if you have something that's uh equivalent to a dag then it's not very
+[0:54:14] equivalent to a dag then it's not very hard otherwise it seems like it might be
+[0:54:15] hard otherwise it seems like it might be hard so one question for gin is what can
+[0:54:17] hard so one question for gin is what can we say about deficient afs beyond this
+[0:54:20] we say about deficient afs beyond this if anything
+[0:54:22] if anything and again for discrete data we just do
+[0:54:24] and again for discrete data we just do the plug-in mle i think so i think
+[0:54:25] the plug-in mle i think so i think that's the efficient thing to do unless
+[0:54:27] that's the efficient thing to do unless i'm missing something
+[0:54:29] i'm missing something uh
+[0:54:30] uh okay so let's talk about robustness uh
+[0:54:33] okay so let's talk about robustness uh robustness of an estimator can sometimes
+[0:54:35] robustness of an estimator can sometimes be obtained by looking at the bias of
+[0:54:36] be obtained by looking at the bias of the estimator and the parametrization so
+[0:54:38] the estimator and the parametrization so in the celebrated augmented ipw
+[0:54:41] in the celebrated augmented ipw estimator the gene discussed we get
+[0:54:42] estimator the gene discussed we get double robustness if you have kind of a
+[0:54:44] double robustness if you have kind of a natural decomposable likelihood
+[0:54:46] natural decomposable likelihood parametrization whereas if you use an
+[0:54:48] parametrization whereas if you use an alternative one
+[0:54:49] alternative one which is equivalently good in some ways
+[0:54:52] which is equivalently good in some ways uh which is based kind of on mark of
+[0:54:53] uh which is based kind of on mark of random fields you don't actually get
+[0:54:55] random fields you don't actually get double robustness here so it's a
+[0:54:56] double robustness here so it's a combination of those two things that get
+[0:54:58] combination of those two things that get us robustness sometimes and so the
+[0:55:00] us robustness sometimes and so the claims here that you always get one out
+[0:55:02] claims here that you always get one out of two robustness
+[0:55:03] of two robustness and i wanted to sort of ask about that
+[0:55:05] and i wanted to sort of ask about that so here is a graph this is a slight
+[0:55:06] so here is a graph this is a slight modification of a graph that robin came
+[0:55:08] modification of a graph that robin came up with so here we want to identify we
+[0:55:11] up with so here we want to identify we have three outcomes and two treatments l
+[0:55:13] have three outcomes and two treatments l 102 and y are the outcomes uh a1 and a2
+[0:55:16] 102 and y are the outcomes uh a1 and a2 are the treatments
+[0:55:18] are the treatments here we have to to identify this we need
+[0:55:19] here we have to to identify this we need to deal with four districts or c
+[0:55:21] to deal with four districts or c components as gin calls it
+[0:55:23] components as gin calls it and we have to kind of factorize into
+[0:55:26] and we have to kind of factorize into districts and then try to get each term
+[0:55:28] districts and then try to get each term using the id algorithm and if we do that
+[0:55:31] using the id algorithm and if we do that this is what we get
+[0:55:33] this is what we get unless i made a mistake uh and uh notice
+[0:55:36] unless i made a mistake uh and uh notice that we don't actually get
+[0:55:37] that we don't actually get identification using geocomputation here
+[0:55:39] identification using geocomputation here uh uh because you have a front or graph
+[0:55:42] uh uh because you have a front or graph as a sub graph like a2 l2 and y's the
+[0:55:44] as a sub graph like a2 l2 and y's the front door so so g computation won't
+[0:55:46] front door so so g computation won't work here but if you look at each
+[0:55:48] work here but if you look at each district term you can think of each
+[0:55:50] district term you can think of each district term as a g computation
+[0:55:52] district term as a g computation functional
+[0:55:54] functional maybe with a sum in front
+[0:55:56] maybe with a sum in front okay and i kind of gave names for some
+[0:55:58] okay and i kind of gave names for some of the nuisance models here under the
+[0:56:00] of the nuisance models here under the natural parametrization where you just
+[0:56:01] natural parametrization where you just parameterizing the order basically
+[0:56:04] parameterizing the order basically okay
+[0:56:05] okay and so if we just wanted one of the
+[0:56:07] and so if we just wanted one of the terms here uh we we get double
+[0:56:09] terms here uh we we get double robustness and this is very well known
+[0:56:11] robustness and this is very well known for anything the g computation outputs
+[0:56:14] for anything the g computation outputs uh so this is kind of sequential
+[0:56:15] uh so this is kind of sequential backdoor so it's very well known you get
+[0:56:17] backdoor so it's very well known you get double robustness and the models are
+[0:56:18] double robustness and the models are either everything in the district or
+[0:56:20] either everything in the district or everything outside of the district so
+[0:56:22] everything outside of the district so one of those two has to be right and so
+[0:56:24] one of those two has to be right and so if you apply this to each term here you
+[0:56:26] if you apply this to each term here you see that you get double kind of a
+[0:56:28] see that you get double kind of a disjunctive thing we need one out of two
+[0:56:30] disjunctive thing we need one out of two model sets correctly
+[0:56:32] model sets correctly okay fine so then we have to combine it
+[0:56:35] okay fine so then we have to combine it and if we combine it
+[0:56:36] and if we combine it we need to get each district writer so
+[0:56:38] we need to get each district writer so it seems to me and so you have an end of
+[0:56:40] it seems to me and so you have an end of an or
+[0:56:42] an or and if you use distributive property of
+[0:56:44] and if you use distributive property of and then an or and you simplify a little
+[0:56:46] and then an or and you simplify a little bit it sort of seems like you get this
+[0:56:49] bit it sort of seems like you get this disjunction here of three links
+[0:56:51] disjunction here of three links and notice that two and three and four
+[0:56:53] and notice that two and three and four and five models always occur together
+[0:56:56] and five models always occur together and so under a reasonable likelihood
+[0:56:58] and so under a reasonable likelihood parameterization for this graph it sort
+[0:57:00] parameterization for this graph it sort of seems to me that we get this kind of
+[0:57:02] of seems to me that we get this kind of robustness
+[0:57:03] robustness and uh each uh
+[0:57:05] and uh each uh class of models occurs in exactly two
+[0:57:07] class of models occurs in exactly two places out of three and so it's not
+[0:57:09] places out of three and so it's not obvious to me
+[0:57:11] obvious to me how to simplify this to get double
+[0:57:12] how to simplify this to get double robustness because because of this now
+[0:57:14] robustness because because of this now it may be that i missed something of
+[0:57:16] it may be that i missed something of course or maybe there's some weird trick
+[0:57:18] course or maybe there's some weird trick but i didn't see it
+[0:57:19] but i didn't see it so the question is what sort of
+[0:57:21] so the question is what sort of robustness do we actually get from id
+[0:57:24] robustness do we actually get from id uh if this is right and maybe it's not
+[0:57:26] uh if this is right and maybe it's not but it sort of seems like here we get
+[0:57:28] but it sort of seems like here we get two out of three robustness rather than
+[0:57:29] two out of three robustness rather than one out of two robustness
+[0:57:31] one out of two robustness uh two out of three of course is not as
+[0:57:33] uh two out of three of course is not as good uh and this does arise in other
+[0:57:35] good uh and this does arise in other problems like in mediation problems that
+[0:57:37] problems like in mediation problems that eric wrote about
+[0:57:39] eric wrote about and so question four for june is what's
+[0:57:41] and so question four for june is what's going on here with these examples so the
+[0:57:43] going on here with these examples so the possibilities are i made a mistake
+[0:57:45] possibilities are i made a mistake that's of course possible i only had a
+[0:57:47] that's of course possible i only had a couple of days to think about it uh
+[0:57:50] couple of days to think about it uh you know and of course this is robin's
+[0:57:51] you know and of course this is robin's example not mine i just tweaked it a
+[0:57:52] example not mine i just tweaked it a little bit uh
+[0:57:55] little bit uh so it's possible maybe to group terms in
+[0:57:57] so it's possible maybe to group terms in some way i haven't thought of to get one
+[0:57:59] some way i haven't thought of to get one out of two it's possible to use another
+[0:58:01] out of two it's possible to use another likelihood maybe to get one out of two
+[0:58:03] likelihood maybe to get one out of two or it may be that actually the target
+[0:58:06] or it may be that actually the target parameter bias for outputs of id is not
+[0:58:08] parameter bias for outputs of id is not always is complicated and you don't
+[0:58:10] always is complicated and you don't always get one out of two actually and
+[0:58:12] always get one out of two actually and it may have to do with how you have to
+[0:58:13] it may have to do with how you have to combine terms from each district each
+[0:58:15] combine terms from each district each district is one out of two but it's not
+[0:58:17] district is one out of two but it's not clear if you always combine them you get
+[0:58:19] clear if you always combine them you get it stays one out of two
+[0:58:21] it stays one out of two okay so then the final contribution in
+[0:58:24] okay so then the final contribution in this paper was post what i call well
+[0:58:25] this paper was post what i call well what everybody calls post selection
+[0:58:27] what everybody calls post selection inference so you first do model
+[0:58:28] inference so you first do model selection you learn the graph
+[0:58:30] selection you learn the graph uh
+[0:58:31] uh then uh you consult existing methods
+[0:58:33] then uh you consult existing methods that tell you that in some circumstances
+[0:58:35] that tell you that in some circumstances if you have an equivalence class of
+[0:58:36] if you have an equivalence class of represented by peg everything
+[0:58:39] represented by peg everything in the class gives you the same
+[0:58:40] in the class gives you the same functional for the effect and then you
+[0:58:42] functional for the effect and then you run your algorithm there
+[0:58:44] run your algorithm there and of course most of the time this
+[0:58:45] and of course most of the time this won't happen but sometimes it will and
+[0:58:47] won't happen but sometimes it will and then you apply dml id
+[0:58:49] then you apply dml id and so the whole point it seems to me of
+[0:58:52] and so the whole point it seems to me of using name and orthogonality is to get
+[0:58:54] using name and orthogonality is to get rooted in consistency basically and
+[0:58:55] rooted in consistency basically and maybe robustness but of course everybody
+[0:58:58] maybe robustness but of course everybody knows that if you use model selection
+[0:58:59] knows that if you use model selection you don't get uniform consistency at any
+[0:59:01] you don't get uniform consistency at any rate in general without strong
+[0:59:03] rate in general without strong assumptions so if we apply this pipeline
+[0:59:06] assumptions so if we apply this pipeline it's not clear why we get rooted in
+[0:59:08] it's not clear why we get rooted in consistency at the end because we have a
+[0:59:10] consistency at the end because we have a step that isn't consistent at any rate
+[0:59:13] step that isn't consistent at any rate so
+[0:59:14] so uh and of course there are uniformly
+[0:59:16] uh and of course there are uniformly consistent extensions that you could try
+[0:59:18] consistent extensions that you could try but then it seems that we should
+[0:59:19] but then it seems that we should propagate uncertainty incurred from
+[0:59:21] propagate uncertainty incurred from learning the graph with error and this
+[0:59:23] learning the graph with error and this is post-selection and to me that seems
+[0:59:25] is post-selection and to me that seems really hard here
+[0:59:29] and also you know one of the things that happens is you're using data you're
+[0:59:31] happens is you're using data you're using the data to learn the graph and
+[0:59:32] using the data to learn the graph and then you're using the data to do
+[0:59:33] then you're using the data to do something else and you get weird
+[0:59:35] something else and you get weird correlations from that potential
+[0:59:37] correlations from that potential so so another question for jin is can
+[0:59:39] so so another question for jin is can anything be said about actually getting
+[0:59:40] anything be said about actually getting root 10 consistency here in settings
+[0:59:43] root 10 consistency here in settings where you don't really want to treat the
+[0:59:44] where you don't really want to treat the pag is fixed
+[0:59:46] pag is fixed and i should say i'm not this is not a
+[0:59:47] and i should say i'm not this is not a criticism this is a hard problem and i
+[0:59:49] criticism this is a hard problem and i myself have some prior work on this
+[0:59:51] myself have some prior work on this where we basically ignore this issue
+[0:59:53] where we basically ignore this issue entirely essentially so i think it's
+[0:59:55] entirely essentially so i think it's understandable uh but it is an issue i
+[0:59:57] understandable uh but it is an issue i think uh and people do work in post
+[0:59:59] think uh and people do work in post selection and statistics
+[1:00:02] selection and statistics okay so to conclude uh very interesting
+[1:00:04] okay so to conclude uh very interesting work at the intersection of graphical
+[1:00:06] work at the intersection of graphical model identification theory and
+[1:00:07] model identification theory and semi-parametric theory uh it would be
+[1:00:09] semi-parametric theory uh it would be nice to clarify relationship to prior
+[1:00:11] nice to clarify relationship to prior work and the robustness properties we
+[1:00:13] work and the robustness properties we actually get from id
+[1:00:15] actually get from id uh there this brings to light really
+[1:00:17] uh there this brings to light really really interesting and difficult
+[1:00:19] really interesting and difficult questions that i think would be great to
+[1:00:20] questions that i think would be great to address and directions for follow-up
+[1:00:22] address and directions for follow-up work and it is my hope that one thing i
+[1:00:24] work and it is my hope that one thing i really liked about this paper it's a
+[1:00:26] really liked about this paper it's a synthesis of multiple areas that were
+[1:00:28] synthesis of multiple areas that were previously separate in causal inference
+[1:00:30] previously separate in causal inference and i really hope the strength continues
+[1:00:32] and i really hope the strength continues i think that's a great thing
+[1:00:34] i think that's a great thing uh and uh i'll finally i wanted to thank
+[1:00:36] uh and uh i'll finally i wanted to thank jin for presenting this interesting work
+[1:00:38] jin for presenting this interesting work this was great
+[1:00:39] this was great uh this is some references and
+[1:00:40] uh this is some references and identification this is a lot more
+[1:00:42] identification this is a lot more references and estimation i tried to be
+[1:00:44] references and estimation i tried to be comprehensive
+[1:00:46] comprehensive and this is some other stuff that came
+[1:00:48] and this is some other stuff that came up in my discussion and thank you that's
+[1:00:50] up in my discussion and thank you that's all i had
+[1:00:52] all i had hopefully i didn't run over
+[1:01:00] all right great uh so let's have jane maybe comment on if he
+[1:01:03] let's have jane maybe comment on if he has something well that's a lot of tough
+[1:01:05] has something well that's a lot of tough questions
+[1:01:10] i answer the questions
+[1:01:12] answer the questions i don't think we solved all those
+[1:01:14] i don't think we solved all those questions in these papers
+[1:01:17] questions in these papers and for your last point about doubly
+[1:01:19] and for your last point about doubly robustness i believe we just borrowed
+[1:01:22] robustness i believe we just borrowed this terminology to my understanding the
+[1:01:25] this terminology to my understanding the robustness properties we get are indeed
+[1:01:28] robustness properties we get are indeed something like that
+[1:01:30] something like that this group or that group or that group
+[1:01:33] this group or that group or that group so i guess that is
+[1:01:36] so i guess that is if you wanted to little puzzle
+[1:01:39] if you wanted to little puzzle yeah the thing is that then you have to
+[1:01:41] yeah the thing is that then you have to be very careful because if you're gonna
+[1:01:43] be very careful because if you're gonna get root n raids
+[1:01:45] get root n raids then the reason you get n to the fourth
+[1:01:47] then the reason you get n to the fourth for nuisances is because they multiply
+[1:01:49] for nuisances is because they multiply to get you n squared
+[1:01:51] to get you n squared but if you have triple robust things i
+[1:01:53] but if you have triple robust things i think it becomes a lot less obvious or
+[1:01:55] think it becomes a lot less obvious or more than triply like you know like
+[1:01:56] more than triply like you know like three out of four for example then it's
+[1:01:58] three out of four for example then it's not obvious
+[1:01:59] not obvious in fact i'm not sure this is a solved
+[1:02:01] in fact i'm not sure this is a solved problem like it what under what
+[1:02:02] problem like it what under what circumstances do you get or 10
+[1:02:05] circumstances do you get or 10 estimator but it's definitely not like
+[1:02:07] estimator but it's definitely not like double ml right i think that's a little
+[1:02:09] double ml right i think that's a little i don't know if that's a good
+[1:02:10] i don't know if that's a good nomenclature for what's happening
+[1:02:12] nomenclature for what's happening because double implies one out of two
+[1:02:14] because double implies one out of two which is i don't think is
+[1:02:16] which is i don't think is what happens here or maybe or maybe it
+[1:02:18] what happens here or maybe or maybe it does i don't know i mean i'm kind of
+[1:02:20] does i don't know i mean i'm kind of open to the possibility that i made a
+[1:02:22] open to the possibility that i made a mistake
+[1:02:29] for the other questions as far as i can remember no we don't have efficient
+[1:02:33] remember no we don't have efficient we don't claim any efficiency now
+[1:02:41] uh i guess the the other question i had one of those was you know you assume
+[1:02:42] one of those was you know you assume discrete data so why why should we even
+[1:02:46] discrete data so why why should we even not why should you just not do maximum
+[1:02:48] not why should you just not do maximum likelihood for discrete data basically
+[1:02:50] likelihood for discrete data basically well first we are trying to consider
+[1:02:53] well first we are trying to consider high dimensional situation
+[1:02:55] high dimensional situation and another possibility this can be
+[1:02:58] and another possibility this can be extended to
+[1:03:00] extended to allow
+[1:03:02] allow continuous covalents as far as to
+[1:03:06] continuous covalents as far as to make sure the influence function well
+[1:03:08] make sure the influence function well defined i believe
+[1:03:11] defined i believe so here too to
+[1:03:13] so here too to be simple we just
+[1:03:15] be simple we just assume everything to be discrete
+[1:03:19] assume everything to be discrete and if the photograph is
+[1:03:21] and if the photograph is i mean if we are considering the case
+[1:03:24] i mean if we are considering the case where i mean everybody can hear me by
+[1:03:25] where i mean everybody can hear me by the way
+[1:03:26] the way yes
+[1:03:27] yes all right so yeah i mean for the case
+[1:03:30] all right so yeah i mean for the case that the causal graph is given instead
+[1:03:32] that the causal graph is given instead of enumerating the identifiability
+[1:03:35] of enumerating the identifiability condition
+[1:03:36] condition then actually graph itself imposes a lot
+[1:03:39] then actually graph itself imposes a lot of other constraints so even if we use
+[1:03:41] of other constraints so even if we use the plug-in estimator for the very
+[1:03:43] the plug-in estimator for the very simple case we
+[1:03:45] simple case we cannot really show sure that this is the
+[1:03:48] cannot really show sure that this is the efficient case it depends on the which
+[1:03:51] efficient case it depends on the which kind of the water we are considering
+[1:03:52] kind of the water we are considering based on the graph i think
+[1:03:54] based on the graph i think so
+[1:03:59] yeah i mean it's a different thread of the
+[1:04:00] the discussion but yeah
+[1:04:02] discussion but yeah i just want to make a comment on it
+[1:04:11] all right uh i think so we're over time so oh but there's a question from the
+[1:04:13] so oh but there's a question from the audience uh but maybe then it's just oh
+[1:04:16] audience uh but maybe then it's just oh dominic you have let's let's first wrap
+[1:04:18] dominic you have let's let's first wrap up and then we can unmute okay great so
+[1:04:21] up and then we can unmute okay great so uh so let's wrap up our official segment
+[1:04:24] uh so let's wrap up our official segment of the
+[1:04:27] of the seminar here
+[1:04:29] seminar here thank you all for for being here and for
+[1:04:33] thank you all for for being here and for uh listening to these wonderful
+[1:04:34] uh listening to these wonderful presentations thank you jen for for
+[1:04:36] presentations thank you jen for for presenting uh and ilya for a very
+[1:04:39] presenting uh and ilya for a very insightful discussion and yonghan thank
+[1:04:41] insightful discussion and yonghan thank you so much for a very nice discussion
+[1:04:42] you so much for a very nice discussion in the q a as well
+[1:04:44] in the q a as well uh all right so
+[1:04:48] uh all right so just one more thing
+[1:04:50] just one more thing so next week we'll have a presentation
+[1:04:52] so next week we'll have a presentation by limbo from university of toronto on
+[1:04:55] by limbo from university of toronto on causal inference on distribution
+[1:04:57] causal inference on distribution functions so we hope that you all join
+[1:04:59] functions so we hope that you all join us next week for that
+[1:05:01] us next week for that thank you so much
+[1:05:03] thank you so much thank you
+[1:05:04] thank you thank you very much

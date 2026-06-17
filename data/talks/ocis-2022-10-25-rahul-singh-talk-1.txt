@@ -1,0 +1,792 @@
+[0:00:06] uh hello everyone uh good morning to those of you who are
+[0:00:08] those of you who are in the morning session I guess uh
+[0:00:10] in the morning session I guess uh welcome to the online causal inference
+[0:00:12] welcome to the online causal inference seminar so today we actually have two
+[0:00:14] seminar so today we actually have two talks uh both from MIT so this is our
+[0:00:17] talks uh both from MIT so this is our special MIT day so the first talk is
+[0:00:19] special MIT day so the first talk is going to be by Rahul Singh on causal
+[0:00:21] going to be by Rahul Singh on causal inference with corrupted data
+[0:00:23] inference with corrupted data measurement error missing values
+[0:00:24] measurement error missing values discretization and differential privacy
+[0:00:26] discretization and differential privacy and actually Rahul has Anish Agarwal in
+[0:00:30] and actually Rahul has Anish Agarwal in the qma helping to answer questions
+[0:00:32] the qma helping to answer questions afterwards we have a talk by
+[0:00:36] afterwards we have a talk by MIT on active learning for optimal
+[0:00:39] MIT on active learning for optimal intervention design and causal models so
+[0:00:42] intervention design and causal models so we hope you enjoy both talks and the
+[0:00:45] we hope you enjoy both talks and the questions today will be handled by Ying
+[0:00:47] questions today will be handled by Ying please feel free to submit them at any
+[0:00:50] please feel free to submit them at any point I will switch over now to you
+[0:00:52] point I will switch over now to you we'll explain how do you do that
+[0:00:55] we'll explain how do you do that thank you Emma um just as usual uh
+[0:00:58] thank you Emma um just as usual uh please submit your questions through the
+[0:00:59] please submit your questions through the Q a section uh if you haven't used it
+[0:01:02] Q a section uh if you haven't used it before it is just the bottom at the
+[0:01:04] before it is just the bottom at the bottom of the zoom window so please do
+[0:01:07] bottom of the zoom window so please do submit your questions through the Q a so
+[0:01:09] submit your questions through the Q a so that we can better track them without
+[0:01:12] that we can better track them without further Ado
+[0:01:13] further Ado um uh rahu I think you can get started
+[0:01:16] um uh rahu I think you can get started foreign
+[0:01:33] here we go is that is that working well perfect yes great thank you
+[0:01:37] perfect yes great thank you so did it all present causal inference
+[0:01:39] so did it all present causal inference with corrupted data measurement error
+[0:01:41] with corrupted data measurement error missing values discretization and
+[0:01:43] missing values discretization and differential privacy this is Joint work
+[0:01:45] differential privacy this is Joint work with Anish who is currently at Amazon
+[0:01:47] with Anish who is currently at Amazon and even more currently he's in the chat
+[0:01:55] I'd like to begin with a headline from The New York Times the 2020 census
+[0:01:58] The New York Times the 2020 census suggests that people live underwater
+[0:02:00] suggests that people live underwater there's a reason
+[0:02:02] there's a reason and that reason is differential privacy
+[0:02:03] and that reason is differential privacy which will be achieved by injecting
+[0:02:05] which will be achieved by injecting synthetic noise into the data set before
+[0:02:07] synthetic noise into the data set before it's published
+[0:02:08] it's published differential privacy is already widely
+[0:02:10] differential privacy is already widely implemented in the technology sector for
+[0:02:13] implemented in the technology sector for example in the high dimensional data
+[0:02:14] example in the high dimensional data sets collected by Apple iOS and Google
+[0:02:16] sets collected by Apple iOS and Google Chrome
+[0:02:17] Chrome only recently it's been adopted in the
+[0:02:20] only recently it's been adopted in the government sector in the censuses and
+[0:02:22] government sector in the censuses and surveys that inform policy making and
+[0:02:24] surveys that inform policy making and that's led to a round of warnings that
+[0:02:26] that's led to a round of warnings that there'll be a painful trade-off between
+[0:02:28] there'll be a painful trade-off between the privacy of individual respondents
+[0:02:30] the privacy of individual respondents and the Precision of policy analysis
+[0:02:33] and the Precision of policy analysis why does the census need privacy
+[0:02:36] why does the census need privacy researchers at the bureau simulated an
+[0:02:38] researchers at the bureau simulated an attack on the 2010 census so the 2010
+[0:02:41] attack on the 2010 census so the 2010 census consists of these tabular
+[0:02:43] census consists of these tabular summaries that are ostensibly Anonymous
+[0:02:45] summaries that are ostensibly Anonymous with a lot of cross-cabulations for a
+[0:02:47] with a lot of cross-cabulations for a certain census block how many people
+[0:02:49] certain census block how many people have characteristics a and b and c and d
+[0:02:51] have characteristics a and b and c and d and so on
+[0:02:53] and so on and these can be viewed as a system of
+[0:02:54] and these can be viewed as a system of equations and then solve to reconstruct
+[0:02:57] equations and then solve to reconstruct microdata without names
+[0:02:59] microdata without names then pretending to be hackers we could
+[0:03:01] then pretending to be hackers we could obtain an external data set of names and
+[0:03:03] obtain an external data set of names and addresses and try to merge the two
+[0:03:10] sorry to interrupt you is it possible to make your microphone a bit louder it's
+[0:03:12] make your microphone a bit louder it's very clear it's just a little bit quiet
+[0:03:14] very clear it's just a little bit quiet sure yeah
+[0:03:24] I'm sorry
+[0:03:29] is this any better
+[0:03:37] I'm not sure but uh it's perfectly clear just a little bit quiet so it's fine you
+[0:03:40] just a little bit quiet so it's fine you can continue please sorry to interact
+[0:03:42] can continue please sorry to interact yeah sure I'll I'll try to stick a
+[0:03:44] yeah sure I'll I'll try to stick a little bit louder as well
+[0:03:46] little bit louder as well um
+[0:04:06] great and so they they simulated the hack and they found that are depending
+[0:04:08] hack and they found that are depending on the quality of the external data used
+[0:04:10] on the quality of the external data used between 52 and 179 million respondents
+[0:04:14] between 52 and 179 million respondents to the 2010 census to be correctly
+[0:04:16] to the 2010 census to be correctly re-identified from the microdata
+[0:04:18] re-identified from the microdata is finding that shock waves at the
+[0:04:20] is finding that shock waves at the bureau and it caused its leadership to
+[0:04:22] bureau and it caused its leadership to really rethink how they publish the
+[0:04:24] really rethink how they publish the census and other data products
+[0:04:26] census and other data products in addition to these tabular summaries
+[0:04:28] in addition to these tabular summaries the bureau publishes Micro Data on wages
+[0:04:31] the bureau publishes Micro Data on wages and in the interest of privacy the
+[0:04:33] and in the interest of privacy the bureau has announced that it will
+[0:04:34] bureau has announced that it will discretize wage data so historically we
+[0:04:38] discretize wage data so historically we could use a tool like the Atlanta fed
+[0:04:39] could use a tool like the Atlanta fed wage tracker to track wages over time
+[0:04:41] wage tracker to track wages over time and so historically we had access to
+[0:04:44] and so historically we had access to data like the blue series
+[0:04:46] data like the blue series well if we implemented this proposed
+[0:04:48] well if we implemented this proposed rounding or discretization scheme well
+[0:04:50] rounding or discretization scheme well then we would have the red series and we
+[0:04:52] then we would have the red series and we can see it's very corrupted and even
+[0:04:53] can see it's very corrupted and even degenerate for a period of time
+[0:04:56] degenerate for a period of time there's a substantial backlash
+[0:04:57] there's a substantial backlash especially among the Communists who use
+[0:05:00] especially among the Communists who use this wage data and the policy was
+[0:05:02] this wage data and the policy was delayed
+[0:05:03] delayed what are the experts saying Professor
+[0:05:06] what are the experts saying Professor Cynthia dork one of the founders of
+[0:05:08] Cynthia dork one of the founders of differential privacy has reflected on
+[0:05:10] differential privacy has reflected on the hack that we saw saying imagine a
+[0:05:13] the hack that we saw saying imagine a kind of weaponization one where somebody
+[0:05:15] kind of weaponization one where somebody decides to make a list of all the gay
+[0:05:17] decides to make a list of all the gay households across the country I expect
+[0:05:19] households across the country I expect there will be people who would write the
+[0:05:21] there will be people who would write the software to do that
+[0:05:23] software to do that professor Charles manske a leading
+[0:05:25] professor Charles manske a leading econometrician has reflected on the data
+[0:05:27] econometrician has reflected on the data corruption and said this is not a minor
+[0:05:30] corruption and said this is not a minor technical issue it's an inescapable
+[0:05:32] technical issue it's an inescapable tension between enhancing privacy and
+[0:05:35] tension between enhancing privacy and enhancing data usability
+[0:05:37] enhancing data usability perhaps most provocatively professor
+[0:05:40] perhaps most provocatively professor John about the chief Economist the U.S
+[0:05:42] John about the chief Economist the U.S Census Bureau has written in the
+[0:05:44] Census Bureau has written in the American Economic Review
+[0:05:45] American Economic Review until now our discipline has ceded one
+[0:05:48] until now our discipline has ceded one of the most important debates in the
+[0:05:50] of the most important debates in the information page to computer science
+[0:05:55] what does this mean for causal inference in this work we'll think about this
+[0:05:57] in this work we'll think about this problem as a causal inference problem
+[0:05:58] problem as a causal inference problem that social scientists are worried about
+[0:06:01] that social scientists are worried about how these new types of data corruption
+[0:06:03] how these new types of data corruption the differential privacy and
+[0:06:04] the differential privacy and discretization will undermine our
+[0:06:06] discretization will undermine our ability to do causal inference
+[0:06:09] ability to do causal inference of course even before 2020 the census
+[0:06:11] of course even before 2020 the census had older classical types of data
+[0:06:13] had older classical types of data corruption which are very much study
+[0:06:15] corruption which are very much study than causal inference like missing
+[0:06:16] than causal inference like missing values of measurement error and so we're
+[0:06:18] values of measurement error and so we're interested in doing causal inference in
+[0:06:20] interested in doing causal inference in the presence of both the classical
+[0:06:21] the presence of both the classical issues and the modern ones
+[0:06:24] issues and the modern ones the standard workflow for doing causal
+[0:06:27] the standard workflow for doing causal inference from a real world data set is
+[0:06:29] inference from a real world data set is to do some data cleaning and then to do
+[0:06:31] to do some data cleaning and then to do some data analysis that typically
+[0:06:33] some data analysis that typically ignores the bias and variance
+[0:06:34] ignores the bias and variance consequences of the data cleaning
+[0:06:37] consequences of the data cleaning and in this work we'll propose a new
+[0:06:39] and in this work we'll propose a new end-to-end procedure for data cleaning
+[0:06:41] end-to-end procedure for data cleaning and then estimation and then inference
+[0:06:44] and then estimation and then inference with data cleaning adjusted confidence
+[0:06:45] with data cleaning adjusted confidence intervals
+[0:06:47] intervals formally will prove root end consistency
+[0:06:49] formally will prove root end consistency gaussian approximation and
+[0:06:51] gaussian approximation and semi-parametric efficiency by finding
+[0:06:53] semi-parametric efficiency by finding sample arguments and our key assumption
+[0:06:55] sample arguments and our key assumption throughout that will power everything is
+[0:06:58] throughout that will power everything is that the true covariates are
+[0:06:59] that the true covariates are approximately lowering
+[0:07:01] approximately lowering we'll argue that there exist scenarios
+[0:07:03] we'll argue that there exist scenarios in which it seems to be possible to
+[0:07:05] in which it seems to be possible to achieve both privacy at the individual
+[0:07:07] achieve both privacy at the individual level and precision of the population
+[0:07:08] level and precision of the population level
+[0:07:11] level in this work we build on many that come
+[0:07:12] in this work we build on many that come before in semi-parametric statistics
+[0:07:15] before in semi-parametric statistics their classic works on the asymptotic
+[0:07:17] their classic works on the asymptotic variants of semi-parametric estimators
+[0:07:19] variants of semi-parametric estimators we also build on the targeted and device
+[0:07:21] we also build on the targeted and device machine learning literatures and I'll
+[0:07:23] machine learning literatures and I'll point out the connections as we go along
+[0:07:26] point out the connections as we go along there's literature on using principal
+[0:07:27] there's literature on using principal component analysis for large Factor
+[0:07:29] component analysis for large Factor models where the authors try to identify
+[0:07:32] models where the authors try to identify and infer these latent factors we'll be
+[0:07:35] and infer these latent factors we'll be interested in Downstream causal
+[0:07:36] interested in Downstream causal parameters instead and while a latent
+[0:07:38] parameters instead and while a latent factor model is sufficient it turns out
+[0:07:40] factor model is sufficient it turns out to be not necessary
+[0:07:43] to be not necessary there is a lot of work in causal
+[0:07:45] there is a lot of work in causal inference on doing estimation in the
+[0:07:47] inference on doing estimation in the presence of various data corruption so
+[0:07:48] presence of various data corruption so for missing values Reuben proposes
+[0:07:50] for missing values Reuben proposes multiple reputation
+[0:07:52] multiple reputation him the synthetic control literature can
+[0:07:55] him the synthetic control literature can kind of be thought along these lines
+[0:07:56] kind of be thought along these lines where the causal parameter of interest
+[0:07:59] where the causal parameter of interest is the average treatment on the treated
+[0:08:01] is the average treatment on the treated in a panel data setting and using a
+[0:08:04] in a panel data setting and using a factor model
+[0:08:05] factor model we'll be interested in a broad class of
+[0:08:07] we'll be interested in a broad class of causal parameters not just average
+[0:08:08] causal parameters not just average treatment on the treatment in
+[0:08:10] treatment on the treatment in cross-sectional data and the factor
+[0:08:13] cross-sectional data and the factor model will not be required
+[0:08:15] model will not be required finally our work relates to various
+[0:08:17] finally our work relates to various literatures on error in variable
+[0:08:19] literatures on error in variable regression and causal inference this
+[0:08:21] regression and causal inference this often means using auxiliary information
+[0:08:23] often means using auxiliary information like repeated measurements or
+[0:08:25] like repeated measurements or instrumental variables or negative
+[0:08:26] instrumental variables or negative controls and I'll try to make the case
+[0:08:28] controls and I'll try to make the case that our work continues this repeated
+[0:08:30] that our work continues this repeated measurement again
+[0:08:32] measurement again in statistics various Works extend the
+[0:08:34] in statistics various Works extend the lasso and the dancing selector to Aaron
+[0:08:37] lasso and the dancing selector to Aaron verbal regression but then the analyst
+[0:08:39] verbal regression but then the analyst needs to know in advance the covariance
+[0:08:41] needs to know in advance the covariance structure of the measurement error and
+[0:08:42] structure of the measurement error and that's something we want to avoid
+[0:08:45] that's something we want to avoid our work relates to the literature on
+[0:08:47] our work relates to the literature on principal component regression and in
+[0:08:49] principal component regression and in particular we'll propose new variants in
+[0:08:51] particular we'll propose new variants in principle Conformity progression for
+[0:08:53] principle Conformity progression for causal inference
+[0:08:55] causal inference so we're motivated by this question of
+[0:08:56] so we're motivated by this question of how to do causal inference with the 2020
+[0:08:58] how to do causal inference with the 2020 U.S census and if it's even possible
+[0:09:00] U.S census and if it's even possible with high-dimensional Corruptions like
+[0:09:02] with high-dimensional Corruptions like discretization and differential privacy
+[0:09:09] I'd like to introduce a little bit of notation I'll denote the outcome by y
+[0:09:11] notation I'll denote the outcome by y the treatment by D and the covariates by
+[0:09:13] the treatment by D and the covariates by X and for today I'll talk about the
+[0:09:16] X and for today I'll talk about the average treatment effect with inid data
+[0:09:19] average treatment effect with inid data so the average treatment effect is Theta
+[0:09:21] so the average treatment effect is Theta naught and it's the sample mean of
+[0:09:22] naught and it's the sample mean of individual treatment effects our
+[0:09:24] individual treatment effects our interest in in ID data comes from the
+[0:09:27] interest in in ID data comes from the fact that we're interested in data
+[0:09:29] fact that we're interested in data Corruptions and if we believe the data
+[0:09:30] Corruptions and if we believe the data is corrupted we probably believe it's
+[0:09:32] is corrupted we probably believe it's not identical
+[0:09:33] not identical in the paper we consider a broader class
+[0:09:36] in the paper we consider a broader class of positive parameters like the local
+[0:09:38] of positive parameters like the local average student effect and elasticity
+[0:09:40] average student effect and elasticity and even non-parametric puzzle functions
+[0:09:42] and even non-parametric puzzle functions like the conditional average student
+[0:09:43] like the conditional average student effect
+[0:09:45] effect the Crux of our problem is that instead
+[0:09:48] the Crux of our problem is that instead of getting to see y d and X we see y d
+[0:09:50] of getting to see y d and X we see y d and Z where Z are Corrections of x
+[0:09:53] and Z where Z are Corrections of x concretely we can imagine for the ith
+[0:09:55] concretely we can imagine for the ith observation of their five covariates
+[0:09:56] observation of their five covariates that's the first row
+[0:09:58] that's the first row in the presence of measurement error we
+[0:09:59] in the presence of measurement error we don't get to see those five covariates
+[0:10:01] don't get to see those five covariates we see those five covariates plus let's
+[0:10:03] we see those five covariates plus let's say gaussian lines and those are the
+[0:10:04] say gaussian lines and those are the five values we see instead
+[0:10:06] five values we see instead or perhaps there's missingness where
+[0:10:08] or perhaps there's missingness where instead of seeing those five values we
+[0:10:10] instead of seeing those five values we see a subset of them
+[0:10:11] see a subset of them or discretization where for example the
+[0:10:14] or discretization where for example the 5.15 has become a six
+[0:10:16] 5.15 has become a six or maybe there's privacy where instead
+[0:10:18] or maybe there's privacy where instead of seeing those five values we see those
+[0:10:20] of seeing those five values we see those five values plus let's say laplacian
+[0:10:22] five values plus let's say laplacian noise
+[0:10:24] noise and why laplacian means
+[0:10:26] and why laplacian means the idea is that if you add laplacian
+[0:10:28] the idea is that if you add laplacian noise to tabular summaries
+[0:10:31] noise to tabular summaries then it provably becomes very hard to
+[0:10:34] then it provably becomes very hard to reconstruct the microdata
+[0:10:36] reconstruct the microdata differential privacy is a formal
+[0:10:37] differential privacy is a formal guarantee of plausible deniability that
+[0:10:40] guarantee of plausible deniability that any individual contributed their data so
+[0:10:42] any individual contributed their data so this is precisely the step of the
+[0:10:44] this is precisely the step of the simulated act that gets disrupted
+[0:10:48] simulated act that gets disrupted I'd like to introduce a visual language
+[0:10:50] I'd like to introduce a visual language which will help us think about the
+[0:10:51] which will help us think about the algorithm and Theory and it'll also help
+[0:10:54] algorithm and Theory and it'll also help us understand these two equations which
+[0:10:56] us understand these two equations which concisely summarize our model
+[0:10:57] concisely summarize our model so we have a vector of outcomes y that
+[0:11:00] so we have a vector of outcomes y that are generated from a regression function
+[0:11:02] are generated from a regression function that we'll call gamma naught with an
+[0:11:04] that we'll call gamma naught with an argument for treatment and an argument
+[0:11:06] argument for treatment and an argument for the clean covariates
+[0:11:07] for the clean covariates there's also a vector of response notes
+[0:11:10] there's also a vector of response notes but we don't get to see the Matrix of
+[0:11:12] but we don't get to see the Matrix of clinical variates instead what we get is
+[0:11:14] clinical variates instead what we get is a matrix of corrupted covariants so it's
+[0:11:17] a matrix of corrupted covariants so it's the clean Matrix plus some additive
+[0:11:19] the clean Matrix plus some additive corruption whether that's measurement
+[0:11:21] corruption whether that's measurement error or discretization or differential
+[0:11:23] error or discretization or differential privacy all of which are by the way
+[0:11:25] privacy all of which are by the way sub-exponential that is to say their
+[0:11:27] sub-exponential that is to say their tails are no worse than an exponential
+[0:11:29] tails are no worse than an exponential distribution and that'll show up in our
+[0:11:31] distribution and that'll show up in our Theory section
+[0:11:32] Theory section then we'll multiply by a missing this
+[0:11:34] then we'll multiply by a missing this mask which corresponds to non-response
+[0:11:37] mask which corresponds to non-response so this is how we accommodate missing
+[0:11:38] so this is how we accommodate missing values
+[0:11:40] values all together then we don't get to see y
+[0:11:42] all together then we don't get to see y d and X we get to see y d and z
+[0:11:48] our key assumption that will power everything is that the true covariates
+[0:11:50] everything is that the true covariates are approximately low right
+[0:11:52] are approximately low right so the Matrix of clinical variates is an
+[0:11:54] so the Matrix of clinical variates is an N by P Matrix for n observations and P
+[0:11:57] N by P Matrix for n observations and P variables and we're saying that it's
+[0:11:59] variables and we're saying that it's well approximated by a matrix that has
+[0:12:01] well approximated by a matrix that has rank only R where R is much less than
+[0:12:03] rank only R where R is much less than nmp and I'd like to suggest the
+[0:12:06] nmp and I'd like to suggest the intuition of a repeated measurement
+[0:12:07] intuition of a repeated measurement model in a classic repeated measurement
+[0:12:09] model in a classic repeated measurement model we have two noisy measurements of
+[0:12:12] model we have two noisy measurements of one signal
+[0:12:13] one signal and in our model the idea is that we
+[0:12:15] and in our model the idea is that we have P noisy measurements where p is an
+[0:12:17] have P noisy measurements where p is an increasing number
+[0:12:18] increasing number and they're not precisely repeated
+[0:12:20] and they're not precisely repeated measurements but approximately so of
+[0:12:22] measurements but approximately so of just R signals where R is allowed to
+[0:12:26] just R signals where R is allowed to grow but it's going much more slowly
+[0:12:27] grow but it's going much more slowly than nmp
+[0:12:30] than nmp geometrically we can visualize this
+[0:12:32] geometrically we can visualize this assumption so in this plot we have three
+[0:12:34] assumption so in this plot we have three converts X1 X2 X3 so the ambient
+[0:12:37] converts X1 X2 X3 so the ambient Dimension p is three
+[0:12:39] Dimension p is three we're visualizing n observations as n
+[0:12:41] we're visualizing n observations as n data points and we see that they're well
+[0:12:43] data points and we see that they're well approximated as living on a
+[0:12:45] approximated as living on a two-dimensional Subspace so R is two
+[0:12:48] two-dimensional Subspace so R is two when visualized this way we get another
+[0:12:50] when visualized this way we get another intuition that approximately when it
+[0:12:53] intuition that approximately when it comes to treatment assignment there is
+[0:12:54] comes to treatment assignment there is approximate selection on the Subspace
+[0:12:57] approximate selection on the Subspace in the paper we keep track of what
+[0:12:59] in the paper we keep track of what happens if there's selection that's not
+[0:13:01] happens if there's selection that's not on the Subspace but we're making this
+[0:13:03] on the Subspace but we're making this approximation assumption so we'll keep
+[0:13:04] approximation assumption so we'll keep track of all the approximation errors
+[0:13:06] track of all the approximation errors with finite sample balance
+[0:13:09] with finite sample balance why would we place an assumption like
+[0:13:11] why would we place an assumption like this well because it seems to hold in
+[0:13:14] this well because it seems to hold in census data so here we've loaded the
+[0:13:16] census data so here we've loaded the covariates from outer door and enhances
+[0:13:18] covariates from outer door and enhances 2013 paper and the American Economic
+[0:13:20] 2013 paper and the American Economic Review and there are 30 covariates we've
+[0:13:23] Review and there are 30 covariates we've done the singular value decomposition
+[0:13:25] done the singular value decomposition and then visualize the singular values
+[0:13:27] and then visualize the singular values also called the principal components
+[0:13:29] also called the principal components we see that maybe just the first five
+[0:13:31] we see that maybe just the first five principal components explain most of the
+[0:13:33] principal components explain most of the variation in the data
+[0:13:36] variation in the data we also see the intuition of approximate
+[0:13:38] we also see the intuition of approximate repeated measurements because among
+[0:13:39] repeated measurements because among these variables we have average
+[0:13:41] these variables we have average disability benefits and average medical
+[0:13:43] disability benefits and average medical benefits an average unemployment
+[0:13:44] benefits an average unemployment benefits which are not precisely
+[0:13:47] benefits which are not precisely repeated measurements but maybe
+[0:13:48] repeated measurements but maybe approximately so
+[0:13:54] we see how reasonable this assumption is in related economic data sets so what if
+[0:13:57] in related economic data sets so what if we look at household level data in the
+[0:13:59] we look at household level data in the PSID or CPS again we see that the
+[0:14:02] PSID or CPS again we see that the approximate rank R is much lower than
+[0:14:04] approximate rank R is much lower than the ambient Dimension p
+[0:14:05] the ambient Dimension p and we're able to verify this kind of
+[0:14:07] and we're able to verify this kind of property in county level data sets and
+[0:14:10] property in county level data sets and commuting Zone level data sets from
+[0:14:12] commuting Zone level data sets from Chetty and hendron's influential papers
+[0:14:13] Chetty and hendron's influential papers in the quarterly Journal of economics
+[0:14:16] in the quarterly Journal of economics so the takeaway is that the census is
+[0:14:19] so the takeaway is that the census is approximately low ranked because it has
+[0:14:21] approximately low ranked because it has these approximate repeated measurements
+[0:14:22] these approximate repeated measurements and that'll power all of our analysis
+[0:14:28] before I present the algorithm let me tell you about the algorithm we want to
+[0:14:30] tell you about the algorithm we want to have
+[0:14:31] have we want to have an algorithm that
+[0:14:33] we want to have an algorithm that estimates causal parameters as if the
+[0:14:35] estimates causal parameters as if the data were uncorrupted yet adjusts for
+[0:14:38] data were uncorrupted yet adjusts for data cleaning in the confidence interval
+[0:14:40] data cleaning in the confidence interval ideally this procedure would not require
+[0:14:42] ideally this procedure would not require knowledge of the corruption covarian
+[0:14:44] knowledge of the corruption covarian structure in advance and in this way we
+[0:14:46] structure in advance and in this way we depart from previous work and connect
+[0:14:47] depart from previous work and connect more to the Matrix completation
+[0:14:49] more to the Matrix completation literature
+[0:14:50] literature if such a procedure were to exist we
+[0:14:52] if such a procedure were to exist we would in some sense preempt the looming
+[0:14:54] would in some sense preempt the looming trade-off between privacy and precision
+[0:15:01] the premise of Matrix completion is that you get a matrix that's n by P
+[0:15:03] you get a matrix that's n by P there are missing values you want to we
+[0:15:06] there are missing values you want to we want to fill in and present values we
+[0:15:08] want to fill in and present values we want to do noise and in this paper we'll
+[0:15:10] want to do noise and in this paper we'll think of Matrix completion as a type of
+[0:15:12] think of Matrix completion as a type of automatic data clean so when we're doing
+[0:15:14] automatic data clean so when we're doing data cleaning we're really making a
+[0:15:16] data cleaning we're really making a matrix estimator X hat of the clean
+[0:15:18] matrix estimator X hat of the clean covariate Matrix X
+[0:15:20] covariate Matrix X there's a vast literature on Matrix
+[0:15:22] there's a vast literature on Matrix completion and our aspiration is to do
+[0:15:25] completion and our aspiration is to do this automatic data cleaning which is
+[0:15:27] this automatic data cleaning which is very agnostic about the noise and then
+[0:15:29] very agnostic about the noise and then adjust for the data cleaning in the
+[0:15:31] adjust for the data cleaning in the confidence interval
+[0:15:33] confidence interval what this is hard to do several
+[0:15:35] what this is hard to do several challenges arise
+[0:15:37] challenges arise the first challenge is that the best
+[0:15:39] the first challenge is that the best traits of Matrix is completion are
+[0:15:41] traits of Matrix is completion are actually slower than n minus a half so
+[0:15:43] actually slower than n minus a half so how could we possibly do causal
+[0:15:45] how could we possibly do causal inference with a standard era of order n
+[0:15:47] inference with a standard era of order n to the minus I have
+[0:15:48] to the minus I have and our answer will be to aim to extend
+[0:15:52] and our answer will be to aim to extend double rate robustness which motivates
+[0:15:54] double rate robustness which motivates us to use the W robust moment WS moment
+[0:15:57] us to use the W robust moment WS moment combines two classic formulations that
+[0:16:00] combines two classic formulations that are the outcome mechanism where the
+[0:16:01] are the outcome mechanism where the outcome mechanism is the expectation of
+[0:16:03] outcome mechanism is the expectation of the acting y given the treatment D equal
+[0:16:05] the acting y given the treatment D equal variates x and that of the treatment
+[0:16:07] variates x and that of the treatment mechanism where the treatment mechanism
+[0:16:08] mechanism where the treatment mechanism is the expectation of the treatment D
+[0:16:10] is the expectation of the treatment D given the covariance X
+[0:16:12] given the covariance X and the outcome mechanism formulation
+[0:16:14] and the outcome mechanism formulation the treatment effect is the outcome
+[0:16:15] the treatment effect is the outcome mechanism the treatment on minus the
+[0:16:17] mechanism the treatment on minus the alpha mechanism the two and often
+[0:16:19] alpha mechanism the two and often expectation
+[0:16:20] expectation and in the treatment mechanism
+[0:16:21] and in the treatment mechanism formulation the treatment effect is the
+[0:16:23] formulation the treatment effect is the reweighting of the out of the outcomes
+[0:16:25] reweighting of the out of the outcomes by The Balancing weight which has the
+[0:16:27] by The Balancing weight which has the treatment mechanism in the denominator
+[0:16:30] treatment mechanism in the denominator in this work we'll propose new error and
+[0:16:32] in this work we'll propose new error and variable estimators for this regression
+[0:16:35] variable estimators for this regression and this balancing weight and in
+[0:16:37] and this balancing weight and in particular having an error and variable
+[0:16:39] particular having an error and variable balancing weight seems to be a
+[0:16:41] balancing weight seems to be a straightforward idea but actually a new
+[0:16:42] straightforward idea but actually a new idea
+[0:16:46] the Second Challenge is that data cleaning May induce strong dependence in
+[0:16:49] cleaning May induce strong dependence in this cleaned data Matrix X hat so what
+[0:16:52] this cleaned data Matrix X hat so what central limit theorem could be used for
+[0:16:53] central limit theorem could be used for inference
+[0:16:54] inference our answer will be to break a lot of
+[0:16:56] our answer will be to break a lot of dependence by using sample splitting
+[0:16:58] dependence by using sample splitting which is a classic idea and implicit
+[0:17:00] which is a classic idea and implicit data cleaning which is a new idea
+[0:17:02] data cleaning which is a new idea so here's our algorithm on a slide we'll
+[0:17:05] so here's our algorithm on a slide we'll split the data set into a training set
+[0:17:07] split the data set into a training set and a test set
+[0:17:08] and a test set on the training set is where we'll do
+[0:17:10] on the training set is where we'll do the data cleaning where we'll learn an
+[0:17:12] the data cleaning where we'll learn an error and variable regression and an
+[0:17:14] error and variable regression and an error variable balancing weight and then
+[0:17:16] error variable balancing weight and then we'll bring those over to the test set
+[0:17:18] we'll bring those over to the test set where we'll do causal parameter
+[0:17:19] where we'll do causal parameter estimation and inference using the
+[0:17:21] estimation and inference using the doubler bus estimating equation
+[0:17:23] doubler bus estimating equation crucially we clean the training
+[0:17:26] crucially we clean the training covariates but we do not clean the test
+[0:17:28] covariates but we do not clean the test covariates and this is what I mean by
+[0:17:30] covariates and this is what I mean by implicit data cleaning that'll break a
+[0:17:32] implicit data cleaning that'll break a lot of dependence
+[0:17:34] lot of dependence for proof of concept in this paper will
+[0:17:37] for proof of concept in this paper will opt for Simplicity we'll go for the
+[0:17:38] opt for Simplicity we'll go for the easiest option each step for data
+[0:17:40] easiest option each step for data cleaning PCA and regression or less for
+[0:17:43] cleaning PCA and regression or less for the balancing weight a modification of
+[0:17:45] the balancing weight a modification of OLX we call the Bal
+[0:17:48] OLX we call the Bal and for the cause of parameter we use
+[0:17:50] and for the cause of parameter we use the Ws moment of course the Matrix
+[0:17:52] the Ws moment of course the Matrix completion literature gives us a broad
+[0:17:54] completion literature gives us a broad menu for data cleaning machine learning
+[0:17:56] menu for data cleaning machine learning gives us many types of non-parametric
+[0:17:58] gives us many types of non-parametric regressions and there's a burgeoning
+[0:18:00] regressions and there's a burgeoning literature about balancing weights
+[0:18:03] literature about balancing weights we hope that by solving the very simple
+[0:18:06] we hope that by solving the very simple case to provide a template for how to
+[0:18:08] case to provide a template for how to think about more complex procedures as
+[0:18:10] think about more complex procedures as well but we're going to make the easiest
+[0:18:11] well but we're going to make the easiest options at each step
+[0:18:14] options at each step let's see how our simple approach
+[0:18:16] let's see how our simple approach performs with measurement error so
+[0:18:18] performs with measurement error so instead of seeing the clean covariates X
+[0:18:21] instead of seeing the clean covariates X we see the graphical variance Z and here
+[0:18:23] we see the graphical variance Z and here we've run the data generating process a
+[0:18:25] we've run the data generating process a thousand times computed a thousand Point
+[0:18:27] thousand times computed a thousand Point estimates and a thousand standard errors
+[0:18:29] estimates and a thousand standard errors then we've visualized one thousand
+[0:18:32] then we've visualized one thousand student ties for an estimates
+[0:18:34] student ties for an estimates if the inferential theory was working
+[0:18:35] if the inferential theory was working then this histogram should line up with
+[0:18:37] then this histogram should line up with a normal zero one density and indeed it
+[0:18:39] a normal zero one density and indeed it does
+[0:18:40] does we can quantify this performance with
+[0:18:42] we can quantify this performance with coverage tables and in the first table
+[0:18:44] coverage tables and in the first table we're ramping up the noise to Signal
+[0:18:46] we're ramping up the noise to Signal ratio 20 60 100 voices signal ratio
+[0:18:50] ratio 20 60 100 voices signal ratio for now we'll do correct specification
+[0:18:52] for now we'll do correct specification so the rank of the DGP is five and we'll
+[0:18:55] so the rank of the DGP is five and we'll use five principal components
+[0:18:57] use five principal components we can see how do our when estimates
+[0:18:59] we can see how do our when estimates compare to the ground truth which in the
+[0:19:01] compare to the ground truth which in the synthetic design is 2.2 and they seem
+[0:19:04] synthetic design is 2.2 and they seem pretty close
+[0:19:05] pretty close we also see that the standard errors
+[0:19:07] we also see that the standard errors adaptively increase in length as we
+[0:19:09] adaptively increase in length as we drive up the level of noise and
+[0:19:11] drive up the level of noise and interestingly with a 100 noise and
+[0:19:14] interestingly with a 100 noise and Signal ratio the appropriate standard
+[0:19:16] Signal ratio the appropriate standard error is only about 10 bigger
+[0:19:18] error is only about 10 bigger we know that the inferential theory is
+[0:19:20] we know that the inferential theory is working because out of 1000 confidence
+[0:19:22] working because out of 1000 confidence intervals about 950 of them include the
+[0:19:24] intervals about 950 of them include the ground troops of 2.2
+[0:19:26] ground troops of 2.2 in the second table we revisit this
+[0:19:28] in the second table we revisit this issue of tuning so what if the rank is
+[0:19:32] issue of tuning so what if the rank is five but we used five or seven or ten
+[0:19:34] five but we used five or seven or ten principal components the point estimates
+[0:19:36] principal components the point estimates remain reasonable the standard errors
+[0:19:38] remain reasonable the standard errors adaptively increase in length and the
+[0:19:40] adaptively increase in length and the coverage remains nominal
+[0:19:42] coverage remains nominal we receive uh we we get similar results
+[0:19:45] we receive uh we we get similar results with missing values discretization and
+[0:19:49] with missing values discretization and differential privacy
+[0:19:50] differential privacy and so the takeaway is that this very
+[0:19:52] and so the takeaway is that this very simple procedure seems to adapt to the
+[0:19:54] simple procedure seems to adapt to the type and the level of data corruption
+[0:19:56] type and the level of data corruption across all these different settings
+[0:19:58] across all these different settings we're just writing the same code again
+[0:19:59] we're just writing the same code again and again
+[0:20:05] the third challenge is a theoretical Challenge and it has to do with the fact
+[0:20:07] Challenge and it has to do with the fact that the best grades of Matrix
+[0:20:09] that the best grades of Matrix completion the rates at which we're
+[0:20:10] completion the rates at which we're uncovering the clean Matrix X from this
+[0:20:12] uncovering the clean Matrix X from this Matrix estimator X hat these rates are
+[0:20:15] Matrix estimator X hat these rates are not for recovering every entry The
+[0:20:17] not for recovering every entry The Matrix but actually recovering Matrix
+[0:20:19] Matrix but actually recovering Matrix entries on average across rows and
+[0:20:21] entries on average across rows and columns so how is this even related to
+[0:20:23] columns so how is this even related to semi-parametrics and our answer which is
+[0:20:26] semi-parametrics and our answer which is the focus of this section is to build a
+[0:20:27] the focus of this section is to build a framework to get from data cleaning all
+[0:20:29] framework to get from data cleaning all the way the data cleaning adjusted
+[0:20:31] the way the data cleaning adjusted confidence intervals
+[0:20:33] confidence intervals so here's our theory on the slide we
+[0:20:35] so here's our theory on the slide we place three main assumptions first that
+[0:20:38] place three main assumptions first that each row of measurement error is
+[0:20:39] each row of measurement error is conditionally mean zero instead of
+[0:20:41] conditionally mean zero instead of exponential
+[0:20:42] exponential second that each row of missingness is
+[0:20:44] second that each row of missingness is conditionally sub exponential and third
+[0:20:46] conditionally sub exponential and third that the Matrix of the true covariates
+[0:20:48] that the Matrix of the true covariates are approximately low rank you've
+[0:20:50] are approximately low rank you've already seen this as reasonable factors
+[0:20:51] already seen this as reasonable factors and the paper we further verify that
+[0:20:53] and the paper we further verify that it's reasonable in theory for nonlinear
+[0:20:55] it's reasonable in theory for nonlinear Factor models
+[0:20:56] Factor models then we prove consistency of the data
+[0:20:59] then we prove consistency of the data cleaning consistency of puzzle entrance
+[0:21:02] cleaning consistency of puzzle entrance gaussian approximation and validity of
+[0:21:05] gaussian approximation and validity of the confidence interval
+[0:21:07] the confidence interval so to interpret these results we've gone
+[0:21:09] so to interpret these results we've gone all the way from a data cleaning
+[0:21:11] all the way from a data cleaning guarantee and recycled those assumptions
+[0:21:13] guarantee and recycled those assumptions until we got to a data cleaning adjusted
+[0:21:15] until we got to a data cleaning adjusted conference involved I'd like to
+[0:21:17] conference involved I'd like to emphasize that we're in a generalized
+[0:21:18] emphasize that we're in a generalized setting with corrupted and inid data and
+[0:21:22] setting with corrupted and inid data and that our analysis requires both n and p
+[0:21:24] that our analysis requires both n and p to increase so we're in this thought
+[0:21:26] to increase so we're in this thought experiment of having access to many
+[0:21:28] experiment of having access to many repeated measurements we then use the
+[0:21:30] repeated measurements we then use the many measurements to concentrate out the
+[0:21:32] many measurements to concentrate out the ones
+[0:21:33] ones on route to these results we provide
+[0:21:35] on route to these results we provide that theory of implicit data cleaning
+[0:21:37] that theory of implicit data cleaning that it's okay to clean the training
+[0:21:39] that it's okay to clean the training covariants and to knock from the test
+[0:21:40] covariants and to knock from the test covers
+[0:21:42] covers in our main results we provide that
+[0:21:45] in our main results we provide that extension of double rate robustness we
+[0:21:46] extension of double rate robustness we were looking for whereby the rate of
+[0:21:48] were looking for whereby the rate of Matrix completion is allowed to be
+[0:21:50] Matrix completion is allowed to be slower than n to the minus a half while
+[0:21:52] slower than n to the minus a half while the rate of causal inference is into the
+[0:21:54] the rate of causal inference is into the minus a half and in this way it allows
+[0:21:56] minus a half and in this way it allows us to turn to the Matrix completion
+[0:21:58] us to turn to the Matrix completion literature in a general way
+[0:21:59] literature in a general way in the paper we do something a little
+[0:22:01] in the paper we do something a little better we do finite sample analysis and
+[0:22:03] better we do finite sample analysis and that lets us think about the
+[0:22:05] that lets us think about the non-parametric case as well so for
+[0:22:06] non-parametric case as well so for causal functions like the conditional
+[0:22:08] causal functions like the conditional average treatment effect
+[0:22:11] average treatment effect so the takeaway of the theory section is
+[0:22:13] so the takeaway of the theory section is that we do slow data cleaning yet allow
+[0:22:15] that we do slow data cleaning yet allow for fast causal inference
+[0:22:22] let me end by doing a case study so here we're going to use otter door enhances
+[0:22:25] we're going to use otter door enhances um
+[0:22:26] um important paper in the American Economic
+[0:22:28] important paper in the American Economic Review where the data is from the Census
+[0:22:30] Review where the data is from the Census and it's at the community Zone level the
+[0:22:32] and it's at the community Zone level the original research question is what is
+[0:22:34] original research question is what is the effect of keyboard competition on
+[0:22:36] the effect of keyboard competition on the U.S naval market and our follow-up
+[0:22:38] the U.S naval market and our follow-up question will be can we recover the same
+[0:22:40] question will be can we recover the same effects with synthetic corruption in
+[0:22:43] effects with synthetic corruption in particular with differential privacy
+[0:22:45] particular with differential privacy calibrated to 20 20 census levels
+[0:22:48] calibrated to 20 20 census levels in this case study the causal parameter
+[0:22:50] in this case study the causal parameter of interest will be the partially linear
+[0:22:52] of interest will be the partially linear IV parameter which is different than the
+[0:22:54] IV parameter which is different than the one we've been talking about but it's
+[0:22:56] one we've been talking about but it's still within our class
+[0:22:59] still within our class and here are results so in figure a in
+[0:23:01] and here are results so in figure a in red we have the point estimate and the
+[0:23:03] red we have the point estimate and the confidence interval from the original
+[0:23:04] confidence interval from the original paper and the original authors use two
+[0:23:07] paper and the original authors use two stage of these squares
+[0:23:09] stage of these squares right next to it in turquoise we have
+[0:23:11] right next to it in turquoise we have our Point estimate and confidence
+[0:23:12] our Point estimate and confidence interval using clean data and we see
+[0:23:15] interval using clean data and we see that we get essentially the same point
+[0:23:16] that we get essentially the same point estimate and a slightly smaller
+[0:23:17] estimate and a slightly smaller confidence interval it's smaller for two
+[0:23:20] confidence interval it's smaller for two reasons first two SLS is inefficient and
+[0:23:23] reasons first two SLS is inefficient and what we're doing is efficient and second
+[0:23:26] what we're doing is efficient and second in the finite sample the data is
+[0:23:27] in the finite sample the data is approximately low rank and our estimator
+[0:23:29] approximately low rank and our estimator is exploiting that fact
+[0:23:31] is exploiting that fact as we move to the right we introduce
+[0:23:33] as we move to the right we introduce more and more measurement error and we
+[0:23:35] more and more measurement error and we see the point estimates remain stable
+[0:23:36] see the point estimates remain stable and the standard errors adaptively
+[0:23:38] and the standard errors adaptively increase in length
+[0:23:40] increase in length we get similar results with missing
+[0:23:42] we get similar results with missing values discretization and differential
+[0:23:44] values discretization and differential privacy where the differential privacy
+[0:23:46] privacy where the differential privacy exercise we calibrate the laplacian
+[0:23:49] exercise we calibrate the laplacian variance in a very specific way
+[0:23:51] variance in a very specific way so it's well known in the differential
+[0:23:53] so it's well known in the differential privacy literature that if you calibrate
+[0:23:55] privacy literature that if you calibrate this variance to First your tolerance
+[0:23:57] this variance to First your tolerance for privacy loss as expressed in the
+[0:24:00] for privacy loss as expressed in the Census Bureau memo and second the
+[0:24:02] Census Bureau memo and second the variation in the underlying microdata
+[0:24:04] variation in the underlying microdata then by adding laplacian Noise We confer
+[0:24:08] then by adding laplacian Noise We confer the type of privacy that we want to
+[0:24:10] the type of privacy that we want to disrupt the hack that we're worried
+[0:24:11] disrupt the hack that we're worried about
+[0:24:13] about so it seems like there exists scenarios
+[0:24:15] so it seems like there exists scenarios that are representative for economic
+[0:24:17] that are representative for economic research in which we can achieve both
+[0:24:19] research in which we can achieve both privacy at the individual level and
+[0:24:21] privacy at the individual level and precision of the population level
+[0:24:23] precision of the population level in other words you can hesitate in
+[0:24:26] in other words you can hesitate in YouTube
+[0:24:27] YouTube so in this work we're motivated by the
+[0:24:29] so in this work we're motivated by the question of how to do causal inference
+[0:24:31] question of how to do causal inference with the 2020 US Census abstractly we
+[0:24:34] with the 2020 US Census abstractly we talk about learning a causal parameter
+[0:24:35] talk about learning a causal parameter from high dimensional corrective data
+[0:24:37] from high dimensional corrective data but concretely we're really interested
+[0:24:40] but concretely we're really interested in this question of
+[0:24:41] in this question of can we sometimes overcome the trade-off
+[0:24:43] can we sometimes overcome the trade-off between privacy and precision and
+[0:24:45] between privacy and precision and sometimes can we not
+[0:24:47] sometimes can we not in the paper we propose new data
+[0:24:50] in the paper we propose new data cleaning adjusted confidence intervals
+[0:24:51] cleaning adjusted confidence intervals and at a high level we try to bridge The
+[0:24:53] and at a high level we try to bridge The Matrix completion literature which is
+[0:24:55] Matrix completion literature which is very rich and the semi-parametric
+[0:24:57] very rich and the semi-parametric literature which is also very rich
+[0:24:59] literature which is also very rich in future work you're trying to think
+[0:25:01] in future work you're trying to think about confounded noise and Sample
+[0:25:03] about confounded noise and Sample selection bias I'd love to talk more and
+[0:25:05] selection bias I'd love to talk more and here's my email address
+[0:25:13] thanks our old uh very nice talk well okay we've just got another
+[0:25:15] well okay we've just got another question in the Q a uh anisha's
+[0:25:19] question in the Q a uh anisha's answering a few but I guess I can ask
+[0:25:20] answering a few but I guess I can ask you this one
+[0:25:22] you this one says this sounds like missing this
+[0:25:24] says this sounds like missing this completely at random however Your
+[0:25:26] completely at random however Your Efficient estimator of the at does not
+[0:25:28] Efficient estimator of the at does not appear to leverage this uh I guess
+[0:25:32] appear to leverage this uh I guess this was a follow-up to a previous
+[0:25:34] this was a follow-up to a previous question
+[0:25:35] question about missingness yeah
+[0:25:38] about missingness yeah yeah it's slightly more General than
+[0:25:40] yeah it's slightly more General than missing completely at random so we allow
+[0:25:43] missing completely at random so we allow for dependence of missiness within a row
+[0:25:45] for dependence of missiness within a row and this was actually an innovation
+[0:25:46] and this was actually an innovation relative to the previous work this was
+[0:25:48] relative to the previous work this was motivated by the fact that in economic
+[0:25:50] motivated by the fact that in economic data if you're missing my income it's a
+[0:25:52] data if you're missing my income it's a lot more likely that you're also missing
+[0:25:54] lot more likely that you're also missing my spouse's income so it's not even more
+[0:25:56] my spouse's income so it's not even more General than missing completely at
+[0:25:57] General than missing completely at random it's still relatively benign
+[0:25:59] random it's still relatively benign missing this
+[0:26:01] missing this um as to thinking about how that should
+[0:26:03] um as to thinking about how that should play out in the same parametric
+[0:26:04] play out in the same parametric efficiency if this question uh first
+[0:26:07] efficiency if this question uh first you've asked this question can share
+[0:26:08] you've asked this question can share some references uh I'd love to read more
+[0:26:10] some references uh I'd love to read more about it and then have a better answer
+[0:26:13] about it and then have a better answer great thank you there's actually two
+[0:26:15] great thank you there's actually two more questions since we have a few
+[0:26:17] more questions since we have a few minutes I'll pass them
+[0:26:19] minutes I'll pass them um what is your interpretation on
+[0:26:22] um what is your interpretation on stronger data corruption leads to
+[0:26:24] stronger data corruption leads to Stronger confidence on the effect
+[0:26:35] yeah so um maybe I'll answer this one a little bit
+[0:26:36] maybe I'll answer this one a little bit generally uh in simulations we tried out
+[0:26:39] generally uh in simulations we tried out a lot of things so I I showed a very
+[0:26:42] a lot of things so I I showed a very linear narrative but we tried out kind
+[0:26:43] linear narrative but we tried out kind of everything and uh we we found that
+[0:26:47] of everything and uh we we found that when it comes to getting the most robust
+[0:26:49] when it comes to getting the most robust results we want data to be approximately
+[0:26:52] results we want data to be approximately Square
+[0:26:54] Square um we found out that maybe there are a
+[0:26:56] um we found out that maybe there are a lot of estimators that could work well
+[0:26:58] lot of estimators that could work well if you implement some of the techniques
+[0:26:59] if you implement some of the techniques we're thinking about and we haven't
+[0:27:01] we're thinking about and we haven't characterized all of them but we just
+[0:27:03] characterized all of them but we just have a first pass
+[0:27:05] have a first pass um we found that the coverage is pretty
+[0:27:06] um we found that the coverage is pretty stable it's only when you get to
+[0:27:08] stable it's only when you get to scenarios where the data is very very
+[0:27:11] scenarios where the data is very very far away from being square and the data
+[0:27:13] far away from being square and the data generating process is very very hard
+[0:27:14] generating process is very very hard that things start to break down
+[0:27:16] that things start to break down and and they break down specifically in
+[0:27:18] and and they break down specifically in getting under coverage
+[0:27:24] great thanks for that answer um let me choose another one because
+[0:27:26] um let me choose another one because we're getting a lot of questions
+[0:27:28] we're getting a lot of questions um do you have any thoughts about a
+[0:27:30] um do you have any thoughts about a scenario where the outcome is also noisy
+[0:27:32] scenario where the outcome is also noisy as will often be the case in data
+[0:27:34] as will often be the case in data protected with DP
+[0:27:36] protected with DP absolutely so in the paper we also
+[0:27:39] absolutely so in the paper we also consider what happens with corrupted
+[0:27:41] consider what happens with corrupted treatment D and corrupted outcome y
+[0:27:44] treatment D and corrupted outcome y um when the outcome Y is corrupted in
+[0:27:46] um when the outcome Y is corrupted in this way in this kind of additive way
+[0:27:48] this way in this kind of additive way it's relatively harmless right that's
+[0:27:50] it's relatively harmless right that's kind of captured by the Epsilon term
+[0:27:52] kind of captured by the Epsilon term what if the outcome is missing well it's
+[0:27:55] what if the outcome is missing well it's kind of an extension in one of the
+[0:27:56] kind of an extension in one of the appendices we think about attrition bias
+[0:27:58] appendices we think about attrition bias where the outcome is selectively missing
+[0:28:00] where the outcome is selectively missing and it's selectively missing with
+[0:28:02] and it's selectively missing with respect to these clean covariates so the
+[0:28:04] respect to these clean covariates so the there's attrition bias with respect to
+[0:28:05] there's attrition bias with respect to the Cleveland whereas we don't get to
+[0:28:07] the Cleveland whereas we don't get to see and we kind of work out that
+[0:28:09] see and we kind of work out that extension uh Independence
+[0:28:15] great uh let's just end with one question uh hopefully it's short
+[0:28:18] question uh hopefully it's short um so this is a question how is the
+[0:28:21] um so this is a question how is the causal inference algorithm to describe
+[0:28:23] causal inference algorithm to describe better than Baseline matching or
+[0:28:24] better than Baseline matching or propensity score matching
+[0:28:30] um so there are going to be many estimators that are semi-parametrically
+[0:28:32] estimators that are semi-parametrically efficient and
+[0:28:34] efficient and um I think something that's nice about
+[0:28:37] um I think something that's nice about this estimator and our analysis of it is
+[0:28:39] this estimator and our analysis of it is that we have a finite simple analysis
+[0:28:42] that we have a finite simple analysis uh even in the presence of corruption
+[0:28:44] uh even in the presence of corruption and I think that from what I've seen
+[0:28:46] and I think that from what I've seen this is relatively new but also very
+[0:28:48] this is relatively new but also very reassuring because we want to know how
+[0:28:49] reassuring because we want to know how things do in the finite sample
+[0:28:51] things do in the finite sample especially if we're thinking about
+[0:28:53] especially if we're thinking about analysis of aggregate units when maybe
+[0:28:56] analysis of aggregate units when maybe there are only a hundred or a few
+[0:28:58] there are only a hundred or a few hundred or something like this we want
+[0:28:59] hundred or something like this we want to have some guarantees even for faculty
+[0:29:01] to have some guarantees even for faculty so they're going to be a lot of
+[0:29:03] so they're going to be a lot of estimators that are asymptotically
+[0:29:05] estimators that are asymptotically equivalent I think one nice property of
+[0:29:07] equivalent I think one nice property of this estimator is that at least for now
+[0:29:09] this estimator is that at least for now we have financial analysis that's a
+[0:29:12] we have financial analysis that's a nicely replicant
+[0:29:14] nicely replicant great thank you so much for answering
+[0:29:16] great thank you so much for answering those questions
+[0:29:18] those questions um I think now we will move on to Dr
+[0:29:20] um I think now we will move on to Dr Stock
+[0:29:22] Stock um Anish has also answered a few
+[0:29:23] um Anish has also answered a few questions and so uh who you're welcome
+[0:29:25] questions and so uh who you're welcome to keep answering questions in the Q a
+[0:29:27] to keep answering questions in the Q a if there's interest
+[0:29:29] if there's interest all right uh do you actually please

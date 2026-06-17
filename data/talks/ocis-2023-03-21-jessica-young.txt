@@ -1,0 +1,1634 @@
+[0:00:05] All right. Uh, welcome to the online causal inference seminar. Uh, today we
+[0:00:07] causal inference seminar. Uh, today we have a talk by Jessica Young from
+[0:00:09] have a talk by Jessica Young from Harvard University on causal inference
+[0:00:11] Harvard University on causal inference with competing events. Uh, we'll forward
+[0:00:13] with competing events. Uh, we'll forward to that very much. In the Q&amp;A during the
+[0:00:15] to that very much. In the Q&amp;A during the talk, we actually have Mats Stensrud
+[0:00:18] talk, we actually have Mats Stensrud from EPFL. So, feel free to submit
+[0:00:20] from EPFL. So, feel free to submit questions, uh, as many questions as you
+[0:00:22] questions, uh, as many questions as you like. Our discussant, uh, today will be
+[0:00:25] like. Our discussant, uh, today will be Jacqueline Rudolph from Johns Hopkins
+[0:00:26] Jacqueline Rudolph from Johns Hopkins University. Um, so she will give a a
+[0:00:29] University. Um, so she will give a a short talk after Jessica. We look
+[0:00:31] short talk after Jessica. We look forward to that as well.
+[0:00:32] forward to that as well. I will now switch over to Yang, who will
+[0:00:34] I will now switch over to Yang, who will describe the Q&amp;A process, and then we'll
+[0:00:37] describe the Q&amp;A process, and then we'll get going.
+[0:00:39] get going. Thank you, Emma. Uh, so as usual, please
+[0:00:41] Thank you, Emma. Uh, so as usual, please submit your questions, uh, whenever you
+[0:00:43] submit your questions, uh, whenever you have it in the Q&amp;A section. Uh, if you
+[0:00:46] have it in the Q&amp;A section. Uh, if you haven't used it before, it is just a
+[0:00:48] haven't used it before, it is just a button in the bottom of the Zoom window.
+[0:00:51] button in the bottom of the Zoom window. Um, so please do submit the questions,
+[0:00:53] Um, so please do submit the questions, uh, using the Q&amp;A instead of the chat
+[0:00:56] uh, using the Q&amp;A instead of the chat for us to better track it them. And I I
+[0:00:59] for us to better track it them. And I I think today we'll try to, uh, save the
+[0:01:01] think today we'll try to, uh, save the questions for Mats and also for Jessica
+[0:01:03] questions for Mats and also for Jessica to the end of the talk, but if you do
+[0:01:06] to the end of the talk, but if you do have some clarification questions,
+[0:01:07] have some clarification questions, please feel free to, uh, bring them up.
+[0:01:10] please feel free to, uh, bring them up. Um, without further ado, please feel
+[0:01:12] Um, without further ado, please feel free to get started, Jessica.
+[0:01:16] free to get started, Jessica. Thank you. Um,
+[0:01:18] Thank you. Um, All right. You should be able to share.
+[0:01:20] All right. You should be able to share. Okay.
+[0:01:28] Can you see? Yes. Full screen and Moving slides?
+[0:01:32] Yes. Full screen and Moving slides? It's moving. Yes. All right. I'm good.
+[0:01:34] It's moving. Yes. All right. I'm good. Okay. Uh, thanks very much for the
+[0:01:37] Okay. Uh, thanks very much for the invitation. I'm going to be talking
+[0:01:39] invitation. I'm going to be talking about causal inference with competing
+[0:01:42] about causal inference with competing events. Um, but first, um, what is a
+[0:01:46] events. Um, but first, um, what is a competing event? In failure time
+[0:01:48] competing event? In failure time settings, a competing event or a
+[0:01:50] settings, a competing event or a competing risk is any event that makes
+[0:01:53] competing risk is any event that makes it subsequently impossible for an event
+[0:01:56] it subsequently impossible for an event of interest to the investigator to
+[0:01:58] of interest to the investigator to occur. So, inherent to the definition of
+[0:02:01] occur. So, inherent to the definition of a competing event is what is of interest
+[0:02:04] a competing event is what is of interest to the investigator.
+[0:02:06] to the investigator. Um as a running example that we're going
+[0:02:08] Um as a running example that we're going to use throughout in an early trial,
+[0:02:10] to use throughout in an early trial, investigators were interested in an
+[0:02:14] investigators were interested in an effect of estrogen therapy versus
+[0:02:16] effect of estrogen therapy versus placebo specifically on prostate cancer
+[0:02:19] placebo specifically on prostate cancer death in men recently diagnosed with
+[0:02:22] death in men recently diagnosed with prostate cancer, but some men in both of
+[0:02:25] prostate cancer, but some men in both of the study arms died of other causes, for
+[0:02:27] the study arms died of other causes, for example, due to cardiovascular events.
+[0:02:30] example, due to cardiovascular events. So, in this example, death due to, say,
+[0:02:33] So, in this example, death due to, say, cardiovascular events
+[0:02:35] cardiovascular events are competing events um for the event of
+[0:02:38] are competing events um for the event of interest death due to prostate cancer
+[0:02:39] interest death due to prostate cancer because obviously an individual is
+[0:02:42] because obviously an individual is deterministically prevented from dying
+[0:02:45] deterministically prevented from dying of prostate cancer once he's died of
+[0:02:48] of prostate cancer once he's died of something else. And importantly,
+[0:02:49] something else. And importantly, competing events can occur regardless of
+[0:02:52] competing events can occur regardless of study design, for example, whether or
+[0:02:54] study design, for example, whether or not the treatment is randomized.
+[0:02:57] not the treatment is randomized. So, there are several um several
+[0:02:59] So, there are several um several different measures that have been
+[0:03:01] different measures that have been defined and widely popularized in the
+[0:03:04] defined and widely popularized in the survival analysis literature um
+[0:03:06] survival analysis literature um ostensibly as the basis for quantifying
+[0:03:09] ostensibly as the basis for quantifying associations
+[0:03:10] associations between, say, a treatment or exposure
+[0:03:12] between, say, a treatment or exposure and an event of interest
+[0:03:15] and an event of interest um subject to competing events in the
+[0:03:17] um subject to competing events in the sense that I defined on the on the
+[0:03:19] sense that I defined on the on the previous slide, meaning there exist
+[0:03:21] previous slide, meaning there exist events that prevent the event uh of
+[0:03:24] events that prevent the event uh of interest to the investigator from
+[0:03:26] interest to the investigator from happening deterministically.
+[0:03:28] happening deterministically. Um and these popular measures include
+[0:03:29] Um and these popular measures include the cause-specific
+[0:03:31] the cause-specific cumulative incidence or crude risk, the
+[0:03:33] cumulative incidence or crude risk, the marginal cumulative incidence or net
+[0:03:35] marginal cumulative incidence or net risk um and the cause-specific and
+[0:03:37] risk um and the cause-specific and subdistribution hazards. And And these
+[0:03:40] subdistribution hazards. And And these measures, you can find descriptions of
+[0:03:42] measures, you can find descriptions of them compared and contrasted in many,
+[0:03:44] them compared and contrasted in many, many textbooks and many papers. And I
+[0:03:47] many textbooks and many papers. And I think it's safe to say that the vast
+[0:03:49] think it's safe to say that the vast majority of
+[0:03:51] majority of applications of of with competing risk
+[0:03:55] applications of of with competing risk data, whether we're talking about trials
+[0:03:56] data, whether we're talking about trials or observational studies, and the goal
+[0:03:59] or observational studies, and the goal is in some sense causal, meaning there
+[0:04:01] is in some sense causal, meaning there is either implicitly or explicitly
+[0:04:03] is either implicitly or explicitly interest in a causal treatment effect.
+[0:04:06] interest in a causal treatment effect. Um, most studies use statistical methods
+[0:04:09] Um, most studies use statistical methods that were in some sense derived from
+[0:04:11] that were in some sense derived from starting off with contrast in one of
+[0:04:14] starting off with contrast in one of these measures, and that's what I'm
+[0:04:15] these measures, and that's what I'm going to talk about the vast, probably
+[0:04:17] going to talk about the vast, probably the vast, vast majority focus on the
+[0:04:20] the vast, vast majority focus on the cause specific hazard. Um,
+[0:04:23] cause specific hazard. Um, however, even in a trial where the
+[0:04:25] however, even in a trial where the treatment is randomized, and even if
+[0:04:27] treatment is randomized, and even if everything else about the trial is,
+[0:04:29] everything else about the trial is, quote, perfect,
+[0:04:30] quote, perfect, um, whether any of these associations
+[0:04:33] um, whether any of these associations can be interpreted as causal treatment
+[0:04:35] can be interpreted as causal treatment effects at all, and even if so, which
+[0:04:38] effects at all, and even if so, which effects in particular they quantify, are
+[0:04:41] effects in particular they quantify, are not straightforward questions to answer.
+[0:04:44] not straightforward questions to answer. And while many, many authors over the
+[0:04:46] And while many, many authors over the last decades have made fairly decisive
+[0:04:49] last decades have made fairly decisive recommendations for choosing between
+[0:04:51] recommendations for choosing between these quantities in terms of targeting a
+[0:04:54] these quantities in terms of targeting a causal effect, um, these
+[0:04:56] causal effect, um, these recommendations, I would say, have not
+[0:04:58] recommendations, I would say, have not been typically explicitly grounded in
+[0:05:01] been typically explicitly grounded in transparent, um, reasoning around
+[0:05:03] transparent, um, reasoning around causality, meaning there's no standard
+[0:05:05] causality, meaning there's no standard counterfactual target, and there's no
+[0:05:07] counterfactual target, and there's no explicit, um, causal model to help with
+[0:05:11] explicit, um, causal model to help with reasoning around both interpretation as
+[0:05:14] reasoning around both interpretation as well as identification. And it turns out
+[0:05:17] well as identification. And it turns out that when we do sort of ground our
+[0:05:19] that when we do sort of ground our thinking in in an explicit
+[0:05:21] thinking in in an explicit counterfactual causal model,
+[0:05:23] counterfactual causal model, we can see that even contrasting
+[0:05:25] we can see that even contrasting counterfactual versions of any of these,
+[0:05:28] counterfactual versions of any of these, um, sort of typical targets, for
+[0:05:30] um, sort of typical targets, for example, had everyone received estrogen
+[0:05:32] example, had everyone received estrogen versus had everyone received placebo,
+[0:05:34] versus had everyone received placebo, may not actually coincide with a causal
+[0:05:38] may not actually coincide with a causal effect at all, but beyond that, the
+[0:05:40] effect at all, but beyond that, the investigator's desired causal, um,
+[0:05:43] investigator's desired causal, um, effect that may or may not have been
+[0:05:45] effect that may or may not have been explicitly, um, articulated.
+[0:05:49] explicitly, um, articulated. And I'm I'm going to argue also that the
+[0:05:52] And I'm I'm going to argue also that the confusion may not be helped by the
+[0:05:54] confusion may not be helped by the causal inference literature in the sense
+[0:05:57] causal inference literature in the sense that
+[0:05:58] that where where
+[0:06:00] where where uh statistical methods are explicitly
+[0:06:02] uh statistical methods are explicitly grounded in counterfactual notions of
+[0:06:04] grounded in counterfactual notions of causal effects explicitly defined, um
+[0:06:07] causal effects explicitly defined, um but again, the existing generic notions
+[0:06:10] but again, the existing generic notions of causal effects that that we have to
+[0:06:12] of causal effects that that we have to choose from um when applied to the
+[0:06:15] choose from um when applied to the setting may not again coincide with what
+[0:06:19] setting may not again coincide with what story the investigator would uh um
+[0:06:22] story the investigator would uh um explicitly tell about what they wish to
+[0:06:24] explicitly tell about what they wish to learn from the study even in a trial.
+[0:06:27] learn from the study even in a trial. Um and so here what we're going to do is
+[0:06:29] Um and so here what we're going to do is consider various counterfactual targets
+[0:06:32] consider various counterfactual targets that have been historically posed um
+[0:06:34] that have been historically posed um that come out of this both the
+[0:06:36] that come out of this both the statistics literature as well as
+[0:06:38] statistics literature as well as consider some options that we could pull
+[0:06:40] consider some options that we could pull out of the historical causal inference
+[0:06:42] out of the historical causal inference literature specifically for the case
+[0:06:44] literature specifically for the case where um the investigator's interested
+[0:06:46] where um the investigator's interested in a causal treatment effect on an event
+[0:06:49] in a causal treatment effect on an event of interest subject to competing events.
+[0:06:51] of interest subject to competing events. And we're also going to motivate a new
+[0:06:53] And we're also going to motivate a new class of causal effects that that um
+[0:06:56] class of causal effects that that um really does come out of stories that
+[0:06:59] really does come out of stories that investigators um have told either in
+[0:07:02] investigators um have told either in discussion sections or when when pressed
+[0:07:04] discussion sections or when when pressed about what they wish to learn from from
+[0:07:06] about what they wish to learn from from a study that could be useful options in
+[0:07:09] a study that could be useful options in in this uh situation.
+[0:07:12] in this uh situation. So we're going to continue on with this
+[0:07:14] So we're going to continue on with this running example of estrogen and prostate
+[0:07:16] running example of estrogen and prostate cancer and I'm going to sort of pose a
+[0:07:18] cancer and I'm going to sort of pose a hypothetical scenario perhaps um which
+[0:07:21] hypothetical scenario perhaps um which is a situation I find myself in a lot.
+[0:07:24] is a situation I find myself in a lot. Say you're the statistician, you're
+[0:07:25] Say you're the statistician, you're working with um investigators and what
+[0:07:28] working with um investigators and what they've what you've gleaned so far is
+[0:07:31] they've what you've gleaned so far is that they tell you we're interested in
+[0:07:32] that they tell you we're interested in the effect of estrogen therapy versus
+[0:07:34] the effect of estrogen therapy versus placebo on death due to prostate cancer.
+[0:07:38] placebo on death due to prostate cancer. So in some in some sense we understand
+[0:07:39] So in some in some sense we understand the treatment of interest and the event
+[0:07:41] the treatment of interest and the event of interest and we know we have possibly
+[0:07:44] of interest and we know we have possibly competing events. They hand you a data
+[0:07:46] competing events. They hand you a data set, um and let's just to remove all
+[0:07:48] set, um and let's just to remove all other complications, say this data set
+[0:07:52] other complications, say this data set is a perfect version of the estrogen
+[0:07:54] is a perfect version of the estrogen therapy trial that I mentioned earlier,
+[0:07:56] therapy trial that I mentioned earlier, in the sense that assume everyone
+[0:07:58] in the sense that assume everyone adheres to the treatment they were
+[0:07:59] adheres to the treatment they were randomized to for as long as they're
+[0:08:01] randomized to for as long as they're alive, or up to the plan, uh study end,
+[0:08:05] alive, or up to the plan, uh study end, the administrative study end, whichever
+[0:08:06] the administrative study end, whichever comes first. So, let's just for
+[0:08:08] comes first. So, let's just for concreteness, suppose that this is 5
+[0:08:10] concreteness, suppose that this is 5 years post randomization. Suppose that
+[0:08:12] years post randomization. Suppose that no one drops out of the study before
+[0:08:15] no one drops out of the study before it's planned end, or loosely no one is
+[0:08:17] it's planned end, or loosely no one is lost to follow up, which for our
+[0:08:19] lost to follow up, which for our practical purposes helps us in that, um
+[0:08:22] practical purposes helps us in that, um for those who died during that 5-year
+[0:08:25] for those who died during that 5-year follow-up, suppose we know the day of
+[0:08:27] follow-up, suppose we know the day of death, uh and the and the exact cause of
+[0:08:29] death, uh and the and the exact cause of death.
+[0:08:31] death. And this just gives, um sort of a formal
+[0:08:33] And this just gives, um sort of a formal notation for that observed data
+[0:08:35] notation for that observed data structure. So, as usual, we can denote A
+[0:08:38] structure. So, as usual, we can denote A as the assigned treatment at baseline.
+[0:08:40] as the assigned treatment at baseline. Say A equals 1 is estrogen active
+[0:08:42] Say A equals 1 is estrogen active treatment, A equals 0 is placebo. And
+[0:08:45] treatment, A equals 0 is placebo. And suppose we're able to measure on every
+[0:08:47] suppose we're able to measure on every subsequent day, which we can index by K
+[0:08:50] subsequent day, which we can index by K going from 0 up to capital K plus 1
+[0:08:53] going from 0 up to capital K plus 1 indexing that administrative study end.
+[0:08:56] indexing that administrative study end. Suppose on every single day we're able
+[0:08:58] Suppose on every single day we're able to know YK, an indicator of whether, um
+[0:09:03] to know YK, an indicator of whether, um or not, an individual failed due to the
+[0:09:05] or not, an individual failed due to the event of interest by day K. So, in our
+[0:09:07] event of interest by day K. So, in our example, this is just yes, no, did an
+[0:09:10] example, this is just yes, no, did an individual die due due to prostate
+[0:09:12] individual die due due to prostate cancer by day K? And then we know DK, an
+[0:09:16] cancer by day K? And then we know DK, an indicator of whether a competing event
+[0:09:18] indicator of whether a competing event was experienced by day K. So, for
+[0:09:21] was experienced by day K. So, for simplicity, let's just assume that the
+[0:09:24] simplicity, let's just assume that the only competing events are, uh deaths due
+[0:09:26] only competing events are, uh deaths due to cardiovascular disease, um but we
+[0:09:29] to cardiovascular disease, um but we could make DK a vector, um of as many
+[0:09:33] could make DK a vector, um of as many possible different events, um as needed.
+[0:09:35] possible different events, um as needed. And hopefully by the end, it will be
+[0:09:38] And hopefully by the end, it will be clear how to think about whether we need
+[0:09:40] clear how to think about whether we need to pull out different different causes
+[0:09:42] to pull out different different causes or not. Um and using sort of typical
+[0:09:45] or not. Um and using sort of typical shorthand notation, we'll use an
+[0:09:47] shorthand notation, we'll use an overline for history. So, Y over bar K
+[0:09:50] overline for history. So, Y over bar K would be the whole vector of the event
+[0:09:52] would be the whole vector of the event of interest process history from
+[0:09:54] of interest process history from baseline up to time K. And then we can
+[0:09:57] baseline up to time K. And then we can use an underline for future. So, say Y
+[0:10:00] use an underline for future. So, say Y under bar K plus one is the whole future
+[0:10:03] under bar K plus one is the whole future process of the event uh of interest from
+[0:10:05] process of the event uh of interest from K plus one up to uh the administrative
+[0:10:08] K plus one up to uh the administrative study end. So, now this was a lot on
+[0:10:11] study end. So, now this was a lot on this slide, but really we can just
+[0:10:12] this slide, but really we can just summarize all of this information simply
+[0:10:14] summarize all of this information simply here. So, we know A and we know the
+[0:10:16] here. So, we know A and we know the whole D bar Y bar vector from zero to
+[0:10:20] whole D bar Y bar vector from zero to the end of follow-up capital K plus one.
+[0:10:23] the end of follow-up capital K plus one. So, I just want to quickly um switch
+[0:10:25] So, I just want to quickly um switch over to what if for those of you who are
+[0:10:28] over to what if for those of you who are familiar with sort of the quote
+[0:10:31] familiar with sort of the quote classical competing risk literature, say
+[0:10:33] classical competing risk literature, say you've read the famous Fine and Gray
+[0:10:35] you've read the famous Fine and Gray paper. Um the way I've described the
+[0:10:37] paper. Um the way I've described the data structure here is a little
+[0:10:38] data structure here is a little different than the way you would see it
+[0:10:40] different than the way you would see it in in one of those papers. So, there you
+[0:10:43] in in one of those papers. So, there you might see for example instead of A and
+[0:10:45] might see for example instead of A and the Y bar D bar history, you might see A
+[0:10:47] the Y bar D bar history, you might see A and a T tilde, a min of a failure time
+[0:10:50] and a T tilde, a min of a failure time and uh comparably an administrative
+[0:10:53] and uh comparably an administrative censoring time, as well as an index of
+[0:10:55] censoring time, as well as an index of the quote cause um of failure, say due
+[0:10:58] the quote cause um of failure, say due to prostate cancer or due to
+[0:11:00] to prostate cancer or due to cardiovascular disease, where T is just
+[0:11:03] cardiovascular disease, where T is just time to first failure from any cause.
+[0:11:05] time to first failure from any cause. So, this is like a time to all cause
+[0:11:07] So, this is like a time to all cause mortality in our in our case and C would
+[0:11:10] mortality in our in our case and C would be just 5 years for everyone. Uh J
+[0:11:13] be just 5 years for everyone. Uh J equals zero if for an individual who
+[0:11:15] equals zero if for an individual who never fails um through the
+[0:11:17] never fails um through the administrative study end and then J
+[0:11:19] administrative study end and then J equals one for one cause, J equals two,
+[0:11:21] equals one for one cause, J equals two, and so on. So, this data this way of
+[0:11:25] and so on. So, this data this way of defining the data structure is
+[0:11:26] defining the data structure is consistent with the way that we defined
+[0:11:28] consistent with the way that we defined it on the previous um slide in the sense
+[0:11:30] it on the previous um slide in the sense that if I know this, then I know this
+[0:11:33] that if I know this, then I know this whole event process. Um, the reason that
+[0:11:36] whole event process. Um, the reason that we're going to define it this way, what
+[0:11:38] we're going to define it this way, what I call a less summarized way without
+[0:11:40] I call a less summarized way without sort of thinking about a T, um, is that
+[0:11:43] sort of thinking about a T, um, is that it more transparently acknowledges the
+[0:11:45] it more transparently acknowledges the time-varying nature of relevant event
+[0:11:48] time-varying nature of relevant event processes in this problem, which as
+[0:11:50] processes in this problem, which as we'll see is relatively crucial for
+[0:11:53] we'll see is relatively crucial for transparency around interpreting
+[0:11:55] transparency around interpreting different counterfactual, um, targets as
+[0:11:57] different counterfactual, um, targets as well as for identification. And this
+[0:12:00] well as for identification. And this talk is going to be mostly focused on
+[0:12:03] talk is going to be mostly focused on posing different estimands and their
+[0:12:04] posing different estimands and their interpretation, but I will allude a
+[0:12:06] interpretation, but I will allude a little bit to practical issues around
+[0:12:09] little bit to practical issues around identification as well.
+[0:12:12] identification as well. So, the key feature of this data
+[0:12:15] So, the key feature of this data structure that makes it effectively a
+[0:12:18] structure that makes it effectively a competing events data structure is the
+[0:12:20] competing events data structure is the fact that if an individual is known to
+[0:12:22] fact that if an individual is known to experience the competing event by say a
+[0:12:25] experience the competing event by say a particular time index K without having
+[0:12:27] particular time index K without having failed of the event of interest, then
+[0:12:30] failed of the event of interest, then deterministically the whole Y future
+[0:12:33] deterministically the whole Y future will by definition be deterministically
+[0:12:36] will by definition be deterministically zero. So, this is just a feature of the
+[0:12:38] zero. So, this is just a feature of the factual world. This future is not
+[0:12:40] factual world. This future is not missing, it's just deterministically
+[0:12:43] missing, it's just deterministically zero. This is just what happens when you
+[0:12:45] zero. This is just what happens when you die of a heart attack, you cannot
+[0:12:46] die of a heart attack, you cannot subsequently die of prostate cancer.
+[0:12:51] subsequently die of prostate cancer. So, now that we understand that the data
+[0:12:53] So, now that we understand that the data structure we have, um, let's go back to
+[0:12:56] structure we have, um, let's go back to the causal question to at least to the
+[0:12:57] the causal question to at least to the degree that in our hypothetical scenario
+[0:13:00] degree that in our hypothetical scenario it was articulated so far. So, all we
+[0:13:02] it was articulated so far. So, all we know is that the investigators are
+[0:13:04] know is that the investigators are interested in the effect of effectively
+[0:13:06] interested in the effect of effectively the effect of A on Y at some by some
+[0:13:09] the effect of A on Y at some by some time K. Um, and there are many, many
+[0:13:12] time K. Um, and there are many, many ways to possibly define a causal effect
+[0:13:14] ways to possibly define a causal effect like this. Um, this statement doesn't
+[0:13:16] like this. Um, this statement doesn't fully clarify what the investigators
+[0:13:19] fully clarify what the investigators full intent is, um, what what the
+[0:13:21] full intent is, um, what what the investigator wishes to learn from from
+[0:13:24] investigator wishes to learn from from this trial. And as we'll see, um,
+[0:13:26] this trial. And as we'll see, um, this it's there's reasons to believe
+[0:13:29] this it's there's reasons to believe that um, there there are a number of
+[0:13:31] that um, there there are a number of possibilities.
+[0:13:33] possibilities. So, before we go any further, I want to
+[0:13:36] So, before we go any further, I want to just like we sort of have a concrete
+[0:13:38] just like we sort of have a concrete definition of a competing event, I also
+[0:13:40] definition of a competing event, I also want to have a concrete definition of
+[0:13:42] want to have a concrete definition of what I mean when I say causal causal
+[0:13:44] what I mean when I say causal causal effect here because people can mean
+[0:13:46] effect here because people can mean different things. Um, what I mean here
+[0:13:49] different things. Um, what I mean here is a contrast of counterfactual outcome
+[0:13:51] is a contrast of counterfactual outcome distributions in the same individuals,
+[0:13:54] distributions in the same individuals, but under different treatments. And so,
+[0:13:56] but under different treatments. And so, by restricting to this definition, um,
+[0:13:59] by restricting to this definition, um, any contrast that we consider, the only
+[0:14:01] any contrast that we consider, the only explanation for a difference can be due
+[0:14:03] explanation for a difference can be due to the treatment and not to comparing
+[0:14:06] to the treatment and not to comparing different groups of individuals.
+[0:14:10] different groups of individuals. So, let's um, let's start out with
+[0:14:12] So, let's um, let's start out with thinking about a con- a counterfactual
+[0:14:14] thinking about a con- a counterfactual contrast in the sort of well-established
+[0:14:18] contrast in the sort of well-established uh, cause-specific cumulative incidence
+[0:14:21] uh, cause-specific cumulative incidence where cause-specific here refers to the
+[0:14:23] where cause-specific here refers to the cause of failure, not to the to the
+[0:14:25] cause of failure, not to the to the treatment as a as a cause. So, so just
+[0:14:29] treatment as a as a cause. So, so just in this discrete um, sort of time
+[0:14:31] in this discrete um, sort of time structure which I do intentionally to
+[0:14:33] structure which I do intentionally to sort of keep things simple cuz nothing
+[0:14:35] sort of keep things simple cuz nothing changes about the interpretation here
+[0:14:37] changes about the interpretation here fundamentally and it just sometimes
+[0:14:39] fundamentally and it just sometimes helps people to to understand these
+[0:14:41] helps people to to understand these concepts better.
+[0:14:42] concepts better. So, a cause-specific cumulative
+[0:14:44] So, a cause-specific cumulative incidence for the cause of failure that
+[0:14:48] incidence for the cause of failure that the investigators have articulated their
+[0:14:50] the investigators have articulated their interest in, in this example, prostate
+[0:14:52] interest in, in this example, prostate cancer death, um,
+[0:14:55] cancer death, um, is simply we can simply understand it at
+[0:14:57] is simply we can simply understand it at any particular time is the probability
+[0:14:59] any particular time is the probability that YK equals 1. That's it. So, in our
+[0:15:02] that YK equals 1. That's it. So, in our example, this is just the probability of
+[0:15:04] example, this is just the probability of dying due to prostate cancer by a
+[0:15:06] dying due to prostate cancer by a particular time. I index here just the
+[0:15:08] particular time. I index here just the last time, but depending on our
+[0:15:10] last time, but depending on our interest, we could put any any time
+[0:15:12] interest, we could put any any time index here. So, a counterfactual
+[0:15:14] index here. So, a counterfactual contrast in this would just be
+[0:15:17] contrast in this would just be uh, the probability that Y equals 1 by a
+[0:15:19] uh, the probability that Y equals 1 by a particular time had everyone received
+[0:15:21] particular time had everyone received estrogen versus say had everyone
+[0:15:24] estrogen versus say had everyone uh, received placebo. So, this is a very
+[0:15:26] uh, received placebo. So, this is a very familiar-looking type of causal effect
+[0:15:28] familiar-looking type of causal effect counterfactual target.
+[0:15:30] counterfactual target. It meets our definition of a causal
+[0:15:32] It meets our definition of a causal effect because it's comparing outcome
+[0:15:34] effect because it's comparing outcome distributions under different treatments
+[0:15:36] distributions under different treatments in the same people. This is referring to
+[0:15:38] in the same people. This is referring to the same population.
+[0:15:41] the same population. And now I'm going to sort of bring in
+[0:15:42] And now I'm going to sort of bring in identification just very briefly.
+[0:15:45] identification just very briefly. The reason that I referred to this sort
+[0:15:47] The reason that I referred to this sort of imaginary version of the study is
+[0:15:49] of imaginary version of the study is perfect because
+[0:15:51] perfect because under under this case, this
+[0:15:53] under under this case, this counterfactual guy is guaranteed
+[0:15:56] counterfactual guy is guaranteed effectively identified by simply this
+[0:15:59] effectively identified by simply this contrast in factual, which turn out to
+[0:16:02] contrast in factual, which turn out to be observed, probabilities. In this
+[0:16:04] be observed, probabilities. In this case, the probability that Y equals 1
+[0:16:06] case, the probability that Y equals 1 among those who actually received active
+[0:16:08] among those who actually received active treatment versus among those who um
+[0:16:12] treatment versus among those who um who received placebo. So, this is sort
+[0:16:15] who received placebo. So, this is sort of the classic case of association
+[0:16:17] of the classic case of association equals causation.
+[0:16:19] equals causation. And obviously very simple statistics
+[0:16:21] And obviously very simple statistics could be used to to estimate this in
+[0:16:23] could be used to to estimate this in this case. They just
+[0:16:25] this case. They just difference in sample
+[0:16:27] difference in sample proportions. So, why do we have so many
+[0:16:31] proportions. So, why do we have so many options in the competing risk
+[0:16:33] options in the competing risk literature? Why for example are the vast
+[0:16:36] literature? Why for example are the vast majority of studies analyzed using
+[0:16:38] majority of studies analyzed using cause-specific hazard
+[0:16:41] cause-specific hazard models? Why is that so strongly
+[0:16:42] models? Why is that so strongly advocated? And the problem if you sort
+[0:16:45] advocated? And the problem if you sort of read between the lines is that this
+[0:16:49] of read between the lines is that this this even though it's an effect, it's an
+[0:16:51] this even though it's an effect, it's an example of what in the causal mediation
+[0:16:53] example of what in the causal mediation literature we would typically call a
+[0:16:55] literature we would typically call a total effect in the sense that it
+[0:16:57] total effect in the sense that it captures all the paths, all the
+[0:16:59] captures all the paths, all the mechanisms by which the treatment
+[0:17:01] mechanisms by which the treatment affects the outcome of interest. And
+[0:17:04] affects the outcome of interest. And when competing events or intermediate
+[0:17:06] when competing events or intermediate events, this could be a reason that the
+[0:17:10] events, this could be a reason that the investigator would not be satisfied with
+[0:17:13] investigator would not be satisfied with with this. So, here's just a causal
+[0:17:15] with this. So, here's just a causal diagram representing a possible an
+[0:17:18] diagram representing a possible an example data generating assumption on
+[0:17:21] example data generating assumption on the data generating process in this sort
+[0:17:23] the data generating process in this sort of quote perfect trial. So, we draw no
+[0:17:26] of quote perfect trial. So, we draw no common causes between A and anything
+[0:17:28] common causes between A and anything else because of the randomization of A,
+[0:17:31] else because of the randomization of A, but of course we can't rule out that
+[0:17:32] but of course we can't rule out that there are not common causes of post
+[0:17:34] there are not common causes of post randomization treatment processes that
+[0:17:37] randomization treatment processes that we don't directly control. So, here we
+[0:17:40] we don't directly control. So, here we allow for example that there are shared
+[0:17:42] allow for example that there are shared common causes of the two different
+[0:17:44] common causes of the two different processes which we just denote by Z. And
+[0:17:47] processes which we just denote by Z. And we also could separate these from unique
+[0:17:50] we also could separate these from unique shared causes of just the say prostate
+[0:17:53] shared causes of just the say prostate cancer death process and the say
+[0:17:56] cancer death process and the say cardiovascular disease process which we
+[0:17:58] cardiovascular disease process which we denote by UY and UD. And all of these
+[0:18:01] denote by UY and UD. And all of these common causes will come into play
+[0:18:04] common causes will come into play in in in in later on, but for now I just
+[0:18:07] in in in in later on, but for now I just want to focus on
+[0:18:09] want to focus on these blue arrows which sort of depict
+[0:18:12] these blue arrows which sort of depict that deterministic defining feature of
+[0:18:15] that deterministic defining feature of the competing events data structure that
+[0:18:17] the competing events data structure that if D equals 1, then future Y must take
+[0:18:21] if D equals 1, then future Y must take the value zero. And when we cannot rule
+[0:18:24] the value zero. And when we cannot rule out based on our working subject matter
+[0:18:26] out based on our working subject matter knowledge that there also arrows from A
+[0:18:29] knowledge that there also arrows from A to D nodes that are not intersected by
+[0:18:32] to D nodes that are not intersected by Y, then the total effect is going to
+[0:18:35] Y, then the total effect is going to capture paths from A to Y that flow
+[0:18:38] capture paths from A to Y that flow through these effectively deterministic
+[0:18:42] through these effectively deterministic blue arrows.
+[0:18:44] blue arrows. And so, to bring this back to the
+[0:18:45] And so, to bring this back to the example, so estrogen therapy we
+[0:18:48] example, so estrogen therapy we reanalyzed this data, estrogen therapy
+[0:18:51] reanalyzed this data, estrogen therapy was found to protect or we estimate it
+[0:18:54] was found to protect or we estimate it protects against prostate cancer death
+[0:18:56] protects against prostate cancer death on the scale of the total effect. In
+[0:18:57] on the scale of the total effect. In other words, comparing estimates of the
+[0:19:00] other words, comparing estimates of the cause specific cumulative incidence
+[0:19:02] cause specific cumulative incidence function. So, this just shows we did
+[0:19:04] function. So, this just shows we did this with a few different estimators.
+[0:19:06] this with a few different estimators. You can ignore that to deal with loss to
+[0:19:08] You can ignore that to deal with loss to follow up which did not matter in this
+[0:19:10] follow up which did not matter in this example, Um, we see that at least we
+[0:19:12] example, Um, we see that at least we estimate that consistently over time the
+[0:19:16] estimate that consistently over time the cause-specific cumulative incidence for
+[0:19:17] cause-specific cumulative incidence for prostate cancer uh death is consistently
+[0:19:20] prostate cancer uh death is consistently higher under uh placebo than under
+[0:19:23] higher under uh placebo than under treatment.
+[0:19:25] treatment. But we find the reverse when we look at
+[0:19:27] But we find the reverse when we look at the total effect thinking about the
+[0:19:29] the total effect thinking about the cause-specific cumulative incidence for
+[0:19:32] cause-specific cumulative incidence for other deaths, say cardiovascular
+[0:19:34] other deaths, say cardiovascular disease. So, we see a reverse of almost
+[0:19:37] disease. So, we see a reverse of almost in equal magnitude flip of the curves.
+[0:19:41] in equal magnitude flip of the curves. We see consistently that we estimate the
+[0:19:43] We see consistently that we estimate the cause-specific cumulative incidence of
+[0:19:45] cause-specific cumulative incidence of other death is consistently higher under
+[0:19:47] other death is consistently higher under active uh treatment. And this um
+[0:19:51] active uh treatment. And this um raises some questions that would raise
+[0:19:54] raises some questions that would raise some concern when thinking about the um
+[0:19:57] some concern when thinking about the um underlying subject matter and about
+[0:19:58] underlying subject matter and about potential mechanisms of this treatment.
+[0:20:01] potential mechanisms of this treatment. So, neither of these total effects allow
+[0:20:05] So, neither of these total effects allow us to distinguish between any of the
+[0:20:07] us to distinguish between any of the following scenarios. They don't tell us
+[0:20:09] following scenarios. They don't tell us whether, say, the protective effect of
+[0:20:12] whether, say, the protective effect of treatment on prostate cancer death is
+[0:20:15] treatment on prostate cancer death is due only to, say, a desirable action of
+[0:20:18] due only to, say, a desirable action of estrogen that prohibits proliferation of
+[0:20:20] estrogen that prohibits proliferation of prostate cancer cells, or it could Could
+[0:20:24] prostate cancer cells, or it could Could this be due only to an action of
+[0:20:26] this be due only to an action of estrogen that just kills people off due
+[0:20:28] estrogen that just kills people off due to heart attacks? We cannot distinguish
+[0:20:31] to heart attacks? We cannot distinguish that based on I actually either of those
+[0:20:34] that based on I actually either of those total effects, based on the uh total
+[0:20:37] total effects, based on the uh total effect on prostate cancer death or other
+[0:20:39] effect on prostate cancer death or other death, because total effects do not
+[0:20:41] death, because total effects do not quantify anything about mechanism. Um,
+[0:20:44] quantify anything about mechanism. Um, so if the investigators do care about
+[0:20:47] so if the investigators do care about this, the knowledge of the total effects
+[0:20:50] this, the knowledge of the total effects is insufficient. So, even though this
+[0:20:52] is insufficient. So, even though this was a perfect trial and we can estimate
+[0:20:54] was a perfect trial and we can estimate a causal effect, this particular causal
+[0:20:57] a causal effect, this particular causal effect will not allow us to distinguish
+[0:20:59] effect will not allow us to distinguish between these scenarios, and something
+[0:21:01] between these scenarios, and something else will have to be put on top of this
+[0:21:03] else will have to be put on top of this to interpret it, even if it's just an
+[0:21:05] to interpret it, even if it's just an assumption about how these treatment
+[0:21:08] assumption about how these treatment works.
+[0:21:09] works. So, I want to clarify this because I've
+[0:21:11] So, I want to clarify this because I've given this talk a number of times and
+[0:21:13] given this talk a number of times and I've learned a lot from the from the
+[0:21:15] I've learned a lot from the from the reactions. I'm not giving a
+[0:21:17] reactions. I'm not giving a recommendation in this talk on what you
+[0:21:20] recommendation in this talk on what you should estimate. Um I'm not saying don't
+[0:21:22] should estimate. Um I'm not saying don't estimate the total effect. For example,
+[0:21:24] estimate the total effect. For example, if you take the perspective that I
+[0:21:27] if you take the perspective that I refuse to try to answer anything that I
+[0:21:29] refuse to try to answer anything that I cannot answer directly from a trial
+[0:21:31] cannot answer directly from a trial where the assumptions would be
+[0:21:32] where the assumptions would be guaranteed um
+[0:21:35] guaranteed um in the trial that I did, but what I'm
+[0:21:37] in the trial that I did, but what I'm saying is that we can't um dilute
+[0:21:40] saying is that we can't um dilute ourselves into interpreting it in a
+[0:21:42] ourselves into interpreting it in a different way than we should. So, if the
+[0:21:45] different way than we should. So, if the investigator is satisfied with the total
+[0:21:47] investigator is satisfied with the total effect, then then you're good. If
+[0:21:49] effect, then then you're good. If they're not, then you need to think
+[0:21:51] they're not, then you need to think about something else. And crucially,
+[0:21:53] about something else. And crucially, anything else we consider that would
+[0:21:55] anything else we consider that would quantify mechanism will not be
+[0:21:57] quantify mechanism will not be guaranteed identified even in this
+[0:21:59] guaranteed identified even in this perfect trial. We would have to think
+[0:22:01] perfect trial. We would have to think about what is the desired target and
+[0:22:03] about what is the desired target and like we always have to do in causal
+[0:22:05] like we always have to do in causal inference, reason from that using
+[0:22:07] inference, reason from that using assumptions encoded in our our causal
+[0:22:10] assumptions encoded in our our causal model to claim that we can identify it
+[0:22:12] model to claim that we can identify it and then we can think about statistics.
+[0:22:15] and then we can think about statistics. Um so again, this talk is focused on
+[0:22:16] Um so again, this talk is focused on more the first part of that task.
+[0:22:20] more the first part of that task. So, what are our options then for a
+[0:22:23] So, what are our options then for a measure of direct effect in this case?
+[0:22:25] measure of direct effect in this case? And what I want to start with is a
+[0:22:27] And what I want to start with is a widely popular measure, probably the
+[0:22:30] widely popular measure, probably the most popular measure used in the
+[0:22:32] most popular measure used in the analysis of competing risk data that I
+[0:22:35] analysis of competing risk data that I believe is so popular because it is
+[0:22:37] believe is so popular because it is being interpreted as a direct treatment
+[0:22:39] being interpreted as a direct treatment effect that does not capture this what
+[0:22:42] effect that does not capture this what I've started calling a pathological
+[0:22:44] I've started calling a pathological mediation by competing events, but
+[0:22:47] mediation by competing events, but actually does not meet our definition of
+[0:22:49] actually does not meet our definition of a causal effect. And that's the
+[0:22:50] a causal effect. And that's the cause-specific hazard ratio. So, many
+[0:22:53] cause-specific hazard ratio. So, many authors um have strongly advocated for
+[0:22:56] authors um have strongly advocated for reporting a cause-specific hazard ratio
+[0:22:59] reporting a cause-specific hazard ratio when competing events are present and
+[0:23:01] when competing events are present and interest is in quote ideology. Um and
+[0:23:04] interest is in quote ideology. Um and the problem is that hazard ratios in
+[0:23:06] the problem is that hazard ratios in general, regardless of whether they're
+[0:23:08] general, regardless of whether they're cause specific or otherwise, are not
+[0:23:10] cause specific or otherwise, are not causal effects at least in the sense
+[0:23:12] causal effects at least in the sense that we define them, meaning contrasting
+[0:23:15] that we define them, meaning contrasting counterfactual outcomes um
+[0:23:18] counterfactual outcomes um under different treatments, but in the
+[0:23:19] under different treatments, but in the same units, the same uh population, the
+[0:23:21] same units, the same uh population, the same individuals. And even when they
+[0:23:24] same individuals. And even when they contrast counterfactual uh hazards,
+[0:23:27] contrast counterfactual uh hazards, additional assumptions are always going
+[0:23:29] additional assumptions are always going to be needed to equate a hazard
+[0:23:31] to be needed to equate a hazard comparison, even a counterfactual one,
+[0:23:34] comparison, even a counterfactual one, to some causal effect. And importantly,
+[0:23:36] to some causal effect. And importantly, these assumptions are generally going to
+[0:23:38] these assumptions are generally going to be beyond what we need to actually
+[0:23:41] be beyond what we need to actually identify and estimate an actual direct
+[0:23:44] identify and estimate an actual direct effect, which we haven't even yet
+[0:23:45] effect, which we haven't even yet defined. Um
+[0:23:48] defined. Um So, just for those of you who are not
+[0:23:50] So, just for those of you who are not that familiar with some of these terms
+[0:23:51] that familiar with some of these terms from the competing risk literature, what
+[0:23:53] from the competing risk literature, what is a cause-specific hazard ratio or
+[0:23:56] is a cause-specific hazard ratio or hazard? A cause-specific hazard is just
+[0:23:59] hazard? A cause-specific hazard is just um again, using this more simplistic uh
+[0:24:02] um again, using this more simplistic uh discrete-time event process notation,
+[0:24:05] discrete-time event process notation, can just be understood as the
+[0:24:06] can just be understood as the probability for when we say
+[0:24:08] probability for when we say cause-specific, meaning the cause of
+[0:24:11] cause-specific, meaning the cause of failure of interest, would just be the
+[0:24:13] failure of interest, would just be the probability of failing due to the event
+[0:24:16] probability of failing due to the event of interest by a particular time among
+[0:24:19] of interest by a particular time among those who survived all previous causes
+[0:24:21] those who survived all previous causes of failure, including the due to the
+[0:24:24] of failure, including the due to the event of interest and the competing
+[0:24:26] event of interest and the competing events. So, in this in our example, this
+[0:24:27] events. So, in this in our example, this would just be those who survived all
+[0:24:29] would just be those who survived all causes who are alive up to the previous
+[0:24:32] causes who are alive up to the previous time. Um so, this does not meet our
+[0:24:35] time. Um so, this does not meet our definition of a causal effect in the
+[0:24:37] definition of a causal effect in the sense that a counterfactual contrast in
+[0:24:39] sense that a counterfactual contrast in this is comparing counterfactual
+[0:24:41] this is comparing counterfactual outcomes under different treatments
+[0:24:43] outcomes under different treatments equals one versus equals zero, but in
+[0:24:46] equals one versus equals zero, but in different sets of individuals. So, this
+[0:24:48] different sets of individuals. So, this is those who would survive all causes
+[0:24:50] is those who would survive all causes under treatment, and this is those who
+[0:24:53] under treatment, and this is those who would survive all causes under placebo.
+[0:24:55] would survive all causes under placebo. And in general, these will be different
+[0:24:57] And in general, these will be different groups of people, particularly when
+[0:24:59] groups of people, particularly when treatment has any effect on D or Y.
+[0:25:03] treatment has any effect on D or Y. Um,
+[0:25:04] Um, the subdistribution hazard, the other
+[0:25:07] the subdistribution hazard, the other very popular measure that I that I
+[0:25:09] very popular measure that I that I mentioned, although not as widely used,
+[0:25:11] mentioned, although not as widely used, but widely considered and sort of
+[0:25:13] but widely considered and sort of competing with textbooks, um, has the
+[0:25:16] competing with textbooks, um, has the same problem in the sense that again,
+[0:25:18] same problem in the sense that again, this is conditioning on different sets
+[0:25:20] this is conditioning on different sets of people, but um, the subdistribution
+[0:25:23] of people, but um, the subdistribution hazard differs from the cause-specific
+[0:25:24] hazard differs from the cause-specific hazard in that it's marginal with
+[0:25:27] hazard in that it's marginal with respect to D. So, effectively, this does
+[0:25:29] respect to D. So, effectively, this does not actually solve the problem that led
+[0:25:32] not actually solve the problem that led us away from the total effect in the
+[0:25:34] us away from the total effect in the first place. Um, so, we're just going to
+[0:25:37] first place. Um, so, we're just going to move on from this because it doesn't
+[0:25:38] move on from this because it doesn't even capture direct effects if that was
+[0:25:41] even capture direct effects if that was the the goal. Um,
+[0:25:44] the the goal. Um, so, there are, as I said, conditions
+[0:25:46] so, there are, as I said, conditions under which we could equate a
+[0:25:48] under which we could equate a cause-specific hazard contrast to a
+[0:25:50] cause-specific hazard contrast to a causal effect. One trivial example would
+[0:25:53] causal effect. One trivial example would again just be under the null. We could
+[0:25:55] again just be under the null. We could just remove move the A labels from both
+[0:25:56] just remove move the A labels from both sides, and now we are comparing the same
+[0:25:59] sides, and now we are comparing the same populations. Of course, we don't
+[0:26:01] populations. Of course, we don't typically
+[0:26:02] typically uh, fund trials to um,
+[0:26:06] uh, fund trials to um, under the assumption that there's no
+[0:26:07] under the assumption that there's no treatment effect, so this is sort of a
+[0:26:09] treatment effect, so this is sort of a again, an over-trivial um, type of
+[0:26:12] again, an over-trivial um, type of assumption. Another special case could
+[0:26:14] assumption. Another special case could be um, if we if we could measure and
+[0:26:18] be um, if we if we could measure and adjust for, in this example, all of the
+[0:26:21] adjust for, in this example, all of the common causes on this graph, and um, in
+[0:26:24] common causes on this graph, and um, in some sense, condition on them, then um,
+[0:26:27] some sense, condition on them, then um, a statistic that went after something
+[0:26:29] a statistic that went after something like that could potentially be given um,
+[0:26:32] like that could potentially be given um, a causal interpretation. But again, the
+[0:26:35] a causal interpretation. But again, the point is that we haven't even yet
+[0:26:36] point is that we haven't even yet defined what that interpretation could
+[0:26:39] defined what that interpretation could be, and if it's what the investigator
+[0:26:41] be, and if it's what the investigator would want. And in fact, if we started
+[0:26:44] would want. And in fact, if we started with a number of candidates for an
+[0:26:46] with a number of candidates for an actual direct effect, none of those
+[0:26:48] actual direct effect, none of those candidates would require worrying about
+[0:26:50] candidates would require worrying about those unique event-specific common
+[0:26:53] those unique event-specific common causes U I
+[0:26:55] causes U I N U D they would only rely on
+[0:26:58] N U D they would only rely on measuring and adjusting for the shared
+[0:27:00] measuring and adjusting for the shared causes Z. So, we're sort of shooting
+[0:27:03] causes Z. So, we're sort of shooting ourselves in the foot from the beginning
+[0:27:05] ourselves in the foot from the beginning if we start with a cause-specific hazard
+[0:27:07] if we start with a cause-specific hazard ratio. Again, there may be special cases
+[0:27:10] ratio. Again, there may be special cases where that makes sense, but in general,
+[0:27:12] where that makes sense, but in general, it's better to start with a clear notion
+[0:27:14] it's better to start with a clear notion of effect.
+[0:27:16] of effect. And I just want to point out that a very
+[0:27:18] And I just want to point out that a very practical um
+[0:27:20] practical um implication of this is just again, if
+[0:27:22] implication of this is just again, if we're if we're planning a trial and
+[0:27:24] we're if we're planning a trial and there is a strong possibility that the
+[0:27:27] there is a strong possibility that the total effect interpretation may be
+[0:27:30] total effect interpretation may be compromised by this, then it's important
+[0:27:32] compromised by this, then it's important to think about what what the
+[0:27:34] to think about what what the investigators really do want to know,
+[0:27:36] investigators really do want to know, and that could end up requiring thinking
+[0:27:38] and that could end up requiring thinking about measuring covariates at the same
+[0:27:41] about measuring covariates at the same level that we would have to think about
+[0:27:43] level that we would have to think about that with an observational study.
+[0:27:46] that with an observational study. So, if we're not interested in a hazard
+[0:27:48] So, if we're not interested in a hazard ratio and we're not um
+[0:27:50] ratio and we're not um where where we we've rejected a total
+[0:27:52] where where we we've rejected a total effect, then what are options with
+[0:27:55] effect, then what are options with branding and analysis? And there are a
+[0:27:57] branding and analysis? And there are a few things that we might look to the
+[0:27:59] few things that we might look to the causal inference literature to apply to
+[0:28:02] causal inference literature to apply to this problem. So, for example, what if
+[0:28:05] this problem. So, for example, what if instead of the total effect, we
+[0:28:07] instead of the total effect, we considered a contrast a similar contrast
+[0:28:10] considered a contrast a similar contrast in the probability that Y equals 1 under
+[0:28:13] in the probability that Y equals 1 under A equals 1 versus A equals 0, but
+[0:28:15] A equals 1 versus A equals 0, but relative to a world where we could fix
+[0:28:18] relative to a world where we could fix the
+[0:28:19] the competing event process throughout to
+[0:28:21] competing event process throughout to just be zero. In other words, eliminate
+[0:28:23] just be zero. In other words, eliminate competing events. This turns out to be a
+[0:28:26] competing events. This turns out to be a special case of the controlled direct
+[0:28:29] special case of the controlled direct effect first posed by Robinson Greenland
+[0:28:32] effect first posed by Robinson Greenland from the mediation literature,
+[0:28:34] from the mediation literature, and it also coincides with a
+[0:28:36] and it also coincides with a counterfactual contrast with that other
+[0:28:39] counterfactual contrast with that other popular measure from that you can find
+[0:28:41] popular measure from that you can find in competing risk textbooks, a marginal
+[0:28:43] in competing risk textbooks, a marginal cumulative incidence or net risk. And
+[0:28:45] cumulative incidence or net risk. And one convenient property of of this is
+[0:28:48] one convenient property of of this is that if we started with this target, um
+[0:28:50] that if we started with this target, um aside from being an actual meeting our
+[0:28:53] aside from being an actual meeting our definition of a causal effect and not
+[0:28:56] definition of a causal effect and not capturing those undesirable mechanisms,
+[0:28:59] capturing those undesirable mechanisms, if you will, via competing events, um it
+[0:29:02] if you will, via competing events, um it also will lead us down if we sort of
+[0:29:04] also will lead us down if we sort of thought through assumptions, it could
+[0:29:05] thought through assumptions, it could lead us down to sort of popular familiar
+[0:29:08] lead us down to sort of popular familiar statistics for right sensor data, where
+[0:29:10] statistics for right sensor data, where effectively we're just treating
+[0:29:12] effectively we're just treating competing events exactly like we would
+[0:29:14] competing events exactly like we would say loss
+[0:29:15] say loss to follow up. So, that's very appealing.
+[0:29:18] to follow up. So, that's very appealing. Um another uh sort of popular measure
+[0:29:21] Um another uh sort of popular measure from the mediation literature that maybe
+[0:29:23] from the mediation literature that maybe we could sort of naively try to apply
+[0:29:25] we could sort of naively try to apply here might be the natural direct effect,
+[0:29:28] here might be the natural direct effect, which has um indirect analogs. So, maybe
+[0:29:31] which has um indirect analogs. So, maybe we could um think about a counterfactual
+[0:29:33] we could um think about a counterfactual contrast under A equals 1 versus A
+[0:29:36] contrast under A equals 1 versus A equals 0, but instead of where we fix D
+[0:29:39] equals 0, but instead of where we fix D bar to be 0, instead we assign the
+[0:29:41] bar to be 0, instead we assign the competing event process to be that um
+[0:29:44] competing event process to be that um under uh placebo. So, that would be sort
+[0:29:47] under uh placebo. So, that would be sort of a direct application of the
+[0:29:48] of a direct application of the definition of the natural direct effect,
+[0:29:50] definition of the natural direct effect, where we think of the mediate the where
+[0:29:52] where we think of the mediate the where the D bar process is our time-varying
+[0:29:55] the D bar process is our time-varying mediator. And then finally, we have the
+[0:29:57] mediator. And then finally, we have the survivor average causal effect, which
+[0:29:59] survivor average causal effect, which would be another All three of these
+[0:30:01] would be another All three of these share the property that they again all
+[0:30:03] share the property that they again all meet our definition of a causal effect.
+[0:30:05] meet our definition of a causal effect. All of them would sort of avoid paths um
+[0:30:10] All of them would sort of avoid paths um from A to Y via D effectively. Um the
+[0:30:13] from A to Y via D effectively. Um the survivor average causal effect would
+[0:30:15] survivor average causal effect would refer though to a subset of the original
+[0:30:18] refer though to a subset of the original population who would never experience
+[0:30:20] population who would never experience the competing event regardless of
+[0:30:22] the competing event regardless of treatment. So, this is So, all three of
+[0:30:25] treatment. So, this is So, all three of these sort of share the potential issue
+[0:30:27] these sort of share the potential issue if you were to really push an
+[0:30:29] if you were to really push an investigator to tell you, "Why did you
+[0:30:31] investigator to tell you, "Why did you design this trial? What are you trying
+[0:30:33] design this trial? What are you trying to inform?" All of these estimands
+[0:30:35] to inform?" All of these estimands really don't have a direct translation
+[0:30:38] really don't have a direct translation into the real world. These clearly do
+[0:30:40] into the real world. These clearly do not in the sense that we cannot
+[0:30:42] not in the sense that we cannot eliminate death, we cannot directly
+[0:30:44] eliminate death, we cannot directly manipulate competing events, and
+[0:30:46] manipulate competing events, and certainly when we give people a equals
+[0:30:48] certainly when we give people a equals one, we don't get to observe what their
+[0:30:51] one, we don't get to observe what their competing event process would be under a
+[0:30:52] competing event process would be under a equals zero. And this guy here, for
+[0:30:55] equals zero. And this guy here, for example, if A has a very strong effect
+[0:30:57] example, if A has a very strong effect on D, who are these people? Are they
+[0:31:00] on D, who are these people? Are they highly unusual? Is this Are do they even
+[0:31:02] highly unusual? Is this Are do they even exist? Is this really the group of Is
+[0:31:06] exist? Is this really the group of Is Were the investigators really only
+[0:31:08] Were the investigators really only interested in in this particular group?
+[0:31:10] interested in in this particular group? So, arguably the
+[0:31:12] So, arguably the policy clinical relevance of these
+[0:31:14] policy clinical relevance of these targets could be questionable.
+[0:31:16] targets could be questionable. So, now we've sort of led ourselves to a
+[0:31:19] So, now we've sort of led ourselves to a dead end. The investigator tells us,
+[0:31:22] dead end. The investigator tells us, like, "No, now that you've explained to
+[0:31:23] like, "No, now that you've explained to me what the total effect is, I don't
+[0:31:25] me what the total effect is, I don't want that. Now you've given me all these
+[0:31:27] want that. Now you've given me all these other potential definitions of direct
+[0:31:29] other potential definitions of direct effect. No, that's not what I wanted."
+[0:31:31] effect. No, that's not what I wanted." So, now what do you do? Well, I think
+[0:31:33] So, now what do you do? Well, I think I've come to the conclusion that the
+[0:31:34] I've come to the conclusion that the investigator has to tell you then what
+[0:31:37] investigator has to tell you then what what they want. But what leads us to
+[0:31:40] what they want. But what leads us to sort of this new class of effects, which
+[0:31:43] sort of this new class of effects, which we now term the separable effects,
+[0:31:45] we now term the separable effects, really has come out of investigators
+[0:31:49] really has come out of investigators telling these stories about what they're
+[0:31:51] telling these stories about what they're actually interested in, which is which
+[0:31:54] actually interested in, which is which is why they may be
+[0:31:56] is why they may be a useful thing to start thinking about.
+[0:31:59] a useful thing to start thinking about. And the first story example of the story
+[0:32:02] And the first story example of the story is from
+[0:32:03] is from a chapter by Robins and Richardson from
+[0:32:05] a chapter by Robins and Richardson from 2010,
+[0:32:07] 2010, where they recounted a story told by
+[0:32:09] where they recounted a story told by Pearl,
+[0:32:10] Pearl, where he was trying to defend the
+[0:32:12] where he was trying to defend the clinical or actionable relevance of
+[0:32:15] clinical or actionable relevance of natural effects in a quote usual
+[0:32:17] natural effects in a quote usual mediation setting. So, this was not
+[0:32:20] mediation setting. So, this was not discussing competing events at all, it
+[0:32:21] discussing competing events at all, it was just sort of a quote typical
+[0:32:24] was just sort of a quote typical mediation problem, where the example was
+[0:32:26] mediation problem, where the example was interest in the direct and indirect
+[0:32:29] interest in the direct and indirect effect, the natural direct and indirect
+[0:32:30] effect, the natural direct and indirect effect of smoking on MI relative to
+[0:32:33] effect of smoking on MI relative to blood pressure. And so, to sort of
+[0:32:35] blood pressure. And so, to sort of defend the clinical relevance or
+[0:32:37] defend the clinical relevance or explain, inform what could be clinically
+[0:32:40] explain, inform what could be clinically relevant from what we learn about
+[0:32:43] relevant from what we learn about natural effects from a study. Um, he
+[0:32:46] natural effects from a study. Um, he told a story about effects of a modified
+[0:32:48] told a story about effects of a modified cigarette, which could be tested in a
+[0:32:50] cigarette, which could be tested in a four-arm trial where individuals are not
+[0:32:53] four-arm trial where individuals are not only randomized to the current A equals
+[0:32:55] only randomized to the current A equals zero and A equals one, A equals zero
+[0:32:57] zero and A equals one, A equals zero being not smoking and A equals one being
+[0:33:00] being not smoking and A equals one being smoking current cigarettes, but consider
+[0:33:03] smoking current cigarettes, but consider two additional arms where um individuals
+[0:33:06] two additional arms where um individuals are further other individuals are
+[0:33:07] are further other individuals are randomized to smoke a modified cigarette
+[0:33:10] randomized to smoke a modified cigarette with just nicotine removed, and then
+[0:33:12] with just nicotine removed, and then another one with just tobacco removed.
+[0:33:14] another one with just tobacco removed. And then he went on to tell a very
+[0:33:16] And then he went on to tell a very detailed story about the working assum-
+[0:33:19] detailed story about the working assum- current working assumptions on the
+[0:33:21] current working assumptions on the mechanisms by which tobacco and nicotine
+[0:33:24] mechanisms by which tobacco and nicotine directly and indirectly affect the
+[0:33:26] directly and indirectly affect the outcome of interest MI and the
+[0:33:28] outcome of interest MI and the intermediate um blood
+[0:33:31] intermediate um blood pressure and use that story to give an
+[0:33:33] pressure and use that story to give an argument how comparisons of outcomes
+[0:33:36] argument how comparisons of outcomes across these four arms could um quantify
+[0:33:41] across these four arms could um quantify something that would be meaningfully
+[0:33:42] something that would be meaningfully interpreted as a direct or indirect
+[0:33:44] interpreted as a direct or indirect effect of smoking um
+[0:33:46] effect of smoking um via blood pressure on MI, but Robins and
+[0:33:49] via blood pressure on MI, but Robins and Richardson pointed out this is not a
+[0:33:51] Richardson pointed out this is not a story about natural effects. This is a
+[0:33:53] story about natural effects. This is a story about a modified treatment effect,
+[0:33:55] story about a modified treatment effect, a modified version of the original
+[0:33:58] a modified version of the original study treatment, and to estimate this
+[0:34:00] study treatment, and to estimate this type of effect would require a different
+[0:34:02] type of effect would require a different thought process for identification um
+[0:34:06] thought process for identification um and to decide how to get to uh
+[0:34:08] and to decide how to get to uh statistics, for example, what types of
+[0:34:10] statistics, for example, what types of covariates would need to be adjust for
+[0:34:12] covariates would need to be adjust for adjusted for, and then what would those
+[0:34:14] adjusted for, and then what would those ultimate statistics um
+[0:34:16] ultimate statistics um look like. And so coming back to
+[0:34:19] look like. And so coming back to competing events, Vanessa Didelez um
+[0:34:22] competing events, Vanessa Didelez um extended this idea posed by Robins and
+[0:34:24] extended this idea posed by Robins and Richardson to the case of sur- survival
+[0:34:26] Richardson to the case of sur- survival outcomes with a time-varying mediator,
+[0:34:29] outcomes with a time-varying mediator, which comes very close to where we are
+[0:34:31] which comes very close to where we are now, and Mats Stensrud um made this leap
+[0:34:35] now, and Mats Stensrud um made this leap to see that um hey, if we thought about
+[0:34:38] to see that um hey, if we thought about this time-varying mediator as the D
+[0:34:40] this time-varying mediator as the D process, which has this very particular
+[0:34:43] process, which has this very particular deterministic relationship with the
+[0:34:45] deterministic relationship with the outcome, that now we have a new way of
+[0:34:47] outcome, that now we have a new way of thinking about um
+[0:34:49] thinking about um uh direct and and indirect effects for
+[0:34:51] uh direct and and indirect effects for this um very relevant mediator, where
+[0:34:54] this um very relevant mediator, where sometimes it's really hard to ignore
+[0:34:57] sometimes it's really hard to ignore interest in mediation. Um and so there's
+[0:35:00] interest in mediation. Um and so there's a number of sort of follow-on results
+[0:35:02] a number of sort of follow-on results that have come out of this um to both
+[0:35:05] that have come out of this um to both allow for a case, for example, on the
+[0:35:07] allow for a case, for example, on the graph I showed where there's an arrow
+[0:35:09] graph I showed where there's an arrow from the common cause uh from A to Z, um
+[0:35:13] from the common cause uh from A to Z, um and and giving different ways of
+[0:35:15] and and giving different ways of interpreting what we now call the
+[0:35:17] interpreting what we now call the separable effects in terms of the
+[0:35:19] separable effects in terms of the mechanisms on of A on the event of
+[0:35:22] mechanisms on of A on the event of interest um relative to the competing
+[0:35:25] interest um relative to the competing event process, and there are a number of
+[0:35:27] event process, and there are a number of other extensions, for example, what if
+[0:35:29] other extensions, for example, what if our outcome uh death is sort of a a
+[0:35:32] our outcome uh death is sort of a a ubiquitous problem even in non-survival
+[0:35:35] ubiquitous problem even in non-survival uh situation, say the outcome is birth
+[0:35:37] uh situation, say the outcome is birth weight, and you're studying fertility
+[0:35:39] weight, and you're studying fertility treatments, and some uh
+[0:35:42] treatments, and some uh some couples don't conceive, or they
+[0:35:44] some couples don't conceive, or they don't um have a live birth. How do you
+[0:35:46] don't um have a live birth. How do you define a causal effect of fertility
+[0:35:48] define a causal effect of fertility treatments on birth weight when that
+[0:35:50] treatments on birth weight when that outcome is not even defined, and
+[0:35:52] outcome is not even defined, and separable effects um can be even more uh
+[0:35:55] separable effects um can be even more uh central, I think, to that kind of
+[0:35:57] central, I think, to that kind of problem. And then we also have some new
+[0:35:59] problem. And then we also have some new results on uh quote recurrent events.
+[0:36:02] results on uh quote recurrent events. I don't know how I'm doing on time, but
+[0:36:03] I don't know how I'm doing on time, but feel free to cut me off. Okay. So, like
+[0:36:07] feel free to cut me off. Okay. So, like all prior notions of effects that
+[0:36:10] all prior notions of effects that quantify mechanisms that we're sort of
+[0:36:12] quantify mechanisms that we're sort of used to from the causal inference
+[0:36:14] used to from the causal inference literature, the controlled direct
+[0:36:15] literature, the controlled direct effect, natural effects, or even the
+[0:36:17] effect, natural effects, or even the safe, separable effects were will always
+[0:36:20] safe, separable effects were will always rely on stronger assumptions for
+[0:36:22] rely on stronger assumptions for identification
+[0:36:23] identification um than a total effect. And this is
+[0:36:26] um than a total effect. And this is something that's a little hard, I think,
+[0:36:28] something that's a little hard, I think, particularly for trialists to wrap their
+[0:36:30] particularly for trialists to wrap their heads around because we're sort of used
+[0:36:32] heads around because we're sort of used to relying on the randomization, but
+[0:36:34] to relying on the randomization, but again, this is a special case where the
+[0:36:37] again, this is a special case where the total effect may not be enough
+[0:36:40] total effect may not be enough inherently, and if we decide that we
+[0:36:43] inherently, and if we decide that we really do have to think about these
+[0:36:45] really do have to think about these necessary additional assumptions and
+[0:36:47] necessary additional assumptions and what that implies for even just for
+[0:36:49] what that implies for even just for covariate collection. But the
+[0:36:51] covariate collection. But the distinction between the separable
+[0:36:53] distinction between the separable effects, I think, and these historical
+[0:36:55] effects, I think, and these historical notions is that they can be applied in a
+[0:36:58] notions is that they can be applied in a much more real-world way, and again,
+[0:37:00] much more real-world way, and again, they really have naturally come out of
+[0:37:02] they really have naturally come out of rather than out of sort of a a
+[0:37:05] rather than out of sort of a a statistician's head, they've come out of
+[0:37:08] statistician's head, they've come out of very subject-matter driven stories about
+[0:37:11] very subject-matter driven stories about um what is actually of interest, and
+[0:37:13] um what is actually of interest, and Mats has been doing a nice job um
+[0:37:15] Mats has been doing a nice job um collecting up some of those stories. So,
+[0:37:17] collecting up some of those stories. So, Pearl did tell that story, but you can
+[0:37:19] Pearl did tell that story, but you can find a lot of sort of similar um
+[0:37:22] find a lot of sort of similar um descriptions and in discussion sections.
+[0:37:25] descriptions and in discussion sections. And so, one thing that um sometimes is
+[0:37:30] And so, one thing that um sometimes is is originally kind of viewed or felt as
+[0:37:33] is originally kind of viewed or felt as a limitation is that these explicitly
+[0:37:35] a limitation is that these explicitly rely on working knowledge of subject
+[0:37:37] rely on working knowledge of subject matter and very specific stories about
+[0:37:39] matter and very specific stories about mechanism. You sort of saw in that
+[0:37:42] mechanism. You sort of saw in that example that Pearl told a very detailed
+[0:37:44] example that Pearl told a very detailed story about how he thinks cigarettes
+[0:37:47] story about how he thinks cigarettes work on the mediator and the outcome.
+[0:37:49] work on the mediator and the outcome. And just steal stealing a line from
+[0:37:51] And just steal stealing a line from Thomas Richardson, um I think this
+[0:37:53] Thomas Richardson, um I think this should be viewed as a feature of the
+[0:37:56] should be viewed as a feature of the separable effects in the sense that it
+[0:37:58] separable effects in the sense that it forces to the forefront even when we're
+[0:38:01] forces to the forefront even when we're struggling with that story, um where
+[0:38:04] struggling with that story, um where there's thinking that remains, which
+[0:38:06] there's thinking that remains, which gives a chance for experts to debate and
+[0:38:09] gives a chance for experts to debate and refine stories or disagree with another
+[0:38:11] refine stories or disagree with another story, and just bring new new ideas. And
+[0:38:14] story, and just bring new new ideas. And the more clarity that we have on
+[0:38:15] the more clarity that we have on questions that we're that we're
+[0:38:17] questions that we're that we're motivating our studies with, which
+[0:38:19] motivating our studies with, which require resources, which require risk to
+[0:38:21] require resources, which require risk to patients, um we're going to get better
+[0:38:24] patients, um we're going to get better better answers out of them. So, if I
+[0:38:26] better answers out of them. So, if I still have time I Do I still have time?
+[0:38:28] still have time I Do I still have time? I can go through some of more of the the
+[0:38:30] I can go through some of more of the the details of separable effects or I can
+[0:38:32] details of separable effects or I can just kind of jump to some resources.
+[0:38:36] just kind of jump to some resources. Yeah, there's a question.
+[0:38:38] Yeah, there's a question. Yeah, there's a there's at least 6
+[0:38:40] Yeah, there's a there's at least 6 minutes or so if that's enough.
+[0:38:43] minutes or so if that's enough. Yeah, I'll go through I'll go through
+[0:38:44] Yeah, I'll go through I'll go through the rest of this. So, um, so so what are
+[0:38:48] the rest of this. So, um, so so what are what are the separable effects? How can
+[0:38:50] what are the separable effects? How can we define them? What kind of assumptions
+[0:38:53] we define them? What kind of assumptions would we need to think about here? So,
+[0:38:56] would we need to think about here? So, the first assumption we have to think
+[0:38:57] the first assumption we have to think about is what we call the modified
+[0:38:59] about is what we call the modified treatment assumption and to sort of
+[0:39:01] treatment assumption and to sort of think about this assumption, it does
+[0:39:03] think about this assumption, it does help to do the thought process that
+[0:39:05] help to do the thought process that Pearl did to think about a new study
+[0:39:08] Pearl did to think about a new study where instead of assigning A, we assign
+[0:39:11] where instead of assigning A, we assign combinations of
+[0:39:13] combinations of new treatments, let's call them AY and
+[0:39:16] new treatments, let's call them AY and AD, and the modified treatment
+[0:39:18] AD, and the modified treatment assumption just states that jointly
+[0:39:21] assumption just states that jointly assigning these two new treatments AY
+[0:39:23] assigning these two new treatments AY and AD to the same value A, so assigning
+[0:39:27] and AD to the same value A, so assigning AY and AD to one, um, leads to exactly
+[0:39:31] AY and AD to one, um, leads to exactly the same values of the future event
+[0:39:34] the same values of the future event process and I actually don't have here
+[0:39:36] process and I actually don't have here including their common causes had we
+[0:39:38] including their common causes had we assigned the original treatment to one,
+[0:39:41] assigned the original treatment to one, let's say. Or or we could replace that
+[0:39:43] let's say. Or or we could replace that with with zero. So, what this assumption
+[0:39:47] with with zero. So, what this assumption plays two roles. We need this assumption
+[0:39:49] plays two roles. We need this assumption for identification, which is what we're
+[0:39:51] for identification, which is what we're sort of used to thinking about
+[0:39:53] sort of used to thinking about assumptions for in causal inference, but
+[0:39:55] assumptions for in causal inference, but we also need this assumption in order to
+[0:39:58] we also need this assumption in order to interpret these separable effects, which
+[0:40:01] interpret these separable effects, which as we'll see are effects of joint
+[0:40:03] as we'll see are effects of joint interventions on these candidate
+[0:40:05] interventions on these candidate treatments AY and AD, as per capturing
+[0:40:08] treatments AY and AD, as per capturing particular mechanisms of the original
+[0:40:10] particular mechanisms of the original treatment A. And this So, this is a
+[0:40:13] treatment A. And this So, this is a strong assumption, there's no doubt, but
+[0:40:15] strong assumption, there's no doubt, but it could in principle be tested or
+[0:40:17] it could in principle be tested or falsified saying a future six-arm trial
+[0:40:20] falsified saying a future six-arm trial where you randomize A both levels of A
+[0:40:23] where you randomize A both levels of A and all levels all combinations of AY
+[0:40:25] and all levels all combinations of AY and AD. A special case where this will
+[0:40:28] and AD. A special case where this will hold
+[0:40:30] hold um is when AY and AD are physical
+[0:40:32] um is when AY and AD are physical decomposition of A as in Pearl story but
+[0:40:36] decomposition of A as in Pearl story but as we've um written about in some of
+[0:40:38] as we've um written about in some of these papers, this is not a requirement.
+[0:40:40] these papers, this is not a requirement. So, not being able to think about a
+[0:40:42] So, not being able to think about a physical decomposition of A is not does
+[0:40:45] physical decomposition of A is not does not preclude you from thinking about
+[0:40:47] not preclude you from thinking about separable effects. You only need to
+[0:40:49] separable effects. You only need to think about this assumption. So, AY and
+[0:40:51] think about this assumption. So, AY and AD could be completely physically
+[0:40:53] AD could be completely physically separate from A as long as they have
+[0:40:56] separate from A as long as they have this property.
+[0:40:58] this property. So, what is a separable effect? As we'll
+[0:41:01] So, what is a separable effect? As we'll define a separable effect of AY
+[0:41:04] define a separable effect of AY evaluated at some level of AD as just
+[0:41:07] evaluated at some level of AD as just really a total effect. So, this looks
+[0:41:10] really a total effect. So, this looks just like the total effect but instead
+[0:41:12] just like the total effect but instead of having A here, we have combinations
+[0:41:15] of having A here, we have combinations of AY and AD. So, we compare AY uh uh
+[0:41:19] of AY and AD. So, we compare AY uh uh the outcome Y under AY equals 1 to AY
+[0:41:22] the outcome Y under AY equals 1 to AY equals 0 holding AD at a fixed level.
+[0:41:25] equals 0 holding AD at a fixed level. So, there could be two separable effects
+[0:41:27] So, there could be two separable effects of AY in principle if they're um for
+[0:41:30] of AY in principle if they're um for different levels of AD. Um and under
+[0:41:33] different levels of AD. Um and under particular mechanistic assumptions about
+[0:41:36] particular mechanistic assumptions about how these candidate treatments AY and AD
+[0:41:39] how these candidate treatments AY and AD operate on Y and D, then this could be
+[0:41:43] operate on Y and D, then this could be interpreted as a direct effect of A on
+[0:41:45] interpreted as a direct effect of A on the outcome of interest not through D.
+[0:41:48] the outcome of interest not through D. And similarly, the separable effect of
+[0:41:50] And similarly, the separable effect of AD evaluated at a level of AY is just a
+[0:41:54] AD evaluated at a level of AY is just a contrast in the outcomes under A AD
+[0:41:56] contrast in the outcomes under A AD equals 1 versus AD equals 0 fixing
+[0:41:59] equals 1 versus AD equals 0 fixing fixing AY. And again, under particular
+[0:42:02] fixing AY. And again, under particular mechanistic assumptions, this could be
+[0:42:04] mechanistic assumptions, this could be interpreted as an indirect effect of A
+[0:42:06] interpreted as an indirect effect of A and Y only through D. But in fact, we
+[0:42:08] and Y only through D. But in fact, we can weaken we can consider a range of
+[0:42:11] can weaken we can consider a range of mechanistic assumptions that are
+[0:42:13] mechanistic assumptions that are analogous to sort of path-specific
+[0:42:16] analogous to sort of path-specific effects if some of you are familiar with
+[0:42:18] effects if some of you are familiar with that. Um using conditions that arrange
+[0:42:21] that. Um using conditions that arrange of from strong to weak isolation
+[0:42:24] of from strong to weak isolation conditions that will basically affect
+[0:42:26] conditions that will basically affect the interpretation of these
+[0:42:27] the interpretation of these counterfactual contrasts.
+[0:42:31] counterfactual contrasts. So just to sort of look at a way to
+[0:42:33] So just to sort of look at a way to think about this. So here's that
+[0:42:35] think about this. So here's that original causal diagram that I showed
+[0:42:38] original causal diagram that I showed and I've suppressed the UI and UD
+[0:42:40] and I've suppressed the UI and UD because again we don't have to worry
+[0:42:41] because again we don't have to worry about those at all anymore for for this
+[0:42:44] about those at all anymore for for this purpose. They can be there or they
+[0:42:46] purpose. They can be there or they cannot be there, but we do have to think
+[0:42:48] cannot be there, but we do have to think about this Z, the shared cause of Y and
+[0:42:51] about this Z, the shared cause of Y and D.
+[0:42:52] D. And for now I'm just going to be even
+[0:42:54] And for now I'm just going to be even agnostic as to whether it's measured
+[0:42:56] agnostic as to whether it's measured because I'm not even yet talking about
+[0:42:58] because I'm not even yet talking about identification. I'm just talking about
+[0:43:00] identification. I'm just talking about interpretation of these
+[0:43:02] interpretation of these quantities. So this is an extended
+[0:43:05] quantities. So this is an extended causal graph posed by Robinson and
+[0:43:07] causal graph posed by Robinson and Richardson and it depicts what we call a
+[0:43:10] Richardson and it depicts what we call a full the assumption of full isolation
+[0:43:12] full the assumption of full isolation which is a mechanistic assumption on AY
+[0:43:15] which is a mechanistic assumption on AY and AD. And basically what this means is
+[0:43:18] and AD. And basically what this means is that under full isolation the AY
+[0:43:21] that under full isolation the AY separable effects contain all the direct
+[0:43:24] separable effects contain all the direct effects of A and Y and the AD separable
+[0:43:27] effects of A and Y and the AD separable effects contain all the indirect effects
+[0:43:29] effects contain all the indirect effects of A and Y and this is you can see this
+[0:43:31] of A and Y and this is you can see this visually all the paths from A to Y
+[0:43:35] visually all the paths from A to Y that flow through AY do not contain D
+[0:43:38] that flow through AY do not contain D and all the paths that flow from A
+[0:43:42] and all the paths that flow from A to Y through AD are intersected by D.
+[0:43:47] to Y through AD are intersected by D. Um so this is sort of the cleanest case
+[0:43:49] Um so this is sort of the cleanest case where
+[0:43:50] where um we can think of these separable
+[0:43:52] um we can think of these separable effects as direct and indirect effects
+[0:43:55] effects as direct and indirect effects of
+[0:43:55] of um A on Y by a D, but we can weaken
+[0:43:58] um A on Y by a D, but we can weaken these isolation conditions. So this is
+[0:44:01] these isolation conditions. So this is an example of partial isolation, what we
+[0:44:04] an example of partial isolation, what we call partial partial isolation and this
+[0:44:06] call partial partial isolation and this could come from an original dag where we
+[0:44:08] could come from an original dag where we allowed an arrow from A to the common
+[0:44:11] allowed an arrow from A to the common cause Z. So, for example, depending, and
+[0:44:14] cause Z. So, for example, depending, and again, this does require some kind of
+[0:44:16] again, this does require some kind of story, and if we have no story, then
+[0:44:18] story, and if we have no story, then we're saying this is some candidate
+[0:44:21] we're saying this is some candidate treatments that we can't yet articulate,
+[0:44:23] treatments that we can't yet articulate, and this is what this is some hypothesis
+[0:44:26] and this is what this is some hypothesis on how those future treatments could
+[0:44:28] on how those future treatments could work, but this would allow that the AD
+[0:44:31] work, but this would allow that the AD component affects the common cause Z.
+[0:44:33] component affects the common cause Z. So, in this example, under partial
+[0:44:35] So, in this example, under partial isolation, the separable AY effect still
+[0:44:38] isolation, the separable AY effect still is a direct effect in the sense that all
+[0:44:41] is a direct effect in the sense that all the paths that flow from A to Y via AY
+[0:44:45] the paths that flow from A to Y via AY do not contain D, but there are but the
+[0:44:48] do not contain D, but there are but the AD effects now contain both some of the
+[0:44:52] AD effects now contain both some of the direct effects and all the indirect
+[0:44:54] direct effects and all the indirect effects. Because now we see that there
+[0:44:56] effects. Because now we see that there are paths from A to Y that flow through
+[0:44:58] are paths from A to Y that flow through AD that also do not contain D. So,
+[0:45:01] AD that also do not contain D. So, again, you can see um so, Math's is very
+[0:45:03] again, you can see um so, Math's is very good at sort of coming up with some of
+[0:45:05] good at sort of coming up with some of these stories, and we have some in the
+[0:45:07] these stories, and we have some in the paper that could even show a clinically
+[0:45:10] paper that could even show a clinically relevant story where even in this case,
+[0:45:12] relevant story where even in this case, the separable AY effect could be um
+[0:45:15] the separable AY effect could be um interesting, or even the separable AD
+[0:45:17] interesting, or even the separable AD effect may be a a new version of the
+[0:45:19] effect may be a a new version of the treatment that reduces some unwanted
+[0:45:21] treatment that reduces some unwanted side effects, let's say.
+[0:45:24] side effects, let's say. Um and this is just a bit about
+[0:45:25] Um and this is just a bit about identification. So, we require, again,
+[0:45:28] identification. So, we require, again, the modified treatment assumption is
+[0:45:29] the modified treatment assumption is required for interpretation, but also
+[0:45:32] required for interpretation, but also for, not surprisingly, for
+[0:45:34] for, not surprisingly, for identification. Here, we need all the
+[0:45:36] identification. Here, we need all the assumptions that the total effect needed
+[0:45:39] assumptions that the total effect needed um with respect to A, but we'll need
+[0:45:41] um with respect to A, but we'll need some, not surprisingly, some additional
+[0:45:43] some, not surprisingly, some additional independencies to hold, and these will
+[0:45:45] independencies to hold, and these will depend on the measured common causes
+[0:45:48] depend on the measured common causes like Z or relevant proxies, and we call
+[0:45:51] like Z or relevant proxies, and we call these dismissible component uh
+[0:45:53] these dismissible component uh conditions. And you can uh see a number
+[0:45:56] conditions. And you can uh see a number of um results and a number of possible
+[0:45:58] of um results and a number of possible statistics that sort of fall out of this
+[0:46:01] statistics that sort of fall out of this uh in Math's lifetime data analysis
+[0:46:03] uh in Math's lifetime data analysis paper.
+[0:46:04] paper. So, here are just a number of
+[0:46:05] So, here are just a number of references.
+[0:46:07] references. Matt and I have a number of workshops
+[0:46:09] Matt and I have a number of workshops coming up in person and virtually in the
+[0:46:11] coming up in person and virtually in the next few months that sort of expand on
+[0:46:14] next few months that sort of expand on this in like 4 or 5 hours. If this is
+[0:46:16] this in like 4 or 5 hours. If this is interesting and Paloma Rojas Sañero,
+[0:46:19] interesting and Paloma Rojas Sañero, who's a postdoc at UCLA, has done a
+[0:46:20] who's a postdoc at UCLA, has done a really nice job putting together
+[0:46:23] really nice job putting together a
+[0:46:24] a web page that is really well annotated
+[0:46:26] web page that is really well annotated that
+[0:46:28] that goes through some of the code from these
+[0:46:31] goes through some of the code from these papers that cover a lot of the sort of
+[0:46:34] papers that cover a lot of the sort of basic ideas that I that I covered. And
+[0:46:37] basic ideas that I that I covered. And that's it. Thank you.
+[0:46:42] Thank you so much, Jessica. Uh with a great over- overview.
+[0:46:45] with a great over- overview. Um
+[0:46:45] Um Matt has heroically answered a lot of
+[0:46:47] Matt has heroically answered a lot of questions very in a very detailed way.
+[0:46:49] questions very in a very detailed way. So, let's in the interest of time move
+[0:46:51] So, let's in the interest of time move to the discussion right away and then
+[0:46:53] to the discussion right away and then maybe we'll have some time to discuss
+[0:46:55] maybe we'll have some time to discuss after that.
+[0:46:57] after that. Jacqueline, feel free to share.
+[0:47:00] Jacqueline, feel free to share. Great.
+[0:47:01] Great. Okay, can you see my screen?
+[0:47:03] Okay, can you see my screen? Yes.
+[0:47:05] Yes. Awesome. Um thank you, Jessica, for an
+[0:47:08] Awesome. Um thank you, Jessica, for an excellent talk and thank you as well to
+[0:47:10] excellent talk and thank you as well to the organizers.
+[0:47:12] the organizers. Um in this presentation, I will recap
+[0:47:15] Um in this presentation, I will recap some of the main points of the talk and
+[0:47:17] some of the main points of the talk and make some remarks and I hope that
+[0:47:19] make some remarks and I hope that Jessica can help shed light on where my
+[0:47:21] Jessica can help shed light on where my thinking is right and where it might be
+[0:47:23] thinking is right and where it might be off.
+[0:47:25] off. So, briefly, some acknowledgements. I
+[0:47:27] So, briefly, some acknowledgements. I have to first thank Dr. Katie Lesko, who
+[0:47:30] have to first thank Dr. Katie Lesko, who was the originally scheduled discussant
+[0:47:31] was the originally scheduled discussant for this talk, but due to a scheduling
+[0:47:34] for this talk, but due to a scheduling conflict gave me this opportunity to
+[0:47:36] conflict gave me this opportunity to speak today.
+[0:47:37] speak today. Um I also want to acknowledge that I am
+[0:47:39] Um I also want to acknowledge that I am an epidemiologist by training and not a
+[0:47:41] an epidemiologist by training and not a statistician and this informs the way I
+[0:47:43] statistician and this informs the way I approach competing events as well as all
+[0:47:45] approach competing events as well as all analyses.
+[0:47:47] analyses. So, as a first remark, I'll start by
+[0:47:49] So, as a first remark, I'll start by giving three examples of where competing
+[0:47:51] giving three examples of where competing events have come into play in my work
+[0:47:53] events have come into play in my work and there will actually be some overlap
+[0:47:55] and there will actually be some overlap with examples Jessica gave.
+[0:47:57] with examples Jessica gave. And in my experience, competing events
+[0:47:59] And in my experience, competing events are almost ubiquitous in applied
+[0:48:01] are almost ubiquitous in applied analysis, although their degree of
+[0:48:02] analysis, although their degree of relevance or how much they are a
+[0:48:04] relevance or how much they are a nuisance varies from analysis to
+[0:48:06] nuisance varies from analysis to analysis.
+[0:48:08] analysis. So, the first example is from an
+[0:48:10] So, the first example is from an analysis where we aimed to estimate the
+[0:48:12] analysis where we aimed to estimate the effect of a cancer diagnosis on time to
+[0:48:14] effect of a cancer diagnosis on time to dementia among people with HIV.
+[0:48:17] dementia among people with HIV. And of course, we had to recognize that
+[0:48:19] And of course, we had to recognize that death following cancer and as people age
+[0:48:21] death following cancer and as people age is common.
+[0:48:23] is common. And all-cause mortality and dementia
+[0:48:25] And all-cause mortality and dementia share some common causes like age and
+[0:48:27] share some common causes like age and comorbidities, but they also have
+[0:48:28] comorbidities, but they also have distinct causes.
+[0:48:30] distinct causes. Additionally, we recognize that death
+[0:48:32] Additionally, we recognize that death prevents dementia, but dementia does not
+[0:48:34] prevents dementia, but dementia does not prevent death. And finally, that death
+[0:48:36] prevent death. And finally, that death can be delayed, but perhaps never
+[0:48:38] can be delayed, but perhaps never eliminated.
+[0:48:40] eliminated. In our second example, we have competing
+[0:48:43] In our second example, we have competing causes of death like the example Jessica
+[0:48:44] causes of death like the example Jessica gave. So, in this analysis, we aimed to
+[0:48:47] gave. So, in this analysis, we aimed to estimate the effect of medication for
+[0:48:49] estimate the effect of medication for opioid use disorder on time to death due
+[0:48:51] opioid use disorder on time to death due to overdose among people who use drugs.
+[0:48:54] to overdose among people who use drugs. And deaths due to other causes like
+[0:48:56] And deaths due to other causes like comorbidities prevents death due to
+[0:48:58] comorbidities prevents death due to overdose and vice versa.
+[0:49:00] overdose and vice versa. And while one can imagine a world in
+[0:49:02] And while one can imagine a world in which overdose deaths were eliminated or
+[0:49:04] which overdose deaths were eliminated or severely reduced, we likely could again
+[0:49:06] severely reduced, we likely could again never eliminate all causes of death.
+[0:49:09] never eliminate all causes of death. And finally, to move on from death as a
+[0:49:11] And finally, to move on from death as a competing event,
+[0:49:13] competing event, we had an analysis where we aimed to
+[0:49:14] we had an analysis where we aimed to estimate the effect of pre-conception
+[0:49:16] estimate the effect of pre-conception low-dose aspirin on pregnancy outcomes
+[0:49:18] low-dose aspirin on pregnancy outcomes including live birth and birth weight.
+[0:49:21] including live birth and birth weight. And to have a live birth, a woman had to
+[0:49:24] And to have a live birth, a woman had to become pregnant. And in a trial where
+[0:49:26] become pregnant. And in a trial where you assign the exposure pre-conception,
+[0:49:28] you assign the exposure pre-conception, it is reasonable to imagine that not all
+[0:49:30] it is reasonable to imagine that not all women would become pregnant during
+[0:49:32] women would become pregnant during course of follow-up. It's additionally
+[0:49:34] course of follow-up. It's additionally unreasonable or unethical to intervene
+[0:49:36] unreasonable or unethical to intervene to force all women to become pregnant by
+[0:49:39] to force all women to become pregnant by the time they were censored.
+[0:49:45] So, moving on now to start talking about the points made in Jessica's talk as
+[0:49:48] the points made in Jessica's talk as well as the contributions of their
+[0:49:49] well as the contributions of their group's papers to the literature.
+[0:49:52] group's papers to the literature. So, to step up again to the classic
+[0:49:55] So, to step up again to the classic statistical approaches to and I put in
+[0:49:57] statistical approaches to and I put in quotes account because this is how it's
+[0:49:59] quotes account because this is how it's often phrased without further
+[0:50:01] often phrased without further explanation for competing events. And
+[0:50:03] explanation for competing events. And those include as has been mentioned the
+[0:50:06] those include as has been mentioned the cause-specific hazard which has
+[0:50:07] cause-specific hazard which has primarily uh been treated as the primary
+[0:50:10] primarily uh been treated as the primary measure of time to event in this
+[0:50:11] measure of time to event in this setting, uh the cumulative incidence
+[0:50:13] setting, uh the cumulative incidence function, and the subdistribution
+[0:50:15] function, and the subdistribution hazard. And if you peruse this
+[0:50:17] hazard. And if you peruse this literature, you'll often see debates on
+[0:50:19] literature, you'll often see debates on whether things like the cause-specific
+[0:50:20] whether things like the cause-specific hazard or the subdistribution
+[0:50:22] hazard or the subdistribution subdistribution hazard is more realistic
+[0:50:24] subdistribution hazard is more realistic or meaningful, and individuals will
+[0:50:26] or meaningful, and individuals will often default to either fitting a Cox
+[0:50:29] often default to either fitting a Cox model or a Fine-Gray model, especially
+[0:50:30] model or a Fine-Gray model, especially if they want to control for confounders.
+[0:50:34] if they want to control for confounders. And additionally in the classic stats
+[0:50:35] And additionally in the classic stats literature as Jessica mentioned,
+[0:50:38] literature as Jessica mentioned, um when
+[0:50:39] um when people have been made a recommendation
+[0:50:41] people have been made a recommendation on the statistical estimate to estimate,
+[0:50:43] on the statistical estimate to estimate, nearly every teaching paper on competing
+[0:50:45] nearly every teaching paper on competing events makes this distinction that the
+[0:50:47] events makes this distinction that the cause-specific hazard ratio should be
+[0:50:49] cause-specific hazard ratio should be estimated for ideology
+[0:50:52] estimated for ideology and contrast of the cumulative incidence
+[0:50:53] and contrast of the cumulative incidence function or subdistribution hazard ratio
+[0:50:56] function or subdistribution hazard ratio should be estimated for questions of
+[0:50:58] should be estimated for questions of prediction, incidence, or intervention.
+[0:51:00] prediction, incidence, or intervention. I've seen it phrased a few ways.
+[0:51:03] I've seen it phrased a few ways. And whenever I've read this, I always
+[0:51:05] And whenever I've read this, I always asked what does this even mean? Um I
+[0:51:08] asked what does this even mean? Um I have always personally kind of despised
+[0:51:09] have always personally kind of despised this distinction. First because I think
+[0:51:12] this distinction. First because I think it is unclear uh what is meant by
+[0:51:14] it is unclear uh what is meant by etiologic. Seemingly, it's about trying
+[0:51:16] etiologic. Seemingly, it's about trying to determine some underlying biological
+[0:51:18] to determine some underlying biological effect or to use the phrasing from
+[0:51:20] effect or to use the phrasing from Jessica's talk, aim at gnostic effect.
+[0:51:23] Jessica's talk, aim at gnostic effect. And while etiologic connotes causal,
+[0:51:25] And while etiologic connotes causal, certainly these authors did not mean
+[0:51:27] certainly these authors did not mean causal in a broad sense.
+[0:51:29] causal in a broad sense. And additionally, what is meant by
+[0:51:30] And additionally, what is meant by useful for prediction or incidence? And
+[0:51:32] useful for prediction or incidence? And I'd say it's certainly not pure
+[0:51:34] I'd say it's certainly not pure prediction or just description of
+[0:51:36] prediction or just description of incidence, which neither of which are
+[0:51:38] incidence, which neither of which are causal goal.
+[0:51:39] causal goal. But perhaps prediction in the sense of
+[0:51:42] But perhaps prediction in the sense of counterfactual estimation under a
+[0:51:43] counterfactual estimation under a hypothetical intervention, it's not
+[0:51:45] hypothetical intervention, it's not entirely clear.
+[0:51:47] entirely clear. And this lack of clarity ties into the
+[0:51:50] And this lack of clarity ties into the second reason, which I think Jessica
+[0:51:52] second reason, which I think Jessica argues very effectively.
+[0:51:54] argues very effectively. It's that this distinction made in the
+[0:51:55] It's that this distinction made in the classic statistical literature is not
+[0:51:57] classic statistical literature is not useful because it still focuses on
+[0:52:00] useful because it still focuses on statistical estimates rather than causal
+[0:52:02] statistical estimates rather than causal estimates.
+[0:52:03] estimates. And so it's better to decide on a
+[0:52:04] And so it's better to decide on a clearly stated counterfactual estimate
+[0:52:07] clearly stated counterfactual estimate that clearly aligns with the goal of the
+[0:52:08] that clearly aligns with the goal of the research project and then consider
+[0:52:11] research project and then consider whether that estimate can be identified
+[0:52:13] whether that estimate can be identified and estimated from the data.
+[0:52:16] and estimated from the data. And so in a sense, rather than
+[0:52:18] And so in a sense, rather than perpetuating this debate from the
+[0:52:19] perpetuating this debate from the classical statistical literature, we
+[0:52:22] classical statistical literature, we should simply move on and refocus our
+[0:52:25] should simply move on and refocus our attention on causal estimates.
+[0:52:27] attention on causal estimates. As a final point, um, in switching to a
+[0:52:30] As a final point, um, in switching to a more causal framework, what purpose do
+[0:52:33] more causal framework, what purpose do the classic statistical estimates serve?
+[0:52:35] the classic statistical estimates serve? Well, they are still useful as perhaps
+[0:52:38] Well, they are still useful as perhaps nuisance parameters required to estimate
+[0:52:40] nuisance parameters required to estimate the causal estimates of interest and are
+[0:52:42] the causal estimates of interest and are thus affected by assumptions related to
+[0:52:44] thus affected by assumptions related to statistical model specification.
+[0:52:48] statistical model specification. All right. So now switching to think
+[0:52:50] All right. So now switching to think about relevant causal estimates, the
+[0:52:52] about relevant causal estimates, the distinction, I think as laid out in
+[0:52:54] distinction, I think as laid out in Jessica's talk, largely becomes about
+[0:52:55] Jessica's talk, largely becomes about whether we want to estimate a total
+[0:52:58] whether we want to estimate a total effect or some kind of direct effect.
+[0:53:00] effect or some kind of direct effect. And which would better answer our
+[0:53:01] And which would better answer our research question?
+[0:53:03] research question? Now, total effects estimate the impact
+[0:53:06] Now, total effects estimate the impact of the exposure on the outcome, allowing
+[0:53:08] of the exposure on the outcome, allowing the competing event to occur as it would
+[0:53:10] the competing event to occur as it would under that exposure intervention.
+[0:53:12] under that exposure intervention. Direct effects, on the other hand, I
+[0:53:14] Direct effects, on the other hand, I think as has been explained, have a more
+[0:53:16] think as has been explained, have a more mechanistic focus and there are a few
+[0:53:18] mechanistic focus and there are a few choices for the target estimate.
+[0:53:21] choices for the target estimate. So ignoring separable effects for the
+[0:53:23] So ignoring separable effects for the moment, um,
+[0:53:24] moment, um, there's this class, this like group of
+[0:53:26] there's this class, this like group of direct effect estimates,
+[0:53:28] direct effect estimates, which I think as Jessica argued are
+[0:53:29] which I think as Jessica argued are largely impossible or impractical. The
+[0:53:32] largely impossible or impractical. The controlled direct effect is only
+[0:53:34] controlled direct effect is only realistic if we can prevent the
+[0:53:36] realistic if we can prevent the competing event. Natural direct effects
+[0:53:38] competing event. Natural direct effects require cross-world assumptions. And
+[0:53:40] require cross-world assumptions. And with the survivor average causal effect,
+[0:53:42] with the survivor average causal effect, we have this difficulty in determining
+[0:53:44] we have this difficulty in determining who our target population is.
+[0:53:47] who our target population is. But suppose these theoretical concerns
+[0:53:49] But suppose these theoretical concerns were not a problem. What would be then
+[0:53:52] were not a problem. What would be then one to estimate? Well, this is entirely
+[0:53:54] one to estimate? Well, this is entirely question dependent, as Jessica
+[0:53:56] question dependent, as Jessica discussed.
+[0:53:57] discussed. I will say that one thing I personally
+[0:53:59] I will say that one thing I personally struggle with, and perhaps this is
+[0:54:00] struggle with, and perhaps this is because of my my training,
+[0:54:02] because of my my training, is the practical relevance of estimating
+[0:54:05] is the practical relevance of estimating direct effects. Um and this is because
+[0:54:08] direct effects. Um and this is because the total effect reflects what you would
+[0:54:10] the total effect reflects what you would potentially see in the real world under
+[0:54:13] potentially see in the real world under an intervention on the exposure.
+[0:54:15] an intervention on the exposure. And the competing event is an inherent
+[0:54:17] And the competing event is an inherent characteristic of the system under
+[0:54:18] characteristic of the system under study, and toggling the exposure could
+[0:54:21] study, and toggling the exposure could potentially have an impact on the
+[0:54:23] potentially have an impact on the competing event, even if it was not
+[0:54:24] competing event, even if it was not designed to do so.
+[0:54:26] designed to do so. To use a very extreme example, does it
+[0:54:28] To use a very extreme example, does it matter whether the intervention prevents
+[0:54:31] matter whether the intervention prevents a dangerous health outcome if it also
+[0:54:33] a dangerous health outcome if it also greatly increased the risk of death in
+[0:54:35] greatly increased the risk of death in the target population?
+[0:54:37] the target population? For this reason, I'd somewhat argue that
+[0:54:40] For this reason, I'd somewhat argue that total effects are more policy relevant,
+[0:54:43] total effects are more policy relevant, and perhaps worthwhile to estimate even
+[0:54:46] and perhaps worthwhile to estimate even in the setting where a mechanistic
+[0:54:47] in the setting where a mechanistic question is more directly of interest to
+[0:54:50] question is more directly of interest to the content area expert, at least for
+[0:54:52] the content area expert, at least for understanding what is going on with the
+[0:54:53] understanding what is going on with the competing event. But I will point out
+[0:54:56] competing event. But I will point out this is my subjective opinion, and I
+[0:54:58] this is my subjective opinion, and I know many, including many of my
+[0:54:59] know many, including many of my colleagues, disagree.
+[0:55:02] colleagues, disagree. So, now moving on to talking about
+[0:55:04] So, now moving on to talking about separable effects, are these the best
+[0:55:07] separable effects, are these the best alternative to the total effect?
+[0:55:10] alternative to the total effect? Well, I'd say in theory, yes. Um
+[0:55:12] Well, I'd say in theory, yes. Um interpretation of separable effects is
+[0:55:15] interpretation of separable effects is more reasonable than other direct effect
+[0:55:16] more reasonable than other direct effect estimates,
+[0:55:18] estimates, and like the total effect, the
+[0:55:19] and like the total effect, the intervention is clear and more
+[0:55:22] intervention is clear and more realistic.
+[0:55:25] realistic. But while these estimates are nice in
+[0:55:27] But while these estimates are nice in theory, it's also important to consider
+[0:55:29] theory, it's also important to consider how practical they are. So, first, let's
+[0:55:32] how practical they are. So, first, let's ask, what kinds of interventions can
+[0:55:35] ask, what kinds of interventions can impact the outcome of interest without
+[0:55:37] impact the outcome of interest without in some way changing the competing
+[0:55:39] in some way changing the competing event. And that's a difficult question
+[0:55:41] event. And that's a difficult question and one that will depend greatly on
+[0:55:43] and one that will depend greatly on subject matter area and potentially
+[0:55:45] subject matter area and potentially creative thinking.
+[0:55:47] creative thinking. Second, when do we have the data to
+[0:55:49] Second, when do we have the data to identify and estimate separable effects?
+[0:55:52] identify and estimate separable effects? Well, clearly you would have it if you
+[0:55:53] Well, clearly you would have it if you were actually able to design that trial
+[0:55:55] were actually able to design that trial where you looked at the decomposed
+[0:55:57] where you looked at the decomposed intervention.
+[0:55:59] intervention. In secondary data, which is what I work
+[0:56:01] In secondary data, which is what I work in most of the time, these effects seem
+[0:56:03] in most of the time, these effects seem to be able to be modeled even if the
+[0:56:05] to be able to be modeled even if the decomposition is only hypothetical. But
+[0:56:07] decomposition is only hypothetical. But we have to be careful not to stretch the
+[0:56:10] we have to be careful not to stretch the truth too far. Um as is mentioned in the
+[0:56:13] truth too far. Um as is mentioned in the sensor 2021 paper, um if the decomposed
+[0:56:16] sensor 2021 paper, um if the decomposed intervention is possible in principle,
+[0:56:18] intervention is possible in principle, but perhaps not in practice, we have
+[0:56:21] but perhaps not in practice, we have some difficulty in assessing our
+[0:56:23] some difficulty in assessing our identification condition.
+[0:56:26] identification condition. Lastly, I'd like to reiterate that the
+[0:56:28] Lastly, I'd like to reiterate that the isolation conditions are critical in
+[0:56:31] isolation conditions are critical in this um
+[0:56:32] this um estimating separable effects. Um and of
+[0:56:35] estimating separable effects. Um and of course they could be verified
+[0:56:36] course they could be verified empirically if we were to run that trial
+[0:56:38] empirically if we were to run that trial of the decomposed intervention, but
+[0:56:40] of the decomposed intervention, but otherwise it joins our list of other
+[0:56:42] otherwise it joins our list of other untestable identification conditions.
+[0:56:46] untestable identification conditions. My last remark is a brief remark and one
+[0:56:49] My last remark is a brief remark and one that I think is somewhat taken for
+[0:56:50] that I think is somewhat taken for granted in this paper is that the
+[0:56:52] granted in this paper is that the important contribution of the Young 2020
+[0:56:57] important contribution of the Young 2020 paper in establishing DAGs for the
+[0:56:59] paper in establishing DAGs for the competing event setting. So, prior to
+[0:57:01] competing event setting. So, prior to that paper, competing event DAGs were
+[0:57:03] that paper, competing event DAGs were often ad hoc and did not necessarily
+[0:57:05] often ad hoc and did not necessarily follow standard DAG rules. And it's
+[0:57:08] follow standard DAG rules. And it's important to establish formal DAGs
+[0:57:10] important to establish formal DAGs because once those are determined, it is
+[0:57:12] because once those are determined, it is much easier to see our causal structure,
+[0:57:14] much easier to see our causal structure, think through identification results,
+[0:57:16] think through identification results, and to convey information about our
+[0:57:17] and to convey information about our causal estimands and assumptions to
+[0:57:19] causal estimands and assumptions to colleagues.
+[0:57:21] colleagues. And these DAGs place the competing event
+[0:57:23] And these DAGs place the competing event as a mediator, which has important
+[0:57:26] as a mediator, which has important implications for the possible causal
+[0:57:28] implications for the possible causal estimands as is as been laid out and the
+[0:57:31] estimands as is as been laid out and the identification of these effects.
+[0:57:33] identification of these effects. And one thing that I
+[0:57:35] And one thing that I think about when thinking about the
+[0:57:37] think about when thinking about the competing event as a mediator is the
+[0:57:39] competing event as a mediator is the assumption about the timing of the two
+[0:57:41] assumption about the timing of the two events this makes and whether it always
+[0:57:43] events this makes and whether it always makes sense for the competing event to
+[0:57:46] makes sense for the competing event to proceed Y.
+[0:57:50] So, thank you for giving me the opportunity to discuss. I'll close with
+[0:57:52] opportunity to discuss. I'll close with this quote from slide 36, which I think
+[0:57:55] this quote from slide 36, which I think is really important.
+[0:57:56] is really important. The more clarity we have on the
+[0:57:58] The more clarity we have on the questions we choose to ask, the more
+[0:58:00] questions we choose to ask, the more clarity we have in how best to answer
+[0:58:02] clarity we have in how best to answer them.
+[0:58:03] them. Thank you.
+[0:58:09] Thanks so much, Jacqueline. Um very nice discussion. So, uh maybe we could take
+[0:58:12] discussion. So, uh maybe we could take just a few minutes to kind of reflect on
+[0:58:15] just a few minutes to kind of reflect on uh Jacqueline's points. Jessica or Max,
+[0:58:17] uh Jacqueline's points. Jessica or Max, if you would like um
+[0:58:19] if you would like um and then we'll wrap up.
+[0:58:26] Yeah, and thank you so much, Jackie. Um that was really nice and it's nice to
+[0:58:29] that was really nice and it's nice to sort of hear about different
+[0:58:32] sort of hear about different applications that you've um
+[0:58:34] applications that you've um you've dealt with.
+[0:58:36] you've dealt with. So, I have to remember all of the
+[0:58:38] So, I have to remember all of the questions. I think just the last one you
+[0:58:40] questions. I think just the last one you mentioned about um the time ordering.
+[0:58:43] mentioned about um the time ordering. So, I think that really
+[0:58:47] So, I think that really that is really just a feature of sort of
+[0:58:52] that is really just a feature of sort of our our need to sort of discretize time
+[0:58:56] our our need to sort of discretize time in our brains. Um but if we started
+[0:58:59] in our brains. Um but if we started thinking about the real causal diagram,
+[0:59:02] thinking about the real causal diagram, um the real event process, the real data
+[0:59:05] um the real event process, the real data generating process, we could think of
+[0:59:07] generating process, we could think of these time jumps in seconds. And once we
+[0:59:11] these time jumps in seconds. And once we start doing that, um basically, we don't
+[0:59:15] start doing that, um basically, we don't really have to worry about the time
+[0:59:17] really have to worry about the time ordering anymore because within a
+[0:59:20] ordering anymore because within a particular second, we're not going to
+[0:59:22] particular second, we're not going to have to worry, for example, about common
+[0:59:24] have to worry, for example, about common causes or um the chance of more than one
+[0:59:28] causes or um the chance of more than one event becomes zero and we can sort of
+[0:59:29] event becomes zero and we can sort of search that will we can start to see.
+[0:59:32] search that will we can start to see. That's why I think on this graph I've
+[0:59:35] That's why I think on this graph I've gotten tried to get into the habit to
+[0:59:37] gotten tried to get into the habit to not put the same time index on the DAG.
+[0:59:41] not put the same time index on the DAG. So that's why I have D1 Y2 D
+[0:59:45] So that's why I have D1 Y2 D because to sort of because that that can
+[0:59:48] because to sort of because that that can be very confusing to put D an arrow from
+[0:59:51] be very confusing to put D an arrow from D1 into Y1 for example. And really that
+[0:59:55] D1 into Y1 for example. And really that time ordering um is is really just a
+[0:59:58] time ordering um is is really just a result of over coarsening often of the
+[1:00:02] result of over coarsening often of the data that we usually have. Um I don't
+[1:00:05] data that we usually have. Um I don't know if that's a very satisfying answer.
+[1:00:08] know if that's a very satisfying answer. Um You can make a comparative answer.
+[1:00:10] Um You can make a comparative answer. Sorry for chiming in but No, no, please.
+[1:00:12] Sorry for chiming in but No, no, please. In any continuous time survival
+[1:00:13] In any continuous time survival analysis, if you have ties in the data,
+[1:00:15] analysis, if you have ties in the data, first of all, that violates the
+[1:00:17] first of all, that violates the assumption that the survival times are
+[1:00:20] assumption that the survival times are absolutely continuous because then you
+[1:00:21] absolutely continuous because then you can't have ties. So if somehow that
+[1:00:24] can't have ties. So if somehow that model is violated. The other thing is
+[1:00:25] model is violated. The other thing is what do they do in practice? They do a
+[1:00:27] what do they do in practice? They do a random draw whether one of the event
+[1:00:29] random draw whether one of the event before the other or they consider them
+[1:00:31] before the other or they consider them to be at the same time. So
+[1:00:33] to be at the same time. So the the ordering that Y is after D is
+[1:00:35] the the ordering that Y is after D is totally arbitrary.
+[1:00:37] totally arbitrary. A simple sensitivity analysis is just to
+[1:00:39] A simple sensitivity analysis is just to change the order and do exactly the same
+[1:00:40] change the order and do exactly the same thing essentially. Let's see if it
+[1:00:42] thing essentially. Let's see if it matter. And if you discretize
+[1:00:44] matter. And if you discretize time in a grid that's fine enough, it
+[1:00:47] time in a grid that's fine enough, it wouldn't matter. Just cuz that.
+[1:00:49] wouldn't matter. Just cuz that. Yeah. Yeah, but that gets very hard. So
+[1:00:51] Yeah. Yeah, but that gets very hard. So I think I think that also gets to what
+[1:00:54] I think I think that also gets to what you were saying about how hard it is to
+[1:00:56] you were saying about how hard it is to think about the separable effects and
+[1:00:58] think about the separable effects and you know, that total effects are
+[1:00:59] you know, that total effects are probably the most policy relevant
+[1:01:02] probably the most policy relevant appealing answer. And I actually agree
+[1:01:05] appealing answer. And I actually agree and sort of in practice I I work with a
+[1:01:07] and sort of in practice I I work with a lot of implied data analysis and a total
+[1:01:10] lot of implied data analysis and a total effects are always my go-to um for this
+[1:01:14] effects are always my go-to um for this problem and actually are probably what I
+[1:01:17] problem and actually are probably what I have been prioritizing
+[1:01:20] have been prioritizing um
+[1:01:21] um in actual survival analysis type
+[1:01:24] in actual survival analysis type problems because the total effects are
+[1:01:26] problems because the total effects are defined in that case.
+[1:01:28] defined in that case. And so I think then on top
+[1:01:31] And so I think then on top everything else we think about beyond
+[1:01:33] everything else we think about beyond that I think it's useful to think about
+[1:01:36] that I think it's useful to think about these other things as kind of as as a
+[1:01:39] these other things as kind of as as a follow on to the total effect. So just
+[1:01:41] follow on to the total effect. So just to give you one example, we worked on a
+[1:01:43] to give you one example, we worked on a study of um
+[1:01:45] study of um prep uptake and HIV um pre-exposure
+[1:01:48] prep uptake and HIV um pre-exposure prophylaxis for HIV and HIV is the
+[1:01:51] prophylaxis for HIV and HIV is the outcome and there are some deaths in the
+[1:01:54] outcome and there are some deaths in the data and this was sort of a short a
+[1:01:56] data and this was sort of a short a relatively short follow-up period where
+[1:01:59] relatively short follow-up period where basically you can make an argument that
+[1:02:01] basically you can make an argument that if I were drawing this DAG
+[1:02:03] if I were drawing this DAG the bottom line is in that study it was
+[1:02:06] the bottom line is in that study it was reasonable to not draw arrows on the DAG
+[1:02:09] reasonable to not draw arrows on the DAG from A into the D nodes
+[1:02:12] from A into the D nodes not intersected by Y. So that's a case
+[1:02:15] not intersected by Y. So that's a case where the total effect can be
+[1:02:17] where the total effect can be interpreted as a direct effect and what
+[1:02:20] interpreted as a direct effect and what I've done is I've augmented my analysis
+[1:02:22] I've done is I've augmented my analysis with a story about mechanism and I feel
+[1:02:26] with a story about mechanism and I feel so confident about that that I'm not
+[1:02:28] so confident about that that I'm not going to bother to do a follow-on
+[1:02:30] going to bother to do a follow-on analysis because I don't feel that
+[1:02:34] analysis because I don't feel that my interpretation of the total effect is
+[1:02:36] my interpretation of the total effect is compromised by this problem or the
+[1:02:39] compromised by this problem or the investigators I was working with did
+[1:02:41] investigators I was working with did not.
+[1:02:42] not. But it's really only when the
+[1:02:44] But it's really only when the investigator says no, this is not
+[1:02:47] investigator says no, this is not satisfactory to me and as you said
+[1:02:51] satisfactory to me and as you said when you talk to your colleagues
+[1:02:52] when you talk to your colleagues different people will give you different
+[1:02:55] different people will give you different answers and I think that's a reality
+[1:02:57] answers and I think that's a reality that we have to
+[1:02:59] that we have to contend with and we have to
+[1:03:01] contend with and we have to I I'm starting I used to take more of a
+[1:03:04] I I'm starting I used to take more of a view of this is what I think the right
+[1:03:06] view of this is what I think the right question is. I think when presenting
+[1:03:08] question is. I think when presenting this and I think I've learned over time
+[1:03:10] this and I think I've learned over time that it's actually not my role to sort
+[1:03:13] that it's actually not my role to sort of generically say what the right
+[1:03:14] of generically say what the right question is because I'm not a subject
+[1:03:16] question is because I'm not a subject matter expert. So, it's really up to
+[1:03:19] matter expert. So, it's really up to subject matter experts
+[1:03:21] subject matter experts and particularly the communities that
+[1:03:23] and particularly the communities that that subject matter is going to affect
+[1:03:26] that subject matter is going to affect that should be having a conversation
+[1:03:28] that should be having a conversation about what are the important questions
+[1:03:30] about what are the important questions because there are practical resources,
+[1:03:32] because there are practical resources, there's money that goes into deciding
+[1:03:34] there's money that goes into deciding which trials get funded, which
+[1:03:36] which trials get funded, which interventions get funded. And I think if
+[1:03:38] interventions get funded. And I think if we're not transparent about what we're
+[1:03:40] we're not transparent about what we're actually answering, that process is
+[1:03:42] actually answering, that process is almost somewhat dishonest. So,
+[1:03:45] almost somewhat dishonest. So, um Yeah. Yeah.
+[1:03:46] um Yeah. Yeah. Thank you all. I'll wrap up.
+[1:03:49] Thank you all. I'll wrap up. Thanks, Jacqueline. Thank you all. Sorry
+[1:03:51] Thanks, Jacqueline. Thank you all. Sorry to interrupt you. We're over time, so
+[1:03:53] to interrupt you. We're over time, so I'll wrap up.
+[1:03:55] I'll wrap up. Apologies. Um okay.
+[1:04:04] All right. Um so, just to um thank again actually Jessica and Jacqueline and Mats
+[1:04:06] actually Jessica and Jacqueline and Mats for um
+[1:04:08] for um giving great talks and answering a lot
+[1:04:09] giving great talks and answering a lot of questions. For people whose questions
+[1:04:12] of questions. For people whose questions haven't been fully answered to their
+[1:04:13] haven't been fully answered to their satisfaction, just know that uh we will
+[1:04:16] satisfaction, just know that uh we will pass on all of your questions to the
+[1:04:18] pass on all of your questions to the speakers, and uh
+[1:04:20] speakers, and uh you can then contact them for a
+[1:04:22] you can then contact them for a follow-up if you're interested. Um
+[1:04:26] follow-up if you're interested. Um thank you again all for um
+[1:04:29] thank you again all for um answering a lot of questions actually
+[1:04:30] answering a lot of questions actually and having a nice discussion.
+[1:04:33] and having a nice discussion. Next week, uh we have a talk by Robin
+[1:04:35] Next week, uh we have a talk by Robin Emmons from University of Oxford. I hope
+[1:04:37] Emmons from University of Oxford. I hope you all join us for that, and thank you
+[1:04:39] you all join us for that, and thank you for coming today.

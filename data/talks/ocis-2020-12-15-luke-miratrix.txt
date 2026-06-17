@@ -1,0 +1,1498 @@
+[0:00:04] welcome to the online caal inference seminar today we are excited to have
+[0:00:06] seminar today we are excited to have Luke miratrix who will talk about using
+[0:00:09] Luke miratrix who will talk about using National Data and meta analysis
+[0:00:11] National Data and meta analysis techniques to get a handle on how bad
+[0:00:13] techniques to get a handle on how bad some biases might be in practice uh in
+[0:00:15] some biases might be in practice uh in Q&amp;A we have Ben Whitman who is a
+[0:00:17] Q&amp;A we have Ben Whitman who is a collaborator of Luke and who happy to
+[0:00:20] collaborator of Luke and who happy to answer your questions um yeah please put
+[0:00:23] answer your questions um yeah please put them there we will also select some of
+[0:00:25] them there we will also select some of them that will then be uh asked live um
+[0:00:29] them that will then be uh asked live um after the talk we have a disc discussion
+[0:00:30] after the talk we have a disc discussion by Beth Tipton and after that uh Luke
+[0:00:34] by Beth Tipton and after that uh Luke will be able to respond thank you all
+[0:00:36] will be able to respond thank you all for coming um as usual uh today the
+[0:00:39] for coming um as usual uh today the questions will be hand handled by me uh
+[0:00:41] questions will be hand handled by me uh as I said before please submit them in
+[0:00:43] as I said before please submit them in Q&amp;A and we will select some of them to
+[0:00:45] Q&amp;A and we will select some of them to be answered live um I'm now switching
+[0:00:47] be answered live um I'm now switching over to
+[0:00:55] Luke feel free to start whenever you're ready great hello everyone uh let me
+[0:00:58] ready great hello everyone uh let me just set up my screen share
+[0:01:11] here so uh today I'm look forward to talking about some work uh that my
+[0:01:13] talking about some work uh that my student Ben Weidman has done um it's and
+[0:01:17] student Ben Weidman has done um it's and there this crosses two different papers
+[0:01:19] there this crosses two different papers so this talk is going to give some
+[0:01:21] so this talk is going to give some highlevel structure and then we're going
+[0:01:23] highlevel structure and then we're going to use that structure to investigate
+[0:01:25] to use that structure to investigate biases in two different
+[0:01:28] biases in two different places uh this abstract is just if you
+[0:01:30] places uh this abstract is just if you want the slides they're posted online
+[0:01:32] want the slides they're posted online and this is the abstract uh for the talk
+[0:01:35] and this is the abstract uh for the talk so the driving questions um of of this
+[0:01:38] so the driving questions um of of this work are sort of how bad does it get so
+[0:01:41] work are sort of how bad does it get so in matching type or quasi experimental
+[0:01:43] in matching type or quasi experimental designs where you're trying to extract
+[0:01:45] designs where you're trying to extract some sort of as if uh randomized
+[0:01:48] some sort of as if uh randomized experiment from observational data you
+[0:01:50] experiment from observational data you might want to know like does matching on
+[0:01:52] might want to know like does matching on covariates really give us an as if
+[0:01:54] covariates really give us an as if randomized experiment and how much
+[0:01:56] randomized experiment and how much confounding is left is the bias uh that
+[0:01:59] confounding is left is the bias uh that is left over due to
+[0:02:00] is left over due to unobserved Compounders uh enough to
+[0:02:04] unobserved Compounders uh enough to really swamp our
+[0:02:06] really swamp our Expedition similarly in actual real
+[0:02:09] Expedition similarly in actual real world randomized experiments especially
+[0:02:11] world randomized experiments especially in places like education uh people in
+[0:02:14] in places like education uh people in good faith attempt to run randomized
+[0:02:16] good faith attempt to run randomized experiments and then nobody cooperates
+[0:02:18] experiments and then nobody cooperates or does what they're told so you have
+[0:02:20] or does what they're told so you have things like attrition where you lose
+[0:02:22] things like attrition where you lose people um after you've randomized them
+[0:02:25] people um after you've randomized them there's a lot of fear that attrition can
+[0:02:26] there's a lot of fear that attrition can really undermine the gold standard
+[0:02:28] really undermine the gold standard validity of a randomized experiment
+[0:02:30] validity of a randomized experiment we might want to know how much ruining
+[0:02:34] we might want to know how much ruining happens so to think about these um
+[0:02:38] happens so to think about these um biases there's sort of three large bins
+[0:02:41] biases there's sort of three large bins of bias we might consider one is who's
+[0:02:43] of bias we might consider one is who's in the sample this boils down to
+[0:02:45] in the sample this boils down to external validity bias or
+[0:02:47] external validity bias or generalizability we can also ask how is
+[0:02:49] generalizability we can also ask how is the treatment assigned was it actually
+[0:02:50] the treatment assigned was it actually assigned at random or uh were people
+[0:02:52] assigned at random or uh were people self- selecting this is confounding or
+[0:02:55] self- selecting this is confounding or selection bias and we can also um ask
+[0:02:59] selection bias and we can also um ask whose data did we analyze did we lose
+[0:03:01] whose data did we analyze did we lose people along the way this would be
+[0:03:02] people along the way this would be attrition bias or missing not at random
+[0:03:05] attrition bias or missing not at random um and other kinds of missingness
+[0:03:08] um and other kinds of missingness mechanisms and we can sort of put all of
+[0:03:11] mechanisms and we can sort of put all of these um biases bias categories in a
+[0:03:14] these um biases bias categories in a table and we can look at randomized
+[0:03:16] table and we can look at randomized trials and we look at uh matched trials
+[0:03:20] trials and we look at uh matched trials um as a comparison and with randomized
+[0:03:23] um as a comparison and with randomized trials they have some strength and
+[0:03:25] trials they have some strength and weaknesses and match um or observational
+[0:03:27] weaknesses and match um or observational Studies have other strength and
+[0:03:29] Studies have other strength and weaknesses in particular random Riz
+[0:03:30] weaknesses in particular random Riz trials you have that randomization
+[0:03:32] trials you have that randomization observational studies you usually have
+[0:03:34] observational studies you usually have more data now with observables when you
+[0:03:37] more data now with observables when you have um observed confounders or or
+[0:03:39] have um observed confounders or or problems you can correct with those
+[0:03:41] problems you can correct with those observables using various modeling and
+[0:03:44] observables using various modeling and usually Drive the biases down to small
+[0:03:46] usually Drive the biases down to small or basically zero it's the unobservables
+[0:03:50] or basically zero it's the unobservables where we really have to stress because
+[0:03:52] where we really have to stress because we can't get a handle on them so having
+[0:03:55] we can't get a handle on them so having some sense of how big they might be in
+[0:03:57] some sense of how big they might be in practice um can make us feel better
+[0:04:00] practice um can make us feel better or potentially worse about whatever
+[0:04:02] or potentially worse about whatever activities we're up
+[0:04:04] activities we're up to in this talk we're looking in first
+[0:04:07] to in this talk we're looking in first under the observational study literature
+[0:04:10] under the observational study literature we're trying to get a handle on what
+[0:04:12] we're trying to get a handle on what kind of residual bias is left over after
+[0:04:14] kind of residual bias is left over after you try to repair um an observational
+[0:04:17] you try to repair um an observational study with the observed variables and
+[0:04:19] study with the observed variables and you can get that down to small or medium
+[0:04:21] you can get that down to small or medium that's the prior literature but the
+[0:04:23] that's the prior literature but the prior literature is also a little
+[0:04:24] prior literature is also a little uncertain so we're going to try to add
+[0:04:26] uncertain so we're going to try to add to that prior literature by looking at a
+[0:04:28] to that prior literature by looking at a host of different studies to see if we
+[0:04:30] host of different studies to see if we can get a sharper handle on how um how
+[0:04:32] can get a sharper handle on how um how bad it is the second part of the talk is
+[0:04:36] bad it is the second part of the talk is this more Uncharted area of how much do
+[0:04:40] this more Uncharted area of how much do unobservables impact attrition bias and
+[0:04:42] unobservables impact attrition bias and can we get a handle on
+[0:04:46] can we get a handle on that the way we do this um is using
+[0:04:49] that the way we do this um is using within study comparisons within study
+[0:04:51] within study comparisons within study comparisons the idea here is we know
+[0:04:54] comparisons the idea here is we know something at least approximately in some
+[0:04:56] something at least approximately in some context where we somehow are given the
+[0:04:57] context where we somehow are given the real answer and then we analyze the data
+[0:05:00] real answer and then we analyze the data as we normally would not looking at that
+[0:05:02] as we normally would not looking at that real answer and we compare our method's
+[0:05:05] real answer and we compare our method's answer to what the real answer is and
+[0:05:08] answer to what the real answer is and then we have to sit there and think
+[0:05:10] then we have to sit there and think about well there's uncertainty in both
+[0:05:11] about well there's uncertainty in both these activities usually the real answer
+[0:05:13] these activities usually the real answer is known with a certain amount of
+[0:05:15] is known with a certain amount of imprecision our actual answer similarly
+[0:05:18] imprecision our actual answer similarly if they're really close then we're like
+[0:05:19] if they're really close then we're like wow it worked um our we've managed to
+[0:05:21] wow it worked um our we've managed to replicate our gold standard so whatever
+[0:05:23] replicate our gold standard so whatever methods we're using at least in this
+[0:05:25] methods we're using at least in this particular instance work um but we're
+[0:05:28] particular instance work um but we're left with how close is close
+[0:05:31] left with how close is close also with a single case study a single
+[0:05:33] also with a single case study a single within study comparison we just know it
+[0:05:35] within study comparison we just know it worked in this very specific
+[0:05:37] worked in this very specific context if we really want to have faith
+[0:05:40] context if we really want to have faith that work these tools work more broadly
+[0:05:41] that work these tools work more broadly then we would want to have a large body
+[0:05:43] then we would want to have a large body of within study comparisons so we can
+[0:05:45] of within study comparisons so we can have a sense of how they tend to work
+[0:05:48] have a sense of how they tend to work also by having lots of within study
+[0:05:50] also by having lots of within study comparisons we can look at how much they
+[0:05:53] comparisons we can look at how much they vary and we can try to um disaggregate
+[0:05:56] vary and we can try to um disaggregate the measurement error of estimating
+[0:05:58] the measurement error of estimating whether things worked or not from
+[0:05:59] whether things worked or not from whether they actually are working in
+[0:06:01] whether they actually are working in expectation so we can try to um say
+[0:06:04] expectation so we can try to um say something a little more
+[0:06:07] something a little more precise so there's some key points so if
+[0:06:09] precise so there's some key points so if you have a good within study comparison
+[0:06:11] you have a good within study comparison you're going to have that true Target
+[0:06:12] you're going to have that true Target estimate that I mentioned and you're
+[0:06:13] estimate that I mentioned and you're also going to have a this is what we
+[0:06:15] also going to have a this is what we really do estimate and the difference is
+[0:06:17] really do estimate and the difference is our estimate of bias and now to get a
+[0:06:21] our estimate of bias and now to get a handle on the uncertainty of that bias
+[0:06:23] handle on the uncertainty of that bias we will'll take the standard errors for
+[0:06:25] we will'll take the standard errors for each part and use those standard errors
+[0:06:28] each part and use those standard errors to get a standard error for the
+[0:06:29] to get a standard error for the difference and that would be the
+[0:06:31] difference and that would be the uncertainty about our bias estimate and
+[0:06:33] uncertainty about our bias estimate and then finally with within multiple within
+[0:06:35] then finally with within multiple within study comparisons the way we're going to
+[0:06:37] study comparisons the way we're going to do that disaggregation I mentioned is uh
+[0:06:40] do that disaggregation I mentioned is uh stealing from The Meta analysis
+[0:06:41] stealing from The Meta analysis literature we're going to think of each
+[0:06:43] literature we're going to think of each of the within study comparisons as its
+[0:06:46] of the within study comparisons as its own study and then look at how the point
+[0:06:49] own study and then look at how the point estimates of biases range across those
+[0:06:51] estimates of biases range across those studies and estimate sort of how much
+[0:06:53] studies and estimate sort of how much structural variation there is in those
+[0:06:56] structural variation there is in those uh Point estimates as opposed to how
+[0:06:58] uh Point estimates as opposed to how much variation there are in due to the
+[0:07:01] much variation there are in due to the measurement
+[0:07:08] error so that's the stage and now there's two acts the First Act is the
+[0:07:10] there's two acts the First Act is the wonderful world of matching or quas
+[0:07:12] wonderful world of matching or quas experimental designs and so that's um
+[0:07:14] experimental designs and so that's um and the paper for this um is recently
+[0:07:17] and the paper for this um is recently been published it's called lurking
+[0:07:18] been published it's called lurking inferential monsters quantifying bias
+[0:07:20] inferential monsters quantifying bias and non-experimental evaluations of
+[0:07:22] and non-experimental evaluations of school programs I will point out that
+[0:07:24] school programs I will point out that you'll notice that the title of this
+[0:07:26] you'll notice that the title of this talk was not a particularly clever title
+[0:07:28] talk was not a particularly clever title that's because I named it but if you
+[0:07:30] that's because I named it but if you look closely you'll find that the titles
+[0:07:32] look closely you'll find that the titles of both papers that this talk is about
+[0:07:34] of both papers that this talk is about are very clever titles and that's
+[0:07:35] are very clever titles and that's because my student named them my student
+[0:07:38] because my student named them my student was not helpful in naming the talk after
+[0:07:40] was not helpful in naming the talk after repeated tents so I was left on my own I
+[0:07:43] repeated tents so I was left on my own I apologize for not being clever
+[0:07:45] apologize for not being clever there so within study comparisons of
+[0:07:49] there so within study comparisons of matching if you can imagine within study
+[0:07:51] matching if you can imagine within study comparison we have this large T Target
+[0:07:53] comparison we have this large T Target population and in that large Target
+[0:07:56] population and in that large Target population there is this selection
+[0:07:57] population there is this selection mechanism that are you going to be in
+[0:08:00] mechanism that are you going to be in the experiment or not and so that's s so
+[0:08:03] the experiment or not and so that's s so we have the study sample and then we
+[0:08:05] we have the study sample and then we randomize the study sample into
+[0:08:06] randomize the study sample into treatment and control that's the T so if
+[0:08:10] treatment and control that's the T so if we're looking here this study sample is
+[0:08:12] we're looking here this study sample is a subset of this larger Target
+[0:08:14] a subset of this larger Target population we have our treated units
+[0:08:16] population we have our treated units they're impacted by whatever it is we're
+[0:08:17] they're impacted by whatever it is we're doing to our units and due to
+[0:08:19] doing to our units and due to randomization we know that the
+[0:08:20] randomization we know that the distribution of the treated units uh
+[0:08:23] distribution of the treated units uh potential outcomes under control is
+[0:08:26] potential outcomes under control is going to be the same as the control
+[0:08:27] going to be the same as the control units potential outcome under control so
+[0:08:30] units potential outcome under control so this comparison is our gold standard
+[0:08:32] this comparison is our gold standard comparison so that comparison is our
+[0:08:36] comparison so that comparison is our Target answer and then what we're trying
+[0:08:38] Target answer and then what we're trying to say is can we recover that using
+[0:08:40] to say is can we recover that using observational study methods so ideally
+[0:08:42] observational study methods so ideally what we would do is we would take this
+[0:08:43] what we would do is we would take this treated group and we would construct a
+[0:08:46] treated group and we would construct a comparison group from the non-sampled
+[0:08:48] comparison group from the non-sampled units by finding non-sampled units that
+[0:08:51] units by finding non-sampled units that are similar to The treated units based
+[0:08:53] are similar to The treated units based on various covariants that we have at
+[0:08:54] on various covariants that we have at their disposal and then we could compare
+[0:08:56] their disposal and then we could compare these two things and that would give us
+[0:08:58] these two things and that would give us an observational study estimate sort of
+[0:09:01] an observational study estimate sort of I'll get into that weeds of that in a
+[0:09:03] I'll get into that weeds of that in a little bit and then the question is does
+[0:09:05] little bit and then the question is does that observational study estimate Echo
+[0:09:08] that observational study estimate Echo the uh gold standard RCT estimate so
+[0:09:12] the uh gold standard RCT estimate so there's tow hat is our RCT there's our
+[0:09:15] there's tow hat is our RCT there's our non RCT estimate the bias in the
+[0:09:18] non RCT estimate the bias in the observational study because we're
+[0:09:20] observational study because we're assuming our RCT is our gold standard
+[0:09:22] assuming our RCT is our gold standard there's no bias there so the bias is
+[0:09:24] there's no bias there so the bias is going to be the difference of these two
+[0:09:25] going to be the difference of these two estimates which turns out to just be a
+[0:09:28] estimates which turns out to just be a contrast between the comparison group we
+[0:09:30] contrast between the comparison group we don't actually need the treatment group
+[0:09:31] don't actually need the treatment group at all we can just focus on whether our
+[0:09:34] at all we can just focus on whether our we can construct a comparison group that
+[0:09:36] we can construct a comparison group that mimics the actual control
+[0:09:40] mimics the actual control group so our estimated bias is the
+[0:09:43] group so our estimated bias is the difference that's basically just what I
+[0:09:45] difference that's basically just what I said so characterizing that bias now we
+[0:09:49] said so characterizing that bias now we can decompose the bias a little bit
+[0:09:51] can decompose the bias a little bit further so we can talk about the
+[0:09:53] further so we can talk about the adjusted mean comparison outcome where
+[0:09:56] adjusted mean comparison outcome where you could imagine if we're fully
+[0:09:57] you could imagine if we're fully adjusting for covariates we can and have
+[0:10:00] adjusting for covariates we can and have this function here the muc uh control
+[0:10:03] this function here the muc uh control group function which is the expected
+[0:10:05] group function which is the expected control potential outcome given observed
+[0:10:08] control potential outcome given observed covariant values X for the control units
+[0:10:11] covariant values X for the control units in um the um in the non- selected sample
+[0:10:16] in um the um in the non- selected sample the people that are set aside and using
+[0:10:20] the people that are set aside and using that definition then our adjusted
+[0:10:23] that definition then our adjusted control potential outcome would be the
+[0:10:25] control potential outcome would be the integral of that function over the
+[0:10:28] integral of that function over the distribution of the units in the
+[0:10:30] distribution of the units in the treatments AR the control group arm of
+[0:10:33] treatments AR the control group arm of our RCT so you can think of our best
+[0:10:36] our RCT so you can think of our best case control uh potential outcome using
+[0:10:39] case control uh potential outcome using our observed covariates is essentially a
+[0:10:41] our observed covariates is essentially a reweighting of the um the non-selected
+[0:10:45] reweighting of the um the non-selected units to match the distribution of our
+[0:10:48] units to match the distribution of our RCT and then if we do that then we can
+[0:10:52] RCT and then if we do that then we can decompose bias into two
+[0:10:55] decompose bias into two pieces the piece the Delta U is the
+[0:10:59] pieces the piece the Delta U is the piece that's left over that's the
+[0:11:01] piece that's left over that's the difference between our comparison group
+[0:11:04] difference between our comparison group and um sorry that's the difference
+[0:11:07] and um sorry that's the difference between the control group in our RCT and
+[0:11:10] between the control group in our RCT and our adjusted comparison group so that's
+[0:11:13] our adjusted comparison group so that's if we do the best adjustment possible
+[0:11:14] if we do the best adjustment possible we're left with Delta U and then the
+[0:11:17] we're left with Delta U and then the Delta X is if we didn't do any kind of
+[0:11:19] Delta X is if we didn't do any kind of adjustment if we just used all of the
+[0:11:21] adjustment if we just used all of the units in the uh non-selected group uh
+[0:11:24] units in the uh non-selected group uh that would be and without without
+[0:11:26] that would be and without without adjustment that would be sort of the
+[0:11:27] adjustment that would be sort of the bias that we can fix
+[0:11:36] now I'm going to go on a brief tangent which is there's a very subtle aspect or
+[0:11:38] which is there's a very subtle aspect or subtle to me anyway of within St study
+[0:11:41] subtle to me anyway of within St study comparisons that I just want to
+[0:11:42] comparisons that I just want to highlight which is what we want from a
+[0:11:45] highlight which is what we want from a within study comparison is we want to
+[0:11:46] within study comparison is we want to know if we can recover an impact
+[0:11:48] know if we can recover an impact estimate in a true observational study
+[0:11:51] estimate in a true observational study I.E we want to know if we find control
+[0:11:53] I.E we want to know if we find control units just like treatment units
+[0:11:55] units just like treatment units treatment units who decided to get
+[0:11:56] treatment units who decided to get treatment on their own are we going to
+[0:11:59] treatment on their own are we going to get a real good estimate of a causal
+[0:12:01] get a real good estimate of a causal effect but if you think about what we're
+[0:12:03] effect but if you think about what we're doing with a within study comparison is
+[0:12:05] doing with a within study comparison is we're we don't have any treatment units
+[0:12:08] we're we don't have any treatment units that self- selected into treatment we
+[0:12:11] that self- selected into treatment we have treatment units that self- selected
+[0:12:13] have treatment units that self- selected into a randomized trial where they might
+[0:12:15] into a randomized trial where they might get treatment which is a different
+[0:12:17] get treatment which is a different selection mechanism so if the within
+[0:12:21] selection mechanism so if the within study comparison is really going to test
+[0:12:23] study comparison is really going to test whether observational study methods work
+[0:12:26] whether observational study methods work well we're not actually in a pure
+[0:12:28] well we're not actually in a pure observational study domain we're in a a
+[0:12:31] observational study domain we're in a a sister domain so the mechanism if the
+[0:12:34] sister domain so the mechanism if the mechanism for deciding to enroll in an
+[0:12:36] mechanism for deciding to enroll in an RCT is similar to the mechanism for
+[0:12:39] RCT is similar to the mechanism for deciding to start up a treatment program
+[0:12:40] deciding to start up a treatment program on one's own then a within study
+[0:12:42] on one's own then a within study comparison is Meaningful so but really A
+[0:12:45] comparison is Meaningful so but really A within study comparison is an argument
+[0:12:47] within study comparison is an argument by analogy okay so our context a context
+[0:12:51] by analogy okay so our context a context which I now realize I've told you
+[0:12:52] which I now realize I've told you literally nothing about uh we're going
+[0:12:54] literally nothing about uh we're going to find that rcts I'm going to tell you
+[0:12:56] to find that rcts I'm going to tell you more about the Contex soon but in our
+[0:12:58] more about the Contex soon but in our context we feel pretty good rcts are a
+[0:13:01] context we feel pretty good rcts are a weit lless design so the schools um want
+[0:13:04] weit lless design so the schools um want the stuff that's why they enrolled in
+[0:13:05] the stuff that's why they enrolled in the RCT so there's some Hunger for that
+[0:13:07] the RCT so there's some Hunger for that that mimics a situation where uh schools
+[0:13:10] that mimics a situation where uh schools would adopt treatment on their own
+[0:13:12] would adopt treatment on their own schools are paying some substantial cost
+[0:13:14] schools are paying some substantial cost so it's not that the RCT makes
+[0:13:15] so it's not that the RCT makes everything free so You' get a bunch of
+[0:13:17] everything free so You' get a bunch of schools that wouldn't normally take
+[0:13:19] schools that wouldn't normally take treatment if they were not given the
+[0:13:20] treatment if they were not given the extra bump of an RCT so that feels
+[0:13:23] extra bump of an RCT so that feels fairly similar and then we also did a
+[0:13:25] fairly similar and then we also did a few uh follow-ups and we found that
+[0:13:27] few uh follow-ups and we found that schools continued to use the RCT program
+[0:13:29] schools continued to use the RCT program after the valuation so again it shows
+[0:13:31] after the valuation so again it shows that there is a real commitment similar
+[0:13:33] that there is a real commitment similar to the kind of commitment you might
+[0:13:34] to the kind of commitment you might expect for a school adopting a treatment
+[0:13:36] expect for a school adopting a treatment on their own to fix some problem that
+[0:13:38] on their own to fix some problem that they perceiv they
+[0:13:39] they perceiv they had but I do want to just mark this
+[0:13:42] had but I do want to just mark this important caveat I think this caveat
+[0:13:44] important caveat I think this caveat could be drawn out a lot more in much of
+[0:13:46] could be drawn out a lot more in much of the within study comparison
+[0:13:49] the within study comparison literature here is a picture of the
+[0:13:51] literature here is a picture of the prior literature and in the prior
+[0:13:54] prior literature and in the prior literature we do see that within study
+[0:13:56] literature we do see that within study compar that with within study comparison
+[0:13:58] compar that with within study comparison evidence does there there are some
+[0:14:01] evidence does there there are some estimates out there and it shows that we
+[0:14:03] estimates out there and it shows that we can correct the biases tend to be
+[0:14:06] can correct the biases tend to be relatively
+[0:14:09] relatively small so let's turn to what we do um we
+[0:14:14] small so let's turn to what we do um we have uh or Ben has more accurately
+[0:14:18] have uh or Ben has more accurately access to basically all of the students
+[0:14:21] access to basically all of the students in England um in What's called the
+[0:14:24] in England um in What's called the national pupil database and in England
+[0:14:27] national pupil database and in England there's standardized test throughout the
+[0:14:29] there's standardized test throughout the entire country so and these most of the
+[0:14:31] entire country so and these most of the students basically virtually all of the
+[0:14:33] students basically virtually all of the students will sit for these tests so we
+[0:14:35] students will sit for these tests so we get to see these students at periodic uh
+[0:14:37] get to see these students at periodic uh points throughout their uh School lives
+[0:14:41] points throughout their uh School lives and we also are going to have this host
+[0:14:43] and we also are going to have this host of variables on these students and also
+[0:14:45] of variables on these students and also variables on the schools and the context
+[0:14:47] variables on the schools and the context that these students live so the other
+[0:14:51] that these students live so the other important thing is there are all of
+[0:14:53] important thing is there are all of these rcts that are being run in England
+[0:14:56] these rcts that are being run in England and those rcts are randomizing and these
+[0:14:59] and those rcts are randomizing and these are schools being randomized into
+[0:15:01] are schools being randomized into treatment and control so we have
+[0:15:03] treatment and control so we have essentially cluster randomized um
+[0:15:06] essentially cluster randomized um designs but all of those rcts are also
+[0:15:09] designs but all of those rcts are also in this database which means that we
+[0:15:11] in this database which means that we have lists of students that are in the
+[0:15:14] have lists of students that are in the rcts and we can embed all of those rcts
+[0:15:18] rcts and we can embed all of those rcts in this larger context of all the
+[0:15:20] in this larger context of all the students in England so it's a perfect uh
+[0:15:22] students in England so it's a perfect uh um platform for conducting within study
+[0:15:25] um platform for conducting within study comparisons because we have um some
+[0:15:27] comparisons because we have um some small percentage of all of the students
+[0:15:29] small percentage of all of the students England are in this selection of rcts
+[0:15:32] England are in this selection of rcts we're going to use those they were
+[0:15:33] we're going to use those they were really randomized basically everyone
+[0:15:36] really randomized basically everyone takes tests so we don't have to worry
+[0:15:37] takes tests so we don't have to worry about attrition and things like that and
+[0:15:39] about attrition and things like that and then we're going to look for the exact
+[0:15:42] then we're going to look for the exact or similar students elsewhere and they
+[0:15:45] or similar students elsewhere and they all have the same outcomes because all
+[0:15:47] all have the same outcomes because all the outcomes are standardized throughout
+[0:15:49] the outcomes are standardized throughout the um the
+[0:15:55] country so in order to estimate selection bias F we're going to do two
+[0:15:57] selection bias F we're going to do two things one is we're just going to have a
+[0:16:00] things one is we're just going to have a naive bias estimate which is sort of our
+[0:16:02] naive bias estimate which is sort of our Benchmark we're just going to take the
+[0:16:03] Benchmark we're just going to take the RCT control and our observational
+[0:16:05] RCT control and our observational control namely all the rest of the
+[0:16:07] control namely all the rest of the students that are not in the RCT um and
+[0:16:11] students that are not in the RCT um and just see how big of a um bias there how
+[0:16:13] just see how big of a um bias there how big a selection bias issue might be and
+[0:16:16] big a selection bias issue might be and then we're going to look at our actual
+[0:16:18] then we're going to look at our actual we're trying to do something estimate
+[0:16:20] we're trying to do something estimate which is we're going to do some matching
+[0:16:22] which is we're going to do some matching we're going to use onetoone matching
+[0:16:23] we're going to use onetoone matching without replacement uh we use my hobus
+[0:16:25] without replacement uh we use my hobus distance propensity score caliper we
+[0:16:28] distance propensity score caliper we decided to deliberately use a a method
+[0:16:29] decided to deliberately use a a method that's common in applied uh research
+[0:16:31] that's common in applied uh research rather than something more Cutting Edge
+[0:16:33] rather than something more Cutting Edge because we want to sort of see how do
+[0:16:35] because we want to sort of see how do things work in practice it's also
+[0:16:37] things work in practice it's also computationally cheap uh which helps
+[0:16:39] computationally cheap uh which helps with our inferential strategy which I'm
+[0:16:41] with our inferential strategy which I'm going to touch on uh in a
+[0:16:49] bit a little bit more in detail um a beta match is a contrast between the RCT
+[0:16:52] beta match is a contrast between the RCT control and the max match comparison
+[0:16:54] control and the max match comparison group and we're going to just fit so we
+[0:16:56] group and we're going to just fit so we do matching and then we do a regression
+[0:16:58] do matching and then we do a regression adjustment step and and uh we fit a
+[0:17:00] adjustment step and and uh we fit a multi-level model uh with school effects
+[0:17:03] multi-level model uh with school effects um and look at the result and we're
+[0:17:07] um and look at the result and we're fitting to our two comparison groups and
+[0:17:09] fitting to our two comparison groups and what we hope is that our um beta match
+[0:17:13] what we hope is that our um beta match is going to be zero but um if it's not
+[0:17:17] is going to be zero but um if it's not zero that would be an estimate of the
+[0:17:19] zero that would be an estimate of the bias in that particular context we have
+[0:17:21] bias in that particular context we have a few outcomes for each intervention and
+[0:17:23] a few outcomes for each intervention and we have a collection of interventions
+[0:17:25] we have a collection of interventions and we basically do this independently
+[0:17:27] and we basically do this independently for each intervention and outcome
+[0:17:30] for each intervention and outcome our inferential strategy will take some
+[0:17:32] our inferential strategy will take some of the correlation when we have multiple
+[0:17:33] of the correlation when we have multiple outcomes in a sendal intervention into
+[0:17:35] outcomes in a sendal intervention into account I can talk about that
+[0:17:38] account I can talk about that later okay so I'm going to briefly pause
+[0:17:42] later okay so I'm going to briefly pause to see if there are any
+[0:17:44] to see if there are any questions thanks Luke I don't think
+[0:17:46] questions thanks Luke I don't think there are questions yet so I think you
+[0:17:48] there are questions yet so I think you can continue and we take questions later
+[0:17:50] can continue and we take questions later okay
+[0:17:53] okay great so our bias estimates uh this is
+[0:17:57] great so our bias estimates uh this is the results of all of that work
+[0:17:59] the results of all of that work um the bias estimates are on the right
+[0:18:02] um the bias estimates are on the right hand side and then at the bottom here
+[0:18:04] hand side and then at the bottom here are just sort of box plots of the bias
+[0:18:07] are just sort of box plots of the bias estimates for naive and for match and we
+[0:18:09] estimates for naive and for match and we can see that the center of naive is it
+[0:18:11] can see that the center of naive is it looks like if we do nothing then uh
+[0:18:14] looks like if we do nothing then uh we're in trouble the comparison groups
+[0:18:17] we're in trouble the comparison groups in the actual randomized trials uh are
+[0:18:20] in the actual randomized trials uh are much different than the rest of the
+[0:18:23] much different than the rest of the country but if we match on average uh we
+[0:18:27] country but if we match on average uh we seem to be right around zero although we
+[0:18:29] seem to be right around zero although we have these whiskers out um meaning that
+[0:18:32] have these whiskers out um meaning that some of our estimates tend to be
+[0:18:33] some of our estimates tend to be positive some of our estimates tend to
+[0:18:34] positive some of our estimates tend to be negative which brings us to the next
+[0:18:37] be negative which brings us to the next aspect of are those estimates positive
+[0:18:40] aspect of are those estimates positive and negative due to random chance
+[0:18:42] and negative due to random chance remember we're estimating both our gold
+[0:18:44] remember we're estimating both our gold standard Benchmark and we're estimating
+[0:18:46] standard Benchmark and we're estimating our observational study um empirical
+[0:18:49] our observational study um empirical estimate and we would expect both those
+[0:18:51] estimate and we would expect both those things to vary around their uh relative
+[0:18:54] things to vary around their uh relative truths so when we look at the difference
+[0:18:56] truths so when we look at the difference there's noise there so even if we were
+[0:18:58] there's noise there so even if we were perfect
+[0:18:59] perfect matching in expectation and everything
+[0:19:01] matching in expectation and everything was hunky dory we would expect to see um
+[0:19:04] was hunky dory we would expect to see um some
+[0:19:05] some scatter so the way we're going to try to
+[0:19:08] scatter so the way we're going to try to look through that scatter and get a
+[0:19:09] look through that scatter and get a sense of how much bias there is in
+[0:19:12] sense of how much bias there is in general across all of our interventions
+[0:19:13] general across all of our interventions and studies is to use meta
+[0:19:22] analysis So Meta analysis it's going to estimate the real magnitude of the bias
+[0:19:23] estimate the real magnitude of the bias and the way meta analysis works we
+[0:19:25] and the way meta analysis works we basically set up a model where we say
+[0:19:27] basically set up a model where we say okay our Point estimate of bias
+[0:19:30] okay our Point estimate of bias given the real estimate of bias is we'll
+[0:19:32] given the real estimate of bias is we'll just say normally distributed which is
+[0:19:34] just say normally distributed which is not a insane assumption because we're
+[0:19:36] not a insane assumption because we're essentially averaging over lots of
+[0:19:38] essentially averaging over lots of things um around that true bias and with
+[0:19:43] things um around that true bias and with some variance and this thing we can
+[0:19:46] some variance and this thing we can actually directly estimate and we're
+[0:19:47] actually directly estimate and we're going to estimate it and then assume
+[0:19:49] going to estimate it and then assume it's known and then we have um this is
+[0:19:53] it's known and then we have um this is you can I like to think of it as sort of
+[0:19:55] you can I like to think of it as sort of a basan is in spirit Assumption of we're
+[0:19:58] a basan is in spirit Assumption of we're saying that all of our Point estimates
+[0:20:01] saying that all of our Point estimates or all of our true biases are normally
+[0:20:03] or all of our true biases are normally distributed around some average overall
+[0:20:06] distributed around some average overall bias and with some variance to squared
+[0:20:09] bias and with some variance to squared which describes how much bias um tends
+[0:20:12] which describes how much bias um tends to occur across studies of this
+[0:20:15] to occur across studies of this type now what we really want or the
+[0:20:18] type now what we really want or the thing that I care most about is that to
+[0:20:20] thing that I care most about is that to squared because it's telling us even if
+[0:20:23] squared because it's telling us even if on average bias is zero that's not that
+[0:20:26] on average bias is zero that's not that comforting it means that say on average
+[0:20:28] comforting it means that say on average bias um sorry if if on average bias was
+[0:20:31] bias um sorry if if on average bias was zero with that
+[0:20:33] zero with that new um if there is some substantial
+[0:20:36] new um if there is some substantial variation it means that some studies we
+[0:20:38] variation it means that some studies we would do our observational study and we
+[0:20:41] would do our observational study and we just blow it and end up with a big
+[0:20:42] just blow it and end up with a big positive bias in other study we blow it
+[0:20:45] positive bias in other study we blow it and there's a big negative bias if those
+[0:20:48] and there's a big negative bias if those biases are not taken into account in any
+[0:20:50] biases are not taken into account in any uncertainty estimation then we're going
+[0:20:52] uncertainty estimation then we're going to be uh generally making overconfident
+[0:20:54] to be uh generally making overconfident statements one way or the other and just
+[0:20:56] statements one way or the other and just be wrong a lot in either direction so
+[0:20:59] be wrong a lot in either direction so what we really want to know is in
+[0:21:01] what we really want to know is in general do these observational studies
+[0:21:03] general do these observational studies methods work I.E is it controlling the
+[0:21:06] methods work I.E is it controlling the bias even if the bias is on average zero
+[0:21:09] bias even if the bias is on average zero we want something more than that we want
+[0:21:10] we want something more than that we want the bias to be generally small so we
+[0:21:13] the bias to be generally small so we could just ignore
+[0:21:20] it um after we so we basically fit this multi-level model where we're assuming
+[0:21:22] multi-level model where we're assuming those Sigma squ kws are known and then
+[0:21:25] those Sigma squ kws are known and then after we can use that to get our
+[0:21:27] after we can use that to get our estimates of t um and new and then we do
+[0:21:31] estimates of t um and new and then we do empirical Bays to shrink all of our uh
+[0:21:35] empirical Bays to shrink all of our uh raw estimates of bias and then empirical
+[0:21:38] raw estimates of bias and then empirical Baye tends to over shrink so then we for
+[0:21:41] Baye tends to over shrink so then we for visualization and just discussion and
+[0:21:43] visualization and just discussion and presentation to make this uh these Works
+[0:21:45] presentation to make this uh these Works accessible to more applied practitioners
+[0:21:48] accessible to more applied practitioners we then immediately rescale them to
+[0:21:50] we then immediately rescale them to match so that the variance of our
+[0:21:52] match so that the variance of our individual bias estimates across our
+[0:21:54] individual bias estimates across our studies matches uh the variance our
+[0:21:57] studies matches uh the variance our overall estimated variance of the
+[0:22:00] overall estimated variance of the biases so when we do all that we get the
+[0:22:04] biases so when we do all that we get the following picture so the top is the
+[0:22:07] following picture so the top is the naive estimates when we do nothing uh
+[0:22:10] naive estimates when we do nothing uh this is our distribution it's it's a
+[0:22:12] this is our distribution it's it's a rough a very rough picture of the true
+[0:22:15] rough a very rough picture of the true distribution of biases across all of our
+[0:22:17] distribution of biases across all of our studies and interventions and then at
+[0:22:20] studies and interventions and then at the bottom um half of the slide we see
+[0:22:22] the bottom um half of the slide we see the distribution of true biases across
+[0:22:26] the distribution of true biases across all of our interventions and studies
+[0:22:28] all of our interventions and studies once we we've adjusted using all of our
+[0:22:30] once we we've adjusted using all of our various
+[0:22:31] various covariants and what we generally see is
+[0:22:34] covariants and what we generally see is the biases after adjustment go um get to
+[0:22:38] the biases after adjustment go um get to be fairly small the standard deviation
+[0:22:41] be fairly small the standard deviation uh is missing on the slide but it's
+[0:22:44] uh is missing on the slide but it's around .03 or something like that um and
+[0:22:49] around .03 or something like that um and there is some spread so according to
+[0:22:51] there is some spread so according to this picture it's not entirely
+[0:22:53] this picture it's not entirely impossible to find biases of on the
+[0:22:56] impossible to find biases of on the order of 0.1 standard deviations or 0.1
+[0:22:58] order of 0.1 standard deviations or 0.1 effect size units which would be a bad
+[0:23:00] effect size units which would be a bad day admittedly but generally speaking a
+[0:23:03] day admittedly but generally speaking a lot of these observational studies seem
+[0:23:04] lot of these observational studies seem to have biases that are relatively
+[0:23:06] to have biases that are relatively negligible unless we're in some sort of
+[0:23:08] negligible unless we're in some sort of nudge literature where we're looking at
+[0:23:11] nudge literature where we're looking at very very small
+[0:23:19] effects so what does all this mean well we compared RCT to matching in 42 times
+[0:23:21] we compared RCT to matching in 42 times and we didn't find systematic
+[0:23:22] and we didn't find systematic differences the results were similar for
+[0:23:24] differences the results were similar for maths reading and writing outcomes some
+[0:23:26] maths reading and writing outcomes some adjustment is necessary however are
+[0:23:29] adjustment is necessary however are adjusted estimates going back a slide
+[0:23:30] adjusted estimates going back a slide were negative and varied so we had the
+[0:23:33] were negative and varied so we had the systematic Trend um meaning that the
+[0:23:36] systematic Trend um meaning that the kinds of rcts that we see are serving a
+[0:23:38] kinds of rcts that we see are serving a specific kind of school that's not
+[0:23:40] specific kind of school that's not entirely surprising but if we naively
+[0:23:43] entirely surprising but if we naively just aren't comparing uh those students
+[0:23:46] just aren't comparing uh those students to um carefully chosen students then we
+[0:23:49] to um carefully chosen students then we will be blowing it to um to a fairly
+[0:23:51] will be blowing it to um to a fairly large
+[0:23:53] large degree so given all of that some may be
+[0:23:56] degree so given all of that some may be tempted to conclude that selection bias
+[0:23:58] tempted to conclude that selection bias isn't a big problem so as long as we're
+[0:23:59] isn't a big problem so as long as we're working with school evaluations with the
+[0:24:01] working with school evaluations with the national pupil database right you can
+[0:24:03] national pupil database right you can have all these caveats we we're
+[0:24:05] have all these caveats we we're examining a fairly specific scenario we
+[0:24:07] examining a fairly specific scenario we are in one country we're looking at one
+[0:24:09] are in one country we're looking at one kind of outcome we're looking at school
+[0:24:11] kind of outcome we're looking at school level interventions etc etc even all of
+[0:24:15] level interventions etc etc even all of that we're a little bit cautious we say
+[0:24:18] that we're a little bit cautious we say that this may go too far and there's
+[0:24:20] that this may go too far and there's some limitations to bear in mind
+[0:24:22] some limitations to bear in mind non-radical inventions is what we're
+[0:24:23] non-radical inventions is what we're looking at here the selection bias
+[0:24:25] looking at here the selection bias itself is a moving Target we want to
+[0:24:27] itself is a moving Target we want to keep rechecking it um this is more a
+[0:24:30] keep rechecking it um this is more a call to arms that we need more of these
+[0:24:32] call to arms that we need more of these within study comparisons in different
+[0:24:34] within study comparisons in different contexts which happily is long as we
+[0:24:38] contexts which happily is long as we have ways to link uh randomized trial
+[0:24:41] have ways to link uh randomized trial information to larger uh databases um
+[0:24:44] information to larger uh databases um where you have some sort of standardized
+[0:24:46] where you have some sort of standardized tests you could uh replicate this kind
+[0:24:49] tests you could uh replicate this kind of thing in all sorts of contexts the
+[0:24:51] of thing in all sorts of contexts the more we do that the more we'll get a
+[0:24:53] more we do that the more we'll get a sense of how well these uh things tend
+[0:24:56] sense of how well these uh things tend to work in
+[0:24:57] to work in practice I've showed you sort of the
+[0:24:59] practice I've showed you sort of the applied takeaways um but in the paper
+[0:25:02] applied takeaways um but in the paper itself um the way we do the uh
+[0:25:05] itself um the way we do the uh inferential strategy to do the meta
+[0:25:07] inferential strategy to do the meta analysis was we need to estimate these
+[0:25:09] analysis was we need to estimate these uncertainty estimates uh for the biases
+[0:25:12] uncertainty estimates uh for the biases and we need to take the correlation
+[0:25:13] and we need to take the correlation structure into account of the various
+[0:25:15] structure into account of the various outcomes um I encourage you to if you're
+[0:25:18] outcomes um I encourage you to if you're interested to go look at the paper where
+[0:25:19] interested to go look at the paper where we sort of spell out how to conduct meta
+[0:25:23] we sort of spell out how to conduct meta analysis in these ways where we we do a
+[0:25:25] analysis in these ways where we we do a simulation style inference where we
+[0:25:27] simulation style inference where we assume that there's no bias and we can
+[0:25:30] assume that there's no bias and we can generate a simulation of what the
+[0:25:32] generate a simulation of what the distribution of biases look like so we
+[0:25:34] distribution of biases look like so we can have some sort of more rigorous
+[0:25:36] can have some sort of more rigorous testing as to what's going on anyway
+[0:25:39] testing as to what's going on anyway some fun details
+[0:25:47] there all right so that is um the end of the First Act and then I'm going to
+[0:25:49] the First Act and then I'm going to basically say everything I just said
+[0:25:51] basically say everything I just said over again except uh replacing
+[0:25:54] over again except uh replacing observational study with the word
+[0:25:56] observational study with the word attrition um but before I do that are
+[0:25:58] attrition um but before I do that are there any questions or should I just
+[0:26:00] there any questions or should I just keep
+[0:26:02] keep going there there are some questions in
+[0:26:04] going there there are some questions in Q&amp;A I think Ben is taking care of it
+[0:26:06] Q&amp;A I think Ben is taking care of it there's one by an anonymous attendee who
+[0:26:09] there's one by an anonymous attendee who asks can you please explain again how
+[0:26:11] asks can you please explain again how the bias in each paper is
+[0:26:15] the bias in each paper is calculated yes um so the way we
+[0:26:18] calculated yes um so the way we calculate bias um
+[0:26:21] calculate bias um is we have a take a particular uh
+[0:26:25] is we have a take a particular uh randomized trial so um there's one that
+[0:26:28] randomized trial so um there's one that I I think it's called chess in schools
+[0:26:30] I I think it's called chess in schools uh these uh very optimistic researchers
+[0:26:33] uh these uh very optimistic researchers believed um wanted to teach chess chess
+[0:26:36] believed um wanted to teach chess chess to children and that would cause them to
+[0:26:38] to children and that would cause them to be engaged with chess school and
+[0:26:40] be engaged with chess school and therefore do better on math um was I
+[0:26:42] therefore do better on math um was I believe the working Theory so they did a
+[0:26:45] believe the working Theory so they did a randomized evaluation of Chess in
+[0:26:47] randomized evaluation of Chess in schools where we have some number of
+[0:26:49] schools where we have some number of schools enrolled in this study and half
+[0:26:53] schools enrolled in this study and half of them um got this intervention and the
+[0:26:55] of them um got this intervention and the other half got the intervention later
+[0:26:57] other half got the intervention later due to a weit list design sign at the so
+[0:27:01] due to a weit list design sign at the so at the end of that we have a collection
+[0:27:02] at the end of that we have a collection of kids that received the intervention
+[0:27:04] of kids that received the intervention and didn't and a collection of schools
+[0:27:05] and didn't and a collection of schools that received the intervention and
+[0:27:07] that received the intervention and didn't given that we can compare them to
+[0:27:10] didn't given that we can compare them to get an estimate of the impact of Chess
+[0:27:13] get an estimate of the impact of Chess in schools for that collection of
+[0:27:16] in schools for that collection of schools and then what we do to get an
+[0:27:18] schools and then what we do to get an observational estimate so that is our
+[0:27:20] observational estimate so that is our gold standard and then for the
+[0:27:21] gold standard and then for the observational estimate we take the
+[0:27:23] observational estimate we take the control schools and for each control
+[0:27:25] control schools and for each control school we try to find a matched uh
+[0:27:27] school we try to find a matched uh school a school that has similar uh
+[0:27:30] school a school that has similar uh characteristics um along a whole host of
+[0:27:32] characteristics um along a whole host of measures average test scores uh
+[0:27:35] measures average test scores uh neighborhood type things like Urban
+[0:27:37] neighborhood type things like Urban versus rural things like that region of
+[0:27:39] versus rural things like that region of the country I
+[0:27:40] the country I think and then we take the average
+[0:27:44] think and then we take the average outcome of all of those control school
+[0:27:47] outcome of all of those control school students and compare to our RCT control
+[0:27:50] students and compare to our RCT control group and um the difference in those is
+[0:27:53] group and um the difference in those is our estimate of bias um is the estimate
+[0:27:57] our estimate of bias um is the estimate of selection bias how different our our
+[0:28:00] of selection bias how different our our constructed control group from the
+[0:28:02] constructed control group from the actual and something that I I would like
+[0:28:05] actual and something that I I would like to highlight here is we can actually in
+[0:28:07] to highlight here is we can actually in some cases we're playing a little bit of
+[0:28:09] some cases we're playing a little bit of um a game where the primary outcome of
+[0:28:11] um a game where the primary outcome of some of these uh interventions might
+[0:28:13] some of these uh interventions might have been some kind of commercial test
+[0:28:15] have been some kind of commercial test and this will come up more with the
+[0:28:16] and this will come up more with the attrition
+[0:28:18] attrition example where um
+[0:28:21] example where um so but we don't care like whatever
+[0:28:24] so but we don't care like whatever outcomes are being used what we do is we
+[0:28:27] outcomes are being used what we do is we use the uh National tests that all
+[0:28:30] use the uh National tests that all students throughout the country are
+[0:28:32] students throughout the country are receiving and use those as outcomes and
+[0:28:34] receiving and use those as outcomes and since we're looking at a selection bias
+[0:28:36] since we're looking at a selection bias we argue that looking at these outcomes
+[0:28:39] we argue that looking at these outcomes even if they're not necessarily the
+[0:28:40] even if they're not necessarily the primary outcomes that the researcher
+[0:28:42] primary outcomes that the researcher originally identified is still okay in
+[0:28:44] originally identified is still okay in terms of testing the validity of the
+[0:28:46] terms of testing the validity of the selection bias because we're not so much
+[0:28:49] selection bias because we're not so much interested we're not actually interested
+[0:28:50] interested we're not actually interested in the treatment impact or whether the
+[0:28:52] in the treatment impact or whether the treatment worked or anything like that
+[0:28:54] treatment worked or anything like that we're just interested in whether we can
+[0:28:56] we're just interested in whether we can recover control group like people
+[0:28:59] recover control group like people uh using observational methods rather
+[0:29:01] uh using observational methods rather than relying on the
+[0:29:02] than relying on the randomization and the way we test that
+[0:29:04] randomization and the way we test that is we look at these three uh test
+[0:29:08] is we look at these three uh test standardized test scores um as three
+[0:29:10] standardized test scores um as three different measures of how these groups
+[0:29:12] different measures of how these groups may be
+[0:29:18] different all right
+[0:29:20] right so let's talk about attrition so here um
+[0:29:23] so let's talk about attrition so here um I just want to call out um this paper is
+[0:29:25] I just want to call out um this paper is submitted but um it's not yet published
+[0:29:27] submitted but um it's not yet published but we're happy to share it
+[0:29:29] but we're happy to share it um it's currently posted on um my uh my
+[0:29:33] um it's currently posted on um my uh my lab group's website so you can find it
+[0:29:42] there in an attrition context we have an evaluation sample so attrition is you
+[0:29:44] evaluation sample so attrition is you have a bunch of people that you've
+[0:29:45] have a bunch of people that you've rounded up for your randomized
+[0:29:47] rounded up for your randomized experiment you randomize them into
+[0:29:48] experiment you randomize them into treatment and then you randomize others
+[0:29:50] treatment and then you randomize others into control and then after you've done
+[0:29:53] into control and then after you've done all of that work um a bunch of people in
+[0:29:55] all of that work um a bunch of people in your treatment group bail on you and a
+[0:29:58] your treatment group bail on you and a bunch of people people in the control
+[0:29:59] bunch of people people in the control group also bail on you so at the end of
+[0:30:02] group also bail on you so at the end of the day you only have your treatment
+[0:30:04] the day you only have your treatment responders and your control responders
+[0:30:06] responders and your control responders the people that stuck around and what
+[0:30:09] the people that stuck around and what you're going to probably do if you're
+[0:30:11] you're going to probably do if you're ignoring attrition which is what a lot
+[0:30:12] ignoring attrition which is what a lot of people really want to do is you're
+[0:30:14] of people really want to do is you're going to compare this group to this
+[0:30:16] going to compare this group to this group as your estimate of a causal
+[0:30:19] group as your estimate of a causal effect if you notice that there's
+[0:30:21] effect if you notice that there's attrition you might adjust for Baseline
+[0:30:24] attrition you might adjust for Baseline uh
+[0:30:24] uh covariates if you see that you have some
+[0:30:26] covariates if you see that you have some difference in the Baseline covariates
+[0:30:28] difference in the Baseline covariates you could adjust your comparison of your
+[0:30:30] you could adjust your comparison of your treatment and control to repair that
+[0:30:32] treatment and control to repair that balance this is moving an RCT more in
+[0:30:35] balance this is moving an RCT more in the direction towards an uh
+[0:30:36] the direction towards an uh observational
+[0:30:38] observational study
+[0:30:40] study so what we're going to do
+[0:30:43] so what we're going to do because um these randomized experiments
+[0:30:46] because um these randomized experiments are Again part of this National pupil
+[0:30:48] are Again part of this National pupil database and happening in England is
+[0:30:50] database and happening in England is what we can do is we can say okay people
+[0:30:53] what we can do is we can say okay people ran these rcts and they have their
+[0:30:56] ran these rcts and they have their particular tests uh this commercial test
+[0:30:58] particular tests uh this commercial test that they're using to estimate the
+[0:30:59] that they're using to estimate the impact of some intervention but then
+[0:31:01] impact of some intervention but then they have people dropping out of the
+[0:31:03] they have people dropping out of the intervention and so on and so
+[0:31:05] intervention and so on and so forth so the evaluators were analyzing
+[0:31:10] forth so the evaluators were analyzing the responders the treatment responders
+[0:31:11] the responders the treatment responders and the control responders but we
+[0:31:13] and the control responders but we actually can look at the full range of
+[0:31:15] actually can look at the full range of all the student data and we can find all
+[0:31:17] all the student data and we can find all the students that left and we can
+[0:31:19] the students that left and we can include them and we can do an analysis
+[0:31:21] include them and we can do an analysis which is the full treatment group
+[0:31:23] which is the full treatment group including the ones that were lost in the
+[0:31:25] including the ones that were lost in the original evaluation and the full control
+[0:31:28] original evaluation and the full control group
+[0:31:29] group now we can't of course do that with the
+[0:31:30] now we can't of course do that with the commercial tests that were used as part
+[0:31:32] commercial tests that were used as part of the original experiment but again we
+[0:31:34] of the original experiment but again we can turn to the state tests and we can
+[0:31:36] can turn to the state tests and we can estimate impacts on the state tests for
+[0:31:38] estimate impacts on the state tests for the full sample as compared to the
+[0:31:41] the full sample as compared to the responder uh
+[0:31:44] responder uh contrast so that's the general idea
+[0:31:47] contrast so that's the general idea before I do that I just want to flag two
+[0:31:49] before I do that I just want to flag two different ways that attrition can hurt
+[0:31:51] different ways that attrition can hurt uh which is a another subtle point that
+[0:31:54] uh which is a another subtle point that um was a surprise to me when we started
+[0:31:56] um was a surprise to me when we started to think about this more deeply so um I
+[0:31:58] to think about this more deeply so um I will share it so we have a collection of
+[0:32:01] will share it so we have a collection of units that we're going to randomize into
+[0:32:03] units that we're going to randomize into treatment and control and we can think
+[0:32:05] treatment and control and we can think of these units as just pairs of
+[0:32:06] of these units as just pairs of potential outcomes we don't care about
+[0:32:08] potential outcomes we don't care about the underlying differences of the units
+[0:32:10] the underlying differences of the units randomization sort of solves that so
+[0:32:12] randomization sort of solves that so every unit we see the blue numbers of
+[0:32:13] every unit we see the blue numbers of the units treated other number if it's
+[0:32:15] the units treated other number if it's in
+[0:32:17] in control and if we imagine that they get
+[0:32:20] control and if we imagine that they get randomized and as for the moment just
+[0:32:23] randomized and as for the moment just assume that they're randomized into
+[0:32:24] assume that they're randomized into Perfect Balance um if they're randomized
+[0:32:27] Perfect Balance um if they're randomized in Perfect Balance then we have this
+[0:32:28] in Perfect Balance then we have this full estimate between the treatment and
+[0:32:30] full estimate between the treatment and the control and we get tow hat of
+[0:32:33] the control and we get tow hat of 2.75 which is the average of all of the
+[0:32:36] 2.75 which is the average of all of the treated outcomes minus the average of
+[0:32:38] treated outcomes minus the average of all of The observed control outcomes for
+[0:32:40] all of The observed control outcomes for the control
+[0:32:49] group now oops ah stop that go back so there's the first kind of attrition we
+[0:32:50] there's the first kind of attrition we might consider is nice attrition we lose
+[0:32:53] might consider is nice attrition we lose the same sorts of units from both
+[0:32:55] the same sorts of units from both treatment and control now with that
+[0:32:58] treatment and control now with that we're still going to get an estimate of
+[0:33:01] we're still going to get an estimate of an average causal effect for the
+[0:33:02] an average causal effect for the remaining responders and it's a valid
+[0:33:05] remaining responders and it's a valid estimate but that estimate might not
+[0:33:07] estimate but that estimate might not generalize to a larger population so
+[0:33:09] generalize to a larger population so here I deleted units that had a
+[0:33:12] here I deleted units that had a specifically large response to treatment
+[0:33:14] specifically large response to treatment and if we have a tritter if the people
+[0:33:16] and if we have a tritter if the people that are particularly sensitive to
+[0:33:17] that are particularly sensitive to treatment are dropping out of the study
+[0:33:19] treatment are dropping out of the study then our overall estimate of treatment
+[0:33:21] then our overall estimate of treatment is going to be valid but it's going to
+[0:33:23] is going to be valid but it's going to be not reflective of the full sample
+[0:33:26] be not reflective of the full sample it's going to be reflective of the
+[0:33:27] it's going to be reflective of the remaining sample so that's sort of the
+[0:33:29] remaining sample so that's sort of the nice attrition it's a generalizability
+[0:33:32] nice attrition it's a generalizability issue we also have differential
+[0:33:35] issue we also have differential attrition where if people in the treated
+[0:33:37] attrition where if people in the treated group are quitting for different reasons
+[0:33:39] group are quitting for different reasons than people in the control group then we
+[0:33:41] than people in the control group then we can have systematic imbalance induced by
+[0:33:43] can have systematic imbalance induced by attrition and now our estimate of
+[0:33:46] attrition and now our estimate of average treatment effect isn't really an
+[0:33:48] average treatment effect isn't really an average treatment effect estimate at all
+[0:33:50] average treatment effect estimate at all it's biased so there's sort of two
+[0:33:52] it's biased so there's sort of two mechanisms at play one is is attrition
+[0:33:55] mechanisms at play one is is attrition causing us to not be able to generalize
+[0:33:57] causing us to not be able to generalize the full sample but we still have a real
+[0:33:59] the full sample but we still have a real randomized experiment that's if
+[0:34:01] randomized experiment that's if attrition mechanism is sort of the same
+[0:34:03] attrition mechanism is sort of the same in both groups or we can have attrition
+[0:34:06] in both groups or we can have attrition that's a much worse kind of attrition
+[0:34:07] that's a much worse kind of attrition which is differential attrition where
+[0:34:09] which is differential attrition where people in each group are quitting for
+[0:34:11] people in each group are quitting for different reasons which creates
+[0:34:13] different reasons which creates imbalance in the group so we no longer
+[0:34:14] imbalance in the group so we no longer have um a valid causal
+[0:34:24] contrast so we can dismantle attrition into in these four components so there's
+[0:34:27] into in these four components so there's a lot of ways to sort of think about how
+[0:34:29] a lot of ways to sort of think about how to express attrition in pieces but one
+[0:34:32] to express attrition in pieces but one way to do it is boils down to we can
+[0:34:34] way to do it is boils down to we can think of
+[0:34:36] think of um here is our overall true average
+[0:34:40] um here is our overall true average treatment effect for our full sample and
+[0:34:43] treatment effect for our full sample and then here is the contrast which isn't
+[0:34:46] then here is the contrast which isn't really an average treatment effect if
+[0:34:48] really an average treatment effect if there's differential attrition but it's
+[0:34:50] there's differential attrition but it's the expected value of y1 of the people
+[0:34:53] the expected value of y1 of the people that stay in the treated group minus the
+[0:34:55] that stay in the treated group minus the expected value of y z for those who stay
+[0:34:57] expected value of y z for those who stay in the control group we can rearrange
+[0:35:00] in the control group we can rearrange that to get this expression which sort
+[0:35:02] that to get this expression which sort of boils down to four pieces the PT and
+[0:35:06] of boils down to four pieces the PT and PC those are our rates of attrition like
+[0:35:08] PC those are our rates of attrition like 10 20 whatever percent and the delta T
+[0:35:12] 10 20 whatever percent and the delta T and the Delta C which are the things
+[0:35:13] and the Delta C which are the things that we don't necessarily know is the
+[0:35:16] that we don't necessarily know is the difference of the treatment ators versus
+[0:35:19] difference of the treatment ators versus the treatment uh group uh full group and
+[0:35:22] the treatment uh group uh full group and the difference of the control ators D
+[0:35:24] the difference of the control ators D versus the control group sorry the
+[0:35:27] versus the control group sorry the treatment respond versus the treatment
+[0:35:29] treatment respond versus the treatment group and the control responders versus
+[0:35:31] group and the control responders versus the control
+[0:35:37] group what we're going to do oh so I'm gonna stop there any more any questions
+[0:35:40] gonna stop there any more any questions or should I keep going there were some
+[0:35:43] or should I keep going there were some questions but Ben is taking care of them
+[0:35:46] questions but Ben is taking care of them so all right thank you Ben for saving me
+[0:35:48] so all right thank you Ben for saving me from having to uh embarrass myself
+[0:35:52] from having to uh embarrass myself appreciate that so
+[0:35:54] appreciate that so onwards so what does attrition really
+[0:35:56] onwards so what does attrition really look like what we're going to do is we
+[0:35:59] look like what we're going to do is we went back to this large database and we
+[0:36:02] went back to this large database and we identified 10 RCT trials that were
+[0:36:04] identified 10 RCT trials that were subject to attrition for some commercial
+[0:36:06] subject to attrition for some commercial test that they were originally uh
+[0:36:08] test that they were originally uh interested in and then we're going to
+[0:36:11] interested in and then we're going to identify which outcome is closest to
+[0:36:13] identify which outcome is closest to whatever the commercial test they were
+[0:36:14] whatever the commercial test they were doing for example if the commercial test
+[0:36:17] doing for example if the commercial test was they wanted to know if the kids
+[0:36:18] was they wanted to know if the kids learned any math we're going to use the
+[0:36:20] learned any math we're going to use the math test and then we're going to
+[0:36:22] math test and then we're going to analyze the trial using the full sample
+[0:36:24] analyze the trial using the full sample and then the responder sample and our
+[0:36:27] and then the responder sample and our attrition bias is just the impact in the
+[0:36:29] attrition bias is just the impact in the full sample minus the impact in the
+[0:36:31] full sample minus the impact in the responder
+[0:36:32] responder sample first the rates of attrition
+[0:36:35] sample first the rates of attrition across the uh 10 studies that we
+[0:36:37] across the uh 10 studies that we identified um we saw about 19% on
+[0:36:41] identified um we saw about 19% on average but that's driven by there's an
+[0:36:42] average but that's driven by there's an outlier of the M the Gap study and then
+[0:36:45] outlier of the M the Gap study and then generally other studies had attrition of
+[0:36:47] generally other studies had attrition of below 20% and if you look at the
+[0:36:50] below 20% and if you look at the treatment versus control there's some
+[0:36:53] treatment versus control there's some areas where there might be some amount
+[0:36:54] areas where there might be some amount of differential attrition but usually at
+[0:36:57] of differential attrition but usually at least the overall rates of attrition is
+[0:36:59] least the overall rates of attrition is about balanced of course you could have
+[0:37:01] about balanced of course you could have very bad differential attrition if 10%
+[0:37:04] very bad differential attrition if 10% of your high Achievers dropped out of
+[0:37:06] of your high Achievers dropped out of treatment and 10% of your low Achievers
+[0:37:08] treatment and 10% of your low Achievers dropped out of control or something like
+[0:37:09] dropped out of control or something like that so just having the same rates of
+[0:37:11] that so just having the same rates of attrition doesn't necessarily mean that
+[0:37:13] attrition doesn't necessarily mean that you don't have a differential attrition
+[0:37:21] problem the main empirical results um this is basically using the exact same
+[0:37:23] this is basically using the exact same game and tools as the first part is what
+[0:37:25] game and tools as the first part is what we see here which is we found
+[0:37:28] we see here which is we found that attrition ranged from almost ne4 in
+[0:37:32] that attrition ranged from almost ne4 in effect size units to a little above 02
+[0:37:35] effect size units to a little above 02 in effect size units I.E despite a lot
+[0:37:38] in effect size units I.E despite a lot of serious alarm bells that are
+[0:37:40] of serious alarm bells that are constantly being rung about the dangers
+[0:37:42] constantly being rung about the dangers of attrition and all sorts of things
+[0:37:44] of attrition and all sorts of things like The whatw Works clearing house and
+[0:37:46] like The whatw Works clearing house and things like that when we actually went
+[0:37:47] things like that when we actually went and looked in these particular
+[0:37:49] and looked in these particular collection of studies we didn't really
+[0:37:51] collection of studies we didn't really see evidence that attrition was um the
+[0:37:54] see evidence that attrition was um the huge catastrophe that one might think
+[0:37:58] huge catastrophe that one might think we then further decompose the mechanism
+[0:38:00] we then further decompose the mechanism using that equation I showed you before
+[0:38:02] using that equation I showed you before to estimate our delta T and our Delta c
+[0:38:05] to estimate our delta T and our Delta c um we have at the top again if we don't
+[0:38:08] um we have at the top again if we don't even bother adjusting for covariant and
+[0:38:10] even bother adjusting for covariant and then at the bottom if we do adjust for
+[0:38:12] then at the bottom if we do adjust for covariates we see that adjusting for
+[0:38:14] covariates we see that adjusting for covariant helps but even if we don't
+[0:38:16] covariant helps but even if we don't adjust for covariant what we're seeing
+[0:38:18] adjust for covariant what we're seeing is the attrition mechanism for the
+[0:38:20] is the attrition mechanism for the treatment and the control seems to be a
+[0:38:23] treatment and the control seems to be a similar shift so the attrition whatever
+[0:38:26] similar shift so the attrition whatever is attrition is happening tends to if
+[0:38:28] is attrition is happening tends to if you will cancel out which is why overall
+[0:38:31] you will cancel out which is why overall we're not seeing massive impacts on the
+[0:38:33] we're not seeing massive impacts on the average treatment
+[0:38:35] average treatment effects we can use this uh mechanism to
+[0:38:39] effects we can use this uh mechanism to do one more little trick which I'm going
+[0:38:41] do one more little trick which I'm going to talk about before I wrap up the talk
+[0:38:44] to talk about before I wrap up the talk um which is what we can do is we can use
+[0:38:47] um which is what we can do is we can use what we've seen in in the literature
+[0:38:49] what we've seen in in the literature like this collection of 10 studies to do
+[0:38:52] like this collection of 10 studies to do a sens to conduct a sensitivity analysis
+[0:38:54] a sens to conduct a sensitivity analysis on a news study by basically saying okay
+[0:38:58] on a news study by basically saying okay if this is the kind of Delta X or delta
+[0:39:01] if this is the kind of Delta X or delta T and Delta uh C we tend to see in
+[0:39:03] T and Delta uh C we tend to see in practice let's take some worst case um
+[0:39:07] practice let's take some worst case um ends of of those ranges and see what
+[0:39:10] ends of of those ranges and see what that means for our particular study we
+[0:39:12] that means for our particular study we know how much attrition a given study
+[0:39:14] know how much attrition a given study has and we can say given that amount of
+[0:39:16] has and we can say given that amount of uh attrition we can plug those values
+[0:39:18] uh attrition we can plug those values into that equation I showed you to
+[0:39:21] into that equation I showed you to estimate how much attrition bias there
+[0:39:24] estimate how much attrition bias there was so there's an intervention it's a
+[0:39:27] was so there's an intervention it's a reading intervention called The Reach
+[0:39:28] reading intervention called The Reach intervention it's a weightless design
+[0:39:30] intervention it's a weightless design the original estimates was fairly large
+[0:39:33] the original estimates was fairly large which u 33 in effect size units with a
+[0:39:35] which u 33 in effect size units with a standard error of about 0.1 and it had
+[0:39:39] standard error of about 0.1 and it had pretty high levels of attrition 27% in
+[0:39:41] pretty high levels of attrition 27% in the treatment group and 32% in the
+[0:39:43] the treatment group and 32% in the control group so the question is okay so
+[0:39:45] control group so the question is okay so we have this promising study with a
+[0:39:47] we have this promising study with a large impact to what extent should we
+[0:39:49] large impact to what extent should we just be like forget it this is high
+[0:39:51] just be like forget it this is high levels of attrition this study has been
+[0:39:53] levels of attrition this study has been compromised we can no longer consider it
+[0:39:55] compromised we can no longer consider it as a piece of good evidence
+[0:39:59] as a piece of good evidence so the first thing we can do is we can
+[0:40:00] so the first thing we can do is we can do a sensitivity check where we plug
+[0:40:02] do a sensitivity check where we plug different values of Delta C and delta T
+[0:40:04] different values of Delta C and delta T into the equation um from before and
+[0:40:08] into the equation um from before and explore a range from no attrition which
+[0:40:11] explore a range from no attrition which gives us this is our original estimate
+[0:40:13] gives us this is our original estimate to under what the worst observed case of
+[0:40:16] to under what the worst observed case of attrition that we saw across all of our
+[0:40:18] attrition that we saw across all of our prior studies when we were able to sort
+[0:40:20] prior studies when we were able to sort of peak under the hood reduces um our
+[0:40:23] of peak under the hood reduces um our impact estimate but it still is quite
+[0:40:26] impact estimate but it still is quite Hefty at above point
+[0:40:28] Hefty at above point to so this kind of sensitivity check I
+[0:40:32] to so this kind of sensitivity check I think mainly what it's going to do is
+[0:40:33] think mainly what it's going to do is it's going to illustrate that things
+[0:40:34] it's going to illustrate that things have to be pretty bad mother nature has
+[0:40:37] have to be pretty bad mother nature has to be pretty angry at you for attrition
+[0:40:39] to be pretty angry at you for attrition to really undermine your results um in a
+[0:40:42] to really undermine your results um in a substantive way there's one other small
+[0:40:45] substantive way there's one other small trick you can do instead of doing a
+[0:40:47] trick you can do instead of doing a sensitivity check you can actually just
+[0:40:50] sensitivity check you can actually just add the um attrition bias think of the
+[0:40:52] add the um attrition bias think of the attrition bias as a random draw so you
+[0:40:55] attrition bias as a random draw so you have a new study the reach study and and
+[0:40:57] have a new study the reach study and and we can think of Mother Nature as sort of
+[0:41:00] we can think of Mother Nature as sort of drawing a random poll of what the
+[0:41:01] drawing a random poll of what the attrition bias or what the attrition
+[0:41:03] attrition bias or what the attrition mechanism looks like from this
+[0:41:05] mechanism looks like from this distribution of attrition mechanisms we
+[0:41:07] distribution of attrition mechanisms we can then if we understand what that
+[0:41:10] can then if we understand what that Randomness looks like we can add that
+[0:41:12] Randomness looks like we can add that Randomness into the standard error in
+[0:41:15] Randomness into the standard error in particular we can update our standard
+[0:41:17] particular we can update our standard error to our old standard error plus our
+[0:41:21] error to our old standard error plus our extra attrition um noise and the way we
+[0:41:25] extra attrition um noise and the way we estimate that is we use this same
+[0:41:28] estimate that is we use this same equation um but we just plug in the the
+[0:41:32] equation um but we just plug in the the variance sorry we we have our observed
+[0:41:36] variance sorry we we have our observed um first we have our observed attrition
+[0:41:40] um first we have our observed attrition that we can just see it in our data and
+[0:41:42] that we can just see it in our data and then from our prior studies we have
+[0:41:44] then from our prior studies we have estimates of these two quantities and
+[0:41:46] estimates of these two quantities and now we have this the variance if you
+[0:41:48] now we have this the variance if you will of the attrition bias if we think
+[0:41:50] will of the attrition bias if we think of that as as a random
+[0:41:57] quantity if we do that in this particular particular case our
+[0:41:58] particular particular case our confidence intervals sort of grow by
+[0:41:59] confidence intervals sort of grow by about 12% and we can also do sort of a
+[0:42:02] about 12% and we can also do sort of a variance decomposition and look at the
+[0:42:05] variance decomposition and look at the fraction of this over overall variance
+[0:42:08] fraction of this over overall variance and see that attrition is about 20% of
+[0:42:11] and see that attrition is about 20% of our overall squared error which gives us
+[0:42:14] our overall squared error which gives us a sense of how big is attrition as a
+[0:42:17] a sense of how big is attrition as a concern relative to all the other
+[0:42:19] concern relative to all the other sources of uncertainty now this as a
+[0:42:21] sources of uncertainty now this as a tangent I'm sort of interested in
+[0:42:23] tangent I'm sort of interested in carrying this a little bit further to
+[0:42:26] carrying this a little bit further to thinking about when we when we think
+[0:42:28] thinking about when we when we think about studies if we have some even rough
+[0:42:30] about studies if we have some even rough sense of where all of the pieces of
+[0:42:32] sense of where all of the pieces of uncertainty are we could in general
+[0:42:35] uncertainty are we could in general think about any particular study of like
+[0:42:37] think about any particular study of like where might we have gone most wrong in
+[0:42:39] where might we have gone most wrong in terms of our looking at our final
+[0:42:40] terms of our looking at our final estimate compared to what the truth is
+[0:42:42] estimate compared to what the truth is which we don't know can we break that
+[0:42:44] which we don't know can we break that down into it's 20% this 20% that 30%
+[0:42:49] down into it's 20% this 20% that 30% that um is potentially something to
+[0:42:52] that um is potentially something to reflect
+[0:42:57] on so summary of our attrition research we estimated attrition bias for 10
+[0:42:59] we estimated attrition bias for 10 studies and 22 outcomes the biases
+[0:43:01] studies and 22 outcomes the biases appear to be small there's some evidence
+[0:43:03] appear to be small there's some evidence that kids um in schools who drop are
+[0:43:05] that kids um in schools who drop are systematically different from those who
+[0:43:07] systematically different from those who stay in particular low attain um
+[0:43:10] stay in particular low attain um attainers are more likely to leave
+[0:43:11] attainers are more likely to leave treatment
+[0:43:13] treatment arms but overall it doesn't seem to be a
+[0:43:16] arms but overall it doesn't seem to be a big threat I think that this
+[0:43:18] big threat I think that this investigation makes me think that a lot
+[0:43:20] investigation makes me think that a lot of the concerns about attrition are may
+[0:43:22] of the concerns about attrition are may be a little bit overstated and we should
+[0:43:24] be a little bit overstated and we should be sweating about other things instead
+[0:43:33] all right so thinking back um across both these um examples we basically were
+[0:43:36] both these um examples we basically were in the game of finding data sets that
+[0:43:38] in the game of finding data sets that had multiple rcts in a similar domain so
+[0:43:41] had multiple rcts in a similar domain so we can sort of do a well a nicely
+[0:43:44] we can sort of do a well a nicely motivated
+[0:43:46] motivated uh uh meta analysis of a bunch of within
+[0:43:49] uh uh meta analysis of a bunch of within study
+[0:43:50] study comparisons I think the tools for we've
+[0:43:52] comparisons I think the tools for we've used these tools in sort of two areas
+[0:43:54] used these tools in sort of two areas and they have a little bit of uh
+[0:43:56] and they have a little bit of uh different aspects in each of areas but
+[0:43:58] different aspects in each of areas but the overall idea is roughly the same
+[0:44:00] the overall idea is roughly the same we're using sort of bootstrap
+[0:44:01] we're using sort of bootstrap permutation resampling methods to get at
+[0:44:03] permutation resampling methods to get at inference um to estimate sort of the
+[0:44:05] inference um to estimate sort of the components of our meta analysis um you
+[0:44:08] components of our meta analysis um you can see the supplements for details on
+[0:44:10] can see the supplements for details on this um in truth I think this is not
+[0:44:13] this um in truth I think this is not really a truly frequentist evaluation
+[0:44:16] really a truly frequentist evaluation where in this case I feel I'm becoming
+[0:44:19] where in this case I feel I'm becoming or I feel more basy in sort of how I
+[0:44:21] or I feel more basy in sort of how I think about these results in a more
+[0:44:22] think about these results in a more pragmatic way of sort of saying okay
+[0:44:24] pragmatic way of sort of saying okay here is a particular context given what
+[0:44:26] here is a particular context given what we've seen within study comparisons how
+[0:44:29] we've seen within study comparisons how bad do we think things are we can think
+[0:44:32] bad do we think things are we can think of that as if you will a random quantity
+[0:44:36] of that as if you will a random quantity but I'll stop there so any final
+[0:44:40] but I'll stop there so any final questions or we can just turn to uh
+[0:44:42] questions or we can just turn to uh Beth's remarks which I'm looking forward
+[0:44:44] Beth's remarks which I'm looking forward to thanks Luke I'll just read perhaps
+[0:44:47] to thanks Luke I'll just read perhaps one quick one um there's a question by
+[0:44:49] one quick one um there's a question by Gaming Zang who asks have you considered
+[0:44:51] Gaming Zang who asks have you considered how these techniques for measuring and
+[0:44:53] how these techniques for measuring and quantifying bias and attrition can be
+[0:44:55] quantifying bias and attrition can be applied for a hazard ratio out come
+[0:44:57] applied for a hazard ratio out come instead of an average treatment
+[0:45:00] instead of an average treatment effect um no that's a a really good
+[0:45:04] effect um no that's a a really good question I I think all of our tools as
+[0:45:06] question I I think all of our tools as long as you can um estimate Hazard
+[0:45:08] long as you can um estimate Hazard ratios in a within study comparison kind
+[0:45:11] ratios in a within study comparison kind of context then if you basically if you
+[0:45:14] of context then if you basically if you can get Point estimates and standard
+[0:45:16] can get Point estimates and standard errors for each of your within study
+[0:45:17] errors for each of your within study comparisons then everything else we do
+[0:45:20] comparisons then everything else we do sort of naturally follows so I I think
+[0:45:23] sort of naturally follows so I I think that um it shouldn't matter much under
+[0:45:26] that um it shouldn't matter much under the hood like what your data analytic
+[0:45:28] the hood like what your data analytic strategy is um it really is can you find
+[0:45:31] strategy is um it really is can you find context where you sort of have the full
+[0:45:33] context where you sort of have the full range of data and have your limited
+[0:45:35] range of data and have your limited range now if you're looking and so you
+[0:45:38] range now if you're looking and so you could extend this to um cases where you
+[0:45:41] could extend this to um cases where you had um different amounts of follow-up
+[0:45:43] had um different amounts of follow-up data and different levels of sensoring
+[0:45:45] data and different levels of sensoring um that would be a really interesting
+[0:45:47] um that would be a really interesting Direction in a lot of context I can
+[0:45:49] Direction in a lot of context I can imagine thanks for the question
+[0:45:58] thanks here I'll stop sharing be all right yeah thank you so much Luke
+[0:46:00] all right yeah thank you so much Luke for the very nice talk we're now
+[0:46:01] for the very nice talk we're now switching over to discussion so we have
+[0:46:03] switching over to discussion so we have Beth present some slides and after that
+[0:46:07] Beth present some slides and after that Luke can respond so I'm now switching
+[0:46:09] Luke can respond so I'm now switching over to
+[0:46:16] Beth I thank you can you guys see my slides good okay um I guess I
+[0:46:21] slides good okay um I guess I can this
+[0:46:32] okay um my slides do not look pretty um like Luke's so uh they are just a nice
+[0:46:35] like Luke's so uh they are just a nice boring white background um so the take
+[0:46:39] boring white background um so the take the way that I sort of have thought
+[0:46:40] the way that I sort of have thought about you know and reading these papers
+[0:46:42] about you know and reading these papers first of all they're great papers and I
+[0:46:44] first of all they're great papers and I um I really enjoyed sort of first of all
+[0:46:47] um I really enjoyed sort of first of all the data set that you have which I think
+[0:46:49] the data set that you have which I think is remarkable um and the ability to
+[0:46:52] is remarkable um and the ability to answer you know to look at these
+[0:46:53] answer you know to look at these questions a WR a broad range of studies
+[0:46:55] questions a WR a broad range of studies um what I was most interested in doing
+[0:46:57] um what I was most interested in doing here is trying to think kind of um to
+[0:46:59] here is trying to think kind of um to play Devil's Advocate a bit I think to
+[0:47:01] play Devil's Advocate a bit I think to think like the the conclusions here were
+[0:47:04] think like the the conclusions here were very optimistic and so I've been trying
+[0:47:06] very optimistic and so I've been trying to think through are there other angles
+[0:47:08] to think through are there other angles at which um to get you know to think
+[0:47:11] at which um to get you know to think about the results and how much how
+[0:47:14] about the results and how much how optimistic we should be from these
+[0:47:15] optimistic we should be from these results so I don't probably have a full
+[0:47:18] results so I don't probably have a full 10 minutes of comments but the first um
+[0:47:21] 10 minutes of comments but the first um paper on confounder bias um I was
+[0:47:25] paper on confounder bias um I was thinking about this range of bias being
+[0:47:27] thinking about this range of bias being you know once adjusted is about 0.1
+[0:47:29] you know once adjusted is about 0.1 standard deviations plus or minus and
+[0:47:32] standard deviations plus or minus and then that started making me think about
+[0:47:34] then that started making me think about what the average treatment effects might
+[0:47:36] what the average treatment effects might be in these studies and how um you know
+[0:47:39] be in these studies and how um you know is this how relevant this is to that so
+[0:47:43] is this how relevant this is to that so is could you think of these as a um a
+[0:47:46] is could you think of these as a um a ratio for example for each so if you
+[0:47:48] ratio for example for each so if you knew what the estimate of the treatment
+[0:47:50] knew what the estimate of the treatment impact was in a study and you also knew
+[0:47:53] impact was in a study and you also knew what the bias estimate was in that study
+[0:47:55] what the bias estimate was in that study I think that would be an interesting
+[0:47:56] I think that would be an interesting thing to analyze um or even just
+[0:47:59] thing to analyze um or even just separately to know what the average
+[0:48:01] separately to know what the average treatment effects were just to be able
+[0:48:03] treatment effects were just to be able to say is this bias large or small um
+[0:48:06] to say is this bias large or small um I'm thinking in a lot of educational
+[0:48:08] I'm thinking in a lot of educational intervention studies um you know people
+[0:48:11] intervention studies um you know people power the studies for point2 effect um
+[0:48:14] power the studies for point2 effect um but I feel like there's been recent work
+[0:48:16] but I feel like there's been recent work often actually maybe also coming out of
+[0:48:18] often actually maybe also coming out of the EF that shows um that effect sizes
+[0:48:23] the EF that shows um that effect sizes in St in these Studies have been rather
+[0:48:25] in St in these Studies have been rather small like closer on average to 6 or 09
+[0:48:29] small like closer on average to 6 or 09 in which case what we're showing here is
+[0:48:31] in which case what we're showing here is that compounder bias could be as large
+[0:48:33] that compounder bias could be as large as the average treatment effect um in
+[0:48:35] as the average treatment effect um in the
+[0:48:37] the studies um the second thought I had was
+[0:48:40] studies um the second thought I had was about the covariate set so I was looking
+[0:48:42] about the covariate set so I was looking through the covariate STS and I was
+[0:48:44] through the covariate STS and I was thinking oh I'm so jealous of a country
+[0:48:46] thinking oh I'm so jealous of a country that has a sort of
+[0:48:48] that has a sort of standardized um well everything really
+[0:48:51] standardized um well everything really at a national scale in the sense that
+[0:48:53] at a national scale in the sense that this covariant set could include student
+[0:48:55] this covariant set could include student achievement um aggregated the schools
+[0:48:57] achievement um aggregated the schools and that's the the variable that in the
+[0:49:00] and that's the the variable that in the US system were lacking um at this at the
+[0:49:03] US system were lacking um at this at the national level where we have that at
+[0:49:05] national level where we have that at state or at yeah in various States but
+[0:49:07] state or at yeah in various States but not at the national level um and so I
+[0:49:10] not at the national level um and so I was wondering if you were to redo the
+[0:49:12] was wondering if you were to redo the analysis
+[0:49:14] analysis without um
+[0:49:17] without um without test score data how well the
+[0:49:20] without test score data how well the bias reduction methods would perform I
+[0:49:22] bias reduction methods would perform I think that's really important um in
+[0:49:24] think that's really important um in other contexts
+[0:49:33] okay there's a little puzzle though in the first paper too that I was that I'm
+[0:49:35] the first paper too that I was that I'm not really sure what to make of and that
+[0:49:37] not really sure what to make of and that is that the bias that you're seeing here
+[0:49:40] is that the bias that you're seeing here is that the treatment effects in the
+[0:49:42] is that the treatment effects in the qed's were actually um the treatment
+[0:49:45] qed's were actually um the treatment effects are
+[0:49:50] larger oh my concern is that treatment effects are typically larger in QED than
+[0:49:52] effects are typically larger in QED than rcts and that's you know we're usually
+[0:49:54] rcts and that's you know we're usually worried that Qs are overstating what the
+[0:49:57] worried that Qs are overstating what the our what the true causal effect is but
+[0:49:59] our what the true causal effect is but in this study actually it looks like
+[0:50:01] in this study actually it looks like they're smaller in fact that they're
+[0:50:03] they're smaller in fact that they're usually closer to like point you know
+[0:50:05] usually closer to like point you know they're even before adjustment they're
+[0:50:07] they're even before adjustment they're smaller and so I was trying to think
+[0:50:09] smaller and so I was trying to think about why why that is why are they
+[0:50:11] about why why that is why are they different um it and the only thing I
+[0:50:14] different um it and the only thing I could kind of come up with is it must
+[0:50:16] could kind of come up with is it must have something to do with the types of
+[0:50:17] have something to do with the types of schools that take part in these
+[0:50:19] schools that take part in these rcts so here you have schools selecting
+[0:50:22] rcts so here you have schools selecting into um treatment and or typically we
+[0:50:25] into um treatment and or typically we have people selecting into treatment but
+[0:50:27] have people selecting into treatment but here actually they're selecting into an
+[0:50:29] here actually they're selecting into an RCT and so I wonder if the mechanism
+[0:50:32] RCT and so I wonder if the mechanism there is different or what you know what
+[0:50:34] there is different or what you know what the effect of that is um and so you
+[0:50:36] the effect of that is um and so you could actually kind of probably Look
+[0:50:38] could actually kind of probably Look Backwards I was saying you know right
+[0:50:39] Backwards I was saying you know right now you're comparing the control to uh
+[0:50:43] now you're comparing the control to uh your matching your comparison to the
+[0:50:45] your matching your comparison to the control you could kind of tackle this
+[0:50:46] control you could kind of tackle this from a generalizability standpoint of
+[0:50:49] from a generalizability standpoint of tracking the matching instead the
+[0:50:51] tracking the matching instead the control to the comparison to sort of
+[0:50:53] control to the comparison to sort of think about how representative these
+[0:50:55] think about how representative these trials are would be an an alternative
+[0:50:58] trials are would be an an alternative approach but also um thinking about how
+[0:51:00] approach but also um thinking about how that differs compared to observational
+[0:51:03] that differs compared to observational study context would be
+[0:51:05] study context would be helpful okay then I had a couple of
+[0:51:08] helpful okay then I had a couple of slides about oops attrition okay so the
+[0:51:11] slides about oops attrition okay so the attrition paper I also found found
+[0:51:14] attrition paper I also found found really interesting um it's focused on
+[0:51:16] really interesting um it's focused on student level attrition I know site
+[0:51:18] student level attrition I know site level attrition is something that occurs
+[0:51:20] level attrition is something that occurs in a lot of um cluster randomized trials
+[0:51:23] in a lot of um cluster randomized trials so I was thinking about you know how
+[0:51:26] so I was thinking about you know how much these result would apply there um
+[0:51:29] much these result would apply there um the other thing though that I was really
+[0:51:30] the other thing though that I was really struck by was that the attrition bias is
+[0:51:33] struck by was that the attrition bias is uh that you show is between plus and
+[0:51:35] uh that you show is between plus and minus .04 standard deviations which is
+[0:51:38] minus .04 standard deviations which is very close to the guidelines given by
+[0:51:41] very close to the guidelines given by decki and Chang um about where there's
+[0:51:44] decki and Chang um about where there's this 0.05 guideline um and when the bias
+[0:51:47] this 0.05 guideline um and when the bias might be less than
+[0:51:49] might be less than 0.05 so I was trying to think about your
+[0:51:51] 0.05 so I was trying to think about your results in comparison to their
+[0:51:53] results in comparison to their guidelines which have to do with both
+[0:51:55] guidelines which have to do with both the overall attrition rate and
+[0:51:56] the overall attrition rate and differential attrition rates and sort of
+[0:51:59] differential attrition rates and sort of when you're in a safe space and when
+[0:52:00] when you're in a safe space and when you're not in a safe space mostly
+[0:52:03] you're not in a safe space mostly because I've been doing a lot of work
+[0:52:04] because I've been doing a lot of work with the whatw works Clearing House
+[0:52:05] with the whatw works Clearing House where we're thinking about
+[0:52:06] where we're thinking about methodological guidelines here so I pul
+[0:52:09] methodological guidelines here so I pul I went back to their paper and I pulled
+[0:52:12] I went back to their paper and I pulled um this table which is what the whatw
+[0:52:14] um this table which is what the whatw works Clearing House for those who are
+[0:52:15] works Clearing House for those who are not involved in the education Community
+[0:52:17] not involved in the education Community I should maybe clarify the WW Works
+[0:52:19] I should maybe clarify the WW Works Clearing House is a part of the
+[0:52:20] Clearing House is a part of the Institute of Education sciences and it's
+[0:52:22] Institute of Education sciences and it's a Clearing House for um causal evidence
+[0:52:26] a Clearing House for um causal evidence about what works in educ in in education
+[0:52:30] about what works in educ in in education based upon typically um rcts and high
+[0:52:33] based upon typically um rcts and high high quality
+[0:52:35] high quality QED so this paper has been turned in
+[0:52:38] QED so this paper has been turned in sort sort of to the policy there and
+[0:52:40] sort sort of to the policy there and I've just sort of noted that there are
+[0:52:41] I've just sort of noted that there are these guidelines that have to do with
+[0:52:43] these guidelines that have to do with overall attrition and differential
+[0:52:45] overall attrition and differential attrition and they have these sort of
+[0:52:47] attrition and they have these sort of three categories so I tried to look back
+[0:52:49] three categories so I tried to look back at the studies you had and kind of
+[0:52:50] at the studies you had and kind of eyeball what you were seeing here and it
+[0:52:52] eyeball what you were seeing here and it looked like you have a lot in the sort
+[0:52:55] looked like you have a lot in the sort of light attri space a couple in the
+[0:52:58] of light attri space a couple in the medium and one in the dark attrition
+[0:53:01] medium and one in the dark attrition which just made me want to know what you
+[0:53:02] which just made me want to know what you know to go back to your analyses do you
+[0:53:05] know to go back to your analyses do you see any sort of difference of the threat
+[0:53:07] see any sort of difference of the threat of attrition or um in those different
+[0:53:09] of attrition or um in those different spaces now given you only have nine
+[0:53:11] spaces now given you only have nine studies so I realize that this is like
+[0:53:13] studies so I realize that this is like getting to subgroups which are going to
+[0:53:14] getting to subgroups which are going to be imprecisely estimated but I think
+[0:53:16] be imprecisely estimated but I think it's I think um it's important and it
+[0:53:18] it's I think um it's important and it would be really helpful to kind of tease
+[0:53:20] would be really helpful to kind of tease apart the similarity or differences
+[0:53:22] apart the similarity or differences between your approaches
+[0:53:29] okay and then the last thought I had was I was just thinking a lot about the
+[0:53:30] I was just thinking a lot about the sample and trying really hard to think
+[0:53:32] sample and trying really hard to think about um you know what limitations there
+[0:53:34] about um you know what limitations there might be from this because I think
+[0:53:35] might be from this because I think largely it's awesome that there is data
+[0:53:37] largely it's awesome that there is data like this that we can um we can look at
+[0:53:41] like this that we can um we can look at um and so I was trying to think so one
+[0:53:44] um and so I was trying to think so one of them I think is in this first paper
+[0:53:46] of them I think is in this first paper is really as I've said about the
+[0:53:48] is really as I've said about the selection into the treatment um you know
+[0:53:51] selection into the treatment um you know versus selection into an RCT and are
+[0:53:53] versus selection into an RCT and are those different is that make does that
+[0:53:55] those different is that make does that make it easier to adjust does that make
+[0:53:58] make it easier to adjust does that make the selection process more knowable um
+[0:54:01] the selection process more knowable um does that you know how is that different
+[0:54:04] does that you know how is that different just sort of how is that different I
+[0:54:05] just sort of how is that different I guess I don't have a good answer the
+[0:54:07] guess I don't have a good answer the second one is I the second paper I was
+[0:54:09] second one is I the second paper I was really interested in thinking about
+[0:54:11] really interested in thinking about extreme attrition so it looks to be like
+[0:54:13] extreme attrition so it looks to be like a lot of what you're looking at is not
+[0:54:15] a lot of what you're looking at is not extreme um and given I you know this is
+[0:54:17] extreme um and given I you know this is a question I have often with the wwc is
+[0:54:19] a question I have often with the wwc is like how often do we see these extreme
+[0:54:21] like how often do we see these extreme conditions but if you look at that graph
+[0:54:24] conditions but if you look at that graph for example I'm always very worried
+[0:54:26] for example I'm always very worried about the fact that we can say that
+[0:54:29] about the fact that we can say that we're safe even when we are up to like
+[0:54:31] we're safe even when we are up to like 45 40 45% attrition um in these
+[0:54:35] 45 40 45% attrition um in these guidelines and that seems like an
+[0:54:36] guidelines and that seems like an extreme amount of attrition that I'd
+[0:54:37] extreme amount of attrition that I'd want to know are we really safe there um
+[0:54:41] want to know are we really safe there um and then the last thoughts I just had
+[0:54:42] and then the last thoughts I just had would were um you know would the results
+[0:54:44] would were um you know would the results be different if this were in the US I
+[0:54:46] be different if this were in the US I don't know I'm trying to think about the
+[0:54:48] don't know I'm trying to think about the differences between the the sort of
+[0:54:51] differences between the the sort of Education systems in the countries and
+[0:54:53] Education systems in the countries and the kinds of interventions being studied
+[0:54:55] the kinds of interventions being studied I don't know how that might affect
+[0:54:57] I don't know how that might affect things or not um and and then I sort of
+[0:55:00] things or not um and and then I sort of left with like does that mean the
+[0:55:02] left with like does that mean the results here are lower bounds unbiased
+[0:55:04] results here are lower bounds unbiased are these sort of best case scenarios in
+[0:55:07] are these sort of best case scenarios in some ways because of the sit of the kind
+[0:55:10] some ways because of the sit of the kind of data that you have and the kind of
+[0:55:11] of data that you have and the kind of selection processes um or are these
+[0:55:15] selection processes um or are these worse like are these should we expect
+[0:55:17] worse like are these should we expect these to be the sort of average case or
+[0:55:18] these to be the sort of average case or are these sort of the the the sort of
+[0:55:20] are these sort of the the the sort of lower bound um and so I'm looking
+[0:55:22] lower bound um and so I'm looking forward to hearing um you know hearing
+[0:55:25] forward to hearing um you know hearing your thoughts thank you
+[0:55:31] great thanks for the nice discussion Beth uh Luke do you want to
+[0:55:40] respond yes uh first uh a couple of things first thank you for for those
+[0:55:42] things first thank you for for those thoughts and and and a lot of them
+[0:55:44] thoughts and and and a lot of them really um zero in on a thing that I
+[0:55:47] really um zero in on a thing that I think is this really interesting
+[0:55:49] think is this really interesting question of like what what is big and
+[0:55:53] question of like what what is big and what is small and does it does it matter
+[0:55:57] what is small and does it does it matter and and I think we've gone back and
+[0:56:01] and and I think we've gone back and forth on it and usually lands on the
+[0:56:05] forth on it and usually lands on the answer of it depends but I I think that
+[0:56:08] answer of it depends but I I think that you you pushing on that is entirely uh
+[0:56:11] you you pushing on that is entirely uh the right thing to do um and and in
+[0:56:16] the right thing to do um and and in particular and on one hand the range
+[0:56:20] particular and on one hand the range going back to the range in in the Quasi
+[0:56:22] going back to the range in in the Quasi experimental is we see a range of
+[0:56:23] experimental is we see a range of negative .1 to to
+[0:56:25] negative .1 to to 0.1 NE Point like if someone told me
+[0:56:28] 0.1 NE Point like if someone told me that my bias in my observational study
+[0:56:30] that my bias in my observational study was 0.1 of excise units and I'm in a
+[0:56:31] was 0.1 of excise units and I'm in a world where 0.1 of excise units might
+[0:56:34] world where 0.1 of excise units might actually count as like we did it um then
+[0:56:37] actually count as like we did it um then clearly that's not great um and on on
+[0:56:42] clearly that's not great um and on on the flip side if you look at the sort of
+[0:56:44] the flip side if you look at the sort of the standard deviation of that of of all
+[0:56:47] the standard deviation of that of of all of our estimates or our estimated amount
+[0:56:49] of our estimates or our estimated amount of variance that estimate um would
+[0:56:52] of variance that estimate um would suggest that in general like you can get
+[0:56:55] suggest that in general like you can get unlucky and end up out there and .1 but
+[0:56:57] unlucky and end up out there and .1 but more often than not you're okay and so
+[0:56:59] more often than not you're okay and so when I'm the the way I've been thinking
+[0:57:01] when I'm the the way I've been thinking about I I think I'm just getting
+[0:57:03] about I I think I'm just getting sloppier and sloppier as a statistician
+[0:57:06] sloppier and sloppier as a statistician possibly or less and less principled or
+[0:57:08] possibly or less and less principled or I'm not sure what exactly to call it but
+[0:57:11] I'm not sure what exactly to call it but it's I I think what it means to me is I
+[0:57:14] it's I I think what it means to me is I look at an observational study now and I
+[0:57:16] look at an observational study now and I go it's quite possible that this is
+[0:57:19] go it's quite possible that this is completely junk but there's also a
+[0:57:22] completely junk but there's also a reasonable chance there's I think this
+[0:57:24] reasonable chance there's I think this work has made me think that there's a
+[0:57:26] work has made me think that there's a higher chance that an observational
+[0:57:27] higher chance that an observational study might tell me something
+[0:57:29] study might tell me something interesting than I thought before I
+[0:57:31] interesting than I thought before I think I thought before it's like let's
+[0:57:32] think I thought before it's like let's keeping a lot of statisticians in
+[0:57:34] keeping a lot of statisticians in business but how can you believe any of
+[0:57:36] business but how can you believe any of it and I'm like well actually it seems
+[0:57:38] it and I'm like well actually it seems to get it right or at least mostly right
+[0:57:41] to get it right or at least mostly right A lot of the time but again I think more
+[0:57:44] A lot of the time but again I think more of this kind of Enterprise is needed to
+[0:57:47] of this kind of Enterprise is needed to to really get a handle on it
+[0:57:50] to really get a handle on it um the other thing I want to say which
+[0:57:52] um the other thing I want to say which isn't in reaction to your comments but
+[0:57:54] isn't in reaction to your comments but usually I always do this which is I'll
+[0:57:57] usually I always do this which is I'll start off and I'll be talking about the
+[0:58:00] start off and I'll be talking about the statistics and the work and I'll forget
+[0:58:02] statistics and the work and I'll forget to really showcase um my student uh Ben
+[0:58:06] to really showcase um my student uh Ben especially now who happens to be
+[0:58:08] especially now who happens to be graduating this year um and is therefore
+[0:58:10] graduating this year um and is therefore on the market this work I think this
+[0:58:12] on the market this work I think this work is really excellent I really
+[0:58:14] work is really excellent I really enjoyed working with him he is a
+[0:58:15] enjoyed working with him he is a fantastic person and he's just very easy
+[0:58:17] fantastic person and he's just very easy to work with and so you should all
+[0:58:19] to work with and so you should all especially if you're in a position for
+[0:58:20] especially if you're in a position for hiring uh make a note of that um so um
+[0:58:27] hiring uh make a note of that um so um and
+[0:58:28] and then the other piece can jum in can I
+[0:58:30] then the other piece can jum in can I jump in really fast oh yes sure please
+[0:58:33] jump in really fast oh yes sure please what's allowed but I think you're right
+[0:58:34] what's allowed but I think you're right I think you're pointing to a really
+[0:58:35] I think you're pointing to a really interesting um distinction like as a
+[0:58:38] interesting um distinction like as a statistician we're trained and we sort
+[0:58:41] statistician we're trained and we sort of this is how we think is to think
+[0:58:42] of this is how we think is to think about worst case scenarios all the time
+[0:58:44] about worst case scenarios all the time right so when I'm talking about when I
+[0:58:46] right so when I'm talking about when I look at methods it's like well I don't
+[0:58:48] look at methods it's like well I don't want to know what how it works on
+[0:58:49] want to know what how it works on average I want to know what happens in
+[0:58:51] average I want to know what happens in the worst case you know and so I'm sort
+[0:58:54] the worst case you know and so I'm sort of Trying to minimize my largest risk
+[0:58:56] of Trying to minimize my largest risk and some way yeah but often empirically
+[0:58:59] and some way yeah but often empirically but I I find that um that's in attention
+[0:59:02] but I I find that um that's in attention often even in my conversations and like
+[0:59:04] often even in my conversations and like Clearing House communities where people
+[0:59:05] Clearing House communities where people are like but the data looks most of the
+[0:59:07] are like but the data looks most of the time like it's okay and so you're right
+[0:59:10] time like it's okay and so you're right there is sort of a tension in like how
+[0:59:12] there is sort of a tension in like how you choose an appropriate method there's
+[0:59:15] you choose an appropriate method there's a decision framework there right that's
+[0:59:17] a decision framework there right that's either are we trying to minimize the
+[0:59:19] either are we trying to minimize the maximum risk or are we trying to think
+[0:59:21] maximum risk or are we trying to think about the average risk or whatever that
+[0:59:23] about the average risk or whatever that I don't think is often articulated or
+[0:59:26] I don't think is often articulated or that or even questions like you know
+[0:59:28] that or even questions like you know which one is the right way to you know
+[0:59:30] which one is the right way to you know should we always be thinking about
+[0:59:31] should we always be thinking about minimizing maximum risk or or should we
+[0:59:34] minimizing maximum risk or or should we often be thinking more about what
+[0:59:36] often be thinking more about what plausible ranges are and feeling
+[0:59:38] plausible ranges are and feeling comfortable that this method Works 90%
+[0:59:40] comfortable that this method Works 90% of the time so I just want to say I
+[0:59:43] of the time so I just want to say I think you've raised a really like
+[0:59:44] think you've raised a really like foundational question
+[0:59:50] there thanks I I it's it's encouraging to hear you hear you say that because
+[0:59:52] to hear you hear you say that because like this is something that has it it
+[0:59:54] like this is something that has it it makes me also think that I should go
+[0:59:56] makes me also think that I should go back and read more of the philosophy of
+[0:59:58] back and read more of the philosophy of science of just to to remind myself that
+[1:00:02] science of just to to remind myself that um any kind of learning is is not due to
+[1:00:04] um any kind of learning is is not due to one study but it's really this sequence
+[1:00:06] one study but it's really this sequence and different kinds of evidence that
+[1:00:08] and different kinds of evidence that triangulate something that's resembling
+[1:00:10] triangulate something that's resembling truth and I hope the social sciences can
+[1:00:13] truth and I hope the social sciences can get there someday um because that's like
+[1:00:16] get there someday um because that's like that's the world I love and live in um
+[1:00:19] that's the world I love and live in um and it's it's a lot muddier than I think
+[1:00:21] and it's it's a lot muddier than I think the harder sciences and the harder
+[1:00:22] the harder sciences and the harder Sciences also have these similar
+[1:00:24] Sciences also have these similar problems but
+[1:00:26] problems but so yeah um just one one last note in
+[1:00:30] so yeah um just one one last note in reaction to your um your comments which
+[1:00:33] reaction to your um your comments which is I think the connections uh to the
+[1:00:35] is I think the connections uh to the what works Clearing House and the and
+[1:00:36] what works Clearing House and the and the Deacon Chang um is really really
+[1:00:39] the Deacon Chang um is really really interesting and we should definitely uh
+[1:00:41] interesting and we should definitely uh reflect on that too so thank you for
+[1:00:45] reflect on that too so thank you for that and I'll stop there all right great
+[1:00:48] that and I'll stop there all right great fantastic uh thank you so I think it now
+[1:00:51] fantastic uh thank you so I think it now it's time to slowly wrap up uh first uh
+[1:00:53] it's time to slowly wrap up uh first uh thank you so much Luke for a very nice
+[1:00:55] thank you so much Luke for a very nice talk thank you so much ben for rocking
+[1:00:58] talk thank you so much ben for rocking Q&amp;A today and answering all these
+[1:01:00] Q&amp;A today and answering all these questions thanks Beth for a very nice
+[1:01:03] questions thanks Beth for a very nice discussion um next time uh so next week
+[1:01:06] discussion um next time uh so next week there will be no online CA inference
+[1:01:08] there will be no online CA inference seminar uh we'll have a winter break and
+[1:01:10] seminar uh we'll have a winter break and we'll be back shortly uh at the
+[1:01:11] we'll be back shortly uh at the beginning of January so we hope that you
+[1:01:14] beginning of January so we hope that you all stay safe until then and enjoy your
+[1:01:17] all stay safe until then and enjoy your uh winter break thank you all for coming
+[1:01:19] uh winter break thank you all for coming and hope to see you next time

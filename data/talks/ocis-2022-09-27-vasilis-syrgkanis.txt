@@ -1,0 +1,1677 @@
+[0:00:03] foreign hello everyone welcome back to the
+[0:00:05] hello everyone welcome back to the online causal inference seminar uh this
+[0:00:08] online causal inference seminar uh this week we have vasilius tsukanas who
+[0:00:10] week we have vasilius tsukanas who recently joined Stanford University
+[0:00:13] recently joined Stanford University and he will talk about automatic
+[0:00:15] and he will talk about automatic automatic device machine learning
+[0:00:18] automatic device machine learning for dynamic treatment effects and
+[0:00:20] for dynamic treatment effects and general nested functionals are discussed
+[0:00:23] general nested functionals are discussed and uh will be Eric shotgun shotgun from
+[0:00:26] and uh will be Eric shotgun shotgun from University of Pennsylvania
+[0:00:28] University of Pennsylvania um today's q a will be handled by Emma
+[0:00:33] um today's q a will be handled by Emma um and I'll hand it over to her explain
+[0:00:36] um and I'll hand it over to her explain the rules
+[0:00:37] the rules uh hi everyone uh thanks for coming uh
+[0:00:41] uh hi everyone uh thanks for coming uh so yes as chingyon said I'm handling the
+[0:00:44] so yes as chingyon said I'm handling the questions today so please submit your
+[0:00:46] questions today so please submit your questions through the Q a not through
+[0:00:48] questions through the Q a not through the chat
+[0:00:49] the chat and periodically I think vasilis will
+[0:00:52] and periodically I think vasilis will stop and ask for questions and then I
+[0:00:55] stop and ask for questions and then I will read them out to him uh yeah so
+[0:00:58] will read them out to him uh yeah so feel free to submit your questions as
+[0:00:59] feel free to submit your questions as soon as they come up you don't need to
+[0:01:01] soon as they come up you don't need to wait for a particular time they will be
+[0:01:03] wait for a particular time they will be stored here and we'll just wait to to
+[0:01:06] stored here and we'll just wait to to ask them
+[0:01:07] ask them all right uh that's it so vasilis you
+[0:01:10] all right uh that's it so vasilis you can take it away
+[0:01:12] can take it away great thank you very much for inviting
+[0:01:15] great thank you very much for inviting me uh it's a great seminar and very
+[0:01:18] me uh it's a great seminar and very happy to present so today I wanted to
+[0:01:21] happy to present so today I wanted to talk about
+[0:01:22] talk about um uh a recent line of work that we've
+[0:01:25] um uh a recent line of work that we've been working on on automatic device
+[0:01:26] been working on on automatic device machine learning uh with generic muscle
+[0:01:29] machine learning uh with generic muscle learning for starting a dynamic
+[0:01:30] learning for starting a dynamic causality parameters building up to the
+[0:01:33] causality parameters building up to the paper that's associated with the talk
+[0:01:35] paper that's associated with the talk which is on automatic device machine
+[0:01:36] which is on automatic device machine learning for dynamic treatment effects
+[0:01:39] learning for dynamic treatment effects I'll spend a quite some time building up
+[0:01:42] I'll spend a quite some time building up to that framework and giving an overview
+[0:01:44] to that framework and giving an overview of this first a few papers so that
+[0:01:47] of this first a few papers so that people can understand the more General
+[0:01:50] people can understand the more General framework that's presented in the most
+[0:01:52] framework that's presented in the most recent paper
+[0:01:57] first let me start by trying to motivate uh why we need automatic device machine
+[0:02:00] uh why we need automatic device machine learning
+[0:02:02] learning um and I just want to you know first
+[0:02:04] um and I just want to you know first mention that we are currently at a stage
+[0:02:06] mention that we are currently at a stage where
+[0:02:07] where um
+[0:02:08] um everybody with an access to a data set
+[0:02:11] everybody with an access to a data set and an outcome of interest can construct
+[0:02:12] and an outcome of interest can construct an ml predictive model so using automl
+[0:02:16] an ml predictive model so using automl Frameworks that are out there so using
+[0:02:18] Frameworks that are out there so using predictive machine learning is super
+[0:02:20] predictive machine learning is super easy for uh domain experts and not
+[0:02:24] easy for uh domain experts and not machine learning or statistics experts
+[0:02:27] machine learning or statistics experts and we should strive to make causal
+[0:02:29] and we should strive to make causal machine learning as easily accessible as
+[0:02:32] machine learning as easily accessible as automated machine learning to every
+[0:02:33] automated machine learning to every decision maker so that domain experts
+[0:02:36] decision maker so that domain experts with access to a data set and an outcome
+[0:02:38] with access to a data set and an outcome of interest can address Interventional
+[0:02:40] of interest can address Interventional patients that they have in mind
+[0:02:43] patients that they have in mind the problem with that is that predictive
+[0:02:45] the problem with that is that predictive modeling is is vastly harder than causal
+[0:02:48] modeling is is vastly harder than causal modeling in predictive model you just
+[0:02:50] modeling in predictive model you just have three stages you collect your data
+[0:02:52] have three stages you collect your data you estimate and then maybe you validate
+[0:02:55] you estimate and then maybe you validate on a separate data set or you split your
+[0:02:57] on a separate data set or you split your sample and validate on the other path
+[0:03:00] sample and validate on the other path and maybe nowadays you also try to
+[0:03:02] and maybe nowadays you also try to interpret what you learned but in causal
+[0:03:05] interpret what you learned but in causal modeling you need many more steps that
+[0:03:07] modeling you need many more steps that require a lot of human computer
+[0:03:09] require a lot of human computer interaction for instance you need to
+[0:03:11] interaction for instance you need to elicit domain assumptions you need to
+[0:03:14] elicit domain assumptions you need to identify you need to devise an
+[0:03:16] identify you need to devise an identification strategy based on the
+[0:03:18] identification strategy based on the domain assumptions and
+[0:03:21] domain assumptions and there's no such perfect analog as part
+[0:03:23] there's no such perfect analog as part of sample validation for causal modeling
+[0:03:26] of sample validation for causal modeling and so
+[0:03:27] and so um for that it's important that we do
+[0:03:31] um for that it's important that we do sensitivity analysis to check how our
+[0:03:33] sensitivity analysis to check how our results change based on the main
+[0:03:35] results change based on the main assumptions and also because there's no
+[0:03:37] assumptions and also because there's no perfect knowledge about assemble
+[0:03:38] perfect knowledge about assemble validation we care a lot about
+[0:03:40] validation we care a lot about constructing confidence intervals and
+[0:03:42] constructing confidence intervals and Performing uh inference
+[0:03:46] Performing uh inference um
+[0:03:46] um in fact exactly because there is no
+[0:03:49] in fact exactly because there is no perfect knowledge about Ensemble
+[0:03:50] perfect knowledge about Ensemble validation the causal inference pipeline
+[0:03:52] validation the causal inference pipeline is really a loop where we want to use
+[0:03:54] is really a loop where we want to use already collected data to inform what
+[0:03:57] already collected data to inform what experiments we want to run next and test
+[0:04:00] experiments we want to run next and test our hypothesis
+[0:04:02] our hypothesis there's been a lot of tools that try to
+[0:04:03] there's been a lot of tools that try to address many of these components of the
+[0:04:06] address many of these components of the causal reference pipeline out there
+[0:04:07] causal reference pipeline out there there's yet to exist a single tool that
+[0:04:11] there's yet to exist a single tool that a domain expert can use and interact
+[0:04:14] a domain expert can use and interact with and answer a cause of question or
+[0:04:16] with and answer a cause of question or Define the most informative experiment
+[0:04:20] Define the most informative experiment and the problem with that I think is
+[0:04:22] and the problem with that I think is that there's still exists a lot of open
+[0:04:25] that there's still exists a lot of open research questions that need to be
+[0:04:26] research questions that need to be addressed in all of these different
+[0:04:27] addressed in all of these different blocks a lot of the
+[0:04:30] blocks a lot of the emphasis has been on the estimation and
+[0:04:33] emphasis has been on the estimation and inference in the last few years of the
+[0:04:35] inference in the last few years of the causal nursing learning field
+[0:04:38] causal nursing learning field um and a lot of my work lies in that but
+[0:04:41] um and a lot of my work lies in that but we need to put a lot of work also on the
+[0:04:43] we need to put a lot of work also on the other components
+[0:04:44] other components in this talk I'll actually talk about
+[0:04:47] in this talk I'll actually talk about one uh one line of work within the
+[0:04:50] one uh one line of work within the estimation and inference pipeline that
+[0:04:52] estimation and inference pipeline that goes into this automation sort of like
+[0:04:54] goes into this automation sort of like goal ultimate goal of how do you go from
+[0:04:57] goal ultimate goal of how do you go from an identified estimate to an the biased
+[0:05:00] an identified estimate to an the biased estimate so that you can perform
+[0:05:02] estimate so that you can perform inference automatically
+[0:05:05] inference automatically um and so the the reason why we want to
+[0:05:09] um and so the the reason why we want to do this automatic debussing is so that
+[0:05:11] do this automatic debussing is so that we don't need to do math every time that
+[0:05:13] we don't need to do math every time that we Define an estimate based on
+[0:05:15] we Define an estimate based on identification strategy and find what is
+[0:05:17] identification strategy and find what is there you know like uh and on you know
+[0:05:20] there you know like uh and on you know like a Dubai store and um or a robust
+[0:05:23] like a Dubai store and um or a robust version of that estimate and construct
+[0:05:26] version of that estimate and construct p-values based on that we want to be
+[0:05:28] p-values based on that we want to be able to do that automatically
+[0:05:31] able to do that automatically foreign
+[0:05:33] foreign so this is a uh this leads to this topic
+[0:05:36] so this is a uh this leads to this topic of Auto automating the debiasing process
+[0:05:39] of Auto automating the debiasing process um and I'll be talking about how can you
+[0:05:41] um and I'll be talking about how can you do that how do you how can you build uh
+[0:05:44] do that how do you how can you build uh the biased estimates of uh
+[0:05:49] the biased estimates of uh generic machine learning uh irrigation
+[0:05:52] generic machine learning uh irrigation estimators with generic muscle blood
+[0:05:54] estimators with generic muscle blood and then in the first part of the talk
+[0:05:57] and then in the first part of the talk I'll mostly focus on static treatment
+[0:06:01] I'll mostly focus on static treatment effect cases and then uh we'll see how
+[0:06:04] effect cases and then uh we'll see how that approach that we built generalizes
+[0:06:07] that approach that we built generalizes to Dynamic treatment regimes and general
+[0:06:10] to Dynamic treatment regimes and general nested functions
+[0:06:13] nested functions foreign
+[0:06:15] foreign to make matters more concrete I'll be
+[0:06:18] to make matters more concrete I'll be focusing in the beginning on a
+[0:06:20] focusing in the beginning on a particular class of causal estimates
+[0:06:23] particular class of causal estimates which are estimates that are based on
+[0:06:26] which are estimates that are based on linear moment functionals
+[0:06:29] linear moment functionals uh we will assume that the parameter of
+[0:06:33] uh we will assume that the parameter of Interest Theta is defined based on a
+[0:06:38] Interest Theta is defined based on a linear moment function it's the
+[0:06:39] linear moment function it's the expectation of some moment M which is
+[0:06:42] expectation of some moment M which is linear and some function G and that
+[0:06:45] linear and some function G and that function G is defined as a regression
+[0:06:47] function G is defined as a regression function so G is the integration of Y
+[0:06:50] function so G is the integration of Y and X
+[0:06:53] and X classical examples of this setup include
+[0:06:56] classical examples of this setup include the average treatment effect where under
+[0:06:59] the average treatment effect where under conditional and confoundedness where if
+[0:07:02] conditional and confoundedness where if you assume that conditional on x
+[0:07:04] you assume that conditional on x the
+[0:07:06] the potential outcomes of Y are independent
+[0:07:09] potential outcomes of Y are independent of the treatment
+[0:07:11] of the treatment then the average treatment effect can be
+[0:07:14] then the average treatment effect can be written as the average of the this large
+[0:07:17] written as the average of the this large regression function that regresses Y and
+[0:07:19] regression function that regresses Y and T and X evaluated at T equals one and
+[0:07:22] T and X evaluated at T equals one and that t equals zero
+[0:07:24] that t equals zero similarly if you don't care about the
+[0:07:26] similarly if you don't care about the average effect but you care about some
+[0:07:28] average effect but you care about some average policy effect where the policy
+[0:07:30] average policy effect where the policy pie maps and observe covariates to
+[0:07:32] pie maps and observe covariates to treatment or no treatment but also can
+[0:07:35] treatment or no treatment but also can be phrased as the average of a linear
+[0:07:37] be phrased as the average of a linear moment functional
+[0:07:38] moment functional and if you have a continuous treatment
+[0:07:40] and if you have a continuous treatment and you care about the average marginal
+[0:07:43] and you care about the average marginal effect or the average derivative that
+[0:07:45] effect or the average derivative that also corresponds to a linear moment
+[0:07:48] also corresponds to a linear moment function
+[0:07:58] um our goal is to be able to construct confidence intervals for Theta while
+[0:08:00] confidence intervals for Theta while allowing for machine learning estimators
+[0:08:02] allowing for machine learning estimators to be used for G or in cases where X is
+[0:08:06] to be used for G or in cases where X is high dimensional either in cases where X
+[0:08:09] high dimensional either in cases where X is high dimensional or in cases where X
+[0:08:11] is high dimensional or in cases where X is low dimensional but we want to be
+[0:08:13] is low dimensional but we want to be non-parametric and flexible and we want
+[0:08:15] non-parametric and flexible and we want to use techniques like random forests
+[0:08:23] um to do that we need to remove the bias
+[0:08:26] to do that we need to remove the bias from the estimation of G typical machine
+[0:08:29] from the estimation of G typical machine learning estimators will try to balance
+[0:08:32] learning estimators will try to balance bias and variants and that bias in the
+[0:08:36] bias and variants and that bias in the estimation of G is going to propagate
+[0:08:37] estimation of G is going to propagate into the estimation of theta and the
+[0:08:40] into the estimation of theta and the estimate of theta is not going to be
+[0:08:42] estimate of theta is not going to be centered and might also have incur a
+[0:08:45] centered and might also have incur a larger because of the error of G
+[0:08:48] larger because of the error of G the solution to that is to the bias the
+[0:08:53] the solution to that is to the bias the moment by adding a correction term
+[0:08:55] moment by adding a correction term the correction term roughly tries to say
+[0:08:58] the correction term roughly tries to say whenever your G is biased meaning that
+[0:09:03] whenever your G is biased meaning that it does not predict the it does not
+[0:09:06] it does not predict the it does not equal to the expected y on the shell of
+[0:09:08] equal to the expected y on the shell of next
+[0:09:09] next then that residual over there is not
+[0:09:11] then that residual over there is not going to be mean zero
+[0:09:13] going to be mean zero um and so
+[0:09:16] um and so whenever that does not mean 0 we should
+[0:09:18] whenever that does not mean 0 we should try to correct our moment n
+[0:09:21] try to correct our moment n by multiplying that residual with some
+[0:09:23] by multiplying that residual with some function a and so here this would have
+[0:09:26] function a and so here this would have been a plasma Denise
+[0:09:28] been a plasma Denise so this is a general pharmacist moment
+[0:09:32] so this is a general pharmacist moment and the intuition is as I said whenever
+[0:09:36] and the intuition is as I said whenever G is biased we're going to get some non
+[0:09:38] G is biased we're going to get some non non-zero term which is going to correct
+[0:09:40] non-zero term which is going to correct them the main question is what is this a
+[0:09:43] them the main question is what is this a that we need to multiply that residual
+[0:09:45] that we need to multiply that residual so that we correctly devise the target
+[0:09:48] so that we correctly devise the target moment function m
+[0:09:55] and this the the answer to that question is that a of X should be what is known
+[0:09:58] is that a of X should be what is known as the risk representer of the linear
+[0:10:01] as the risk representer of the linear functional
+[0:10:02] functional so
+[0:10:04] so um if we view this expected M as a
+[0:10:06] um if we view this expected M as a linear function of G
+[0:10:08] linear function of G then by the risk represented theorem
+[0:10:11] then by the risk represented theorem every cell and assuming some continuity
+[0:10:14] every cell and assuming some continuity irregularity assumptions any such as
+[0:10:17] irregularity assumptions any such as linear functional will have an inner
+[0:10:19] linear functional will have an inner product representation in the L2 space
+[0:10:23] product representation in the L2 space which means that we can write this
+[0:10:26] which means that we can write this linear functional as a linear product
+[0:10:29] linear functional as a linear product of the form expected value of a times G
+[0:10:35] of the form expected value of a times G and that a is there is representative
+[0:10:46] so in order to debias the moment M we need to be able to estimate that risk
+[0:10:48] need to be able to estimate that risk representer and add this device in
+[0:10:50] representer and add this device in correction
+[0:10:56] why is that the biasing correction useful uh the general theorem is suppose
+[0:11:00] useful uh the general theorem is suppose that you estimate your moment based on
+[0:11:02] that you estimate your moment based on an empirical analog of that the biased
+[0:11:05] an empirical analog of that the biased moment where you plug in some estimate
+[0:11:09] moment where you plug in some estimate of G hat and some estimate of the risk
+[0:11:12] of G hat and some estimate of the risk the representer a hat
+[0:11:15] the representer a hat then uh if the moment satisfies the
+[0:11:19] then uh if the moment satisfies the regularity condition known as mean
+[0:11:21] regularity condition known as mean squared continuity
+[0:11:22] squared continuity it's a slightly stronger version than
+[0:11:24] it's a slightly stronger version than continuity because you need the square
+[0:11:27] continuity because you need the square and the second moment of M to be
+[0:11:29] and the second moment of M to be lipsticks with respect to the L2 Norm of
+[0:11:32] lipsticks with respect to the L2 Norm of G
+[0:11:34] G and moreover suppose that Jihad and
+[0:11:36] and moreover suppose that Jihad and a-hat estimated accurately enough
+[0:11:40] a-hat estimated accurately enough uh on a separate sample or with cross
+[0:11:43] uh on a separate sample or with cross fitting
+[0:11:44] fitting um and at the rate where the only the
+[0:11:47] um and at the rate where the only the product of these two errors needs to go
+[0:11:49] product of these two errors needs to go down as one over root 10. so this is
+[0:11:51] down as one over root 10. so this is sort of like a form of double robustness
+[0:11:53] sort of like a form of double robustness where either a minus a hat uh
+[0:11:58] where either a minus a hat uh for instance is is fast enough or G hat
+[0:12:02] for instance is is fast enough or G hat minus G naught is fast enough or their
+[0:12:05] minus G naught is fast enough or their product should be one over ten
+[0:12:07] product should be one over ten um this for instance will be satisfied
+[0:12:09] um this for instance will be satisfied if both of them uh to chaos one over n
+[0:12:11] if both of them uh to chaos one over n to the one chord
+[0:12:14] to the one chord then you can show that the sympirical
+[0:12:16] then you can show that the sympirical estimate is going to be asymptotically
+[0:12:18] estimate is going to be asymptotically normal and hence you can construct
+[0:12:20] normal and hence you can construct confidence intervals based on that
+[0:12:22] confidence intervals based on that asymptotic normal characterization
+[0:12:26] asymptotic normal characterization foreign
+[0:12:31] offers this form of double robustness and uh the one missing piece is how do
+[0:12:35] and uh the one missing piece is how do you estimate this represent the very hot
+[0:12:43] the traditional approach to uh the biasing is to characterize how the risk
+[0:12:46] biasing is to characterize how the risk representative looks like for your
+[0:12:48] representative looks like for your Target moment of interest and then
+[0:12:51] Target moment of interest and then perform plugin estimation
+[0:12:53] perform plugin estimation for instance in the case of the average
+[0:12:56] for instance in the case of the average treatment effect
+[0:12:58] treatment effect there is a presenter looks like this
+[0:13:00] there is a presenter looks like this inverse propensity term
+[0:13:02] inverse propensity term um there are two terms one for the G1
+[0:13:05] um there are two terms one for the G1 and one for the G zero so that's the
+[0:13:06] and one for the G zero so that's the classical inverse propensity term and by
+[0:13:09] classical inverse propensity term and by you where the denominator is the
+[0:13:12] you where the denominator is the probability of treatment conditional on
+[0:13:14] probability of treatment conditional on X and so plugging it back to the device
+[0:13:17] X and so plugging it back to the device in Formula you'll get the augmented
+[0:13:19] in Formula you'll get the augmented inverse propensity estimator or the W
+[0:13:21] inverse propensity estimator or the W robust estimate
+[0:13:27] um similarly you can derive the functional form of the risk
+[0:13:29] functional form of the risk representative for the other movement
+[0:13:31] representative for the other movement functionals and it will typically depend
+[0:13:33] functionals and it will typically depend on some other
+[0:13:34] on some other function like the propensity or the
+[0:13:38] function like the propensity or the conditional density of the treatment
+[0:13:40] conditional density of the treatment and then you can estimate that that
+[0:13:43] and then you can estimate that that function for instance you can train a
+[0:13:45] function for instance you can train a class with a probability classifier for
+[0:13:46] class with a probability classifier for the propensity and plug it in
+[0:13:53] uh however the automatic device machine learning uh sort of like line of work
+[0:13:55] learning uh sort of like line of work asks can we circumvent this
+[0:13:57] asks can we circumvent this characterization step and estimate a
+[0:13:59] characterization step and estimate a directly we don't want to have to do
+[0:14:02] directly we don't want to have to do sort of math every time that uh an
+[0:14:06] sort of math every time that uh an analytic derivations every time that we
+[0:14:08] analytic derivations every time that we come up with a new estimate
+[0:14:10] come up with a new estimate and derive what the risk representer
+[0:14:13] and derive what the risk representer looks like and then estimate whatever
+[0:14:15] looks like and then estimate whatever function comes up can we directly
+[0:14:18] function comes up can we directly estimate a solely with black box access
+[0:14:21] estimate a solely with black box access to the moment of Interest so if someone
+[0:14:25] to the moment of Interest so if someone just gives you Oracle evaluation Oracle
+[0:14:27] just gives you Oracle evaluation Oracle access to the moment of Interest Can you
+[0:14:29] access to the moment of Interest Can you estimate a
+[0:14:30] estimate a without knowing how it looks like
+[0:14:32] without knowing how it looks like exactly
+[0:14:34] exactly and
+[0:14:40] the seminal paper of charge of new in sync showed how you can do this uh using
+[0:14:45] sync showed how you can do this uh using um L1 penalized linear representations
+[0:14:48] um L1 penalized linear representations of there is representer
+[0:14:51] of there is representer and in fact uh this idea of estimating
+[0:14:54] and in fact uh this idea of estimating there is represented directly dates back
+[0:14:57] there is represented directly dates back to even the seminal paper of Nui 94
+[0:15:00] to even the seminal paper of Nui 94 which characterized the variance of
+[0:15:02] which characterized the variance of semi-parametric estimators or follow-up
+[0:15:05] semi-parametric estimators or follow-up work by Chen and Yao uh and a more
+[0:15:09] work by Chen and Yao uh and a more classical work which tries to estimate
+[0:15:13] classical work which tries to estimate this representation presenter based on
+[0:15:15] this representation presenter based on unpenalized linear representations
+[0:15:19] unpenalized linear representations and typically uses this implicit
+[0:15:22] and typically uses this implicit estimation of research presenters not
+[0:15:23] estimation of research presenters not for the biasing but rather for
+[0:15:27] for the biasing but rather for calculating the correct values
+[0:15:30] calculating the correct values so here
+[0:15:31] so here uh the The Works above repurposed sort
+[0:15:35] uh the The Works above repurposed sort of like this idea of automatically
+[0:15:36] of like this idea of automatically estimating there is a presenter for
+[0:15:38] estimating there is a presenter for device
+[0:15:44] um but here what we're going to ask is what if we want to do generic ml for
+[0:15:46] what if we want to do generic ml for estimating a
+[0:15:48] estimating a we don't want to be restricted to using
+[0:15:51] we don't want to be restricted to using unpellalized linear representations or
+[0:15:53] unpellalized linear representations or L1 penalized linear representations we
+[0:15:55] L1 penalized linear representations we want to be able to use any muscle
+[0:15:57] want to be able to use any muscle learning method for estimating that risk
+[0:15:59] learning method for estimating that risk represented without the need to
+[0:16:01] represented without the need to characterize
+[0:16:08] and so this was the idea in um in this in this paper
+[0:16:10] in this paper um on automatic device machine learning
+[0:16:12] um on automatic device machine learning via neural net for generalized linear
+[0:16:14] via neural net for generalized linear regression where
+[0:16:17] regression where the the key observation was that you can
+[0:16:20] the the key observation was that you can view the risk representer as the
+[0:16:22] view the risk representer as the minimizer of a stochastic loss of a risk
+[0:16:27] minimizer of a stochastic loss of a risk that loss looks like uh we expected a of
+[0:16:31] that loss looks like uh we expected a of x squared minus two times the moment
+[0:16:33] x squared minus two times the moment evaluated at a
+[0:16:36] evaluated at a by there is representative theorem we
+[0:16:38] by there is representative theorem we know that the second quantity over here
+[0:16:40] know that the second quantity over here the expected moment evaluated at a
+[0:16:44] the expected moment evaluated at a is going to be equal to the true risk
+[0:16:47] is going to be equal to the true risk representer a naught multiplied by a
+[0:16:50] representer a naught multiplied by a and so you can easily then sort of
+[0:16:52] and so you can easily then sort of complete the squares you can add the
+[0:16:54] complete the squares you can add the constant term which is a naught of x
+[0:16:56] constant term which is a naught of x squared
+[0:16:57] squared and once you add that then you can
+[0:16:59] and once you add that then you can complete the square you can see that the
+[0:17:01] complete the square you can see that the loss is equivalent
+[0:17:03] loss is equivalent to the mean Square there with respect to
+[0:17:05] to the mean Square there with respect to a naught that we care about
+[0:17:08] a naught that we care about so minimizing this loss
+[0:17:10] so minimizing this loss is equivalent to minimizing the mean
+[0:17:13] is equivalent to minimizing the mean Square there that you care about
+[0:17:15] Square there that you care about and the other nice thing is that this
+[0:17:17] and the other nice thing is that this loss only requires Oracle access to the
+[0:17:20] loss only requires Oracle access to the moment of Interest
+[0:17:22] moment of Interest you don't need to know how m z of a
+[0:17:26] you don't need to know how m z of a looks like
+[0:17:27] looks like you just need to be able to evaluate it
+[0:17:35] and so uh you can take this sort of like population risk into an empirical
+[0:17:38] population risk into an empirical estimate by minimizing the corresponding
+[0:17:41] estimate by minimizing the corresponding empirical loss
+[0:17:44] empirical loss where you replace the expectation with
+[0:17:46] where you replace the expectation with an empirical average of this quantity
+[0:17:49] an empirical average of this quantity and we can so we can prove estimation
+[0:17:53] and we can so we can prove estimation rates that scale with a notion of
+[0:17:56] rates that scale with a notion of complexity of the function plus a that
+[0:17:59] complexity of the function plus a that you're using to minimize over and in
+[0:18:01] you're using to minimize over and in particular we're using the critical
+[0:18:03] particular we're using the critical radius which is
+[0:18:05] radius which is um a notion that typically yields tight
+[0:18:08] um a notion that typically yields tight measures uh it's a tight sort of like
+[0:18:11] measures uh it's a tight sort of like convergence rates for strongly convex
+[0:18:14] convergence rates for strongly convex losses and here we have a strongly
+[0:18:16] losses and here we have a strongly convex flows
+[0:18:18] convex flows more formally
+[0:18:21] more formally um you can uh so that if you choose a
+[0:18:27] um you can uh so that if you choose a Delta n which upper bounds the critical
+[0:18:29] Delta n which upper bounds the critical radius of these two function classes the
+[0:18:31] radius of these two function classes the first is a minus a naught and the second
+[0:18:34] first is a minus a naught and the second is M of a minus M of a naught
+[0:18:37] is M of a minus M of a naught uh so
+[0:18:39] uh so and these are just like scalars scalings
+[0:18:43] and these are just like scalars scalings of them so that's also required that
+[0:18:46] of them so that's also required that everything between that and zero is
+[0:18:48] everything between that and zero is included
+[0:18:50] included um and your moment function satisfies
+[0:18:53] um and your moment function satisfies the same squared continuity that I
+[0:18:55] the same squared continuity that I mentioned for the normality theorem
+[0:18:58] mentioned for the normality theorem then you can show that the minimizer of
+[0:19:00] then you can show that the minimizer of the empirical loss is going to be is
+[0:19:03] the empirical loss is going to be is going to be achieving fast rates meaning
+[0:19:05] going to be achieving fast rates meaning uh of the order of the square of the
+[0:19:08] uh of the order of the square of the critical radius plus some bias error if
+[0:19:11] critical radius plus some bias error if your true or is represented is not in
+[0:19:13] your true or is represented is not in the class over which you minimize
+[0:19:16] the class over which you minimize and so here I'm saying fast rate because
+[0:19:18] and so here I'm saying fast rate because for instance uh for parametric function
+[0:19:20] for instance uh for parametric function classes Delta n is typically of the
+[0:19:22] classes Delta n is typically of the order of one over root n and so you're
+[0:19:25] order of one over root n and so you're gonna get here rates for the mean Square
+[0:19:27] gonna get here rates for the mean Square there that are of the order of one over
+[0:19:29] there that are of the order of one over n
+[0:19:30] n and similarly for VC Dimension VC
+[0:19:33] and similarly for VC Dimension VC subgraph classes you're going to get of
+[0:19:34] subgraph classes you're going to get of the order of root log n over n
+[0:19:37] the order of root log n over n sorry Delta n is root log in operant so
+[0:19:39] sorry Delta n is root log in operant so you're going to get a login Over N rate
+[0:19:41] you're going to get a login Over N rate so these are sort of fast rates you're
+[0:19:43] so these are sort of fast rates you're going to get in you're getting one over
+[0:19:44] going to get in you're getting one over n rates
+[0:19:46] n rates so that's one theorem we had in that
+[0:19:47] so that's one theorem we had in that paper for estimation rates for there is
+[0:19:50] paper for estimation rates for there is representer and because it's an
+[0:19:52] representer and because it's an empirical risk minimization approach of
+[0:19:54] empirical risk minimization approach of a of um of some loss function you can
+[0:19:58] a of um of some loss function you can see that you can use any ml method to
+[0:20:02] see that you can use any ml method to minimize that risk so you're not
+[0:20:04] minimize that risk so you're not constrained uh to just use a L1
+[0:20:07] constrained uh to just use a L1 parallelized saves or
+[0:20:09] parallelized saves or neural Nets or
+[0:20:12] neural Nets or random Forest you can use any of those
+[0:20:14] random Forest you can use any of those approaches to minimize those loss
+[0:20:20] and these are just some examples of what the rate you're going to get for
+[0:20:22] the rate you're going to get for different function classes that you
+[0:20:24] different function classes that you might want to use
+[0:20:31] and this approach does not only hold for linear moments you can go beyond linear
+[0:20:34] linear moments you can go beyond linear moments if the moment that function that
+[0:20:37] moments if the moment that function that you have is of some some of the form
+[0:20:40] you have is of some some of the form expected M of theta node G naught is
+[0:20:43] expected M of theta node G naught is equal to zero where this moment M can be
+[0:20:46] equal to zero where this moment M can be non-linear in G naught then you can
+[0:20:48] non-linear in G naught then you can still locally be biased the moment you
+[0:20:50] still locally be biased the moment you won't get double robustness but you can
+[0:20:51] won't get double robustness but you can get a local robustness which is still
+[0:20:55] get a local robustness which is still good enough to
+[0:20:57] good enough to um
+[0:20:58] um to give asymptotic normality and so
+[0:21:00] to give asymptotic normality and so construction of confidence intervals
+[0:21:02] construction of confidence intervals assuming A and G are estimated
+[0:21:04] assuming A and G are estimated accurately enough but here the
+[0:21:06] accurately enough but here the estimation approach is slightly more
+[0:21:08] estimation approach is slightly more complicated uh you need to estimate
+[0:21:11] complicated uh you need to estimate there is representer not of them
+[0:21:14] there is representer not of them non-linear functional that you have over
+[0:21:16] non-linear functional that you have over there but instead you first need to
+[0:21:17] there but instead you first need to linearize that non-linear functional
+[0:21:20] linearize that non-linear functional around some
+[0:21:22] around some uh G some estimate of G in fact your
+[0:21:26] uh G some estimate of G in fact your goal is to estimate there is a presenter
+[0:21:29] goal is to estimate there is a presenter of the uh directional derivative
+[0:21:32] of the uh directional derivative evaluated at G naught of that non-linear
+[0:21:35] evaluated at G naught of that non-linear function
+[0:21:36] function and so that's this quantity down here
+[0:21:37] and so that's this quantity down here which is now linear in G so this
+[0:21:40] which is now linear in G so this directional derivative is linear in that
+[0:21:42] directional derivative is linear in that sort of deviation parameter G
+[0:21:45] sort of deviation parameter G and then you want to estimate there is
+[0:21:48] and then you want to estimate there is representative of this linear function
+[0:21:51] representative of this linear function which you can do in two steps first
+[0:21:53] which you can do in two steps first estimating a preliminary model of G
+[0:21:55] estimating a preliminary model of G applying it instead here instead of G
+[0:21:57] applying it instead here instead of G naught and then doing some sort of like
+[0:22:00] naught and then doing some sort of like anal
+[0:22:02] anal automatic automatic differentiation
+[0:22:05] automatic automatic differentiation um to estimate the directional
+[0:22:07] um to estimate the directional derivative and then plugging that
+[0:22:10] derivative and then plugging that automatically differentiated moment into
+[0:22:13] automatically differentiated moment into our automatic risk representer approach
+[0:22:19] our automatic risk representer approach so that's the first sort of small part
+[0:22:22] so that's the first sort of small part of the of the talk and I would like to
+[0:22:25] of the of the talk and I would like to stop here and post for questions
+[0:22:28] stop here and post for questions thanks basilis uh we have two questions
+[0:22:31] thanks basilis uh we have two questions at the moment so I'll uh work backwards
+[0:22:35] at the moment so I'll uh work backwards so this question is a bit long uh there
+[0:22:38] so this question is a bit long uh there is a parallel line of work on the
+[0:22:40] is a parallel line of work on the biasing by influence functions where we
+[0:22:42] biasing by influence functions where we can empirically compute the influence
+[0:22:44] can empirically compute the influence function how do you compare Auto DML to
+[0:22:47] function how do you compare Auto DML to this line of work
+[0:22:52] um
+[0:23:03] well I think I should say in uh it's not clear what when you're automatically
+[0:23:05] clear what when you're automatically Computing influence functions it's not
+[0:23:07] Computing influence functions it's not clear what
+[0:23:09] clear what um
+[0:23:10] um direction to use in the directional
+[0:23:13] direction to use in the directional derivative when you're trying to add
+[0:23:15] derivative when you're trying to add some extra
+[0:23:16] some extra uh sort of like perturbation to your
+[0:23:20] uh sort of like perturbation to your probability law
+[0:23:22] probability law uh and so it's not clear how you're
+[0:23:25] uh and so it's not clear how you're gonna get you know what types of
+[0:23:26] gonna get you know what types of guarantees you can get
+[0:23:29] guarantees you can get um
+[0:23:35] for for such approaches and also not clear if you can get some sort of like
+[0:23:36] clear if you can get some sort of like mean square error guarantees
+[0:23:39] mean square error guarantees for the uh influence function you're
+[0:23:42] for the uh influence function you're calculating similar to how we get mean
+[0:23:45] calculating similar to how we get mean Square data guarantees for there is a
+[0:23:46] Square data guarantees for there is a representative
+[0:23:48] representative on the other hand the two are very well
+[0:23:50] on the other hand the two are very well connected you know like the influence
+[0:23:52] connected you know like the influence function for those algorithms linear
+[0:23:54] function for those algorithms linear moments looks like these two bias and
+[0:23:56] moments looks like these two bias and things so you're estimating there is
+[0:23:58] things so you're estimating there is represented automatically is implicitly
+[0:24:00] represented automatically is implicitly estimating the influence function the
+[0:24:02] estimating the influence function the and many times the efficient influence
+[0:24:04] and many times the efficient influence function for as linear moments and so
+[0:24:08] function for as linear moments and so from that perspective you can view this
+[0:24:10] from that perspective you can view this as another way of automatically
+[0:24:11] as another way of automatically estimating an influence function with
+[0:24:13] estimating an influence function with some means where the organities on the
+[0:24:14] some means where the organities on the approximation area when I get
+[0:24:20] thank you thanks for answering the question and there's another question is
+[0:24:24] question and there's another question is it possible to say anything about
+[0:24:25] it possible to say anything about uniqueness of the risk Representatives
+[0:24:29] uniqueness of the risk Representatives so there is yeah that's a good question
+[0:24:31] so there is yeah that's a good question there is a present there's my especially
+[0:24:33] there is a present there's my especially if you restrict your function with class
+[0:24:35] if you restrict your function with class G might actually not be unique
+[0:24:38] G might actually not be unique uh but typically there will be a minimum
+[0:24:43] uh but typically there will be a minimum a minimal resolution there in terms of
+[0:24:45] a minimal resolution there in terms of like say a second moment
+[0:24:47] like say a second moment and so that's the one that you really
+[0:24:50] and so that's the one that you really want to estimate
+[0:24:52] want to estimate and I believe our loss function will go
+[0:24:54] and I believe our loss function will go after that because it has this expected
+[0:24:56] after that because it has this expected a square
+[0:25:00] um that's it yeah
+[0:25:03] that's it yeah great uh so we just got another one so
+[0:25:06] great uh so we just got another one so maybe we can have a short answer to this
+[0:25:08] maybe we can have a short answer to this question uh do you have any thoughts on
+[0:25:11] question uh do you have any thoughts on how your framework can incorporate
+[0:25:12] how your framework can incorporate constraints on the parameter space is it
+[0:25:15] constraints on the parameter space is it simply solving a constraint optimization
+[0:25:16] simply solving a constraint optimization problem to minimize the loss
+[0:25:20] foreign
+[0:25:32] it's not clear um how you would do that right so in the
+[0:25:36] um how you would do that right so in the end we're still doing a the thing that I
+[0:25:39] end we're still doing a the thing that I mentioned so far we're still doing a
+[0:25:40] mentioned so far we're still doing a plugin to uh the moment and then
+[0:25:44] plugin to uh the moment and then estimating an average moment
+[0:25:46] estimating an average moment if you want to estimate an average
+[0:25:47] if you want to estimate an average moment subject to some constraints on
+[0:25:49] moment subject to some constraints on Theta it's a harder problem what if you
+[0:25:52] Theta it's a harder problem what if you know it's the lies of the boundaries and
+[0:25:54] know it's the lies of the boundaries and then it's not clear how you would do the
+[0:25:55] then it's not clear how you would do the asymptotics
+[0:25:56] asymptotics another thing that we want to say is
+[0:25:58] another thing that we want to say is that um
+[0:25:59] that um you can use our framework also within
+[0:26:02] you can use our framework also within the tmle framework and there maybe you
+[0:26:05] the tmle framework and there maybe you could incorporate constraints on uh
+[0:26:10] could incorporate constraints on uh on say the outcome being binary or
+[0:26:13] on say the outcome being binary or something like that because really there
+[0:26:15] something like that because really there is representative we're estimating is
+[0:26:16] is representative we're estimating is equivalent to this least favorable
+[0:26:20] equivalent to this least favorable direction that you need to add to the
+[0:26:23] direction that you need to add to the tmele framework and so you can use our
+[0:26:25] tmele framework and so you can use our risk representer in the TMA framework to
+[0:26:28] risk representer in the TMA framework to construct a corrected regression
+[0:26:32] construct a corrected regression function G
+[0:26:33] function G right so and then the plugin with that
+[0:26:36] right so and then the plugin with that correctly regression function G
+[0:26:39] correctly regression function G and you can also use our framework also
+[0:26:43] and you can also use our framework also as in in in not in the timely but in the
+[0:26:47] as in in in not in the timely but in the earlier uh approach of Source Time
+[0:26:49] earlier uh approach of Source Time Robinson Road nitsky where you add there
+[0:26:52] Robinson Road nitsky where you add there is represented as a clever covariate
+[0:26:54] is represented as a clever covariate so you can also add a of X you can first
+[0:26:57] so you can also add a of X you can first estimate a of X and not it as a clever
+[0:26:59] estimate a of X and not it as a clever covered integration regressing y on G of
+[0:27:02] covered integration regressing y on G of X plus a linear function of this
+[0:27:04] X plus a linear function of this representer
+[0:27:05] representer and that will also give you double
+[0:27:08] and that will also give you double robustness
+[0:27:10] robustness and maybe those approaches are more
+[0:27:12] and maybe those approaches are more amenable to adding constraints
+[0:27:18] great uh thanks for a very detailed and considerate answer so yes we don't have
+[0:27:20] considerate answer so yes we don't have any more questions
+[0:27:28] cool so uh the next short snippet of the talk is about
+[0:27:29] talk is about um making this approach practical using
+[0:27:32] um making this approach practical using neural lens in random forests
+[0:27:35] neural lens in random forests and we wanted to
+[0:27:36] and we wanted to you know take it to practice and see
+[0:27:38] you know take it to practice and see what uh maybe we can do some practical
+[0:27:40] what uh maybe we can do some practical tunics heuristics to improve them you
+[0:27:43] tunics heuristics to improve them you know like the the vanilla method
+[0:27:45] know like the the vanilla method for this particular types of machine
+[0:27:47] for this particular types of machine learning approaches
+[0:27:50] learning approaches um and the first observation for neural
+[0:27:53] um and the first observation for neural networks uh was that you can have
+[0:27:57] networks uh was that you can have um a generalization of the rosenba and
+[0:28:00] um a generalization of the rosenba and Ruben result where it suffices to
+[0:28:04] Ruben result where it suffices to condition on propensity when estimating
+[0:28:05] condition on propensity when estimating the regression to get an unbiased
+[0:28:07] the regression to get an unbiased testimony the average human effect this
+[0:28:10] testimony the average human effect this observation generalizes to any linear
+[0:28:13] observation generalizes to any linear moment functional it always suffices to
+[0:28:16] moment functional it always suffices to estimate the regression function that is
+[0:28:18] estimate the regression function that is just a function of there is
+[0:28:20] just a function of there is representative
+[0:28:21] representative so you don't need really to condition on
+[0:28:24] so you don't need really to condition on the whole on all of X but you only need
+[0:28:26] the whole on all of X but you only need to condition on the risk representative
+[0:28:28] to condition on the risk representative a naught of x if you want an unbiased
+[0:28:30] a naught of x if you want an unbiased estimate of the average treatment effect
+[0:28:31] estimate of the average treatment effect in fact it suffices to just run a linear
+[0:28:34] in fact it suffices to just run a linear regression with respect to there is
+[0:28:37] regression with respect to there is representer and you will still get the
+[0:28:39] representer and you will still get the numbers estimate of the treatment effect
+[0:28:42] numbers estimate of the treatment effect although it won't be efficient but still
+[0:28:44] although it won't be efficient but still be unbiased right so there is
+[0:28:47] be unbiased right so there is represented really carries the
+[0:28:48] represented really carries the sufficient information that you need to
+[0:28:50] sufficient information that you need to control for to get a non-biased estimate
+[0:28:52] control for to get a non-biased estimate of your target parameter
+[0:28:56] of your target parameter um and you can view that it's just one
+[0:28:59] um and you can view that it's just one line of derivation that uses the risk
+[0:29:01] line of derivation that uses the risk represented characterization I will go
+[0:29:03] represented characterization I will go through that but we can use that uh
+[0:29:06] through that but we can use that uh within a multitasking neural network
+[0:29:09] within a multitasking neural network architecture where we say because there
+[0:29:11] architecture where we say because there is represented carries all of the
+[0:29:13] is represented carries all of the information that we need to condition on
+[0:29:16] information that we need to condition on we can share a lot of layers we can have
+[0:29:19] we can share a lot of layers we can have like a first few layers of a neural net
+[0:29:21] like a first few layers of a neural net leading to a representation that is used
+[0:29:24] leading to a representation that is used in some linear form to learn the risk
+[0:29:27] in some linear form to learn the risk representer and that same representation
+[0:29:29] representer and that same representation that's used for there is representer is
+[0:29:31] that's used for there is representer is then also passed to another smaller
+[0:29:33] then also passed to another smaller neural network that learns the
+[0:29:35] neural network that learns the regression function
+[0:29:37] regression function and so this multitasking hopefully will
+[0:29:39] and so this multitasking hopefully will help learn better representations and
+[0:29:42] help learn better representations and deal with the you know like the fact
+[0:29:44] deal with the you know like the fact that the neural networks does those
+[0:29:46] that the neural networks does those representations are not really
+[0:29:48] representations are not really identified but you will have more
+[0:29:50] identified but you will have more information when we train both on the
+[0:29:52] information when we train both on the Aries representer and the regression
+[0:29:54] Aries representer and the regression function to learn better representations
+[0:29:58] function to learn better representations and in fact because you're training both
+[0:30:00] and in fact because you're training both GNA directly
+[0:30:03] GNA directly you can incorporate this clever covered
+[0:30:05] you can incorporate this clever covered adjustment idea within the neural net
+[0:30:07] adjustment idea within the neural net training by always adding some linear
+[0:30:11] training by always adding some linear function of the risk representer in your
+[0:30:13] function of the risk representer in your final regression function and minimizing
+[0:30:16] final regression function and minimizing that X that square loss with the clever
+[0:30:19] that X that square loss with the clever combine
+[0:30:20] combine so we can simultaneously minimize all of
+[0:30:23] so we can simultaneously minimize all of these losses the loss of the vanilla G
+[0:30:26] these losses the loss of the vanilla G of X regression Square loss the loss of
+[0:30:29] of X regression Square loss the loss of the clever covariate
+[0:30:31] the clever covariate [Music]
+[0:30:32] [Music] regression loss and the loss of the
+[0:30:35] regression loss and the loss of the recent presenter all simultaneously and
+[0:30:37] recent presenter all simultaneously and hopefully that leads to better
+[0:30:39] hopefully that leads to better estimation rates for all of them in
+[0:30:41] estimation rates for all of them in finite samples
+[0:30:43] finite samples and that's exactly what we what we got
+[0:30:46] and that's exactly what we what we got this approach actually is was inspired
+[0:30:49] this approach actually is was inspired by prior work
+[0:30:52] by prior work by David bly's Group
+[0:30:55] by David bly's Group which used essentially the analog of our
+[0:30:59] which used essentially the analog of our multitasking architecture but with the
+[0:31:01] multitasking architecture but with the plugin formula so they were using
+[0:31:03] plugin formula so they were using multitasking to learn the propensity and
+[0:31:06] multitasking to learn the propensity and the regression and then doing the W
+[0:31:08] the regression and then doing the W robust at the end with the plugin
+[0:31:10] robust at the end with the plugin formula for there is representer here we
+[0:31:12] formula for there is representer here we can generalize that to any linear moment
+[0:31:14] can generalize that to any linear moment functional and instead of First Learning
+[0:31:16] functional and instead of First Learning propensity in plugging it in we actually
+[0:31:18] propensity in plugging it in we actually directly minimize the the risk loss
+[0:31:21] directly minimize the the risk loss which is the square loss with respect to
+[0:31:22] which is the square loss with respect to what you care about which is the inverse
+[0:31:25] what you care about which is the inverse propensity and so by doing that we
+[0:31:27] propensity and so by doing that we actually get better rates than the trunk
+[0:31:31] actually get better rates than the trunk on net for the standard semi-synthetic
+[0:31:34] on net for the standard semi-synthetic data set that's out there on infant
+[0:31:37] data set that's out there on infant health and development program
+[0:31:39] health and development program uh so we get like Point 11 mean absolute
+[0:31:42] uh so we get like Point 11 mean absolute error as compared to 0.146
+[0:31:46] error as compared to 0.146 uh and you see here these improvements
+[0:31:48] uh and you see here these improvements primarily comes from the fact that we're
+[0:31:50] primarily comes from the fact that we're not learning a propensity we're learning
+[0:31:51] not learning a propensity we're learning there is representative Direction
+[0:31:54] there is representative Direction uh similarly we
+[0:31:57] uh similarly we um devised a way of training random
+[0:32:00] um devised a way of training random forests uh based on the wrist laws and
+[0:32:04] forests uh based on the wrist laws and there we use the ideas from the
+[0:32:06] there we use the ideas from the generalized random Forest work and we
+[0:32:10] generalized random Forest work and we can cast minimizing this risk loss as
+[0:32:13] can cast minimizing this risk loss as solving a conditional moment restriction
+[0:32:16] solving a conditional moment restriction and so we can use these ideas that go
+[0:32:18] and so we can use these ideas that go into the generalized random Forest to
+[0:32:20] into the generalized random Forest to have a random Forest that minimizes
+[0:32:22] have a random Forest that minimizes their wrist flows and by doing that we
+[0:32:25] their wrist flows and by doing that we also get very good performance in terms
+[0:32:27] also get very good performance in terms of the mean absolute error and also we
+[0:32:29] of the mean absolute error and also we get pretty good coverage uh in terms of
+[0:32:32] get pretty good coverage uh in terms of confidence intervals so we get both
+[0:32:34] confidence intervals so we get both small I mean absolute error and good
+[0:32:37] small I mean absolute error and good coverage
+[0:32:42] and the nice thing with this generalization to any moment
+[0:32:43] generalization to any moment restrictions that you can also take it
+[0:32:44] restrictions that you can also take it to continuous treatments and estimating
+[0:32:47] to continuous treatments and estimating average marginal effects uh which was
+[0:32:50] average marginal effects uh which was not possible with the
+[0:32:52] not possible with the plug-in approach the approaches that
+[0:32:55] plug-in approach the approaches that were before
+[0:32:56] were before um that solely focused on the binary
+[0:32:58] um that solely focused on the binary case
+[0:33:00] case um here for instance we applied it to a
+[0:33:03] um here for instance we applied it to a public data set on gasoline demand and
+[0:33:05] public data set on gasoline demand and we get reasonable results hard to test
+[0:33:08] we get reasonable results hard to test whether these are accurate results but
+[0:33:10] whether these are accurate results but at least we get results for our non
+[0:33:13] at least we get results for our non non-parametric risk representer based
+[0:33:15] non-parametric risk representer based estimator of elasticities that are
+[0:33:19] estimator of elasticities that are comparable to what you would get
+[0:33:21] comparable to what you would get uh if you made a parametric linear a
+[0:33:24] uh if you made a parametric linear a parametric assumption and you estimated
+[0:33:26] parametric assumption and you estimated an average marginal effect based on a
+[0:33:28] an average marginal effect based on a linear parametric assumption
+[0:33:31] linear parametric assumption um so at least the method does not
+[0:33:33] um so at least the method does not collapse or you know give nonsensical
+[0:33:36] collapse or you know give nonsensical results in in finite sometimes even for
+[0:33:40] results in in finite sometimes even for this hard problem of estimating an
+[0:33:41] this hard problem of estimating an average marginal effect but where if you
+[0:33:44] average marginal effect but where if you were to take the characterization
+[0:33:46] were to take the characterization approach you would need to estimate a
+[0:33:47] approach you would need to estimate a conditional density which is a hard
+[0:33:49] conditional density which is a hard statistical task but here we sort of
+[0:33:52] statistical task but here we sort of avoid this direct estimation of
+[0:33:53] avoid this direct estimation of conditional density by minimizing the
+[0:33:55] conditional density by minimizing the wrist loss
+[0:33:57] wrist loss hmm
+[0:33:58] hmm I also like to uh pause here for for a
+[0:34:02] I also like to uh pause here for for a few questions if there are for this
+[0:34:04] few questions if there are for this small snippet
+[0:34:07] small snippet so we actually don't have any open
+[0:34:08] so we actually don't have any open questions now on the Q a and I think in
+[0:34:11] questions now on the Q a and I think in the interest of time maybe it's yeah
+[0:34:12] the interest of time maybe it's yeah sure
+[0:34:13] sure so let me move on to then to the more
+[0:34:16] so let me move on to then to the more General framework of estimating uh
+[0:34:18] General framework of estimating uh Dynamic causal effects an automatic
+[0:34:20] Dynamic causal effects an automatic device for dynamic causal effects
+[0:34:26] um the uh the types of estimates that we
+[0:34:30] the uh the types of estimates that we now care about uh uh are of the of the
+[0:34:33] now care about uh uh are of the of the following form we have data that are
+[0:34:35] following form we have data that are collected based on a dynamic treatment
+[0:34:37] collected based on a dynamic treatment regime so treatments were offered in an
+[0:34:41] regime so treatments were offered in an Adaptive manner where uh say at multiple
+[0:34:44] Adaptive manner where uh say at multiple periods some treatment was over that
+[0:34:46] periods some treatment was over that period one that depends on some observed
+[0:34:48] period one that depends on some observed state
+[0:34:49] state that treatment affected the observed
+[0:34:51] that treatment affected the observed State and then the observed state of
+[0:34:54] State and then the observed state of Period 2 and T1
+[0:34:56] Period 2 and T1 led to what treatment was going to be
+[0:34:58] led to what treatment was going to be given at period two and then again we
+[0:35:02] given at period two and then again we have some final outcome of Interest
+[0:35:05] have some final outcome of Interest and what we care about is understanding
+[0:35:07] and what we care about is understanding what would happen if instead of offering
+[0:35:10] what would happen if instead of offering this if you know like if we intervened
+[0:35:12] this if you know like if we intervened in the system and offered some uh
+[0:35:15] in the system and offered some uh sequence of treatments Tau 1 and Tau 2.
+[0:35:17] sequence of treatments Tau 1 and Tau 2. for now I'm going to focus just on the
+[0:35:20] for now I'm going to focus just on the static treatment sequence so we're not
+[0:35:23] static treatment sequence so we're not looking at some counterfactual adaptive
+[0:35:26] looking at some counterfactual adaptive policy that we want to evaluate but our
+[0:35:28] policy that we want to evaluate but our framework will extend to that too so we
+[0:35:31] framework will extend to that too so we just care about this simple thing what
+[0:35:32] just care about this simple thing what would happen What would be the mean
+[0:35:34] would happen What would be the mean average outcome
+[0:35:36] average outcome under such a static treatment sequence
+[0:35:40] under such a static treatment sequence star one and how to say always treating
+[0:35:46] um the setting here is is inherently more
+[0:35:49] the setting here is is inherently more difficult than one stock treatment
+[0:35:52] difficult than one stock treatment problems because of these surrogate or
+[0:35:55] problems because of these surrogate or sorry this control
+[0:35:57] sorry this control treatment feedback loop that treatment
+[0:35:59] treatment feedback loop that treatment at period one changes the con the
+[0:36:02] at period one changes the con the controls or the covariates that go into
+[0:36:05] controls or the covariates that go into the treatment decision at period two and
+[0:36:08] the treatment decision at period two and so this really precludes us from viewing
+[0:36:10] so this really precludes us from viewing this problem as a once or trigger
+[0:36:11] this problem as a once or trigger problem we cannot just say this person
+[0:36:15] problem we cannot just say this person was offered two treatments T1 and D2L
+[0:36:17] was offered two treatments T1 and D2L and let's control for S1 and S2 or let's
+[0:36:20] and let's control for S1 and S2 or let's just control for a spawn none of these
+[0:36:22] just control for a spawn none of these static treatment reductions would work
+[0:36:25] static treatment reductions would work in this problem and it wouldn't estimate
+[0:36:27] in this problem and it wouldn't estimate the thing that we care about
+[0:36:29] the thing that we care about and so that's why this uh this setting
+[0:36:32] and so that's why this uh this setting has its own name uh and is known as the
+[0:36:35] has its own name uh and is known as the dynamic treatment resume and has a long
+[0:36:37] dynamic treatment resume and has a long history in uh in especially in
+[0:36:40] history in uh in especially in biostatistics
+[0:36:47] but uh one observation is that even though we cannot view it as a one sort
+[0:36:51] though we cannot view it as a one sort controlling for exercise where we
+[0:36:53] controlling for exercise where we connect we just try to estimate the
+[0:36:55] connect we just try to estimate the effect of some treatment on some outcome
+[0:36:57] effect of some treatment on some outcome controlling for a set of variables we
+[0:37:00] controlling for a set of variables we can actually view it as a recursive
+[0:37:01] can actually view it as a recursive controlling for exercise we can go in
+[0:37:04] controlling for exercise we can go in the end for instance and say what if we
+[0:37:08] the end for instance and say what if we wanna live the first period treatment as
+[0:37:11] wanna live the first period treatment as is
+[0:37:12] is and just intervene on the second period
+[0:37:15] and just intervene on the second period treatment what would be the mean
+[0:37:17] treatment what would be the mean counterfactual the mean outcome under
+[0:37:20] counterfactual the mean outcome under such an intervention
+[0:37:24] of course this is a you know like this is just a threat static treatment
+[0:37:26] is just a threat static treatment problem we can estimate that by
+[0:37:29] problem we can estimate that by estimating the effect of
+[0:37:31] estimating the effect of treatment two on the outcome controlling
+[0:37:34] treatment two on the outcome controlling for S2
+[0:37:36] for S2 So based on the G formula we will just
+[0:37:40] So based on the G formula we will just estimate regress the outcome on T2 and
+[0:37:43] estimate regress the outcome on T2 and S2
+[0:37:44] S2 and then by the fact that conditional on
+[0:37:47] and then by the fact that conditional on S2 the uh this kind of this potential
+[0:37:51] S2 the uh this kind of this potential outcome here is independent of the
+[0:37:53] outcome here is independent of the original treatment T2
+[0:37:55] original treatment T2 which is known as a sequential
+[0:37:57] which is known as a sequential conditional exogenating we'll get that
+[0:38:00] conditional exogenating we'll get that when we evaluate that regression
+[0:38:01] when we evaluate that regression function F2 at different uh treatments
+[0:38:04] function F2 at different uh treatments say Tau two
+[0:38:06] say Tau two we're going to get exactly the mean
+[0:38:07] we're going to get exactly the mean potential outcome that we care about
+[0:38:09] potential outcome that we care about right so f 2 of Tau 2 is the expected y
+[0:38:13] right so f 2 of Tau 2 is the expected y conditional on T2 equals Tau two but
+[0:38:16] conditional on T2 equals Tau two but then that is really this potential
+[0:38:17] then that is really this potential outcome over here and because of
+[0:38:20] outcome over here and because of sequential exogenity we can drop the
+[0:38:23] sequential exogenity we can drop the conditioning on on the second period
+[0:38:25] conditioning on on the second period treatment and we care we get exactly
+[0:38:28] treatment and we care we get exactly uh the mean of the potential outcome
+[0:38:31] uh the mean of the potential outcome that we care about conditional justice
+[0:38:33] that we care about conditional justice state
+[0:38:34] state so now uh once we do that if we redefine
+[0:38:38] so now uh once we do that if we redefine our outcome to be this adjusted outcome
+[0:38:41] our outcome to be this adjusted outcome where we simply impute as an outcome the
+[0:38:45] where we simply impute as an outcome the evaluation of that function f at Tau 2
+[0:38:48] evaluation of that function f at Tau 2 at the intervention that we care about
+[0:38:50] at the intervention that we care about in the second period then it's as if we
+[0:38:53] in the second period then it's as if we remove that second period treatment from
+[0:38:55] remove that second period treatment from the equation so there is no second
+[0:38:57] the equation so there is no second period treatment there's no second
+[0:38:59] period treatment there's no second period State and we just have another
+[0:39:02] period State and we just have another controlling for exercise where our goal
+[0:39:04] controlling for exercise where our goal is to estimate the effect of treatment
+[0:39:07] is to estimate the effect of treatment of period one
+[0:39:08] of period one on this adjusted outcome controlling for
+[0:39:11] on this adjusted outcome controlling for S1
+[0:39:12] S1 so we can estimate a new regression
+[0:39:16] so we can estimate a new regression where we regress that adjusted outcome
+[0:39:19] where we regress that adjusted outcome on T1 and S1 and by a similar derivation
+[0:39:22] on T1 and S1 and by a similar derivation you'll get that whenever you evaluate
+[0:39:24] you'll get that whenever you evaluate that regression function at any Tau 1
+[0:39:26] that regression function at any Tau 1 you'll get exactly the mean potential
+[0:39:29] you'll get exactly the mean potential outcome that you care about conditional
+[0:39:31] outcome that you care about conditional on the first period state
+[0:39:38] um and so in the end you can look at this uh you know like this new yet
+[0:39:42] this uh you know like this new yet another adjusted outcome you're evaluate
+[0:39:44] another adjusted outcome you're evaluate this first regression F of star one we
+[0:39:46] this first regression F of star one we know that this F1 of Tau 1 is going to
+[0:39:48] know that this F1 of Tau 1 is going to be the in expectation equal to the
+[0:39:50] be the in expectation equal to the potential outcome that you care about
+[0:39:52] potential outcome that you care about and so then the average effect that you
+[0:39:55] and so then the average effect that you care about is just an average of that
+[0:39:57] care about is just an average of that regression function or an average of
+[0:39:59] regression function or an average of that adjusted outcome and you're gonna
+[0:40:01] that adjusted outcome and you're gonna get
+[0:40:02] get uh your your target estimate
+[0:40:06] uh your your target estimate so uh this recursive controlling for
+[0:40:09] so uh this recursive controlling for exercise yields this uh Target estimate
+[0:40:12] exercise yields this uh Target estimate which is based on a recursive
+[0:40:13] which is based on a recursive regressions so the Theta that we care
+[0:40:16] regressions so the Theta that we care about is the expected value of that
+[0:40:18] about is the expected value of that regression function F1 evaluated at Tau
+[0:40:21] regression function F1 evaluated at Tau one but that regression function F1 is a
+[0:40:25] one but that regression function F1 is a regression that depends on some other
+[0:40:26] regression that depends on some other regression function F2 evaluated at Tau
+[0:40:29] regression function F2 evaluated at Tau two so F2 of Tau two is really the label
+[0:40:31] two so F2 of Tau two is really the label that you want to predict condition on T1
+[0:40:33] that you want to predict condition on T1 and S1
+[0:40:35] and S1 and that other regulation function is
+[0:40:37] and that other regulation function is not really a regression function
+[0:40:38] not really a regression function predicts the outcome conditional into
+[0:40:40] predicts the outcome conditional into ns2
+[0:40:42] ns2 so this is the estimate that you want to
+[0:40:45] so this is the estimate that you want to um
+[0:40:46] um debias
+[0:40:48] debias and and you see that it does not fall
+[0:40:49] and and you see that it does not fall into the static sort of treatment
+[0:40:51] into the static sort of treatment problems that we were facing in the
+[0:40:53] problems that we were facing in the first part of the talk because now the
+[0:40:55] first part of the talk because now the the function that goes into our linear
+[0:40:57] the function that goes into our linear moment functional which is the first
+[0:40:59] moment functional which is the first equation is not really a regression
+[0:41:01] equation is not really a regression function that predicts some Target
+[0:41:03] function that predicts some Target variable it's a regression function that
+[0:41:04] variable it's a regression function that predicts some other regression function
+[0:41:06] predicts some other regression function which then predicts some Target variable
+[0:41:08] which then predicts some Target variable and this is the idea when the nested
+[0:41:10] and this is the idea when the nested regressions and why you know our paper
+[0:41:14] regressions and why you know our paper is called General estimating journalists
+[0:41:17] is called General estimating journalists in the functionals
+[0:41:18] in the functionals so how do we debias this uh this Theta
+[0:41:22] so how do we debias this uh this Theta instead of just plugging in the direct
+[0:41:25] instead of just plugging in the direct F1 and F2 say we use again random
+[0:41:27] F1 and F2 say we use again random forests or lassos to estimate those
+[0:41:30] forests or lassos to estimate those regression functions we don't want to do
+[0:41:32] regression functions we don't want to do a plug-in approach uh so how can we use
+[0:41:35] a plug-in approach uh so how can we use a similar automatic debussing approaches
+[0:41:37] a similar automatic debussing approaches to uh to the bias this vanilla estimate
+[0:41:42] to uh to the bias this vanilla estimate we can start by following a similar
+[0:41:45] we can start by following a similar pattern as we did in the first talk in
+[0:41:48] pattern as we did in the first talk in the first part of the talk we can add a
+[0:41:50] the first part of the talk we can add a device in correction to our original
+[0:41:52] device in correction to our original moment where the debiasing depends on
+[0:41:56] moment where the debiasing depends on the residual of the first regression
+[0:41:58] the residual of the first regression function F1 so the aggregation function
+[0:42:01] function F1 so the aggregation function F1 is trying to predict F2 evaluated at
+[0:42:04] F1 is trying to predict F2 evaluated at tau2 and so whenever uh that F1 is not
+[0:42:09] tau2 and so whenever uh that F1 is not equal to the expected value of F2 given
+[0:42:13] equal to the expected value of F2 given T1 and S1 this residual is not going to
+[0:42:15] T1 and S1 this residual is not going to be mean zero and you're gonna have a
+[0:42:17] be mean zero and you're gonna have a device in correction that's gonna
+[0:42:18] device in correction that's gonna correct the errors in F1
+[0:42:22] correct the errors in F1 and of course the thing that you need to
+[0:42:25] and of course the thing that you need to multiply over here is there is
+[0:42:27] multiply over here is there is representative of your original moment
+[0:42:28] representative of your original moment function so that's fine so this is one
+[0:42:30] function so that's fine so this is one step where you can uh it's very similar
+[0:42:33] step where you can uh it's very similar to the static treatment problem
+[0:42:36] to the static treatment problem but now you all of a sudden have a
+[0:42:38] but now you all of a sudden have a depends on F2 which is another
+[0:42:40] depends on F2 which is another regression function that
+[0:42:43] regression function that has not been debiased right so the
+[0:42:46] has not been debiased right so the errors in F2 now are also gonna directly
+[0:42:49] errors in F2 now are also gonna directly impact Theta and you're not going to get
+[0:42:51] impact Theta and you're not going to get um
+[0:42:58] you know unless F2 is very benign so what can you do well you know this is
+[0:43:01] so what can you do well you know this is again another linear moment function now
+[0:43:03] again another linear moment function now of F2 so you can view A1 times F2 as a
+[0:43:07] of F2 so you can view A1 times F2 as a linear moment functional F2 estimate
+[0:43:09] linear moment functional F2 estimate there is a presenter of that new linear
+[0:43:11] there is a presenter of that new linear moment functional and add yet another
+[0:43:15] moment functional and add yet another correction that the biases with respect
+[0:43:19] correction that the biases with respect to F2 so you're going to add one more
+[0:43:22] to F2 so you're going to add one more term over here where A2 is the reason
+[0:43:25] term over here where A2 is the reason representative of A1 times F2 a value is
+[0:43:27] representative of A1 times F2 a value is the Tau two and it multiplies the
+[0:43:30] the Tau two and it multiplies the whatever you know like the residual of
+[0:43:31] whatever you know like the residual of F2 with respect to whatever F2 is trying
+[0:43:34] F2 with respect to whatever F2 is trying to predict so in this case it's going to
+[0:43:36] to predict so in this case it's going to be Y and now we didn't introduce any new
+[0:43:39] be Y and now we didn't introduce any new uh sort of function into our into our
+[0:43:41] uh sort of function into our into our moment so we're done
+[0:43:43] moment so we're done so this uh you know recur you know it's
+[0:43:46] so this uh you know recur you know it's a recursive risk correction where at
+[0:43:49] a recursive risk correction where at every step you're estimating a risk
+[0:43:51] every step you're estimating a risk representer of some linear function and
+[0:43:53] representer of some linear function and you're adding the residual of that you
+[0:43:56] you're adding the residual of that you know corresponding regression function
+[0:43:58] know corresponding regression function with what it's trying to predict
+[0:44:08] so that's the uh the devising idea uh and you can generalize that whenever you
+[0:44:10] and you can generalize that whenever you have arbitrary stages and arbitrarily a
+[0:44:14] have arbitrary stages and arbitrarily a sequence of treatments you continue
+[0:44:17] sequence of treatments you continue adding uh correction terms that look
+[0:44:19] adding uh correction terms that look like
+[0:44:21] like um there is representative of the
+[0:44:22] um there is representative of the corresponding linear functional and the
+[0:44:25] corresponding linear functional and the residual of whatever the regression
+[0:44:27] residual of whatever the regression function is trying to predict
+[0:44:30] function is trying to predict and under regularity assumptions and
+[0:44:33] and under regularity assumptions and under uh assumptions on the products of
+[0:44:37] under uh assumptions on the products of rates of there is representer and the
+[0:44:39] rates of there is representer and the regression functions you can also get a
+[0:44:42] regression functions you can also get a symptom
+[0:44:43] symptom and here we get again this condition on
+[0:44:47] and here we get again this condition on the rates of convergent that is known as
+[0:44:50] the rates of convergent that is known as is related to the notion of multiple
+[0:44:52] is related to the notion of multiple robustness you don't get exactly double
+[0:44:54] robustness you don't get exactly double robustness
+[0:44:56] robustness but you get that
+[0:44:59] but you get that you only need either there is a
+[0:45:02] you only need either there is a presenter at A T and the regression
+[0:45:04] presenter at A T and the regression function a Time t or the to go down to
+[0:45:08] function a Time t or the to go down to zero fast enough at one of our written
+[0:45:10] zero fast enough at one of our written rates and you also need there is
+[0:45:12] rates and you also need there is representative time T and the regression
+[0:45:14] representative time T and the regression function at time t plus one to go down
+[0:45:16] function at time t plus one to go down as one over root n rates so you have an
+[0:45:19] as one over root n rates so you have an extra
+[0:45:20] extra uh term over here sorry we'll see this
+[0:45:24] uh term over here sorry we'll see this if you could wrap up your talk in two
+[0:45:26] if you could wrap up your talk in two minutes that would be great all right
+[0:45:28] minutes that would be great all right yeah great
+[0:45:29] yeah great uh so that's the main asymptotic
+[0:45:32] uh so that's the main asymptotic normality theorem here
+[0:45:34] normality theorem here um now how do you estimate there is a
+[0:45:36] um now how do you estimate there is a presenter we can estimate there is
+[0:45:38] presenter we can estimate there is represented using uh the idea of there
+[0:45:40] represented using uh the idea of there is loss minimization but now it's going
+[0:45:43] is loss minimization but now it's going to be a recursive list loss minimization
+[0:45:45] to be a recursive list loss minimization uh the loss function is going to be a T
+[0:45:47] uh the loss function is going to be a T minus two times the moment the moment
+[0:45:49] minus two times the moment the moment that every step is going to be either
+[0:45:51] that every step is going to be either the original moment or the previous risk
+[0:45:54] the original moment or the previous risk representer multiplied uh by uh by the
+[0:45:59] representer multiplied uh by uh by the nearest representative so this is going
+[0:46:00] nearest representative so this is going to be the form of the loss function that
+[0:46:02] to be the form of the loss function that you're minimizing at every step
+[0:46:04] you're minimizing at every step and you uh you do that again recursively
+[0:46:08] and you uh you do that again recursively from period zero up till uh final period
+[0:46:11] from period zero up till uh final period uh compared to the static setting now we
+[0:46:14] uh compared to the static setting now we need to account for errors propagating
+[0:46:15] need to account for errors propagating from errors in previous iterates of 80
+[0:46:17] from errors in previous iterates of 80 and we provide them a theorem that does
+[0:46:20] and we provide them a theorem that does exactly that and gives finite sample
+[0:46:24] exactly that and gives finite sample rmsc guarantees for a hat
+[0:46:27] rmsc guarantees for a hat for all of these eight Heights that
+[0:46:29] for all of these eight Heights that you're estimating
+[0:46:30] you're estimating together
+[0:46:32] together we also have several extensions of this
+[0:46:35] we also have several extensions of this basic framework
+[0:46:37] basic framework um so that grow in complexity for
+[0:46:40] um so that grow in complexity for instance you don't need to have just
+[0:46:43] instance you don't need to have just this static uh Dynamic treatment regime
+[0:46:47] this static uh Dynamic treatment regime problem but whenever you have any uh set
+[0:46:50] problem but whenever you have any uh set of nasty Gleaner moment functionals
+[0:46:53] of nasty Gleaner moment functionals where the first moment depends on F1 and
+[0:46:56] where the first moment depends on F1 and F1 depends on F2 and F2 depends on F3
+[0:46:59] F1 depends on F2 and F2 depends on F3 when you you have such nested moment
+[0:47:01] when you you have such nested moment sequences you can apply or uh divide
+[0:47:05] sequences you can apply or uh divide recursive automatic device and your idea
+[0:47:07] recursive automatic device and your idea and this for instance captures uh
+[0:47:10] and this for instance captures uh evaluation of dynamic adaptive Target
+[0:47:11] evaluation of dynamic adaptive Target policies you can also extend that to
+[0:47:14] policies you can also extend that to non-linear recursive moments and we have
+[0:47:17] non-linear recursive moments and we have an application of that for estimating
+[0:47:19] an application of that for estimating models of dynamic discrete choice and
+[0:47:23] models of dynamic discrete choice and you can even go to non-linear nested IV
+[0:47:26] you can even go to non-linear nested IV functional where the conditioning is not
+[0:47:29] functional where the conditioning is not the same set of variables as what goes
+[0:47:32] the same set of variables as what goes into your function so this corresponds
+[0:47:34] into your function so this corresponds to non-parametric IV problems at every
+[0:47:36] to non-parametric IV problems at every stage and we have an automatic debiasing
+[0:47:39] stage and we have an automatic debiasing approach for that setting and you can
+[0:47:41] approach for that setting and you can even
+[0:47:42] even generalize that where the expectations
+[0:47:44] generalize that where the expectations of every one of those moments are taken
+[0:47:47] of every one of those moments are taken with respect to different distributions
+[0:47:49] with respect to different distributions for instance you might want to use that
+[0:47:51] for instance you might want to use that when doing data Fusion where some
+[0:47:53] when doing data Fusion where some regression functions are trained on one
+[0:47:55] regression functions are trained on one data set and then applied to another
+[0:47:57] data set and then applied to another data set you can still do automatic
+[0:47:59] data set you can still do automatic device machine learning and this for
+[0:48:02] device machine learning and this for instance has applications to the
+[0:48:04] instance has applications to the surrogate approach where you want to use
+[0:48:05] surrogate approach where you want to use historical data as short-term data to
+[0:48:08] historical data as short-term data to estimate the effects of treatments on
+[0:48:10] estimate the effects of treatments on long-term outcomes
+[0:48:13] long-term outcomes and uh and that's that's all I wanted to
+[0:48:16] and uh and that's that's all I wanted to say uh
+[0:48:18] say uh uh to recap
+[0:48:20] uh to recap um
+[0:48:21] um sorry
+[0:48:22] sorry uh a large variety of causal estimates
+[0:48:25] uh a large variety of causal estimates that arise in complex studying and
+[0:48:26] that arise in complex studying and longitudinal data analysis can be
+[0:48:29] longitudinal data analysis can be automatically the biased
+[0:48:31] automatically the biased uh when regularized machine learning
+[0:48:33] uh when regularized machine learning algorithms were used to estimate the
+[0:48:34] algorithms were used to estimate the nuisance models and the estimation of
+[0:48:36] nuisance models and the estimation of the device in terms itself can be
+[0:48:38] the device in terms itself can be performed with genetic machine learning
+[0:48:40] performed with genetic machine learning an experimental results using neural
+[0:48:42] an experimental results using neural Nets in random forests provide examples
+[0:48:44] Nets in random forests provide examples of superior performance to plug-in
+[0:48:46] of superior performance to plug-in approaches and to Prior automatically
+[0:48:47] approaches and to Prior automatically revising approaches based solely on
+[0:48:50] revising approaches based solely on linear models thank you very much
+[0:48:53] linear models thank you very much thanks vasilis so maybe uh in the
+[0:48:56] thanks vasilis so maybe uh in the interest of time we skipped the
+[0:48:58] interest of time we skipped the questions in the Q a now and move on to
+[0:49:00] questions in the Q a now and move on to Eric's discussion just know if if your
+[0:49:03] Eric's discussion just know if if your question doesn't get answered during the
+[0:49:04] question doesn't get answered during the talk we still pass on all the questions
+[0:49:06] talk we still pass on all the questions to the speaker and you can continue in
+[0:49:08] to the speaker and you can continue in those discussions after the talk all
+[0:49:11] those discussions after the talk all right uh Eric please feel free to share
+[0:49:15] right uh Eric please feel free to share your screen
+[0:49:26] can you see my screen looks great yes okay thank you so this
+[0:49:30] looks great yes okay thank you so this is a discussion of facilities
+[0:49:32] is a discussion of facilities um work with colleagues um let me jump
+[0:49:35] um work with colleagues um let me jump right into it
+[0:49:37] right into it um first of all I mean congratulations I
+[0:49:39] um first of all I mean congratulations I really enjoyed this this paper as well
+[0:49:41] really enjoyed this this paper as well as the other papers in a series
+[0:49:44] as the other papers in a series um of works by the author and and and
+[0:49:47] um of works by the author and and and his collaborators
+[0:49:49] his collaborators um yeah it's a very ambitious uh program
+[0:49:52] um yeah it's a very ambitious uh program that they have going there the ambition
+[0:49:54] that they have going there the ambition here is to provide automatic
+[0:49:57] here is to provide automatic different tools for some of the most
+[0:49:59] different tools for some of the most important semi-parametric functionals in
+[0:50:02] important semi-parametric functionals in the Social and Health Sciences so the
+[0:50:04] the Social and Health Sciences so the average human impact uh the average
+[0:50:07] average human impact uh the average treatment effectively treated the
+[0:50:09] treatment effectively treated the average derivatives and and many more
+[0:50:12] average derivatives and and many more adversities uh described including
+[0:50:14] adversities uh described including settings where you have emotional data
+[0:50:16] settings where you have emotional data and sequential treatments
+[0:50:20] and sequential treatments um and and the goal is to to come up
+[0:50:21] um and and the goal is to to come up with estimators automatically that that
+[0:50:24] with estimators automatically that that have so-called uh what has been known in
+[0:50:26] have so-called uh what has been known in literature a small bias properties
+[0:50:29] literature a small bias properties um so so what is a small bias properties
+[0:50:32] um so so what is a small bias properties smart small biased properties have long
+[0:50:34] smart small biased properties have long been part of the same project folklore
+[0:50:37] been part of the same project folklore it's well known in certain circles if
+[0:50:39] it's well known in certain circles if you're uh aficionados of uh that is a
+[0:50:42] you're uh aficionados of uh that is a debt at the mystical art of influence
+[0:50:44] debt at the mystical art of influence functioning calculus that was developed
+[0:50:46] functioning calculus that was developed by back in the 80s and 90s uh by famous
+[0:50:50] by back in the 80s and 90s uh by famous people such as bicol and colleagues
+[0:50:52] people such as bicol and colleagues Vanderburgh new and and Jimmy Robbins
+[0:50:56] Vanderburgh new and and Jimmy Robbins what does automatic device and I'll try
+[0:50:59] what does automatic device and I'll try to do it's really I I view it as a
+[0:51:01] to do it's really I I view it as a democratization of the small bias
+[0:51:03] democratization of the small bias property into a simple calculus that
+[0:51:06] property into a simple calculus that anyone can in principle follow on and
+[0:51:08] anyone can in principle follow on and compared by Notions of tangent species
+[0:51:10] compared by Notions of tangent species start twice their appreciation and all
+[0:51:12] start twice their appreciation and all these technicalities out of the Saint
+[0:51:14] these technicalities out of the Saint Patrick Theory
+[0:51:20] um despite that I want to just spend a few minutes talking about this was also
+[0:51:22] few minutes talking about this was also raised as a question
+[0:51:25] raised as a question to the speaker connections to Modern
+[0:51:27] to the speaker connections to Modern cinepagic Theory what is the connection
+[0:51:29] cinepagic Theory what is the connection between HTML and endless literature
+[0:51:32] between HTML and endless literature um the small bias property refers to an
+[0:51:35] um the small bias property refers to an estimator is of a semi-parametric
+[0:51:37] estimator is of a semi-parametric functional having second or smaller
+[0:51:39] functional having second or smaller order bias
+[0:51:41] order bias a property known to hold for so-called
+[0:51:44] a property known to hold for so-called influence functions
+[0:51:47] influence functions what is the influence function and as
+[0:51:49] what is the influence function and as you can see this is get christening
+[0:51:51] you can see this is get christening technical so roughly speaking without
+[0:51:53] technical so roughly speaking without going into the details new plus function
+[0:51:55] going into the details new plus function is you take the derivative of your
+[0:51:58] is you take the derivative of your functional with respect to a path a
+[0:52:00] functional with respect to a path a collection of Pathways
+[0:52:02] collection of Pathways um in in your model and you look for a
+[0:52:05] um in in your model and you look for a representation such that the derivative
+[0:52:07] representation such that the derivative can be represented as a score under that
+[0:52:10] can be represented as a score under that semi parametric model
+[0:52:12] semi parametric model uh multiplied by a choice at this object
+[0:52:15] uh multiplied by a choice at this object B of o
+[0:52:16] B of o okay and do is known as a new Flash
+[0:52:19] okay and do is known as a new Flash function and so it would be an object
+[0:52:20] function and so it would be an object that satisfies this equation
+[0:52:22] that satisfies this equation if M the model the same pattern model is
+[0:52:25] if M the model the same pattern model is unrestricted then V and O is unique and
+[0:52:28] unrestricted then V and O is unique and characterizes the efficiency Bound for
+[0:52:30] characterizes the efficiency Bound for the model if m is on is restricted vo o
+[0:52:33] the model if m is on is restricted vo o is not unique and the efficient
+[0:52:35] is not unique and the efficient influence function can be obtained by
+[0:52:37] influence function can be obtained by projecting any vehicle or to the tangent
+[0:52:40] projecting any vehicle or to the tangent space for M and so this is a can be a
+[0:52:42] space for M and so this is a can be a really difficult antiguous exercise on
+[0:52:45] really difficult antiguous exercise on how to solve this equation and find your
+[0:52:47] how to solve this equation and find your order satisfies this equation for all
+[0:52:50] order satisfies this equation for all scores in your model
+[0:52:52] scores in your model but there's a connection to to to what
+[0:52:55] but there's a connection to to to what what the the speaker is doing here that
+[0:52:58] what the the speaker is doing here that thinking of this derivative the one I
+[0:53:00] thinking of this derivative the one I had on the left hand side as a bounded
+[0:53:02] had on the left hand side as a bounded linear operator on the tangent space and
+[0:53:04] linear operator on the tangent space and so this tension space is the span of the
+[0:53:06] so this tension space is the span of the scores and so this is a linear grade on
+[0:53:08] scores and so this is a linear grade on this one of the score then we we the the
+[0:53:11] this one of the score then we we the the equation can be Rewritten as you have
+[0:53:13] equation can be Rewritten as you have the derivative now I think of it as a
+[0:53:14] the derivative now I think of it as a linear bounded functional bonded linear
+[0:53:16] linear bounded functional bonded linear function on the on the tangent space and
+[0:53:19] function on the on the tangent space and by the rich representation theorem that
+[0:53:22] by the rich representation theorem that could be written as one element of that
+[0:53:23] could be written as one element of that space times the score and in terms of uh
+[0:53:27] space times the score and in terms of uh in the the inner product between those
+[0:53:29] in the the inner product between those two objects which of course is the the
+[0:53:31] two objects which of course is the the right side uh representation that I had
+[0:53:33] right side uh representation that I had on the previous slide and so this is uh
+[0:53:37] on the previous slide and so this is uh an implementation of Rich representation
+[0:53:38] an implementation of Rich representation theorem from the perspective of the
+[0:53:40] theorem from the perspective of the functional not a moment equation
+[0:53:42] functional not a moment equation complexity of the functional and the
+[0:53:44] complexity of the functional and the semi-partic model because that is the
+[0:53:46] semi-partic model because that is the what defines the tension space
+[0:53:48] what defines the tension space okay and so the efficient influence
+[0:53:51] okay and so the efficient influence function BF is the Reds representative
+[0:53:53] function BF is the Reds representative of the functional derivative of operator
+[0:53:55] of the functional derivative of operator PSI of s
+[0:53:57] PSI of s and the key property of VR the efficient
+[0:54:00] and the key property of VR the efficient interest function in fact of any
+[0:54:02] interest function in fact of any influence function is that it has uh it
+[0:54:04] influence function is that it has uh it is a good moment equation and this has
+[0:54:06] is a good moment equation and this has been advocated by many people over the
+[0:54:08] been advocated by many people over the years that it generates a semi-partic
+[0:54:10] years that it generates a semi-partic estimators in the model M with second
+[0:54:12] estimators in the model M with second order buys aka the small bias property
+[0:54:15] order buys aka the small bias property we're after in many examples the second
+[0:54:17] we're after in many examples the second order bias is of mixed biased type uh
+[0:54:20] order bias is of mixed biased type uh AKA W multiply robustness you could you
+[0:54:23] AKA W multiply robustness you could you could tell that there are a lot of
+[0:54:24] could tell that there are a lot of lingos here but they all sort of
+[0:54:25] lingos here but they all sort of correspond roughly to the semi the same
+[0:54:27] correspond roughly to the semi the same idea and and I recommend looking at
+[0:54:30] idea and and I recommend looking at papers by Robins with this game
+[0:54:32] papers by Robins with this game colleagues and as well as vendor light
+[0:54:34] colleagues and as well as vendor light for Rich literature on on these these
+[0:54:37] for Rich literature on on these these types of techniques
+[0:54:39] types of techniques recently chernos of coff and his
+[0:54:41] recently chernos of coff and his colleagues have rebranded small buys
+[0:54:43] colleagues have rebranded small buys essentially as what's been known as
+[0:54:45] essentially as what's been known as women orthogonality so if it's your
+[0:54:48] women orthogonality so if it's your current team here these ideas evolve
+[0:54:50] current team here these ideas evolve over time and new twists to these
+[0:54:53] over time and new twists to these existing ideas are are added and so the
+[0:54:56] existing ideas are are added and so the question is what is new in atml what is
+[0:54:58] question is what is new in atml what is what are the the as far in my view there
+[0:55:02] what are the the as far in my view there are two key insights of a DML which I
+[0:55:04] are two key insights of a DML which I think are terrific typically the
+[0:55:07] think are terrific typically the efficient influence function can be hard
+[0:55:08] efficient influence function can be hard to derive agml give a very simple
+[0:55:11] to derive agml give a very simple approach for a large class of
+[0:55:13] approach for a large class of functionals to do this automatically
+[0:55:15] functionals to do this automatically without learning difficult
+[0:55:16] without learning difficult semi-parametric Theory okay so that's
+[0:55:19] semi-parametric Theory okay so that's great
+[0:55:20] great it the the
+[0:55:22] it the the um as the series uh described in many
+[0:55:25] um as the series uh described in many examples often the the efficient
+[0:55:27] examples often the the efficient influence function and in fact the
+[0:55:29] influence function and in fact the infrastructure in general in order to
+[0:55:30] infrastructure in general in order to guarantee this property of small bias
+[0:55:32] guarantee this property of small bias will depend on high dimensional Museum's
+[0:55:34] will depend on high dimensional Museum's parameters nonlinearity for instance for
+[0:55:36] parameters nonlinearity for instance for the familiar aipw it would depend on one
+[0:55:39] the familiar aipw it would depend on one of the capacity score and so atml gives
+[0:55:41] of the capacity score and so atml gives a simple but yet very general approach
+[0:55:44] a simple but yet very general approach generic approach to estimate these
+[0:55:46] generic approach to estimate these nuisance parameters I.E these nuisance
+[0:55:49] nuisance parameters I.E these nuisance values become identified by The Ritz
+[0:55:51] values become identified by The Ritz wrap center that is completely agnostic
+[0:55:53] wrap center that is completely agnostic to the actual functional dependence on
+[0:55:55] to the actual functional dependence on the the nuisance progress these are both
+[0:55:58] the the nuisance progress these are both cool a key insights and very important
+[0:56:02] cool a key insights and very important steps forward particularly when combined
+[0:56:05] steps forward particularly when combined with powerful ideas such as
+[0:56:06] with powerful ideas such as cross-feeding which by the way is again
+[0:56:08] cross-feeding which by the way is again yet again an idea that has been in the
+[0:56:11] yet again an idea that has been in the literature for for quite a while going
+[0:56:12] literature for for quite a while going back to shakingly districts which
+[0:56:14] back to shakingly districts which permits the use of Highly now in in our
+[0:56:17] permits the use of Highly now in in our modern days allows us and license us to
+[0:56:20] modern days allows us and license us to use high deductive ml tubes and modern
+[0:56:22] use high deductive ml tubes and modern learning theory to study asymptotics
+[0:56:27] learning theory to study asymptotics so um I just thought I would spend one
+[0:56:29] so um I just thought I would spend one minute on a canorical example which is a
+[0:56:31] minute on a canorical example which is a one-armed puzzling inference problem or
+[0:56:33] one-armed puzzling inference problem or a missing data at random problems so we
+[0:56:35] a missing data at random problems so we have I'm interested in the expected
+[0:56:37] have I'm interested in the expected value of why from the whole population
+[0:56:38] value of why from the whole population we observe why only for those who have
+[0:56:40] we observe why only for those who have orange books one and condition L fully
+[0:56:43] orange books one and condition L fully observed kubernetes wise independent of
+[0:56:45] observed kubernetes wise independent of R therefore we have uh missing that
+[0:56:48] R therefore we have uh missing that messiness at random and you observed it
+[0:56:50] messiness at random and you observed it and functional is of course given by the
+[0:56:52] and functional is of course given by the G formula take the expected value of the
+[0:56:55] G formula take the expected value of the conditional expectation of of Y given L
+[0:56:59] conditional expectation of of Y given L among the complete cases and this is a
+[0:57:01] among the complete cases and this is a functional that is pathway sequential as
+[0:57:03] functional that is pathway sequential as long as positivity holds you have at
+[0:57:05] long as positivity holds you have at least this this condition event makes
+[0:57:06] least this this condition event makes sense
+[0:57:08] sense the the eif the efficient influence
+[0:57:10] the the eif the efficient influence function of Rapids on risky and Java
+[0:57:12] function of Rapids on risky and Java would derived back in 94 is the
+[0:57:15] would derived back in 94 is the augmented ipw estimate moment W robust
+[0:57:17] augmented ipw estimate moment W robust moment equation which is given here
+[0:57:19] moment equation which is given here combines propensity score and outcome
+[0:57:21] combines propensity score and outcome regression in such a way that the bias
+[0:57:23] regression in such a way that the bias uh used by um of an estimator that would
+[0:57:27] uh used by um of an estimator that would plug in estimators of these two
+[0:57:28] plug in estimators of these two quantities would in fact PW robust
+[0:57:30] quantities would in fact PW robust meaning mixed bias type the product of
+[0:57:32] meaning mixed bias type the product of the biases of the nuisance Prime yeah
+[0:57:34] the biases of the nuisance Prime yeah and so this will typically for
+[0:57:36] and so this will typically for implementation it requires estimating
+[0:57:38] implementation it requires estimating these Newton users parameters separately
+[0:57:40] these Newton users parameters separately this has traditionally been done as uh
+[0:57:43] this has traditionally been done as uh treating Mis regression problems
+[0:57:45] treating Mis regression problems and whether you one uses parametric
+[0:57:48] and whether you one uses parametric semi-particle or more flexible
+[0:57:49] semi-particle or more flexible maintenance and there's a rich
+[0:57:51] maintenance and there's a rich literature on variants of this from
+[0:57:53] literature on variants of this from Robin spaniel land Seattle's Davidian 10
+[0:57:56] Robin spaniel land Seattle's Davidian 10 and many others that um that I have I'm
+[0:57:58] and many others that um that I have I'm not mentioning yet and most recently by
+[0:58:01] not mentioning yet and most recently by channels of golf in the dtml framework
+[0:58:03] channels of golf in the dtml framework so it's a great tradition
+[0:58:05] so it's a great tradition the other aspect of agml that I think is
+[0:58:08] the other aspect of agml that I think is is really elegant uh it leverages the
+[0:58:11] is really elegant uh it leverages the fact that
+[0:58:12] fact that um
+[0:58:13] um the functional is a bounded in your
+[0:58:15] the functional is a bounded in your operator to construct a generic device
+[0:58:17] operator to construct a generic device movement function which basically
+[0:58:19] movement function which basically presented and so you're not the the
+[0:58:22] presented and so you're not the the comparison between the W robust
+[0:58:24] comparison between the W robust estimator which tells you what the the
+[0:58:26] estimator which tells you what the the the second business parameters is in
+[0:58:29] the second business parameters is in terms of The observed data distribution
+[0:58:30] terms of The observed data distribution it's the propensity score versus the
+[0:58:33] it's the propensity score versus the this construction of HTML which it says
+[0:58:35] this construction of HTML which it says I just need a function of r and l and of
+[0:58:38] I just need a function of r and l and of course for this to be an observed data
+[0:58:39] course for this to be an observed data uh uh statistic
+[0:58:42] uh uh statistic um this this has to be linear and R
+[0:58:44] um this this has to be linear and R because
+[0:58:45] because um it has to be
+[0:58:47] um it has to be and Institute of R has to sit here so
+[0:58:49] and Institute of R has to sit here so you see why okay and and what's
+[0:58:52] you see why okay and and what's beautiful about this is you don't need
+[0:58:54] beautiful about this is you don't need to know what the power of a star is they
+[0:58:56] to know what the power of a star is they give a generic approach to estimate it
+[0:58:59] give a generic approach to estimate it directly and so the a-star will solve
+[0:59:02] directly and so the a-star will solve this minimization problems that you can
+[0:59:04] this minimization problems that you can then perform
+[0:59:06] then perform um and you can use it without directly
+[0:59:08] um and you can use it without directly using the fact that a star is takes this
+[0:59:11] using the fact that a star is takes this form uh to in order for it to be
+[0:59:14] form uh to in order for it to be efficient and so this is great this is
+[0:59:16] efficient and so this is great this is really flexible very highly accessible
+[0:59:19] really flexible very highly accessible tool that everyone can Implement with
+[0:59:20] tool that everyone can Implement with their favorite machine learning methods
+[0:59:23] their favorite machine learning methods it allows one to use as a specifically
+[0:59:25] it allows one to use as a specifically demonstrated really fancy ml tools to
+[0:59:27] demonstrated really fancy ml tools to estimate a star using the above
+[0:59:30] estimate a star using the above objective function and I think this is
+[0:59:32] objective function and I think this is an exciting uh and promising development
+[0:59:34] an exciting uh and promising development all right so let me turn this I hope we
+[0:59:37] all right so let me turn this I hope we have a few minutes from a discussion I
+[0:59:39] have a few minutes from a discussion I have some questions for the series in
+[0:59:41] have some questions for the series in this setting uh you allow for user
+[0:59:43] this setting uh you allow for user specified markup restrictions sometimes
+[0:59:45] specified markup restrictions sometimes at least in the paper I know you didn't
+[0:59:47] at least in the paper I know you didn't get the chance to get into it uh session
+[0:59:49] get the chance to get into it uh session and might not be unrestricted how would
+[0:59:52] and might not be unrestricted how would you ensure that HTML religious fetch
+[0:59:55] you ensure that HTML religious fetch restrictions to attain the efficiency
+[0:59:56] restrictions to attain the efficiency bound okay so that's mean that may not
+[0:59:58] bound okay so that's mean that may not always be something that you want to
+[1:00:00] always be something that you want to pursue but sometimes uh you may need
+[1:00:03] pursue but sometimes uh you may need um to try to get as much efficiency as
+[1:00:05] um to try to get as much efficiency as possible and so one question is how to
+[1:00:07] possible and so one question is how to practically implement this
+[1:00:09] practically implement this in Dynamic settings this is prime
+[1:00:10] in Dynamic settings this is prime minister's estimation of HTML are nested
+[1:00:13] minister's estimation of HTML are nested so you have DC traded
+[1:00:20] estimation steps um this means that the error of
+[1:00:22] um this means that the error of estimation can propagate from early
+[1:00:23] estimation can propagate from early unuses functions to ladder ones this can
+[1:00:26] unuses functions to ladder ones this can induce more bias than necessary how do
+[1:00:28] induce more bias than necessary how do you address this in practice right so I
+[1:00:30] you address this in practice right so I know you have a way of addressing
+[1:00:32] know you have a way of addressing addressing in theory in constructing
+[1:00:34] addressing in theory in constructing these objective functions but in
+[1:00:36] these objective functions but in practice the reality is if your outcome
+[1:00:39] practice the reality is if your outcome regression at the last time point is
+[1:00:41] regression at the last time point is poor the the outcome regression at the
+[1:00:43] poor the the outcome regression at the first time point is going to be awful
+[1:00:45] first time point is going to be awful and so
+[1:00:46] and so um how how to uh have you thought about
+[1:00:48] um how how to uh have you thought about how to address this issue a related
+[1:00:50] how to address this issue a related problem is that in original settings
+[1:00:52] problem is that in original settings subjects often drop out so that data may
+[1:00:55] subjects often drop out so that data may be sparse at the end of follow-up HTML
+[1:00:57] be sparse at the end of follow-up HTML estimates occasion specific uses
+[1:01:00] estimates occasion specific uses functions which will likely fail in such
+[1:01:02] functions which will likely fail in such settings how can you address this issue
+[1:01:04] settings how can you address this issue so to give you a setting in
+[1:01:07] so to give you a setting in biostatistics uh when Jamie did this
+[1:01:09] biostatistics uh when Jamie did this work with Miguel for instance with
+[1:01:10] work with Miguel for instance with martial structure models they they allow
+[1:01:13] martial structure models they they allow privacy to be shared over time so that
+[1:01:14] privacy to be shared over time so that you borrow information from earlier time
+[1:01:16] you borrow information from earlier time points and so there's a little various
+[1:01:19] points and so there's a little various trade out there
+[1:01:20] trade out there um and so my question then is can you
+[1:01:22] um and so my question then is can you can you think similarly in this proposed
+[1:01:24] can you think similarly in this proposed setting uh as such uh of such strategies
+[1:01:27] setting uh as such uh of such strategies in a more forward fashion
+[1:01:30] in a more forward fashion also automation is great it increases
+[1:01:34] also automation is great it increases the the the the use of the adoption of
+[1:01:36] the the the the use of the adoption of the methods my question is what is the
+[1:01:39] the methods my question is what is the cost of automation one that I I can
+[1:01:42] cost of automation one that I I can immediately see is and this is by no
+[1:01:44] immediately see is and this is by no means just specific to to atml how to
+[1:01:47] means just specific to to atml how to team users functions estimates using
+[1:01:49] team users functions estimates using either rths or deep neural Nets if the
+[1:01:52] either rths or deep neural Nets if the aim is to minimize the bias
+[1:01:54] aim is to minimize the bias administrator of the at and not
+[1:01:56] administrator of the at and not necessarily the risk of residence
+[1:01:57] necessarily the risk of residence function all that of the representative
+[1:01:59] function all that of the representative that you're using so this is a hard
+[1:02:01] that you're using so this is a hard question and I'm curious if you have
+[1:02:03] question and I'm curious if you have some some thoughts and then finally I
+[1:02:04] some some thoughts and then finally I think you touched a little bit up on on
+[1:02:06] think you touched a little bit up on on this final Point what about problems
+[1:02:08] this final Point what about problems where the representer is not a
+[1:02:09] where the representer is not a regression or density or function of
+[1:02:11] regression or density or function of such an object
+[1:02:13] such an object um and I'm thinking of course a problem
+[1:02:14] um and I'm thinking of course a problem that's close to India to me which is
+[1:02:16] that's close to India to me which is using proxies where the in the user
+[1:02:19] using proxies where the in the user parameter tend to be solutions to
+[1:02:20] parameter tend to be solutions to integral equations and I think you touch
+[1:02:22] integral equations and I think you touch a little bit Upon This by talking about
+[1:02:24] a little bit Upon This by talking about iits but I always hope you can say a
+[1:02:26] iits but I always hope you can say a little more I don't know if you have
+[1:02:27] little more I don't know if you have enough time to cover all of this but
+[1:02:28] enough time to cover all of this but again congratulations on a really
+[1:02:30] again congratulations on a really beautiful uh piece of work and I look
+[1:02:32] beautiful uh piece of work and I look forward to hearing your answers thank
+[1:02:34] forward to hearing your answers thank you
+[1:02:35] you thank you very much Eric these are uh
+[1:02:38] thank you very much Eric these are uh amazing questions uh and thank you for
+[1:02:41] amazing questions uh and thank you for the commentary
+[1:02:43] the commentary um so let me try to address to the best
+[1:02:46] um so let me try to address to the best that I come some of them are actually
+[1:02:47] that I come some of them are actually you know like research questions that we
+[1:02:50] you know like research questions that we can take offline uh uh
+[1:02:58] so the first one uh as I said you know there there is laws that we're
+[1:02:59] there there is laws that we're minimizing because it tries to minimize
+[1:03:01] minimizing because it tries to minimize uh also the the square the second moment
+[1:03:04] uh also the the square the second moment of there is representer many times it
+[1:03:06] of there is representer many times it will find a wrist lot that has a small
+[1:03:08] will find a wrist lot that has a small variance like a small variation and so
+[1:03:11] variance like a small variation and so there is hope that maybe there's a
+[1:03:13] there is hope that maybe there's a theorem that that resource will actually
+[1:03:15] theorem that that resource will actually find something that is projected on the
+[1:03:18] find something that is projected on the function space g but sometimes I feel
+[1:03:20] function space g but sometimes I feel that you know in order to get the full
+[1:03:22] that you know in order to get the full efficiency you need to use you need to
+[1:03:24] efficiency you need to use you need to restrict the functional space over which
+[1:03:26] restrict the functional space over which you're minimizing there is a presenter
+[1:03:29] you're minimizing there is a presenter for instance uh you know one very Pro
+[1:03:31] for instance uh you know one very Pro typical example is if you assume that
+[1:03:33] typical example is if you assume that your regression function is partially
+[1:03:35] your regression function is partially linear then you need to minimize eraser
+[1:03:38] linear then you need to minimize eraser presenters over partially linear
+[1:03:39] presenters over partially linear functions uh that right so that are
+[1:03:43] functions uh that right so that are linear in in the treatment or something
+[1:03:45] linear in in the treatment or something so
+[1:03:46] so um
+[1:03:47] um and so you can do that by explicitly
+[1:03:49] and so you can do that by explicitly restricting your research presenter to
+[1:03:51] restricting your research presenter to have this form to be partially linear
+[1:03:53] have this form to be partially linear and then most probably you'll you'll get
+[1:03:55] and then most probably you'll you'll get the efficiency
+[1:03:57] the efficiency uh I don't know how to
+[1:03:59] uh I don't know how to generalize that fully uh you for in
+[1:04:06] generalize that fully uh you for in general thinking like there are so you
+[1:04:07] general thinking like there are so you know you can prove some theorems if your
+[1:04:09] know you can prove some theorems if your G is following some nice class of
+[1:04:12] G is following some nice class of families then it suffices to estimate
+[1:04:14] families then it suffices to estimate there is a presenter within the same
+[1:04:17] there is a presenter within the same space g so that's actually something
+[1:04:19] space g so that's actually something that you can show so many times you can
+[1:04:22] that you can show so many times you can minimize the risk loss over the same
+[1:04:24] minimize the risk loss over the same function space as the regression
+[1:04:26] function space as the regression function and that will typically give
+[1:04:28] function and that will typically give you uh let me get you very close to
+[1:04:30] you uh let me get you very close to efficiency but the formal theorem I
+[1:04:33] efficiency but the formal theorem I don't have a bit of Market but these are
+[1:04:35] don't have a bit of Market but these are things you can
+[1:04:36] things you can you can do to get a lower variance risk
+[1:04:41] you can do to get a lower variance risk Representatives
+[1:04:43] Representatives um
+[1:04:44] um yeah the second thing is is indeed true
+[1:04:47] yeah the second thing is is indeed true that like in our setting uh the air that
+[1:04:50] that like in our setting uh the air that you are gonna get because uh we did not
+[1:04:52] you are gonna get because uh we did not make any assumption about time
+[1:04:55] make any assumption about time invariance uh or that or you know like
+[1:04:58] invariance uh or that or you know like search parameters the error rates that
+[1:05:00] search parameters the error rates that you're gonna get are gonna blow up with
+[1:05:02] you're gonna get are gonna blow up with the time periods so uh without further
+[1:05:05] the time periods so uh without further assumptions on some timing device I
+[1:05:07] assumptions on some timing device I don't see how you can bypass that I
+[1:05:10] don't see how you can bypass that I think it's even exponential blow up in
+[1:05:12] think it's even exponential blow up in the time periods you will get ready to
+[1:05:13] the time periods you will get ready to look like 2 to the M over Epsilon square
+[1:05:16] look like 2 to the M over Epsilon square or something so if m is really not the
+[1:05:17] or something so if m is really not the constant uh The Horizon uh of the time
+[1:05:21] constant uh The Horizon uh of the time series then you need to do that it's an
+[1:05:25] series then you need to do that it's an open uh open question how you do
+[1:05:27] open uh open question how you do automatic device consume learning that's
+[1:05:30] automatic device consume learning that's Horizon 3 uh
+[1:05:32] Horizon 3 uh uh but um
+[1:05:36] uh but um and in practice
+[1:05:40] um
+[1:05:46] the one thing that I would do like if I were to so we one thing that's actually
+[1:05:48] were to so we one thing that's actually missing from the paper that's uh on top
+[1:05:50] missing from the paper that's uh on top of our mind is actually having
+[1:05:51] of our mind is actually having experiments to see how you know like uh
+[1:05:53] experiments to see how you know like uh these these things behave with same
+[1:05:56] these these things behave with same neural Nets
+[1:05:58] neural Nets or high dimensional linear functions one
+[1:06:01] or high dimensional linear functions one thing that you could do is the
+[1:06:02] thing that you could do is the multitasking idea that we had for the
+[1:06:05] multitasking idea that we had for the neural net implementation for the static
+[1:06:06] neural net implementation for the static regime you can also use it here if you
+[1:06:09] regime you can also use it here if you want to learn the presentations that are
+[1:06:11] want to learn the presentations that are served across all these representers
+[1:06:12] served across all these representers right so maybe you have some large State
+[1:06:14] right so maybe you have some large State space but you know that the policy
+[1:06:17] space but you know that the policy depends on some represents slow
+[1:06:20] depends on some represents slow dimensional representation of that then
+[1:06:22] dimensional representation of that then you can use a multitasking approach
+[1:06:25] you can use a multitasking approach where all of there is representers
+[1:06:27] where all of there is representers you're minimizing are using the
+[1:06:28] you're minimizing are using the essential representation layer and
+[1:06:30] essential representation layer and you're minimizing them simultaneously
+[1:06:33] you're minimizing them simultaneously right so you can have losses there were
+[1:06:35] right so you can have losses there were one the output of one representative
+[1:06:37] one the output of one representative goes into the as the input to the other
+[1:06:39] goes into the as the input to the other loss function and so on and so forth and
+[1:06:41] loss function and so on and so forth and you can simultaneously minimize all of
+[1:06:43] you can simultaneously minimize all of the service representers at once and
+[1:06:46] the service representers at once and that was probably will lead to better
+[1:06:48] that was probably will lead to better Finance sample performance
+[1:06:52] Finance sample performance um
+[1:06:59] the third one is similar I think yeah I don't know how to do easily do parameter
+[1:07:01] don't know how to do easily do parameter sharing other than when you do parameter
+[1:07:03] sharing other than when you do parameter set sharing essentially you're gonna be
+[1:07:05] set sharing essentially you're gonna be redefining what your estimate is right
+[1:07:08] redefining what your estimate is right and so whatever parameter setting you do
+[1:07:10] and so whatever parameter setting you do that's going to give you a new moment
+[1:07:12] that's going to give you a new moment function that you're you need to use
+[1:07:15] function that you're you need to use right that the sort of like says that
+[1:07:18] right that the sort of like says that all of these different quantities are
+[1:07:20] all of these different quantities are the same so I can average all of them so
+[1:07:22] the same so I can average all of them so you can have a different moment function
+[1:07:23] you can have a different moment function then you can do automatic device and for
+[1:07:25] then you can do automatic device and for that moment function uh so I don't know
+[1:07:28] that moment function uh so I don't know if that should be incorporated into the
+[1:07:30] if that should be incorporated into the automatic DML framework or it's just a
+[1:07:32] automatic DML framework or it's just a way of getting a better original moment
+[1:07:34] way of getting a better original moment to then be bias because of parameter
+[1:07:37] to then be bias because of parameter setting maybe that's more towards the
+[1:07:39] setting maybe that's more towards the identification strategy that once you
+[1:07:41] identification strategy that once you have your assumptions together with your
+[1:07:43] have your assumptions together with your parametric restrictions or your
+[1:07:44] parametric restrictions or your parameter setting restrictions can we
+[1:07:47] parameter setting restrictions can we have more automated algorithms that use
+[1:07:48] have more automated algorithms that use all of those assumptions not just say
+[1:07:51] all of those assumptions not just say the causal graph but also this extra
+[1:07:53] the causal graph but also this extra auxiliary assumptions together a good
+[1:07:55] auxiliary assumptions together a good original moment than the bias
+[1:07:57] original moment than the bias that goes I think into more of like the
+[1:08:00] that goes I think into more of like the the line of research that I I really
+[1:08:03] the line of research that I I really like which is incorporating external to
+[1:08:06] like which is incorporating external to the causal graph assumptions into
+[1:08:08] the causal graph assumptions into automated the identification algorithms
+[1:08:12] automated the identification algorithms and the tuning uh it's a good question
+[1:08:15] and the tuning uh it's a good question you know like the current thing that I
+[1:08:17] you know like the current thing that I would recommend is just because it's
+[1:08:19] would recommend is just because it's just a square sort of like a square loss
+[1:08:21] just a square sort of like a square loss an uncompleted Square loss that's what I
+[1:08:24] an uncompleted Square loss that's what I would do for hyper parameter tuning just
+[1:08:26] would do for hyper parameter tuning just do out of sample there is loss and
+[1:08:29] do out of sample there is loss and choose the hyper parameters that
+[1:08:31] choose the hyper parameters that minimize the out of sample risk loss
+[1:08:34] minimize the out of sample risk loss and that's what we do in practice in all
+[1:08:37] and that's what we do in practice in all of our experiments like in the neural
+[1:08:39] of our experiments like in the neural net and in the random Force experiments
+[1:08:43] net and in the random Force experiments um and in the archives experiments we
+[1:08:45] um and in the archives experiments we exactly do that we split samples and we
+[1:08:46] exactly do that we split samples and we choose the hyper parameters that lead to
+[1:08:48] choose the hyper parameters that lead to the smallest out of sample loss that
+[1:08:50] the smallest out of sample loss that worked well for coverage and for mean
+[1:08:52] worked well for coverage and for mean Square there
+[1:08:54] Square there as a selection tool
+[1:08:56] as a selection tool um whether you want to use the target
+[1:08:58] um whether you want to use the target estimate for hybrid parameter tuning I
+[1:09:01] estimate for hybrid parameter tuning I think uh is uh is an interesting
+[1:09:04] think uh is uh is an interesting question I believe also Dominic uh has
+[1:09:08] question I believe also Dominic uh has some paper on uh doing something
+[1:09:10] some paper on uh doing something different for hybrid parameter tuning
+[1:09:11] different for hybrid parameter tuning based on the target estimate and you
+[1:09:13] based on the target estimate and you could use maybe ideas from that work
+[1:09:15] could use maybe ideas from that work within the auto DML framework uh to
+[1:09:19] within the auto DML framework uh to inform
+[1:09:20] inform the uh
+[1:09:22] the uh cross validation
+[1:09:24] cross validation uh based on what you you're targeting
+[1:09:26] uh based on what you you're targeting after but in some sense the the fact
+[1:09:28] after but in some sense the the fact that you're locally robust tells you
+[1:09:30] that you're locally robust tells you that it suffices to minimize means where
+[1:09:33] that it suffices to minimize means where there are resource error and then that
+[1:09:36] there are resource error and then that wouldn't that would the propagate to
+[1:09:39] wouldn't that would the propagate to small Theta error
+[1:09:40] small Theta error so sorry I think we have to uh all right
+[1:09:44] so sorry I think we have to uh all right discussion now because we're already
+[1:09:45] discussion now because we're already over time sounds good all right
+[1:09:47] over time sounds good all right someone's still there then thank you
+[1:09:48] someone's still there then thank you very much sorry about that and they're
+[1:09:50] very much sorry about that and they're very insightful questions
+[1:09:52] very insightful questions um yeah so thank you again merciles and
+[1:09:55] um yeah so thank you again merciles and Eric for the great talk and discussion
+[1:09:58] Eric for the great talk and discussion so I'm just gonna wrap up with an
+[1:10:00] so I'm just gonna wrap up with an introduction to our uh speaker next week
+[1:10:02] introduction to our uh speaker next week will be Li hwale from Stanford
+[1:10:04] will be Li hwale from Stanford University and he'll talk about double
+[1:10:07] University and he'll talk about double robust two-way fix-ifax regression for
+[1:10:10] robust two-way fix-ifax regression for panel data
+[1:10:12] panel data um so see you next week

@@ -1,0 +1,832 @@
+[0:00:03] so let's go for it then um cool so um yeah so i'm going to be
+[0:00:06] cool so um yeah so i'm going to be talking about
+[0:00:07] talking about uh balance and causal inference from
+[0:00:09] uh balance and causal inference from sort of simple methods like post
+[0:00:10] sort of simple methods like post stratification
+[0:00:12] stratification to some of the um fancier stuff uh
+[0:00:15] to some of the um fancier stuff uh like the stuff based on regularizaries
+[0:00:17] like the stuff based on regularizaries representers
+[0:00:18] representers um and this talk is based largely on my
+[0:00:21] um and this talk is based largely on my paper augmented mini max linear
+[0:00:23] paper augmented mini max linear estimation with stefan
+[0:00:25] estimation with stefan um so let's get started
+[0:00:28] um so let's get started okay uh there all right so
+[0:00:31] okay uh there all right so um so we're gonna start with
+[0:00:34] um so we're gonna start with uh an example that i hope is familiar to
+[0:00:37] uh an example that i hope is familiar to uh many of you all
+[0:00:38] uh many of you all um estimating the treatment specific
+[0:00:40] um estimating the treatment specific mean so
+[0:00:41] mean so the idea is uh going to observe iid
+[0:00:44] the idea is uh going to observe iid units described by covariates
+[0:00:47] units described by covariates which we'll call x a level of treatment
+[0:00:49] which we'll call x a level of treatment which we'll call
+[0:00:50] which we'll call w um and an outcome
+[0:00:54] w um and an outcome which is the outcome under that level of
+[0:00:56] which is the outcome under that level of treatment
+[0:00:57] treatment um when treatment assignment is
+[0:00:59] um when treatment assignment is unconfounded the
+[0:01:00] unconfounded the tree mean is just an average involving a
+[0:01:03] tree mean is just an average involving a regression of y
+[0:01:04] regression of y of x on w we're going to call this
+[0:01:06] of x on w we're going to call this regression uh
+[0:01:07] regression uh m of x on w of x and w
+[0:01:10] m of x on w of x and w in particular it's the average of the
+[0:01:13] in particular it's the average of the treated arm value
+[0:01:15] treated arm value m of x x is the sort of natural value of
+[0:01:18] m of x x is the sort of natural value of the covariate
+[0:01:19] the covariate with the uh treatment set to the
+[0:01:22] with the uh treatment set to the particular
+[0:01:22] particular treated arm out one
+[0:01:50] looks like we're having some connection issues here some
+[0:01:53] issues here some difficulty
+[0:02:18] okay looks like we lost skips or david so maybe
+[0:02:20] so maybe let's wait a few minutes see if he comes
+[0:02:22] let's wait a few minutes see if he comes back
+[0:02:35] um
+[0:02:40] well this is actually the first time we've had a speaker
+[0:02:42] we've had a speaker having technical difficulties this is
+[0:02:44] having technical difficulties this is not bad given the number of times we've
+[0:02:46] not bad given the number of times we've done this now
+[0:02:48] done this now that's pretty amazing yeah
+[0:02:51] that's pretty amazing yeah so here he might be able to join by
+[0:02:54] so here he might be able to join by phone which
+[0:02:55] phone which hi david great okay i i apologize
+[0:02:58] hi david great okay i i apologize i'm having some uh internet connection
+[0:03:00] i'm having some uh internet connection issues apparently
+[0:03:02] issues apparently if you um if you don't share your video
+[0:03:04] if you um if you don't share your video maybe uh that will make it
+[0:03:06] maybe uh that will make it less likely to happen and there's also a
+[0:03:10] less likely to happen and there's also a disconnect and not a lag but i can uh i
+[0:03:12] disconnect and not a lag but i can uh i can totally
+[0:03:13] can totally uh okay there we are
+[0:03:17] uh okay there we are um okay so i think i think this is where
+[0:03:20] um okay so i think i think this is where we were at
+[0:03:21] we were at so um we observe
+[0:03:25] so um we observe this and we're trying to estimate this
+[0:03:28] this and we're trying to estimate this guy
+[0:03:29] guy all right so um let's talk about
+[0:03:32] all right so um let's talk about sort of some basic uh estimation
+[0:03:35] sort of some basic uh estimation approaches
+[0:03:36] approaches um and the first is is real obvious so
+[0:03:39] um and the first is is real obvious so um if we want to estimate the average of
+[0:03:41] um if we want to estimate the average of the treated arm value of the regression
+[0:03:43] the treated arm value of the regression function
+[0:03:44] function we just find an estimator for the
+[0:03:46] we just find an estimator for the regression function
+[0:03:47] regression function and we average its treated arm value
+[0:03:50] and we average its treated arm value over the sample
+[0:03:51] over the sample um so this is often called imputation
+[0:03:54] um so this is often called imputation um so another approach was
+[0:03:57] um so another approach was which is common but a little less
+[0:04:00] which is common but a little less obvious
+[0:04:01] obvious is weighting we can find weights that
+[0:04:04] is weighting we can find weights that will approximately equate
+[0:04:06] will approximately equate averages of the treated value of m
+[0:04:09] averages of the treated value of m with weighted averages of the natural
+[0:04:12] with weighted averages of the natural arm value
+[0:04:13] arm value that is they solve this condition and so
+[0:04:15] that is they solve this condition and so the idea is
+[0:04:16] the idea is because we basically observe this
+[0:04:18] because we basically observe this quantity through y
+[0:04:20] quantity through y that solves our problem um
+[0:04:23] that solves our problem um we take a weighted average of the
+[0:04:25] we take a weighted average of the observed outcomes y which are just the
+[0:04:27] observed outcomes y which are just the natural arm value plus
+[0:04:28] natural arm value plus noise and that's our estimator and so
+[0:04:31] noise and that's our estimator and so uh it may not be trivial to estimate
+[0:04:35] uh it may not be trivial to estimate weights with this property
+[0:04:36] weights with this property um but certainly there exist weights
+[0:04:39] um but certainly there exist weights with this property in particular the
+[0:04:41] with this property in particular the inverse propensity weights will do
+[0:04:43] inverse propensity weights will do um because for each square integrable
+[0:04:46] um because for each square integrable function m
+[0:04:47] function m the uh population analog of this
+[0:04:50] the uh population analog of this condition is satisfied
+[0:04:51] condition is satisfied that is satisfied in mean um and so
+[0:04:55] that is satisfied in mean um and so uh and so what the inverse propensity
+[0:04:57] uh and so what the inverse propensity weights do
+[0:04:58] weights do is they have this indicator that sort of
+[0:05:00] is they have this indicator that sort of picks out
+[0:05:01] picks out the uh correct arm of treatment
+[0:05:04] the uh correct arm of treatment and we have uh the conditional
+[0:05:07] and we have uh the conditional probability
+[0:05:08] probability that means that its conditional mean is
+[0:05:09] that means that its conditional mean is one so we're not sort of inflating
+[0:05:11] one so we're not sort of inflating anything by doing that
+[0:05:13] anything by doing that or uh losing anything by doing that
+[0:05:17] or uh losing anything by doing that all right so these are our sort of basic
+[0:05:19] all right so these are our sort of basic approaches um
+[0:05:20] approaches um but let's let's look at something a
+[0:05:22] but let's let's look at something a little fancier uh augmented inverse
+[0:05:24] little fancier uh augmented inverse probability weighting
+[0:05:25] probability weighting so imputation works pretty well if we
+[0:05:28] so imputation works pretty well if we estimate the regression function well
+[0:05:30] estimate the regression function well and weighting works if we estimate the
+[0:05:32] and weighting works if we estimate the inverse propensity weights well
+[0:05:34] inverse propensity weights well but combining both yields a more robust
+[0:05:36] but combining both yields a more robust estimator
+[0:05:37] estimator uh aipw the idea is pretty simple
+[0:05:41] uh aipw the idea is pretty simple we're going to start with the amputation
+[0:05:43] we're going to start with the amputation estimator
+[0:05:44] estimator and then estimate its error by weighting
+[0:05:47] and then estimate its error by weighting uh
+[0:05:48] uh our regression residuals and then
+[0:05:50] our regression residuals and then subtract it off
+[0:05:51] subtract it off so here's our imputation estimator and
+[0:05:54] so here's our imputation estimator and here's our estimate of its error
+[0:05:56] here's our estimate of its error and this weighting estimate of its error
+[0:05:58] and this weighting estimate of its error works essentially just like before
+[0:06:00] works essentially just like before the idea is that the error of the
+[0:06:02] the idea is that the error of the amputation estimator
+[0:06:04] amputation estimator is just the average of the treated arm
+[0:06:06] is just the average of the treated arm value of the regression error function
+[0:06:08] value of the regression error function that is the difference between our uh
+[0:06:11] that is the difference between our uh regression function
+[0:06:12] regression function uh function estimate and the regression
+[0:06:14] uh function estimate and the regression function itself
+[0:06:16] function itself um and the regression residuals are just
+[0:06:19] um and the regression residuals are just its natural arm value plus some noise
+[0:06:21] its natural arm value plus some noise and that's what our weights do
+[0:06:23] and that's what our weights do they equate natural arm values with uh
+[0:06:26] they equate natural arm values with uh with um
+[0:06:34] sorry treated arm values um so they're essentially designed to to
+[0:06:35] so they're essentially designed to to make this lineup
+[0:06:37] make this lineup all right so a common worry with
+[0:06:40] all right so a common worry with procedures like this
+[0:06:41] procedures like this is instability inverse probability
+[0:06:43] is instability inverse probability weighting has a reputation for extreme
+[0:06:45] weighting has a reputation for extreme variability
+[0:06:46] variability um in particular when uh overlap is low
+[0:06:49] um in particular when uh overlap is low meaning
+[0:06:50] meaning essentially there are some units uh for
+[0:06:52] essentially there are some units uh for which treatment is extremely rare
+[0:06:54] which treatment is extremely rare um and a lot of people talk about a sort
+[0:06:57] um and a lot of people talk about a sort of famous simulation study of kang and
+[0:07:00] of famous simulation study of kang and schaefer
+[0:07:00] schaefer uh in this context but uh in part
+[0:07:04] uh in this context but uh in part uh this is kind of misleading because
+[0:07:06] uh this is kind of misleading because it's a bad example
+[0:07:08] it's a bad example um and robin's and co-authors had a
+[0:07:10] um and robin's and co-authors had a really nice commentary on this point
+[0:07:13] really nice commentary on this point um in summary in the kangen shaffer
+[0:07:16] um in summary in the kangen shaffer study treatment is so rare for some
+[0:07:19] study treatment is so rare for some units the estimation of a treatment
+[0:07:21] units the estimation of a treatment effect or
+[0:07:21] effect or treatment specific mean is nearly
+[0:07:23] treatment specific mean is nearly impossible um
+[0:07:25] impossible um remarkably an imputation estimator still
+[0:07:28] remarkably an imputation estimator still works
+[0:07:29] works and if you tweak the experimental design
+[0:07:31] and if you tweak the experimental design just a little you simulate something
+[0:07:32] just a little you simulate something slightly differently
+[0:07:33] slightly differently this falls apart and no estimator works
+[0:07:36] this falls apart and no estimator works anymore
+[0:07:36] anymore so we really probably shouldn't be using
+[0:07:39] so we really probably shouldn't be using this example to decide whether
+[0:07:41] this example to decide whether inverse probability weighting works or
+[0:07:43] inverse probability weighting works or doesn't work um
+[0:07:45] doesn't work um on the other hand you know this isn't
+[0:07:46] on the other hand you know this isn't the only observation
+[0:07:48] the only observation that inverse probability weighting can
+[0:07:50] that inverse probability weighting can be a little more variable than we'd like
+[0:07:52] be a little more variable than we'd like um we should probably also blame what i
+[0:07:55] um we should probably also blame what i call the usual inverse probability
+[0:07:57] call the usual inverse probability weighting workflow
+[0:07:58] weighting workflow and that's kind of a two-step process
+[0:08:01] and that's kind of a two-step process where
+[0:08:02] where the first thing we do is we estimate the
+[0:08:04] the first thing we do is we estimate the propensity score by regressing a
+[0:08:06] propensity score by regressing a treatment indicator on the covariate um
+[0:08:09] treatment indicator on the covariate um and then we use this reciprocal to
+[0:08:11] and then we use this reciprocal to form inverse propensity weights um
+[0:08:14] form inverse propensity weights um and the problem with this approach is
+[0:08:16] and the problem with this approach is basically that inversion dramatically
+[0:08:18] basically that inversion dramatically inflates errors when the propensity
+[0:08:20] inflates errors when the propensity score is small
+[0:08:21] score is small if you just sort of do the arithmetic
+[0:08:23] if you just sort of do the arithmetic and you subtract the reciprocals
+[0:08:25] and you subtract the reciprocals you get you get the product of the
+[0:08:28] you get you get the product of the values in the denominator
+[0:08:30] values in the denominator which will tell you that um whenever the
+[0:08:32] which will tell you that um whenever the propensity score is small
+[0:08:36] propensity score is small errors can get extremely large
+[0:08:39] errors can get extremely large um all right so
+[0:08:44] um all right so um we may we may be in a position where
+[0:08:48] um we may we may be in a position where we want kind of an alternative workflow
+[0:08:49] we want kind of an alternative workflow and i'm going to talk about one
+[0:08:51] and i'm going to talk about one uh i'll call the balancing workflow and
+[0:08:54] uh i'll call the balancing workflow and we're going to start from kind of an
+[0:08:55] we're going to start from kind of an obvious place which is just
+[0:08:57] obvious place which is just looking at the error of the uh
+[0:09:00] looking at the error of the uh aipw estimator it really uh so it has
+[0:09:03] aipw estimator it really uh so it has two terms
+[0:09:04] two terms well we're going to look at a two-term
+[0:09:06] well we're going to look at a two-term decomposition
+[0:09:07] decomposition one of these terms is basically an
+[0:09:10] one of these terms is basically an average of mean
+[0:09:10] average of mean zero stuff um and you know by central
+[0:09:14] zero stuff um and you know by central limit theorem or something it'll be
+[0:09:16] limit theorem or something it'll be uh fairly manageable um the more
+[0:09:19] uh fairly manageable um the more worrisome term
+[0:09:20] worrisome term uh sort of imbalance term in which
+[0:09:23] uh sort of imbalance term in which error arises primarily from a difference
+[0:09:25] error arises primarily from a difference between averages of the treated arm
+[0:09:27] between averages of the treated arm value of the regression error function
+[0:09:30] value of the regression error function um do we see here and the weighted
+[0:09:33] um do we see here and the weighted average of the natural arm value
+[0:09:34] average of the natural arm value of that thing we see here so basically
+[0:09:37] of that thing we see here so basically error arises from our weights failing to
+[0:09:39] error arises from our weights failing to do the job we ask them to do
+[0:09:41] do the job we ask them to do and um so we call this difference the
+[0:09:43] and um so we call this difference the imbalance in the regression error
+[0:09:45] imbalance in the regression error function
+[0:09:46] function and so the sort of balancing idea
+[0:09:50] and so the sort of balancing idea is if we think that regression error
+[0:09:52] is if we think that regression error function will be in some set
+[0:09:54] function will be in some set we'll call that set a model for the
+[0:09:56] we'll call that set a model for the regression error
+[0:09:57] regression error um we can choose weights that control
+[0:09:59] um we can choose weights that control the maximal imbalance over that model
+[0:10:02] the maximal imbalance over that model um so that's just the maximum of this
+[0:10:05] um so that's just the maximum of this error term
+[0:10:06] error term overall sort of candidates for the
+[0:10:08] overall sort of candidates for the regression error in our model
+[0:10:12] regression error in our model uh and there's a nice minimax approach
+[0:10:13] uh and there's a nice minimax approach based on this
+[0:10:15] based on this that accounts for the mean zero term as
+[0:10:17] that accounts for the mean zero term as well
+[0:10:18] well in which we minimize the maximal mean
+[0:10:20] in which we minimize the maximal mean squared error of our model
+[0:10:22] squared error of our model and that's pretty simply just the
+[0:10:25] and that's pretty simply just the square of the maximal imbalance plus a
+[0:10:28] square of the maximal imbalance plus a term proportional to the squared norm
+[0:10:30] term proportional to the squared norm of the weights which keeps some of this
+[0:10:33] of the weights which keeps some of this sort of extreme waiting
+[0:10:34] sort of extreme waiting phenomena from happening so specifically
+[0:10:37] phenomena from happening so specifically this is uh conditional on design means
+[0:10:40] this is uh conditional on design means squared error
+[0:10:42] squared error where design means covariate and
+[0:10:44] where design means covariate and treatment
+[0:10:45] treatment um and it's maximal in the sense that
+[0:10:48] um and it's maximal in the sense that it's the worst case
+[0:10:49] it's the worst case um over both regression error functions
+[0:10:52] um over both regression error functions in the model
+[0:10:53] in the model andover variance is bounded by some sort
+[0:10:56] andover variance is bounded by some sort of
+[0:10:56] of tuning noise level parameter sigma
+[0:10:59] tuning noise level parameter sigma squared
+[0:11:05] so uh if we think about the weights a little they're essentially method of
+[0:11:06] little they're essentially method of moments estimates of the iners
+[0:11:08] moments estimates of the iners propensity weights
+[0:11:10] propensity weights and by that i mean they approximately
+[0:11:12] and by that i mean they approximately solve a
+[0:11:13] solve a set of sample moment conditions those
+[0:11:16] set of sample moment conditions those are the
+[0:11:16] are the approximate balance conditions for the
+[0:11:18] approximate balance conditions for the functions in our model that is
+[0:11:20] functions in our model that is we're equating our weighted natural arm
+[0:11:23] we're equating our weighted natural arm value with our
+[0:11:25] value with our our treated arm value and the inverse
+[0:11:27] our treated arm value and the inverse propensity
+[0:11:28] propensity weights solve the analogous uh
+[0:11:30] weights solve the analogous uh population balance conditions
+[0:11:32] population balance conditions and they do it for all functions in the
+[0:11:33] and they do it for all functions in the model m and they do it for all square
+[0:11:35] model m and they do it for all square integrable functions
+[0:11:37] integrable functions so um
+[0:11:41] so um one of the nice properties of an
+[0:11:43] one of the nice properties of an estimate like this
+[0:11:44] estimate like this is it's a direct estimate of the inverse
+[0:11:46] is it's a direct estimate of the inverse propensity weights
+[0:11:47] propensity weights there's no error inflating inversion
+[0:11:49] there's no error inflating inversion step in this workflow
+[0:11:50] step in this workflow and as a result we get pretty stable
+[0:11:52] and as a result we get pretty stable estimates even in problematic examples
+[0:11:54] estimates even in problematic examples like the kane and shaffer problem
+[0:12:02] so uh let's look at what happens a little more concretely
+[0:12:03] little more concretely with some of this stuff so if we have
+[0:12:06] with some of this stuff so if we have discrete covariance
+[0:12:08] discrete covariance we maybe can get away with a completely
+[0:12:09] we maybe can get away with a completely general model that is a model that says
+[0:12:13] general model that is a model that says our regression error function could be
+[0:12:15] our regression error function could be any function of the covariates outright
+[0:12:18] any function of the covariates outright um and if we let things be this general
+[0:12:22] um and if we let things be this general the maximal imbalance will be infinity
+[0:12:24] the maximal imbalance will be infinity unless we weight treated units so their
+[0:12:26] unless we weight treated units so their empirical covariate distribution
+[0:12:27] empirical covariate distribution exactly matches the whole sample uh the
+[0:12:30] exactly matches the whole sample uh the point is because we're completely
+[0:12:32] point is because we're completely unconstrained
+[0:12:33] unconstrained if there's any difference at all we can
+[0:12:35] if there's any difference at all we can just sort of
+[0:12:36] just sort of blow up that difference to infinity um
+[0:12:39] blow up that difference to infinity um so uh this is what post ratification
+[0:12:43] so uh this is what post ratification does
+[0:12:43] does this sort of exact matching um and so
+[0:12:45] this sort of exact matching um and so these are weights that are
+[0:12:46] these are weights that are uh commonly used to sort of adjust
+[0:12:50] uh commonly used to sort of adjust um you know non-representative surveys
+[0:12:53] um you know non-representative surveys and things
+[0:12:53] and things things like that um
+[0:12:57] things like that um okay so i'm sorry
+[0:13:01] okay so i'm sorry if covariates are continuous we can't do
+[0:13:04] if covariates are continuous we can't do this
+[0:13:06] this the reason for that is no two units will
+[0:13:08] the reason for that is no two units will have exactly the same covariates
+[0:13:10] have exactly the same covariates so we need there to be a sense in which
+[0:13:12] so we need there to be a sense in which two empirical distributions are sort of
+[0:13:14] two empirical distributions are sort of close enough
+[0:13:14] close enough even if they don't line up perfectly um
+[0:13:17] even if they don't line up perfectly um and essentially this means we need some
+[0:13:19] and essentially this means we need some kind of continuity
+[0:13:20] kind of continuity uh in the models we consider and so we
+[0:13:23] uh in the models we consider and so we can control
+[0:13:24] can control and balance in in models that limit
+[0:13:26] and balance in in models that limit discontinuity some examples being say
+[0:13:29] discontinuity some examples being say functions with a bounded derivative or
+[0:13:31] functions with a bounded derivative or two or
+[0:13:32] two or functions of bounded variation and this
+[0:13:35] functions of bounded variation and this isn't like a weird requirement specific
+[0:13:37] isn't like a weird requirement specific to balancing estimators or anything it's
+[0:13:39] to balancing estimators or anything it's really just a requirement
+[0:13:41] really just a requirement that we can learn about a function from
+[0:13:43] that we can learn about a function from its samples we need the same to do any
+[0:13:44] its samples we need the same to do any kind of estimation
+[0:13:46] kind of estimation so if we have enough continuity then uh
+[0:13:50] so if we have enough continuity then uh we can prove some pretty strong
+[0:13:51] we can prove some pretty strong optimality properties for estimators
+[0:13:53] optimality properties for estimators like this
+[0:13:54] like this in particular um
+[0:13:57] in particular um we can prove asymptotic efficiency so if
+[0:14:00] we can prove asymptotic efficiency so if we choose weights minimizing conditional
+[0:14:02] we choose weights minimizing conditional mean squared error
+[0:14:04] mean squared error for a model that's convex uniformly
+[0:14:06] for a model that's convex uniformly bounded and emits a uniform central
+[0:14:08] bounded and emits a uniform central limit theorem
+[0:14:09] limit theorem our estimator is efficient under three
+[0:14:13] our estimator is efficient under three conditions the first is a kind of
+[0:14:15] conditions the first is a kind of overlap condition
+[0:14:16] overlap condition uh that the inverse propensity weighting
+[0:14:18] uh that the inverse propensity weighting function is square integrable
+[0:14:20] function is square integrable the second is that our regression is
+[0:14:22] the second is that our regression is mean square consistent
+[0:14:24] mean square consistent uh which um hopefully you should be
+[0:14:27] uh which um hopefully you should be getting from your regression
+[0:14:29] getting from your regression um and the third which is sort of the
+[0:14:31] um and the third which is sort of the strong
+[0:14:32] strong condition here is that our uh model
+[0:14:35] condition here is that our uh model is a valid model for our regression
+[0:14:37] is a valid model for our regression error meaning that our regression error
+[0:14:40] error meaning that our regression error function is either
+[0:14:41] function is either in the model or in sort of a scaled-up
+[0:14:44] in the model or in sort of a scaled-up version
+[0:14:44] version where that scale is constant order
+[0:14:48] where that scale is constant order so um so this is nice
+[0:14:52] so um so this is nice for those who aren't familiar with
+[0:14:53] for those who aren't familiar with asymptotic efficiency essentially it
+[0:14:55] asymptotic efficiency essentially it means that the usual confidence
+[0:14:57] means that the usual confidence intervals are
+[0:14:57] intervals are asymptotically valid and they have
+[0:15:00] asymptotically valid and they have minimal length among asymptotically
+[0:15:02] minimal length among asymptotically valid intervals
+[0:15:03] valid intervals so this really lets us
+[0:15:06] so this really lets us do inference pretty much however we want
+[0:15:09] do inference pretty much however we want we can form wall type intervals
+[0:15:11] we can form wall type intervals where we just take our estimate and like
+[0:15:13] where we just take our estimate and like plus or minus 1.96 times the standard
+[0:15:15] plus or minus 1.96 times the standard error
+[0:15:17] error or we can do the bootstrap um
+[0:15:20] or we can do the bootstrap um pretty much anything that would work for
+[0:15:21] pretty much anything that would work for a sample mean so um
+[0:15:24] a sample mean so um if we have if we have these conditions
+[0:15:26] if we have if we have these conditions basically everything becomes pretty easy
+[0:15:28] basically everything becomes pretty easy um and um we can do inference
+[0:15:31] um and um we can do inference straightforwardly
+[0:15:33] straightforwardly um but of course to actually use this
+[0:15:35] um but of course to actually use this thing
+[0:15:36] thing we have to sort of choose our parameters
+[0:15:38] we have to sort of choose our parameters so all this stuff works out nicely
+[0:15:40] so all this stuff works out nicely and we have three to choose
+[0:15:44] and we have three to choose the first is our noise level parameter
+[0:15:46] the first is our noise level parameter in our minimax problem
+[0:15:48] in our minimax problem the second is our outcome regression
+[0:15:51] the second is our outcome regression estimator
+[0:15:52] estimator and our third parameter is our model for
+[0:15:55] and our third parameter is our model for its error
+[0:15:56] its error and so the good news about this is that
+[0:15:59] and so the good news about this is that the estimator is adaptive it's
+[0:16:01] the estimator is adaptive it's sensitive to properties of the
+[0:16:02] sensitive to properties of the regression error that aren't baked into
+[0:16:05] regression error that aren't baked into our
+[0:16:05] our regression error model and that means
+[0:16:08] regression error model and that means that we don't really need to get that
+[0:16:09] that we don't really need to get that model perfect
+[0:16:10] model perfect which would be pretty difficult um so
+[0:16:14] which would be pretty difficult um so i'll give you a bit of a flavor of these
+[0:16:17] i'll give you a bit of a flavor of these adaptivity properties
+[0:16:18] adaptivity properties um uh
+[0:16:22] um uh uh the procedure behaves uh a bit like
+[0:16:25] uh the procedure behaves uh a bit like we had perfectly modeled a couple
+[0:16:26] we had perfectly modeled a couple properties of the regression error
+[0:16:28] properties of the regression error one of them is consistency say like uh
+[0:16:32] one of them is consistency say like uh the rate at which um it's mean squared
+[0:16:35] the rate at which um it's mean squared error to case
+[0:16:37] error to case and the second is essentially its
+[0:16:39] and the second is essentially its smoothness
+[0:16:40] smoothness like maybe the rate of decay of its
+[0:16:42] like maybe the rate of decay of its fourier coefficients
+[0:16:44] fourier coefficients um we have this in our khs models
+[0:16:47] um we have this in our khs models um and so that that sort of tells us
+[0:16:51] um and so that that sort of tells us that
+[0:16:52] that uh even though we sort of think of m as
+[0:16:56] uh even though we sort of think of m as the class of all regression errors we
+[0:16:57] the class of all regression errors we could deal with and
+[0:16:59] could deal with and it would be nice to have it be right we
+[0:17:02] it would be nice to have it be right we don't need to get it that right
+[0:17:08] um and we kind of have the same deal for uh for the noise level sigma the
+[0:17:10] uh for the noise level sigma the estimator uh
+[0:17:12] estimator uh isn't too sensitive um you can of course
+[0:17:14] isn't too sensitive um you can of course screw it up if you throw like sigma
+[0:17:16] screw it up if you throw like sigma 10 000 in there but uh
+[0:17:20] 10 000 in there but uh basically in in practice we usually just
+[0:17:22] basically in in practice we usually just use sigma's one
+[0:17:24] use sigma's one um and it works pretty well and the
+[0:17:27] um and it works pretty well and the theory is basically justified
+[0:17:28] theory is basically justified uh so um
+[0:17:33] uh so um and i i guess is the third point um we
+[0:17:35] and i i guess is the third point um we actually don't require
+[0:17:37] actually don't require all that much of the regression error in
+[0:17:39] all that much of the regression error in terms of its its consistency
+[0:17:42] terms of its its consistency so um so we don't need to do a great job
+[0:17:45] so um so we don't need to do a great job there either
+[0:17:47] there either and so the good news here is basically
+[0:17:50] and so the good news here is basically that we do pretty well
+[0:17:52] that we do pretty well with reasonable default parameters and
+[0:17:55] with reasonable default parameters and that's important because
+[0:17:57] that's important because we don't really know how to
+[0:17:58] we don't really know how to automatically tune and estimate sort of
+[0:18:00] automatically tune and estimate sort of more optimal ones
+[0:18:01] more optimal ones this is a this is a challenge in this
+[0:18:03] this is a this is a challenge in this estimator in particular but really
+[0:18:06] estimator in particular but really sort of throughout uh causal inference
+[0:18:08] sort of throughout uh causal inference and semi-parametrics
+[0:18:10] and semi-parametrics uh we don't really know how to how to do
+[0:18:13] uh we don't really know how to how to do tuning
+[0:18:14] tuning um for our ultimate goal
+[0:18:17] um for our ultimate goal um alright so let's move on to what's
+[0:18:20] um alright so let's move on to what's probably the most
+[0:18:22] probably the most practical consideration of all um what
+[0:18:25] practical consideration of all um what we actually want to estimate and
+[0:18:28] we actually want to estimate and uh i know i'm certainly guilty of uh
+[0:18:31] uh i know i'm certainly guilty of uh sort of
+[0:18:32] sort of not quite knowing how to estimate the
+[0:18:34] not quite knowing how to estimate the thing i wanted and
+[0:18:36] thing i wanted and estimating something that's um sort of
+[0:18:38] estimating something that's um sort of feels similar enough just because i sort
+[0:18:40] feels similar enough just because i sort of had the code or knew how to
+[0:18:42] of had the code or knew how to do it and the great thing about working
+[0:18:44] do it and the great thing about working in this framework is
+[0:18:45] in this framework is estimating many other things is a
+[0:18:47] estimating many other things is a trivial change it's often just one line
+[0:18:49] trivial change it's often just one line of code so we can more often just sort
+[0:18:51] of code so we can more often just sort of
+[0:18:52] of do what we want
+[0:18:58] and so some examples of the kind of things we can do
+[0:18:59] things we can do are say the average treatment effect
+[0:19:02] are say the average treatment effect well that's not that
+[0:19:03] well that's not that different um the average policy value so
+[0:19:06] different um the average policy value so if we had a policy for assigning
+[0:19:08] if we had a policy for assigning treatment to people on the basis of
+[0:19:09] treatment to people on the basis of their covariates
+[0:19:10] their covariates we could estimate how well that worked
+[0:19:13] we could estimate how well that worked um
+[0:19:14] um if say a dose is continuous
+[0:19:18] if say a dose is continuous we could estimate this average slope of
+[0:19:20] we could estimate this average slope of the dose response function
+[0:19:22] the dose response function generally the framework we're working in
+[0:19:25] generally the framework we're working in is we can estimate a linear functional
+[0:19:28] is we can estimate a linear functional of the regression function
+[0:19:29] of the regression function which we'll call h that varies with
+[0:19:33] which we'll call h that varies with the covariates and treatment level um
+[0:19:38] the covariates and treatment level um so this isn't just sort of a drop in
+[0:19:41] so this isn't just sort of a drop in change code wise
+[0:19:42] change code wise if you were to substitute h for uh what
+[0:19:45] if you were to substitute h for uh what i was calling treated arm value earlier
+[0:19:47] i was calling treated arm value earlier in the talk
+[0:19:48] in the talk basically it all goes through we have
+[0:19:49] basically it all goes through we have the same theoretical results uh
+[0:19:51] the same theoretical results uh and everything um and in this more
+[0:19:54] and everything um and in this more general setting
+[0:19:55] general setting the inverse propensity weights
+[0:19:56] the inverse propensity weights generalized to uh
+[0:19:58] generalized to uh the wrist representer of our s demand
+[0:20:02] the wrist representer of our s demand and what that means is the inverse
+[0:20:03] and what that means is the inverse propensity weights solve
+[0:20:05] propensity weights solve sort of exactly the condition that we've
+[0:20:07] sort of exactly the condition that we've wanted before
+[0:20:08] wanted before um the average of h now at a function f
+[0:20:12] um the average of h now at a function f is just the weighted out average of the
+[0:20:15] is just the weighted out average of the natural value of f for all uh mean
+[0:20:18] natural value of f for all uh mean squared continuous functions
+[0:20:20] squared continuous functions um so this is kind of the analog of the
+[0:20:23] um so this is kind of the analog of the condition that defines the uh
+[0:20:25] condition that defines the uh inverse propensity weights and
+[0:20:29] inverse propensity weights and so it's maybe not immediately obvious
+[0:20:31] so it's maybe not immediately obvious that this has a solution
+[0:20:33] that this has a solution um but when our s demand is mean square
+[0:20:36] um but when our s demand is mean square continuous
+[0:20:36] continuous uh as a function of uh of the regression
+[0:20:40] uh as a function of uh of the regression function m
+[0:20:41] function m the representation theorem guarantees
+[0:20:43] the representation theorem guarantees that the solution
+[0:20:44] that the solution exists uh and that it's square
+[0:20:46] exists uh and that it's square integrable so essentially
+[0:20:47] integrable so essentially the kind of overlap we need is really
+[0:20:50] the kind of overlap we need is really just saying
+[0:20:51] just saying that the s demand um that we're
+[0:20:54] that the s demand um that we're interested in
+[0:20:54] interested in varies continuously uh with the
+[0:20:57] varies continuously uh with the regression function
+[0:21:00] regression function so that's actually not strictly
+[0:21:03] so that's actually not strictly necessary
+[0:21:04] necessary we can get away with estimating some
+[0:21:07] we can get away with estimating some discontinuous functionals
+[0:21:08] discontinuous functionals things like the conditional average
+[0:21:10] things like the conditional average treatment effect at a point
+[0:21:12] treatment effect at a point um by using this approach to estimate a
+[0:21:14] um by using this approach to estimate a smoother approximation
+[0:21:16] smoother approximation and so the idea is if we if we have the
+[0:21:19] and so the idea is if we if we have the um conditional average treatment effect
+[0:21:22] um conditional average treatment effect at a point it's not really an average
+[0:21:24] at a point it's not really an average over anything so none of this stuff
+[0:21:26] over anything so none of this stuff really works
+[0:21:27] really works but we can approximate it by an average
+[0:21:30] but we can approximate it by an average over sort of a little bump
+[0:21:31] over sort of a little bump around around the place we want to
+[0:21:33] around around the place we want to estimate it
+[0:21:34] estimate it so basically we smooth by convolution
+[0:21:37] so basically we smooth by convolution with some sort of kernel
+[0:21:38] with some sort of kernel um and we can apply the same techniques
+[0:21:40] um and we can apply the same techniques and by sort of varying the bandwidth
+[0:21:42] and by sort of varying the bandwidth of the kernel um we can sort of vary
+[0:21:46] of the kernel um we can sort of vary uh how easy this thing is to estimate
+[0:21:48] uh how easy this thing is to estimate versus how close it is to the
+[0:21:50] versus how close it is to the the like kate itself rather
+[0:21:53] the like kate itself rather uh yeah okay so that
+[0:21:57] uh yeah okay so that that kind of closes the story i wanted
+[0:21:59] that kind of closes the story i wanted to tell on
+[0:22:00] to tell on um sort of uh what we can do with this
+[0:22:03] um sort of uh what we can do with this estimator
+[0:22:04] estimator i want to talk a little about kind of
+[0:22:06] i want to talk a little about kind of the principles behind
+[0:22:08] the principles behind um how it works and the sort of
+[0:22:10] um how it works and the sort of folkloric tradition it comes out of
+[0:22:12] folkloric tradition it comes out of so balancing folks
+[0:22:15] so balancing folks or at least the folks i know i have done
+[0:22:19] or at least the folks i know i have done this in the past
+[0:22:20] this in the past um tend to emphasize basically three
+[0:22:23] um tend to emphasize basically three principles
+[0:22:25] principles the first is directly balancing the
+[0:22:27] the first is directly balancing the sample not the population
+[0:22:29] sample not the population the second is sort of balancing the
+[0:22:31] the second is sort of balancing the right model balancing
+[0:22:33] right model balancing what we have to balance not just the
+[0:22:35] what we have to balance not just the convenient one
+[0:22:36] convenient one and the third is estimating the inverse
+[0:22:38] and the third is estimating the inverse propensity score
+[0:22:39] propensity score not its inverse the propensity score
+[0:22:42] not its inverse the propensity score and these are all kind of slogans um
+[0:22:46] and these are all kind of slogans um but there's there's some so i'm going to
+[0:22:48] but there's there's some so i'm going to give a bit of interpretation to them
+[0:22:50] give a bit of interpretation to them the by the first one basically we mean
+[0:22:53] the by the first one basically we mean we solve sample moment conditions the
+[0:22:56] we solve sample moment conditions the sample balance conditions that we need
+[0:22:57] sample balance conditions that we need to make
+[0:22:58] to make uh our error have small estimator have
+[0:23:00] uh our error have small estimator have small error
+[0:23:01] small error we don't say estimate the propensity
+[0:23:04] we don't say estimate the propensity score which balances the population but
+[0:23:06] score which balances the population but then
+[0:23:07] then indirectly balances the sample because
+[0:23:08] indirectly balances the sample because the sample converges to the population
+[0:23:11] the sample converges to the population um and as far as balancing the right
+[0:23:14] um and as far as balancing the right model
+[0:23:14] model the idea is if people are focused on
+[0:23:16] the idea is if people are focused on modeling the propensity score
+[0:23:18] modeling the propensity score they uh they sort of forget about what
+[0:23:20] they uh they sort of forget about what they want the inverse propensity weights
+[0:23:22] they want the inverse propensity weights to
+[0:23:22] to do and they get a propensity score
+[0:23:24] do and they get a propensity score estimate that may be close to the
+[0:23:25] estimate that may be close to the propensity score
+[0:23:26] propensity score but not in the right sense um and the
+[0:23:29] but not in the right sense um and the third i guess is fairly self-explanatory
+[0:23:31] third i guess is fairly self-explanatory and so these are the principles that i
+[0:23:34] and so these are the principles that i think we
+[0:23:35] think we we say are why balancing works and why
+[0:23:38] we say are why balancing works and why balancing is a good idea
+[0:23:40] balancing is a good idea but it's not really clear that we need
+[0:23:41] but it's not really clear that we need all three and
+[0:23:43] all three and as a bit of a thought experiment we can
+[0:23:45] as a bit of a thought experiment we can sort of kill the first
+[0:23:47] sort of kill the first by crossfitting when we estimate the
+[0:23:49] by crossfitting when we estimate the weights and
+[0:23:50] weights and what i mean by this is we can minimize
+[0:23:53] what i mean by this is we can minimize conditional mean squared error just as
+[0:23:55] conditional mean squared error just as before but we do it for half the sample
+[0:23:58] before but we do it for half the sample and by doing so we get an estimate of
+[0:24:00] and by doing so we get an estimate of the inverse propensity weighting
+[0:24:01] the inverse propensity weighting function
+[0:24:02] function and then we can just evaluate it on
+[0:24:04] and then we can just evaluate it on units for the other half of the sample
+[0:24:06] units for the other half of the sample so the only reason we would get any kind
+[0:24:08] so the only reason we would get any kind of balance here
+[0:24:10] of balance here is because uh our first estimate is
+[0:24:13] is because uh our first estimate is uh an estimate of the inverse propensity
+[0:24:16] uh an estimate of the inverse propensity weighting function
+[0:24:17] weighting function and that would balance so
+[0:24:21] and that would balance so it kind of raises the question like is
+[0:24:23] it kind of raises the question like is this balancing
+[0:24:24] this balancing right so it violates our first principle
+[0:24:27] right so it violates our first principle but
+[0:24:27] but it satisfies our second and third um
+[0:24:31] it satisfies our second and third um and it's maybe not super relevant that
+[0:24:33] and it's maybe not super relevant that it's balancing or not
+[0:24:35] it's balancing or not um uh
+[0:24:38] um uh one question is maybe is it better or is
+[0:24:42] one question is maybe is it better or is it worse
+[0:24:43] it worse because intuition uh that sort of
+[0:24:45] because intuition uh that sort of justifies sample splitting uh about a
+[0:24:47] justifies sample splitting uh about a phenomenon called own observation bias
+[0:24:49] phenomenon called own observation bias suggests it might work better but people
+[0:24:52] suggests it might work better but people sort of
+[0:24:53] sort of you have about five more minutes left
+[0:24:55] you have about five more minutes left thank you
+[0:24:56] thank you yep sure people sort of hold up uh
+[0:24:59] yep sure people sort of hold up uh directly balancing the samples the
+[0:25:01] directly balancing the samples the reason balancing works
+[0:25:02] reason balancing works so we do have evidence that very similar
+[0:25:06] so we do have evidence that very similar methods work
+[0:25:07] methods work quite well both in theory and in
+[0:25:08] quite well both in theory and in simulations so
+[0:25:10] simulations so um either
+[0:25:14] um either either both both are true or uh
+[0:25:17] either both both are true or uh we really don't know so we sort of have
+[0:25:20] we really don't know so we sort of have these intuitive principles that tell us
+[0:25:22] these intuitive principles that tell us that we should crossfit
+[0:25:23] that we should crossfit and we should directly balance the
+[0:25:25] and we should directly balance the sample but we can't do both
+[0:25:27] sample but we can't do both um and we don't really know when to
+[0:25:28] um and we don't really know when to prefer one or over the other
+[0:25:30] prefer one or over the other um and that sort of takes us to where
+[0:25:33] um and that sort of takes us to where we are today as a community i mean
+[0:25:35] we are today as a community i mean historically
+[0:25:36] historically there's been tension between folks who
+[0:25:38] there's been tension between folks who emphasize simple balance properties
+[0:25:41] emphasize simple balance properties like uh the sort of exact balance you
+[0:25:43] like uh the sort of exact balance you get from post stratification
+[0:25:45] get from post stratification and those who sort of emphasize
+[0:25:46] and those who sort of emphasize semi-parametric efficiency and all of
+[0:25:48] semi-parametric efficiency and all of the sort of technical tools that have
+[0:25:50] the sort of technical tools that have developed around those ideas
+[0:25:52] developed around those ideas but in the last decade with sort of more
+[0:25:54] but in the last decade with sort of more general notions of balance
+[0:25:56] general notions of balance it's become harder to see the boundary
+[0:25:58] it's become harder to see the boundary between these approaches
+[0:25:59] between these approaches it's less clear what a balancing
+[0:26:01] it's less clear what a balancing estimator is
+[0:26:02] estimator is um and what what a sort of traditional
+[0:26:05] um and what what a sort of traditional estimator is
+[0:26:07] estimator is so nonetheless there's still kind of a
+[0:26:10] so nonetheless there's still kind of a stereotype that balancing estimators and
+[0:26:12] stereotype that balancing estimators and semi-parametric estimators have
+[0:26:13] semi-parametric estimators have fundamentally different robustness
+[0:26:15] fundamentally different robustness properties
+[0:26:16] properties so for balancing estimators we might say
+[0:26:18] so for balancing estimators we might say something like
+[0:26:19] something like oh they're optimal for the observed
+[0:26:21] oh they're optimal for the observed design uh which is great because that's
+[0:26:23] design uh which is great because that's the design i have
+[0:26:25] the design i have and for uh for sort of semi-parametric
+[0:26:28] and for uh for sort of semi-parametric estimators we may say
+[0:26:29] estimators we may say they get a lot of double robustness by
+[0:26:32] they get a lot of double robustness by uh
+[0:26:32] uh sort of thinking about averaging over a
+[0:26:35] sort of thinking about averaging over a bunch of possible designs
+[0:26:36] bunch of possible designs that were that um we could sample and
+[0:26:39] that were that um we could sample and the truth is really
+[0:26:41] the truth is really these stereotypical properties may just
+[0:26:43] these stereotypical properties may just be ones that the easiest to prove
+[0:26:45] be ones that the easiest to prove uh it may well be that um
+[0:26:48] uh it may well be that um you know uh that we can we can prove one
+[0:26:52] you know uh that we can we can prove one or the other
+[0:26:52] or the other um using some sort of uh more involved
+[0:26:56] um using some sort of uh more involved arguments that haven't quite appeared
+[0:26:57] arguments that haven't quite appeared yet
+[0:26:58] yet um and that's kind of uh
+[0:27:01] um and that's kind of uh it puts us in an interesting state
+[0:27:03] it puts us in an interesting state because um
+[0:27:10] basically there's a lot like these are all these are both desirable properties
+[0:27:12] all these are both desirable properties um and i think the properties people
+[0:27:14] um and i think the properties people like about balancing estimators
+[0:27:16] like about balancing estimators and non-balancing estimators are both
+[0:27:19] and non-balancing estimators are both are both nice um
+[0:27:21] are both nice um and we sort of know how to make them
+[0:27:23] and we sort of know how to make them happen
+[0:27:24] happen but we don't know what we have to do to
+[0:27:26] but we don't know what we have to do to make them happen there's really a lot of
+[0:27:28] make them happen there's really a lot of work to be done in understanding exactly
+[0:27:30] work to be done in understanding exactly how these properties arise
+[0:27:32] how these properties arise and whether they're compatible or we
+[0:27:33] and whether they're compatible or we have to make some kind of choice
+[0:27:35] have to make some kind of choice and this really isn't work uh for sort
+[0:27:37] and this really isn't work uh for sort of one faction you know balancing folks
+[0:27:40] of one faction you know balancing folks or non-balancing folks
+[0:27:41] or non-balancing folks um it's really sort of between balancing
+[0:27:44] um it's really sort of between balancing and not
+[0:27:44] and not it's worked for all of us um so uh
+[0:27:48] it's worked for all of us um so uh thanks for listening and uh thanks to
+[0:27:50] thanks for listening and uh thanks to the organizers for the opportunity to uh
+[0:27:52] the organizers for the opportunity to uh say my piece
+[0:27:54] say my piece um i'll uh i'll show some references and
+[0:27:58] um i'll uh i'll show some references and uh take any questions if
+[0:27:59] uh take any questions if time allows thanks david for the uh
+[0:28:02] time allows thanks david for the uh fantastic talk
+[0:28:04] fantastic talk uh do you want to ask a question yeah so
+[0:28:07] uh do you want to ask a question yeah so maybe one one quick question so
+[0:28:09] maybe one one quick question so um the in in in work in
+[0:28:12] um the in in in work in in observational studies there's kind of
+[0:28:13] in observational studies there's kind of the rosenbaum tradition
+[0:28:15] the rosenbaum tradition um that has developed its own uh kind of
+[0:28:18] um that has developed its own uh kind of way of doing
+[0:28:19] way of doing sensitivity analysis in this setting and
+[0:28:21] sensitivity analysis in this setting and recently we've seen some work on
+[0:28:23] recently we've seen some work on uh sensitivity analysis for um ipw
+[0:28:27] uh sensitivity analysis for um ipw estimators like i'm thinking about work
+[0:28:28] estimators like i'm thinking about work by zhao and and co-authors
+[0:28:31] by zhao and and co-authors um and so i was thinking uh is is there
+[0:28:34] um and so i was thinking uh is is there kind of
+[0:28:34] kind of a a movement going uh through
+[0:28:38] a a movement going uh through kind of um thinking about how to get
+[0:28:40] kind of um thinking about how to get sensitivity analysis
+[0:28:41] sensitivity analysis to work in in kind of this balancing
+[0:28:44] to work in in kind of this balancing framework
+[0:28:45] framework or does that already exist i mean
+[0:28:49] or does that already exist i mean so like one one argument you could make
+[0:28:52] so like one one argument you could make is that
+[0:28:53] is that that uh sort of sensitivity analysis is
+[0:28:57] that uh sort of sensitivity analysis is about the difference
+[0:28:58] about the difference between s demands and estimators so
+[0:29:02] between s demands and estimators so like it almost the balancing the
+[0:29:05] like it almost the balancing the framework for the estimation is largely
+[0:29:06] framework for the estimation is largely irrelevant
+[0:29:07] irrelevant of course these things are coupled in
+[0:29:08] of course these things are coupled in some of these traditions
+[0:29:10] some of these traditions um there's also you can sort of go at it
+[0:29:13] um there's also you can sort of go at it the other way
+[0:29:14] the other way right like sensitivity like a lower
+[0:29:16] right like sensitivity like a lower sensitivity bound is a parameter
+[0:29:19] sensitivity bound is a parameter and then you know you could probably
+[0:29:22] and then you know you could probably find a balancing estimator for it
+[0:29:25] find a balancing estimator for it um i i haven't i haven't really seen
+[0:29:29] um i i haven't i haven't really seen much
+[0:29:29] much on um much that tries to use balance as
+[0:29:34] on um much that tries to use balance as um a
+[0:29:38] um a sort of sensitivity notion i guess i
+[0:29:41] sort of sensitivity notion i guess i mean it would be like what balance fails
+[0:29:43] mean it would be like what balance fails to control
+[0:29:44] to control right yeah yeah
+[0:29:47] right yeah yeah that's kind of what i was thinking about
+[0:29:49] that's kind of what i was thinking about or maybe um uh
+[0:29:51] or maybe um uh what happened to the the true class so
+[0:29:54] what happened to the the true class so you mentioned that the
+[0:29:55] you mentioned that the um you didn't you don't actually know
+[0:29:58] um you didn't you don't actually know need to know exactly
+[0:30:00] need to know exactly uh the the right uh model class and that
+[0:30:04] uh the the right uh model class and that you're kind of like
+[0:30:05] you're kind of like robust to this um but so that could be
+[0:30:08] robust to this um but so that could be like one direction in which to look at
+[0:30:10] like one direction in which to look at the sensitivities like well if it's not
+[0:30:13] the sensitivities like well if it's not right
+[0:30:15] right yeah so there are many ways of sort of
+[0:30:18] yeah so there are many ways of sort of embedding
+[0:30:19] embedding like kind of fundamental uncertainty
+[0:30:22] like kind of fundamental uncertainty into this kind of minimax framework
+[0:30:24] into this kind of minimax framework i haven't seen it yet that might be cool
+[0:30:26] i haven't seen it yet that might be cool um
+[0:30:28] um yeah great um let me see if we have
+[0:30:32] yeah great um let me see if we have other questions
+[0:30:37] yeah i think that's i think that's about it um
+[0:30:39] it um yeah thanks for this great talk it was
+[0:30:40] yeah thanks for this great talk it was uh very very interesting
+[0:30:46] uh okay yeah thank you uh again karthika and david so
+[0:30:48] and david so um let me share my screen
+[0:30:57] uh so next week we're very excited to have uh
+[0:30:58] have uh yours moy from the university of
+[0:31:00] yours moy from the university of amsterdam who will present
+[0:31:02] amsterdam who will present joint causal inference a unifying
+[0:31:04] joint causal inference a unifying perspective on
+[0:31:05] perspective on causal discovery we're very much looking
+[0:31:07] causal discovery we're very much looking forward to that and we
+[0:31:09] forward to that and we hope to see you there thanks for joining
+[0:31:12] hope to see you there thanks for joining us

@@ -1,0 +1,1615 @@
+[0:00:06] all right uh hi everyone uh welcome to another online console and Friends
+[0:00:08] another online console and Friends seminar uh today we have plenty of
+[0:00:10] seminar uh today we have plenty of people here uh we actually have a talk
+[0:00:13] people here uh we actually have a talk by Robin Evans from University of Oxford
+[0:00:15] by Robin Evans from University of Oxford on parameterizing and simulating from
+[0:00:17] on parameterizing and simulating from causal models in the Q a to help Robin
+[0:00:20] causal models in the Q a to help Robin answer questions we have Daniel Manila
+[0:00:23] answer questions we have Daniel Manila from Oxford and Vanessa didillas from
+[0:00:25] from Oxford and Vanessa didillas from Pips so if you have attractions please
+[0:00:27] Pips so if you have attractions please ask them as during the talk uh they will
+[0:00:30] ask them as during the talk uh they will be there too
+[0:00:31] be there too to help answer questions to help Robin
+[0:00:34] to help answer questions to help Robin answer questions as well after Robin
+[0:00:36] answer questions as well after Robin stock we have a discussion our
+[0:00:38] stock we have a discussion our discussion today is Larry Wasserman from
+[0:00:40] discussion today is Larry Wasserman from CMU so we very much look forward to that
+[0:00:43] CMU so we very much look forward to that part of the talk today as well and now I
+[0:00:46] part of the talk today as well and now I will hand it over to Georgia who handles
+[0:00:48] will hand it over to Georgia who handles the Q a today
+[0:00:54] thanks Emma um
+[0:00:55] um okay
+[0:00:56] okay um so as always please submit your
+[0:00:58] um so as always please submit your questions if you have them as they come
+[0:01:00] questions if you have them as they come up in your mind through the Q a there
+[0:01:02] up in your mind through the Q a there should be a button at the bottom of your
+[0:01:03] should be a button at the bottom of your screen with q a please refrain from
+[0:01:06] screen with q a please refrain from using the chat since it it makes it
+[0:01:08] using the chat since it it makes it easier for us to to keep track of the
+[0:01:10] easier for us to to keep track of the questions uh like Emma said we have
+[0:01:13] questions uh like Emma said we have Daniel and Vanessa and Q a answering the
+[0:01:15] Daniel and Vanessa and Q a answering the questions and maybe if you're lucky your
+[0:01:18] questions and maybe if you're lucky your question will be answered will be asked
+[0:01:20] question will be answered will be asked live as well so uh I think we're ready
+[0:01:22] live as well so uh I think we're ready for Robin now
+[0:01:27] great feel free to share
+[0:01:39] right I think everyone can see that yes
+[0:01:40] yes okay well thanks very much Georgia and
+[0:01:42] okay well thanks very much Georgia and Emma and uh Ying for inviting me to give
+[0:01:44] Emma and uh Ying for inviting me to give this talk it's a great privilege
+[0:01:47] this talk it's a great privilege um so I mean in this series which has
+[0:01:49] um so I mean in this series which has now been going on for three years the
+[0:01:52] now been going on for three years the third anniversary on Friday
+[0:01:54] third anniversary on Friday um there have been lots of talks all
+[0:01:56] um there have been lots of talks all about different kinds of causal models
+[0:01:58] about different kinds of causal models and today I'm going to talk about
+[0:02:00] and today I'm going to talk about something maybe slightly different which
+[0:02:02] something maybe slightly different which is how for some of these causal models
+[0:02:04] is how for some of these causal models you might parametrize them
+[0:02:06] you might parametrize them and that can give you a likelihood which
+[0:02:07] and that can give you a likelihood which enables you to simulate from them and
+[0:02:10] enables you to simulate from them and also just to fit them using
+[0:02:11] also just to fit them using likelihood-based methods
+[0:02:17] so all of this is Joint work with Vanessa dealers who uh has Emma said is
+[0:02:20] Vanessa dealers who uh has Emma said is from uh the University of Bremen and the
+[0:02:22] from uh the University of Bremen and the leiblings institute for prevention
+[0:02:23] leiblings institute for prevention research and epidemiology uh known as
+[0:02:26] research and epidemiology uh known as bips
+[0:02:28] bips and it's sort of outlined for my talk
+[0:02:30] and it's sort of outlined for my talk today I'm going to start off by giving a
+[0:02:33] today I'm going to start off by giving a very brief introduction to causal
+[0:02:34] very brief introduction to causal inference
+[0:02:36] inference and some problems which exist with some
+[0:02:40] and some problems which exist with some causal models as they are generally used
+[0:02:43] causal models as they are generally used then we're going to give in this next
+[0:02:46] then we're going to give in this next section our solution which involves
+[0:02:47] section our solution which involves using marginal modeling techniques from
+[0:02:50] using marginal modeling techniques from marginal modeling
+[0:02:51] marginal modeling in the third part we'll have some more
+[0:02:53] in the third part we'll have some more theoretical results in the fourth part
+[0:02:55] theoretical results in the fourth part some simulations and then we'll end with
+[0:02:57] some simulations and then we'll end with some other applications of of our
+[0:02:59] some other applications of of our parameterization
+[0:03:05] okay so section one what is causal inference
+[0:03:06] inference so it's a kind of typical problem in
+[0:03:08] so it's a kind of typical problem in causal inference is where we want to
+[0:03:10] causal inference is where we want to model an outcome as though uh the
+[0:03:12] model an outcome as though uh the treatments that have been assigned have
+[0:03:14] treatments that have been assigned have had been assigned in a specific way and
+[0:03:16] had been assigned in a specific way and obviously the most common uh way we
+[0:03:18] obviously the most common uh way we might want to imagine that the treatment
+[0:03:20] might want to imagine that the treatment was assigned is at random
+[0:03:23] was assigned is at random unfortunately observationally this is
+[0:03:25] unfortunately observationally this is not often the case so at most we might
+[0:03:28] not often the case so at most we might be willing to assume that there's some
+[0:03:30] be willing to assume that there's some set of observable covariates that we've
+[0:03:32] set of observable covariates that we've measured that they can be used to
+[0:03:35] measured that they can be used to identify the causal effect because they
+[0:03:37] identify the causal effect because they are considered to be sufficient to
+[0:03:38] are considered to be sufficient to control for confounding
+[0:03:41] control for confounding so this basically means that any
+[0:03:42] so this basically means that any statistical estimator of the causal
+[0:03:45] statistical estimator of the causal estimate of Interest which in our case
+[0:03:47] estimate of Interest which in our case here is the causal effect of when we
+[0:03:49] here is the causal effect of when we intervene on a what happens to the
+[0:03:51] intervene on a what happens to the distribution of Y is going to involve
+[0:03:53] distribution of Y is going to involve either some adjustment using these
+[0:03:55] either some adjustment using these covarent Z or some re-weighting so we
+[0:03:58] covarent Z or some re-weighting so we might first estimate the distribution of
+[0:04:00] might first estimate the distribution of a given Z and use the propensity score
+[0:04:02] a given Z and use the propensity score to re-weight or some other fairly
+[0:04:05] to re-weight or some other fairly complicated method for obtaining
+[0:04:08] complicated method for obtaining identifying this cause of effect
+[0:04:14] um and a sort of consequence of this is that the Interventional likelihood for
+[0:04:17] that the Interventional likelihood for such a model in terms of the
+[0:04:18] such a model in terms of the observational data that you get from it
+[0:04:20] observational data that you get from it is very complicated and it means that
+[0:04:22] is very complicated and it means that basically you can't do likelihood-based
+[0:04:25] basically you can't do likelihood-based inference so for example you can't find
+[0:04:27] inference so for example you can't find the maximum likelihood estimator of the
+[0:04:30] the maximum likelihood estimator of the strength of this Edge in the causal
+[0:04:32] strength of this Edge in the causal sense because you can't evaluate the
+[0:04:34] sense because you can't evaluate the likelihood and it also precludes
+[0:04:36] likelihood and it also precludes anything like a fully Bayesian approach
+[0:04:38] anything like a fully Bayesian approach to modeling something like this
+[0:04:46] okay so to take a slightly more concrete example this is a causal model and it
+[0:04:49] example this is a causal model and it represents a sequential treatment
+[0:04:53] represents a sequential treatment um study so here the story is at the
+[0:04:56] um study so here the story is at the beginning of the study a doctor
+[0:04:58] beginning of the study a doctor randomizes her patients to have some
+[0:05:00] randomizes her patients to have some dose of a treatment and we're going to
+[0:05:02] dose of a treatment and we're going to call that dose a
+[0:05:04] call that dose a and a little later she evaluates some
+[0:05:07] and a little later she evaluates some intermediate outcome which we're going
+[0:05:08] intermediate outcome which we're going to call Zed
+[0:05:10] to call Zed and then on the basis of both that
+[0:05:12] and then on the basis of both that initial treatment and the first outcome
+[0:05:14] initial treatment and the first outcome she then re-randomizes a second
+[0:05:17] she then re-randomizes a second treatment B conditionally on those first
+[0:05:20] treatment B conditionally on those first two values
+[0:05:21] two values and then finally we observe this final
+[0:05:23] and then finally we observe this final outcome y
+[0:05:26] outcome y and then of course because these two
+[0:05:27] and then of course because these two observations are measured on the same
+[0:05:29] observations are measured on the same patients we'll assume that
+[0:05:31] patients we'll assume that um they'll be correlated due to
+[0:05:32] um they'll be correlated due to unobserved characteristics for patients
+[0:05:34] unobserved characteristics for patients and we represent that by this latent
+[0:05:36] and we represent that by this latent variable U which has z and y as its
+[0:05:39] variable U which has z and y as its children
+[0:05:44] and then maybe we're interested in what would have happened if B had been
+[0:05:45] would have happened if B had been assigned completely at randomly at
+[0:05:47] assigned completely at randomly at random rather than dependent on the
+[0:05:49] random rather than dependent on the values of A and Z so in fact we want to
+[0:05:51] values of A and Z so in fact we want to sort of
+[0:05:52] sort of probabilistically sever these two edges
+[0:05:56] probabilistically sever these two edges and it was first shown how to do this in
+[0:05:59] and it was first shown how to do this in a seminal 1986 paper by Jamie Robbins
+[0:06:02] a seminal 1986 paper by Jamie Robbins using what he calls the G formula
+[0:06:05] using what he calls the G formula so what we do is take our factorization
+[0:06:07] so what we do is take our factorization of the observable distribution so a z b
+[0:06:10] of the observable distribution so a z b and Y
+[0:06:11] and Y uh and factorize it according to the
+[0:06:13] uh and factorize it according to the causal ordering
+[0:06:14] causal ordering and then what we notice is that the
+[0:06:16] and then what we notice is that the thing we need to kind of get rid of the
+[0:06:18] thing we need to kind of get rid of the dependence we need to get rid of is B's
+[0:06:20] dependence we need to get rid of is B's dependence on a and z
+[0:06:22] dependence on a and z unfortunately that is one of the factors
+[0:06:24] unfortunately that is one of the factors in this factorization so all we need to
+[0:06:26] in this factorization so all we need to do is delete that factor
+[0:06:29] do is delete that factor and for a it doesn't depend on anything
+[0:06:31] and for a it doesn't depend on anything so all we need to do is delete its
+[0:06:33] so all we need to do is delete its margin at the front here and that leaves
+[0:06:34] margin at the front here and that leaves us with the distribution of Z given a
+[0:06:37] us with the distribution of Z given a multiplied by the distribution of Y
+[0:06:39] multiplied by the distribution of Y given a z and b
+[0:06:42] given a z and b okay and that gives us the
+[0:06:45] okay and that gives us the Interventional distribution over both z
+[0:06:47] Interventional distribution over both z and y jointly
+[0:06:49] and y jointly um and of course it is just a
+[0:06:51] um and of course it is just a probability distribution so if we want
+[0:06:52] probability distribution so if we want to know uh the distribution over y only
+[0:06:55] to know uh the distribution over y only all we have to do is integrate this
+[0:06:56] all we have to do is integrate this quantity over Z
+[0:06:58] quantity over Z and that gives us the G formula which is
+[0:07:00] and that gives us the G formula which is in this green box down here
+[0:07:03] in this green box down here and this quantity is sometimes called a
+[0:07:06] and this quantity is sometimes called a marginal structural model
+[0:07:08] marginal structural model um
+[0:07:09] um and this sort of shows that you can
+[0:07:12] and this sort of shows that you can identify it relatively straightforwardly
+[0:07:18] um so that's great there are some problems with it though so it suppose
+[0:07:21] problems with it though so it suppose that you're interested in in maybe
+[0:07:22] that you're interested in in maybe testing whether or not a actually has a
+[0:07:25] testing whether or not a actually has a causal effect on y uh conditionally on B
+[0:07:28] causal effect on y uh conditionally on B so in other words does this marginal
+[0:07:31] so in other words does this marginal structure will actually depend upon a at
+[0:07:32] structure will actually depend upon a at all
+[0:07:33] all and it turns out that's quite difficult
+[0:07:37] and it turns out that's quite difficult um why is it so difficult well
+[0:07:39] um why is it so difficult well um partly it's because the likelihood is
+[0:07:41] um partly it's because the likelihood is so complicated so in discussing marginal
+[0:07:43] so complicated so in discussing marginal structural models uh Robbins himself
+[0:07:45] structural models uh Robbins himself notes there's a great difficulty in
+[0:07:47] notes there's a great difficulty in performing likelihood-based inference
+[0:07:49] performing likelihood-based inference because the likelihood for these kinds
+[0:07:51] because the likelihood for these kinds of models is what he calls a
+[0:07:53] of models is what he calls a computational nightmare so in other
+[0:07:55] computational nightmare so in other words if you try and write down a
+[0:07:57] words if you try and write down a likelihood which contains some
+[0:07:59] likelihood which contains some particular nice parametric model for
+[0:08:01] particular nice parametric model for this piece of the distribution that's
+[0:08:03] this piece of the distribution that's functional and what you're left with is
+[0:08:05] functional and what you're left with is a bit of a a mess
+[0:08:10] and then the second reason we have a problem is because this model suffers
+[0:08:12] problem is because this model suffers from something called the genol Paradox
+[0:08:13] from something called the genol Paradox which is due to to Robins as well but
+[0:08:16] which is due to to Robins as well but also Larry uh he's going to talk about
+[0:08:18] also Larry uh he's going to talk about this afterwards so what you might think
+[0:08:21] this afterwards so what you might think of doing is well we've got these two
+[0:08:23] of doing is well we've got these two conditional distributions so so why
+[0:08:26] conditional distributions so so why don't we just specify a nice model for Z
+[0:08:28] don't we just specify a nice model for Z given a
+[0:08:30] given a and another nice model for y given a z
+[0:08:32] and another nice model for y given a z and b
+[0:08:33] and b and compute what this quantity is
+[0:08:36] and compute what this quantity is and then maybe we fiddle with the
+[0:08:38] and then maybe we fiddle with the parameters of these two models a bit
+[0:08:40] parameters of these two models a bit until we get to a point where the thing
+[0:08:42] until we get to a point where the thing does not depend on a
+[0:08:44] does not depend on a unfortunately that doesn't work as uh
+[0:08:48] unfortunately that doesn't work as uh Jamie and Rob Larry showed
+[0:08:51] Jamie and Rob Larry showed um so the idea is
+[0:08:53] um so the idea is basically unless your models are
+[0:08:55] basically unless your models are completely linear
+[0:08:57] completely linear in which case you don't really have any
+[0:08:58] in which case you don't really have any problems at all you can't necessarily
+[0:09:02] problems at all you can't necessarily uh find a
+[0:09:04] uh find a um a collection of parameter values
+[0:09:07] um a collection of parameter values which will give you this quantity not
+[0:09:09] which will give you this quantity not depending upon a at all
+[0:09:11] depending upon a at all so let's take a very simple example
+[0:09:13] so let's take a very simple example let's suppose that Z is binary and we
+[0:09:15] let's suppose that Z is binary and we model it as a logistic regression
+[0:09:17] model it as a logistic regression conditional in a
+[0:09:19] conditional in a and that a y is unbounded and we model
+[0:09:22] and that a y is unbounded and we model it as mean as a linear function of a z
+[0:09:24] it as mean as a linear function of a z and b
+[0:09:26] and b so it's pretty easy to then compute that
+[0:09:28] so it's pretty easy to then compute that the Interventional mean of Y after we go
+[0:09:31] the Interventional mean of Y after we go in and fix a and b to particular values
+[0:09:33] in and fix a and b to particular values is given by just these two terms which
+[0:09:36] is given by just these two terms which come out and then this final term the Z
+[0:09:39] come out and then this final term the Z will just become the mean of z
+[0:09:42] will just become the mean of z um
+[0:09:43] um given a right which is X bit of alpha a
+[0:09:47] given a right which is X bit of alpha a so we can see now that this null
+[0:09:49] so we can see now that this null hypothesis will only hold if first of
+[0:09:52] hypothesis will only hold if first of all beta a is zero because we need this
+[0:09:54] all beta a is zero because we need this term to be zero
+[0:09:56] term to be zero and second of all if this final term is
+[0:09:58] and second of all if this final term is constant in in capital A so that means
+[0:10:01] constant in in capital A so that means either beta Z has to be zero or Alpha
+[0:10:04] either beta Z has to be zero or Alpha has to be zero
+[0:10:05] has to be zero so we need
+[0:10:07] so we need and if we translate this into
+[0:10:08] and if we translate this into Independence is this means that either Y
+[0:10:10] Independence is this means that either Y is completely independent of A and Z
+[0:10:12] is completely independent of A and Z given B
+[0:10:14] given B or essentially a is independent of Z and
+[0:10:17] or essentially a is independent of Z and of Y given z and b
+[0:10:20] of Y given z and b so we need an extra Independence above
+[0:10:23] so we need an extra Independence above the one that we're actually interested
+[0:10:25] the one that we're actually interested in which is we want y we want y not to
+[0:10:28] in which is we want y we want y not to be independent of to be independent of a
+[0:10:29] be independent of to be independent of a given B in this causal sense
+[0:10:32] given B in this causal sense so this is a much more restrictive
+[0:10:34] so this is a much more restrictive hypothesis that we actually end up
+[0:10:35] hypothesis that we actually end up having to test if we use these
+[0:10:37] having to test if we use these parametric models
+[0:10:40] parametric models so the sort of lesson here is that just
+[0:10:42] so the sort of lesson here is that just specifying nice parametric models for
+[0:10:44] specifying nice parametric models for these two distributions and then playing
+[0:10:46] these two distributions and then playing around with the parameters is not the
+[0:10:48] around with the parameters is not the way to go if you want to simulate for a
+[0:10:50] way to go if you want to simulate for a model where this quantity does not
+[0:10:53] model where this quantity does not depend upon capital a
+[0:10:56] depend upon capital a and larian uh Jamie also show that if
+[0:10:59] and larian uh Jamie also show that if you have a hypothesis
+[0:11:02] you have a hypothesis um test of this model
+[0:11:05] um test of this model and then you try to test it
+[0:11:08] and then you try to test it assuming that these conditions are not
+[0:11:10] assuming that these conditions are not true then you will end up rejecting with
+[0:11:12] true then you will end up rejecting with probability one tending to one as the
+[0:11:14] probability one tending to one as the sample size grows
+[0:11:22] so another approach that people take generally when they're interested in
+[0:11:24] generally when they're interested in doing inference
+[0:11:25] doing inference is to propose models that are sort of
+[0:11:28] is to propose models that are sort of over parameterized and therefore
+[0:11:30] over parameterized and therefore generating they're not congenial
+[0:11:32] generating they're not congenial so what do I mean by that well a
+[0:11:35] so what do I mean by that well a congenial model is one where for any
+[0:11:38] congenial model is one where for any combination of the parameter values
+[0:11:39] combination of the parameter values there is a distribution which represents
+[0:11:41] there is a distribution which represents the restrictions that you've imposed
+[0:11:43] the restrictions that you've imposed whereas an uncongenial one tends to give
+[0:11:46] whereas an uncongenial one tends to give too many restrictions and there may not
+[0:11:48] too many restrictions and there may not exist a distribution that satisfies them
+[0:11:50] exist a distribution that satisfies them all
+[0:11:51] all so here's a simple example from paper by
+[0:11:54] so here's a simple example from paper by lawyersital
+[0:11:55] lawyersital so they consider a mediation model with
+[0:11:58] so they consider a mediation model with a treatment a mediator M and a binary
+[0:12:00] a treatment a mediator M and a binary outcome y
+[0:12:01] outcome y and they suggest the following moment
+[0:12:03] and they suggest the following moment restrictions so the first is that y
+[0:12:06] restrictions so the first is that y conditional on a is a logistic
+[0:12:08] conditional on a is a logistic regression so it's linear in in a
+[0:12:11] regression so it's linear in in a and also that y conditional On A and M
+[0:12:13] and also that y conditional On A and M is a logistic regression so it's linear
+[0:12:15] is a logistic regression so it's linear in a and m
+[0:12:16] in a and m but unfortunately the logistic function
+[0:12:19] but unfortunately the logistic function is not collapsible which means that
+[0:12:21] is not collapsible which means that unless B to m is equal to zero
+[0:12:24] unless B to m is equal to zero and then the two models just got to be
+[0:12:26] and then the two models just got to be the same
+[0:12:27] the same then there is no non-trivial model that
+[0:12:30] then there is no non-trivial model that will satisfy these restrictions
+[0:12:33] will satisfy these restrictions so
+[0:12:34] so this is a sort of warning that if you
+[0:12:36] this is a sort of warning that if you try and just specify models and hope
+[0:12:38] try and just specify models and hope then it's quite likely you end up with a
+[0:12:40] then it's quite likely you end up with a situation where there's no logical
+[0:12:43] situation where there's no logical possibility of such a distribution
+[0:12:45] possibility of such a distribution existing
+[0:12:46] existing and I should just say this works very
+[0:12:48] and I should just say this works very well if you're interested in inference
+[0:12:50] well if you're interested in inference and that paper is interested in
+[0:12:52] and that paper is interested in inference and they get good results
+[0:12:58] and just in case you thought this was only a feature of static models
+[0:13:00] only a feature of static models um actually it's not so this is the
+[0:13:02] um actually it's not so this is the example of what are called history
+[0:13:03] example of what are called history adjusted marginal structural models
+[0:13:05] adjusted marginal structural models um which show that the same thing can
+[0:13:07] um which show that the same thing can easily happen in a time-bearing
+[0:13:09] easily happen in a time-bearing situation
+[0:13:14] so what is it that we want from this talk
+[0:13:17] what is it that we want from this talk the first thing is we'd like to be able
+[0:13:18] the first thing is we'd like to be able to describe a joint distribution over
+[0:13:21] to describe a joint distribution over the observational data
+[0:13:24] the observational data of all the variables so that's
+[0:13:25] of all the variables so that's confounders treatments and any outcomes
+[0:13:28] confounders treatments and any outcomes that satisfies three properties so first
+[0:13:31] that satisfies three properties so first we've got an explicitly provided
+[0:13:33] we've got an explicitly provided parametrization of the causal function
+[0:13:35] parametrization of the causal function that we're interested in so that's the P
+[0:13:37] that we're interested in so that's the P of Y given do A and B in the previous
+[0:13:39] of Y given do A and B in the previous example
+[0:13:40] example we want to allow the rest of the
+[0:13:42] we want to allow the rest of the distribution to be as flexible as
+[0:13:43] distribution to be as flexible as possible
+[0:13:44] possible and we want it to remain coherent and
+[0:13:47] and we want it to remain coherent and unambiguous so coherent I mean we don't
+[0:13:49] unambiguous so coherent I mean we don't want restrictions that aren't possible
+[0:13:51] want restrictions that aren't possible aren't feasible to meet and ambiguous we
+[0:13:54] aren't feasible to meet and ambiguous we want to say that we're specifying
+[0:13:56] want to say that we're specifying everything in the model
+[0:14:01] and next we'd like to be able to simulate from that distribution p
+[0:14:04] simulate from that distribution p such that first of all the data can
+[0:14:06] such that first of all the data can exhibit a complex confounding structure
+[0:14:09] exhibit a complex confounding structure if we're looking at it observationally
+[0:14:11] if we're looking at it observationally but if we perform the intervention
+[0:14:13] but if we perform the intervention assuming it's identifiable then we'll
+[0:14:15] assuming it's identifiable then we'll see that it does indeed obey the causal
+[0:14:17] see that it does indeed obey the causal model that we specified back here in
+[0:14:20] model that we specified back here in part one
+[0:14:25] and then thirdly we'd like to be able to fit these models
+[0:14:27] fit these models especially models that are typically
+[0:14:29] especially models that are typically only fitted in a semi-parametric way
+[0:14:30] only fitted in a semi-parametric way such as marginal structural models using
+[0:14:33] such as marginal structural models using likelihood-based methods
+[0:14:35] likelihood-based methods and you because you may not want to do
+[0:14:36] and you because you may not want to do this because you might be worried about
+[0:14:38] this because you might be worried about modeling specification but it's useful
+[0:14:40] modeling specification but it's useful from the perspective of uh seeing that
+[0:14:43] from the perspective of uh seeing that the maximum likely estimator is the most
+[0:14:45] the maximum likely estimator is the most efficient possible model and therefore
+[0:14:47] efficient possible model and therefore maybe using it as something like a lower
+[0:14:48] maybe using it as something like a lower bound or how good your inference could
+[0:14:50] bound or how good your inference could possibly be
+[0:14:56] okay so what is our solution
+[0:14:59] so what is our solution um to these problems
+[0:15:01] um to these problems so what we're going to do is just
+[0:15:03] so what we're going to do is just rewrite the model a little bit to show
+[0:15:05] rewrite the model a little bit to show that it is a bit more General so I'm
+[0:15:06] that it is a bit more General so I'm going to call this causal distribution
+[0:15:09] going to call this causal distribution that I was talking about earlier P star
+[0:15:11] that I was talking about earlier P star of z and y given a and b now
+[0:15:14] of z and y given a and b now um but I'm defining it in the same way
+[0:15:17] um but I'm defining it in the same way so we can ask what we know about this
+[0:15:19] so we can ask what we know about this model
+[0:15:21] model so we know the margin over y because
+[0:15:23] so we know the margin over y because that's something that we've been given
+[0:15:25] that's something that we've been given so the analyst presumably wants to know
+[0:15:27] so the analyst presumably wants to know what the parameters are in this piece
+[0:15:34] um we also know something else about the other margin so which is that it doesn't
+[0:15:36] other margin so which is that it doesn't depend upon B
+[0:15:39] depend upon B right so if we marginalize that y here
+[0:15:40] right so if we marginalize that y here we're just left with the ordinary
+[0:15:42] we're just left with the ordinary distribution of Z given a and that's
+[0:15:44] distribution of Z given a and that's because when we did the intervention
+[0:15:46] because when we did the intervention here we severed the dependence of B on Z
+[0:15:49] here we severed the dependence of B on Z given a and so therefore there's also no
+[0:15:52] given a and so therefore there's also no dependence of Z on B given a
+[0:15:55] dependence of Z on B given a so this is an important restriction that
+[0:15:57] so this is an important restriction that we have to impose on our model
+[0:16:02] obviously this isn't quite enough to specify the full uh conditional
+[0:16:05] specify the full uh conditional distribution here so we need something
+[0:16:07] distribution here so we need something else and uh anyone who knows anything
+[0:16:10] else and uh anyone who knows anything about marginal modeling we'll say you
+[0:16:12] about marginal modeling we'll say you need some sort of conditional dependence
+[0:16:14] need some sort of conditional dependence measure
+[0:16:15] measure for y and z
+[0:16:16] for y and z under this distribution P star and we
+[0:16:20] under this distribution P star and we don't sort of prescribe what this
+[0:16:22] don't sort of prescribe what this dependence measure has to be in
+[0:16:23] dependence measure has to be in principle it can be any uh model any
+[0:16:27] principle it can be any uh model any quantity which enables you to recover
+[0:16:29] quantity which enables you to recover The Joint distribution in a smooth way
+[0:16:31] The Joint distribution in a smooth way but for every every example in this
+[0:16:33] but for every every example in this presentation I'm going to use a copula
+[0:16:35] presentation I'm going to use a copula and if they're both just if z and y are
+[0:16:38] and if they're both just if z and y are both discrete you can use
+[0:16:39] both discrete you can use um a conditional odds ratio
+[0:16:49] so the solution to this problem is to specify nice parametric models for three
+[0:16:52] specify nice parametric models for three bits
+[0:16:53] bits the first is the distribution of what I
+[0:16:55] the first is the distribution of what I call the past which is everything before
+[0:16:57] call the past which is everything before the outcome you're interested in
+[0:16:59] the outcome you're interested in then you have a model for the quantity
+[0:17:01] then you have a model for the quantity of Interest which again in our case was
+[0:17:03] of Interest which again in our case was P of Y given do a and b
+[0:17:06] P of Y given do a and b and finally we have a parametration for
+[0:17:08] and finally we have a parametration for this dependence measure which could be a
+[0:17:10] this dependence measure which could be a copular or a conditional odds ratio or
+[0:17:12] copular or a conditional odds ratio or something else like a risk ratio
+[0:17:20] so these quantities have three great properties so first of all you can
+[0:17:22] properties so first of all you can completely specify the joint
+[0:17:24] completely specify the joint distribution with these three things so
+[0:17:27] distribution with these three things so any distribution can be written more or
+[0:17:29] any distribution can be written more or less in this form
+[0:17:31] less in this form the first two things are always
+[0:17:33] the first two things are always variation independent which means any
+[0:17:35] variation independent which means any value of this distribution and any value
+[0:17:38] value of this distribution and any value of this distribution can combine to give
+[0:17:40] of this distribution can combine to give a distribution that has both of them as
+[0:17:44] a distribution that has both of them as as part of it
+[0:17:45] as part of it but you can often also choose this third
+[0:17:48] but you can often also choose this third piece be variation independent so for
+[0:17:51] piece be variation independent so for example a copular and a conditional
+[0:17:53] example a copular and a conditional answer ratio are both always variation
+[0:17:55] answer ratio are both always variation independent of their margins
+[0:17:57] independent of their margins and that obviously has big advantages so
+[0:18:00] and that obviously has big advantages so for example if you want to do Bayesian
+[0:18:02] for example if you want to do Bayesian inference you can just specify
+[0:18:03] inference you can just specify independent priors and not worry about
+[0:18:06] independent priors and not worry about whether that's coherent
+[0:18:09] whether that's coherent and they also don't have any redundancy
+[0:18:10] and they also don't have any redundancy so I'm not trying to specify anything uh
+[0:18:13] so I'm not trying to specify anything uh in two different ways
+[0:18:15] in two different ways um when I use this decomposition of the
+[0:18:18] um when I use this decomposition of the distribution
+[0:18:20] distribution so because of this we refer to it as a
+[0:18:22] so because of this we refer to it as a Frugal parametrization it gives us
+[0:18:24] Frugal parametrization it gives us exactly what we want it got I.E the
+[0:18:26] exactly what we want it got I.E the quantity of interest is parametrized
+[0:18:28] quantity of interest is parametrized um and then the rest of the model is
+[0:18:30] um and then the rest of the model is specified only as much as it needs to be
+[0:18:39] Okay so we've seen that there's sort of generally a tension between three
+[0:18:41] generally a tension between three different things one is a simple
+[0:18:44] different things one is a simple specification of the joint distribution
+[0:18:45] specification of the joint distribution P which obviously helps with things like
+[0:18:48] P which obviously helps with things like simulation and likelihood-based
+[0:18:50] simulation and likelihood-based inference because computationally will
+[0:18:52] inference because computationally will just make it much easier to perform
+[0:18:54] just make it much easier to perform those two tasks
+[0:18:57] those two tasks then this simple specification of the
+[0:18:59] then this simple specification of the target of inference which is this uh
+[0:19:02] target of inference which is this uh Star Distribution of the outcome given
+[0:19:04] Star Distribution of the outcome given the two treatments
+[0:19:06] the two treatments in order that the model is nicely
+[0:19:09] in order that the model is nicely interpretable
+[0:19:10] interpretable and then the Third
+[0:19:12] and then the Third tension is with this these marginal
+[0:19:14] tension is with this these marginal constraints right so I need to be able
+[0:19:15] constraints right so I need to be able to enforce that Z is independent of B
+[0:19:18] to enforce that Z is independent of B given a in the previous example and in
+[0:19:21] given a in the previous example and in general I need to make sure I can
+[0:19:23] general I need to make sure I can enforce constraints of that kind
+[0:19:26] enforce constraints of that kind and The Frugal pronunciation is sort of
+[0:19:29] and The Frugal pronunciation is sort of perfect for these uh second and third
+[0:19:31] perfect for these uh second and third points it gives you exactly what we want
+[0:19:33] points it gives you exactly what we want for the target of inference and it can
+[0:19:34] for the target of inference and it can exactly enforce the constraints and it
+[0:19:36] exactly enforce the constraints and it sacrifices only a little bit
+[0:19:38] sacrifices only a little bit for the nice simple specification of the
+[0:19:41] for the nice simple specification of the joint distribution but it's not
+[0:19:43] joint distribution but it's not sufficient to prevent us from simulating
+[0:19:45] sufficient to prevent us from simulating from it or from doing likelihood-based
+[0:19:47] from it or from doing likelihood-based inference
+[0:19:53] okay I'll just stop there and see if anyone has any questions
+[0:19:59] hi uh we don't have any questions for the moment so we can continue with the
+[0:20:01] the moment so we can continue with the talk um generally when you stop and ask
+[0:20:03] talk um generally when you stop and ask questions people remember to ask their
+[0:20:05] questions people remember to ask their questions at that moment so maybe in two
+[0:20:07] questions at that moment so maybe in two minutes we'll have one but you can go
+[0:20:10] minutes we'll have one but you can go ahead for now
+[0:20:12] ahead for now okay thanks very much
+[0:20:15] okay thanks very much so to generalize what we've already seen
+[0:20:18] so to generalize what we've already seen I'm going to use the following notation
+[0:20:20] I'm going to use the following notation so a is going to be uh in general a
+[0:20:23] so a is going to be uh in general a vector of the treatments and possibly
+[0:20:26] vector of the treatments and possibly effect modifiers so anything I want to
+[0:20:28] effect modifiers so anything I want to be in my conditioning set
+[0:20:30] be in my conditioning set now why is going to be a vector of all
+[0:20:33] now why is going to be a vector of all the outcomes that we're interested in
+[0:20:35] the outcomes that we're interested in and Z is going to be a vector of any
+[0:20:38] and Z is going to be a vector of any variables that we want to be
+[0:20:39] variables that we want to be marginalized
+[0:20:41] marginalized so sort of cartoon
+[0:20:43] so sort of cartoon of the setup is that you have these
+[0:20:45] of the setup is that you have these observed confounder Z and then a
+[0:20:48] observed confounder Z and then a treatment a and an outcome y
+[0:20:50] treatment a and an outcome y um but actually as we'll see it doesn't
+[0:20:52] um but actually as we'll see it doesn't have to be as simple as that we've
+[0:20:54] have to be as simple as that we've already seen that you don't have to have
+[0:20:56] already seen that you don't have to have all the treatments be after the
+[0:20:59] all the treatments be after the covariates so we've in this model we had
+[0:21:01] covariates so we've in this model we had a treatment that came before the covert
+[0:21:02] a treatment that came before the covert and in fact there's no strict causal
+[0:21:05] and in fact there's no strict causal order on any of these quantities
+[0:21:08] order on any of these quantities and the fact that they can be Vector
+[0:21:09] and the fact that they can be Vector valued also makes this a lot more
+[0:21:11] valued also makes this a lot more flexible than it might initially seem
+[0:21:16] and then the object that we're interested in is some conditional
+[0:21:18] interested in is some conditional distribution that we obtain on the
+[0:21:20] distribution that we obtain on the outcomes given the treatments and effect
+[0:21:22] outcomes given the treatments and effect modifiers
+[0:21:32] so this is a marginal distribution so but the margin of course is not the
+[0:21:34] so but the margin of course is not the standard margin so we need some way of
+[0:21:36] standard margin so we need some way of describing which margins are allowed
+[0:21:40] describing which margins are allowed um
+[0:21:40] um so we come up with this notion of what
+[0:21:42] so we come up with this notion of what we call cognate probability
+[0:21:44] we call cognate probability distributions
+[0:21:45] distributions so we're going to define a kernel
+[0:21:47] so we're going to define a kernel function W uh so this is just some
+[0:21:50] function W uh so this is just some conditional distribution over the uh
+[0:21:52] conditional distribution over the uh covariates conditional on the treatments
+[0:21:55] covariates conditional on the treatments so it's it's a conditional distribution
+[0:21:57] so it's it's a conditional distribution so it has to be non-negative and it has
+[0:22:00] so it has to be non-negative and it has to integrate to one over the values of
+[0:22:02] to integrate to one over the values of the covariates for each value of the
+[0:22:03] the covariates for each value of the treatment
+[0:22:05] treatment and we can allow it to be a smooth
+[0:22:06] and we can allow it to be a smooth function of the past so it could be for
+[0:22:09] function of the past so it could be for example the margin over Z or it could be
+[0:22:12] example the margin over Z or it could be the conditional of Z given a as we'll
+[0:22:14] the conditional of Z given a as we'll see in a minute
+[0:22:19] and then we're going to say that a probability distribution P star of Y
+[0:22:21] probability distribution P star of Y given a is cognate to P of Y given a
+[0:22:25] given a is cognate to P of Y given a within our joint distribution over all
+[0:22:27] within our joint distribution over all the variables
+[0:22:28] the variables if you can write it as an integral over
+[0:22:31] if you can write it as an integral over the full conditional of Y given the
+[0:22:34] the full conditional of Y given the treatments and the covariance
+[0:22:36] treatments and the covariance multiplied by a kernel function that
+[0:22:38] multiplied by a kernel function that satisfies the conditions up here
+[0:22:40] satisfies the conditions up here and then integrated out
+[0:22:42] and then integrated out integrating out the covariate values
+[0:22:46] integrating out the covariate values and then this uh this product here it
+[0:22:50] and then this uh this product here it sort of implicitly becomes our P Star
+[0:22:53] sort of implicitly becomes our P Star Distribution
+[0:22:58] okay so that's slightly abstract let's have some concrete examples
+[0:23:00] have some concrete examples so the first thing to note is that the
+[0:23:02] so the first thing to note is that the ordinary conditional is in fact cognate
+[0:23:05] ordinary conditional is in fact cognate to itself because if we put in the
+[0:23:08] to itself because if we put in the ordinary conditional of the covariate
+[0:23:10] ordinary conditional of the covariate given the outcomes then we recover the
+[0:23:13] given the outcomes then we recover the ordinary conditional here
+[0:23:16] ordinary conditional here and similarly the kind of classic
+[0:23:18] and similarly the kind of classic backdoor criteria type quantity that we
+[0:23:22] backdoor criteria type quantity that we get from this model is also cognates to
+[0:23:24] get from this model is also cognates to the ordinary condition of Y given a we
+[0:23:27] the ordinary condition of Y given a we just put in the margin over these
+[0:23:29] just put in the margin over these covariate Z instead of it's conditional
+[0:23:31] covariate Z instead of it's conditional on the outcome
+[0:23:34] on the outcome then we can also have slightly more
+[0:23:35] then we can also have slightly more complicated models so this one
+[0:23:38] complicated models so this one um to be sort of imagining here maybe
+[0:23:39] um to be sort of imagining here maybe we've got a treatment like alcohol an
+[0:23:42] we've got a treatment like alcohol an outcome like blood pressure and then
+[0:23:43] outcome like blood pressure and then we've measured someone's genes and their
+[0:23:46] we've measured someone's genes and their socioeconomic status but maybe we're not
+[0:23:49] socioeconomic status but maybe we're not so interested in how their socioeconomic
+[0:23:50] so interested in how their socioeconomic status modifies this effect but we are
+[0:23:53] status modifies this effect but we are interested in how their genes modify it
+[0:23:55] interested in how their genes modify it that in this case we could use the
+[0:23:57] that in this case we could use the distribution of the socioeconomic status
+[0:24:00] distribution of the socioeconomic status given the genes as our W and then that
+[0:24:03] given the genes as our W and then that would give us the quantity that we're
+[0:24:05] would give us the quantity that we're interested in here so it shows you how
+[0:24:08] interested in here so it shows you how this distribution changes as the
+[0:24:11] this distribution changes as the genetics of the personal change
+[0:24:13] genetics of the personal change foreign
+[0:24:18] we can also have slightly more exotic quantities so
+[0:24:20] quantities so um here I'm going to Define this y of a
+[0:24:22] um here I'm going to Define this y of a as the usual potential outcome for y
+[0:24:25] as the usual potential outcome for y when big a is set to be little a by some
+[0:24:28] when big a is set to be little a by some intervention
+[0:24:29] intervention and we can have quantities like this one
+[0:24:31] and we can have quantities like this one which basically says uh so what would
+[0:24:34] which basically says uh so what would happen to someone who had treatment a
+[0:24:37] happen to someone who had treatment a prime if we had set their treatment to
+[0:24:40] prime if we had set their treatment to be little a instead
+[0:24:42] be little a instead and it's just given by this so here we
+[0:24:44] and it's just given by this so here we just use the
+[0:24:46] just use the um uh the
+[0:24:48] um uh the W to be P of Z given a prime and then we
+[0:24:52] W to be P of Z given a prime and then we fix a prime over the two arms
+[0:24:55] fix a prime over the two arms assuming there's only two
+[0:24:57] assuming there's only two and what's sort of nice about this is
+[0:25:00] and what's sort of nice about this is we'll see is that uh an expectation of a
+[0:25:03] we'll see is that uh an expectation of a quantity like this appears in something
+[0:25:05] quantity like this appears in something called the effect of treatment on the
+[0:25:06] called the effect of treatment on the treated estimand so it means that we can
+[0:25:08] treated estimand so it means that we can also include this as one of our
+[0:25:10] also include this as one of our contrasts in a model and also simulate
+[0:25:13] contrasts in a model and also simulate from it and the problem likelihood-based
+[0:25:15] from it and the problem likelihood-based inference if we would like to
+[0:25:22] okay and then it's sort of formal definition of a general Frugal
+[0:25:23] definition of a general Frugal parametrization is that we have these
+[0:25:25] parametrization is that we have these three separate parametry models again we
+[0:25:27] three separate parametry models again we have the past the distribution of the
+[0:25:28] have the past the distribution of the covarix and the treatment
+[0:25:30] covarix and the treatment we have the quantity that we're
+[0:25:31] we have the quantity that we're interested in modeling
+[0:25:33] interested in modeling and we have some dependence measure and
+[0:25:35] and we have some dependence measure and this distribution can be anything that's
+[0:25:37] this distribution can be anything that's cognates to the ordinary conditional of
+[0:25:39] cognates to the ordinary conditional of the outcomes given the treatments and
+[0:25:42] the outcomes given the treatments and any effect modifiers
+[0:25:48] so this as I say means we can also model things like the effect of treatment on
+[0:25:51] things like the effect of treatment on the treated or the effect of treatment
+[0:25:52] the treated or the effect of treatment on the controls using this
+[0:25:54] on the controls using this parametrization very nicely
+[0:26:05] okay here's our main theorem which basically says uh what which kinds of
+[0:26:08] basically says uh what which kinds of parametrizations you can use
+[0:26:11] parametrizations you can use um in order to obtain a nice smooth
+[0:26:14] um in order to obtain a nice smooth model for P that includes some specific
+[0:26:18] model for P that includes some specific part P star
+[0:26:20] part P star so essentially it turns out you can do
+[0:26:22] so essentially it turns out you can do this
+[0:26:24] this if and only if the isomorphic
+[0:26:27] if and only if the isomorphic parametrization on the ordinary
+[0:26:29] parametrization on the ordinary conditional distribution
+[0:26:31] conditional distribution and then the ordinary dependence measure
+[0:26:33] and then the ordinary dependence measure just now evaluated on P rather than on P
+[0:26:37] just now evaluated on P rather than on P star
+[0:26:38] star if this if this pronunciation is smooth
+[0:26:41] if this if this pronunciation is smooth then so is this and vice versa
+[0:26:43] then so is this and vice versa so it's a nice very nice way to easily
+[0:26:46] so it's a nice very nice way to easily see whether a parameterization is a
+[0:26:47] see whether a parameterization is a sensible one or not
+[0:26:53] so this gives us exactly what we want the Best of Both Worlds a coherent joint
+[0:26:55] the Best of Both Worlds a coherent joint distribution P where we're able to
+[0:26:57] distribution P where we're able to specify the parametric form of this
+[0:27:00] specify the parametric form of this particular Target of Interest
+[0:27:08] okay any more questions at that point
+[0:27:16] um so Vanessa has done a lot of work in the Q a but I guess since we have an
+[0:27:18] the Q a but I guess since we have an open question we can take that one Dave
+[0:27:20] open question we can take that one Dave uh what calculus and possibility Vines
+[0:27:23] uh what calculus and possibility Vines could be included in the approach
+[0:27:26] could be included in the approach excellent question yes so um so we
+[0:27:28] excellent question yes so um so we certainly can use Vines
+[0:27:30] certainly can use Vines um so
+[0:27:32] um so I mean what's nice about cobblers is
+[0:27:34] I mean what's nice about cobblers is that they are pretty flexible so you can
+[0:27:36] that they are pretty flexible so you can have a wide range of uh of margins used
+[0:27:39] have a wide range of uh of margins used in them and buying copulas are a great
+[0:27:41] in them and buying copulas are a great example of just how flexible they can be
+[0:27:43] example of just how flexible they can be and they mean that you can eat more
+[0:27:45] and they mean that you can eat more easily put in extra conditional
+[0:27:46] easily put in extra conditional independencies for example if you want
+[0:27:48] independencies for example if you want to so
+[0:27:49] to so um
+[0:27:50] um yeah so there's a kind of uh particular
+[0:27:53] yeah so there's a kind of uh particular sorts of Independence models are
+[0:27:55] sorts of Independence models are available using Vine copulas if you want
+[0:27:58] available using Vine copulas if you want to to go that way so
+[0:28:00] to to go that way so um yes essentially you can use any sort
+[0:28:03] um yes essentially you can use any sort of uh copular that works
+[0:28:10] Robin can I ask you a short question um
+[0:28:11] um if you go to the previous slide so
+[0:28:14] if you go to the previous slide so is this does this mean that you just
+[0:28:16] is this does this mean that you just need to specify
+[0:28:24] um it doesn't mean that Y A and Z Are All That You observe you can kind of
+[0:28:25] All That You observe you can kind of leave out some things or you don't have
+[0:28:28] leave out some things or you don't have to observe all the variables these are
+[0:28:30] to observe all the variables these are just the ones that figure in this model
+[0:28:32] just the ones that figure in this model and that's the only parametrizations you
+[0:28:34] and that's the only parametrizations you need yeah so so I mean this is saying
+[0:28:38] need yeah so so I mean this is saying you you're parameterizing the joint
+[0:28:39] you you're parameterizing the joint distribution of Y A and Z right and
+[0:28:41] distribution of Y A and Z right and you're not promising anything else so
+[0:28:43] you're not promising anything else so okay that's all so anything you want to
+[0:28:46] okay that's all so anything you want to model that you need it in your
+[0:28:47] model that you need it in your parametrization and you need to classify
+[0:28:50] parametrization and you need to classify it as either an outcome
+[0:28:52] it as either an outcome um
+[0:28:52] um a treatment or something you want to get
+[0:28:54] a treatment or something you want to get rid of
+[0:29:00] okay great great thanks do you think we have time for one more question I think
+[0:29:03] have time for one more question I think it's related to a previous one in the Q
+[0:29:05] it's related to a previous one in the Q a
+[0:29:06] a um so can this approach be easily
+[0:29:08] um so can this approach be easily extended to a more complex situations
+[0:29:10] extended to a more complex situations such as the existence of exposure
+[0:29:13] such as the existence of exposure mediator interactions and the outcome or
+[0:29:15] mediator interactions and the outcome or categorical mediator and the outcome Etc
+[0:29:18] categorical mediator and the outcome Etc so yeah so mediation is actually hard
+[0:29:22] so yeah so mediation is actually hard um and there's a sort of non-smoothness
+[0:29:23] um and there's a sort of non-smoothness built in
+[0:29:25] built in um so that's kind of one case we really
+[0:29:27] um so that's kind of one case we really can't do but you can certainly do much
+[0:29:29] can't do but you can certainly do much more complicated models than this so in
+[0:29:31] more complicated models than this so in particular you can do survival models as
+[0:29:33] particular you can do survival models as we'll see a bit later on and you can
+[0:29:35] we'll see a bit later on and you can also have structural nested meme models
+[0:29:37] also have structural nested meme models with the same approach so you get these
+[0:29:40] with the same approach so you get these much more complicated time varying
+[0:29:41] much more complicated time varying structures
+[0:29:43] structures over time but uh you know so it's it's
+[0:29:46] over time but uh you know so it's it's not just these little toy models that we
+[0:29:49] not just these little toy models that we can do uh we can use this approach on
+[0:29:53] can do uh we can use this approach on thank you I think we can continue so
+[0:29:56] thank you I think we can continue so hopefully we can get to those models
+[0:30:05] okay so let's do a simulation then and our method for simulating is to First
+[0:30:07] our method for simulating is to First obtain data from the intervened
+[0:30:10] obtain data from the intervened distribution
+[0:30:11] distribution um using our marginal modeling
+[0:30:12] um using our marginal modeling techniques and then use rejection
+[0:30:14] techniques and then use rejection sampling to get back the data that comes
+[0:30:16] sampling to get back the data that comes from the observational world
+[0:30:18] from the observational world so let's start off by assuming that A
+[0:30:21] so let's start off by assuming that A and B have been intervened on and then
+[0:30:23] and B have been intervened on and then set now to be independent the newbies
+[0:30:25] set now to be independent the newbies with parameter half
+[0:30:28] with parameter half and then we can sample from our copula
+[0:30:31] and then we can sample from our copula over Y and Z get conditional quantiles
+[0:30:34] over Y and Z get conditional quantiles so uh
+[0:30:36] so uh here I could include you in the couple
+[0:30:38] here I could include you in the couple if I wanted to but I'm choosing not to
+[0:30:41] if I wanted to but I'm choosing not to um and if I did then I could separate
+[0:30:43] um and if I did then I could separate out the different dependencies of this
+[0:30:45] out the different dependencies of this uh sort of
+[0:30:47] uh sort of confounded dependence and the direct
+[0:30:49] confounded dependence and the direct dependence
+[0:30:51] dependence um but here I'm just going to choose a
+[0:30:53] um but here I'm just going to choose a gaussian copula with a correlation
+[0:30:55] gaussian copula with a correlation that's chosen so that it's always
+[0:30:56] that's chosen so that it's always between -1 and 1 and I choose it depend
+[0:30:59] between -1 and 1 and I choose it depend on a in this case I could also choose to
+[0:31:02] on a in this case I could also choose to depend upon B if I wanted I just haven't
+[0:31:04] depend upon B if I wanted I just haven't done that here
+[0:31:06] done that here okay and then we want to make sure the
+[0:31:08] okay and then we want to make sure the margins of z and y have the correct
+[0:31:10] margins of z and y have the correct correct distributions
+[0:31:12] correct distributions so we're going to use inversion to turn
+[0:31:16] so we're going to use inversion to turn Zeds conditional quantiles into a
+[0:31:18] Zeds conditional quantiles into a conditional distribution and we're going
+[0:31:20] conditional distribution and we're going to choose it to have this exponential
+[0:31:22] to choose it to have this exponential distribution with a rate given by this
+[0:31:25] distribution with a rate given by this function here so X of uh 0.2 times a
+[0:31:29] function here so X of uh 0.2 times a minus 0.3
+[0:31:32] minus 0.3 and then we're going to do the same
+[0:31:33] and then we're going to do the same thing to y
+[0:31:39] um and we're going to choose its Interventional distribution to be normal
+[0:31:41] Interventional distribution to be normal with this linear mean and variance one
+[0:31:46] with this linear mean and variance one and at this point I now have samples
+[0:31:48] and at this point I now have samples from the intervene distribution right so
+[0:31:51] from the intervene distribution right so I know exactly uh what form y has
+[0:31:54] I know exactly uh what form y has but I that's not what I wanted right I
+[0:31:57] but I that's not what I wanted right I wanted distribution from the
+[0:31:58] wanted distribution from the observational
+[0:31:59] observational distribution
+[0:32:00] distribution so I need to do some rejection sampling
+[0:32:04] so I need to do some rejection sampling and what I'm going to do is to take the
+[0:32:08] and what I'm going to do is to take the ratio of the distribution I want for B
+[0:32:10] ratio of the distribution I want for B which is this logistic regression with
+[0:32:13] which is this logistic regression with this probability of being equal to one
+[0:32:15] this probability of being equal to one I'm going to divide it by the
+[0:32:17] I'm going to divide it by the probability it was actually equal to 1
+[0:32:19] probability it was actually equal to 1 in the sample which is you know same as
+[0:32:22] in the sample which is you know same as multiplying by two
+[0:32:24] multiplying by two I'll then bound that over the space of
+[0:32:27] I'll then bound that over the space of the variables and uh then sample some
+[0:32:31] the variables and uh then sample some independent uniforms and reject if those
+[0:32:35] independent uniforms and reject if those uniforms are greater than the value of
+[0:32:38] uniforms are greater than the value of the ratio that results
+[0:32:41] the ratio that results and you can do this using the RR package
+[0:32:43] and you can do this using the RR package which is available at this GitHub page
+[0:32:45] which is available at this GitHub page and you can replicate the experiments
+[0:32:48] and you can replicate the experiments that are being demonstrated now
+[0:32:57] Okay so we've generated now 10 000 data points from that causal model
+[0:32:59] points from that causal model and we're going to start just by fitting
+[0:33:01] and we're going to start just by fitting a naive regression model as though we
+[0:33:03] a naive regression model as though we don't know that this is not going to
+[0:33:04] don't know that this is not going to work
+[0:33:05] work and uh so we're just regressing y On A
+[0:33:08] and uh so we're just regressing y On A and B and hoping for the best
+[0:33:10] and B and hoping for the best these are the True Values that we put in
+[0:33:13] these are the True Values that we put in um and this is the estimate that the
+[0:33:16] um and this is the estimate that the model gives us and you can see that the
+[0:33:18] model gives us and you can see that the bias is several times in the case of
+[0:33:21] bias is several times in the case of this intercept parameter and the B
+[0:33:23] this intercept parameter and the B parameter uh what the standard error is
+[0:33:25] parameter uh what the standard error is supposed to be
+[0:33:26] supposed to be so the P values as you can imagine will
+[0:33:29] so the P values as you can imagine will be very very small
+[0:33:34] alternatively we could do some causal inference and actually estimate this by
+[0:33:37] inference and actually estimate this by using inverse probability weighting
+[0:33:39] using inverse probability weighting so let's fit a logistic regression for B
+[0:33:42] so let's fit a logistic regression for B given a and z because we know that this
+[0:33:44] given a and z because we know that this model is correctly specified
+[0:33:47] model is correctly specified and then we can inverse weight each of
+[0:33:50] and then we can inverse weight each of the observations to get a pseudo
+[0:33:51] the observations to get a pseudo population and fit an outcome model
+[0:33:53] population and fit an outcome model using those inverse weights
+[0:33:55] using those inverse weights and this time we see that the bias is
+[0:33:57] and this time we see that the bias is much smaller and in fact in every case
+[0:34:00] much smaller and in fact in every case it's within one standard error of the
+[0:34:02] it's within one standard error of the true value of these parameters
+[0:34:05] true value of these parameters so this suggests two things first of all
+[0:34:08] so this suggests two things first of all our simulation is working excellent and
+[0:34:11] our simulation is working excellent and second of all it suggests that inverse
+[0:34:13] second of all it suggests that inverse probability weighting does what it's
+[0:34:14] probability weighting does what it's supposed to which is you know a nice
+[0:34:16] supposed to which is you know a nice side effect
+[0:34:22] but of course because we actually have a likelihood we can also use maximum
+[0:34:23] likelihood we can also use maximum likelihood estimation to obtain our
+[0:34:25] likelihood estimation to obtain our estimates
+[0:34:27] estimates um and if we do that we see we get
+[0:34:30] um and if we do that we see we get slightly smaller bias and indeed the
+[0:34:32] slightly smaller bias and indeed the standard errors if we compare them to
+[0:34:33] standard errors if we compare them to the previous slide they are again a bit
+[0:34:35] the previous slide they are again a bit smaller and that's not surprising of
+[0:34:36] smaller and that's not surprising of course because we know that maximum
+[0:34:39] course because we know that maximum likely estimation is at least
+[0:34:41] likely estimation is at least asymptotically the most efficient method
+[0:34:42] asymptotically the most efficient method available
+[0:34:44] available so just to say this shows that if you
+[0:34:47] so just to say this shows that if you have the correct model then you'll get
+[0:34:49] have the correct model then you'll get efficient estimation but of course it's
+[0:34:51] efficient estimation but of course it's not recommended in practice because if
+[0:34:54] not recommended in practice because if your model is mispecified you may get
+[0:34:55] your model is mispecified you may get poor estimates and be overly optimistic
+[0:34:58] poor estimates and be overly optimistic about your wrong estimates
+[0:35:08] okay so now let's uh form these analyzes again this time on a thousand different
+[0:35:09] again this time on a thousand different data sets only with with only 250
+[0:35:12] data sets only with with only 250 observations in each
+[0:35:14] observations in each and we can see that again the naive
+[0:35:15] and we can see that again the naive estimator is consistently biased
+[0:35:18] estimator is consistently biased so particularly the first and third
+[0:35:20] so particularly the first and third coefficients are not doing a good job of
+[0:35:22] coefficients are not doing a good job of estimating the actual values
+[0:35:24] estimating the actual values whereas inverse probability weighting
+[0:35:27] whereas inverse probability weighting augmented inverse probability rating
+[0:35:29] augmented inverse probability rating which is doubly robust
+[0:35:30] which is doubly robust and the maximum likely estimates are all
+[0:35:33] and the maximum likely estimates are all uh unbiased
+[0:35:35] uh unbiased and uh it's a bit hard to see on this
+[0:35:38] and uh it's a bit hard to see on this plot because the compounding isn't that
+[0:35:40] plot because the compounding isn't that strong but the mle does have slightly
+[0:35:42] strong but the mle does have slightly narrower
+[0:35:44] narrower um box plots than the other two methods
+[0:35:46] um box plots than the other two methods and we can make the confounding a bit
+[0:35:48] and we can make the confounding a bit stronger so before we had this function
+[0:35:51] stronger so before we had this function being a over 2 plus Z over two if we
+[0:35:53] being a over 2 plus Z over two if we change it to just Z
+[0:35:55] change it to just Z then if this exaggerates all the um
+[0:35:59] then if this exaggerates all the um uh difficulties so the naive method
+[0:36:01] uh difficulties so the naive method becomes even worse
+[0:36:03] becomes even worse inverse probability weighting W robust
+[0:36:05] inverse probability weighting W robust and maximum active estimation all have
+[0:36:08] and maximum active estimation all have wider box plots now and you can also see
+[0:36:10] wider box plots now and you can also see that the inverse probability weights are
+[0:36:12] that the inverse probability weights are actually slightly biased at the sample
+[0:36:14] actually slightly biased at the sample size here and similarly doubly robust
+[0:36:16] size here and similarly doubly robust estimates are a little bit biased as
+[0:36:18] estimates are a little bit biased as well
+[0:36:19] well and it's much clearer on this plot that
+[0:36:21] and it's much clearer on this plot that maximum likelihood estimation is more
+[0:36:23] maximum likelihood estimation is more efficient than inverse probability
+[0:36:25] efficient than inverse probability weighting and W robust estimation
+[0:36:35] okay excellent so um what else can we do with this method
+[0:36:37] um what else can we do with this method with this uh parametrization so the
+[0:36:40] with this uh parametrization so the first thing is and this is I think it
+[0:36:42] first thing is and this is I think it presents what uh Vanessa was originally
+[0:36:44] presents what uh Vanessa was originally trying to do with the paper with we'll
+[0:36:45] trying to do with the paper with we'll have a craft that I mentioned earlier
+[0:36:46] have a craft that I mentioned earlier was to be able to simulate from Cox
+[0:36:50] was to be able to simulate from Cox marginal structural models which is a
+[0:36:51] marginal structural models which is a form of survival model where we model
+[0:36:53] form of survival model where we model the probability of survival to the next
+[0:36:56] the probability of survival to the next time Point conditional on having
+[0:36:58] time Point conditional on having survived to the previous time point
+[0:37:00] survived to the previous time point over a fixed regime of treatments so the
+[0:37:03] over a fixed regime of treatments so the story is here we have some treatments
+[0:37:05] story is here we have some treatments which are assumed to be assigned based
+[0:37:07] which are assumed to be assigned based on only observed variables so I.E the
+[0:37:10] on only observed variables so I.E the this time bearing observed covarent and
+[0:37:13] this time bearing observed covarent and previous treatments
+[0:37:15] previous treatments um and then we're allowing again so this
+[0:37:18] um and then we're allowing again so this is just a direct extension of the model
+[0:37:20] is just a direct extension of the model we had before we allow the covariates
+[0:37:23] we had before we allow the covariates the time brain compare it to be um
+[0:37:25] the time brain compare it to be um confounded with survival as well
+[0:37:28] confounded with survival as well but in terms of identification that
+[0:37:29] but in terms of identification that doesn't really make any difference
+[0:37:31] doesn't really make any difference but the point is we can simulate from
+[0:37:34] but the point is we can simulate from these models with a specified form for
+[0:37:37] these models with a specified form for this marginal structural model piece
+[0:37:44] and in a sense this resolves a sort of open problem in the literature because a
+[0:37:45] open problem in the literature because a lot of authors
+[0:37:46] lot of authors give methods for simulating from Cox
+[0:37:49] give methods for simulating from Cox marginal structural models but they
+[0:37:51] marginal structural models but they can't specify what the marginal
+[0:37:53] can't specify what the marginal structure is in the way that we can
+[0:37:55] structure is in the way that we can so the nice paper by Ruth Cleo and
+[0:37:57] so the nice paper by Ruth Cleo and authors where they use an additive
+[0:37:59] authors where they use an additive Hazard model
+[0:38:01] Hazard model um to get data that could be from a Cox
+[0:38:04] um to get data that could be from a Cox marginal structural model and then they
+[0:38:05] marginal structural model and then they compute what the parameters of that Cox
+[0:38:07] compute what the parameters of that Cox marginal structural model are but they
+[0:38:10] marginal structural model are but they can't then so easily say Okay I want
+[0:38:13] can't then so easily say Okay I want um I want data from this specific Cox
+[0:38:16] um I want data from this specific Cox marginal structural model
+[0:38:23] and this means that in particular it becomes much easier to simulate from
+[0:38:25] becomes much easier to simulate from under some null hypothesis so maybe you
+[0:38:27] under some null hypothesis so maybe you think that survival is actually
+[0:38:28] think that survival is actually completely independent of the treatments
+[0:38:30] completely independent of the treatments and you can also easily incorporate
+[0:38:32] and you can also easily incorporate something like a stationarity assumption
+[0:38:35] something like a stationarity assumption and there's a nice paper by Jessica
+[0:38:37] and there's a nice paper by Jessica young Eric Check and checking which
+[0:38:39] young Eric Check and checking which notes that actually this isn't at all
+[0:38:40] notes that actually this isn't at all trivial so
+[0:38:42] trivial so um there's a quote from that paper
+[0:38:43] um there's a quote from that paper talking about their own method they say
+[0:38:45] talking about their own method they say we may therefore be limited to
+[0:38:47] we may therefore be limited to simulation scenarios with the proposed
+[0:38:48] simulation scenarios with the proposed algorithm to unrealistic settings if we
+[0:38:52] algorithm to unrealistic settings if we wish to simultaneously generate data
+[0:38:53] wish to simultaneously generate data under the null and the message of this
+[0:38:56] under the null and the message of this paper is you don't have to be limited to
+[0:38:58] paper is you don't have to be limited to unrealistic situations
+[0:39:06] so another use which I'm particularly excited about for this method is to be
+[0:39:09] excited about for this method is to be able to integrate different kinds of
+[0:39:11] able to integrate different kinds of studies
+[0:39:13] studies into one uh source of evidence all about
+[0:39:17] into one uh source of evidence all about the same causal parameter
+[0:39:20] the same causal parameter so imagine you have a treatment and a
+[0:39:22] so imagine you have a treatment and a disease it's designed to treat and you
+[0:39:24] disease it's designed to treat and you have access to a few randomized control
+[0:39:26] have access to a few randomized control trials as well as some large
+[0:39:28] trials as well as some large observational databases
+[0:39:31] observational databases how do we combine the evidence from
+[0:39:33] how do we combine the evidence from those randomized control trials with the
+[0:39:36] those randomized control trials with the observational databases to
+[0:39:38] observational databases to quantitatively say how good we think
+[0:39:40] quantitatively say how good we think this treatment is
+[0:39:42] this treatment is and this is a paradigm I nicknamed many
+[0:39:44] and this is a paradigm I nicknamed many data it's a sort of analogy with big
+[0:39:46] data it's a sort of analogy with big data we don't have necessarily big data
+[0:39:48] data we don't have necessarily big data sets but we've got lots of them
+[0:39:51] sets but we've got lots of them and the point is using this
+[0:39:53] and the point is using this parametrization we can jointly describe
+[0:39:55] parametrization we can jointly describe these models because in the randomized
+[0:39:57] these models because in the randomized control trial the parameter of Interest
+[0:39:58] control trial the parameter of Interest might just be an ordinary conditional
+[0:40:00] might just be an ordinary conditional distribution
+[0:40:01] distribution and the observational
+[0:40:04] and the observational um study is going to be something with
+[0:40:06] um study is going to be something with this uh some more complicated functional
+[0:40:09] this uh some more complicated functional of the the whole distribution that is
+[0:40:11] of the the whole distribution that is generating that data
+[0:40:13] generating that data so we can jointly describe them and
+[0:40:15] so we can jointly describe them and indeed we are about to release a paper
+[0:40:18] indeed we are about to release a paper which uses Bayesian inference to combine
+[0:40:20] which uses Bayesian inference to combine a randomized control trial with a large
+[0:40:23] a randomized control trial with a large observational database
+[0:40:30] and then the third application of this is to fitting what are called nested
+[0:40:32] is to fitting what are called nested Markov models some nested markup models
+[0:40:35] Markov models some nested markup models and these are models which allow for
+[0:40:37] and these are models which allow for generalized conditional Independence
+[0:40:39] generalized conditional Independence constraints and they are generalized in
+[0:40:41] constraints and they are generalized in the sense that you have to first do an
+[0:40:44] the sense that you have to first do an an intervention you have to fix some
+[0:40:46] an intervention you have to fix some variables before you'll see the
+[0:40:48] variables before you'll see the independence so it's very much inspired
+[0:40:51] independence so it's very much inspired by the kind of causal models I've been
+[0:40:53] by the kind of causal models I've been looking at
+[0:40:58] um so here is a specific example of what's known as the vermograph
+[0:41:00] what's known as the vermograph so here the idea is that a does not have
+[0:41:04] so here the idea is that a does not have any direct effect on the outcome why but
+[0:41:06] any direct effect on the outcome why but if you look there's no M separation that
+[0:41:09] if you look there's no M separation that would tell you that a is independent of
+[0:41:11] would tell you that a is independent of Y in any sense so if I don't condition
+[0:41:14] Y in any sense so if I don't condition on z and b then this just leaves open
+[0:41:16] on z and b then this just leaves open that path uh the direction path here but
+[0:41:19] that path uh the direction path here but if I do conditional either Z or B then
+[0:41:22] if I do conditional either Z or B then it opens up this backdoor path here
+[0:41:24] it opens up this backdoor path here because Z is a Collider
+[0:41:30] um but it turns out perhaps unsurprisingly at this point if you uh
+[0:41:32] unsurprisingly at this point if you uh divide by the distribution of B given a
+[0:41:35] divide by the distribution of B given a and z then you get to a model where a
+[0:41:38] and z then you get to a model where a now is conditionally independent of Y
+[0:41:40] now is conditionally independent of Y given B
+[0:41:41] given B I mean it's precisely because there's no
+[0:41:44] I mean it's precisely because there's no directed Edge from a to Y in this model
+[0:41:46] directed Edge from a to Y in this model that that constraint arises
+[0:41:49] that that constraint arises so the constraint is exactly the one
+[0:41:51] so the constraint is exactly the one that we've been testing all along
+[0:41:53] that we've been testing all along um so it's very easy then to fit a model
+[0:41:55] um so it's very easy then to fit a model and check whether that constraint is is
+[0:41:58] and check whether that constraint is is true because we can just then compare
+[0:42:00] true because we can just then compare the likelihood for example
+[0:42:02] the likelihood for example um where this is set to be to have Zero
+[0:42:05] um where this is set to be to have Zero Effect and compare it to a model where
+[0:42:07] Effect and compare it to a model where it is not set to have Zero Effect
+[0:42:16] okay so to wrap up we presented this Frugal parameterization and used some
+[0:42:18] Frugal parameterization and used some methods from marginal modeling to
+[0:42:19] methods from marginal modeling to simulate from causal models
+[0:42:21] simulate from causal models and we've also shown that we can fit
+[0:42:23] and we've also shown that we can fit these models using likelihood-based
+[0:42:25] these models using likelihood-based methods specifically maximum likelier
+[0:42:26] methods specifically maximum likelier estimation
+[0:42:28] estimation I think the main thing I'd sort of like
+[0:42:30] I think the main thing I'd sort of like people to take from this talk is that a
+[0:42:33] people to take from this talk is that a lot of causal models are marginal and
+[0:42:35] lot of causal models are marginal and marginal models have been around for a
+[0:42:37] marginal models have been around for a long time and there's a lot of things
+[0:42:39] long time and there's a lot of things written about them so I would suggest
+[0:42:42] written about them so I would suggest that looking in the marginal model
+[0:42:43] that looking in the marginal model literature might be a good uh source of
+[0:42:46] literature might be a good uh source of inspiration for ways to attack causal
+[0:42:48] inspiration for ways to attack causal problems
+[0:42:53] there are lots of other applications of these parameterizations so we've seen
+[0:42:56] these parameterizations so we've seen marginal structural models survival
+[0:42:57] marginal structural models survival models but you can also look at Dynamic
+[0:43:00] models but you can also look at Dynamic treatment regimes structural nested
+[0:43:02] treatment regimes structural nested models uh stationarity We've mentioned
+[0:43:04] models uh stationarity We've mentioned briefly and data fusion
+[0:43:07] briefly and data fusion um obviously is relevant to our many
+[0:43:09] um obviously is relevant to our many data um paradigm
+[0:43:12] data um paradigm we can also do things like simulate from
+[0:43:14] we can also do things like simulate from arbitrary instrumental variables models
+[0:43:15] arbitrary instrumental variables models which are I think something that just
+[0:43:18] which are I think something that just hasn't really been attempted before
+[0:43:25] so limitation so the main limitation we have is that if you've got continuous
+[0:43:28] have is that if you've got continuous outcomes and to stimulates you need to
+[0:43:30] outcomes and to stimulates you need to do this reaction sampling
+[0:43:31] do this reaction sampling and in higher Dimensions this becomes
+[0:43:34] and in higher Dimensions this becomes really really inefficient so the bound
+[0:43:37] really really inefficient so the bound suffers from the curse dimensionality
+[0:43:39] suffers from the curse dimensionality because for every Dimension you add you
+[0:43:41] because for every Dimension you add you exponentially have to increase the bound
+[0:43:44] exponentially have to increase the bound and it just means that it's very hard to
+[0:43:47] and it just means that it's very hard to get any samples at all at that kind of
+[0:43:49] get any samples at all at that kind of scale
+[0:43:50] scale so we've been working on uh hamiltonian
+[0:43:53] so we've been working on uh hamiltonian Monte Carlo methods to speed this up and
+[0:43:55] Monte Carlo methods to speed this up and of course that's great it does come at
+[0:43:57] of course that's great it does come at the cost that now the data are not
+[0:43:59] the cost that now the data are not exactly from the distribution that you
+[0:44:01] exactly from the distribution that you want but that's really there's sort of
+[0:44:04] want but that's really there's sort of in some sense it seems like there's
+[0:44:05] in some sense it seems like there's nothing we can do about that if we can't
+[0:44:07] nothing we can do about that if we can't use rejection sampling there aren't
+[0:44:09] use rejection sampling there aren't really many other methods that give you
+[0:44:11] really many other methods that give you exact samples from a distribution that
+[0:44:13] exact samples from a distribution that you can't
+[0:44:14] you can't just evaluate directly
+[0:44:18] okay thank you very much
+[0:44:28] thanks Robin uh super interesting uh there are some questions in the Q a but
+[0:44:31] there are some questions in the Q a but um Vanessa and Daniel are doing a good
+[0:44:34] um Vanessa and Daniel are doing a good job answering so maybe we move on to the
+[0:44:36] job answering so maybe we move on to the discussion now and then we'll have some
+[0:44:38] discussion now and then we'll have some time to chat after that about
+[0:44:40] time to chat after that about any other questions that's come up
+[0:44:43] any other questions that's come up so Larry um Robin if you can stop
+[0:44:47] so Larry um Robin if you can stop sharing your screen that would be
+[0:44:48] sharing your screen that would be wonderful
+[0:44:49] wonderful um and Larry
+[0:44:52] um and Larry okay let me uh
+[0:44:54] okay let me uh get my
+[0:45:01] slides up here
+[0:45:08] hopefully everybody can see that is that readable
+[0:45:12] can see that is that readable yes yes okay
+[0:45:14] yes yes okay um
+[0:45:15] um yeah so I'm uh I really like this uh
+[0:45:19] yeah so I'm uh I really like this uh work by uh uh Robin and Vanessa when the
+[0:45:22] work by uh uh Robin and Vanessa when the paper
+[0:45:24] paper first was on archive some time ago uh I
+[0:45:27] first was on archive some time ago uh I caught my attention because this is this
+[0:45:29] caught my attention because this is this is a problem that uh was brought to my
+[0:45:31] is a problem that uh was brought to my attention by Jamie Robbins in the 90s
+[0:45:33] attention by Jamie Robbins in the 90s and ever since then I thought kind of
+[0:45:35] and ever since then I thought kind of thought about it in the background
+[0:45:36] thought about it in the background so this grabbed my attention
+[0:45:42] um and actually during the pandemic I worked on some causal inference uh for
+[0:45:44] worked on some causal inference uh for for epidemic stuff where these epidemic
+[0:45:48] for epidemic stuff where these epidemic models which uh there's countless of
+[0:45:50] models which uh there's countless of them typically have exactly this genome
+[0:45:52] them typically have exactly this genome problem that uh Robinson so I was very
+[0:45:55] problem that uh Robinson so I was very interested and I have to say uh Robin
+[0:45:57] interested and I have to say uh Robin was very kind I I annoyed him with some
+[0:46:00] was very kind I I annoyed him with some emails uh askings for some
+[0:46:02] emails uh askings for some clarifications which he he kindly gave
+[0:46:04] clarifications which he he kindly gave me
+[0:46:05] me um but what I thought I'd do so
+[0:46:08] um but what I thought I'd do so haven't thought about this particular
+[0:46:10] haven't thought about this particular topic before then it could I know that
+[0:46:12] topic before then it could I know that there's a lot of information uh Robin
+[0:46:14] there's a lot of information uh Robin went through and it can be kind of
+[0:46:16] went through and it can be kind of confusing and Abstract so I thought I
+[0:46:18] confusing and Abstract so I thought I would sort of give you my very quick
+[0:46:20] would sort of give you my very quick um uh re-explanation of what Robin and
+[0:46:23] um uh re-explanation of what Robin and Vanessa are doing
+[0:46:25] Vanessa are doing um and in particular I have one slide
+[0:46:27] um and in particular I have one slide where I'm going to show you kind of on
+[0:46:29] where I'm going to show you kind of on one slide here's how you would actually
+[0:46:30] one slide here's how you would actually implement this in a very simple case
+[0:46:33] implement this in a very simple case assuming I've gotten all this right uh
+[0:46:35] assuming I've gotten all this right uh Robin and Vanessa can correct me if I'm
+[0:46:38] Robin and Vanessa can correct me if I'm making a an air here but
+[0:46:40] making a an air here but um so just very quickly just to remind
+[0:46:42] um so just very quickly just to remind you what the problem is is to construct
+[0:46:44] you what the problem is is to construct a joint distribution with a given causal
+[0:46:46] a joint distribution with a given causal model
+[0:46:47] model and the way I like to think about it is
+[0:46:49] and the way I like to think about it is if you start with a given joint
+[0:46:51] if you start with a given joint distribution and I ask you what's the
+[0:46:53] distribution and I ask you what's the causal distribution for the outcome for
+[0:46:56] causal distribution for the outcome for the counter facts we'll say y of a when
+[0:46:57] the counter facts we'll say y of a when I intervene in set a to be little a
+[0:47:00] I intervene in set a to be little a that's sort of what we're more familiar
+[0:47:02] that's sort of what we're more familiar with doing and that's the G formula
+[0:47:04] with doing and that's the G formula right so the way I would write that is
+[0:47:06] right so the way I would write that is you start with the joint distribution
+[0:47:07] you start with the joint distribution you apply Robin's G formula and you get
+[0:47:09] you apply Robin's G formula and you get the causal distribution and we're kind
+[0:47:11] the causal distribution and we're kind of all used to Computing causal effects
+[0:47:13] of all used to Computing causal effects that way and what Vanessa and Robin are
+[0:47:15] that way and what Vanessa and Robin are doing is sort of the reverse given a
+[0:47:18] doing is sort of the reverse given a causal model how can I construct a joint
+[0:47:20] causal model how can I construct a joint distribution that has that causal model
+[0:47:23] distribution that has that causal model so I want to you give me P of a I'm
+[0:47:25] so I want to you give me P of a I'm going to construct a joint P such that
+[0:47:27] going to construct a joint P such that that joint P if I apply the G formula I
+[0:47:30] that joint P if I apply the G formula I get back P of a
+[0:47:32] get back P of a okay so it's kind of the reverse process
+[0:47:33] okay so it's kind of the reverse process in some sense
+[0:47:35] in some sense um and there's lots of causal models in
+[0:47:37] um and there's lots of causal models in particular uh Robin focused on marginal
+[0:47:39] particular uh Robin focused on marginal structural models well you mentioned
+[0:47:41] structural models well you mentioned structural nested models these were
+[0:47:43] structural nested models these were created
+[0:47:44] created um you know but mainly by Jamie Robinson
+[0:47:46] um you know but mainly by Jamie Robinson his colleagues and they're really
+[0:47:47] his colleagues and they're really important because for a variety of
+[0:47:50] important because for a variety of reasons they lead the tractable
+[0:47:51] reasons they lead the tractable estimators
+[0:47:53] estimators um they're typically semi-parametric
+[0:47:55] um they're typically semi-parametric which means you can leave a lot of the
+[0:47:56] which means you can leave a lot of the distribution unspecified and as Rob
+[0:47:59] distribution unspecified and as Rob mentioned they avoid this genol Paradox
+[0:48:01] mentioned they avoid this genol Paradox in a sense they allowed you to spend
+[0:48:03] in a sense they allowed you to spend your modeling wisely you're putting the
+[0:48:04] your modeling wisely you're putting the model where where it really where it
+[0:48:06] model where where it really where it really matters
+[0:48:08] really matters um and just to give you a more
+[0:48:10] um and just to give you a more complicated example of a marginal
+[0:48:12] complicated example of a marginal structural model so you can see why
+[0:48:13] structural model so you can see why they're so useful uh here's a typical
+[0:48:15] they're so useful uh here's a typical time during study where you have
+[0:48:16] time during study where you have covariates treatment and outcome at each
+[0:48:19] covariates treatment and outcome at each time over a long period of time capital
+[0:48:22] time over a long period of time capital T and uh if you're familiar with the G
+[0:48:25] T and uh if you're familiar with the G formula you know that I can talk about
+[0:48:26] formula you know that I can talk about the counter factual why if I had set all
+[0:48:29] the counter factual why if I had set all the treatments equal to particular
+[0:48:31] the treatments equal to particular values and
+[0:48:32] values and uh you get this complicated functional
+[0:48:34] uh you get this complicated functional that Robin's derived and you might say
+[0:48:38] that Robin's derived and you might say okay well how do I estimate that and as
+[0:48:40] okay well how do I estimate that and as Robin pointed out you could just stick
+[0:48:42] Robin pointed out you could just stick in models wherever you see p of x given
+[0:48:45] in models wherever you see p of x given the past or Y given the past and this is
+[0:48:48] the past or Y given the past and this is uh not going to work
+[0:48:49] uh not going to work for the reasons he said because you get
+[0:48:51] for the reasons he said because you get this null Paradox where strangely enough
+[0:48:54] this null Paradox where strangely enough you're going to end up rejecting the
+[0:48:55] you're going to end up rejecting the null hypothesis even when there's no
+[0:48:57] null hypothesis even when there's no treatment effect
+[0:48:59] treatment effect um so if you haven't seen that before
+[0:49:00] um so if you haven't seen that before you just you can trust trust us that
+[0:49:03] you just you can trust trust us that that's the case but uh you know a
+[0:49:05] that's the case but uh you know a marginal instruction model can really
+[0:49:07] marginal instruction model can really simplify things so you might say well I
+[0:49:09] simplify things so you might say well I think the treatment effect could be
+[0:49:10] think the treatment effect could be approximated by a linear function like
+[0:49:12] approximated by a linear function like this
+[0:49:12] this and then you can estimate the treatment
+[0:49:15] and then you can estimate the treatment effect very easily we just use an
+[0:49:17] effect very easily we just use an estimating equation to estimate the
+[0:49:19] estimating equation to estimate the betas and you get no null Paradox and
+[0:49:21] betas and you get no null Paradox and you haven't even had to specify the
+[0:49:23] you haven't even had to specify the whole data generating process so so
+[0:49:26] whole data generating process so so that's just to remind you why things
+[0:49:28] that's just to remind you why things like marginal structure models are so
+[0:49:30] like marginal structure models are so important and so useful
+[0:49:32] important and so useful uh but as was pointed out they only
+[0:49:35] uh but as was pointed out they only specify a part of the distribution so
+[0:49:37] specify a part of the distribution so why do you want to specify the rest of
+[0:49:39] why do you want to specify the rest of the decision Robin already told you for
+[0:49:42] the decision Robin already told you for simulation convenience of parametric
+[0:49:44] simulation convenience of parametric models and so on
+[0:49:46] models and so on um he didn't mention checking fit I
+[0:49:47] um he didn't mention checking fit I wonder it's going to something I'll ask
+[0:49:49] wonder it's going to something I'll ask about at the end is I think maybe these
+[0:49:51] about at the end is I think maybe these methods could be used once you have the
+[0:49:52] methods could be used once you have the rest of the model specified if you do
+[0:49:54] rest of the model specified if you do that flexibly then the only thing in
+[0:49:57] that flexibly then the only thing in question is the marginal instructional
+[0:49:59] question is the marginal instructional model and so we could look at residuals
+[0:50:01] model and so we could look at residuals and things like that and perhaps check
+[0:50:03] and things like that and perhaps check fit so here's I'm going to give you my
+[0:50:05] fit so here's I'm going to give you my one slide summary of how to do this but
+[0:50:08] one slide summary of how to do this but first just to remind you the notation
+[0:50:10] first just to remind you the notation um P sub a or p y set a or do a as
+[0:50:16] um P sub a or p y set a or do a as peroxide or with the counterfeit they
+[0:50:19] peroxide or with the counterfeit they all mean the same thing here and what
+[0:50:20] all mean the same thing here and what I'm in these slides that's just the
+[0:50:22] I'm in these slides that's just the causal distribution of y when you said a
+[0:50:24] causal distribution of y when you said a which is given by this G formula and the
+[0:50:28] which is given by this G formula and the other thing Robin mentioned just to
+[0:50:30] other thing Robin mentioned just to remind you is these things called
+[0:50:31] remind you is these things called copulas the key thing here is any joint
+[0:50:35] copulas the key thing here is any joint density can always be written as its
+[0:50:37] density can always be written as its marginals times this extra thing called
+[0:50:39] marginals times this extra thing called the copula density
+[0:50:41] the copula density um okay so that's just to remind you of
+[0:50:43] um okay so that's just to remind you of some of the notation that came up so
+[0:50:45] some of the notation that came up so this is my one slide summary of how you
+[0:50:46] this is my one slide summary of how you do this and I hope I've got it right
+[0:50:48] do this and I hope I've got it right this is the basic Frugal Construction in
+[0:50:50] this is the basic Frugal Construction in a toy model and the end is Robin
+[0:50:51] a toy model and the end is Robin emphasize you can do this in complicated
+[0:50:54] emphasize you can do this in complicated models too but so here's the idea I have
+[0:50:56] models too but so here's the idea I have covariates or confounder's X treatment a
+[0:51:00] covariates or confounder's X treatment a Oh Come y I want to specify some joint
+[0:51:03] Oh Come y I want to specify some joint distribution so Step One is I'm going to
+[0:51:05] distribution so Step One is I'm going to write this as the past P of x y and then
+[0:51:10] write this as the past P of x y and then the density of Y given the past so I
+[0:51:13] the density of Y given the past so I haven't done anything yet
+[0:51:14] haven't done anything yet now
+[0:51:16] now um I'm going to use the fact that the
+[0:51:19] um I'm going to use the fact that the the density of Y given X and A is
+[0:51:22] the density of Y given X and A is exactly the same as the causal
+[0:51:25] exactly the same as the causal distribution of Y given X set a and
+[0:51:28] distribution of Y given X set a and that's why don't I have to do a g
+[0:51:29] that's why don't I have to do a g formula or something like that that's
+[0:51:31] formula or something like that that's because we've also conditioning on all
+[0:51:33] because we've also conditioning on all the covariates in this problem so this
+[0:51:35] the covariates in this problem so this is a particular
+[0:51:36] is a particular case where conditioning and finding the
+[0:51:39] case where conditioning and finding the causal distribution just happen to be
+[0:51:40] causal distribution just happen to be the same not true in general but just in
+[0:51:42] the same not true in general but just in this simple case so I haven't done
+[0:51:44] this simple case so I haven't done anything except to rewrite things this
+[0:51:46] anything except to rewrite things this way and now I look at this and I say
+[0:51:48] way and now I look at this and I say well think of a is fixed and now I just
+[0:51:50] well think of a is fixed and now I just have a density for y given X so I'm just
+[0:51:53] have a density for y given X so I'm just going to use the definition of
+[0:51:55] going to use the definition of conditional density and write that as
+[0:51:57] conditional density and write that as the joint divided by the
+[0:51:59] the joint divided by the marginal so again I have just Elementary
+[0:52:02] marginal so again I have just Elementary probability
+[0:52:08] um next step is I'm going to use this copula idea I take this this is a joint
+[0:52:10] copula idea I take this this is a joint density so I can always write it as its
+[0:52:12] density so I can always write it as its margin the marginals X and marginal for
+[0:52:16] margin the marginals X and marginal for y times some copula
+[0:52:18] y times some copula and you can see this part is going to
+[0:52:20] and you can see this part is going to cancel the Pax is going to cancel
+[0:52:23] cancel the Pax is going to cancel this first part is just whatever density
+[0:52:25] this first part is just whatever density you're specifying for x and a and the
+[0:52:27] you're specifying for x and a and the things in the red and the blue the red
+[0:52:29] things in the red and the blue the red is something we've already pre-specified
+[0:52:31] is something we've already pre-specified this is what I wanted to inject into the
+[0:52:34] this is what I wanted to inject into the model this is my marginal structure
+[0:52:35] model this is my marginal structure model this is the density for y
+[0:52:38] model this is the density for y when a is fixed and so we're starting
+[0:52:40] when a is fixed and so we're starting with the assumption that I've specified
+[0:52:42] with the assumption that I've specified a model for this and this is somehow the
+[0:52:44] a model for this and this is somehow the you know the whole game is I want to
+[0:52:46] you know the whole game is I want to construct a joint density for everything
+[0:52:48] construct a joint density for everything and inject this into the model somehow
+[0:52:51] and inject this into the model somehow and Robinson Vanessa's construction
+[0:52:53] and Robinson Vanessa's construction allows me to do it here because now I
+[0:52:55] allows me to do it here because now I can just stick it in here but I've just
+[0:52:57] can just stick it in here but I've just got to specify one extra piece say this
+[0:52:59] got to specify one extra piece say this copula and so uh we're done is what this
+[0:53:03] copula and so uh we're done is what this is saying is I can rewrite the joint
+[0:53:05] is saying is I can rewrite the joint density as the density of X and I can
+[0:53:06] density as the density of X and I can put in anything I want there I put in my
+[0:53:09] put in anything I want there I put in my marginal structural model here which I
+[0:53:11] marginal structural model here which I have control over now and then I have to
+[0:53:13] have control over now and then I have to just specify some sort of copula and so
+[0:53:16] just specify some sort of copula and so this is as I understand it if I've done
+[0:53:18] this is as I understand it if I've done it right how I would use the Frugal
+[0:53:21] it right how I would use the Frugal parameterization to inject a marginal
+[0:53:24] parameterization to inject a marginal structural model and get out of a
+[0:53:26] structural model and get out of a well-specified joint density now of
+[0:53:28] well-specified joint density now of course in more complicated situations
+[0:53:31] course in more complicated situations it's not that simple but this is the
+[0:53:32] it's not that simple but this is the basic idea
+[0:53:33] basic idea and really I should have put parameters
+[0:53:36] and really I should have put parameters and everything and the nice thing is
+[0:53:38] and everything and the nice thing is that I can take these to be variation
+[0:53:40] that I can take these to be variation independent that is you know I can
+[0:53:41] independent that is you know I can freely vary beta and gamma and Alpha and
+[0:53:44] freely vary beta and gamma and Alpha and that's important uh
+[0:53:46] that's important uh and if you're interested just in a
+[0:53:49] and if you're interested just in a conditional distribution of Y given x a
+[0:53:50] conditional distribution of Y given x a by the way that just now becomes the
+[0:53:53] by the way that just now becomes the marginal structure model times this
+[0:53:54] marginal structure model times this copula
+[0:53:56] copula um and I just want to emphasize this
+[0:53:58] um and I just want to emphasize this variation events is important it's one
+[0:54:00] variation events is important it's one of the ingredients in the null paradox
+[0:54:03] of the ingredients in the null paradox um I will say that I'm not convinced
+[0:54:05] um I will say that I'm not convinced that completely solves the null Paradox
+[0:54:07] that completely solves the null Paradox I'll come back to this point if the
+[0:54:09] I'll come back to this point if the model is correct the variation
+[0:54:11] model is correct the variation Independence does solve the null period
+[0:54:13] Independence does solve the null period you won't end up rejecting the null uh
+[0:54:15] you won't end up rejecting the null uh incorrectly but if the model is just an
+[0:54:18] incorrectly but if the model is just an approximation is it always if there can
+[0:54:20] approximation is it always if there can still I think be uh you're not
+[0:54:23] still I think be uh you're not guaranteed necessarily to get the
+[0:54:24] guaranteed necessarily to get the parameter Bay to be zero because you're
+[0:54:26] parameter Bay to be zero because you're estimating a projection
+[0:54:28] estimating a projection um so there might be some you might say
+[0:54:30] um so there might be some you might say residual in all Paradox but in some
+[0:54:32] residual in all Paradox but in some sense it's reduced so so now I'm just
+[0:54:35] sense it's reduced so so now I'm just going to get to conclude
+[0:54:37] going to get to conclude uh with some a few questions there are
+[0:54:40] uh with some a few questions there are other attempts to do this
+[0:54:42] other attempts to do this um
+[0:54:43] um there's one by uh Babino
+[0:54:46] there's one by uh Babino um Andrea rottnitzki and Jamie Robbins
+[0:54:48] um Andrea rottnitzki and Jamie Robbins which uh it's the paper is written in
+[0:54:51] which uh it's the paper is written in terms of regression functions but you
+[0:54:53] terms of regression functions but you can do the same thing in terms of
+[0:54:54] can do the same thing in terms of densities
+[0:54:56] densities um and I think it would go like this you
+[0:54:59] um and I think it would go like this you would
+[0:55:00] would Define this ratio which is simply the
+[0:55:03] Define this ratio which is simply the density of X Y given X and a divided by
+[0:55:06] density of X Y given X and a divided by the same thing at some
+[0:55:08] the same thing at some baseline value of x I'm just picking 0
+[0:55:11] baseline value of x I'm just picking 0 it doesn't have to be that and then you
+[0:55:14] it doesn't have to be that and then you can check that the
+[0:55:16] can check that the density of Y given X and A can actually
+[0:55:19] density of Y given X and A can actually be written now uh as there's our
+[0:55:21] be written now uh as there's our marginal structural model
+[0:55:23] marginal structural model there's this ratio and this is just sort
+[0:55:26] there's this ratio and this is just sort of like a normalizing constant
+[0:55:29] of like a normalizing constant um now this here to me looks just fairly
+[0:55:33] um now this here to me looks just fairly simple I will say when there's multiple
+[0:55:35] simple I will say when there's multiple time points I think the Frugal
+[0:55:37] time points I think the Frugal parameterization is easier and and more
+[0:55:40] parameterization is easier and and more interpretable because I think coptibles
+[0:55:42] interpretable because I think coptibles are sort of you know we can construct
+[0:55:44] are sort of you know we can construct things like Vine copulas and things like
+[0:55:45] things like Vine copulas and things like that for many time points this gets
+[0:55:47] that for many time points this gets becomes uh now an A nested kind of
+[0:55:50] becomes uh now an A nested kind of iterative construction which is a little
+[0:55:52] iterative construction which is a little bit more hard to understand I think
+[0:55:55] bit more hard to understand I think um but still I'm just curious how it
+[0:55:58] um but still I'm just curious how it might compare to this parameterization
+[0:56:01] might compare to this parameterization is this feasible in a time during study
+[0:56:03] is this feasible in a time during study of many time points uh is the next
+[0:56:05] of many time points uh is the next question and in principle it is because
+[0:56:06] question and in principle it is because again all you need now is sort of a
+[0:56:08] again all you need now is sort of a bigger copula this this was very
+[0:56:11] bigger copula this this was very interesting to me because again I was
+[0:56:13] interesting to me because again I was working on some epidemic models where we
+[0:56:16] working on some epidemic models where we had many many time points and I was
+[0:56:18] had many many time points and I was trying to imagine how I would repair
+[0:56:20] trying to imagine how I would repair those models in the sense of
+[0:56:23] those models in the sense of um
+[0:56:23] um trying to do some uh modify the model
+[0:56:26] trying to do some uh modify the model using a Frugal parameterization uh so I
+[0:56:29] using a Frugal parameterization uh so I think it's I think it is feasible and in
+[0:56:31] think it's I think it is feasible and in fact in the paper of course you guys
+[0:56:33] fact in the paper of course you guys talk about that but you are now having
+[0:56:35] talk about that but you are now having to specify a bigger and bigger model and
+[0:56:37] to specify a bigger and bigger model and a you know more complicated copula so
+[0:56:41] a you know more complicated copula so maybe you could just make some comments
+[0:56:42] maybe you could just make some comments about practical how practical uh that is
+[0:56:46] about practical how practical uh that is um and the other thing is yeah this is a
+[0:56:49] um and the other thing is yeah this is a question so let's look at this uh P of x
+[0:56:52] question so let's look at this uh P of x a y again I can specify so here's the
+[0:56:56] a y again I can specify so here's the Frugal parameterization so I can take P
+[0:56:58] Frugal parameterization so I can take P of X I can make this to be very
+[0:56:59] of X I can make this to be very something very flexible even
+[0:57:00] something very flexible even non-parametric
+[0:57:02] non-parametric I can take my copula to be a very
+[0:57:04] I can take my copula to be a very flexible model maybe even a
+[0:57:06] flexible model maybe even a non-parametric thing and then put in my
+[0:57:08] non-parametric thing and then put in my marginal structural model what have I
+[0:57:10] marginal structural model what have I constructed and why this constructed
+[0:57:12] constructed and why this constructed essentially a semi-parametric model
+[0:57:14] essentially a semi-parametric model basically it's fully non-parametric
+[0:57:16] basically it's fully non-parametric except for the marginal structural model
+[0:57:18] except for the marginal structural model but the rest of it's all kind of almost
+[0:57:20] but the rest of it's all kind of almost unconstrained and I'm wondering if doing
+[0:57:22] unconstrained and I'm wondering if doing that might be useful as a way of doing
+[0:57:24] that might be useful as a way of doing model checking because now I can like
+[0:57:26] model checking because now I can like simulate from this figure out what the
+[0:57:28] simulate from this figure out what the residual should look like and if I see
+[0:57:29] residual should look like and if I see any measure of Misfit since all of this
+[0:57:32] any measure of Misfit since all of this is very flexible the only thing I can
+[0:57:33] is very flexible the only thing I can blame is the marginal structural model
+[0:57:35] blame is the marginal structural model so I don't know if that's practical or
+[0:57:37] so I don't know if that's practical or not but that's my question is do you
+[0:57:39] not but that's my question is do you think I can use the Frugal
+[0:57:41] think I can use the Frugal polymerization then as a way of doing
+[0:57:43] polymerization then as a way of doing model checking for things like marginal
+[0:57:45] model checking for things like marginal structural models which might not be so
+[0:57:47] structural models which might not be so easy in in like time varying settings
+[0:57:49] easy in in like time varying settings and so on
+[0:57:51] and so on um and this other question more
+[0:57:52] um and this other question more technical one which is if the model is
+[0:57:54] technical one which is if the model is correct I'm convinced The Frugal
+[0:57:56] correct I'm convinced The Frugal parameterization actually solves the
+[0:57:57] parameterization actually solves the null Paradox
+[0:57:59] null Paradox um if the model is wrong I can still fit
+[0:58:02] um if the model is wrong I can still fit a marginal structural model using like
+[0:58:03] a marginal structural model using like estimating equations for example without
+[0:58:05] estimating equations for example without specimening a model and hopefully under
+[0:58:08] specimening a model and hopefully under some conditions of course we can still
+[0:58:10] some conditions of course we can still avoid the null Paradox although you have
+[0:58:13] avoid the null Paradox although you have to specify say propensity scores and
+[0:58:15] to specify say propensity scores and things like that but if I just use the
+[0:58:19] things like that but if I just use the Frugal polymerization and fit that model
+[0:58:21] Frugal polymerization and fit that model I'm fitting this projection and I have
+[0:58:23] I'm fitting this projection and I have the benefit of the variation
+[0:58:25] the benefit of the variation Independence but I'm just wondering is
+[0:58:27] Independence but I'm just wondering is it still true that I'm going to avoid
+[0:58:30] it still true that I'm going to avoid the null Paradox or could could there be
+[0:58:32] the null Paradox or could could there be still some null Paradox due to model the
+[0:58:34] still some null Paradox due to model the specification
+[0:58:36] specification I wanted to mention
+[0:58:39] I wanted to mention um which I forgot to put in my slides is
+[0:58:41] um which I forgot to put in my slides is you'll notice in Robin's slides there's
+[0:58:43] you'll notice in Robin's slides there's this variable U that appears all over
+[0:58:45] this variable U that appears all over the place and if you want to read more
+[0:58:48] the place and if you want to read more about this stuff it's that you is very
+[0:58:49] about this stuff it's that you is very important I I call those things Phantoms
+[0:58:51] important I I call those things Phantoms because they're unobserved but they're
+[0:58:53] because they're unobserved but they're not confounders and they play an
+[0:58:55] not confounders and they play an important role in all this stuff so I
+[0:58:57] important role in all this stuff so I just want to mention that if you're
+[0:58:58] just want to mention that if you're interested in this stuff keep your eyes
+[0:58:59] interested in this stuff keep your eyes open for those Phantoms because they're
+[0:59:02] open for those Phantoms because they're actually uh they cause a lot of problems
+[0:59:05] actually uh they cause a lot of problems that Rob was talking about okay that's
+[0:59:08] that Rob was talking about okay that's the end of my uh discussion very nice I
+[0:59:10] the end of my uh discussion very nice I think it's really great work that
+[0:59:12] think it's really great work that Vanessa and uh Robin have done and
+[0:59:14] Vanessa and uh Robin have done and congratulations on a on a really uh nice
+[0:59:16] congratulations on a on a really uh nice paper
+[0:59:18] paper thank you
+[0:59:24] um thank you Larry uh for a nice discussion okay so Robin uh Vanessa I
+[0:59:28] discussion okay so Robin uh Vanessa I guess Daniel as well uh if you want to
+[0:59:30] guess Daniel as well uh if you want to kind of answer some questions that would
+[0:59:33] kind of answer some questions that would be the time
+[0:59:34] be the time yeah so
+[0:59:35] yeah so um so I hadn't actually seen this uh
+[0:59:38] um so I hadn't actually seen this uh Babino paper before but it looks to me
+[0:59:40] Babino paper before but it looks to me like that's just another way that you
+[0:59:42] like that's just another way that you could specify your dependent structure
+[0:59:45] could specify your dependent structure right by using that ratio instead of the
+[0:59:47] right by using that ratio instead of the copula so yes I guess this is something
+[0:59:50] copula so yes I guess this is something we should investigate
+[0:59:52] we should investigate um but yeah I mean if it's obviously if
+[0:59:54] um but yeah I mean if it's obviously if it's computationally feasible that would
+[0:59:56] it's computationally feasible that would be excellent
+[0:59:58] be excellent um
+[1:00:00] um you mind just sharing your slides again
+[1:00:02] you mind just sharing your slides again so that people can see the questions oh
+[1:00:04] so that people can see the questions oh yeah let's see
+[1:00:06] yeah let's see um so then
+[1:00:07] um so then um
+[1:00:08] um the second question yes it is feasible
+[1:00:10] the second question yes it is feasible in a Time varying study with many time
+[1:00:12] in a Time varying study with many time points so
+[1:00:13] points so um
+[1:00:14] um obviously you have to specify more more
+[1:00:16] obviously you have to specify more more models that's true
+[1:00:18] models that's true um but I think that's sort of inevitable
+[1:00:20] um but I think that's sort of inevitable whatever method you're using right
+[1:00:22] whatever method you're using right somehow those models need to be
+[1:00:24] somehow those models need to be specified if you want it to be uh
+[1:00:26] specified if you want it to be uh realistic right so
+[1:00:29] realistic right so um
+[1:00:30] um I can't sort of think of any other way
+[1:00:32] I can't sort of think of any other way that would uh be
+[1:00:35] that would uh be uh simpler and yet give you the
+[1:00:38] uh simpler and yet give you the flexibility that this brown solution
+[1:00:40] flexibility that this brown solution does
+[1:00:41] does computationally we said that the
+[1:00:44] computationally we said that the simulation gets harder
+[1:00:46] simulation gets harder um with many time points and then
+[1:00:48] um with many time points and then obviously we have to
+[1:00:50] obviously we have to um
+[1:00:52] um uh
+[1:00:54] uh we're sort of reduced to then using uh
+[1:00:56] we're sort of reduced to then using uh something like a Monte Carlo method to
+[1:00:58] something like a Monte Carlo method to get samples from it and
+[1:01:00] get samples from it and relatively early stages with that but it
+[1:01:02] relatively early stages with that but it seemed as though
+[1:01:03] seemed as though um that's working well so I'm optimistic
+[1:01:06] um that's working well so I'm optimistic that will be the way that we do things
+[1:01:08] that will be the way that we do things in the future
+[1:01:11] in the future um
+[1:01:12] um tell me to check the fit
+[1:01:14] tell me to check the fit um yes I mean so obviously I mentioned
+[1:01:16] um yes I mean so obviously I mentioned the Verma model and said to me you could
+[1:01:18] the Verma model and said to me you could use a likelihood ratio test for example
+[1:01:20] use a likelihood ratio test for example but as you say there's no you don't have
+[1:01:23] but as you say there's no you don't have something to have to use likely a ratio
+[1:01:24] something to have to use likely a ratio test
+[1:01:25] test um and
+[1:01:27] um and you're right you could easily
+[1:01:28] you're right you could easily um simulate from some some data from it
+[1:01:30] um simulate from some some data from it and maybe compare the residuals to the
+[1:01:32] and maybe compare the residuals to the ones you get in your actual data set and
+[1:01:34] ones you get in your actual data set and see whether they look uh plausible
+[1:01:38] see whether they look uh plausible um
+[1:01:38] um and whatever other kinds of tests you
+[1:01:42] and whatever other kinds of tests you might want to do
+[1:01:43] might want to do um
+[1:01:48] and then for four um obviously no it I mean I wouldn't
+[1:01:50] um obviously no it I mean I wouldn't really call it a paradox in this case
+[1:01:51] really call it a paradox in this case it's just you've got the wrong model and
+[1:01:53] it's just you've got the wrong model and so the hypothesis uh May reject uh
+[1:01:55] so the hypothesis uh May reject uh incorrectly
+[1:01:57] incorrectly um I would presume that one can use
+[1:01:59] um I would presume that one can use similar techniques to the methods used
+[1:02:00] similar techniques to the methods used in estimating equations to try and
+[1:02:02] in estimating equations to try and alleviate that but
+[1:02:05] alleviate that but as you say presumably it will involve
+[1:02:07] as you say presumably it will involve specifying something else correctly like
+[1:02:09] specifying something else correctly like the entity score in order to guarantee
+[1:02:11] the entity score in order to guarantee that
+[1:02:13] that um
+[1:02:14] um yeah do you have anything you want to
+[1:02:16] yeah do you have anything you want to add Vanessa
+[1:02:18] add Vanessa no but there are excellent points and
+[1:02:21] no but there are excellent points and things we should follow up and uh
+[1:02:23] things we should follow up and uh especially also the model
+[1:02:25] especially also the model um fitting of the margin structural
+[1:02:27] um fitting of the margin structural model
+[1:02:28] model um and also maybe one point uh to add is
+[1:02:32] um and also maybe one point uh to add is uh they use in sensitivity analysis
+[1:02:35] uh they use in sensitivity analysis um which is also in response to one of
+[1:02:37] um which is also in response to one of the questions in the in the Q a uh so um
+[1:02:42] the questions in the in the Q a uh so um we hope we think that an application
+[1:02:44] we hope we think that an application would also be in uh doing some
+[1:02:47] would also be in uh doing some sensitivity analysis with latent
+[1:02:49] sensitivity analysis with latent confounding
+[1:02:56] great uh thank you all so we are a little bit over time which is a shame
+[1:02:58] little bit over time which is a shame because uh this was such a nice
+[1:03:00] because uh this was such a nice discussion too so uh maybe then we wrap
+[1:03:03] discussion too so uh maybe then we wrap up
+[1:03:04] up um
+[1:03:05] um player you can stop sharing your screen
+[1:03:07] player you can stop sharing your screen now thank you so much
+[1:03:09] now thank you so much um
+[1:03:11] um sorry
+[1:03:13] sorry lost myself okay
+[1:03:17] lost myself okay all right
+[1:03:21] so um I'd like to think once more uh Larry
+[1:03:24] um I'd like to think once more uh Larry Robin Vanessa and Daniel uh for getting
+[1:03:28] Robin Vanessa and Daniel uh for getting such nice talks and answering so many
+[1:03:29] such nice talks and answering so many questions if your question hasn't been
+[1:03:31] questions if your question hasn't been answered then you've asked it in the Q a
+[1:03:33] answered then you've asked it in the Q a uh just know that we will pass on all
+[1:03:36] uh just know that we will pass on all the questions to the speakers after the
+[1:03:38] the questions to the speakers after the talk so if you want to get in touch with
+[1:03:40] talk so if you want to get in touch with them to uh
+[1:03:42] them to uh further discuss that's totally possible
+[1:03:45] further discuss that's totally possible um next week we have an interview with
+[1:03:48] um next week we have an interview with Philip Davids from University of
+[1:03:49] Philip Davids from University of Cambridge so hopefully you will all join
+[1:03:51] Cambridge so hopefully you will all join us for that we'll actually have Vanessa
+[1:03:53] us for that we'll actually have Vanessa back on here as a special guest for That
+[1:03:55] back on here as a special guest for That interview
+[1:03:56] interview um yeah so hope to see you all then

@@ -1,0 +1,1767 @@
+[0:00:04] uh welcome to the online causal inference seminar today
+[0:00:06] online causal inference seminar today we're very lucky to have
+[0:00:08] we're very lucky to have andrea ronitsky from ditella university
+[0:00:10] andrea ronitsky from ditella university in buenos aires
+[0:00:12] in buenos aires uh she's going to talk about optimal
+[0:00:13] uh she's going to talk about optimal adjustment sets and non-parametric
+[0:00:15] adjustment sets and non-parametric graphical models
+[0:00:16] graphical models uh we're also lucky to have a discussion
+[0:00:19] uh we're also lucky to have a discussion by emma pierkovic from the university of
+[0:00:21] by emma pierkovic from the university of washington which will
+[0:00:22] washington which will occur after the talk if you have any
+[0:00:26] occur after the talk if you have any questions please submit them through q a
+[0:00:28] questions please submit them through q a and if you want to contact the
+[0:00:30] and if you want to contact the panelists please uh submit uh
+[0:00:33] panelists please uh submit uh your concerns in the chat uh
+[0:00:36] your concerns in the chat uh we also are joined in q a by facundo
+[0:00:39] we also are joined in q a by facundo sapienza
+[0:00:41] sapienza um guian will be uh handling questions
+[0:00:43] um guian will be uh handling questions today so
+[0:00:44] today so i'll switch over to guyong now
+[0:00:52] thank you michael um so michael michael mentioned
+[0:00:52] mentioned um we are lucky to have fakundo
+[0:00:56] um we are lucky to have fakundo um to help us with the q a so uh submit
+[0:00:58] um to help us with the q a so uh submit your questions there facundo will
+[0:01:00] your questions there facundo will uh do his best to answer them um we will
+[0:01:02] uh do his best to answer them um we will also select a few questions to ask
+[0:01:04] also select a few questions to ask to um andrea so
+[0:01:07] to um andrea so if your question is selected then we'll
+[0:01:09] if your question is selected then we'll reach out to you and
+[0:01:11] reach out to you and ask you to raise your hand so please do
+[0:01:12] ask you to raise your hand so please do not raise your hand unless i've asked
+[0:01:14] not raise your hand unless i've asked you to do so
+[0:01:15] you to do so all right that's it from me andrea feel
+[0:01:18] all right that's it from me andrea feel free to
+[0:01:18] free to start whenever you're ready okay
+[0:01:22] start whenever you're ready okay uh well thank you very much
+[0:01:25] uh well thank you very much uh everybody michael gager
+[0:01:29] uh everybody michael gager and emma for joining us in the
+[0:01:31] and emma for joining us in the discussion
+[0:01:32] discussion so i'm very
+[0:01:36] so i'm very lucky to be here to present our work the
+[0:01:39] lucky to be here to present our work the work that i will
+[0:01:40] work that i will be presenting is work that we've done
+[0:01:43] be presenting is work that we've done with ezekiel smukler who is now
+[0:01:45] with ezekiel smukler who is now in barcelona global and fakundo who's
+[0:01:48] in barcelona global and fakundo who's here
+[0:01:49] here and he's uh at uc berkeley and it's
+[0:01:52] and he's uh at uc berkeley and it's based on two papers
+[0:01:53] based on two papers uh the first one that uh appeared in
+[0:01:57] uh the first one that uh appeared in 2020 in the journal of
+[0:01:58] 2020 in the journal of machine learning research and the other
+[0:02:00] machine learning research and the other one that is about to appear in
+[0:02:01] one that is about to appear in biometrica
+[0:02:02] biometrica it's already available online so here is
+[0:02:06] it's already available online so here is the problem
+[0:02:07] the problem that i want to address today
+[0:02:14] yes yes so currently you're not full screen
+[0:02:14] screen is that is that you okay oh no no that's
+[0:02:17] is that is that you okay oh no no that's that's a problem
+[0:02:18] that's a problem thank you very much let me see and i
+[0:02:20] thank you very much let me see and i also i guess i also want to
+[0:02:23] also i guess i also want to let's see i want to also disconnect this
+[0:02:26] let's see i want to also disconnect this is this
+[0:02:27] is this any better yeah that looks that looks
+[0:02:28] any better yeah that looks that looks great yeah perfect okay
+[0:02:31] great yeah perfect okay so suppose that we want to design we are
+[0:02:34] so suppose that we want to design we are at the stage of designing a plan
+[0:02:35] at the stage of designing a plan observational study
+[0:02:37] observational study and the objective of the study is to
+[0:02:39] and the objective of the study is to investigate the population average
+[0:02:41] investigate the population average effect treatment effect of a point
+[0:02:43] effect treatment effect of a point exposure or treatment on an outcome
+[0:02:46] exposure or treatment on an outcome now the treatment that i will be
+[0:02:47] now the treatment that i will be considering could be a static meaning
+[0:02:50] considering could be a static meaning one-size-fits-all or
+[0:02:51] one-size-fits-all or personalized where
+[0:02:54] personalized where the treatment depends on covariates the
+[0:02:57] the treatment depends on covariates the treatment that i am planning to assign
+[0:02:59] treatment that i am planning to assign in an intervene world
+[0:03:01] in an intervene world will depend on covariate
+[0:03:04] will depend on covariate now suppose that in order to decide
+[0:03:07] now suppose that in order to decide which variables to measure
+[0:03:09] which variables to measure in order to control for confounding with
+[0:03:12] in order to control for confounding with the input of experts
+[0:03:13] the input of experts we postulate the causal graphical model
+[0:03:16] we postulate the causal graphical model now at the design stage we must
+[0:03:18] now at the design stage we must also specify the anticipated strategy of
+[0:03:21] also specify the anticipated strategy of analysis so suppose that we anticipate
+[0:03:25] analysis so suppose that we anticipate estimating causal effects by
+[0:03:26] estimating causal effects by non-parametric adjustment
+[0:03:28] non-parametric adjustment meaning as i will formalize later that
+[0:03:31] meaning as i will formalize later that we will estimate the population average
+[0:03:33] we will estimate the population average treatment effect by either ipw or
+[0:03:36] treatment effect by either ipw or outcome regression or
+[0:03:37] outcome regression or w robust estimation estimating
+[0:03:40] w robust estimation estimating the nuisance functions the propensity
+[0:03:42] the nuisance functions the propensity score and or the outcome regression
+[0:03:45] score and or the outcome regression are non-parametrically using any
+[0:03:47] are non-parametrically using any non-parametric or machine learning
+[0:03:49] non-parametric or machine learning techniques
+[0:03:50] techniques now in many graphs we will find that
+[0:03:53] now in many graphs we will find that there are several distinct sets of
+[0:03:54] there are several distinct sets of covariates that will suffice to control
+[0:03:57] covariates that will suffice to control for confounding by the anticipated
+[0:04:00] for confounding by the anticipated method of analysis meaning
+[0:04:03] method of analysis meaning the method of adjustment so the question
+[0:04:06] the method of adjustment so the question is which variables should we measure
+[0:04:08] is which variables should we measure in this talk i will address this
+[0:04:10] in this talk i will address this question from the perspective of solving
+[0:04:12] question from the perspective of solving the problem of determining
+[0:04:14] the problem of determining among adjustment sets that suffice
+[0:04:17] among adjustment sets that suffice uh to control for confounding the one
+[0:04:19] uh to control for confounding the one that yields
+[0:04:20] that yields a non-parametrically adjusted estimation
+[0:04:23] a non-parametrically adjusted estimation of population
+[0:04:24] of population estimator of population average
+[0:04:27] estimator of population average treatment effect with smallest
+[0:04:28] treatment effect with smallest asymptotic variants
+[0:04:31] asymptotic variants now because estimation of conditional
+[0:04:34] now because estimation of conditional mean
+[0:04:34] mean functions and propensity scores scales
+[0:04:37] functions and propensity scores scales up in difficulty with the number of
+[0:04:38] up in difficulty with the number of covariates
+[0:04:40] covariates we may also want to consider restricting
+[0:04:42] we may also want to consider restricting attention
+[0:04:43] attention to the set of minimal adjustment sets
+[0:04:46] to the set of minimal adjustment sets these are
+[0:04:46] these are adjustment sets such that removal of one
+[0:04:49] adjustment sets such that removal of one variable from the sets
+[0:04:51] variable from the sets invalidates the set the remaining set as
+[0:04:54] invalidates the set the remaining set as an adjustment set
+[0:04:55] an adjustment set we no longer are able to control for
+[0:04:57] we no longer are able to control for confounding
+[0:04:59] confounding even more and along the same lines we
+[0:05:02] even more and along the same lines we may also want to restrict attention to
+[0:05:04] may also want to restrict attention to the smallest size adjustment sets which
+[0:05:06] the smallest size adjustment sets which are a subset of the minimal adjustment
+[0:05:08] are a subset of the minimal adjustment sets
+[0:05:09] sets conformed by comprised by those
+[0:05:12] conformed by comprised by those adjustment sets that have the minimum
+[0:05:14] adjustment sets that have the minimum possible cardinality
+[0:05:17] possible cardinality now um along the same lines and being
+[0:05:20] now um along the same lines and being realistic
+[0:05:22] realistic not all variables that we postulate
+[0:05:25] not all variables that we postulate in a graphical model in a causal
+[0:05:27] in a graphical model in a causal graphical model may be observable
+[0:05:30] graphical model may be observable some will be impossible to measure for
+[0:05:32] some will be impossible to measure for logistics or cost considerations
+[0:05:35] logistics or cost considerations so it may happen that among the
+[0:05:38] so it may happen that among the variables that are observable
+[0:05:41] variables that are observable we are we still have variables that
+[0:05:43] we are we still have variables that suffice as
+[0:05:44] suffice as adjustment sets that suffice to control
+[0:05:46] adjustment sets that suffice to control for confounding
+[0:05:47] for confounding then the question is uh
+[0:05:51] then the question is uh among those variables that are
+[0:05:53] among those variables that are observable
+[0:05:54] observable uh and our uh adjustment sets which is
+[0:05:57] uh and our uh adjustment sets which is the set
+[0:05:58] the set that again minimizes uh the variance
+[0:06:01] that again minimizes uh the variance of the non-parametrically adjusted uh
+[0:06:05] of the non-parametrically adjusted uh uh estimator
+[0:06:08] uh estimator okay so uh the plan here is that i will
+[0:06:12] okay so uh the plan here is that i will illustrate the topic first kind of
+[0:06:14] illustrate the topic first kind of informally
+[0:06:15] informally with a number of examples with the aim
+[0:06:18] with a number of examples with the aim of warming up a little bit
+[0:06:20] of warming up a little bit then i will go through the background
+[0:06:22] then i will go through the background that will allow me to
+[0:06:24] that will allow me to uh formalize the problem uh
+[0:06:27] uh formalize the problem uh sufficiently well so that everything
+[0:06:29] sufficiently well so that everything that i will say the results that i will
+[0:06:31] that i will say the results that i will give
+[0:06:32] give later on will make sense and then
+[0:06:34] later on will make sense and then finally i will talk about
+[0:06:36] finally i will talk about uh results i will focus primarily uh
+[0:06:39] uh results i will focus primarily uh on adjustment sets in uh graphs without
+[0:06:42] on adjustment sets in uh graphs without hidden variables
+[0:06:43] hidden variables not because we don't have results for
+[0:06:45] not because we don't have results for hidden variables but because the
+[0:06:48] hidden variables but because the solution scales up in complication and i
+[0:06:51] solution scales up in complication and i don't think i will have time
+[0:06:52] don't think i will have time if i do i will talk about it and lastly
+[0:06:55] if i do i will talk about it and lastly if i have time i will talk a little bit
+[0:06:57] if i have time i will talk a little bit as well
+[0:06:58] as well about semi-parametric efficient
+[0:07:00] about semi-parametric efficient estimation meaning if we could hope to
+[0:07:02] estimation meaning if we could hope to measure
+[0:07:03] measure all the variables in the graph then uh
+[0:07:06] all the variables in the graph then uh how will we do it efficiently
+[0:07:08] how will we do it efficiently okay and then finally i will end with a
+[0:07:10] okay and then finally i will end with a summary of uh
+[0:07:12] summary of uh open issues and and questions
+[0:07:15] open issues and and questions okay so here is an example of a graph
+[0:07:17] okay so here is an example of a graph taken from shear and plat
+[0:07:20] taken from shear and plat it was an expository paper explain
+[0:07:23] it was an expository paper explain precisely the
+[0:07:24] precisely the usefulness of causal graphical models to
+[0:07:27] usefulness of causal graphical models to a medical audience
+[0:07:29] a medical audience and suppose that we want to estimate the
+[0:07:31] and suppose that we want to estimate the effect of warming
+[0:07:32] effect of warming up exercises of different types of
+[0:07:34] up exercises of different types of warm-up exercises on
+[0:07:37] warm-up exercises on the occurrence of an injury during law
+[0:07:40] the occurrence of an injury during law practice in sports
+[0:07:42] practice in sports well in this graph these two variables
+[0:07:44] well in this graph these two variables highlighted here suffice to control for
+[0:07:46] highlighted here suffice to control for confounding because they block all the
+[0:07:47] confounding because they block all the backward
+[0:07:48] backward backward paths between uh treatment and
+[0:07:50] backward paths between uh treatment and outcome
+[0:07:51] outcome but likewise these ones do and the and
+[0:07:53] but likewise these ones do and the and the uh
+[0:07:54] the uh and the union of both of them also do so
+[0:07:57] and the union of both of them also do so the question is uh
+[0:07:59] the question is uh if if we consider all of them i mean
+[0:08:01] if if we consider all of them i mean there are many more
+[0:08:03] there are many more that are adjustment sets which one
+[0:08:06] that are adjustment sets which one would give me the estimator with the
+[0:08:08] would give me the estimator with the smallest asymptotic variance
+[0:08:10] smallest asymptotic variance so to be more precise about what
+[0:08:12] so to be more precise about what estimators i'm talking about
+[0:08:14] estimators i'm talking about and how i'm planning to do the analysis
+[0:08:16] and how i'm planning to do the analysis consider this very simple
+[0:08:18] consider this very simple model okay so here i'm interested in
+[0:08:21] model okay so here i'm interested in uh treatment a on outcome y okay
+[0:08:25] uh treatment a on outcome y okay and in this graph z alone and g
+[0:08:28] and in this graph z alone and g alone or z and g
+[0:08:31] alone or z and g suffice to control for confounding okay
+[0:08:34] suffice to control for confounding okay and what i mean by that
+[0:08:36] and what i mean by that is uh they are actually valid adjustment
+[0:08:39] is uh they are actually valid adjustment sets what i mean by that
+[0:08:41] sets what i mean by that is that under the causal graphical model
+[0:08:43] is that under the causal graphical model represented by this diag and i will be
+[0:08:45] represented by this diag and i will be precise about that later on about what i
+[0:08:47] precise about that later on about what i mean by that
+[0:08:49] mean by that uh the mean in a world where i
+[0:08:52] uh the mean in a world where i intervened
+[0:08:53] intervened and set the treatment a to a particular
+[0:08:55] and set the treatment a to a particular value little a
+[0:08:56] value little a can be found can be identified by the g
+[0:08:59] can be found can be identified by the g formula
+[0:09:00] formula which can also be re-expressed in ipw
+[0:09:04] which can also be re-expressed in ipw form
+[0:09:05] form now the kind of estimators that i will
+[0:09:07] now the kind of estimators that i will be considering the
+[0:09:09] be considering the then for estimating the mean
+[0:09:12] then for estimating the mean will be estimators that estimate either
+[0:09:15] will be estimators that estimate either the outcome regression
+[0:09:16] the outcome regression conditional on a particular adjustment
+[0:09:19] conditional on a particular adjustment set
+[0:09:20] set or the propensity score
+[0:09:23] or the propensity score and or both in case of w robust
+[0:09:26] and or both in case of w robust estimators that are estimated
+[0:09:29] estimators that are estimated via some non-parametric technique okay
+[0:09:32] via some non-parametric technique okay or machine learning technique
+[0:09:34] or machine learning technique and the question is of these three if i
+[0:09:37] and the question is of these three if i have to choose which of these three to
+[0:09:39] have to choose which of these three to use
+[0:09:39] use to estimate this counter factual mean
+[0:09:42] to estimate this counter factual mean which one will yield the estimator with
+[0:09:45] which one will yield the estimator with the smallest asymptotic variant
+[0:09:47] the smallest asymptotic variant and the question is a valid question is
+[0:09:49] and the question is a valid question is because as i will
+[0:09:51] because as i will formalize a little bit later it turns
+[0:09:53] formalize a little bit later it turns out that
+[0:09:54] out that all estimators of this functional that
+[0:09:56] all estimators of this functional that use non-parametric estimators
+[0:09:58] use non-parametric estimators of either the propensity score or the
+[0:10:02] of either the propensity score or the conditional mean under sufficient
+[0:10:06] conditional mean under sufficient regularity conditions smoothness
+[0:10:07] regularity conditions smoothness conditions or complexity
+[0:10:09] conditions or complexity conditions uh will converge to the same
+[0:10:12] conditions uh will converge to the same limiting distribution
+[0:10:14] limiting distribution so the question is i need to compare
+[0:10:17] so the question is i need to compare essentially
+[0:10:18] essentially three asymptotic variances okay because
+[0:10:21] three asymptotic variances okay because three estimators will be rude and
+[0:10:23] three estimators will be rude and consistent
+[0:10:24] consistent and asymptotically normal and now i have
+[0:10:27] and asymptotically normal and now i have to compare three variances the variance
+[0:10:29] to compare three variances the variance associated with using g the variance
+[0:10:32] associated with using g the variance associated
+[0:10:33] associated with using z and the variance associated
+[0:10:35] with using z and the variance associated with using g
+[0:10:36] with using g and c okay so now consider
+[0:10:40] and c okay so now consider a case of a personalized treatment okay
+[0:10:42] a case of a personalized treatment okay so now we have again the same graph
+[0:10:45] so now we have again the same graph but now suppose that i'm interested in
+[0:10:47] but now suppose that i'm interested in estimating the mean
+[0:10:48] estimating the mean in a world where i will only assign
+[0:10:50] in a world where i will only assign treatment a
+[0:10:52] treatment a to those individuals that have covariate
+[0:10:55] to those individuals that have covariate z
+[0:10:55] z greater than a threshold value little z
+[0:10:58] greater than a threshold value little z okay so that's my personalized regime
+[0:11:00] okay so that's my personalized regime my personality's treatment and now the
+[0:11:04] my personality's treatment and now the adjustment sets that are available to me
+[0:11:06] adjustment sets that are available to me are two
+[0:11:08] are two one is z and the other one is g and z
+[0:11:11] one is z and the other one is g and z because i need to include z in the
+[0:11:13] because i need to include z in the adjustment set in order to calculate the
+[0:11:15] adjustment set in order to calculate the counter factual mean
+[0:11:17] counter factual mean so in fact what i mean now by adjustment
+[0:11:21] so in fact what i mean now by adjustment set is again
+[0:11:23] set is again that the counter factual mean under the
+[0:11:26] that the counter factual mean under the assumptions of the causal graphical
+[0:11:28] assumptions of the causal graphical model uh
+[0:11:30] model uh is expressed via the g formula or the
+[0:11:32] is expressed via the g formula or the ipw
+[0:11:33] ipw formula where i now uh
+[0:11:36] formula where i now uh replace the indicator as i had earlier
+[0:11:40] replace the indicator as i had earlier with uh the uh determining the regime
+[0:11:44] with uh the uh determining the regime in the particular case that i am uh
+[0:11:47] in the particular case that i am uh discussing here this particular example
+[0:11:49] discussing here this particular example the regime is deterministic
+[0:11:51] the regime is deterministic so this pi function here is a point mass
+[0:11:53] so this pi function here is a point mass probability
+[0:11:55] probability but if uh i but everything that i will
+[0:11:57] but if uh i but everything that i will say will apply also to regimes that are
+[0:12:00] say will apply also to regimes that are uh
+[0:12:00] uh random regimes where in the hypothetical
+[0:12:03] random regimes where in the hypothetical world i will be assigning treatment
+[0:12:06] world i will be assigning treatment a equal one uh with a certain
+[0:12:08] a equal one uh with a certain probability
+[0:12:09] probability that depends on on the threshold z
+[0:12:14] that depends on on the threshold z all right so again the question is if i
+[0:12:16] all right so again the question is if i am to ask to estimate the propensity
+[0:12:18] am to ask to estimate the propensity score and the outcome mean
+[0:12:20] score and the outcome mean non-parametrically which estimator will
+[0:12:22] non-parametrically which estimator will yield the smallest asymptotic variance
+[0:12:25] yield the smallest asymptotic variance now uh one
+[0:12:29] now uh one to formalize what i mean by uh minimum
+[0:12:32] to formalize what i mean by uh minimum adjustment sets and minimal adjustment
+[0:12:34] adjustment sets and minimal adjustment set consider this graph a little bit
+[0:12:36] set consider this graph a little bit more complicated again i'm interested in
+[0:12:38] more complicated again i'm interested in the effect of a and y and let's say that
+[0:12:42] the effect of a and y and let's say that i'm interested in a static treatment
+[0:12:44] i'm interested in a static treatment regime
+[0:12:45] regime well here uh any at any set of these
+[0:12:49] well here uh any at any set of these covariates in black that includes that
+[0:12:51] covariates in black that includes that it will include
+[0:12:52] it will include t will be a valid adjustment set
+[0:12:54] t will be a valid adjustment set likewise
+[0:12:55] likewise if it includes r and if it doesn't
+[0:12:58] if it includes r and if it doesn't include r
+[0:12:58] include r and t there will still be covariates uh
+[0:13:01] and t there will still be covariates uh adjustment sets that are valid for
+[0:13:03] adjustment sets that are valid for example one that includes
+[0:13:05] example one that includes m1 and m2 or one that includes h1 and m2
+[0:13:10] m1 and m2 or one that includes h1 and m2 in fact any one that includes at least
+[0:13:12] in fact any one that includes at least one of m1 and h1 or m2 and h2 will be a
+[0:13:15] one of m1 and h1 or m2 and h2 will be a valid adjustment set
+[0:13:17] valid adjustment set but of all all of the adjustment sets
+[0:13:19] but of all all of the adjustment sets there are certain adjustment sets
+[0:13:21] there are certain adjustment sets or under which i cannot remove one
+[0:13:24] or under which i cannot remove one variable without destroying the validity
+[0:13:26] variable without destroying the validity of the adjustment set
+[0:13:27] of the adjustment set those are the minimal adjustment sets
+[0:13:29] those are the minimal adjustment sets for example
+[0:13:31] for example h1 and h2 is a minimal adjustment set
+[0:13:33] h1 and h2 is a minimal adjustment set because
+[0:13:34] because if i remove one of these two variables
+[0:13:37] if i remove one of these two variables from set
+[0:13:38] from set i will open the backdoor path and i will
+[0:13:42] i will open the backdoor path and i will destroy i will have a measure
+[0:13:44] destroy i will have a measure confounding
+[0:13:51] all right now i i can also consider out of all the minimal
+[0:13:52] of all the minimal adjustment sets the one which have
+[0:13:54] adjustment sets the one which have minimum cardinality okay smallest
+[0:13:56] minimum cardinality okay smallest cardinality and those are the ones that
+[0:13:58] cardinality and those are the ones that i will call minimum adjustment set
+[0:14:00] i will call minimum adjustment set and the problems that i will address
+[0:14:03] and the problems that i will address here
+[0:14:04] here are finding of the minimal or of the
+[0:14:07] are finding of the minimal or of the minimum adjustment sets
+[0:14:08] minimum adjustment sets the one that yields the um
+[0:14:12] the one that yields the um estimator a non-parametrically adjusted
+[0:14:15] estimator a non-parametrically adjusted estimator with the smallest asymptotic
+[0:14:17] estimator with the smallest asymptotic variance
+[0:14:19] variance right so now let me turn um to
+[0:14:23] right so now let me turn um to uh to the um
+[0:14:26] uh to the um problem of formalizing briefly exactly
+[0:14:29] problem of formalizing briefly exactly what i assume
+[0:14:31] what i assume what i mean by the causal graphical
+[0:14:33] what i mean by the causal graphical model
+[0:14:34] model to define precisely what i mean by
+[0:14:36] to define precisely what i mean by adjustment sets
+[0:14:37] adjustment sets and non-parametric causal estimators
+[0:14:41] and non-parametric causal estimators okay but it was a graphical model
+[0:14:43] okay but it was a graphical model represented by a dog i mean
+[0:14:45] represented by a dog i mean that the causal graphical i mean that i
+[0:14:48] that the causal graphical i mean that i am going to assume a causal graphical
+[0:14:50] am going to assume a causal graphical agnostic
+[0:14:51] agnostic uh model uh that assumes that each
+[0:14:55] uh model uh that assumes that each vertex in the dax
+[0:14:56] vertex in the dax stands for a factual random variable and
+[0:14:58] stands for a factual random variable and that the joint law of the variables in
+[0:15:00] that the joint law of the variables in the dac
+[0:15:01] the dac factorizes according to the dac and by
+[0:15:04] factorizes according to the dac and by that i mean
+[0:15:04] that i mean that the joint distribution of the
+[0:15:06] that the joint distribution of the variables in this world
+[0:15:09] variables in this world is a product of the conditional
+[0:15:12] is a product of the conditional uh probabilities of each node given its
+[0:15:15] uh probabilities of each node given its parents in the dac
+[0:15:18] parents in the dac all right but the global graphical model
+[0:15:20] all right but the global graphical model also assumes that the distribution
+[0:15:23] also assumes that the distribution of the data in a hypothetical world in
+[0:15:25] of the data in a hypothetical world in which for a subset of the variables
+[0:15:27] which for a subset of the variables say a1 saas
+[0:15:31] say a1 saas we implement a treatment regime in which
+[0:15:33] we implement a treatment regime in which we assign treatment ai
+[0:15:35] we assign treatment ai to little ai with a certain probability
+[0:15:38] to little ai with a certain probability pi i
+[0:15:38] pi i that depends on a set of covariates that
+[0:15:41] that depends on a set of covariates that are non-descendants of ai
+[0:15:44] are non-descendants of ai um we obtain the formula
+[0:15:47] um we obtain the formula uh for the joint distribution of the
+[0:15:49] uh for the joint distribution of the data in that world
+[0:15:50] data in that world by the truncation formula whereby we
+[0:15:52] by the truncation formula whereby we replace
+[0:15:53] replace uh the conditional distribution of the
+[0:15:56] uh the conditional distribution of the treatment given
+[0:15:56] treatment given its parents in in the um actual law
+[0:16:00] its parents in in the um actual law with uh the distribution that will hold
+[0:16:03] with uh the distribution that will hold in the intervene world now in this talk
+[0:16:06] in the intervene world now in this talk for most of the talk unless i have time
+[0:16:08] for most of the talk unless i have time at the very very end
+[0:16:10] at the very very end i will concentrate on a univariate and
+[0:16:12] i will concentrate on a univariate and the reason
+[0:16:13] the reason that i will do that is because for a
+[0:16:16] that i will do that is because for a multivariate rate when there are time
+[0:16:18] multivariate rate when there are time dependent confounding the problem is
+[0:16:21] dependent confounding the problem is scales up in difficulty and in fact the
+[0:16:23] scales up in difficulty and in fact the results are not so
+[0:16:24] results are not so exciting because there are negative
+[0:16:26] exciting because there are negative results about
+[0:16:27] results about about the existence of optimal
+[0:16:29] about the existence of optimal adjustment sets
+[0:16:31] adjustment sets um so again i will concentrate on a
+[0:16:34] um so again i will concentrate on a univariate a point
+[0:16:36] univariate a point exposure and throughout my a will be
+[0:16:39] exposure and throughout my a will be a discrete treatment it will be finite
+[0:16:42] a discrete treatment it will be finite value
+[0:16:43] value and i will always assume that z
+[0:16:47] and i will always assume that z is a non-descendant of a so i will not
+[0:16:49] is a non-descendant of a so i will not repeat myself
+[0:16:50] repeat myself z from now on is the non-descendant of a
+[0:16:53] z from now on is the non-descendant of a all right so let us now
+[0:16:56] all right so let us now turn to the formal definition of what i
+[0:16:59] turn to the formal definition of what i mean by a z
+[0:17:00] mean by a z adjustment set okay a z adjustment set
+[0:17:02] adjustment set okay a z adjustment set is an adjustment set
+[0:17:04] is an adjustment set that will be valid that will help me
+[0:17:07] that will be valid that will help me that will lead me to the um
+[0:17:11] that will lead me to the um to estimation to identification
+[0:17:14] to estimation to identification when i want to identify a dynamic
+[0:17:16] when i want to identify a dynamic treatment regime that depends on a
+[0:17:18] treatment regime that depends on a personalized regime that depends on z so
+[0:17:22] personalized regime that depends on z so uh for such uh definition then i need to
+[0:17:24] uh for such uh definition then i need to require
+[0:17:25] require that z is included in l and
+[0:17:28] that z is included in l and secondly that the for for any regime
+[0:17:31] secondly that the for for any regime that depends on z
+[0:17:33] that depends on z and any function of y uh the mean of
+[0:17:36] and any function of y uh the mean of that function under the regime
+[0:17:38] that function under the regime is found via uh the g functional
+[0:17:42] is found via uh the g functional okay the g functional again that is
+[0:17:44] okay the g functional again that is computed
+[0:17:45] computed using l okay
+[0:17:49] using l okay if z is the empty set i will then say
+[0:17:53] if z is the empty set i will then say that l is a static adjustment set okay
+[0:17:56] that l is a static adjustment set okay which is
+[0:17:58] which is mostly most of the papers that i read on
+[0:18:01] mostly most of the papers that i read on adjustment sets are about
+[0:18:09] and a non-parametric elegistic estimator as i said earlier is any estimator of
+[0:18:11] as i said earlier is any estimator of the g functional
+[0:18:12] the g functional that estimates the unknown outcome mean
+[0:18:15] that estimates the unknown outcome mean or propensity score nonparametrically
+[0:18:18] or propensity score nonparametrically okay so um there's
+[0:18:21] okay so um there's a lot of knowledge
+[0:18:25] a lot of knowledge about uh characterization of static
+[0:18:28] about uh characterization of static adjustment sets
+[0:18:29] adjustment sets in fact uh the uh
+[0:18:32] in fact uh the uh backdoor criterion of pearl uh the
+[0:18:35] backdoor criterion of pearl uh the famous background
+[0:18:36] famous background criterion is give sufficient conditions
+[0:18:39] criterion is give sufficient conditions uh for an adjustment set to be
+[0:18:42] uh for an adjustment set to be um for a set to be an adjustment set
+[0:18:46] um for a set to be an adjustment set a static adjustment set the criterion is
+[0:18:49] a static adjustment set the criterion is sound but not complete meaning that it
+[0:18:51] sound but not complete meaning that it gives sufficient conditions
+[0:18:53] gives sufficient conditions but not necessary but then there is the
+[0:18:55] but not necessary but then there is the generalized
+[0:18:56] generalized adjustment criterion uh derived by
+[0:18:59] adjustment criterion uh derived by chipster and berkovic
+[0:19:01] chipster and berkovic at all in in a series of papers and that
+[0:19:04] at all in in a series of papers and that that is a
+[0:19:05] that is a a complete and sound uh criterion for
+[0:19:08] a complete and sound uh criterion for determining adjustment sets uh for
+[0:19:11] determining adjustment sets uh for for static regimes okay
+[0:19:14] for static regimes okay uh that is when z uh is the empty set
+[0:19:17] uh that is when z uh is the empty set but in fact it turns out that we can
+[0:19:20] but in fact it turns out that we can make
+[0:19:21] make good use of these results because the
+[0:19:24] good use of these results because the class of
+[0:19:25] class of all the adjustment sets we prove in one
+[0:19:27] all the adjustment sets we prove in one of our papers
+[0:19:28] of our papers that it's actually comprised by a
+[0:19:31] that it's actually comprised by a subset of the static adjustment sets
+[0:19:35] subset of the static adjustment sets precisely the static adjustment sets
+[0:19:39] precisely the static adjustment sets that include l that includes z okay that
+[0:19:42] that include l that includes z okay that includes
+[0:19:42] includes the covariate that uh our regime that
+[0:19:46] the covariate that uh our regime that regimes that we care about depends on
+[0:19:49] regimes that we care about depends on so in fact now uh another
+[0:19:53] so in fact now uh another fantastic result which is
+[0:19:56] fantastic result which is uh the existence of efficient graphical
+[0:19:59] uh the existence of efficient graphical algorithms for finding
+[0:20:02] algorithms for finding all static adjustment sets we can use
+[0:20:04] all static adjustment sets we can use that result
+[0:20:05] that result to actually find the class of all z
+[0:20:08] to actually find the class of all z adjustment sets because this paper by
+[0:20:11] adjustment sets because this paper by van der sander list and textor actually
+[0:20:14] van der sander list and textor actually also includes all static also searches
+[0:20:17] also includes all static also searches for all static adjustment sets that
+[0:20:19] for all static adjustment sets that include a given
+[0:20:20] include a given set z okay and it it actually
+[0:20:23] set z okay and it it actually does it efficiently
+[0:20:30] okay uh as for uh the asymptotic variance of
+[0:20:32] variance of uh the non-parametrically adjusted
+[0:20:34] uh the non-parametrically adjusted estimators
+[0:20:36] estimators um recall that z is an adjustment set
+[0:20:40] um recall that z is an adjustment set sorry l is a z adjustment set if it
+[0:20:43] sorry l is a z adjustment set if it satisfies that for any regime
+[0:20:46] satisfies that for any regime uh the counterfactual mean under the
+[0:20:48] uh the counterfactual mean under the causal graphical model is the g
+[0:20:50] causal graphical model is the g functional okay and as i said uh
+[0:20:53] functional okay and as i said uh the estimators are those that estimate
+[0:20:56] the estimators are those that estimate uh
+[0:20:57] uh the propensity score or the outcome
+[0:20:58] the propensity score or the outcome regression nonparametrically
+[0:21:00] regression nonparametrically and the key point is that under
+[0:21:03] and the key point is that under sufficient regularity conditions on the
+[0:21:06] sufficient regularity conditions on the complexity
+[0:21:07] complexity of the nuisance functions or the
+[0:21:10] of the nuisance functions or the smoothness of the nuisance functions
+[0:21:12] smoothness of the nuisance functions uh all regular and asymptotically linear
+[0:21:16] uh all regular and asymptotically linear estimators
+[0:21:17] estimators uh basically if you wish all asymptotes
+[0:21:20] uh basically if you wish all asymptotes uh estimators that are root and
+[0:21:22] uh estimators that are root and consistent will be
+[0:21:24] consistent will be asymptotically normal will have uh
+[0:21:27] asymptotically normal will have uh the same limiting mean zero normal
+[0:21:30] the same limiting mean zero normal distribution
+[0:21:31] distribution with the variance that now i can index
+[0:21:33] with the variance that now i can index based on
+[0:21:35] based on pi the treatment regime and l
+[0:21:38] pi the treatment regime and l okay and l meaning the particular
+[0:21:41] okay and l meaning the particular adjustment set
+[0:21:42] adjustment set that i chose and of course it will
+[0:21:44] that i chose and of course it will depend on p okay on the particular law
+[0:21:46] depend on p okay on the particular law at which i
+[0:21:47] at which i i um evaluate the calculation
+[0:21:51] i um evaluate the calculation now this variance here uh is actually
+[0:21:54] now this variance here uh is actually the variance of the unique influence
+[0:21:56] the variance of the unique influence function of the functional the g
+[0:21:58] function of the functional the g functional that are just for l under a
+[0:22:00] functional that are just for l under a non-parametric model
+[0:22:02] non-parametric model and there's a lot of knowledge that we
+[0:22:04] and there's a lot of knowledge that we all
+[0:22:05] all been studying for many many years about
+[0:22:08] been studying for many many years about the structure the geometric structure of
+[0:22:10] the structure the geometric structure of these
+[0:22:11] these unique influence function it's the a the
+[0:22:14] unique influence function it's the a the augmented ibw
+[0:22:16] augmented ibw estimating function if you wish uh
+[0:22:19] estimating function if you wish uh that we actually exploit it in order
+[0:22:23] that we actually exploit it in order to understand uh the the
+[0:22:27] to understand uh the the ordering of or to understand the
+[0:22:30] ordering of or to understand the structure
+[0:22:30] structure of the asymptotic variance or the
+[0:22:33] of the asymptotic variance or the dependence of the asymptotic variance of
+[0:22:35] dependence of the asymptotic variance of one l
+[0:22:37] one l okay so let's finalize the formalism of
+[0:22:41] okay so let's finalize the formalism of what i'm after um i will define then
+[0:22:44] what i'm after um i will define then a globally optimal z adjustment set
+[0:22:47] a globally optimal z adjustment set l global uh to a
+[0:22:50] l global uh to a an adjustment set such that for all
+[0:22:53] an adjustment set such that for all regimes
+[0:22:54] regimes and all laws under the bayesian network
+[0:22:58] and all laws under the bayesian network the variance the asymptotic variance
+[0:23:00] the variance the asymptotic variance that uses that particular adjustment set
+[0:23:03] that uses that particular adjustment set minimizes the uh variance the asymptotic
+[0:23:07] minimizes the uh variance the asymptotic variance
+[0:23:08] variance over all possible z adjustment sets
+[0:23:12] over all possible z adjustment sets so that's what i call global then the
+[0:23:15] so that's what i call global then the observably
+[0:23:16] observably observable globally optimal adjustment
+[0:23:18] observable globally optimal adjustment set z adjustment set
+[0:23:20] set z adjustment set will be the one that minimizes uh these
+[0:23:23] will be the one that minimizes uh these variants but now over observable
+[0:23:26] variants but now over observable adjustment sets
+[0:23:27] adjustment sets if such observable adjustment sets exist
+[0:23:29] if such observable adjustment sets exist of course
+[0:23:34] the problem then actually is a minimization problem
+[0:23:37] minimization problem where i now find a
+[0:23:40] where i now find a subset of variables which i call the
+[0:23:42] subset of variables which i call the observable variables let's call them
+[0:23:44] observable variables let's call them n and now the problem is minimize
+[0:23:48] n and now the problem is minimize the variance subject not only to l being
+[0:23:51] the variance subject not only to l being a c adjustment set but also to well
+[0:23:53] a c adjustment set but also to well being included
+[0:23:55] being included in the particular subset of observable
+[0:23:57] in the particular subset of observable variables
+[0:23:58] variables m okay and likewise
+[0:24:01] m okay and likewise i'm going to reiterate but i can do
+[0:24:06] i'm going to reiterate but i can do exactly the same
+[0:24:07] exactly the same i can give the same exact definitions
+[0:24:10] i can give the same exact definitions but now
+[0:24:10] but now restricting attentions furthermore to
+[0:24:13] restricting attentions furthermore to minimal
+[0:24:14] minimal uh the adjustment sets or to minimum z
+[0:24:17] uh the adjustment sets or to minimum z adjustment sets
+[0:24:20] adjustment sets okay now let me um
+[0:24:23] okay now let me um say that our work was really inspired we
+[0:24:27] say that our work was really inspired we started working on this problem after
+[0:24:29] started working on this problem after reading the fantastic paper by henkel
+[0:24:31] reading the fantastic paper by henkel perkovic and method
+[0:24:32] perkovic and method that actually provided graphical rules
+[0:24:36] that actually provided graphical rules for comparing certain pairs of static
+[0:24:38] for comparing certain pairs of static adjustment sets
+[0:24:39] adjustment sets and for determining the optimal global
+[0:24:42] and for determining the optimal global static adjustment set
+[0:24:44] static adjustment set but in that paper they um
+[0:24:47] but in that paper they um used um causal graphical
+[0:24:50] used um causal graphical linear models that is they further
+[0:24:53] linear models that is they further assumed that
+[0:24:54] assumed that you know that every every uh variable in
+[0:24:57] you know that every every uh variable in the dot
+[0:24:57] the dot was linearly related to
+[0:25:01] was linearly related to the parents and they estimated the
+[0:25:03] the parents and they estimated the treatment effect by ordinary squares
+[0:25:06] treatment effect by ordinary squares adjusting
+[0:25:07] adjusting by the particular adjustment set
+[0:25:15] of course their work and our work uh is frame uh into a
+[0:25:19] our work uh is frame uh into a long history of uh
+[0:25:22] long history of uh in classical statistics connected with
+[0:25:25] in classical statistics connected with the efficiency implications of include
+[0:25:27] the efficiency implications of include inclusion of over adjustment and
+[0:25:30] inclusion of over adjustment and precision variables in regression
+[0:25:32] precision variables in regression and that his literature dates back
+[0:25:36] and that his literature dates back at least to cochrane in 1968
+[0:25:40] at least to cochrane in 1968 okay and our contributions include
+[0:25:42] okay and our contributions include because uh you know we
+[0:25:43] because uh you know we as i said we go further in that we
+[0:25:45] as i said we go further in that we consider uh
+[0:25:47] consider uh adjustment sets that are minimal and
+[0:25:49] adjustment sets that are minimal and meaning
+[0:25:50] meaning minimum but also um time dependent it's
+[0:25:53] minimum but also um time dependent it's already personalized
+[0:25:54] already personalized and uh and assuming also hidden
+[0:25:58] and uh and assuming also hidden variables
+[0:25:59] variables but they include uh proving that the
+[0:26:01] but they include uh proving that the results at
+[0:26:02] results at kenkalperkovic and mathews also apply
+[0:26:05] kenkalperkovic and mathews also apply uh in the case of graphical models that
+[0:26:08] uh in the case of graphical models that are non-parametric
+[0:26:10] are non-parametric and where the treatment effect is
+[0:26:11] and where the treatment effect is estimated via non-parametrical covariate
+[0:26:14] estimated via non-parametrical covariate adjustment
+[0:26:15] adjustment so i think that this is a good time uh
+[0:26:18] so i think that this is a good time uh to stop
+[0:26:19] to stop um and ask questions i don't know if
+[0:26:22] um and ask questions i don't know if there's any question or shall i continue
+[0:26:26] there's any question or shall i continue yeah so there was one one one question
+[0:26:27] yeah so there was one one one question about uh uh clarifying so
+[0:26:30] about uh uh clarifying so the question has been handled by faculty
+[0:26:31] the question has been handled by faculty but i think it might be uh
+[0:26:33] but i think it might be uh helpful to to clarify that so the
+[0:26:36] helpful to to clarify that so the question was
+[0:26:36] question was uh about clarifying what you mean by all
+[0:26:39] uh about clarifying what you mean by all regimes
+[0:26:40] regimes uh pi and in particular whether that
+[0:26:42] uh pi and in particular whether that denotes any possible treatment
+[0:26:44] denotes any possible treatment assignment given z
+[0:26:45] assignment given z and kind of as a follow-up any possible
+[0:26:48] and kind of as a follow-up any possible treatment assignment given z that's
+[0:26:49] treatment assignment given z that's correct
+[0:26:50] correct okay meaning that it's for any regime
+[0:26:52] okay meaning that it's for any regime any absolutely
+[0:26:54] any absolutely remember how i uh i described one
+[0:26:56] remember how i uh i described one particular regime a deterministic regime
+[0:26:59] particular regime a deterministic regime that uh signed treatment only if z
+[0:27:01] that uh signed treatment only if z exceeded a particular threshold but now
+[0:27:03] exceeded a particular threshold but now you can change the threshold
+[0:27:05] you can change the threshold and that's a new regime or you can toss
+[0:27:07] and that's a new regime or you can toss a coin with a probability that depends
+[0:27:10] a coin with a probability that depends on
+[0:27:10] on you know on a on z and and you have now
+[0:27:13] you know on a on z and and you have now a different regime whether to assign or
+[0:27:15] a different regime whether to assign or not
+[0:27:16] not and and they are all they are all within
+[0:27:17] and and they are all they are all within that the class that i am considering
+[0:27:19] that the class that i am considering okay
+[0:27:20] okay and i will so in other words i'm not
+[0:27:22] and i will so in other words i'm not thinking of which regime i'm going to be
+[0:27:24] thinking of which regime i'm going to be estimating
+[0:27:25] estimating when i when i do the calculation the l
+[0:27:28] when i when i do the calculation the l that i will obtain will be valid for
+[0:27:30] that i will obtain will be valid for any regime and if you consider if you
+[0:27:33] any regime and if you consider if you consider a a deterministic regime where
+[0:27:36] consider a a deterministic regime where that actually doesn't depend on z so a
+[0:27:38] that actually doesn't depend on z so a is assigned
+[0:27:39] is assigned like uh right that's a static static
+[0:27:42] like uh right that's a static static case yes
+[0:27:42] case yes yeah that's a static case that's when z
+[0:27:44] yeah that's a static case that's when z is the empty set
+[0:27:46] is the empty set and that's where that's that's uh that's
+[0:27:49] and that's where that's that's uh that's what most of the literature
+[0:27:51] what most of the literature uh concentrates on you know but if you
+[0:27:53] uh concentrates on you know but if you so if you include
+[0:27:54] so if you include z in the in the adjustment set um
+[0:27:57] z in the in the adjustment set um as you would do for the for the um uh
+[0:28:00] as you would do for the for the um uh the the non-static regime then
+[0:28:04] the the non-static regime then um isn't there a risk that you might
+[0:28:06] um isn't there a risk that you might include a variable that you shouldn't
+[0:28:08] include a variable that you shouldn't actually include
+[0:28:09] actually include that basically breaks no no because i'm
+[0:28:12] that basically breaks no no because i'm including i'm including variables so
+[0:28:15] including i'm including variables so first of all
+[0:28:16] first of all um okay so so it's a good point but
+[0:28:20] um okay so so it's a good point but but you have to see that when i look at
+[0:28:22] but you have to see that when i look at the class of z
+[0:28:23] the class of z adjustment sets this result says that
+[0:28:26] adjustment sets this result says that for
+[0:28:27] for a adjustment set to be a valid g
+[0:28:29] a adjustment set to be a valid g adjustment set
+[0:28:30] adjustment set it has to be a static adjustment set so
+[0:28:34] it has to be a static adjustment set so what you are thinking is i start with
+[0:28:36] what you are thinking is i start with that static adjustment set
+[0:28:38] that static adjustment set and i add to a static adjustment set z
+[0:28:41] and i add to a static adjustment set z and that's wrong
+[0:28:42] and that's wrong okay that's not what i'm saying okay
+[0:28:44] okay that's not what i'm saying okay what i'm saying is
+[0:28:45] what i'm saying is you give me a static adjustment set you
+[0:28:48] you give me a static adjustment set you check
+[0:28:48] check whether that adjustment set includes z
+[0:28:52] whether that adjustment set includes z and then if it does then it's a valid g
+[0:28:54] and then if it does then it's a valid g adjustment set
+[0:28:55] adjustment set and not otherwise great
+[0:28:59] and not otherwise great thank you all right um okay
+[0:29:02] thank you all right um okay so um all right so let me now
+[0:29:07] so um all right so let me now uh continue with um
+[0:29:11] uh continue with um now going to um
+[0:29:14] now going to um the formalization okay so our first
+[0:29:17] the formalization okay so our first result
+[0:29:18] result concerns supplementation of an existing
+[0:29:21] concerns supplementation of an existing adjustment set with precision variables
+[0:29:24] adjustment set with precision variables now suppose that b is a z adjustment set
+[0:29:27] now suppose that b is a z adjustment set and that conditional on it g is
+[0:29:30] and that conditional on it g is d separated from treatment that is under
+[0:29:33] d separated from treatment that is under the
+[0:29:33] the any factual law in the bayesian network
+[0:29:36] any factual law in the bayesian network g
+[0:29:36] g does not predict treatment then the
+[0:29:39] does not predict treatment then the result says
+[0:29:41] result says that g union b
+[0:29:44] that g union b is also a z adjustment set
+[0:29:47] is also a z adjustment set and the asymptotic variance of the
+[0:29:49] and the asymptotic variance of the non-parametric
+[0:29:50] non-parametric estimators that use b union g
+[0:29:54] estimators that use b union g is less than or equal than that of the
+[0:29:57] is less than or equal than that of the estimators that use b alone
+[0:29:59] estimators that use b alone in other words adding g a variable that
+[0:30:03] in other words adding g a variable that does not further predict treatment
+[0:30:06] does not further predict treatment can never hurt it can only help but it
+[0:30:09] can never hurt it can only help but it can never hurt
+[0:30:10] can never hurt okay all right because
+[0:30:13] okay all right because that variable g of course will be a
+[0:30:16] that variable g of course will be a variable that will
+[0:30:17] variable that will um actually
+[0:30:25] at most helped me with uh predicting why okay and it doesn't create any over
+[0:30:27] okay and it doesn't create any over adjustment
+[0:30:29] adjustment okay uh now in fact um
+[0:30:33] okay uh now in fact um the uh for the special case in which the
+[0:30:36] the uh for the special case in which the regime is static
+[0:30:38] regime is static and assigns a to little a the formula
+[0:30:40] and assigns a to little a the formula for the amount of variance reduction is
+[0:30:42] for the amount of variance reduction is quite intuitive and revealing
+[0:30:45] quite intuitive and revealing uh it says that there is that there will
+[0:30:47] uh it says that there is that there will be a large variance reduction
+[0:30:50] be a large variance reduction when among those treated with a equal
+[0:30:53] when among those treated with a equal little a
+[0:30:55] little a within strata of the existing adjustment
+[0:30:57] within strata of the existing adjustment set b
+[0:30:58] set b the supplemental variables g are strong
+[0:31:02] the supplemental variables g are strong predictors of the outcomes
+[0:31:04] predictors of the outcomes for those variables of the existing
+[0:31:07] for those variables of the existing adjustment set values for those values
+[0:31:10] adjustment set values for those values of the existing
+[0:31:12] of the existing adjustment set variable sorry for which
+[0:31:14] adjustment set variable sorry for which there is a
+[0:31:15] there is a small chance of being assigned treatment
+[0:31:18] small chance of being assigned treatment if you look at this
+[0:31:19] if you look at this here i mean yes uh g when g is a good
+[0:31:23] here i mean yes uh g when g is a good predictor
+[0:31:24] predictor of of the outcome this variance will be
+[0:31:27] of of the outcome this variance will be small
+[0:31:28] small but it will matter most when g is a good
+[0:31:31] but it will matter most when g is a good predictor for
+[0:31:32] predictor for those values of b for which b has a
+[0:31:35] those values of b for which b has a little chance at for those
+[0:31:37] little chance at for those values of b for which a has a little
+[0:31:39] values of b for which a has a little chance of being assigned to a because in
+[0:31:41] chance of being assigned to a because in those cases
+[0:31:42] those cases this will be small this will be large
+[0:31:44] this will be small this will be large and then there will be a great
+[0:31:46] and then there will be a great reduction in variance okay
+[0:31:49] reduction in variance okay now for b equal to the empty set
+[0:31:53] now for b equal to the empty set uh in fact this result uh we um
+[0:31:56] uh in fact this result uh we um jamie and i um in 1992 already
+[0:32:00] jamie and i um in 1992 already calculated this result uh for for b
+[0:32:02] calculated this result uh for for b equals the empty set and han
+[0:32:04] equals the empty set and han later on in 1988 gave the same formula
+[0:32:08] later on in 1988 gave the same formula and for that case the formula quantifies
+[0:32:10] and for that case the formula quantifies the variance reduction associated with
+[0:32:12] the variance reduction associated with adjustment for pre-treatment covariates
+[0:32:14] adjustment for pre-treatment covariates in randomized studies
+[0:32:16] in randomized studies for static regimes henkel at all
+[0:32:20] for static regimes henkel at all obtained a similar quantitative result
+[0:32:23] obtained a similar quantitative result for the asymptotic variance of ols
+[0:32:25] for the asymptotic variance of ols estimators and there it cause a linear
+[0:32:27] estimators and there it cause a linear graphical model
+[0:32:33] all right now let's consider the next one
+[0:32:34] one the next one is about deleting or
+[0:32:36] the next one is about deleting or pruning variables from an
+[0:32:38] pruning variables from an existing adjustment set that existing
+[0:32:41] existing adjustment set that existing adjustment set i will call
+[0:32:42] adjustment set i will call it g union b okay
+[0:32:45] it g union b okay and i will be contemplating uh
+[0:32:49] and i will be contemplating uh eliminating variables from that set that
+[0:32:52] eliminating variables from that set that do not further predict the outcome
+[0:32:56] do not further predict the outcome given the variables that will remain in
+[0:32:58] given the variables that will remain in the adjustment set will
+[0:33:00] the adjustment set will that will remain in the set and the
+[0:33:02] that will remain in the set and the treatment
+[0:33:03] treatment well if i if i delete variables that
+[0:33:06] well if i if i delete variables that satisfy this condition
+[0:33:07] satisfy this condition then it will turn out that if the
+[0:33:09] then it will turn out that if the remaining variables that if i have not
+[0:33:11] remaining variables that if i have not deleted the zs
+[0:33:13] deleted the zs from the set then the uh
+[0:33:16] from the set then the uh remaining variables will also be at the
+[0:33:18] remaining variables will also be at the adjustment set
+[0:33:20] adjustment set and it will again happen
+[0:33:23] and it will again happen that the deletion will never hurt me and
+[0:33:25] that the deletion will never hurt me and in fact typically it will help me
+[0:33:27] in fact typically it will help me meaning that for all pies for all
+[0:33:30] meaning that for all pies for all regimes and for
+[0:33:32] regimes and for all peace it will be the case that the
+[0:33:34] all peace it will be the case that the asymptotic variance
+[0:33:36] asymptotic variance by using just g will be better than
+[0:33:38] by using just g will be better than using g union b
+[0:33:45] okay now um again uh the formula for the case of a static
+[0:33:48] uh the formula for the case of a static regime that assigns
+[0:33:49] regime that assigns a to little a is revealing
+[0:33:52] a to little a is revealing it says that the deletion will induce a
+[0:33:55] it says that the deletion will induce a large variance reduction
+[0:33:56] large variance reduction when within levels of the remaining
+[0:33:59] when within levels of the remaining variables g
+[0:34:01] variables g the variables b are strong predictors of
+[0:34:03] the variables b are strong predictors of treatment
+[0:34:04] treatment especially for those levels of the
+[0:34:06] especially for those levels of the remaining variables g
+[0:34:08] remaining variables g for which among the treated the outcome
+[0:34:10] for which among the treated the outcome y is harder to predict
+[0:34:12] y is harder to predict meaning for those values of g for which
+[0:34:15] meaning for those values of g for which this variance this conditional variance
+[0:34:17] this variance this conditional variance is large
+[0:34:18] is large in other words i mean if i if i have to
+[0:34:21] in other words i mean if i if i have to uh roughly speaking uh
+[0:34:23] uh roughly speaking uh say what this uh formula is involving
+[0:34:27] say what this uh formula is involving uh the variance reduction induced by
+[0:34:30] uh the variance reduction induced by deletion
+[0:34:30] deletion of an over adjustment variable b will be
+[0:34:33] of an over adjustment variable b will be larger the stronger the association
+[0:34:35] larger the stronger the association encoded in the green arrow is
+[0:34:38] encoded in the green arrow is but the impact of the deletion will be
+[0:34:40] but the impact of the deletion will be more significant the weaker the
+[0:34:41] more significant the weaker the association encoded in the blue edges
+[0:34:44] association encoded in the blue edges so that the expectation this expectation
+[0:34:47] so that the expectation this expectation is larger
+[0:34:49] is larger and uh the weaker the association
+[0:34:52] and uh the weaker the association included
+[0:34:52] included um in the um sorry what did i say
+[0:34:56] um in the um sorry what did i say the yeah so if if the if the red
+[0:35:00] the yeah so if if the if the red arrow is uh encoding a weak association
+[0:35:03] arrow is uh encoding a weak association then these um this is going to be large
+[0:35:07] then these um this is going to be large and that's when it will matter most okay
+[0:35:10] and that's when it will matter most okay when the over adjustment when deletion
+[0:35:12] when the over adjustment when deletion of the over adjustment variable
+[0:35:13] of the over adjustment variable will matter most and the intuition for
+[0:35:16] will matter most and the intuition for that is that if g
+[0:35:17] that is that if g predicts perfectly well y then it
+[0:35:19] predicts perfectly well y then it doesn't really matter whether you add b
+[0:35:21] doesn't really matter whether you add b or not
+[0:35:22] or not okay so basically that's what what's
+[0:35:24] okay so basically that's what what's this is saying
+[0:35:26] this is saying all right so now uh let's add a
+[0:35:29] all right so now uh let's add a corollary
+[0:35:30] corollary okay that is immediate from these other
+[0:35:33] okay that is immediate from these other two
+[0:35:34] two uh results the corollary says that well
+[0:35:36] uh results the corollary says that well suppose
+[0:35:37] suppose that g and b are two z adjustment sets
+[0:35:41] that g and b are two z adjustment sets and the part of g that is not in b does
+[0:35:44] and the part of g that is not in b does not help me to further predict a
+[0:35:47] not help me to further predict a and the the part of b that is not in g
+[0:35:50] and the the part of b that is not in g does not help me
+[0:35:51] does not help me predict uh y given uh g and
+[0:35:54] predict uh y given uh g and and the the treatment then it's always
+[0:35:57] and the the treatment then it's always it
+[0:35:58] it then for every law in the bayesian
+[0:36:00] then for every law in the bayesian network and all regimes
+[0:36:02] network and all regimes it's always the case uh that uh using g
+[0:36:05] it's always the case uh that uh using g can never hurt i mean and typically
+[0:36:07] can never hurt i mean and typically helps
+[0:36:08] helps okay and the uh the proof is really
+[0:36:11] okay and the uh the proof is really straightforward and
+[0:36:13] straightforward and rather revealing because what we do is
+[0:36:15] rather revealing because what we do is we just add and subtract
+[0:36:18] we just add and subtract the variance of using b union g
+[0:36:21] the variance of using b union g okay and then we have uh one part that
+[0:36:24] okay and then we have uh one part that is the gain due to supplementation with
+[0:36:26] is the gain due to supplementation with the precision component of g minus b
+[0:36:29] the precision component of g minus b and then there is another part that is
+[0:36:30] and then there is another part that is due to the gain due to deletion of the
+[0:36:33] due to the gain due to deletion of the noisy component of v minus g
+[0:36:36] noisy component of v minus g and in this graph then if i use this
+[0:36:39] and in this graph then if i use this result it will tell me that g is always
+[0:36:41] result it will tell me that g is always better than b
+[0:36:42] better than b and and it would be much much better if
+[0:36:44] and and it would be much much better if g
+[0:36:45] g encodes a strong uh association so that
+[0:36:48] encodes a strong uh association so that g is a good predictor of y
+[0:36:49] g is a good predictor of y but b it's also very strong okay it's a
+[0:36:52] but b it's also very strong okay it's a very strong association
+[0:36:54] very strong association okay and the green line is weak so that
+[0:36:58] okay and the green line is weak so that g
+[0:36:58] g is not too much associated with a
+[0:37:02] is not too much associated with a all right now not all adjustment sets
+[0:37:06] all right now not all adjustment sets are comparable
+[0:37:07] are comparable and this graph is is just telling the
+[0:37:09] and this graph is is just telling the whole story because in this graph this
+[0:37:11] whole story because in this graph this graph is completely symmetric
+[0:37:13] graph is completely symmetric so there's no reason why
+[0:37:19] you know picking o1 and w2 as an adjustment set will be any
+[0:37:21] adjustment set will be any better across all laws than picking w1
+[0:37:25] better across all laws than picking w1 and o2
+[0:37:26] and o2 and in fact it will very much matter
+[0:37:28] and in fact it will very much matter depending on the strength of
+[0:37:29] depending on the strength of of the associations and i will not go
+[0:37:31] of the associations and i will not go through that because
+[0:37:34] through that because it's pretty clear but the truth is that
+[0:37:38] it's pretty clear but the truth is that in fact in spite of the fact that there
+[0:37:40] in fact in spite of the fact that there is no
+[0:37:41] is no adjustment set no that it's not true
+[0:37:43] adjustment set no that it's not true that all adjustment sets are comparable
+[0:37:46] that all adjustment sets are comparable uh it is true that there is one
+[0:37:49] uh it is true that there is one adjustment set
+[0:37:50] adjustment set that is uh more efficient than everyone
+[0:37:52] that is uh more efficient than everyone okay it's it's the best of all of them
+[0:37:54] okay it's it's the best of all of them and that's the o102 is the one
+[0:37:57] and that's the o102 is the one intuitively that is closer to y okay
+[0:38:01] intuitively that is closer to y okay and to formalize this result
+[0:38:04] and to formalize this result actually it's not me that i'm going to
+[0:38:06] actually it's not me that i'm going to formalize it's a result
+[0:38:08] formalize it's a result it's a graphical result really that was
+[0:38:12] it's a graphical result really that was derived
+[0:38:12] derived again in bachelor percover matthews
+[0:38:16] again in bachelor percover matthews and it specifies the following so
+[0:38:19] and it specifies the following so here is the guy that is going to be the
+[0:38:21] here is the guy that is going to be the winner okay oh
+[0:38:23] winner okay oh so consider the set o which is the set
+[0:38:26] so consider the set o which is the set of non-descendants of a
+[0:38:28] of non-descendants of a and i'm writing it you know avoiding as
+[0:38:30] and i'm writing it you know avoiding as much as possible
+[0:38:31] much as possible you know terminology that is uh you know
+[0:38:34] you know terminology that is uh you know too technical
+[0:38:35] too technical okay so o is the set of non-descendants
+[0:38:38] okay so o is the set of non-descendants of a
+[0:38:40] of a that are either parents of y or parents
+[0:38:43] that are either parents of y or parents of the vertices
+[0:38:44] of the vertices that are in the causal pathway between a
+[0:38:46] that are in the causal pathway between a and y now because they are
+[0:38:47] and y now because they are non-descendants of a they cannot be in
+[0:38:49] non-descendants of a they cannot be in the causal pathway
+[0:38:50] the causal pathway okay but they are parents of y or
+[0:38:53] okay but they are parents of y or the vertices that are in the causal
+[0:38:56] the vertices that are in the causal pathway between a and y
+[0:38:59] pathway between a and y well that's it henkel it all
+[0:39:02] well that's it henkel it all proved that it's a static adjustment set
+[0:39:05] proved that it's a static adjustment set and furthermore
+[0:39:06] and furthermore that it satisfies these two conditions
+[0:39:09] that it satisfies these two conditions okay so that for any other static
+[0:39:12] okay so that for any other static adjustment set
+[0:39:13] adjustment set it verifies the two conditions that a
+[0:39:16] it verifies the two conditions that a good
+[0:39:17] good adjustment set ought to satisfy and
+[0:39:19] adjustment set ought to satisfy and therefore
+[0:39:20] therefore uh immediately it follows from
+[0:39:23] uh immediately it follows from the corollaries that i mentioned earlier
+[0:39:26] the corollaries that i mentioned earlier that always then the globally optimal
+[0:39:28] that always then the globally optimal static adjustment set
+[0:39:30] static adjustment set okay but that's just for static
+[0:39:32] okay but that's just for static adjustment set how about
+[0:39:33] adjustment set how about four adjustment sets that depend on
+[0:39:37] four adjustment sets that depend on personalized regimes that depend on z
+[0:39:39] personalized regimes that depend on z well
+[0:39:40] well in uh in the 2021 paper
+[0:39:43] in uh in the 2021 paper with facundo and sequel we proved that
+[0:39:46] with facundo and sequel we proved that uh
+[0:39:46] uh o union z is the optimally global
+[0:39:50] o union z is the optimally global uh optimal global z adjustment set
+[0:39:53] uh optimal global z adjustment set so let me give you the example so in
+[0:39:55] so let me give you the example so in this example
+[0:39:56] this example these three guys here are uh determine
+[0:40:00] these three guys here are uh determine the optimal adjustment set
+[0:40:01] the optimal adjustment set because they are parents of either
+[0:40:06] because they are parents of either uh the mediator in the causal pathway
+[0:40:09] uh the mediator in the causal pathway between treatment and outcome
+[0:40:11] between treatment and outcome or they are parents of the outcome okay
+[0:40:14] or they are parents of the outcome okay and themselves they are not descendants
+[0:40:16] and themselves they are not descendants of treatment
+[0:40:18] of treatment okay so this is the globally optimal
+[0:40:19] okay so this is the globally optimal adjustment set it's the o set
+[0:40:22] adjustment set it's the o set and if i were to consider a treatment
+[0:40:25] and if i were to consider a treatment regime
+[0:40:25] regime where i decide the type of warm-up
+[0:40:29] where i decide the type of warm-up exercise
+[0:40:29] exercise based on previous injury a type of
+[0:40:32] based on previous injury a type of previous injury
+[0:40:34] previous injury then now the optimal global adjustment
+[0:40:37] then now the optimal global adjustment set
+[0:40:37] set will also include a previous injury and
+[0:40:40] will also include a previous injury and this now
+[0:40:41] this now is a globally optimal adjustment set
+[0:40:45] is a globally optimal adjustment set now regarding guillermo's
+[0:40:48] now regarding guillermo's point it is true that if you give me
+[0:40:52] point it is true that if you give me um an adjustment set that is static
+[0:40:55] um an adjustment set that is static uh it doesn't necessarily
+[0:40:58] uh it doesn't necessarily happen that when i add z
+[0:41:01] happen that when i add z i will remain it will remain being a
+[0:41:04] i will remain it will remain being a an adjustment set and you can see that
+[0:41:07] an adjustment set and you can see that because like for example with the m bias
+[0:41:15] graph um you know the empty set is is uh is an adjustment set but if i
+[0:41:18] is uh is an adjustment set but if i if my z was exactly the point in the
+[0:41:20] if my z was exactly the point in the middle of the m bias
+[0:41:22] middle of the m bias um of course when i add the z i open a
+[0:41:25] um of course when i add the z i open a path
+[0:41:25] path and and it's no longer you know it's no
+[0:41:28] and and it's no longer you know it's no longer an
+[0:41:29] longer an adjustment set it doesn't block all the
+[0:41:31] adjustment set it doesn't block all the vector paths
+[0:41:32] vector paths between a and y but with the optimal
+[0:41:35] between a and y but with the optimal adjustments
+[0:41:36] adjustments just one second with the optimal
+[0:41:37] just one second with the optimal adjustment said it is true
+[0:41:39] adjustment said it is true it is true that oh union set is an
+[0:41:42] it is true that oh union set is an adjustment set
+[0:41:43] adjustment set okay is is is the optimal adjustment set
+[0:41:46] okay is is is the optimal adjustment set i mean
+[0:41:46] i mean it is an adjustment set so even though
+[0:41:48] it is an adjustment set so even though it's not true for everything
+[0:41:50] it's not true for everything all union z is an adjustment set i mean
+[0:41:53] all union z is an adjustment set i mean if you add to o
+[0:41:54] if you add to o any non-descendant of y of a sorry
+[0:41:58] any non-descendant of y of a sorry if you add to o if you consider o
+[0:42:01] if you add to o if you consider o union any non-descendant of a you obtain
+[0:42:04] union any non-descendant of a you obtain a static adjustment set
+[0:42:06] a static adjustment set therefore now you have an adjustment set
+[0:42:08] therefore now you have an adjustment set that is static and it includes z
+[0:42:10] that is static and it includes z therefore is the z adjustment set
+[0:42:14] therefore is the z adjustment set okay it's a c attachment set did you
+[0:42:17] okay it's a c attachment set did you have a
+[0:42:18] have a point that you want sorry i just wanted
+[0:42:20] point that you want sorry i just wanted to say you have about six minutes left
+[0:42:22] to say you have about six minutes left oh my gosh okay well then i have very
+[0:42:25] oh my gosh okay well then i have very little
+[0:42:26] little more to say okay so let me then go to
+[0:42:29] more to say okay so let me then go to uh optimal minimal adjustment set now
+[0:42:32] uh optimal minimal adjustment set now included in the adjustment set there may
+[0:42:33] included in the adjustment set there may be many
+[0:42:34] be many several distinct minimal adjustments set
+[0:42:37] several distinct minimal adjustments set however included in the globally optimal
+[0:42:39] however included in the globally optimal adjustment set there is a unique minimal
+[0:42:41] adjustment set there is a unique minimal adjustment set
+[0:42:42] adjustment set which turns out to be the
+[0:42:45] which turns out to be the optimal among minimal adjustment sets
+[0:42:49] optimal among minimal adjustment sets and how do i find that minimal optimal
+[0:42:51] and how do i find that minimal optimal adjustment set
+[0:42:52] adjustment set what i do is i
+[0:42:56] what i do is i essentially consider the optimal
+[0:42:58] essentially consider the optimal adjustment set
+[0:43:00] adjustment set okay the z up in this the z adjustment
+[0:43:03] okay the z up in this the z adjustment set the optimal z adjustment set
+[0:43:05] set the optimal z adjustment set and i start removing variables from that
+[0:43:08] and i start removing variables from that set
+[0:43:09] set except for the zs that i keep i start
+[0:43:11] except for the zs that i keep i start removing variables
+[0:43:12] removing variables that are not associated with a
+[0:43:16] that are not associated with a okay conditional on the remaining
+[0:43:17] okay conditional on the remaining variables and it turns out that you can
+[0:43:19] variables and it turns out that you can do this process
+[0:43:20] do this process until you you exhaust possibilities okay
+[0:43:23] until you you exhaust possibilities okay and there's always a smallest subset
+[0:43:26] and there's always a smallest subset of all union z uh that includes z
+[0:43:30] of all union z uh that includes z and that um that um
+[0:43:33] and that um that um that satisfies this condition okay
+[0:43:36] that satisfies this condition okay so um now
+[0:43:40] so um now in our 2020 paper we show that when z
+[0:43:44] in our 2020 paper we show that when z is the empty set omin is the optimal
+[0:43:46] is the empty set omin is the optimal minimal adjustment set and in our 2021
+[0:43:49] minimal adjustment set and in our 2021 we show that it's the minimal now
+[0:43:52] we show that it's the minimal now here is the deal this is the optimal
+[0:43:56] here is the deal this is the optimal minimal adjustment set that is static
+[0:43:58] minimal adjustment set that is static because i can remove
+[0:44:00] because i can remove contact sport contact sport is
+[0:44:03] contact sport contact sport is is conditionally independent of
+[0:44:05] is conditionally independent of treatment given what remains
+[0:44:07] treatment given what remains but i cannot remove anything else
+[0:44:09] but i cannot remove anything else because anything else will
+[0:44:10] because anything else will uh uh will be um
+[0:44:13] uh uh will be um will will uh destroy um
+[0:44:16] will will uh destroy um destroy the um the validity of the
+[0:44:19] destroy the um the validity of the adjustment center
+[0:44:20] adjustment center yet if i wanted to consider uh an up an
+[0:44:24] yet if i wanted to consider uh an up an adjustment set that it depends on
+[0:44:26] adjustment set that it depends on previous injury where z is previous
+[0:44:28] previous injury where z is previous injury now i have to include contact
+[0:44:30] injury now i have to include contact sport because
+[0:44:31] sport because if i don't include contact sport then i
+[0:44:34] if i don't include contact sport then i create
+[0:44:34] create a an open path okay so now the
+[0:44:37] a an open path okay so now the optimal minimal adjustment set agrees
+[0:44:40] optimal minimal adjustment set agrees with the optimal global adjustment set i
+[0:44:42] with the optimal global adjustment set i cannot remove any variable
+[0:44:44] cannot remove any variable in this case okay now
+[0:44:48] in this case okay now i'm going to skip all the minimum stuff
+[0:44:50] i'm going to skip all the minimum stuff because uh there's no
+[0:44:52] because uh there's no no time really for for minimum let me
+[0:44:55] no time really for for minimum let me just
+[0:44:56] just very briefly say a few words about uh
+[0:44:58] very briefly say a few words about uh hidden variables that's with hidden
+[0:45:00] hidden variables that's with hidden variables
+[0:45:01] variables if i have that with hidden variables
+[0:45:04] if i have that with hidden variables even if
+[0:45:05] even if an observable variable adjustment set
+[0:45:07] an observable variable adjustment set exists a globally
+[0:45:09] exists a globally optimal adjustment set may not exist and
+[0:45:11] optimal adjustment set may not exist and this was actually also noticed in the
+[0:45:13] this was actually also noticed in the paper by kenkeletol
+[0:45:15] paper by kenkeletol and and here is an example uh if i have
+[0:45:18] and and here is an example uh if i have this dag and u
+[0:45:20] this dag and u is not observable then i have two
+[0:45:23] is not observable then i have two options either the empty set is an
+[0:45:24] options either the empty set is an adjustment set or
+[0:45:26] adjustment set or l1 l2 is an adjustment set and neither
+[0:45:29] l1 l2 is an adjustment set and neither one is a winner
+[0:45:31] one is a winner universally because it will depend on
+[0:45:33] universally because it will depend on whether
+[0:45:34] whether l1 l2 are great predictors of why where
+[0:45:37] l1 l2 are great predictors of why where while not good predictors of a
+[0:45:39] while not good predictors of a in which case l1 l2 will be you know
+[0:45:42] in which case l1 l2 will be you know under those laws where
+[0:45:43] under those laws where you know the association encoded in the
+[0:45:45] you know the association encoded in the blue line
+[0:45:46] blue line is weak but the association encoded in
+[0:45:49] is weak but the association encoded in the red lines um
+[0:45:50] the red lines um red arrows is strong then l1 l2 will be
+[0:45:53] red arrows is strong then l1 l2 will be a winner but otherwise
+[0:45:55] a winner but otherwise um you know if the reverse strengths
+[0:45:58] um you know if the reverse strengths occur the empty set will be a leader um
+[0:46:02] occur the empty set will be a leader um so uh in uh our paper 21
+[0:46:06] so uh in uh our paper 21 2021 paper in fact we did show that
+[0:46:09] 2021 paper in fact we did show that there
+[0:46:10] there we did prove a sufficient condition uh
+[0:46:13] we did prove a sufficient condition uh for
+[0:46:13] for existence of the globally optimal
+[0:46:15] existence of the globally optimal adjustment adjustment set
+[0:46:16] adjustment adjustment set and this is of course that there is an
+[0:46:18] and this is of course that there is an adjustment set and secondly
+[0:46:20] adjustment set and secondly that uh that every observable and just
+[0:46:23] that uh that every observable and just a variable is an ancestor of at least a
+[0:46:26] a variable is an ancestor of at least a y or z
+[0:46:27] y or z and again i don't have time to go
+[0:46:29] and again i don't have time to go through much of this
+[0:46:30] through much of this we also proved in that paper
+[0:46:34] we also proved in that paper that optimal minimal and optimal minimum
+[0:46:37] that optimal minimal and optimal minimum always exist among the observable
+[0:46:38] always exist among the observable minimum and minimal
+[0:46:40] minimum and minimal adjusted at the adjustment set so long
+[0:46:43] adjusted at the adjustment set so long as of course there is one
+[0:46:45] as of course there is one adjustment set that is observable
+[0:46:48] adjustment set that is observable and we provided the polynomial time
+[0:46:50] and we provided the polynomial time graphical algorithm that is based on a
+[0:46:52] graphical algorithm that is based on a particular latent projected undirected
+[0:46:54] particular latent projected undirected moralized graph
+[0:46:56] moralized graph that finds actually the optimal minimal
+[0:46:58] that finds actually the optimal minimal and minimum
+[0:46:59] and minimum and the globally optimal when uh that
+[0:47:02] and the globally optimal when uh that such
+[0:47:03] such when they you know when the conditions
+[0:47:05] when they you know when the conditions that i previously
+[0:47:06] that i previously previously stated the sufficient
+[0:47:08] previously stated the sufficient conditions hold and we wrote a
+[0:47:10] conditions hold and we wrote a python package you know that is
+[0:47:13] python package you know that is available
+[0:47:14] available that implements these algorithms i'm not
+[0:47:16] that implements these algorithms i'm not sure
+[0:47:17] sure how much i won't talk about say
+[0:47:19] how much i won't talk about say parametric estimation i don't have time
+[0:47:21] parametric estimation i don't have time for that but let me just mention
+[0:47:22] for that but let me just mention a few things that i didn't talk ab at
+[0:47:24] a few things that i didn't talk ab at all uh
+[0:47:25] all uh multiple treatment and time dependent
+[0:47:27] multiple treatment and time dependent confounding the results are not so
+[0:47:29] confounding the results are not so exciting because
+[0:47:31] exciting because uh there are graphs which not even a
+[0:47:34] uh there are graphs which not even a globally optimal
+[0:47:35] globally optimal adjustment set exists um when
+[0:47:39] adjustment set exists um when when every all the variables are
+[0:47:41] when every all the variables are observable uh so i'm not
+[0:47:43] observable uh so i'm not uh it's it's subtle but it's like that i
+[0:47:46] uh it's it's subtle but it's like that i didn't talk at all about uh
+[0:47:48] didn't talk at all about uh cp dax and pdax even though many of the
+[0:47:50] cp dax and pdax even though many of the results that we
+[0:47:51] results that we we did apply also that we have apply
+[0:47:54] we did apply also that we have apply also to
+[0:47:54] also to these tags there's a lot of work in this
+[0:47:57] these tags there's a lot of work in this area
+[0:47:58] area uh by emma and co-authors
+[0:48:06] etc and they are all fantastic they are mostly
+[0:48:07] mostly mostly accepted by the for the week we
+[0:48:10] mostly accepted by the for the week we with that all
+[0:48:11] with that all are focused on on linear models on
+[0:48:13] are focused on on linear models on linear
+[0:48:14] linear graphical models but let me just mention
+[0:48:17] graphical models but let me just mention an open question that
+[0:48:18] an open question that um that you know several open questions
+[0:48:21] um that you know several open questions that we're working some on
+[0:48:22] that we're working some on on right now for some of which we have
+[0:48:25] on right now for some of which we have some answers some
+[0:48:26] some answers some we don't okay so really really for
+[0:48:29] we don't okay so really really for design the question of
+[0:48:30] design the question of interest is the following so assume the
+[0:48:32] interest is the following so assume the cost of an adjustment set is
+[0:48:34] cost of an adjustment set is cl okay so you have a cost for each
+[0:48:36] cl okay so you have a cost for each adjustment set
+[0:48:38] adjustment set so now we want to find the adjustment
+[0:48:40] so now we want to find the adjustment set
+[0:48:41] set that minimizes okay the asymptotic
+[0:48:44] that minimizes okay the asymptotic variance
+[0:48:45] variance overall adjustment set that satisfy the
+[0:48:47] overall adjustment set that satisfy the cost constraint
+[0:48:48] cost constraint okay a cost constraint where you have c
+[0:48:50] okay a cost constraint where you have c star is the
+[0:48:51] star is the total amount of money that you're
+[0:48:53] total amount of money that you're willing to spend that you can spend
+[0:48:55] willing to spend that you can spend and that is uh you know that it's true
+[0:48:59] and that is uh you know that it's true um universally for all laws uh in the
+[0:49:02] um universally for all laws uh in the bayesian network
+[0:49:03] bayesian network we don't think this problem is solvable
+[0:49:05] we don't think this problem is solvable we don't even know that there is a
+[0:49:06] we don't even know that there is a solution but perhaps what we
+[0:49:08] solution but perhaps what we think we will be able to find a solution
+[0:49:11] think we will be able to find a solution is uh
+[0:49:12] is uh if we restrict attention to the c star
+[0:49:14] if we restrict attention to the c star that is already uh
+[0:49:16] that is already uh looking at only you know it's it's the
+[0:49:19] looking at only you know it's it's the it's the minimum cost is the cost of the
+[0:49:22] it's the minimum cost is the cost of the less costly uh adjustment set
+[0:49:25] less costly uh adjustment set and of course this is what uh minimum
+[0:49:27] and of course this is what uh minimum the l minimum solves
+[0:49:28] the l minimum solves because it solves it when the cost is
+[0:49:30] because it solves it when the cost is the size of the adjustment set
+[0:49:33] the size of the adjustment set um so then there is semi parametric
+[0:49:36] um so then there is semi parametric efficiency index with hidden variables
+[0:49:38] efficiency index with hidden variables there is some progress in this paper
+[0:49:40] there is some progress in this paper although there's a lot of
+[0:49:42] although there's a lot of things that are unresolved yet and
+[0:49:45] things that are unresolved yet and there's other estimates and we are
+[0:49:46] there's other estimates and we are working with att
+[0:49:48] working with att there's even questions of how to define
+[0:49:50] there's even questions of how to define what we mean by an adjustment set in
+[0:49:52] what we mean by an adjustment set in cases we no longer use the key formula
+[0:49:54] cases we no longer use the key formula but what exactly what do we mean
+[0:49:56] but what exactly what do we mean and we have some results on atp that
+[0:49:58] and we have some results on atp that we're working with ezekiel
+[0:50:00] we're working with ezekiel and i'll stop here sorry if i went too
+[0:50:02] and i'll stop here sorry if i went too long
+[0:50:04] long okay thanks andrea uh for the great talk
+[0:50:06] okay thanks andrea uh for the great talk uh we'll now move over to
+[0:50:08] uh we'll now move over to uh the discussion with emma so emma
+[0:50:20] yeah sure let me you will need to let me know if you see my thoughts
+[0:50:23] know if you see my thoughts do you see them yes or great okay
+[0:50:26] do you see them yes or great okay wonderful
+[0:50:28] wonderful okay so uh first i just want to say
+[0:50:31] okay so uh first i just want to say thank you to the organizers of the
+[0:50:32] thank you to the organizers of the seminar it's always a nice seminar um
+[0:50:35] seminar it's always a nice seminar um and i
+[0:50:35] and i would like to thank andrea for kind of
+[0:50:37] would like to thank andrea for kind of inviting me to serve as a discussant
+[0:50:39] inviting me to serve as a discussant here
+[0:50:40] here uh so i have as you may have noticed
+[0:50:43] uh so i have as you may have noticed from address i've done some work on
+[0:50:45] from address i've done some work on various adjustments so i think that's
+[0:50:46] various adjustments so i think that's kind of my uh reason for being here but
+[0:50:48] kind of my uh reason for being here but hopefully i can shed
+[0:50:50] hopefully i can shed a slightly different perspective on
+[0:50:51] a slightly different perspective on these results given that i
+[0:50:54] these results given that i tend to work with graphical models a lot
+[0:50:56] tend to work with graphical models a lot and that's that's the perspective that i
+[0:50:57] and that's that's the perspective that i usually take
+[0:50:59] usually take so first i'll just do a little overview
+[0:51:02] so first i'll just do a little overview on various adjustments and how we got to
+[0:51:03] on various adjustments and how we got to this point
+[0:51:05] this point so uh correct adjustment is a kind of a
+[0:51:07] so uh correct adjustment is a kind of a commonly used
+[0:51:08] commonly used tool to identify total causal effects in
+[0:51:11] tool to identify total causal effects in its
+[0:51:11] its first and maybe most famous iteration it
+[0:51:13] first and maybe most famous iteration it was known as the backdoor adjustment
+[0:51:15] was known as the backdoor adjustment introduced by pearl in 1993 and so a
+[0:51:18] introduced by pearl in 1993 and so a valid
+[0:51:19] valid covariate adjustment set can then be
+[0:51:21] covariate adjustment set can then be used to construct estimators
+[0:51:22] used to construct estimators of the total causal effects through
+[0:51:24] of the total causal effects through these outcome regressions or
+[0:51:26] these outcome regressions or these inverse probability weighted
+[0:51:28] these inverse probability weighted estimators or some w robust estimators
+[0:51:30] estimators or some w robust estimators as andrea pointed out
+[0:51:32] as andrea pointed out and so recent kind of advances i guess
+[0:51:35] and so recent kind of advances i guess in causal inference have allowed us to
+[0:51:36] in causal inference have allowed us to enumerate
+[0:51:37] enumerate all valid covariate adjustment sets for
+[0:51:39] all valid covariate adjustment sets for a pair of treatment response variables a
+[0:51:41] a pair of treatment response variables a y
+[0:51:42] y given a particular graphical model so
+[0:51:44] given a particular graphical model so andrea has listed this paper by one
+[0:51:46] andrea has listed this paper by one zeissander that's
+[0:51:48] zeissander that's really kind of the starting point of all
+[0:51:50] really kind of the starting point of all of this work
+[0:51:56] uh right so here uh if you have this causal graphical model
+[0:51:58] if you have this causal graphical model that you define in the form of a bag
+[0:52:00] that you define in the form of a bag as andrea mentioned usually you have
+[0:52:03] as andrea mentioned usually you have more than one valid covariate adjustment
+[0:52:05] more than one valid covariate adjustment set if there is a valid
+[0:52:07] set if there is a valid adjustment set that you could use to
+[0:52:08] adjustment set that you could use to kind of estimate the stolen causal
+[0:52:10] kind of estimate the stolen causal effect so that leads to a natural
+[0:52:12] effect so that leads to a natural question if i have more than one
+[0:52:13] question if i have more than one like which one of these adjustment sets
+[0:52:15] like which one of these adjustment sets would lead us to the most efficient
+[0:52:16] would lead us to the most efficient estimator
+[0:52:18] estimator and in this paper by henkel at all so
+[0:52:21] and in this paper by henkel at all so uh leonard henkel and melissa mathos for
+[0:52:24] uh leonard henkel and melissa mathos for both the dph zurich
+[0:52:25] both the dph zurich and uh soon moving to copenhagen
+[0:52:28] and uh soon moving to copenhagen actually also congrats
+[0:52:30] actually also congrats uh so we explored this question in terms
+[0:52:32] uh so we explored this question in terms of a linear structural puzzle model
+[0:52:34] of a linear structural puzzle model and given this uh outcome regression and
+[0:52:37] and given this uh outcome regression and given
+[0:52:38] given uh dag cp dag or npdex so these tags
+[0:52:41] uh dag cp dag or npdex so these tags epiderm and amputex are
+[0:52:42] epiderm and amputex are graphical models that we consider so in
+[0:52:45] graphical models that we consider so in andrea talk
+[0:52:46] andrea talk and she focused on on the dag case but
+[0:52:48] and she focused on on the dag case but i'm going to try to give this
+[0:52:49] i'm going to try to give this perspective
+[0:52:50] perspective of uh cp doug or anthony in this case so
+[0:52:58] what are these graphs so the perspective that we take in this heinkel at all
+[0:52:59] that we take in this heinkel at all paper
+[0:53:00] paper is that we are trying to learn or we we
+[0:53:03] is that we are trying to learn or we we are learning a graph from observational
+[0:53:04] are learning a graph from observational data and perhaps some
+[0:53:06] data and perhaps some background knowledge from experts and to
+[0:53:08] background knowledge from experts and to do this we're exploiting some
+[0:53:09] do this we're exploiting some conditional independencies in the data
+[0:53:12] conditional independencies in the data now without making additional assumption
+[0:53:15] now without making additional assumption uh the graph that you can learn from
+[0:53:17] uh the graph that you can learn from this
+[0:53:17] this uh type of observational data perhaps
+[0:53:19] uh type of observational data perhaps some expert knowledge
+[0:53:21] some expert knowledge is a cp dag or an empty dag meaning
+[0:53:24] is a cp dag or an empty dag meaning these are kind of summary graphs that
+[0:53:25] these are kind of summary graphs that represent an equivalence class of tags
+[0:53:28] represent an equivalence class of tags and one of these dags is your causal
+[0:53:30] and one of these dags is your causal truth but we
+[0:53:30] truth but we do not know which one of them is the
+[0:53:32] do not know which one of them is the true one
+[0:53:34] true one so if you for example have data
+[0:53:35] so if you for example have data generated by a linear structural causal
+[0:53:37] generated by a linear structural causal model with gaussian noise
+[0:53:38] model with gaussian noise then you could if you have enough data
+[0:53:41] then you could if you have enough data learn uh
+[0:53:42] learn uh the cp dag representation of this graph
+[0:53:46] the cp dag representation of this graph okay so the question that we had is if
+[0:53:48] okay so the question that we had is if you have this kind of equivalence class
+[0:53:50] you have this kind of equivalence class of graphs
+[0:53:51] of graphs uh when can you find the most efficient
+[0:53:54] uh when can you find the most efficient adjustment sets that can estimate your
+[0:53:56] adjustment sets that can estimate your total causal effect
+[0:53:57] total causal effect so if you have an equivalence class of
+[0:53:59] so if you have an equivalence class of graphs you first need to think about
+[0:54:01] graphs you first need to think about when is your causal effect in fact
+[0:54:03] when is your causal effect in fact identifiable meaning it will not always
+[0:54:05] identifiable meaning it will not always be identifiable it will not always be
+[0:54:07] be identifiable it will not always be the same for all the graphs in your
+[0:54:08] the same for all the graphs in your equivalence class
+[0:54:11] equivalence class but actually if it is identifiable and
+[0:54:14] but actually if it is identifiable and in particular non-zero we actually know
+[0:54:18] in particular non-zero we actually know that
+[0:54:18] that whenever it is identifiable in this
+[0:54:22] whenever it is identifiable in this equivalence class represented by cp
+[0:54:24] equivalence class represented by cp diagram or mpdag it can actually also be
+[0:54:26] diagram or mpdag it can actually also be identified through covariate adjustment
+[0:54:28] identified through covariate adjustment so andrea mentioned a little bit that in
+[0:54:30] so andrea mentioned a little bit that in some cases you cannot
+[0:54:31] some cases you cannot estimate the total effect using
+[0:54:33] estimate the total effect using covariate adjustments
+[0:54:34] covariate adjustments or this particular covariate adjustment
+[0:54:36] or this particular covariate adjustment that we assume
+[0:54:37] that we assume which is true but it turns out when you
+[0:54:39] which is true but it turns out when you have kind of single variables a y
+[0:54:41] have kind of single variables a y and a non-zero causal effect and you
+[0:54:44] and a non-zero causal effect and you have the cp dag and mp diaper the causal
+[0:54:46] have the cp dag and mp diaper the causal effect is identifiable you can use
+[0:54:47] effect is identifiable you can use queried adjustment to estimate it
+[0:54:50] queried adjustment to estimate it and so we use this kind of setup and
+[0:54:53] and so we use this kind of setup and then
+[0:54:54] then found this or showed this efficiency
+[0:54:57] found this or showed this efficiency based pruning and supplementing of
+[0:54:59] based pruning and supplementing of variables
+[0:55:00] variables to adjustment sets and so we also use
+[0:55:02] to adjustment sets and so we also use that to define this
+[0:55:04] that to define this as andrel refers to it globally optimal
+[0:55:06] as andrel refers to it globally optimal adjustment set
+[0:55:08] adjustment set however our results also additionally
+[0:55:10] however our results also additionally assume these linear structural models
+[0:55:12] assume these linear structural models and so greatly depend on that
+[0:55:16] and so greatly depend on that but i just wanted to point out here that
+[0:55:18] but i just wanted to point out here that the perspective we're taking is that the
+[0:55:20] the perspective we're taking is that the efficient
+[0:55:20] efficient we're looking for kind of an efficient
+[0:55:22] we're looking for kind of an efficient estimator using a graph that can be
+[0:55:24] estimator using a graph that can be learned from observational data
+[0:55:26] learned from observational data and uh under identifiability of causal
+[0:55:28] and uh under identifiability of causal effect
+[0:55:29] effect and this leads us to use essentially
+[0:55:31] and this leads us to use essentially these conditional independence
+[0:55:32] these conditional independence constraints
+[0:55:33] constraints as uh as constraints that kind of
+[0:55:36] as uh as constraints that kind of from which we derive our results
+[0:55:45] so uh andrea in this two papers uh with ezekiel and fakundo who's here
+[0:55:48] uh with ezekiel and fakundo who's here they expanded on these results quite a
+[0:55:50] they expanded on these results quite a bit but they focused on this dag setting
+[0:55:54] bit but they focused on this dag setting so what they look at is they look at
+[0:55:56] so what they look at is they look at kind of the semi-parametric efficiency
+[0:55:58] kind of the semi-parametric efficiency that can be achieved with this
+[0:56:00] that can be achieved with this adjustment set and try to find
+[0:56:02] adjustment set and try to find the best adjustment sets in terms of the
+[0:56:05] the best adjustment sets in terms of the semiparametric efficiency
+[0:56:07] semiparametric efficiency so they actually show that the same type
+[0:56:08] so they actually show that the same type of pruning and supplementation of
+[0:56:10] of pruning and supplementation of variables
+[0:56:11] variables can be applied in this setting and that
+[0:56:14] can be applied in this setting and that they also derive the same globally
+[0:56:16] they also derive the same globally optimal adjustment set here
+[0:56:18] optimal adjustment set here so the perspective taken in this paper
+[0:56:21] so the perspective taken in this paper is
+[0:56:21] is right they're assuming a dag but they're
+[0:56:25] right they're assuming a dag but they're looking for semi-parametric efficient
+[0:56:26] looking for semi-parametric efficient estimators
+[0:56:27] estimators and that leads them to use conditional
+[0:56:30] and that leads them to use conditional independence constraints to derive this
+[0:56:31] independence constraints to derive this efficient estimator
+[0:56:33] efficient estimator so there's kind of two different ways of
+[0:56:36] so there's kind of two different ways of getting to the same point
+[0:56:37] getting to the same point right either you look at kind of
+[0:56:38] right either you look at kind of equivalence classes and therefore you
+[0:56:40] equivalence classes and therefore you use conditional independencies
+[0:56:42] use conditional independencies or you look at semi-parametric efficient
+[0:56:43] or you look at semi-parametric efficient estimators and that therefore you use
+[0:56:45] estimators and that therefore you use conditional dependencies
+[0:56:46] conditional dependencies um and they all kind of lead you to the
+[0:56:49] um and they all kind of lead you to the same
+[0:56:50] same uh more or less results
+[0:56:53] uh more or less results so of course these two papers further
+[0:56:55] so of course these two papers further expand the concepts of adjustment sets
+[0:56:57] expand the concepts of adjustment sets so andrea mentioned the
+[0:56:58] so andrea mentioned the globally optimal the optimal minimal and
+[0:57:00] globally optimal the optimal minimal and optimal minimum adjustment set
+[0:57:03] optimal minimum adjustment set but they kind of further construct
+[0:57:06] but they kind of further construct contrast
+[0:57:06] contrast the standard definition that i'm used to
+[0:57:08] the standard definition that i'm used to seeing of an adjustment set with some
+[0:57:10] seeing of an adjustment set with some other
+[0:57:10] other kind of settings
+[0:57:14] kind of settings so in particular this static adjustment
+[0:57:17] so in particular this static adjustment set
+[0:57:17] set is kind of the standard definition of an
+[0:57:19] is kind of the standard definition of an adjustment set as i'm used to seeing it
+[0:57:21] adjustment set as i'm used to seeing it but they contrast it with this dynamic
+[0:57:23] but they contrast it with this dynamic adjustment set
+[0:57:25] adjustment set which is uh an adjustment set that kind
+[0:57:27] which is uh an adjustment set that kind of depends on some non-descendants of
+[0:57:28] of depends on some non-descendants of your treatment
+[0:57:30] your treatment where the treatment is assigned based on
+[0:57:32] where the treatment is assigned based on the certain values of these
+[0:57:33] the certain values of these non-descendants
+[0:57:35] non-descendants and they actually have this proposition
+[0:57:37] and they actually have this proposition that the uh
+[0:57:38] that the uh something is a dynamic adjustment set if
+[0:57:41] something is a dynamic adjustment set if if it is also a static adjustment set
+[0:57:44] if it is also a static adjustment set in your graph so because my work is
+[0:57:47] in your graph so because my work is mostly on these equivalence classes
+[0:57:49] mostly on these equivalence classes my commentary will revolve around
+[0:57:53] my commentary will revolve around when can you extend these results to
+[0:57:54] when can you extend these results to these equivalence classes and i think
+[0:57:56] these equivalence classes and i think this
+[0:57:56] this proposition is an example of a result
+[0:57:58] proposition is an example of a result that actually immediately
+[0:58:00] that actually immediately extends to kind of equivalence classes
+[0:58:02] extends to kind of equivalence classes of graphs
+[0:58:04] of graphs uh and i think that stems from the fact
+[0:58:06] uh and i think that stems from the fact that we're both
+[0:58:07] that we're both using kind of conditional independencies
+[0:58:09] using kind of conditional independencies for all of these cases
+[0:58:11] for all of these cases so they also list the criteria for
+[0:58:13] so they also list the criteria for identifying these minimum
+[0:58:15] identifying these minimum z dynamic adjustment sets and i believe
+[0:58:17] z dynamic adjustment sets and i believe i may have
+[0:58:19] i may have they also contain all other z dynamic
+[0:58:21] they also contain all other z dynamic adjustments
+[0:58:22] adjustments sets uh not just the minimum ones
+[0:58:25] sets uh not just the minimum ones via node cuts in an undirected graph and
+[0:58:28] via node cuts in an undirected graph and so to do this they generalize a result
+[0:58:30] so to do this they generalize a result from founders under at all
+[0:58:32] from founders under at all so i would guess based on those results
+[0:58:34] so i would guess based on those results extending to
+[0:58:35] extending to cpdx and empty text this as well this
+[0:58:37] cpdx and empty text this as well this kind of note cut
+[0:58:38] kind of note cut rule should also extend
+[0:58:46] now in the other papers piano smoker they contrast the static adjustment sets
+[0:58:49] they contrast the static adjustment sets so now they're referred to as the time
+[0:58:50] so now they're referred to as the time it depends the adjustment says it's the
+[0:58:52] it depends the adjustment says it's the same definition as i had in the previous
+[0:58:53] same definition as i had in the previous slides
+[0:58:55] slides but that is constructed with these time
+[0:58:56] but that is constructed with these time dependent adjustment sets so
+[0:58:58] dependent adjustment sets so um and apologies i've switched from
+[0:59:01] um and apologies i've switched from using
+[0:59:02] using l for an adjustment set now using z so
+[0:59:04] l for an adjustment set now using z so this is just from the paper
+[0:59:10] uh so this time dependent adjustment set to in the case where you may have
+[0:59:12] to in the case where you may have uh sequential treatments in terms of
+[0:59:14] uh sequential treatments in terms of time so you have one treatment that
+[0:59:16] time so you have one treatment that influences perhaps the next sequence of
+[0:59:18] influences perhaps the next sequence of treatments
+[0:59:19] treatments you will not always have a static
+[0:59:22] you will not always have a static adjustment set or this time independent
+[0:59:24] adjustment set or this time independent adjustment sets
+[0:59:24] adjustment sets even if you know the causal dac so they
+[0:59:28] even if you know the causal dac so they define this
+[0:59:28] define this time-dependent covariate adjustment set
+[0:59:30] time-dependent covariate adjustment set as this
+[0:59:31] as this kind of sequence of uh adjustment
+[0:59:35] kind of sequence of uh adjustment sets or this this adjustment set
+[0:59:37] sets or this this adjustment set consists of many
+[0:59:39] consists of many of these kind of intermediate adjustment
+[0:59:41] of these kind of intermediate adjustment sets so this criterion
+[0:59:43] sets so this criterion i believe is in pearl's book refer to a
+[0:59:45] i believe is in pearl's book refer to a sequential backdoor
+[0:59:47] sequential backdoor you could also refer to it as a
+[0:59:49] you could also refer to it as a g-functional
+[0:59:51] g-functional and there's some it kind of appears
+[0:59:52] and there's some it kind of appears throughout some other
+[0:59:55] throughout some other papers but they showed that essentially
+[0:59:58] papers but they showed that essentially a similar type of pruning and
+[0:59:59] a similar type of pruning and supplementation of variables for
+[1:00:01] supplementation of variables for efficiency
+[1:00:01] efficiency can be applied to these time-dependent
+[1:00:03] can be applied to these time-dependent covariate adjustment sets now it's not
+[1:00:05] covariate adjustment sets now it's not exactly one-to-one it's a bit more
+[1:00:07] exactly one-to-one it's a bit more complicated because these sets are more
+[1:00:08] complicated because these sets are more complicated but a similar type of
+[1:00:10] complicated but a similar type of pruning can apply
+[1:00:12] pruning can apply and i think that results should kind of
+[1:00:15] and i think that results should kind of again generalize to the cp degree and mp
+[1:00:17] again generalize to the cp degree and mp case but an interesting kind of open
+[1:00:19] case but an interesting kind of open question here is how you would kind of
+[1:00:21] question here is how you would kind of identify
+[1:00:23] identify what is this time dependent variable
+[1:00:24] what is this time dependent variable adjustment set and what what are all the
+[1:00:26] adjustment set and what what are all the valid variables just
+[1:00:27] valid variables just these time dependent various adjustment
+[1:00:28] these time dependent various adjustment sets given an equivalence class
+[1:00:30] sets given an equivalence class so that's i think unsolved and kind of
+[1:00:32] so that's i think unsolved and kind of very interesting
+[1:00:35] very interesting all right it's just uh some more kind of
+[1:00:37] all right it's just uh some more kind of general questions that this paper opens
+[1:00:39] general questions that this paper opens up
+[1:00:40] up so redneck and smoker further derived
+[1:00:43] so redneck and smoker further derived conditions under which this optimal
+[1:00:45] conditions under which this optimal adjustment set would be also
+[1:00:46] adjustment set would be also semi-parametrically optimal
+[1:00:48] semi-parametrically optimal so also optimal among kind of all other
+[1:00:50] so also optimal among kind of all other ways of estimating the total effect
+[1:00:54] ways of estimating the total effect but it is not always only parametrically
+[1:00:56] but it is not always only parametrically optimal so in particular
+[1:00:58] optimal so in particular for example in this graph where you have
+[1:01:00] for example in this graph where you have a to some mediator m
+[1:01:01] a to some mediator m to y we know that an
+[1:01:04] to y we know that an empty adjustment set is a valid
+[1:01:06] empty adjustment set is a valid adjustment and the optimal adjustment
+[1:01:07] adjustment and the optimal adjustment set here
+[1:01:08] set here but we know that we can get kind of a
+[1:01:10] but we know that we can get kind of a better estimate if
+[1:01:11] better estimate if we exploit the fact that there is this
+[1:01:13] we exploit the fact that there is this mediator here
+[1:01:15] mediator here so in the linear setting you can
+[1:01:16] so in the linear setting you can consider kind of uh
+[1:01:19] consider kind of uh computing this effect as a product of
+[1:01:21] computing this effect as a product of these two effects so
+[1:01:23] these two effects so one from a to m and m to y and in
+[1:01:26] one from a to m and m to y and in an earlier paper so richard guo and i
+[1:01:29] an earlier paper so richard guo and i showed that
+[1:01:30] showed that in this setting this linear setting uh
+[1:01:33] in this setting this linear setting uh that would be
+[1:01:34] that would be uh more efficient than we of course that
+[1:01:36] uh more efficient than we of course that result is known for for a while we
+[1:01:38] result is known for for a while we generalize
+[1:01:38] generalize it to kind of the cp diagram empty that
+[1:01:40] it to kind of the cp diagram empty that case
+[1:01:45] there's further kind of constraints that you can use that
+[1:01:46] you can use that that adjustments that do not use so for
+[1:01:48] that adjustments that do not use so for example
+[1:01:50] example even if you don't have this mediator you
+[1:01:52] even if you don't have this mediator you may have
+[1:01:53] may have this case where uh o1 and o2 would be
+[1:01:56] this case where uh o1 and o2 would be the optimal adjustment set for this a
+[1:01:58] the optimal adjustment set for this a and y
+[1:01:59] and y but using just an adjustment set here to
+[1:02:01] but using just an adjustment set here to estimate n y does not
+[1:02:03] estimate n y does not exploit this independency between these
+[1:02:05] exploit this independency between these o1 and o2 so here
+[1:02:07] o1 and o2 so here this would be optimal set the question
+[1:02:09] this would be optimal set the question is kind of
+[1:02:10] is kind of how do you optimally estimate the causal
+[1:02:12] how do you optimally estimate the causal effect in general
+[1:02:14] effect in general and uh furthermore we've seen that
+[1:02:17] and uh furthermore we've seen that there's problems when you add latent
+[1:02:18] there's problems when you add latent variables
+[1:02:19] variables so the question is also kind of what do
+[1:02:21] so the question is also kind of what do you do then and i think andrea mentioned
+[1:02:23] you do then and i think andrea mentioned a bit that in that case you can still
+[1:02:24] a bit that in that case you can still use these minimal adjustment sets but
+[1:02:26] use these minimal adjustment sets but perhaps there's something
+[1:02:27] perhaps there's something something better we can do in that case
+[1:02:29] something better we can do in that case too all right so those were
+[1:02:30] too all right so those were those were my comments i hope i didn't
+[1:02:32] those were my comments i hope i didn't take too much time uh thank you again
+[1:02:34] take too much time uh thank you again for
+[1:02:34] for letting me discuss this uh these nice
+[1:02:36] letting me discuss this uh these nice works
+[1:02:38] works um thank you emma and andre would you
+[1:02:41] um thank you emma and andre would you like to
+[1:02:42] like to briefly respond no um do i have
+[1:02:45] briefly respond no um do i have like yeah can you hear me right no so
+[1:02:49] like yeah can you hear me right no so thank you very much emma for uh
+[1:02:50] thank you very much emma for uh the discussion uh a couple of points the
+[1:02:54] the discussion uh a couple of points the first one is
+[1:02:56] first one is i have a problem about
+[1:03:00] i have a problem about looking for optimal adjustment sets in
+[1:03:03] looking for optimal adjustment sets in cp dax and dax because when i think of
+[1:03:06] cp dax and dax because when i think of those
+[1:03:06] those i think that there has been a process of
+[1:03:08] i think that there has been a process of model selection early on
+[1:03:10] model selection early on and so i'm not sure how to think about
+[1:03:12] and so i'm not sure how to think about inference
+[1:03:13] inference when i arrive at this cp tax i have no
+[1:03:16] when i arrive at this cp tax i have no problem if i start from that cp that
+[1:03:18] problem if i start from that cp that the problem is i arrived to that cp dac
+[1:03:21] the problem is i arrived to that cp dac after a process of already model
+[1:03:23] after a process of already model selection
+[1:03:24] selection and that was part of the reason why we
+[1:03:26] and that was part of the reason why we put off with that and we said
+[1:03:28] put off with that and we said this is the other area this is the other
+[1:03:31] this is the other area this is the other scenario where we feel
+[1:03:33] scenario where we feel that you know i wouldn't have a cp that
+[1:03:35] that you know i wouldn't have a cp that to start with you know if i am designing
+[1:03:37] to start with you know if i am designing a study because i
+[1:03:39] a study because i haven't seen data yet okay so that's why
+[1:03:41] haven't seen data yet okay so that's why you know we
+[1:03:42] you know we we moved into that direction and um
+[1:03:45] we moved into that direction and um not to say that you know the results are
+[1:03:47] not to say that you know the results are fantastic you know the results that emma
+[1:03:49] fantastic you know the results that emma and richard and
+[1:03:50] and richard and vanessa have but but i'm saying i have a
+[1:03:53] vanessa have but but i'm saying i have a little bit of a problem there
+[1:03:55] little bit of a problem there uh and then the other thing is uh is
+[1:03:58] uh and then the other thing is uh is that
+[1:03:58] that um about semi-parametric efficiency i
+[1:04:01] um about semi-parametric efficiency i said nothing i mean that we have a lot
+[1:04:03] said nothing i mean that we have a lot of results in that
+[1:04:04] of results in that 2020 paper particularly about we have a
+[1:04:07] 2020 paper particularly about we have a complete and sound algorithm to
+[1:04:09] complete and sound algorithm to determine when
+[1:04:11] determine when uh you don't really need to measure all
+[1:04:12] uh you don't really need to measure all the other variables because just the
+[1:04:14] the other variables because just the optimal adjustment set
+[1:04:16] optimal adjustment set and using non-parametrically adjusted
+[1:04:18] and using non-parametrically adjusted estimation
+[1:04:19] estimation is going to attain the semi-parametric
+[1:04:21] is going to attain the semi-parametric efficiency bound
+[1:04:23] efficiency bound uh in a model that actually exploits the
+[1:04:26] uh in a model that actually exploits the assumptions in the
+[1:04:27] assumptions in the graph so we actually characterize the
+[1:04:29] graph so we actually characterize the graphs where you don't have to worry
+[1:04:31] graphs where you don't have to worry about anything else
+[1:04:32] about anything else and if you don't if you do have to worry
+[1:04:34] and if you don't if you do have to worry about something else
+[1:04:35] about something else and a super interesting question from
+[1:04:37] and a super interesting question from the design point of view
+[1:04:39] the design point of view is okay suppose that i give you a graph
+[1:04:42] is okay suppose that i give you a graph now
+[1:04:42] now find of the graph the variables that
+[1:04:45] find of the graph the variables that really show up in the efficient score
+[1:04:47] really show up in the efficient score all the other variables don't matter
+[1:04:49] all the other variables don't matter okay so if you're going to focus on
+[1:04:51] okay so if you're going to focus on estimation just
+[1:04:52] estimation just bother to estimate to measure only those
+[1:04:55] bother to estimate to measure only those variables and we're actually working
+[1:04:57] variables and we're actually working and have super exciting results with him
+[1:04:59] and have super exciting results with him and richard and
+[1:05:00] and richard and particularly the problem okay so we
+[1:05:03] particularly the problem okay so we didn't mention anything about that
+[1:05:05] didn't mention anything about that there's no time maybe next year you
+[1:05:07] there's no time maybe next year you invite us and we'll tell you all we
+[1:05:08] invite us and we'll tell you all we learned about that problem
+[1:05:11] learned about that problem but that's about it okay
+[1:05:14] but that's about it okay so thanks andrea um so
+[1:05:17] so thanks andrea um so maybe it's time to uh to wrap up
+[1:05:21] maybe it's time to uh to wrap up so um so let me share my screen
+[1:05:29] so thanks andre and emma for a great talk uh next week
+[1:05:30] talk uh next week we're going to have alberto abedi from
+[1:05:33] we're going to have alberto abedi from mit
+[1:05:34] mit talk about a penalized synthetic control
+[1:05:36] talk about a penalized synthetic control estimator for disaggregated data
+[1:05:38] estimator for disaggregated data we're looking forward to that talk and
+[1:05:40] we're looking forward to that talk and we hope you will join us uh thank you
+[1:05:43] we hope you will join us uh thank you thank you bye-bye bye bye
+[1:05:47] thank you bye-bye bye bye thank you and great discussion

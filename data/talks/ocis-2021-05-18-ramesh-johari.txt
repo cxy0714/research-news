@@ -1,0 +1,2150 @@
+[0:00:04] welcome back to the uh online course inference cinema today we
+[0:00:06] online course inference cinema today we are excited to have ramesh johari from
+[0:00:08] are excited to have ramesh johari from stanford university who will talk about
+[0:00:10] stanford university who will talk about experimental design and two-sided
+[0:00:12] experimental design and two-sided platforms and analysis of bias
+[0:00:14] platforms and analysis of bias we also have two collaborators in uh q a
+[0:00:17] we also have two collaborators in uh q a so feel free to submit any questions
+[0:00:19] so feel free to submit any questions there hannah
+[0:00:20] there hannah and gabriel after the talk we'll have a
+[0:00:22] and gabriel after the talk we'll have a discussion by panos tules
+[0:00:24] discussion by panos tules um question today will be handled by
+[0:00:27] um question today will be handled by dion
+[0:00:27] dion so maybe i'm going to switch over to
+[0:00:30] so maybe i'm going to switch over to guillaume for a few seconds
+[0:00:36] thank you dominique so as emily said uh we're lucky to have hannah and gabriel
+[0:00:37] we're lucky to have hannah and gabriel in the q a today
+[0:00:39] in the q a today um so please do submit your questions um
+[0:00:41] um so please do submit your questions um ramesh will also pause from time to time
+[0:00:44] ramesh will also pause from time to time to take questions live so we'll pick
+[0:00:46] to take questions live so we'll pick some questions from the q a
+[0:00:47] some questions from the q a and um if your question is selected i
+[0:00:49] and um if your question is selected i will ask you to raise your hand and i
+[0:00:51] will ask you to raise your hand and i will unmute you so please do not raise
+[0:00:53] will unmute you so please do not raise your hand
+[0:00:54] your hand until i've asked you to do so all right
+[0:00:56] until i've asked you to do so all right that's it from me ramesh
+[0:00:57] that's it from me ramesh whenever you're ready
+[0:01:07] all right is that good you see it all um excellent okay
+[0:01:11] um excellent okay well first of all thanks uh michael
+[0:01:13] well first of all thanks uh michael dominic guillaume
+[0:01:14] dominic guillaume hedo for inviting me um i've mentioned
+[0:01:17] hedo for inviting me um i've mentioned to many people this seminar has kind of
+[0:01:19] to many people this seminar has kind of been a role model since
+[0:01:20] been a role model since the start of the pandemic for how to
+[0:01:22] the start of the pandemic for how to write run a great uh online seminar so
+[0:01:24] write run a great uh online seminar so thank you and
+[0:01:25] thank you and and it's really an honor to be able to
+[0:01:26] and it's really an honor to be able to speak here um i also
+[0:01:28] speak here um i also uh want to introduce hannah and gabriel
+[0:01:30] uh want to introduce hannah and gabriel uh the work i'll talk about today is
+[0:01:32] uh the work i'll talk about today is joint with hannah lee gabriel weintraub
+[0:01:33] joint with hannah lee gabriel weintraub and inessa liskovich
+[0:01:35] and inessa liskovich uh inessa couldn't be with us she's a
+[0:01:36] uh inessa couldn't be with us she's a data scientist at airbnb
+[0:01:38] data scientist at airbnb uh hannah is a phd student in management
+[0:01:40] uh hannah is a phd student in management science and engineering uh my department
+[0:01:42] science and engineering uh my department at stanford
+[0:01:43] at stanford and gabriel is a professor at the
+[0:01:45] and gabriel is a professor at the stanford gsb uh
+[0:01:46] stanford gsb uh hannah is actually going to be on the
+[0:01:48] hannah is actually going to be on the job market in the fall and uh it's
+[0:01:49] job market in the fall and uh it's important for me to say that
+[0:01:51] important for me to say that this really is something that she's
+[0:01:53] this really is something that she's driven the the lion's share of
+[0:01:55] driven the the lion's share of um so uh thank you both for being here
+[0:01:58] um so uh thank you both for being here to answer questions
+[0:01:59] to answer questions um okay so let me just jump right into
+[0:02:02] um okay so let me just jump right into it um
+[0:02:04] it um first just a few words about me because
+[0:02:05] first just a few words about me because i know this is a community that
+[0:02:08] i know this is a community that i'm perhaps a little bit of an outsider
+[0:02:10] i'm perhaps a little bit of an outsider to
+[0:02:11] to my you know broad area is operations
+[0:02:13] my you know broad area is operations research at stanford
+[0:02:16] research at stanford for the last 10 years my research has
+[0:02:18] for the last 10 years my research has largely focused on market design and
+[0:02:20] largely focused on market design and platform design
+[0:02:21] platform design particularly with an emphasis on
+[0:02:22] particularly with an emphasis on designing online marketplaces
+[0:02:24] designing online marketplaces um so oh sorry
+[0:02:27] um so oh sorry i'm sure what happened there so this
+[0:02:29] i'm sure what happened there so this includes things like search
+[0:02:31] includes things like search matching pricing learning reputation
+[0:02:35] matching pricing learning reputation from a practical standpoint i've spent a
+[0:02:36] from a practical standpoint i've spent a lot of time also advising
+[0:02:38] lot of time also advising online marketplaces in the last five
+[0:02:40] online marketplaces in the last five years what that's taken me into
+[0:02:42] years what that's taken me into is a great deal of interest in
+[0:02:44] is a great deal of interest in understanding how these platforms and
+[0:02:45] understanding how these platforms and markets use a b
+[0:02:46] markets use a b tests or experimentation uh to deploy
+[0:02:49] tests or experimentation uh to deploy new features
+[0:02:50] new features and that's sort of the motivation for
+[0:02:52] and that's sort of the motivation for the talk today
+[0:02:54] the talk today so um when we think about
+[0:02:56] so um when we think about experimentation in in two-sided
+[0:02:58] experimentation in in two-sided platforms
+[0:02:59] platforms you know kind of the mental model i want
+[0:03:00] you know kind of the mental model i want you to have here is platforms like you
+[0:03:01] you to have here is platforms like you know airbnb
+[0:03:02] know airbnb for lodging upwork or test rabbit for
+[0:03:05] for lodging upwork or test rabbit for labor
+[0:03:06] labor uber or lyft for ride sharing you know
+[0:03:09] uber or lyft for ride sharing you know they'll routinely use experiments to
+[0:03:10] they'll routinely use experiments to test virtually any new feature nothing
+[0:03:12] test virtually any new feature nothing really gets deployed without being
+[0:03:13] really gets deployed without being tested
+[0:03:15] tested examples of features might be something
+[0:03:16] examples of features might be something like you know what if we provide better
+[0:03:18] like you know what if we provide better profile descriptions let's say you know
+[0:03:20] profile descriptions let's say you know for listings or for workers in the
+[0:03:21] for listings or for workers in the online labor market
+[0:03:22] online labor market or what if you reduce the friction
+[0:03:24] or what if you reduce the friction involved in the checkout flow uh to
+[0:03:26] involved in the checkout flow uh to actually book
+[0:03:26] actually book uh an item um so in these experiments
+[0:03:30] uh an item um so in these experiments kind of the the high level point of this
+[0:03:32] kind of the the high level point of this talk
+[0:03:32] talk is first just to emphasize the fact that
+[0:03:35] is first just to emphasize the fact that interference
+[0:03:36] interference can lead to biased estimates of a global
+[0:03:38] can lead to biased estimates of a global treatment effect of interest so you're
+[0:03:39] treatment effect of interest so you're interested in
+[0:03:40] interested in what the market will look like with this
+[0:03:42] what the market will look like with this intervention rolled out to everyone
+[0:03:43] intervention rolled out to everyone versus no one
+[0:03:44] versus no one the global treatment effect and as this
+[0:03:47] the global treatment effect and as this entire seminar has
+[0:03:48] entire seminar has has studied over the course of the year
+[0:03:50] has studied over the course of the year uh interferences
+[0:03:52] uh interferences is a is a significant challenge um in
+[0:03:55] is a is a significant challenge um in in these settings okay and so i will i
+[0:03:57] in these settings okay and so i will i will describe in a bit more detail
+[0:03:59] will describe in a bit more detail exactly mechanically how that
+[0:04:00] exactly mechanically how that interference arises
+[0:04:02] interference arises at a high level an important theme in
+[0:04:04] at a high level an important theme in the talk
+[0:04:05] the talk is that there's a very significant
+[0:04:07] is that there's a very significant connection between the
+[0:04:08] connection between the statistical phenomenon of interference
+[0:04:11] statistical phenomenon of interference and the economic phenomenon of
+[0:04:12] and the economic phenomenon of competition
+[0:04:13] competition that essentially there's an inherent
+[0:04:16] that essentially there's an inherent connectedness in marketplaces that comes
+[0:04:18] connectedness in marketplaces that comes from the fact that if i make one listing
+[0:04:20] from the fact that if i make one listing more attractive
+[0:04:21] more attractive that'll make other listings relatively
+[0:04:22] that'll make other listings relatively less attractive if i make one customer
+[0:04:24] less attractive if i make one customer more likely to book
+[0:04:26] more likely to book that that will reduce supply available
+[0:04:28] that that will reduce supply available to other customers
+[0:04:29] to other customers so these uh competition effects on the
+[0:04:32] so these uh competition effects on the listing side and the customer side
+[0:04:33] listing side and the customer side which are economic phenomena will be the
+[0:04:35] which are economic phenomena will be the main drivers of interference
+[0:04:37] main drivers of interference in sort of standard experimental methods
+[0:04:40] in sort of standard experimental methods um
+[0:04:40] um so you know as an example i'm going to
+[0:04:43] so you know as an example i'm going to use the term customers and listings to
+[0:04:45] use the term customers and listings to refer to the two sides of the market
+[0:04:46] refer to the two sides of the market consistently
+[0:04:48] consistently uh you know you could imagine something
+[0:04:49] uh you know you could imagine something like an online platform where the
+[0:04:50] like an online platform where the listings are freelancers uh you know
+[0:04:52] listings are freelancers uh you know these are customers
+[0:04:53] these are customers you know the customers come they have
+[0:04:55] you know the customers come they have two stages in which they survey what's
+[0:04:57] two stages in which they survey what's going on in the market first they
+[0:04:58] going on in the market first they consider a set of listings
+[0:05:00] consider a set of listings and then may choose to book something or
+[0:05:02] and then may choose to book something or book nothing at all and so you know i'll
+[0:05:04] book nothing at all and so you know i'll get a bit more detail into kind of how
+[0:05:05] get a bit more detail into kind of how we think of this from a modeling
+[0:05:06] we think of this from a modeling perspective later but
+[0:05:08] perspective later but that's that's sort of the mental model i
+[0:05:09] that's that's sort of the mental model i want you to have in mind
+[0:05:12] want you to have in mind so let me first motivate just to make
+[0:05:14] so let me first motivate just to make sure i ground everyone this this slide
+[0:05:16] sure i ground everyone this this slide hopefully is going to feel very natural
+[0:05:17] hopefully is going to feel very natural for people that that come from a causal
+[0:05:19] for people that that come from a causal inference background
+[0:05:20] inference background but i first want to motivate exactly a
+[0:05:22] but i first want to motivate exactly a little bit more this point about how
+[0:05:23] little bit more this point about how competition can create
+[0:05:24] competition can create interference so for this purpose we're
+[0:05:26] interference so for this purpose we're going to look at a very simple market
+[0:05:28] going to look at a very simple market with just one freelancer
+[0:05:29] with just one freelancer and two customers okay now suppose i
+[0:05:32] and two customers okay now suppose i have some new intervention
+[0:05:33] have some new intervention where um i'm able to make cause i think
+[0:05:36] where um i'm able to make cause i think i can make customers more likely to book
+[0:05:37] i can make customers more likely to book with this intervention
+[0:05:39] with this intervention so let's say i introduced this treatment
+[0:05:41] so let's say i introduced this treatment and the way i test the intervention is
+[0:05:42] and the way i test the intervention is that i give some customers the
+[0:05:44] that i give some customers the intervention and other customers i don't
+[0:05:45] intervention and other customers i don't so in this example
+[0:05:46] so in this example the green customer is treated the the
+[0:05:48] the green customer is treated the the blue customer is control
+[0:05:50] blue customer is control okay suppose that customer a arrives
+[0:05:52] okay suppose that customer a arrives before customer b
+[0:05:54] before customer b and happens to book this freelancer
+[0:05:57] and happens to book this freelancer in this simple market which is of course
+[0:05:59] in this simple market which is of course highly stylized when customer b
+[0:06:01] highly stylized when customer b shows up there's nothing left to book
+[0:06:03] shows up there's nothing left to book now the fact that customer b doesn't
+[0:06:04] now the fact that customer b doesn't book
+[0:06:05] book isn't necessarily because we're we're
+[0:06:07] isn't necessarily because we're we're getting an unbiased read of
+[0:06:09] getting an unbiased read of you know the relative uh deficiency of
+[0:06:12] you know the relative uh deficiency of customer b's booking flow against
+[0:06:13] customer b's booking flow against customer ace booking flow of control
+[0:06:15] customer ace booking flow of control against treatment
+[0:06:16] against treatment it's really just that there was no
+[0:06:17] it's really just that there was no inventory left to book at all
+[0:06:19] inventory left to book at all so this is an extreme example of course
+[0:06:21] so this is an extreme example of course in reality what ends up happening is
+[0:06:23] in reality what ends up happening is that
+[0:06:24] that when you introduce an intervention that
+[0:06:26] when you introduce an intervention that makes some customers more likely to book
+[0:06:27] makes some customers more likely to book than others the treatment customer is
+[0:06:29] than others the treatment customer is more likely to book that control
+[0:06:30] more likely to book that control the treatment customers cannibalize
+[0:06:32] the treatment customers cannibalize listings away
+[0:06:34] listings away from the control customers and as a
+[0:06:36] from the control customers and as a result if you use a naive estimator that
+[0:06:38] result if you use a naive estimator that just
+[0:06:38] just uses the estimates that the number of
+[0:06:40] uses the estimates that the number of bookings made by treatment customers
+[0:06:42] bookings made by treatment customers and compares it to the number of
+[0:06:43] and compares it to the number of bookings made by control customers
+[0:06:45] bookings made by control customers you'll tend to
+[0:06:45] you'll tend to underestimate bookings relative to
+[0:06:48] underestimate bookings relative to global control
+[0:06:49] global control you'll tend to overestimate bookings
+[0:06:51] you'll tend to overestimate bookings relative to global treatment
+[0:06:52] relative to global treatment and you know essentially that creates a
+[0:06:54] and you know essentially that creates a bias then in your estimate of the global
+[0:06:56] bias then in your estimate of the global treatment effect
+[0:06:57] treatment effect okay so this this effect here is arising
+[0:06:59] okay so this this effect here is arising because customers are competing
+[0:07:01] because customers are competing with each other for the same limited
+[0:07:03] with each other for the same limited inventory on the opposite side of the
+[0:07:04] inventory on the opposite side of the market
+[0:07:05] market when we only randomize on the customer
+[0:07:06] when we only randomize on the customer side
+[0:07:09] side um more generally platforms tend to use
+[0:07:12] um more generally platforms tend to use two
+[0:07:12] two types of experiments uh you know in a
+[0:07:15] types of experiments uh you know in a vast majority of these settings
+[0:07:17] vast majority of these settings one of them is to randomize only on the
+[0:07:18] one of them is to randomize only on the customer side there's of course
+[0:07:20] customer side there's of course a symmetric version of that where you
+[0:07:21] a symmetric version of that where you randomize only on the listing side
+[0:07:24] randomize only on the listing side estimates from customer side
+[0:07:25] estimates from customer side randomization tend to exhibit
+[0:07:27] randomization tend to exhibit interference due to competition between
+[0:07:28] interference due to competition between customers
+[0:07:29] customers estimates from listing side
+[0:07:31] estimates from listing side randomization tend to exhibit
+[0:07:32] randomization tend to exhibit interference to
+[0:07:33] interference to exhibit interference due to competition
+[0:07:35] exhibit interference due to competition between listings
+[0:07:37] between listings um you know you might ask well is this a
+[0:07:39] um you know you might ask well is this a big deal does this matter in practice
+[0:07:41] big deal does this matter in practice and one of the kind of important
+[0:07:44] and one of the kind of important motivators for our work
+[0:07:45] motivators for our work is that um these uh kind of earlier
+[0:07:48] is that um these uh kind of earlier empirical work suggested that this bias
+[0:07:50] empirical work suggested that this bias could actually be as
+[0:07:51] could actually be as large uh as the treatment effect in the
+[0:07:53] large uh as the treatment effect in the case of these two papers it was in the
+[0:07:55] case of these two papers it was in the context of
+[0:07:56] context of customer side randomized experiments um
+[0:07:59] customer side randomized experiments um coming out of those papers and related
+[0:08:02] coming out of those papers and related work like that uh there there wasn't
+[0:08:04] work like that uh there there wasn't there had wasn't really a lot of
+[0:08:05] there had wasn't really a lot of consensus as of when we started this
+[0:08:07] consensus as of when we started this work
+[0:08:08] work on why biases are especially large or
+[0:08:10] on why biases are especially large or what designs or estimators could be used
+[0:08:12] what designs or estimators could be used to minimize that bias and variance
+[0:08:14] to minimize that bias and variance specifically in the context of these
+[0:08:15] specifically in the context of these of these market platforms um
+[0:08:19] of these market platforms um you know so okay so i've motivated a
+[0:08:21] you know so okay so i've motivated a problem here which is that i have
+[0:08:23] problem here which is that i have markets markets effectively the way i
+[0:08:24] markets markets effectively the way i drew it on that first slide looks like
+[0:08:26] drew it on that first slide looks like a network the network is creating some
+[0:08:28] a network the network is creating some spillover effects between treatment and
+[0:08:30] spillover effects between treatment and control customers or treatment and
+[0:08:31] control customers or treatment and control listings
+[0:08:33] control listings and you know this whole seminar series
+[0:08:35] and you know this whole seminar series has had had
+[0:08:36] has had had numerous examples of how we study and
+[0:08:39] numerous examples of how we study and model
+[0:08:39] model and analyze experimental design and
+[0:08:42] and analyze experimental design and estimation in settings with spillovers
+[0:08:44] estimation in settings with spillovers that can be modeled through that type of
+[0:08:46] that can be modeled through that type of network structure so
+[0:08:48] network structure so what approach would we take if we were
+[0:08:49] what approach would we take if we were to go down that road a natural way to do
+[0:08:51] to go down that road a natural way to do that would be to
+[0:08:52] that would be to to use what's called an exposure model
+[0:08:55] to use what's called an exposure model which is essentially a low dimensional
+[0:08:56] which is essentially a low dimensional representation
+[0:08:57] representation of the impact of one unit's treatment
+[0:08:59] of the impact of one unit's treatment condition on
+[0:09:01] condition on uh sorry of other units treatment
+[0:09:03] uh sorry of other units treatment conditions on a given unit's potential
+[0:09:04] conditions on a given unit's potential outcomes
+[0:09:05] outcomes all right this is the approach pioneered
+[0:09:09] all right this is the approach pioneered in aeronaut summi and 13 and then you
+[0:09:11] in aeronaut summi and 13 and then you know uh the the two references i have
+[0:09:13] know uh the the two references i have here
+[0:09:13] here are are two uh leading examples of this
+[0:09:16] are are two uh leading examples of this approach applied to
+[0:09:17] approach applied to uh marketplace experimentation um
+[0:09:20] uh marketplace experimentation um so i think there's obviously a lot of
+[0:09:22] so i think there's obviously a lot of value in that approach
+[0:09:23] value in that approach um in this talk it's going to be quite a
+[0:09:26] um in this talk it's going to be quite a bit of a left turn
+[0:09:27] bit of a left turn from that typical approach in in causal
+[0:09:29] from that typical approach in in causal inference uh the approach we take is
+[0:09:31] inference uh the approach we take is much more structural
+[0:09:32] much more structural uh we want to know you know what aspects
+[0:09:35] uh we want to know you know what aspects of the market impact bias
+[0:09:36] of the market impact bias and i guess i'll just say as an aside in
+[0:09:38] and i guess i'll just say as an aside in terms of sort of collision of
+[0:09:39] terms of sort of collision of communities
+[0:09:40] communities this is uh very much i think in keeping
+[0:09:43] this is uh very much i think in keeping with the way that
+[0:09:44] with the way that the operations research community
+[0:09:46] the operations research community operations management community would
+[0:09:48] operations management community would often
+[0:09:48] often study market design and platform design
+[0:09:50] study market design and platform design questions uh you know certainly a lot of
+[0:09:52] questions uh you know certainly a lot of the work we've done over the last 10
+[0:09:53] the work we've done over the last 10 years
+[0:09:54] years that's outside of experimentation i
+[0:09:56] that's outside of experimentation i think has a similar flavor which is to
+[0:09:58] think has a similar flavor which is to really understand structurally
+[0:09:59] really understand structurally if i give you a market and you know we
+[0:10:02] if i give you a market and you know we have basic
+[0:10:03] have basic uh sort of understanding of the
+[0:10:05] uh sort of understanding of the structure of that market
+[0:10:06] structure of that market um how can we use our understanding of
+[0:10:08] um how can we use our understanding of the market to impact or guide
+[0:10:10] the market to impact or guide our thinking on experimental design and
+[0:10:12] our thinking on experimental design and estimation
+[0:10:13] estimation um so with that in mind the approach we
+[0:10:16] um so with that in mind the approach we take is
+[0:10:17] take is is you know very much more driven by
+[0:10:19] is you know very much more driven by kind of a population model viewpoint
+[0:10:21] kind of a population model viewpoint where we explicitly model inventory
+[0:10:22] where we explicitly model inventory dynamics
+[0:10:23] dynamics and then we use that model to study
+[0:10:25] and then we use that model to study interference and bias
+[0:10:26] interference and bias and you know i'm personally from a
+[0:10:28] and you know i'm personally from a research standpoint very interested in
+[0:10:30] research standpoint very interested in interconnections between these two
+[0:10:31] interconnections between these two viewpoints
+[0:10:32] viewpoints how we can use structural models to
+[0:10:34] how we can use structural models to stress test the findings that we get
+[0:10:36] stress test the findings that we get from exposure models
+[0:10:38] from exposure models and vice versa whether or not there are
+[0:10:40] and vice versa whether or not there are simple lower dimensional ways using
+[0:10:42] simple lower dimensional ways using exposure models to capture
+[0:10:43] exposure models to capture the key features that we discover uh
+[0:10:45] the key features that we discover uh from a structural modeling standpoint so
+[0:10:48] from a structural modeling standpoint so you know i could even if the rest of the
+[0:10:50] you know i could even if the rest of the talk doesn't make any sense i'd say this
+[0:10:52] talk doesn't make any sense i'd say this is one of the main takeaways that i want
+[0:10:53] is one of the main takeaways that i want to pass along to the
+[0:10:55] to pass along to the to the audience i think this is really
+[0:10:57] to the audience i think this is really like the tip of a gigantic iceberg of
+[0:10:59] like the tip of a gigantic iceberg of interesting modeling opportunities
+[0:11:01] interesting modeling opportunities um in these kinds of settings for today
+[0:11:03] um in these kinds of settings for today my goal is going to be to convince you
+[0:11:05] my goal is going to be to convince you that there is value
+[0:11:06] that there is value in structurally modeling these inventory
+[0:11:07] in structurally modeling these inventory dynamics and that we learned something
+[0:11:09] dynamics and that we learned something from doing so
+[0:11:11] from doing so okay so with that in mind uh let me
+[0:11:13] okay so with that in mind uh let me comment quickly about what our
+[0:11:15] comment quickly about what our contributions are
+[0:11:17] contributions are first you know given that previous slide
+[0:11:21] first you know given that previous slide first i'd say our contribution is a
+[0:11:23] first i'd say our contribution is a substrate on which to even
+[0:11:25] substrate on which to even be able to study the performance of
+[0:11:26] be able to study the performance of different experiment designs and so
+[0:11:28] different experiment designs and so that's this kind of structural model
+[0:11:30] that's this kind of structural model that we develop and i'll walk through
+[0:11:31] that we develop and i'll walk through that a couple of slides
+[0:11:33] that a couple of slides and we use that model and what we find
+[0:11:37] and we use that model and what we find is that there's a particular market
+[0:11:39] is that there's a particular market metric that has a first order
+[0:11:41] metric that has a first order impact on the biases of common designs
+[0:11:44] impact on the biases of common designs and their associated estimators
+[0:11:46] and their associated estimators and that is the supply demand and
+[0:11:48] and that is the supply demand and balance in the market
+[0:11:49] balance in the market um and so supply demand amounts
+[0:11:51] um and so supply demand amounts essentially says you know
+[0:11:53] essentially says you know effectively are there more buyers or
+[0:11:54] effectively are there more buyers or more sellers in the market
+[0:11:57] more sellers in the market a market with more sellers than buyers
+[0:11:59] a market with more sellers than buyers is demand constrained
+[0:12:00] is demand constrained a market with more buyers than sellers
+[0:12:02] a market with more buyers than sellers is supply constraint
+[0:12:04] is supply constraint and what i'm going to try to show you is
+[0:12:05] and what i'm going to try to show you is that we derive
+[0:12:08] that we derive not only are we able to characterize
+[0:12:09] not only are we able to characterize kind of the dependence of bias on the
+[0:12:11] kind of the dependence of bias on the supply demand and balance but also
+[0:12:12] supply demand and balance but also derive a lot of structural insight into
+[0:12:14] derive a lot of structural insight into why it arises
+[0:12:15] why it arises uh beyond that we're able to use our
+[0:12:17] uh beyond that we're able to use our kind of insights to motivate
+[0:12:19] kind of insights to motivate the development of a novel two-sided
+[0:12:20] the development of a novel two-sided randomization design and associate
+[0:12:22] randomization design and associate estimators that can actually be used to
+[0:12:23] estimators that can actually be used to reduce bias
+[0:12:25] reduce bias um and i'll conclude the talk with the
+[0:12:27] um and i'll conclude the talk with the discussion of major open directions
+[0:12:28] discussion of major open directions you'll notice the word inference didn't
+[0:12:30] you'll notice the word inference didn't show up here
+[0:12:31] show up here which is borderline blasphemous for a
+[0:12:33] which is borderline blasphemous for a causal inference seminar
+[0:12:35] causal inference seminar and that is indeed a very important open
+[0:12:37] and that is indeed a very important open direction out of the work that we've
+[0:12:39] direction out of the work that we've done here this talk is really focused on
+[0:12:40] done here this talk is really focused on an analysis of bias
+[0:12:42] an analysis of bias and you know i'll come back a little bit
+[0:12:44] and you know i'll come back a little bit at the end of the talk to talking about
+[0:12:46] at the end of the talk to talking about you know these kind of open directions
+[0:12:48] you know these kind of open directions of which the most notable omission is
+[0:12:49] of which the most notable omission is inference
+[0:12:50] inference okay let me just pause there for a
+[0:12:52] okay let me just pause there for a second i don't see any open questions in
+[0:12:54] second i don't see any open questions in the q a but um
+[0:12:55] the q a but um if anyone has any questions or anything
+[0:12:57] if anyone has any questions or anything um
+[0:12:58] um take a quick pause nothing right now i
+[0:13:00] take a quick pause nothing right now i think so far so good
+[0:13:01] think so far so good now i can keep going okay great okay
+[0:13:04] now i can keep going okay great okay um yeah obviously just uh interrupt
+[0:13:06] um yeah obviously just uh interrupt interrupt medium if there's anything i
+[0:13:08] interrupt medium if there's anything i need to
+[0:13:08] need to chime in on okay so you know i've
+[0:13:11] chime in on okay so you know i've motivated the talk by telling you i want
+[0:13:13] motivated the talk by telling you i want to give you a structural model of a
+[0:13:14] to give you a structural model of a two-sided marketplace
+[0:13:16] two-sided marketplace um so this is the model that we're going
+[0:13:18] um so this is the model that we're going to work with and again i will just
+[0:13:20] to work with and again i will just reiterate one more time
+[0:13:22] reiterate one more time that this model is is well beyond the
+[0:13:24] that this model is is well beyond the typical
+[0:13:25] typical sort of exposure model that would be
+[0:13:26] sort of exposure model that would be seen in the talk in this seminar series
+[0:13:28] seen in the talk in this seminar series it it's you're going to see that there's
+[0:13:30] it it's you're going to see that there's a much more
+[0:13:32] a much more [Music]
+[0:13:33] [Music] explicit stochastic modeling of all the
+[0:13:35] explicit stochastic modeling of all the different components
+[0:13:36] different components uh that are involved in interactions in
+[0:13:38] uh that are involved in interactions in these marketplaces
+[0:13:40] these marketplaces so throughout you know if you want an
+[0:13:42] so throughout you know if you want an example that to attach words to the
+[0:13:43] example that to attach words to the things i'm talking about you can think
+[0:13:45] things i'm talking about you can think of an online labor platform where the
+[0:13:47] of an online labor platform where the listings quote unquote correspond to
+[0:13:48] listings quote unquote correspond to freelancers
+[0:13:49] freelancers the customers correspond to employers
+[0:13:51] the customers correspond to employers who come book freelancers for some
+[0:13:53] who come book freelancers for some amount of time and then the freelancers
+[0:13:55] amount of time and then the freelancers become available again
+[0:13:56] become available again so with that in mind um you know i want
+[0:13:58] so with that in mind um you know i want you to imagine that
+[0:13:59] you to imagine that we'll have this we'll have n listings
+[0:14:01] we'll have this we'll have n listings and n is the total size of the
+[0:14:03] and n is the total size of the marketplace that's an important scaling
+[0:14:05] marketplace that's an important scaling parameter in our
+[0:14:05] parameter in our in our model um in this picture
+[0:14:09] in our model um in this picture what i have is uh six total listings in
+[0:14:11] what i have is uh six total listings in the marketplace
+[0:14:12] the marketplace one of them you'll see is shaded out
+[0:14:14] one of them you'll see is shaded out that indicates that it's not available
+[0:14:15] that indicates that it's not available to an arriving customer that it's
+[0:14:17] to an arriving customer that it's already been booked by uh by a customer
+[0:14:19] already been booked by uh by a customer and and is is currently unavailable
+[0:14:22] and and is is currently unavailable you'll notice that these uh listings
+[0:14:24] you'll notice that these uh listings have um uh different types
+[0:14:26] have um uh different types and so you know there's one type that's
+[0:14:28] and so you know there's one type that's yellow three that are blue two that are
+[0:14:30] yellow three that are blue two that are green
+[0:14:30] green in this marketplace we don't actually
+[0:14:32] in this marketplace we don't actually use types in any of our designer
+[0:14:34] use types in any of our designer estimation
+[0:14:35] estimation it's just there to allow our model to be
+[0:14:36] it's just there to allow our model to be heterogeneous so that um
+[0:14:38] heterogeneous so that um so that essentially it's it's more
+[0:14:40] so that essentially it's it's more general in terms of the structure of
+[0:14:42] general in terms of the structure of utilities and
+[0:14:43] utilities and interactions that we can capture
+[0:14:46] interactions that we can capture customers arrive one by one over time
+[0:14:48] customers arrive one by one over time according to a plus on process
+[0:14:50] according to a plus on process and customers are also heterogeneous
+[0:14:52] and customers are also heterogeneous they have some type that's indexed by
+[0:14:53] they have some type that's indexed by gamma
+[0:14:54] gamma okay now when the customer arrives
+[0:14:57] okay now when the customer arrives there's two stages through which they
+[0:14:59] there's two stages through which they we formulate their discrete choice model
+[0:15:02] we formulate their discrete choice model the first thing they do
+[0:15:03] the first thing they do is they sample listings uh from
+[0:15:06] is they sample listings uh from this consideration set from the market
+[0:15:09] this consideration set from the market into a consideration set with a
+[0:15:11] into a consideration set with a probability
+[0:15:12] probability alpha gamma of theta else this
+[0:15:14] alpha gamma of theta else this probability depends on the type of the
+[0:15:16] probability depends on the type of the customer and the type of the listing
+[0:15:17] customer and the type of the listing and this sampling is independent across
+[0:15:19] and this sampling is independent across listings okay so essentially
+[0:15:21] listings okay so essentially you know there's a bernoulli random
+[0:15:22] you know there's a bernoulli random variable for each listing that governs
+[0:15:24] variable for each listing that governs whether or not each one of these
+[0:15:26] whether or not each one of these listings that are available are included
+[0:15:28] listings that are available are included in this consideration set of the
+[0:15:29] in this consideration set of the customer
+[0:15:30] customer so why do we model it this way the way
+[0:15:32] so why do we model it this way the way we're thinking about it is if you show
+[0:15:34] we're thinking about it is if you show up to a site let's say
+[0:15:35] up to a site let's say you know like upwork with a huge number
+[0:15:37] you know like upwork with a huge number of freelancers on the site
+[0:15:39] of freelancers on the site upwork doesn't actually show you all
+[0:15:40] upwork doesn't actually show you all those freelancers let's say in a search
+[0:15:42] those freelancers let's say in a search or something like that
+[0:15:43] or something like that it'll show you a restricted subset of
+[0:15:45] it'll show you a restricted subset of those freelancers so one way to think of
+[0:15:47] those freelancers so one way to think of this alpha gamma of theta l
+[0:15:48] this alpha gamma of theta l is that it's that process by which the
+[0:15:50] is that it's that process by which the large amount of available inventory in
+[0:15:52] large amount of available inventory in the marketplace
+[0:15:53] the marketplace is translated into the actual set that's
+[0:15:55] is translated into the actual set that's shown to a customer
+[0:15:56] shown to a customer from which they'll eventually make a
+[0:15:58] from which they'll eventually make a choice or not
+[0:16:00] choice or not so that's the second stage of our choice
+[0:16:02] so that's the second stage of our choice model which is that
+[0:16:04] model which is that a customer chooses from the
+[0:16:05] a customer chooses from the consideration set according to a
+[0:16:06] consideration set according to a multinomial logic model okay
+[0:16:08] multinomial logic model okay a multinomial logic is kind of a
+[0:16:10] a multinomial logic is kind of a workhorse discrete choice model
+[0:16:12] workhorse discrete choice model and you know uh given given kind of the
+[0:16:14] and you know uh given given kind of the structural modeling we were doing was a
+[0:16:16] structural modeling we were doing was a natural choice for us to work with
+[0:16:18] natural choice for us to work with uh in this multinomial logic model
+[0:16:19] uh in this multinomial logic model there's a utility that depends on the
+[0:16:21] there's a utility that depends on the customer
+[0:16:22] customer type gamma and that depends on the
+[0:16:24] type gamma and that depends on the listing type theta
+[0:16:25] listing type theta and so the probability of choosing a
+[0:16:27] and so the probability of choosing a given listing out of this consideration
+[0:16:29] given listing out of this consideration set
+[0:16:30] set is proportional to the utility of that
+[0:16:32] is proportional to the utility of that uh you know that uh customer type for
+[0:16:34] uh you know that uh customer type for that listing type
+[0:16:36] that listing type in this particular case let's say the
+[0:16:38] in this particular case let's say the customer books the green listing
+[0:16:39] customer books the green listing there's also an outside option so they
+[0:16:41] there's also an outside option so they may choose not to book it all
+[0:16:43] may choose not to book it all and you know after they booked that
+[0:16:45] and you know after they booked that green listing the remaining available
+[0:16:46] green listing the remaining available listings now
+[0:16:48] listings now is that initial available set with the
+[0:16:50] is that initial available set with the green listing also
+[0:16:51] green listing also uh shaded out so that's no longer
+[0:16:53] uh shaded out so that's no longer available now in the market of course if
+[0:16:55] available now in the market of course if the listings became booked and never
+[0:16:56] the listings became booked and never became available again
+[0:16:58] became available again you know everything would eventually be
+[0:16:59] you know everything would eventually be booked and there would be nothing left
+[0:17:01] booked and there would be nothing left what we model is that there's an
+[0:17:03] what we model is that there's an inventory dynamic here where the
+[0:17:04] inventory dynamic here where the inventory becomes booked for some amount
+[0:17:06] inventory becomes booked for some amount of time
+[0:17:07] of time and eventually releases and becomes
+[0:17:08] and eventually releases and becomes available again and so in particular
+[0:17:11] available again and so in particular we assume that bookings of type theta
+[0:17:12] we assume that bookings of type theta become unavailable for some random
+[0:17:14] become unavailable for some random length of time
+[0:17:15] length of time and then eventually become available and
+[0:17:16] and then eventually become available and that random length of time is
+[0:17:17] that random length of time is exponential
+[0:17:19] exponential okay so the booking dynamics are you
+[0:17:21] okay so the booking dynamics are you know there's some
+[0:17:22] know there's some available inventory some booked
+[0:17:23] available inventory some booked inventory customers arrive one at a time
+[0:17:26] inventory customers arrive one at a time they form a consideration set they make
+[0:17:28] they form a consideration set they make a choice
+[0:17:29] a choice that changes what's available in the
+[0:17:31] that changes what's available in the market as seen potentially by the next
+[0:17:33] market as seen potentially by the next customer who arrives
+[0:17:34] customer who arrives and the cycle repeats again so
+[0:17:37] and the cycle repeats again so i guess the main point to take away from
+[0:17:39] i guess the main point to take away from this slide is that
+[0:17:41] this slide is that this way of structuring the dynamics
+[0:17:43] this way of structuring the dynamics induces
+[0:17:44] induces a continuous time markov chain
+[0:17:46] a continuous time markov chain specifically with the state vector being
+[0:17:48] specifically with the state vector being the number of available listings in the
+[0:17:49] the number of available listings in the market
+[0:17:50] market okay and you know what we do then
+[0:17:54] okay and you know what we do then in our in our work at a high level is
+[0:17:56] in our in our work at a high level is that model
+[0:17:58] that model becomes the substrate by which we are
+[0:18:00] becomes the substrate by which we are able to study
+[0:18:01] able to study the role of interventions and design an
+[0:18:04] the role of interventions and design an analysis of experiments
+[0:18:06] analysis of experiments so in particular we consider
+[0:18:08] so in particular we consider interventions in the paper that change
+[0:18:10] interventions in the paper that change the the customer's choice probability
+[0:18:12] the the customer's choice probability either through
+[0:18:13] either through this alpha gamma of theta which was
+[0:18:15] this alpha gamma of theta which was these uh consideration parameters
+[0:18:17] these uh consideration parameters or v gamma of theta that were the the
+[0:18:19] or v gamma of theta that were the the utilities
+[0:18:20] utilities there are three versions you could
+[0:18:22] there are three versions you could instantiate of the model that i had on
+[0:18:24] instantiate of the model that i had on this slide
+[0:18:25] this slide so one version is the model where you
+[0:18:28] so one version is the model where you have global treatment all customers see
+[0:18:30] have global treatment all customers see the intervention on all listings
+[0:18:32] the intervention on all listings another version is global control where
+[0:18:34] another version is global control where no customers see the intervention on any
+[0:18:36] no customers see the intervention on any listings okay so where this alpha and v
+[0:18:38] listings okay so where this alpha and v are the the control alpha and v and then
+[0:18:41] are the the control alpha and v and then you have an experiment and i'm going to
+[0:18:43] you have an experiment and i'm going to leave this a bit vague for now and we'll
+[0:18:44] leave this a bit vague for now and we'll define it specifically for different
+[0:18:46] define it specifically for different experiments
+[0:18:47] experiments where some customers see the
+[0:18:48] where some customers see the intervention on some listings and which
+[0:18:50] intervention on some listings and which customers and which listings
+[0:18:52] customers and which listings will be more precise in a little bit so
+[0:18:55] will be more precise in a little bit so with this
+[0:18:55] with this way of thinking about the world you know
+[0:18:57] way of thinking about the world you know what is a good notion of a global
+[0:18:59] what is a good notion of a global treatment effect
+[0:19:00] treatment effect i want to be clear that in real markets
+[0:19:01] i want to be clear that in real markets there may be many metrics of interest
+[0:19:03] there may be many metrics of interest um in our work we kind of focus on an
+[0:19:06] um in our work we kind of focus on an important benchmark metric which is the
+[0:19:08] important benchmark metric which is the rate of booking
+[0:19:10] rate of booking and so the rate of booking literally
+[0:19:11] and so the rate of booking literally would just be what is the rate at which
+[0:19:13] would just be what is the rate at which listings are booked over time
+[0:19:15] listings are booked over time and you know if we have a global
+[0:19:16] and you know if we have a global treatment version of the model and a
+[0:19:18] treatment version of the model and a global control version of the model
+[0:19:20] global control version of the model the global treatment effect is the
+[0:19:21] the global treatment effect is the difference between the rate of booking
+[0:19:23] difference between the rate of booking and global treatment
+[0:19:24] and global treatment and the rate of booking and global
+[0:19:25] and the rate of booking and global control okay
+[0:19:28] control okay um so what we want to do so in an ideal
+[0:19:30] um so what we want to do so in an ideal world what would we love to do you know
+[0:19:32] world what would we love to do you know think about it for the model perspective
+[0:19:33] think about it for the model perspective for a second what we'd love to do is
+[0:19:35] for a second what we'd love to do is have a version of the model that's
+[0:19:36] have a version of the model that's global global treatment version of the
+[0:19:38] global global treatment version of the model this global control
+[0:19:39] model this global control estimate these these rates of booking
+[0:19:43] estimate these these rates of booking in in steady state and take the
+[0:19:45] in in steady state and take the difference
+[0:19:46] difference of course in reality there are two gaps
+[0:19:48] of course in reality there are two gaps here one of them is that we have to run
+[0:19:50] here one of them is that we have to run an experiment on one version of the
+[0:19:52] an experiment on one version of the system
+[0:19:52] system to estimate this difference and the
+[0:19:55] to estimate this difference and the other is that it's a model
+[0:19:56] other is that it's a model and it's it's mismatched to you know
+[0:19:58] and it's it's mismatched to you know it's it's an abstraction of reality and
+[0:20:00] it's it's an abstraction of reality and so coming back to the main theme of the
+[0:20:02] so coming back to the main theme of the talk
+[0:20:03] talk we want to use the model to derive
+[0:20:04] we want to use the model to derive structural insight into what features of
+[0:20:06] structural insight into what features of the market or of this model set up
+[0:20:08] the market or of this model set up are most influential in determining the
+[0:20:11] are most influential in determining the the bias of designs and estimators
+[0:20:14] the bias of designs and estimators okay so uh this is a small interlude
+[0:20:17] okay so uh this is a small interlude just to tell you how
+[0:20:19] just to tell you how you know as an operations researcher
+[0:20:20] you know as an operations researcher we'd approach this this type of problem
+[0:20:23] we'd approach this this type of problem inventory modeling inventory dynamics is
+[0:20:26] inventory modeling inventory dynamics is a is an extremely old topic in
+[0:20:27] a is an extremely old topic in operations research with a really
+[0:20:29] operations research with a really beautiful set of tools attached to it at
+[0:20:32] beautiful set of tools attached to it at this point
+[0:20:33] this point this is an example of a model where the
+[0:20:35] this is an example of a model where the continuous time markov chain is not easy
+[0:20:37] continuous time markov chain is not easy to analyze directly the the steady-state
+[0:20:39] to analyze directly the the steady-state distribution depends in complicated ways
+[0:20:41] distribution depends in complicated ways on the underlying model primitives and
+[0:20:44] on the underlying model primitives and so
+[0:20:45] so we use a common approach in inventory
+[0:20:46] we use a common approach in inventory model which is asymptotics to
+[0:20:48] model which is asymptotics to take some asymptotic of the system use
+[0:20:50] take some asymptotic of the system use the asymptotic to study that
+[0:20:52] the asymptotic to study that that much more complicated uh finite uh
+[0:20:55] that much more complicated uh finite uh finite markov chain
+[0:20:56] finite markov chain or finally parameterize smart cop chain
+[0:21:00] or finally parameterize smart cop chain in our case what we do is we take a
+[0:21:01] in our case what we do is we take a large system or mean field limit
+[0:21:04] large system or mean field limit so this is also sometimes called a
+[0:21:05] so this is also sometimes called a hydrodynamic or fluid scaling
+[0:21:07] hydrodynamic or fluid scaling where we send the the fraction of that
+[0:21:09] where we send the the fraction of that we send the number of listings to
+[0:21:10] we send the number of listings to infinity
+[0:21:11] infinity we assume the fraction of listings a
+[0:21:13] we assume the fraction of listings a scaled arrival rate and a scaled outside
+[0:21:15] scaled arrival rate and a scaled outside option all converge to
+[0:21:17] option all converge to these deterministic values okay um
+[0:21:21] these deterministic values okay um so in the fluid limit one of the things
+[0:21:22] so in the fluid limit one of the things that's weird and this gets back to this
+[0:21:24] that's weird and this gets back to this whole question of inference
+[0:21:25] whole question of inference is that i'm removing variance all that's
+[0:21:28] is that i'm removing variance all that's going to survive
+[0:21:29] going to survive is the fluid behavior of the system
+[0:21:32] is the fluid behavior of the system and that might seem odd again for you
+[0:21:34] and that might seem odd again for you know a seminar on causal inference to
+[0:21:36] know a seminar on causal inference to eliminate all the variants
+[0:21:38] eliminate all the variants uh but i'll go back to what i was saying
+[0:21:39] uh but i'll go back to what i was saying at the beginning of the talk which is
+[0:21:41] at the beginning of the talk which is that i'm focused on understanding bias
+[0:21:43] that i'm focused on understanding bias of these designs and associated
+[0:21:45] of these designs and associated estimators
+[0:21:46] estimators and despite the fact that we eliminate
+[0:21:48] and despite the fact that we eliminate the variance this hydrodynamic scaling
+[0:21:50] the variance this hydrodynamic scaling or fluid scaling
+[0:21:51] or fluid scaling allows us to still characterize the bias
+[0:21:54] allows us to still characterize the bias of these different designs so it's a
+[0:21:55] of these different designs so it's a very valuable
+[0:21:56] very valuable structural tool for laying bare sort of
+[0:21:59] structural tool for laying bare sort of how the bias depends on the parameters
+[0:22:01] how the bias depends on the parameters of the model
+[0:22:02] of the model okay um okay so
+[0:22:06] okay um okay so uh here is kind of one mathematical
+[0:22:08] uh here is kind of one mathematical interlude here just to illustrate how we
+[0:22:10] interlude here just to illustrate how we take
+[0:22:11] take our our um you know this kind of mean
+[0:22:14] our our um you know this kind of mean field modeling
+[0:22:15] field modeling uh tool kit apply it to get a structural
+[0:22:18] uh tool kit apply it to get a structural model that we can actually handle
+[0:22:19] model that we can actually handle attractively
+[0:22:20] attractively what we prove is that as as the number
+[0:22:23] what we prove is that as as the number of listings in the market the total
+[0:22:24] of listings in the market the total number of listings in the market
+[0:22:25] number of listings in the market approaches infinity
+[0:22:27] approaches infinity then the continuous time markov chain
+[0:22:29] then the continuous time markov chain converges in an appropriate sense in
+[0:22:31] converges in an appropriate sense in that appropriate senses uniformly in
+[0:22:32] that appropriate senses uniformly in probability
+[0:22:34] probability to a system of ordinary differential
+[0:22:35] to a system of ordinary differential equations that can be written down
+[0:22:37] equations that can be written down explicitly and this ordinary
+[0:22:39] explicitly and this ordinary differential equation system has a
+[0:22:41] differential equation system has a unique limit
+[0:22:42] unique limit the mean field steady state as t goes to
+[0:22:44] the mean field steady state as t goes to infinity so we first take n to infinity
+[0:22:46] infinity so we first take n to infinity then we we prove that this limiting ode
+[0:22:49] then we we prove that this limiting ode system has actually a unique
+[0:22:51] system has actually a unique uh object attached to it the mean field
+[0:22:53] uh object attached to it the mean field steady state in the limit where where
+[0:22:55] steady state in the limit where where time grows large
+[0:22:56] time grows large so we think of this mean field steady
+[0:22:58] so we think of this mean field steady state as a
+[0:23:00] state as a as a sort of succinct summary
+[0:23:03] as a sort of succinct summary of what that model universe would have
+[0:23:06] of what that model universe would have given rise to so
+[0:23:07] given rise to so as an example i could have the global
+[0:23:09] as an example i could have the global treatment model which is represented by
+[0:23:11] treatment model which is represented by continuous time markov chain
+[0:23:13] continuous time markov chain take the mean field limit take t to
+[0:23:14] take the mean field limit take t to infinity it gives me an object i can
+[0:23:16] infinity it gives me an object i can work with which is the mean field steady
+[0:23:18] work with which is the mean field steady state
+[0:23:19] state that comes out of that limiting mean
+[0:23:21] that comes out of that limiting mean field model
+[0:23:23] field model and so in particular for each of our
+[0:23:24] and so in particular for each of our three universes global treatment global
+[0:23:26] three universes global treatment global control and experiment
+[0:23:27] control and experiment we have their own mean field study state
+[0:23:30] we have their own mean field study state attached to them
+[0:23:31] attached to them now we can express estimators of
+[0:23:33] now we can express estimators of interest to us
+[0:23:34] interest to us in terms of the mean field study state
+[0:23:36] in terms of the mean field study state of the experiment and that
+[0:23:38] of the experiment and that by comparison with differences between
+[0:23:40] by comparison with differences between global treatment and global control
+[0:23:41] global treatment and global control will allow us to say something about the
+[0:23:43] will allow us to say something about the bias of different designs and estimators
+[0:23:45] bias of different designs and estimators okay so all of this stuff was under the
+[0:23:48] okay so all of this stuff was under the hood
+[0:23:48] hood it's basically saying you know this is
+[0:23:50] it's basically saying you know this is what i meant when i said structural
+[0:23:52] what i meant when i said structural model
+[0:23:52] model this is my way of taking a really
+[0:23:55] this is my way of taking a really complicated set of inventory dynamics
+[0:23:58] complicated set of inventory dynamics translating them into something that now
+[0:24:00] translating them into something that now we can analyze
+[0:24:01] we can analyze and that we can uh that we can um
+[0:24:04] and that we can uh that we can um uh use to understand uh you know the
+[0:24:07] uh use to understand uh you know the bias
+[0:24:08] bias of of of different designs and uh and
+[0:24:11] of of of different designs and uh and estimators that you know we would want
+[0:24:12] estimators that you know we would want to
+[0:24:13] to we would want to use um so maybe i'll
+[0:24:15] we would want to use um so maybe i'll just make one last comment
+[0:24:17] just make one last comment at this slide and then pause for for
+[0:24:18] at this slide and then pause for for questions so one of them is
+[0:24:20] questions so one of them is um first of all
+[0:24:23] um first of all that you know we're looking at steady
+[0:24:24] that you know we're looking at steady state here and
+[0:24:26] state here and i think that's an interesting thing to
+[0:24:28] i think that's an interesting thing to point out because of course in reality
+[0:24:30] point out because of course in reality experiments
+[0:24:31] experiments are a finite time horizon we don't run
+[0:24:33] are a finite time horizon we don't run experiments for infinite time all the
+[0:24:35] experiments for infinite time all the way out to study state
+[0:24:36] way out to study state which naturally begs the question you
+[0:24:38] which naturally begs the question you know sort of what can you take away from
+[0:24:40] know sort of what can you take away from a steady state analysis
+[0:24:42] a steady state analysis of of an experiment the the kind of key
+[0:24:45] of of an experiment the the kind of key point we want to make
+[0:24:46] point we want to make is that you know we're again we're
+[0:24:48] is that you know we're again we're focused on analyzing bias
+[0:24:50] focused on analyzing bias the platform is uh typically going to be
+[0:24:54] the platform is uh typically going to be interested
+[0:24:54] interested in what the steady state rate of
+[0:24:56] in what the steady state rate of bookings would have been
+[0:24:58] bookings would have been and so a first readout for us on
+[0:25:00] and so a first readout for us on understanding how bias depends
+[0:25:02] understanding how bias depends structurally on the design of the market
+[0:25:04] structurally on the design of the market is to compare the steady state
+[0:25:07] is to compare the steady state performance of the experiment to the
+[0:25:08] performance of the experiment to the steady-state behavior and global
+[0:25:09] steady-state behavior and global treatment and global control
+[0:25:11] treatment and global control so that's one comment the second comment
+[0:25:13] so that's one comment the second comment i want to make is about
+[0:25:14] i want to make is about you know variance and inference um
+[0:25:17] you know variance and inference um although
+[0:25:17] although uh although you know we do all this
+[0:25:19] uh although you know we do all this analysis in a mean field limit
+[0:25:21] analysis in a mean field limit in the paper we carry out uh sort of
+[0:25:23] in the paper we carry out uh sort of extensive simulation analysis that
+[0:25:25] extensive simulation analysis that allows us to also get an understanding
+[0:25:27] allows us to also get an understanding of the variance of different designs and
+[0:25:28] of the variance of different designs and estimators and i'll try to say a bit
+[0:25:30] estimators and i'll try to say a bit more about that
+[0:25:30] more about that um you know just a bullet or two at the
+[0:25:33] um you know just a bullet or two at the at the end of the talk
+[0:25:34] at the end of the talk um so maybe i'll pause here there's a
+[0:25:36] um so maybe i'll pause here there's a there's a couple of questions
+[0:25:37] there's a couple of questions um let me try to answer these um
+[0:25:41] um let me try to answer these um okay so um isn't the poisson assumption
+[0:25:44] okay so um isn't the poisson assumption a problem
+[0:25:45] a problem absolutely the assumption is a problem
+[0:25:47] absolutely the assumption is a problem uh it's a stationary
+[0:25:49] uh it's a stationary um i i'm actually surprised i'm gonna
+[0:25:51] um i i'm actually surprised i'm gonna broaden that comment a little bit every
+[0:25:52] broaden that comment a little bit every assumption is a problem in this model
+[0:25:54] assumption is a problem in this model i mean there's really two very broad
+[0:25:57] i mean there's really two very broad philosophical perspectives we can take
+[0:25:59] philosophical perspectives we can take here
+[0:25:59] here uh one of them is um one of them is that
+[0:26:02] uh one of them is um one of them is that uh
+[0:26:03] uh you know we are every assumption we're
+[0:26:05] you know we are every assumption we're making
+[0:26:06] making is a progressive deviation from reality
+[0:26:09] is a progressive deviation from reality so i would argue there's really
+[0:26:10] so i would argue there's really no market that perfectly fits the
+[0:26:11] no market that perfectly fits the assumptions and i'm actually not trying
+[0:26:13] assumptions and i'm actually not trying to convince you of that fact at all
+[0:26:15] to convince you of that fact at all but at the from a kind of philosophical
+[0:26:18] but at the from a kind of philosophical standpoint the approach here is that
+[0:26:19] standpoint the approach here is that we're
+[0:26:20] we're we're taking a model that we captures
+[0:26:21] we're taking a model that we captures enough of the first order effects that
+[0:26:23] enough of the first order effects that are present
+[0:26:24] are present notably the role of inventory dynamics
+[0:26:26] notably the role of inventory dynamics and inventory constraints and creating
+[0:26:28] and inventory constraints and creating interference
+[0:26:29] interference and trying to use that to understand how
+[0:26:31] and trying to use that to understand how how
+[0:26:32] how uh features of the market are
+[0:26:34] uh features of the market are influencing bias and then you know then
+[0:26:36] influencing bias and then you know then we have
+[0:26:36] we have we need to have additional argument that
+[0:26:38] we need to have additional argument that convinces us the features that we're
+[0:26:40] convinces us the features that we're finding are actually relevant in
+[0:26:41] finding are actually relevant in practice
+[0:26:42] practice okay and i'll try to convince you of
+[0:26:43] okay and i'll try to convince you of that as i go through the talk
+[0:26:45] that as i go through the talk um the other kind of point i would make
+[0:26:47] um the other kind of point i would make there is that
+[0:26:49] there is that you know from a practical standpoint one
+[0:26:50] you know from a practical standpoint one needs a full inferential pipeline to be
+[0:26:53] needs a full inferential pipeline to be able to make this actionable and that's
+[0:26:54] able to make this actionable and that's something we're kind of actively working
+[0:26:56] something we're kind of actively working on with online platforms
+[0:26:57] on with online platforms to try to actually translate the
+[0:26:59] to try to actually translate the estimators we develop here
+[0:27:01] estimators we develop here into you know a pipeline where you
+[0:27:02] into you know a pipeline where you actually have standard errors and
+[0:27:03] actually have standard errors and confidence intervals and all the things
+[0:27:05] confidence intervals and all the things you would need to cope with some of the
+[0:27:06] you would need to cope with some of the kinds of uncertainties that you're
+[0:27:07] kinds of uncertainties that you're bringing up
+[0:27:08] bringing up and then there's a question about what
+[0:27:09] and then there's a question about what would have to change to come to a system
+[0:27:11] would have to change to come to a system of pdes or spdes instead of an ode would
+[0:27:13] of pdes or spdes instead of an ode would this be possible yeah actually it's
+[0:27:15] this be possible yeah actually it's funny
+[0:27:15] funny i think that question is connected to
+[0:27:16] i think that question is connected to the first one in fact the reason we get
+[0:27:18] the first one in fact the reason we get an ode
+[0:27:19] an ode is because we have a continuous time
+[0:27:20] is because we have a continuous time markov chain with a simple state
+[0:27:22] markov chain with a simple state representation
+[0:27:23] representation but if you have history dependence
+[0:27:25] but if you have history dependence either in the customer revival process
+[0:27:27] either in the customer revival process or why they book or you know in in why
+[0:27:29] or why they book or you know in in why listings become available after a given
+[0:27:31] listings become available after a given amount of time
+[0:27:32] amount of time all of those things would induce a
+[0:27:33] all of those things would induce a system in the limit that's actually that
+[0:27:35] system in the limit that's actually that has a measure value descriptor
+[0:27:37] has a measure value descriptor rather than a simple state description
+[0:27:39] rather than a simple state description captured by odes
+[0:27:40] captured by odes so there are many many ways the model
+[0:27:42] so there are many many ways the model can rapidly become more complicated if
+[0:27:44] can rapidly become more complicated if you try to capture more features of
+[0:27:45] you try to capture more features of reality
+[0:27:46] reality um i'd like to to tell the following
+[0:27:49] um i'd like to to tell the following anecdote at times like this uh hal
+[0:27:51] anecdote at times like this uh hal varian
+[0:27:52] varian was giving a seminar once and you know
+[0:27:53] was giving a seminar once and you know he put up a model and someone in the
+[0:27:54] he put up a model and someone in the audience said
+[0:27:56] audience said um oh you know i i actually worked on
+[0:27:57] um oh you know i i actually worked on the same thing but my model was a lot
+[0:27:59] the same thing but my model was a lot more complicated than yours
+[0:28:00] more complicated than yours and hal paused and then said oh you know
+[0:28:02] and hal paused and then said oh you know my model was more complicated when i
+[0:28:03] my model was more complicated when i started working on it too but then i
+[0:28:05] started working on it too but then i worked on it for a while
+[0:28:06] worked on it for a while and so so you know i think like that
+[0:28:09] and so so you know i think like that philosophy
+[0:28:10] philosophy tends to tends to be something that
+[0:28:12] tends to tends to be something that pervades a lot of operations research
+[0:28:14] pervades a lot of operations research and applied micro
+[0:28:16] and applied micro where you know you're kind of trying to
+[0:28:17] where you know you're kind of trying to get to a point where your model is
+[0:28:18] get to a point where your model is capturing enough of the first order
+[0:28:20] capturing enough of the first order effects
+[0:28:20] effects but isn't so complicated that you can't
+[0:28:22] but isn't so complicated that you can't do anything with it
+[0:28:24] do anything with it that's not to say though that i think my
+[0:28:25] that's not to say though that i think my personal viewpoint is that a lot of the
+[0:28:27] personal viewpoint is that a lot of the most interesting things we can do here
+[0:28:29] most interesting things we can do here do absolutely involve taking many more
+[0:28:31] do absolutely involve taking many more of these practical realities and
+[0:28:32] of these practical realities and platforms
+[0:28:33] platforms and asking you know what is being missed
+[0:28:36] and asking you know what is being missed with the simple modeling approach
+[0:28:38] with the simple modeling approach and what would we need to do to
+[0:28:39] and what would we need to do to incorporate that so those are those are
+[0:28:41] incorporate that so those are those are really good questions
+[0:28:42] really good questions um okay so um with that let me
+[0:28:45] um okay so um with that let me transition now into the second part of
+[0:28:47] transition now into the second part of the talk and just
+[0:28:48] the talk and just summarize kind of what our what our main
+[0:28:49] summarize kind of what our what our main results are um
+[0:28:51] results are um so uh first of all let's talk about two
+[0:28:55] so uh first of all let's talk about two benchmark designs the two i mentioned at
+[0:28:56] benchmark designs the two i mentioned at the beginning of the talk customer side
+[0:28:58] the beginning of the talk customer side randomization and listing side
+[0:28:59] randomization and listing side randomization
+[0:29:00] randomization so customer side randomization and i
+[0:29:03] so customer side randomization and i should say by the way in the
+[0:29:04] should say by the way in the illustrations i give you in these slides
+[0:29:06] illustrations i give you in these slides i'm going to assume that listings and
+[0:29:08] i'm going to assume that listings and customers are completely homogenous
+[0:29:09] customers are completely homogenous pre-treatment
+[0:29:10] pre-treatment just because it makes the illustration
+[0:29:12] just because it makes the illustration simple but that's not an assumption
+[0:29:14] simple but that's not an assumption that's needed to
+[0:29:15] that's needed to to uh to to go through the work that we
+[0:29:17] to uh to to go through the work that we do in the paper
+[0:29:19] do in the paper um okay so suppose i have an arriving
+[0:29:21] um okay so suppose i have an arriving customer what does customer side
+[0:29:22] customer what does customer side randomization mean
+[0:29:23] randomization mean it means that i have some probability
+[0:29:25] it means that i have some probability this customer would be randomized to
+[0:29:26] this customer would be randomized to treatment versus control
+[0:29:28] treatment versus control if they're randomized to treatment they
+[0:29:29] if they're randomized to treatment they have some utility d tilde
+[0:29:31] have some utility d tilde if they're randomized to control they
+[0:29:32] if they're randomized to control they have some utility v for a listing
+[0:29:34] have some utility v for a listing okay so this is kind of the key
+[0:29:36] okay so this is kind of the key parameter that drives this model
+[0:29:38] parameter that drives this model uh it's a customer's randomized to
+[0:29:40] uh it's a customer's randomized to treatment and they arrived to see a
+[0:29:41] treatment and they arrived to see a market with five available listings
+[0:29:43] market with five available listings they view all of those listings as
+[0:29:44] they view all of those listings as having utility v tilde
+[0:29:46] having utility v tilde if a customer is randomized to control
+[0:29:48] if a customer is randomized to control they arrive to see the same the exact
+[0:29:50] they arrive to see the same the exact same market
+[0:29:51] same market they would see that market as having
+[0:29:52] they would see that market as having five listings with utility v
+[0:29:54] five listings with utility v all right um for the illustrations i'm
+[0:29:56] all right um for the illustrations i'm going to show you just
+[0:29:57] going to show you just us i want you to keep in mind a setting
+[0:29:59] us i want you to keep in mind a setting where v tilde is bigger than v
+[0:30:01] where v tilde is bigger than v so that the treatment is better for the
+[0:30:03] so that the treatment is better for the customer increases utility for the
+[0:30:05] customer increases utility for the for the customer okay um
+[0:30:08] for the customer okay um now notice that what happens here if a
+[0:30:10] now notice that what happens here if a customer arrives as a treatment type and
+[0:30:11] customer arrives as a treatment type and they're more likely to book a listing
+[0:30:14] they're more likely to book a listing they'll take listings off the market if
+[0:30:16] they'll take listings off the market if a subsequent control customer arrives
+[0:30:18] a subsequent control customer arrives then that control customer is going to
+[0:30:20] then that control customer is going to see less inventory
+[0:30:21] see less inventory in the market as a consequence of the
+[0:30:23] in the market as a consequence of the treatment customer's behavior
+[0:30:25] treatment customer's behavior so this creates this inner temporal
+[0:30:26] so this creates this inner temporal interference between customers that's
+[0:30:28] interference between customers that's arising because of competition for the
+[0:30:30] arising because of competition for the same limited inventory
+[0:30:31] same limited inventory as i discussed earlier um you know we
+[0:30:35] as i discussed earlier um you know we that the most common estimator that's
+[0:30:36] that the most common estimator that's used for this kind of experiment in
+[0:30:38] used for this kind of experiment in practice
+[0:30:38] practice is just the naive orbits thomson
+[0:30:40] is just the naive orbits thomson estimator where you look at the steady
+[0:30:42] estimator where you look at the steady state rate of bookings by treatment and
+[0:30:43] state rate of bookings by treatment and control customers
+[0:30:44] control customers appropriately normalized by the two
+[0:30:46] appropriately normalized by the two groups so here's our first theorem
+[0:30:49] groups so here's our first theorem which is that if you look at the that
+[0:30:50] which is that if you look at the that naive horvit's thompson estimator
+[0:30:52] naive horvit's thompson estimator that becomes unbiased in the demand
+[0:30:55] that becomes unbiased in the demand constraint limit
+[0:30:56] constraint limit so on the x-axis here what i have is
+[0:30:57] so on the x-axis here what i have is relative demand which is a ratio between
+[0:31:00] relative demand which is a ratio between the arrival rate of customers
+[0:31:01] the arrival rate of customers and the rate at which listings become
+[0:31:03] and the rate at which listings become available again
+[0:31:05] available again and what you can see is that the the
+[0:31:07] and what you can see is that the the bias is decreasing
+[0:31:08] bias is decreasing as the market becomes uh relatively um
+[0:31:11] as the market becomes uh relatively um demand constrained
+[0:31:13] demand constrained when lambda becomes much smaller
+[0:31:14] when lambda becomes much smaller relative to tao
+[0:31:16] relative to tao so you know the intuition for this is
+[0:31:18] so you know the intuition for this is actually fairly straightforward the idea
+[0:31:20] actually fairly straightforward the idea is that interference is arising because
+[0:31:21] is that interference is arising because of intertemporal competition between
+[0:31:23] of intertemporal competition between customers
+[0:31:24] customers so if i can eliminate that inner
+[0:31:26] so if i can eliminate that inner temporal competition i wouldn't have any
+[0:31:28] temporal competition i wouldn't have any more interference in this type of design
+[0:31:29] more interference in this type of design and estimation
+[0:31:31] and estimation how do i do that well a simple way is
+[0:31:33] how do i do that well a simple way is imagine a setting
+[0:31:34] imagine a setting where listings become available again
+[0:31:36] where listings become available again almost instantaneously after they were
+[0:31:38] almost instantaneously after they were booked
+[0:31:39] booked well in that case when the next customer
+[0:31:40] well in that case when the next customer arrives the fact that i had booked
+[0:31:43] arrives the fact that i had booked something
+[0:31:43] something will have no impact on the market that
+[0:31:45] will have no impact on the market that they see
+[0:31:46] they see so now you'll just have a sequence of
+[0:31:48] so now you'll just have a sequence of customers that are seeing independent
+[0:31:50] customers that are seeing independent copies of the same market
+[0:31:51] copies of the same market with all its inventory available all
+[0:31:53] with all its inventory available all right so in a market where the the
+[0:31:55] right so in a market where the the markets either really demand constraints
+[0:31:57] markets either really demand constraints customers arrive slowly relative to the
+[0:32:00] customers arrive slowly relative to the um
+[0:32:00] um to the to the inventory or the inventory
+[0:32:03] to the to the inventory or the inventory replenishes rapidly
+[0:32:04] replenishes rapidly um um what will happen is that the
+[0:32:07] um um what will happen is that the customers essentially become decoupled
+[0:32:09] customers essentially become decoupled from each other and there's no longer
+[0:32:10] from each other and there's no longer any interference between them
+[0:32:11] any interference between them i like to think of this as the netflix
+[0:32:13] i like to think of this as the netflix setting if i watch a movie tonight
+[0:32:15] setting if i watch a movie tonight that has no impact on whether panos can
+[0:32:17] that has no impact on whether panos can watch the same movie tonight
+[0:32:18] watch the same movie tonight um the the movies are completely
+[0:32:21] um the the movies are completely sort of infinitely available effectively
+[0:32:23] sort of infinitely available effectively from our perspective
+[0:32:25] from our perspective um okay so that's one example and this
+[0:32:27] um okay so that's one example and this result i would i would
+[0:32:29] result i would i would imagine is quite robust so you know
+[0:32:31] imagine is quite robust so you know we've thought about this a bit and we
+[0:32:32] we've thought about this a bit and we think you can relax a lot of the model
+[0:32:34] think you can relax a lot of the model assumptions
+[0:32:34] assumptions this result would probably still hold up
+[0:32:36] this result would probably still hold up in pretty much this this form
+[0:32:39] in pretty much this this form the other other side of typical uh
+[0:32:41] the other other side of typical uh platform randomization is what's called
+[0:32:43] platform randomization is what's called listing side randomization
+[0:32:45] listing side randomization where a platform will randomize
+[0:32:48] where a platform will randomize customers
+[0:32:49] customers into uh treatment or sorry randomized
+[0:32:51] into uh treatment or sorry randomized listings into treatment or control
+[0:32:53] listings into treatment or control so in this case what happens is that an
+[0:32:55] so in this case what happens is that an individual listing
+[0:32:56] individual listing gets a label attached to it which is
+[0:32:58] gets a label attached to it which is it's a treatment listings or listing or
+[0:32:59] it's a treatment listings or listing or control listing
+[0:33:01] control listing now if an if a customer arrives right
+[0:33:03] now if an if a customer arrives right now the customers are not in treatment
+[0:33:05] now the customers are not in treatment or control it's the listings
+[0:33:06] or control it's the listings customer arrives and they see five
+[0:33:09] customer arrives and they see five listings three of which are labeled
+[0:33:10] listings three of which are labeled treatment
+[0:33:11] treatment then that customer is going to see those
+[0:33:13] then that customer is going to see those three listings as having v
+[0:33:15] three listings as having v tilde as utility and the two blue
+[0:33:17] tilde as utility and the two blue listings the control listings is having
+[0:33:18] listings the control listings is having utility v
+[0:33:20] utility v so in this case what's happening is that
+[0:33:22] so in this case what's happening is that when that customer sees that market then
+[0:33:24] when that customer sees that market then now
+[0:33:25] now um the customer is going to become more
+[0:33:27] um the customer is going to become more likely to choose a treatment listing
+[0:33:29] likely to choose a treatment listing over a control listing through that
+[0:33:30] over a control listing through that choice model i described earlier
+[0:33:32] choice model i described earlier so here there's direct competition
+[0:33:34] so here there's direct competition between listings in the choice process
+[0:33:36] between listings in the choice process of the customer
+[0:33:37] of the customer that create that competition between
+[0:33:39] that create that competition between listings means the treatment condition
+[0:33:40] listings means the treatment condition of one listing
+[0:33:41] of one listing will impact the potential outcomes of
+[0:33:44] will impact the potential outcomes of another listing so you have interference
+[0:33:45] another listing so you have interference in the statistical sense
+[0:33:47] in the statistical sense okay again use a naive horvit's thompson
+[0:33:50] okay again use a naive horvit's thompson estimator
+[0:33:51] estimator rate of bookings and treatment versus
+[0:33:53] rate of bookings and treatment versus rate of bookings and control
+[0:33:55] rate of bookings and control so you know for listing side
+[0:33:57] so you know for listing side randomization what we find
+[0:33:59] randomization what we find is the opposite result and this we found
+[0:34:01] is the opposite result and this we found to be a bit more surprising
+[0:34:03] to be a bit more surprising which is that as the market becomes more
+[0:34:05] which is that as the market becomes more supply constrained
+[0:34:07] supply constrained uh then the naive lr estimator the naive
+[0:34:11] uh then the naive lr estimator the naive listing side randomization estimator
+[0:34:12] listing side randomization estimator actually becomes
+[0:34:13] actually becomes unbiased in that limit um i want to
+[0:34:16] unbiased in that limit um i want to point out a few things
+[0:34:17] point out a few things one thing is that this graph here this
+[0:34:19] one thing is that this graph here this is a numerical plot
+[0:34:21] is a numerical plot is is plotting bias over gte which is
+[0:34:23] is is plotting bias over gte which is the relative bias
+[0:34:25] the relative bias in fact the relative bias may not go to
+[0:34:27] in fact the relative bias may not go to zero for lr in this limit
+[0:34:29] zero for lr in this limit the absolute bias goes to zero
+[0:34:33] the absolute bias goes to zero the but the relative bias may not and an
+[0:34:36] the but the relative bias may not and an important point there is that
+[0:34:37] important point there is that um you know in the demand constraint
+[0:34:40] um you know in the demand constraint limit the cr
+[0:34:41] limit the cr estimator even the relative bias goes to
+[0:34:44] estimator even the relative bias goes to zero
+[0:34:44] zero so there's kind of a a stronger result
+[0:34:48] so there's kind of a a stronger result in the demand
+[0:34:48] in the demand constraint limit than in the supply
+[0:34:49] constraint limit than in the supply constraint limit and one of the reasons
+[0:34:51] constraint limit and one of the reasons for this is that
+[0:34:52] for this is that the supply constraint limit does depend
+[0:34:54] the supply constraint limit does depend more on the specifics of the choice
+[0:34:56] more on the specifics of the choice model that you use
+[0:34:57] model that you use nevertheless you know this graph is
+[0:34:59] nevertheless you know this graph is revealing an important insight which is
+[0:35:01] revealing an important insight which is the qualitatively lr
+[0:35:02] the qualitatively lr performs much better than cr in the
+[0:35:04] performs much better than cr in the supply constraint limit and that we
+[0:35:06] supply constraint limit and that we believe to be quite robust
+[0:35:08] believe to be quite robust again through kind of a simple intuition
+[0:35:09] again through kind of a simple intuition that i can give you which is
+[0:35:11] that i can give you which is if in if you think about what causes
+[0:35:13] if in if you think about what causes interference between listings
+[0:35:16] interference between listings the interference between treatment and
+[0:35:17] the interference between treatment and control listings arises due to
+[0:35:18] control listings arises due to competition between them in the choice
+[0:35:20] competition between them in the choice process of a customer
+[0:35:22] process of a customer so anything that weakens that
+[0:35:24] so anything that weakens that competitive effect
+[0:35:25] competitive effect will also have the effect of weakening
+[0:35:27] will also have the effect of weakening interference
+[0:35:28] interference and as you move into a regime where
+[0:35:30] and as you move into a regime where supply becomes lower
+[0:35:32] supply becomes lower any listing that becomes available is
+[0:35:34] any listing that becomes available is facing reduced competition from other
+[0:35:36] facing reduced competition from other listings
+[0:35:37] listings the more you move into a supply
+[0:35:38] the more you move into a supply constrained regime so if you
+[0:35:41] constrained regime so if you if you face less competition from other
+[0:35:42] if you face less competition from other listings that will lead to the
+[0:35:45] listings that will lead to the phenomenon that
+[0:35:46] phenomenon that there's there's also less interference
+[0:35:48] there's there's also less interference less treatment control interference
+[0:35:50] less treatment control interference of the sort that i was describing
+[0:35:51] of the sort that i was describing earlier so
+[0:35:53] earlier so qualitatively we think it's generally
+[0:35:55] qualitatively we think it's generally going to be true that lr performs better
+[0:35:57] going to be true that lr performs better than cr
+[0:35:58] than cr in the supply constraint limit this
+[0:36:00] in the supply constraint limit this particular result shows that the
+[0:36:02] particular result shows that the absolute bias of lr goes to zero
+[0:36:04] absolute bias of lr goes to zero as as you move to the supply constraint
+[0:36:06] as as you move to the supply constraint limit as you move to the the right axis
+[0:36:08] limit as you move to the the right axis here
+[0:36:08] here okay okay so with the last few minutes
+[0:36:11] okay okay so with the last few minutes that i have
+[0:36:12] that i have um i'm going to talk about a new design
+[0:36:16] um i'm going to talk about a new design which is two-sided randomization that's
+[0:36:18] which is two-sided randomization that's kind of inspired by
+[0:36:19] kind of inspired by you know the plot that's on this slide
+[0:36:20] you know the plot that's on this slide so you could see that cr and lr exhibit
+[0:36:23] so you could see that cr and lr exhibit advantages
+[0:36:24] advantages in different regimes of market balance
+[0:36:26] in different regimes of market balance and maybe i should just highlight here
+[0:36:27] and maybe i should just highlight here for a second
+[0:36:28] for a second i opened this this um i opened this
+[0:36:32] i opened this this um i opened this um this talk by saying that
+[0:36:35] um this talk by saying that it was important to us to find out to
+[0:36:38] it was important to us to find out to use this model to understand
+[0:36:40] use this model to understand structurally qualitatively what features
+[0:36:42] structurally qualitatively what features of the market
+[0:36:43] of the market impact bias of typical experimental
+[0:36:46] impact bias of typical experimental approaches
+[0:36:47] approaches and i'd say that these results are
+[0:36:48] and i'd say that these results are examples of that in
+[0:36:50] examples of that in in action where you know just a very
+[0:36:53] in action where you know just a very fundamental market design parameter is
+[0:36:55] fundamental market design parameter is the market balance that's something that
+[0:36:57] the market balance that's something that you know anyone who's working in these
+[0:36:58] you know anyone who's working in these platforms is going to be acutely aware
+[0:37:00] platforms is going to be acutely aware of
+[0:37:01] of yeah i've worked with these platforms
+[0:37:02] yeah i've worked with these platforms quite a bit as of gabriel and hannah
+[0:37:04] quite a bit as of gabriel and hannah one thing that we've we all found
+[0:37:06] one thing that we've we all found surprising is that you know we were very
+[0:37:08] surprising is that you know we were very familiar with that as an important
+[0:37:09] familiar with that as an important market design parameter
+[0:37:11] market design parameter and yet it never really came up in a
+[0:37:13] and yet it never really came up in a discussion of what kind of experiment to
+[0:37:14] discussion of what kind of experiment to run
+[0:37:15] run and i thought that you know one
+[0:37:16] and i thought that you know one important takeaway of this type of work
+[0:37:18] important takeaway of this type of work this style of work is that it allows us
+[0:37:20] this style of work is that it allows us to connect
+[0:37:21] to connect important desiderata of market design
+[0:37:23] important desiderata of market design with
+[0:37:24] with uh with their impact on a b testing and
+[0:37:26] uh with their impact on a b testing and experimentation which i think in general
+[0:37:28] experimentation which i think in general again to reiterate that theme
+[0:37:30] again to reiterate that theme is something that would be very valuable
+[0:37:31] is something that would be very valuable more broadly to develop those kinds of
+[0:37:33] more broadly to develop those kinds of insights
+[0:37:34] insights now what we wanted to do is recover the
+[0:37:36] now what we wanted to do is recover the benefits of cr and lr in the two
+[0:37:38] benefits of cr and lr in the two extremes
+[0:37:38] extremes um so what we you know what we propose
+[0:37:40] um so what we you know what we propose is this new design called two-sided
+[0:37:42] is this new design called two-sided randomization
+[0:37:43] randomization where essentially uh you randomize
+[0:37:46] where essentially uh you randomize customers in the treatment
+[0:37:47] customers in the treatment and listings into into treatment and now
+[0:37:49] and listings into into treatment and now you need to define well when is the
+[0:37:51] you need to define well when is the treatment
+[0:37:52] treatment experience applied and we we take an end
+[0:37:55] experience applied and we we take an end of the two treatment conditions to
+[0:37:56] of the two treatment conditions to determine that so if the customer
+[0:37:57] determine that so if the customer enlisting are both in treatment
+[0:37:59] enlisting are both in treatment then the treatment condition is applied
+[0:38:01] then the treatment condition is applied otherwise the uh the control condition
+[0:38:03] otherwise the uh the control condition applies
+[0:38:04] applies okay um this is something that hito uh
+[0:38:07] okay um this is something that hito uh pepayari and and others at amazon also
+[0:38:09] pepayari and and others at amazon also had
+[0:38:10] had uh independent work on in in 2019
+[0:38:13] uh independent work on in in 2019 uh on double-sided randomization
+[0:38:17] uh on double-sided randomization um it should be pretty clear that this
+[0:38:19] um it should be pretty clear that this design generalizes cr and lr
+[0:38:21] design generalizes cr and lr because if you randomize all listings to
+[0:38:23] because if you randomize all listings to treatment then the only
+[0:38:25] treatment then the only the only randomization that matters is
+[0:38:26] the only randomization that matters is whether customers are in control or
+[0:38:27] whether customers are in control or treatment
+[0:38:28] treatment and if you randomize all customers to
+[0:38:31] and if you randomize all customers to treatment all that matters is whether
+[0:38:32] treatment all that matters is whether listings are in control or treatment so
+[0:38:33] listings are in control or treatment so you can recover crnlr as special cases
+[0:38:36] you can recover crnlr as special cases okay so what we you know what we did is
+[0:38:39] okay so what we you know what we did is okay we said here's like a new class of
+[0:38:40] okay we said here's like a new class of designs you could work with what
+[0:38:42] designs you could work with what estimators are interesting to use here
+[0:38:44] estimators are interesting to use here so you know we came up with kind of two
+[0:38:47] so you know we came up with kind of two interesting ways to leverage design and
+[0:38:49] interesting ways to leverage design and estimation
+[0:38:50] estimation to deal with the issues of bias that
+[0:38:52] to deal with the issues of bias that we've shown you so far
+[0:38:53] we've shown you so far one of them from a design standpoint is
+[0:38:55] one of them from a design standpoint is to interpolate between the cr and lr
+[0:38:57] to interpolate between the cr and lr designs
+[0:38:58] designs and the other from an estimation
+[0:38:59] and the other from an estimation standpoint is to use competition effects
+[0:39:01] standpoint is to use competition effects to heuristically de-bias the estimator
+[0:39:03] to heuristically de-bias the estimator so i think i'll first just point out um
+[0:39:06] so i think i'll first just point out um you know
+[0:39:07] you know that technically speaking it's not very
+[0:39:09] that technically speaking it's not very hard to see
+[0:39:10] hard to see that if you design this tsr if you
+[0:39:13] that if you design this tsr if you choose the tsr design and estimator
+[0:39:16] choose the tsr design and estimator so that you're interpolating between cr
+[0:39:18] so that you're interpolating between cr and lr based on the market balance
+[0:39:20] and lr based on the market balance that you can recover kind of the best of
+[0:39:22] that you can recover kind of the best of both worlds where the bias
+[0:39:23] both worlds where the bias is is small in both extremes for purple
+[0:39:26] is is small in both extremes for purple here which is a tsr estimator
+[0:39:28] here which is a tsr estimator okay um and in fact you could see that
+[0:39:30] okay um and in fact you could see that even can offer lower bias and
+[0:39:32] even can offer lower bias and intermediate regimes of market balance
+[0:39:33] intermediate regimes of market balance than either crlr
+[0:39:35] than either crlr okay um so so that's kind of i think
+[0:39:38] okay um so so that's kind of i think clear because of the structure of tsr
+[0:39:40] clear because of the structure of tsr that we should be able to interpolate
+[0:39:43] that we should be able to interpolate what's more interesting i think is
+[0:39:44] what's more interesting i think is is that you know one of the things we
+[0:39:46] is that you know one of the things we initiated um is is to look at how you
+[0:39:48] initiated um is is to look at how you can use that tsr design
+[0:39:50] can use that tsr design to actually try to deal with the bias
+[0:39:52] to actually try to deal with the bias that's being introduced
+[0:39:53] that's being introduced so there let me just provide a little
+[0:39:55] so there let me just provide a little bit of intuition of how it might be used
+[0:39:56] bit of intuition of how it might be used for de-biasing
+[0:39:58] for de-biasing so um you know what we can do is we can
+[0:40:01] so um you know what we can do is we can kind of estimate competition effects on
+[0:40:03] kind of estimate competition effects on both sides of the market between
+[0:40:04] both sides of the market between customers in between listings
+[0:40:06] customers in between listings using these three control stalls so
+[0:40:08] using these three control stalls so here's one way that that might look
+[0:40:10] here's one way that that might look so let's suppose that the treatment
+[0:40:12] so let's suppose that the treatment makes the listing more attractive
+[0:40:14] makes the listing more attractive okay which means that you know if i if i
+[0:40:17] okay which means that you know if i if i imagine sort of what bookings should
+[0:40:20] imagine sort of what bookings should have been made
+[0:40:21] have been made in a world in where i didn't have
+[0:40:23] in a world in where i didn't have treatment
+[0:40:25] treatment um you know from a from a control and
+[0:40:28] um you know from a from a control and treatment
+[0:40:29] treatment customer's perspective they should both
+[0:40:31] customer's perspective they should both see controlled listings the same way
+[0:40:33] see controlled listings the same way so in the absence of any treatment
+[0:40:35] so in the absence of any treatment listings i should have expected that the
+[0:40:37] listings i should have expected that the booking rates in these two cells are
+[0:40:38] booking rates in these two cells are about the same
+[0:40:40] about the same now what will actually happen is that
+[0:40:42] now what will actually happen is that because this green box exists
+[0:40:45] because this green box exists and you know some listing some bookings
+[0:40:47] and you know some listing some bookings will be cannibalized away from this cell
+[0:40:49] will be cannibalized away from this cell into this cell treatment customers
+[0:40:51] into this cell treatment customers instead of booking control listings at
+[0:40:53] instead of booking control listings at the same rate
+[0:40:54] the same rate as controllable customers or booking
+[0:40:55] as controllable customers or booking control listings treatment customers
+[0:40:57] control listings treatment customers will sometimes swap over and book a
+[0:40:59] will sometimes swap over and book a treatment listing instead remember that
+[0:41:00] treatment listing instead remember that treatment makes listings more attractive
+[0:41:03] treatment makes listings more attractive so by looking at the difference between
+[0:41:05] so by looking at the difference between these two cells
+[0:41:06] these two cells i can estimate the degree of competition
+[0:41:08] i can estimate the degree of competition between listings
+[0:41:09] between listings in this experiment all right so that's
+[0:41:12] in this experiment all right so that's cc minus ct
+[0:41:13] cc minus ct similarly i can do something where i
+[0:41:15] similarly i can do something where i estimate the competition between
+[0:41:16] estimate the competition between customers
+[0:41:17] customers as c uh cc minus um minus tc
+[0:41:21] as c uh cc minus um minus tc the cell minus the cell and uh uh
+[0:41:24] the cell minus the cell and uh uh in the paper that hito and papaya worked
+[0:41:27] in the paper that hito and papaya worked on there's a similar application of
+[0:41:28] on there's a similar application of these types of correction terms as well
+[0:41:31] these types of correction terms as well um so you know what we find is that
+[0:41:34] um so you know what we find is that um what we find is that if you if you
+[0:41:37] um what we find is that if you if you use this kind of correction
+[0:41:39] use this kind of correction then this actually allows you to de-bias
+[0:41:42] then this actually allows you to de-bias beyond just you know this idea of
+[0:41:44] beyond just you know this idea of interpolation
+[0:41:45] interpolation and that de-biasing is part of what
+[0:41:47] and that de-biasing is part of what gives rise to better performance
+[0:41:49] gives rise to better performance in intermediate regimes of market
+[0:41:51] in intermediate regimes of market balance you're actually able to capture
+[0:41:53] balance you're actually able to capture competition effects by leveraging these
+[0:41:55] competition effects by leveraging these four cells and i guess just more
+[0:41:56] four cells and i guess just more generally i would say that this idea of
+[0:41:58] generally i would say that this idea of using creative design on both sides of
+[0:42:00] using creative design on both sides of the market
+[0:42:01] the market this is also something which is in the
+[0:42:03] this is also something which is in the work by jean-paul jayabadi and others at
+[0:42:05] work by jean-paul jayabadi and others at google
+[0:42:06] google in their work on bipartite experiments
+[0:42:08] in their work on bipartite experiments and and design there
+[0:42:10] and and design there where you know one can start to get
+[0:42:11] where you know one can start to get creative about exactly what kinds of
+[0:42:12] creative about exactly what kinds of randomization schemes and estimation
+[0:42:14] randomization schemes and estimation schemes
+[0:42:15] schemes can can allow us to to debias um
+[0:42:19] can can allow us to to debias um so i want to just close with a couple
+[0:42:21] so i want to just close with a couple thoughts and then i'll i'll open the
+[0:42:22] thoughts and then i'll i'll open the floor up for for panos
+[0:42:24] floor up for for panos um one thing i want to point out is that
+[0:42:26] um one thing i want to point out is that you know if you'd come to this talk
+[0:42:27] you know if you'd come to this talk before and you hadn't seen two-sided
+[0:42:29] before and you hadn't seen two-sided randomization
+[0:42:30] randomization an obvious solution to the problem i'm
+[0:42:32] an obvious solution to the problem i'm describing is cluster randomization
+[0:42:34] describing is cluster randomization where i just take different clusters of
+[0:42:35] where i just take different clusters of the market and randomize them to
+[0:42:36] the market and randomize them to treatment and control
+[0:42:38] treatment and control one of the challenges in online
+[0:42:40] one of the challenges in online marketplaces is that the clusters aren't
+[0:42:41] marketplaces is that the clusters aren't perfectly isolated
+[0:42:42] perfectly isolated you often have a lot of bleed over
+[0:42:44] you often have a lot of bleed over between customers for example uh an
+[0:42:46] between customers for example uh an employer who comes to an online labor
+[0:42:47] employer who comes to an online labor market looking to hire a web developer
+[0:42:49] market looking to hire a web developer may also get some search results that
+[0:42:51] may also get some search results that are you know python developers or java
+[0:42:53] are you know python developers or java developers who happen to also do web
+[0:42:55] developers who happen to also do web development
+[0:42:56] development and that'll in turn interfere with the
+[0:42:57] and that'll in turn interfere with the market for python development or for
+[0:42:59] market for python development or for java development
+[0:43:01] java development so you know we we wanted to investigate
+[0:43:02] so you know we we wanted to investigate well what are the potential pros and
+[0:43:04] well what are the potential pros and cons of two-sided randomization against
+[0:43:06] cons of two-sided randomization against cluster randomization
+[0:43:08] cluster randomization um we ran a simple simulation where we
+[0:43:11] um we ran a simple simulation where we had two clusters
+[0:43:13] had two clusters and we have a parameter that controls
+[0:43:14] and we have a parameter that controls the market overlap between the clusters
+[0:43:17] the market overlap between the clusters as you can see if the clusters are
+[0:43:18] as you can see if the clusters are completely non-overlapping
+[0:43:20] completely non-overlapping then cluster randomization yields far
+[0:43:21] then cluster randomization yields far lower bias than our our two-sided
+[0:43:23] lower bias than our our two-sided randomization estimation would
+[0:43:25] randomization estimation would but you know one of the virtues of
+[0:43:27] but you know one of the virtues of two-sided randomization we thought
+[0:43:28] two-sided randomization we thought was that you know even at sort of even
+[0:43:31] was that you know even at sort of even if you get to small levels of market
+[0:43:33] if you get to small levels of market overlap
+[0:43:34] overlap um cluster randomization can uh start to
+[0:43:37] um cluster randomization can uh start to in
+[0:43:37] in you know have bias that's introduced
+[0:43:40] you know have bias that's introduced because of these overlaps between the
+[0:43:41] because of these overlaps between the clusters
+[0:43:43] clusters and you know that's a situation where
+[0:43:44] and you know that's a situation where tsr this two-sided randomization and
+[0:43:47] tsr this two-sided randomization and associated estimator
+[0:43:48] associated estimator actually you know control that bias even
+[0:43:50] actually you know control that bias even as as the market overlap grows
+[0:43:52] as as the market overlap grows and this is valuable from a practical
+[0:43:54] and this is valuable from a practical perspective because it allows the
+[0:43:55] perspective because it allows the platform not to have to worry about
+[0:43:57] platform not to have to worry about uh completely disentangling clusters to
+[0:44:00] uh completely disentangling clusters to be able to run uh run experiments
+[0:44:02] be able to run uh run experiments um so this was kind of a valuable
+[0:44:03] um so this was kind of a valuable insight in comparison with a standard
+[0:44:05] insight in comparison with a standard design
+[0:44:07] design um so uh you know i'll kind of
+[0:44:10] um so uh you know i'll kind of only say a couple words about this slide
+[0:44:12] only say a couple words about this slide which is that you know essentially i
+[0:44:13] which is that you know essentially i haven't said anything about variants
+[0:44:16] haven't said anything about variants um there is a little bit more uh in the
+[0:44:18] um there is a little bit more uh in the paper and also it more recently in a
+[0:44:20] paper and also it more recently in a follow-up paper using a static model on
+[0:44:22] follow-up paper using a static model on bias variants
+[0:44:23] bias variants and rmse related to these designs but
+[0:44:26] and rmse related to these designs but i'll skip this in the interest of time
+[0:44:28] i'll skip this in the interest of time um so so looking ahead uh
+[0:44:31] um so so looking ahead uh you know i guess to reiterate for the
+[0:44:33] you know i guess to reiterate for the last time i would say
+[0:44:35] last time i would say i think like what i'm hoping you'll take
+[0:44:37] i think like what i'm hoping you'll take away from this work at
+[0:44:38] away from this work at a highest level is that uh there's a a
+[0:44:41] a highest level is that uh there's a a very different way to look at
+[0:44:43] very different way to look at uh you know some of these experimental
+[0:44:45] uh you know some of these experimental design and estimation considerations
+[0:44:46] design and estimation considerations where our goal is to understand the
+[0:44:48] where our goal is to understand the relationship between market conditions
+[0:44:49] relationship between market conditions and interference and bias
+[0:44:52] and interference and bias and you know looking ahead there's a lot
+[0:44:55] and you know looking ahead there's a lot left to do built off what we've done
+[0:44:56] left to do built off what we've done here the obvious one was inference
+[0:44:58] here the obvious one was inference which is to build a pipeline that allows
+[0:45:00] which is to build a pipeline that allows us to estimate standard errors and
+[0:45:01] us to estimate standard errors and confidence intervals
+[0:45:03] confidence intervals i haven't told you anything about
+[0:45:04] i haven't told you anything about optimality what would be the best
+[0:45:06] optimality what would be the best tsr designs and i should say and
+[0:45:08] tsr designs and i should say and estimators that we could construct
+[0:45:10] estimators that we could construct um and then you know another really
+[0:45:12] um and then you know another really interesting line of work is to use these
+[0:45:14] interesting line of work is to use these new designs to de-bias
+[0:45:16] new designs to de-bias existing designs because platforms are
+[0:45:18] existing designs because platforms are are quite fond of running these naive
+[0:45:20] are quite fond of running these naive designs they're easy to run
+[0:45:22] designs they're easy to run and you know maybe one thing they could
+[0:45:23] and you know maybe one thing they could do is run a tsr design to simultaneously
+[0:45:26] do is run a tsr design to simultaneously de-bias
+[0:45:27] de-bias many of these naive estimators for lr
+[0:45:29] many of these naive estimators for lr and cr designs
+[0:45:30] and cr designs so a lot of these questions are things
+[0:45:32] so a lot of these questions are things we're working on empirically in
+[0:45:33] we're working on empirically in partnership with with live platforms
+[0:45:35] partnership with with live platforms you know and maybe more broadly for this
+[0:45:37] you know and maybe more broadly for this community i'll just highlight that
+[0:45:38] community i'll just highlight that there's a lot of open work left to do
+[0:45:40] there's a lot of open work left to do in understanding the pros and cons of
+[0:45:42] in understanding the pros and cons of many different approaches that are
+[0:45:44] many different approaches that are deployed daily
+[0:45:45] deployed daily uh in these environments to deal with
+[0:45:46] uh in these environments to deal with interference not only tsr but cluster
+[0:45:49] interference not only tsr but cluster randomized and switch back and crossover
+[0:45:51] randomized and switch back and crossover designs
+[0:45:51] designs so let me wrap up there um just a couple
+[0:45:53] so let me wrap up there um just a couple of minutes over but um
+[0:45:55] of minutes over but um thank you and let me turn back to
+[0:45:56] thank you and let me turn back to dominic and guillaume maybe you can tell
+[0:45:58] dominic and guillaume maybe you can tell us
+[0:45:58] us what next steps you want to take from
+[0:45:59] what next steps you want to take from here uh thanks for the nice talk ramesh
+[0:46:02] here uh thanks for the nice talk ramesh yeah i think we could
+[0:46:03] yeah i think we could maybe take one quick question uh before
+[0:46:06] maybe take one quick question uh before we switch to the discussion
+[0:46:07] we switch to the discussion gio yeah so uh one of the questions that
+[0:46:10] gio yeah so uh one of the questions that was asked by an
+[0:46:11] was asked by an an anonymous attendee is whether for the
+[0:46:14] an anonymous attendee is whether for the proposed design is conceivable
+[0:46:15] proposed design is conceivable that we can do or instead of and for
+[0:46:18] that we can do or instead of and for treatment
+[0:46:19] treatment um
+[0:46:24] yeah that's that's actually a great question um so
+[0:46:26] question um so in this in this table that i had um
+[0:46:29] in this in this table that i had um you're absolutely right we could have
+[0:46:30] you're absolutely right we could have three green cells and one blue cell
+[0:46:32] three green cells and one blue cell um it is something we've thought about
+[0:46:34] um it is something we've thought about and you know you would end up with
+[0:46:36] and you know you would end up with something very similar where you could
+[0:46:37] something very similar where you could obviously
+[0:46:38] obviously still develop estimates of
+[0:46:40] still develop estimates of cannibalization by now comparing across
+[0:46:42] cannibalization by now comparing across the two green cells in each column or in
+[0:46:44] the two green cells in each column or in each row
+[0:46:45] each row and um i don't you know i think to some
+[0:46:49] and um i don't you know i think to some extent that choice
+[0:46:50] extent that choice would require a little bit better
+[0:46:52] would require a little bit better analysis of variance in particular
+[0:46:54] analysis of variance in particular because um the main issue that's going
+[0:46:56] because um the main issue that's going to arise there is the change in sample
+[0:46:58] to arise there is the change in sample sizes that are rising for the
+[0:47:00] sizes that are rising for the for the estimates that you're
+[0:47:00] for the estimates that you're constructing um there's some impact on
+[0:47:03] constructing um there's some impact on bias as well because obviously the
+[0:47:05] bias as well because obviously the cannibalization estimates would be
+[0:47:06] cannibalization estimates would be different
+[0:47:07] different but our our sort of intuitive thinking
+[0:47:09] but our our sort of intuitive thinking on that is that
+[0:47:10] on that is that which one of those two types of tsr
+[0:47:12] which one of those two types of tsr designs you use
+[0:47:13] designs you use seems to be more guided by by a question
+[0:47:14] seems to be more guided by by a question of variance um
+[0:47:16] of variance um so i think you know that is one of those
+[0:47:17] so i think you know that is one of those questions that's an interesting one to
+[0:47:19] questions that's an interesting one to study you can actually get even more
+[0:47:20] study you can actually get even more sophisticated
+[0:47:21] sophisticated where you have more cells on each side
+[0:47:23] where you have more cells on each side and and uh
+[0:47:24] and and uh more complex logic that's applied to
+[0:47:26] more complex logic that's applied to determine whether treatment or control
+[0:47:28] determine whether treatment or control conditions are applied on any given
+[0:47:30] conditions are applied on any given edge in the marketplace so this is
+[0:47:32] edge in the marketplace so this is definitely just
+[0:47:33] definitely just a starting point towards a much richer
+[0:47:35] a starting point towards a much richer class of potential designs and
+[0:47:36] class of potential designs and associated estimators
+[0:47:39] associated estimators all right great thanks yeah then let's
+[0:47:41] all right great thanks yeah then let's switch over to the discussion
+[0:47:43] switch over to the discussion so panos presents some slides and after
+[0:47:44] so panos presents some slides and after that drama she will be able to respond
+[0:48:03] okay uh you can see my slides
+[0:48:18] yes yep all right so uh thanks for the invitation thanks ramesh
+[0:48:20] thanks for the invitation thanks ramesh for a wonderful talk
+[0:48:21] for a wonderful talk uh i'm very happy to to discuss uh this
+[0:48:24] uh i'm very happy to to discuss uh this paper
+[0:48:24] paper uh i first congratulate the authors it's
+[0:48:27] uh i first congratulate the authors it's i think it's an important paper
+[0:48:28] i think it's an important paper uh it's very very uh very well written
+[0:48:31] uh it's very very uh very well written and i'll try to make those points i'll
+[0:48:33] and i'll try to make those points i'll try to focus on four four points because
+[0:48:35] try to focus on four four points because there's
+[0:48:36] there's so many things to unpack here and i feel
+[0:48:38] so many things to unpack here and i feel that uh even like the
+[0:48:39] that uh even like the 15 minutes is not enough but i'll do my
+[0:48:41] 15 minutes is not enough but i'll do my best so
+[0:48:42] best so first of all one important thing here is
+[0:48:44] first of all one important thing here is that we talk about proper experiment
+[0:48:46] that we talk about proper experiment experimental design in comparative
+[0:48:47] experimental design in comparative markets it's it's a it's a new field
+[0:48:49] markets it's it's a it's a new field it's an exciting field
+[0:48:51] it's an exciting field uh but it's it's always important to to
+[0:48:53] uh but it's it's always important to to think about a good experiments
+[0:48:55] think about a good experiments good data collection because this is
+[0:48:57] good data collection because this is ultimately what supports also good
+[0:48:59] ultimately what supports also good science
+[0:49:00] science um the framework annotation also another
+[0:49:02] um the framework annotation also another high level
+[0:49:03] high level uh comments the framework and the
+[0:49:04] uh comments the framework and the notation are really well thought out i
+[0:49:06] notation are really well thought out i think
+[0:49:07] think um and i'm going to discuss a potential
+[0:49:10] um and i'm going to discuss a potential outcomes
+[0:49:11] outcomes type of formalism but it doesn't seem to
+[0:49:13] type of formalism but it doesn't seem to work as well it does give some benefits
+[0:49:15] work as well it does give some benefits but it seems that
+[0:49:17] but it seems that it's clear that the the authors put a
+[0:49:19] it's clear that the the authors put a lot of effort into thinking about this
+[0:49:20] lot of effort into thinking about this clearly and putting it
+[0:49:22] clearly and putting it into precise uh uh terms uh the s demand
+[0:49:25] into precise uh uh terms uh the s demand is interesting because it takes
+[0:49:26] is interesting because it takes into account the this complex system
+[0:49:28] into account the this complex system dynamics which is um
+[0:49:30] dynamics which is um definitely a complex and interesting
+[0:49:32] definitely a complex and interesting task and finally we have
+[0:49:34] task and finally we have in terms of contributions we have this
+[0:49:35] in terms of contributions we have this very insightful i think characterization
+[0:49:37] very insightful i think characterization of
+[0:49:38] of uh of the interference and how to deal
+[0:49:40] uh of the interference and how to deal with it based on this parameter
+[0:49:41] with it based on this parameter the structural parameters lambda
+[0:49:45] the structural parameters lambda it's a more systems approach to
+[0:49:46] it's a more systems approach to interference it's different than
+[0:49:48] interference it's different than what we're used to uh let's say in in
+[0:49:50] what we're used to uh let's say in in statistics
+[0:49:51] statistics uh but it's definitely refreshing and
+[0:49:53] uh but it's definitely refreshing and definitely novel
+[0:49:55] definitely novel um some quick condition uh i'm going to
+[0:49:59] um some quick condition uh i'm going to be quick about that because romesh
+[0:50:01] be quick about that because romesh already presented that so the problem is
+[0:50:04] already presented that so the problem is that we have
+[0:50:04] that we have um you know this this market over here
+[0:50:07] um you know this this market over here uh we have customers we have listings
+[0:50:09] uh we have customers we have listings and then
+[0:50:10] and then um our estimate is basically a
+[0:50:12] um our estimate is basically a comparison between these two
+[0:50:14] comparison between these two let's say pure treatment and pure
+[0:50:16] let's say pure treatment and pure control situations right in one
+[0:50:17] control situations right in one situation where
+[0:50:18] situation where we treat every customer we treat every
+[0:50:20] we treat every customer we treat every listing we treat every
+[0:50:21] listing we treat every we we have we have control all control
+[0:50:24] we we have we have control all control customers all control listings and then
+[0:50:25] customers all control listings and then we compare the let's say the booking
+[0:50:27] we compare the let's say the booking rates between these two
+[0:50:29] rates between these two kind of factuals in the experiment
+[0:50:31] kind of factuals in the experiment however it's
+[0:50:32] however it's definitely more messy because there is
+[0:50:34] definitely more messy because there is interference
+[0:50:35] interference since these customers are looking into
+[0:50:38] since these customers are looking into listings that are in control
+[0:50:39] listings that are in control and also looking into lists listings
+[0:50:41] and also looking into lists listings that are in treatment so
+[0:50:43] that are in treatment so there is a computation between customers
+[0:50:45] there is a computation between customers for listings that there is also a
+[0:50:46] for listings that there is also a competition between listings for
+[0:50:48] competition between listings for customers
+[0:50:49] customers that nice symmetry i think it's a very
+[0:50:50] that nice symmetry i think it's a very nice moment in the in the paper
+[0:50:52] nice moment in the in the paper that that symmetra is highlighted in the
+[0:50:55] that that symmetra is highlighted in the paper in a very nice
+[0:50:56] paper in a very nice way i think um an an interesting aspect
+[0:51:00] way i think um an an interesting aspect here i think is that we what we're
+[0:51:02] here i think is that we what we're looking here is
+[0:51:03] looking here is that we look into interference as a mars
+[0:51:05] that we look into interference as a mars market friction
+[0:51:07] market friction and i think that's an interesting way to
+[0:51:08] and i think that's an interesting way to to to think about interference in this
+[0:51:10] to to think about interference in this case
+[0:51:11] case because in the case where you didn't
+[0:51:12] because in the case where you didn't have you didn't have frictions
+[0:51:14] have you didn't have frictions like the uh the bookings were released
+[0:51:16] like the uh the bookings were released immediately or or
+[0:51:17] immediately or or or their other transactions were kind of
+[0:51:20] or their other transactions were kind of very fast
+[0:51:20] very fast and and and no cost uh we will have
+[0:51:23] and and and no cost uh we will have interference so really that connection
+[0:51:25] interference so really that connection between friction and interference i
+[0:51:27] between friction and interference i think it's it's
+[0:51:28] think it's it's it's new and it's pretty pretty exciting
+[0:51:31] it's new and it's pretty pretty exciting and actually the paper does consider
+[0:51:32] and actually the paper does consider those limit cases where friction
+[0:51:34] those limit cases where friction disappears right like the in the case
+[0:51:36] disappears right like the in the case where
+[0:51:36] where this release is automatic uh we don't
+[0:51:38] this release is automatic uh we don't have this friction
+[0:51:39] have this friction the customers don't have to wait uh and
+[0:51:42] the customers don't have to wait uh and so uh that friction disappears and so
+[0:51:44] so uh that friction disappears and so interference disappears and that's a
+[0:51:45] interference disappears and that's a novel way i think of dealing with
+[0:51:47] novel way i think of dealing with interference
+[0:51:48] interference it's very different than what we'll do
+[0:51:50] it's very different than what we'll do oh
+[0:51:51] oh sorry i think the slide was frozen on
+[0:51:53] sorry i think the slide was frozen on slide two but now i see slide three
+[0:51:55] slide two but now i see slide three again
+[0:51:55] again so okay yeah so
+[0:51:58] so okay yeah so yeah i was saying that it's this is a
+[0:52:00] yeah i was saying that it's this is a novel way of dealing with interference
+[0:52:02] novel way of dealing with interference compare this with a statistical approach
+[0:52:03] compare this with a statistical approach where we care about let's say first
+[0:52:05] where we care about let's say first order second order interference effects
+[0:52:08] order second order interference effects we try to to position the units in a way
+[0:52:10] we try to to position the units in a way like in the field experiments let's say
+[0:52:12] like in the field experiments let's say such that we control interference
+[0:52:14] such that we control interference it's an entirely new novel way of
+[0:52:16] it's an entirely new novel way of dealing with interference uh
+[0:52:17] dealing with interference uh so it's definitely refreshing
+[0:52:21] so it's definitely refreshing now i think the myself i'm more familiar
+[0:52:24] now i think the myself i'm more familiar with potential outcomes and i guess some
+[0:52:26] with potential outcomes and i guess some of the audience i think there was a
+[0:52:27] of the audience i think there was a question about potential outcomes as
+[0:52:29] question about potential outcomes as well
+[0:52:30] well uh like what kind of sudva violations do
+[0:52:32] uh like what kind of sudva violations do we see here so i think it's instructive
+[0:52:34] we see here so i think it's instructive uh to to try to to to express what is
+[0:52:37] uh to to try to to to express what is happening in this paper through the
+[0:52:38] happening in this paper through the language of potential outcomes
+[0:52:40] language of potential outcomes it's definitely not easy and you'll see
+[0:52:42] it's definitely not easy and you'll see that there are some benefits but there
+[0:52:43] that there are some benefits but there are some downsides so this is what the
+[0:52:45] are some downsides so this is what the best i could do
+[0:52:46] best i could do is basically if you if you write this
+[0:52:49] is basically if you if you write this down
+[0:52:49] down in terms of potential outcomes you will
+[0:52:51] in terms of potential outcomes you will say okay the unit is a pair of customer
+[0:52:53] say okay the unit is a pair of customer and listing
+[0:52:54] and listing and suppose there's a super population
+[0:52:56] and suppose there's a super population of customers that come in and go right
+[0:52:57] of customers that come in and go right it's not like uh
+[0:53:04] i think we're still on slide three the intuition slide it hasn't progressed
+[0:53:08] intuition slide it hasn't progressed uh yes i have ah there it is
+[0:53:11] uh yes i have ah there it is thanks okay um
+[0:53:15] thanks okay um right yes so yeah i was saying that the
+[0:53:18] right yes so yeah i was saying that the units are the customer and listing pairs
+[0:53:20] units are the customer and listing pairs and then
+[0:53:20] and then for every customer listing pair at every
+[0:53:22] for every customer listing pair at every time t some treatments of
+[0:53:24] time t some treatments of customers and listings we have this why
+[0:53:27] customers and listings we have this why this potential
+[0:53:28] this potential outcomes that tells me whether the cast
+[0:53:30] outcomes that tells me whether the cast this particular listing is booked
+[0:53:32] this particular listing is booked at time t okay and why this is helpful
+[0:53:35] at time t okay and why this is helpful um because if you just try you can write
+[0:53:37] um because if you just try you can write down some the constraints of the of the
+[0:53:39] down some the constraints of the of the market that will help
+[0:53:40] market that will help elucidate a thing what are the what are
+[0:53:42] elucidate a thing what are the what are the sources of interference for instance
+[0:53:44] the sources of interference for instance if you sum up those um across across
+[0:53:47] if you sum up those um across across customers
+[0:53:48] customers then we this has to be bounded because
+[0:53:50] then we this has to be bounded because listings cannot be
+[0:53:51] listings cannot be overbooked or doubly booked right if you
+[0:53:53] overbooked or doubly booked right if you sum up across listings then again
+[0:53:55] sum up across listings then again there's an upper bound because
+[0:53:56] there's an upper bound because we don't allow overbooking or double
+[0:53:58] we don't allow overbooking or double booking uh depending on the application
+[0:54:00] booking uh depending on the application and
+[0:54:00] and if you just sum up across listings of a
+[0:54:02] if you just sum up across listings of a specific type then we we
+[0:54:04] specific type then we we this has to be upper bounded because we
+[0:54:06] this has to be upper bounded because we have capacity constraints this pro i
+[0:54:08] have capacity constraints this pro i think
+[0:54:09] think so um it it's not really separated even
+[0:54:12] so um it it's not really separated even though the paper doesn't talk about
+[0:54:13] though the paper doesn't talk about potential outcomes it's not really
+[0:54:15] potential outcomes it's not really separated a lot by by that framework
+[0:54:18] separated a lot by by that framework um because you can definitely express
+[0:54:20] um because you can definitely express those constraints in terms of potential
+[0:54:22] those constraints in terms of potential outcomes um and
+[0:54:24] outcomes um and perhaps following that form of formalism
+[0:54:27] perhaps following that form of formalism we have to illustrate where interference
+[0:54:28] we have to illustrate where interference is coming from it's basically potential
+[0:54:30] is coming from it's basically potential outcomes but
+[0:54:31] outcomes but they have to to satisfy some constraints
+[0:54:33] they have to to satisfy some constraints that's this is how
+[0:54:34] that's this is how i guess the more potential outcomes uh
+[0:54:38] i guess the more potential outcomes uh people will think about this and then
+[0:54:41] people will think about this and then the the estimate the s demand
+[0:54:42] the the estimate the s demand is um where we take these potential
+[0:54:45] is um where we take these potential outcomes
+[0:54:46] outcomes when everybody is treated and then when
+[0:54:48] when everybody is treated and then when everybody is in control and then we
+[0:54:50] everybody is in control and then we compare between these two cases
+[0:54:52] compare between these two cases now here what are the benefits of these
+[0:54:54] now here what are the benefits of these potential outcomes formalism i think
+[0:54:56] potential outcomes formalism i think one is that you clearly see what are the
+[0:54:58] one is that you clearly see what are the constraints you can clearly see where
+[0:54:59] constraints you can clearly see where interference is coming from
+[0:55:01] interference is coming from and the second thing is is that we can
+[0:55:02] and the second thing is is that we can talk about the s demand
+[0:55:04] talk about the s demand without even talking about the model um
+[0:55:06] without even talking about the model um i think this potential point of
+[0:55:08] i think this potential point of improvement for the paper will be to
+[0:55:10] improvement for the paper will be to um perhaps talk about this demand more
+[0:55:12] um perhaps talk about this demand more more quickly so that it can
+[0:55:14] more quickly so that it can ground it more formally and and and
+[0:55:16] ground it more formally and and and before
+[0:55:17] before right now the paper kind of talks about
+[0:55:18] right now the paper kind of talks about the model more it talks
+[0:55:20] the model more it talks builds up the notation builds the choice
+[0:55:22] builds up the notation builds the choice model and later it gets into the s
+[0:55:24] model and later it gets into the s demand
+[0:55:25] demand so i think this is the benefit of the
+[0:55:26] so i think this is the benefit of the potential outcome in general that
+[0:55:29] potential outcome in general that you can very quickly define the
+[0:55:32] you can very quickly define the scientific problem and it
+[0:55:34] scientific problem and it this is also model agnostic model free
+[0:55:36] this is also model agnostic model free and then you can talk about what kind of
+[0:55:37] and then you can talk about what kind of models can i use to get there
+[0:55:39] models can i use to get there however the downside here and i'm kind
+[0:55:41] however the downside here and i'm kind of cheating here is that i'm not telling
+[0:55:43] of cheating here is that i'm not telling you what
+[0:55:43] you what these dots are and there are other
+[0:55:46] these dots are and there are other constraints in the in the in this system
+[0:55:48] constraints in the in the in this system like the release time constraints that
+[0:55:50] like the release time constraints that are just really hard to to to write down
+[0:55:52] are just really hard to to to write down in terms of potential outcomes so
+[0:55:53] in terms of potential outcomes so there's apps uh there there's an upside
+[0:55:55] there's apps uh there there's an upside down side so it's uh but i think it's
+[0:55:57] down side so it's uh but i think it's it's an interesting connection between
+[0:55:59] it's an interesting connection between uh the two uh the two frameworks so
+[0:56:02] uh the two uh the two frameworks so here's the
+[0:56:03] here's the intuition for the one um uh result in
+[0:56:06] intuition for the one um uh result in the paper
+[0:56:07] the paper so you have this customer uh the
+[0:56:09] so you have this customer uh the randomization design all the listings
+[0:56:11] randomization design all the listings are in treatments
+[0:56:12] are in treatments and here if the if this this side is
+[0:56:14] and here if the if this this side is like very large
+[0:56:15] like very large it's very is frictionless then it's as
+[0:56:18] it's very is frictionless then it's as if the treated customers here that look
+[0:56:20] if the treated customers here that look into treated units in the treated
+[0:56:22] into treated units in the treated economy
+[0:56:22] economy um the full treated economy and then the
+[0:56:25] um the full treated economy and then the control customers
+[0:56:26] control customers is as if they're looking into the the
+[0:56:28] is as if they're looking into the the full treated economy again but
+[0:56:29] full treated economy again but by definition this is the same as
+[0:56:31] by definition this is the same as they're looking into the control economy
+[0:56:33] they're looking into the control economy so now you have a clean separation but
+[0:56:35] so now you have a clean separation but not by
+[0:56:36] not by by any kind of trick uh design trick or
+[0:56:39] by any kind of trick uh design trick or like experimental design trick it's more
+[0:56:41] like experimental design trick it's more like
+[0:56:41] like uh it's a systems right uh it's it's
+[0:56:44] uh it's a systems right uh it's it's it's it's a consequence of the
+[0:56:45] it's it's a consequence of the of this scaling of that of that economy
+[0:56:48] of this scaling of that of that economy which i think it's it's really
+[0:56:49] which i think it's it's really interesting
+[0:56:50] interesting if you want to write this down as a
+[0:56:51] if you want to write this down as a potential uh as in potential outcomes so
+[0:56:54] potential uh as in potential outcomes so basically what i think what what you get
+[0:56:55] basically what i think what what you get is that
+[0:56:56] is that the potential outcomes is separated into
+[0:56:59] the potential outcomes is separated into panas i think your sites might be stuck
+[0:57:01] panas i think your sites might be stuck again
+[0:57:01] again i think there's some like delay and
+[0:57:03] i think there's some like delay and update
+[0:57:09] yes all right sorry yes i was saying that you have
+[0:57:11] that you have um yes so i was saying that
+[0:57:15] um yes so i was saying that by by assuming that this lambda tau goes
+[0:57:17] by by assuming that this lambda tau goes to zero it's basically you separate this
+[0:57:19] to zero it's basically you separate this into two different
+[0:57:20] into two different let's say uh economies right so that's
+[0:57:23] let's say uh economies right so that's why you can get unbiased
+[0:57:24] why you can get unbiased estimates and if you want to write this
+[0:57:26] estimates and if you want to write this in terms of potential outcomes which i
+[0:57:28] in terms of potential outcomes which i think is useful
+[0:57:29] think is useful uh your potential outcomes now kind of
+[0:57:31] uh your potential outcomes now kind of separate betw
+[0:57:32] separate betw between a component that's design based
+[0:57:34] between a component that's design based that's your design that's the
+[0:57:35] that's your design that's the the proportion of created units and then
+[0:57:38] the proportion of created units and then that part is your estimate
+[0:57:39] that part is your estimate i think that clean separation is a
+[0:57:41] i think that clean separation is a really nice idea like a systems approach
+[0:57:43] really nice idea like a systems approach to dealing with interference where
+[0:57:44] to dealing with interference where you have the potential outcome it's
+[0:57:45] you have the potential outcome it's separated and then
+[0:57:47] separated and then now for this design part you can control
+[0:57:49] now for this design part you can control for it right you can you can do the
+[0:57:51] for it right you can you can do the harford stomps and estimator you can
+[0:57:52] harford stomps and estimator you can get rid of it um now this equation here
+[0:57:56] get rid of it um now this equation here is also a form of satwa
+[0:57:57] is also a form of satwa uh and and and there was a question also
+[0:57:59] uh and and and there was a question also in the site about that
+[0:58:01] in the site about that it's a former certified because uh so
+[0:58:03] it's a former certified because uh so the certified is not only about the
+[0:58:04] the certified is not only about the the no interference right the saatva is
+[0:58:06] the no interference right the saatva is more about the the subtle importance of
+[0:58:08] more about the the subtle importance of the satellite is that
+[0:58:09] the satellite is that it tells you what what is the invariant
+[0:58:11] it tells you what what is the invariant what can you do with very different
+[0:58:13] what can you do with very different uh treatment vectors and this is exactly
+[0:58:15] uh treatment vectors and this is exactly what this equation
+[0:58:16] what this equation tells you it tells you that no matter
+[0:58:18] tells you it tells you that no matter what zc is the potential outcome depends
+[0:58:20] what zc is the potential outcome depends on the proportion
+[0:58:21] on the proportion the population proportion of this you
+[0:58:23] the population proportion of this you see the customers they treat the
+[0:58:24] see the customers they treat the proportion of three customers
+[0:58:26] proportion of three customers and then the other part is just demand
+[0:58:27] and then the other part is just demand that's fixed and by dividing here
+[0:58:30] that's fixed and by dividing here putting this
+[0:58:31] putting this on the other side you can estimate that
+[0:58:33] on the other side you can estimate that that that estimate
+[0:58:34] that that estimate which i think it's it's a nice intuition
+[0:58:36] which i think it's it's a nice intuition that comes from this system's
+[0:58:37] that comes from this system's perspective
+[0:58:39] perspective now for the lr design it's a little more
+[0:58:41] now for the lr design it's a little more tricky for me uh and this is where i
+[0:58:43] tricky for me uh and this is where i struggle a little bit
+[0:58:44] struggle a little bit because in this case where this lambdas
+[0:58:46] because in this case where this lambdas out the structural parameter goes to
+[0:58:47] out the structural parameter goes to infinity
+[0:58:48] infinity essentially we have initiated customers
+[0:58:50] essentially we have initiated customers so what no matter what you do
+[0:58:52] so what no matter what you do progress the slide again yeah so i
+[0:58:54] progress the slide again yeah so i apologize i think it's because of this
+[0:58:56] apologize i think it's because of this airplane thingy
+[0:58:57] airplane thingy but there it is yeah there it is yeah i
+[0:58:59] but there it is yeah there it is yeah i was saying that
+[0:59:00] was saying that you have um we have infinite customers
+[0:59:02] you have um we have infinite customers so in that other regime the s demand is
+[0:59:05] so in that other regime the s demand is is equal to zero and that's that's it's
+[0:59:08] is equal to zero and that's that's it's hard for me to think about that like
+[0:59:09] hard for me to think about that like it's not
+[0:59:10] it's not really realistic at least it's not as
+[0:59:12] really realistic at least it's not as realistic as the other
+[0:59:13] realistic as the other uh setting and by by
+[0:59:17] uh setting and by by by kind of interpolating our design
+[0:59:20] by kind of interpolating our design towards these two extremes to one
+[0:59:21] towards these two extremes to one extreme realistic the other might not be
+[0:59:23] extreme realistic the other might not be as much
+[0:59:24] as much maybe it's perhaps not the best thing to
+[0:59:25] maybe it's perhaps not the best thing to do it's uh it's a little bit concerning
+[0:59:27] do it's uh it's a little bit concerning that we're kind of considering
+[0:59:28] that we're kind of considering settings where the s demand is exactly
+[0:59:31] settings where the s demand is exactly equal to zero so i'd like you to hear
+[0:59:33] equal to zero so i'd like you to hear ramesh's thought
+[0:59:34] ramesh's thought thoughts about that um and
+[0:59:37] thoughts about that um and a few a few final comments about one is
+[0:59:40] a few a few final comments about one is about robustness
+[0:59:41] about robustness and the other is about other designs
+[0:59:44] and the other is about other designs um so this the paper the the the
+[0:59:47] um so this the paper the the the approach of this paper is model based so
+[0:59:49] approach of this paper is model based so it will be nice to know what happens
+[0:59:51] it will be nice to know what happens uh how would you handle the modal
+[0:59:52] uh how would you handle the modal assumptions right like for instance
+[0:59:54] assumptions right like for instance um if you solve this the markov chain
+[0:59:57] um if you solve this the markov chain equations like the stable in the stable
+[0:59:59] equations like the stable in the stable um in stationary regime
+[1:00:02] um in stationary regime we get some equations about this um
+[1:00:05] we get some equations about this um booking rates right for
+[1:00:06] booking rates right for all of these kind of factuals but we
+[1:00:08] all of these kind of factuals but we know that there are some equations that
+[1:00:09] know that there are some equations that have to be
+[1:00:10] have to be uh satisfied by this by this for this
+[1:00:13] uh satisfied by this by this for this quantities
+[1:00:13] quantities so what if these quantities what is this
+[1:00:16] so what if these quantities what is this uh you have to advance your slide again
+[1:00:20] uh you have to advance your slide again um
+[1:00:31] is it can you see now the um no we're still on the previous slide
+[1:00:34] no we're still on the previous slide okay i'll i'll do
+[1:00:35] okay i'll i'll do this thing can you see it now
+[1:00:40] this thing can you see it now not quite yet now we we just see it it
+[1:00:42] not quite yet now we we just see it it says panos tools has started screen
+[1:00:44] says panos tools has started screen sharing
+[1:00:45] sharing but we don't see oh now we will try that
+[1:00:47] but we don't see oh now we will try that one
+[1:00:48] one yeah yeah okay so one so one question
+[1:00:51] yeah yeah okay so one so one question just very quickly is that
+[1:00:52] just very quickly is that these these types of um quantities uh
+[1:00:55] these these types of um quantities uh the model makes specific predictions
+[1:00:57] the model makes specific predictions about the kind of factuals so
+[1:00:59] about the kind of factuals so and these some of them are estimable
+[1:01:01] and these some of them are estimable right so what if these predictions are
+[1:01:02] right so what if these predictions are not
+[1:01:03] not are not validated in the data what will
+[1:01:05] are not validated in the data what will be the practical recommendation here
+[1:01:07] be the practical recommendation here and then what if i want to to get away
+[1:01:09] and then what if i want to to get away get away from these the mortal
+[1:01:10] get away from these the mortal assumptions and try to to solve
+[1:01:13] assumptions and try to to solve simpler questions for instance in the
+[1:01:14] simpler questions for instance in the stats literature we we don't really
+[1:01:16] stats literature we we don't really we don't rely on a model but we can
+[1:01:18] we don't rely on a model but we can still test for the existence of
+[1:01:20] still test for the existence of interference can we do
+[1:01:21] interference can we do can we solve simpler questions but at
+[1:01:24] can we solve simpler questions but at the same time being
+[1:01:25] the same time being model agnostic and and finally regarding
+[1:01:28] model agnostic and and finally regarding alternative designs that's something
+[1:01:29] alternative designs that's something that ramesh also
+[1:01:30] that ramesh also talked about um this lambda parameters
+[1:01:33] talked about um this lambda parameters are crucial so can i manipulate them uh
+[1:01:36] are crucial so can i manipulate them uh directly like as a platform will it make
+[1:01:38] directly like as a platform will it make sense
+[1:01:39] sense um and also regarding these crossover
+[1:01:42] um and also regarding these crossover designs
+[1:01:42] designs i can put the system in condition one
+[1:01:44] i can put the system in condition one and then later in condition zero
+[1:01:46] and then later in condition zero is that better or not it is reasonable
+[1:01:48] is that better or not it is reasonable but is it clear that the tsr design is
+[1:01:51] but is it clear that the tsr design is will be better than a crossover design
+[1:01:52] will be better than a crossover design like like what i described
+[1:01:54] like like what i described uh and finally when it comes to cluster
+[1:01:56] uh and finally when it comes to cluster designs to me it
+[1:01:58] designs to me it defeats the purpose of the paper a
+[1:01:59] defeats the purpose of the paper a little bit because we're talking about
+[1:02:01] little bit because we're talking about integrated markets i think this is the
+[1:02:03] integrated markets i think this is the main motivation of the paper so
+[1:02:04] main motivation of the paper so uh it will it will be a natural to think
+[1:02:07] uh it will it will be a natural to think about
+[1:02:08] about clustering or a cluster design so i i
+[1:02:10] clustering or a cluster design so i i would in practice i would prefer the tsr
+[1:02:12] would in practice i would prefer the tsr design compared
+[1:02:13] design compared to a cluster design in this case but i
+[1:02:16] to a cluster design in this case but i would be
+[1:02:16] would be interested to to to hear more so that's
+[1:02:19] interested to to to hear more so that's all i had sorry for the technical
+[1:02:20] all i had sorry for the technical uh troubles but um thanks very much this
+[1:02:23] uh troubles but um thanks very much this is this is a really interesting paper it
+[1:02:25] is this is a really interesting paper it was
+[1:02:25] was very fun to read it helped me a lot
+[1:02:28] very fun to read it helped me a lot understand kind of get a
+[1:02:29] understand kind of get a a new and fresh perspective into
+[1:02:31] a new and fresh perspective into interference like through this
+[1:02:32] interference like through this competitive market
+[1:02:38] yeah thanks panos uh ramesh do you want to respond quickly
+[1:02:41] to respond quickly um yeah uh yeah thanks so much for the
+[1:02:43] um yeah uh yeah thanks so much for the the close reading
+[1:02:44] the close reading and the and the comments uh it's really
+[1:02:46] and the and the comments uh it's really excellent i'll just add
+[1:02:48] excellent i'll just add two quick comments so uh one is um you
+[1:02:51] two quick comments so uh one is um you know i
+[1:02:52] know i said this briefly during the talk and
+[1:02:53] said this briefly during the talk and panos highlighted it really well
+[1:02:55] panos highlighted it really well the the two extremes are not symmetric
+[1:02:57] the the two extremes are not symmetric in terms of i would say how robust
+[1:02:59] in terms of i would say how robust our our findings are so cr is i think
+[1:03:02] our our findings are so cr is i think extremely robust in the sense that
+[1:03:04] extremely robust in the sense that you could change the model dramatically
+[1:03:05] you could change the model dramatically and just mechanically because of the way
+[1:03:07] and just mechanically because of the way inventory is turning over
+[1:03:08] inventory is turning over you would still get unbiasedness or the
+[1:03:10] you would still get unbiasedness or the the the sigfa
+[1:03:12] the the sigfa uh condition that you derived the lr
+[1:03:14] uh condition that you derived the lr extreme is definitely trickier in my
+[1:03:16] extreme is definitely trickier in my view
+[1:03:17] view and i think there's two things i would
+[1:03:19] and i think there's two things i would highlight there one of them is that
+[1:03:21] highlight there one of them is that the mean field limit that i use starts
+[1:03:23] the mean field limit that i use starts to break down in that extreme because in
+[1:03:25] to break down in that extreme because in the finite system
+[1:03:26] the finite system you would just have one listing becoming
+[1:03:28] you would just have one listing becoming available every once in a while
+[1:03:29] available every once in a while that's not something you can take a mean
+[1:03:31] that's not something you can take a mean field limit of so there is this
+[1:03:32] field limit of so there is this commutativity problem in
+[1:03:34] commutativity problem in even the the mean field limit
+[1:03:36] even the the mean field limit theoretically from a practical
+[1:03:37] theoretically from a practical standpoint
+[1:03:38] standpoint i think it's the issue that i raised in
+[1:03:40] i think it's the issue that i raised in the talk that depending on the exact
+[1:03:42] the talk that depending on the exact nature of choice
+[1:03:43] nature of choice it may not be that the absolute bias
+[1:03:45] it may not be that the absolute bias goes to zero in that
+[1:03:46] goes to zero in that sorry the relative bias goes to zero in
+[1:03:48] sorry the relative bias goes to zero in in that regime
+[1:03:49] in that regime nevertheless so that i don't leave that
+[1:03:51] nevertheless so that i don't leave that on a on a low note um
+[1:03:53] on a on a low note um you know one one of the things we did
+[1:03:54] you know one one of the things we did find in this follow-up paper
+[1:03:56] find in this follow-up paper uh the work that we've done there is
+[1:03:57] uh the work that we've done there is that um the the finding that lr is
+[1:04:00] that um the the finding that lr is significantly better than
+[1:04:02] significantly better than cr in that extreme appears to be robust
+[1:04:04] cr in that extreme appears to be robust and that's kind of what i was
+[1:04:05] and that's kind of what i was highlighting in the talk
+[1:04:07] highlighting in the talk and the last quick comment i'll make is
+[1:04:08] and the last quick comment i'll make is just i thought you said something really
+[1:04:09] just i thought you said something really interesting about what we can do
+[1:04:10] interesting about what we can do pre-experiment
+[1:04:12] pre-experiment and that's really i think just a huge
+[1:04:14] and that's really i think just a huge unexplored opportunity in terms of
+[1:04:16] unexplored opportunity in terms of the kind of uh the the causal inference
+[1:04:18] the kind of uh the the causal inference side of this problem which is that
+[1:04:20] side of this problem which is that so much of the interference structure is
+[1:04:21] so much of the interference structure is stuff that we can actually see in
+[1:04:23] stuff that we can actually see in advance because it's really connected to
+[1:04:24] advance because it's really connected to inventory dynamics and you know even
+[1:04:27] inventory dynamics and you know even you know one one simple way to look at
+[1:04:28] you know one one simple way to look at it is if i could estimate choice models
+[1:04:31] it is if i could estimate choice models out of the experiment
+[1:04:32] out of the experiment and i understood inventory dynamics i
+[1:04:34] and i understood inventory dynamics i can basically completely recreate global
+[1:04:36] can basically completely recreate global treatment and global control
+[1:04:38] treatment and global control and so i think you know understanding
+[1:04:40] and so i think you know understanding understanding that
+[1:04:42] understanding that uh a bit better um you know sort of what
+[1:04:44] uh a bit better um you know sort of what can be done outside the experiment
+[1:04:46] can be done outside the experiment uh is like fantastic and fertile ground
+[1:04:48] uh is like fantastic and fertile ground connects up a lot with
+[1:04:49] connects up a lot with uh efforts in marketplace simulation as
+[1:04:51] uh efforts in marketplace simulation as well so that's a great point
+[1:04:53] well so that's a great point so i'll leave it there
+[1:04:59] all right great thank you so i think it's now time
+[1:05:00] it's now time to uh to wrap up so uh first thank you
+[1:05:03] to uh to wrap up so uh first thank you so much
+[1:05:04] so much uh ramesh for the very nice talk thank
+[1:05:06] uh ramesh for the very nice talk thank you panos for a great discussion
+[1:05:08] you panos for a great discussion and thank you grabaril and hannah for
+[1:05:10] and thank you grabaril and hannah for helping out in q a
+[1:05:12] helping out in q a next time we're going to have razi nabi
+[1:05:13] next time we're going to have razi nabi from trans hopkins university
+[1:05:16] from trans hopkins university we're all looking forward to that until
+[1:05:18] we're all looking forward to that until then please stay safe
+[1:05:19] then please stay safe and hope you have a great week thank you
+[1:05:21] and hope you have a great week thank you all for coming and see you next time

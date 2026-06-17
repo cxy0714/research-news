@@ -1,0 +1,1202 @@
+[0:00:06] thanks so much for coming to this week's online call inference seminar today
+[0:00:08] online call inference seminar today we're very excited to have basis ranis
+[0:00:11] we're very excited to have basis ranis from Stanford University H he's going to
+[0:00:13] from Stanford University H he's going to talk about detecting clinician imp pre
+[0:00:15] talk about detecting clinician imp pre biases and diagnosis using proximal C
+[0:00:18] biases and diagnosis using proximal C inference and after his talk we're GNA
+[0:00:20] inference and after his talk we're GNA have discussion from elier Spitzer from
+[0:00:22] have discussion from elier Spitzer from John's Hopkins University and today our
+[0:00:25] John's Hopkins University and today our questions will be handled by chinan so
+[0:00:28] questions will be handled by chinan so chinan um yes uh so it's very simple uh
+[0:00:32] chinan um yes uh so it's very simple uh so please use the
+[0:00:34] so please use the Q&amp;A tab on the bottom of the screen to
+[0:00:37] Q&amp;A tab on the bottom of the screen to submit your questions this will allow us
+[0:00:39] submit your questions this will allow us to keep track of all the questions
+[0:00:41] to keep track of all the questions submitted uh please do not use the chat
+[0:00:45] submitted uh please do not use the chat um for Q&amp;A
+[0:00:47] um for Q&amp;A purposes um and so without further Ado
+[0:00:51] purposes um and so without further Ado uh vilis would you like to share your
+[0:00:53] uh vilis would you like to share your screen and start the
+[0:00:56] talk yes
+[0:01:02] so again thank you very much for inviting me um so I'm going to present
+[0:01:04] inviting me um so I'm going to present this joint work with car li who is
+[0:01:08] this joint work with car li who is amazing pH student of Ras Alman here at
+[0:01:10] amazing pH student of Ras Alman here at the computer science department and uh
+[0:01:13] the computer science department and uh she she did most of the you know heavy
+[0:01:15] she she did most of the you know heavy lifting in this paper um
+[0:01:19] lifting in this paper um um so the overall goal of this of this
+[0:01:23] um so the overall goal of this of this project was to um develop a
+[0:01:26] project was to um develop a methodology to identify clinician
+[0:01:29] methodology to identify clinician implicit biases from observational
+[0:01:32] implicit biases from observational data uh in a way that can be you know
+[0:01:35] data uh in a way that can be you know like applied in large scale data sets
+[0:01:38] like applied in large scale data sets for such as the UK bio
+[0:01:40] for such as the UK bio Bank identifying clinicial implicit bias
+[0:01:43] Bank identifying clinicial implicit bias is an important question uh there's been
+[0:01:45] is an important question uh there's been a lot of um evidence already uh that um
+[0:01:50] a lot of um evidence already uh that um you know clinicians through unconscious
+[0:01:52] you know clinicians through unconscious um biases they uh uh can lead to uh
+[0:01:57] um biases they uh uh can lead to uh unequal um um
+[0:02:01] unequal um um sort of like treatment of patients for
+[0:02:03] sort of like treatment of patients for instance there's you know like survey um
+[0:02:06] instance there's you know like survey um results um from different
+[0:02:09] results um from different underrepresented communities um uh that
+[0:02:13] underrepresented communities um uh that um give evidence of unfair of unequal
+[0:02:16] um give evidence of unfair of unequal treatment and this can also lead to even
+[0:02:18] treatment and this can also lead to even um uh harmful
+[0:02:21] um uh harmful uh clinical outcomes so for instance
+[0:02:24] uh clinical outcomes so for instance there is a
+[0:02:25] there is a documented two 2.6 higher rate of
+[0:02:28] documented two 2.6 higher rate of maternal mortality among black women as
+[0:02:30] maternal mortality among black women as compared to white women and there's been
+[0:02:32] compared to white women and there's been several um uh papers in the last three
+[0:02:35] several um uh papers in the last three decades trying to understand whether
+[0:02:37] decades trying to understand whether that is due to sort of like unequal
+[0:02:41] that is due to sort of like unequal treatment
+[0:02:43] treatment um moreover you know like U implicit
+[0:02:46] um moreover you know like U implicit biases can arise uh due to many observed
+[0:02:50] biases can arise uh due to many observed patient identities um and so we want to
+[0:02:54] patient identities um and so we want to develop a framework that will allow us
+[0:02:56] develop a framework that will allow us to understand or estimate uh such
+[0:02:59] to understand or estimate uh such implicit bias effects from observational
+[0:03:03] implicit bias effects from observational data for any type of patient identity
+[0:03:06] data for any type of patient identity and any type of clinical
+[0:03:09] and any type of clinical decision um whether it is a decision
+[0:03:12] decision um whether it is a decision about treatment or a decision about
+[0:03:19] diagnosis moreover we want this methodology to be first um scalable to
+[0:03:24] methodology to be first um scalable to very large patient level data sets from
+[0:03:27] very large patient level data sets from large um you know um eh are
+[0:03:32] large um you know um eh are repositories um and so it has to be a
+[0:03:36] repositories um and so it has to be a methodology that can also apply to
+[0:03:38] methodology that can also apply to observational
+[0:03:44] data the Second Challenge is uh you know when we look at such observational data
+[0:03:46] when we look at such observational data how do we even Define um an implicitly
+[0:03:49] how do we even Define um an implicitly biased
+[0:03:50] biased decision and how do we even Define what
+[0:03:52] decision and how do we even Define what is the implicit bias
+[0:03:59] effect and third once we formalize what that implicit bias effect um is that
+[0:04:01] that implicit bias effect um is that we're after how do we even identify it
+[0:04:04] we're after how do we even identify it from observational
+[0:04:11] data so in the first part let me just give you an overview of the methodology
+[0:04:12] give you an overview of the methodology we're going to use which is based on the
+[0:04:14] we're going to use which is based on the proximal causal inference framework that
+[0:04:17] proximal causal inference framework that has been developed by the seminal work
+[0:04:20] has been developed by the seminal work of uh Eric ckin catkins group in the
+[0:04:24] of uh Eric ckin catkins group in the last um few years and many other
+[0:04:27] last um few years and many other prominent scientists
+[0:04:36] uh so first how do we even Define implicit biases uh we're going to use a
+[0:04:40] implicit biases uh we're going to use a you know like a mediation framework to
+[0:04:42] you know like a mediation framework to Define implicit
+[0:04:44] Define implicit biases we're going to call the patient
+[0:04:46] biases we're going to call the patient this sensitive attribute which is either
+[0:04:48] this sensitive attribute which is either race gender or other patient identity as
+[0:04:51] race gender or other patient identity as the
+[0:04:52] the treatment and we're going to define the
+[0:04:55] treatment and we're going to define the implicit bias effect as the direct
+[0:04:57] implicit bias effect as the direct effect that flows through the direct
+[0:05:00] effect that flows through the direct between the treatment and whatever
+[0:05:01] between the treatment and whatever clinician outcome
+[0:05:13] why the major uh s of hurdle is that potentially that patient attribute could
+[0:05:15] potentially that patient attribute could be truly influencing the underlying risk
+[0:05:18] be truly influencing the underlying risk of diagnosis
+[0:05:20] of diagnosis why either directly or through other
+[0:05:23] why either directly or through other unobserved confounding paths for
+[0:05:26] unobserved confounding paths for instance uh there is a documented um uh
+[0:05:29] instance uh there is a documented um uh evidence that U life course racism can
+[0:05:34] evidence that U life course racism can lead to increased risk of hypertension
+[0:05:37] lead to increased risk of hypertension and so the patient attribute can lead to
+[0:05:40] and so the patient attribute can lead to some you know different can have an
+[0:05:43] some you know different can have an effect on the patient actual Health
+[0:05:44] effect on the patient actual Health state which can then uh you know like um
+[0:05:49] state which can then uh you know like um naturally lead to a different clinician
+[0:05:51] naturally lead to a different clinician decision without that uh implying that
+[0:05:54] decision without that uh implying that there was a biased
+[0:05:59] decision so we want to imagine that there's an unobserved potentially s like
+[0:06:02] there's an unobserved potentially s like a latent patient Health
+[0:06:04] a latent patient Health State and that the patient attribute
+[0:06:07] State and that the patient attribute could potentially have either direct or
+[0:06:10] could potentially have either direct or uh indirect
+[0:06:12] uh indirect uh uh correlations with that patient
+[0:06:15] uh uh correlations with that patient Health State through unobserved
+[0:06:16] Health State through unobserved confounding
+[0:06:24] paths and so we don't want to estimate the effect from the treatment to the
+[0:06:26] the effect from the treatment to the outcome that flows through this patient
+[0:06:28] outcome that flows through this patient Health state
+[0:06:31] Health state will call
+[0:06:37] M um and so to formalize this we're going
+[0:06:40] um and so to formalize this we're going to be focusing on a on a particular type
+[0:06:43] to be focusing on a on a particular type of direct effect we're going to be
+[0:06:44] of direct effect we're going to be focusing on the control direct
+[0:06:47] focusing on the control direct effect um primarily for reasons that it
+[0:06:51] effect um primarily for reasons that it later um first it will be an a quantity
+[0:06:56] later um first it will be an a quantity that will be relatively easier to
+[0:06:58] that will be relatively easier to identify and estimate
+[0:07:00] identify and estimate and second because if we detect a
+[0:07:04] and second because if we detect a control direct effect that does
+[0:07:07] control direct effect that does statistically significant non-zero
+[0:07:09] statistically significant non-zero control direct effect that does imply
+[0:07:11] control direct effect that does imply that there
+[0:07:12] that there is um some amount of implicit bias so it
+[0:07:16] is um some amount of implicit bias so it sort of serves our purpose of flagging
+[0:07:18] sort of serves our purpose of flagging whether there exists implicit biases in
+[0:07:20] whether there exists implicit biases in a medical
+[0:07:26] decision uh moreover you know the control direct effect has this intuitive
+[0:07:29] control direct effect has this intuitive identification ation formula if we were
+[0:07:31] identification ation formula if we were able to observe that patient Health
+[0:07:35] able to observe that patient Health State then what we're essentially trying
+[0:07:38] State then what we're essentially trying to learn is the outcome of a g formula
+[0:07:41] to learn is the outcome of a g formula where we control for that uh mediator
+[0:07:47] where we control for that uh mediator M or we control for the patient
+[0:07:56] State the problem is that this um you know mediator m is typically unobserved
+[0:07:59] know mediator m is typically unobserved the patient Health state is
+[0:08:05] unobserved but we do observe in our large data set several incomplete
+[0:08:08] large data set several incomplete proxies of the health
+[0:08:15] state for instance we might observe survey responses from the patient or
+[0:08:18] survey responses from the patient or blood
+[0:08:20] blood tests which
+[0:08:22] tests which are relatively strong proxies of the
+[0:08:25] are relatively strong proxies of the patient Health state but of course not
+[0:08:28] patient Health state but of course not exactly the patient Health state
+[0:08:37] moreover these types of proxies can roughly be categorized into two groups
+[0:08:39] roughly be categorized into two groups for instance things like survey
+[0:08:42] for instance things like survey responses are typically collected by uh
+[0:08:46] responses are typically collected by uh some program enrollment coordinator like
+[0:08:48] some program enrollment coordinator like in the UK
+[0:08:50] in the UK biobank and are not considered by the
+[0:08:53] biobank and are not considered by the the clinician at the at the point of the
+[0:08:55] the clinician at the at the point of the decision and so they do not directly
+[0:08:58] decision and so they do not directly influence the clinical
+[0:09:01] influence the clinical decision other than potentially through
+[0:09:03] decision other than potentially through the health State through this path that
+[0:09:07] the health State through this path that goes through the health
+[0:09:09] goes through the health State and on the other hand these you
+[0:09:12] State and on the other hand these you know the more biological proxies like
+[0:09:14] know the more biological proxies like blood
+[0:09:16] blood tests are probably considered in the
+[0:09:19] tests are probably considered in the clinical decision but they do not have a
+[0:09:23] clinical decision but they do not have a direct influence from the patient say
+[0:09:26] direct influence from the patient say sensitive attribute other than through
+[0:09:28] sensitive attribute other than through the patient Health state
+[0:09:41] and so we are left with this um type of causal graph that is very familiar to
+[0:09:43] causal graph that is very familiar to people working in Pro proximal causal
+[0:09:45] people working in Pro proximal causal inference it is a graph that allows us
+[0:09:49] inference it is a graph that allows us to implicitly control for the patient
+[0:09:53] to implicitly control for the patient Health State using this proxies and
+[0:09:57] Health State using this proxies and proximal causal inference reasoning
+[0:10:00] proximal causal inference reasoning so this can be viewed as a type of
+[0:10:03] so this can be viewed as a type of research design if you have such survey
+[0:10:06] research design if you have such survey responses that were collected at program
+[0:10:08] responses that were collected at program enrollment and subsequent blood tests
+[0:10:11] enrollment and subsequent blood tests that were considered by the doctor
+[0:10:13] that were considered by the doctor during the decision then you can use
+[0:10:16] during the decision then you can use this type of research design to identify
+[0:10:18] this type of research design to identify the control direct effect of the patient
+[0:10:21] the control direct effect of the patient sensitive attribute
+[0:10:35] in particular uh this graph you can show that it is
+[0:10:36] that it is technically sort of mathematically the
+[0:10:39] technically sort of mathematically the identification strategy that you can
+[0:10:40] identification strategy that you can take is mathematically
+[0:10:43] take is mathematically equivalent to the problem of estimating
+[0:10:46] equivalent to the problem of estimating an average treatment effect with an
+[0:10:48] an average treatment effect with an unobserved confounder m and an outcome
+[0:10:51] unobserved confounder m and an outcome proxy control X and a treatment proxy
+[0:10:54] proxy control X and a treatment proxy control Z even though the graph is not
+[0:10:56] control Z even though the graph is not exactly the same as
+[0:10:58] exactly the same as that uh the
+[0:11:00] that uh the identification strategy is essentially
+[0:11:02] identification strategy is essentially identical and so we can
+[0:11:05] identical and so we can use um a reasoning analogous to existing
+[0:11:09] use um a reasoning analogous to existing results in proximal causal
+[0:11:11] results in proximal causal inference such as the work of at all can
+[0:11:15] inference such as the work of at all can chetkin at all and KU at
+[0:11:18] chetkin at all and KU at all to show that the control direct
+[0:11:21] all to show that the control direct effect can be identified as a linear
+[0:11:24] effect can be identified as a linear function of a solution to a
+[0:11:26] function of a solution to a nonparametric IV problem a particular we
+[0:11:30] nonparametric IV problem a particular we can apply a g formula we now instead of
+[0:11:35] can apply a g formula we now instead of using the conditional expectation of the
+[0:11:37] using the conditional expectation of the outcome conditional on the hidden
+[0:11:39] outcome conditional on the hidden mediator and the treatment as the
+[0:11:43] mediator and the treatment as the regression we're going to use a model
+[0:11:45] regression we're going to use a model that is the outcome to an instrumental
+[0:11:47] that is the outcome to an instrumental variable regression
+[0:11:49] variable regression problem where Y is the
+[0:11:54] problem where Y is the outcome D and X is the treatment and d
+[0:11:58] outcome D and X is the treatment and d and Z is the
+[0:12:01] and Z is the instrument and assuming that this
+[0:12:04] instrument and assuming that this non-parametric instrumental variable
+[0:12:06] non-parametric instrumental variable regression
+[0:12:07] regression problem has has a solution which is a
+[0:12:10] problem has has a solution which is a non-trivial
+[0:12:12] non-trivial assumption then this formula identifies
+[0:12:16] assumption then this formula identifies the control direct
+[0:12:23] effect this function here is typically also referred to as the outcome Bridge
+[0:12:25] also referred to as the outcome Bridge function and so we need to assume that
+[0:12:27] function and so we need to assume that the problem uh at
+[0:12:30] the problem uh at that there exists an outcome Bridge
+[0:12:41] function in our um application we are also going to consider a slightly more
+[0:12:44] also going to consider a slightly more complicated uh causal graph in
+[0:12:47] complicated uh causal graph in particular we're also going to consider
+[0:12:50] particular we're also going to consider other patient characteristics that are
+[0:12:52] other patient characteristics that are not part of the survey responses in the
+[0:12:54] not part of the survey responses in the blood tests that could potentially
+[0:12:56] blood tests that could potentially influence almost all of these variables
+[0:13:00] influence almost all of these variables such as you know things like phys past
+[0:13:03] such as you know things like phys past physical activity workplace
+[0:13:06] physical activity workplace characteristics
+[0:13:07] characteristics demographics and so those extra control
+[0:13:11] demographics and so those extra control variables will be allowed to influence
+[0:13:15] variables will be allowed to influence the health State the clinical decision
+[0:13:17] the health State the clinical decision the blood tests and through either
+[0:13:20] the blood tests and through either direct or unobserved confounding paths
+[0:13:23] direct or unobserved confounding paths the patient attribute or the servy
+[0:13:25] the patient attribute or the servy responses and so however you know this
+[0:13:28] responses and so however you know this addition doesn't really really alter
+[0:13:30] addition doesn't really really alter that much the intuition it's just that
+[0:13:32] that much the intuition it's just that now to estimate the control direct
+[0:13:35] now to estimate the control direct effect we need to condition also on this
+[0:13:38] effect we need to condition also on this observed variables
+[0:13:41] observed variables W and so we need to add W as part of the
+[0:13:45] W and so we need to add W as part of the both in some sense
+[0:13:48] both in some sense the outcome proxies and the treatment
+[0:13:51] the outcome proxies and the treatment Proxes so now we're going to have a
+[0:13:53] Proxes so now we're going to have a slightly more complex non-parametric IV
+[0:13:56] slightly more complex non-parametric IV problem where W is also Al part of the
+[0:14:00] problem where W is also Al part of the treatment and the
+[0:14:10] instrument so that's our sort of like our identification methodology let me
+[0:14:12] our identification methodology let me now move to our an overview of our
+[0:14:15] now move to our an overview of our technical contributions before going to
+[0:14:18] technical contributions before going to the empirical results in the last part
+[0:14:21] the empirical results in the last part of the
+[0:14:27] talk first let me give you some very closely related prior work
+[0:14:30] closely related prior work there are two papers that um um uh are
+[0:14:34] there are two papers that um um uh are closely related to ours um both of them
+[0:14:38] closely related to ours um both of them um coauthored by Ilia who is going to be
+[0:14:41] um coauthored by Ilia who is going to be also discussing this paper at the
+[0:14:44] also discussing this paper at the end the first paper considers mediation
+[0:14:49] end the first paper considers mediation analysis via proximal causal inference
+[0:14:51] analysis via proximal causal inference where we have an observed mediator and a
+[0:14:53] where we have an observed mediator and a hidden confounder so there tries to
+[0:14:56] hidden confounder so there tries to extend proximal causal inference to not
+[0:14:59] extend proximal causal inference to not just average stream effects but also in
+[0:15:02] just average stream effects but also in direct and indirect effects in
+[0:15:03] direct and indirect effects in particular
+[0:15:05] particular natural Direct
+[0:15:07] natural Direct effects uh there the mediator is
+[0:15:10] effects uh there the mediator is observed and so the technical problem is
+[0:15:12] observed and so the technical problem is dealing with the unobserved
+[0:15:14] dealing with the unobserved confounder even more closely related is
+[0:15:17] confounder even more closely related is the paper of causal inflence with hidden
+[0:15:19] the paper of causal inflence with hidden mediators which considers a you know and
+[0:15:21] mediators which considers a you know and I if I'm not mistaken the same type of
+[0:15:24] I if I'm not mistaken the same type of causal graph that we also used in this
+[0:15:28] causal graph that we also used in this paper where you have a hidden mediator
+[0:15:30] paper where you have a hidden mediator and you want to understand the direct
+[0:15:33] and you want to understand the direct effect uh the difference with this uh
+[0:15:36] effect uh the difference with this uh work
+[0:15:38] work is
+[0:15:40] is uh uh the focus on a different type of
+[0:15:43] uh uh the focus on a different type of direct effect so the work focuses on the
+[0:15:47] direct effect so the work focuses on the natural direct effect while we focus on
+[0:15:49] natural direct effect while we focus on the control direct effect um the natural
+[0:15:53] the control direct effect um the natural direct effect most probably is the most
+[0:15:56] direct effect most probably is the most natural of the Direct effects however um
+[0:15:59] natural of the Direct effects however um the identification results in that paper
+[0:16:01] the identification results in that paper so that to estimate the natural Direct
+[0:16:03] so that to estimate the natural Direct Effect one needs to also
+[0:16:05] Effect one needs to also estimate the conditional density of the
+[0:16:09] estimate the conditional density of the outcome
+[0:16:10] outcome proxies conditional on the treatment and
+[0:16:13] proxies conditional on the treatment and the controls
+[0:16:15] the controls W uh and so we um focused on the control
+[0:16:19] W uh and so we um focused on the control direct effect because it avoids the need
+[0:16:21] direct effect because it avoids the need to estimate this object which can be uh
+[0:16:27] to estimate this object which can be uh quite hard to estimate when w and X are
+[0:16:29] quite hard to estimate when w and X are relatively High
+[0:16:31] relatively High dimensional uh for instance in our
+[0:16:33] dimensional uh for instance in our example in our application X was like 60
+[0:16:36] example in our application X was like 60 dimensional uh
+[0:16:46] variable um so uh as we see the as we already Sol the control direct effect
+[0:16:48] already Sol the control direct effect does not require this estimation however
+[0:16:51] does not require this estimation however it does not estimate the
+[0:16:53] it does not estimate the natural um uh direct effect
+[0:16:59] natural um uh direct effect for our purposes though flagging
+[0:17:01] for our purposes though flagging clinicial
+[0:17:02] clinicial biases um we found that showcasing that
+[0:17:07] biases um we found that showcasing that the control direct effect is
+[0:17:08] the control direct effect is statistically non zero is an equally
+[0:17:10] statistically non zero is an equally good signal of implicit biases and so if
+[0:17:13] good signal of implicit biases and so if we can estimate that with a
+[0:17:15] we can estimate that with a statistically easier problem um then um
+[0:17:21] statistically easier problem um then um it's an reasonable Avenue and so that's
+[0:17:24] it's an reasonable Avenue and so that's why we went with a control direct
+[0:17:30] effect our all our work is also very related to recent uh work on the fully
+[0:17:34] related to recent uh work on the fully nonparametric uh proximal coal inference
+[0:17:36] nonparametric uh proximal coal inference approach where you make no further
+[0:17:39] approach where you make no further assumptions uh on the outcome Bridge
+[0:17:42] assumptions uh on the outcome Bridge function so um in particular some
+[0:17:47] function so um in particular some notable very related work is that of
+[0:17:49] notable very related work is that of quol and kosol which show that the
+[0:17:52] quol and kosol which show that the average treatment effect in our case
+[0:17:54] average treatment effect in our case that would translate to the control
+[0:17:56] that would translate to the control direct effect can be identified
+[0:17:59] direct effect can be identified even when the outcome Bridge function is
+[0:18:01] even when the outcome Bridge function is not unique and then subsequent work of
+[0:18:06] not unique and then subsequent work of that we did with Nathan kalus and
+[0:18:08] that we did with Nathan kalus and Whitney neui
+[0:18:11] Whitney neui and several other Coors um as well as
+[0:18:14] and several other Coors um as well as the work of Zang all shows how you can
+[0:18:16] the work of Zang all shows how you can even do inference and construct
+[0:18:18] even do inference and construct confidence intervals on functionals of
+[0:18:21] confidence intervals on functionals of um npiv uh
+[0:18:24] um npiv uh Solutions um even without
+[0:18:27] Solutions um even without uniqueness so in principle we could use
+[0:18:31] uniqueness so in principle we could use um these
+[0:18:33] um these techniques to and apply them to our
+[0:18:37] techniques to and apply them to our problem
+[0:18:38] problem [Music]
+[0:18:39] [Music] um however we um
+[0:18:43] um however we um uh we try to develop a solution that
+[0:18:46] uh we try to develop a solution that tries to avoid uh solving uh
+[0:18:49] tries to avoid uh solving uh non-parametric linear inverse
+[0:18:52] non-parametric linear inverse problems um primarily because um it is
+[0:18:56] problems um primarily because um it is again a statistically daunting task uh
+[0:18:58] again a statistically daunting task uh and hands um having Alternatives that
+[0:19:02] and hands um having Alternatives that make somewhat reasonable assumptions and
+[0:19:05] make somewhat reasonable assumptions and are easier to estimate and more stable
+[0:19:07] are easier to estimate and more stable in practice could be a useful um
+[0:19:10] in practice could be a useful um additional
+[0:19:11] additional Tool uh in the proximal caal inference
+[0:19:15] Tool uh in the proximal caal inference literature and so here's our technical
+[0:19:17] literature and so here's our technical contributions in this work first we we
+[0:19:20] contributions in this work first we we we developed a simpler debias mine
+[0:19:23] we developed a simpler debias mine learning estimation and inference
+[0:19:25] learning estimation and inference approach under partially linearity
+[0:19:28] approach under partially linearity assumptions
+[0:19:34] and again similar to this prior works on the fully nonlinear case we developed
+[0:19:37] the fully nonlinear case we developed such an estimation and inference
+[0:19:39] such an estimation and inference approach without uniqueness assumptions
+[0:19:41] approach without uniqueness assumptions to solutions to IV Pro instrumental
+[0:19:44] to solutions to IV Pro instrumental variable regression
+[0:19:46] variable regression problems and because of this partial
+[0:19:48] problems and because of this partial linearity assumption that we made we can
+[0:19:51] linearity assumption that we made we can avoid the need to estimate uh a
+[0:19:54] avoid the need to estimate uh a non-parametric linear inverse problem
+[0:20:04] moreover um our appro you know uh for our method we developed seever a suit of
+[0:20:06] our method we developed seever a suit of Novel statistical Diagnostic and
+[0:20:08] Novel statistical Diagnostic and robustness
+[0:20:10] robustness tests that check the plausibility of
+[0:20:12] tests that check the plausibility of several of the identification
+[0:20:15] several of the identification assumptions so that we can be somewhat
+[0:20:18] assumptions so that we can be somewhat confident that um our results are
+[0:20:22] confident that um our results are correct and we implemented the inference
+[0:20:25] correct and we implemented the inference method in an easy to use Python library
+[0:20:27] method in an easy to use Python library for everyone to use both our estimation
+[0:20:29] for everyone to use both our estimation and inference approach and to run the
+[0:20:32] and inference approach and to run the diagnostic and robustness
+[0:20:35] diagnostic and robustness tests as a side note many of the
+[0:20:38] tests as a side note many of the technical developments in this paper are
+[0:20:39] technical developments in this paper are actually relevant even beyond our
+[0:20:42] actually relevant even beyond our setting to the classical linear
+[0:20:45] setting to the classical linear instrumental variable regression
+[0:20:48] instrumental variable regression setting but in a scenario that um has
+[0:20:52] setting but in a scenario that um has not been the focus of Prior work even
+[0:20:55] not been the focus of Prior work even though the classical n setting is very
+[0:20:58] though the classical n setting is very widely studed so in a setting where we
+[0:21:01] widely studed so in a setting where we have many instruments many treatments
+[0:21:03] have many instruments many treatments and we have an ill posed a rank
+[0:21:08] and we have an ill posed a rank deficient instrument treatment
+[0:21:10] deficient instrument treatment population covariance Matrix so a lot of
+[0:21:13] population covariance Matrix so a lot of the technical technicalities in the
+[0:21:15] the technical technicalities in the paper have to deal with this rank
+[0:21:19] paper have to deal with this rank deficient moderately High dimensional
+[0:21:22] deficient moderately High dimensional linear IV
+[0:21:23] linear IV [Music]
+[0:21:25] [Music] problem and uh that's what I'll be
+[0:21:28] problem and uh that's what I'll be describing
+[0:21:30] describing next so let me move to the
+[0:21:32] next so let me move to the identification estimation part uh so
+[0:21:35] identification estimation part uh so what is the partial linearity assumption
+[0:21:37] what is the partial linearity assumption we're going to be making this in this
+[0:21:39] we're going to be making this in this work we're going to be assuming that the
+[0:21:43] work we're going to be assuming that the conditional expectation function of the
+[0:21:47] conditional expectation function of the outcome given the mediator the
+[0:21:52] outcome given the mediator the treatment the outcome proxies and The
+[0:21:55] treatment the outcome proxies and The observed controls so basically all of
+[0:21:58] observed controls so basically all of the parents
+[0:21:59] the parents of the outcome in the causal of the
+[0:22:01] of the outcome in the causal of the outcome in the causal graph so this
+[0:22:03] outcome in the causal graph so this conditional expectation function is
+[0:22:06] conditional expectation function is partially linear and the treatment the
+[0:22:09] partially linear and the treatment the mediator and the outcome
+[0:22:17] proxies um so we're allowing for a flexible
+[0:22:20] um so we're allowing for a flexible dependence on The observed
+[0:22:21] dependence on The observed characteristics but crucially here we're
+[0:22:23] characteristics but crucially here we're assuming that the for instance the
+[0:22:26] assuming that the for instance the treatment effect the direct treatment
+[0:22:28] treatment effect the direct treatment effect is is
+[0:22:31] effect is is constant and is equal to that
+[0:22:34] constant and is equal to that Theta moreover we're going to be
+[0:22:36] Theta moreover we're going to be assuming that the outcome
+[0:22:39] assuming that the outcome proxis uh the conditional expectation of
+[0:22:41] proxis uh the conditional expectation of the outcome proxis is partially linear
+[0:22:43] the outcome proxis is partially linear with respect to the
+[0:22:50] mediator and can be fully nonlinear with respect to the
+[0:22:51] respect to the controls and that
+[0:22:54] controls and that this Matrix F that appears in the
+[0:22:58] this Matrix F that appears in the conditional expectation of the outcome
+[0:23:05] Proxes uh as it relates to the hidden mediator has full column
+[0:23:12] rank so again we'll be thinking of scenarios where the number of x's that
+[0:23:15] scenarios where the number of x's that we have is more High
+[0:23:17] we have is more High [Music]
+[0:23:18] [Music] dimensional has more Dimensions than the
+[0:23:21] dimensional has more Dimensions than the uh hidden mediator we're trying to
+[0:23:23] uh hidden mediator we're trying to control for so the dimension of X should
+[0:23:26] control for so the dimension of X should be thought of as being larger than the
+[0:23:27] be thought of as being larger than the dimension of M
+[0:23:29] dimension of M and moreover this full column rang
+[0:23:32] and moreover this full column rang assumption says
+[0:23:34] assumption says that
+[0:23:35] that the patterns of
+[0:23:39] the patterns of correlation of every coordinate of M
+[0:23:43] correlation of every coordinate of M with
+[0:23:46] with X are linearly
+[0:23:50] X are linearly independent across the coordinates of
+[0:23:58] M so this is our our main assumption that enable Ables uh enables us to avoid
+[0:24:01] that enable Ables uh enables us to avoid the need to estimate a linear inverse
+[0:24:05] the need to estimate a linear inverse problem and under this plr assumption
+[0:24:11] problem and under this plr assumption you can we we can show that there always
+[0:24:14] you can we we can show that there always exists a partially linear outcome Bridge
+[0:24:18] exists a partially linear outcome Bridge function meaning without loss of
+[0:24:20] function meaning without loss of generality we can focus on outcome
+[0:24:22] generality we can focus on outcome Bridge functions that are partially
+[0:24:24] Bridge functions that are partially linear in the treatment and the outcome
+[0:24:27] linear in the treatment and the outcome Proxes
+[0:24:37] now this is of course very helpful when you go to estimation first of all
+[0:24:38] you go to estimation first of all because of this assumption we can
+[0:24:41] because of this assumption we can basically sort of remove W from all of
+[0:24:44] basically sort of remove W from all of the equations and in a pre-processing
+[0:24:47] the equations and in a pre-processing step forget about after a pre-processing
+[0:24:49] step forget about after a pre-processing step forget about D so we can
+[0:24:53] step forget about D so we can residualized W out of all the variables
+[0:24:56] residualized W out of all the variables so we're going to be defining vti to be
+[0:24:58] so we're going to be defining vti to be the resid ual of any variable V after
+[0:25:00] the resid ual of any variable V after you subtract everything that's
+[0:25:01] you subtract everything that's predictable from
+[0:25:09] W and uh then we can observe that you know first of all this is the equation
+[0:25:11] know first of all this is the equation that the outcome Bridge function needs
+[0:25:12] that the outcome Bridge function needs to
+[0:25:14] to satisfy because we know that you know
+[0:25:18] satisfy because we know that you know the outcome Bridge function is partially
+[0:25:20] the outcome Bridge function is partially linear we can rewrite this
+[0:25:23] linear we can rewrite this equation you know replacing Q with a
+[0:25:25] equation you know replacing Q with a partially linear
+[0:25:27] partially linear specification but then then once we do
+[0:25:29] specification but then then once we do that we can subtract from this equation
+[0:25:32] that we can subtract from this equation the corresponding conditional
+[0:25:34] the corresponding conditional expectation conditioning only on W which
+[0:25:37] expectation conditioning only on W which will basically remove W from the
+[0:25:40] will basically remove W from the equation and replace all of the
+[0:25:42] equation and replace all of the remaining variables with the
+[0:25:44] remaining variables with the corresponding
+[0:25:46] corresponding residuals so now given this you know
+[0:25:49] residuals so now given this you know after this pre-processing step we've
+[0:25:51] after this pre-processing step we've basically reduced our problem to a very
+[0:25:54] basically reduced our problem to a very standard linear instrumental variable
+[0:25:56] standard linear instrumental variable regression problem on the
+[0:25:59] regression problem on the residuals moreover it's easy to show
+[0:26:01] residuals moreover it's easy to show that this you know like linear IV moment
+[0:26:06] that this you know like linear IV moment will be locally robust or nimon
+[0:26:07] will be locally robust or nimon orthogonal to the residual models and so
+[0:26:11] orthogonal to the residual models and so these residual models can sort of be
+[0:26:13] these residual models can sort of be ignored when quantifying the uncertainty
+[0:26:15] ignored when quantifying the uncertainty of our estimate
+[0:26:24] Theta so this is sort of like an easy pre-processing
+[0:26:25] pre-processing step hence under that pre-process after
+[0:26:28] step hence under that pre-process after that pre-processing Sy St we can sort of
+[0:26:30] that pre-processing Sy St we can sort of rethink we can go back to the original
+[0:26:33] rethink we can go back to the original simpler graph without W and replace
+[0:26:35] simpler graph without W and replace every variable with its residuals and in
+[0:26:39] every variable with its residuals and in this simpler graph our partial linearity
+[0:26:42] this simpler graph our partial linearity assumption
+[0:26:43] assumption basically implies that the Matrix
+[0:26:48] basically implies that the Matrix between M and
+[0:26:49] between M and X which is f which is equivalent to the
+[0:26:54] X which is f which is equivalent to the covariant of the residual x with the
+[0:26:56] covariant of the residual x with the residual M has full column rank
+[0:27:07] um so for the rest of the talk I'm going to be ignoring the residualization part
+[0:27:10] to be ignoring the residualization part and also removing all of those Tilles
+[0:27:12] and also removing all of those Tilles from everywhere just for Simplicity of
+[0:27:16] from everywhere just for Simplicity of notation so now we're back to a simple
+[0:27:18] notation so now we're back to a simple problem where we don't have W and we
+[0:27:22] problem where we don't have W and we just want to solve this
+[0:27:24] just want to solve this linear instrumental variable regression
+[0:27:27] linear instrumental variable regression problem where the treatment and the
+[0:27:29] problem where the treatment and the instrument where the the treatment and
+[0:27:32] instrument where the the treatment and DNZ is the instrument and DNX is the
+[0:27:42] treatment so this is a classical linear view problem so what's what's the
+[0:27:43] view problem so what's what's the problem so first you know the desiderata
+[0:27:46] problem so first you know the desiderata from the identification part is that
+[0:27:48] from the identification part is that because we want this full column rank
+[0:27:50] because we want this full column rank assumption for
+[0:27:52] assumption for instance we want to add as many x's and
+[0:27:56] instance we want to add as many x's and Z's to our uh analysis is to ensure that
+[0:28:00] Z's to our uh analysis is to ensure that we're accounting for all of the
+[0:28:02] we're accounting for all of the different types of hidden Dimensions M
+[0:28:06] different types of hidden Dimensions M of the health
+[0:28:08] of the health state for instance in our application in
+[0:28:10] state for instance in our application in the UK biobank we we want to use around
+[0:28:14] the UK biobank we we want to use around 19 96 features as Z from survey
+[0:28:19] 19 96 features as Z from survey responses and around 65 features as X
+[0:28:23] responses and around 65 features as X from BL observe blood test
+[0:28:33] and the problem is that we expect the hidden Health state that influenc the
+[0:28:36] hidden Health state that influenc the clinical
+[0:28:37] clinical decision to be much lower
+[0:28:41] dimensional than
+[0:28:49] this so we don't want we don't expect for instance the hidden Health state to
+[0:28:51] for instance the hidden Health state to be 65
+[0:29:00] dimensional however the k variance of the x and z where X is now part of the
+[0:29:03] the x and z where X is now part of the treatment and Z is part of the
+[0:29:06] treatment and Z is part of the instrument has rank at most the
+[0:29:09] instrument has rank at most the dimension of M because x and z are
+[0:29:12] dimension of M because x and z are correlated only through m in particular
+[0:29:16] correlated only through m in particular because x and z are independent given M
+[0:29:19] because x and z are independent given M you can easily show that the coant of x
+[0:29:22] you can easily show that the coant of x and z will decompose into
+[0:29:25] and z will decompose into a we have a sort of a low rank
+[0:29:28] a we have a sort of a low rank decomposition
+[0:29:35] and so we know that in most practical scenarios where we're going to try to
+[0:29:37] scenarios where we're going to try to apply this type of research design and
+[0:29:39] apply this type of research design and we're going to try to bring as many x's
+[0:29:41] we're going to try to bring as many x's and Z's to be able to capture the hidden
+[0:29:43] and Z's to be able to capture the hidden State we're going to be faced with this
+[0:29:45] State we're going to be faced with this rank deficient covariance
+[0:29:55] Matrix and so we our goal is to be able to solve this linear IV problem with
+[0:29:57] to solve this linear IV problem with many instruments and any many
+[0:29:59] many instruments and any many treatments with an ill post
+[0:30:08] variant moreover in our problem we have a special
+[0:30:09] a special structure
+[0:30:12] structure where yes we have an OST ciance which
+[0:30:14] where yes we have an OST ciance which means that our linear IV has many
+[0:30:16] means that our linear IV has many solutions but we only care about this
+[0:30:18] solutions but we only care about this single scalar parameter Theta we don't
+[0:30:21] single scalar parameter Theta we don't care about any other coefficient in the
+[0:30:23] care about any other coefficient in the linear IV we only care about
+[0:30:26] linear IV we only care about Theta so our goal is to solve this
+[0:30:29] Theta so our goal is to solve this problem with the goal of Performing
+[0:30:33] problem with the goal of Performing inference only on
+[0:30:41] Theta so the first question is okay there's a non-uniqueness problem here
+[0:30:43] there's a non-uniqueness problem here because of the rank
+[0:30:45] because of the rank deficiency this linear IV problem will
+[0:30:47] deficiency this linear IV problem will have many
+[0:30:48] have many solutions so there will be many thetas
+[0:30:51] solutions so there will be many thetas and H's that will satisfy this
+[0:30:55] and H's that will satisfy this equation moreover if you simply call
+[0:30:58] equation moreover if you simply call standard 2 SLS to solve this linear two
+[0:31:01] standard 2 SLS to solve this linear two stage Le squares to solve this linear IV
+[0:31:03] stage Le squares to solve this linear IV you're actually going to get very
+[0:31:04] you're actually going to get very unstable results when you have such low
+[0:31:07] unstable results when you have such low rank Co
+[0:31:14] variant the solution is to add some form of regularization so for instance you
+[0:31:16] of regularization so for instance you can we can you can add L2 regularization
+[0:31:18] can we can you can add L2 regularization to stabilize the estimate for instance
+[0:31:22] to stabilize the estimate for instance to try to make the solution converts to
+[0:31:26] to try to make the solution converts to the minimum Norm solution
+[0:31:33] but then the question is if we start adding such regularization so that we
+[0:31:35] adding such regularization so that we convert to the minimum nor solution are
+[0:31:38] convert to the minimum nor solution are we really recovering the correct
+[0:31:40] we really recovering the correct Theta because it could be that the
+[0:31:42] Theta because it could be that the minimum nor Theta the Theta in the
+[0:31:45] minimum nor Theta the Theta in the minimum Norm solution is not the correct
+[0:31:47] minimum Norm solution is not the correct direct effect
+[0:31:49] direct effect Theta and also even if it does converge
+[0:31:53] Theta and also even if it does converge to the correct
+[0:31:54] to the correct um parameter how do you perform
+[0:31:57] um parameter how do you perform inference Theta despite the fact that
+[0:31:59] inference Theta despite the fact that you added this regularization which is
+[0:32:02] you added this regularization which is going to lead to some regularization
+[0:32:11] bias so the idea is similar to what this prior works that we did the Ben with the
+[0:32:15] prior works that we did the Ben with the Benet all works we're going to try
+[0:32:19] to
+[0:32:29] um so that um Theta is uniquely
+[0:32:36] identified even when H is not uniquely identified and we're going to construct
+[0:32:38] identified and we're going to construct a a moment that
+[0:32:41] a a moment that is of neon orthogonal or locally robust
+[0:32:44] is of neon orthogonal or locally robust with respect to estimates of
+[0:32:46] with respect to estimates of H so that's the where we're heading so
+[0:32:51] H so that's the where we're heading so the key idea of how to do that is to
+[0:32:53] the key idea of how to do that is to instead of looking at this sort of like
+[0:32:57] instead of looking at this sort of like high dimensional linear IV moderately
+[0:32:59] high dimensional linear IV moderately dimensional linear
+[0:33:01] dimensional linear IV we're going to try to find an
+[0:33:04] IV we're going to try to find an instrument that is a linear combination
+[0:33:06] instrument that is a linear combination of D
+[0:33:08] of D andz which is isolates the
+[0:33:11] andz which is isolates the identification of the parameter Theta
+[0:33:13] identification of the parameter Theta that we care about so we're going to try
+[0:33:14] that we care about so we're going to try to find a new instrument D Bar that is D
+[0:33:19] to find a new instrument D Bar that is D minus Su function of Z of course any
+[0:33:23] minus Su function of Z of course any solution to the vector of equations
+[0:33:27] solution to the vector of equations above will also be a solution to an IV
+[0:33:31] above will also be a solution to an IV problem when we use DB bar as our
+[0:33:35] problem when we use DB bar as our instrument and because we want this D
+[0:33:37] instrument and because we want this D Bar to isolate the identification of
+[0:33:40] Bar to isolate the identification of theta we will be looking for a d bar
+[0:33:44] theta we will be looking for a d bar that is orthogonal to
+[0:33:47] that is orthogonal to X or uncorrelated with
+[0:33:51] X or uncorrelated with X so we're going to be trying to find a
+[0:33:54] X so we're going to be trying to find a parameter Vector
+[0:33:56] parameter Vector gamma such that the new residualized
+[0:34:01] gamma such that the new residualized instrument is orthogonal to
+[0:34:05] instrument is orthogonal to X and we'll call this the Dual linear
+[0:34:13] IV and the second main assumption in our development is that this dual IV admits
+[0:34:17] development is that this dual IV admits a solution
+[0:34:18] a solution gamma and at that solution the
+[0:34:20] gamma and at that solution the correlation between the treatment and
+[0:34:23] correlation between the treatment and this residual
+[0:34:24] this residual treatment is non zero
+[0:34:31] if this dual IV does admit a
+[0:34:40] solution then the following moment identifies
+[0:34:45] Theta in particular the folling moment is Satisfied by the correct Theta right
+[0:34:48] is Satisfied by the correct Theta right and the correct
+[0:34:50] and the correct H uh because the original Primal Primal
+[0:34:53] H uh because the original Primal Primal IV is Satisfied by the correct the and
+[0:34:55] IV is Satisfied by the correct the and the correct
+[0:34:56] the correct H but
+[0:34:58] H but crucially this new
+[0:35:04] moment oops this new moment does not actually
+[0:35:07] oops this new moment does not actually depend on H at all because our
+[0:35:10] depend on H at all because our instrument is uncorrelated with X this
+[0:35:13] instrument is uncorrelated with X this equation is equivalent to an equation
+[0:35:17] equation is equivalent to an equation that completely removes H from the
+[0:35:21] that completely removes H from the equation and so no matter what H you
+[0:35:24] equation and so no matter what H you started with the solution to Theta will
+[0:35:28] started with the solution to Theta will be the
+[0:35:30] be the same and so even if you have multiple
+[0:35:33] same and so even if you have multiple hes that satisfy the original Primal
+[0:35:37] hes that satisfy the original Primal IV the Theta that will accompanying
+[0:35:40] IV the Theta that will accompanying those hes will always be
+[0:35:43] those hes will always be unique and hence it will be the contr
+[0:35:46] unique and hence it will be the contr the correct control direct
+[0:35:53] effect so this leads to the following theorem if H star is the minimum Norm
+[0:35:56] theorem if H star is the minimum Norm solution to the Primal IV
+[0:35:59] solution to the Primal IV and gamma star is the minimum Norm
+[0:36:01] and gamma star is the minimum Norm solution to the Dual
+[0:36:04] solution to the Dual IV and this correlation between D and
+[0:36:06] IV and this correlation between D and the residual D is non
+[0:36:10] the residual D is non zero then this Norm this moment equation
+[0:36:14] zero then this Norm this moment equation which is only an equation with respect
+[0:36:17] which is only an equation with respect to Theta lagging in the minimum Norm
+[0:36:19] to Theta lagging in the minimum Norm Solutions 8 star and gamma
+[0:36:22] Solutions 8 star and gamma star uniquely identifies the control
+[0:36:25] star uniquely identifies the control direct effect
+[0:36:32] moreover this new moment is nean orthogonal or locally robust with
+[0:36:35] orthogonal or locally robust with respect to the nuisance parameters H
+[0:36:37] respect to the nuisance parameters H star and gamma star so the derivative of
+[0:36:41] star and gamma star so the derivative of this moment with respect to those
+[0:36:43] this moment with respect to those parameters when evaluated at the true at
+[0:36:46] parameters when evaluated at the true at the things that they're converging to is
+[0:36:48] the things that they're converging to is equal to
+[0:36:50] equal to zero and hence we can apply you know the
+[0:36:55] zero and hence we can apply you know the locally robust or n orthogonal must
+[0:36:58] locally robust or n orthogonal must machine learning Machinery to perform
+[0:37:01] machine learning Machinery to perform inference on
+[0:37:03] inference on Theta now at this point one might also
+[0:37:06] Theta now at this point one might also wonder what does the assumption that the
+[0:37:11] wonder what does the assumption that the Dual IV admit a solution what does that
+[0:37:13] Dual IV admit a solution what does that really
+[0:37:15] really mean it turns out under the partial
+[0:37:18] mean it turns out under the partial linearity assumption we've already
+[0:37:21] linearity assumption we've already made
+[0:37:23] made existence of a solution to the Dual
+[0:37:27] existence of a solution to the Dual IV holds a sufficient condition for it
+[0:37:30] IV holds a sufficient condition for it is if the covariance of the mediator
+[0:37:33] is if the covariance of the mediator with the treatment proxies has full row
+[0:37:38] with the treatment proxies has full row rank so really the um the full set of
+[0:37:42] rank so really the um the full set of assumptions that we're going to be
+[0:37:43] assumptions that we're going to be making here is that we have this causal
+[0:37:46] making here is that we have this causal graph we have the partial linearity
+[0:37:47] graph we have the partial linearity assumptions and both also Z it is go
+[0:37:51] assumptions and both also Z it is go ahead as it is like you have like five
+[0:37:53] ahead as it is like you have like five more minutes to finish and um if you
+[0:37:56] more minutes to finish and um if you want to answer some questions there's
+[0:37:58] want to answer some questions there's some questions uh in the Q&amp;A but if you
+[0:38:00] some questions uh in the Q&amp;A but if you want to wait until you finish the talk
+[0:38:02] want to wait until you finish the talk that's also fine let me yeah I'll finish
+[0:38:04] that's also fine let me yeah I'll finish the yeah
+[0:38:06] the yeah s sounds good yeah okay so that's the
+[0:38:09] s sounds good yeah okay so that's the assumptions that we're
+[0:38:11] assumptions that we're making uh we can a corollary of this
+[0:38:14] making uh we can a corollary of this result is that we can uh perform
+[0:38:16] result is that we can uh perform inference on Theta so for instance you
+[0:38:18] inference on Theta so for instance you know we can invoke the verify the
+[0:38:21] know we can invoke the verify the conditions of the locally robust theorem
+[0:38:24] conditions of the locally robust theorem uh which gives you what is the rate
+[0:38:26] uh which gives you what is the rate condition you need to satisfy
+[0:38:28] condition you need to satisfy and uh then gives
+[0:38:31] and uh then gives you ASM totic normality and confidence
+[0:38:35] you ASM totic normality and confidence intervals then um how do we estimate
+[0:38:38] intervals then um how do we estimate those minimum Norm Solutions we're going
+[0:38:40] those minimum Norm Solutions we're going to use a regularized 2sls approach where
+[0:38:43] to use a regularized 2sls approach where we regularize the second
+[0:38:45] we regularize the second stage and uh we provide theorems that
+[0:38:49] stage and uh we provide theorems that show that even when the cence Matrix of
+[0:38:53] show that even when the cence Matrix of x and z is ill posed or low
+[0:38:55] x and z is ill posed or low rank uh these regularized to SLS will
+[0:38:58] rank uh these regularized to SLS will achieve mean squared errors for the uh
+[0:39:02] achieve mean squared errors for the uh for the parameter Vector so this is now
+[0:39:04] for the parameter Vector so this is now for a generic IV problem both with
+[0:39:07] for a generic IV problem both with respect to the L2 norm and with a sort
+[0:39:10] respect to the L2 norm and with a sort of projected L2 norm and using these
+[0:39:13] of projected L2 norm and using these conditions we can argue what is the
+[0:39:16] conditions we can argue what is the degree of regularization you need to set
+[0:39:18] degree of regularization you need to set to the regularized 2
+[0:39:20] to the regularized 2 SLS so that you can get astoic normality
+[0:39:23] SLS so that you can get astoic normality so in particular you know setting Lambda
+[0:39:25] so in particular you know setting Lambda anything that's faster than one /n so
+[0:39:28] anything that's faster than one /n so slower than 1/n but faster than 1/ n to
+[0:39:30] slower than 1/n but faster than 1/ n to the 1/3 gives you asymptotic
+[0:39:33] the 1/3 gives you asymptotic normality so that's our inference
+[0:39:35] normality so that's our inference approach we also develop several
+[0:39:37] approach we also develop several diagnostic tests and robustness checks
+[0:39:40] diagnostic tests and robustness checks um you know the first set of tests we
+[0:39:42] um you know the first set of tests we develop is about existence of solutions
+[0:39:44] develop is about existence of solutions so we develop test for to check whether
+[0:39:46] so we develop test for to check whether the Primal IV or the Dual IV has
+[0:39:48] the Primal IV or the Dual IV has Solutions let me skip through the
+[0:39:50] Solutions let me skip through the details um uh the second test we
+[0:39:54] details um uh the second test we developed was a weak identification test
+[0:39:57] developed was a weak identification test where we're checking whether the
+[0:39:59] where we're checking whether the identification strength is small and you
+[0:40:03] identification strength is small and you can you know like you can view this new
+[0:40:05] can you know like you can view this new test as sort of like a variant of the F
+[0:40:07] test as sort of like a variant of the F test where you have a many treat many
+[0:40:09] test where you have a many treat many instruments but you only care about a
+[0:40:11] instruments but you only care about a particular
+[0:40:12] particular coefficient uh for a partic for one of
+[0:40:14] coefficient uh for a partic for one of the
+[0:40:15] the treatments and we also developed a cence
+[0:40:18] treatments and we also developed a cence rank test that uses the fact that the
+[0:40:20] rank test that uses the fact that the cence between x and z has a rank that is
+[0:40:24] cence between x and z has a rank that is equal to the dimension of M and so hence
+[0:40:26] equal to the dimension of M and so hence we can look at the rank of the coant of
+[0:40:28] we can look at the rank of the coant of x and z and this will hint us as to what
+[0:40:32] x and z and this will hint us as to what dimension of them these sets of x's and
+[0:40:35] dimension of them these sets of x's and Z's can actually support and so if that
+[0:40:38] Z's can actually support and so if that Dimension is quite small compared to our
+[0:40:40] Dimension is quite small compared to our hypothesize dimension of the
+[0:40:42] hypothesize dimension of the mediator then it's worrisome that our
+[0:40:45] mediator then it's worrisome that our proxies are too weak to effectively
+[0:40:47] proxies are too weak to effectively control for
+[0:40:49] control for them so that's our suit of technical
+[0:40:52] them so that's our suit of technical results now on the empirical results we
+[0:40:55] results now on the empirical results we applied this approach to uh the UK bio
+[0:40:57] applied this approach to uh the UK bio bank which contains 5 500,000 patient
+[0:41:01] bank which contains 5 500,000 patient EHR records uh for different for a a
+[0:41:04] EHR records uh for different for a a whole set of patient attributes
+[0:41:05] whole set of patient attributes sensitive attributes and for a whole set
+[0:41:07] sensitive attributes and for a whole set of medical diagnosis for different um
+[0:41:11] of medical diagnosis for different um diseases um we
+[0:41:15] diseases um we identified 34 cases of implicit bias uh
+[0:41:19] identified 34 cases of implicit bias uh where we say it's a valid implicit bias
+[0:41:22] where we say it's a valid implicit bias estimate in that it passes all of our
+[0:41:25] estimate in that it passes all of our robustness checks that we just described
+[0:41:29] robustness checks that we just described and also gives an an implicit bias that
+[0:41:31] and also gives an an implicit bias that is statistically
+[0:41:33] is statistically significant some of these implicit bias
+[0:41:36] significant some of these implicit bias results agree with the literature like
+[0:41:38] results agree with the literature like um it's has been documented that uh
+[0:41:42] um it's has been documented that uh doctors are less likely to diagnose
+[0:41:46] doctors are less likely to diagnose women with heart disease uh but some
+[0:41:49] women with heart disease uh but some disagree such as for instance it is
+[0:41:51] disagree such as for instance it is believe that doctors over diagnose uh um
+[0:41:57] believe that doctors over diagnose uh um black people with a chronic kidney
+[0:42:00] black people with a chronic kidney disease um so um potentially this
+[0:42:04] disease um so um potentially this disagreement is due to issues in the UK
+[0:42:07] disagreement is due to issues in the UK biobank data such as omission of some of
+[0:42:09] biobank data such as omission of some of the um blood tests that people typically
+[0:42:12] the um blood tests that people typically clinicians typically use for chronic
+[0:42:14] clinicians typically use for chronic kidney disease is not available in the
+[0:42:15] kidney disease is not available in the UK bang and so most probably that's the
+[0:42:18] UK bang and so most probably that's the reason for that mistake or that you know
+[0:42:22] reason for that mistake or that you know disagreement um you know um we also run
+[0:42:25] disagreement um you know um we also run a several robustness uh uh checks for
+[0:42:28] a several robustness uh uh checks for our estimates such as how many data
+[0:42:31] our estimates such as how many data points we need to remove to invalidate
+[0:42:34] points we need to remove to invalidate or negate the statistical result and we
+[0:42:36] or negate the statistical result and we find that most of these uh six results
+[0:42:39] find that most of these uh six results are robust to sample
+[0:42:42] are robust to sample removal and the confidence intervals are
+[0:42:45] removal and the confidence intervals are similar if you if you follow
+[0:42:46] similar if you if you follow bootstrapping approaches for calculation
+[0:42:48] bootstrapping approaches for calculation of
+[0:42:49] of uncertainty we also found that there is
+[0:42:51] uncertainty we also found that there is heterogenity when you stratify the group
+[0:42:54] heterogenity when you stratify the group population by income so you know like
+[0:42:56] population by income so you know like future work is
+[0:42:58] future work is also um you know improving the data
+[0:43:01] also um you know improving the data quality using Stanford DHR data uh allow
+[0:43:04] quality using Stanford DHR data uh allow you improving our methodology to allow
+[0:43:06] you improving our methodology to allow for nonlinear specifications that will
+[0:43:09] for nonlinear specifications that will allow for such effect
+[0:43:11] allow for such effect heterogenity translate our results to
+[0:43:13] heterogenity translate our results to system specific impact collaborating
+[0:43:15] system specific impact collaborating with clinicians and standardized bias
+[0:43:18] with clinicians and standardized bias detection via easy to use software so
+[0:43:20] detection via easy to use software so here is the software we've already
+[0:43:22] here is the software we've already implemented if you want to try it out um
+[0:43:25] implemented if you want to try it out um and thank you very much for your
+[0:43:27] and thank you very much for your attention
+[0:43:33] thank you so much um would it be okay if I just ask a
+[0:43:37] much um would it be okay if I just ask a couple of quick questions yeah please
+[0:43:40] couple of quick questions yeah please yeah uh so first question uh from
+[0:43:44] yeah uh so first question uh from Anonymous attendee are there any
+[0:43:47] Anonymous attendee are there any assumptions on the F functions I think
+[0:43:49] assumptions on the F functions I think are this are functions in your partially
+[0:43:51] are this are functions in your partially linear
+[0:43:54] linear model the F no there's no assumption on
+[0:43:56] model the F no there's no assumption on the F functions of course there's the
+[0:43:58] the F functions of course there's the rate conditions that you need them to be
+[0:44:00] rate conditions that you need them to be estimable at end to the one quarter
+[0:44:01] estimable at end to the one quarter rates for inference yeah but not nothing
+[0:44:05] rates for inference yeah but not nothing else okay that's also what I thought uh
+[0:44:08] else okay that's also what I thought uh next question uh how would you handle
+[0:44:11] next question uh how would you handle measurement in error in some variables
+[0:44:14] measurement in error in some variables like survey
+[0:44:21] responses is is that important to hand I suspect because we're using an IV
+[0:44:23] suspect because we're using an IV approach the servey response measurement
+[0:44:25] approach the servey response measurement error is not important like um
+[0:44:28] error is not important like um you know you could have like errors in
+[0:44:30] you know you could have like errors in in Z injected in there as long as there
+[0:44:32] in Z injected in there as long as there is part in Z that correlates with M
+[0:44:34] is part in Z that correlates with M that's all that's needed
+[0:44:36] that's all that's needed here so you could have independent
+[0:44:38] here so you could have independent sources of error Epsilon that enter
+[0:44:41] sources of error Epsilon that enter enter Z yeah right uh so just go for
+[0:44:46] enter Z yeah right uh so just go for another applied question this is about
+[0:44:48] another applied question this is about the specification of this particular
+[0:44:51] the specification of this particular problem uh should we not also take into
+[0:44:54] problem uh should we not also take into account doctor's attributes like their
+[0:44:56] account doctor's attributes like their ethnicity on gender in this
+[0:45:00] ethnicity on gender in this model
+[0:45:19] um I think I think the answer is is yes obviously yes but primarily if you
+[0:45:21] obviously yes but primarily if you believe that there is heterogenity in
+[0:45:23] believe that there is heterogenity in the effect with respect to those
+[0:45:24] the effect with respect to those attributes I would suspect that those
+[0:45:26] attributes I would suspect that those attributes would ender as heterogenity
+[0:45:28] attributes would ender as heterogenity of the effect and so it will be useful
+[0:45:30] of the effect and so it will be useful maybe in our follow-up analysis where
+[0:45:32] maybe in our follow-up analysis where we're going to start looking at effect
+[0:45:34] we're going to start looking at effect heterogenity and interactions between
+[0:45:36] heterogenity and interactions between the treatment and other
+[0:45:37] the treatment and other attributes and that setting I would
+[0:45:40] attributes and that setting I would expect that yes
+[0:45:42] expect that yes uh uh
+[0:45:49] having yeah having those doctor characteristics will be useful here for
+[0:45:51] characteristics will be useful here for Hena now I guess this Theta you can
+[0:45:53] Hena now I guess this Theta you can potentially view it as estimating an
+[0:45:55] potentially view it as estimating an average effect for the doctor population
+[0:45:57] average effect for the doctor population however that is um
+[0:46:01] however that is um conr okay perhaps one last question uh
+[0:46:05] conr okay perhaps one last question uh how restrictive is the Assumption on the
+[0:46:09] how restrictive is the Assumption on the full rank of the F Matrix I think you're
+[0:46:11] full rank of the F Matrix I think you're on the right page the analysis be done
+[0:46:14] on the right page the analysis be done if this Matrix is ranked
+[0:46:16] if this Matrix is ranked deficient yeah so that you should think
+[0:46:18] deficient yeah so that you should think of that you have like 69 blood tests it
+[0:46:21] of that you have like 69 blood tests it should be that um you know like the
+[0:46:23] should be that um you know like the health state does not coar all those
+[0:46:26] health state does not coar all those blood tests in a cinear Manner and so
+[0:46:28] blood tests in a cinear Manner and so the more blood test you have you should
+[0:46:30] the more blood test you have you should expect that you know the these patterns
+[0:46:33] expect that you know the these patterns of variations will be linearly
+[0:46:34] of variations will be linearly independent so I expect that you know
+[0:46:37] independent so I expect that you know the more X's you add the more plausible
+[0:46:39] the more X's you add the more plausible this assumption is and as long as those
+[0:46:41] this assumption is and as long as those X's also are trying to capture different
+[0:46:44] X's also are trying to capture different uh slightly different uh parts of
+[0:46:47] uh slightly different uh parts of n
+[0:46:49] n right okay um thank you very much uh
+[0:46:52] right okay um thank you very much uh let's move on to
+[0:46:54] let's move on to discussion um
+[0:46:57] discussion um if you can unshare your screen vilis and
+[0:47:00] if you can unshare your screen vilis and Ilia you like to share your I don't have
+[0:47:03] Ilia you like to share your I don't have any slides to share today apologize for
+[0:47:05] any slides to share today apologize for that but uh can you hear me okay yes yes
+[0:47:10] that but uh can you hear me okay yes yes okay great uh I will get started uh will
+[0:47:13] okay great uh I will get started uh will not be super long so thank you um ois
+[0:47:17] not be super long so thank you um ois for inviting me to discuss always always
+[0:47:19] for inviting me to discuss always always fun to do that and thank you vilus for
+[0:47:21] fun to do that and thank you vilus for presenting very interesting paper so uh
+[0:47:24] presenting very interesting paper so uh this paper the way you would first read
+[0:47:28] this paper the way you would first read it is it's about kind of fairness
+[0:47:29] it is it's about kind of fairness disparity stuff and it's also about
+[0:47:31] disparity stuff and it's also about proximal inference with
+[0:47:33] proximal inference with mediators and so uh the first thing I'll
+[0:47:36] mediators and so uh the first thing I'll say is that you know as soon as you
+[0:47:38] say is that you know as soon as you start doing fairness and you start
+[0:47:39] start doing fairness and you start thinking about Direct effects of things
+[0:47:41] thinking about Direct effects of things like race there there's the usual
+[0:47:44] like race there there's the usual questions I will mention about like what
+[0:47:46] questions I will mention about like what does that actually mean uh people spill
+[0:47:48] does that actually mean uh people spill a lot of ink of that because you can't
+[0:47:50] a lot of ink of that because you can't manipulate race directly and so there
+[0:47:52] manipulate race directly and so there are various ways around it but I do I
+[0:47:54] are various ways around it but I do I did want to mention that that's a thing
+[0:47:55] did want to mention that that's a thing to worry about with this kind of stuff
+[0:47:58] to worry about with this kind of stuff uh but uh what I really want to
+[0:48:00] uh but uh what I really want to concentrate on is the stats end of it so
+[0:48:03] concentrate on is the stats end of it so I think what I've realized um looking at
+[0:48:06] I think what I've realized um looking at this paper is that it's not actually
+[0:48:08] this paper is that it's not actually proximal inference with
+[0:48:10] proximal inference with mediators uh and the reason for that is
+[0:48:12] mediators uh and the reason for that is because of the target of inference the
+[0:48:14] because of the target of inference the target of inference as vilus points out
+[0:48:16] target of inference as vilus points out is just the G formula where you adjust
+[0:48:18] is just the G formula where you adjust for
+[0:48:19] for m so if you like like you know if you
+[0:48:21] m so if you like like you know if you look at the graph it's very suggestive
+[0:48:23] look at the graph it's very suggestive that m is like on the causal pathway but
+[0:48:25] that m is like on the causal pathway but actually like the graph is leading here
+[0:48:27] actually like the graph is leading here you m basically acts as a confounder and
+[0:48:31] you m basically acts as a confounder and therefore what's really happening here
+[0:48:33] therefore what's really happening here is this is just regular meow at all
+[0:48:35] is this is just regular meow at all style proximo uh because what the
+[0:48:39] style proximo uh because what the proxies are proxying for is the variable
+[0:48:43] proxies are proxying for is the variable you adjust for which is the original
+[0:48:45] you adjust for which is the original setting of proximal inference like that
+[0:48:48] setting of proximal inference like that that Eric and Company did so um okay so
+[0:48:52] that Eric and Company did so um okay so I think actually like you know it's not
+[0:48:54] I think actually like you know it's not really like what like camir gami and
+[0:48:56] really like what like camir gami and Company did um and that's because the
+[0:48:59] Company did um and that's because the target of inference for air gami was
+[0:49:01] target of inference for air gami was like the fondor functional with a
+[0:49:03] like the fondor functional with a missing mediator or the natural direct
+[0:49:05] missing mediator or the natural direct effect for the missing mediator and here
+[0:49:07] effect for the missing mediator and here the target of inference is just a g
+[0:49:08] the target of inference is just a g formula basically where the mediator is
+[0:49:10] formula basically where the mediator is just being adjusted for so okay that's
+[0:49:13] just being adjusted for so okay that's fine um but that's what it is um the
+[0:49:17] fine um but that's what it is um the other thing I wanted to mention briefly
+[0:49:19] other thing I wanted to mention briefly is like the the target is not really the
+[0:49:22] is like the the target is not really the control direct effect as a lot of people
+[0:49:24] control direct effect as a lot of people Define it because usually uh the control
+[0:49:26] Define it because usually uh the control direct effect fixes the mediator to
+[0:49:28] direct effect fixes the mediator to something uh here it's being averaged
+[0:49:30] something uh here it's being averaged over which is fine but it's some sort of
+[0:49:32] over which is fine but it's some sort of aggregate Direct Control direct effect
+[0:49:34] aggregate Direct Control direct effect something like that okay so
+[0:49:39] something like that okay so um I guess uh the the contributions in
+[0:49:42] um I guess uh the the contributions in stats that I saw here uh is that if you
+[0:49:46] stats that I saw here uh is that if you make enough assumptions of linearity of
+[0:49:48] make enough assumptions of linearity of various sorts uh you could use IV
+[0:49:50] various sorts uh you could use IV methods to do proximal which I thought
+[0:49:52] methods to do proximal which I thought was interesting because it's kind of
+[0:49:53] was interesting because it's kind of Full Circle right because bridges come
+[0:49:56] Full Circle right because bridges come from I from nonparametric I uh and so
+[0:49:59] from I from nonparametric I uh and so now they're you're kind of kind of going
+[0:50:01] now they're you're kind of kind of going back there uh and so uh because uh to me
+[0:50:06] back there uh and so uh because uh to me this is just assuming linearity on the
+[0:50:10] this is just assuming linearity on the Target that meow at all would consider
+[0:50:12] Target that meow at all would consider like my question
+[0:50:14] like my question is uh I guess two questions first uh how
+[0:50:18] is uh I guess two questions first uh how much linearity is enough to be able to
+[0:50:21] much linearity is enough to be able to do this like can we assume less can we
+[0:50:24] do this like can we assume less can we assume different kinds of things and
+[0:50:25] assume different kinds of things and second if I really wanted to reformulate
+[0:50:28] second if I really wanted to reformulate this paper in the meow at all setting
+[0:50:31] this paper in the meow at all setting where I'm doing proximal for
+[0:50:33] where I'm doing proximal for confounding like what's what how would I
+[0:50:36] confounding like what's what how would I phrase these assumptions to be able to
+[0:50:37] phrase these assumptions to be able to use I methods there because it seems
+[0:50:40] use I methods there because it seems like you should be able we should be
+[0:50:41] like you should be able we should be able to do it because that's the problem
+[0:50:44] able to do it because that's the problem that we're doing we're doing the G
+[0:50:45] that we're doing we're doing the G formula
+[0:50:47] formula problem uh I don't know that like Vil
+[0:50:49] problem uh I don't know that like Vil has really discussed this but I'm
+[0:50:51] has really discussed this but I'm guessing that there is a way to
+[0:50:52] guessing that there is a way to reformulate assumptions to do that as
+[0:50:54] reformulate assumptions to do that as well and that would be kind of
+[0:50:55] well and that would be kind of interesting uh the other thing I was
+[0:50:57] interesting uh the other thing I was going to ask since double ml was brought
+[0:50:59] going to ask since double ml was brought up like have have you worked out like
+[0:51:02] up like have have you worked out like has it been worked out with the
+[0:51:03] has it been worked out with the efficient if here is or is that like a
+[0:51:06] efficient if here is or is that like a good question to be asking is it too
+[0:51:08] good question to be asking is it too hard because yeah my experience with
+[0:51:11] hard because yeah my experience with proximal problems is the semi parametric
+[0:51:13] proximal problems is the semi parametric model is incredibly annoying uh like to
+[0:51:16] model is incredibly annoying uh like to project onto so maybe it's very
+[0:51:18] project onto so maybe it's very difficult to get the efficient AF but
+[0:51:20] difficult to get the efficient AF but maybe something is possible to say there
+[0:51:24] maybe something is possible to say there uh okay and that's all that's all I
+[0:51:26] uh okay and that's all that's all I really had to say uh so not too much but
+[0:51:29] really had to say uh so not too much but thank you again vilus it was very
+[0:51:30] thank you again vilus it was very interesting got me thinking about lots
+[0:51:32] interesting got me thinking about lots of
+[0:51:33] of stuff thank you yeah so I think yeah
+[0:51:35] stuff thank you yeah so I think yeah you're you're spot on I think I think
+[0:51:37] you're you're spot on I think I think it's correct as I also mentioned like
+[0:51:38] it's correct as I also mentioned like the problem is technically equivalent to
+[0:51:41] the problem is technically equivalent to the standard um sort of proximal
+[0:51:44] the standard um sort of proximal inference with it's just you know you're
+[0:51:47] inference with it's just you know you're in some sense it says that if you care
+[0:51:48] in some sense it says that if you care about the control direct effect with
+[0:51:50] about the control direct effect with this averaging in a mediation analysis
+[0:51:53] this averaging in a mediation analysis it is equivalent to as if the mediator
+[0:51:55] it is equivalent to as if the mediator was a confounder and statistically you
+[0:51:58] was a confounder and statistically you faced with the same problem are results
+[0:52:00] faced with the same problem are results yes can you can apply them to the
+[0:52:02] yes can you can apply them to the standard um unobserved confounder where
+[0:52:05] standard um unobserved confounder where m is an unobserved confounder and not a
+[0:52:08] m is an unobserved confounder and not a mediator um and there it would still be
+[0:52:11] mediator um and there it would still be again a partial linearity Assumption of
+[0:52:13] again a partial linearity Assumption of the outcome given X U the treatment and
+[0:52:19] the outcome given X U the treatment and The observed controls on the conditional
+[0:52:22] The observed controls on the conditional expectation um in terms of minimality of
+[0:52:25] expectation um in terms of minimality of the linearity assumptions in you know in
+[0:52:27] the linearity assumptions in you know in some sense all we all we need here is
+[0:52:29] some sense all we all we need here is that the uh Bridge function is partially
+[0:52:31] that the uh Bridge function is partially linear right uh all of the results
+[0:52:34] linear right uh all of the results follow after that the plr assumption
+[0:52:36] follow after that the plr assumption that I presented is a sufficient
+[0:52:39] that I presented is a sufficient condition from first principles of when
+[0:52:42] condition from first principles of when such a partially linear Bridge function
+[0:52:44] such a partially linear Bridge function arises so under this conditional
+[0:52:47] arises so under this conditional expectation function assumptions you get
+[0:52:49] expectation function assumptions you get a partially linear Bridge
+[0:52:51] a partially linear Bridge function um I'm not sure that there are
+[0:52:55] function um I'm not sure that there are more uh
+[0:52:57] more uh it's not necessary I suspect that you
+[0:53:00] it's not necessary I suspect that you would that these are all the these are
+[0:53:03] would that these are all the these are these are all the settings where you
+[0:53:04] these are all the settings where you would get a partial linear assumption
+[0:53:06] would get a partial linear assumption but you know that's it's more thought
+[0:53:08] but you know that's it's more thought yes but it's certainly possible that
+[0:53:10] yes but it's certainly possible that like things just like you you have some
+[0:53:12] like things just like you you have some complicated integral and then things
+[0:53:14] complicated integral and then things cancel out and you get a linear function
+[0:53:15] cancel out and you get a linear function it's just hard to characterize when that
+[0:53:17] it's just hard to characterize when that happens yes yes so this was just like we
+[0:53:19] happens yes yes so this was just like we wanted to get like a first principle if
+[0:53:21] wanted to get like a first principle if you just want to think about conditional
+[0:53:23] you just want to think about conditional expectation of outcomes given parents
+[0:53:25] expectation of outcomes given parents then uh when do you get an outcome
+[0:53:28] then uh when do you get an outcome Bridge function because the bridge
+[0:53:29] Bridge function because the bridge function is a more complicated object
+[0:53:31] function is a more complicated object it's not a conditional expectation so if
+[0:53:34] it's not a conditional expectation so if I just said we have a partial linear
+[0:53:36] I just said we have a partial linear Bridge function then what does that mean
+[0:53:38] Bridge function then what does that mean like it's like it's a very high level
+[0:53:40] like it's like it's a very high level assumption in my mind so that's why we
+[0:53:41] assumption in my mind so that's why we want it to have a more primitive
+[0:53:43] want it to have a more primitive assumption that gives rise to that and
+[0:53:45] assumption that gives rise to that and it also gives rise to interpretable
+[0:53:47] it also gives rise to interpretable assumptions of what does it like what
+[0:53:50] assumptions of what does it like what for existence like under this plr
+[0:53:52] for existence like under this plr assumption then the covariant the full
+[0:53:55] assumption then the covariant the full column rank covariant is the sufficient
+[0:53:58] column rank covariant is the sufficient condition for the existence of a bridge
+[0:53:59] condition for the existence of a bridge function right so it's not just a
+[0:54:03] function right so it's not just a condition that gives a linear Bridge
+[0:54:04] condition that gives a linear Bridge function but it actually implies the
+[0:54:05] function but it actually implies the existence of a bridge function so even
+[0:54:08] existence of a bridge function so even the existence of a bridge function is
+[0:54:09] the existence of a bridge function is slightly easier to understand in this
+[0:54:11] slightly easier to understand in this partially linear context it's a full
+[0:54:13] partially linear context it's a full column rang on that conditional
+[0:54:15] column rang on that conditional expectation of x given Z given the
+[0:54:19] expectation of x given Z given the mediator and uh yeah so the for instance
+[0:54:24] mediator and uh yeah so the for instance also going to your final one like the
+[0:54:26] also going to your final one like the the the the the software that we'
+[0:54:28] the the the the software that we' released you can directly apply it to
+[0:54:31] released you can directly apply it to the standard proximal caal INF setting
+[0:54:33] the standard proximal caal INF setting with an nonobserved confounder you know
+[0:54:35] with an nonobserved confounder you know renaming the mediator with a conf as a
+[0:54:37] renaming the mediator with a conf as a confounder if you're if that's what it
+[0:54:39] confounder if you're if that's what it is in your setting and you'll get an an
+[0:54:42] is in your setting and you'll get an an estimate of the sort of like average
+[0:54:44] estimate of the sort of like average treatment effect is just that if that
+[0:54:47] treatment effect is just that if that confounder is a mediator you should
+[0:54:49] confounder is a mediator you should interpret that result as a controlled
+[0:54:51] interpret that result as a controlled direct effect because you're also
+[0:54:52] direct effect because you're also controlling for mediators right so
+[0:54:55] controlling for mediators right so that's the the difference
+[0:54:59] that's the the difference um
+[0:55:02] um yeah was there some other comment that I
+[0:55:04] yeah was there some other comment that I didn't
+[0:55:06] didn't address I don't uh just the the usual
+[0:55:10] address I don't uh just the the usual like what does this direct effect even
+[0:55:11] like what does this direct effect even mean when you're intervening and race
+[0:55:13] mean when you're intervening and race but this is like a very old discussion
+[0:55:15] but this is like a very old discussion right so I don't know what there is to
+[0:55:17] right so I don't know what there is to say about that yeah I would say here
+[0:55:20] say about that yeah I would say here maybe it's like uh from for people that
+[0:55:24] maybe it's like uh from for people that you know that don't want to maybe go
+[0:55:26] you know that don't want to maybe go into the
+[0:55:27] into the that type of philosophical question
+[0:55:28] that type of philosophical question maybe you could just think of it as the
+[0:55:31] maybe you could just think of it as the um you can just think about the
+[0:55:33] um you can just think about the statistical estimate you have a big
+[0:55:34] statistical estimate you have a big regression where you have all of the
+[0:55:36] regression where you have all of the health State and the sensitive attribute
+[0:55:38] health State and the sensitive attribute and in this big prediction problem does
+[0:55:41] and in this big prediction problem does the sensitive attribute also uh have you
+[0:55:44] the sensitive attribute also uh have you know like is it an important feature
+[0:55:46] know like is it an important feature right so uh and that is what you're
+[0:55:49] right so uh and that is what you're going to say is an implicit bias if
+[0:55:53] going to say is an implicit bias if there's still some remnant uh predictive
+[0:55:56] there's still some remnant uh predictive power of the sensitive attribute on the
+[0:55:57] power of the sensitive attribute on the clinician outcome even once you
+[0:56:00] clinician outcome even once you incorporate uh the all of the Patients
+[0:56:03] incorporate uh the all of the Patients health State and other patient
+[0:56:06] health State and other patient characteristics there's still a
+[0:56:07] characteristics there's still a predictive power to the sensitive
+[0:56:10] predictive power to the sensitive attribute and so you
+[0:56:13] attribute and so you know that means that somehow uh there's
+[0:56:16] know that means that somehow uh there's a
+[0:56:17] a perceived uh implicit bias
+[0:56:20] perceived uh implicit bias that you know the clinician use the race
+[0:56:23] that you know the clinician use the race directly in their
+[0:56:25] directly in their decision yeah
+[0:56:28] decision yeah so so the answer it sounds like is we're
+[0:56:30] so so the answer it sounds like is we're going to be just doing what people in
+[0:56:33] going to be just doing what people in the fairness literature do is we're
+[0:56:34] the fairness literature do is we're going to come up with some math thing
+[0:56:35] going to come up with some math thing and we're going to Define bias using
+[0:56:37] and we're going to Define bias using this math thing just by by Fiat
+[0:56:40] this math thing just by by Fiat essentially like implicit bias is this
+[0:56:42] essentially like implicit bias is this thing we did with proximal okay I mean
+[0:56:45] thing we did with proximal okay I mean people definitely do this a
+[0:56:47] people definitely do this a lot yeah well I do like to think about
+[0:56:50] lot yeah well I do like to think about it as a control direct effect but yeah
+[0:56:52] it as a control direct effect but yeah if you don't want to think of us race if
+[0:56:55] if you don't want to think of us race if you somehow from your causal vocabulary
+[0:56:58] you somehow from your causal vocabulary you don't want to intervene on things
+[0:57:01] you don't want to intervene on things that you could anyway I don't know like
+[0:57:04] that you could anyway I don't know like um to be clear I I do this too right I
+[0:57:07] um to be clear I I do this too right I mean I have papers to try to intervene
+[0:57:09] mean I have papers to try to intervene in race and I think I got a lot of push
+[0:57:10] in race and I think I got a lot of push back so this is why I'm asking basically
+[0:57:13] back so this is why I'm asking basically well in my mind it's more like a a
+[0:57:15] well in my mind it's more like a a perceived the perceived Race So if
+[0:57:17] perceived the perceived Race So if somehow you could intervene on the
+[0:57:18] somehow you could intervene on the perceived race like the clinician could
+[0:57:21] perceived race like the clinician could now perceive A different race at the
+[0:57:23] now perceive A different race at the point of a uh of their decision that
+[0:57:26] point of a uh of their decision that then that that is the
+[0:57:32] intervention yeah I think that's it thank you
+[0:57:36] yeah I think that's it thank you yeah um perfect timing n um I think uh
+[0:57:42] yeah um perfect timing n um I think uh should we just draw a conclusion
+[0:57:45] should we just draw a conclusion sure perfect so thanks so much for B
+[0:57:49] sure perfect so thanks so much for B this for the excellent talk and Foria
+[0:57:52] this for the excellent talk and Foria for the wonderful discussion as well and
+[0:57:54] for the wonderful discussion as well and so thank you so much for everyone for
+[0:57:56] so thank you so much for everyone for coming uh and next week we're going to
+[0:57:58] coming uh and next week we're going to have Katie keys from Williams College
+[0:58:00] have Katie keys from Williams College she's going to talk about proximal CA
+[0:58:02] she's going to talk about proximal CA inflence with Text data and discussion
+[0:58:04] inflence with Text data and discussion is tbaa but it's going to be announced
+[0:58:07] is tbaa but it's going to be announced soon so um I hope we're going to see you
+[0:58:10] soon so um I hope we're going to see you again next week so thanks you so much

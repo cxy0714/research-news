@@ -1,0 +1,1382 @@
+[0:00:07] thanks hi everyone welcome to the online C inference seminar we hope you've had a
+[0:00:09] C inference seminar we hope you've had a great Thanksgiving uh today we are
+[0:00:12] great Thanksgiving uh today we are excited to have Richi go from Columbia
+[0:00:14] excited to have Richi go from Columbia University to talk about identifiable
+[0:00:17] University to talk about identifiable deep generative models for reach data
+[0:00:20] deep generative models for reach data types with discrete Laden layers uh the
+[0:00:24] types with discrete Laden layers uh the discussion today will be our te and J
+[0:00:26] discussion today will be our te and J from University of Cambridge uh Q&amp;A
+[0:00:29] from University of Cambridge uh Q&amp;A today will be hand by Emma so Emma
+[0:00:31] today will be hand by Emma so Emma please um explain how it
+[0:00:41] works hi everyone uh yes so today the second there we go so yes as always
+[0:00:44] second there we go so yes as always please submit your questions through the
+[0:00:45] please submit your questions through the Q&amp;A so that we can public can answer
+[0:00:48] Q&amp;A so that we can public can answer them and so that everyone else of the
+[0:00:50] them and so that everyone else of the participants can end up seeing them if
+[0:00:52] participants can end up seeing them if you just submit them through chat only
+[0:00:54] you just submit them through chat only the panel is see your questions so keep
+[0:00:56] the panel is see your questions so keep that in mind uh okay great I also wanted
+[0:01:00] that in mind uh okay great I also wanted to say that uh there will be no official
+[0:01:03] to say that uh there will be no official kind of pauses in the talk for questions
+[0:01:05] kind of pauses in the talk for questions so please just submit them as they come
+[0:01:06] so please just submit them as they come up and then we'll naturally create some
+[0:01:08] up and then we'll naturally create some pauses for questions to be asked so just
+[0:01:10] pauses for questions to be asked so just keep asking your questions through the
+[0:01:12] keep asking your questions through the Q&amp;A and I also want to say before we
+[0:01:15] Q&amp;A and I also want to say before we start today uh we're welcoming our some
+[0:01:19] start today uh we're welcoming our some of our new panelists who will be joining
+[0:01:21] of our new panelists who will be joining us soon today we have no kagami and SAR
+[0:01:24] us soon today we have no kagami and SAR magak here and we'll have some more
+[0:01:27] magak here and we'll have some more coming soon so that's news for maybe
+[0:01:30] coming soon so that's news for maybe some other time but uh welcome okay
+[0:01:33] some other time but uh welcome okay great youi please feel free to start
+[0:01:35] great youi please feel free to start your presentation and
+[0:01:37] your presentation and yeah thank you let me share my
+[0:01:51] screen okay so can you see my slides yes okay yeah um so um I would
+[0:01:56] slides yes okay yeah um so um I would like to thank U and in for inviting me
+[0:01:58] like to thank U and in for inviting me here um it's really my my great honor
+[0:02:01] here um it's really my my great honor and pleasure to talk about my research
+[0:02:03] and pleasure to talk about my research in this online causal inference seminar
+[0:02:05] in this online causal inference seminar so um I have been working on latent
+[0:02:08] so um I have been working on latent variable models identifiability and
+[0:02:10] variable models identifiability and other um aspects of it for a long time
+[0:02:13] other um aspects of it for a long time and I've been actually constantly
+[0:02:14] and I've been actually constantly reading into the causal inference
+[0:02:16] reading into the causal inference literature and getting inspired by some
+[0:02:18] literature and getting inspired by some interesting ideas there but actually I
+[0:02:20] interesting ideas there but actually I haven't formally um being a researcher
+[0:02:23] haven't formally um being a researcher of caal inference so uh it's really an
+[0:02:26] of caal inference so uh it's really an great opportunity for me to present my
+[0:02:28] great opportunity for me to present my work here and to potentially generate
+[0:02:30] work here and to potentially generate some discussions and exploring some new
+[0:02:32] some discussions and exploring some new ideas so uh today I will be talking
+[0:02:35] ideas so uh today I will be talking about uh my recent work on identifiable
+[0:02:38] about uh my recent work on identifiable deep generating models for Rich data
+[0:02:39] deep generating models for Rich data types and these models consist of
+[0:02:42] types and these models consist of discrete latent
+[0:02:43] discrete latent layers um this work is uh joined partly
+[0:02:46] layers um this work is uh joined partly with David dson from Duke University and
+[0:02:49] with David dson from Duke University and uh partly with s my PhD student St H Lee
+[0:02:52] uh partly with s my PhD student St H Lee uh from Columbia
+[0:02:54] uh from Columbia University so here's a very um brief
+[0:02:57] University so here's a very um brief overview of latent variable models on
+[0:02:59] overview of latent variable models on one hand these models have been very
+[0:03:01] one hand these models have been very popular in Social and Behavioral
+[0:03:03] popular in Social and Behavioral Sciences for a long time they are used
+[0:03:06] Sciences for a long time they are used to model constructs that are not
+[0:03:07] to model constructs that are not directly measurable for example
+[0:03:09] directly measurable for example personality in Psychology public opinion
+[0:03:12] personality in Psychology public opinion in political science or latent skills in
+[0:03:14] in political science or latent skills in education which is the field that
+[0:03:16] education which is the field that motivates uh much of my research on the
+[0:03:19] motivates uh much of my research on the other hand we also see that latent
+[0:03:22] other hand we also see that latent variable have uh emerged as very
+[0:03:24] variable have uh emerged as very powerful Tools in modern machine
+[0:03:26] powerful Tools in modern machine learning and deep learning they can be
+[0:03:28] learning and deep learning they can be used to perform Dimension reduction
+[0:03:30] used to perform Dimension reduction there are also building blocks for deep
+[0:03:32] there are also building blocks for deep neural networks and deep generative
+[0:03:33] neural networks and deep generative models for example in variational Auto
+[0:03:36] models for example in variational Auto encoders in deep belief
+[0:03:38] encoders in deep belief networks these models all consist of
+[0:03:41] networks these models all consist of many latent variable models to induce
+[0:03:43] many latent variable models to induce very expressive distributions for
+[0:03:45] very expressive distributions for complex data
+[0:03:47] complex data objects so if we um try to understand
+[0:03:50] objects so if we um try to understand the nature of the latent variable models
+[0:03:52] the nature of the latent variable models we can divide them into uh basically
+[0:03:55] we can divide them into uh basically four categories depending on the
+[0:03:58] four categories depending on the characteristic of the latent and The
+[0:03:59] characteristic of the latent and The observed variable for example the factor
+[0:04:02] observed variable for example the factor analysis is a traditional method that
+[0:04:04] analysis is a traditional method that uses continuous latent variables to
+[0:04:07] uses continuous latent variables to model continuous data and it has been
+[0:04:09] model continuous data and it has been actually analyzed and used in
+[0:04:12] actually analyzed and used in psychometrics to understand
+[0:04:13] psychometrics to understand psychological and educational data since
+[0:04:16] psychological and educational data since a long time ago and we also know uh in
+[0:04:19] a long time ago and we also know uh in other cells of this table we have
+[0:04:22] other cells of this table we have popular models such as Gan mixture item
+[0:04:24] popular models such as Gan mixture item response Theory and um uh today I will
+[0:04:28] response Theory and um uh today I will start with uh simple model in the bottom
+[0:04:31] start with uh simple model in the bottom right cell of this table that uses a
+[0:04:33] right cell of this table that uses a discrete latent variable to model
+[0:04:35] discrete latent variable to model multivar discrete data so the simplest
+[0:04:37] multivar discrete data so the simplest possible model is Laten class model
+[0:04:40] possible model is Laten class model proposed by sociologists in 1950s it is
+[0:04:43] proposed by sociologists in 1950s it is used to understand the different types
+[0:04:46] used to understand the different types of U people's opinion based on the
+[0:04:49] of U people's opinion based on the categorical responses to survey
+[0:04:51] categorical responses to survey questions but we know that uh a Univar
+[0:04:54] questions but we know that uh a Univar latent variable is not expressive uh in
+[0:04:57] latent variable is not expressive uh in modern applications and it is designed
+[0:05:00] modern applications and it is designed aable in modern applications to consider
+[0:05:02] aable in modern applications to consider multivariate latent variables for
+[0:05:04] multivariate latent variables for example multiple latent skills in
+[0:05:06] example multiple latent skills in education and uh it also is desirable to
+[0:05:10] education and uh it also is desirable to consider potentially sparse graphical
+[0:05:12] consider potentially sparse graphical dependence in a graphical model this can
+[0:05:14] dependence in a graphical model this can enhance interpretation and encourage
+[0:05:16] enhance interpretation and encourage Dimension
+[0:05:18] Dimension reduction also importantly it is also
+[0:05:21] reduction also importantly it is also desirable to consider a deep structure
+[0:05:24] desirable to consider a deep structure that consist of many layers of latent
+[0:05:26] that consist of many layers of latent variables to explain High dimensional
+[0:05:28] variables to explain High dimensional and complex data at the bottom layer
+[0:05:31] and complex data at the bottom layer but an important concern in such
+[0:05:33] but an important concern in such modeling is that uh do we understand the
+[0:05:35] modeling is that uh do we understand the identifiability and the um property of
+[0:05:39] identifiability and the um property of the latent structures and model
+[0:05:40] the latent structures and model parameters because we know that
+[0:05:42] parameters because we know that identifiability is an important
+[0:05:44] identifiability is an important prerequisite for valid statistical
+[0:05:46] prerequisite for valid statistical estimation and
+[0:05:48] estimation and inference so uh in this talk I want to
+[0:05:51] inference so uh in this talk I want to provide a perspective a statistical
+[0:05:54] provide a perspective a statistical perspective um from the identifiability
+[0:05:57] perspective um from the identifiability consideration and we will propose uh
+[0:06:00] consideration and we will propose uh generative model that have many latent
+[0:06:02] generative model that have many latent layers with discrete latent variables
+[0:06:05] layers with discrete latent variables and they can be used to model Rich types
+[0:06:07] and they can be used to model Rich types of data in the bottom y
+[0:06:10] of data in the bottom y layer so let's start with a simple uh
+[0:06:13] layer so let's start with a simple uh case with just one latent layer to
+[0:06:16] case with just one latent layer to motivate the key idea let's say um in
+[0:06:20] motivate the key idea let's say um in this graphical model the gray nodes
+[0:06:23] this graphical model the gray nodes denote The observed variables for
+[0:06:24] denote The observed variables for example in educational test it can be a
+[0:06:27] example in educational test it can be a student responses to P questions and the
+[0:06:30] student responses to P questions and the latent variable are A1 through a k they
+[0:06:33] latent variable are A1 through a k they can denote the students statuses of K
+[0:06:36] can denote the students statuses of K latent
+[0:06:37] latent attributes and we will consider binary
+[0:06:39] attributes and we will consider binary latent variables to start with here each
+[0:06:43] latent variables to start with here each AI just denotes uh it can denote the
+[0:06:46] AI just denotes uh it can denote the presence or absence of a particular
+[0:06:48] presence or absence of a particular latent
+[0:06:49] latent skill and uh uh the structure between
+[0:06:52] skill and uh uh the structure between the latent and The observed layer
+[0:06:54] the latent and The observed layer describes the dependence of The observed
+[0:06:56] describes the dependence of The observed items on the latent attributes here the
+[0:06:59] items on the latent attributes here the key ke statistical flexibility we have
+[0:07:01] key ke statistical flexibility we have is that we allow the latent variables A1
+[0:07:04] is that we allow the latent variables A1 through AK to be arbitrarily
+[0:07:07] through AK to be arbitrarily dependent and this will be the key to
+[0:07:10] dependent and this will be the key to build deep models that are still
+[0:07:11] build deep models that are still identifiable at the high
+[0:07:13] identifiable at the high level so as a more concrete example the
+[0:07:17] level so as a more concrete example the teams or Trends in mathematics and
+[0:07:19] teams or Trends in mathematics and science study is an international
+[0:07:21] science study is an international educational assessment and it has been
+[0:07:24] educational assessment and it has been um uh it has been uh there for more than
+[0:07:27] um uh it has been uh there for more than 20 years and covering more than 50
+[0:07:29] 20 years and covering more than 50 countries so for example in the teams
+[0:07:32] countries so for example in the teams mathematics assessment for fourth
+[0:07:34] mathematics assessment for fourth graders researchers have specified that
+[0:07:37] graders researchers have specified that they are interested in understanding um
+[0:07:40] they are interested in understanding um three content skills geometry number
+[0:07:42] three content skills geometry number data and three cognitive skills applying
+[0:07:45] data and three cognitive skills applying knowing and reasoning of students so uh
+[0:07:48] knowing and reasoning of students so uh if we want to use the binary latent
+[0:07:51] if we want to use the binary latent variable framework to understand this
+[0:07:53] variable framework to understand this then the observed variables could be
+[0:07:55] then the observed variables could be correct or wrong answers of a student to
+[0:07:58] correct or wrong answers of a student to the P questions in the exam and we want
+[0:08:00] the P questions in the exam and we want to use the response data to uh
+[0:08:03] to use the response data to uh understand the presence or absence of
+[0:08:06] understand the presence or absence of the klaen skills so we can see that
+[0:08:09] the klaen skills so we can see that identifiability here is an important
+[0:08:11] identifiability here is an important thing because without identifiability we
+[0:08:14] thing because without identifiability we cannot even make sure the interpretation
+[0:08:16] cannot even make sure the interpretation of each latent
+[0:08:24] variable so um the key structure in this graphical model is actually uh the edges
+[0:08:26] graphical model is actually uh the edges pointing from the latent to The observed
+[0:08:28] pointing from the latent to The observed layer here's a toy example Le suppose we
+[0:08:31] layer here's a toy example Le suppose we have five questions and two latent
+[0:08:33] have five questions and two latent skills doing addition and doing
+[0:08:36] skills doing addition and doing multiplication and uh you can see the
+[0:08:38] multiplication and uh you can see the first question here asks for 1 plus
+[0:08:40] first question here asks for 1 plus three so it only measures the scale
+[0:08:42] three so it only measures the scale addition therefore in this graphical
+[0:08:44] addition therefore in this graphical model the first variable y1 only has one
+[0:08:46] model the first variable y1 only has one latent parent okay and uh the fifth
+[0:08:50] latent parent okay and uh the fifth question here uh measures both latent
+[0:08:52] question here uh measures both latent skill so it has both parents in this
+[0:08:54] skill so it has both parents in this bipartite graph so this Q Matrix uh
+[0:08:59] bipartite graph so this Q Matrix uh which is a term coin in psychometrics
+[0:09:01] which is a term coin in psychometrics literature is proposed in 1980s in
+[0:09:04] literature is proposed in 1980s in educational measurement and it describes
+[0:09:07] educational measurement and it describes this bipartite graph structure of how
+[0:09:10] this bipartite graph structure of how these observed items depend on the
+[0:09:12] these observed items depend on the latent
+[0:09:12] latent skills specifically the qjk will be
+[0:09:16] skills specifically the qjk will be equal to one if and only if latent
+[0:09:19] equal to one if and only if latent variable AK is app parent of observed
+[0:09:22] variable AK is app parent of observed variable
+[0:09:24] variable YJ so if we uh first consider
+[0:09:27] YJ so if we uh first consider categorical responses for the
+[0:09:30] categorical responses for the bottom gray layer then the model
+[0:09:33] bottom gray layer then the model parameters can be summarized as two
+[0:09:35] parameters can be summarized as two parts the first part is the parameters
+[0:09:38] parts the first part is the parameters describing the distribution of the
+[0:09:39] describing the distribution of the latent variables so uh as I said we will
+[0:09:43] latent variables so uh as I said we will consider arbitrary dependence between
+[0:09:45] consider arbitrary dependence between the latent and uh simply we can adopt a
+[0:09:48] the latent and uh simply we can adopt a saturated model in this part for each
+[0:09:51] saturated model in this part for each possible binary latent pattern Alpha we
+[0:09:53] possible binary latent pattern Alpha we give it a proportion parameter new Alpha
+[0:09:56] give it a proportion parameter new Alpha that describes in the population how
+[0:09:59] that describes in the population how much uh what is the proportion of this
+[0:10:01] much uh what is the proportion of this particular latent pattern so there's no
+[0:10:04] particular latent pattern so there's no other constraint on new Alpha which
+[0:10:07] other constraint on new Alpha which means we allow any possible
+[0:10:09] means we allow any possible dependence among our a variables and to
+[0:10:13] dependence among our a variables and to describe the conditional distribution of
+[0:10:15] describe the conditional distribution of the Y given the a uh if Y is categorical
+[0:10:19] the Y given the a uh if Y is categorical then we can use the probability Theta
+[0:10:22] then we can use the probability Theta parameters to describe this conditional
+[0:10:23] parameters to describe this conditional probability tables and note that this
+[0:10:26] probability tables and note that this graphical Matrix uh the previous Matrix
+[0:10:29] graphical Matrix uh the previous Matrix q but from now on I will adopt notation
+[0:10:31] q but from now on I will adopt notation G short for graph to emphasize that this
+[0:10:36] G short for graph to emphasize that this Matrix uh actually summarizes the bip
+[0:10:38] Matrix uh actually summarizes the bip parted graph between the latent and The
+[0:10:40] parted graph between the latent and The observed layer so these Theta parameters
+[0:10:44] observed layer so these Theta parameters these conditional probabilities actually
+[0:10:46] these conditional probabilities actually will depend on this Q on this G Matrix
+[0:10:50] will depend on this Q on this G Matrix because we know that say here the first
+[0:10:52] because we know that say here the first question y one it only depends on the
+[0:10:55] question y one it only depends on the first latent skill therefore although we
+[0:10:58] first latent skill therefore although we can see this param has a subscript Alpha
+[0:11:01] can see this param has a subscript Alpha which is a binary Vector of K Dimension
+[0:11:04] which is a binary Vector of K Dimension but uh actually a lot of them will be
+[0:11:07] but uh actually a lot of them will be equal because the first uh the first
+[0:11:10] equal because the first uh the first observed variable does not depend on
+[0:11:12] observed variable does not depend on other Laten
+[0:11:14] other Laten skills so a glance at the Deep
+[0:11:16] skills so a glance at the Deep generative structure uh is provided
+[0:11:19] generative structure uh is provided here we will consider that in the bottom
+[0:11:21] here we will consider that in the bottom layer we still have um P observed
+[0:11:24] layer we still have um P observed variables they are gray but we have more
+[0:11:27] variables they are gray but we have more than one latent layer this is a directed
+[0:11:30] than one latent layer this is a directed graphical model with all the edges
+[0:11:33] graphical model with all the edges pointing in the top down Direction and
+[0:11:34] pointing in the top down Direction and only between two adjacent
+[0:11:37] only between two adjacent layers specifically we will use uh
+[0:11:41] layers specifically we will use uh several bipartite matrices graphical
+[0:11:43] several bipartite matrices graphical matrices G1 G2 ATC to summarize the
+[0:11:47] matrices G1 G2 ATC to summarize the structure bipar graph structure between
+[0:11:49] structure bipar graph structure between consecutive
+[0:11:51] consecutive layers and all the white notes here are
+[0:11:55] layers and all the white notes here are discrete so the key Insight from
+[0:11:57] discrete so the key Insight from previous is that since we allow the
+[0:12:01] previous is that since we allow the binary latent layer that is adjacent to
+[0:12:03] binary latent layer that is adjacent to the data layer to be arbitrarily
+[0:12:05] the data layer to be arbitrarily dependent on each other actually we can
+[0:12:08] dependent on each other actually we can um build a deep model so um before
+[0:12:12] um build a deep model so um before talking about the identifiability in
+[0:12:14] talking about the identifiability in this uh at this complicated level let's
+[0:12:18] this uh at this complicated level let's just look at a toy example to see uh
+[0:12:21] just look at a toy example to see uh what we need to establish
+[0:12:24] what we need to establish identifiability so let's consider that
+[0:12:26] identifiability so let's consider that there are just three observed variables
+[0:12:28] there are just three observed variables and two Laten layer while in this
+[0:12:30] and two Laten layer while in this shallower latent layer we have two
+[0:12:32] shallower latent layer we have two binary latent
+[0:12:34] binary latent skills so now we can actually view the
+[0:12:37] skills so now we can actually view the configuration of this latent Vector a uh
+[0:12:42] configuration of this latent Vector a uh it has four possible configurations and
+[0:12:44] it has four possible configurations and it denotes four latent
+[0:12:47] it denotes four latent classes so since y1 here has only one
+[0:12:51] classes so since y1 here has only one latent parent A1 then we have the
+[0:12:54] latent parent A1 then we have the following equality of the conditional
+[0:12:56] following equality of the conditional probabilities so to understand this note
+[0:12:59] probabilities so to understand this note that if y1 is just the response to the
+[0:13:02] that if y1 is just the response to the first question in the exam since this
+[0:13:04] first question in the exam since this first question only measures the first
+[0:13:06] first question only measures the first skill so you can imagine a student that
+[0:13:08] skill so you can imagine a student that only Masters the first skill and another
+[0:13:11] only Masters the first skill and another student that Masters both skills
+[0:13:13] student that Masters both skills actually they will have the same
+[0:13:15] actually they will have the same expected performance on this question
+[0:13:18] expected performance on this question because this question does not depend on
+[0:13:21] because this question does not depend on the second skill so that is how this
+[0:13:24] the second skill so that is how this bipartite graph and especially the
+[0:13:26] bipartite graph and especially the sparcity of this bipar graph induces the
+[0:13:28] sparcity of this bipar graph induces the equality constraints on this conditional
+[0:13:32] equality constraints on this conditional probability hi youi just a short
+[0:13:35] probability hi youi just a short question from the Q&amp;A it's just a
+[0:13:37] question from the Q&amp;A it's just a clarifying question uh and that is how
+[0:13:39] clarifying question uh and that is how do you decide that A1 and AK are latent
+[0:13:43] do you decide that A1 and AK are latent um so the person is wondering I think
+[0:13:45] um so the person is wondering I think specifically for this example because
+[0:13:48] specifically for this example because they seem uh they they think
+[0:13:51] they seem uh they they think that uh knowing them they they do not
+[0:13:54] that uh knowing them they they do not think they should be Laten so just a
+[0:13:56] think they should be Laten so just a clarifying question oh so here uh
+[0:14:00] clarifying question oh so here uh because we consider uh modeling the
+[0:14:03] because we consider uh modeling the response data in the bottom layer that
+[0:14:04] response data in the bottom layer that means uh in such an example actually we
+[0:14:08] means uh in such an example actually we only get to observe the joint uh
+[0:14:10] only get to observe the joint uh distribution of y1 Y2 Y3 that is uh in
+[0:14:14] distribution of y1 Y2 Y3 that is uh in this uh uh in this exam we have three
+[0:14:17] this uh uh in this exam we have three questions and what we observe each is
+[0:14:19] questions and what we observe each is each students responses to these three
+[0:14:21] each students responses to these three questions we don't observe their latent
+[0:14:23] questions we don't observe their latent skill A1 A2 but we're trying to
+[0:14:26] skill A1 A2 but we're trying to understand uh if uh the latent variable
+[0:14:30] understand uh if uh the latent variable are actually underlying the distribution
+[0:14:32] are actually underlying the distribution for y1 Y2 Y3 then what kind of latent
+[0:14:35] for y1 Y2 Y3 then what kind of latent structure can be
+[0:14:36] structure can be identifiable um that
+[0:14:39] identifiable um that clear uh yes that's clear thanks okay I
+[0:14:45] clear uh yes that's clear thanks okay I will continue so um this example
+[0:14:48] will continue so um this example actually shows that although the
+[0:14:50] actually shows that although the shallowest latting layer consist of many
+[0:14:53] shallowest latting layer consist of many uh multiple latent variables but if we
+[0:14:56] uh multiple latent variables but if we flatten them into just a unidimensional
+[0:14:58] flatten them into just a unidimensional latent variable with here four latent
+[0:15:01] latent variable with here four latent classes then we can understand a latent
+[0:15:04] classes then we can understand a latent class model uh with this equality
+[0:15:08] class model uh with this equality constraints in order to understand this
+[0:15:11] constraints in order to understand this bipartite graph model so here is the
+[0:15:15] bipartite graph model so here is the formulation of the constrainted latent
+[0:15:16] formulation of the constrainted latent class model the white node Z here
+[0:15:20] class model the white node Z here denotes the latent variable it is uni
+[0:15:23] denotes the latent variable it is uni dimensional and according to this
+[0:15:25] dimensional and according to this conditional Independence we have the
+[0:15:28] conditional Independence we have the distribution of The observed P variables
+[0:15:31] distribution of The observed P variables it takes this form it is the mixture of
+[0:15:34] it takes this form it is the mixture of K product
+[0:15:36] K product distributions and this new and Theta are
+[0:15:38] distributions and this new and Theta are parameters introduced earlier so here uh
+[0:15:42] parameters introduced earlier so here uh note that on the left hand side um we
+[0:15:45] note that on the left hand side um we have the joint distribution of only the
+[0:15:47] have the joint distribution of only the observed variables and uh we marginalize
+[0:15:50] observed variables and uh we marginalize out the latent
+[0:15:51] out the latent variable okay so uh to understand the
+[0:15:54] variable okay so uh to understand the previous model we need to consider that
+[0:15:56] previous model we need to consider that these Theta parameters they are actually
+[0:15:59] these Theta parameters they are actually not freely varying in their parameter
+[0:16:01] not freely varying in their parameter space instead they are subject to
+[0:16:04] space instead they are subject to constraints the equality constraints so
+[0:16:08] constraints the equality constraints so uh formally we introduce a constraint
+[0:16:10] uh formally we introduce a constraint Matrix S that has K columns note that
+[0:16:14] Matrix S that has K columns note that here small K means the number of uh
+[0:16:18] here small K means the number of uh categories that this latent variable Z
+[0:16:20] categories that this latent variable Z can take so it is different from the
+[0:16:22] can take so it is different from the capital K which is a number of binary
+[0:16:24] capital K which is a number of binary latent variables
+[0:16:26] latent variables before so this s Matrix simp L
+[0:16:29] before so this s Matrix simp L summarizes for each question what level
+[0:16:32] summarizes for each question what level of the latent variables should be
+[0:16:33] of the latent variables should be constrained to have the same conditional
+[0:16:36] constrained to have the same conditional probability so you can imagine this
+[0:16:38] probability so you can imagine this constraint Matrix has a very close
+[0:16:41] constraint Matrix has a very close connection to this graphical
+[0:16:48] Matrix so for those of uh the audience that are familiar with tensor
+[0:16:50] that are familiar with tensor decompositions actually this latent
+[0:16:52] decompositions actually this latent class model formulation is connected to
+[0:16:55] class model formulation is connected to a CP decomposition of tensor in fact we
+[0:16:59] a CP decomposition of tensor in fact we can write the probability Mass function
+[0:17:01] can write the probability Mass function of the observed Vector y as a CP
+[0:17:05] of the observed Vector y as a CP decomposition where the tensor core and
+[0:17:08] decomposition where the tensor core and tensor arms are determined by these
+[0:17:10] tensor arms are determined by these parameters of course this is a
+[0:17:12] parameters of course this is a probabilistic tensor meaning that all
+[0:17:14] probabilistic tensor meaning that all the entries are non- negative and they
+[0:17:16] the entries are non- negative and they sum to one so recovering parameters from
+[0:17:20] sum to one so recovering parameters from this constraint Laden class model
+[0:17:22] this constraint Laden class model actually is a problem of uh unique
+[0:17:25] actually is a problem of uh unique tensor CP decomposition subject to the
+[0:17:28] tensor CP decomposition subject to the same constraints
+[0:17:29] same constraints so it is an algebraic uh
+[0:17:33] so it is an algebraic uh problem so here maybe I will um
+[0:17:38] problem so here maybe I will um first skip some very technical uh like
+[0:17:42] first skip some very technical uh like relatively technical details uh and uh
+[0:17:44] relatively technical details uh and uh in the Q&amp;A uh in the Q&amp;A session I'm
+[0:17:46] in the Q&amp;A uh in the Q&amp;A session I'm very happy to go through this uh that uh
+[0:17:50] very happy to go through this uh that uh more technical aspects but um here is
+[0:17:53] more technical aspects but um here is our definition of identifiability of
+[0:17:55] our definition of identifiability of constrainted lat class models and our
+[0:17:58] constrainted lat class models and our results
+[0:18:00] results of uh identifiability conditions so we
+[0:18:03] of uh identifiability conditions so we will say that the constraint Laten class
+[0:18:05] will say that the constraint Laten class model is strictly identifiable if for
+[0:18:07] model is strictly identifiable if for any valid parameters Theta s and a
+[0:18:11] any valid parameters Theta s and a new the following equality holds if and
+[0:18:14] new the following equality holds if and only if the two sets of parameters are
+[0:18:17] only if the two sets of parameters are identical up to a latent class
+[0:18:19] identical up to a latent class permutation so note that here this
+[0:18:21] permutation so note that here this equality is about the uh equality of
+[0:18:24] equality is about the uh equality of probability Mass function of the Y
+[0:18:26] probability Mass function of the Y Vector under the two sets of parameters
+[0:18:30] Vector under the two sets of parameters because Y is the only thing that we
+[0:18:32] because Y is the only thing that we observe we don't observe the latent
+[0:18:33] observe we don't observe the latent variable so we can only start with uh we
+[0:18:36] variable so we can only start with uh we can only examine the joint distribution
+[0:18:39] can only examine the joint distribution of the
+[0:18:41] of the observables here uh we are able to
+[0:18:43] observables here uh we are able to examine the algebraic structure of the
+[0:18:46] examine the algebraic structure of the constraint Laten class models and obtain
+[0:18:48] constraint Laten class models and obtain the following transparent conditions for
+[0:18:52] the following transparent conditions for identifiability here if we suppose the
+[0:18:54] identifiability here if we suppose the number of latent classes is known and
+[0:18:56] number of latent classes is known and the proportion of each latent class is
+[0:18:58] the proportion of each latent class is positive
+[0:18:59] positive then if there exists a partition of the
+[0:19:02] then if there exists a partition of the P observed variables into three disjoint
+[0:19:06] P observed variables into three disjoint sets such that each submatrix of the
+[0:19:09] sets such that each submatrix of the constraint Matrix corresponding to each
+[0:19:11] constraint Matrix corresponding to each of the set has mutually distinct colum
+[0:19:15] of the set has mutually distinct colum vectors then the parameters are strictly
+[0:19:19] vectors then the parameters are strictly identifiable note that this constraint
+[0:19:22] identifiable note that this constraint Matrix S actually is a binary Matrix and
+[0:19:25] Matrix S actually is a binary Matrix and it simply describes whether or not
+[0:19:27] it simply describes whether or not different latent levels should have the
+[0:19:30] different latent levels should have the same conditional probabilities so
+[0:19:32] same conditional probabilities so actually this condition uh for
+[0:19:34] actually this condition uh for identifiability is very transparent and
+[0:19:37] identifiability is very transparent and it merely requires that the constraint
+[0:19:39] it merely requires that the constraint Matrix S vertically Stacks three copies
+[0:19:44] Matrix S vertically Stacks three copies uh vertically Stacks three matrices Each
+[0:19:46] uh vertically Stacks three matrices Each of which has distinct column
+[0:19:55] vectors so now let's understand uh how this result inspires us to establish
+[0:19:57] this result inspires us to establish identifiability for our our generative
+[0:19:59] identifiability for our our generative model with multiple latent variables
+[0:20:03] model with multiple latent variables note that previously in the toy example
+[0:20:05] note that previously in the toy example we have seen that we really examined the
+[0:20:08] we have seen that we really examined the bip parted graph in order to get the
+[0:20:11] bip parted graph in order to get the equality constraint in fact there is a
+[0:20:14] equality constraint in fact there is a Ono one correspondence between the bip
+[0:20:16] Ono one correspondence between the bip parted graph Matrix G and the constraint
+[0:20:19] parted graph Matrix G and the constraint Matrix S so here in this example we see
+[0:20:22] Matrix S so here in this example we see the G Matrix has the size 3x two and the
+[0:20:26] the G Matrix has the size 3x two and the S Matrix will have size three 3 by four
+[0:20:29] S Matrix will have size three 3 by four where the four columns are indexed by
+[0:20:32] where the four columns are indexed by the configurations that this a layer
+[0:20:34] the configurations that this a layer takes and uh uh each entry of this s
+[0:20:38] takes and uh uh each entry of this s Matrix can be
+[0:20:41] Matrix can be determined by uh each row of this G
+[0:20:45] determined by uh each row of this G Matrix so uh particularly what we have
+[0:20:49] Matrix so uh particularly what we have is that if the G Matrix contains an
+[0:20:52] is that if the G Matrix contains an identity Matrix ik then the constraint
+[0:20:55] identity Matrix ik then the constraint Matrix S will contain mutually distinct
+[0:20:58] Matrix S will contain mutually distinct column back vors so if we combine this
+[0:21:00] column back vors so if we combine this observation from the previous theorem on
+[0:21:03] observation from the previous theorem on strict identifiability then we get a
+[0:21:05] strict identifiability then we get a very uh intuitive condition on the G
+[0:21:07] very uh intuitive condition on the G Matrix that is as long as the G Matrix
+[0:21:11] Matrix that is as long as the G Matrix contains three copies of identity
+[0:21:14] contains three copies of identity matrices it vertically Stacks three
+[0:21:17] matrices it vertically Stacks three identity matrices as submatrix then the
+[0:21:21] identity matrices as submatrix then the corresponding uh bottom two layers
+[0:21:25] corresponding uh bottom two layers should be
+[0:21:26] should be identifiable okay and uh this this is
+[0:21:29] identifiable okay and uh this this is just because we have a oneto one
+[0:21:30] just because we have a oneto one correspondence between G Matrix and S
+[0:21:32] correspondence between G Matrix and S Matrix and we can read off one Matrix
+[0:21:35] Matrix and we can read off one Matrix from the other one okay so actually this
+[0:21:38] from the other one okay so actually this is not hard to uh get if we uh read uh
+[0:21:44] is not hard to uh get if we uh read uh if we uh look at this uh closing okay so
+[0:21:49] if we uh look at this uh closing okay so here is the um we call it basian pyramid
+[0:21:52] here is the um we call it basian pyramid model for modeling multiv categorical
+[0:21:54] model for modeling multiv categorical data the bottom layer are P observed
+[0:21:57] data the bottom layer are P observed categorical VAR variables where each
+[0:21:59] categorical VAR variables where each variable YJ can potentially take DJ
+[0:22:02] variable YJ can potentially take DJ categories we only require DJ is uh at
+[0:22:06] categories we only require DJ is uh at least two is a positive integer that is
+[0:22:08] least two is a positive integer that is at least two and uh um here this is a
+[0:22:13] at least two and uh um here this is a directed graphical model and we require
+[0:22:16] directed graphical model and we require the distribution of each variable
+[0:22:18] the distribution of each variable depends only on its parents and the
+[0:22:20] depends only on its parents and the parent information is summarized in this
+[0:22:23] parent information is summarized in this bipartite graph matrices G1 G2 so this
+[0:22:26] bipartite graph matrices G1 G2 so this G1 Matrix has rows corresponding to the
+[0:22:30] G1 Matrix has rows corresponding to the P variables in the bottom and columns
+[0:22:33] P variables in the bottom and columns corresponding to the K1 Laten variables
+[0:22:36] corresponding to the K1 Laten variables in this layer and similarly G2 has this
+[0:22:40] in this layer and similarly G2 has this rows corresponding this shallows Laten
+[0:22:43] rows corresponding this shallows Laten layer and columns corresponding to this
+[0:22:46] layer and columns corresponding to this second shallowest Len layer and each
+[0:22:48] second shallowest Len layer and each entry here is just a binary indicator of
+[0:22:51] entry here is just a binary indicator of the parent child relationship whether it
+[0:22:53] the parent child relationship whether it is uh there or not you um sorry to
+[0:22:57] is uh there or not you um sorry to interrupt there's two two more questions
+[0:22:59] interrupt there's two two more questions in the Q&amp;A so I'm just uh is that okay
+[0:23:03] in the Q&amp;A so I'm just uh is that okay yeah sure yes all right the first
+[0:23:05] yeah sure yes all right the first question is uh could you have partial
+[0:23:08] question is uh could you have partial identifiability in this
+[0:23:10] identifiability in this context uh yeah that's a um good
+[0:23:13] context uh yeah that's a um good question so I think
+[0:23:15] question so I think um we have a slightly weaker notion
+[0:23:19] um we have a slightly weaker notion called uh generic identifiability uh
+[0:23:21] called uh generic identifiability uh that I will talk about later so uh here
+[0:23:24] that I will talk about later so uh here strict identifiability means um when the
+[0:23:28] strict identifiability means um when the parameters vary everywhere in the
+[0:23:30] parameters vary everywhere in the parameter space there will be
+[0:23:32] parameter space there will be identifiable but generic identifiability
+[0:23:35] identifiable but generic identifiability means that when parameters vary almost
+[0:23:38] means that when parameters vary almost everywhere in the parameter space
+[0:23:39] everywhere in the parameter space potentially excluding a lake measure
+[0:23:41] potentially excluding a lake measure zero set we can have identifiability
+[0:23:44] zero set we can have identifiability yeah but for uh other possible
+[0:23:46] yeah but for uh other possible relaxation of the identifiability notion
+[0:23:48] relaxation of the identifiability notion I think it would also be interesting to
+[0:23:50] I think it would also be interesting to consider yeah but sorry
+[0:23:53] consider yeah but sorry uh all right another question um could
+[0:23:56] uh all right another question um could you explain what the parameters are in
+[0:23:58] you explain what the parameters are in the definition of
+[0:24:01] the definition of identifiability sure um so here the
+[0:24:04] identifiability sure um so here the Theta uh just collects all the
+[0:24:07] Theta uh just collects all the conditional probability of y j given the
+[0:24:11] conditional probability of y j given the latent so here um recall that in this
+[0:24:15] latent so here um recall that in this latent class model the Theta J C H just
+[0:24:20] latent class model the Theta J C H just means conditioning on the latent
+[0:24:22] means conditioning on the latent variable is equal to H then what is the
+[0:24:25] variable is equal to H then what is the probability that YJ takes the category
+[0:24:28] probability that YJ takes the category of CJ okay so this is conditional
+[0:24:30] of CJ okay so this is conditional probability of Y given Z and new H are
+[0:24:33] probability of Y given Z and new H are just the uh proportion parameters for
+[0:24:36] just the uh proportion parameters for the latent variable Z so uh this is
+[0:24:40] the latent variable Z so uh this is denoted as Theta this is denoted as new
+[0:24:42] denoted as Theta this is denoted as new and S just can uh collects these
+[0:24:45] and S just can uh collects these constraint Matrix entries so in this
+[0:24:48] constraint Matrix entries so in this identifiability definition we uh require
+[0:24:52] identifiability definition we uh require uh our conditions are only imposed on
+[0:24:54] uh our conditions are only imposed on this discrete structure s but our uh
+[0:24:57] this discrete structure s but our uh conclusions actually hold for all these
+[0:25:00] conclusions actually hold for all these components in the model the Theta the
+[0:25:02] components in the model the Theta the new and the
+[0:25:09] S okay thank you okay so uh following the convention
+[0:25:13] you okay so uh following the convention in probabilistic graphical model we can
+[0:25:15] in probabilistic graphical model we can write out the conditional distribution
+[0:25:17] write out the conditional distribution of each layer given its parent layer as
+[0:25:21] of each layer given its parent layer as the
+[0:25:22] the factorization in this form because we
+[0:25:24] factorization in this form because we have conditional
+[0:25:25] have conditional Independence and in the end if we
+[0:25:28] Independence and in the end if we multiply all these conditional
+[0:25:30] multiply all these conditional distributions we get the joint of all
+[0:25:32] distributions we get the joint of all the variables but since only the bottom
+[0:25:35] the variables but since only the bottom layer is observed we need to marginalize
+[0:25:37] layer is observed we need to marginalize all the latent
+[0:25:39] all the latent layers so you can imagine the resulting
+[0:25:41] layers so you can imagine the resulting distribution for The observed P random
+[0:25:43] distribution for The observed P random variables at the bottom could be quite
+[0:25:46] variables at the bottom could be quite rich and
+[0:25:47] rich and flexible and uh um if we can have
+[0:25:51] flexible and uh um if we can have identifiability for such an expressive
+[0:25:53] identifiability for such an expressive distribution family then uh we can use
+[0:25:56] distribution family then uh we can use it to model a complicated with data so
+[0:26:00] it to model a complicated with data so this result summarizes our
+[0:26:02] this result summarizes our identifiability conditions for beian
+[0:26:05] identifiability conditions for beian Pyramid so in fact we have very
+[0:26:09] Pyramid so in fact we have very transparent conditions that only depend
+[0:26:11] transparent conditions that only depend on the structures of this bipartite
+[0:26:13] on the structures of this bipartite graphical matrices G1 through GD so
+[0:26:16] graphical matrices G1 through GD so Suppose there are D layers and uh this
+[0:26:19] Suppose there are D layers and uh this GM it just describes the uh parent child
+[0:26:22] GM it just describes the uh parent child relationship between the consecutive
+[0:26:25] relationship between the consecutive layers and each of it is a binary Matrix
+[0:26:28] layers and each of it is a binary Matrix we require that it vertically Stacks
+[0:26:30] we require that it vertically Stacks three identity submatrices and there
+[0:26:33] three identity submatrices and there could be a remaining submatrix that
+[0:26:35] could be a remaining submatrix that takes an arbitrary
+[0:26:37] takes an arbitrary form as long as this condition is
+[0:26:40] form as long as this condition is satisfied then um the following
+[0:26:43] satisfied then um the following properties are identifiable the
+[0:26:45] properties are identifiable the probability distribution of the Z and
+[0:26:48] probability distribution of the Z and the conditional distribution of the
+[0:26:51] the conditional distribution of the other variable given their parents and
+[0:26:53] other variable given their parents and also the bipartite graph structure
+[0:26:56] also the bipartite graph structure between any two consecutive layers
+[0:26:58] between any two consecutive layers so they are identifiable um subject to
+[0:27:02] so they are identifiable um subject to um up to the latent variable permutation
+[0:27:05] um up to the latent variable permutation within each layer because that is the
+[0:27:07] within each layer because that is the inevitable and trivial uh ambiguity
+[0:27:10] inevitable and trivial uh ambiguity there so here we assume that the number
+[0:27:13] there so here we assume that the number of latent variables in each layer are
+[0:27:16] of latent variables in each layer are known okay so this condition actually
+[0:27:19] known okay so this condition actually can be translated into the graphical
+[0:27:21] can be translated into the graphical language and has an interesting
+[0:27:23] language and has an interesting implication on how this deep generative
+[0:27:26] implication on how this deep generative graph should grow because we require
+[0:27:29] graph should grow because we require that here uh GM contains at least three
+[0:27:33] that here uh GM contains at least three identity it really means that each
+[0:27:36] identity it really means that each latent variable regardless of which
+[0:27:38] latent variable regardless of which layer it is in it should have three
+[0:27:41] layer it is in it should have three exclusive children exclusive means that
+[0:27:44] exclusive children exclusive means that uh this variable only has one parent
+[0:27:46] uh this variable only has one parent then it is an exclusive child of this
+[0:27:49] then it is an exclusive child of this latent variable note that we do not
+[0:27:52] latent variable note that we do not constraint the uh graph here to be a
+[0:27:54] constraint the uh graph here to be a tree because we allow a structure like
+[0:27:57] tree because we allow a structure like this so here Y 2 has uh two pairs it is
+[0:28:00] this so here Y 2 has uh two pairs it is allowed and uh this structure can be
+[0:28:03] allowed and uh this structure can be absorbed into the GM star part okay as
+[0:28:05] absorbed into the GM star part okay as long as there exist three exclusive
+[0:28:08] long as there exist three exclusive children then we can have
+[0:28:10] children then we can have identifiability and note that this
+[0:28:12] identifiability and note that this condition also implies a natural
+[0:28:15] condition also implies a natural constraint on the number of latent
+[0:28:17] constraint on the number of latent variables in each layer because it
+[0:28:20] variables in each layer because it naturally uh constraints that K1 can be
+[0:28:23] naturally uh constraints that K1 can be at most p over three K2 can be at most
+[0:28:26] at most p over three K2 can be at most K1 over three uh
+[0:28:28] K1 over three uh so we have a smaller and smaller latent
+[0:28:31] so we have a smaller and smaller latent layers when we go deeper actually this
+[0:28:33] layers when we go deeper actually this is uh consistent with some empirical uh
+[0:28:36] is uh consistent with some empirical uh wisdom that uh when we build um
+[0:28:40] wisdom that uh when we build um representation when we try to extract
+[0:28:42] representation when we try to extract latent representations under uh complex
+[0:28:45] latent representations under uh complex data then actually um we should ex we
+[0:28:48] data then actually um we should ex we should try to extract more and more
+[0:28:50] should try to extract more and more abstract and general features from data
+[0:28:52] abstract and general features from data when we move away from the data layer
+[0:28:55] when we move away from the data layer and in Psychology actually it's also uh
+[0:28:57] and in Psychology actually it's also uh in interesting to uh uncover a hierarchy
+[0:29:01] in interesting to uh uncover a hierarchy of Laten concepts for example the bottom
+[0:29:04] of Laten concepts for example the bottom layer are just a large number of
+[0:29:07] layer are just a large number of question responses in the exam and the
+[0:29:09] question responses in the exam and the shallow latting layer could be very fine
+[0:29:12] shallow latting layer could be very fine green skills and the uh deeper Laten
+[0:29:14] green skills and the uh deeper Laten layers could be more General uh skills
+[0:29:17] layers could be more General uh skills such as number geometry and even deeper
+[0:29:20] such as number geometry and even deeper we can have even more General uh as uh
+[0:29:24] we can have even more General uh as uh Concepts such as uh math physics Etc so
+[0:29:27] Concepts such as uh math physics Etc so it is consistent with some um
+[0:29:30] it is consistent with some um conventional or empirical observation
+[0:29:33] conventional or empirical observation that we want the latent representations
+[0:29:35] that we want the latent representations to be uh having a fewer number uh when
+[0:29:39] to be uh having a fewer number uh when we go deeper and also here the sparcity
+[0:29:42] we go deeper and also here the sparcity condition between latent layers can help
+[0:29:45] condition between latent layers can help us pinpoint the meaning of each latent
+[0:29:48] us pinpoint the meaning of each latent variable because we can try to
+[0:29:51] variable because we can try to understand the interpretation of each
+[0:29:52] understand the interpretation of each latent variable by looking at uh its
+[0:29:56] latent variable by looking at uh its children variables and the the
+[0:29:58] children variables and the the connection strength uh in each
+[0:30:01] connection strength uh in each Edge uh here are some discussions
+[0:30:04] Edge uh here are some discussions between uh on the connections between
+[0:30:07] between uh on the connections between our study and some existing work so in
+[0:30:10] our study and some existing work so in psychometrics there's a family of
+[0:30:13] psychometrics there's a family of so-called cognitive diagnostic models
+[0:30:15] so-called cognitive diagnostic models proposed for diagnosing the absence or
+[0:30:18] proposed for diagnosing the absence or presence of fine gr latent skills they
+[0:30:21] presence of fine gr latent skills they are usually confirmatory in nature with
+[0:30:23] are usually confirmatory in nature with domain knowledge as input that means uh
+[0:30:26] domain knowledge as input that means uh all these uh
+[0:30:29] all these uh uh so actually they have only one Q
+[0:30:31] uh so actually they have only one Q Matrix that describes how the questions
+[0:30:33] Matrix that describes how the questions depend on the skills and that is often
+[0:30:35] depend on the skills and that is often given by educational experts who
+[0:30:36] given by educational experts who designed the exam but here we assume
+[0:30:39] designed the exam but here we assume that this Matrix itself is unknown and
+[0:30:41] that this Matrix itself is unknown and we try to identify it from data also
+[0:30:45] we try to identify it from data also deep structures have not been considered
+[0:30:46] deep structures have not been considered there in machine learning actually there
+[0:30:49] there in machine learning actually there are related models that have a discrete
+[0:30:51] are related models that have a discrete Laten variables including deep belief
+[0:30:53] Laten variables including deep belief networks deep Bossman machines and the
+[0:30:56] networks deep Bossman machines and the vector quanti varation Auto encoders
+[0:30:59] vector quanti varation Auto encoders they are very popular and useful in
+[0:31:01] they are very popular and useful in various prediction tasks but the
+[0:31:03] various prediction tasks but the identifiability issue is typically
+[0:31:06] identifiability issue is typically ignored so um in both these fields
+[0:31:09] ignored so um in both these fields modeling uh arbitrarily flexible
+[0:31:11] modeling uh arbitrarily flexible responses with deep layers have not been
+[0:31:14] responses with deep layers have not been formally defined and whether these deep
+[0:31:16] formally defined and whether these deep models can be identifiable is unknown
+[0:31:19] models can be identifiable is unknown previously so thus far actually I have
+[0:31:21] previously so thus far actually I have only talked about categorical responses
+[0:31:24] only talked about categorical responses for the Y layer But Here by uh
+[0:31:28] for the Y layer But Here by uh arbitrary flexible
+[0:31:30] arbitrary flexible responses actually I mean we can extend
+[0:31:33] responses actually I mean we can extend our identifiability result to the cases
+[0:31:36] our identifiability result to the cases where the Y layer actually takes a much
+[0:31:39] where the Y layer actually takes a much more flexible types of
+[0:31:42] more flexible types of distributions so in this case we extend
+[0:31:46] distributions so in this case we extend our model where each YJ has a sample
+[0:31:49] our model where each YJ has a sample space curly YJ and we require it to be a
+[0:31:52] space curly YJ and we require it to be a complete separable metrix space it has
+[0:31:54] complete separable metrix space it has its Sigma algebra and measure so for
+[0:31:57] its Sigma algebra and measure so for example if YJ is the collection of all
+[0:32:00] example if YJ is the collection of all the non- negative
+[0:32:01] the non- negative integers then we can use it to model
+[0:32:04] integers then we can use it to model count responses and if YJ is uh the
+[0:32:07] count responses and if YJ is uh the entire real line then we can use it to
+[0:32:10] entire real line then we can use it to model uh continuous responses what we
+[0:32:14] model uh continuous responses what we require as before is that first the
+[0:32:17] require as before is that first the latent variables are discrete and they
+[0:32:19] latent variables are discrete and they can be arbitrarily connected to each
+[0:32:20] can be arbitrarily connected to each other and second the graphical
+[0:32:23] other and second the graphical constraint the conditional Independence
+[0:32:25] constraint the conditional Independence constraint encoded in the G matrices
+[0:32:27] constraint encoded in the G matrices they are respected so we have this
+[0:32:29] they are respected so we have this conditional distribution that only
+[0:32:31] conditional distribution that only depends on the parent variables of each
+[0:32:33] depends on the parent variables of each YJ but not all the
+[0:32:36] YJ but not all the variables so um here you can see um the
+[0:32:41] variables so um here you can see um the when YJ curly YJ takes different spaces
+[0:32:45] when YJ curly YJ takes different spaces then we can use it to model different
+[0:32:47] then we can use it to model different types of distributions for example
+[0:32:49] types of distributions for example exponential family distribution can be
+[0:32:52] exponential family distribution can be used here we allow uh flexible link
+[0:32:55] used here we allow uh flexible link functions and also Flex ible parent
+[0:32:58] functions and also Flex ible parent child interactions this means uh in
+[0:33:01] child interactions this means uh in order to specify the conditional
+[0:33:02] order to specify the conditional distribution of each variable given its
+[0:33:04] distribution of each variable given its parents we actually do not constraint it
+[0:33:07] parents we actually do not constraint it must take a certain parametric form and
+[0:33:09] must take a certain parametric form and the key and crucial assumption there is
+[0:33:12] the key and crucial assumption there is that the graphical conditional
+[0:33:13] that the graphical conditional Independence is respected so possible
+[0:33:16] Independence is respected so possible parent child interactions include the
+[0:33:18] parent child interactions include the main effect uh basically means the
+[0:33:21] main effect uh basically means the linear combinations of the parent latent
+[0:33:23] linear combinations of the parent latent variables will enter the conditional
+[0:33:26] variables will enter the conditional distribution actually
+[0:33:27] distribution actually uh many examples fall in this category
+[0:33:30] uh many examples fall in this category the restricted Bossman machines noisy or
+[0:33:32] the restricted Bossman machines noisy or basion networks uh can be reformulated
+[0:33:35] basion networks uh can be reformulated in this form but we can also uh adopt a
+[0:33:39] in this form but we can also uh adopt a more parsimonious model for example
+[0:33:41] more parsimonious model for example constraining that the conditional
+[0:33:43] constraining that the conditional probability of each variable given its
+[0:33:45] probability of each variable given its parents to only take two possible levels
+[0:33:48] parents to only take two possible levels due to some Boolean um interaction or we
+[0:33:52] due to some Boolean um interaction or we can consider more complicated models
+[0:33:54] can consider more complicated models that include not only these M effect
+[0:33:56] that include not only these M effect effects but also potential interaction
+[0:33:58] effects but also potential interaction effects of these parent variables but as
+[0:34:01] effects of these parent variables but as long as the G matrices still play a role
+[0:34:04] long as the G matrices still play a role and conditional Independence is
+[0:34:06] and conditional Independence is respected then our uh identifiability
+[0:34:10] respected then our uh identifiability result still holds so we still uh have
+[0:34:13] result still holds so we still uh have that when the graph takes the form uh in
+[0:34:16] that when the graph takes the form uh in the previous slide then uh we can
+[0:34:18] the previous slide then uh we can identify the parameters and the graph
+[0:34:19] identify the parameters and the graph structures
+[0:34:26] themselves so uh here uh we summarize the result uh for
+[0:34:28] the result uh for identifiability in this General response
+[0:34:30] identifiability in this General response case YJ belongs to uh General sample
+[0:34:35] case YJ belongs to uh General sample space curly YJ and uh uh we also uh in
+[0:34:39] space curly YJ and uh uh we also uh in this result compared to the previous
+[0:34:41] this result compared to the previous slide you may notice that we relax the
+[0:34:44] slide you may notice that we relax the requirement of the number of exclusive
+[0:34:46] requirement of the number of exclusive children from three to two due to some
+[0:34:49] children from three to two due to some blessing of dependence phenomenon so
+[0:34:52] blessing of dependence phenomenon so without going to details I just uh would
+[0:34:55] without going to details I just uh would like to comment that actually this
+[0:34:56] like to comment that actually this condition look looks very similar to the
+[0:35:00] condition look looks very similar to the categorical response case although here
+[0:35:02] categorical response case although here we consider much more General sample
+[0:35:05] we consider much more General sample spaces and the high level intuition is
+[0:35:08] spaces and the high level intuition is that uh we
+[0:35:11] that uh we actually uh we actually do a bing of the
+[0:35:14] actually uh we actually do a bing of the sample space of an General observed
+[0:35:16] sample space of an General observed variable and uh Define surrogate Cate
+[0:35:20] variable and uh Define surrogate Cate categorical variables okay so that's the
+[0:35:22] categorical variables okay so that's the high level idea but uh before that I
+[0:35:25] high level idea but uh before that I also want to comment that uh
+[0:35:28] also want to comment that uh corresponding uh partly related to the
+[0:35:30] corresponding uh partly related to the previous question on partial
+[0:35:31] previous question on partial identifiability here we establish
+[0:35:33] identifiability here we establish generic
+[0:35:35] generic identifiability for a specific subfam of
+[0:35:38] identifiability for a specific subfam of model that is the main effect based
+[0:35:40] model that is the main effect based model the main effect model has this
+[0:35:44] model the main effect model has this generalized linear model form where you
+[0:35:45] generalized linear model form where you can think of these latent parents
+[0:35:47] can think of these latent parents serving as uh covariates or predictors
+[0:35:50] serving as uh covariates or predictors in a glm okay but they are latent now so
+[0:35:53] in a glm okay but they are latent now so as long as we have this uh main effect
+[0:35:55] as long as we have this uh main effect structure then we no longer require the
+[0:35:58] structure then we no longer require the G Matrix to contain those two identity
+[0:36:02] G Matrix to contain those two identity actually uh we relax the condition to
+[0:36:04] actually uh we relax the condition to that um it only needs to contain two uh
+[0:36:09] that um it only needs to contain two uh K byk submatrices where the diagonals
+[0:36:12] K byk submatrices where the diagonals are equal to one but any of the off
+[0:36:14] are equal to one but any of the off diagonal entry is free to be either one
+[0:36:16] diagonal entry is free to be either one or zero so this largely relaxes the
+[0:36:19] or zero so this largely relaxes the previous requirement and can allow
+[0:36:21] previous requirement and can allow actually a dense bip partic graph
+[0:36:22] actually a dense bip partic graph between layers for this main effect
+[0:36:25] between layers for this main effect based
+[0:36:26] based model okay
+[0:36:28] model okay so uh also this condition can be
+[0:36:30] so uh also this condition can be translated to graphical language in that
+[0:36:33] translated to graphical language in that uh we can find two matches from The
+[0:36:35] uh we can find two matches from The observed uh from the latent variable to
+[0:36:38] observed uh from the latent variable to The observed variable but they are not
+[0:36:40] The observed variable but they are not perfect matches
+[0:36:43] perfect matches uh compared to the previous result in
+[0:36:46] uh compared to the previous result in graph Theory
+[0:36:48] graph Theory terminology okay so um here a little bit
+[0:36:51] terminology okay so um here a little bit more detail of how we go from
+[0:36:53] more detail of how we go from categorical to nonparametric
+[0:36:55] categorical to nonparametric distribution so uh when we consider that
+[0:36:58] distribution so uh when we consider that the YJ actually has a non-parametric
+[0:37:01] the YJ actually has a non-parametric probability
+[0:37:02] probability measure but we still have discrete
+[0:37:05] measure but we still have discrete latent variables and have conditional
+[0:37:07] latent variables and have conditional Independence then we can actually
+[0:37:09] Independence then we can actually factorize this distribution joint
+[0:37:12] factorize this distribution joint distribution of The observed variables
+[0:37:14] distribution of The observed variables uh still in this way this is a finite
+[0:37:17] uh still in this way this is a finite mixture of non-parametric measure
+[0:37:19] mixture of non-parametric measure products and we will construct the
+[0:37:21] products and we will construct the beaning of each variable YJ using some
+[0:37:24] beaning of each variable YJ using some cut points so if the sample space YJ is
+[0:37:28] cut points so if the sample space YJ is a real line then it is partitioned into
+[0:37:30] a real line then it is partitioned into several consecutive intervals then we
+[0:37:33] several consecutive intervals then we will Define a surrogate categorical
+[0:37:35] will Define a surrogate categorical response variable by uh just collecting
+[0:37:38] response variable by uh just collecting the binary indicators of whether the
+[0:37:40] the binary indicators of whether the original YJ belongs to each of these
+[0:37:42] original YJ belongs to each of these interval then we can use the bip parted
+[0:37:45] interval then we can use the bip parted graph condition to prove identifiability
+[0:37:47] graph condition to prove identifiability about the conditional distribution of
+[0:37:49] about the conditional distribution of this arrogate given the latent but since
+[0:37:52] this arrogate given the latent but since these cut points are kind of arbitrary
+[0:37:55] these cut points are kind of arbitrary as long as certain rank conditions are
+[0:37:57] as long as certain rank conditions are satisfied so we can uh go back to
+[0:38:00] satisfied so we can uh go back to establish the identifiability of this
+[0:38:04] establish the identifiability of this conditional distribution for the
+[0:38:06] conditional distribution for the nonparametric probability measure so
+[0:38:08] nonparametric probability measure so that's how we uh actually are able to
+[0:38:11] that's how we uh actually are able to translate our identifiability conditions
+[0:38:13] translate our identifiability conditions in the categorical case uh and uh still
+[0:38:16] in the categorical case uh and uh still have similar conditions in the general
+[0:38:18] have similar conditions in the general response
+[0:38:20] response case so I think I also like to give few
+[0:38:24] case so I think I also like to give few remarks on the identifiability results
+[0:38:26] remarks on the identifiability results and the
+[0:38:28] and the proof so uh since I mentioned that the
+[0:38:31] proof so uh since I mentioned that the structure uh in our model with this
+[0:38:34] structure uh in our model with this discrete latent variables actually has a
+[0:38:37] discrete latent variables actually has a a tensor CP decomposition form and
+[0:38:39] a tensor CP decomposition form and there's a classical algebraic result
+[0:38:42] there's a classical algebraic result established by crco in
+[0:38:44] established by crco in 1970s it says that a three-way tensor
+[0:38:47] 1970s it says that a three-way tensor decomposition uh actually can be unique
+[0:38:50] decomposition uh actually can be unique under quite mild conditions on the rank
+[0:38:52] under quite mild conditions on the rank so this result offers a way to prove
+[0:38:55] so this result offers a way to prove uniqueness of tenser comp positions by
+[0:38:58] uniqueness of tenser comp positions by checking certain Global rank conditions
+[0:39:01] checking certain Global rank conditions and uh uh in the first result that I
+[0:39:03] and uh uh in the first result that I talked about today with the three
+[0:39:05] talked about today with the three identity matrices uh in the G uh
+[0:39:09] identity matrices uh in the G uh actually we used this result in the
+[0:39:11] actually we used this result in the classical uh crusco paper but we also
+[0:39:15] classical uh crusco paper but we also propose a more fine gr algebraic
+[0:39:17] propose a more fine gr algebraic technique to study identifiability of
+[0:39:20] technique to study identifiability of individual parameters rather than
+[0:39:21] individual parameters rather than checking Global rank conditions so then
+[0:39:25] checking Global rank conditions so then uh this technique allows us to actually
+[0:39:27] uh this technique allows us to actually establish identifiability under uh
+[0:39:30] establish identifiability under uh complex graphical constraints and
+[0:39:32] complex graphical constraints and sometimes obtain weaker conditions
+[0:39:34] sometimes obtain weaker conditions compared to crusco theorem but I would
+[0:39:36] compared to crusco theorem but I would say the high level uh the high level
+[0:39:39] say the high level uh the high level idea actually is uh the spirit is
+[0:39:42] idea actually is uh the spirit is similar to crusco theorem by looking at
+[0:39:44] similar to crusco theorem by looking at these tensor decompositions and how
+[0:39:47] these tensor decompositions and how graphical model conditional Independence
+[0:39:50] graphical model conditional Independence induce a lot of constraints
+[0:39:52] induce a lot of constraints there so uh using this technique we can
+[0:39:55] there so uh using this technique we can deal with nonan nonan nonlinearity and
+[0:40:00] deal with nonan nonan nonlinearity and also graphs well beyond trees by
+[0:40:03] also graphs well beyond trees by examining polinomial equations given by
+[0:40:05] examining polinomial equations given by higher order
+[0:40:07] higher order tensors note that say we have P observed
+[0:40:10] tensors note that say we have P observed variables in the bottom layer and the uh
+[0:40:13] variables in the bottom layer and the uh The Joint distribution even if each of
+[0:40:15] The Joint distribution even if each of the observed variable is just binary but
+[0:40:17] the observed variable is just binary but what we have is really a pway uh
+[0:40:20] what we have is really a pway uh contingency table or a pway
+[0:40:23] contingency table or a pway tensor so in order to study
+[0:40:25] tensor so in order to study identifiability we need to understand um
+[0:40:28] identifiability we need to understand um these polinomial equations given by
+[0:40:31] these polinomial equations given by these higher order tensors rather than
+[0:40:33] these higher order tensors rather than the cence matrices uh which arises uh
+[0:40:37] the cence matrices uh which arises uh when in a lot of study in linear
+[0:40:38] when in a lot of study in linear structural equation models with uh
+[0:40:41] structural equation models with uh gaussian latent variables and observed
+[0:40:43] gaussian latent variables and observed variables okay and uh uh the arbitrary
+[0:40:46] variables okay and uh uh the arbitrary dependence among the latent variable
+[0:40:48] dependence among the latent variable allows us to go deep because uh here the
+[0:40:51] allows us to go deep because uh here the intuition also is I think is simple uh
+[0:40:54] intuition also is I think is simple uh and intuitive because uh the the way we
+[0:40:57] and intuitive because uh the the way we can go deeper is first is by first
+[0:41:00] can go deeper is first is by first focusing on the bottom two layer and
+[0:41:02] focusing on the bottom two layer and marginalize out all the deeper Laten
+[0:41:04] marginalize out all the deeper Laten layer then you can imagine the
+[0:41:07] layer then you can imagine the distribution of this shallow SL layer
+[0:41:09] distribution of this shallow SL layer could be quite complicated but since our
+[0:41:12] could be quite complicated but since our identifi fty condition for the bottom
+[0:41:14] identifi fty condition for the bottom two layer is established for arbitrary
+[0:41:17] two layer is established for arbitrary dependence among the latent so we can
+[0:41:20] dependence among the latent so we can actually uh only require conditions on
+[0:41:23] actually uh only require conditions on the G1 Matrix to have identifiability
+[0:41:27] the G1 Matrix to have identifiability and the identifiable quantities in this
+[0:41:29] and the identifiable quantities in this stage includes the joint distribution of
+[0:41:32] stage includes the joint distribution of this shallow slatting layer and once
+[0:41:35] this shallow slatting layer and once this joint distribution of the
+[0:41:36] this joint distribution of the shallowest Len layer is identified
+[0:41:39] shallowest Len layer is identified actually this brings us back to the case
+[0:41:41] actually this brings us back to the case that as if this layer is observed so
+[0:41:44] that as if this layer is observed so then we can actually proceed in a
+[0:41:46] then we can actually proceed in a layer-wise manner and this is uh
+[0:41:49] layer-wise manner and this is uh actually not possible if we have say
+[0:41:51] actually not possible if we have say continuous latent variables or uh if we
+[0:41:53] continuous latent variables or uh if we are not able to deal with arbitrary
+[0:41:55] are not able to deal with arbitrary dependence
+[0:42:03] okay yeah so uh the last Point here I want to make is uh we also have
+[0:42:05] want to make is uh we also have extension from categorical to very
+[0:42:07] extension from categorical to very flexible types of responses um so that
+[0:42:11] flexible types of responses um so that provides opportunities to model data
+[0:42:13] provides opportunities to model data that are uh also can take mixed type for
+[0:42:16] that are uh also can take mixed type for example some of the observed variables
+[0:42:18] example some of the observed variables are continuous and some of them are uh
+[0:42:20] are continuous and some of them are uh discrete that's also possible but the
+[0:42:22] discrete that's also possible but the key is that we have discrete latent
+[0:42:24] key is that we have discrete latent variables and they can be either
+[0:42:27] variables and they can be either uh they are not necessarily need to be
+[0:42:35] binary um I want to very briefly uh go through the
+[0:42:37] through the estimation so uh actually one thing we
+[0:42:40] estimation so uh actually one thing we have is uh once the model is
+[0:42:42] have is uh once the model is identifiable then the maximum likelihood
+[0:42:45] identifiable then the maximum likelihood estimator will be consistent and the ban
+[0:42:48] estimator will be consistent and the ban estimator will also have posterior
+[0:42:50] estimator will also have posterior consistency uh when the priors have full
+[0:42:52] consistency uh when the priors have full support around the truth so that's a
+[0:42:54] support around the truth so that's a pretty natural uh coroller
+[0:42:57] pretty natural uh coroller okay so uh as an illustration we focus
+[0:43:00] okay so uh as an illustration we focus on the two Laten layer model with uh one
+[0:43:04] on the two Laten layer model with uh one binary latent layer and one discrete uh
+[0:43:06] binary latent layer and one discrete uh deeper latent variable so we have a
+[0:43:09] deeper latent variable so we have a latent class model for a layer given Z
+[0:43:12] latent class model for a layer given Z and we have a generalized linear model
+[0:43:14] and we have a generalized linear model for y given a so in this case since we
+[0:43:17] for y given a so in this case since we have the main effects in the glm we can
+[0:43:19] have the main effects in the glm we can apply generic identifiability
+[0:43:23] apply generic identifiability conditions um actually for uh different
+[0:43:26] conditions um actually for uh different types of responses we adopted different
+[0:43:29] types of responses we adopted different estimation method we have tried
+[0:43:30] estimation method we have tried different estimation methods we have
+[0:43:33] different estimation methods we have tried bent shrinkage estimation for the
+[0:43:35] tried bent shrinkage estimation for the categorical response case where we enose
+[0:43:38] categorical response case where we enose non-parametric basion priors to estimate
+[0:43:40] non-parametric basion priors to estimate the latent structure and use data
+[0:43:42] the latent structure and use data augmentation to develop a g sampler and
+[0:43:45] augmentation to develop a g sampler and for frequentist shrinkage estimation uh
+[0:43:48] for frequentist shrinkage estimation uh for General response uh we have used
+[0:43:52] for General response uh we have used lasso and group lasso penalties in order
+[0:43:54] lasso and group lasso penalties in order to estimate the bip partic graph
+[0:43:56] to estimate the bip partic graph structure structure because actually in
+[0:43:58] structure structure because actually in the previous main effect model you can
+[0:44:00] the previous main effect model you can see the graph really plays a role of
+[0:44:03] see the graph really plays a role of specifying what coefficients should be
+[0:44:05] specifying what coefficients should be zero or not okay so we can use some
+[0:44:07] zero or not okay so we can use some penalty in order to estimate um the
+[0:44:10] penalty in order to estimate um the graph structure between layers and we
+[0:44:13] graph structure between layers and we can use em
+[0:44:14] can use em algorithm for uh exponential family
+[0:44:18] algorithm for uh exponential family responses at the bottom
+[0:44:20] responses at the bottom layer the simulation results uh also
+[0:44:24] layer the simulation results uh also corroborate the identifiability
+[0:44:26] corroborate the identifiability conclusion
+[0:44:27] conclusion so here I show the mean estimation error
+[0:44:29] so here I show the mean estimation error of the graphical Matrix between the a
+[0:44:31] of the graphical Matrix between the a layer and the bottom y
+[0:44:33] layer and the bottom y layer you can see this is a actually a
+[0:44:36] layer you can see this is a actually a relatively challenging scenario we don't
+[0:44:38] relatively challenging scenario we don't have a large sample size but the number
+[0:44:40] have a large sample size but the number of cells in the contingency table is
+[0:44:42] of cells in the contingency table is huge because we have 20 uh categorical
+[0:44:45] huge because we have 20 uh categorical variables Each of which has four
+[0:44:47] variables Each of which has four categories but for uh relatively uh not
+[0:44:51] categories but for uh relatively uh not so large sample size the estimation of
+[0:44:53] so large sample size the estimation of the G Matrix is uh quite accurate here
+[0:44:57] the G Matrix is uh quite accurate here and uh if we look at the estimation uh
+[0:44:59] and uh if we look at the estimation uh root means squared error of continuous
+[0:45:01] root means squared error of continuous parameters in the model then uh this
+[0:45:04] parameters in the model then uh this plot of rmsse versus one over square
+[0:45:08] plot of rmsse versus one over square root of the sample size shows that we
+[0:45:10] root of the sample size shows that we have the usual statistical convergence
+[0:45:12] have the usual statistical convergence rate so it is an empirical validation of
+[0:45:15] rate so it is an empirical validation of um good statistical
+[0:45:18] um good statistical performance I also want to talk about hi
+[0:45:22] performance I also want to talk about hi sorry to interrupt but uh we are nearly
+[0:45:25] sorry to interrupt but uh we are nearly running out of time uh can you quickly
+[0:45:27] running out of time uh can you quickly wrap up in like two or three minutes
+[0:45:29] wrap up in like two or three minutes sure yeah so
+[0:45:32] sure yeah so um so I I think I will only talk about
+[0:45:35] um so I I think I will only talk about maybe one uh real data example so uh we
+[0:45:39] maybe one uh real data example so uh we uh applied the method to uh nucleotide
+[0:45:41] uh applied the method to uh nucleotide sequence data and uh um observed that
+[0:45:46] sequence data and uh um observed that the estimated latent representations in
+[0:45:49] the estimated latent representations in totally unsupervised manner are actually
+[0:45:52] totally unsupervised manner are actually very predictive uh of the held out uh
+[0:45:56] very predictive uh of the held out uh information information so that means uh
+[0:45:58] information information so that means uh in a downstream classification where we
+[0:46:00] in a downstream classification where we use latent representations to predict
+[0:46:03] use latent representations to predict the sequence type of each nucleotide
+[0:46:06] the sequence type of each nucleotide sequence actually we achieve an accuracy
+[0:46:08] sequence actually we achieve an accuracy that matches fine-tuned CNN so uh that
+[0:46:13] that matches fine-tuned CNN so uh that is uh in terms of prediction and in
+[0:46:15] is uh in terms of prediction and in terms of illustrating the general
+[0:46:17] terms of illustrating the general response uh we applied the method to an
+[0:46:20] response uh we applied the method to an educational assessment data set uh which
+[0:46:23] educational assessment data set uh which is a application that has motivated my
+[0:46:25] is a application that has motivated my research uh for years
+[0:46:27] research uh for years and in this data set we consider uh each
+[0:46:30] and in this data set we consider uh each students response time to each of the
+[0:46:32] students response time to each of the question and we are able to uh use uh
+[0:46:36] question and we are able to uh use uh our model to uncover the uh here is a
+[0:46:39] our model to uncover the uh here is a correlation plot among the seven latent
+[0:46:42] correlation plot among the seven latent skills in this exam and we can see uh
+[0:46:46] skills in this exam and we can see uh this identifiable model it gives rise to
+[0:46:48] this identifiable model it gives rise to very interpretable structure in this
+[0:46:50] very interpretable structure in this correlation because uh the four content
+[0:46:52] correlation because uh the four content skills number algebra geometry data they
+[0:46:56] skills number algebra geometry data they they are highly correlated the three
+[0:46:57] they are highly correlated the three cognitive skill knowing applying
+[0:46:59] cognitive skill knowing applying reasoning they're highly correlated and
+[0:47:01] reasoning they're highly correlated and they're relatively smaller correlation
+[0:47:03] they're relatively smaller correlation across one content and one cognitive
+[0:47:05] across one content and one cognitive skill okay so uh in the end
+[0:47:10] skill okay so uh in the end um I want to uh give a very uh brief
+[0:47:15] um I want to uh give a very uh brief brainstorming about the connections
+[0:47:17] brainstorming about the connections between uh this study to causal
+[0:47:19] between uh this study to causal inference so uh I think uh it may be
+[0:47:23] inference so uh I think uh it may be interesting to pursue causal Discovery
+[0:47:25] interesting to pursue causal Discovery among the latent variables because since
+[0:47:27] among the latent variables because since we allow the latent variables to be
+[0:47:28] we allow the latent variables to be arbitrarily dependent and are able to
+[0:47:30] arbitrarily dependent and are able to identify their joint distribution then
+[0:47:33] identify their joint distribution then combined with some um ideas uh in causal
+[0:47:36] combined with some um ideas uh in causal Discovery among discrete variables then
+[0:47:38] Discovery among discrete variables then maybe we can uh try to understand the
+[0:47:40] maybe we can uh try to understand the causal relationship uh beyond the
+[0:47:43] causal relationship uh beyond the correlation here among latent
+[0:47:46] correlation here among latent variables and also uh since we have a
+[0:47:48] variables and also uh since we have a deep generative model here and uh we can
+[0:47:51] deep generative model here and uh we can identify uh the the structure in this D
+[0:47:53] identify uh the the structure in this D Genera model I feel this work is also
+[0:47:56] Genera model I feel this work is also related to uh causal representation
+[0:47:58] related to uh causal representation learning where people try to use the
+[0:48:01] learning where people try to use the lower dimensional latent variables and
+[0:48:03] lower dimensional latent variables and disentangle them also it may be
+[0:48:06] disentangle them also it may be interesting to consider causal inference
+[0:48:07] interesting to consider causal inference under unobserved latent confounding
+[0:48:09] under unobserved latent confounding where the latent variables uh not only
+[0:48:12] where the latent variables uh not only serve as substantively meaningful
+[0:48:13] serve as substantively meaningful constructs like latent skills or uh
+[0:48:16] constructs like latent skills or uh sequence biological sequence types but
+[0:48:18] sequence biological sequence types but they also serve as Compounders and how
+[0:48:20] they also serve as Compounders and how to use these identifiability result in
+[0:48:23] to use these identifiability result in that setting or generalized result in
+[0:48:25] that setting or generalized result in that setting I think it would also be
+[0:48:27] that setting I think it would also be interesting so thank you very much for
+[0:48:28] interesting so thank you very much for your
+[0:48:29] your attention thank
+[0:48:32] attention thank you thanks youi uh can I just ask a
+[0:48:36] you thanks youi uh can I just ask a short question from the Q&amp;A that and
+[0:48:39] short question from the Q&amp;A that and before we move on to the discussion so
+[0:48:41] before we move on to the discussion so person has asked could this be an
+[0:48:44] person has asked could this be an infinite mixture like could there be an
+[0:48:46] infinite mixture like could there be an infinite mixture I guess with these
+[0:48:49] infinite mixture I guess with these lat um so uh in the results that I
+[0:48:52] lat um so uh in the results that I presented actually we have assumed the
+[0:48:55] presented actually we have assumed the number of lat variables uh are known so
+[0:48:58] number of lat variables uh are known so they are a finite mixture yeah but uh in
+[0:49:02] they are a finite mixture yeah but uh in the but I think it is uh although
+[0:49:05] the but I think it is uh although technically uh non trivial but it would
+[0:49:07] technically uh non trivial but it would be interesting to consider uh how to
+[0:49:09] be interesting to consider uh how to identify the number of latent variables
+[0:49:11] identify the number of latent variables and maybe start with an overfeed mixture
+[0:49:14] and maybe start with an overfeed mixture model because in the estimation
+[0:49:16] model because in the estimation procedure we have tried uh Bea
+[0:49:18] procedure we have tried uh Bea nonparametric prior with an infinite
+[0:49:20] nonparametric prior with an infinite mixture to start with and we are still
+[0:49:22] mixture to start with and we are still able to estimate the number of latent
+[0:49:24] able to estimate the number of latent variables uh I mean that's empirical
+[0:49:25] variables uh I mean that's empirical observation
+[0:49:29] thank you okay let's move on to the
+[0:49:37] discussion you if you can stop sharing that actually it's fine if you keep
+[0:49:39] that actually it's fine if you keep sharing uh I did not prepare any slides
+[0:49:42] sharing uh I did not prepare any slides uh so what I would do is uh well first
+[0:49:46] uh so what I would do is uh well first of all I'd like to thank Richi to give
+[0:49:49] of all I'd like to thank Richi to give this really nice talk about her work um
+[0:49:53] this really nice talk about her work um so what I will do is I'll just give some
+[0:49:55] so what I will do is I'll just give some high level comments on Rich's talk and
+[0:49:57] high level comments on Rich's talk and then I'll try to ask specific questions
+[0:50:00] then I'll try to ask specific questions on some of the slides that I found a
+[0:50:03] on some of the slides that I found a bit confusing when I read through the
+[0:50:07] bit confusing when I read through the slides um so my first comment is on the
+[0:50:12] slides um so my first comment is on the um on related literatures on
+[0:50:14] um on related literatures on identifiability in causal inference as
+[0:50:17] identifiability in causal inference as far as I know there are two related
+[0:50:19] far as I know there are two related literatures one is on linear structural
+[0:50:21] literatures one is on linear structural equation models uh um and there's a lot
+[0:50:25] equation models uh um and there's a lot of work by mattio dton and his
+[0:50:27] of work by mattio dton and his collaborators I think CB has cited them
+[0:50:30] collaborators I think CB has cited them here uh and arguably the kind of the
+[0:50:34] here uh and arguably the kind of the technique the mathematical techniques
+[0:50:35] technique the mathematical techniques are a bit different I think there was a
+[0:50:37] are a bit different I think there was a lot of more kind of algebraic geometry
+[0:50:40] lot of more kind of algebraic geometry in that kind of linear uh models um but
+[0:50:44] in that kind of linear uh models um but I I think it it looks like Rich's work
+[0:50:47] I I think it it looks like Rich's work was based on Cru call theorem and sort
+[0:50:49] was based on Cru call theorem and sort of tensor de composition of probability
+[0:50:51] of tensor de composition of probability distributions but when I looked at the
+[0:50:54] distributions but when I looked at the proofs it do at I did see some kind of
+[0:50:57] proofs it do at I did see some kind of algebraic varieties so maybe there's a
+[0:51:00] algebraic varieties so maybe there's a connection that I did not I'm not aware
+[0:51:02] connection that I did not I'm not aware of there was another literature on uh
+[0:51:05] of there was another literature on uh sort of nonparametric identifiability of
+[0:51:07] sort of nonparametric identifiability of causal effects from causal graphical
+[0:51:10] causal effects from causal graphical models with Laten variables so examples
+[0:51:13] models with Laten variables so examples include the due calculus the ID
+[0:51:15] include the due calculus the ID algorithm and also these more recent uh
+[0:51:19] algorithm and also these more recent uh I guess this is more closer to generic
+[0:51:22] I guess this is more closer to generic identifiability using proximal uh sort
+[0:51:25] identifiability using proximal uh sort of boxes for
+[0:51:27] of boxes for Compounders uh I'm not an expert in that
+[0:51:31] Compounders uh I'm not an expert in that area either but I did notice there's
+[0:51:33] area either but I did notice there's some similarity and connections to the
+[0:51:35] some similarity and connections to the results presented
+[0:51:37] results presented here uh my second high level comment is
+[0:51:40] here uh my second high level comment is on I guess which uh last slide about
+[0:51:44] on I guess which uh last slide about Connections to causal inference so so
+[0:51:47] Connections to causal inference so so for most of the talk there's no
+[0:51:49] for most of the talk there's no mentioning of causality but you can
+[0:51:51] mentioning of causality but you can easily imagine these basian pyramids
+[0:51:53] easily imagine these basian pyramids could have applications in causal
+[0:51:56] could have applications in causal inference uh I think particularly this
+[0:51:58] inference uh I think particularly this is the case in social sciences where uh
+[0:52:02] is the case in social sciences where uh in many problems cause and effects are
+[0:52:04] in many problems cause and effects are often best constructed as abstract
+[0:52:06] often best constructed as abstract latent variables instead of something we
+[0:52:08] latent variables instead of something we can measure uh and the team data set
+[0:52:11] can measure uh and the team data set that youi gave us is an example of that
+[0:52:14] that youi gave us is an example of that kind uh where we want to assess students
+[0:52:17] kind uh where we want to assess students aptitude in Geometry or reasoning those
+[0:52:19] aptitude in Geometry or reasoning those are quite abstract Concepts uh so you
+[0:52:23] are quite abstract Concepts uh so you gives an example where she could find um
+[0:52:26] gives an example where she could find um sort of correlations between those
+[0:52:28] sort of correlations between those latent kind of aptitudes but it can be
+[0:52:31] latent kind of aptitudes but it can be imagined that you can modify the model
+[0:52:33] imagined that you can modify the model perhaps either using like a more like a
+[0:52:35] perhaps either using like a more like a structural learning kind of approach or
+[0:52:38] structural learning kind of approach or you can in the more conventional
+[0:52:39] you can in the more conventional approaches you specify some kind of
+[0:52:42] approaches you specify some kind of causal structure between the latent
+[0:52:43] causal structure between the latent variables and you can do some kind of a
+[0:52:46] variables and you can do some kind of a caal inference
+[0:52:47] caal inference there uh my third high level comment is
+[0:52:51] there uh my third high level comment is that uh oh um looks like it just
+[0:52:56] that uh oh um looks like it just need to turn on my light excuse me for
+[0:53:01] need to turn on my light excuse me for minute um my third comment is that I
+[0:53:04] minute um my third comment is that I think this is a really a very exciting
+[0:53:07] think this is a really a very exciting uh this is opens up a really exciting uh
+[0:53:10] uh this is opens up a really exciting uh kind of Direction uh for psychometrics
+[0:53:14] kind of Direction uh for psychometrics um and and
+[0:53:16] um and and perhaps a lot of other social science
+[0:53:18] perhaps a lot of other social science areas I think a lot of uh in in those
+[0:53:22] areas I think a lot of uh in in those areas a lot of people use linear
+[0:53:23] areas a lot of people use linear structural equation models their main
+[0:53:26] structural equation models their main research tools um and the methodology
+[0:53:30] research tools um and the methodology and computational uh software for for
+[0:53:33] and computational uh software for for those were largely developed as far as I
+[0:53:36] those were largely developed as far as I know in the 1970s and 80s uh and they're
+[0:53:39] know in the 1970s and 80s uh and they're often fraud with statistical and
+[0:53:41] often fraud with statistical and numerical issues uh I think what would
+[0:53:43] numerical issues uh I think what would be really interesting is to understand
+[0:53:46] be really interesting is to understand how these modern tools uh uh
+[0:53:49] how these modern tools uh uh computational tools for deep neural
+[0:53:51] computational tools for deep neural networks and also the modern theory for
+[0:53:53] networks and also the modern theory for Cog graphical models could be used to
+[0:53:57] Cog graphical models could be used to significantly upgrade our toolbox for
+[0:53:59] significantly upgrade our toolbox for these latent variable
+[0:54:01] these latent variable models uh related to what uh you
+[0:54:05] models uh related to what uh you mentioned on on the last slide I think
+[0:54:07] mentioned on on the last slide I think there's also this emerging area
+[0:54:09] there's also this emerging area especially in machine learning called
+[0:54:11] especially in machine learning called causal representation learning where
+[0:54:13] causal representation learning where people are interested in giving uh
+[0:54:15] people are interested in giving uh causal explanations to highlevel
+[0:54:17] causal explanations to highlevel Features learned by neuron networks uh I
+[0:54:21] Features learned by neuron networks uh I don't think people have gone
+[0:54:23] don't think people have gone particularly that far in that direction
+[0:54:25] particularly that far in that direction but it was really interesting to see
+[0:54:27] but it was really interesting to see some of the examples emerging from sort
+[0:54:29] some of the examples emerging from sort of features you can learn from images um
+[0:54:33] of features you can learn from images um and it would be really interesting to
+[0:54:34] and it would be really interesting to see if the identifiability presented
+[0:54:37] see if the identifiability presented here and also developed in the causal
+[0:54:39] here and also developed in the causal influence Community can be useful to
+[0:54:41] influence Community can be useful to solve conceptual and theoretical issues
+[0:54:44] solve conceptual and theoretical issues in that area uh for example one I guess
+[0:54:48] in that area uh for example one I guess simple silly probably City question is
+[0:54:51] simple silly probably City question is that given what Yi has uh shown us uh
+[0:54:55] that given what Yi has uh shown us uh it's is it actually a good idea when we
+[0:54:57] it's is it actually a good idea when we construct architecture of a neuron
+[0:54:58] construct architecture of a neuron Network should we actually always
+[0:55:00] Network should we actually always require every neuron to have at least
+[0:55:02] require every neuron to have at least three exclusive children in the network
+[0:55:05] three exclusive children in the network is because that that would make the new
+[0:55:07] is because that that would make the new network identifiable but I don't know
+[0:55:10] network identifiable but I don't know what the the machine Learners would
+[0:55:12] what the the machine Learners would say okay I have three more minutes so
+[0:55:15] say okay I have three more minutes so maybe I'll just ask uh some quick
+[0:55:19] maybe I'll just ask uh some quick questions um on some of the slides you
+[0:55:22] questions um on some of the slides you can you share your slide again and um
+[0:55:24] can you share your slide again and um turn to number
+[0:55:27] turn to number 17 uh where you described this
+[0:55:30] 17 uh where you described this transformation from G to
+[0:55:32] transformation from G to S yeah um
+[0:55:41] okay um it's it has
+[0:55:51] some yeah I it's number 17 yes oh so yeah I guess I'm generally a bit fuzzy
+[0:55:53] yeah I guess I'm generally a bit fuzzy about the what this Matrix this
+[0:55:56] about the what this Matrix this constraint Matrix S means okay so I can
+[0:56:00] constraint Matrix S means okay so I can see there's
+[0:56:01] see there's a a map from G to S but first of all why
+[0:56:06] a a map from G to S but first of all why is this constraint uh why is it enough
+[0:56:09] is this constraint uh why is it enough to use just a binary constraint
+[0:56:12] to use just a binary constraint Matrix um yeah so uh actually this is an
+[0:56:15] Matrix um yeah so uh actually this is an intermediate uh tool that we use to uh
+[0:56:20] intermediate uh tool that we use to uh translate the uh identifiability in this
+[0:56:22] translate the uh identifiability in this constraint Laten class model to this
+[0:56:24] constraint Laten class model to this bipartite uh graphical model so uh and
+[0:56:29] bipartite uh graphical model so uh and actually it is not the only way to uh
+[0:56:31] actually it is not the only way to uh prove identifiability in this model but
+[0:56:33] prove identifiability in this model but I will try to explain a bit um the
+[0:56:35] I will try to explain a bit um the relationship so here uh the S Matrix uh
+[0:56:39] relationship so here uh the S Matrix uh the entry is determined by um one minus
+[0:56:44] the entry is determined by um one minus the binary indicator of whether the
+[0:56:46] the binary indicator of whether the corresponding latent pattern uh in this
+[0:56:49] corresponding latent pattern uh in this particular column is element wisely
+[0:56:51] particular column is element wisely greater than or equal to the
+[0:56:53] greater than or equal to the corresponding uh row Vector there so
+[0:56:55] corresponding uh row Vector there so basically s is encoding the information
+[0:57:00] basically s is encoding the information that whether this latent pattern is
+[0:57:02] that whether this latent pattern is considered as uh not capable so if we
+[0:57:05] considered as uh not capable so if we think of this from an still an ability
+[0:57:08] think of this from an still an ability and education uh context then uh as uh
+[0:57:12] and education uh context then uh as uh each entry is a binary indicator of
+[0:57:14] each entry is a binary indicator of whether the corresponding ability
+[0:57:15] whether the corresponding ability pattern is not capable of the uh this
+[0:57:19] pattern is not capable of the uh this particular question with this uh skill
+[0:57:23] particular question with this uh skill requirement profile so uh then if it is
+[0:57:28] requirement profile so uh then if it is not capable then actually they will be
+[0:57:29] not capable then actually they will be constrained to have the same uh
+[0:57:31] constrained to have the same uh conditional response probability for
+[0:57:33] conditional response probability for this particular question yeah so uh it
+[0:57:37] this particular question yeah so uh it actually does not in include all the
+[0:57:39] actually does not in include all the information in this by party graph but
+[0:57:42] information in this by party graph but uh actually extracting this much
+[0:57:44] uh actually extracting this much information already allows us to
+[0:57:46] information already allows us to translate the uh uh condition on the S
+[0:57:50] translate the uh uh condition on the S Matrix to the G Matrix and obtain the
+[0:57:53] Matrix to the G Matrix and obtain the requirement that uh this pipar graph
+[0:57:56] requirement that uh this pipar graph each latent variable has uh needs to
+[0:57:58] each latent variable has uh needs to have at least three exclusive
+[0:58:01] have at least three exclusive children um I don't know if that is okay
+[0:58:04] children um I don't know if that is okay that's
+[0:58:05] that's helpful um maybe I'll just ask one last
+[0:58:09] helpful um maybe I'll just ask one last question can you go to uh slide 21 where
+[0:58:12] question can you go to uh slide 21 where you presented your theorem of the
+[0:58:15] you presented your theorem of the identifiability of Basi and pyramids so
+[0:58:17] identifiability of Basi and pyramids so I guess here you you basically said that
+[0:58:20] I guess here you you basically said that uh for strict identifiability one
+[0:58:24] uh for strict identifiability one sufficient condition is that one each
+[0:58:26] sufficient condition is that one each latent variable needs to have three
+[0:58:28] latent variable needs to have three exclusive children so this reminds me of
+[0:58:32] exclusive children so this reminds me of these kind of three indicator rules in
+[0:58:35] these kind of three indicator rules in uh latent factor models where everything
+[0:58:37] uh latent factor models where everything is continuous can you comment on the
+[0:58:40] is continuous can you comment on the connect um any if there's any connection
+[0:58:43] connect um any if there's any connection to to those results yeah that's a great
+[0:58:46] to to those results yeah that's a great question so uh also related to your a
+[0:58:49] question so uh also related to your a high level comment earlier uh that um
+[0:58:53] high level comment earlier uh that um the consideration of identifiability for
+[0:58:55] the consideration of identifiability for linear structural equation models with
+[0:58:56] linear structural equation models with continuous variables actually uh uh is
+[0:58:59] continuous variables actually uh uh is connected to our study in these models
+[0:59:02] connected to our study in these models with discrete and potentially deep
+[0:59:04] with discrete and potentially deep latent uh structures and uh um the
+[0:59:07] latent uh structures and uh um the difference is that in those cases uh
+[0:59:10] difference is that in those cases uh when studying identifiability uh the uh
+[0:59:12] when studying identifiability uh the uh first I I think the similarity is that
+[0:59:15] first I I think the similarity is that we will just focus on the polinomial
+[0:59:18] we will just focus on the polinomial equations uh given by The observed uh
+[0:59:22] equations uh given by The observed uh distribution and examine whether under
+[0:59:25] distribution and examine whether under what conditions these polinomial
+[0:59:26] what conditions these polinomial equations have a unique Roots because
+[0:59:28] equations have a unique Roots because unique Roots means that we can identify
+[0:59:30] unique Roots means that we can identify things so but in continuous latent
+[0:59:33] things so but in continuous latent variable case all the in especially if
+[0:59:36] variable case all the in especially if we have gaussian latent and observed
+[0:59:37] we have gaussian latent and observed variables then all the information about
+[0:59:40] variables then all the information about The Joint distribution of random
+[0:59:42] The Joint distribution of random variables is encoded in a cence matrix
+[0:59:45] variables is encoded in a cence matrix which is just a matrix structure uh and
+[0:59:48] which is just a matrix structure uh and the polinomial equations are about the
+[0:59:50] the polinomial equations are about the entries in that Matrix and uh
+[0:59:52] entries in that Matrix and uh traditionally the two indicator rule the
+[0:59:54] traditionally the two indicator rule the three indicator rule developed by Factor
+[0:59:56] three indicator rule developed by Factor uh in the factor uh analysis literature
+[0:59:58] uh in the factor uh analysis literature examines these uh uh polinomial
+[1:00:01] examines these uh uh polinomial equations which involves the entries in
+[1:00:04] equations which involves the entries in the cences and variances and uh uh
+[1:00:06] the cences and variances and uh uh discover that structure but in our study
+[1:00:09] discover that structure but in our study uh because we have discrete observed
+[1:00:11] uh because we have discrete observed variables to start with then uh The
+[1:00:13] variables to start with then uh The Joint distribution of observed variables
+[1:00:16] Joint distribution of observed variables as long as we have more than two
+[1:00:17] as long as we have more than two observed variables then we have a tensor
+[1:00:19] observed variables then we have a tensor and we cannot use cence to summarize
+[1:00:22] and we cannot use cence to summarize their joint distribution because the
+[1:00:23] their joint distribution because the joint distribution of three binary
+[1:00:25] joint distribution of three binary random variables even if we know their
+[1:00:27] random variables even if we know their cence and uh they mean right we don't
+[1:00:29] cence and uh they mean right we don't know the The Joint so um uh therefore
+[1:00:32] know the The Joint so um uh therefore the polinomial equations actually will
+[1:00:34] the polinomial equations actually will take different forms but I think it's a
+[1:00:36] take different forms but I think it's a very interesting uh so the in terms of
+[1:00:39] very interesting uh so the in terms of technique how we get the two indicator
+[1:00:41] technique how we get the two indicator rule here and in uh traditional factor
+[1:00:45] rule here and in uh traditional factor analysis is quite different but it's
+[1:00:47] analysis is quite different but it's very interesting that uh in this uh like
+[1:00:50] very interesting that uh in this uh like algebraic statistical consideration in
+[1:00:52] algebraic statistical consideration in both cases um these two indicator and
+[1:00:56] both cases um these two indicator and three indicator rules are sufficient for
+[1:00:58] three indicator rules are sufficient for identifiability so I think I still could
+[1:01:00] identifiability so I think I still could not give a like very intuitive
+[1:01:02] not give a like very intuitive explanation of uh why uh they are U
+[1:01:06] explanation of uh why uh they are U exactly the same kind of condition but
+[1:01:08] exactly the same kind of condition but yeah I would say uh they are uh they
+[1:01:10] yeah I would say uh they are uh they both belong to algebraic statistics
+[1:01:12] both belong to algebraic statistics investigation of polinomial but actually
+[1:01:14] investigation of polinomial but actually they are arising from very different
+[1:01:16] they are arising from very different structures like matrices and
+[1:01:19] structures like matrices and tensors thank you very
+[1:01:22] tensors thank you very much great thank you for the great talk
+[1:01:25] much great thank you for the great talk youi and thank you CH for the inspiring
+[1:01:28] youi and thank you CH for the inspiring discussion um it's I think it's a good
+[1:01:31] discussion um it's I think it's a good point to wrap up we still have uh a few
+[1:01:34] point to wrap up we still have uh a few questions in the Q&amp;A but due to the time
+[1:01:37] questions in the Q&amp;A but due to the time limit um we'll just stop here so we will
+[1:01:40] limit um we'll just stop here so we will forward uh the questions to youi and if
+[1:01:43] forward uh the questions to youi and if you're interested um feel free to follow
+[1:01:46] you're interested um feel free to follow up by emails also um so I'll share
+[1:01:52] up by emails also um so I'll share the uh final slide
+[1:02:00] so next week we'll have Erica moodi from Miguel University to talk about flexible
+[1:02:03] Miguel University to talk about flexible modeling of adaptive treatment
+[1:02:05] modeling of adaptive treatment strategies for sensor outcomes uh we
+[1:02:07] strategies for sensor outcomes uh we hope to see you next week um and
+[1:02:13] hope to see you next week um and stop

@@ -1,0 +1,1690 @@
+[0:00:04] all right welcome back to the uh online causal influence seminar today we are
+[0:00:06] causal influence seminar today we are excited to have isaiah
+[0:00:07] excited to have isaiah andrews from harvard university who will
+[0:00:09] andrews from harvard university who will talk about uh inference on winners
+[0:00:12] talk about uh inference on winners uh after that we'll have a discussion by
+[0:00:14] uh after that we'll have a discussion by uh will ian
+[0:00:16] uh will ian questions today will be handled by
+[0:00:17] questions today will be handled by michael so i'm now
+[0:00:19] michael so i'm now quickly switching over to him uh thanks
+[0:00:23] quickly switching over to him uh thanks dominic so uh we also have some
+[0:00:25] dominic so uh we also have some collaborators in q a today uh toru
+[0:00:26] collaborators in q a today uh toru kitagago
+[0:00:27] kitagago kawa and um adam mccloskey um
+[0:00:31] kawa and um adam mccloskey um so please submit your questions through
+[0:00:32] so please submit your questions through the q a box that's the q a box not the
+[0:00:35] the q a box that's the q a box not the chat box also isaiah will
+[0:00:38] chat box also isaiah will pause a couple times to receive
+[0:00:41] pause a couple times to receive questions live
+[0:00:43] questions live so um we may ask you uh whether you'd
+[0:00:46] so um we may ask you uh whether you'd like to
+[0:00:46] like to ask your question live just keep in mind
+[0:00:49] ask your question live just keep in mind uh if you choose to do that that the
+[0:00:50] uh if you choose to do that that the talk is being
+[0:00:51] talk is being recorded uh so with that uh isaiah
+[0:00:54] recorded uh so with that uh isaiah please feel free to start whenever
+[0:00:55] please feel free to start whenever you're ready
+[0:00:56] you're ready great thank you very much
+[0:01:00] great thank you very much so uh thank you very much to all the
+[0:01:03] so uh thank you very much to all the organizers for the opportunity to
+[0:01:04] organizers for the opportunity to present
+[0:01:05] present and uh thanks very much to will for
+[0:01:08] and uh thanks very much to will for discussing the paper so um
+[0:01:13] discussing the paper so um today i am very uh excited to present
+[0:01:16] today i am very uh excited to present uh the project inference on winners
+[0:01:18] uh the project inference on winners which is joint work with torah kidagawa
+[0:01:20] which is joint work with torah kidagawa and adam mccloskey
+[0:01:22] and adam mccloskey so in this project we're interested in
+[0:01:25] so in this project we're interested in inference and
+[0:01:26] inference and on target parameters chosen based on
+[0:01:27] on target parameters chosen based on optimization right think for example of
+[0:01:30] optimization right think for example of inference on the best performing
+[0:01:31] inference on the best performing treatment in an experiment
+[0:01:33] treatment in an experiment not surprisingly the data-driven choice
+[0:01:35] not surprisingly the data-driven choice of a target parameter
+[0:01:36] of a target parameter leads to bias and under coverage for
+[0:01:38] leads to bias and under coverage for conventional estimators and confidence
+[0:01:40] conventional estimators and confidence sets respectively
+[0:01:41] sets respectively so to motivate what i'll be talking
+[0:01:43] so to motivate what i'll be talking about today i'm going to start by
+[0:01:45] about today i'm going to start by introducing the problem here in the
+[0:01:46] introducing the problem here in the context of the stylized example
+[0:01:48] context of the stylized example where i'll describe the source of the
+[0:01:49] where i'll describe the source of the bias and then sketch our corrective
+[0:01:51] bias and then sketch our corrective inference proposals
+[0:01:54] inference proposals so for this stylized example i'd like to
+[0:01:56] so for this stylized example i'd like to think about a researcher who's running a
+[0:01:58] think about a researcher who's running a randomized trial
+[0:01:59] randomized trial and estimating average outcomes under
+[0:02:01] and estimating average outcomes under two treatments say theta one
+[0:02:03] two treatments say theta one and theta two the average outcomes under
+[0:02:05] and theta two the average outcomes under treatments they don't wanna theta two x
+[0:02:07] treatments they don't wanna theta two x theta 1 and x theta 2 for this toy
+[0:02:09] theta 1 and x theta 2 for this toy example will take to be
+[0:02:10] example will take to be jointly normal centered at the
+[0:02:12] jointly normal centered at the population average outcomes under the
+[0:02:14] population average outcomes under the corresponding treatment
+[0:02:15] corresponding treatment with identity variance covariance matrix
+[0:02:17] with identity variance covariance matrix where again i'm taking the identity
+[0:02:19] where again i'm taking the identity variance covariance matrix just for the
+[0:02:20] variance covariance matrix just for the example
+[0:02:21] example and we will be relaxing that uh in our
+[0:02:24] and we will be relaxing that uh in our more general results
+[0:02:30] so in this setting right given the results of such an experiment we face a
+[0:02:32] results of such an experiment we face a natural question of which treatment to
+[0:02:33] natural question of which treatment to recommend
+[0:02:34] recommend and one natural option is to choose the
+[0:02:36] and one natural option is to choose the treatment that maximizes the observed
+[0:02:38] treatment that maximizes the observed outcomes
+[0:02:39] outcomes so to recommend treatment theta hat
+[0:02:40] so to recommend treatment theta hat which is the arg max of x theta
+[0:02:43] which is the arg max of x theta now along with such a recommendation we
+[0:02:45] now along with such a recommendation we might also want an assessment for the
+[0:02:46] might also want an assessment for the effectiveness of the recommended
+[0:02:48] effectiveness of the recommended treatment
+[0:02:49] treatment and in particular we might want
+[0:02:50] and in particular we might want estimates and confidence sets for mu
+[0:02:52] estimates and confidence sets for mu theta hat
+[0:02:53] theta hat the true effectiveness of the estimated
+[0:02:56] the true effectiveness of the estimated best treatment
+[0:03:02] in this setting though we run into a version of a winner's course note in
+[0:03:04] version of a winner's course note in particular that theta hat
+[0:03:06] particular that theta hat is equal to theta one only if x theta
+[0:03:09] is equal to theta one only if x theta one is greater than or equal to x theta
+[0:03:11] one is greater than or equal to x theta two
+[0:03:11] two but this means the distribution of x
+[0:03:13] but this means the distribution of x theta one
+[0:03:15] theta one uh conditional one theta hat equals
+[0:03:16] uh conditional one theta hat equals theta one is truncated below
+[0:03:18] theta one is truncated below at the random truncation point x theta
+[0:03:20] at the random truncation point x theta two
+[0:03:21] two which in turn means that the probability
+[0:03:23] which in turn means that the probability that x theta one overestimates mu theta
+[0:03:26] that x theta one overestimates mu theta one
+[0:03:26] one conditional on recommending treatment
+[0:03:28] conditional on recommending treatment one is strictly greater than half
+[0:03:30] one is strictly greater than half right but the problem i've set up here
+[0:03:32] right but the problem i've set up here is totally symmetric in treatments theta
+[0:03:34] is totally symmetric in treatments theta one and theta two
+[0:03:35] one and theta two so the same is true unconditionally as
+[0:03:37] so the same is true unconditionally as well right so the unconditional
+[0:03:39] well right so the unconditional probability that we overestimate the
+[0:03:41] probability that we overestimate the true effectiveness of the recommended
+[0:03:42] true effectiveness of the recommended treatment
+[0:03:43] treatment is strictly greater than a half right so
+[0:03:46] is strictly greater than a half right so this
+[0:03:46] this says that our sort of conventional
+[0:03:48] says that our sort of conventional estimate for the true effectiveness of
+[0:03:49] estimate for the true effectiveness of the recommended treatment
+[0:03:51] the recommended treatment is upwards medium biased as an estimator
+[0:03:53] is upwards medium biased as an estimator for its true effectiveness
+[0:03:54] for its true effectiveness and at least in some cases the
+[0:03:56] and at least in some cases the corresponding confidence set which just
+[0:03:58] corresponding confidence set which just takes that estimate adds and subtracts
+[0:04:00] takes that estimate adds and subtracts 1.96 standard errors
+[0:04:01] 1.96 standard errors may undercover
+[0:04:07] so to see the extent to which this is a problem numerically
+[0:04:08] problem numerically let's think about sort of a
+[0:04:09] let's think about sort of a generalization of the toy example with
+[0:04:11] generalization of the toy example with two
+[0:04:12] two 10 and 50 treatments where for
+[0:04:14] 10 and 50 treatments where for simplicity i'm still going to assume
+[0:04:16] simplicity i'm still going to assume an identity variance covariance matrix
+[0:04:18] an identity variance covariance matrix let's further suppose that the first
+[0:04:20] let's further suppose that the first treatment
+[0:04:20] treatment is weakly more effective than the second
+[0:04:22] is weakly more effective than the second well all the remaining treatments are
+[0:04:24] well all the remaining treatments are equally effective
+[0:04:25] equally effective right so here we're in a world where the
+[0:04:27] right so here we're in a world where the first treatment is weakly most effective
+[0:04:29] first treatment is weakly most effective everything else is the same in this
+[0:04:31] everything else is the same in this setting let's think about the
+[0:04:33] setting let's think about the performance of the conventional
+[0:04:34] performance of the conventional estimator right so just sample average
+[0:04:36] estimator right so just sample average outcome for the recommended treatment
+[0:04:38] outcome for the recommended treatment and the conventional or more
+[0:04:39] and the conventional or more pejoratively naive confidence
+[0:04:41] pejoratively naive confidence that just takes the conventional
+[0:04:42] that just takes the conventional estimator adds and subtracts 1.96
+[0:04:45] estimator adds and subtracts 1.96 standard errors
+[0:04:50] so first we could think about the overestimation probability
+[0:04:52] overestimation probability so in this plot on the horizontal axis
+[0:04:55] so in this plot on the horizontal axis i've got
+[0:04:55] i've got youth theta one the effectiveness of the
+[0:04:57] youth theta one the effectiveness of the first treatment minus new theta minus
+[0:04:59] first treatment minus new theta minus one
+[0:04:59] one the effectiveness of the remaining
+[0:05:01] the effectiveness of the remaining treatments on the vertical axis i'm
+[0:05:03] treatments on the vertical axis i'm showing the overestimation probability
+[0:05:05] showing the overestimation probability minus a half so the probability that our
+[0:05:08] minus a half so the probability that our estimate for the effectiveness of the
+[0:05:09] estimate for the effectiveness of the recommended treatment
+[0:05:10] recommended treatment exceeds its true effectiveness minus a
+[0:05:12] exceeds its true effectiveness minus a half
+[0:05:14] half what we see here is that when all the
+[0:05:16] what we see here is that when all the treatments are equally effective we've
+[0:05:17] treatments are equally effective we've got about a 75
+[0:05:19] got about a 75 chance of overestimating the
+[0:05:21] chance of overestimating the effectiveness of the recommended
+[0:05:22] effectiveness of the recommended treatment
+[0:05:23] treatment in the case where we're considering just
+[0:05:24] in the case where we're considering just two candidates as i make the first
+[0:05:26] two candidates as i make the first treatment more effective that
+[0:05:28] treatment more effective that overestimation probability drops
+[0:05:29] overestimation probability drops and eventually converges down to a half
+[0:05:32] and eventually converges down to a half if i increase the number of treatments
+[0:05:34] if i increase the number of treatments considered to 10
+[0:05:35] considered to 10 right the overestimation probability
+[0:05:36] right the overestimation probability when everything is tied goes to nearly
+[0:05:38] when everything is tied goes to nearly
+[0:05:41] but again slowly declines as they make one treatment more effective than the
+[0:05:42] one treatment more effective than the other
+[0:05:43] other similar story with 50 treatments
+[0:05:46] similar story with 50 treatments if instead of thinking about
+[0:05:48] if instead of thinking about overestimation probabilities i prefer to
+[0:05:50] overestimation probabilities i prefer to think about the median estimation error
+[0:05:52] think about the median estimation error right the picture is qualitatively
+[0:05:54] right the picture is qualitatively similar just the magnitude of the bias
+[0:05:56] similar just the magnitude of the bias keeps getting worse as i add more
+[0:05:58] keeps getting worse as i add more treatments
+[0:06:04] now in addition to bias we also care about coverage
+[0:06:05] about coverage so here i'm showing you the
+[0:06:07] so here i'm showing you the unconditional coverage probability of
+[0:06:08] unconditional coverage probability of conventional
+[0:06:09] conventional 95 confidence intervals it turns out in
+[0:06:12] 95 confidence intervals it turns out in this case if i have just
+[0:06:14] this case if i have just two treatments there's actually not an
+[0:06:16] two treatments there's actually not an under coverage problem
+[0:06:17] under coverage problem so the coverage of nominal 95 confidence
+[0:06:20] so the coverage of nominal 95 confidence intervals for the recommended treatment
+[0:06:22] intervals for the recommended treatment is in fact 95 but if i increase the
+[0:06:25] is in fact 95 but if i increase the number of treatments to 10
+[0:06:27] number of treatments to 10 the coverage probability when everything
+[0:06:28] the coverage probability when everything is tied drops to about 80
+[0:06:31] is tied drops to about 80 though it recovers as i make the first
+[0:06:32] though it recovers as i make the first treatment better than the others and if
+[0:06:34] treatment better than the others and if i
+[0:06:35] i increase the number of treatments to 50
+[0:06:37] increase the number of treatments to 50 the coverage drops to about 30
+[0:06:44] so that was uh sort of hopefully convinced you that there's potentially a
+[0:06:45] convinced you that there's potentially a problem here trying to do inference on
+[0:06:47] problem here trying to do inference on the best performing treatment in an
+[0:06:48] the best performing treatment in an experiment
+[0:06:49] experiment i'll let's talk about our solutions but
+[0:06:50] i'll let's talk about our solutions but before i do that let me just pause to
+[0:06:52] before i do that let me just pause to see if there are any questions just
+[0:06:53] see if there are any questions just about the setup so far
+[0:06:55] about the setup so far uh we have no questions yet so just
+[0:06:58] uh we have no questions yet so just continue
+[0:07:04] perfect all right so on to propose solutions
+[0:07:06] solutions so to think about correcting these
+[0:07:07] so to think about correcting these issues right we need to say what we mean
+[0:07:10] issues right we need to say what we mean by correcting them and we think there
+[0:07:13] by correcting them and we think there are at least two possible goals for
+[0:07:14] are at least two possible goals for corrected inference but we'll focus on
+[0:07:16] corrected inference but we'll focus on two
+[0:07:17] two so the first possible goal for corrected
+[0:07:19] so the first possible goal for corrected inference in this setting
+[0:07:20] inference in this setting is what we'll term conditional inference
+[0:07:22] is what we'll term conditional inference right so we might want procedures that
+[0:07:24] right so we might want procedures that are going to be valid
+[0:07:25] are going to be valid conditional on the treatment theta
+[0:07:27] conditional on the treatment theta that's going to be recommended
+[0:07:29] that's going to be recommended for confidence sets for instance this
+[0:07:31] for confidence sets for instance this could mean conditional coverage
+[0:07:33] could mean conditional coverage so the conditional coverage probability
+[0:07:35] so the conditional coverage probability of our confidence set
+[0:07:36] of our confidence set condition on recommending a given
+[0:07:38] condition on recommending a given treatment should be at least one minus
+[0:07:39] treatment should be at least one minus alpha
+[0:07:41] alpha for estimators we could think about
+[0:07:42] for estimators we could think about conditional median unbiases
+[0:07:44] conditional median unbiases so the conditional overestimation
+[0:07:46] so the conditional overestimation probability again condition on
+[0:07:48] probability again condition on recommending a given treatment
+[0:07:49] recommending a given treatment should be a half
+[0:07:55] alternatively though we could also think about unconditional interest
+[0:07:57] about unconditional interest right where rather than conditioning on
+[0:07:58] right where rather than conditioning on the treatment recommended will require
+[0:08:00] the treatment recommended will require validity
+[0:08:01] validity only on average across different values
+[0:08:03] only on average across different values data have that could have arisen
+[0:08:05] data have that could have arisen right so here we're saying we want
+[0:08:06] right so here we're saying we want something that's valid in whatever sense
+[0:08:08] something that's valid in whatever sense on average
+[0:08:09] on average but not conditional on a recommendation
+[0:08:12] but not conditional on a recommendation for confidence for instance this would
+[0:08:14] for confidence for instance this would say that the unconditional coverage
+[0:08:16] say that the unconditional coverage probability for the true effectiveness
+[0:08:17] probability for the true effectiveness of the recommended treatment
+[0:08:19] of the recommended treatment should be at least one minus alpha well
+[0:08:21] should be at least one minus alpha well for estimators we could have
+[0:08:22] for estimators we could have unconditional median unbiasedness so the
+[0:08:24] unconditional median unbiasedness so the unconditional overestimation probability
+[0:08:26] unconditional overestimation probability should be a half now the law of iterated
+[0:08:30] should be a half now the law of iterated expectations
+[0:08:30] expectations tells us that unconditional validity is
+[0:08:33] tells us that unconditional validity is less demanding than conditional validity
+[0:08:35] less demanding than conditional validity in the sense that any conditionally
+[0:08:37] in the sense that any conditionally valid procedure is also valid
+[0:08:39] valid procedure is also valid unconditionally
+[0:08:40] unconditionally but that means that the class of
+[0:08:42] but that means that the class of unconditional procedures is larger
+[0:08:43] unconditional procedures is larger so if we're satisfied with unconditional
+[0:08:46] so if we're satisfied with unconditional validity
+[0:08:46] validity we might be able to obtain unconditional
+[0:08:49] we might be able to obtain unconditional performance improvements
+[0:08:56] now having introduced these two possible criteria unconditional and conditional
+[0:08:58] criteria unconditional and conditional validity it raises the natural question
+[0:09:01] validity it raises the natural question of which of them we ought to impose
+[0:09:03] of which of them we ought to impose and in our view the answer to that seems
+[0:09:06] and in our view the answer to that seems fairly context
+[0:09:08] fairly context so to think through the distinction uh
+[0:09:09] so to think through the distinction uh let's go back to this toy example where
+[0:09:12] let's go back to this toy example where it just got two treatments
+[0:09:13] it just got two treatments and let's suppose that you know
+[0:09:15] and let's suppose that you know treatment theta one is some new
+[0:09:16] treatment theta one is some new treatment that we're considering
+[0:09:18] treatment that we're considering treatment theta two is a control right
+[0:09:20] treatment theta two is a control right which is sort of the baseline
+[0:09:21] which is sort of the baseline status quo now if i impose only
+[0:09:25] status quo now if i impose only unconditional validity and the
+[0:09:28] unconditional validity and the probability that i recommend the new
+[0:09:29] probability that i recommend the new treatment is small
+[0:09:31] treatment is small then of course i may have that the
+[0:09:33] then of course i may have that the coverage probability
+[0:09:34] coverage probability conditional on recommending the new
+[0:09:35] conditional on recommending the new treatment is much much less than one
+[0:09:37] treatment is much much less than one minus alpha
+[0:09:39] minus alpha and in particular it may be the case
+[0:09:41] and in particular it may be the case that our confidence set is
+[0:09:42] that our confidence set is systematically over optimistic
+[0:09:44] systematically over optimistic in those cases where we recommend a new
+[0:09:46] in those cases where we recommend a new treatment with the result that if one
+[0:09:48] treatment with the result that if one were to follow these recommendations
+[0:09:49] were to follow these recommendations that we're making
+[0:09:50] that we're making the results would lie below our
+[0:09:52] the results would lie below our confidence set with high probability
+[0:09:55] confidence set with high probability and one way to think about the
+[0:09:56] and one way to think about the conditional versus unconditional
+[0:09:58] conditional versus unconditional distinction
+[0:09:58] distinction is whether this sort of scenario bothers
+[0:10:00] is whether this sort of scenario bothers us right if we say yes it bothers me
+[0:10:03] us right if we say yes it bothers me that when i'm recommending a deviation
+[0:10:05] that when i'm recommending a deviation from the status quo the results are
+[0:10:06] from the status quo the results are disappointing relative to the confidence
+[0:10:08] disappointing relative to the confidence set
+[0:10:09] set that i reported then that says that we
+[0:10:11] that i reported then that says that we want coverage conditional on the
+[0:10:13] want coverage conditional on the recommendation
+[0:10:13] recommendation corresponding to conditional validity on
+[0:10:16] corresponding to conditional validity on the other hand
+[0:10:17] the other hand right if we say you know i've premised
+[0:10:19] right if we say you know i've premised this whole discussion
+[0:10:20] this whole discussion on the fact that the probability we
+[0:10:22] on the fact that the probability we recommend the new treatment is small
+[0:10:24] recommend the new treatment is small and so i don't worry about the fact that
+[0:10:26] and so i don't worry about the fact that the coverage conditional on this low
+[0:10:27] the coverage conditional on this low probability event
+[0:10:28] probability event is low well that would say that i'm
+[0:10:30] is low well that would say that i'm satisfied with unconditional validity in
+[0:10:32] satisfied with unconditional validity in this setting
+[0:10:38] so having set up those two potential goals conditional and unconditional
+[0:10:39] goals conditional and unconditional inference
+[0:10:40] inference what can one do in each case so for
+[0:10:43] what can one do in each case so for conditional inference
+[0:10:44] conditional inference right we're going to be thinking about
+[0:10:46] right we're going to be thinking about imprints on youth the true effectiveness
+[0:10:48] imprints on youth the true effectiveness of the recommended treatment
+[0:10:49] of the recommended treatment conditional on recommending treatment
+[0:10:51] conditional on recommending treatment theta
+[0:10:53] theta but a useful observation here is that
+[0:10:55] but a useful observation here is that the conditional distribution
+[0:10:57] the conditional distribution of x right the vector of estimated
+[0:11:00] of x right the vector of estimated average outcomes under different
+[0:11:01] average outcomes under different treatments conditional on a given
+[0:11:03] treatments conditional on a given recommendation
+[0:11:04] recommendation is just going to be a multivariate
+[0:11:05] is just going to be a multivariate truncated normal right but
+[0:11:08] truncated normal right but truncated normals belong to the
+[0:11:09] truncated normals belong to the exponential family so
+[0:11:11] exponential family so using exponential family results we can
+[0:11:13] using exponential family results we can get optimal median unbiased estimators
+[0:11:15] get optimal median unbiased estimators and equal tails confidence sets
+[0:11:17] and equal tails confidence sets where these confidences are equal tailed
+[0:11:19] where these confidences are equal tailed in the sense that we're
+[0:11:20] in the sense that we're equally likely to over and underestimate
+[0:11:23] equally likely to over and underestimate mu theta hat
+[0:11:26] mu theta hat if you prefer uniformly most accurate
+[0:11:28] if you prefer uniformly most accurate unbiased confidence sets those are also
+[0:11:29] unbiased confidence sets those are also available
+[0:11:30] available and discussed in the appendages of the
+[0:11:32] and discussed in the appendages of the paper as well as in the broader
+[0:11:34] paper as well as in the broader conditional inference literature the
+[0:11:37] conditional inference literature the intuition behind these constructions
+[0:11:39] intuition behind these constructions right is that in this case where i want
+[0:11:41] right is that in this case where i want to do inference condition on theta hat
+[0:11:43] to do inference condition on theta hat equals theta one
+[0:11:45] equals theta one mu theta two the true effectiveness of
+[0:11:47] mu theta two the true effectiveness of the treatment i'm not recommending
+[0:11:49] the treatment i'm not recommending is a nuisance parameter well x theta two
+[0:11:52] is a nuisance parameter well x theta two is a minimal sufficient statistic for
+[0:11:54] is a minimal sufficient statistic for that nuisance parameter
+[0:11:57] that nuisance parameter but once we condition on that minimal
+[0:11:59] but once we condition on that minimal sufficient statistic
+[0:12:00] sufficient statistic right the distribution of x theta 1 is
+[0:12:02] right the distribution of x theta 1 is just going to be a truncated normal
+[0:12:04] just going to be a truncated normal right in particular it will be this
+[0:12:05] right in particular it will be this untruncated normal distribution
+[0:12:07] untruncated normal distribution truncated to the interval where x1 is
+[0:12:10] truncated to the interval where x1 is greater than the realized value of x2
+[0:12:17] so that's conditional inference what about unconditional
+[0:12:19] about unconditional so for unconditional inference we've got
+[0:12:21] so for unconditional inference we've got two potential options
+[0:12:24] two potential options one as i suggested before is just to use
+[0:12:26] one as i suggested before is just to use the conditional procedure
+[0:12:28] the conditional procedure right again conditional validity implies
+[0:12:30] right again conditional validity implies unconditional validity
+[0:12:31] unconditional validity so we're free to just continue to report
+[0:12:33] so we're free to just continue to report the conditional confidence that
+[0:12:36] the conditional confidence that however since unconditional inference is
+[0:12:38] however since unconditional inference is a weaker criterion we also have more
+[0:12:39] a weaker criterion we also have more options
+[0:12:40] options right now one option we could take is
+[0:12:42] right now one option we could take is what we'll call the projection
+[0:12:43] what we'll call the projection confidence set
+[0:12:44] confidence set which is an approach with many analogs
+[0:12:46] which is an approach with many analogs in the existing literature
+[0:12:48] in the existing literature so for this approach right we'll just
+[0:12:51] so for this approach right we'll just take our standard estimator
+[0:12:52] take our standard estimator add and subtract a critical value where
+[0:12:55] add and subtract a critical value where this critical value will be the one
+[0:12:56] this critical value will be the one minus alpha quantile
+[0:12:58] minus alpha quantile of the max of the absolute value of a
+[0:13:01] of the max of the absolute value of a two-dimensional normal distribution
+[0:13:05] two-dimensional normal distribution right intuitively one way to think about
+[0:13:07] right intuitively one way to think about what this uh confidence that it's doing
+[0:13:09] what this uh confidence that it's doing is it's forming a rectangular joint
+[0:13:11] is it's forming a rectangular joint confidence set from mu theta one and u
+[0:13:13] confidence set from mu theta one and u theta two
+[0:13:14] theta two right simultaneous confidence set and
+[0:13:16] right simultaneous confidence set and then projecting that
+[0:13:17] then projecting that on the um dimension corresponding to the
+[0:13:21] on the um dimension corresponding to the treatment of interest theta to construct
+[0:13:23] treatment of interest theta to construct a confidence interval for mu theta hat
+[0:13:26] a confidence interval for mu theta hat now as it turns out at least from our
+[0:13:28] now as it turns out at least from our perspective from the unconditional
+[0:13:29] perspective from the unconditional perspective here
+[0:13:30] perspective here neither of these confidence sets is
+[0:13:32] neither of these confidence sets is fully satisfactory
+[0:13:34] fully satisfactory as i'll show you in simulation in a
+[0:13:36] as i'll show you in simulation in a minute uh conditional confidence sets
+[0:13:38] minute uh conditional confidence sets and estimators
+[0:13:38] and estimators turn out to perform quite well when mu
+[0:13:41] turn out to perform quite well when mu theta one is much much bigger than mu
+[0:13:42] theta one is much much bigger than mu theta two
+[0:13:43] theta two or the reverse right sort of in the case
+[0:13:45] or the reverse right sort of in the case where it's exposed and the obvious
+[0:13:47] where it's exposed and the obvious which treatment is the best with high
+[0:13:48] which treatment is the best with high probability but perform
+[0:13:50] probability but perform poorly when new theta 1 and mu theta 2
+[0:13:52] poorly when new theta 1 and mu theta 2 are about the same
+[0:13:54] are about the same by contrast the projection interval
+[0:13:57] by contrast the projection interval performs reasonably well
+[0:13:58] performs reasonably well when mu theta 1 and mu theta 2 are about
+[0:14:00] when mu theta 1 and mu theta 2 are about the same but ends up being unnecessarily
+[0:14:03] the same but ends up being unnecessarily wide when mu theta 1 is much bigger than
+[0:14:04] wide when mu theta 1 is much bigger than mu theta 2.
+[0:14:13] now if we require conditional coverage right i've already said
+[0:14:14] right i've already said that our conditional procedures are
+[0:14:16] that our conditional procedures are optimal so if you're
+[0:14:17] optimal so if you're satisfied with the sense in which
+[0:14:18] satisfied with the sense in which they're optimal there's not really much
+[0:14:20] they're optimal there's not really much scope for improvement here
+[0:14:22] scope for improvement here but if we care only about unconditional
+[0:14:24] but if we care only about unconditional coverage
+[0:14:25] coverage right then potentially there's scope to
+[0:14:27] right then potentially there's scope to improve things
+[0:14:29] improve things so in particular to do that we propose
+[0:14:31] so in particular to do that we propose what we call a hybrid confidence set
+[0:14:33] what we call a hybrid confidence set which is uh uses an argument very
+[0:14:35] which is uh uses an argument very similar to the conditioning approach
+[0:14:37] similar to the conditioning approach but changes the conditioning event so
+[0:14:39] but changes the conditioning event so rather than just conditioning on the
+[0:14:41] rather than just conditioning on the recommended treatment we also condition
+[0:14:43] recommended treatment we also condition on the event that the true effectiveness
+[0:14:45] on the event that the true effectiveness of the recommended treatment
+[0:14:47] of the recommended treatment lies in the level beta projection
+[0:14:49] lies in the level beta projection confidence
+[0:14:50] confidence where beta is some value less than alpha
+[0:14:52] where beta is some value less than alpha and all the numbers i'm going to show
+[0:14:54] and all the numbers i'm going to show you we use beta equals alpha
+[0:14:57] you we use beta equals alpha changing the conditioning event in this
+[0:14:59] changing the conditioning event in this way has the effect of ensuring that the
+[0:15:00] way has the effect of ensuring that the hybrid confidence set
+[0:15:02] hybrid confidence set always lies within the level beta
+[0:15:04] always lies within the level beta projection confidence set
+[0:15:06] projection confidence set and so limits the worst case performance
+[0:15:08] and so limits the worst case performance relative to the projection confidence
+[0:15:10] relative to the projection confidence set
+[0:15:10] set in this case where the two treatments
+[0:15:12] in this case where the two treatments are roughly the same are
+[0:15:13] are roughly the same are roughly equally effective while
+[0:15:15] roughly equally effective while retaining
+[0:15:16] retaining most of the good performance of the
+[0:15:18] most of the good performance of the conditional approach when one treatment
+[0:15:20] conditional approach when one treatment is much better than the other
+[0:15:22] is much better than the other building on similar ideas we can propose
+[0:15:24] building on similar ideas we can propose hybrid estimators
+[0:15:25] hybrid estimators and we find in simulation that
+[0:15:27] and we find in simulation that hybridizing in this way
+[0:15:29] hybridizing in this way seems to give substantial unconditional
+[0:15:31] seems to give substantial unconditional performance improvements in many cases
+[0:15:37] so to illustrate that let's go back to this simulation example
+[0:15:38] this simulation example where to avoid repeating the pictures
+[0:15:40] where to avoid repeating the pictures too many times i'm just going to focus
+[0:15:42] too many times i'm just going to focus on the case where we're thinking about
+[0:15:43] on the case where we're thinking about 50 possible treatments
+[0:15:46] 50 possible treatments as before we see that the conventional
+[0:15:48] as before we see that the conventional confidence set right dramatically
+[0:15:50] confidence set right dramatically undercover is when the treatments are of
+[0:15:52] undercover is when the treatments are of roughly similar effectiveness
+[0:15:54] roughly similar effectiveness the solid line here is the coverage of
+[0:15:56] the solid line here is the coverage of the projection confidence set
+[0:15:58] the projection confidence set and we see that its coverage is right
+[0:16:00] and we see that its coverage is right around the nominal level 95
+[0:16:02] around the nominal level 95 when all the treatments are equally
+[0:16:03] when all the treatments are equally effective but that it substantially over
+[0:16:06] effective but that it substantially over covers right in this case where one
+[0:16:08] covers right in this case where one treatment is much more effective than
+[0:16:09] treatment is much more effective than the others
+[0:16:11] the others looking at the conditional and hybrid by
+[0:16:14] looking at the conditional and hybrid by contrast we see that their coverage
+[0:16:15] contrast we see that their coverage is close to 95 uniformly across the
+[0:16:18] is close to 95 uniformly across the different parameter values we're
+[0:16:20] different parameter values we're considering here
+[0:16:23] considering here in addition to coverage of course we
+[0:16:25] in addition to coverage of course we also care about length so here i'm
+[0:16:26] also care about length so here i'm plotting the median length of 95
+[0:16:29] plotting the median length of 95 confidence nominal 95 confidence
+[0:16:31] confidence nominal 95 confidence intervals
+[0:16:32] intervals right of course the length of the
+[0:16:34] right of course the length of the conventional and projection approaches
+[0:16:36] conventional and projection approaches doesn't depend on the realized value of
+[0:16:38] doesn't depend on the realized value of x right so it's constant along the
+[0:16:40] x right so it's constant along the horizontal axis here
+[0:16:42] horizontal axis here looking first at the conditional right
+[0:16:44] looking first at the conditional right we see the phenomenon i was alluding to
+[0:16:46] we see the phenomenon i was alluding to before
+[0:16:47] before right basically the conditional
+[0:16:48] right basically the conditional confidence set ends up being
+[0:16:50] confidence set ends up being quite long right its median length is
+[0:16:52] quite long right its median length is more than twice the length of the
+[0:16:53] more than twice the length of the projection interval
+[0:16:54] projection interval in this case where all the treatments
+[0:16:56] in this case where all the treatments are equally effective as i make one
+[0:16:58] are equally effective as i make one treatment more effective than the others
+[0:17:00] treatment more effective than the others right its medium length declines
+[0:17:02] right its medium length declines and eventually converges down all the
+[0:17:04] and eventually converges down all the way to the length of the conventional
+[0:17:06] way to the length of the conventional interval
+[0:17:08] interval interestingly in this particular case uh
+[0:17:10] interestingly in this particular case uh taking this hybrid approach
+[0:17:12] taking this hybrid approach ends up giving us a median length that's
+[0:17:14] ends up giving us a median length that's shorter than the projection interval for
+[0:17:16] shorter than the projection interval for all the parameter values we consider
+[0:17:17] all the parameter values we consider here
+[0:17:18] here the median length of the hybrid
+[0:17:19] the median length of the hybrid converges almost all the way down to the
+[0:17:22] converges almost all the way down to the length of the conventional interval
+[0:17:24] length of the conventional interval although it's hard to see here the
+[0:17:25] although it's hard to see here the conditional will converge fully to the
+[0:17:27] conditional will converge fully to the conventional
+[0:17:28] conventional the hybrid doesn't quite get there but
+[0:17:30] the hybrid doesn't quite get there but it's close
+[0:17:33] it's close so just to wrap up the takeaways from
+[0:17:36] so just to wrap up the takeaways from this stylized example
+[0:17:38] this stylized example right we first see that inference on the
+[0:17:40] right we first see that inference on the best performing treatment in an
+[0:17:42] best performing treatment in an experiment
+[0:17:42] experiment invalidates conventional inference
+[0:17:44] invalidates conventional inference procedures and of course we're not the
+[0:17:46] procedures and of course we're not the first
+[0:17:46] first to know this as previously been noted by
+[0:17:48] to know this as previously been noted by many others
+[0:17:50] many others to address this we develop optimal
+[0:17:52] to address this we develop optimal inference procedures that are valid
+[0:17:53] inference procedures that are valid conditional on the parameter selected
+[0:17:55] conditional on the parameter selected but um validity conditional on the
+[0:17:58] but um validity conditional on the parameter selected is also a fairly
+[0:17:59] parameter selected is also a fairly dramatic
+[0:18:00] dramatic demanding criterion so if we're
+[0:18:02] demanding criterion so if we're satisfied with unconditional validity
+[0:18:04] satisfied with unconditional validity instead of conditional validity
+[0:18:06] instead of conditional validity we also propose these hybrid inference
+[0:18:08] we also propose these hybrid inference procedures which we find
+[0:18:10] procedures which we find allow substantial performance
+[0:18:11] allow substantial performance improvements relative to both
+[0:18:13] improvements relative to both our conditional procedures and existing
+[0:18:16] our conditional procedures and existing ultra and an existing alternative namely
+[0:18:17] ultra and an existing alternative namely projection
+[0:18:19] projection in the remainder of the talk i'll sketch
+[0:18:21] in the remainder of the talk i'll sketch uh sort of the constructions we're using
+[0:18:23] uh sort of the constructions we're using for more general settings
+[0:18:25] for more general settings and then illustrate all this with an
+[0:18:26] and then illustrate all this with an application to the recent economics
+[0:18:28] application to the recent economics literature on neighborhood effects
+[0:18:31] literature on neighborhood effects before i do that though let me just
+[0:18:33] before i do that though let me just briefly flag uh the relation to the
+[0:18:35] briefly flag uh the relation to the literature here
+[0:18:36] literature here so as i suggested our optimality results
+[0:18:39] so as i suggested our optimality results for conditional inference build on
+[0:18:41] for conditional inference build on classical results for exponential
+[0:18:42] classical results for exponential families
+[0:18:45] families further results for conditional
+[0:18:47] further results for conditional inference also build
+[0:18:48] inference also build on the large and growing recent
+[0:18:50] on the large and growing recent literature on selective inference
+[0:18:51] literature on selective inference right where this literature develops a
+[0:18:53] right where this literature develops a general framework for conditional
+[0:18:54] general framework for conditional inference that our conditional
+[0:18:56] inference that our conditional uh inference procedures fall into where
+[0:18:59] uh inference procedures fall into where relative to the selective inference
+[0:19:01] relative to the selective inference literature um one thing that appears to
+[0:19:02] literature um one thing that appears to be new in this paper
+[0:19:04] be new in this paper is that we find these substantial gains
+[0:19:06] is that we find these substantial gains from relaxing
+[0:19:07] from relaxing to the unconditional problem via this
+[0:19:10] to the unconditional problem via this hybrid approach
+[0:19:12] hybrid approach our unconditional inference results
+[0:19:14] our unconditional inference results likewise build on the large literature
+[0:19:16] likewise build on the large literature on post-selection inference
+[0:19:18] on post-selection inference where the projection interval we propose
+[0:19:20] where the projection interval we propose we use is a special case of procedures
+[0:19:23] we use is a special case of procedures in this literature
+[0:19:24] in this literature but again the hybrid approach appears to
+[0:19:26] but again the hybrid approach appears to be novel relative to this
+[0:19:28] be novel relative to this uh post-selection inference literature
+[0:19:31] uh post-selection inference literature so before i move on to the more general
+[0:19:33] so before i move on to the more general case let me pause here for questions
+[0:19:37] case let me pause here for questions sure yeah we have a uh question from uh
+[0:19:40] sure yeah we have a uh question from uh uh i apologize if i'm pronouncing your
+[0:19:42] uh i apologize if i'm pronouncing your name wrong uh krika mo
+[0:19:44] name wrong uh krika mo mondet uh so i'll allow you to
+[0:19:48] mondet uh so i'll allow you to mute yourself
+[0:19:55] hello hello hi yes can you hear me yes yes so i have a couple of questions
+[0:19:58] yes yes so i have a couple of questions so you just answer my second question
+[0:20:01] so you just answer my second question which is basically the connection to
+[0:20:02] which is basically the connection to post selection in france
+[0:20:04] post selection in france that's cool so the first question is
+[0:20:07] that's cool so the first question is um um will the same problem arise if you
+[0:20:11] um um will the same problem arise if you decided to recommend the worst treatment
+[0:20:13] decided to recommend the worst treatment instead of the best one yeah yeah yeah
+[0:20:16] instead of the best one yeah yeah yeah so the
+[0:20:17] so the it's it's totally um if you recommend
+[0:20:19] it's it's totally um if you recommend the best treatment rather than the worst
+[0:20:21] the best treatment rather than the worst one you could think of that as
+[0:20:22] one you could think of that as recommending the best treatment based on
+[0:20:24] recommending the best treatment based on minus x so the results are totally
+[0:20:26] minus x so the results are totally symmetric for best versus worse
+[0:20:28] symmetric for best versus worse related problems also come up if i say
+[0:20:30] related problems also come up if i say like okay maybe the best is selected so
+[0:20:32] like okay maybe the best is selected so i'm going to recommend the second best
+[0:20:34] i'm going to recommend the second best um sort of the sort of exact
+[0:20:37] um sort of the sort of exact form of the bias there is going to be a
+[0:20:39] form of the bias there is going to be a little different from the best but
+[0:20:40] little different from the best but sort of again you'll have bias and under
+[0:20:42] sort of again you'll have bias and under coverage issues in
+[0:20:44] coverage issues in cases with a lot of treatments yeah so
+[0:20:47] cases with a lot of treatments yeah so when when
+[0:20:48] when when you have different let's say mechanism
+[0:20:50] you have different let's say mechanism of recommending
+[0:20:51] of recommending different treatment maybe not
+[0:20:53] different treatment maybe not necessarily the best how this
+[0:20:55] necessarily the best how this mechanism would affect your analysis
+[0:20:58] mechanism would affect your analysis yeah absolutely so
+[0:21:02] yeah absolutely so one way to think about it is um
+[0:21:05] one way to think about it is um sorry so i'm going to go back here so
+[0:21:08] sorry so i'm going to go back here so just going to here right
+[0:21:12] just going to here right essentially one way to think about it is
+[0:21:14] essentially one way to think about it is if you just give me
+[0:21:15] if you just give me some some mechanism for picking which
+[0:21:17] some some mechanism for picking which treatment i'm going to recommend
+[0:21:19] treatment i'm going to recommend right the event that i recommend a
+[0:21:22] right the event that i recommend a particular treatment
+[0:21:23] particular treatment you can think of as an event in the
+[0:21:25] you can think of as an event in the space of axes
+[0:21:26] space of axes right basically the space of the sample
+[0:21:29] right basically the space of the sample average outcomes for all these different
+[0:21:30] average outcomes for all these different treatments
+[0:21:32] treatments and so right sort of the full the
+[0:21:35] and so right sort of the full the more general version where you're not
+[0:21:36] more general version where you're not just picking the best just you're
+[0:21:38] just picking the best just you're picking in some way
+[0:21:39] picking in some way you can think about you can think of as
+[0:21:41] you can think about you can think of as i'm interested in the effect of some
+[0:21:44] i'm interested in the effect of some treatment conditional on the event that
+[0:21:46] treatment conditional on the event that x falls in
+[0:21:48] x falls in some set in the space of possible
+[0:21:50] some set in the space of possible x-realizations
+[0:21:51] x-realizations and that's precisely the sort of problem
+[0:21:54] and that's precisely the sort of problem that the selective
+[0:21:55] that the selective inference literature develops tools to
+[0:21:57] inference literature develops tools to address and so
+[0:21:58] address and so conditional inference in that case is
+[0:22:00] conditional inference in that case is going to follow sort of the same
+[0:22:02] going to follow sort of the same um logic as the selective inference
+[0:22:05] um logic as the selective inference literature
+[0:22:06] literature but the particular conditioning of that
+[0:22:08] but the particular conditioning of that would be different than the one we're
+[0:22:09] would be different than the one we're using
+[0:22:09] using i see i see thank you very much
+[0:22:12] i see i see thank you very much yeah absolutely thank you
+[0:22:18] uh yeah i think there's no more questions right now so feel free to
+[0:22:20] questions right now so feel free to continue
+[0:22:20] continue perfect
+[0:22:29] all right so um with that let me go and talk a bit about our more general
+[0:22:31] and talk a bit about our more general results
+[0:22:37] so the more so sort of moving beyond this toy example the more general
+[0:22:39] this toy example the more general setting we think about
+[0:22:40] setting we think about is one where we observe uh vectors x and
+[0:22:43] is one where we observe uh vectors x and y
+[0:22:43] y which are jointly normal with unknown
+[0:22:46] which are jointly normal with unknown mean mu
+[0:22:47] mean mu known covariance matrix sigma note that
+[0:22:50] known covariance matrix sigma note that unlike in the for example sigma doesn't
+[0:22:51] unlike in the for example sigma doesn't have to be diagonal these things don't
+[0:22:53] have to be diagonal these things don't have to be independent
+[0:22:54] have to be independent anything like that we'll again index the
+[0:22:57] anything like that we'll again index the elements of x and y by theta
+[0:22:59] elements of x and y by theta right writing mu x theta for the mean of
+[0:23:02] right writing mu x theta for the mean of x theta mu y theta for the mean of y
+[0:23:04] x theta mu y theta for the mean of y theta
+[0:23:05] theta now in today's talk and in most of the
+[0:23:07] now in today's talk and in most of the paper we focus on this finite sample
+[0:23:09] paper we focus on this finite sample normal setting with a known variance
+[0:23:10] normal setting with a known variance matrix
+[0:23:11] matrix but in the paper we show that finite
+[0:23:13] but in the paper we show that finite sample results in the normal model
+[0:23:15] sample results in the normal model translate to uniform asymptotic results
+[0:23:18] translate to uniform asymptotic results in the way you would expect
+[0:23:19] in the way you would expect in cases where i've got asymptotic or
+[0:23:21] in cases where i've got asymptotic or normal x and y
+[0:23:22] normal x and y and a consistent estimator for sigma so
+[0:23:25] and a consistent estimator for sigma so if you prefer to think about these as
+[0:23:26] if you prefer to think about these as asymptotic results you can do that
+[0:23:27] asymptotic results you can do that translation
+[0:23:33] now for the general problem we'll suppose that we're going to
+[0:23:34] suppose that we're going to pick theta again as the arg max of x
+[0:23:37] pick theta again as the arg max of x theta
+[0:23:38] theta but that we're interested in inference
+[0:23:40] but that we're interested in inference on mu y theta hat
+[0:23:42] on mu y theta hat right so this is a generalization of the
+[0:23:44] right so this is a generalization of the stylized example
+[0:23:45] stylized example because we're allowing the possibility
+[0:23:46] because we're allowing the possibility that we're doing selection based on one
+[0:23:48] that we're doing selection based on one thing
+[0:23:49] thing and targeting inference based on another
+[0:23:52] and targeting inference based on another right for instance maybe i'm interested
+[0:23:53] right for instance maybe i'm interested in picking the best performing treatment
+[0:23:55] in picking the best performing treatment in terms of average outcomes over
+[0:23:57] in terms of average outcomes over everybody
+[0:23:58] everybody but i want to do inference on the impact
+[0:24:00] but i want to do inference on the impact of that treatment for some subpopulation
+[0:24:02] of that treatment for some subpopulation of interest
+[0:24:03] of interest right and that's going to be
+[0:24:04] right and that's going to be accommodated by this uh
+[0:24:11] now for conditional inference uh the construction from the toy example
+[0:24:13] construction from the toy example uh extends directly to the general case
+[0:24:15] uh extends directly to the general case but i'm going to refer you to the paper
+[0:24:16] but i'm going to refer you to the paper for sort of the
+[0:24:17] for sort of the boring details of that at the end of the
+[0:24:20] boring details of that at the end of the day the upshot is that we'll get an
+[0:24:22] day the upshot is that we'll get an optimal quantile unbiased estimator new
+[0:24:24] optimal quantile unbiased estimator new hat alpha
+[0:24:25] hat alpha right where the probability that we
+[0:24:27] right where the probability that we overestimate the true effectiveness of
+[0:24:29] overestimate the true effectiveness of the recommended treatment
+[0:24:30] the recommended treatment condition on the recommendation made is
+[0:24:32] condition on the recommendation made is going to be exactly equal to alpha
+[0:24:36] going to be exactly equal to alpha hence you have one half is going to be a
+[0:24:38] hence you have one half is going to be a median unbiased estimator
+[0:24:40] median unbiased estimator while the equal tailed interval you had
+[0:24:42] while the equal tailed interval you had alpha over 2 of you have 1 minus alpha
+[0:24:44] alpha over 2 of you have 1 minus alpha over 2
+[0:24:44] over 2 well of coverage one minus alpha
+[0:24:48] well of coverage one minus alpha it further turns out that in cases where
+[0:24:50] it further turns out that in cases where the probability that theta hat takes
+[0:24:51] the probability that theta hat takes some value theta tilde is close to one
+[0:24:54] some value theta tilde is close to one right where i almost don't have a
+[0:24:55] right where i almost don't have a selection problem because i almost
+[0:24:56] selection problem because i almost always pick the same treatment
+[0:24:58] always pick the same treatment right this is in the plots in the toy
+[0:25:00] right this is in the plots in the toy example this was when treatment one was
+[0:25:02] example this was when treatment one was much much better than the other
+[0:25:03] much much better than the other treatments
+[0:25:05] treatments the median unbiased estimator is
+[0:25:07] the median unbiased estimator is approximately the same
+[0:25:08] approximately the same in particular converges to the
+[0:25:10] in particular converges to the conventional estimator while the equal
+[0:25:12] conventional estimator while the equal tail confidence interval can
+[0:25:13] tail confidence interval can collapses to the standard normal
+[0:25:15] collapses to the standard normal confidence interval right and so in that
+[0:25:17] confidence interval right and so in that sense these corrections from the
+[0:25:18] sense these corrections from the conditional approach
+[0:25:20] conditional approach vanish in the case where they're not
+[0:25:21] vanish in the case where they're not needed
+[0:25:26] now i do want to say a word on a common alternative
+[0:25:27] alternative to or one comp one uh natural solution
+[0:25:30] to or one comp one uh natural solution to deal with this issue which is sample
+[0:25:32] to deal with this issue which is sample splitting
+[0:25:33] splitting so for sample splitting you could think
+[0:25:35] so for sample splitting you could think for instance of choosing theta hat based
+[0:25:37] for instance of choosing theta hat based on the first half or other fraction of
+[0:25:38] on the first half or other fraction of the data
+[0:25:39] the data while using the other half or other
+[0:25:41] while using the other half or other fraction of the data for inference
+[0:25:44] fraction of the data for inference asymptotically what this looks like
+[0:25:46] asymptotically what this looks like right is getting independent x1 y1
+[0:25:48] right is getting independent x1 y1 and x2 y2 where i'll calculate theta hat
+[0:25:51] and x2 y2 where i'll calculate theta hat based on x1
+[0:25:52] based on x1 and then use y2 for inference
+[0:25:55] and then use y2 for inference now since x1 and y2 are independent
+[0:25:58] now since x1 and y2 are independent right selecting
+[0:25:59] right selecting the target parameter based on x1 doesn't
+[0:26:01] the target parameter based on x1 doesn't mess up inference based on y2
+[0:26:03] mess up inference based on y2 so conventional inference is going to be
+[0:26:05] so conventional inference is going to be valid in this setup
+[0:26:07] valid in this setup but uh results in 50 and sun and taylor
+[0:26:09] but uh results in 50 and sun and taylor
+[0:26:12] say that sample splitting is going to be dominated for this problem
+[0:26:14] dominated for this problem right and one way to think about the
+[0:26:16] right and one way to think about the reason why is that rather than
+[0:26:18] reason why is that rather than conditioning
+[0:26:18] conditioning on theta hat equals theta tilde but if i
+[0:26:21] on theta hat equals theta tilde but if i take the sample splitting approach here
+[0:26:22] take the sample splitting approach here i'm effectively conditioning on the pair
+[0:26:24] i'm effectively conditioning on the pair x1 y1 right but there's still some
+[0:26:27] x1 y1 right but there's still some residual useful information in x1 y1
+[0:26:30] residual useful information in x1 y1 conditional on the realization of theta
+[0:26:32] conditional on the realization of theta hat
+[0:26:34] hat and so by exploiting that information
+[0:26:36] and so by exploiting that information one can develop
+[0:26:37] one can develop uh more powerful inference and so in the
+[0:26:40] uh more powerful inference and so in the supplement of the paper we talk about
+[0:26:42] supplement of the paper we talk about one
+[0:26:42] one uh easy to compute split sample
+[0:26:44] uh easy to compute split sample procedure that dominates the usual split
+[0:26:46] procedure that dominates the usual split sample approach
+[0:26:48] sample approach now if you think about sort of splits
+[0:26:50] now if you think about sort of splits this like doing a split sample type of
+[0:26:52] this like doing a split sample type of thing
+[0:26:53] thing versus uh the approach i've been
+[0:26:54] versus uh the approach i've been sketching so far which is using the full
+[0:26:56] sketching so far which is using the full data to select x
+[0:26:58] data to select x right there you face a bit of a
+[0:27:00] right there you face a bit of a trade-off right because
+[0:27:01] trade-off right because using sample splitting leaves more
+[0:27:03] using sample splitting leaves more information for inference
+[0:27:05] information for inference on the parameter of interest but um on
+[0:27:08] on the parameter of interest but um on average right you'll do a better job
+[0:27:10] average right you'll do a better job picking the best treatment if you use
+[0:27:12] picking the best treatment if you use more of the data for that
+[0:27:13] more of the data for that right so that raises a question of how
+[0:27:14] right so that raises a question of how do you feel about sort of
+[0:27:16] do you feel about sort of picking the best treatment possible in
+[0:27:17] picking the best treatment possible in expectation versus doing a better job on
+[0:27:20] expectation versus doing a better job on inference
+[0:27:25] next uh we can also generalize our results for unconditional inference
+[0:27:28] results for unconditional inference right for unconditional inference for
+[0:27:30] right for unconditional inference for the projection approach we'll again just
+[0:27:32] the projection approach we'll again just form a rectangular joint confidence set
+[0:27:34] form a rectangular joint confidence set for the full vector mu y
+[0:27:36] for the full vector mu y and then report the interval
+[0:27:38] and then report the interval corresponding to the parameter of
+[0:27:39] corresponding to the parameter of interest mu y theta hat
+[0:27:40] interest mu y theta hat and again the hybrid approach is just
+[0:27:42] and again the hybrid approach is just going to combine the conditional
+[0:27:44] going to combine the conditional and projection idea is exactly analogous
+[0:27:46] and projection idea is exactly analogous to the toy example before
+[0:27:50] to the toy example before so that's a quick sketch of our results
+[0:27:53] so that's a quick sketch of our results with more general setting um any
+[0:27:55] with more general setting um any questions at this stage
+[0:27:57] questions at this stage uh not currently no
+[0:28:01] perfect
+[0:28:08] so to wrap up um i want to revisit uh illustrate with a um analysis
+[0:28:11] uh illustrate with a um analysis revisiting the recent economics
+[0:28:12] revisiting the recent economics literature on neighborhood effects
+[0:28:15] literature on neighborhood effects so uh chatty and hendra 2018 find that
+[0:28:19] so uh chatty and hendra 2018 find that the neighborhoods in which children grow
+[0:28:21] the neighborhoods in which children grow up appear to have large causal impacts
+[0:28:23] up appear to have large causal impacts on their outcomes in adulthood motivated
+[0:28:26] on their outcomes in adulthood motivated by these results
+[0:28:27] by these results birdman at all 2020 conducted a
+[0:28:29] birdman at all 2020 conducted a randomized trial
+[0:28:30] randomized trial trying to help low-income households
+[0:28:32] trying to help low-income households with children moved to higher
+[0:28:33] with children moved to higher opportunity neighborhoods
+[0:28:35] opportunity neighborhoods right they were doing this in the
+[0:28:37] right they were doing this in the conjunction with the seattle and king
+[0:28:38] conjunction with the seattle and king county housing authorities in washington
+[0:28:40] county housing authorities in washington state
+[0:28:40] state and the target neighborhoods here the
+[0:28:42] and the target neighborhoods here the neighborhoods they were trying to help
+[0:28:43] neighborhoods they were trying to help these low-income families move
+[0:28:45] these low-income families move to were defined roughly as the top third
+[0:28:48] to were defined roughly as the top third of census tracts in the seattle
+[0:28:50] of census tracts in the seattle commuting zone
+[0:28:51] commuting zone based on estimated measures of economic
+[0:28:53] based on estimated measures of economic opportunity
+[0:28:55] opportunity right now for the exercise i'm going to
+[0:28:57] right now for the exercise i'm going to show you here we asked what would happen
+[0:28:59] show you here we asked what would happen if one would repeat this exercise in the
+[0:29:01] if one would repeat this exercise in the 50 largest commuting zones in the us
+[0:29:04] 50 largest commuting zones in the us and i'll show you both simulation and
+[0:29:06] and i'll show you both simulation and empirical results
+[0:29:12] so for simulations what we're going to do is to treat the neighborhood level
+[0:29:14] do is to treat the neighborhood level economic opportunity estimates
+[0:29:16] economic opportunity estimates used by bergman at all 2020 as the true
+[0:29:20] used by bergman at all 2020 as the true values of this economic opportunity
+[0:29:22] values of this economic opportunity measure it will then simulate
+[0:29:24] measure it will then simulate estimates by adding noise with
+[0:29:27] estimates by adding noise with a standard deviation equal to the
+[0:29:29] a standard deviation equal to the standard errors for the original
+[0:29:31] standard errors for the original measures
+[0:29:33] measures in each computing zone we'll then select
+[0:29:35] in each computing zone we'll then select the top third of tracks
+[0:29:36] the top third of tracks based on these simulated estimates and
+[0:29:39] based on these simulated estimates and we'll conduct inference
+[0:29:40] we'll conduct inference on the average quality of selected
+[0:29:42] on the average quality of selected tracks
+[0:29:43] tracks relative to the average over the whole
+[0:29:45] relative to the average over the whole commuting zone
+[0:29:46] commuting zone right so we're essentially trying to
+[0:29:48] right so we're essentially trying to estimate the extent to which
+[0:29:50] estimate the extent to which targeting tracks in this way is
+[0:29:52] targeting tracks in this way is succeeding
+[0:29:53] succeeding in selecting higher quality tracks on
+[0:29:56] in selecting higher quality tracks on average
+[0:29:58] average for both the simulation and empirical
+[0:30:00] for both the simulation and empirical results i'm going to include a
+[0:30:01] results i'm going to include a comparison with empirical-based
+[0:30:03] comparison with empirical-based estimates and credible sets
+[0:30:05] estimates and credible sets right and one reason we're doing this is
+[0:30:07] right and one reason we're doing this is that empirical-based estimates
+[0:30:09] that empirical-based estimates based on a normal prior are widely used
+[0:30:12] based on a normal prior are widely used in the applied literature in this area
+[0:30:13] in the applied literature in this area and so we're a natural benchmark
+[0:30:15] and so we're a natural benchmark right plus of course if you uh
+[0:30:18] right plus of course if you uh were a you know if one were to take a
+[0:30:20] were a you know if one were to take a fully basic number of credibility
+[0:30:23] fully basic number of credibility um like prior over the distribution of
+[0:30:26] um like prior over the distribution of economic opportunity
+[0:30:27] economic opportunity under that prior this selection issue
+[0:30:29] under that prior this selection issue goes away right since bayes is valid
+[0:30:31] goes away right since bayes is valid conditional on the full data so it's
+[0:30:32] conditional on the full data so it's certainly valid conditional on the best
+[0:30:34] certainly valid conditional on the best performing treatment
+[0:30:35] performing treatment in the experiment
+[0:30:42] so let me show you some results in this segment
+[0:30:43] segment so panel a here i'm showing you uh
+[0:30:46] so panel a here i'm showing you uh the gains from selected tracts on
+[0:30:49] the gains from selected tracts on average across
+[0:30:50] average across each of these 50 commuting zones so the
+[0:30:53] each of these 50 commuting zones so the units here
+[0:30:54] units here are that an effect size of 0.05 says
+[0:30:57] are that an effect size of 0.05 says that
+[0:30:58] that uh if one takes this model of
+[0:31:01] uh if one takes this model of neighborhood-level economic opportunity
+[0:31:02] neighborhood-level economic opportunity seriously
+[0:31:04] seriously right we think that uh four children
+[0:31:06] right we think that uh four children going up in households at the 25th
+[0:31:09] going up in households at the 25th percentile of the income distribution
+[0:31:11] percentile of the income distribution moving to a randomly selected target
+[0:31:13] moving to a randomly selected target tract
+[0:31:14] tract relative to a randomly selected tract
+[0:31:16] relative to a randomly selected tract over the entire commuting zone
+[0:31:19] over the entire commuting zone is going to increase that child's
+[0:31:21] is going to increase that child's writing in the
+[0:31:22] writing in the income distribution in adulthood by five
+[0:31:25] income distribution in adulthood by five percentage points
+[0:31:26] percentage points right so these are non-trivial effect
+[0:31:28] right so these are non-trivial effect sizes here
+[0:31:29] sizes here we see that across all 50 commuting
+[0:31:31] we see that across all 50 commuting zones uh
+[0:31:33] zones uh these numbers are positive which is
+[0:31:34] these numbers are positive which is saying that you know again
+[0:31:36] saying that you know again under this model we are succeeding in
+[0:31:38] under this model we are succeeding in selecting higher quality tracks on
+[0:31:40] selecting higher quality tracks on average by doing things in this way
+[0:31:42] average by doing things in this way panel b shows the median bias of various
+[0:31:45] panel b shows the median bias of various estimators
+[0:31:46] estimators right so the green here is the naive
+[0:31:48] right so the green here is the naive estimator which just ignores the
+[0:31:49] estimator which just ignores the selection issue
+[0:31:50] selection issue not surprisingly it's upward bias for
+[0:31:53] not surprisingly it's upward bias for exactly the reasons we already discussed
+[0:31:55] exactly the reasons we already discussed in red i've got the empirical days
+[0:31:58] in red i've got the empirical days estimator
+[0:31:59] estimator interestingly right and pure uh doing
+[0:32:01] interestingly right and pure uh doing empirical-based shrinkage off of the
+[0:32:02] empirical-based shrinkage off of the normal prior here
+[0:32:04] normal prior here definitely reduces the absolute
+[0:32:05] definitely reduces the absolute magnitude of the bias and makes the sign
+[0:32:07] magnitude of the bias and makes the sign ambiguous right we're biased upwards and
+[0:32:09] ambiguous right we're biased upwards and some commuting zones bias downwards and
+[0:32:11] some commuting zones bias downwards and others
+[0:32:12] others finally the conditional and hybrid are
+[0:32:14] finally the conditional and hybrid are in blue and gray here and
+[0:32:16] in blue and gray here and as we would hope are close to media
+[0:32:18] as we would hope are close to media non-biased
+[0:32:21] non-biased panel c here i'm showing the median
+[0:32:23] panel c here i'm showing the median absolute estimation error
+[0:32:26] absolute estimation error so here we see that the naive does worse
+[0:32:28] so here we see that the naive does worse than the conditional on the hybrid which
+[0:32:30] than the conditional on the hybrid which overlap here in the blue
+[0:32:31] overlap here in the blue which in turn does worse than empirical
+[0:32:33] which in turn does worse than empirical days right so if all i cared about here
+[0:32:35] days right so if all i cared about here were
+[0:32:36] were median absolute estimation errors i
+[0:32:37] median absolute estimation errors i don't care about
+[0:32:39] don't care about bias i'd actually be better off doing
+[0:32:41] bias i'd actually be better off doing empirical base in general here
+[0:32:48] panel d here shows coverage right so we see that
+[0:32:49] see that naive confidence intervals dramatically
+[0:32:51] naive confidence intervals dramatically undercover across
+[0:32:52] undercover across all 50 commuting zones empirical based
+[0:32:54] all 50 commuting zones empirical based credible sets
+[0:32:55] credible sets the coverage actually varies a great
+[0:32:57] the coverage actually varies a great deal across different computing zones so
+[0:32:59] deal across different computing zones so in some it's extremely low in some it's
+[0:33:01] in some it's extremely low in some it's actually close to 95
+[0:33:07] projection intervals over cover while hybrid
+[0:33:08] hybrid and conditional intervals have coverage
+[0:33:10] and conditional intervals have coverage close to 95 percent
+[0:33:11] close to 95 percent across all 50 commuting zones finally
+[0:33:15] across all 50 commuting zones finally panel er
+[0:33:15] panel er e here i'm showing you the median length
+[0:33:17] e here i'm showing you the median length of these different intervals
+[0:33:19] of these different intervals so we see that conditional intervals are
+[0:33:21] so we see that conditional intervals are generally longer than projection
+[0:33:22] generally longer than projection intervals
+[0:33:23] intervals which are longer than hybrid intervals
+[0:33:25] which are longer than hybrid intervals which in turn are longer than
+[0:33:27] which in turn are longer than naive and empirical based intervals
+[0:33:29] naive and empirical based intervals although the latter two
+[0:33:30] although the latter two under color
+[0:33:36] finally here i'm showing you the empirical results
+[0:33:38] empirical results from applying all this to the actual
+[0:33:40] from applying all this to the actual data
+[0:33:41] data so in green i've got the naive estimator
+[0:33:44] so in green i've got the naive estimator and confidence interval
+[0:33:46] and confidence interval in blue the hybrid estimator and
+[0:33:48] in blue the hybrid estimator and confidence interval
+[0:33:49] confidence interval red the empirical base estimator and
+[0:33:52] red the empirical base estimator and credible set
+[0:33:53] credible set and orange the projection interval
+[0:33:56] and orange the projection interval one thing we note is that uh across all
+[0:33:59] one thing we note is that uh across all 50 commuting zones
+[0:34:01] 50 commuting zones the hybrid and empirical base estimates
+[0:34:03] the hybrid and empirical base estimates shift the naive estimates downwards so
+[0:34:06] shift the naive estimates downwards so you know according to both those
+[0:34:07] you know according to both those approaches we do want to correct things
+[0:34:08] approaches we do want to correct things downwards here
+[0:34:10] downwards here the hybrid intervals are not
+[0:34:11] the hybrid intervals are not surprisingly substantially wider than
+[0:34:13] surprisingly substantially wider than both the empirical days and the naive
+[0:34:15] both the empirical days and the naive intervals
+[0:34:16] intervals but substantially shorter than the
+[0:34:17] but substantially shorter than the projection variables
+[0:34:19] projection variables also worth noting um even with these
+[0:34:23] also worth noting um even with these uh even correcting the estimates
+[0:34:25] uh even correcting the estimates downwards here
+[0:34:27] downwards here the hybrid and projection intervals here
+[0:34:29] the hybrid and projection intervals here never overlap zero
+[0:34:31] never overlap zero right and so that's saying that even
+[0:34:33] right and so that's saying that even taking into account the presence of this
+[0:34:35] taking into account the presence of this sort of winner's curse bias
+[0:34:37] sort of winner's curse bias we still conclude that again taking the
+[0:34:39] we still conclude that again taking the neighborhood effects model seriously
+[0:34:41] neighborhood effects model seriously targeting neighborhoods in this way is
+[0:34:43] targeting neighborhoods in this way is succeeding in selecting higher
+[0:34:44] succeeding in selecting higher opportunity tracks on average
+[0:34:46] opportunity tracks on average across all these commuting cells
+[0:34:50] across all these commuting cells so to wrap up in this project we're
+[0:34:52] so to wrap up in this project we're interested
+[0:34:53] interested in inference on parameters chosen based
+[0:34:55] in inference on parameters chosen based on maximization
+[0:34:56] on maximization which leads to bias and under coverage
+[0:34:59] which leads to bias and under coverage if not correct
+[0:35:01] if not correct for this setting one can get uh optimal
+[0:35:03] for this setting one can get uh optimal inference and beat in on bias estimators
+[0:35:05] inference and beat in on bias estimators conditional on the parameter chosen
+[0:35:07] conditional on the parameter chosen right where these conditional procedures
+[0:35:09] right where these conditional procedures converge to conventional ones
+[0:35:11] converge to conventional ones in the case where uh the corrections are
+[0:35:13] in the case where uh the corrections are needed because the same thing is
+[0:35:15] needed because the same thing is selected with high probability
+[0:35:17] selected with high probability if we only care about unconditional bias
+[0:35:20] if we only care about unconditional bias or coverage
+[0:35:21] or coverage we can also think about these hybrid
+[0:35:23] we can also think about these hybrid confidence sets and estimators
+[0:35:24] confidence sets and estimators which we find outperform both pure
+[0:35:26] which we find outperform both pure conditional procedures
+[0:35:28] conditional procedures and the existing alternative in the
+[0:35:30] and the existing alternative in the literature namely projection
+[0:35:36] so that's uh wraps up what i wanted to say
+[0:35:38] say thanks so much isaiah maybe we have one
+[0:35:42] thanks so much isaiah maybe we have one final question
+[0:35:44] final question so this comes from an anonymous attendee
+[0:35:46] so this comes from an anonymous attendee it reads could crossfitting further
+[0:35:48] it reads could crossfitting further improve the inference procedure in
+[0:35:49] improve the inference procedure in comparison to sample splitting
+[0:35:51] comparison to sample splitting so so we've thought about we've thought
+[0:35:54] so so we've thought about we've thought about it here
+[0:35:55] about it here and the the thing that ends up being a
+[0:35:57] and the the thing that ends up being a bit tricky with
+[0:35:59] bit tricky with um crossfitting in this case is sort of
+[0:36:02] um crossfitting in this case is sort of what
+[0:36:03] what what treatment are you making a
+[0:36:04] what treatment are you making a statement about right because if i
+[0:36:06] statement about right because if i uh sort of you know i split the data and
+[0:36:09] uh sort of you know i split the data and i i sort of pick a treatment on
+[0:36:11] i i sort of pick a treatment on part one of the data and then create a
+[0:36:13] part one of the data and then create a confidence interval in part two and then
+[0:36:15] confidence interval in part two and then flip the two roles
+[0:36:16] flip the two roles right i've got two confidence intervals
+[0:36:18] right i've got two confidence intervals but in general those may be confidence
+[0:36:19] but in general those may be confidence intervals for the effects of different
+[0:36:21] intervals for the effects of different treatments
+[0:36:22] treatments right until in some sense it's sort of
+[0:36:24] right until in some sense it's sort of there you end up with confidence
+[0:36:26] there you end up with confidence intervals but it's not
+[0:36:28] intervals but it's not um the conditional approach where you
+[0:36:31] um the conditional approach where you use the full data or where you just do
+[0:36:33] use the full data or where you just do sort of direct sample splitting and
+[0:36:35] sort of direct sample splitting and don't do the crossfitting thing
+[0:36:36] don't do the crossfitting thing you end up with a recommendation and
+[0:36:38] you end up with a recommendation and then a confidence interval that
+[0:36:40] then a confidence interval that corresponds
+[0:36:40] corresponds to that recommendation in crossfitting
+[0:36:42] to that recommendation in crossfitting you end up with multiple recommendations
+[0:36:44] you end up with multiple recommendations and so you sort of
+[0:36:45] and so you sort of lose that interpretive element in a way
+[0:36:47] lose that interpretive element in a way that at least to us made
+[0:36:48] that at least to us made made it unclear how to think about the
+[0:36:51] made it unclear how to think about the results from crossfitting in this
+[0:36:52] results from crossfitting in this setting or sort of
+[0:36:53] setting or sort of whether that would be something
+[0:36:54] whether that would be something attractive to do
+[0:36:59] all right thank you so much yeah thank you
+[0:37:03] yeah so we're now switching over to the discussion uh we'll have will vivian
+[0:37:06] discussion uh we'll have will vivian present some slides and after that
+[0:37:08] present some slides and after that you'll have as i you will have the
+[0:37:10] you'll have as i you will have the opportunity to respond
+[0:37:11] opportunity to respond will whenever you're ready uh great can
+[0:37:15] will whenever you're ready uh great can you hear me
+[0:37:16] you hear me yep okay uh so thanks very much uh
+[0:37:19] yep okay uh so thanks very much uh isaiah and thanks so much to the
+[0:37:21] isaiah and thanks so much to the organizers um
+[0:37:23] organizers um so i'm will fifian
+[0:37:26] so i'm will fifian uh so so there there's a lot to like
+[0:37:29] uh so so there there's a lot to like about the paper and the talk uh
+[0:37:31] about the paper and the talk uh i really enjoyed um reading it so so one
+[0:37:34] i really enjoyed um reading it so so one thing i think sometimes we don't spend
+[0:37:35] thing i think sometimes we don't spend enough time talking about in
+[0:37:37] enough time talking about in in statistics is the difference between
+[0:37:39] in statistics is the difference between these these different goals
+[0:37:41] these these different goals and i really like the the discussion of
+[0:37:42] and i really like the the discussion of conditional versus unconditional
+[0:37:44] conditional versus unconditional inference goals although i'm not sure
+[0:37:46] inference goals although i'm not sure that it left me any more
+[0:37:48] that it left me any more uh any less confused about which i
+[0:37:50] uh any less confused about which i should use um
+[0:37:52] should use um so the uh i don't mean that as an insult
+[0:37:55] so the uh i don't mean that as an insult i'm not sure that if possible to make me
+[0:37:57] i'm not sure that if possible to make me less confused
+[0:37:59] less confused um and uh the uh
+[0:38:02] um and uh the uh i really love the uh the hybrid method
+[0:38:04] i really love the uh the hybrid method uh it's it's
+[0:38:05] uh it's it's simple in the best possible sense of the
+[0:38:06] simple in the best possible sense of the word um you know i
+[0:38:08] word um you know i we we should have thought of this uh a
+[0:38:10] we we should have thought of this uh a long time ago uh but
+[0:38:12] long time ago uh but uh it's it's really exciting um and it
+[0:38:15] uh it's it's really exciting um and it kind of trims the
+[0:38:16] kind of trims the the wild tales of the conditional c
+[0:38:18] the wild tales of the conditional c confidence intervals that we worry about
+[0:38:21] confidence intervals that we worry about i'll talk a little bit more about that
+[0:38:22] i'll talk a little bit more about that later um
+[0:38:24] later um and the i like the median unbiased
+[0:38:28] and the i like the median unbiased estimator there's also the uniform on
+[0:38:30] estimator there's also the uniform on asymptotic results that are difficult to
+[0:38:31] asymptotic results that are difficult to get for the purely conditional approach
+[0:38:34] get for the purely conditional approach um so i'll start with just a sort of
+[0:38:38] um so i'll start with just a sort of cure so the winner's curse can be
+[0:38:40] cure so the winner's curse can be so it's it sounds very um obvious but it
+[0:38:44] so it's it sounds very um obvious but it can actually be
+[0:38:45] can actually be there there are surprising phenomena so
+[0:38:47] there there are surprising phenomena so as isaiah mentioned
+[0:38:49] as isaiah mentioned um there isn't actually under coverage
+[0:38:51] um there isn't actually under coverage in
+[0:38:52] in uh if there are only two treatments so
+[0:38:54] uh if there are only two treatments so how could this possibly be
+[0:38:56] how could this possibly be uh well there's an interesting uh
+[0:38:57] uh well there's an interesting uh there's a nice recent paper by jotum
+[0:38:59] there's a nice recent paper by jotum hecklinger
+[0:39:00] hecklinger uh benjaminian philip stark
+[0:39:03] uh benjaminian philip stark and they show that you can think of it
+[0:39:05] and they show that you can think of it as a method
+[0:39:08] as a method that has this very weird uh acceptance
+[0:39:11] that has this very weird uh acceptance region
+[0:39:12] region so here this is the region where if you
+[0:39:15] so here this is the region where if you can see my mouse this is the region
+[0:39:18] can see my mouse this is the region where we choose treatment number one and
+[0:39:20] where we choose treatment number one and these are the times when we choose
+[0:39:22] these are the times when we choose treatment number one and we get
+[0:39:23] treatment number one and we get uh and we mis we don't cover
+[0:39:27] uh and we mis we don't cover um if this is uh if this is mu
+[0:39:31] um if this is uh if this is mu and the same over here for treatment
+[0:39:32] and the same over here for treatment number two and if we just flip
+[0:39:34] number two and if we just flip this uh region we just get the usual uh
+[0:39:38] this uh region we just get the usual uh the usual shape so it uh it's
+[0:39:40] the usual shape so it uh it's interesting sometimes you find that you
+[0:39:42] interesting sometimes you find that you don't actually need corrections but of
+[0:39:43] don't actually need corrections but of course
+[0:39:44] course most of the time you do need corrections
+[0:39:46] most of the time you do need corrections as as isaiah showed
+[0:39:48] as as isaiah showed um so uh
+[0:39:52] um so uh so the i think a big motivation for
+[0:39:54] so the i think a big motivation for probably the main motivation for the
+[0:39:55] probably the main motivation for the hybrid method
+[0:39:56] hybrid method um is especially in the case where we
+[0:39:58] um is especially in the case where we have a one-sided tri
+[0:39:59] have a one-sided tri truncation event uh the conditional
+[0:40:02] truncation event uh the conditional intervals have serious problems
+[0:40:04] intervals have serious problems um so you know as i mentioned they are
+[0:40:06] um so you know as i mentioned they are optimal as conditional link
+[0:40:07] optimal as conditional link as conditional intervals but that
+[0:40:10] as conditional intervals but that definitely leads us to question how
+[0:40:12] definitely leads us to question how committed are we to
+[0:40:13] committed are we to following this conditional approach
+[0:40:17] following this conditional approach so here if we have normal mu 1 truncated
+[0:40:20] so here if we have normal mu 1 truncated to just be
+[0:40:20] to just be bigger than bigger than 3 then
+[0:40:24] bigger than bigger than 3 then if we observe a y that's significantly
+[0:40:27] if we observe a y that's significantly bigger
+[0:40:28] bigger uh than the the boundary then we just
+[0:40:31] uh than the the boundary then we just get back the nominal intervals so that's
+[0:40:32] get back the nominal intervals so that's a really nice thing about the
+[0:40:34] a really nice thing about the conditional approach
+[0:40:35] conditional approach but as we get close to the boundary
+[0:40:38] but as we get close to the boundary if you think about it if you observe 3.1
+[0:40:42] if you think about it if you observe 3.1 can we reject that mu is is -5
+[0:40:45] can we reject that mu is is -5 well actually no because even if mu
+[0:40:49] well actually no because even if mu is -5 conditional on on y being bigger
+[0:40:52] is -5 conditional on on y being bigger than
+[0:40:52] than three it's not that unlikely that y
+[0:40:54] three it's not that unlikely that y would be three point one and so that's
+[0:40:55] would be three point one and so that's why
+[0:40:56] why mu equals minus five has to be included
+[0:40:58] mu equals minus five has to be included in this confidence interval
+[0:41:00] in this confidence interval um i should note that if we randomize or
+[0:41:02] um i should note that if we randomize or if we
+[0:41:03] if we or other other shaped uh regions so of
+[0:41:06] or other other shaped uh regions so of course you know
+[0:41:06] course you know the this is one application of
+[0:41:08] the this is one application of conditional uh
+[0:41:10] conditional uh conditional post selection and for
+[0:41:11] conditional post selection and for instance and other applications
+[0:41:13] instance and other applications um uh behave much better um
+[0:41:16] um uh behave much better um so this can be fixed by uh data
+[0:41:19] so this can be fixed by uh data splitting as isaiah
+[0:41:20] splitting as isaiah alluded to uh or we sort of call it data
+[0:41:23] alluded to uh or we sort of call it data carving because we
+[0:41:24] carving because we we do data splitting but then we use
+[0:41:26] we do data splitting but then we use sort of the leftover information in the
+[0:41:27] sort of the leftover information in the first data set so here we truncate
+[0:41:30] first data set so here we truncate uh so now i have i've split the y into
+[0:41:32] uh so now i have i've split the y into two i truncate to just
+[0:41:34] two i truncate to just the first one being above three and now
+[0:41:38] the first one being above three and now the confidence interval the expected
+[0:41:39] the confidence interval the expected confidence interval length is bounded
+[0:41:41] confidence interval length is bounded above by what i would get by data
+[0:41:42] above by what i would get by data splitting
+[0:41:43] splitting uh and so this has some of this has some
+[0:41:46] uh and so this has some of this has some of the nice properties
+[0:41:47] of the nice properties of the hybrid approach um but there is a
+[0:41:49] of the hybrid approach um but there is a problem that the hybrid approach doesn't
+[0:41:51] problem that the hybrid approach doesn't have which is that we're only using part
+[0:41:53] have which is that we're only using part of the data and if we're trying to
+[0:41:54] of the data and if we're trying to select the best treatment then then it's
+[0:41:56] select the best treatment then then it's much
+[0:41:57] much more appealing uh to use all of the data
+[0:41:59] more appealing uh to use all of the data to select the best treatment
+[0:42:02] to select the best treatment so the hybrid method uh so it's more
+[0:42:04] so the hybrid method uh so it's more complicated than this but
+[0:42:06] complicated than this but i think roughly we sort of we construct
+[0:42:08] i think roughly we sort of we construct simultaneous confidence intervals for
+[0:42:10] simultaneous confidence intervals for for each of the treatments uh we just
+[0:42:12] for each of the treatments uh we just sort of assume that they cover
+[0:42:14] sort of assume that they cover this is a time-honored tradition in you
+[0:42:17] this is a time-honored tradition in you know
+[0:42:17] know in multiple testing we just we do
+[0:42:20] in multiple testing we just we do something we assume that it worked and
+[0:42:21] something we assume that it worked and we go from there
+[0:42:22] we go from there and then we kind of clip we get to clip
+[0:42:24] and then we kind of clip we get to clip the conditional interval there so
+[0:42:26] the conditional interval there so uh so here you know if there's 50
+[0:42:29] uh so here you know if there's 50 treatments
+[0:42:29] treatments and we're using alpha over 10 then the
+[0:42:32] and we're using alpha over 10 then the half width is 3.7 and so now
+[0:42:35] half width is 3.7 and so now if mu were minus 5 we would never even
+[0:42:37] if mu were minus 5 we would never even have been in this situation to begin
+[0:42:39] have been in this situation to begin with
+[0:42:39] with uh and at least with with probability
+[0:42:42] uh and at least with with probability 99.5
+[0:42:44] 99.5 and that justifies excluding -5 from the
+[0:42:47] and that justifies excluding -5 from the interval
+[0:42:47] interval so this is a you know totally simple
+[0:42:50] so this is a you know totally simple idea totally solves the problem at least
+[0:42:52] idea totally solves the problem at least unconditionally
+[0:42:54] unconditionally and it's it's so simple that it makes
+[0:42:56] and it's it's so simple that it makes you think that it could be applied
+[0:42:58] you think that it could be applied anywhere i don't know exactly how i
+[0:42:59] anywhere i don't know exactly how i would just plug this in if i were doing
+[0:43:01] would just plug this in if i were doing post-selection inference and regression
+[0:43:03] post-selection inference and regression say
+[0:43:03] say but i'm curious just sort of how uh
+[0:43:07] but i'm curious just sort of how uh you know how how easily generalizable
+[0:43:08] you know how how easily generalizable this is or or
+[0:43:10] this is or or what how would we turn this into a
+[0:43:11] what how would we turn this into a general principle because i'd like to do
+[0:43:13] general principle because i'd like to do that
+[0:43:14] that uh maybe you've already done it and um
+[0:43:18] uh maybe you've already done it and um and also is this approach complementary
+[0:43:20] and also is this approach complementary with the randomization approach is it
+[0:43:22] with the randomization approach is it one or the other or or could we
+[0:43:24] one or the other or or could we combine them and where to be fruitful to
+[0:43:25] combine them and where to be fruitful to combine them in some way
+[0:43:28] combine them in some way um okay so the other thing is well we
+[0:43:31] um okay so the other thing is well we can reject
+[0:43:31] can reject mu is minus five but we could also
+[0:43:33] mu is minus five but we could also reject mu is 6.8 that's
+[0:43:35] reject mu is 6.8 that's 3.1 plus 3.7 uh but we actually could
+[0:43:39] 3.1 plus 3.7 uh but we actually could already reject the mu is
+[0:43:40] already reject the mu is 6.8 um so it doesn't seem like we've
+[0:43:43] 6.8 um so it doesn't seem like we've gained anything on the top end we've
+[0:43:45] gained anything on the top end we've gained we certainly gained by clipping
+[0:43:46] gained we certainly gained by clipping the bottom end but we didn't need to
+[0:43:48] the bottom end but we didn't need to clip the top end
+[0:43:49] clip the top end so i wonder would it be more efficient
+[0:43:51] so i wonder would it be more efficient to use of course
+[0:43:52] to use of course i've described a less i've described a
+[0:43:55] i've described a less i've described a simpler version of what they're actually
+[0:43:56] simpler version of what they're actually doing
+[0:43:57] doing but i wonder would it be more efficient
+[0:43:58] but i wonder would it be more efficient to use just lower confidence bounds
+[0:44:00] to use just lower confidence bounds instead of
+[0:44:01] instead of confidence intervals for the initial
+[0:44:04] confidence intervals for the initial step
+[0:44:05] step and second um you know it doesn't seem
+[0:44:07] and second um you know it doesn't seem like we need to worry too much
+[0:44:09] like we need to worry too much if if you know if we're constructing a
+[0:44:11] if if you know if we're constructing a region from u1 u2 mu3 we don't have to
+[0:44:13] region from u1 u2 mu3 we don't have to worry too much about
+[0:44:15] worry too much about rejecting mu 1 equals 11 and u2 mu3 or
+[0:44:18] rejecting mu 1 equals 11 and u2 mu3 or minus 11
+[0:44:20] minus 11 uh that the conditional intervals are
+[0:44:22] uh that the conditional intervals are going to do perfectly well there so i
+[0:44:23] going to do perfectly well there so i wonder by sort of
+[0:44:25] wonder by sort of very carefully crafting regions could we
+[0:44:27] very carefully crafting regions could we converge to the nominal interval could
+[0:44:29] converge to the nominal interval could we recover this very nice property of
+[0:44:31] we recover this very nice property of the conditional intervals
+[0:44:32] the conditional intervals as the as the first uh as the selection
+[0:44:36] as the as the first uh as the selection becomes really obvious
+[0:44:38] becomes really obvious okay and the last thing um is that the
+[0:44:42] okay and the last thing um is that the the housing example uh it's a really
+[0:44:44] the housing example uh it's a really really nice example
+[0:44:46] really nice example uh they're comparing their method to an
+[0:44:48] uh they're comparing their method to an empirical bayes method
+[0:44:50] empirical bayes method um that we have it looks wonderful
+[0:44:54] um that we have it looks wonderful so when i see these intervals i'm very
+[0:44:58] so when i see these intervals i'm very resistant to
+[0:44:59] resistant to getting rid of them going for the blue
+[0:45:01] getting rid of them going for the blue ones uh
+[0:45:02] ones uh and you know that so these these red
+[0:45:04] and you know that so these these red intervals they're using information
+[0:45:06] intervals they're using information census level uh census tract level
+[0:45:09] census level uh census tract level covariates
+[0:45:10] covariates to make predictions and they're assuming
+[0:45:12] to make predictions and they're assuming that those predictions are mostly not
+[0:45:14] that those predictions are mostly not too wrong
+[0:45:15] too wrong um and they're sort of estimating how
+[0:45:17] um and they're sort of estimating how wrong they are
+[0:45:18] wrong they are based on the data excuse me
+[0:45:22] based on the data excuse me so we see these and we would really love
+[0:45:25] so we see these and we would really love to keep using them
+[0:45:26] to keep using them but uh but but uh you know isaiah
+[0:45:29] but uh but but uh you know isaiah and toro and andrew tell us that they
+[0:45:31] and toro and andrew tell us that they undercover
+[0:45:32] undercover uh so it seems like what can we do um
+[0:45:36] uh so it seems like what can we do um i wonder i wonder how much of the under
+[0:45:38] i wonder i wonder how much of the under coverage
+[0:45:39] coverage so it could be model and specification
+[0:45:41] so it could be model and specification for the prior as they mentioned in the
+[0:45:43] for the prior as they mentioned in the paper but i wonder
+[0:45:44] paper but i wonder is is there something about the the goal
+[0:45:47] is is there something about the the goal being different because these are
+[0:45:48] being different because these are credible intervals
+[0:45:50] credible intervals uh rather than confidence intervals uh
+[0:45:52] uh rather than confidence intervals uh and so they guarantee us coverage given
+[0:45:54] and so they guarantee us coverage given the data they don't guarantee us
+[0:45:56] the data they don't guarantee us coverage
+[0:45:57] coverage uh given the parameter so given the data
+[0:45:59] uh given the parameter so given the data if we think of the parameter as random
+[0:46:00] if we think of the parameter as random then the credible intervals will cover
+[0:46:02] then the credible intervals will cover if we generate the data and the
+[0:46:05] if we generate the data and the parameter jointly
+[0:46:06] parameter jointly then we will get uh then we will get
+[0:46:09] then we will get uh then we will get coverage
+[0:46:09] coverage um but there's sort of the the
+[0:46:12] um but there's sort of the the simulation in the paper is sort of a
+[0:46:13] simulation in the paper is sort of a quasi fixed effects model where the good
+[0:46:16] quasi fixed effects model where the good the good sensors tracks basically get to
+[0:46:18] the good sensors tracks basically get to keep their their
+[0:46:19] keep their their uh their effect sizes are jittered a bit
+[0:46:21] uh their effect sizes are jittered a bit but they basically get to keep being
+[0:46:23] but they basically get to keep being good
+[0:46:24] good fixed effects they basically get to keep
+[0:46:26] fixed effects they basically get to keep being good census tracts
+[0:46:29] being good census tracts and this is a little bit like the issue
+[0:46:32] and this is a little bit like the issue that was brought up by efron and morris
+[0:46:34] that was brought up by efron and morris in their 1977 paper on the james stein
+[0:46:36] in their 1977 paper on the james stein estimator another empirical days method
+[0:46:39] estimator another empirical days method and they noticed that this shrinkage is
+[0:46:41] and they noticed that this shrinkage is doing well
+[0:46:42] doing well and and they they have better
+[0:46:44] and and they they have better performance in some ways
+[0:46:46] performance in some ways but they say well maybe we're not being
+[0:46:48] but they say well maybe we're not being fair to roberto clemente
+[0:46:50] fair to roberto clemente who was a big time all-star and
+[0:46:53] who was a big time all-star and uh you know we we shouldn't be surprised
+[0:46:56] uh you know we we shouldn't be surprised that he's doing better than these other
+[0:46:58] that he's doing better than these other than these other baseball players so why
+[0:46:59] than these other baseball players so why are we why are we assuming that he's
+[0:47:01] are we why are we assuming that he's just
+[0:47:01] just that he's no better than the others and
+[0:47:03] that he's no better than the others and so in particular we wouldn't expect if
+[0:47:06] so in particular we wouldn't expect if we repeated this experiment many times
+[0:47:07] we repeated this experiment many times to be covering for roberto clementi
+[0:47:10] to be covering for roberto clementi and so i wonder if all the census tracts
+[0:47:11] and so i wonder if all the census tracts that we're looking at here are just all
+[0:47:13] that we're looking at here are just all the roberto clementes
+[0:47:15] the roberto clementes uh and if that's the case then uh it
+[0:47:18] uh and if that's the case then uh it sort of raises
+[0:47:19] sort of raises uh well one question is sort of you know
+[0:47:23] uh well one question is sort of you know either is empirical based doing what
+[0:47:25] either is empirical based doing what it's what it's advertised but we just
+[0:47:27] it's what it's advertised but we just don't like it is it possible that
+[0:47:29] don't like it is it possible that there's something about empirical base
+[0:47:30] there's something about empirical base that's just not answering quite the
+[0:47:32] that's just not answering quite the right question for inference on winners
+[0:47:34] right question for inference on winners i don't know the answer to that question
+[0:47:35] i don't know the answer to that question but i'm curious what you all think of it
+[0:47:38] but i'm curious what you all think of it uh
+[0:47:38] uh and finally so these census they're
+[0:47:40] and finally so these census they're getting a lot of mileage out of using
+[0:47:42] getting a lot of mileage out of using the census tract covariate so i wonder
+[0:47:43] the census tract covariate so i wonder if there's any way to bring those into
+[0:47:45] if there's any way to bring those into the analysis
+[0:47:46] the analysis uh the frequentist analysis so here i
+[0:47:50] uh the frequentist analysis so here i just
+[0:47:50] just have the the questions uh up on this
+[0:47:53] have the the questions uh up on this slide
+[0:47:53] slide um and i'll um you myself and look
+[0:47:56] um and i'll um you myself and look forward to hearing the response
+[0:48:02] fantastic thanks so much will for the uh for the really really great discussion
+[0:48:03] for the really really great discussion and thank you as well for collective
+[0:48:04] and thank you as well for collective questions um no these are these
+[0:48:06] questions um no these are these are great great questions so to go
+[0:48:09] are great great questions so to go through them
+[0:48:10] through them in order i guess starting with um
+[0:48:13] in order i guess starting with um starting with the first one on weather
+[0:48:15] starting with the first one on weather can be applied
+[0:48:16] can be applied anywhere um in some sense i think
+[0:48:20] anywhere um in some sense i think our view is that the answer seems to be
+[0:48:21] our view is that the answer seems to be yes um subject to
+[0:48:23] yes um subject to you know not having not having done it
+[0:48:25] you know not having not having done it absolutely everywhere
+[0:48:27] absolutely everywhere but um so certainly just this idea of
+[0:48:31] but um so certainly just this idea of you know if i've got a
+[0:48:32] you know if i've got a if i've got some unconditionally valid
+[0:48:35] if i've got some unconditionally valid interval
+[0:48:36] interval i can combine it with uh can sort of use
+[0:48:38] i can combine it with uh can sort of use it as the basis for a conditional
+[0:48:40] it as the basis for a conditional interval via this sort of hybridization
+[0:48:43] interval via this sort of hybridization argument seems to work more broadly and
+[0:48:45] argument seems to work more broadly and um
+[0:48:45] um adam my co-author on this has one one of
+[0:48:48] adam my co-author on this has one one of my co-authors on this has a separate
+[0:48:50] my co-authors on this has a separate paper thinking about that
+[0:48:51] paper thinking about that in um model selection settings and so at
+[0:48:54] in um model selection settings and so at least there it does seem to extend
+[0:48:57] least there it does seem to extend um it seems to extend there at least um
+[0:49:02] um it seems to extend there at least um complementing with randomization yeah
+[0:49:05] complementing with randomization yeah again i think it's a
+[0:49:07] again i think it's a it's a super interesting question and
+[0:49:09] it's a super interesting question and not one that i
+[0:49:10] not one that i feel like i have a super solid answer on
+[0:49:14] feel like i have a super solid answer on at the moment
+[0:49:14] at the moment i guess my sort of for this inference on
+[0:49:18] i guess my sort of for this inference on winner setting that we've
+[0:49:19] winner setting that we've uh that's sort of our focus in this
+[0:49:22] uh that's sort of our focus in this paper exactly as you were saying
+[0:49:23] paper exactly as you were saying randomization feels
+[0:49:25] randomization feels um potentially unappealing in that it
+[0:49:28] um potentially unappealing in that it i'm sort of paying a price in terms of
+[0:49:30] i'm sort of paying a price in terms of the quality of the recommendation i'm
+[0:49:32] the quality of the recommendation i'm generating in exchange for doing a
+[0:49:34] generating in exchange for doing a better job on inference on that object
+[0:49:36] better job on inference on that object and so
+[0:49:37] and so there um it's not entirely obvious to me
+[0:49:41] there um it's not entirely obvious to me we
+[0:49:41] we one would want to go that direction but
+[0:49:43] one would want to go that direction but certainly for more general model
+[0:49:44] certainly for more general model selection settings i think
+[0:49:46] selection settings i think uh there's potentially a lot of appeal
+[0:49:49] uh there's potentially a lot of appeal um and
+[0:49:50] um and i mean one could also take a different
+[0:49:51] i mean one could also take a different view even for the entrance on winner's
+[0:49:52] view even for the entrance on winner's case
+[0:49:54] case on 2a yeah absolutely so
+[0:49:58] on 2a yeah absolutely so in the in the context of the toy example
+[0:50:02] in the in the context of the toy example where all uh basically you only end up
+[0:50:04] where all uh basically you only end up with
+[0:50:05] with lower truncation uh it's definitely
+[0:50:08] lower truncation uh it's definitely going to be more
+[0:50:09] going to be more efficient to use simultaneous confidence
+[0:50:11] efficient to use simultaneous confidence intervals as you of course know
+[0:50:13] intervals as you of course know for more general uh covariance
+[0:50:16] for more general uh covariance structures here
+[0:50:17] structures here you can end up with both lower and upper
+[0:50:19] you can end up with both lower and upper truncation which is why we
+[0:50:20] truncation which is why we sort of defaulted to the two-sided
+[0:50:23] sort of defaulted to the two-sided projection error
+[0:50:24] projection error but one could absolutely do something
+[0:50:25] but one could absolutely do something more tailored and get
+[0:50:27] more tailored and get power gains from sort of choosing the
+[0:50:30] power gains from sort of choosing the initial
+[0:50:31] initial unconditional interval that is the basis
+[0:50:33] unconditional interval that is the basis of the hybrid method in a more
+[0:50:35] of the hybrid method in a more careful case specific way absolutely
+[0:50:39] careful case specific way absolutely very much uh very similar answer on your
+[0:50:42] very much uh very similar answer on your on your 2b
+[0:50:43] on your 2b i guess i we have
+[0:50:46] i guess i we have not um thought through sort of
+[0:50:50] not um thought through sort of whether exactly what one would need to
+[0:50:53] whether exactly what one would need to do to get
+[0:50:54] do to get an oddly shaped region that's going to
+[0:50:56] an oddly shaped region that's going to converge that's going to ensure
+[0:50:58] converge that's going to ensure full convergence to the nominal interval
+[0:51:00] full convergence to the nominal interval as we have a very very clear winner for
+[0:51:02] as we have a very very clear winner for the hybrid case
+[0:51:03] the hybrid case but exactly as you're suggesting it does
+[0:51:06] but exactly as you're suggesting it does it seems that that should
+[0:51:07] it seems that that should there should be a way to do that um and
+[0:51:10] there should be a way to do that um and i'm my many apologies to someone if
+[0:51:12] i'm my many apologies to someone if there is one out there that we just
+[0:51:13] there is one out there that we just are not aware of at the moment but it
+[0:51:16] are not aware of at the moment but it does
+[0:51:16] does seem like it should be possible to do
+[0:51:19] seem like it should be possible to do something along those lines
+[0:51:21] something along those lines and then to combine that with the hybrid
+[0:51:22] and then to combine that with the hybrid interval so you're not paying
+[0:51:24] interval so you're not paying sort of this price at infinity um when
+[0:51:27] sort of this price at infinity um when there really isn't a selection issue
+[0:51:30] there really isn't a selection issue on question 3a um is empirical base
+[0:51:34] on question 3a um is empirical base appropriate for inference on winners
+[0:51:35] appropriate for inference on winners yeah again i think it's a i think it's a
+[0:51:38] yeah again i think it's a i think it's a really
+[0:51:38] really interesting question and
+[0:51:41] interesting question and the way that we had thought about this
+[0:51:45] the way that we had thought about this is um starting from sort of a
+[0:51:50] is um starting from sort of a starting from the observation that if
+[0:51:52] starting from the observation that if you know if i were in a
+[0:51:53] you know if i were in a fully bayesian world right so i specify
+[0:51:56] fully bayesian world right so i specify my prior on the distribution
+[0:51:57] my prior on the distribution of effect of you know track level
+[0:51:59] of effect of you know track level effects and in fact uh tractor level
+[0:52:02] effects and in fact uh tractor level effects are drawn from that prior
+[0:52:04] effects are drawn from that prior distribution
+[0:52:05] distribution then right there is no inference on
+[0:52:07] then right there is no inference on winner's problem
+[0:52:08] winner's problem right so the coverage probability of
+[0:52:11] right so the coverage probability of my credible interval for the
+[0:52:14] my credible interval for the winner under that data generating
+[0:52:16] winner under that data generating process is precisely the nominal level
+[0:52:19] process is precisely the nominal level again by um by iterated expectations
+[0:52:22] again by um by iterated expectations and so in that sense um the way we were
+[0:52:26] and so in that sense um the way we were thinking about the
+[0:52:27] thinking about the sort of empirical base under coverage we
+[0:52:29] sort of empirical base under coverage we were observing these simulations was
+[0:52:32] were observing these simulations was basically about a divergence between the
+[0:52:35] basically about a divergence between the underlying distribution of effect sizes
+[0:52:37] underlying distribution of effect sizes and that
+[0:52:38] and that um data generating and sort of the
+[0:52:41] um data generating and sort of the normal distribution assumed by the
+[0:52:44] normal distribution assumed by the assumed by the prior um now
+[0:52:47] assumed by the prior um now if one were to um
+[0:52:52] if one were to um if one were to sort of as you noted sort
+[0:52:54] if one were to sort of as you noted sort of there too there are two layers to
+[0:52:56] of there too there are two layers to that right so one is that
+[0:52:57] that right so one is that in our simulation designs we are holding
+[0:53:00] in our simulation designs we are holding the tracked
+[0:53:01] the tracked sort of track quality fixed and so
+[0:53:04] sort of track quality fixed and so that's certainly a departure from
+[0:53:06] that's certainly a departure from redrawing it from a normal distribution
+[0:53:09] redrawing it from a normal distribution at the other extreme we could of course
+[0:53:10] at the other extreme we could of course redraw it from a normal distribution in
+[0:53:12] redraw it from a normal distribution in which case
+[0:53:13] which case up to estimating the prior hyper
+[0:53:15] up to estimating the prior hyper parameters my guess is that empirical
+[0:53:16] parameters my guess is that empirical base should have
+[0:53:18] base should have coverage very very very very good
+[0:53:20] coverage very very very very good coverage there's then this
+[0:53:21] coverage there's then this intermediate ground of you know what if
+[0:53:23] intermediate ground of you know what if we fit some sort of a non-normal
+[0:53:25] we fit some sort of a non-normal distribution
+[0:53:26] distribution to the uh track level economic
+[0:53:29] to the uh track level economic opportunity estimates
+[0:53:30] opportunity estimates and redraw from those um and that is not
+[0:53:33] and redraw from those um and that is not a middle ground that we've explored yet
+[0:53:35] a middle ground that we've explored yet but i agree it's it's definitely
+[0:53:37] but i agree it's it's definitely interesting to think about my intuition
+[0:53:38] interesting to think about my intuition would be
+[0:53:40] would be if it's highly not normal and we insist
+[0:53:42] if it's highly not normal and we insist on doing normal
+[0:53:43] on doing normal empirical days based on a normal prior
+[0:53:45] empirical days based on a normal prior we should still get issues but of course
+[0:53:47] we should still get issues but of course one could also do
+[0:53:48] one could also do empirical days based on a richer class
+[0:53:50] empirical days based on a richer class of priors and i think there's a there's
+[0:53:51] of priors and i think there's a there's a very interesting space to explore
+[0:53:53] a very interesting space to explore there
+[0:53:54] there on your on your final question um
+[0:53:58] on your on your final question um whether one could use census tract
+[0:54:00] whether one could use census tract covariates again
+[0:54:02] covariates again yeah that is a that is an interesting
+[0:54:06] yeah that is a that is an interesting question whether one could use census
+[0:54:09] question whether one could use census tract level covariance for the frequency
+[0:54:10] tract level covariance for the frequency analysis that's a
+[0:54:11] analysis that's a that's a quite interesting question and
+[0:54:13] that's a quite interesting question and one that
+[0:54:15] one that i it certainly seems like there should
+[0:54:17] i it certainly seems like there should be a way to do it it is not something we
+[0:54:19] be a way to do it it is not something we have done
+[0:54:20] have done and so i don't i don't want to speculate
+[0:54:22] and so i don't i don't want to speculate too much on the
+[0:54:23] too much on the ideal way to do it but it's a super
+[0:54:25] ideal way to do it but it's a super interesting question that we should you
+[0:54:26] interesting question that we should you definitely
+[0:54:27] definitely want to think about so thank you so so
+[0:54:29] want to think about so thank you so so much for the
+[0:54:30] much for the really really uh great uh discussion
+[0:54:34] really really uh great uh discussion and great questions thank you again
+[0:54:39] and great questions thank you again thank you all right
+[0:54:42] thank you all right thank you so much if there are no
+[0:54:44] thank you so much if there are no further comments i will
+[0:54:46] further comments i will i'll quickly uh um i think hiro has a
+[0:54:49] i'll quickly uh um i think hiro has a question
+[0:54:50] question oh okay sure yeah then i say this
+[0:54:53] oh okay sure yeah then i say this this is uh very interesting i was
+[0:54:55] this is uh very interesting i was wondering
+[0:54:57] wondering whether this relates to some of the
+[0:55:00] whether this relates to some of the the multi-armed banded things is there
+[0:55:04] the multi-armed banded things is there you also obviously have issues with uh
+[0:55:07] you also obviously have issues with uh with inference and i think that people
+[0:55:09] with inference and i think that people have kind of tried various ways
+[0:55:11] have kind of tried various ways of trying to get confidence intervals
+[0:55:14] of trying to get confidence intervals uh given the the designs
+[0:55:18] uh given the the designs given the adaptive designs so
+[0:55:22] given the adaptive designs so yeah so this is this is uh early
+[0:55:25] yeah so this is this is uh early early stages but um actually have been
+[0:55:27] early stages but um actually have been um
+[0:55:28] um talking with a student kevin chen at
+[0:55:31] talking with a student kevin chen at harvard
+[0:55:32] harvard about some related exactly some
+[0:55:36] about some related exactly some related conditioning ideas and settings
+[0:55:38] related conditioning ideas and settings like
+[0:55:39] like um multi-arm bandits where your or
+[0:55:42] um multi-arm bandits where your or sort of adaptive
+[0:55:45] sort of adaptive randomized trials with large batches
+[0:55:48] randomized trials with large batches where you're willing to treat things as
+[0:55:49] where you're willing to treat things as approximately normally distributed it
+[0:55:51] approximately normally distributed it does
+[0:55:51] does seem like some ideas related to
+[0:55:55] seem like some ideas related to the conditional inference machinery
+[0:55:57] the conditional inference machinery we're
+[0:55:58] we're building on here do appear to extend to
+[0:56:01] building on here do appear to extend to some settings of that sort although that
+[0:56:03] some settings of that sort although that is very much uh
+[0:56:05] is very much uh early stage discussions at the moment
+[0:56:07] early stage discussions at the moment but it does it does seem like there are
+[0:56:09] but it does it does seem like there are things that one can do in that general
+[0:56:10] things that one can do in that general direction
+[0:56:11] direction building on similar ideas
+[0:56:23] all right thank you yeah then uh yeah thank you everyone first thank you
+[0:56:25] thank you everyone first thank you isaiah for a very interesting talk and
+[0:56:28] isaiah for a very interesting talk and will for a very a nice discussion
+[0:56:30] will for a very a nice discussion also thank you to toro and adam uh for
+[0:56:33] also thank you to toro and adam uh for uh for helping out in
+[0:56:35] uh for helping out in q a um next time we're gonna have a
+[0:56:38] q a um next time we're gonna have a talk by alex wolzowski wolfowski
+[0:56:41] talk by alex wolzowski wolfowski from duke university i hope i pronounced
+[0:56:43] from duke university i hope i pronounced that correctly we'll talk about
+[0:56:45] that correctly we'll talk about online experimentation for studying
+[0:56:47] online experimentation for studying political polarization thank you all for
+[0:56:49] political polarization thank you all for coming and hope you have a great
+[0:56:51] coming and hope you have a great week and see you next time

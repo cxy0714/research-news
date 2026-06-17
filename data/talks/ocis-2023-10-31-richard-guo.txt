@@ -1,0 +1,1387 @@
+[0:00:07] all right hi everyone welcome to the online causal inference seminar today we
+[0:00:09] online causal inference seminar today we have Richard G from University of
+[0:00:11] have Richard G from University of Cambridge presenting on confounder
+[0:00:13] Cambridge presenting on confounder selection via iterative graph expansion
+[0:00:16] selection via iterative graph expansion our discussion today will be Ilia
+[0:00:18] our discussion today will be Ilia Spitzer from John Hopkins University and
+[0:00:20] Spitzer from John Hopkins University and we'll stick to the standard format for
+[0:00:24] we'll stick to the standard format for discussion we also have uh in the Q&amp;A uh
+[0:00:28] discussion we also have uh in the Q&amp;A uh chin one of our own uh is the co-author
+[0:00:31] chin one of our own uh is the co-author on this paper and so he'll also be
+[0:00:33] on this paper and so he'll also be answering some questions so okay so now
+[0:00:35] answering some questions so okay so now I'll switch to Ying who will be handling
+[0:00:37] I'll switch to Ying who will be handling questions today all
+[0:00:39] questions today all right thank you Emma so as usual we will
+[0:00:42] right thank you Emma so as usual we will use the Q&amp;A section for submitting
+[0:00:45] use the Q&amp;A section for submitting questions uh Richard will also have
+[0:00:48] questions uh Richard will also have places to stop for questions but we
+[0:00:50] places to stop for questions but we encourage you to submit your questions
+[0:00:52] encourage you to submit your questions as soon as you have them um please do
+[0:00:55] as soon as you have them um please do submit it using the Q&amp;A button at the
+[0:00:58] submit it using the Q&amp;A button at the bottom of the zoom window instead of the
+[0:01:00] bottom of the zoom window instead of the chat chat for us to better track the
+[0:01:02] chat chat for us to better track the questions so I think that's all uh
+[0:01:06] questions so I think that's all uh please feel free to get started
+[0:01:18] Richard right um yeah I want to thank the organizers for having me and also
+[0:01:20] the organizers for having me and also for running this fantastic seminar
+[0:01:23] for running this fantastic seminar series uh very happy to be here to
+[0:01:25] series uh very happy to be here to present my recent work on confound
+[0:01:27] present my recent work on confound selection by iterative graph expansion
+[0:01:29] selection by iterative graph expansion and this is join work with my colleague
+[0:01:31] and this is join work with my colleague tja who will be handling the
+[0:01:33] tja who will be handling the Q&amp;A so this is the outline I'll start
+[0:01:36] Q&amp;A so this is the outline I'll start with some introduction and show you uh
+[0:01:39] with some introduction and show you uh shiny uh shiny app demo that implements
+[0:01:41] shiny uh shiny app demo that implements our method and then I will tell you why
+[0:01:44] our method and then I will tell you why that works um with some
+[0:01:46] that works um with some Theory okay so let me start with the
+[0:01:49] Theory okay so let me start with the introduction so confounder selection uh
+[0:01:51] introduction so confounder selection uh is a very important and basic problem in
+[0:01:54] is a very important and basic problem in observational study I think you would
+[0:01:56] observational study I think you would agree with me the single most widely
+[0:01:58] agree with me the single most widely used method for control for founding for
+[0:02:01] used method for control for founding for identification is uh this adjustment
+[0:02:04] identification is uh this adjustment coar
+[0:02:06] coar adjustment so throughout the talk I will
+[0:02:08] adjustment so throughout the talk I will assume we have a point treatment that is
+[0:02:10] assume we have a point treatment that is X and a single outcome that is y and now
+[0:02:13] X and a single outcome that is y and now we're interested in infering the effect
+[0:02:16] we're interested in infering the effect of X and
+[0:02:17] of X and Y and the strategy I mentioned is just
+[0:02:21] Y and the strategy I mentioned is just through adjustment a set of coar s the S
+[0:02:26] through adjustment a set of coar s the S should satisfy the so-called condition
+[0:02:28] should satisfy the so-called condition exchangeability meaning that the the
+[0:02:30] exchangeability meaning that the the potential outcome the out potential
+[0:02:32] potential outcome the out potential outcome y indexed by this x is
+[0:02:35] outcome y indexed by this x is independent of X in every straight ter
+[0:02:37] independent of X in every straight ter defined by such a coar set s for every
+[0:02:41] defined by such a coar set s for every treatment level
+[0:02:43] treatment level X and once you have this condition then
+[0:02:46] X and once you have this condition then under further assumption about the
+[0:02:48] under further assumption about the positivity of the treatment level we can
+[0:02:51] positivity of the treatment level we can identify basically on the left you have
+[0:02:53] identify basically on the left you have this causal query on the right to have
+[0:02:56] this causal query on the right to have this observed dist condition
+[0:02:57] this observed dist condition distribution and that is the basic idea
+[0:02:59] distribution and that is the basic idea the underlying many the identification
+[0:03:02] the underlying many the identification of many effects such as the average
+[0:03:03] of many effects such as the average treatment effect and average effect on
+[0:03:06] treatment effect and average effect on the
+[0:03:07] the treated so then the Min and do question
+[0:03:10] treated so then the Min and do question is how do we select such a set of coar
+[0:03:13] is how do we select such a set of coar as under which uh this conditional
+[0:03:16] as under which uh this conditional exchangeability
+[0:03:17] exchangeability holds and this is the problem of
+[0:03:20] holds and this is the problem of confounder
+[0:03:21] confounder selection and it can be argued that
+[0:03:23] selection and it can be argued that there are um slight variations of the
+[0:03:25] there are um slight variations of the objectives depending on what we're
+[0:03:27] objectives depending on what we're talking about so the primary objective
+[0:03:29] talking about so the primary objective would be
+[0:03:30] would be how to find such a set of cervical varat
+[0:03:33] how to find such a set of cervical varat such that it satisfy this conditional
+[0:03:36] such that it satisfy this conditional exchangeability condition and such a set
+[0:03:39] exchangeability condition and such a set is called a sufficient adjustment
+[0:03:41] is called a sufficient adjustment set and also there are a bunch of
+[0:03:44] set and also there are a bunch of secondary objectives and that is when
+[0:03:47] secondary objectives and that is when you have multiple choices of sufficient
+[0:03:49] you have multiple choices of sufficient adjustment sets and you can further
+[0:03:51] adjustment sets and you can further choose one to optimize some specific
+[0:03:54] choose one to optimize some specific criteria such as efficiency the
+[0:03:56] criteria such as efficiency the cardinality of the set such and the cost
+[0:03:59] cardinality of the set such and the cost of data collection for example example
+[0:04:01] of data collection for example example and these are all very interesting
+[0:04:02] and these are all very interesting problems and they have been considered
+[0:04:04] problems and they have been considered in the literature but uh for now I'm
+[0:04:07] in the literature but uh for now I'm going to set that aside so for this talk
+[0:04:10] going to set that aside so for this talk I'm going to only focus on the primary
+[0:04:13] I'm going to only focus on the primary objective namely finding a set s for
+[0:04:16] objective namely finding a set s for which this conditional exchangeability
+[0:04:19] which this conditional exchangeability holds okay um so more or less I'm going
+[0:04:22] holds okay um so more or less I'm going to talk about this problem in a
+[0:04:25] to talk about this problem in a graphical framework namely uh I assume
+[0:04:29] graphical framework namely uh I assume there is underlying dag that defines the
+[0:04:31] there is underlying dag that defines the causal model so you can think of the
+[0:04:33] causal model so you can think of the caal model as the structural equation
+[0:04:36] caal model as the structural equation model with independent error defined by
+[0:04:38] model with independent error defined by such a D model or actually you if you
+[0:04:41] such a D model or actually you if you want you can think about the even weaker
+[0:04:43] want you can think about the even weaker model that is the FC STG model
+[0:04:46] model that is the FC STG model associated with the underlying
+[0:04:48] associated with the underlying dag and I want to think about there
+[0:04:51] dag and I want to think about there exists such an underlying dag that
+[0:04:53] exists such an underlying dag that defines the caal
+[0:04:54] defines the caal model so I guess the immediate reaction
+[0:04:58] model so I guess the immediate reaction uh which is I won't be surprised
+[0:05:00] uh which is I won't be surprised surprised by uh the audience if anyone
+[0:05:02] surprised by uh the audience if anyone uh finds this um solve the problem
+[0:05:05] uh finds this um solve the problem basically um Pearl in 93 has a
+[0:05:08] basically um Pearl in 93 has a pathbreaking paper about the backd door
+[0:05:10] pathbreaking paper about the backd door Criterion that says uh if s s is a set
+[0:05:15] Criterion that says uh if s s is a set of Co variance excluding the treatment
+[0:05:17] of Co variance excluding the treatment and outcome is a sufficient adjustment
+[0:05:19] and outcome is a sufficient adjustment set if satisfies two conditions the
+[0:05:23] set if satisfies two conditions the first condition is that the set contains
+[0:05:26] first condition is that the set contains no descendant of X which is
+[0:05:28] no descendant of X which is understandable because
+[0:05:30] understandable because you don't want to block any directed
+[0:05:32] you don't want to block any directed pathway from X to Y so this is the first
+[0:05:35] pathway from X to Y so this is the first condition the second condition is the
+[0:05:37] condition the second condition is the more pronounced one namely uh such a set
+[0:05:41] more pronounced one namely uh such a set should block all the back door pathes
+[0:05:43] should block all the back door pathes between X and Y so what is back door
+[0:05:45] between X and Y so what is back door path the back path is a path with an
+[0:05:49] path the back path is a path with an arrow head into X so we should find S
+[0:05:52] arrow head into X so we should find S such that there is no M
+[0:05:55] such that there is no M connected pathes between X and Y with an
+[0:05:57] connected pathes between X and Y with an arror head into X so these these two
+[0:06:00] arror head into X so these these two conditions is called the soal is is the
+[0:06:02] conditions is called the soal is is the so-called Factor
+[0:06:05] so-called Factor Criterion uh and the reverse side of the
+[0:06:07] Criterion uh and the reverse side of the story is that this Criterion is actually
+[0:06:10] story is that this Criterion is actually complete in the following sense As
+[0:06:13] complete in the following sense As proved by Spitz rle so if s is a
+[0:06:16] proved by Spitz rle so if s is a sufficient adjustment set for the caal
+[0:06:19] sufficient adjustment set for the caal model defined a certain graph then if I
+[0:06:22] model defined a certain graph then if I remove those descendant of the treatment
+[0:06:25] remove those descendant of the treatment from the set s then the remaining set is
+[0:06:28] from the set s then the remaining set is still adjustment set and it satisfies
+[0:06:30] still adjustment set and it satisfies the backd door
+[0:06:32] the backd door criteria so in practice um and which is
+[0:06:36] criteria so in practice um and which is also what I'm going to take uh in this
+[0:06:38] also what I'm going to take uh in this talk I only consider adjustment sets
+[0:06:40] talk I only consider adjustment sets that contain no descendant of x uh
+[0:06:43] that contain no descendant of x uh without loss of generality we can always
+[0:06:45] without loss of generality we can always restrict the search for adjustment sets
+[0:06:48] restrict the search for adjustment sets to those that contain no descendant of X
+[0:06:51] to those that contain no descendant of X so under this assumption then any set is
+[0:06:54] so under this assumption then any set is a sufficient adustment set if and only
+[0:06:57] a sufficient adustment set if and only if if that meets a back door criteria so
+[0:06:59] if if that meets a back door criteria so indeed indeed this is an if and only if
+[0:07:02] indeed indeed this is an if and only if condition so it does look like a solved
+[0:07:04] condition so it does look like a solved problem isn't
+[0:07:07] problem isn't it um I guess just to provide a b a bit
+[0:07:10] it um I guess just to provide a b a bit motivation about this work I think this
+[0:07:11] motivation about this work I think this Bears out of conversation with my
+[0:07:13] Bears out of conversation with my co-author Chen because I think in the
+[0:07:16] co-author Chen because I think in the graphical model perspective um
+[0:07:19] graphical model perspective um frequently you know in the paper we say
+[0:07:22] frequently you know in the paper we say suppose we have underlying dag or admg
+[0:07:25] suppose we have underlying dag or admg model G and then we're going to derive a
+[0:07:27] model G and then we're going to derive a boun results make statements and
+[0:07:29] boun results make statements and sometimes the statements would involve
+[0:07:31] sometimes the statements would involve properties about this G so then it
+[0:07:34] properties about this G so then it brings up this question so where does
+[0:07:37] brings up this question so where does the G come from in what cases we can
+[0:07:38] the G come from in what cases we can expect no in such a graph G I think it's
+[0:07:41] expect no in such a graph G I think it's quite rare in
+[0:07:43] quite rare in practice um so basically I think the
+[0:07:46] practice um so basically I think the motivation is coming from uh some
+[0:07:50] motivation is coming from uh some critiques uh on this known G
+[0:07:54] critiques uh on this known G stance so at least I'm going to provide
+[0:07:57] stance so at least I'm going to provide critiques in two aspects so firstly uh
+[0:08:00] critiques in two aspects so firstly uh it is perhaps not practical uh to assume
+[0:08:02] it is perhaps not practical uh to assume that you know the underlying graph
+[0:08:05] that you know the underlying graph G uh because probably we don't know the
+[0:08:07] G uh because probably we don't know the full CA structureal mechanism and take
+[0:08:11] full CA structureal mechanism and take it further suppose we know it but it
+[0:08:14] it further suppose we know it but it probably not matter if we can readily
+[0:08:16] probably not matter if we can readily draw the full graph because firstly uh
+[0:08:21] draw the full graph because firstly uh where do we set the boundary of my
+[0:08:22] where do we set the boundary of my canvas so what that means is you can
+[0:08:25] canvas so what that means is you can always add more vertices to the graph
+[0:08:28] always add more vertices to the graph and you don't know where to
+[0:08:30] and you don't know where to where some people would argue you know
+[0:08:32] where some people would argue you know you want to include the common courses
+[0:08:34] you want to include the common courses but common courses or common CES are
+[0:08:35] but common courses or common CES are still common courses so you know you
+[0:08:38] still common courses so you know you could imagine going you know to the
+[0:08:41] could imagine going you know to the origin of the universe and uh that would
+[0:08:43] origin of the universe and uh that would be way too many vertices to
+[0:08:45] be way too many vertices to draw and uh there is another analogy I
+[0:08:48] draw and uh there is another analogy I want to make um so suppose you're quite
+[0:08:50] want to make um so suppose you're quite organized person you know where your
+[0:08:52] organized person you know where your toothbrushes are you can't find with
+[0:08:54] toothbrushes are you can't find with your computer your home but if I ask you
+[0:08:57] your computer your home but if I ask you to draw out the floor plan of your home
+[0:08:59] to draw out the floor plan of your home so
+[0:09:00] so uh it's probably another matter so even
+[0:09:02] uh it's probably another matter so even if you know you have the rough idea of
+[0:09:05] if you know you have the rough idea of how things are related but it could be
+[0:09:06] how things are related but it could be another matter to draw it completely uh
+[0:09:09] another matter to draw it completely uh on a pen of paper
+[0:09:11] on a pen of paper so and also frequently it's not the
+[0:09:14] so and also frequently it's not the statisticians who are supposed to draw
+[0:09:16] statisticians who are supposed to draw the graph we more or less rely on the
+[0:09:18] the graph we more or less rely on the domain Knowledge from domain experts to
+[0:09:21] domain Knowledge from domain experts to draw the graph I would want to want to
+[0:09:23] draw the graph I would want to want to say that there are tools and protocols
+[0:09:26] say that there are tools and protocols that kind of formalize or Aid the
+[0:09:28] that kind of formalize or Aid the process of drawing the D model
+[0:09:30] process of drawing the D model but I think many people still find this
+[0:09:32] but I think many people still find this practice quite challenging so this is
+[0:09:35] practice quite challenging so this is the first aspect of critique um namely
+[0:09:38] the first aspect of critique um namely that is not entirely
+[0:09:39] that is not entirely practical well the second aspect um is
+[0:09:43] practical well the second aspect um is just a simple observation nor is it
+[0:09:45] just a simple observation nor is it entirely necessary because if you think
+[0:09:48] entirely necessary because if you think about the back door Criterion which
+[0:09:49] about the back door Criterion which consists of two Clauses it certainly
+[0:09:52] consists of two Clauses it certainly only concerns partial knowledge about
+[0:09:54] only concerns partial knowledge about the graph knowing the set satisfy the
+[0:09:57] the graph knowing the set satisfy the back door Criterion does not really
+[0:09:59] back door Criterion does not really leted you to fully recover the graph so
+[0:10:02] leted you to fully recover the graph so the back door Criterion by itself is
+[0:10:04] the back door Criterion by itself is only a statement about certain aspects
+[0:10:07] only a statement about certain aspects about the graph G so naturally uh then
+[0:10:10] about the graph G so naturally uh then there are two further
+[0:10:12] there are two further questions so the first question is how
+[0:10:15] questions so the first question is how can we articulate what is the partial
+[0:10:18] can we articulate what is the partial knowledge about the graph G that defines
+[0:10:21] knowledge about the graph G that defines the backto criteria namely can we find a
+[0:10:24] the backto criteria namely can we find a proper modular representation to such a
+[0:10:27] proper modular representation to such a partial
+[0:10:28] partial knowledge then the further question is
+[0:10:31] knowledge then the further question is having defined such a representation how
+[0:10:34] having defined such a representation how do we design a procedure to properly
+[0:10:38] do we design a procedure to properly elicit such a partial knowledge uh from
+[0:10:40] elicit such a partial knowledge uh from domain
+[0:10:48] experts okay uh so before I present our method uh it's worth mentioning that
+[0:10:50] method uh it's worth mentioning that there are other works earlier proposals
+[0:10:52] there are other works earlier proposals in literature uh that move away from the
+[0:10:55] in literature uh that move away from the known G stance and a particular example
+[0:10:59] known G stance and a particular example I think is a quite wellknown one is this
+[0:11:01] I think is a quite wellknown one is this disjunctive Criterium proposed by one
+[0:11:03] disjunctive Criterium proposed by one whe Spitzer so imagine the setting you
+[0:11:06] whe Spitzer so imagine the setting you have already collected a data set in the
+[0:11:08] have already collected a data set in the data set you have the treatment X you
+[0:11:10] data set you have the treatment X you have outcome Y and you also have uh
+[0:11:13] have outcome Y and you also have uh collected the data for a bunch of
+[0:11:15] collected the data for a bunch of observed the pre treatment covariant
+[0:11:18] observed the pre treatment covariant then you go through this table to ask
+[0:11:20] then you go through this table to ask for each covariant whether the covariant
+[0:11:23] for each covariant whether the covariant is either a cause of X or a cause of Y
+[0:11:26] is either a cause of X or a cause of Y or both if the answer is yes you include
+[0:11:29] or both if the answer is yes you include that it into the set
+[0:11:31] that it into the set s so this is a disjunctive
+[0:11:34] s so this is a disjunctive Criterion and um viter proved a quite
+[0:11:39] Criterion and um viter proved a quite remarkable property which is uh the set
+[0:11:42] remarkable property which is uh the set s would be a sufficient adjustment set
+[0:11:45] s would be a sufficient adjustment set whenever the set of observed apprear
+[0:11:48] whenever the set of observed apprear contains any subset and that subset is a
+[0:11:51] contains any subset and that subset is a sufficient adjustment set so as you can
+[0:11:54] sufficient adjustment set so as you can imagine this is can be this can be quite
+[0:11:56] imagine this is can be this can be quite useful especially when you are in a
+[0:11:58] useful especially when you are in a scenario where the data set has already
+[0:12:01] scenario where the data set has already been defined the data has already been
+[0:12:03] been defined the data has already been collected and you only have very limited
+[0:12:06] collected and you only have very limited structural knowledge about the
+[0:12:07] structural knowledge about the underlying graph namely you only know
+[0:12:09] underlying graph namely you only know whether or not every covariant is a
+[0:12:12] whether or not every covariant is a cause of X or Y in that case then using
+[0:12:15] cause of X or Y in that case then using this Criterion um you know maybe the
+[0:12:18] this Criterion um you know maybe the best bet but on the contrary uh if we're
+[0:12:22] best bet but on the contrary uh if we're in the early stage of Designing the
+[0:12:24] in the early stage of Designing the designing the procedure where the goal
+[0:12:26] designing the procedure where the goal part of the goal is to figure out what
+[0:12:28] part of the goal is to figure out what data what various we want to measure
+[0:12:31] data what various we want to measure then this is probably not the most
+[0:12:40] suitable okay um so let me just uh give a Nal description of our approach to
+[0:12:43] a Nal description of our approach to give you a
+[0:12:44] give you a feel what a proposal looks
+[0:12:47] feel what a proposal looks like so for this purpose I'm going to
+[0:12:50] like so for this purpose I'm going to look at this so-called butterfly bias
+[0:12:53] look at this so-called butterfly bias graph where X treatment Y is the outcome
+[0:12:56] graph where X treatment Y is the outcome and B is this compounder of X Y Y and
+[0:13:00] and B is this compounder of X Y Y and the but the so-called butterfly is you
+[0:13:04] the but the so-called butterfly is you know evident from this m shaped path x
+[0:13:07] know evident from this m shaped path x cb d y so basically we need to control B
+[0:13:13] cb d y so basically we need to control B and once control B that opens this aim
+[0:13:16] and once control B that opens this aim the sh shaped collider path and we
+[0:13:19] the sh shaped collider path and we either have to additionally control C or
+[0:13:21] either have to additionally control C or control D in order to control the
+[0:13:23] control D in order to control the confounding between X and
+[0:13:26] confounding between X and Y okay um well in terms of procedure I
+[0:13:30] Y okay um well in terms of procedure I will first draw X and Y with a
+[0:13:32] will first draw X and Y with a bidirected dash Edge between them so for
+[0:13:35] bidirected dash Edge between them so for the I will explain what this symbol
+[0:13:38] the I will explain what this symbol means later but for now you just think
+[0:13:40] means later but for now you just think about this means potential confounding
+[0:13:43] about this means potential confounding so this symbol simply means there could
+[0:13:45] so this symbol simply means there could be potential direct confounding between
+[0:13:47] be potential direct confounding between X and
+[0:13:49] X and Y so in the next step I'm going to
+[0:13:52] Y so in the next step I'm going to introduce this variable B by
+[0:13:55] introduce this variable B by introduction of B the this potential
+[0:13:57] introduction of B the this potential confounding between X and Y is gone
+[0:13:59] confounding between X and Y is gone B is introduced into the canvas and at
+[0:14:01] B is introduced into the canvas and at the same time I need to draw new edges I
+[0:14:04] the same time I need to draw new edges I need to draw the edges between B and x
+[0:14:07] need to draw the edges between B and x and B and Y indicating that there could
+[0:14:09] and B and Y indicating that there could be potentially confounding between B and
+[0:14:11] be potentially confounding between B and x and B and Y in the next stage I'm
+[0:14:14] x and B and Y in the next stage I'm going to you know try to control this
+[0:14:18] going to you know try to control this potential compounding between B and X
+[0:14:20] potential compounding between B and X for that purpose I'm going to introduce
+[0:14:23] for that purpose I'm going to introduce C that breaks the bnx link but also
+[0:14:26] C that breaks the bnx link but also introduces new links
+[0:14:29] introduces new links and I continue to try to control the
+[0:14:32] and I continue to try to control the edge between c and x immediately when I
+[0:14:36] edge between c and x immediately when I find that there is no confounding
+[0:14:38] find that there is no confounding between sin and X I remove the edge
+[0:14:41] between sin and X I remove the edge between sin and x and right now lo and
+[0:14:43] between sin and x and right now lo and behold uh X and Y are in different
+[0:14:47] behold uh X and Y are in different connected components meaning that X and
+[0:14:50] connected components meaning that X and Y are disconnected and immediately we
+[0:14:53] Y are disconnected and immediately we know B and C is found as a sufficient
+[0:14:56] know B and C is found as a sufficient adjustment
+[0:14:58] adjustment set
+[0:14:59] set okay so in terms of the two previous
+[0:15:03] okay so in terms of the two previous questions first um the representation of
+[0:15:06] questions first um the representation of the partial knowledge to define the uh
+[0:15:09] the partial knowledge to define the uh backd door
+[0:15:10] backd door Criterion we our representation is a
+[0:15:13] Criterion we our representation is a specific graph with B directed edges in
+[0:15:17] specific graph with B directed edges in particular this dashed by direct edges
+[0:15:19] particular this dashed by direct edges denote a potential confounding
+[0:15:22] denote a potential confounding Arc which I'll Define in a moment and
+[0:15:26] Arc which I'll Define in a moment and and the second question about the
+[0:15:27] and the second question about the procedural design
+[0:15:29] procedural design how do we elicit such a partial
+[0:15:32] how do we elicit such a partial knowledge so basically we this is a
+[0:15:34] knowledge so basically we this is a itera procedure every time we select a
+[0:15:37] itera procedure every time we select a possible confounding Arc and introduce
+[0:15:40] possible confounding Arc and introduce new variables to control such a
+[0:15:42] new variables to control such a confounding Arc the new variables
+[0:15:44] confounding Arc the new variables introduced to control it are called a
+[0:15:46] introduced to control it are called a primary adjustment set and the way we to
+[0:15:49] primary adjustment set and the way we to to conceptualize primary adjustment set
+[0:15:52] to conceptualize primary adjustment set is through some uh queries from the user
+[0:15:57] is through some uh queries from the user about the common causes and mediators
+[0:16:00] about the common causes and mediators and then I'm going to remove that
+[0:16:02] and then I'm going to remove that potential confounding Arc and also
+[0:16:04] potential confounding Arc and also introduce new arcs this procedure would
+[0:16:07] introduce new arcs this procedure would terminate once X and Y become
+[0:16:09] terminate once X and Y become disconnected at that stage we declare a
+[0:16:12] disconnected at that stage we declare a sufficient adjustment is found a
+[0:16:14] sufficient adjustment is found a sufficient adjustment is all the
+[0:16:16] sufficient adjustment is all the variables on the canvas except X and Y
+[0:16:19] variables on the canvas except X and Y and then you can think of this as a
+[0:16:21] and then you can think of this as a procedure of inverting the lat
+[0:16:25] procedure of inverting the lat projection okay so I think now is due
+[0:16:28] projection okay so I think now is due time to show you uh
+[0:16:31] time to show you uh demo so uh I have this demo coded up in
+[0:16:37] demo so uh I have this demo coded up in are
+[0:16:43] shiny okay now I'm going to switch to My Demo
+[0:16:53] screen uh okay I guess you guys can see it
+[0:16:54] it now all
+[0:16:56] now all right so here I'm looking at a case
+[0:17:00] right so here I'm looking at a case study uh on the right
+[0:17:03] study uh on the right so the case study is about inferring the
+[0:17:06] so the case study is about inferring the effect of
+[0:17:08] effect of warm-up and on the sports injury so
+[0:17:10] warm-up and on the sports injury so whether or not you do warmup before
+[0:17:13] whether or not you do warmup before exercise uh would increase or decrease
+[0:17:15] exercise uh would increase or decrease the likelihood of getting Sports
+[0:17:17] the likelihood of getting Sports Injury so treatment is a warmup injury
+[0:17:20] Injury so treatment is a warmup injury is the outcome and here this example by
+[0:17:24] is the outcome and here this example by the way from sh plat 2008 paper and I'm
+[0:17:28] the way from sh plat 2008 paper and I'm coloring all the observed variables as
+[0:17:30] coloring all the observed variables as blue and all the unobserved latent
+[0:17:33] blue and all the unobserved latent variables as
+[0:17:35] variables as red okay so for now I'm just showing you
+[0:17:38] red okay so for now I'm just showing you suppose this is the underlying true coal
+[0:17:42] suppose this is the underlying true coal dag but the point is you want to imagine
+[0:17:45] dag but the point is you want to imagine yourself as a domain expert who has you
+[0:17:47] yourself as a domain expert who has you know knowledge about the mechanism of
+[0:17:49] know knowledge about the mechanism of sports injury
+[0:17:51] sports injury you in your mind somewhere there is
+[0:17:54] you in your mind somewhere there is sufficient knowledge about this graph
+[0:17:56] sufficient knowledge about this graph but you may not be able to immediately
+[0:17:58] but you may not be able to immediately draw the full graph what I'm going to do
+[0:18:00] draw the full graph what I'm going to do is to query you repeatedly about certain
+[0:18:03] is to query you repeatedly about certain aspects of the graph okay so this is the
+[0:18:07] aspects of the graph okay so this is the shiny app uh firstly I'm going to rename
+[0:18:11] shiny app uh firstly I'm going to rename the treatment as
+[0:18:16] warmup rename the outcome as
+[0:18:26] y so the goal here as we remember is to try to make the warm up and injury
+[0:18:29] try to make the warm up and injury Disconnected by Direct by by by directed
+[0:18:32] Disconnected by Direct by by by directed edges immediately that happens we have
+[0:18:34] edges immediately that happens we have found a sufficient adjustment set so
+[0:18:36] found a sufficient adjustment set so there is only one Edge between warmer
+[0:18:38] there is only one Edge between warmer injury let me try to see what I can do
+[0:18:41] injury let me try to see what I can do with an edge so I double click on the
+[0:18:42] with an edge so I double click on the edge so ask me zero primary adjustment
+[0:18:46] edge so ask me zero primary adjustment set for warmer injury I don't know what
+[0:18:48] set for warmer injury I don't know what that means so help me find
+[0:18:51] that means so help me find one okay ask me is there a common cause
+[0:18:54] one okay ask me is there a common cause of warmup and injury so imagine I'm a
+[0:18:57] of warmup and injury so imagine I'm a domain expert so so at least I mean
+[0:19:00] domain expert so so at least I mean there are three common causes the coach
+[0:19:02] there are three common causes the coach is a common cause the genetics a common
+[0:19:04] is a common cause the genetics a common cause and the fitness level is a common
+[0:19:06] cause and the fitness level is a common cause so I say yes enter common cause
+[0:19:10] cause so I say yes enter common cause let's say I enter finish
+[0:19:18] level okay finish level observed no remember um only blue vertices observed
+[0:19:22] remember um only blue vertices observed so now it starts to ask me about
+[0:19:25] so now it starts to ask me about mediators so is there a set observed
+[0:19:27] mediators so is there a set observed variables of fully mediated effect from
+[0:19:29] variables of fully mediated effect from Fitness level on the warmup where the
+[0:19:32] Fitness level on the warmup where the fitness level could affect warmup
+[0:19:34] fitness level could affect warmup through this unobserved variable so I
+[0:19:36] through this unobserved variable so I would say no is there a set of observed
+[0:19:40] would say no is there a set of observed variables that fully mediate the effect
+[0:19:41] variables that fully mediate the effect of Fitness level on the injury well if I
+[0:19:44] of Fitness level on the injury well if I think about it f Fitness level only
+[0:19:47] think about it f Fitness level only affects the injury through this muscle
+[0:19:50] affects the injury through this muscle fatigue and muscle fatigue is observed
+[0:19:52] fatigue and muscle fatigue is observed so I would say
+[0:19:55] so I would say muscle
+[0:19:57] muscle t
+[0:19:59] t these are my
+[0:20:01] these are my mediators now you ask me again if there
+[0:20:04] mediators now you ask me again if there is another common cause of warm of
+[0:20:06] is another common cause of warm of injury that is not blocked by muscle
+[0:20:11] injury that is not blocked by muscle fatigue well obviously genetics is
+[0:20:15] fatigue well obviously genetics is another common cause and genetics
+[0:20:17] another common cause and genetics affects warm up through this pathway of
+[0:20:20] affects warm up through this pathway of unobserved variables and genetics also
+[0:20:23] unobserved variables and genetics also affects injury in at least three
+[0:20:26] affects injury in at least three Pathways this one
+[0:20:29] Pathways this one that one and also through this tissue
+[0:20:31] that one and also through this tissue disorder tissue weakness pathway and
+[0:20:34] disorder tissue weakness pathway and that pathway is not blocked by muscle
+[0:20:37] that pathway is not blocked by muscle fatigue so I say
+[0:20:40] fatigue so I say yes so I key in
+[0:20:44] yes so I key in genetics genetics is not observed so
+[0:20:48] genetics genetics is not observed so genetics to warm up no I can't find
+[0:20:52] genetics to warm up no I can't find mediators but for genetics to
+[0:20:55] mediators but for genetics to injury there are two mediators are fully
+[0:20:57] injury there are two mediators are fully mediate one of them is muscle fatigue
+[0:21:00] mediate one of them is muscle fatigue the other one is a new one is the tissue
+[0:21:04] the other one is a new one is the tissue disorder so I just key in tissue
+[0:21:14] disorder so I think these will suffice I click these are my mediators now ask me
+[0:21:17] click these are my mediators now ask me again is there a common cause of warmup
+[0:21:20] again is there a common cause of warmup injury that are not blocked by muscle
+[0:21:23] injury that are not blocked by muscle fatigue and tissue disorder well there
+[0:21:25] fatigue and tissue disorder well there is another common cause which is coach
+[0:21:28] is another common cause which is coach but but if if I think about it why I
+[0:21:31] but but if if I think about it why I mean coach only affects the outcome
+[0:21:34] mean coach only affects the outcome injury through the muscle fatigue so no
+[0:21:39] injury through the muscle fatigue so no there's no more common cause so now it's
+[0:21:43] there's no more common cause so now it's a smidy face uh it tells me this wizard
+[0:21:46] a smidy face uh it tells me this wizard has gone through it has found the
+[0:21:47] has gone through it has found the primary adjustment set for this Dash
+[0:21:50] primary adjustment set for this Dash bidirec confounding Arc between warmup
+[0:21:52] bidirec confounding Arc between warmup injury and that said is muscle fatigue
+[0:21:55] injury and that said is muscle fatigue and tissue disorder I say yes
+[0:21:59] and tissue disorder I say yes so what it does is to remove the btic
+[0:22:01] so what it does is to remove the btic compounding Arc between the variables
+[0:22:04] compounding Arc between the variables and introduce the fatigue and dis dissue
+[0:22:06] and introduce the fatigue and dis dissue disorder onto the canvas at the same
+[0:22:08] disorder onto the canvas at the same time also introduce five edges including
+[0:22:12] time also introduce five edges including these two edges those two edges and also
+[0:22:15] these two edges those two edges and also a b direct Edge between muscle fatigue
+[0:22:18] a b direct Edge between muscle fatigue and tissue
+[0:22:19] and tissue disorder now you can see there are four
+[0:22:22] disorder now you can see there are four edges that are highlighted and on the
+[0:22:25] edges that are highlighted and on the bottom right it tells me it tells me
+[0:22:28] bottom right it tells me it tells me that in order to render the warm of
+[0:22:31] that in order to render the warm of injury disconnected at least two edges I
+[0:22:33] injury disconnected at least two edges I need to remove either at the minimum
+[0:22:36] need to remove either at the minimum remove these two or remove those two but
+[0:22:39] remove these two or remove those two but I can choose which one I want to remove
+[0:22:41] I can choose which one I want to remove in practice uh for example if I want to
+[0:22:45] in practice uh for example if I want to just look at the edge between muscle
+[0:22:47] just look at the edge between muscle fatigue and tissue
+[0:22:48] fatigue and tissue disorder um okay I click on the wizard
+[0:22:51] disorder um okay I click on the wizard is there a common cause of them and the
+[0:22:54] is there a common cause of them and the answer is yes and the common cause of
+[0:22:57] answer is yes and the common cause of them would be genetics
+[0:23:04] is genetics observed no does genetics allow me to control this confounding Arc
+[0:23:07] allow me to control this confounding Arc through mediators unfortunately
+[0:23:10] through mediators unfortunately no so now that would render this
+[0:23:14] no so now that would render this bidirected PO potential confounding Arc
+[0:23:18] bidirected PO potential confounding Arc as a uncontrollable solid confounding
+[0:23:21] as a uncontrollable solid confounding Arc that means this Edge by no means I
+[0:23:23] Arc that means this Edge by no means I can remove so then I need to think about
+[0:23:26] can remove so then I need to think about the other edges so the either these two
+[0:23:28] the other edges so the either these two or those two let's say I look at warm up
+[0:23:32] or those two let's say I look at warm up and muscle
+[0:23:38] fatigue so is there a common cause of muscle fatigue and
+[0:23:40] muscle fatigue and warmup that is not blocked by tissue
+[0:23:43] warmup that is not blocked by tissue disorder
+[0:23:44] disorder yes and that one could be Fitness
+[0:23:54] level then this level not observed and also unfortunately I don't have
+[0:23:55] also unfortunately I don't have mediators to control the fitness level
+[0:24:00] mediators to control the fitness level Pathways to these two vertices so I say
+[0:24:03] Pathways to these two vertices so I say no and
+[0:24:04] no and no so this Edge is also not
+[0:24:08] no so this Edge is also not expandable the same way if I look at the
+[0:24:11] expandable the same way if I look at the edge between warm up and tissue disorder
+[0:24:14] edge between warm up and tissue disorder also I think similarly there won't be a
+[0:24:18] also I think similarly there won't be a primary adjustment set so my only bet in
+[0:24:21] primary adjustment set so my only bet in so far is to control simultaneously
+[0:24:25] so far is to control simultaneously these two edges so if I look at tissue
+[0:24:29] these two edges so if I look at tissue disorder and
+[0:24:32] disorder and injury is there a common cause of tissue
+[0:24:35] injury is there a common cause of tissue disorder and injury that is not blocked
+[0:24:39] disorder and injury that is not blocked by warmup and muscle fatigue well they
+[0:24:43] by warmup and muscle fatigue well they do have a common cause the common cause
+[0:24:45] do have a common cause the common cause is genetics but genetics uh effects on
+[0:24:48] is genetics but genetics uh effects on the injury is fully mediated by the
+[0:24:50] the injury is fully mediated by the muscle muscle fatigue so the answer is
+[0:25:00] no so that means uh I'm ready to remove this set by introducing no more variable
+[0:25:03] this set by introducing no more variable so I say yes so there is only one Edge
+[0:25:06] so I say yes so there is only one Edge left to cut this
+[0:25:08] left to cut this one similarly is there a common cause of
+[0:25:12] one similarly is there a common cause of muscle fatigue and injury that is not
+[0:25:15] muscle fatigue and injury that is not blocked by warmup and tissue disorder
+[0:25:18] blocked by warmup and tissue disorder well there's genetics but genetics is
+[0:25:20] well there's genetics but genetics is fully mediated by tissue disorder so I
+[0:25:22] fully mediated by tissue disorder so I say
+[0:25:23] say no so I can remove this H so now warm up
+[0:25:28] no so I can remove this H so now warm up injury leave on different kinetic
+[0:25:30] injury leave on different kinetic components that
+[0:25:32] components that means these two variables musle fatigue
+[0:25:35] means these two variables musle fatigue and tissue tissue disorder is found to
+[0:25:38] and tissue tissue disorder is found to be a sufficient adjustment
+[0:25:46] set okay uh let me get back to my
+[0:25:48] my slides okay uh I hope this gives you
+[0:25:51] slides okay uh I hope this gives you some idea how this operationalize so let
+[0:25:54] some idea how this operationalize so let me just comment on some features of this
+[0:25:57] me just comment on some features of this procedure and it's
+[0:25:59] procedure and it's implementation so we have um so this is
+[0:26:03] implementation so we have um so this is a graph our representation is a graph
+[0:26:05] a graph our representation is a graph then edges are called confounding arcs
+[0:26:07] then edges are called confounding arcs there are two types the dashed ones are
+[0:26:10] there are two types the dashed ones are potential or possible confounding arcs
+[0:26:12] potential or possible confounding arcs and the solid ones are uncontrollable
+[0:26:14] and the solid ones are uncontrollable confounding arcs meaning there is no
+[0:26:16] confounding arcs meaning there is no primary adjustment set I could use to
+[0:26:18] primary adjustment set I could use to control
+[0:26:20] control it so to control the dash ones uh we
+[0:26:25] it so to control the dash ones uh we need to ask the user a bnch of questions
+[0:26:27] need to ask the user a bnch of questions to in the
+[0:26:30] to in the knowledge and I think it has been clear
+[0:26:34] knowledge and I think it has been clear um to you hopefully that to answer these
+[0:26:36] um to you hopefully that to answer these queries you do not need to pre-specify
+[0:26:40] queries you do not need to pre-specify the full graph uh although I show you
+[0:26:42] the full graph uh although I show you the full graph that that is just to you
+[0:26:44] the full graph that that is just to you know conceptualize what might be in
+[0:26:47] know conceptualize what might be in one's
+[0:26:48] one's head so actually to answer the questions
+[0:26:51] head so actually to answer the questions as you could notice uh the only thing
+[0:26:54] as you could notice uh the only thing you need to reason about are common
+[0:26:56] you need to reason about are common causes and mediators and these these are
+[0:26:58] causes and mediators and these these are things you can reason uh about local
+[0:27:01] things you can reason uh about local structures and not about global
+[0:27:03] structures and not about global structures and the queries are designed
+[0:27:06] structures and the queries are designed to be economical what that means is that
+[0:27:08] to be economical what that means is that we only quy those information that is
+[0:27:11] we only quy those information that is needed for the task here for example the
+[0:27:13] needed for the task here for example the causal relations between those observed
+[0:27:16] causal relations between those observed confounders we never ask about them
+[0:27:18] confounders we never ask about them because they're irrelevant to our task
+[0:27:21] because they're irrelevant to our task of confounding
+[0:27:23] of confounding selection and also I think uh the
+[0:27:26] selection and also I think uh the procedure is designed in a way such that
+[0:27:29] procedure is designed in a way such that users familiar famili
+[0:27:33] users familiar famili familiarity with coog graphical model is
+[0:27:36] familiarity with coog graphical model is not a prerequisite so in particular user
+[0:27:38] not a prerequisite so in particular user does not need to be aware what a cider
+[0:27:40] does not need to be aware what a cider bias is and imp implicitly it is already
+[0:27:44] bias is and imp implicitly it is already taken care of by this procedure so
+[0:27:46] taken care of by this procedure so probably you already noticed here the
+[0:27:49] probably you already noticed here the muscle fatigue is actually a cider if
+[0:27:51] muscle fatigue is actually a cider if you conditional muscle fatigue that
+[0:27:53] you conditional muscle fatigue that would open up this m shaped Collider
+[0:27:58] would open up this m shaped Collider pathway like
+[0:28:00] pathway like this but the procedure would also ask us
+[0:28:04] this but the procedure would also ask us to control for tissue disorder that
+[0:28:06] to control for tissue disorder that would block this cider pathway so it is
+[0:28:09] would block this cider pathway so it is already taken care of so there are two
+[0:28:12] already taken care of so there are two ways that the procedure can terminate
+[0:28:15] ways that the procedure can terminate the first one is as we already seen that
+[0:28:18] the first one is as we already seen that the X and Y are Disconnected by by
+[0:28:20] the X and Y are Disconnected by by directed edges that means a sufficient
+[0:28:21] directed edges that means a sufficient adjustment set has been identified but
+[0:28:24] adjustment set has been identified but if you are unlucky or you don't have
+[0:28:26] if you are unlucky or you don't have sufficient um you know observed the
+[0:28:28] sufficient um you know observed the variables then you could possibly run
+[0:28:30] variables then you could possibly run into the case where the X and Y are
+[0:28:32] into the case where the X and Y are connected by uncontrollable confounding
+[0:28:34] connected by uncontrollable confounding arcs that means no sufficient adjustment
+[0:28:37] arcs that means no sufficient adjustment set can be
+[0:28:39] set can be found okay uh before I move on to the
+[0:28:42] found okay uh before I move on to the theory is there any
+[0:28:49] question uh no we currently don't have uh uh public questions uh please submit
+[0:28:53] uh uh public questions uh please submit your questions as soon as you have it
+[0:28:55] your questions as soon as you have it and yeah we'll have to okay Emma has a
+[0:28:58] and yeah we'll have to okay Emma has a question yeah I have a question is there
+[0:29:01] question yeah I have a question is there a way to like show the intermediate
+[0:29:05] a way to like show the intermediate process like because the what the
+[0:29:07] process like because the what the algorithm currently is doing is it's in
+[0:29:10] algorithm currently is doing is it's in the background like Computing something
+[0:29:13] the background like Computing something or drawing something for itself or
+[0:29:15] or drawing something for itself or something so is there a way to show that
+[0:29:17] something so is there a way to show that because it seems to be difficult to keep
+[0:29:20] because it seems to be difficult to keep all of this in your head in answering
+[0:29:22] all of this in your head in answering the series of
+[0:29:28] questions um okay so I I will say two things
+[0:29:31] okay so I I will say two things one um I haven't explained why that
+[0:29:34] one um I haven't explained why that works probably it's already clear to you
+[0:29:36] works probably it's already clear to you Emma but uh um but I guess I guess if
+[0:29:40] Emma but uh um but I guess I guess if you see the the theory it will become
+[0:29:42] you see the the theory it will become clear what the algorithm you're trying
+[0:29:44] clear what the algorithm you're trying to do the second thing is I think
+[0:29:46] to do the second thing is I think engineering wise you know uh you
+[0:29:50] engineering wise you know uh you probably notice I have a kiding genetics
+[0:29:52] probably notice I have a kiding genetics twice I shouldn't have done it I think
+[0:29:54] twice I shouldn't have done it I think there are definitely some uh room for
+[0:29:55] there are definitely some uh room for improvement for the engine engineering
+[0:29:58] improvement for the engine engineering that um the user would only need to key
+[0:30:01] that um the user would only need to key in less information than his current
+[0:30:04] in less information than his current implementation um I don't know if that
+[0:30:07] implementation um I don't know if that answers your question that helps yeah
+[0:30:14] thanks uh I suppose there is another
+[0:30:22] question oh yes a question just pops up uh it asks uh Laten variables could be
+[0:30:25] uh it asks uh Laten variables could be included in this model or only measured
+[0:30:29] included in this model or only measured variables so we would ask questions
+[0:30:32] variables so we would ask questions about latent variables in particular
+[0:30:34] about latent variables in particular about latent common
+[0:30:37] about latent common causes but on the canvas all you see are
+[0:30:40] causes but on the canvas all you see are observed variables so because those are
+[0:30:43] observed variables so because those are what we need to control for confound
+[0:30:45] what we need to control for confound what we use for for constructing the
+[0:30:47] what we use for for constructing the sufficient assessment set so I hope that
+[0:30:51] sufficient assessment set so I hope that answers your
+[0:30:52] answers your question thank
+[0:30:54] question thank you all right uh if there's no more
+[0:30:57] you all right uh if there's no more question let me move on to the theory a
+[0:31:00] question let me move on to the theory a little
+[0:31:02] little bit okay so um so the theory uh I would
+[0:31:06] bit okay so um so the theory uh I would assume there is this underlying asally
+[0:31:09] assume there is this underlying asally directed Mist graph G over the vertex
+[0:31:12] directed Mist graph G over the vertex set V that defines our CA model this
+[0:31:15] set V that defines our CA model this admg is a direct extension of Dax that
+[0:31:19] admg is a direct extension of Dax that allow for confounding that has
+[0:31:21] allow for confounding that has bidirected edges in addition to directed
+[0:31:25] bidirected edges in addition to directed edges um so an EDM G
+[0:31:29] edges um so an EDM G um has directed edges directed edges
+[0:31:32] um has directed edges directed edges would represent direct causal effects
+[0:31:34] would represent direct causal effects and birir edges would represent the
+[0:31:37] and birir edges would represent the existence of L and common cause in other
+[0:31:39] existence of L and common cause in other words
+[0:31:41] words indogen so for admg a very important
+[0:31:45] indogen so for admg a very important concept is M connection and M separation
+[0:31:50] concept is M connection and M separation and this is a direct extension of the
+[0:31:52] and this is a direct extension of the concept of deconnection desparation from
+[0:31:54] concept of deconnection desparation from dags so the way to test m connection and
+[0:31:58] dags so the way to test m connection and SE M separation is basically the same as
+[0:32:01] SE M separation is basically the same as for testing deconnection
+[0:32:04] for testing deconnection desparation and this induces a relation
+[0:32:07] desparation and this induces a relation that can be posited from any set of
+[0:32:11] that can be posited from any set of triplet so for a b and c and suppose
+[0:32:14] triplet so for a b and c and suppose they're disjointed there is a way to
+[0:32:17] they're disjointed there is a way to test whether A and B are M connected to
+[0:32:21] test whether A and B are M connected to given C or A and B are M separated given
+[0:32:25] given C or A and B are M separated given C by testing whether there is an M
+[0:32:28] C by testing whether there is an M connecting path between A and B given
+[0:32:35] C okay so I'm going to assume we're operating under a unknown graph G but we
+[0:32:40] operating under a unknown graph G but we can make repeated queries about certain
+[0:32:42] can make repeated queries about certain aspects of
+[0:32:44] aspects of G okay uh let me introduce some
+[0:32:47] G okay uh let me introduce some notations as you can see this m
+[0:32:50] notations as you can see this m separation or M connection is a
+[0:32:53] separation or M connection is a statement about existence or
+[0:32:56] statement about existence or non-existence of certain pathes and
+[0:32:58] non-existence of certain pathes and there is no restriction about those
+[0:33:00] there is no restriction about those pathes except for its
+[0:33:03] pathes except for its connectedness but for our purpose we're
+[0:33:06] connectedness but for our purpose we're interested in confounding control and
+[0:33:09] interested in confounding control and that means we only care about certain
+[0:33:11] that means we only care about certain shapes of
+[0:33:13] shapes of pathes so paths can be the shapes can be
+[0:33:16] pathes so paths can be the shapes can be defined in many ways a particular aspect
+[0:33:19] defined in many ways a particular aspect is whether or not a path has any cider
+[0:33:22] is whether or not a path has any cider so cider is where two arrows meet when
+[0:33:26] so cider is where two arrows meet when when the
+[0:33:27] when the paths have no ciders I call that Arc and
+[0:33:30] paths have no ciders I call that Arc and Arc is denoted with this Squigly line so
+[0:33:34] Arc is denoted with this Squigly line so directed Arc is just the synonym for
+[0:33:38] directed Arc is just the synonym for directed path so that means a followed
+[0:33:41] directed path so that means a followed by a bunch of edges a bunch of arrows
+[0:33:43] by a bunch of edges a bunch of arrows pointing to
+[0:33:45] pointing to B so directed Arc means directed
+[0:33:48] B so directed Arc means directed directed path and what is important to
+[0:33:51] directed path and what is important to us is actually this confounding Arc
+[0:33:54] us is actually this confounding Arc concept um meaning this is a non cider
+[0:33:58] concept um meaning this is a non cider path with endpoint arrows so there are
+[0:34:02] path with endpoint arrows so there are four configurations either a followed by
+[0:34:06] four configurations either a followed by a bunch of left arrows and Then followed
+[0:34:08] a bunch of left arrows and Then followed by a bunch of right arrows and followed
+[0:34:10] by a bunch of right arrows and followed by end point B or a left arrows B Edge b
+[0:34:15] by end point B or a left arrows B Edge b or a B Edge right arrows b or a left
+[0:34:20] or a B Edge right arrows b or a left arrows B Edge a single B Edge and Bun to
+[0:34:24] arrows B Edge a single B Edge and Bun to right arrows and to the other end for B
+[0:34:27] right arrows and to the other end for B okay so confounding Arc is kind of the
+[0:34:30] okay so confounding Arc is kind of the basic building block for inducing
+[0:34:33] basic building block for inducing confounding uh and also um we when we
+[0:34:38] confounding uh and also um we when we draw this Arc notation the actual pathes
+[0:34:42] draw this Arc notation the actual pathes they represent should match the endpoint
+[0:34:45] they represent should match the endpoint arroe head of this squiggly line but if
+[0:34:48] arroe head of this squiggly line but if we don't want to restrict whether is a
+[0:34:51] we don't want to restrict whether is a endpoint tail or endpoint head we can
+[0:34:54] endpoint tail or endpoint head we can use this half arrow notation so a a half
+[0:34:57] use this half arrow notation so a a half Arrow Squigly line Arrow b means either
+[0:35:00] Arrow Squigly line Arrow b means either one of these two
+[0:35:08] cases and if we concatenate a bunch of arcs that would define the path and I
+[0:35:11] arcs that would define the path and I use this wild card notation for XX for
+[0:35:14] use this wild card notation for XX for for concatenation of ARX and that's a
+[0:35:18] for concatenation of ARX and that's a confounding path the confounding path is
+[0:35:21] confounding path the confounding path is represent in such a
+[0:35:22] represent in such a way um so you want to interpret this
+[0:35:25] way um so you want to interpret this wild card as meaning zero one or more
+[0:35:28] wild card as meaning zero one or more ciders if there is zero cider that just
+[0:35:31] ciders if there is zero cider that just means a confounding arc when there is
+[0:35:34] means a confounding arc when there is one cider that means a concatenation of
+[0:35:36] one cider that means a concatenation of two confound arcs where there are more
+[0:35:39] two confound arcs where there are more than two or more ciders um it is
+[0:35:43] than two or more ciders um it is concatenation of two or more three or
+[0:35:46] concatenation of two or more three or more confounding
+[0:35:48] more confounding arcs and by the way if we allow any
+[0:35:51] arcs and by the way if we allow any shape of path that is this specific
+[0:35:54] shape of path that is this specific symbol half arrows um with Squig
+[0:35:58] symbol half arrows um with Squig like okay so having defined such shape
+[0:36:01] like okay so having defined such shape of pathes then we can refine this notion
+[0:36:04] of pathes then we can refine this notion of M connection or name Separation by
+[0:36:07] of M connection or name Separation by saying uh by specifying particular shape
+[0:36:10] saying uh by specifying particular shape of path that means existence or
+[0:36:13] of path that means existence or non-existance of a M connecting path a
+[0:36:16] non-existance of a M connecting path a particular shape between A and B given
+[0:36:19] particular shape between A and B given C so M connection M separation can be
+[0:36:23] C so M connection M separation can be written in such a fashion because this
+[0:36:25] written in such a fashion because this type of half arror path is meaning path
+[0:36:28] type of half arror path is meaning path of any shape but importantly to us is a
+[0:36:32] of any shape but importantly to us is a a different um three types of refined M
+[0:36:37] a different um three types of refined M connection or M separation uh relations
+[0:36:41] connection or M separation uh relations in particular the latter two so the
+[0:36:43] in particular the latter two so the confounding Arc and the confounding
+[0:36:47] confounding Arc and the confounding path so the confounding Arc in our
+[0:36:49] path so the confounding Arc in our procedure that I just showed you in the
+[0:36:51] procedure that I just showed you in the demo translates into birir edges and the
+[0:36:55] demo translates into birir edges and the confounding path is concatenation of
+[0:36:59] confounding path is concatenation of multiple confounding
+[0:37:01] multiple confounding arcs so this notation for example the
+[0:37:04] arcs so this notation for example the second one would mean given C there
+[0:37:07] second one would mean given C there exists a confounding Arc that is M
+[0:37:09] exists a confounding Arc that is M connected between A and
+[0:37:12] connected between A and B I hope that's
+[0:37:14] B I hope that's clear okay us using such a notation we
+[0:37:18] clear okay us using such a notation we can basically reformulate pearls Back
+[0:37:21] can basically reformulate pearls Back Criterion in such a way so a set s that
+[0:37:24] Criterion in such a way so a set s that contains no descendant of X satisfy the
+[0:37:27] contains no descendant of X satisfy the back door Criterion if and only if there
+[0:37:30] back door Criterion if and only if there is no M connected confounding path
+[0:37:33] is no M connected confounding path between X and Y given s it's just a
+[0:37:42] reformulation okay um but uh this is not directly usable because uh for blocking
+[0:37:46] directly usable because uh for blocking confounding pathes suppose C is a set
+[0:37:48] confounding pathes suppose C is a set that blocks confounding path because the
+[0:37:51] that blocks confounding path because the this cider bias problem if we enlarge
+[0:37:55] this cider bias problem if we enlarge the condition in set it's not not
+[0:37:57] the condition in set it's not not necessarily true that A and B are still
+[0:38:00] necessarily true that A and B are still separated in terms of confounding pathes
+[0:38:03] separated in terms of confounding pathes but what is true is for confounding arcs
+[0:38:07] but what is true is for confounding arcs when confounding arcs we are use a
+[0:38:08] when confounding arcs we are use a larger set to control for confounding
+[0:38:10] larger set to control for confounding arcs that larger set always work so it
+[0:38:13] arcs that larger set always work so it has its
+[0:38:15] has its monotonicity so basically our idea is
+[0:38:18] monotonicity so basically our idea is because as our notation suggests any
+[0:38:21] because as our notation suggests any confounding path is a concatenation of
+[0:38:23] confounding path is a concatenation of confounding pathes so if we're able to
+[0:38:26] confounding pathes so if we're able to block all the confounding arcs
+[0:38:28] block all the confounding arcs iteratively properly then at the end of
+[0:38:31] iteratively properly then at the end of the day I would be able to block all the
+[0:38:33] the day I would be able to block all the confounding paths as well and because
+[0:38:35] confounding paths as well and because confounding arcs are easier to
+[0:38:37] confounding arcs are easier to conceptualize and block that is the way
+[0:38:40] conceptualize and block that is the way we are going to
+[0:38:42] we are going to proceed so what is a the the set
+[0:38:45] proceed so what is a the the set introduced to control a confounding Arc
+[0:38:47] introduced to control a confounding Arc that is called a primary adjustment set
+[0:38:50] that is called a primary adjustment set as you already seen in the
+[0:38:52] as you already seen in the demo um so um so basically the the
+[0:38:57] demo um so um so basically the the primary adjustment set between A and B
+[0:38:59] primary adjustment set between A and B is the set that renders the confounding
+[0:39:01] is the set that renders the confounding Arc between A and B
+[0:39:09] disconnected okay so as you can imagine then we can keep adding vertices to this
+[0:39:12] then we can keep adding vertices to this positive postulated um confounder set s
+[0:39:17] positive postulated um confounder set s but uh I guess as Emma alluded to how do
+[0:39:20] but uh I guess as Emma alluded to how do we keep track of the compounding
+[0:39:22] we keep track of the compounding relations um actually this has a simple
+[0:39:25] relations um actually this has a simple answer because where able to show
+[0:39:28] answer because where able to show something uh that is very useful but
+[0:39:30] something uh that is very useful but before that I'm going to see if there
+[0:39:32] before that I'm going to see if there are any more
+[0:39:34] are any more questions uh we currently don't have
+[0:39:36] questions uh we currently don't have open questions for now so again we
+[0:39:39] open questions for now so again we encourage all the audience to submit a
+[0:39:42] encourage all the audience to submit a question as soon as you have them um but
+[0:39:44] question as soon as you have them um but for now I think we can we can continue
+[0:39:47] for now I think we can we can continue okay thank you all right so okay so what
+[0:39:50] okay thank you all right so okay so what is the algorithm do to keep track of the
+[0:39:52] is the algorithm do to keep track of the confounding relations so this Bears a
+[0:39:55] confounding relations so this Bears a relation to this important operation
+[0:39:58] relation to this important operation that is called lium projection so if you
+[0:40:00] that is called lium projection so if you remember I I said earlier on that our
+[0:40:03] remember I I said earlier on that our procedure can be viewed as running L
+[0:40:06] procedure can be viewed as running L projection in the
+[0:40:07] projection in the reverse so what is len projection Len
+[0:40:10] reverse so what is len projection Len projection um is to represent a model of
+[0:40:13] projection um is to represent a model of a margin so admg because the
+[0:40:17] a margin so admg because the introduction of this bir directed edges
+[0:40:19] introduction of this bir directed edges in addition to directed edges it is
+[0:40:21] in addition to directed edges it is closed it is kind of the closed the
+[0:40:23] closed it is kind of the closed the model under marginalization so basically
+[0:40:27] model under marginalization so basically if you can partition your vertices into
+[0:40:30] if you can partition your vertices into observe the V TAA and un observe U such
+[0:40:33] observe the V TAA and un observe U such as V TAA and U are disjoint then you can
+[0:40:36] as V TAA and U are disjoint then you can properly formulate a graph only
+[0:40:38] properly formulate a graph only involving those observed variables using
+[0:40:41] involving those observed variables using this operation called lat projection for
+[0:40:44] this operation called lat projection for example suppose on the left this is the
+[0:40:46] example suppose on the left this is the full graph then if I want to marginalize
+[0:40:49] full graph then if I want to marginalize Only onto the margin lxy then I can keep
+[0:40:53] Only onto the margin lxy then I can keep these two directed edges and add two new
+[0:40:57] these two directed edges and add two new edges X to Y because X to Y is only
+[0:41:00] edges X to Y because X to Y is only through the L variable U2 and also add a
+[0:41:03] through the L variable U2 and also add a batter Edge between a y because that's
+[0:41:05] batter Edge between a y because that's that signalize uh that that simp that
+[0:41:09] that signalize uh that that simp that that suggest a a len compounding between
+[0:41:12] that suggest a a len compounding between Aon and Y okay so I think it's a pretty
+[0:41:17] Aon and Y okay so I think it's a pretty well-known result that M connection is
+[0:41:20] well-known result that M connection is preserved by L projection operation and
+[0:41:23] preserved by L projection operation and what is key to our to our proposal is
+[0:41:26] what is key to our to our proposal is that where to show that the three
+[0:41:28] that where to show that the three refined M connection relations the
+[0:41:31] refined M connection relations the directed Arc the confounding Arc and the
+[0:41:33] directed Arc the confounding Arc and the confounding pathes are also preserved by
+[0:41:36] confounding pathes are also preserved by L projection and what our actually our
+[0:41:40] L projection and what our actually our procedure relies on is a simple coroller
+[0:41:43] procedure relies on is a simple coroller of this theorem meaning that if we take
+[0:41:45] of this theorem meaning that if we take the LI projection only take a b and the
+[0:41:49] the LI projection only take a b and the set of variabl C then uh a bity edge
+[0:41:54] set of variabl C then uh a bity edge becomes a directed A bity Arc a directed
+[0:41:58] becomes a directed A bity Arc a directed Arc sorry becomes a directed Edge a
+[0:42:01] Arc sorry becomes a directed Edge a confounding Arc becomes a single by
+[0:42:04] confounding Arc becomes a single by directed edge and a confounding path
+[0:42:07] directed edge and a confounding path becomes a bind
+[0:42:09] becomes a bind directed
+[0:42:11] directed pathway and this leads to what I call a
+[0:42:15] pathway and this leads to what I call a representation so we can from the CER we
+[0:42:20] representation so we can from the CER we can derive the district criteria so on
+[0:42:22] can derive the district criteria so on the left it is pearls back door criteria
+[0:42:26] the left it is pearls back door criteria so s is sufficient adjustment set even
+[0:42:28] so s is sufficient adjustment set even only if it blocks all the back door path
+[0:42:30] only if it blocks all the back door path is in G and this is statement made about
+[0:42:33] is in G and this is statement made about sort of the global property about G on
+[0:42:35] sort of the global property about G on the right we have this
+[0:42:38] the right we have this reformulation basically we take X and Y
+[0:42:40] reformulation basically we take X and Y and the posited adjustment set as I only
+[0:42:43] and the posited adjustment set as I only project onto that margin then on the
+[0:42:47] project onto that margin then on the projection s is sufficient adjustment
+[0:42:49] projection s is sufficient adjustment said if and only if there is no
+[0:42:52] said if and only if there is no confounding Arc that connects X and Y so
+[0:42:55] confounding Arc that connects X and Y so that is why the the procedure would
+[0:42:58] that is why the the procedure would successfully terminate once X and Y
+[0:43:00] successfully terminate once X and Y becomes
+[0:43:01] becomes disconnected okay so as I said this
+[0:43:03] disconnected okay so as I said this leads to explicit representation and
+[0:43:07] leads to explicit representation and procedure so what do we need to take
+[0:43:09] procedure so what do we need to take care of we basically need to track for
+[0:43:13] care of we basically need to track for any pair of vertices whether or not
+[0:43:16] any pair of vertices whether or not there exists a m connected confounding
+[0:43:19] there exists a m connected confounding Arc between them given all the other
+[0:43:21] Arc between them given all the other variables on the
+[0:43:23] variables on the canvas um and when we draw the edges we
+[0:43:26] canvas um and when we draw the edges we initially draw them as potential
+[0:43:28] initially draw them as potential confounding arcs if there exist primary
+[0:43:31] confounding arcs if there exist primary adjustment set the the the edge is
+[0:43:33] adjustment set the the the edge is removed otherwise the edge becomes
+[0:43:36] removed otherwise the edge becomes uncontrolled confounding Arc that is
+[0:43:39] uncontrolled confounding Arc that is written as this solid by direct
+[0:43:42] written as this solid by direct Edge and in particular primary of
+[0:43:45] Edge and in particular primary of adjustment set can be constructed from
+[0:43:47] adjustment set can be constructed from The Wizard I just showed you and that
+[0:43:49] The Wizard I just showed you and that only requires answering questions about
+[0:43:51] only requires answering questions about common causes and
+[0:43:53] common causes and mediators okay um so I don't think I
+[0:43:56] mediators okay um so I don't think I have have time to go through this but
+[0:43:59] have have time to go through this but basically um we can show the soundness
+[0:44:02] basically um we can show the soundness of a completeness of our algorithm if we
+[0:44:06] of a completeness of our algorithm if we formalize it in this way so if we round
+[0:44:09] formalize it in this way so if we round the procedure exhaustively and also we
+[0:44:12] the procedure exhaustively and also we replace the user answer by an oracle a
+[0:44:15] replace the user answer by an oracle a truthful Oracle then we can show our
+[0:44:19] truthful Oracle then we can show our procedure is sound in the sense that
+[0:44:21] procedure is sound in the sense that anything found by the procedure is
+[0:44:23] anything found by the procedure is indeed a sufficient adustment set and
+[0:44:25] indeed a sufficient adustment set and also we can show is complete meaning
+[0:44:27] also we can show is complete meaning that if all the so if if the Oracle
+[0:44:31] that if all the so if if the Oracle answers the queries in optimal way then
+[0:44:35] answers the queries in optimal way then all the adjustment sets uh then the the
+[0:44:40] all the adjustment sets uh then the the the procedure is able to find all the
+[0:44:42] the procedure is able to find all the kind of the optimal minimal adjustment
+[0:44:46] kind of the optimal minimal adjustment sets Okay and let me try to wrap up so I
+[0:44:50] sets Okay and let me try to wrap up so I think uh we introduced this notion of
+[0:44:53] think uh we introduced this notion of confounding path and confounding Arc
+[0:44:55] confounding path and confounding Arc which are quite useful to our
+[0:44:57] which are quite useful to our development because that leads to a
+[0:44:59] development because that leads to a concrete representation of this part of
+[0:45:00] concrete representation of this part of knowledge and also I think this provides
+[0:45:02] knowledge and also I think this provides a structural definition of what a
+[0:45:04] a structural definition of what a confounding is and this complements I
+[0:45:07] confounding is and this complements I think some earlier efforts in the
+[0:45:09] think some earlier efforts in the literature on the definition of a
+[0:45:11] literature on the definition of a confounder or a confounding variable and
+[0:45:14] confounder or a confounding variable and the queries are designed to be
+[0:45:22] economical um so for example uh there are certain things that are useless and
+[0:45:23] are certain things that are useless and we never ask about them um and the user
+[0:45:28] we never ask about them um and the user does not need to be an expert or knowing
+[0:45:30] does not need to be an expert or knowing anything about M separation or D
+[0:45:32] anything about M separation or D separation to be able to use this this
+[0:45:34] separation to be able to use this this procedure all sure he has to do is to
+[0:45:38] procedure all sure he has to do is to reason about common causes and mediators
+[0:45:40] reason about common causes and mediators in particular the user does not need to
+[0:45:42] in particular the user does not need to be aware of this collider bias which can
+[0:45:44] be aware of this collider bias which can be quite difficult to beginners about in
+[0:45:47] be quite difficult to beginners about in graphical models and also I think this
+[0:45:49] graphical models and also I think this is a call to moving away to re-examine
+[0:45:51] is a call to moving away to re-examine The Stance of this known G assumption so
+[0:45:54] The Stance of this known G assumption so basically I think a lot of
+[0:45:55] basically I think a lot of identification problems only actually
+[0:45:57] identification problems only actually relies on certain part of knowledge
+[0:45:59] relies on certain part of knowledge about the graph and is worth thinking
+[0:46:01] about the graph and is worth thinking how to articulate the representation of
+[0:46:03] how to articulate the representation of such par of knowledge and how to elicit
+[0:46:06] such par of knowledge and how to elicit it and I think more development is
+[0:46:08] it and I think more development is needed to use cographs for practitioners
+[0:46:12] needed to use cographs for practitioners to design uh observational study um okay
+[0:46:16] to design uh observational study um okay uh thank you very much for attention and
+[0:46:19] uh thank you very much for attention and I would encourage everyone to try our
+[0:46:21] I would encourage everyone to try our shiny uh procedure
+[0:46:25] shiny uh procedure thanks
+[0:46:27] thanks thank you Richard for the great talk uh
+[0:46:29] thank you Richard for the great talk uh we have another question popping up but
+[0:46:32] we have another question popping up but chiman is answering it so um I'm I
+[0:46:34] chiman is answering it so um I'm I should we proceed
+[0:46:36] should we proceed or okay yeah maybe we move on to the
+[0:46:39] or okay yeah maybe we move on to the discussion in this case and then
+[0:46:41] discussion in this case and then hopefully we'll have some time for
+[0:46:43] hopefully we'll have some time for questions and answers
+[0:46:50] after I guess that's yes sorry please go for
+[0:46:54] that's yes sorry please go for it uh just one second here
+[0:46:57] it uh just one second here let me go to the full
+[0:47:01] let me go to the full screen hopefully you can see this is
+[0:47:03] screen hopefully you can see this is that right yes yes great work excellent
+[0:47:06] that right yes yes great work excellent so thank you for inviting me it's always
+[0:47:08] so thank you for inviting me it's always always great to be at ois and thank you
+[0:47:10] always great to be at ois and thank you Richard for very thought provoking
+[0:47:14] Richard for very thought provoking talk um so I have actually relatively
+[0:47:17] talk um so I have actually relatively few things to say about this uh so we'll
+[0:47:20] few things to say about this uh so we'll see how this goes I have I have one
+[0:47:22] see how this goes I have I have one minor question and one
+[0:47:24] minor question and one comment so uh so it's funny this is not
+[0:47:27] comment so uh so it's funny this is not the first time I've did an OCS
+[0:47:29] the first time I've did an OCS discussion I always seem to start with a
+[0:47:31] discussion I always seem to start with a variant of this slide basically with
+[0:47:34] variant of this slide basically with different bullet points at the bottom so
+[0:47:36] different bullet points at the bottom so this is the usual like story right with
+[0:47:38] this is the usual like story right with a coari adjustment right uh and you know
+[0:47:43] a coari adjustment right uh and you know lots of talks kind of start from this
+[0:47:44] lots of talks kind of start from this and then they say well we're going to
+[0:47:46] and then they say well we're going to elaborate on the story and the
+[0:47:48] elaborate on the story and the elaboration here is you know what do we
+[0:47:50] elaboration here is you know what do we do how do we find C the valid adjustment
+[0:47:53] do how do we find C the valid adjustment set if the graph is complicated or what
+[0:47:54] set if the graph is complicated or what do we do if the graph isn't known
+[0:47:56] do we do if the graph isn't known um obviously in this case it's very
+[0:47:59] um obviously in this case it's very obvious um and this is again a recap V
+[0:48:04] obvious um and this is again a recap V did a great job with uh there's uh if
+[0:48:06] did a great job with uh there's uh if the graph is known you can use the BG
+[0:48:08] the graph is known you can use the BG Criterion uh you can you can include
+[0:48:10] Criterion uh you can you can include variables that are descendant of
+[0:48:12] variables that are descendant of treatments because they won't
+[0:48:13] treatments because they won't necessarily
+[0:48:14] necessarily block um causal paths and you know Emma
+[0:48:18] block um causal paths and you know Emma Emma of course knows all about this and
+[0:48:20] Emma of course knows all about this and has very nice papers on this uh and why
+[0:48:24] has very nice papers on this uh and why would you ever do that well because you
+[0:48:25] would you ever do that well because you might be uncertain about whether
+[0:48:27] might be uncertain about whether something is a descendant of a of a
+[0:48:29] something is a descendant of a of a treatment or not uh in a spirit of not
+[0:48:32] treatment or not uh in a spirit of not completely knowing the graph so this
+[0:48:34] completely knowing the graph so this very very often happens with like
+[0:48:35] very very often happens with like electronic health records for example
+[0:48:37] electronic health records for example where time stamps are a little bit hazy
+[0:48:39] where time stamps are a little bit hazy like when something is measured and so I
+[0:48:41] like when something is measured and so I think like having these criteria that
+[0:48:44] think like having these criteria that include the standards of treatments I
+[0:48:45] include the standards of treatments I think is quite useful for giving a
+[0:48:46] think is quite useful for giving a little bit more security about exactly
+[0:48:48] little bit more security about exactly what the ordering and the variables is
+[0:48:49] what the ordering and the variables is uh also this can come up of course if
+[0:48:52] uh also this can come up of course if you know if you don't know the graph
+[0:48:53] you know if you don't know the graph like one one approaches you learn it by
+[0:48:55] like one one approaches you learn it by model selection and then you try to uh
+[0:48:57] model selection and then you try to uh do something with the equivalence class
+[0:48:59] do something with the equivalence class and there is there's some work in this
+[0:49:00] and there is there's some work in this of course uh and uh em em has this work
+[0:49:04] of course uh and uh em em has this work that can apply to like the output of
+[0:49:05] that can apply to like the output of those algorithms as well okay so uh so
+[0:49:09] those algorithms as well okay so uh so so the contribution in here is uh this
+[0:49:12] so the contribution in here is uh this interesting algorithm that constructs
+[0:49:13] interesting algorithm that constructs and adjustment said by asking questions
+[0:49:15] and adjustment said by asking questions basically so it's like Active Learning I
+[0:49:17] basically so it's like Active Learning I guess in the language of artificial
+[0:49:18] guess in the language of artificial intelligence right Active Learning of
+[0:49:20] intelligence right Active Learning of the of something about the graph
+[0:49:22] the of something about the graph basically and so the nice thing is you
+[0:49:24] basically and so the nice thing is you don't need the structure um
+[0:49:27] don't need the structure um and also there is a a definition of
+[0:49:28] and also there is a a definition of confounding in terms of paths uh which
+[0:49:30] confounding in terms of paths uh which is interesting so so first so so first I
+[0:49:34] is interesting so so first so so first I have a minor question about this so uh a
+[0:49:37] have a minor question about this so uh a naive question about defining
+[0:49:40] naive question about defining confounding is why isn't you know
+[0:49:42] confounding is why isn't you know ignorability failing the definition of
+[0:49:45] ignorability failing the definition of confounding uh it's not graphical not in
+[0:49:48] confounding uh it's not graphical not in terms of
+[0:49:49] terms of paths
+[0:49:51] paths uh but you know the thought here is you
+[0:49:55] uh but you know the thought here is you know if you if ignorability holds you
+[0:49:57] know if you if ignorability holds you don't have confounding so consequently
+[0:49:58] don't have confounding so consequently if it fails you do have confounding
+[0:50:00] if it fails you do have confounding because you have to do something else
+[0:50:02] because you have to do something else right now that isn't to say that path
+[0:50:04] right now that isn't to say that path definitions aren't useful um but it it
+[0:50:08] definitions aren't useful um but it it would have to be that they're providing
+[0:50:09] would have to be that they're providing some other uh something Illuminating
+[0:50:12] some other uh something Illuminating about this other than this and of course
+[0:50:13] about this other than this and of course the advantage of this is you don't have
+[0:50:15] the advantage of this is you don't have to think in terms of the graph you could
+[0:50:16] to think in terms of the graph you could just have an algebraic model and you
+[0:50:18] just have an algebraic model and you could have their you know you could you
+[0:50:20] could have their you know you could you could Define presence of confounding in
+[0:50:22] could Define presence of confounding in this way now as as Richard points out
+[0:50:24] this way now as as Richard points out confounders is very different from
+[0:50:26] confounders is very different from confounding and it's a much trickier
+[0:50:29] confounding and it's a much trickier thing which is why there's a whole
+[0:50:30] thing which is why there's a whole separate paper and confounders but for
+[0:50:32] separate paper and confounders but for confounding it's not clear to me uh that
+[0:50:35] confounding it's not clear to me uh that it's that tricky okay so that's my very
+[0:50:37] it's that tricky okay so that's my very minor question um on Expert solicitation
+[0:50:41] minor question um on Expert solicitation you know I do some expert solicitation
+[0:50:44] you know I do some expert solicitation myself and of course I'm a very
+[0:50:45] myself and of course I'm a very graphical person so a lot of my expert
+[0:50:48] graphical person so a lot of my expert solicitation is like with doctors and
+[0:50:50] solicitation is like with doctors and it's in terms of like drawing a picture
+[0:50:51] it's in terms of like drawing a picture on the board uh and uh my experience
+[0:50:54] on the board uh and uh my experience with this is how easy are these
+[0:50:56] with this is how easy are these questions exactly like the claim is that
+[0:50:58] questions exactly like the claim is that they're pretty easy but I'm not sure
+[0:51:00] they're pretty easy but I'm not sure that they're so easy there certainly I
+[0:51:02] that they're so easy there certainly I didn't find
+[0:51:03] didn't find them uh so easy for myself when I
+[0:51:06] them uh so easy for myself when I thought about this procedure and maybe
+[0:51:08] thought about this procedure and maybe that's just because I'm a graphical
+[0:51:09] that's just because I'm a graphical person and the other thing I was going
+[0:51:11] person and the other thing I was going to say is are these questions actually
+[0:51:12] to say is are these questions actually all for the expert or not so here is
+[0:51:15] all for the expert or not so here is what this is a quote I think I
+[0:51:17] what this is a quote I think I reproduced it from the paper correctly
+[0:51:19] reproduced it from the paper correctly this is what the paper claims you end up
+[0:51:21] this is what the paper claims you end up asking right you know so the first one
+[0:51:24] asking right you know so the first one is there a common cause of CEO a and Y
+[0:51:26] is there a common cause of CEO a and Y such that neither its effect and a or
+[0:51:28] such that neither its effect and a or its effect and Y is fully mediated by
+[0:51:30] its effect and Y is fully mediated by somset uh so fine and then the second
+[0:51:33] somset uh so fine and then the second question is is this
+[0:51:35] question is is this observed and if first answer first
+[0:51:39] observed and if first answer first question is yes second is no what are
+[0:51:41] question is yes second is no what are some other variables y y y and a lot of
+[0:51:43] some other variables y y y and a lot of this is all about like whether things
+[0:51:44] this is all about like whether things are being fully mediated and this is
+[0:51:46] are being fully mediated and this is where I got stock on first of all this
+[0:51:47] where I got stock on first of all this is a fairly complicated question I think
+[0:51:49] is a fairly complicated question I think to ask a person like if if I talk to the
+[0:51:52] to ask a person like if if I talk to the doctor like I can ask them like if a
+[0:51:54] doctor like I can ask them like if a causes B that I can ask
+[0:51:56] causes B that I can ask uh if I can ask if like you know some
+[0:51:59] uh if I can ask if like you know some set mediates A and B uh they will
+[0:52:01] set mediates A and B uh they will probably tell me but then I say what
+[0:52:03] probably tell me but then I say what about this variable and I say oh right
+[0:52:05] about this variable and I say oh right of course that variable will also be a
+[0:52:06] of course that variable will also be a mediator so I think it's not so simple
+[0:52:08] mediator so I think it's not so simple to to get reliable answers to questions
+[0:52:11] to to get reliable answers to questions that are disc complicated basically so
+[0:52:13] that are disc complicated basically so that's my first comment uh the other
+[0:52:15] that's my first comment uh the other comment is one and three is about the
+[0:52:17] comment is one and three is about the model two is about our state of
+[0:52:19] model two is about our state of knowledge so so they're not exactly the
+[0:52:21] knowledge so so they're not exactly the same and I guess maybe it depends how
+[0:52:23] same and I guess maybe it depends how you use this procedure in the context of
+[0:52:24] you use this procedure in the context of study design maybe it makes sense to ask
+[0:52:27] study design maybe it makes sense to ask the expert because you're not really
+[0:52:29] the expert because you're not really asking whether it's observed you're
+[0:52:30] asking whether it's observed you're asking like whether we should observe it
+[0:52:32] asking like whether we should observe it but I do say that like in the context of
+[0:52:34] but I do say that like in the context of like finding an adjustment set in an
+[0:52:35] like finding an adjustment set in an existing problem I'm not sure that two
+[0:52:37] existing problem I'm not sure that two is an expert question it's a data
+[0:52:39] is an expert question it's a data question right uh and you know like like
+[0:52:43] question right uh and you know like like speaking for myself thinking about this
+[0:52:44] speaking for myself thinking about this procedure I'm a graph person I like to
+[0:52:46] procedure I'm a graph person I like to like I I feel fairly hobbled without
+[0:52:47] like I I feel fairly hobbled without drawing a
+[0:52:49] drawing a dag for a problem and I is hard to
+[0:52:52] dag for a problem and I is hard to answer in my head and I think in some
+[0:52:55] answer in my head and I think in some sense
+[0:52:56] sense uh it's kind of interesting like you you
+[0:52:58] uh it's kind of interesting like you you end up you know using graph Theory but I
+[0:53:00] end up you know using graph Theory but I think it's not in the graph spirit in a
+[0:53:01] think it's not in the graph spirit in a sense that essentially what this is
+[0:53:02] sense that essentially what this is doing is it's replacing the graph by an
+[0:53:04] doing is it's replacing the graph by an algebraic description of the graph
+[0:53:05] algebraic description of the graph that's sufficient for finding adjustment
+[0:53:07] that's sufficient for finding adjustment basically because a lot of these
+[0:53:08] basically because a lot of these questions are basically algebraic claims
+[0:53:10] questions are basically algebraic claims about the model that's my that was my
+[0:53:12] about the model that's my that was my take on it uh and I also think in
+[0:53:15] take on it uh and I also think in practice uh it's difficult to answer
+[0:53:18] practice uh it's difficult to answer questions about full mediation in the
+[0:53:19] questions about full mediation in the affirmative and I think it's a practical
+[0:53:22] affirmative and I think it's a practical reason related to why fror hasn't been
+[0:53:24] reason related to why fror hasn't been more widely adopted because I think like
+[0:53:26] more widely adopted because I think like the front door method requires that you
+[0:53:27] the front door method requires that you have a mediator that fully mediates
+[0:53:29] have a mediator that fully mediates everything that isn't confounded and I
+[0:53:30] everything that isn't confounded and I think in practice it's just hard to find
+[0:53:32] think in practice it's just hard to find variables like this that's been my
+[0:53:35] variables like this that's been my experience uh and uh so uh so my my my
+[0:53:39] experience uh and uh so uh so my my my thought here is we should try to meet
+[0:53:41] thought here is we should try to meet the subject matter in the
+[0:53:43] the subject matter in the middle uh so coar adjustment is very
+[0:53:46] middle uh so coar adjustment is very simple very well studied right uh and
+[0:53:49] simple very well studied right uh and the the citation algorithm that's that's
+[0:53:51] the the citation algorithm that's that's provided here I think is asking fairly
+[0:53:53] provided here I think is asking fairly complicated questions really and in
+[0:53:55] complicated questions really and in computer science you know we have this
+[0:53:56] computer science you know we have this saying that if I have a if I have a a
+[0:54:00] saying that if I have a if I have a a human machine collaboration then things
+[0:54:02] human machine collaboration then things should be hard for the machine and easy
+[0:54:03] should be hard for the machine and easy for the human right and so in that
+[0:54:06] for the human right and so in that Spirit um is it so my my qu my open sort
+[0:54:09] Spirit um is it so my my qu my open sort of question is is it possible to ask
+[0:54:11] of question is is it possible to ask easier question at the price of using
+[0:54:14] easier question at the price of using more complicated formulas for
+[0:54:15] more complicated formulas for identification because we have very
+[0:54:17] identification because we have very fancy theory for identification of
+[0:54:19] fancy theory for identification of course with graphs we also have very
+[0:54:22] course with graphs we also have very fancy theory that can use additional
+[0:54:24] fancy theory that can use additional non- perimetric uh you know
+[0:54:26] non- perimetric uh you know non-graphical things like proximal
+[0:54:28] non-graphical things like proximal inference or instrumental variables and
+[0:54:29] inference or instrumental variables and all these other things and uh so I just
+[0:54:32] all these other things and uh so I just wanted to illustrate the kind of things
+[0:54:34] wanted to illustrate the kind of things you can do so like the the graph on the
+[0:54:36] you can do so like the the graph on the left is the fror graph and the big
+[0:54:38] left is the fror graph and the big difficulty with the fror graph is I need
+[0:54:39] difficulty with the fror graph is I need to find an M that's a full mediator
+[0:54:41] to find an M that's a full mediator basically and it's very difficult to
+[0:54:43] basically and it's very difficult to find such an M which you end up finding
+[0:54:45] find such an M which you end up finding is uh an M that partially mediates the
+[0:54:48] is uh an M that partially mediates the effect but there is still the direct
+[0:54:49] effect but there is still the direct effect of a and Y that's like the graph
+[0:54:50] effect of a and Y that's like the graph in the middle and the point being that
+[0:54:52] in the middle and the point being that even though that's true like uh you
+[0:54:55] even though that's true like uh you could still get get identification with
+[0:54:56] could still get get identification with extra tricks so the graph on the right
+[0:54:58] extra tricks so the graph on the right for example uh if I have some proxies
+[0:55:00] for example uh if I have some proxies for the for the unobserved confounder Z
+[0:55:02] for the for the unobserved confounder Z and W there are things I can do despite
+[0:55:04] and W there are things I can do despite the fact that uh that uh the the full
+[0:55:07] the fact that uh that uh the the full mediation isn't achieved right so I
+[0:55:09] mediation isn't achieved right so I think like I do wonder if you could use
+[0:55:11] think like I do wonder if you could use tricks like that to ask easier questions
+[0:55:15] tricks like that to ask easier questions without requiring
+[0:55:17] without requiring full in particular basic so that's I
+[0:55:20] full in particular basic so that's I don't have anything like sort of
+[0:55:21] don't have anything like sort of constructive to say about it I'm just
+[0:55:22] constructive to say about it I'm just sort of wandering about this so that's
+[0:55:25] sort of wandering about this so that's all I have to say um so to conclude uh
+[0:55:28] all I have to say um so to conclude uh the usual way we think about
+[0:55:29] the usual way we think about identification is we we know the graph
+[0:55:30] identification is we we know the graph exactly and we ask our friend the ID
+[0:55:32] exactly and we ask our friend the ID algorithm or various extensions for for
+[0:55:35] algorithm or various extensions for for what to do uh we could try to learn the
+[0:55:37] what to do uh we could try to learn the graph from data and then try to identify
+[0:55:39] graph from data and then try to identify within the equivalence class uh and uh
+[0:55:42] within the equivalence class uh and uh we can also come up with simple criteria
+[0:55:44] we can also come up with simple criteria that require some limited knowledge
+[0:55:45] that require some limited knowledge that's like what Tyler and I when my my
+[0:55:47] that's like what Tyler and I when my my my paper did back in the day uh or we
+[0:55:49] my paper did back in the day uh or we can ask targeted questions which is very
+[0:55:51] can ask targeted questions which is very interesting new way of thinking about it
+[0:55:53] interesting new way of thinking about it which is what uh this this this work
+[0:55:55] which is what uh this this this work proposed
+[0:55:56] proposed uh it's model elicitation versus
+[0:55:58] uh it's model elicitation versus question and I think it's quite
+[0:56:00] question and I think it's quite promising potentially uh and I think
+[0:56:02] promising potentially uh and I think like the way to maybe extend this is to
+[0:56:05] like the way to maybe extend this is to think about simpler questions more
+[0:56:06] think about simpler questions more complicated identification strategies
+[0:56:08] complicated identification strategies basically and uh finally thank you
+[0:56:11] basically and uh finally thank you Richard for presenting always great to
+[0:56:12] Richard for presenting always great to hear to hear from you um it's a very
+[0:56:15] hear to hear from you um it's a very interesting stuff I read the paper with
+[0:56:17] interesting stuff I read the paper with interest and uh here are some references
+[0:56:20] interest and uh here are some references um not very important really and thank
+[0:56:23] um not very important really and thank you very much for allowing me the
+[0:56:24] you very much for allowing me the opportunity to just
+[0:56:25] opportunity to just what was
+[0:56:32] fun thanks syia uh so yeah Richard Chan do you want to say something or answer
+[0:56:35] do you want to say something or answer some
+[0:56:36] some questions uh I just want to thank Ilia
+[0:56:39] questions uh I just want to thank Ilia uh I think he always raises um questions
+[0:56:42] uh I think he always raises um questions for us to think about uh and with
+[0:56:46] for us to think about uh and with very um very good insights um yeah I
+[0:56:50] very um very good insights um yeah I just want to I'm not going to I I
+[0:56:53] just want to I'm not going to I I definitely need more time to think about
+[0:56:54] definitely need more time to think about I just want to mention two things
+[0:56:55] I just want to mention two things first confounding I just find it
+[0:56:58] first confounding I just find it interesting because
+[0:56:59] interesting because uh that relates to the problem of
+[0:57:02] uh that relates to the problem of representation so I guess our philos
+[0:57:04] representation so I guess our philos philosophy is try to identify what
+[0:57:06] philosophy is try to identify what exactly this is a parti of knowledge
+[0:57:08] exactly this is a parti of knowledge that is needed to test this spor
+[0:57:11] that is needed to test this spor Criterion and we arrived as a such a
+[0:57:14] Criterion and we arrived as a such a representation and it's nice to give a
+[0:57:16] representation and it's nice to give a name to the basic structure that induces
+[0:57:18] name to the basic structure that induces of compounding which is this confound
+[0:57:20] of compounding which is this confound impath and in terms of questions that um
+[0:57:24] impath and in terms of questions that um I agree to some extent I think 40
+[0:57:26] I agree to some extent I think 40 mediation perhaps not you know it's hard
+[0:57:29] mediation perhaps not you know it's hard to imagine perhaps sometimes but um you
+[0:57:32] to imagine perhaps sometimes but um you know when you have a unobserved uh
+[0:57:35] know when you have a unobserved uh latent confounder you know you know you
+[0:57:38] latent confounder you know you know you have to try your best to to to you know
+[0:57:41] have to try your best to to to you know even find proxies of such mediators to
+[0:57:44] even find proxies of such mediators to to control for it um so I guess and also
+[0:57:48] to control for it um so I guess and also I think the questions are designed in a
+[0:57:51] I think the questions are designed in a way that you only need to think about
+[0:57:54] way that you only need to think about directed pathway ways you never have to
+[0:57:56] directed pathway ways you never have to we never ask questions about ciders or
+[0:57:59] we never ask questions about ciders or you know any other shapes of Pathways or
+[0:58:02] you know any other shapes of Pathways or even M connecting this so in that
+[0:58:04] even M connecting this so in that perspective I think we have tried in to
+[0:58:07] perspective I think we have tried in to some extent to simplify our questions
+[0:58:08] some extent to simplify our questions but maybe there's still room for
+[0:58:11] but maybe there's still room for improvement um so I don't know J do you
+[0:58:15] improvement um so I don't know J do you um I just want to add one thing perhaps
+[0:58:18] um I just want to add one thing perhaps um on the district criteria because
+[0:58:21] um on the district criteria because actually when I think about this work
+[0:58:23] actually when I think about this work the most practical thing that may come
+[0:58:26] the most practical thing that may come come out of it is the district Criterion
+[0:58:28] come out of it is the district Criterion which is you don't look at the full
+[0:58:31] which is you don't look at the full graph with many many variables some
+[0:58:34] graph with many many variables some observed some unobserved to justify that
+[0:58:38] observed some unobserved to justify that you found a sufficient adjustment set
+[0:58:40] you found a sufficient adjustment set all you need to do is to look at the
+[0:58:42] all you need to do is to look at the minimal graph look at the minimal to Rel
+[0:58:46] minimal graph look at the minimal to Rel projection graph and check if the
+[0:58:48] projection graph and check if the exposure and outcome can be connected by
+[0:58:51] exposure and outcome can be connected by bidirected edges it's a very easy
+[0:58:54] bidirected edges it's a very easy criteria Ian uh uh for verifying that a
+[0:58:58] criteria Ian uh uh for verifying that a set is sufficient and I think that
+[0:59:01] set is sufficient and I think that potentially is more useful than the
+[0:59:04] potentially is more useful than the algorithm uh that we uh developed I I
+[0:59:08] algorithm uh that we uh developed I I agree that algorithm uh involves some
+[0:59:11] agree that algorithm uh involves some fairly complicated
+[0:59:12] fairly complicated questions um but to me I think these are
+[0:59:16] questions um but to me I think these are kind of the questions you have to ask if
+[0:59:20] kind of the questions you have to ask if you want to draw a graph
+[0:59:23] you want to draw a graph perhaps and yeah it's it's really we are
+[0:59:26] perhaps and yeah it's it's really we are kind of exposing the difficulty of of
+[0:59:30] kind of exposing the difficulty of of the assumptions
+[0:59:32] the assumptions uh behind that that we say we claim a CA
+[0:59:36] uh behind that that we say we claim a CA of graph is
+[0:59:38] of graph is no um I I know I know am
+[0:59:42] no um I I know I know am a I just wanted to make one brief remark
+[0:59:45] a I just wanted to make one brief remark here and I haven't mentioned this in my
+[0:59:46] here and I haven't mentioned this in my slides but I think it pretty
+[0:59:48] slides but I think it pretty straightforward with follows from the
+[0:59:49] straightforward with follows from the definition of a mark of blanket I I I'm
+[0:59:52] definition of a mark of blanket I I I'm not immediately aware of whether it was
+[0:59:54] not immediately aware of whether it was written out before or not
+[0:59:55] written out before or not but yeah anyways yeah I I agree that
+[0:59:58] but yeah anyways yeah I I agree that it's very
+[1:00:04] useful is this okay if I ask a question I hope well I guess I'm in charge so
+[1:00:07] I hope well I guess I'm in charge so it's okay
+[1:00:09] it's okay um so uh I have a question that's
+[1:00:13] um so uh I have a question that's something about just clarification so
+[1:00:15] something about just clarification so would your algorithm
+[1:00:17] would your algorithm output uh more than one set if one if
+[1:00:22] output uh more than one set if one if more than one exists that you could use
+[1:00:24] more than one exists that you could use or it's just stop when it identifies
+[1:00:26] or it's just stop when it identifies this priming this relating to like this
+[1:00:30] this priming this relating to like this yeah so that depends on how you round
+[1:00:34] yeah so that depends on how you round the algorithm so basically we have the
+[1:00:37] the algorithm so basically we have the algorithm as I show you in the demo and
+[1:00:39] algorithm as I show you in the demo and we also have a formulated algorithm
+[1:00:43] we also have a formulated algorithm which you try different ways you can
+[1:00:45] which you try different ways you can expand the edges because you could make
+[1:00:48] expand the edges because you could make different choices and you also have an
+[1:00:51] different choices and you also have an oracle that tells you all the primary
+[1:00:53] oracle that tells you all the primary adjustments set I mean for the latter I
+[1:00:55] adjustments set I mean for the latter I think it would give you all the possible
+[1:00:58] think it would give you all the possible valid sufficient set but in practice
+[1:01:01] valid sufficient set but in practice we're we're using the former right the
+[1:01:03] we're we're using the former right the the the the user is probably only going
+[1:01:05] the the the user is probably only going to do it once then you know I think it
+[1:01:10] to do it once then you know I think it may not give you you know another
+[1:01:13] may not give you you know another sufficient judment said basically the
+[1:01:14] sufficient judment said basically the user has to try again you know maybe
+[1:01:18] user has to try again you know maybe yeah yeah so some follow-ups I guess so
+[1:01:21] yeah yeah so some follow-ups I guess so I was also wondering about this so you
+[1:01:25] I was also wondering about this so you are explicitly not using descendants or
+[1:01:28] are explicitly not using descendants or you could have descendants that you
+[1:01:30] you could have descendants that you allow or beginning not using using okay
+[1:01:34] allow or beginning not using using okay great great great that's uh and so is
+[1:01:36] great great great that's uh and so is the idea behind this algorithm to like
+[1:01:39] the idea behind this algorithm to like run it before conducting some type of
+[1:01:41] run it before conducting some type of observational study to know what you
+[1:01:43] observational study to know what you should measure or is it like after
+[1:01:44] should measure or is it like after you've already conducted the study or
+[1:01:46] you've already conducted the study or when is the proposed use I guess I think
+[1:01:49] when is the proposed use I guess I think a certain Advantage is to design I think
+[1:01:52] a certain Advantage is to design I think to design a stu I think it would also be
+[1:01:54] to design a stu I think it would also be used to to post a design analysis but I
+[1:01:56] used to to post a design analysis but I think for Designing is a I would say is
+[1:02:01] think for Designing is a I would say is Advantage okay great just
+[1:02:05] Advantage okay great just curious
+[1:02:07] curious cool all right great thank you uh
+[1:02:10] cool all right great thank you uh Richard and Chan and IAH for all your
+[1:02:14] Richard and Chan and IAH for all your discussion I'll just wrap up for
+[1:02:22] today okay so thank you also to all the audience uh who is here and asked
+[1:02:24] audience uh who is here and asked questions or just listen uh next week we
+[1:02:27] questions or just listen uh next week we have Anisha agerwal from Columbia
+[1:02:29] have Anisha agerwal from Columbia University talking about on causal
+[1:02:31] University talking about on causal inference when temporal and spatial
+[1:02:32] inference when temporal and spatial spillovers in panel data so hope to see
+[1:02:35] spillovers in panel data so hope to see you all there and have a great rest of
+[1:02:37] you all there and have a great rest of your
+[1:02:39] week yeah see you everyone

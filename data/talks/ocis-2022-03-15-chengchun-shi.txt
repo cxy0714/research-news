@@ -1,0 +1,1388 @@
+[0:00:04] all right uh welcome to the uh online causal infant seminar today we're
+[0:00:06] causal infant seminar today we're excited to have chiang chong shi from
+[0:00:09] excited to have chiang chong shi from lse who will talk about the
+[0:00:11] lse who will talk about the reinforcement learning framework for
+[0:00:12] reinforcement learning framework for dynamic causal effects evaluation in a b
+[0:00:14] dynamic causal effects evaluation in a b testing
+[0:00:16] testing you will take questions so please submit
+[0:00:18] you will take questions so please submit your questions in q a
+[0:00:20] your questions in q a after the talk we'll have a discussion
+[0:00:22] after the talk we'll have a discussion by will ways sun from purdue university
+[0:00:25] by will ways sun from purdue university we're very much looking for today's
+[0:00:27] we're very much looking for today's talks
+[0:00:28] talks questions today will be handled by yinx
+[0:00:30] questions today will be handled by yinx i'm quickly handing over
+[0:00:32] i'm quickly handing over to her
+[0:00:34] to her thanks dominique so uh please submit
+[0:00:37] thanks dominique so uh please submit your questions uh using the q a section
+[0:00:40] your questions uh using the q a section if you haven't used it before it is just
+[0:00:43] if you haven't used it before it is just behind the uh
+[0:00:45] behind the uh the zoom window there is a
+[0:00:48] the zoom window there is a a q a button and please submit the
+[0:00:50] a q a button and please submit the questions there instead of the chat so
+[0:00:52] questions there instead of the chat so that we can track the questions better
+[0:00:56] that we can track the questions better and that's it
+[0:00:57] and that's it i'll give the stage to attention
+[0:01:01] i'll give the stage to attention uh thanks in dominican
+[0:01:03] uh thanks in dominican for other work for the kind of
+[0:01:05] for other work for the kind of invitation and a very nice introduction
+[0:01:08] invitation and a very nice introduction and uh good morning good afternoon and
+[0:01:10] and uh good morning good afternoon and good evening
+[0:01:12] good evening thank you everyone for coming to my talk
+[0:01:14] thank you everyone for coming to my talk uh it is really a great honor for me to
+[0:01:16] uh it is really a great honor for me to give a talk here at this online course
+[0:01:18] give a talk here at this online course inference seminar and in today's talk i
+[0:01:21] inference seminar and in today's talk i would like to discuss some of my recent
+[0:01:23] would like to discuss some of my recent research projects where we introduce a
+[0:01:25] research projects where we introduce a reinforcement learning framework for
+[0:01:26] reinforcement learning framework for dynamic positive effects evaluation
+[0:01:34] uh to be honest i'm not an expert in causal influence but i do know that the
+[0:01:36] causal influence but i do know that the fossil influence is very popular
+[0:01:38] fossil influence is very popular nowadays and it is becoming more and
+[0:01:40] nowadays and it is becoming more and more popular
+[0:01:41] more popular and uh so just as a warm-up i guess
+[0:01:43] and uh so just as a warm-up i guess everyone in this seminar know that uh
+[0:01:46] everyone in this seminar know that uh the last year's a nobel prize in
+[0:01:48] the last year's a nobel prize in economics is awarded uh to uh david and
+[0:01:51] economics is awarded uh to uh david and joshua for their excellent work and
+[0:01:53] joshua for their excellent work and unquasi and the natural experiments
+[0:02:02] and the cosmic influence has been why they applied
+[0:02:03] they applied in practices it has been applied to a
+[0:02:05] in practices it has been applied to a wide range of applications so including
+[0:02:08] wide range of applications so including economics
+[0:02:10] economics healthcare
+[0:02:11] healthcare and uh it is also being what they use
+[0:02:14] and uh it is also being what they use they in technological companies
+[0:02:15] they in technological companies including those e-commerce platforms
+[0:02:18] including those e-commerce platforms such as amazon
+[0:02:19] such as amazon and it also has been applied in red
+[0:02:22] and it also has been applied in red sharing
+[0:02:23] sharing and in today's talk we will mainly focus
+[0:02:25] and in today's talk we will mainly focus on applications in red sharing and to
+[0:02:28] on applications in red sharing and to our knowledge this is kind of like a
+[0:02:30] our knowledge this is kind of like a next explored application in the current
+[0:02:33] next explored application in the current causal inference literature
+[0:02:40] so now when it comes from uh ride sharing
+[0:02:42] now when it comes from uh ride sharing you can think about large ride sharing
+[0:02:44] you can think about large ride sharing companies such as uber adapter where
+[0:02:46] companies such as uber adapter where they have a group of drivers that
+[0:02:48] they have a group of drivers that operate in a taxi taxi-like fashion
+[0:02:51] operate in a taxi taxi-like fashion and i have also been uh collaborated
+[0:02:53] and i have also been uh collaborated with a particular running sharing
+[0:02:54] with a particular running sharing company and for that company it has like
+[0:02:57] company and for that company it has like over
+[0:02:58] over 500 million many users
+[0:03:02] 500 million many users and the vehicle trajectory data that
+[0:03:04] and the vehicle trajectory data that they have is over 100 terabytes
+[0:03:08] they have is over 100 terabytes so that's the data that they have for
+[0:03:10] so that's the data that they have for one day
+[0:03:11] one day so those are companies they really have
+[0:03:13] so those are companies they really have a huge database and the richness of the
+[0:03:16] a huge database and the richness of the data in those companies provide us
+[0:03:18] data in those companies provide us statisticians with unique opportunities
+[0:03:21] statisticians with unique opportunities to conduct data-driven statistical
+[0:03:23] to conduct data-driven statistical analysis
+[0:03:30] and here i list some of the questions that are of the company's interest so
+[0:03:32] that are of the company's interest so firstly the company is interested in the
+[0:03:35] firstly the company is interested in the problem of supply demand forecasting
+[0:03:38] problem of supply demand forecasting so at a certain time point in the future
+[0:03:42] so at a certain time point in the future in a particular location what is the
+[0:03:44] in a particular location what is the estimated number of core orders in that
+[0:03:47] estimated number of core orders in that location
+[0:03:53] and what is the estimated number of drivers in that
+[0:03:54] drivers in that location
+[0:03:56] location so that corresponds to the problem of
+[0:03:57] so that corresponds to the problem of supply demand forecasting
+[0:04:01] supply demand forecasting and secondly a policy evaluation so
+[0:04:03] and secondly a policy evaluation so based on the data that the company have
+[0:04:06] based on the data that the company have how can we evaluate the performance of a
+[0:04:08] how can we evaluate the performance of a given policy
+[0:04:14] and finally a policy optimization so how can we derive an optimal policy based on
+[0:04:17] can we derive an optimal policy based on the observed data to maximize the
+[0:04:19] the observed data to maximize the company's long-term objective long-term
+[0:04:21] company's long-term objective long-term objective
+[0:04:26] and solving these questions require knowledges from experimental design
+[0:04:28] knowledges from experimental design spatial temporal modeling deep
+[0:04:30] spatial temporal modeling deep reinforcement learning and graphical
+[0:04:32] reinforcement learning and graphical modeling
+[0:04:34] modeling and these questions they are at the
+[0:04:36] and these questions they are at the intersections of statistics
+[0:04:38] intersections of statistics computer science
+[0:04:40] computer science operational research
+[0:04:42] operational research and machine learning
+[0:04:48] now the research projects that i'm going to talk about today are motivated by the
+[0:04:51] to talk about today are motivated by the applications in red sharing
+[0:04:53] applications in red sharing and in particular
+[0:04:55] and in particular in the first project i would like to
+[0:04:57] in the first project i would like to talk about one of my research
+[0:04:59] talk about one of my research a work where we introduce a
+[0:05:01] a work where we introduce a reinforcement learning framework for
+[0:05:03] reinforcement learning framework for solving the a b testing problem in those
+[0:05:05] solving the a b testing problem in those rider sharing companies
+[0:05:08] rider sharing companies and actually we finished
+[0:05:10] and actually we finished writing up this paper two years ago and
+[0:05:12] writing up this paper two years ago and it has been recently accepted in jason
+[0:05:14] it has been recently accepted in jason last year
+[0:05:21] so in this project we focus on considering the ap testing problem and
+[0:05:24] considering the ap testing problem and nowadays a testing uh
+[0:05:26] nowadays a testing uh is very popular and it has become like a
+[0:05:29] is very popular and it has become like a golden standard for the technological
+[0:05:31] golden standard for the technological companies to compare two versions of the
+[0:05:34] companies to compare two versions of the products
+[0:05:36] products and typically what those companies will
+[0:05:38] and typically what those companies will do is that they will randomize the
+[0:05:41] do is that they will randomize the visitors into two different subgroups
+[0:05:48] and for each subgroup they will assign a particular version of the policy
+[0:05:51] particular version of the policy and then they collect the data and
+[0:05:53] and then they collect the data and estimate what is the uh average reward
+[0:05:55] estimate what is the uh average reward what is the
+[0:05:57] what is the estimate average outcome
+[0:05:58] estimate average outcome for those subpopulation
+[0:06:01] for those subpopulation and finally they conduct a two stability
+[0:06:03] and finally they conduct a two stability test to compare uh to test like whether
+[0:06:06] test to compare uh to test like whether the new policy is significantly better
+[0:06:09] the new policy is significantly better compared to the old policy or not
+[0:06:18] and our project is motivated by considering the order dispatching
+[0:06:20] considering the order dispatching problem in those rider-sharing companies
+[0:06:23] problem in those rider-sharing companies and basically those other dispatching
+[0:06:25] and basically those other dispatching problems uh they
+[0:06:28] problems uh they can be considered like one of the most
+[0:06:30] can be considered like one of the most fundamental problems in those rather
+[0:06:32] fundamental problems in those rather sharing
+[0:06:33] sharing companies and the problem can be
+[0:06:35] companies and the problem can be formulated as follows
+[0:06:38] formulated as follows so at each time point we will have a
+[0:06:40] so at each time point we will have a list of the core orders
+[0:06:43] list of the core orders and we also have a list of the available
+[0:06:46] and we also have a list of the available drivers
+[0:06:48] drivers so essentially for each of the core
+[0:06:50] so essentially for each of the core order in the list which driver should we
+[0:06:52] order in the list which driver should we ask to pick up that particular call
+[0:06:55] ask to pick up that particular call order
+[0:06:57] order so that corresponds to the other
+[0:06:59] so that corresponds to the other dispatching problem and based on the
+[0:07:00] dispatching problem and based on the definition you can see that this is like
+[0:07:03] definition you can see that this is like one of the most basic but
+[0:07:06] one of the most basic but one of the most
+[0:07:07] one of the most important problem in the right sharing
+[0:07:09] important problem in the right sharing company
+[0:07:14] and our project is motivated by the need for comparing the long-term rewards of
+[0:07:16] for comparing the long-term rewards of two on other dispatching policies in
+[0:07:19] two on other dispatching policies in retired sharing companies
+[0:07:27] and before presenting our methodology i just want to first give you a summary of
+[0:07:31] just want to first give you a summary of how the data collected from those
+[0:07:32] how the data collected from those companies look like
+[0:07:35] companies look like so in order to evaluate
+[0:07:37] so in order to evaluate two different order dispatching policies
+[0:07:40] two different order dispatching policies the company typically conducts a running
+[0:07:42] the company typically conducts a running experiment
+[0:07:43] experiment to compare those two policies
+[0:07:45] to compare those two policies and the experiments usually last for two
+[0:07:48] and the experiments usually last for two weeks
+[0:07:50] weeks and typically they will use one thirty
+[0:07:52] and typically they will use one thirty thirty minutes or one hour as a time
+[0:07:55] thirty minutes or one hour as a time unit
+[0:07:58] unit so every 30 minutes or every hour it
+[0:08:01] so every 30 minutes or every hour it will assign a new policy it will
+[0:08:03] will assign a new policy it will implement a new treatment
+[0:08:11] and the observed data consists of some of the time varying variables so
+[0:08:14] of the time varying variables so including the number of drivers and the
+[0:08:16] including the number of drivers and the number of uh
+[0:08:18] number of uh the number of passengers the number of
+[0:08:20] the number of passengers the number of core orders in this time unit
+[0:08:26] and these two variables they usually have huge impact on the company's
+[0:08:28] have huge impact on the company's outcome
+[0:08:29] outcome and they can be viewed as like the
+[0:08:31] and they can be viewed as like the supply and the demand of this two-sided
+[0:08:35] supply and the demand of this two-sided radical platform
+[0:08:41] and the treatment uh being considered is binary so
+[0:08:43] being considered is binary so essentially we want to compare a new
+[0:08:45] essentially we want to compare a new policy against an old version of the
+[0:08:47] policy against an old version of the policy
+[0:08:49] policy and for those companies they typically
+[0:08:50] and for those companies they typically adopt a so-called alternating time
+[0:08:53] adopt a so-called alternating time interval design or the switchback design
+[0:08:54] interval design or the switchback design which can be described as bottles
+[0:09:00] so at a particular time point it will use an old policy
+[0:09:04] use an old policy and then in the next time point it will
+[0:09:06] and then in the next time point it will adopt a new policy and then it will
+[0:09:09] adopt a new policy and then it will switch back to an old policy so on and
+[0:09:12] switch back to an old policy so on and so forth
+[0:09:18] and finally the company uh also considered like
+[0:09:22] the company uh also considered like have different types of outcomes
+[0:09:25] have different types of outcomes so the first type of outcome corresponds
+[0:09:27] so the first type of outcome corresponds to the answer rate
+[0:09:28] to the answer rate which is essentially the percentage of
+[0:09:31] which is essentially the percentage of call orders being responded by the
+[0:09:33] call orders being responded by the drivers
+[0:09:37] and the second one corresponds to a completion rate which is a percentage of
+[0:09:38] completion rate which is a percentage of orders being completed
+[0:09:41] orders being completed so these two outcomes these two outcomes
+[0:09:44] so these two outcomes these two outcomes uh they measure the customer
+[0:09:47] uh they measure the customer satisfaction rate with respect to the
+[0:09:49] satisfaction rate with respect to the company
+[0:09:54] and in addition to these two outcomes we can also consider the driver income
+[0:10:07] now there are a few challenges for solving the a b testing problems in
+[0:10:09] solving the a b testing problems in those run sharing companies
+[0:10:11] those run sharing companies and in particular the first challenge is
+[0:10:14] and in particular the first challenge is due to the distance of the carryover
+[0:10:16] due to the distance of the carryover effects
+[0:10:17] effects so in the next slide i will discuss in
+[0:10:19] so in the next slide i will discuss in detail why the carryover effect exists
+[0:10:22] detail why the carryover effect exists in our red sharing applications
+[0:10:25] in our red sharing applications and in particular under this alternating
+[0:10:27] and in particular under this alternating time interval design and due to the
+[0:10:29] time interval design and due to the existence of the carryover effects it
+[0:10:30] existence of the carryover effects it turns out that the past actions will
+[0:10:32] turns out that the past actions will affect the future outcomes
+[0:10:39] and so so it is very important that in order to develop a valid a b testing
+[0:10:41] in order to develop a valid a b testing procedure we should take the carryover
+[0:10:43] procedure we should take the carryover effects into consideration
+[0:10:46] effects into consideration and unfortunately most of the of the
+[0:10:49] and unfortunately most of the of the existing iv testing procedure they might
+[0:10:51] existing iv testing procedure they might fail to detect the carryover effect
+[0:10:58] and the second challenge comes from the need for early determination and this is
+[0:11:00] need for early determination and this is essentially
+[0:11:01] essentially because each experiment will take a
+[0:11:04] because each experiment will take a considerably long time
+[0:11:06] considerably long time and early determination is very
+[0:11:08] and early determination is very important in order to save the time as
+[0:11:10] important in order to save the time as well as a budget
+[0:11:16] finally the last challenge comes from the need for adaptive randomization and
+[0:11:18] the need for adaptive randomization and this is because sometimes the company
+[0:11:21] this is because sometimes the company also would like to randomize the
+[0:11:23] also would like to randomize the treatment adaptively
+[0:11:25] treatment adaptively in order to maximize the total reward or
+[0:11:28] in order to maximize the total reward or in order to detect the authentic
+[0:11:30] in order to detect the authentic hypothesis faster
+[0:11:36] and to our knowledge no existing test has simultaneously addressed all these
+[0:11:38] has simultaneously addressed all these three challenges
+[0:11:46] now uh in the next few slides i just want to give you a very simple toy
+[0:11:48] want to give you a very simple toy example to illustrate why those
+[0:11:50] example to illustrate why those carryover effects exist in our right
+[0:11:52] carryover effects exist in our right sharing applications
+[0:12:00] now uh at this time point uh we have three drivers here in song number three
+[0:12:04] three drivers here in song number three and we have another uh driver in zone
+[0:12:07] and we have another uh driver in zone number 10 and a passenger install number
+[0:12:09] number 10 and a passenger install number six
+[0:12:15] so at this particular time point we can consider two different actions
+[0:12:18] consider two different actions so we can either ask one of the drivers
+[0:12:20] so we can either ask one of the drivers or number three to pick up this
+[0:12:22] or number three to pick up this passenger
+[0:12:24] passenger alternatively we can ask the driver in
+[0:12:26] alternatively we can ask the driver in so number 10 to pick up this passenger
+[0:12:34] now suppose we use the closest driver policy
+[0:12:35] policy so we ask one of the drivers on number 3
+[0:12:37] so we ask one of the drivers on number 3 we pick up this pass integer
+[0:12:40] we pick up this pass integer and because of that we will only have
+[0:12:42] and because of that we will only have two drivers in song number three
+[0:12:50] now suppose sometime later we receive three core orders in zone
+[0:12:53] we receive three core orders in zone number one
+[0:12:55] number one then in that case of course we can ask
+[0:12:57] then in that case of course we can ask two of the drivers in zone number three
+[0:12:59] two of the drivers in zone number three to pick up two of the passengers here
+[0:13:08] and we can also ask the driver in zone number 10 to pick up the remaining
+[0:13:10] number 10 to pick up the remaining passenger
+[0:13:17] but due to that song number 10 is very far away from zone number one so it
+[0:13:19] far away from zone number one so it might take a very long time for the
+[0:13:21] might take a very long time for the driver install number 10 to pick up this
+[0:13:24] driver install number 10 to pick up this passenger
+[0:13:26] passenger and because of that the passenger might
+[0:13:28] and because of that the passenger might refuse to wait and cancel the order
+[0:13:33] refuse to wait and cancel the order so in that case we will miss one order
+[0:13:35] so in that case we will miss one order in the future
+[0:13:36] in the future [Music]
+[0:13:42] now suppose if we consider a different action at that time point so instead of
+[0:13:45] action at that time point so instead of asking one of the drivers in number
+[0:13:47] asking one of the drivers in number three to pick up this passenger we
+[0:13:48] three to pick up this passenger we directly ask the passing of the driver
+[0:13:50] directly ask the passing of the driver install number 10 to pick up this
+[0:13:52] install number 10 to pick up this passenger
+[0:13:54] passenger so this helps to save all the three
+[0:13:56] so this helps to save all the three drivers in zone number three
+[0:13:59] drivers in zone number three so that sometime later in the future
+[0:14:02] so that sometime later in the future when those three quarters appear in
+[0:14:04] when those three quarters appear in seoul number one we are able to match
+[0:14:07] seoul number one we are able to match all these three orders
+[0:14:15] so this is just a illustration of why carryover effects exist in our radio
+[0:14:18] carryover effects exist in our radio sharing applications
+[0:14:20] sharing applications and essentially those carryover effects
+[0:14:22] and essentially those carryover effects uh they refer to the effect of the past
+[0:14:25] uh they refer to the effect of the past actions on the future rewards on the
+[0:14:27] actions on the future rewards on the future outcomes
+[0:14:29] future outcomes and to summarize those carryover effects
+[0:14:31] and to summarize those carryover effects exist due to that the past actions they
+[0:14:35] exist due to that the past actions they can affect the distribution of the
+[0:14:37] can affect the distribution of the drivers which can in turn affect the
+[0:14:39] drivers which can in turn affect the future outcome
+[0:14:51] but as i have mentioned earlier on most of the existing ilp testing procedures
+[0:14:53] of the existing ilp testing procedures they will fail to detect the carryover
+[0:14:56] they will fail to detect the carryover effects
+[0:14:57] effects so now to elaborate uh let us consider a
+[0:15:00] so now to elaborate uh let us consider a very simple uh example where we focus on
+[0:15:03] very simple uh example where we focus on considering uh the following pair of uh
+[0:15:06] considering uh the following pair of uh the testing hypothesis
+[0:15:11] so under the null hypothesis the old policy has
+[0:15:14] null hypothesis the old policy has larger cumulative reward
+[0:15:21] and under the authentic hypothesis the new policy has larger cumulative reward
+[0:15:29] we further designed two examples here so in the first example all those
+[0:15:31] in the first example all those observations they are dependent over
+[0:15:34] observations they are dependent over time
+[0:15:36] time so so the carryover effect does not
+[0:15:38] so so the carryover effect does not exist in the first example
+[0:15:41] exist in the first example and in particular uh the immediate the
+[0:15:44] and in particular uh the immediate the the outcome at each time point depends
+[0:15:46] the outcome at each time point depends only on
+[0:15:48] only on the st at this time point and uh the the
+[0:15:52] the st at this time point and uh the the current treatment
+[0:15:54] current treatment where where all those time varying
+[0:15:55] where where all those time varying variables they are independently
+[0:15:57] variables they are independently generated
+[0:15:58] generated so there's no carryover effect in this
+[0:16:00] so there's no carryover effect in this example
+[0:16:06] however if we look at the second example so here
+[0:16:08] so here the current outcome is not
+[0:16:10] the current outcome is not uh that doesn't depend on the current
+[0:16:13] uh that doesn't depend on the current action
+[0:16:14] action but it depends on the actions in the
+[0:16:17] but it depends on the actions in the past through the current time varying
+[0:16:20] past through the current time varying variable t
+[0:16:25] so in the second example those observations they are dependent over
+[0:16:28] observations they are dependent over time and the carryover effects do exist
+[0:16:31] time and the carryover effects do exist in the second example
+[0:16:37] now given these two examples we apply a very simple two uh sample t-test and the
+[0:16:39] very simple two uh sample t-test and the double machine learning based test for
+[0:16:41] double machine learning based test for causal effects evaluation as well as our
+[0:16:43] causal effects evaluation as well as our proposed test to these two uh examples
+[0:16:48] proposed test to these two uh examples and it turns out that
+[0:16:50] and it turns out that when applied to the first example where
+[0:16:52] when applied to the first example where no carryover effect exists where the
+[0:16:54] no carryover effect exists where the observations they are time independent
+[0:16:56] observations they are time independent so all these three tests uh they are
+[0:16:59] so all these three tests uh they are very powerful
+[0:17:05] however i will apply to the second example where the carryover effects does
+[0:17:07] example where the carryover effects does exist and the observations they are time
+[0:17:09] exist and the observations they are time dependent
+[0:17:11] dependent so neither the two sample t stat test
+[0:17:13] so neither the two sample t stat test nor the double machine learning test
+[0:17:15] nor the double machine learning test they are able to detect the authentic
+[0:17:17] they are able to detect the authentic hypothesis
+[0:17:24] and to the country the proposal test remains very powerful
+[0:17:32] and next i would like to give you a summary of the contributions and
+[0:17:34] summary of the contributions and advances of our proposal so firstly and
+[0:17:37] advances of our proposal so firstly and very importantly we introduce a
+[0:17:38] very importantly we introduce a reinforcement link framework for solving
+[0:17:40] reinforcement link framework for solving the a b testing problem
+[0:17:43] the a b testing problem and as i will discuss later so this
+[0:17:46] and as i will discuss later so this reinforcement framework is a very
+[0:17:48] reinforcement framework is a very natural framework to be considered for
+[0:17:51] natural framework to be considered for those two-sided marketplace that
+[0:17:53] those two-sided marketplace that involves sequential decision making over
+[0:17:56] involves sequential decision making over time
+[0:18:01] and there's a number of advantages why we want to use the reinforcement
+[0:18:03] we want to use the reinforcement framework so firstly uh just to remind
+[0:18:06] framework so firstly uh just to remind you that our objective here is to
+[0:18:08] you that our objective here is to compare the long-term rewards the
+[0:18:11] compare the long-term rewards the long-term outcomes between two different
+[0:18:13] long-term outcomes between two different policies
+[0:18:15] policies and in reinforcement learning there's a
+[0:18:17] and in reinforcement learning there's a very natural criteria to measure the
+[0:18:20] very natural criteria to measure the long-term outcomes which corresponds to
+[0:18:21] long-term outcomes which corresponds to the value function
+[0:18:28] and secondly under this reinforcement framework it turns out that it allows us
+[0:18:31] framework it turns out that it allows us to directly model the carrier effects
+[0:18:33] to directly model the carrier effects using the dynamic system transitions
+[0:18:36] using the dynamic system transitions so this simultaneously address the first
+[0:18:39] so this simultaneously address the first challenge
+[0:18:45] and finally it also enables us uh to consistently estimate the long-term
+[0:18:47] consistently estimate the long-term rewards even if we are given a single
+[0:18:50] rewards even if we are given a single time series data
+[0:18:57] and i will talk about these three uh points in detail uh later in the next
+[0:18:59] points in detail uh later in the next few slides
+[0:19:01] few slides and in addition we also propose an
+[0:19:03] and in addition we also propose an original testing procedure for comparing
+[0:19:05] original testing procedure for comparing long-term rewards between different
+[0:19:06] long-term rewards between different policies
+[0:19:08] policies and there are three novelties of our
+[0:19:11] and there are three novelties of our proposal tested procedure
+[0:19:13] proposal tested procedure involves sequential monitoring online
+[0:19:16] involves sequential monitoring online updating and it is also applicable to a
+[0:19:18] updating and it is also applicable to a wider range of the designs so including
+[0:19:20] wider range of the designs so including the markup design the alternating time
+[0:19:22] the markup design the alternating time interval design and the adapted design
+[0:19:32] so this helps to address the second and the third challenge
+[0:19:42] now let's first uh focus on uh the first bullet point where we introduce a
+[0:19:43] bullet point where we introduce a reinforcement framework for a b testing
+[0:19:45] reinforcement framework for a b testing and in particular i will focus on
+[0:19:47] and in particular i will focus on talking about the following two uh
+[0:19:49] talking about the following two uh questions so firstly what is the
+[0:19:51] questions so firstly what is the reinforcement framework and secondly why
+[0:19:53] reinforcement framework and secondly why do we want to use the reinforcement
+[0:19:55] do we want to use the reinforcement framework
+[0:20:02] so firstly i just want to give you a brief introduction to reinforcement
+[0:20:04] brief introduction to reinforcement learning
+[0:20:05] learning so basically a reinforcement learning is
+[0:20:07] so basically a reinforcement learning is concerned with solving the so-called
+[0:20:09] concerned with solving the so-called sequential decision making problems
+[0:20:15] and it is typically assumed that there exists an agent that tries to learn and
+[0:20:19] exists an agent that tries to learn and interact with a given environment
+[0:20:26] and at each time point the agent will observe some features from the
+[0:20:28] observe some features from the environment summarized into a state
+[0:20:30] environment summarized into a state vector
+[0:20:36] and then the agent will choose some actions from
+[0:20:38] actions from the the
+[0:20:39] the the the set of available uh options
+[0:20:46] and after that the environment will respond to the agent by providing an
+[0:20:48] respond to the agent by providing an immediate reward to the agent
+[0:20:54] and in addition the environment will move into the next into the future state
+[0:20:58] move into the next into the future state based on the action that the agent
+[0:20:59] based on the action that the agent selected
+[0:21:01] selected and such a procedure applies
+[0:21:04] and such a procedure applies sequentially so at the end the agent
+[0:21:06] sequentially so at the end the agent will receive a sequence of the rewards
+[0:21:14] and one of the key objectives of reinforcement learning
+[0:21:15] key objectives of reinforcement learning is try to find an optimal policy to
+[0:21:17] is try to find an optimal policy to maximize the cumulative reward that the
+[0:21:19] maximize the cumulative reward that the agent receives in the long run
+[0:21:27] and the reinforcement has also been widely applied in
+[0:21:29] widely applied in a number of applications so
+[0:21:31] a number of applications so and in the last few years i guess one of
+[0:21:33] and in the last few years i guess one of the most successful applications of
+[0:21:35] the most successful applications of those reinforcement networks corresponds
+[0:21:38] those reinforcement networks corresponds uh to uh
+[0:21:40] uh to uh the the development of alphago which is
+[0:21:43] the the development of alphago which is the ai system invented by the google
+[0:21:44] the ai system invented by the google demand team
+[0:21:46] demand team and five years ago it successfully
+[0:21:48] and five years ago it successfully defeated the cursive who was the final
+[0:21:50] defeated the cursive who was the final boss of the game of gold at the time
+[0:22:00] and here in this slide i listed some of the existing state of the art
+[0:22:01] the existing state of the art reinforcement plenty out with us to
+[0:22:03] reinforcement plenty out with us to solve those sequential decision making
+[0:22:04] solve those sequential decision making problems
+[0:22:05] problems but what i want to highlight in this
+[0:22:07] but what i want to highlight in this slide is that the foundations of all
+[0:22:10] slide is that the foundations of all those reinforcement learning algorithms
+[0:22:12] those reinforcement learning algorithms lie in modeling the observed data by a
+[0:22:15] lie in modeling the observed data by a so-called markup decision process model
+[0:22:24] and there are two key assumptions behind this such an mvp model
+[0:22:27] this such an mvp model so the first assumption is a markup
+[0:22:29] so the first assumption is a markup assumption so which included today means
+[0:22:32] assumption so which included today means that
+[0:22:32] that a conditional on the present the future
+[0:22:35] a conditional on the present the future and the past they are independent
+[0:22:43] and in particular it requires the future state and the current outcome to be
+[0:22:45] state and the current outcome to be independent of the past data
+[0:22:47] independent of the past data observations given the current state
+[0:22:50] observations given the current state action pair
+[0:22:56] and the second option basically corresponds to the stationary assumption
+[0:22:58] corresponds to the stationary assumption and it essentially requires that this
+[0:23:00] and it essentially requires that this markup transition function or this
+[0:23:02] markup transition function or this markov transition destiny function
+[0:23:03] markov transition destiny function should be stationary over time
+[0:23:10] now by introducing this reinforcement framework we essentially mean that we
+[0:23:13] framework we essentially mean that we use this markup decision process model
+[0:23:15] use this markup decision process model to model the observer data to formulate
+[0:23:18] to model the observer data to formulate the a b testing problem
+[0:23:26] and here's a graphical visualization of the markup assumption so given the
+[0:23:28] the markup assumption so given the current state action pair
+[0:23:31] current state action pair the
+[0:23:32] the outcome and the future state they are
+[0:23:34] outcome and the future state they are independent of the observations in the
+[0:23:36] independent of the observations in the past
+[0:23:39] past so they are independent of the past data
+[0:23:41] so they are independent of the past data history
+[0:23:47] and here's a visualization of the stationarity assumption so essentially
+[0:23:49] stationarity assumption so essentially uh those parallel sound means that
+[0:23:52] uh those parallel sound means that uh the
+[0:23:53] uh the the uh effect of those variables um uh
+[0:23:57] the uh effect of those variables um uh the the outcomes they are stationary
+[0:23:59] the the outcomes they are stationary over time
+[0:24:00] over time so so those uh effects
+[0:24:03] so so those uh effects they are time homogeneous
+[0:24:05] they are time homogeneous [Music]
+[0:24:11] now uh the second question why we want to use the reinforcement framework so as
+[0:24:14] to use the reinforcement framework so as i have mentioned earlier our purpose is
+[0:24:16] i have mentioned earlier our purpose is to compare the long-term rewards between
+[0:24:18] to compare the long-term rewards between two different policies
+[0:24:20] two different policies and in reinforcement learning there's a
+[0:24:21] and in reinforcement learning there's a very natural criteria that we can use to
+[0:24:24] very natural criteria that we can use to measure the long-term rewards which
+[0:24:26] measure the long-term rewards which corresponds to the value function
+[0:24:31] and specifically the value function is
+[0:24:33] specifically the value function is defined
+[0:24:34] defined to be the conditional expectation of the
+[0:24:37] to be the conditional expectation of the cumulative discounted rewards given
+[0:24:41] cumulative discounted rewards given under a given initial state
+[0:24:48] so here the expectation is taken by assuming that one particular treatment
+[0:24:50] assuming that one particular treatment is repeatedly assigned
+[0:24:55] and the discounted factor gamma is bounded between 0 and 1 and it
+[0:24:58] bounded between 0 and 1 and it represents a trade-off between the
+[0:24:59] represents a trade-off between the immediate and the future rewards
+[0:25:02] immediate and the future rewards and when gamma is small we
+[0:25:05] and when gamma is small we put more
+[0:25:06] put more weight on the immediate reward
+[0:25:09] weight on the immediate reward and in the most extreme case where we
+[0:25:11] and in the most extreme case where we set gamma to be equal to 0 it leads to a
+[0:25:14] set gamma to be equal to 0 it leads to a myopic evaluation
+[0:25:20] and to the country if we increase the value of gamma then we pay more and more
+[0:25:22] value of gamma then we pay more and more attention to the future rewards and when
+[0:25:25] attention to the future rewards and when gamma is close to
+[0:25:27] gamma is close to these two far sided evaluation
+[0:25:34] now the second reason why we want to use the reinforcement framework is that it
+[0:25:36] the reinforcement framework is that it allows us to model the carryover effects
+[0:25:39] allows us to model the carryover effects using the dynamic state transitions
+[0:25:42] using the dynamic state transitions so here's a causal diagram of the
+[0:25:45] so here's a causal diagram of the mdp model and based on this causal
+[0:25:48] mdp model and based on this causal diagram we can see that there's a path
+[0:25:51] diagram we can see that there's a path from the past action to the current
+[0:25:54] from the past action to the current reward due to the current outcome so
+[0:25:57] reward due to the current outcome so there's a path here connecting these two
+[0:25:59] there's a path here connecting these two variables
+[0:26:05] and essentially under this model assumption the past treatment the past
+[0:26:07] assumption the past treatment the past action is allowed to impact the current
+[0:26:10] action is allowed to impact the current reward indirectly through its effect on
+[0:26:14] reward indirectly through its effect on the current state variable so on the
+[0:26:15] the current state variable so on the current time varying variable st
+[0:26:19] current time varying variable st and in practice what it implies is that
+[0:26:22] and in practice what it implies is that those st they should include
+[0:26:25] those st they should include important mediators that mediates the
+[0:26:27] important mediators that mediates the treatment effects of the past actions on
+[0:26:30] treatment effects of the past actions on the current outcomes
+[0:26:37] and to the country i'm also be existing works in the ap testing procedure they
+[0:26:40] works in the ap testing procedure they require the independence assumption so
+[0:26:42] require the independence assumption so this is the
+[0:26:43] this is the causal diagram and because of that they
+[0:26:45] causal diagram and because of that they cannot
+[0:26:46] cannot be used to capture the carryover effects
+[0:26:57] and finally by introducing the mdp model assumption uh it imposes the markup
+[0:26:59] assumption uh it imposes the markup assumption and the stationary assumption
+[0:27:01] assumption and the stationary assumption and these two assumptions allows us to
+[0:27:03] and these two assumptions allows us to consistently estimate
+[0:27:05] consistently estimate the long-term reward under a given
+[0:27:07] the long-term reward under a given policy even if we have a single time
+[0:27:10] policy even if we have a single time series data
+[0:27:16] and these assumptions they are also mild to some extent so for instance we can
+[0:27:18] to some extent so for instance we can always concatenate observations over
+[0:27:20] always concatenate observations over multiple time points in order to meet
+[0:27:22] multiple time points in order to meet the markup assumption
+[0:27:25] the markup assumption and in order to meet the stationarity
+[0:27:27] and in order to meet the stationarity assumption so in our application we can
+[0:27:29] assumption so in our application we can create some dummy variables such as peak
+[0:27:32] create some dummy variables such as peak and non-peak hours and include those
+[0:27:34] and non-peak hours and include those dummy variables in the state to satisfy
+[0:27:37] dummy variables in the state to satisfy the stationarity assumption
+[0:27:44] uh there's a question uh in
+[0:27:44] in qna are you assuming that in your markov
+[0:27:47] qna are you assuming that in your markov formulation the equations are linear uh
+[0:27:49] formulation the equations are linear uh if that
+[0:27:51] if that that's right can you justify it for this
+[0:27:53] that's right can you justify it for this application uh that's a very good
+[0:27:55] application uh that's a very good question so here we do not require those
+[0:27:57] question so here we do not require those equations to be linear so we allow it
+[0:28:00] equations to be linear so we allow it to be uh non-linear uh
+[0:28:04] to be uh non-linear uh we allow it to be non-linear but later
+[0:28:07] we allow it to be non-linear but later what we do is that we will uh use c
+[0:28:09] what we do is that we will uh use c method
+[0:28:10] method uh to to handle the potential uh
+[0:28:13] uh to to handle the potential uh nonlinear structure of this markov model
+[0:28:17] nonlinear structure of this markov model uh does that answer your question
+[0:28:25] uh there's another question uh what would the mdp be a good framework here
+[0:28:28] would the mdp be a good framework here given there are other agents
+[0:28:31] given there are other agents leading to
+[0:28:32] leading to non-stationarity in the environment
+[0:28:36] non-stationarity in the environment so what other agents are you referring
+[0:28:38] so what other agents are you referring to here
+[0:28:47] uh so so here in this application we consider
+[0:28:48] consider uh
+[0:28:49] uh we we view this problem in a global
+[0:28:52] we we view this problem in a global level
+[0:28:53] level so so so so the platform only uh
+[0:28:56] so so so so the platform only uh implements one action at each time point
+[0:29:00] implements one action at each time point [Music]
+[0:29:02] [Music] uh that that's a very good question um
+[0:29:06] uh that that's a very good question um so so here we mainly focus on the up the
+[0:29:09] so so here we mainly focus on the up the actions selected by the two-sided
+[0:29:11] actions selected by the two-sided markets by the right sharing platform
+[0:29:14] markets by the right sharing platform and because of that if we if we uh
+[0:29:18] and because of that if we if we uh if we only focus on the actions
+[0:29:19] if we only focus on the actions determined by the platform then uh
+[0:29:23] determined by the platform then uh there's only a single agent in our
+[0:29:25] there's only a single agent in our application but of course you can also
+[0:29:27] application but of course you can also view it as a
+[0:29:29] view it as a uh you can also use a model framework to
+[0:29:32] uh you can also use a model framework to formulate this problem by assuming that
+[0:29:35] formulate this problem by assuming that there's multiple actions uh there are
+[0:29:37] there's multiple actions uh there are multiple agents in this application
+[0:29:39] multiple agents in this application but here we only focus on the actions
+[0:29:42] but here we only focus on the actions selected determined by the uh
+[0:29:45] selected determined by the uh right sharing company and because of
+[0:29:47] right sharing company and because of that so there's only a single agent in
+[0:29:49] that so there's only a single agent in our application from this perspective
+[0:29:55] oh does that answer your question
+[0:30:09] now the second contributions of our uh work is that we propose a tested
+[0:30:12] work is that we propose a tested procedure for comparing the long-term
+[0:30:14] procedure for comparing the long-term rewards of two policies
+[0:30:16] rewards of two policies and as i have talked about earlier uh it
+[0:30:18] and as i have talked about earlier uh it has three normalities including
+[0:30:20] has three normalities including sequential monitoring on updating and it
+[0:30:22] sequential monitoring on updating and it is applicable to a wide range of the
+[0:30:23] is applicable to a wide range of the designs
+[0:30:28] and here's a conceptual comparison between our proposal and some of the
+[0:30:29] between our proposal and some of the existing work
+[0:30:31] existing work so firstly if we consider the two sample
+[0:30:33] so firstly if we consider the two sample t-test so very naive two-sample t-test
+[0:30:36] t-test so very naive two-sample t-test so if
+[0:30:37] so if it requires the observations to be
+[0:30:39] it requires the observations to be independent so it cannot handle the
+[0:30:41] independent so it cannot handle the carry-over effects
+[0:30:43] carry-over effects and it is not designed for solving the
+[0:30:45] and it is not designed for solving the sequential testing problem
+[0:30:47] sequential testing problem but it can be applied to the switchback
+[0:30:49] but it can be applied to the switchback design which is the design
+[0:30:51] design which is the design under our real data application
+[0:30:57] now if we consider classical sequential tests
+[0:30:59] tests they also require the independence
+[0:31:01] they also require the independence assumption so they cannot handle the
+[0:31:03] assumption so they cannot handle the carry-over effects
+[0:31:06] carry-over effects but they allow sequential monitoring
+[0:31:08] but they allow sequential monitoring they allow already stopping and they can
+[0:31:10] they allow already stopping and they can be applied you know to the switchback
+[0:31:12] be applied you know to the switchback design
+[0:31:17] and the recently there's also a paper by a boynoff and a shepherd where they are
+[0:31:19] a boynoff and a shepherd where they are proposed to evaluate the treatment
+[0:31:21] proposed to evaluate the treatment effect of
+[0:31:22] effect of a policy in a trading company
+[0:31:25] a policy in a trading company and in their paper they focus on the
+[0:31:27] and in their paper they focus on the long-term rewards so they can handle the
+[0:31:29] long-term rewards so they can handle the carryover effect
+[0:31:33] carryover effect however a sequential monitoring is not
+[0:31:34] however a sequential monitoring is not considered in their paper and they use
+[0:31:37] considered in their paper and they use inverse propensity score weighted method
+[0:31:39] inverse propensity score weighted method and because of that they require the
+[0:31:41] and because of that they require the preventative score to be bounded between
+[0:31:42] preventative score to be bounded between 0 and 1.
+[0:31:44] 0 and 1. however in our application we use a
+[0:31:46] however in our application we use a switchback design where the treatments
+[0:31:48] switchback design where the treatments they are
+[0:31:49] they are they they are deterministically assigned
+[0:31:52] they they are deterministically assigned and because of that their method is not
+[0:31:53] and because of that their method is not applicable to the switchback design
+[0:31:55] applicable to the switchback design which is the design considered in our
+[0:31:57] which is the design considered in our application
+[0:32:00] application and in addition uh here i also list two
+[0:32:03] and in addition uh here i also list two methods developed in the reinforcement
+[0:32:05] methods developed in the reinforcement in the future so we can adopt these two
+[0:32:07] in the future so we can adopt these two methods to test the difference between
+[0:32:11] methods to test the difference between two policies
+[0:32:13] two policies uh so both uh
+[0:32:15] uh so both uh well both methods they they consider
+[0:32:17] well both methods they they consider long-term rewards so they are able uh to
+[0:32:19] long-term rewards so they are able uh to detect the carryover effects
+[0:32:21] detect the carryover effects but they haven't studied the sequential
+[0:32:24] but they haven't studied the sequential monitoring uh problem
+[0:32:26] monitoring uh problem and they also
+[0:32:27] and they also require uh to use the inverse propensity
+[0:32:30] require uh to use the inverse propensity score weighted as meter so they cannot
+[0:32:32] score weighted as meter so they cannot be applied to the switchback design
+[0:32:35] be applied to the switchback design and to the country uh for our proposal
+[0:32:38] and to the country uh for our proposal it is able to detect the carrier effect
+[0:32:40] it is able to detect the carrier effect and we allow sequential monitoring and
+[0:32:42] and we allow sequential monitoring and can be applied it can be applied to the
+[0:32:44] can be applied it can be applied to the switchback design
+[0:32:49] and next a brief summary of the methodology
+[0:32:52] next a brief summary of the methodology of our up also
+[0:32:54] of our up also so in order to compare the long-term
+[0:32:57] so in order to compare the long-term rewards under two different policies so
+[0:32:59] rewards under two different policies so we apply we propose to apply the
+[0:33:01] we apply we propose to apply the classical uh temporal difference
+[0:33:03] classical uh temporal difference learning method
+[0:33:04] learning method in
+[0:33:05] in the reinforcement literature and combine
+[0:33:07] the reinforcement literature and combine it with a c method uh to compute the
+[0:33:10] it with a c method uh to compute the value as meter
+[0:33:12] value as meter and here i want to highlight that most
+[0:33:14] and here i want to highlight that most of the the existing methods in the temp
+[0:33:17] of the the existing methods in the temp in the reinforcement literature most of
+[0:33:19] in the reinforcement literature most of those are temporal different stunning
+[0:33:21] those are temporal different stunning methods they focus on providing the
+[0:33:23] methods they focus on providing the point value estimator
+[0:33:29] but in our application since we want to conduct the hypothesis testing so we
+[0:33:31] conduct the hypothesis testing so we want to we need to provide the rigorous
+[0:33:33] want to we need to provide the rigorous uncertainty quantification and here i
+[0:33:35] uncertainty quantification and here i adopt
+[0:33:37] adopt the method uh proposed in walk by uh
+[0:33:40] the method uh proposed in walk by uh recent jsp paper
+[0:33:46] and the second key uh ingredient in your proposal is to adopt
+[0:33:49] ingredient in your proposal is to adopt the alpha spending approach that is
+[0:33:51] the alpha spending approach that is originally designed for
+[0:33:52] originally designed for clinical trials for sequential
+[0:33:54] clinical trials for sequential monitoring
+[0:33:59] and in addition we also developed a boost replacement procedure for
+[0:34:01] boost replacement procedure for determining the stopping boundary and
+[0:34:03] determining the stopping boundary and this is because for the classical
+[0:34:05] this is because for the classical overspending approach it used the
+[0:34:06] overspending approach it used the numerical integration method however
+[0:34:09] numerical integration method however such a method is no longer applicable in
+[0:34:11] such a method is no longer applicable in adaptive design due to the existence of
+[0:34:14] adaptive design due to the existence of the carryover effects in our application
+[0:34:23] and here's the illustration of the oppa spending approach
+[0:34:24] spending approach um
+[0:34:25] um so so essentially in order to implement
+[0:34:27] so so essentially in order to implement those our spending approach it requires
+[0:34:29] those our spending approach it requires to specify an alpha spending function
+[0:34:32] to specify an alpha spending function which is a function of the time in the
+[0:34:35] which is a function of the time in the experiment
+[0:34:37] experiment and typically at the initial time point
+[0:34:39] and typically at the initial time point uh the this function is equal to zero
+[0:34:46] and at the end when the experiment is terminated then this function is
+[0:34:49] terminated then this function is equal to
+[0:34:50] equal to the total significance level the the
+[0:34:53] the total significance level the the total uh type one arrow
+[0:34:55] total uh type one arrow which is equal to for instance 0.05
+[0:34:58] which is equal to for instance 0.05 and it is required that this average
+[0:35:01] and it is required that this average bending function should be a
+[0:35:02] bending function should be a monotonically increasing function
+[0:35:05] monotonically increasing function now suppose if we want to conduct a
+[0:35:07] now suppose if we want to conduct a sequential testing so we want to apply
+[0:35:09] sequential testing so we want to apply our test at three time points so at time
+[0:35:11] our test at three time points so at time point t1 t2 and t
+[0:35:15] point t1 t2 and t so this is how the procedure looks like
+[0:35:17] so this is how the procedure looks like so firstly we collect all the data up to
+[0:35:21] so firstly we collect all the data up to time point e1 and apply our test once
+[0:35:25] time point e1 and apply our test once now instead of using all the
+[0:35:27] now instead of using all the significance levels
+[0:35:29] significance levels we will only set we will set the
+[0:35:31] we will only set we will set the significance level to be equal to alpha
+[0:35:33] significance level to be equal to alpha t only
+[0:35:39] and then if the test is rejected then we can terminate the experiment
+[0:35:41] can terminate the experiment otherwise we will need to conduct uh we
+[0:35:44] otherwise we will need to conduct uh we need to connect the data again until the
+[0:35:46] need to connect the data again until the time point t2 and apply our test again
+[0:35:50] time point t2 and apply our test again and due to that we have already used uh
+[0:35:53] and due to that we have already used uh set the significance level to be alpha
+[0:35:55] set the significance level to be alpha t1 in the first time point
+[0:35:57] t1 in the first time point so here when applying the test the
+[0:35:59] so here when applying the test the second time we will need to use the
+[0:36:01] second time we will need to use the incremental
+[0:36:02] incremental significance level
+[0:36:05] significance level by by setting this alpha to be equal to
+[0:36:07] by by setting this alpha to be equal to the difference between alpha t2 and
+[0:36:08] the difference between alpha t2 and alpha t1
+[0:36:11] alpha t1 and again if the test is rejected then
+[0:36:13] and again if the test is rejected then we can terminate the experiment
+[0:36:16] we can terminate the experiment so otherwise we will need to wait until
+[0:36:18] so otherwise we will need to wait until the end and apply the test again
+[0:36:25] so this is a illustration of the alpha spending approach
+[0:36:27] spending approach and in theory we also showed that our
+[0:36:29] and in theory we also showed that our test is able to control type one arrow
+[0:36:31] test is able to control type one arrow and is consistent against our identify
+[0:36:33] and is consistent against our identify hypothesis that converges until now at
+[0:36:35] hypothesis that converges until now at the parametric rate
+[0:36:37] the parametric rate and it is valid under the markup design
+[0:36:40] and it is valid under the markup design the alternative interval design and the
+[0:36:42] the alternative interval design and the adaptive design
+[0:36:48] and more importantly uh in our proposal we propose to use the temporal
+[0:36:50] we propose to use the temporal difference learning method and combine
+[0:36:51] difference learning method and combine it with the skew method to give to
+[0:36:53] it with the skew method to give to derive the value estimator to estimate
+[0:36:56] derive the value estimator to estimate the long-term effect of a given policy
+[0:36:59] the long-term effect of a given policy and very importantly we showed that
+[0:37:01] and very importantly we showed that under-smoothing is not needed to
+[0:37:03] under-smoothing is not needed to guarantee the resulting value as made to
+[0:37:04] guarantee the resulting value as made to have a checkable limiting distribution
+[0:37:08] have a checkable limiting distribution so in other words we do not need to
+[0:37:10] so in other words we do not need to include a huge number of basis functions
+[0:37:14] include a huge number of basis functions to guarantee that the bias of the value
+[0:37:16] to guarantee that the bias of the value estimator is much smaller compared to
+[0:37:17] estimator is much smaller compared to its standard deviation
+[0:37:22] and in addition we also showed that the value estimator is semi-parametrically
+[0:37:24] value estimator is semi-parametrically efficient
+[0:37:26] efficient now the reason why under smoothing is
+[0:37:28] now the reason why under smoothing is not needed here is due to that the cvs
+[0:37:30] not needed here is due to that the cvs meters of conditional expectations they
+[0:37:32] meters of conditional expectations they are at important
+[0:37:34] are at important and these results they have already been
+[0:37:36] and these results they have already been established in the classical regression
+[0:37:39] established in the classical regression setting where the observations they are
+[0:37:40] setting where the observations they are time independent
+[0:37:42] time independent and here we extend these results to our
+[0:37:44] and here we extend these results to our setting to our setting of reverse
+[0:37:46] setting to our setting of reverse blending allowing the observations to be
+[0:37:48] blending allowing the observations to be time dependent
+[0:37:50] time dependent and what the implies is that the
+[0:37:52] and what the implies is that the proposed test will not be oversensitive
+[0:37:54] proposed test will not be oversensitive to the number of basis functions and the
+[0:37:57] to the number of basis functions and the cross-validation can be potentially
+[0:37:58] cross-validation can be potentially employed to stack the basis functions
+[0:38:05] and finally uh we conducted some simulation studies to
+[0:38:07] conducted some simulation studies to compare our proposal test with a two
+[0:38:09] compare our proposal test with a two sample t-test and a
+[0:38:12] sample t-test and a version of the uh sequential test
+[0:38:14] version of the uh sequential test and uh it turns out uh so if you look at
+[0:38:17] and uh it turns out uh so if you look at the plot on the right so this
+[0:38:19] the plot on the right so this corresponds to the settings under the
+[0:38:21] corresponds to the settings under the now
+[0:38:22] now hypothesis
+[0:38:24] hypothesis so the blue line here denotes the alpha
+[0:38:26] so the blue line here denotes the alpha spanning function and the gradient that
+[0:38:28] spanning function and the gradient that bases the empirical rejection
+[0:38:30] bases the empirical rejection probability
+[0:38:31] probability so under the now we expect that the
+[0:38:33] so under the now we expect that the gradient should be close to the blue
+[0:38:35] gradient should be close to the blue line or it should be well below the blue
+[0:38:37] line or it should be well below the blue line
+[0:38:38] line now you can be seeing that
+[0:38:41] now you can be seeing that all these tests they are able to control
+[0:38:42] all these tests they are able to control the type 1 arrow
+[0:38:45] the type 1 arrow however if we look at the right plots so
+[0:38:47] however if we look at the right plots so those plots corresponds to the settings
+[0:38:49] those plots corresponds to the settings under the authentic hypothesis
+[0:38:52] under the authentic hypothesis then you can be seeing that neither the
+[0:38:54] then you can be seeing that neither the two sample t tests and nor are the
+[0:38:55] two sample t tests and nor are the sequential classical sequential tests
+[0:38:57] sequential classical sequential tests they are able to detect the authentic
+[0:38:59] they are able to detect the authentic hypothesis
+[0:39:00] hypothesis and to the country our test remains very
+[0:39:03] and to the country our test remains very powerful
+[0:39:04] powerful and again this is due to that those two
+[0:39:07] and again this is due to that those two competing methods they are not able to
+[0:39:09] competing methods they are not able to detect the carryover effects
+[0:39:17] and finally we apply our test to data from the right sharing company and the
+[0:39:19] from the right sharing company and the data is uh collected from a given online
+[0:39:23] data is uh collected from a given online experiment that lasted for two weeks
+[0:39:26] experiment that lasted for two weeks and we use 30 minutes as one time unit
+[0:39:28] and we use 30 minutes as one time unit and this gives us a total sample size of
+[0:39:30] and this gives us a total sample size of over 600
+[0:39:32] over 600 and we include three state variables so
+[0:39:36] and we include three state variables so including the number of drivers number
+[0:39:37] including the number of drivers number of
+[0:39:38] of core orders and then we also include the
+[0:39:40] core orders and then we also include the supply and demand equity magic
+[0:39:43] supply and demand equity magic so which corresponds to a mediator that
+[0:39:44] so which corresponds to a mediator that i have mentioned earlier that mediates
+[0:39:47] i have mentioned earlier that mediates the treatment effect of the past actions
+[0:39:49] the treatment effect of the past actions on the future outcomes
+[0:39:55] and we focus on comparing two policies and the driver's income is set to be the
+[0:39:57] and the driver's income is set to be the immediate reward at each time point and
+[0:39:59] immediate reward at each time point and the new policy is expected to have
+[0:40:01] the new policy is expected to have better
+[0:40:02] better performance
+[0:40:08] and then we apply our test to two
+[0:40:10] to two examples so in the first
+[0:40:12] examples so in the first example so this data is collected from
+[0:40:14] example so this data is collected from an aaa experiment which compares a
+[0:40:17] an aaa experiment which compares a baseline strategy against itself
+[0:40:21] baseline strategy against itself so since the treatment since the pause
+[0:40:23] so since the treatment since the pause is being considered they are essentially
+[0:40:25] is being considered they are essentially the same so we expect that our tester
+[0:40:28] the same so we expect that our tester should not reject the null hypothesis
+[0:40:34] and the blue line here corresponds to the rejection boundary and the
+[0:40:37] the rejection boundary and the orange curve corresponds to a test
+[0:40:39] orange curve corresponds to a test statistic so it can be seen that the
+[0:40:41] statistic so it can be seen that the rejection boundary uh
+[0:40:46] the value of the rejection boundary is much larger compared to the test
+[0:40:48] much larger compared to the test statistic so our test fails to reject
+[0:40:51] statistic so our test fails to reject the null hypothesis as expected
+[0:40:55] the null hypothesis as expected however we applied our test procedure to
+[0:40:58] however we applied our test procedure to the a b experiment uh it turns out that
+[0:41:02] the a b experiment uh it turns out that we are able to uh claim that
+[0:41:04] we are able to uh claim that it can count the new party is better
+[0:41:07] it can count the new party is better before the experiment is terminated
+[0:41:14] and to the country if we directly use the two sample t test then it failed to
+[0:41:16] the two sample t test then it failed to reject the null hypothesis it gives us a
+[0:41:19] reject the null hypothesis it gives us a p-value of 0.18
+[0:41:21] p-value of 0.18 [Music]
+[0:41:27] uh there's a there there's a few questions uh in qna so firstly how can
+[0:41:29] questions uh in qna so firstly how can you control the time interval
+[0:41:31] you control the time interval in the switchback design will the
+[0:41:34] in the switchback design will the results be better or worse if you can or
+[0:41:38] results be better or worse if you can or cannot
+[0:41:39] cannot um so
+[0:41:41] um so if i understand
+[0:41:42] if i understand the question uh correctly uh so so here
+[0:41:45] the question uh correctly uh so so here we can determine like uh when we would
+[0:41:48] we can determine like uh when we would like to test in the switchback design uh
+[0:41:51] like to test in the switchback design uh so so essentially in our data
+[0:41:53] so so essentially in our data application uh what we will do is that
+[0:41:56] application uh what we will do is that we will conduct our test
+[0:41:58] we will conduct our test at the end of the first week
+[0:42:00] at the end of the first week as well as every day on the second week
+[0:42:04] as well as every day on the second week so so in our application uh we can
+[0:42:06] so so in our application uh we can control uh
+[0:42:08] control uh when to when to test
+[0:42:10] when to when to test under the switchback design
+[0:42:12] under the switchback design and uh for for your second question
+[0:42:14] and uh for for your second question uh will the result be better
+[0:42:17] uh will the result be better or worse if you cannot so so i expect
+[0:42:20] or worse if you cannot so so i expect that if if if i don't know uh
+[0:42:23] that if if if i don't know uh when shall we continue the test so this
+[0:42:25] when shall we continue the test so this can be a more challenging problem
+[0:42:27] can be a more challenging problem um so i'm not sure about the exact
+[0:42:30] um so i'm not sure about the exact solution to your question but i guess
+[0:42:33] solution to your question but i guess it will be challenging it will be more
+[0:42:35] it will be challenging it will be more challenging compared to our current
+[0:42:37] challenging compared to our current setting where we know when to test
+[0:42:40] setting where we know when to test so sorry to interrupt you we're slowly
+[0:42:42] so sorry to interrupt you we're slowly running out of time could we maybe like
+[0:42:45] running out of time could we maybe like try to wrap up in the next like three or
+[0:42:46] try to wrap up in the next like three or four minutes and then we take some of
+[0:42:48] four minutes and then we take some of the remaining question at the very end
+[0:42:50] the remaining question at the very end um yeah sure no no problem uh so sorry
+[0:42:53] um yeah sure no no problem uh so sorry for the inconvenience um so um
+[0:42:56] for the inconvenience um so um i just want to quickly summarize the
+[0:42:58] i just want to quickly summarize the second project where we develop a
+[0:42:59] second project where we develop a duplicate divisive procedure
+[0:43:01] duplicate divisive procedure for all policy interval estimation
+[0:43:03] for all policy interval estimation and the objective here is to evaluate
+[0:43:05] and the objective here is to evaluate the impact of the target policy offline
+[0:43:07] the impact of the target policy offline using historical data generated by a
+[0:43:09] using historical data generated by a different behavioral policy as well as
+[0:43:10] different behavioral policy as well as to provide the rigorous oscillating
+[0:43:12] to provide the rigorous oscillating quantification
+[0:43:13] quantification and here similarly we also consider a
+[0:43:15] and here similarly we also consider a reinforcement framework and the key
+[0:43:16] reinforcement framework and the key difference is that in the first project
+[0:43:18] difference is that in the first project we consider to evaluate the difference
+[0:43:20] we consider to evaluate the difference between two fixed policies but in this
+[0:43:22] between two fixed policies but in this project we focus on evaluating the
+[0:43:25] project we focus on evaluating the impact of our general target policy
+[0:43:27] impact of our general target policy and most of the existing methods uh in
+[0:43:30] and most of the existing methods uh in the reinforcement literature they focus
+[0:43:31] the reinforcement literature they focus on providing point as matrix and here we
+[0:43:33] on providing point as matrix and here we want to provide the rigor sources in
+[0:43:35] want to provide the rigor sources in quantification to provide uh to
+[0:43:36] quantification to provide uh to construct some of the symbols and the
+[0:43:38] construct some of the symbols and the main idea is to develop a deeply
+[0:43:40] main idea is to develop a deeply divisive procedure by using the theory
+[0:43:42] divisive procedure by using the theory of high order influence functions and
+[0:43:43] of high order influence functions and here's a graphical visualization of our
+[0:43:46] here's a graphical visualization of our procedure so essentially for each of the
+[0:43:47] procedure so essentially for each of the estimator there's a bias variance
+[0:43:49] estimator there's a bias variance trade-off
+[0:43:50] trade-off and if our purpose is to provide a point
+[0:43:52] and if our purpose is to provide a point as meter only to to minimize uh the mean
+[0:43:55] as meter only to to minimize uh the mean square error then we should guarantee
+[0:43:57] square error then we should guarantee the bias environments they they can't
+[0:43:58] the bias environments they they can't like reach our balance
+[0:44:00] like reach our balance but in our application since we focus on
+[0:44:02] but in our application since we focus on providing confidence intervals since we
+[0:44:04] providing confidence intervals since we focus on providing uh uncertainty
+[0:44:06] focus on providing uh uncertainty quantification so we need to guarantee
+[0:44:07] quantification so we need to guarantee that the bias of the estimator is much
+[0:44:10] that the bias of the estimator is much decays at a much faster rate compared to
+[0:44:12] decays at a much faster rate compared to his virus
+[0:44:13] his virus compared to his standard deviation
+[0:44:16] compared to his standard deviation and it turns out that after applying our
+[0:44:19] and it turns out that after applying our devicing procedure multiple times so it
+[0:44:22] devicing procedure multiple times so it guarantees that the bias of the final
+[0:44:24] guarantees that the bias of the final value estimator will be much smaller
+[0:44:26] value estimator will be much smaller compared to its standard deviation
+[0:44:28] compared to its standard deviation and because of that the relative
+[0:44:30] and because of that the relative confidence interval is valid so that's
+[0:44:32] confidence interval is valid so that's the essential method
+[0:44:34] the essential method oh the the the essential method of our
+[0:44:36] oh the the the essential method of our proposal to iteratively devise the bias
+[0:44:39] proposal to iteratively devise the bias of the initial qs meter
+[0:44:42] of the initial qs meter and we also show that our test date is
+[0:44:43] and we also show that our test date is robustly is efficient and flexible and
+[0:44:46] robustly is efficient and flexible and we did some uh
+[0:44:47] we did some uh conceptual comparisons and also a
+[0:44:49] conceptual comparisons and also a conductor simulations to compare our
+[0:44:51] conductor simulations to compare our tests with
+[0:44:52] tests with our uh
+[0:44:54] our uh against our proposal and i guess i can
+[0:44:57] against our proposal and i guess i can just wrap up today uh so thank you very
+[0:44:59] just wrap up today uh so thank you very much for coming and the papers and
+[0:45:00] much for coming and the papers and softwares can be found on my personal
+[0:45:02] softwares can be found on my personal website and finally just a tiny
+[0:45:03] website and finally just a tiny advertisement i have a post operation so
+[0:45:06] advertisement i have a post operation so if you are interested you can find more
+[0:45:07] if you are interested you can find more information here so again um thank you
+[0:45:10] information here so again um thank you very much and feel free to let me know
+[0:45:12] very much and feel free to let me know if you have any questions
+[0:45:16] all right thank you very much for the nice talk i think because of time
+[0:45:19] nice talk i think because of time constraints we should probably just
+[0:45:20] constraints we should probably just continue with the discussion and take
+[0:45:21] continue with the discussion and take all the other questions that we have at
+[0:45:22] all the other questions that we have at the very end of the seminar
+[0:45:24] the very end of the seminar all right yeah now we have the
+[0:45:25] all right yeah now we have the discussion by uh by will uh will
+[0:45:28] discussion by uh by will uh will whenever
+[0:45:29] whenever you're ready
+[0:45:36] all right can you see the slice
+[0:45:43] okay great yeah thanks for the uh thanks for the kind of invention from the
+[0:45:45] for the kind of invention from the online course influence committee and
+[0:45:47] online course influence committee and thanks to the invitation and this is a
+[0:45:50] thanks to the invitation and this is a discussion uh
+[0:45:52] discussion uh of tensions work as especially related
+[0:45:54] of tensions work as especially related to
+[0:45:55] to the work transformation the uncertainty
+[0:45:57] the work transformation the uncertainty quantification in the io framework
+[0:46:01] quantification in the io framework so and i want to discuss to one related
+[0:46:04] so and i want to discuss to one related work that's related to attention's work
+[0:46:07] work that's related to attention's work so
+[0:46:07] so which works on the online bootstrap
+[0:46:10] which works on the online bootstrap inference for policy evaluation rl
+[0:46:12] inference for policy evaluation rl typically the idea is very similar to
+[0:46:16] typically the idea is very similar to what's information
+[0:46:18] what's information so in in the online ab test framework in
+[0:46:21] so in in the online ab test framework in order to do online tests we will need to
+[0:46:24] order to do online tests we will need to first quantify the uncertainty in
+[0:46:27] first quantify the uncertainty in estimator so after you quantify
+[0:46:29] estimator so after you quantify uncertainty you estimate the variance
+[0:46:31] uncertainty you estimate the variance then they'll construct the confidence
+[0:46:32] then they'll construct the confidence interval and then we can do the online
+[0:46:34] interval and then we can do the online test okay so in this framework this is
+[0:46:37] test okay so in this framework this is the influence for policy evaluation in
+[0:46:39] the influence for policy evaluation in reinforced learning and these two are
+[0:46:41] reinforced learning and these two are trenchants work so they typically
+[0:46:43] trenchants work so they typically require a batch update instead of fully
+[0:46:46] require a batch update instead of fully online so this is well just by insurance
+[0:46:49] online so this is well just by insurance children's application because in the
+[0:46:51] children's application because in the right sharing application so we set the
+[0:46:54] right sharing application so we set the time points at one day like seventh day
+[0:46:56] time points at one day like seventh day and eight day and the ninth day and
+[0:46:58] and eight day and the ninth day and between day and day we have lots of
+[0:47:00] between day and day we have lots of benefits so we can do a batch update
+[0:47:04] benefits so we can do a batch update all right so what is the motivation of
+[0:47:06] all right so what is the motivation of this work is what happens if you would
+[0:47:08] this work is what happens if you would like to do online influence we would
+[0:47:10] like to do online influence we would like to
+[0:47:12] like to quantify the uncertainty for each
+[0:47:14] quantify the uncertainty for each decision we are making in this area
+[0:47:16] decision we are making in this area framework
+[0:47:18] framework and in the
+[0:47:19] and in the linear stochastic approximation
+[0:47:22] linear stochastic approximation framework there are some
+[0:47:23] framework there are some existing work which focus on the id
+[0:47:27] existing work which focus on the id setting or the margin gear setting so
+[0:47:29] setting or the margin gear setting so that's to say our data our id or data
+[0:47:33] that's to say our data our id or data from a minute sequence so basically the
+[0:47:36] from a minute sequence so basically the asymptotic nominality results are well
+[0:47:38] asymptotic nominality results are well behaved and then we can construct the
+[0:47:41] behaved and then we can construct the influence by using plug-in estimator so
+[0:47:45] influence by using plug-in estimator so what's the motivation of this work is to
+[0:47:48] what's the motivation of this work is to to develop a fully online influence for
+[0:47:51] to develop a fully online influence for the linear stochastic transformation and
+[0:47:53] the linear stochastic transformation and the markov noise and where the tip the
+[0:47:56] the markov noise and where the tip the temporal difference learning which is
+[0:47:58] temporal difference learning which is for own policy and the gradient temporal
+[0:48:01] for own policy and the gradient temporal difference learning which is the off
+[0:48:02] difference learning which is the off policy measure are the special case of
+[0:48:04] policy measure are the special case of these two
+[0:48:05] these two and they'll construct the convenient
+[0:48:07] and they'll construct the convenient ones
+[0:48:08] ones all right so
+[0:48:10] all right so a few background about linear stochastic
+[0:48:12] a few background about linear stochastic approximation so in linear stogasm the
+[0:48:15] approximation so in linear stogasm the goal is to solve this linear system a
+[0:48:18] goal is to solve this linear system a bar theta equals b bar
+[0:48:20] bar theta equals b bar and here
+[0:48:23] and here so and the update of this linear
+[0:48:25] so and the update of this linear stochastic system is this on top of that
+[0:48:29] stochastic system is this on top of that and where the alpha key is only rate
+[0:48:32] and where the alpha key is only rate and c does the updated parameter
+[0:48:34] and c does the updated parameter a tutor and b tutor that's just noisy
+[0:48:37] a tutor and b tutor that's just noisy observation of a bar and b bar for
+[0:48:40] observation of a bar and b bar for example in the
+[0:48:41] example in the data driven decision making case we
+[0:48:43] data driven decision making case we don't observe a bubble b bar instead we
+[0:48:45] don't observe a bubble b bar instead we only observe a noisy version and his
+[0:48:48] only observe a noisy version and his noise version a function of a gorgeous
+[0:48:52] noise version a function of a gorgeous markov chain
+[0:48:53] markov chain okay and this firmware this is a typical
+[0:48:55] okay and this firmware this is a typical case of linear structure approximation
+[0:48:57] case of linear structure approximation on the markov noise
+[0:48:59] on the markov noise and and interesting there are two
+[0:49:01] and and interesting there are two special cases one is the on policy
+[0:49:04] special cases one is the on policy linearity linear temporal difference
+[0:49:06] linearity linear temporal difference learning
+[0:49:07] learning so in linear temporal difference
+[0:49:09] so in linear temporal difference learning just like uh
+[0:49:11] learning just like uh transformation
+[0:49:12] transformation so if we can
+[0:49:14] so if we can parameterize the value function as a
+[0:49:17] parameterize the value function as a linear function of the state then we
+[0:49:19] linear function of the state then we have a parameter theta and the goal
+[0:49:20] have a parameter theta and the goal eventually is to learn the theta
+[0:49:23] eventually is to learn the theta in the update and this linear tds happen
+[0:49:26] in the update and this linear tds happen to be a special case of this framework
+[0:49:29] to be a special case of this framework and in the second part of some
+[0:49:31] and in the second part of some transformation of policy learning where
+[0:49:33] transformation of policy learning where you don't observe you don't you cannot
+[0:49:35] you don't observe you don't you cannot interact with the environment so and the
+[0:49:38] interact with the environment so and the all policy the greater gd that's another
+[0:49:41] all policy the greater gd that's another widely used uh policy measure this is
+[0:49:43] widely used uh policy measure this is also a special case of this framework
+[0:49:50] right and why is inference is challenging in
+[0:49:53] and why is inference is challenging in especially under markov setting
+[0:49:56] especially under markov setting so
+[0:49:56] so if we can if we reformulate this update
+[0:50:00] if we can if we reformulate this update a little bit basically we can write down
+[0:50:02] a little bit basically we can write down the seed update as a function of the
+[0:50:05] the seed update as a function of the previous update plus a noise term here
+[0:50:08] previous update plus a noise term here the key part is this noise term
+[0:50:11] the key part is this noise term where e t is marginal difference
+[0:50:13] where e t is marginal difference sequence noise so this is well behaved
+[0:50:16] sequence noise so this is well behaved and we have two additional terms there's
+[0:50:18] and we have two additional terms there's two additional terms are decaying noise
+[0:50:20] two additional terms are decaying noise this goes to zero eventually
+[0:50:23] this goes to zero eventually and
+[0:50:24] and in the id setting or in the martingale
+[0:50:27] in the id setting or in the martingale setting we don't have the remaining two
+[0:50:30] setting we don't have the remaining two parts we only have the first one
+[0:50:32] parts we only have the first one and then we can use plug-in estimator to
+[0:50:36] and then we can use plug-in estimator to estimate the variance of the sequence
+[0:50:39] estimate the variance of the sequence by the simple anomaly results and then
+[0:50:41] by the simple anomaly results and then we can construct a company in the world
+[0:50:42] we can construct a company in the world can do online eb text okay
+[0:50:45] can do online eb text okay however
+[0:50:46] however in the mark in the mark of noise setting
+[0:50:49] in the mark in the mark of noise setting we have two remaining terms so we cannot
+[0:50:52] we have two remaining terms so we cannot simply plug in
+[0:50:55] simply plug in to we can not simply use plug-in
+[0:50:57] to we can not simply use plug-in estimator for the variance okay so
+[0:51:00] estimator for the variance okay so that's the key difference between this
+[0:51:02] that's the key difference between this work and the change the tension's
+[0:51:05] work and the change the tension's measured engine they
+[0:51:07] measured engine they they use the best temporary difference
+[0:51:09] they use the best temporary difference learning which is the least square
+[0:51:10] learning which is the least square temporary difference attorney so where
+[0:51:12] temporary difference attorney so where you don't have this bias issue
+[0:51:15] you don't have this bias issue all right so that's the key difference
+[0:51:17] all right so that's the key difference we cannot use packing estimate to
+[0:51:19] we cannot use packing estimate to estimate the variance
+[0:51:21] estimate the variance so that's why in this work we'll propose
+[0:51:23] so that's why in this work we'll propose a bootstrap version so idea is a very
+[0:51:25] a bootstrap version so idea is a very simple so like uh in bootstrap we
+[0:51:28] simple so like uh in bootstrap we multiply our perturbation w
+[0:51:32] multiply our perturbation w to the sequence
+[0:51:33] to the sequence and this w id random variable is mean 1
+[0:51:36] and this w id random variable is mean 1 and a variance 1
+[0:51:37] and a variance 1 and this is the independent of x okay
+[0:51:40] and this is the independent of x okay and after we multiply this w we can keep
+[0:51:42] and after we multiply this w we can keep track of this new sequence so this c dot
+[0:51:45] track of this new sequence so this c dot t hat that would be a new sequence
+[0:51:48] t hat that would be a new sequence and in theory we show that this new
+[0:51:50] and in theory we show that this new sequence have the same distribution
+[0:51:53] sequence have the same distribution to the original
+[0:51:55] to the original point smear that we're interested in
+[0:51:58] point smear that we're interested in okay so by this theory and then
+[0:52:01] okay so by this theory and then eventually what we need to do just use
+[0:52:03] eventually what we need to do just use the distribution of the left term to
+[0:52:06] the distribution of the left term to estimate the distribution of the right
+[0:52:07] estimate the distribution of the right time right term okay and then eventually
+[0:52:10] time right term okay and then eventually what we do is just use bootstrap
+[0:52:13] what we do is just use bootstrap to estimate the distribution of left
+[0:52:16] to estimate the distribution of left hand we can generate many many w at each
+[0:52:19] hand we can generate many many w at each time t
+[0:52:21] time t and then we generate many sequences of c
+[0:52:23] and then we generate many sequences of c hat and then we can use the variance of
+[0:52:26] hat and then we can use the variance of this cedar hat to approximate the
+[0:52:28] this cedar hat to approximate the variance of left hand side
+[0:52:30] variance of left hand side and then eventually we can get to the
+[0:52:32] and then eventually we can get to the conflict interval for the right hand
+[0:52:35] conflict interval for the right hand center so that's the key idea of the
+[0:52:37] center so that's the key idea of the online bootstrap inference
+[0:52:40] online bootstrap inference in zero we can prove that this construct
+[0:52:43] in zero we can prove that this construct and counting interval are asymptotically
+[0:52:45] and counting interval are asymptotically valid in the sense that when t goes to
+[0:52:48] valid in the sense that when t goes to infinity and when the bootstrap
+[0:52:50] infinity and when the bootstrap numbers goes to infinity all these
+[0:52:54] numbers goes to infinity all these construct convenience are valid okay so
+[0:52:56] construct convenience are valid okay so that's the first part of our
+[0:52:58] that's the first part of our accumulation as we relate to tensions
+[0:53:00] accumulation as we relate to tensions work in terms of work as iostd that's
+[0:53:02] work in terms of work as iostd that's the least square temporary difference
+[0:53:04] the least square temporary difference where you can
+[0:53:05] where you can best update your uh
+[0:53:08] best update your uh your your reinforcement algorithm and
+[0:53:09] your your reinforcement algorithm and policy uh in some operation for example
+[0:53:12] policy uh in some operation for example in self-driving car application or in
+[0:53:14] in self-driving car application or in real-time recommended system you will
+[0:53:16] real-time recommended system you will want to construct the contouring mode at
+[0:53:19] want to construct the contouring mode at each decision point
+[0:53:21] each decision point so and for that kind of task you can use
+[0:53:24] so and for that kind of task you can use this online push reinforce framework
+[0:53:26] this online push reinforce framework okay so that's the first one i like to
+[0:53:28] okay so that's the first one i like to mention
+[0:53:29] mention so the second part interests work is the
+[0:53:32] so the second part interests work is the extension of synchronous work is how can
+[0:53:34] extension of synchronous work is how can offline data help the online test so in
+[0:53:37] offline data help the online test so in the current uh children's workers focus
+[0:53:40] the current uh children's workers focus on the online ad test where we just do
+[0:53:42] on the online ad test where we just do online experiments
+[0:53:44] online experiments and this is great in practice and this
+[0:53:47] and this is great in practice and this is very uh accurate
+[0:53:49] is very uh accurate and there's no other co-founding issues
+[0:53:51] and there's no other co-founding issues in the online test but sometimes this
+[0:53:54] in the online test but sometimes this could be expensive the online experiment
+[0:53:57] could be expensive the online experiment and this may also hurt user experience
+[0:53:59] and this may also hurt user experience especially in some recommender system or
+[0:54:01] especially in some recommender system or in some clinical trials
+[0:54:04] in some clinical trials for example in the switchback design so
+[0:54:06] for example in the switchback design so we have to force the customer to
+[0:54:09] we have to force the customer to get treatment a or get treatment b so
+[0:54:12] get treatment a or get treatment b so that's the uh
+[0:54:14] that's the uh that may hurt the user's experience
+[0:54:17] that may hurt the user's experience so in transfer intrinsic work is how to
+[0:54:20] so in transfer intrinsic work is how to use the offline data to help the
+[0:54:22] use the offline data to help the decision so for the offline data we have
+[0:54:25] decision so for the offline data we have plenty of offline data
+[0:54:27] plenty of offline data and and the
+[0:54:28] and and the and the issue of this offline data is
+[0:54:31] and the issue of this offline data is they may have some of the confounding
+[0:54:34] they may have some of the confounding compounding issues because they are from
+[0:54:35] compounding issues because they are from another design
+[0:54:37] another design so this for example
+[0:54:39] so this for example so in the clinical trial in the current
+[0:54:41] so in the clinical trial in the current like a cuvette vaccine design so at the
+[0:54:44] like a cuvette vaccine design so at the beginning of the back new vaccine denial
+[0:54:46] beginning of the back new vaccine denial there's no existing data what scientists
+[0:54:49] there's no existing data what scientists can do is to look at the historical
+[0:54:51] can do is to look at the historical vaccine design data set or clinical
+[0:54:53] vaccine design data set or clinical trials and the personal data may have
+[0:54:55] trials and the personal data may have some sense of what treatment design is
+[0:54:58] some sense of what treatment design is for the online evidence okay
+[0:55:00] for the online evidence okay and some open question is how to use the
+[0:55:03] and some open question is how to use the offline data to help the extreme design
+[0:55:07] offline data to help the extreme design for example should we use the switchback
+[0:55:08] for example should we use the switchback design in the online test or
+[0:55:11] design in the online test or what kind of treatment should we design
+[0:55:14] what kind of treatment should we design in the online test so this might be
+[0:55:17] in the online test so this might be uh
+[0:55:18] uh if we have plenty of plenty of offline
+[0:55:21] if we have plenty of plenty of offline data that could help in this sense
+[0:55:23] data that could help in this sense second one is how to use offline data to
+[0:55:25] second one is how to use offline data to improve the sample efficiency in online
+[0:55:28] improve the sample efficiency in online a b test
+[0:55:30] a b test in online tests we have to construct
+[0:55:31] in online tests we have to construct companies we have to estimate variance
+[0:55:34] companies we have to estimate variance in order to estimate that we typically
+[0:55:36] in order to estimate that we typically need lots of data sets
+[0:55:38] need lots of data sets so how can we use the plenty of offline
+[0:55:40] so how can we use the plenty of offline data to do this or to help improve the
+[0:55:42] data to do this or to help improve the sample efficiency so that's something
+[0:55:45] sample efficiency so that's something that's interesting
+[0:55:46] that's interesting okay i think that's that's all of my
+[0:55:49] okay i think that's that's all of my discussion
+[0:55:51] discussion thank you very much for the uh for
+[0:55:53] thank you very much for the uh for coming here
+[0:55:58] uh thanks oh thanks uh for for a very nice
+[0:56:01] oh thanks uh for for a very nice discussion also just
+[0:56:03] discussion also just want to make a few comments regarding uh
+[0:56:04] want to make a few comments regarding uh your your discussion uh so the first
+[0:56:07] your your discussion uh so the first party you introduced the online
+[0:56:08] party you introduced the online bootstrap impress method and i think
+[0:56:11] bootstrap impress method and i think it can be naturally applied in our
+[0:56:13] it can be naturally applied in our application uh so the advantage of using
+[0:56:15] application uh so the advantage of using your method is that
+[0:56:17] your method is that it allows us to test like at each time
+[0:56:20] it allows us to test like at each time point at each time point we can connect
+[0:56:22] point at each time point we can connect the test based on your method so uh this
+[0:56:25] the test based on your method so uh this potentially helps to terminate the
+[0:56:27] potentially helps to terminate the experiment earlier
+[0:56:29] experiment earlier but uh to the country in our application
+[0:56:32] but uh to the country in our application you know we only focus on conduct the
+[0:56:33] you know we only focus on conduct the test each day so so that's why we can do
+[0:56:36] test each day so so that's why we can do it uh you know often uh setting a as you
+[0:56:38] it uh you know often uh setting a as you have mentioned but i think your message
+[0:56:40] have mentioned but i think your message can be potentially used to to to help uh
+[0:56:42] can be potentially used to to to help uh in our applications
+[0:56:44] in our applications and the the the second question on how
+[0:56:48] and the the the second question on how to combine offline and the online data
+[0:56:50] to combine offline and the online data it is also uh equally very very very
+[0:56:52] it is also uh equally very very very interesting and uh for for those
+[0:56:54] interesting and uh for for those companies and that
+[0:56:56] companies and that they usually have a huge uh
+[0:56:58] they usually have a huge uh observational data for the past app
+[0:57:00] observational data for the past app policy so so actually we already have
+[0:57:02] policy so so actually we already have lots of data historical data for for for
+[0:57:05] lots of data historical data for for for the older policy so this is because
+[0:57:07] the older policy so this is because usually we will actually use the auto
+[0:57:09] usually we will actually use the auto policy in the past
+[0:57:10] policy in the past now the the problem is that as you have
+[0:57:13] now the the problem is that as you have mentioned in the online test in the av
+[0:57:15] mentioned in the online test in the av testing procedure
+[0:57:17] testing procedure uh how how should we design uh the the
+[0:57:20] uh how how should we design uh the the did design this
+[0:57:22] did design this experiment
+[0:57:23] experiment uh to outline the offline data to to to
+[0:57:26] uh to outline the offline data to to to contact the test uh more in a more
+[0:57:28] contact the test uh more in a more efficient manner
+[0:57:30] efficient manner so so that's a uh i i think this is a
+[0:57:32] so so that's a uh i i think this is a very interesting uh question and uh
+[0:57:36] very interesting uh question and uh we we we can maybe explore further uh on
+[0:57:38] we we we can maybe explore further uh on how to how how to do uh this
+[0:57:42] how to how how to do uh this to do to do uh these related uh future
+[0:57:44] to do to do uh these related uh future works
+[0:57:45] works okay
+[0:57:47] okay all right thank you thank you for the
+[0:57:48] all right thank you thank you for the comments
+[0:57:50] comments all right thanks so i mean we still have
+[0:57:51] all right thanks so i mean we still have like a tiny bit of time left so you can
+[0:57:53] like a tiny bit of time left so you can take a few quick questions from q a if
+[0:57:55] take a few quick questions from q a if you
+[0:57:57] you if you want to take some
+[0:58:00] if you want to take some now but we can also we can also wrap up
+[0:58:02] now but we can also we can also wrap up if you're
+[0:58:04] if you're and then maybe just one quick question i
+[0:58:06] and then maybe just one quick question i i saw there's a question on qr and a
+[0:58:08] i saw there's a question on qr and a what what additional benefit can be
+[0:58:09] what what additional benefit can be introduced by offline data when compared
+[0:58:11] introduced by offline data when compared to
+[0:58:12] to uh the offline policy method so this is
+[0:58:15] uh the offline policy method so this is a very good question now i think of
+[0:58:18] a very good question now i think of course you can you can treat all the
+[0:58:19] course you can you can treat all the data as an offline data and then apply
+[0:58:22] data as an offline data and then apply offline
+[0:58:23] offline evaluation methods
+[0:58:24] evaluation methods but the offline data firstly it might
+[0:58:26] but the offline data firstly it might suffer from a compounding issue so by
+[0:58:28] suffer from a compounding issue so by contact conducting the online experiment
+[0:58:31] contact conducting the online experiment you render you randomly generate the
+[0:58:33] you render you randomly generate the treatment so it guarantees that
+[0:58:35] treatment so it guarantees that it doesn't have any co-founder all
+[0:58:37] it doesn't have any co-founder all measure components in the observed data
+[0:58:39] measure components in the observed data so so the treatment effect can be uh
+[0:58:41] so so the treatment effect can be uh precisely evaluated but in the country
+[0:58:43] precisely evaluated but in the country if we only use the offline data then it
+[0:58:45] if we only use the offline data then it might suffer from the company issue and
+[0:58:46] might suffer from the company issue and the second reason why the online design
+[0:58:50] the second reason why the online design experiment is uh
+[0:58:51] experiment is uh considered the the the design experiment
+[0:58:54] considered the the the design experiment is a good idea is that it also helps to
+[0:58:57] is a good idea is that it also helps to improve the efficiency of the treatment
+[0:58:59] improve the efficiency of the treatment of the causal effect as meter so if we
+[0:59:02] of the causal effect as meter so if we if we design the experiment properly we
+[0:59:05] if we design the experiment properly we can guarantee that
+[0:59:07] can guarantee that the tester can might have better power
+[0:59:09] the tester can might have better power property
+[0:59:14] and um there's a follow-up question why often data will potentially introduce
+[0:59:16] often data will potentially introduce the unpassed co-founding issue so this
+[0:59:18] the unpassed co-founding issue so this is because um in some applications uh
+[0:59:20] is because um in some applications uh for instance um
+[0:59:22] for instance um we we human might decide which which
+[0:59:24] we we human might decide which which action to take at each time point
+[0:59:26] action to take at each time point and uh we take actions by due to some
+[0:59:30] and uh we take actions by due to some some of
+[0:59:31] some of the factors so but for those factors
+[0:59:33] the factors so but for those factors they are not recorded in our observable
+[0:59:35] they are not recorded in our observable data set
+[0:59:36] data set so so so in the offline data set uh on
+[0:59:39] so so so in the offline data set uh on company is a very serious issue and we
+[0:59:41] company is a very serious issue and we need to take that into consideration
+[0:59:49] all right i think i'll now quickly wrap up one second
+[0:59:51] quickly wrap up one second so first thank you so much chengcheng
+[0:59:54] so first thank you so much chengcheng for a very interesting uh talk and
+[0:59:58] for a very interesting uh talk and for a very nice discussion um next time
+[1:00:01] for a very nice discussion um next time we're going to have a talk by matthias
+[1:00:03] we're going to have a talk by matthias turton from technical university of
+[1:00:05] turton from technical university of munich who will talk about the
+[1:00:06] munich who will talk about the half-track criterion for identifiability
+[1:00:08] half-track criterion for identifiability of latent variable models thank you all
+[1:00:10] of latent variable models thank you all for
+[1:00:11] for checking in today i hope you have a
+[1:00:13] checking in today i hope you have a great week and see you next time
+[1:00:16] great week and see you next time all right thank you

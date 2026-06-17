@@ -1,0 +1,1978 @@
+[0:00:04] welcome to the online course inference seminar today we're excited to have mark
+[0:00:06] seminar today we're excited to have mark thunderland from uc berkeley
+[0:00:08] thunderland from uc berkeley who will speak about higher order
+[0:00:10] who will speak about higher order targeted maximum likelihood estimation
+[0:00:12] targeted maximum likelihood estimation in q a there's a collaborator of
+[0:00:16] in q a there's a collaborator of mark zai wang who will try to answer all
+[0:00:19] mark zai wang who will try to answer all your questions
+[0:00:20] your questions mike wonderland will also take a break
+[0:00:22] mike wonderland will also take a break in the middle of the presentation
+[0:00:23] in the middle of the presentation to answer your questions so please
+[0:00:25] to answer your questions so please submit them via q a
+[0:00:28] submit them via q a after that we have a discussion by alex
+[0:00:30] after that we have a discussion by alex lutke from the university of washington
+[0:00:32] lutke from the university of washington uh today questions will be handled by
+[0:00:35] uh today questions will be handled by guillaume so i'm switching over
+[0:00:38] guillaume so i'm switching over to him now thank you dominic um
+[0:00:42] to him now thank you dominic um so as as dominic said uh the
+[0:00:45] so as as dominic said uh the um uh zai wang
+[0:00:48] um uh zai wang will handle the q a um so please submit
+[0:00:51] will handle the q a um so please submit your questions there
+[0:00:53] your questions there we'll select a few of them that will ask
+[0:00:56] we'll select a few of them that will ask mark live
+[0:00:57] mark live if your question is selected i will ask
+[0:00:59] if your question is selected i will ask you to raise your hand and
+[0:01:01] you to raise your hand and i will unmute you please do not raise
+[0:01:04] i will unmute you please do not raise your hand
+[0:01:04] your hand until i've asked you to do so all right
+[0:01:07] until i've asked you to do so all right thank you very much and
+[0:01:08] thank you very much and mark feel free to start whenever you are
+[0:01:11] mark feel free to start whenever you are ready
+[0:01:24] how is this looking good all right good yeah thanks so much for
+[0:01:27] all right good yeah thanks so much for the uh
+[0:01:29] the uh invitation and the opportunity uh
+[0:01:32] invitation and the opportunity uh so today's talk will about will be about
+[0:01:35] so today's talk will about will be about higher order
+[0:01:36] higher order targeted make some like good estimation
+[0:01:38] targeted make some like good estimation uh target makes a lot life estimations
+[0:01:40] uh target makes a lot life estimations and general approach
+[0:01:41] and general approach uh for statistical estimation in highly
+[0:01:44] uh for statistical estimation in highly non-paramedical flexible models
+[0:01:47] non-paramedical flexible models and this what i talk about today is an
+[0:01:49] and this what i talk about today is an advance within that
+[0:01:55] framework [Music]
+[0:01:58] [Music] there we go so i will give an overview i
+[0:02:02] there we go so i will give an overview i will first uh
+[0:02:04] will first uh review the first the regular team only
+[0:02:06] review the first the regular team only which i now call them first order team
+[0:02:08] which i now call them first order team only an important uh machine learning
+[0:02:11] only an important uh machine learning algorithm which is called highly
+[0:02:12] algorithm which is called highly adaptive loss cell which
+[0:02:14] adaptive loss cell which also will be an important ingredient for
+[0:02:15] also will be an important ingredient for the high order team only
+[0:02:17] the high order team only which is just an mle over big function
+[0:02:19] which is just an mle over big function plus
+[0:02:20] plus i then focus on defining the second
+[0:02:22] i then focus on defining the second order teamily
+[0:02:24] order teamily i demonstrate why it's that it optimizes
+[0:02:28] i demonstrate why it's that it optimizes an exact remainder of the first order
+[0:02:31] an exact remainder of the first order team only and thereby
+[0:02:32] team only and thereby makes the third order remainder i
+[0:02:35] makes the third order remainder i present an exact expansion for the
+[0:02:36] present an exact expansion for the second order team only
+[0:02:38] second order team only uh which also allows us for a higher
+[0:02:40] uh which also allows us for a higher order inference
+[0:02:42] order inference and understanding uh i showed the
+[0:02:44] and understanding uh i showed the generalization
+[0:02:45] generalization to cave order team lee so you can
+[0:02:47] to cave order team lee so you can actually work with k plus one
+[0:02:48] actually work with k plus one order remainder and we'll show
+[0:02:51] order remainder and we'll show simulations for the average treatment
+[0:02:53] simulations for the average treatment effect and
+[0:02:54] effect and also another example which is more
+[0:02:55] also another example which is more theoretical interest
+[0:02:57] theoretical interest has been studied accordingly which is
+[0:02:59] has been studied accordingly which is the integral of the density squared and
+[0:03:00] the integral of the density squared and then we end with some concluding
+[0:03:03] then we end with some concluding remarks first i need to
+[0:03:06] remarks first i need to bring this back into what statistical
+[0:03:09] bring this back into what statistical learning is about now the first step is
+[0:03:12] learning is about now the first step is of course that the observed data
+[0:03:14] of course that the observed data we are seeing we often let's say denoted
+[0:03:16] we are seeing we often let's say denoted with like one o two up to o n
+[0:03:18] with like one o two up to o n so we have n units and we observe
+[0:03:20] so we have n units and we observe records on them
+[0:03:22] records on them and that data is a random variable it's
+[0:03:25] and that data is a random variable it's the result of an experiment and
+[0:03:26] the result of an experiment and therefore it also has a probability
+[0:03:28] therefore it also has a probability distribution we often call it p0
+[0:03:30] distribution we often call it p0 or p0n to indicate if it's the
+[0:03:34] or p0n to indicate if it's the distribution of the whole overall data
+[0:03:38] distribution of the whole overall data then we need to agree on what do we know
+[0:03:40] then we need to agree on what do we know about the likelihood of the data what do
+[0:03:41] about the likelihood of the data what do we know about the probability density of
+[0:03:42] we know about the probability density of the data that's called a statistical
+[0:03:44] the data that's called a statistical model and we want to do that in a
+[0:03:46] model and we want to do that in a realistic way so that the true
+[0:03:47] realistic way so that the true data distribution is still included so
+[0:03:50] data distribution is still included so satisfy these assumptions
+[0:03:52] satisfy these assumptions we then need to define and query about
+[0:03:54] we then need to define and query about our
+[0:03:56] our data distribution and we call that
+[0:03:59] data distribution and we call that mapping psi so psi maps the true p0 into
+[0:04:02] mapping psi so psi maps the true p0 into a number
+[0:04:03] a number and that often comes from the whole
+[0:04:06] and that often comes from the whole causal
+[0:04:06] causal modeling defining a causal quantity
+[0:04:09] modeling defining a causal quantity establishing identification
+[0:04:11] establishing identification so that you don't have an estimate so
+[0:04:13] so that you don't have an estimate so that's where causal inference comes in
+[0:04:15] that's where causal inference comes in as a way to define an estimate of
+[0:04:17] as a way to define an estimate of interest which approximates the desired
+[0:04:19] interest which approximates the desired causal effect
+[0:04:20] causal effect the best you can under transparent
+[0:04:23] the best you can under transparent assumptions
+[0:04:25] assumptions but this talk is really about the
+[0:04:26] but this talk is really about the estimation once you have reached that
+[0:04:28] estimation once you have reached that state
+[0:04:29] state then we need to define an estimator and
+[0:04:31] then we need to define an estimator and that's what this will be all about and
+[0:04:32] that's what this will be all about and then of course for constant involves we
+[0:04:34] then of course for constant involves we need to understand the theory of the
+[0:04:35] need to understand the theory of the estimate we need to understand the
+[0:04:36] estimate we need to understand the sampling distribution the estimator so
+[0:04:38] sampling distribution the estimator so that it has
+[0:04:38] that it has let's say approximately normal
+[0:04:39] let's say approximately normal distribution and so we can construct
+[0:04:42] distribution and so we can construct confidence intervals
+[0:04:44] confidence intervals now targeted learning is
+[0:04:47] now targeted learning is defined as the subfield of statistics
+[0:04:49] defined as the subfield of statistics which is concerned with the development
+[0:04:52] which is concerned with the development of estimators of the data distribution i
+[0:04:55] of estimators of the data distribution i call mp and star
+[0:04:58] call mp and star which come then with a plug-in estimate
+[0:04:59] which come then with a plug-in estimate of psi of p and star and we want these
+[0:05:01] of psi of p and star and we want these plug-in estimators
+[0:05:03] plug-in estimators to be have good behavior so that we want
+[0:05:06] to be have good behavior so that we want them to behave
+[0:05:07] them to behave to be consistent as token normal and
+[0:05:09] to be consistent as token normal and also provide confidence involved
+[0:05:10] also provide confidence involved and all this needs to happen in
+[0:05:12] and all this needs to happen in realistic statistical models which will
+[0:05:14] realistic statistical models which will be infinite dimensional
+[0:05:15] be infinite dimensional and highly non-parametric so by
+[0:05:18] and highly non-parametric so by necessity to learn the stochastic
+[0:05:19] necessity to learn the stochastic relations
+[0:05:20] relations between the different variables you
+[0:05:22] between the different variables you observe you need machine learning and
+[0:05:24] observe you need machine learning and therefore machine learning will be an
+[0:05:25] therefore machine learning will be an intrinsic component of this but we also
+[0:05:27] intrinsic component of this but we also need to make sure we are getting formal
+[0:05:29] need to make sure we are getting formal inference
+[0:05:29] inference and so that's where we get the bridge
+[0:05:31] and so that's where we get the bridge from machine learning to statistical
+[0:05:32] from machine learning to statistical inference
+[0:05:33] inference in this talk i will focus on the case
+[0:05:36] in this talk i will focus on the case where we observe
+[0:05:37] where we observe an iid independent identity distributed
+[0:05:40] an iid independent identity distributed copies of a random variable
+[0:05:41] copies of a random variable so that is all about this common
+[0:05:43] so that is all about this common probability solution and a feature of it
+[0:05:46] probability solution and a feature of it but there's also work we also have of
+[0:05:48] but there's also work we also have of things like
+[0:05:49] things like time series networks and adaptive
+[0:05:51] time series networks and adaptive designs which are really synthesized one
+[0:05:53] designs which are really synthesized one problems
+[0:05:54] problems so teamwork is completely applicable to
+[0:05:56] so teamwork is completely applicable to that
+[0:05:57] that okay so what is the first order tmle so
+[0:06:00] okay so what is the first order tmle so what you have now you have this
+[0:06:02] what you have now you have this parameter psi
+[0:06:04] parameter psi which like for example we'll do an
+[0:06:06] which like for example we'll do an example i can have a treatment effect
+[0:06:08] example i can have a treatment effect and we have to study that parameter as a
+[0:06:11] and we have to study that parameter as a mapping from the probability
+[0:06:12] mapping from the probability distribution like the density
+[0:06:14] distribution like the density of your data to the real line
+[0:06:18] of your data to the real line and in particular we have to calculate
+[0:06:19] and in particular we have to calculate the so-called pathways derivative of
+[0:06:21] the so-called pathways derivative of that
+[0:06:21] that and that defines then the so-called
+[0:06:23] and that defines then the so-called canonical gradient
+[0:06:24] canonical gradient so you take paths through p little
+[0:06:27] so you take paths through p little parametric models
+[0:06:29] parametric models we call them p epsilon you have psi of p
+[0:06:31] we call them p epsilon you have psi of p epsilon you take the dd epsilon
+[0:06:33] epsilon you take the dd epsilon the derivative and write it as a
+[0:06:35] the derivative and write it as a covariance of some function
+[0:06:37] covariance of some function with the score of the path and that
+[0:06:39] with the score of the path and that function is called the gradient and in
+[0:06:41] function is called the gradient and in particular we can choose it to be the
+[0:06:42] particular we can choose it to be the canonical
+[0:06:43] canonical gradient now that canonical gradient is
+[0:06:45] gradient now that canonical gradient is a very important
+[0:06:46] a very important object because it defines a path
+[0:06:49] object because it defines a path if we to compute a path like p epsilon
+[0:06:52] if we to compute a path like p epsilon with score
+[0:06:53] with score that canonical gradient that path is all
+[0:06:56] that canonical gradient that path is all now about has a fluctuation round and
+[0:06:59] now about has a fluctuation round and that path is all about
+[0:07:00] that path is all about changing the target parameter maximally
+[0:07:02] changing the target parameter maximally for every small change
+[0:07:04] for every small change of epsilon and so that one will be used
+[0:07:06] of epsilon and so that one will be used to do the team lead update
+[0:07:09] to do the team lead update and so the procedure then starts with
+[0:07:11] and so the procedure then starts with first we need an
+[0:07:12] first we need an initial estimator of the data
+[0:07:13] initial estimator of the data distribution p0 so here you can use your
+[0:07:16] distribution p0 so here you can use your like we often propose super learning as
+[0:07:18] like we often propose super learning as a way to build a library of many
+[0:07:20] a way to build a library of many algorithms and that cross relation
+[0:07:22] algorithms and that cross relation decide which algorithm performs best
+[0:07:24] decide which algorithm performs best but there are other you can choose
+[0:07:26] but there are other you can choose whatever you want as long it has to be
+[0:07:28] whatever you want as long it has to be flexible it has to be a good estimator
+[0:07:29] flexible it has to be a good estimator of the data distribution p0
+[0:07:32] of the data distribution p0 then we take this least favorable path
+[0:07:36] then we take this least favorable path as we call it so it's this path
+[0:07:38] as we call it so it's this path which has a parameter epsilon at epsilon
+[0:07:41] which has a parameter epsilon at epsilon zero you get back your initial estimator
+[0:07:44] zero you get back your initial estimator and
+[0:07:44] and it has score the canonical gradient and
+[0:07:47] it has score the canonical gradient and what that means is that your
+[0:07:49] what that means is that your psi along this path along when you move
+[0:07:52] psi along this path along when you move epsilon from zero away
+[0:07:53] epsilon from zero away will have a maximal square change for
+[0:07:56] will have a maximal square change for every essentially unit
+[0:07:57] every essentially unit increase in epsilon and therefore when
+[0:08:00] increase in epsilon and therefore when you do an mle
+[0:08:01] you do an mle along this path it's like fitting the
+[0:08:03] along this path it's like fitting the parameter and therefore you get a lot of
+[0:08:06] parameter and therefore you get a lot of gain from that little single mle step
+[0:08:09] gain from that little single mle step you get a big
+[0:08:10] you get a big bias reduction for your target parameter
+[0:08:12] bias reduction for your target parameter and that's what
+[0:08:13] and that's what causes gives us the bridge from a
+[0:08:16] causes gives us the bridge from a machine learning estimator
+[0:08:17] machine learning estimator which will not provide inference to
+[0:08:19] which will not provide inference to suddenly a distorted estimator for which
+[0:08:21] suddenly a distorted estimator for which we will have
+[0:08:22] we will have inference and and all that so it's a
+[0:08:25] inference and and all that so it's a simple mle as i say here the epsilon n1
+[0:08:28] simple mle as i say here the epsilon n1 is just the maximum likelihood estimator
+[0:08:29] is just the maximum likelihood estimator l is to like the log likelihoods
+[0:08:31] l is to like the log likelihoods function
+[0:08:32] function it can be generalized to other loss
+[0:08:33] it can be generalized to other loss functions but let's talk about log
+[0:08:34] functions but let's talk about log likelihood
+[0:08:35] likelihood and then you take your update so you now
+[0:08:37] and then you take your update so you now say okay
+[0:08:38] say okay that's along that path i moved my
+[0:08:41] that's along that path i moved my initial estimator to an update
+[0:08:44] initial estimator to an update with that mle and that becomes my target
+[0:08:47] with that mle and that becomes my target makes like estimator of the density
+[0:08:49] makes like estimator of the density which is now tailored for the target
+[0:08:51] which is now tailored for the target estimate
+[0:08:52] estimate and so we plug it into our psi mapping
+[0:08:54] and so we plug it into our psi mapping and we get our psi
+[0:08:55] and we get our psi pn1 star and that is then the target
+[0:08:58] pn1 star and that is then the target that makes them like the estimator of
+[0:08:59] that makes them like the estimator of the estimate
+[0:09:00] the estimate psi zero this estimator solves in
+[0:09:03] psi zero this estimator solves in particular
+[0:09:03] particular the efficient inner curve equation and
+[0:09:05] the efficient inner curve equation and there's the score being the canonical
+[0:09:07] there's the score being the canonical gradient and you set
+[0:09:08] gradient and you set empirical mean of that equal to zero and
+[0:09:10] empirical mean of that equal to zero and that's an important ingredient
+[0:09:12] that's an important ingredient and that really drives the theory of
+[0:09:14] and that really drives the theory of this estimate
+[0:09:16] this estimate and so the fear of this estimate can be
+[0:09:18] and so the fear of this estimate can be summarized in one page
+[0:09:20] summarized in one page and firstly what you do you define what
+[0:09:23] and firstly what you do you define what we call the exact
+[0:09:24] we call the exact remainder in this called r1 because we
+[0:09:27] remainder in this called r1 because we also have one
+[0:09:28] also have one later r2 from it because of the second
+[0:09:30] later r2 from it because of the second order team
+[0:09:31] order team and it's nothing else than doing a
+[0:09:33] and it's nothing else than doing a tailor expansion first order tail
+[0:09:35] tailor expansion first order tail expansion
+[0:09:36] expansion fp so you take psi p minus psi p0
+[0:09:40] fp so you take psi p minus psi p0 minus this uh linear mapping and p minus
+[0:09:43] minus this uh linear mapping and p minus p0 which can be written as an
+[0:09:45] p0 which can be written as an expectation operator p minus p are
+[0:09:47] expectation operator p minus p are applied to the canonical gradient
+[0:09:50] applied to the canonical gradient and so this is this remainder will
+[0:09:52] and so this is this remainder will always be a second order term
+[0:09:54] always be a second order term but we'll show that for like for example
+[0:09:55] but we'll show that for like for example for the treatment specific mean and
+[0:09:57] for the treatment specific mean and other examples
+[0:09:58] other examples uh so it'll be like an integral of
+[0:10:00] uh so it'll be like an integral of something like p minus p zero squared
+[0:10:02] something like p minus p zero squared that kind of thing and
+[0:10:05] that kind of thing and so this remainder tells us in particular
+[0:10:09] so this remainder tells us in particular that i can apply it now to p
+[0:10:10] that i can apply it now to p being dtmle so i get now that the psi
+[0:10:14] being dtmle so i get now that the psi of the team lead the psi of pn1 star
+[0:10:16] of the team lead the psi of pn1 star minus psi p0
+[0:10:18] minus psi p0 equals the minus p0 applied to the
+[0:10:20] equals the minus p0 applied to the canonical gradient at the team lead plus
+[0:10:22] canonical gradient at the team lead plus this exact remainder
+[0:10:25] this exact remainder where i use that the p of the canonical
+[0:10:27] where i use that the p of the canonical and the economic grain has mean zero
+[0:10:28] and the economic grain has mean zero under
+[0:10:30] under under p and then we combine that
+[0:10:34] under p and then we combine that with the score equation because the
+[0:10:35] with the score equation because the empirical mean of the canonical range
+[0:10:37] empirical mean of the canonical range equals zero
+[0:10:38] equals zero because of being a team lead so now you
+[0:10:39] because of being a team lead so now you add that on and you get now
+[0:10:41] add that on and you get now this key equation for the team only
+[0:10:44] this key equation for the team only which is really in every paper we write
+[0:10:46] which is really in every paper we write this is the start
+[0:10:47] this is the start of the t millionaires and essentially
+[0:10:49] of the t millionaires and essentially you're done by that so you say that the
+[0:10:51] you're done by that so you say that the psi
+[0:10:51] psi of p and one star the plug-in estimator
+[0:10:53] of p and one star the plug-in estimator minus side p0
+[0:10:54] minus side p0 is the empirical process pn minus p0
+[0:10:57] is the empirical process pn minus p0 applied to the canonical grain at the
+[0:10:58] applied to the canonical grain at the timely
+[0:10:59] timely plus this second order remain so now if
+[0:11:02] plus this second order remain so now if you can show that the second order
+[0:11:04] you can show that the second order remainder
+[0:11:04] remainder is small o p n to the minus half so it
+[0:11:06] is small o p n to the minus half so it goes away even when you blow it up with
+[0:11:08] goes away even when you blow it up with square root sample size
+[0:11:10] square root sample size then you're essentially done right
+[0:11:11] then you're essentially done right because then all you need is that
+[0:11:13] because then all you need is that p n minus p zero applied to the common
+[0:11:15] p n minus p zero applied to the common grain you want that canonical gradient
+[0:11:16] grain you want that canonical gradient not at the random p
+[0:11:17] not at the random p n star but you want it at the p zero so
+[0:11:19] n star but you want it at the p zero so you need a little bit of consistency in
+[0:11:21] you need a little bit of consistency in a so-called donskar loss condition
+[0:11:24] a so-called donskar loss condition but even that could be avoided with
+[0:11:25] but even that could be avoided with so-called cross-validated team
+[0:11:27] so-called cross-validated team but either way that's not really a key
+[0:11:30] but either way that's not really a key ingredient
+[0:11:31] ingredient and key assumption and so you push it
+[0:11:33] and key assumption and so you push it then
+[0:11:34] then immediately towards the statement that
+[0:11:36] immediately towards the statement that the tmle minus the estimate
+[0:11:39] the tmle minus the estimate equals an empirical mean of mean zero
+[0:11:42] equals an empirical mean of mean zero independent identically distant random
+[0:11:43] independent identically distant random variables plus
+[0:11:44] variables plus something negligible some opn to the
+[0:11:47] something negligible some opn to the minus half
+[0:11:48] minus half and so therefore it goes to a normal
+[0:11:49] and so therefore it goes to a normal distribution with mean zero and variance
+[0:11:52] distribution with mean zero and variance the variance of this canonical range
+[0:11:53] the variance of this canonical range which is also called the efficient
+[0:11:54] which is also called the efficient involves curve
+[0:11:56] involves curve and this is by definition means that the
+[0:11:58] and this is by definition means that the estimators are both
+[0:11:59] estimators are both efficient so that more all regular
+[0:12:01] efficient so that more all regular isotope linear estimator it's an optimal
+[0:12:03] isotope linear estimator it's an optimal estimate
+[0:12:04] estimate so what you see from this it's all about
+[0:12:07] so what you see from this it's all about the second order remainder
+[0:12:08] the second order remainder being small that's exactly you know
+[0:12:10] being small that's exactly you know where the key is
+[0:12:12] where the key is that's why you want a good initial
+[0:12:13] that's why you want a good initial estimate in particular
+[0:12:16] estimate in particular now in inference follows you can because
+[0:12:19] now in inference follows you can because once your estimate behaves like a sample
+[0:12:21] once your estimate behaves like a sample mean you can calculate on all type
+[0:12:22] mean you can calculate on all type columns interval you compute the sample
+[0:12:24] columns interval you compute the sample variance of your
+[0:12:26] variance of your influence curve which is this canonical
+[0:12:27] influence curve which is this canonical gradient and and
+[0:12:29] gradient and and you get your natural compound involved
+[0:12:30] you get your natural compound involved for free so that's not
+[0:12:32] for free so that's not any extra work
+[0:12:38] okay so i'm running an example is that we have
+[0:12:38] we have uh n iid observations
+[0:12:42] uh n iid observations on every subject let's say we have some
+[0:12:43] on every subject let's say we have some baseline history w which is a bunch of
+[0:12:46] baseline history w which is a bunch of cohorts
+[0:12:46] cohorts we have then a binary treatment assigned
+[0:12:48] we have then a binary treatment assigned to the subject maybe in an observational
+[0:12:50] to the subject maybe in an observational way and then we collect an outcome let
+[0:12:52] way and then we collect an outcome let me make it
+[0:12:53] me make it for now binary outcome y which is like
+[0:12:55] for now binary outcome y which is like the person died or not
+[0:12:57] the person died or not and we then define a starter estimate
+[0:13:01] and we then define a starter estimate this psi of p which is you take the
+[0:13:03] this psi of p which is you take the conditional probability of death
+[0:13:06] conditional probability of death given treatment and covert you said
+[0:13:08] given treatment and covert you said treatment is one and then you take the
+[0:13:09] treatment is one and then you take the average over your covert distribution
+[0:13:11] average over your covert distribution you could do the same
+[0:13:12] you could do the same for treatment being control a zero
+[0:13:14] for treatment being control a zero subtract it and you get the so-called
+[0:13:16] subtract it and you get the so-called average treatment effect
+[0:13:17] average treatment effect in other words that will actually equal
+[0:13:19] in other words that will actually equal the average treatment effect
+[0:13:20] the average treatment effect under the assumption of november
+[0:13:22] under the assumption of november confounder so this is the estimate which
+[0:13:24] confounder so this is the estimate which is
+[0:13:24] is you know often targeted in causal
+[0:13:26] you know often targeted in causal influence
+[0:13:27] influence so now we can analyze this psi of p and
+[0:13:30] so now we can analyze this psi of p and we can calculate the so-called canonical
+[0:13:32] we can calculate the so-called canonical gradient
+[0:13:33] gradient and that's nothing else than a score and
+[0:13:35] and that's nothing else than a score and it will have a score component for each
+[0:13:37] it will have a score component for each factor of the likelihood
+[0:13:38] factor of the likelihood here you see the dp1 which is this
+[0:13:40] here you see the dp1 which is this canonical gradient the first
+[0:13:41] canonical gradient the first component is a score for distribution of
+[0:13:44] component is a score for distribution of y given a and w
+[0:13:45] y given a and w the second is just a function w that one
+[0:13:48] the second is just a function w that one will be
+[0:13:48] will be normally used to target the distance of
+[0:13:50] normally used to target the distance of w but we since we estimate
+[0:13:52] w but we since we estimate the empiric just the distribution w of
+[0:13:54] the empiric just the distribution w of the empirical distribution
+[0:13:55] the empirical distribution that one doesn't have to be targeted so
+[0:13:57] that one doesn't have to be targeted so that's can be ignored and it's all about
+[0:13:59] that's can be ignored and it's all about that first component
+[0:14:00] that first component which is y residual times a
+[0:14:04] which is y residual times a over the probability of a given w and
+[0:14:06] over the probability of a given w and that
+[0:14:07] that is uh yeah the important component of
+[0:14:09] is uh yeah the important component of this canonical gradient
+[0:14:11] this canonical gradient and also we'll define the team melee
+[0:14:12] and also we'll define the team melee step
+[0:14:14] step the exact remainder can be calculated
+[0:14:16] the exact remainder can be calculated here and that is indeed second order and
+[0:14:18] here and that is indeed second order and it's given by this
+[0:14:19] it's given by this integral of the outcome regression minus
+[0:14:21] integral of the outcome regression minus the true outcome regression times the
+[0:14:23] the true outcome regression times the propensity score minus the true
+[0:14:24] propensity score minus the true propensity score divided by the
+[0:14:26] propensity score divided by the propensity score so it's this it has
+[0:14:28] propensity score so it's this it has it's an kind of a nice term with a cross
+[0:14:30] it's an kind of a nice term with a cross structure
+[0:14:31] structure and we often think of this as so we call
+[0:14:33] and we often think of this as so we call this a double robust
+[0:14:34] this a double robust estimation problem because this
+[0:14:36] estimation problem because this remainder will be zero and one of them
+[0:14:38] remainder will be zero and one of them is correct
+[0:14:42] the canonical gradient tells us how to do the team only because this tells us
+[0:14:44] do the team only because this tells us oh we need to
+[0:14:45] oh we need to come up with a path through the outcome
+[0:14:48] come up with a path through the outcome regression which has a score
+[0:14:49] regression which has a score disk component now you do that by
+[0:14:52] disk component now you do that by using let's say logistic regression and
+[0:14:54] using let's say logistic regression and then add clever where the offset
+[0:14:56] then add clever where the offset is your initial estimator the budget of
+[0:14:58] is your initial estimator the budget of your initial conditional probability
+[0:15:01] your initial conditional probability estimator and you add as clever
+[0:15:03] estimator and you add as clever covariate treatment
+[0:15:04] covariate treatment over the estimated propensity score then
+[0:15:07] over the estimated propensity score then you do a simple
+[0:15:08] you do a simple mle which is nothing else than running a
+[0:15:10] mle which is nothing else than running a universal logistic regression
+[0:15:12] universal logistic regression and then you have your update your
+[0:15:14] and then you have your update your update of your outcome regression
+[0:15:16] update of your outcome regression and and then you are done right then you
+[0:15:19] and and then you are done right then you take them you evaluate it at as1
+[0:15:21] take them you evaluate it at as1 and you take the empirical mean and that
+[0:15:23] and you take the empirical mean and that is the team only
+[0:15:25] is the team only and that can then be analyzed like in
+[0:15:26] and that can then be analyzed like in the previous slide and then all you are
+[0:15:28] the previous slide and then all you are dealing with is that this remainder
+[0:15:30] dealing with is that this remainder right this r1 at this qn star minus q0
+[0:15:33] right this r1 at this qn star minus q0 and gn minus zero that has to be
+[0:15:36] and gn minus zero that has to be small and second order and yeah that
+[0:15:38] small and second order and yeah that means you
+[0:15:39] means you you need to have a good estimator
+[0:15:43] you need to have a good estimator uh here i'm just going to show you a
+[0:15:46] uh here i'm just going to show you a little
+[0:15:47] little finite sample evaluation of what
+[0:15:49] finite sample evaluation of what untimoly update does
+[0:15:51] untimoly update does this is for a particular example we'll
+[0:15:52] this is for a particular example we'll also be looking at is the integral
+[0:15:54] also be looking at is the integral density squared example it's an example
+[0:15:57] density squared example it's an example where
+[0:15:57] where now the remainder is actually of the
+[0:15:59] now the remainder is actually of the form integral p minus p0 squared so it's
+[0:16:01] form integral p minus p0 squared so it's kind of an ugly remainder it's always
+[0:16:03] kind of an ugly remainder it's always positive or always negative in this case
+[0:16:05] positive or always negative in this case so that really can hurt your and sample
+[0:16:08] so that really can hurt your and sample you know
+[0:16:09] you know normal approximation and so it's an
+[0:16:11] normal approximation and so it's an important problem people have studied in
+[0:16:13] important problem people have studied in the literature quite a bit
+[0:16:15] the literature quite a bit and uh we can do a teamwork update in
+[0:16:18] and uh we can do a teamwork update in the usual way
+[0:16:19] the usual way and and and here is a picture for a
+[0:16:22] and and and here is a picture for a given data set
+[0:16:23] given data set where we plot how when epsilon is zero
+[0:16:26] where we plot how when epsilon is zero you got back your initial estimator
+[0:16:28] you got back your initial estimator right and then along this path this
+[0:16:29] right and then along this path this least favorable path
+[0:16:31] least favorable path you moved from zero to the actual mle
+[0:16:33] you moved from zero to the actual mle and what happens then to your
+[0:16:35] and what happens then to your plug-in estimator and you see that it
+[0:16:37] plug-in estimator and you see that it starts with this biased initial
+[0:16:39] starts with this biased initial and then it moves towards psi zero
+[0:16:42] and then it moves towards psi zero and it keeps doing that till the
+[0:16:44] and it keeps doing that till the likelihood is maximized along this path
+[0:16:47] likelihood is maximized along this path you can actually think of this as an if
+[0:16:49] you can actually think of this as an if you would for example run a steepest
+[0:16:51] you would for example run a steepest descent algorithm if you write
+[0:16:52] descent algorithm if you write outside of the p tilde
+[0:16:55] outside of the p tilde of the uh you know at least favorable
+[0:16:58] of the uh you know at least favorable path in epsilon
+[0:16:59] path in epsilon minus psi p0 and you square it and you
+[0:17:01] minus psi p0 and you square it and you say hey i want to run the least
+[0:17:03] say hey i want to run the least and steepest descent algorithm i want to
+[0:17:05] and steepest descent algorithm i want to minimize that in
+[0:17:06] minimize that in epsilon you would actually be running
+[0:17:08] epsilon you would actually be running the same algorithm
+[0:17:10] the same algorithm because the canonical gradient of that
+[0:17:12] because the canonical gradient of that squared
+[0:17:13] squared will be the canonical gradient of psi
+[0:17:15] will be the canonical gradient of psi times some a constant but the constant
+[0:17:18] times some a constant but the constant wouldn't matter except you need to know
+[0:17:19] wouldn't matter except you need to know the direction and so
+[0:17:21] the direction and so in the end you are actually during this
+[0:17:23] in the end you are actually during this tmle
+[0:17:24] tmle it is like literally running the
+[0:17:25] it is like literally running the steepest descent over minimizing the
+[0:17:27] steepest descent over minimizing the distance
+[0:17:28] distance from your plug-in estimator fluctuated
+[0:17:31] from your plug-in estimator fluctuated towards psi zero except at some point
+[0:17:35] towards psi zero except at some point you don't know what the sign anymore is
+[0:17:36] you don't know what the sign anymore is and that's exactly the point where the
+[0:17:38] and that's exactly the point where the likelihood is maximized and that's where
+[0:17:39] likelihood is maximized and that's where it stops so you can only gain so much
+[0:17:42] it stops so you can only gain so much but this is what it does in finance
+[0:17:45] but this is what it does in finance samples
+[0:17:46] samples okay so then in the world of tmle you
+[0:17:49] okay so then in the world of tmle you still say okay i need a good initial
+[0:17:51] still say okay i need a good initial estimator
+[0:17:51] estimator and that's where we have proposed height
+[0:17:53] and that's where we have proposed height adaptive lasso is a very powerful
+[0:17:55] adaptive lasso is a very powerful estimator in particular one we need one
+[0:17:56] estimator in particular one we need one which gets this rate into the quarter
+[0:18:00] which gets this rate into the quarter now let's do a little review of what
+[0:18:02] now let's do a little review of what highly depth of lasso is
+[0:18:04] highly depth of lasso is so what we have is we can represent any
+[0:18:07] so what we have is we can represent any multivariate real valued function
+[0:18:09] multivariate real valued function like a function on some kind of cube in
+[0:18:11] like a function on some kind of cube in higher dimensions
+[0:18:13] higher dimensions we can represent it as f of x
+[0:18:16] we can represent it as f of x as an integral of these basis functions
+[0:18:20] as an integral of these basis functions you can they're called splines really
+[0:18:22] you can they're called splines really zero order splines
+[0:18:24] zero order splines and then times the dfu which is the
+[0:18:27] and then times the dfu which is the increment of the function and and
+[0:18:30] increment of the function and and so really what you're doing here you
+[0:18:32] so really what you're doing here you write your function x as this infinite
+[0:18:34] write your function x as this infinite linear combination
+[0:18:35] linear combination of indicator based functions which are
+[0:18:37] of indicator based functions which are defined as this v u x
+[0:18:39] defined as this v u x which is the indicator x bigger than u i
+[0:18:41] which is the indicator x bigger than u i think of u as the not
+[0:18:42] think of u as the not point and it's a function in x and so
+[0:18:45] point and it's a function in x and so it's it's like for if
+[0:18:46] it's it's like for if if you have universe x then this would
+[0:18:49] if you have universe x then this would be like indicator
+[0:18:50] be like indicator x bigger than a cup so it's a function
+[0:18:52] x bigger than a cup so it's a function which goes from zero to one
+[0:18:54] which goes from zero to one at the null point but if x is two
+[0:18:56] at the null point but if x is two dimensional you also have indicator x
+[0:18:58] dimensional you also have indicator x one bigger than u one times indicator x
+[0:19:00] one bigger than u one times indicator x two bigger than u two
+[0:19:01] two bigger than u two but you also have because you're also
+[0:19:03] but you also have because you're also integrating over null points along the
+[0:19:04] integrating over null points along the edges
+[0:19:05] edges and that's where they become universal
+[0:19:06] and that's where they become universal indicators so they become also indicated
+[0:19:08] indicators so they become also indicated x one bigger than u1 and
+[0:19:10] x one bigger than u1 and separate indicator x2 bigger than u2 so
+[0:19:13] separate indicator x2 bigger than u2 so you get
+[0:19:13] you get all these one-way two-way freeway up to
+[0:19:16] all these one-way two-way freeway up to the way
+[0:19:17] the way tensor products of these indicator base
+[0:19:19] tensor products of these indicator base functions they're all in there
+[0:19:20] functions they're all in there and your function can be exactly written
+[0:19:23] and your function can be exactly written like this infinite linear combination
+[0:19:25] like this infinite linear combination where the coefficients are the actual
+[0:19:27] where the coefficients are the actual increments of the function
+[0:19:30] increments of the function and so what we do we define the
+[0:19:32] and so what we do we define the variation of the function
+[0:19:34] variation of the function as this integral of all these increments
+[0:19:37] as this integral of all these increments you know is the integral of the absolute
+[0:19:40] you know is the integral of the absolute value of the dfu
+[0:19:41] value of the dfu and these are this is increments in in
+[0:19:43] and these are this is increments in in both the full dimension but also in
+[0:19:44] both the full dimension but also in lower dimensions because again we also
+[0:19:46] lower dimensions because again we also go over the edges of this
+[0:19:48] go over the edges of this high animation cube which are planes
+[0:19:50] high animation cube which are planes lower dimensional plates and even lines
+[0:19:53] lower dimensional plates and even lines so the conclusion is you can write any
+[0:19:56] so the conclusion is you can write any function
+[0:19:56] function which is cadillac right continuous left
+[0:19:58] which is cadillac right continuous left hand limit as an
+[0:20:00] hand limit as an infinite linear combination of tensor
+[0:20:02] infinite linear combination of tensor products of these indicator
+[0:20:04] products of these indicator really spline basis functions and where
+[0:20:06] really spline basis functions and where the l1 norm
+[0:20:08] the l1 norm is actually the variation of the
+[0:20:09] is actually the variation of the function is how merchant goes up and
+[0:20:11] function is how merchant goes up and down
+[0:20:16] so that means with this representation we can say okay
+[0:20:17] we can say okay many of our functional parameters like
+[0:20:19] many of our functional parameters like conditional densities conditional
+[0:20:21] conditional densities conditional hazards and conditional
+[0:20:22] hazards and conditional means they all can be written often we
+[0:20:25] means they all can be written often we do this right like think about
+[0:20:28] do this right like think about density can be expressed in terms of one
+[0:20:30] density can be expressed in terms of one hazard for example and the hazard can be
+[0:20:31] hazard for example and the hazard can be written as e to the power of some linear
+[0:20:33] written as e to the power of some linear combination
+[0:20:34] combination of basis functions so that linear
+[0:20:36] of basis functions so that linear combination is now your function
+[0:20:37] combination is now your function f and similar with logistic regression
+[0:20:39] f and similar with logistic regression right we take the logic
+[0:20:41] right we take the logic of your probability and that becomes a
+[0:20:42] of your probability and that becomes a freely modal thing which we write as
+[0:20:44] freely modal thing which we write as beta x
+[0:20:45] beta x so that becomes then again our linear
+[0:20:46] so that becomes then again our linear combination so you can parametrize many
+[0:20:49] combination so you can parametrize many functional parameters of all of them
+[0:20:50] functional parameters of all of them really
+[0:20:51] really in terms of this kind of freely varying
+[0:20:55] in terms of this kind of freely varying catholic function which then is modeled
+[0:20:57] catholic function which then is modeled with this big infinite linear
+[0:20:58] with this big infinite linear combination of base functions
+[0:21:00] combination of base functions so now you can define a loss function
+[0:21:03] so now you can define a loss function like the usual squared error or more
+[0:21:04] like the usual squared error or more likelihood whatever it is
+[0:21:06] likelihood whatever it is and we take the empirical mean of that
+[0:21:08] and we take the empirical mean of that loss and we optimize it we minimize it
+[0:21:10] loss and we optimize it we minimize it over all these functions
+[0:21:12] over all these functions f so all catholic functions diff and
+[0:21:13] f so all catholic functions diff and variation are smaller than
+[0:21:15] variation are smaller than some constant now since every function
+[0:21:18] some constant now since every function can be represented as a linear
+[0:21:20] can be represented as a linear combination of the base functions it
+[0:21:21] combination of the base functions it becomes really
+[0:21:22] becomes really a loss so problem in the sense that you
+[0:21:25] a loss so problem in the sense that you are minimizing an empirical mean
+[0:21:27] are minimizing an empirical mean over a vector beta very high dimensional
+[0:21:30] over a vector beta very high dimensional vector because we are putting in
+[0:21:31] vector because we are putting in lots of basis functions uh to really
+[0:21:34] lots of basis functions uh to really make the full approximation
+[0:21:35] make the full approximation and you just minimize this function over
+[0:21:38] and you just minimize this function over a beta vector under which the l1 norm
+[0:21:40] a beta vector under which the l1 norm is constrained because that's a
+[0:21:42] is constrained because that's a variation and then you choose
+[0:21:44] variation and then you choose that album with cross-validation so it's
+[0:21:46] that album with cross-validation so it's really like the regular glam net right
+[0:21:48] really like the regular glam net right that's effect our function we often use
+[0:21:51] that's effect our function we often use to program these things for all kinds of
+[0:21:53] to program these things for all kinds of functional
+[0:21:54] functional parameters and but it just happens to be
+[0:21:57] parameters and but it just happens to be with a lot of data functions now for
+[0:21:59] with a lot of data functions now for example
+[0:22:00] example we can therefore fit the nuisance
+[0:22:01] we can therefore fit the nuisance parameters for for the average human
+[0:22:03] parameters for for the average human effect problem
+[0:22:04] effect problem like the conditional probability of
+[0:22:06] like the conditional probability of death as a function of the treatment and
+[0:22:07] death as a function of the treatment and the coherence and the propensity for we
+[0:22:08] the coherence and the propensity for we can all fit them
+[0:22:10] can all fit them with this highly debt with loss so uh
+[0:22:13] with this highly debt with loss so uh regression
+[0:22:14] regression with n times two to the power d basis
+[0:22:16] with n times two to the power d basis functions
+[0:22:17] functions and then choose the l1 norm with cross
+[0:22:19] and then choose the l1 norm with cross validation
+[0:22:20] validation and then you say okay that's nice but
+[0:22:22] and then you say okay that's nice but how good is this estimating or this
+[0:22:24] how good is this estimating or this estimator has actually a rate of
+[0:22:26] estimator has actually a rate of convergence in moles based dissimilarity
+[0:22:28] convergence in moles based dissimilarity which is typically like l2 norms
+[0:22:30] which is typically like l2 norms squares or coolback lightner dissimilar
+[0:22:32] squares or coolback lightner dissimilar which again behaves like an l2 number
+[0:22:34] which again behaves like an l2 number squared
+[0:22:34] squared the rate of convergence if you take the
+[0:22:37] the rate of convergence if you take the square root of it is n to the minus one
+[0:22:39] square root of it is n to the minus one third times log n to the power of d over
+[0:22:42] third times log n to the power of d over two
+[0:22:42] two so in whole space this similarity is
+[0:22:43] so in whole space this similarity is always quadratic so it becomes then n to
+[0:22:45] always quadratic so it becomes then n to the minus two thirds times log n to the
+[0:22:47] the minus two thirds times log n to the power d
+[0:22:48] power d so anyway the rate of convergence is
+[0:22:49] so anyway the rate of convergence is there for n to the minus one third up to
+[0:22:51] there for n to the minus one third up to log n vectors so you see that the
+[0:22:53] log n vectors so you see that the dimension has very little impact on the
+[0:22:54] dimension has very little impact on the rate of convergence
+[0:22:56] rate of convergence and therefore your second or the
+[0:22:57] and therefore your second or the remainder think about the a t
+[0:22:59] remainder think about the a t can be bounded by causing swats and will
+[0:23:02] can be bounded by causing swats and will actually starts behaving like n to the
+[0:23:03] actually starts behaving like n to the minus two thirds
+[0:23:04] minus two thirds which is good because if i blow it up
+[0:23:06] which is good because if i blow it up with root n it still goes to zero
+[0:23:08] with root n it still goes to zero so as a consequence a tmle that uses
+[0:23:10] so as a consequence a tmle that uses this initial estimator and whole mle
+[0:23:12] this initial estimator and whole mle will be isotopically efficient uh only
+[0:23:15] will be isotopically efficient uh only assuming that these true nutrients
+[0:23:17] assuming that these true nutrients functions are catalytic and a finite
+[0:23:18] functions are catalytic and a finite variation
+[0:23:20] variation so that's what this example is for the
+[0:23:22] so that's what this example is for the treatment specific mean we can now make
+[0:23:23] treatment specific mean we can now make the claim that if we use tmle and used
+[0:23:25] the claim that if we use tmle and used as initial estimator highly depth of
+[0:23:27] as initial estimator highly depth of lasso
+[0:23:28] lasso for the propensity square and the
+[0:23:29] for the propensity square and the outcome regression and we've just
+[0:23:31] outcome regression and we've just assumed the positivity assumption
+[0:23:33] assumed the positivity assumption right that at least we have support for
+[0:23:35] right that at least we have support for this parameter
+[0:23:36] this parameter then all we need is that these outcome
+[0:23:38] then all we need is that these outcome regressions and these propensity scores
+[0:23:40] regressions and these propensity scores are catalog functions which
+[0:23:41] are catalog functions which is just they can even have jumps they
+[0:23:43] is just they can even have jumps they just have to be right continuous left
+[0:23:45] just have to be right continuous left and limit and they need to have finite
+[0:23:46] and limit and they need to have finite variation
+[0:23:47] variation and then the estimator is asymptotically
+[0:23:50] and then the estimator is asymptotically efficient
+[0:23:52] efficient okay you might say that's nice so stop
+[0:23:54] okay you might say that's nice so stop there
+[0:23:55] there that's great asymptotically that's great
+[0:23:57] that's great asymptotically that's great but let's not forget in finite samples
+[0:24:00] but let's not forget in finite samples the distance between the whole estimator
+[0:24:02] the distance between the whole estimator and this true function can still be
+[0:24:04] and this true function can still be large
+[0:24:05] large because there's a constant in front of
+[0:24:06] because there's a constant in front of this rate and this constant gets worse
+[0:24:08] this rate and this constant gets worse depending on the dimension
+[0:24:09] depending on the dimension so this is still a very serious issue in
+[0:24:11] so this is still a very serious issue in finding symbols
+[0:24:12] finding symbols that remainder might really become
+[0:24:14] that remainder might really become dominating thing
+[0:24:15] dominating thing matters and therefore your normal
+[0:24:17] matters and therefore your normal approximation might not be there
+[0:24:19] approximation might not be there for a finite sample therefore we are
+[0:24:22] for a finite sample therefore we are interested in seeing can we do better
+[0:24:24] interested in seeing can we do better can we create and that's where we talk
+[0:24:26] can we create and that's where we talk about high order timely
+[0:24:28] about high order timely to make that remainder better instead of
+[0:24:29] to make that remainder better instead of second order let's make it third order
+[0:24:31] second order let's make it third order is that possible
+[0:24:38] so so here's the idea really the basic idea so think about
+[0:24:41] really the basic idea so think about the tmle right we have this p until the
+[0:24:44] the tmle right we have this p until the one picot that's the teamly update which
+[0:24:46] one picot that's the teamly update which takes this initial estimator p and then
+[0:24:48] takes this initial estimator p and then does this teamily update along this
+[0:24:50] does this teamily update along this least favorable path
+[0:24:51] least favorable path and that timely update means you have
+[0:24:53] and that timely update means you have this app strong and that needs to be
+[0:24:54] this app strong and that needs to be fitted with an mle
+[0:24:56] fitted with an mle so that's what i define here as p until
+[0:24:58] so that's what i define here as p until the one p
+[0:24:59] the one p as this stimulates plug that into psi
+[0:25:01] as this stimulates plug that into psi this is the plug into emily
+[0:25:03] this is the plug into emily this is the plug-in timing when used as
+[0:25:05] this is the plug-in timing when used as initial p
+[0:25:06] initial p i call this now a parameter so i'm
+[0:25:08] i call this now a parameter so i'm actually going to think of it as a
+[0:25:10] actually going to think of it as a parameter in the initial
+[0:25:12] parameter in the initial so this i call it psi n1p
+[0:25:15] so this i call it psi n1p and then i say so psi m1 p0
+[0:25:18] and then i say so psi m1 p0 is actually itself a target parameter we
+[0:25:21] is actually itself a target parameter we call it the first order fluctuate the
+[0:25:23] call it the first order fluctuate the target parameter
+[0:25:24] target parameter and when you think about the role of the
+[0:25:26] and when you think about the role of the initial what do you want
+[0:25:28] initial what do you want you are going to plug in this initial in
+[0:25:30] you are going to plug in this initial in this mapping
+[0:25:31] this mapping psi and 1 so you want the initial to be
+[0:25:34] psi and 1 so you want the initial to be a good plug-in estimator of psi n1
+[0:25:37] a good plug-in estimator of psi n1 so therefore i say it makes sense to use
+[0:25:39] so therefore i say it makes sense to use as initial estimator p
+[0:25:40] as initial estimator p in the first order team lead the actual
+[0:25:43] in the first order team lead the actual tmle
+[0:25:44] tmle of this parameter so in other words this
+[0:25:47] of this parameter so in other words this is a new parameter
+[0:25:48] is a new parameter let's now construct a great plugin
+[0:25:50] let's now construct a great plugin estimator for that and we know teamily
+[0:25:52] estimator for that and we know teamily has these properties
+[0:25:53] has these properties so we replace the initial estimator in
+[0:25:56] so we replace the initial estimator in the theme leader p
+[0:25:57] the theme leader p by antimony of this new parameter
+[0:26:00] by antimony of this new parameter this fluctuate problem and then you get
+[0:26:03] this fluctuate problem and then you get this
+[0:26:04] this psi which first does the team use the
+[0:26:06] psi which first does the team use the initial estimator
+[0:26:07] initial estimator constructs the teamily of this psi cyan
+[0:26:09] constructs the teamily of this psi cyan well that becomes then the initial
+[0:26:11] well that becomes then the initial estimate in the usual timily
+[0:26:13] estimate in the usual timily and so you get this kind of sequential
+[0:26:15] and so you get this kind of sequential application of team lease where the
+[0:26:17] application of team lease where the first you do a team lead that becomes
+[0:26:18] first you do a team lead that becomes the initial estimator for the next team
+[0:26:20] the initial estimator for the next team link and small
+[0:26:21] link and small so this can be generalized to cave order
+[0:26:23] so this can be generalized to cave order now because
+[0:26:24] now because the team leap of psi and one has its own
+[0:26:27] the team leap of psi and one has its own initial estimate and why
+[0:26:28] initial estimate and why you can say again hey let's make taylor
+[0:26:30] you can say again hey let's make taylor that towards its goal
+[0:26:31] that towards its goal and then you define the parameter psi
+[0:26:33] and then you define the parameter psi and two p and so on
+[0:26:35] and two p and so on so in this way the initial estimator is
+[0:26:37] so in this way the initial estimator is tailored towards its goal
+[0:26:39] tailored towards its goal to estimate psi and one p0 well
+[0:26:45] to estimate psi and one p0 well okay so that's is the net is a natural
+[0:26:47] okay so that's is the net is a natural idea
+[0:26:48] idea let's say okay now i have targeted my
+[0:26:50] let's say okay now i have targeted my initial estimate for team lead for the
+[0:26:52] initial estimate for team lead for the purpose
+[0:26:52] purpose what it is there is actually a problem
+[0:26:54] what it is there is actually a problem because
+[0:26:55] because for to apply the team lead to this
+[0:26:57] for to apply the team lead to this parameter i need to establish this
+[0:26:59] parameter i need to establish this pathways differentiable
+[0:27:00] pathways differentiable now it has dependence on p in two places
+[0:27:03] now it has dependence on p in two places it depends on the initial here right in
+[0:27:05] it depends on the initial here right in this least favorable path there's the
+[0:27:07] this least favorable path there's the initial
+[0:27:08] initial and there's the epsilon which is itself
+[0:27:10] and there's the epsilon which is itself don't maximize with epsilon n1p
+[0:27:13] don't maximize with epsilon n1p so it also depends on p now this one is
+[0:27:15] so it also depends on p now this one is very smooth
+[0:27:16] very smooth there's no problem there but it's the
+[0:27:18] there's no problem there but it's the mle
+[0:27:20] mle in p which is in a way also smooth
+[0:27:22] in p which is in a way also smooth because it's just like a
+[0:27:23] because it's just like a maximum likely to longer parametric
+[0:27:25] maximum likely to longer parametric model however because of the fact we use
+[0:27:27] model however because of the fact we use here the empirical
+[0:27:28] here the empirical you cannot formally establish the
+[0:27:30] you cannot formally establish the pathways differentiability because you
+[0:27:32] pathways differentiability because you need then that's some rather liquid
+[0:27:34] need then that's some rather liquid derivative dpn over dp should exist it
+[0:27:36] derivative dpn over dp should exist it shouldn't blow up
+[0:27:38] shouldn't blow up and and that's why you don't get the
+[0:27:39] and and that's why you don't get the pathways differentiability
+[0:27:42] pathways differentiability however then we can say oh well what is
+[0:27:44] however then we can say oh well what is the idea of pn
+[0:27:45] the idea of pn when you maximize the likelihood right
+[0:27:47] when you maximize the likelihood right pn is the empirical
+[0:27:48] pn is the empirical which is nothing other than an npmle why
+[0:27:51] which is nothing other than an npmle why not replace the npmle
+[0:27:53] not replace the npmle by our whole mle which is also an mla
+[0:27:56] by our whole mle which is also an mla right that's a model based
+[0:27:57] right that's a model based mle so now we're going to replace our
+[0:27:59] mle so now we're going to replace our mle step by maximizing the likelihood
+[0:28:02] mle step by maximizing the likelihood instead of over the empirical likelihood
+[0:28:04] instead of over the empirical likelihood we take the smooth regularized
+[0:28:05] we take the smooth regularized likelihood which replaces
+[0:28:07] likelihood which replaces p n by p until
+[0:28:10] p n by p until the whole emily and we know we have
+[0:28:13] the whole emily and we know we have proven right if you
+[0:28:14] proven right if you didn't undersch move the whole emily so
+[0:28:15] didn't undersch move the whole emily so you choose the l1 or larger and larger
+[0:28:18] you choose the l1 or larger and larger you can actually show it's can it starts
+[0:28:20] you can actually show it's can it starts acting like a regular
+[0:28:22] acting like a regular mpmle it solves all these core equations
+[0:28:24] mpmle it solves all these core equations and
+[0:28:25] and even uniformly over a large class
+[0:28:29] even uniformly over a large class and also to be noted for components of
+[0:28:31] and also to be noted for components of the initial estimator that are fitted
+[0:28:32] the initial estimator that are fitted with the empirical measure
+[0:28:34] with the empirical measure we can set the p until the component to
+[0:28:37] we can set the p until the component to the empirical measure as well
+[0:28:38] the empirical measure as well so we don't need any smoothing for
+[0:28:40] so we don't need any smoothing for certain components which already are
+[0:28:42] certain components which already are estimated empirically
+[0:28:44] estimated empirically it's only for the components where we
+[0:28:46] it's only for the components where we will apply smoothing
+[0:28:47] will apply smoothing such as machine learning once we have
+[0:28:50] such as machine learning once we have done this with this little twist
+[0:28:53] done this with this little twist we have now that our psy fluctuated
+[0:28:57] we have now that our psy fluctuated target prime is now pathways
+[0:28:58] target prime is now pathways differentiable it has now economical
+[0:29:00] differentiable it has now economical grains i call it d2
+[0:29:01] grains i call it d2 and it has a corresponding exact
+[0:29:04] and it has a corresponding exact remainder
+[0:29:06] remainder and so now we are ready now we say okay
+[0:29:07] and so now we are ready now we say okay now i can construct a least favorable
+[0:29:09] now i can construct a least favorable path
+[0:29:10] path through p which targets this psi
+[0:29:13] through p which targets this psi n1 this fluctuate the target parameter
+[0:29:16] n1 this fluctuate the target parameter and
+[0:29:16] and i can do the teamily so i do the little
+[0:29:18] i can do the teamily so i do the little emily except i do it regularized with
+[0:29:20] emily except i do it regularized with respect to this
+[0:29:21] respect to this whole emily it's a little smooth one and
+[0:29:24] whole emily it's a little smooth one and i construct this plug this
+[0:29:28] i construct this plug this i make that the initial estimator for
+[0:29:30] i make that the initial estimator for the first opportunity
+[0:29:32] the first opportunity and i plug it in and this is called the
+[0:29:34] and i plug it in and this is called the second order
+[0:29:35] second order timoly so that's uh the overall idea
+[0:29:39] timoly so that's uh the overall idea and and i think this is a moment for a
+[0:29:42] and and i think this is a moment for a few questions
+[0:29:43] few questions uh if if there are any uh before i go
+[0:29:46] uh if if there are any uh before i go dive
+[0:29:46] dive into why this is such a good idea and
+[0:29:49] into why this is such a good idea and why it really helps
+[0:29:50] why it really helps to reduce the bias
+[0:29:54] to reduce the bias mark um so there's a a question in the q
+[0:29:57] mark um so there's a a question in the q a that's been answered by
+[0:29:59] a that's been answered by uh ze but maybe it's uh it's a broader
+[0:30:02] uh ze but maybe it's uh it's a broader interest so
+[0:30:02] interest so um what type of functions fail to have
+[0:30:06] um what type of functions fail to have finite sectional variation in moderate
+[0:30:09] finite sectional variation in moderate high dimensions yeah it's it's
+[0:30:13] high dimensions yeah it's it's i mean to start with you need to realize
+[0:30:16] i mean to start with you need to realize that
+[0:30:16] that any kind of continuous function
+[0:30:20] any kind of continuous function you know is essentially included in the
+[0:30:22] you know is essentially included in the class of
+[0:30:24] class of all catalog functions with finite
+[0:30:25] all catalog functions with finite sectional variation except if this
+[0:30:27] sectional variation except if this continuous function gets completely
+[0:30:28] continuous function gets completely crazy
+[0:30:29] crazy right when it goes up and down forever
+[0:30:32] right when it goes up and down forever so that's a huge plus
+[0:30:33] so that's a huge plus already on top of that it can have jumps
+[0:30:37] already on top of that it can have jumps right catholic functions are allowed
+[0:30:39] right catholic functions are allowed just like cdfs human disease you can't
+[0:30:40] just like cdfs human disease you can't have jumps
+[0:30:41] have jumps so it can have you can have except the
+[0:30:44] so it can have you can have except the jumps have to be around
+[0:30:47] jumps have to be around what i think of as rectangular
+[0:30:48] what i think of as rectangular discontinuity lines so in other words i
+[0:30:50] discontinuity lines so in other words i cannot have like some kind of circle
+[0:30:52] cannot have like some kind of circle jumping up out of my function
+[0:30:54] jumping up out of my function but if it if the discontinuity happens
+[0:30:56] but if it if the discontinuity happens along lines
+[0:30:57] along lines the x's then it works right so there's
+[0:31:00] the x's then it works right so there's there's the type of discontinues are
+[0:31:02] there's the type of discontinues are controlled
+[0:31:04] controlled and that's where so that's the kind of
+[0:31:05] and that's where so that's the kind of things you start where where it would
+[0:31:07] things you start where where it would not
+[0:31:08] not be cat-like and and and your running
+[0:31:10] be cat-like and and and your running problems
+[0:31:11] problems but the the variation arm is really yeah
+[0:31:14] but the the variation arm is really yeah that is bounded is kind of what you
+[0:31:15] that is bounded is kind of what you expect in the real world right you don't
+[0:31:17] expect in the real world right you don't expect necessarily
+[0:31:19] expect necessarily maybe some exceptions that there are
+[0:31:20] maybe some exceptions that there are functions which just keeps going on and
+[0:31:22] functions which just keeps going on and on and on
+[0:31:23] on and on especially if we focus on functions on
+[0:31:25] especially if we focus on functions on part support and i should say that i
+[0:31:27] part support and i should say that i always do that
+[0:31:28] always do that we always work on functional part
+[0:31:29] we always work on functional part support because you know once you get to
+[0:31:30] support because you know once you get to the whole line
+[0:31:31] the whole line it's really getting very difficult uh so
+[0:31:34] it's really getting very difficult uh so yes
+[0:31:35] yes yeah that makes sense sense thanks um
+[0:31:38] yeah that makes sense sense thanks um another question that's spotted
+[0:31:39] another question that's spotted in in the chat is about the um the input
+[0:31:42] in in the chat is about the um the input of the algorithms in particular
+[0:31:44] of the algorithms in particular um one is whether the you have to
+[0:31:47] um one is whether the you have to specify
+[0:31:47] specify the canonical gradient or whether it's
+[0:31:49] the canonical gradient or whether it's something that can be obtained
+[0:31:51] something that can be obtained numerically yeah that's a very good
+[0:31:53] numerically yeah that's a very good question and actually in the tech report
+[0:31:55] question and actually in the tech report which is on the front page which is
+[0:31:57] which is on the front page which is really what it's based on we just made a
+[0:31:58] really what it's based on we just made a tech report yesterday there's whole
+[0:32:00] tech report yesterday there's whole sections
+[0:32:01] sections we have written about exactly that how
+[0:32:04] we have written about exactly that how we can
+[0:32:05] we can do the computation with purely numerical
+[0:32:07] do the computation with purely numerical algorithms of these canonical gradients
+[0:32:09] algorithms of these canonical gradients because you can represent
+[0:32:10] because you can represent these canonical gradients as also linear
+[0:32:12] these canonical gradients as also linear combinations of essentially spline
+[0:32:13] combinations of essentially spline latest functions
+[0:32:14] latest functions except transform through this corporate
+[0:32:16] except transform through this corporate so and then it becomes nothing else than
+[0:32:18] so and then it becomes nothing else than some kind of regression problem
+[0:32:20] some kind of regression problem and in fact it's all about cholesky
+[0:32:21] and in fact it's all about cholesky decomposition and inversion of a
+[0:32:23] decomposition and inversion of a symmetric matrix
+[0:32:25] symmetric matrix or regression there are two ways to do
+[0:32:26] or regression there are two ways to do it so in the end all of this can be
+[0:32:29] it so in the end all of this can be learned these canonical range can be
+[0:32:30] learned these canonical range can be learned with pure
+[0:32:32] learned with pure computational regression or
+[0:32:35] computational regression or computational
+[0:32:36] computational numerical routines such as computing and
+[0:32:38] numerical routines such as computing and colossal decomposition
+[0:32:39] colossal decomposition so this can be completely brought into
+[0:32:41] so this can be completely brought into the world where you don't even have to
+[0:32:43] the world where you don't even have to know
+[0:32:43] know about hilbert's phase and projections
+[0:32:45] about hilbert's phase and projections and all that even though that's what we
+[0:32:46] and all that even though that's what we have been doing in the past
+[0:32:48] have been doing in the past so i really see that in the future we
+[0:32:49] so i really see that in the future we are moving exactly towards a world
+[0:32:52] are moving exactly towards a world where we start bringing in the power of
+[0:32:54] where we start bringing in the power of the computer to just
+[0:32:55] the computer to just compute these approximations and they
+[0:32:57] compute these approximations and they also have advantages by the way
+[0:32:58] also have advantages by the way uh work with z wing where we are
+[0:33:02] uh work with z wing where we are seeing them is that by representing the
+[0:33:04] seeing them is that by representing the efficient hemisphere as a nice
+[0:33:06] efficient hemisphere as a nice closed form object just a linear
+[0:33:07] closed form object just a linear combination of basis functions you get
+[0:33:09] combination of basis functions you get real advantages
+[0:33:10] real advantages because you can evaluate even at
+[0:33:12] because you can evaluate even at observations outside your
+[0:33:14] observations outside your you know where you had your head
+[0:33:15] you know where you had your head observations so you had like a new
+[0:33:16] observations so you had like a new observations and
+[0:33:17] observations and and so it really and it also has a
+[0:33:20] and so it really and it also has a stabilization effect so i really think
+[0:33:22] stabilization effect so i really think uh yeah that's an excellent question so
+[0:33:26] uh yeah that's an excellent question so thank you yeah um yeah thanks i'll i'll
+[0:33:29] thank you yeah um yeah thanks i'll i'll uh
+[0:33:29] uh i'll let you continue with your talk
+[0:33:31] i'll let you continue with your talk thanks
+[0:33:32] thanks okay yeah so um
+[0:33:40] during so the effect so to understand more theoretically so
+[0:33:42] so to understand more theoretically so yeah so this sounds fun right
+[0:33:44] yeah so this sounds fun right it's a good idea to make this initial
+[0:33:46] it's a good idea to make this initial estimate tailored for its goals so just
+[0:33:48] estimate tailored for its goals so just make it intimately itself obviously of
+[0:33:51] make it intimately itself obviously of what it's actually
+[0:33:51] what it's actually used for however let's try we need some
+[0:33:54] used for however let's try we need some theory right that this is truly a good
+[0:33:56] theory right that this is truly a good idea now the first fear is
+[0:33:58] idea now the first fear is it's actually you can define what i call
+[0:34:01] it's actually you can define what i call the exact total remainder so in other
+[0:34:03] the exact total remainder so in other words write down the first order team
+[0:34:05] words write down the first order team league
+[0:34:07] league an update of an initial p right and we
+[0:34:09] an update of an initial p right and we want to understand how to choose p
+[0:34:11] want to understand how to choose p why it's such a good idea to make that
+[0:34:13] why it's such a good idea to make that the second order timely update
+[0:34:16] the second order timely update so write this minus psi p0 and subtract
+[0:34:18] so write this minus psi p0 and subtract the empirical process
+[0:34:20] the empirical process at the first order common grain using
+[0:34:21] at the first order common grain using the true p0 so this is like a perfect
+[0:34:24] the true p0 so this is like a perfect you know that's the total remainder the
+[0:34:26] you know that's the total remainder the only twist is that it's p
+[0:34:27] only twist is that it's p until and not pn but that's where the
+[0:34:29] until and not pn but that's where the under smoothing happens and then this
+[0:34:31] under smoothing happens and then this starts behaving like pn minus p0 so this
+[0:34:33] starts behaving like pn minus p0 so this is really what you care about you want
+[0:34:35] is really what you care about you want that to be small
+[0:34:36] that to be small that's the remainder right after that
+[0:34:38] that's the remainder right after that you just have an empirical process
+[0:34:39] you just have an empirical process empirical meaning this term actually
+[0:34:42] empirical meaning this term actually equals the
+[0:34:43] equals the remainder r1 right we already had the
+[0:34:46] remainder r1 right we already had the exact remainder
+[0:34:46] exact remainder and then this additional empirical
+[0:34:48] and then this additional empirical process term so that's the remainder you
+[0:34:50] process term so that's the remainder you can think of this as a function in the
+[0:34:52] can think of this as a function in the initial p
+[0:34:53] initial p by changing the initial for the first
+[0:34:55] by changing the initial for the first order table i might make this smaller or
+[0:34:57] order table i might make this smaller or bigger
+[0:34:58] bigger and we like to choose an initial which
+[0:35:00] and we like to choose an initial which makes this as small as possible
+[0:35:02] makes this as small as possible then comes that we that when you work
+[0:35:05] then comes that we that when you work out you can actually show that this
+[0:35:06] out you can actually show that this exact total remainder can be written
+[0:35:10] exact total remainder can be written as exactly this fluctuated target
+[0:35:12] as exactly this fluctuated target problem psi n1p
+[0:35:13] problem psi n1p minus psi one p0 plus something which
+[0:35:16] minus psi one p0 plus something which doesn't depend on p
+[0:35:17] doesn't depend on p it's like this is a perfect remainder
+[0:35:19] it's like this is a perfect remainder using as an initial p0 for the team lead
+[0:35:20] using as an initial p0 for the team lead relative to p0
+[0:35:21] relative to p0 has nothing to do with the initial so
+[0:35:23] has nothing to do with the initial so what you see when you want to minimize
+[0:35:26] what you see when you want to minimize the exact total remainder it's all about
+[0:35:28] the exact total remainder it's all about this fluctuated target prime
+[0:35:30] this fluctuated target prime approximating
+[0:35:31] approximating its its target estimate psi n1 p0
+[0:35:34] its its target estimate psi n1 p0 so now you see why it's a good idea to
+[0:35:36] so now you see why it's a good idea to use there to make this
+[0:35:38] use there to make this as close as possible to that so
+[0:35:40] as close as possible to that so essentially choose p to optimize this to
+[0:35:42] essentially choose p to optimize this to minimize this difference
+[0:35:44] minimize this difference and that's precisely what team only does
+[0:35:48] and that's precisely what team only does and so formally what happens if i now
+[0:35:51] and so formally what happens if i now replace here cyan one p by a timely of
+[0:35:54] replace here cyan one p by a timely of this
+[0:35:55] this then this whole thing this here starts
+[0:35:57] then this whole thing this here starts behaving like a team lee so that means
+[0:35:59] behaving like a team lee so that means it behaves like we know with team
+[0:36:00] it behaves like we know with team release right we have this key identity
+[0:36:02] release right we have this key identity we then know that the psi and one of its
+[0:36:05] we then know that the psi and one of its stimuli minus sine one p zero
+[0:36:07] stimuli minus sine one p zero behaves like this empirical process of
+[0:36:09] behaves like this empirical process of the second order efficient function
+[0:36:10] the second order efficient function plus an exact new remainder the
+[0:36:13] plus an exact new remainder the remainder for that parameter
+[0:36:14] remainder for that parameter which actually happens to be third order
+[0:36:16] which actually happens to be third order so the exact total remainder becomes
+[0:36:20] so the exact total remainder becomes then i can plug it in right for for this
+[0:36:23] then i can plug it in right for for this because remember here was the formula
+[0:36:25] because remember here was the formula so i can now plug this in and that
+[0:36:27] so i can now plug this in and that becomes this and then i still have that
+[0:36:29] becomes this and then i still have that perfect remainder which had just only p0
+[0:36:31] perfect remainder which had just only p0 in it
+[0:36:32] in it so now you have replaced this remainder
+[0:36:36] so now you have replaced this remainder from regular initial p by using for the
+[0:36:39] from regular initial p by using for the initial in the first routinely this
+[0:36:41] initial in the first routinely this second order team lead date we actually
+[0:36:43] second order team lead date we actually replaced it by
+[0:36:44] replaced it by um adding an additional empirical
+[0:36:46] um adding an additional empirical process term
+[0:36:48] process term plus a perfect uh remainder here and
+[0:36:50] plus a perfect uh remainder here and then here comes this new remainder which
+[0:36:52] then here comes this new remainder which is actually going to be third order
+[0:36:54] is actually going to be third order so that's what you now have formula
+[0:36:56] so that's what you now have formula achieved
+[0:36:58] achieved and also some right sorry to interrupt
+[0:37:01] and also some right sorry to interrupt you have around 10 minutes left
+[0:37:02] you have around 10 minutes left yeah that's fine that's great so to
+[0:37:05] yeah that's fine that's great so to summarize
+[0:37:06] summarize when you compute here's the first
+[0:37:08] when you compute here's the first ordered timely minus truth
+[0:37:09] ordered timely minus truth it can be written as this empirical
+[0:37:11] it can be written as this empirical process with the first order input
+[0:37:13] process with the first order input plus an exact total remainder the exact
+[0:37:15] plus an exact total remainder the exact total remainder equals
+[0:37:17] total remainder equals exactly this new parameter sine 1 p
+[0:37:19] exactly this new parameter sine 1 p minus
+[0:37:20] minus sine 1 p 0 plus a perfect remainder
+[0:37:24] sine 1 p 0 plus a perfect remainder and to optimize the exact total
+[0:37:26] and to optimize the exact total remainder you therefore want to
+[0:37:28] remainder you therefore want to make this 18 mle and in fact
+[0:37:31] make this 18 mle and in fact you can show similar with a first order
+[0:37:33] you can show similar with a first order team that if you would run
+[0:37:35] team that if you would run an oracle steepest descent algorithm
+[0:37:37] an oracle steepest descent algorithm optimizing this guy even though you
+[0:37:39] optimizing this guy even though you don't know it because you don't know p0
+[0:37:41] don't know it because you don't know p0 right but suppose you do you do know
+[0:37:43] right but suppose you do you do know easier and you literally say oh this is
+[0:37:44] easier and you literally say oh this is what i want to optimize and p
+[0:37:46] what i want to optimize and p you would run a steepest descent
+[0:37:47] you would run a steepest descent algorithm by every time moving along a
+[0:37:49] algorithm by every time moving along a path
+[0:37:50] path with maximal chains of this right along
+[0:37:52] with maximal chains of this right along the steep is the same
+[0:37:53] the steep is the same you would literally be running exactly
+[0:37:55] you would literally be running exactly in the second or the team only algorithm
+[0:37:57] in the second or the team only algorithm along this
+[0:37:58] along this least favorable of making local moves
+[0:38:00] least favorable of making local moves every time which
+[0:38:01] every time which we call a universal least favorable path
+[0:38:04] we call a universal least favorable path except if you know this guy you would
+[0:38:07] except if you know this guy you would even keep going till the end
+[0:38:09] even keep going till the end with the secondary team lead at the
+[0:38:10] with the secondary team lead at the moment you
+[0:38:12] moment you have maximized your likelihood you stop
+[0:38:14] have maximized your likelihood you stop because the
+[0:38:15] because the the canonical gradient of this guy is a
+[0:38:18] the canonical gradient of this guy is a constant times the economic range of
+[0:38:20] constant times the economic range of this guy
+[0:38:21] this guy and the constant becomes the moment the
+[0:38:22] and the constant becomes the moment the amount likely to maximize that cost you
+[0:38:24] amount likely to maximize that cost you don't know which direction to go anymore
+[0:38:26] don't know which direction to go anymore so that's why that's the moment where
+[0:38:28] so that's why that's the moment where you then stop so but
+[0:38:29] you then stop so but up till that point you literally are
+[0:38:31] up till that point you literally are optimizing the exact total remainder for
+[0:38:33] optimizing the exact total remainder for your given sample
+[0:38:35] your given sample that's what this picture shows this is
+[0:38:38] that's what this picture shows this is again just a simulated data set
+[0:38:40] again just a simulated data set we look at that exact total remainder
+[0:38:42] we look at that exact total remainder along this path
+[0:38:43] along this path right when we at epsilon is zero this is
+[0:38:46] right when we at epsilon is zero this is where
+[0:38:47] where we have an initial the first order team
+[0:38:49] we have an initial the first order team only gets some bias reduction
+[0:38:51] only gets some bias reduction by moving us to the bias the remainder
+[0:38:53] by moving us to the bias the remainder smaller
+[0:38:54] smaller yes but then here comes for absolutely
+[0:38:57] yes but then here comes for absolutely zero for that second order
+[0:38:59] zero for that second order team lead update which is going to pop
+[0:39:01] team lead update which is going to pop through the initial estimate
+[0:39:02] through the initial estimate here we are still getting the first
+[0:39:04] here we are still getting the first order team lead as epsilon moves
+[0:39:07] order team lead as epsilon moves so the initial starts changing we are
+[0:39:09] so the initial starts changing we are getting bias reduction bias reduction so
+[0:39:11] getting bias reduction bias reduction so this remaining gets smaller and smaller
+[0:39:13] this remaining gets smaller and smaller till the point where you know we don't
+[0:39:14] till the point where you know we don't really know what to do anymore that's
+[0:39:16] really know what to do anymore that's where you
+[0:39:16] where you where you then are stuck and that's how
+[0:39:18] where you then are stuck and that's how far you go you can see
+[0:39:20] far you go you can see massive bias reductions happening in
+[0:39:22] massive bias reductions happening in this given sample for this given data
+[0:39:24] this given sample for this given data set
+[0:39:24] set just by changing that initial estimator
+[0:39:27] just by changing that initial estimator fruit is
+[0:39:28] fruit is along this least favorable path and
+[0:39:31] along this least favorable path and here's another example
+[0:39:32] here's another example where actually the first order doesn't
+[0:39:33] where actually the first order doesn't do anything it's just terrible
+[0:39:35] do anything it's just terrible because it's because of a certain
+[0:39:36] because it's because of a certain setting and the second order just
+[0:39:38] setting and the second order just changing the initial estimator
+[0:39:40] changing the initial estimator we still get huge bias production and
+[0:39:43] we still get huge bias production and therefore get this exact remainder
+[0:39:44] therefore get this exact remainder reduced a lot
+[0:39:51] we also get an exact expansion for the second order team ali
+[0:39:52] second order team ali which essentially we already derived but
+[0:39:53] which essentially we already derived but there's a little trick we use
+[0:39:55] there's a little trick we use which links the remainder at p0
+[0:39:58] which links the remainder at p0 to the remainder at p and tilde and then
+[0:40:01] to the remainder at p and tilde and then we get a beautiful exact expansion and
+[0:40:03] we get a beautiful exact expansion and that's this one here
+[0:40:04] that's this one here which says that the second order t milli
+[0:40:06] which says that the second order t milli minus truth so the plug-in estimator
+[0:40:08] minus truth so the plug-in estimator minus truth
+[0:40:10] minus truth is an empirical process of the first
+[0:40:12] is an empirical process of the first order efficient in this function
+[0:40:13] order efficient in this function plus an empirical process of the second
+[0:40:15] plus an empirical process of the second order in order to sufficiently function
+[0:40:17] order in order to sufficiently function of that sine well
+[0:40:18] of that sine well plus perfect remainders right because
+[0:40:19] plus perfect remainders right because this is just the t milli update when you
+[0:40:21] this is just the t milli update when you use this initial p0
+[0:40:23] use this initial p0 so that's really negligible and then
+[0:40:25] so that's really negligible and then finally
+[0:40:26] finally here comes the remainder which is not an
+[0:40:28] here comes the remainder which is not an empirical mean anymore empirical process
+[0:40:30] empirical mean anymore empirical process and that's this difference of the rn2
+[0:40:34] and that's this difference of the rn2 which is the
+[0:40:34] which is the exact remainder for this new parameter
+[0:40:36] exact remainder for this new parameter sine one
+[0:40:38] sine one this is third order and in fact you can
+[0:40:40] this is third order and in fact you can link it to the first order remainder
+[0:40:42] link it to the first order remainder by just writing it as the first order
+[0:40:44] by just writing it as the first order remainder
+[0:40:45] remainder of this sequentially updated initial
+[0:40:47] of this sequentially updated initial relative to p until
+[0:40:49] relative to p until so this is an exact expansion which
+[0:40:51] so this is an exact expansion which involves both an initial estimator
+[0:40:53] involves both an initial estimator and the pn tilde used for the whole
+[0:40:55] and the pn tilde used for the whole emily and it defines this
+[0:40:58] emily and it defines this uh exact expansion and there's also a
+[0:41:00] uh exact expansion and there's also a way to target p until instead of under
+[0:41:02] way to target p until instead of under smoothing you can target it
+[0:41:04] smoothing you can target it to make this more directly behave like
+[0:41:06] to make this more directly behave like an empirical mean
+[0:41:07] an empirical mean so that you get rid of the bias due to
+[0:41:09] so that you get rid of the bias due to the smoothing of piantilla
+[0:41:12] the smoothing of piantilla so that's what this says by
+[0:41:13] so that's what this says by undersmooving the whole emily
+[0:41:15] undersmooving the whole emily these pn tilde means the means on the pn
+[0:41:19] these pn tilde means the means on the pn tilde starts behaving like the empirical
+[0:41:20] tilde starts behaving like the empirical means
+[0:41:21] means and so this becomes more and more
+[0:41:22] and so this becomes more and more negligible and therefore our exact
+[0:41:24] negligible and therefore our exact expansion starts now all being about
+[0:41:26] expansion starts now all being about this which is of course perfect because
+[0:41:28] this which is of course perfect because this is now an empirical mean
+[0:41:29] this is now an empirical mean of mean zero independent random
+[0:41:31] of mean zero independent random variables it just has an additional
+[0:41:32] variables it just has an additional influence
+[0:41:33] influence curve component which is this one which
+[0:41:36] curve component which is this one which actually goes to zero
+[0:41:40] so statistical inference can then be based not just on the first ordinance
+[0:41:42] based not just on the first ordinance function but also on the second order so
+[0:41:44] function but also on the second order so that you can you pick up
+[0:41:45] that you can you pick up the second order term in the remainder
+[0:41:48] the second order term in the remainder in a way you pick it up in the in our
+[0:41:50] in a way you pick it up in the in our asymptote in our normal approximation
+[0:41:52] asymptote in our normal approximation and we're only ignoring a third order
+[0:41:54] and we're only ignoring a third order remainder so that's the advantage that
+[0:41:57] remainder so that's the advantage that you you get from it
+[0:41:58] you you get from it we can generalize this to cave order
+[0:42:00] we can generalize this to cave order teamily
+[0:42:02] teamily very naturally right and then you get
+[0:42:04] very naturally right and then you get that this
+[0:42:05] that this sequential you take compute an initial
+[0:42:07] sequential you take compute an initial estimator you make it
+[0:42:09] estimator you make it you you compute the teamwork and then
+[0:42:12] you you compute the teamwork and then that becomes the initial estimate the
+[0:42:13] that becomes the initial estimate the next email in the next and next and
+[0:42:14] next email in the next and next and finally you're back to the first order
+[0:42:16] finally you're back to the first order team
+[0:42:16] team which uses now this highly targeted
+[0:42:18] which uses now this highly targeted initial estimator
+[0:42:20] initial estimator and then you get as a result that that
+[0:42:22] and then you get as a result that that plug-in timely
+[0:42:24] plug-in timely minus psi p0 is again and sum from js1
+[0:42:27] minus psi p0 is again and sum from js1 to k
+[0:42:28] to k of pure empirical processes little
+[0:42:30] of pure empirical processes little regularized through p and tilde
+[0:42:31] regularized through p and tilde plus perfect remainders and all you're
+[0:42:33] plus perfect remainders and all you're left with beyond this kind of nice
+[0:42:35] left with beyond this kind of nice empirical mean terms
+[0:42:36] empirical mean terms is this r and k plus one which is our k
+[0:42:39] is this r and k plus one which is our k plus one order difference so it's like
+[0:42:41] plus one order difference so it's like an integral of p minus p zero to the
+[0:42:43] an integral of p minus p zero to the power k plus one
+[0:42:45] power k plus one and and again you can relate it to the
+[0:42:47] and and again you can relate it to the first order remainder
+[0:42:48] first order remainder because it happens to be it's the first
+[0:42:50] because it happens to be it's the first order where you keep just targeting and
+[0:42:52] order where you keep just targeting and targeting and targeting it
+[0:42:53] targeting and targeting it sequentially and every time when you
+[0:42:55] sequentially and every time when you target you get a reduction in order you
+[0:42:57] target you get a reduction in order you get it the first becomes second order
+[0:42:59] get it the first becomes second order becomes third and the third comes fourth
+[0:43:00] becomes third and the third comes fourth and so on
+[0:43:02] and so on okay so i want to end the last few
+[0:43:04] okay so i want to end the last few minutes there's some simulations these
+[0:43:06] minutes there's some simulations these are simulations for the treatment
+[0:43:07] are simulations for the treatment specific mean
+[0:43:08] specific mean and here you see for the bias of the
+[0:43:10] and here you see for the bias of the first order team lead buys in the second
+[0:43:12] first order team lead buys in the second order team lead we make the
+[0:43:13] order team lead we make the propensity score enter the quarter
+[0:43:15] propensity score enter the quarter consistent but
+[0:43:16] consistent but qn0 the outcome branch is inconsistent
+[0:43:19] qn0 the outcome branch is inconsistent so in this case you would expect that
+[0:43:21] so in this case you would expect that the first order team really
+[0:43:23] the first order team really should have a skilled bias root and
+[0:43:25] should have a skilled bias root and skill bias that actually increases so
+[0:43:26] skill bias that actually increases so it's not even astral to linear
+[0:43:28] it's not even astral to linear the second order team should have root
+[0:43:31] the second order team should have root and
+[0:43:32] and bias which should become constant so
+[0:43:34] bias which should become constant so it's not perfect
+[0:43:35] it's not perfect asymptotically but actually what you see
+[0:43:37] asymptotically but actually what you see in finite samples is that the bias is
+[0:43:38] in finite samples is that the bias is dramatically reduced by the second order
+[0:43:40] dramatically reduced by the second order team league right you go from
+[0:43:41] team league right you go from 0.72 relative to a standard error so
+[0:43:44] 0.72 relative to a standard error so that means cool within the balls are
+[0:43:45] that means cool within the balls are horrible now
+[0:43:46] horrible now but for the secondary team leader bias
+[0:43:48] but for the secondary team leader bias is still negligible relative to the
+[0:43:49] is still negligible relative to the standard error
+[0:43:50] standard error and therefore you get great coverage and
+[0:43:53] and therefore you get great coverage and all that even in a situation where it's
+[0:43:55] all that even in a situation where it's not even
+[0:43:55] not even theoretically there's still uh
+[0:43:59] theoretically there's still uh too much inconsistency because our third
+[0:44:02] too much inconsistency because our third order term will be exactly n to the
+[0:44:04] order term will be exactly n to the minus half now because we will get the g
+[0:44:06] minus half now because we will get the g n zero minus zero squared
+[0:44:07] n zero minus zero squared so for the secondary team we at least
+[0:44:09] so for the secondary team we at least get and
+[0:44:11] get and get to that level in this case but even
+[0:44:13] get to that level in this case but even in finite samples it actually seems to
+[0:44:15] in finite samples it actually seems to just work
+[0:44:16] just work now here's a situation where both are
+[0:44:18] now here's a situation where both are into the cortical system that means the
+[0:44:19] into the cortical system that means the first order team lead is just not as
+[0:44:21] first order team lead is just not as good linear it has too much it still has
+[0:44:23] good linear it has too much it still has a root and level bias
+[0:44:25] a root and level bias the secondary team should be fine and so
+[0:44:28] the secondary team should be fine and so again you see
+[0:44:29] again you see the bias is indeed staying constant once
+[0:44:31] the bias is indeed staying constant once we scale it at root end
+[0:44:33] we scale it at root end for the first order but for the second
+[0:44:34] for the first order but for the second order team leader buys is you know
+[0:44:36] order team leader buys is you know smaller by effect or
+[0:44:37] smaller by effect or a lot right factor 10 and so on
+[0:44:40] a lot right factor 10 and so on so you get big gains similar for the
+[0:44:43] so you get big gains similar for the integral of the density squared
+[0:44:45] integral of the density squared which is a particular interesting
+[0:44:47] which is a particular interesting problem where the remainders are
+[0:44:48] problem where the remainders are non-forgiving
+[0:44:49] non-forgiving and so that's why i say here second
+[0:44:51] and so that's why i say here second order team
+[0:44:52] order team will replace this top second order
+[0:44:54] will replace this top second order remainder which is always positive
+[0:44:57] remainder which is always positive and therefore hurts not only by a third
+[0:44:59] and therefore hurts not only by a third order remainder but it will also be a
+[0:45:00] order remainder but it will also be a remainder with all that cancellation
+[0:45:02] remainder with all that cancellation going on
+[0:45:03] going on like we have seen with the at problem
+[0:45:05] like we have seen with the at problem right with the double robust there's a
+[0:45:06] right with the double robust there's a lot of cancellation happening in that
+[0:45:08] lot of cancellation happening in that remains not like a square
+[0:45:09] remains not like a square so the squares will be gone and so
+[0:45:11] so the squares will be gone and so that's the benefit
+[0:45:12] that's the benefit now here's simulations dom for this
+[0:45:14] now here's simulations dom for this integral density squared and where you
+[0:45:16] integral density squared and where you see the bias
+[0:45:17] see the bias and here we increase the bias in our
+[0:45:19] and here we increase the bias in our simulations and you
+[0:45:20] simulations and you see here the second order timely and
+[0:45:23] see here the second order timely and then the thunder smooth because we
+[0:45:25] then the thunder smooth because we understood
+[0:45:25] understood the whole emily and you see that as the
+[0:45:28] the whole emily and you see that as the bias
+[0:45:29] bias that we get you know small buys with the
+[0:45:32] that we get you know small buys with the second order team lead
+[0:45:33] second order team lead while the first order team really gets
+[0:45:34] while the first order team really gets worse and worse and worse
+[0:45:37] worse and worse and worse and here's the ratio of bias versus
+[0:45:39] and here's the ratio of bias versus standard error if the bias over the
+[0:45:40] standard error if the bias over the standard error starts converging to one
+[0:45:42] standard error starts converging to one and so on you have terrible coverage
+[0:45:44] and so on you have terrible coverage so you see the first order team will
+[0:45:45] so you see the first order team will leave suffering but then the second
+[0:45:48] leave suffering but then the second order team really pushes it
+[0:45:49] order team really pushes it towards uh you know zero essentially so
+[0:45:52] towards uh you know zero essentially so you get good coverage
+[0:45:54] you get good coverage and here are then some numbers where you
+[0:45:56] and here are then some numbers where you see for example here
+[0:45:58] see for example here you know 1.37 and then you get a whole
+[0:46:01] you know 1.37 and then you get a whole order a bit
+[0:46:01] order a bit better and similar here we go from
+[0:46:05] better and similar here we go from 10 to the minus 3 to a 10 to the minus 5
+[0:46:08] 10 to the minus 3 to a 10 to the minus 5 bias
+[0:46:09] bias which is really a massive reduction in
+[0:46:12] which is really a massive reduction in this problem
+[0:46:14] this problem okay so i enter some concluding remarks
+[0:46:17] okay so i enter some concluding remarks so the cave order team ali allows a
+[0:46:19] so the cave order team ali allows a linear expansion
+[0:46:20] linear expansion with a remainder that is incapable for
+[0:46:22] with a remainder that is incapable for order difference it involves these
+[0:46:23] order difference it involves these empirical
+[0:46:24] empirical p until the minus p of functions
+[0:46:27] p until the minus p of functions so it's a nice it's an uh almost
+[0:46:30] so it's a nice it's an uh almost empirical means
+[0:46:31] empirical means with a little bias due to the whole
+[0:46:32] with a little bias due to the whole emblem but that's controlled by either
+[0:46:34] emblem but that's controlled by either under movement or targeting
+[0:46:36] under movement or targeting uh dramatic reductions and bias due to
+[0:46:38] uh dramatic reductions and bias due to second order team really
+[0:46:40] second order team really are observed in simulations that not
+[0:46:42] are observed in simulations that not only weakens the assumptions on the
+[0:46:44] only weakens the assumptions on the initial estimate and thermally for
+[0:46:45] initial estimate and thermally for isotopic efficient but it has a clear
+[0:46:47] isotopic efficient but it has a clear finite simple impact on bias
+[0:46:49] finite simple impact on bias and improves coverage of combos in the
+[0:46:50] and improves coverage of combos in the walls a particular appealing and
+[0:46:53] walls a particular appealing and estimation problem in which secondary
+[0:46:54] estimation problem in which secondary remainder behaves like squares which we
+[0:46:56] remainder behaves like squares which we also have in causal inference
+[0:46:58] also have in causal inference high-order teamily also opens up a rows
+[0:47:00] high-order teamily also opens up a rows for inferencing problems if the
+[0:47:02] for inferencing problems if the first-order efficient inner script
+[0:47:03] first-order efficient inner script disappears so there are these kind of
+[0:47:05] disappears so there are these kind of problems and now
+[0:47:05] problems and now we can look at that higher order
+[0:47:07] we can look at that higher order expansion and start using that for
+[0:47:08] expansion and start using that for inference
+[0:47:10] inference algebra and pure computational methods
+[0:47:12] algebra and pure computational methods are developed for computing these higher
+[0:47:13] are developed for computing these higher order efficient interval scopes
+[0:47:15] order efficient interval scopes which are very doable it's a
+[0:47:16] which are very doable it's a constructive procedure
+[0:47:18] constructive procedure once you have the first order that gets
+[0:47:19] once you have the first order that gets you the second order once you have the
+[0:47:20] you the second order once you have the second order it gets you the third order
+[0:47:22] second order it gets you the third order and so on
+[0:47:22] and so on and it all can be done through the
+[0:47:24] and it all can be done through the miracle algebra routines
+[0:47:26] miracle algebra routines and i end here and thank you very much
+[0:47:29] and i end here and thank you very much for your attention
+[0:47:31] for your attention uh fantastic thanks for the very
+[0:47:33] uh fantastic thanks for the very interesting talk mark
+[0:47:34] interesting talk mark we're now switching over to the
+[0:47:36] we're now switching over to the discussion we will have alex
+[0:47:38] discussion we will have alex lutky present some slides after that
+[0:47:41] lutky present some slides after that mark will
+[0:47:42] mark will be able to respond so now i'm switching
+[0:47:44] be able to respond so now i'm switching over to alex
+[0:47:46] over to alex alex whenever you're ready i stop share
+[0:47:49] alex whenever you're ready i stop share right
+[0:47:50] right yeah and mark if you stop shooting
+[0:47:52] yeah and mark if you stop shooting thanks
+[0:47:57] all right uh so so thank you uh and thank you to the organizers
+[0:47:59] thank you to the organizers uh for having me um and also to mark
+[0:48:02] uh for having me um and also to mark uh for some helpful discussions over the
+[0:48:05] uh for some helpful discussions over the last week or so
+[0:48:12] um so i'll start um my discussion i'm just going to give a high level overview
+[0:48:14] just going to give a high level overview just just a recap
+[0:48:15] just just a recap of the approach um that mark has
+[0:48:17] of the approach um that mark has described and what it's aiming to
+[0:48:19] described and what it's aiming to accomplish
+[0:48:20] accomplish um so i use relatively similar notation
+[0:48:23] um so i use relatively similar notation but
+[0:48:24] but but i uh simplified in a few a few
+[0:48:26] but i uh simplified in a few a few places
+[0:48:27] places um so here m is a statistical model so
+[0:48:29] um so here m is a statistical model so just a collection of possible
+[0:48:30] just a collection of possible distributions
+[0:48:31] distributions that should contain the truth and psi is
+[0:48:34] that should contain the truth and psi is a parameter so it's mapping from a
+[0:48:36] a parameter so it's mapping from a distribution to
+[0:48:37] distribution to to just a real number
+[0:48:40] to just a real number um and and so a tmle we can think of
+[0:48:43] um and and so a tmle we can think of here as a data dependent mapping
+[0:48:45] here as a data dependent mapping and all it does is it takes as input for
+[0:48:47] and all it does is it takes as input for the for the purpose of what we care
+[0:48:49] the for the purpose of what we care about here is an algorithm that takes
+[0:48:50] about here is an algorithm that takes his input
+[0:48:51] his input and an initial fit of the distribution p
+[0:48:53] and an initial fit of the distribution p naught of the truth
+[0:48:56] naught of the truth um and then it returns an estimate um so
+[0:48:59] um and then it returns an estimate um so psi n of p hat where p hat is the
+[0:49:00] psi n of p hat where p hat is the initial fit is just an estimate of psi
+[0:49:02] initial fit is just an estimate of psi of p naught
+[0:49:04] of p naught okay and and expressing that this
+[0:49:06] okay and and expressing that this estimator in this form
+[0:49:07] estimator in this form is very important um for the development
+[0:49:10] is very important um for the development the the further developments that mark
+[0:49:11] the the further developments that mark makes as
+[0:49:12] makes as he progresses towards a second and
+[0:49:14] he progresses towards a second and higher order tmle
+[0:49:17] higher order tmle so perhaps this isn't too surprising but
+[0:49:20] so perhaps this isn't too surprising but but if we did happen to have access
+[0:49:22] but if we did happen to have access to the true data generating distribution
+[0:49:24] to the true data generating distribution if we had sort of oracle access to the
+[0:49:26] if we had sort of oracle access to the true p naught
+[0:49:27] true p naught then a very good estimator to use
+[0:49:30] then a very good estimator to use would be just to sort of run the usual
+[0:49:33] would be just to sort of run the usual tmle and plug in the truth p naught in
+[0:49:35] tmle and plug in the truth p naught in that case of course this is unachievable
+[0:49:36] that case of course this is unachievable we don't have access to p not
+[0:49:38] we don't have access to p not but but just sort of for the sake of a
+[0:49:41] but but just sort of for the sake of a thought experiment here if we did have
+[0:49:42] thought experiment here if we did have access to p naught how would this
+[0:49:44] access to p naught how would this estimator behave
+[0:49:45] estimator behave well in this case the tmle minus the
+[0:49:48] well in this case the tmle minus the truth
+[0:49:49] truth would have this optimal first order
+[0:49:50] would have this optimal first order behavior plus this very small remainder
+[0:49:52] behavior plus this very small remainder term here
+[0:49:53] term here thanks to the fact that we really have
+[0:49:54] thanks to the fact that we really have access to the truth here
+[0:49:56] access to the truth here okay so this sort of orange term is
+[0:49:58] okay so this sort of orange term is really behaving as well as we can
+[0:49:59] really behaving as well as we can possibly hope to behave
+[0:50:01] possibly hope to behave um base based on this this estimator
+[0:50:05] um base based on this this estimator okay and then also of course we don't
+[0:50:06] okay and then also of course we don't have access to p naught so
+[0:50:08] have access to p naught so if we plug in any other initial fit p
+[0:50:10] if we plug in any other initial fit p hat we can we can always relate
+[0:50:13] hat we can we can always relate the deviation between our tmle evaluated
+[0:50:15] the deviation between our tmle evaluated at p hat
+[0:50:16] at p hat to the truth um from the truth rather by
+[0:50:19] to the truth um from the truth rather by just adding and subtracting
+[0:50:21] just adding and subtracting this sort of oracle estimator here and
+[0:50:23] this sort of oracle estimator here and what we end up with
+[0:50:25] what we end up with is this leading term is sort of this
+[0:50:27] is this leading term is sort of this sort of perfect term the best we could
+[0:50:28] sort of perfect term the best we could possibly hope for
+[0:50:30] possibly hope for and the second term here is like a
+[0:50:31] and the second term here is like a deviation between
+[0:50:33] deviation between our tmle our estimator this algorithm if
+[0:50:35] our tmle our estimator this algorithm if we feed it p
+[0:50:36] we feed it p hat versus this algorithm this estimator
+[0:50:38] hat versus this algorithm this estimator if we feed it p naught okay
+[0:50:42] if we feed it p naught okay and so what the second order tml aims to
+[0:50:44] and so what the second order tml aims to do here is it aims to ensure that p
+[0:50:46] do here is it aims to ensure that p hat is such that this term up here is
+[0:50:48] hat is such that this term up here is small
+[0:50:49] small that is to say this sine of p hat is a
+[0:50:52] that is to say this sine of p hat is a good estimator of sine of p naught
+[0:50:54] good estimator of sine of p naught okay now we need to be a little bit
+[0:50:56] okay now we need to be a little bit careful here because note that as the
+[0:50:57] careful here because note that as the the n
+[0:50:58] the n perhaps suggests cyan is a data
+[0:51:00] perhaps suggests cyan is a data dependent parameter so it actually
+[0:51:01] dependent parameter so it actually depends on the data
+[0:51:03] depends on the data um but but we can still think of cyan as
+[0:51:05] um but but we can still think of cyan as just a mapping
+[0:51:06] just a mapping that takes as input some distribution in
+[0:51:08] that takes as input some distribution in our model and returns a real number
+[0:51:11] our model and returns a real number okay so so what mark does when he
+[0:51:12] okay so so what mark does when he develops his higher order team lee is
+[0:51:14] develops his higher order team lee is he studies this parameter psi n and then
+[0:51:17] he studies this parameter psi n and then he tries to develop an estimator for
+[0:51:18] he tries to develop an estimator for sine of p naught
+[0:51:27] okay um so so maybe just a caveat because this turns out to be important
+[0:51:28] because this turns out to be important um
+[0:51:29] um for a discussion point that sort of i'll
+[0:51:31] for a discussion point that sort of i'll conclude with
+[0:51:32] conclude with so the usual tmle if we think of this
+[0:51:34] so the usual tmle if we think of this cyan of p hat algorithm
+[0:51:37] cyan of p hat algorithm is is a plug-in estimator of a maximum
+[0:51:39] is is a plug-in estimator of a maximum likelihood estimator
+[0:51:40] likelihood estimator and so what we do is we plug in so our
+[0:51:43] and so what we do is we plug in so our final tmle is just psi of pn star
+[0:51:45] final tmle is just psi of pn star pn star is some estimate of p naught and
+[0:51:48] pn star is some estimate of p naught and the way we get to pn
+[0:51:49] the way we get to pn star is we just fit a maximum likelihood
+[0:51:52] star is we just fit a maximum likelihood estimator
+[0:51:53] estimator within a particular model and this
+[0:51:55] within a particular model and this particular model is carefully chosen
+[0:51:56] particular model is carefully chosen i won't worry about for now about how
+[0:51:58] i won't worry about for now about how it's chosen but this model
+[0:52:01] it's chosen but this model i guess the key point is it's really
+[0:52:02] i guess the key point is it's really centered about p hat so we could think
+[0:52:04] centered about p hat so we could think of it as a little perturbation of our
+[0:52:05] of it as a little perturbation of our initial distribution
+[0:52:06] initial distribution okay so so this depends on p-hat and
+[0:52:09] okay so so this depends on p-hat and it's in this way that we could think of
+[0:52:10] it's in this way that we could think of this the tmle is an algorithm mapping
+[0:52:12] this the tmle is an algorithm mapping from p-hat
+[0:52:13] from p-hat to an estimate or taking as a p hat and
+[0:52:15] to an estimate or taking as a p hat and returning an s to my brother
+[0:52:18] returning an s to my brother you know there's a problem that arises
+[0:52:20] you know there's a problem that arises if we try to study this tmle as
+[0:52:22] if we try to study this tmle as i described on the last slide and the
+[0:52:24] i described on the last slide and the problem is really well
+[0:52:25] problem is really well um it turns out that this cyan parameter
+[0:52:27] um it turns out that this cyan parameter isn't pathways differentiable it's not
+[0:52:29] isn't pathways differentiable it's not sufficiently smooth for us to be able to
+[0:52:31] sufficiently smooth for us to be able to to really construct
+[0:52:32] to really construct a good estimator
+[0:52:37] so what mark does when he's sort of pursuing this higher order approach
+[0:52:39] pursuing this higher order approach is he says okay well rather than fitting
+[0:52:42] is he says okay well rather than fitting this pn star via maximum likelihood
+[0:52:44] this pn star via maximum likelihood what i can do instead is i can find some
+[0:52:46] what i can do instead is i can find some smooth surrogate for the empirical
+[0:52:48] smooth surrogate for the empirical distribution
+[0:52:48] distribution so so on a later slide i'll make it
+[0:52:50] so so on a later slide i'll make it clear sort of what he's asking of that
+[0:52:51] clear sort of what he's asking of that smooth surrogate that the
+[0:52:53] smooth surrogate that the um sort of what requirements it must
+[0:52:57] um sort of what requirements it must have
+[0:52:57] have but we can often think of it as like a
+[0:52:59] but we can often think of it as like a density estimator if everything's
+[0:53:00] density estimator if everything's continuous
+[0:53:01] continuous um and then pn star here will define as
+[0:53:04] um and then pn star here will define as a quebec library projection
+[0:53:06] a quebec library projection of pn tilde onto this exact same model m
+[0:53:09] of pn tilde onto this exact same model m p hat
+[0:53:10] p hat that i described on the last slide okay
+[0:53:13] that i described on the last slide okay and then the tmle is defined in the
+[0:53:15] and then the tmle is defined in the exactly the same way where i just take p
+[0:53:16] exactly the same way where i just take p n star and i plug it into psi
+[0:53:19] n star and i plug it into psi and it turns out that under conditions
+[0:53:22] and it turns out that under conditions um
+[0:53:23] um essentially that p and tilde is smooth
+[0:53:24] essentially that p and tilde is smooth enough the resulting parameter psi n
+[0:53:27] enough the resulting parameter psi n is in fact pathways differentiable and
+[0:53:29] is in fact pathways differentiable and so this provides mark a means to sort of
+[0:53:31] so this provides mark a means to sort of iteratively go through
+[0:53:32] iteratively go through and say okay well if you give me a path
+[0:53:35] and say okay well if you give me a path differentiable parameter even
+[0:53:36] differentiable parameter even even if it depends on the data i do have
+[0:53:38] even if it depends on the data i do have an approach for constructing an
+[0:53:39] an approach for constructing an estimator of it
+[0:53:40] estimator of it so i'll just go ahead and do that and
+[0:53:41] so i'll just go ahead and do that and i'm going to try to estimate now cyan of
+[0:53:43] i'm going to try to estimate now cyan of p naught
+[0:53:44] p naught okay so that that's sort of um the logic
+[0:53:47] okay so that that's sort of um the logic that that underlies the algorithm that
+[0:53:49] that that underlies the algorithm that you described
+[0:53:57] and so the la on my last two slides i i just want to make sort of an observation
+[0:53:59] just want to make sort of an observation um so so i guess this is an interesting
+[0:54:01] um so so i guess this is an interesting fact
+[0:54:02] fact which is that if we look at the kl
+[0:54:05] which is that if we look at the kl projection on this last slide
+[0:54:07] projection on this last slide and if it just so happens that p hat is
+[0:54:09] and if it just so happens that p hat is exactly equal to p-n-tild
+[0:54:11] exactly equal to p-n-tild so in this case again m of m of p-hat is
+[0:54:14] so in this case again m of m of p-hat is just some
+[0:54:14] just some model that that is involves
+[0:54:16] model that that is involves perturbations of uh
+[0:54:18] perturbations of uh p-hat and so it certainly includes p-hat
+[0:54:21] p-hat and so it certainly includes p-hat so if i take the k-l projection of and
+[0:54:23] so if i take the k-l projection of and p-n-tilde onto the model
+[0:54:24] p-n-tilde onto the model m of p and tilde then the count
+[0:54:26] m of p and tilde then the count projection will just be equal to p until
+[0:54:27] projection will just be equal to p until itself
+[0:54:29] itself so all that means here is that the tmle
+[0:54:31] so all that means here is that the tmle um
+[0:54:32] um when we take the initial just to equal
+[0:54:34] when we take the initial just to equal the pn tilde
+[0:54:35] the pn tilde just returns pianto it doesn't do
+[0:54:37] just returns pianto it doesn't do anything it just takes p until
+[0:54:38] anything it just takes p until plugs it into the parameter okay it
+[0:54:41] plugs it into the parameter okay it turns out if you iterate this logic
+[0:54:43] turns out if you iterate this logic um you can see that in fact the kth
+[0:54:46] um you can see that in fact the kth order tmle
+[0:54:47] order tmle if you use p until that's your initial
+[0:54:49] if you use p until that's your initial is still just going to return p until no
+[0:54:51] is still just going to return p until no matter how large you make k no matter
+[0:54:52] matter how large you make k no matter how many iterative steps you take in
+[0:54:54] how many iterative steps you take in this procedure
+[0:54:55] this procedure you're always just going to return psi
+[0:54:57] you're always just going to return psi of p until
+[0:54:59] of p until okay so in some sense this shows how
+[0:55:00] okay so in some sense this shows how critical of a role that pn tilde plays
+[0:55:03] critical of a role that pn tilde plays here
+[0:55:03] here you really need at least if the initial
+[0:55:05] you really need at least if the initial is p until
+[0:55:06] is p until you really need that psi of p until it
+[0:55:09] you really need that psi of p until it is a good estimator
+[0:55:10] is a good estimator okay and it turns out under certain
+[0:55:12] okay and it turns out under certain conditions um
+[0:55:13] conditions um smoothness conditions that that involve
+[0:55:15] smoothness conditions that that involve this this uh
+[0:55:16] this this uh bounded uniform sectional variation norm
+[0:55:19] bounded uniform sectional variation norm also known as
+[0:55:19] also known as the hardy crouse norm in the literature
+[0:55:21] the hardy crouse norm in the literature in case that's helpful for
+[0:55:22] in case that's helpful for for folks to make a connection there um
+[0:55:26] for folks to make a connection there um you really do need sort of certain
+[0:55:27] you really do need sort of certain smoothness properties in order for this
+[0:55:29] smoothness properties in order for this this high order tmle
+[0:55:30] this high order tmle to give to return a nice estimator in
+[0:55:32] to give to return a nice estimator in the case that use p until there's the
+[0:55:34] the case that use p until there's the initial
+[0:55:42] okay and and so so that said um sort of in spite of the fact that from
+[0:55:43] sort of in spite of the fact that from an algorithmist algorithmic perspective
+[0:55:46] an algorithmist algorithmic perspective when you use p and tilde as your initial
+[0:55:48] when you use p and tilde as your initial the kth order to mle is is just going to
+[0:55:50] the kth order to mle is is just going to return psi p and tilde
+[0:55:51] return psi p and tilde um nonetheless the the the analysis that
+[0:55:55] um nonetheless the the the analysis that mark did of this hierarchy mle still
+[0:55:57] mark did of this hierarchy mle still provides a very
+[0:55:58] provides a very interesting and sort of novel um
+[0:56:00] interesting and sort of novel um expansion here
+[0:56:01] expansion here where we can we can come up with a new
+[0:56:03] where we can we can come up with a new way of studying
+[0:56:04] way of studying the simple plug-in estimator psi of p
+[0:56:06] the simple plug-in estimator psi of p and tilde where he comes up with this
+[0:56:08] and tilde where he comes up with this nice expansion where we have
+[0:56:10] nice expansion where we have um so some term representing optimal
+[0:56:12] um so some term representing optimal first order behavior here
+[0:56:14] first order behavior here um we have a term that is sort of
+[0:56:16] um we have a term that is sort of expressing
+[0:56:17] expressing how important of a role p and tilde
+[0:56:19] how important of a role p and tilde plays we really need that p until for
+[0:56:21] plays we really need that p until for certain distributions
+[0:56:22] certain distributions its mean looks a lot like the empirical
+[0:56:24] its mean looks a lot like the empirical mean
+[0:56:25] mean then we have some negligible terms that
+[0:56:27] then we have some negligible terms that that really won't come into play
+[0:56:29] that really won't come into play and then we have this very interesting
+[0:56:31] and then we have this very interesting orange term these these second and
+[0:56:32] orange term these these second and higher order terms here
+[0:56:34] higher order terms here that look like an empirical mean minus a
+[0:56:36] that look like an empirical mean minus a true mean of certain functions
+[0:56:38] true mean of certain functions i think mark these sort of play the role
+[0:56:40] i think mark these sort of play the role kind of higher order gradients here
+[0:56:42] kind of higher order gradients here and these functions actually do depend
+[0:56:44] and these functions actually do depend so they're random through p and tilde
+[0:56:46] so they're random through p and tilde and p naught so we need to be a bit
+[0:56:47] and p naught so we need to be a bit careful
+[0:56:48] careful um we can't just necessarily interpret
+[0:56:50] um we can't just necessarily interpret these
+[0:56:51] these um as converging to sort of some nice
+[0:56:53] um as converging to sort of some nice normal or being faster than root n
+[0:56:56] normal or being faster than root n depending um we need to be very careful
+[0:56:58] depending um we need to be very careful in sort of seeing how p
+[0:56:59] in sort of seeing how p until impacts uh these gradients um
+[0:57:02] until impacts uh these gradients um so and mark has done studied this so
+[0:57:04] so and mark has done studied this so much in this paper
+[0:57:06] much in this paper um but in any case this is very
+[0:57:08] um but in any case this is very interesting because it potentially
+[0:57:09] interesting because it potentially provides a means
+[0:57:10] provides a means um both to study this this uh plug-in
+[0:57:12] um both to study this this uh plug-in parameter psi of p and tilde
+[0:57:15] parameter psi of p and tilde um and also potentially to to do higher
+[0:57:17] um and also potentially to to do higher order bias corrections
+[0:57:19] order bias corrections um so i think it's sort of interesting
+[0:57:21] um so i think it's sort of interesting and i'll be interested in future work to
+[0:57:22] and i'll be interested in future work to see
+[0:57:23] see um whether anyone sort of is able to
+[0:57:26] um whether anyone sort of is able to make further progress on this
+[0:57:28] make further progress on this um so i'll stop there
+[0:57:34] uh thanks for the great discussion alex mark do you want to uh respond quickly
+[0:57:37] mark do you want to uh respond quickly sure yeah thanks a lot alex that's so
+[0:57:39] sure yeah thanks a lot alex that's so wonderful
+[0:57:40] wonderful um and uh very clear
+[0:57:44] um and uh very clear um yeah so one of the points of the main
+[0:57:46] um yeah so one of the points of the main point uh
+[0:57:47] point uh alex is making is uh
+[0:57:52] alex is making is uh that's when you use this initial in
+[0:57:54] that's when you use this initial in other words we have this general
+[0:57:55] other words we have this general high order t moly and it has ingredients
+[0:57:58] high order t moly and it has ingredients an initial estimator
+[0:58:00] an initial estimator pn0 and it has another ingredient
+[0:58:03] pn0 and it has another ingredient pm tilde which is the whole emily and
+[0:58:06] pm tilde which is the whole emily and and that gives us an exact expansion and
+[0:58:09] and that gives us an exact expansion and and that exact expansion tells us
+[0:58:12] and that exact expansion tells us in particular what we need about pn
+[0:58:15] in particular what we need about pn tilde about the whole emily
+[0:58:17] tilde about the whole emily namely that the empirical mean
+[0:58:20] namely that the empirical mean of the mean under the whole emily minus
+[0:58:23] of the mean under the whole emily minus the empirical mean
+[0:58:24] the empirical mean of these higher order influence
+[0:58:26] of these higher order influence functions is negligible
+[0:58:28] functions is negligible that's the role uh piantil that needs to
+[0:58:30] that's the role uh piantil that needs to play
+[0:58:32] play now that
+[0:58:35] now that itself allows us to now say okay we have
+[0:58:38] itself allows us to now say okay we have pn0
+[0:58:40] pn0 and we have this whole emily uh pn tilde
+[0:58:44] and we have this whole emily uh pn tilde and we have room right one
+[0:58:48] and we have room right one is indeed you can say why not just make
+[0:58:51] is indeed you can say why not just make sure
+[0:58:51] sure this uh the whole emily is under
+[0:58:54] this uh the whole emily is under smoothed appropriately
+[0:58:55] smoothed appropriately or is targeted appropriately so that it
+[0:58:58] or is targeted appropriately so that it solves
+[0:58:59] solves these that it acts like an empirical
+[0:59:02] these that it acts like an empirical mean
+[0:59:02] mean on these high over the influence
+[0:59:03] on these high over the influence functions
+[0:59:05] functions and once you have achieved that then
+[0:59:07] and once you have achieved that then just use
+[0:59:08] just use the whole emily in order to just use the
+[0:59:11] the whole emily in order to just use the plugin of that hull emily which is now
+[0:59:14] plugin of that hull emily which is now under smoothed appropriately or targeted
+[0:59:16] under smoothed appropriately or targeted appropriately
+[0:59:17] appropriately to solve these higher influence
+[0:59:18] to solve these higher influence functions that is a great estimator
+[0:59:21] functions that is a great estimator there's no doubt about it
+[0:59:22] there's no doubt about it and and then you know i'm a fan of under
+[0:59:24] and and then you know i'm a fan of under schmidt
+[0:59:25] schmidt emily it's really it is the analog of
+[0:59:27] emily it's really it is the analog of mle for paramedic models except for
+[0:59:30] mle for paramedic models except for infinite dimensional models and it's a
+[0:59:33] infinite dimensional models and it's a it's a plug-in
+[0:59:34] it's a plug-in and it automatically without if you
+[0:59:36] and it automatically without if you understood you don't even know what
+[0:59:37] understood you don't even know what you're targeting but for all these
+[0:59:38] you're targeting but for all these target rounds you can uniformly prove it
+[0:59:40] target rounds you can uniformly prove it will be
+[0:59:41] will be asymptotically efficient
+[0:59:44] asymptotically efficient and so you might say why are we not just
+[0:59:48] and so you might say why are we not just uh and indeed like alex was saying this
+[0:59:51] uh and indeed like alex was saying this work allowed me to analyze
+[0:59:55] work allowed me to analyze this whole emily and this is holland in
+[0:59:57] this whole emily and this is holland in this particular way
+[0:59:59] this particular way giving us insight that it is in many
+[1:00:01] giving us insight that it is in many ways and higher order optimal estimator
+[1:00:04] ways and higher order optimal estimator as you understood you start knocking out
+[1:00:06] as you understood you start knocking out all these terms and you start
+[1:00:07] all these terms and you start essentially behaving like this big
+[1:00:09] essentially behaving like this big uh empirical mean of higher order
+[1:00:12] uh empirical mean of higher order influence
+[1:00:13] influence and that also allows us to do inference
+[1:00:15] and that also allows us to do inference for this type of
+[1:00:17] for this type of whole plug-in hull emily like again alex
+[1:00:19] whole plug-in hull emily like again alex was mentioning
+[1:00:21] was mentioning by incorporating these additional terms
+[1:00:23] by incorporating these additional terms i would even argue
+[1:00:24] i would even argue that even that bias term which is p
+[1:00:26] that even that bias term which is p until the minus pn
+[1:00:27] until the minus pn applied which is supposed to be
+[1:00:29] applied which is supposed to be inevitable if you understood you could
+[1:00:31] inevitable if you understood you could still say
+[1:00:31] still say yeah but it's still there why not
+[1:00:33] yeah but it's still there why not bootstrap this whole expansion right
+[1:00:35] bootstrap this whole expansion right because you can bootstrap
+[1:00:36] because you can bootstrap that's the beauty we have shown that
+[1:00:38] that's the beauty we have shown that non-permanent bootstrap works
+[1:00:39] non-permanent bootstrap works beautifully for hull
+[1:00:40] beautifully for hull so we can probably even bootstrap that
+[1:00:42] so we can probably even bootstrap that bias term and just make that part of the
+[1:00:44] bias term and just make that part of the inference
+[1:00:45] inference and so that itself is means
+[1:00:48] and so that itself is means we have a contribution towards this kind
+[1:00:50] we have a contribution towards this kind of plug-in whole emily for both
+[1:00:52] of plug-in whole emily for both inference also for how you should be
+[1:00:54] inference also for how you should be under moving because we can announce a
+[1:00:56] under moving because we can announce a track
+[1:00:56] track if we have understood enough because we
+[1:00:58] if we have understood enough because we know what the goal is
+[1:00:59] know what the goal is namely to solve these higher order
+[1:01:02] namely to solve these higher order influence functions so that itself is an
+[1:01:03] influence functions so that itself is an important contribution to the whole
+[1:01:05] important contribution to the whole plug-in hall emily world
+[1:01:07] plug-in hall emily world are we then saying why even bother doing
+[1:01:10] are we then saying why even bother doing than still this kind of
+[1:01:11] than still this kind of high order team why not just work with
+[1:01:13] high order team why not just work with this you know
+[1:01:15] this you know cleverly under smoothed or targeted
+[1:01:18] cleverly under smoothed or targeted plug-in hull emily
+[1:01:20] plug-in hull emily i would argue yes because this gets now
+[1:01:22] i would argue yes because this gets now to the comparison of
+[1:01:23] to the comparison of a plug-in whole emily versus a team lead
+[1:01:27] a plug-in whole emily versus a team lead and team lee has the benefit i can
+[1:01:30] and team lee has the benefit i can choose as initial estimate or something
+[1:01:32] choose as initial estimate or something highly adaptive
+[1:01:33] highly adaptive because if you use hull that's very
+[1:01:34] because if you use hull that's very non-parametric
+[1:01:36] non-parametric but you know depending on the dimension
+[1:01:38] but you know depending on the dimension and depending on the underlying
+[1:01:39] and depending on the underlying smoothness maybe we need
+[1:01:41] smoothness maybe we need the higher order splines which we also
+[1:01:43] the higher order splines which we also have maybe we need
+[1:01:45] have maybe we need uh fewer basis functions we don't need
+[1:01:47] uh fewer basis functions we don't need the higher weight basis functions and
+[1:01:48] the higher weight basis functions and not just let me
+[1:01:49] not just let me let the algorithm figure it out let's
+[1:01:51] let the algorithm figure it out let's help it right so in order to start
+[1:01:53] help it right so in order to start building a super learner with
+[1:01:54] building a super learner with cross-validation to choose between all
+[1:01:56] cross-validation to choose between all these different adaptive algorithms
+[1:01:58] these different adaptive algorithms in this way we can construct an initial
+[1:02:00] in this way we can construct an initial estimator which will do significantly
+[1:02:02] estimator which will do significantly better and finite samples
+[1:02:03] better and finite samples then how for approximating p0
+[1:02:06] then how for approximating p0 and then the targeting pushes it towards
+[1:02:10] and then the targeting pushes it towards the whole emily through these mle steps
+[1:02:12] the whole emily through these mle steps but it still preserves a lot of its
+[1:02:14] but it still preserves a lot of its initial adaptive nature
+[1:02:16] initial adaptive nature and the whole emily plays now clearly
+[1:02:18] and the whole emily plays now clearly the role of still being able to maximize
+[1:02:20] the role of still being able to maximize a likelihood
+[1:02:21] a likelihood right because it will have a significant
+[1:02:23] right because it will have a significant like a larger likelihood than any kind
+[1:02:24] like a larger likelihood than any kind of initial estimator
+[1:02:26] of initial estimator and therefore gets these bias reductions
+[1:02:29] and therefore gets these bias reductions and in particular it can incorporate
+[1:02:32] and in particular it can incorporate knowledge about
+[1:02:33] knowledge about nuisance parameters or foreign
+[1:02:34] nuisance parameters or foreign parameters to really get maximal bias
+[1:02:36] parameters to really get maximal bias production
+[1:02:37] production so in this way it's a contribution to
+[1:02:39] so in this way it's a contribution to the teamwork world
+[1:02:40] the teamwork world because that's the contribution of team
+[1:02:42] because that's the contribution of team only that it allows you
+[1:02:43] only that it allows you to do that targeting towards a very
+[1:02:47] to do that targeting towards a very specific uh
+[1:02:48] specific uh target parameters and we also have shown
+[1:02:51] target parameters and we also have shown in the stack report that you can
+[1:02:52] in the stack report that you can actually
+[1:02:52] actually really even target the
+[1:02:55] really even target the whole emily in such a way that the mles
+[1:02:58] whole emily in such a way that the mles are identical to what they would be
+[1:02:59] are identical to what they would be under the empirical
+[1:03:00] under the empirical so now it's truly nothing else than a
+[1:03:02] so now it's truly nothing else than a regular team lead with just extra
+[1:03:04] regular team lead with just extra targeting
+[1:03:04] targeting and so you're completely in the world of
+[1:03:06] and so you're completely in the world of regular team league
+[1:03:07] regular team league but with all that extra targeting and so
+[1:03:10] but with all that extra targeting and so that's why it is a real contribution
+[1:03:12] that's why it is a real contribution to the teamwork world having said that i
+[1:03:14] to the teamwork world having said that i think both estimates are
+[1:03:16] think both estimates are are of yeah great interest and i i'm a
+[1:03:19] are of yeah great interest and i i'm a fan of both
+[1:03:20] fan of both let me put it that way i will stop there
+[1:03:23] let me put it that way i will stop there all right fantastic uh thanks mark i
+[1:03:25] all right fantastic uh thanks mark i think yeah we're slowly running out of
+[1:03:27] think yeah we're slowly running out of time so
+[1:03:28] time so let me wrap up so first thank you
+[1:03:31] let me wrap up so first thank you mark for a very interesting talk
+[1:03:34] mark for a very interesting talk uh thank you zai for for helping out in
+[1:03:38] uh thank you zai for for helping out in q a and thank you alex for
+[1:03:40] q a and thank you alex for for the very interesting discussion next
+[1:03:43] for the very interesting discussion next time
+[1:03:44] time we're going to have uh stephen bates
+[1:03:46] we're going to have uh stephen bates from uc berkeley who will talk about
+[1:03:48] from uc berkeley who will talk about causal inference in genetic trial
+[1:03:49] causal inference in genetic trial studies we're looking forward to that
+[1:03:51] studies we're looking forward to that until then we hope you all stay safe and
+[1:03:54] until then we hope you all stay safe and hope to see you next time
+[1:03:55] hope to see you next time thank you all for coming and hope you
+[1:03:58] thank you all for coming and hope you have a good week
+[1:03:59] have a good week thank you thank you

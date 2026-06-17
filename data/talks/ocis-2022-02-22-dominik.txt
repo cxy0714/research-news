@@ -1,0 +1,1776 @@
+[0:00:06] hi everyone uh welcome to the online causal inference seminar so today we
+[0:00:09] causal inference seminar so today we have dominic protegler from stanford
+[0:00:11] have dominic protegler from stanford university presenting work on calibrated
+[0:00:14] university presenting work on calibrated inference statistical influence that
+[0:00:16] inference statistical influence that accounts for both sampling uncertainty
+[0:00:18] accounts for both sampling uncertainty and distributional uncertainty
+[0:00:20] and distributional uncertainty and in the q and a we have eugene zhang
+[0:00:22] and in the q and a we have eugene zhang also from stanford who worked on this
+[0:00:24] also from stanford who worked on this project as well so she should be able to
+[0:00:26] project as well so she should be able to answer all your questions
+[0:00:27] answer all your questions uh our discussion later today is hiro
+[0:00:30] uh our discussion later today is hiro invents also from stanford so we have a
+[0:00:32] invents also from stanford so we have a big stanford group today
+[0:00:34] big stanford group today hopefully you all enjoy the talk and we
+[0:00:36] hopefully you all enjoy the talk and we look forward to your questions i'll now
+[0:00:38] look forward to your questions i'll now take it over to ying who is handling
+[0:00:41] take it over to ying who is handling questions today
+[0:00:48] alexander um so please uh raise your questions in the q and a section um if
+[0:00:50] questions in the q and a section um if you haven't used it before it is at the
+[0:00:52] you haven't used it before it is at the bottom of the zoom window and please try
+[0:00:56] bottom of the zoom window and please try to
+[0:00:56] to submit the questions in the q a part not
+[0:00:59] submit the questions in the q a part not in the chat for us to better track the
+[0:01:01] in the chat for us to better track the questions
+[0:01:02] questions so dominic will have two points
+[0:01:06] so dominic will have two points to stop four questions and
+[0:01:08] to stop four questions and i'll raise some of the questions to
+[0:01:10] i'll raise some of the questions to donate
+[0:01:11] donate and that's it i'll give the stage to
+[0:01:13] and that's it i'll give the stage to domnick
+[0:01:19] all right thank you so much give me one second i'll share my
+[0:01:26] wait does it not work
+[0:01:37] okay can you see my screen yes
+[0:01:38] yes okay yeah thank you so much for giving
+[0:01:40] okay yeah thank you so much for giving me the opportunity to speak it's very
+[0:01:42] me the opportunity to speak it's very nice to uh
+[0:01:43] nice to uh uh also be on this side and give a talk
+[0:01:46] uh also be on this side and give a talk um yeah so before i start with this
+[0:01:48] um yeah so before i start with this joint uh work with uh eugene she has
+[0:01:50] joint uh work with uh eugene she has done a really fantastic job
+[0:01:53] done a really fantastic job with this project she's a second year
+[0:01:55] with this project she's a second year phd student here uh here at stanford
+[0:01:58] phd student here uh here at stanford okay so one quick warning in the
+[0:02:00] okay so one quick warning in the beginning um so this talk is not just
+[0:02:03] beginning um so this talk is not just purely about causal inference and it's
+[0:02:05] purely about causal inference and it's also not about
+[0:02:06] also not about like building a completely new method so
+[0:02:08] like building a completely new method so what we want to do is we want to take a
+[0:02:11] what we want to do is we want to take a method that is currently used in in
+[0:02:13] method that is currently used in in causal inference or and just show like
+[0:02:16] causal inference or and just show like what kind of guarantees it can yield so
+[0:02:18] what kind of guarantees it can yield so uh there's some stuff that people
+[0:02:20] uh there's some stuff that people currently do in causal inference to
+[0:02:21] currently do in causal inference to increase the
+[0:02:23] increase the robustness of results and we want to
+[0:02:24] robustness of results and we want to kind of see whether we can give some
+[0:02:26] kind of see whether we can give some neat interpretation for that
+[0:02:33] okay and this is kind of very very new and ongoing work so there will be some
+[0:02:35] and ongoing work so there will be some rough edges here and there
+[0:02:37] rough edges here and there okay um
+[0:02:39] okay um so what is the what is the broader
+[0:02:40] so what is the what is the broader problem the broader problem here is the
+[0:02:42] problem the broader problem here is the replicability crisis and very broadly
+[0:02:45] replicability crisis and very broadly what that states is that if i have a
+[0:02:47] what that states is that if i have a data set that i compute something
+[0:02:49] data set that i compute something and come to some statistical conclusion
+[0:02:51] and come to some statistical conclusion on my side if someone does something
+[0:02:54] on my side if someone does something similar
+[0:02:55] similar with a with a similar data set drawn
+[0:02:57] with a with a similar data set drawn from a similar distribution they might
+[0:02:59] from a similar distribution they might come to very different conclusions and
+[0:03:01] come to very different conclusions and that has led to all kinds of problems in
+[0:03:03] that has led to all kinds of problems in the literature
+[0:03:05] the literature where we don't get as many matches and
+[0:03:07] where we don't get as many matches and we don't get as much replicability as we
+[0:03:09] we don't get as much replicability as we would like to have
+[0:03:11] would like to have now there are many reasons for that
+[0:03:13] now there are many reasons for that crisis
+[0:03:14] crisis and there's also already been done a lot
+[0:03:16] and there's also already been done a lot to address this
+[0:03:18] to address this among that is that some a lot of studies
+[0:03:20] among that is that some a lot of studies have low power there's p hacking going
+[0:03:22] have low power there's p hacking going on people don't adjust for multiplicity
+[0:03:25] on people don't adjust for multiplicity um
+[0:03:26] um sometimes the samples that we take are
+[0:03:28] sometimes the samples that we take are not representative of the full
+[0:03:29] not representative of the full population
+[0:03:31] population sometimes the data might be correlated
+[0:03:33] sometimes the data might be correlated there might be distribution shifts so
+[0:03:34] there might be distribution shifts so you see there are all kinds of things
+[0:03:36] you see there are all kinds of things that can go wrong that
+[0:03:37] that can go wrong that drive what we saw in the previous slides
+[0:03:40] drive what we saw in the previous slides and we're going to mostly look at it
+[0:03:41] and we're going to mostly look at it from
+[0:03:43] from two sides from a distribution or from a
+[0:03:45] two sides from a distribution or from a model stability perspective i'll make
+[0:03:47] model stability perspective i'll make that more concrete in the next in the
+[0:03:49] that more concrete in the next in the next slides
+[0:03:55] okay so what do we usually do in statistics uh
+[0:03:57] statistics uh the setting that we have is we
+[0:03:59] the setting that we have is we we might be interested in the parameter
+[0:04:01] we might be interested in the parameter theta as a function of some underlying
+[0:04:03] theta as a function of some underlying distribution so this is our
+[0:04:05] distribution so this is our target distribution of p naught
+[0:04:07] target distribution of p naught and for simplicity let's just use the
+[0:04:09] and for simplicity let's just use the fun
+[0:04:10] fun running example where we're just
+[0:04:11] running example where we're just interested in a linear regression
+[0:04:12] interested in a linear regression coefficient
+[0:04:14] coefficient now you can just assume that the data is
+[0:04:17] now you can just assume that the data is iid and write down an estimator for that
+[0:04:21] iid and write down an estimator for that and
+[0:04:22] and then often the argument goes that you
+[0:04:24] then often the argument goes that you say okay on at least low dimensional
+[0:04:26] say okay on at least low dimensional settings asymptotically my estimator is
+[0:04:29] settings asymptotically my estimator is is linear that means it's uh
+[0:04:31] is linear that means it's uh asymptotically it's close to being the
+[0:04:33] asymptotically it's close to being the mean of some function plus some lower
+[0:04:35] mean of some function plus some lower order terms
+[0:04:36] order terms and uh so what i can do if i want to
+[0:04:39] and uh so what i can do if i want to construct confidence intervals i can
+[0:04:40] construct confidence intervals i can just look at the asymptotics of this
+[0:04:42] just look at the asymptotics of this mean so this will be asymptotically
+[0:04:44] mean so this will be asymptotically gaussian under iid sampling so i can
+[0:04:47] gaussian under iid sampling so i can construct approximate 95 confidence
+[0:04:49] construct approximate 95 confidence intervals by
+[0:04:51] intervals by estimating the standard deviation of
+[0:04:53] estimating the standard deviation of of this
+[0:04:55] of this term all right so
+[0:04:59] term all right so we will not be working in this setting
+[0:05:01] we will not be working in this setting to make this very very con very clear um
+[0:05:04] to make this very very con very clear um so there are two things that can go
+[0:05:07] so there are two things that can go wrong here at least two things that can
+[0:05:08] wrong here at least two things that can go wrong here
+[0:05:10] go wrong here the first thing is we might not be able
+[0:05:12] the first thing is we might not be able to directly draw from the distribution
+[0:05:13] to directly draw from the distribution of interest
+[0:05:15] of interest i'll make that more concrete later and
+[0:05:17] i'll make that more concrete later and often i mean the way i wrote it down is
+[0:05:19] often i mean the way i wrote it down is that i said oh there's this linear
+[0:05:21] that i said oh there's this linear regression coefficient that we're
+[0:05:22] regression coefficient that we're interested in well often there is not
+[0:05:24] interested in well often there is not just one reasonable choice there might
+[0:05:25] just one reasonable choice there might be many reasonable choices and that
+[0:05:27] be many reasonable choices and that might also give us some issues of
+[0:05:29] might also give us some issues of replicability and stability and now i'll
+[0:05:31] replicability and stability and now i'll talk about these points in more detail
+[0:05:34] talk about these points in more detail now
+[0:05:35] now separately
+[0:05:38] separately okay so the first one and i will call
+[0:05:40] okay so the first one and i will call that distributional uncertainty so we
+[0:05:42] that distributional uncertainty so we might not draw data id from the
+[0:05:45] might not draw data id from the distribution of interest so there might
+[0:05:47] distribution of interest so there might be some distribution shift between the
+[0:05:49] be some distribution shift between the sampling and the target distribution and
+[0:05:51] sampling and the target distribution and you can also think about this as
+[0:05:52] you can also think about this as sampling bias so for some reason during
+[0:05:54] sampling bias so for some reason during the sampling process there is a mistake
+[0:05:56] the sampling process there is a mistake there are some issues there are some
+[0:05:57] there are some issues there are some practicalities uh that that creep in and
+[0:06:01] practicalities uh that that creep in and i will actually not draw id from what i
+[0:06:03] i will actually not draw id from what i want but
+[0:06:04] want but from something slightly different of
+[0:06:06] from something slightly different of course
+[0:06:08] course observations might also be contaminated
+[0:06:10] observations might also be contaminated the units might be correlated then the
+[0:06:11] the units might be correlated then the variance formula doesn't work
+[0:06:14] variance formula doesn't work there might be
+[0:06:15] there might be so p naught might be the unknown
+[0:06:17] so p naught might be the unknown the distribution without confounding
+[0:06:19] the distribution without confounding that you're interested in but you're
+[0:06:20] that you're interested in but you're drawing from something that is slightly
+[0:06:22] drawing from something that is slightly confounded
+[0:06:24] confounded again due to some practicalities during
+[0:06:26] again due to some practicalities during the sampling process
+[0:06:28] the sampling process there are all kinds of statistical
+[0:06:30] there are all kinds of statistical techniques to address such issues
+[0:06:32] techniques to address such issues usually these techniques uh assume that
+[0:06:35] usually these techniques uh assume that you know something how the perturbation
+[0:06:37] you know something how the perturbation worked
+[0:06:38] worked um so what we want to do in in this
+[0:06:41] um so what we want to do in in this setting is we want to deal with unknown
+[0:06:43] setting is we want to deal with unknown perturbation so just ask okay if
+[0:06:46] perturbation so just ask okay if if the distribution is perturbed in some
+[0:06:48] if the distribution is perturbed in some generic fashion um
+[0:06:50] generic fashion um can we still deal with it
+[0:06:55] okay so let's make it a little bit more concrete
+[0:06:58] let's make it a little bit more concrete uh what do i mean with distributional
+[0:06:59] uh what do i mean with distributional uncertainty because i know this is not a
+[0:07:01] uncertainty because i know this is not a term that people might use a lot in the
+[0:07:03] term that people might use a lot in the literature
+[0:07:05] literature so instead of drawing an iid sample from
+[0:07:08] so instead of drawing an iid sample from the target distribution i will assume
+[0:07:10] the target distribution i will assume that i see an iid sample from some
+[0:07:12] that i see an iid sample from some perturb distribution
+[0:07:13] perturb distribution [Music]
+[0:07:15] [Music] where this
+[0:07:16] where this psi here is a is a random variable
+[0:07:20] psi here is a is a random variable and what i have then is my arrow now
+[0:07:23] and what i have then is my arrow now consists of two things if i look at
+[0:07:25] consists of two things if i look at theta hat minus theta of the target
+[0:07:27] theta hat minus theta of the target distribution there is now an error due
+[0:07:29] distribution there is now an error due to my iid sampling so this is what we
+[0:07:32] to my iid sampling so this is what we usually quantify in statistics and then
+[0:07:34] usually quantify in statistics and then there's error due to the perturbation
+[0:07:36] there's error due to the perturbation due to some issues that creep in during
+[0:07:38] due to some issues that creep in during the sampling process
+[0:07:40] the sampling process so what we would like to do is because
+[0:07:42] so what we would like to do is because this is target we want to construct
+[0:07:44] this is target we want to construct confidence intervals that cover this
+[0:07:50] cover this parameter and not just not just this one
+[0:07:54] okay and later what we're going to do is we're going to put a little bit more
+[0:07:55] we're going to put a little bit more structure on on this term and that will
+[0:07:57] structure on on this term and that will allow us to to also deal with uh with
+[0:07:59] allow us to to also deal with uh with this variation
+[0:08:07] okay any questions so far don't any
+[0:08:08] any queuing so i'll just continue
+[0:08:10] queuing so i'll just continue um yeah the second thing is researchers
+[0:08:12] um yeah the second thing is researchers degrees of freedom um
+[0:08:14] degrees of freedom um as i said before there's a i said though
+[0:08:16] as i said before there's a i said though there's this linear regression
+[0:08:17] there's this linear regression coefficient that we're interested in
+[0:08:19] coefficient that we're interested in well usually it doesn't just isn't just
+[0:08:23] well usually it doesn't just isn't just direct the problem doesn't just directly
+[0:08:24] direct the problem doesn't just directly start with that's the problem usually
+[0:08:26] start with that's the problem usually starts with a research question that
+[0:08:27] starts with a research question that you're interested in and then as a
+[0:08:29] you're interested in and then as a statisticians you have many options to
+[0:08:31] statisticians you have many options to operationalize
+[0:08:32] operationalize that particular research question so
+[0:08:35] that particular research question so you could ask which observations should
+[0:08:37] you could ask which observations should i drop from the sample how should i
+[0:08:39] i drop from the sample how should i include missing values which covariates
+[0:08:41] include missing values which covariates should i include in the specification
+[0:08:43] should i include in the specification which interaction terms should i use in
+[0:08:45] which interaction terms should i use in causal inference even if i have
+[0:08:47] causal inference even if i have unconfoundedness i i don't just have one
+[0:08:49] unconfoundedness i i don't just have one estimator there potentially many many
+[0:08:51] estimator there potentially many many many estimators that i can use so
+[0:08:53] many estimators that i can use so there's a whole lot of decisions
+[0:08:54] there's a whole lot of decisions statisticians has
+[0:08:56] statisticians has to make here and now if if you don't
+[0:08:58] to make here and now if if you don't have a good reason to use one
+[0:09:01] have a good reason to use one method over another
+[0:09:04] method over another then
+[0:09:05] then there will be quite an arbitrary
+[0:09:06] there will be quite an arbitrary decision at this point where kind of
+[0:09:08] decision at this point where kind of your your conclusion might depend very
+[0:09:12] your your conclusion might depend very much on the
+[0:09:13] much on the on the on the decisions that you make
+[0:09:15] on the on the decisions that you make here even though you might not have a
+[0:09:17] here even though you might not have a strong reason to prefer one decision
+[0:09:18] strong reason to prefer one decision over the other
+[0:09:20] over the other so if there's instability kind of in
+[0:09:22] so if there's instability kind of in this you'll
+[0:09:25] this you'll intuitively uh the the conclusions that
+[0:09:28] intuitively uh the the conclusions that you draw will will not be very
+[0:09:29] you draw will will not be very trustworthy
+[0:09:31] trustworthy uh people have uh
+[0:09:33] uh people have uh talked about these issues a lot uh very
+[0:09:35] talked about these issues a lot uh very famously lemur has a great paper where
+[0:09:37] famously lemur has a great paper where he's worried that
+[0:09:38] he's worried that this type of this type of instability
+[0:09:42] this type of this type of instability in in our data science process might
+[0:09:45] in in our data science process might might draw
+[0:09:46] might draw might make our conclusions uh
+[0:09:49] might make our conclusions uh not trustworthy
+[0:09:51] not trustworthy okay just to make it a little bit more
+[0:09:52] okay just to make it a little bit more concrete we're in in a causal inference
+[0:09:55] concrete we're in in a causal inference seminar here
+[0:09:56] seminar here um
+[0:09:57] um so i have uh
+[0:09:59] so i have uh if you have unconfoundedness and
+[0:10:01] if you have unconfoundedness and linearity you can say okay i wanna
+[0:10:03] linearity you can say okay i wanna i want to estimate the effect of running
+[0:10:05] i want to estimate the effect of running aggression of y on t and some
+[0:10:07] aggression of y on t and some confounders now from your background
+[0:10:09] confounders now from your background knowledge there might just there might
+[0:10:10] knowledge there might just there might not just be one reasonable adjustment
+[0:10:12] not just be one reasonable adjustment that there might be many reasonable
+[0:10:14] that there might be many reasonable adjustment sets
+[0:10:16] adjustment sets so you don't just have one estimator you
+[0:10:18] so you don't just have one estimator you might have a cup
+[0:10:19] might have a cup um i currently see that there are two
+[0:10:22] um i currently see that there are two questions in q and a
+[0:10:25] questions in q and a but i think eugene is typing an answer
+[0:10:27] but i think eugene is typing an answer so i'll continue for now take long
+[0:10:30] so i'll continue for now take long questions later
+[0:10:33] questions later okay
+[0:10:34] okay so of course there's a lot of related
+[0:10:37] so of course there's a lot of related literature
+[0:10:38] literature now
+[0:10:43] i already talked about lemur paper there are a lot of people who recommend
+[0:10:45] are a lot of people who recommend not just
+[0:10:47] not just evaluating one estimator but trying to
+[0:10:49] evaluating one estimator but trying to find different
+[0:10:50] find different identification strategies or use
+[0:10:52] identification strategies or use different models to estimate
+[0:10:56] different models to estimate one one parameter that you're interested
+[0:10:57] one one parameter that you're interested in
+[0:10:59] in and just look at the overall stability
+[0:11:00] and just look at the overall stability of this pipeline that i talked about
+[0:11:02] of this pipeline that i talked about before
+[0:11:04] before um and more specifically uh people have
+[0:11:07] um and more specifically uh people have looked at in causal influence people
+[0:11:09] looked at in causal influence people have looked at adding and removing
+[0:11:11] have looked at adding and removing variables
+[0:11:13] variables in in in regression adjustment and often
+[0:11:17] in in in regression adjustment and often uh
+[0:11:18] uh this type of variation then is getting
+[0:11:20] this type of variation then is getting interpreted as a
+[0:11:22] interpreted as a as
+[0:11:23] as the size of a
+[0:11:24] the size of a omitted variable bias so you kind of
+[0:11:26] omitted variable bias so you kind of change the variables that you observe
+[0:11:28] change the variables that you observe and then
+[0:11:29] and then deduce something about
+[0:11:32] deduce something about omitted variables
+[0:11:38] there's also a couple of other ways stability principles have been used
+[0:11:41] ways stability principles have been used first for causal discovery
+[0:11:43] first for causal discovery um there's also a related problem that
+[0:11:45] um there's also a related problem that i'm not gonna talk about today which is
+[0:11:48] i'm not gonna talk about today which is uh
+[0:11:49] uh which is if you if you have a
+[0:11:52] which is if you if you have a if you in a data-driven way you choose
+[0:11:54] if you in a data-driven way you choose the final estimator out of a set of
+[0:11:56] the final estimator out of a set of estimators for example if you choose the
+[0:11:57] estimators for example if you choose the most pleasing model out of like 10 or 20
+[0:12:01] most pleasing model out of like 10 or 20 models then you'll have a
+[0:12:03] models then you'll have a multiple testing issue and you'll have
+[0:12:05] multiple testing issue and you'll have to adjust your p-value for that so the
+[0:12:07] to adjust your p-value for that so the problem we're going to talk about today
+[0:12:09] problem we're going to talk about today is different because even if you have
+[0:12:11] is different because even if you have infinite data
+[0:12:12] infinite data um and your p values are super small if
+[0:12:15] um and your p values are super small if your conclusions are not drop us to
+[0:12:17] your conclusions are not drop us to small changes in your in your data
+[0:12:19] small changes in your in your data science pipeline uh then you have reason
+[0:12:21] science pipeline uh then you have reason to be worried so that's what we're going
+[0:12:23] to be worried so that's what we're going to talk about today
+[0:12:31] okay so now there are a lot of
+[0:12:33] now there are a lot of a lot of design decisions so this is
+[0:12:35] a lot of design decisions so this is like trying to operationalize it is not
+[0:12:37] like trying to operationalize it is not just about it's not just about the math
+[0:12:40] just about it's not just about the math there's also a lot of decisions that
+[0:12:41] there's also a lot of decisions that we've made along the process that i just
+[0:12:43] we've made along the process that i just wanted to quickly kind of point out here
+[0:12:46] wanted to quickly kind of point out here so if you want to measure this type of
+[0:12:48] so if you want to measure this type of instability what you can do is you can
+[0:12:50] instability what you can do is you can just say okay i start
+[0:12:53] just say okay i start i start with a certain theoretical
+[0:12:56] i start with a certain theoretical deceiterations and i then i try to work
+[0:12:58] deceiterations and i then i try to work forwards and try to
+[0:12:59] forwards and try to see how my
+[0:13:00] see how my or my stability coefficient has to look
+[0:13:02] or my stability coefficient has to look like
+[0:13:04] like what we've done in this work we've
+[0:13:06] what we've done in this work we've we've just tried to start with something
+[0:13:08] we've just tried to start with something people already do and try to see whether
+[0:13:10] people already do and try to see whether that also gives us meaning in terms of
+[0:13:12] that also gives us meaning in terms of uh distributional stability
+[0:13:16] uh distributional stability um
+[0:13:17] um then you can also
+[0:13:18] then you can also ask the high level question well how how
+[0:13:20] ask the high level question well how how should i even report these these type of
+[0:13:22] should i even report these these type of things so if i think about for example
+[0:13:24] things so if i think about for example about distributional stability
+[0:13:26] about distributional stability should i should i see this as different
+[0:13:29] should i should i see this as different type of uncertainty sp values so for
+[0:13:31] type of uncertainty sp values so for each of those different stability
+[0:13:33] each of those different stability notions should i have one p value should
+[0:13:36] notions should i have one p value should i have one notion of distributional
+[0:13:38] i have one notion of distributional stability should i have one notion of uh
+[0:13:41] stability should i have one notion of uh model stability and so on so should i
+[0:13:43] model stability and so on so should i report the three or four dimensional
+[0:13:45] report the three or four dimensional thing in the end or should i try to
+[0:13:47] thing in the end or should i try to integrate everything just into one
+[0:13:49] integrate everything just into one quantity i don't have a finite uh like a
+[0:13:52] quantity i don't have a finite uh like a definite answer on that but i just want
+[0:13:53] definite answer on that but i just want to point out so here in this
+[0:13:55] to point out so here in this in this
+[0:13:56] in this in this talk we're going to try to
+[0:13:58] in this talk we're going to try to integrate
+[0:13:59] integrate uh different uh
+[0:14:01] uh different uh things into uh one quantity so later our
+[0:14:04] things into uh one quantity so later our quantity will not just account for
+[0:14:07] quantity will not just account for uh sampling uncertainty but also for
+[0:14:09] uh sampling uncertainty but also for distribution uncertainty
+[0:14:11] distribution uncertainty and yeah also
+[0:14:13] and yeah also we have to make a choice about the
+[0:14:14] we have to make a choice about the asymptotic regime
+[0:14:18] asymptotic regime so if you look at the decomposition
+[0:14:25] decomposition up here you see there's a sampling uncertainty and there's a
+[0:14:27] sampling uncertainty and there's a distributional uncertainty here
+[0:14:29] distributional uncertainty here you can now look at settings where this
+[0:14:31] you can now look at settings where this is
+[0:14:32] is of lower order than this then you can
+[0:14:34] of lower order than this then you can think about where this is of the same
+[0:14:36] think about where this is of the same order
+[0:14:37] order as as size of this and you can also look
+[0:14:40] as as size of this and you can also look at where this is of lower order than
+[0:14:42] at where this is of lower order than this
+[0:14:43] this so
+[0:14:44] so like for purely strategical reasons uh
+[0:14:47] like for purely strategical reasons uh we decided to
+[0:14:48] we decided to go with the setup where sampling
+[0:14:50] go with the setup where sampling uncertainty is of the same order uh so
+[0:14:53] uncertainty is of the same order uh so of the magnitude one over square root of
+[0:14:55] of the magnitude one over square root of n
+[0:14:56] n because uh
+[0:14:57] because uh well first of all it's the most
+[0:14:59] well first of all it's the most interesting um
+[0:15:01] interesting um because uh we wanna you wanna integrate
+[0:15:03] because uh we wanna you wanna integrate different notions of stability and then
+[0:15:05] different notions of stability and then it makes most sense i believe to start
+[0:15:07] it makes most sense i believe to start with the regime that people are
+[0:15:09] with the regime that people are currently looking at and that is where
+[0:15:11] currently looking at and that is where sampling uncertainty is
+[0:15:14] sampling uncertainty is is important
+[0:15:15] is important okay but in the end uh you actually i
+[0:15:18] okay but in the end uh you actually i think we want methods that work for all
+[0:15:20] think we want methods that work for all of these three asymptotic regimes
+[0:15:22] of these three asymptotic regimes and i think our method does that but for
+[0:15:24] and i think our method does that but for like for reason of exposition we
+[0:15:27] like for reason of exposition we simplified we didn't we didn't do the
+[0:15:30] simplified we didn't we didn't do the full generality in the paper
+[0:15:32] full generality in the paper okay so what's the overall goal here
+[0:15:36] okay so what's the overall goal here so we want to connect those two problems
+[0:15:39] so we want to connect those two problems that we had before so we want to connect
+[0:15:40] that we had before so we want to connect distributional uncertainty to estimator
+[0:15:43] distributional uncertainty to estimator to estimator variability
+[0:15:45] to estimator variability in fact we're going to show that this
+[0:15:47] in fact we're going to show that this estimator to estimate a variability can
+[0:15:48] estimator to estimate a variability can be used to construct confidence
+[0:15:50] be used to construct confidence intervals that account for a certain
+[0:15:52] intervals that account for a certain type of distributional uncertainty so if
+[0:15:55] type of distributional uncertainty so if you look at this from this perspective
+[0:15:57] you look at this from this perspective these researchers degrees of freedom so
+[0:15:59] these researchers degrees of freedom so those multiple ways to construct
+[0:16:01] those multiple ways to construct estimators can be seen as an opportunity
+[0:16:04] estimators can be seen as an opportunity and it's not just a problem
+[0:16:06] and it's not just a problem for for stability in our pipeline
+[0:16:14] okay so let me briefly uh
+[0:16:16] briefly uh go to the settings so this is the
+[0:16:18] go to the settings so this is the simplified version
+[0:16:19] simplified version um
+[0:16:21] um we have a d1 to dn
+[0:16:24] we have a d1 to dn so and observations as a data set so
+[0:16:28] so and observations as a data set so that for any bounded function with
+[0:16:30] that for any bounded function with bounded total variation
+[0:16:32] bounded total variation we look at this empirical process
+[0:16:34] we look at this empirical process and we want this to be approximately
+[0:16:36] and we want this to be approximately gaussian distribution booted with mean
+[0:16:39] gaussian distribution booted with mean zero and variance
+[0:16:41] zero and variance times some uh adjustment factor delta
+[0:16:44] times some uh adjustment factor delta squared here
+[0:16:45] squared here and you might be wondering about this
+[0:16:47] and you might be wondering about this delta squared here and i'll i'll give a
+[0:16:49] delta squared here and i'll i'll give a bit more intuition why this data squared
+[0:16:50] bit more intuition why this data squared here pops up
+[0:16:53] here pops up the only thing that i want to say here
+[0:16:54] the only thing that i want to say here is that
+[0:16:55] is that if you actually draw iid from the target
+[0:16:57] if you actually draw iid from the target distribution then obviously this
+[0:16:59] distribution then obviously this equation holds with
+[0:17:01] equation holds with by the clt just with delta equal one so
+[0:17:04] by the clt just with delta equal one so what we're just doing here is at this
+[0:17:06] what we're just doing here is at this point we're just relaxing the iid
+[0:17:08] point we're just relaxing the iid assumption
+[0:17:10] assumption that's all we're doing here and the the
+[0:17:12] that's all we're doing here and the the reason why we're introducing a delta
+[0:17:14] reason why we're introducing a delta here will be later motivated by a
+[0:17:16] here will be later motivated by a isotropic person distribution of
+[0:17:18] isotropic person distribution of perturbations that we're going to talk
+[0:17:20] perturbations that we're going to talk about in a second
+[0:17:22] about in a second so i said this is the simplified version
+[0:17:24] so i said this is the simplified version why is it the simplified version because
+[0:17:26] why is it the simplified version because i just said approximately here
+[0:17:29] i just said approximately here if you want to make this very rigorous
+[0:17:32] if you want to make this very rigorous what you actually have to consider the
+[0:17:34] what you actually have to consider the way we construct these are we're
+[0:17:36] way we construct these are we're constructing that with a triangular
+[0:17:38] constructing that with a triangular arrays of random variables and then you
+[0:17:40] arrays of random variables and then you get the empirical process on the left
+[0:17:42] get the empirical process on the left hand side and on the right hand side you
+[0:17:43] hand side and on the right hand side you have your gaussian distribution plus a
+[0:17:45] have your gaussian distribution plus a small op of one so that's just
+[0:17:48] small op of one so that's just notationally a little bit harder and i
+[0:17:50] notationally a little bit harder and i think a bit harder to understand at the
+[0:17:52] think a bit harder to understand at the beginning so that's why i thought just
+[0:17:53] beginning so that's why i thought just the simplified version uh for now is is
+[0:17:56] the simplified version uh for now is is easier to follow so just think about
+[0:17:58] easier to follow so just think about this as an empirical process that
+[0:18:00] this as an empirical process that doesn't have
+[0:18:01] doesn't have the correct variance that you expect
+[0:18:05] the correct variance that you expect okay
+[0:18:10] so now there are two questions that we will address separately
+[0:18:13] will address separately so first of all um there's a statistical
+[0:18:16] so first of all um there's a statistical side to that so how do you do inference
+[0:18:18] side to that so how do you do inference under this assumption and then there's
+[0:18:19] under this assumption and then there's the interpretation side so what kind of
+[0:18:22] the interpretation side so what kind of distributional perturbation processes
+[0:18:24] distributional perturbation processes will actually lead you to this to this
+[0:18:27] will actually lead you to this to this equation and we want to separate that
+[0:18:28] equation and we want to separate that because
+[0:18:29] because people might be working on either side
+[0:18:31] people might be working on either side of this and then it's easier to kind of
+[0:18:32] of this and then it's easier to kind of have that thing in the middle that just
+[0:18:35] have that thing in the middle that just makes everything work
+[0:18:38] makes everything work and we'll also show
+[0:18:39] and we'll also show kind of later how the distributional
+[0:18:42] kind of later how the distributional uncertainty relates to other
+[0:18:43] uncertainty relates to other distribution issues such as confounding
+[0:18:45] distribution issues such as confounding and sampling bias that we might worry
+[0:18:46] and sampling bias that we might worry about
+[0:18:47] about in causal inference
+[0:18:52] okay so when does this assumption hold just a
+[0:18:55] so when does this assumption hold just a very quick
+[0:18:57] very quick very quick overview
+[0:19:02] so what i'm going to do here is a very
+[0:19:04] what i'm going to do here is a very simple model where i take a discrete
+[0:19:06] simple model where i take a discrete distribution
+[0:19:07] distribution where i put equal weight on on each of
+[0:19:10] where i put equal weight on on each of the elements in my in my sampling space
+[0:19:13] the elements in my in my sampling space and so the probabilities are one over m
+[0:19:16] and so the probabilities are one over m for all of my all of my axes and now i
+[0:19:19] for all of my all of my axes and now i just draw some some random weights and i
+[0:19:22] just draw some some random weights and i randomly up weight or down weight
+[0:19:25] randomly up weight or down weight the probabilities of events so here i
+[0:19:27] the probabilities of events so here i mean the expectation of this whole thing
+[0:19:29] mean the expectation of this whole thing here is 1 over m
+[0:19:31] here is 1 over m but because the psi k is random i just
+[0:19:34] but because the psi k is random i just randomly upgrade or down weight
+[0:19:37] randomly upgrade or down weight probabilities of events
+[0:19:39] probabilities of events and now if you look at the variance of
+[0:19:41] and now if you look at the variance of an empirical process under this sampling
+[0:19:43] an empirical process under this sampling process so if i now don't draw from the
+[0:19:45] process so if i now don't draw from the original distribution but from this
+[0:19:47] original distribution but from this slightly perturbed distribution you're
+[0:19:49] slightly perturbed distribution you're going to see that you first get the term
+[0:19:52] going to see that you first get the term that is due to the sampling variation
+[0:19:53] that is due to the sampling variation and then there's this additional term
+[0:19:55] and then there's this additional term that comes due to the fact that you did
+[0:19:57] that comes due to the fact that you did not sample from the actual distribution
+[0:19:59] not sample from the actual distribution that you wanted to sample from but
+[0:20:01] that you wanted to sample from but a randomly kind of perturbed
+[0:20:03] a randomly kind of perturbed version of the thing that you wanted to
+[0:20:05] version of the thing that you wanted to sample from
+[0:20:07] sample from okay so there's a
+[0:20:09] okay so there's a there's this original variance
+[0:20:11] there's this original variance that you're now multiplying with a
+[0:20:12] that you're now multiplying with a vector uh that will be larger than one
+[0:20:15] vector uh that will be larger than one so that's the delta that we were
+[0:20:18] so that's the delta that we were that we had in the result above and just
+[0:20:21] that we had in the result above and just to comment here so i have a slightly uh
+[0:20:24] to comment here so i have a slightly uh weaker example here so here i'm just
+[0:20:26] weaker example here so here i'm just talking about the variance the
+[0:20:27] talking about the variance the assumption that we make is actually
+[0:20:28] assumption that we make is actually about the asymptotic distribution
+[0:20:31] about the asymptotic distribution but we'll
+[0:20:33] but we'll but you can make that more precise uh
+[0:20:35] but you can make that more precise uh with a slightly more difficult
+[0:20:37] with a slightly more difficult difficult version of this and we have
+[0:20:39] difficult version of this and we have that we have it in our paper also what i
+[0:20:41] that we have it in our paper also what i presented here was for discrete
+[0:20:42] presented here was for discrete distribution again you can do something
+[0:20:44] distribution again you can do something similar for continuous distributions
+[0:20:46] similar for continuous distributions um
+[0:20:48] um the only important thing here is the
+[0:20:49] the only important thing here is the intuition here you can think about the
+[0:20:51] intuition here you can think about the perturb distribution here just as
+[0:20:53] perturb distribution here just as randomly operating or downwarding the
+[0:20:56] randomly operating or downwarding the probabilities of events compared to the
+[0:20:58] probabilities of events compared to the target distribution that you actually
+[0:20:59] target distribution that you actually want to sample from
+[0:21:06] okay um you could also ask what what other
+[0:21:08] um you could also ask what what other types of sampling processes will give me
+[0:21:10] types of sampling processes will give me that scaling factor delta and the
+[0:21:11] that scaling factor delta and the variance um so i already talked about
+[0:21:14] variance um so i already talked about the randomly upgrading or downwarding
+[0:21:16] the randomly upgrading or downwarding probabilities of events there are a
+[0:21:18] probabilities of events there are a bunch of other things drawing with
+[0:21:20] bunch of other things drawing with replacement from a finite population
+[0:21:22] replacement from a finite population you can also do a sampling of clusters
+[0:21:26] you can also do a sampling of clusters of units where the units in the clusters
+[0:21:28] of units where the units in the clusters are highly correlated but you don't
+[0:21:30] are highly correlated but you don't observe the membership so for your unit
+[0:21:32] observe the membership so for your unit you don't know which cluster they belong
+[0:21:34] you don't know which cluster they belong to
+[0:21:39] but we'll we'll go to that in more detail later
+[0:21:41] in more detail later for now let's go to statistical
+[0:21:43] for now let's go to statistical inference okay
+[0:21:45] inference okay any questions so far
+[0:21:48] any questions so far there are several questions that have
+[0:21:50] there are several questions that have been answered by eugene there's only one
+[0:21:53] been answered by eugene there's only one online ones
+[0:21:55] online ones it asks for whether it is just a
+[0:21:57] it asks for whether it is just a development of stats theory or like in
+[0:22:00] development of stats theory or like in your example how would you know with
+[0:22:02] your example how would you know with real data about the nature of dependence
+[0:22:04] real data about the nature of dependence in the random realizations and how does
+[0:22:07] in the random realizations and how does this help the practitioner i think this
+[0:22:09] this help the practitioner i think this is a fantastic question
+[0:22:11] is a fantastic question um
+[0:22:12] um so the the way that i think about this
+[0:22:14] so the the way that i think about this and the what what is driven all of this
+[0:22:17] and the what what is driven all of this is that
+[0:22:18] is that the goal here is to start with something
+[0:22:20] the goal here is to start with something that practitioners already do and you'll
+[0:22:22] that practitioners already do and you'll see that once we discuss the methods so
+[0:22:24] see that once we discuss the methods so we start with something that people
+[0:22:25] we start with something that people already do which is uh looking at the
+[0:22:28] already do which is uh looking at the variation between different
+[0:22:30] variation between different methods that you think are reasonable
+[0:22:32] methods that you think are reasonable for estimating the same thing and then
+[0:22:34] for estimating the same thing and then provide some meaning for that so provide
+[0:22:36] provide some meaning for that so provide rigorous guarantees and say like under
+[0:22:38] rigorous guarantees and say like under what kind of distributional assumptions
+[0:22:40] what kind of distributional assumptions will you be able
+[0:22:41] will you be able to do more with that
+[0:22:43] to do more with that so the
+[0:22:45] so the there is something that people already
+[0:22:46] there is something that people already do we provide meaning with that now the
+[0:22:49] do we provide meaning with that now the hope is that if if people are convinced
+[0:22:51] hope is that if if people are convinced that this relaxation of of like of the
+[0:22:54] that this relaxation of of like of the theory is reasonable that it will also
+[0:22:56] theory is reasonable that it will also drive the development of new type of
+[0:22:58] drive the development of new type of methodology and for me the ultimate
+[0:23:01] methodology and for me the ultimate the the ultimate goal or the ultimate
+[0:23:04] the the ultimate goal or the ultimate reason why what i want to achieve with
+[0:23:05] reason why what i want to achieve with this is i want to have more stable and
+[0:23:08] this is i want to have more stable and more replicable
+[0:23:10] more replicable discoveries across data sets so that for
+[0:23:12] discoveries across data sets so that for me is the is the final driver and i
+[0:23:14] me is the is the final driver and i think that's where it will also be
+[0:23:16] think that's where it will also be useful for practitioners again so
+[0:23:18] useful for practitioners again so currently what i'm doing is i'm
+[0:23:19] currently what i'm doing is i'm developing a new a theoretical framework
+[0:23:22] developing a new a theoretical framework where i believe
+[0:23:23] where i believe new methods that might increase the
+[0:23:25] new methods that might increase the stability of discoveries might emerge
+[0:23:28] stability of discoveries might emerge and the ultimate goal then will be to
+[0:23:30] and the ultimate goal then will be to see whether it
+[0:23:31] see whether it increases stability of decision making
+[0:23:38] um now you ask in which how do we know uh in real data about the dependencies
+[0:23:41] uh in real data about the dependencies um
+[0:23:42] um i'll argue a little bit later i think
+[0:23:44] i'll argue a little bit later i think it's difficult at this point to see
+[0:23:45] it's difficult at this point to see exactly kind of how we do it so i'll
+[0:23:49] exactly kind of how we do it so i'll i hope to answer this just part of the
+[0:23:51] i hope to answer this just part of the question later
+[0:23:57] thanks um yeah then i think we can continue
+[0:23:58] continue yeah thanks thanks for the question this
+[0:24:00] yeah thanks thanks for the question this is a this is a great it was a great
+[0:24:01] is a this is a great it was a great question um
+[0:24:03] question um okay so how let's do how to do inference
+[0:24:06] okay so how let's do how to do inference um well let's first
+[0:24:07] um well let's first discuss how to not do inference in this
+[0:24:10] discuss how to not do inference in this framework um
+[0:24:11] framework um so
+[0:24:13] so what what people or what you intuitively
+[0:24:15] what what people or what you intuitively what you would do is you let's say you
+[0:24:17] what you would do is you let's say you want to estimate the mean
+[0:24:19] want to estimate the mean you can just estimate the empirical
+[0:24:20] you can just estimate the empirical standard deviation
+[0:24:23] standard deviation so uh the empirical standard empirical
+[0:24:26] so uh the empirical standard empirical variance here
+[0:24:27] variance here and if you apply our assumption one
+[0:24:31] and if you apply our assumption one you will actually get this right in the
+[0:24:33] you will actually get this right in the sense that the empirical standard
+[0:24:35] sense that the empirical standard deviation will be close to the variant
+[0:24:37] deviation will be close to the variant of just one single observation but the
+[0:24:40] of just one single observation but the problem is that the mean
+[0:24:43] problem is that the mean uh now does not have the
+[0:24:46] uh now does not have the variance
+[0:24:47] variance the mean does not have the correct
+[0:24:49] the mean does not have the correct variance anymore so the variance of
+[0:24:50] variance anymore so the variance of theta hat
+[0:24:52] theta hat is a delta squared times the variance
+[0:24:54] is a delta squared times the variance divided by n
+[0:24:55] divided by n so if you just do things as usual
+[0:24:58] so if you just do things as usual here you're going to have an issue uh
+[0:25:01] here you're going to have an issue uh you're gonna trust the underestimate
+[0:25:03] you're gonna trust the underestimate uncertainty usually
+[0:25:08] okay so
+[0:25:09] so intuitively what's just happening is now
+[0:25:11] intuitively what's just happening is now you have two types of uncertainty the
+[0:25:12] you have two types of uncertainty the first one is sampling uncertainty the
+[0:25:14] first one is sampling uncertainty the second one is distributional uncertainty
+[0:25:16] second one is distributional uncertainty and the delta squared has to take care
+[0:25:19] and the delta squared has to take care of both of them so if you just put a
+[0:25:21] of both of them so if you just put a factor of one here you're going to
+[0:25:23] factor of one here you're going to underestimate uncertainty
+[0:25:30] okay so what are the assumptions here so
+[0:25:32] so we assumed
+[0:25:33] we assumed that the statisticians doesn't just have
+[0:25:35] that the statisticians doesn't just have oh sorry one one other thing to mention
+[0:25:37] oh sorry one one other thing to mention here so if you don't put any additional
+[0:25:39] here so if you don't put any additional structure on this at this point there's
+[0:25:41] structure on this at this point there's nothing you can do
+[0:25:43] nothing you can do if in the example above even if you let
+[0:25:45] if in the example above even if you let n go to infinity you have infinite data
+[0:25:47] n go to infinity you have infinite data you have no idea how large
+[0:25:48] you have no idea how large distributional perturbations are that
+[0:25:50] distributional perturbations are that means you have no y to estimate that so
+[0:25:52] means you have no y to estimate that so you we need more structure at this point
+[0:25:55] you we need more structure at this point okay so the assumptions here that we
+[0:25:58] okay so the assumptions here that we make is that we don't just have one
+[0:25:59] make is that we don't just have one estimator we have a bunch of estimators
+[0:26:01] estimator we have a bunch of estimators that you believe estimate a very similar
+[0:26:04] that you believe estimate a very similar quantity
+[0:26:05] quantity um so
+[0:26:08] um so theta had k minus theta of p naught
+[0:26:10] theta had k minus theta of p naught should be should be should be close to
+[0:26:12] should be should be should be close to zero
+[0:26:14] zero and then we also assume uh asymptotic
+[0:26:16] and then we also assume uh asymptotic linearity here
+[0:26:18] linearity here so we're looking at the low dimensional
+[0:26:20] so we're looking at the low dimensional setup
+[0:26:22] setup where those phi k's are your uh your
+[0:26:25] where those phi k's are your uh your influence functions um just a quick
+[0:26:27] influence functions um just a quick comments about these two assumptions or
+[0:26:29] comments about these two assumptions or these two parts of the assumption here
+[0:26:30] these two parts of the assumption here so we assume asymptotic linearity that
+[0:26:32] so we assume asymptotic linearity that is kind of clear for iid sampling you
+[0:26:35] is kind of clear for iid sampling you can also show that this holds in our
+[0:26:36] can also show that this holds in our sampling model even with the
+[0:26:38] sampling model even with the distributional uncertainty under
+[0:26:40] distributional uncertainty under relatively minor assumptions
+[0:26:42] relatively minor assumptions there's also this other question where i
+[0:26:44] there's also this other question where i said okay i asked assume that you have
+[0:26:46] said okay i asked assume that you have estimators that supposedly estimate a
+[0:26:48] estimators that supposedly estimate a very similar quantity if they don't if
+[0:26:50] very similar quantity if they don't if they as asymptotically convert to
+[0:26:52] they as asymptotically convert to different things what you will usually
+[0:26:54] different things what you will usually get is in our confidence intervals you
+[0:26:56] get is in our confidence intervals you will get over coverage so you'll just be
+[0:26:58] will get over coverage so you'll just be conservative
+[0:27:00] conservative so um
+[0:27:02] so um so yeah this is i don't think this is
+[0:27:04] so yeah this is i don't think this is the important assumption here i think
+[0:27:07] the important assumption here i think assumption one the first one is more
+[0:27:09] assumption one the first one is more important and
+[0:27:11] important and more
+[0:27:12] more more important to think about
+[0:27:14] more important to think about okay so let's look
+[0:27:16] okay so let's look let's let's see how we can do inference
+[0:27:18] let's let's see how we can do inference here
+[0:27:20] here i'm going to take two estimators and i'm
+[0:27:22] i'm going to take two estimators and i'm going to take the difference if you take
+[0:27:24] going to take the difference if you take difference and you square them what
+[0:27:26] difference and you square them what you're going to see is that
+[0:27:28] you're going to see is that approximately because i assumed
+[0:27:31] approximately because i assumed asymptotic linearity i can use as 1
+[0:27:34] asymptotic linearity i can use as 1 assumption 2 then i see that this is
+[0:27:36] assumption 2 then i see that this is approximately delta squared times the
+[0:27:38] approximately delta squared times the variance of the differences
+[0:27:40] variance of the differences times z squared whereas that is a
+[0:27:42] times z squared whereas that is a standard gaussian random variable
+[0:27:45] standard gaussian random variable so
+[0:27:46] so on average
+[0:27:47] on average that difference
+[0:27:49] that difference will be close to that squared times the
+[0:27:51] will be close to that squared times the variance
+[0:27:52] variance now the problem is of course set squared
+[0:27:54] now the problem is of course set squared is a gaussian random variable so you
+[0:27:56] is a gaussian random variable so you just doing that for one for two
+[0:27:58] just doing that for one for two estimators will not get too far
+[0:28:01] estimators will not get too far um but what you can do now is you can
+[0:28:04] um but what you can do now is you can estimate the variance
+[0:28:06] estimate the variance of of this thing that is still possible
+[0:28:08] of of this thing that is still possible in our sampling model you divide those
+[0:28:10] in our sampling model you divide those two things and you will roughly get uh
+[0:28:13] two things and you will roughly get uh delta squared times
+[0:28:15] delta squared times times a caution random variable now we
+[0:28:18] times a caution random variable now we don't like that there's a lot of
+[0:28:19] don't like that there's a lot of variation here
+[0:28:20] variation here so what we do is we actually we actually
+[0:28:23] so what we do is we actually we actually average over doing this for different
+[0:28:25] average over doing this for different estimators
+[0:28:26] estimators so here
+[0:28:27] so here at the top you see some form of between
+[0:28:29] at the top you see some form of between estimator variation
+[0:28:31] estimator variation and here on the bottom what you see is
+[0:28:32] and here on the bottom what you see is that the
+[0:28:34] that the expected variation between these
+[0:28:35] expected variation between these estimators assuming iid sampling so we
+[0:28:38] estimators assuming iid sampling so we look at the actual deviation of
+[0:28:40] look at the actual deviation of estimators divided by the expected
+[0:28:42] estimators divided by the expected deviation of estimators and if that
+[0:28:45] deviation of estimators and if that ratio becomes very large
+[0:28:47] ratio becomes very large then your estimated delta becomes very
+[0:28:49] then your estimated delta becomes very large and if those things are very close
+[0:28:52] large and if those things are very close then that ratio
+[0:28:54] then that ratio will get will get smaller under iid
+[0:28:56] will get will get smaller under iid sampling this ratio should be close to
+[0:28:59] sampling this ratio should be close to 1.
+[0:29:04] okay now a couple of comments here
+[0:29:10] the denominators so dividing by the expected variation assuming id sampling
+[0:29:12] expected variation assuming id sampling is very important here so if you just
+[0:29:14] is very important here so if you just look
+[0:29:15] look if a practitioner just says like oh i
+[0:29:17] if a practitioner just says like oh i have 10 different ways to uh to estimate
+[0:29:19] have 10 different ways to uh to estimate the causal effect let me uh
+[0:29:22] the causal effect let me uh let me just compar compare whether they
+[0:29:25] let me just compar compare whether they get close that doesn't really tell you
+[0:29:27] get close that doesn't really tell you anything about stability if those
+[0:29:29] anything about stability if those estimators are all the same so it's not
+[0:29:31] estimators are all the same so it's not about how far they are of absolute terms
+[0:29:34] about how far they are of absolute terms but it's about how far they are apart in
+[0:29:36] but it's about how far they are apart in relative terms compared to how far you
+[0:29:39] relative terms compared to how far you expect them to be
+[0:29:41] expect them to be so yeah it's about relative deviation
+[0:29:43] so yeah it's about relative deviation not absolute deviation
+[0:29:45] not absolute deviation um there's also some relationship to
+[0:29:47] um there's also some relationship to random effect models that you could talk
+[0:29:48] random effect models that you could talk about
+[0:29:49] about here um but i'll skip that in the
+[0:29:51] here um but i'll skip that in the interest of time
+[0:29:53] interest of time um yeah we have a theorem now that says
+[0:29:56] um yeah we have a theorem now that says okay
+[0:29:58] okay that you can calibrate your inference
+[0:30:00] that you can calibrate your inference so
+[0:30:05] you under the assumptions before and under some regularity conditions you can
+[0:30:08] under some regularity conditions you can form confidence intervals with the
+[0:30:09] form confidence intervals with the estimated delta
+[0:30:11] estimated delta that we estimate as before
+[0:30:13] that we estimate as before and what you get now is a guarantee
+[0:30:16] and what you get now is a guarantee that
+[0:30:17] that the
+[0:30:18] the that the parameter is in this interval
+[0:30:20] that the parameter is in this interval with probability that goes to one minus
+[0:30:22] with probability that goes to one minus alpha the important thing here is that
+[0:30:25] alpha the important thing here is that you are
+[0:30:26] you are we are not talking about the
+[0:30:28] we are not talking about the sampling distribution this is
+[0:30:30] sampling distribution this is uh
+[0:30:31] uh you are potentially drawing from a
+[0:30:33] you are potentially drawing from a perturbed distribution peak psi
+[0:30:36] perturbed distribution peak psi so the data is from the perturbed
+[0:30:37] so the data is from the perturbed distribution but you're covering
+[0:30:39] distribution but you're covering uh the parameter of the original
+[0:30:41] uh the parameter of the original unpredicted distribution
+[0:30:43] unpredicted distribution so we can account for both sampling
+[0:30:45] so we can account for both sampling uncertainty and the uncertainty that
+[0:30:47] uncertainty and the uncertainty that you're worried about making
+[0:30:49] you're worried about making distributional mistakes
+[0:30:52] okay
+[0:30:57] so are there any questions so far
+[0:31:01] are there any questions so far uh there is no open questions for now
+[0:31:04] uh there is no open questions for now okay
+[0:31:05] okay thanks
+[0:31:09] okay so now the goal is to understand just a
+[0:31:11] now the goal is to understand just a little bit better what this
+[0:31:12] little bit better what this distributional perturbation model does
+[0:31:14] distributional perturbation model does because that is kind of a part that is
+[0:31:17] because that is kind of a part that is kind of
+[0:31:18] kind of maybe new to some people here
+[0:31:20] maybe new to some people here um
+[0:31:25] so you could say like okay dominic like this is like yeah nice theory i mean you
+[0:31:28] this is like yeah nice theory i mean you wrote down some
+[0:31:29] wrote down some distributional perturbation mall and you
+[0:31:31] distributional perturbation mall and you arrive with some way to adjust your
+[0:31:33] arrive with some way to adjust your confidence intervals right so like what
+[0:31:35] confidence intervals right so like what about other models i could have written
+[0:31:37] about other models i could have written down something else right
+[0:31:38] down something else right what what would happen in that setting
+[0:31:40] what what would happen in that setting so everyone can just write down their
+[0:31:42] so everyone can just write down their favorite distributional perturbation
+[0:31:43] favorite distributional perturbation model
+[0:31:46] model and so that's the first point that i
+[0:31:47] and so that's the first point that i want to tackle here and the second point
+[0:31:49] want to tackle here and the second point i want to tackle is just talk about how
+[0:31:51] i want to tackle is just talk about how it relates to other concepts that we
+[0:31:52] it relates to other concepts that we worry about in causal inference such as
+[0:31:54] worry about in causal inference such as confounding and
+[0:31:57] confounding and non-iid sampling
+[0:32:00] non-iid sampling um so
+[0:32:02] um so we have a theorem about the what about
+[0:32:05] we have a theorem about the what about what about other perturbation models
+[0:32:08] what about other perturbation models and this this theorem essentially says
+[0:32:11] and this this theorem essentially says i'll not go into too much details here
+[0:32:13] i'll not go into too much details here but this theorem essentially says that
+[0:32:15] but this theorem essentially says that under a symmetry assumption
+[0:32:18] under a symmetry assumption there is essentially only one
+[0:32:19] there is essentially only one perturbation model and that is the
+[0:32:21] perturbation model and that is the perturbation model that we are looking
+[0:32:23] perturbation model that we are looking at so
+[0:32:25] at so uh
+[0:32:26] uh if you operationalize that you say like
+[0:32:28] if you operationalize that you say like okay there is some process that perturbs
+[0:32:30] okay there is some process that perturbs my distribution that there's some
+[0:32:32] my distribution that there's some way that a mistake creeps in
+[0:32:35] way that a mistake creeps in that i don't that i don't sample from
+[0:32:37] that i don't that i don't sample from what i exactly want to sample from
+[0:32:40] what i exactly want to sample from and the the symmetry assumption that i
+[0:32:42] and the the symmetry assumption that i wrote down is that two events that have
+[0:32:44] wrote down is that two events that have the same probability get
+[0:32:46] the same probability get perturbed with the same strength so they
+[0:32:48] perturbed with the same strength so they have the same variation and i also
+[0:32:51] have the same variation and i also assume that
+[0:32:52] assume that events that have a small
+[0:32:54] events that have a small problem probability will only get
+[0:32:56] problem probability will only get perturbed a little bit
+[0:32:58] perturbed a little bit then you can show that
+[0:33:00] then you can show that essentially our perturbation model is
+[0:33:03] essentially our perturbation model is the only perturbation model
+[0:33:06] the only perturbation model that there is under this this setup
+[0:33:09] that there is under this this setup which just says that all of your
+[0:33:10] which just says that all of your variances are scaled by this global
+[0:33:13] variances are scaled by this global vector delta squared
+[0:33:19] okay so in in some way the like the model
+[0:33:21] so in in some way the like the model that we're using is you can just think
+[0:33:22] that we're using is you can just think about this as the the most generic uh
+[0:33:26] about this as the the most generic uh distributional perturbation model that
+[0:33:27] distributional perturbation model that you can write down of course there's
+[0:33:29] you can write down of course there's other there are ways that you can do
+[0:33:31] other there are ways that you can do things differently but you can just
+[0:33:32] things differently but you can just think about it also as a symmetry
+[0:33:34] think about it also as a symmetry assumption on on your on your
+[0:33:37] assumption on on your on your perturbation if you don't know anything
+[0:33:39] perturbation if you don't know anything about the perturbation i think this this
+[0:33:41] about the perturbation i think this this might be a good place to start
+[0:33:46] okay so now you can ask well how does this relate to other concepts that we
+[0:33:48] this relate to other concepts that we that we worry about
+[0:33:50] that we worry about um
+[0:33:53] um so what we do in the paper is we talk
+[0:33:56] so what we do in the paper is we talk about relationships to other stuff for
+[0:33:58] about relationships to other stuff for example uh you can think about
+[0:34:00] example uh you can think about violations of unconfoundedness if you
+[0:34:02] violations of unconfoundedness if you start with the original distribution and
+[0:34:04] start with the original distribution and you have unconfoundedness there and you
+[0:34:07] you have unconfoundedness there and you you do the perturbation that you do
+[0:34:09] you do the perturbation that you do before then you can show that with high
+[0:34:11] before then you can show that with high probability
+[0:34:12] probability uh
+[0:34:13] uh confoundedness does not hold anymore and
+[0:34:15] confoundedness does not hold anymore and you can actually you can compute the
+[0:34:17] you can actually you can compute the bias
+[0:34:18] bias due to confounding there and depending
+[0:34:20] due to confounding there and depending on how large your delta is you will have
+[0:34:22] on how large your delta is you will have a lot of confounding or little
+[0:34:23] a lot of confounding or little confounding
+[0:34:25] confounding so um
+[0:34:27] so um the
+[0:34:28] the the
+[0:34:29] the the random perturbation model kind of
+[0:34:30] the random perturbation model kind of induces some forms of you can think
+[0:34:32] induces some forms of you can think about as a form of random confounding
+[0:34:36] about as a form of random confounding um also
+[0:34:38] um also you can think about it as a violation of
+[0:34:40] you can think about it as a violation of the iid assumption so
+[0:34:43] the iid assumption so if you look at the if you draw your
+[0:34:45] if you look at the if you draw your random variable ci id from the from the
+[0:34:49] random variable ci id from the from the perturb distribution and you look at
+[0:34:52] perturb distribution and you look at you look at the covariance between di
+[0:34:54] you look at the covariance between di and dj marginally so marginally means
+[0:34:56] and dj marginally so marginally means both over the sampling uncertainty and
+[0:34:59] both over the sampling uncertainty and over a distributional uncertainty
+[0:35:01] over a distributional uncertainty you'll see that you uh the covariance
+[0:35:03] you'll see that you uh the covariance now has this
+[0:35:04] now has this this common factor delta squared
+[0:35:08] this common factor delta squared that is uh
+[0:35:09] that is uh [Music]
+[0:35:10] [Music] that is common uh across all the
+[0:35:12] that is common uh across all the functions so if i would write phi of the
+[0:35:14] functions so if i would write phi of the i5 of dj i would always get the same
+[0:35:16] i5 of dj i would always get the same delta squared
+[0:35:17] delta squared so you can also just think about the
+[0:35:19] so you can also just think about the random perturbation model as introducing
+[0:35:22] random perturbation model as introducing associations between the units
+[0:35:34] okay i think i see a question here which is
+[0:35:35] is i think the previous re-weighting shifts
+[0:35:37] i think the previous re-weighting shifts can fall in a broader evasion framework
+[0:35:41] can fall in a broader evasion framework could you please comment on the
+[0:35:42] could you please comment on the connection uh with with the bayesian
+[0:35:44] connection uh with with the bayesian framework so i'm not sure i understand
+[0:35:46] framework so i'm not sure i understand this completely so in a bayesian
+[0:35:48] this completely so in a bayesian framework what you could do is you could
+[0:35:49] framework what you could do is you could say like oh okay there's uh
+[0:35:52] say like oh okay there's uh um
+[0:35:53] um there's a
+[0:35:55] there's a there's a bias due to distributional
+[0:35:57] there's a bias due to distributional perturbations and i'm going to put a
+[0:35:58] perturbations and i'm going to put a prior on the bias
+[0:36:00] prior on the bias and
+[0:36:01] and now i just try to marginalize over it
+[0:36:04] now i just try to marginalize over it so here our setup is slightly different
+[0:36:06] so here our setup is slightly different in that we don't you don't know the
+[0:36:08] in that we don't you don't know the strength of the perturbations and that's
+[0:36:11] strength of the perturbations and that's why you use estimator to estimator a
+[0:36:13] why you use estimator to estimator a variability that kind of
+[0:36:15] variability that kind of allows you to find out how
+[0:36:17] allows you to find out how how big the deviations are actually from
+[0:36:19] how big the deviations are actually from the from the ideal
+[0:36:21] the from the ideal um
+[0:36:23] um yeah so it's it's more like you you
+[0:36:25] yeah so it's it's more like you you specify the form
+[0:36:26] specify the form uh the form of the perturbations and
+[0:36:28] uh the form of the perturbations and once you specify the form of the
+[0:36:29] once you specify the form of the population you just have a
+[0:36:30] population you just have a one-dimensional parameter you have to
+[0:36:32] one-dimensional parameter you have to estimate
+[0:36:33] estimate uh instead of putting a full prior on it
+[0:36:35] uh instead of putting a full prior on it where you actually need to know how
+[0:36:36] where you actually need to know how strong your confounding is or how strong
+[0:36:38] strong your confounding is or how strong your perturbations are if that makes any
+[0:36:41] your perturbations are if that makes any sense
+[0:36:47] okay just some high level intuition i have to be careful when i say okay there
+[0:36:48] have to be careful when i say okay there are conditions there are relationships
+[0:36:50] are conditions there are relationships to uh to confounding and then non-iid
+[0:36:53] to uh to confounding and then non-iid sampling
+[0:36:55] sampling so what we're trying to do is here we're
+[0:36:56] so what we're trying to do is here we're just trying to start with sampling
+[0:36:58] just trying to start with sampling uncertainty and then realize that well
+[0:37:00] uncertainty and then realize that well often in statistical problems sampling
+[0:37:03] often in statistical problems sampling uncertainty is not your biggest source
+[0:37:04] uncertainty is not your biggest source of uncertainty there's a lot of other
+[0:37:06] of uncertainty there's a lot of other stuff that can go wrong so the question
+[0:37:08] stuff that can go wrong so the question is can we extend our notion of
+[0:37:10] is can we extend our notion of uncertainty to account for more stuff
+[0:37:13] uncertainty to account for more stuff and what we saw is that if you do
+[0:37:14] and what we saw is that if you do calibrated inference you can you can
+[0:37:17] calibrated inference you can you can account for a little bit more
+[0:37:19] account for a little bit more under an isotropic assumption
+[0:37:21] under an isotropic assumption and you can also deal with certain forms
+[0:37:23] and you can also deal with certain forms of correlated data certain forms of
+[0:37:25] of correlated data certain forms of confounding and certain forms of
+[0:37:26] confounding and certain forms of selection bias but like none of these
+[0:37:29] selection bias but like none of these concepts are subsumed in in other
+[0:37:31] concepts are subsumed in in other concepts so there's there's a
+[0:37:33] concepts so there's there's a relationship but we're not
+[0:37:35] relationship but we're not we're not like solving all confounding
+[0:37:37] we're not like solving all confounding problems that they are out in the world
+[0:37:38] problems that they are out in the world it's just trying to take a step in the
+[0:37:40] it's just trying to take a step in the right direction and uh kind of move
+[0:37:43] right direction and uh kind of move towards quantifying uncertainty uh a
+[0:37:46] towards quantifying uncertainty uh a little bit more broadly
+[0:37:48] little bit more broadly if that makes any sense
+[0:37:54] okay um yeah any questions
+[0:37:57] yeah any questions um
+[0:37:58] um there are several questions again
+[0:38:00] there are several questions again answered by eugene there's
+[0:38:03] answered by eugene there's uh still one open question
+[0:38:05] uh still one open question does it matter if your analysis arrows
+[0:38:07] does it matter if your analysis arrows are sequential and dependent
+[0:38:10] are sequential and dependent it's like you screw up and that affects
+[0:38:12] it's like you screw up and that affects your next group
+[0:38:14] your next group um so i think analysis arrows that are
+[0:38:17] um so i think analysis arrows that are sequential and dependent that could also
+[0:38:19] sequential and dependent that could also fit into that framework
+[0:38:21] fit into that framework um
+[0:38:22] um the only thing that you have to assume
+[0:38:25] the only thing that you have to assume is that there's a scaling factor in the
+[0:38:27] is that there's a scaling factor in the variance and you'd have to check that
+[0:38:28] variance and you'd have to check that for your particular model that being
+[0:38:30] for your particular model that being said if you think that your analysis
+[0:38:32] said if you think that your analysis errors are sequential so for example a
+[0:38:34] errors are sequential so for example a time series example then there's also
+[0:38:36] time series example then there's also other stuff that you can do right so for
+[0:38:38] other stuff that you can do right so for example you can assume that the process
+[0:38:40] example you can assume that the process is stationary you can then kind of look
+[0:38:42] is stationary you can then kind of look at the lag one correlations like two
+[0:38:43] at the lag one correlations like two correlations and so on so if you have
+[0:38:45] correlations and so on so if you have more structure on the problem there's
+[0:38:47] more structure on the problem there's also a lot of other stuff that you can
+[0:38:49] also a lot of other stuff that you can do
+[0:38:49] do um so what we presented here the main
+[0:38:52] um so what we presented here the main strength of it is that you don't have to
+[0:38:54] strength of it is that you don't have to assume that you know which units are
+[0:38:56] assume that you know which units are collated with which you really don't
+[0:38:58] collated with which you really don't know much about structure and then this
+[0:39:00] know much about structure and then this thing
+[0:39:01] thing still works
+[0:39:03] still works yeah thanks for the question
+[0:39:05] yeah thanks for the question i have a question if it's okay
+[0:39:08] i have a question if it's okay uh
+[0:39:09] uh so i was just wondering when you're
+[0:39:11] so i was just wondering when you're doing that computation where you have
+[0:39:12] doing that computation where you have several estimators and you're kind of
+[0:39:14] several estimators and you're kind of using that to i guess quantify
+[0:39:16] using that to i guess quantify uncertainty all of the estimators are
+[0:39:19] uncertainty all of the estimators are weighted the same but is there kind of a
+[0:39:22] weighted the same but is there kind of a reason why
+[0:39:23] reason why or
+[0:39:24] or i guess like if you try some estimators
+[0:39:25] i guess like if you try some estimators more than others could you like
+[0:39:26] more than others could you like re-weighted somehow or i don't know oh
+[0:39:28] re-weighted somehow or i don't know oh yeah yeah so we we have something
+[0:39:30] yeah yeah so we we have something actually in our paper on that you can
+[0:39:32] actually in our paper on that you can also do some form of inverse variance
+[0:39:34] also do some form of inverse variance waiting in the center i skipped it
+[0:39:35] waiting in the center i skipped it because
+[0:39:36] because not enough time but yeah you can you can
+[0:39:38] not enough time but yeah you can you can do some form of inverse variance waiting
+[0:39:40] do some form of inverse variance waiting here you will actually do the same
+[0:39:41] here you will actually do the same inverse variance weighting as under iit
+[0:39:43] inverse variance weighting as under iit sampling so we're not changing the
+[0:39:45] sampling so we're not changing the estimator we're just changing the
+[0:39:47] estimator we're just changing the uncertainty quantification
+[0:39:49] uncertainty quantification um but yeah that's that's a very
+[0:39:51] um but yeah that's that's a very interesting comment thanks cool thanks
+[0:40:00] okay so then i'll continue um so now about numerical examples i'll try to
+[0:40:02] about numerical examples i'll try to make this a little bit shorter um so
+[0:40:04] make this a little bit shorter um so there are two things that i think that i
+[0:40:06] there are two things that i think that i think are interesting to uh to explore
+[0:40:08] think are interesting to uh to explore here the first one does the coverage
+[0:40:11] here the first one does the coverage that we promised from the theorem
+[0:40:12] that we promised from the theorem actually hold in practice or for like
+[0:40:14] actually hold in practice or for like things that you can simulate that's the
+[0:40:15] things that you can simulate that's the first part and the second part uh that
+[0:40:18] first part and the second part uh that relates to the question from the
+[0:40:20] relates to the question from the practitioner earlier today is my
+[0:40:22] practitioner earlier today is my ultimately the goal is to increase
+[0:40:24] ultimately the goal is to increase stability and reliability of decision
+[0:40:26] stability and reliability of decision making so we'll also have some real
+[0:40:29] making so we'll also have some real world data application where we try to
+[0:40:31] world data application where we try to look into that a little bit more detail
+[0:40:33] look into that a little bit more detail where we just compare this method to
+[0:40:35] where we just compare this method to a different one
+[0:40:41] okay so let's start with the evaluation of the coverage so does our theorem
+[0:40:43] of the coverage so does our theorem actually kind of does the approximation
+[0:40:45] actually kind of does the approximation work in practice um so we define so here
+[0:40:48] work in practice um so we define so here we have an example from causal inference
+[0:40:50] we have an example from causal inference we draw
+[0:40:51] we draw under the aperture distribution we draw
+[0:40:53] under the aperture distribution we draw from the following graph
+[0:40:55] from the following graph so you have
+[0:40:58] so you have y x1 bunch of covariates we are
+[0:41:00] y x1 bunch of covariates we are interested in the causal effect of x1 on
+[0:41:02] interested in the causal effect of x1 on y so you can get that in a regression of
+[0:41:05] y so you can get that in a regression of y on x2 and x1
+[0:41:08] y on x2 and x1 there's also a bunch of other things
+[0:41:09] there's also a bunch of other things that you can do you can do a regression
+[0:41:10] that you can do you can do a regression of y on x2 x1 and x3 here
+[0:41:14] of y on x2 x1 and x3 here and so on
+[0:41:15] and so on the data that we're drawing is not
+[0:41:17] the data that we're drawing is not directly from this model but we're kind
+[0:41:18] directly from this model but we're kind of again randomly perturbing the
+[0:41:20] of again randomly perturbing the distribution what that means is
+[0:41:22] distribution what that means is again there are some random issues that
+[0:41:24] again there are some random issues that might creep in that make you not sample
+[0:41:26] might creep in that make you not sample from the target distribution that you
+[0:41:28] from the target distribution that you want to sample from
+[0:41:32] so you're looking at this perturbed data and want to estimate the causal effect
+[0:41:34] and want to estimate the causal effect of x 1 and y
+[0:41:36] of x 1 and y you get a bunch of adjustment sets
+[0:41:39] you get a bunch of adjustment sets that lead to different estimators here
+[0:41:43] that lead to different estimators here now
+[0:41:44] now let's look at the results and there are
+[0:41:45] let's look at the results and there are actually two things that we evaluate
+[0:41:47] actually two things that we evaluate here so first the dashed lines is the
+[0:41:50] here so first the dashed lines is the is the is the
+[0:41:51] is the is the is the actual delta uh the one that we
+[0:41:53] is the actual delta uh the one that we want to estimate
+[0:41:55] want to estimate um the the red bars or the red dots is
+[0:41:58] um the the red bars or the red dots is what you see is if you only use
+[0:42:00] what you see is if you only use adjustment sets that are correct but you
+[0:42:02] adjustment sets that are correct but you could also say okay well i probably will
+[0:42:04] could also say okay well i probably will make some mistakes and some of my
+[0:42:06] make some mistakes and some of my adjustment sets will not leak to
+[0:42:08] adjustment sets will not leak to lead to a consistent causal effect
+[0:42:10] lead to a consistent causal effect estimate so for that we have the the
+[0:42:12] estimate so for that we have the the blue bars where we kind of wanted to
+[0:42:13] blue bars where we kind of wanted to simulate a setup where you were not
+[0:42:15] simulate a setup where you were not entirely sure and you also
+[0:42:17] entirely sure and you also use an adjustment set where you
+[0:42:19] use an adjustment set where you accidentally fail to
+[0:42:21] accidentally fail to to adjust for the important confounder
+[0:42:23] to adjust for the important confounder x2 and what you see is that
+[0:42:26] x2 and what you see is that on average here
+[0:42:29] on average here the estimation of delta looks pretty
+[0:42:31] the estimation of delta looks pretty good there's some variation here of
+[0:42:33] good there's some variation here of course
+[0:42:35] course but also if you look at the case where
+[0:42:37] but also if you look at the case where your estimators are not estimating the
+[0:42:38] your estimators are not estimating the same thing they're not consistent
+[0:42:41] same thing they're not consistent you will actually tend to overestimate
+[0:42:44] you will actually tend to overestimate uncertainty so we're overestimating the
+[0:42:46] uncertainty so we're overestimating the delta here
+[0:42:52] okay so that is kind of an important
+[0:42:53] so that is kind of an important robustness criterion if the assumptions
+[0:42:55] robustness criterion if the assumptions are not satisfied you will tend to
+[0:42:56] are not satisfied you will tend to overestimate the uncertainty so you will
+[0:42:59] overestimate the uncertainty so you will get
+[0:43:00] get larger confidence intervals than
+[0:43:01] larger confidence intervals than necessary
+[0:43:03] necessary okay now we are evaluating coverage here
+[0:43:06] okay now we are evaluating coverage here um
+[0:43:07] um so
+[0:43:09] so you see in blue you see the calibrated
+[0:43:11] you see in blue you see the calibrated ones and in red you see the uncalibrated
+[0:43:13] ones and in red you see the uncalibrated ones
+[0:43:14] ones um
+[0:43:15] um and you see that for the uncalibrated
+[0:43:17] and you see that for the uncalibrated ones coverage is a lot lower um
+[0:43:20] ones coverage is a lot lower um for the calibrated ones we're not
+[0:43:21] for the calibrated ones we're not perfect so we're not always hitting
+[0:43:23] perfect so we're not always hitting those like that that really nice 95
+[0:43:25] those like that that really nice 95 percent and the reason for that is
+[0:43:28] percent and the reason for that is that we just use a a a few adjustment
+[0:43:32] that we just use a a a few adjustment sets the more adjustment sets you have
+[0:43:34] sets the more adjustment sets you have the more you use the more stable it will
+[0:43:35] the more you use the more stable it will get this procedure and then you'll get
+[0:43:37] get this procedure and then you'll get closer to this line
+[0:43:39] closer to this line but overall we're just we're we're doing
+[0:43:42] but overall we're just we're we're doing a lot better and the takeaway here is if
+[0:43:45] a lot better and the takeaway here is if uh
+[0:43:45] uh is the
+[0:43:47] is the what we're actually looking at is the
+[0:43:48] what we're actually looking at is the coverage under the unprepared
+[0:43:50] coverage under the unprepared distribution but we don't directly
+[0:43:52] distribution but we don't directly sample from it it's actually the iid
+[0:43:54] sample from it it's actually the iid data is from the
+[0:43:56] data is from the from the from the perturbed distribution
+[0:43:58] from the from the perturbed distribution okay and i'm running out of time so i'll
+[0:44:01] okay and i'm running out of time so i'll go with the next one a little bit
+[0:44:04] go with the next one a little bit quicker
+[0:44:05] quicker so
+[0:44:06] so as i said we want to increase stability
+[0:44:08] as i said we want to increase stability and trustworthiness of
+[0:44:10] and trustworthiness of of of statistical decision making
+[0:44:13] of of statistical decision making um so
+[0:44:14] um so what we did here is we just we took a
+[0:44:17] what we did here is we just we took a real world data set and we looked at the
+[0:44:19] real world data set and we looked at the stability of rankings
+[0:44:21] stability of rankings so you
+[0:44:23] so you you do a bunch of regressions and then
+[0:44:25] you do a bunch of regressions and then you look at the effect sizes of
+[0:44:27] you look at the effect sizes of covariates and what you want is that
+[0:44:29] covariates and what you want is that across random splits of the data of
+[0:44:32] across random splits of the data of course what you want is that your
+[0:44:33] course what you want is that your rankings roughly agree so that things
+[0:44:36] rankings roughly agree so that things that you think are important on one part
+[0:44:38] that you think are important on one part of the data set you also report as
+[0:44:40] of the data set you also report as important on another part of the data
+[0:44:42] important on another part of the data set
+[0:44:44] set um
+[0:44:45] um yeah
+[0:44:46] yeah so what we do here is now a comparison
+[0:44:49] so what we do here is now a comparison of two method the first one is where you
+[0:44:50] of two method the first one is where you just randomly
+[0:44:53] just randomly choose one of the adjustment sets
+[0:44:55] choose one of the adjustment sets perform a linear regression and then
+[0:44:57] perform a linear regression and then rank
+[0:44:58] rank and the second method is where you use
+[0:45:00] and the second method is where you use our method where you where you aggregate
+[0:45:02] our method where you where you aggregate them and then use the the
+[0:45:05] them and then use the the adjusted way to compute these confidence
+[0:45:07] adjusted way to compute these confidence intervals
+[0:45:15] you can evaluate stability of rankings so just very quickly what you overall
+[0:45:18] so just very quickly what you overall see here is
+[0:45:20] see here is that our method method two will give you
+[0:45:22] that our method method two will give you a higher stability of rankings uh than
+[0:45:26] a higher stability of rankings uh than the competing method and just one redos
+[0:45:29] the competing method and just one redos so there was a small change here
+[0:45:32] so there was a small change here in in this table compared to to
+[0:45:34] in in this table compared to to yesterday evening so depending on when
+[0:45:36] yesterday evening so depending on when you look at it these numbers are
+[0:45:37] you look at it these numbers are slightly different but the takeaway is
+[0:45:39] slightly different but the takeaway is the same is that the the the proposed
+[0:45:42] the same is that the the the proposed method increases the stability uh of
+[0:45:46] method increases the stability uh of these rankings
+[0:45:47] these rankings okay
+[0:45:48] okay let's summarize because i don't want to
+[0:45:50] let's summarize because i don't want to take away from afido's discussion time
+[0:45:53] take away from afido's discussion time so it is possible to account for
+[0:45:56] so it is possible to account for variation to different types of
+[0:45:59] variation to different types of problems so variation due to the
+[0:46:01] problems so variation due to the sampling and also variation due to
+[0:46:03] sampling and also variation due to isotropic distribution of perturbations
+[0:46:04] isotropic distribution of perturbations you can just think about this as a
+[0:46:06] you can just think about this as a generalism of generalization of a
+[0:46:08] generalism of generalization of a statistical inference framework
+[0:46:10] statistical inference framework we don't get this for free so what we
+[0:46:12] we don't get this for free so what we need to do this is we need
+[0:46:15] need to do this is we need estimate we need different estimators
+[0:46:16] estimate we need different estimators that we think reasonably estimate
+[0:46:18] that we think reasonably estimate similar quantities and then look at the
+[0:46:21] similar quantities and then look at the stability of these estimates
+[0:46:23] stability of these estimates and what i try to also sketch out in
+[0:46:25] and what i try to also sketch out in this talk is that this is related to
+[0:46:27] this talk is that this is related to other concepts such as confounding
+[0:46:29] other concepts such as confounding selection bias and correlated data it's
+[0:46:31] selection bias and correlated data it's not perfectly kind of addressing all of
+[0:46:33] not perfectly kind of addressing all of those things but there's an intersection
+[0:46:34] those things but there's an intersection we're just we're trying to push the
+[0:46:36] we're just we're trying to push the boundaries of current data analysis a
+[0:46:38] boundaries of current data analysis a bit further
+[0:46:39] bit further um but we're not kind of subsuming
+[0:46:41] um but we're not kind of subsuming everything that's out there of course
+[0:46:44] everything that's out there of course um yeah and what i'm kind of uh
+[0:46:46] um yeah and what i'm kind of uh particularly interested in
+[0:46:48] particularly interested in is that uh if you just look at the
+[0:46:50] is that uh if you just look at the stability of decision making procedures
+[0:46:52] stability of decision making procedures across data sets or within data sets
+[0:46:54] across data sets or within data sets that's something that we wanna that we
+[0:46:56] that's something that we wanna that we wanna that we wanna increase and that is
+[0:46:58] wanna that we wanna increase and that is one of the ultimate goals of this
+[0:46:59] one of the ultimate goals of this procedure
+[0:47:01] procedure um yeah manuscript will soon be posted
+[0:47:03] um yeah manuscript will soon be posted on archive um
+[0:47:05] on archive um we'll either upload it today or maybe
+[0:47:07] we'll either upload it today or maybe it's already uploaded i would have to
+[0:47:08] it's already uploaded i would have to ask jin
+[0:47:10] ask jin so yeah either today or tomorrow uh and
+[0:47:12] so yeah either today or tomorrow uh and uh yeah so you'll have access to it so
+[0:47:14] uh yeah so you'll have access to it so yeah thank you all for uh for listening
+[0:47:16] yeah thank you all for uh for listening and with that um
+[0:47:19] and with that um i'll
+[0:47:20] i'll get over to you
+[0:47:23] get over to you thank you dominic okay
+[0:47:25] thank you dominic okay all right thanks do you have the stage
+[0:47:28] all right thanks do you have the stage okay let me um see if i can
+[0:47:31] okay let me um see if i can share my
+[0:47:43] all right thanks uh dominique and eugene for a very interesting uh
+[0:47:46] eugene for a very interesting uh paper
+[0:47:47] paper dominique for very interesting
+[0:47:49] dominique for very interesting presentation uh
+[0:47:51] presentation uh so
+[0:47:56] they're looking at a setting where we're interested in a particular parameter
+[0:47:59] interested in a particular parameter and what we often do is kind of we
+[0:48:01] and what we often do is kind of we assume
+[0:48:02] assume that we have iid data for a particular
+[0:48:05] that we have iid data for a particular distribution and then we estimate the
+[0:48:08] distribution and then we estimate the particular parameter we may have a good
+[0:48:10] particular parameter we may have a good procedure for for doing that
+[0:48:13] procedure for for doing that um that leads to asymptotic normality
+[0:48:16] um that leads to asymptotic normality for the for the estimator
+[0:48:18] for the for the estimator and we can
+[0:48:20] and we can in fact estimate our variance and so tip
+[0:48:22] in fact estimate our variance and so tip often what we do is we report that that
+[0:48:25] often what we do is we report that that point estimate and we report a standard
+[0:48:28] point estimate and we report a standard error we report
+[0:48:30] error we report something that captures the sampling
+[0:48:32] something that captures the sampling uncertainty
+[0:48:34] uncertainty of uh of that estimator
+[0:48:36] of uh of that estimator and kind of dominique referred a couple
+[0:48:38] and kind of dominique referred a couple of times kind of to uh to settings where
+[0:48:41] of times kind of to uh to settings where there's a decision maker
+[0:48:44] there's a decision maker and kind of often what we do is just
+[0:48:46] and kind of often what we do is just take these two numbers to the decision
+[0:48:48] take these two numbers to the decision maker the point estimate our best
+[0:48:50] maker the point estimate our best estimate of what the thing is we're
+[0:48:52] estimate of what the thing is we're interested in
+[0:48:53] interested in and some measure of the sampling
+[0:48:55] and some measure of the sampling uncertainty because in practice we know
+[0:48:58] uncertainty because in practice we know that that's not really capturing
+[0:49:01] that that's not really capturing the full uncertainty
+[0:49:03] the full uncertainty of the object we're interested in
+[0:49:06] of the object we're interested in we think our model is probably not quite
+[0:49:08] we think our model is probably not quite uh correct and the data may not have
+[0:49:10] uh correct and the data may not have been quite
+[0:49:12] been quite the the right data for this uh this
+[0:49:15] the the right data for this uh this problem there may have been
+[0:49:17] problem there may have been selection bias in the the data there may
+[0:49:19] selection bias in the the data there may have been no response
+[0:49:22] have been no response maybe measurement there may be all sorts
+[0:49:24] maybe measurement there may be all sorts of things that make this not quite right
+[0:49:27] of things that make this not quite right but we don't have a lot of
+[0:49:29] but we don't have a lot of good tools available
+[0:49:31] good tools available to quantify that that uncertainty as in
+[0:49:35] to quantify that that uncertainty as in practice kind of at least sort of in the
+[0:49:37] practice kind of at least sort of in the settings
+[0:49:39] settings i've seen
+[0:49:41] i've seen the
+[0:49:42] the analysts the statisticians often bring
+[0:49:45] analysts the statisticians often bring to the decision maker just these two
+[0:49:47] to the decision maker just these two numbers this point estimate and an
+[0:49:49] numbers this point estimate and an estimate of the sampling uncertainty
+[0:49:52] estimate of the sampling uncertainty and then the rest of the discussion is
+[0:49:54] and then the rest of the discussion is much more informal about how how much we
+[0:49:57] much more informal about how how much we actually trust these results how robust
+[0:49:59] actually trust these results how robust we think they are
+[0:50:00] we think they are how much they would change if we did
+[0:50:03] how much they would change if we did things a little bit differently and
+[0:50:05] things a little bit differently and people may report some of these
+[0:50:06] people may report some of these estimates but not in a very systematic
+[0:50:09] estimates but not in a very systematic way i said what uh
+[0:50:11] way i said what uh eugene and dominique doing this uh
+[0:50:14] eugene and dominique doing this uh this project
+[0:50:16] this project is trying to come up with more
+[0:50:17] is trying to come up with more systematic ways
+[0:50:19] systematic ways of quantifying the the uncertainty
+[0:50:22] of quantifying the the uncertainty associated with the estimates in a way
+[0:50:25] associated with the estimates in a way that would actually be useful for the
+[0:50:26] that would actually be useful for the decision makers to kind of distinguish
+[0:50:28] decision makers to kind of distinguish between settings where
+[0:50:31] between settings where we think the estimates are very robust
+[0:50:33] we think the estimates are very robust and very credible and settings where
+[0:50:36] and very credible and settings where they're not necessarily very very
+[0:50:38] they're not necessarily very very credible
+[0:50:39] credible and so in some sense this relates
+[0:50:42] and so in some sense this relates to the literature and dominic referred
+[0:50:45] to the literature and dominic referred to the the lima paper where
+[0:50:48] to the the lima paper where lima does kind of one particular form of
+[0:50:51] lima does kind of one particular form of sensitivity analysis where he uses a
+[0:50:53] sensitivity analysis where he uses a range of prior distributions to see
+[0:50:56] range of prior distributions to see how much estimates change and there's
+[0:50:58] how much estimates change and there's other settings where people have used
+[0:51:00] other settings where people have used measures of
+[0:51:02] measures of of robustness
+[0:51:03] of robustness and you can also view this as somewhat
+[0:51:06] and you can also view this as somewhat related to paul rosenbaum's work where
+[0:51:09] related to paul rosenbaum's work where he estimates average treatment effects
+[0:51:11] he estimates average treatment effects using
+[0:51:12] using unconfoundedness type settings
+[0:51:15] unconfoundedness type settings based on different
+[0:51:16] based on different control groups based on different
+[0:51:18] control groups based on different comparison groups and he compares
+[0:51:20] comparison groups and he compares estimates from these different
+[0:51:22] estimates from these different comparison groups
+[0:51:24] comparison groups to get a sense of how credible the
+[0:51:26] to get a sense of how credible the estimates are based on on one particular
+[0:51:30] estimates are based on on one particular the comparison group but what dominique
+[0:51:34] the comparison group but what dominique do here is really come up with a very
+[0:51:37] do here is really come up with a very specific
+[0:51:43] procedure that has for which they establish uh formal properties uh and
+[0:51:46] establish uh formal properties uh and that's really what's been missing in a
+[0:51:47] that's really what's been missing in a lot of this literature and
+[0:51:49] lot of this literature and would be really nice it would be
+[0:51:52] would be really nice it would be particularly nice kind of if in the end
+[0:51:55] particularly nice kind of if in the end we get to a set of of measures
+[0:51:57] we get to a set of of measures that people can do routinely in
+[0:52:01] that people can do routinely in in different settings
+[0:52:03] in different settings to capture more of the uncertainty
+[0:52:06] to capture more of the uncertainty associated with the specification of the
+[0:52:10] associated with the specification of the of the model and what i really like
+[0:52:12] of the model and what i really like about this paper is kind of that
+[0:52:14] about this paper is kind of that in a in a particular setting they
+[0:52:16] in a in a particular setting they managed to get very far in coming up
+[0:52:18] managed to get very far in coming up with with a specific uh procedure
+[0:52:22] with with a specific uh procedure so the
+[0:52:24] so the kind of
+[0:52:26] kind of but they
+[0:52:26] but they they they do then say well suppose that
+[0:52:28] they they do then say well suppose that instead of having a sample drawn from p
+[0:52:31] instead of having a sample drawn from p naught it's drawn from
+[0:52:33] naught it's drawn from some other distribution index by psi
+[0:52:36] some other distribution index by psi and how we can measure the uncertainty
+[0:52:39] and how we can measure the uncertainty coming uh from that now in very simple
+[0:52:41] coming uh from that now in very simple cases there doesn't really seem much we
+[0:52:43] cases there doesn't really seem much we can do in terms of establishing
+[0:52:46] can do in terms of establishing what uh how different the distribution
+[0:52:48] what uh how different the distribution we're drawing is from uh from the
+[0:52:50] we're drawing is from uh from the distribution of pinot so if you're just
+[0:52:53] distribution of pinot so if you're just interested in estimating a population
+[0:52:54] interested in estimating a population mean there doesn't seem much
+[0:52:57] mean there doesn't seem much much we can actually do
+[0:53:00] much we can actually do but what they what they do is kind of
+[0:53:03] but what they what they do is kind of leverage the fact the the
+[0:53:06] leverage the fact the the possibility that we have multiple
+[0:53:07] possibility that we have multiple estimators
+[0:53:10] estimators that would all work
+[0:53:11] that would all work if the
+[0:53:12] if the distribution was p naught but it might
+[0:53:15] distribution was p naught but it might have slightly different properties
+[0:53:17] have slightly different properties if uh
+[0:53:18] if uh if we
+[0:53:20] if we are sampling from it from a different
+[0:53:22] are sampling from it from a different distribution
+[0:53:24] distribution and then they look at the the
+[0:53:26] and then they look at the the variation between these different
+[0:53:28] variation between these different estimators and use that to get a measure
+[0:53:31] estimators and use that to get a measure of the of the uncertainty
+[0:53:34] of the of the uncertainty and so the key thing really is
+[0:53:36] and so the key thing really is how we come up
+[0:53:38] how we come up with these different estimators and
+[0:53:40] with these different estimators and whether we're in a setting where we
+[0:53:42] whether we're in a setting where we where
+[0:53:43] where there are meaningfully different
+[0:53:44] there are meaningfully different estimators and the the example the
+[0:53:47] estimators and the the example the causal inference example kind of with
+[0:53:49] causal inference example kind of with the the
+[0:53:50] the the the graph that dominic gave was very
+[0:53:52] the graph that dominic gave was very nice there because there is there are
+[0:53:55] nice there because there is there are meaningfully different estimators you
+[0:53:57] meaningfully different estimators you can estimate the
+[0:53:58] can estimate the effect of interest of x1 on
+[0:54:01] effect of interest of x1 on on why
+[0:54:08] one set of adjustment
+[0:54:09] adjustment variables and set and
+[0:54:12] variables and set and comparing those two estimators clearly
+[0:54:14] comparing those two estimators clearly gives you a very
+[0:54:16] gives you a very nice
+[0:54:17] nice way of of getting a sense of uh
+[0:54:20] way of of getting a sense of uh of the very the uncertainty coming from
+[0:54:23] of the very the uncertainty coming from the variation in
+[0:54:25] the variation in in from the the
+[0:54:27] in from the the distribution uncertainty
+[0:54:29] distribution uncertainty and so in some sense
+[0:54:30] and so in some sense that seems to be related
+[0:54:32] that seems to be related to the literature and
+[0:54:34] to the literature and what the nuclear metrics is called over
+[0:54:36] what the nuclear metrics is called over identification where you have multiple
+[0:54:38] identification where you have multiple estimators
+[0:54:39] estimators that would actually estimate
+[0:54:41] that would actually estimate different objects if the model was not
+[0:54:43] different objects if the model was not correctly specified now the econometric
+[0:54:46] correctly specified now the econometric literature has been very much focused
+[0:54:48] literature has been very much focused on testing a particular model with much
+[0:54:51] on testing a particular model with much less emphasis on using it in a more
+[0:54:54] less emphasis on using it in a more constructive
+[0:54:56] constructive way
+[0:55:02] to capture uncertainty in their in the overall conclusions often it's just used
+[0:55:04] overall conclusions often it's just used as
+[0:55:05] as uh as a basis for constructing a test
+[0:55:08] uh as a basis for constructing a test and testing the null that the model has
+[0:55:10] and testing the null that the model has correctly specified and if you reject
+[0:55:12] correctly specified and if you reject that now it's back to the drawing board
+[0:55:15] that now it's back to the drawing board and coming up with a model
+[0:55:17] and coming up with a model that is
+[0:55:18] that is not rejected by the data but here
+[0:55:21] not rejected by the data but here dominique indigen kind of use it
+[0:55:23] dominique indigen kind of use it to uh to expand the the
+[0:55:28] to uh to expand the the to increase the standardized to expand
+[0:55:30] to increase the standardized to expand the confidence intervals in a way
+[0:55:32] the confidence intervals in a way that uh that gives you more robust and
+[0:55:34] that uh that gives you more robust and more credible uh estimators
+[0:55:38] more credible uh estimators and so one question there is whether
+[0:55:39] and so one question there is whether this would work
+[0:55:41] this would work in settings where we don't really have
+[0:55:43] in settings where we don't really have over identification but we may use
+[0:55:45] over identification but we may use slightly different parametric
+[0:55:46] slightly different parametric approximations
+[0:55:49] approximations so
+[0:55:50] so suppose we're in a setting where we're
+[0:55:52] suppose we're in a setting where we're estimating average treatment effects
+[0:55:54] estimating average treatment effects and we make it unconfound in this
+[0:55:56] and we make it unconfound in this assumption
+[0:55:58] assumption there people have used lots of different
+[0:55:59] there people have used lots of different estimators you could use matching
+[0:56:01] estimators you could use matching estimators you could use
+[0:56:03] estimators you could use regression type estimators you could use
+[0:56:06] regression type estimators you could use inverse propensity score weighting
+[0:56:07] inverse propensity score weighting estimators or doubly robust estimators
+[0:56:12] estimators or doubly robust estimators but asymptotically
+[0:56:13] but asymptotically many of these estimators would be the
+[0:56:15] many of these estimators would be the same they would have the same first
+[0:56:17] same they would have the same first order linear approximation
+[0:56:19] order linear approximation and so the variation between the
+[0:56:21] and so the variation between the estimators
+[0:56:23] estimators irrespective of what the distribution is
+[0:56:26] irrespective of what the distribution is that generates the data
+[0:56:28] that generates the data would be very
+[0:56:29] would be very similar and so so it's not quite clear
+[0:56:31] similar and so so it's not quite clear to me what the procedure would
+[0:56:34] to me what the procedure would end up with in that case what i would
+[0:56:36] end up with in that case what i would really capture nah whether we would
+[0:56:39] really capture nah whether we would just say there isn't much variation in
+[0:56:41] just say there isn't much variation in the
+[0:56:42] the coming from the distribution or
+[0:56:44] coming from the distribution or uncertainty
+[0:56:45] uncertainty or whether
+[0:56:47] or whether it would still
+[0:56:49] it would still affect work in practice because it's
+[0:56:51] affect work in practice because it's working off the parametric assumptions
+[0:56:53] working off the parametric assumptions that people in practice use to implement
+[0:56:56] that people in practice use to implement these methods
+[0:56:58] these methods so that's one question but in settings
+[0:57:00] so that's one question but in settings where we do have meaningful
+[0:57:02] where we do have meaningful over identification where we have say
+[0:57:05] over identification where we have say multiple instrumental variables
+[0:57:07] multiple instrumental variables or multiple adjustment sets this is
+[0:57:10] or multiple adjustment sets this is clearly a very nice way of
+[0:57:14] clearly a very nice way of getting
+[0:57:16] getting the
+[0:57:17] the interval estimates or getting measures
+[0:57:19] interval estimates or getting measures of uncertainty that capture a more
+[0:57:22] of uncertainty that capture a more expansive notion of uncertainty than
+[0:57:25] expansive notion of uncertainty than just the sampling uncertainty
+[0:57:31] and so i really like this idea and i think
+[0:57:33] think in the end we have a huge way to go
+[0:57:36] in the end we have a huge way to go in terms of coming up with
+[0:57:39] in terms of coming up with good additional measures of uncertainty
+[0:57:41] good additional measures of uncertainty to report to decision-makers beyond the
+[0:57:44] to report to decision-makers beyond the sampling and certainty that we routinely
+[0:57:48] sampling and certainty that we routinely report and that that we all agree with
+[0:57:51] report and that that we all agree with but that
+[0:57:52] but that doesn't capture all the uncertainty
+[0:57:53] doesn't capture all the uncertainty we're clearly interested in
+[0:57:56] we're clearly interested in and so i i'd love to see kind of more
+[0:57:58] and so i i'd love to see kind of more work in this direction and kind of see
+[0:58:00] work in this direction and kind of see how the dominican eugene's ideas play
+[0:58:03] how the dominican eugene's ideas play out there
+[0:58:04] out there and getting a sense of how this can be
+[0:58:06] and getting a sense of how this can be applied in a in a more routine way
+[0:58:11] applied in a in a more routine way allowing researchers to do this in lots
+[0:58:13] allowing researchers to do this in lots of different settings and particularly i
+[0:58:15] of different settings and particularly i think what would be helpful there is
+[0:58:17] think what would be helpful there is getting a sense of how we would choose
+[0:58:19] getting a sense of how we would choose to set up estimators because clearly if
+[0:58:21] to set up estimators because clearly if we choose very similar estimators
+[0:58:24] we choose very similar estimators we may not get much out of this so we
+[0:58:26] we may not get much out of this so we would like so it would be good to have
+[0:58:28] would like so it would be good to have have guidance in how to choose the set
+[0:58:31] have guidance in how to choose the set of estimators
+[0:58:33] of estimators and it would also and dominic's
+[0:58:36] and it would also and dominic's presentation actually helped me a lot
+[0:58:37] presentation actually helped me a lot there but
+[0:58:38] there but um
+[0:58:39] um and understanding that assumption that
+[0:58:41] and understanding that assumption that the adjustment is purely multiplicative
+[0:58:43] the adjustment is purely multiplicative uh how we can
+[0:58:44] uh how we can think about extending that or how we can
+[0:58:47] think about extending that or how we can view that as uh as a sort of a first
+[0:58:49] view that as uh as a sort of a first order approximation
+[0:58:52] order approximation and final question is
+[0:58:54] and final question is whether we should in the end
+[0:58:57] whether we should in the end try to keep the sampling and
+[0:58:59] try to keep the sampling and distribution uncertainty
+[0:59:02] distribution uncertainty separate or combine them in a single
+[0:59:04] separate or combine them in a single measure of the overall
+[0:59:06] measure of the overall uncertainty
+[0:59:07] uncertainty because they do seem to capture very
+[0:59:09] because they do seem to capture very different
+[0:59:10] different things and whether we want to
+[0:59:12] things and whether we want to combine them
+[0:59:14] combine them or keep them separate isn't completely
+[0:59:16] or keep them separate isn't completely clear to me
+[0:59:18] clear to me but this was a very interesting
+[0:59:19] but this was a very interesting presentation i really enjoyed this
+[0:59:22] presentation i really enjoyed this so let me stop here
+[0:59:29] fantastic thanks i'm sorry
+[0:59:30] i'm sorry no worries take it away i'm afraid to
+[0:59:33] no worries take it away i'm afraid to take over sorry sorry can you keep up
+[0:59:35] take over sorry sorry can you keep up the
+[0:59:37] the questions so i couldn't go yeah first of
+[0:59:40] questions so i couldn't go yeah first of all thank you so much for the very nice
+[0:59:41] all thank you so much for the very nice discussion
+[0:59:43] discussion um so
+[0:59:44] um so let me
+[0:59:45] let me share my screen again sorry
+[0:59:48] share my screen again sorry for the for the first point that was
+[0:59:49] for the for the first point that was about how big of a difference does it
+[0:59:51] about how big of a difference does it make in an empirical setting so yeah
+[0:59:53] make in an empirical setting so yeah we're kind of at the beginning of the
+[0:59:54] we're kind of at the beginning of the journey with this so i cannot give a
+[0:59:56] journey with this so i cannot give a general answer yet for the for the type
+[0:59:59] general answer yet for the for the type of things that i've seen so far is it
+[1:00:00] of things that i've seen so far is it does actually does change the ranking uh
+[1:00:03] does actually does change the ranking uh if you especially if you do large scale
+[1:00:05] if you especially if you do large scale screening um uh you can get a very
+[1:00:08] screening um uh you can get a very different rankings out of the ones uh
+[1:00:10] different rankings out of the ones uh compared to the ones that you would
+[1:00:11] compared to the ones that you would usually do but like we need to evaluate
+[1:00:13] usually do but like we need to evaluate it a lot more
+[1:00:15] it a lot more um
+[1:00:16] um one question that you had that you don't
+[1:00:18] one question that you had that you don't have here on that slide but where you
+[1:00:19] have here on that slide but where you said okay how should we think about is
+[1:00:21] said okay how should we think about is if if the influence functions are are
+[1:00:23] if if the influence functions are are the same asymptotically i think that is
+[1:00:25] the same asymptotically i think that is a fantastic point if the if the
+[1:00:27] a fantastic point if the if the influence functions of your different
+[1:00:29] influence functions of your different estimators are the same asymptotically
+[1:00:31] estimators are the same asymptotically then we'll divide by something that is
+[1:00:32] then we'll divide by something that is very close to zero
+[1:00:34] very close to zero and uh so our method will become
+[1:00:36] and uh so our method will become unstable
+[1:00:37] unstable um but you'll also you'll
+[1:00:40] um but you'll also you'll the an important point is that you'll
+[1:00:42] the an important point is that you'll you'll know about it so it's it's
+[1:00:44] you'll know about it so it's it's important to know that because if you if
+[1:00:46] important to know that because if you if you just report those five estimators uh
+[1:00:49] you just report those five estimators uh and they are all returning the same
+[1:00:51] and they are all returning the same estimate you you could be inclined to
+[1:00:52] estimate you you could be inclined to believe that oh this is actually a
+[1:00:54] believe that oh this is actually a stable result whereas if you apply our
+[1:00:56] stable result whereas if you apply our method it just says like oh well you've
+[1:00:58] method it just says like oh well you've actually looked at the same evidence ten
+[1:01:00] actually looked at the same evidence ten times
+[1:01:01] times so uh what you did now is not more
+[1:01:03] so uh what you did now is not more credible than what you've done before so
+[1:01:06] credible than what you've done before so uh i think in in that setting where
+[1:01:08] uh i think in in that setting where every where you have 10 times very
+[1:01:10] every where you have 10 times very similar estimated behaves like the way
+[1:01:12] similar estimated behaves like the way we want to behave it which is to tell
+[1:01:14] we want to behave it which is to tell you hey actually uh we don't have
+[1:01:17] you hey actually uh we don't have additional evidence that that our
+[1:01:19] additional evidence that that our distribution uncertainties are of a
+[1:01:21] distribution uncertainties are of a certain size
+[1:01:22] certain size um
+[1:01:23] um how do we choose the set of estimators
+[1:01:25] how do we choose the set of estimators of course um this is kind of uh
+[1:01:28] of course um this is kind of uh this is uh this is will be like depend
+[1:01:31] this is uh this is will be like depend on the application um
+[1:01:33] on the application um currently what i
+[1:01:35] currently what i what i do in my simulations is i just
+[1:01:37] what i do in my simulations is i just kind of randomly changed some some some
+[1:01:40] kind of randomly changed some some some small things um uh about that that you
+[1:01:42] small things um uh about that that you could have done differently but uh it it
+[1:01:45] could have done differently but uh it it of course it depending on the
+[1:01:46] of course it depending on the application it's a lot more it's a lot
+[1:01:48] application it's a lot more it's a lot better to actually have uh
+[1:01:50] better to actually have uh background knowledge that tells you what
+[1:01:52] background knowledge that tells you what thing you think the right set of
+[1:01:54] thing you think the right set of estimators should be
+[1:01:56] estimators should be the third point uh is fantastic we've
+[1:01:58] the third point uh is fantastic we've thought about that a lot so there's a
+[1:02:00] thought about that a lot so there's a lot of generalizations you can write
+[1:02:02] lot of generalizations you can write down from that so we we were fitting a
+[1:02:03] down from that so we we were fitting a one-dimensional parameter delta you
+[1:02:06] one-dimensional parameter delta you could write more general uncertainty
+[1:02:08] could write more general uncertainty models where you perturb the different
+[1:02:09] models where you perturb the different the distribution of x differently than
+[1:02:11] the distribution of x differently than let's say the distribution of y given x
+[1:02:14] let's say the distribution of y given x so then you're not just learning one
+[1:02:16] so then you're not just learning one parameter delta but what you can learn
+[1:02:17] parameter delta but what you can learn is a potentially kind of very flexible
+[1:02:20] is a potentially kind of very flexible uncertainty model so at least in theory
+[1:02:22] uncertainty model so at least in theory can like you can push this very far the
+[1:02:25] can like you can push this very far the question is like how stable or unstable
+[1:02:26] question is like how stable or unstable are these things and that's something
+[1:02:28] are these things and that's something that we have not investigated properly
+[1:02:30] that we have not investigated properly yet and point four uh fantastic i i'm
+[1:02:33] yet and point four uh fantastic i i'm not i'm not sure kind of i have a a
+[1:02:36] not i'm not sure kind of i have a a final answer on that um
+[1:02:39] final answer on that um should we do this separately or should
+[1:02:40] should we do this separately or should we combine them in a single measure so
+[1:02:42] we combine them in a single measure so the good thing about combining them in a
+[1:02:44] the good thing about combining them in a single measure is that i think people
+[1:02:46] single measure is that i think people kind of like binary decision making so
+[1:02:49] kind of like binary decision making so they like very simple like
+[1:02:51] they like very simple like one-dimensional quantities that they can
+[1:02:53] one-dimensional quantities that they can make
+[1:02:54] make decisions uh based on
+[1:02:56] decisions uh based on also another nice thing about putting
+[1:02:58] also another nice thing about putting that into a single measure is that for
+[1:03:00] that into a single measure is that for example if you adjust for multiplicity
+[1:03:03] example if you adjust for multiplicity i think if you also i think similar
+[1:03:05] i think if you also i think similar issues that you have
+[1:03:07] issues that you have uh with multiplicity when you
+[1:03:10] uh with multiplicity when you uh when you when you look at normal
+[1:03:11] uh when you when you look at normal answer you also have here if you just
+[1:03:14] answer you also have here if you just look at data sets until you see an
+[1:03:15] look at data sets until you see an effect uh
+[1:03:18] effect uh there you should kind of use bonferroni
+[1:03:20] there you should kind of use bonferroni and so on to adjust for that so putting
+[1:03:22] and so on to adjust for that so putting that into this framework i think
+[1:03:23] that into this framework i think actually makes sense but i also kind of
+[1:03:25] actually makes sense but i also kind of i also like the other point where you
+[1:03:27] i also like the other point where you say like okay these are actually
+[1:03:29] say like okay these are actually different things and we should just not
+[1:03:30] different things and we should just not report one or two things or three things
+[1:03:32] report one or two things or three things maybe we should report four or five
+[1:03:33] maybe we should report four or five different things that kind of deal with
+[1:03:35] different things that kind of deal with different issues of
+[1:03:37] different issues of your data
+[1:03:38] your data okay now i've babbled for a long time um
+[1:03:41] okay now i've babbled for a long time um yeah thank you so much for discussion
+[1:03:42] yeah thank you so much for discussion peter this is very helpful and
+[1:03:44] peter this is very helpful and especially uh point one is something
+[1:03:46] especially uh point one is something that will kind of investigate a lot
+[1:03:47] that will kind of investigate a lot further in future work um yeah and
+[1:03:50] further in future work um yeah and that's it thanks
+[1:03:58] great thank you okay so since we're over time i guess we can wrap up
+[1:04:04] just one second [Music]
+[1:04:06] [Music] all right
+[1:04:16] great so um next week we have koski mai from
+[1:04:19] so um next week we have koski mai from harvard university talking about safe
+[1:04:22] harvard university talking about safe policy learning through extrapolation
+[1:04:24] policy learning through extrapolation application to pre-trial risk assessed
+[1:04:26] application to pre-trial risk assessed so we hope to see you all there
+[1:04:28] so we hope to see you all there and before we finish i'd just like to
+[1:04:30] and before we finish i'd just like to thank dominic for a very nice
+[1:04:32] thank dominic for a very nice presentation and eugene for answering
+[1:04:34] presentation and eugene for answering questions and hito for a great
+[1:04:36] questions and hito for a great discussion
+[1:04:37] discussion um so yeah we had some really
+[1:04:39] um so yeah we had some really interesting questions hope you all find
+[1:04:41] interesting questions hope you all find this uh
+[1:04:42] this uh presentation stimulating and yeah i
+[1:04:44] presentation stimulating and yeah i guess we'll all read the paper very soon
+[1:04:47] guess we'll all read the paper very soon okay so thank you all for coming and
+[1:04:49] okay so thank you all for coming and hope to see you next week

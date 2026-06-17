@@ -1,0 +1,1644 @@
+[0:00:05] Uh so welcome to the online causal inference seminar. Today we're very
+[0:00:07] inference seminar. Today we're very lucky to have Fan Li from Yale who's
+[0:00:10] lucky to have Fan Li from Yale who's going to tell us about propensity score
+[0:00:12] going to tell us about propensity score weighting for covariate adjustment in
+[0:00:14] weighting for covariate adjustment in randomized uh clinical trials. Uh we're
+[0:00:17] randomized uh clinical trials. Uh we're also very lucky to have uh a discussant
+[0:00:19] also very lucky to have uh a discussant with us today, Kerry
+[0:00:26] Um and before we get started, I'm going to switch over to Guillaume who's going
+[0:00:28] to switch over to Guillaume who's going to tell you about how we take questions.
+[0:00:36] Thank you, Michael. Um so as usual, questions will be
+[0:00:37] questions will be uh handled through the Q&amp;A. So we're
+[0:00:39] uh handled through the Q&amp;A. So we're very lucky to have Fan and Shishi today
+[0:00:42] very lucky to have Fan and Shishi today who will be uh answering your questions
+[0:00:44] who will be uh answering your questions in the Q&amp;A um live. Um if uh so from
+[0:00:49] in the Q&amp;A um live. Um if uh so from time to time we will pause and ask
+[0:00:50] time to time we will pause and ask questions uh directly to Fan. Um so
+[0:00:53] questions uh directly to Fan. Um so please again uh these questions will be
+[0:00:55] please again uh these questions will be selected from the Q&amp;A. So ask your
+[0:00:57] selected from the Q&amp;A. So ask your questions there and we'll select a few
+[0:00:59] questions there and we'll select a few of them. If your question is selected, I
+[0:01:01] of them. If your question is selected, I will ask you to raise your hand and
+[0:01:03] will ask you to raise your hand and unmute you. So please don't raise your
+[0:01:04] unmute you. So please don't raise your hand um unless I've asked you to do so.
+[0:01:07] hand um unless I've asked you to do so. And uh again, thank you everyone for uh
+[0:01:10] And uh again, thank you everyone for uh coming uh you know, making it uh during
+[0:01:13] coming uh you know, making it uh during uh
+[0:01:14] uh Thanksgiving week. We really appreciate
+[0:01:15] Thanksgiving week. We really appreciate that and uh
+[0:01:17] that and uh Fan, uh feel free to start whenever
+[0:01:19] Fan, uh feel free to start whenever you're ready.
+[0:01:21] you're ready. Sounds good.
+[0:01:22] Sounds good. Um I'm going to share my screen.
+[0:01:25] Um I'm going to share my screen. I don't think I um
+[0:01:27] I don't think I um Michael, can you Could you give me
+[0:01:28] Michael, can you Could you give me permission to share?
+[0:01:30] permission to share? Oh.
+[0:01:31] Oh. Sounds good. There we go. Thank you. Um
+[0:01:33] Sounds good. There we go. Thank you. Um thanks again, Michael and Guillaume. Um
+[0:01:35] thanks again, Michael and Guillaume. Um it is a great pleasure to be here and um
+[0:01:37] it is a great pleasure to be here and um talk about propensity score weighting
+[0:01:39] talk about propensity score weighting for um
+[0:01:40] for um covariate adjustment which concerns a
+[0:01:42] covariate adjustment which concerns a common practice in um randomized trials.
+[0:01:44] common practice in um randomized trials. This is joint work with Shushi Zhen who
+[0:01:47] This is joint work with Shushi Zhen who is a graduate student at Duke University
+[0:01:49] is a graduate student at Duke University and Ray Wan from Harvard as well as um
+[0:01:51] and Ray Wan from Harvard as well as um Senior Fan from Duke.
+[0:01:54] Senior Fan from Duke. Um randomized control trials serves as
+[0:01:56] Um randomized control trials serves as the gold standard for evaluating the
+[0:01:58] the gold standard for evaluating the efficacy and safety of new
+[0:01:59] efficacy and safety of new interventions. It balances both the
+[0:02:03] interventions. It balances both the the the measured and unmeasured
+[0:02:04] the the measured and unmeasured confounders and expectation and ensures
+[0:02:07] confounders and expectation and ensures the optimal internal validity for
+[0:02:09] the optimal internal validity for comparisons.
+[0:02:10] comparisons. Which justifies the difference in means
+[0:02:12] Which justifies the difference in means estimator as an unbiased estimator for
+[0:02:15] estimator as an unbiased estimator for the intervention effect.
+[0:02:17] the intervention effect. Oftentimes we also collect
+[0:02:20] Oftentimes we also collect patient level characteristics at
+[0:02:21] patient level characteristics at baseline in these studies.
+[0:02:24] baseline in these studies. But due to a single randomization and
+[0:02:26] But due to a single randomization and perhaps also limited sample size, the
+[0:02:28] perhaps also limited sample size, the chance imbalance can often occur for
+[0:02:30] chance imbalance can often occur for these covariates, which may
+[0:02:32] these covariates, which may impact the face validity of the trial in
+[0:02:35] impact the face validity of the trial in a sense that it appears that
+[0:02:38] a sense that it appears that randomization doesn't really
+[0:02:40] randomization doesn't really do its job as well as affecting its
+[0:02:43] do its job as well as affecting its the the
+[0:02:43] the the the subsequent statistical analysis in
+[0:02:46] the subsequent statistical analysis in terms of the efficiency and in power.
+[0:02:49] terms of the efficiency and in power. As a simple example, we look at the
+[0:02:51] As a simple example, we look at the table one, the usual table one in a
+[0:02:53] table one, the usual table one in a standard clinical paper. Um
+[0:02:56] standard clinical paper. Um For the
+[0:02:57] For the best air RCT, the best up here
+[0:02:59] best air RCT, the best up here intervention research RCT, which
+[0:03:02] intervention research RCT, which evaluates the effect of continuous
+[0:03:05] evaluates the effect of continuous positive airway pressure, the CPAP
+[0:03:07] positive airway pressure, the CPAP intervention, on the health outcomes for
+[0:03:10] intervention, on the health outcomes for patients with obstructive sleep apnea.
+[0:03:12] patients with obstructive sleep apnea. The trial doesn't have a large sample
+[0:03:15] The trial doesn't have a large sample size. We only have about 170 people for
+[0:03:18] size. We only have about 170 people for randomization into two groups.
+[0:03:21] randomization into two groups. And um
+[0:03:22] And um in this table, we can see that
+[0:03:24] in this table, we can see that randomization balances most of the
+[0:03:27] randomization balances most of the covariates between the two groups except
+[0:03:30] covariates between the two groups except for the baseline systolic blood pressure
+[0:03:33] for the baseline systolic blood pressure as well as the baseline apnea hypopnea
+[0:03:36] as well as the baseline apnea hypopnea index. For both of these covariates, it
+[0:03:39] index. For both of these covariates, it appears that in the control group, the
+[0:03:41] appears that in the control group, the average value of these covariates are
+[0:03:43] average value of these covariates are higher than
+[0:03:45] higher than the intervention the the CPAP group. And
+[0:03:47] the intervention the the CPAP group. And so, ignoring these imbalances may
+[0:03:51] so, ignoring these imbalances may um um may may may have some consequences
+[0:03:54] um um may may may have some consequences in the downstream analysis in terms of
+[0:03:56] in the downstream analysis in terms of the um validity as well as the
+[0:03:58] the um validity as well as the statistical efficiency um for the
+[0:04:00] statistical efficiency um for the intervention effect.
+[0:04:02] intervention effect. So, there are two mainstream approaches
+[0:04:04] So, there are two mainstream approaches for adjusting for covariates in in
+[0:04:06] for adjusting for covariates in in randomized trial and um a common way to
+[0:04:08] randomized trial and um a common way to do so is to perform regression
+[0:04:11] do so is to perform regression adjustment rather analysis of the
+[0:04:13] adjustment rather analysis of the covariate, the ANCOVA approach.
+[0:04:15] covariate, the ANCOVA approach. Um in in this approach, we model the
+[0:04:17] Um in in this approach, we model the outcome as a function of the treatment,
+[0:04:19] outcome as a function of the treatment, center, covariates, as well as their
+[0:04:22] center, covariates, as well as their interactions. And one can read off the
+[0:04:25] interactions. And one can read off the coefficient of the treatment variable as
+[0:04:28] coefficient of the treatment variable as an adjusted um estimator for the
+[0:04:30] an adjusted um estimator for the intervention effect in randomized
+[0:04:32] intervention effect in randomized trials.
+[0:04:33] trials. And these adjusted um estimator often
+[0:04:36] And these adjusted um estimator often improves power over the unadjusted
+[0:04:38] improves power over the unadjusted estimator and under some conditions, we
+[0:04:41] estimator and under some conditions, we can show that um this ANCOVA estimator
+[0:04:43] can show that um this ANCOVA estimator is asymptotically equivalent to the most
+[0:04:46] is asymptotically equivalent to the most efficient estimator among a
+[0:04:48] efficient estimator among a semi-parametric class of estimators.
+[0:04:51] semi-parametric class of estimators. And even under model misspecification in
+[0:04:53] And even under model misspecification in the sense that um the covariates um
+[0:04:56] the sense that um the covariates um enter that
+[0:04:57] enter that the functional forms of the covariates
+[0:04:59] the functional forms of the covariates are misspecified, the ANCOVA estimator
+[0:05:01] are misspecified, the ANCOVA estimator is still unbiased um
+[0:05:04] is still unbiased um um not only that, but also the
+[0:05:06] um not only that, but also the model-based variance can also be valid
+[0:05:08] model-based variance can also be valid um um if the allocation it is balanced,
+[0:05:11] um um if the allocation it is balanced, which is shown in a recent paper.
+[0:05:15] which is shown in a recent paper. However, misspecification of the outcome
+[0:05:17] However, misspecification of the outcome model can decrease the precision in
+[0:05:19] model can decrease the precision in unbalanced experiments when we have
+[0:05:21] unbalanced experiments when we have unbalanced allocations um and also in in
+[0:05:24] unbalanced allocations um and also in in the presence of strong um treatment
+[0:05:26] the presence of strong um treatment effect heterogeneity.
+[0:05:28] effect heterogeneity. Um using regression approaches, that
+[0:05:30] Um using regression approaches, that also invites that that also has a
+[0:05:32] also invites that that also has a potential for inviting a fishing
+[0:05:33] potential for inviting a fishing expedition in a sense that one may
+[0:05:35] expedition in a sense that one may search for a outcome model that um
+[0:05:39] search for a outcome model that um presents the most dramatic treatment
+[0:05:41] presents the most dramatic treatment effect estimates, um thus jeopardizing
+[0:05:44] effect estimates, um thus jeopardizing that jeopardizes the objectivity in in
+[0:05:46] that jeopardizes the objectivity in in causal inference with randomized trials.
+[0:05:49] causal inference with randomized trials. Even so, um ANCOVA models are still most
+[0:05:51] Even so, um ANCOVA models are still most commonly used in in biomedical studies.
+[0:05:55] commonly used in in biomedical studies. Alternatively, the inverse probability
+[0:05:57] Alternatively, the inverse probability weighting is an objective alternative to
+[0:06:01] weighting is an objective alternative to the ANCOVA models in analyzing
+[0:06:03] the ANCOVA models in analyzing randomized controlled trials.
+[0:06:05] randomized controlled trials. Using IPW, we model the known treatment
+[0:06:08] Using IPW, we model the known treatment assignment mechanism as a function of
+[0:06:10] assignment mechanism as a function of the baseline covariates and we create
+[0:06:13] the baseline covariates and we create the usual inverse propensity score
+[0:06:15] the usual inverse propensity score weights and then use the difference in
+[0:06:17] weights and then use the difference in the weighted mean outcomes between
+[0:06:19] the weighted mean outcomes between groups
+[0:06:20] groups as an estimator for the intervention
+[0:06:22] as an estimator for the intervention effect in RCTs.
+[0:06:24] effect in RCTs. In randomized trials, the assignment
+[0:06:28] In randomized trials, the assignment mechanism is controlled by the
+[0:06:29] mechanism is controlled by the investigator and so the propensity score
+[0:06:32] investigator and so the propensity score model is always considered correctly
+[0:06:34] model is always considered correctly specified and hence justifies the
+[0:06:36] specified and hence justifies the unbiasedness of this IPW estimator in
+[0:06:40] unbiasedness of this IPW estimator in randomized trials for covariate
+[0:06:41] randomized trials for covariate adjustment.
+[0:06:43] adjustment. The advantage of this IPW approach as
+[0:06:46] The advantage of this IPW approach as documented in the literature is that it
+[0:06:48] documented in the literature is that it separates the design and analysis
+[0:06:50] separates the design and analysis without involving outcome in the design
+[0:06:53] without involving outcome in the design stage and we can imagine a situation
+[0:06:55] stage and we can imagine a situation where the propensity score weights are
+[0:06:58] where the propensity score weights are created by one analyst and then the
+[0:07:00] created by one analyst and then the other analyst will carry out analysis
+[0:07:03] other analyst will carry out analysis based on only propensity score weights
+[0:07:05] based on only propensity score weights but without access to any covariates
+[0:07:08] but without access to any covariates and thus
+[0:07:10] and thus avoids the fishing expedition by
+[0:07:11] avoids the fishing expedition by promoting objectivity in pre-specifying
+[0:07:15] promoting objectivity in pre-specifying the analytical adjustment. The IPW
+[0:07:18] the analytical adjustment. The IPW approach also avoids potential
+[0:07:20] approach also avoids potential convergence issues with regression under
+[0:07:23] convergence issues with regression under rare outcomes, for example, with rare
+[0:07:26] rare outcomes, for example, with rare Bernoulli outcomes or binary outcomes,
+[0:07:29] Bernoulli outcomes or binary outcomes, we would not have to do
+[0:07:31] we would not have to do log binomial regression models to
+[0:07:32] log binomial regression models to estimate risk ratios
+[0:07:35] estimate risk ratios which we know could be prone to
+[0:07:38] which we know could be prone to non-convergence issues.
+[0:07:40] non-convergence issues. The limitation of IPW, however, is that
+[0:07:42] The limitation of IPW, however, is that it may be inefficient compared to ANCOVA
+[0:07:46] it may be inefficient compared to ANCOVA with a limited sample size and also
+[0:07:47] with a limited sample size and also unbalanced
+[0:07:49] unbalanced treatment allocations.
+[0:07:51] treatment allocations. And then because of that, we propose to
+[0:07:53] And then because of that, we propose to weight beyond inverse probability
+[0:07:54] weight beyond inverse probability weighting or IPW for covariate
+[0:07:57] weighting or IPW for covariate adjustment in RCTs. We wish to maintain
+[0:08:00] adjustment in RCTs. We wish to maintain the objectivity of weighting, but
+[0:08:02] the objectivity of weighting, but possibly could improve the finite sample
+[0:08:04] possibly could improve the finite sample performance of IPW for adjustment. Um to
+[0:08:08] performance of IPW for adjustment. Um to do so, we introduce the usual notation
+[0:08:10] do so, we introduce the usual notation where we write N as the total sample
+[0:08:12] where we write N as the total sample size. We let Z denote the randomized
+[0:08:15] size. We let Z denote the randomized treatment indicator taking values zero
+[0:08:18] treatment indicator taking values zero and one depending on the assignment we
+[0:08:20] and one depending on the assignment we observe.
+[0:08:21] observe. We write Y1 Y0 as potential outcomes
+[0:08:24] We write Y1 Y0 as potential outcomes under treatment and control, and we let
+[0:08:27] under treatment and control, and we let X denote
+[0:08:28] X denote a list of the recorded baseline
+[0:08:30] a list of the recorded baseline covariates in the trial.
+[0:08:32] covariates in the trial. And we are interested in the additive
+[0:08:34] And we are interested in the additive causal estimate as usual, the ATE
+[0:08:36] causal estimate as usual, the ATE estimate defined as the expectation of
+[0:08:39] estimate defined as the expectation of Y1 - Y0 over the study population.
+[0:08:44] Y1 - Y0 over the study population. We maintain a usual assumption of the
+[0:08:46] We maintain a usual assumption of the stable unit treatment value condition
+[0:08:48] stable unit treatment value condition where we link the observed outcome Y to
+[0:08:51] where we link the observed outcome Y to the potential outcomes. And we assume
+[0:08:54] the potential outcomes. And we assume randomization, which says that the
+[0:08:57] randomization, which says that the randomization of the treatment
+[0:08:58] randomization of the treatment assignment Z does not depend on the
+[0:09:00] assignment Z does not depend on the covariates nor the potential outcomes.
+[0:09:03] covariates nor the potential outcomes. And we denote this R as the proportion
+[0:09:06] And we denote this R as the proportion of the individuals being randomized to
+[0:09:09] of the individuals being randomized to intervention.
+[0:09:10] intervention. Most typically, this R value equals to
+[0:09:13] Most typically, this R value equals to 1/2 indicating
+[0:09:15] 1/2 indicating a balanced assignment. So, we have equal
+[0:09:18] a balanced assignment. So, we have equal proportion
+[0:09:20] proportion of individuals randomized into treatment
+[0:09:22] of individuals randomized into treatment or control, but other values can also be
+[0:09:25] or control, but other values can also be possible with perceived benefit of the
+[0:09:27] possible with perceived benefit of the treatment. In some cases, when we
+[0:09:29] treatment. In some cases, when we consider the treatment to be beneficial
+[0:09:31] consider the treatment to be beneficial for ethical reasons, we may have a
+[0:09:33] for ethical reasons, we may have a larger value
+[0:09:34] larger value of R
+[0:09:36] of R compared to 1/2.
+[0:09:37] compared to 1/2. Under these conditions, um the ATE
+[0:09:40] Under these conditions, um the ATE parameter tau can easily be identified
+[0:09:42] parameter tau can easily be identified by the difference in the conditional
+[0:09:44] by the difference in the conditional expectation between the two groups,
+[0:09:46] expectation between the two groups, which motivates the usual unadjusted
+[0:09:48] which motivates the usual unadjusted difference-in-means estimator.
+[0:09:51] difference-in-means estimator. Um
+[0:09:52] Um to make some possible improvement by
+[0:09:54] to make some possible improvement by using weighting procedures, we recognize
+[0:09:56] using weighting procedures, we recognize that ATE is a special case of a class of
+[0:09:59] that ATE is a special case of a class of the weighted average treatment effect,
+[0:10:01] the weighted average treatment effect, the weight estimate. Um and um to define
+[0:10:04] the weight estimate. Um and um to define that, we write the conditional average
+[0:10:07] that, we write the conditional average treatment effect as tau of X, and we
+[0:10:10] treatment effect as tau of X, and we assume the density of the observed
+[0:10:12] assume the density of the observed covariates f of X in the study sample
+[0:10:14] covariates f of X in the study sample exist.
+[0:10:16] exist. We consider a target population denoted
+[0:10:18] We consider a target population denoted by the density g of X, which can
+[0:10:21] by the density g of X, which can possibly be different from the observed
+[0:10:23] possibly be different from the observed density f of X. And then we write h of X
+[0:10:26] density f of X. And then we write h of X as a ratio between g of X over f of X,
+[0:10:29] as a ratio between g of X over f of X, and we call that function h of X a
+[0:10:31] and we call that function h of X a tilting function, which can reweight um
+[0:10:34] tilting function, which can reweight um my study population represent the target
+[0:10:37] my study population represent the target population of interest.
+[0:10:40] population of interest. Um by the above elements, we can define
+[0:10:42] Um by the above elements, we can define the class of estimates, um the class of
+[0:10:45] the class of estimates, um the class of the estimates, um um which is the ATE
+[0:10:47] the estimates, um um which is the ATE over a new target population G, which we
+[0:10:51] over a new target population G, which we call tau of H, um to specifically
+[0:10:54] call tau of H, um to specifically acknowledge the linkage of this estimate
+[0:10:57] acknowledge the linkage of this estimate to the tilting function. And we can
+[0:10:58] to the tilting function. And we can express that um as a ratio of these two
+[0:11:01] express that um as a ratio of these two expectations here, um
+[0:11:03] expectations here, um and then evidently, when the h function
+[0:11:06] and then evidently, when the h function is proportional to a constant, um the
+[0:11:09] is proportional to a constant, um the observed density coincide with the
+[0:11:11] observed density coincide with the target density, and the target
+[0:11:13] target density, and the target population is basically the observed
+[0:11:15] population is basically the observed population, and that this weight
+[0:11:16] population, and that this weight estimate um becomes the usual ATE.
+[0:11:20] estimate um becomes the usual ATE. Varying values of the tilting function
+[0:11:22] Varying values of the tilting function can vary the target population, and in
+[0:11:24] can vary the target population, and in practice, most commonly in observational
+[0:11:26] practice, most commonly in observational studies, we could prespecify the value
+[0:11:29] studies, we could prespecify the value of the tilting function as a function of
+[0:11:31] of the tilting function as a function of the true propensity score to a to target
+[0:11:34] the true propensity score to a to target um um alternative target populations.
+[0:11:37] um um alternative target populations. But under randomization, the value of
+[0:11:40] But under randomization, the value of the true propensity score is a constant,
+[0:11:42] the true propensity score is a constant, and as long as
+[0:11:44] and as long as um the tilting function is a function of
+[0:11:47] um the tilting function is a function of the true propensity score, different
+[0:11:50] the true propensity score, different forms of the tilting function can
+[0:11:52] forms of the tilting function can correspond to the same target
+[0:11:54] correspond to the same target population, and the weight estimate
+[0:11:57] population, and the weight estimate simply becomes the ATE.
+[0:12:04] And the the special feature um in the last slide under randomized control
+[0:12:06] last slide under randomized control trials provides the basis for using
+[0:12:08] trials provides the basis for using alternative weighting strategies to
+[0:12:11] alternative weighting strategies to achieve better finite sample
+[0:12:12] achieve better finite sample performances in in covariate adjustment
+[0:12:15] performances in in covariate adjustment for RCTs. And specifically for a given
+[0:12:18] for RCTs. And specifically for a given value of the tilting function, if we
+[0:12:20] value of the tilting function, if we want to estimate that weight estimate,
+[0:12:22] want to estimate that weight estimate, we can use the following balancing
+[0:12:24] we can use the following balancing weights, which gives each individual um
+[0:12:27] weights, which gives each individual um receiving intervention a weight being
+[0:12:29] receiving intervention a weight being proportional to the ratio between the
+[0:12:32] proportional to the ratio between the tilting function and the true propensity
+[0:12:34] tilting function and the true propensity score. And we give a weight to each
+[0:12:37] score. And we give a weight to each individual in the control group um as
+[0:12:39] individual in the control group um as the ratio between the tilting function
+[0:12:42] the ratio between the tilting function over 1 minus
+[0:12:43] over 1 minus propensity score. We call this class of
+[0:12:45] propensity score. We call this class of weights the balancing weights because
+[0:12:47] weights the balancing weights because they could balance the distributions of
+[0:12:49] they could balance the distributions of the weighted covariates between the two
+[0:12:51] the weighted covariates between the two arms towards a common target population
+[0:12:53] arms towards a common target population G.
+[0:12:56] G. Um and then we can use the higher type
+[0:12:58] Um and then we can use the higher type estimator of the weight to estimate the
+[0:13:00] estimator of the weight to estimate the class of estimates um
+[0:13:02] class of estimates um um as usual, and we can choose the
+[0:13:05] um as usual, and we can choose the weight to be inverse probability
+[0:13:07] weight to be inverse probability weights, um which is a common practice,
+[0:13:09] weights, um which is a common practice, or we can use
+[0:13:11] or we can use um overlap weights, which gives um each
+[0:13:14] um overlap weights, which gives um each individual receiving treatment a weight
+[0:13:16] individual receiving treatment a weight equal to 1 minus um the propensity
+[0:13:18] equal to 1 minus um the propensity score, the propensity to receive the
+[0:13:20] score, the propensity to receive the control um condition, um and then we
+[0:13:23] control um condition, um and then we give the weight to each individual in
+[0:13:25] give the weight to each individual in the control condition the propensity to
+[0:13:27] the control condition the propensity to receive the intervention.
+[0:13:29] receive the intervention. Um among this family because ATT weights
+[0:13:32] Um among this family because ATT weights as well as the matching weights are also
+[0:13:34] as well as the matching weights are also special members of the class of the
+[0:13:36] special members of the class of the balancing weights, they can also be used
+[0:13:38] balancing weights, they can also be used um for covariate adjustment purposes in
+[0:13:40] um for covariate adjustment purposes in randomized control trials.
+[0:13:42] randomized control trials. And just to reiterate, um the choice um
+[0:13:47] And just to reiterate, um the choice um although different choices of the
+[0:13:48] although different choices of the tilting function can modify the target
+[0:13:50] tilting function can modify the target population and target estimates in
+[0:13:53] population and target estimates in observational studies, um they
+[0:13:54] observational studies, um they correspond to the same ATE in in
+[0:13:58] correspond to the same ATE in in randomized control trials as long as um
+[0:14:00] randomized control trials as long as um the specification of the H function only
+[0:14:03] the specification of the H function only depends on
+[0:14:04] depends on um the true propensity score.
+[0:14:07] um the true propensity score. In observational studies, um the overlap
+[0:14:10] In observational studies, um the overlap weights or OW correspond to a target
+[0:14:12] weights or OW correspond to a target population with the most overlap in the
+[0:14:14] population with the most overlap in the baseline covariates, and theoretically
+[0:14:16] baseline covariates, and theoretically this is shown um to give the smallest
+[0:14:19] this is shown um to give the smallest asymptotic variance of the causal
+[0:14:21] asymptotic variance of the causal contrast. Empirically, there are also an
+[0:14:24] contrast. Empirically, there are also an increased number of simulation studies
+[0:14:26] increased number of simulation studies showing that um we can gain efficiency
+[0:14:29] showing that um we can gain efficiency in in finite samples by using OW versus
+[0:14:32] in in finite samples by using OW versus IPW.
+[0:14:33] IPW. And in RCTs, the true propensity score
+[0:14:36] And in RCTs, the true propensity score is a constant, and so OW and IPW
+[0:14:39] is a constant, and so OW and IPW actually target the same target estimate
+[0:14:42] actually target the same target estimate ATE as we explained before, but their
+[0:14:45] ATE as we explained before, but their finite sample
+[0:14:46] finite sample but their finite sample operating
+[0:14:48] but their finite sample operating characteristics can be markedly
+[0:14:50] characteristics can be markedly different, um and um this is the basis
+[0:14:53] different, um and um this is the basis from which we consider applying the
+[0:14:56] from which we consider applying the overlap weights um to RCTs um for
+[0:14:59] overlap weights um to RCTs um for covariate adjustment purposes, and then
+[0:15:01] covariate adjustment purposes, and then we display the sample weighting
+[0:15:03] we display the sample weighting estimator um here in the slide, where EI
+[0:15:06] estimator um here in the slide, where EI hat represents um an an estimated
+[0:15:09] hat represents um an an estimated propensity scores from a working model
+[0:15:12] propensity scores from a working model in in RCTs.
+[0:15:14] in in RCTs. And then in RCTs, um the working
+[0:15:16] And then in RCTs, um the working propensity score model is often the
+[0:15:18] propensity score model is often the logistic regression model um Um, that is
+[0:15:21] logistic regression model um Um, that is the most accessible um, parametric
+[0:15:23] the most accessible um, parametric regression models for binary, um,
+[0:15:25] regression models for binary, um, outcomes. Um, and we write the theta
+[0:15:27] outcomes. Um, and we write the theta parameter as the parameter in this
+[0:15:29] parameter as the parameter in this propensity score model.
+[0:15:31] propensity score model. And then what goes into the propensity
+[0:15:32] And then what goes into the propensity score model for adjustment usually
+[0:15:35] score model for adjustment usually includes, um, um, certification
+[0:15:37] includes, um, um, certification variables we use in the design stage, as
+[0:15:40] variables we use in the design stage, as well as other key prognostic factors we
+[0:15:42] well as other key prognostic factors we pre-specified in the design stage, as
+[0:15:44] pre-specified in the design stage, as well.
+[0:15:45] well. And the purpose here, um, when we fit
+[0:15:48] And the purpose here, um, when we fit this propensity score, um,
+[0:15:50] this propensity score, um, this working propensity score model is
+[0:15:52] this working propensity score model is not to learn the assignment mechanism,
+[0:15:55] not to learn the assignment mechanism, um, but to implicitly perform adjustment
+[0:15:58] um, but to implicitly perform adjustment for covariates in RCTs. And so, um, in
+[0:16:01] for covariates in RCTs. And so, um, in this context, um, perhaps flexible
+[0:16:03] this context, um, perhaps flexible regression models may not be as useful,
+[0:16:06] regression models may not be as useful, um, as in observational studies. And so,
+[0:16:08] um, as in observational studies. And so, we did not consider those flexible
+[0:16:10] we did not consider those flexible models from this point onward.
+[0:16:14] models from this point onward. Um, another interesting property of the
+[0:16:16] Um, another interesting property of the OW is that, um, the overlap weights
+[0:16:19] OW is that, um, the overlap weights estimated from the logistic,
+[0:16:22] estimated from the logistic, um, the logistic working model can lead
+[0:16:24] um, the logistic working model can lead to exact mean balance of any predictor
+[0:16:27] to exact mean balance of any predictor included in the model, um, in a sense
+[0:16:30] included in the model, um, in a sense that once we apply the overlap weights
+[0:16:32] that once we apply the overlap weights to my RCT data, um, I can see that the
+[0:16:35] to my RCT data, um, I can see that the weighted covariates from the two groups
+[0:16:38] weighted covariates from the two groups are exactly the same. And that means
+[0:16:41] are exactly the same. And that means that the weighted difference in the
+[0:16:43] that the weighted difference in the usual table one are identically zero,
+[0:16:46] usual table one are identically zero, which improves,
+[0:16:48] which improves, um, the face validity of the trial
+[0:16:50] um, the face validity of the trial showing that the randomization actually
+[0:16:52] showing that the randomization actually worked because we have, um, equally
+[0:16:54] worked because we have, um, equally compared, um, equally comparable
+[0:16:57] compared, um, equally comparable treatment and control groups.
+[0:17:00] treatment and control groups. Um, the exact mean balance property also
+[0:17:03] Um, the exact mean balance property also can translate into better efficiency in
+[0:17:06] can translate into better efficiency in the estimation of the ATE parameter in
+[0:17:08] the estimation of the ATE parameter in RCTs. And, um, this intuition can be,
+[0:17:12] RCTs. And, um, this intuition can be, um, illustrated in, um, by the following
+[0:17:15] um, illustrated in, um, by the following example, where we consider a simple
+[0:17:18] example, where we consider a simple additive outcome surface YI equal to an
+[0:17:22] additive outcome surface YI equal to an overall intercept plus a constant
+[0:17:25] overall intercept plus a constant treatment effect plus a covariate effect
+[0:17:28] treatment effect plus a covariate effect as well as a mean zero error term here.
+[0:17:31] as well as a mean zero error term here. And then we can decompose the sources of
+[0:17:34] And then we can decompose the sources of the estimation error for
+[0:17:37] the estimation error for common estimators in RCTs as
+[0:17:40] common estimators in RCTs as a sum of the
+[0:17:42] a sum of the weighted chance imbalance defined by
+[0:17:45] weighted chance imbalance defined by this delta X over here, which measures
+[0:17:48] this delta X over here, which measures um after waiting how different the
+[0:17:51] um after waiting how different the covariates are between the two groups,
+[0:17:53] covariates are between the two groups, as well as the weighted difference in
+[0:17:55] as well as the weighted difference in the noises defined as this delta epsilon
+[0:17:58] the noises defined as this delta epsilon um quantity um in the slide here, which
+[0:18:01] um quantity um in the slide here, which measures how different um the expected
+[0:18:04] measures how different um the expected error term would be after waiting.
+[0:18:07] error term would be after waiting. And then the error of the unadjusted
+[0:18:09] And then the error of the unadjusted estimator clearly um in a single
+[0:18:12] estimator clearly um in a single randomized study will be equal to a
+[0:18:14] randomized study will be equal to a linear combination
+[0:18:16] linear combination um of the unweighted
+[0:18:18] um of the unweighted um difference in the covariates as well
+[0:18:21] um difference in the covariates as well as the unweighted difference in error
+[0:18:23] as the unweighted difference in error terms.
+[0:18:24] terms. And then this source of error, the first
+[0:18:26] And then this source of error, the first source of error can explode when Xs
+[0:18:29] source of error can explode when Xs exhibit chance imbalance and the
+[0:18:32] exhibit chance imbalance and the coefficient beta zero becomes large, in
+[0:18:34] coefficient beta zero becomes large, in which case we know we have some
+[0:18:36] which case we know we have some highly prognostic covariates that are
+[0:18:38] highly prognostic covariates that are unbalanced by randomization.
+[0:18:41] unbalanced by randomization. Um the error of the IPW estimator can be
+[0:18:45] Um the error of the IPW estimator can be um decomposed into the sum of a weighted
+[0:18:47] um decomposed into the sum of a weighted combination um
+[0:18:49] combination um um of a of a linear combination of the
+[0:18:51] um of a of a linear combination of the weighted of the IP of the inverse
+[0:18:53] weighted of the IP of the inverse probability weighted um difference in
+[0:18:55] probability weighted um difference in chance imbalance as well as
+[0:18:57] chance imbalance as well as the IPW weighted um um difference in the
+[0:19:01] the IPW weighted um um difference in the noises. And um this error term is often
+[0:19:04] noises. And um this error term is often smaller than the one from the unadjusted
+[0:19:07] smaller than the one from the unadjusted estimator because we expect that IPW
+[0:19:09] estimator because we expect that IPW could reduce the chance imbalance to
+[0:19:11] could reduce the chance imbalance to some degree um even not perfectly. And
+[0:19:14] some degree um even not perfectly. And so, we expect that, um, the error term
+[0:19:16] so, we expect that, um, the error term from the IPW estimator will be smaller
+[0:19:19] from the IPW estimator will be smaller in general.
+[0:19:20] in general. In contrast, the estimation error for
+[0:19:24] In contrast, the estimation error for the OW estimator is actually free of the
+[0:19:27] the OW estimator is actually free of the covariates as well as the coefficient
+[0:19:29] covariates as well as the coefficient measuring the prognostic value of the
+[0:19:31] measuring the prognostic value of the covariates because, um, the estimation
+[0:19:35] covariates because, um, the estimation error, um, will only depend on, um, the
+[0:19:39] error, um, will only depend on, um, the the o- the overlap weighted difference
+[0:19:41] the o- the overlap weighted difference in the error terms. Um, and so, the
+[0:19:43] in the error terms. Um, and so, the value of the beta zero does not affect
+[0:19:45] value of the beta zero does not affect the estimation error. And so, this
+[0:19:48] the estimation error. And so, this intuition from a single study, um, shows
+[0:19:51] intuition from a single study, um, shows that there could be an ordering of the
+[0:19:54] that there could be an ordering of the estimation error among these three
+[0:19:56] estimation error among these three estimators. And then, the reduced
+[0:19:58] estimators. And then, the reduced estimation error in a single iteration
+[0:20:01] estimation error in a single iteration can translate into better efficiency
+[0:20:03] can translate into better efficiency over repeated experiments for the OW
+[0:20:06] over repeated experiments for the OW estimator.
+[0:20:08] estimator. We also studied the asymptotic
+[0:20:09] We also studied the asymptotic properties, um, of the OW estimator in
+[0:20:12] properties, um, of the OW estimator in the context of RCTs.
+[0:20:14] the context of RCTs. Um, and and to present those results, we
+[0:20:17] Um, and and to present those results, we first introduce the family of the, um,
+[0:20:19] first introduce the family of the, um, regular and asymptotic linear estimators
+[0:20:22] regular and asymptotic linear estimators for ATE, um, in in randomized trials,
+[0:20:25] for ATE, um, in in randomized trials, um, given in this first line over here.
+[0:20:27] um, given in this first line over here. And then, the first, um, two terms are
+[0:20:30] And then, the first, um, two terms are basically the unadjusted estimator, and
+[0:20:32] basically the unadjusted estimator, and then, um, the latter term concerns an
+[0:20:35] then, um, the latter term concerns an augmentation, um, from this first
+[0:20:37] augmentation, um, from this first estimator, where we write g0x and g1x as
+[0:20:41] estimator, where we write g0x and g1x as two scalar functions of the x's.
+[0:20:44] two scalar functions of the x's. The the unadjusted estimator RCTs
+[0:20:46] The the unadjusted estimator RCTs corresponds to choosing g the g z of x,
+[0:20:49] corresponds to choosing g the g z of x, um, as basically zero. The ANCOVA 1
+[0:20:52] um, as basically zero. The ANCOVA 1 estimator, where we regress y to the
+[0:20:55] estimator, where we regress y to the main effects of the treatment and the
+[0:20:57] main effects of the treatment and the main effects of the covariates
+[0:20:58] main effects of the covariates corresponds to choices of the g z x as
+[0:21:02] corresponds to choices of the g z x as the expectation of y given x's. Um,
+[0:21:05] the expectation of y given x's. Um, while the ANCOVA 2 estimator, where we
+[0:21:07] while the ANCOVA 2 estimator, where we add another interaction between
+[0:21:09] add another interaction between treatment and covariates corresponds to
+[0:21:12] treatment and covariates corresponds to um, choosing GZ of X equals to the
+[0:21:15] um, choosing GZ of X equals to the conditional expectation of Y given Z as
+[0:21:18] conditional expectation of Y given Z as well as the X's. And this approach has
+[0:21:20] well as the X's. And this approach has been considered to be fully efficient if
+[0:21:23] been considered to be fully efficient if the outcome model is correctly
+[0:21:24] the outcome model is correctly specified.
+[0:21:26] specified. And also, the IPW estimator with the
+[0:21:28] And also, the IPW estimator with the working logistic regression model um,
+[0:21:31] working logistic regression model um, can also be shown to be asymptotically
+[0:21:32] can also be shown to be asymptotically equivalent to the ANCOVA 2 estimator
+[0:21:35] equivalent to the ANCOVA 2 estimator when the G of um, GZ of X is linear in
+[0:21:39] when the G of um, GZ of X is linear in the X's, which is the adjustment
+[0:21:41] the X's, which is the adjustment variable in the in the logistic working
+[0:21:44] variable in the in the logistic working um, propensity score. And this has been
+[0:21:46] um, propensity score. And this has been shown in the prior literature.
+[0:21:49] shown in the prior literature. Um, what we can show is that um, first
+[0:21:51] Um, what we can show is that um, first of all, if the propensity score is um,
+[0:21:54] of all, if the propensity score is um, estimated by a parametric model
+[0:21:56] estimated by a parametric model that satisfies some conditions, then the
+[0:21:59] that satisfies some conditions, then the OW estimator in RCT is also belongs to
+[0:22:03] OW estimator in RCT is also belongs to the class of the semi-parametric
+[0:22:05] the class of the semi-parametric estimators we introduced earlier.
+[0:22:07] estimators we introduced earlier. And then suppose X1 and X2 are two
+[0:22:09] And then suppose X1 and X2 are two nested sets of the baseline covariates
+[0:22:12] nested sets of the baseline covariates um, with EX1 and EX2
+[0:22:16] um, with EX1 and EX2 um, as two nested smooth parametric
+[0:22:19] um, as two nested smooth parametric models for the propensity score.
+[0:22:21] models for the propensity score. Corresponding to two OW estimators with
+[0:22:24] Corresponding to two OW estimators with the weights coming from these two
+[0:22:26] the weights coming from these two models, we can then show that the
+[0:22:28] models, we can then show that the asymptotic variance of the OW estimator
+[0:22:31] asymptotic variance of the OW estimator with the more saturated propensity score
+[0:22:33] with the more saturated propensity score model is no larger than that um, of the
+[0:22:37] model is no larger than that um, of the than the asymptotic variance of the OW
+[0:22:39] than the asymptotic variance of the OW estimator with the more parsimonious
+[0:22:42] estimator with the more parsimonious um, working propensity score model.
+[0:22:44] um, working propensity score model. And then finally, with a logistic
+[0:22:46] And then finally, with a logistic working propensity score model, the OW
+[0:22:49] working propensity score model, the OW estimator is also asymptotically
+[0:22:50] estimator is also asymptotically equivalent to the ANCOVA 2 estimator and
+[0:22:54] equivalent to the ANCOVA 2 estimator and is um,
+[0:22:55] is um, um, semi-parametrically efficient as
+[0:22:57] um, semi-parametrically efficient as long as the true outcome surface given
+[0:23:00] long as the true outcome surface given covariates and given treatment condition
+[0:23:03] covariates and given treatment condition is a linear function of the access,
+[0:23:05] is a linear function of the access, which is the adjustment variable in
+[0:23:08] which is the adjustment variable in the working logistic propensity score
+[0:23:10] the working logistic propensity score model.
+[0:23:12] model. And then the previous results extend the
+[0:23:14] And then the previous results extend the results of IPW to OW
+[0:23:17] results of IPW to OW and then indicates that adjusting for
+[0:23:20] and then indicates that adjusting for baseline covariates using OW does not
+[0:23:22] baseline covariates using OW does not adversely affect
+[0:23:25] adversely affect efficiency in large samples than without
+[0:23:27] efficiency in large samples than without adjustment.
+[0:23:29] adjustment. And to further illustrate the intuition
+[0:23:31] And to further illustrate the intuition of the second point where we show that
+[0:23:34] of the second point where we show that the OW estimator with the more
+[0:23:36] the OW estimator with the more saturated propensity score model is not
+[0:23:39] saturated propensity score model is not asymptotically less efficient than the
+[0:23:42] asymptotically less efficient than the one with a more with a more parsimonious
+[0:23:44] one with a more with a more parsimonious propensity score model, we can show that
+[0:23:47] propensity score model, we can show that when
+[0:23:48] when the allocation proportion R equals to
+[0:23:50] the allocation proportion R equals to 1/2,
+[0:23:52] 1/2, the asymptotic variance of the OW
+[0:23:54] the asymptotic variance of the OW estimator is
+[0:23:56] estimator is is proportional to the variance of the
+[0:23:58] is proportional to the variance of the mean centered outcome Y tilde as well as
+[0:24:02] mean centered outcome Y tilde as well as R times 1 minus the R squared, which
+[0:24:05] R times 1 minus the R squared, which measures the proportion of explained
+[0:24:07] measures the proportion of explained variation after regressing this mean
+[0:24:09] variation after regressing this mean centered
+[0:24:10] centered this mean centered outcome to
+[0:24:12] this mean centered outcome to covariates. And then as we include more
+[0:24:15] covariates. And then as we include more covariates in the propensity score
+[0:24:17] covariates in the propensity score model, this R squared do not further
+[0:24:19] model, this R squared do not further decrease
+[0:24:21] decrease and that illustrates the intuition of
+[0:24:23] and that illustrates the intuition of the second of the second part of the
+[0:24:25] the second of the second part of the previous proposition.
+[0:24:27] previous proposition. However, in in finite samples because we
+[0:24:29] However, in in finite samples because we do not afford to adjust for many
+[0:24:31] do not afford to adjust for many covariates, it is often encouraged to
+[0:24:34] covariates, it is often encouraged to specify X a priori
+[0:24:37] specify X a priori and specifically to include
+[0:24:39] and specifically to include those that exhibit chance imbalance as
+[0:24:42] those that exhibit chance imbalance as well as those with high prognostic
+[0:24:43] well as those with high prognostic values in the design stage.
+[0:24:47] values in the design stage. Perhaps more interestingly, we can also
+[0:24:49] Perhaps more interestingly, we can also show that the previous proposition also
+[0:24:51] show that the previous proposition also holds for the larger family of the
+[0:24:54] holds for the larger family of the balancing weights as long as the tilting
+[0:24:56] balancing weights as long as the tilting function HX is a smooth function of the
+[0:25:00] function HX is a smooth function of the true propensity score, where the
+[0:25:02] true propensity score, where the smoothness requires at least
+[0:25:04] smoothness requires at least differentiability
+[0:25:05] differentiability and in particular the matching weights
+[0:25:08] and in particular the matching weights as a member of the balancing weights
+[0:25:10] as a member of the balancing weights is not any is not everywhere
+[0:25:13] is not any is not everywhere differentiable but this proposition
+[0:25:15] differentiable but this proposition still holds if we smooth over that
+[0:25:18] still holds if we smooth over that single non-differentiable point when EX
+[0:25:21] single non-differentiable point when EX equals to 1.
+[0:25:24] equals to 1. For binary outcomes we can we we can
+[0:25:27] For binary outcomes we can we we can still apply the OW
+[0:25:29] still apply the OW machinery to estimate risk ratio, causal
+[0:25:32] machinery to estimate risk ratio, causal risk ratios and also causal odds ratios
+[0:25:35] risk ratios and also causal odds ratios in addition to the additive causal
+[0:25:36] in addition to the additive causal estimates and
+[0:25:39] estimates and we can show as has been done previously
+[0:25:41] we can show as has been done previously for IPW that OW can improve efficiency
+[0:25:45] for IPW that OW can improve efficiency over the unadjusted estimator in RCTs
+[0:25:49] over the unadjusted estimator in RCTs when we estimate these series of ratio
+[0:25:52] when we estimate these series of ratio estimates
+[0:25:53] estimates but with a caveat that OW may have
+[0:25:56] but with a caveat that OW may have better
+[0:25:57] better finite sample stability and the
+[0:25:59] finite sample stability and the performance than IPW.
+[0:26:02] performance than IPW. For for inference with OW we proceed
+[0:26:05] For for inference with OW we proceed with the usual sandwich variance that
+[0:26:09] with the usual sandwich variance that is that it takes into account for the
+[0:26:13] is that it takes into account for the uncertainty in the estimation of the
+[0:26:14] uncertainty in the estimation of the propensity scores in that logistic
+[0:26:16] propensity scores in that logistic working
+[0:26:17] working model and we can summarize the variance
+[0:26:20] model and we can summarize the variance estimators of the OW
+[0:26:23] estimators of the OW approach for each of these estimates
+[0:26:25] approach for each of these estimates both additive and also ratio concisely
+[0:26:28] both additive and also ratio concisely in a single variance formula
+[0:26:31] in a single variance formula where this new one and new two depends
+[0:26:34] where this new one and new two depends on the choices of the target estimates.
+[0:26:37] on the choices of the target estimates. And then this form of the variance
+[0:26:38] And then this form of the variance estimator also shed light on the
+[0:26:40] estimator also shed light on the variance reduction property of the OW
+[0:26:42] variance reduction property of the OW relative to the unadjusted
+[0:26:45] relative to the unadjusted variances which is given by the first
+[0:26:47] variances which is given by the first term in this variance estimator.
+[0:26:50] term in this variance estimator. So I will stop here um, for any
+[0:26:53] So I will stop here um, for any questions in the middle before we go
+[0:26:55] questions in the middle before we go into the simulation study um, if we have
+[0:26:57] into the simulation study um, if we have any questions.
+[0:27:02] Thanks Van. So, there are no questions in the in the Q&amp;A um, but um, I do have
+[0:27:06] in the in the Q&amp;A um, but um, I do have one question. So, um,
+[0:27:08] one question. So, um, proposition one is really interesting.
+[0:27:10] proposition one is really interesting. So, the um,
+[0:27:12] So, the um, the point C I was particularly surprised
+[0:27:13] the point C I was particularly surprised about that it's um, uh, asymptotically
+[0:27:16] about that it's um, uh, asymptotically equivalent to ANCOVA 2 um,
+[0:27:18] equivalent to ANCOVA 2 um, like I I I I guess from my intuition is
+[0:27:21] like I I I I guess from my intuition is is a bit shaky is that the
+[0:27:23] is a bit shaky is that the uh, the uh, overlap weight balance the
+[0:27:27] uh, the uh, overlap weight balance the the the covariates uh, but the margins
+[0:27:29] the the covariates uh, but the margins of the covariates, right? Um, but if
+[0:27:31] of the covariates, right? Um, but if your if your ANCOVA 2 model has
+[0:27:33] your if your ANCOVA 2 model has interactions between the between the
+[0:27:35] interactions between the between the covariates within that um,
+[0:27:37] covariates within that um, uh, technically or potentially lead to
+[0:27:39] uh, technically or potentially lead to more more precision. Um, I I guess I'm
+[0:27:42] more more precision. Um, I I guess I'm I'm kind of um, unclear as to how
+[0:27:45] I'm kind of um, unclear as to how I don't have strong intuition as to how
+[0:27:46] I don't have strong intuition as to how they can be equivalent given given that.
+[0:27:49] they can be equivalent given given that. Yeah, so um,
+[0:27:51] Yeah, so um, basically what we can show is that once
+[0:27:53] basically what we can show is that once we use either IPW or so so so um, so
+[0:27:58] we use either IPW or so so so um, so maybe this is more straightforward in
+[0:27:59] maybe this is more straightforward in saying that the ANCOVA 2 estimator by
+[0:28:02] saying that the ANCOVA 2 estimator by specifying that interaction terms, we
+[0:28:03] specifying that interaction terms, we can show that it corresponds to um, I
+[0:28:07] can show that it corresponds to um, I mean the influence function of this
+[0:28:08] mean the influence function of this approach basically says that G0X
+[0:28:11] approach basically says that G0X and G1X equals to the conditional
+[0:28:13] and G1X equals to the conditional expectation of Y given X's um, given Z
+[0:28:17] expectation of Y given X's um, given Z equals to Z, right? So, it really models
+[0:28:19] equals to Z, right? So, it really models the treatment specific outcome surfaces.
+[0:28:21] the treatment specific outcome surfaces. And then the same um,
+[0:28:25] And then the same um, influence function can be obtained once
+[0:28:28] influence function can be obtained once we specify the weights like you know,
+[0:28:31] we specify the weights like you know, you using IPW or OW. So, you can show
+[0:28:34] you using IPW or OW. So, you can show that they will lead to the same
+[0:28:36] that they will lead to the same construction of the G0 and G1X which
+[0:28:39] construction of the G0 and G1X which models the treatment specific outcome
+[0:28:41] models the treatment specific outcome surfaces. So, that is the central reason
+[0:28:44] surfaces. So, that is the central reason why um, that um, proposition would hold.
+[0:28:47] why um, that um, proposition would hold. Um, hm,
+[0:28:49] Um, hm, as as
+[0:28:51] as as asymptotic
+[0:28:51] asymptotic Yeah.
+[0:28:52] Yeah. um,
+[0:28:53] um, Yeah.
+[0:28:54] Yeah. And um, but there is also a theory
+[0:28:56] And um, but there is also a theory showing that if we have um, equal
+[0:28:58] showing that if we have um, equal randomization, um, and cobalt 2 will be
+[0:29:01] randomization, um, and cobalt 2 will be equivalent to cobalt 1, but this is more
+[0:29:03] equivalent to cobalt 1, but this is more general, um, where we allow R to be an
+[0:29:05] general, um, where we allow R to be an arbitrary number between 0 and 1.
+[0:29:08] arbitrary number between 0 and 1. So, um, that's kind of the essential
+[0:29:11] So, um, that's kind of the essential reason why they're equivalent, um,
+[0:29:14] reason why they're equivalent, um, asymptotically. Basically, by allowing G
+[0:29:16] asymptotically. Basically, by allowing G of Z GZ of X to be a treatment-specific
+[0:29:19] of Z GZ of X to be a treatment-specific outcome surface, and that comes from the
+[0:29:21] outcome surface, and that comes from the expansion of the influence function when
+[0:29:23] expansion of the influence function when we use these weighting procedures.
+[0:29:26] we use these weighting procedures. Okay. Thanks, that makes sense. Thank
+[0:29:28] Okay. Thanks, that makes sense. Thank you for the precision.
+[0:29:29] you for the precision. Thanks.
+[0:29:31] Thanks. Um, so I will move on then, um, before
+[0:29:33] Um, so I will move on then, um, before we um, have any questions. Um, so so so
+[0:29:35] we um, have any questions. Um, so so so we um, proceed with some simulation
+[0:29:37] we um, proceed with some simulation studies to compare, um, um,
+[0:29:40] studies to compare, um, um, the uh, these approaches. We start from
+[0:29:42] the uh, these approaches. We start from the continue from a continuous outcome,
+[0:29:45] the continue from a continuous outcome, where we generate 10 covariates from the
+[0:29:47] where we generate 10 covariates from the um, standard normal distribution, and
+[0:29:49] um, standard normal distribution, and then we randomize the treatment
+[0:29:51] then we randomize the treatment indicator from a Bernoulli model, where
+[0:29:54] indicator from a Bernoulli model, where we allow the allocation proportion to be
+[0:29:57] we allow the allocation proportion to be um, 1/2, but also deviates from 1/2 to
+[0:29:59] um, 1/2, but also deviates from 1/2 to be 0.7. We simulate, um, the potential
+[0:30:02] be 0.7. We simulate, um, the potential outcome from a linear outcome surface,
+[0:30:04] outcome from a linear outcome surface, um, where we specify the main effect of
+[0:30:07] um, where we specify the main effect of beta 0, so that the signal-to-noise
+[0:30:09] beta 0, so that the signal-to-noise ratio is 1, but with varying importance
+[0:30:12] ratio is 1, but with varying importance attached to components of the X's. Some
+[0:30:14] attached to components of the X's. Some strong prognostic covariates, but some
+[0:30:17] strong prognostic covariates, but some weak prognostic covariates.
+[0:30:19] weak prognostic covariates. We also vary beta 1, um, to represent
+[0:30:22] We also vary beta 1, um, to represent the level of the treatment effect
+[0:30:23] the level of the treatment effect heterogeneity. Um, we are interested in
+[0:30:26] heterogeneity. Um, we are interested in small to moderate, um, randomized
+[0:30:28] small to moderate, um, randomized control trials, mimicking the best air
+[0:30:30] control trials, mimicking the best air in best air RCT, and then we, um, ran
+[0:30:34] in best air RCT, and then we, um, ran two 2,000 simulations to see, um, to to
+[0:30:37] two 2,000 simulations to see, um, to to compare the performance characteristics
+[0:30:39] compare the performance characteristics of a set of commonly used, um,
+[0:30:41] of a set of commonly used, um, estimators, including the unadjusted
+[0:30:43] estimators, including the unadjusted estimator, the IPW and OW estimator,
+[0:30:46] estimator, the IPW and OW estimator, where we consider linear specification
+[0:30:48] where we consider linear specification of the covariates in the logistic
+[0:30:50] of the covariates in the logistic working model. And then we also compare
+[0:30:53] working model. And then we also compare with the ANCOVA 2 estimator, which we
+[0:30:55] with the ANCOVA 2 estimator, which we denote by LR, stands for linear
+[0:30:57] denote by LR, stands for linear regression.
+[0:30:58] regression. And then we also compare with the
+[0:30:59] And then we also compare with the augmented IPW estimator, where we hybrid
+[0:31:02] augmented IPW estimator, where we hybrid IPW with regression, which is known as
+[0:31:05] IPW with regression, which is known as the usual doubly robust estimator in the
+[0:31:07] the usual doubly robust estimator in the observational, um, in in in in
+[0:31:09] observational, um, in in in in observational studies, but applied to
+[0:31:12] observational studies, but applied to the RCT context.
+[0:31:14] the RCT context. And for variance estimation, we proceed
+[0:31:16] And for variance estimation, we proceed with, um, the sandwich variance for IPW,
+[0:31:18] with, um, the sandwich variance for IPW, OW, as well as the AIPW, which takes
+[0:31:21] OW, as well as the AIPW, which takes into account the estimation, um, of the
+[0:31:24] into account the estimation, um, of the regression function, as well as the
+[0:31:26] regression function, as well as the inverse probability, um, as well as
+[0:31:28] inverse probability, um, as well as propensity score model.
+[0:31:30] propensity score model. And for linear regression, we proceed
+[0:31:32] And for linear regression, we proceed with, um,
+[0:31:33] with, um, the Huber-White sandwich variance, um,
+[0:31:35] the Huber-White sandwich variance, um, as recommended in the paper by Wing. Um,
+[0:31:38] as recommended in the paper by Wing. Um, this es- this variance is consistent
+[0:31:40] this es- this variance is consistent even when the allocation proportion
+[0:31:43] even when the allocation proportion deviates from 1/2.
+[0:31:46] deviates from 1/2. Um, so under equal randomization, um,
+[0:31:49] Um, so under equal randomization, um, when we have a constant treatment
+[0:31:51] when we have a constant treatment effect, um, this figure shows
+[0:31:54] effect, um, this figure shows the relative efficiency of IPW, linear
+[0:31:56] the relative efficiency of IPW, linear regression, and and IPW, um, relative to
+[0:31:59] regression, and and IPW, um, relative to the unadjusted estimator, um, when we
+[0:32:01] the unadjusted estimator, um, when we vary, um, the level of the sample size.
+[0:32:04] vary, um, the level of the sample size. In this simple case, there is an
+[0:32:06] In this simple case, there is an efficiency ordering in a sense that OW
+[0:32:09] efficiency ordering in a sense that OW seems to be the most efficient, um,
+[0:32:11] seems to be the most efficient, um, followed by linear regression, and then
+[0:32:13] followed by linear regression, and then followed by IPW.
+[0:32:15] followed by IPW. And the advantages of the OW is, um,
+[0:32:18] And the advantages of the OW is, um, very noticeable in in in small samples
+[0:32:20] very noticeable in in in small samples when n, when the sample size of RCT does
+[0:32:22] when n, when the sample size of RCT does not exceed 100, but when we increase the
+[0:32:26] not exceed 100, but when we increase the sample size to 200, um, all of the three
+[0:32:29] sample size to 200, um, all of the three estimators are, um, approximately
+[0:32:32] estimators are, um, approximately equally, um, efficient, which matches,
+[0:32:35] equally, um, efficient, which matches, um, the previous proposition one that we
+[0:32:38] um, the previous proposition one that we have studied analytically,
+[0:32:40] have studied analytically, we did not display the results from the
+[0:32:42] we did not display the results from the AIPW estimator because in this context,
+[0:32:45] AIPW estimator because in this context, um it is almost behaving equally to the
+[0:32:48] um it is almost behaving equally to the linear regression estimator, suggesting
+[0:32:50] linear regression estimator, suggesting that the regression components dominates
+[0:32:52] that the regression components dominates the waiting components in our CCTs.
+[0:32:56] the waiting components in our CCTs. Um when we increase the level of um
+[0:32:58] Um when we increase the level of um heterogeneity of the treatment effect,
+[0:33:00] heterogeneity of the treatment effect, when we increase the um when we increase
+[0:33:02] when we increase the um when we increase the value of the interactions in our
+[0:33:04] the value of the interactions in our data generating process, we can see that
+[0:33:07] data generating process, we can see that the linear regression um becomes um
+[0:33:09] the linear regression um becomes um slightly more efficient than OW and then
+[0:33:12] slightly more efficient than OW and then followed by IPW in this in this in this
+[0:33:14] followed by IPW in this in this in this particular scenario. And then it is
+[0:33:17] particular scenario. And then it is expected because we do have the correct
+[0:33:19] expected because we do have the correct outcome model specification, um and then
+[0:33:22] outcome model specification, um and then the balanced design actually favors the
+[0:33:24] the balanced design actually favors the linear regression in small samples.
+[0:33:26] linear regression in small samples. However, the advantage of the linear
+[0:33:29] However, the advantage of the linear regression or in COVID-2 model decreases
+[0:33:31] regression or in COVID-2 model decreases with reduced degree um of the treatment
+[0:33:34] with reduced degree um of the treatment effect heterogeneity.
+[0:33:36] effect heterogeneity. And then once we further increase the
+[0:33:38] And then once we further increase the sample size to to 400 or 500, all three
+[0:33:42] sample size to to 400 or 500, all three estimators again are approximately
+[0:33:44] estimators again are approximately equally efficient, um which matches our
+[0:33:47] equally efficient, um which matches our um analytical prediction from
+[0:33:50] um analytical prediction from proposition one, which shows that they
+[0:33:51] proposition one, which shows that they are asymptotically equivalent. But in
+[0:33:54] are asymptotically equivalent. But in any case, we have seen that OW always
+[0:33:57] any case, we have seen that OW always performs better than IPW in the
+[0:33:59] performs better than IPW in the simulation studies under equal
+[0:34:01] simulation studies under equal randomization.
+[0:34:07] So, should I um take care of the question now or should um or should I
+[0:34:09] question now or should um or should I proceed after?
+[0:34:14] Cuz I saw there's a question from the um chat.
+[0:34:18] Um Um I So, these questions are more
+[0:34:20] Um I So, these questions are more related to the um
+[0:34:22] related to the um what what happened before the theory, so
+[0:34:24] what what happened before the theory, so maybe we can keep them for the end uh so
+[0:34:26] maybe we can keep them for the end uh so you can continue
+[0:34:26] you can continue Sounds good.
+[0:34:27] Sounds good. Yeah. Yeah.
+[0:34:27] Yeah. Yeah. Sounds good. Thanks a lot.
+[0:34:28] Sounds good. Thanks a lot. presentation. Yeah.
+[0:34:30] presentation. Yeah. Um so so so we went ahead to do more
+[0:34:32] Um so so so we went ahead to do more simulations with unequal, um, allocation
+[0:34:34] simulations with unequal, um, allocation proportion when R equals to 0.7. And,
+[0:34:37] proportion when R equals to 0.7. And, um, for example, when we have a constant
+[0:34:39] um, for example, when we have a constant treatment effect, um, scenario, um, the
+[0:34:42] treatment effect, um, scenario, um, the left panels, um, um, corresponds to a
+[0:34:45] left panels, um, um, corresponds to a situation where we have the outcome
+[0:34:46] situation where we have the outcome model correctly specified.
+[0:34:49] model correctly specified. Um, in this case, we can see that when
+[0:34:51] Um, in this case, we can see that when the sample size, uh, um, does not exceed
+[0:34:54] the sample size, uh, um, does not exceed 100, the linear regression estimator may
+[0:34:57] 100, the linear regression estimator may even be less efficient than the
+[0:34:59] even be less efficient than the unadjusted estimator, suggesting its
+[0:35:01] unadjusted estimator, suggesting its instability in small samples. When we
+[0:35:03] instability in small samples. When we have an unequal, um, allocation
+[0:35:05] have an unequal, um, allocation proportion.
+[0:35:06] proportion. Um, in this case, OW performs the best,
+[0:35:10] Um, in this case, OW performs the best, um, um, in in in in in the range of, um,
+[0:35:14] um, um, in in in in in the range of, um, sample sizes we considered. Um, on the
+[0:35:16] sample sizes we considered. Um, on the right on the right-hand side, um,
+[0:35:19] right on the right-hand side, um, it corresponds to a scenario where we
+[0:35:21] it corresponds to a scenario where we modify the data generating process by
+[0:35:23] modify the data generating process by allowing for additional interactions
+[0:35:25] allowing for additional interactions between covariates, but that
+[0:35:27] between covariates, but that interactions is ignored, um, in the, um,
+[0:35:30] interactions is ignored, um, in the, um, model fitting stage, in the outcome
+[0:35:32] model fitting stage, in the outcome regression model, as well as in the
+[0:35:34] regression model, as well as in the propensity score model. And in this
+[0:35:36] propensity score model. And in this case, again, under a misspecified
+[0:35:38] case, again, under a misspecified outcome model, we can see that there are
+[0:35:40] outcome model, we can see that there are situations where the linear regression
+[0:35:42] situations where the linear regression model performs even worse than the
+[0:35:45] model performs even worse than the unadjusted estimator. And the IPW could
+[0:35:48] unadjusted estimator. And the IPW could also possibly underperform the
+[0:35:50] also possibly underperform the unadjusted estimator in some situations.
+[0:35:53] unadjusted estimator in some situations. But the OW estimator remains the most
+[0:35:55] But the OW estimator remains the most efficient and always perform, um, better
+[0:35:58] efficient and always perform, um, better than the unadjusted estimators, showing
+[0:36:00] than the unadjusted estimators, showing that showing its promises in adjusting
+[0:36:02] that showing its promises in adjusting for covariates in randomized trials. And
+[0:36:04] for covariates in randomized trials. And also, um, indicating its ability to
+[0:36:06] also, um, indicating its ability to protect to some degree, um, model
+[0:36:09] protect to some degree, um, model misspecification,
+[0:36:11] misspecification, in in RCTs.
+[0:36:13] in in RCTs. Um, for inference, um, we found that the
+[0:36:15] Um, for inference, um, we found that the coverage of the IPW estimator and OW
+[0:36:18] coverage of the IPW estimator and OW estimator are close to nominal in in
+[0:36:20] estimator are close to nominal in in most situations with the sandwich
+[0:36:22] most situations with the sandwich variance we worked with. However, the
+[0:36:25] variance we worked with. However, the Huber-White variance for the linear
+[0:36:27] Huber-White variance for the linear regression can be unstable in small
+[0:36:29] regression can be unstable in small samples and often be severely biased
+[0:36:32] samples and often be severely biased towards zero and showing undercoverage.
+[0:36:35] towards zero and showing undercoverage. And this is most evident when we have an
+[0:36:37] And this is most evident when we have an unbalanced allocation, um when the
+[0:36:40] unbalanced allocation, um when the outcome model is misspecified, or when
+[0:36:42] outcome model is misspecified, or when we have a strong degree of heterogeneous
+[0:36:44] we have a strong degree of heterogeneous treatment effect, which is ironic
+[0:36:46] treatment effect, which is ironic because that's when the linear
+[0:36:48] because that's when the linear regression gains the most efficiency, um
+[0:36:50] regression gains the most efficiency, um but the coverage can be poor if we
+[0:36:52] but the coverage can be poor if we proceed with a Huber-White variance.
+[0:36:55] proceed with a Huber-White variance. Um in any case, the AIW the the variance
+[0:36:58] Um in any case, the AIW the the variance estimate for AI for AITW is very similar
+[0:37:02] estimate for AI for AITW is very similar to the performance of the variance of
+[0:37:03] to the performance of the variance of the of the linear regression because
+[0:37:05] the of the linear regression because again, the regression components
+[0:37:07] again, the regression components dominates the weighting component in
+[0:37:09] dominates the weighting component in this hybrid estimator.
+[0:37:12] this hybrid estimator. Um for binary outcomes, we found that
+[0:37:14] Um for binary outcomes, we found that the covariate adjustment leads to
+[0:37:16] the covariate adjustment leads to efficiency improvement likely when the
+[0:37:18] efficiency improvement likely when the sample size exceeds 100, um except under
+[0:37:22] sample size exceeds 100, um except under strong heterogeneous treatment effect.
+[0:37:25] strong heterogeneous treatment effect. And then in this particular case,
+[0:37:27] And then in this particular case, correct outcome model can be more
+[0:37:29] correct outcome model can be more efficient than weighting um in small
+[0:37:31] efficient than weighting um in small samples only for common outcomes, but if
+[0:37:34] samples only for common outcomes, but if we have a rare outcome, when the
+[0:37:36] we have a rare outcome, when the prevalence of the outcome reduces to
+[0:37:38] prevalence of the outcome reduces to 15%, we'll see that the performance of
+[0:37:41] 15%, we'll see that the performance of the regression-based approach starts to
+[0:37:43] the regression-based approach starts to deteriorate in small samples.
+[0:37:45] deteriorate in small samples. Um in any case, the OW estimator um
+[0:37:48] Um in any case, the OW estimator um always performed better than IPW in
+[0:37:50] always performed better than IPW in terms of efficiency.
+[0:37:53] terms of efficiency. And then for inference in small samples,
+[0:37:54] And then for inference in small samples, the sandwich variance for OW has the
+[0:37:57] the sandwich variance for OW has the smallest finite sample biases,
+[0:37:59] smallest finite sample biases, um but the Huber-White variance for the
+[0:38:01] um but the Huber-White variance for the logistic regression has the largest
+[0:38:03] logistic regression has the largest bias, um even when we have a sample size
+[0:38:05] bias, um even when we have a sample size over 100 in some scenarios.
+[0:38:09] over 100 in some scenarios. We then return to the application um um
+[0:38:11] We then return to the application um um of we we then return to the motivating
+[0:38:13] of we we then return to the motivating application um of this research, the
+[0:38:15] application um of this research, the Best Apnea Interventions for Research
+[0:38:18] Best Apnea Interventions for Research RCT, where we study the the of
+[0:38:21] RCT, where we study the the of continuous positive airway pressure
+[0:38:23] continuous positive airway pressure treatment on the health outcomes of
+[0:38:25] treatment on the health outcomes of patients with obstructive um sleep
+[0:38:28] patients with obstructive um sleep apnea. Um and in the trial we know that
+[0:38:30] apnea. Um and in the trial we know that we do not have a large sample size. Um
+[0:38:33] we do not have a large sample size. Um uh we have about only 83 or 86
+[0:38:36] uh we have about only 83 or 86 individuals in the two treatment and
+[0:38:38] individuals in the two treatment and control groups.
+[0:38:39] control groups. And we are interested in um two
+[0:38:41] And we are interested in um two outcomes, the systolic blood pressure
+[0:38:44] outcomes, the systolic blood pressure measured um after baseline as well as
+[0:38:47] measured um after baseline as well as the Epworth Sleepiness Scale um that
+[0:38:50] the Epworth Sleepiness Scale um that measures the daily sleepiness. And we
+[0:38:52] measures the daily sleepiness. And we have a set of covariates to be
+[0:38:54] have a set of covariates to be considered in the trial including
+[0:38:56] considered in the trial including um patient demographics as well as other
+[0:39:00] um patient demographics as well as other um health um um
+[0:39:01] um health um um um health informations from the
+[0:39:03] um health informations from the patients.
+[0:39:04] patients. And then this is the usual table one we
+[0:39:07] And then this is the usual table one we see in a standard clinical paper. Um as
+[0:39:10] see in a standard clinical paper. Um as we um explained earlier, um
+[0:39:12] we um explained earlier, um randomization balances um almost um most
+[0:39:15] randomization balances um almost um most of the covariates but not all of them.
+[0:39:18] of the covariates but not all of them. And in specifically, if we calculate the
+[0:39:20] And in specifically, if we calculate the um
+[0:39:21] um absolute standardized differences um
+[0:39:24] absolute standardized differences um without any adjustment, we can see that
+[0:39:27] without any adjustment, we can see that um the baseline systolic blood pressure
+[0:39:29] um the baseline systolic blood pressure and the baseline apnea hypopnea index,
+[0:39:32] and the baseline apnea hypopnea index, the baseline AHI, um signals large um
+[0:39:35] the baseline AHI, um signals large um imbalance, large chance imbalance. And
+[0:39:37] imbalance, large chance imbalance. And and this chance imbalance also carries
+[0:39:39] and this chance imbalance also carries to the BMI as well.
+[0:39:42] to the BMI as well. If we use IPW, we can see that um the
+[0:39:45] If we use IPW, we can see that um the resulting absolute standardized
+[0:39:47] resulting absolute standardized differences can be um reduced to some
+[0:39:50] differences can be um reduced to some degree so that we have approximate
+[0:39:52] degree so that we have approximate balance between two groups, but once we
+[0:39:54] balance between two groups, but once we use overlap weights, that um imbalance
+[0:39:58] use overlap weights, that um imbalance vanishes to zero, which exemplifies the
+[0:40:00] vanishes to zero, which exemplifies the removal of the chance imbalance in the
+[0:40:02] removal of the chance imbalance in the design stage before analyzing any
+[0:40:04] design stage before analyzing any outcomes.
+[0:40:07] outcomes. Um we then apply um all of the previous
+[0:40:09] Um we then apply um all of the previous um uh investigated estimators to
+[0:40:12] um uh investigated estimators to analyzing the best air RCT.
+[0:40:15] analyzing the best air RCT. And in this case, um the most the the
+[0:40:18] And in this case, um the most the the the the largest difference actually
+[0:40:20] the the largest difference actually concerns, um, the application of the
+[0:40:23] concerns, um, the application of the unadjusted estimator versus the adjusted
+[0:40:26] unadjusted estimator versus the adjusted estimators, um, because the covariate
+[0:40:28] estimators, um, because the covariate adjustment, um, more or less returns
+[0:40:31] adjustment, um, more or less returns very similar results in the single
+[0:40:32] very similar results in the single analysis.
+[0:40:34] analysis. Um, in particular, for this systolic
+[0:40:37] Um, in particular, for this systolic blood pressure outcome, um, if we
+[0:40:39] blood pressure outcome, um, if we proceed with the unadjusted estimator,
+[0:40:42] proceed with the unadjusted estimator, we'll find a a falsely, um, significant
+[0:40:45] we'll find a a falsely, um, significant results if we use the 0.5 0.05 as our
+[0:40:48] results if we use the 0.5 0.05 as our traditional cutoff. We'll see that, um,
+[0:40:51] traditional cutoff. We'll see that, um, you know, chance imbalance in the
+[0:40:53] you know, chance imbalance in the baseline covariates may lead to, um,
+[0:40:56] baseline covariates may lead to, um, incorrect or doubtful, um, um,
+[0:40:59] incorrect or doubtful, um, um, conclusions with the unadjusted
+[0:41:00] conclusions with the unadjusted estimator in this single analysis, but
+[0:41:03] estimator in this single analysis, but after we adjust for covariates using any
+[0:41:05] after we adjust for covariates using any of the IPW, OW, or linear regression
+[0:41:08] of the IPW, OW, or linear regression approaches, we would not see that effect
+[0:41:11] approaches, we would not see that effect if we use the traditional 0.05 as a
+[0:41:13] if we use the traditional 0.05 as a cutoff. And that signals some
+[0:41:15] cutoff. And that signals some differences, um, in in in adjustment for
+[0:41:17] differences, um, in in in adjustment for covariates, and, um, can
+[0:41:20] covariates, and, um, can um, be an illustration of the
+[0:41:21] um, be an illustration of the consequences of ignoring the baseline
+[0:41:24] consequences of ignoring the baseline imbalance, um, in a single RCT.
+[0:41:28] imbalance, um, in a single RCT. And so, um, in in this presentation, we
+[0:41:31] And so, um, in in this presentation, we we demonstrate, um, the balancing
+[0:41:33] we demonstrate, um, the balancing weights, um, as a family of the
+[0:41:35] weights, um, as a family of the weighting procedure can serve as an
+[0:41:37] weighting procedure can serve as an alternative way to adjust for covariates
+[0:41:40] alternative way to adjust for covariates and improve and and and improve
+[0:41:41] and improve and and and improve precision in analyzing RCTs.
+[0:41:44] precision in analyzing RCTs. We show that, um, the weighting
+[0:41:46] We show that, um, the weighting procedure, um, in in some conditions can
+[0:41:48] procedure, um, in in some conditions can be asymptotically equivalent to the
+[0:41:50] be asymptotically equivalent to the efficient ANCOVA procedures, and then
+[0:41:52] efficient ANCOVA procedures, and then justifies its application
+[0:41:54] justifies its application asymptotically. Um, but also, we can
+[0:41:57] asymptotically. Um, but also, we can also show we we we've also shown that
+[0:41:59] also show we we we've also shown that that we can always do better in
+[0:42:00] that we can always do better in weighting than IPW by applying or
+[0:42:03] weighting than IPW by applying or switching to the OW procedure.
+[0:42:06] switching to the OW procedure. On the other hand, though commonly used
+[0:42:09] On the other hand, though commonly used regression may invite a fishing
+[0:42:10] regression may invite a fishing expedition and come with additional
+[0:42:12] expedition and come with additional caveats and specifically the regression
+[0:42:15] caveats and specifically the regression procedure can be unstable in small
+[0:42:17] procedure can be unstable in small samples if we have a rare outcome or an
+[0:42:20] samples if we have a rare outcome or an unbalanced randomization. And model
+[0:42:23] unbalanced randomization. And model misspecification can also decrease the
+[0:42:26] misspecification can also decrease the efficiency of regression in a sense that
+[0:42:28] efficiency of regression in a sense that we may have an estimator that is
+[0:42:31] we may have an estimator that is you know, even even even more
+[0:42:33] you know, even even even more inefficient than the unadjusted
+[0:42:35] inefficient than the unadjusted estimator.
+[0:42:36] estimator. And then there are some caveats also
+[0:42:38] And then there are some caveats also coming with the inference
+[0:42:41] coming with the inference with with the application of the
+[0:42:43] with with the application of the Huber-White sandwich variance which can
+[0:42:45] Huber-White sandwich variance which can be unstable in finite samples.
+[0:42:48] be unstable in finite samples. So there is an increasing body of
+[0:42:50] So there is an increasing body of literature that studies overlap weights
+[0:42:53] literature that studies overlap weights not only in observational studies but
+[0:42:56] not only in observational studies but also in randomized trials as exemplified
+[0:42:58] also in randomized trials as exemplified by our study. And so our reflection on
+[0:43:01] by our study. And so our reflection on overlap weights suggest that we can
+[0:43:03] overlap weights suggest that we can conceptualize a continuum of study
+[0:43:06] conceptualize a continuum of study designs for comparative effectiveness
+[0:43:08] designs for comparative effectiveness characterized by different degrees of
+[0:43:11] characterized by different degrees of overlap. For example, in observational
+[0:43:14] overlap. For example, in observational studies with weak overlap in this first
+[0:43:17] studies with weak overlap in this first figure we can see that the densities of
+[0:43:20] figure we can see that the densities of the two groups the red curve as well as
+[0:43:23] the two groups the red curve as well as the green curve are very different and
+[0:43:26] the green curve are very different and then OW will move the goal post to gain
+[0:43:29] then OW will move the goal post to gain efficiency over IPW for causal contrast
+[0:43:32] efficiency over IPW for causal contrast by focusing on the population with the
+[0:43:35] by focusing on the population with the best equity weights which is defined by
+[0:43:38] best equity weights which is defined by this blue density over here in this
+[0:43:40] this blue density over here in this first figure.
+[0:43:41] first figure. But once we move to situations with
+[0:43:44] But once we move to situations with better overlap even by the second
+[0:43:46] better overlap even by the second situation we'll see that the densities
+[0:43:49] situation we'll see that the densities of the two treatment and control groups
+[0:43:52] of the two treatment and control groups will become more similar and in this
+[0:43:54] will become more similar and in this case we can actually show that the
+[0:43:56] case we can actually show that the average treatment effect among the
+[0:43:59] average treatment effect among the overlap population will approximate ATE
+[0:44:02] overlap population will approximate ATE but OW will be more efficient than IPW
+[0:44:05] but OW will be more efficient than IPW as well. In the limit which we have
+[0:44:08] as well. In the limit which we have perfect overlap and the two groups are
+[0:44:11] perfect overlap and the two groups are comparable in expectation guaranteed by
+[0:44:14] comparable in expectation guaranteed by randomization, which is the case in our
+[0:44:16] randomization, which is the case in our study,
+[0:44:17] study, OW and I and and IPW both estimate the
+[0:44:21] OW and I and and IPW both estimate the target estimate ATE, but we still
+[0:44:23] target estimate ATE, but we still demonstrate that OW is more efficient
+[0:44:26] demonstrate that OW is more efficient than IPW um in in all of the cases we
+[0:44:29] than IPW um in in all of the cases we investigated.
+[0:44:31] investigated. And there are some potential
+[0:44:33] And there are some potential misconception um on waiting um on
+[0:44:35] misconception um on waiting um on applying waiting procedures to
+[0:44:37] applying waiting procedures to randomized control trials. For for
+[0:44:38] randomized control trials. For for example, there is a recent simulation
+[0:44:40] example, there is a recent simulation study suggesting that there is a
+[0:44:42] study suggesting that there is a superior coverage um and efficiency
+[0:44:45] superior coverage um and efficiency property um you know, by using linear
+[0:44:47] property um you know, by using linear regression versus IPW in in small
+[0:44:49] regression versus IPW in in small samples, but um those simulation studies
+[0:44:52] samples, but um those simulation studies only considered the model-based variance
+[0:44:54] only considered the model-based variance um when the outcome regression model is
+[0:44:56] um when the outcome regression model is correctly specified. And it further
+[0:44:58] correctly specified. And it further assumes equal allocation under which
+[0:45:01] assumes equal allocation under which case under which case we would expect
+[0:45:03] case under which case we would expect that the model-based variance is valid
+[0:45:06] that the model-based variance is valid and is more stable than the Huber-White
+[0:45:08] and is more stable than the Huber-White sandwich variance.
+[0:45:10] sandwich variance. Um however, the limitation that they
+[0:45:12] Um however, the limitation that they found for IPW may be inherent to IPW but
+[0:45:15] found for IPW may be inherent to IPW but not on but not for waiting in general
+[0:45:17] not on but not for waiting in general because we can make improvements
+[0:45:19] because we can make improvements possibly by using OW in in randomized
+[0:45:22] possibly by using OW in in randomized control trials. And then OW only
+[0:45:25] control trials. And then OW only requires a one-line of change in the
+[0:45:27] requires a one-line of change in the code compared to IPW um and then it's
+[0:45:30] code compared to IPW um and then it's pretty easy to carry out. In addition,
+[0:45:33] pretty easy to carry out. In addition, um even if the variance calculation is
+[0:45:35] um even if the variance calculation is more involved, we have recently prepared
+[0:45:38] more involved, we have recently prepared an R package called PSW to
+[0:45:40] an R package called PSW to operationalize um the variance
+[0:45:41] operationalize um the variance calculation as well. And this new
+[0:45:43] calculation as well. And this new package not only can provide a pipeline
+[0:45:46] package not only can provide a pipeline for analyzing observational studies,
+[0:45:48] for analyzing observational studies, it can also provide a tool for analyzing
+[0:45:51] it can also provide a tool for analyzing randomized control trials as we have um
+[0:45:54] randomized control trials as we have um um shown in this presentation.
+[0:45:56] um shown in this presentation. Um we also currently thinking about
+[0:45:59] Um we also currently thinking about applying this procedure to other um
+[0:46:02] applying this procedure to other um study designs and other problems which
+[0:46:04] study designs and other problems which may be prone to chance imbalance. For
+[0:46:06] may be prone to chance imbalance. For example, subgroup analysis in randomized
+[0:46:09] example, subgroup analysis in randomized control trials often suffer from limited
+[0:46:11] control trials often suffer from limited sample size and lower power. And so
+[0:46:13] sample size and lower power. And so there is a chance for applying these new
+[0:46:16] there is a chance for applying these new waiting procedures to gain efficiency in
+[0:46:18] waiting procedures to gain efficiency in those limited sample sizes. Um this
+[0:46:22] those limited sample sizes. Um this waiting procedure, the OW, can also be
+[0:46:24] waiting procedure, the OW, can also be applied to analyzing multi-arm
+[0:46:26] applied to analyzing multi-arm randomized control trials for pairwise
+[0:46:28] randomized control trials for pairwise comparisons adjusting for covariates as
+[0:46:30] comparisons adjusting for covariates as well as cluster or group randomized
+[0:46:33] well as cluster or group randomized trials which often come with a limited
+[0:46:35] trials which often come with a limited number of clusters due to difficulties
+[0:46:38] number of clusters due to difficulties in engaging stakeholders from health
+[0:46:40] in engaging stakeholders from health care systems. And so these areas
+[0:46:43] care systems. And so these areas represent additional opportunities of
+[0:46:45] represent additional opportunities of applying these new waiting procedures
+[0:46:48] applying these new waiting procedures for adjustment for covariates to improve
+[0:46:50] for adjustment for covariates to improve efficiency.
+[0:46:52] efficiency. And so I'll stop here in case we have
+[0:46:54] And so I'll stop here in case we have any
+[0:46:55] any questions. And I hope I'm still doing
+[0:46:57] questions. And I hope I'm still doing well in terms of time.
+[0:46:59] well in terms of time. And um
+[0:47:00] And um um any any questions and comments are
+[0:47:03] um any any questions and comments are very welcome.
+[0:47:05] very welcome. Um thank you Phan for the fantastic
+[0:47:08] Um thank you Phan for the fantastic presentation. I think probably in the
+[0:47:10] presentation. I think probably in the interest of time we should first
+[0:47:12] interest of time we should first do go to the discussion. So um
+[0:47:15] do go to the discussion. So um Sounds good. I'll stop sharing.
+[0:47:17] Sounds good. I'll stop sharing. So Kerry, you have maybe you can share
+[0:47:19] So Kerry, you have maybe you can share your screen and start when you're ready.
+[0:47:29] Can you see my screen okay? You good? Yes.
+[0:47:30] Yes. Okay, great. Um well, hi everyone. I am
+[0:47:33] Okay, great. Um well, hi everyone. I am Kerry Loch Morgan from Penn State
+[0:47:34] Kerry Loch Morgan from Penn State University and I am very happy to have
+[0:47:37] University and I am very happy to have the opportunity to discuss what I think
+[0:47:39] the opportunity to discuss what I think was just a really fantastic talk by Phan
+[0:47:40] was just a really fantastic talk by Phan that we all just heard. Um so I wanted
+[0:47:43] that we all just heard. Um so I wanted to start by thanking Phan for a very
+[0:47:45] to start by thanking Phan for a very wonderful talk and also for thanking all
+[0:47:47] wonderful talk and also for thanking all of the authors which I think is kind of
+[0:47:49] of the authors which I think is kind of funny includes the other Phan Lee too.
+[0:47:50] funny includes the other Phan Lee too. So I get a chuckle out of that. Um but I
+[0:47:53] So I get a chuckle out of that. Um but I think this was a really important piece
+[0:47:55] think this was a really important piece of work that that has a valuable place
+[0:47:57] of work that that has a valuable place in the causal inference literature. So,
+[0:47:58] in the causal inference literature. So, thank you to everyone involved.
+[0:48:01] thank you to everyone involved. All right. So, I am going to start by
+[0:48:03] All right. So, I am going to start by summarizing what I see as some of the
+[0:48:05] summarizing what I see as some of the key takeaways here, and then giving some
+[0:48:08] key takeaways here, and then giving some of my thoughts and perspectives on the
+[0:48:09] of my thoughts and perspectives on the topic.
+[0:48:11] topic. Um so, the first really important point
+[0:48:13] Um so, the first really important point kind of um preceding all of this is the
+[0:48:14] kind of um preceding all of this is the idea that covariates can be imbalanced
+[0:48:16] idea that covariates can be imbalanced even in experiments just by chance, and
+[0:48:19] even in experiments just by chance, and that's the motivation for all of this
+[0:48:20] that's the motivation for all of this work.
+[0:48:22] work. Regression or otherwise known as ANCOVA
+[0:48:24] Regression or otherwise known as ANCOVA is a really popular way to adjust for
+[0:48:25] is a really popular way to adjust for this, but as Fon has just
+[0:48:28] this, but as Fon has just um illuminated, there are cons involved
+[0:48:30] um illuminated, there are cons involved with regression.
+[0:48:31] with regression. Propensity score weighting is a nice
+[0:48:33] Propensity score weighting is a nice alternative that I think avoids a lot of
+[0:48:35] alternative that I think avoids a lot of the problems typically associated with
+[0:48:37] the problems typically associated with ANCOVA. And I think once we're ready to
+[0:48:40] ANCOVA. And I think once we're ready to go down the road of propensity score
+[0:48:41] go down the road of propensity score weighting for covariate adjustment, I
+[0:48:43] weighting for covariate adjustment, I think we've seen a lot of compelling
+[0:48:44] think we've seen a lot of compelling reasons for why the overlap weights um
+[0:48:47] reasons for why the overlap weights um really are superior in a lot of ways to
+[0:48:48] really are superior in a lot of ways to the inverse probability weights that are
+[0:48:50] the inverse probability weights that are more traditionally used.
+[0:48:52] more traditionally used. And this comes in part because of the
+[0:48:54] And this comes in part because of the the better balance I think the exact
+[0:48:55] the better balance I think the exact mean balance property is really so
+[0:48:57] mean balance property is really so appealing, um but also because that
+[0:48:59] appealing, um but also because that better balance does lead as well to
+[0:49:00] better balance does lead as well to greater precision.
+[0:49:02] greater precision. So, those are kind of my high-level
+[0:49:04] So, those are kind of my high-level takeaways. Um let me dive into some of
+[0:49:06] takeaways. Um let me dive into some of the more more details and perspectives
+[0:49:08] the more more details and perspectives and thoughts here.
+[0:49:10] and thoughts here. All right. So, let's um situate this in
+[0:49:12] All right. So, let's um situate this in the RCT that we're talking about. So,
+[0:49:14] the RCT that we're talking about. So, we're talking about randomizing units to
+[0:49:16] we're talking about randomizing units to treatment groups, conducting the
+[0:49:18] treatment groups, conducting the experiment,
+[0:49:20] experiment, and analyzing the outcomes, and if
+[0:49:22] and analyzing the outcomes, and if needed, adjusting for imbalance. And
+[0:49:24] needed, adjusting for imbalance. And this is kind of the flow that that is
+[0:49:26] this is kind of the flow that that is very typical, probably the most common
+[0:49:28] very typical, probably the most common flow that researchers take when um
+[0:49:30] flow that researchers take when um analyzing experiments or
+[0:49:32] analyzing experiments or clinical trials.
+[0:49:34] clinical trials. So, I want to first of all commend this
+[0:49:35] So, I want to first of all commend this idea that we're talking about um that
+[0:49:38] idea that we're talking about um that it's a really great first step to
+[0:49:40] it's a really great first step to separate the imbalance adjustment from
+[0:49:42] separate the imbalance adjustment from the outcome model. Fon talked about
+[0:49:44] the outcome model. Fon talked about this, and I will as well, but I think um
+[0:49:46] this, and I will as well, but I think um separating as much as we can away from
+[0:49:48] separating as much as we can away from the analysis of the outcomes um really
+[0:49:51] the analysis of the outcomes um really goes a long way to improving objectivity
+[0:49:53] goes a long way to improving objectivity of our causal estimates or causal
+[0:49:54] of our causal estimates or causal estimates, I should say.
+[0:49:56] estimates, I should say. Um, so I think it's a great a great step
+[0:49:59] Um, so I think it's a great a great step to separate the propensity score model
+[0:50:01] to separate the propensity score model from the outcome model.
+[0:50:03] from the outcome model. However, since we are in experimental
+[0:50:05] However, since we are in experimental setting, I do I feel remiss not to at
+[0:50:07] setting, I do I feel remiss not to at least acknowledge that I don't think
+[0:50:09] least acknowledge that I don't think this is necessarily the best approach
+[0:50:11] this is necessarily the best approach and I don't fault the authors at all cuz
+[0:50:12] and I don't fault the authors at all cuz this is a little bit outside the scope
+[0:50:14] this is a little bit outside the scope of what they were talking about. Um, but
+[0:50:16] of what they were talking about. Um, but I did want to at least mention the idea
+[0:50:18] I did want to at least mention the idea that an even better approach would be to
+[0:50:20] that an even better approach would be to prevent this imbalance by design. So,
+[0:50:22] prevent this imbalance by design. So, take the imbalance, um, into the
+[0:50:24] take the imbalance, um, into the randomization phase or into the design
+[0:50:26] randomization phase or into the design phase, prevent imbalance from the
+[0:50:28] phase, prevent imbalance from the get-go,
+[0:50:29] get-go, and then have a straightforward analysis
+[0:50:30] and then have a straightforward analysis of the outcomes from your experiment.
+[0:50:33] of the outcomes from your experiment. Um, there are many ways to do this.
+[0:50:34] Um, there are many ways to do this. That's not really the point here. You
+[0:50:36] That's not really the point here. You could use traditional blocking. I'll put
+[0:50:38] could use traditional blocking. I'll put in a shameless plug for my
+[0:50:39] in a shameless plug for my re-randomization method where you can
+[0:50:41] re-randomization method where you can re-randomize if you don't have
+[0:50:42] re-randomize if you don't have acceptable balance. Um, but whatever
+[0:50:44] acceptable balance. Um, but whatever method you choose, I think we should be
+[0:50:45] method you choose, I think we should be thinking more about preventing imbalance
+[0:50:48] thinking more about preventing imbalance as opposed to adjusting for it.
+[0:50:50] as opposed to adjusting for it. That being said, no matter what we do
+[0:50:52] That being said, no matter what we do here, there will be experiments that
+[0:50:54] here, there will be experiments that require adjustments. So, that being
+[0:50:57] require adjustments. So, that being said, um, let me move on now assuming
+[0:50:59] said, um, let me move on now assuming that we have an experiment with observed
+[0:51:01] that we have an experiment with observed covariate imbalance, which is where I
+[0:51:02] covariate imbalance, which is where I think, um, Fan and co-authors were used
+[0:51:05] think, um, Fan and co-authors were used as the starting point for for all of
+[0:51:06] as the starting point for for all of their work.
+[0:51:08] their work. All right. So, what do I see as
+[0:51:10] All right. So, what do I see as advantage number one? First and foremost
+[0:51:13] advantage number one? First and foremost of the method that they've proposed. Um,
+[0:51:16] of the method that they've proposed. Um, I see this as it's not specific to
+[0:51:17] I see this as it's not specific to overlap weights yet, but really, um, an
+[0:51:19] overlap weights yet, but really, um, an advantage of propensity score weighting
+[0:51:21] advantage of propensity score weighting over ANCOVA.
+[0:51:23] over ANCOVA. And that's this idea that you can you
+[0:51:24] And that's this idea that you can you can fit the propensity score model
+[0:51:27] can fit the propensity score model without any access to the outcomes.
+[0:51:29] without any access to the outcomes. And Fan mentioned this is a way to, um,
+[0:51:33] And Fan mentioned this is a way to, um, to stop the fishing expeditions, but I
+[0:51:35] to stop the fishing expeditions, but I think even for really well-intentioned,
+[0:51:37] think even for really well-intentioned, ethical, honest researchers, we all have
+[0:51:40] ethical, honest researchers, we all have a an inherent interest in the results if
+[0:51:43] a an inherent interest in the results if we're really invested in the study at
+[0:51:44] we're really invested in the study at hand, and it's really hard to make all
+[0:51:47] hand, and it's really hard to make all the model decisions, all all the
+[0:51:48] the model decisions, all all the necessary decisions that come with
+[0:51:50] necessary decisions that come with modeling if at every step of the way
+[0:51:52] modeling if at every step of the way we're also seeing the estimated
+[0:51:54] we're also seeing the estimated treatment effect. Um and I know there
+[0:51:56] treatment effect. Um and I know there are alternatives, you can blind the the
+[0:51:58] are alternatives, you can blind the the treatment labels, which we can do be be
+[0:51:59] treatment labels, which we can do be be doing more of, but I think separating
+[0:52:02] doing more of, but I think separating the all the modeling decisions or all
+[0:52:03] the all the modeling decisions or all the analytic decisions from the outcomes
+[0:52:06] the analytic decisions from the outcomes is is a really great way to be going in
+[0:52:08] is is a really great way to be going in terms of objectivity.
+[0:52:10] terms of objectivity. Um so I think just based on this alone,
+[0:52:12] Um so I think just based on this alone, propensity score weighting is really
+[0:52:14] propensity score weighting is really superior to ANCOVA, um just based on
+[0:52:16] superior to ANCOVA, um just based on this point alone, but of course that's
+[0:52:18] this point alone, but of course that's not the only advantage.
+[0:52:21] not the only advantage. All right, so advantage number two I
+[0:52:22] All right, so advantage number two I think has to do with modeling
+[0:52:24] think has to do with modeling assumptions.
+[0:52:25] assumptions. So ANCOVA, um like it or not, does come
+[0:52:28] So ANCOVA, um like it or not, does come with associated modeling assumptions,
+[0:52:30] with associated modeling assumptions, and the authors pointed out and and I
+[0:52:32] and the authors pointed out and and I agree that the ANCOVA estimate is
+[0:52:34] agree that the ANCOVA estimate is consistent if you're in the
+[0:52:36] consistent if you're in the superpopulation pre-randomization
+[0:52:38] superpopulation pre-randomization framework, and I think it's actually
+[0:52:40] framework, and I think it's actually really quite impressive that it's
+[0:52:41] really quite impressive that it's consistent even under model
+[0:52:43] consistent even under model misspecification. And this is a really a
+[0:52:45] misspecification. And this is a really a really important point and it and it was
+[0:52:47] really important point and it and it was touted a lot here, um but I do want to
+[0:52:49] touted a lot here, um but I do want to be very um clear I guess is a way of
+[0:52:52] be very um clear I guess is a way of saying this, is that it's consistent
+[0:52:55] saying this, is that it's consistent pre-randomization. So if you can assume
+[0:52:57] pre-randomization. So if you can assume that there's no relationship or that the
+[0:52:59] that there's no relationship or that the treatment and the covariates are
+[0:53:01] treatment and the covariates are independent, which is true under
+[0:53:03] independent, which is true under randomization, but not true once you've
+[0:53:05] randomization, but not true once you've observed a randomization and see that
+[0:53:08] observed a randomization and see that the covariates are in fact in balance.
+[0:53:10] the covariates are in fact in balance. If the covariates are associated with
+[0:53:12] If the covariates are associated with the treatment, which they are if they're
+[0:53:14] the treatment, which they are if they're there's imbalance there, um
+[0:53:16] there's imbalance there, um then if the model is misspecified, you
+[0:53:18] then if the model is misspecified, you do have conditional bias, and I think
+[0:53:20] do have conditional bias, and I think that's an important point. We can't just
+[0:53:22] that's an important point. We can't just see the model misspecification get just
+[0:53:24] see the model misspecification get just get swept under the rug with randomized
+[0:53:25] get swept under the rug with randomized experiments, um but it's really
+[0:53:27] experiments, um but it's really important to consider
+[0:53:29] important to consider if the covariates are actually
+[0:53:30] if the covariates are actually imbalanced. And this is especially
+[0:53:32] imbalanced. And this is especially important because we all know this
+[0:53:33] important because we all know this famous quote, but all models are wrong
+[0:53:36] famous quote, but all models are wrong and some are useful.
+[0:53:37] and some are useful. We really we know that our um model is
+[0:53:39] We really we know that our um model is going to be misspecified to some extent,
+[0:53:42] going to be misspecified to some extent, and maybe in a perfect simulation study,
+[0:53:44] and maybe in a perfect simulation study, we can assume the correct outcome model,
+[0:53:46] we can assume the correct outcome model, but in any real application, um there is
+[0:53:48] but in any real application, um there is going to be some degree of model
+[0:53:49] going to be some degree of model misspecification. And I think having to
+[0:53:51] misspecification. And I think having to caveat your causal estimate estimates
+[0:53:54] caveat your causal estimate estimates with this notion that assuming the
+[0:53:56] with this notion that assuming the outcome the relationship between the
+[0:53:58] outcome the relationship between the outcome and the covariates is correctly
+[0:53:59] outcome and the covariates is correctly modeled
+[0:54:01] modeled is a really strong caveat that that we'd
+[0:54:03] is a really strong caveat that that we'd rather not make given the choice.
+[0:54:05] rather not make given the choice. So that brings me to the propensity
+[0:54:07] So that brings me to the propensity score model, which avoids the need to
+[0:54:09] score model, which avoids the need to correctly model on the this unknown
+[0:54:11] correctly model on the this unknown relationship between the outcome and the
+[0:54:13] relationship between the outcome and the covariates. But this is where I wanted
+[0:54:15] covariates. But this is where I wanted to bring up a little request for a
+[0:54:17] to bring up a little request for a clarification maybe um or or help in my
+[0:54:20] clarification maybe um or or help in my own understanding here maybe
+[0:54:21] own understanding here maybe misunderstanding.
+[0:54:24] misunderstanding. Um so the so this is different than the
+[0:54:26] Um so the so this is different than the observational study setting in that the
+[0:54:28] observational study setting in that the true propensity score model here is
+[0:54:30] true propensity score model here is known. It's a randomized experiment.
+[0:54:32] known. It's a randomized experiment. It's not only known, but it's a constant
+[0:54:35] It's not only known, but it's a constant and it's not dependent on the
+[0:54:36] and it's not dependent on the covariates.
+[0:54:37] covariates. So so so Fan mentioned and this was in
+[0:54:39] So so so Fan mentioned and this was in the paper as well that um we know the
+[0:54:41] the paper as well that um we know the propensity score model, so it's always
+[0:54:43] propensity score model, so it's always correctly specified. But I wanted to
+[0:54:45] correctly specified. But I wanted to push back just a little there. So sorry
+[0:54:47] push back just a little there. So sorry Fan, but it seems to me that maybe it's
+[0:54:49] Fan, but it seems to me that maybe it's always correctly misspecified because
+[0:54:51] always correctly misspecified because you're you're specifying it as a
+[0:54:53] you're you're specifying it as a function of the covariates that you know
+[0:54:54] function of the covariates that you know really aren't a part of the true model.
+[0:54:57] really aren't a part of the true model. Um
+[0:54:58] Um so I know that I know that they're doing
+[0:54:59] so I know that I know that they're doing the right thing and I know we care about
+[0:55:01] the right thing and I know we care about the correct observed. We know about
+[0:55:03] the correct observed. We know about Sorry, we care about correcting observed
+[0:55:06] Sorry, we care about correcting observed imbalance, which the estimated
+[0:55:07] imbalance, which the estimated propensity score captures, not the true
+[0:55:09] propensity score captures, not the true propensity score. So we care about those
+[0:55:11] propensity score. So we care about those estimated propensity scores, but I'm
+[0:55:13] estimated propensity scores, but I'm really kind of struggling with how how
+[0:55:15] really kind of struggling with how how to grapple with this this idea that
+[0:55:17] to grapple with this this idea that we're modeling
+[0:55:18] we're modeling something, but not really trying to
+[0:55:20] something, but not really trying to model an underlying truth.
+[0:55:22] model an underlying truth. Um and what does that imply about the
+[0:55:24] Um and what does that imply about the the underpinning assumptions? The
+[0:55:25] the underpinning assumptions? The results are likely still in in some
+[0:55:28] results are likely still in in some sense model dependent, but it's not as
+[0:55:30] sense model dependent, but it's not as clear as the ANCOVA setting um what
+[0:55:32] clear as the ANCOVA setting um what those modeling assumptions are, what it
+[0:55:33] those modeling assumptions are, what it even means to have a have a correct
+[0:55:35] even means to have a have a correct model versus an incorrect model.
+[0:55:38] model versus an incorrect model. Um, maybe there aren't any assumptions
+[0:55:40] Um, maybe there aren't any assumptions here, but that might be too good to be
+[0:55:41] here, but that might be too good to be true. Um, if there are really no
+[0:55:44] true. Um, if there are really no modeling assumptions, there's a that's a
+[0:55:45] modeling assumptions, there's a that's a clear advantage. Um, but but it seems
+[0:55:48] clear advantage. Um, but but it seems like we can't take a bunch of
+[0:55:49] like we can't take a bunch of assumptions and replace them with
+[0:55:50] assumptions and replace them with nothing. So, I just
+[0:55:52] nothing. So, I just wanted a little clarification there.
+[0:55:55] wanted a little clarification there. And that brings us then to the overlap
+[0:55:57] And that brings us then to the overlap weights kind of as a separate point.
+[0:55:59] weights kind of as a separate point. So, so I think the overlap weights as
+[0:56:02] So, so I think the overlap weights as opposed to inverse probability weights,
+[0:56:03] opposed to inverse probability weights, I should say first and foremost with a a
+[0:56:05] I should say first and foremost with a a big disclaimer. So, I was one of the
+[0:56:07] big disclaimer. So, I was one of the authors on the original overlap weight
+[0:56:09] authors on the original overlap weight paper. So, I'm a little bit biased here.
+[0:56:11] paper. So, I'm a little bit biased here. Um, but I think that there's so many
+[0:56:13] Um, but I think that there's so many reasons why they're they're they really
+[0:56:14] reasons why they're they're they really are superior to the inverse probability
+[0:56:16] are superior to the inverse probability weights.
+[0:56:18] weights. Um, they give better, and by better I
+[0:56:20] Um, they give better, and by better I mean exact mean balance, which I still
+[0:56:22] mean exact mean balance, which I still find incredible to this day every time I
+[0:56:24] find incredible to this day every time I see that.
+[0:56:25] see that. Um, and also better precision. So, it's
+[0:56:27] Um, and also better precision. So, it's kind of the best of all worlds.
+[0:56:29] kind of the best of all worlds. This is maybe more relevant in
+[0:56:30] This is maybe more relevant in observational studies, but if there is
+[0:56:33] observational studies, but if there is really severe imbalance, um, they also
+[0:56:34] really severe imbalance, um, they also avoid those explosive weights you can
+[0:56:36] avoid those explosive weights you can see with the IPW weights.
+[0:56:39] see with the IPW weights. Um, so I should back up and say in
+[0:56:41] Um, so I should back up and say in observational studies, really the only
+[0:56:44] observational studies, really the only thing I think stopping from everyone
+[0:56:46] thing I think stopping from everyone just immediately jumping on the overlay
+[0:56:47] just immediately jumping on the overlay overlap weight bandwagon is this idea
+[0:56:50] overlap weight bandwagon is this idea that it does change the target
+[0:56:51] that it does change the target population. And I think in most settings
+[0:56:52] population. And I think in most settings that's worth it, um, but it is a
+[0:56:54] that's worth it, um, but it is a conscious decision you have to make.
+[0:56:56] conscious decision you have to make. And I think it's really fascinating here
+[0:56:58] And I think it's really fascinating here that in in experiments, you're not
+[0:57:00] that in in experiments, you're not actually changing the target population.
+[0:57:02] actually changing the target population. The propensity score is a constant. So,
+[0:57:05] The propensity score is a constant. So, waiting by any function of the score is
+[0:57:07] waiting by any function of the score is exactly equivalent. So, whether you want
+[0:57:09] exactly equivalent. So, whether you want to use overlap weights or inverse
+[0:57:11] to use overlap weights or inverse probability weights, you're working with
+[0:57:12] probability weights, you're working with the same target population, which to me
+[0:57:14] the same target population, which to me seems like a no-brainer that that we
+[0:57:16] seems like a no-brainer that that we should all be moving in the direction of
+[0:57:17] should all be moving in the direction of of overlap weights.
+[0:57:19] of overlap weights. I'm still a little fuzzy here on this
+[0:57:21] I'm still a little fuzzy here on this idea that the true propensity scores are
+[0:57:23] idea that the true propensity scores are a constant. The estimated ones do depend
+[0:57:25] a constant. The estimated ones do depend on the covariates, but I think that's
+[0:57:26] on the covariates, but I think that's just me needing to digest that a little
+[0:57:28] just me needing to digest that a little more.
+[0:57:30] more. Um, regardless, I think these the
+[0:57:31] Um, regardless, I think these the overlap weights really have a clear
+[0:57:33] overlap weights really have a clear advantage over the inverse probability
+[0:57:34] advantage over the inverse probability weights.
+[0:57:37] weights. So, to summarize, I think in my mind
+[0:57:39] So, to summarize, I think in my mind from what I've seen, um the overlap
+[0:57:42] from what I've seen, um the overlap weights, I think are superior to the
+[0:57:44] weights, I think are superior to the inverse probability weights, and I think
+[0:57:45] inverse probability weights, and I think propensity score weighting in general is
+[0:57:47] propensity score weighting in general is superior to ANCOVA for covariate
+[0:57:49] superior to ANCOVA for covariate adjustment.
+[0:57:51] adjustment. Um propensity score weighting over
+[0:57:53] Um propensity score weighting over ANCOVA has the clear benefit of
+[0:57:54] ANCOVA has the clear benefit of improving objectivity, while also
+[0:57:56] improving objectivity, while also reducing the reliance on model
+[0:57:58] reducing the reliance on model assumptions.
+[0:57:59] assumptions. Whereas the overlap weights over the
+[0:58:01] Whereas the overlap weights over the inverse probability weights have that
+[0:58:03] inverse probability weights have that exact mean balance property, and also
+[0:58:05] exact mean balance property, and also the better precision property.
+[0:58:08] the better precision property. I do want to point out that I think all
+[0:58:09] I do want to point out that I think all of these advantages become much more
+[0:58:11] of these advantages become much more pronounced with worse balance. So, in
+[0:58:14] pronounced with worse balance. So, in the perfect balance situation, they're
+[0:58:16] the perfect balance situation, they're all basically equivalent, at least in
+[0:58:18] all basically equivalent, at least in terms of point estimates. Um whereas in
+[0:58:20] terms of point estimates. Um whereas in observational studies, I don't think any
+[0:58:21] observational studies, I don't think any of us would consider using ANCOVA as a
+[0:58:23] of us would consider using ANCOVA as a good method for causal inference. Um and
+[0:58:25] good method for causal inference. Um and I think especially in observational
+[0:58:27] I think especially in observational studies, the overlap weights um
+[0:58:30] studies, the overlap weights um get rid of that those really explosive
+[0:58:32] get rid of that those really explosive um weights in the tails with the inverse
+[0:58:34] um weights in the tails with the inverse probability weights suffer from.
+[0:58:37] probability weights suffer from. Um and I just wanted to close by saying
+[0:58:38] Um and I just wanted to close by saying reminder that that for experiments, all
+[0:58:41] reminder that that for experiments, all of these are inferior to balancing by
+[0:58:42] of these are inferior to balancing by design. So, we should all be doing that
+[0:58:44] design. So, we should all be doing that um whenever possible and using this as
+[0:58:46] um whenever possible and using this as kind of a a second resort.
+[0:58:48] kind of a a second resort. Okay. Thank you to all of you and to
+[0:58:50] Okay. Thank you to all of you and to Tufan for a fantastic talk.
+[0:58:52] Tufan for a fantastic talk. I'll stop there.
+[0:58:54] I'll stop there. Uh thank you, uh Carrie, for the great
+[0:58:57] Uh thank you, uh Carrie, for the great discussion. Um Tufan, would you do you
+[0:58:59] discussion. Um Tufan, would you do you want to respond?
+[0:59:01] want to respond? Um totally, yes. So, thank you so much,
+[0:59:02] Um totally, yes. So, thank you so much, Carrie, for your um really nice
+[0:59:04] Carrie, for your um really nice discussion. Um and um
+[0:59:06] discussion. Um and um um maybe I could in the interest of
+[0:59:08] um maybe I could in the interest of time, I could respond to two points
+[0:59:09] time, I could respond to two points really quickly.
+[0:59:10] really quickly. Yeah.
+[0:59:11] Yeah. Um and then the first one is I want to
+[0:59:13] Um and then the first one is I want to say that um it it's really important to
+[0:59:15] say that um it it's really important to consider balancing by design using
+[0:59:18] consider balancing by design using either blocking, um certification, um as
+[0:59:21] either blocking, um certification, um as well as um
+[0:59:23] well as um um restricted randomization, such as
+[0:59:25] um restricted randomization, such as re-randomization. Um but I think in
+[0:59:27] re-randomization. Um but I think in those cases it's still possible also to
+[0:59:30] those cases it's still possible also to use the overlap weights
+[0:59:33] use the overlap weights in the analysis stage to gain additional
+[0:59:36] in the analysis stage to gain additional efficiency and and remove any potential
+[0:59:39] efficiency and and remove any potential residual balance. So, I think the
+[0:59:40] residual balance. So, I think the applicability of this waiting procedure
+[0:59:42] applicability of this waiting procedure is universal
+[0:59:44] is universal is is universal, but we should do a
+[0:59:46] is is universal, but we should do a better job in the design stage because
+[0:59:48] better job in the design stage because there is no analysis that can save from
+[0:59:50] there is no analysis that can save from save us from a poor design. So, I
+[0:59:52] save us from a poor design. So, I completely agree with that. And then the
+[0:59:54] completely agree with that. And then the second point is that whether regarding
+[0:59:57] second point is that whether regarding whether there is any assumptions on the
+[0:59:59] whether there is any assumptions on the propensity for waiting in randomized
+[1:00:01] propensity for waiting in randomized control trials.
+[1:00:03] control trials. I think this point is really worth
+[1:00:04] I think this point is really worth discussing because asymptotically if we
+[1:00:06] discussing because asymptotically if we believe that the assignment does not
+[1:00:08] believe that the assignment does not depend on any covariate and so all of
+[1:00:11] depend on any covariate and so all of the coefficients in that logistic
+[1:00:13] the coefficients in that logistic working model is basically an unbiased
+[1:00:15] working model is basically an unbiased estimator of zeros, right? Because we're
+[1:00:18] estimator of zeros, right? Because we're estimating for example a true
+[1:00:20] estimating for example a true probability of 1/2 that is irrespective
+[1:00:22] probability of 1/2 that is irrespective of any covariates. But, what the
+[1:00:25] of any covariates. But, what the propensity for waiting has been doing is
+[1:00:27] propensity for waiting has been doing is that it exploits the chance imbalance
+[1:00:31] that it exploits the chance imbalance and then by estimating the betas in that
+[1:00:33] and then by estimating the betas in that logistic working model somehow it
+[1:00:36] logistic working model somehow it exploits it it has an induced outcome
+[1:00:40] exploits it it has an induced outcome regression just like ANCOVA. And and
+[1:00:42] regression just like ANCOVA. And and this is more
+[1:00:44] this is more maybe more evident if we put all of
+[1:00:46] maybe more evident if we put all of these estimators into the family of the
+[1:00:49] these estimators into the family of the estimators given in the slide which I
+[1:00:51] estimators given in the slide which I think I have mentioned
+[1:00:53] think I have mentioned again and again is that once we do
+[1:00:55] again and again is that once we do waiting we'll see that asymptotically
+[1:00:57] waiting we'll see that asymptotically that amounts to choosing these
+[1:01:00] that amounts to choosing these augmentation terms G0X and G1X as the
+[1:01:04] augmentation terms G0X and G1X as the conditional expectation of Y even Z and
+[1:01:07] conditional expectation of Y even Z and X's which is implicitly equal to ANCOVA.
+[1:01:11] X's which is implicitly equal to ANCOVA. So, we are even though we're not
+[1:01:13] So, we are even though we're not directly estimating an outcome function
+[1:01:16] directly estimating an outcome function in the analysis stage, but somehow by
+[1:01:19] in the analysis stage, but somehow by exploiting the structure of the logistic
+[1:01:22] exploiting the structure of the logistic working propensity score model, we are
+[1:01:23] working propensity score model, we are implicitly
+[1:01:25] implicitly talking about exploiting the
+[1:01:27] talking about exploiting the relationship between the X's as well as
+[1:01:30] relationship between the X's as well as the outcome. So, it's an indirect route
+[1:01:33] the outcome. So, it's an indirect route to where we want to get and it voids
+[1:01:35] to where we want to get and it voids potential problems with directly,
+[1:01:38] potential problems with directly, you know, applying outcome regression.
+[1:01:39] you know, applying outcome regression. So, I would say that there is very
+[1:01:42] So, I would say that there is very little assumption going into the
+[1:01:44] little assumption going into the propensity score model um stage and and
+[1:01:47] propensity score model um stage and and what we are doing is to really exploit
+[1:01:50] what we are doing is to really exploit the fact that we have imbalance and then
+[1:01:52] the fact that we have imbalance and then use that to inform an implicit outcome
+[1:01:55] use that to inform an implicit outcome regression model which, in the end,
+[1:01:57] regression model which, in the end, asymptotically is going to be identical
+[1:01:59] asymptotically is going to be identical to the ANCOVA models, whether for ITW or
+[1:02:02] to the ANCOVA models, whether for ITW or for OW. But, in in small samples, OW
+[1:02:05] for OW. But, in in small samples, OW seems to be a lot more superior than
+[1:02:07] seems to be a lot more superior than ITW. So, that's
+[1:02:09] ITW. So, that's the reason
+[1:02:10] the reason why we are advocating a change in the
+[1:02:12] why we are advocating a change in the practice for randomized control trials.
+[1:02:15] practice for randomized control trials. Thank you.
+[1:02:19] Uh thank you, Fan. So, I think we should probably uh
+[1:02:21] probably uh finish up now.
+[1:02:23] finish up now. Sounds good.
+[1:02:24] Sounds good. So, um so yeah, um
+[1:02:27] So, um so yeah, um Should I screen?
+[1:02:36] And I apologize if I haven't answered all the questions in chat.
+[1:02:38] all the questions in chat. Um um but um I I would be happy to take
+[1:02:40] Um um but um I I would be happy to take any questions after um words as well by
+[1:02:43] any questions after um words as well by email.
+[1:02:44] email. Okay, thank you. So, um yeah, thank you
+[1:02:47] Okay, thank you. So, um yeah, thank you to uh
+[1:02:48] to uh uh Fan and and Kerry for uh the great
+[1:02:51] uh Fan and and Kerry for uh the great presentations and to uh Fan and Shushi
+[1:02:53] presentations and to uh Fan and Shushi for uh helping with Q&amp;A.
+[1:02:56] for uh helping with Q&amp;A. Uh next week we're going to have uh
+[1:02:58] Uh next week we're going to have uh Vanessa Didelez from the University of
+[1:03:00] Vanessa Didelez from the University of Bremen tell us about causal reasoning in
+[1:03:03] Bremen tell us about causal reasoning in survival and time-to-event analyses uh
+[1:03:06] survival and time-to-event analyses uh and our discussant will be Els
+[1:03:08] and our discussant will be Els Goetgebuer from uh Ghent University. Uh
+[1:03:11] Goetgebuer from uh Ghent University. Uh we're very much looking forward to that
+[1:03:12] we're very much looking forward to that talk and uh we hope you'll join us. So,
+[1:03:15] talk and uh we hope you'll join us. So, thank Thank
+[1:03:20] Hi, thank you. Thanks again. Thank you.
+[1:03:22] Thanks again. Thank you. Happy holidays.
+[1:03:23] Happy holidays. Great talk.
+[1:03:24] Great talk. Thank you.

@@ -1,0 +1,1199 @@
+[0:00:05] welcome to the online causal inference seminar today we have Susan Murphy from
+[0:00:08] seminar today we have Susan Murphy from Harvard speak about inference for batch
+[0:00:10] Harvard speak about inference for batch bandits so this is joint work with Kelly
+[0:00:14] bandits so this is joint work with Kelly Zhang and Lucas Johnson both of them are
+[0:00:17] Zhang and Lucas Johnson both of them are here with us in Q&amp;A today so if you have
+[0:00:19] here with us in Q&amp;A today so if you have questions please submit them there Susan
+[0:00:23] questions please submit them there Susan Murphy will also stop from time to time
+[0:00:24] Murphy will also stop from time to time to take questions from the audience
+[0:00:27] to take questions from the audience after the talk we will have a discussion
+[0:00:30] after the talk we will have a discussion by Stefan lager and then if we have some
+[0:00:32] by Stefan lager and then if we have some more time left we will also take some
+[0:00:34] more time left we will also take some more questions from the audience all
+[0:00:37] more questions from the audience all right that's it from my side I'm now
+[0:00:41] right that's it from my side I'm now switching to Pio
+[0:00:51] so as Nick mentioned as today we have Kelly shank and Lukas Jensen who will be
+[0:00:53] Kelly shank and Lukas Jensen who will be manning the Q&amp;A section so again please
+[0:00:57] manning the Q&amp;A section so again please submit your questions we will select a
+[0:01:00] submit your questions we will select a few questions to ask directly to Susan
+[0:01:02] few questions to ask directly to Susan when she pauses so if your question is
+[0:01:04] when she pauses so if your question is selected that will reach out to you via
+[0:01:07] selected that will reach out to you via the chat and ask you to use the raise
+[0:01:10] the chat and ask you to use the raise your hand functionality and so I can
+[0:01:13] your hand functionality and so I can identify you quickly and then last week
+[0:01:16] identify you quickly and then last week we're willing to ask the question live
+[0:01:17] we're willing to ask the question live and so again please do not raise your
+[0:01:21] and so again please do not raise your hand until I've asked you to do so that
+[0:01:23] hand until I've asked you to do so that makes things more complicated if you do
+[0:01:25] makes things more complicated if you do that's it from me Susan
+[0:01:30] that's it from me Susan feel free to start whenever you are
+[0:01:32] feel free to start whenever you are ready
+[0:01:41] you
+[0:01:51] just a second I'm going to get you have to turn on the slideshow it's great to
+[0:01:56] to turn on the slideshow it's great to be here with all you guys today so this
+[0:02:00] be here with all you guys today so this talk is about the end prints with batch
+[0:02:02] talk is about the end prints with batch bandits and you see all these little
+[0:02:05] bandits and you see all these little icons on the screen these are different
+[0:02:08] icons on the screen these are different studies it's some of the studies that
+[0:02:10] studies it's some of the studies that were involved in in digital health and
+[0:02:13] were involved in in digital health and we design bandit algorithms and
+[0:02:17] we design bandit algorithms and generalizations were full orell
+[0:02:19] generalizations were full orell algorithms for these types of studies so
+[0:02:21] algorithms for these types of studies so that motivated my work in this area
+[0:02:26] that motivated my work in this area because we are part of big teams and
+[0:02:29] because we are part of big teams and they want to make use of the data that
+[0:02:31] they want to make use of the data that results once you run a bandit okay
+[0:02:36] results once you run a bandit okay let's see if I can get it to go yep our
+[0:02:39] let's see if I can get it to go yep our team we already know this because our
+[0:02:42] team we already know this because our moderators towed us but I just want to
+[0:02:44] moderators towed us but I just want to say that Kelly is responsible for all
+[0:02:47] say that Kelly is responsible for all things good and this talk and so it's
+[0:02:51] things good and this talk and so it's Lucas anything that goes wrong you know
+[0:02:53] Lucas anything that goes wrong you know who to blame so what I'm going to do to
+[0:02:58] who to blame so what I'm going to do to make sure that we're all on the same
+[0:02:59] make sure that we're all on the same page is I'm just going to give you a
+[0:03:01] page is I'm just going to give you a really brief introduction into bandits
+[0:03:05] really brief introduction into bandits and Thompson sampling the paper that's
+[0:03:07] and Thompson sampling the paper that's associated with this considers other
+[0:03:10] associated with this considers other types of bandits as well but this will
+[0:03:13] types of bandits as well but this will just help get us helps me get everyone
+[0:03:15] just help get us helps me get everyone on the same page so we bandits occur
+[0:03:20] on the same page so we bandits occur often in the real world and the place
+[0:03:22] often in the real world and the place that you see them most is in
+[0:03:24] that you see them most is in advertisement and how to and they're
+[0:03:28] advertisement and how to and they're used for sequential decision-making to
+[0:03:31] used for sequential decision-making to learn how to show ads that result in the
+[0:03:34] learn how to show ads that result in the greatest revenue and my area digital
+[0:03:38] greatest revenue and my area digital health it's when to send different kinds
+[0:03:40] health it's when to send different kinds of Matt which message different kinds of
+[0:03:42] of Matt which message different kinds of messages to encourage users to adopt
+[0:03:44] messages to encourage users to adopt healthy behaviors and then you see an
+[0:03:46] healthy behaviors and then you see an example also in online education in all
+[0:03:49] example also in online education in all of these cases there is some notion of
+[0:03:52] of these cases there is some notion of reward so in the case of advertisements
+[0:03:55] reward so in the case of advertisements that reward might be a click-through
+[0:03:57] that reward might be a click-through rate or a revenue but in digital health
+[0:04:00] rate or a revenue but in digital health its enactment
+[0:04:02] its enactment certain healthy behaviors so the goal is
+[0:04:04] certain healthy behaviors so the goal is to choose these treatments these actions
+[0:04:07] to choose these treatments these actions so as to maximize those rewards so
+[0:04:13] so as to maximize those rewards so here's the hard it would I'm going to
+[0:04:15] here's the hard it would I'm going to actually yes so what I'm gonna do is I'm
+[0:04:17] actually yes so what I'm gonna do is I'm gonna be strapped away most to the
+[0:04:19] gonna be strapped away most to the problem I'm just gonna look at a two
+[0:04:20] problem I'm just gonna look at a two arms ban it's so very simple bad it's
+[0:04:25] arms ban it's so very simple bad it's guy help me be really much more clear in
+[0:04:27] guy help me be really much more clear in this talk and the main issues are going
+[0:04:30] this talk and the main issues are going to occur in the two arm band at the
+[0:04:32] to occur in the two arm band at the binary bandit so in the case of a binary
+[0:04:35] binary bandit so in the case of a binary bandit you have two potential outcomes
+[0:04:38] bandit you have two potential outcomes you have the reward under action zero
+[0:04:42] you have the reward under action zero I'm hoping you can you guys can see the
+[0:04:44] I'm hoping you can you guys can see the little arrow that I'm putting on my
+[0:04:46] little arrow that I'm putting on my screen and then you have the reward
+[0:04:48] screen and then you have the reward under action one and those are your two
+[0:04:51] under action one and those are your two potential outcomes and they occur at
+[0:04:53] potential outcomes and they occur at each time point and we're going to
+[0:04:55] each time point and we're going to assume they're independent and so how
+[0:04:57] assume they're independent and so how does the algorithm look to you it's a
+[0:05:00] does the algorithm look to you it's a way that data is being collected it's
+[0:05:02] way that data is being collected it's online as day and data is coming in so
+[0:05:05] online as day and data is coming in so the algorithm selects an action and then
+[0:05:07] the algorithm selects an action and then it receives the reward and then it
+[0:05:09] it receives the reward and then it returns to the next time points Alexis
+[0:05:11] returns to the next time points Alexis actually receives a reward and in
+[0:05:13] actually receives a reward and in essence what the band and algorithm is
+[0:05:16] essence what the band and algorithm is doing is it's creating a sequence of
+[0:05:19] doing is it's creating a sequence of mappings mappings from the data you have
+[0:05:21] mappings mappings from the data you have at hand which we're going to call
+[0:05:23] at hand which we're going to call history you see that at the very bottom
+[0:05:25] history you see that at the very bottom of the slide to a probability in the
+[0:05:29] of the slide to a probability in the case of binary action it's just a
+[0:05:31] case of binary action it's just a success probability probability of
+[0:05:33] success probability probability of sending action one so pi sub t is the
+[0:05:38] sending action one so pi sub t is the probability that probability of course
+[0:05:39] probability that probability of course could be 1 or 0 but in general it could
+[0:05:42] could be 1 or 0 but in general it could be any number between 1 and 0 and your
+[0:05:45] be any number between 1 and 0 and your and the bandit tosses this Bernoulli
+[0:05:47] and the bandit tosses this Bernoulli with that probability so how does a
+[0:05:51] with that probability so how does a simple Thompson sampling type algorithm
+[0:05:54] simple Thompson sampling type algorithm it's a type of bandit algorithm in this
+[0:05:58] it's a type of bandit algorithm in this setting what you do is you pretend
+[0:06:00] setting what you do is you pretend that's really important you're just
+[0:06:01] that's really important you're just pretending
+[0:06:02] pretending the rewards are galaxy and you have you
+[0:06:07] the rewards are galaxy and you have you know denote the mean reward by beta sub
+[0:06:10] know denote the mean reward by beta sub 0 beta sub 1 because we only have two
+[0:06:13] 0 beta sub 1 because we only have two actions
+[0:06:15] actions and then you put a gaussian independent
+[0:06:17] and then you put a gaussian independent Gaussian priors on those two parameters
+[0:06:19] Gaussian priors on those two parameters the mean under action zero and the mean
+[0:06:22] the mean under action zero and the mean under action one and now you proceed
+[0:06:25] under action one and now you proceed through time at the very first time of
+[0:06:28] through time at the very first time of course that step one in that little
+[0:06:30] course that step one in that little pseudocode is you're using the prior but
+[0:06:33] pseudocode is you're using the prior but I'll just continue as if we're at a
+[0:06:35] I'll just continue as if we're at a later step so you calculate your
+[0:06:37] later step so you calculate your posterior that is the posterior
+[0:06:38] posterior that is the posterior probability that the mean under action
+[0:06:40] probability that the mean under action one is greater than the mean of under
+[0:06:42] one is greater than the mean of under action zero you take that probability
+[0:06:45] action zero you take that probability and you use that product posterior
+[0:06:47] and you use that product posterior probability to determine how to choose
+[0:06:50] probability to determine how to choose the next action I mean the algorithm is
+[0:06:52] the next action I mean the algorithm is doing that now algorithm receives the
+[0:06:54] doing that now algorithm receives the next reward the reward corresponding to
+[0:06:58] next reward the reward corresponding to the action that was indeed selected and
+[0:07:00] the action that was indeed selected and then you update the posterior and you
+[0:07:03] then you update the posterior and you just kind of cycle through repeatedly
+[0:07:05] just kind of cycle through repeatedly collecting data so thinking about it
+[0:07:07] collecting data so thinking about it from a data collections perspective you
+[0:07:09] from a data collections perspective you just collect data as you move through
+[0:07:11] just collect data as you move through time one thing to realize in a lot of
+[0:07:15] time one thing to realize in a lot of these algorithms particularly if you're
+[0:07:17] these algorithms particularly if you're involved in actual implementation of the
+[0:07:20] involved in actual implementation of the algorithm is that step 4 update
+[0:07:22] algorithm is that step 4 update posterior for the two means that may not
+[0:07:26] posterior for the two means that may not occur at every time and there's a lot of
+[0:07:29] occur at every time and there's a lot of reasons of computational reasons as well
+[0:07:32] reasons of computational reasons as well as reasons they're completely unrelated
+[0:07:34] as reasons they're completely unrelated to this talk for why you would do step
+[0:07:37] to this talk for why you would do step four only every now and then okay so
+[0:07:44] four only every now and then okay so again that banded algorithm what we saw
+[0:07:46] again that banded algorithm what we saw was it used a posterior probability to
+[0:07:49] was it used a posterior probability to farm that mapping and since we were in
+[0:07:51] farm that mapping and since we were in the Gaussian prior Gaussian a reward
+[0:07:53] the Gaussian prior Gaussian a reward study in effect it's just the posterior
+[0:07:56] study in effect it's just the posterior mean and posterior covariance matrix
+[0:07:58] mean and posterior covariance matrix they get that form that mapping to a
+[0:08:01] they get that form that mapping to a probability that you use to choose the
+[0:08:03] probability that you use to choose the binary action and what is so what what
+[0:08:08] binary action and what is so what what are banded algorithms really what are
+[0:08:11] are banded algorithms really what are they really well what they are is up a
+[0:08:14] they really well what they are is up a type of online optimization algorithm so
+[0:08:18] type of online optimization algorithm so it's just one of the many types of
+[0:08:20] it's just one of the many types of online optimization algorithms you have
+[0:08:23] online optimization algorithms you have and online optimization problems
+[0:08:26] and online optimization problems what they have is some criteria and
+[0:08:28] what they have is some criteria and there's some criterion that you want to
+[0:08:30] there's some criterion that you want to maximize or optimize minimize max here
+[0:08:33] maximize or optimize minimize max here maximize but unfortunately you don't
+[0:08:36] maximize but unfortunately you don't know all the parameters in that
+[0:08:38] know all the parameters in that criterion and you see the criterion at
+[0:08:41] criterion and you see the criterion at the very bottom of that slide and what
+[0:08:43] the very bottom of that slide and what we don't know is the mean beta zero that
+[0:08:47] we don't know is the mean beta zero that is the mean under reward zero and the
+[0:08:50] is the mean under reward zero and the mean under reward when you take action
+[0:08:52] mean under reward when you take action what we don't know those two parameters
+[0:08:54] what we don't know those two parameters so the criterion has those two unknowns
+[0:08:57] so the criterion has those two unknowns and so all online optimization
+[0:09:00] and so all online optimization algorithms have to balance trying to
+[0:09:03] algorithms have to balance trying to learn these unknown proper a meters at
+[0:09:06] learn these unknown proper a meters at the same time they're trying to maximize
+[0:09:08] the same time they're trying to maximize the criterion and that's what's going on
+[0:09:11] the criterion and that's what's going on in Bandit algorithms so ah the topic of
+[0:09:20] in Bandit algorithms so ah the topic of this talk is what do you do after you've
+[0:09:22] this talk is what do you do after you've run one of these algorithms so uh in
+[0:09:26] run one of these algorithms so uh in digital health this involves enormous a
+[0:09:30] digital health this involves enormous a large number of people most the time in
+[0:09:34] large number of people most the time in my setting these are clinical
+[0:09:35] my setting these are clinical populations so these are expensive
+[0:09:38] populations so these are expensive studies and you can't just run it the
+[0:09:41] studies and you can't just run it the band and then be done with it you've got
+[0:09:44] band and then be done with it you've got to figure out a way to make the best use
+[0:09:46] to figure out a way to make the best use of that day you've got to uh you want
+[0:09:50] of that day you've got to uh you want very much to enhance scientific
+[0:09:53] very much to enhance scientific discovery in a particular domain in the
+[0:09:55] discovery in a particular domain in the case of digital health that would be in
+[0:09:57] case of digital health that would be in health so how much you do that you might
+[0:10:00] health so how much you do that you might be interested in confidence intervals
+[0:10:02] be interested in confidence intervals for the differences between two actions
+[0:10:04] for the differences between two actions in general you have other data like
+[0:10:07] in general you have other data like context we've that's with more
+[0:10:09] context we've that's with more complicated algorithms contextual
+[0:10:12] complicated algorithms contextual bandits or RL algorithms and you want to
+[0:10:14] bandits or RL algorithms and you want to do a whole variety of different types of
+[0:10:16] do a whole variety of different types of confidence intervals and even also often
+[0:10:20] confidence intervals and even also often in my setting there's other outcomes you
+[0:10:23] in my setting there's other outcomes you really care about they're called
+[0:10:24] really care about they're called secondary outcomes and you want to
+[0:10:26] secondary outcomes and you want to understand you want to provide some
+[0:10:28] understand you want to provide some measure of confidence inference with
+[0:10:30] measure of confidence inference with confidence about the impact of those
+[0:10:33] confidence about the impact of those actions on those other
+[0:10:36] actions on those other so if you're from causal inference like
+[0:10:39] so if you're from causal inference like I was I am you think man this has got to
+[0:10:43] I was I am you think man this has got to be easy I mean we're in a setting where
+[0:10:47] be easy I mean we're in a setting where the potential outcomes are missing at
+[0:10:49] the potential outcomes are missing at random this is not an observational
+[0:10:52] random this is not an observational study we actually designed the algorithm
+[0:10:57] study we actually designed the algorithm that determines the probability that the
+[0:10:59] that determines the probability that the action is selected we have total control
+[0:11:10] in fact we can um in here in the simple case I can either write down the
+[0:11:12] case I can either write down the likelihood so here you see my likelihood
+[0:11:15] likelihood so here you see my likelihood kind of in the up girth one-third of the
+[0:11:17] kind of in the up girth one-third of the screen you have one factor that just is
+[0:11:21] screen you have one factor that just is effect impacted by the randomization
+[0:11:25] effect impacted by the randomization probabilities that is the probabilities
+[0:11:28] probabilities that is the probabilities of choosing the binary actions and then
+[0:11:30] of choosing the binary actions and then you have the other factor which is all
+[0:11:32] you have the other factor which is all about the rewards so here I act as if
+[0:11:36] about the rewards so here I act as if there's two densities the density of the
+[0:11:37] there's two densities the density of the reward on to action 0 the density of the
+[0:11:39] reward on to action 0 the density of the reward or inaction 1 I'm pretending like
+[0:11:42] reward or inaction 1 I'm pretending like they're completely known the only thing
+[0:11:44] they're completely known the only thing we don't know is there means they don't
+[0:11:45] we don't know is there means they don't want to beta 0 the likelihood factors
+[0:11:48] want to beta 0 the likelihood factors that signals to you that you should be
+[0:11:51] that signals to you that you should be able to do likelihood inference you know
+[0:11:54] able to do likelihood inference you know just straight up just use maximum
+[0:11:56] just straight up just use maximum likelihood should work great you only
+[0:11:59] likelihood should work great you only have two parameters my dimensional
+[0:12:01] have two parameters my dimensional problem here it's been known however in
+[0:12:06] problem here it's been known however in bandits I mean this goes back to bio
+[0:12:08] bandits I mean this goes back to bio stat in the clinical world decades and
+[0:12:12] stat in the clinical world decades and decades ago that inference after you've
+[0:12:15] decades ago that inference after you've run a bandit is not straightforward and
+[0:12:18] run a bandit is not straightforward and a lot of this is due to bias that occur
+[0:12:22] a lot of this is due to bias that occur small sample bias in the estimation of
+[0:12:26] small sample bias in the estimation of the mean rewards and you can cut you can
+[0:12:28] the mean rewards and you can cut you can see it right away because if the
+[0:12:32] see it right away because if the algorithms let's say that um that action
+[0:12:36] algorithms let's say that um that action one is slightly better so what's going
+[0:12:39] one is slightly better so what's going to happen is the Bandit algorithm after
+[0:12:41] to happen is the Bandit algorithm after a while will mainly just select action 1
+[0:12:44] a while will mainly just select action 1 and so you'll never get enough data
+[0:12:48] and so you'll never get enough data really estimate the mean of the reward
+[0:12:51] really estimate the mean of the reward under action zero so you can see why you
+[0:12:54] under action zero so you can see why you end up with a slight problem I mean a
+[0:12:56] end up with a slight problem I mean a problem there because you aren't really
+[0:12:59] problem there because you aren't really sampling your actions enough and so you
+[0:13:03] sampling your actions enough and so you won't be able to estimate certain
+[0:13:04] won't be able to estimate certain rewards under certain actions they're
+[0:13:06] rewards under certain actions they're less optimal rewards the less yeah so
+[0:13:11] less optimal rewards the less yeah so there's a whole variety of ways you can
+[0:13:13] there's a whole variety of ways you can try and get around this so I just have a
+[0:13:17] try and get around this so I just have a bunch of sites at the bottom these are
+[0:13:19] bunch of sites at the bottom these are more modern sites where people go into
+[0:13:22] more modern sites where people go into these problems in some detail so I'm
+[0:13:26] these problems in some detail so I'm going to talk about in our study well
+[0:13:29] going to talk about in our study well let me go back to this let me make sure
+[0:13:32] let me go back to this let me make sure I'm on the right thing yeah so I'm
+[0:13:36] I'm on the right thing yeah so I'm thinking in my head right now everything
+[0:13:38] thinking in my head right now everything should be just great but I have this
+[0:13:40] should be just great but I have this history that's warning me I might have
+[0:13:43] history that's warning me I might have some problems so in our our setting
+[0:13:46] some problems so in our our setting we're in a setting where our bandits are
+[0:13:50] we're in a setting where our bandits are always matched so I give you two
+[0:13:55] always matched so I give you two examples here the simplest is the online
+[0:13:58] examples here the simplest is the online advertising setting where you send out
+[0:14:01] advertising setting where you send out of group of ads ads to end users at each
+[0:14:04] of group of ads ads to end users at each time point and then you march through
+[0:14:07] time point and then you march through time until time capital T and your
+[0:14:10] time until time capital T and your banded algorithm updates in our case
+[0:14:14] banded algorithm updates in our case with Thomson sampling the posterior
+[0:14:16] with Thomson sampling the posterior distribution at each time point in mice
+[0:14:20] distribution at each time point in mice in my lab setting this is a considered a
+[0:14:24] in my lab setting this is a considered a course approximation to digital health
+[0:14:26] course approximation to digital health where we have end users that are
+[0:14:28] where we have end users that are progressing through capital T time
+[0:14:30] progressing through capital T time points and we only allow the Bandit
+[0:14:33] points and we only allow the Bandit algorithm to update at each of the time
+[0:14:35] algorithm to update at each of the time points and so are not again I've already
+[0:14:39] points and so are not again I've already said this we want to use Clutton this is
+[0:14:41] said this we want to use Clutton this is the setting grant we want to use
+[0:14:43] the setting grant we want to use classical statistical kinds of
+[0:14:45] classical statistical kinds of approaches to form confidence intervals
+[0:14:47] approaches to form confidence intervals make hypothesis tests and in our setting
+[0:14:52] make hypothesis tests and in our setting T capital T is always fixed its test it
+[0:14:56] T capital T is always fixed its test it has to do with the duration of the study
+[0:14:58] has to do with the duration of the study usually that's related to
+[0:15:00] usually that's related to how soon the domain scientists think
+[0:15:03] how soon the domain scientists think that interventions can have impacts it's
+[0:15:05] that interventions can have impacts it's on the thing that changes where you
+[0:15:09] on the thing that changes where you might think about large samples is in
+[0:15:11] might think about large samples is in terms of in the batch size so when I
+[0:15:15] terms of in the batch size so when I think about approximations so that I can
+[0:15:18] think about approximations so that I can form confidence intervals I think well
+[0:15:20] form confidence intervals I think well let's use let's think in terms of large
+[0:15:23] let's use let's think in terms of large in and see if we can get good
+[0:15:25] in and see if we can get good approximations that way so here's the
+[0:15:29] approximations that way so here's the notation for this again we have binary
+[0:15:33] notation for this again we have binary actions so we have our two rewards two
+[0:15:36] actions so we have our two rewards two potential rewards for every time point t
+[0:15:39] potential rewards for every time point t and individual that I user I right now
+[0:15:45] and individual that I user I right now they're all independent the tree there
+[0:15:48] they're all independent the tree there means our beta 0 beta well we're going
+[0:15:50] means our beta 0 beta well we're going of these two unknown parameters and the
+[0:15:52] of these two unknown parameters and the treatment effect is just the difference
+[0:15:54] treatment effect is just the difference between the mean under action 1 minus
+[0:15:56] between the mean under action 1 minus the mean under action 0 our bandit
+[0:15:59] the mean under action 0 our bandit algorithm is going to produce some sort
+[0:16:02] algorithm is going to produce some sort of probability of choosing action equal
+[0:16:05] of probability of choosing action equal 1 that want action 1 and notice how
+[0:16:09] 1 that want action 1 and notice how there's a superscript on that that
+[0:16:13] there's a superscript on that that probability and that superscript of in
+[0:16:15] probability and that superscript of in parentheses in and why is that because
+[0:16:18] parentheses in and why is that because now that probability depends on the
+[0:16:21] now that probability depends on the number of individuals that we're in that
+[0:16:25] number of individuals that we're in that batch right because it's a think of the
+[0:16:28] batch right because it's a think of the Thompson sampling it's the posterior
+[0:16:30] Thompson sampling it's the posterior probability of action a1 mean being
+[0:16:34] probability of action a1 mean being better than action zero mean given the
+[0:16:36] better than action zero mean given the data so far of course it's also a func
+[0:16:40] data so far of course it's also a func in its function of the history which
+[0:16:41] in its function of the history which also depends on in the actions in each
+[0:16:44] also depends on in the actions in each batch or just iid I mean there are just
+[0:16:49] batch or just iid I mean there are just Bernoulli so it's like if you just look
+[0:16:52] Bernoulli so it's like if you just look at one batch and you condition on the
+[0:16:55] at one batch and you condition on the past it's like you have a randomized
+[0:16:57] past it's like you have a randomized trial with unequal randomization
+[0:17:00] trial with unequal randomization probabilities it's truly not very it
+[0:17:02] probabilities it's truly not very it doesn't seem very special conditional in
+[0:17:05] doesn't seem very special conditional in the past it each each batch it's like
+[0:17:07] the past it each each batch it's like that you see the notation for the
+[0:17:11] that you see the notation for the history this history is all the actions
+[0:17:14] history this history is all the actions all the rewards we've seen across all
+[0:17:15] all the rewards we've seen across all the batches that have occurred prior to
+[0:17:18] the batches that have occurred prior to this time
+[0:17:26] so and I've already mentioned that the behavior of the bandit is poor I talked
+[0:17:31] behavior of the bandit is poor I talked about bias in terms of estimating the
+[0:17:33] about bias in terms of estimating the mean of the rewards and most the time
+[0:17:38] mean of the rewards and most the time one thinks about this bias is coming
+[0:17:40] one thinks about this bias is coming about because your your randomization
+[0:17:44] about because your your randomization probabilities those bandit those
+[0:17:46] probabilities those bandit those posterior probabilities they're just two
+[0:17:48] posterior probabilities they're just two questions - one or zero and so you don't
+[0:17:51] questions - one or zero and so you don't accumulate enough information about one
+[0:17:53] accumulate enough information about one of the arms so you can't estimate it's
+[0:17:55] of the arms so you can't estimate it's mean very well so I'm going to I design
+[0:18:01] mean very well so I'm going to I design these algorithms for our my studies my
+[0:18:04] these algorithms for our my studies my lab studies so we actually clip the
+[0:18:06] lab studies so we actually clip the Bandit probabilities and you see a way
+[0:18:10] Bandit probabilities and you see a way to clip pie men might be point 1 and pie
+[0:18:13] to clip pie men might be point 1 and pie max might be 0.9 and we actually clip
+[0:18:16] max might be 0.9 and we actually clip these bandit probabilities for reasons
+[0:18:18] these bandit probabilities for reasons that are unrelated to after study
+[0:18:21] that are unrelated to after study entrance and if someone is interested in
+[0:18:24] entrance and if someone is interested in hearing about that in the questions
+[0:18:26] hearing about that in the questions section you know I'm happy to tell you
+[0:18:28] section you know I'm happy to tell you more but our problem our bandit
+[0:18:31] more but our problem our bandit providers Listeria probabilities they
+[0:18:33] providers Listeria probabilities they always get clipped in mice in the
+[0:18:35] always get clipped in mice in the studies that I'm involved with so you'd
+[0:18:38] studies that I'm involved with so you'd think now well everything should be okay
+[0:18:40] think now well everything should be okay because we're gonna always constantly be
+[0:18:43] because we're gonna always constantly be sampling both action wanting action zero
+[0:18:47] sampling both action wanting action zero we shouldn't have this poor behavior
+[0:18:48] we shouldn't have this poor behavior that's what least that's what I would
+[0:18:51] that's what least that's what I would think however and indeed are you see
+[0:18:55] think however and indeed are you see that here if the two arms have different
+[0:18:58] that here if the two arms have different means hopefully I'm not sure if you can
+[0:19:00] means hopefully I'm not sure if you can see my cursor but if the two arms do
+[0:19:03] see my cursor but if the two arms do have different means
+[0:19:05] have different means then those randomization problems
+[0:19:08] then those randomization problems converge to a constant PI min if
+[0:19:12] converge to a constant PI min if treatment one is poorer than treatment
+[0:19:15] treatment one is poorer than treatment zero PI max if treatment one is better
+[0:19:19] zero PI max if treatment one is better than treatment zero so everything is
+[0:19:22] than treatment zero so everything is really well behaved I mean at least it
+[0:19:24] really well behaved I mean at least it seems that way at first glance
+[0:19:32] but there are still problems the problems arise when you're a fact that
+[0:19:35] problems arise when you're a fact that is the difference between your two arms
+[0:19:36] is the difference between your two arms here I'm saying zero you'll see actually
+[0:19:39] here I'm saying zero you'll see actually this is actually when the difference
+[0:19:41] this is actually when the difference between the two arms is small and what
+[0:19:44] between the two arms is small and what happens is this posterior probability
+[0:19:47] happens is this posterior probability that one arm is better than the other
+[0:19:49] that one arm is better than the other given the prior the history it doesn't
+[0:19:52] given the prior the history it doesn't concentrate what do I mean by doesn't
+[0:19:56] concentrate what do I mean by doesn't concentrate it doesn't converge in
+[0:19:57] concentrate it doesn't converge in probability to a constant
+[0:19:59] probability to a constant in fact in really simple cases like if I
+[0:20:02] in fact in really simple cases like if I just focus on the second if in the first
+[0:20:04] just focus on the second if in the first batch we do uniform randomization 1/2
+[0:20:06] batch we do uniform randomization 1/2 1/2 to both actions and then in the
+[0:20:08] 1/2 to both actions and then in the second batch we use a posterior
+[0:20:11] second batch we use a posterior probability no clipping to choose action
+[0:20:16] probability no clipping to choose action one action zero then what you see is
+[0:20:19] one action zero then what you see is that this posterior probability
+[0:20:22] that this posterior probability converges in distribution to a uniform
+[0:20:25] converges in distribution to a uniform think p-values it's very interesting so
+[0:20:29] think p-values it's very interesting so it's totally interesting so what is it
+[0:20:32] it's totally interesting so what is it um what's happening here is it if you
+[0:20:34] um what's happening here is it if you think of a bunch of studies each per
+[0:20:37] think of a bunch of studies each per each investigator is running a study of
+[0:20:42] each investigator is running a study of in a users per batch capital T batches
+[0:20:46] in a users per batch capital T batches then this randomization probably at time
+[0:20:49] then this randomization probably at time 2 is uniform across the the investigator
+[0:20:54] 2 is uniform across the the investigator studies so like I could be one of the
+[0:20:57] studies so like I could be one of the investigators and my PI two might go to
+[0:21:00] investigators and my PI two might go to 0.9 Dominic's
+[0:21:03] 0.9 Dominic's by two might go to point one hits it
+[0:21:07] by two might go to point one hits it Stephan's might go to point five he's
+[0:21:09] Stephan's might go to point five he's lucky but wait you have no control over
+[0:21:14] lucky but wait you have no control over what your problem it's not concentrating
+[0:21:24] think about how we do propensity score waiting and after study analyses this is
+[0:21:27] waiting and after study analyses this is a disaster because the propensity score
+[0:21:30] a disaster because the propensity score is it just depends on the trial it's no
+[0:21:34] is it just depends on the trial it's no I have some notes for myself all right
+[0:21:38] I have some notes for myself all right the first note is suppose I will are
+[0:21:40] the first note is suppose I will are planned for the
+[0:21:41] planned for the study how do i what I'm thinking about
+[0:21:45] study how do i what I'm thinking about planning for the next investigator I
+[0:21:47] planning for the next investigator I have to I'm gonna want to have some
+[0:21:50] have to I'm gonna want to have some primary analysis usually with some
+[0:21:52] primary analysis usually with some hypothesis test maybe that arm Wan mean
+[0:21:55] hypothesis test maybe that arm Wan mean is different from army arm to zero mean
+[0:21:59] is different from army arm to zero mean and I'm gonna want to determine the
+[0:22:01] and I'm gonna want to determine the sample size that I need to get a
+[0:22:03] sample size that I need to get a particular power if I use this bandit
+[0:22:06] particular power if I use this bandit algorithm now I know any tech most test
+[0:22:10] algorithm now I know any tech most test statistics the ones I can think of
+[0:22:12] statistics the ones I can think of anyway their variance is going to depend
+[0:22:14] anyway their variance is going to depend on the propensity score that is the
+[0:22:18] on the propensity score that is the probability of randomization and I have
+[0:22:21] probability of randomization and I have no way of anticipating what it's going
+[0:22:23] no way of anticipating what it's going to be the next time around it could be
+[0:22:25] to be the next time around it could be any number between 0 and 1 it's a
+[0:22:28] any number between 0 and 1 it's a disaster I have no way to size my next
+[0:22:31] disaster I have no way to size my next study the other so that's a big problem
+[0:22:35] study the other so that's a big problem you could think well you're not
+[0:22:36] you could think well you're not interested in sizing your studies and
+[0:22:38] interested in sizing your studies and besides that you know beta 1 mean reward
+[0:22:43] besides that you know beta 1 mean reward under action 1 being equal to mean every
+[0:22:46] under action 1 being equal to mean every word and action 0 we all know but we're
+[0:22:52] word and action 0 we all know but we're gonna see shortly that this is just a
+[0:22:54] gonna see shortly that this is just a symptom of a problem the minute you have
+[0:22:57] symptom of a problem the minute you have small effects you have problems with
+[0:23:01] small effects you have problems with your inference and in most experimental
+[0:23:05] your inference and in most experimental settings small effects or the name of
+[0:23:08] settings small effects or the name of the game so I'm gonna go through the
+[0:23:14] the game so I'm gonna go through the asymptotic distribution what do we know
+[0:23:16] asymptotic distribution what do we know about um that asymptotic district of an
+[0:23:19] about um that asymptotic district of an estimator that you might use at the end
+[0:23:21] estimator that you might use at the end of a bandit study a batch bandit study
+[0:23:25] of a bandit study a batch bandit study and I'm focusing on the ordinary
+[0:23:29] and I'm focusing on the ordinary least-squares estimator and one reason
+[0:23:31] least-squares estimator and one reason why you might want to focus on that is
+[0:23:33] why you might want to focus on that is that if your errors were really Gaussian
+[0:23:36] that if your errors were really Gaussian then all you'd be doing is maximal
+[0:23:38] then all you'd be doing is maximal likelihood estimation you know and that
+[0:23:40] likelihood estimation you know and that would make perfect sense it's the kind
+[0:23:41] would make perfect sense it's the kind of thing you might think you would do
+[0:23:43] of thing you might think you would do and so if you so here you see the
+[0:23:45] and so if you so here you see the difference the
+[0:23:48] difference the [Music]
+[0:23:50] [Music] that was someone from overseas telling
+[0:23:54] that was someone from overseas telling me my visa has expired and I if I pay
+[0:23:57] me my visa has expired and I if I pay them $250 I can get my visa it renewed
+[0:24:01] them $250 I can get my visa it renewed so you see the equation for the
+[0:24:05] so you see the equation for the treatment effect here and it's a very
+[0:24:09] treatment effect here and it's a very simple closed-form it's the average of
+[0:24:11] simple closed-form it's the average of the rewards under action one minus the
+[0:24:14] the rewards under action one minus the average into the rewards and action zero
+[0:24:16] average into the rewards and action zero and uh you get one can go back Kelly our
+[0:24:20] and uh you get one can go back Kelly our our team Kelly generalized lion weighs 8
+[0:24:25] our team Kelly generalized lion weighs 8 1982 central limit theorem to a
+[0:24:29] 1982 central limit theorem to a triangular array and showed that under
+[0:24:32] triangular array and showed that under Molech conditions including clip and I'm
+[0:24:36] Molech conditions including clip and I'm going to add the clipping and this
+[0:24:39] going to add the clipping and this condition here that's at the bottom half
+[0:24:41] condition here that's at the bottom half of the slide that you'll get asymptotic
+[0:24:45] of the slide that you'll get asymptotic normality for standardized difference
+[0:24:48] normality for standardized difference between beta hat 1 and beta hat 0 sounds
+[0:24:51] between beta hat 1 and beta hat 0 sounds great so let's let's focus on this
+[0:24:55] great so let's let's focus on this requirement in the bottom half of the
+[0:24:58] requirement in the bottom half of the slide so what is this this is the
+[0:25:01] slide so what is this this is the average the fraction of times we choose
+[0:25:04] average the fraction of times we choose action 1 over the entire time period
+[0:25:08] action 1 over the entire time period divided by some constant there has to be
+[0:25:11] divided by some constant there has to be a sequence of constants that you take
+[0:25:14] a sequence of constants that you take that fraction you divide by that
+[0:25:16] that fraction you divide by that constant that ratio will go to 1 in a
+[0:25:19] constant that ratio will go to 1 in a sense you're saying you're going to get
+[0:25:21] sense you're saying you're going to get concentration but we already discussed
+[0:25:25] concentration but we already discussed how even at time - we're not getting
+[0:25:27] how even at time - we're not getting concentration
+[0:25:38] that is if your treatment effect the difference in means in your rewards
+[0:25:40] difference in means in your rewards between action one and action zero zero
+[0:25:43] between action one and action zero zero there's no sequence of the constants for
+[0:25:45] there's no sequence of the constants for which this this fraction would go to one
+[0:25:52] which this this fraction would go to one in probability because if there were
+[0:25:54] in probability because if there were them we'd have at some time normality
+[0:25:55] them we'd have at some time normality and indeed in toy settings it's really
+[0:25:59] and indeed in toy settings it's really easy to show that when the true
+[0:26:02] easy to show that when the true treatment means are equal Kelly shows
+[0:26:06] treatment means are equal Kelly shows this that you get the limiting
+[0:26:09] this that you get the limiting distribution which is non normal and and
+[0:26:12] distribution which is non normal and and Kelly does this fervour idea of common
+[0:26:15] Kelly does this fervour idea of common bandit algorithms including Thompson
+[0:26:18] bandit algorithms including Thompson sampling and so how is this relevant
+[0:26:23] sampling and so how is this relevant when the difference between the two
+[0:26:26] when the difference between the two means is small not zero but buts small
+[0:26:29] means is small not zero but buts small so uh here's a simple simulation
+[0:26:35] so uh here's a simple simulation illustrating this non you the
+[0:26:37] illustrating this non you the consequences of this non uniformity I
+[0:26:39] consequences of this non uniformity I should be clear about what non
+[0:26:41] should be clear about what non uniformity here is non uniformity means
+[0:26:44] uniformity here is non uniformity means we get a normal distribution for that
+[0:26:46] we get a normal distribution for that OLS estimator when the difference
+[0:26:49] OLS estimator when the difference between the two means is non zero and we
+[0:26:52] between the two means is non zero and we get a totally well we get one
+[0:26:54] get a totally well we get one distribution when the difference between
+[0:26:57] distribution when the difference between the means is non zero in a totally
+[0:26:59] the means is non zero in a totally different distribution when the
+[0:27:00] different distribution when the difference between the means is zero so
+[0:27:03] difference between the means is zero so that's what we mean by the non uniform
+[0:27:05] that's what we mean by the non uniform convergence and this results in
+[0:27:08] convergence and this results in unreliable confidence intervals this has
+[0:27:10] unreliable confidence intervals this has been known for you know decades and
+[0:27:14] been known for you know decades and decades so what you have here are a 95%
+[0:27:17] decades so what you have here are a 95% confidence intervals acting as if the
+[0:27:19] confidence intervals acting as if the OLS estimators indeed normal which it
+[0:27:22] OLS estimators indeed normal which it would be if you did have a difference
+[0:27:25] would be if you did have a difference between the two means and on the the
+[0:27:30] between the two means and on the the x-axis you have the size of the batch
+[0:27:33] x-axis you have the size of the batch there's always capital T equal 25 time
+[0:27:35] there's always capital T equal 25 time points and on the y-axis you have this
+[0:27:38] points and on the y-axis you have this signal-to-noise ratio that's Sigma in
+[0:27:41] signal-to-noise ratio that's Sigma in the denominator of the signal to know
+[0:27:43] the denominator of the signal to know this is the error variance on the reward
+[0:27:46] this is the error variance on the reward and so what you see is the under under
+[0:27:49] and so what you see is the under under coverage is the light color and it
+[0:27:52] coverage is the light color and it doesn't really matter what batch size
+[0:27:53] doesn't really matter what batch size you have you can always find a signal to
+[0:27:56] you have you can always find a signal to noise ratio where your conference
+[0:27:58] noise ratio where your conference animals are not going to work well and
+[0:28:00] animals are not going to work well and it's a signal to noise ratio that is
+[0:28:02] it's a signal to noise ratio that is nonzero it's still gonna be one which
+[0:28:05] nonzero it's still gonna be one which your conference cells don't work well so
+[0:28:10] your conference cells don't work well so it's our goal our goal is to take
+[0:28:13] it's our goal our goal is to take advantage of our application setting and
+[0:28:15] advantage of our application setting and that is in our setting we have batches
+[0:28:19] that is in our setting we have batches of size in and each time the other
+[0:28:22] of size in and each time the other characteristic though that occurs in our
+[0:28:25] characteristic though that occurs in our setting is non-stationarity that is and
+[0:28:31] setting is non-stationarity that is and you see some words about that I'm
+[0:28:34] you see some words about that I'm thinking of digital health but this I
+[0:28:36] thinking of digital health but this I expect would occur also in online
+[0:28:38] expect would occur also in online advertisements though the problem is you
+[0:28:41] advertisements though the problem is you don't control the world around the user
+[0:28:44] don't control the world around the user and so there can be other competing ads
+[0:28:46] and so there can be other competing ads competing interventions so the
+[0:28:48] competing interventions so the effectiveness of the actions the
+[0:28:50] effectiveness of the actions the relative effectiveness effectiveness can
+[0:28:53] relative effectiveness effectiveness can I change with time and there's other
+[0:28:55] I change with time and there's other things going on in society you can have
+[0:28:58] things going on in society you can have a pandemic for example all kinds of
+[0:29:01] a pandemic for example all kinds of things can happen and you get
+[0:29:02] things can happen and you get non-stationary so we want whatever we do
+[0:29:05] non-stationary so we want whatever we do to manage that in some way okay so now
+[0:29:09] to manage that in some way okay so now I'm gonna go to my questions slide
+[0:29:13] I'm gonna go to my questions slide thanks Susan so Kenny and mucus has been
+[0:29:17] thanks Susan so Kenny and mucus has been doing a great job in the Q&amp;A so that
+[0:29:19] doing a great job in the Q&amp;A so that there aren't many left one dot which is
+[0:29:22] there aren't many left one dot which is flagged as potentially interesting is a
+[0:29:24] flagged as potentially interesting is a question that Ryan and he asked 35
+[0:29:28] question that Ryan and he asked 35 mispronounced renamed so let me unmute
+[0:29:30] mispronounced renamed so let me unmute you yeah you should get needed I can
+[0:29:39] you yeah you should get needed I can hear it yes yeah all right yeah so I had
+[0:29:43] hear it yes yeah all right yeah so I had a question on the clipping and I was
+[0:29:46] a question on the clipping and I was curious if this clipping and maybe this
+[0:29:48] curious if this clipping and maybe this is just my lack of understanding here
+[0:29:49] is just my lack of understanding here this clipping is done early on in the
+[0:29:52] this clipping is done early on in the experiment so that you're not converging
+[0:29:54] experiment so that you're not converging too quickly when you have like a pretty
+[0:29:57] too quickly when you have like a pretty uninformed prior or does
+[0:30:00] uninformed prior or does do you do this throughout the entire
+[0:30:02] do you do this throughout the entire experiment so even when you are later in
+[0:30:05] experiment so even when you are later in your experiment and you have a pretty
+[0:30:07] your experiment and you have a pretty confident prior distribution and you're
+[0:30:10] confident prior distribution and you're doing your updates do you continue to do
+[0:30:13] doing your updates do you continue to do your clipping on your batches later on
+[0:30:15] your clipping on your batches later on as well or is this just an early thing
+[0:30:18] as well or is this just an early thing to kind of overcome compensate for any
+[0:30:21] to kind of overcome compensate for any early overcorrection yeah so in the
+[0:30:27] early overcorrection yeah so in the paper that's associated with this we
+[0:30:28] paper that's associated with this we allow the clipping to to go away so to
+[0:30:32] allow the clipping to to go away so to dissipate with time which is more
+[0:30:34] dissipate with time which is more consistent with what you just said in
+[0:30:36] consistent with what you just said in real life I'm talking about in digital
+[0:30:40] real life I'm talking about in digital health we don't do that and it's because
+[0:30:45] health we don't do that and it's because there it's thought that some degree of
+[0:30:48] there it's thought that some degree of stochastic City reduces the rate at
+[0:30:51] stochastic City reduces the rate at which people have bicha wait two
+[0:30:54] which people have bicha wait two messages so even a message an action
+[0:30:57] messages so even a message an action that might not be effective every now
+[0:30:59] that might not be effective every now and then having a little bit of
+[0:31:00] and then having a little bit of stochastic stochasticity is more
+[0:31:04] stochastic stochasticity is more engaging there's and there's also a
+[0:31:07] engaging there's and there's also a reason why we have an upper limit to the
+[0:31:09] reason why we have an upper limit to the clipping and at all it's all embedded in
+[0:31:12] clipping and at all it's all embedded in the domain science it comes from that
+[0:31:16] the domain science it comes from that consideration as opposed to a data
+[0:31:18] consideration as opposed to a data science perspective however in the paper
+[0:31:20] science perspective however in the paper we do allow this is your intuition is
+[0:31:23] we do allow this is your intuition is like right on thanks great thanks Thank
+[0:31:28] like right on thanks great thanks Thank You Ryan and Susan you have 15 minutes
+[0:31:31] You Ryan and Susan you have 15 minutes left so I think we'll we won't take any
+[0:31:34] left so I think we'll we won't take any more questions for now and that you go
+[0:31:36] more questions for now and that you go on with your talk okay thank you
+[0:31:40] on with your talk okay thank you okay so what we're gonna do is we're
+[0:31:43] okay so what we're gonna do is we're gonna we're gonna develop batched OLS
+[0:31:46] gonna we're gonna develop batched OLS we're going to take advantage of the
+[0:31:48] we're going to take advantage of the fact that our our we have batch users at
+[0:31:51] fact that our our we have batch users at each time point and so here you see this
+[0:31:56] each time point and so here you see this is going to be the crucial thing that's
+[0:31:58] is going to be the crucial thing that's gonna allow us to get after study
+[0:32:00] gonna allow us to get after study inference and that is here's the
+[0:32:03] inference and that is here's the fraction in a particular batch time T
+[0:32:06] fraction in a particular batch time T batch the fraction of times that action
+[0:32:09] batch the fraction of times that action one is selected over the probability of
+[0:32:13] one is selected over the probability of Salah
+[0:32:14] Salah in action one and we'll be able to show
+[0:32:16] in action one and we'll be able to show we could we show that this converges in
+[0:32:19] we could we show that this converges in probability to one we'll be able to do
+[0:32:21] probability to one we'll be able to do this even though this probability in the
+[0:32:25] this even though this probability in the denominator is not concentrating I at
+[0:32:29] denominator is not concentrating I at the very bottom of the slide I put the
+[0:32:32] the very bottom of the slide I put the condition that one used in classical
+[0:32:36] condition that one used in classical lion ways result and you see the
+[0:32:39] lion ways result and you see the comparison here now we're looking at a
+[0:32:41] comparison here now we're looking at a fraction at the batch level as opposed
+[0:32:44] fraction at the batch level as opposed to the overall fraction across all
+[0:32:45] to the overall fraction across all batches all times and we're not asking
+[0:32:49] batches all times and we're not asking that that the for concentration we don't
+[0:32:53] that that the for concentration we don't need a PI sub T which is constant as it
+[0:32:56] need a PI sub T which is constant as it did in that bottom equation the bottom a
+[0:32:59] did in that bottom equation the bottom a display where a sub n is a constant we
+[0:33:01] display where a sub n is a constant we don't need that anymore and that's good
+[0:33:04] don't need that anymore and that's good that's what's gonna save us it's this
+[0:33:06] that's what's gonna save us it's this recognition so and how does the batched
+[0:33:11] recognition so and how does the batched OLS estimator differ from our usual oil
+[0:33:14] OLS estimator differ from our usual oil assets to me you can see them both the
+[0:33:16] assets to me you can see them both the best OLS estimators just calculate the
+[0:33:19] best OLS estimators just calculate the OLS estimator for every batch separately
+[0:33:22] OLS estimator for every batch separately it's nothing special and so here's the
+[0:33:27] it's nothing special and so here's the theorem for be OLS batched
+[0:33:31] theorem for be OLS batched ordinary least-squares so I wrote the
+[0:33:34] ordinary least-squares so I wrote the simple version where I have fixed
+[0:33:36] simple version where I have fixed clipping but the real version has the
+[0:33:39] clipping but the real version has the clippings the upper bound going to one
+[0:33:42] clippings the upper bound going to one in the lower bound going to zero it's
+[0:33:44] in the lower bound going to zero it's just I wrote it here for clarity I just
+[0:33:46] just I wrote it here for clarity I just for the simple version and you see you
+[0:33:48] for the simple version and you see you get this multivariate normality here and
+[0:33:52] get this multivariate normality here and the limit is independence very
+[0:33:54] the limit is independence very interesting and has to do this more a
+[0:33:55] interesting and has to do this more a martingale type central limit theorem
+[0:33:57] martingale type central limit theorem and what's really cool at least I don't
+[0:34:00] and what's really cool at least I don't know about you guys but what I think is
+[0:34:01] know about you guys but what I think is really cool about this is that the the
+[0:34:05] really cool about this is that the the term and square roots is not settling
+[0:34:09] term and square roots is not settling down it's not like these a bar ones
+[0:34:12] down it's not like these a bar ones these are just the average number of
+[0:34:13] these are just the average number of times you chose action one so that
+[0:34:16] times you chose action one so that fraction is never it's not concentrating
+[0:34:21] fraction is never it's not concentrating so we're multiplying our estimator the
+[0:34:24] so we're multiplying our estimator the difference between our to observe
+[0:34:26] difference between our to observe estimated means - the s - man we're
+[0:34:31] estimated means - the s - man we're multiplying that by something that
+[0:34:32] multiplying that by something that doesn't concentrate and then we get a
+[0:34:35] doesn't concentrate and then we get a centralized there is very interesting oh
+[0:34:39] centralized there is very interesting oh we also do this in the contextual bat
+[0:34:41] we also do this in the contextual bat bandit setting you can see that in the
+[0:34:43] bandit setting you can see that in the archive paper here's our test statistic
+[0:34:46] archive paper here's our test statistic it's just a sum of the test statistics
+[0:34:49] it's just a sum of the test statistics one per batch so there's T capital T
+[0:34:52] one per batch so there's T capital T batches and you get a sum across the
+[0:34:55] batches and you get a sum across the batches and this is in the stationery
+[0:34:57] batches and this is in the stationery case the station I just written the null
+[0:35:01] case the station I just written the null and the alternative hypothesis in the
+[0:35:03] and the alternative hypothesis in the stationery in case that's why there's no
+[0:35:05] stationery in case that's why there's no subscript of T so let me show you some
+[0:35:08] subscript of T so let me show you some results okay I'm not going to take
+[0:35:12] results okay I'm not going to take questions because I only have ten more
+[0:35:14] questions because I only have ten more minutes so the two methods that I'm
+[0:35:18] minutes so the two methods that I'm going to compare to these are two recent
+[0:35:20] going to compare to these are two recent papers this fund a and a diamond at all
+[0:35:25] papers this fund a and a diamond at all and we're gonna compare all the batch
+[0:35:28] and we're gonna compare all the batch OLS the test statistic based on that
+[0:35:31] OLS the test statistic based on that show us - these two methods and what I
+[0:35:34] show us - these two methods and what I just I got to be really upfront with you
+[0:35:36] just I got to be really upfront with you not neither one of these methods we're
+[0:35:38] not neither one of these methods we're going to compare in the stationary
+[0:35:39] going to compare in the stationary setting but then we're gonna compare it
+[0:35:40] setting but then we're gonna compare it in the non stationary setting - and of
+[0:35:42] in the non stationary setting - and of course neither one of these methods were
+[0:35:44] course neither one of these methods were made were designed for the non
+[0:35:45] made were designed for the non stationary setting so one doesn't expect
+[0:35:47] stationary setting so one doesn't expect them to perform all that well given that
+[0:35:50] them to perform all that well given that they weren't designed for that setting
+[0:35:52] they weren't designed for that setting so here's the stationary setting so
+[0:35:56] so here's the stationary setting so let's look at this this slide on the
+[0:35:58] let's look at this this slide on the left hand side I mean the graph the
+[0:36:00] left hand side I mean the graph the figure on the left hand side you see the
+[0:36:03] figure on the left hand side you see the number of there okay so there's 25
+[0:36:05] number of there okay so there's 25 individuals per batch here and at each
+[0:36:10] individuals per batch here and at each point on the x axis that's where you've
+[0:36:12] point on the x axis that's where you've been to study with that many batches at
+[0:36:15] been to study with that many batches at most 25 batches everything is really
+[0:36:20] most 25 batches everything is really simple normal rewards and you see the
+[0:36:24] simple normal rewards and you see the different methods standard OLS as you
+[0:36:26] different methods standard OLS as you might expect has elevated type 1 error
+[0:36:30] might expect has elevated type 1 error rate just using Lion ways asymptotic
+[0:36:36] rate just using Lion ways asymptotic normality results here's the
+[0:36:40] normality results here's the WD correlated that's in green it looks
+[0:36:42] WD correlated that's in green it looks great in terms of type 1 error raid
+[0:36:44] great in terms of type 1 error raid bulbs also looks great in terms of the
+[0:36:47] bulbs also looks great in terms of the type 1 error rate they're both a
+[0:36:48] type 1 error rate they're both a phenomenal and then this is the Haddad a
+[0:36:52] phenomenal and then this is the Haddad a tall estimator it has some problems with
+[0:36:56] tall estimator it has some problems with the type 1 error rate for smaller
+[0:36:59] the type 1 error rate for smaller numbers of batches say up to maybe 12 or
+[0:37:04] numbers of batches say up to maybe 12 or 13 batches so then to compare the power
+[0:37:08] 13 batches so then to compare the power what we did was we adjusted the critical
+[0:37:12] what we did was we adjusted the critical values for both OLS and AI PW using
+[0:37:20] values for both OLS and AI PW using simulations so that they're type 1 error
+[0:37:23] simulations so that they're type 1 error rates we just changed their critical
+[0:37:24] rates we just changed their critical value so their type 1 error rate would
+[0:37:26] value so their type 1 error rate would be at most point O 5 so we're just we're
+[0:37:30] be at most point O 5 so we're just we're making them fees we're if the type 1
+[0:37:33] making them fees we're if the type 1 error rate is greater in point oh five
+[0:37:34] error rate is greater in point oh five these are not feasible solutions so we
+[0:37:36] these are not feasible solutions so we just made them feasible and then that
+[0:37:38] just made them feasible and then that means you have to have a simulation
+[0:37:40] means you have to have a simulation model and you have to know a lot about
+[0:37:41] model and you have to know a lot about how your data's being generated but we
+[0:37:44] how your data's being generated but we did we have that here so we did it and
+[0:37:46] did we have that here so we did it and here you see a comparison of the power
+[0:37:55] the WD correlated it doesn't do so hot with power and then you see BLS and the
+[0:37:58] with power and then you see BLS and the Haddad at all work has a nicer power and
+[0:38:01] Haddad at all work has a nicer power and quite nicely OLS has the greatest power
+[0:38:04] quite nicely OLS has the greatest power of course you've got to be able to
+[0:38:06] of course you've got to be able to adjust the critical value to to obtain
+[0:38:08] adjust the critical value to to obtain this power it's quite still quite nice
+[0:38:12] this power it's quite still quite nice so now we look at a non-stationary
+[0:38:15] so now we look at a non-stationary setting this is where only the baseline
+[0:38:18] setting this is where only the baseline during the two means are non stationary
+[0:38:22] during the two means are non stationary you see the figure on the left hand side
+[0:38:24] you see the figure on the left hand side under the null so they're both
+[0:38:27] under the null so they're both decreasing with time the mean reward
+[0:38:31] decreasing with time the mean reward associated with those two arms but their
+[0:38:33] associated with those two arms but their difference is the same and so that's the
+[0:38:37] difference is the same and so that's the right that's the figure on the right
+[0:38:38] right that's the figure on the right hand side ok and you see the null and
+[0:38:42] hand side ok and you see the null and the alternative hypothesis at the bottom
+[0:38:45] the alternative hypothesis at the bottom of the slide in the paper you can find
+[0:38:50] of the slide in the paper you can find settings when even the treatment it's
+[0:38:52] settings when even the treatment it's that effect itself
+[0:38:54] that effect itself changing with time but here I'm just
+[0:38:55] changing with time but here I'm just gonna focus on constant treatment effect
+[0:38:58] gonna focus on constant treatment effect yet the baseline is changing with time
+[0:39:00] yet the baseline is changing with time and so on the figure on the left hand
+[0:39:05] and so on the figure on the left hand side you can see the type 1 error rate
+[0:39:08] side you can see the type 1 error rate now I just want to remind you
+[0:39:11] now I just want to remind you neither the Deshpande method nor the
+[0:39:15] neither the Deshpande method nor the Dodd paper were developed for non
+[0:39:17] Dodd paper were developed for non stationary and indeed things just don't
+[0:39:21] stationary and indeed things just don't go well in terms of type 1 error rate
+[0:39:24] go well in terms of type 1 error rate and even once you adjust I mean well
+[0:39:28] and even once you adjust I mean well except with only this green is a is a
+[0:39:31] except with only this green is a is a non feasible solution only the WD
+[0:39:33] non feasible solution only the WD correlated for later large batches
+[0:39:36] correlated for later large batches norge members of matches is so that's
+[0:39:39] norge members of matches is so that's the only one that needs to be adjusted
+[0:39:40] the only one that needs to be adjusted to be a feasible solution but now you go
+[0:39:43] to be a feasible solution but now you go to the power and the powers does not go
+[0:39:48] to the power and the powers does not go so well either
+[0:39:55] that's OLS does better as it was designed to so all I have left is the
+[0:40:01] designed to so all I have left is the discussion which is two slides so I
+[0:40:04] discussion which is two slides so I figure I'll do my discussion and they
+[0:40:06] figure I'll do my discussion and they will have questions because that way
+[0:40:08] will have questions because that way we'll be right on time
+[0:40:16] so what we have here is a setting where there's non uniform convergence of stand
+[0:40:18] there's non uniform convergence of stand of a standard statistical estimator and
+[0:40:21] of a standard statistical estimator and if you're assuming normal rewards we're
+[0:40:24] if you're assuming normal rewards we're talking about the MLE when you use it on
+[0:40:27] talking about the MLE when you use it on data collected via a band a and this
+[0:40:31] data collected via a band a and this happens even when you're careful and
+[0:40:34] happens even when you're careful and bound your to action selections your
+[0:40:37] bound your to action selections your treatment selection probabilities away
+[0:40:39] treatment selection probabilities away from zero and one what it reminds me is
+[0:40:43] from zero and one what it reminds me is that even an incredibly apparently
+[0:40:46] that even an incredibly apparently simple problem can be non regular
+[0:40:49] simple problem can be non regular remember all non regularity is when
+[0:40:53] remember all non regularity is when occurs when your estimator is in some
+[0:40:56] occurs when your estimator is in some way a non smooth function of the
+[0:40:58] way a non smooth function of the underlying data and that's what's
+[0:41:00] underlying data and that's what's happening with these random these
+[0:41:01] happening with these random these posterior probabilities when there's no
+[0:41:03] posterior probabilities when there's no treatment effect it's it's it's like a
+[0:41:05] treatment effect it's it's it's like a non smooth function
+[0:41:07] non smooth function it's akin to that and as a result you
+[0:41:11] it's akin to that and as a result you get these inaccurate assessments of
+[0:41:14] get these inaccurate assessments of confidence and the thing that concerns
+[0:41:16] confidence and the thing that concerns me most and I think it's most important
+[0:41:19] me most and I think it's most important for the world all the applications that
+[0:41:21] for the world all the applications that I work on it's what price does the
+[0:41:24] I work on it's what price does the scientific team have to pay if we want
+[0:41:27] scientific team have to pay if we want to dynamically personalize these digital
+[0:41:30] to dynamically personalize these digital interventions to people we end up with
+[0:41:35] interventions to people we end up with these non concentrating propensity
+[0:41:38] these non concentrating propensity scores now hopefully our treatment
+[0:41:43] scores now hopefully our treatment effects are not zero but our treatment
+[0:41:45] effects are not zero but our treatment effects are not large either so we have
+[0:41:47] effects are not large either so we have to deal with this so if your day is
+[0:41:53] to deal with this so if your day is collected via that via batch bandits
+[0:41:56] collected via that via batch bandits then the method that we develop provides
+[0:42:00] then the method that we develop provides a way for you to conduct after study
+[0:42:02] a way for you to conduct after study inference for a whole class you just use
+[0:42:05] inference for a whole class you just use that multivariate normality result you
+[0:42:07] that multivariate normality result you can produce a whole class of elements
+[0:42:08] can produce a whole class of elements that you will look at and as we saw I
+[0:42:12] that you will look at and as we saw I gave you some indication of its
+[0:42:13] gave you some indication of its robustness to non-stationarity
+[0:42:16] robustness to non-stationarity thanks so much
+[0:42:25] tastic thank you very much for it is for this great talk and so I think in terms
+[0:42:27] this great talk and so I think in terms of timing it makes sense if we first
+[0:42:29] of timing it makes sense if we first move on to the discussion and then if we
+[0:42:31] move on to the discussion and then if we have some time left then we take some
+[0:42:33] have some time left then we take some more questions from the audience so
+[0:42:36] more questions from the audience so please if you have any additional
+[0:42:38] please if you have any additional questions put them in Q&amp;A and we will
+[0:42:41] questions put them in Q&amp;A and we will now switch over to - Stefan lager Stefan
+[0:42:46] now switch over to - Stefan lager Stefan bara can you turn on your camera and
+[0:43:03] yeah all right all right you can see ya also thank thanks a lot thanks and
+[0:43:07] also thank thanks a lot thanks and reminding me to give the discussion
+[0:43:08] reminding me to give the discussion thanks everyone for being here and also
+[0:43:11] thanks everyone for being here and also thank Susan for the very nice talk I
+[0:43:15] thank Susan for the very nice talk I really enjoyed it
+[0:43:18] really enjoyed it so this citizens talk falls into this
+[0:43:21] so this citizens talk falls into this broad category of inference after
+[0:43:25] broad category of inference after adaptive data collection or a banded
+[0:43:27] adaptive data collection or a banded data and this is somehow a problem it
+[0:43:32] data and this is somehow a problem it always seems easier than it is but then
+[0:43:35] always seems easier than it is but then the more you think about it the more
+[0:43:36] the more you think about it the more just kind of seems terrible and I I like
+[0:43:40] just kind of seems terrible and I I like how Susan talked about it in the talk
+[0:43:42] how Susan talked about it in the talk how your first intuition is that when
+[0:43:45] how your first intuition is that when you're running a bandit algorithm you're
+[0:43:47] you're running a bandit algorithm you're choosing randomization probabilities
+[0:43:48] choosing randomization probabilities yourself this is like a randomized trial
+[0:43:51] yourself this is like a randomized trial there's no kind of manoa Dean comparing
+[0:43:57] there's no kind of manoa Dean comparing confounding what could possibly go wrong
+[0:44:00] confounding what could possibly go wrong and yet it's not very hard to come up
+[0:44:04] and yet it's not very hard to come up with examples that could where things
+[0:44:05] with examples that could where things could go wrong and just one as one
+[0:44:08] could go wrong and just one as one example of this kind of thing that kind
+[0:44:11] example of this kind of thing that kind of this was the example of convincing
+[0:44:13] of this was the example of convincing hey that's kind of basic things just
+[0:44:16] hey that's kind of basic things just can't can't work with this kind of data
+[0:44:19] can't can't work with this kind of data let's say we have a super simple to
+[0:44:22] let's say we have a super simple to batch one arm experiment ah
+[0:44:25] batch one arm experiment ah so let's say we want to do something
+[0:44:26] so let's say we want to do something like develop a new coronavirus vaccine
+[0:44:30] like develop a new coronavirus vaccine we have a clear threshold of what it
+[0:44:33] we have a clear threshold of what it means to work or not work someone has a
+[0:44:35] means to work or not work someone has a VAX
+[0:44:36] VAX candidate and we just want to see
+[0:44:37] candidate and we just want to see whether it works and what we're gonna
+[0:44:39] whether it works and what we're gonna imagine doing that we have some outcome
+[0:44:42] imagine doing that we have some outcome measure Q and we're gonna say that the
+[0:44:44] measure Q and we're gonna say that the vaccine works if Q is bigger than zero
+[0:44:46] vaccine works if Q is bigger than zero and what we're gonna do is we're gonna
+[0:44:47] and what we're gonna do is we're gonna start by writing a smaller pilot study
+[0:44:49] start by writing a smaller pilot study with n1 samples we're gonna say that Q
+[0:44:51] with n1 samples we're gonna say that Q hat one is the sample average of the
+[0:44:53] hat one is the sample average of the outcome measure for the pilot study then
+[0:44:56] outcome measure for the pilot study then if Q hat one is bigger than zero maybe
+[0:44:59] if Q hat one is bigger than zero maybe we're gonna say it's promising it looks
+[0:45:01] we're gonna say it's promising it looks like maybe Q is bigger than zero two so
+[0:45:03] like maybe Q is bigger than zero two so then we're gonna run a bigger second
+[0:45:05] then we're gonna run a bigger second batch with ten and one samples and if Q
+[0:45:08] batch with ten and one samples and if Q 1 Q hat one is less than zero so that he
+[0:45:11] 1 Q hat one is less than zero so that he doesn't really look promising we're
+[0:45:12] doesn't really look promising we're gonna have the second batch be smaller
+[0:45:14] gonna have the second batch be smaller only gonna have the second batch be the
+[0:45:16] only gonna have the second batch be the same same size as the first punch and
+[0:45:18] same same size as the first punch and I'm not saying people would actually run
+[0:45:20] I'm not saying people would actually run a study like this but I think is kind of
+[0:45:21] a study like this but I think is kind of a simple caricature of something people
+[0:45:23] a simple caricature of something people would actually run the idea here is that
+[0:45:25] would actually run the idea here is that the first batch is exploratory the
+[0:45:27] the first batch is exploratory the second batch is confirmatory after you
+[0:45:29] second batch is confirmatory after you collect this data you'd want a
+[0:45:32] collect this data you'd want a reasonable estimate of the overall
+[0:45:34] reasonable estimate of the overall effect size Q and so you can test this
+[0:45:36] effect size Q and so you can test this bigger than zero or not and here's where
+[0:45:39] bigger than zero or not and here's where you run into problems the first study is
+[0:45:42] you run into problems the first study is a big round of my study you got an
+[0:45:44] a big round of my study you got an estimate Q hat from it it's roughly
+[0:45:46] estimate Q hat from it it's roughly normal Oh Q hat 2 is the estimate you
+[0:45:52] normal Oh Q hat 2 is the estimate you get out of a large randomized data or
+[0:45:56] get out of a large randomized data or early large study it should be roughly
+[0:45:58] early large study it should be roughly normal but if you take the average of Q
+[0:46:00] normal but if you take the average of Q hat 1inc you have to it's just not
+[0:46:02] hat 1inc you have to it's just not normal because the sample size is random
+[0:46:04] normal because the sample size is random and to see this in action here's a
+[0:46:08] and to see this in action here's a simulation with this design under the
+[0:46:10] simulation with this design under the assumption that the true Q is zero so
+[0:46:12] assumption that the true Q is zero so this is kind of like these an emphasize
+[0:46:15] this is kind of like these an emphasize things get hard without the data
+[0:46:17] things get hard without the data collection when you're right at the
+[0:46:19] collection when you're right at the boundary between having effects are not
+[0:46:20] boundary between having effects are not having effects and if we do this if the
+[0:46:25] having effects and if we do this if the true Q is zero then the probability that
+[0:46:27] true Q is zero then the probability that the first study succeeds that you pass
+[0:46:29] the first study succeeds that you pass the pilot Q hat one is bigger than zero
+[0:46:31] the pilot Q hat one is bigger than zero it's roughly 50% on the left and red you
+[0:46:35] it's roughly 50% on the left and red you see a histogram of kind of what your
+[0:46:38] see a histogram of kind of what your final Q hat looks like on the event
+[0:46:40] final Q hat looks like on the event where the first pilot study failed it's
+[0:46:43] where the first pilot study failed it's negative as you'd expect because Q hat
+[0:46:44] negative as you'd expect because Q hat one is negative we know that and it's
+[0:46:47] one is negative we know that and it's kind of spread out because the second
+[0:46:48] kind of spread out because the second study is smaller
+[0:46:50] study is smaller first half failed and then on the right
+[0:46:52] first half failed and then on the right in green you see a histogram of the
+[0:46:54] in green you see a histogram of the distribution of Q hat conditional on the
+[0:46:57] distribution of Q hat conditional on the first pilot study passing now it's
+[0:46:59] first pilot study passing now it's positive as you'd expect because Q hat
+[0:47:01] positive as you'd expect because Q hat one is positive it's also narrower
+[0:47:03] one is positive it's also narrower because I'm event where Q hat one looked
+[0:47:06] because I'm event where Q hat one looked promising you collected more data so we
+[0:47:08] promising you collected more data so we have less noise so then what's the open
+[0:47:12] have less noise so then what's the open overall distribution Q hat well it's
+[0:47:14] overall distribution Q hat well it's just the average of these two
+[0:47:15] just the average of these two distributions you get the thing in blue
+[0:47:17] distributions you get the thing in blue and the lower right corner
+[0:47:19] and the lower right corner it's obviously normal so this just shows
+[0:47:22] it's obviously normal so this just shows you can pool two perfectly fine normal
+[0:47:25] you can pool two perfectly fine normal experiments and you get something not
+[0:47:28] experiments and you get something not normal this is kind of extremely
+[0:47:31] normal this is kind of extremely frustrating but at some point I guess
+[0:47:33] frustrating but at some point I guess you just have to deal with it so what
+[0:47:36] you just have to deal with it so what can you do and there are several
+[0:47:37] can you do and there are several approaches that have been proposed in
+[0:47:39] approaches that have been proposed in the literature the most classical one is
+[0:47:42] the literature the most classical one is just something like essentially if
+[0:47:44] just something like essentially if you're working with bandit data maybe
+[0:47:46] you're working with bandit data maybe relax there's more to statistics than
+[0:47:49] relax there's more to statistics than proving central limit theorems and then
+[0:47:51] proving central limit theorems and then giving gaps and confidence intervals so
+[0:47:54] giving gaps and confidence intervals so there's all this work on kind of
+[0:47:55] there's all this work on kind of competeing sequences like the law of the
+[0:47:57] competeing sequences like the law of the litter iterated log based on results
+[0:47:58] litter iterated log based on results like the log ladder I did logarithm that
+[0:48:00] like the log ladder I did logarithm that try to kind of provide inference for
+[0:48:02] try to kind of provide inference for adaptive data collection kind of in a
+[0:48:05] adaptive data collection kind of in a framework that maybe apply as natively
+[0:48:07] framework that maybe apply as natively to that setting to references there on
+[0:48:09] to that setting to references there on an old one and a new one this is kind of
+[0:48:13] an old one and a new one this is kind of a classical literature but in some
+[0:48:16] a classical literature but in some settings people really like kind of
+[0:48:19] settings people really like kind of asymptotically normal test statistics
+[0:48:21] asymptotically normal test statistics and p-values and stuff like that that
+[0:48:22] and p-values and stuff like that that feel familiar and there's been some more
+[0:48:26] feel familiar and there's been some more recent work kind of in this direction so
+[0:48:29] recent work kind of in this direction so this second bullet here is about
+[0:48:32] this second bullet here is about strategies that use sample adaptive
+[0:48:34] strategies that use sample adaptive weighting schemes the main result here
+[0:48:37] weighting schemes the main result here is that if you just have Q hat one and Q
+[0:48:39] is that if you just have Q hat one and Q have two estimates of Q from different
+[0:48:42] have two estimates of Q from different batches if you take their straight
+[0:48:43] batches if you take their straight average that's generally not going to be
+[0:48:46] average that's generally not going to be normal but it's possible to take pick
+[0:48:48] normal but it's possible to take pick random data adaptive ways so that's kind
+[0:48:51] random data adaptive ways so that's kind of when you take this weighted average
+[0:48:53] of when you take this weighted average of Q hats with random weights then you
+[0:48:55] of Q hats with random weights then you get a Q hat gamma that actually does
+[0:48:58] get a Q hat gamma that actually does satisfy a student's by central limit
+[0:49:01] satisfy a student's by central limit theorem so you can get Gaussian
+[0:49:02] theorem so you can get Gaussian inference
+[0:49:03] inference so that's one thing and then Susan's
+[0:49:06] so that's one thing and then Susan's talk today has another approach cell
+[0:49:09] talk today has another approach cell which they're kind of other the way I
+[0:49:13] which they're kind of other the way I read this is more look maybe you
+[0:49:15] read this is more look maybe you shouldn't focus so much on kind of
+[0:49:18] shouldn't focus so much on kind of giving a single estimate of what this
+[0:49:20] giving a single estimate of what this overall target q as just kind of you
+[0:49:25] overall target q as just kind of you have data in many batches within each
+[0:49:27] have data in many batches within each batch you can prove a central limit them
+[0:49:29] batch you can prove a central limit them properly normalized so just kind of
+[0:49:32] properly normalized so just kind of stuff start by proving central limit
+[0:49:34] stuff start by proving central limit theorem for different batches and then
+[0:49:35] theorem for different batches and then aggregate that rather than trying to go
+[0:49:38] aggregate that rather than trying to go for the summary directly um and of
+[0:49:41] for the summary directly um and of course this is not an exhaustive list
+[0:49:42] course this is not an exhaustive list but this is kind of some approaches that
+[0:49:44] but this is kind of some approaches that are out there and I guess I'm just
+[0:49:47] are out there and I guess I'm just reading this paper with a striking to me
+[0:49:49] reading this paper with a striking to me is that in superficially is approach two
+[0:49:52] is that in superficially is approach two and three look quite different but still
+[0:49:56] and three look quite different but still both of them essentially what they do is
+[0:49:58] both of them essentially what they do is they reject a straight averaging of the
+[0:50:01] they reject a straight averaging of the Q hat T's because that's not Gauss they
+[0:50:04] Q hat T's because that's not Gauss they try to aggregate them scale them and so
+[0:50:06] try to aggregate them scale them and so forth in a different way and then see
+[0:50:10] forth in a different way and then see what can you get by kind of scaling
+[0:50:11] what can you get by kind of scaling these things differently and you get
+[0:50:14] these things differently and you get normal again that something kind of you
+[0:50:16] normal again that something kind of you have to ask is there relationship and
+[0:50:18] have to ask is there relationship and just to kind of zoom in a little bit
+[0:50:21] just to kind of zoom in a little bit more I'll focus on the stationery case
+[0:50:24] more I'll focus on the stationery case here in which case um you you want to go
+[0:50:28] here in which case um you you want to go from just kind of having a separate Q
+[0:50:30] from just kind of having a separate Q hat T for each batch to having a single
+[0:50:32] hat T for each batch to having a single summary statistic that lets you test
+[0:50:34] summary statistic that lets you test kind of for specific value of Q naught
+[0:50:38] kind of for specific value of Q naught and what Susan proposed in her talk was
+[0:50:42] and what Susan proposed in her talk was essentially if you have these different
+[0:50:44] essentially if you have these different as some part of the normal test
+[0:50:46] as some part of the normal test statistics for each batch then just take
+[0:50:49] statistics for each batch then just take if these are all asymptotically normal
+[0:50:51] if these are all asymptotically normal on their own then just take their
+[0:50:54] on their own then just take their average and this is also going to be
+[0:50:56] average and this is also going to be asymptotically normal and then this
+[0:50:59] asymptotically normal and then this function Z Q naught is going to be kind
+[0:51:01] function Z Q naught is going to be kind of a one dimensional test statistic the
+[0:51:02] of a one dimensional test statistic the testing the null Q equals Q naught so so
+[0:51:08] testing the null Q equals Q naught so so this is great
+[0:51:09] this is great it's an asymptotic normal test statistic
+[0:51:10] it's an asymptotic normal test statistic it can be used with classical inference
+[0:51:12] it can be used with classical inference about Q this is nice is there anything
+[0:51:16] about Q this is nice is there anything that we could complain about I think
+[0:51:20] that we could complain about I think here's brick it's interesting we end up
+[0:51:24] here's brick it's interesting we end up waiting the difference between Q hat t
+[0:51:26] waiting the difference between Q hat t minus Q naught by square root NT and
+[0:51:29] minus Q naught by square root NT and this is okay but if you kind of
+[0:51:33] this is okay but if you kind of typically when we aggregate the
+[0:51:35] typically when we aggregate the estimators we know that the kind of
+[0:51:36] estimators we know that the kind of optimal way to aggregate estimators is
+[0:51:39] optimal way to aggregate estimators is weighting them by its precision
+[0:51:40] weighting them by its precision weighting which here would involve
+[0:51:41] weighting which here would involve waiting by M G naught square root it so
+[0:51:45] waiting by M G naught square root it so maybe it feels like very West some price
+[0:51:47] maybe it feels like very West some price to pay for asymptotic normality here
+[0:51:49] to pay for asymptotic normality here we're not waiting these estimators by
+[0:51:51] we're not waiting these estimators by the thing we would have wanted to wait
+[0:51:52] the thing we would have wanted to wait by if you optimize power but then of
+[0:51:56] by if you optimize power but then of course maybe it also is feels like they
+[0:51:58] course maybe it also is feels like they were there's some arbitrariness and just
+[0:52:00] were there's some arbitrariness and just kind of pooling these kind of different
+[0:52:03] kind of pooling these kind of different bachelors test statistics by taking
+[0:52:05] bachelors test statistics by taking their average you could actually pick
+[0:52:07] their average you could actually pick any deterministic weights kind of tell
+[0:52:09] any deterministic weights kind of tell I'm gonna give more weight for the first
+[0:52:11] I'm gonna give more weight for the first test statistic less what's the second
+[0:52:13] test statistic less what's the second test statistic anything like that though
+[0:52:15] test statistic anything like that though also satisfy central limit theorem and
+[0:52:17] also satisfy central limit theorem and you could try thinking about wet our
+[0:52:20] you could try thinking about wet our weights that kind of optimize for power
+[0:52:23] weights that kind of optimize for power and in this kind of aggregated test
+[0:52:26] and in this kind of aggregated test statistic Z gamma and kind of issue if
+[0:52:30] statistic Z gamma and kind of issue if you go down this line of reasoning and
+[0:52:34] you go down this line of reasoning and you you kind of ask yourself the
+[0:52:38] you you kind of ask yourself the question how can i optimize power and
+[0:52:40] question how can i optimize power and I'm in a heuristic lee optimize power
+[0:52:42] I'm in a heuristic lee optimize power subject to kind of
+[0:52:45] subject to kind of a constraint that the sum of the gamma
+[0:52:46] a constraint that the sum of the gamma squares is a specific thing so I don't
+[0:52:49] squares is a specific thing so I don't kind of get a mixture of gaussians
+[0:52:50] kind of get a mixture of gaussians phenomenon and that kind of gamma t can
+[0:52:54] phenomenon and that kind of gamma t can only get depending on past data so I
+[0:52:57] only get depending on past data so I kind of can't can't cheat ah then it
+[0:53:02] kind of can't can't cheat ah then it turns out that kind of this line of
+[0:53:04] turns out that kind of this line of reasoning if you push it you you get to
+[0:53:07] reasoning if you push it you you get to essentially and this is a very different
+[0:53:08] essentially and this is a very different representation but you you get to
+[0:53:11] representation but you you get to essentially the same class of what this
+[0:53:15] essentially the same class of what this harada del paper called the variance
+[0:53:16] harada del paper called the variance stabilizing test statistics a purple
+[0:53:20] stabilizing test statistics a purple weighted averaging this is the kind of
+[0:53:21] weighted averaging this is the kind of strategy to what talked about earlier
+[0:53:23] strategy to what talked about earlier and I doubt it all what they referred to
+[0:53:26] and I doubt it all what they referred to as this kind of test statistic from
+[0:53:29] as this kind of test statistic from Susan's talk they refer to that as the
+[0:53:31] Susan's talk they refer to that as the constant allocation strategy so of
+[0:53:34] constant allocation strategy so of course this is kind of the connection
+[0:53:37] course this is kind of the connection isn't kind of you can't just take with
+[0:53:39] isn't kind of you can't just take with the action in the paper you need to kind
+[0:53:41] the action in the paper you need to kind of adapt the results of the setting but
+[0:53:43] of adapt the results of the setting but what I thought was very interesting is
+[0:53:45] what I thought was very interesting is kind of if you think about how do you
+[0:53:47] kind of if you think about how do you optimize power in the pool test
+[0:53:49] optimize power in the pool test statistics you see in Susan's talk you
+[0:53:51] statistics you see in Susan's talk you land on kind of this this other thing
+[0:53:53] land on kind of this this other thing that people had come up with kind of
+[0:53:55] that people had come up with kind of from a very different path so just I
+[0:53:58] from a very different path so just I think I'm out of time so I just want to
+[0:53:59] think I'm out of time so I just want to close by saying batched experiments are
+[0:54:03] close by saying batched experiments are kind of a very important type of
+[0:54:04] kind of a very important type of adaptive experiment the Jang gents and I
+[0:54:08] adaptive experiment the Jang gents and I Murphy paper I it I found it very
+[0:54:12] Murphy paper I it I found it very helpful in understanding this problem
+[0:54:14] helpful in understanding this problem better and then if you have batched
+[0:54:15] better and then if you have batched experiments just study each batch on its
+[0:54:18] experiments just study each batch on its own prove the central limit theorem for
+[0:54:19] own prove the central limit theorem for each batch then pull those and you can
+[0:54:22] each batch then pull those and you can do a lot of stuff this way it seems to
+[0:54:25] do a lot of stuff this way it seems to be very flexible and promising and
+[0:54:28] be very flexible and promising and something that I was very interesting to
+[0:54:31] something that I was very interesting to interested to realize I'm reading
+[0:54:33] interested to realize I'm reading through this is it actually if you kind
+[0:54:35] through this is it actually if you kind of follow the language and I Murphy
+[0:54:37] of follow the language and I Murphy paradigm and try to optimize power then
+[0:54:40] paradigm and try to optimize power then you you you kind of get by a very
+[0:54:43] you you you kind of get by a very different route to the type of test
+[0:54:44] different route to the type of test statistics that kind of underline DeLuca
+[0:54:47] statistics that kind of underline DeLuca and her not at all I've had been looking
+[0:54:49] and her not at all I've had been looking at from kind of a very different
+[0:54:50] at from kind of a very different perspective so so I thought this was
+[0:54:53] perspective so so I thought this was kind of at least to me this was
+[0:54:55] kind of at least to me this was encouraging to see that maybe maybe the
+[0:54:57] encouraging to see that maybe maybe the community we're doing something me
+[0:54:59] community we're doing something me and that kind of different ways of
+[0:55:01] and that kind of different ways of thinking about the problem lead us is
+[0:55:03] thinking about the problem lead us is similar places but of course a natural
+[0:55:07] similar places but of course a natural full of corollary as if there are all
+[0:55:08] full of corollary as if there are all these connections then clearly there's
+[0:55:10] these connections then clearly there's got to be more stuff and deeper results
+[0:55:12] got to be more stuff and deeper results to say here and what are these results I
+[0:55:14] to say here and what are these results I guess we all have a lot of birth to do
+[0:55:17] guess we all have a lot of birth to do there anyways that's all I had and
+[0:55:21] there anyways that's all I had and thanks again Susan for the grants talk
+[0:55:24] thanks again Susan for the grants talk all right fantastic Thank You Stephan
+[0:55:28] all right fantastic Thank You Stephan Susan do you want to respond quickly
+[0:55:32] Susan do you want to respond quickly perhaps I'm more bored with Stephan um
+[0:55:36] perhaps I'm more bored with Stephan um the real issue I think is you know we
+[0:55:41] the real issue I think is you know we run one of these studies then afterwards
+[0:55:43] run one of these studies then afterwards you have all these guys who want to do a
+[0:55:45] you have all these guys who want to do a whole variety of standard statistical
+[0:55:48] whole variety of standard statistical analyses you know I don't know
+[0:55:51] analyses you know I don't know mediational analyses you know all kinds
+[0:55:54] mediational analyses you know all kinds of things how do you maybe I can view
+[0:55:58] of things how do you maybe I can view them all as sort of method of moments
+[0:55:59] them all as sort of method of moments analyses how do we how do we bring what
+[0:56:04] analyses how do we how do we bring what Stephan is speaking about these various
+[0:56:07] Stephan is speaking about these various different ways to accommodate the non
+[0:56:10] different ways to accommodate the non concentrating probabilities and allow
+[0:56:14] concentrating probabilities and allow all these investigators to be able to do
+[0:56:17] all these investigators to be able to do a whole variety of method of moments
+[0:56:19] a whole variety of method of moments estimators maybe the mediation analyses
+[0:56:22] estimators maybe the mediation analyses because definitely that's what these
+[0:56:24] because definitely that's what these guys want to do what's up
+[0:56:34] all right fantastic thank you I think now it's it's time to wrap up so one
+[0:56:38] now it's it's time to wrap up so one second
+[0:56:52] yeah thank you very much Susan for the fantastic talk thank you also to Kelly
+[0:56:54] fantastic talk thank you also to Kelly Zhang and Lucas Johnson for for rocking
+[0:56:57] Zhang and Lucas Johnson for for rocking Q&amp;A today it was very nice and also
+[0:57:02] Q&amp;A today it was very nice and also fantastic thanks Stefan for a discussion
+[0:57:05] fantastic thanks Stefan for a discussion next week we will have Yasu from
+[0:57:09] next week we will have Yasu from linkedin speak about causal inference
+[0:57:11] linkedin speak about causal inference challenges in industry experiences at
+[0:57:15] challenges in industry experiences at LinkedIn we're very excited about that
+[0:57:18] LinkedIn we're very excited about that talk and we hope we'll see you all there
+[0:57:20] talk and we hope we'll see you all there thank you all for coming and I hope you
+[0:57:23] thank you all for coming and I hope you all stay safe thank you

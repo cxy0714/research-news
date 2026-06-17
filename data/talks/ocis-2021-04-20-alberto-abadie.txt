@@ -1,0 +1,1933 @@
+[0:00:04] Welcome to the online causal inference seminar. Today, we're excited to have
+[0:00:06] seminar. Today, we're excited to have Alberto Abadie from MIT talk about the
+[0:00:09] Alberto Abadie from MIT talk about the penalized synthetic control estimator
+[0:00:11] penalized synthetic control estimator for disaggregated data.
+[0:00:13] for disaggregated data. Uh one of the collaborators is is in Q&amp;A
+[0:00:15] Uh one of the collaborators is is in Q&amp;A today, so feel free to to submit your
+[0:00:18] today, so feel free to to submit your questions. Also, Alberto will stop from
+[0:00:20] questions. Also, Alberto will stop from time to time to take questions from the
+[0:00:22] time to time to take questions from the audience. If you choose to participate,
+[0:00:24] audience. If you choose to participate, please keep in mind that the talk will
+[0:00:26] please keep in mind that the talk will be recorded. After the talk, we'll have
+[0:00:28] be recorded. After the talk, we'll have a discussion by Stefan Wager.
+[0:00:31] a discussion by Stefan Wager. Questions today will be handled by
+[0:00:32] Questions today will be handled by Michael, so I'm now switching over
+[0:00:35] Michael, so I'm now switching over to him.
+[0:00:39] Uh thanks. Uh thanks, Dominik. So,
+[0:00:41] thanks, Dominik. So, uh so yeah, we have uh Jeremy Roth with
+[0:00:43] uh so yeah, we have uh Jeremy Roth with us today uh who will help with uh
+[0:00:45] us today uh who will help with uh questions, so uh submit them there and
+[0:00:47] questions, so uh submit them there and uh we may ask you if you'd like to ask
+[0:00:49] uh we may ask you if you'd like to ask your question live, in which case I'll
+[0:00:50] your question live, in which case I'll ask you to uh raise your hand
+[0:00:53] ask you to uh raise your hand so we can unmute you and don't raise
+[0:00:55] so we can unmute you and don't raise your hand until I've asked you to do so.
+[0:00:57] your hand until I've asked you to do so. Uh so with that, uh Alberto, please uh
+[0:00:59] Uh so with that, uh Alberto, please uh start whenever you're ready.
+[0:01:01] start whenever you're ready. Sure. Thank you so much.
+[0:01:04] Sure. Thank you so much. Okay.
+[0:01:05] Okay. Uh let me see.
+[0:01:11] Okay. Uh thank you so much, Michael and Dominik and everybody else involved in
+[0:01:13] Dominik and everybody else involved in the involved in the
+[0:01:15] the involved in the organization of this uh of this seminar.
+[0:01:18] organization of this uh of this seminar. Uh
+[0:01:19] Uh it's
+[0:01:19] it's great. It is great to be here and
+[0:01:21] great. It is great to be here and presenting this work with uh Jeremy as a
+[0:01:24] presenting this work with uh Jeremy as a as uh was said before, Jeremy is with us
+[0:01:26] as uh was said before, Jeremy is with us today in the panel.
+[0:01:28] today in the panel. So, he will be also able to answer
+[0:01:31] So, he will be also able to answer questions about this this paper. So, uh
+[0:01:34] questions about this this paper. So, uh the title of the paper is a penalized
+[0:01:35] the title of the paper is a penalized synthetic control estimator for
+[0:01:37] synthetic control estimator for disaggregated data.
+[0:01:39] disaggregated data. Let me see if I can
+[0:01:41] Let me see if I can Okay.
+[0:01:42] Okay. There you go.
+[0:01:43] There you go. So, um
+[0:01:45] So, um let me start with a what a synthetic
+[0:01:47] let me start with a what a synthetic control estimator is about. A synthetic
+[0:01:48] control estimator is about. A synthetic control estimator is an estimator that
+[0:01:50] control estimator is an estimator that compares the outcome
+[0:01:52] compares the outcome of a treated unit
+[0:01:54] of a treated unit uh to the outcome for a weighted average
+[0:01:55] uh to the outcome for a weighted average of untreated unit. So, we're going to
+[0:01:57] of untreated unit. So, we're going to have a weighted average and we are going
+[0:01:59] have a weighted average and we are going to choose the weights such that the
+[0:02:01] to choose the weights such that the resulting unit, what we're going to call
+[0:02:03] resulting unit, what we're going to call a synthetic control, um matches the
+[0:02:06] a synthetic control, um matches the characteristics of the treated unit
+[0:02:07] characteristics of the treated unit before intervention. And when I say
+[0:02:09] before intervention. And when I say characteristics, I basically
+[0:02:12] characteristics, I basically I am basically thinking about predictors
+[0:02:13] I am basically thinking about predictors of the outcome variable of interest.
+[0:02:16] of the outcome variable of interest. Synthetic control estimators were
+[0:02:18] Synthetic control estimators were originally proposed for settings in
+[0:02:20] originally proposed for settings in which you have like a um
+[0:02:23] which you have like a um one aggregate unit that is exposed to
+[0:02:25] one aggregate unit that is exposed to intervention of interest, perhaps a a
+[0:02:27] intervention of interest, perhaps a a city or a state or or a country, and
+[0:02:30] city or a state or or a country, and then you have like a relatively small
+[0:02:32] then you have like a relatively small number of other aggregate units that are
+[0:02:33] number of other aggregate units that are not exposed and that we can potentially
+[0:02:36] not exposed and that we can potentially use as a as comparisons. This is what
+[0:02:38] use as a as comparisons. This is what we're going to call the donor pool. From
+[0:02:40] we're going to call the donor pool. From this donor pool, we can choose a
+[0:02:42] this donor pool, we can choose a potential comparisons for the treated
+[0:02:43] potential comparisons for the treated unit to reproduce the counterfactual of
+[0:02:46] unit to reproduce the counterfactual of interest of what would have happened to
+[0:02:47] interest of what would have happened to the treated unit in the absence of the
+[0:02:49] the treated unit in the absence of the intervention.
+[0:02:51] intervention. An example that we're going to cover
+[0:02:52] An example that we're going to cover later is that um imagine that there is a
+[0:02:55] later is that um imagine that there is a tobacco control program in California uh
+[0:02:58] tobacco control program in California uh is implemented there in the entire state
+[0:03:01] is implemented there in the entire state and we are able to see the evolution of
+[0:03:03] and we are able to see the evolution of a aggregate tobacco consumption in
+[0:03:05] a aggregate tobacco consumption in California with the intervention. What
+[0:03:08] California with the intervention. What we are missing is
+[0:03:09] we are missing is what would have happened in California
+[0:03:11] what would have happened in California in the absence of this intervention and
+[0:03:13] in the absence of this intervention and we are going to use like a weighted
+[0:03:15] we are going to use like a weighted average of other states uh that did not
+[0:03:17] average of other states uh that did not implement an intervention like that to
+[0:03:19] implement an intervention like that to try to, you know, like reproduce um
+[0:03:22] try to, you know, like reproduce um you know, the counterfactual of interest
+[0:03:24] you know, the counterfactual of interest that is, as I said before, you know,
+[0:03:26] that is, as I said before, you know, the evolution of tobacco consumption in
+[0:03:28] the evolution of tobacco consumption in California in the absence of the
+[0:03:30] California in the absence of the intervention.
+[0:03:32] intervention. And one of the motivations for synthetic
+[0:03:34] And one of the motivations for synthetic controls is that in this type of
+[0:03:36] controls is that in this type of settings where you have like um
+[0:03:38] settings where you have like um uh one or a few treated units and also a
+[0:03:40] uh one or a few treated units and also a small number of untreated unit, a
+[0:03:42] small number of untreated unit, a combination of a untreated unit
+[0:03:45] combination of a untreated unit often is going to do a much better job
+[0:03:48] often is going to do a much better job reproducing the characteristics of the
+[0:03:49] reproducing the characteristics of the treated unit than any single comparison
+[0:03:52] treated unit than any single comparison unit alone. Okay?
+[0:03:58] This is a literature in which um you know, the empirical work has gone
+[0:04:00] you know, the empirical work has gone perhaps faster than than the
+[0:04:02] perhaps faster than than the methodological work and now the method
+[0:04:04] methodological work and now the method has found like a recent applications in
+[0:04:06] has found like a recent applications in in in context which in which you have
+[0:04:09] in in context which in which you have disaggregated data. So, you may have
+[0:04:11] disaggregated data. So, you may have like a many treated units and also like
+[0:04:14] like a many treated units and also like a many untreated units. And this paper
+[0:04:16] a many untreated units. And this paper is about that. It's about how to adapt
+[0:04:18] is about that. It's about how to adapt the synthetic control estimation to this
+[0:04:20] the synthetic control estimation to this type of settings with a many treated and
+[0:04:22] type of settings with a many treated and many untreated units. And you know, what
+[0:04:24] many untreated units. And you know, what is appealing about synthetic control
+[0:04:26] is appealing about synthetic control estimators in this setting and what is
+[0:04:27] estimators in this setting and what is challenging about synthetic control
+[0:04:28] challenging about synthetic control estimators in this setting.
+[0:04:31] estimators in this setting. In principle, conceptually, the problem
+[0:04:34] In principle, conceptually, the problem of finding a synthetic control estimator
+[0:04:36] of finding a synthetic control estimator or a synthetic control unit for many
+[0:04:38] or a synthetic control unit for many treated units
+[0:04:39] treated units is not different than the problem of
+[0:04:41] is not different than the problem of finding a synthetic control
+[0:04:43] finding a synthetic control unit for, you know, one only one treated
+[0:04:46] unit for, you know, one only one treated unit because you will have just to
+[0:04:48] unit because you will have just to reproduce what you did for one treated
+[0:04:50] reproduce what you did for one treated unit, but as many times as treated units
+[0:04:52] unit, but as many times as treated units you have.
+[0:04:54] you have. However, as we are going to see, um the
+[0:04:57] However, as we are going to see, um the problem of finding a synthetic control
+[0:04:59] problem of finding a synthetic control does not have a unique solution in
+[0:05:01] does not have a unique solution in general
+[0:05:02] general and multiplicity of solution may be a
+[0:05:04] and multiplicity of solution may be a particularly difficult problem when you
+[0:05:06] particularly difficult problem when you have like a many treated
+[0:05:08] have like a many treated uh and many untreated units. And this is
+[0:05:10] uh and many untreated units. And this is something that
+[0:05:11] something that we will try to solve in this paper.
+[0:05:14] we will try to solve in this paper. Also, as you can imagine, in settings in
+[0:05:16] Also, as you can imagine, in settings in which you may have like many treated and
+[0:05:18] which you may have like many treated and many untreated units, now
+[0:05:20] many untreated units, now it may be the case that single untreated
+[0:05:21] it may be the case that single untreated unit provide a close matches to the
+[0:05:23] unit provide a close matches to the treated unit of interest. So, now you
+[0:05:26] treated unit of interest. So, now you have a little bit of a trade-off between
+[0:05:27] have a little bit of a trade-off between between doing synthetic controls or
+[0:05:29] between doing synthetic controls or between doing something like matching.
+[0:05:31] between doing something like matching. You have a trade-off between minimizing
+[0:05:33] You have a trade-off between minimizing the covariate discrepancy between each
+[0:05:35] the covariate discrepancy between each treated unit and its synthetic control
+[0:05:37] treated unit and its synthetic control as a whole or minimizing the covariate
+[0:05:40] as a whole or minimizing the covariate discrepancy between each treated unit
+[0:05:42] discrepancy between each treated unit and each unit that that contributes um
+[0:05:45] and each unit that that contributes um to its synthetic control. That is this
+[0:05:47] to its synthetic control. That is this is what we will call the matching case.
+[0:05:51] is what we will call the matching case. So, to you know, address these
+[0:05:53] So, to you know, address these difficulties, we are going to propose a
+[0:05:55] difficulties, we are going to propose a synthetic control estimator that is is
+[0:05:57] synthetic control estimator that is is going to include a penalization and is
+[0:05:59] going to include a penalization and is going to penalize the pair was matching
+[0:06:01] going to penalize the pair was matching discrepancies between the characteristic
+[0:06:03] discrepancies between the characteristic of each of the treated units and the
+[0:06:05] of each of the treated units and the characteristics of the unit that
+[0:06:06] characteristics of the unit that contribute to the respective synthetic
+[0:06:08] contribute to the respective synthetic controls. We will show that this
+[0:06:11] controls. We will show that this penalized estimator is unique and is is
+[0:06:13] penalized estimator is unique and is is sparse and is going to prioritize the
+[0:06:15] sparse and is going to prioritize the inclusion in the synthetic controls of
+[0:06:17] inclusion in the synthetic controls of these those units, those untreated units
+[0:06:19] these those units, those untreated units that are close to the treated in the in
+[0:06:22] that are close to the treated in the in the space of the of the predictors, in
+[0:06:24] the space of the of the predictors, in the space of the matching variables.
+[0:06:30] Okay, so let's start a little bit with a some notation in order to
+[0:06:32] some notation in order to be a little more precise about the
+[0:06:34] be a little more precise about the concepts. We are going to use a
+[0:06:36] concepts. We are going to use a potential outcomes in this setting. For
+[0:06:37] potential outcomes in this setting. For each unit I, we'll have two potential
+[0:06:39] each unit I, we'll have two potential outcome, the potential outcome with
+[0:06:41] outcome, the potential outcome with treatment
+[0:06:42] treatment Y1, the potential outcome with a
+[0:06:43] Y1, the potential outcome with a treatment Y0. As usual, realized
+[0:06:46] treatment Y0. As usual, realized outcomes will be like a so Y1 if you are
+[0:06:48] outcomes will be like a so Y1 if you are treated. Like if the unit one is the
+[0:06:51] treated. Like if the unit one is the unit
+[0:06:52] unit I is treated, we'll say that TI is equal
+[0:06:54] I is treated, we'll say that TI is equal to one and Y0 if the unit is not
+[0:06:56] to one and Y0 if the unit is not treated.
+[0:06:57] treated. We're going to have a vector of
+[0:06:59] We're going to have a vector of predictors for each unit is going to be
+[0:07:01] predictors for each unit is going to be P times one, a vector of predictors and
+[0:07:03] P times one, a vector of predictors and this will be a vector of predictors of
+[0:07:05] this will be a vector of predictors of Y0 of the potential outcome without the
+[0:07:07] Y0 of the potential outcome without the treatment.
+[0:07:09] treatment. And for the treated, we are going to
+[0:07:10] And for the treated, we are going to observe Y1 and we are going to observe X
+[0:07:13] observe Y1 and we are going to observe X and for the untreated, we are going to
+[0:07:14] and for the untreated, we are going to observe Y0 and we are going to observe X
+[0:07:16] observe Y0 and we are going to observe X and we are going to have like a N1
+[0:07:18] and we are going to have like a N1 treated and we are going to have N0
+[0:07:20] treated and we are going to have N0 untreated. And just to be like a tidying
+[0:07:22] untreated. And just to be like a tidying our notation, we are going to reorder
+[0:07:24] our notation, we are going to reorder the observations so that the treated
+[0:07:26] the observations so that the treated always comes first.
+[0:07:27] always comes first. Okay?
+[0:07:28] Okay? So,
+[0:07:30] So, in these settings in which we have like
+[0:07:32] in these settings in which we have like a
+[0:07:32] a potentially
+[0:07:34] potentially uh multiple and potentially many treated
+[0:07:37] uh multiple and potentially many treated units, what are going to be the
+[0:07:38] units, what are going to be the parameters of interest that we care
+[0:07:40] parameters of interest that we care about? Well, you may care about perhaps
+[0:07:42] about? Well, you may care about perhaps about the individual treatment effects
+[0:07:44] about the individual treatment effects like a
+[0:07:45] like a you may care about for each treated
+[0:07:46] you may care about for each treated unit, you know, what is the what is the
+[0:07:49] unit, you know, what is the what is the effect of the treatment for for that
+[0:07:50] effect of the treatment for for that unit.
+[0:07:52] unit. Perhaps you have many of those treated
+[0:07:54] Perhaps you have many of those treated units and like a you may want to average
+[0:07:56] units and like a you may want to average them in some way and one potential
+[0:07:58] them in some way and one potential parameter of interest in this case is
+[0:08:00] parameter of interest in this case is the average effect of the treatment on
+[0:08:01] the average effect of the treatment on treated that you take the average of the
+[0:08:04] treated that you take the average of the the previous parameters for all the
+[0:08:06] the previous parameters for all the treated units.
+[0:08:12] Okay, so how do we calculate synthetic controls um uh typically? Um
+[0:08:16] controls um uh typically? Um note, this is not the estimator that we
+[0:08:18] note, this is not the estimator that we are going to propose in this paper, but
+[0:08:19] are going to propose in this paper, but this is the estimator that has been used
+[0:08:21] this is the estimator that has been used previously.
+[0:08:22] previously. So, for each treated unit I, we're going
+[0:08:25] So, for each treated unit I, we're going to look at the the predictors of the
+[0:08:27] to look at the the predictors of the outcome, XI,
+[0:08:29] outcome, XI, and we are going to try to match these
+[0:08:30] and we are going to try to match these predictors with a weighted average of a,
+[0:08:33] predictors with a weighted average of a, you know, like predictors of the units
+[0:08:35] you know, like predictors of the units in the donor pool, in the, you know,
+[0:08:36] in the donor pool, in the, you know, sets of
+[0:08:38] sets of of set of untreated units. Okay? And um
+[0:08:41] of set of untreated units. Okay? And um to avoid um
+[0:08:43] to avoid um to avoid extrapolation, usually we're
+[0:08:45] to avoid extrapolation, usually we're going to you know, ask that these
+[0:08:47] going to you know, ask that these weights are non-negative and we are
+[0:08:49] weights are non-negative and we are going to ask that these weights are,
+[0:08:51] going to ask that these weights are, you know, such that they sum to one.
+[0:08:53] you know, such that they sum to one. Okay? And when we have these uh
+[0:08:56] Okay? And when we have these uh WIA stars that are the solution to these
+[0:08:59] WIA stars that are the solution to these problems, WIA stars is going to be the
+[0:09:01] problems, WIA stars is going to be the weight of untreated unit J in the
+[0:09:03] weight of untreated unit J in the synthetic control for treated unit I.
+[0:09:06] synthetic control for treated unit I. Okay, that's and you know, like you can
+[0:09:08] Okay, that's and you know, like you can do it for one unit or you can do it for
+[0:09:11] do it for one unit or you can do it for 200 units. I mean, the problem is
+[0:09:13] 200 units. I mean, the problem is exactly the same because you are going
+[0:09:14] exactly the same because you are going one by one.
+[0:09:15] one by one. Okay?
+[0:09:17] Okay? Another way to express this problem is
+[0:09:18] Another way to express this problem is like a using matrices like this matrix
+[0:09:21] like a using matrices like this matrix is going to appear quite a lot. X0 is
+[0:09:23] is going to appear quite a lot. X0 is going to be the matrix that collects the
+[0:09:25] going to be the matrix that collects the predictors
+[0:09:26] predictors for all the untreated units. So, each
+[0:09:28] for all the untreated units. So, each column of X0 is going to be the value of
+[0:09:30] column of X0 is going to be the value of the pre- dictors for one of the
+[0:09:31] the pre- dictors for one of the untreated units. And then we can
+[0:09:33] untreated units. And then we can express, you know, our our minimization
+[0:09:35] express, you know, our our minimization problems like a using matrices.
+[0:09:43] Okay. So, once we have these weights,
+[0:09:44] weights, these W stars, the way in which we are
+[0:09:47] these W stars, the way in which we are going to calculate
+[0:09:48] going to calculate our estimates is the following. For each
+[0:09:51] our estimates is the following. For each uh you know, treated observation, we're
+[0:09:52] uh you know, treated observation, we're going to take the outcome of this
+[0:09:53] going to take the outcome of this treated observation and we are going to
+[0:09:55] treated observation and we are going to compare it to the outcome of a of the
+[0:09:58] compare it to the outcome of a of the synthetic control. Okay, and this will
+[0:10:00] synthetic control. Okay, and this will be
+[0:10:01] be uh our estimate of the effect of the
+[0:10:03] uh our estimate of the effect of the treatment for that particular
+[0:10:04] treatment for that particular observations. If we want to
+[0:10:07] observations. If we want to um
+[0:10:08] um compute or estimate the effect of the
+[0:10:09] compute or estimate the effect of the treatment for the treated, like we just
+[0:10:12] treatment for the treated, like we just have to average
+[0:10:14] have to average you know, over all the treated
+[0:10:16] you know, over all the treated observations.
+[0:10:23] Okay, so let's um go to a
+[0:10:25] go to a particular example to try to make this a
+[0:10:27] particular example to try to make this a little bit clearer. Like we're going to
+[0:10:30] little bit clearer. Like we're going to look at the case in which you know, N1
+[0:10:32] look at the case in which you know, N1 is equal to one. So, we only have in
+[0:10:33] is equal to one. So, we only have in this case one treated unit and this
+[0:10:36] this case one treated unit and this treated unit is the state of California.
+[0:10:38] treated unit is the state of California. And the treatment is a tobacco control
+[0:10:40] And the treatment is a tobacco control control program that happened in the in
+[0:10:42] control program that happened in the in the state of California and was
+[0:10:44] the state of California and was implemented in a in 1988. This was
+[0:10:47] implemented in a in 1988. This was called like a proposition 99.
+[0:10:49] called like a proposition 99. Okay.
+[0:10:50] Okay. And what do we see in this series? Like
+[0:10:52] And what do we see in this series? Like we in this graph, we see two series with
+[0:10:55] we in this graph, we see two series with the first one
+[0:10:56] the first one is um
+[0:10:58] is um uh per capita cigarette cigarette sales
+[0:11:00] uh per capita cigarette cigarette sales for California. This is the solid line.
+[0:11:02] for California. This is the solid line. The second one, the discontinuous line
+[0:11:04] The second one, the discontinuous line is
+[0:11:05] is is per capita cigarette sales for the
+[0:11:07] is per capita cigarette sales for the rest of the US.
+[0:11:09] rest of the US. And as we can see, the rest of the US
+[0:11:11] And as we can see, the rest of the US doesn't provide a good approximation.
+[0:11:13] doesn't provide a good approximation. It's not going to provide a good
+[0:11:14] It's not going to provide a good approximation for what happens in
+[0:11:16] approximation for what happens in California in the absence of in the
+[0:11:18] California in the absence of in the absence of proposition 99 because even
+[0:11:21] absence of proposition 99 because even before the passage of
+[0:11:23] before the passage of proposition 99, even before the
+[0:11:25] proposition 99, even before the intervention, um the you know, the the
+[0:11:28] intervention, um the you know, the the evolution of the series in California
+[0:11:30] evolution of the series in California and the evolution of the series in the
+[0:11:31] and the evolution of the series in the the rest of the US was very very
+[0:11:33] the rest of the US was very very different. And synthetic controls is
+[0:11:36] different. And synthetic controls is asking this question, well, you know, is
+[0:11:37] asking this question, well, you know, is there a combination of regions is there
+[0:11:40] there a combination of regions is there a combination of states in the United
+[0:11:42] a combination of states in the United States that did not implement this type
+[0:11:44] States that did not implement this type of um
+[0:11:45] of um this type of um
+[0:11:47] this type of um intervention, but can reproduce um you
+[0:11:50] intervention, but can reproduce um you know, the the evolution of the outcome
+[0:11:52] know, the the evolution of the outcome variable for California before the
+[0:11:53] variable for California before the intervention. Also, perhaps all their
+[0:11:55] intervention. Also, perhaps all their variables of interest, other predictors
+[0:11:57] variables of interest, other predictors of the outcome.
+[0:11:58] of the outcome. And um
+[0:12:00] And um you can see that this
+[0:12:01] you can see that this this um
+[0:12:02] this um synthetic control exists. There is like
+[0:12:04] synthetic control exists. There is like a combination of other states that they
+[0:12:06] a combination of other states that they you know, can reproduce very well what
+[0:12:08] you know, can reproduce very well what happens in California before the passage
+[0:12:10] happens in California before the passage of proposition 99. And like we are going
+[0:12:13] of proposition 99. And like we are going to you know, like attribute or we want
+[0:12:15] to you know, like attribute or we want to attribute you know, this gap between
+[0:12:19] to attribute you know, this gap between between tobacco consumption in
+[0:12:21] between tobacco consumption in California and tobacco consumption for
+[0:12:23] California and tobacco consumption for its synthetic control, we're going to
+[0:12:25] its synthetic control, we're going to attribute this gap to the to the passage
+[0:12:27] attribute this gap to the to the passage of proposition 99.
+[0:12:29] of proposition 99. Okay, so this is the idea. And as I said
+[0:12:31] Okay, so this is the idea. And as I said before, um we typically not only look at
+[0:12:34] before, um we typically not only look at the at the pre-intervention outcomes.
+[0:12:36] the at the pre-intervention outcomes. Pre-intervention outcomes are great
+[0:12:38] Pre-intervention outcomes are great predictors of what's going to happen
+[0:12:40] predictors of what's going to happen later, but perhaps we may have other
+[0:12:42] later, but perhaps we may have other predictors. In this case, like for this
+[0:12:45] predictors. In this case, like for this particular example, this one here, this
+[0:12:47] particular example, this one here, this X1.
+[0:12:52] The only um treated unit is the first unit in this case that is California.
+[0:12:54] unit in this case that is California. And you know, this is the set of
+[0:12:56] And you know, this is the set of predictors that we're going to trying to
+[0:12:57] predictors that we're going to trying to match. We don't do it a very well if we
+[0:13:00] match. We don't do it a very well if we use yes a simple average of
+[0:13:03] use yes a simple average of the other states in the US that did not
+[0:13:05] the other states in the US that did not implement during our you know, like um
+[0:13:08] implement during our you know, like um during our sample
+[0:13:09] during our sample you know, during our the duration of our
+[0:13:11] you know, during our the duration of our study, did not implement them
+[0:13:14] study, did not implement them um you know, interventions like the one
+[0:13:17] um you know, interventions like the one in California, but we can find like um
+[0:13:20] in California, but we can find like um you know, weighted average of these
+[0:13:21] you know, weighted average of these states that very much very well
+[0:13:23] states that very much very well reproduces you know, the characteristics
+[0:13:25] reproduces you know, the characteristics of California before the intervention in
+[0:13:28] of California before the intervention in terms of you know, predictors of tobacco
+[0:13:30] terms of you know, predictors of tobacco consumption.
+[0:13:35] Okay. So, when you when you start like um
+[0:13:38] So, when you when you start like um you know, like just going to your
+[0:13:39] you know, like just going to your computer and calculating to synthetic
+[0:13:40] computer and calculating to synthetic controls, you will realize very soon
+[0:13:42] controls, you will realize very soon that they tend to be a sparse. And by
+[0:13:45] that they tend to be a sparse. And by sparse, they I mean it's like we have
+[0:13:47] sparse, they I mean it's like we have like 38 states in the United States that
+[0:13:50] like 38 states in the United States that we we can use as our pool, but when we
+[0:13:52] we we can use as our pool, but when we calculate a synthetic control for
+[0:13:54] calculate a synthetic control for California, we'll see that only a few
+[0:13:56] California, we'll see that only a few states carry positive weights. Okay. And
+[0:13:59] states carry positive weights. Okay. And most of the states, in fact, are not
+[0:14:00] most of the states, in fact, are not going to carry positive weights. And
+[0:14:02] going to carry positive weights. And this is very typical of synthetic
+[0:14:04] this is very typical of synthetic controls and there is like a
+[0:14:06] controls and there is like a very you know, like a clear reason for
+[0:14:08] very you know, like a clear reason for that. Like um
+[0:14:10] that. Like um um
+[0:14:12] um even in cases like these where you know,
+[0:14:15] even in cases like these where you know, like we have a very few
+[0:14:17] like we have a very few um predictor variables,
+[0:14:20] um predictor variables, because of the curse of dimensionality,
+[0:14:22] because of the curse of dimensionality, it's going to be the case that in many
+[0:14:23] it's going to be the case that in many of these applications, the value of the
+[0:14:26] of these applications, the value of the X's
+[0:14:27] X's for the treated unit falls outside of
+[0:14:30] for the treated unit falls outside of the convex hull
+[0:14:32] the convex hull of the values of the X's for the donor
+[0:14:33] of the values of the X's for the donor pool. And then your synthetic control is
+[0:14:35] pool. And then your synthetic control is going to be just the
+[0:14:37] going to be just the the projection of this XI
+[0:14:39] the projection of this XI uh on the convex hull of the columns of
+[0:14:41] uh on the convex hull of the columns of X0.
+[0:14:43] X0. Okay. And when you look at this
+[0:14:45] Okay. And when you look at this projection, like this going to be a
+[0:14:47] projection, like this going to be a sparse, right? It's going to be just you
+[0:14:49] sparse, right? It's going to be just you know, like you know, combination of
+[0:14:51] know, like you know, combination of these and like three units.
+[0:14:54] these and like three units. Okay, so if XI
+[0:14:57] Okay, so if XI does not belong to the convex span of
+[0:14:58] does not belong to the convex span of the columns of X0, the synthetic control
+[0:15:00] the columns of X0, the synthetic control is going to be unique and is sparse.
+[0:15:04] is going to be unique and is sparse. Okay.
+[0:15:05] Okay. If XI belongs to the convex span of the
+[0:15:07] If XI belongs to the convex span of the columns of X0, then the synthetic
+[0:15:09] columns of X0, then the synthetic controls may not be unique or sparse,
+[0:15:12] controls may not be unique or sparse, although we know that the sparse
+[0:15:13] although we know that the sparse solution exist.
+[0:15:15] solution exist. Okay.
+[0:15:17] Okay. The The problem that we're going to have
+[0:15:19] The The problem that we're going to have is that is going to be the following.
+[0:15:21] is that is going to be the following. When when you have only one or a few
+[0:15:23] When when you have only one or a few treated units, non-uniqueness of
+[0:15:25] treated units, non-uniqueness of synthetic control is going to be rarely
+[0:15:27] synthetic control is going to be rarely an issue.
+[0:15:28] an issue. And you can solve it by you know, like
+[0:15:30] And you can solve it by you know, like in creative methods. Like you know, you
+[0:15:32] in creative methods. Like you know, you can become more ambitious and increase
+[0:15:34] can become more ambitious and increase the number of covariates that you're
+[0:15:35] the number of covariates that you're going to use or you can just restrict
+[0:15:37] going to use or you can just restrict the donor pool to units that are very
+[0:15:39] the donor pool to units that are very close in the characteristics to the
+[0:15:42] close in the characteristics to the treated units.
+[0:15:44] treated units. In settings when you have a large number
+[0:15:46] In settings when you have a large number of treated units and especially a large
+[0:15:48] of treated units and especially a large number of untreated units,
+[0:15:50] number of untreated units, non-uniqueness may be a more important
+[0:15:52] non-uniqueness may be a more important issue. Maybe like you may have like a
+[0:15:54] issue. Maybe like you may have like a many more instances of non-
+[0:15:55] many more instances of non- non-uniqueness and you probably may be
+[0:15:57] non-uniqueness and you probably may be much harder to solve and you don't want
+[0:15:59] much harder to solve and you don't want to go like
+[0:16:00] to go like you know, treated unit by treated unit
+[0:16:02] you know, treated unit by treated unit trying to implement creative
+[0:16:05] trying to implement creative you know, like
+[0:16:06] you know, like changes in the problem
+[0:16:07] changes in the problem in order to make the solution unique.
+[0:16:11] in order to make the solution unique. And as we said before, in settings where
+[0:16:13] And as we said before, in settings where you have a large number of untreated
+[0:16:14] you have a large number of untreated units and and you know, like may happen
+[0:16:17] units and and you know, like may happen that you know, a single untreated units
+[0:16:20] that you know, a single untreated units may provide close matches to
+[0:16:23] may provide close matches to to the treated units in the data.
+[0:16:25] to the treated units in the data. And then you are thinking, so what what
+[0:16:27] And then you are thinking, so what what I what I'm supposed to do in this
+[0:16:28] I what I'm supposed to do in this setting? Should I should I
+[0:16:30] setting? Should I should I you know, like um
+[0:16:32] you know, like um I compute synthetic controls or should I
+[0:16:34] I compute synthetic controls or should I you know, just match each treated unit
+[0:16:36] you know, just match each treated unit to the closest untreated unit um
+[0:16:39] to the closest untreated unit um in the donor pool. Okay, so you are
+[0:16:41] in the donor pool. Okay, so you are going to face this trade-off that
+[0:16:43] going to face this trade-off that you know, between you know, minimizing
+[0:16:45] you know, between you know, minimizing the covariate discrepancy between each
+[0:16:47] the covariate discrepancy between each of the treated units and its synthetic
+[0:16:49] of the treated units and its synthetic controls.
+[0:16:50] controls. This is what we're going to call the
+[0:16:51] This is what we're going to call the synthetic control case or minimizing the
+[0:16:53] synthetic control case or minimizing the covariate discrepancy between each
+[0:16:55] covariate discrepancy between each treated unit and each unit that
+[0:16:57] treated unit and each unit that contributes to the to estimating the
+[0:17:00] contributes to the to estimating the counterfactual of interest. Okay, so
+[0:17:02] counterfactual of interest. Okay, so like
+[0:17:03] like So, this is what we're going to call the
+[0:17:05] So, this is what we're going to call the matching case.
+[0:17:07] matching case. Okay, so this is this is how
+[0:17:10] Okay, so this is this is how you know, estimating synthetic controls
+[0:17:12] you know, estimating synthetic controls in settings when you have many treated
+[0:17:13] in settings when you have many treated units and many untreated units may
+[0:17:15] units and many untreated units may become
+[0:17:16] become complicated.
+[0:17:18] complicated. Okay, so this is what we're going to
+[0:17:20] Okay, so this is what we're going to propose in this paper. We're going to
+[0:17:22] propose in this paper. We're going to propose a modification of the synthetic
+[0:17:24] propose a modification of the synthetic control method. We are going to propose
+[0:17:25] control method. We are going to propose an augmentation of the objective
+[0:17:28] an augmentation of the objective function. Like this is what we have
+[0:17:29] function. Like this is what we have before. This is the
+[0:17:32] before. This is the you know, the problem
+[0:17:33] you know, the problem that we we look at before. And what
+[0:17:35] that we we look at before. And what we're going to do is like we're going to
+[0:17:37] we're going to do is like we're going to add this penalty term.
+[0:17:39] add this penalty term. Okay. And the penalty term is going to
+[0:17:42] Okay. And the penalty term is going to depend on the pairwise matching
+[0:17:43] depend on the pairwise matching discrepancies between you know, each of
+[0:17:45] discrepancies between you know, each of the treated units
+[0:17:47] the treated units and the unit that you know, like
+[0:17:49] and the unit that you know, like contribute to a synthetic controls is
+[0:17:50] contribute to a synthetic controls is going to be weighted
+[0:17:53] going to be weighted by the weight of that unit in the
+[0:17:54] by the weight of that unit in the synthetic control.
+[0:17:56] synthetic control. Okay. And the penalty term is going to
+[0:17:58] Okay. And the penalty term is going to be is going to depend how important this
+[0:18:00] be is going to depend how important this penalty term is going to depend on this
+[0:18:03] penalty term is going to depend on this on this penalty parameter lambda.
+[0:18:05] on this penalty parameter lambda. Okay.
+[0:18:07] Okay. Um lambda is going to be
+[0:18:09] Um lambda is going to be bigger than zero.
+[0:18:11] bigger than zero. And
+[0:18:12] And you know, like this parameter is going
+[0:18:13] you know, like this parameter is going to control the trade-off between fitting
+[0:18:15] to control the trade-off between fitting well the treated unit or and using
+[0:18:18] well the treated unit or and using treated units that are that have
+[0:18:20] treated units that are that have predictor values that are close to XI.
+[0:18:22] predictor values that are close to XI. Okay, because in principle you could fit
+[0:18:24] Okay, because in principle you could fit the treated unit very well with two
+[0:18:26] the treated unit very well with two units that are you know, very very far
+[0:18:28] units that are you know, very very far away from XI
+[0:18:29] away from XI by interpolation.
+[0:18:31] by interpolation. Okay, and this parameter is going to is
+[0:18:33] Okay, and this parameter is going to is going to control that trade-off.
+[0:18:36] going to control that trade-off. When um
+[0:18:37] When um you take the limit of this estimator as
+[0:18:39] you take the limit of this estimator as lambda goes to zero, you obtain what we
+[0:18:42] lambda goes to zero, you obtain what we call in the paper the pure synthetic
+[0:18:44] call in the paper the pure synthetic control estimator. This going to be the
+[0:18:46] control estimator. This going to be the synthetic control that minimizes
+[0:18:48] synthetic control that minimizes the pairwise matching discrepancies
+[0:18:51] the pairwise matching discrepancies among all solutions for the unpenalized
+[0:18:53] among all solutions for the unpenalized estimator. Which we have already
+[0:18:55] estimator. Which we have already discussed, they you may have like more
+[0:18:57] discussed, they you may have like more than one solution. In particular, when
+[0:18:59] than one solution. In particular, when it has more than one solution, typically
+[0:19:00] it has more than one solution, typically will have like um
+[0:19:02] will have like um um an infinite number of solutions.
+[0:19:05] um an infinite number of solutions. Okay.
+[0:19:06] Okay. When
+[0:19:07] When you take the limit of the estimator of
+[0:19:09] you take the limit of the estimator of lambda goes to infinity, like you are
+[0:19:12] lambda goes to infinity, like you are going just going to
+[0:19:14] going just going to you know, like uh
+[0:19:15] you know, like uh trying to minimize this part over here.
+[0:19:18] trying to minimize this part over here. And what is going to minimize this part
+[0:19:19] And what is going to minimize this part over here is the nearest neighbor
+[0:19:21] over here is the nearest neighbor matching estimator. You're just going to
+[0:19:23] matching estimator. You're just going to as as your synthetic control, you're
+[0:19:25] as as your synthetic control, you're going to choose the closest unit to the
+[0:19:27] going to choose the closest unit to the treated unit in the space in the space
+[0:19:30] treated unit in the space in the space of the covariates.
+[0:19:32] of the covariates. Okay.
+[0:19:37] Okay, so what are the advantages of this penalization? What are the advantages of
+[0:19:40] penalization? What are the advantages of changing our estimator in this way in
+[0:19:42] changing our estimator in this way in the case in which you have you have many
+[0:19:44] the case in which you have you have many treated units and many untreated units?
+[0:19:47] treated units and many untreated units? So, we're going to see later, one of the
+[0:19:49] So, we're going to see later, one of the advantages is that when you make lambda
+[0:19:52] advantages is that when you make lambda bigger than zero, no matter what what is
+[0:19:54] bigger than zero, no matter what what is the value of lambda, the solution is
+[0:19:55] the value of lambda, the solution is going to be unique and it's going to be
+[0:19:57] going to be unique and it's going to be a sparse
+[0:19:59] a sparse provided that the untreated observations
+[0:20:01] provided that the untreated observations are in general position that is like um
+[0:20:03] are in general position that is like um you know, a not very strict
+[0:20:05] you know, a not very strict requirement. Um
+[0:20:09] requirement. Um So, sparsity of synthetic controls is
+[0:20:11] So, sparsity of synthetic controls is you know, like a
+[0:20:13] you know, like a often
+[0:20:14] often you know, like a good um
+[0:20:16] you know, like a good um type of property if you want to
+[0:20:19] type of property if you want to interpret what is exactly the nature of
+[0:20:22] interpret what is exactly the nature of the counterfactual
+[0:20:23] the counterfactual that you are estimating in terms of the
+[0:20:26] that you are estimating in terms of the what um
+[0:20:27] what um how much each unit is contributing to
+[0:20:29] how much each unit is contributing to the counterfactual of interest and you
+[0:20:31] the counterfactual of interest and you know, how can do you interpret it the
+[0:20:33] know, how can do you interpret it the estimate of this counterfactual.
+[0:20:36] estimate of this counterfactual. Okay.
+[0:20:37] Okay. The second
+[0:20:38] The second um
+[0:20:39] um advantage of the penalized synthetic
+[0:20:41] advantage of the penalized synthetic control estimator is that it's going to
+[0:20:42] control estimator is that it's going to reduce interpolation biases. As I said
+[0:20:45] reduce interpolation biases. As I said before, like a for the unpenalized
+[0:20:47] before, like a for the unpenalized synthetic control estimator, in
+[0:20:48] synthetic control estimator, in principle, if you allow the donor pool
+[0:20:51] principle, if you allow the donor pool to be very large and if you allow the
+[0:20:52] to be very large and if you allow the donor pool to be um you know, like to be
+[0:20:56] donor pool to be um you know, like to be to include units that are very different
+[0:20:58] to include units that are very different in the value of the covariates relative
+[0:21:00] in the value of the covariates relative to the treated unit, you could match the
+[0:21:02] to the treated unit, you could match the treated unit very well, but you could
+[0:21:04] treated unit very well, but you could match the treated unit with units that
+[0:21:05] match the treated unit with units that are very far away and you can incur in
+[0:21:08] are very far away and you can incur in interpolation biases. And then
+[0:21:11] interpolation biases. And then the presence of this regularization term
+[0:21:13] the presence of this regularization term is going to is going to reduce this
+[0:21:15] is going to is going to reduce this interpolation biases. And at the same
+[0:21:17] interpolation biases. And at the same time, we're going to do that like using
+[0:21:19] time, we're going to do that like using exactly the same computational
+[0:21:20] exactly the same computational complexity as before in the sense that
+[0:21:22] complexity as before in the sense that we still will have like um
+[0:21:24] we still will have like um you know,
+[0:21:26] you know, minimizing a quadratic function with
+[0:21:28] minimizing a quadratic function with linear constraints is going to be
+[0:21:30] linear constraints is going to be exactly the same as before. Like we're
+[0:21:31] exactly the same as before. Like we're going to have this term that will be
+[0:21:33] going to have this term that will be important later. What this What is this
+[0:21:35] important later. What this What is this delta I? This delta I is a you know,
+[0:21:38] delta I? This delta I is a you know, it's a measure of I have a vector of
+[0:21:40] it's a measure of I have a vector of dimension N0
+[0:21:42] dimension N0 and is the
+[0:21:44] and is the you know, each of the elements of delta
+[0:21:46] you know, each of the elements of delta I
+[0:21:47] I is going to be the square
+[0:21:49] is going to be the square of the distance between XI and the
+[0:21:52] of the distance between XI and the corresponding observation in the donor
+[0:21:54] corresponding observation in the donor pool.
+[0:21:54] pool. Okay, that's a that's something that we
+[0:21:56] Okay, that's a that's something that we will use later.
+[0:22:03] Okay. So, before going into the formal results, let's see how this is going to
+[0:22:05] results, let's see how this is going to work in a simple example and
+[0:22:08] work in a simple example and you know, we couldn't we couldn't think
+[0:22:09] you know, we couldn't we couldn't think of an example simpler than this. We're
+[0:22:12] of an example simpler than this. We're going to do everything in one dimension,
+[0:22:14] going to do everything in one dimension, so X is going to be one-dimensional.
+[0:22:17] so X is going to be one-dimensional. We're going to have like four units. You
+[0:22:19] We're going to have like four units. You know, X1 is going to be the treated unit
+[0:22:22] know, X1 is going to be the treated unit and you know, the sorry, the
+[0:22:24] and you know, the sorry, the treated unit is going to be unit one and
+[0:22:27] treated unit is going to be unit one and the value of X for unit one is going to
+[0:22:28] the value of X for unit one is going to be
+[0:22:29] be two. It's going to be equal to two. And
+[0:22:32] two. It's going to be equal to two. And you know, X2, X3 and X4 are one, four
+[0:22:34] you know, X2, X3 and X4 are one, four and five.
+[0:22:35] and five. Okay, so like this is the value of for
+[0:22:37] Okay, so like this is the value of for the predictor for the treated unit, the
+[0:22:40] the predictor for the treated unit, the value of the predictors for the for the
+[0:22:41] value of the predictors for the for the units in the donor pool. This is the you
+[0:22:44] units in the donor pool. This is the you know, the vector with the square of the
+[0:22:46] know, the vector with the square of the the square of the distances between X1
+[0:22:50] the square of the distances between X1 and you know, the columns of X0.
+[0:22:53] and you know, the columns of X0. Okay. So, if you look at this and and
+[0:22:57] Okay. So, if you look at this and and you know, like a
+[0:22:58] you know, like a you don't have to
+[0:23:00] you don't have to think a lot
+[0:23:01] think a lot to see that for the unpenalized version
+[0:23:04] to see that for the unpenalized version of the synthetic control estimator,
+[0:23:06] of the synthetic control estimator, there there are going to be two sparse
+[0:23:08] there there are going to be two sparse solutions, right? Like there will be
+[0:23:10] solutions, right? Like there will be like one sparse solution that
+[0:23:11] like one sparse solution that interpolate interpolates X1 with X2 and
+[0:23:14] interpolate interpolates X1 with X2 and X3
+[0:23:16] X3 and there will be another sparse
+[0:23:17] and there will be another sparse solution that interpolates X1 with X2
+[0:23:20] solution that interpolates X1 with X2 and X4.
+[0:23:21] and X4. Okay, and then you have the you know,
+[0:23:23] Okay, and then you have the you know, like a corresponding like a
+[0:23:25] like a corresponding like a synthetic controls weights. Okay. So,
+[0:23:29] synthetic controls weights. Okay. So, the one that uses X2 and X3, we will
+[0:23:32] the one that uses X2 and X3, we will think that this superior
+[0:23:34] think that this superior you know, it's a you know, better
+[0:23:37] you know, it's a you know, better synthetic controls in the sense that you
+[0:23:38] synthetic controls in the sense that you know, like a is you're using
+[0:23:41] know, like a is you're using um units in the donor pool with a lower
+[0:23:45] um units in the donor pool with a lower matching discrepancy relative to the
+[0:23:46] matching discrepancy relative to the treated unit. So, like a most people
+[0:23:49] treated unit. So, like a most people will think that you know, like a using
+[0:23:51] will think that you know, like a using one and using one and three, sorry,
+[0:23:53] one and using one and three, sorry, using two and three is better than using
+[0:23:54] using two and three is better than using two and four for this case. And you can
+[0:23:57] two and four for this case. And you can make this you know, precise in terms of
+[0:23:59] make this you know, precise in terms of the worst case
+[0:24:01] the worst case bias and the Lipschitz condition on the
+[0:24:03] bias and the Lipschitz condition on the on the on the regression functions.
+[0:24:06] on the on the regression functions. Okay, however, if you take you know,
+[0:24:07] Okay, however, if you take you know, just apply the conventional synthetic
+[0:24:09] just apply the conventional synthetic controls, these are going to be like a
+[0:24:12] controls, these are going to be like a you know, like two equally good you
+[0:24:14] you know, like two equally good you know, like synthetic controls in terms
+[0:24:15] know, like synthetic controls in terms of the
+[0:24:16] of the in terms of the objective function that
+[0:24:18] in terms of the objective function that you're trying to minimize. And not only
+[0:24:20] you're trying to minimize. And not only that, like you know that the
+[0:24:22] that, like you know that the any convex combination of these two
+[0:24:24] any convex combination of these two solutions is also going to be a a
+[0:24:25] solutions is also going to be a a solution, so we are going to have an
+[0:24:27] solution, so we are going to have an infinite number of solutions for the
+[0:24:29] infinite number of solutions for the unpenalized synthetic controls.
+[0:24:31] unpenalized synthetic controls. Okay. So, what happens
+[0:24:34] Okay. So, what happens um So,
+[0:24:35] um So, let me just be precise. You're going to
+[0:24:37] let me just be precise. You're going to have two sparse solutions and then an
+[0:24:39] have two sparse solutions and then an infinite number of non-sparse solutions
+[0:24:41] infinite number of non-sparse solutions in this case.
+[0:24:43] in this case. So, what happens when you use a
+[0:24:44] So, what happens when you use a penalized synthetic controls? If you use
+[0:24:46] penalized synthetic controls? If you use a penalized synthetic control and do you
+[0:24:48] a penalized synthetic control and do you do the minimization, you're going to see
+[0:24:50] do the minimization, you're going to see that you know, this is what you're going
+[0:24:52] that you know, this is what you're going to obtain.
+[0:24:53] to obtain. You're going to obtain a unique solution
+[0:24:56] You're going to obtain a unique solution for the problem. The solution and
+[0:24:58] for the problem. The solution and naturally will depend on the value of
+[0:25:00] naturally will depend on the value of lambda.
+[0:25:01] lambda. But for any value of lambda, you will
+[0:25:03] But for any value of lambda, you will have like
+[0:25:04] have like perhaps a different solution, but will
+[0:25:06] perhaps a different solution, but will be a unique.
+[0:25:08] be a unique. As we can see, as lambda goes to zero in
+[0:25:10] As we can see, as lambda goes to zero in this case, you're going to converge.
+[0:25:14] this case, you're going to converge. This is what we call the pure synthetic
+[0:25:15] This is what we call the pure synthetic control. You're going to converge to the
+[0:25:18] control. You're going to converge to the best you know, sparse solution for the
+[0:25:24] best you know, sparse solution for the you know, among the set of solutions,
+[0:25:25] you know, among the set of solutions, the original set of solutions of the
+[0:25:27] the original set of solutions of the unpenalized synthetic control.
+[0:25:29] unpenalized synthetic control. Okay, as lambda
+[0:25:31] Okay, as lambda goes to infinity, you're going to
+[0:25:34] goes to infinity, you're going to you're going to converge to the matching
+[0:25:36] you're going to converge to the matching estimator that is going to give all the
+[0:25:38] estimator that is going to give all the weight to unit number two.
+[0:25:41] weight to unit number two. And the penalized synthetic control
+[0:25:42] And the penalized synthetic control estimator is never going to use, no
+[0:25:44] estimator is never going to use, no matter what is the the value of lambda,
+[0:25:45] matter what is the the value of lambda, never going to use X4. Never you're
+[0:25:48] never going to use X4. Never you're going to use the best match. There you
+[0:25:49] going to use the best match. There you have like a X3 dominating X X4 in terms
+[0:25:53] have like a X3 dominating X X4 in terms of the the pairwise matching discrepancy
+[0:25:55] of the the pairwise matching discrepancy with respect to the treated unit. So,
+[0:25:57] with respect to the treated unit. So, this is how how this is going to work in
+[0:26:00] this is how how this is going to work in practice in one
+[0:26:02] practice in one in one very easy example.
+[0:26:08] Okay, so what is the formal result here? Like a
+[0:26:09] Like a I take this matrix.
+[0:26:12] I take this matrix. This is the the transpose of X0
+[0:26:15] This is the the transpose of X0 then a vector of one and then this
+[0:26:17] then a vector of one and then this vector of the you know, the square of
+[0:26:18] vector of the you know, the square of the matching discrepancies between each
+[0:26:21] the matching discrepancies between each of the treated units
+[0:26:22] of the treated units or sorry, in this case I should say in
+[0:26:24] or sorry, in this case I should say in between one treated unit because we are
+[0:26:26] between one treated unit because we are going treated unit by treated unit and
+[0:26:28] going treated unit by treated unit and each of the units in the donor pool.
+[0:26:31] each of the units in the donor pool. So, the the this theorem says that the
+[0:26:34] So, the the this theorem says that the any submatrix that is composed by rows
+[0:26:38] any submatrix that is composed by rows of the this matrix
+[0:26:39] of the this matrix will have if this
+[0:26:41] will have if this any submatrix have a full rank
+[0:26:44] any submatrix have a full rank then no matter what is the value of
+[0:26:45] then no matter what is the value of lambda the penalized synthetic control
+[0:26:48] lambda the penalized synthetic control is going to be unique and will you know,
+[0:26:51] is going to be unique and will you know, at most P plus one non-zero components.
+[0:26:53] at most P plus one non-zero components. Remember, P is the dimension of X.
+[0:26:56] Remember, P is the dimension of X. Okay.
+[0:26:57] Okay. So,
+[0:26:58] So, what is the meaning of you know, this
+[0:27:01] what is the meaning of you know, this the condition of the theorem? Basically,
+[0:27:02] the condition of the theorem? Basically, it's requiring two things like um for
+[0:27:05] it's requiring two things like um for you is required that no two control
+[0:27:07] you is required that no two control units have the same value of the
+[0:27:08] units have the same value of the predictors.
+[0:27:10] predictors. You know, otherwise you're going you
+[0:27:11] You know, otherwise you're going you know, like the this condition will not
+[0:27:13] know, like the this condition will not be
+[0:27:14] be will not be true. And second, there is
+[0:27:16] will not be true. And second, there is no set of P plus two control units that
+[0:27:19] no set of P plus two control units that lay on the surface of a sphere that is
+[0:27:22] lay on the surface of a sphere that is centered on XI
+[0:27:24] centered on XI in which case
+[0:27:25] in which case this condition wouldn't be true
+[0:27:28] this condition wouldn't be true either. And you can see you can see you
+[0:27:30] either. And you can see you can see you know, like if these if you violate these
+[0:27:32] know, like if these if you violate these or these, you can see how you're not
+[0:27:34] or these, you can see how you're not going to have uniqueness and you know,
+[0:27:37] going to have uniqueness and you know, every time that you don't have
+[0:27:38] every time that you don't have uniqueness, typically you're not going
+[0:27:39] uniqueness, typically you're not going to have a sparsity, right? Like imagine
+[0:27:41] to have a sparsity, right? Like imagine that you have like um
+[0:27:43] that you have like um you know, XI is here. This is the
+[0:27:44] you know, XI is here. This is the treated unit. But imagine that you we
+[0:27:47] treated unit. But imagine that you we have like a
+[0:27:48] have like a controls here and you know, like in a
+[0:27:52] controls here and you know, like in a in a little bit of a
+[0:27:53] in a little bit of a you know, like a sphere you know, around
+[0:27:56] you know, like a sphere you know, around X1.
+[0:27:57] X1. Like you could you could use these three
+[0:28:01] Like you could you could use these three you know, and have a you know, like a
+[0:28:02] you know, and have a you know, like a synthetic control and you could use
+[0:28:03] synthetic control and you could use these three
+[0:28:04] these three and have a synthetic control, but you
+[0:28:06] and have a synthetic control, but you know, the
+[0:28:07] know, the the you know, like a aggregate pairwise
+[0:28:10] the you know, like a aggregate pairwise matching discrepancy is going to be
+[0:28:12] matching discrepancy is going to be exactly the same for the two synthetic
+[0:28:13] exactly the same for the two synthetic controls.
+[0:28:14] controls. Okay, this is why
+[0:28:16] Okay, this is why you need not to have co-sphericity, but
+[0:28:19] you need not to have co-sphericity, but this is like a
+[0:28:21] this is like a this is a really weak
+[0:28:23] this is a really weak assumption in the in the sense that you
+[0:28:24] assumption in the in the sense that you know, like if you take the the X's that
+[0:28:26] know, like if you take the the X's that come from some you know, like um
+[0:28:29] come from some you know, like um um you know, um
+[0:28:32] um you know, um continuous distribution, like a this
+[0:28:34] continuous distribution, like a this type of co-sphericity will happen with
+[0:28:36] type of co-sphericity will happen with probability zero.
+[0:28:42] Okay, and I think if I if I remember correctly that this is the point in
+[0:28:43] correctly that this is the point in which I I'm supposed to stop
+[0:28:46] which I I'm supposed to stop and take questions. Is that right?
+[0:28:48] and take questions. Is that right? Uh yeah, sure. So, we we have a question
+[0:28:51] Uh yeah, sure. So, we we have a question from
+[0:28:52] from Timo Schenk, so let me unmute
+[0:28:55] Timo Schenk, so let me unmute him.
+[0:28:57] him. Uh
+[0:28:58] Uh Timo, you should be Yeah, there you are.
+[0:29:01] Timo, you should be Yeah, there you are. Yeah. Yeah, hi. I have a question. It's
+[0:29:04] Yeah. Yeah, hi. I have a question. It's a bit more in the beginning.
+[0:29:06] a bit more in the beginning. So,
+[0:29:08] So, when we are only interested in the in
+[0:29:09] when we are only interested in the in the average
+[0:29:11] the average I was wondering
+[0:29:12] I was wondering because I remember from the earlier
+[0:29:14] because I remember from the earlier papers that then
+[0:29:15] papers that then it was common to just take the average
+[0:29:17] it was common to just take the average of the treated units and estimate one
+[0:29:19] of the treated units and estimate one synthetic control on the average,
+[0:29:21] synthetic control on the average, whereas now we estimate
+[0:29:23] whereas now we estimate N1 synthetic controls and then average
+[0:29:26] N1 synthetic controls and then average them. So, I was wondering what the
+[0:29:28] them. So, I was wondering what the difference is and
+[0:29:29] difference is and Yes. if there are any.
+[0:29:31] Yes. if there are any. So, that's the Yes, thank you for
+[0:29:33] So, that's the Yes, thank you for mentioning this. This is something that
+[0:29:34] mentioning this. This is something that I didn't mention. Like the other way in
+[0:29:36] I didn't mention. Like the other way in which to solve this problem is that
+[0:29:38] which to solve this problem is that well, you just take the average of the
+[0:29:39] well, you just take the average of the treated and
+[0:29:42] treated and now you you made a
+[0:29:44] now you you made a you know, you made a problem into a
+[0:29:46] you know, you made a problem into a problem with only one treated unit and
+[0:29:49] problem with only one treated unit and you just like um you know like estimate
+[0:29:51] you just like um you know like estimate a synthetic control for that treated
+[0:29:52] a synthetic control for that treated unit. And that's that's you know like
+[0:29:55] unit. And that's that's you know like that's something that they can be done
+[0:29:56] that's something that they can be done in some instances, but you are going to
+[0:29:59] in some instances, but you are going to expose yourself to
+[0:30:02] expose yourself to you know high risk of interpolation
+[0:30:03] you know high risk of interpolation biases, right? Because like it may be
+[0:30:05] biases, right? Because like it may be the case that the average of the treated
+[0:30:07] the case that the average of the treated unit
+[0:30:08] unit is nowhere close to each of the treated
+[0:30:11] is nowhere close to each of the treated units, right? You may have like treated
+[0:30:13] units, right? You may have like treated units all over the place, you know on
+[0:30:15] units all over the place, you know on the average which is a quite distance
+[0:30:16] the average which is a quite distance for them. And like you are going to be
+[0:30:18] for them. And like you are going to be matching something that is
+[0:30:20] matching something that is you know is is that average, but it's
+[0:30:22] you know is is that average, but it's close to the to the true value of the
+[0:30:24] close to the to the true value of the predictors for the treated units. Um if
+[0:30:27] predictors for the treated units. Um if if everything is linear like things
+[0:30:30] if everything is linear like things things will go well if things are
+[0:30:31] things will go well if things are non-linear like you are going to do
+[0:30:33] non-linear like you are going to do you're going to incur in some
+[0:30:35] you're going to incur in some interpolation biases that you can like
+[0:30:37] interpolation biases that you can like attenuate to some extent if you try to
+[0:30:40] attenuate to some extent if you try to you know like a first you know like a go
+[0:30:42] you know like a first you know like a go unit by unit and then
+[0:30:45] unit by unit and then calculate the synthetic control for each
+[0:30:46] calculate the synthetic control for each of the treated units and then taking the
+[0:30:48] of the treated units and then taking the average.
+[0:30:53] Yeah yeah, clear. Thanks a lot. Sure.
+[0:30:54] Sure. Uh thanks Alberto. Maybe you can
+[0:30:56] Uh thanks Alberto. Maybe you can continue.
+[0:30:57] continue. Okay, very good.
+[0:30:59] Okay, very good. Okay, so the
+[0:31:01] Okay, so the other issue that we found
+[0:31:03] other issue that we found when we started looking at this um
+[0:31:06] when we started looking at this um penalized synthetic control estimators
+[0:31:08] penalized synthetic control estimators is that they relate in very nice ways to
+[0:31:12] is that they relate in very nice ways to an object that is studied in
+[0:31:14] an object that is studied in computational geometry and we don't know
+[0:31:18] computational geometry and we don't know very much about and we have to learn
+[0:31:19] very much about and we have to learn suddenly about this object and this
+[0:31:21] suddenly about this object and this object is called the Delaunay
+[0:31:23] object is called the Delaunay triangulation and I will try to explain
+[0:31:25] triangulation and I will try to explain what a Delaunay triangulation is about
+[0:31:28] what a Delaunay triangulation is about and and why it's relevant here and
+[0:31:31] and and why it's relevant here and you know like talking about the Delaunay
+[0:31:33] you know like talking about the Delaunay triangulation is going to give us two
+[0:31:35] triangulation is going to give us two things. First is going to give us a way
+[0:31:38] things. First is going to give us a way to compute um
+[0:31:39] to compute um penalized synthetic control estimators
+[0:31:42] penalized synthetic control estimators um
+[0:31:42] um um in one of the in one of the cases
+[0:31:45] um in one of the in one of the cases that is in our mind quite important, but
+[0:31:47] that is in our mind quite important, but is is difficult to compute it otherwise.
+[0:31:50] is is difficult to compute it otherwise. And the second thing is that is going to
+[0:31:52] And the second thing is that is going to give us um
+[0:31:53] give us um a notion of proximity between the the
+[0:31:56] a notion of proximity between the the treated unit and the synthetic control
+[0:31:57] treated unit and the synthetic control and it's also going to give us a notion
+[0:31:59] and it's also going to give us a notion of proximity between
+[0:32:01] of proximity between you know like the
+[0:32:02] you know like the the
+[0:32:03] the um
+[0:32:05] um Sorry, it's going to give us a notion of
+[0:32:07] Sorry, it's going to give us a notion of proximity I should say of the synthetic
+[0:32:08] proximity I should say of the synthetic control and each of the units that
+[0:32:10] control and each of the units that contribute to the synthetic control. And
+[0:32:12] contribute to the synthetic control. And and also a notion of proximity um
+[0:32:14] and also a notion of proximity um between you know the treated units and
+[0:32:17] between you know the treated units and each of the units that contribute to its
+[0:32:19] each of the units that contribute to its synthetic control.
+[0:32:20] synthetic control. All right, so let's go for it. So, what
+[0:32:22] All right, so let's go for it. So, what is like a Delaunay triangulation and
+[0:32:26] is like a Delaunay triangulation and and you know I'm sure that
+[0:32:28] and you know I'm sure that that
+[0:32:29] that Jeremy can and you know like a
+[0:32:31] Jeremy can and you know like a can pronounce Delaunay much better than
+[0:32:33] can pronounce Delaunay much better than me. Um but anyway, like let's go there.
+[0:32:36] me. Um but anyway, like let's go there. Like take take a
+[0:32:39] Like take take a matrix like this matrix that we have X0
+[0:32:41] matrix like this matrix that we have X0 and the Delaunay triangulation of
+[0:32:44] and the Delaunay triangulation of of this matrix of the collection of of
+[0:32:46] of this matrix of the collection of of this matrix is going to be a
+[0:32:47] this matrix is going to be a triangulation such that no point in X0
+[0:32:50] triangulation such that no point in X0 so like no column of X0
+[0:32:53] so like no column of X0 is inside the circumcircle of any
+[0:32:56] is inside the circumcircle of any triangle in this triangulation. Like so,
+[0:32:59] triangle in this triangulation. Like so, what they were doing is like we're
+[0:33:00] what they were doing is like we're taking triangles where you know like
+[0:33:02] taking triangles where you know like we're taking the you know the the convex
+[0:33:05] we're taking the you know the the convex hull of all these points. We are like
+[0:33:08] hull of all these points. We are like dividing the this convex hull in
+[0:33:09] dividing the this convex hull in triangles and these triangles are going
+[0:33:11] triangles and these triangles are going to be of such way that they you know
+[0:33:14] to be of such way that they you know when I take the circumcircle of this
+[0:33:16] when I take the circumcircle of this triangle so I don't have like any point
+[0:33:18] triangle so I don't have like any point inside it which is if you if you look at
+[0:33:20] inside it which is if you if you look at this a figure carefully, it's exactly
+[0:33:23] this a figure carefully, it's exactly what happens in the figure. And perhaps
+[0:33:25] what happens in the figure. And perhaps a little bit surprising, you know this
+[0:33:26] a little bit surprising, you know this triangulation like it exists um under
+[0:33:30] triangulation like it exists um under relatively weak conditions.
+[0:33:33] relatively weak conditions. Okay, so and why is this is going to be
+[0:33:35] Okay, so and why is this is going to be this triangulation important for us? Let
+[0:33:38] this triangulation important for us? Let me try to
+[0:33:39] me try to let me try to um explain like this what
+[0:33:42] let me try to um explain like this what we did. We're going to think about
+[0:33:45] we did. We're going to think about you know like as
+[0:33:46] you know like as you know like a setting with a
+[0:33:48] you know like a setting with a um
+[0:33:49] um two dimension of the covariates so we
+[0:33:51] two dimension of the covariates so we have like a like a you know like a
+[0:33:54] have like a like a you know like a uh you know X1 and X2 and and you know
+[0:33:57] uh you know X1 and X2 and and you know these are going to be uniform
+[0:34:00] these are going to be uniform and we just like a you know simulated
+[0:34:03] and we just like a you know simulated from this like a joint uniform
+[0:34:05] from this like a joint uniform distribution and we have like several
+[0:34:06] distribution and we have like several dots here
+[0:34:08] dots here and those are
+[0:34:09] and those are you can think about this as the as the
+[0:34:11] you can think about this as the as the null pool. And we have a green dot also
+[0:34:14] null pool. And we have a green dot also that you can think about it as a you
+[0:34:16] that you can think about it as a you know treated unit. Okay, so how you can
+[0:34:18] know treated unit. Okay, so how you can construct a you know Delaunay
+[0:34:20] construct a you know Delaunay triangulation like the first thing that
+[0:34:21] triangulation like the first thing that we are going to do or one of the way
+[0:34:23] we are going to do or one of the way ways in which you can proceed is the
+[0:34:24] ways in which you can proceed is the following. Um the first thing that you
+[0:34:27] following. Um the first thing that you can do is like a think about what is
+[0:34:29] can do is like a think about what is going to be the Voronoi
+[0:34:31] going to be the Voronoi tessellation in this case. What is the
+[0:34:33] tessellation in this case. What is the Voronoi tessellation? Well, it's a you
+[0:34:35] Voronoi tessellation? Well, it's a you know it's a tessellation of this you
+[0:34:37] know it's a tessellation of this you know like a uh of this
+[0:34:40] know like a uh of this square such that you know
+[0:34:42] square such that you know each of these sets
+[0:34:45] each of these sets you know is is composed
+[0:34:47] you know is is composed by the points that are closer
+[0:34:50] by the points that are closer uh to the
+[0:34:51] uh to the you know to the orange point inside the
+[0:34:54] you know to the orange point inside the the set than to any other orange point.
+[0:34:58] the set than to any other orange point. Okay, this is like a you can think about
+[0:35:00] Okay, this is like a you can think about the
+[0:35:01] the you know like you know for this point
+[0:35:04] you know like you know for this point you know this these are all the points
+[0:35:05] you know this these are all the points such that
+[0:35:06] such that this orange point is the nearest
+[0:35:08] this orange point is the nearest neighbor.
+[0:35:09] neighbor. Okay, so this is the Voronoi
+[0:35:11] Okay, so this is the Voronoi tessellation
+[0:35:13] tessellation without counting the green dot. We are
+[0:35:15] without counting the green dot. We are going we are only counting the
+[0:35:17] going we are only counting the the the orange dot. And what you can see
+[0:35:19] the the orange dot. And what you can see now in this graph one one thing that you
+[0:35:21] now in this graph one one thing that you can see is that this one this one is the
+[0:35:24] can see is that this one this one is the nearest neighbor of a of the treated
+[0:35:25] nearest neighbor of a of the treated unit.
+[0:35:26] unit. Okay, so how do you construct the
+[0:35:29] Okay, so how do you construct the Delaunay triangulations? One of the
+[0:35:31] Delaunay triangulations? One of the things that you can do or one of the
+[0:35:32] things that you can do or one of the ways in which you can construct the
+[0:35:33] ways in which you can construct the Delaunay triangulation is by
+[0:35:35] Delaunay triangulation is by you know linking
+[0:35:37] you know linking you know each point
+[0:35:40] you know each point to its neighbors in this graph, right?
+[0:35:44] to its neighbors in this graph, right? Like um and you do it for all the points
+[0:35:47] Like um and you do it for all the points like you find the Delaunay triangulation
+[0:35:50] like you find the Delaunay triangulation of of you know the set of the points in
+[0:35:52] of of you know the set of the points in the null pool.
+[0:35:54] the null pool. So, let's go now like a little bit more
+[0:35:56] So, let's go now like a little bit more zoom into the area where you know our
+[0:35:59] zoom into the area where you know our treated unit is. And now what we are
+[0:36:01] treated unit is. And now what we are going to do here is like a we are going
+[0:36:03] going to do here is like a we are going to show you
+[0:36:05] to show you the set of all possible penalized
+[0:36:07] the set of all possible penalized synthetic controls as a function of um
+[0:36:09] synthetic controls as a function of um of lambda. Like so, when you do that you
+[0:36:12] of lambda. Like so, when you do that you get this
+[0:36:14] get this red line.
+[0:36:15] red line. So, this red line again collects you
+[0:36:19] So, this red line again collects you know
+[0:36:21] know X0 times W star lambda for different
+[0:36:24] X0 times W star lambda for different values of lambda. And you can see how
+[0:36:26] values of lambda. And you can see how this going to work, right? When lambda
+[0:36:28] this going to work, right? When lambda is very very large
+[0:36:29] is very very large we said that the synthetic control is
+[0:36:32] we said that the synthetic control is going to be the nearest neighbor. So,
+[0:36:33] going to be the nearest neighbor. So, this going to be this one. This happens
+[0:36:35] this going to be this one. This happens when you arrive there when lambda is
+[0:36:37] when you arrive there when lambda is very very large.
+[0:36:38] very very large. Um when lambda is very very small, you
+[0:36:42] Um when lambda is very very small, you are going to you know like a
+[0:36:44] are going to you know like a be close to solving the original
+[0:36:47] be close to solving the original synthetic control problem and so you
+[0:36:49] synthetic control problem and so you just want to have like a
+[0:36:51] just want to have like a a convex combination of the all these
+[0:36:53] a convex combination of the all these points that reproduces this this red
+[0:36:56] points that reproduces this this red this green dot.
+[0:36:58] this green dot. And you know like the one that you're
+[0:36:59] And you know like the one that you're going to get in this case is the one
+[0:37:01] going to get in this case is the one that is
+[0:37:03] that is you know like a produced by by
+[0:37:06] you know like a produced by by by these three points in the Delaunay
+[0:37:08] by these three points in the Delaunay triangle where the synthetic control is.
+[0:37:12] triangle where the synthetic control is. Okay. And this um
+[0:37:15] Okay. And this um this property that you know this the
+[0:37:18] this property that you know this the synthetic control is um the penalized
+[0:37:21] synthetic control is um the penalized synthetic control is um
+[0:37:23] synthetic control is um is composed by weights of you know the
+[0:37:27] is composed by weights of you know the vertices
+[0:37:28] vertices of the units in in its Delaunay
+[0:37:33] of the units in in its Delaunay triangle. Um it is it is generally
+[0:37:35] triangle. Um it is it is generally something that you can show um we are
+[0:37:38] something that you can show um we are going to show in the next theorem and
+[0:37:39] going to show in the next theorem and this this what it says like a
+[0:37:42] this this what it says like a consider the Delaunay
+[0:37:43] consider the Delaunay tessellation the Delaunay triangulation
+[0:37:45] tessellation the Delaunay triangulation that is induced by the columns of X0
+[0:37:48] that is induced by the columns of X0 and then like um
+[0:37:50] and then like um you take um
+[0:37:51] you take um any control unit such that XJ is not a
+[0:37:55] any control unit such that XJ is not a vertex of the Delaunay simple simplex
+[0:37:57] vertex of the Delaunay simple simplex the Delaunay triangle
+[0:38:00] the Delaunay triangle containing the synthetic control, then
+[0:38:02] containing the synthetic control, then you know the weight for this the weight
+[0:38:04] you know the weight for this the weight for this observation is going to be
+[0:38:06] for this observation is going to be equal to zero. Okay, so this tells you
+[0:38:09] equal to zero. Okay, so this tells you that you know
+[0:38:11] that you know let me erase a little bit here.
+[0:38:18] This tells you that while you're here while you're here
+[0:38:21] while you're here only these three points are going to
+[0:38:22] only these three points are going to contribute.
+[0:38:24] contribute. While you are there
+[0:38:27] While you are there only these three points are going to
+[0:38:28] only these three points are going to contribute.
+[0:38:30] contribute. Okay, this is this is what you're going
+[0:38:32] Okay, this is this is what you're going to obtain. So, um
+[0:38:34] to obtain. So, um this result is is providing us with two
+[0:38:37] this result is is providing us with two things. First is going to provide a
+[0:38:38] things. First is going to provide a notion of proximity between a synthetic
+[0:38:41] notion of proximity between a synthetic control and the units that contribute to
+[0:38:43] control and the units that contribute to it. And it also
+[0:38:44] it. And it also provides us with a way to compute to
+[0:38:47] provides us with a way to compute to compute the pure synthetic control for
+[0:38:49] compute the pure synthetic control for the setting in which you know like that
+[0:38:51] the setting in which you know like that is the setting in which this lambda you
+[0:38:53] is the setting in which this lambda you know like a converges to zero or we take
+[0:38:56] know like a converges to zero or we take the limit of the estimator as lambda
+[0:38:57] the limit of the estimator as lambda converges to zero.
+[0:38:58] converges to zero. Because this is difficult to do in
+[0:39:00] Because this is difficult to do in practice. You know you have to take like
+[0:39:02] practice. You know you have to take like a small values of lambda
+[0:39:04] a small values of lambda you are going to be close to us to a to
+[0:39:06] you are going to be close to us to a to a problem with multiple solution. But
+[0:39:08] a problem with multiple solution. But now that we know this like the Delaunay
+[0:39:10] now that we know this like the Delaunay property, we just use you know like a
+[0:39:13] property, we just use you know like a we can just use the synthetic control
+[0:39:14] we can just use the synthetic control that we obtain using only
+[0:39:17] that we obtain using only you know the values of the vertices of
+[0:39:20] you know the values of the vertices of the Delaunay triangle in which you know
+[0:39:23] the Delaunay triangle in which you know like the treated unit is going to is
+[0:39:25] like the treated unit is going to is going to fall. Okay.
+[0:39:27] going to fall. Okay. Anyway, so this is this one.
+[0:39:29] Anyway, so this is this one. I think I'm very very bad in doing very
+[0:39:31] I think I'm very very bad in doing very bad in terms of time, so I will try to I
+[0:39:33] bad in terms of time, so I will try to I will try to speed up a little bit. So,
+[0:39:35] will try to speed up a little bit. So, the other thing that
+[0:39:37] the other thing that you know we find in terms of Delaunay
+[0:39:39] you know we find in terms of Delaunay triangles is that um
+[0:39:41] triangles is that um there is another notion that there is
+[0:39:43] there is another notion that there is another way in which you can use this
+[0:39:44] another way in which you can use this notion to have a
+[0:39:46] notion to have a you know a sense of proximity between
+[0:39:49] you know a sense of proximity between you know the treated unit and the all
+[0:39:50] you know the treated unit and the all the units that they contribute to the
+[0:39:52] the units that they contribute to the synthetic control that treated unit. And
+[0:39:55] synthetic control that treated unit. And it's in the following way. Imagine that
+[0:39:56] it's in the following way. Imagine that you do the Delaunay triangulation now
+[0:39:58] you do the Delaunay triangulation now not only of X0 but you know you augment
+[0:40:00] not only of X0 but you know you augment this matrix with XI.
+[0:40:02] this matrix with XI. With the characteristics of the treated
+[0:40:03] With the characteristics of the treated unit.
+[0:40:04] unit. Then like um
+[0:40:07] Then like um then you know
+[0:40:08] then you know II is going to be the set of indices uh
+[0:40:11] II is going to be the set of indices uh of you know the points in in you know
+[0:40:13] of you know the points in in you know like a the points in the donor pool that
+[0:40:15] like a the points in the donor pool that are connected to XI. Uh through one of
+[0:40:18] are connected to XI. Uh through one of these edges of the Delaunay triangle. Uh
+[0:40:20] these edges of the Delaunay triangle. Uh like a if um
+[0:40:23] like a if um um
+[0:40:25] um if the untreated
+[0:40:26] if the untreated units are in general quadratic position
+[0:40:28] units are in general quadratic position that is also like a quite a weak
+[0:40:30] that is also like a quite a weak requirement you can show that if you
+[0:40:32] requirement you can show that if you know uh an untreated unit is not
+[0:40:34] know uh an untreated unit is not connected to XI in this triangulation
+[0:40:37] connected to XI in this triangulation you know it's going to have a weight
+[0:40:39] you know it's going to have a weight zero in the synthetic control no matter
+[0:40:40] zero in the synthetic control no matter what what is the no matter what is the
+[0:40:42] what what is the no matter what is the value of lambda.
+[0:40:44] value of lambda. Okay.
+[0:40:45] Okay. So like here like um
+[0:40:47] So like here like um we have like a in the augmented
+[0:40:49] we have like a in the augmented triangulation we have all these points
+[0:40:50] triangulation we have all these points that are connected. And this is a
+[0:40:52] that are connected. And this is a necessary condition for being a you know
+[0:40:54] necessary condition for being a you know like a point that is used in the
+[0:40:55] like a point that is used in the synthetic control but it's not necessary
+[0:40:57] synthetic control but it's not necessary because you know that you can see that
+[0:40:58] because you know that you can see that they you know we never use these two.
+[0:41:02] they you know we never use these two. Okay. Um let me try to speed up a little
+[0:41:05] Okay. Um let me try to speed up a little bit. I want to uh talk a little bit more
+[0:41:07] bit. I want to uh talk a little bit more about the simulations and
+[0:41:10] about the simulations and and perhaps an empirical application. I
+[0:41:12] and perhaps an empirical application. I have to say that we also
+[0:41:14] have to say that we also um um we also um
+[0:41:19] um um we also um think in this paper and propose a bias
+[0:41:21] think in this paper and propose a bias correction for the synthetic control
+[0:41:22] correction for the synthetic control estimator. Um
+[0:41:24] estimator. Um this is important because then you are
+[0:41:26] this is important because then you are in case which you have like a many
+[0:41:28] in case which you have like a many treated units
+[0:41:29] treated units uh it may be the case that some of the
+[0:41:30] uh it may be the case that some of the treated units are not well reproduced by
+[0:41:32] treated units are not well reproduced by synthetic control. You are going to
+[0:41:34] synthetic control. You are going to obtain a bias because of that and you
+[0:41:36] obtain a bias because of that and you know there are like a regression based
+[0:41:38] know there are like a regression based methods to correct these biases. And
+[0:41:40] methods to correct these biases. And this is similar to what people have used
+[0:41:43] this is similar to what people have used for matching estimator and similar to
+[0:41:44] for matching estimator and similar to also like other proposals in the context
+[0:41:47] also like other proposals in the context of the synthetic controls.
+[0:41:50] of the synthetic controls. Let me jump over inference um
+[0:41:52] Let me jump over inference um you know like a little bit and let me
+[0:41:54] you know like a little bit and let me jump because I have like
+[0:41:57] jump because I have like few minutes over you know how to select
+[0:41:59] few minutes over you know how to select the um
+[0:42:00] the um um the penalization parameter. Um it is
+[0:42:04] um the penalization parameter. Um it is going to be basically with a
+[0:42:06] going to be basically with a you know out of sample
+[0:42:07] you know out of sample um validation. And let me talk a little
+[0:42:10] um validation. And let me talk a little about you know the performance of the
+[0:42:11] about you know the performance of the synthetic control estimators. I just I
+[0:42:13] synthetic control estimators. I just I just
+[0:42:15] just going to say a couple of Let me see what
+[0:42:16] going to say a couple of Let me see what I need from this. I need I need that you
+[0:42:18] I need from this. I need I need that you know N1 is number of treated unit N0 is
+[0:42:21] know N1 is number of treated unit N0 is the number of untreated units.
+[0:42:24] the number of untreated units. R is something that is going to control
+[0:42:26] R is something that is going to control how
+[0:42:27] how non-linear
+[0:42:29] non-linear uh the regression of Y on on on X is.
+[0:42:32] uh the regression of Y on on on X is. Um what else I need? Oh and P.
+[0:42:35] Um what else I need? Oh and P. P is the you know the dimension of the
+[0:42:36] P is the you know the dimension of the covariates right? And you know then you
+[0:42:38] covariates right? And you know then you have a lot of you know like them Monte
+[0:42:41] have a lot of you know like them Monte Carlo simulations that you cannot see
+[0:42:43] Carlo simulations that you cannot see but they are color coded and I will not
+[0:42:45] but they are color coded and I will not try to describe uh in detail but this is
+[0:42:48] try to describe uh in detail but this is what I can say about what happens in the
+[0:42:50] what I can say about what happens in the simulations. Like what we see is that
+[0:42:52] simulations. Like what we see is that the the penalized and the pure synthetic
+[0:42:55] the the penalized and the pure synthetic control estimators that they outperform
+[0:42:57] control estimators that they outperform the matching matching procedures
+[0:42:59] the matching matching procedures across like a all three different
+[0:43:01] across like a all three different measures of performance that are
+[0:43:03] measures of performance that are basically root mean square error for the
+[0:43:06] basically root mean square error for the individual treatment effects, root mean
+[0:43:08] individual treatment effects, root mean square error for the aggregate treatment
+[0:43:10] square error for the aggregate treatment effects and also
+[0:43:11] effects and also uh bias.
+[0:43:12] uh bias. The penalized synthetic control
+[0:43:14] The penalized synthetic control estimator is going to behave very well
+[0:43:15] estimator is going to behave very well in terms of the individual root mean
+[0:43:17] in terms of the individual root mean square error because it's going to use a
+[0:43:19] square error because it's going to use a lot of observations because it's not a
+[0:43:21] lot of observations because it's not a sparse in principle or may not be a
+[0:43:24] sparse in principle or may not be a sparse. And then you know that's going
+[0:43:25] sparse. And then you know that's going to reduce by bias. Sorry that's going to
+[0:43:28] to reduce by bias. Sorry that's going to reduce variance but it's going to be
+[0:43:30] reduce variance but it's going to be this going to be done at the cost of
+[0:43:32] this going to be done at the cost of large reduction in sparsity and increase
+[0:43:34] large reduction in sparsity and increase in bias.
+[0:43:36] in bias. Uh however this low low sparsity is
+[0:43:38] Uh however this low low sparsity is going to is going to you know affect
+[0:43:40] going to is going to you know affect performance of this
+[0:43:42] performance of this estimator when we talk about aggregate
+[0:43:44] estimator when we talk about aggregate root mean square error.
+[0:43:45] root mean square error. Okay because the the estimator is going
+[0:43:48] Okay because the the estimator is going to inherit the bias that has from the
+[0:43:50] to inherit the bias that has from the individual to for estimation of the
+[0:43:52] individual to for estimation of the individual uh
+[0:43:54] individual uh treatment effect. So especially when P
+[0:43:55] treatment effect. So especially when P is small and R is large when we have
+[0:43:57] is small and R is large when we have like a not that many variables that are
+[0:44:00] like a not that many variables that are in the
+[0:44:01] in the in in the not not as many predictors and
+[0:44:04] in in the not not as many predictors and we have like that the regression
+[0:44:05] we have like that the regression function is very non-linear
+[0:44:08] function is very non-linear we see that the you know the penalized
+[0:44:10] we see that the you know the penalized synthetic control estimator is going to
+[0:44:12] synthetic control estimator is going to suffer in terms of aggregate root mean
+[0:44:13] suffer in terms of aggregate root mean square error. It does great in terms of
+[0:44:15] square error. It does great in terms of individual root mean square error.
+[0:44:17] individual root mean square error. Uh the advantage of this this estimator
+[0:44:20] Uh the advantage of this this estimator with respect to bias is going to a
+[0:44:22] with respect to bias is going to a slight decrease as the degree of the
+[0:44:25] slight decrease as the degree of the outcome function like R increases like
+[0:44:27] outcome function like R increases like so when R becomes a very large and the
+[0:44:30] so when R becomes a very large and the regression function is
+[0:44:32] regression function is very non-linear this interpolation that
+[0:44:35] very non-linear this interpolation that in which you know like synthetic
+[0:44:36] in which you know like synthetic controls is based is not going to work
+[0:44:38] controls is based is not going to work at
+[0:44:39] at that a great and you know like a
+[0:44:40] that a great and you know like a matching estimators like the the
+[0:44:42] matching estimators like the the difference in performance between
+[0:44:44] difference in performance between um um synthetic control estimators and
+[0:44:47] um um synthetic control estimators and matching estimators are going to is
+[0:44:48] matching estimators are going to is going to be is going to decrease. Okay.
+[0:44:51] going to be is going to decrease. Okay. And
+[0:44:52] And and the other thing that we see is that
+[0:44:53] and the other thing that we see is that the bias correction improves improves
+[0:44:55] the bias correction improves improves performance uh substantially.
+[0:44:57] performance uh substantially. I think I have 4 minutes and let me just
+[0:45:00] I think I have 4 minutes and let me just go to finish with an example of
+[0:45:03] go to finish with an example of application. I think it's a
+[0:45:05] application. I think it's a is a is an a nice illustration of how
+[0:45:07] is a is an a nice illustration of how this method works in practice. Like we
+[0:45:10] this method works in practice. Like we going to talk about um
+[0:45:12] going to talk about um um you know the National Supported Work
+[0:45:13] um you know the National Supported Work Demonstration. Uh the National Supported
+[0:45:16] Demonstration. Uh the National Supported Work Demonstration data is a data that
+[0:45:18] Work Demonstration data is a data that is um
+[0:45:19] is um quite famous in you know in program
+[0:45:21] quite famous in you know in program evaluation. It has been used to
+[0:45:23] evaluation. It has been used to demonstrate the applicability and
+[0:45:24] demonstrate the applicability and performance of many alternative
+[0:45:26] performance of many alternative estimators.
+[0:45:27] estimators. And of course when we send this paper to
+[0:45:29] And of course when we send this paper to a journal they asked us like you have to
+[0:45:31] a journal they asked us like you have to use the National Work Supported Work
+[0:45:33] use the National Work Supported Work Demonstration to you know like um
+[0:45:35] Demonstration to you know like um to to illustrate the the applicability
+[0:45:37] to to illustrate the the applicability of the this method. So we did okay and
+[0:45:40] of the this method. So we did okay and um
+[0:45:41] um So this is like a
+[0:45:43] So this is like a subsidized
+[0:45:44] subsidized job program for people with
+[0:45:47] job program for people with with problems in the labor market in the
+[0:45:49] with problems in the labor market in the United States. The nice thing about this
+[0:45:51] United States. The nice thing about this data set is that we have an experimental
+[0:45:53] data set is that we have an experimental estimate because you know there is like
+[0:45:55] estimate because you know there is like an experimental control group and you
+[0:45:57] an experimental control group and you know we can calculate a benchmark
+[0:45:59] know we can calculate a benchmark experimental estimate that is like a
+[0:46:01] experimental estimate that is like a $1,794.
+[0:46:03] $1,794. But then what we can do is we can take
+[0:46:05] But then what we can do is we can take as many people has done before us we can
+[0:46:07] as many people has done before us we can take the experimental control group
+[0:46:10] take the experimental control group out of the you know out of data set and
+[0:46:14] out of the you know out of data set and instead try to use like a
+[0:46:15] instead try to use like a non-experimental control group to see if
+[0:46:18] non-experimental control group to see if you know adjusting for the difference
+[0:46:20] you know adjusting for the difference between treated and non-treated using in
+[0:46:21] between treated and non-treated using in this case a penalized synthetic control
+[0:46:23] this case a penalized synthetic control estimator is going to bring us back
+[0:46:25] estimator is going to bring us back close to the experimental estimate and
+[0:46:28] close to the experimental estimate and um
+[0:46:29] um so this is what people have done many
+[0:46:31] so this is what people have done many people have done before us. Like we are
+[0:46:32] people have done before us. Like we are going to look at the penalized synthetic
+[0:46:34] going to look at the penalized synthetic control with you know a small value of
+[0:46:36] control with you know a small value of lambda because this is going to kind try
+[0:46:37] lambda because this is going to kind try to approximate the the pure synthetic
+[0:46:40] to approximate the the pure synthetic control that we cannot um
+[0:46:43] control that we cannot um compute a nicely in this way in this
+[0:46:45] compute a nicely in this way in this setting because we have a lot of
+[0:46:46] setting because we have a lot of observations. We're going to look at the
+[0:46:47] observations. We're going to look at the unpenalized synthetic control
+[0:46:49] unpenalized synthetic control uh penalized synthetic control with a
+[0:46:52] uh penalized synthetic control with a lambda bigger than zero chosen to
+[0:46:54] lambda bigger than zero chosen to minimize absolute bias. The one match
+[0:46:56] minimize absolute bias. The one match matching estimator.
+[0:46:59] matching estimator. And the matching estimator with the
+[0:47:00] And the matching estimator with the matches
+[0:47:01] matches the number of matches is chosen to
+[0:47:03] the number of matches is chosen to minimize root mean square error.
+[0:47:06] minimize root mean square error. And so what do we get? So this what we
+[0:47:08] And so what do we get? So this what we get basically uh
+[0:47:10] get basically uh this are the
+[0:47:11] this are the you know like the characteristics
+[0:47:14] you know like the characteristics of the treated experimental treated
+[0:47:16] of the treated experimental treated experimental treated. This is um
+[0:47:19] experimental treated. This is um this is the difference between like a
+[0:47:21] this is the difference between like a the experimental treated and
+[0:47:22] the experimental treated and experimental untreated
+[0:47:24] experimental untreated around like a
+[0:47:26] around like a $1,800.
+[0:47:28] $1,800. And these are the you know the untreated
+[0:47:30] And these are the you know the untreated that we get from the from the
+[0:47:33] that we get from the from the observational
+[0:47:35] observational uh sample that they you know they have
+[0:47:36] uh sample that they you know they have like
+[0:47:38] like you know characteristics that are very
+[0:47:40] you know characteristics that are very very different from the characteristics
+[0:47:42] very different from the characteristics of the experimental treated and
+[0:47:43] of the experimental treated and experimental untreated. And we what we
+[0:47:45] experimental untreated. And we what we try to see is like we can match these
+[0:47:48] try to see is like we can match these characteristics with the different
+[0:47:49] characteristics with the different estimators and to which extent we get
+[0:47:51] estimators and to which extent we get something that is close uh to the
+[0:47:54] something that is close uh to the experimental estimate under the
+[0:47:55] experimental estimate under the assumption that we have something like a
+[0:47:56] assumption that we have something like a selection on observables in this case
+[0:47:58] selection on observables in this case that you know if we if we you know
+[0:48:01] that you know if we if we you know control for all these characteristics
+[0:48:04] control for all these characteristics we will obtain something that is close
+[0:48:05] we will obtain something that is close to the experimental estimate. We see
+[0:48:07] to the experimental estimate. We see that the you know the the
+[0:48:10] that the you know the the penalized synthetic control is doing
+[0:48:11] penalized synthetic control is doing very well both in you know like a
+[0:48:13] very well both in you know like a reproducing the characteristics of the
+[0:48:15] reproducing the characteristics of the of the units in the experiment the
+[0:48:18] of the units in the experiment the characteristics of the treated unit in
+[0:48:19] characteristics of the treated unit in the experiment and also like reproducing
+[0:48:21] the experiment and also like reproducing the experimental estimates. Like the
+[0:48:24] the experimental estimates. Like the unpenalized synthetic control does um
+[0:48:27] unpenalized synthetic control does um uh you know a little bit worse in terms
+[0:48:28] uh you know a little bit worse in terms of you know like reproducing the
+[0:48:30] of you know like reproducing the treatment effects. Um
+[0:48:33] treatment effects. Um And
+[0:48:34] And but you know like also quite close and
+[0:48:36] but you know like also quite close and you know the the penalized synthetic
+[0:48:38] you know the the penalized synthetic control estimator that um
+[0:48:39] control estimator that um that minimizes
+[0:48:41] that minimizes um bias to you know estimate the bias to
+[0:48:43] um bias to you know estimate the bias to choose lambda or the matching estimator
+[0:48:46] choose lambda or the matching estimator with the uses just one match they do
+[0:48:48] with the uses just one match they do like relatively well also like um
+[0:48:51] like relatively well also like um you know reproducing the characteristics
+[0:48:53] you know reproducing the characteristics of the treated units and reproducing the
+[0:48:55] of the treated units and reproducing the experimental estimate. What is not doing
+[0:48:58] experimental estimate. What is not doing um
+[0:48:59] um such a nice work is like
+[0:49:01] such a nice work is like uh choosing the matching estimator with
+[0:49:03] uh choosing the matching estimator with the number of matches to you know like
+[0:49:06] the number of matches to you know like minimize root mean square error.
+[0:49:08] minimize root mean square error. Okay.
+[0:49:09] Okay. Uh and the other thing that you can see
+[0:49:10] Uh and the other thing that you can see is that they you know like
+[0:49:12] is that they you know like the the synthetic control synthetic
+[0:49:14] the the synthetic control synthetic control estimator here this one the
+[0:49:17] control estimator here this one the two penalizes synthetic control
+[0:49:18] two penalizes synthetic control estimator they are you know like a very
+[0:49:21] estimator they are you know like a very sparse
+[0:49:22] sparse in terms of the minimum density median
+[0:49:24] in terms of the minimum density median density and maximum density. The density
+[0:49:26] density and maximum density. The density is the number of weights that are
+[0:49:28] is the number of weights that are non-zero.
+[0:49:29] non-zero. Uh the you know unpenalized synthetic
+[0:49:30] Uh the you know unpenalized synthetic control estimators become
+[0:49:33] control estimators become uh you know in some cases the the
+[0:49:35] uh you know in some cases the the density super large. You know for some
+[0:49:36] density super large. You know for some units they usually a lot of units in
+[0:49:39] units they usually a lot of units in order to try to try to match this
+[0:49:42] order to try to try to match this particular unit, which makes
+[0:49:44] particular unit, which makes interpretation of these estimates a
+[0:49:46] interpretation of these estimates a little bit harder.
+[0:49:47] little bit harder. So,
+[0:49:48] So, we do some inference, but I don't have
+[0:49:50] we do some inference, but I don't have time for this, but uh
+[0:49:52] time for this, but uh you know, it works well both for the uh
+[0:49:55] you know, it works well both for the uh you know, for both for the you know,
+[0:49:56] you know, for both for the you know, like um
+[0:49:58] like um um individual treatment effects and for
+[0:49:59] um individual treatment effects and for the aggregate treatment effects, we're
+[0:50:01] the aggregate treatment effects, we're going to like uh reject that the effects
+[0:50:04] going to like uh reject that the effects are equal to zero.
+[0:50:06] are equal to zero. And uh I just wanted to conclude um with
+[0:50:09] And uh I just wanted to conclude um with a little bit of a summary. So, we're
+[0:50:11] a little bit of a summary. So, we're doing here, we propose a penalizing
+[0:50:13] doing here, we propose a penalizing synthetic control estimators that is
+[0:50:15] synthetic control estimators that is trading off for what matching
+[0:50:17] trading off for what matching discrepancies
+[0:50:18] discrepancies relative to each treated unit
+[0:50:21] relative to each treated unit in the synthetic control against a
+[0:50:23] in the synthetic control against a against matching rest discrepancies
+[0:50:25] against matching rest discrepancies relative to the synthetic control as a
+[0:50:27] relative to the synthetic control as a whole.
+[0:50:28] whole. Uh we show that this estimator is
+[0:50:30] Uh we show that this estimator is uh is unique and is sparse is sparse
+[0:50:33] uh is unique and is sparse is sparse which is
+[0:50:34] which is particularly convenient for the
+[0:50:35] particularly convenient for the empirical applications with many treated
+[0:50:37] empirical applications with many treated units. We propose a bias correction
+[0:50:40] units. We propose a bias correction and we propose inferential methods. I
+[0:50:42] and we propose inferential methods. I didn't have much time to talk about
+[0:50:43] didn't have much time to talk about this. And we see that we we show the
+[0:50:46] this. And we see that we we show the applicability of these methods in both
+[0:50:48] applicability of these methods in both simulations and and using this national
+[0:50:50] simulations and and using this national supported work demonstration data.
+[0:50:53] supported work demonstration data. So,
+[0:50:55] So, thank you.
+[0:50:57] thank you. Fantastic. Thank you so much for the
+[0:50:58] Fantastic. Thank you so much for the great talk. We're now switching over to
+[0:51:00] great talk. We're now switching over to the discussion. So, we'll have Stefan
+[0:51:02] the discussion. So, we'll have Stefan present some slides and after that
+[0:51:03] present some slides and after that Alberto, you will have the opportunity
+[0:51:05] Alberto, you will have the opportunity to respond.
+[0:51:07] to respond. Okay. Thanks.
+[0:51:23] Okay. I'm just loading my slides.
+[0:51:39] All right. Um well, thanks. Uh thanks Alberto for
+[0:51:41] Um well, thanks. Uh thanks Alberto for the very very nice talk.
+[0:51:43] the very very nice talk. Um
+[0:51:44] Um I I I have to admit I I can't I have a
+[0:51:47] I I I have to admit I I can't I have a very hard time wrapping my head around
+[0:51:49] very hard time wrapping my head around the idea that I'm discussing uh
+[0:51:51] the idea that I'm discussing uh Alberto's paper on synth.
+[0:51:52] Alberto's paper on synth. Um I I wrote a first draft of a
+[0:51:54] Um I I wrote a first draft of a discussion uh a while back when I was
+[0:51:57] discussion uh a while back when I was thinking about this and the discussion
+[0:51:58] thinking about this and the discussion went something like this. Uh
+[0:52:00] went something like this. Uh synthetic controls are a good method. Uh
+[0:52:02] synthetic controls are a good method. Uh this is Alberto. He invented synthetic
+[0:52:05] this is Alberto. He invented synthetic controls. Uh but very cool.
+[0:52:07] controls. Uh but very cool. Uh I'm trying to wrap my head around
+[0:52:09] Uh I'm trying to wrap my head around what to what to say.
+[0:52:11] what to what to say. Um but anyways,
+[0:52:13] Um but anyways, I guess since I'm uh I'm I'm here, I I
+[0:52:15] I guess since I'm uh I'm I'm here, I I did want to do kind of
+[0:52:17] did want to do kind of say say a few words about kind of one
+[0:52:19] say say a few words about kind of one one question I I kind of connected with
+[0:52:21] one question I I kind of connected with and and grappled with um while while I
+[0:52:24] and and grappled with um while while I working through the paper.
+[0:52:26] working through the paper. And and the question is
+[0:52:28] And and the question is um
+[0:52:29] um kind of what are the
+[0:52:31] kind of what are the formal
+[0:52:33] formal statistical assumptions that help us
+[0:52:35] statistical assumptions that help us understand kind of when works and not
+[0:52:38] understand kind of when works and not only that, but kind of when does it do
+[0:52:39] only that, but kind of when does it do really well.
+[0:52:41] really well. Um
+[0:52:42] Um Uh Alberto did a very nice job kind of
+[0:52:44] Uh Alberto did a very nice job kind of giving a kind of a conceptual practical
+[0:52:46] giving a kind of a conceptual practical intuition for what synthetic controls
+[0:52:48] intuition for what synthetic controls are doing and why we should expect that
+[0:52:51] are doing and why we should expect that to kind of take us to a point where we
+[0:52:52] to kind of take us to a point where we get good good good estimates of the
+[0:52:54] get good good good estimates of the treatment effect. But kind of
+[0:52:56] treatment effect. But kind of what I was thinking is kind of
+[0:52:58] what I was thinking is kind of can I can I kind of fit this into like a
+[0:53:01] can I can I kind of fit this into like a familiar kind of math stat framework of
+[0:53:04] familiar kind of math stat framework of of causal inference and connect it
+[0:53:06] of causal inference and connect it there.
+[0:53:07] there. So, so just kind of very quickly for the
+[0:53:09] So, so just kind of very quickly for the setting, um
+[0:53:11] setting, um I mean, since this is exactly what
+[0:53:13] I mean, since this is exactly what Alberto discussed in detail,
+[0:53:15] Alberto discussed in detail, um we observe
+[0:53:17] um we observe n units for capital T time periods. For
+[0:53:19] n units for capital T time periods. For the first T minus one time periods, no
+[0:53:21] the first T minus one time periods, no one's treated and in the last time
+[0:53:23] one's treated and in the last time periods, there are some units that get
+[0:53:26] periods, there are some units that get treated. Um the average treatment effect
+[0:53:28] treated. Um the average treatment effect on the treated is just the difference
+[0:53:30] on the treated is just the difference over kind of the exposed units in the
+[0:53:33] over kind of the exposed units in the last time period between their actual
+[0:53:36] last time period between their actual outcome and their kind of potential
+[0:53:38] outcome and their kind of potential control outcome they would have received
+[0:53:39] control outcome they would have received had they not been treated.
+[0:53:41] had they not been treated. Uh this is exactly the same setting as
+[0:53:42] Uh this is exactly the same setting as what Alberto was discussing
+[0:53:44] what Alberto was discussing um except uh
+[0:53:47] um except uh I'm kind of using Y's throughout
+[0:53:49] I'm kind of using Y's throughout um
+[0:53:50] um to
+[0:53:51] to as as one might in the panel setting
+[0:53:54] as as one might in the panel setting as opposed to kind of calling the
+[0:53:55] as opposed to kind of calling the pre-treatment outcomes um X's.
+[0:53:59] pre-treatment outcomes um X's. And so, what synthetic control methods
+[0:54:01] And so, what synthetic control methods do in this setting is they estimate the
+[0:54:03] do in this setting is they estimate the average treatment effect on the treated
+[0:54:05] average treatment effect on the treated uh by taking
+[0:54:07] uh by taking the average of the observed outcomes
+[0:54:10] the average of the observed outcomes in the treated period for the exposed
+[0:54:11] in the treated period for the exposed units
+[0:54:12] units minus a weighted average
+[0:54:15] minus a weighted average of
+[0:54:16] of unexposed units in the last time period
+[0:54:19] unexposed units in the last time period where kind of
+[0:54:21] where kind of all the interest is in how you pick the
+[0:54:22] all the interest is in how you pick the weights. Uh so, here Abadie and L'Hour
+[0:54:26] weights. Uh so, here Abadie and L'Hour propose a new
+[0:54:28] propose a new way of picking the the weights that
+[0:54:30] way of picking the the weights that builds on insights from nearest neighbor
+[0:54:31] builds on insights from nearest neighbor matching. I think this is a very very
+[0:54:33] matching. I think this is a very very compelling discussion. Um
+[0:54:36] compelling discussion. Um um that kind of
+[0:54:38] um that kind of uh yeah, Alberto explained it in detail,
+[0:54:40] uh yeah, Alberto explained it in detail, so so I won't kind of
+[0:54:42] so so I won't kind of uh re-explain kind of how how they get
+[0:54:44] uh re-explain kind of how how they get these gamma hats, but the important
+[0:54:45] these gamma hats, but the important point is that you kind of use data from
+[0:54:47] point is that you kind of use data from the pre-treatment periods to pick the
+[0:54:49] the pre-treatment periods to pick the gamma hats and then in the last period,
+[0:54:52] gamma hats and then in the last period, you estimate the treatment effect uh by
+[0:54:54] you estimate the treatment effect uh by waiting.
+[0:54:55] waiting. So,
+[0:54:57] So, again,
+[0:54:58] again, um
+[0:54:59] um the the this is kind of conceptually,
+[0:55:01] the the this is kind of conceptually, it's clear why this gives a very nice
+[0:55:03] it's clear why this gives a very nice estimator. Um but something something I
+[0:55:06] estimator. Um but something something I uh think it
+[0:55:07] uh think it is also kind of helpful to consider is
+[0:55:09] is also kind of helpful to consider is kind of what are the statistical
+[0:55:11] kind of what are the statistical properties that really justify this.
+[0:55:13] properties that really justify this. Uh what are the assumptions on potential
+[0:55:16] Uh what are the assumptions on potential outcomes uh that identify enable
+[0:55:19] outcomes uh that identify enable identification of causal effects? And
+[0:55:21] identification of causal effects? And for other questions you might ask like
+[0:55:23] for other questions you might ask like for example, when can you get a central
+[0:55:24] for example, when can you get a central limit theorem for
+[0:55:26] limit theorem for tau hat?
+[0:55:27] tau hat? Uh now, the the funny thing is after I
+[0:55:29] Uh now, the the funny thing is after I wrote these slides, I I saw kind of a
+[0:55:31] wrote these slides, I I saw kind of a copy of Alberto's slides where now they
+[0:55:34] copy of Alberto's slides where now they have a central limit theorem. Um under
+[0:55:36] have a central limit theorem. Um under some assumptions for the estimator
+[0:55:38] some assumptions for the estimator um
+[0:55:38] um even though he skipped over them in the
+[0:55:41] even though he skipped over them in the interest of time. But so, that that is
+[0:55:42] interest of time. But so, that that is cool and it was very helpful for me in
+[0:55:43] cool and it was very helpful for me in kind of understanding the result better.
+[0:55:45] kind of understanding the result better. Um
+[0:55:47] Um But that being said, kind of overall in
+[0:55:48] But that being said, kind of overall in this literature, um
+[0:55:50] this literature, um kind of formal identification results
+[0:55:52] kind of formal identification results aren't emphasized, right? Um and I I
+[0:55:55] aren't emphasized, right? Um and I I don't For example, Abadie, Diamond, and
+[0:55:57] don't For example, Abadie, Diamond, and Hainmueller, they they pitch a synthetic
+[0:56:00] Hainmueller, they they pitch a synthetic control as a method for comparative case
+[0:56:02] control as a method for comparative case studies and emphasize placebo type
+[0:56:06] studies and emphasize placebo type of inference.
+[0:56:07] of inference. So, again, I come from like a machine
+[0:56:10] So, again, I come from like a machine learning community. It's a community
+[0:56:12] learning community. It's a community where there's heavy emphasis on
+[0:56:14] where there's heavy emphasis on empirics, figuring out what works
+[0:56:17] empirics, figuring out what works and kind of going with that. So, kind of
+[0:56:19] and kind of going with that. So, kind of I think this is a very reasonable
+[0:56:21] I think this is a very reasonable approach for building
+[0:56:23] approach for building methods that that kind of help in
+[0:56:24] methods that that kind of help in practice. But I I it's just kind of for
+[0:56:27] practice. But I I it's just kind of for for myself, also kind of like find it
+[0:56:29] for myself, also kind of like find it helpful to think about these methods
+[0:56:30] helpful to think about these methods from a more formal perspective.
+[0:56:32] from a more formal perspective. And especially since the catch is that
+[0:56:36] And especially since the catch is that when there's a method that kind of works
+[0:56:37] when there's a method that kind of works really well in applications, but the
+[0:56:39] really well in applications, but the formal aspects aren't emphasized, you
+[0:56:40] formal aspects aren't emphasized, you might think that kind of the method
+[0:56:42] might think that kind of the method doesn't look so good um from a formal
+[0:56:45] doesn't look so good um from a formal point of view.
+[0:56:46] point of view. But the catch is that as far as I can
+[0:56:48] But the catch is that as far as I can tell, synthetic control methods actually
+[0:56:50] tell, synthetic control methods actually just look really good when you look at
+[0:56:53] just look really good when you look at them from kind of formal asymptotic stat
+[0:56:55] them from kind of formal asymptotic stat perspective.
+[0:56:56] perspective. Um it's just not a perspective that's
+[0:56:58] Um it's just not a perspective that's emphasized that much.
+[0:57:01] emphasized that much. So, just very briefly, if you're going
+[0:57:03] So, just very briefly, if you're going to
+[0:57:04] to kind of try to do formal inference for
+[0:57:06] kind of try to do formal inference for percent, there essentially two
+[0:57:08] percent, there essentially two assumptions you could make.
+[0:57:09] assumptions you could make. The one is
+[0:57:11] The one is that kind of
+[0:57:13] that kind of whether or not you're treated in time
+[0:57:14] whether or not you're treated in time period capital T is as good as random
+[0:57:17] period capital T is as good as random conditional on your outcomes observed in
+[0:57:19] conditional on your outcomes observed in time periods one through capital T minus
+[0:57:22] time periods one through capital T minus one.
+[0:57:22] one. Uh this is assumption used for the
+[0:57:25] Uh this is assumption used for the central limit theorem in Abadie and
+[0:57:26] central limit theorem in Abadie and L'Hour. And it's also a perspective that
+[0:57:29] L'Hour. And it's also a perspective that kind of I connected with really in this
+[0:57:32] kind of I connected with really in this discussion for the paper by Ben Michael
+[0:57:34] discussion for the paper by Ben Michael Feller and uh Rothstein.
+[0:57:37] Feller and uh Rothstein. Um the nice aspect of this uh discussion
+[0:57:40] Um the nice aspect of this uh discussion is it kind of puts us firmly into a
+[0:57:41] is it kind of puts us firmly into a familiar setting um
+[0:57:43] familiar setting um from the unconfoundedness literature,
+[0:57:45] from the unconfoundedness literature, right? Where you can just treat your
+[0:57:48] right? Where you can just treat your observations one through capital T minus
+[0:57:50] observations one through capital T minus one as your X's, you know what to do.
+[0:57:52] one as your X's, you know what to do. The only downside is that if you're in
+[0:57:54] The only downside is that if you're in kind of classical panel models where
+[0:57:56] kind of classical panel models where kind of you people have unobserved types
+[0:57:59] kind of you people have unobserved types that govern their evolution,
+[0:58:01] that govern their evolution, um then this assumption is harder to
+[0:58:02] um then this assumption is harder to justify.
+[0:58:04] justify. Another thing you could do uh is to
+[0:58:06] Another thing you could do uh is to assume a factor model. So, this is kind
+[0:58:08] assume a factor model. So, this is kind of we assume that your control potential
+[0:58:10] of we assume that your control potential outcomes follow a standard two-way
+[0:58:12] outcomes follow a standard two-way structure plus you have this kind of
+[0:58:14] structure plus you have this kind of K-dimensional interactive confounding
+[0:58:16] K-dimensional interactive confounding term.
+[0:58:17] term. Um
+[0:58:18] Um you could also think of synthetic
+[0:58:20] you could also think of synthetic controls as something do something
+[0:58:22] controls as something do something here. Uh this is a widely studied model
+[0:58:24] here. Uh this is a widely studied model in econometrics. For example, this paper
+[0:58:26] in econometrics. For example, this paper by Bai um is is highly cited. And this
+[0:58:29] by Bai um is is highly cited. And this factor model is actually also used as
+[0:58:31] factor model is actually also used as motivation uh in Abadie, Diamond, and
+[0:58:33] motivation uh in Abadie, Diamond, and Hainmueller for kind of understanding
+[0:58:35] Hainmueller for kind of understanding synth.
+[0:58:36] synth. Uh
+[0:58:38] Uh But still, this factor model is
+[0:58:40] But still, this factor model is generally harder to work with than the
+[0:58:42] generally harder to work with than the selection on
+[0:58:43] selection on on observed history model. So, kind of
+[0:58:46] on observed history model. So, kind of getting a sharp characterization of
+[0:58:47] getting a sharp characterization of synthetic control is a little takes a
+[0:58:49] synthetic control is a little takes a little more work and there is a question
+[0:58:51] little more work and there is a question of how how good is synth here.
+[0:58:53] of how how good is synth here. Um
+[0:58:54] Um but
+[0:58:55] but kind of what I what I want to emphasize
+[0:58:56] kind of what I what I want to emphasize and this this was a kind of
+[0:58:59] and this this was a kind of pleasant surprise to me is that it turns
+[0:59:01] pleasant surprise to me is that it turns out
+[0:59:02] out synthetic controls are just very good
+[0:59:03] synthetic controls are just very good under this setting. So, here's kind of a
+[0:59:06] under this setting. So, here's kind of a recent result on this from
+[0:59:09] recent result on this from uh Hirschberg. Um so, if we assume this
+[0:59:13] uh Hirschberg. Um so, if we assume this kind of low-rank model,
+[0:59:15] kind of low-rank model, um
+[0:59:16] um so, kind of that treatment effects are
+[0:59:17] so, kind of that treatment effects are identified by this factor model,
+[0:59:20] identified by this factor model, um and we consider
+[0:59:23] um and we consider a synthetic control estimator. Here in
+[0:59:26] a synthetic control estimator. Here in this result, the synthetic control
+[0:59:27] this result, the synthetic control estimator is fit once to the average of
+[0:59:29] estimator is fit once to the average of the treated units, not to each unit on
+[0:59:31] the treated units, not to each unit on its own.
+[0:59:32] its own. Um, then
+[0:59:34] Um, then the estimator is consistent and then the
+[0:59:36] the estimator is consistent and then the estimator is consistent for the average
+[0:59:38] estimator is consistent for the average treatment effect on the treated and also
+[0:59:40] treatment effect on the treated and also satisfies the central limit theorem uh
+[0:59:42] satisfies the central limit theorem uh provided essentially that first generate
+[0:59:45] provided essentially that first generate large panel
+[0:59:46] large panel and that second is kind of unusual
+[0:59:49] and that second is kind of unusual assumption but not that bad. It's that
+[0:59:51] assumption but not that bad. It's that in the noiseless case, that is if there
+[0:59:53] in the noiseless case, that is if there was no noise and you kind of only got to
+[0:59:55] was no noise and you kind of only got to observe YIT is alpha I plus beta T plus
+[0:59:58] observe YIT is alpha I plus beta T plus the interactive term with no noise, then
+[1:00:01] the interactive term with no noise, then synthetic controls would be consistent.
+[1:00:03] synthetic controls would be consistent. If synth is consistent in the noiseless
+[1:00:04] If synth is consistent in the noiseless model,
+[1:00:05] model, this is kind of an identifying
+[1:00:06] this is kind of an identifying assumption that tells you that the
+[1:00:08] assumption that tells you that the factor structure doesn't change uh post
+[1:00:10] factor structure doesn't change uh post intervention, um then you're also
+[1:00:12] intervention, um then you're also consistent in the kind of real uh noisy
+[1:00:15] consistent in the kind of real uh noisy setup.
+[1:00:16] setup. And kind of what's what's nice about
+[1:00:18] And kind of what's what's nice about this setup is that okay, we needed to
+[1:00:20] this setup is that okay, we needed to assume um
+[1:00:22] assume um uh the result needed to assume that
+[1:00:23] uh the result needed to assume that you're in a large panel, that
+[1:00:25] you're in a large panel, that in in the noiseless case
+[1:00:27] in in the noiseless case synthetic control is is consistent,
+[1:00:30] synthetic control is is consistent, which is of course something to think
+[1:00:31] which is of course something to think about more and I think uh deserves
+[1:00:33] about more and I think uh deserves further scrutiny, but assumptions that
+[1:00:35] further scrutiny, but assumptions that were not made, there was no assumption
+[1:00:38] were not made, there was no assumption of
+[1:00:39] of strong factors
+[1:00:40] strong factors or this kind of
+[1:00:42] or this kind of like is considered best practice in the
+[1:00:43] like is considered best practice in the high dimensional inference literature,
+[1:00:45] high dimensional inference literature, there's no assumption that kind of
+[1:00:47] there's no assumption that kind of factors that are there are strong enough
+[1:00:49] factors that are there are strong enough that you can actually find them. There's
+[1:00:51] that you can actually find them. There's no assumption of stationarity and
+[1:00:53] no assumption of stationarity and there's no assumption of um
+[1:00:55] there's no assumption of um exchangeability uh across units.
+[1:00:58] exchangeability uh across units. So, um
+[1:01:00] So, um from from this from this perspective, I
+[1:01:02] from from this from this perspective, I think it's kind of like we study
+[1:01:04] think it's kind of like we study synthetic controls in this model and and
+[1:01:06] synthetic controls in this model and and there are many things to like from a
+[1:01:08] there are many things to like from a performal perspective uh relative to
+[1:01:10] performal perspective uh relative to kind of
+[1:01:11] kind of everything else that's out there uh that
+[1:01:13] everything else that's out there uh that people are doing.
+[1:01:14] people are doing. Um
+[1:01:15] Um in in in terms of in terms of the
+[1:01:17] in in in terms of in terms of the reference,
+[1:01:18] reference, just context, these are these are some
+[1:01:19] just context, these are these are some points that we also made uh in the
+[1:01:21] points that we also made uh in the synthetic uh difference-in-differences
+[1:01:23] synthetic uh difference-in-differences paper
+[1:01:24] paper uh with uh Arkhangelsky et al. Um but I
+[1:01:27] uh with uh Arkhangelsky et al. Um but I guess in that paper we did many things
+[1:01:29] guess in that paper we did many things that also connect to like a different
+[1:01:31] that also connect to like a different method. So, it's maybe the the message
+[1:01:33] method. So, it's maybe the the message uh so just to kind of emphasize that
+[1:01:34] uh so just to kind of emphasize that that the message also is valid for
+[1:01:36] that the message also is valid for synthetic controls uh directly. Uh this
+[1:01:39] synthetic controls uh directly. Uh this is this is the paper that kind of really
+[1:01:41] is this is the paper that kind of really digs deep on that connection.
+[1:01:44] digs deep on that connection. But so, in in the interest of time, I'll
+[1:01:46] But so, in in the interest of time, I'll I'll wrap up here. Uh synthetic controls
+[1:01:49] I'll wrap up here. Uh synthetic controls um introduced by Abadie and co-authors
+[1:01:51] um introduced by Abadie and co-authors are are widely used in uh practice. Um
+[1:01:55] are are widely used in uh practice. Um I think partially just because they've
+[1:01:56] I think partially just because they've been so empirically successful, there's
+[1:01:58] been so empirically successful, there's been huge emphasis on the types of
+[1:02:01] been huge emphasis on the types of diagnostic diagnostics that are often
+[1:02:03] diagnostic diagnostics that are often the most compelling in applications, um
+[1:02:05] the most compelling in applications, um including in qualitative diagnostics and
+[1:02:07] including in qualitative diagnostics and placebo studies.
+[1:02:08] placebo studies. Uh but kind of if one is so inclined,
+[1:02:11] Uh but kind of if one is so inclined, one can also study synthetic controls as
+[1:02:14] one can also study synthetic controls as a formal method suited to large uh low
+[1:02:17] a formal method suited to large uh low rank panels.
+[1:02:18] rank panels. And and and and and the nice thing is
+[1:02:20] And and and and and the nice thing is that kind of when viewed through this
+[1:02:21] that kind of when viewed through this lens, uh synthetic controls aren't just
+[1:02:23] lens, uh synthetic controls aren't just kind of an okay method that you can
+[1:02:26] kind of an okay method that you can prove works under kind of some strong
+[1:02:28] prove works under kind of some strong conditions, but they're actually uh
+[1:02:30] conditions, but they're actually uh among uh one of the best available.
+[1:02:32] among uh one of the best available. So, I think yeah.
+[1:02:35] So, I think yeah. Anyways, that's uh all I had to say. Uh
+[1:02:38] Anyways, that's uh all I had to say. Uh thanks again.
+[1:02:42] Uh thanks Stefan for the nice discussion. Alberto, uh do you want to
+[1:02:44] discussion. Alberto, uh do you want to respond? Uh sure. And first say again uh
+[1:02:49] respond? Uh sure. And first say again uh thank you Stefan for discussing uh this
+[1:02:52] thank you Stefan for discussing uh this presentation, this paper and uh
+[1:02:55] presentation, this paper and uh for all your work on synthetic controls
+[1:02:56] for all your work on synthetic controls too. I mean, like I have barely
+[1:02:59] too. I mean, like I have barely enough time to
+[1:03:00] enough time to to describe my paper and I should have
+[1:03:02] to describe my paper and I should have described also if I have time like a um
+[1:03:06] described also if I have time like a um very exciting work that many other
+[1:03:08] very exciting work that many other people are doing is with is synthetic
+[1:03:10] people are doing is with is synthetic controls and also including uh Stefan
+[1:03:12] controls and also including uh Stefan and co-authors and he has mentioned what
+[1:03:14] and co-authors and he has mentioned what much of it, but uh
+[1:03:16] much of it, but uh you know, they are really pushing this
+[1:03:17] you know, they are really pushing this literature in in like an uh
+[1:03:20] literature in in like an uh you know, in in in a you know, a variety
+[1:03:22] you know, in in in a you know, a variety of directions and in very very
+[1:03:24] of directions and in very very productive way and and you know, all
+[1:03:26] productive way and and you know, all that all that is all that is great and
+[1:03:29] that all that is all that is great and um
+[1:03:30] um there is um yeah, work on inference by
+[1:03:33] there is um yeah, work on inference by Stefan and co-author, by Victor
+[1:03:35] Stefan and co-author, by Victor Chernozhukov, uh
+[1:03:37] Chernozhukov, uh and Matias Cattaneo, Rocio Titiunik and
+[1:03:39] and Matias Cattaneo, Rocio Titiunik and co-authors. Like um
+[1:03:41] co-authors. Like um uh it is a really um you know, active
+[1:03:43] uh it is a really um you know, active area of a of research and um
+[1:03:47] area of a of research and um and uh you know, we're trying to
+[1:03:48] and uh you know, we're trying to contribute to it. I mean, like um
+[1:03:55] let me say why like a synthetic controls and like um
+[1:03:57] and like um at the beginning didn't focus much on
+[1:04:01] at the beginning didn't focus much on uh
+[1:04:01] uh inference and all this all sampling
+[1:04:03] inference and all this all sampling based inference.
+[1:04:05] based inference. Uh the reason is that um as I
+[1:04:08] Uh the reason is that um as I describe at the beginning of my
+[1:04:10] describe at the beginning of my presentation, the the
+[1:04:12] presentation, the the the
+[1:04:14] the you know, the framework was
+[1:04:15] you know, the framework was um proposed for a setting which you have
+[1:04:18] um proposed for a setting which you have like one
+[1:04:19] like one treated unit, like a comparative case
+[1:04:21] treated unit, like a comparative case study with one treated unit and um and
+[1:04:25] study with one treated unit and um and in that setting at the end like you
+[1:04:26] in that setting at the end like you estimate um you know, the unit level
+[1:04:28] estimate um you know, the unit level treatment effects.
+[1:04:30] treatment effects. Uh you're not estimating average
+[1:04:32] Uh you're not estimating average treatment effect for a bunch of units,
+[1:04:33] treatment effect for a bunch of units, you're estimating a unit level treatment
+[1:04:35] you're estimating a unit level treatment effects and
+[1:04:36] effects and you know, there are like things like a
+[1:04:38] you know, there are like things like a consistency,
+[1:04:40] consistency, asymptotic normality, things like that
+[1:04:41] asymptotic normality, things like that like um
+[1:04:43] like um unfortunately may go out the of the
+[1:04:45] unfortunately may go out the of the window and not because of the method,
+[1:04:47] window and not because of the method, but just because of the nature of of the
+[1:04:49] but just because of the nature of of the problem. I mean, like you are trying to
+[1:04:51] problem. I mean, like you are trying to do something for, you know, like a one
+[1:04:53] do something for, you know, like a one unit. So, what they we tried to do in
+[1:04:55] unit. So, what they we tried to do in that case in that case and like Stefan
+[1:04:57] that case in that case and like Stefan like described very well like a we use a
+[1:05:00] like described very well like a we use a factor model and we use for motivation
+[1:05:02] factor model and we use for motivation we also use it for for you know, like
+[1:05:04] we also use it for for you know, like establishing a bias on the estimator uh
+[1:05:07] establishing a bias on the estimator uh like a a bound on the bias of the
+[1:05:09] like a a bound on the bias of the estimator in that case. And at you know,
+[1:05:11] estimator in that case. And at you know, at that point we thought you know, this
+[1:05:12] at that point we thought you know, this is this is kind of what we can do uh in
+[1:05:16] is this is kind of what we can do uh in this setting um
+[1:05:18] this setting um and now like as I said before like many
+[1:05:21] and now like as I said before like many people are pushing this literature like
+[1:05:23] people are pushing this literature like in many different directions and you
+[1:05:24] in many different directions and you know, that is great and obtaining
+[1:05:25] know, that is great and obtaining results on consistency, asymptotic
+[1:05:27] results on consistency, asymptotic normality depend you know, in in in
+[1:05:30] normality depend you know, in in in settings in which you may have like a
+[1:05:32] settings in which you may have like a like more data perhaps than the that
+[1:05:34] like more data perhaps than the that than what we have in the original
+[1:05:36] than what we have in the original applications.
+[1:05:37] applications. And um
+[1:05:39] And um and yes, like the other thing that
+[1:05:41] and yes, like the other thing that Stefan mentioned is that when you have
+[1:05:43] Stefan mentioned is that when you have like many treated units and many control
+[1:05:45] like many treated units and many control units, you can think about this as a
+[1:05:47] units, you can think about this as a matching problem.
+[1:05:48] matching problem. If you can think about this in a
+[1:05:49] If you can think about this in a matching problem, you want to estimate
+[1:05:50] matching problem, you want to estimate the effect of a treatment on the treated
+[1:05:52] the effect of a treatment on the treated as an average and for that you can
+[1:05:54] as an average and for that you can obtain things like consistent uh
+[1:05:56] obtain things like consistent uh consistency and asymptotic normality
+[1:05:58] consistency and asymptotic normality under certain conditions. Like uh and
+[1:06:00] under certain conditions. Like uh and one of them that we Jeremy and I we have
+[1:06:02] one of them that we Jeremy and I we have been looking at is like uh what happens
+[1:06:05] been looking at is like uh what happens if you have selection of servers in
+[1:06:06] if you have selection of servers in these settings, how these estimators
+[1:06:08] these settings, how these estimators behave and how they compare to matching
+[1:06:10] behave and how they compare to matching estimators. Something that they we tried
+[1:06:12] estimators. Something that they we tried to
+[1:06:13] to we tried to do in this in in this paper.
+[1:06:15] we tried to do in this in in this paper. So, um uh
+[1:06:17] So, um uh that's it. Thank you very much Stefan uh
+[1:06:19] that's it. Thank you very much Stefan uh for your um
+[1:06:20] for your um uh great discussion and I look forward
+[1:06:22] uh great discussion and I look forward to
+[1:06:23] to reading more of your um
+[1:06:26] reading more of your um of your work which you know, I didn't
+[1:06:28] of your work which you know, I didn't have time to to discuss, but is is as is
+[1:06:31] have time to to discuss, but is is as is as as you may know, is discussed in the
+[1:06:33] as as you may know, is discussed in the paper.
+[1:06:38] All right, thank you. Yeah, I think it's time to wrap up now. So, first of all,
+[1:06:40] time to wrap up now. So, first of all, thank you so much Alberto for a great
+[1:06:41] thank you so much Alberto for a great discussion.
+[1:06:42] discussion. Thank you Jeremy for handling uh all
+[1:06:44] Thank you Jeremy for handling uh all these questions. I think yeah, I'm
+[1:06:46] these questions. I think yeah, I'm currently seeing 21 answered questions.
+[1:06:48] currently seeing 21 answered questions. So, uh that's uh that's impressive.
+[1:06:51] So, uh that's uh that's impressive. Also, thank you so much Stefan for the
+[1:06:53] Also, thank you so much Stefan for the for the great discussion.
+[1:06:55] for the great discussion. Um next time
+[1:06:57] Um next time we're going to have Isabelle Abreu from
+[1:07:00] we're going to have Isabelle Abreu from Harvard University who will
+[1:07:02] Harvard University who will talk about causally interpretable
+[1:07:04] talk about causally interpretable meta-analysis transported inferences
+[1:07:05] meta-analysis transported inferences from multiple randomized trials to a
+[1:07:07] from multiple randomized trials to a target population.
+[1:07:09] target population. Uh yeah, we hope to see you all there.
+[1:07:10] Uh yeah, we hope to see you all there. Thank you all for coming and uh see you
+[1:07:12] Thank you all for coming and uh see you next time. Thank you.

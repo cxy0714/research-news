@@ -1,0 +1,1686 @@
+[0:00:04] welcome welcome back to the causal inference seminar today we're excited to
+[0:00:06] inference seminar today we're excited to have Anish Agarwal from Colombia
+[0:00:08] have Anish Agarwal from Colombia University will talk to us about uh
+[0:00:11] University will talk to us about uh causal inference with temporal and
+[0:00:13] causal inference with temporal and spatial spillovers in panel data uh
+[0:00:16] spatial spillovers in panel data uh after that we will have an open format
+[0:00:18] after that we will have an open format discussion with yaf from Harvard and
+[0:00:21] discussion with yaf from Harvard and Ashish from from MIT we're excited about
+[0:00:23] Ashish from from MIT we're excited about this um questions today will be handled
+[0:00:27] this um questions today will be handled by jinguan so maybe jinguan you want to
+[0:00:29] by jinguan so maybe jinguan you want to say a few words
+[0:00:31] say a few words yes I'm happy to um so we have two
+[0:00:34] yes I'm happy to um so we have two discussions today but we're adopting the
+[0:00:36] discussions today but we're adopting the new format which we means that uh it
+[0:00:39] new format which we means that uh it would really just be an open discussion
+[0:00:42] would really just be an open discussion uh with um contributions from our two
+[0:00:45] uh with um contributions from our two invited discussion but also uh perhaps
+[0:00:48] invited discussion but also uh perhaps from some of you in the audience um
+[0:00:50] from some of you in the audience um you're you're welcome to submit
+[0:00:52] you're you're welcome to submit questions using the Q&amp;A box um at the
+[0:00:56] questions using the Q&amp;A box um at the bottom of your screen um and I'll I'll
+[0:00:59] bottom of your screen um and I'll I'll bring them up to inish at suitable times
+[0:01:02] bring them up to inish at suitable times and maybe we can all have a discussion
+[0:01:05] and maybe we can all have a discussion about some really interesting questions
+[0:01:07] about some really interesting questions uh at the end as well uh without further
+[0:01:10] uh at the end as well uh without further Ado I'll um give the mic
+[0:01:13] Ado I'll um give the mic to hi everyone uh let me share my
+[0:01:24] screen all right is that working Yep looks great okay great uh
+[0:01:27] working Yep looks great okay great uh thank you again for inviting me back uh
+[0:01:29] thank you again for inviting me back uh the oi organizers and thank you Shia for
+[0:01:31] the oi organizers and thank you Shia for being here uh my friend and
+[0:01:34] being here uh my friend and collaborative vilus is also a panelist
+[0:01:36] collaborative vilus is also a panelist so um you can also ask him questions
+[0:01:38] so um you can also ask him questions along the way so my talk today is called
+[0:01:40] along the way so my talk today is called on caal inference for temporal and
+[0:01:41] on caal inference for temporal and spatial spillovers in panel data so let
+[0:01:44] spatial spillovers in panel data so let me explain what that means so panel data
+[0:01:47] me explain what that means so panel data is a setting essentially where you're
+[0:01:48] is a setting essentially where you're collecting uh simultaneously collecting
+[0:01:50] collecting uh simultaneously collecting data of n units the units could be say
+[0:01:53] data of n units the units could be say different uh Geographic locations it
+[0:01:55] different uh Geographic locations it could be individuals it could be stores
+[0:01:58] could be individuals it could be stores Etc depending on the context over T time
+[0:02:01] Etc depending on the context over T time steps right so it's a a Time series and
+[0:02:04] steps right so it's a a Time series and they're ongoing different sequences of a
+[0:02:05] they're ongoing different sequences of a possible interventions right so at any
+[0:02:07] possible interventions right so at any point in time every unit can get one of
+[0:02:08] point in time every unit can get one of a possible interventions if you want to
+[0:02:10] a possible interventions if you want to think about it visually this is the way
+[0:02:12] think about it visually this is the way I think about it is that you have one
+[0:02:13] I think about it is that you have one Matrix which is your observed outcomes
+[0:02:15] Matrix which is your observed outcomes which is y right so y1 one is the
+[0:02:18] which is y right so y1 one is the outcome for unit one at time step one Y
+[0:02:21] outcome for unit one at time step one Y and T is the outcome for unit n at time
+[0:02:23] and T is the outcome for unit n at time step t Okay so this is the Matrix you're
+[0:02:25] step t Okay so this is the Matrix you're collecting of The observed outcomes and
+[0:02:27] collecting of The observed outcomes and you also have another Matrix which is
+[0:02:28] you also have another Matrix which is the treatment assignment pattern so you
+[0:02:30] the treatment assignment pattern so you have the treatment assignment pattern is
+[0:02:31] have the treatment assignment pattern is given by the variable a so a11 is the
+[0:02:34] given by the variable a so a11 is the intervention that unit one gets time
+[0:02:36] intervention that unit one gets time Step One a&amp; is the intervention that
+[0:02:38] Step One a&amp; is the intervention that unit n get the time step T okay and the
+[0:02:40] unit n get the time step T okay and the question we're going to be try to
+[0:02:42] question we're going to be try to explore in this talk is how do we
+[0:02:44] explore in this talk is how do we explore exploit structure across units
+[0:02:46] explore exploit structure across units time and assignment patterns for very
+[0:02:48] time and assignment patterns for very personalized counterfactual analysis
+[0:02:50] personalized counterfactual analysis despite temporal and spatial spillovers
+[0:02:52] despite temporal and spatial spillovers and now I'll explain what temporal and
+[0:02:54] and now I'll explain what temporal and spatial spillovers means so here's a
+[0:02:56] spatial spillovers means so here's a motivating example from e-commerce I
+[0:02:59] motivating example from e-commerce I spent the past year at Amazon so suppose
+[0:03:00] spent the past year at Amazon so suppose you're showing customers ads an
+[0:03:02] you're showing customers ads an e-commerce platform every time they go
+[0:03:03] e-commerce platform every time they go on a landing page so say you have Bob
+[0:03:05] on a landing page so say you have Bob and Alice so Bob gets the usual landing
+[0:03:07] and Alice so Bob gets the usual landing page when you go on um e-commerce
+[0:03:10] page when you go on um e-commerce website and Alice gets the a different
+[0:03:12] website and Alice gets the a different version of it they were different ads
+[0:03:14] version of it they were different ads different rendering of of the way the
+[0:03:15] different rendering of of the way the the homepage looks like etc etc okay
+[0:03:18] the homepage looks like etc etc okay that's on day one and day two say now
+[0:03:20] that's on day one and day two say now Bob gets treated he gets the the uh the
+[0:03:22] Bob gets treated he gets the the uh the new fancy web page and Alice goes back
+[0:03:25] new fancy web page and Alice goes back to the original one
+[0:03:27] to the original one okay now say the purchase decision for
+[0:03:29] okay now say the purchase decision for any user on day two is likely to be a
+[0:03:31] any user on day two is likely to be a function of a few things the first would
+[0:03:33] function of a few things the first would be say the ads that were shown to the
+[0:03:35] be say the ads that were shown to the user on day two right so the ads that
+[0:03:37] user on day two right so the ads that were shown to Bob on day two was
+[0:03:39] were shown to Bob on day two was probably also going to be a function of
+[0:03:40] probably also going to be a function of the ads that were shown to Bob on day
+[0:03:42] the ads that were shown to Bob on day one and the purchase decision of Bob on
+[0:03:45] one and the purchase decision of Bob on day one right so the there are certain
+[0:03:46] day one right so the there are certain ads that were shown on day one you might
+[0:03:47] ads that were shown on day one you might have a memory and that might affect what
+[0:03:48] have a memory and that might affect what you do on day two and what you purchase
+[0:03:50] you do on day two and what you purchase on day one will also affect what you do
+[0:03:52] on day one will also affect what you do on day two and that's what I call
+[0:03:53] on day two and that's what I call temporal spillover where things in the
+[0:03:55] temporal spillover where things in the past affect your current outcomes okay
+[0:03:58] past affect your current outcomes okay now the second thing is that maybe Alice
+[0:04:00] now the second thing is that maybe Alice and Bob are friends and they talk about
+[0:04:02] and Bob are friends and they talk about what they like and what they don't like
+[0:04:03] what they like and what they don't like and and as a result they influence each
+[0:04:05] and and as a result they influence each other's decisions making right the ads
+[0:04:07] other's decisions making right the ads that Alice was shown might affect what
+[0:04:09] that Alice was shown might affect what happens to Bob right and so that's what
+[0:04:11] happens to Bob right and so that's what I call spatial spillover when the people
+[0:04:13] I call spatial spillover when the people around you are affecting your
+[0:04:15] around you are affecting your outcomes okay and then it could even be
+[0:04:17] outcomes okay and then it could even be the case where the ads shown in the
+[0:04:18] the case where the ads shown in the purchase decision of the user social
+[0:04:19] purchase decision of the user social network on day one are affecting your
+[0:04:21] network on day one are affecting your outcomes today and so that's what I call
+[0:04:22] outcomes today and so that's what I call when you have temporal and spatial
+[0:04:24] when you have temporal and spatial spillovers
+[0:04:25] spillovers together
+[0:04:27] together okay and so the talk today's talk is
+[0:04:29] okay and so the talk today's talk is really going to be about the
+[0:04:30] really going to be about the identification of potential outcomes
+[0:04:34] identification of potential outcomes yeah well you said we can ask questions
+[0:04:36] yeah well you said we can ask questions just a quick one in the beginning when
+[0:04:38] just a quick one in the beginning when you were listing it are you also
+[0:04:40] you were listing it are you also considering the case if for example I
+[0:04:43] considering the case if for example I have the
+[0:04:44] have the advertisement uh and I purchase
+[0:04:46] advertisement uh and I purchase something and that product is no longer
+[0:04:49] something and that product is no longer available for person to so that's
+[0:04:51] available for person to so that's slightly different
+[0:04:52] slightly different spillovers uh but it could happen in
+[0:04:55] spillovers uh but it could happen in this situation is that something that
+[0:04:57] this situation is that something that you're also going to think about because
+[0:04:58] you're also going to think about because I imagine that's like a fifth point yeah
+[0:05:01] I imagine that's like a fifth point yeah yeah that's a great point I think uh at
+[0:05:03] yeah that's a great point I think uh at least at a first P trying to think about
+[0:05:05] least at a first P trying to think about it at the top of my head I don't think
+[0:05:06] it at the top of my head I don't think we' be able to consider that setting
+[0:05:07] we' be able to consider that setting where
+[0:05:09] where um no I don't think where that where
+[0:05:11] um no I don't think where that where there that strong substitution effects I
+[0:05:13] there that strong substitution effects I don't think we'll consider it but maybe
+[0:05:14] don't think we'll consider it but maybe there's an extension of it that will
+[0:05:16] there's an extension of it that will come to me eventually but not not
+[0:05:24] immediately so um so just repeat temporal spillovers is the setting where
+[0:05:26] temporal spillovers is the setting where for a given unit your past interventions
+[0:05:28] for a given unit your past interventions and affect your current outcomes so
+[0:05:30] and affect your current outcomes so Bob got treated and then untreated and
+[0:05:33] Bob got treated and then untreated and then or treated then treated that has
+[0:05:34] then or treated then treated that has different outcomes on day two and then
+[0:05:36] different outcomes on day two and then the spatial spillovers is for a given
+[0:05:38] the spatial spillovers is for a given unit the interventions of other units
+[0:05:39] unit the interventions of other units can affect your current
+[0:05:41] can affect your current outcomes
+[0:05:43] outcomes okay and uh this work on temporal
+[0:05:45] okay and uh this work on temporal spillovers it's called synthetic blip
+[0:05:47] spillovers it's called synthetic blip effects this is work with vasilis who's
+[0:05:49] effects this is work with vasilis who's at Stanford in the operations research
+[0:05:51] at Stanford in the operations research Department there and the spatial
+[0:05:53] Department there and the spatial spillovers work is called Network
+[0:05:55] spillovers work is called Network synthetic interventions and that's a
+[0:05:56] synthetic interventions and that's a joint work with uh Sarah and D who at
+[0:05:59] joint work with uh Sarah and D who at MIT in ECS um and Christina who's at
+[0:06:02] MIT in ECS um and Christina who's at Cornell operations research okay and the
+[0:06:04] Cornell operations research okay and the focus of this talk is really going to be
+[0:06:06] focus of this talk is really going to be about the identification idea and and
+[0:06:08] about the identification idea and and how do you actually identify these
+[0:06:09] how do you actually identify these potential outcomes uh I won't talk much
+[0:06:11] potential outcomes uh I won't talk much about estimation and inference the
+[0:06:13] about estimation and inference the estimation inference results for the
+[0:06:14] estimation inference results for the networks and interventions paper in the
+[0:06:16] networks and interventions paper in the in the paper the synthetic blip effects
+[0:06:18] in the paper the synthetic blip effects we're working on it it should be in a
+[0:06:20] we're working on it it should be in a revision soon but the I want to get to
+[0:06:21] revision soon but the I want to get to the heart of it to me which is the
+[0:06:22] the heart of it to me which is the identification
+[0:06:25] identification argument okay so let's start with
+[0:06:27] argument okay so let's start with synthetic blip effects so here what is
+[0:06:29] synthetic blip effects so here what is the outcome of Interest the outcome of
+[0:06:31] the outcome of Interest the outcome of interest is I'll explain what the
+[0:06:32] interest is I'll explain what the expectation is with respect to in a few
+[0:06:34] expectation is with respect to in a few slides but is a potential outcome for
+[0:06:36] slides but is a potential outcome for any given unit n at time step t under
+[0:06:39] any given unit n at time step t under any sequence of interventions A1 to a
+[0:06:42] any sequence of interventions A1 to a okay so in total um and in this setting
+[0:06:46] okay so in total um and in this setting the potential outcome is only a function
+[0:06:48] the potential outcome is only a function of the sequence of interventions you got
+[0:06:49] of the sequence of interventions you got in the past it's not a function of what
+[0:06:50] in the past it's not a function of what anyone else got so in this part of the
+[0:06:52] anyone else got so in this part of the talk I'll only be talking about temporal
+[0:06:53] talk I'll only be talking about temporal spillovers and not spatial spillovers
+[0:06:55] spillovers and not spatial spillovers and I'll discuss how you can combine
+[0:06:57] and I'll discuss how you can combine both of them at the end of the top okay
+[0:06:59] both of them at the end of the top okay so in this setting the total number of
+[0:07:01] so in this setting the total number of causal parameters you have is going to
+[0:07:03] causal parameters you have is going to be n because they're n people and a to
+[0:07:05] be n because they're n people and a to the power of T so let's just say it's up
+[0:07:07] the power of T so let's just say it's up and down let's say it's two
+[0:07:08] and down let's say it's two interventions so it's two to the^ of T *
+[0:07:10] interventions so it's two to the^ of T * n because at any point in time you have
+[0:07:12] n because at any point in time you have two possibilities for interventions and
+[0:07:14] two possibilities for interventions and you have t time steps it gets two to the
+[0:07:15] you have t time steps it gets two to the T or a to the T more
+[0:07:17] T or a to the T more generally
+[0:07:19] generally okay and so now going back to the
+[0:07:22] okay and so now going back to the original question we started with this
+[0:07:23] original question we started with this talk is how do you exploit structure
+[0:07:24] talk is how do you exploit structure across unit time and assignment patterns
+[0:07:26] across unit time and assignment patterns to identify these potential outcomes uh
+[0:07:29] to identify these potential outcomes uh one way that's been quite popular in the
+[0:07:31] one way that's been quite popular in the in the literature and is really useful
+[0:07:32] in the literature and is really useful is something called Laten Factor models
+[0:07:34] is something called Laten Factor models okay so here are some examples of Laten
+[0:07:36] okay so here are some examples of Laten Factor models that have been studied in
+[0:07:37] Factor models that have been studied in the past that do not consider temporal
+[0:07:39] the past that do not consider temporal and spatial spills so here's a classic
+[0:07:42] and spatial spills so here's a classic one so here is y nt0 so that's the
+[0:07:45] one so here is y nt0 so that's the potential outcome for unit n at time
+[0:07:47] potential outcome for unit n at time step t under control okay and the model
+[0:07:51] step t under control okay and the model the Assumption that's put is that it can
+[0:07:53] the Assumption that's put is that it can be written as an inner product between
+[0:07:54] be written as an inner product between VN WT plus a res residual term called
+[0:07:57] VN WT plus a res residual term called Epsilon n t so V n is the unit specific
+[0:08:01] Epsilon n t so V n is the unit specific low dimensional latent factor WT is a
+[0:08:04] low dimensional latent factor WT is a Time specific low dimensional latent
+[0:08:06] Time specific low dimensional latent factor and Epsilon NT is the residual
+[0:08:08] factor and Epsilon NT is the residual term okay the additional assumption
+[0:08:11] term okay the additional assumption that's made is that this residual term
+[0:08:13] that's made is that this residual term is an independent random variable where
+[0:08:15] is an independent random variable where its expectation condition Lane factors
+[0:08:16] its expectation condition Lane factors is zero okay and this Epsilon is indeed
+[0:08:19] is zero okay and this Epsilon is indeed what the expectation is going to be
+[0:08:21] what the expectation is going to be respect to in in for the purpose of this
+[0:08:23] respect to in in for the purpose of this talk and the nice thing about these
+[0:08:25] talk and the nice thing about these latent factor models is they allow the
+[0:08:26] latent factor models is they allow the latent factors to be Compounders and
+[0:08:28] latent factors to be Compounders and will allow for that as well plus more
+[0:08:31] will allow for that as well plus more okay so this is fundamentally the
+[0:08:32] okay so this is fundamentally the assumption is that there's some low
+[0:08:34] assumption is that there's some low dimensional representation of what
+[0:08:36] dimensional representation of what defines a unit given by BN and what
+[0:08:38] defines a unit given by BN and what defines a Time given by WT okay and you
+[0:08:42] defines a Time given by WT okay and you have this bilinear inner product between
+[0:08:43] have this bilinear inner product between them that gives you the expectation of
+[0:08:45] them that gives you the expectation of the potential
+[0:08:46] the potential outcome okay so some lat Factor models
+[0:08:48] outcome okay so some lat Factor models have been analyzed in the literature and
+[0:08:49] have been analyzed in the literature and are very popular one is called synthetic
+[0:08:51] are very popular one is called synthetic controls that was uh by Alberto who's
+[0:08:54] controls that was uh by Alberto who's one of my advisers at MIT and his
+[0:08:56] one of my advisers at MIT and his co-authors um and the L Factor model is
+[0:08:59] co-authors um and the L Factor model is studies look something like this where
+[0:09:00] studies look something like this where you have y n t0 it's equal to the VN
+[0:09:03] you have y n t0 it's equal to the VN comma wt0 plus this residual term okay
+[0:09:06] comma wt0 plus this residual term okay and this is the type of treatment
+[0:09:07] and this is the type of treatment assignment pattern they look at where
+[0:09:09] assignment pattern they look at where for some period of time everyone is
+[0:09:10] for some period of time everyone is under control then some subset of units
+[0:09:13] under control then some subset of units remain under control and other subset of
+[0:09:14] remain under control and other subset of units get feated okay so capital A is
+[0:09:17] units get feated okay so capital A is going to be represent the uh treatment
+[0:09:20] going to be represent the uh treatment assignment pattern for the units that
+[0:09:22] assignment pattern for the units that actually got treated okay and the
+[0:09:24] actually got treated okay and the question of interest in synthetic
+[0:09:25] question of interest in synthetic controls says what if a treated unit had
+[0:09:27] controls says what if a treated unit had remained under control so the question
+[0:09:29] remained under control so the question is treatment effect on the
+[0:09:31] is treatment effect on the treated another model that I've studied
+[0:09:33] treated another model that I've studied with some of my co-authors uh dve R
+[0:09:35] with some of my co-authors uh dve R another adviser of mine and Dennis Shen
+[0:09:36] another adviser of mine and Dennis Shen who is now at USC is they look something
+[0:09:40] who is now at USC is they look something like this so now we add more structure
+[0:09:42] like this so now we add more structure to the latent factor model so we say the
+[0:09:45] to the latent factor model so we say the potential outcome for unit N A Time t t
+[0:09:47] potential outcome for unit N A Time t t under intervention a not just under
+[0:09:49] under intervention a not just under control is given as follows you VN and
+[0:09:52] control is given as follows you VN and WTA okay the key difference now is that
+[0:09:54] WTA okay the key difference now is that in the synthetic controls world you have
+[0:09:57] in the synthetic controls world you have this potential this latent factor model
+[0:09:58] this potential this latent factor model is only on potential outcomes under
+[0:10:00] is only on potential outcomes under control right because the goal is to
+[0:10:02] control right because the goal is to answer questions of what happened to a
+[0:10:04] answer questions of what happened to a unit under control in synthetic
+[0:10:06] unit under control in synthetic interventions now I want to ask
+[0:10:07] interventions now I want to ask questions to the form um what happens to
+[0:10:09] questions to the form um what happens to a unit that under goes intervention as
+[0:10:11] a unit that under goes intervention as well and so now you have to put more
+[0:10:12] well and so now you have to put more structure in the potential outcomes uh
+[0:10:14] structure in the potential outcomes uh in particular that there's the same lat
+[0:10:16] in particular that there's the same lat factor that holds across all
+[0:10:17] factor that holds across all interventions okay and the type of
+[0:10:19] interventions okay and the type of treatment assignment patterns we studied
+[0:10:21] treatment assignment patterns we studied look something like this where everyone
+[0:10:22] look something like this where everyone is under control for a while and then
+[0:10:24] is under control for a while and then some subset of units remain under
+[0:10:25] some subset of units remain under control some subset of units get
+[0:10:27] control some subset of units get intervention one two and so on so forth
+[0:10:30] intervention one two and so on so forth okay you can see the big difference is
+[0:10:31] okay you can see the big difference is that there's the wt0 on the left and
+[0:10:34] that there's the wt0 on the left and there's WTA on the right so essentially
+[0:10:35] there's WTA on the right so essentially the VN remains constant in the synthetic
+[0:10:38] the VN remains constant in the synthetic interventions lay in fact model across
+[0:10:39] interventions lay in fact model across these different
+[0:10:40] these different interventions
+[0:10:43] interventions okay so the key idea the intuition for
+[0:10:46] okay so the key idea the intuition for identification this in this in this
+[0:10:48] identification this in this in this world of synthetic controls and
+[0:10:49] world of synthetic controls and synthetic inventions is that you can
+[0:10:52] synthetic inventions is that you can represent these unit specific latent
+[0:10:54] represent these unit specific latent factors as linear or convex combinations
+[0:10:56] factors as linear or convex combinations of each other so synthetic controls is
+[0:10:58] of each other so synthetic controls is traditionally that you can represent
+[0:10:59] traditionally that you can represent them as convex combinations of each
+[0:11:01] them as convex combinations of each other in synthetic interventions you
+[0:11:02] other in synthetic interventions you allow them to be linear combinations but
+[0:11:04] allow them to be linear combinations but the fundamental idea is you can
+[0:11:05] the fundamental idea is you can represent one unit Lane Factor as some
+[0:11:07] represent one unit Lane Factor as some combination of other people's L factors
+[0:11:10] combination of other people's L factors okay so what that allows for in the
+[0:11:12] okay so what that allows for in the synthetic controls world is that you can
+[0:11:13] synthetic controls world is that you can express the expected potential outcomes
+[0:11:15] express the expected potential outcomes of a treated unit as some linear
+[0:11:17] of a treated unit as some linear combination of untreated units or convex
+[0:11:19] combination of untreated units or convex combination more
+[0:11:21] combination more classically and because you have this
+[0:11:22] classically and because you have this additional structure in the in the
+[0:11:24] additional structure in the in the synthetic interventions world where this
+[0:11:25] synthetic interventions world where this potential outcome Lan Factor model holds
+[0:11:27] potential outcome Lan Factor model holds over the different interventions you can
+[0:11:29] over the different interventions you can now Express the expected potential
+[0:11:31] now Express the expected potential outcome of an untreated unit as a linear
+[0:11:32] outcome of an untreated unit as a linear combination of treated units because the
+[0:11:34] combination of treated units because the VN is going to be uniform across the
+[0:11:36] VN is going to be uniform across the different
+[0:11:37] different interventions okay but the basic idea is
+[0:11:41] interventions okay but the basic idea is because you can represent these lat
+[0:11:42] because you can represent these lat Factor models as linear combinations of
+[0:11:44] Factor models as linear combinations of each other you could represent potential
+[0:11:46] each other you could represent potential outcomes as linear combinations of each
+[0:11:47] outcomes as linear combinations of each other as well in expectation okay that's
+[0:11:50] other as well in expectation okay that's the key idea to this this these kind of
+[0:11:52] the key idea to this this these kind of matching style
+[0:11:53] matching style estimators
+[0:11:55] estimators okay so the question is given this kind
+[0:11:57] okay so the question is given this kind of of intuition of lat Factor models can
+[0:12:00] of of intuition of lat Factor models can we naely extend these lat Factor models
+[0:12:01] we naely extend these lat Factor models to the case for the temporal Spell
+[0:12:03] to the case for the temporal Spell owners okay so let's think about a naive
+[0:12:06] owners okay so let's think about a naive extension of the lat Factor models that
+[0:12:07] extension of the lat Factor models that was previously studied so in synthetic
+[0:12:09] was previously studied so in synthetic inventions we had something like this
+[0:12:10] inventions we had something like this where Y and has given this form now um
+[0:12:14] where Y and has given this form now um let's say we're doing synthetic
+[0:12:15] let's say we're doing synthetic interventions with temporal spillovers
+[0:12:17] interventions with temporal spillovers right so now your potential outcome at
+[0:12:19] right so now your potential outcome at time step T is not only a function of
+[0:12:20] time step T is not only a function of the intervention you get at time step T
+[0:12:22] the intervention you get at time step T but the history of of interventions you
+[0:12:24] but the history of of interventions you get one na extension you could think of
+[0:12:26] get one na extension you could think of is that now let me make the latent
+[0:12:29] is that now let me make the latent factor associated with time and
+[0:12:30] factor associated with time and intervention more complex right so now
+[0:12:32] intervention more complex right so now it's not only going to be a function of
+[0:12:34] it's not only going to be a function of the intervention you get at time step T
+[0:12:36] the intervention you get at time step T but the entire sequence of interventions
+[0:12:37] but the entire sequence of interventions right so it's WT and then A1 to a
+[0:12:40] right so it's WT and then A1 to a t
+[0:12:42] t okay now what is the problem by if you
+[0:12:44] okay now what is the problem by if you try to naively extend it this way here
+[0:12:47] try to naively extend it this way here are some limitations you will
+[0:12:48] are some limitations you will immediately run into so let's say I want
+[0:12:50] immediately run into so let's say I want to estimate all parameters which is all
+[0:12:52] to estimate all parameters which is all a^ T * n parameters it requires the
+[0:12:55] a^ T * n parameters it requires the sample size the number of donor units
+[0:12:56] sample size the number of donor units you have to scale exponentially in t
+[0:12:59] you have to scale exponentially in t okay it requires some number of units to
+[0:13:01] okay it requires some number of units to go through every sequence of
+[0:13:02] go through every sequence of interventions and there's eight of the T
+[0:13:03] interventions and there's eight of the T possibilities so even with small T
+[0:13:05] possibilities so even with small T you're going to run into sample
+[0:13:07] you're going to run into sample complexity issues and fundamentally you
+[0:13:09] complexity issues and fundamentally you can only identify intervention sequences
+[0:13:10] can only identify intervention sequences youve see in the data right but if
+[0:13:12] youve see in the data right but if there's eight of the T possibilities
+[0:13:13] there's eight of the T possibilities you're not going to see every sequence
+[0:13:14] you're not going to see every sequence in the
+[0:13:16] in the data the second problem is that when
+[0:13:18] data the second problem is that when you're dealing with this kind of of data
+[0:13:20] you're dealing with this kind of of data you would like some level of adaptivity
+[0:13:22] you would like some level of adaptivity so the intervention you get at some
+[0:13:23] so the intervention you get at some point should be a function of the
+[0:13:24] point should be a function of the observed sequence of outcomes you have
+[0:13:26] observed sequence of outcomes you have but you try to naively extend these kind
+[0:13:28] but you try to naively extend these kind of um late Factor models that was
+[0:13:30] of um late Factor models that was studied and say synthetic intervention
+[0:13:31] studied and say synthetic intervention sythetic controls you cannot have an
+[0:13:33] sythetic controls you cannot have an Adaptive intervention assignment pth and
+[0:13:35] Adaptive intervention assignment pth and here's a dag that kind of represents
+[0:13:36] here's a dag that kind of represents that fundamentally the Y end which The
+[0:13:39] that fundamentally the Y end which The observed outcomes don't have an arrow
+[0:13:40] observed outcomes don't have an arrow pointing into the um the a ends right
+[0:13:44] pointing into the um the a ends right and as a result there's no adaptivity
+[0:13:45] and as a result there's no adaptivity the Laten Factor models can affect the
+[0:13:47] the Laten Factor models can affect the sequence of interventions but the
+[0:13:49] sequence of interventions but the observed outcomes cannot right and so
+[0:13:52] observed outcomes cannot right and so that's that's a problem that we want to
+[0:13:53] that's that's a problem that we want to also overcome is the sample complexity
+[0:13:55] also overcome is the sample complexity issue and the adaptivity
+[0:13:57] issue and the adaptivity issue okay
+[0:13:59] issue okay and so what we're going to study in this
+[0:14:01] and so what we're going to study in this first part of the talk is can we
+[0:14:02] first part of the talk is can we overcome these limitations by adding
+[0:14:03] overcome these limitations by adding more structure to the latent factor
+[0:14:05] more structure to the latent factor models so what if we add more structure
+[0:14:08] models so what if we add more structure two models that we explore in this paper
+[0:14:09] two models that we explore in this paper one is what I call an additive time
+[0:14:11] one is what I call an additive time varying Laten Factor model that look
+[0:14:13] varying Laten Factor model that look something like this I'm going to run
+[0:14:14] something like this I'm going to run through this slowly now and and Par it
+[0:14:16] through this slowly now and and Par it so your Y and T under the sequence of
+[0:14:19] so your Y and T under the sequence of interventions A1 to a t has this
+[0:14:20] interventions A1 to a t has this particular
+[0:14:21] particular form the first thing is that the first
+[0:14:24] form the first thing is that the first thing to note is there a latent
+[0:14:25] thing to note is there a latent factorization into a separable unit
+[0:14:27] factorization into a separable unit latent factor and a separable
+[0:14:28] latent factor and a separable intervention Lan Factor okay so the key
+[0:14:31] intervention Lan Factor okay so the key thing is that the lane factor for n and
+[0:14:33] thing is that the lane factor for n and the lane factor for a are
+[0:14:36] the lane factor for a are separated okay the second thing is that
+[0:14:38] separated okay the second thing is that the effect of an intervention in any
+[0:14:40] the effect of an intervention in any time step is additive on the eventual
+[0:14:42] time step is additive on the eventual potential outcome right so if you look
+[0:14:44] potential outcome right so if you look at this it's a summation of w a let's
+[0:14:47] at this it's a summation of w a let's say l goes from one to T of w A1 W A2 w
+[0:14:51] say l goes from one to T of w A1 W A2 w w a t but they enter into the potential
+[0:14:53] w a t but they enter into the potential outcome function in an additive
+[0:14:55] outcome function in an additive way and that's going to be key to that's
+[0:14:58] way and that's going to be key to that's turn of be something be the key
+[0:14:59] turn of be something be the key structural assumption we make and will
+[0:15:00] structural assumption we make and will motivate why when when and why this
+[0:15:02] motivate why when when and why this shows up okay the second thing is the
+[0:15:05] shows up okay the second thing is the third thing is the residual is a mean
+[0:15:07] third thing is the residual is a mean zero independent random variable
+[0:15:09] zero independent random variable condition Lane factors and this is
+[0:15:10] condition Lane factors and this is indeed what the the expectation is going
+[0:15:11] indeed what the the expectation is going to be respect
+[0:15:13] to be respect to and the nice thing here why we call
+[0:15:16] to and the nice thing here why we call the time varying Lan Factor model is
+[0:15:18] the time varying Lan Factor model is because the effect right can be a
+[0:15:20] because the effect right can be a function of the Horizon capital T and
+[0:15:22] function of the Horizon capital T and the time period L the intervention was
+[0:15:24] the time period L the intervention was applied on so you see T comma L right so
+[0:15:26] applied on so you see T comma L right so the effect of the intervention at time
+[0:15:28] the effect of the intervention at time step l which is given by W can be
+[0:15:31] step l which is given by W can be modulated by capital T and comma
+[0:15:35] modulated by capital T and comma L the second model we'll study something
+[0:15:38] L the second model we'll study something called an additive time invariant latent
+[0:15:40] called an additive time invariant latent factor model where the effect is now
+[0:15:42] factor model where the effect is now only a function of the lag T minus L
+[0:15:44] only a function of the lag T minus L versus the double index T comma L okay
+[0:15:46] versus the double index T comma L okay so when it's a Time invariant L Factor
+[0:15:48] so when it's a Time invariant L Factor model the effect in a particular time
+[0:15:50] model the effect in a particular time only is a function of the lag between
+[0:15:52] only is a function of the lag between that time and the eventual Horizon you
+[0:15:54] that time and the eventual Horizon you care about verus in the time varying
+[0:15:56] care about verus in the time varying Laten Factor model it actually depends
+[0:15:58] Laten Factor model it actually depends that specific time time
+[0:16:01] that specific time time index
+[0:16:03] index okay any questions maybe I'll stop here
+[0:16:05] okay any questions maybe I'll stop here for a second any
+[0:16:08] for a second any questions yeah maybe just a couple quick
+[0:16:10] questions yeah maybe just a couple quick ones the first one is um what
+[0:16:14] ones the first one is um what assumptions are you making on the
+[0:16:16] assumptions are you making on the interventions because I maybe I'm got
+[0:16:19] interventions because I maybe I'm got confused a little bit which was in the
+[0:16:21] confused a little bit which was in the synthetic controls you're typically
+[0:16:22] synthetic controls you're typically assuming the intervention is not random
+[0:16:25] assuming the intervention is not random and then in the second one are you
+[0:16:27] and then in the second one are you assuming that the intervention is random
+[0:16:29] assuming that the intervention is random to some extent or are you still in the
+[0:16:30] to some extent or are you still in the observational study setting so it's it's
+[0:16:33] observational study setting so it's it's in the observational study setting so
+[0:16:35] in the observational study setting so maybe I'll I'll answer it here um so let
+[0:16:38] maybe I'll I'll answer it here um so let me let me finish this question I'll try
+[0:16:40] me let me finish this question I'll try to come back to your question perfect
+[0:16:43] to come back to your question perfect other question was so maybe if you're
+[0:16:44] other question was so maybe if you're gonna come back to that the other
+[0:16:46] gonna come back to that the other question is these similar these a
+[0:16:50] question is these similar these a version of these models to some extent
+[0:16:52] version of these models to some extent has been sort of studied in the
+[0:16:53] has been sort of studied in the biostatistics literature for a while
+[0:16:55] biostatistics literature for a while when you sort of assume that the
+[0:16:57] when you sort of assume that the treatment is additive
+[0:16:59] treatment is additive um can you tell us a little bit about
+[0:17:01] um can you tell us a little bit about those connections because I think those
+[0:17:03] those connections because I think those are really interesting and maybe there's
+[0:17:04] are really interesting and maybe there's some differences but it's been a while
+[0:17:06] some differences but it's been a while since I read I know Jamie Robbins has
+[0:17:08] since I read I know Jamie Robbins has like a 100 papers on this yeah so this
+[0:17:12] like a 100 papers on this yeah so this this work and I'll get to that in a
+[0:17:13] this work and I'll get to that in a second as well in another five slides so
+[0:17:15] second as well in another five slides so that's why this paper is called
+[0:17:16] that's why this paper is called synthetic blip effects because in some
+[0:17:18] synthetic blip effects because in some sense what we're doing is we're
+[0:17:19] sense what we're doing is we're combining the ideas of these lateen
+[0:17:21] combining the ideas of these lateen Factor models with the blip effect
+[0:17:22] Factor models with the blip effect literature which is what comes from um
+[0:17:24] literature which is what comes from um the biostat literature and robins and
+[0:17:27] the biostat literature and robins and heran being some of the uh uh people
+[0:17:30] heran being some of the uh uh people developed that thoroughly and so again
+[0:17:32] developed that thoroughly and so again I'll come back to the question in a few
+[0:17:33] I'll come back to the question in a few slides if that's where okay perfect yeah
+[0:17:36] slides if that's where okay perfect yeah I'm too
+[0:17:37] I'm too eager no please that's fantastic um so
+[0:17:42] eager no please that's fantastic um so okay so this this is the lane Factor
+[0:17:43] okay so this this is the lane Factor modle study and I'll motivate why and
+[0:17:45] modle study and I'll motivate why and how these these Lane Factor models come
+[0:17:47] how these these Lane Factor models come up but just as a as a tldr of of what
+[0:17:50] up but just as a as a tldr of of what we're going to achieve by having these
+[0:17:52] we're going to achieve by having these additional structures so if you have the
+[0:17:54] additional structures so if you have the naive extension of the the lad Factor
+[0:17:55] naive extension of the the lad Factor model the additive time bring lad Factor
+[0:17:57] model the additive time bring lad Factor model and the additive time invent fact
+[0:17:59] model and the additive time invent fact model what you get is that the unit
+[0:18:01] model what you get is that the unit sample complexity drops by adding the
+[0:18:02] sample complexity drops by adding the structure so it goes from a to the T to
+[0:18:04] structure so it goes from a to the T to a * T when you have an additive time
+[0:18:06] a * T when you have an additive time bring lat Factor model and when you have
+[0:18:08] bring lat Factor model and when you have an additive time invariant Len Factor
+[0:18:09] an additive time invariant Len Factor model it actually the dependence in goes
+[0:18:11] model it actually the dependence in goes away remarkably at least to
+[0:18:13] away remarkably at least to me um and the second thing is as I have
+[0:18:17] me um and the second thing is as I have asked was what kind of interventions you
+[0:18:19] asked was what kind of interventions you allow for how obser how adaptive can it
+[0:18:21] allow for how obser how adaptive can it be how is it in the observational
+[0:18:23] be how is it in the observational setting and the randomized setting so if
+[0:18:26] setting and the randomized setting so if you do the N9 extension of the latent
+[0:18:27] you do the N9 extension of the latent factor model and say Sy ventions or
+[0:18:29] factor model and say Sy ventions or synthetic controls it can it's non
+[0:18:31] synthetic controls it can it's non adaptive so it can be a function of the
+[0:18:33] adaptive so it can be a function of the latent factors right but once you let's
+[0:18:35] latent factors right but once you let's say some Oracle could look at the latent
+[0:18:36] say some Oracle could look at the latent factors after that they have to decide
+[0:18:37] factors after that they have to decide the intervention policy and that's it in
+[0:18:40] the intervention policy and that's it in the addtive time varing the factor model
+[0:18:42] the addtive time varing the factor model it can be adaptive after some time
+[0:18:43] it can be adaptive after some time period so the some part where it's it's
+[0:18:46] period so the some part where it's it's non adaptive it can be dependent on late
+[0:18:47] non adaptive it can be dependent on late fact models but it's non adaptive to The
+[0:18:48] fact models but it's non adaptive to The observed outcomes and after a while it
+[0:18:50] observed outcomes and after a while it can become adaptive and for the addtive
+[0:18:53] can become adaptive and for the addtive time invari Lane Factor model when you
+[0:18:54] time invari Lane Factor model when you have the most structure it can be
+[0:18:55] have the most structure it can be adaptive After Time step one essentially
+[0:18:57] adaptive After Time step one essentially you can be adaptive right from the start
+[0:19:00] you can be adaptive right from the start okay so that's in some sense the if
+[0:19:01] okay so that's in some sense the if there's one slide you should uh take
+[0:19:03] there's one slide you should uh take from this from this talk and this is
+[0:19:06] from this from this talk and this is it um Anish I just just a quick
+[0:19:08] it um Anish I just just a quick clarifying question so when you're
+[0:19:10] clarifying question so when you're talking about the unit sample size
+[0:19:12] talking about the unit sample size complexity this is for recovering the
+[0:19:14] complexity this is for recovering the Laten factors so what exactly is a
+[0:19:17] Laten factors so what exactly is a sample complexity for yeah this is to
+[0:19:19] sample complexity for yeah this is to recover the potential outcome for any
+[0:19:21] recover the potential outcome for any unit under any sequence of
+[0:19:23] unit under any sequence of interventions so not the latent factors
+[0:19:25] interventions so not the latent factors so we're not identifying the latent
+[0:19:26] so we're not identifying the latent factors themselves we're just imposing
+[0:19:28] factors themselves we're just imposing structure exists in a latent sense and
+[0:19:31] structure exists in a latent sense and implicitly and this is to recover the
+[0:19:33] implicitly and this is to recover the outcomes for any unit under any sequence
+[0:19:35] outcomes for any unit under any sequence of
+[0:19:36] of interventions one complexity one
+[0:19:38] interventions one complexity one parameter I'm hiding here is the
+[0:19:40] parameter I'm hiding here is the dimension of the lad factors which we're
+[0:19:41] dimension of the lad factors which we're going to just assume to be a constant so
+[0:19:43] going to just assume to be a constant so here I'm just showing the dependence in
+[0:19:44] here I'm just showing the dependence in a and
+[0:19:50] t great and in terms of adaptivity here's
+[0:19:52] great and in terms of adaptivity here's one way of thinking about it so in the
+[0:19:53] one way of thinking about it so in the time bring Lan in Factor model right
+[0:19:56] time bring Lan in Factor model right after some point in time so there's a
+[0:19:57] after some point in time so there's a non-adaptive period where where the
+[0:19:59] non-adaptive period where where the outcomes are not affecting the
+[0:20:00] outcomes are not affecting the interventions and after some time period
+[0:20:02] interventions and after some time period the outcomes can start affecting the
+[0:20:04] the outcomes can start affecting the interventions okay and then the Adaptive
+[0:20:07] interventions okay and then the Adaptive additive time invent in Factor model
+[0:20:08] additive time invent in Factor model they can start affecting the
+[0:20:10] they can start affecting the interventions after the first time
+[0:20:12] interventions after the first time step
+[0:20:14] step okay so hopefully have this answers your
+[0:20:16] okay so hopefully have this answers your question to some
+[0:20:23] extent now the question is what motivates these additive Laten Factor
+[0:20:25] motivates these additive Laten Factor models we had this Laten Factor model
+[0:20:26] models we had this Laten Factor model put out here what what motivates it the
+[0:20:28] put out here what what motivates it the first one actually is an auto regressive
+[0:20:29] first one actually is an auto regressive process so imagine you had the following
+[0:20:31] process so imagine you had the following Auto regressive process that people
+[0:20:33] Auto regressive process that people study in time stre literature and
+[0:20:34] study in time stre literature and econometrics in uh stats all the time
+[0:20:37] econometrics in uh stats all the time which is that say your outcome today is
+[0:20:39] which is that say your outcome today is some linear combination of the previous
+[0:20:41] some linear combination of the previous outcomes and some linear combination of
+[0:20:43] outcomes and some linear combination of the previous interventions plus some
+[0:20:45] the previous interventions plus some noise term okay that turns out can be
+[0:20:48] noise term okay that turns out can be expressed in terms is a special case of
+[0:20:49] expressed in terms is a special case of an additive time bring Laten Factor
+[0:20:51] an additive time bring Laten Factor model and fundamentally what's happening
+[0:20:53] model and fundamentally what's happening is those linear coefficients that that
+[0:20:55] is those linear coefficients that that hit the both the interventions and the
+[0:20:57] hit the both the interventions and the outcomes those are what become some
+[0:20:59] outcomes those are what become some combination of them become the vnts
+[0:21:01] combination of them become the vnts those become the lane time specific Lane
+[0:21:03] those become the lane time specific Lane factors okay and then the noise the Adas
+[0:21:06] factors okay and then the noise the Adas those basically get put into the Epsilon
+[0:21:09] those basically get put into the Epsilon term okay and the key idea of
+[0:21:11] term okay and the key idea of representing this way is you cursively
+[0:21:13] representing this way is you cursively write the linear
+[0:21:14] write the linear combinations the outcomes really if you
+[0:21:16] combinations the outcomes really if you think about it are just additive sums of
+[0:21:18] think about it are just additive sums of the interventions right so you keep
+[0:21:20] the interventions right so you keep recursively peeling the Y ends and write
+[0:21:23] recursively peeling the Y ends and write them in terms of interventions you will
+[0:21:24] them in terms of interventions you will get that any at any time point you can
+[0:21:26] get that any at any time point you can write them as an additive sum of all the
+[0:21:28] write them as an additive sum of all the ious interventions that happened okay
+[0:21:31] ious interventions that happened okay and that's really the idea of how this
+[0:21:33] and that's really the idea of how this works
+[0:21:34] works out another model that's even more
+[0:21:35] out another model that's even more General in order agressive processes is
+[0:21:37] General in order agressive processes is linear dynamical systems right so it's
+[0:21:39] linear dynamical systems right so it's like a state space model so here the
+[0:21:42] like a state space model so here the transition matrices you have the A's and
+[0:21:44] transition matrices you have the A's and the C's and the B's and the D's those
+[0:21:46] the C's and the B's and the D's those are the things that go into the latent
+[0:21:48] are the things that go into the latent factors okay and the yeah that's
+[0:21:51] factors okay and the yeah that's fundamentally what drives it again the
+[0:21:53] fundamentally what drives it again the key thing in both the linear dynamical
+[0:21:54] key thing in both the linear dynamical system and an auto regressive process is
+[0:21:57] system and an auto regressive process is the effect of an interventionary time
+[0:21:58] the effect of an interventionary time step affects the eventual outcome in an
+[0:22:00] step affects the eventual outcome in an additive way okay so anytime that you
+[0:22:02] additive way okay so anytime that you have a setting where your intervention
+[0:22:04] have a setting where your intervention at any point in time has an effect on
+[0:22:06] at any point in time has an effect on the eventual outcome in an addtive way
+[0:22:08] the eventual outcome in an addtive way you can probably write it in terms of a
+[0:22:10] you can probably write it in terms of a linear um time varying or time invariant
+[0:22:13] linear um time varying or time invariant um L Factor model OKAY the key thing
+[0:22:16] um L Factor model OKAY the key thing we're saying in some sense is that these
+[0:22:17] we're saying in some sense is that these these transition matrices that you have
+[0:22:19] these transition matrices that you have all have some structure for these
+[0:22:21] all have some structure for these different let's say hetrogeneous
+[0:22:22] different let's say hetrogeneous dynamical systems they can all be
+[0:22:24] dynamical systems they can all be written as some linear combinations of
+[0:22:25] written as some linear combinations of each other the various transition
+[0:22:27] each other the various transition matrices so they all come from some sort
+[0:22:28] matrices so they all come from some sort of low rank manifold then natur really
+[0:22:30] of low rank manifold then natur really what allows us to share information
+[0:22:31] what allows us to share information across these different dynamical systems
+[0:22:33] across these different dynamical systems or Auto regressive processes okay and
+[0:22:36] or Auto regressive processes okay and lamical systems are something that
+[0:22:37] lamical systems are something that people study all the time I study them
+[0:22:39] people study all the time I study them you know in in electrical engineering um
+[0:22:42] you know in in electrical engineering um for like control systems signal
+[0:22:43] for like control systems signal processing people study them in system
+[0:22:45] processing people study them in system biology but it's a really neat way of of
+[0:22:48] biology but it's a really neat way of of thinking about um your your a dynamical
+[0:22:51] thinking about um your your a dynamical system and even if you have a nonlinear
+[0:22:53] system and even if you have a nonlinear dynamical system what people tend to do
+[0:22:54] dynamical system what people tend to do is that they if you sample your data
+[0:22:56] is that they if you sample your data quick enough then they approximate it by
+[0:22:58] quick enough then they approximate it by line IAL system for short periods of
+[0:22:59] line IAL system for short periods of time it's a very useful abstraction in
+[0:23:01] time it's a very useful abstraction in in
+[0:23:03] in practice okay so now let me go to the
+[0:23:05] practice okay so now let me go to the identification strategy for um time
+[0:23:07] identification strategy for um time bearing impact the
+[0:23:09] bearing impact the models okay so here's the Assumption we
+[0:23:12] models okay so here's the Assumption we make on the treatment assignment Matrix
+[0:23:14] make on the treatment assignment Matrix remember there's two things so is the
+[0:23:15] remember there's two things so is the potential outcomes Matrix or The
+[0:23:16] potential outcomes Matrix or The observed outcomes Matrix and the
+[0:23:18] observed outcomes Matrix and the treatment assignment Matrix made add
+[0:23:19] treatment assignment Matrix made add structure in both places so this is the
+[0:23:21] structure in both places so this is the structure visually that we put on the
+[0:23:23] structure visually that we put on the treatment assignment Matrix in
+[0:23:25] treatment assignment Matrix in particular there's a stagger adoption
+[0:23:26] particular there's a stagger adoption into an Adaptive regime can explain what
+[0:23:29] into an Adaptive regime can explain what that means so what we require of the
+[0:23:31] that means so what we require of the treatment assignment Matrix is that
+[0:23:32] treatment assignment Matrix is that there's some control sequence 01 to 0 t
+[0:23:35] there's some control sequence 01 to 0 t that is common across these different
+[0:23:36] that is common across these different units and the meaning of control can
+[0:23:38] units and the meaning of control can vary over
+[0:23:39] vary over time and the units leave this control
+[0:23:42] time and the units leave this control sequence in a staggered manner okay so
+[0:23:44] sequence in a staggered manner okay so imagine like I'm a digital platform I'm
+[0:23:46] imagine like I'm a digital platform I'm going through the regular status quo and
+[0:23:48] going through the regular status quo and over some time after some time I get in
+[0:23:50] over some time after some time I get in an staggered way put into an Adaptive
+[0:23:53] an staggered way put into an Adaptive regime okay and the intervention
+[0:23:56] regime okay and the intervention assignment after leaving the control
+[0:23:57] assignment after leaving the control sequence can can be adapted to the data
+[0:24:00] sequence can can be adapted to the data and fourth the assumption is that
+[0:24:01] and fourth the assumption is that there's some subset of units that leave
+[0:24:03] there's some subset of units that leave the control sequence at every time step
+[0:24:05] the control sequence at every time step so that's why it's a staggered adoption
+[0:24:06] so that's why it's a staggered adoption into this into this um adaptive
+[0:24:09] into this into this um adaptive regime any questions about this should
+[0:24:12] regime any questions about this should show you make
+[0:24:15] show you make sense
+[0:24:17] sense okay so here there's this are you
+[0:24:19] okay so here there's this are you assuming that you once you go into the
+[0:24:22] assuming that you once you go into the adoption you have to stick with
+[0:24:24] adoption you have to stick with it yeah I mean the Adaptive regime can
+[0:24:27] it yeah I mean the Adaptive regime can contain the sequence that's totally
+[0:24:30] contain the sequence that's totally fine so can you just tell us a little
+[0:24:32] fine so can you just tell us a little bit what exactly does that adaptive
+[0:24:34] bit what exactly does that adaptive regime mean adaptive means that now your
+[0:24:37] regime mean adaptive means that now your your outcome is a your intervention is a
+[0:24:39] your outcome is a your intervention is a function of the observed
+[0:24:47] outcomes I see so you can but you can go from zero you can go to the treatment
+[0:24:49] from zero you can go to the treatment and then you can go back to the to zero
+[0:24:51] and then you can go back to the to zero yeah you can you can you can absolutely
+[0:24:52] yeah you can you can you can absolutely do that the main thing is that going
+[0:24:54] do that the main thing is that going back to zero after the Adaptive regime
+[0:24:56] back to zero after the Adaptive regime can be a function of the previous outut
+[0:24:58] can be a function of the previous outut coms if you're in the control sequence
+[0:25:00] coms if you're in the control sequence it it you you decide that a priority and
+[0:25:02] it it you you decide that a priority and then you you stick with
+[0:25:04] then you you stick with that I see
+[0:25:07] that I see okay but yeah that's a great question
+[0:25:09] okay but yeah that's a great question you can you can be going from from
+[0:25:10] you can you can be going from from Intervention to control to intervention
+[0:25:12] Intervention to control to intervention to control it's just about how adaptive
+[0:25:13] to control it's just about how adaptive is that the person deciding the
+[0:25:16] is that the person deciding the policy okay so this is the treatment
+[0:25:18] policy okay so this is the treatment assignment pattern part and now comes to
+[0:25:21] assignment pattern part and now comes to I think your second question here which
+[0:25:22] I think your second question here which you um which you guessed well was that
+[0:25:25] you um which you guessed well was that the second part of this identification
+[0:25:26] the second part of this identification strategy is using this idea of effects
+[0:25:28] strategy is using this idea of effects which we'll go into which was introduced
+[0:25:30] which we'll go into which was introduced by Robins in 97 and further analyzed I
+[0:25:32] by Robins in 97 and further analyzed I mean there's a there's a whole variety
+[0:25:33] mean there's a there's a whole variety of papers on it by Hernan and
+[0:25:37] of papers on it by Hernan and Robins so the key idea we're going to be
+[0:25:39] Robins so the key idea we're going to be using is that we can represent the
+[0:25:40] using is that we can represent the potential outcomes in terms of blip
+[0:25:42] potential outcomes in terms of blip effects and baselines okay so from now
+[0:25:43] effects and baselines okay so from now on Just for Simplicity I'm going to deal
+[0:25:45] on Just for Simplicity I'm going to deal with the case where T equals to two it
+[0:25:47] with the case where T equals to two it easily generalizes to uh General T okay
+[0:25:50] easily generalizes to uh General T okay so the F first thing is you write your
+[0:25:51] so the F first thing is you write your potential outcome so we're going
+[0:25:54] potential outcome so we're going to dealing with the case of identifying
+[0:25:56] to dealing with the case of identifying the potential outcome for unit n for
+[0:25:58] the potential outcome for unit n for some intervention sequence A1 A2 that is
+[0:26:00] some intervention sequence A1 A2 that is not observed on okay we going to write
+[0:26:03] not observed on okay we going to write this potential outcome Y and A1 A2 in
+[0:26:06] this potential outcome Y and A1 A2 in terms of a telescoping sum okay so YN A1
+[0:26:09] terms of a telescoping sum okay so YN A1 A2 minus YN 01 A2 YN 01 E2 minus y and
+[0:26:14] A2 minus YN 01 A2 YN 01 E2 minus y and 01 02 and so on so forth the first thing
+[0:26:17] 01 02 and so on so forth the first thing is going to be called the blip effect
+[0:26:19] is going to be called the blip effect for time step one with intervention A1
+[0:26:21] for time step one with intervention A1 the second one is the blip effect at
+[0:26:22] the second one is the blip effect at time two and invention A2 and then the
+[0:26:24] time two and invention A2 and then the last thing is called the Baseline
+[0:26:25] last thing is called the Baseline outcome and I'll explain what these
+[0:26:27] outcome and I'll explain what these things are
+[0:26:28] things are okay so but the the basic idea is that
+[0:26:30] okay so but the the basic idea is that to identify the potential outcome of
+[0:26:31] to identify the potential outcome of Interest it suffices to identify two
+[0:26:33] Interest it suffices to identify two blip effects and a baseline
+[0:26:36] blip effects and a baseline outcome
+[0:26:38] outcome okay so what's the blip effect so blip
+[0:26:40] okay so what's the blip effect so blip effect at time step t for intervention a
+[0:26:43] effect at time step t for intervention a is essentially the treatment effect of
+[0:26:45] is essentially the treatment effect of intervention a compared to a baseline z
+[0:26:47] intervention a compared to a baseline z t for time step t with common
+[0:26:49] t for time step t with common interventions for all other time steps
+[0:26:52] interventions for all other time steps okay so if you let's say in engineering
+[0:26:53] okay so if you let's say in engineering we also call this an Impulse response
+[0:26:55] we also call this an Impulse response which is what happens if I just tried
+[0:26:56] which is what happens if I just tried the intervention at a particular time
+[0:26:57] the intervention at a particular time step and the rest of it will say was
+[0:26:59] step and the rest of it will say was under control or something okay so
+[0:27:00] under control or something okay so you're trying to learn the effect of of
+[0:27:02] you're trying to learn the effect of of the intervention at that particular
+[0:27:03] the intervention at that particular point in time that's what a blip effect
+[0:27:07] point in time that's what a blip effect is okay and the Baseline outcome is
+[0:27:09] is okay and the Baseline outcome is really the question of what if what the
+[0:27:11] really the question of what if what the potential outcome of a unit remain under
+[0:27:12] potential outcome of a unit remain under control for all T time
+[0:27:15] control for all T time steps
+[0:27:17] steps okay so H how how does this latent
+[0:27:20] okay so H how how does this latent factor model connect with this blip
+[0:27:21] factor model connect with this blip effects so we had this structure for the
+[0:27:23] effects so we had this structure for the additive time bring dat in Factor model
+[0:27:26] additive time bring dat in Factor model here I'm uh dropping the dependenc on
+[0:27:28] here I'm uh dropping the dependenc on two right so normally it should be 2
+[0:27:30] two right so normally it should be 2 comma L but I'm depressing the
+[0:27:31] comma L but I'm depressing the dependence on two for notational
+[0:27:34] dependence on two for notational Simplicity right so we said that to
+[0:27:37] Simplicity right so we said that to represent the potential outcome it
+[0:27:38] represent the potential outcome it suffices to identify the two blip
+[0:27:40] suffices to identify the two blip effects and the Baseline outcomes if you
+[0:27:42] effects and the Baseline outcomes if you have such a Laten Factor model what it
+[0:27:43] have such a Laten Factor model what it implies is that the blip effect also has
+[0:27:45] implies is that the blip effect also has a impact the model representation given
+[0:27:46] a impact the model representation given as
+[0:27:48] as follows okay so another interpretation
+[0:27:51] follows okay so another interpretation of what we're doing is that we're making
+[0:27:52] of what we're doing is that we're making a latent factor model assumption on the
+[0:27:54] a latent factor model assumption on the blip effects which is the key object of
+[0:27:57] blip effects which is the key object of study in the bio stats literature for
+[0:27:59] study in the bio stats literature for dynamic treatment effects okay and so
+[0:28:03] dynamic treatment effects okay and so the fundamental idea we have L fact
+[0:28:05] the fundamental idea we have L fact model is that we can represent the
+[0:28:06] model is that we can represent the latent factors in terms of linear
+[0:28:08] latent factors in terms of linear combinations of each other and that lets
+[0:28:09] combinations of each other and that lets you represent the outcomes as linear
+[0:28:11] you represent the outcomes as linear combinations of each other the idea here
+[0:28:13] combinations of each other the idea here now is that we can represent the blip
+[0:28:15] now is that we can represent the blip effects and the Baseline outcomes and
+[0:28:16] effects and the Baseline outcomes and linear combinations of each other and
+[0:28:18] linear combinations of each other and that's going to be the key the heart of
+[0:28:19] that's going to be the key the heart of the identification strategy okay so one
+[0:28:22] the identification strategy okay so one way of thinking about what we're doing
+[0:28:23] way of thinking about what we're doing is we're trying to bridge this
+[0:28:24] is we're trying to bridge this literature synthetic controls and
+[0:28:25] literature synthetic controls and interventions that late in fact to model
+[0:28:26] interventions that late in fact to model literature with the
+[0:28:28] literature with the effect that's fundamentally what this
+[0:28:30] effect that's fundamentally what this paper is
+[0:28:32] paper is about okay so now give you an idea of
+[0:28:34] about okay so now give you an idea of the proof of how it
+[0:28:35] the proof of how it works okay so we have this telescoping
+[0:28:37] works okay so we have this telescoping sum we identify blip effect time one
+[0:28:40] sum we identify blip effect time one blip effect time two in the Baseline
+[0:28:41] blip effect time two in the Baseline outcome here's how it works at step one
+[0:28:44] outcome here's how it works at step one you identify the Baseline outcome okay
+[0:28:47] you identify the Baseline outcome okay and the idea is very much it's
+[0:28:48] and the idea is very much it's essentially the synthetic controls idea
+[0:28:50] essentially the synthetic controls idea so you look at all the units that
+[0:28:52] so you look at all the units that received the observed outcomes uh the
+[0:28:54] received the observed outcomes uh the the exact control sequence 0 1 02 those
+[0:28:57] the exact control sequence 0 1 02 those are the donor units in this particular
+[0:28:59] are the donor units in this particular setting okay and then because you
+[0:29:01] setting okay and then because you already observe those outcomes for them
+[0:29:02] already observe those outcomes for them you have the Baseline for these donate
+[0:29:05] you have the Baseline for these donate units okay then by the L Factor model
+[0:29:08] units okay then by the L Factor model that we have we can create a synthetic
+[0:29:10] that we have we can create a synthetic baseline or a synthetic control for
+[0:29:11] baseline or a synthetic control for every unit as some line combination of
+[0:29:14] every unit as some line combination of The observed outcomes for these uh
+[0:29:16] The observed outcomes for these uh control units okay so it's basically
+[0:29:18] control units okay so it's basically synthetic controls you look at the
+[0:29:20] synthetic controls you look at the people get control you write everyone
+[0:29:22] people get control you write everyone else as some L combination of them you
+[0:29:23] else as some L combination of them you have a synthetic Baseline for every unit
+[0:29:25] have a synthetic Baseline for every unit okay so that's step one so once you've
+[0:29:27] okay so that's step one so once you've done step one you now have a baseline
+[0:29:29] done step one you now have a baseline for every unit uh
+[0:29:31] for every unit uh estimated
+[0:29:39] okay so that first part's done now step two is I want to identify the blip
+[0:29:40] two is I want to identify the blip effect times step two so that's the blip
+[0:29:42] effect times step two so that's the blip effect at the at the at the final time
+[0:29:44] effect at the at the at the final time step for where here at this point it's
+[0:29:46] step for where here at this point it's two okay so I want toy the blip effect
+[0:29:49] two okay so I want toy the blip effect the time step two for intervention A2
+[0:29:52] the time step two for intervention A2 what you do is you look at the unit that
+[0:29:54] what you do is you look at the unit that received 01 in the first time step and
+[0:29:56] received 01 in the first time step and received A2 in the second time time
+[0:29:59] received A2 in the second time time step okay now I want to somehow tease
+[0:30:02] step okay now I want to somehow tease out the blip effect at just time Step 2
+[0:30:05] out the blip effect at just time Step 2 the nice thing is if I subtract the
+[0:30:06] the nice thing is if I subtract the baseline from them which I have from the
+[0:30:08] baseline from them which I have from the first
+[0:30:09] first step that exactly equals the blip effect
+[0:30:11] step that exactly equals the blip effect for these units at time step two okay so
+[0:30:14] for these units at time step two okay so I look at the people who get
+[0:30:15] I look at the people who get intervention 01 then A2 I take the
+[0:30:18] intervention 01 then A2 I take the outcomes I subtract the synthetic
+[0:30:20] outcomes I subtract the synthetic controls for them and I now have exactly
+[0:30:22] controls for them and I now have exactly have the blip effect for them at time
+[0:30:23] have the blip effect for them at time step
+[0:30:25] step two okay now you use your lat Factor
+[0:30:28] two okay now you use your lat Factor model trick again now you have a
+[0:30:29] model trick again now you have a synthetic blip effect for every unit for
+[0:30:32] synthetic blip effect for every unit for time step two under intervention
+[0:30:41] A2 okay so and you can repeat this process now for every intervention so
+[0:30:42] process now for every intervention so you don't just do this for A2 but this
+[0:30:44] you don't just do this for A2 but this for every possible intervention the
+[0:30:45] for every possible intervention the second time step and so now you'll
+[0:30:47] second time step and so now you'll actually have a blip effect at time step
+[0:30:49] actually have a blip effect at time step two under every intervention for every
+[0:30:51] two under every intervention for every unit okay by just repeating this process
+[0:30:53] unit okay by just repeating this process a sufficient number of
+[0:30:55] a sufficient number of times okay I think there's a question
+[0:30:58] times okay I think there's a question the Q&amp;A uh should we do it later or or
+[0:31:00] the Q&amp;A uh should we do it later or or no I'm happy to do it either ways um we
+[0:31:03] no I'm happy to do it either ways um we can do it now um it's a question from
+[0:31:06] can do it now um it's a question from Thomas
+[0:31:07] Thomas Richardson uh it's a comment on the
+[0:31:09] Richardson uh it's a comment on the robins model on the bleep effect which
+[0:31:12] robins model on the bleep effect which do not assume control Before Time t uh
+[0:31:15] do not assume control Before Time t uh in other words I think what Thomas meant
+[0:31:18] in other words I think what Thomas meant was uh when you look at your blip for
+[0:31:21] was uh when you look at your blip for A2 uh the he's saying the robins model
+[0:31:25] A2 uh the he's saying the robins model assume you take this natural realization
+[0:31:28] assume you take this natural realization of A1 instead of fixing it at zero so
+[0:31:32] of A1 instead of fixing it at zero so the question was do the blips here take
+[0:31:34] the question was do the blips here take zero prior to the time of the
+[0:31:38] zero prior to the time of the blip that's a great question so in in
+[0:31:41] blip that's a great question so in in our setting we will um be only looking
+[0:31:45] our setting we will um be only looking at the people the blip effect given the
+[0:31:47] at the people the blip effect given the latent factor model only depends on the
+[0:31:48] latent factor model only depends on the intervention you get at that time step
+[0:31:50] intervention you get at that time step it can be any sequence of interventions
+[0:31:52] it can be any sequence of interventions in the other time step as long it's
+[0:31:53] in the other time step as long it's common between you and your between the
+[0:31:56] common between you and your between the interventions you got and the
+[0:31:58] interventions you got and the counterfactual but because it's the L
+[0:32:00] counterfactual but because it's the L Factor model it only depends on the
+[0:32:02] Factor model it only depends on the intervention at that time step but for
+[0:32:04] intervention at that time step but for the identification strategy we will be
+[0:32:06] the identification strategy we will be looking at people who got the control in
+[0:32:08] looking at people who got the control in the time step
+[0:32:13] before okay so for this specific identification strategy we'll be looking
+[0:32:15] identification strategy we'll be looking for identifying blip effect two we'll be
+[0:32:17] for identifying blip effect two we'll be looking at people who got 01 in the
+[0:32:19] looking at people who got 01 in the first time
+[0:32:26] step um maybe a natural followup to that I guess you have you may have different
+[0:32:28] I guess you have you may have different ways to uh decompose this effect for for
+[0:32:32] ways to uh decompose this effect for for example you can use one one as the
+[0:32:34] example you can use one one as the Baseline outcome and you have another
+[0:32:36] Baseline outcome and you have another telescoping sum um so that would a
+[0:32:39] telescoping sum um so that would a different identification
+[0:32:41] different identification strategy uh with that uh yeah would that
+[0:32:45] strategy uh with that uh yeah would that matter for your method AB I think it
+[0:32:49] matter for your method AB I think it would it would generalize in a
+[0:32:51] would it would generalize in a straightforward way so if you you can
+[0:32:52] straightforward way so if you you can just redefine in terms of which
+[0:32:54] just redefine in terms of which interventions you're looking at but then
+[0:32:56] interventions you're looking at but then the control the donor SE sequence the
+[0:32:58] the control the donor SE sequence the units that you could consider control
+[0:33:00] units that you could consider control will now be the one one sequence and you
+[0:33:02] will now be the one one sequence and you could repeat the process in the same
+[0:33:05] could repeat the process in the same way so I think it it just depends on on
+[0:33:08] way so I think it it just depends on on correctly defining the control which
+[0:33:10] correctly defining the control which units you use in the donor group at
+[0:33:11] units you use in the donor group at which time
+[0:33:13] which time Point okay thanks I think Thomas just
+[0:33:15] Point okay thanks I think Thomas just added a comment that I think he said I
+[0:33:18] added a comment that I think he said I guess the meaning of blip has changed
+[0:33:22] guess the meaning of blip has changed um
+[0:33:28] but yeah so just to repeat once more maybe it's a good point um so here what
+[0:33:32] maybe it's a good point um so here what I'm seeing is the blip effect at time
+[0:33:34] I'm seeing is the blip effect at time Step at compared to a baseline right
+[0:33:36] Step at compared to a baseline right with common interventions at all the
+[0:33:37] with common interventions at all the time steps but because of the lat Factor
+[0:33:39] time steps but because of the lat Factor model we assume it's only a function of
+[0:33:41] model we assume it's only a function of the intervention you get at the tth time
+[0:33:43] the intervention you get at the tth time step it's not really a function of what
+[0:33:45] step it's not really a function of what happens to the other time step because
+[0:33:46] happens to the other time step because they they cancel out because we assume
+[0:33:48] they they cancel out because we assume that this the effect in any time step is
+[0:33:50] that this the effect in any time step is additive so as a result you can have
+[0:33:53] additive so as a result you can have multiple definitions of the blip effect
+[0:33:54] multiple definitions of the blip effect at a particular time step but I think
+[0:33:56] at a particular time step but I think maybe I'll talk about that offline um
+[0:33:59] maybe I'll talk about that offline um yeah that's very very helpful thank you
+[0:34:07] yeah okay so we said if you do this this step now where you take the outcomes of
+[0:34:09] step now where you take the outcomes of people who get intervention A2 uh you
+[0:34:11] people who get intervention A2 uh you subtract the synthetic Baseline you now
+[0:34:13] subtract the synthetic Baseline you now have the blip effect isolated for them
+[0:34:14] have the blip effect isolated for them at time step
+[0:34:15] at time step two
+[0:34:17] two okay and now say I want to identify the
+[0:34:20] okay and now say I want to identify the blip effect time step one here is where
+[0:34:21] blip effect time step one here is where it gets a little tricky you have to use
+[0:34:23] it gets a little tricky you have to use a bit of recursion okay so what you do
+[0:34:26] a bit of recursion okay so what you do now is you look for the unit that rece
+[0:34:27] now is you look for the unit that rece received intervention A1 at time step
+[0:34:29] received intervention A1 at time step one okay now they received some
+[0:34:32] one okay now they received some intervention A2 Capital A2 at time step
+[0:34:34] intervention A2 Capital A2 at time step two it could be anything the nice thing
+[0:34:36] two it could be anything the nice thing is we now subtract the synthetic blip
+[0:34:38] is we now subtract the synthetic blip effect for them at time of
+[0:34:40] effect for them at time of A2 okay and A2 is the observed outcome
+[0:34:43] A2 okay and A2 is the observed outcome for this Don unit nice thing is in step
+[0:34:45] for this Don unit nice thing is in step two we had already synthetically we had
+[0:34:46] two we had already synthetically we had already identified this blip effect so
+[0:34:49] already identified this blip effect so we can subtract it we subtract the
+[0:34:52] we can subtract it we subtract the synthetic Baseline and that actually
+[0:34:54] synthetic Baseline and that actually isolates the blip effect for these units
+[0:34:57] isolates the blip effect for these units um for these
+[0:34:58] um for these units okay so let me do it again so you
+[0:35:02] units okay so let me do it again so you look at the units theed I want to
+[0:35:03] look at the units theed I want to identify the blip effect at time step
+[0:35:05] identify the blip effect at time step one for intervention A1 the right set of
+[0:35:08] one for intervention A1 the right set of units that will be my donor group now
+[0:35:10] units that will be my donor group now will be the unit that received
+[0:35:11] will be the unit that received intervention A1 at time step one and
+[0:35:14] intervention A1 at time step one and let's say they received some
+[0:35:15] let's say they received some intervention A2 at time step two what
+[0:35:18] intervention A2 at time step two what I'll do is I'm going to subtract two
+[0:35:19] I'll do is I'm going to subtract two synthetic things now I'm going to
+[0:35:20] synthetic things now I'm going to subtract the synthetic Baseline and I'm
+[0:35:23] subtract the synthetic Baseline and I'm going to subtract the synthetic blip
+[0:35:24] going to subtract the synthetic blip effect at time step two for the
+[0:35:26] effect at time step two for the intervention that they actually got like
+[0:35:28] intervention that they actually got like the actual intervention that they got
+[0:35:30] the actual intervention that they got and you subtract these two things you
+[0:35:31] and you subtract these two things you can easily see that the blip what you
+[0:35:34] can easily see that the blip what you what is remained is the blip effect at
+[0:35:35] what is remained is the blip effect at time step one and intervention
+[0:35:43] A1 okay and again using the Laten Factor model you can now create the synthetic
+[0:35:45] model you can now create the synthetic blip effect for all units bya linear
+[0:35:47] blip effect for all units bya linear combination of the blip effects of these
+[0:35:49] combination of the blip effects of these donate
+[0:35:51] donate units okay so here's where the recursion
+[0:35:53] units okay so here's where the recursion happens because to identify this you
+[0:35:54] happens because to identify this you need to identify the blip effect at time
+[0:35:56] need to identify the blip effect at time step two and that's something we'
+[0:35:57] step two and that's something we' already kind of stored in memory uh
+[0:35:59] already kind of stored in memory uh through this Dynamic program that we
+[0:36:06] run and so if you do this you now have a blip effect for time step one identified
+[0:36:08] blip effect for time step one identified under any intervention and as we said
+[0:36:10] under any intervention and as we said because the sum of these things give you
+[0:36:12] because the sum of these things give you the the potential outcome of interest
+[0:36:14] the the potential outcome of interest you now have actually identified uh YN
+[0:36:16] you now have actually identified uh YN A1 A2 and that's fundamentally it right
+[0:36:18] A1 A2 and that's fundamentally it right you now there's you can obviously extend
+[0:36:20] you now there's you can obviously extend this to T time steps and any sequence of
+[0:36:22] this to T time steps and any sequence of interventions but it's really this idea
+[0:36:24] interventions but it's really this idea of where you identify the Baseline first
+[0:36:26] of where you identify the Baseline first and then you um build out the effect at
+[0:36:29] and then you um build out the effect at the last time step once you have that
+[0:36:31] the last time step once you have that you learn the time the blip effect for
+[0:36:33] you learn the time the blip effect for time of T minus one you have that and
+[0:36:35] time of T minus one you have that and you cursively build it out till the end
+[0:36:37] you cursively build it out till the end okay and and that's basically the idea
+[0:36:39] okay and and that's basically the idea is you keep using this Lan Factor model
+[0:36:41] is you keep using this Lan Factor model to to learn the synthetic blip
+[0:36:47] effects okay so that's really the idea for the addtive time bring L Factor
+[0:36:49] for the addtive time bring L Factor model and you can easily argue that
+[0:36:51] model and you can easily argue that given that kind of recursive strategy
+[0:36:53] given that kind of recursive strategy the unit sample complexity now scales as
+[0:36:55] the unit sample complexity now scales as a * T rather than a the^ of t
+[0:36:58] a * T rather than a the^ of t okay and uh there's a variant there's a
+[0:37:01] okay and uh there's a variant there's a um a different variant of this argument
+[0:37:03] um a different variant of this argument that will work for the time and variant
+[0:37:04] that will work for the time and variant Factor model that actually only allows
+[0:37:06] Factor model that actually only allows eight
+[0:37:08] eight um sample complexity just being a okay
+[0:37:11] um sample complexity just being a okay and the fundamental difference is that
+[0:37:12] and the fundamental difference is that in the time bring in Factor model we're
+[0:37:13] in the time bring in Factor model we're only using the outcomes of the tth time
+[0:37:16] only using the outcomes of the tth time step okay in the addtive time varing
+[0:37:19] step okay in the addtive time varing time invariant in fact the model you
+[0:37:21] time invariant in fact the model you actually look at the outcomes of every
+[0:37:22] actually look at the outcomes of every unit and you look at the their their
+[0:37:24] unit and you look at the their their sequence of inter of of outcomes right
+[0:37:26] sequence of inter of of outcomes right so you're looking actually you're you're
+[0:37:27] so you're looking actually you're you're utilizing the data not just at the last
+[0:37:29] utilizing the data not just at the last time step over the entire sequence of
+[0:37:30] time step over the entire sequence of trajectories and that's really what
+[0:37:32] trajectories and that's really what allows you to um bring down the sample
+[0:37:35] allows you to um bring down the sample complexity from a * C to a but I'll
+[0:37:37] complexity from a * C to a but I'll leave those details for the
+[0:37:46] paper so a summary I can I you Qui clarifying question um should asked this
+[0:37:48] clarifying question um should asked this earlier about um what you mean by an
+[0:37:50] earlier about um what you mean by an Adaptive policy so does that um what
+[0:37:54] Adaptive policy so does that um what you're assuming about the Adaptive
+[0:37:56] you're assuming about the Adaptive policy should I be thinking of that is
+[0:37:57] policy should I be thinking of that is it's some version of sequential
+[0:38:00] it's some version of sequential randomization conditional on these
+[0:38:02] randomization conditional on these latent factors is there like an overlap
+[0:38:05] latent factors is there like an overlap assumption or is it just or is it
+[0:38:07] assumption or is it just or is it something weaker than that yeah so in
+[0:38:09] something weaker than that yeah so in the in the naive lat Factor model so all
+[0:38:12] the in the naive lat Factor model so all of these in these um these models you
+[0:38:15] of these in these um these models you allow for there to be confounding of
+[0:38:19] allow for there to be confounding of based on the lean factors okay so
+[0:38:22] based on the lean factors okay so whether it's adaptive or non when I when
+[0:38:23] whether it's adaptive or non when I when I say non-adaptive I still mean that you
+[0:38:25] I say non-adaptive I still mean that you can allow for it to be dependent the L
+[0:38:27] can allow for it to be dependent the L Factor model on the L
+[0:38:30] Factor model on the L factors when I say adaptive what I mean
+[0:38:32] factors when I say adaptive what I mean is now it can also be a function of the
+[0:38:33] is now it can also be a function of the observed outcomes now what does that
+[0:38:36] observed outcomes now what does that mean it means can also be defend on the
+[0:38:37] mean it means can also be defend on the noise that is introduced at every time
+[0:38:39] noise that is introduced at every time step so the Epsilon that's introduced at
+[0:38:41] step so the Epsilon that's introduced at every time step that can also affect my
+[0:38:43] every time step that can also affect my treatment assignment pattern and that's
+[0:38:45] treatment assignment pattern and that's fundamentally what I mean by
+[0:38:47] fundamentally what I mean by adaptive okay so the just to repeat the
+[0:38:50] adaptive okay so the just to repeat the lane factors can be affecting the
+[0:38:52] lane factors can be affecting the intervention assignment in all these
+[0:38:53] intervention assignment in all these different models so even in a
+[0:38:55] different models so even in a non-adaptive setting it can be
+[0:38:56] non-adaptive setting it can be functional L factors but the Epsilon
+[0:38:59] functional L factors but the Epsilon which is what affects the observed
+[0:39:00] which is what affects the observed outcomes those affecting the treatment
+[0:39:02] outcomes those affecting the treatment assignment pattern can only be in the
+[0:39:04] assignment pattern can only be in the Adaptive
+[0:39:12] regime sorry there's a related question from the audience U the question is
+[0:39:15] from the audience U the question is about whether you assume uh measurement
+[0:39:17] about whether you assume uh measurement invariance which I think means uh if you
+[0:39:21] invariance which I think means uh if you assume there's a equal Factor loadings
+[0:39:23] assume there's a equal Factor loadings um that doesn't change over time if I
+[0:39:26] um that doesn't change over time if I understand understand the question
+[0:39:28] understand understand the question correctly is that the Assumption here so
+[0:39:32] correctly is that the Assumption here so let me see if I can I don't exactly know
+[0:39:36] let me see if I can I don't exactly know what that means measurement invariance
+[0:39:37] what that means measurement invariance but fundamentally the the model is
+[0:39:40] but fundamentally the the model is something like um this right
+[0:39:44] something like um this right so so here for example the latent factor
+[0:39:48] so so here for example the latent factor for the unit right is something that is
+[0:39:50] for the unit right is something that is changing for uh at capital T and L so
+[0:39:54] changing for uh at capital T and L so it's a different Lane Factor at every
+[0:39:55] it's a different Lane Factor at every time step
+[0:40:00] but when we say measurement invariance I think I guess the invariance that I'm I
+[0:40:02] think I guess the invariance that I'm I need is that the latent factor is not a
+[0:40:04] need is that the latent factor is not a function of the
+[0:40:07] function of the intervention so that's the fundamental
+[0:40:08] intervention so that's the fundamental separability that I'm
+[0:40:17] exploiting okay um yeah let's uh yeah move
+[0:40:19] move on sounds
+[0:40:27] good so the the summary of the key ideas is that idea one is that we have an
+[0:40:28] is that idea one is that we have an additive time varing Laten Factor model
+[0:40:30] additive time varing Laten Factor model right that that was was which is
+[0:40:32] right that that was was which is motivated by Auto regressive processes
+[0:40:34] motivated by Auto regressive processes and and L Dial Systems idea two is that
+[0:40:36] and and L Dial Systems idea two is that we rewrite the outcomes and the blip
+[0:40:38] we rewrite the outcomes and the blip effects and Baseline outcomes with this
+[0:40:40] effects and Baseline outcomes with this latent factorization the third idea is
+[0:40:42] latent factorization the third idea is that we identify the Baseline outcomes
+[0:40:44] that we identify the Baseline outcomes using the synthetic controls
+[0:40:45] using the synthetic controls approach right and the fourth idea is
+[0:40:47] approach right and the fourth idea is that we use dynamic programming
+[0:40:49] that we use dynamic programming recursion to recursively identify the
+[0:40:51] recursion to recursively identify the synthetic blip effects for all the T typ
+[0:40:53] synthetic blip effects for all the T typ steps and these four things playing
+[0:40:54] steps and these four things playing together is really what gives you
+[0:40:55] together is really what gives you identification
+[0:40:58] identification um and with that I'll I'll end the
+[0:41:00] um and with that I'll I'll end the temporal spill others part of the talk
+[0:41:01] temporal spill others part of the talk we'll come back through the end when I
+[0:41:02] we'll come back through the end when I talk about when you have temporal and
+[0:41:04] talk about when you have temporal and spatial spill others together and now
+[0:41:06] spatial spill others together and now I'll talk about spatial spillovers when
+[0:41:07] I'll talk about spatial spillovers when you have Network interference um it's
+[0:41:10] you have Network interference um it's called networks and interventions so
+[0:41:13] called networks and interventions so here the target causal parameter is
+[0:41:15] here the target causal parameter is rather than being a function of the
+[0:41:16] rather than being a function of the history of interventions it's a function
+[0:41:19] history of interventions it's a function of the interventions of everyone else
+[0:41:21] of the interventions of everyone else got as
+[0:41:22] got as well okay so it's y andt AI where AI
+[0:41:27] well okay so it's y andt AI where AI from one to n which which are the N
+[0:41:28] from one to n which which are the N different people okay we'll make
+[0:41:30] different people okay we'll make restrictions the type of SP spatial
+[0:41:32] restrictions the type of SP spatial spills we allow for in a second and uh
+[0:41:35] spills we allow for in a second and uh what the expectation is defined respect
+[0:41:37] what the expectation is defined respect to I'll I'll talk about in a second
+[0:41:39] to I'll I'll talk about in a second again here we allow for spatial
+[0:41:40] again here we allow for spatial spillovers but not temporal spillovers
+[0:41:41] spillovers but not temporal spillovers because your potential outcome is not a
+[0:41:42] because your potential outcome is not a function of the history of outcomes okay
+[0:41:45] function of the history of outcomes okay so again if there was arbitary
+[0:41:47] so again if there was arbitary spillovers across all units then sharing
+[0:41:48] spillovers across all units then sharing information becomes challenging so you
+[0:41:50] information becomes challenging so you want to restrict the extent of the
+[0:41:51] want to restrict the extent of the spatial spillovers and what people do
+[0:41:54] spatial spillovers and what people do and and what we do as well is you assume
+[0:41:55] and and what we do as well is you assume there's some graph over the unit UNS
+[0:41:58] there's some graph over the unit UNS okay so here's so let's say here the the
+[0:42:02] okay so here's so let's say here the the node which is the blue circle so the
+[0:42:03] node which is the blue circle so the units and the edges defines um between
+[0:42:06] units and the edges defines um between two units means that they're neighbors
+[0:42:08] two units means that they're neighbors so that means if there's an edge between
+[0:42:10] so that means if there's an edge between say me and ases that means his outcomes
+[0:42:12] say me and ases that means his outcomes affect his intervention affects my
+[0:42:13] affect his intervention affects my outcomes okay and if there's no Edge
+[0:42:16] outcomes okay and if there's no Edge between say me and Dominic that means
+[0:42:17] between say me and Dominic that means whatever happens to him it doesn't
+[0:42:18] whatever happens to him it doesn't affect my
+[0:42:20] affect my outcomes okay and so say for this unit
+[0:42:23] outcomes okay and so say for this unit that is being pointed to that outcomes
+[0:42:25] that is being pointed to that outcomes of this unit is dependent on the
+[0:42:26] of this unit is dependent on the ventions of its immediate neighborhood
+[0:42:28] ventions of its immediate neighborhood which is circled in
+[0:42:29] which is circled in red okay and so under this kind of
+[0:42:32] red okay and so under this kind of assumption the potential outcome becomes
+[0:42:35] assumption the potential outcome becomes less complex rather than being a
+[0:42:36] less complex rather than being a function of the interventions of all the
+[0:42:38] function of the interventions of all the N units it's only a function of the
+[0:42:40] N units it's only a function of the neighborhood of n which given by macal n
+[0:42:42] neighborhood of n which given by macal n Comm
+[0:42:45] Comm okay so what is a lane Factor model that
+[0:42:48] okay so what is a lane Factor model that makes sense with such a neighborhood
+[0:42:49] makes sense with such a neighborhood based the over restriction so here's so
+[0:42:52] based the over restriction so here's so this is the model and Sy interventions
+[0:42:54] this is the model and Sy interventions here's the extension so rather than just
+[0:42:56] here's the extension so rather than just being VN WTA it's an additive sum of the
+[0:43:00] being VN WTA it's an additive sum of the VNS uh for all your neighbors okay so in
+[0:43:03] VNS uh for all your neighbors okay so in some sense now it's a more complex L
+[0:43:04] some sense now it's a more complex L Factor model where now it's uh
+[0:43:07] Factor model where now it's uh essentially a Laten Factor specific to
+[0:43:09] essentially a Laten Factor specific to unit neighbor I and unit
+[0:43:11] unit neighbor I and unit n okay so now it's going to be basically
+[0:43:15] n okay so now it's going to be basically a more complex model because it's a
+[0:43:16] a more complex model because it's a additive sum of the lat factors for me
+[0:43:18] additive sum of the lat factors for me and the interventions I get but also for
+[0:43:20] and the interventions I get but also for the interventions my my neighbors
+[0:43:23] the interventions my my neighbors get
+[0:43:25] get okay and the potential outcome function
+[0:43:27] okay and the potential outcome function is a function of not just the
+[0:43:28] is a function of not just the interventions I get but the
+[0:43:29] interventions I get but the interventions that my neers get as
+[0:43:32] interventions that my neers get as well and the key assumption again is
+[0:43:34] well and the key assumption again is that the effect is additive over the
+[0:43:36] that the effect is additive over the different
+[0:43:42] neighbors okay another way of of of looking at this is because you have this
+[0:43:44] looking at this is because you have this additive model you can write this Laden
+[0:43:46] additive model you can write this Laden Factor model in terms of this elated
+[0:43:48] Factor model in terms of this elated Laten Factor okay where this this V Tia
+[0:43:51] Laten Factor okay where this this V Tia n is really the uh you you're
+[0:43:54] n is really the uh you you're concatenating the lat factors for you
+[0:43:56] concatenating the lat factors for you the lane factor of youu and your
+[0:43:57] the lane factor of youu and your neighbor one youu and your neighbor two
+[0:43:58] neighbor one youu and your neighbor two and so on so forth you have this larger
+[0:44:00] and so on so forth you have this larger Lane factor and that's another way of
+[0:44:01] Lane factor and that's another way of representing what's
+[0:44:07] happening so here's a way of comparing it so SI with spatial spell overs
+[0:44:10] it so SI with spatial spell overs essentially have this elongated Lane
+[0:44:11] essentially have this elongated Lane Factor model right and so it looks a lot
+[0:44:14] Factor model right and so it looks a lot like the synthetic Dimensions model but
+[0:44:16] like the synthetic Dimensions model but it's this larger Lane factor it's a more
+[0:44:18] it's this larger Lane factor it's a more complex Lane Factor model to deal with
+[0:44:19] complex Lane Factor model to deal with the neighbor interference that's really
+[0:44:21] the neighbor interference that's really the L Factor model that we studying in
+[0:44:23] the L Factor model that we studying in this this
+[0:44:25] this this literature so the key identification
+[0:44:27] literature so the key identification idea is that you simply change the donor
+[0:44:28] idea is that you simply change the donor group right that's really it is that you
+[0:44:30] group right that's really it is that you just have a smaller donor group to
+[0:44:31] just have a smaller donor group to choose from so suppose we have the
+[0:44:34] choose from so suppose we have the following graph with binary
+[0:44:36] following graph with binary interventions okay so the synthetic
+[0:44:38] interventions okay so the synthetic controls question uh would be say for
+[0:44:40] controls question uh would be say for this unit that was treated in red like
+[0:44:42] this unit that was treated in red like what would have happened if this unit
+[0:44:43] what would have happened if this unit under control that's the question we ask
+[0:44:45] under control that's the question we ask in synthetic controls right and all the
+[0:44:48] in synthetic controls right and all the people in blue are valid donors for you
+[0:44:50] people in blue are valid donors for you right if you don't assume any sort of
+[0:44:51] right if you don't assume any sort of neighborhood
+[0:44:52] neighborhood interference the right question to ask
+[0:44:54] interference the right question to ask of synthetic controls with neighbor
+[0:44:56] of synthetic controls with neighbor interference is what would have happened
+[0:44:57] interference is what would have happened if my unit if the unit and my neighbors
+[0:44:59] if my unit if the unit and my neighbors were under control so for this
+[0:45:00] were under control so for this particular unit its neighbors would be
+[0:45:02] particular unit its neighbors would be the two next to it one that's blue one
+[0:45:03] the two next to it one that's blue one that's red
+[0:45:05] that's red okay and the valid Dona units given the
+[0:45:08] okay and the valid Dona units given the model are the units that have the same
+[0:45:10] model are the units that have the same number of neighbors as you so for this
+[0:45:12] number of neighbors as you so for this unit it has two
+[0:45:14] unit it has two neighbors right and I want to know what
+[0:45:15] neighbors right and I want to know what happens to it under control so which are
+[0:45:18] happens to it under control so which are the units that have two neighbors it's
+[0:45:20] the units that have two neighbors it's and such that all of the neighbors its
+[0:45:22] and such that all of the neighbors its neighbors have control it's these two so
+[0:45:25] neighbors have control it's these two so these are the two that become the valid
+[0:45:26] these are the two that become the valid Neighbors
+[0:45:26] Neighbors yeah Dominic you have a question I just
+[0:45:28] yeah Dominic you have a question I just wanted to remind you of the time so in
+[0:45:30] wanted to remind you of the time so in order to some time for discussion okay
+[0:45:33] order to some time for discussion okay yeah perfect I'll be done in five
+[0:45:34] yeah perfect I'll be done in five minutes sounds
+[0:45:36] minutes sounds great okay so the fundamental idea is
+[0:45:38] great okay so the fundamental idea is that you just change the donor group
+[0:45:40] that you just change the donor group rather than being anyone that gets under
+[0:45:41] rather than being anyone that gets under control it's units that have the same
+[0:45:43] control it's units that have the same number of neighbors and neighbors and
+[0:45:45] number of neighbors and neighbors and the neighborhood of them have the target
+[0:45:46] the neighborhood of them have the target intervention assignment okay and so with
+[0:45:50] intervention assignment okay and so with this kind of elongated Laten Factor
+[0:45:51] this kind of elongated Laten Factor model the assumption is that the
+[0:45:53] model the assumption is that the elongated Laten Factor model can be
+[0:45:54] elongated Laten Factor model can be written as linear combinations of the
+[0:45:56] written as linear combinations of the valid donor group right so the valid
+[0:45:58] valid donor group right so the valid donor group here are the units that
+[0:46:00] donor group here are the units that receive the same number of have the same
+[0:46:01] receive the same number of have the same number of neighbors and the the target
+[0:46:03] number of neighbors and the the target intervention assignment for themselves
+[0:46:05] intervention assignment for themselves and the neighbors and what that implies
+[0:46:07] and the neighbors and what that implies with the lane factor and the overlap
+[0:46:09] with the lane factor and the overlap assumption is that uh the expected
+[0:46:11] assumption is that uh the expected potential outcome of the unit can be
+[0:46:12] potential outcome of the unit can be returned in terms of observed outcomes
+[0:46:14] returned in terms of observed outcomes for those units for the donor group
+[0:46:17] for those units for the donor group units
+[0:46:19] units okay and again um the idea here it's not
+[0:46:22] okay and again um the idea here it's not randomized but you assume that condition
+[0:46:23] randomized but you assume that condition of the lat factors the assignment is
+[0:46:25] of the lat factors the assignment is independent.com
+[0:46:27] independent.com so we don't allow for adaptivity and
+[0:46:29] so we don't allow for adaptivity and that's fundamentally it right so the the
+[0:46:31] that's fundamentally it right so the the tldr for the neighbor identification the
+[0:46:33] tldr for the neighbor identification the the network synthetic interventions at
+[0:46:35] the network synthetic interventions at least for the identification part is you
+[0:46:37] least for the identification part is you have a more complex L Factor model and
+[0:46:39] have a more complex L Factor model and algorithmically what that means is you
+[0:46:40] algorithmically what that means is you have a smaller donor group to choose
+[0:46:41] have a smaller donor group to choose from when you think about control you
+[0:46:43] from when you think about control you have to be more selective more careful
+[0:46:45] have to be more selective more careful when you think about what's a valid unit
+[0:46:47] when you think about what's a valid unit and you think about the neighbors and
+[0:46:48] and you think about the neighbors and the treatment assignment of the
+[0:46:50] the treatment assignment of the neighbors okay so in conclusion how do
+[0:46:53] neighbors okay so in conclusion how do you simultaneously handle both temporal
+[0:46:55] you simultaneously handle both temporal and spatial spill is so the idea of
+[0:46:57] and spatial spill is so the idea of temporal spillovers is they have this
+[0:46:59] temporal spillovers is they have this additively impact models over time and
+[0:47:01] additively impact models over time and you cursively identify blip effects for
+[0:47:03] you cursively identify blip effects for spatial spillovers you have this
+[0:47:04] spatial spillovers you have this elongated Lane Factor model and you look
+[0:47:06] elongated Lane Factor model and you look at the neighbor assignment and I think
+[0:47:08] at the neighbor assignment and I think the way you would potentially handle
+[0:47:10] the way you would potentially handle temporal and spatial spillovers together
+[0:47:12] temporal and spatial spillovers together is you have this additive elongated L
+[0:47:13] is you have this additive elongated L INF Factor model and you essentially
+[0:47:15] INF Factor model and you essentially recursively identify Network blip
+[0:47:17] recursively identify Network blip effects and I think that would be one
+[0:47:18] effects and I think that would be one way of getting towards combining both
+[0:47:20] way of getting towards combining both these things this hasn't been done but
+[0:47:21] these things this hasn't been done but this is my conjecture of how I could do
+[0:47:23] this is my conjecture of how I could do this okay with that I'll end I'll just
+[0:47:26] this okay with that I'll end I'll just give some I think L Factor models are
+[0:47:28] give some I think L Factor models are are super interesting and there's a ton
+[0:47:29] are super interesting and there's a ton of work to be done here give you some of
+[0:47:31] of work to be done here give you some of the things I've been thinking about one
+[0:47:33] the things I've been thinking about one is called synthetic combinations which
+[0:47:34] is called synthetic combinations which is with Al and SAS or Berkeley MIT where
+[0:47:38] is with Al and SAS or Berkeley MIT where now we think about where the
+[0:47:39] now we think about where the interventions are combinations like a
+[0:47:40] interventions are combinations like a factoral design or permutations and so
+[0:47:42] factoral design or permutations and so how do you add structure across uh
+[0:47:43] how do you add structure across uh comori interventions another work I'm
+[0:47:46] comori interventions another work I'm doing Alberto and uh and Raz and abin
+[0:47:49] doing Alberto and uh and Raz and abin Raz of the Cornell and abin M is W
+[0:47:51] Raz of the Cornell and abin M is W robust Laden Factor models where you
+[0:47:52] robust Laden Factor models where you create W robust estimators by assuming
+[0:47:55] create W robust estimators by assuming uh the outcoming Matrix and the
+[0:47:56] uh the outcoming Matrix and the assignment Matrix are low ranked or
+[0:47:58] assignment Matrix are low ranked or either one of them is low rank uh here's
+[0:48:00] either one of them is low rank uh here's strategy proov decision- making where we
+[0:48:02] strategy proov decision- making where we combine it with ideas and mechanism
+[0:48:04] combine it with ideas and mechanism design where what happens if units
+[0:48:06] design where what happens if units actually manipulate the pre-intervention
+[0:48:07] actually manipulate the pre-intervention outcomes to get a better treatment
+[0:48:08] outcomes to get a better treatment assignment how do you deal with those
+[0:48:09] assignment how do you deal with those kinds of
+[0:48:10] kinds of settings um some work with Alberto and D
+[0:48:13] settings um some work with Alberto and D on formly bridging um causal dags with
+[0:48:16] on formly bridging um causal dags with Lane Factor
+[0:48:18] Lane Factor models um causal Matrix completion which
+[0:48:20] models um causal Matrix completion which is a which bringing some of these ideas
+[0:48:22] is a which bringing some of these ideas to the traditional Matrix completion
+[0:48:23] to the traditional Matrix completion literature with mining random data and
+[0:48:26] literature with mining random data and some work I did with Rahul now at
+[0:48:28] some work I did with Rahul now at Harvard on um bringing some of these
+[0:48:30] Harvard on um bringing some of these ideas million Factor models to deal with
+[0:48:32] ideas million Factor models to deal with when your Coates have been um corrupted
+[0:48:35] when your Coates have been um corrupted with with leasy noise to get
+[0:48:37] with with leasy noise to get differential privacy okay and with that
+[0:48:40] differential privacy okay and with that I'll end thank you very much for your
+[0:48:41] I'll end thank you very much for your attention and please um any questions we
+[0:48:45] attention and please um any questions we welcome thanks for the very nice talk so
+[0:48:47] welcome thanks for the very nice talk so we're now going to switch over to the
+[0:48:48] we're now going to switch over to the discussion so this will be a discussion
+[0:48:50] discussion so this will be a discussion between yaf ases and Anish um also yeah
+[0:48:54] between yaf ases and Anish um also yeah please if you have any questions submit
+[0:48:55] please if you have any questions submit them via Q&amp;A so we can also bring them
+[0:48:57] them via Q&amp;A so we can also bring them in during the discussion yeah with that
+[0:48:59] in during the discussion yeah with that I'm handing over to Y and
+[0:49:04] I'm handing over to Y and Ashish J you wan to go
+[0:49:07] Ashish J you wan to go post oh yeah I guess um so one thing
+[0:49:10] post oh yeah I guess um so one thing that would that be helpful for for me to
+[0:49:13] that would that be helpful for for me to think about at least in the the first
+[0:49:14] think about at least in the the first part of the talk on the synthetic blip
+[0:49:16] part of the talk on the synthetic blip effects is you know so if I start with s
+[0:49:19] effects is you know so if I start with s the estimand I'm interested in is some
+[0:49:22] the estimand I'm interested in is some average potential outcome along a
+[0:49:24] average potential outcome along a particular sequence of treatment
+[0:49:26] particular sequence of treatment you know there's sort of a lot large
+[0:49:28] you know there's sort of a lot large work showing I can identify you know
+[0:49:31] work showing I can identify you know causal s demands like that if I'm
+[0:49:33] causal s demands like that if I'm willing to make some sort of sequential
+[0:49:35] willing to make some sort of sequential randomization assumption um some
+[0:49:38] randomization assumption um some sequential overlap and then you know do
+[0:49:40] sequential overlap and then you know do a sort of recursive identification
+[0:49:42] a sort of recursive identification strategy so' be helpful to try for me I
+[0:49:44] strategy so' be helpful to try for me I was trying to as you're going through it
+[0:49:45] was trying to as you're going through it trying to map back to sort of what um
+[0:49:49] trying to map back to sort of what um sort of the latent factor model is
+[0:49:51] sort of the latent factor model is buying me and then potentially at what
+[0:49:53] buying me and then potentially at what cost is it buying me those additional
+[0:49:55] cost is it buying me those additional gains so it seems like sort of the main
+[0:49:58] gains so it seems like sort of the main benefit is it allows you to relax
+[0:50:02] benefit is it allows you to relax sequential randomization because now I
+[0:50:04] sequential randomization because now I could think of these latent factors as
+[0:50:06] could think of these latent factors as like unit specific unobserved
+[0:50:08] like unit specific unobserved Compounders and I can still get Point
+[0:50:11] Compounders and I can still get Point identification of sort of the causal
+[0:50:12] identification of sort of the causal estimate I'm interested in um and
+[0:50:15] estimate I'm interested in um and potentially the cost is I'm imposing
+[0:50:17] potentially the cost is I'm imposing more structure on potential outcomes
+[0:50:19] more structure on potential outcomes through this latent factor model um is
+[0:50:22] through this latent factor model um is that like a is that a reasonable
+[0:50:24] that like a is that a reasonable characterization of like what you get
+[0:50:27] characterization of like what you get here and then if it is a reasonable
+[0:50:29] here and then if it is a reasonable characterization do you have a sense of
+[0:50:31] characterization do you have a sense of like how I should think about is this
+[0:50:33] like how I should think about is this Laten Factor model like quite
+[0:50:36] Laten Factor model like quite restrictive um if it is what is it
+[0:50:38] restrictive um if it is what is it ruling out and if it's if it is ruling
+[0:50:41] ruling out and if it's if it is ruling out stuff is it POS does it have any
+[0:50:43] out stuff is it POS does it have any like testable implications in the data
+[0:50:45] like testable implications in the data could we think about that absolutely
+[0:50:48] could we think about that absolutely that's a great question um so in terms
+[0:50:50] that's a great question um so in terms of of this question of overlap I I think
+[0:50:52] of of this question of overlap I I think of overlap as um the analogous thing in
+[0:50:56] of overlap as um the analogous thing in the lane Factor model world is the um
+[0:51:00] the lane Factor model world is the um that you can write a lane Factor model
+[0:51:01] that you can write a lane Factor model for one unit as a linear combination of
+[0:51:03] for one unit as a linear combination of other units right so that's the
+[0:51:05] other units right so that's the analogous of overlap where the treatment
+[0:51:06] analogous of overlap where the treatment assignment is diverse enough that people
+[0:51:08] assignment is diverse enough that people of of one kind of L Factor model uh can
+[0:51:11] of of one kind of L Factor model uh can be written as line combinations of other
+[0:51:12] be written as line combinations of other people get other treatment
+[0:51:14] people get other treatment assignments um and so that's where the
+[0:51:16] assignments um and so that's where the diversity of the treatment assignment
+[0:51:17] diversity of the treatment assignment comes so for example if you're if you
+[0:51:18] comes so for example if you're if you have an
+[0:51:19] have an adversarial um treatment assignment
+[0:51:22] adversarial um treatment assignment where you look at the latent factors you
+[0:51:23] where you look at the latent factors you decide that people of one kind put them
+[0:51:25] decide that people of one kind put them in treatment one and people who have an
+[0:51:27] in treatment one and people who have an orthogonal set of Lan factors up put
+[0:51:28] orthogonal set of Lan factors up put them treatment two then you can write
+[0:51:30] them treatment two then you can write them in terms of each other and I think
+[0:51:32] them in terms of each other and I think that's how I think of at least the
+[0:51:33] that's how I think of at least the overlap assumption to some extent being
+[0:51:35] overlap assumption to some extent being the equivalent thing um the sequential
+[0:51:37] the equivalent thing um the sequential randomization yeah I think the basic
+[0:51:40] randomization yeah I think the basic idea is that you have these you don't
+[0:51:44] idea is that you have these you don't have covariates anymore you don't rely
+[0:51:45] have covariates anymore you don't rely on these covariates and say conditional
+[0:51:47] on these covariates and say conditional these coari the treatment assignment is
+[0:51:48] these coari the treatment assignment is as good as random you say instead that
+[0:51:50] as good as random you say instead that these low dimensional L factums that
+[0:51:52] these low dimensional L factums that that give you that um I think the the
+[0:51:56] that give you that um I think the the main I the main thing that we're
+[0:51:58] main I the main thing that we're imposing I don't think the lane Factor
+[0:52:00] imposing I don't think the lane Factor model itself is that much more
+[0:52:02] model itself is that much more restrictive than selection observables
+[0:52:04] restrictive than selection observables in my opinion it's just saying that
+[0:52:05] in my opinion it's just saying that there's some low dimensional
+[0:52:06] there's some low dimensional representation of these observables that
+[0:52:08] representation of these observables that is driving the assignment mechanism I
+[0:52:11] is driving the assignment mechanism I think the bigger assumption that's being
+[0:52:12] think the bigger assumption that's being made is that you have this additively
+[0:52:14] made is that you have this additively time varly impact the
+[0:52:15] time varly impact the model um and I think that's that's the
+[0:52:18] model um and I think that's that's the main assumption being made and the
+[0:52:20] main assumption being made and the motivation that we took for that is
+[0:52:21] motivation that we took for that is because well one thing that people study
+[0:52:23] because well one thing that people study a lot in literature across a variety of
+[0:52:25] a lot in literature across a variety of literatures is as Auto aggressive
+[0:52:26] literatures is as Auto aggressive processes and linear dynamical systems
+[0:52:28] processes and linear dynamical systems and that's an example um and so I think
+[0:52:31] and that's an example um and so I think in terms of testable assumptions there's
+[0:52:33] in terms of testable assumptions there's a lot of work that's done on on I think
+[0:52:35] a lot of work that's done on on I think identifying whether you have an AR
+[0:52:37] identifying whether you have an AR process that's driving your system or a
+[0:52:39] process that's driving your system or a linear dynamical system that's driving
+[0:52:40] linear dynamical system that's driving your system and we haven't done this but
+[0:52:42] your system and we haven't done this but I think it would be great to see if one
+[0:52:44] I think it would be great to see if one could Port some of those tests to see
+[0:52:47] could Port some of those tests to see whether you actually have at least one
+[0:52:48] whether you actually have at least one side of test of whether you have a len
+[0:52:50] side of test of whether you have a len Factor model an addtive Len Factor model
+[0:52:52] Factor model an addtive Len Factor model or
+[0:52:53] or not um and and the reason you don't need
+[0:52:56] not um and and the reason you don't need sequential randomization as much is if
+[0:52:58] sequential randomization as much is if you look at the identification argument
+[0:53:00] you look at the identification argument you're really only relying on The
+[0:53:02] you're really only relying on The observed outcomes at say uh till you get
+[0:53:05] observed outcomes at say uh till you get into the Adaptive period so once you get
+[0:53:06] into the Adaptive period so once you get the Adaptive period I don't actually
+[0:53:07] the Adaptive period I don't actually look at the outcomes anymore so that
+[0:53:09] look at the outcomes anymore so that point you can be as adaptive as you want
+[0:53:11] point you can be as adaptive as you want and and no one's going to Care um
+[0:53:13] and and no one's going to Care um Alberto made a similar point in thing in
+[0:53:15] Alberto made a similar point in thing in the synthetic controls paper is that for
+[0:53:16] the synthetic controls paper is that for the units that get treated I make no
+[0:53:18] the units that get treated I make no assumption about the treatment
+[0:53:19] assumption about the treatment assignment pattern of what happens to
+[0:53:20] assignment pattern of what happens to them on the treatment because they never
+[0:53:21] them on the treatment because they never look at that data right I only look at
+[0:53:23] look at that data right I only look at the data of the people who remain under
+[0:53:25] the data of the people who remain under control and so but that's the data I
+[0:53:27] control and so but that's the data I need to make an assumption over so
+[0:53:29] need to make an assumption over so fundamentally the Assumption you need to
+[0:53:31] fundamentally the Assumption you need to make is only over the data you use the
+[0:53:33] make is only over the data you use the data you don't use you know it can be as
+[0:53:35] data you don't use you know it can be as arbitrary as you
+[0:53:37] arbitrary as you want so one thing I'm wondering is how
+[0:53:42] want so one thing I'm wondering is how robust are these models because when I'm
+[0:53:45] robust are these models because when I'm thinking of something like synthetic
+[0:53:47] thinking of something like synthetic controls it does a pretty decent job
+[0:53:51] controls it does a pretty decent job even if some of those um assumptions on
+[0:53:54] even if some of those um assumptions on on the factor model are broken um or
+[0:53:57] on the factor model are broken um or violated but here because you're doing
+[0:53:59] violated but here because you're doing this recursiveness I imagine they must
+[0:54:01] this recursiveness I imagine they must be way more sensitive to this additive
+[0:54:03] be way more sensitive to this additive assumption which frankly I know you're
+[0:54:06] assumption which frankly I know you're saying maybe it's not that strong but I
+[0:54:07] saying maybe it's not that strong but I was trying to imagine where is what are
+[0:54:10] was trying to imagine where is what are real applications in CA inference where
+[0:54:12] real applications in CA inference where I can truly trust this additive like
+[0:54:14] I can truly trust this additive like healthcare it's probably not necessarily
+[0:54:16] healthcare it's probably not necessarily additive Ecommerce it's probably also
+[0:54:19] additive Ecommerce it's probably also not necessarily additive there's
+[0:54:21] not necessarily additive there's probably some sort of u-shaped or
+[0:54:22] probably some sort of u-shaped or something like that so like how robust
+[0:54:25] something like that so like how robust oh have you done any sort of studies uh
+[0:54:27] oh have you done any sort of studies uh in terms of robustness here yeah so I
+[0:54:30] in terms of robustness here yeah so I think you're totally right that in terms
+[0:54:31] think you're totally right that in terms of estimation so let's one is
+[0:54:33] of estimation so let's one is identification at least in terms of
+[0:54:35] identification at least in terms of estimation um there will be this
+[0:54:37] estimation um there will be this exponential dependence on T that will
+[0:54:39] exponential dependence on T that will show up if you want to estimate anything
+[0:54:41] show up if you want to estimate anything correctly one thing that people do a lot
+[0:54:43] correctly one thing that people do a lot in the literature is that you say it's
+[0:54:44] in the literature is that you say it's not a function your potential outcome
+[0:54:46] not a function your potential outcome today is not a function of the entire
+[0:54:47] today is not a function of the entire sequence of of of history but let's say
+[0:54:50] sequence of of of history but let's say the past K time steps right and so then
+[0:54:53] the past K time steps right and so then that's one way that you if you're
+[0:54:55] that's one way that you if you're willing to make such an assumption then
+[0:54:56] willing to make such an assumption then then uh it helps because then you only
+[0:54:58] then uh it helps because then you only need to identify these blip effects for
+[0:55:00] need to identify these blip effects for the past K time steps yeah uh and then
+[0:55:03] the past K time steps yeah uh and then potentially could use a a test that
+[0:55:05] potentially could use a a test that people use for AR processes of how many
+[0:55:07] people use for AR processes of how many lags you need a similar type thing could
+[0:55:09] lags you need a similar type thing could potentially show up here um sorry but go
+[0:55:13] potentially show up here um sorry but go ahead well my my question was more about
+[0:55:15] ahead well my my question was more about what of the additive assumptions wrong
+[0:55:17] what of the additive assumptions wrong right because I think that's really the
+[0:55:19] right because I think that's really the heart of this is you you've basically
+[0:55:21] heart of this is you you've basically sort of traded some versions of
+[0:55:23] sort of traded some versions of nonparametric identification for
+[0:55:25] nonparametric identification for parametric identification uh and my
+[0:55:28] parametric identification uh and my question is what if your model is wrong
+[0:55:30] question is what if your model is wrong uh and what I was saying is that in
+[0:55:32] uh and what I was saying is that in synthetic controls like it feels like
+[0:55:36] synthetic controls like it feels like because you're not doing this recursive
+[0:55:38] because you're not doing this recursive thing you have a little bit more
+[0:55:41] thing you have a little bit more robustness whereas here because you're
+[0:55:43] robustness whereas here because you're doing this recursive thing you're taking
+[0:55:44] doing this recursive thing you're taking all these differences I'm imagining if
+[0:55:47] all these differences I'm imagining if this additive assumption is even
+[0:55:49] this additive assumption is even slightly violated then things can go
+[0:55:51] slightly violated then things can go really really wrong and I'm just curious
+[0:55:53] really really wrong and I'm just curious you have any thoughts on that I think I
+[0:55:55] you have any thoughts on that I think I think it's but I think then you know the
+[0:55:57] think it's but I think then you know the the with synthetic controls
+[0:55:59] the with synthetic controls interventions you're putting the
+[0:56:00] interventions you're putting the Assumption somewhere else that you don't
+[0:56:01] Assumption somewhere else that you don't have the spill over effects right so so
+[0:56:04] have the spill over effects right so so it depends on where you want there's no
+[0:56:06] it depends on where you want there's no free lunge right so if you want to allow
+[0:56:09] free lunge right so if you want to allow for these temporal spillovers where the
+[0:56:11] for these temporal spillovers where the interventions in far back in the day can
+[0:56:13] interventions in far back in the day can affect you then a more stringent
+[0:56:16] affect you then a more stringent assumption is being placed with
+[0:56:17] assumption is being placed with something like synthetic controls where
+[0:56:18] something like synthetic controls where your outcome today is only a function of
+[0:56:20] your outcome today is only a function of the intervention today you can get away
+[0:56:22] the intervention today you can get away with more um but I I hear you on the
+[0:56:26] with more um but I I hear you on the question of um is there a way to relax
+[0:56:28] question of um is there a way to relax this additive assumption to allow for
+[0:56:30] this additive assumption to allow for say some level of nonlinearity or say in
+[0:56:32] say some level of nonlinearity or say in some basis you have nonlinearity it's a
+[0:56:34] some basis you have nonlinearity it's a good question I don't know the answer um
+[0:56:37] good question I don't know the answer um one thing I think the first immediate
+[0:56:38] one thing I think the first immediate thing to do is that there's a lot of
+[0:56:40] thing to do is that there's a lot of literature on testing for when you have
+[0:56:42] literature on testing for when you have a linear dynamical system or a
+[0:56:43] a linear dynamical system or a regressive process because that's a
+[0:56:45] regressive process because that's a model we use all the time in in finance
+[0:56:47] model we use all the time in in finance inometrics so you can always use those I
+[0:56:50] inometrics so you can always use those I think the first thing to do is to use
+[0:56:51] think the first thing to do is to use those robustness checks and bring this
+[0:56:53] those robustness checks and bring this to this literature um because you can at
+[0:56:55] to this literature um because you can at least have at least a one-sided test of
+[0:56:57] least have at least a one-sided test of okay if you have an autoaggressive
+[0:56:58] okay if you have an autoaggressive process there then you know that's a
+[0:57:00] process there then you know that's a special case of this I'm assuming less
+[0:57:02] special case of this I'm assuming less than autoaggressive
+[0:57:04] than autoaggressive process but there is a related question
+[0:57:08] process but there is a related question in from the audience which is I think
+[0:57:10] in from the audience which is I think coming from a different angle this is
+[0:57:12] coming from a different angle this is from Anonymous attendees so he he or she
+[0:57:16] from Anonymous attendees so he he or she said my experience using models to
+[0:57:18] said my experience using models to identify time varying treatments is that
+[0:57:20] identify time varying treatments is that it is quite data demanding and bias
+[0:57:23] it is quite data demanding and bias reduction is over often overweigh by
+[0:57:26] reduction is over often overweigh by variance increase as far as multicar
+[0:57:28] variance increase as far as multicar simulations have suggested can you tell
+[0:57:31] simulations have suggested can you tell us if your approach is more efficient or
+[0:57:33] us if your approach is more efficient or not than other approaches identifying
+[0:57:36] not than other approaches identifying average treatment effects in a dynamic
+[0:57:38] average treatment effects in a dynamic setting that's a good question um I we
+[0:57:42] setting that's a good question um I we haven't done a systematic study with
+[0:57:43] haven't done a systematic study with like the entire literature of of of how
+[0:57:45] like the entire literature of of of how you would do this different
+[0:57:48] you would do this different possibilities um what I have found is
+[0:57:50] possibilities um what I have found is that when you have a latent factor model
+[0:57:53] that when you have a latent factor model structure that is in your data then
+[0:57:56] structure that is in your data then exploiting it by by by regularizing your
+[0:57:59] exploiting it by by by regularizing your fit to to just the low rank part of it
+[0:58:01] fit to to just the low rank part of it tends to actually dramatically reduce
+[0:58:03] tends to actually dramatically reduce the variance U compared to approaches
+[0:58:05] the variance U compared to approaches that don't explicitly exploit that uh
+[0:58:08] that don't explicitly exploit that uh low rank structure that exists in your
+[0:58:10] low rank structure that exists in your data um
+[0:58:13] data um now again this is a lot of this work is
+[0:58:16] now again this is a lot of this work is for the setting of personalized
+[0:58:17] for the setting of personalized contactual analysis so another good
+[0:58:19] contactual analysis so another good question that I don't know the answer to
+[0:58:21] question that I don't know the answer to Is that if you do if you create
+[0:58:23] Is that if you do if you create personalized counterfactual trajectories
+[0:58:24] personalized counterfactual trajectories for everyone then you take an average
+[0:58:26] for everyone then you take an average treatment effect uh is that better than
+[0:58:28] treatment effect uh is that better than directly just getting the average
+[0:58:29] directly just getting the average treatment effect uh maybe there's a
+[0:58:31] treatment effect uh maybe there's a better way of maybe a a less stringently
+[0:58:34] better way of maybe a a less stringently in fact the model or just a better way
+[0:58:35] in fact the model or just a better way of doing it if your goal is just to
+[0:58:37] of doing it if your goal is just to estimate average treatment effects I
+[0:58:39] estimate average treatment effects I that I don't know the answer to
+[0:58:42] that I don't know the answer to that great thank you I think we're like
+[0:58:44] that great thank you I think we're like at one hour so I'll just quickly wrap up
+[0:58:46] at one hour so I'll just quickly wrap up but if you have further discussion feel
+[0:58:48] but if you have further discussion feel free to have it
+[0:58:49] free to have it afterwards um so first of all yeah thank
+[0:58:52] afterwards um so first of all yeah thank you so much everyone first Anish for a
+[0:58:54] you so much everyone first Anish for a very nice uh talk and but also to asish
+[0:58:58] very nice uh talk and but also to asish and Y for a very interesting discussion
+[0:59:01] and Y for a very interesting discussion thank you all for coming next time we're
+[0:59:03] thank you all for coming next time we're going to have Maya mathur from Stanford
+[0:59:05] going to have Maya mathur from Stanford University who will talk about the
+[0:59:07] University who will talk about the common cause principle for eliminating
+[0:59:08] common cause principle for eliminating selection bias and causal as demands
+[0:59:10] selection bias and causal as demands through coar adjustment thank you all
+[0:59:12] through coar adjustment thank you all for coming hope you have a great week
+[0:59:14] for coming hope you have a great week and see you next time thank
+[0:59:18] and see you next time thank you byebye

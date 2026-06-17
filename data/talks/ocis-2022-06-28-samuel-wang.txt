@@ -1,0 +1,1766 @@
+[0:00:05] hello everyone and welcome back to another one of the online causal
+[0:00:07] another one of the online causal inference seminars uh we are very happy
+[0:00:09] inference seminars uh we are very happy today to have samuel guang from connell
+[0:00:11] today to have samuel guang from connell university who will talk to us about
+[0:00:13] university who will talk to us about uncertainty quantification for causal
+[0:00:15] uncertainty quantification for causal discovery after the talk we have a
+[0:00:18] discovery after the talk we have a discussion by daniel malinsky from
+[0:00:20] discussion by daniel malinsky from columbia university
+[0:00:22] columbia university the q a today the questions will be
+[0:00:24] the q a today the questions will be handled by emma so i'm switching over to
+[0:00:26] handled by emma so i'm switching over to her
+[0:00:33] thanks georgia uh yes so please submit your questions throughout
+[0:00:35] please submit your questions throughout the talk as soon as you have it please
+[0:00:37] the talk as soon as you have it please submit it through the q a and get please
+[0:00:40] submit it through the q a and get please use q a to submit the questions uh
+[0:00:42] use q a to submit the questions uh because if you submit on the chat not
+[0:00:44] because if you submit on the chat not everyone can see them
+[0:00:46] everyone can see them uh at some point
+[0:00:48] uh at some point sam i will stop and take some questions
+[0:00:51] sam i will stop and take some questions and i will ask them for you
+[0:00:54] and i will ask them for you uh yeah so please do submit questions as
+[0:00:57] uh yeah so please do submit questions as soon as kind of they come for you
+[0:01:00] soon as kind of they come for you all right so that's kind of it
+[0:01:04] i'll let samuel take over
+[0:01:27] and let's get it is it uh
+[0:01:28] is it uh the screen is screen is showing all
+[0:01:29] the screen is screen is showing all right
+[0:01:31] right yep
+[0:01:35] all right well thanks for organizing this um organizing this and i'm excited
+[0:01:37] this um organizing this and i'm excited to be here and to talk about this work
+[0:01:40] to be here and to talk about this work uh so this is joint work with milan
+[0:01:43] uh so this is joint work with milan kohler at the university of chicago and
+[0:01:44] kohler at the university of chicago and uh matthias stern at uh tu munich and so
+[0:01:47] uh matthias stern at uh tu munich and so this is a project that we have been
+[0:01:48] this is a project that we have been talking about
+[0:01:50] talking about off and on for uh
+[0:01:52] off and on for uh probably about three or four years now
+[0:01:54] probably about three or four years now and so i'm excited to kind of finally
+[0:01:56] and so i'm excited to kind of finally talk about this and and kind of um share
+[0:01:59] talk about this and and kind of um share some of this work with you today
+[0:02:06] all right so today i'll be talking about causal discovery and then i want to
+[0:02:08] causal discovery and then i want to first provide a bit of motivation uh so
+[0:02:10] first provide a bit of motivation uh so this figure is now a classic example
+[0:02:12] this figure is now a classic example from a paper by sax at all which
+[0:02:13] from a paper by sax at all which appeared in science in 2005.
+[0:02:16] appeared in science in 2005. so it depicts a protein regulatory
+[0:02:17] so it depicts a protein regulatory network and so you can think about this
+[0:02:19] network and so you can think about this and maybe in the way that proteins
+[0:02:21] and maybe in the way that proteins interact within a biological cell
+[0:02:27] all right so this figure you can think of this as a graph which encodes causal
+[0:02:29] of this as a graph which encodes causal structure and each of these nodes
+[0:02:31] structure and each of these nodes represents a type of protein and the
+[0:02:33] represents a type of protein and the arrows indicate some sort of causal
+[0:02:34] arrows indicate some sort of causal effect
+[0:02:35] effect so in particular
+[0:02:37] so in particular for instance we have
+[0:02:43] this protein plc gamma this is a protein pip 2.
+[0:02:44] pip 2. there's a directed edge from plc gamma
+[0:02:47] there's a directed edge from plc gamma to pip 2.
+[0:02:48] to pip 2. and so what this encodes is that the
+[0:02:50] and so what this encodes is that the prevalence of plc gamma has a causal
+[0:02:52] prevalence of plc gamma has a causal effect on the prevalence of pip 2 within
+[0:02:54] effect on the prevalence of pip 2 within this biological cell
+[0:02:59] so in this paper this is called the consensus network
+[0:03:00] consensus network the authors call it the consensus
+[0:03:01] the authors call it the consensus network and what they mean by this is
+[0:03:03] network and what they mean by this is that the structure is informed by many
+[0:03:05] that the structure is informed by many different experiments
+[0:03:07] different experiments that were designed and performed by a
+[0:03:08] that were designed and performed by a lot of expert biologists which were
+[0:03:10] lot of expert biologists which were published in a number of papers and over
+[0:03:12] published in a number of papers and over the course of many years all of this
+[0:03:14] the course of many years all of this information kind of coalesces into this
+[0:03:16] information kind of coalesces into this plot
+[0:03:17] plot here so this is a long tedious expensive
+[0:03:20] here so this is a long tedious expensive process right and and this is exactly
+[0:03:22] process right and and this is exactly the type of situation where we hope
+[0:03:24] the type of situation where we hope causal discovery can be helpful
+[0:03:27] causal discovery can be helpful and just kind of at a very broad level
+[0:03:29] and just kind of at a very broad level what i mean by cost discovery is the
+[0:03:31] what i mean by cost discovery is the problem of estimating causal structure
+[0:03:33] problem of estimating causal structure or in some sense selecting a causal
+[0:03:34] or in some sense selecting a causal model
+[0:03:35] model from data and this is typically
+[0:03:37] from data and this is typically observational data
+[0:03:44] all right so throughout the talk we'll use the language of graphical models um
+[0:03:46] use the language of graphical models um and so basically we're using complex
+[0:03:48] and so basically we're using complex systems or start we're representing a
+[0:03:51] systems or start we're representing a graph using a complex
+[0:03:53] graph using a complex representing a complex system using a
+[0:03:54] representing a complex system using a graph where each vertex represents a
+[0:03:56] graph where each vertex represents a variable and each edge represents a
+[0:03:59] variable and each edge represents a dependence relationship
+[0:04:01] dependence relationship um so for in this case we have maybe um
+[0:04:04] um so for in this case we have maybe um an observed vector which is uh has four
+[0:04:07] an observed vector which is uh has four elements
+[0:04:08] elements and uh this could be a corresponding
+[0:04:11] and uh this could be a corresponding graph
+[0:04:12] graph um so if p has a direct effect
+[0:04:14] um so if p has a direct effect on some other node c then
+[0:04:17] on some other node c then we'll put in this edge and we'll say p
+[0:04:20] we'll put in this edge and we'll say p is a parent of its child c so in this
+[0:04:22] is a parent of its child c so in this case uh there's a directed edge from one
+[0:04:25] case uh there's a directed edge from one to three you can see this right here
+[0:04:27] to three you can see this right here um and so we'll say that y1 where or
+[0:04:29] um and so we'll say that y1 where or node 1 is a parent of node 3.
+[0:04:33] node 1 is a parent of node 3. if there exists a
+[0:04:35] if there exists a directed path from say node a to node d
+[0:04:38] directed path from say node a to node d then we'll say a is an ancestor of the
+[0:04:40] then we'll say a is an ancestor of the descendant d so in this case we have a
+[0:04:42] descendant d so in this case we have a series of edges
+[0:04:44] series of edges one to three to four
+[0:04:47] one to three to four so in this case
+[0:04:48] so in this case one is an ancestor of its descendant
+[0:04:51] one is an ancestor of its descendant four
+[0:04:53] four throughout this talk we're going to
+[0:04:54] throughout this talk we're going to assume that the model corresponds to an
+[0:04:57] assume that the model corresponds to an acyclic graph and so what that means is
+[0:04:59] acyclic graph and so what that means is we can't start at one node follow a
+[0:05:02] we can't start at one node follow a series of edges and then end up back at
+[0:05:04] series of edges and then end up back at that same node
+[0:05:09] okay so under this assumption uh this implies
+[0:05:11] so under this assumption uh this implies that there is always at least one causal
+[0:05:13] that there is always at least one causal ordering um
+[0:05:15] ordering um for for the nodes and what we mean by
+[0:05:17] for for the nodes and what we mean by this is is an ordering or permutation of
+[0:05:19] this is is an ordering or permutation of the nodes um and we're going to use
+[0:05:21] the nodes um and we're going to use theta to denote um an ordering or
+[0:05:23] theta to denote um an ordering or permutation um in particular uh theta u
+[0:05:26] permutation um in particular uh theta u will be less than theta v where u and v
+[0:05:29] will be less than theta v where u and v are two different nodes
+[0:05:30] are two different nodes only if u is not a descendant of v
+[0:05:34] only if u is not a descendant of v so in this case uh a valid causal
+[0:05:36] so in this case uh a valid causal ordering would be one two three four
+[0:05:40] ordering would be one two three four um but we also have another valid causal
+[0:05:42] um but we also have another valid causal ordering which would be two
+[0:05:44] ordering which would be two one three four
+[0:05:46] one three four so you can basically think of this as
+[0:05:48] so you can basically think of this as just um an ordering where nodes which
+[0:05:50] just um an ordering where nodes which appear at the front um are kind of
+[0:05:52] appear at the front um are kind of causes and some of in some sense and
+[0:05:54] causes and some of in some sense and then causality flows downstream towards
+[0:05:56] then causality flows downstream towards nodes at the end
+[0:06:01] all right and so just kind of a bit of notation here we're going to use uh p a
+[0:06:03] notation here we're going to use uh p a v d e v a n a v and n d of e to know
+[0:06:07] v d e v a n a v and n d of e to know parents descendants
+[0:06:09] parents descendants ancestors and non-descendants of v
+[0:06:17] okay and then finally um we will let p r of theta v
+[0:06:19] p r of theta v you have some fixed theta as fixed
+[0:06:22] you have some fixed theta as fixed ordering
+[0:06:23] ordering and so this could be a valid ordering or
+[0:06:24] and so this could be a valid ordering or could be an invalid ordering but it's
+[0:06:26] could be an invalid ordering but it's just some ordering
+[0:06:28] just some ordering and
+[0:06:30] and pr of v will denote the
+[0:06:33] pr of v will denote the sets of nodes which precede v
+[0:06:35] sets of nodes which precede v um and basically just they're just the
+[0:06:36] um and basically just they're just the nodes which um yeah are before v in that
+[0:06:40] nodes which um yeah are before v in that specific ordering
+[0:06:46] all right so in causal discovery we don't assume that this graph structure
+[0:06:48] don't assume that this graph structure is known a priori
+[0:06:50] is known a priori and this graph structure is actually
+[0:06:51] and this graph structure is actually what we want to estimate from the data
+[0:07:03] all right so this is a very broad topic but roughly speaking the place where
+[0:07:04] but roughly speaking the place where most problems start is with
+[0:07:05] most problems start is with identification
+[0:07:07] identification so the question is what do i need to
+[0:07:08] so the question is what do i need to assume such that i can pick out the
+[0:07:10] assume such that i can pick out the correct causal model given population
+[0:07:13] correct causal model given population values or you can think of this as maybe
+[0:07:14] values or you can think of this as maybe having an infinite amount of data
+[0:07:17] having an infinite amount of data and so the way that this is done is
+[0:07:18] and so the way that this is done is people assume that the the true data
+[0:07:20] people assume that the the true data generating procedure lies within a class
+[0:07:22] generating procedure lies within a class of models that's small enough so that
+[0:07:24] of models that's small enough so that causal structure can be identified
+[0:07:26] causal structure can be identified but large enough
+[0:07:28] but large enough to to reflect the true process
+[0:07:31] to to reflect the true process um and so so the thing to think about
+[0:07:33] um and so so the thing to think about here is that the assumptions that we
+[0:07:34] here is that the assumptions that we make the identifying assumptions end up
+[0:07:36] make the identifying assumptions end up being very very important and i'll
+[0:07:38] being very very important and i'll mention a specific type of assumption um
+[0:07:47] which is used later the natural follow-up question is is
+[0:07:49] the natural follow-up question is is about consistency right so under various
+[0:07:51] about consistency right so under various assumptions how can i consistently
+[0:07:53] assumptions how can i consistently recover the causal model from sample
+[0:07:55] recover the causal model from sample data
+[0:07:56] data and so there are many different
+[0:07:57] and so there are many different procedures under various assumptions
+[0:07:58] procedures under various assumptions which have shown been shown to be
+[0:08:00] which have shown been shown to be consistent
+[0:08:01] consistent but these procedures and kind of by and
+[0:08:03] but these procedures and kind of by and large uh take in data and output a
+[0:08:06] large uh take in data and output a single point estimate of causal
+[0:08:08] single point estimate of causal structure and so this might be a graph
+[0:08:09] structure and so this might be a graph this might be a causal ordering this
+[0:08:10] this might be a causal ordering this might be an equivalence class of some
+[0:08:12] might be an equivalence class of some sort but it's kind of a single point
+[0:08:15] sort but it's kind of a single point estimate
+[0:08:20] um and this however um until pretty recently is where most of
+[0:08:22] until pretty recently is where most of the literature and i should say at least
+[0:08:23] the literature and i should say at least from a frequentist perspective
+[0:08:25] from a frequentist perspective has stopped
+[0:08:26] has stopped right so it's clear that identification
+[0:08:28] right so it's clear that identification and consistency are very important right
+[0:08:31] and consistency are very important right and kind of the things that you want to
+[0:08:32] and kind of the things that you want to think about first
+[0:08:33] think about first but as a statistician
+[0:08:35] but as a statistician i think it's also critical to be able to
+[0:08:37] i think it's also critical to be able to assess our uncertainty about the causal
+[0:08:39] assess our uncertainty about the causal model that we've estimated
+[0:08:41] model that we've estimated so put another way
+[0:08:44] so put another way how much confidence do we have in the
+[0:08:46] how much confidence do we have in the estimated causal structure
+[0:08:48] estimated causal structure okay and so even if i do have
+[0:08:50] okay and so even if i do have consistency guarantees and even if my um
+[0:08:52] consistency guarantees and even if my um right given a specific set of data
+[0:08:54] right given a specific set of data the estimated structure can be incorrect
+[0:08:57] the estimated structure can be incorrect and this might be because of sample
+[0:08:59] and this might be because of sample variability this might be because i've
+[0:09:01] variability this might be because i've made incorrect assumptions and my model
+[0:09:03] made incorrect assumptions and my model is mis-specified or it could be both
+[0:09:06] is mis-specified or it could be both um right and so this is kind of the
+[0:09:07] um right and so this is kind of the problem that i want to think about today
+[0:09:09] problem that i want to think about today and so ultimately i want to think about
+[0:09:11] and so ultimately i want to think about uncertainty in the causal model
+[0:09:12] uncertainty in the causal model selection problem
+[0:09:21] all right so perhaps uncertainty about and model selection isn't quite as
+[0:09:23] and model selection isn't quite as natural to kind of think about us first
+[0:09:25] natural to kind of think about us first um so let's think about confidence
+[0:09:26] um so let's think about confidence intervals we're used to right let's
+[0:09:28] intervals we're used to right let's suppose a coefficient and a linear
+[0:09:30] suppose a coefficient and a linear regression problem
+[0:09:32] regression problem so certainly we can start with the
+[0:09:34] so certainly we can start with the mechanical definition right so you
+[0:09:35] mechanical definition right so you repeat this procedure with new data many
+[0:09:37] repeat this procedure with new data many different times and you know so on and
+[0:09:39] different times and you know so on and so on right
+[0:09:40] so on right but in practice what questions does a
+[0:09:42] but in practice what questions does a confidence interval actually inform us
+[0:09:44] confidence interval actually inform us about or what does it actually tell us
+[0:09:47] about or what does it actually tell us okay and so maybe kind of broadly
+[0:09:49] okay and so maybe kind of broadly speaking there's kind of two questions
+[0:09:51] speaking there's kind of two questions at least right so how trustworthy is my
+[0:09:53] at least right so how trustworthy is my point estimate
+[0:09:54] point estimate what are other possibilities which are
+[0:09:56] what are other possibilities which are not ruled out by my data
+[0:09:58] not ruled out by my data right and so the width of the confidence
+[0:10:01] right and so the width of the confidence interval might tell you how trustworthy
+[0:10:02] interval might tell you how trustworthy your point estimate is if it's quite
+[0:10:04] your point estimate is if it's quite wide i can know that i don't have a lot
+[0:10:06] wide i can know that i don't have a lot of precision in my estimate
+[0:10:09] of precision in my estimate um and moreover not just the size of the
+[0:10:10] um and moreover not just the size of the confidence interval but i'm actually
+[0:10:12] confidence interval but i'm actually probably also interested in the specific
+[0:10:14] probably also interested in the specific values contained at the interval right
+[0:10:16] values contained at the interval right and that tells us in some sense what are
+[0:10:17] and that tells us in some sense what are other possibilities that are not ruled
+[0:10:19] other possibilities that are not ruled out by my data
+[0:10:25] so our work aims to provide answers for these two questions in the context of
+[0:10:27] these two questions in the context of cause of discovery
+[0:10:31] so i should note that there's been some recent work on hypothesis testing of
+[0:10:33] recent work on hypothesis testing of individual edges within the graph or in
+[0:10:36] individual edges within the graph or in some cases a set of edges
+[0:10:38] some cases a set of edges um but these procedures require that the
+[0:10:40] um but these procedures require that the causal ordering is known or at least can
+[0:10:43] causal ordering is known or at least can be covered recovered consistently
+[0:10:46] be covered recovered consistently and so in general we don't actually know
+[0:10:47] and so in general we don't actually know whether the causal ordering can be
+[0:10:50] whether the causal ordering can be recovered consistently
+[0:10:51] recovered consistently and so we're interested in providing
+[0:10:53] and so we're interested in providing uncertainty over the entire causal
+[0:10:55] uncertainty over the entire causal structure which is valid even when the
+[0:10:58] structure which is valid even when the causal ordering can't be consistently
+[0:11:00] causal ordering can't be consistently recovered
+[0:11:01] recovered and the way that we'll do this um is by
+[0:11:04] and the way that we'll do this um is by um
+[0:11:04] um [Music]
+[0:11:06] [Music] proposing a framework which produces
+[0:11:08] proposing a framework which produces confidence that's for the causal
+[0:11:10] confidence that's for the causal ordering itself right so we're kind of
+[0:11:12] ordering itself right so we're kind of taking a step back not looking at edges
+[0:11:14] taking a step back not looking at edges but kind of thinking about the case
+[0:11:15] but kind of thinking about the case where we might have even less
+[0:11:16] where we might have even less information
+[0:11:25] all right so before i dive into the specific procedure i want to talk uh
+[0:11:27] specific procedure i want to talk uh briefly about the types of models that
+[0:11:29] briefly about the types of models that we're actually considering and so as i
+[0:11:30] we're actually considering and so as i mentioned before there are various
+[0:11:32] mentioned before there are various assumptions which allow for
+[0:11:33] assumptions which allow for identification of causal structure from
+[0:11:35] identification of causal structure from observational data and i want to talk
+[0:11:37] observational data and i want to talk about one specific model here the linear
+[0:11:39] about one specific model here the linear structural equation model
+[0:11:41] structural equation model so this model assumes that each variable
+[0:11:42] so this model assumes that each variable that we observe is a linear function of
+[0:11:44] that we observe is a linear function of its parents in the corresponding graph
+[0:11:47] its parents in the corresponding graph and some idiosyncratic error term
+[0:11:53] we'll also assume that there's no unobserved confounding in our system and
+[0:11:55] unobserved confounding in our system and mathematically we'll encode that by the
+[0:11:57] mathematically we'll encode that by the mutual independence of each of these
+[0:11:58] mutual independence of each of these error terms these epsilon terms
+[0:12:06] all right under these assumptions uh uh shimizu at all in 2006 showed that
+[0:12:09] uh shimizu at all in 2006 showed that when these epsilon
+[0:12:10] when these epsilon error terms are not gaussian or
+[0:12:13] error terms are not gaussian or non-gaussian the exact graph
+[0:12:15] non-gaussian the exact graph corresponding to the data generating
+[0:12:17] corresponding to the data generating procedure can be identified
+[0:12:19] procedure can be identified and this is from observational data
+[0:12:22] and this is from observational data um so we'll mostly and then this talk
+[0:12:25] um so we'll mostly and then this talk will stick with the linear setting for
+[0:12:27] will stick with the linear setting for simplicity uh but i do want to note also
+[0:12:29] simplicity uh but i do want to note also identification was shown for non-linear
+[0:12:32] identification was shown for non-linear structural causal models um by hoyer at
+[0:12:34] structural causal models um by hoyer at all and peters and there's a series of
+[0:12:36] all and peters and there's a series of papers there and our procedure also
+[0:12:39] papers there and our procedure also directly generalizes to non-linear
+[0:12:40] directly generalizes to non-linear models but we'll stick with linearity on
+[0:12:43] models but we'll stick with linearity on the linear model for simplicity here
+[0:12:53] okay so if you're not familiar with the literature what i told you might seem
+[0:12:55] literature what i told you might seem like a bit of science fiction right so
+[0:12:57] like a bit of science fiction right so how do non-gaussian errors help us
+[0:12:59] how do non-gaussian errors help us identify causal direction
+[0:13:01] identify causal direction right how do they help us identify the
+[0:13:02] right how do they help us identify the exact causal graph
+[0:13:04] exact causal graph and so here's a bivariate example to
+[0:13:06] and so here's a bivariate example to hopefully build a little bit of
+[0:13:07] hopefully build a little bit of intuition um in this case there's two
+[0:13:10] intuition um in this case there's two variables and the true graph is um
+[0:13:14] variables and the true graph is um we have two variables p and c and the
+[0:13:16] we have two variables p and c and the true graph is p
+[0:13:17] true graph is p is a parent of its child c all right um
+[0:13:21] is a parent of its child c all right um so you can see this that c is a
+[0:13:24] so you can see this that c is a linear function of p plus some error
+[0:13:26] linear function of p plus some error term
+[0:13:31] and um say and i should also know that the errors are generally generated from
+[0:13:32] the errors are generally generated from a uniform distribution okay so say i'm
+[0:13:35] a uniform distribution okay so say i'm trying to decide whether p is apparent
+[0:13:36] trying to decide whether p is apparent to c or whether c is a parent of p
+[0:13:40] to c or whether c is a parent of p in both cases i can plot the positive
+[0:13:42] in both cases i can plot the positive parent on the horizontal axis and the
+[0:13:43] parent on the horizontal axis and the positive child on the vertical axis and
+[0:13:45] positive child on the vertical axis and so that's what i've done here left hand
+[0:13:47] so that's what i've done here left hand side i have the correctly specified
+[0:13:48] side i have the correctly specified graph
+[0:13:49] graph uh correctly specified model on the
+[0:13:51] uh correctly specified model on the right hand side here i have the
+[0:13:52] right hand side here i have the incorrectly specified model
+[0:13:54] incorrectly specified model in both cases i the red line indicates
+[0:13:56] in both cases i the red line indicates the least squares line
+[0:13:58] the least squares line um and if you just look at this plot it
+[0:14:00] um and if you just look at this plot it may be a little bit hard at first to
+[0:14:02] may be a little bit hard at first to kind of see how you might differentiate
+[0:14:04] kind of see how you might differentiate between the incorrect model and the
+[0:14:05] between the incorrect model and the correct model
+[0:14:10] but here on this next plot i've plotted not i've kept what i think is the parent
+[0:14:12] not i've kept what i think is the parent on the horizontal axis
+[0:14:14] on the horizontal axis and here i've plotted the residuals when
+[0:14:17] and here i've plotted the residuals when i regress the child onto the parent
+[0:14:20] i regress the child onto the parent and so now we can see things that are a
+[0:14:22] and so now we can see things that are a little bit different so here on the left
+[0:14:24] little bit different so here on the left hand side where i have the correctly
+[0:14:26] hand side where i have the correctly specified model we can see that the
+[0:14:27] specified model we can see that the residuals
+[0:14:29] residuals are roughly independent of the parent
+[0:14:34] on the right hand side where i've incorrectly specified the model
+[0:14:36] incorrectly specified the model we can see that the residuals are
+[0:14:38] we can see that the residuals are uncorrelated with the parent and this is
+[0:14:40] uncorrelated with the parent and this is from the first order conditions of least
+[0:14:42] from the first order conditions of least squares but we can see that they're not
+[0:14:44] squares but we can see that they're not independent and we can see this by
+[0:14:46] independent and we can see this by noting that the domain or
+[0:14:49] noting that the domain or of the um
+[0:14:51] of the um or the sorry the range of the
+[0:14:54] or the sorry the range of the residuals changes as i um go across
+[0:14:56] residuals changes as i um go across different values of what i thought was
+[0:14:57] different values of what i thought was the parent
+[0:15:03] all right so the punch line here is that by checking independence of the
+[0:15:04] by checking independence of the residuals and regressors
+[0:15:07] residuals and regressors i can rule out false models and certify
+[0:15:10] i can rule out false models and certify correct models
+[0:15:17] and this basic intuition actually also holds in multivariate data right
+[0:15:19] holds in multivariate data right so if you give me um some node v and a
+[0:15:22] so if you give me um some node v and a set u
+[0:15:24] set u i'm going to let eta v u be the
+[0:15:26] i'm going to let eta v u be the residuals which result from regressing
+[0:15:28] residuals which result from regressing in a population setting v onto u and so
+[0:15:31] in a population setting v onto u and so what we mean here is um
+[0:15:34] what we mean here is um population setting rate we're going to
+[0:15:35] population setting rate we're going to use the um
+[0:15:37] use the um the coefficient which would be um
+[0:15:39] the coefficient which would be um produced by the ols coefficient which
+[0:15:41] produced by the ols coefficient which would be given by using kind of the
+[0:15:43] would be given by using kind of the population covariance
+[0:15:52] all right if u contains the parents of v and does not contain any descendants of
+[0:15:54] and does not contain any descendants of v
+[0:15:56] v then the model that i've just described
+[0:15:57] then the model that i've just described to you this linear structural equation
+[0:15:59] to you this linear structural equation model
+[0:16:00] model under these assumptions then the
+[0:16:02] under these assumptions then the residuals will be independent
+[0:16:04] residuals will be independent of the regressors
+[0:16:07] of the regressors and in general
+[0:16:08] and in general independence does not hold
+[0:16:10] independence does not hold um if this this same independent
+[0:16:13] um if this this same independent statement does not hold if u contains
+[0:16:15] statement does not hold if u contains the sentence of b
+[0:16:16] the sentence of b or if the parents of v are not contained
+[0:16:18] or if the parents of v are not contained within you
+[0:16:22] okay so this this statement i'm about to make is not quite true
+[0:16:24] make is not quite true uh but at least to build into intuition
+[0:16:26] uh but at least to build into intuition i think it's helpful to think about this
+[0:16:28] i think it's helpful to think about this um and so one can think of the
+[0:16:29] um and so one can think of the independence of the regressors and the
+[0:16:31] independence of the regressors and the residuals
+[0:16:32] residuals as equivalent
+[0:16:34] as equivalent to the fact to some sort of ancestral
+[0:16:36] to the fact to some sort of ancestral state in particular the statement that u
+[0:16:40] state in particular the statement that u contains the parents
+[0:16:41] contains the parents but does not contain any descendants of
+[0:16:44] but does not contain any descendants of v
+[0:16:45] v so we can um yeah so
+[0:16:47] so we can um yeah so so this is not quite true right there's
+[0:16:49] so this is not quite true right there's a lot of subtlety here um but uh at
+[0:16:52] a lot of subtlety here um but uh at least for the purposes of this of this
+[0:16:54] least for the purposes of this of this talk i think that maybe can
+[0:16:55] talk i think that maybe can um will be helpful to think about it in
+[0:16:57] um will be helpful to think about it in that way
+[0:17:02] all right so i'll pause here for uh for any questions
+[0:17:06] any questions hi sam uh there is one clarifying
+[0:17:08] hi sam uh there is one clarifying question from alexander um do i
+[0:17:11] question from alexander um do i understand correctly that a causal
+[0:17:13] understand correctly that a causal ordering is not necessarily a total
+[0:17:15] ordering is not necessarily a total ordering on the set of nodes
+[0:17:18] ordering on the set of nodes so so the way that we're thinking about
+[0:17:19] so so the way that we're thinking about it it is a total ordering
+[0:17:22] it it is a total ordering but there may be
+[0:17:23] but there may be um
+[0:17:24] um but that but the num
+[0:17:26] but that but the num but there may be multiple valid causal
+[0:17:28] but there may be multiple valid causal orderings
+[0:17:29] orderings yeah so we're thinking of an ordering as
+[0:17:31] yeah so we're thinking of an ordering as being a total ordering but there may be
+[0:17:33] being a total ordering but there may be multiple orderings that are
+[0:17:35] multiple orderings that are valid
+[0:17:36] valid all right but you select kind of one i
+[0:17:38] all right but you select kind of one i guess
+[0:17:40] guess uh sure yeah
+[0:17:42] uh sure yeah all right and there's another question
+[0:17:43] all right and there's another question that just came up in your example for
+[0:17:45] that just came up in your example for intuition how do you separate
+[0:17:47] intuition how do you separate misspecification from non-constant
+[0:17:49] misspecification from non-constant variance looks like you would get the
+[0:17:51] variance looks like you would get the same diagnostic what assumption are you
+[0:17:53] same diagnostic what assumption are you making so you can distinguish the two
+[0:17:56] making so you can distinguish the two yes yes so so so you're right so so this
+[0:17:59] yes yes so so so you're right so so this this kind of statement here which again
+[0:18:01] this kind of statement here which again is not entirely correct but um roughly
+[0:18:03] is not entirely correct but um roughly speaking um is is the intuition that i
+[0:18:06] speaking um is is the intuition that i want to build um so you're right so
+[0:18:07] want to build um so you're right so we've specified um a linear model um and
+[0:18:12] we've specified um a linear model um and we've assumed that each of these epsilon
+[0:18:14] we've assumed that each of these epsilon v's are iid and independent
+[0:18:17] v's are iid and independent of um
+[0:18:18] of um these y
+[0:18:20] these y u's so so you're right if um
+[0:18:23] u's so so you're right if um if there's a violation to this to this
+[0:18:24] if there's a violation to this to this model assumption then
+[0:18:26] model assumption then it would also um
+[0:18:29] it would also um this identification um kind of criteria
+[0:18:32] this identification um kind of criteria would not would not be totally correct
+[0:18:40] great those are all questions for now okay great
+[0:18:43] okay great so given this setting right so then the
+[0:18:45] so given this setting right so then the question that we want to answer is how
+[0:18:46] question that we want to answer is how can we form a confidence set for the
+[0:18:48] can we form a confidence set for the causal orderings
+[0:18:53] um and which gives us a way to assess uncertainty about our point estimates
+[0:18:55] uncertainty about our point estimates right and the framework that we're going
+[0:18:57] right and the framework that we're going to be using is actually very very simple
+[0:18:59] to be using is actually very very simple right so if we let theta be a causal
+[0:19:01] right so if we let theta be a causal ordering or you can think about this as
+[0:19:03] ordering or you can think about this as a permutation of my nodes
+[0:19:05] a permutation of my nodes um we're going to suppose we have a
+[0:19:07] um we're going to suppose we have a goodness of fit test for the causal
+[0:19:08] goodness of fit test for the causal ordering
+[0:19:10] ordering and this produces some p-value at which
+[0:19:12] and this produces some p-value at which we'll denote um pi of theta
+[0:19:15] we'll denote um pi of theta now to form the confidence set which
+[0:19:17] now to form the confidence set which we're going to denote
+[0:19:19] we're going to denote um hat theta
+[0:19:20] um hat theta um we're going to simply invert this
+[0:19:23] um we're going to simply invert this goodness of fit test
+[0:19:24] goodness of fit test so put another way for some
+[0:19:26] so put another way for some pre-specified alpha let's say 0.05
+[0:19:30] pre-specified alpha let's say 0.05 hat theta contains all the causal
+[0:19:32] hat theta contains all the causal orderings which are not ruled out by a
+[0:19:34] orderings which are not ruled out by a goodness of fit tests at level alpha
+[0:19:41] all right so this is very straightforward um
+[0:19:43] straightforward um there's there's nothing too complicated
+[0:19:44] there's there's nothing too complicated about this and assuming we can we can
+[0:19:47] about this and assuming we can we can kind of compute or get our hands on this
+[0:19:49] kind of compute or get our hands on this object um a question is why should you
+[0:19:51] object um a question is why should you care about it
+[0:19:56] so if you recall the questions about uncertainty that i brought up at the
+[0:19:57] uncertainty that i brought up at the beginning which we wanted to answer
+[0:19:59] beginning which we wanted to answer right so first one how trustworthy is my
+[0:20:02] right so first one how trustworthy is my point estimate
+[0:20:04] point estimate and what are other possibilities which
+[0:20:06] and what are other possibilities which are not ruled out by the data
+[0:20:12] right so for instance if hat theta is empty so if my
+[0:20:14] if hat theta is empty so if my confidence set is empty
+[0:20:17] confidence set is empty this means that no orderings satisfy the
+[0:20:19] this means that no orderings satisfy the identifying assumptions
+[0:20:22] identifying assumptions right and so this should cause the
+[0:20:23] right and so this should cause the scientists to be very cautious and
+[0:20:25] scientists to be very cautious and potentially think about using a
+[0:20:26] potentially think about using a different causal discovery procedure
+[0:20:28] different causal discovery procedure which requires different assumptions
+[0:20:30] which requires different assumptions right
+[0:20:31] right on the other hand if half theta is very
+[0:20:33] on the other hand if half theta is very large particularly if it contains many
+[0:20:35] large particularly if it contains many orderings with conflicting causal
+[0:20:37] orderings with conflicting causal relations
+[0:20:39] relations uh this might mean that the signal in
+[0:20:40] uh this might mean that the signal in some sense um is low right and so the
+[0:20:43] some sense um is low right and so the point estimate that you might have
+[0:20:45] point estimate that you might have gotten from your procedure um might be
+[0:20:47] gotten from your procedure um might be or probably is unreliable and if and it
+[0:20:50] or probably is unreliable and if and it could potentially change drastically if
+[0:20:53] could potentially change drastically if new data was gathered in this experiment
+[0:20:55] new data was gathered in this experiment in some sense was repeated
+[0:20:57] in some sense was repeated so this set tells me a lot about how
+[0:20:59] so this set tells me a lot about how trustworthy my point estimate might be
+[0:21:06] in terms of the second question right what are other possibilities which are
+[0:21:07] what are other possibilities which are not ruled out by my data this this set
+[0:21:10] not ruled out by my data this this set is kind of explicitly um that that that
+[0:21:13] is kind of explicitly um that that that set right it's uh
+[0:21:15] set right it's uh um exactly the set of orderings which
+[0:21:16] um exactly the set of orderings which are not ruled out by my data
+[0:21:19] are not ruled out by my data and so we think this could be quite
+[0:21:20] and so we think this could be quite helpful for hypothesis generation so
+[0:21:22] helpful for hypothesis generation so that scientists can better know which
+[0:21:24] that scientists can better know which experiments to perform and to
+[0:21:25] experiments to perform and to investigate further down the line
+[0:21:35] all right so more formally what can we say about this object right so if we let
+[0:21:38] say about this object right so if we let theta g be the set of all valid causal
+[0:21:40] theta g be the set of all valid causal orderings right and so these again to
+[0:21:42] orderings right and so these again to the question earlier these are all total
+[0:21:44] the question earlier these are all total orderings but there may be multiple
+[0:21:46] orderings but there may be multiple orderings which are valid
+[0:21:49] orderings which are valid um when the goodness of fit tests that
+[0:21:51] um when the goodness of fit tests that i'm using is asymptotically valid
+[0:21:53] i'm using is asymptotically valid for any of the thetas in in this true
+[0:21:55] for any of the thetas in in this true set of ordering state g
+[0:21:57] set of ordering state g then we can make this statement here
+[0:22:00] then we can make this statement here um where the intersection of the
+[0:22:01] um where the intersection of the confidence set that i've produced
+[0:22:04] confidence set that i've produced uh theta hat
+[0:22:05] uh theta hat and the true set
+[0:22:07] and the true set theta g is non-empty with some user
+[0:22:09] theta g is non-empty with some user specified probability
+[0:22:12] specified probability in some ways it's probably a bit more
+[0:22:14] in some ways it's probably a bit more natural
+[0:22:15] natural to make a statement about the
+[0:22:16] to make a statement about the probability that the true set would be
+[0:22:18] probability that the true set would be contained within the estimated set so
+[0:22:20] contained within the estimated set so something like um
+[0:22:26] like this but since we don't necessarily uh we
+[0:22:28] but since we don't necessarily uh we don't limit or or kind of know operator
+[0:22:30] don't limit or or kind of know operator the number of valid um orderings uh it
+[0:22:32] the number of valid um orderings uh it becomes a little bit harder to make a
+[0:22:33] becomes a little bit harder to make a statement like that
+[0:22:36] statement like that um i do want to point out that we focus
+[0:22:38] um i do want to point out that we focus on orderings largely for computational
+[0:22:40] on orderings largely for computational reasons because the search space of
+[0:22:42] reasons because the search space of orderings is much much smaller than the
+[0:22:44] orderings is much much smaller than the search space of graphs and this is
+[0:22:45] search space of graphs and this is things that this kind of strategy has
+[0:22:47] things that this kind of strategy has been used um before
+[0:22:50] been used um before but in general consistently recovering
+[0:22:52] but in general consistently recovering the graph when you start with the
+[0:22:54] the graph when you start with the correct causal ordering requires much
+[0:22:56] correct causal ordering requires much weaker conditions
+[0:22:58] weaker conditions and so when those conditions are met
+[0:23:00] and so when those conditions are met what we can do is we could take each
+[0:23:02] what we can do is we could take each ordering in theta hat
+[0:23:04] ordering in theta hat and map it to an estimated graph
+[0:23:07] and map it to an estimated graph and then letting those set of graphs be
+[0:23:10] and then letting those set of graphs be uh g hat uh then this would give us
+[0:23:13] uh g hat uh then this would give us something kind of much more natural in
+[0:23:14] something kind of much more natural in terms of what we are kind of used to
+[0:23:16] terms of what we are kind of used to thinking about in terms of um confidence
+[0:23:19] thinking about in terms of um confidence intervals or confidence sets
+[0:23:21] intervals or confidence sets and so in particular the the true graph
+[0:23:23] and so in particular the the true graph g which in this case is unique is
+[0:23:26] g which in this case is unique is contained within this set with some
+[0:23:29] contained within this set with some user specified probability
+[0:23:38] all right so another nice thing about this um set um theta hat is that it's
+[0:23:41] this um set um theta hat is that it's also of interest because it can give a
+[0:23:43] also of interest because it can give a conservative set of ancestral relations
+[0:23:45] conservative set of ancestral relations and so this is similar to the notion
+[0:23:47] and so this is similar to the notion that was proposed in peter's at all in
+[0:23:49] that was proposed in peter's at all in 2016.
+[0:23:51] 2016. and so if we let a be a set of of pairs
+[0:23:54] and so if we let a be a set of of pairs of of nodes in in my graph
+[0:23:57] of of nodes in in my graph um
+[0:23:58] um and a is going to include the pair uv
+[0:24:02] and a is going to include the pair uv if only if you pre um
+[0:24:04] if only if you pre um only if you is an ancestor of v
+[0:24:11] right so this is uh something about the true graph here um and if i can
+[0:24:13] true graph here um and if i can construct this set
+[0:24:15] construct this set a hat
+[0:24:16] a hat right to be the set of pairs which i
+[0:24:19] right to be the set of pairs which i include uv in this set
+[0:24:22] include uv in this set only if
+[0:24:24] only if u precedes v
+[0:24:26] u precedes v in every ordering that's in my set
+[0:24:29] in every ordering that's in my set then i can make the statements here that
+[0:24:31] then i can make the statements here that um
+[0:24:33] um a hat is included within a with some
+[0:24:36] a hat is included within a with some user specified probability
+[0:24:38] user specified probability right and so i'll put another way um
+[0:24:41] right and so i'll put another way um this set a hat
+[0:24:42] this set a hat um
+[0:24:44] um does not contain any false discoveries
+[0:24:46] does not contain any false discoveries with probability one minus alpha
+[0:24:48] with probability one minus alpha okay and so this is similar to what is
+[0:24:50] okay and so this is similar to what is what is um um proposed in in in peter's
+[0:24:54] what is um um proposed in in in peter's at all uh 2016.
+[0:25:01] all right and then finally
+[0:25:02] and then finally um
+[0:25:03] um i want to point out that this confidence
+[0:25:05] i want to point out that this confidence set can also be used to get confidence
+[0:25:07] set can also be used to get confidence intervals for causal effects of u on v
+[0:25:09] intervals for causal effects of u on v which account for model uncertainty
+[0:25:16] all right so suppose um so we're still using this kind of um conservative set
+[0:25:17] using this kind of um conservative set of ancestral relations and so suppose i
+[0:25:22] of ancestral relations and so suppose i estimate theta hat
+[0:25:24] estimate theta hat with um confidence level alpha over two
+[0:25:27] with um confidence level alpha over two and i have some pair uv which lives in
+[0:25:31] and i have some pair uv which lives in which or which is contained in a hat
+[0:25:39] ok so then for each theta in theta hat so each ordering in my confidence set i
+[0:25:41] so each ordering in my confidence set i can form a one minus alpha over two
+[0:25:43] can form a one minus alpha over two confidence interval for either the
+[0:25:45] confidence interval for either the direct or the total effect
+[0:25:46] direct or the total effect um
+[0:25:48] um given this specific theta so for the
+[0:25:50] given this specific theta so for the direct effect perhaps you would regress
+[0:25:51] direct effect perhaps you would regress v
+[0:25:52] v onto all the nodes that precede v and
+[0:25:54] onto all the nodes that precede v and this again should include u by
+[0:25:56] this again should include u by assumption
+[0:25:57] assumption um for the total effect i might regress
+[0:25:59] um for the total effect i might regress v onto all the nodes um which and sorry
+[0:26:02] v onto all the nodes um which and sorry this should say precede u um including u
+[0:26:07] this should say precede u um including u right and so um
+[0:26:09] right and so um you can get a confidence interval for
+[0:26:11] you can get a confidence interval for the linear coefficient which corresponds
+[0:26:13] the linear coefficient which corresponds to u um and this is just kind of the
+[0:26:16] to u um and this is just kind of the normal uh linear um regression
+[0:26:19] normal uh linear um regression confidence interval that you might get
+[0:26:21] confidence interval that you might get but if you get each of those confidence
+[0:26:23] but if you get each of those confidence intervals and you take the union over
+[0:26:25] intervals and you take the union over all theta so you're going to get a
+[0:26:28] all theta so you're going to get a fairly wide confidence interval in some
+[0:26:29] fairly wide confidence interval in some sense
+[0:26:31] sense this then forms a
+[0:26:33] this then forms a confidence interval which
+[0:26:35] confidence interval which for either the director the total effect
+[0:26:37] for either the director the total effect which accounts for your model
+[0:26:39] which accounts for your model uncertainty
+[0:26:41] uncertainty so this is similar in some sense to um
+[0:26:44] so this is similar in some sense to um [Music]
+[0:26:45] [Music] the the problem that was considered by
+[0:26:47] the the problem that was considered by strider at all
+[0:26:56] okay so we started off with a pretty simple procedure um but hopefully that
+[0:26:58] simple procedure um but hopefully that that quick overview and kind of some of
+[0:27:00] that quick overview and kind of some of those like maybe applications or use
+[0:27:02] those like maybe applications or use cases um convinces you that this this
+[0:27:04] cases um convinces you that this this object that we've i've just kind of
+[0:27:06] object that we've i've just kind of mentioned is is interesting and useful
+[0:27:09] mentioned is is interesting and useful but that leaves us with the question of
+[0:27:11] but that leaves us with the question of how do i practically compute this object
+[0:27:14] how do i practically compute this object right so there are there are two parts
+[0:27:15] right so there are there are two parts that we need for for this simple
+[0:27:17] that we need for for this simple framework uh the first of which the
+[0:27:18] framework uh the first of which the goodness of fit test um is largely a
+[0:27:21] goodness of fit test um is largely a statistical problem
+[0:27:23] statistical problem and the second part inverting this test
+[0:27:25] and the second part inverting this test is largely a computational problem and
+[0:27:27] is largely a computational problem and so the solution to both of these parts
+[0:27:29] so the solution to both of these parts are tightly interwoven um in some sense
+[0:27:32] are tightly interwoven um in some sense um
+[0:27:33] um but um somewhat distinct
+[0:27:41] okay so let me then stop for for any questions before i dive into the details
+[0:27:45] questions before i dive into the details hi there is one questions um in the q a
+[0:27:48] hi there is one questions um in the q a so it says in an rct you know the causal
+[0:27:51] so it says in an rct you know the causal order and yet the goodness of fit may be
+[0:27:53] order and yet the goodness of fit may be lousy why does a proper causal order
+[0:27:56] lousy why does a proper causal order imply a good fit and an improper causal
+[0:27:58] imply a good fit and an improper causal order imply a bad fit
+[0:28:05] yeah so um i i guess maybe to the first part of the
+[0:28:08] i i guess maybe to the first part of the question so so in an rct um you you know
+[0:28:11] question so so in an rct um you you know the the causal ordering but um
+[0:28:14] the the causal ordering but um but we're not just
+[0:28:15] but we're not just so somehow the the test that we're going
+[0:28:17] so somehow the the test that we're going to specify right doesn't just test for
+[0:28:19] to specify right doesn't just test for causal ordering it tests for the causal
+[0:28:21] causal ordering it tests for the causal ordering as well as the specific
+[0:28:22] ordering as well as the specific modeling assumptions that we've made
+[0:28:25] modeling assumptions that we've made um so so you're right it could still be
+[0:28:27] um so so you're right it could still be that you know if linearity is not the
+[0:28:29] that you know if linearity is not the right um
+[0:28:31] right um is not the right model
+[0:28:33] is not the right model um then this goodness of fit test will
+[0:28:35] um then this goodness of fit test will still reject
+[0:28:37] still reject even though the causal ordering may be
+[0:28:39] even though the causal ordering may be correctly specified
+[0:28:46] is there uh
+[0:28:47] uh i guess the question was yes why does a
+[0:28:49] i guess the question was yes why does a bad causal ordering imply an uh bad fit
+[0:28:52] bad causal ordering imply an uh bad fit or something like that um so yes i think
+[0:28:55] or something like that um so yes i think you answered it but why does the proper
+[0:28:58] you answered it but why does the proper causal order imply a good fit in an
+[0:28:59] causal order imply a good fit in an improper causal or they imply that
+[0:29:01] improper causal or they imply that i think uh yeah you say that there's
+[0:29:04] i think uh yeah you say that there's there's more to it than just a causal
+[0:29:05] there's more to it than just a causal order um yeah so i just
+[0:29:08] order um yeah so i just so those are all the questions we have
+[0:29:10] so those are all the questions we have for now please do submit your questions
+[0:29:12] for now please do submit your questions same there's about we're about halfway
+[0:29:14] same there's about we're about halfway through the doctor
+[0:29:21] okay great
+[0:29:31] okay so um for some ordering theta um so okay so now i'll talk a little bit about
+[0:29:33] okay so now i'll talk a little bit about the details of the goodness of fit test
+[0:29:34] the details of the goodness of fit test and and how we're gonna try to do this
+[0:29:36] and and how we're gonna try to do this computationally
+[0:29:38] computationally okay um so for some form some ordering
+[0:29:41] okay um so for some form some ordering theta recall that uh this
+[0:29:44] theta recall that uh this notation uh pr of of v
+[0:29:47] notation uh pr of of v uh denotes the nodes that precede v in
+[0:29:50] uh denotes the nodes that precede v in an ordering theta
+[0:29:52] an ordering theta right and so again this could be a valid
+[0:29:55] right and so again this could be a valid ordering this could be an invalid
+[0:29:56] ordering this could be an invalid ordering but it's just some some order
+[0:29:57] ordering but it's just some some order that we've we've specified
+[0:30:01] that we've we've specified and where again we're going to let eta v
+[0:30:03] and where again we're going to let eta v and then set minus
+[0:30:06] and then set minus the
+[0:30:06] the prv uh be the population regression
+[0:30:09] prv uh be the population regression residuals when regressing v
+[0:30:11] residuals when regressing v onto pr v
+[0:30:16] okay so what i showed you kind of roughly speaking from from the um the
+[0:30:18] roughly speaking from from the um the small example
+[0:30:19] small example before
+[0:30:20] before um
+[0:30:22] um when
+[0:30:24] when theta is a valid ordering
+[0:30:27] theta is a valid ordering this is equivalent
+[0:30:29] this is equivalent to these ancestral conditions here right
+[0:30:31] to these ancestral conditions here right so the ancestors of v are contained
+[0:30:34] so the ancestors of v are contained within the predecessors a v and the
+[0:30:36] within the predecessors a v and the predecessors of v do not include any
+[0:30:39] predecessors of v do not include any descendants of v right so this is this
+[0:30:41] descendants of v right so this is this is kind of the definition of a valid
+[0:30:43] is kind of the definition of a valid total ordering
+[0:30:44] total ordering uh and i should say this is true for all
+[0:30:46] uh and i should say this is true for all v
+[0:30:47] v uh but from the example that i showed
+[0:30:49] uh but from the example that i showed you earlier this
+[0:30:51] you earlier this statement about
+[0:30:53] statement about um causal ordering or something about
+[0:30:56] um causal ordering or something about the graph implies that these residuals
+[0:30:59] the graph implies that these residuals are independent of its predecessors
+[0:31:02] are independent of its predecessors for all v
+[0:31:10] okay so this then gives us a way to test for a causal a valid causal ordering in
+[0:31:13] for a causal a valid causal ordering in particular we're going to test whether
+[0:31:15] particular we're going to test whether um
+[0:31:16] um the residuals are independent of the
+[0:31:18] the residuals are independent of the predecessors for all v and we're going
+[0:31:20] predecessors for all v and we're going to use this as a proxy for testing
+[0:31:22] to use this as a proxy for testing whether theta is a valid causal order
+[0:31:33] okay so if i just think about for a specific v a specific node in my graph
+[0:31:37] specific v a specific node in my graph um and i want to do that test once um
+[0:31:39] um and i want to do that test once um this then kind of yields the the kind of
+[0:31:42] this then kind of yields the the kind of the very straightforward but slightly
+[0:31:44] the very straightforward but slightly naive procedure
+[0:31:46] naive procedure where we're simply going to regress v
+[0:31:48] where we're simply going to regress v onto its predecessors
+[0:31:50] onto its predecessors we'll form the residuals and again i
+[0:31:52] we'll form the residuals and again i have the hat here because these are the
+[0:31:54] have the hat here because these are the estimated residuals in some sense
+[0:31:56] estimated residuals in some sense because i'm using an estimated linear
+[0:31:58] because i'm using an estimated linear coefficient
+[0:32:00] coefficient and then once i have the residuals i can
+[0:32:02] and then once i have the residuals i can just apply any
+[0:32:04] just apply any any independence test you like
+[0:32:06] any independence test you like to
+[0:32:07] to test whether the residuals are
+[0:32:08] test whether the residuals are independent of the predecessors
+[0:32:17] okay so unfortunately uh this problem is a little bit more complicated than that
+[0:32:19] a little bit more complicated than that and i'm not going to dive into too many
+[0:32:20] and i'm not going to dive into too many of the details here but i want to at
+[0:32:22] of the details here but i want to at least point out a little bit of the
+[0:32:23] least point out a little bit of the subtlety
+[0:32:24] subtlety um so in practice uh
+[0:32:26] um so in practice uh to get the residuals right we need to
+[0:32:28] to get the residuals right we need to estimate a linear coefficient
+[0:32:30] estimate a linear coefficient use these
+[0:32:31] use these um
+[0:32:32] um and and and we do this using sample data
+[0:32:36] and and and we do this using sample data so what this means is that this the
+[0:32:37] so what this means is that this the linear coefficients in some sense you
+[0:32:39] linear coefficients in some sense you can think of them as nuisance parameters
+[0:32:42] can think of them as nuisance parameters and when i don't have them exactly
+[0:32:43] and when i don't have them exactly correct right i can think about the
+[0:32:46] correct right i can think about the estimated residuals now
+[0:32:48] estimated residuals now having some term which actually includes
+[0:32:51] having some term which actually includes the predecessors of
+[0:32:53] the predecessors of a v
+[0:32:54] a v even when the null hypothesis
+[0:32:56] even when the null hypothesis is true that i've kind of correctly
+[0:32:58] is true that i've kind of correctly specified the um
+[0:33:01] specified the um uh
+[0:33:02] uh the the the causal order
+[0:33:04] the the the causal order and so what this means is that even when
+[0:33:06] and so what this means is that even when this statement holds in the population
+[0:33:08] this statement holds in the population case even when the predecessors of v are
+[0:33:10] case even when the predecessors of v are independent of the population residuals
+[0:33:13] independent of the population residuals it's not generally true that this
+[0:33:15] it's not generally true that this statement when i'm using the estimated
+[0:33:17] statement when i'm using the estimated residuals
+[0:33:18] residuals um
+[0:33:20] um the estimated residuals are generally
+[0:33:21] the estimated residuals are generally not independent of the predecessors
+[0:33:24] not independent of the predecessors and for impact if you use kind of
+[0:33:26] and for impact if you use kind of whatever test of independence that
+[0:33:28] whatever test of independence that you're trying to use if it has power
+[0:33:30] you're trying to use if it has power against you know these local
+[0:33:31] against you know these local alternatives then then
+[0:33:33] alternatives then then this naive procedure
+[0:33:35] this naive procedure will not have proper size
+[0:33:44] okay so fortunately we're not the first ones to notice this and there's a lot of
+[0:33:45] ones to notice this and there's a lot of existing work which addresses this issue
+[0:33:47] existing work which addresses this issue of goodness-of-fit testing for linear
+[0:33:49] of goodness-of-fit testing for linear models
+[0:33:50] models via testing independence of residuals
+[0:33:52] via testing independence of residuals and regressors
+[0:33:53] and regressors and what i want to say is in practice
+[0:33:55] and what i want to say is in practice you can use any of these procedures in
+[0:33:56] you can use any of these procedures in our framework and you might need a
+[0:33:57] our framework and you might need a slight modification here there to kind
+[0:33:59] slight modification here there to kind of plug them in um but but really this
+[0:34:01] of plug them in um but but really this is kind of um
+[0:34:03] is kind of um yeah there are many situations in which
+[0:34:05] yeah there are many situations in which one of these tests might be more
+[0:34:06] one of these tests might be more appropriate than the other
+[0:34:08] appropriate than the other um nonetheless we've developed a
+[0:34:09] um nonetheless we've developed a procedure which i'll only mention here
+[0:34:11] procedure which i'll only mention here at a very high level um but we've
+[0:34:13] at a very high level um but we've developed this procedure in a way that
+[0:34:15] developed this procedure in a way that we hope melds together some of the the
+[0:34:17] we hope melds together some of the the kind of the better elements or the best
+[0:34:18] kind of the better elements or the best elements from previous procedures which
+[0:34:20] elements from previous procedures which are particularly useful here in our
+[0:34:22] are particularly useful here in our setting
+[0:34:24] setting so in particular we use a test statistic
+[0:34:26] so in particular we use a test statistic which is a scaled sample mean of the
+[0:34:28] which is a scaled sample mean of the product of a non-linear function so g is
+[0:34:30] product of a non-linear function so g is a non-linear function
+[0:34:32] a non-linear function and it takes in
+[0:34:33] and it takes in one of the
+[0:34:35] one of the predecessors of e
+[0:34:36] predecessors of e and then
+[0:34:37] and then eta here is the residuals and so we're
+[0:34:40] eta here is the residuals and so we're thinking about scaled sample moments of
+[0:34:42] thinking about scaled sample moments of this form
+[0:34:47] all right and so one of the reasons that we use this test statistic is that we'll
+[0:34:49] we use this test statistic is that we'll need to compute
+[0:34:50] need to compute this test many many different times so
+[0:34:52] this test many many different times so we want something that's quite
+[0:34:53] we want something that's quite computationally efficient right and so
+[0:34:55] computationally efficient right and so when g is a polynomial this has the
+[0:34:57] when g is a polynomial this has the flavor in in some ways which is similar
+[0:35:00] flavor in in some ways which is similar to the to the higher order moments um
+[0:35:02] to the to the higher order moments um which are examined by shoulders at all
+[0:35:04] which are examined by shoulders at all and wang and dirt in 2019 and
+[0:35:06] and wang and dirt in 2019 and um
+[0:35:07] um and be and this is one of the nice
+[0:35:08] and be and this is one of the nice things about the kind the the
+[0:35:11] things about the kind the the um
+[0:35:12] um testing test statistics that are used by
+[0:35:14] testing test statistics that are used by um shoulders at all is that they're very
+[0:35:16] um shoulders at all is that they're very fast and so we kind of have that element
+[0:35:18] fast and so we kind of have that element here
+[0:35:20] here um
+[0:35:22] um um
+[0:35:23] um calibrate their test by deriving a
+[0:35:24] calibrate their test by deriving a limiting normal distribution but in
+[0:35:26] limiting normal distribution but in contrast
+[0:35:28] contrast we hope to get better finite sample
+[0:35:29] we hope to get better finite sample results by using a residual bootstrap
+[0:35:31] results by using a residual bootstrap and so in some ways this is similar to
+[0:35:34] and so in some ways this is similar to to work by sending send 2014 who use a
+[0:35:36] to work by sending send 2014 who use a very powerful but but computationally
+[0:35:38] very powerful but but computationally expensive
+[0:35:40] expensive hilbert schmidt independence criterion
+[0:35:41] hilbert schmidt independence criterion as their test statistic
+[0:35:44] as their test statistic okay so the sentence then uh procedure
+[0:35:46] okay so the sentence then uh procedure they they use a residual bootstrap which
+[0:35:49] they they use a residual bootstrap which resamples both covariates and residuals
+[0:35:51] resamples both covariates and residuals to calibrate their null and so in some
+[0:35:53] to calibrate their null and so in some ways they're thinking about the joint
+[0:35:55] ways they're thinking about the joint distribution of their test statistic
+[0:35:58] distribution of their test statistic over both the covariates
+[0:36:00] over both the covariates and the errors
+[0:36:01] and the errors um and in contrast we want to condition
+[0:36:03] um and in contrast we want to condition on the covariance right and so this
+[0:36:06] on the covariance right and so this as as we'll talk about in a few slides
+[0:36:08] as as we'll talk about in a few slides this allows us to produce tests which
+[0:36:10] this allows us to produce tests which will be independent across each level so
+[0:36:13] will be independent across each level so that we can combine the results in a way
+[0:36:15] that we can combine the results in a way that doesn't lose as much power
+[0:36:17] that doesn't lose as much power and so stylistically this is similar in
+[0:36:20] and so stylistically this is similar in some ways to the conditional test
+[0:36:22] some ways to the conditional test uh which uh which have been brought up
+[0:36:24] uh which uh which have been brought up by sean bulman and barrett and samworth
+[0:36:26] by sean bulman and barrett and samworth um but in those works instead of using a
+[0:36:28] um but in those works instead of using a residual bootstrap they propose a
+[0:36:30] residual bootstrap they propose a parametric boot trap and kind of in
+[0:36:32] parametric boot trap and kind of in practice uh they assume that these
+[0:36:34] practice uh they assume that these errors are gaussian and so this is in
+[0:36:36] errors are gaussian and so this is in our setting is kind of exactly what we
+[0:36:37] our setting is kind of exactly what we want to avoid
+[0:36:39] want to avoid and so hopefully we've kind of taken a
+[0:36:41] and so hopefully we've kind of taken a lot of these um
+[0:36:43] lot of these um these previous um procedures and kind of
+[0:36:45] these previous um procedures and kind of picked out what's best or most useful
+[0:36:48] picked out what's best or most useful for our specific setting here um and
+[0:36:50] for our specific setting here um and built this into a new procedure um but
+[0:36:52] built this into a new procedure um but like i said there are lots of different
+[0:36:54] like i said there are lots of different situations depending on your scaling of
+[0:36:56] situations depending on your scaling of p and n and things like this and where
+[0:36:58] p and n and things like this and where you might want to use other um
+[0:37:01] you might want to use other um other procedures which have been
+[0:37:02] other procedures which have been previously proposed
+[0:37:12] okay so like i said i'm not going to really dive into the details of the
+[0:37:14] really dive into the details of the goodness if it tests for a single
+[0:37:15] goodness if it tests for a single regression so much but once you have one
+[0:37:18] regression so much but once you have one it's it's very straightforward to apply
+[0:37:20] it's it's very straightforward to apply the um this test of the entire order
+[0:37:23] the um this test of the entire order okay so what we're going to do is we're
+[0:37:24] okay so what we're going to do is we're going to apply the test to each node in
+[0:37:26] going to apply the test to each node in the ordering and we'll get a p-value for
+[0:37:28] the ordering and we'll get a p-value for each test
+[0:37:29] each test and the p-value will be
+[0:37:31] and the p-value will be this gamma theta v
+[0:37:34] this gamma theta v and we're going to combine all the
+[0:37:35] and we're going to combine all the p-values into the single um statistic by
+[0:37:38] p-values into the single um statistic by just taking the minimum and so this is
+[0:37:40] just taking the minimum and so this is sometimes known as as tibbetts rule or
+[0:37:42] sometimes known as as tibbetts rule or tidbits method
+[0:37:44] tidbits method um
+[0:37:45] um and as i mentioned earlier we we have
+[0:37:47] and as i mentioned earlier we we have our procedure is specifically set up in
+[0:37:48] our procedure is specifically set up in such a way that we can show that these
+[0:37:51] such a way that we can show that these p-values are asymptotically independent
+[0:37:53] p-values are asymptotically independent and so what we do is we compare gamma
+[0:37:55] and so what we do is we compare gamma theta this aggregate or through the
+[0:37:57] theta this aggregate or through the minimum
+[0:37:58] minimum to a beta
+[0:38:00] to a beta distribution to the quantiles of the
+[0:38:01] distribution to the quantiles of the beta and we this gives us a final
+[0:38:04] beta and we this gives us a final p-value
+[0:38:05] p-value pi theta
+[0:38:07] pi theta right
+[0:38:09] right okay so very concretely what do we do if
+[0:38:11] okay so very concretely what do we do if we're testing the ordering one two three
+[0:38:13] we're testing the ordering one two three four
+[0:38:14] four um what we'll do is we'll first consider
+[0:38:16] um what we'll do is we'll first consider the node two
+[0:38:18] the node two we'll look at its predecessors which are
+[0:38:20] we'll look at its predecessors which are y one so we'll regress two onto y one
+[0:38:22] y one so we'll regress two onto y one we'll look at the residuals
+[0:38:24] we'll look at the residuals and test
+[0:38:25] and test whether they're independent and this
+[0:38:27] whether they're independent and this will produce
+[0:38:28] will produce gamma theta two
+[0:38:31] gamma theta two we'll do this again for three
+[0:38:32] we'll do this again for three with its predecessors one and two and
+[0:38:34] with its predecessors one and two and again for four with its predecessors one
+[0:38:36] again for four with its predecessors one two three
+[0:38:38] two three we'll take the minimum of all these p
+[0:38:40] we'll take the minimum of all these p values and then we'll compare
+[0:38:42] values and then we'll compare that minimum to the quantiles of a beta
+[0:38:43] that minimum to the quantiles of a beta one three to get my final p p-value
+[0:38:46] one three to get my final p p-value pi theta
+[0:38:54] okay so what we can show um is that using our specific testing um procedure
+[0:38:58] using our specific testing um procedure when the elements of epsilon are
+[0:39:00] when the elements of epsilon are mutually independent and sub-exponential
+[0:39:02] mutually independent and sub-exponential as long as p which is the number of
+[0:39:04] as long as p which is the number of variables that i have uh log p over n
+[0:39:07] variables that i have uh log p over n goes to zero
+[0:39:08] goes to zero um then essentially we have a
+[0:39:13] um then essentially we have a yeah we have a valid uh test a goodness
+[0:39:16] yeah we have a valid uh test a goodness of fit test for the the causal ordering
+[0:39:21] so this is again like i said i'm going to mostly focus on the linear case you
+[0:39:24] to mostly focus on the linear case you can think about the non-linear setting
+[0:39:25] can think about the non-linear setting um and the way to think about this maybe
+[0:39:27] um and the way to think about this maybe is just to use a sieve estimator
+[0:39:29] is just to use a sieve estimator to model the nonlinear function where we
+[0:39:32] to model the nonlinear function where we have a basis of functions which we allow
+[0:39:34] have a basis of functions which we allow to grow with our sample size and we just
+[0:39:35] to grow with our sample size and we just track the approximation bias through
+[0:39:46] okay so that's kind of the statistical part of the problem um
+[0:39:48] part of the problem um but how do we do this kind of
+[0:39:50] but how do we do this kind of computationally right so uh the the
+[0:39:52] computationally right so uh the the number of orderings that we would need
+[0:39:54] number of orderings that we would need to test is is huge right and so how do
+[0:39:56] to test is is huge right and so how do we make this feasible for at least a
+[0:39:58] we make this feasible for at least a moderately sized
+[0:39:59] moderately sized key
+[0:40:00] key and to do this we'll use a branch and
+[0:40:02] and to do this we'll use a branch and bound type procedure right so the final
+[0:40:03] bound type procedure right so the final test statistic that we're using gamma
+[0:40:05] test statistic that we're using gamma theta
+[0:40:06] theta is um the minimum key value across the
+[0:40:08] is um the minimum key value across the tests for each level but for
+[0:40:11] tests for each level but for a pre-specified p which is the number of
+[0:40:14] a pre-specified p which is the number of variables i've observed and alpha we can
+[0:40:15] variables i've observed and alpha we can compute the critical value as the alpha
+[0:40:18] compute the critical value as the alpha quantile of a beta one minus uh one p
+[0:40:20] quantile of a beta one minus uh one p minus one
+[0:40:22] minus one and so when we're testing level by level
+[0:40:24] and so when we're testing level by level we can actually stop once the critical
+[0:40:26] we can actually stop once the critical value is exceeded
+[0:40:28] value is exceeded so what i mean by this is suppose i have
+[0:40:30] so what i mean by this is suppose i have um a case where i have 10 variables i've
+[0:40:34] um a case where i have 10 variables i've set alpha to 0.1
+[0:40:36] set alpha to 0.1 then the critical value is 0.0116
+[0:40:40] then the critical value is 0.0116 so let's say i'm testing the ordering
+[0:40:42] so let's say i'm testing the ordering two one three four five six so on and so
+[0:40:45] two one three four five six so on and so on
+[0:40:46] on so i get to the first thing that i'm
+[0:40:47] so i get to the first thing that i'm going to test i'm testing one and its
+[0:40:50] going to test i'm testing one and its predecessors too
+[0:40:53] predecessors too and say in this first thing that i'm
+[0:40:54] and say in this first thing that i'm testing i get out a p-value of 0.009 so
+[0:40:58] testing i get out a p-value of 0.009 so i know i've already exceeded the
+[0:41:00] i know i've already exceeded the critical value and i can reject this
+[0:41:02] critical value and i can reject this ordering without going down the rest of
+[0:41:04] ordering without going down the rest of the way
+[0:41:05] the way and not only that i can actually
+[0:41:06] and not only that i can actually automatically exclude all orderings
+[0:41:08] automatically exclude all orderings which start with two one
+[0:41:10] which start with two one you know and then anything else right so
+[0:41:12] you know and then anything else right so this allows me to um rule out a lot of
+[0:41:15] this allows me to um rule out a lot of um orderings um without doing the full
+[0:41:18] um orderings um without doing the full copy um computation
+[0:41:25] okay so practically speaking we use a procedure which starts with small um
+[0:41:28] procedure which starts with small um orderings and in this case orderings of
+[0:41:31] orderings and in this case orderings of size two tests them all
+[0:41:33] size two tests them all and then takes all the non-rejected
+[0:41:34] and then takes all the non-rejected orderings and tries to see if we can
+[0:41:36] orderings and tries to see if we can continue kind of building on and goes to
+[0:41:38] continue kind of building on and goes to orderings of size three and four and it
+[0:41:41] orderings of size three and four and it continues testing these orderings until
+[0:41:43] continues testing these orderings until i get um i've tested and and verified
+[0:41:46] i get um i've tested and and verified that um the total ordering um is not
+[0:41:48] that um the total ordering um is not rejected by the goodness of fit test
+[0:41:56] one other kind of computational um uh thing that we can take advantage of here
+[0:41:57] thing that we can take advantage of here is that when considering ancestral sets
+[0:42:00] is that when considering ancestral sets the ordering does not necessarily matter
+[0:42:03] the ordering does not necessarily matter and what i mean by this is suppose i'm
+[0:42:05] and what i mean by this is suppose i'm i'm considering the orderings one two
+[0:42:07] i'm considering the orderings one two and three
+[0:42:08] and three and two one three right so if i'm
+[0:42:10] and two one three right so if i'm testing
+[0:42:12] testing um node three in this case i want to
+[0:42:14] um node three in this case i want to test whether the ancestors of three are
+[0:42:16] test whether the ancestors of three are contained in the predecessors of three
+[0:42:18] contained in the predecessors of three which is contained in the
+[0:42:19] which is contained in the non-descendants of three
+[0:42:21] non-descendants of three for both of these orderings the test
+[0:42:23] for both of these orderings the test that i would do is exactly the same
+[0:42:26] that i would do is exactly the same right so so the punch line here is at
+[0:42:28] right so so the punch line here is at each step i need to record a test
+[0:42:30] each step i need to record a test statistic for each permutation
+[0:42:32] statistic for each permutation but i only need to
+[0:42:34] but i only need to compute a test for each combination
+[0:42:36] compute a test for each combination so this also allows um
+[0:42:39] so this also allows um this kind of still is definitely a
+[0:42:42] this kind of still is definitely a memory uh constraint but in terms of a
+[0:42:44] memory uh constraint but in terms of a computation this allows us to to
+[0:42:47] computation this allows us to to reduce and to avoid
+[0:42:49] reduce and to avoid redundant computation
+[0:42:56] okay so i'm going to briefly talk through a little bit of a few
+[0:42:58] through a little bit of a few simulations um and so getting close to
+[0:43:00] simulations um and so getting close to the time but um so we're going to
+[0:43:02] the time but um so we're going to consider linear structural equation
+[0:43:04] consider linear structural equation models um here and we're going to set p
+[0:43:07] models um here and we're going to set p equal to eight so this is you know a
+[0:43:09] equal to eight so this is you know a small but moderately sized graph
+[0:43:13] small but moderately sized graph um and we're going to consider a few
+[0:43:14] um and we're going to consider a few settings where we have n the number of
+[0:43:16] settings where we have n the number of samples grow from 500 1000 all the way
+[0:43:18] samples grow from 500 1000 all the way up to 5000
+[0:43:20] up to 5000 um and so we're generating a random
+[0:43:22] um and so we're generating a random graph with edges uh basically put in
+[0:43:24] graph with edges uh basically put in with some
+[0:43:26] with some constant probability
+[0:43:27] constant probability but we are drawing the edge weights or
+[0:43:29] but we are drawing the edge weights or in this case the linear coefficients in
+[0:43:32] in this case the linear coefficients in my structural equation model
+[0:43:34] my structural equation model from a gamma and we've specifically
+[0:43:36] from a gamma and we've specifically constructed this so that the signal um
+[0:43:39] constructed this so that the signal um also decreases
+[0:43:41] also decreases with um
+[0:43:43] with um the sample size
+[0:43:44] the sample size and we're drawing errors from various
+[0:43:46] and we're drawing errors from various distributions gamma laplace log normal
+[0:43:48] distributions gamma laplace log normal uniform
+[0:43:55] okay so the first plot here um this just kind of verifies what what you would
+[0:43:57] kind of verifies what what you would expect um
+[0:43:59] expect um that we
+[0:44:00] that we can create confidence sets which do have
+[0:44:02] can create confidence sets which do have the correct coverage
+[0:44:04] the correct coverage um and these are all 90 confidence
+[0:44:06] um and these are all 90 confidence intervals with roughly the um
+[0:44:13] yeah and so you can see that that each of these um has roughly the correct
+[0:44:16] of these um has roughly the correct empirical coverage
+[0:44:17] empirical coverage as we go through and so on the
+[0:44:18] as we go through and so on the horizontal axis i have various sample
+[0:44:20] horizontal axis i have various sample sizes each of the different colors
+[0:44:22] sizes each of the different colors indicates different distributions
+[0:44:29] okay so this is maybe a more interesting plot here and so
+[0:44:31] plot here and so um on the solid lines
+[0:44:34] um on the solid lines here and each of these again each of
+[0:44:36] here and each of these again each of these colors is a different distribution
+[0:44:38] these colors is a different distribution but these solid lines indicate um the
+[0:44:40] but these solid lines indicate um the proportion of orderings
+[0:44:42] proportion of orderings in my confidence set out of the
+[0:44:44] in my confidence set out of the proportion out of all of the total
+[0:44:46] proportion out of all of the total orderings that are possible right and so
+[0:44:47] orderings that are possible right and so you can see um what i have um at n
+[0:44:50] you can see um what i have um at n equals you know 2500 um
+[0:44:54] equals you know 2500 um my confidence set
+[0:44:55] my confidence set only contains a small portion of the
+[0:44:58] only contains a small portion of the total orderings that are um that are
+[0:45:01] total orderings that are um that are possible
+[0:45:03] possible the dotted lines here in this um on this
+[0:45:06] the dotted lines here in this um on this plot indicate the proportion of times
+[0:45:08] plot indicate the proportion of times that i can consistently recover the true
+[0:45:11] that i can consistently recover the true causal ordering and this is using the
+[0:45:12] causal ordering and this is using the direct lingam procedure right and so the
+[0:45:14] direct lingam procedure right and so the punchline here is that even and you can
+[0:45:17] punchline here is that even and you can see that these are kind of by by design
+[0:45:19] see that these are kind of by by design we've set up the simulation settings to
+[0:45:21] we've set up the simulation settings to explicitly in this way that
+[0:45:24] explicitly in this way that the true causal ordering is not
+[0:45:26] the true causal ordering is not consistently recovered
+[0:45:28] consistently recovered right so these are roughly about 20 of
+[0:45:30] right so these are roughly about 20 of the time
+[0:45:31] the time and so we can see that the confidence
+[0:45:32] and so we can see that the confidence set is shrinking down
+[0:45:34] set is shrinking down and it has the right coverage and so
+[0:45:36] and it has the right coverage and so it's doing the right thing even though i
+[0:45:38] it's doing the right thing even though i can't consistently recover the true
+[0:45:40] can't consistently recover the true causal order
+[0:45:47] um and here we have another plot which shows basically that the the ancestral
+[0:45:49] shows basically that the the ancestral relations that we can recover with this
+[0:45:51] relations that we can recover with this conservative set of ancestral relations
+[0:45:53] conservative set of ancestral relations a hat is also increasing despite the
+[0:45:55] a hat is also increasing despite the fact that i cannot consistently recover
+[0:45:58] fact that i cannot consistently recover um the causal ordering and then finally
+[0:46:01] um the causal ordering and then finally there's a question maybe about timing
+[0:46:02] there's a question maybe about timing right the other thing is is this
+[0:46:03] right the other thing is is this computationally feasible um so we showed
+[0:46:07] computationally feasible um so we showed kind of in all those simulations um with
+[0:46:09] kind of in all those simulations um with p is equal to eight
+[0:46:10] p is equal to eight here we kind of ramp up the the size of
+[0:46:12] here we kind of ramp up the the size of the graph a little bit we go from 10 11
+[0:46:14] the graph a little bit we go from 10 11 12 and 13. and so this is the time um
+[0:46:18] 12 and 13. and so this is the time um average time for to compute a confidence
+[0:46:20] average time for to compute a confidence set and this is done all on a single
+[0:46:23] set and this is done all on a single chord so you can also think about how
+[0:46:24] chord so you can also think about how you might paralyze this and speed things
+[0:46:26] you might paralyze this and speed things up
+[0:46:26] up but maybe the thing to think about here
+[0:46:28] but maybe the thing to think about here is um even at um p equals 13 uh we can
+[0:46:32] is um even at um p equals 13 uh we can create a confidence set um in roughly
+[0:46:35] create a confidence set um in roughly about an hour on a single core
+[0:46:38] about an hour on a single core now again i do want to to point out that
+[0:46:40] now again i do want to to point out that this is uh dependent on these
+[0:46:42] this is uh dependent on these quote-unquote signal right so we're
+[0:46:44] quote-unquote signal right so we're using a branch and bound procedure which
+[0:46:46] using a branch and bound procedure which in in worst cases is um has to search
+[0:46:49] in in worst cases is um has to search over all permutations and and and so in
+[0:46:52] over all permutations and and and so in some sense when the signal strength is
+[0:46:54] some sense when the signal strength is is larger and i can rule out more
+[0:46:56] is larger and i can rule out more orderings
+[0:46:57] orderings near the beginning then this also allows
+[0:46:59] near the beginning then this also allows us to do a faster computation
+[0:47:06] okay um so i will briefly end with a little
+[0:47:08] um so i will briefly end with a little bit of discussion i'll go quickly here
+[0:47:09] bit of discussion i'll go quickly here because i know dan has has a lot of
+[0:47:11] because i know dan has has a lot of these thoughts also
+[0:47:13] these thoughts also so we've proposed a procedure which
+[0:47:15] so we've proposed a procedure which returns a confidence set for causal
+[0:47:17] returns a confidence set for causal orderings
+[0:47:18] orderings computational feasibility is is
+[0:47:21] computational feasibility is is definitely a constraint but it depends
+[0:47:23] definitely a constraint but it depends on the signal to noise ratio and is
+[0:47:25] on the signal to noise ratio and is generally feasible for i'm using the
+[0:47:27] generally feasible for i'm using the term medium size p although i know
+[0:47:29] term medium size p although i know medium is is maybe uh relative here
+[0:47:32] medium is is maybe uh relative here um but but kind of very importantly it
+[0:47:35] um but but kind of very importantly it allows practitioners to see whether the
+[0:47:36] allows practitioners to see whether the identifying assumptions used for causal
+[0:47:38] identifying assumptions used for causal discovery are reasonable for their data
+[0:47:40] discovery are reasonable for their data or not
+[0:47:41] or not and it also allows practitioners to see
+[0:47:43] and it also allows practitioners to see what other orders are not ruled out by
+[0:47:44] what other orders are not ruled out by the data
+[0:47:46] the data so the drawbacks i i think there are
+[0:47:48] so the drawbacks i i think there are there are many and i want to be honest
+[0:47:50] there are many and i want to be honest and forthright about this and so
+[0:47:52] and forthright about this and so inverting the absolute goodness of fit
+[0:47:54] inverting the absolute goodness of fit test may rule out orderings even when
+[0:47:56] test may rule out orderings even when they are very helpful um and so i'll be
+[0:47:58] they are very helpful um and so i'll be brief here because i know dan wants to
+[0:48:00] brief here because i know dan wants to talk about this as well um but you can
+[0:48:01] talk about this as well um but you can imagine the case where um i have an
+[0:48:04] imagine the case where um i have an empty
+[0:48:05] empty um confidence set and i've ruled out all
+[0:48:08] um confidence set and i've ruled out all orderings
+[0:48:09] orderings but it could be that the
+[0:48:10] but it could be that the misspecification is still
+[0:48:13] misspecification is still mild enough that the point estimate that
+[0:48:15] mild enough that the point estimate that you get is actually still useful
+[0:48:17] you get is actually still useful right and so this it could be that you
+[0:48:19] right and so this it could be that you have an empty confidence set but the
+[0:48:21] have an empty confidence set but the point has been so useful and and this is
+[0:48:23] point has been so useful and and this is maybe a drawback and and there are ways
+[0:48:25] maybe a drawback and and there are ways to get around this but
+[0:48:27] to get around this but what i would say is that we actually
+[0:48:28] what i would say is that we actually don't know in these settings how
+[0:48:30] don't know in these settings how quote-unquote mild the misspecification
+[0:48:33] quote-unquote mild the misspecification is
+[0:48:34] is right and so it could be that you are in
+[0:48:35] right and so it could be that you are in the case where it is still the point
+[0:48:37] the case where it is still the point estimate still is useful but you could
+[0:48:39] estimate still is useful but you could be in the case where the the point
+[0:48:40] be in the case where the the point estimate is completely useless and so at
+[0:48:42] estimate is completely useless and so at least knowing that the model
+[0:48:44] least knowing that the model specification is is not true is helpful
+[0:48:48] specification is is not true is helpful um and then the last drawback rate this
+[0:48:50] um and then the last drawback rate this is very computationally uh intensive and
+[0:48:53] is very computationally uh intensive and so um
+[0:48:54] so um you can paralyze things but uh and and
+[0:48:57] you can paralyze things but uh and and speed up there's a few tricks that you
+[0:48:58] speed up there's a few tricks that you can do to speed up things but this is
+[0:49:00] can do to speed up things but this is still kind of one of the the big
+[0:49:01] still kind of one of the the big bottlenecks
+[0:49:04] bottlenecks okay so the future um future questions
+[0:49:06] okay so the future um future questions can confidence that's to be extended to
+[0:49:07] can confidence that's to be extended to different models um and can we think
+[0:49:10] different models um and can we think about different notions of confidence
+[0:49:11] about different notions of confidence sets so i'll i'll actually not discuss
+[0:49:13] sets so i'll i'll actually not discuss that because i think dan has some some
+[0:49:16] that because i think dan has some some good thoughts on this and so i'll um
+[0:49:18] good thoughts on this and so i'll um turn the the time over to him
+[0:49:26] awesome thank you for your discussion um i think we are ready for then and we can
+[0:49:28] i think we are ready for then and we can take the questions that we have time
+[0:49:29] take the questions that we have time after reasons we're running a little bit
+[0:49:31] after reasons we're running a little bit behind i want dan to have all of his
+[0:49:33] behind i want dan to have all of his time
+[0:49:37] you don't mind uh stopping sharing your screen
+[0:49:40] yeah let me just pull my slides up
+[0:49:48] okay this looks okay all right great thanks so much um to
+[0:49:51] all right great thanks so much um to uh to sam and to the organizers for
+[0:49:54] uh to sam and to the organizers for inviting me and congrats to sam and the
+[0:49:56] inviting me and congrats to sam and the co-authors and really interesting and
+[0:49:58] co-authors and really interesting and insightful
+[0:49:59] insightful paper
+[0:50:00] paper um i think there's a lot of really cool
+[0:50:02] um i think there's a lot of really cool content in here so i will be trying to
+[0:50:04] content in here so i will be trying to be brief and just highlight a few things
+[0:50:06] be brief and just highlight a few things a few like things that i think are
+[0:50:08] a few like things that i think are really valuable and the questions that i
+[0:50:10] really valuable and the questions that i think that they raise from this kind of
+[0:50:12] think that they raise from this kind of uh paper
+[0:50:14] uh paper um
+[0:50:15] um there's sort of three things that i
+[0:50:17] there's sort of three things that i kind of want to
+[0:50:19] kind of want to highlight
+[0:50:20] highlight the first is that i think it's really
+[0:50:22] the first is that i think it's really important to orient the community the
+[0:50:24] important to orient the community the causal inference community and the
+[0:50:25] causal inference community and the causal discovery community
+[0:50:27] causal discovery community towards quantifying uncertainty in
+[0:50:29] towards quantifying uncertainty in causal model selection um and so i'm
+[0:50:32] causal model selection um and so i'm really happy that this paper is doing
+[0:50:34] really happy that this paper is doing that and there's a lot of work to be
+[0:50:35] that and there's a lot of work to be done and i hope more people get inspired
+[0:50:37] done and i hope more people get inspired to come up with confidence or sets or
+[0:50:40] to come up with confidence or sets or quantifying uncertainty in different
+[0:50:41] quantifying uncertainty in different ways
+[0:50:42] ways um i think this idea of inverting a
+[0:50:45] um i think this idea of inverting a global goodness of fit test to construct
+[0:50:47] global goodness of fit test to construct confidence sense for entire orderings or
+[0:50:50] confidence sense for entire orderings or models is quite interesting and i know
+[0:50:52] models is quite interesting and i know that
+[0:50:53] that similar things have been done in other
+[0:50:55] similar things have been done in other areas of statistics that require
+[0:50:57] areas of statistics that require confidence sets for a kind of um
+[0:51:00] confidence sets for a kind of um unusual statistical object but i don't
+[0:51:02] unusual statistical object but i don't think it's really been done in in this
+[0:51:04] think it's really been done in in this particular setting before
+[0:51:06] particular setting before um
+[0:51:07] um and i think that the
+[0:51:09] and i think that the the talk and the paper associated with
+[0:51:11] the talk and the paper associated with this talk go
+[0:51:13] this talk go do a good job of highlighting many
+[0:51:14] do a good job of highlighting many questions and choices that arise when
+[0:51:16] questions and choices that arise when quantifying uncertainty and these kind
+[0:51:18] quantifying uncertainty and these kind of non-standard statistical objects um
+[0:51:21] of non-standard statistical objects um and sam and his co-authors provide
+[0:51:23] and sam and his co-authors provide answers to each of those questions which
+[0:51:25] answers to each of those questions which i think are reasonable answers
+[0:51:27] i think are reasonable answers in many cases there are other answers
+[0:51:29] in many cases there are other answers that may also be reasonable and so
+[0:51:30] that may also be reasonable and so that's what i just want to highlight
+[0:51:31] that's what i just want to highlight here
+[0:51:33] here so the first thing i'll say is that most
+[0:51:38] so the first thing i'll say is that most theoretical work about the statistical
+[0:51:40] theoretical work about the statistical properties or statistical performance of
+[0:51:43] properties or statistical performance of causal discovery algorithms has so far
+[0:51:45] causal discovery algorithms has so far focused on consistency properties of
+[0:51:48] focused on consistency properties of point estimates where the point estimate
+[0:51:49] point estimates where the point estimate is a graph which may itself represent a
+[0:51:52] is a graph which may itself represent a set of graphs uh being an equivalence
+[0:51:54] set of graphs uh being an equivalence class
+[0:51:55] class um but there's this extensive literature
+[0:51:57] um but there's this extensive literature on the conditions under which you can
+[0:51:59] on the conditions under which you can get different kinds of guarantees point
+[0:52:02] get different kinds of guarantees point wise guarantees which are kind of weaker
+[0:52:04] wise guarantees which are kind of weaker and uniform consistency guarantees which
+[0:52:06] and uniform consistency guarantees which are kind of stronger under various
+[0:52:08] are kind of stronger under various assumptions and this is just a kind of
+[0:52:10] assumptions and this is just a kind of partial list of papers over the last
+[0:52:12] partial list of papers over the last uh 20 years or so that i think
+[0:52:15] uh 20 years or so that i think have
+[0:52:16] have tried to tackle this problem in one way
+[0:52:18] tried to tackle this problem in one way or another
+[0:52:19] or another a key takeaway of a lot of that
+[0:52:21] a key takeaway of a lot of that literature is that strong guarantees or
+[0:52:24] literature is that strong guarantees or strong conclusions uh will necessarily
+[0:52:27] strong conclusions uh will necessarily rely on strong assumptions about the
+[0:52:29] rely on strong assumptions about the data generating process in particular um
+[0:52:33] data generating process in particular um uniform guarantees are going to be
+[0:52:34] uniform guarantees are going to be stronger than
+[0:52:36] stronger than uh point wise guarantees and the and to
+[0:52:39] uh point wise guarantees and the and to sort of like roughly summarize what goes
+[0:52:41] sort of like roughly summarize what goes on in this literature is that we can
+[0:52:43] on in this literature is that we can achieve uniform consistency guarantees
+[0:52:46] achieve uniform consistency guarantees for the equivalence class for estimating
+[0:52:48] for the equivalence class for estimating the equivalence class in non-parametric
+[0:52:50] the equivalence class in non-parametric settings when we make strong assumptions
+[0:52:53] settings when we make strong assumptions like what's called strong faithfulness
+[0:52:55] like what's called strong faithfulness or the somewhat weaker assumption called
+[0:52:57] or the somewhat weaker assumption called k triangle faithfulness but if we make
+[0:53:00] k triangle faithfulness but if we make only
+[0:53:00] only relatively weak agnostic assumptions um
+[0:53:04] relatively weak agnostic assumptions um just using regular faithfulness for
+[0:53:06] just using regular faithfulness for example we can typically only expect
+[0:53:08] example we can typically only expect point wise consistency guarantees
+[0:53:10] point wise consistency guarantees and in this case sam and his co-authors
+[0:53:13] and in this case sam and his co-authors they're drawing strong conclusions by
+[0:53:15] they're drawing strong conclusions by giving you asymptotic confidence sets
+[0:53:18] giving you asymptotic confidence sets which are closely related in a kind of
+[0:53:20] which are closely related in a kind of complex way to uniform consistency
+[0:53:22] complex way to uniform consistency guarantees
+[0:53:27] but they'll make strong assumptions to do that
+[0:53:28] do that i won't go into the relationship i i
+[0:53:30] i won't go into the relationship i i think if i'm understanding correctly the
+[0:53:33] think if i'm understanding correctly the confidence sets that sam and his
+[0:53:35] confidence sets that sam and his co-authors present are uniform although
+[0:53:37] co-authors present are uniform although you can correct me if i'm wrong about
+[0:53:38] you can correct me if i'm wrong about that um but in any case they do rely on
+[0:53:41] that um but in any case they do rely on this kind of additive noise model
+[0:53:43] this kind of additive noise model assumption class in order to get a
+[0:53:45] assumption class in order to get a unique
+[0:53:46] unique uh a unique
+[0:53:49] uh a unique graph or ordering um for every
+[0:53:52] graph or ordering um for every uh
+[0:53:53] uh or
+[0:53:55] or they rely on that assumption in order to
+[0:53:58] they rely on that assumption in order to um to get identification of of an
+[0:54:01] um to get identification of of an ordering or a graph which might be a set
+[0:54:03] ordering or a graph which might be a set of orderings um
+[0:54:05] of orderings um and uh this additive noise model
+[0:54:08] and uh this additive noise model which for which the linear model is a
+[0:54:10] which for which the linear model is a special case
+[0:54:11] special case um does allow that but it comes with
+[0:54:14] um does allow that but it comes with uh comes with some drawbacks um any
+[0:54:18] uh comes with some drawbacks um any assumption
+[0:54:19] assumption that
+[0:54:20] that uh whether it's a lingam model a a
+[0:54:23] uh whether it's a lingam model a a non-linear additive noise model or one
+[0:54:26] non-linear additive noise model or one of these equal variances type models
+[0:54:28] of these equal variances type models that ensures unique identifiability of
+[0:54:30] that ensures unique identifiability of the causal structure is a quite strong
+[0:54:32] the causal structure is a quite strong assumption it's going to lead to these
+[0:54:34] assumption it's going to lead to these strong guarantees but it's going to
+[0:54:36] strong guarantees but it's going to be
+[0:54:37] be potentially
+[0:54:38] potentially easy to violate
+[0:54:40] easy to violate and in particular the additive noise
+[0:54:42] and in particular the additive noise model class is not closed under
+[0:54:44] model class is not closed under marginalization so if you start with a
+[0:54:46] marginalization so if you start with a set of variables v and you think you
+[0:54:48] set of variables v and you think you have some additive noise model that's
+[0:54:50] have some additive noise model that's non-linear over v uh and then you look
+[0:54:53] non-linear over v uh and then you look at any subset of v call it v prime which
+[0:54:57] at any subset of v call it v prime which might be for marginalizing out mediators
+[0:54:59] might be for marginalizing out mediators or marginalizing out confounders you're
+[0:55:01] or marginalizing out confounders you're no longer guaranteed to have an additive
+[0:55:03] no longer guaranteed to have an additive noise model over that smaller set and so
+[0:55:07] noise model over that smaller set and so in practice any set that you give me
+[0:55:10] in practice any set that you give me is i can think of as a marginalization
+[0:55:12] is i can think of as a marginalization of some bigger set and so
+[0:55:15] of some bigger set and so one would never really expect i think
+[0:55:17] one would never really expect i think this model class to exactly hold for any
+[0:55:20] this model class to exactly hold for any given set v
+[0:55:22] given set v although people you know reasonably
+[0:55:24] although people you know reasonably might think that it's a it's a good
+[0:55:26] might think that it's a it's a good approximation in some particular
+[0:55:28] approximation in some particular setting
+[0:55:30] setting i think that it's worth highlighting
+[0:55:31] i think that it's worth highlighting here that it can be concerning because
+[0:55:33] here that it can be concerning because the null hypothesis test that's being
+[0:55:35] the null hypothesis test that's being tested over and over again in this
+[0:55:36] tested over and over again in this approach presumes this model class
+[0:55:39] approach presumes this model class actually holds and so if it only really
+[0:55:41] actually holds and so if it only really like approximately holds
+[0:55:43] like approximately holds or doesn't hold at all then we'll have
+[0:55:46] or doesn't hold at all then we'll have grounds to reject those null hypotheses
+[0:55:48] grounds to reject those null hypotheses quite often for reasons independent of
+[0:55:51] quite often for reasons independent of the
+[0:55:52] the of the causal ordering
+[0:55:54] of the causal ordering um so my first question to sam and to
+[0:55:57] um so my first question to sam and to his co-authors is about whether we can
+[0:56:00] his co-authors is about whether we can do something kind of similar in spirit
+[0:56:02] do something kind of similar in spirit but in a kind of non-parametric general
+[0:56:04] but in a kind of non-parametric general way working in the space of equivalence
+[0:56:07] way working in the space of equivalence classes so once we move away from these
+[0:56:08] classes so once we move away from these additive noise models and into the kind
+[0:56:10] additive noise models and into the kind of non-parametric generality we won't be
+[0:56:13] of non-parametric generality we won't be able to have uh you know and a unique
+[0:56:16] able to have uh you know and a unique identified uh dag uh or the orderings
+[0:56:20] identified uh dag uh or the orderings that go with that and so we have to
+[0:56:21] that go with that and so we have to start thinking in the space of
+[0:56:22] start thinking in the space of equivalence classes and i think that
+[0:56:24] equivalence classes and i think that probably the answer is yes but it's
+[0:56:26] probably the answer is yes but it's gonna get it's gonna introduce some
+[0:56:28] gonna get it's gonna introduce some additional complications um
+[0:56:32] additional complications um the other the related to my second
+[0:56:34] the other the related to my second bullet point early on i think the idea
+[0:56:36] bullet point early on i think the idea that sam is using about testing global
+[0:56:40] that sam is using about testing global goodness of fit tests
+[0:56:42] goodness of fit tests is really interesting i think this seems
+[0:56:45] is really interesting i think this seems like a great way of constructing
+[0:56:46] like a great way of constructing confidence sets for for model selection
+[0:56:48] confidence sets for for model selection procedures in general and i think it
+[0:56:50] procedures in general and i think it ought to be explored more
+[0:56:52] ought to be explored more um the approach taken here is global in
+[0:56:55] um the approach taken here is global in that they test many
+[0:56:57] that they test many constraints for a given ordering so for
+[0:56:59] constraints for a given ordering so for a given ordering they're testing for
+[0:57:01] a given ordering they're testing for each variable basically whether the
+[0:57:03] each variable basically whether the structural equation model holds for that
+[0:57:05] structural equation model holds for that particular variable given its
+[0:57:07] particular variable given its its predecessors and then they aggregate
+[0:57:10] its predecessors and then they aggregate the p-values and accept or reject the
+[0:57:12] the p-values and accept or reject the entire ordering or model at once
+[0:57:16] entire ordering or model at once however a null
+[0:57:18] however a null some particular null in that set of
+[0:57:20] some particular null in that set of tests and constraints may be false for
+[0:57:22] tests and constraints may be false for many different reasons even if the
+[0:57:25] many different reasons even if the structure meaning the ordering itself is
+[0:57:27] structure meaning the ordering itself is correct as sam mentioned it could you
+[0:57:30] correct as sam mentioned it could you could have the wrong functional form for
+[0:57:32] could have the wrong functional form for your estimated uh f
+[0:57:34] your estimated uh f uh you could have non-additive noise you
+[0:57:36] uh you could have non-additive noise you could have residual correlation between
+[0:57:38] could have residual correlation between things and so this leads me to ask
+[0:57:40] things and so this leads me to ask whether we can do something similar in
+[0:57:42] whether we can do something similar in spirit but
+[0:57:43] spirit but test a non-parametric independence
+[0:57:45] test a non-parametric independence constraint
+[0:57:47] constraint implied by the ordering rather than
+[0:57:50] implied by the ordering rather than this kind of more additive noise model
+[0:57:52] this kind of more additive noise model specific kind of constraint although as
+[0:57:55] specific kind of constraint although as i was listening to sam's talk i realized
+[0:57:56] i was listening to sam's talk i realized this one that i wrote down specifically
+[0:57:58] this one that i wrote down specifically is probably not the best way to start so
+[0:58:00] is probably not the best way to start so the non so the the
+[0:58:03] the non so the the markov property for a dag says that
+[0:58:05] markov property for a dag says that every variable is independent of its
+[0:58:07] every variable is independent of its non-descendants given as parents
+[0:58:09] non-descendants given as parents um so you might think that for fixed
+[0:58:12] um so you might think that for fixed ordering i can just use the ordering to
+[0:58:14] ordering i can just use the ordering to try and determine
+[0:58:15] try and determine uh what are the non-descendants and what
+[0:58:17] uh what are the non-descendants and what are the predecessors and do this kind of
+[0:58:19] are the predecessors and do this kind of independence test it's a bit tricky here
+[0:58:22] independence test it's a bit tricky here because you you don't necessarily know
+[0:58:24] because you you don't necessarily know how to distinguish between
+[0:58:25] how to distinguish between um
+[0:58:27] um non-descendants and things that are just
+[0:58:29] non-descendants and things that are just less greater than in the ordering so
+[0:58:31] less greater than in the ordering so something more tricky would have to be
+[0:58:33] something more tricky would have to be done here but something in this general
+[0:58:35] done here but something in this general space of testing
+[0:58:37] space of testing the global markov property or or things
+[0:58:40] the global markov property or or things implied by the global markov property i
+[0:58:42] implied by the global markov property i think would be quite interesting and
+[0:58:43] think would be quite interesting and this ends up being uh closely related to
+[0:58:46] this ends up being uh closely related to work done by
+[0:58:48] work done by carolyn uhler and her collaborators on
+[0:58:49] carolyn uhler and her collaborators on permutation based
+[0:58:52] permutation based search methods
+[0:58:54] search methods although they focus on return they look
+[0:58:56] although they focus on return they look through all possible permutations in a
+[0:58:58] through all possible permutations in a kind of computationally clever way and
+[0:59:01] kind of computationally clever way and they test these kinds of independence
+[0:59:03] they test these kinds of independence constraints although they focus on
+[0:59:05] constraints although they focus on returning a single best ordering rather
+[0:59:07] returning a single best ordering rather than a confidence set
+[0:59:10] than a confidence set um
+[0:59:11] um and a question that this this leads me
+[0:59:13] and a question that this this leads me to is the benefits and drawbacks of a
+[0:59:16] to is the benefits and drawbacks of a global p-value kind of based approach
+[0:59:19] global p-value kind of based approach rather than local uncertainty
+[0:59:21] rather than local uncertainty quantification for parts of the model
+[0:59:24] quantification for parts of the model there has been some previous work that's
+[0:59:25] there has been some previous work that's computed p-values for individual edges
+[0:59:28] computed p-values for individual edges in a dag
+[0:59:30] in a dag by strobel at all which which assigns
+[0:59:34] by strobel at all which which assigns basically a p-value to a single edge
+[0:59:37] basically a p-value to a single edge for each edge in the in a in a
+[0:59:39] for each edge in the in a in a discovered graph using something like
+[0:59:41] discovered graph using something like the pc algorithm or similar
+[0:59:44] the pc algorithm or similar which can indicate pieces of the graph
+[0:59:46] which can indicate pieces of the graph that are more or less trustworthy based
+[0:59:48] that are more or less trustworthy based on the p-values
+[0:59:50] on the p-values that approach is quite different from
+[0:59:52] that approach is quite different from this one and i think each of these might
+[0:59:54] this one and i think each of these might have some benefits and drawbacks in
+[0:59:56] have some benefits and drawbacks in terms of
+[0:59:57] terms of how how you're quantifying uncertainty
+[1:00:01] how how you're quantifying uncertainty for different use cases
+[1:00:03] for different use cases and then i think this is my final
+[1:00:05] and then i think this is my final question
+[1:00:06] question to sam for consideration is whether this
+[1:00:09] to sam for consideration is whether this general approach can be adapted to a
+[1:00:11] general approach can be adapted to a certain confidence sense
+[1:00:13] certain confidence sense after using a consistent point
+[1:00:16] after using a consistent point estimation procedure so if you use
+[1:00:18] estimation procedure so if you use something like the pc algorithm or ges
+[1:00:20] something like the pc algorithm or ges or fci or whatever it is
+[1:00:23] or fci or whatever it is that returns a single object to u which
+[1:00:26] that returns a single object to u which might represent an equivalence class of
+[1:00:28] might represent an equivalence class of graphs
+[1:00:29] graphs and you might think that an analogy to
+[1:00:32] and you might think that an analogy to this kind of like theta hat plus or
+[1:00:33] this kind of like theta hat plus or minus you know the walled confidence
+[1:00:36] minus you know the walled confidence interval approach that a confidence set
+[1:00:38] interval approach that a confidence set might be something that's uh you know
+[1:00:40] might be something that's uh you know minimal deviations from uh from a point
+[1:00:43] minimal deviations from uh from a point estimate that we that we think is the
+[1:00:45] estimate that we that we think is the sort of our best guess at the graph
+[1:00:47] sort of our best guess at the graph um and so you might consider starting
+[1:00:49] um and so you might consider starting with that point estimate and then doing
+[1:00:51] with that point estimate and then doing something like sam's procedure looking
+[1:00:53] something like sam's procedure looking at goodness of fit tests for nearby
+[1:00:56] at goodness of fit tests for nearby models models that are different by one
+[1:00:58] models models that are different by one edge or two edges or some some sort of
+[1:01:02] edge or two edges or some some sort of some sort of approach like that which i
+[1:01:03] some sort of approach like that which i think could be an interesting
+[1:01:05] think could be an interesting follow-up to this kind of work and would
+[1:01:07] follow-up to this kind of work and would have the benefit of
+[1:01:09] have the benefit of including elements in the confidence set
+[1:01:12] including elements in the confidence set that are
+[1:01:13] that are um
+[1:01:14] um not just
+[1:01:15] not just satisfying the coverage guarantee but
+[1:01:18] satisfying the coverage guarantee but that are like plausibly satisfying the
+[1:01:20] that are like plausibly satisfying the coverage guarantee or plausible models
+[1:01:22] coverage guarantee or plausible models because they're close to our best fit
+[1:01:24] because they're close to our best fit our best guess kind of thing
+[1:01:26] our best guess kind of thing um so i'll i'll end there and let sam
+[1:01:30] um so i'll i'll end there and let sam have some time to wrap up
+[1:01:32] have some time to wrap up thanks
+[1:01:36] uh thanks dan um feel free to respond to some of the
+[1:01:38] um feel free to respond to some of the comments that they know brings up
+[1:01:45] yeah thanks dan i um yeah i really appreciate the discussion i think this
+[1:01:46] appreciate the discussion i think this is i think we're totally on the same
+[1:01:48] is i think we're totally on the same page um the hope here is that this kind
+[1:01:51] page um the hope here is that this kind of work spurs a lot of other
+[1:01:53] of work spurs a lot of other folks in the community to think about
+[1:01:54] folks in the community to think about these problems um and so yes there's i
+[1:01:57] these problems um and so yes there's i want to absolutely be very kind of
+[1:01:59] want to absolutely be very kind of forthright with the shortcomings and say
+[1:02:01] forthright with the shortcomings and say hey come come work on this right because
+[1:02:03] hey come come work on this right because this is uh there's a lot to be done here
+[1:02:05] this is uh there's a lot to be done here um maybe i'll kind of just in terms of
+[1:02:08] um maybe i'll kind of just in terms of the questions i'll go backwards to four
+[1:02:10] the questions i'll go backwards to four words kind of um so this kind of
+[1:02:12] words kind of um so this kind of question about the the wall type
+[1:02:14] question about the the wall type confidence interval and so this is this
+[1:02:16] confidence interval and so this is this is actually something i i think that's
+[1:02:18] is actually something i i think that's there's a lot to that um and this is
+[1:02:20] there's a lot to that um and this is something that we kind of considered a
+[1:02:22] something that we kind of considered a little bit at the beginning we kind of
+[1:02:23] little bit at the beginning we kind of discussed a lot of different ways to
+[1:02:25] discussed a lot of different ways to think about this um
+[1:02:26] think about this um in particular i think one of the the
+[1:02:28] in particular i think one of the the nice parts of that
+[1:02:30] nice parts of that is that
+[1:02:31] is that this goodness of fit test rate um it
+[1:02:33] this goodness of fit test rate um it could be that the model specification is
+[1:02:35] could be that the model specification is is somewhat mild and so that your
+[1:02:38] is somewhat mild and so that your um point estimate is still
+[1:02:40] um point estimate is still still useful and good um but would be
+[1:02:42] still useful and good um but would be rejected by a goodness of it test and so
+[1:02:43] rejected by a goodness of it test and so if you center your your your confidence
+[1:02:46] if you center your your your confidence interval around a point estimate
+[1:02:48] interval around a point estimate then you still kind of
+[1:02:50] then you still kind of can get a non-empty confidence set in a
+[1:02:52] can get a non-empty confidence set in a way that's helpful
+[1:02:53] way that's helpful right
+[1:02:54] right i think one of the things that we were a
+[1:02:56] i think one of the things that we were a little bit kind of didn't quite know how
+[1:02:58] little bit kind of didn't quite know how to think about maybe in this way though
+[1:03:00] to think about maybe in this way though is that
+[1:03:02] is that you don't really know
+[1:03:04] you don't really know whether your your misspecification is is
+[1:03:06] whether your your misspecification is is is really bad or not and so in some ways
+[1:03:08] is really bad or not and so in some ways it could be a benefit that you still get
+[1:03:11] it could be a benefit that you still get um a non-empty uh confidence set but in
+[1:03:14] um a non-empty uh confidence set but in some ways it can it could
+[1:03:17] some ways it can it could kind of lead you astray or quite quite
+[1:03:19] kind of lead you astray or quite quite far and so
+[1:03:20] far and so um
+[1:03:21] um you know in in another way also it's you
+[1:03:23] you know in in another way also it's you need kind of um
+[1:03:25] need kind of um in some ways you need consistency of the
+[1:03:27] in some ways you need consistency of the the point estimate to still kind of form
+[1:03:29] the point estimate to still kind of form good confidence sets and so
+[1:03:31] good confidence sets and so the procedure we ultimately kind of
+[1:03:33] the procedure we ultimately kind of decided to go a different way so where
+[1:03:34] decided to go a different way so where you don't necessarily need consistency
+[1:03:37] you don't necessarily need consistency um but but i do think i do think there's
+[1:03:39] um but but i do think i do think there's a lot kind of i think there are
+[1:03:41] a lot kind of i think there are definitely ways i think in which that
+[1:03:43] definitely ways i think in which that type of confidence that can be thought
+[1:03:45] type of confidence that can be thought of and
+[1:03:46] of and would be fruitful
+[1:03:47] would be fruitful um maybe the question about the kind of
+[1:03:49] um maybe the question about the kind of thinking about more local structure um
+[1:03:53] thinking about more local structure um that i think is is actually so i haven't
+[1:03:55] that i think is is actually so i haven't read this uh struggle um paper from 2019
+[1:03:58] read this uh struggle um paper from 2019 so thanks for pointing that out um and
+[1:04:00] so thanks for pointing that out um and i'll i'll definitely add that to my list
+[1:04:01] i'll i'll definitely add that to my list of things to read um this is in some
+[1:04:03] of things to read um this is in some ways also a little bit um similar to
+[1:04:06] ways also a little bit um similar to some some very recent work by scholteis
+[1:04:08] some some very recent work by scholteis bulman and yuan where they think about
+[1:04:10] bulman and yuan where they think about testing
+[1:04:12] testing specific linearity assumptions um in in
+[1:04:15] specific linearity assumptions um in in a graph um
+[1:04:17] a graph um and i think
+[1:04:19] and i think i think there's yeah you're right these
+[1:04:20] i think there's yeah you're right these are kind of complementary ideas where
+[1:04:22] are kind of complementary ideas where local structure is important
+[1:04:24] local structure is important and global structure kind of is somewhat
+[1:04:26] and global structure kind of is somewhat complementary um i think for us it was
+[1:04:30] complementary um i think for us it was i think what you know at least if you
+[1:04:32] i think what you know at least if you assume a dag
+[1:04:34] assume a dag um kind of the idea that if you flip an
+[1:04:35] um kind of the idea that if you flip an edge here this doesn't just have local
+[1:04:38] edge here this doesn't just have local implications it actually has kind of
+[1:04:39] implications it actually has kind of global implications elsewhere um and so
+[1:04:42] global implications elsewhere um and so um
+[1:04:43] um i think that was one of the reasons that
+[1:04:45] i think that was one of the reasons that we kind of thought more about global
+[1:04:47] we kind of thought more about global structure
+[1:04:48] structure because um it's it's not quite as easy
+[1:04:51] because um it's it's not quite as easy just to kind of pace together a bunch of
+[1:04:52] just to kind of pace together a bunch of kind of confidence intervals to get one
+[1:04:54] kind of confidence intervals to get one large confidence interval
+[1:04:56] large confidence interval um
+[1:04:57] um but i do think i think practically
+[1:04:58] but i do think i think practically speaking i think kind of having this
+[1:05:00] speaking i think kind of having this local
+[1:05:01] local confidence sets would also be quite
+[1:05:02] confidence sets would also be quite helpful um
+[1:05:03] helpful um [Music]
+[1:05:05] [Music] so and then i think the last question
+[1:05:06] so and then i think the last question was about um
+[1:05:09] was about um kind of going more apparent
+[1:05:10] kind of going more apparent non-parametrically and thinking about
+[1:05:12] non-parametrically and thinking about equivalence classes um yeah definitely
+[1:05:14] equivalence classes um yeah definitely right like so yes we we've made kind of
+[1:05:17] right like so yes we we've made kind of strong assumptions in in order for our
+[1:05:20] strong assumptions in in order for our um confidence that procedure to work and
+[1:05:22] um confidence that procedure to work and in some ways this is
+[1:05:24] in some ways this is we came at it from the point of view of
+[1:05:26] we came at it from the point of view of i have used this procedure on my data
+[1:05:29] i have used this procedure on my data and so i have used a lingam or a
+[1:05:31] and so i have used a lingam or a continuous added noise model and i want
+[1:05:33] continuous added noise model and i want to assess the
+[1:05:34] to assess the um
+[1:05:36] um the
+[1:05:37] the uncertainty in this particular point
+[1:05:38] uncertainty in this particular point estimate um
+[1:05:40] estimate um and so one of the things that you want
+[1:05:42] and so one of the things that you want to know here is are my identifying
+[1:05:44] to know here is are my identifying assumption is good right and so this
+[1:05:46] assumption is good right and so this allows us to test that now if you take
+[1:05:48] allows us to test that now if you take out for the non-parent kind of if you're
+[1:05:50] out for the non-parent kind of if you're less
+[1:05:51] less parametric about things
+[1:05:53] parametric about things um
+[1:05:54] um i think one of the hard things that that
+[1:05:56] i think one of the hard things that that we were trying to think through a little
+[1:05:57] we were trying to think through a little bit is is this becomes very
+[1:05:58] bit is is this becomes very computationally difficult so so in
+[1:06:00] computationally difficult so so in particular when you have kind of a class
+[1:06:02] particular when you have kind of a class of orderings that you can search over um
+[1:06:04] of orderings that you can search over um this this is
+[1:06:05] this this is much easier computationally and then
+[1:06:07] much easier computationally and then kind of the search over equivalence
+[1:06:09] kind of the search over equivalence classes and in specific graphs then you
+[1:06:11] classes and in specific graphs then you know as you know um can can be quite
+[1:06:13] know as you know um can can be quite tricky um and so i think there's
+[1:06:15] tricky um and so i think there's definitely good work to be done in that
+[1:06:17] definitely good work to be done in that area um and i yeah i hope hope i hope so
+[1:06:20] area um and i yeah i hope hope i hope so i hope uh either to do that myself or to
+[1:06:22] i hope uh either to do that myself or to see other people do that so
+[1:06:24] see other people do that so yeah
+[1:06:26] yeah all right thank you both
+[1:06:28] all right thank you both since we're running a little bit behind
+[1:06:29] since we're running a little bit behind on time let's uh wrap up here and
+[1:06:31] on time let's uh wrap up here and hopefully um
+[1:06:34] hopefully um the audience will
+[1:06:35] the audience will forgive us for not taking their
+[1:06:37] forgive us for not taking their questions at this point so um
+[1:06:40] questions at this point so um let me wrap up really quick i know it
+[1:06:42] let me wrap up really quick i know it will be to everybody's disappointment
+[1:06:44] will be to everybody's disappointment to hear that we're going to the summer
+[1:06:46] to hear that we're going to the summer break
+[1:06:47] break and we will see you again in september

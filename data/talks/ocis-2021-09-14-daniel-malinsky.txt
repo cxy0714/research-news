@@ -1,0 +1,1762 @@
+[0:00:06] okay welcome everyone um um welcome to today's online course of inference
+[0:00:08] today's online course of inference seminar
+[0:00:09] seminar um
+[0:00:10] um so today
+[0:00:11] so today our speaker will be danielle malinsky
+[0:00:13] our speaker will be danielle malinsky from columbia university
+[0:00:16] from columbia university will talk us about his work on
+[0:00:18] will talk us about his work on explaining the behavior of black box
+[0:00:20] explaining the behavior of black box prediction algorithms with causal
+[0:00:22] prediction algorithms with causal learning
+[0:00:24] learning our discussion today will be joshua
+[0:00:26] our discussion today will be joshua loftus from the london school of
+[0:00:28] loftus from the london school of economics
+[0:00:32] so
+[0:00:38] daniel's collaborator nimoy will be
+[0:00:40] nimoy will be monitoring the chat box for
+[0:00:43] monitoring the chat box for questions um
+[0:00:46] questions um and i think about two-thirds of
+[0:00:49] and i think about two-thirds of daniel's slides
+[0:00:51] daniel's slides he said this slide 16 he will
+[0:00:53] he said this slide 16 he will make a pause
+[0:00:55] make a pause and he also
+[0:00:57] and he also answer questions um
+[0:01:00] answer questions um so without further ado uh let me give
+[0:01:03] so without further ado uh let me give the stage to danny
+[0:01:10] oh can i just say a few things about the question
+[0:01:11] question oh sorry uh yes
+[0:01:13] oh sorry uh yes yeah
+[0:01:14] yeah sure um so hi everyone uh so just a few
+[0:01:18] sure um so hi everyone uh so just a few things about questions please use the q
+[0:01:20] things about questions please use the q a to ask questions not the chat this way
+[0:01:23] a to ask questions not the chat this way the questions can be answered publicly
+[0:01:25] the questions can be answered publicly so as jinyoung mentioned numero is going
+[0:01:28] so as jinyoung mentioned numero is going to be monitoring the q a part and
+[0:01:31] to be monitoring the q a part and answering questions there a few
+[0:01:33] answering questions there a few questions will be flagged for dan to
+[0:01:35] questions will be flagged for dan to answer live and for those questions
+[0:01:37] answer live and for those questions either i will ask then or
+[0:01:40] either i will ask then or i will ask one of you to raise your hand
+[0:01:42] i will ask one of you to raise your hand and ask the question live just keep in
+[0:01:44] and ask the question live just keep in mind that the session is being recorded
+[0:01:45] mind that the session is being recorded so that if you ask your question live
+[0:01:48] so that if you ask your question live you may be heard on the recording later
+[0:01:50] you may be heard on the recording later on
+[0:01:51] on all right
+[0:01:52] all right that's it so now i'll make it over to
+[0:01:54] that's it so now i'll make it over to there
+[0:02:06] cool great
+[0:02:07] great so
+[0:02:08] so sharing my slides everybody can see my
+[0:02:10] sharing my slides everybody can see my slides okay and hear me great awesome
+[0:02:12] slides okay and hear me great awesome well thank you so much uh for having me
+[0:02:15] well thank you so much uh for having me here at this uh great seminar series
+[0:02:17] here at this uh great seminar series thanks to the organizers both for
+[0:02:19] thanks to the organizers both for inviting me and for in general
+[0:02:21] inviting me and for in general organizing this great series which i've
+[0:02:23] organizing this great series which i've really enjoyed um
+[0:02:25] really enjoyed um and thank you to the
+[0:02:27] and thank you to the uh to the guests for coming to watch us
+[0:02:30] uh to the guests for coming to watch us talk
+[0:02:31] talk um so my talk today will be
+[0:02:34] um so my talk today will be on the subject of explainable ai or
+[0:02:37] on the subject of explainable ai or explainable machine learning from a kind
+[0:02:39] explainable machine learning from a kind of causality or causal inference point
+[0:02:41] of causality or causal inference point of view and it's based on joint work
+[0:02:43] of view and it's based on joint work with my collaborators numerosani
+[0:02:46] with my collaborators numerosani and ilia schpitzer who are both at
+[0:02:48] and ilia schpitzer who are both at hopkins
+[0:02:50] hopkins an archive paper online
+[0:02:52] an archive paper online a draft paper that
+[0:02:54] a draft paper that you'll see the reference at the end of
+[0:02:55] you'll see the reference at the end of the slides
+[0:03:00] so the starting point the starting
+[0:03:02] the starting point the starting observation of this kind of project is
+[0:03:05] observation of this kind of project is that
+[0:03:06] that many of the most successful machine
+[0:03:08] many of the most successful machine learning algorithms
+[0:03:10] learning algorithms are so-called black boxes it is not
+[0:03:12] are so-called black boxes it is not transparent to the user on what basis
+[0:03:15] transparent to the user on what basis they arrive at their predictions usually
+[0:03:17] they arrive at their predictions usually at some
+[0:03:18] at some complex combination of feature
+[0:03:20] complex combination of feature extraction
+[0:03:22] extraction and a neural network or multiple neural
+[0:03:24] and a neural network or multiple neural networks or multiple feature extractors
+[0:03:26] networks or multiple feature extractors which
+[0:03:28] which are used
+[0:03:29] are used as the basis
+[0:03:31] as the basis of an algorithmic procedure to make
+[0:03:33] of an algorithmic procedure to make predictions about say what's what's
+[0:03:36] predictions about say what's what's located in an image or what is the
+[0:03:38] located in an image or what is the meaning of a text
+[0:03:41] meaning of a text in most of my examples in this talk i'm
+[0:03:43] in most of my examples in this talk i'm going to talk in terms of images
+[0:03:45] going to talk in terms of images and assume that the
+[0:03:47] and assume that the and use kind of a running example of
+[0:03:50] and use kind of a running example of image classification with a
+[0:03:52] image classification with a say a convolutional neural network as
+[0:03:54] say a convolutional neural network as the the black box
+[0:03:56] the the black box um but everything i'll say also applies
+[0:03:59] um but everything i'll say also applies more broadly to
+[0:04:01] more broadly to other kinds of data for
+[0:04:03] other kinds of data for example video or text like natural
+[0:04:06] example video or text like natural language processing
+[0:04:08] language processing data or
+[0:04:10] data or audio data
+[0:04:11] audio data and it doesn't have to be a
+[0:04:12] and it doesn't have to be a convolutional neural network it could be
+[0:04:14] convolutional neural network it could be sort of like any machine learning black
+[0:04:16] sort of like any machine learning black box
+[0:04:18] box procedure
+[0:04:19] procedure but to fix ideas i'll focus kind of on
+[0:04:20] but to fix ideas i'll focus kind of on the example of image
+[0:04:22] the example of image image analysis with neural networks
+[0:04:25] image analysis with neural networks and there has been an interest in
+[0:04:28] and there has been an interest in understanding how to explain or
+[0:04:31] understanding how to explain or interpret the behavior of these black
+[0:04:33] interpret the behavior of these black blocs prediction models
+[0:04:36] blocs prediction models uh why
+[0:04:37] uh why why should we care about this well
+[0:04:38] why should we care about this well there's there's
+[0:04:40] there's there's several different reasons first this
+[0:04:43] several different reasons first this kind of general interest in transparency
+[0:04:46] kind of general interest in transparency uh and communication and trust in
+[0:04:48] uh and communication and trust in procedures that are very complex if
+[0:04:50] procedures that are very complex if you're going to deploy these procedures
+[0:04:53] you're going to deploy these procedures in settings for example like in
+[0:04:55] in settings for example like in healthcare or in criminal justice
+[0:04:58] healthcare or in criminal justice uh there is a
+[0:05:00] uh there is a strong
+[0:05:02] strong intuition that we should understand
+[0:05:03] intuition that we should understand what's going on with these methods
+[0:05:05] what's going on with these methods before we use them in order to put our
+[0:05:07] before we use them in order to put our trust in
+[0:05:09] trust in in their ability to help make very
+[0:05:11] in their ability to help make very complex and consequential decisions
+[0:05:14] complex and consequential decisions there's also an interest in recourse
+[0:05:15] there's also an interest in recourse which is a
+[0:05:17] which is a term
+[0:05:18] term used in some literature for
+[0:05:19] used in some literature for understanding how
+[0:05:22] understanding how individual users that are affected by
+[0:05:24] individual users that are affected by algorithms
+[0:05:26] algorithms can
+[0:05:27] can question or challenge the algorithm's
+[0:05:29] question or challenge the algorithm's predictions about something if that if
+[0:05:31] predictions about something if that if that prediction is thought to be
+[0:05:33] that prediction is thought to be inadequate or unfair in some way
+[0:05:36] inadequate or unfair in some way there's also a question of algorithm
+[0:05:38] there's also a question of algorithm auditing for reliability
+[0:05:40] auditing for reliability so understanding what is going on with
+[0:05:43] so understanding what is going on with the algorithm can help understand
+[0:05:45] the algorithm can help understand whether irrelevant artifacts
+[0:05:47] whether irrelevant artifacts are making a difference to the
+[0:05:49] are making a difference to the algorithm's behavior for example they're
+[0:05:51] algorithm's behavior for example they're sort of like classic stories you can
+[0:05:52] sort of like classic stories you can tell about
+[0:05:53] tell about um was this image taken in the daytime
+[0:05:56] um was this image taken in the daytime or in the night time or was it taking
+[0:05:57] or in the night time or was it taking out hospital a versus hospital b sort of
+[0:06:00] out hospital a versus hospital b sort of irrelevant artifacts that are supposed
+[0:06:02] irrelevant artifacts that are supposed to be
+[0:06:03] to be um that we would like to guard against
+[0:06:05] um that we would like to guard against because
+[0:06:06] because they may lead to poor generalization of
+[0:06:09] they may lead to poor generalization of our prediction models in new settings
+[0:06:12] our prediction models in new settings and then finally there's the kind of
+[0:06:13] and then finally there's the kind of fairness or uh bias perspective that
+[0:06:16] fairness or uh bias perspective that understanding
+[0:06:18] understanding what base on what basis the algorithm is
+[0:06:21] what base on what basis the algorithm is making its predictions can help us
+[0:06:23] making its predictions can help us understand if there are social biases
+[0:06:26] understand if there are social biases related to say race or gender or
+[0:06:28] related to say race or gender or something else that
+[0:06:30] something else that are being
+[0:06:31] are being perhaps unintentionally encoded into the
+[0:06:34] perhaps unintentionally encoded into the algorithmic procedures themselves
+[0:06:36] algorithmic procedures themselves so
+[0:06:37] so my
+[0:06:38] my the work we do here sort of focuses on
+[0:06:40] the work we do here sort of focuses on these latter two
+[0:06:42] these latter two motivations the auditing for reliability
+[0:06:45] motivations the auditing for reliability and auditing for
+[0:06:47] and auditing for fairness or bias concerns and so i'll
+[0:06:49] fairness or bias concerns and so i'll give two kind of quick examples on the
+[0:06:51] give two kind of quick examples on the left we have some images from a paper
+[0:06:55] left we have some images from a paper by winkler at all in jama dermatology
+[0:06:58] by winkler at all in jama dermatology where they study
+[0:06:59] where they study how
+[0:07:01] how a convolutional neural network based
+[0:07:04] a convolutional neural network based procedure
+[0:07:05] procedure um
+[0:07:06] um which is trained to recognize images of
+[0:07:08] which is trained to recognize images of skin lesions in a healthcare setting
+[0:07:11] skin lesions in a healthcare setting can be affected by this irrelevant
+[0:07:13] can be affected by this irrelevant artifact which is the purple marker
+[0:07:16] artifact which is the purple marker highlighting made by radiologists or
+[0:07:19] highlighting made by radiologists or doctors i think uh in the course of of
+[0:07:23] doctors i think uh in the course of of image analysis which they do for their
+[0:07:26] image analysis which they do for their own reasons to to help with identifying
+[0:07:29] own reasons to to help with identifying or and delineating you know lesions of
+[0:07:32] or and delineating you know lesions of interest but which if they make their
+[0:07:34] interest but which if they make their way into the training data on which the
+[0:07:36] way into the training data on which the algorithm is trained uh it turns out may
+[0:07:39] algorithm is trained uh it turns out may have a strong effect on the algorithm's
+[0:07:42] have a strong effect on the algorithm's behavior and performance
+[0:07:44] behavior and performance which is undesirable
+[0:07:46] which is undesirable on the right hand side an example from a
+[0:07:49] on the right hand side an example from a non-profit group called algorithm watch
+[0:07:52] non-profit group called algorithm watch which is a group that
+[0:07:55] which is a group that studies and writes about the use of
+[0:07:57] studies and writes about the use of algorithms and kind of socially
+[0:07:59] algorithms and kind of socially impactful settings and they wrote this
+[0:08:03] impactful settings and they wrote this this piece about the google vision api
+[0:08:07] this piece about the google vision api is a sort of publicly available
+[0:08:10] is a sort of publicly available piece of software that google has used
+[0:08:12] piece of software that google has used for image classification and makes
+[0:08:14] for image classification and makes available to the public
+[0:08:17] available to the public and somebody noticed i think on twitter
+[0:08:19] and somebody noticed i think on twitter that this image
+[0:08:21] that this image this software seems to encode
+[0:08:24] this software seems to encode stereotyped associations so they found
+[0:08:26] stereotyped associations so they found this picture of a human hand holding a
+[0:08:30] this picture of a human hand holding a an electronic thermometer a thermometer
+[0:08:33] an electronic thermometer a thermometer that we're probably all familiar with at
+[0:08:34] that we're probably all familiar with at this point
+[0:08:36] this point but was labeled as
+[0:08:38] but was labeled as highly likely to be a gun
+[0:08:41] highly likely to be a gun and the question is whether
+[0:08:43] and the question is whether that incorrect label was tracking
+[0:08:46] that incorrect label was tracking stereotyped associations in the training
+[0:08:48] stereotyped associations in the training data because the skin color on the hand
+[0:08:51] data because the skin color on the hand is black or dark
+[0:08:53] is black or dark there was even a kind of
+[0:08:55] there was even a kind of crude experiment that that was discussed
+[0:08:58] crude experiment that that was discussed in this piece where somebody altered the
+[0:09:00] in this piece where somebody altered the image artificially to lighten the skin
+[0:09:02] image artificially to lighten the skin tone and the probability of gun
+[0:09:05] tone and the probability of gun decreased and the probability of some
+[0:09:07] decreased and the probability of some other category monocular increased and
+[0:09:09] other category monocular increased and so that was the
+[0:09:11] so that was the hypothesis was that the
+[0:09:13] hypothesis was that the google vision api was tracking
+[0:09:15] google vision api was tracking stereotyped associations whatever it was
+[0:09:17] stereotyped associations whatever it was doing
+[0:09:19] doing um so in in this talk
+[0:09:22] um so in in this talk we're going to
+[0:09:24] we're going to do the following and i should say it's a
+[0:09:26] do the following and i should say it's a bit of an unusual talk we're not
+[0:09:28] bit of an unusual talk we're not proposing a
+[0:09:30] proposing a new algorithm or a new estimator or
+[0:09:33] new algorithm or a new estimator or proving any sort of theoretical results
+[0:09:35] proving any sort of theoretical results about the behavior of a new estimator or
+[0:09:38] about the behavior of a new estimator or a new algorithm
+[0:09:39] a new algorithm rather we're doing two things we're
+[0:09:41] rather we're doing two things we're making a kind of philosophical proposal
+[0:09:43] making a kind of philosophical proposal about how we think
+[0:09:44] about how we think that causality is relevant to explaining
+[0:09:47] that causality is relevant to explaining algorithm behaviors
+[0:09:49] algorithm behaviors and then a kind of algorithmic proposal
+[0:09:51] and then a kind of algorithmic proposal where we
+[0:09:52] where we we suggest applying
+[0:09:54] we suggest applying existing causal discovery algorithms
+[0:09:57] existing causal discovery algorithms in a kind of new way to try and learn
+[0:09:59] in a kind of new way to try and learn causal relationships between
+[0:10:01] causal relationships between uh interpretable features i'll go into
+[0:10:03] uh interpretable features i'll go into what that means and the outputs of these
+[0:10:06] what that means and the outputs of these black box decision
+[0:10:07] black box decision prediction algorithms
+[0:10:09] prediction algorithms i'll illustrate the idea with the
+[0:10:10] i'll illustrate the idea with the simulation experiment and then talk
+[0:10:12] simulation experiment and then talk about two applications to real data both
+[0:10:15] about two applications to real data both in the domain of image classification
+[0:10:18] in the domain of image classification one where we're classifying birds into
+[0:10:20] one where we're classifying birds into different kinds of species and one where
+[0:10:23] different kinds of species and one where we're classifying long x-rays
+[0:10:27] we're classifying long x-rays as to whether they have pneumonia
+[0:10:28] as to whether they have pneumonia exhibit pneumonia or not
+[0:10:31] exhibit pneumonia or not okay so what's an explanation so there
+[0:10:33] okay so what's an explanation so there are many there's a large literature now
+[0:10:36] are many there's a large literature now in
+[0:10:36] in machine learning and artificial
+[0:10:38] machine learning and artificial intelligence
+[0:10:39] intelligence that
+[0:10:40] that uh
+[0:10:41] uh that tries to tackle this problem of
+[0:10:43] that tries to tackle this problem of explanatory ai
+[0:10:44] explanatory ai and many approaches focus on one of two
+[0:10:47] and many approaches focus on one of two things
+[0:10:48] things one approximating complex algorithms by
+[0:10:52] one approximating complex algorithms by simple model classes for example taking
+[0:10:54] simple model classes for example taking a complex neural network or a random
+[0:10:56] a complex neural network or a random forest or something else
+[0:10:58] forest or something else and using uh sparse linear models to
+[0:11:01] and using uh sparse linear models to give you a good as a good uh or as good
+[0:11:04] give you a good as a good uh or as good as possible approximation to the complex
+[0:11:06] as possible approximation to the complex model class and this is kind of under
+[0:11:08] model class and this is kind of under the presupposition that
+[0:11:10] the presupposition that that sparse linear models aren't are
+[0:11:12] that sparse linear models aren't are naturally interpretable because we know
+[0:11:14] naturally interpretable because we know how much each term in the linear model
+[0:11:17] how much each term in the linear model contributes to the prediction outcome
+[0:11:19] contributes to the prediction outcome it's basically the regression
+[0:11:21] it's basically the regression coefficient
+[0:11:23] coefficient and then there's feature importance
+[0:11:24] and then there's feature importance methods which identify
+[0:11:26] methods which identify features or covariates i'm using
+[0:11:28] features or covariates i'm using features in the kind of machine learning
+[0:11:30] features in the kind of machine learning way but so just covariates highly
+[0:11:32] way but so just covariates highly associated with a particular algorithm
+[0:11:34] associated with a particular algorithm output
+[0:11:35] output um
+[0:11:36] um where that measure of association or
+[0:11:39] where that measure of association or measure of importance is based on say
+[0:11:42] measure of importance is based on say large regression coefficients in the
+[0:11:44] large regression coefficients in the context of one of these approximating
+[0:11:46] context of one of these approximating simple model classes or a large
+[0:11:49] simple model classes or a large perturbation gradient
+[0:11:51] perturbation gradient something which
+[0:11:53] something which is highly associated with the particular
+[0:11:56] is highly associated with the particular predicted class
+[0:11:58] predicted class and the example
+[0:11:59] and the example the image on the bottom half of the
+[0:12:01] the image on the bottom half of the slide is from a famous paper that
+[0:12:04] slide is from a famous paper that introduces the
+[0:12:05] introduces the lime algorithm for explainability
+[0:12:08] lime algorithm for explainability where the basic idea is for an input
+[0:12:11] where the basic idea is for an input image they're learning what are the sort
+[0:12:13] image they're learning what are the sort of important super pixels
+[0:12:16] of important super pixels uh in
+[0:12:17] uh in the in the image for for explaining why
+[0:12:21] the in the image for for explaining why the classifier predicted a particular
+[0:12:24] the classifier predicted a particular class so the most likely classes for
+[0:12:26] class so the most likely classes for this image according to some classifier
+[0:12:28] this image according to some classifier they discussed was electric guitar
+[0:12:30] they discussed was electric guitar acoustic guitar and labrador and if you
+[0:12:32] acoustic guitar and labrador and if you ask what made in some sense
+[0:12:35] ask what made in some sense what are the features most highly
+[0:12:37] what are the features most highly associated with the with the high
+[0:12:39] associated with the with the high probability of electric guitar and it
+[0:12:41] probability of electric guitar and it seems to highlight features that
+[0:12:43] seems to highlight features that surround the fretboard of the guitar
+[0:12:45] surround the fretboard of the guitar uh for acoustic guitar it seems to be
+[0:12:47] uh for acoustic guitar it seems to be something like the body and the bridge
+[0:12:49] something like the body and the bridge and for labrador it seems to be
+[0:12:50] and for labrador it seems to be something around the head
+[0:12:53] something around the head and so that's a very uh
+[0:12:56] and so that's a very uh compelling and intuitive approach to
+[0:12:58] compelling and intuitive approach to algorithmic explanation
+[0:13:00] algorithmic explanation um but one thing that i think has been
+[0:13:02] um but one thing that i think has been missing in this discussion
+[0:13:05] missing in this discussion is any sort of
+[0:13:06] is any sort of more systematic and philosophically
+[0:13:09] more systematic and philosophically grounded discussion of what it means to
+[0:13:12] grounded discussion of what it means to explain a phenomenon
+[0:13:14] explain a phenomenon and there's a long history of of
+[0:13:16] and there's a long history of of theorizing and writing about
+[0:13:19] theorizing and writing about explanation
+[0:13:21] explanation in the literature and philosophy and
+[0:13:23] in the literature and philosophy and philosophy of science which goes back
+[0:13:25] philosophy of science which goes back many decades really but just focusing in
+[0:13:28] many decades really but just focusing in on the 20th century
+[0:13:30] on the 20th century the role of causality in scientific
+[0:13:32] the role of causality in scientific explanation has become particularly
+[0:13:35] explanation has become particularly central
+[0:13:36] central so
+[0:13:37] so um
+[0:13:39] um what are philosophers of science doing
+[0:13:40] what are philosophers of science doing when they talk about explanation well
+[0:13:42] when they talk about explanation well they say you know they're interested in
+[0:13:44] they say you know they're interested in understanding the sort of logic or the
+[0:13:47] understanding the sort of logic or the rules behind underlying
+[0:13:51] rules behind underlying scientific explanation where theories
+[0:13:54] scientific explanation where theories for example theories in physics like
+[0:13:56] for example theories in physics like general relativity
+[0:13:58] general relativity or newtonian mechanics or
+[0:14:01] or newtonian mechanics or statistical mechanics how those kinds of
+[0:14:03] statistical mechanics how those kinds of theories relate to the phenomena which
+[0:14:06] theories relate to the phenomena which they purport to explain for example the
+[0:14:08] they purport to explain for example the motion of the planets or the motions of
+[0:14:12] motion of the planets or the motions of molecules in a gas
+[0:14:14] molecules in a gas and in the mid 20th century uh the sort
+[0:14:16] and in the mid 20th century uh the sort of standard model of explanation that
+[0:14:19] of standard model of explanation that was um commonly discussed in the
+[0:14:21] was um commonly discussed in the philosophical literature
+[0:14:23] philosophical literature uh most associated with the philosopher
+[0:14:25] uh most associated with the philosopher carl temple
+[0:14:27] carl temple was a kind of deductive model
+[0:14:29] was a kind of deductive model which says that
+[0:14:30] which says that an explanation is a kind of argument
+[0:14:33] an explanation is a kind of argument it's an argument which identifies
+[0:14:35] it's an argument which identifies premises and general laws
+[0:14:38] premises and general laws from which the target phenomenon the
+[0:14:40] from which the target phenomenon the thing that we're trying to explain
+[0:14:43] thing that we're trying to explain follows logically
+[0:14:45] follows logically so roughly what explains that the volume
+[0:14:47] so roughly what explains that the volume of this gas is y say some value you know
+[0:14:51] of this gas is y say some value you know uh two meters cubed um well if we write
+[0:14:54] uh two meters cubed um well if we write down the ideal gas law and some
+[0:14:57] down the ideal gas law and some observations about initial conditions
+[0:14:59] observations about initial conditions like temperature
+[0:15:00] like temperature and so forth then you can just derive
+[0:15:03] and so forth then you can just derive what the what the volume is expected to
+[0:15:05] what the what the volume is expected to be under those conditions using the
+[0:15:07] be under those conditions using the ideal gas law and using basic logic and
+[0:15:10] ideal gas law and using basic logic and that's what an explanation involves
+[0:15:12] that's what an explanation involves according to this kind of standard model
+[0:15:14] according to this kind of standard model schema
+[0:15:15] schema and there were various debates about the
+[0:15:18] and there were various debates about the schema things
+[0:15:20] schema things became a bit more complicated people
+[0:15:22] became a bit more complicated people introduced a kind of more statistical
+[0:15:24] introduced a kind of more statistical version where instead of using deductive
+[0:15:26] version where instead of using deductive logic to make the
+[0:15:28] logic to make the phenomenon guaranteed instead you might
+[0:15:30] phenomenon guaranteed instead you might think of a kind of statistical version
+[0:15:32] think of a kind of statistical version which makes the phenomenon only highly
+[0:15:34] which makes the phenomenon only highly probable so it says a high probability
+[0:15:36] probable so it says a high probability the volume of the gas will be this
+[0:15:39] the volume of the gas will be this but this came under fire from a variety
+[0:15:41] but this came under fire from a variety of different directions in the
+[0:15:42] of different directions in the philosophical literature
+[0:15:44] philosophical literature for example it doesn't seem to capture
+[0:15:46] for example it doesn't seem to capture this intuition that explanation
+[0:15:49] this intuition that explanation seems to be asymmetric in practice
+[0:15:51] seems to be asymmetric in practice so
+[0:15:53] so uh using the ideal gas law example the
+[0:15:55] uh using the ideal gas law example the ideal gas law and initial conditions
+[0:15:58] ideal gas law and initial conditions might explain why the volume of a gas
+[0:16:01] might explain why the volume of a gas is at a particular value but the reverse
+[0:16:04] is at a particular value but the reverse isn't true if i said the volume of the
+[0:16:06] isn't true if i said the volume of the gas is 2 meters cubed it does not
+[0:16:09] gas is 2 meters cubed it does not explain the ideal gas law and you can
+[0:16:12] explain the ideal gas law and you can think of less
+[0:16:13] think of less less sciency versions of this where
+[0:16:16] less sciency versions of this where for example you have a
+[0:16:18] for example you have a swinging pendulum on a clock and it's
+[0:16:20] swinging pendulum on a clock and it's well known that the length of the
+[0:16:22] well known that the length of the peltangelum explains the period of
+[0:16:24] peltangelum explains the period of motion of the swinging pendulum but the
+[0:16:26] motion of the swinging pendulum but the reverse isn't true so if i change the
+[0:16:28] reverse isn't true so if i change the length of the pendulum then the period
+[0:16:29] length of the pendulum then the period of motion will change but if i speed up
+[0:16:32] of motion will change but if i speed up the period of motion it's not going to
+[0:16:33] the period of motion it's not going to change the length of the pendulum this
+[0:16:35] change the length of the pendulum this kind of asymmetric nature to explanation
+[0:16:38] kind of asymmetric nature to explanation was a kind of a puzzle in this
+[0:16:40] was a kind of a puzzle in this literature
+[0:16:41] literature and also that the kind of deductive view
+[0:16:45] and also that the kind of deductive view and as well as the statistical view
+[0:16:47] and as well as the statistical view can't really distinguish between
+[0:16:48] can't really distinguish between so-called relevant and irrelevant
+[0:16:50] so-called relevant and irrelevant generalizations
+[0:16:52] generalizations for example
+[0:16:55] for example this idea that
+[0:16:56] this idea that some phenomena you can sort of insert in
+[0:16:59] some phenomena you can sort of insert in the course of a logical argument but
+[0:17:02] the course of a logical argument but doesn't really seem actually relevant in
+[0:17:04] doesn't really seem actually relevant in some sense to the
+[0:17:07] some sense to the phenomena being explained so i can add
+[0:17:10] phenomena being explained so i can add some additional irrelevant premises to
+[0:17:13] some additional irrelevant premises to my initial conditions about temperature
+[0:17:15] my initial conditions about temperature and so forth
+[0:17:17] and so forth and those won't make a difference for
+[0:17:18] and those won't make a difference for deriving the volume of the gas because
+[0:17:21] deriving the volume of the gas because all i really is temperature is sort of
+[0:17:23] all i really is temperature is sort of sufficient along with the ideal gas law
+[0:17:25] sufficient along with the ideal gas law to tell me about the
+[0:17:27] to tell me about the the volume uh well temperature and
+[0:17:29] the volume uh well temperature and pressure i guess
+[0:17:31] pressure i guess um so the response in the philosophical
+[0:17:34] um so the response in the philosophical literature was to move towards
+[0:17:36] literature was to move towards considering counter-factuals and
+[0:17:37] considering counter-factuals and causality and their role in explanation
+[0:17:40] causality and their role in explanation so uh there's a kind of influential view
+[0:17:43] so uh there's a kind of influential view that's best summarized by
+[0:17:45] that's best summarized by james woodward's book from 2003
+[0:17:48] james woodward's book from 2003 that
+[0:17:50] that presents a kind of counterfactual
+[0:17:52] presents a kind of counterfactual approach to causal explanation of
+[0:17:54] approach to causal explanation of phenomena in science
+[0:17:56] phenomena in science which roughly says that
+[0:17:59] which roughly says that x
+[0:18:01] x x helps explain some phenomenon y
+[0:18:04] x helps explain some phenomenon y if under suitable background conditions
+[0:18:06] if under suitable background conditions some intervention on x produces the
+[0:18:08] some intervention on x produces the change in the distribution of y
+[0:18:10] change in the distribution of y and this is a kind of
+[0:18:12] and this is a kind of counter factual
+[0:18:14] counter factual causally grounded
+[0:18:16] causally grounded approach to
+[0:18:18] approach to explanation of phenomena in very
+[0:18:20] explanation of phenomena in very disparate general domains including
+[0:18:22] disparate general domains including physics and biology and social sciences
+[0:18:26] physics and biology and social sciences the kind of slogan is that that
+[0:18:28] the kind of slogan is that that explanations answer what what would have
+[0:18:30] explanations answer what what would have been different questions to know
+[0:18:33] been different questions to know how to explain why i have to tell you
+[0:18:36] how to explain why i have to tell you what would have been different namely
+[0:18:38] what would have been different namely some element of x
+[0:18:39] some element of x uh to make a difference in the
+[0:18:41] uh to make a difference in the distribution of y
+[0:18:43] distribution of y and this approach to causal explanation
+[0:18:45] and this approach to causal explanation addresses many of the issues with
+[0:18:47] addresses many of the issues with non-causal attempts at explanation in
+[0:18:49] non-causal attempts at explanation in particular it does exhibit asymmetry in
+[0:18:52] particular it does exhibit asymmetry in the kind of right kind of way
+[0:18:55] the kind of right kind of way as a woodward would argue uh it also
+[0:18:57] as a woodward would argue uh it also does
+[0:18:58] does sort of seem to explain why some
+[0:19:01] sort of seem to explain why some features are irrelevant uh and some are
+[0:19:03] features are irrelevant uh and some are not based on this kind of counterfactual
+[0:19:06] not based on this kind of counterfactual dependence notion so that if if i add
+[0:19:08] dependence notion so that if if i add you if i add a premise which is not
+[0:19:10] you if i add a premise which is not counterfactually relevant to the
+[0:19:12] counterfactually relevant to the conclusion it doesn't figure in the
+[0:19:15] conclusion it doesn't figure in the explanation or it's not necessary for
+[0:19:17] explanation or it's not necessary for the explanation at least
+[0:19:19] the explanation at least and moreover this approach to
+[0:19:21] and moreover this approach to explanation has cleared connections to
+[0:19:23] explanation has cleared connections to causal modeling
+[0:19:24] causal modeling in
+[0:19:25] in statistics and computer science as we do
+[0:19:28] statistics and computer science as we do it here
+[0:19:29] it here and i should note the footnote says that
+[0:19:32] and i should note the footnote says that in this discussion and is often the case
+[0:19:34] in this discussion and is often the case in
+[0:19:35] in in this philosophical literature we're
+[0:19:38] in this philosophical literature we're going to focus on what's what are called
+[0:19:39] going to focus on what's what are called type level not token level explanations
+[0:19:42] type level not token level explanations so we're explaining the distribution of
+[0:19:43] so we're explaining the distribution of some random variable y that's the
+[0:19:46] some random variable y that's the phenomenon
+[0:19:47] phenomenon rather than in a particular event that
+[0:19:50] rather than in a particular event that the variable y takes on a value little y
+[0:19:53] the variable y takes on a value little y so the kind of
+[0:19:58] the standard example is that we want to explain
+[0:20:02] is that we want to explain that cancer causes smoking
+[0:20:04] that cancer causes smoking at the type level not that my cancer
+[0:20:07] at the type level not that my cancer causes my smoking
+[0:20:09] causes my smoking which is like kind of event level or
+[0:20:11] which is like kind of event level or token level phenomenon
+[0:20:14] token level phenomenon so what's our setup um in this kind of
+[0:20:17] so what's our setup um in this kind of machine learning
+[0:20:18] machine learning uh
+[0:20:19] uh explainable ai setting
+[0:20:21] explainable ai setting we assume that
+[0:20:24] we assume that we have
+[0:20:25] we have some collection of low level input
+[0:20:27] some collection of low level input features x so x is a vector
+[0:20:31] features x so x is a vector of low level features for example image
+[0:20:33] of low level features for example image pixels if you're doing image analysis or
+[0:20:36] pixels if you're doing image analysis or maybe
+[0:20:37] maybe words if you're doing textual analysis
+[0:20:41] words if you're doing textual analysis and this is supposed to be probably high
+[0:20:42] and this is supposed to be probably high dimensional
+[0:20:44] dimensional um we have an outcome y taking values
+[0:20:47] um we have an outcome y taking values and some predefined space script y and
+[0:20:49] and some predefined space script y and we have an algorithm whatever that might
+[0:20:51] we have an algorithm whatever that might be which learns a map f
+[0:20:54] be which learns a map f from the state space of x this
+[0:20:57] from the state space of x this complicated high dimensional space to
+[0:20:59] complicated high dimensional space to the output space y so f is a function
+[0:21:02] the output space y so f is a function which might be you know a neural network
+[0:21:05] which might be you know a neural network parameterized by a billion parameters or
+[0:21:07] parameterized by a billion parameters or it might be something simpler like a
+[0:21:09] it might be something simpler like a random forest or linear regression or
+[0:21:11] random forest or linear regression or whatever it might be
+[0:21:13] whatever it might be which predicts the value y and we'll say
+[0:21:15] which predicts the value y and we'll say the predicted value is called y hat
+[0:21:17] the predicted value is called y hat that's the sort of standard machine
+[0:21:19] that's the sort of standard machine learning paradigm right
+[0:21:21] learning paradigm right um high level features is something we
+[0:21:23] um high level features is something we introduce as the sort of locus of
+[0:21:26] introduce as the sort of locus of explanation so we're not interested in
+[0:21:29] explanation so we're not interested in the causal
+[0:21:31] the causal relation the causal determination of
+[0:21:33] relation the causal determination of these low-level individual
+[0:21:36] these low-level individual input pixels
+[0:21:37] input pixels but we're interested in how something
+[0:21:39] but we're interested in how something which
+[0:21:40] which is more at a
+[0:21:43] is more at a human understandable and potentially
+[0:21:45] human understandable and potentially manipulable level of abstraction
+[0:21:48] manipulable level of abstraction so for example and
+[0:21:50] so for example and we'll denote those kinds of features by
+[0:21:51] we'll denote those kinds of features by z as an example uh it means this bird
+[0:21:55] z as an example uh it means this bird classification experiment i'll talk
+[0:21:57] classification experiment i'll talk about later if you have an image of a
+[0:21:59] about later if you have an image of a bird
+[0:22:00] bird um
+[0:22:00] um x
+[0:22:01] x consists of the raw pixels you know 256
+[0:22:04] consists of the raw pixels you know 256 by 256 raw pixels or something like that
+[0:22:08] by 256 raw pixels or something like that and the high level features correspond
+[0:22:10] and the high level features correspond to
+[0:22:11] to sort of
+[0:22:13] sort of interpretable
+[0:22:14] interpretable ornithological features that
+[0:22:17] ornithological features that we might hope our
+[0:22:19] we might hope our our prediction algorithm is under the
+[0:22:21] our prediction algorithm is under the hood paying attention to for example the
+[0:22:23] hood paying attention to for example the wing pattern the color of the belly the
+[0:22:26] wing pattern the color of the belly the size of the beak or the shape of the
+[0:22:28] size of the beak or the shape of the beak or the shape of the head or so
+[0:22:30] beak or the shape of the head or so forth
+[0:22:31] forth so those are um
+[0:22:34] so those are um kind of
+[0:22:36] kind of not directly used in the black box
+[0:22:39] not directly used in the black box prediction algorithm
+[0:22:40] prediction algorithm so f learns on the pixels x
+[0:22:43] so f learns on the pixels x but we hope that it's tracking
+[0:22:46] but we hope that it's tracking if it's a good algorithm it's tracking
+[0:22:48] if it's a good algorithm it's tracking something that's relevant about the you
+[0:22:50] something that's relevant about the you know
+[0:22:51] know anatomy of birds and what distinguishes
+[0:22:53] anatomy of birds and what distinguishes one bird from another like things like
+[0:22:55] one bird from another like things like these interpretable features build
+[0:22:57] these interpretable features build length build shape and so forth
+[0:22:59] length build shape and so forth um and or for example
+[0:23:02] um and or for example in the
+[0:23:03] in the x-ray data set that i'll talk about
+[0:23:04] x-ray data set that i'll talk about later the raw pixel the raw features x
+[0:23:07] later the raw pixel the raw features x the low-level features consist in
+[0:23:10] the low-level features consist in the pixels of the x-ray
+[0:23:14] the pixels of the x-ray and the high-level features correspond
+[0:23:16] and the high-level features correspond to
+[0:23:17] to radio
+[0:23:19] radio radiologists labels about what's
+[0:23:22] radiologists labels about what's exhibited in the x-ray for example
+[0:23:24] exhibited in the x-ray for example whether there's diffusion or
+[0:23:25] whether there's diffusion or pneumothorax exhibited in the x-ray
+[0:23:28] pneumothorax exhibited in the x-ray which are particular
+[0:23:30] which are particular lung
+[0:23:31] lung ailments or conditions that might be
+[0:23:33] ailments or conditions that might be visible on a chest x-ray
+[0:23:36] visible on a chest x-ray and our interest here then is to
+[0:23:38] and our interest here then is to understand which of these high level
+[0:23:40] understand which of these high level features if any
+[0:23:42] features if any are
+[0:23:43] are causally relevant to the
+[0:23:46] causally relevant to the output of the prediction algorithm y hat
+[0:23:50] output of the prediction algorithm y hat so
+[0:23:51] so um
+[0:23:52] um that's the question which elements of z
+[0:23:54] that's the question which elements of z if any are causes of y hat and we
+[0:23:57] if any are causes of y hat and we propose to answer this question by
+[0:23:58] propose to answer this question by learning a graphical representation over
+[0:24:01] learning a graphical representation over this set of variables z
+[0:24:03] this set of variables z c one through
+[0:24:05] c one through uh z uh p
+[0:24:07] uh z uh p and y hat allowing for arbitrary
+[0:24:10] and y hat allowing for arbitrary unmeasured confounders between
+[0:24:12] unmeasured confounders between uh among these variables
+[0:24:14] uh among these variables and the reason for that this is quite
+[0:24:16] and the reason for that this is quite important is that it's entirely possible
+[0:24:18] important is that it's entirely possible that some element of z
+[0:24:21] that some element of z some elements of z say z i
+[0:24:23] some elements of z say z i will be associated with the output of
+[0:24:26] will be associated with the output of the algorithm y hat
+[0:24:28] the algorithm y hat due to something that's latent a latent
+[0:24:30] due to something that's latent a latent common cause or latent confounder
+[0:24:32] common cause or latent confounder between z i and y hat namely that
+[0:24:37] between z i and y hat namely that it might be that certain features say
+[0:24:40] it might be that certain features say the
+[0:24:41] the wing shape of the bird are not really
+[0:24:44] wing shape of the bird are not really causally efficacious in in the in
+[0:24:49] causally efficacious in in the in internal representation of the black box
+[0:24:51] internal representation of the black box prediction algorithm
+[0:24:53] prediction algorithm but that they that they're simply
+[0:24:55] but that they that they're simply associated with something else that is
+[0:24:57] associated with something else that is the causally relevant variable
+[0:25:00] the causally relevant variable and
+[0:25:01] and moreover we know that in practice we'll
+[0:25:03] moreover we know that in practice we'll never have
+[0:25:05] never have a
+[0:25:06] a completely rich set of high-level
+[0:25:08] completely rich set of high-level features so in the data that we actually
+[0:25:11] features so in the data that we actually have on say in this bird classification
+[0:25:13] have on say in this bird classification experiment we have a bunch of
+[0:25:15] experiment we have a bunch of high level features that come along with
+[0:25:17] high level features that come along with the data
+[0:25:18] the data i think there was 20 29 of them or so
+[0:25:23] but
+[0:25:28] not everything that may be relevant is in fact labeled as a high-level feature
+[0:25:30] in fact labeled as a high-level feature and so there might be some relevant but
+[0:25:32] and so there might be some relevant but uh unrecorded variables that are are
+[0:25:35] uh unrecorded variables that are are acting as confounders here
+[0:25:37] acting as confounders here so so the approach then is going to rely
+[0:25:41] so so the approach then is going to rely on learning um
+[0:25:44] on learning um learning a graphical representation
+[0:25:46] learning a graphical representation i'm going to assume that the audience
+[0:25:48] i'm going to assume that the audience here is at least familiar with the basic
+[0:25:51] here is at least familiar with the basic idea behind directed acyclic graphs or
+[0:25:53] idea behind directed acyclic graphs or dags as causal representations among
+[0:25:56] dags as causal representations among some multivariate system
+[0:25:58] some multivariate system um
+[0:25:59] um but because we are worried about the
+[0:26:01] but because we are worried about the possibility of
+[0:26:03] possibility of measured confounders or relate variables
+[0:26:06] measured confounders or relate variables we're going to have to use a somewhat
+[0:26:08] we're going to have to use a somewhat more complicated representational scheme
+[0:26:11] more complicated representational scheme called a pag or a partial ancestral
+[0:26:13] called a pag or a partial ancestral graph and very roughly the way this
+[0:26:15] graph and very roughly the way this works is that if you um start with some
+[0:26:18] works is that if you um start with some sort of ground truth directed a cyclic
+[0:26:20] sort of ground truth directed a cyclic graph like the one at the top of the
+[0:26:21] graph like the one at the top of the slide
+[0:26:22] slide um but you you stipulate that some of
+[0:26:25] um but you you stipulate that some of the variables are unobserved for example
+[0:26:27] the variables are unobserved for example u1 and u2 are unobserved
+[0:26:30] u1 and u2 are unobserved uh in the data or they're latent
+[0:26:34] uh in the data or they're latent then we can define the latent project a
+[0:26:35] then we can define the latent project a latent projection
+[0:26:37] latent projection uh mixed graph mixed because it has both
+[0:26:40] uh mixed graph mixed because it has both directed and bi-directed edges
+[0:26:43] directed and bi-directed edges that captures all the conditional
+[0:26:45] that captures all the conditional independence relationships among the
+[0:26:47] independence relationships among the observed
+[0:26:48] observed variables in the dag
+[0:26:50] variables in the dag and these where these double-headed
+[0:26:52] and these where these double-headed arrows correspond to
+[0:26:54] arrows correspond to uh what they mean is that z2 is not a
+[0:26:57] uh what they mean is that z2 is not a cause of z3 and z3 is not a cause of z2
+[0:27:00] cause of z3 and z3 is not a cause of z2 but rather they're some unmeasured
+[0:27:02] but rather they're some unmeasured common cause
+[0:27:04] common cause which explains their association in this
+[0:27:06] which explains their association in this case u1 in the ground truth so
+[0:27:10] case u1 in the ground truth so um the kind of domain that we're
+[0:27:12] um the kind of domain that we're interested in is not the domain not the
+[0:27:14] interested in is not the domain not the class of all directed acyclic graphs but
+[0:27:16] class of all directed acyclic graphs but the class of
+[0:27:17] the class of these latent projection models with
+[0:27:19] these latent projection models with bi-directed edges
+[0:27:21] bi-directed edges and then we have to make a
+[0:27:23] and then we have to make a a second kind of
+[0:27:25] a second kind of uh conceptual step to equivalence
+[0:27:28] uh conceptual step to equivalence classes of these of these objects so
+[0:27:30] classes of these of these objects so it's sort of well known in the space of
+[0:27:32] it's sort of well known in the space of dags that dags are not uniquely
+[0:27:34] dags that dags are not uniquely identifiable from conditional
+[0:27:36] identifiable from conditional independence information alone
+[0:27:38] independence information alone usually you can only learn what's called
+[0:27:40] usually you can only learn what's called an equivalence class of dags a cp dag a
+[0:27:43] an equivalence class of dags a cp dag a completed partial dag
+[0:27:45] completed partial dag and the same is true in the world of of
+[0:27:48] and the same is true in the world of of these latent projection graphs i should
+[0:27:50] these latent projection graphs i should say they're called mags because it
+[0:27:51] say they're called mags because it stands for maximal ancestral graph i'm
+[0:27:54] stands for maximal ancestral graph i'm not going to go through the definitions
+[0:27:55] not going to go through the definitions very formally but i have some appendix
+[0:27:57] very formally but i have some appendix slides at the end of these slides which
+[0:27:59] slides at the end of these slides which have the definitions
+[0:28:01] have the definitions an equivalence class of maximal
+[0:28:02] an equivalence class of maximal ancestral graphs is called a partial
+[0:28:05] ancestral graphs is called a partial ancestor graph or a tag
+[0:28:07] ancestor graph or a tag which has potentially these bi-directed
+[0:28:10] which has potentially these bi-directed edges
+[0:28:11] edges as well as circle marks to indicate uh
+[0:28:14] as well as circle marks to indicate uh uncertainty or ambiguity about some of
+[0:28:17] uncertainty or ambiguity about some of the directionality so when you see a
+[0:28:19] the directionality so when you see a circle what that denotes is that
+[0:28:22] circle what that denotes is that um
+[0:28:24] um that there's uncertainty about whether
+[0:28:26] that there's uncertainty about whether there is a another arrowhead at the
+[0:28:28] there is a another arrowhead at the place of that circle or a tail
+[0:28:30] place of that circle or a tail so whether this is a directed edge from
+[0:28:32] so whether this is a directed edge from z4 to z3 or a bi-directed edge
+[0:28:36] z4 to z3 or a bi-directed edge that indicates latent confounding so
+[0:28:39] that indicates latent confounding so some some edges might be
+[0:28:41] some some edges might be uniquely identified as directed or
+[0:28:43] uniquely identified as directed or bi-directed and some will only be
+[0:28:45] bi-directed and some will only be partially identified
+[0:28:47] partially identified and have these circles in them
+[0:28:50] and have these circles in them so um
+[0:28:52] so um we're going to propose to learn a pad
+[0:28:55] we're going to propose to learn a pad representation from among
+[0:28:57] representation from among over these variables z and y hat as i
+[0:28:59] over these variables z and y hat as i said earlier the peg will contain
+[0:29:03] said earlier the peg will contain a variety of possible edges including
+[0:29:05] a variety of possible edges including directed edges to indicate a causal
+[0:29:08] directed edges to indicate a causal relationship bi-directed edges to
+[0:29:10] relationship bi-directed edges to indicate a non-causal confounded
+[0:29:13] indicate a non-causal confounded relationship and then partially directed
+[0:29:15] relationship and then partially directed edges in circles to indicate uncertainty
+[0:29:18] edges in circles to indicate uncertainty about exactly what's going on so if x
+[0:29:20] about exactly what's going on so if x circle y it may be directed or it may be
+[0:29:23] circle y it may be directed or it may be bi-directed and if x circle circle y
+[0:29:26] bi-directed and if x circle circle y then it could kind of go in either
+[0:29:28] then it could kind of go in either direction or be bi-directed
+[0:29:31] direction or be bi-directed uh then yes just a reminder there's a
+[0:29:34] uh then yes just a reminder there's a about a bit less than 15 minutes left
+[0:29:37] about a bit less than 15 minutes left okay i'll speed up so i don't have time
+[0:29:39] okay i'll speed up so i don't have time to go into how the fci procedure works
+[0:29:42] to go into how the fci procedure works here
+[0:29:43] here i do have some appendix slides at the
+[0:29:44] i do have some appendix slides at the end but if you're very roughly familiar
+[0:29:46] end but if you're very roughly familiar with the pc algorithm the fci which
+[0:29:49] with the pc algorithm the fci which stands for fast causal inference was a
+[0:29:51] stands for fast causal inference was a procedure proposed by
+[0:29:53] procedure proposed by peter spurdies and his collaborators
+[0:29:55] peter spurdies and his collaborators back in the 90s and then kind of
+[0:29:58] back in the 90s and then kind of developed in the years following
+[0:30:01] developed in the years following which is a constraint based procedure
+[0:30:03] which is a constraint based procedure that involves a sequence of conditional
+[0:30:05] that involves a sequence of conditional independence tests
+[0:30:06] independence tests orientations of arrows based on the
+[0:30:08] orientations of arrows based on the so-called collider rule
+[0:30:10] so-called collider rule and
+[0:30:11] and additional orientations basically follow
+[0:30:13] additional orientations basically follow from the acyclicity assumption of the
+[0:30:16] from the acyclicity assumption of the underlying dag
+[0:30:18] underlying dag so our approach then is ultimately
+[0:30:20] so our approach then is ultimately assuming that y hat is some complicated
+[0:30:23] assuming that y hat is some complicated function
+[0:30:24] function of
+[0:30:25] of of x but we're approximating that
+[0:30:29] of x but we're approximating that complicated function by a kind of
+[0:30:31] complicated function by a kind of structural causal model in terms of
+[0:30:32] structural causal model in terms of these high level features
+[0:30:35] these high level features z tilde
+[0:30:37] z tilde uh instead of x we know that this is the
+[0:30:39] uh instead of x we know that this is the truth but this is sort of what we're
+[0:30:41] truth but this is sort of what we're approximating the truth with and that
+[0:30:44] approximating the truth with and that the z's themselves are complicated
+[0:30:46] the z's themselves are complicated functions of the underlying pixels or
+[0:30:48] functions of the underlying pixels or underlying low-level features and
+[0:30:50] underlying low-level features and finally that we only observe
+[0:30:52] finally that we only observe a subset z of the full
+[0:30:55] a subset z of the full level of the full range of of high level
+[0:30:58] level of the full range of of high level features
+[0:31:00] features what this means in practice is that
+[0:31:02] what this means in practice is that we're saying that the variables
+[0:31:05] we're saying that the variables z tilde and y hat will will be assumed
+[0:31:08] z tilde and y hat will will be assumed to satisfy markov and faithfulness
+[0:31:10] to satisfy markov and faithfulness conditions with respect to a dag
+[0:31:12] conditions with respect to a dag and where in y hat the output of the
+[0:31:15] and where in y hat the output of the prediction algorithm is known to be a
+[0:31:17] prediction algorithm is known to be a non-ancestor
+[0:31:18] non-ancestor of any of the low level of any of the
+[0:31:21] of any of the low level of any of the high-level features the high-level
+[0:31:22] high-level features the high-level features can say can tell you the
+[0:31:25] features can say can tell you the teleprediction algorithm what to do but
+[0:31:27] teleprediction algorithm what to do but the prediction doesn't change anything
+[0:31:29] the prediction doesn't change anything about
+[0:31:30] about the high-level features themselves
+[0:31:33] the high-level features themselves so kind of illustrative simulation which
+[0:31:34] so kind of illustrative simulation which i think is uh important for
+[0:31:36] i think is uh important for understanding how this works
+[0:31:38] understanding how this works um
+[0:31:39] um we generated our numeric generated 5000
+[0:31:43] we generated our numeric generated 5000 two-dimensional black and white images
+[0:31:45] two-dimensional black and white images containing several possible shapes as
+[0:31:47] containing several possible shapes as well as noise so these black and white
+[0:31:50] well as noise so these black and white images
+[0:31:51] images contain
+[0:31:52] contain vertical bars horizontal bars circles
+[0:31:55] vertical bars horizontal bars circles and rectangles
+[0:31:57] and rectangles located at various places in the in the
+[0:32:00] located at various places in the in the 2d field
+[0:32:02] 2d field and
+[0:32:03] and as a simulation we can label each output
+[0:32:06] as a simulation we can label each output image with a binary label one or zero
+[0:32:09] image with a binary label one or zero this kind of um is meant to
+[0:32:12] this kind of um is meant to to approximate some sort of setting
+[0:32:14] to approximate some sort of setting where some behavior is being predicted
+[0:32:16] where some behavior is being predicted on the basis of the image say you know
+[0:32:19] on the basis of the image say you know whether it has cancer doesn't have
+[0:32:21] whether it has cancer doesn't have cancer whether it has pneumonia or does
+[0:32:22] cancer whether it has pneumonia or does not have pneumonia based on something
+[0:32:25] not have pneumonia based on something about the shapes inside the images
+[0:32:27] about the shapes inside the images and because so we generated those images
+[0:32:29] and because so we generated those images according to a a kind of known uh
+[0:32:34] according to a a kind of known uh structural causal model or a directed
+[0:32:36] structural causal model or a directed acyclic graph that's depicted below
+[0:32:38] acyclic graph that's depicted below where uh in truth we we design it such
+[0:32:41] where uh in truth we we design it such that vertical bars and circles are the
+[0:32:44] that vertical bars and circles are the ones that are causally efficacious for
+[0:32:46] ones that are causally efficacious for the outcome label y
+[0:32:49] the outcome label y but the other variables are in various
+[0:32:52] but the other variables are in various ways associated just not causally
+[0:32:54] ways associated just not causally relevant so horizontal bars and vertical
+[0:32:56] relevant so horizontal bars and vertical bars are associated
+[0:33:00] bars are associated and rectangles are so are are more
+[0:33:03] and rectangles are so are are more likely if you have horizontal bars in
+[0:33:05] likely if you have horizontal bars in the image
+[0:33:07] the image rectangles and the output are associated
+[0:33:09] rectangles and the output are associated through an uh this confounding variable
+[0:33:12] through an uh this confounding variable which is the presence of circles and so
+[0:33:14] which is the presence of circles and so forth and so the question is can we try
+[0:33:15] forth and so the question is can we try and disentangle what's important from
+[0:33:18] and disentangle what's important from this data if we train
+[0:33:20] this data if we train a kind of standard deep convolutional
+[0:33:23] a kind of standard deep convolutional neural network on the raw image pixels
+[0:33:25] neural network on the raw image pixels to predict why here we use the resnet 18
+[0:33:33] framework and pie torch achieve relatively good accuracy and
+[0:33:36] achieve relatively good accuracy and then we try and learn the causes of the
+[0:33:38] then we try and learn the causes of the prediction of that neural network y hat
+[0:33:41] prediction of that neural network y hat even if we've excluded some important
+[0:33:42] even if we've excluded some important feature for example we exclude c
+[0:33:46] feature for example we exclude c so the
+[0:33:48] so the fti algorithm then is used to estimate a
+[0:33:50] fti algorithm then is used to estimate a pag over this smaller set of variables
+[0:33:54] pag over this smaller set of variables horizontal bars vertical bars rectangles
+[0:33:56] horizontal bars vertical bars rectangles and the prediction of the neural network
+[0:33:58] and the prediction of the neural network itself so if we have the
+[0:34:00] itself so if we have the ground truth on the left well our
+[0:34:03] ground truth on the left well our algorith what our fci procedure will
+[0:34:05] algorith what our fci procedure will learn given sufficient data is this
+[0:34:08] learn given sufficient data is this procedure is this a pag representation
+[0:34:11] procedure is this a pag representation on the right which correctly indicates
+[0:34:14] on the right which correctly indicates that r
+[0:34:15] that r is not a cause of
+[0:34:18] is not a cause of of the true label and not an or the
+[0:34:20] of the true label and not an or the predicted label y hat but rather is
+[0:34:23] predicted label y hat but rather is associated due to some unmeasured
+[0:34:26] associated due to some unmeasured underlying
+[0:34:27] underlying confounding
+[0:34:28] confounding uh feature
+[0:34:30] uh feature but
+[0:34:31] but but that v vertical bars
+[0:34:34] but that v vertical bars is possibly a
+[0:34:36] is possibly a cause of the output of the prediction
+[0:34:38] cause of the output of the prediction algorithm it can't it does not orient
+[0:34:40] algorithm it can't it does not orient some of these edges entirely so it will
+[0:34:42] some of these edges entirely so it will be uncertain about some of the
+[0:34:43] be uncertain about some of the relationships in the end but it sort of
+[0:34:45] relationships in the end but it sort of tells us intuitively correct uh like if
+[0:34:49] tells us intuitively correct uh like if under the assumption that our neural
+[0:34:50] under the assumption that our neural network really is learning
+[0:34:53] network really is learning correctly what's going on here
+[0:34:55] correctly what's going on here then it should our fci procedure
+[0:34:58] then it should our fci procedure correctly
+[0:35:00] correctly uh recovers the fact that some variables
+[0:35:03] uh recovers the fact that some variables are clearly not causally
+[0:35:05] are clearly not causally important they're not causal ancestors
+[0:35:07] important they're not causal ancestors of the
+[0:35:08] of the prediction behavior and some
+[0:35:11] prediction behavior and some are or at least possibly are
+[0:35:14] are or at least possibly are so let me pause here for questions
+[0:35:15] so let me pause here for questions before going into the real
+[0:35:18] before going into the real data examples
+[0:35:27] okay great so there is so mayor just answered the question in the q a but
+[0:35:29] answered the question in the q a but there is there's two other questions in
+[0:35:31] there is there's two other questions in the q a at the moment so the first one
+[0:35:34] the q a at the moment so the first one is from vanessa
+[0:35:36] is from vanessa can you elaborate what confounding in
+[0:35:39] can you elaborate what confounding in the context of an algorithm means as
+[0:35:41] the context of an algorithm means as opposed to confounding in the context of
+[0:35:43] opposed to confounding in the context of the underlying phenomenon that the
+[0:35:45] the underlying phenomenon that the algorithm is trying to describe
+[0:35:49] algorithm is trying to describe yes great okay good question so
+[0:35:52] yes great okay good question so um
+[0:35:53] um in this case we're interested in
+[0:35:55] in this case we're interested in confounders for the uh
+[0:36:03] so not all of the
+[0:36:05] not all of the [Music]
+[0:36:08] [Music] um
+[0:36:10] um high-level features which are in fact
+[0:36:12] high-level features which are in fact relevant to the prediction algorithm the
+[0:36:15] relevant to the prediction algorithm the behavior the outputs of the prediction
+[0:36:17] behavior the outputs of the prediction algorithm are necessarily measured right
+[0:36:18] algorithm are necessarily measured right so it might be that the internal
+[0:36:20] so it might be that the internal representation of the neural network
+[0:36:23] representation of the neural network uh looks at the size of the bird's beak
+[0:36:26] uh looks at the size of the bird's beak and the shape of the bird's head and the
+[0:36:29] and the shape of the bird's head and the color of the bird's throat but we don't
+[0:36:31] color of the bird's throat but we don't actually have the color of the bird's
+[0:36:32] actually have the color of the bird's throat
+[0:36:34] throat directly measured in our
+[0:36:37] directly measured in our in our
+[0:36:38] in our set of high-level features and so some
+[0:36:41] set of high-level features and so some other feature which is maybe correlated
+[0:36:43] other feature which is maybe correlated with the color of the bird's throat say
+[0:36:47] with the color of the bird's throat say i don't know
+[0:36:48] i don't know sparrows more likely to have uh bright
+[0:36:51] sparrows more likely to have uh bright colored throats i don't think that's
+[0:36:52] colored throats i don't think that's true but say we're true that some other
+[0:36:54] true but say we're true that some other feature of the some some other features
+[0:36:56] feature of the some some other features of the bird like its size are correlated
+[0:36:59] of the bird like its size are correlated with the color of the bird's throat then
+[0:37:02] with the color of the bird's throat then size will look like it's associated with
+[0:37:04] size will look like it's associated with the output of the prediction algorithm
+[0:37:06] the output of the prediction algorithm even though that's not really what's
+[0:37:07] even though that's not really what's being used in the internal
+[0:37:09] being used in the internal representation
+[0:37:10] representation of the neural network to make any
+[0:37:12] of the neural network to make any classification decisions so we're sort
+[0:37:15] classification decisions so we're sort of trying to we have this kind of mental
+[0:37:17] of trying to we have this kind of mental model of the neural network that
+[0:37:19] model of the neural network that internally it's it's not looking at
+[0:37:21] internally it's it's not looking at everything at once it's looking at
+[0:37:23] everything at once it's looking at localized or perhaps non-localized
+[0:37:26] localized or perhaps non-localized spread out
+[0:37:27] spread out but lower dimensional representations of
+[0:37:30] but lower dimensional representations of the big pixel space
+[0:37:32] the big pixel space and those lower dimensional
+[0:37:33] and those lower dimensional representations map on to things we hope
+[0:37:35] representations map on to things we hope like uh beak shape and throat color and
+[0:37:38] like uh beak shape and throat color and so forth and the idea is that we don't
+[0:37:41] so forth and the idea is that we don't have access to all of those things we
+[0:37:42] have access to all of those things we don't know what they are
+[0:37:44] don't know what they are a priori we just have access to whatever
+[0:37:46] a priori we just have access to whatever high level features
+[0:37:48] high level features we can come up with um and so there will
+[0:37:51] we can come up with um and so there will be potentially unmeasured confounding
+[0:37:54] be potentially unmeasured confounding between what's actually making a
+[0:37:56] between what's actually making a difference to the
+[0:37:58] difference to the the algorithm's output prediction
+[0:38:06] all right great um so maybe then you can go on for
+[0:38:08] go on for for some more minutes and since there's
+[0:38:09] for some more minutes and since there's quite a lot of things to cover so but uh
+[0:38:12] quite a lot of things to cover so but uh there's more questions later okay sure
+[0:38:14] there's more questions later okay sure sure so the main the the main sort of
+[0:38:18] sure so the main the the main sort of the
+[0:38:18] the last the remaining part of this project
+[0:38:20] last the remaining part of this project is the empirical part where we so it's
+[0:38:22] is the empirical part where we so it's nice to see that things make sense to us
+[0:38:25] nice to see that things make sense to us uh using a simulated data set but in the
+[0:38:27] uh using a simulated data set but in the real data how does this thing work out
+[0:38:30] real data how does this thing work out and the idea is that um
+[0:38:33] and the idea is that um so so in the first data set we're using
+[0:38:35] so so in the first data set we're using data from this caltech ucsd bird
+[0:38:38] data from this caltech ucsd bird classification image data set
+[0:38:40] classification image data set which is a large collection of
+[0:38:43] which is a large collection of photographs of birds and different
+[0:38:45] photographs of birds and different settings
+[0:38:46] settings um with
+[0:38:48] um with 200 categories of bird labels and 312
+[0:38:51] 200 categories of bird labels and 312 binary attributes that were
+[0:38:54] binary attributes that were associated with each image
+[0:38:57] associated with each image or potentially associated with each
+[0:38:58] or potentially associated with each image binary attributes like you know
+[0:39:01] image binary attributes like you know does it have a red
+[0:39:02] does it have a red belly or a yellow belly or and so forth
+[0:39:06] belly or a yellow belly or and so forth um after processing things to make the
+[0:39:09] um after processing things to make the problem a bit more compact we ended up
+[0:39:12] problem a bit more compact we ended up using more than 3 000 images
+[0:39:15] using more than 3 000 images 26 ordinal attributes so we classify say
+[0:39:19] 26 ordinal attributes so we classify say you know color into four or five
+[0:39:22] you know color into four or five different categories like
+[0:39:23] different categories like uh and back pattern into different
+[0:39:26] uh and back pattern into different categories like is it striped is it
+[0:39:27] categories like is it striped is it solid is it um checkered or whatever
+[0:39:31] solid is it um checkered or whatever and an outcome label with
+[0:39:33] and an outcome label with only nine categories instead of the 200
+[0:39:36] only nine categories instead of the 200 categories of birds so we group together
+[0:39:38] categories of birds so we group together sparrows and different kinds of seagulls
+[0:39:40] sparrows and different kinds of seagulls and different kinds of birds of prey for
+[0:39:43] and different kinds of birds of prey for example
+[0:39:44] example and
+[0:39:45] and train our
+[0:39:47] train our resnet
+[0:39:48] resnet convolutional neural network
+[0:39:50] convolutional neural network architecture on the raw bird
+[0:39:54] architecture on the raw bird images so just using the pixels x not
+[0:39:57] images so just using the pixels x not using any of the high dimensional
+[0:39:59] using any of the high dimensional features directly
+[0:40:01] features directly and uh and then try and reconstruct the
+[0:40:04] and uh and then try and reconstruct the pag representation of of
+[0:40:07] pag representation of of of
+[0:40:07] of that
+[0:40:09] that prediction algorithm using the high
+[0:40:10] prediction algorithm using the high level features
+[0:40:12] level features and there's a kind of technical point
+[0:40:13] and there's a kind of technical point here which is that
+[0:40:15] here which is that [Music]
+[0:40:16] [Music] constraint-based algorithms can be
+[0:40:18] constraint-based algorithms can be somewhat unstable to perturbations of
+[0:40:20] somewhat unstable to perturbations of the data so because you're doing a
+[0:40:22] the data so because you're doing a sequence of many conditional
+[0:40:23] sequence of many conditional independence tests uh conditional
+[0:40:26] independence tests uh conditional independence tests may uh falsely reject
+[0:40:28] independence tests may uh falsely reject the null hypothesis
+[0:40:30] the null hypothesis uh at various frequencies depending on
+[0:40:32] uh at various frequencies depending on your sample size and so it's often
+[0:40:36] your sample size and so it's often it's common in the applied literature to
+[0:40:38] it's common in the applied literature to quantify
+[0:40:39] quantify um to sort of aggregate the
+[0:40:42] um to sort of aggregate the the learned graph over multiple
+[0:40:44] the learned graph over multiple different sub samples of the data to
+[0:40:46] different sub samples of the data to make sure that whatever edges you do
+[0:40:48] make sure that whatever edges you do learn are sort of stably there across
+[0:40:50] learn are sort of stably there across subsamples so we're going to report
+[0:40:53] subsamples so we're going to report basically the frequency of across
+[0:40:56] basically the frequency of across subsamples how often do we get that a
+[0:40:58] subsamples how often do we get that a particular feature is a cause or
+[0:41:00] particular feature is a cause or possible cause of the output
+[0:41:02] possible cause of the output of the prediction algorithm and we'll
+[0:41:04] of the prediction algorithm and we'll call this edge stability and for the
+[0:41:07] call this edge stability and for the bird classification experiment we see
+[0:41:09] bird classification experiment we see that the most stably
+[0:41:12] that the most stably possibly causal
+[0:41:14] possibly causal features from among the 20 something
+[0:41:16] features from among the 20 something features that we have with this bird
+[0:41:18] features that we have with this bird data
+[0:41:19] data are things like wing shape and wing
+[0:41:22] are things like wing shape and wing pattern and tail shape these are picked
+[0:41:25] pattern and tail shape these are picked out
+[0:41:26] out majority of the time as being causally
+[0:41:28] majority of the time as being causally relevant or possibly causally relevant
+[0:41:30] relevant or possibly causally relevant to the prediction
+[0:41:32] to the prediction outcome where some features are picked
+[0:41:34] outcome where some features are picked out very rarely or almost not at all for
+[0:41:36] out very rarely or almost not at all for example belly pattern and wing color
+[0:41:38] example belly pattern and wing color seems to not be
+[0:41:40] seems to not be a relevant uh feature for predicting the
+[0:41:44] a relevant uh feature for predicting the outcome of
+[0:41:45] outcome of the
+[0:41:46] the the bird cat the bird category
+[0:41:49] the bird cat the bird category and and relevant here in the sense of is
+[0:41:52] and and relevant here in the sense of is it judged to be a causal ancestor or
+[0:41:54] it judged to be a causal ancestor or possible causal ancestor of the
+[0:41:56] possible causal ancestor of the prediction outcome
+[0:41:58] prediction outcome it's a little bit hard to visualize the
+[0:41:59] it's a little bit hard to visualize the whole graph for this kind of big
+[0:42:02] whole graph for this kind of big large set of variables so here's a sub
+[0:42:03] large set of variables so here's a sub graph of it so the
+[0:42:06] graph of it so the the graphs will basically look like
+[0:42:09] the graphs will basically look like a peg representation where the outcome
+[0:42:12] a peg representation where the outcome is y hat and the various features here
+[0:42:16] is y hat and the various features here i'm just picking features that are
+[0:42:17] i'm just picking features that are directly adjacent to the outcome y hat
+[0:42:20] directly adjacent to the outcome y hat may be related to each other in a
+[0:42:22] may be related to each other in a variety of complex ways and they may
+[0:42:24] variety of complex ways and they may have different kinds of arrows into
+[0:42:26] have different kinds of arrows into y-hat in this case
+[0:42:28] y-hat in this case for this
+[0:42:29] for this sample on the birds data they all
+[0:42:32] sample on the birds data they all uh
+[0:42:33] uh pretty much these
+[0:42:34] pretty much these these
+[0:42:35] these features wing pattern under parts color
+[0:42:37] features wing pattern under parts color upper tail color wing shape fruit color
+[0:42:40] upper tail color wing shape fruit color they're all things which impact
+[0:42:42] they're all things which impact uh or which are judged to be causal
+[0:42:45] uh or which are judged to be causal ancestors of the
+[0:42:47] ancestors of the output of the prediction algorithm
+[0:42:50] output of the prediction algorithm and we can do the same thing
+[0:42:52] and we can do the same thing uh with the x-ray data set
+[0:42:55] uh with the x-ray data set uh
+[0:42:56] uh for pneumonia diagnosis a bit different
+[0:42:58] for pneumonia diagnosis a bit different setting
+[0:42:59] setting but in this case we are using this chest
+[0:43:01] but in this case we are using this chest x-ray eight image data set both of these
+[0:43:03] x-ray eight image data set both of these image data sets by the way are publicly
+[0:43:05] image data sets by the way are publicly available online
+[0:43:06] available online this image data set is one where
+[0:43:10] this image data set is one where each x-ray is associated with a binary
+[0:43:14] each x-ray is associated with a binary pneumonia diagnosis label
+[0:43:16] pneumonia diagnosis label and the interpretable features are seven
+[0:43:19] and the interpretable features are seven uh radiologist findings of different
+[0:43:22] uh radiologist findings of different sorts cardiomegaly uh i don't know how
+[0:43:24] sorts cardiomegaly uh i don't know how to pronounce italic tassis effusion
+[0:43:27] to pronounce italic tassis effusion infiltration
+[0:43:28] infiltration mass nodule pneumothorax all things
+[0:43:30] mass nodule pneumothorax all things which might be visible on an x-ray only
+[0:43:33] which might be visible on an x-ray only some of which are probably relevant to
+[0:43:35] some of which are probably relevant to pneumonia so we use a sample of about
+[0:43:37] pneumonia so we use a sample of about 240 images with these seven binary
+[0:43:40] 240 images with these seven binary attributes and using again the resnet18
+[0:43:43] attributes and using again the resnet18 architecture which in a kind of like
+[0:43:45] architecture which in a kind of like very simple application of of those of
+[0:43:48] very simple application of of those of that
+[0:43:48] that of that uh paradigm gets relatively good
+[0:43:52] of that uh paradigm gets relatively good accuracy and so we hope we ask the
+[0:43:55] accuracy and so we hope we ask the question about what what is this
+[0:43:57] question about what what is this algorithm picking up on and we see that
+[0:43:59] algorithm picking up on and we see that the most stable edges which are judged
+[0:44:02] the most stable edges which are judged to be causal ancestors of the outcome
+[0:44:04] to be causal ancestors of the outcome are things like infiltration
+[0:44:07] are things like infiltration atylic atelectasis and a fusion whereas
+[0:44:10] atylic atelectasis and a fusion whereas the other ones are not and to us this is
+[0:44:12] the other ones are not and to us this is a good sign because these are the things
+[0:44:14] a good sign because these are the things which are potentially relevant to
+[0:44:16] which are potentially relevant to pneumonia diagnosis whereas these other
+[0:44:20] pneumonia diagnosis whereas these other uh
+[0:44:21] uh these other um
+[0:44:23] these other um ailments or issues are you know bad for
+[0:44:26] ailments or issues are you know bad for their own reasons but not directly
+[0:44:28] their own reasons but not directly related to pneumonia uh necessarily
+[0:44:30] related to pneumonia uh necessarily whereas you know having fluid in your
+[0:44:32] whereas you know having fluid in your lungs is often an important part of
+[0:44:34] lungs is often an important part of ammonia diagnosis so in this case we can
+[0:44:38] ammonia diagnosis so in this case we can show what the whole graph looks like
+[0:44:39] show what the whole graph looks like because there's only seven features and
+[0:44:41] because there's only seven features and so we see something that looks like a
+[0:44:43] so we see something that looks like a peg where you have a few things that are
+[0:44:45] peg where you have a few things that are undirected here a few bi-directed edges
+[0:44:48] undirected here a few bi-directed edges but you have mostly directed and
+[0:44:50] but you have mostly directed and partially directed edges into the
+[0:44:52] partially directed edges into the um
+[0:44:54] um into the
+[0:44:55] into the outcome y hat and some variables are
+[0:44:58] outcome y hat and some variables are seen entirely irrelevant because they're
+[0:45:00] seen entirely irrelevant because they're disconnected from from y hat according
+[0:45:02] disconnected from from y hat according to what we learned from fci
+[0:45:05] to what we learned from fci and unfortunately i'm running out of
+[0:45:06] and unfortunately i'm running out of time so i won't have time to talk about
+[0:45:08] time so i won't have time to talk about how this compares to alternatives but we
+[0:45:10] how this compares to alternatives but we do compare it to um other popular
+[0:45:13] do compare it to um other popular explainable ai procedures in the
+[0:45:15] explainable ai procedures in the literature like lime
+[0:45:17] literature like lime uh where the results kind of look like
+[0:45:19] uh where the results kind of look like this
+[0:45:20] this um but are i'm my opinion not
+[0:45:23] um but are i'm my opinion not particularly
+[0:45:25] particularly helpful in this setting they don't
+[0:45:26] helpful in this setting they don't really tell you they highlight broad
+[0:45:29] really tell you they highlight broad images of pixel space without really
+[0:45:31] images of pixel space without really telling you what's important about those
+[0:45:34] telling you what's important about those regions
+[0:45:35] regions it makes it kind of hard to generalize
+[0:45:37] it makes it kind of hard to generalize across images
+[0:45:39] across images it's kind of a similar story with shaft
+[0:45:41] it's kind of a similar story with shaft this is a procedure that's very popular
+[0:45:43] this is a procedure that's very popular based on shapely values
+[0:45:45] based on shapely values for explaining the
+[0:45:47] for explaining the behavior of prediction algorithms we see
+[0:45:50] behavior of prediction algorithms we see that in the both in the birds and in the
+[0:45:51] that in the both in the birds and in the ammonia case they highlight certain
+[0:45:54] ammonia case they highlight certain pixel areas as being important in the
+[0:45:56] pixel areas as being important in the sense of having a large
+[0:45:58] sense of having a large shapely value um but without really
+[0:46:02] shapely value um but without really giving much insight at least in my
+[0:46:05] giving much insight at least in my opinion
+[0:46:06] opinion uh into what is really going on here
+[0:46:08] uh into what is really going on here like what is it about this cloud of
+[0:46:11] like what is it about this cloud of pixels and the bird image that is really
+[0:46:13] pixels and the bird image that is really uh distinguishing about this you know
+[0:46:16] uh distinguishing about this you know morning lark or sparrow or whatever it
+[0:46:18] morning lark or sparrow or whatever it is
+[0:46:18] is um so i'll just conclude very briefly so
+[0:46:21] um so i'll just conclude very briefly so that josh has some time to talk
+[0:46:22] that josh has some time to talk um i think that pag learning algorithms
+[0:46:25] um i think that pag learning algorithms are more generally learning algorithms
+[0:46:27] are more generally learning algorithms that learn causal representations but
+[0:46:30] that learn causal representations but allow for unmeasured latent confounding
+[0:46:33] allow for unmeasured latent confounding can be useful to distinguish between
+[0:46:35] can be useful to distinguish between possible causal determinants of the
+[0:46:37] possible causal determinants of the output of a prediction algorithm
+[0:46:41] output of a prediction algorithm we can impose additional background
+[0:46:43] we can impose additional background knowledge uh in this case the only
+[0:46:45] knowledge uh in this case the only background knowledge we impose
+[0:46:48] background knowledge we impose is that the
+[0:46:50] is that the prediction label
+[0:46:51] prediction label does not cause the features in the image
+[0:46:54] does not cause the features in the image um so we say that y hat is not an
+[0:46:55] um so we say that y hat is not an ancestor of the features in the image
+[0:46:57] ancestor of the features in the image but you can impose additional background
+[0:46:58] but you can impose additional background knowledge uh if if you so choose um we
+[0:47:01] knowledge uh if if you so choose um we won't go into that here
+[0:47:03] won't go into that here how informative the analysis will be in
+[0:47:05] how informative the analysis will be in the end meaning how
+[0:47:07] the end meaning how many of the edges will be directed
+[0:47:08] many of the edges will be directed versus only partially directed will
+[0:47:11] versus only partially directed will depend
+[0:47:12] depend uh on the on the data on the chosen
+[0:47:14] uh on the on the data on the chosen variables and the strength of your
+[0:47:15] variables and the strength of your background assumptions
+[0:47:17] background assumptions and then finally
+[0:47:19] and then finally some questions
+[0:47:20] some questions that remain with this kind of work is
+[0:47:23] that remain with this kind of work is that we rely on the availability of
+[0:47:25] that we rely on the availability of interpretable features uh which were
+[0:47:27] interpretable features uh which were available in our data sets that we were
+[0:47:29] available in our data sets that we were using here but not
+[0:47:32] using here but not necessarily available in all
+[0:47:33] necessarily available in all applications so can they be learned
+[0:47:35] applications so can they be learned automatically in some sense or is human
+[0:47:37] automatically in some sense or is human input at the feature selection stage
+[0:47:39] input at the feature selection stage really essential uh what does it rattle
+[0:47:41] really essential uh what does it rattle should interpretable features are high
+[0:47:42] should interpretable features are high level features see satisfy exactly can
+[0:47:45] level features see satisfy exactly can we use
+[0:47:46] we use uh you know
+[0:47:48] uh you know state-of-the-art simulation techniques
+[0:47:49] state-of-the-art simulation techniques to help simulate realistic interventions
+[0:47:52] to help simulate realistic interventions to help validate what we've learned and
+[0:47:54] to help validate what we've learned and so forth
+[0:47:55] so forth so i'll conclude there our paper is this
+[0:47:58] so i'll conclude there our paper is this archive draft at the top and our
+[0:48:00] archive draft at the top and our references are below
+[0:48:02] references are below thanks for your time and attention
+[0:48:06] thanks for your time and attention thanks and that was a great talk um so
+[0:48:09] thanks and that was a great talk um so maybe just like a very short question
+[0:48:11] maybe just like a very short question before we move on to the discussion
+[0:48:13] before we move on to the discussion because um
+[0:48:14] because um there's there's a lot of questions and
+[0:48:16] there's there's a lot of questions and not not enough time
+[0:48:17] not not enough time and so there's a question from an
+[0:48:19] and so there's a question from an anonymous attendee that says how can we
+[0:48:22] anonymous attendee that says how can we know that
+[0:48:23] know that pag learning is what deep learning
+[0:48:25] pag learning is what deep learning really learns
+[0:48:31] we can't and i don't think it is it's the claim is not that the internal
+[0:48:33] it's the claim is not that the internal representation of the deep learning
+[0:48:35] representation of the deep learning procedure really has something like the
+[0:48:37] procedure really has something like the pack underneath the hood
+[0:48:40] pack underneath the hood we know what it does roughly uh
+[0:48:43] we know what it does roughly uh the deep
+[0:48:44] the deep at least the convolutional neural
+[0:48:45] at least the convolutional neural network
+[0:48:46] network has these stages where it does feature
+[0:48:48] has these stages where it does feature extraction
+[0:48:50] extraction uh learns basically lower dimensional
+[0:48:52] uh learns basically lower dimensional representations of the big input image
+[0:48:55] representations of the big input image and then classifies them according to
+[0:48:58] and then classifies them according to a chain of logistic regressions
+[0:49:00] a chain of logistic regressions basically right like a fully connected
+[0:49:01] basically right like a fully connected neural network so we know what's going
+[0:49:03] neural network so we know what's going under the hood going on under the hood
+[0:49:05] under the hood going on under the hood in that sense
+[0:49:06] in that sense but we don't know exactly which features
+[0:49:08] but we don't know exactly which features it's paying attention to
+[0:49:10] it's paying attention to and which or which it's putting more
+[0:49:12] and which or which it's putting more weight on in some sense
+[0:49:15] weight on in some sense because of this relatively complex chain
+[0:49:17] because of this relatively complex chain of of of
+[0:49:19] of of of operations
+[0:49:20] operations so the pag is it's not that we think
+[0:49:23] so the pag is it's not that we think that underneath
+[0:49:24] that underneath that the true data generating process
+[0:49:27] that the true data generating process follows a pag or a dag
+[0:49:29] follows a pag or a dag we know it doesn't in some sense but we
+[0:49:31] we know it doesn't in some sense but we think that it's a good approximation
+[0:49:33] think that it's a good approximation that sheds insight on
+[0:49:36] that sheds insight on on what is going on it illuminates
+[0:49:37] on what is going on it illuminates what's happening because it tells us
+[0:49:40] what's happening because it tells us kind of
+[0:49:40] kind of stylized
+[0:49:42] stylized causal qualitative facts like is this
+[0:49:47] causal qualitative facts like is this feature
+[0:49:48] feature is the throat color of the bird
+[0:49:50] is the throat color of the bird causally relevant to the output of the
+[0:49:52] causally relevant to the output of the prediction algorithm so it's it's
+[0:49:54] prediction algorithm so it's it's somewhat in the spirit of approximating
+[0:49:56] somewhat in the spirit of approximating a complex thing with a simpler thing
+[0:49:58] a complex thing with a simpler thing which is what lime and a lot of other
+[0:50:00] which is what lime and a lot of other explainable ai procedures do but we make
+[0:50:03] explainable ai procedures do but we make no assumptions that what's going on is
+[0:50:05] no assumptions that what's going on is really you know dag-like underneath the
+[0:50:07] really you know dag-like underneath the hood
+[0:50:09] hood okay um thanks dan so let's then move on
+[0:50:12] okay um thanks dan so let's then move on to the discussion by joshua so joshua
+[0:50:15] to the discussion by joshua so joshua please share your screen
+[0:50:17] please share your screen all right thank you and um let me also
+[0:50:20] all right thank you and um let me also echo
+[0:50:21] echo uh dan's thanks to the organizers and
+[0:50:23] uh dan's thanks to the organizers and audience
+[0:50:24] audience um and start by saying i really like
+[0:50:26] um and start by saying i really like this paper i think it's really
+[0:50:27] this paper i think it's really interesting
+[0:50:28] interesting um
+[0:50:29] um i'm taking the title of one of dan's
+[0:50:31] i'm taking the title of one of dan's slides here uh where but i'm making part
+[0:50:33] slides here uh where but i'm making part of it into the answer of a question so
+[0:50:36] of it into the answer of a question so what is an explanation answer some
+[0:50:38] what is an explanation answer some philosophy um and and maybe this
+[0:50:41] philosophy um and and maybe this audience doesn't really need to hear
+[0:50:42] audience doesn't really need to hear this because i think if you're
+[0:50:43] this because i think if you're interested in causal inference
+[0:50:44] interested in causal inference particularly you're probably already
+[0:50:45] particularly you're probably already more
+[0:50:47] more being open to philosophy side of things
+[0:50:48] being open to philosophy side of things but i do hope that the paper entices uh
+[0:50:51] but i do hope that the paper entices uh people to check out more of that
+[0:50:53] people to check out more of that literature because it's really
+[0:50:54] literature because it's really interesting and it's helpful to remind
+[0:50:56] interesting and it's helpful to remind us that there are always these
+[0:50:57] us that there are always these background considerations that we kind
+[0:50:58] background considerations that we kind of
+[0:50:59] of tend to forget about um
+[0:51:01] tend to forget about um when we're when we're doing methodology
+[0:51:03] when we're when we're doing methodology um
+[0:51:04] um so uh unlike dan i don't have any formal
+[0:51:07] so uh unlike dan i don't have any formal background in in philosophy so i i don't
+[0:51:10] background in in philosophy so i i don't i don't really know what a dialectic is
+[0:51:11] i don't really know what a dialectic is but let's do it let's advance the
+[0:51:13] but let's do it let's advance the dialectic of um
+[0:51:15] dialectic of um brayman's two cultures and uh
+[0:51:18] brayman's two cultures and uh ephron and hastie's
+[0:51:20] ephron and hastie's computer age statistical inference
+[0:51:21] computer age statistical inference narrative
+[0:51:23] narrative the rough idea of the history of
+[0:51:25] the rough idea of the history of statistical methods is that we first
+[0:51:28] statistical methods is that we first come up with an algorithm
+[0:51:30] come up with an algorithm so an example could just be computing
+[0:51:32] so an example could just be computing the mean
+[0:51:33] the mean and at first we don't know how much we
+[0:51:35] and at first we don't know how much we can trust the result of that algorithm
+[0:51:37] can trust the result of that algorithm until we then develop a method of
+[0:51:39] until we then develop a method of inference for that algorithm so this is
+[0:51:43] inference for that algorithm so this is i'm
+[0:51:44] i'm you know the joke here is i'm saying
+[0:51:45] you know the joke here is i'm saying that's a dialectic i don't know if
+[0:51:48] that's a dialectic i don't know if whatever but um
+[0:51:49] whatever but um at any rate i think uh
+[0:51:52] at any rate i think uh the the cool thing that
+[0:51:54] the the cool thing that efron hastily pointed out is that we can
+[0:51:56] efron hastily pointed out is that we can start to leverage algorithms for
+[0:51:58] start to leverage algorithms for inference so that can help us catch up
+[0:52:00] inference so that can help us catch up because the inference culture we're kind
+[0:52:02] because the inference culture we're kind of slower to develop things so if we can
+[0:52:05] of slower to develop things so if we can use algorithms to give inferences then
+[0:52:07] use algorithms to give inferences then that can help us catch up sometimes so
+[0:52:09] that can help us catch up sometimes so you know the bootstraps an example maybe
+[0:52:11] you know the bootstraps an example maybe here the fci is a good example
+[0:52:14] here the fci is a good example um
+[0:52:16] um so i want to say i think this is a
+[0:52:17] so i want to say i think this is a growth area for st statisticians to work
+[0:52:20] growth area for st statisticians to work on
+[0:52:20] on uh that
+[0:52:22] uh that it seems to me like people care more
+[0:52:24] it seems to me like people care more about interpretability and
+[0:52:25] about interpretability and explainability
+[0:52:27] explainability they realize that the algorithm culture
+[0:52:30] they realize that the algorithm culture deep neural networks methods have kind
+[0:52:32] deep neural networks methods have kind of raced ahead and given us really
+[0:52:34] of raced ahead and given us really amazing looking predictive accuracy
+[0:52:37] amazing looking predictive accuracy results
+[0:52:38] results but that
+[0:52:39] but that in a lot of cases we don't understand
+[0:52:40] in a lot of cases we don't understand why it works and we don't know when it
+[0:52:42] why it works and we don't know when it will fail and so people clearly now are
+[0:52:44] will fail and so people clearly now are paying more attention to
+[0:52:47] paying more attention to the idea of explainability and how do
+[0:52:49] the idea of explainability and how do you explain a black box's predictions
+[0:52:53] you explain a black box's predictions so
+[0:52:57] i think one current set of work on this you've seen
+[0:52:59] current set of work on this you've seen cited here methods like lime and chap
+[0:53:02] cited here methods like lime and chap in the current paper uh
+[0:53:04] in the current paper uh they can provide explanations but these
+[0:53:06] they can provide explanations but these explanations are
+[0:53:08] explanations are a little more complicated they're a
+[0:53:09] a little more complicated they're a little more challenging to interpret
+[0:53:11] little more challenging to interpret than what we're used to doing in you
+[0:53:13] than what we're used to doing in you know in our linear models we just
+[0:53:14] know in our linear models we just interpret one coefficient of a linear
+[0:53:16] interpret one coefficient of a linear regression model and that has even that
+[0:53:19] regression model and that has even that is
+[0:53:20] is uh
+[0:53:21] uh interpretation that a lot of people
+[0:53:22] interpretation that a lot of people struggle with you know if you teach
+[0:53:24] struggle with you know if you teach students you you understand that that's
+[0:53:26] students you you understand that that's a subtle point and especially also if
+[0:53:28] a subtle point and especially also if you want to think causally it's also a
+[0:53:30] you want to think causally it's also a subtle point how do you interpret a
+[0:53:32] subtle point how do you interpret a regression coefficient now we're not
+[0:53:33] regression coefficient now we're not just talking about a regression
+[0:53:34] just talking about a regression coefficient we're talking about things
+[0:53:36] coefficient we're talking about things like in line we're talking about a local
+[0:53:39] like in line we're talking about a local uh sparse model to approximate this
+[0:53:42] uh sparse model to approximate this black box model near one point so the
+[0:53:45] black box model near one point so the explanations themselves are getting more
+[0:53:47] explanations themselves are getting more complex and now i think the area that
+[0:53:49] complex and now i think the area that statisticians have to work on more is
+[0:53:52] statisticians have to work on more is developing methods to give inference for
+[0:53:54] developing methods to give inference for these more complicated types of
+[0:53:56] these more complicated types of explanations
+[0:53:59] explanations so in this paper dan mentioned they use
+[0:54:02] so in this paper dan mentioned they use edge stability so my kind of one high
+[0:54:05] edge stability so my kind of one high level question here is what kind of
+[0:54:07] level question here is what kind of guarantees are there for using this edge
+[0:54:10] guarantees are there for using this edge stability type of metric
+[0:54:12] stability type of metric to understand you know we've got
+[0:54:14] to understand you know we've got an algorithm that gives us an
+[0:54:15] an algorithm that gives us an explanation it's a peg it tells you
+[0:54:18] explanation it's a peg it tells you there's some edges here that tell you uh
+[0:54:20] there's some edges here that tell you uh which high level features might be
+[0:54:21] which high level features might be causes of y hat um and then you do that
+[0:54:24] causes of y hat um and then you do that many times and you have this plot of
+[0:54:27] many times and you have this plot of edge stability as your inference for
+[0:54:29] edge stability as your inference for that resulting explanation
+[0:54:31] that resulting explanation so i think this is a good example and i
+[0:54:33] so i think this is a good example and i think that um you can probably form you
+[0:54:35] think that um you can probably form you could probably do a lot more research in
+[0:54:37] could probably do a lot more research in that kind of direction
+[0:54:40] that kind of direction let me get my soapbox out and say
+[0:54:43] let me get my soapbox out and say this is what i think is one of the most
+[0:54:44] this is what i think is one of the most important limitations to this area of
+[0:54:48] important limitations to this area of talking about explaining black boxes
+[0:54:49] talking about explaining black boxes [Music]
+[0:54:51] [Music] people need to remember that explaining
+[0:54:53] people need to remember that explaining the black box is not the same as
+[0:54:55] the black box is not the same as explaining the underlying phenomenon the
+[0:54:56] explaining the underlying phenomenon the black box predicts right so maybe this
+[0:54:58] black box predicts right so maybe this needs to even become another one of the
+[0:55:00] needs to even become another one of the catch phrases like association is not
+[0:55:02] catch phrases like association is not causation
+[0:55:03] causation uh interpreting
+[0:55:05] uh interpreting y hat is not the same as interpreting
+[0:55:07] y hat is not the same as interpreting why
+[0:55:09] why so
+[0:55:10] so do we need some
+[0:55:12] do we need some and often that's what we want to do
+[0:55:14] and often that's what we want to do right often what we really care about is
+[0:55:16] right often what we really care about is not just to understand why this black
+[0:55:19] not just to understand why this black box can predict well
+[0:55:20] box can predict well but like it is it because it captures
+[0:55:23] but like it is it because it captures some structure that reflects some real
+[0:55:25] some structure that reflects some real causal structure in the world as well
+[0:55:28] causal structure in the world as well so
+[0:55:29] so i think that's going to be uh possibly
+[0:55:32] i think that's going to be uh possibly even an implicit goal a lot of the time
+[0:55:34] even an implicit goal a lot of the time that people want to use methods like
+[0:55:35] that people want to use methods like this to explain a black box i think a
+[0:55:38] this to explain a black box i think a lot of times they don't want to just
+[0:55:39] lot of times they don't want to just understand what's causing the prediction
+[0:55:42] understand what's causing the prediction to be a certain value they actually want
+[0:55:44] to be a certain value they actually want to understand what's causing the outcome
+[0:55:46] to understand what's causing the outcome to be a certain value and they might mix
+[0:55:48] to be a certain value and they might mix these two things up if they're not
+[0:55:50] these two things up if they're not careful and we have to be very clear in
+[0:55:52] careful and we have to be very clear in communicating that
+[0:55:53] communicating that um
+[0:55:55] um i'm not sure maybe this is i maybe i'm
+[0:55:57] i'm not sure maybe this is i maybe i'm being unfair here i think this might be
+[0:55:59] being unfair here i think this might be more dangerous if we say that our
+[0:56:01] more dangerous if we say that our methods are causal explanations so if we
+[0:56:03] methods are causal explanations so if we tell people that we're giving a causal
+[0:56:05] tell people that we're giving a causal explanation to a black box
+[0:56:07] explanation to a black box uh algorithm
+[0:56:09] uh algorithm then
+[0:56:09] then maybe that will make some people more
+[0:56:11] maybe that will make some people more likely to to make this a confused
+[0:56:13] likely to to make this a confused conclusion and jump to it because to me
+[0:56:16] conclusion and jump to it because to me causality is about underlying real world
+[0:56:19] causality is about underlying real world you know kind of like laws of nature and
+[0:56:21] you know kind of like laws of nature and things that always have to happen and
+[0:56:24] things that always have to happen and in that sense the natural cause of what
+[0:56:27] in that sense the natural cause of what makes a algorithm do what it does is
+[0:56:29] makes a algorithm do what it does is that a programmer wrote code to make
+[0:56:31] that a programmer wrote code to make that algorithm do that so that's
+[0:56:33] that algorithm do that so that's for my causal explanation for for any
+[0:56:35] for my causal explanation for for any black box
+[0:56:37] black box um
+[0:56:39] um and just to to kind of drive this point
+[0:56:41] and just to to kind of drive this point home this takes us outside the context
+[0:56:44] home this takes us outside the context of the current paper because i'm going
+[0:56:45] of the current paper because i'm going to say let's forget about the high level
+[0:56:47] to say let's forget about the high level features for a minute
+[0:56:49] features for a minute and that simplifies away the
+[0:56:50] and that simplifies away the problem that this paper cares about
+[0:56:52] problem that this paper cares about almost completely but suppose
+[0:56:55] almost completely but suppose we just have x and y and the true causal
+[0:56:57] we just have x and y and the true causal dag is y causes x right you can think y
+[0:57:01] dag is y causes x right you can think y is an underlying health condition x are
+[0:57:03] is an underlying health condition x are some types of clinical covariates that
+[0:57:05] some types of clinical covariates that might be symptoms
+[0:57:06] might be symptoms now if you train a black box algorithm
+[0:57:08] now if you train a black box algorithm to predict why most likely
+[0:57:11] to predict why most likely uh the symptoms do cause the black box
+[0:57:14] uh the symptoms do cause the black box to predict a certain value for y
+[0:57:17] to predict a certain value for y but in reality you know the real world
+[0:57:19] but in reality you know the real world the the causal direction is the other
+[0:57:21] the the causal direction is the other way around
+[0:57:22] way around now this could be still useful as a
+[0:57:23] now this could be still useful as a model diagnostic damage in this um
+[0:57:27] model diagnostic damage in this um but like i said i think a lot of times
+[0:57:28] but like i said i think a lot of times people have a real goal of changing the
+[0:57:30] people have a real goal of changing the world
+[0:57:31] world and so in that case you know if they
+[0:57:34] and so in that case you know if they come up their explanation method tells
+[0:57:36] come up their explanation method tells them that x causes y hat and they go out
+[0:57:40] them that x causes y hat and they go out and they start saying we've got to
+[0:57:41] and they start saying we've got to manipulate x in order to change y then
+[0:57:43] manipulate x in order to change y then they're in trouble
+[0:57:48] okay so this is just a recap of my high level questions
+[0:57:50] of my high level questions uh in case there's any time to for for
+[0:57:52] uh in case there's any time to for for discussion you know we've got a type of
+[0:57:55] discussion you know we've got a type of inference for this new for this
+[0:57:57] inference for this new for this explanation approach edge stability is
+[0:57:59] explanation approach edge stability is there any work telling us what kind of
+[0:58:01] there any work telling us what kind of guarantee that inference might have
+[0:58:04] guarantee that inference might have and um
+[0:58:05] and um can we
+[0:58:06] can we can we actually form some rough ideas
+[0:58:09] can we actually form some rough ideas you know things like
+[0:58:11] you know things like uh
+[0:58:12] uh things like no one observed confounding
+[0:58:14] things like no one observed confounding where it's a sufficient condition
+[0:58:17] where it's a sufficient condition that
+[0:58:18] that an explanation of the black box
+[0:58:20] an explanation of the black box corresponds to an explanation of the
+[0:58:22] corresponds to an explanation of the real world
+[0:58:23] real world like how do we know when a black box is
+[0:58:25] like how do we know when a black box is capturing causal structure and so that
+[0:58:27] capturing causal structure and so that explaining the black box is telling us
+[0:58:29] explaining the black box is telling us about the real world as well
+[0:58:31] about the real world as well uh do the qualities of these explanation
+[0:58:33] uh do the qualities of these explanation does the quality vary if um if the black
+[0:58:37] does the quality vary if um if the black box is over fit or has poor out of
+[0:58:39] box is over fit or has poor out of distribution generalization for example
+[0:58:42] distribution generalization for example the last question here i noticed some
+[0:58:43] the last question here i noticed some people were bringing up in the q a too
+[0:58:46] people were bringing up in the q a too you know there's some assumptions in
+[0:58:48] you know there's some assumptions in this work
+[0:58:48] this work and in particular i'm wondering if any
+[0:58:50] and in particular i'm wondering if any of those assumptions
+[0:58:52] of those assumptions uh might break down in the case where
+[0:58:54] uh might break down in the case where you try to learn the high level features
+[0:58:57] you try to learn the high level features so you've got this kind of
+[0:58:58] so you've got this kind of directionality assumptions
+[0:59:00] directionality assumptions and could those be broken if you're
+[0:59:02] and could those be broken if you're using the same data to learn the high
+[0:59:04] using the same data to learn the high level features as the black box
+[0:59:07] level features as the black box and i'll stop there
+[0:59:12] great thanks very nice discussion so then maybe you
+[0:59:15] very nice discussion so then maybe you can take a minute or two to answer these
+[0:59:18] can take a minute or two to answer these questions even though we're over time um
+[0:59:20] questions even though we're over time um just
+[0:59:21] just so that the discussion doesn't end
+[0:59:22] so that the discussion doesn't end without the discussion
+[0:59:24] without the discussion yeah no thanks uh thanks a ton josh that
+[0:59:27] yeah no thanks uh thanks a ton josh that was great um sorry that i went for so
+[0:59:29] was great um sorry that i went for so long that we don't have time to discuss
+[0:59:30] long that we don't have time to discuss very much let me just say very quickly a
+[0:59:32] very much let me just say very quickly a couple of things that related to what
+[0:59:34] couple of things that related to what you brought up i really agree that the
+[0:59:36] you brought up i really agree that the the distinction between y hat which is
+[0:59:38] the distinction between y hat which is the output of the algorithm and the
+[0:59:40] the output of the algorithm and the underlying phenomenon y is super
+[0:59:43] underlying phenomenon y is super important very important
+[0:59:45] important very important and we try and emphasize that a lot in
+[0:59:47] and we try and emphasize that a lot in the paper
+[0:59:48] the paper and so you're right that explaining why
+[0:59:50] and so you're right that explaining why hat is not the same thing as explaining
+[0:59:51] hat is not the same thing as explaining why and it would be
+[0:59:53] why and it would be um wrong and bad for people to mix this
+[0:59:56] um wrong and bad for people to mix this up when they interpret these kinds of
+[0:59:57] up when they interpret these kinds of results so our interest here is the kind
+[1:00:01] results so our interest here is the kind of causal real world that you refer to
+[1:00:04] of causal real world that you refer to is the real world of the algorithm so we
+[1:00:06] is the real world of the algorithm so we want to know
+[1:00:08] want to know what could we change in the image
+[1:00:10] what could we change in the image that would make the algorithm label this
+[1:00:12] that would make the algorithm label this patient as having pneumonia rather than
+[1:00:15] patient as having pneumonia rather than not having pneumonia or the reverse
+[1:00:18] not having pneumonia or the reverse not the true number the true why is the
+[1:00:21] not the true number the true why is the actual pneumonia status of this you know
+[1:00:23] actual pneumonia status of this you know that's used in the in the training
+[1:00:26] that's used in the in the training section of the procedure but that what
+[1:00:29] section of the procedure but that what we care about is understanding the
+[1:00:31] we care about is understanding the behavior of this prediction algorithm
+[1:00:34] behavior of this prediction algorithm and understanding that like well if
+[1:00:36] and understanding that like well if if the person had just had
+[1:00:39] if the person had just had um you know we see that the person has
+[1:00:41] um you know we see that the person has fluid in their lungs but if they also
+[1:00:43] fluid in their lungs but if they also had
+[1:00:44] had um
+[1:00:45] um an enlarged heart then that would have
+[1:00:48] an enlarged heart then that would have you know ruled out pneumonia because
+[1:00:50] you know ruled out pneumonia because that's due to something else that's sort
+[1:00:52] that's due to something else that's sort of
+[1:00:53] of that would be a good thing for the
+[1:00:54] that would be a good thing for the algorithm to be picking up on internally
+[1:00:56] algorithm to be picking up on internally because that would mean the algorithm
+[1:00:58] because that would mean the algorithm like knows something about the
+[1:01:00] like knows something about the underlying disease and isn't tracking
+[1:01:02] underlying disease and isn't tracking something that's ultimately irrelevant
+[1:01:05] something that's ultimately irrelevant so so i think it is very important that
+[1:01:08] so so i think it is very important that when we talk about like how the
+[1:01:10] when we talk about like how the explanation relates to the causal truth
+[1:01:12] explanation relates to the causal truth out there in the world like the world
+[1:01:14] out there in the world like the world that we're studying here isn't the world
+[1:01:16] that we're studying here isn't the world of pneumonia it's the world of pneumonia
+[1:01:18] of pneumonia it's the world of pneumonia predictions from a neural network so we
+[1:01:21] predictions from a neural network so we have to ask about what's going on in
+[1:01:22] have to ask about what's going on in that world and i think we have a good
+[1:01:24] that world and i think we have a good understanding of the mechanism like i
+[1:01:25] understanding of the mechanism like i said we know how a convolutional neural
+[1:01:27] said we know how a convolutional neural network works in a sense we can write it
+[1:01:29] network works in a sense we can write it down
+[1:01:30] down and so we just don't know exactly what
+[1:01:33] and so we just don't know exactly what it's
+[1:01:34] it's thinking about you know what it's
+[1:01:36] thinking about you know what it's putting weight on in some sense and so
+[1:01:38] putting weight on in some sense and so that's the part of the world that we're
+[1:01:39] that's the part of the world that we're trying to get some some grasp on
+[1:01:42] trying to get some some grasp on um another point you made well so one
+[1:01:44] um another point you made well so one point you made about edge stability and
+[1:01:46] point you made about edge stability and guarantees
+[1:01:47] guarantees in general there's not a lot of
+[1:01:48] in general there's not a lot of guarantees of this sort but there is
+[1:01:51] guarantees of this sort but there is some related uh work by peter buehlmann
+[1:01:54] some related uh work by peter buehlmann and company where they've they show some
+[1:01:56] and company where they've they show some kind of like false discovery rate
+[1:01:58] kind of like false discovery rate guarantees for this kind of sub sampling
+[1:02:00] guarantees for this kind of sub sampling procedure that we do so they show that
+[1:02:02] procedure that we do so they show that basically if you're just thinking about
+[1:02:04] basically if you're just thinking about adjacencies and whether the adjacencies
+[1:02:06] adjacencies and whether the adjacencies are there or not you can you can derive
+[1:02:09] are there or not you can you can derive some
+[1:02:10] some um
+[1:02:11] um probability
+[1:02:12] probability guarantees on the you know the
+[1:02:14] guarantees on the you know the probability of having a
+[1:02:16] probability of having a unexpected false discovery rate under
+[1:02:19] unexpected false discovery rate under this kind of sub sampling procedure and
+[1:02:21] this kind of sub sampling procedure and so that'll tell you you know whether the
+[1:02:23] so that'll tell you you know whether the edge frequency
+[1:02:26] edge frequency at least for the adjacency part is
+[1:02:28] at least for the adjacency part is reliable in some sense although it
+[1:02:29] reliable in some sense although it doesn't say very much about orientations
+[1:02:35] uh but in general i think there's an issue because
+[1:02:37] issue because with with
+[1:02:38] with with with uh demanding guarantees in this
+[1:02:40] with uh demanding guarantees in this setting because it's not clear
+[1:02:43] setting because it's not clear uh what the true assumptions would be
+[1:02:46] uh what the true assumptions would be right so like any guarantee you you
+[1:02:47] right so like any guarantee you you prove a theorem about is going to be
+[1:02:49] prove a theorem about is going to be based on some
+[1:02:52] based on some mathematical assumptions about what the
+[1:02:53] mathematical assumptions about what the data generating process is you know
+[1:02:55] data generating process is you know whether things are gaussian and whether
+[1:02:57] whether things are gaussian and whether things follow a particular
+[1:03:03] distribution when they're generated and i think here it's just that none of
+[1:03:05] i think here it's just that none of those assumptions are likely to hold
+[1:03:07] those assumptions are likely to hold like any assumption i could come up with
+[1:03:08] like any assumption i could come up with about the data generating process and
+[1:03:11] about the data generating process and prove a theorem about is going to be not
+[1:03:13] prove a theorem about is going to be not true of the setting that we're studying
+[1:03:15] true of the setting that we're studying here and so it seems to be i mean i'm
+[1:03:18] here and so it seems to be i mean i'm open to you know proofs are great and
+[1:03:20] open to you know proofs are great and theoretical results would be interesting
+[1:03:21] theoretical results would be interesting if we have them but it's like i guess
+[1:03:23] if we have them but it's like i guess i'm skeptical that we'll have any
+[1:03:25] i'm skeptical that we'll have any grounded an assumption that's realistic
+[1:03:27] grounded an assumption that's realistic to this kind of domain and so that's why
+[1:03:29] to this kind of domain and so that's why the best i sort of aim for at this stage
+[1:03:33] the best i sort of aim for at this stage is
+[1:03:34] is a reasonable approximation like i think
+[1:03:36] a reasonable approximation like i think it's very
+[1:03:37] it's very very
+[1:03:38] very intentionally like we're approximating
+[1:03:40] intentionally like we're approximating at every step here and that's because
+[1:03:43] at every step here and that's because that's i think the best we can do in
+[1:03:44] that's i think the best we can do in this setting
+[1:03:45] this setting um and then
+[1:03:47] um and then i'm sorry
+[1:03:48] i'm sorry i really need to catch you up
+[1:03:51] i really need to catch you up um
+[1:03:52] um right sorry about that so
+[1:03:55] right sorry about that so you can finish off i would like to thank
+[1:03:58] you can finish off i would like to thank numeric for heroically tackling many
+[1:04:00] numeric for heroically tackling many questions in the q a uh any unanswered
+[1:04:02] questions in the q a uh any unanswered questions will be passed on to the
+[1:04:04] questions will be passed on to the speaker so please uh feel free to
+[1:04:06] speaker so please uh feel free to contact the speaker if you have any
+[1:04:08] contact the speaker if you have any follow-ups
+[1:04:09] follow-ups thank you i'm sorry dan again
+[1:04:13] thank you i'm sorry dan again thank you
+[1:04:17] all right so um next week we will have uh
+[1:04:20] um next week we will have uh wrestling from
+[1:04:21] wrestling from um
+[1:04:26] correct page yeah next week we will have kept wrestling from university of
+[1:04:28] kept wrestling from university of massachusetts amherst
+[1:04:30] massachusetts amherst um he will talk about nonparametric
+[1:04:32] um he will talk about nonparametric tests of the causal null
+[1:04:34] tests of the causal null with non-discrete exposures
+[1:04:36] with non-discrete exposures so i hope i will see everyone next week

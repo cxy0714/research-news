@@ -1,0 +1,2134 @@
+[0:00:06] all right hi everyone uh welcome to the online cousin inference seminar uh so
+[0:00:08] online cousin inference seminar uh so today we have a talk by luke kiel from
+[0:00:11] today we have a talk by luke kiel from university of pennsylvania on so many
+[0:00:13] university of pennsylvania on so many choices the comparative performance of
+[0:00:15] choices the comparative performance of statistical adjustment methods
+[0:00:17] statistical adjustment methods uh our discussion after the talk will be
+[0:00:19] uh our discussion after the talk will be even diaz from cornell university
+[0:00:22] even diaz from cornell university so yeah we look forward to these talks
+[0:00:25] so yeah we look forward to these talks um and getting into the details uh today
+[0:00:29] um and getting into the details uh today ying will be handling questions if you
+[0:00:31] ying will be handling questions if you have questions
+[0:00:32] have questions uh feel free to drop them in the q a
+[0:00:34] uh feel free to drop them in the q a i'll switch over to you who will apply
+[0:00:37] i'll switch over to you who will apply uh who will
+[0:00:38] uh who will explain in more details
+[0:00:41] explain in more details yeah so if you have questions please
+[0:00:43] yeah so if you have questions please submit the questions in the qr a section
+[0:00:47] submit the questions in the qr a section if you haven't used it before
+[0:00:49] if you haven't used it before it is at the bottom of the zoom window
+[0:00:53] it is at the bottom of the zoom window and please try to avoid sending the
+[0:00:56] and please try to avoid sending the questions in the chat because the
+[0:00:58] questions in the chat because the comment section will help us better
+[0:01:00] comment section will help us better track the questions and that's it um
+[0:01:04] track the questions and that's it um i'll give the stage to luke
+[0:01:07] i'll give the stage to luke okay thank you everyone for
+[0:01:09] okay thank you everyone for this opportunity today
+[0:01:12] this opportunity today yeah feel free to start sharing whenever
+[0:01:16] yeah feel free to start sharing whenever yeah
+[0:01:17] yeah great
+[0:01:26] okay so today i'm gonna to give more of an applause but definitely a
+[0:01:27] more of an applause but definitely a more applied talk not some of my
+[0:01:31] more applied talk not some of my new breaking ground that has the sort of
+[0:01:32] new breaking ground that has the sort of an overview um and a little bit of a
+[0:01:35] an overview um and a little bit of a reflection on what i've learned over the
+[0:01:37] reflection on what i've learned over the last three years three years ago i
+[0:01:39] last three years three years ago i switched jobs and took a job where i
+[0:01:41] switched jobs and took a job where i interact with clinical investigators a
+[0:01:43] interact with clinical investigators a lot on a regular basis
+[0:01:46] lot on a regular basis and it's been good to sort of see
+[0:01:48] and it's been good to sort of see well
+[0:01:49] well it's one of those things a little like
+[0:01:51] it's one of those things a little like sausage it's kind of scary to see up
+[0:01:52] sausage it's kind of scary to see up close how it's made um but i've learned
+[0:01:55] close how it's made um but i've learned a little bit about a lot about about
+[0:01:58] a little bit about a lot about about the gap between what happens at
+[0:02:00] the gap between what happens at places like the american causality
+[0:02:02] places like the american causality seminar and what happens on the ground
+[0:02:04] seminar and what happens on the ground and some of the communication i think we
+[0:02:05] and some of the communication i think we might need to do
+[0:02:07] might need to do to make applied work better
+[0:02:11] to make applied work better however before i get into the talk i'd
+[0:02:12] however before i get into the talk i'd like to give a quick plug for the
+[0:02:14] like to give a quick plug for the society for causal inference
+[0:02:16] society for causal inference membership is live
+[0:02:18] membership is live uh there is a link here where you can go
+[0:02:20] uh there is a link here where you can go and join the society for causal
+[0:02:22] and join the society for causal inference
+[0:02:23] inference uh we are about to hold elections on
+[0:02:25] uh we are about to hold elections on march first for the first permanent set
+[0:02:26] march first for the first permanent set of leadership positions uh we have a
+[0:02:29] of leadership positions uh we have a great slay of candidates running from
+[0:02:31] great slay of candidates running from all over the country uh however to vote
+[0:02:33] all over the country uh however to vote you have to be a member and then as you
+[0:02:37] you have to be a member and then as you may know the early bird registration
+[0:02:39] may know the early bird registration rate for ac ic ended on friday however
+[0:02:42] rate for ac ic ended on friday however if you are a member of sci you still get
+[0:02:45] if you are a member of sci you still get that so if you missed that and was still
+[0:02:46] that so if you missed that and was still like the discount that is still possible
+[0:02:48] like the discount that is still possible if you're a member of
+[0:02:50] if you're a member of uh sci is the meant to be the uh home of
+[0:02:53] uh sci is the meant to be the uh home of the american causal influence conference
+[0:02:56] the american causal influence conference and as once the leadership gets into
+[0:02:57] and as once the leadership gets into position we have lots of great ideas in
+[0:02:59] position we have lots of great ideas in terms of
+[0:03:00] terms of uh new initiatives and causal inference
+[0:03:02] uh new initiatives and causal inference if you'd like to be involved please join
+[0:03:04] if you'd like to be involved please join us
+[0:03:08] so today i want to talk a bit about essentially adjusting for confounding
+[0:03:10] essentially adjusting for confounding and observed confounders
+[0:03:12] and observed confounders um
+[0:03:13] um there's
+[0:03:14] there's probably the most common study design
+[0:03:16] probably the most common study design not just in biomedical
+[0:03:19] not just in biomedical epic clinical applications but across
+[0:03:21] epic clinical applications but across the social and medical sciences is a
+[0:03:23] the social and medical sciences is a simply to assume right that there are no
+[0:03:26] simply to assume right that there are no unobserved confounders
+[0:03:28] unobserved confounders roughly i'm being here and then adjust
+[0:03:30] roughly i'm being here and then adjust for those compounders a statistical
+[0:03:32] for those compounders a statistical model
+[0:03:33] model i would say in many of those
+[0:03:35] i would say in many of those applications that's not that implication
+[0:03:37] applications that's not that implication is not fully understood
+[0:03:39] is not fully understood but there's definitely a move where
+[0:03:41] but there's definitely a move where we're looking at some sort of
+[0:03:43] we're looking at some sort of implied if not explicit causal effect
+[0:03:45] implied if not explicit causal effect and we have a series of confounders that
+[0:03:47] and we have a series of confounders that get controlled for
+[0:03:49] get controlled for that is i think you can i'll let anyone
+[0:03:51] that is i think you can i'll let anyone disagree that that is a very very widely
+[0:03:53] disagree that that is a very very widely used uh study design uh particularly in
+[0:03:57] used uh study design uh particularly in clinical studies of various totals
+[0:04:01] clinical studies of various totals in terms of regression in terms of how
+[0:04:03] in terms of regression in terms of how we adjust for those right once we move
+[0:04:05] we adjust for those right once we move to point two there's going to be some
+[0:04:06] to point two there's going to be some sort of adjusting for confounding
+[0:04:08] sort of adjusting for confounding there's going to be controlling people
+[0:04:10] there's going to be controlling people talk about controlling for the number of
+[0:04:11] talk about controlling for the number of phrases that get used right but we
+[0:04:13] phrases that get used right but we essentially move into a multivariate
+[0:04:15] essentially move into a multivariate world right it's still common even in
+[0:04:18] world right it's still common even in clinical studies to do a bunch of
+[0:04:19] clinical studies to do a bunch of bivariate regressions and then run a
+[0:04:21] bivariate regressions and then run a multivariate regression as soon as you
+[0:04:22] multivariate regression as soon as you move on to that regression rule right
+[0:04:24] move on to that regression rule right we're talking about some sort of
+[0:04:26] we're talking about some sort of adjustment method
+[0:04:27] adjustment method and it wasn't that long ago that
+[0:04:29] and it wasn't that long ago that regression was the only choice
+[0:04:32] regression was the only choice uh then essentially i would say matching
+[0:04:34] uh then essentially i would say matching and general propensity score methods
+[0:04:35] and general propensity score methods have sort of
+[0:04:36] have sort of gained uh quite a bit of popularity over
+[0:04:39] gained uh quite a bit of popularity over the last 20 years
+[0:04:40] the last 20 years um though it's always been interesting
+[0:04:42] um though it's always been interesting to me the gap between what the
+[0:04:44] to me the gap between what the introduction the propensity score and
+[0:04:45] introduction the propensity score and then if you look at the citations for
+[0:04:47] then if you look at the citations for the original propensity score paper
+[0:04:49] the original propensity score paper it's basically almost totally uncited
+[0:04:51] it's basically almost totally uncited until around 1999 and every year since
+[0:04:54] until around 1999 and every year since 1999 there's this huge increase in
+[0:04:56] 1999 there's this huge increase in trajectory so it's i kind of like to
+[0:04:58] trajectory so it's i kind of like to think around 2000 is when these methods
+[0:05:00] think around 2000 is when these methods sort of start to get more popular
+[0:05:02] sort of start to get more popular mainstream currency
+[0:05:04] mainstream currency and right now there are many many
+[0:05:05] and right now there are many many different methods right i'm going to
+[0:05:06] different methods right i'm going to give you a little sense
+[0:05:08] give you a little sense right there's still people debate a
+[0:05:09] right there's still people debate a little i still get questions about is it
+[0:05:11] little i still get questions about is it okay to use least squares versus a
+[0:05:13] okay to use least squares versus a logistic regression
+[0:05:14] logistic regression but matching itself there's sub
+[0:05:16] but matching itself there's sub classification standard propensity score
+[0:05:18] classification standard propensity score matching kernel matching optimization
+[0:05:20] matching kernel matching optimization you know right i i don't think i didn't
+[0:05:23] you know right i i don't think i didn't capture the full list of i'm sure
+[0:05:25] capture the full list of i'm sure proposed matching algorithms out there
+[0:05:28] proposed matching algorithms out there but there are a number of those and
+[0:05:29] but there are a number of those and those debates right each paper tends to
+[0:05:33] those debates right each paper tends to show that it's slightly better than some
+[0:05:35] show that it's slightly better than some other form of matching uh lately i would
+[0:05:37] other form of matching uh lately i would say the big explosion and methods a lot
+[0:05:39] say the big explosion and methods a lot of increase in terms of weighting
+[0:05:41] of increase in terms of weighting right for a long time it was pretty
+[0:05:43] right for a long time it was pretty standard ip weighting but there's been a
+[0:05:45] standard ip weighting but there's been a huge
+[0:05:46] huge uh
+[0:05:47] uh explosion in what i would call balancing
+[0:05:49] explosion in what i would call balancing weight methods of proximal balancing
+[0:05:50] weight methods of proximal balancing weight methods um stable balancing
+[0:05:53] weight methods um stable balancing weights cvs weights entropy weights
+[0:05:54] weights cvs weights entropy weights overlap weights there's a lot of
+[0:05:56] overlap weights there's a lot of different sort of weighting methods
+[0:05:58] different sort of weighting methods and then right uh for a long time there
+[0:06:01] and then right uh for a long time there were two bart and twang i've actually
+[0:06:02] were two bart and twang i've actually been around for quite a while but
+[0:06:04] been around for quite a while but there's been a bunch of super learnings
+[0:06:05] there's been a bunch of super learnings you know me grmf uh there's a large huge
+[0:06:09] you know me grmf uh there's a large huge increase right in various forms of what
+[0:06:11] increase right in various forms of what i'll call machine learning
+[0:06:13] i'll call machine learning uh based methods which tend to be
+[0:06:15] uh based methods which tend to be importing a series of
+[0:06:17] importing a series of uh adjustment methods that are used for
+[0:06:19] uh adjustment methods that are used for prediction
+[0:06:21] prediction of various types so you can see already
+[0:06:23] of various types so you can see already here i know this is not anywhere meant
+[0:06:25] here i know this is not anywhere meant to be an exhaustive list but it's a
+[0:06:27] to be an exhaustive list but it's a fairly relatively large list of certain
+[0:06:29] fairly relatively large list of certain options that one could choose in terms
+[0:06:31] options that one could choose in terms of adjusting for observed confounders
+[0:06:34] of adjusting for observed confounders um there is a widespread confusion i
+[0:06:36] um there is a widespread confusion i would say out there this is an anecdote
+[0:06:38] would say out there this is an anecdote from a call paper i was a co-author on a
+[0:06:41] from a call paper i was a co-author on a later co-author on a clinician i know at
+[0:06:44] later co-author on a clinician i know at the children's hospital of pennsylvania
+[0:06:46] the children's hospital of pennsylvania had worked with dylan uh dylan
+[0:06:49] had worked with dylan uh dylan small and paul rosenbaum and implemented
+[0:06:52] small and paul rosenbaum and implemented a fairly sophisticated form of optimal
+[0:06:54] a fairly sophisticated form of optimal matching for a paper at jama
+[0:06:57] matching for a paper at jama the editors the statistical editor jama
+[0:06:58] the editors the statistical editor jama came back and said we don't understand
+[0:07:00] came back and said we don't understand this can you please redo this as a
+[0:07:02] this can you please redo this as a simple propensity score match
+[0:07:05] simple propensity score match right which is not
+[0:07:06] right which is not i can imagine other forms of adjustment
+[0:07:08] i can imagine other forms of adjustment you might adjust but that doesn't that
+[0:07:10] you might adjust but that doesn't that struck me as a odd
+[0:07:12] struck me as a odd step back
+[0:07:13] step back if you look through their clinical
+[0:07:14] if you look through their clinical literature particularly when there's a
+[0:07:16] literature particularly when there's a survival outcome regression is still
+[0:07:18] survival outcome regression is still essentially dominant cox regressions are
+[0:07:20] essentially dominant cox regressions are still i would say
+[0:07:21] still i would say and logistic regression is by far and
+[0:07:23] and logistic regression is by far and away the most standard methods used
+[0:07:26] away the most standard methods used um
+[0:07:27] um and causal influence methods are
+[0:07:28] and causal influence methods are surprisingly much of what we think and i
+[0:07:30] surprisingly much of what we think and i think this is when you spend time at
+[0:07:32] think this is when you spend time at some point like the ac i see you think
+[0:07:34] some point like the ac i see you think ip waiting is standard
+[0:07:35] ip waiting is standard i was involved in an interview process
+[0:07:37] i was involved in an interview process two weeks ago where we're interviewing
+[0:07:40] two weeks ago where we're interviewing people with mas and stats or
+[0:07:41] people with mas and stats or biostatistics
+[0:07:43] biostatistics and not a single of the three candidates
+[0:07:44] and not a single of the three candidates had heard of ip waiting right so a lot
+[0:07:46] had heard of ip waiting right so a lot of these things we take for
+[0:07:49] of these things we take for for for as given as more uh robust
+[0:07:53] for for as given as more uh robust different types of methods
+[0:07:54] different types of methods there's still like widespread confusion
+[0:07:56] there's still like widespread confusion in terms of sort of what is better what
+[0:07:58] in terms of sort of what is better what is optimal
+[0:07:59] is optimal what should you be using or and should
+[0:08:01] what should you be using or and should we ever abandon regression
+[0:08:03] we ever abandon regression and by regression i mean something with
+[0:08:05] and by regression i mean something with a
+[0:08:06] a pretty vanilla
+[0:08:07] pretty vanilla linear additive functional form
+[0:08:13] however and again i think and i think one of the
+[0:08:14] and again i think and i think one of the things that
+[0:08:16] things that struck me as i've gone back through the
+[0:08:17] struck me as i've gone back through the literature because this is in causal
+[0:08:19] literature because this is in causal inference you might argue this is one of
+[0:08:21] inference you might argue this is one of the larger literatures that is
+[0:08:23] the larger literatures that is developing new methods for statistical
+[0:08:25] developing new methods for statistical adjustment
+[0:08:26] adjustment that is in terms of effort there's
+[0:08:28] that is in terms of effort there's well as i said many many papers on this
+[0:08:30] well as i said many many papers on this topic
+[0:08:32] topic why so much effort and one thing that
+[0:08:34] why so much effort and one thing that has struck me is
+[0:08:35] has struck me is it's actually sort of it
+[0:08:37] it's actually sort of it within much of the causal influence
+[0:08:39] within much of the causal influence literature implied
+[0:08:41] literature implied as to why we need to focus on more
+[0:08:43] as to why we need to focus on more flexible methods of statistical
+[0:08:45] flexible methods of statistical adjustment
+[0:08:46] adjustment that is it's very rarely communicated
+[0:08:48] that is it's very rarely communicated what model specification is
+[0:08:51] what model specification is um
+[0:08:51] um [Music]
+[0:08:53] [Music] right if you could one way this is from
+[0:08:55] right if you could one way this is from a another paper uh paper i wrote with
+[0:08:57] a another paper uh paper i wrote with dylan and uh
+[0:08:59] dylan and uh and you can sort of think about what
+[0:09:01] and you can sort of think about what actually is going into any particular
+[0:09:03] actually is going into any particular causal effect is there's there's
+[0:09:05] causal effect is there's there's possible hidden bias which in this sort
+[0:09:07] possible hidden bias which in this sort of setting is is would be biased as a
+[0:09:09] of setting is is would be biased as a function of omitted confounders
+[0:09:11] function of omitted confounders in these studies where essentially we've
+[0:09:13] in these studies where essentially we've assumed that that is zero and taken that
+[0:09:14] assumed that that is zero and taken that as given
+[0:09:16] as given their right is right is misspecification
+[0:09:18] their right is right is misspecification bias that could be that is due to
+[0:09:20] bias that could be that is due to incorrect functional form in the form of
+[0:09:21] incorrect functional form in the form of statistical adjustment in this setting
+[0:09:24] statistical adjustment in this setting and then there's statistical noise and i
+[0:09:26] and then there's statistical noise and i don't know that there's often much
+[0:09:27] don't know that there's often much communication about like the magnitude
+[0:09:30] communication about like the magnitude of how big this
+[0:09:32] of how big this particular bias this mis-specification
+[0:09:35] particular bias this mis-specification bias can be there's also to me i think a
+[0:09:37] bias can be there's also to me i think a little bit of a tragedy in it if you are
+[0:09:40] little bit of a tragedy in it if you are we never quite know in this setting
+[0:09:41] we never quite know in this setting where we're in this thing where the
+[0:09:43] where we're in this thing where the hidden bias is zero
+[0:09:46] hidden bias is zero we we do know it in some settings but if
+[0:09:47] we we do know it in some settings but if you are in this world where you these
+[0:09:50] you are in this world where you these are the no unobserved confounding
+[0:09:51] are the no unobserved confounding assumption holds and you bias your
+[0:09:54] assumption holds and you bias your specification
+[0:09:55] specification your result is a function of
+[0:09:57] your result is a function of specification bias which isn't generally
+[0:09:58] specification bias which isn't generally entirely preventable that's a bit of a
+[0:10:00] entirely preventable that's a bit of a tragedy
+[0:10:01] tragedy uh in my view in terms of estimating
+[0:10:03] uh in my view in terms of estimating causal effects
+[0:10:05] causal effects right that is we the model
+[0:10:07] right that is we the model sophistication gentilly arises due to
+[0:10:09] sophistication gentilly arises due to incorrect modeling of choices
+[0:10:11] incorrect modeling of choices non-linearity in various forms hidden
+[0:10:13] non-linearity in various forms hidden interactions are probably the two main
+[0:10:16] interactions are probably the two main uh uh uh sources of it um i came across
+[0:10:20] uh uh uh sources of it um i came across i've developed a couple little
+[0:10:22] i've developed a couple little simulation exercises i think it was
+[0:10:24] simulation exercises i think it was helpful to communicate to people
+[0:10:26] helpful to communicate to people how large this the magnitude of what
+[0:10:29] how large this the magnitude of what this bias can be
+[0:10:31] this bias can be in this simulation uh it's a very simple
+[0:10:34] in this simulation uh it's a very simple setup we have an outcome we have z which
+[0:10:36] setup we have an outcome we have z which is a treatment there's a single
+[0:10:37] is a treatment there's a single continuous control variable
+[0:10:39] continuous control variable that has a quadratic functional form
+[0:10:42] that has a quadratic functional form um the magnitude of the bias i don't get
+[0:10:44] um the magnitude of the bias i don't get into it here it's in the paper depends
+[0:10:45] into it here it's in the paper depends very much on how much correlated x is
+[0:10:47] very much on how much correlated x is and then the variances across these two
+[0:10:49] and then the variances across these two terms
+[0:10:50] terms um
+[0:10:52] um but in this we can think of three
+[0:10:54] but in this we can think of three scenarios one you could omit x right
+[0:10:56] scenarios one you could omit x right we're omitting a confounder x is
+[0:10:58] we're omitting a confounder x is designed in this simulation to be a
+[0:11:00] designed in this simulation to be a confounder it has to be in the equation
+[0:11:02] confounder it has to be in the equation you can mod as linear right we can
+[0:11:05] you can mod as linear right we can induce model misspecification on purpose
+[0:11:07] induce model misspecification on purpose or we can include x in the model with
+[0:11:10] or we can include x in the model with the true quadratic specification
+[0:11:13] the true quadratic specification and i think it's this is i think when i
+[0:11:14] and i think it's this is i think when i show this to more applied uh researchers
+[0:11:17] show this to more applied uh researchers i think this starts to get a little more
+[0:11:19] i think this starts to get a little more attention right if we get the functional
+[0:11:21] attention right if we get the functional form right this is each of these
+[0:11:24] form right this is each of these histograms is the distribution of the
+[0:11:26] histograms is the distribution of the estimates over a thousand simulations
+[0:11:28] estimates over a thousand simulations when everything is right when things are
+[0:11:30] when everything is right when things are correctly specified we are
+[0:11:32] correctly specified we are hitting the true uh uh effect um when we
+[0:11:36] hitting the true uh uh effect um when we omit the confounder right we are clearly
+[0:11:38] omit the confounder right we are clearly shifted away the distribution is no
+[0:11:40] shifted away the distribution is no longer
+[0:11:41] longer overlaps with the true distribution but
+[0:11:43] overlaps with the true distribution but model miss specification itself
+[0:11:45] model miss specification itself depending on how you uh configure the
+[0:11:48] depending on how you uh configure the variance and covariance between z and x
+[0:11:50] variance and covariance between z and x can induce specification that rivals or
+[0:11:53] can induce specification that rivals or is greater than that of omitted variable
+[0:11:54] is greater than that of omitted variable bias right and it's really this when we
+[0:11:56] bias right and it's really this when we think about what
+[0:11:57] think about what what
+[0:11:58] what when we worry about flexible forms right
+[0:11:59] when we worry about flexible forms right is we're trying to prevent this form of
+[0:12:01] is we're trying to prevent this form of bias
+[0:12:06] in terms of reducing monopoly specification right
+[0:12:08] specification right for a long time i think the the the main
+[0:12:11] for a long time i think the the the main emphasis has been what i would call a
+[0:12:13] emphasis has been what i would call a semi-parametric
+[0:12:14] semi-parametric nuisance parameter approach and this is
+[0:12:16] nuisance parameter approach and this is how i would group essentially both
+[0:12:18] how i would group essentially both matching and in most forms of
+[0:12:21] matching and in most forms of weighting
+[0:12:22] weighting where the the best functional form
+[0:12:25] where the the best functional form specification for the control variables
+[0:12:28] specification for the control variables the confounders is left right is is left
+[0:12:32] the confounders is left right is is left unspecified to some extent there's
+[0:12:34] unspecified to some extent there's various levels to how flexible that
+[0:12:36] various levels to how flexible that people
+[0:12:37] people are in that area
+[0:12:39] are in that area again it depends on how the propensity
+[0:12:40] again it depends on how the propensity scores are estimated there's a lot of
+[0:12:41] scores are estimated there's a lot of different ways you can relax it but this
+[0:12:43] different ways you can relax it but this is sort of because as propensity score
+[0:12:45] is sort of because as propensity score methods have become dominant this has
+[0:12:46] methods have become dominant this has sort of become probably the most common
+[0:12:48] sort of become probably the most common way that people try to reduce model
+[0:12:50] way that people try to reduce model misspecification
+[0:12:52] misspecification and then there's a variety of different
+[0:12:53] and then there's a variety of different forms of non-parametric estimation
+[0:12:55] forms of non-parametric estimation methods again many often associated with
+[0:12:58] methods again many often associated with what we determine machine learning which
+[0:13:00] what we determine machine learning which have also been employed uh in into
+[0:13:02] have also been employed uh in into increasing effect
+[0:13:04] increasing effect right
+[0:13:05] right so let's run through sort of how the
+[0:13:07] so let's run through sort of how the sort of combinations we can sort of
+[0:13:09] sort of combinations we can sort of think of
+[0:13:10] think of uh in terms of how these different
+[0:13:12] uh in terms of how these different methods can be combined in terms of the
+[0:13:14] methods can be combined in terms of the degrees of freedom that it gives people
+[0:13:16] degrees of freedom that it gives people researchers in terms of estimating
+[0:13:18] researchers in terms of estimating causal effects
+[0:13:25] so here in terms of the notation y is going to be an outcome x is treatment
+[0:13:27] going to be an outcome x is treatment and a
+[0:13:28] and a z is treatment and x is uh baseline
+[0:13:30] z is treatment and x is uh baseline compounds
+[0:13:38] so when we talk with clinician this is a choice that people implicitly or
+[0:13:39] choice that people implicitly or sometimes explicitly make right
+[0:13:42] sometimes explicitly make right that is sometimes the the approach is
+[0:13:44] that is sometimes the the approach is outcome focused most regression any sort
+[0:13:47] outcome focused most regression any sort of regression setup of course is going
+[0:13:48] of regression setup of course is going to be outcome focused
+[0:13:51] to be outcome focused again most of the
+[0:13:54] again most of the semi-parametric nuisance function
+[0:13:56] semi-parametric nuisance function approaches are going to be treatment
+[0:13:58] approaches are going to be treatment focused right these are propensity score
+[0:13:59] focused right these are propensity score methods are of course treatment focused
+[0:14:02] methods are of course treatment focused and then right and
+[0:14:04] and then right and gaining currency over the last 10 years
+[0:14:06] gaining currency over the last 10 years or so of course is some
+[0:14:08] or so of course is some by doubly robust some combination of
+[0:14:11] by doubly robust some combination of these two again the combination
+[0:14:12] these two again the combination sometimes is
+[0:14:14] sometimes is is simply
+[0:14:15] is simply running matching and then running
+[0:14:17] running matching and then running regression with some additional
+[0:14:18] regression with some additional adjustment on top of that or it's much
+[0:14:20] adjustment on top of that or it's much more explicit in terms of the propensity
+[0:14:22] more explicit in terms of the propensity score
+[0:14:23] score weighting methods that incorporate these
+[0:14:27] weighting methods that incorporate these together
+[0:14:28] together and then in terms of write our
+[0:14:30] and then in terms of write our estimation methods right we this there's
+[0:14:32] estimation methods right we this there's a lot of plug and play of course across
+[0:14:34] a lot of plug and play of course across these two methods in terms of whether
+[0:14:35] these two methods in terms of whether you regression the propensity score
+[0:14:38] you regression the propensity score methods uh in terms of what's happened
+[0:14:40] methods uh in terms of what's happened in terms of what choices people make
+[0:14:43] in terms of what choices people make there's been a lot of work on what i
+[0:14:44] there's been a lot of work on what i would call advanced grading and matching
+[0:14:46] would call advanced grading and matching methods these are all again more
+[0:14:48] methods these are all again more computationally uh uh
+[0:14:50] computationally uh uh flexible things that unlike propensity
+[0:14:52] flexible things that unlike propensity score methods are directly targeting
+[0:14:54] score methods are directly targeting balance i think that's a key shift
+[0:14:56] balance i think that's a key shift both matching and waiting have moved
+[0:14:57] both matching and waiting have moved away from just estimating a single
+[0:14:59] away from just estimating a single dimensional propensity score and
+[0:15:00] dimensional propensity score and targeting the objective function in
+[0:15:02] targeting the objective function in terms of balance directly
+[0:15:04] terms of balance directly and then i think of course in the last
+[0:15:06] and then i think of course in the last five to ten years most the focus has
+[0:15:08] five to ten years most the focus has been on machine learning amendments
+[0:15:10] been on machine learning amendments and then of course in terms of what you
+[0:15:11] and then of course in terms of what you see in terms of
+[0:15:13] see in terms of applying in the applied literature
+[0:15:14] applying in the applied literature there's not much use of
+[0:15:16] there's not much use of beyond the first two but they're right
+[0:15:18] beyond the first two but they're right any number of combinations
+[0:15:20] any number of combinations there's work on using regression models
+[0:15:22] there's work on using regression models with a propensity score on the right
+[0:15:23] with a propensity score on the right hand side
+[0:15:25] hand side um the most common was is is some sort
+[0:15:28] um the most common was is is some sort of ipw waiting and matching with some
+[0:15:30] of ipw waiting and matching with some sort of outcome regression on top of
+[0:15:31] sort of outcome regression on top of that with perhaps some additional bias
+[0:15:33] that with perhaps some additional bias correction
+[0:15:34] correction uh
+[0:15:35] uh but there's other things people use a
+[0:15:37] but there's other things people use a gbm for propensity score estimation
+[0:15:39] gbm for propensity score estimation to write so there's a lot of different
+[0:15:41] to write so there's a lot of different sort of common combinations here
+[0:15:43] sort of common combinations here i think in terms of what we if we think
+[0:15:45] i think in terms of what we if we think about what should be
+[0:15:47] about what should be generating someone pl when you start to
+[0:15:49] generating someone pl when you start to look at all these lists and if i talk to
+[0:15:51] look at all these lists and if i talk to apply collaborators if i show them this
+[0:15:53] apply collaborators if i show them this long list right clinical collaborators
+[0:15:55] long list right clinical collaborators clinical researchers are very busy
+[0:15:57] clinical researchers are very busy people they tend to be mds with full
+[0:15:59] people they tend to be mds with full practices that are then doing research
+[0:16:02] practices that are then doing research in addition to that
+[0:16:03] in addition to that um
+[0:16:04] um [Music]
+[0:16:06] [Music] it's always struck me as i work with
+[0:16:08] it's always struck me as i work with more medical researchers their
+[0:16:10] more medical researchers their incentives right or
+[0:16:11] incentives right or at least at penn
+[0:16:13] at least at penn a lot of
+[0:16:14] a lot of clinical researchers uh get penalized if
+[0:16:17] clinical researchers uh get penalized if they do too much research because then
+[0:16:18] they do too much research because then they have to they stop bringing in
+[0:16:20] they have to they stop bringing in clinical dollars
+[0:16:21] clinical dollars so they're very busy people if you show
+[0:16:23] so they're very busy people if you show them a long list of methods they're like
+[0:16:24] them a long list of methods they're like i don't know i don't know all the time
+[0:16:26] i don't know i don't know all the time let's figure it out let's let's run a
+[0:16:27] let's figure it out let's let's run a cox model and move on
+[0:16:29] cox model and move on um so in terms of generating some sort
+[0:16:31] um so in terms of generating some sort of advice i think some sort of questions
+[0:16:33] of advice i think some sort of questions that i think that would be relevant to a
+[0:16:36] that i think that would be relevant to a more applied literature
+[0:16:37] more applied literature is should we always use doubly robust
+[0:16:39] is should we always use doubly robust methods
+[0:16:40] methods um
+[0:16:41] um at least in so far should you always do
+[0:16:44] at least in so far should you always do both a treatment focused and an
+[0:16:45] both a treatment focused and an outcome-focused approach to compare the
+[0:16:47] outcome-focused approach to compare the results if that's not strictly speaking
+[0:16:49] results if that's not strictly speaking a doubly robust approach
+[0:16:51] a doubly robust approach but it's at least
+[0:16:52] but it's at least understanding the fact that the model
+[0:16:54] understanding the fact that the model specification can happen in two
+[0:16:56] specification can happen in two different across those two different
+[0:16:57] different across those two different approaches
+[0:16:59] approaches should we move toward ml focus
+[0:17:06] machine learning methods focus approach at all
+[0:17:07] at all there's a relatively recent
+[0:17:09] there's a relatively recent uh discussion on this in statistical
+[0:17:11] uh discussion on this in statistical science in terms of discussing the data
+[0:17:13] science in terms of discussing the data competition out of acic that's clearly
+[0:17:16] competition out of acic that's clearly an undercurrent there is should we just
+[0:17:18] an undercurrent there is should we just let the machines always sort this out
+[0:17:20] let the machines always sort this out because that should that be our
+[0:17:20] because that should that be our recommendation to our applied
+[0:17:22] recommendation to our applied researchers
+[0:17:23] researchers and should we
+[0:17:24] and should we in particular i think should we push
+[0:17:26] in particular i think should we push towards uh
+[0:17:28] towards uh to in my mind i'm going to talk a bit
+[0:17:30] to in my mind i'm going to talk a bit about this
+[0:17:31] about this the theoretical literature really seems
+[0:17:32] the theoretical literature really seems to be converging on a particular form of
+[0:17:35] to be converging on a particular form of a doubly robust and machine learning
+[0:17:36] a doubly robust and machine learning approach only
+[0:17:38] approach only that is in particular is i think there's
+[0:17:41] that is in particular is i think there's any doubt that machine learning methods
+[0:17:43] any doubt that machine learning methods are going to be your most flexible
+[0:17:44] are going to be your most flexible choice in terms of avoiding uh
+[0:17:51] functional form and specification however
+[0:17:53] however sure i was reading a review by victor
+[0:17:56] sure i was reading a review by victor turner zukov and some other people it's
+[0:17:57] turner zukov and some other people it's pretty clear metal ml methods on their
+[0:17:59] pretty clear metal ml methods on their own have pretty poor inferential
+[0:18:01] own have pretty poor inferential properties
+[0:18:02] properties right across they weren't really
+[0:18:03] right across they weren't really designed for inference
+[0:18:05] designed for inference um there's been a lot of work the last
+[0:18:07] um there's been a lot of work the last five years and what i i there's no real
+[0:18:09] five years and what i i there's no real name for this this is the name that
+[0:18:11] name for this this is the name that edward kennedy and i came up called the
+[0:18:12] edward kennedy and i came up called the w robust machine learning framework it
+[0:18:14] w robust machine learning framework it has clearly showed us how to combine ml
+[0:18:17] has clearly showed us how to combine ml methods but get the right form of
+[0:18:18] methods but get the right form of optimal efficiency
+[0:18:20] optimal efficiency that is in this setup there's always a
+[0:18:22] that is in this setup there's always a double robust framework
+[0:18:24] double robust framework the the bias is a series of bias
+[0:18:26] the the bias is a series of bias corrected estimators using influence
+[0:18:28] corrected estimators using influence functions
+[0:18:29] functions and then of course the estimations
+[0:18:31] and then of course the estimations combined was the correct form of sample
+[0:18:33] combined was the correct form of sample splitting for the selection of key
+[0:18:34] splitting for the selection of key tuning parameters
+[0:18:36] tuning parameters um i to me this framework clearly has
+[0:18:39] um i to me this framework clearly has the best theoretical properties
+[0:18:41] the best theoretical properties from my reading in the literature people
+[0:18:43] from my reading in the literature people can debate i'm open to debate about that
+[0:18:46] can debate i'm open to debate about that um but right is this so is this the the
+[0:18:49] um but right is this so is this the the is it necessary right is the marginal
+[0:18:51] is it necessary right is the marginal gain from this framework enough in
+[0:18:52] gain from this framework enough in applied settings that this is what we
+[0:18:54] applied settings that this is what we should be pushing all any sort of
+[0:18:56] should be pushing all any sort of applied collaboration toward
+[0:19:00] applied collaboration toward um
+[0:19:00] um [Music]
+[0:19:02] [Music] so this talk it covers a couple of
+[0:19:04] so this talk it covers a couple of different papers where i'm sort of
+[0:19:05] different papers where i'm sort of interested in sort of interrogating
+[0:19:07] interested in sort of interrogating these questions and i like to do it
+[0:19:09] these questions and i like to do it essentially when in terms of evaluating
+[0:19:11] essentially when in terms of evaluating performance there are two main ways that
+[0:19:12] performance there are two main ways that we do that
+[0:19:13] we do that and that's either recovering
+[0:19:15] and that's either recovering experimental benchmarks or simulations
+[0:19:18] experimental benchmarks or simulations right the acic data competition is very
+[0:19:20] right the acic data competition is very focused on simulations and i
+[0:19:22] focused on simulations and i you know our response i think you know
+[0:19:24] you know our response i think you know i'm i'm in that exchange in statistical
+[0:19:26] i'm i'm in that exchange in statistical science and i think there's there's
+[0:19:27] science and i think there's there's pluses and minuses to both settings
+[0:19:30] pluses and minuses to both settings um in this case i'm going to focus on
+[0:19:33] um in this case i'm going to focus on two experimental case studies we're
+[0:19:34] two experimental case studies we're going to look at some two places where
+[0:19:36] going to look at some two places where we have experimental benchmarks but
+[0:19:38] we have experimental benchmarks but observational data
+[0:19:39] observational data one of which was not been widely used
+[0:19:41] one of which was not been widely used neither one of which is the lawn
+[0:19:42] neither one of which is the lawn framework
+[0:19:43] framework um
+[0:19:45] um and uh
+[0:19:46] and uh so what i want to do is leverage these
+[0:19:49] so what i want to do is leverage these two different experimental benchmarks
+[0:19:51] two different experimental benchmarks with some focus on these questions to
+[0:19:53] with some focus on these questions to give us some idea right of of answers to
+[0:19:56] give us some idea right of of answers to these two questions
+[0:19:58] these two questions uh i've
+[0:19:59] uh i've been encouraged to pause for questions
+[0:20:00] been encouraged to pause for questions and i want to take this point at one my
+[0:20:03] and i want to take this point at one my first sort of
+[0:20:04] first sort of um
+[0:20:06] um a pausing point in terms of taking
+[0:20:08] a pausing point in terms of taking questions
+[0:20:15] um there are no questions in the q a section ever we encourage people to
+[0:20:18] section ever we encourage people to raise questions
+[0:20:20] raise questions and i think we can continue okay
+[0:20:26] okay actually look there's just one
+[0:20:29] actually look there's just one question that showed up right now
+[0:20:36] how do common support violations fit into this framework that's a question so
+[0:20:39] into this framework that's a question so again that very much depends on what
+[0:20:41] again that very much depends on what your which method you're talking about
+[0:20:43] your which method you're talking about um
+[0:20:45] um in the waiting setup like overlap
+[0:20:47] in the waiting setup like overlap weights are definitely designed to
+[0:20:49] weights are definitely designed to particularly target overlap in
+[0:20:50] particularly target overlap in particular
+[0:20:52] particular most matching methods uh
+[0:20:55] most matching methods uh again within matching propensity score
+[0:20:56] again within matching propensity score matching itself has got some of those
+[0:20:58] matching itself has got some of those some rudimentary diagnostics that you
+[0:21:00] some rudimentary diagnostics that you can think about overlap
+[0:21:01] can think about overlap but there are optimal subsetting methods
+[0:21:04] but there are optimal subsetting methods that are essentially matching methods
+[0:21:06] that are essentially matching methods designed to trim for common support
+[0:21:10] designed to trim for common support machine learning methods some of them
+[0:21:11] machine learning methods some of them again
+[0:21:12] again have a bar
+[0:21:14] have a bar right has trimming rules to enforce
+[0:21:16] right has trimming rules to enforce common support so that's just another
+[0:21:18] common support so that's just another degree of freedom in terms of across
+[0:21:20] degree of freedom in terms of across these different forms of methods
+[0:21:22] these different forms of methods yet another form of
+[0:21:24] yet another form of uh
+[0:21:25] uh degree of freedom in terms of how we
+[0:21:27] degree of freedom in terms of how we choose these adjustment methods
+[0:21:30] choose these adjustment methods in the clinical literature i don't know
+[0:21:32] in the clinical literature i don't know that it's
+[0:21:34] that it's that that topic is too well understood
+[0:21:36] that that topic is too well understood um
+[0:21:37] um in
+[0:21:38] in this literature in general there's some
+[0:21:40] this literature in general there's some methods are designed to target
+[0:21:42] methods are designed to target particular poor overlap and others are
+[0:21:44] particular poor overlap and others are less designed to do that and it depends
+[0:21:46] less designed to do that and it depends on sort of
+[0:21:47] on sort of which of these combinations sometimes
+[0:21:48] which of these combinations sometimes the methods are chosen for that reason
+[0:21:50] the methods are chosen for that reason that's one reason people will sometimes
+[0:21:52] that's one reason people will sometimes match and then run progression on top of
+[0:21:54] match and then run progression on top of it right
+[0:21:55] it right that's a
+[0:21:56] that's a recommendation out there right the
+[0:21:57] recommendation out there right the matching is designed to sort of enforce
+[0:21:59] matching is designed to sort of enforce the common support so that when you run
+[0:22:01] the common support so that when you run the regression on top of it you're
+[0:22:03] the regression on top of it you're avoiding extrapolation in that
+[0:22:04] avoiding extrapolation in that particular way so it kind of depends on
+[0:22:07] particular way so it kind of depends on which combination is selected and
+[0:22:09] which combination is selected and whether you think that if you think
+[0:22:10] whether you think that if you think that's an issue you can select among
+[0:22:12] that's an issue you can select among these different methods for that
+[0:22:14] these different methods for that to enforce common support
+[0:22:20] great thanks can we just do one short one also
+[0:22:22] one also do the bayesian approaches count to the
+[0:22:25] do the bayesian approaches count to the ml category
+[0:22:32] that's a good question i mean bart yes uh
+[0:22:32] uh but i i would argue
+[0:22:35] but i i would argue i'm probably gonna offend some some
+[0:22:37] i'm probably gonna offend some some asian when i say this i think you could
+[0:22:38] asian when i say this i think you could very easily construct a bayesian setup
+[0:22:40] very easily construct a bayesian setup that's not machine learning right i mean
+[0:22:43] that's not machine learning right i mean if i could set up a logistic regression
+[0:22:45] if i could set up a logistic regression with some sort of
+[0:22:46] with some sort of prior on it an estimated propensity
+[0:22:49] prior on it an estimated propensity score that way and i don't know i
+[0:22:50] score that way and i don't know i wouldn't to me that wouldn't be a
+[0:22:52] wouldn't to me that wouldn't be a machine learning approach
+[0:22:53] machine learning approach what what classifies as machine learning
+[0:22:56] what what classifies as machine learning i mean i
+[0:22:57] i mean i i know bayes when i see it what classes
+[0:22:59] i know bayes when i see it what classes went right again is you could argue that
+[0:23:01] went right again is you could argue that again jam is a machine learning method
+[0:23:03] again jam is a machine learning method it's in hasting tupac gerani right but
+[0:23:05] it's in hasting tupac gerani right but it's a pretty
+[0:23:07] it's a pretty vanilla um
+[0:23:10] vanilla um so
+[0:23:11] so i
+[0:23:12] i no i would say in general bars yes
+[0:23:15] no i would say in general bars yes bayesian can be machine learning but it
+[0:23:16] bayesian can be machine learning but it doesn't have i would say it doesn't have
+[0:23:17] doesn't have i would say it doesn't have to be uh there were probably some who
+[0:23:20] to be uh there were probably some who may disagree with that categorization
+[0:23:21] may disagree with that categorization but that's sort of my
+[0:23:23] but that's sort of my my take on that
+[0:23:25] my take on that great thanks
+[0:23:29] go ahead so i want to talk about the first case
+[0:23:31] so i want to talk about the first case study this is a case study that's uh one
+[0:23:33] study this is a case study that's uh one i came across with a clinic a
+[0:23:35] i came across with a clinic a collaborator in the uk it's a really
+[0:23:36] collaborator in the uk it's a really cool study i wish we did this a bit more
+[0:23:39] cool study i wish we did this a bit more often
+[0:23:40] often so the clinical question they had a
+[0:23:42] so the clinical question they had a clinical question
+[0:23:43] clinical question uh a gourd stands for gastroenter
+[0:23:46] uh a gourd stands for gastroenter gastrointestinal reflux disease
+[0:23:50] gastrointestinal reflux disease essentially very bad
+[0:23:52] essentially very bad heartburn
+[0:23:54] heartburn for people with advanced med
+[0:23:58] for people with advanced med advanced uh
+[0:24:00] advanced uh severe gourd they are essentially the
+[0:24:02] severe gourd they are essentially the main form of treatment is something
+[0:24:04] main form of treatment is something called a proton pump inhibitor which is
+[0:24:06] called a proton pump inhibitor which is essentially a form of medical management
+[0:24:08] essentially a form of medical management treatment but there are also forms of
+[0:24:10] treatment but there are also forms of surgical treatment for gourd
+[0:24:12] surgical treatment for gourd the trial in particular that is the main
+[0:24:14] the trial in particular that is the main applied research question of interest
+[0:24:16] applied research question of interest was whether surgery was um
+[0:24:20] was whether surgery was um superior to medical management medical
+[0:24:23] superior to medical management medical management has some long-term because
+[0:24:24] management has some long-term because you're taking these medications for a
+[0:24:26] you're taking these medications for a long time there can be long-term side
+[0:24:27] long time there can be long-term side effects where surgery is meant to be a
+[0:24:29] effects where surgery is meant to be a one-off
+[0:24:30] one-off intervention that avoids some of those
+[0:24:32] intervention that avoids some of those long-term consequences so that was the
+[0:24:34] long-term consequences so that was the the the two arms essentially the study
+[0:24:36] the the two arms essentially the study are medical management versus surgery
+[0:24:39] are medical management versus surgery um but what was really nice about it is
+[0:24:41] um but what was really nice about it is reflux was the title of it
+[0:24:44] reflux was the title of it uh that actually stands for
+[0:24:47] uh that actually stands for something that i
+[0:24:48] something that i forget
+[0:24:49] forget uh often these large studies have
+[0:24:52] uh often these large studies have acronym names
+[0:24:54] acronym names but what they did is they actually
+[0:24:55] but what they did is they actually enrolled and did a parallel
+[0:24:57] enrolled and did a parallel rct and observation study
+[0:25:00] rct and observation study so what actually happened here is they
+[0:25:02] so what actually happened here is they had their baseline enrollment criteria
+[0:25:04] had their baseline enrollment criteria and the enrollment criteria had to do
+[0:25:05] and the enrollment criteria had to do things with age but mostly it had to do
+[0:25:07] things with age but mostly it had to do with
+[0:25:08] with uh you needed a gourd
+[0:25:10] uh you needed a gourd a diagnosis that had to be a certain
+[0:25:12] a diagnosis that had to be a certain level of severity a number of sort of
+[0:25:14] level of severity a number of sort of standard clinical characteristics that
+[0:25:16] standard clinical characteristics that were used to be enrolled in the study
+[0:25:18] were used to be enrolled in the study once the patients were enrolled in the
+[0:25:21] once the patients were enrolled in the study
+[0:25:22] study they were given a choice they were given
+[0:25:24] they were given a choice they were given a choice would you like to be in a
+[0:25:26] a choice would you like to be in a randomized trial arm or would you prefer
+[0:25:28] randomized trial arm or would you prefer to be in this patient preference
+[0:25:31] to be in this patient preference and what happened in there that was
+[0:25:32] and what happened in there that was entirely up to the the patients to
+[0:25:34] entirely up to the the patients to choose between the two arms
+[0:25:36] choose between the two arms if patients enrolled selected the rct
+[0:25:39] if patients enrolled selected the rct arm they were randomized right as is
+[0:25:42] arm they were randomized right as is would be the case in any clinical trial
+[0:25:44] would be the case in any clinical trial they were randomized across the two arms
+[0:25:47] they were randomized across the two arms in the patient preference arm they in
+[0:25:49] in the patient preference arm they in consultation with their doctor were able
+[0:25:52] consultation with their doctor were able to select which form of treatment they
+[0:25:54] to select which form of treatment they were given surgery or medical management
+[0:25:57] were given surgery or medical management to give you an idea of the overall
+[0:25:58] to give you an idea of the overall sample sizes here so uh 810 patients
+[0:26:01] sample sizes here so uh 810 patients made it through the enrollment criteria
+[0:26:03] made it through the enrollment criteria were enrolled in reflux
+[0:26:06] were enrolled in reflux 357 opted to into the rct arm
+[0:26:10] 357 opted to into the rct arm and then 453 opted into the patient
+[0:26:13] and then 453 opted into the patient preference arm across surgery and
+[0:26:15] preference arm across surgery and medical management it's 178 works
+[0:26:18] medical management it's 178 works received surgery and 179
+[0:26:20] received surgery and 179 received medical management in the other
+[0:26:23] received medical management in the other arm it was a bit more imbalanced 261
+[0:26:26] arm it was a bit more imbalanced 261 opted to take surgery
+[0:26:28] opted to take surgery and then 192 opted for medical
+[0:26:30] and then 192 opted for medical management
+[0:26:31] management um
+[0:26:32] um [Music]
+[0:26:34] [Music] so what was so we have
+[0:26:36] so what was so we have the full data set we have a set of
+[0:26:38] the full data set we have a set of baseline debate this set of baseline
+[0:26:40] baseline debate this set of baseline covariates were
+[0:26:42] covariates were gathered here uh from the enrollment
+[0:26:44] gathered here uh from the enrollment criteria
+[0:26:45] criteria so in terms of work on like this and
+[0:26:47] so in terms of work on like this and work on the type using the target trial
+[0:26:49] work on the type using the target trial framework this is all very nicely set up
+[0:26:51] framework this is all very nicely set up here and that the design takes care of
+[0:26:53] here and that the design takes care of all that and the enrollment criteria and
+[0:26:54] all that and the enrollment criteria and the setups were essentially designed to
+[0:26:55] the setups were essentially designed to be parallel across the two studies
+[0:26:58] be parallel across the two studies and this was conducted in the uk at 21
+[0:26:59] and this was conducted in the uk at 21 different medical centers across the uk
+[0:27:07] so the main uh two different outcomes here are health status eq5d
+[0:27:10] here are health status eq5d is a questionnaire that's used uh more
+[0:27:13] is a questionnaire that's used uh more widely in europe but it's a health
+[0:27:14] widely in europe but it's a health status questionnaire
+[0:27:16] status questionnaire uh asking people about their health
+[0:27:18] uh asking people about their health status and then they have quality of
+[0:27:19] status and then they have quality of life both of these are a series of
+[0:27:21] life both of these are a series of survey instruments that are then um
+[0:27:25] survey instruments that are then um uh
+[0:27:26] uh turned into a scale by principal
+[0:27:27] turned into a scale by principal components so our outcomes here are both
+[0:27:30] components so our outcomes here are both these principal component scale outcomes
+[0:27:33] these principal component scale outcomes um that are
+[0:27:34] um that are roughly essentially continuous
+[0:27:37] roughly essentially continuous so those are the two main outcomes and
+[0:27:39] so those are the two main outcomes and here we they actually looked at over a
+[0:27:41] here we they actually looked at over a few different periods but three months
+[0:27:42] few different periods but three months was the first measure of the first time
+[0:27:45] was the first measure of the first time that they measured it after the
+[0:27:46] that they measured it after the intervention
+[0:27:50] um so what's nice here because we have the
+[0:27:52] so what's nice here because we have the data from both the trial and the full
+[0:27:55] data from both the trial and the full data set from the trial and
+[0:27:57] data set from the trial and the observational study right we can
+[0:28:00] the observational study right we can estimate the treatment effect in the rct
+[0:28:03] estimate the treatment effect in the rct we can also then estimate it in the
+[0:28:04] we can also then estimate it in the non-randomized arm
+[0:28:07] non-randomized arm and then you can compare in education
+[0:28:09] and then you can compare in education they like to use this measure where you
+[0:28:11] they like to use this measure where you take the standard deviation and the
+[0:28:12] take the standard deviation and the control arm and you standardize that so
+[0:28:14] control arm and you standardize that so it's a form of essentially a
+[0:28:15] it's a form of essentially a standardized measure of bias across
+[0:28:18] standardized measure of bias across the two arms so you can essentially
+[0:28:20] the two arms so you can essentially measure the discrepancy from the
+[0:28:21] measure the discrepancy from the observational study to the rct arm
+[0:28:26] observational study to the rct arm so in this uh this is an earlier paper i
+[0:28:28] so in this uh this is an earlier paper i was particularly interested after the
+[0:28:30] was particularly interested after the the um so i here i'll i'm going to cover
+[0:28:33] the um so i here i'll i'm going to cover i usually
+[0:28:34] i usually we used a lot of different methods in
+[0:28:36] we used a lot of different methods in terms of
+[0:28:36] terms of estimating the uh uh observational study
+[0:28:39] estimating the uh uh observational study arms what we're going to do is we're
+[0:28:40] arms what we're going to do is we're going to vary how we estimate the
+[0:28:42] going to vary how we estimate the observational study estimates
+[0:28:45] observational study estimates um
+[0:28:46] um one thing i noticed in the results from
+[0:28:48] one thing i noticed in the results from the acic competition is that a number of
+[0:28:50] the acic competition is that a number of the methods that perform rather poorly
+[0:28:52] the methods that perform rather poorly were these
+[0:28:54] were these uh series of stata commands that stata
+[0:28:56] uh series of stata commands that stata has stata actually has a whole suite
+[0:28:59] has stata actually has a whole suite of
+[0:29:00] of they're called pe effects commands
+[0:29:02] they're called pe effects commands they're essentially designed to
+[0:29:03] they're essentially designed to implement causal inference estimators
+[0:29:05] implement causal inference estimators more easily for you
+[0:29:06] more easily for you i noticed that those often performed
+[0:29:08] i noticed that those often performed rather poorly so one thing we did in
+[0:29:10] rather poorly so one thing we did in this first study is we vary not only the
+[0:29:13] this first study is we vary not only the methods that is we use matching and
+[0:29:15] methods that is we use matching and regression and those sorts of things but
+[0:29:17] regression and those sorts of things but we also did some variation across we did
+[0:29:20] we also did some variation across we did i used
+[0:29:20] i used the full set of stata commands but also
+[0:29:23] the full set of stata commands but also coded
+[0:29:24] coded several of these up in r
+[0:29:26] several of these up in r um
+[0:29:28] um myself to sort of get some sense of
+[0:29:30] myself to sort of get some sense of what's going on in terms of
+[0:29:31] what's going on in terms of uh uh the software that strikes me as
+[0:29:34] uh uh the software that strikes me as important in the sense that the state of
+[0:29:35] important in the sense that the state of commands are often some of the most
+[0:29:36] commands are often some of the most widely used i think in applied
+[0:29:38] widely used i think in applied literature and that they're easily
+[0:29:40] literature and that they're easily accessible and don't require any sort of
+[0:29:42] accessible and don't require any sort of programming
+[0:29:45] programming so to give you here's a list of
+[0:29:46] so to give you here's a list of everything we tried
+[0:29:48] everything we tried um
+[0:29:49] um so we have in terms of outcome model
+[0:29:52] so we have in terms of outcome model focus
+[0:29:53] focus data we did regression adjustments data
+[0:29:55] data we did regression adjustments data however i should say this is not using
+[0:29:57] however i should say this is not using the reg command instead of this is using
+[0:29:59] the reg command instead of this is using the tef so the tefx has an ra option
+[0:30:03] the tef so the tefx has an ra option which does regression adjustment
+[0:30:05] which does regression adjustment um
+[0:30:06] um in r i just did regular regression
+[0:30:08] in r i just did regular regression adjustment there are some interesting
+[0:30:09] adjustment there are some interesting contrasts sometimes across these two
+[0:30:11] contrasts sometimes across these two commands and then i chose selected bard
+[0:30:13] commands and then i chose selected bard as a machine learning but outcome
+[0:30:15] as a machine learning but outcome focused uh setup
+[0:30:17] focused uh setup in terms of the
+[0:30:18] in terms of the treatment focus across theta so stata
+[0:30:21] treatment focus across theta so stata has essentially
+[0:30:22] has essentially the tefx has two different options for
+[0:30:25] the tefx has two different options for ipw and and stabilized
+[0:30:27] ipw and and stabilized augmented ipw weights and then it has a
+[0:30:30] augmented ipw weights and then it has a ps and a nearest neighbor match command
+[0:30:32] ps and a nearest neighbor match command so it has essentially two forms of
+[0:30:33] so it has essentially two forms of matching
+[0:30:34] matching at least at this time of writing um
+[0:30:37] at least at this time of writing um stata comes out with updates very often
+[0:30:39] stata comes out with updates very often now and there may be other options in
+[0:30:41] now and there may be other options in there now but
+[0:30:42] there now but three this is these were the options
+[0:30:43] three this is these were the options available in state as of about three
+[0:30:45] available in state as of about three years ago
+[0:30:46] years ago and then in r i did i just coded these
+[0:30:49] and then in r i did i just coded these myself for the propensity score match uh
+[0:30:52] myself for the propensity score match uh i use just standard matching there
+[0:30:55] i use just standard matching there the covariant matching is essentially
+[0:30:57] the covariant matching is essentially using a mountain lobus distance
+[0:30:59] using a mountain lobus distance and then
+[0:31:01] and then the the more
+[0:31:02] the the more sophisticated form of matching i use
+[0:31:04] sophisticated form of matching i use something called cardinality matching
+[0:31:06] something called cardinality matching which is a method of matching
+[0:31:08] which is a method of matching integer based matching developed by jose
+[0:31:09] integer based matching developed by jose zuccereta
+[0:31:11] zuccereta um that i think is is like more advanced
+[0:31:14] um that i think is is like more advanced forms of matches designed to directly
+[0:31:16] forms of matches designed to directly target covariant balance in terms of the
+[0:31:18] target covariant balance in terms of the optimization
+[0:31:19] optimization it also can
+[0:31:21] it also can trim for overlap as well
+[0:31:24] trim for overlap as well in terms of outcome versus treatment
+[0:31:26] in terms of outcome versus treatment that is
+[0:31:27] that is totally robust most of these the stata
+[0:31:29] totally robust most of these the stata has options to add regression adjustment
+[0:31:31] has options to add regression adjustment onto some of these commands
+[0:31:34] onto some of these commands then i just added regression adjustment
+[0:31:35] then i just added regression adjustment to these other two the doubly robust is
+[0:31:37] to these other two the doubly robust is just using an augmented propensity score
+[0:31:39] just using an augmented propensity score weights
+[0:31:40] weights and then in terms of more sophisticated
+[0:31:43] and then in terms of more sophisticated metas i use the generalized random force
+[0:31:44] metas i use the generalized random force methods this is the method of
+[0:31:47] methods this is the method of uh off the athene wagner
+[0:31:50] uh off the athene wagner and then in terms of a super learner
+[0:31:52] and then in terms of a super learner with a tl me this is i used uh
+[0:31:55] with a tl me this is i used uh the mp causal package uh from edward
+[0:31:58] the mp causal package uh from edward kennedy that ties into the super learner
+[0:32:01] kennedy that ties into the super learner package and r and i did the estimation
+[0:32:03] package and r and i did the estimation estimates that way i'll talk a little
+[0:32:05] estimates that way i'll talk a little bit about the
+[0:32:06] bit about the the s the learners that were included
+[0:32:08] the s the learners that were included this in in a moment
+[0:32:11] this in in a moment so we've got essentially as i said we've
+[0:32:13] so we've got essentially as i said we've got two outcomes we've got these
+[0:32:14] got two outcomes we've got these different sets of outcomes i'm going to
+[0:32:16] different sets of outcomes i'm going to stratify the results in three different
+[0:32:17] stratify the results in three different ways i'm first going to
+[0:32:19] ways i'm first going to compare the more the machine learning
+[0:32:21] compare the more the machine learning based methods and then i'll contrast
+[0:32:23] based methods and then i'll contrast this data and our
+[0:32:25] this data and our non-machine learning methods
+[0:32:27] non-machine learning methods um so across this these these sometimes
+[0:32:31] um so across this these these sometimes are a little bit small so this this
+[0:32:33] are a little bit small so this this upper row here is the generalized random
+[0:32:35] upper row here is the generalized random forest
+[0:32:36] forest uh this this vertical line here is this
+[0:32:38] uh this this vertical line here is this is again all across the x-axis across
+[0:32:41] is again all across the x-axis across all these is the the metric is
+[0:32:42] all these is the the metric is standardized bias
+[0:32:44] standardized bias so this is essentially the distance
+[0:32:46] so this is essentially the distance between uh the observational study
+[0:32:49] between uh the observational study estimate and the rct estimate with a
+[0:32:51] estimate and the rct estimate with a confidence interval
+[0:32:53] confidence interval uh as points get close to the vertical
+[0:32:55] uh as points get close to the vertical line the observational study method is
+[0:32:58] line the observational study method is doing better in terms of recovering that
+[0:32:59] doing better in terms of recovering that experimental benchmark
+[0:33:01] experimental benchmark so this top row here this is so these
+[0:33:04] so this top row here this is so these are the two forms the two outcomes
+[0:33:06] are the two forms the two outcomes grf does
+[0:33:08] grf does fine
+[0:33:10] fine same with bart
+[0:33:11] same with bart uh what was very interesting here and
+[0:33:13] uh what was very interesting here and this is going to be a thing i'm going to
+[0:33:14] this is going to be a thing i'm going to come back to
+[0:33:16] come back to uh in the initial super learner here
+[0:33:18] uh in the initial super learner here i included a random forest a lasso and a
+[0:33:22] i included a random forest a lasso and a gbm
+[0:33:23] gbm i alternated when i when i when this
+[0:33:25] i alternated when i when i when this result came back i actually spent some
+[0:33:27] result came back i actually spent some time
+[0:33:28] time swapping learners in and out and it
+[0:33:30] swapping learners in and out and it never actually moved closer
+[0:33:33] never actually moved closer um to this i never could quite
+[0:33:36] um to this i never could quite understand why that's but that's going
+[0:33:37] understand why that's but that's going to be well i'm going to come back to
+[0:33:38] to be well i'm going to come back to that
+[0:33:39] that uh this sort of set up here across the
+[0:33:41] uh this sort of set up here across the tl me super learner framework
+[0:33:44] tl me super learner framework in my in these applications seem to be
+[0:33:46] in my in these applications seem to be somewhat sensitive sometimes to the
+[0:33:47] somewhat sensitive sometimes to the inclusion of learner
+[0:33:55] uh in terms of stated results uh so across the top here we have the tdfx
+[0:33:57] across the top here we have the tdfx command doing regression adjustment
+[0:34:00] command doing regression adjustment standard ipw stabilized waste then this
+[0:34:03] standard ipw stabilized waste then this is ipw with the regression adjustment ps
+[0:34:06] is ipw with the regression adjustment ps mesh and match
+[0:34:07] mesh and match and then only the nn match command
+[0:34:09] and then only the nn match command allows you to do the regression
+[0:34:11] allows you to do the regression adjustment on the outcome model after
+[0:34:12] adjustment on the outcome model after you've matched
+[0:34:14] you've matched here quite noticeably
+[0:34:16] here quite noticeably both the two matching commands are
+[0:34:18] both the two matching commands are actually the worst performers actually
+[0:34:20] actually the worst performers actually across all the methods we tried they end
+[0:34:22] across all the methods we tried they end up being here notice the standardized
+[0:34:24] up being here notice the standardized bias is actually half a standard
+[0:34:26] bias is actually half a standard deviation that's actually rather large
+[0:34:28] deviation that's actually rather large it's over two a quarter of a standard
+[0:34:31] it's over two a quarter of a standard deviation here
+[0:34:32] deviation here um and it was interestingly enough for
+[0:34:34] um and it was interestingly enough for reasons i don't fully understand because
+[0:34:36] reasons i don't fully understand because i'll explain later
+[0:34:37] i'll explain later when you add in the regression
+[0:34:39] when you add in the regression adjustment uh
+[0:34:40] adjustment uh it it's it for so remember the rest
+[0:34:43] it it's it for so remember the rest adjustment here is being added to this
+[0:34:44] adjustment here is being added to this nearest neighbor match command here and
+[0:34:47] nearest neighbor match command here and actually moves it in the wrong wrong
+[0:34:49] actually moves it in the wrong wrong direction in a very large
+[0:34:51] direction in a very large um
+[0:34:57] with considerable amounts of bias um so
+[0:34:59] um so in both these settings these stata
+[0:35:01] in both these settings these stata commands which are probably from my
+[0:35:03] commands which are probably from my understanding in match and ps match are
+[0:35:05] understanding in match and ps match are probably some of the most commonly used
+[0:35:07] probably some of the most commonly used methods across everything i'm going to
+[0:35:08] methods across everything i'm going to show you today
+[0:35:10] show you today end up having
+[0:35:11] end up having not only just
+[0:35:12] not only just very poor performance in general
+[0:35:16] very poor performance in general um
+[0:35:17] um and here again notice here the
+[0:35:18] and here again notice here the regression adjustment is actually
+[0:35:21] regression adjustment is actually does this is this regression adjustment
+[0:35:23] does this is this regression adjustment is being added to this estimate and
+[0:35:25] is being added to this estimate and again it's just zero movement at all
+[0:35:29] again it's just zero movement at all um
+[0:35:30] um so
+[0:35:30] so uh mistakes can be made
+[0:35:33] uh mistakes can be made uh so in r the results are a bit more
+[0:35:35] uh so in r the results are a bit more what's interesting
+[0:35:37] what's interesting as notice here right these these basic
+[0:35:39] as notice here right these these basic for penzi score matches are not doing
+[0:35:41] for penzi score matches are not doing very well
+[0:35:42] very well here
+[0:35:44] here standard ipw is does fine in all s
+[0:35:47] standard ipw is does fine in all s settings
+[0:35:48] settings the only thing i think that the behavior
+[0:35:50] the only thing i think that the behavior here is a bit more normal in both the
+[0:35:52] here is a bit more normal in both the propensity score match and the mahou
+[0:35:53] propensity score match and the mahou novus match if you look at the based on
+[0:35:56] novus match if you look at the based on the initial settings the balance is not
+[0:35:57] the initial settings the balance is not great
+[0:35:59] great [Music]
+[0:36:00] [Music] cardinality matching on the other hand
+[0:36:02] cardinality matching on the other hand balances quite well initially and the
+[0:36:04] balances quite well initially and the results there's very little bias however
+[0:36:06] results there's very little bias however in both these instances once we add in
+[0:36:08] in both these instances once we add in the additional bias reduction
+[0:36:10] the additional bias reduction from the from an outcome model we have
+[0:36:12] from the from an outcome model we have no problem
+[0:36:13] no problem um which is
+[0:36:16] um which is i find
+[0:36:17] i find it's very hard to understand exactly
+[0:36:18] it's very hard to understand exactly what the state of commands are doing
+[0:36:20] what the state of commands are doing like a lot of things that are not open
+[0:36:22] like a lot of things that are not open source it's hard to stand
+[0:36:24] source it's hard to stand uh so it's surprising to me
+[0:36:27] uh so it's surprising to me here that this why these the regression
+[0:36:30] here that this why these the regression the additional regression adjustment
+[0:36:31] the additional regression adjustment here in stata is failing where in r it's
+[0:36:34] here in stata is failing where in r it's doing exactly as we would expect
+[0:36:36] doing exactly as we would expect um
+[0:36:37] um in terms of taking the the imbalances
+[0:36:40] in terms of taking the the imbalances left in the match and we're moving it to
+[0:36:41] left in the match and we're moving it to an outcome model
+[0:36:43] an outcome model uh for this other outcome here only the
+[0:36:45] uh for this other outcome here only the propensity score match has some is is
+[0:36:48] propensity score match has some is is biased but again once we add in uh a
+[0:36:52] biased but again once we add in uh a regression adjustment on top of that
+[0:36:54] regression adjustment on top of that the bias is very is very small well
+[0:36:56] the bias is very is very small well under five tenths of a standard
+[0:36:57] under five tenths of a standard deviation
+[0:37:01] um so we look and see to me it's quite
+[0:37:03] so we look and see to me it's quite interesting uh that here the mode of
+[0:37:06] interesting uh that here the mode of software versus something we don't
+[0:37:07] software versus something we don't really tend to think about actually has
+[0:37:10] really tend to think about actually has uh
+[0:37:11] uh pretty key uh uh
+[0:37:14] pretty key uh uh effects on the results
+[0:37:16] effects on the results that is both the ps mesh and then in
+[0:37:18] that is both the ps mesh and then in match are though one of the only two
+[0:37:19] match are though one of the only two that failed
+[0:37:21] that failed again however both propensity score
+[0:37:23] again however both propensity score matching and uh
+[0:37:25] matching and uh even in r
+[0:37:26] even in r uh performs poorly until you add in the
+[0:37:28] uh performs poorly until you add in the regression adjustment
+[0:37:30] regression adjustment um clearly there's
+[0:37:33] um clearly there's that should be caught by any normal
+[0:37:35] that should be caught by any normal reasonable analyst in the sense that
+[0:37:37] reasonable analyst in the sense that both of these displayed imbalances that
+[0:37:39] both of these displayed imbalances that were then you would you would either
+[0:37:41] were then you would you would either want to adjust your match or again you
+[0:37:43] want to adjust your match or again you include the outcome adjustment
+[0:37:45] include the outcome adjustment um
+[0:37:45] um [Music]
+[0:37:47] [Music] but it's it's
+[0:37:48] but it's it's here
+[0:37:49] here uh oh and then the other thing i thought
+[0:37:51] uh oh and then the other thing i thought was interesting again is that it is the
+[0:37:53] was interesting again is that it is the case that the one of the more advanced
+[0:37:55] case that the one of the more advanced machine learning methods
+[0:37:56] machine learning methods uh did struggle with one of the outcomes
+[0:37:59] uh did struggle with one of the outcomes in particular
+[0:38:00] in particular so let me quickly take this as a second
+[0:38:02] so let me quickly take this as a second point in terms of questions
+[0:38:06] point in terms of questions um yeah we have quite a few questions
+[0:38:08] um yeah we have quite a few questions but there are some common ones
+[0:38:11] but there are some common ones the first is
+[0:38:13] the first is a question raised by three people
+[0:38:16] a question raised by three people which is about the characteristics
+[0:38:19] which is about the characteristics between the two groups like the the the
+[0:38:22] between the two groups like the the the randomized study and the non-randomized
+[0:38:24] randomized study and the non-randomized study like did you account for the
+[0:38:26] study like did you account for the difference in these two populations
+[0:38:29] difference in these two populations uh
+[0:38:35] there well so because the there are some differences across the two
+[0:38:37] differences across the two so there are very few differences across
+[0:38:39] so there are very few differences across the random eye if you look at the in the
+[0:38:41] the random eye if you look at the in the in the main paper we actually present
+[0:38:42] in the main paper we actually present balance statistics across this
+[0:38:44] balance statistics across this uh we actually present the balance
+[0:38:46] uh we actually present the balance statistics across the two arms and then
+[0:38:48] statistics across the two arms and then within well within the rct arm of course
+[0:38:50] within well within the rct arm of course they're going to be balanced by design
+[0:38:52] they're going to be balanced by design um
+[0:38:54] um but because the enrollment criteria are
+[0:38:56] but because the enrollment criteria are standardized across the two there is
+[0:38:58] standardized across the two there is some selection bias in terms there is
+[0:39:00] some selection bias in terms there is some modest look at degrees of selection
+[0:39:02] some modest look at degrees of selection bias in terms of observed covariance
+[0:39:05] bias in terms of observed covariance between the observational study arm and
+[0:39:06] between the observational study arm and the rctr but it's not
+[0:39:09] the rctr but it's not it's not dramatic
+[0:39:12] it's not dramatic but in terms of doing the statistical
+[0:39:14] but in terms of doing the statistical adjustment itself no we didn't correct
+[0:39:15] adjustment itself no we didn't correct for those
+[0:39:16] for those and the reason we didn't is that's
+[0:39:18] and the reason we didn't is that's generally like if you look at the way
+[0:39:19] generally like if you look at the way this is these studies are typically done
+[0:39:21] this is these studies are typically done so it was interesting on archive today
+[0:39:24] so it was interesting on archive today eric chichen chetchen and some other
+[0:39:25] eric chichen chetchen and some other researchers actually
+[0:39:27] researchers actually just
+[0:39:28] just put up a new pre-print on
+[0:39:30] put up a new pre-print on ways to design uh observational studies
+[0:39:33] ways to design uh observational studies from experiments that
+[0:39:34] from experiments that take this a little more into account
+[0:39:37] take this a little more into account most of the original like lalonde
+[0:39:38] most of the original like lalonde studies don't do
+[0:39:40] studies don't do control across the two arms we're just
+[0:39:41] control across the two arms we're just trying to see
+[0:39:43] trying to see how well based on the observable
+[0:39:44] how well based on the observable characteristics within each arm can i
+[0:39:46] characteristics within each arm can i recover that experimental benchmark
+[0:39:53] thanks um um
+[0:39:54] um we'll go with another question which is
+[0:39:57] we'll go with another question which is mainly about the paper and data by two
+[0:39:59] mainly about the paper and data by two people they are asking whether the paper
+[0:40:02] people they are asking whether the paper or the data set are available
+[0:40:05] or the data set are available the paper is available the data set uh
+[0:40:08] the paper is available the data set uh you'd have to apply the original
+[0:40:09] you'd have to apply the original investigators to get the data set
+[0:40:11] investigators to get the data set um
+[0:40:12] um i i could talk to
+[0:40:14] i i could talk to you talk to me i can put you in touch
+[0:40:15] you talk to me i can put you in touch with the right people uh the paper at
+[0:40:17] with the right people uh the paper at the end of the thing i will put i have a
+[0:40:20] the end of the thing i will put i have a citation for this paper
+[0:40:21] citation for this paper at the end of the talk i have a
+[0:40:22] at the end of the talk i have a statement for this paper
+[0:40:25] statement for this paper um thanks
+[0:40:27] um thanks yeah well we still have a few questions
+[0:40:29] yeah well we still have a few questions left but i think for the sake of time
+[0:40:32] left but i think for the sake of time maybe we just continue
+[0:40:35] maybe we just continue okay
+[0:40:37] okay um yeah and i'm i don't have too much
+[0:40:40] um yeah and i'm i don't have too much more to go
+[0:40:41] more to go so in the second application this is
+[0:40:43] so in the second application this is about right heart catheterization
+[0:40:45] about right heart catheterization whether it reduces mortality
+[0:40:47] whether it reduces mortality uh so across observational studies
+[0:40:50] uh so across observational studies the general argument is that it does in
+[0:40:52] the general argument is that it does in the rct or well
+[0:40:55] the rct or well i
+[0:40:55] i pair phrase that in the observational
+[0:40:57] pair phrase that in the observational studies we find that the rhc seems to be
+[0:41:01] studies we find that the rhc seems to be attributed to higher mortality in the
+[0:41:03] attributed to higher mortality in the art there's a couple of rccs done in the
+[0:41:06] art there's a couple of rccs done in the united in the uk
+[0:41:07] united in the uk and there they find no relationship
+[0:41:09] and there they find no relationship between rct the the
+[0:41:11] between rct the the right heart catheterization
+[0:41:13] right heart catheterization and mortality at all it doesn't appear
+[0:41:15] and mortality at all it doesn't appear to reduce mortality
+[0:41:17] to reduce mortality so here i'm using the conor's data this
+[0:41:19] so here i'm using the conor's data this data set is widely available you can
+[0:41:21] data set is widely available you can download the raw data set from
+[0:41:23] download the raw data set from vanderbilt
+[0:41:24] vanderbilt but this data set has been published
+[0:41:26] but this data set has been published many many times
+[0:41:28] many many times it's a nice example there are a lot of
+[0:41:29] it's a nice example there are a lot of continuous covariates a lot of the
+[0:41:31] continuous covariates a lot of the confounders are continuous because they
+[0:41:32] confounders are continuous because they actually have bedside physiology data
+[0:41:35] actually have bedside physiology data and the overlap is is quite poor
+[0:41:37] and the overlap is is quite poor uh here i don't have access to the rct
+[0:41:40] uh here i don't have access to the rct those are just published rcts but i
+[0:41:41] those are just published rcts but i can't
+[0:41:43] can't i haven't been able to get hold of the
+[0:41:44] i haven't been able to get hold of the actual rct data itself
+[0:41:46] actual rct data itself so here we're essentially uh the goal is
+[0:41:48] so here we're essentially uh the goal is to see whether the observational study
+[0:41:50] to see whether the observational study methods how close they are to
+[0:41:51] methods how close they are to essentially covering zero
+[0:41:54] essentially covering zero which is the uh the basic finding from
+[0:41:56] which is the uh the basic finding from from the in the rcts
+[0:41:59] from the in the rcts here i'm using a much more limited
+[0:42:00] here i'm using a much more limited number of methods
+[0:42:03] number of methods i'm going to focus on regression and ipw
+[0:42:06] i'm going to focus on regression and ipw that is a fairly standard form of
+[0:42:09] that is a fairly standard form of outcome modeling in a fairly standard
+[0:42:11] outcome modeling in a fairly standard form of treatment modeling
+[0:42:14] form of treatment modeling then i'm going to do two different more
+[0:42:15] then i'm going to do two different more advanced
+[0:42:16] advanced flavors
+[0:42:18] flavors i'm going to do optimal matching with
+[0:42:19] i'm going to do optimal matching with fine coverage balancing this is
+[0:42:21] fine coverage balancing this is something a
+[0:42:22] something a column collaborator sample mental
+[0:42:24] column collaborator sample mental berkeley method of matching that he came
+[0:42:26] berkeley method of matching that he came up with is again designed to target
+[0:42:28] up with is again designed to target particular balance considerations and
+[0:42:30] particular balance considerations and then overlaps is developer family her
+[0:42:33] then overlaps is developer family her group of duke these are a form of waste
+[0:42:35] group of duke these are a form of waste that are designed to target overlap in
+[0:42:36] that are designed to target overlap in particular which is both seem relevant
+[0:42:38] particular which is both seem relevant here given when you look at the raw data
+[0:42:40] here given when you look at the raw data there's clearly overlap issues
+[0:42:43] there's clearly overlap issues and then in terms of more advanced drml
+[0:42:45] and then in terms of more advanced drml methods i used uh both gr uh grf and uh
+[0:42:49] methods i used uh both gr uh grf and uh a super learner tlma combination
+[0:42:52] a super learner tlma combination um
+[0:42:53] um so here if you look at uh so this is
+[0:42:56] so here if you look at uh so this is just a a regression model uh
+[0:42:59] just a a regression model uh with some interact with
+[0:43:01] with some interact with limited interactions and and
+[0:43:03] limited interactions and and non-linearity included so the ip
+[0:43:05] non-linearity included so the ip weighting here is again simply done with
+[0:43:07] weighting here is again simply done with the logistic regression
+[0:43:09] the logistic regression uh in terms of estimating that
+[0:43:10] uh in terms of estimating that propensity score both of these these are
+[0:43:12] propensity score both of these these are proportions this is the difference in
+[0:43:14] proportions this is the difference in and risk is a risk difference so this is
+[0:43:17] and risk is a risk difference so this is saying that if you got right heart
+[0:43:18] saying that if you got right heart catheterization you were 6.3 percent
+[0:43:20] catheterization you were 6.3 percent more likely to die
+[0:43:22] more likely to die and the ip weight right both of these
+[0:43:24] and the ip weight right both of these either the ones outcome focused and one
+[0:43:26] either the ones outcome focused and one is treatment focused right the results
+[0:43:28] is treatment focused right the results are essentially identical
+[0:43:31] are essentially identical um
+[0:43:32] um so for the match i worked pretty hard on
+[0:43:34] so for the match i worked pretty hard on this match to get it balanced as i said
+[0:43:37] this match to get it balanced as i said the overlap is quite poor
+[0:43:39] the overlap is quite poor in the rhc in the original data set
+[0:43:41] in the rhc in the original data set there are
+[0:43:42] there are 2184 patients that got rhc
+[0:43:46] 2184 patients that got rhc and there are 3 51 controls
+[0:43:49] and there are 3 51 controls to balance that
+[0:43:51] to balance that and the if you look at the the balance
+[0:43:53] and the if you look at the the balance going into the data it's quite poor
+[0:43:55] going into the data it's quite poor there's standardized differences of
+[0:43:56] there's standardized differences of above 0.5
+[0:43:59] above 0.5 to balance it well to get all those
+[0:44:00] to balance it well to get all those standardized differences under 0.1
+[0:44:04] standardized differences under 0.1 uh
+[0:44:04] uh i trimmed about there were
+[0:44:06] i trimmed about there were 1547 matched pairs so i had to do a
+[0:44:09] 1547 matched pairs so i had to do a pretty substantial trimming so it allows
+[0:44:11] pretty substantial trimming so it allows about six hundred treated observations
+[0:44:14] about six hundred treated observations to get um
+[0:44:16] to get um this balance well uh there are a number
+[0:44:18] this balance well uh there are a number of uh discrete covariates that i use
+[0:44:21] of uh discrete covariates that i use fine balance that nearly exactly balance
+[0:44:23] fine balance that nearly exactly balance as well
+[0:44:24] as well what's interesting here again is the
+[0:44:26] what's interesting here again is the regression adjustment again the amount
+[0:44:28] regression adjustment again the amount of bias correction here from bias from
+[0:44:31] of bias correction here from bias from uh from
+[0:44:32] uh from the regression adjustment is actually
+[0:44:34] the regression adjustment is actually rather minimal
+[0:44:36] rather minimal it moves it but again both of these have
+[0:44:37] it moves it but again both of these have actually in some sense the the commons
+[0:44:39] actually in some sense the the commons is a little overlapped so i'm not going
+[0:44:41] is a little overlapped so i'm not going to make strong lines here
+[0:44:43] to make strong lines here but um these are both actually
+[0:44:45] but um these are both actually somewhat worse than a slightly more
+[0:44:47] somewhat worse than a slightly more naive methods
+[0:44:49] naive methods um
+[0:44:50] um so then i tried the overlap weights
+[0:44:52] so then i tried the overlap weights again they're giving me both overlap
+[0:44:54] again they're giving me both overlap weights with and then with regression
+[0:44:57] weights with and then with regression again i get very similar results to the
+[0:44:59] again i get very similar results to the naive methods
+[0:45:01] naive methods um
+[0:45:02] um so then as i moved on i noticed actually
+[0:45:05] so then as i moved on i noticed actually this wasn't initially my plan but the
+[0:45:07] this wasn't initially my plan but the overlap weight
+[0:45:08] overlap weight the package in r that contains overlap
+[0:45:10] the package in r that contains overlap weights
+[0:45:11] weights allows for a gbm you can estimate the
+[0:45:14] allows for a gbm you can estimate the propensity score by a gbm instead of a
+[0:45:16] propensity score by a gbm instead of a logistic regression
+[0:45:18] logistic regression and i added that option as sort of a
+[0:45:20] and i added that option as sort of a machine learning method not a double
+[0:45:22] machine learning method not a double robust machine learning method
+[0:45:24] robust machine learning method and then the random force itself of the
+[0:45:26] and then the random force itself of the first two that sort of clearly moved in
+[0:45:28] first two that sort of clearly moved in the direction
+[0:45:29] the direction of the zero that we would expect from
+[0:45:31] of the zero that we would expect from the randomized trial
+[0:45:33] the randomized trial again as i mentioned earlier some
+[0:45:35] again as i mentioned earlier some sensitivity to the
+[0:45:37] sensitivity to the the number of learners in the sl setup
+[0:45:40] the number of learners in the sl setup the super learner setup so i started out
+[0:45:42] the super learner setup so i started out with glm random force gamm lasso and gbm
+[0:45:47] with glm random force gamm lasso and gbm um and again clearly some movement in
+[0:45:49] um and again clearly some movement in the right direction
+[0:45:51] the right direction it was it
+[0:45:52] it was it it surprised me however that there was
+[0:45:54] it surprised me however that there was this this difference here with the with
+[0:45:56] this this difference here with the with the gbm in there it should seem to stay
+[0:45:58] the gbm in there it should seem to stay a bit closer clearly the in the super
+[0:46:02] a bit closer clearly the in the super learner this last super learner here i
+[0:46:04] learner this last super learner here i dropped uh
+[0:46:05] dropped uh the lasso
+[0:46:07] the lasso and the gam and then here i only use the
+[0:46:09] and the gam and then here i only use the gbm
+[0:46:10] gbm so it's interesting to me that in terms
+[0:46:12] so it's interesting to me that in terms of we think the gbm here i think it's
+[0:46:14] of we think the gbm here i think it's picking up
+[0:46:15] picking up i've got some initial analysis plan i
+[0:46:17] i've got some initial analysis plan i think it's pissing up picking up on some
+[0:46:18] think it's pissing up picking up on some hidden interactions the random force in
+[0:46:20] hidden interactions the random force in the gbm that's the seems to be the key
+[0:46:22] the gbm that's the seems to be the key driver of the bias here
+[0:46:24] driver of the bias here it's interesting to me in terms of the
+[0:46:26] it's interesting to me in terms of the averaging across the learners that that
+[0:46:28] averaging across the learners that that doesn't really come through that aspect
+[0:46:30] doesn't really come through that aspect of it doesn't come through unless i use
+[0:46:31] of it doesn't come through unless i use a gbm alone
+[0:46:38] so and it's just a wrap up i've been talking too long
+[0:46:40] talking too long uh abrasive propensity score methods uh
+[0:46:43] uh abrasive propensity score methods uh in stata don't work well
+[0:46:45] in stata don't work well uh i i think it's pretty clear that at
+[0:46:48] uh i i think it's pretty clear that at least you need to be doubly robust
+[0:46:51] least you need to be doubly robust uh at least in terms of estimating both
+[0:46:53] uh at least in terms of estimating both if not formally or doubly robust
+[0:46:55] if not formally or doubly robust estimate both an outcome and a treatment
+[0:46:57] estimate both an outcome and a treatment focused method and compare and make sure
+[0:46:59] focused method and compare and make sure those agree
+[0:47:01] those agree um
+[0:47:02] um across mostly simulations the drml
+[0:47:04] across mostly simulations the drml methods rarely perform poorly they're
+[0:47:06] methods rarely perform poorly they're not a silver bullet we did see some
+[0:47:08] not a silver bullet we did see some instances where they did clearly were
+[0:47:10] instances where they did clearly were displayed some level of bias
+[0:47:12] displayed some level of bias um grf i think clearly showed the best
+[0:47:15] um grf i think clearly showed the best case best results across all the case
+[0:47:17] case best results across all the case studies
+[0:47:19] studies i do think however i think
+[0:47:22] i do think however i think it's something for a
+[0:47:25] it's something for a in terms of investigation how we
+[0:47:26] in terms of investigation how we communicate this to a wider applied
+[0:47:28] communicate this to a wider applied audience how do we make these tools more
+[0:47:30] audience how do we make these tools more available
+[0:47:31] available um
+[0:47:32] um [Music]
+[0:47:35] [Music] i'm not a great programmer but
+[0:47:37] i'm not a great programmer but i i'm clearly more advanced than most of
+[0:47:39] i i'm clearly more advanced than most of my clinical colleagues
+[0:47:41] my clinical colleagues and
+[0:47:42] and sometimes i think the drml methods even
+[0:47:45] sometimes i think the drml methods even in r is not the most straightforward it
+[0:47:47] in r is not the most straightforward it took me a while i'm good at it now but
+[0:47:49] took me a while i'm good at it now but i learned i have to strip all the
+[0:47:51] i learned i have to strip all the variable names off or the data matrix
+[0:47:53] variable names off or the data matrix often gives me errors
+[0:47:55] often gives me errors um there's i think we have a long way to
+[0:47:57] um there's i think we have a long way to go in terms of a communicating and
+[0:47:59] go in terms of a communicating and generating these sort of tools
+[0:48:01] generating these sort of tools for applied users
+[0:48:08] oh and then here's the that paper people were talking about this this is the
+[0:48:09] were talking about this this is the paper that the reflux is from
+[0:48:12] paper that the reflux is from and then the second application is a
+[0:48:13] and then the second application is a working paper that i don't have
+[0:48:15] working paper that i don't have it's not quite done yet
+[0:48:17] it's not quite done yet perfect uh things look and there's many
+[0:48:20] perfect uh things look and there's many questions in the q a as you will see i
+[0:48:23] questions in the q a as you will see i think maybe if you could give like a a
+[0:48:25] think maybe if you could give like a a short answer to one and then move on to
+[0:48:27] short answer to one and then move on to the discussion so we have time and feel
+[0:48:29] the discussion so we have time and feel free to review and see like which
+[0:48:30] free to review and see like which questions perhaps you find more
+[0:48:32] questions perhaps you find more interesting to answer after the
+[0:48:33] interesting to answer after the discussion
+[0:48:34] discussion um okay
+[0:48:36] um okay so from paul ferraro
+[0:48:38] so from paul ferraro given all of the replicability crisis
+[0:48:41] given all of the replicability crisis issues that have been raised over the
+[0:48:42] issues that have been raised over the last decade why would using an
+[0:48:45] last decade why would using an experimental batch benchmark be superior
+[0:48:47] experimental batch benchmark be superior to using simulation benchmark
+[0:48:50] to using simulation benchmark uh i think
+[0:48:52] uh i think i guess i wouldn't
+[0:48:54] i guess i wouldn't i don't want to get too much into the
+[0:48:56] i don't want to get too much into the wii's i've got because i got a paper
+[0:48:57] wii's i've got because i got a paper that talks a bit about the contrast
+[0:48:59] that talks a bit about the contrast between experimental best parts and
+[0:49:00] between experimental best parts and simulations
+[0:49:01] simulations i guess my quick answer that would be is
+[0:49:03] i guess my quick answer that would be is there pluses and minuses to both
+[0:49:05] there pluses and minuses to both experimental benchmarks and simulations
+[0:49:07] experimental benchmarks and simulations i would argue that a lot of the
+[0:49:09] i would argue that a lot of the replicability crisis is not coming out
+[0:49:11] replicability crisis is not coming out of the rct literature it's mostly coming
+[0:49:13] of the rct literature it's mostly coming out of other i mean
+[0:49:14] out of other i mean it was in psychology but there were a
+[0:49:16] it was in psychology but there were a bunch of things that they were doing in
+[0:49:17] bunch of things that they were doing in psychology that i would argue don't
+[0:49:19] psychology that i would argue don't happen in a well a lot of well random
+[0:49:21] happen in a well a lot of well random well-run rct trials and clinical studies
+[0:49:25] well-run rct trials and clinical studies we can debate whether that's the case or
+[0:49:27] we can debate whether that's the case or not but the regulatory framework for
+[0:49:29] not but the regulatory framework for rcts is i think very robust and the
+[0:49:31] rcts is i think very robust and the people who run those are actually do a
+[0:49:33] people who run those are actually do a really good job
+[0:49:34] really good job i think it's pretty different than some
+[0:49:35] i think it's pretty different than some of the where the the other forms require
+[0:49:37] of the where the the other forms require replicability problems i would say don't
+[0:49:39] replicability problems i would say don't come from that rct literature
+[0:49:42] come from that rct literature we can disagree on that but that's would
+[0:49:44] we can disagree on that but that's would be my
+[0:49:45] be my um
+[0:49:46] um cool great uh so
+[0:49:48] cool great uh so wonderful then let's move on to the
+[0:49:50] wonderful then let's move on to the discussion even
+[0:49:52] discussion even please feel free to start sharing your
+[0:49:54] please feel free to start sharing your screen and yeah look i totally invite
+[0:49:56] screen and yeah look i totally invite you to review the long list of questions
+[0:49:59] you to review the long list of questions it's been a very successful talk i think
+[0:50:05] uh thank you emman thank you look for for a very interesting and
+[0:50:07] for a very interesting and thought-provoking talk i mean the this
+[0:50:09] thought-provoking talk i mean the this the goal of of giving practitioners a
+[0:50:11] the goal of of giving practitioners a bit of advice
+[0:50:13] bit of advice um in terms of what what methods they
+[0:50:16] um in terms of what what methods they should be using i think is is is very
+[0:50:18] should be using i think is is is very important and this provides a good
+[0:50:21] important and this provides a good a good like you know a good solution and
+[0:50:23] a good like you know a good solution and good insights into that that said i'm
+[0:50:24] good insights into that that said i'm i'm gonna be talking a little bit more
+[0:50:26] i'm gonna be talking a little bit more about um
+[0:50:29] about um a few of the more theoretical aspects of
+[0:50:30] a few of the more theoretical aspects of this of this um of this issue
+[0:50:33] this of this um of this issue so i'll
+[0:50:34] so i'll i'll use similar notation to a loop used
+[0:50:38] i'll use similar notation to a loop used i'll start talking about a causal
+[0:50:39] i'll start talking about a causal parameter that we want to estimate let's
+[0:50:41] parameter that we want to estimate let's say the kind of actual uh expectation of
+[0:50:43] say the kind of actual uh expectation of y1 you know or sorry the expectation of
+[0:50:45] y1 you know or sorry the expectation of the kind of actual y1
+[0:50:47] the kind of actual y1 uh you know what would have been
+[0:50:48] uh you know what would have been observed in a world where everyone is
+[0:50:50] observed in a world where everyone is treated a target statistical parameter
+[0:50:52] treated a target statistical parameter which we can say for now it's the g
+[0:50:54] which we can say for now it's the g computation formula for example an
+[0:50:56] computation formula for example an estimator tau hat which is usually just
+[0:50:58] estimator tau hat which is usually just a function of your observed data just
+[0:51:00] a function of your observed data just the whole data set that we have on
+[0:51:02] the whole data set that we have on covariates uh exposures and and outcome
+[0:51:05] covariates uh exposures and and outcome and a probability limit for for that um
+[0:51:08] and a probability limit for for that um estimator as the sample size grows
+[0:51:11] estimator as the sample size grows so actually luke showed us uh at the
+[0:51:13] so actually luke showed us uh at the composition like this this is this is
+[0:51:14] composition like this this is this is sort of me rephrasing with what he had
+[0:51:16] sort of me rephrasing with what he had already said if you want to know what's
+[0:51:18] already said if you want to know what's the difference between your estimator
+[0:51:20] the difference between your estimator and the causal target so you sort of
+[0:51:22] and the causal target so you sort of have to take the care of three
+[0:51:24] have to take the care of three quantities right the first one is a
+[0:51:26] quantities right the first one is a statistical uncertainty which tells you
+[0:51:28] statistical uncertainty which tells you like you know how far you are from from
+[0:51:30] like you know how far you are from from the the limit just
+[0:51:33] the the limit just randomness in the sampling
+[0:51:34] randomness in the sampling model specification bias which is like
+[0:51:37] model specification bias which is like even if you take that limit is that
+[0:51:39] even if you take that limit is that close to your to your target uh
+[0:51:41] close to your to your target uh statistical parameter
+[0:51:42] statistical parameter and then we have identification bias as
+[0:51:44] and then we have identification bias as well which is to have we included uh the
+[0:51:48] well which is to have we included uh the right covariates in order to get to get
+[0:51:51] right covariates in order to get to get the causal parameter and so the first
+[0:51:54] the causal parameter and so the first point i want to make is that of course
+[0:51:55] point i want to make is that of course look and look said this this this
+[0:51:58] look and look said this this this this talk does not focus on
+[0:51:59] this talk does not focus on identification bias to address that we
+[0:52:01] identification bias to address that we have uh sensitivity analysis we have
+[0:52:05] have uh sensitivity analysis we have partial identification we have other
+[0:52:07] partial identification we have other kind of tools
+[0:52:08] kind of tools but i want to make the point that the
+[0:52:10] but i want to make the point that the choice of estimator not only impacts
+[0:52:12] choice of estimator not only impacts specification bias but it also impacts
+[0:52:14] specification bias but it also impacts statistical uncertainty for example we
+[0:52:16] statistical uncertainty for example we have
+[0:52:18] have the different estimators have different
+[0:52:19] the different estimators have different properties in terms of convergence rates
+[0:52:21] properties in terms of convergence rates right like how fast do they go to that
+[0:52:22] right like how fast do they go to that limit
+[0:52:23] limit um do they converge at really rate is
+[0:52:26] um do they converge at really rate is are they efficient right so this this
+[0:52:27] are they efficient right so this this all of these estimators also have
+[0:52:29] all of these estimators also have different properties in terms of
+[0:52:30] different properties in terms of statistical uncertainty
+[0:52:34] statistical uncertainty um
+[0:52:35] um okay so that uh that that was sort of
+[0:52:37] okay so that uh that that was sort of the first point the second point is is i
+[0:52:39] the first point the second point is is i mean and luke also mentioned this
+[0:52:42] mean and luke also mentioned this uh there is at least three or like you
+[0:52:44] uh there is at least three or like you know yeah of course at least three but
+[0:52:46] know yeah of course at least three but um but these are probably the most
+[0:52:47] um but these are probably the most commonly used uh methods or ideas for uh
+[0:52:52] commonly used uh methods or ideas for uh for estimator selection
+[0:52:53] for estimator selection the first sort of approach is is to
+[0:52:55] the first sort of approach is is to study their statistical properties and
+[0:52:57] study their statistical properties and these studies are always are usually
+[0:52:59] these studies are always are usually done in in large samples uh just
+[0:53:02] done in in large samples uh just asymptotic properties of the estimators
+[0:53:03] asymptotic properties of the estimators just because the to during final
+[0:53:05] just because the to during final examples it's a little harder
+[0:53:07] examples it's a little harder there's numerical simulation studies
+[0:53:09] there's numerical simulation studies which are usually based on synthetic
+[0:53:10] which are usually based on synthetic data and there is benchmark studies
+[0:53:12] data and there is benchmark studies right so we we saw two examples of this
+[0:53:14] right so we we saw two examples of this kind of a benchmark study today
+[0:53:17] kind of a benchmark study today um but one sort of point that i think is
+[0:53:20] um but one sort of point that i think is is important to highlight is that
+[0:53:22] is important to highlight is that benchmark studies and simulation studies
+[0:53:24] benchmark studies and simulation studies are quite limited in terms of providing
+[0:53:27] are quite limited in terms of providing general estimator selection techniques
+[0:53:30] general estimator selection techniques they just give you a one-off snapshot
+[0:53:32] they just give you a one-off snapshot that that only applies to that one data
+[0:53:34] that that only applies to that one data generating mechanism or that one data
+[0:53:37] generating mechanism or that one data set
+[0:53:37] set and so as a general estimator selection
+[0:53:40] and so as a general estimator selection tool they might be um they might not be
+[0:53:43] tool they might be um they might not be they might be limited but they do
+[0:53:44] they might be limited but they do provide useful information for example
+[0:53:46] provide useful information for example they tell you when things break and look
+[0:53:48] they tell you when things break and look talk like showed us precisely what like
+[0:53:50] talk like showed us precisely what like you know how that happened with many of
+[0:53:52] you know how that happened with many of these data commands right but they don't
+[0:53:54] these data commands right but they don't show you really when things work right
+[0:53:56] show you really when things work right so that's that's that's the first
+[0:53:57] so that's that's that's the first problem i do find uh simulations that is
+[0:54:00] problem i do find uh simulations that is uh especially very useful for
+[0:54:02] uh especially very useful for confirmatory purposes for example if you
+[0:54:04] confirmatory purposes for example if you know that your estimator has to be
+[0:54:05] know that your estimator has to be efficient that it has to be
+[0:54:07] efficient that it has to be asymptotically linear then you can use a
+[0:54:08] asymptotically linear then you can use a simulation study to show those sort of
+[0:54:10] simulation study to show those sort of asymptotic properties
+[0:54:13] asymptotic properties and in particular in the in the reflux
+[0:54:16] and in particular in the in the reflux study which which look uh discussed
+[0:54:19] study which which look uh discussed uh you know the the the point that i
+[0:54:21] uh you know the the the point that i want to make here is that this
+[0:54:22] want to make here is that this difference the difference between the
+[0:54:24] difference the difference between the rct and observational estimates actually
+[0:54:26] rct and observational estimates actually conflate the specification bias and
+[0:54:29] conflate the specification bias and identification bias right
+[0:54:31] identification bias right so in one on the one hand we can you
+[0:54:33] so in one on the one hand we can you know we can take this difference and
+[0:54:34] know we can take this difference and decompose it in this in this sort of way
+[0:54:36] decompose it in this in this sort of way which is similar to what i showed in in
+[0:54:38] which is similar to what i showed in in one of the
+[0:54:39] one of the previous slides we have statistic
+[0:54:41] previous slides we have statistic statistical uncertainty uh in the rct
+[0:54:43] statistical uncertainty uh in the rct where you know in the rct we don't have
+[0:54:45] where you know in the rct we don't have any sort of identification bias or any
+[0:54:46] any sort of identification bias or any specification bias we just have
+[0:54:48] specification bias we just have statistical uncertainty but in the
+[0:54:50] statistical uncertainty but in the observational study we have we have the
+[0:54:51] observational study we have we have the three type of components right like
+[0:54:53] three type of components right like statistical uncertainty misspecification
+[0:54:55] statistical uncertainty misspecification bias and identification bias
+[0:54:58] bias and identification bias and even if you're able to take um
+[0:55:01] and even if you're able to take um care of the statistical uncertainty
+[0:55:03] care of the statistical uncertainty which i think was one of the questions
+[0:55:05] which i think was one of the questions even if you construct the right
+[0:55:06] even if you construct the right confidence intervals etc etc you don't
+[0:55:08] confidence intervals etc etc you don't know the difference uh between between
+[0:55:11] know the difference uh between between the rct estimate and the observational
+[0:55:13] the rct estimate and the observational estimate is because the um
+[0:55:16] estimate is because the um observational estimate you know suffers
+[0:55:18] observational estimate you know suffers from lack of identification right so
+[0:55:20] from lack of identification right so that's one problem and then the second
+[0:55:22] that's one problem and then the second problem i see with this is that bad
+[0:55:23] problem i see with this is that bad estimators can get lucky right like if
+[0:55:26] estimators can get lucky right like if you have
+[0:55:27] you have one estimator that's bad maybe it has a
+[0:55:29] one estimator that's bad maybe it has a different uh limit probability limit and
+[0:55:31] different uh limit probability limit and then these two biases happen to cancel
+[0:55:33] then these two biases happen to cancel out then that's that's problematic
+[0:55:36] out then that's that's problematic and of course the the question that was
+[0:55:38] and of course the the question that was that was brought up
+[0:55:40] that was brought up which is you know there is
+[0:55:41] which is you know there is self-selection of participants to the
+[0:55:42] self-selection of participants to the rct into the observational study and
+[0:55:45] rct into the observational study and what does that imply that do we have
+[0:55:46] what does that imply that do we have different target causal parameters
+[0:55:49] different target causal parameters is that are those differences
+[0:55:50] is that are those differences due to an observed variable so there is
+[0:55:53] due to an observed variable so there is there is a lot of questions there
+[0:55:58] um in terms of large sample properties i
+[0:56:00] in terms of large sample properties i think luke also mentioned this this is
+[0:56:03] think luke also mentioned this this is the the this is actually the main reason
+[0:56:05] the the this is actually the main reason why uh approaches like the doubly robust
+[0:56:08] why uh approaches like the doubly robust uh plus machine learning um estimation
+[0:56:11] uh plus machine learning um estimation approach has been has been proposed
+[0:56:12] approach has been has been proposed because they this kind of approach can
+[0:56:15] because they this kind of approach can be shown to satisfy these properties
+[0:56:18] be shown to satisfy these properties first it behaves like sample mean um in
+[0:56:20] first it behaves like sample mean um in large samples so if you
+[0:56:22] large samples so if you you have a lot of data this is like an
+[0:56:23] you have a lot of data this is like an empirical average so that's nice
+[0:56:26] empirical average so that's nice the remainder term from that sort of
+[0:56:28] the remainder term from that sort of approximation happens to be the product
+[0:56:30] approximation happens to be the product of two errors
+[0:56:31] of two errors the error in the regression of the
+[0:56:32] the error in the regression of the propensity score and the error in the
+[0:56:34] propensity score and the error in the regression of the outcome and if if
+[0:56:37] regression of the outcome and if if these two are small well then the
+[0:56:39] these two are small well then the product is
+[0:56:40] product is likely to be smaller compared to either
+[0:56:42] likely to be smaller compared to either one so this is a very nice property and
+[0:56:44] one so this is a very nice property and this actually can be seen as a as
+[0:56:46] this actually can be seen as a as something that improves not only uh
+[0:56:48] something that improves not only uh large sample performance but fine with
+[0:56:50] large sample performance but fine with sample performance as well
+[0:56:52] sample performance as well and uh the ml part comes precisely
+[0:56:55] and uh the ml part comes precisely because those that product of two errors
+[0:56:57] because those that product of two errors that shows up in double robust
+[0:56:58] that shows up in double robust estimators can be made small with
+[0:57:00] estimators can be made small with machine learning so these are the sort
+[0:57:01] machine learning so these are the sort of the reasons why why
+[0:57:03] of the reasons why why this approach is recommended there is
+[0:57:05] this approach is recommended there is asymptotic theory also for many other
+[0:57:06] asymptotic theory also for many other methods some of the matching methods
+[0:57:08] methods some of the matching methods that were used in simulation studies
+[0:57:09] that were used in simulation studies also have nice asymptotic approximations
+[0:57:12] also have nice asymptotic approximations are efficient et cetera et cetera
+[0:57:14] are efficient et cetera et cetera however this this large sample
+[0:57:16] however this this large sample properties have a problem which is they
+[0:57:18] properties have a problem which is they are useful only if they provide useful
+[0:57:20] are useful only if they provide useful approximations to that can be used in in
+[0:57:23] approximations to that can be used in in fine examples otherwise they they you
+[0:57:25] fine examples otherwise they they you know they're really not good
+[0:57:27] know they're really not good and it's hard to know once you have a
+[0:57:28] and it's hard to know once you have a data set once you have a given problem
+[0:57:30] data set once you have a given problem that you have to solve it's hard to know
+[0:57:32] that you have to solve it's hard to know if the person approximation is good so
+[0:57:33] if the person approximation is good so this is the reason why people maybe
+[0:57:36] this is the reason why people maybe sometimes try to like you know maybe not
+[0:57:38] sometimes try to like you know maybe not pay so much their their estimated
+[0:57:40] pay so much their their estimated selection
+[0:57:41] selection uh
+[0:57:42] uh in and based on large sample properties
+[0:57:45] in and based on large sample properties and so i want to finish with with sort
+[0:57:47] and so i want to finish with with sort of saying like the the the goal of sort
+[0:57:50] of saying like the the the goal of sort of finding one estimator that works sort
+[0:57:52] of finding one estimator that works sort of best for all
+[0:57:54] of best for all situations i think would be it would be
+[0:57:56] situations i think would be it would be great if we could could do that but i
+[0:57:58] great if we could could do that but i think that's generally impossible i i
+[0:58:00] think that's generally impossible i i tend to believe that that this dublin
+[0:58:02] tend to believe that that this dublin was plus machine learning estimators
+[0:58:05] was plus machine learning estimators perform
+[0:58:06] perform best in most cases but you know there
+[0:58:08] best in most cases but you know there can be cases and sample sizes in which
+[0:58:11] can be cases and sample sizes in which many of the other methods could be could
+[0:58:12] many of the other methods could be could could actually perform better
+[0:58:14] could actually perform better and so i think there's there there have
+[0:58:16] and so i think there's there there have been a few methods uh and actually this
+[0:58:19] been a few methods uh and actually this is part of something i'm working on uh
+[0:58:21] is part of something i'm working on uh with with some collaborators
+[0:58:23] with with some collaborators but there are sort of new methods to to
+[0:58:26] but there are sort of new methods to to to start thinking about okay how do we
+[0:58:28] to start thinking about okay how do we do estimator selection and i'm just here
+[0:58:30] do estimator selection and i'm just here providing a you know a
+[0:58:33] providing a you know a very quick description of how that could
+[0:58:35] very quick description of how that could work for example
+[0:58:36] work for example and one way in which we that could work
+[0:58:38] and one way in which we that could work is let's say we define a uh model
+[0:58:40] is let's say we define a uh model statistical model p and this model b can
+[0:58:43] statistical model p and this model b can be constrained in any way you want for
+[0:58:45] be constrained in any way you want for example you can say what are the number
+[0:58:46] example you can say what are the number of variables that you have binary
+[0:58:49] of variables that you have binary categorical continuous outcome type etc
+[0:58:51] categorical continuous outcome type etc you can define some kind of maximum
+[0:58:54] you can define some kind of maximum amount of confounding that you'll allow
+[0:58:55] amount of confounding that you'll allow in this in this statistical model
+[0:58:58] in this in this statistical model um complexity in the outcome cover the
+[0:59:01] um complexity in the outcome cover the relationships for example as measured by
+[0:59:03] relationships for example as measured by the variation norm and a fixed sample
+[0:59:05] the variation norm and a fixed sample size right
+[0:59:06] size right so once you have this statistical model
+[0:59:08] so once you have this statistical model you can start solving problems like like
+[0:59:10] you can start solving problems like like this minimax type of estimation problem
+[0:59:13] this minimax type of estimation problem so if you have a class of estimators t
+[0:59:15] so if you have a class of estimators t which let's say include all the matching
+[0:59:17] which let's say include all the matching estimators all the inverse probability
+[0:59:19] estimators all the inverse probability weighted estimators et cetera et cetera
+[0:59:20] weighted estimators et cetera et cetera that that
+[0:59:22] that that look
+[0:59:23] look mentioned we can start trying to think
+[0:59:25] mentioned we can start trying to think okay so for every one of those um
+[0:59:28] okay so for every one of those um estimation approaches
+[0:59:30] estimation approaches and for every sort of probability
+[0:59:32] and for every sort of probability distribution in in the model i can
+[0:59:34] distribution in in the model i can compute sort of this this uh msc
+[0:59:37] compute sort of this this uh msc basically the mean square error and i'm
+[0:59:39] basically the mean square error and i'm going to take the worst case scenario
+[0:59:40] going to take the worst case scenario the the probability distribution in the
+[0:59:43] the the probability distribution in the model that gives me the worst
+[0:59:45] model that gives me the worst um mse
+[0:59:46] um mse and then take the estimator that makes
+[0:59:49] and then take the estimator that makes that worst case scenario um not as bad
+[0:59:52] that worst case scenario um not as bad right
+[0:59:53] right this is actually something that can be
+[0:59:55] this is actually something that can be done in some cases numerically and it
+[0:59:57] done in some cases numerically and it would approaches like this and as i said
+[0:59:59] would approaches like this and as i said there are many approaches that work with
+[1:00:01] there are many approaches that work with this idea approaches like this can
+[1:00:03] this idea approaches like this can actually be
+[1:00:04] actually be maybe solved numerically and can provide
+[1:00:06] maybe solved numerically and can provide a more uh sort of principle solution to
+[1:00:08] a more uh sort of principle solution to this problem of estimator selection but
+[1:00:11] this problem of estimator selection but anyway this is all very uh recent and
+[1:00:13] anyway this is all very uh recent and and i i don't think it's ready for for
+[1:00:16] and i i don't think it's ready for for you know for using in practice
+[1:00:19] you know for using in practice and with that i'll stop thank you
+[1:00:22] and with that i'll stop thank you thank you yvonne that was a really
+[1:00:25] thank you yvonne that was a really interesting discussion look um i
+[1:00:27] interesting discussion look um i encourage you to
+[1:00:28] encourage you to i guess comment on some questions raised
+[1:00:30] i guess comment on some questions raised in the discussion
+[1:00:32] in the discussion and uh then maybe we can go through some
+[1:00:34] and uh then maybe we can go through some of these questions i will say
+[1:00:36] of these questions i will say any of the questions that we don't get
+[1:00:38] any of the questions that we don't get to obviously because there is a lot of
+[1:00:39] to obviously because there is a lot of them will be forwarded to look after the
+[1:00:41] them will be forwarded to look after the talk so you can feel free to start your
+[1:00:43] talk so you can feel free to start your discussion with him
+[1:00:45] discussion with him offline
+[1:00:46] offline uh but yeah look please take it
+[1:00:49] uh but yeah look please take it all right yeah you on thanks for those
+[1:00:50] all right yeah you on thanks for those comments those are great
+[1:00:52] comments those are great um
+[1:00:54] um i don't have any real responses i mean i
+[1:00:56] i don't have any real responses i mean i don't have any and there were new issues
+[1:00:58] don't have any and there were new issues raised i feel like i really need to
+[1:00:59] raised i feel like i really need to respond to
+[1:01:01] respond to so why don't i work my way through some
+[1:01:03] so why don't i work my way through some of the q and a here
+[1:01:05] of the q and a here um so the first
+[1:01:06] um so the first and i'll just uh
+[1:01:13] you can go in the way you want so yeah perfect i was just going to ask to stop
+[1:01:15] perfect i was just going to ask to stop sharing yeah great um go ahead so i'll
+[1:01:17] sharing yeah great um go ahead so i'll go in the order by which they're asked
+[1:01:19] go in the order by which they're asked well i'll go back in time to the first
+[1:01:21] well i'll go back in time to the first question and work my way toward the more
+[1:01:23] question and work my way toward the more recent questions
+[1:01:25] recent questions um
+[1:01:26] um [Music]
+[1:01:28] [Music] either by a theoretical are the
+[1:01:30] either by a theoretical are the theoretical so this is leon distefano
+[1:01:33] theoretical so this is leon distefano are the theoretical optimality results
+[1:01:35] are the theoretical optimality results for dml mostly asymptotic i think
+[1:01:38] for dml mostly asymptotic i think i think ivan sort of answered that i
+[1:01:39] i think ivan sort of answered that i think just yes by and large yes
+[1:01:42] think just yes by and large yes um
+[1:01:44] um then the next one is why is aipw
+[1:01:46] then the next one is why is aipw considered treatment out treatment only
+[1:01:49] considered treatment out treatment only as opposed to modeling both outcome and
+[1:01:51] as opposed to modeling both outcome and treatment okay this is a
+[1:01:53] treatment okay this is a confusion between the ways theta labels
+[1:01:55] confusion between the ways theta labels things and the way things so aipw is
+[1:01:58] things and the way things so aipw is often refers to augmented ipw which is a
+[1:02:00] often refers to augmented ipw which is a daily robust method
+[1:02:02] daily robust method in stata however aipw means they're
+[1:02:04] in stata however aipw means they're using using stabilized weights you know
+[1:02:07] using using stabilized weights you know often times the weights are instead of
+[1:02:09] often times the weights are instead of one over the propensity score it's the
+[1:02:11] one over the propensity score it's the propensity score you know the
+[1:02:13] propensity score you know the stabilized version of the weights so
+[1:02:15] stabilized version of the weights so when i use the aipw i followed the state
+[1:02:17] when i use the aipw i followed the state of convention and that just means
+[1:02:18] of convention and that just means stabilize
+[1:02:20] stabilize weights not an augmented inverse
+[1:02:22] weights not an augmented inverse propensity score waiter that would be
+[1:02:23] propensity score waiter that would be considerably robust so that's just a
+[1:02:25] considerably robust so that's just a matter of i think noncoming chores
+[1:02:28] matter of i think noncoming chores um
+[1:02:29] um [Music]
+[1:02:30] [Music] how do you get the standard errors for
+[1:02:31] how do you get the standard errors for the bias estimate since the covariance
+[1:02:33] the bias estimate since the covariance between the experimental and
+[1:02:34] between the experimental and observational methods is presumably
+[1:02:35] observational methods is presumably non-zero boost trapping the difference
+[1:02:38] non-zero boost trapping the difference there are a couple different ways out
+[1:02:39] there are a couple different ways out there that you can do this there's
+[1:02:40] there that you can do this there's actually for standardized bias there's a
+[1:02:43] actually for standardized bias there's a closed form estimate of the
+[1:02:45] closed form estimate of the confidence interval there's a package in
+[1:02:47] confidence interval there's a package in r and i did it that way there is a way
+[1:02:49] r and i did it that way there is a way to bootstrap it
+[1:02:50] to bootstrap it uh i've tried that in other settings and
+[1:02:52] uh i've tried that in other settings and it didn't make much difference
+[1:02:54] it didn't make much difference so there's a formula for a considerable
+[1:02:57] so there's a formula for a considerable on a standardized difference and i use
+[1:02:59] on a standardized difference and i use that
+[1:03:00] that formula
+[1:03:02] formula the next question by the same person
+[1:03:03] the next question by the same person what covariance are you including when
+[1:03:05] what covariance are you including when you implement the observational methods
+[1:03:06] you implement the observational methods do you have a rich set of coverage that
+[1:03:08] do you have a rich set of coverage that people say we need for matching to work
+[1:03:11] people say we need for matching to work uh so this is an interesting question
+[1:03:13] uh so this is an interesting question when you say a rich set of covariance
+[1:03:15] when you say a rich set of covariance the richness of the covariates almost
+[1:03:18] the richness of the covariates almost always depends on the original study
+[1:03:19] always depends on the original study design and who decide what covariance
+[1:03:22] design and who decide what covariance they decided to collect and that is
+[1:03:24] they decided to collect and that is essentially what we are constrained by
+[1:03:25] essentially what we are constrained by here
+[1:03:26] here uh
+[1:03:28] uh the reflux investigators for example i
+[1:03:30] the reflux investigators for example i have
+[1:03:35] i'm not a clinical expert to know that they captured everything they have
+[1:03:37] they captured everything they have baseline measures of the outcome which i
+[1:03:39] baseline measures of the outcome which i think are particularly often useful
+[1:03:41] think are particularly often useful they have a fairly rich set i in i think
+[1:03:43] they have a fairly rich set i in i think the rac data definitely has a very rich
+[1:03:46] the rac data definitely has a very rich set of of of covariates
+[1:03:50] set of of of covariates um
+[1:03:50] um [Music]
+[1:03:51] [Music] again i didn't have any control over
+[1:03:53] again i didn't have any control over that i used
+[1:03:54] that i used all the ones that were generally
+[1:03:56] all the ones that were generally included in those data sets
+[1:03:57] included in those data sets there are quite a few i i i off the top
+[1:04:01] there are quite a few i i i off the top of my head i don't remember exactly
+[1:04:03] of my head i don't remember exactly when we how many there are but in terms
+[1:04:06] when we how many there are but in terms of what i do know
+[1:04:07] of what i do know in the rac data the data is much more so
+[1:04:10] in the rac data the data is much more so in
+[1:04:11] in in clinical studies data tends to either
+[1:04:13] in clinical studies data tends to either be what we call a registry data
+[1:04:15] be what we call a registry data or claims data claims data is collected
+[1:04:18] or claims data claims data is collected usually at a higher level and doesn't
+[1:04:20] usually at a higher level and doesn't include bedside measures of physiology
+[1:04:22] include bedside measures of physiology the rhc data includes a number of
+[1:04:24] the rhc data includes a number of measures of bedside measures of
+[1:04:26] measures of bedside measures of physiology like mean arterial pressure
+[1:04:28] physiology like mean arterial pressure blood pressure
+[1:04:29] blood pressure um
+[1:04:31] um bilirubin things like that so in that
+[1:04:33] bilirubin things like that so in that sense i would say the rac data is much
+[1:04:36] sense i would say the rac data is much richer
+[1:04:37] richer than quite a few of the other claimed
+[1:04:39] than quite a few of the other claimed data sets that you use for medical
+[1:04:40] data sets that you use for medical studies
+[1:04:42] studies um
+[1:04:44] um the next one uh is
+[1:04:46] the next one uh is as for john king's comment recently we
+[1:04:48] as for john king's comment recently we should stop using psn should we start
+[1:04:50] should stop using psn should we start using mahal notes distance any comments
+[1:04:52] using mahal notes distance any comments so i think they mean gary king
+[1:04:55] so i think they mean gary king should we stop i mean i don't want to
+[1:04:57] should we stop i mean i don't want to make huge generalizations if propensity
+[1:04:59] make huge generalizations if propensity score matching is easiest the only thing
+[1:05:00] score matching is easiest the only thing you can really do
+[1:05:02] you can really do sure use it i in general i do think yes
+[1:05:05] sure use it i in general i do think yes in terms of matching there are much more
+[1:05:07] in terms of matching there are much more sophisticated methods out there that
+[1:05:08] sophisticated methods out there that will make your life easier and probably
+[1:05:10] will make your life easier and probably balance things a lot faster than most
+[1:05:12] balance things a lot faster than most psm implementations so i would generally
+[1:05:15] psm implementations so i would generally agree with that
+[1:05:17] agree with that um
+[1:05:21] what is the size the estimation error around the vertical line
+[1:05:24] around the vertical line uh
+[1:05:29] again i'd have to go back to the original paper if you want to follow up
+[1:05:30] original paper if you want to follow up with the original paper i don't know
+[1:05:32] with the original paper i don't know that off the top of my um
+[1:05:35] that off the top of my um without the paper here right like i'm
+[1:05:37] without the paper here right like i'm sorry i can't answer that
+[1:05:39] sorry i can't answer that uh what was the beta stick model
+[1:05:41] uh what was the beta stick model sophistications was this connected to
+[1:05:42] sophistications was this connected to the common multiplicative regression
+[1:05:44] the common multiplicative regression models using eq5d value status mission
+[1:05:46] models using eq5d value status mission or were them there or were they more
+[1:05:48] or were them there or were they more common regression treatment estimation
+[1:05:51] common regression treatment estimation specifications related to some other
+[1:05:53] specifications related to some other quantities
+[1:05:54] quantities if related to multiplicative models how
+[1:05:56] if related to multiplicative models how are the results related to the specific
+[1:05:57] are the results related to the specific model specification
+[1:05:59] model specification so the basic model specifications i
+[1:06:01] so the basic model specifications i actually use
+[1:06:03] actually use pretty vanilla ones in terms of just
+[1:06:06] pretty vanilla ones in terms of just linear
+[1:06:07] linear i didn't include any interactions it
+[1:06:08] i didn't include any interactions it wasn't clear to me i talked to some
+[1:06:10] wasn't clear to me i talked to some clinicians and they weren't it's it's
+[1:06:14] clinicians and they weren't it's it's this is the this is where i do think
+[1:06:15] this is the this is where i do think sometimes machine learning is quite
+[1:06:16] sometimes machine learning is quite helpful when i go and i talk to
+[1:06:18] helpful when i go and i talk to conditions and i think so what do you
+[1:06:19] conditions and i think so what do you think of the key interactions here
+[1:06:21] think of the key interactions here they're like
+[1:06:22] they're like good question we've got 20 variables
+[1:06:24] good question we've got 20 variables there's the number of possible
+[1:06:26] there's the number of possible interactions it's quite large
+[1:06:28] interactions it's quite large um
+[1:06:28] um [Music]
+[1:06:30] [Music] so those the
+[1:06:32] so those the specifications there we didn't include
+[1:06:33] specifications there we didn't include anything multiplicative
+[1:06:35] anything multiplicative uh other than what would be generated
+[1:06:38] uh other than what would be generated through uh the machine learning fits
+[1:06:45] [Music] if i'm a stator user which command will
+[1:06:47] if i'm a stator user which command will you recommend ah that's a good question
+[1:06:50] you recommend ah that's a good question i wouldn't recommend anything
+[1:06:52] i wouldn't recommend anything in general it looked to me like the i
+[1:06:54] in general it looked to me like the i would definitely use the te fx commands
+[1:06:57] would definitely use the te fx commands with both ipw what they call ipw but
+[1:06:59] with both ipw what they call ipw but then also check the regress add the
+[1:07:01] then also check the regress add the regression adjustment on top of that
+[1:07:03] regression adjustment on top of that and hope for concordance across all if
+[1:07:05] and hope for concordance across all if you get concordance across two or three
+[1:07:07] you get concordance across two or three of those methods you're probably safe in
+[1:07:08] of those methods you're probably safe in terms of being a state of user
+[1:07:10] terms of being a state of user but i would i would i would stay away
+[1:07:12] but i would i would i would stay away from the
+[1:07:13] from the nn and the ps match commands and stick
+[1:07:15] nn and the ps match commands and stick with the
+[1:07:16] with the variations on the regression adjustment
+[1:07:18] variations on the regression adjustment with and without on the ipw and the ipw
+[1:07:22] with and without on the ipw and the ipw command
+[1:07:26] i missed it how did you get the true effect in reflux we have the data and we
+[1:07:28] effect in reflux we have the data and we have the rct data in the rac data
+[1:07:31] have the rct data in the rac data there's a couple of published papers
+[1:07:32] there's a couple of published papers that did similar trials and they're just
+[1:07:35] that did similar trials and they're just they're just published but we don't have
+[1:07:37] they're just published but we don't have the data there so that's in a much more
+[1:07:39] the data there so that's in a much more informal setup
+[1:07:45] in the propensity score matching we actually included all of them
+[1:07:47] actually included all of them um right the the other advice would be
+[1:07:49] um right the the other advice would be to include those that are imbalanced
+[1:07:50] to include those that are imbalanced like there's a rule
+[1:07:52] like there's a rule a rule of thumb i do any covariant
+[1:07:54] a rule of thumb i do any covariant that's got a
+[1:07:55] that's got a standardized difference of larger than
+[1:07:56] standardized difference of larger than .15 you might put in the outcome model
+[1:08:00] .15 you might put in the outcome model but here we just we put them all in
+[1:08:09] um okay push back on this
+[1:08:11] okay push back on this it doesn't matter so much if they're
+[1:08:13] it doesn't matter so much if they're similar on observables
+[1:08:15] similar on observables the differences between observational
+[1:08:17] the differences between observational experimental methods must be due to
+[1:08:18] experimental methods must be due to differences on non-observables
+[1:08:20] differences on non-observables and we can't tell if this difference in
+[1:08:21] and we can't tell if this difference in unobservables between treated untreated
+[1:08:23] unobservables between treated untreated nrs or difference in one of those
+[1:08:25] nrs or difference in one of those between rct and irs
+[1:08:28] between rct and irs yes that's true right there we have two
+[1:08:30] yes that's true right there we have two forms of unobservables here that's
+[1:08:32] forms of unobservables here that's always a risk to me this is more of a
+[1:08:35] always a risk to me this is more of a risk when you fail to recover the
+[1:08:36] risk when you fail to recover the experimental benchmark right if if if
+[1:08:39] experimental benchmark right if if if every method fails
+[1:08:41] every method fails to recover an experimental benchmark
+[1:08:43] to recover an experimental benchmark then right there are obviously two
+[1:08:44] then right there are obviously two sources of certain unobservables that
+[1:08:46] sources of certain unobservables that might be driving that
+[1:08:49] might be driving that when i successfully replicate an
+[1:08:50] when i successfully replicate an experimental benchmark in many
+[1:08:52] experimental benchmark in many across many different methods
+[1:08:55] across many different methods that suggests to me that the
+[1:08:56] that suggests to me that the unobservables are not
+[1:08:59] unobservables are not problematic in these in these settings
+[1:09:08] okay yeah so maybe we should also wrap up
+[1:09:10] yeah so maybe we should also wrap up soon so feel free to pick out your
+[1:09:12] soon so feel free to pick out your favorite i guess
+[1:09:15] favorite i guess uh this is one that i think is actually
+[1:09:17] uh this is one that i think is actually quite relevant
+[1:09:19] quite relevant um would you what do you recommend for
+[1:09:22] um would you what do you recommend for projects with limited limited
+[1:09:24] projects with limited limited computational capacity for our example
+[1:09:26] computational capacity for our example our chemical products are having very
+[1:09:27] our chemical products are having very large data sets and using the ml methods
+[1:09:28] large data sets and using the ml methods or even some ps7 editors will overwhelm
+[1:09:30] or even some ps7 editors will overwhelm the data platforms that we must use
+[1:09:33] the data platforms that we must use yes um
+[1:09:34] yes um [Music]
+[1:09:35] [Music] so the fastest thing i have seen lately
+[1:09:38] so the fastest thing i have seen lately is some of the newer balancing weight
+[1:09:40] is some of the newer balancing weight methods approximate balancing weight
+[1:09:42] methods approximate balancing weight methods
+[1:09:43] methods uh avi feller and eli ben michael one of
+[1:09:46] uh avi feller and eli ben michael one of his students who's now at harvard
+[1:09:48] his students who's now at harvard they have a limitation of balancing
+[1:09:50] they have a limitation of balancing weights that i have found to be very
+[1:09:51] weights that i have found to be very very fast with data sets of over a
+[1:09:53] very fast with data sets of over a million observations we can get
+[1:09:55] million observations we can get really great balance in less than five
+[1:09:57] really great balance in less than five minutes
+[1:09:58] minutes and then on top of that you could do
+[1:10:00] and then on top of that you could do some sort of more vanilla regression
+[1:10:02] some sort of more vanilla regression adjustment
+[1:10:03] adjustment that strikes me as an approach that we
+[1:10:05] that strikes me as an approach that we should have should be pretty feasible in
+[1:10:07] should have should be pretty feasible in most any computational setting so that
+[1:10:09] most any computational setting so that would be my recommendation there
+[1:10:11] would be my recommendation there most matching methods
+[1:10:13] most matching methods are not great i think when computational
+[1:10:15] are not great i think when computational capacity is limited my other than more
+[1:10:18] capacity is limited my other than more generic ones
+[1:10:20] generic ones um
+[1:10:21] um so
+[1:10:22] so there are 100 people probably just
+[1:10:26] there are 100 people probably just grown in my response there but from my
+[1:10:28] grown in my response there but from my experience
+[1:10:29] experience some forms of balancing weights are
+[1:10:30] some forms of balancing weights are definitely the fastest in terms of doing
+[1:10:32] definitely the fastest in terms of doing treatment focused and then on top of
+[1:10:34] treatment focused and then on top of that some sort of more vanilla
+[1:10:35] that some sort of more vanilla regression adjustment should get around
+[1:10:37] regression adjustment should get around that
+[1:10:39] that um
+[1:10:39] um [Music]
+[1:10:44] someone said i should talk a bit about untestable assumptions that's and
+[1:10:46] untestable assumptions that's and someone else respond yes they're
+[1:10:48] someone else respond yes they're different sensitivity analysis
+[1:10:51] different sensitivity analysis um yeah i agree sensitivity analysis
+[1:10:53] um yeah i agree sensitivity analysis different study designs i think using i
+[1:10:56] different study designs i think using i one way i really like to understand
+[1:10:58] one way i really like to understand observe bias is
+[1:11:00] observe bias is if i have an instrument use an
+[1:11:01] if i have an instrument use an instrument conduct an observational
+[1:11:03] instrument conduct an observational study that targets the ate user
+[1:11:05] study that targets the ate user regression discontinuity
+[1:11:08] regression discontinuity i think they're
+[1:11:10] i think they're trying to target the same causal
+[1:11:12] trying to target the same causal question with
+[1:11:13] question with different study designs that have
+[1:11:15] different study designs that have different make different assumptions
+[1:11:16] different make different assumptions about observables is probably one of the
+[1:11:18] about observables is probably one of the most effective way
+[1:11:20] most effective way um i can't claim i'm not going to claim
+[1:11:22] um i can't claim i'm not going to claim responsibility for that idea because
+[1:11:23] responsibility for that idea because that's an idea that paul rosenbaum has
+[1:11:25] that's an idea that paul rosenbaum has talked about for many years
+[1:11:27] talked about for many years but i think in particular that's
+[1:11:28] but i think in particular that's probably sensitivity analysis is fine
+[1:11:30] probably sensitivity analysis is fine but sensitive analysis is because i
+[1:11:32] but sensitive analysis is because i don't do it but it's still a thought
+[1:11:34] don't do it but it's still a thought experiment
+[1:11:35] experiment ideally let's find um
+[1:11:38] ideally let's find um i think it's worth finding different
+[1:11:39] i think it's worth finding different study designs that make different
+[1:11:40] study designs that make different assumptions about then observables and
+[1:11:42] assumptions about then observables and seeing what sort of
+[1:11:43] seeing what sort of congruence you get across different
+[1:11:45] congruence you get across different study designs on the same causal
+[1:11:46] study designs on the same causal question
+[1:11:48] question not to shout too much of the economist
+[1:11:50] not to shout too much of the economist but like if you read the literature on
+[1:11:52] but like if you read the literature on college education
+[1:11:54] college education yeah it's based on instruments a lot of
+[1:11:56] yeah it's based on instruments a lot of people hate instruments but they've used
+[1:11:57] people hate instruments but they've used a lot of different instruments that have
+[1:11:58] a lot of different instruments that have clearly different sorts of
+[1:12:00] clearly different sorts of biases and they get the same result
+[1:12:04] biases and they get the same result that's to me is a good sign
+[1:12:10] um so i think i'll keep it there in terms
+[1:12:12] so i think i'll keep it there in terms of what's left uh feel free to i'm very
+[1:12:15] of what's left uh feel free to i'm very easy to find on the web if you want to
+[1:12:17] easy to find on the web if you want to track me down and email with questions
+[1:12:19] track me down and email with questions i will answer them at some other period
+[1:12:20] i will answer them at some other period later this week
+[1:12:22] later this week all right perfect
+[1:12:24] all right perfect so in that case
+[1:12:26] so in that case uh
+[1:12:27] uh right
+[1:12:28] right so uh thanks luke and
+[1:12:31] so uh thanks luke and eva
+[1:12:32] eva just one second
+[1:12:33] just one second here we go
+[1:12:35] here we go for the wonderful talks and it's not
+[1:12:37] for the wonderful talks and it's not provoking discussions and also for
+[1:12:39] provoking discussions and also for answering so many questions and thank
+[1:12:41] answering so many questions and thank you the audience for asking so many
+[1:12:42] you the audience for asking so many questions actually it's been very
+[1:12:44] questions actually it's been very engaging
+[1:12:45] engaging uh so next week actually we have one of
+[1:12:47] uh so next week actually we have one of our own so dominic roten hoysa
+[1:12:51] our own so dominic roten hoysa will present his work on calibrated
+[1:12:53] will present his work on calibrated inference statistical inference that
+[1:12:55] inference statistical inference that accounts for both sampling uncertainty
+[1:12:57] accounts for both sampling uncertainty and distributional answers in t so we
+[1:12:59] and distributional answers in t so we hope to see you all there thanks and
+[1:13:02] hope to see you all there thanks and have a great day

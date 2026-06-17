@@ -1,0 +1,1565 @@
+[0:00:06] okay so thank you so much for everyone to coming like online cence seminar
+[0:00:08] to coming like online cence seminar today uh we have a great speaker Jared
+[0:00:11] today uh we have a great speaker Jared muray from University of Texas at Austin
+[0:00:13] muray from University of Texas at Austin uh he's going to talk about a unifying
+[0:00:15] uh he's going to talk about a unifying waiting perspective on cal machine
+[0:00:17] waiting perspective on cal machine learning conal methods gaussian
+[0:00:19] learning conal methods gaussian processes and bean tree models and he
+[0:00:22] processes and bean tree models and he has his co-author Abby feder in the Q&amp;A
+[0:00:25] has his co-author Abby feder in the Q&amp;A session and after the talk we're going
+[0:00:27] session and after the talk we're going to also have discussion from Rahul s
+[0:00:30] to also have discussion from Rahul s from univers uh from Harvard University
+[0:00:33] from univers uh from Harvard University um so and Sarah is going to handle the
+[0:00:35] um so and Sarah is going to handle the Q&amp;A so
+[0:00:36] Q&amp;A so Sarah uh yeah I just wanted to remind
+[0:00:38] Sarah uh yeah I just wanted to remind you to please use the Q&amp;A function
+[0:00:40] you to please use the Q&amp;A function instead of the chat so that AI can
+[0:00:43] instead of the chat so that AI can answer your questions and then if at the
+[0:00:44] answer your questions and then if at the end there will be still questions that
+[0:00:46] end there will be still questions that AI hasn't answer or you still want to
+[0:00:49] AI hasn't answer or you still want to ask new questions then maybe Jared and
+[0:00:51] ask new questions then maybe Jared and even Ai and aul can discuss about them
+[0:00:54] even Ai and aul can discuss about them so I would read them out for you at the
+[0:00:55] so I would read them out for you at the end okay so then with this Jared the
+[0:01:00] end okay so then with this Jared the floor is
+[0:01:00] floor is yours great thank you so much uh let me
+[0:01:05] yours great thank you so much uh let me get set up here uh while I'm getting set
+[0:01:07] get set up here uh while I'm getting set up I just want to take a second
+[0:01:10] up I just want to take a second um thank everybody for uh joining today
+[0:01:14] um thank everybody for uh joining today these virtual talks are so much better
+[0:01:16] these virtual talks are so much better when there is an actual audience uh and
+[0:01:19] when there is an actual audience uh and then I also want to um oops screen I
+[0:01:22] then I also want to um oops screen I also want to uh thank our discussant who
+[0:01:24] also want to uh thank our discussant who has put something together based on a
+[0:01:27] has put something together based on a Half Baked typo ridden draft at the last
+[0:01:30] Half Baked typo ridden draft at the last minute uh I haven't seen it but I'm sure
+[0:01:33] minute uh I haven't seen it but I'm sure that it's fantastic and far better than
+[0:01:35] that it's fantastic and far better than what I would have done with the same
+[0:01:36] what I would have done with the same Source material so thanks for H for um
+[0:01:39] Source material so thanks for H for um volunteering to do that and then um uh
+[0:01:42] volunteering to do that and then um uh dealing with my border line and
+[0:01:44] dealing with my border line and confidence along the way
+[0:01:54] um so this is work that is um in progress progressed a fair amount but
+[0:01:56] progress progressed a fair amount but still very much work in progress um so
+[0:01:58] still very much work in progress um so I'd very much appreciate uh any feedback
+[0:02:00] I'd very much appreciate uh any feedback back here in the talk or afterwards uh
+[0:02:02] back here in the talk or afterwards uh from folks uh joint work with my
+[0:02:04] from folks uh joint work with my colleague AI Feller who was able to join
+[0:02:06] colleague AI Feller who was able to join us for the panel today he'll be in the
+[0:02:07] us for the panel today he'll be in the chat um answering all your fantastic
+[0:02:10] chat um answering all your fantastic questions um big thank you to AI also
+[0:02:13] questions um big thank you to AI also for making a big push here at the last
+[0:02:15] for making a big push here at the last minute so we could get these slides
+[0:02:18] minute so we could get these slides together so um let me just jump right in
+[0:02:22] together so um let me just jump right in uh the title here is ambitious I want to
+[0:02:24] uh the title here is ambitious I want to make a a couple sort of caveats from the
+[0:02:27] make a a couple sort of caveats from the outset um this is a unifying waiting for
+[0:02:30] outset um this is a unifying waiting for perspective it's not a universal waiting
+[0:02:32] perspective it's not a universal waiting perspective so there are a lot of really
+[0:02:33] perspective so there are a lot of really interesting causal ml methods that um
+[0:02:37] interesting causal ml methods that um are not going to sort of fall in this
+[0:02:38] are not going to sort of fall in this framework that we're talking about today
+[0:02:40] framework that we're talking about today but there's an awful lot that do and um
+[0:02:43] but there's an awful lot that do and um through the course of working on this
+[0:02:45] through the course of working on this project I have learned a lot about uh
+[0:02:47] project I have learned a lot about uh the existing literature uh including
+[0:02:50] the existing literature uh including work from a lot of fantastic folks in
+[0:02:52] work from a lot of fantastic folks in other areas um but also I've learned a
+[0:02:55] other areas um but also I've learned a lot about my own work kind of mapping it
+[0:02:57] lot about my own work kind of mapping it onto this waiting perspective and then
+[0:02:59] onto this waiting perspective and then seeing How It lines up with all these
+[0:03:01] seeing How It lines up with all these other methods so hopefully you guys will
+[0:03:03] other methods so hopefully you guys will get something on that too so let's just
+[0:03:05] get something on that too so let's just set the stage here um if you're on this
+[0:03:08] set the stage here um if you're on this call probably I don't need to explain to
+[0:03:10] call probably I don't need to explain to you that we've seen um a pretty steep
+[0:03:13] you that we've seen um a pretty steep rise uh in the application of machine
+[0:03:15] rise uh in the application of machine learning to causal inference I would say
+[0:03:18] learning to causal inference I would say one of the biggest advances in this
+[0:03:19] one of the biggest advances in this space over the last 10 15ish years has
+[0:03:23] space over the last 10 15ish years has been really just recognizing that
+[0:03:26] been really just recognizing that adapting machine learning methods that
+[0:03:27] adapting machine learning methods that are so effective for prediction to the
+[0:03:29] are so effective for prediction to the setting of causal inference is not as
+[0:03:32] setting of causal inference is not as simple as just picking something off the
+[0:03:33] simple as just picking something off the shelf changing the inputs a little bit
+[0:03:36] shelf changing the inputs a little bit uh dumping it into some causal black box
+[0:03:38] uh dumping it into some causal black box and then hoping what we get out the
+[0:03:39] and then hoping what we get out the other end makes sense right um all sorts
+[0:03:42] other end makes sense right um all sorts of issues with that in practice um so a
+[0:03:45] of issues with that in practice um so a lot of work from uh a variety of
+[0:03:47] lot of work from uh a variety of different people on adapting caal
+[0:03:49] different people on adapting caal machine learning or sorry adapting
+[0:03:51] machine learning or sorry adapting machine learning to causal settings a
+[0:03:53] machine learning to causal settings a lot of that work based on traditional
+[0:03:55] lot of that work based on traditional semi- parametric Theory and new clothes
+[0:03:58] semi- parametric Theory and new clothes uh there's the work on double machine
+[0:03:59] uh there's the work on double machine learning all sort of semi- parametric
+[0:04:01] learning all sort of semi- parametric efficiency type arguments being made for
+[0:04:04] efficiency type arguments being made for um machine learning methods adapted to
+[0:04:07] um machine learning methods adapted to the causal space um there's a couple of
+[0:04:10] the causal space um there's a couple of uh pretty big I don't know if you call
+[0:04:12] uh pretty big I don't know if you call them drawbacks but areas for improvement
+[0:04:14] them drawbacks but areas for improvement right uh the first one is that these are
+[0:04:17] right uh the first one is that these are largely blackbox methods right um so
+[0:04:20] largely blackbox methods right um so concurrently there's certainly been a
+[0:04:21] concurrently there's certainly been a lot of work on trying to interpret
+[0:04:24] lot of work on trying to interpret machine learning methods a lot of that
+[0:04:25] machine learning methods a lot of that stuff also adapted to causal inference
+[0:04:28] stuff also adapted to causal inference um but when we're talking about causal
+[0:04:29] um but when we're talking about causal inference we really talking about an
+[0:04:30] inference we really talking about an area where transparency is at a Prem
+[0:04:33] area where transparency is at a Prem right uh what are we doing when we
+[0:04:35] right uh what are we doing when we answer caal questions well usually we're
+[0:04:36] answer caal questions well usually we're not going to stop there right um it's
+[0:04:38] not going to stop there right um it's part of a larger feedback group where
+[0:04:40] part of a larger feedback group where we're trying to answer causal questions
+[0:04:42] we're trying to answer causal questions to decide about policies or intervenes
+[0:04:44] to decide about policies or intervenes to deploy in practice maybe these uh
+[0:04:47] to deploy in practice maybe these uh estimates of heterogeneous effects are
+[0:04:48] estimates of heterogeneous effects are being fed into machines that are
+[0:04:50] being fed into machines that are actually making decisions about who gets
+[0:04:52] actually making decisions about who gets uh treatments or interventions um and so
+[0:04:55] uh treatments or interventions um and so it's really important to be able to
+[0:04:56] it's really important to be able to interrogate these things um another
+[0:04:58] interrogate these things um another thing that is near and dear to my heart
+[0:05:00] thing that is near and dear to my heart as a trained statistician um is that we
+[0:05:02] as a trained statistician um is that we have just fewer sort of traditional type
+[0:05:04] have just fewer sort of traditional type Diagnostics right um I spend uh
+[0:05:07] Diagnostics right um I spend uh significant portion of my life teaching
+[0:05:09] significant portion of my life teaching regression to people that maybe
+[0:05:11] regression to people that maybe shouldn't never actually use it and we
+[0:05:13] shouldn't never actually use it and we spend a lot of time talking about
+[0:05:15] spend a lot of time talking about diagnosing model assumptions when these
+[0:05:17] diagnosing model assumptions when these things are reliable when they're not
+[0:05:19] things are reliable when they're not reliable etc etc etc and the suite of
+[0:05:22] reliable etc etc etc and the suite of tools that we have available for doing
+[0:05:24] tools that we have available for doing that with Cal ml is
+[0:05:28] that with Cal ml is lacking um so in parallel with this
+[0:05:31] lacking um so in parallel with this causal machine learning World um
+[0:05:33] causal machine learning World um unfortunately in my perspective uh
+[0:05:35] unfortunately in my perspective uh there's another box that people are
+[0:05:37] there's another box that people are putting some of these methods in and
+[0:05:38] putting some of these methods in and that's the basian non-parametric caal
+[0:05:40] that's the basian non-parametric caal modeling basian machine learning
+[0:05:42] modeling basian machine learning Universe um the literature is a little
+[0:05:44] Universe um the literature is a little bit bifurcated here um however it has
+[0:05:47] bit bifurcated here um however it has sort of broken through in that um at
+[0:05:49] sort of broken through in that um at least empirically in these large
+[0:05:50] least empirically in these large empirical evaluations uh beijan methods
+[0:05:53] empirical evaluations uh beijan methods seem to do really well and in particular
+[0:05:55] seem to do really well and in particular basan methods based on regression trees
+[0:05:57] basan methods based on regression trees seem to do really well we see it
+[0:05:59] seem to do really well we see it empirically we have a little bit of
+[0:06:00] empirically we have a little bit of theory sort of informing why that might
+[0:06:02] theory sort of informing why that might be the case um but I would say that
+[0:06:04] be the case um but I would say that overall we don't necessarily have a
+[0:06:06] overall we don't necessarily have a great understanding of why that's the
+[0:06:07] great understanding of why that's the case right um so there is this
+[0:06:10] case right um so there is this perspective that these methods are sort
+[0:06:12] perspective that these methods are sort of distinct from the broader cal machine
+[0:06:14] of distinct from the broader cal machine learning literature you think about um
+[0:06:16] learning literature you think about um the advances that have been really uh
+[0:06:18] the advances that have been really uh influential in that area you're thinking
+[0:06:20] influential in that area you're thinking about things like the r learning or
+[0:06:22] about things like the r learning or thinking about things like double or
+[0:06:23] thinking about things like double or dubias machine learning One Step
+[0:06:25] dubias machine learning One Step augmented
+[0:06:27] augmented estimators kind of all the same thing
+[0:06:29] estimators kind of all the same thing when you squint
+[0:06:30] when you squint uh and it turns out that those things
+[0:06:31] uh and it turns out that those things are all very closely related to the work
+[0:06:33] are all very closely related to the work that we're doing on beijan tree
+[0:06:36] that we're doing on beijan tree models um now looking at these things
+[0:06:38] models um now looking at these things from a basion perspective doesn't
+[0:06:40] from a basion perspective doesn't necessarily uh fix those last two
+[0:06:42] necessarily uh fix those last two drawbacks or areas for improvement we
+[0:06:43] drawbacks or areas for improvement we talked about on the last slide uh this
+[0:06:45] talked about on the last slide uh this is still very much a black box you might
+[0:06:47] is still very much a black box you might even argue that the box is a little bit
+[0:06:49] even argue that the box is a little bit blacker because we're trying to use a
+[0:06:51] blacker because we're trying to use a full posterior distribution to learn
+[0:06:53] full posterior distribution to learn about these things uh and there are very
+[0:06:55] about these things uh and there are very few uh Diagnostics in particular very
+[0:06:57] few uh Diagnostics in particular very few Diagnostics that are targeted to
+[0:06:58] few Diagnostics that are targeted to things um like causal
+[0:07:00] things um like causal asss um so that's some of the things
+[0:07:03] asss um so that's some of the things we're going to try to address right um
+[0:07:06] we're going to try to address right um so what are we doing in this paper what
+[0:07:08] so what are we doing in this paper what we're doing is we're looking at the
+[0:07:09] we're doing is we're looking at the implied waiting representation for a
+[0:07:11] implied waiting representation for a variety of caal ml methods and we're
+[0:07:14] variety of caal ml methods and we're going to focus on methods um that rely
+[0:07:17] going to focus on methods um that rely on the Robinson transformation or the
+[0:07:20] on the Robinson transformation or the Robinson kernel which I'm going to
+[0:07:21] Robinson kernel which I'm going to introduce you to uh in a minute here
+[0:07:23] introduce you to uh in a minute here okay so there's a deep connection here
+[0:07:26] okay so there's a deep connection here between uh the Robinson transformation
+[0:07:28] between uh the Robinson transformation or outcome models and the Robinson
+[0:07:30] or outcome models and the Robinson parameterization uh and things like
+[0:07:33] parameterization uh and things like balancing weights from the classical um
+[0:07:35] balancing weights from the classical um causal inference literature which ties
+[0:07:37] causal inference literature which ties directly into all the uh fantastic and
+[0:07:40] directly into all the uh fantastic and exciting new work on um estimating Reese
+[0:07:43] exciting new work on um estimating Reese representers uh using regression models
+[0:07:45] representers uh using regression models to um infer waiting functions we'll see
+[0:07:48] to um infer waiting functions we'll see a little bit more specifics on that in
+[0:07:50] a little bit more specifics on that in minute here okay um so I'm going to show
+[0:07:52] minute here okay um so I'm going to show you a few things about those um I'm
+[0:07:54] you a few things about those um I'm going to show you that when we move into
+[0:07:55] going to show you that when we move into the Robinson parameterization there's
+[0:07:57] the Robinson parameterization there's some nice things that happen uh we can
+[0:07:59] some nice things that happen uh we can um take the implied weights and we can
+[0:08:02] um take the implied weights and we can uh pull them apart into two terms that
+[0:08:03] uh pull them apart into two terms that are doing two different things uh one
+[0:08:05] are doing two different things uh one that is trying to balance functions
+[0:08:08] that is trying to balance functions between a treatment and a control group
+[0:08:10] between a treatment and a control group to control frein founding um another
+[0:08:12] to control frein founding um another piece is trying to shift the target so
+[0:08:15] piece is trying to shift the target so if we have IID samples from a
+[0:08:16] if we have IID samples from a distribution P but we want to estimate
+[0:08:19] distribution P but we want to estimate the average treatment effect in a
+[0:08:20] the average treatment effect in a different distribution say Q there's
+[0:08:22] different distribution say Q there's another component of the weights that's
+[0:08:24] another component of the weights that's actually dealing with um that uh
+[0:08:26] actually dealing with um that uh transfer so you can think about that as
+[0:08:27] transfer so you can think about that as transportability you can think about it
+[0:08:29] transportability you can think about it as general iability you can think about
+[0:08:31] as general iability you can think about it as co-variate shift it's all six of
+[0:08:33] it as co-variate shift it's all six of one or half does
+[0:08:36] one or half does okay um I'm going to draw out the
+[0:08:38] okay um I'm going to draw out the correspondence between gaussian
+[0:08:39] correspondence between gaussian processes and kernel Ridge and uh what I
+[0:08:42] processes and kernel Ridge and uh what I call conditional posterior weights okay
+[0:08:45] call conditional posterior weights okay uh this is a correspondence that has
+[0:08:46] uh this is a correspondence that has been used in simpler models for a long
+[0:08:49] been used in simpler models for a long time in the uh survey sampling context
+[0:08:52] time in the uh survey sampling context it's a little bit of work around this in
+[0:08:54] it's a little bit of work around this in the um CAA context uh but I'm going to
+[0:08:57] the um CAA context uh but I'm going to extend that explicitly to the
+[0:08:59] extend that explicitly to the non-parametric B CA models that are um
+[0:09:01] non-parametric B CA models that are um widely used in practice F BCF things
+[0:09:04] widely used in practice F BCF things like that um and then I'm also going to
+[0:09:06] like that um and then I'm also going to show you what happens when we take those
+[0:09:08] show you what happens when we take those models and instead of just using them uh
+[0:09:10] models and instead of just using them uh off the shelf the way they were
+[0:09:11] off the shelf the way they were introduced if we move them into the
+[0:09:13] introduced if we move them into the Robinson parameterization okay so I'm
+[0:09:15] Robinson parameterization okay so I'm going to illustrate that with basian CA
+[0:09:16] going to illustrate that with basian CA Forest as a um wholly unbiased consumer
+[0:09:19] Forest as a um wholly unbiased consumer of the literature I think that's one of
+[0:09:21] of the literature I think that's one of the better methods out there so it makes
+[0:09:22] the better methods out there so it makes sense to take a closer look at that
+[0:09:24] sense to take a closer look at that one okay and then finally I'm going to
+[0:09:27] one okay and then finally I'm going to show you uh some standard waiting
+[0:09:28] show you uh some standard waiting Diagnostics and I'm going to apply them
+[0:09:30] Diagnostics and I'm going to apply them to CML methods uh in particular to that
+[0:09:32] to CML methods uh in particular to that rbcf model just because it's going to
+[0:09:34] rbcf model just because it's going to illustrate some points um but uh one
+[0:09:37] illustrate some points um but uh one thing I'm probably not going to have
+[0:09:38] thing I'm probably not going to have time to talk about today is the other
+[0:09:40] time to talk about today is the other advantage of putting all these things in
+[0:09:42] advantage of putting all these things in a common framework of waiting estimators
+[0:09:44] a common framework of waiting estimators which is that we can compare these
+[0:09:45] which is that we can compare these methods that are um fit or inferred or
+[0:09:49] methods that are um fit or inferred or built uh in very different ways we can
+[0:09:51] built uh in very different ways we can sort of put them all on common footing
+[0:09:53] sort of put them all on common footing if we can derive a waiting
+[0:09:54] if we can derive a waiting representation and we can use that to
+[0:09:55] representation and we can use that to compare between methods uh and uh glean
+[0:09:58] compare between methods uh and uh glean a deeper understanding of how they're
+[0:10:00] a deeper understanding of how they're similar how they're different where
+[0:10:02] similar how they're different where they're different and why they might be
+[0:10:04] they're different and why they might be different where they're different a lot
+[0:10:06] different where they're different a lot of words
+[0:10:07] of words there okay uh so I'm just going to step
+[0:10:10] there okay uh so I'm just going to step quickly through some background here um
+[0:10:12] quickly through some background here um you guys are in the online Cil inference
+[0:10:14] you guys are in the online Cil inference seminar so a lot of this is going to
+[0:10:16] seminar so a lot of this is going to look familiar to you we're going to
+[0:10:18] look familiar to you we're going to start by uh making some causal
+[0:10:20] start by uh making some causal identifying assumptions so uh over here
+[0:10:22] identifying assumptions so uh over here on the left
+[0:10:40] oops let's try this trying to get my pointer can you guys see my cursor you
+[0:10:43] pointer can you guys see my cursor you can okay great I'll just use the
+[0:10:45] can okay great I'll just use the cursor um okay so uh the causal setup
+[0:10:48] cursor um okay so uh the causal setup here we're going to start with some uh
+[0:10:50] here we're going to start with some uh standard identifying assumptions in
+[0:10:51] standard identifying assumptions in particular we're going to assume strong
+[0:10:53] particular we're going to assume strong ignorability plus sua um right so I've
+[0:10:56] ignorability plus sua um right so I've got all my confounders measured got no
+[0:10:58] got all my confounders measured got no interference I have all that good stuff
+[0:11:00] interference I have all that good stuff on the right hand side here I'm going to
+[0:11:02] on the right hand side here I'm going to define a couple of quantities the first
+[0:11:04] define a couple of quantities the first one is going to be what I call the
+[0:11:06] one is going to be what I call the outcome function so that's going to be
+[0:11:07] outcome function so that's going to be the conditional expected value of each
+[0:11:09] the conditional expected value of each of my potential outcomes conditional on
+[0:11:11] of my potential outcomes conditional on co-variance we're just going to call
+[0:11:13] co-variance we're just going to call that F ofx and Z that's going to be an
+[0:11:15] that F ofx and Z that's going to be an object of great interest in the talk uh
+[0:11:17] object of great interest in the talk uh and then this little e of X down here
+[0:11:19] and then this little e of X down here that's just going to be my propensity
+[0:11:20] that's just going to be my propensity score the probability that c is equal to
+[0:11:22] score the probability that c is equal to one uh given that X is equal to X right
+[0:11:25] one uh given that X is equal to X right so a lot of what I'm going to tell you
+[0:11:26] so a lot of what I'm going to tell you here is going to transfer to other
+[0:11:29] here is going to transfer to other interesting settings multi-arm
+[0:11:30] interesting settings multi-arm treatments continuous treatments things
+[0:11:32] treatments continuous treatments things like that um but it turns out that this
+[0:11:34] like that um but it turns out that this is hard enough to do that we're just
+[0:11:35] is hard enough to do that we're just going to focus on this simpli
+[0:11:38] going to focus on this simpli case um so layering those assumptions
+[0:11:41] case um so layering those assumptions together plus some uh Integra
+[0:11:43] together plus some uh Integra integrability assumptions is going to
+[0:11:44] integrability assumptions is going to lead us to um what I call a structural
+[0:11:46] lead us to um what I call a structural model for observables okay so this Yi
+[0:11:49] model for observables okay so this Yi over here on the left hand side that is
+[0:11:51] over here on the left hand side that is the observable y those are not my
+[0:11:52] the observable y those are not my potential outcomes and under these
+[0:11:54] potential outcomes and under these assumptions I can say that Yi is f of XI
+[0:11:58] assumptions I can say that Yi is f of XI and Z right so Z here being a binary
+[0:12:00] and Z right so Z here being a binary treatment indicator uh plus some error
+[0:12:02] treatment indicator uh plus some error terms the error terms have this
+[0:12:04] terms the error terms have this structure down here they are
+[0:12:06] structure down here they are conditionally independent of treatment
+[0:12:07] conditionally independent of treatment assignment and they have conditional
+[0:12:09] assignment and they have conditional mean zero and that's it right so when I
+[0:12:12] mean zero and that's it right so when I make reference to the structural model
+[0:12:13] make reference to the structural model I'm really uh referring to the model
+[0:12:15] I'm really uh referring to the model that um you see here on the slides
+[0:12:18] that um you see here on the slides that's before I start layering on
+[0:12:20] that's before I start layering on parametric assumptions making
+[0:12:21] parametric assumptions making assumptions about the form of f whether
+[0:12:23] assumptions about the form of f whether it lives in a particular function space
+[0:12:25] it lives in a particular function space whether I can express it as a regression
+[0:12:26] whether I can express it as a regression on some basis etc etc etc okay um so
+[0:12:30] on some basis etc etc etc okay um so pretty mild assumptions there again it's
+[0:12:31] pretty mild assumptions there again it's really uh ignorability consistency and
+[0:12:33] really uh ignorability consistency and then some um uh uh means at
+[0:12:53] this okay um so uh the estimand that we're going to look at are going to be
+[0:12:55] we're going to look at are going to be um average treatment effects in a Target
+[0:12:57] um average treatment effects in a Target population Q so another thing that I
+[0:12:59] population Q so another thing that I could talk about today that I'm not
+[0:13:00] could talk about today that I'm not going to have time to talk about is um
+[0:13:02] going to have time to talk about is um estimated conditional average treatment
+[0:13:04] estimated conditional average treatment effects right so you can think about
+[0:13:05] effects right so you can think about that in this setup as taking that Target
+[0:13:07] that in this setup as taking that Target distribution q and taking it down to a
+[0:13:09] distribution q and taking it down to a point there's a lot of regularity
+[0:13:11] point there's a lot of regularity conditions that fall apart when we do
+[0:13:12] conditions that fall apart when we do that and I just don't want to deal with
+[0:13:14] that and I just don't want to deal with them today so we're going to imagine
+[0:13:15] them today so we're going to imagine that we want to estimate um the uh
+[0:13:17] that we want to estimate um the uh average treatment effect in a sort of
+[0:13:19] average treatment effect in a sort of proper distribution cue here um so uh
+[0:13:23] proper distribution cue here um so uh this setup is going to accommodate uh
+[0:13:25] this setup is going to accommodate uh the at and the original population P the
+[0:13:28] the at and the original population P the at
+[0:13:30] at uh conditional estimands that assume a
+[0:13:32] uh conditional estimands that assume a fixed distribution for the co-variates
+[0:13:33] fixed distribution for the co-variates um it's going to cover an awful lot of
+[0:13:36] um it's going to cover an awful lot of stuff uh so my estimat are going to be
+[0:13:38] stuff uh so my estimat are going to be right like this guy down here right so
+[0:13:40] right like this guy down here right so the at under the distribution Q I have
+[0:13:43] the at under the distribution Q I have IID observations from P lurking in the
+[0:13:46] IID observations from P lurking in the background here there is an assumption
+[0:13:47] background here there is an assumption that Q is absolutely continuous with
+[0:13:49] that Q is absolutely continuous with respect to P you relax that doesn't
+[0:13:51] respect to P you relax that doesn't really matter too much um but the uh
+[0:13:54] really matter too much um but the uh first big point I want to make about our
+[0:13:56] first big point I want to make about our estimand is that um it's a linear
+[0:13:59] estimand is that um it's a linear operator given by a linear operator um
+[0:14:01] operator given by a linear operator um on the outcome function app okay so in
+[0:14:05] on the outcome function app okay so in addition to ignorability SOA all that
+[0:14:07] addition to ignorability SOA all that stuff you guys are causal people so you
+[0:14:08] stuff you guys are causal people so you know what's coming next I need some kind
+[0:14:10] know what's coming next I need some kind of overlap assumption my overlap
+[0:14:12] of overlap assumption my overlap assumption is going to be that this is a
+[0:14:14] assumption is going to be that this is a nice linear operator uh in particular
+[0:14:17] nice linear operator uh in particular that is continuous which is going to
+[0:14:18] that is continuous which is going to mean that it has a uh Rees representer
+[0:14:21] mean that it has a uh Rees representer in
+[0:14:22] in L2 okay uh so I'm just going to go ahead
+[0:14:26] L2 okay uh so I'm just going to go ahead and state the overlap assumption in
+[0:14:27] and state the overlap assumption in terms of the ree representer the Reese
+[0:14:29] terms of the ree representer the Reese repres Center is defined as follows
+[0:14:30] repres Center is defined as follows that's this Alpha Q of x and z can you
+[0:14:34] that's this Alpha Q of x and z can you guys still see my pointer it's like
+[0:14:36] guys still see my pointer it's like disappearing you can okay I can't it's
+[0:14:39] disappearing you can okay I can't it's weird how about over here can you see it
+[0:14:41] weird how about over here can you see it over
+[0:14:43] here it's like I didn't live through
+[0:14:55] Co oh good enough um so uh the Reese representer here for our Target esans it
+[0:14:57] representer here for our Target esans it looks a little bit strange but you've
+[0:14:58] looks a little bit strange but you've seen each of the two pieces before so
+[0:15:01] seen each of the two pieces before so over here on the left hand side
+[0:15:02] over here on the left hand side underlined in red those are just good
+[0:15:04] underlined in red those are just good oldfashioned inverse propensity weights
+[0:15:07] oldfashioned inverse propensity weights signed by the treatment group you're
+[0:15:08] signed by the treatment group you're going to see why I added the sign in a
+[0:15:10] going to see why I added the sign in a second here it's really going to help us
+[0:15:11] second here it's really going to help us out with notation right so on the left
+[0:15:13] out with notation right so on the left hand side underlined in red we have
+[0:15:15] hand side underlined in red we have inverse propensity weights what do the
+[0:15:17] inverse propensity weights what do the inverse propensity weights do they DEC
+[0:15:19] inverse propensity weights do they DEC confound right so they mean balance
+[0:15:20] confound right so they mean balance functions between treatment and
+[0:15:22] functions between treatment and controls uh on the right hand side
+[0:15:24] controls uh on the right hand side underlined in blue we have a density
+[0:15:26] underlined in blue we have a density ratio right what's the density ratio
+[0:15:28] ratio right what's the density ratio going to do it's going to mean balance
+[0:15:30] going to do it's going to mean balance things between uh the source P from
+[0:15:33] things between uh the source P from which I have IID samples to the Target Q
+[0:15:35] which I have IID samples to the Target Q where I want to estimate my average
+[0:15:37] where I want to estimate my average treatment effects okay uh so we're going
+[0:15:39] treatment effects okay uh so we're going to try to do both of those two things at
+[0:15:41] to try to do both of those two things at once so uh sometimes I like to call this
+[0:15:44] once so uh sometimes I like to call this uh composite overlap asumption because
+[0:15:46] uh composite overlap asumption because it's accounting for two things right
+[0:15:48] it's accounting for two things right it's accounting for um I need some
+[0:15:50] it's accounting for um I need some treated and control units in the places
+[0:15:52] treated and control units in the places in coar space where I want to estimate
+[0:15:54] in coar space where I want to estimate effects it's accounting for that density
+[0:15:56] effects it's accounting for that density ratio there um overlap can fail in that
+[0:15:59] ratio there um overlap can fail in that I can have propensity scores going to
+[0:16:01] I can have propensity scores going to zero or one uh as long as Q assigned
+[0:16:04] zero or one uh as long as Q assigned zero Mass there right so I'm not making
+[0:16:05] zero Mass there right so I'm not making a strong overlap assumption well this is
+[0:16:07] a strong overlap assumption well this is a strong one but it's not as strongest
+[0:16:09] a strong one but it's not as strongest of ones you might see
+[0:16:10] of ones you might see elsewhere
+[0:16:12] elsewhere okay so like I said Alpha Q is the re
+[0:16:15] okay so like I said Alpha Q is the re representer in l2p uh and the important
+[0:16:18] representer in l2p uh and the important thing is really down uh when we get down
+[0:16:20] thing is really down uh when we get down here to
+[0:16:22] here to um uh down here so TQ I can write um as
+[0:16:27] um uh down here so TQ I can write um as a population level waiting estimator so
+[0:16:30] a population level waiting estimator so I can take observations y that are
+[0:16:31] I can take observations y that are distributed according to P or really the
+[0:16:34] distributed according to P or really the triple X Y and Z distributed according
+[0:16:36] triple X Y and Z distributed according to p and to Q is going to be the
+[0:16:38] to p and to Q is going to be the expected value of alpha XZ * y under P
+[0:16:48] okay now the ree representer has some other nice
+[0:16:49] other nice properties uh the Reese representer has
+[0:16:51] properties uh the Reese representer has what we call balancing properties so by
+[0:16:54] what we call balancing properties so by definition for uh any F that's mean s
+[0:16:57] definition for uh any F that's mean s integrable under P we have the following
+[0:16:59] integrable under P we have the following relationship the expected value of um
+[0:17:02] relationship the expected value of um the re representer times um any
+[0:17:05] the re representer times um any potential outcome function f that's
+[0:17:06] potential outcome function f that's integraal is going to be equal to on the
+[0:17:09] integraal is going to be equal to on the right hand side the expected value in Q
+[0:17:11] right hand side the expected value in Q of the contrast F of X1 minus F of x0
+[0:17:14] of the contrast F of X1 minus F of x0 right of course on the right hand side
+[0:17:15] right of course on the right hand side if f is our true outcome function then
+[0:17:17] if f is our true outcome function then on the right hand side I have t q but
+[0:17:19] on the right hand side I have t q but that's going to work for any function of
+[0:17:21] that's going to work for any function of F and z uh that is integrable
+[0:17:25] F and z uh that is integrable okay now if you're a waiting person
+[0:17:28] okay now if you're a waiting person you're used to thinking about different
+[0:17:29] you're used to thinking about different forms of balance okay so this General
+[0:17:32] forms of balance okay so this General balancing property that holds uh by the
+[0:17:34] balancing property that holds uh by the Reese representation theorem implies a
+[0:17:36] Reese representation theorem implies a couple of balancing properties that are
+[0:17:38] couple of balancing properties that are more familiar to waiting folks okay so
+[0:17:40] more familiar to waiting folks okay so in red again we're going to be leaning
+[0:17:42] in red again we're going to be leaning on those inverse propensity weights to
+[0:17:43] on those inverse propensity weights to do what to take functions of X and mean
+[0:17:46] do what to take functions of X and mean balance them between treatment and
+[0:17:47] balance them between treatment and control groups that's going to deal with
+[0:17:49] control groups that's going to deal with confounding right uh we're also going to
+[0:17:52] confounding right uh we're also going to the re representer is also going to mean
+[0:17:54] the re representer is also going to mean balance those functions H ofx between my
+[0:17:56] balance those functions H ofx between my source population P from which I have
+[0:17:58] source population P from which I have IID samples and the target Q the
+[0:18:01] IID samples and the target Q the population where I'm trying to estimate
+[0:18:02] population where I'm trying to estimate an average treatment effect okay so
+[0:18:04] an average treatment effect okay so those properties in red and blue are
+[0:18:06] those properties in red and blue are implied by the more General one up top
+[0:18:09] implied by the more General one up top um you can put those things into one
+[0:18:10] um you can put those things into one toone correspondence if you want uh but
+[0:18:12] toone correspondence if you want uh but really I just want to draw out that this
+[0:18:14] really I just want to draw out that this um balancing property of the re
+[0:18:15] um balancing property of the re representer which looks a little bit
+[0:18:17] representer which looks a little bit abstract is actually equivalent to um
+[0:18:19] abstract is actually equivalent to um what a waiting person would naturally
+[0:18:21] what a waiting person would naturally want their weights to
+[0:18:31] do okay um so that's just some setup uh what I'm going to do now is I'm going to
+[0:18:32] what I'm going to do now is I'm going to briefly review The Waiting
+[0:18:34] briefly review The Waiting representation of outcome models okay so
+[0:18:37] representation of outcome models okay so lots of different ways that we could try
+[0:18:38] lots of different ways that we could try to estimate toq one way is the waiting
+[0:18:41] to estimate toq one way is the waiting form that I showed you a few slides ago
+[0:18:43] form that I showed you a few slides ago right I know that if I hit uh y with
+[0:18:45] right I know that if I hit uh y with alpha x and z and take an expected value
+[0:18:47] alpha x and z and take an expected value I get back to Q in the population so I
+[0:18:50] I get back to Q in the population so I could try to build those weights
+[0:18:51] could try to build those weights directly the other thing I could do of
+[0:18:53] directly the other thing I could do of course is I could estimate an outcome
+[0:18:55] course is I could estimate an outcome function uh and then take my estimate of
+[0:18:57] function uh and then take my estimate of the outcome function integrate that Q
+[0:18:59] the outcome function integrate that Q looking at those contrasts I could do an
+[0:19:02] looking at those contrasts I could do an augmented estimator that puts those two
+[0:19:03] augmented estimator that puts those two things together we're going to talk
+[0:19:05] things together we're going to talk about outcome models today and draw the
+[0:19:06] about outcome models today and draw the equivalence between outcome models and
+[0:19:08] equivalence between outcome models and waiting estimators you can close the
+[0:19:10] waiting estimators you can close the loop and get back to augmented
+[0:19:11] loop and get back to augmented estimators long line of work on that
+[0:19:13] estimators long line of work on that we're not going
+[0:19:15] we're not going to um so let's just start simple so uh
+[0:19:18] to um so let's just start simple so uh what I'm going to do is I'm going to
+[0:19:20] what I'm going to do is I'm going to begin in a setting where I just assume
+[0:19:21] begin in a setting where I just assume that I have a simple regression model so
+[0:19:24] that I have a simple regression model so my estimate for f ofx and Z is just
+[0:19:26] my estimate for f ofx and Z is just going to be a linear regression in some
+[0:19:27] going to be a linear regression in some features that I comput from The observed
+[0:19:29] features that I comput from The observed covariates and The observed treatment
+[0:19:31] covariates and The observed treatment assignments okay um so think about the
+[0:19:34] assignments okay um so think about the estimate that you would fit in LM right
+[0:19:36] estimate that you would fit in LM right so I have a bunch of things I want to
+[0:19:38] so I have a bunch of things I want to control for maybe I want to estimate
+[0:19:40] control for maybe I want to estimate some heterogeneity by interacting x with
+[0:19:42] some heterogeneity by interacting x with Z we could also get sort of arbitrarily
+[0:19:44] Z we could also get sort of arbitrarily fancy here we could be using basis
+[0:19:46] fancy here we could be using basis expansions etc etc we'll build up to
+[0:19:49] expansions etc etc we'll build up to that uh and I'm going to start by
+[0:19:51] that uh and I'm going to start by estimating that model and about the
+[0:19:52] estimating that model and about the simplest way that I could uh using a
+[0:19:55] simplest way that I could uh using a ridge regression estimate of my
+[0:19:56] ridge regression estimate of my coefficients right y Ridge maybe I'm in
+[0:19:59] coefficients right y Ridge maybe I'm in high Dimensions maybe I want to
+[0:20:01] high Dimensions maybe I want to regularize um we could uh get back OS
+[0:20:04] regularize um we could uh get back OS estimates by taking Sigma squar going
+[0:20:06] estimates by taking Sigma squar going down to zero and everything I'm about to
+[0:20:08] down to zero and everything I'm about to show you will go through okay so it
+[0:20:10] show you will go through okay so it turns out that uh if I go ahead and fit
+[0:20:12] turns out that uh if I go ahead and fit this
+[0:20:21] model okay uh what am I going to get I'm going to get an estimate for um the uh
+[0:20:24] going to get an estimate for um the uh coefficients that's over
+[0:20:27] coefficients that's over here on the right hand side side right
+[0:20:29] here on the right hand side side right so these are my regression coefficients
+[0:20:31] so these are my regression coefficients if I want to get a prediction at x and z
+[0:20:34] if I want to get a prediction at x and z i compute my basis function x and z and
+[0:20:36] i compute my basis function x and z and hit them with the regression
+[0:20:39] hit them with the regression coefficients
+[0:20:45] right um now of course when I get back at the end of the day is going to be um
+[0:20:47] at the end of the day is going to be um a waiting estimator right uh those
+[0:20:49] a waiting estimator right uh those regression coefficients are linear in y
+[0:20:52] regression coefficients are linear in y so my predictions are linear in y so
+[0:20:54] so my predictions are linear in y so what I have here are a set of model
+[0:20:56] what I have here are a set of model implied weights right I have a linear
+[0:20:57] implied weights right I have a linear smoother we got we all know that uh
+[0:20:59] smoother we got we all know that uh Ridge OLS regression those are linear
+[0:21:01] Ridge OLS regression those are linear smoothers that's just what this means
+[0:21:03] smoothers that's just what this means now what does that mean when I go to
+[0:21:04] now what does that mean when I go to estimated causal effect if I wanted to
+[0:21:06] estimated causal effect if I wanted to estimate a causal effect in this model
+[0:21:08] estimate a causal effect in this model what would I do um well I would do
+[0:21:10] what would I do um well I would do something very similar right I need to
+[0:21:14] something very similar right I need to um I need to estimate my fat I need to
+[0:21:17] um I need to estimate my fat I need to plug it into the equation over here
+[0:21:20] plug it into the equation over here right so now I'm plugging in fat for the
+[0:21:21] right so now I'm plugging in fat for the true F Computing that integral over two
+[0:21:24] true F Computing that integral over two uh how does that work out well over here
+[0:21:27] uh how does that work out well over here I can just pull out uh my regression
+[0:21:29] I can just pull out uh my regression coefficients and so really I need to hit
+[0:21:31] coefficients and so really I need to hit my regression coefficients with this
+[0:21:33] my regression coefficients with this quantity here F Delta Q okay so the
+[0:21:37] quantity here F Delta Q okay so the Delta Q is just the expected value of uh
+[0:21:40] Delta Q is just the expected value of uh B of X1 minus V of x0 right it's the
+[0:21:42] B of X1 minus V of x0 right it's the feature Vector when I set uh the
+[0:21:44] feature Vector when I set uh the treatment equal to one the feature
+[0:21:46] treatment equal to one the feature Vector when I set uh Z equals z might
+[0:21:49] Vector when I set uh Z equals z might hear these called counterfactual
+[0:21:50] hear these called counterfactual features uh we're going to be looking at
+[0:21:52] features uh we're going to be looking at this contrast here uh this guy F Delta Q
+[0:21:55] this contrast here uh this guy F Delta Q is kind of an interesting object it
+[0:21:56] is kind of an interesting object it turns out that's actually the Reese
+[0:21:57] turns out that's actually the Reese representer of that linear operator in a
+[0:22:00] representer of that linear operator in a different space in a Hilbert space not
+[0:22:02] different space in a Hilbert space not going to be super Central to what we're
+[0:22:03] going to be super Central to what we're doing here um but uh you guys will see
+[0:22:06] doing here um but uh you guys will see in a second why that's sort of
+[0:22:12] interesting um so what does that mean for my treatment effect estimate it's
+[0:22:13] for my treatment effect estimate it's going to take this form again I'm going
+[0:22:15] going to take this form again I'm going to hit my regression coefficients with B
+[0:22:17] to hit my regression coefficients with B Delta Q um and I'm going to get back
+[0:22:20] Delta Q um and I'm going to get back model and F weights okay um so this is
+[0:22:24] model and F weights okay um so this is not something that I invented for this
+[0:22:25] not something that I invented for this talk this is wellknown
+[0:22:27] talk this is wellknown um often times you see it explicated in
+[0:22:30] um often times you see it explicated in simpler context where maybe we're just
+[0:22:32] simpler context where maybe we're just trying to estimate the mean in a
+[0:22:34] trying to estimate the mean in a different population we're trying to
+[0:22:36] different population we're trying to transport a mean maybe we're just trying
+[0:22:38] transport a mean maybe we're just trying to DEC confound we're trying to do a
+[0:22:39] to DEC confound we're trying to do a couple things here at once so the
+[0:22:41] couple things here at once so the problem is going to have some more
+[0:22:42] problem is going to have some more interesting structure that we'll get
+[0:22:43] interesting structure that we'll get into a second right but for now what's
+[0:22:45] into a second right but for now what's the takeaway the takeaway here is just
+[0:22:47] the takeaway the takeaway here is just that we get back model
+[0:22:48] that we get back model ements
+[0:23:00] okay um whoops too far no just far
+[0:23:01] no just far enough we're going to spend a lot of
+[0:23:03] enough we're going to spend a lot of time uh talking about kernel Ridge
+[0:23:05] time uh talking about kernel Ridge regression okay so kernal Ridge
+[0:23:07] regression okay so kernal Ridge regression is just um a generalization
+[0:23:09] regression is just um a generalization of the regression modity you just saw to
+[0:23:11] of the regression modity you just saw to allow us to have infinite dimensional
+[0:23:13] allow us to have infinite dimensional features okay if you're not familiar
+[0:23:15] features okay if you're not familiar with colel Ridge I'm not going to teach
+[0:23:16] with colel Ridge I'm not going to teach it to you in five minutes uh but there
+[0:23:18] it to you in five minutes uh but there are some simple correspondences here
+[0:23:20] are some simple correspondences here that will help you um keep track of the
+[0:23:22] that will help you um keep track of the notation of the rest of the talk right
+[0:23:24] notation of the rest of the talk right so when we go from uh parametric Ridge
+[0:23:26] so when we go from uh parametric Ridge to curle Ridge what are we doing well
+[0:23:28] to curle Ridge what are we doing well we're going to estimate instead of a set
+[0:23:29] we're going to estimate instead of a set of regression coefficients we're going
+[0:23:31] of regression coefficients we're going to try to directly estimate a function f
+[0:23:33] to try to directly estimate a function f that's going to live in uh Hilbert space
+[0:23:36] that's going to live in uh Hilbert space the Hilbert space is going to be a
+[0:23:37] the Hilbert space is going to be a reproducing kernel Hilbert space that's
+[0:23:39] reproducing kernel Hilbert space that's determined by the kernel that I use oh
+[0:23:42] determined by the kernel that I use oh that's a mouthful um the uh
+[0:23:45] that's a mouthful um the uh correspondence here between function
+[0:23:47] correspondence here between function evaluations where before uh my
+[0:23:50] evaluations where before uh my predictions in the regression model were
+[0:23:52] predictions in the regression model were just the inner product of um this
+[0:23:54] just the inner product of um this feature Vector b x and z transpose beta
+[0:23:58] feature Vector b x and z transpose beta hat we're going to have a similar thing
+[0:23:59] hat we're going to have a similar thing going on here um in the um uh in the
+[0:24:03] going on here um in the um uh in the kernel Ridge regression except now my
+[0:24:05] kernel Ridge regression except now my inner product is going to be happening
+[0:24:07] inner product is going to be happening in some Hilbert space uh and on the left
+[0:24:09] in some Hilbert space uh and on the left hand side I'm GNA have a feature Vector
+[0:24:11] hand side I'm GNA have a feature Vector that's determined by the kernel this is
+[0:24:12] that's determined by the kernel this is the canonical feature Vector if you're
+[0:24:14] the canonical feature Vector if you're familiar with that literature um it's
+[0:24:16] familiar with that literature um it's going to act very much like the
+[0:24:17] going to act very much like the coefficients in my regression model okay
+[0:24:20] coefficients in my regression model okay and then on the right hand side we have
+[0:24:21] and then on the right hand side we have fat that's a point in function space you
+[0:24:23] fat that's a point in function space you can think about fat as just determining
+[0:24:25] can think about fat as just determining uh regression coefficients okay um then
+[0:24:30] uh regression coefficients okay um then at the end of the day when I estimate T
+[0:24:32] at the end of the day when I estimate T hat Q um how am I going to do it I'm
+[0:24:34] hat Q um how am I going to do it I'm going to do it in the same way I'm going
+[0:24:35] going to do it in the same way I'm going to get um that uh the Delta Q what we
+[0:24:39] to get um that uh the Delta Q what we call the Target representer that is the
+[0:24:41] call the Target representer that is the Reese representer of that linear
+[0:24:43] Reese representer of that linear operator in this Hilbert space H uh and
+[0:24:45] operator in this Hilbert space H uh and then I'm going to hit it in the inner
+[0:24:46] then I'm going to hit it in the inner product with my estimated fat the same
+[0:24:49] product with my estimated fat the same way that I did over here in the
+[0:24:50] way that I did over here in the parametric pression mod okay um so if
+[0:24:53] parametric pression mod okay um so if you're familiar with colel Ridge that's
+[0:24:54] you're familiar with colel Ridge that's not news to you none of this uh if
+[0:24:56] not news to you none of this uh if you're less familiar with colel Ridge
+[0:24:58] you're less familiar with colel Ridge you can just uh impute uh transposes for
+[0:25:01] you can just uh impute uh transposes for all the inner products on the rest of my
+[0:25:02] all the inner products on the rest of my slides and you will get 100% of the
+[0:25:04] slides and you will get 100% of the message
+[0:25:12] okay um oh yes before we move on down here in Orange it turns out that we're
+[0:25:14] here in Orange it turns out that we're also going to get back a waiting
+[0:25:15] also going to get back a waiting estimator when we compute our treat
+[0:25:17] estimator when we compute our treat effects in this way okay so we're going
+[0:25:18] effects in this way okay so we're going to have an estimate that's
+[0:25:24] LLY okay um so let's take a closer look at what those weights actually are okay
+[0:25:27] at what those weights actually are okay they have a simple closed form
+[0:25:30] they have a simple closed form uh so it turns out that we can write
+[0:25:32] uh so it turns out that we can write them as the expected value with respect
+[0:25:34] them as the expected value with respect to an empirical distribution so that
+[0:25:36] to an empirical distribution so that little p hat down there uh is just
+[0:25:38] little p hat down there uh is just denoting that I'm taking an empirical
+[0:25:40] denoting that I'm taking an empirical average with respect to the sample
+[0:25:41] average with respect to the sample values of uh XZ and Y okay so you can
+[0:25:44] values of uh XZ and Y okay so you can think about that as an estimate of the
+[0:25:45] think about that as an estimate of the population expectation um on the right
+[0:25:48] population expectation um on the right hand side I have for you the uh closed
+[0:25:50] hand side I have for you the uh closed form of that um uh function Alpha hat
+[0:25:55] form of that um uh function Alpha hat okay uh it depends on this object C hat
+[0:25:58] okay uh it depends on this object C hat that's a variance operator um again if
+[0:26:01] that's a variance operator um again if we're thinking about um the regression
+[0:26:03] we're thinking about um the regression model uh it's the uncentered coari or
+[0:26:05] model uh it's the uncentered coari or the scatter Matrix of those features Fe
+[0:26:08] the scatter Matrix of those features Fe okay um we're going to take a closer
+[0:26:10] okay um we're going to take a closer look at that guy in a
+[0:26:11] look at that guy in a second um so that uh should look
+[0:26:14] second um so that uh should look familiar to you guys it probably looks a
+[0:26:15] familiar to you guys it probably looks a little bit like regression coefficients
+[0:26:17] little bit like regression coefficients um and effectively they are right um so
+[0:26:21] um and effectively they are right um so by fitting that outcome regression model
+[0:26:23] by fitting that outcome regression model I'm getting an estimate of fat fat is
+[0:26:26] I'm getting an estimate of fat fat is going to live in that RK hsh um it's
+[0:26:29] going to live in that RK hsh um it's also going to imply an estimate for the
+[0:26:31] also going to imply an estimate for the Reese representer the estimate for the
+[0:26:33] Reese representer the estimate for the ree representer is going to live in the
+[0:26:34] ree representer is going to live in the same space and it's going to have a very
+[0:26:36] same space and it's going to have a very interesting
+[0:26:37] interesting form okay um so where does that closed
+[0:26:41] form okay um so where does that closed form come from there are a few different
+[0:26:42] form come from there are a few different ways to derive it okay um so down here
+[0:26:46] ways to derive it okay um so down here at the bottom of the slide we can derive
+[0:26:48] at the bottom of the slide we can derive it as an estimate of um a regularized
+[0:26:51] it as an estimate of um a regularized estimate of the re representer under the
+[0:26:53] estimate of the re representer under the population re loss okay uh rahul's
+[0:26:56] population re loss okay uh rahul's written 15 papers about doing this
+[0:26:59] written 15 papers about doing this they're fantastic this is a known thing
+[0:27:01] they're fantastic this is a known thing um but it's a really clean way to see
+[0:27:03] um but it's a really clean way to see that implied estimate of the re
+[0:27:05] that implied estimate of the re representer uh as doing something
+[0:27:07] representer uh as doing something eminently reasonable right so the first
+[0:27:09] eminently reasonable right so the first term of that loss I'm just going to try
+[0:27:11] term of that loss I'm just going to try to minimize the mean squared error of my
+[0:27:13] to minimize the mean squared error of my estimate relative to the truth uh then
+[0:27:15] estimate relative to the truth uh then on the right hand side I have the same
+[0:27:17] on the right hand side I have the same kind of Ridge regularization that I used
+[0:27:19] kind of Ridge regularization that I used in Colonel Ridge so I'm going to
+[0:27:21] in Colonel Ridge so I'm going to encourage that estimate to be smooth in
+[0:27:23] encourage that estimate to be smooth in a way that's going to uh decay in the
+[0:27:25] a way that's going to uh decay in the sample
+[0:27:26] sample size okay
+[0:27:29] size okay again I want to emphasize that the
+[0:27:30] again I want to emphasize that the estimate we get back is going to live in
+[0:27:32] estimate we get back is going to live in the same model class or the same
+[0:27:34] the same model class or the same function class as the one that I assumed
+[0:27:36] function class as the one that I assumed for f that's going to be important later
+[0:27:37] for f that's going to be important later on okay uh so that's one way to get at
+[0:27:40] on okay uh so that's one way to get at this estimate for alha hat there's an
+[0:27:43] this estimate for alha hat there's an equivalent form in terms of balancing
+[0:27:45] equivalent form in terms of balancing weights okay um so the balancing weight
+[0:27:48] weights okay um so the balancing weight objective is going to look something
+[0:27:49] objective is going to look something like this um similar basic idea we're
+[0:27:53] like this um similar basic idea we're going to have two terms in this panalty
+[0:27:54] going to have two terms in this panalty one that's going to apply regularization
+[0:27:56] one that's going to apply regularization one that's going to uh encourage
+[0:27:57] one that's going to uh encourage accurate estimation
+[0:27:59] accurate estimation estimation one that's going to encourage
+[0:28:01] estimation one that's going to encourage accurate estimation in this case we're
+[0:28:03] accurate estimation in this case we're going to encourage accurate estimation
+[0:28:06] going to encourage accurate estimation by Trying to minimize the worst Pace
+[0:28:09] by Trying to minimize the worst Pace imbalance okay so if you guys remember
+[0:28:12] imbalance okay so if you guys remember uh when I showed you the properties of
+[0:28:14] uh when I showed you the properties of the re representer the re representer uh
+[0:28:16] the re representer the re representer uh in L2 was the unique function that
+[0:28:19] in L2 was the unique function that satisfied um the interior of the soup
+[0:28:22] satisfied um the interior of the soup right so if we just look inside of these
+[0:28:23] right so if we just look inside of these absolute values here um this was the
+[0:28:25] absolute values here um this was the balancing property that was held by the
+[0:28:27] balancing property that was held by the Rees representer and it was held for any
+[0:28:30] Rees representer and it was held for any function H that's in L2 okay um now we
+[0:28:34] function H that's in L2 okay um now we could try to minimize the soup over L2
+[0:28:37] could try to minimize the soup over L2 directly um it would be uh a losers
+[0:28:40] directly um it would be uh a losers exercise so what we're going to try to
+[0:28:41] exercise so what we're going to try to do is we're going to try to optimize um
+[0:28:43] do is we're going to try to optimize um for uh minimizing the worst case
+[0:28:46] for uh minimizing the worst case imbalance over a different function
+[0:28:47] imbalance over a different function class that function class is going to be
+[0:28:50] class that function class is going to be determined by the outcome law okay um so
+[0:28:53] determined by the outcome law okay um so if you're a balancing weights person
+[0:28:55] if you're a balancing weights person what are we going to try to do we're
+[0:28:56] what are we going to try to do we're going to try to balance the features
+[0:28:58] going to try to balance the features that are in our regression model okay
+[0:29:01] that are in our regression model okay and it's going to have this weird form
+[0:29:02] and it's going to have this weird form of imbalance in the inside here again
+[0:29:04] of imbalance in the inside here again that's going to imply mean balancing
+[0:29:06] that's going to imply mean balancing between treatment and control groups and
+[0:29:07] between treatment and control groups and then Target balancing uh from my source
+[0:29:09] then Target balancing uh from my source population P to the Target population Q
+[0:29:12] population P to the Target population Q okay so the leading term there is worst
+[0:29:14] okay so the leading term there is worst case imbalance in functions H that
+[0:29:16] case imbalance in functions H that belong to the RS I'm going to try to
+[0:29:19] belong to the RS I'm going to try to minimize the whole thing again over the
+[0:29:21] minimize the whole thing again over the same function class as my outcome model
+[0:29:24] same function class as my outcome model regularization over here again is maybe
+[0:29:26] regularization over here again is maybe a little bit more direct right so on the
+[0:29:27] a little bit more direct right so on the right hand side here
+[0:29:29] right hand side here uh you can think about this guy as the
+[0:29:30] uh you can think about this guy as the variance of my function estimate with
+[0:29:32] variance of my function estimate with respect to uh P okay um I haven't
+[0:29:36] respect to uh P okay um I haven't enforced that this thing is mean zero
+[0:29:37] enforced that this thing is mean zero but it
+[0:29:38] but it is right um that's also going to control
+[0:29:41] is right um that's also going to control the uh variance of my waiting estimator
+[0:29:44] the uh variance of my waiting estimator in the case that I have heteroscedastic
+[0:29:45] in the case that I have heteroscedastic erors right but for right now you can
+[0:29:47] erors right but for right now you can just think about these two optimization
+[0:29:49] just think about these two optimization problems as doing the same thing I'm
+[0:29:50] problems as doing the same thing I'm trying to accurately estimate Alpha Q
+[0:29:53] trying to accurately estimate Alpha Q while I apply regularization
+[0:30:02] all right so uh now we're going to get specific we're going to think about um
+[0:30:04] specific we're going to think about um how to specify that function class we're
+[0:30:07] how to specify that function class we're going to move from generic models of the
+[0:30:09] going to move from generic models of the outcome to what we call R
+[0:30:11] outcome to what we call R parameterizations okay so first I'm
+[0:30:13] parameterizations okay so first I'm going to do that for you with the
+[0:30:14] going to do that for you with the population level with the true F right
+[0:30:16] population level with the true F right so on this slide f is the true um
+[0:30:18] so on this slide f is the true um outcome function for my structural
+[0:30:20] outcome function for my structural model um I can always rewrite that
+[0:30:23] model um I can always rewrite that function in what I call the Robinson or
+[0:30:26] function in what I call the Robinson or the r
+[0:30:27] the r parameterization why do call it that
+[0:30:29] parameterization why do call it that we're regressing on the residuals on the
+[0:30:31] we're regressing on the residuals on the right hand side so that Z minus E of X
+[0:30:33] right hand side so that Z minus E of X that's the residual for Z and the
+[0:30:35] that's the residual for Z and the propensity score if I slide that M ofx
+[0:30:38] propensity score if I slide that M ofx over to the left hand side then I can
+[0:30:39] over to the left hand side then I can think about this whole outcome model as
+[0:30:41] think about this whole outcome model as regressing residuals in y on residuals
+[0:30:44] regressing residuals in y on residuals in X and I'm going to do that uh with
+[0:30:46] in X and I'm going to do that uh with heterogeneity right so I'm gonna let T
+[0:30:48] heterogeneity right so I'm gonna let T of X be a function of
+[0:30:54] this okay um so that's completely General some hinky things happen if I
+[0:30:56] General some hinky things happen if I don't actually have overlap but let's go
+[0:30:58] don't actually have overlap but let's go ahead and assume that I do uh in that
+[0:31:00] ahead and assume that I do uh in that case it's completely General right so
+[0:31:01] case it's completely General right so this is not imposing parametric
+[0:31:02] this is not imposing parametric assumptions on the true outcome
+[0:31:05] assumptions on the true outcome model um it's just uh sort of
+[0:31:07] model um it's just uh sort of rearranging things in a way that's
+[0:31:08] rearranging things in a way that's convenient for
+[0:31:11] convenient for us now if I want to reparameterize my
+[0:31:13] us now if I want to reparameterize my assumed outcome model I'm going to do
+[0:31:15] assumed outcome model I'm going to do more or less the same thing right so
+[0:31:17] more or less the same thing right so remember we started initially with this
+[0:31:18] remember we started initially with this parametric model uh parametric
+[0:31:20] parametric model uh parametric regression model f ofx was the of x and
+[0:31:22] regression model f ofx was the of x and z transpose beta okay if I want to move
+[0:31:26] z transpose beta okay if I want to move to the r parameterization I can do the
+[0:31:29] to the r parameterization I can do the same thing right so I can rewrite the
+[0:31:30] same thing right so I can rewrite the right hand side uh in this form where
+[0:31:33] right hand side uh in this form where now I have two regression functions M
+[0:31:36] now I have two regression functions M and T to of X is going to be the
+[0:31:38] and T to of X is going to be the regression function that gives me that
+[0:31:39] regression function that gives me that katees conditional average treatment
+[0:31:41] katees conditional average treatment effects M of X is going to be a nuisance
+[0:31:43] effects M of X is going to be a nuisance parameter um that's going to be a
+[0:31:44] parameter um that's going to be a regression function giving me e of Y
+[0:31:46] regression function giving me e of Y given X
+[0:31:48] given X okay um so T of X I care deeply about M
+[0:31:50] okay um so T of X I care deeply about M of X I care less about but I need to
+[0:31:52] of X I care less about but I need to deal with it okay um and just to kind of
+[0:31:55] deal with it okay um and just to kind of make explicit what we're doing here what
+[0:31:57] make explicit what we're doing here what we're doing is we're taking that feature
+[0:31:58] we're doing is we're taking that feature vector and we're partitioning it into
+[0:32:00] vector and we're partitioning it into two pieces the first piece the M ofx
+[0:32:03] two pieces the first piece the M ofx those are the regression coefficients in
+[0:32:05] those are the regression coefficients in the function M ofx that is the stuff
+[0:32:08] the function M ofx that is the stuff that we're going to try to mean balance
+[0:32:09] that we're going to try to mean balance between treatment and control okay um
+[0:32:12] between treatment and control okay um and then down bottom my features are um
+[0:32:15] and then down bottom my features are um this weird looking thing that is z minus
+[0:32:17] this weird looking thing that is z minus Z ofx so the local residual in Z and
+[0:32:20] Z ofx so the local residual in Z and then times the heterogen features FTI
+[0:32:23] then times the heterogen features FTI the ones that feature in um the hyrogen
+[0:32:26] the ones that feature in um the hyrogen function down here okay so this form
+[0:32:28] function down here okay so this form looks a little bit weird but it's very
+[0:32:31] looks a little bit weird but it's very very useful to write things in this
+[0:32:35] form
+[0:32:41] right now if I wanted to do that uh and I didn't want to be working in the
+[0:32:42] I didn't want to be working in the parametric setting what do I do I can do
+[0:32:45] parametric setting what do I do I can do the same thing in colel Ridge by just
+[0:32:47] the same thing in colel Ridge by just saying I'm gonna let M live in some
+[0:32:49] saying I'm gonna let M live in some Hilbert space hm to live in some Hilbert
+[0:32:51] Hilbert space hm to live in some Hilbert space H tow both of them are going to be
+[0:32:54] space H tow both of them are going to be reproducing kernel Hilbert spaces with
+[0:32:56] reproducing kernel Hilbert spaces with their own kernel okay um how do I get
+[0:32:59] their own kernel okay um how do I get there is just the same thing as doing
+[0:33:00] there is just the same thing as doing kernel Ridge with this nasty looking
+[0:33:03] kernel Ridge with this nasty looking kernel down here okay um so if you're a
+[0:33:05] kernel down here okay um so if you're a person who understands kernels you
+[0:33:07] person who understands kernels you already knew what that kernel looked
+[0:33:08] already knew what that kernel looked like if you're somebody who's less
+[0:33:09] like if you're somebody who's less familiar with kernels this picture
+[0:33:10] familiar with kernels this picture doesn't help you so I'm going to move on
+[0:33:12] doesn't help you so I'm going to move on but it's there right so it's just kernel
+[0:33:13] but it's there right so it's just kernel Ridge with a very specific kernel what
+[0:33:15] Ridge with a very specific kernel what we call an R kernel the thing to keep in
+[0:33:17] we call an R kernel the thing to keep in mind is that it's going to give me a
+[0:33:18] mind is that it's going to give me a parameterization of the outcome model
+[0:33:20] parameterization of the outcome model that is in the uh Robinson or regression
+[0:33:22] that is in the uh Robinson or regression on residual
+[0:33:25] on residual form okay so what does that mean so I
+[0:33:27] form okay so what does that mean so I can move from a generic outcome model to
+[0:33:30] can move from a generic outcome model to an outcome model that's in the Robinson
+[0:33:31] an outcome model that's in the Robinson parameterization right well we know that
+[0:33:34] parameterization right well we know that moving from um a model that's generic to
+[0:33:36] moving from um a model that's generic to one that's in the Robinson
+[0:33:37] one that's in the Robinson parameterization here it's going to do
+[0:33:39] parameterization here it's going to do the same thing to my implied estimate of
+[0:33:41] the same thing to my implied estimate of the Reese representer okay I dropped a q
+[0:33:44] the Reese representer okay I dropped a q here but this Alpha hat Q is my estimate
+[0:33:45] here but this Alpha hat Q is my estimate of alpha Q so it's going to have the
+[0:33:48] of alpha Q so it's going to have the same regression form right so there's
+[0:33:49] same regression form right so there's going to be that Ma of X out front and
+[0:33:52] going to be that Ma of X out front and this to a ofx that's multiplying the um
+[0:33:55] this to a ofx that's multiplying the um uh propensity score residuals here right
+[0:33:57] uh propensity score residuals here right so going to have the same functional
+[0:33:59] so going to have the same functional form that's what we saw uh just before
+[0:34:01] form that's what we saw uh just before we started talking about this
+[0:34:04] we started talking about this parameterization now what's interesting
+[0:34:05] parameterization now what's interesting is that if we think about the true Reese
+[0:34:07] is that if we think about the true Reese representer in L2 it's already in this
+[0:34:10] representer in L2 it's already in this form right it was just maybe a little
+[0:34:12] form right it was just maybe a little bit hidden because that function ma ofx
+[0:34:14] bit hidden because that function ma ofx that nuisance parameter in My outcome
+[0:34:15] that nuisance parameter in My outcome model it's exactly equal to zero okay
+[0:34:18] model it's exactly equal to zero okay and then on the right hand side all I've
+[0:34:20] and then on the right hand side all I've done is kind of rearrange things so that
+[0:34:22] done is kind of rearrange things so that we have a term hitting that residual so
+[0:34:24] we have a term hitting that residual so uh ma is going to be zero almost
+[0:34:27] uh ma is going to be zero almost everywhere at X and this ta uh uh
+[0:34:30] everywhere at X and this ta uh uh regression parameter is going to be a
+[0:34:32] regression parameter is going to be a product of 1 over e ofx * 1 minus E ofx
+[0:34:36] product of 1 over e ofx * 1 minus E ofx you can think about that as a measure of
+[0:34:38] you can think about that as a measure of local overlap right if overlap is good
+[0:34:41] local overlap right if overlap is good that thing is going to be about one over
+[0:34:45] that thing is going to be about one over point4 sorry it's going to be about four
+[0:34:47] point4 sorry it's going to be about four right one over .25 if overlap is bad if
+[0:34:50] right one over .25 if overlap is bad if the propensity score is getting extreme
+[0:34:51] the propensity score is getting extreme that term is going to be blowing up
+[0:34:53] that term is going to be blowing up right uh so it's the product of um that
+[0:34:56] right uh so it's the product of um that inverse with the density ratio for
+[0:34:58] inverse with the density ratio for moving from P to q and again we can
+[0:35:00] moving from P to q and again we can think about P to Q as being well behaved
+[0:35:02] think about P to Q as being well behaved when the uh Target population is similar
+[0:35:05] when the uh Target population is similar to The Source population it's going to
+[0:35:06] to The Source population it's going to be less well behaved when they're far
+[0:35:08] be less well behaved when they're far apart when it's difficult to move from Q
+[0:35:10] apart when it's difficult to move from Q to P okay um so we're going to use this
+[0:35:14] to P okay um so we're going to use this mapping the implied weights uh the
+[0:35:16] mapping the implied weights uh the implied weighting representation to try
+[0:35:18] implied weighting representation to try to understand um what our outcome model
+[0:35:21] to understand um what our outcome model is going to be doing okay so since I
+[0:35:24] is going to be doing okay so since I know that estimating My outcome model in
+[0:35:27] know that estimating My outcome model in this form is estimating the re
+[0:35:28] this form is estimating the re representer in this form I can uh infer
+[0:35:31] representer in this form I can uh infer two things almost immediately the first
+[0:35:34] two things almost immediately the first thing is that this parameterization is
+[0:35:36] thing is that this parameterization is going to give me low confounding bias
+[0:35:38] going to give me low confounding bias that's due to regularization for any
+[0:35:41] that's due to regularization for any Target why is that intuitively forget
+[0:35:44] Target why is that intuitively forget about the outcome model for a second and
+[0:35:46] about the outcome model for a second and just think about trying to directly
+[0:35:47] just think about trying to directly represent the Reese rep uh try to to
+[0:35:49] represent the Reese rep uh try to to directly estimate the Reese representer
+[0:35:51] directly estimate the Reese representer um and using a model that's going to let
+[0:35:53] um and using a model that's going to let N be something well if I regularize that
+[0:35:56] N be something well if I regularize that nuisance parameter m I know that the
+[0:35:59] nuisance parameter m I know that the True Value I want to get back is zero so
+[0:36:02] True Value I want to get back is zero so I can regularize the heck out of it I
+[0:36:04] I can regularize the heck out of it I canot regularize it at all doesn't
+[0:36:06] canot regularize it at all doesn't really matter I'm going to have low
+[0:36:07] really matter I'm going to have low confounding bias uh due to
+[0:36:09] confounding bias uh due to regularization because the true value is
+[0:36:11] regularization because the true value is zero right so if I shrink that thing to
+[0:36:12] zero right so if I shrink that thing to be smooth I'm automatically shrinking it
+[0:36:14] be smooth I'm automatically shrinking it back to uh the truth Jared um yeah Jared
+[0:36:18] back to uh the truth Jared um yeah Jared you're gonna have about 10 minutes great
+[0:36:21] you're gonna have about 10 minutes great thank you um the second thing that I'm
+[0:36:23] thank you um the second thing that I'm going to know is that I'm going to have
+[0:36:26] going to know is that I'm going to have large regularization bias when it's
+[0:36:28] large regularization bias when it's difficult to generalize from the overlap
+[0:36:30] difficult to generalize from the overlap population to the Target right why uh if
+[0:36:35] population to the Target right why uh if that term ta ofx is extremely variable
+[0:36:38] that term ta ofx is extremely variable if it's extremely non-s smooth I'm gonna
+[0:36:39] if it's extremely non-s smooth I'm gonna have a bad time there's two ways that
+[0:36:41] have a bad time there's two ways that can happen I can have crappy overlap
+[0:36:44] can happen I can have crappy overlap between treatment and control groups or
+[0:36:46] between treatment and control groups or I can have a Target population that
+[0:36:47] I can have a Target population that looks very different than the
+[0:36:50] looks very different than the source
+[0:36:52] source okay so my main result is going to be
+[0:36:55] okay so my main result is going to be that not only is the true ree
+[0:36:57] that not only is the true ree representer in this form
+[0:36:58] representer in this form when I estimate an outcome model in our
+[0:37:01] when I estimate an outcome model in our parameterization my estimate for the
+[0:37:03] parameterization my estimate for the Reese representer is also going to be
+[0:37:05] Reese representer is also going to be approximately in this form so if we take
+[0:37:08] approximately in this form so if we take all those empirical averages and
+[0:37:10] all those empirical averages and substitute them with population averages
+[0:37:12] substitute them with population averages this equality becomes exact
+[0:37:16] this equality becomes exact okay so these are my estimates for Ma
+[0:37:19] okay so these are my estimates for Ma and my estimates for ta okay uh this um
+[0:37:24] and my estimates for ta okay uh this um ta I'm going to tell you about in a
+[0:37:26] ta I'm going to tell you about in a second here this form is not very
+[0:37:27] second here this form is not very Illuminating so I'm just going to run
+[0:37:29] Illuminating so I'm just going to run through it um why does that happen it
+[0:37:33] through it um why does that happen it happens because that coari Matrix that
+[0:37:36] happens because that coari Matrix that you guys saw in my definition of alpha
+[0:37:38] you guys saw in my definition of alpha hat is going to be diagonal so what I've
+[0:37:40] hat is going to be diagonal so what I've done is I've diagonalized that Matrix C
+[0:37:43] done is I've diagonalized that Matrix C okay um so uh this uh scatter Matrix is
+[0:37:47] okay um so uh this uh scatter Matrix is going to be block diagonal the cross
+[0:37:49] going to be block diagonal the cross covariance between my features DM and
+[0:37:52] covariance between my features DM and Fetal um times that residual right so
+[0:37:57] Fetal um times that residual right so that residual that termin red shows up
+[0:37:59] that residual that termin red shows up because we moved into the Robinson
+[0:38:00] because we moved into the Robinson parameterization and this guy is going
+[0:38:02] parameterization and this guy is going to be equal to zero um by the properties
+[0:38:05] to be equal to zero um by the properties of the propensity score right so I block
+[0:38:08] of the propensity score right so I block diagonalized these things that nice form
+[0:38:09] diagonalized these things that nice form on the previous slide falls out this is
+[0:38:12] on the previous slide falls out this is related to the property of name and
+[0:38:13] related to the property of name and orthogonality so in particular when you
+[0:38:15] orthogonality so in particular when you have this property here this um
+[0:38:17] have this property here this um orthogonalization property that's
+[0:38:19] orthogonalization property that's equivalent to having name and
+[0:38:20] equivalent to having name and orthogonality between uh my estimates of
+[0:38:22] orthogonality between uh my estimates of penus treatment effects both in the
+[0:38:24] penus treatment effects both in the colonel Ridge outcome model and in the
+[0:38:26] colonel Ridge outcome model and in the kernel Ridge model for the uh re
+[0:38:28] kernel Ridge model for the uh re represent okay NE orthogonality we all
+[0:38:30] represent okay NE orthogonality we all know and love it um does all kinds of
+[0:38:32] know and love it um does all kinds of nice things including gives us robs okay
+[0:38:36] nice things including gives us robs okay um so real quick let's run through the
+[0:38:39] um so real quick let's run through the punch lines so uh again we're going to
+[0:38:42] punch lines so uh again we're going to continue to assume that the true outcome
+[0:38:43] continue to assume that the true outcome function is in the Robinson
+[0:38:44] function is in the Robinson parameterization no loss of generality
+[0:38:47] parameterization no loss of generality for any waiting estimator I can
+[0:38:49] for any waiting estimator I can decompose its bias into two pieces on
+[0:38:52] decompose its bias into two pieces on the left hand side we have confounding
+[0:38:54] the left hand side we have confounding bias that's imbalanced between treatment
+[0:38:56] bias that's imbalanced between treatment and control groups on the right hand
+[0:38:58] and control groups on the right hand side we have Target bias that equation
+[0:39:00] side we have Target bias that equation is inscrutable but what it's doing is
+[0:39:03] is inscrutable but what it's doing is it's measuring the difference between uh
+[0:39:05] it's measuring the difference between uh weighted averages and the target
+[0:39:07] weighted averages and the target population okay I'll unpack that for you
+[0:39:09] population okay I'll unpack that for you in a way that's hopefully a little bit
+[0:39:10] in a way that's hopefully a little bit more clear in a second we can study each
+[0:39:13] more clear in a second we can study each of those two pieces independently for
+[0:39:15] of those two pieces independently for our particular waiting estimator that
+[0:39:17] our particular waiting estimator that has this form what can we say the first
+[0:39:19] has this form what can we say the first thing we can say is that the confounding
+[0:39:21] thing we can say is that the confounding bias is going to be approximately zero
+[0:39:24] bias is going to be approximately zero why again because we pick up that
+[0:39:26] why again because we pick up that residual term in the middle of
+[0:39:28] residual term in the middle of expectation so just by iterated
+[0:39:30] expectation so just by iterated expectation I know that that guy is zero
+[0:39:32] expectation I know that that guy is zero regardless of what that parameter m is
+[0:39:35] regardless of what that parameter m is okay so uh my estimate Alpha hat is
+[0:39:38] okay so uh my estimate Alpha hat is going to mean balance almost anything
+[0:39:40] going to mean balance almost anything between treatment and control groups
+[0:39:41] between treatment and control groups it's going to inherent the balancing
+[0:39:43] it's going to inherent the balancing properties of the propensity score okay
+[0:39:46] properties of the propensity score okay um again that's going to happen because
+[0:39:47] um again that's going to happen because Alpha hat has this particular form Alpha
+[0:39:50] Alpha hat has this particular form Alpha hat is giving me back balancing weights
+[0:39:53] hat is giving me back balancing weights okay balancing weights in the sense that
+[0:39:55] okay balancing weights in the sense that they're prop proportional to that
+[0:39:56] they're prop proportional to that residual
+[0:39:58] residual okay what can I say about Target bias
+[0:40:01] okay what can I say about Target bias Target bias is going to have this
+[0:40:02] Target bias is going to have this particular form uh it's going to be the
+[0:40:05] particular form uh it's going to be the expected value of uh this
+[0:40:07] expected value of uh this guy couple of other things we need to
+[0:40:09] guy couple of other things we need to introduce here the first one is uh
+[0:40:12] introduce here the first one is uh what's called the overlap population
+[0:40:14] what's called the overlap population okay um so the overlap population is
+[0:40:17] okay um so the overlap population is just my original population from which I
+[0:40:19] just my original population from which I have IID samples uh reweighted by this
+[0:40:22] have IID samples uh reweighted by this measure of overlap e ofx * 1 minus E ofx
+[0:40:25] measure of overlap e ofx * 1 minus E ofx okay uh this function New Q over here is
+[0:40:28] okay uh this function New Q over here is the target to overlap density ratio so
+[0:40:31] the target to overlap density ratio so it's going to be a measure of how
+[0:40:32] it's going to be a measure of how difficult it is to get from the
+[0:40:34] difficult it is to get from the population where I have overlap to my
+[0:40:36] population where I have overlap to my target Q my target bias is going to be
+[0:40:38] target Q my target bias is going to be the difference between an implied
+[0:40:40] the difference between an implied estimate of that density ratio and the
+[0:40:42] estimate of that density ratio and the actual thing when I take the expected
+[0:40:44] actual thing when I take the expected value hitting that thing with to okay uh
+[0:40:47] value hitting that thing with to okay uh what can I tell you about to hat I can
+[0:40:49] what can I tell you about to hat I can tell you something really nice I can
+[0:40:51] tell you something really nice I can tell you that tow hat or sorry not tow
+[0:40:53] tell you that tow hat or sorry not tow hat new hat I can tell you that new hat
+[0:40:55] hat new hat I can tell you that new hat is a direct estimate of that density
+[0:40:58] is a direct estimate of that density ratio this is just the Reese loss down
+[0:41:00] ratio this is just the Reese loss down here the regularization looks a little
+[0:41:02] here the regularization looks a little bit weird um but it's the same basic
+[0:41:04] bit weird um but it's the same basic idea I'm going to try to directly
+[0:41:06] idea I'm going to try to directly estimate that density ratio so if that
+[0:41:08] estimate that density ratio so if that density ratio lives in HT my hbert space
+[0:41:11] density ratio lives in HT my hbert space in to um uh I should be able to do a
+[0:41:15] in to um uh I should be able to do a good job as long as it's a smooth
+[0:41:17] good job as long as it's a smooth element of HT that's an Insight I can
+[0:41:20] element of HT that's an Insight I can use to debias Big Picture What's
+[0:41:23] use to debias Big Picture What's Happening Here the target bias is also
+[0:41:25] Happening Here the target bias is also going to be low if the overlap popul and
+[0:41:28] going to be low if the overlap popul and the target are close if they're not
+[0:41:30] the target are close if they're not close I can pick a kernel that makes
+[0:41:32] close I can pick a kernel that makes them close not going to have time to
+[0:41:33] them close not going to have time to talk about
+[0:41:35] talk about that all right um so those are the two
+[0:41:38] that all right um so those are the two sort of headline
+[0:41:40] sort of headline results there's a direct mapping here
+[0:41:43] results there's a direct mapping here between kernel Ridge regression Invasion
+[0:41:45] between kernel Ridge regression Invasion models we get there through gaussian
+[0:41:47] models we get there through gaussian processes okay we're bumping up against
+[0:41:49] processes okay we're bumping up against time so I'm not going to have time to
+[0:41:51] time so I'm not going to have time to outline that carefully for you but the
+[0:41:53] outline that carefully for you but the basic idea here is that if I have a
+[0:41:54] basic idea here is that if I have a gaussian process regression model I have
+[0:41:57] gaussian process regression model I have a model that is centered at kernel Ridge
+[0:42:00] a model that is centered at kernel Ridge okay how often do I have a gausian
+[0:42:02] okay how often do I have a gausian process regression model almost all the
+[0:42:05] process regression model almost all the basian models you know for Cal inference
+[0:42:07] basian models you know for Cal inference can be recast in this form including
+[0:42:09] can be recast in this form including Bart BCF etc etc etc
+[0:42:19] okay uh that's a fine point um really really briefly how does that mapping
+[0:42:21] really briefly how does that mapping work in the context of tree models um
+[0:42:24] work in the context of tree models um regression tree models are going to work
+[0:42:25] regression tree models are going to work by ensembling short regression trees in
+[0:42:28] by ensembling short regression trees in panels A and B I'm just showing you what
+[0:42:30] panels A and B I'm just showing you what a regression tree looks like uh we have
+[0:42:32] a regression tree looks like uh we have the regression tree up top that's the
+[0:42:34] the regression tree up top that's the same thing as a partition of coari based
+[0:42:36] same thing as a partition of coari based down bottom we get our regression
+[0:42:37] down bottom we get our regression predictions by returning these little
+[0:42:39] predictions by returning these little parameters mu on the right hand side I'm
+[0:42:41] parameters mu on the right hand side I'm just showing you how we build that
+[0:42:42] just showing you how we build that feature mapping right so we take
+[0:42:44] feature mapping right so we take covariant X we map them to dummy
+[0:42:46] covariant X we map them to dummy variables that indicate where I fall
+[0:42:48] variables that indicate where I fall inside of those trees and then I stick
+[0:42:50] inside of those trees and then I stick that those dummy variables in a
+[0:42:52] that those dummy variables in a regression function
+[0:42:55] regression function okay how does an ensemble work I'm going
+[0:42:57] okay how does an ensemble work I'm going to do this a whole bunch of times that's
+[0:42:59] to do this a whole bunch of times that's what those tree features are going to
+[0:43:00] what those tree features are going to look like so when I fit a Bart model
+[0:43:03] look like so when I fit a Bart model when I fit a BCF model I know what I'm
+[0:43:06] when I fit a BCF model I know what I'm doing now what I'm doing now is I'm
+[0:43:08] doing now what I'm doing now is I'm solving a waiting problem I'm trying to
+[0:43:10] solving a waiting problem I'm trying to mean balance between treatment and
+[0:43:12] mean balance between treatment and control I'm trying to Target balance
+[0:43:14] control I'm trying to Target balance between my source and my target I'm
+[0:43:16] between my source and my target I'm doing that in this tree space this tree
+[0:43:18] doing that in this tree space this tree space is very uh robust in the sense
+[0:43:21] space is very uh robust in the sense that it's approximately invariant to
+[0:43:23] that it's approximately invariant to transformations of My outcome you can
+[0:43:25] transformations of My outcome you can think about it as coarsing my covariant
+[0:43:27] think about it as coarsing my covariant and then doing some almost exact
+[0:43:29] and then doing some almost exact matching down inside can't really tell
+[0:43:31] matching down inside can't really tell you too much about that right now here
+[0:43:32] you too much about that right now here today happy to talk about it later maybe
+[0:43:35] today happy to talk about it later maybe in the discussion um some pictures for
+[0:43:38] in the discussion um some pictures for what it looks like before I leave I just
+[0:43:41] what it looks like before I leave I just want to show you what we can do we can
+[0:43:42] want to show you what we can do we can do things like extract the weights for
+[0:43:46] do things like extract the weights for estimates of say average treatment
+[0:43:47] estimates of say average treatment effects subgroup average treatment
+[0:43:49] effects subgroup average treatment effects from an actual applied data
+[0:43:51] effects from an actual applied data analyses right so I'm showing you
+[0:43:52] analyses right so I'm showing you pictures of the weights for two
+[0:43:54] pictures of the weights for two different esand an average treatment
+[0:43:56] different esand an average treatment effect the subgroup average treatment
+[0:43:57] effect the subgroup average treatment effect
+[0:43:58] effect okay I can look at them I can see some
+[0:44:00] okay I can look at them I can see some interesting things right away the
+[0:44:01] interesting things right away the weights for the at seem well behaved the
+[0:44:03] weights for the at seem well behaved the weights for the subgroup at maybe a
+[0:44:05] weights for the subgroup at maybe a little bit less we have some negative
+[0:44:06] little bit less we have some negative weights we have maybe some extrapolation
+[0:44:08] weights we have maybe some extrapolation I had no idea that was happening before
+[0:44:10] I had no idea that was happening before I had some idea but I didn't really know
+[0:44:11] I had some idea but I didn't really know how bad it was now I can actually
+[0:44:13] how bad it was now I can actually interrogate the weights okay can look at
+[0:44:15] interrogate the weights okay can look at the distribution I can see the
+[0:44:17] the distribution I can see the regularization in action I can fit a
+[0:44:19] regularization in action I can fit a complicated basan non-parametric model
+[0:44:21] complicated basan non-parametric model and I can do balance checks right so I
+[0:44:24] and I can do balance checks right so I can look at balance between treatment
+[0:44:26] can look at balance between treatment and control and the original coari
+[0:44:28] and control and the original coari I can look at balance between treatment
+[0:44:29] I can look at balance between treatment and control in a blown out coari space
+[0:44:32] and control in a blown out coari space okay so I'm using here a
+[0:44:34] okay so I'm using here a parameterization of a Bas tree model in
+[0:44:36] parameterization of a Bas tree model in the Robinson parameterization it
+[0:44:38] the Robinson parameterization it balances a bunch of things that it has
+[0:44:40] balances a bunch of things that it has no business balancing High degree
+[0:44:41] no business balancing High degree polinomial interactions between High
+[0:44:43] polinomial interactions between High degree polinomial that's cool had no
+[0:44:45] degree polinomial that's cool had no idea it was happening before I started
+[0:44:47] idea it was happening before I started this project okay I can do the same
+[0:44:49] this project okay I can do the same thing for Target balance okay um and I
+[0:44:53] thing for Target balance okay um and I can do the same thing in particular for
+[0:44:54] can do the same thing in particular for Target balance for weird estimand like
+[0:44:56] Target balance for weird estimand like subgroup Ates what I can do now is I can
+[0:44:59] subgroup Ates what I can do now is I can interrogate that model fit and I can
+[0:45:00] interrogate that model fit and I can actually see the amount of weight that
+[0:45:02] actually see the amount of weight that I'm putting on observations that fall
+[0:45:04] I'm putting on observations that fall outside the subgroup it's a little bit
+[0:45:06] outside the subgroup it's a little bit surprising and it's going to let me
+[0:45:08] surprising and it's going to let me characterize how shrinkage is working in
+[0:45:10] characterize how shrinkage is working in this super complicated beijan
+[0:45:11] this super complicated beijan nonparametric model okay uh huge upside
+[0:45:14] nonparametric model okay uh huge upside from my
+[0:45:15] from my perspective okay so wrapping up I'll
+[0:45:19] perspective okay so wrapping up I'll just throw this slide right here I won't
+[0:45:21] just throw this slide right here I won't say too much uh about it I'll let you
+[0:45:23] say too much uh about it I'll let you guys just kind of stare at it and read
+[0:45:24] guys just kind of stare at it and read it for a second uh because I don't want
+[0:45:26] it for a second uh because I don't want to take any more time thank you so much
+[0:45:28] to take any more time thank you so much for your attention and thanks for coming
+[0:45:33] today thank you so
+[0:45:39] much so then maybe now who maybe you can start
+[0:45:42] maybe now who maybe you can start sharing that
+[0:45:48] [Music]
+[0:45:56] perfect perfect great is that a good size or is
+[0:45:59] perfect great is that a good size or is that better
+[0:46:00] that better yes okay very good um thank you for
+[0:46:03] yes okay very good um thank you for having me today I'll discuss this paper
+[0:46:06] having me today I'll discuss this paper un a unifying waiting perspective on
+[0:46:08] un a unifying waiting perspective on causal machine learning um enjoyed it
+[0:46:10] causal machine learning um enjoyed it very much I'm going to
+[0:46:16] discuss uh or I'll provide a summary of what I think are the main research
+[0:46:17] what I think are the main research questions and then I'll discuss a couple
+[0:46:19] questions and then I'll discuss a couple of the points that I particularly
+[0:46:20] of the points that I particularly enjoyed that are in this
+[0:46:26] work let's consider a causal parameter I'll denote by to and it'll be a
+[0:46:28] I'll denote by to and it'll be a functional or a scalar summary of an
+[0:46:30] functional or a scalar summary of an underlying regression this regression
+[0:46:32] underlying regression this regression I'll denote by F following the authors
+[0:46:35] I'll denote by F following the authors it is uh also the outcome model or
+[0:46:37] it is uh also the outcome model or outcome regression because it's the
+[0:46:39] outcome regression because it's the expectation of the outcome y given the
+[0:46:41] expectation of the outcome y given the treatment Z in the coari X then the
+[0:46:43] treatment Z in the coari X then the treatment effect is the expectation of
+[0:46:45] treatment effect is the expectation of this Alem regression with treatment on
+[0:46:47] this Alem regression with treatment on minus this Alem regression treatment off
+[0:46:50] minus this Alem regression treatment off this work studies estimators that are
+[0:46:53] this work studies estimators that are based on an estimator of the Alka model
+[0:46:55] based on an estimator of the Alka model and so in particular we could take a our
+[0:46:57] and so in particular we could take a our estimator of the alen model cural R
+[0:46:59] estimator of the alen model cural R progression we would call that fat and
+[0:47:02] progression we would call that fat and then we can construct a natural
+[0:47:04] then we can construct a natural estimator to hat for the treatment
+[0:47:06] estimator to hat for the treatment effect it's the empirical mean of the
+[0:47:08] effect it's the empirical mean of the alcome estimator treatment on minus the
+[0:47:10] alcome estimator treatment on minus the alcome estimat treatment off this
+[0:47:13] alcome estimat treatment off this estimator implies weights in particular
+[0:47:16] estimator implies weights in particular for this choice of tow hat it can be
+[0:47:18] for this choice of tow hat it can be represented as an empirical mean of
+[0:47:20] represented as an empirical mean of outcomes as reweighted by these weights
+[0:47:23] outcomes as reweighted by these weights Alpha
+[0:47:24] Alpha have um one way to see that this must be
+[0:47:28] have um one way to see that this must be the case is that kernel regression has a
+[0:47:29] the case is that kernel regression has a close form solution with a vector of
+[0:47:31] close form solution with a vector of outcomes Y and that'll be preserved when
+[0:47:34] outcomes Y and that'll be preserved when taking the
+[0:47:39] difference I think a couple questions arise one is what is Alpha hat for
+[0:47:42] arise one is what is Alpha hat for different choices of fat some previous
+[0:47:45] different choices of fat some previous Works focus on kernel R progression with
+[0:47:47] Works focus on kernel R progression with the product kernel uh and in this work
+[0:47:50] the product kernel uh and in this work the authors propose and analyze
+[0:47:52] the authors propose and analyze carefully the r kernel which has great
+[0:47:54] carefully the r kernel which has great properties and also many extensions
+[0:47:57] properties and also many extensions connect connecting their results to
+[0:47:58] connect connecting their results to basian causal
+[0:48:00] basian causal inference a related question is what
+[0:48:03] inference a related question is what does this tell us about imbalance so
+[0:48:05] does this tell us about imbalance so previously some authors had
+[0:48:06] previously some authors had characterized a bias imbalance trade-off
+[0:48:09] characterized a bias imbalance trade-off and now in this work the authors
+[0:48:10] and now in this work the authors decompose interpret and control the
+[0:48:13] decompose interpret and control the components of the imbalance using the AR
+[0:48:15] components of the imbalance using the AR kernal
+[0:48:17] kernal parameterization let me now mention the
+[0:48:18] parameterization let me now mention the points I particularly
+[0:48:20] points I particularly enjoyed so one point I enjoyed uh it was
+[0:48:23] enjoyed so one point I enjoyed uh it was on the last page of the draft that I saw
+[0:48:25] on the last page of the draft that I saw the au's right Al model implied weights
+[0:48:28] the au's right Al model implied weights provide a common representation for
+[0:48:30] provide a common representation for comparing different Alem model classes
+[0:48:32] comparing different Alem model classes and
+[0:48:33] and specifications so for each F hat whether
+[0:48:35] specifications so for each F hat whether it's kernel R progression with a
+[0:48:37] it's kernel R progression with a particular choice of Kernel or whether
+[0:48:39] particular choice of Kernel or whether it's one of its kinds of extensions
+[0:48:41] it's one of its kinds of extensions closer to basian cosal inference we now
+[0:48:44] closer to basian cosal inference we now have more tools to compare them and in
+[0:48:46] have more tools to compare them and in particular we can ask questions like
+[0:48:48] particular we can ask questions like which regions of the sample space
+[0:48:50] which regions of the sample space receive greater weight if we use a
+[0:48:52] receive greater weight if we use a particular choice of
+[0:48:53] particular choice of fat for particular choice of fat how
+[0:48:56] fat for particular choice of fat how much extrap ation is taking place and
+[0:48:59] much extrap ation is taking place and that's important for
+[0:49:01] that's important for interpretability finally which component
+[0:49:03] interpretability finally which component of imbalance could affect results for
+[0:49:05] of imbalance could affect results for this choice that I've
+[0:49:08] this choice that I've had another point I enjoyed has to do
+[0:49:11] had another point I enjoyed has to do with clever kernels so author is right
+[0:49:14] with clever kernels so author is right uh the debiased model in the r
+[0:49:16] uh the debiased model in the r parameterization is equivalent to
+[0:49:18] parameterization is equivalent to regression on a clever
+[0:49:24] covariate one way to interpret this point is that by carefully designing the
+[0:49:26] point is that by carefully designing the kernel for fat in kernel ingression we
+[0:49:28] kernel for fat in kernel ingression we can control various things we can
+[0:49:31] can control various things we can control one component of the imbalance
+[0:49:33] control one component of the imbalance that the author call the M
+[0:49:35] that the author call the M imbalance we can control another
+[0:49:37] imbalance we can control another component uh and sorry I should mention
+[0:49:39] component uh and sorry I should mention that um that's in some ways
+[0:49:41] that um that's in some ways automatically controlled by using the r
+[0:49:43] automatically controlled by using the r kernel there's another component of the
+[0:49:45] kernel there's another component of the imbalance that we can control called the
+[0:49:46] imbalance that we can control called the target imbalance and the authors provide
+[0:49:48] target imbalance and the authors provide a way to augment the r kernel to deal
+[0:49:50] a way to augment the r kernel to deal with that one as well and I think it
+[0:49:52] with that one as well and I think it raises the question of what are more
+[0:49:55] raises the question of what are more properties we could possibly achieve by
+[0:49:57] properties we could possibly achieve by carefully designing this kernel for fat
+[0:50:00] carefully designing this kernel for fat uh in my view I think this is an
+[0:50:01] uh in my view I think this is an interesting direction for f future work
+[0:50:04] interesting direction for f future work and um maybe I'll pose as a question for
+[0:50:06] and um maybe I'll pose as a question for the authors when I finish what
+[0:50:09] the authors when I finish what possible properties they hope to further
+[0:50:12] possible properties they hope to further achieve or are properties that have come
+[0:50:14] achieve or are properties that have come up in their discussions and thinking
+[0:50:15] up in their discussions and thinking that could possibly be achieved by
+[0:50:17] that could possibly be achieved by designing this kernel even more
+[0:50:19] designing this kernel even more carefully so conclude um given a choice
+[0:50:23] carefully so conclude um given a choice of an Alem model fat that implies an
+[0:50:26] of an Alem model fat that implies an estimate for the treatment effect tow
+[0:50:28] estimate for the treatment effect tow hat and hence weights Alpha hat
+[0:50:31] hat and hence weights Alpha hat according to a formula like we see here
+[0:50:33] according to a formula like we see here a couple of my favorite insights in this
+[0:50:35] a couple of my favorite insights in this paper are first that now we have more
+[0:50:37] paper are first that now we have more tools to evaluate how different choices
+[0:50:40] tools to evaluate how different choices of uh
+[0:50:42] of uh fat um deliver different estimators to
+[0:50:46] fat um deliver different estimators to hat and then also um we have this
+[0:50:50] hat and then also um we have this Insight that by designing the kernel for
+[0:50:51] Insight that by designing the kernel for fat we can actually control properties
+[0:50:54] fat we can actually control properties of tow hat and I think uh that's a
+[0:50:56] of tow hat and I think uh that's a direction I'd like to explore for
+[0:50:57] direction I'd like to explore for further maybe now I'll hand it back to
+[0:50:59] further maybe now I'll hand it back to the authors um and I'd love to hear
+[0:51:00] the authors um and I'd love to hear their thoughts especially about the
+[0:51:01] their thoughts especially about the second
+[0:51:13] point Thank You ra maybe like the Jared and Abby do you want to respond to the
+[0:51:15] and Abby do you want to respond to the to the comments and also maybe we can
+[0:51:18] to the comments and also maybe we can open up the question and answers if we
+[0:51:20] open up the question and answers if we still have time after
+[0:51:22] still have time after that yeah yeah um thank you R for that
+[0:51:25] that yeah yeah um thank you R for that discussion and again um I uh much much
+[0:51:29] discussion and again um I uh much much appreciation and love for your uh work
+[0:51:31] appreciation and love for your uh work extracting from that um rough draft
+[0:51:33] extracting from that um rough draft these insights you're um your favorite
+[0:51:35] these insights you're um your favorite parts of the paper are also some of mine
+[0:51:38] parts of the paper are also some of mine um we had to we had to go quickly
+[0:51:40] um we had to we had to go quickly through debiasing um but that result is
+[0:51:44] through debiasing um but that result is interesting right because we sort of
+[0:51:46] interesting right because we sort of know intuitively that if we want to
+[0:51:48] know intuitively that if we want to generalize beyond the sample that we
+[0:51:50] generalize beyond the sample that we have in hand or if we want to compute
+[0:51:51] have in hand or if we want to compute certain average effects we know that the
+[0:51:53] certain average effects we know that the way we model heterogenity has to be
+[0:51:55] way we model heterogenity has to be tailored to that right we it in terms of
+[0:51:58] tailored to that right we it in terms of kind of the ignorability conditions we
+[0:51:59] kind of the ignorability conditions we need to satisfy the coars we need to
+[0:52:01] need to satisfy the coars we need to have um but this very clear notion that
+[0:52:06] have um but this very clear notion that that Target to overlap density ratio
+[0:52:08] that Target to overlap density ratio needs to be smooth in the um rchs of the
+[0:52:12] needs to be smooth in the um rchs of the um treatment effect
+[0:52:14] um treatment effect function I didn't I had no idea to think
+[0:52:16] function I didn't I had no idea to think about it in those terms before I got
+[0:52:18] about it in those terms before I got started um and then it turns out that
+[0:52:20] started um and then it turns out that just really Maps directly onto a lot of
+[0:52:22] just really Maps directly onto a lot of these old results about regressing on
+[0:52:24] these old results about regressing on Clever covariates which again just
+[0:52:26] Clever covariates which again just regressing on on re Representatives
+[0:52:29] regressing on on re Representatives um the one of the more interesting parts
+[0:52:32] um the one of the more interesting parts of this project for me has been exactly
+[0:52:35] of this project for me has been exactly how difficult it is to disentangle those
+[0:52:37] how difficult it is to disentangle those two sources of bias the compounding bias
+[0:52:39] two sources of bias the compounding bias from the um transportability or
+[0:52:41] from the um transportability or generalizability bias whatever you want
+[0:52:43] generalizability bias whatever you want to call it targeting bias um and I think
+[0:52:46] to call it targeting bias um and I think there's a lot of work to do here um for
+[0:52:48] there's a lot of work to do here um for other estimand how do we think about
+[0:52:50] other estimand how do we think about that for Kate right so for Kate we have
+[0:52:52] that for Kate right so for Kate we have a similar waiting representation but
+[0:52:54] a similar waiting representation but what does Target bias even mean really
+[0:52:57] what does Target bias even mean really right uh and then if we go beyond that
+[0:53:00] right uh and then if we go beyond that you know models of continuous treatment
+[0:53:02] you know models of continuous treatment effects what what about when we're
+[0:53:03] effects what what about when we're looking at you know um acral treatment
+[0:53:05] looking at you know um acral treatment effects so we're looking at trying to
+[0:53:06] effects so we're looking at trying to estimate a marginal dose response curve
+[0:53:09] estimate a marginal dose response curve can we can we do similar things right
+[0:53:11] can we can we do similar things right where we can write down the Ree
+[0:53:12] where we can write down the Ree representer and try to take it apart get
+[0:53:13] representer and try to take it apart get out different pieces of the bias and
+[0:53:15] out different pieces of the bias and control it um are there additional ties
+[0:53:18] control it um are there additional ties to these um you know orthogonal moment
+[0:53:22] to these um you know orthogonal moment representations uh to the Reese
+[0:53:24] representations uh to the Reese representer um then I guess I would just
+[0:53:27] representer um then I guess I would just say finally that one of the one of the
+[0:53:30] say finally that one of the one of the really interesting Parts here is that we
+[0:53:32] really interesting Parts here is that we can get not all but many of the benefits
+[0:53:35] can get not all but many of the benefits of an augmented estimator here without
+[0:53:37] of an augmented estimator here without having to leave augmented outcome World
+[0:53:39] having to leave augmented outcome World um which is appealing to me as maybe not
+[0:53:42] um which is appealing to me as maybe not a died in the wool basan but you know a
+[0:53:44] a died in the wool basan but you know a guy that has some Tendencies uh it's
+[0:53:46] guy that has some Tendencies uh it's kind of nice to to have coherent
+[0:53:48] kind of nice to to have coherent estimation inference from that
+[0:53:49] estimation inference from that perspective while still having all these
+[0:53:51] perspective while still having all these nice properties that um also translate
+[0:53:53] nice properties that um also translate to good freeny
+[0:53:55] to good freeny properties so yeah long long way to say
+[0:53:58] properties so yeah long long way to say that um the points you found interesting
+[0:54:00] that um the points you found interesting interest me
+[0:54:10] too maybe shall I read the question that is in the chat so the question is about
+[0:54:14] is in the chat so the question is about are there any results on asymptotics for
+[0:54:16] are there any results on asymptotics for your
+[0:54:18] your approach there are they're not in my
+[0:54:20] approach there are they're not in my paper um but they exist um so uh uh so
+[0:54:25] paper um but they exist um so uh uh so rahul's work is where you want to go if
+[0:54:27] rahul's work is where you want to go if you want to understand any of this for
+[0:54:28] you want to understand any of this for Colonel Ridge um uh question I would
+[0:54:31] Colonel Ridge um uh question I would have for him is could you sharpen any of
+[0:54:33] have for him is could you sharpen any of that right if we're specializing to the
+[0:54:35] that right if we're specializing to the case where we have um our kernels and
+[0:54:36] case where we have um our kernels and things like that my intuition says yes
+[0:54:39] things like that my intuition says yes umh but I haven't you know been through
+[0:54:41] umh but I haven't you know been through any of the math but uh he studied in
+[0:54:43] any of the math but uh he studied in depth that um uh estimate of ala you get
+[0:54:47] depth that um uh estimate of ala you get from optimizing the the re loss um we
+[0:54:50] from optimizing the the re loss um we have results for things like the the r
+[0:54:52] have results for things like the the r learner that kind of cast it in this
+[0:54:54] learner that kind of cast it in this balancing weights form and of course the
+[0:54:56] balancing weights form and of course the theory is just the theory right it's
+[0:54:57] theory is just the theory right it's just particular choices for internals
+[0:54:58] just particular choices for internals and things like that um so I think that
+[0:55:01] and things like that um so I think that there's probably some there's probably
+[0:55:03] there's probably some there's probably some room for specializing and
+[0:55:05] some room for specializing and sharpening existing results we haven't
+[0:55:07] sharpening existing results we haven't really done that in the current paper um
+[0:55:09] really done that in the current paper um just understanding the point estimates
+[0:55:10] just understanding the point estimates it turns out is H is a
+[0:55:17] non-trivial yeah I'd only add um that you know from the r learner and from
+[0:55:20] you know from the r learner and from that parameterization I think it guides
+[0:55:21] that parameterization I think it guides Us in thinking about what are the
+[0:55:23] Us in thinking about what are the approximating assumptions under which we
+[0:55:25] approximating assumptions under which we would get a possibly sharper result um
+[0:55:27] would get a possibly sharper result um so it's I think through your
+[0:55:28] so it's I think through your parameterization it becomes immediate
+[0:55:30] parameterization it becomes immediate what the additional assumptions would
+[0:55:37] be I think there is more of a comment than a question in the chat now it's
+[0:55:40] than a question in the chat now it's like uh the comment says for Bart and
+[0:55:42] like uh the comment says for Bart and ban threes that are excellent papers by
+[0:55:44] ban threes that are excellent papers by Veronica rova on this topic probably you
+[0:55:47] Veronica rova on this topic probably you already know them do you want to see uh
+[0:55:49] already know them do you want to see uh yes that's that's true yeah that's true
+[0:55:51] yes that's that's true yeah that's true and I was permiss and mentioning them
+[0:55:52] and I was permiss and mentioning them I'll also include my colleague Tony
+[0:55:53] I'll also include my colleague Tony lanero um in the bucket of folks that
+[0:55:55] lanero um in the bucket of folks that have results about this um they um
+[0:55:59] have results about this um they um they're sort of in the traditional vein
+[0:56:02] they're sort of in the traditional vein of semi parametric Bernstein Bond me's
+[0:56:04] of semi parametric Bernstein Bond me's results um it's a little bit tricky to
+[0:56:07] results um it's a little bit tricky to get them out of Bart models as opposed
+[0:56:09] get them out of Bart models as opposed to generic gussian processes um there's
+[0:56:11] to generic gussian processes um there's some interesting interactions and how
+[0:56:13] some interesting interactions and how you specify those um prior distributions
+[0:56:16] you specify those um prior distributions over tree structures splitting rules
+[0:56:18] over tree structures splitting rules things like that that that pop out of
+[0:56:20] things like that that that pop out of theory um there's a a whole long line of
+[0:56:23] theory um there's a a whole long line of literature that um I didn't actually
+[0:56:25] literature that um I didn't actually have cited on my slides
+[0:56:27] have cited on my slides on um sort of more traditional analysis
+[0:56:30] on um sort of more traditional analysis of partially linear models you can map
+[0:56:32] of partially linear models you can map the one onto the other what we're doing
+[0:56:34] the one onto the other what we're doing is a little bit more General it's kind
+[0:56:35] is a little bit more General it's kind of annoying to put back in the other
+[0:56:37] of annoying to put back in the other space but um it's very related and the
+[0:56:40] space but um it's very related and the solution in the partially lineary model
+[0:56:41] solution in the partially lineary model is exactly the Robinson parameterization
+[0:56:44] is exactly the Robinson parameterization um so it's a little bit um I'm a little
+[0:56:47] um so it's a little bit um I'm a little bit sugarin that it took me so long to
+[0:56:49] bit sugarin that it took me so long to to see that connection when we started
+[0:56:50] to see that connection when we started this project
+[0:56:59] sounds good um if you want we can I I have like
+[0:57:03] good um if you want we can I I have like a question that I would like to discuss
+[0:57:05] a question that I would like to discuss with you but AI already told me that he
+[0:57:06] with you but AI already told me that he doesn't want to discuss so I'm still
+[0:57:09] doesn't want to discuss so I'm still very curious about uh this question
+[0:57:11] very curious about uh this question which was from the beginning which they
+[0:57:13] which was from the beginning which they were asking why do you put this
+[0:57:14] were asking why do you put this specifically in Hilbert or
+[0:57:16] specifically in Hilbert or recurring kernel I forgot actually
+[0:57:19] recurring kernel I forgot actually rkhs spaces could any banak space also
+[0:57:23] rkhs spaces could any banak space also work and you guys both answered but do
+[0:57:25] work and you guys both answered but do you want to maybe comment on it together
+[0:57:27] you want to maybe comment on it together or sure I go ahead to be clear
+[0:57:33] or sure I go ahead to be clear no so there's um there's a couple of
+[0:57:36] no so there's um there's a couple of reasons to think about an archs um well
+[0:57:39] reasons to think about an archs um well several um one is practical and
+[0:57:41] several um one is practical and computational right um so Computing that
+[0:57:44] computational right um so Computing that estimate Alpha hat is dead simple in an
+[0:57:46] estimate Alpha hat is dead simple in an rchs right um so that's thing one uh
+[0:57:50] rchs right um so that's thing one uh thing two is that a lot of the methods
+[0:57:52] thing two is that a lot of the methods that you know and love turns out are
+[0:57:55] that you know and love turns out are doing um colel Ridge in RS um or doing
+[0:57:59] doing um colel Ridge in RS um or doing curent rich and therefore giving me
+[0:58:00] curent rich and therefore giving me estimates that live in an
+[0:58:01] estimates that live in an rchs um there are pieces of that result
+[0:58:05] rchs um there are pieces of that result that do rely on things that are really
+[0:58:08] that do rely on things that are really tied to living in an rchs in particular
+[0:58:11] tied to living in an rchs in particular um the reproducing propert property the
+[0:58:13] um the reproducing propert property the fact that um function evaluation is a
+[0:58:15] fact that um function evaluation is a continuous linear functional in ag um
+[0:58:18] continuous linear functional in ag um that's important for a lot of things um
+[0:58:21] that's important for a lot of things um in terms of the balancing right like I
+[0:58:23] in terms of the balancing right like I want to pass expectations into that
+[0:58:24] want to pass expectations into that inner product and then look at what
+[0:58:25] inner product and then look at what happens
+[0:58:27] happens um can't always do that there are
+[0:58:29] um can't always do that there are probably ways to generalize uh from here
+[0:58:32] probably ways to generalize uh from here um not obvious to me what they are I
+[0:58:35] um not obvious to me what they are I will um sort of drop a marker to um work
+[0:58:38] will um sort of drop a marker to um work that that ai's done on more generic
+[0:58:40] that that ai's done on more generic waiting equivalences that go beyond risk
+[0:58:42] waiting equivalences that go beyond risk Ridge regularization um what happens in
+[0:58:45] Ridge regularization um what happens in parametric or limiting cases High
+[0:58:47] parametric or limiting cases High Dimensions when we substitute you know
+[0:58:49] Dimensions when we substitute you know Ridge regression for lasso type
+[0:58:51] Ridge regression for lasso type regularization or other sorts um there's
+[0:58:54] regularization or other sorts um there's a lot of interesting stuff there that
+[0:58:55] a lot of interesting stuff there that doesn't fall into the approach
+[0:58:58] doesn't fall into the approach um still in regression so I don't know
+[0:59:01] um still in regression so I don't know if you end up in a bigger function space
+[0:59:03] if you end up in a bigger function space but um but yeah your life is just a lot
+[0:59:05] but um but yeah your life is just a lot easier um okay
+[0:59:08] easier um okay Jess sounds
+[0:59:16] good okay so maybe it's time the good time to wrap up thanks so much for the
+[0:59:19] time to wrap up thanks so much for the great presentation Jared and also
+[0:59:21] great presentation Jared and also answering a lot of questions ABI and
+[0:59:22] answering a lot of questions ABI and Rahul for the great discussion um so let
+[0:59:26] Rahul for the great discussion um so let me open up
+[0:59:28] me open up um my
+[0:59:38] slide okay just let me put it bigger so next week uh we actually don't
+[0:59:41] bigger so next week uh we actually don't have seminar because of Thanksgiving so
+[0:59:43] have seminar because of Thanksgiving so please have a wonderful holiday for
+[0:59:45] please have a wonderful holiday for everyone and after that we're going to
+[0:59:46] everyone and after that we're going to have agent Shu from Stanford uh he's
+[0:59:48] have agent Shu from Stanford uh he's going to talk about factoral difference
+[0:59:50] going to talk about factoral difference in differences this discussion from
+[0:59:52] in differences this discussion from artman from UC Berkley after the the
+[0:59:54] artman from UC Berkley after the the break so I hope that everyone will come
+[0:59:57] break so I hope that everyone will come back to the seminar after the break so
+[0:59:59] back to the seminar after the break so thanks so much again to the presenters
+[1:00:01] thanks so much again to the presenters and discuss discussing so thanks so much
+[1:00:03] and discuss discussing so thanks so much for
+[1:00:04] for everyone thanks everyone thank you

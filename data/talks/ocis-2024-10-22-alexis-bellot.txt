@@ -1,0 +1,1524 @@
+[0:00:04] Okay, um, welcome to the the causal inference online seminar today. Um,
+[0:00:07] inference online seminar today. Um, we're very pleased to have Dr. Alexis
+[0:00:10] we're very pleased to have Dr. Alexis Bellot from Google DeepMind to give us a
+[0:00:13] Bellot from Google DeepMind to give us a talk
+[0:00:14] talk about his work on partial
+[0:00:16] about his work on partial transportability for domain
+[0:00:18] transportability for domain generalization.
+[0:00:19] generalization. Our discussant today will be Adam Lee
+[0:00:22] Our discussant today will be Adam Lee from Columbia University.
+[0:00:24] from Columbia University. And the Q&amp;A will be moderated by Aditya
+[0:00:29] And the Q&amp;A will be moderated by Aditya Ghosh.
+[0:00:30] Ghosh. Aditya, do you want to say a few words
+[0:00:32] Aditya, do you want to say a few words about the Q&amp;A?
+[0:00:34] about the Q&amp;A? Yeah,
+[0:00:35] Yeah, the audience please put your questions
+[0:00:37] the audience please put your questions in the Q&amp;A panel as soon as you have
+[0:00:39] in the Q&amp;A panel as soon as you have them
+[0:00:40] them instead of the Zoom chat.
+[0:00:42] instead of the Zoom chat. We have Kasra, which is a collaborator
+[0:00:45] We have Kasra, which is a collaborator of Alexis today to help us with the Q&amp;A.
+[0:00:47] of Alexis today to help us with the Q&amp;A. So with that I'll pass the mic to
+[0:00:49] So with that I'll pass the mic to Alexis.
+[0:00:50] Alexis. Thank you.
+[0:00:52] Thank you. Thank you.
+[0:00:53] Thank you. Thank you very much.
+[0:00:55] Thank you very much. Let me share my screen.
+[0:01:05] All right, so you should now be seeing my introductory slide. I hope that's
+[0:01:07] my introductory slide. I hope that's okay.
+[0:01:09] okay. All right, so thanks very much for the
+[0:01:11] All right, so thanks very much for the invitation. It's really a privilege to
+[0:01:13] invitation. It's really a privilege to to be here. I've been following the
+[0:01:14] to be here. I've been following the seminar for
+[0:01:16] seminar for for a few years now and it's just an
+[0:01:18] for a few years now and it's just an incredible initiative. So thank you for
+[0:01:20] incredible initiative. So thank you for that.
+[0:01:22] that. So so I guess today I I want to
+[0:01:24] So so I guess today I I want to challenge all of us to
+[0:01:26] challenge all of us to think about transfer learning from more
+[0:01:28] think about transfer learning from more of a causal perspective.
+[0:01:31] of a causal perspective. And we'll do so with a recent recent
+[0:01:34] And we'll do so with a recent recent work of us, a contribution to
+[0:01:38] work of us, a contribution to to to this line of research that um
+[0:01:42] to to this line of research that um that coins this notion of partial
+[0:01:44] that coins this notion of partial transportability to try to understand
+[0:01:46] transportability to try to understand try transfer learning from a causal
+[0:01:48] try transfer learning from a causal perspective. And this is work with Kasra
+[0:01:51] perspective. And this is work with Kasra and Elias both at Columbia University.
+[0:01:55] and Elias both at Columbia University. So to preface this talk,
+[0:01:57] So to preface this talk, it's useful to discuss a little bit
+[0:02:00] it's useful to discuss a little bit where we are as a field at this moment
+[0:02:03] where we are as a field at this moment in time.
+[0:02:05] in time. So you can think of
+[0:02:07] So you can think of the the research landscape as this
+[0:02:10] the the research landscape as this vast forest that we that we all exist
+[0:02:12] vast forest that we that we all exist in.
+[0:02:13] in. Right?
+[0:02:14] Right? In which progress has been typically
+[0:02:16] In which progress has been typically guided by very strong empirical
+[0:02:18] guided by very strong empirical evaluations, data experiments, and their
+[0:02:21] evaluations, data experiments, and their interpretations.
+[0:02:22] interpretations. Right? That really allows us to explore
+[0:02:24] Right? That really allows us to explore this landscape more and more over time.
+[0:02:27] this landscape more and more over time. It's been our compass, if you like.
+[0:02:30] It's been our compass, if you like. But there's also quite a few people that
+[0:02:33] But there's also quite a few people that critique this data-driven paradigm.
+[0:02:36] critique this data-driven paradigm. For instance, in the early 2000s you had
+[0:02:38] For instance, in the early 2000s you had John Ioannidis from Stanford
+[0:02:41] John Ioannidis from Stanford pointing out that there's an increasing
+[0:02:43] pointing out that there's an increasing concern that in modern research false
+[0:02:45] concern that in modern research false findings may be the vast majority of
+[0:02:47] findings may be the vast majority of published research claims.
+[0:02:50] published research claims. In the 1950s you had people like Donald
+[0:02:53] In the 1950s you had people like Donald Campbell from psychology
+[0:02:56] Campbell from psychology arguing that well-designed experiments
+[0:02:59] arguing that well-designed experiments are great, but they only demonstrate for
+[0:03:02] are great, but they only demonstrate for very specific conditions. Right? That
+[0:03:05] very specific conditions. Right? That govern the particular experimental
+[0:03:07] govern the particular experimental sample, population, and so forth.
+[0:03:13] And you also have people like Tom Mitchell,
+[0:03:16] you also have people like Tom Mitchell, um,
+[0:03:17] um, found one of the founder of the machine
+[0:03:19] found one of the founder of the machine learning department at CMU pointing out
+[0:03:22] learning department at CMU pointing out that a learner that makes no a priori
+[0:03:23] that a learner that makes no a priori assumptions regarding the identity of
+[0:03:25] assumptions regarding the identity of the target concept has no rational basis
+[0:03:28] the target concept has no rational basis for classifying any unseen instances.
+[0:03:31] for classifying any unseen instances. So in a way data is great and helps us a
+[0:03:34] So in a way data is great and helps us a great deal, but there there's something
+[0:03:37] great deal, but there there's something more than data to be able to make more
+[0:03:40] more than data to be able to make more verifiable and generalizable claims
+[0:03:43] verifiable and generalizable claims in in some sense. Right?
+[0:03:50] And I I guess we're familiar with the sentiment in machine learning and AI
+[0:03:52] sentiment in machine learning and AI ourselves as well. Right? We typically
+[0:03:55] ourselves as well. Right? We typically go through a process of uh collecting
+[0:03:57] go through a process of uh collecting data on the particular circumstances and
+[0:04:00] data on the particular circumstances and then learning some mapping, a prediction
+[0:04:02] then learning some mapping, a prediction function from this particular training
+[0:04:04] function from this particular training domain. Let's say a lab or a randomized
+[0:04:08] domain. Let's say a lab or a randomized clinical trial, something like that.
+[0:04:11] clinical trial, something like that. That prediction function, which is then
+[0:04:12] That prediction function, which is then deployed,
+[0:04:14] deployed, right? In a test environment that may
+[0:04:17] right? In a test environment that may not be exactly the same as a training
+[0:04:19] not be exactly the same as a training environment.
+[0:04:21] environment. Okay? And so it's not surprising that
+[0:04:23] Okay? And so it's not surprising that optimal predictions in on the training
+[0:04:25] optimal predictions in on the training distribution
+[0:04:27] distribution may not be optimal on this target test
+[0:04:30] may not be optimal on this target test population where the system's eventually
+[0:04:32] population where the system's eventually going to be deployed.
+[0:04:35] going to be deployed. And in fact, without an understanding on
+[0:04:37] And in fact, without an understanding on the relationship between these two
+[0:04:39] the relationship between these two domains, right? The commonalities and
+[0:04:41] domains, right? The commonalities and discrepancies between the two domains,
+[0:04:43] discrepancies between the two domains, extrapolation or generalization is is
+[0:04:45] extrapolation or generalization is is provably impossible.
+[0:04:51] So I'm going to give you just my my own
+[0:04:54] I'm going to give you just my my own personal
+[0:04:56] personal historical account of the different
+[0:04:58] historical account of the different paradigms in the data scientists that
+[0:05:00] paradigms in the data scientists that led us to I mean what I take to be the
+[0:05:02] led us to I mean what I take to be the current state of machine learning to
+[0:05:05] current state of machine learning to understand a little bit better this
+[0:05:07] understand a little bit better this divide between data-driven paradigms on
+[0:05:10] divide between data-driven paradigms on the one hand and more, let's say,
+[0:05:12] the one hand and more, let's say, model-based paradigms on the other hand.
+[0:05:15] model-based paradigms on the other hand. So I'll start at an arbitrary point in
+[0:05:17] So I'll start at an arbitrary point in time, sometimes in the 1970s,
+[0:05:20] time, sometimes in the 1970s, in which
+[0:05:22] in which people like Vladimir Vapnik and Alexey
+[0:05:24] people like Vladimir Vapnik and Alexey Chervonenkis
+[0:05:26] Chervonenkis um
+[0:05:28] um really gave a strong
+[0:05:31] really gave a strong theoretical justification to this
+[0:05:32] theoretical justification to this learning principle called empirical risk
+[0:05:34] learning principle called empirical risk minimization.
+[0:05:36] minimization. Right?
+[0:05:37] Right? And then with a little bit later in the
+[0:05:39] And then with a little bit later in the 1980s with the resurgence of neural
+[0:05:41] 1980s with the resurgence of neural networks, you had
+[0:05:43] networks, you had the backpropagation algorithm developed
+[0:05:45] the backpropagation algorithm developed by Paul Werbos and then popularized by
+[0:05:48] by Paul Werbos and then popularized by Jeff Hinton
+[0:05:50] Jeff Hinton that
+[0:05:51] that really provided a tool to much more
+[0:05:53] really provided a tool to much more efficiently uh
+[0:05:55] efficiently uh train and learn a complex neural
+[0:05:58] train and learn a complex neural networks that minimize this empirical
+[0:06:00] networks that minimize this empirical risk.
+[0:06:02] risk. Now this combined with
+[0:06:04] Now this combined with you know, newer regularization
+[0:06:06] you know, newer regularization techniques maybe pioneered by people
+[0:06:08] techniques maybe pioneered by people like Rob Tibshirani
+[0:06:10] like Rob Tibshirani and Roger Earl in the statistics
+[0:06:12] and Roger Earl in the statistics literature, all of these ingredients
+[0:06:14] literature, all of these ingredients then kind of fueled, I mean, as well as
+[0:06:17] then kind of fueled, I mean, as well as many other things, this deep learning
+[0:06:19] many other things, this deep learning revolution that we're in at the moment.
+[0:06:22] revolution that we're in at the moment. And maybe here Yoshua Bengio being one
+[0:06:23] And maybe here Yoshua Bengio being one representative of this line of research.
+[0:06:27] representative of this line of research. But simultaneously, I guess in the more
+[0:06:30] But simultaneously, I guess in the more empirical sciences,
+[0:06:32] empirical sciences, you had
+[0:06:33] you had in psychology in the 1950s
+[0:06:36] in psychology in the 1950s Donald Campbell and Julian Stanley
+[0:06:39] Donald Campbell and Julian Stanley coining this term external validity that
+[0:06:42] coining this term external validity that was investigating um
+[0:06:44] was investigating um you know, the generalizability or the
+[0:06:46] you know, the generalizability or the validity of experimental results when
+[0:06:48] validity of experimental results when applied to a target domain that wasn't
+[0:06:50] applied to a target domain that wasn't necessarily
+[0:06:51] necessarily exactly
+[0:06:53] exactly under the same collected under the same
+[0:06:55] under the same collected under the same circumstances and the source domain
+[0:06:58] circumstances and the source domain where those
+[0:06:59] where those where those causal effects, for
+[0:07:00] where those causal effects, for instance, were computed in the first
+[0:07:01] instance, were computed in the first place.
+[0:07:03] place. And then a little bit later people like
+[0:07:05] And then a little bit later people like Lee Caushran started arguing that
+[0:07:08] Lee Caushran started arguing that really for valid to make valid
+[0:07:11] really for valid to make valid extrapolation, you need to look at the
+[0:07:13] extrapolation, you need to look at the variations in the interaction between
+[0:07:15] variations in the interaction between treatment and context across different
+[0:07:18] treatment and context across different domains. Right? So we're starting to
+[0:07:20] domains. Right? So we're starting to really think about causal mechanisms,
+[0:07:23] really think about causal mechanisms, the underlying causal mechanisms that
+[0:07:25] the underlying causal mechanisms that generate the data as
+[0:07:28] generate the data as maybe the the the the right
+[0:07:30] maybe the the the the right representation to talk about problems of
+[0:07:32] representation to talk about problems of transfer learning and extrapolation.
+[0:07:36] transfer learning and extrapolation. And of course, starting in the 1980s we
+[0:07:38] And of course, starting in the 1980s we had a much more formal investigation
+[0:07:42] had a much more formal investigation of causal mechanisms.
+[0:07:44] of causal mechanisms. And with people like Donald Rubin and
+[0:07:48] And with people like Donald Rubin and Judea Pearl as well as many other
+[0:07:49] Judea Pearl as well as many other collaborators,
+[0:07:51] collaborators, they started to develop like a much more
+[0:07:54] they started to develop like a much more systematic approach to deduce
+[0:07:57] systematic approach to deduce the truth value of causal statements
+[0:07:59] the truth value of causal statements given data and assumptions.
+[0:08:02] given data and assumptions. And that kind of research, that
+[0:08:04] And that kind of research, that mechanistic approach to to to causality
+[0:08:06] mechanistic approach to to to causality in the context of transfer learning is
+[0:08:08] in the context of transfer learning is is known as transportability theory.
+[0:08:12] is known as transportability theory. And I also want to point out that these
+[0:08:14] And I also want to point out that these debates about notions of extrapolations
+[0:08:17] debates about notions of extrapolations also occur in many other fields of uh
+[0:08:20] also occur in many other fields of uh of of uh
+[0:08:22] of of uh of science, right? And one example is a
+[0:08:25] of science, right? And one example is a philosophy of science
+[0:08:27] philosophy of science where Nancy Cartwright, for instance,
+[0:08:30] where Nancy Cartwright, for instance, argues that the basis for extrapolation
+[0:08:33] argues that the basis for extrapolation is the invariance in the causal
+[0:08:35] is the invariance in the causal mechanisms or these causal powers that
+[0:08:37] mechanisms or these causal powers that she talks about.
+[0:08:40] she talks about. So a wide-ranging topic.
+[0:08:42] So a wide-ranging topic. And
+[0:08:43] And to me in my own personal reading of the
+[0:08:46] to me in my own personal reading of the current state of affairs is that in
+[0:08:49] current state of affairs is that in machine learning we have adopted many of
+[0:08:51] machine learning we have adopted many of the techniques from more data-driven
+[0:08:53] the techniques from more data-driven accounts of machine learning
+[0:08:55] accounts of machine learning that are, however, being increasingly
+[0:08:57] that are, however, being increasingly applied to solve problems that would
+[0:08:59] applied to solve problems that would require, let's say, more reframing of
+[0:09:01] require, let's say, more reframing of model-based accounts.
+[0:09:03] model-based accounts. Problems in psychology, in epidemiology,
+[0:09:05] Problems in psychology, in epidemiology, in economics where
+[0:09:07] in economics where thinking about mechanisms is important.
+[0:09:11] thinking about mechanisms is important. Now, I mean, before I upset too many of
+[0:09:13] Now, I mean, before I upset too many of you, I want to clarify a subtle point,
+[0:09:16] you, I want to clarify a subtle point, which is that, of course, focusing on
+[0:09:19] which is that, of course, focusing on optimal training prediction is
+[0:09:20] optimal training prediction is definitely worthwhile.
+[0:09:22] definitely worthwhile. Now more than ever, right? We see
+[0:09:24] Now more than ever, right? We see increasing
+[0:09:26] increasing enormous really social, economic, and
+[0:09:28] enormous really social, economic, and scientific benefits from these kind of
+[0:09:30] scientific benefits from these kind of pursuits.
+[0:09:33] pursuits. But a point I'll try to argue is that
+[0:09:36] But a point I'll try to argue is that neglecting the context in which models
+[0:09:38] neglecting the context in which models are trained
+[0:09:39] are trained at least for certain applications going
+[0:09:41] at least for certain applications going to be a limiting perspective.
+[0:09:48] So now I'll I'll I'll dive into this
+[0:09:50] I'll I'll dive into this transportability theory a little bit
+[0:09:53] transportability theory a little bit more deeply with you know, some more
+[0:09:55] more deeply with you know, some more formal definitions, mathematical
+[0:09:57] formal definitions, mathematical notations to slowly introduce the topic
+[0:09:59] notations to slowly introduce the topic before I talk about our our main
+[0:10:01] before I talk about our our main contributions for for today.
+[0:10:08] So, the kind of question that we'll be interested in reasoning about and
+[0:10:10] interested in reasoning about and thinking about is firstly an evaluation
+[0:10:13] thinking about is firstly an evaluation problem.
+[0:10:15] problem. So, take a given prediction function
+[0:10:17] So, take a given prediction function that someone gave you, let's say,
+[0:10:20] that someone gave you, let's say, maybe trained on some source data.
+[0:10:27] Um prediction function came about.
+[0:10:29] prediction function came about. But, you are operating in some target
+[0:10:32] But, you are operating in some target domain and you're interested in
+[0:10:33] domain and you're interested in understanding what is the error of this
+[0:10:35] understanding what is the error of this prediction function if deployed in my
+[0:10:37] prediction function if deployed in my target domain.
+[0:10:40] target domain. So, what I mean by error of a given
+[0:10:41] So, what I mean by error of a given prediction function
+[0:10:43] prediction function is in as a mathematical expression is an
+[0:10:47] is in as a mathematical expression is an expectation over
+[0:10:55] compares the true outcome values with those predicted by your prediction
+[0:10:58] those predicted by your prediction function. Here, X being some covariates
+[0:11:01] function. Here, X being some covariates that
+[0:11:02] that you take as input to your prediction
+[0:11:03] you take as input to your prediction function.
+[0:11:05] function. And crucially, the inferential challenge
+[0:11:07] And crucially, the inferential challenge for these kind of problems will be that
+[0:11:09] for these kind of problems will be that you don't necessarily have a lot of data
+[0:11:11] you don't necessarily have a lot of data from your target domain, but instead you
+[0:11:14] from your target domain, but instead you can leverage data from some source
+[0:11:16] can leverage data from some source domain, right? PS.
+[0:11:19] domain, right? PS. And um
+[0:11:20] And um we'll also introduce some additional
+[0:11:22] we'll also introduce some additional elements, some understanding of
+[0:11:24] elements, some understanding of structure, and some qualitative uh
+[0:11:27] structure, and some qualitative uh um
+[0:11:29] um um
+[0:11:30] um qualitative understanding of the
+[0:11:32] qualitative understanding of the dependencies between different variables
+[0:11:33] dependencies between different variables to make this problem tractable.
+[0:11:37] to make this problem tractable. And so, the the answer like many many
+[0:11:39] And so, the the answer like many many different questions is that it depends,
+[0:11:42] different questions is that it depends, right? Sometimes the error will be you
+[0:11:45] right? Sometimes the error will be you you'll be able to compute the error
+[0:11:46] you'll be able to compute the error given your data and assumptions,
+[0:11:47] given your data and assumptions, sometimes you won't.
+[0:11:49] sometimes you won't. And crucially, it depends on the
+[0:11:50] And crucially, it depends on the structure of your domain and also on the
+[0:11:53] structure of your domain and also on the invariances across source and target
+[0:11:55] invariances across source and target domains.
+[0:11:57] domains. So, what I mean by structure
+[0:11:59] So, what I mean by structure in in in this kind of problem is
+[0:12:02] in in in this kind of problem is some form of qualitative understanding
+[0:12:05] some form of qualitative understanding of the functional dependencies between
+[0:12:07] of the functional dependencies between different variables in your system,
+[0:12:09] different variables in your system, right?
+[0:12:10] right? Typically encoded in a causal diagram
+[0:12:13] Typically encoded in a causal diagram like this one.
+[0:12:14] like this one. Here, relating three variables in some
+[0:12:16] Here, relating three variables in some hypothetical example,
+[0:12:18] hypothetical example, diet, a health outcome, and an
+[0:12:21] diet, a health outcome, and an individual's fitness routine.
+[0:12:24] individual's fitness routine. And of course, a diagram like this one
+[0:12:26] And of course, a diagram like this one is an abstraction
+[0:12:28] is an abstraction of an underlying structural model that
+[0:12:30] of an underlying structural model that defines a whole data generating
+[0:12:32] defines a whole data generating mechanism.
+[0:12:33] mechanism. Okay?
+[0:12:34] Okay? So, for instance, when
+[0:12:36] So, for instance, when when we have um
+[0:12:38] when we have um you know, incoming arrows into Y from
+[0:12:40] you know, incoming arrows into Y from both X and Z,
+[0:12:42] both X and Z, what we mean is that X and Z are
+[0:12:44] what we mean is that X and Z are arguments
+[0:12:45] arguments to the function that assigns value to Y,
+[0:12:48] to the function that assigns value to Y, health in this case, right? And then you
+[0:12:50] health in this case, right? And then you see that X and Z appear in the function
+[0:12:53] see that X and Z appear in the function of Y.
+[0:12:55] of Y. And whenever I drew a bidirected arc
+[0:12:56] And whenever I drew a bidirected arc like this one,
+[0:12:58] like this one, I
+[0:12:59] I we we just mean
+[0:13:01] we we just mean we're we're trying to encode the
+[0:13:02] we're we're trying to encode the presence of a common cause to both X and
+[0:13:05] presence of a common cause to both X and Z. So, you see this variable UX Z, this
+[0:13:08] Z. So, you see this variable UX Z, this unobserved common cause appearing in
+[0:13:09] unobserved common cause appearing in both the the assignment of X and Z.
+[0:13:13] both the the assignment of X and Z. And this this kind of underlying model
+[0:13:16] And this this kind of underlying model is typically latent, right? You only
+[0:13:17] is typically latent, right? You only have a coarse representation of the
+[0:13:20] have a coarse representation of the dependencies that take place in the
+[0:13:22] dependencies that take place in the system,
+[0:13:24] system, but in itself is very powerful.
+[0:13:27] but in itself is very powerful. You can sample
+[0:13:28] You can sample um sorry, maybe there's a question.
+[0:13:32] um sorry, maybe there's a question. Uh no, sorry, I'll continue.
+[0:13:39] Uh sorry, yes. There is one question in the chat by
+[0:13:41] There is one question in the chat by Jingong.
+[0:13:42] Jingong. Okay.
+[0:13:43] Okay. Clarify what you mean by model-based
+[0:13:45] Clarify what you mean by model-based approach because it seems someone like
+[0:13:47] approach because it seems someone like Don Rubin would describe his approach as
+[0:13:49] Don Rubin would describe his approach as design-based instead of model-based.
+[0:13:53] design-based instead of model-based. Right. I mean, the I use the terms
+[0:13:56] Right. I mean, the I use the terms loosely, right? I'm trying to make a
+[0:14:00] loosely, right? I'm trying to make a little bit of a parallel between
+[0:14:02] little bit of a parallel between someone that takes as the primitive the
+[0:14:04] someone that takes as the primitive the data distribution and someone that takes
+[0:14:07] data distribution and someone that takes as a primitive a more underlying
+[0:14:10] as a primitive a more underlying mechanistic structural model.
+[0:14:12] mechanistic structural model. But, of course, the distinction isn't so
+[0:14:15] But, of course, the distinction isn't so clear across the boards. You can think
+[0:14:17] clear across the boards. You can think of it as a helpful guideline to think
+[0:14:19] of it as a helpful guideline to think through these problems, but don't read
+[0:14:21] through these problems, but don't read too much into uh
+[0:14:23] too much into uh into the labels necessarily.
+[0:14:26] into the labels necessarily. Uh so, I hope that's fine.
+[0:14:32] Um Okay, so I mean, so here we have I guess
+[0:14:35] Okay, so I mean, so here we have I guess a description of a single domain, let's
+[0:14:37] a description of a single domain, let's say the source domain, right? And
+[0:14:39] say the source domain, right? And problems of transfer learning, there's
+[0:14:40] problems of transfer learning, there's typically multiple domains involved, so
+[0:14:42] typically multiple domains involved, so at least a source and a target domain.
+[0:14:45] at least a source and a target domain. And so, we typically operate on a richer
+[0:14:49] And so, we typically operate on a richer abstraction, which are called selection
+[0:14:51] abstraction, which are called selection diagrams, that not only encode the
+[0:14:54] diagrams, that not only encode the structure of the source domain, but also
+[0:14:55] structure of the source domain, but also tell you something about the
+[0:14:58] tell you something about the the discrepancies and the invariances
+[0:15:00] the discrepancies and the invariances between a source domain and a target
+[0:15:02] between a source domain and a target domain.
+[0:15:04] domain. For instance, in this case, these
+[0:15:06] For instance, in this case, these these square nodes
+[0:15:08] these square nodes would indicate that the mechanisms of X
+[0:15:11] would indicate that the mechanisms of X and Z may vary arbitrarily between
+[0:15:14] and Z may vary arbitrarily between source and target domains, but that
+[0:15:16] source and target domains, but that anything else is meant to be invariant.
+[0:15:18] anything else is meant to be invariant. For instance, the mechanism of Y, right?
+[0:15:21] For instance, the mechanism of Y, right? Is meant to be equal across source and
+[0:15:24] Is meant to be equal across source and target models.
+[0:15:27] target models. So, and and it's this kind of object
+[0:15:28] So, and and it's this kind of object that we'll be working that we'll be
+[0:15:30] that we'll be working that we'll be working with to try to solve these
+[0:15:33] working with to try to solve these evaluation problems in
+[0:15:35] evaluation problems in the transportability literature
+[0:15:36] the transportability literature generally.
+[0:15:38] generally. So, let's just look at one example to to
+[0:15:41] So, let's just look at one example to to understand how you may use these
+[0:15:42] understand how you may use these different elements to
+[0:15:45] different elements to you know, get a unique value for the
+[0:15:47] you know, get a unique value for the error of some prediction function.
+[0:15:50] error of some prediction function. So, let's take some example,
+[0:15:53] So, let's take some example, right? You we we're still working with
+[0:15:55] right? You we we're still working with our system of
+[0:15:57] our system of diet, health, and fitness. And we're
+[0:15:59] diet, health, and fitness. And we're interested in computing the error of
+[0:16:00] interested in computing the error of some prediction function H that takes
+[0:16:03] some prediction function H that takes diet as an input trying to predict an
+[0:16:05] diet as an input trying to predict an individual's health outcome.
+[0:16:07] individual's health outcome. And here, you have some
+[0:16:10] And here, you have some data on all these variables in some
+[0:16:12] data on all these variables in some source domain,
+[0:16:14] source domain, and only partial information in the
+[0:16:15] and only partial information in the target domain. In particular, you have
+[0:16:17] target domain. In particular, you have data on X and Z, but you don't have any
+[0:16:19] data on X and Z, but you don't have any information on the outcome,
+[0:16:21] information on the outcome, right? This is maybe one instance of a
+[0:16:24] right? This is maybe one instance of a transportability problem.
+[0:16:31] Um so, you can start with your definition of the error, which
+[0:16:33] with your definition of the error, which by definition is given by this
+[0:16:36] by definition is given by this by this weighted sum of
+[0:16:38] by this weighted sum of of the your loss function weighted
+[0:16:40] of the your loss function weighted according to your target target
+[0:16:42] according to your target target probabilities.
+[0:16:45] probabilities. And you can then um
+[0:16:48] And you can then um you know, massage this expression to try
+[0:16:50] you know, massage this expression to try to work through the problem. For
+[0:16:51] to work through the problem. For instance,
+[0:16:52] instance, introducing Z by marginalizing over it
+[0:16:54] introducing Z by marginalizing over it and then using conditional expectation
+[0:16:57] and then using conditional expectation to get this updated equation.
+[0:17:00] to get this updated equation. And then exploiting the invariances
+[0:17:02] And then exploiting the invariances between the source and target domain,
+[0:17:05] between the source and target domain, right?
+[0:17:06] right? To express your target error as a
+[0:17:08] To express your target error as a functional of distributions that you
+[0:17:11] functional of distributions that you have available as an input.
+[0:17:13] have available as an input. In this case, source data on Y, X, and
+[0:17:16] In this case, source data on Y, X, and Z, and target data on X and Z.
+[0:17:25] And so, to reason about you know, success and about in these kind of
+[0:17:27] success and about in these kind of problems, it can be useful to think
+[0:17:29] problems, it can be useful to think about what happens in with the
+[0:17:31] about what happens in with the underlying models that you're studying.
+[0:17:35] underlying models that you're studying. So, imagine on the one hand you have
+[0:17:39] So, imagine on the one hand you have a large space of models for the target
+[0:17:41] a large space of models for the target domain. These are all possible data
+[0:17:42] domain. These are all possible data generating mechanisms for your target
+[0:17:44] generating mechanisms for your target domain, right? And now the on the other
+[0:17:47] domain, right? And now the on the other hand, you have the space of possible
+[0:17:48] hand, you have the space of possible errors
+[0:17:49] errors in that target domain. Here, it could be
+[0:17:52] in that target domain. Here, it could be a range of numbers between zero and one,
+[0:17:54] a range of numbers between zero and one, a range of numbers from zero to
+[0:17:55] a range of numbers from zero to infinity,
+[0:17:57] infinity, anything that's plausible for your
+[0:18:00] anything that's plausible for your for for your application.
+[0:18:03] for for your application. And a first observation is that if you
+[0:18:05] And a first observation is that if you fix a particular structural model for
+[0:18:08] fix a particular structural model for your target domain, that evaluates to a
+[0:18:10] your target domain, that evaluates to a unique error of a given prediction
+[0:18:12] unique error of a given prediction function in that domain.
+[0:18:15] function in that domain. So, now what happens if
+[0:18:17] So, now what happens if of course, you don't have access to to
+[0:18:19] of course, you don't have access to to this model in the first place.
+[0:18:21] this model in the first place. But, what you do know is you have access
+[0:18:24] But, what you do know is you have access to the selection diagram
+[0:18:26] to the selection diagram that to some extent constrains the space
+[0:18:29] that to some extent constrains the space of possible target models
+[0:18:32] of possible target models for for your problem, right? You're
+[0:18:34] for for your problem, right? You're limited to the functional dependencies
+[0:18:37] limited to the functional dependencies that are specified by the selection
+[0:18:38] that are specified by the selection diagram.
+[0:18:40] diagram. And this reduced space
+[0:18:42] And this reduced space as a consequence also constrains the
+[0:18:45] as a consequence also constrains the space of possible errors that you might
+[0:18:47] space of possible errors that you might observe in any one of these are
+[0:18:48] observe in any one of these are compatible models.
+[0:18:52] compatible models. And when you have access to some data,
+[0:18:54] And when you have access to some data, really exactly the same thing uh
+[0:18:57] really exactly the same thing uh the same thing happens, right? The data
+[0:18:59] the same thing happens, right? The data further constrains
+[0:19:01] further constrains the space of models that would now be
+[0:19:03] the space of models that would now be viable targets for your target domain,
+[0:19:06] viable targets for your target domain, which then automatically also constrains
+[0:19:09] which then automatically also constrains the the possible errors that you might
+[0:19:10] the the possible errors that you might observe.
+[0:19:12] observe. And so, whenever two models in your
+[0:19:15] And so, whenever two models in your intersection evaluates
+[0:19:18] intersection evaluates to the same possible error in this other
+[0:19:21] to the same possible error in this other space of errors,
+[0:19:22] space of errors, we would say that the effect or your
+[0:19:25] we would say that the effect or your query or your extrapolation error is
+[0:19:28] query or your extrapolation error is transportable,
+[0:19:29] transportable, right?
+[0:19:30] right? Um I think there's a question.
+[0:19:42] Uh I'll continue, but then I'm I'll stop in a couple of slides to once
+[0:19:45] I'll stop in a couple of slides to once I finish this short section and then
+[0:19:47] I finish this short section and then maybe we can have a longer discussion.
+[0:19:55] Right? And and this is the the notion of transportability essentially. And in the
+[0:19:57] transportability essentially. And in the previous example, we were able to
+[0:19:59] previous example, we were able to uniquely compute the value of the target
+[0:20:01] uniquely compute the value of the target error exactly because of this reason,
+[0:20:03] error exactly because of this reason, because all models compatible with our
+[0:20:05] because all models compatible with our data and assumptions evaluate really to
+[0:20:08] data and assumptions evaluate really to the same target error.
+[0:20:14] And I should say at this point that there is um
+[0:20:15] there is um a long literature by now, I guess in the
+[0:20:18] a long literature by now, I guess in the last decade, systematically developing
+[0:20:21] last decade, systematically developing algorithms to decide when an effect is
+[0:20:24] algorithms to decide when an effect is meant to be transportable or not.
+[0:20:27] meant to be transportable or not. Right? And so you can have a look at any
+[0:20:29] Right? And so you can have a look at any of these references to learn more about
+[0:20:31] of these references to learn more about about the field, right? At this point
+[0:20:32] about the field, right? At this point I'm revisiting more than saying anything
+[0:20:35] I'm revisiting more than saying anything really new.
+[0:20:41] Now, I guess in most problems, you're typically not that lucky, right? You may
+[0:20:43] typically not that lucky, right? You may not be You may not be confident to make
+[0:20:45] not be You may not be confident to make strong assumptions about the invariances
+[0:20:47] strong assumptions about the invariances or the structure of your problem,
+[0:20:50] or the structure of your problem, or your data may not be as informative
+[0:20:52] or your data may not be as informative as you wish. You may not have any data
+[0:20:54] as you wish. You may not have any data in your target domain,
+[0:20:56] in your target domain, and therefore the the amount that you
+[0:20:59] and therefore the the amount that you can constrain the possible models with
+[0:21:01] can constrain the possible models with your assumptions and data may not be
+[0:21:02] your assumptions and data may not be sufficient to uniquely
+[0:21:05] sufficient to uniquely identify the target error. That means
+[0:21:07] identify the target error. That means that potentially two different models in
+[0:21:10] that potentially two different models in your space of viable models will
+[0:21:11] your space of viable models will evaluate two different target errors.
+[0:21:15] evaluate two different target errors. And so you'd say in this case that the
+[0:21:17] And so you'd say in this case that the your target error isn't identifiable, it
+[0:21:19] your target error isn't identifiable, it isn't uniquely computable.
+[0:21:22] isn't uniquely computable. Still, however, you are constraining to
+[0:21:24] Still, however, you are constraining to some extent the space of possible
+[0:21:25] some extent the space of possible errors, hopefully. And so you'd hope
+[0:21:28] errors, hopefully. And so you'd hope that the set of possible errors is no
+[0:21:30] that the set of possible errors is no longer totally unconstrained,
+[0:21:33] longer totally unconstrained, but maybe contained in some interval
+[0:21:36] but maybe contained in some interval that you can estimate.
+[0:21:37] that you can estimate. Right? And for instance, a maximum
+[0:21:40] Right? And for instance, a maximum target error may be a very informative
+[0:21:42] target error may be a very informative quantity for you to decide whether to
+[0:21:45] quantity for you to decide whether to use a particular prediction model or
+[0:21:47] use a particular prediction model or not.
+[0:21:49] not. And so in in this work,
+[0:21:51] And so in in this work, um yeah, right. And and this notion is
+[0:21:53] um yeah, right. And and this notion is one of partial transportability, right?
+[0:21:57] one of partial transportability, right? You're making a parallel between
+[0:21:58] You're making a parallel between identifiability and and partial
+[0:22:00] identifiability and and partial identifiability, but
+[0:22:02] identifiability, but for the the task of transportability.
+[0:22:06] for the the task of transportability. So the the kind of question that we'll
+[0:22:08] So the the kind of question that we'll be asking next is um
+[0:22:11] be asking next is um is it possible, can we tightly estimate
+[0:22:13] is it possible, can we tightly estimate this maximum target error,
+[0:22:16] this maximum target error, right, to get a measure of robustness of
+[0:22:18] right, to get a measure of robustness of a given prediction function, if it were
+[0:22:21] a given prediction function, if it were to be applied in some target domain?
+[0:22:24] to be applied in some target domain? And we'll also have a little bit of a
+[0:22:25] And we'll also have a little bit of a focus on doing this kind of process
+[0:22:28] focus on doing this kind of process efficiently
+[0:22:29] efficiently and
+[0:22:30] and learning evaluating this maximum target
+[0:22:33] learning evaluating this maximum target error from finite samples, moving from
+[0:22:35] error from finite samples, moving from distributions to finite samples.
+[0:22:38] distributions to finite samples. Um right, I can take
+[0:22:41] Um right, I can take a question live if
+[0:22:43] a question live if if there are if there are any at this
+[0:22:44] if there are if there are any at this point.
+[0:22:51] There was one question, but I think Astra answered it, so you can go ahead.
+[0:22:54] Astra answered it, so you can go ahead. Cool.
+[0:22:58] Right. So we'll we'll we'll now move on to
+[0:23:01] So we'll we'll we'll now move on to um
+[0:23:02] um to developing methods to evaluate this
+[0:23:05] to developing methods to evaluate this maximum target error in general kind of
+[0:23:07] maximum target error in general kind of partial transportability tasks.
+[0:23:11] partial transportability tasks. Given an arbitrary selection diagram and
+[0:23:13] Given an arbitrary selection diagram and an arbitrary combination of
+[0:23:15] an arbitrary combination of source data set, source maybe with
+[0:23:18] source data set, source maybe with target, without target.
+[0:23:21] target, without target. And so our our our main contribution in
+[0:23:25] And so our our our main contribution in in in this line of research is to show
+[0:23:27] in in this line of research is to show first that it is possible
+[0:23:29] first that it is possible to tightly estimate the target error if
+[0:23:32] to tightly estimate the target error if your observed variables are discrete.
+[0:23:35] your observed variables are discrete. That is, if you work in in um
+[0:23:38] That is, if you work in in um in systems characterized by discrete
+[0:23:41] in systems characterized by discrete variables, so where you work with
+[0:23:42] variables, so where you work with discrete probabilities,
+[0:23:44] discrete probabilities, and uh
+[0:23:46] and uh which which which is the one restriction
+[0:23:49] which which which is the one restriction we'll make for our results. But note,
+[0:23:51] we'll make for our results. But note, however, that we are working in a fully
+[0:23:53] however, that we are working in a fully non-parametric regime otherwise.
+[0:23:55] non-parametric regime otherwise. Right? We don't make any assumptions of
+[0:23:58] Right? We don't make any assumptions of the probability of exogenous variables
+[0:24:00] the probability of exogenous variables or
+[0:24:01] or on the parametric form of the function
+[0:24:04] on the parametric form of the function assigning
+[0:24:05] assigning value to different variables, right? You
+[0:24:08] value to different variables, right? You only take the data and the graph
+[0:24:09] only take the data and the graph otherwise.
+[0:24:12] otherwise. And the the reason why why it will be
+[0:24:15] And the the reason why why it will be possible to to compute these tight upper
+[0:24:18] possible to to compute these tight upper bounds
+[0:24:19] bounds is because um intuitively, at least, all
+[0:24:22] is because um intuitively, at least, all discrete probabilities and constraints
+[0:24:25] discrete probabilities and constraints defined by the selection diagrams
+[0:24:27] defined by the selection diagrams defined induced by any SCMs
+[0:24:29] defined induced by any SCMs can be equivalently generated by a
+[0:24:31] can be equivalently generated by a special subset of SCMs,
+[0:24:34] special subset of SCMs, those that would be parameterized by
+[0:24:36] those that would be parameterized by neural networks and by uniform
+[0:24:37] neural networks and by uniform distributions for the exogenous
+[0:24:39] distributions for the exogenous variables.
+[0:24:41] variables. And this is a result that follows from
+[0:24:46] And this is a result that follows from from the neural causal model paradigm
+[0:24:49] from the neural causal model paradigm developed by um
+[0:24:51] developed by um by Kevin and
+[0:24:52] by Kevin and and Elias's lab in a couple of years
+[0:24:55] and Elias's lab in a couple of years ago, and that itself builds on the
+[0:24:58] ago, and that itself builds on the canonical representation of SCMs
+[0:25:01] canonical representation of SCMs from also Elias's lab a few years ago.
+[0:25:06] from also Elias's lab a few years ago. And really what this means is that we
+[0:25:08] And really what this means is that we have this equality, right?
+[0:25:11] have this equality, right? Um the the maximum error over the space
+[0:25:14] Um the the maximum error over the space of all possible compatible models given
+[0:25:17] of all possible compatible models given your your data and assumptions
+[0:25:19] your your data and assumptions is going to evaluate to the same value
+[0:25:22] is going to evaluate to the same value um to the to the maximum of the error if
+[0:25:24] um to the to the maximum of the error if you search only over neural causal
+[0:25:26] you search only over neural causal models, these models parameterized by a
+[0:25:29] models, these models parameterized by a neural network and uniform
+[0:25:30] neural network and uniform distributions.
+[0:25:32] distributions. So this is in a sense an expressiveness
+[0:25:34] So this is in a sense an expressiveness result, right? Without loss of
+[0:25:36] result, right? Without loss of generality, you can constrain your
+[0:25:38] generality, you can constrain your search
+[0:25:40] search over the space of neural causal models
+[0:25:42] over the space of neural causal models and ultimately make inference over all
+[0:25:45] and ultimately make inference over all causal models.
+[0:25:47] causal models. And why this Why is this particularly
+[0:25:50] And why this Why is this particularly interesting in our case
+[0:25:52] interesting in our case is because the the second problem is
+[0:25:54] is because the the second problem is much more tractable.
+[0:25:56] much more tractable. It's powerful in the sense you can
+[0:25:57] It's powerful in the sense you can because you can efficiently search over
+[0:26:00] because you can efficiently search over the space of neural causal models with
+[0:26:01] the space of neural causal models with gradient descent.
+[0:26:03] gradient descent. And it's much more intractable to do so
+[0:26:06] And it's much more intractable to do so over the space of all causal models.
+[0:26:14] Um so let let me give you a quick example of what this means, right? What
+[0:26:17] example of what this means, right? What What do I mean by parameterizing by
+[0:26:20] What do I mean by parameterizing by searching over the space of neural
+[0:26:21] searching over the space of neural causal models, the optimization and so
+[0:26:24] causal models, the optimization and so forth.
+[0:26:29] Um so we'll we'll work with this colored MNIST example, which maybe you've seen
+[0:26:32] MNIST example, which maybe you've seen before.
+[0:26:33] before. And so the the data generating
+[0:26:36] And so the the data generating mechanisms proceed as follows. So
+[0:26:40] mechanisms proceed as follows. So you start with a typical MNIST image,
+[0:26:44] you start with a typical MNIST image, which are these grayscale images of
+[0:26:47] which are these grayscale images of digits between 0 and 9,
+[0:26:50] digits between 0 and 9, right, as in this example.
+[0:26:53] right, as in this example. From
+[0:26:54] From that digit, you produce a label, a
+[0:26:56] that digit, you produce a label, a binary label from 0 or 1,
+[0:26:59] binary label from 0 or 1, depending on the digit that appears in
+[0:27:01] depending on the digit that appears in the image. So you will assign a 0, a
+[0:27:03] the image. So you will assign a 0, a label of 0 if the digit is less than 5,
+[0:27:06] label of 0 if the digit is less than 5, and you will assign a
+[0:27:07] and you will assign a label of 1 if the digit is greater or
+[0:27:09] label of 1 if the digit is greater or equal than 5.
+[0:27:12] equal than 5. Then um
+[0:27:14] Then um given this label, you'll generate a
+[0:27:16] given this label, you'll generate a color, either red or green, that will
+[0:27:19] color, either red or green, that will depend on the label of a particular
+[0:27:22] depend on the label of a particular image, right?
+[0:27:25] image, right? And uh
+[0:27:27] And uh with the color and the grayscale image,
+[0:27:29] with the color and the grayscale image, you will concatenate the the two
+[0:27:31] you will concatenate the the two features to generate deterministically
+[0:27:34] features to generate deterministically a colored image,
+[0:27:36] a colored image, right, either
+[0:27:37] right, either um
+[0:27:39] um in this case a green four or a red four,
+[0:27:43] in this case a green four or a red four, that where we're going to be using um
+[0:27:47] that where we're going to be using um as as arguments to to our prediction
+[0:27:49] as as arguments to to our prediction function.
+[0:27:50] function. Okay?
+[0:27:52] Okay? And importantly, we'll
+[0:27:55] And importantly, we'll this this defines maybe a particular
+[0:27:56] this this defines maybe a particular data generating mechanism
+[0:27:58] data generating mechanism in which we're going to enforce a very
+[0:28:00] in which we're going to enforce a very strong correlation between the label and
+[0:28:02] strong correlation between the label and the color,
+[0:28:03] the color, right? Most of the zeros, for instance,
+[0:28:06] right? Most of the zeros, for instance, in your data are going to be colored
+[0:28:08] in your data are going to be colored green,
+[0:28:09] green, and most of the ones are going to be
+[0:28:11] and most of the ones are going to be colored red, for example.
+[0:28:13] colored red, for example. Which means that most likely, if the
+[0:28:15] Which means that most likely, if the digit in the image is below five, you'll
+[0:28:18] digit in the image is below five, you'll see a green image,
+[0:28:20] see a green image, and if the digit is greater or equal to
+[0:28:22] and if the digit is greater or equal to five, you'll see a red image, right? And
+[0:28:25] five, you'll see a red image, right? And in this source domain, the correlation
+[0:28:27] in this source domain, the correlation between these two features is going to
+[0:28:29] between these two features is going to be very high, 0.9.
+[0:28:31] be very high, 0.9. In this source domain in which
+[0:28:33] In this source domain in which data is generated that you have
+[0:28:34] data is generated that you have available for your evaluation problem.
+[0:28:43] Um however, I'm going to assume that um I would like to operate in a target
+[0:28:45] I would like to operate in a target domain
+[0:28:46] domain in which the assignment of color may
+[0:28:48] in which the assignment of color may vary, right? So you no longer you may
+[0:28:52] vary, right? So you no longer you may potentially no longer have this strong
+[0:28:53] potentially no longer have this strong correlation between the label and the
+[0:28:55] correlation between the label and the color, and instead it could be anything
+[0:28:57] color, and instead it could be anything else, really.
+[0:29:03] And in this target domain, the data is not available. So you see here I'm I'm
+[0:29:05] not available. So you see here I'm I'm showing a selection diagram in which the
+[0:29:08] showing a selection diagram in which the square node specifies this variation in
+[0:29:11] square node specifies this variation in the assignment of color of my data.
+[0:29:16] the assignment of color of my data. And so the transportability question for
+[0:29:17] And so the transportability question for this problem
+[0:29:19] this problem is given some
+[0:29:21] is given some prediction function that takes the
+[0:29:23] prediction function that takes the colored image to predict the label, some
+[0:29:25] colored image to predict the label, some h of z, right?
+[0:29:27] h of z, right? Can we evaluate the worst target error,
+[0:29:31] Can we evaluate the worst target error, right, that such a prediction would
+[0:29:33] right, that such a prediction would have?
+[0:29:35] have? Right?
+[0:29:36] Right? The error, the worst error if evaluated
+[0:29:38] The error, the worst error if evaluated in some target domain
+[0:29:40] in some target domain in which the color mechanism is
+[0:29:42] in which the color mechanism is potentially completely different, right?
+[0:29:47] Um
+[0:29:52] Uh okay, so uh neural causal models, right? When we
+[0:29:54] uh neural causal models, right? When we say that we we search over the space of
+[0:29:56] say that we we search over the space of neural causal models,
+[0:29:58] neural causal models, what what does that mean? So, we start
+[0:30:00] what what does that mean? So, we start by parameterizing
+[0:30:02] by parameterizing our structural causal models according
+[0:30:04] our structural causal models according to this uh selection diagram, right?
+[0:30:07] to this uh selection diagram, right? So, we define, you know, each one of the
+[0:30:09] So, we define, you know, each one of the variables
+[0:30:11] variables to be uh functions of uh of uh their
+[0:30:14] to be uh functions of uh of uh their parents parameterized
+[0:30:17] parents parameterized So, you have, for instance, a source
+[0:30:18] So, you have, for instance, a source domain in which uh the label is uh
+[0:30:21] domain in which uh the label is uh generated by a neural network that takes
+[0:30:25] generated by a neural network that takes uh the grayscale image as well as some
+[0:30:27] uh the grayscale image as well as some uh noise term.
+[0:30:29] uh noise term. And uh similarly for all other
+[0:30:31] And uh similarly for all other variables, right? For instance, here the
+[0:30:35] variables, right? For instance, here the uh color would be generated by a neural
+[0:30:37] uh color would be generated by a neural network that takes the label as an input
+[0:30:40] network that takes the label as an input and some uh some error term U.
+[0:30:43] and some uh some error term U. And um you do exactly the same thing for
+[0:30:46] And um you do exactly the same thing for the for the target structural causal
+[0:30:48] the for the target structural causal model, but note uh the invariances in
+[0:30:52] model, but note uh the invariances in the parameters of these uh of these uh
+[0:30:55] the parameters of these uh of these uh functions,
+[0:30:57] functions, right?
+[0:30:58] right? So, be because there's an invariance in
+[0:31:01] So, be because there's an invariance in the label Y, the parameters of the
+[0:31:03] the label Y, the parameters of the neural network that assign um
+[0:31:06] neural network that assign um this uh this label in both the source
+[0:31:08] this uh this label in both the source and the target domain are meant to be
+[0:31:09] and the target domain are meant to be equal.
+[0:31:11] equal. Similarly for W, similarly for Z,
+[0:31:14] Similarly for W, similarly for Z, only the um
+[0:31:16] only the um only the assignment of color varies. And
+[0:31:19] only the assignment of color varies. And so, two different neural networks will
+[0:31:21] so, two different neural networks will be used to parameterize color in these
+[0:31:22] be used to parameterize color in these two different domains.
+[0:31:29] And uh so, now that you have this parameterization, it's about searching.
+[0:31:31] parameterization, it's about searching. Searching for the parameters that lead
+[0:31:34] Searching for the parameters that lead you to the maximum error in this uh in
+[0:31:36] you to the maximum error in this uh in this target domain.
+[0:31:39] this target domain. And so, the optimization problem that
+[0:31:41] And so, the optimization problem that you're looking at is first you're
+[0:31:42] you're looking at is first you're interested in maximizing the target
+[0:31:44] interested in maximizing the target error,
+[0:31:45] error, right? The target error that is a direct
+[0:31:47] right? The target error that is a direct consequence of this uh target structural
+[0:31:50] consequence of this uh target structural causal model that you defined,
+[0:31:52] causal model that you defined, right?
+[0:31:53] right? And then you you need to make sure that
+[0:31:55] And then you you need to make sure that all other constraints are satisfied.
+[0:31:58] all other constraints are satisfied. So, first, our structural causal models
+[0:32:00] So, first, our structural causal models reflect uh reflect the graphical
+[0:32:02] reflect uh reflect the graphical structure that we have, which is fine.
+[0:32:04] structure that we have, which is fine. That by design we parameterize it this
+[0:32:06] That by design we parameterize it this way.
+[0:32:07] way. And second, we're interested in matching
+[0:32:09] And second, we're interested in matching um the uh
+[0:32:12] um the uh matching the source data that we have
+[0:32:14] matching the source data that we have available.
+[0:32:15] available. So, the data generated by by our source
+[0:32:18] So, the data generated by by our source uh neural causal model has to match uh
+[0:32:20] uh neural causal model has to match uh the data that we have available. And so,
+[0:32:22] the data that we have available. And so, you're working with this constrained
+[0:32:24] you're working with this constrained optimization problem,
+[0:32:25] optimization problem, which is
+[0:32:27] which is not uh not a difficult one with modern
+[0:32:30] not uh not a difficult one with modern gradient descent techniques.
+[0:32:32] gradient descent techniques. And so, the the guarantee that we give
+[0:32:35] And so, the the guarantee that we give is that with enough data, you know, in
+[0:32:37] is that with enough data, you know, in the limits, if you solve this problem,
+[0:32:39] the limits, if you solve this problem, you'll reach the
+[0:32:42] you'll reach the worst case target error.
+[0:32:45] worst case target error. Um sorry to interrupt. Can you clarify
+[0:32:47] Um sorry to interrupt. Can you clarify what are the X and Y for the above
+[0:32:49] what are the X and Y for the above graph?
+[0:32:54] For the health graph? Yeah, you have a Y and X in your
+[0:32:56] Yeah, you have a Y and X in your constraint optimization problem. What do
+[0:32:59] constraint optimization problem. What do they correspond in your um example? Uh
+[0:33:03] they correspond in your um example? Uh sorry. I good point. Yeah, I am here the
+[0:33:07] sorry. I good point. Yeah, I am here the X is a typo. Sorry, the X should be a Z
+[0:33:09] X is a typo. Sorry, the X should be a Z in the constraint optimization problem.
+[0:33:13] in the constraint optimization problem. Uh was that the
+[0:33:15] Uh was that the uh the the question? Yeah, yes. Thank
+[0:33:17] uh the the question? Yeah, yes. Thank you.
+[0:33:18] you. If so, yeah, sorry.
+[0:33:20] If so, yeah, sorry. Uh it should be a Z, right? We're
+[0:33:21] Uh it should be a Z, right? We're working um with a function that takes
+[0:33:23] working um with a function that takes the uh the colored image as input.
+[0:33:33] Okay, so now now we have a way of um computing really the the maximum target
+[0:33:35] computing really the the maximum target error for any classifier. So, you can
+[0:33:37] error for any classifier. So, you can think of this as this magnifying glass
+[0:33:39] think of this as this magnifying glass that for any classifier
+[0:33:41] that for any classifier will give you the maximum
+[0:33:44] will give you the maximum uh target error in some in some uh
+[0:33:46] uh target error in some in some uh domain.
+[0:33:48] domain. Okay.
+[0:33:49] Okay. But now, I I guess we we can do
+[0:33:52] But now, I I guess we we can do evaluation, but the the next natural
+[0:33:55] evaluation, but the the next natural question is, of course,
+[0:33:57] question is, of course, um
+[0:33:58] um given that we could learn really any uh
+[0:34:02] given that we could learn really any uh classifier or that we have a large pool
+[0:34:05] classifier or that we have a large pool of classifiers available,
+[0:34:06] of classifiers available, can we find the one with the lowest
+[0:34:09] can we find the one with the lowest maximum target error?
+[0:34:11] maximum target error? So, we're um really moving for from an
+[0:34:15] So, we're um really moving for from an from uh an evaluation problem to uh
+[0:34:18] from uh an evaluation problem to uh an optimization problem.
+[0:34:20] an optimization problem. We want to navigate this space of
+[0:34:21] We want to navigate this space of different uh
+[0:34:23] different uh different possible uh prediction
+[0:34:24] different possible uh prediction function to converge to the one that has
+[0:34:27] function to converge to the one that has the lowest maximum target error.
+[0:34:31] the lowest maximum target error. So, we're going to search over this
+[0:34:33] So, we're going to search over this optimization objective that is this uh
+[0:34:36] optimization objective that is this uh maximum target error.
+[0:34:37] maximum target error. And so, we call this evaluation
+[0:34:39] And so, we call this evaluation algorithm neural TR
+[0:34:41] algorithm neural TR uh in in our work.
+[0:34:46] Okay. Um I I could take a um
+[0:34:49] Um I I could take a um a question now if there is any before
+[0:34:51] a question now if there is any before before moving to to to optimization.
+[0:34:55] before moving to to to optimization. Otherwise, I'll uh I'll continue.
+[0:35:04] Can I ask a quick question? Um why are you saying maximizing the error
+[0:35:06] why are you saying maximizing the error instead of minimizing it?
+[0:35:11] Um I mean, in in this case, I'm I'm
+[0:35:13] I mean, in in this case, I'm I'm assuming that uh you you'd like to be
+[0:35:15] assuming that uh you you'd like to be robust to the worst case error that you
+[0:35:18] robust to the worst case error that you might observe in the target domain.
+[0:35:20] might observe in the target domain. So,
+[0:35:22] So, you have some maximum error, and then
+[0:35:24] you have some maximum error, and then you want to find, I guess, in the
+[0:35:25] you want to find, I guess, in the optimization problem, the classifier
+[0:35:28] optimization problem, the classifier that would minimize Yeah, yeah.
+[0:35:31] that would minimize Yeah, yeah. Thank you.
+[0:35:36] Okay. So,
+[0:35:37] So, um
+[0:35:39] um by by by design or or as a consequence,
+[0:35:43] by by by design or or as a consequence, we we we not only can, you know,
+[0:35:47] we we we not only can, you know, tell you the the maximum target error of
+[0:35:49] tell you the the maximum target error of a given classifier or prediction
+[0:35:51] a given classifier or prediction function,
+[0:35:52] function, but we also have access to the
+[0:35:53] but we also have access to the underlying SCMs
+[0:35:55] underlying SCMs that uh
+[0:35:58] that uh you know, adversarial data really for
+[0:36:01] you know, adversarial data really for any prediction function.
+[0:36:04] any prediction function. And uh so, we can leverage uh this
+[0:36:06] And uh so, we can leverage uh this observation to design an iterative
+[0:36:10] observation to design an iterative algorithm that will uh
+[0:36:13] algorithm that will uh successively generate more and more
+[0:36:14] successively generate more and more adversarial data
+[0:36:16] adversarial data um that eventually will allow you to
+[0:36:18] um that eventually will allow you to train a predictor that will minimize the
+[0:36:21] train a predictor that will minimize the worst case error over all possible
+[0:36:23] worst case error over all possible predictors in your space. Let's say over
+[0:36:26] predictors in your space. Let's say over all neural networks.
+[0:36:28] all neural networks. So, let me go through this uh step by
+[0:36:30] So, let me go through this uh step by step to understand the process a little
+[0:36:32] step to understand the process a little bit better.
+[0:36:34] bit better. So, we start with an H1, some prediction
+[0:36:36] So, we start with an H1, some prediction function.
+[0:36:37] function. Uh this could be anything. It could be a
+[0:36:39] Uh this could be anything. It could be a random prediction function. It could be
+[0:36:40] random prediction function. It could be something pretrained on uh
+[0:36:43] something pretrained on uh anything you like.
+[0:36:45] anything you like. You
+[0:36:46] You you then pass it through the neural TR
+[0:36:49] you then pass it through the neural TR algorithm that is going to give you the
+[0:36:50] algorithm that is going to give you the SCM that entails the worst case
+[0:36:52] SCM that entails the worst case performance of this prediction function
+[0:36:54] performance of this prediction function in the target domain.
+[0:36:57] in the target domain. And you then use this SCM to sample some
+[0:37:00] And you then use this SCM to sample some some data. This will be the most
+[0:37:02] some data. This will be the most adversarial data for this prediction
+[0:37:04] adversarial data for this prediction function.
+[0:37:06] function. You can then use this data to train a
+[0:37:08] You can then use this data to train a second prediction function, H2,
+[0:37:10] second prediction function, H2, right?
+[0:37:11] right? That will minimize error in this new
+[0:37:14] That will minimize error in this new adversarial data set that you created.
+[0:37:17] adversarial data set that you created. And then you go through a second
+[0:37:18] And then you go through a second iteration,
+[0:37:19] iteration, take this H2 uh function, pass it
+[0:37:22] take this H2 uh function, pass it through our evaluation algorithm,
+[0:37:24] through our evaluation algorithm, generate a new SCM that now entails the
+[0:37:27] generate a new SCM that now entails the worst case performance for this second
+[0:37:29] worst case performance for this second prediction function, H2.
+[0:37:31] prediction function, H2. You can then sample
+[0:37:33] You can then sample um
+[0:37:34] um a new uh adversarial data for that
+[0:37:37] a new uh adversarial data for that particular function, H2,
+[0:37:39] particular function, H2, and then go through um an additional
+[0:37:41] and then go through um an additional iteration, an additional uh
+[0:37:45] iteration, an additional uh learning step in which you train a
+[0:37:46] learning step in which you train a function, H3,
+[0:37:48] function, H3, that is going to um
+[0:37:51] that is going to um find the um
+[0:37:53] find the um find the the function that minimizes the
+[0:37:55] find the the function that minimizes the maximum error across these two
+[0:37:59] maximum error across these two data set that you've generated so far,
+[0:38:01] data set that you've generated so far, right? So, this HT H3 has this uh
+[0:38:04] right? So, this HT H3 has this uh property that it's the best work worst
+[0:38:06] property that it's the best work worst case predictor across the collection of
+[0:38:08] case predictor across the collection of adversarial data sets that you've
+[0:38:10] adversarial data sets that you've created so far.
+[0:38:17] And um if you continue this process, the guarantee is that you converge
+[0:38:20] the guarantee is that you converge to the prediction function that
+[0:38:22] to the prediction function that maximizes the
+[0:38:24] maximizes the target error across all possible causal
+[0:38:26] target error across all possible causal models
+[0:38:27] models that are compatible with your target
+[0:38:29] that are compatible with your target domain.
+[0:38:31] domain. And so, we we have a way, if you if you
+[0:38:34] And so, we we have a way, if you if you like, to do evaluation of a given
+[0:38:36] like, to do evaluation of a given prediction function, but also find the
+[0:38:38] prediction function, but also find the prediction function that minimizes this
+[0:38:40] prediction function that minimizes this worst case error.
+[0:38:48] So, let me let me run through an example of what what that would look
+[0:38:50] an example of what what that would look like for the colored MNIST data set.
+[0:38:53] like for the colored MNIST data set. What it would look like to learn
+[0:38:55] What it would look like to learn um a prediction function that minimizes
+[0:38:57] um a prediction function that minimizes this worst case error.
+[0:39:00] this worst case error. So, I'll try to describe each one of
+[0:39:02] So, I'll try to describe each one of these iterations in turn for you to see
+[0:39:05] these iterations in turn for you to see how uh
+[0:39:06] how uh how how ultimately you may um
+[0:39:09] how how ultimately you may um slowly reach a predictor that uh that
+[0:39:12] slowly reach a predictor that uh that has best and better and better worst
+[0:39:14] has best and better and better worst case error.
+[0:39:16] case error. So, in the first iteration, we start
+[0:39:18] So, in the first iteration, we start with a random predictor.
+[0:39:20] with a random predictor. Okay, something that just outputs uh
+[0:39:22] Okay, something that just outputs uh zero and ones given a colored image
+[0:39:24] zero and ones given a colored image randomly.
+[0:39:26] randomly. And so, you see here on the Y axis, you
+[0:39:29] And so, you see here on the Y axis, you have the accuracy of such a predictor in
+[0:39:31] have the accuracy of such a predictor in the target domain.
+[0:39:32] the target domain. And on the X axis, you have um training
+[0:39:35] And on the X axis, you have um training iterations of the neural TR algorithm.
+[0:39:38] iterations of the neural TR algorithm. So, here the only thing that we really
+[0:39:39] So, here the only thing that we really care about is going to be this end point
+[0:39:41] care about is going to be this end point after 100 iterations of our algorithm.
+[0:39:45] after 100 iterations of our algorithm. And so you can see that a random
+[0:39:46] And so you can see that a random predictor will achieve an accuracy of
+[0:39:49] predictor will achieve an accuracy of 0.5.
+[0:39:50] 0.5. Right? Even in the most adversarial
+[0:39:52] Right? Even in the most adversarial case.
+[0:39:54] case. Right?
+[0:39:55] Right? And so from
+[0:39:56] And so from from this algorithm you then obtain the
+[0:39:58] from this algorithm you then obtain the SCM
+[0:39:59] SCM that entails this worst case
+[0:40:01] that entails this worst case performance. And so you can we can
+[0:40:03] performance. And so you can we can generate some data from that SCM that in
+[0:40:06] generate some data from that SCM that in this case looks a little bit like this.
+[0:40:08] this case looks a little bit like this. Right?
+[0:40:09] Right? So you generate these colored images as
+[0:40:11] So you generate these colored images as well as the labels.
+[0:40:13] well as the labels. And which is meant to be your
+[0:40:15] And which is meant to be your adversarial data for this particular
+[0:40:18] adversarial data for this particular random training function that you
+[0:40:20] random training function that you started with.
+[0:40:22] started with. And so now you you take this adversarial
+[0:40:24] And so now you you take this adversarial data and you train a second prediction
+[0:40:26] data and you train a second prediction function.
+[0:40:27] function. Right? Some H2, let's say.
+[0:40:30] Right? Some H2, let's say. And pass it again through this new TR
+[0:40:33] And pass it again through this new TR algorithm to find the SCM that entails
+[0:40:35] algorithm to find the SCM that entails the worst case performance.
+[0:40:37] the worst case performance. And here notice something interesting.
+[0:40:40] And here notice something interesting. Is that in the data we generated,
+[0:40:42] Is that in the data we generated, there's a very strong correlation
+[0:40:44] there's a very strong correlation between the color of the image and the
+[0:40:46] between the color of the image and the label.
+[0:40:47] label. So in this particular example um
+[0:40:50] So in this particular example um whenever the image is green, the label
+[0:40:53] whenever the image is green, the label is one. And whenever the image is red,
+[0:40:55] is one. And whenever the image is red, the label is zero.
+[0:40:57] the label is zero. So there's going to be a strong
+[0:40:58] So there's going to be a strong incentive here to use the color of the
+[0:41:00] incentive here to use the color of the image
+[0:41:01] image um for your label prediction.
+[0:41:04] um for your label prediction. And
+[0:41:05] And we would expect that training a
+[0:41:07] we would expect that training a classifier on this data would exactly
+[0:41:08] classifier on this data would exactly uncover this pattern.
+[0:41:11] uncover this pattern. So what happens when we take such a
+[0:41:13] So what happens when we take such a classifier and try to
+[0:41:15] classifier and try to evaluate the worst case performance
+[0:41:17] evaluate the worst case performance under these variations in
+[0:41:19] under these variations in in the color assignments.
+[0:41:22] in the color assignments. So what you obtain, you see you shoot up
+[0:41:24] So what you obtain, you see you shoot up to
+[0:41:25] to to an error of
+[0:41:28] to an error of of zero pretty much. So the or or 90
+[0:41:32] of zero pretty much. So the or or 90 something.
+[0:41:33] something. So you're What this means is that the
+[0:41:35] So you're What this means is that the worst case performance
+[0:41:38] worst case performance of um
+[0:41:40] of um of your of your prediction function
+[0:41:42] of your of your prediction function trained on this adversarial data that we
+[0:41:44] trained on this adversarial data that we just generated is going to be very poor.
+[0:41:47] just generated is going to be very poor. Right?
+[0:41:48] Right? And if we take the SCM that generated
+[0:41:51] And if we take the SCM that generated the adversarial data, you can see here
+[0:41:53] the adversarial data, you can see here that it it generated data where the
+[0:41:55] that it it generated data where the correlation between the color and the
+[0:41:58] correlation between the color and the label is exactly flipped.
+[0:42:00] label is exactly flipped. Right?
+[0:42:01] Right? So this is really how you witness this
+[0:42:03] So this is really how you witness this very bad performance from your uh
+[0:42:06] very bad performance from your uh from your predictor in the second
+[0:42:07] from your predictor in the second iteration.
+[0:42:09] iteration. And so now we're moving on with the
+[0:42:11] And so now we're moving on with the algorithm, you we go into a third
+[0:42:13] algorithm, you we go into a third iteration that will take these two
+[0:42:15] iteration that will take these two adversarial adversarial data sets and
+[0:42:18] adversarial adversarial data sets and train a new prediction function to
+[0:42:20] train a new prediction function to minimize the maximum across both.
+[0:42:24] minimize the maximum across both. And so here you can already see that
+[0:42:26] And so here you can already see that the classifier will be kind of forced to
+[0:42:28] the classifier will be kind of forced to ignore the color.
+[0:42:30] ignore the color. Because
+[0:42:31] Because if you take the color into account,
+[0:42:33] if you take the color into account, you're going to do very bad in either
+[0:42:35] you're going to do very bad in either the first data set or the second data
+[0:42:37] the first data set or the second data set.
+[0:42:38] set. So here just to share a little bit of
+[0:42:39] So here just to share a little bit of the intuition of uh
+[0:42:41] the intuition of uh of what your prediction function will
+[0:42:43] of what your prediction function will will will tend to do given these two
+[0:42:45] will will tend to do given these two samples of data.
+[0:42:48] samples of data. And
+[0:42:49] And if you pass that new prediction function
+[0:42:51] if you pass that new prediction function through our evaluation algorithm, we see
+[0:42:54] through our evaluation algorithm, we see exactly this pattern.
+[0:42:56] exactly this pattern. So we're really reaching here an optimal
+[0:42:57] So we're really reaching here an optimal performance of 0.25.
+[0:43:00] performance of 0.25. Because the data in the target domain is
+[0:43:03] Because the data in the target domain is generated subject to some noise, 25% of
+[0:43:05] generated subject to some noise, 25% of noise.
+[0:43:07] noise. So this
+[0:43:09] So this really what what's happening is that you
+[0:43:11] really what what's happening is that you you ended up with a predictor that is
+[0:43:12] you ended up with a predictor that is using the digit of the image
+[0:43:15] using the digit of the image to generate the label.
+[0:43:17] to generate the label. Which theoretically in this case by
+[0:43:19] Which theoretically in this case by design
+[0:43:20] design is the optimal the optimal worst case
+[0:43:22] is the optimal the optimal worst case performance that you can obtain.
+[0:43:28] Right? And so in this case you see that with three iterations of
+[0:43:31] with three iterations of of of our algorithm, you you reach this
+[0:43:33] of of our algorithm, you you reach this optimal performance that you know in
+[0:43:35] optimal performance that you know in theory we guarantee with uh
+[0:43:37] theory we guarantee with uh with with a large number of such
+[0:43:38] with with a large number of such iterations.
+[0:43:41] iterations. Um okay.
+[0:43:43] Um okay. So in in two or three minutes, I just
+[0:43:46] So in in two or three minutes, I just have some concluding remarks. If if
+[0:43:48] have some concluding remarks. If if there's any quick question now,
+[0:43:51] there's any quick question now, I'd happy to take them. Otherwise, I'll
+[0:43:53] I'd happy to take them. Otherwise, I'll continue.
+[0:43:58] Right. So to to to conclude
+[0:44:02] So to to to conclude um
+[0:44:03] um I I I guess to to recap
+[0:44:06] I I I guess to to recap some of some of the methods we we we
+[0:44:07] some of some of the methods we we we explored to unify a little bit these
+[0:44:11] explored to unify a little bit these newer machine learning tools that are
+[0:44:13] newer machine learning tools that are efficient, large scale, and work on you
+[0:44:15] efficient, large scale, and work on you know many different modalities.
+[0:44:18] know many different modalities. Um try to repurpose them a little bit to
+[0:44:20] Um try to repurpose them a little bit to solve
+[0:44:21] solve problems of transfer learning that
+[0:44:23] problems of transfer learning that require this maybe more mechanistic
+[0:44:25] require this maybe more mechanistic input to give to give you stronger
+[0:44:27] input to give to give you stronger guarantees on on performance. Right?
+[0:44:30] guarantees on on performance. Right? So we looked at two problems. One is
+[0:44:32] So we looked at two problems. One is evaluation of
+[0:44:33] evaluation of given prediction functions, and the
+[0:44:35] given prediction functions, and the other one is optimization
+[0:44:37] other one is optimization of of prediction functions in the first
+[0:44:39] of of prediction functions in the first place for worst case error. Right?
+[0:44:42] place for worst case error. Right? And um
+[0:44:43] And um the the evaluation is really one model
+[0:44:45] the the evaluation is really one model of the this larger optimization
+[0:44:47] of the this larger optimization procedure. So everything uh
+[0:44:50] procedure. So everything uh um everything works in tandem, if you
+[0:44:52] um everything works in tandem, if you like.
+[0:44:54] like. Um so also as a higher level conclusion
+[0:45:00] Um so also as a higher level conclusion then I I guess I I worry that well
+[0:45:03] then I I guess I I worry that well in in reality the the the data you
+[0:45:06] in in reality the the the data you observe is really only a reflection of
+[0:45:10] observe is really only a reflection of the underlying mechanism, the underlying
+[0:45:11] the underlying mechanism, the underlying process that is taking place. Right?
+[0:45:14] process that is taking place. Right? For many application that gives you a
+[0:45:16] For many application that gives you a lot of information and you can construct
+[0:45:18] lot of information and you can construct very powerful tools to solve many
+[0:45:20] very powerful tools to solve many different problems. But for others, it
+[0:45:22] different problems. But for others, it can be a little bit of a limiting
+[0:45:24] can be a little bit of a limiting perspective.
+[0:45:25] perspective. So I hope with
+[0:45:27] So I hope with some of this transferability work and
+[0:45:29] some of this transferability work and this maybe more model based approach to
+[0:45:32] this maybe more model based approach to to this problem that um
+[0:45:34] to this problem that um you can actually
+[0:45:36] you can actually work or investigate the type of
+[0:45:38] work or investigate the type of assumptions that would uh
+[0:45:40] assumptions that would uh lead you to make a better inferences
+[0:45:43] lead you to make a better inferences about the actual system you're
+[0:45:45] about the actual system you're describing instead of just the data you
+[0:45:47] describing instead of just the data you you you observe.
+[0:45:50] you you observe. Right?
+[0:45:51] Right? So that's everything for me. Thank you.
+[0:45:54] So that's everything for me. Thank you. Thank you for your attention. Happy to
+[0:45:55] Thank you for your attention. Happy to take more questions.
+[0:46:04] I think for the interest of time we can move to Adam and then we can take more
+[0:46:07] move to Adam and then we can take more questions towards the end. Is that okay?
+[0:46:15] Adam? Sure. Okay. Yeah, I can share the screen.
+[0:46:17] screen. Um
+[0:46:18] Um Okay, yeah. I guess in the interest of
+[0:46:19] Okay, yeah. I guess in the interest of time, I'll just quickly jump to some
+[0:46:21] time, I'll just quickly jump to some discussion questions. So
+[0:46:24] discussion questions. So Uh yeah, I think Alexis just
+[0:46:27] Uh yeah, I think Alexis just Adam, we're seeing your
+[0:46:30] Adam, we're seeing your the notes, not the main slides. Oh.
+[0:46:33] the notes, not the main slides. Oh. Uh
+[0:46:34] Uh Okay.
+[0:46:40] What about now? Yeah, that works.
+[0:46:41] Yeah, that works. Okay.
+[0:46:43] Okay. Uh yeah, so Alexis just did a recap, so
+[0:46:46] Uh yeah, so Alexis just did a recap, so I'll skip this.
+[0:46:47] I'll skip this. Uh so here I'll just highlight some
+[0:46:50] Uh so here I'll just highlight some the related work that I thought was
+[0:46:53] the related work that I thought was foundational and
+[0:46:55] foundational and uh really a lot of this work came from
+[0:46:58] uh really a lot of this work came from the Balkan Pearl paper where established
+[0:47:00] the Balkan Pearl paper where established a canonical parameterization of SCMs,
+[0:47:02] a canonical parameterization of SCMs, which
+[0:47:03] which I think is a great paper for everyone on
+[0:47:05] I think is a great paper for everyone on the call to definitely read.
+[0:47:07] the call to definitely read. Uh and then there's definitely a big
+[0:47:09] Uh and then there's definitely a big body of work around generalizations, so
+[0:47:11] body of work around generalizations, so I didn't do this justice. But for the
+[0:47:13] I didn't do this justice. But for the sake of time, I think we can just go to
+[0:47:16] sake of time, I think we can just go to the some discussion questions that I
+[0:47:18] the some discussion questions that I thought of when reading through this
+[0:47:20] thought of when reading through this paper.
+[0:47:21] paper. Um yeah, there's a lot here, so
+[0:47:23] Um yeah, there's a lot here, so happy to go down the list.
+[0:47:25] happy to go down the list. Uh Alexis, however you want to do this.
+[0:47:28] Uh Alexis, however you want to do this. Uh maybe we can stop stop from the top
+[0:47:30] Uh maybe we can stop stop from the top down. I know someone had a question
+[0:47:31] down. I know someone had a question about applications as well, so.
+[0:47:37] Yeah, how do you see this being applied in the real world, I guess?
+[0:47:40] in the real world, I guess? Yeah.
+[0:47:41] Yeah. Um
+[0:47:42] Um So I guess there's
+[0:47:44] So I guess there's there's two ingredients that
+[0:47:47] there's two ingredients that that that we need for for this kind of
+[0:47:49] that that we need for for this kind of for this kind of work.
+[0:47:51] for this kind of work. One is
+[0:47:52] One is some some data from uh
+[0:47:54] some some data from uh some domain that is
+[0:47:56] some domain that is hopefully related to to to the problem
+[0:47:59] hopefully related to to to the problem you're you're trying to solve in some
+[0:48:00] you're you're trying to solve in some target domain.
+[0:48:01] target domain. And second is some qualitative
+[0:48:03] And second is some qualitative understanding of what are the things
+[0:48:05] understanding of what are the things that are meant to to change or be
+[0:48:07] that are meant to to change or be invariant across uh
+[0:48:09] invariant across uh across
+[0:48:10] across the domains that generated your source
+[0:48:12] the domains that generated your source data and your target domain.
+[0:48:15] data and your target domain. Now I understand that that's
+[0:48:17] Now I understand that that's not always possible in many real world
+[0:48:19] not always possible in many real world problems.
+[0:48:21] problems. However, in in in many other problems,
+[0:48:23] However, in in in many other problems, it is.
+[0:48:24] it is. And um
+[0:48:27] And um the also when when specifying causal
+[0:48:29] the also when when specifying causal diagrams or selection diagrams, the the
+[0:48:32] diagrams or selection diagrams, the the assumptions are really in the absence of
+[0:48:34] assumptions are really in the absence of edges or in the absence of uh
+[0:48:37] edges or in the absence of uh of
+[0:48:38] of you know squared nodes that denote
+[0:48:40] you know squared nodes that denote variation between domains.
+[0:48:42] variation between domains. So I think there's there's always ways
+[0:48:44] So I think there's there's always ways of um
+[0:48:45] of um of
+[0:48:47] of you know adding more edges than you need
+[0:48:50] you know adding more edges than you need cautiously
+[0:48:51] cautiously to maintain correct inferences for your
+[0:48:54] to maintain correct inferences for your algorithm. Right? Your bounds may be a
+[0:48:57] algorithm. Right? Your bounds may be a little bit looser, but you can still
+[0:48:59] little bit looser, but you can still guarantee correctness even if you use
+[0:49:01] guarantee correctness even if you use some kind of sub super model for your
+[0:49:03] some kind of sub super model for your selection diagram.
+[0:49:05] selection diagram. Um
+[0:49:06] Um Right? And I guess there's many other
+[0:49:09] Right? And I guess there's many other many other tools available to try to get
+[0:49:11] many other tools available to try to get robust inferences for these kind of
+[0:49:13] robust inferences for these kind of problems. Right?
+[0:49:15] problems. Right? You could look at um
+[0:49:17] You could look at um some form of sensitivity analysis, work
+[0:49:20] some form of sensitivity analysis, work with multiple graphs
+[0:49:22] with multiple graphs that could be potential candidates for
+[0:49:24] that could be potential candidates for your problem, and then do some kind of
+[0:49:26] your problem, and then do some kind of worst case optimization over all of
+[0:49:28] worst case optimization over all of them.
+[0:49:29] them. Uh you could look at causal discovery
+[0:49:31] Uh you could look at causal discovery algorithms to refine your your
+[0:49:33] algorithms to refine your your understanding of the system you're
+[0:49:35] understanding of the system you're studying.
+[0:49:36] studying. So I guess there's no bulletproof
+[0:49:38] So I guess there's no bulletproof solution, but specification of
+[0:49:41] solution, but specification of assumption is definitely going to be,
+[0:49:43] assumption is definitely going to be, let's say, 95% of the work to to for
+[0:49:46] let's say, 95% of the work to to for these things to be successful.
+[0:49:48] these things to be successful. Okay. That's
+[0:49:50] Okay. That's as a follow-up, I'm curious then, is
+[0:49:54] as a follow-up, I'm curious then, is would you say the
+[0:49:56] would you say the worst case the bounds are
+[0:49:59] worst case the bounds are less trivial the more edges are removed
+[0:50:02] less trivial the more edges are removed from the selection diagram? Is it Is
+[0:50:04] from the selection diagram? Is it Is there just like some
+[0:50:05] there just like some function? Like as you remove edges, you
+[0:50:08] function? Like as you remove edges, you get a better answer and more informative
+[0:50:09] get a better answer and more informative answer?
+[0:50:14] Yeah, so I mean, you can think as removing edges
+[0:50:16] removing edges as further constraining the space of
+[0:50:18] as further constraining the space of possible target models that would be
+[0:50:20] possible target models that would be consistent with your assumptions.
+[0:50:23] consistent with your assumptions. Right?
+[0:50:24] Right? So, if you optimize over a smaller
+[0:50:26] So, if you optimize over a smaller space,
+[0:50:28] space, you you might get,
+[0:50:30] you you might get, you know, um
+[0:50:32] you know, um uh bounds that are uh
+[0:50:34] uh bounds that are uh how do you say? Less wide, right?
+[0:50:37] how do you say? Less wide, right? And uh
+[0:50:39] And uh So, so in that sense, you get bounds
+[0:50:41] So, so in that sense, you get bounds that are
+[0:50:43] that are maybe you can call them more
+[0:50:44] maybe you can call them more informative. I mean, you should be
+[0:50:45] informative. I mean, you should be careful that your assumptions are kind
+[0:50:47] careful that your assumptions are kind of reflect the system that you're
+[0:50:48] of reflect the system that you're studying.
+[0:50:49] studying. But uh but but yeah.
+[0:50:53] But uh but but yeah. I see. So, in some sense, like if
+[0:50:55] I see. So, in some sense, like if someone wanted to use this,
+[0:50:58] someone wanted to use this, they should be careful about the removal
+[0:50:59] they should be careful about the removal of edges because
+[0:51:01] of edges because it may result in a bound that is
+[0:51:04] it may result in a bound that is quote unquote overly optimistic uh for
+[0:51:06] quote unquote overly optimistic uh for their
+[0:51:07] their uh transportability task, correct?
+[0:51:10] uh transportability task, correct? Yeah. I mean, you you you may be over
+[0:51:12] Yeah. I mean, you you you may be over estimating over a space that doesn't
+[0:51:14] estimating over a space that doesn't include the potential target domain if,
+[0:51:18] include the potential target domain if, you know, you inadvertently remove an
+[0:51:21] you know, you inadvertently remove an edge that that was important or
+[0:51:23] edge that that was important or uh you know, if you didn't include a
+[0:51:25] uh you know, if you didn't include a particular square node to node
+[0:51:26] particular square node to node variation, uh
+[0:51:28] variation, uh something like that.
+[0:51:29] something like that. Makes sense.
+[0:51:31] Makes sense. Uh I guess the next question I had was
+[0:51:33] Uh I guess the next question I had was can you elaborate a little bit more on
+[0:51:35] can you elaborate a little bit more on the trade-off? So, that in the paper
+[0:51:37] the trade-off? So, that in the paper there's two approaches
+[0:51:39] there's two approaches to solving this kind of problem. One is
+[0:51:42] to solving this kind of problem. One is uh through the canonical model and the
+[0:51:43] uh through the canonical model and the second is through the NCM. Can you
+[0:51:44] second is through the NCM. Can you elaborate a little on the trade-offs of
+[0:51:47] elaborate a little on the trade-offs of these two approaches and when
+[0:51:50] these two approaches and when like Yeah, I guess when would someone
+[0:51:52] like Yeah, I guess when would someone want to use the canonical model versus
+[0:51:53] want to use the canonical model versus the NCM?
+[0:51:56] the NCM? Yeah,
+[0:51:56] Yeah, I I
+[0:51:57] I I I didn't go into a lot of details about
+[0:51:59] I didn't go into a lot of details about the canonical parameterization.
+[0:52:02] the canonical parameterization. Um I'll go ahead and make maybe a bold
+[0:52:05] Um I'll go ahead and make maybe a bold statement, which is use always the
+[0:52:08] statement, which is use always the neural causal models as your
+[0:52:10] neural causal models as your parameterization for your system.
+[0:52:12] parameterization for your system. Um
+[0:52:14] Um Just may maybe for practical reasons
+[0:52:16] Just may maybe for practical reasons more than more than theoretical reasons,
+[0:52:18] more than more than theoretical reasons, right? They're really meant to be
+[0:52:20] right? They're really meant to be equivalent.
+[0:52:21] equivalent. But one typically requires a um
+[0:52:26] But one typically requires a um a you know, MCMC sampler to learn
+[0:52:29] a you know, MCMC sampler to learn procedure distributions over over your
+[0:52:32] procedure distributions over over your parameters in the canonical
+[0:52:33] parameters in the canonical parameterization, whereas the other can
+[0:52:35] parameterization, whereas the other can be solved by a gradient descent.
+[0:52:38] be solved by a gradient descent. So, I mean, the spaces of models they
+[0:52:39] So, I mean, the spaces of models they encode is meant to be exactly the same.
+[0:52:43] encode is meant to be exactly the same. But
+[0:52:44] But I guess the kind of techniques you use
+[0:52:45] I guess the kind of techniques you use to search over them
+[0:52:48] to search over them would favor the the neural causal model
+[0:52:50] would favor the the neural causal model approach.
+[0:52:56] Okay. Yeah, that makes sense. I was just curious if anytime someone would want to
+[0:52:58] curious if anytime someone would want to use Yeah, for me, I I would just assume
+[0:53:01] use Yeah, for me, I I would just assume NCM.
+[0:53:02] NCM. Doesn't doesn't make sense to do. And is
+[0:53:04] Doesn't doesn't make sense to do. And is there any similar limitation? I guess an
+[0:53:07] there any similar limitation? I guess an add-on to that, I know the canonical
+[0:53:09] add-on to that, I know the canonical model approach, there's some limitations
+[0:53:11] model approach, there's some limitations in terms of
+[0:53:13] in terms of you know, like I think like the some
+[0:53:15] you know, like I think like the some variables have to be discrete and such.
+[0:53:18] variables have to be discrete and such. And I would it wasn't super clear to me
+[0:53:20] And I would it wasn't super clear to me from the paper if the NCM also suffers
+[0:53:22] from the paper if the NCM also suffers from those limitations. Can you
+[0:53:25] from those limitations. Can you elaborate a little bit on that and just
+[0:53:27] elaborate a little bit on that and just if there are limitations, like how would
+[0:53:29] if there are limitations, like how would you think about overcoming them as well?
+[0:53:36] Yeah, I mean, the you know, operating on discretely valued
+[0:53:39] you know, operating on discretely valued variables is the perhaps the the biggest
+[0:53:42] variables is the perhaps the the biggest technical uh
+[0:53:43] technical uh uh limitation. I mean, all the property
+[0:53:46] uh limitation. I mean, all the property that we leverage for for most of the
+[0:53:49] that we leverage for for most of the theoretical results. Um
+[0:53:51] theoretical results. Um So, so that that's that's a big one. Um
+[0:53:54] So, so that that's that's a big one. Um not that the methods can't be applied to
+[0:53:57] not that the methods can't be applied to continuously valued data.
+[0:53:59] continuously valued data. Um often, you know, if your neural
+[0:54:01] Um often, you know, if your neural networks are expressive enough, I would
+[0:54:03] networks are expressive enough, I would expect them to work equally well on
+[0:54:05] expect them to work equally well on continuously valued data.
+[0:54:07] continuously valued data. But for the theoretical statement,
+[0:54:10] But for the theoretical statement, it's um
+[0:54:12] it's um it's just much harder to um
+[0:54:15] it's just much harder to um uh develop kind of a non-parametric
+[0:54:18] uh develop kind of a non-parametric approach to study systems that are
+[0:54:20] approach to study systems that are continuously valued.
+[0:54:22] continuously valued. You often need to make some
+[0:54:23] You often need to make some distributional assumptions or some
+[0:54:25] distributional assumptions or some functional assumptions to make progress.
+[0:54:28] functional assumptions to make progress. So, you'd lose that non-parametric
+[0:54:30] So, you'd lose that non-parametric aspect,
+[0:54:31] aspect, I think, or or at least so far, it's
+[0:54:33] I think, or or at least so far, it's it's the case
+[0:54:34] it's the case to, you know, study theoretically
+[0:54:37] to, you know, study theoretically systems of continuously valued
+[0:54:39] systems of continuously valued variables.
+[0:54:41] variables. See.
+[0:54:43] See. Um okay.
+[0:54:45] Um okay. Yeah, I guess that answers kind of my
+[0:54:47] Yeah, I guess that answers kind of my third question as well. So,
+[0:54:50] third question as well. So, in terms of
+[0:54:52] in terms of Yeah, I guess
+[0:54:54] Yeah, I guess this is also asked maybe in the chat,
+[0:54:56] this is also asked maybe in the chat, but
+[0:54:57] but besides the worst-case risk, can this
+[0:55:00] besides the worst-case risk, can this method be this like framework be applied
+[0:55:03] method be this like framework be applied to other
+[0:55:05] to other you know, statistics pretty easily? Can
+[0:55:08] you know, statistics pretty easily? Can you comment a little on that?
+[0:55:11] you comment a little on that? Yeah, that that's a good point.
+[0:55:13] Yeah, that that's a good point. So, I get I guess I we do put a lot of
+[0:55:16] So, I get I guess I we do put a lot of focus on the worst-case risk, but in
+[0:55:18] focus on the worst-case risk, but in reality, any query, any functional
+[0:55:22] reality, any query, any functional of the target distribution
+[0:55:25] of the target distribution could be a valid target for
+[0:55:26] could be a valid target for optimization.
+[0:55:28] optimization. So, it could be a conditional
+[0:55:30] So, it could be a conditional probability of the outcome given some
+[0:55:33] probability of the outcome given some other variables. It could be a causal
+[0:55:35] other variables. It could be a causal effect
+[0:55:36] effect in the target domain. Uh
+[0:55:38] in the target domain. Uh It could be, you know, a conditional
+[0:55:40] It could be, you know, a conditional expectation in in the target domain. Uh
+[0:55:44] expectation in in the target domain. Uh Really anything that's a function of the
+[0:55:46] Really anything that's a function of the target distribution could could be a
+[0:55:48] target distribution could could be a viable target.
+[0:55:55] Okay. Nice. That's awesome. Um Then I guess uh for me, I'm personally
+[0:55:57] Then I guess uh for me, I'm personally kind of interested, yeah, a little bit
+[0:55:59] kind of interested, yeah, a little bit on the fifth question.
+[0:56:01] on the fifth question. Uh so, you you talked a little bit about
+[0:56:02] Uh so, you you talked a little bit about how sort of the assumptions of removing
+[0:56:05] how sort of the assumptions of removing edges in the selection diagram translate
+[0:56:08] edges in the selection diagram translate to some,
+[0:56:09] to some, you know, qualitatively better and
+[0:56:11] you know, qualitatively better and better bounds, but
+[0:56:12] better bounds, but yeah, I I guess how can you see this
+[0:56:15] yeah, I I guess how can you see this work being extended for when the graph
+[0:56:17] work being extended for when the graph is unknown, for instance?
+[0:56:19] is unknown, for instance? Like
+[0:56:20] Like what what sort of challenges are there
+[0:56:22] what what sort of challenges are there when we extend to, for instance, like
+[0:56:24] when we extend to, for instance, like the Markov equivalence class of a causal
+[0:56:26] the Markov equivalence class of a causal diagram? Or if, say, some of the edges
+[0:56:29] diagram? Or if, say, some of the edges are reversed?
+[0:56:31] are reversed? Just curious to hear your thoughts.
+[0:56:34] Just curious to hear your thoughts. Yeah, yeah. Well, Adam, as you know,
+[0:56:36] Yeah, yeah. Well, Adam, as you know, causal discovery across multiple domains
+[0:56:39] causal discovery across multiple domains is a difficult problem.
+[0:56:41] is a difficult problem. Yes.
+[0:56:42] Yes. Um
+[0:56:44] Um So, it's it's challenging. It's
+[0:56:47] So, it's it's challenging. It's it's it's definitely challenging.
+[0:56:49] it's it's definitely challenging. Now, my my default answer would be
+[0:56:52] Now, my my default answer would be causal discovery
+[0:56:54] causal discovery and try to operate on, let's say, an
+[0:56:56] and try to operate on, let's say, an equivalence class, maybe of selection
+[0:56:58] equivalence class, maybe of selection diagrams,
+[0:56:59] diagrams, instead of
+[0:57:01] instead of particular unique causal diagram.
+[0:57:04] particular unique causal diagram. But uh
+[0:57:06] But uh theoretically, I I don't think we know
+[0:57:08] theoretically, I I don't think we know how to do that yet because uh
+[0:57:11] how to do that yet because uh of course, in in the way
+[0:57:14] of course, in in the way this is designed, right? You use a
+[0:57:16] this is designed, right? You use a selection diagram to parameterize your
+[0:57:19] selection diagram to parameterize your neural causal model.
+[0:57:21] neural causal model. And we don't know how to how to
+[0:57:23] And we don't know how to how to parameterize an equivalence class,
+[0:57:25] parameterize an equivalence class, right? How to parameterize uh
+[0:57:32] And so, if if that's possible, you know, um
+[0:57:32] um So, I think Kash R is raising your hand.
+[0:57:35] So, I think Kash R is raising your hand. If you want to comment, uh yeah.
+[0:57:36] If you want to comment, uh yeah. wanted to add something here. One
+[0:57:38] wanted to add something here. One trivial answer could be that if you are
+[0:57:41] trivial answer could be that if you are unsure about a couple of selection
+[0:57:43] unsure about a couple of selection diagrams or like a class of selection
+[0:57:45] diagrams or like a class of selection diagrams, even if it is if it is huge,
+[0:57:47] diagrams, even if it is if it is huge, if you don't have any computational
+[0:57:49] if you don't have any computational constraints, uh then you can model all
+[0:57:51] constraints, uh then you can model all of them using neural CTR, but uh but I
+[0:57:55] of them using neural CTR, but uh but I mean, that would be that would be the
+[0:57:57] mean, that would be that would be the that would be suboptimal, of course. If
+[0:57:59] that would be suboptimal, of course. If especially if you reverse an edge, then
+[0:58:02] especially if you reverse an edge, then the entire architecture needs to change.
+[0:58:04] the entire architecture needs to change. It's not that only a uh one module is
+[0:58:06] It's not that only a uh one module is changing. Uh it might change the entire
+[0:58:08] changing. Uh it might change the entire architecture because the architecture
+[0:58:10] architecture because the architecture depends on the C components of of the I
+[0:58:14] depends on the C components of of the I mean, the the architecture can be
+[0:58:15] mean, the the architecture can be decomposed into the C components of the
+[0:58:17] decomposed into the C components of the graph.
+[0:58:18] graph. Uh and if you change if you even add one
+[0:58:21] Uh and if you change if you even add one bi-directed edge, it might merge two
+[0:58:23] bi-directed edge, it might merge two uh C components, and then the entire
+[0:58:25] uh C components, and then the entire architecture needs to change. Uh so, I I
+[0:58:28] architecture needs to change. Uh so, I I think yeah, that space is is very
+[0:58:29] think yeah, that space is is very chaotic once you changing little edges.
+[0:58:32] chaotic once you changing little edges. Of course, that's that's why it is super
+[0:58:34] Of course, that's that's why it is super hard to even uh
+[0:58:36] hard to even uh come up come up with uh
+[0:58:38] come up come up with uh nice algorithms for causal discovery
+[0:58:40] nice algorithms for causal discovery because they are very much dependent on
+[0:58:42] because they are very much dependent on each other, the existence or
+[0:58:43] each other, the existence or nonexistence of these edges.
+[0:58:45] nonexistence of these edges. Yeah, that makes sense. Now, I I
+[0:58:46] Yeah, that makes sense. Now, I I completely understand. Causal discovery
+[0:58:48] completely understand. Causal discovery is a challenging uh area research.
+[0:58:52] is a challenging uh area research. Um okay, yeah, I think we're running up
+[0:58:53] Um okay, yeah, I think we're running up on time, right, Chenyang?
+[0:58:56] on time, right, Chenyang? Yeah, I'm sorry to interrupt, but um
+[0:58:58] Yeah, I'm sorry to interrupt, but um this is probably a good time to uh draw
+[0:59:01] this is probably a good time to uh draw a conclusion to the um seminar.
+[0:59:04] a conclusion to the um seminar. Uh thank you very much, Alexis and Adam,
+[0:59:06] Uh thank you very much, Alexis and Adam, for the nice talk and discussion. Uh I
+[0:59:09] for the nice talk and discussion. Uh I think this way of kind of back and forth
+[0:59:12] think this way of kind of back and forth between the discussant and speakers
+[0:59:13] between the discussant and speakers always
+[0:59:14] always very nice to see um for the seminar
+[0:59:17] very nice to see um for the seminar audience.
+[0:59:18] audience. Yeah, thanks again.
+[0:59:20] Yeah, thanks again. Uh so, I just want to make an
+[0:59:21] Uh so, I just want to make an announcement for uh our seminar next
+[0:59:24] announcement for uh our seminar next week.
+[0:59:26] week. Um so, this will be given by uh Toru
+[0:59:29] Um so, this will be given by uh Toru Kitagawa from Brown University on policy
+[0:59:32] Kitagawa from Brown University on policy choice in time series by empirical
+[0:59:34] choice in time series by empirical welfare maximization.
+[0:59:36] welfare maximization. Um yeah, thank you very much. I will see
+[0:59:38] Um yeah, thank you very much. I will see you next week.

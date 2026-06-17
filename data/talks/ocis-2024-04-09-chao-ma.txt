@@ -1,0 +1,1772 @@
+[0:00:05] Okay, uh welcome to the online causal inference seminar. Today we have a child
+[0:00:07] inference seminar. Today we have a child mom from Microsoft research who will
+[0:00:08] mom from Microsoft research who will talk about towards causal Foundation
+[0:00:10] talk about towards causal Foundation models.
+[0:00:11] models. Um
+[0:00:12] Um duality between causal inference and
+[0:00:13] duality between causal inference and attention. Um
+[0:00:15] attention. Um as a discussion we have Chachi Zhang who
+[0:00:17] as a discussion we have Chachi Zhang who is a collaborator of of Zhao.
+[0:00:19] is a collaborator of of Zhao. Questions today will be answered handled
+[0:00:21] Questions today will be answered handled by Sarah.
+[0:00:22] by Sarah. So maybe she wants to say few words.
+[0:00:25] So maybe she wants to say few words. Okay, so
+[0:00:26] Okay, so sure.
+[0:00:27] sure. So if you have questions, please use the
+[0:00:29] So if you have questions, please use the Q&amp;A panel.
+[0:00:31] Q&amp;A panel. And
+[0:00:32] And if there are short clarifying questions,
+[0:00:35] if there are short clarifying questions, I may try to interrupt Zhao depending or
+[0:00:38] I may try to interrupt Zhao depending or Zhao can also answer them directly.
+[0:00:41] Zhao can also answer them directly. And if there are longer questions, we
+[0:00:42] And if there are longer questions, we can discuss them maybe in the end after
+[0:00:44] can discuss them maybe in the end after the discussion. Right?
+[0:00:47] the discussion. Right? Okay.
+[0:00:48] Okay. Sounds good.
+[0:00:54] Oh, so shall I Okay, shall I shall you
+[0:00:56] shall I Okay, shall I shall you introduce Zhao Dominic or we just start
+[0:00:58] introduce Zhao Dominic or we just start like this?
+[0:01:00] like this? Okay, we just start like this. So Zhao
+[0:01:01] Okay, we just start like this. So Zhao I'm sorry, maybe you didn't hear it.
+[0:01:03] I'm sorry, maybe you didn't hear it. Yeah.
+[0:01:04] Yeah. Okay.
+[0:01:04] Okay. Yeah.
+[0:01:06] Yeah. Yeah, Zhao whenever you're you're ready.
+[0:01:09] Yeah, Zhao whenever you're you're ready. Thank you. Okay, okay. Sure. Okay, then
+[0:01:11] Thank you. Okay, okay. Sure. Okay, then I can get started then.
+[0:01:12] I can get started then. So
+[0:01:14] So okay,
+[0:01:15] okay, thanks a lot for your time everyone. So
+[0:01:17] thanks a lot for your time everyone. So it's really good to be here today and on
+[0:01:20] it's really good to be here today and on behalf of the search especially the
+[0:01:22] behalf of the search especially the causality team from Microsoft research
+[0:01:24] causality team from Microsoft research Cambridge and present to you our recent
+[0:01:27] Cambridge and present to you our recent research paper.
+[0:01:28] research paper. Which essentially shows our first steps
+[0:01:30] Which essentially shows our first steps towards building a causal Foundation
+[0:01:32] towards building a causal Foundation models. So which is constant that we
+[0:01:34] models. So which is constant that we will introduce later.
+[0:01:37] will introduce later. Essentially, I just want to start by
+[0:01:38] Essentially, I just want to start by setting up the scene
+[0:01:40] setting up the scene as everyone knows that since the
+[0:01:43] as everyone knows that since the beginning of last year, right? We have
+[0:01:45] beginning of last year, right? We have really made a remarkable investment in
+[0:01:47] really made a remarkable investment in the entire field of AI.
+[0:01:50] the entire field of AI. Especially driven by larger, you know,
+[0:01:51] Especially driven by larger, you know, Foundation models like large language
+[0:01:53] Foundation models like large language models.
+[0:01:55] models. So at the same time we've seen a new
+[0:01:58] So at the same time we've seen a new kind of formalism of solving tasks,
+[0:02:00] kind of formalism of solving tasks, solving problems
+[0:02:01] solving problems like using
+[0:02:03] like using foundational models, that is using one
+[0:02:05] foundational models, that is using one single model that's capable of
+[0:02:08] single model that's capable of generalizing to a wide range of
+[0:02:10] generalizing to a wide range of different tasks.
+[0:02:12] different tasks. Right? So, given that, you know, one
+[0:02:14] Right? So, given that, you know, one natural question raised by many
+[0:02:16] natural question raised by many researchers in the field is that, you
+[0:02:18] researchers in the field is that, you know, given this progress, can we safely
+[0:02:20] know, given this progress, can we safely claim that is scale all you need to
+[0:02:23] claim that is scale all you need to build a powerful model?
+[0:02:25] build a powerful model? Or an AGI, although I don't really want
+[0:02:26] Or an AGI, although I don't really want to use that word. But, you know, to
+[0:02:29] to use that word. But, you know, to answer this question, it really depends
+[0:02:31] answer this question, it really depends on the context and perspective.
+[0:02:35] on the context and perspective. So, obviously, so we are a causal team.
+[0:02:38] So, obviously, so we are a causal team. So, one important I think one important
+[0:02:41] So, one important I think one important unsolved uh question is how to
+[0:02:44] unsolved uh question is how to understand, you know, cause and effect
+[0:02:47] understand, you know, cause and effect in functional models.
+[0:02:48] in functional models. So, like one obvious example is the
+[0:02:51] So, like one obvious example is the video generation um because like the
+[0:02:54] video generation um because like the currently the main methodology and
+[0:02:56] currently the main methodology and models
+[0:02:57] models that we use to perform this kind of task
+[0:03:00] that we use to perform this kind of task is still based on, you know, next token
+[0:03:01] is still based on, you know, next token prediction
+[0:03:03] prediction and association-based learning. So,
+[0:03:05] and association-based learning. So, naturally, so they will have a limited
+[0:03:07] naturally, so they will have a limited understanding of the world
+[0:03:10] understanding of the world despite of those amazing detailed um you
+[0:03:13] despite of those amazing detailed um you know, video samples. So, they might
+[0:03:15] know, video samples. So, they might generate samples in the end that does
+[0:03:17] generate samples in the end that does not make sense to human.
+[0:03:21] not make sense to human. So, you know, talking about, you know,
+[0:03:23] So, you know, talking about, you know, large vision models is just one thing,
+[0:03:25] large vision models is just one thing, but they're not the entire story, right?
+[0:03:28] but they're not the entire story, right? So, because
+[0:03:29] So, because beyond generating uh you know, pretty
+[0:03:32] beyond generating uh you know, pretty videos using the large vision models,
+[0:03:34] videos using the large vision models, they're also uh far more crucial you
+[0:03:37] they're also uh far more crucial you know, applications to it that makes
+[0:03:39] know, applications to it that makes causality very important for functional
+[0:03:42] causality very important for functional models.
+[0:03:43] models. So, for example, in gene editing and
+[0:03:46] So, for example, in gene editing and uh neurotechnology and in body AI or in,
+[0:03:49] uh neurotechnology and in body AI or in, you know, policy making, urban design,
+[0:03:52] you know, policy making, urban design, etc., I can go on so the problem of
+[0:03:54] etc., I can go on so the problem of solving causality is so fundamental that
+[0:03:57] solving causality is so fundamental that once your model, you know, can
+[0:03:59] once your model, you know, can understand the consequences of your
+[0:04:02] understand the consequences of your action of your intervention. Then you
+[0:04:04] action of your intervention. Then you then you can really pretty much you know
+[0:04:06] then you can really pretty much you know achieve your desirable impacts and
+[0:04:09] achieve your desirable impacts and results.
+[0:04:10] results. And especially on solving this kind of
+[0:04:13] And especially on solving this kind of noble and unsolved
+[0:04:15] noble and unsolved questions in different fields.
+[0:04:18] questions in different fields. So now back to the question that we
+[0:04:20] So now back to the question that we raised in the beginning is still on your
+[0:04:22] raised in the beginning is still on your need. So to answer that, so we believe
+[0:04:25] need. So to answer that, so we believe that it is also important to build
+[0:04:27] that it is also important to build financial models that can understand
+[0:04:29] financial models that can understand causality.
+[0:04:30] causality. So if you try to map out where we are,
+[0:04:33] So if you try to map out where we are, right? So in terms of the set of current
+[0:04:35] right? So in terms of the set of current financial models, so we can say that
+[0:04:37] financial models, so we can say that they mostly light between the first and
+[0:04:39] they mostly light between the first and second letters of the pearls letters of
+[0:04:42] second letters of the pearls letters of causality.
+[0:04:43] causality. So mostly they're based on associative
+[0:04:45] So mostly they're based on associative reasoning and for certain certain
+[0:04:47] reasoning and for certain certain classes of models that we have right
+[0:04:49] classes of models that we have right now, they can also perform intervention
+[0:04:51] now, they can also perform intervention predictions, but not for counterfactuals
+[0:04:53] predictions, but not for counterfactuals in general. So
+[0:04:55] in general. So This is where our you know, causality
+[0:04:57] This is where our you know, causality comes in.
+[0:04:59] comes in. We are now really focusing our efforts
+[0:05:01] We are now really focusing our efforts to build a you know, causal financial
+[0:05:03] to build a you know, causal financial models that is capable of solving tasks
+[0:05:06] models that is capable of solving tasks across three different layers.
+[0:05:08] across three different layers. So of course this is a non-trivial
+[0:05:10] So of course this is a non-trivial question because causality on its own is
+[0:05:12] question because causality on its own is a very hard field. It's very difficult
+[0:05:14] a very hard field. It's very difficult fields and you know, it's we think that
+[0:05:17] fields and you know, it's we think that it's unlikely that you know, this type
+[0:05:19] it's unlikely that you know, this type of picture can be achieved by trivially
+[0:05:24] of picture can be achieved by trivially like the scale up your models. So we
+[0:05:27] like the scale up your models. So we talk about why later on. But in this
+[0:05:29] talk about why later on. But in this talk, right? I'm going to address three
+[0:05:32] talk, right? I'm going to address three different kind of aspects.
+[0:05:34] different kind of aspects. So to start with is you know, why we
+[0:05:37] So to start with is you know, why we think that causality is a unsolved
+[0:05:40] think that causality is a unsolved question in modern financial models.
+[0:05:42] question in modern financial models. And then why this goal like requires a
+[0:05:46] And then why this goal like requires a different approach
+[0:05:47] different approach to in terms of building, you know,
+[0:05:49] to in terms of building, you know, causal aware financial models.
+[0:05:51] causal aware financial models. And finally, we're going to show you one
+[0:05:53] And finally, we're going to show you one of the approaches that we have found
+[0:05:55] of the approaches that we have found that might be helpful in the tools
+[0:05:57] that might be helpful in the tools building this type of causal aware
+[0:05:59] building this type of causal aware financial models.
+[0:06:01] financial models. So, let's uh get started. So, first
+[0:06:04] So, let's uh get started. So, first let's talk about um challenges that we
+[0:06:06] let's talk about um challenges that we face right now and why causality is
+[0:06:09] face right now and why causality is still a unresolved question in modern
+[0:06:12] still a unresolved question in modern financial models.
+[0:06:14] financial models. So, what are the challenges? You know,
+[0:06:17] So, what are the challenges? You know, to understand what we are, you know,
+[0:06:18] to understand what we are, you know, people have been trying to uh let's say
+[0:06:21] people have been trying to uh let's say benchmark the causal performance of, you
+[0:06:24] benchmark the causal performance of, you know, pre-trained large multi-modal
+[0:06:26] know, pre-trained large multi-modal models, right? And uh you know, people
+[0:06:29] models, right? And uh you know, people have found that, you know, at the
+[0:06:30] have found that, you know, at the current stage, right? This current large
+[0:06:32] current stage, right? This current large models it still struggles with even the
+[0:06:35] models it still struggles with even the simplest form of causal questions.
+[0:06:37] simplest form of causal questions. So, what it means is that the type of
+[0:06:40] So, what it means is that the type of questions that's based on uh empirical
+[0:06:43] questions that's based on uh empirical and semantic understanding of, you know,
+[0:06:45] and semantic understanding of, you know, domain-specific knowledge or common
+[0:06:47] domain-specific knowledge or common sense of human.
+[0:06:49] sense of human. So, let me give an example. So, here
+[0:06:51] So, let me give an example. So, here let's say we have two types of, you
+[0:06:53] let's say we have two types of, you know, you know, counterfactual reasoning
+[0:06:55] know, you know, counterfactual reasoning task. One for video, the other one for
+[0:06:58] task. One for video, the other one for uh language, for example.
+[0:07:00] uh language, for example. So, in the video case, so for example,
+[0:07:03] So, in the video case, so for example, we can give a set of frames of objects
+[0:07:05] we can give a set of frames of objects interacting with each other and we might
+[0:07:08] interacting with each other and we might ask question that, you know, what will
+[0:07:10] ask question that, you know, what will happen if certain objects is removed,
+[0:07:12] happen if certain objects is removed, right? And how will this change the
+[0:07:14] right? And how will this change the trajectory of other objects?
+[0:07:17] trajectory of other objects? And similarly, in the language space, so
+[0:07:20] And similarly, in the language space, so we can ask, you know, given a factual
+[0:07:22] we can ask, you know, given a factual event, for example, if slaughter slays a
+[0:07:25] event, for example, if slaughter slays a pig, then we might ask that what would
+[0:07:27] pig, then we might ask that what would have happened if the slaughter slayed a
+[0:07:30] have happened if the slaughter slayed a person instead, right? So, these are all
+[0:07:33] person instead, right? So, these are all simple, you know, causal questions in
+[0:07:34] simple, you know, causal questions in the sense that, you know, with a good
+[0:07:36] the sense that, you know, with a good understanding of, you know, a common
+[0:07:39] understanding of, you know, a common sense, a model might still be able to
+[0:07:41] sense, a model might still be able to answer those questions even without
+[0:07:43] answer those questions even without possessing a pure um causal inference
+[0:07:47] possessing a pure um causal inference capabilities.
+[0:07:49] capabilities. So, it's exactly what people have found,
+[0:07:51] So, it's exactly what people have found, but however, it has been shown by this
+[0:07:54] but however, it has been shown by this recent uh you know, benchmark study that
+[0:07:58] recent uh you know, benchmark study that even in the like in the first in the
+[0:08:00] even in the like in the first in the language space, like most models, except
+[0:08:02] language space, like most models, except for uh uh GPT-4, they all underperform
+[0:08:06] for uh uh GPT-4, they all underperform for this type of simplest causal task.
+[0:08:09] for this type of simplest causal task. And when it comes to real-world
+[0:08:10] And when it comes to real-world understandings, right? It's more
+[0:08:12] understandings, right? It's more difficult, and none of our current
+[0:08:14] difficult, and none of our current models can produce satisfactory answers
+[0:08:17] models can produce satisfactory answers to different types of, you know, causal
+[0:08:19] to different types of, you know, causal reasoning questions.
+[0:08:21] reasoning questions. So, this results essentially showed
+[0:08:24] So, this results essentially showed where we are right now. So, at least for
+[0:08:25] where we are right now. So, at least for now, um our current foundation models,
+[0:08:27] now, um our current foundation models, they kind of lacks the capabilities to
+[0:08:29] they kind of lacks the capabilities to solve causal task consistently.
+[0:08:37] And so, I think that one missing piece behind that is the pure the lack of, you
+[0:08:40] behind that is the pure the lack of, you know, pure
+[0:08:41] know, pure um causal inference capability, which
+[0:08:43] um causal inference capability, which means that, you know, you know, can your
+[0:08:45] means that, you know, you know, can your model derive a quantitative causal laws
+[0:08:48] model derive a quantitative causal laws given the data and evidence that it
+[0:08:51] given the data and evidence that it observes, right?
+[0:08:53] observes, right? So, ideally, what we want to achieve is
+[0:08:55] So, ideally, what we want to achieve is that given a set of observations from a
+[0:08:57] that given a set of observations from a complex system, let's say cell system,
+[0:09:00] complex system, let's say cell system, where you have observations across
+[0:09:01] where you have observations across different
+[0:09:03] different uh across different shops close across
+[0:09:04] uh across different shops close across the globe, and then you have
+[0:09:06] the globe, and then you have observations on their revenues and their
+[0:09:08] observations on their revenues and their like discount strategies, for example.
+[0:09:10] like discount strategies, for example. So, now
+[0:09:12] So, now I want to understand the causal effects
+[0:09:14] I want to understand the causal effects of my strategy.
+[0:09:15] of my strategy. And then a causal model should be able
+[0:09:17] And then a causal model should be able to like naturally utilize certain causal
+[0:09:20] to like naturally utilize certain causal assumptions in trying to de-confound and
+[0:09:22] assumptions in trying to de-confound and de-bias your data and your evidence. And
+[0:09:25] de-bias your data and your evidence. And then it can produce causal predictions
+[0:09:28] then it can produce causal predictions by making counterfactual or intervention
+[0:09:30] by making counterfactual or intervention predictions on uh what would have
+[0:09:32] predictions on uh what would have happened if you have uh done a different
+[0:09:35] happened if you have uh done a different um
+[0:09:35] um strategy or discount level in this case.
+[0:09:39] strategy or discount level in this case. So, think about this. So, this kind of
+[0:09:42] So, think about this. So, this kind of achievement or goal is fundamentally
+[0:09:44] achievement or goal is fundamentally different from how current the
+[0:09:46] different from how current the foundation models are built.
+[0:09:48] foundation models are built. So, regardless of their capabilities of
+[0:09:51] So, regardless of their capabilities of understanding causal questions, but the
+[0:09:53] understanding causal questions, but the key point here is that the type of
+[0:09:55] key point here is that the type of answers that they can
+[0:09:57] answers that they can provide is very different from what we
+[0:09:59] provide is very different from what we expect.
+[0:10:01] expect. So, for example, I can ask GPT-4 to say
+[0:10:04] So, for example, I can ask GPT-4 to say in my sales scenario, so what are the
+[0:10:07] in my sales scenario, so what are the causal impacts of certain action?
+[0:10:09] causal impacts of certain action? Then, it can only like answer the
+[0:10:11] Then, it can only like answer the questions qualitatively. So, for
+[0:10:13] questions qualitatively. So, for example, like this typically increases
+[0:10:16] example, like this typically increases the revenue, etc.
+[0:10:18] the revenue, etc. And then, you might ask, you know, can
+[0:10:19] And then, you might ask, you know, can you further quantify that effect?
+[0:10:22] you further quantify that effect? And then, most likely, you know, you can
+[0:10:25] And then, most likely, you know, you can answer that, you know, perhaps reasons
+[0:10:27] answer that, you know, perhaps reasons that is suggest a interval of 10%, blah
+[0:10:30] that is suggest a interval of 10%, blah blah blah, something like that, right?
+[0:10:33] blah blah, something like that, right? But, that's different from what I expect
+[0:10:34] But, that's different from what I expect from a causal model, because a causal
+[0:10:36] from a causal model, because a causal model should be able to return a
+[0:10:39] model should be able to return a quantitative and mathematical model
+[0:10:41] quantitative and mathematical model that actually can describe the
+[0:10:43] that actually can describe the underlying causal models. And more
+[0:10:44] underlying causal models. And more importantly, can guide you directly to
+[0:10:46] importantly, can guide you directly to optimize my actions in the future in
+[0:10:49] optimize my actions in the future in accurate way.
+[0:10:51] accurate way. So, I think this is the area where like
+[0:10:53] So, I think this is the area where like causal models and foundation models can
+[0:10:55] causal models and foundation models can make a real world impact.
+[0:10:57] make a real world impact. So, I guess that's the first challenges
+[0:10:59] So, I guess that's the first challenges that we're facing with our current
+[0:11:00] that we're facing with our current foundation models.
+[0:11:02] foundation models. And second one is about the capability
+[0:11:04] And second one is about the capability of understand the answering, you know,
+[0:11:07] of understand the answering, you know, novel causal questions.
+[0:11:10] novel causal questions. So, for example, you know,
+[0:11:12] So, for example, you know, you might be launching a whole new like
+[0:11:14] you might be launching a whole new like intervention strategy to boost your
+[0:11:16] intervention strategy to boost your sales, right? And and improve your
+[0:11:18] sales, right? And and improve your business.
+[0:11:19] business. But now, you want to understand how this
+[0:11:22] But now, you want to understand how this will impact my, you know, goal, which is
+[0:11:25] will impact my, you know, goal, which is my revenue, like in the future, right?
+[0:11:29] my revenue, like in the future, right? And then, I can ask GPT-4 to
+[0:11:32] And then, I can ask GPT-4 to answer this question, and the answer
+[0:11:34] answer this question, and the answer that I got is that, you know, it doesn't
+[0:11:36] that I got is that, you know, it doesn't really have access to the case studies
+[0:11:38] really have access to the case studies results uh
+[0:11:40] results uh um about this new interventions that you
+[0:11:43] um about this new interventions that you are launching. So,
+[0:11:44] are launching. So, you cannot basically get any answers or
+[0:11:47] you cannot basically get any answers or at least meaningful answers.
+[0:11:49] at least meaningful answers. But on the other hand, a causal model
+[0:11:50] But on the other hand, a causal model should at least on certain extent be
+[0:11:53] should at least on certain extent be able to still generalize to novel
+[0:11:56] able to still generalize to novel scenarios like this. So, this is
+[0:11:57] scenarios like this. So, this is something that our team actually did in
+[0:11:59] something that our team actually did in the past. So, we actually have a small
+[0:12:01] the past. So, we actually have a small scale of data sets, right? Of a new
+[0:12:04] scale of data sets, right? Of a new intervention that we're trying to launch
+[0:12:05] intervention that we're trying to launch in the future.
+[0:12:06] in the future. And we use our causal model, which is a
+[0:12:09] And we use our causal model, which is a cooperative learning model trying to
+[0:12:10] cooperative learning model trying to recover its causal effect,
+[0:12:13] recover its causal effect, which is actually shown in the green bar
+[0:12:15] which is actually shown in the green bar here.
+[0:12:16] here. And it turns out that our causal sorry,
+[0:12:18] And it turns out that our causal sorry, our causal prediction
+[0:12:20] our causal prediction um is actually very accurate when it
+[0:12:22] um is actually very accurate when it compares to the pink one, which is
+[0:12:24] compares to the pink one, which is actually uh the large-scale real-world
+[0:12:27] actually uh the large-scale real-world experiments and it's actually randomized
+[0:12:29] experiments and it's actually randomized experiment that we gathered afterwards.
+[0:12:32] experiment that we gathered afterwards. So, this shows capabilities of causal
+[0:12:34] So, this shows capabilities of causal models and it also shows the second
+[0:12:36] models and it also shows the second challenge that the current foundational
+[0:12:38] challenge that the current foundational models facing, which is how can solve
+[0:12:40] models facing, which is how can solve unseen a novel causal questions.
+[0:12:46] And finally, the final challenge I want to talk about is the kind of like the
+[0:12:48] to talk about is the kind of like the the scaling law. So, I guess one of the
+[0:12:52] the scaling law. So, I guess one of the challenges that we have is there's no
+[0:12:54] challenges that we have is there's no evidence in terms of scaling laws on the
+[0:12:57] evidence in terms of scaling laws on the performance of causal models um in terms
+[0:13:00] performance of causal models um in terms of their capability to answer causal
+[0:13:02] of their capability to answer causal questions.
+[0:13:03] questions. So, researchers have tried to benchmark
+[0:13:06] So, researchers have tried to benchmark the capabilities of different, let's
+[0:13:07] the capabilities of different, let's say, language models,
+[0:13:09] say, language models, right? Um based on their capability to
+[0:13:12] right? Um based on their capability to to infer causation relationships from
+[0:13:14] to infer causation relationships from correlation relationships.
+[0:13:17] correlation relationships. So, they tested over a wide range of
+[0:13:19] So, they tested over a wide range of models from randomized baselines to BERT
+[0:13:22] models from randomized baselines to BERT to LLaMA to GPT-4.
+[0:13:25] to LLaMA to GPT-4. And unfortunately, as the sizes of your
+[0:13:27] And unfortunately, as the sizes of your model increases, their causal
+[0:13:29] model increases, their causal performance does not significantly
+[0:13:31] performance does not significantly improve.
+[0:13:32] improve. So, that was becoming, you know,
+[0:13:34] So, that was becoming, you know, potentially problematic because this
+[0:13:36] potentially problematic because this might suggest that, you know, as, you
+[0:13:38] might suggest that, you know, as, you know, now we might be losing one of our
+[0:13:41] know, now we might be losing one of our most powerful weapons in terms of
+[0:13:43] most powerful weapons in terms of building large models
+[0:13:45] building large models to perform causal tasks.
+[0:13:49] So, um so, there's also a lot more
+[0:13:51] um so, there's also a lot more evaluations that conducted in the
+[0:13:52] evaluations that conducted in the literature, but I guess the main
+[0:13:54] literature, but I guess the main takeaway that I found was that
+[0:13:57] takeaway that I found was that So, we found out, you know, this kind of
+[0:13:58] So, we found out, you know, this kind of large multimodal models, they are they
+[0:14:01] large multimodal models, they are they can perform amazingly well on certain
+[0:14:04] can perform amazingly well on certain types of causal questions, but they're
+[0:14:05] types of causal questions, but they're just not super consistent.
+[0:14:07] just not super consistent. And they especially struggle with
+[0:14:09] And they especially struggle with quantitative predictions and in terms of
+[0:14:11] quantitative predictions and in terms of the pure causal inference capabilities.
+[0:14:14] the pure causal inference capabilities. And also there's no kind of like the
+[0:14:16] And also there's no kind of like the evidence of causal version of scale law.
+[0:14:19] evidence of causal version of scale law. So, we believe that, you know, one of
+[0:14:22] So, we believe that, you know, one of the common reasons behind this is that,
+[0:14:24] the common reasons behind this is that, you know, current foundation models, by
+[0:14:25] you know, current foundation models, by construction,
+[0:14:26] construction, they're not able to model the actual
+[0:14:29] they're not able to model the actual physical or quantitative data
+[0:14:31] physical or quantitative data measurements to ground their
+[0:14:32] measurements to ground their predictions.
+[0:14:34] predictions. So,
+[0:14:35] So, how do we address that?
+[0:14:36] how do we address that? So, to build a causal way foundation
+[0:14:38] So, to build a causal way foundation models, there I think there are two
+[0:14:40] models, there I think there are two approaches in general.
+[0:14:42] approaches in general. So, one is that you take a causal model,
+[0:14:44] So, one is that you take a causal model, right? Or a causal framework. Then it's
+[0:14:46] right? Or a causal framework. Then it's based on, let's say, first outcome,
+[0:14:49] based on, let's say, first outcome, structural causal models, etc., that
+[0:14:51] structural causal models, etc., that already solve certain causal task under
+[0:14:53] already solve certain causal task under certain assumptions.
+[0:14:55] certain assumptions. And then try to make it foundational.
+[0:14:59] And then try to make it foundational. The other approach is that you take a
+[0:15:00] The other approach is that you take a model
+[0:15:01] model uh that's already foundational but not
+[0:15:03] uh that's already foundational but not causal. Let's say a language model,
+[0:15:05] causal. Let's say a language model, right? And then try to make it causal
+[0:15:07] right? And then try to make it causal aware.
+[0:15:08] aware. So, in fact, our team explored both, but
+[0:15:11] So, in fact, our team explored both, but uh in this talk, our strategy is kind of
+[0:15:13] uh in this talk, our strategy is kind of the mix
+[0:15:14] the mix uh of a little bit of, you know, from
+[0:15:15] uh of a little bit of, you know, from both sides.
+[0:15:17] both sides. So, let's talk about our proposed
+[0:15:19] So, let's talk about our proposed approach.
+[0:15:20] approach. So,
+[0:15:22] So, uh to start with, let me remind you how
+[0:15:24] uh to start with, let me remind you how a normal large language models trend.
+[0:15:27] a normal large language models trend. So, as we start with, we assume that
+[0:15:29] So, as we start with, we assume that we're going to have a, you know, true
+[0:15:30] we're going to have a, you know, true world model.
+[0:15:32] world model. Um
+[0:15:33] Um and in this in this case, it's going to
+[0:15:35] and in this in this case, it's going to be a, you know, um hypothetical ground
+[0:15:38] be a, you know, um hypothetical ground truth data generating process, right?
+[0:15:41] truth data generating process, right? So, then um
+[0:15:43] So, then um now, this kind of like the ground truth
+[0:15:45] now, this kind of like the ground truth world model is going to generate bunch
+[0:15:47] world model is going to generate bunch of measurement data sets in different
+[0:15:49] of measurement data sets in different domains,
+[0:15:50] domains, you know, that the human can gather and
+[0:15:52] you know, that the human can gather and analysis, right?
+[0:15:54] analysis, right? So, over the years of, you know,
+[0:15:55] So, over the years of, you know, development and uh you know,
+[0:15:57] development and uh you know, advancements of uh our humans uh
+[0:15:59] advancements of uh our humans uh knowledge about our world, we start to
+[0:16:02] knowledge about our world, we start to summarize our kind of like the knowledge
+[0:16:04] summarize our kind of like the knowledge from those observations
+[0:16:06] from those observations that we have from uh our world.
+[0:16:09] that we have from uh our world. And we summarize into textual, you know,
+[0:16:11] And we summarize into textual, you know, statements in the end, right?
+[0:16:13] statements in the end, right? And fundamentally, we use those, you
+[0:16:16] And fundamentally, we use those, you know, statements uh as a, you know,
+[0:16:19] know, statements uh as a, you know, uh source of training data to train our
+[0:16:21] uh source of training data to train our large language uh models.
+[0:16:26] And now, what I'm trying to say is that now that
+[0:16:28] what I'm trying to say is that now that we know that this approach is not able
+[0:16:30] we know that this approach is not able to model the actual physical and
+[0:16:32] to model the actual physical and quantitative data measurements that we
+[0:16:34] quantitative data measurements that we have, the ground of predictions.
+[0:16:36] have, the ground of predictions. So, then why don't we directly build a
+[0:16:39] So, then why don't we directly build a new functional model that is trained
+[0:16:41] new functional model that is trained entirely on all the quantitative data
+[0:16:43] entirely on all the quantitative data sets in the world, right?
+[0:16:45] sets in the world, right? And with the goal of trying to make the
+[0:16:48] And with the goal of trying to make the correct causal predictions,
+[0:16:50] correct causal predictions, right?
+[0:16:51] right? So, then if that can work,
+[0:16:54] So, then if that can work, once such model is trained, we can then
+[0:16:56] once such model is trained, we can then take any kind of new unseen data sets
+[0:16:59] take any kind of new unseen data sets from a new problem, say your proprietary
+[0:17:01] from a new problem, say your proprietary sales data, into this model.
+[0:17:04] sales data, into this model. And this will then uh try to give your
+[0:17:06] And this will then uh try to give your uh quantitative uh causal predictions
+[0:17:08] uh quantitative uh causal predictions about your unique system, which is
+[0:17:10] about your unique system, which is specified uh in your proprietary data.
+[0:17:14] specified uh in your proprietary data. And then, all the predictions will be
+[0:17:15] And then, all the predictions will be done in the real shot, meaning that this
+[0:17:17] done in the real shot, meaning that this model is not re-trained or re-adapted to
+[0:17:19] model is not re-trained or re-adapted to new data.
+[0:17:21] new data. So now this is becoming interesting
+[0:17:23] So now this is becoming interesting because the same formulation can be
+[0:17:25] because the same formulation can be applied to new problems in other domains
+[0:17:28] applied to new problems in other domains as well, like in perhaps in unresolved
+[0:17:31] as well, like in perhaps in unresolved questions in health and scientific
+[0:17:33] questions in health and scientific areas, etc.
+[0:17:37] So now next I'm going to show you. So
+[0:17:41] now next I'm going to show you. So having this kind of mindset, like how
+[0:17:43] having this kind of mindset, like how are we going to address that? Especially
+[0:17:45] are we going to address that? Especially one of the results from our group that
+[0:17:47] one of the results from our group that we derive in this particular paper
+[0:17:50] we derive in this particular paper that will help to build such, you know,
+[0:17:52] that will help to build such, you know, causal foundation model.
+[0:17:54] causal foundation model. And the result is what we call the
+[0:17:55] And the result is what we call the duality between causal inference and
+[0:17:58] duality between causal inference and attention.
+[0:18:00] attention. But before we actually do that, so let
+[0:18:02] But before we actually do that, so let me start by describing
+[0:18:04] me start by describing um, you know, this result on a high
+[0:18:06] um, you know, this result on a high level.
+[0:18:07] level. So essentially, so this result tells you
+[0:18:10] So essentially, so this result tells you that
+[0:18:11] that under some under some assumptions
+[0:18:14] under some under some assumptions the problem of, you know, learning a
+[0:18:16] the problem of, you know, learning a attention-based model, you know,
+[0:18:18] attention-based model, you know, given a certain measurement data set
+[0:18:20] given a certain measurement data set that you have
+[0:18:21] that you have is
+[0:18:22] is or it can be mathematically equivalent
+[0:18:25] or it can be mathematically equivalent to the problem of finding the kind of
+[0:18:28] to the problem of finding the kind of like the optimal causal predictions that
+[0:18:30] like the optimal causal predictions that minimizes certain types of, you know,
+[0:18:32] minimizes certain types of, you know, error between your causal predictions
+[0:18:35] error between your causal predictions and the ground truth causal quantity.
+[0:18:37] and the ground truth causal quantity. And in fact, these two problems are
+[0:18:39] And in fact, these two problems are equivalent to each other, meaning that
+[0:18:40] equivalent to each other, meaning that they are, you know, dual problems. So
+[0:18:42] they are, you know, dual problems. So the
+[0:18:44] the uh, like the attention
+[0:18:46] uh, like the attention uh, optimization problem is actually a
+[0:18:47] uh, optimization problem is actually a dual problem of the original kind of
+[0:18:50] dual problem of the original kind of like the optimal causal prediction
+[0:18:52] like the optimal causal prediction problem. So we'll talk about this in
+[0:18:53] problem. So we'll talk about this in more details in its exact mathematical
+[0:18:56] more details in its exact mathematical form.
+[0:18:57] form. But on a high level, because
+[0:18:59] But on a high level, because attention-based mechanisms so
+[0:19:01] attention-based mechanisms so fundamental in modern, you know,
+[0:19:04] fundamental in modern, you know, foundation models and we believe that
+[0:19:06] foundation models and we believe that these connections might be essentially
+[0:19:09] these connections might be essentially exploited in the future to enable
+[0:19:11] exploited in the future to enable training a causal bench model.
+[0:19:18] So, before we go into more details, so we will actually try to briefly
+[0:19:20] we will actually try to briefly introduce two preliminary concepts, you
+[0:19:22] introduce two preliminary concepts, you know, just to make the talk a little bit
+[0:19:23] know, just to make the talk a little bit more self-contained, right? The first
+[0:19:26] more self-contained, right? The first concept is a optimal balancing. So,
+[0:19:30] concept is a optimal balancing. So, which can be think of as a in a sense a
+[0:19:33] which can be think of as a in a sense a generalization of inverse probability
+[0:19:35] generalization of inverse probability weighting.
+[0:19:36] weighting. Where basically you start from existing
+[0:19:39] Where basically you start from existing data set, which is your observation
+[0:19:41] data set, which is your observation data. Of course, we're going to have
+[0:19:42] data. Of course, we're going to have some confounding.
+[0:19:44] some confounding. The distributions
+[0:19:46] The distributions will be different between your control
+[0:19:48] will be different between your control group and treatment group.
+[0:19:50] group and treatment group. And the idea of optimal balancing is
+[0:19:51] And the idea of optimal balancing is essentially to apply some kind of
+[0:19:53] essentially to apply some kind of weighting alpha, right?
+[0:19:55] weighting alpha, right? Which is used to like rebalance or
+[0:19:57] Which is used to like rebalance or reweight each of the data points.
+[0:20:00] reweight each of the data points. And then after reweighting, if you have
+[0:20:03] And then after reweighting, if you have chosen your alpha wisely, then you will
+[0:20:06] chosen your alpha wisely, then you will reach a new distribution, a rebalanced
+[0:20:08] reach a new distribution, a rebalanced distribution,
+[0:20:10] distribution, that can approximate the AB randomized
+[0:20:12] that can approximate the AB randomized testing very well, under which, you
+[0:20:14] testing very well, under which, you know, the goal of recovering causal
+[0:20:15] know, the goal of recovering causal effects becomes trivial.
+[0:20:18] effects becomes trivial. Right?
+[0:20:19] Right? So, to be more specific, so essentially,
+[0:20:23] So, to be more specific, so essentially, we have data set of this format, where
+[0:20:24] we have data set of this format, where we have X being your covariates, T the
+[0:20:27] we have X being your covariates, T the treatment, Y your outcome, right? And
+[0:20:30] treatment, Y your outcome, right? And then you also have,
+[0:20:31] then you also have, you know, we also have we use the
+[0:20:33] you know, we also have we use the notation W
+[0:20:35] notation W to also sometimes to denote the rescaled
+[0:20:37] to also sometimes to denote the rescaled version of treatment, because treatment
+[0:20:39] version of treatment, because treatment usually by one means treatment and zero
+[0:20:41] usually by one means treatment and zero means control.
+[0:20:43] means control. Here,
+[0:20:44] Here, if we use W and
+[0:20:46] if we use W and W equals to one means that it's
+[0:20:47] W equals to one means that it's treatment, and then W equals to minus
+[0:20:49] treatment, and then W equals to minus one means it's in the control group.
+[0:20:52] one means it's in the control group. Right? So, you have data sets in this
+[0:20:53] Right? So, you have data sets in this format.
+[0:20:55] format. And then you can define the true average
+[0:20:57] And then you can define the true average treatment effect, which is the
+[0:20:58] treatment effect, which is the difference between your expectation of
+[0:21:00] difference between your expectation of your different versions of potential
+[0:21:02] your different versions of potential outcomes.
+[0:21:04] outcomes. And then your optimal balancing no
+[0:21:06] And then your optimal balancing no causal effect estimator is defined as
+[0:21:08] causal effect estimator is defined as the following, right? So, which is
+[0:21:10] the following, right? So, which is basically the difference between a
+[0:21:12] basically the difference between a weighted sum of your treatment group and
+[0:21:14] weighted sum of your treatment group and your control, which is weighted by your
+[0:21:16] your control, which is weighted by your balancing weights.
+[0:21:18] balancing weights. So, this is your kind of estimator, and
+[0:21:20] So, this is your kind of estimator, and your goal is to derive a optimal like a
+[0:21:22] your goal is to derive a optimal like a optimal estimator
+[0:21:25] optimal estimator with the optimal weights.
+[0:21:28] with the optimal weights. So, that's the first concept I want want
+[0:21:29] So, that's the first concept I want want to cover.
+[0:21:31] to cover. And the second concept is about, you
+[0:21:34] And the second concept is about, you know, attention because
+[0:21:36] know, attention because our result involves understandings of
+[0:21:38] our result involves understandings of the basic attention mechanisms,
+[0:21:40] the basic attention mechanisms, especially used in, for example, large
+[0:21:42] especially used in, for example, large language models.
+[0:21:45] language models. So, in let's say in the language
+[0:21:47] So, in let's say in the language processing context,
+[0:21:49] processing context, usually you have a, you know,
+[0:21:52] usually you have a, you know, um
+[0:21:53] um context, right? You have your query, you
+[0:21:56] context, right? You have your query, you know, which could be the questions that
+[0:21:57] know, which could be the questions that you have asked to your, you know,
+[0:21:59] you have asked to your, you know, language models or simply a continuation
+[0:22:02] language models or simply a continuation of your conversation.
+[0:22:05] of your conversation. So, now your goal is trying to predict
+[0:22:07] So, now your goal is trying to predict predict the next token of your response.
+[0:22:10] predict the next token of your response. And attention mechanism can be think as
+[0:22:13] And attention mechanism can be think as a
+[0:22:14] a advanced way to achieve the goal of
+[0:22:16] advanced way to achieve the goal of predicting next token.
+[0:22:18] predicting next token. So, the way it works is trying to mimic
+[0:22:20] So, the way it works is trying to mimic the selective, you know, attention
+[0:22:22] the selective, you know, attention mechanism of a human or biological
+[0:22:24] mechanism of a human or biological systems where based on setting Sorry,
+[0:22:27] systems where based on setting Sorry, based on your query, it's going to look
+[0:22:29] based on your query, it's going to look back into each token or each word in
+[0:22:32] back into each token or each word in your
+[0:22:33] your uh you know,
+[0:22:34] uh you know, context
+[0:22:37] context in your history text, and then it will
+[0:22:39] in your history text, and then it will calculate some sort of similarity scores
+[0:22:42] calculate some sort of similarity scores between your query and each of your
+[0:22:45] between your query and each of your tokens in your context.
+[0:22:47] tokens in your context. So, then finally,
+[0:22:49] So, then finally, if you somehow choose to focus on only
+[0:22:52] if you somehow choose to focus on only those like a high importance tokens that
+[0:22:55] those like a high importance tokens that have higher scores, right, in terms of
+[0:22:57] have higher scores, right, in terms of similarities.
+[0:22:59] similarities. And then what happened next is that So,
+[0:23:01] And then what happened next is that So, you focus on this high importance tokens
+[0:23:05] you focus on this high importance tokens and then they will map into some sort of
+[0:23:07] and then they will map into some sort of high dimensional you know numerical
+[0:23:09] high dimensional you know numerical embeddings
+[0:23:11] embeddings that can be trainable.
+[0:23:13] that can be trainable. So as the core this embeddings the value
+[0:23:15] So as the core this embeddings the value tensors which is going to be very
+[0:23:17] tensors which is going to be very important
+[0:23:18] important in the rest of the talk.
+[0:23:20] in the rest of the talk. So what happened next is that you know
+[0:23:21] So what happened next is that you know all these values between all these high
+[0:23:23] all these values between all these high importance tokens will be weighted by
+[0:23:26] importance tokens will be weighted by all these similarity scores that you
+[0:23:27] all these similarity scores that you obtained before
+[0:23:29] obtained before into a single output
+[0:23:31] into a single output which is used to predict your next
+[0:23:34] which is used to predict your next token.
+[0:23:35] token. And you train the whole system you know
+[0:23:37] And you train the whole system you know end to end you know
+[0:23:39] end to end you know and predict next token of the response.
+[0:23:42] and predict next token of the response. So this is how attention works in
+[0:23:43] So this is how attention works in general but mathematically speaking it's
+[0:23:45] general but mathematically speaking it's very simple so you have a softmax
+[0:23:46] very simple so you have a softmax function
+[0:23:48] function which is actually your measurements of
+[0:23:50] which is actually your measurements of similarity between your query and your
+[0:23:53] similarity between your query and your key right? And then you re-weight your
+[0:23:56] key right? And then you re-weight your value matrix by your similarity scores
+[0:23:58] value matrix by your similarity scores and and obtain your kind of output.
+[0:24:07] So now we're talking about attention in language space but in our work we're
+[0:24:08] language space but in our work we're trying to focus on qualitative data
+[0:24:11] trying to focus on qualitative data let's say a table right?
+[0:24:13] let's say a table right? So in this context so we use attention
+[0:24:15] So in this context so we use attention in similar but different way.
+[0:24:17] in similar but different way. So instead of attending all language
+[0:24:18] So instead of attending all language tokens that are essentially we take the
+[0:24:20] tokens that are essentially we take the entire table data as the input.
+[0:24:23] entire table data as the input. And let's say that we want to
+[0:24:25] And let's say that we want to you know let's say we choose one
+[0:24:27] you know let's say we choose one particular row let's say the sixth
+[0:24:29] particular row let's say the sixth row six of some data you know we we
+[0:24:32] row six of some data you know we we treat it as query.
+[0:24:34] treat it as query. And all the other rows as context right?
+[0:24:39] And all the other rows as context right? And then somehow we can still calculate
+[0:24:41] And then somehow we can still calculate certain you know types of similarity
+[0:24:43] certain you know types of similarity scores
+[0:24:45] scores which will be used to re-weight your
+[0:24:48] which will be used to re-weight your value matrix of different rows
+[0:24:50] value matrix of different rows and we you treat different different
+[0:24:52] and we you treat different different rows as a separate token.
+[0:24:54] rows as a separate token. And by doing so you can use all the
+[0:24:57] And by doing so you can use all the contextual information of all these
+[0:24:59] contextual information of all these sorry other rows in your data sets to
+[0:25:01] sorry other rows in your data sets to predict um whatever quantities that you
+[0:25:04] predict um whatever quantities that you want. That's uh you know, relates to
+[0:25:07] want. That's uh you know, relates to your you know, row six of your query.
+[0:25:10] your you know, row six of your query. That's it.
+[0:25:12] That's it. So, given you know,
+[0:25:14] So, given you know, uh the backgrounds of these two
+[0:25:16] uh the backgrounds of these two preliminary concepts, now we are able to
+[0:25:18] preliminary concepts, now we are able to formally state our results.
+[0:25:20] formally state our results. Right?
+[0:25:21] Right? So, essentially this result say that you
+[0:25:23] So, essentially this result say that you can start from fitting a a a state
+[0:25:25] can start from fitting a a a state transformer-based model with a a a
+[0:25:28] transformer-based model with a a a proper attention mechanism. Basically,
+[0:25:30] proper attention mechanism. Basically, trying to attend over your um input uh
+[0:25:34] trying to attend over your um input uh quantitative data set.
+[0:25:36] quantitative data set. And then you challenge to your optimal
+[0:25:38] And then you challenge to your optimal solution. And what it does is that it's
+[0:25:41] solution. And what it does is that it's going to map your H-prime model. It's
+[0:25:42] going to map your H-prime model. It's going to map each row of your data uh
+[0:25:45] going to map each row of your data uh set to a certain kind of like a value
+[0:25:47] set to a certain kind of like a value tensors,
+[0:25:49] tensors, which are used to predict um
+[0:25:51] which are used to predict um a certain quantity. So, actually here
+[0:25:53] a certain quantity. So, actually here I'm really training the model to predict
+[0:25:54] I'm really training the model to predict W, which is essentially your risk
+[0:25:57] W, which is essentially your risk outcome.
+[0:25:59] outcome. And what happened next is that okay, now
+[0:26:01] And what happened next is that okay, now you can actually show that after
+[0:26:03] you can actually show that after training, so
+[0:26:05] training, so all these different uh like the value
+[0:26:07] all these different uh like the value tensors that you obtain,
+[0:26:09] tensors that you obtain, they are essentially directly, you know,
+[0:26:11] they are essentially directly, you know, um proportional to the optimal alpha
+[0:26:14] um proportional to the optimal alpha that we talked about before. So, we call
+[0:26:16] that we talked about before. So, we call that this alpha will be used to
+[0:26:18] that this alpha will be used to rebalance the data sets and kind of like
+[0:26:20] rebalance the data sets and kind of like uh
+[0:26:20] uh uh uh
+[0:26:21] uh uh produce causal effect estimations.
+[0:26:24] produce causal effect estimations. So, now
+[0:26:25] So, now uh this theory tells you that um
+[0:26:27] uh this theory tells you that um after training, this kind of value
+[0:26:29] after training, this kind of value tensors
+[0:26:30] tensors can be directly be used to re-weight
+[0:26:33] can be directly be used to re-weight your
+[0:26:34] your um kind of like the
+[0:26:36] um kind of like the data points. And it's will be optimal in
+[0:26:39] data points. And it's will be optimal in the sense that it will maximize or
+[0:26:41] the sense that it will maximize or minimize a certain causal prediction
+[0:26:43] minimize a certain causal prediction error that we will introduce later.
+[0:26:46] error that we will introduce later. But essentially, um
+[0:26:48] But essentially, um more mathematically speaking, so what
+[0:26:50] more mathematically speaking, so what we're trying to say is that uh
+[0:26:52] we're trying to say is that uh technically, you are using so we call
+[0:26:54] technically, you are using so we call that we have a softmax
+[0:26:56] that we have a softmax query
+[0:26:57] query context. So here is your kind of like
+[0:27:00] context. So here is your kind of like your attention here.
+[0:27:02] your attention here. Right? So now, you have wrapped your
+[0:27:04] Right? So now, you have wrapped your attention using a hinge loss, right?
+[0:27:08] attention using a hinge loss, right? Which is a classification loss.
+[0:27:09] Which is a classification loss. And also we have another loss term,
+[0:27:11] And also we have another loss term, which is this term here is a kind of
+[0:27:14] which is this term here is a kind of like a
+[0:27:15] like a um
+[0:27:16] um um
+[0:27:17] um representation term, which assume which
+[0:27:20] representation term, which assume which try to encourage your learned
+[0:27:23] try to encourage your learned like the balance as to, you know, sum up
+[0:27:26] like the balance as to, you know, sum up to one, let's say.
+[0:27:28] to one, let's say. So in the end, you can directly read off
+[0:27:30] So in the end, you can directly read off your optimal causal balancing weights
+[0:27:32] your optimal causal balancing weights by this particular, you know,
+[0:27:35] by this particular, you know, uh equation.
+[0:27:36] uh equation. And your estimations of causal effects
+[0:27:39] And your estimations of causal effects can be done trivially by just
+[0:27:40] can be done trivially by just subtracting
+[0:27:42] subtracting the related uh expectation of your
+[0:27:44] the related uh expectation of your conditional outcomes.
+[0:27:49] So now
+[0:27:50] now perhaps I just talk about a sketch of
+[0:27:52] perhaps I just talk about a sketch of the proof of how we arrive this result
+[0:27:56] the proof of how we arrive this result on a higher level, right?
+[0:27:57] on a higher level, right? So recall that we have some data sets of
+[0:28:00] So recall that we have some data sets of this particular format. Uh we have X, T,
+[0:28:02] this particular format. Uh we have X, T, and Y corresponding to the outcome. We
+[0:28:04] and Y corresponding to the outcome. We have a ground truth ATEs, and we have
+[0:28:07] have a ground truth ATEs, and we have our auto balancing causal effect
+[0:28:09] our auto balancing causal effect estimator in this
+[0:28:10] estimator in this uh form, right?
+[0:28:13] uh form, right? And then what's happening next is that,
+[0:28:15] And then what's happening next is that, you know, our goal is to try to minimize
+[0:28:17] you know, our goal is to try to minimize the expectation of our causal error,
+[0:28:20] the expectation of our causal error, which is the difference between our, you
+[0:28:21] which is the difference between our, you know, causal
+[0:28:22] know, causal uh effect prediction and the ground
+[0:28:24] uh effect prediction and the ground truth causal effect.
+[0:28:26] truth causal effect. And oh, one thing here I'm missing is
+[0:28:28] And oh, one thing here I'm missing is actually uh it should be a absolute uh
+[0:28:30] actually uh it should be a absolute uh you know, value, you know, on your
+[0:28:32] you know, value, you know, on your error, right?
+[0:28:34] error, right? So your goal is now to minimize that,
+[0:28:36] So your goal is now to minimize that, but the difficulty here is that you
+[0:28:38] but the difficulty here is that you don't actually know the ground truth
+[0:28:40] don't actually know the ground truth causal effect because, of course, it's
+[0:28:42] causal effect because, of course, it's the well-known difficulty of causal
+[0:28:45] the well-known difficulty of causal inference, where given any, you know, uh
+[0:28:48] inference, where given any, you know, uh fixed subject, right? So, uh uh like one
+[0:28:51] fixed subject, right? So, uh uh like one of these kind of versions of fresh
+[0:28:53] of these kind of versions of fresh outcomes will be unknown to us, right?
+[0:28:56] outcomes will be unknown to us, right? So, how do we deal with that?
+[0:28:58] So, how do we deal with that? So, one common strategy is that, you
+[0:29:00] So, one common strategy is that, you know, now let's say that you have your
+[0:29:03] know, now let's say that you have your like fresh outcome at zero, which is the
+[0:29:05] like fresh outcome at zero, which is the control group, being uh unknown.
+[0:29:08] control group, being uh unknown. And then what's happening is that um you
+[0:29:10] And then what's happening is that um you can essentially assume this uh function
+[0:29:14] can essentially assume this uh function belongs to a function class called the
+[0:29:17] belongs to a function class called the uh reproducing kernel Hilbert space
+[0:29:20] uh reproducing kernel Hilbert space uh with a feature map. So, it's a
+[0:29:22] uh with a feature map. So, it's a specific uh you know, very useful,
+[0:29:24] specific uh you know, very useful, well-expressive, you know, function
+[0:29:26] well-expressive, you know, function class.
+[0:29:28] class. Um and then assuming that your um you
+[0:29:31] Um and then assuming that your um you know, missing outcomes from this
+[0:29:33] know, missing outcomes from this function class,
+[0:29:35] function class, and what it can do instead is that to
+[0:29:38] and what it can do instead is that to minimize the worst-case error by first
+[0:29:40] minimize the worst-case error by first doing the you know, supremum over your
+[0:29:44] doing the you know, supremum over your uh all the possible uh outcomes, you
+[0:29:46] uh all the possible uh outcomes, you know, F in the function class,
+[0:29:49] know, F in the function class, and here your ground truth is actually,
+[0:29:51] and here your ground truth is actually, you know, a function of your F.
+[0:29:54] you know, a function of your F. And then you minimize your uh you know,
+[0:29:57] And then you minimize your uh you know, optimal answer makes alpha.
+[0:29:59] optimal answer makes alpha. So, in this case, um one can show that
+[0:30:02] So, in this case, um one can show that there will exist a lambda factor such
+[0:30:05] there will exist a lambda factor such that this original kind of like
+[0:30:07] that this original kind of like worst-case error will be reduced to the
+[0:30:09] worst-case error will be reduced to the following optimization problem,
+[0:30:12] following optimization problem, which is very similar to support vector
+[0:30:13] which is very similar to support vector machine problems where you do this kind
+[0:30:15] machine problems where you do this kind of like the uh
+[0:30:17] of like the uh like the optimization under certain
+[0:30:18] like the optimization under certain constraints, and you also can define a
+[0:30:21] constraints, and you also can define a some type of kernel matrices, right?
+[0:30:25] some type of kernel matrices, right? And the exact form of this doesn't
+[0:30:26] And the exact form of this doesn't really matter, but that because it is
+[0:30:28] really matter, but that because it is just a
+[0:30:29] just a uh intermediate result.
+[0:30:31] uh intermediate result. But then you can further show that this,
+[0:30:33] But then you can further show that this, you know, SVM kind of like optimization
+[0:30:35] you know, SVM kind of like optimization problem,
+[0:30:36] problem, so there will exist a feature map, you
+[0:30:39] so there will exist a feature map, you know, fee,
+[0:30:41] know, fee, such that you know, so uh recall that
+[0:30:45] such that you know, so uh recall that this type of
+[0:30:46] this type of optimization problems in SVM contest
+[0:30:49] optimization problems in SVM contest it's usually going to be let's say a
+[0:30:52] it's usually going to be let's say a dual problem, right? So, it's going to
+[0:30:54] dual problem, right? So, it's going to have a
+[0:30:55] have a a primal version of this optimization
+[0:30:58] a primal version of this optimization problem.
+[0:30:59] problem. So, then you can show that you know,
+[0:31:01] So, then you can show that you know, there
+[0:31:02] there there is a you know,
+[0:31:05] there is a you know, it's a primal form we have the same
+[0:31:07] it's a primal form we have the same optimal solution as the following
+[0:31:10] optimal solution as the following optimization problem.
+[0:31:12] optimization problem. Which is essentially optimizing
+[0:31:14] Which is essentially optimizing the objective that we talked about
+[0:31:17] the objective that we talked about before in our duality result where you
+[0:31:20] before in our duality result where you have your hinge loss over your attention
+[0:31:23] have your hinge loss over your attention model.
+[0:31:24] model. And you have your
+[0:31:25] And you have your a regularization loss.
+[0:31:28] a regularization loss. And here, so your V is actually defined
+[0:31:32] And here, so your V is actually defined by this equation here. Which is actually
+[0:31:36] by this equation here. Which is actually it shows you that you know, under the
+[0:31:38] it shows you that you know, under the optimal solution your value tensor is
+[0:31:40] optimal solution your value tensor is going to be
+[0:31:42] going to be a function of your alpha.
+[0:31:44] a function of your alpha. And your N W and also your X, right?
+[0:31:48] And your N W and also your X, right? And your H here is just a normalizer.
+[0:31:52] And your H here is just a normalizer. So, what this essentially means
+[0:31:53] So, what this essentially means intuitively is that
+[0:31:55] intuitively is that so in practice, both your value tensors
+[0:31:58] so in practice, both your value tensors and your key tensors in your attention
+[0:32:01] and your key tensors in your attention network can be parameterized as as a
+[0:32:03] network can be parameterized as as a function of your input data. Which is a
+[0:32:06] function of your input data. Which is a set of you know, X.
+[0:32:13] So, given this, so then you can train your attention based model on
+[0:32:16] your attention based model on your data set.
+[0:32:18] your data set. And then applying hinge loss and your
+[0:32:20] And then applying hinge loss and your regularization term, then then you can
+[0:32:22] regularization term, then then you can arrive at your um
+[0:32:25] arrive at your um a trained model in which you can read
+[0:32:27] a trained model in which you can read off your optimal balance weights.
+[0:32:29] off your optimal balance weights. Which is shown by this you know,
+[0:32:34] uh formulation where in which we call this
+[0:32:36] formulation where in which we call this method causal inference with attention
+[0:32:38] method causal inference with attention or Cena.
+[0:32:40] or Cena. So, start from a large data and then you
+[0:32:42] So, start from a large data and then you pass your observational data to your
+[0:32:45] pass your observational data to your pre-trained attention model
+[0:32:47] pre-trained attention model uh that is trained using this
+[0:32:49] uh that is trained using this particular, you know, loss.
+[0:32:51] particular, you know, loss. And then this pre-trained model will
+[0:32:53] And then this pre-trained model will produce a a alpha value uh in the
+[0:32:56] produce a a alpha value uh in the zero-shot manner, which you will be used
+[0:32:59] zero-shot manner, which you will be used to reweight your observation data.
+[0:33:01] to reweight your observation data. And after reweighting, you're going to
+[0:33:03] And after reweighting, you're going to debias your data and then you can
+[0:33:05] debias your data and then you can directly uh estimate the causal effects
+[0:33:07] directly uh estimate the causal effects without further, you know, uh you know,
+[0:33:09] without further, you know, uh you know, uh model fitting.
+[0:33:11] uh model fitting. So, so everything can be implemented by
+[0:33:13] So, so everything can be implemented by a transformer-like architecture, if you
+[0:33:15] a transformer-like architecture, if you like.
+[0:33:16] like. So, which essentially in terms of
+[0:33:18] So, which essentially in terms of implementation is going to be very um uh
+[0:33:21] implementation is going to be very um uh simple. So, we just do amortization,
+[0:33:23] simple. So, we just do amortization, right? Because we know that for each
+[0:33:25] right? Because we know that for each data set we have, so it's going to be a
+[0:33:27] data set we have, so it's going to be a corresponding optimal uh unique optimal
+[0:33:31] corresponding optimal uh unique optimal balancing weights.
+[0:33:32] balancing weights. And then basically what we try to do in
+[0:33:34] And then basically what we try to do in practice in our implementation is that
+[0:33:36] practice in our implementation is that we use this kind of like attention or or
+[0:33:39] we use this kind of like attention or or transformer-based architecture to
+[0:33:41] transformer-based architecture to amortize all this kind of like
+[0:33:42] amortize all this kind of like knowledge, right? So, trying to uh like
+[0:33:45] knowledge, right? So, trying to uh like the in general predict the underlying,
+[0:33:48] the in general predict the underlying, you know, uh balancing weights given any
+[0:33:51] you know, uh balancing weights given any data set.
+[0:33:52] data set. So, after training, so you can
+[0:33:54] So, after training, so you can essentially um directly read off the
+[0:33:56] essentially um directly read off the weights uh
+[0:33:57] weights uh without, you know, um
+[0:33:59] without, you know, um any model retraining using a single
+[0:34:01] any model retraining using a single forward pass of your pre-trained model.
+[0:34:04] forward pass of your pre-trained model. So, pretty much in the similar setting
+[0:34:07] So, pretty much in the similar setting as other type of balancing models.
+[0:34:11] as other type of balancing models. So, now the main takeaway here I'm
+[0:34:13] So, now the main takeaway here I'm trying trying to talk about is that So,
+[0:34:15] trying trying to talk about is that So, we've shown you one possible recipes to
+[0:34:17] we've shown you one possible recipes to build um causal-aware model.
+[0:34:20] build um causal-aware model. This is trying to start by kind of like
+[0:34:22] This is trying to start by kind of like building the connections between
+[0:34:23] building the connections between attention problem and causal inference
+[0:34:25] attention problem and causal inference problem. And then we can directly apply
+[0:34:27] problem. And then we can directly apply causal
+[0:34:28] causal uh sorry, attention or transformer
+[0:34:30] uh sorry, attention or transformer architecture on your quantitative data
+[0:34:33] architecture on your quantitative data set. That's
+[0:34:34] set. That's a much friendlier specific loss and
+[0:34:36] a much friendlier specific loss and mechanism. And then you can estimate
+[0:34:39] mechanism. And then you can estimate your like causal effects in the real
+[0:34:41] your like causal effects in the real world.
+[0:34:46] So, now so far we've shown you how it works. And then
+[0:34:48] we've shown you how it works. And then we do have some experiments that shows
+[0:34:51] we do have some experiments that shows how well it works.
+[0:34:52] how well it works. So, we will have more kind of like a
+[0:34:54] So, we will have more kind of like a comprehensive experiments that we have
+[0:34:57] comprehensive experiments that we have in our paper. But I'm going to highlight
+[0:34:59] in our paper. But I'm going to highlight a few of them.
+[0:35:02] a few of them. So,
+[0:35:03] So, uh the first
+[0:35:04] uh the first very successful application or our
+[0:35:06] very successful application or our experiment is that um
+[0:35:08] experiment is that um so a a it's it's a causal machine
+[0:35:11] so a a it's it's a causal machine benchmark that we have, which is which
+[0:35:13] benchmark that we have, which is which contains you know, a thousands of
+[0:35:15] contains you know, a thousands of different synthetic tasks
+[0:35:17] different synthetic tasks that can be used to evaluate the
+[0:35:19] that can be used to evaluate the performance of causal bench models. Um
+[0:35:21] performance of causal bench models. Um so, the idea here is to trying to
+[0:35:23] so, the idea here is to trying to simulate, you know, how this type of
+[0:35:26] simulate, you know, how this type of causal bench models will be used in
+[0:35:28] causal bench models will be used in real-life scenarios. So, we start from,
+[0:35:31] real-life scenarios. So, we start from, you know, um you know, synthesizing
+[0:35:34] you know, um you know, synthesizing let's say 5,000
+[0:35:36] let's say 5,000 uh or even more synthetic tasks. So,
+[0:35:38] uh or even more synthetic tasks. So, which is defined by, you know, you first
+[0:35:40] which is defined by, you know, you first randomly generalize different causal
+[0:35:42] randomly generalize different causal graphs, which corresponds to different
+[0:35:44] graphs, which corresponds to different causal mechanisms, right? So, then we
+[0:35:46] causal mechanisms, right? So, then we have different you know, you know,
+[0:35:48] have different you know, you know, functions. You have you have different
+[0:35:51] functions. You have you have different treatments and outcomes, right?
+[0:35:53] treatments and outcomes, right? So, you have
+[0:35:55] So, you have all these type of
+[0:35:57] all these type of observational data sets from these
+[0:35:59] observational data sets from these different systems without the knowledge
+[0:36:00] different systems without the knowledge of the underlying causal graphs. And
+[0:36:03] of the underlying causal graphs. And then you use only those observational
+[0:36:05] then you use only those observational data sets to pre-train our model.
+[0:36:08] data sets to pre-train our model. And then we also generate another 1,000
+[0:36:10] And then we also generate another 1,000 unseen you know, synthetic tasks which
+[0:36:12] unseen you know, synthetic tasks which have different causal graphs and
+[0:36:14] have different causal graphs and different causal mechanisms. And then
+[0:36:16] different causal mechanisms. And then during test time you can feed them into
+[0:36:18] during test time you can feed them into um our causal bench model.
+[0:36:22] um our causal bench model. And then
+[0:36:23] And then um during we can actually predict make
+[0:36:26] um during we can actually predict make causal predictions about their causal
+[0:36:27] causal predictions about their causal effects.
+[0:36:28] effects. And then, finally, you can do evaluation
+[0:36:31] And then, finally, you can do evaluation because
+[0:36:32] because uh, all of this often that and you do
+[0:36:34] uh, all of this often that and you do have access to
+[0:36:35] have access to the ground truth AD.
+[0:36:38] the ground truth AD. So, um, so we can focus on perhaps the
+[0:36:41] So, um, so we can focus on perhaps the like the second column here, which is
+[0:36:42] like the second column here, which is the 5,000 data set that we want to
+[0:36:44] the 5,000 data set that we want to highlight
+[0:36:45] highlight here.
+[0:36:46] here. And then uh, so we do actually achieve
+[0:36:49] And then uh, so we do actually achieve the state of our performance. So, when
+[0:36:51] the state of our performance. So, when compared to a a wide range of different
+[0:36:53] compared to a a wide range of different uh, you know, state of the art methods,
+[0:36:55] uh, you know, state of the art methods, right? And uh, one thing I would want to
+[0:36:57] right? And uh, one thing I would want to emphasize here is that all the other
+[0:36:59] emphasize here is that all the other methods, right? They are trained on a
+[0:37:01] methods, right? They are trained on a particular set basis. Meaning that when
+[0:37:03] particular set basis. Meaning that when you have a different uh, you know, uh,
+[0:37:05] you have a different uh, you know, uh, test data sets, right? You need to
+[0:37:07] test data sets, right? You need to retrain or re-estimate in the entire
+[0:37:09] retrain or re-estimate in the entire thing, right? Like Dragon Net, ResNet,
+[0:37:12] thing, right? Like Dragon Net, ResNet, or machine learning. So, you just do the
+[0:37:14] or machine learning. So, you just do the training all over again.
+[0:37:16] training all over again. But yet, uh, our method is still able to
+[0:37:18] But yet, uh, our method is still able to kind of in general. So, we have
+[0:37:20] kind of in general. So, we have different versions, but in general, we
+[0:37:21] different versions, but in general, we can still do a pretty much very good
+[0:37:25] can still do a pretty much very good job.
+[0:37:26] job. And even considering that our model is
+[0:37:28] And even considering that our model is actually a very lightweight one and can
+[0:37:30] actually a very lightweight one and can be trained in a matter of uh, days.
+[0:37:34] be trained in a matter of uh, days. So, um, and what's more interesting is
+[0:37:36] So, um, and what's more interesting is that we've shown its capability to
+[0:37:38] that we've shown its capability to generalize to, you know, real world data
+[0:37:40] generalize to, you know, real world data sets. So, meaning that you you pretrain
+[0:37:42] sets. So, meaning that you you pretrain this model
+[0:37:43] this model on a period of synthetic assets, right?
+[0:37:46] on a period of synthetic assets, right? And then, we can take a real world
+[0:37:47] And then, we can take a real world asset, which is the ACIC data set,
+[0:37:50] asset, which is the ACIC data set, typically used for uh, like causal
+[0:37:52] typically used for uh, like causal benchmarking.
+[0:37:53] benchmarking. And then, you you just perform causal
+[0:37:55] And then, you you just perform causal inference there shot without, you know,
+[0:37:58] inference there shot without, you know, fine-tuning the model.
+[0:37:59] fine-tuning the model. And as you can see that we indeed um,
+[0:38:02] And as you can see that we indeed um, you know,
+[0:38:03] you know, still achieve the, you know, the best
+[0:38:05] still achieve the, you know, the best performance across different uh, um,
+[0:38:08] performance across different uh, um, uh, models, even though the other ones,
+[0:38:10] uh, models, even though the other ones, they are all already tuned on this ACIC
+[0:38:13] they are all already tuned on this ACIC data set.
+[0:38:15] data set. So, that's uh, you know, really um,
+[0:38:17] So, that's uh, you know, really um, interesting result.
+[0:38:19] interesting result. And of course, finally, um, so one
+[0:38:21] And of course, finally, um, so one benefit that you can get from this type
+[0:38:23] benefit that you can get from this type model is of course inference time
+[0:38:24] model is of course inference time because the
+[0:38:25] because the So imagine that you want to engage in in
+[0:38:28] So imagine that you want to engage in in a very, you know, active, let's say,
+[0:38:30] a very, you know, active, let's say, online advertisement types of, you know,
+[0:38:33] online advertisement types of, you know, causal inference task where you need to
+[0:38:34] causal inference task where you need to change or retrain your adapt your models
+[0:38:37] change or retrain your adapt your models uh like the
+[0:38:39] uh like the all the time.
+[0:38:40] all the time. And it's going to be a burden for for
+[0:38:41] And it's going to be a burden for for engineering. But with this type of
+[0:38:43] engineering. But with this type of pre-trained causal inference machines,
+[0:38:45] pre-trained causal inference machines, what we can do is that we can achieve a
+[0:38:47] what we can do is that we can achieve a huge, you know, reduction of the
+[0:38:49] huge, you know, reduction of the inference time because everything is
+[0:38:50] inference time because everything is just forward pass. You don't need to
+[0:38:52] just forward pass. You don't need to retrain the model, right?
+[0:38:53] retrain the model, right? So this will might lead to a number of
+[0:38:55] So this will might lead to a number of different applications.
+[0:38:58] different applications. So for the takeaway of the experiment
+[0:39:01] So for the takeaway of the experiment part is that
+[0:39:02] part is that it kind of already validates
+[0:39:04] it kind of already validates the duality that we proposed, which is
+[0:39:06] the duality that we proposed, which is causal inference attention, because in
+[0:39:08] causal inference attention, because in fact it works in practice.
+[0:39:10] fact it works in practice. And
+[0:39:11] And it can perform causal task
+[0:39:14] it can perform causal task pretty good and also
+[0:39:16] pretty good and also the accuracy is state of the art
+[0:39:19] the accuracy is state of the art across different, you know, popular
+[0:39:22] across different, you know, popular benchmark baselines.
+[0:39:24] benchmark baselines. And it's just foundational. So it can do
+[0:39:26] And it's just foundational. So it can do zero-shot inference and it can
+[0:39:27] zero-shot inference and it can generalize to unseen data sets and which
+[0:39:30] generalize to unseen data sets and which will also help to
+[0:39:31] will also help to become a, you know, massive inference
+[0:39:33] become a, you know, massive inference time saver.
+[0:39:39] So finally, I just want to spend a few minutes to talk about extensions. So
+[0:39:41] minutes to talk about extensions. So because currently, as you can see that
+[0:39:43] because currently, as you can see that there's a clear limitation of this work,
+[0:39:45] there's a clear limitation of this work, which is that it focus on estimating,
+[0:39:47] which is that it focus on estimating, you know, average treatment effects,
+[0:39:49] you know, average treatment effects, which is just a single scalar value for,
+[0:39:50] which is just a single scalar value for, you know, different data sets.
+[0:39:53] you know, different data sets. So for our future research, we're
+[0:39:55] So for our future research, we're working on generalizing to not just
+[0:39:57] working on generalizing to not just ATEs, but also individual
+[0:40:00] ATEs, but also individual treatment effects,
+[0:40:01] treatment effects, counterfactuals, and
+[0:40:03] counterfactuals, and of course discovery.
+[0:40:04] of course discovery. So more recently, we do have a lot of
+[0:40:06] So more recently, we do have a lot of work, which is called the fixed point
+[0:40:07] work, which is called the fixed point approach for causal judgment modeling,
+[0:40:09] approach for causal judgment modeling, which is under ICML review currently. So
+[0:40:12] which is under ICML review currently. So what it essentially does is that, you
+[0:40:14] what it essentially does is that, you know, as opposed to the potential
+[0:40:15] know, as opposed to the potential outcome framework that we're, you know,
+[0:40:17] outcome framework that we're, you know, using in this particular
+[0:40:19] using in this particular uh uh
+[0:40:20] uh uh talk. So, now we generalize the the
+[0:40:24] talk. So, now we generalize the the ideas uh you know, to
+[0:40:26] ideas uh you know, to um apply to this kind of like the um
+[0:40:29] um apply to this kind of like the um uh the structural causal
+[0:40:31] uh the structural causal uh models uh formalism of causality. And
+[0:40:34] uh models uh formalism of causality. And we arrive at what we call the fixed
+[0:40:35] we arrive at what we call the fixed point approach,
+[0:40:37] point approach, uh which is the alternative viewpoint
+[0:40:39] uh which is the alternative viewpoint for structural causal models, under
+[0:40:40] for structural causal models, under which you can map your counterfactual
+[0:40:43] which you can map your counterfactual estimations and causal discovery to like
+[0:40:46] estimations and causal discovery to like a new type of attention models.
+[0:40:49] a new type of attention models. And then
+[0:40:50] And then um uh so, we do and also we have uh like
+[0:40:52] um uh so, we do and also we have uh like the by far the most uh kind of like
+[0:40:54] the by far the most uh kind of like general identification results of
+[0:40:57] general identification results of counterfactuals models uh counterfactual
+[0:40:59] counterfactuals models uh counterfactual distributions, you know, given graphs um
+[0:41:02] distributions, you know, given graphs um you know, of your uh models. But
+[0:41:03] you know, of your uh models. But essentially, I I think that the point
+[0:41:05] essentially, I I think that the point I'm trying to say is that we are working
+[0:41:07] I'm trying to say is that we are working on different types of uh
+[0:41:09] on different types of uh generalizations.
+[0:41:11] generalizations. And uh so, this work this fixed point uh
+[0:41:13] And uh so, this work this fixed point uh model is called FIB.
+[0:41:15] model is called FIB. So, uh finally, just want to end with
+[0:41:18] So, uh finally, just want to end with the roadmap of our future research. So,
+[0:41:20] the roadmap of our future research. So, now we have seen in this talk trying to
+[0:41:22] now we have seen in this talk trying to predict effects of actions in the fold
+[0:41:25] predict effects of actions in the fold of work we have FIB, which is the
+[0:41:27] of work we have FIB, which is the structural causal model framework in the
+[0:41:28] structural causal model framework in the observational setting and trying to
+[0:41:30] observational setting and trying to learn the causal mechanisms and causal
+[0:41:32] learn the causal mechanisms and causal graphs um everything to all together.
+[0:41:35] graphs um everything to all together. And but these are still like kind of
+[0:41:37] And but these are still like kind of like uh in a sense toyish models.
+[0:41:41] like uh in a sense toyish models. So, in the end we want to kind of like
+[0:41:44] So, in the end we want to kind of like uh generalize and scale up to a larger
+[0:41:47] uh generalize and scale up to a larger and more kind of like uh multi-modality
+[0:41:51] and more kind of like uh multi-modality uh models uh to build what we can say
+[0:41:53] uh models uh to build what we can say causal world models in the end.
+[0:41:55] causal world models in the end. Right?
+[0:41:56] Right? So, I I think that's basically the end
+[0:41:59] So, I I think that's basically the end of this talk. So, we're trying to push
+[0:42:01] of this talk. So, we're trying to push the boundaries of both areas from causal
+[0:42:03] the boundaries of both areas from causal machine learning and modern
+[0:42:04] machine learning and modern like AI in terms of causal models and to
+[0:42:07] like AI in terms of causal models and to the join them together to form a new
+[0:42:10] the join them together to form a new kind of a of model, which is a causal
+[0:42:11] kind of a of model, which is a causal graph model.
+[0:42:13] graph model. And uh thanks everyone for your time for
+[0:42:15] And uh thanks everyone for your time for listening and kudos to all my
+[0:42:17] listening and kudos to all my collaborators for this paper.
+[0:42:19] collaborators for this paper. Okay, thank you. So, I guess now we're
+[0:42:21] Okay, thank you. So, I guess now we're going to
+[0:42:22] going to hand over to Jachi
+[0:42:25] hand over to Jachi about on the the discussion. Yeah.
+[0:42:27] about on the the discussion. Yeah. Thanks thanks for the talk. Can can I
+[0:42:29] Thanks thanks for the talk. Can can I ask a quick question before we go to
+[0:42:31] ask a quick question before we go to discussion? Yeah, for sure.
+[0:42:33] discussion? Yeah, for sure. So, for the training data I was like so
+[0:42:35] So, for the training data I was like so you currently seem to use synthetic
+[0:42:37] you currently seem to use synthetic data, right? If you use synthetic data,
+[0:42:39] data, right? If you use synthetic data, then the model will probably only learn
+[0:42:42] then the model will probably only learn things that we already know with other
+[0:42:44] things that we already know with other procedures how to compute the ground
+[0:42:46] procedures how to compute the ground truth, right? So, for example, we know
+[0:42:48] truth, right? So, for example, we know like ignorability based you can do
+[0:42:50] like ignorability based you can do re-weighting of AIPW or whatever to
+[0:42:52] re-weighting of AIPW or whatever to compute the causal effect. So, is the
+[0:42:55] compute the causal effect. So, is the goal to make that richer? Or you could
+[0:42:57] goal to make that richer? Or you could also if you use real-world data, then
+[0:42:59] also if you use real-world data, then it's a bit trickier, right? Because if
+[0:43:01] it's a bit trickier, right? Because if you use observational data, you don't
+[0:43:02] you use observational data, you don't know the ground truth. So,
+[0:43:04] know the ground truth. So, if you use experimental data, then you
+[0:43:06] if you use experimental data, then you don't need the re-weighting anymore. So,
+[0:43:08] don't need the re-weighting anymore. So, like if you think about like, you know,
+[0:43:11] like if you think about like, you know, like making this broader and larger,
+[0:43:13] like making this broader and larger, like how how do you do that? Like data
+[0:43:15] like how how do you do that? Like data Oh, yeah, I think that's a really good
+[0:43:17] Oh, yeah, I think that's a really good question. So, perhaps I can talk about
+[0:43:19] question. So, perhaps I can talk about it more because actually this is also
+[0:43:21] it more because actually this is also one of the points I guess we want to
+[0:43:22] one of the points I guess we want to discuss later on. So, I guess for this
+[0:43:24] discuss later on. So, I guess for this particular one, I guess that I just want
+[0:43:26] particular one, I guess that I just want to clarify that. So, in our model, I
+[0:43:29] to clarify that. So, in our model, I think that at some point so when we talk
+[0:43:32] think that at some point so when we talk about the training
+[0:43:33] about the training Oh,
+[0:43:35] Oh, yeah, here. So, actually so we're not
+[0:43:38] yeah, here. So, actually so we're not actually so we actually there are two
+[0:43:39] actually so we actually there are two versions of the model, right? The first
+[0:43:41] versions of the model, right? The first version is that so you just you know,
+[0:43:43] version is that so you just you know, everything on supervised learning,
+[0:43:45] everything on supervised learning, meaning that you don't have access to
+[0:43:46] meaning that you don't have access to experimental data.
+[0:43:48] experimental data. So, you don't learn to actually recover
+[0:43:51] So, you don't learn to actually recover the the ground truth because you don't
+[0:43:52] the the ground truth because you don't have the ground truth. So, that's the
+[0:43:54] have the ground truth. So, that's the kind of beauty of this theoretical
+[0:43:56] kind of beauty of this theoretical results because you just fit to your
+[0:43:58] results because you just fit to your kind of like you predict your kind of
+[0:44:00] kind of like you predict your kind of like your your let's say next token in
+[0:44:02] like your your let's say next token in in this case your W using a value of
+[0:44:06] in this case your W using a value of And then in this case basically, you
+[0:44:08] And then in this case basically, you don't have access to the ground truth
+[0:44:10] don't have access to the ground truth causal effects or the
+[0:44:13] causal effects or the the optimal ways that you have. So, so
+[0:44:16] the optimal ways that you have. So, so so I guess that's the general idea I'm
+[0:44:18] so I guess that's the general idea I'm trying to push. So, is that
+[0:44:21] trying to push. So, is that although we're moving to functional
+[0:44:22] although we're moving to functional models where you're trying to relax
+[0:44:24] models where you're trying to relax certain requirements of, you know,
+[0:44:25] certain requirements of, you know, theory or application theory, but we
+[0:44:27] theory or application theory, but we still like in perfect scenario, still
+[0:44:29] still like in perfect scenario, still want your model to work perfectly well
+[0:44:31] want your model to work perfectly well even without access to ground truth.
+[0:44:33] even without access to ground truth. And then and then on top of that, you
+[0:44:35] And then and then on top of that, you might be optional to add some kind of
+[0:44:37] might be optional to add some kind of like supervision signal where you do
+[0:44:39] like supervision signal where you do have, you know, a ground truth that's a
+[0:44:41] have, you know, a ground truth that's a ATE, and this is the other version of
+[0:44:43] ATE, and this is the other version of the model, so which correspond to let's
+[0:44:44] the model, so which correspond to let's say um
+[0:44:47] say um here, so we have a ZS, which is
+[0:44:49] here, so we have a ZS, which is zero-shot, right? So, which is purely
+[0:44:51] zero-shot, right? So, which is purely unsupervised. And then we have like a
+[0:44:54] unsupervised. And then we have like a ZSS. So, this this S means supervised,
+[0:44:58] ZSS. So, this this S means supervised, which means that you do have a certain
+[0:45:00] which means that you do have a certain access to the ground truth of your your
+[0:45:02] access to the ground truth of your your your
+[0:45:03] your causal effect estimations. So, as you
+[0:45:05] causal effect estimations. So, as you can see, even without access to the
+[0:45:07] can see, even without access to the ground truth, it's still working very
+[0:45:08] ground truth, it's still working very well, but with that, you can even be
+[0:45:11] well, but with that, you can even be better. So, I guess that's the whole
+[0:45:12] better. So, I guess that's the whole kind of idea behind this work. Okay,
+[0:45:14] kind of idea behind this work. Okay, thanks. So, just one quick comment, but
+[0:45:17] thanks. So, just one quick comment, but let me control that also. Like if if you
+[0:45:19] let me control that also. Like if if you don't have access to the ground truth,
+[0:45:21] don't have access to the ground truth, then there might be many graphs like
+[0:45:22] then there might be many graphs like that represent different causal effects
+[0:45:24] that represent different causal effects that give you exactly the same data set.
+[0:45:25] that give you exactly the same data set. So, in that case, I'm not sure
+[0:45:27] So, in that case, I'm not sure how you can learn, but we can shout that
+[0:45:29] how you can learn, but we can shout that for later. Maybe let's just switch
+[0:45:30] for later. Maybe let's just switch discussion. Okay, yeah. Okay, okay,
+[0:45:33] discussion. Okay, yeah. Okay, okay, thank you.
+[0:45:39] So, I think there are a few remaining questions in the chat,
+[0:45:41] questions in the chat, but I will first
+[0:45:43] but I will first go through my discussion slides, and
+[0:45:45] go through my discussion slides, and then maybe
+[0:45:46] then maybe Charles and I can try to
+[0:45:49] Charles and I can try to tackle the discussion as well as the
+[0:45:50] tackle the discussion as well as the questions together.
+[0:45:53] questions together. Sounds good for sharing.
+[0:45:55] Sounds good for sharing. Okay.
+[0:45:55] Okay. Yeah. If you stop sharing, I can share.
+[0:45:58] Yeah. If you stop sharing, I can share. Okay, Dr. Shaw, I guess. Yeah.
+[0:46:10] Yeah. Thanks.
+[0:46:18] All right. Um so thanks Chao for the amazing talk.
+[0:46:23] Um so thanks Chao for the amazing talk. Um I'll be the discussant today. My name
+[0:46:24] Um I'll be the discussant today. My name is Jachi. I'm a PhD student at MIT and I
+[0:46:27] is Jachi. I'm a PhD student at MIT and I did this work with Chao while I was
+[0:46:29] did this work with Chao while I was interning at Microsoft last summer.
+[0:46:32] interning at Microsoft last summer. So I thought it would be helpful to
+[0:46:34] So I thought it would be helpful to start the discussion by presenting a few
+[0:46:37] start the discussion by presenting a few summary slides of the key ideas behind
+[0:46:40] summary slides of the key ideas behind this work.
+[0:46:41] this work. Mainly like the key ideas of how I would
+[0:46:43] Mainly like the key ideas of how I would explain to someone why the method works.
+[0:46:46] explain to someone why the method works. Um so the main goal of Sina is to
+[0:46:48] Um so the main goal of Sina is to perform average treatment effect
+[0:46:50] perform average treatment effect estimation and how it does that is
+[0:46:52] estimation and how it does that is relying on this
+[0:46:54] relying on this pretty well established statistical
+[0:46:55] pretty well established statistical method known as covariate balancing
+[0:46:58] method known as covariate balancing which is basically a method when you're
+[0:46:59] which is basically a method when you're given observational data, you re-weight
+[0:47:02] given observational data, you re-weight different units in your data set to
+[0:47:04] different units in your data set to mimic or emulate some randomized control
+[0:47:06] mimic or emulate some randomized control trials
+[0:47:07] trials to estimate average treatment effect.
+[0:47:10] to estimate average treatment effect. And how Sina does it is basically
+[0:47:12] And how Sina does it is basically relying on using attentions. Um so if we
+[0:47:15] relying on using attentions. Um so if we think about how attentions usually used
+[0:47:17] think about how attentions usually used in prior works, for example languages,
+[0:47:20] in prior works, for example languages, we have a sentence of different words,
+[0:47:22] we have a sentence of different words, we would tokenize each word and ask
+[0:47:24] we would tokenize each word and ask attention to attend to different words
+[0:47:26] attention to attend to different words in the data set.
+[0:47:28] in the data set. And then this way after after the
+[0:47:30] And then this way after after the attention layer, we get a sentence level
+[0:47:32] attention layer, we get a sentence level or contextual embedding of each word in
+[0:47:35] or contextual embedding of each word in the sentence.
+[0:47:36] the sentence. So the key idea behind Sina is instead
+[0:47:38] So the key idea behind Sina is instead of inputting like a sentence, we
+[0:47:40] of inputting like a sentence, we actually input
+[0:47:42] actually input a whole data set where we're asking the
+[0:47:44] a whole data set where we're asking the unit to attend to each other.
+[0:47:47] unit to attend to each other. This way after the attention layer,
+[0:47:48] This way after the attention layer, layer, we're actually getting a data set
+[0:47:50] layer, we're actually getting a data set dependent or a data set level
+[0:47:53] dependent or a data set level unit embedding.
+[0:47:55] unit embedding. Um so to ensure that this data set
+[0:47:57] Um so to ensure that this data set dependent unit embedding um,
+[0:48:00] dependent unit embedding um, actually correspond to the optimal
+[0:48:01] actually correspond to the optimal balancing weight, uh, this is this comes
+[0:48:04] balancing weight, uh, this is this comes to the second idea of Cena, which is
+[0:48:06] to the second idea of Cena, which is essentially based on the two
+[0:48:07] essentially based on the two observations developed in previous
+[0:48:09] observations developed in previous works. Uh, one of these observations
+[0:48:11] works. Uh, one of these observations basically says you can rewrite the
+[0:48:13] basically says you can rewrite the self-attention layer as a form uh, of
+[0:48:16] self-attention layer as a form uh, of some uh, kernel SVM. Uh, this is one key
+[0:48:19] some uh, kernel SVM. Uh, this is one key component key observation. And the
+[0:48:22] component key observation. And the second observation is uh, if we actually
+[0:48:25] second observation is uh, if we actually assume that the outcome model belongs to
+[0:48:27] assume that the outcome model belongs to some uh, reproducing kernel Hilbert
+[0:48:29] some uh, reproducing kernel Hilbert space, then you can uh, use the kernel
+[0:48:32] space, then you can uh, use the kernel SVM problem to describe uh, a way to
+[0:48:35] SVM problem to describe uh, a way to solve your covariate balancing weights.
+[0:48:37] solve your covariate balancing weights. Um, so the second idea of Cena is
+[0:48:39] Um, so the second idea of Cena is basically trying to enforce the
+[0:48:41] basically trying to enforce the self-attention in my neural network uh,
+[0:48:44] self-attention in my neural network uh, to actually solve for the kernel SVM
+[0:48:47] to actually solve for the kernel SVM problem that correspond to covariate
+[0:48:49] problem that correspond to covariate balancing. Um, so Chao has talked a lot
+[0:48:51] balancing. Um, so Chao has talked a lot about how this is achieved, so I won't
+[0:48:54] about how this is achieved, so I won't go into the details. Uh, but basically
+[0:48:56] go into the details. Uh, but basically after enforcing this through the loss
+[0:48:58] after enforcing this through the loss function, you can then read off the
+[0:49:00] function, you can then read off the solution of your covariate balancing
+[0:49:03] solution of your covariate balancing from the attention weights. Uh, and I
+[0:49:05] from the attention weights. Uh, and I would like to comment on uh, nicely
+[0:49:06] would like to comment on uh, nicely about this uh, connection is that this
+[0:49:09] about this uh, connection is that this actually allow you to do like arbitrary
+[0:49:11] actually allow you to do like arbitrary parameterization as long as the last
+[0:49:14] parameterization as long as the last layer of your um, transformer correspond
+[0:49:17] layer of your um, transformer correspond to this self-attention that solves the
+[0:49:19] to this self-attention that solves the corresponding kernel question.
+[0:49:21] corresponding kernel question. Um, so this is basically the second idea
+[0:49:24] Um, so this is basically the second idea of how you would use an attention
+[0:49:26] of how you would use an attention network to um, solve for average
+[0:49:28] network to um, solve for average treatment effect in a single data set.
+[0:49:30] treatment effect in a single data set. So then to move on beyond single data
+[0:49:33] So then to move on beyond single data set where we actually want to train on
+[0:49:35] set where we actually want to train on say like utilizing multiple data set
+[0:49:37] say like utilizing multiple data set online to um, get a pre-trained model
+[0:49:40] online to um, get a pre-trained model that works on a new data set, uh, this
+[0:49:42] that works on a new data set, uh, this relies on the idea of amortization,
+[0:49:45] relies on the idea of amortization, which is essentially saying that instead
+[0:49:47] which is essentially saying that instead of solving this uh,
+[0:49:49] of solving this uh, data set problem each at a time, we're
+[0:49:51] data set problem each at a time, we're sharing the parameters of how to solve
+[0:49:53] sharing the parameters of how to solve uh these problems using, say, for
+[0:49:55] uh these problems using, say, for example, a set of parameters in a neural
+[0:49:57] example, a set of parameters in a neural network.
+[0:49:59] network. Uh so, this this is like a way to
+[0:50:01] Uh so, this this is like a way to parameterize, say, like the data set to
+[0:50:04] parameterize, say, like the data set to weights. Uh output. Uh and once you have
+[0:50:07] weights. Uh output. Uh and once you have this shared weight, you can then on a
+[0:50:09] this shared weight, you can then on a new data set directly use your
+[0:50:11] new data set directly use your pre-trained model to infer the weights.
+[0:50:14] pre-trained model to infer the weights. Uh and this will be done by using just
+[0:50:16] Uh and this will be done by using just one forward pass. So, this is like, I
+[0:50:19] one forward pass. So, this is like, I would say, the last key idea of Sin uh
+[0:50:21] would say, the last key idea of Sin uh Uh and then we've seen a lot of
+[0:50:23] Uh and then we've seen a lot of empirical results. Uh but I would just
+[0:50:25] empirical results. Uh but I would just like to highlight two key empirical
+[0:50:27] like to highlight two key empirical result in my mind. Uh so, there are a
+[0:50:30] result in my mind. Uh so, there are a lot of results in the paper that shows
+[0:50:31] lot of results in the paper that shows that the correctness of this method in
+[0:50:34] that the correctness of this method in simulation or in real data set.
+[0:50:36] simulation or in real data set. Uh but the one case where we're actually
+[0:50:38] Uh but the one case where we're actually trying to um we're actually trying to
+[0:50:41] trying to um we're actually trying to make a case that this may be helpful in
+[0:50:43] make a case that this may be helpful in foundation model is try to see if we can
+[0:50:45] foundation model is try to see if we can actually generalize from synthetic data
+[0:50:47] actually generalize from synthetic data to real world data set. Uh and this is
+[0:50:50] to real world data set. Uh and this is the table that child showed where uh our
+[0:50:52] the table that child showed where uh our method is able to perform quite well
+[0:50:55] method is able to perform quite well compared to
+[0:50:56] compared to uh a bunch of other baselines. Um and
+[0:50:59] uh a bunch of other baselines. Um and then this will also give you the
+[0:51:01] then this will also give you the instantaneous inference time benefit
+[0:51:04] instantaneous inference time benefit just because you just need this one
+[0:51:06] just because you just need this one forward pass instead of resolving the
+[0:51:08] forward pass instead of resolving the problems on the new data set itself.
+[0:51:11] problems on the new data set itself. Um so, this is a bit of the summary of
+[0:51:14] Um so, this is a bit of the summary of the whole
+[0:51:15] the whole uh work.
+[0:51:17] uh work. Um and uh moving on to the discussion
+[0:51:20] Um and uh moving on to the discussion part I would like to bring uh bring up.
+[0:51:23] part I would like to bring uh bring up. Uh so, the first point I think someone
+[0:51:25] Uh so, the first point I think someone asked, uh which is also I guess my
+[0:51:27] asked, uh which is also I guess my favorite reviewers' question. Um so, for
+[0:51:29] favorite reviewers' question. Um so, for the method itself, uh we've made a lot
+[0:51:32] the method itself, uh we've made a lot of assumptions in the work um to try to
+[0:51:35] of assumptions in the work um to try to make um like the whole pipeline or in
+[0:51:38] make um like the whole pipeline or in the implementation make sense in theory.
+[0:51:41] the implementation make sense in theory. Uh and uh including um this assumption
+[0:51:44] Uh and uh including um this assumption on ignorability,
+[0:51:46] on ignorability, uh which uh I would argue that it would
+[0:51:48] uh which uh I would argue that it would hardly be the case in the real world
+[0:51:50] hardly be the case in the real world setting,
+[0:51:51] setting, uh, but I don't think this is so much of
+[0:51:53] uh, but I don't think this is so much of a problem in the method in in the paper
+[0:51:56] a problem in the method in in the paper itself because um, in the empirical
+[0:51:58] itself because um, in the empirical evaluations, uh, Child actually talked
+[0:52:01] evaluations, uh, Child actually talked about this, um,
+[0:52:02] about this, um, Erdos-Renyi 5000 data set simulation
+[0:52:06] Erdos-Renyi 5000 data set simulation data set where he's generating like 5
+[0:52:09] data set where he's generating like 5 5000 different graphs and then, uh,
+[0:52:11] 5000 different graphs and then, uh, actually those data set has certain
+[0:52:13] actually those data set has certain violations as certain degrees of
+[0:52:16] violations as certain degrees of violation to the ignorability uh,
+[0:52:18] violation to the ignorability uh, assumption.
+[0:52:20] assumption. Um, so I think like, um, if you have
+[0:52:22] Um, so I think like, um, if you have observed like all these different
+[0:52:23] observed like all these different multiple data set during training and
+[0:52:25] multiple data set during training and you have some supervision as what the
+[0:52:27] you have some supervision as what the ground truth ATE is, uh, I would think
+[0:52:30] ground truth ATE is, uh, I would think like in some sense the model is able to
+[0:52:32] like in some sense the model is able to implicitly learn, uh,
+[0:52:34] implicitly learn, uh, to deconfound in two the extent that it
+[0:52:37] to deconfound in two the extent that it will allow you to actually predict,
+[0:52:39] will allow you to actually predict, sorry, do average treatment effect
+[0:52:41] sorry, do average treatment effect estimation.
+[0:52:42] estimation. Uh,
+[0:52:43] Uh, and, um, there was also this previous
+[0:52:46] and, um, there was also this previous work, uh, by Banana and Claus. Uh, the
+[0:52:49] work, uh, by Banana and Claus. Uh, the title of this work is policy evaluation
+[0:52:51] title of this work is policy evaluation with latent confounders, uh, via optimal
+[0:52:54] with latent confounders, uh, via optimal balancing, which says basically if you
+[0:52:56] balancing, which says basically if you have a latent confounder here, uh, a
+[0:52:59] have a latent confounder here, uh, a latent confounder like an unobserved
+[0:53:00] latent confounder like an unobserved covariate here, uh, you're fine using
+[0:53:04] covariate here, uh, you're fine using optimal balancing as long as,
+[0:53:07] optimal balancing as long as, uh, you have an approximate oracle to
+[0:53:09] uh, you have an approximate oracle to what the ground truth posterior of Z is
+[0:53:11] what the ground truth posterior of Z is given the covariate and treatment. So, I
+[0:53:14] given the covariate and treatment. So, I think in some sense this is kind of
+[0:53:17] think in some sense this is kind of related to like the other popular trend
+[0:53:20] related to like the other popular trend in causality research recently, like
+[0:53:22] in causality research recently, like causal representation learning,
+[0:53:24] causal representation learning, uh, where you have seen a lot of data
+[0:53:25] uh, where you have seen a lot of data set and to what degree you would try to
+[0:53:28] set and to what degree you would try to answer, uh, we can identify the latent Z
+[0:53:31] answer, uh, we can identify the latent Z uh, for our specific task.
+[0:53:33] uh, for our specific task. So, this would be the first discussion
+[0:53:36] So, this would be the first discussion point I would like to bring up.
+[0:53:38] point I would like to bring up. Uh, and the second discussion point is,
+[0:53:41] Uh, and the second discussion point is, um, so I think, uh, at the beginning
+[0:53:43] um, so I think, uh, at the beginning child talked a lot about um,
+[0:53:45] child talked a lot about um, like adapting recent or sorry, adapting
+[0:53:48] like adapting recent or sorry, adapting current uh, foundation model large
+[0:53:51] current uh, foundation model large language models for different quality
+[0:53:53] language models for different quality task and he has discussed a lot about
+[0:53:56] task and he has discussed a lot about like the pitfall of this during this
+[0:53:57] like the pitfall of this during this task. So I don't want to go into that
+[0:54:00] task. So I don't want to go into that direction of discussion. Um,
+[0:54:03] direction of discussion. Um, uh, I would more like to discuss like
+[0:54:05] uh, I would more like to discuss like uh, if we actually want to build say
+[0:54:07] uh, if we actually want to build say like a causal model foundation model
+[0:54:08] like a causal model foundation model from scratch, uh, what would be um, say
+[0:54:11] from scratch, uh, what would be um, say the right strategy um, to
+[0:54:14] the right strategy um, to uh, learn to um, scale up causal
+[0:54:17] uh, learn to um, scale up causal inference from like a data perspective.
+[0:54:20] inference from like a data perspective. Um, the reason I'm bringing this up is
+[0:54:21] Um, the reason I'm bringing this up is because
+[0:54:23] because um, so far the experiments that we've
+[0:54:24] um, so far the experiments that we've seen in this paper is are basically all
+[0:54:26] seen in this paper is are basically all tabular data set and basically we're
+[0:54:29] tabular data set and basically we're trying to uh, come up with a random
+[0:54:31] trying to uh, come up with a random approach on this tabular data set to do
+[0:54:33] approach on this tabular data set to do self-supervised learning in order to
+[0:54:35] self-supervised learning in order to just transfer on a new data set.
+[0:54:38] just transfer on a new data set. Uh, but however in other domains, uh,
+[0:54:41] Uh, but however in other domains, uh, like for example, I mean here maybe here
+[0:54:43] like for example, I mean here maybe here at the Broad Institute we look into a
+[0:54:45] at the Broad Institute we look into a lot of single cell applications. There a
+[0:54:47] lot of single cell applications. There a lot of in that domain, uh, people are
+[0:54:50] lot of in that domain, uh, people are also dealing with tabular data set.
+[0:54:52] also dealing with tabular data set. Uh, but in this paper last year um,
+[0:54:55] Uh, but in this paper last year um, called Geneformer in late nature,
+[0:54:57] called Geneformer in late nature, um, they actually how they were building
+[0:54:59] um, they actually how they were building their model is actually transferring
+[0:55:01] their model is actually transferring their tabular data set into something
+[0:55:03] their tabular data set into something that look like languages.
+[0:55:05] that look like languages. Um, so in this tabular data set they
+[0:55:07] Um, so in this tabular data set they have cell by gene matrix where uh, each
+[0:55:10] have cell by gene matrix where uh, each entry of their tabular data set
+[0:55:12] entry of their tabular data set correspond to the expression of a gene
+[0:55:14] correspond to the expression of a gene in a cell.
+[0:55:15] in a cell. Um, but instead of building a model from
+[0:55:17] Um, but instead of building a model from scratch or like coming up with uh, new
+[0:55:19] scratch or like coming up with uh, new techniques, what they did is they just
+[0:55:21] techniques, what they did is they just took one cell um, after some
+[0:55:23] took one cell um, after some normalization, they rank the uh,
+[0:55:26] normalization, they rank the uh, expressed genes from in a ascending
+[0:55:28] expressed genes from in a ascending order and basically treat that as like a
+[0:55:31] order and basically treat that as like a sentence description of each cell and
+[0:55:33] sentence description of each cell and then used all the tokenization and mask
+[0:55:35] then used all the tokenization and mask pre-training um, this transformed data
+[0:55:37] pre-training um, this transformed data set.
+[0:55:38] set. So um,
+[0:55:39] So um, this in this domain they were showing
+[0:55:41] this in this domain they were showing that this representation after the
+[0:55:43] that this representation after the transformation it learned can be useful
+[0:55:45] transformation it learned can be useful all different various downstream tasks.
+[0:55:47] all different various downstream tasks. So I was wondering for the our cases in
+[0:55:50] So I was wondering for the our cases in general as well.
+[0:55:53] general as well. Should we actually be
+[0:55:55] Should we actually be like developing new method on the tablet
+[0:55:56] like developing new method on the tablet data set itself or should we actually
+[0:55:59] data set itself or should we actually think about it in another perspective
+[0:56:01] think about it in another perspective where we transform that into a more
+[0:56:03] where we transform that into a more succinct or say maybe in some sense more
+[0:56:07] succinct or say maybe in some sense more robust representation of our data and
+[0:56:09] robust representation of our data and then use the existing taxing accounts on
+[0:56:12] then use the existing taxing accounts on those transformations.
+[0:56:14] those transformations. So that's the second point I want to
+[0:56:17] So that's the second point I want to bring up. And the third point is
+[0:56:21] bring up. And the third point is in general
+[0:56:22] in general how should we think about aligning this
+[0:56:25] how should we think about aligning this causality task with human preferences.
+[0:56:28] causality task with human preferences. So I think we've seen like reinforcement
+[0:56:30] So I think we've seen like reinforcement learning with human feedbacks to work
+[0:56:31] learning with human feedbacks to work really really well in large language
+[0:56:33] really really well in large language models where you generate two different
+[0:56:35] models where you generate two different tasks sorry two different tasks and then
+[0:56:38] tasks sorry two different tasks and then you ask the human to rank which one is
+[0:56:39] you ask the human to rank which one is better
+[0:56:41] better and then using this robust feedback you
+[0:56:42] and then using this robust feedback you then retreat sorry like update your
+[0:56:45] then retreat sorry like update your large language model to more align with
+[0:56:47] large language model to more align with human preferences.
+[0:56:48] human preferences. So I was wondering in general for
+[0:56:51] So I was wondering in general for causality task
+[0:56:53] causality task whether it's treatment factor estimation
+[0:56:55] whether it's treatment factor estimation or structural learning
+[0:56:57] or structural learning how should we really think about
+[0:56:59] how should we really think about incorporating humans into this loop of
+[0:57:03] incorporating humans into this loop of updating the models.
+[0:57:05] updating the models. And the last point I want to bring up is
+[0:57:08] And the last point I want to bring up is if we actually believe in scales
+[0:57:11] if we actually believe in scales I think we're never going to be able to
+[0:57:13] I think we're never going to be able to get enough randomized trials or maybe
+[0:57:15] get enough randomized trials or maybe observation data we can have a lot.
+[0:57:18] observation data we can have a lot. If we actually believe in scale with
+[0:57:19] If we actually believe in scale with scale which I think we should because I
+[0:57:21] scale which I think we should because I use chat GPT everyday.
+[0:57:25] use chat GPT everyday. Where exactly is the place that we can
+[0:57:28] Where exactly is the place that we can actually mine for more data.
+[0:57:30] actually mine for more data. Should we actually look be looking into
+[0:57:32] Should we actually look be looking into this very realistic simulations? Um
+[0:57:36] this very realistic simulations? Um There what are the caveats and
+[0:57:37] There what are the caveats and opportunities there?
+[0:57:39] opportunities there? Or there might be opportunity in the
+[0:57:41] Or there might be opportunity in the south data that Charles mentioned in
+[0:57:43] south data that Charles mentioned in Microsoft
+[0:57:44] Microsoft which is proprietary.
+[0:57:46] which is proprietary. And then there might be also like
+[0:57:49] And then there might be also like robotics examples where you have very
+[0:57:51] robotics examples where you have very realistic simulation which is also I
+[0:57:53] realistic simulation which is also I think a lot of causal representation
+[0:57:55] think a lot of causal representation learning works actually looking to. Or
+[0:57:59] learning works actually looking to. Or maybe in biology we have more and more
+[0:58:01] maybe in biology we have more and more interventions.
+[0:58:03] interventions. And this is the like a picture I stole
+[0:58:05] And this is the like a picture I stole from my advisor slide
+[0:58:08] from my advisor slide which is showing how much data is
+[0:58:10] which is showing how much data is generated in the bio domain.
+[0:58:12] generated in the bio domain. This is one lab at the Broad which
+[0:58:15] This is one lab at the Broad which generates more than 80 petabytes of data
+[0:58:17] generates more than 80 petabytes of data in the last decade which is comparable
+[0:58:19] in the last decade which is comparable to Twitter and also the entire Netflix
+[0:58:22] to Twitter and also the entire Netflix movie corpus.
+[0:58:23] movie corpus. So this are the four discussion point I
+[0:58:26] So this are the four discussion point I would like to bring up. And
+[0:58:33] Also the questions, feel free to ask questions.
+[0:58:34] questions. I then hand over to Charles.
+[0:58:38] I then hand over to Charles. Yeah, okay. So perhaps I can talk about
+[0:58:41] Yeah, okay. So perhaps I can talk about the first one because that also relates
+[0:58:42] the first one because that also relates to some questions in the
+[0:58:44] to some questions in the chat about assumptions that data and
+[0:58:46] chat about assumptions that data and also relates to the four. But I guess
+[0:58:48] also relates to the four. But I guess that I guess in general I guess these
+[0:58:50] that I guess in general I guess these are great questions indeed and I think
+[0:58:52] are great questions indeed and I think that um
+[0:58:53] that um um it's also very
+[0:58:55] um it's also very like a controversial topic in terms of
+[0:58:57] like a controversial topic in terms of how do like I think of the assumptions.
+[0:59:00] how do like I think of the assumptions. Uh in in in your
+[0:59:02] Uh in in in your in your kind of like the a model. So I
+[0:59:05] in your kind of like the a model. So I guess in this unique foundational kind
+[0:59:07] guess in this unique foundational kind of like setting
+[0:59:09] of like setting I think that this kind of like offers a
+[0:59:11] I think that this kind of like offers a unique opportunities for us at least for
+[0:59:13] unique opportunities for us at least for certain types of you know um models
+[0:59:16] certain types of you know um models where in which I think
+[0:59:18] where in which I think like like we can like I think of the
+[0:59:20] like like we can like I think of the assumptions differently because like
+[0:59:22] assumptions differently because like like in real world scenarios like there
+[0:59:24] like in real world scenarios like there are all kinds of violation assumptions
+[0:59:26] are all kinds of violation assumptions but I guess these assumptions will still
+[0:59:28] but I guess these assumptions will still be useful as I said before.
+[0:59:31] be useful as I said before. In a sense,
+[0:59:32] In a sense, can be certain form of inductive bias,
+[0:59:35] can be certain form of inductive bias, let's say. So, these assumptions will
+[0:59:37] let's say. So, these assumptions will help you kind of guide you to build the
+[0:59:38] help you kind of guide you to build the models and and
+[0:59:40] models and and design structures and which under which
+[0:59:43] design structures and which under which if the assumptions are satisfied and
+[0:59:45] if the assumptions are satisfied and also if your models trend like a true
+[0:59:48] also if your models trend like a true optimum, then like even with pure
+[0:59:50] optimum, then like even with pure unsupervised setting, you your models is
+[0:59:53] unsupervised setting, you your models is supposed to work and to recover the
+[0:59:55] supposed to work and to recover the underlying true causal effects. So,
+[0:59:58] underlying true causal effects. So, that's bottom line. But then, this can
+[1:00:00] that's bottom line. But then, this can also serve as an inductive bias in which
+[1:00:02] also serve as an inductive bias in which you can take all the data sets that you
+[1:00:04] you can take all the data sets that you have, but they might violate the
+[1:00:05] have, but they might violate the assumptions for sure, but still because
+[1:00:08] assumptions for sure, but still because of the fact that you have compensated
+[1:00:09] of the fact that you have compensated that with
+[1:00:10] that with perhaps additional kind of like the
+[1:00:13] perhaps additional kind of like the uh causal effects that you you're
+[1:00:14] uh causal effects that you you're available to help you to actually like
+[1:00:17] available to help you to actually like the like to improve the model. So, I
+[1:00:19] the like to improve the model. So, I guess the like
+[1:00:21] guess the like in this particular formalism, so this is
+[1:00:24] in this particular formalism, so this is very demanding in terms of that you you
+[1:00:25] very demanding in terms of that you you need a model that's supposed to be
+[1:00:26] need a model that's supposed to be flexible and also like
+[1:00:29] flexible and also like does like it needs to have certain
+[1:00:32] does like it needs to have certain types of guarantees that it should work
+[1:00:34] types of guarantees that it should work even like
+[1:00:35] even like like without unsupervised data.
+[1:00:38] like without unsupervised data. So, I guess that's my main takeaway. So,
+[1:00:41] So, I guess that's my main takeaway. So, in terms of the four, that's also
+[1:00:42] in terms of the four, that's also similar so we get more data. So,
+[1:00:45] similar so we get more data. So, like there are lots of data out there I
+[1:00:48] like there are lots of data out there I guess you know in terms of the at least
+[1:00:51] guess you know in terms of the at least for this work in terms of tablet data
+[1:00:52] for this work in terms of tablet data sets, there's just a lot of tablet data
+[1:00:54] sets, there's just a lot of tablet data sets in the world that's not explored. I
+[1:00:56] sets in the world that's not explored. I guess
+[1:00:57] guess a lot of them being proprietary is one
+[1:00:58] a lot of them being proprietary is one of the problems, but I guess like as
+[1:01:01] of the problems, but I guess like as long as the models is compatible with
+[1:01:03] long as the models is compatible with kind of semi-supervised learning
+[1:01:05] kind of semi-supervised learning uh with certain kind of like
+[1:01:07] uh with certain kind of like the causal principles, then I guess
+[1:01:10] the causal principles, then I guess this might work especially for the
+[1:01:12] this might work especially for the robotic setting because the outcome has
+[1:01:14] robotic setting because the outcome has been looking into this uh
+[1:01:15] been looking into this uh especially embodied AI settings
+[1:01:17] especially embodied AI settings a bit more because it is where you know
+[1:01:19] a bit more because it is where you know causality becomes very prominent. And
+[1:01:21] causality becomes very prominent. And then, yeah, we do have a like the
+[1:01:23] then, yeah, we do have a like the precision paper to call for this.
+[1:01:36] Just um
+[1:01:37] um Uh for the Yeah.
+[1:01:40] Uh for the Yeah. I think Sarah is going to pick a few
+[1:01:43] I think Sarah is going to pick a few questions from the chat.
+[1:01:45] questions from the chat. And
+[1:01:46] And then for like the remaining questions,
+[1:01:48] then for like the remaining questions, we might not have time to answer them
+[1:01:49] we might not have time to answer them today, but
+[1:01:50] today, but Okay. to email us.
+[1:01:53] Okay. to email us. Indeed. So, there are many questions.
+[1:01:55] Indeed. So, there are many questions. So, you know, the talk was very popular.
+[1:01:57] So, you know, the talk was very popular. So, thank you for the talk, and thank
+[1:01:59] So, thank you for the talk, and thank you for the discussion.
+[1:02:00] you for the discussion. I wanted first to ask one of the first
+[1:02:02] I wanted first to ask one of the first question, which was asked quite a while
+[1:02:03] question, which was asked quite a while ago. It is about whether this could work
+[1:02:06] ago. It is about whether this could work in a dynamic causal context, for
+[1:02:08] in a dynamic causal context, for example, with panel data or time series
+[1:02:10] example, with panel data or time series data.
+[1:02:12] data. Yeah, I think that this can be possible.
+[1:02:14] Yeah, I think that this can be possible. Yeah, I think this can be possible
+[1:02:16] Yeah, I think this can be possible because there's no uh like fundamental
+[1:02:18] because there's no uh like fundamental difficulties. Our team does have a lot
+[1:02:20] difficulties. Our team does have a lot of works in the dynamic uh like temporal
+[1:02:22] of works in the dynamic uh like temporal settings in terms of causal modeling and
+[1:02:24] settings in terms of causal modeling and causal deep learning. I I do believe a
+[1:02:26] causal deep learning. I I do believe a lot of this work can be combined with
+[1:02:28] lot of this work can be combined with the current settings
+[1:02:30] the current settings of the scenario. Yeah.
+[1:02:33] of the scenario. Yeah. But but currently this work, so
+[1:02:34] But but currently this work, so particularly for this paper, it's not,
+[1:02:36] particularly for this paper, it's not, you know, designed for, you know, temper
+[1:02:38] you know, designed for, you know, temper a temporal data set.
+[1:02:41] a temporal data set. Okay. So, there are actually very many
+[1:02:44] Okay. So, there are actually very many good questions, and I hope that uh the
+[1:02:46] good questions, and I hope that uh the people can reach out to you if they have
+[1:02:48] people can reach out to you if they have them. So, definitely uh Run One had like
+[1:02:50] them. So, definitely uh Run One had like four questions for you.
+[1:02:52] four questions for you. Uh so, maybe you can reach out uh to
+[1:02:54] Uh so, maybe you can reach out uh to them. I will ask one of the anonymous
+[1:02:56] them. I will ask one of the anonymous attendee because it's a bit more
+[1:02:58] attendee because it's a bit more difficult to reach out to somebody
+[1:02:59] difficult to reach out to somebody anonymous. So, the anonymous attendee
+[1:03:01] anonymous. So, the anonymous attendee was saying, "Thank you for the great
+[1:03:02] was saying, "Thank you for the great talk. Would the causation foundation
+[1:03:04] talk. Would the causation foundation models be too task-specific?
+[1:03:08] models be too task-specific? It appears that the models are specific
+[1:03:09] It appears that the models are specific for the exposures.
+[1:03:11] for the exposures. Does it mean for each different
+[1:03:12] Does it mean for each different exposure, a different foundation model
+[1:03:14] exposure, a different foundation model needs to be built?"
+[1:03:16] needs to be built?" And then they say
+[1:03:17] And then they say this Sorry, just a uh sorry, I didn't
+[1:03:19] this Sorry, just a uh sorry, I didn't finish. Sorry, I'm I
+[1:03:20] finish. Sorry, I'm I Oh, okay. I paused. I paused awkwardly.
+[1:03:22] Oh, okay. I paused. I paused awkwardly. Sorry about that. Uh this is not exactly
+[1:03:24] Sorry about that. Uh this is not exactly an issue of the method, but just the
+[1:03:26] an issue of the method, but just the nature of the problem. And they are also
+[1:03:28] nature of the problem. And they are also curious about how your approach
+[1:03:30] curious about how your approach addresses the zero-shot inference.
+[1:03:32] addresses the zero-shot inference. Finished.
+[1:03:34] Finished. Okay, I think that there's so a lot of
+[1:03:36] Okay, I think that there's so a lot of questions uh entangled to each other,
+[1:03:38] questions uh entangled to each other, but I guess the interest of whether it's
+[1:03:40] but I guess the interest of whether it's too task-specific, I guess yes or no.
+[1:03:42] too task-specific, I guess yes or no. Yes in a sense that currently, so it's
+[1:03:45] Yes in a sense that currently, so it's also one of the
+[1:03:46] also one of the uh like a very common like comments I
+[1:03:48] uh like a very common like comments I get from different people is that so
+[1:03:50] get from different people is that so this is uh we call it like twist causal
+[1:03:52] this is uh we call it like twist causal panel financial models, but actually
+[1:03:54] panel financial models, but actually it's mostly currently only addresses one
+[1:03:56] it's mostly currently only addresses one type of task, which is the kind of like
+[1:03:58] type of task, which is the kind of like the like causal effects estimations
+[1:04:00] the like causal effects estimations given one specific exposures. So, I
+[1:04:03] given one specific exposures. So, I don't think you you actually need to
+[1:04:05] don't think you you actually need to re-run your model with different
+[1:04:06] re-run your model with different exposure though, because like this
+[1:04:08] exposure though, because like this actually symmetric, but I guess
+[1:04:10] actually symmetric, but I guess uh I do agree that to a certain extent
+[1:04:12] uh I do agree that to a certain extent it is very specific in a sense it only
+[1:04:14] it is very specific in a sense it only solves AT estimations, so this is why
+[1:04:16] solves AT estimations, so this is why later on so we are working on follow-up
+[1:04:18] later on so we are working on follow-up works to extend it to like a more
+[1:04:21] works to extend it to like a more different kind of tasks. So,
+[1:04:24] different kind of tasks. So, um
+[1:04:25] um so I kind of forget the second half of
+[1:04:26] so I kind of forget the second half of the question though. So,
+[1:04:28] the question though. So, I
+[1:04:30] I We we're also running out of time, so
+[1:04:32] We we're also running out of time, so Yes. maybe Okay. We can discuss some
+[1:04:34] Yes. maybe Okay. We can discuss some other time. Okay. Well,
+[1:04:36] other time. Okay. Well, thank you so much
+[1:04:38] thank you so much for the interesting
+[1:04:40] for the interesting talk, Joe, and Jackie for the
+[1:04:42] talk, Joe, and Jackie for the discussion.
+[1:04:44] discussion. It just was an interesting seminar. Uh
+[1:04:47] It just was an interesting seminar. Uh next time we're going to have Mihaela
+[1:04:48] next time we're going to have Mihaela van der Schaar from the University of
+[1:04:49] van der Schaar from the University of Cambridge who will talk about the causal
+[1:04:51] Cambridge who will talk about the causal discovery ladder, unraveling, governing
+[1:04:52] discovery ladder, unraveling, governing equations, and beyond using machine
+[1:04:54] equations, and beyond using machine learning. Thank you and all for coming.
+[1:04:57] learning. Thank you and all for coming. Uh
+[1:04:57] Uh I hope have you have a great week and uh
+[1:04:59] I hope have you have a great week and uh see you see you next week. Thank you.
+[1:05:02] see you see you next week. Thank you. Thank you.

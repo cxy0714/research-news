@@ -1,0 +1,1395 @@
+[0:00:06] uh hello everyone uh welcome back to the online closely friend seminar uh fall
+[0:00:09] online closely friend seminar uh fall 2022.
+[0:00:10] 2022. uh
+[0:00:11] uh so today uh we're back in a slightly
+[0:00:13] so today uh we're back in a slightly different time
+[0:00:15] different time next week we'll be back our regularly
+[0:00:17] next week we'll be back our regularly scheduled time
+[0:00:18] scheduled time and uh today we have a talk by dominic
+[0:00:21] and uh today we have a talk by dominic yanti from amazon research on a formal
+[0:00:24] yanti from amazon research on a formal framework for quantitative root cause
+[0:00:26] framework for quantitative root cause analysis
+[0:00:27] analysis after dominic's talk we'll have a short
+[0:00:29] after dominic's talk we'll have a short discussion by nicholas piston who is uh
+[0:00:31] discussion by nicholas piston who is uh from university of copenhagen
+[0:00:34] from university of copenhagen and uh as always uh you please feel free
+[0:00:37] and uh as always uh you please feel free to submit your questions during the
+[0:00:38] to submit your questions during the entire talk at some point dominic will
+[0:00:41] entire talk at some point dominic will stop and
+[0:00:42] stop and take your questions
+[0:00:43] take your questions and for how to submit your questions in
+[0:00:46] and for how to submit your questions in those discussions i'll take it over to
+[0:00:48] those discussions i'll take it over to our own dominic
+[0:00:50] our own dominic so yeah please
+[0:00:52] so yeah please yeah thank you emma so yeah as usual
+[0:00:54] yeah thank you emma so yeah as usual please submit your questions via q a
+[0:00:57] please submit your questions via q a um and then when dominic stops all the
+[0:01:00] um and then when dominic stops all the other dominic stops uh we will bring the
+[0:01:02] other dominic stops uh we will bring the question to him or we will ask you to
+[0:01:04] question to him or we will ask you to kind of unmute yourself
+[0:01:05] kind of unmute yourself yeah with that i'll head over to uh
+[0:01:08] yeah with that i'll head over to uh dominic
+[0:01:09] dominic yeah feel free to start whenever you're
+[0:01:11] yeah feel free to start whenever you're ready yeah
+[0:01:13] ready yeah thanks for the introduction
+[0:01:15] thanks for the introduction and thanks for inviting me
+[0:01:17] and thanks for inviting me let me briefly check and i
+[0:01:21] let me briefly check and i take the right slides do you see my
+[0:01:24] take the right slides do you see my slides
+[0:01:29] we do but they need to change to the
+[0:01:33] but they need to change to the right mode right
+[0:01:38] okay that looks good
+[0:01:40] that looks good okay so
+[0:01:41] okay so i'm presenting
+[0:01:42] i'm presenting we still see our the little window on
+[0:01:45] we still see our the little window on general information on the right side of
+[0:01:49] general information on the right side of the window
+[0:01:50] the window [Music]
+[0:01:51] [Music] then let me
+[0:01:53] then let me check that to it
+[0:01:56] check that to it i rarely use
+[0:02:03] uh zoom is this better yeah we still see this little info
+[0:02:05] yeah we still see this little info window it looks like you look at file
+[0:02:08] window it looks like you look at file names lights and so on so you can just
+[0:02:10] names lights and so on so you can just close that
+[0:02:18] now it's fine actually no you know
+[0:02:19] no you know [Music]
+[0:02:21] [Music] but now you see
+[0:02:23] but now you see you see a little bit more than the slide
+[0:02:25] you see a little bit more than the slide right
+[0:02:26] right yeah a little bit more
+[0:02:37] um can you move can you move your curse a little bit to the right so that i can
+[0:02:39] a little bit to the right so that i can turn to the right to the right right and
+[0:02:41] turn to the right to the right right and then
+[0:02:42] then in the middle yeah
+[0:02:43] in the middle yeah in the middle there's this this general
+[0:02:47] in the middle there's this this general he doesn't does he not see what we see
+[0:02:50] he doesn't does he not see what we see i think probably yeah dominic you're
+[0:02:51] i think probably yeah dominic you're probably not seeing the little window
+[0:02:53] probably not seeing the little window that's opened there yeah but i can't
+[0:02:56] that's opened there yeah but i can't really access it right now
+[0:02:58] really access it right now okay and then we'll just run let's
+[0:03:02] okay and then we'll just run let's just start so the framework for
+[0:03:05] just start so the framework for quantitative root cause analysis
+[0:03:07] quantitative root cause analysis um
+[0:03:09] um yeah so as i will
+[0:03:12] yeah so as i will point out also
+[0:03:14] point out also later
+[0:03:15] later um
+[0:03:16] um this talk is not not really about an
+[0:03:18] this talk is not not really about an algorithm or any
+[0:03:20] algorithm or any particular method
+[0:03:22] particular method it's more about
+[0:03:27] a concept what's the right concept for root cause
+[0:03:29] what's the right concept for root cause analysis
+[0:03:30] analysis and
+[0:03:32] and you can think of several um complex
+[0:03:35] you can think of several um complex systems or
+[0:03:38] systems or in real world like amazon supply chain
+[0:03:41] in real world like amazon supply chain or
+[0:03:42] or the dependent servers in aws cloud
+[0:03:45] the dependent servers in aws cloud computing
+[0:03:47] computing and um the goal is to understand the
+[0:03:50] and um the goal is to understand the system
+[0:03:51] system uh in the sense of understand the role
+[0:03:53] uh in the sense of understand the role of each component for instance for
+[0:03:56] of each component for instance for anomalies or for distribution change or
+[0:03:59] anomalies or for distribution change or whatsoever
+[0:04:01] whatsoever so
+[0:04:02] so uh yeah for instance
+[0:04:04] uh yeah for instance an
+[0:04:05] an on hand inventory level
+[0:04:08] on hand inventory level planning system or you have
+[0:04:11] planning system or you have forecasted demand or whatsoever and you
+[0:04:13] forecasted demand or whatsoever and you want to understand
+[0:04:15] want to understand anomalies or distribution shifts
+[0:04:19] anomalies or distribution shifts and
+[0:04:25] this will be the outline of the talk i will
+[0:04:26] i will put root cause analysis in the general
+[0:04:29] put root cause analysis in the general context of causal contribution
+[0:04:32] context of causal contribution of mechanisms
+[0:04:35] of mechanisms so a kind of modular perspective
+[0:04:38] so a kind of modular perspective where we decompose the system into
+[0:04:42] where we decompose the system into modules
+[0:04:44] modules that can be changed independently
+[0:04:48] that can be changed independently i will describe root cause analysis of
+[0:04:50] i will describe root cause analysis of outliers and food course analysis of
+[0:04:52] outliers and food course analysis of distribution change as examples
+[0:04:56] distribution change as examples and i will show practical implementation
+[0:04:58] and i will show practical implementation of root cause analysis of outliers
+[0:05:04] and discuss philosophical aspects of causal
+[0:05:05] philosophical aspects of causal contribution
+[0:05:08] contribution so the modular perspective in graphical
+[0:05:10] so the modular perspective in graphical models that should be quite familiar so
+[0:05:12] models that should be quite familiar so we have
+[0:05:13] we have a causal bayesian network where their
+[0:05:15] a causal bayesian network where their distribution decomposes
+[0:05:19] distribution decomposes into the conditional distributions of
+[0:05:22] into the conditional distributions of each
+[0:05:23] each node given its parents
+[0:05:25] node given its parents its direct causes
+[0:05:28] its direct causes a more
+[0:05:29] a more fine grained
+[0:05:30] fine grained model is the functional causal model
+[0:05:32] model is the functional causal model where every node is a deterministic
+[0:05:35] where every node is a deterministic function of its parents and the noise
+[0:05:38] function of its parents and the noise with independent noise variables
+[0:05:42] with independent noise variables we will need both kind of modular
+[0:05:45] we will need both kind of modular decompositions and we think of
+[0:05:48] decompositions and we think of in the functional causal model as the
+[0:05:50] in the functional causal model as the from of the structural equations as the
+[0:05:53] from of the structural equations as the independent models
+[0:05:55] independent models uh modules and uh in the causal medium
+[0:05:59] uh modules and uh in the causal medium bayesian network the
+[0:06:02] bayesian network the conditional distributions of each node
+[0:06:04] conditional distributions of each node given its causes
+[0:06:08] given its causes first i want to emphasize that root
+[0:06:09] first i want to emphasize that root cause analysis
+[0:06:12] cause analysis gives me significantly different from
+[0:06:14] gives me significantly different from analyzing treatment effects
+[0:06:17] analyzing treatment effects because
+[0:06:18] because let's say you you see the following
+[0:06:20] let's say you you see the following chain of events you have a thunderstorm
+[0:06:23] chain of events you have a thunderstorm it
+[0:06:24] it causes a power outage
+[0:06:26] causes a power outage and this in turn causes a server outage
+[0:06:29] and this in turn causes a server outage and that causes a revenue drop of some
+[0:06:32] and that causes a revenue drop of some business
+[0:06:33] business then
+[0:06:35] then if you analyze for instance
+[0:06:37] if you analyze for instance uh the treatment effect of two
+[0:06:39] uh the treatment effect of two interventions on server outage on
+[0:06:42] interventions on server outage on revenue
+[0:06:44] revenue then you will see of course it has an
+[0:06:46] then you will see of course it has an impact on
+[0:06:47] impact on revenue but
+[0:06:49] revenue but nevertheless you would not consider this
+[0:06:52] nevertheless you would not consider this the root cause because the the root
+[0:06:54] the root cause because the the root cause is
+[0:06:56] cause is further upstream
+[0:06:58] further upstream so
+[0:06:59] so [Music]
+[0:07:00] [Music] do interventions just
+[0:07:02] do interventions just show the behavior
+[0:07:06] show the behavior of a target variable with respect to a
+[0:07:08] of a target variable with respect to a treatment but
+[0:07:09] treatment but it doesn't
+[0:07:11] it doesn't tell you whether
+[0:07:12] tell you whether the
+[0:07:13] the the root just responded to something
+[0:07:16] the root just responded to something further upstream so this is the the
+[0:07:19] further upstream so this is the the crucial difference
+[0:07:21] crucial difference um that
+[0:07:22] um that is essential for this talk
+[0:07:26] is essential for this talk i want to put as i said root cause
+[0:07:28] i want to put as i said root cause analysis in the context of general
+[0:07:30] analysis in the context of general attribution problems
+[0:07:32] attribution problems and
+[0:07:37] root cause analysis of outliers where we attribute anomalies of a target variable
+[0:07:40] attribute anomalies of a target variable quantitatively to its
+[0:07:43] quantitatively to its ancestors
+[0:07:45] ancestors uh root cause analysis of distribution
+[0:07:47] uh root cause analysis of distribution change where the we attribute
+[0:07:49] change where the we attribute distribution shift
+[0:07:50] distribution shift to the different conditional
+[0:07:53] to the different conditional distributions in the causal bayesian
+[0:07:55] distributions in the causal bayesian network
+[0:07:57] network we have intrinsic causal contribution
+[0:07:59] we have intrinsic causal contribution not really root cause analysis it
+[0:08:02] not really root cause analysis it attributes the variation so the variance
+[0:08:04] attributes the variation so the variance of the target
+[0:08:06] of the target to
+[0:08:07] to its mechanism
+[0:08:09] its mechanism and you can do that for
+[0:08:12] and you can do that for many different
+[0:08:13] many different attribution problems
+[0:08:19] so what do we mean by contribution of mechanisms
+[0:08:22] contribution of mechanisms so
+[0:08:22] so the idea is to replace the mechanism
+[0:08:26] the idea is to replace the mechanism at the
+[0:08:27] at the node at the respective node
+[0:08:30] node at the respective node with a baseline mechanism
+[0:08:33] with a baseline mechanism and
+[0:08:34] and explore the impact of replacement on the
+[0:08:37] explore the impact of replacement on the target quantity
+[0:08:39] target quantity which
+[0:08:40] which defines the contribution of that
+[0:08:42] defines the contribution of that particular mechanism
+[0:08:45] particular mechanism and
+[0:08:46] and replace mechanisms one after another
+[0:08:52] we get contributions that sum up to the joint contribution
+[0:08:56] that sum up to the joint contribution um when we replace all the nodes with
+[0:08:59] um when we replace all the nodes with baseline mechanisms so that's also
+[0:09:02] baseline mechanisms so that's also crucial for our kind of contribution
+[0:09:05] crucial for our kind of contribution and i mean
+[0:09:06] and i mean the word contribution implies
+[0:09:09] the word contribution implies contribution to something
+[0:09:12] contribution to something so
+[0:09:13] so we want to tell
+[0:09:14] we want to tell um
+[0:09:15] um [Music]
+[0:09:16] [Music] what is the quantity these contributions
+[0:09:19] what is the quantity these contributions sum up to
+[0:09:21] sum up to and they are supposed to sum up to
+[0:09:23] and they are supposed to sum up to something meaningful so this is the key
+[0:09:25] something meaningful so this is the key idea
+[0:09:26] idea that we always have
+[0:09:29] that we always have at the back of our mind it should sum up
+[0:09:32] at the back of our mind it should sum up to something meaningful
+[0:09:34] to something meaningful but the problems are
+[0:09:35] but the problems are in this
+[0:09:37] in this in this idea what's the baseline
+[0:09:40] in this idea what's the baseline and that will be a quite a fundamental
+[0:09:44] and that will be a quite a fundamental problem as you will see later
+[0:09:47] problem as you will see later and the contribution computed this way
+[0:09:49] and the contribution computed this way it depends on the order of replacements
+[0:09:53] it depends on the order of replacements so in general the dag doesn't
+[0:09:56] so in general the dag doesn't have a unique ordering of nodes
+[0:09:59] have a unique ordering of nodes so we have to tell
+[0:10:01] so we have to tell in which order we want to replace with
+[0:10:03] in which order we want to replace with baseline mechanisms
+[0:10:06] baseline mechanisms this we have applied to the root cause
+[0:10:08] this we have applied to the root cause analysis of outliers again where
+[0:10:11] analysis of outliers again where we replace the
+[0:10:14] we replace the extreme noise value and j with a default
+[0:10:18] extreme noise value and j with a default value and the default will just be the
+[0:10:21] value and the default will just be the natural observation observed
+[0:10:23] natural observation observed distribution of the noise variable
+[0:10:26] distribution of the noise variable in distribution change
+[0:10:28] in distribution change we replace the conditional with some
+[0:10:32] we replace the conditional with some baseline conditional
+[0:10:34] baseline conditional and intrinsic causal contribution we set
+[0:10:37] and intrinsic causal contribution we set the random noise to some constant noise
+[0:10:47] okay now i want to a little bit um
+[0:10:49] a little bit um uh discuss
+[0:10:51] uh discuss why we replace mechanisms versus
+[0:10:55] why we replace mechanisms versus replacing values
+[0:10:57] replacing values um so replacing a mechanism at the node
+[0:11:00] um so replacing a mechanism at the node changes the way it reacts to its parents
+[0:11:04] changes the way it reacts to its parents and this reveals then the role of a node
+[0:11:07] and this reveals then the role of a node better than replacing its values
+[0:11:11] better than replacing its values nodes that just propagate the value from
+[0:11:13] nodes that just propagate the value from parent to child
+[0:11:16] parent to child do not contribute to an event
+[0:11:23] okay and replacing then i should emphasize that
+[0:11:27] replacing then i should emphasize that changing the noise
+[0:11:29] changing the noise to a baseline value
+[0:11:31] to a baseline value is perfectly aligned with this
+[0:11:33] is perfectly aligned with this perspective because
+[0:11:35] perspective because uh changing the noise replaces the
+[0:11:38] uh changing the noise replaces the deterministic mechanism
+[0:11:41] deterministic mechanism um
+[0:11:42] um maybe you're aware of the so-called
+[0:11:45] maybe you're aware of the so-called response function formulation
+[0:11:50] which phrases every functional causal model
+[0:11:53] phrases every functional causal model without loss of generality
+[0:11:56] without loss of generality as
+[0:11:57] as a distribution over the functions from
+[0:12:00] a distribution over the functions from the parents to the node
+[0:12:03] the parents to the node so every noise without loss of
+[0:12:05] so every noise without loss of generality
+[0:12:07] generality is
+[0:12:08] is function valued
+[0:12:10] function valued this interpretation
+[0:12:12] this interpretation is quite valuable because
+[0:12:14] is quite valuable because then
+[0:12:16] then you see that the strict
+[0:12:23] difference between whether the function changed or the noise changed disappears
+[0:12:27] changed or the noise changed disappears but i will comment on that later
+[0:12:32] so let me
+[0:12:33] let me implement this idea for root cause
+[0:12:37] implement this idea for root cause analysis of outliers as examples so
+[0:12:40] analysis of outliers as examples so first we want to quantify anomalies
+[0:12:43] first we want to quantify anomalies and what is quite convenient is a log
+[0:12:46] and what is quite convenient is a log probabilistic outlier score
+[0:12:49] probabilistic outlier score it measures basically the tail
+[0:12:52] it measures basically the tail probability the minus logarithm of the
+[0:12:55] probability the minus logarithm of the tail probability
+[0:12:56] tail probability after applying some feature map g
+[0:13:00] after applying some feature map g this feature map g admits generalization
+[0:13:02] this feature map g admits generalization to multivariate and
+[0:13:05] to multivariate and non-numeric variables
+[0:13:08] non-numeric variables so examples would be just the usual
+[0:13:11] so examples would be just the usual one-sided tail probability of an extreme
+[0:13:14] one-sided tail probability of an extreme value what's the probability of
+[0:13:17] value what's the probability of getting an even more extreme value
+[0:13:20] getting an even more extreme value or the distance from the mean
+[0:13:29] and then we recursively write the target node
+[0:13:30] node as a function of its ancestor noise
+[0:13:32] as a function of its ancestor noise variables by inserting these functions
+[0:13:35] variables by inserting these functions from the fcm into each other
+[0:13:38] from the fcm into each other and then the contribution of each input
+[0:13:41] and then the contribution of each input and j
+[0:13:43] and j to the
+[0:13:44] to the anomaly at the target node n
+[0:13:47] anomaly at the target node n is defined by
+[0:13:50] is defined by the
+[0:13:51] the logarithm of the quotient
+[0:13:54] logarithm of the quotient of the probability of the tail event
+[0:13:58] of the probability of the tail event given that you
+[0:13:59] given that you adjust the first j inputs the first j
+[0:14:03] adjust the first j inputs the first j noise terms
+[0:14:05] noise terms versus you adjust only the first j minus
+[0:14:09] versus you adjust only the first j minus one
+[0:14:10] one noise terms
+[0:14:12] noise terms so it describes
+[0:14:14] so it describes the logarithm of the factor
+[0:14:17] the logarithm of the factor by which
+[0:14:18] by which the
+[0:14:20] the outlier is made more likely
+[0:14:23] outlier is made more likely by that particular value of the noise
+[0:14:29] and because this contribution is still
+[0:14:32] because this contribution is still order dependent we symmetrize overall
+[0:14:34] order dependent we symmetrize overall orderings of inputs
+[0:14:37] orderings of inputs and
+[0:14:38] and get sharply values
+[0:14:40] get sharply values um
+[0:14:46] you're smiling um
+[0:14:52] okay so a nice contributing contribution is the logical and gate
+[0:14:54] is the logical and gate where y is just um
+[0:14:57] where y is just um the end of the inputs
+[0:15:00] the end of the inputs then the outlier score is a sum of
+[0:15:03] then the outlier score is a sum of the input outlier scores
+[0:15:06] the input outlier scores so
+[0:15:07] so minus log the probability of obtaining a
+[0:15:10] minus log the probability of obtaining a one at the target
+[0:15:11] one at the target is just the sum over minus log of the
+[0:15:15] is just the sum over minus log of the probabilities of
+[0:15:17] probabilities of and having an n at the inputs
+[0:15:20] and having an n at the inputs and it turns out that
+[0:15:23] and it turns out that according to our framework the
+[0:15:24] according to our framework the contribution of the input xj reads minus
+[0:15:28] contribution of the input xj reads minus log
+[0:15:29] log the probability of that event
+[0:15:32] the probability of that event so it turns out that only rare events
+[0:15:35] so it turns out that only rare events get high contribution
+[0:15:37] get high contribution so frequent events cannot get high
+[0:15:41] so frequent events cannot get high contributions but it's not
+[0:15:44] contributions but it's not in the general framework it's not true
+[0:15:46] in the general framework it's not true that every rare event gets a high
+[0:15:48] that every rare event gets a high contribution because what counts is the
+[0:15:51] contribution because what counts is the impact on the target um however the
+[0:15:55] impact on the target um however the other way around
+[0:15:57] other way around um
+[0:15:58] um an event that is not rare can't get high
+[0:16:01] an event that is not rare can't get high contribution
+[0:16:03] contribution and um
+[0:16:04] and um intuitively
+[0:16:06] intuitively this makes sense
+[0:16:12] and it's nice that this potential stronger contribution of rare events is
+[0:16:14] stronger contribution of rare events is not put in by hand but just results
+[0:16:17] not put in by hand but just results naturally from the framework
+[0:16:19] naturally from the framework for
+[0:16:21] for frequent events replacing the true value
+[0:16:24] frequent events replacing the true value with samples from the natural
+[0:16:26] with samples from the natural distribution cannot change the
+[0:16:28] distribution cannot change the likelihood of the out area layer event
+[0:16:31] likelihood of the out area layer event that much
+[0:16:32] that much that aligns with the intuition that
+[0:16:35] that aligns with the intuition that historically strong drop of those joints
+[0:16:38] historically strong drop of those joints cannot be explained by an event that
+[0:16:40] cannot be explained by an event that happens twice a week
+[0:16:49] example with two dice so the rare event would be
+[0:16:51] rare event would be uh to have
+[0:16:53] uh to have one one
+[0:16:54] one one with both of the dice
+[0:16:57] with both of the dice um so we have a logarithm of four times
+[0:17:01] um so we have a logarithm of four times hundred
+[0:17:02] hundred for this outlier event it decomposes
+[0:17:05] for this outlier event it decomposes into log four
+[0:17:07] into log four plus log hundred
+[0:17:09] plus log hundred so the contribution of the yellow die is
+[0:17:13] so the contribution of the yellow die is
+[0:17:19] roughly versus 70 c percent 77 of the blue one
+[0:17:26] so as a summary would cause our analysis of anomalies
+[0:17:28] of anomalies provide a scale independent
+[0:17:30] provide a scale independent quantification via probabilistic scores
+[0:17:34] quantification via probabilistic scores explains anomalies in terms of ancestor
+[0:17:36] explains anomalies in terms of ancestor anomalies why on fcm
+[0:17:39] anomalies why on fcm it quantifies contribution via
+[0:17:42] it quantifies contribution via controversial change of log
+[0:17:44] controversial change of log probabilities
+[0:17:46] probabilities which achieves comparability across
+[0:17:49] which achieves comparability across measures with different units
+[0:17:52] measures with different units and sharply values achieve symmetry with
+[0:17:54] and sharply values achieve symmetry with respect to reordering of nodes
+[0:17:58] respect to reordering of nodes and nodes with highest contributions can
+[0:18:00] and nodes with highest contributions can be called root causes
+[0:18:02] be called root causes [Music]
+[0:18:03] [Music] now i want to
+[0:18:05] now i want to talk about two common misunderstandings
+[0:18:08] talk about two common misunderstandings that we have repeatedly
+[0:18:14] your rcaf anomalies assumes that every anomaly is caused
+[0:18:18] anomaly is caused by an anomaly of some noise term in j
+[0:18:22] by an anomaly of some noise term in j but also the functions fj could be
+[0:18:24] but also the functions fj could be anomalous and this i mentioned already
+[0:18:29] anomalous and this i mentioned already if you really look what
+[0:18:31] if you really look what what the framework does
+[0:18:33] what the framework does you see that we do not really care
+[0:18:36] you see that we do not really care whether the function f j or the noise n
+[0:18:40] whether the function f j or the noise n j has changed or has anomaly behavior
+[0:18:45] j has changed or has anomaly behavior because this difference does not even
+[0:18:47] because this difference does not even exist in the response function
+[0:18:48] exist in the response function formulation
+[0:18:55] the node can only be a root cause if x j the observed value cannot be
+[0:18:58] x j the observed value cannot be explained
+[0:19:00] explained by the usual fcm
+[0:19:03] by the usual fcm with a normal
+[0:19:05] with a normal noise value and this can happen
+[0:19:08] noise value and this can happen either
+[0:19:09] either if the noise was anomalous or the
+[0:19:12] if the noise was anomalous or the function was anomalous at that
+[0:19:14] function was anomalous at that particular event
+[0:19:21] and the second misunderstanding that we had to discuss a lot with reviewers back
+[0:19:23] had to discuss a lot with reviewers back then
+[0:19:25] then your rca for anomalies is based on
+[0:19:28] your rca for anomalies is based on hypothetical interventions on the noise
+[0:19:30] hypothetical interventions on the noise which
+[0:19:31] which are considered very unnatural
+[0:19:35] are considered very unnatural even if it's not hypothetical people
+[0:19:37] even if it's not hypothetical people don't accept that
+[0:19:39] don't accept that but that is not even true
+[0:19:41] but that is not even true i don't want to discuss whether this is
+[0:19:43] i don't want to discuss whether this is a problem but for me it wouldn't but
+[0:19:46] a problem but for me it wouldn't but it's not even true
+[0:19:47] it's not even true we only need hypothetical interventions
+[0:19:50] we only need hypothetical interventions on observed nodes
+[0:19:52] on observed nodes because the impact of
+[0:19:54] because the impact of changing the noise and j to
+[0:19:56] changing the noise and j to until the j
+[0:20:03] changes the observed node x j
+[0:20:04] x j from
+[0:20:06] from the
+[0:20:06] the um from fj p a and j
+[0:20:10] um from fj p a and j with to the one with a different noise
+[0:20:12] with to the one with a different noise value
+[0:20:13] value and this is an intervention so it's just
+[0:20:16] and this is an intervention so it's just a parent-dependent intervention on the
+[0:20:18] a parent-dependent intervention on the observed node you don't have to act on
+[0:20:21] observed node you don't have to act on the noise at all
+[0:20:30] i want to be a bit less detailed about
+[0:20:32] detailed about root cause analysis of distribution
+[0:20:33] root cause analysis of distribution change although it i would say it's a
+[0:20:35] change although it i would say it's a quite robust method and
+[0:20:38] quite robust method and it
+[0:20:39] it is free of several obstacles
+[0:20:42] is free of several obstacles uh practical obstacles of root cause
+[0:20:44] uh practical obstacles of root cause analysis of anomalies
+[0:20:46] analysis of anomalies but uh nevertheless
+[0:20:48] but uh nevertheless let me
+[0:20:50] let me just explain the concept
+[0:20:52] just explain the concept so the joint distribution changes to p
+[0:20:55] so the joint distribution changes to p tilde
+[0:20:56] tilde and we want to attribute this to the
+[0:20:58] and we want to attribute this to the different mechanisms
+[0:21:00] different mechanisms so um
+[0:21:03] so um if you like information theory you may
+[0:21:05] if you like information theory you may appreciate that kl distance decompresses
+[0:21:08] appreciate that kl distance decompresses nicely into the sum of conditional kl
+[0:21:11] nicely into the sum of conditional kl distances
+[0:21:13] distances with a small caveat that
+[0:21:15] with a small caveat that the conditional kl distances contain
+[0:21:19] the conditional kl distances contain the distribution of parents so it's not
+[0:21:23] the distribution of parents so it's not strictly speaking a property of the
+[0:21:25] strictly speaking a property of the mechanism alone
+[0:21:27] mechanism alone but
+[0:21:28] but i think this is a
+[0:21:30] i think this is a small issue that cannot be avoided for
+[0:21:33] small issue that cannot be avoided for fundamental reasons
+[0:21:35] fundamental reasons um
+[0:21:37] um in this context
+[0:21:42] makes sense to to mention the sparse mechanism
+[0:21:43] mechanism shift hypothesis
+[0:21:45] shift hypothesis which is in a paper
+[0:21:47] which is in a paper towards
+[0:21:49] towards causal representation learning
+[0:21:51] causal representation learning of banner jacob and co-authors
+[0:21:58] it's the hypothesis that small distribution changes tend to
+[0:22:00] small distribution changes tend to manifest themselves in a sparse shift of
+[0:22:03] manifest themselves in a sparse shift of mechanisms so only few of these
+[0:22:06] mechanisms so only few of these conditioners would change typically
+[0:22:09] conditioners would change typically because it's not any
+[0:22:11] because it's not any it's a more awake and unformal
+[0:22:14] it's a more awake and unformal hypothesis but
+[0:22:16] hypothesis but in this context we would assume that
+[0:22:19] in this context we would assume that only a few of the conditionals changed
+[0:22:22] only a few of the conditionals changed and therefore for the practical in
+[0:22:24] and therefore for the practical in implementation we introduce a binary
+[0:22:27] implementation we introduce a binary label l
+[0:22:28] label l indicating the data set
+[0:22:32] indicating the data set and then
+[0:22:34] and then the statement that the conditional
+[0:22:35] the statement that the conditional assistant chain didn't change is just
+[0:22:37] assistant chain didn't change is just equivalent to a conditional independence
+[0:22:40] equivalent to a conditional independence and this way we can identify the
+[0:22:43] and this way we can identify the mechanisms that changed
+[0:22:50] however it's for applications more interesting to
+[0:22:52] for applications more interesting to just look at
+[0:22:54] just look at certain target nodes and statistical
+[0:22:57] certain target nodes and statistical properties for instance an expectation
+[0:23:00] properties for instance an expectation of some target node it's more realistic
+[0:23:02] of some target node it's more realistic than
+[0:23:03] than just monitoring the entire distribution
+[0:23:06] just monitoring the entire distribution with n nodes and
+[0:23:10] with n nodes and then we can still replace each of the
+[0:23:13] then we can still replace each of the mechanisms step by step in any ordering
+[0:23:17] mechanisms step by step in any ordering and then this
+[0:23:20] and then this change of the distribution decomposes
+[0:23:22] change of the distribution decomposes into an order dependent contribution
+[0:23:24] into an order dependent contribution where we again average over all
+[0:23:26] where we again average over all orderings to get sharply value-based
+[0:23:29] orderings to get sharply value-based contributions
+[0:23:31] contributions okay i think i don't want to
+[0:23:34] okay i think i don't want to go more to the details
+[0:23:37] go more to the details um
+[0:23:37] um this is
+[0:23:39] this is the attribution of just wondering about
+[0:23:42] the attribution of just wondering about the time
+[0:23:44] the time okay
+[0:23:45] okay um
+[0:23:45] um [Music]
+[0:23:47] [Music] the
+[0:23:47] the for the variance you can do the same i
+[0:23:50] for the variance you can do the same i don't want to
+[0:23:52] don't want to yeah
+[0:23:53] yeah the details there
+[0:23:57] and
+[0:24:03] here i should mainly mention that
+[0:24:10] i wouldn't doubt that for simple examples
+[0:24:12] examples root cause analysis can also be done by
+[0:24:14] root cause analysis can also be done by some kind of mediation analysis to to
+[0:24:17] some kind of mediation analysis to to just distinguish of what part has been
+[0:24:20] just distinguish of what part has been inherited from the parents and what has
+[0:24:23] inherited from the parents and what has been generated by that particular node
+[0:24:26] been generated by that particular node but for complex systems we don't see an
+[0:24:28] but for complex systems we don't see an approach for causal attribution that is
+[0:24:31] approach for causal attribution that is equally simple conceptually
+[0:24:37] so to summarize the properties desired for
+[0:24:40] to summarize the properties desired for quest causal attribution in the sense of
+[0:24:42] quest causal attribution in the sense of this talk is
+[0:24:44] this talk is that is
+[0:24:45] that is applicable to any causal tank
+[0:24:48] applicable to any causal tank and no contribution to nodes that just
+[0:24:50] and no contribution to nodes that just propagate
+[0:24:51] propagate invariant with respect to reordering of
+[0:24:54] invariant with respect to reordering of nodes
+[0:24:55] nodes and
+[0:24:57] and continuous with respect to removing
+[0:24:59] continuous with respect to removing infinitely weak causal links and that
+[0:25:02] infinitely weak causal links and that isn't property
+[0:25:03] isn't property a property that is really problematic
+[0:25:05] a property that is really problematic for
+[0:25:06] for quite some
+[0:25:08] quite some contribution methods
+[0:25:11] contribution methods that i've seen in the literature and
+[0:25:13] that i've seen in the literature and that
+[0:25:14] that i have been rejecting for our work for
+[0:25:17] i have been rejecting for our work for that reason
+[0:25:18] that reason although they have
+[0:25:21] although they have good justification in their own right
+[0:25:28] and in simple experiment for
+[0:25:31] simple experiment for rcaf anomalies
+[0:25:34] rcaf anomalies the extreme river flow at four stations
+[0:25:38] the extreme river flow at four stations in england
+[0:25:40] in england so
+[0:25:41] so [Music]
+[0:25:42] [Music] ngr new jumbles rock is uh downstream
+[0:25:48] ngr new jumbles rock is uh downstream and the other three locations are
+[0:25:51] and the other three locations are upstream but from different rivers
+[0:25:54] upstream but from different rivers rivers and the
+[0:25:56] rivers and the upstream of new jumbo's rock there's a
+[0:25:59] upstream of new jumbo's rock there's a confluence point
+[0:26:01] confluence point and then we want to explore
+[0:26:03] and then we want to explore whether anomalies in njr
+[0:26:07] whether anomalies in njr are caused by anomalies upstream and of
+[0:26:10] are caused by anomalies upstream and of course we have precipitation as
+[0:26:12] course we have precipitation as confounders so let's say more
+[0:26:16] confounders so let's say more global precipitation
+[0:26:19] global precipitation [Music]
+[0:26:20] [Music] here we see an extreme value of the
+[0:26:24] here we see an extreme value of the river flow
+[0:26:25] river flow mid of march
+[0:26:27] mid of march
+[0:26:30] and we see that the other stations also show
+[0:26:34] we see that the other stations also show that normally therefore
+[0:26:36] that normally therefore we hope to see that they contribute
+[0:26:40] we hope to see that they contribute significantly
+[0:26:41] significantly um
+[0:26:42] um where do we get the functional causal
+[0:26:44] where do we get the functional causal model from would say just domain
+[0:26:46] model from would say just domain knowledge
+[0:26:47] knowledge so
+[0:26:48] so the assumption is all structure
+[0:26:50] the assumption is all structure coefficients are one
+[0:26:52] coefficients are one which just means that no water gets lost
+[0:26:55] which just means that no water gets lost as an approximation
+[0:26:57] as an approximation and the noise
+[0:27:00] and the noise is just the water entering the river
+[0:27:02] is just the water entering the river between parents nodes and the
+[0:27:07] between parents nodes and the nodes and the node under consideration
+[0:27:15] what the results show is that ngr itself shows no contribution
+[0:27:19] ngr itself shows no contribution and
+[0:27:20] and the other three share the contribution
+[0:27:23] the other three share the contribution almost equally
+[0:27:29] what do we con conclude from that that's also an important point that if
+[0:27:31] that's also an important point that if several mechanisms are simultaneously
+[0:27:34] several mechanisms are simultaneously anomalous there's probably a confounder
+[0:27:38] anomalous there's probably a confounder for instance high precipitation in a
+[0:27:41] for instance high precipitation in a large region region
+[0:27:43] large region region if you think of this sparse mechanism
+[0:27:45] if you think of this sparse mechanism shift hypothesis then you wouldn't
+[0:27:48] shift hypothesis then you wouldn't assume that
+[0:27:49] assume that all of these mechanisms corrupt
+[0:27:51] all of these mechanisms corrupt simultaneously so there's probably
+[0:27:55] simultaneously so there's probably a mechanism for the upstream
+[0:27:57] a mechanism for the upstream so it's also
+[0:27:59] so it's also probably an indicator for
+[0:28:01] probably an indicator for violation of causal sufficiency
+[0:28:03] violation of causal sufficiency [Music]
+[0:28:05] [Music] the
+[0:28:05] the practical implication
+[0:28:13] so we infer the fcm either from domain knowledge or learned from data subject
+[0:28:16] knowledge or learned from data subject to strong assumptions for instance
+[0:28:18] to strong assumptions for instance additive noise
+[0:28:20] additive noise we compute the true values of the noise
+[0:28:23] we compute the true values of the noise for the outlier
+[0:28:25] for the outlier and
+[0:28:27] and this is of course only feasible if this
+[0:28:29] this is of course only feasible if this the function in the fcm is invertible
+[0:28:32] the function in the fcm is invertible for fixed value of the parents
+[0:28:35] for fixed value of the parents and then we generate normal
+[0:28:37] and then we generate normal noise values via samples from the past
+[0:28:41] noise values via samples from the past there's a lot of practical problems
+[0:28:45] there's a lot of practical problems you want to be honest about that
+[0:28:47] you want to be honest about that [Music]
+[0:28:49] [Music] generating normal values from the past
+[0:28:51] generating normal values from the past is problematic if there are
+[0:28:53] is problematic if there are seasonalities
+[0:28:55] seasonalities and
+[0:28:56] and learning the functions
+[0:28:57] learning the functions of the functional console model in the
+[0:28:59] of the functional console model in the outlier region is statistically ill post
+[0:29:02] outlier region is statistically ill post of course
+[0:29:04] of course and
+[0:29:05] and the scaling behavior of the method is
+[0:29:08] the scaling behavior of the method is currently unclear
+[0:29:11] currently unclear however the main contribution as i
+[0:29:14] however the main contribution as i emphasized is not the practical method
+[0:29:16] emphasized is not the practical method and the specific algorithm it's more
+[0:29:19] and the specific algorithm it's more uh the the scope of defining a clear
+[0:29:22] uh the the scope of defining a clear concept of root cause analysis
+[0:29:26] concept of root cause analysis um
+[0:29:27] um which includes a quantitative
+[0:29:29] which includes a quantitative contribution analysis because this is
+[0:29:31] contribution analysis because this is what
+[0:29:32] what what
+[0:29:33] what customers ask you all the time so uh
+[0:29:36] customers ask you all the time so uh what's the quantitative contribution
+[0:29:38] what's the quantitative contribution then as a mathematician you would say
+[0:29:41] then as a mathematician you would say well
+[0:29:42] well you can't
+[0:29:44] you can't tell
+[0:29:45] tell in percentage because it's non-linear
+[0:29:47] in percentage because it's non-linear but you can also say okay
+[0:29:50] but you can also say okay people want a quantitative contribution
+[0:29:52] people want a quantitative contribution so we must invent one
+[0:29:56] so we must invent one so this despite tons of papers on rca we
+[0:29:59] so this despite tons of papers on rca we didn't find a clean concept
+[0:30:07] but i think there's also a limit of formalizing root cause analysis
+[0:30:09] formalizing root cause analysis because
+[0:30:10] because there are normative aspects
+[0:30:14] there are normative aspects that are neither captured by statistics
+[0:30:16] that are neither captured by statistics nor by causality so let's say for
+[0:30:18] nor by causality so let's say for instance you have a thunderstorm
+[0:30:21] instance you have a thunderstorm power outage server outage and the
+[0:30:23] power outage server outage and the revenue drop
+[0:30:24] revenue drop then there can be
+[0:30:26] then there can be different
+[0:30:28] different opinions on root causes thunderstorm for
+[0:30:30] opinions on root causes thunderstorm for obvious reasons but you could also say
+[0:30:33] obvious reasons but you could also say power outage
+[0:30:35] power outage yeah so the network should be prepared
+[0:30:38] yeah so the network should be prepared for thunderstorms
+[0:30:39] for thunderstorms and servo outage the server should have
+[0:30:42] and servo outage the server should have emergency power
+[0:30:44] emergency power so
+[0:30:46] so if you
+[0:30:47] if you talk to people and
+[0:30:49] talk to people and ask them about their intuition about
+[0:30:52] ask them about their intuition about root causes you will realize that
+[0:30:55] root causes you will realize that their idea of food courses
+[0:30:57] their idea of food courses always includes these normative aspects
+[0:31:06] and the question is whether the mechanism whether the framework is
+[0:31:09] mechanism whether the framework is flexible enough
+[0:31:10] flexible enough to also capture that and this is
+[0:31:14] to also capture that and this is something
+[0:31:16] something an insight that is very recent that
+[0:31:19] an insight that is very recent that if um
+[0:31:21] if um baseline mechanisms are those observed
+[0:31:24] baseline mechanisms are those observed in the past so the statistical
+[0:31:26] in the past so the statistical perspective
+[0:31:27] perspective perspective the thunderstorm is the root
+[0:31:29] perspective the thunderstorm is the root cause here
+[0:31:31] cause here because the other mechanisms just
+[0:31:33] because the other mechanisms just behaved
+[0:31:35] behaved as they did in the past
+[0:31:38] as they did in the past or
+[0:31:39] or if as if they would have reacted in the
+[0:31:42] if as if they would have reacted in the past
+[0:31:44] past to an equally strong thunderstorm
+[0:31:47] to an equally strong thunderstorm but
+[0:31:48] but if the baseline mechanisms represent our
+[0:31:51] if the baseline mechanisms represent our demands and ethical expectations so the
+[0:31:54] demands and ethical expectations so the normative perspective then any node can
+[0:31:57] normative perspective then any node can be considered
+[0:31:58] be considered the root cause
+[0:32:01] the root cause uh
+[0:32:02] uh yeah this is
+[0:32:04] yeah this is where i want to end so the crucial
+[0:32:06] where i want to end so the crucial papers are the two above and then i
+[0:32:08] papers are the two above and then i should mention that
+[0:32:10] should mention that uh do why
+[0:32:12] uh do why meanwhile contains uh
+[0:32:15] meanwhile contains uh our root cause analysis and distribution
+[0:32:17] our root cause analysis and distribution change
+[0:32:19] change so this is open source
+[0:32:21] so this is open source thank you for your attention
+[0:32:24] thank you for your attention thanks thanks for a nice talk i think
+[0:32:27] thanks thanks for a nice talk i think we have time for at least one short
+[0:32:29] we have time for at least one short question from a q a
+[0:32:31] question from a q a um so in q a someone asked whether this
+[0:32:33] um so in q a someone asked whether this would also be applicable to other types
+[0:32:35] would also be applicable to other types of graphs so i think the person has in
+[0:32:37] of graphs so i think the person has in mind for example that there's a cp deck
+[0:32:38] mind for example that there's a cp deck instead of a dac would you then go
+[0:32:40] instead of a dac would you then go through the equivalence class or how how
+[0:32:42] through the equivalence class or how how do you deal with the
+[0:32:44] do you deal with the the daggers it's a good question i know
+[0:32:46] the daggers it's a good question i know it's an important question i don't have
+[0:32:48] it's an important question i don't have an answer yet
+[0:32:50] an answer yet i mean
+[0:32:51] i mean um
+[0:32:56] yeah it could be a probabilistic attribution that also just
+[0:33:00] attribution that also just yeah then we have uncertainty about the
+[0:33:02] yeah then we have uncertainty about the attribution
+[0:33:04] attribution um
+[0:33:09] yeah we could also think of what are independent
+[0:33:11] independent blocks
+[0:33:12] blocks in these
+[0:33:14] in these like clusters of nodes and
+[0:33:21] do a more cost grained root cause analysis
+[0:33:23] analysis yeah i don't know
+[0:33:25] yeah i don't know that's that's interesting yeah thanks um
+[0:33:28] that's that's interesting yeah thanks um yeah and
+[0:33:29] yeah and and one other one so currently how just
+[0:33:32] and one other one so currently how just to understand the whole pipeline so how
+[0:33:33] to understand the whole pipeline so how do you have it what do you have in mind
+[0:33:35] do you have it what do you have in mind so
+[0:33:36] so like in you have in mind that someone
+[0:33:38] like in you have in mind that someone has a maybe the the causal ordering and
+[0:33:40] has a maybe the the causal ordering and then someone fits the graph like a
+[0:33:43] then someone fits the graph like a causal model to it maybe additive models
+[0:33:45] causal model to it maybe additive models and then apply it to that like have you
+[0:33:48] and then apply it to that like have you tried out that pipeline do you have any
+[0:33:49] tried out that pipeline do you have any particular recommendations on what kind
+[0:33:51] particular recommendations on what kind of
+[0:33:52] of models to fit here
+[0:33:54] models to fit here yeah yeah that's
+[0:33:56] yeah yeah that's i mean the
+[0:33:58] i mean the this pipeline is
+[0:34:00] this pipeline is in do y
+[0:34:01] in do y so you can try it out for i mean
+[0:34:05] so you can try it out for i mean it also has a documentation of toy
+[0:34:07] it also has a documentation of toy examples
+[0:34:14] it raises all the practical questions that i admitted
+[0:34:18] so
+[0:34:24] if you have simple functions it works to some extent but of course
+[0:34:26] it works to some extent but of course from our complex functions there's
+[0:34:30] from our complex functions there's all these issues of
+[0:34:32] all these issues of ill personnel of the
+[0:34:35] ill personnel of the ill-definedness of the
+[0:34:37] ill-definedness of the of the function and
+[0:34:43] yeah but i think
+[0:34:44] i think then we need to talk also about
+[0:34:47] then we need to talk also about probabilistic
+[0:34:49] probabilistic contribution analysis
+[0:34:54] there's one other quick question i think that we have
+[0:34:55] that we have time for it um
+[0:34:57] time for it um that just came in so
+[0:34:58] that just came in so like it's about scaling issues so how
+[0:35:00] like it's about scaling issues so how large of a decks can you can you handle
+[0:35:03] large of a decks can you can you handle or what like what are the limitations
+[0:35:05] or what like what are the limitations you've seen in terms of scaling
+[0:35:09] um
+[0:35:14] yeah i think it's hard to say it heavily
+[0:35:16] i think it's hard to say it heavily depends on
+[0:35:18] depends on on the assumptions um
+[0:35:26] yeah i don't want to yeah
+[0:35:31] sure no i don't want to commit there because
+[0:35:33] because yeah i mean if you have linear functions
+[0:35:35] yeah i mean if you have linear functions then it scales much better but of course
+[0:35:38] then it scales much better but of course yeah
+[0:35:39] yeah so
+[0:35:40] so uh
+[0:35:42] uh yeah we have to see yeah
+[0:35:45] yeah we have to see yeah all right
+[0:35:46] all right thanks awesome all right um yeah with
+[0:35:48] thanks awesome all right um yeah with that i think we should uh head over to a
+[0:35:51] that i think we should uh head over to a nicholas pfister who will
+[0:35:53] nicholas pfister who will will be the discussant and after that
+[0:35:55] will be the discussant and after that dominick you will have the opportunity
+[0:35:57] dominick you will have the opportunity to respond to yes so i should stop
+[0:36:00] to respond to yes so i should stop sharing
+[0:36:02] sharing perfect
+[0:36:16] and the audience you feel free to keep so many questions that you want because
+[0:36:18] so many questions that you want because you can share whenever you uh yes um
+[0:36:25] let's see [Music]
+[0:36:41] can you see the screen now yeah
+[0:36:42] yeah great uh good so um first off um
+[0:36:46] great uh good so um first off um thanks for inviting me to this uh
+[0:36:49] thanks for inviting me to this uh a nice online format once again and um
+[0:36:52] a nice online format once again and um also thanks to dominic for
+[0:36:55] also thanks to dominic for for a very uh
+[0:36:57] for a very uh interesting uh talk today and also uh
+[0:36:59] interesting uh talk today and also uh for um for some interesting papers that
+[0:37:02] for um for some interesting papers that i
+[0:37:03] i that i could read so now as a short
+[0:37:05] that i could read so now as a short warning um
+[0:37:06] warning um i am no expert in root cause analysis so
+[0:37:10] i am no expert in root cause analysis so this is a little bit new also for me
+[0:37:12] this is a little bit new also for me um but i kind of now tried to phrase it
+[0:37:15] um but i kind of now tried to phrase it a little bit in my perspective and then
+[0:37:18] a little bit in my perspective and then we'll
+[0:37:19] we'll hopefully get into a little bit of
+[0:37:21] hopefully get into a little bit of discussion with dominic at the end
+[0:37:25] discussion with dominic at the end ah good so let me uh kind of give you a
+[0:37:28] ah good so let me uh kind of give you a little bit of my flavor to what i think
+[0:37:31] little bit of my flavor to what i think this root cause analysis setup that
+[0:37:34] this root cause analysis setup that dominic is looking at here and boils
+[0:37:37] dominic is looking at here and boils down to in a bit of a simpler
+[0:37:39] down to in a bit of a simpler setting so
+[0:37:42] setting so we start off from kind of a fixed causal
+[0:37:44] we start off from kind of a fixed causal model which i here called this
+[0:37:45] model which i here called this calligraphic m0 which is over a set m of
+[0:37:49] calligraphic m0 which is over a set m of our observed variables and x that we
+[0:37:51] our observed variables and x that we look at and then there is a fixed
+[0:37:53] look at and then there is a fixed kind of dag model underneath that is
+[0:37:56] kind of dag model underneath that is part of this column model that we look
+[0:37:59] part of this column model that we look at
+[0:38:00] at and now i kind of consider three steps
+[0:38:02] and now i kind of consider three steps so first
+[0:38:03] so first we assume kind of our system is
+[0:38:05] we assume kind of our system is generating some data according to this
+[0:38:07] generating some data according to this causal model
+[0:38:08] causal model and then
+[0:38:09] and then in a second step we kind of think about
+[0:38:12] in a second step we kind of think about now
+[0:38:13] now somewhere
+[0:38:14] somewhere there is going to be some change within
+[0:38:16] there is going to be some change within this model so we're intervening very
+[0:38:19] this model so we're intervening very locally and changing our original causal
+[0:38:22] locally and changing our original causal model to now slightly different causal
+[0:38:24] model to now slightly different causal model
+[0:38:25] model and where we only affect certain of
+[0:38:27] and where we only affect certain of these variables
+[0:38:28] these variables and kind of some of the changes that
+[0:38:30] and kind of some of the changes that that we saw also now in this talk is
+[0:38:32] that we saw also now in this talk is that we might do a noise shift or we
+[0:38:35] that we might do a noise shift or we might change the entire mechanism in
+[0:38:37] might change the entire mechanism in some way and but
+[0:38:38] some way and but importantly we keep the rest of the
+[0:38:40] importantly we keep the rest of the system the same
+[0:38:42] system the same and then we let the system run again in
+[0:38:45] and then we let the system run again in the second round and now what we kind of
+[0:38:47] the second round and now what we kind of are interested in in this root cause
+[0:38:49] are interested in in this root cause analysis
+[0:38:50] analysis is that we want to try and find
+[0:38:53] is that we want to try and find basically what are the root causes of
+[0:38:55] basically what are the root causes of the change either
+[0:38:57] the change either in the entire distribution maybe or
+[0:38:59] in the entire distribution maybe or maybe also only in a marginal or
+[0:39:02] maybe also only in a marginal or some kind of quantity based on the
+[0:39:05] some kind of quantity based on the distribution now what was responsible
+[0:39:08] distribution now what was responsible for this so which of the
+[0:39:11] for this so which of the changes kind of
+[0:39:12] changes kind of contributed the most somehow to
+[0:39:16] contributed the most somehow to the change that i'm observing so this is
+[0:39:18] the change that i'm observing so this is kind of my starting point for where i
+[0:39:20] kind of my starting point for where i think
+[0:39:22] think for understanding kind of what is going
+[0:39:24] for understanding kind of what is going on here
+[0:39:26] on here and just as a short example to
+[0:39:28] and just as a short example to illustrate this and we think of a
+[0:39:30] illustrate this and we think of a structural causal model or fcm as
+[0:39:33] structural causal model or fcm as dominic said
+[0:39:35] dominic said and then we had we have kind of a graph
+[0:39:37] and then we had we have kind of a graph and now this is just a simple example
+[0:39:40] and now this is just a simple example then we do some intervention on it so
+[0:39:43] then we do some intervention on it so say here we're interested in kind of the
+[0:39:46] say here we're interested in kind of the green node and now we intervene
+[0:39:48] green node and now we intervene basically on x1 and x5 and for example
+[0:39:52] basically on x1 and x5 and for example in this outlier or anomaly detection
+[0:39:55] in this outlier or anomaly detection thing we would think about these
+[0:39:57] thing we would think about these two nodes as being the root cause of
+[0:40:00] two nodes as being the root cause of some outlier happening in x2 and x5
+[0:40:04] some outlier happening in x2 and x5 and now this propagates through our
+[0:40:06] and now this propagates through our causal system and we also see an outlier
+[0:40:09] causal system and we also see an outlier in x4 and now we want to go back kind of
+[0:40:12] in x4 and now we want to go back kind of to what actually caused kind of x2 and
+[0:40:15] to what actually caused kind of x2 and x5 because we didn't see it and
+[0:40:17] x5 because we didn't see it and importantly here is that we don't want
+[0:40:19] importantly here is that we don't want to take
+[0:40:20] to take x3 and so we saw this in this
+[0:40:22] x3 and so we saw this in this thunderstorm example that dominate
+[0:40:24] thunderstorm example that dominate presented it's somehow in the middle
+[0:40:26] presented it's somehow in the middle because so the mechanism here
+[0:40:28] because so the mechanism here from the causal perspective is kind of
+[0:40:30] from the causal perspective is kind of remaining
+[0:40:31] remaining entirely fixed right so nothing really
+[0:40:33] entirely fixed right so nothing really is changing here so this is really
+[0:40:35] is changing here so this is really something that is a little bit different
+[0:40:36] something that is a little bit different than if we look at causal effects also
+[0:40:39] than if we look at causal effects also that i will be talking about
+[0:40:42] that i will be talking about in a second and then we see kind of that
+[0:40:44] in a second and then we see kind of that we have this anomaly detection and
+[0:40:46] we have this anomaly detection and equivalently we can also look at the
+[0:40:48] equivalently we can also look at the same thing
+[0:40:49] same thing basically from the perspective of now
+[0:40:51] basically from the perspective of now having
+[0:40:52] having marginally changing the entire mechanism
+[0:40:55] marginally changing the entire mechanism in certain variables so it can add as
+[0:40:57] in certain variables so it can add as links etc and then we just care about
+[0:40:59] links etc and then we just care about the distribution change again in our
+[0:41:01] the distribution change again in our variable so this is exactly the same
+[0:41:03] variable so this is exactly the same kind of idea and
+[0:41:05] kind of idea and as we will see or as dominic kind of
+[0:41:08] as we will see or as dominic kind of showed this that this is somehow the
+[0:41:09] showed this that this is somehow the same notion is kind of
+[0:41:12] same notion is kind of the right one that we want to have and
+[0:41:14] the right one that we want to have and this is not so much a causal effect as
+[0:41:16] this is not so much a causal effect as more
+[0:41:17] more of somehow something different
+[0:41:19] of somehow something different and that i will try to argue so root
+[0:41:21] and that i will try to argue so root causes somehow hard to define i think
+[0:41:24] causes somehow hard to define i think with causal effects directly
+[0:41:32] good and then what we saw also nicely in this talk is a bit that this problem of
+[0:41:34] this talk is a bit that this problem of associating root causes can somehow be
+[0:41:37] associating root causes can somehow be phrased perfectly well as a causal
+[0:41:39] phrased perfectly well as a causal attribution problem where we ask kind of
+[0:41:42] attribution problem where we ask kind of how much of the change in y or in some
+[0:41:45] how much of the change in y or in some response variable that i'm interested in
+[0:41:47] response variable that i'm interested in is attributed due to each of the
+[0:41:50] is attributed due to each of the variables so i want to give each of them
+[0:41:51] variables so i want to give each of them somehow a score between zero and one and
+[0:41:53] somehow a score between zero and one and then it should sum to one
+[0:41:56] then it should sum to one ideally
+[0:41:58] ideally and here
+[0:41:59] and here i think the important thing is somehow
+[0:42:02] i think the important thing is somehow this and this also how it was mentioned
+[0:42:04] this and this also how it was mentioned in one of his papers is this notion of
+[0:42:07] in one of his papers is this notion of intrinsic
+[0:42:09] intrinsic uh attribution
+[0:42:10] uh attribution and i think
+[0:42:12] and i think and now maybe i just picked one of these
+[0:42:14] and now maybe i just picked one of these contributions that i feel like is kind
+[0:42:16] contributions that i feel like is kind of the key one and this is exactly that
+[0:42:19] of the key one and this is exactly that there is no contribution
+[0:42:21] there is no contribution that to propagating nodes so if you have
+[0:42:24] that to propagating nodes so if you have a system of these three nodes x1 x2 x3
+[0:42:27] a system of these three nodes x1 x2 x3 and x1 and x2
+[0:42:29] and x1 and x2 are basically this the same variables
+[0:42:32] are basically this the same variables so this mechanism is entirely
+[0:42:34] so this mechanism is entirely deterministic
+[0:42:36] deterministic then you do not want to
+[0:42:39] then you do not want to attribute
+[0:42:41] attribute any importance to the variable x2 for
+[0:42:44] any importance to the variable x2 for that change so the entire change should
+[0:42:46] that change so the entire change should be kind of at
+[0:42:48] be kind of at only at x1 so i somehow need to separate
+[0:42:52] only at x1 so i somehow need to separate this deterministic
+[0:42:55] this deterministic notion from the
+[0:42:57] notion from the on the stochasticity that comes in
+[0:42:59] on the stochasticity that comes in through the node x1
+[0:43:01] through the node x1 and i think this is kind of the key
+[0:43:03] and i think this is kind of the key property
+[0:43:04] property essentially
+[0:43:06] essentially and now um
+[0:43:09] and now um given this goal
+[0:43:11] given this goal the the question kind of is then what is
+[0:43:13] the the question kind of is then what is the correct causal attribution and here
+[0:43:16] the correct causal attribution and here dominic of course gave already the
+[0:43:18] dominic of course gave already the answer and i will know and just repeat
+[0:43:20] answer and i will know and just repeat this basically from
+[0:43:22] this basically from uh from
+[0:43:23] uh from in relation to um to um total causal
+[0:43:27] in relation to um to um total causal effects and direct effects so if we
+[0:43:29] effects and direct effects so if we think about the total causal effect so
+[0:43:31] think about the total causal effect so what is this this is just basically
+[0:43:33] what is this this is just basically saying
+[0:43:34] saying i do a hard intervention on one of my
+[0:43:36] i do a hard intervention on one of my variables say x j and then i see what
+[0:43:39] variables say x j and then i see what happens in my response variable y so
+[0:43:41] happens in my response variable y so this is what
+[0:43:43] this is what i fully control one variable and then i
+[0:43:45] i fully control one variable and then i see what is happening in another one
+[0:43:47] see what is happening in another one with a direct effect i basically do the
+[0:43:50] with a direct effect i basically do the same but now i adjust for my other
+[0:43:52] same but now i adjust for my other variables so basically you think about
+[0:43:55] variables so basically you think about fixing your jth variable and then fixing
+[0:43:57] fixing your jth variable and then fixing the other ones to what they were before
+[0:43:59] the other ones to what they were before and then i just average it out here
+[0:44:01] and then i just average it out here just to remove
+[0:44:03] just to remove this dependence
+[0:44:04] this dependence and now
+[0:44:05] and now what is the intrinsic effect
+[0:44:08] what is the intrinsic effect of a variable so this can be defined
+[0:44:10] of a variable so this can be defined somehow similarly and here it's kind of
+[0:44:13] somehow similarly and here it's kind of i just instead of intervening fully on
+[0:44:16] i just instead of intervening fully on my variable i now go ahead and i just
+[0:44:19] my variable i now go ahead and i just set
+[0:44:20] set in the structural uh form
+[0:44:23] in the structural uh form of this variable that i'm interested in
+[0:44:26] of this variable that i'm interested in i just replace the noise
+[0:44:28] i just replace the noise and then i look kind of how does this
+[0:44:30] and then i look kind of how does this affect now my um
+[0:44:32] affect now my um my my variable y
+[0:44:34] my my variable y and this is if you like you can define
+[0:44:36] and this is if you like you can define it as
+[0:44:37] it as also an intervention of course on your
+[0:44:39] also an intervention of course on your noise
+[0:44:40] noise if one does not like this of course it
+[0:44:43] if one does not like this of course it it remains as dominic said an
+[0:44:44] it remains as dominic said an intervention on your
+[0:44:46] intervention on your on your structural equations
+[0:44:48] on your structural equations that is fine
+[0:44:50] that is fine and now so why are these two things not
+[0:44:53] and now so why are these two things not kind of the right thing
+[0:44:54] kind of the right thing what we want in terms of this
+[0:44:56] what we want in terms of this propagation property that i mentioned
+[0:44:57] propagation property that i mentioned before well this is somehow
+[0:45:00] before well this is somehow somehow obvious right because so if you
+[0:45:01] somehow obvious right because so if you think about this example that you saw
+[0:45:03] think about this example that you saw before if you look at total causal
+[0:45:05] before if you look at total causal effects you're really intervening also
+[0:45:07] effects you're really intervening also on these deterministic propagating nodes
+[0:45:11] on these deterministic propagating nodes and then they will
+[0:45:12] and then they will they will immediately also get a certain
+[0:45:15] they will immediately also get a certain bit of contribution
+[0:45:16] bit of contribution and the direct cause effect is even more
+[0:45:19] and the direct cause effect is even more not what we want actually here because
+[0:45:21] not what we want actually here because it really is somehow it finds the causes
+[0:45:23] it really is somehow it finds the causes that are closest to what to what i'm
+[0:45:26] that are closest to what to what i'm looking at and this is of course not
+[0:45:27] looking at and this is of course not what root cause analysis is interested
+[0:45:29] what root cause analysis is interested in
+[0:45:31] in good anyway now some comments to what i
+[0:45:34] good anyway now some comments to what i think about this intrinsic effect so i
+[0:45:36] think about this intrinsic effect so i actually i thought this was a very uh
+[0:45:39] actually i thought this was a very uh fascinating concept
+[0:45:41] fascinating concept and interesting and i also thought so
+[0:45:44] and interesting and i also thought so the examples now dominic also mentioned
+[0:45:46] the examples now dominic also mentioned they're very much like
+[0:45:48] they're very much like a supply chain and you have also these
+[0:45:52] a supply chain and you have also these these like fixed physical systems of the
+[0:45:54] these like fixed physical systems of the river networks and so on but i also
+[0:45:56] river networks and so on but i also thought actually that it
+[0:45:58] thought actually that it relates somewhat to
+[0:46:00] relates somewhat to problems in biology where
+[0:46:03] problems in biology where one sometimes looks at variable
+[0:46:05] one sometimes looks at variable importance
+[0:46:06] importance in terms of finding kind of
+[0:46:08] in terms of finding kind of if you have some phenotype you want
+[0:46:10] if you have some phenotype you want somehow the
+[0:46:11] somehow the the genetic
+[0:46:13] the genetic the genes somehow that are closest maybe
+[0:46:15] the genes somehow that are closest maybe to some phenotype
+[0:46:17] to some phenotype but maybe actually you do want somehow
+[0:46:19] but maybe actually you do want somehow the ones that have somehow this more
+[0:46:21] the ones that have somehow this more this intrinsic effect so i think also in
+[0:46:23] this intrinsic effect so i think also in other fields this might actually be an
+[0:46:25] other fields this might actually be an interesting notion to look at given of
+[0:46:28] interesting notion to look at given of course that it is
+[0:46:29] course that it is also a little bit more challenging of
+[0:46:32] also a little bit more challenging of course
+[0:46:33] course to compute in certain settings in
+[0:46:35] to compute in certain settings in particular if the graph is not known
+[0:46:38] particular if the graph is not known uh
+[0:46:39] uh good uh yeah so this i also mentioned uh
+[0:46:43] good uh yeah so this i also mentioned uh i guess before is that at first sight
+[0:46:45] i guess before is that at first sight the scene also if you look at kind of
+[0:46:47] the scene also if you look at kind of this intrinsic effect it seems
+[0:46:50] this intrinsic effect it seems somewhat artificially and very uh
+[0:46:52] somewhat artificially and very uh specifically targeted towards
+[0:46:54] specifically targeted towards towards the cause of moderation
+[0:46:56] towards the cause of moderation you're not now only using the nodes as
+[0:46:59] you're not now only using the nodes as in a graphical model but you're really
+[0:47:00] in a graphical model but you're really going into now the structural form
+[0:47:04] going into now the structural form and this immediately raised also
+[0:47:07] and this immediately raised also my mind a bit the question of how robust
+[0:47:09] my mind a bit the question of how robust this notion actually is towards
+[0:47:11] this notion actually is towards misspecifying your causal model in a
+[0:47:14] misspecifying your causal model in a certain way
+[0:47:15] certain way and
+[0:47:16] and although but now the last point that i
+[0:47:19] although but now the last point that i want to make which i think kind of
+[0:47:22] want to make which i think kind of should give the intuition actually that
+[0:47:24] should give the intuition actually that this is actually
+[0:47:25] this is actually a relatively robust notion of i think a
+[0:47:29] a relatively robust notion of i think a certain
+[0:47:30] certain caudal effect because and this is what i
+[0:47:32] caudal effect because and this is what i mentioned before it somehow what you're
+[0:47:34] mentioned before it somehow what you're trying to do is somehow
+[0:47:36] trying to do is somehow distinguish stochastic
+[0:47:40] distinguish stochastic propagating effect from somehow a more
+[0:47:42] propagating effect from somehow a more deterministic mechanism and you're just
+[0:47:44] deterministic mechanism and you're just trying to split uh those two up and this
+[0:47:46] trying to split uh those two up and this seems somehow intuitively to me at least
+[0:47:49] seems somehow intuitively to me at least doable although i haven't a whole
+[0:47:52] doable although i haven't a whole lot about it
+[0:47:53] lot about it and so
+[0:47:54] and so i think yeah yeah
+[0:47:56] i think yeah yeah in any case uh very nice notion
+[0:48:00] in any case uh very nice notion good
+[0:48:01] good and uh yeah i don't want to go too deep
+[0:48:04] and uh yeah i don't want to go too deep so that's like a few questions so i
+[0:48:06] so that's like a few questions so i actually had a lot of questions but um
+[0:48:10] actually had a lot of questions but um that were very specific yes i will focus
+[0:48:12] that were very specific yes i will focus on a little bit of the higher level
+[0:48:14] on a little bit of the higher level questions because they might be more
+[0:48:16] questions because they might be more interesting also for others to hear so
+[0:48:20] interesting also for others to hear so um
+[0:48:21] um maybe this first one goes in relation to
+[0:48:23] maybe this first one goes in relation to this robustness so so i was wondering
+[0:48:25] this robustness so so i was wondering how are these methods affected if for
+[0:48:28] how are these methods affected if for example parts of your graph somehow are
+[0:48:30] example parts of your graph somehow are misspecified so you kind of
+[0:48:32] misspecified so you kind of you only know that certain things are
+[0:48:34] you only know that certain things are correct maybe i'll just read all of them
+[0:48:36] correct maybe i'll just read all of them and then we can uh
+[0:48:38] and then we can uh discuss some of them so in the second
+[0:48:40] discuss some of them so in the second question i was thinking is
+[0:48:46] uh is it possible and this i guess goes a little bit into the setting
+[0:48:48] a little bit into the setting that if parts of the g are somehow
+[0:48:51] that if parts of the g are somehow unknown and maybe this was a little bit
+[0:48:53] unknown and maybe this was a little bit more the cp dag question before so then
+[0:48:56] more the cp dag question before so then can one
+[0:48:57] can one somehow get control on some bounds
+[0:48:59] somehow get control on some bounds potentially that say like okay so this
+[0:49:02] potentially that say like okay so this note calls at most this much or
+[0:49:04] note calls at most this much or something
+[0:49:06] something and so i can get somehow an upper bound
+[0:49:08] and so i can get somehow an upper bound on
+[0:49:08] on on how much or lower bound on this
+[0:49:11] on how much or lower bound on this contributed at least a bit to to a
+[0:49:13] contributed at least a bit to to a system if i have somehow some
+[0:49:16] system if i have somehow some uncertainty within my my graphical model
+[0:49:19] uncertainty within my my graphical model and then the last one was already also
+[0:49:21] and then the last one was already also answered and you also mentioned it a bit
+[0:49:23] answered and you also mentioned it a bit in your talk with these hidden variables
+[0:49:24] in your talk with these hidden variables so maybe you can
+[0:49:26] so maybe you can also discuss that a little bit more yeah
+[0:49:30] also discuss that a little bit more yeah and with that uh
+[0:49:32] and with that uh i would like to thank and thank you
+[0:49:34] i would like to thank and thank you dominic and your co-authors of course um
+[0:49:36] dominic and your co-authors of course um for very
+[0:49:38] for very few thought-provoking and nice papers
+[0:49:47] yeah thanks a lot tony class for this nice discussion for and particular
+[0:49:50] this nice discussion for and particular for your flexibility to
+[0:49:55] to also process last minute slides
+[0:50:02] um yeah so the the last question is just uh
+[0:50:04] yeah so the the last question is just uh so
+[0:50:05] so we can deal with hidden common courses
+[0:50:07] we can deal with hidden common courses and
+[0:50:08] and i think the the root cause analysis
+[0:50:10] i think the the root cause analysis paper contains some remarks on that it's
+[0:50:13] paper contains some remarks on that it's not
+[0:50:14] not very detailed but
+[0:50:16] very detailed but in principle the concept applies to
+[0:50:18] in principle the concept applies to hidden common causes
+[0:50:24] you just need to have the fcm and then you have dependent noise terms
+[0:50:26] and then you have dependent noise terms but you intervene on the noise so that
+[0:50:31] but you intervene on the noise so that destroys the correlations between the
+[0:50:33] destroys the correlations between the noise terms yes i guess this is because
+[0:50:35] noise terms yes i guess this is because you always basically condition
+[0:50:37] you always basically condition on a full subset of nodes and then plus
+[0:50:40] on a full subset of nodes and then plus yeah
+[0:50:41] yeah and then yeah okay so then the specific
+[0:50:45] and then yeah okay so then the specific way if you have the correct model right
+[0:50:47] way if you have the correct model right so then yeah yeah yeah yeah
+[0:50:51] so then yeah yeah yeah yeah yeah so
+[0:50:52] yeah so i think there were quite a few questions
+[0:50:54] i think there were quite a few questions on robustness i also see them in the
+[0:50:56] on robustness i also see them in the chat also
+[0:50:58] chat also i didn't read the chat
+[0:51:00] i didn't read the chat systematically yet but
+[0:51:04] systematically yet but yeah i think
+[0:51:06] yeah i think the robustness
+[0:51:07] the robustness we are doing experiments on that um
+[0:51:11] we are doing experiments on that um it's
+[0:51:12] it's i would say too preliminary to comment
+[0:51:15] i would say too preliminary to comment on that
+[0:51:17] on that it is
+[0:51:18] it is crucial a crucial question
+[0:51:22] crucial a crucial question and
+[0:51:23] and as i said so i could i could think of
+[0:51:26] as i said so i could i could think of having larger modules
+[0:51:28] having larger modules in regions where we are unsure about
+[0:51:33] in regions where we are unsure about um and apart from that
+[0:51:35] um and apart from that these confidence
+[0:51:38] these confidence values need to be developed yes
+[0:51:41] values need to be developed yes so i just see that these are interesting
+[0:51:44] so i just see that these are interesting research questions
+[0:51:46] research questions that are asked in the chat
+[0:51:49] that are asked in the chat we haven't
+[0:51:51] we haven't fully answered them and
+[0:51:54] fully answered them and since
+[0:51:55] since people ask about scaling and i didn't
+[0:51:58] people ask about scaling and i didn't comment on that much
+[0:52:00] comment on that much i should say that
+[0:52:02] i should say that i feel that many of these problems uh
+[0:52:05] i feel that many of these problems uh are already interesting with a small
+[0:52:07] are already interesting with a small number of variables so i don't consider
+[0:52:10] number of variables so i don't consider wood quarter analysis with five
+[0:52:12] wood quarter analysis with five variables
+[0:52:13] variables drivel
+[0:52:15] drivel simple in any way
+[0:52:17] simple in any way um i mean we all know that also a causal
+[0:52:20] um i mean we all know that also a causal discovery with five variables
+[0:52:24] discovery with five variables is not easy at all
+[0:52:26] is not easy at all uh it may even get easier in some
+[0:52:29] uh it may even get easier in some regards
+[0:52:30] regards with more but so
+[0:52:33] with more but so i like to focus on small problems
+[0:52:38] yeah and then there was a comment on
+[0:52:42] shapley values
+[0:52:48] i would say uh
+[0:52:49] uh uh shapley values we are not dogmatic at
+[0:52:52] uh shapley values we are not dogmatic at all about chapli values and we don't
+[0:52:54] all about chapli values and we don't sell this as the crucial point i mean
+[0:52:58] sell this as the crucial point i mean it's
+[0:52:59] it's a pragmatic way of
+[0:53:00] a pragmatic way of getting rid of this ambiguity of the
+[0:53:03] getting rid of this ambiguity of the ordering of replacement
+[0:53:06] ordering of replacement but um
+[0:53:07] but um i often hear it
+[0:53:09] i often hear it that people say oh this method uses
+[0:53:11] that people say oh this method uses sharply values
+[0:53:13] sharply values and it sounds like
+[0:53:15] and it sounds like as if this would already describe the
+[0:53:18] as if this would already describe the method but
+[0:53:20] method but i mean we have partially published
+[0:53:22] i mean we have partially published meanwhile
+[0:53:23] meanwhile i don't know at least five papers with
+[0:53:26] i don't know at least five papers with which contain
+[0:53:28] which contain sharply values and all of them are
+[0:53:31] sharply values and all of them are substantially different so
+[0:53:34] substantially different so it's just a way to get rid of the
+[0:53:36] it's just a way to get rid of the ordering and
+[0:53:43] how you deal with the combinatorial problem
+[0:53:44] problem in practice
+[0:53:45] in practice when it comes to many variables
+[0:53:48] when it comes to many variables this is
+[0:53:49] this is an open problem i would say but there
+[0:53:52] an open problem i would say but there are approximations
+[0:53:55] are approximations can i ask one more so actually along
+[0:53:58] can i ask one more so actually along these uh sharply values so if you
+[0:54:00] these uh sharply values so if you so i mean
+[0:54:02] so i mean the reason one one looks also often at
+[0:54:05] the reason one one looks also often at these is that one wants somehow this
+[0:54:07] these is that one wants somehow this attribution property right so now that
+[0:54:10] attribution property right so now that it sums to the total and then it has all
+[0:54:12] it sums to the total and then it has all these nice properties and
+[0:54:14] these nice properties and this is the one solution to get it but
+[0:54:16] this is the one solution to get it but so actually how
+[0:54:19] so actually how how important do you think actually that
+[0:54:21] how important do you think actually that these
+[0:54:23] these like
+[0:54:24] like somewhat artificial properties of
+[0:54:25] somewhat artificial properties of summing to one
+[0:54:27] summing to one or like being like an actual attribution
+[0:54:30] or like being like an actual attribution how important is this actually because
+[0:54:31] how important is this actually because so sometimes you could also think it
+[0:54:33] so sometimes you could also think it would be fine if i somehow have a proper
+[0:54:36] would be fine if i somehow have a proper ranking or i have
+[0:54:38] ranking or i have like just like some quantification of
+[0:54:41] like just like some quantification of how much i
+[0:54:42] how much i believe you know that doesn't doesn't
+[0:54:45] believe you know that doesn't doesn't necessarily need to have this additivity
+[0:54:49] necessarily need to have this additivity yeah
+[0:54:53] and [Music]
+[0:54:54] [Music] it makes sense
+[0:54:56] it makes sense to us that but
+[0:54:57] to us that but um
+[0:55:04] for me it's the general belief the what is behind it is the general
+[0:55:06] the what is behind it is the general belief that
+[0:55:11] whenever you have a concept
+[0:55:13] a concept that
+[0:55:15] that is clean in this regard
+[0:55:18] is clean in this regard it's also more modular
+[0:55:22] it's also more modular so
+[0:55:22] so um it's hard to
+[0:55:24] um it's hard to to explain that by examples at least i
+[0:55:27] to explain that by examples at least i couldn't
+[0:55:28] couldn't come up with one on the fly but
+[0:55:31] come up with one on the fly but uh
+[0:55:32] uh my belief is that when
+[0:55:35] my belief is that when concepts are
+[0:55:37] concepts are principled then
+[0:55:44] they have they admit many different ways of
+[0:55:46] they admit many different ways of interpreting them
+[0:55:48] interpreting them and are in this we got more flexible and
+[0:55:52] and are in this we got more flexible and maybe i can directly comment on one
+[0:55:54] maybe i can directly comment on one other question in the chat
+[0:55:56] other question in the chat are extensions to machine learning
+[0:55:58] are extensions to machine learning immediate say to neural network
+[0:56:00] immediate say to neural network perspectives
+[0:56:01] perspectives i'm not entirely sure whether it's just
+[0:56:04] i'm not entirely sure whether it's just meant
+[0:56:05] meant in the sense that the regression models
+[0:56:09] in the sense that the regression models are learned by neural networks
+[0:56:16] if if this is the question then we already have that
+[0:56:18] already have that so
+[0:56:19] so you can learn
+[0:56:21] you can learn you can use any
+[0:56:24] you can use any regression method
+[0:56:26] regression method at each particular node
+[0:56:28] at each particular node to learn the conditional distribution
+[0:56:31] to learn the conditional distribution or to first learn the conditional
+[0:56:33] or to first learn the conditional expectation and then assume an additive
+[0:56:36] expectation and then assume an additive noise model or whatsoever so this is
+[0:56:38] noise model or whatsoever so this is exactly
+[0:56:40] exactly um
+[0:56:41] um the key idea to have this modula so
+[0:56:45] the key idea to have this modula so i believe that
+[0:56:47] i believe that causal methods
+[0:56:48] causal methods should be modular in the sense that they
+[0:56:52] should be modular in the sense that they that they build on top of machine
+[0:56:54] that they build on top of machine learning methods so when machine
+[0:56:57] learning methods so when machine learning advances you just replace these
+[0:57:00] learning advances you just replace these modules
+[0:57:02] modules and therefore i'm emphasizing that it's
+[0:57:04] and therefore i'm emphasizing that it's not a particular algorithm it's just a
+[0:57:07] not a particular algorithm it's just a concept of thinking about
+[0:57:10] concept of thinking about root causes
+[0:57:17] thanks thank you dawn and nicolas for the discussion maybe we
+[0:57:20] and nicolas for the discussion maybe we should then
+[0:57:21] should then wrap up
+[0:57:23] wrap up so i'll be done
+[0:57:35] great uh so yes thank you again uh dominic for the nice talk and
+[0:57:38] dominic for the nice talk and introduction to a new problem i didn't
+[0:57:40] introduction to a new problem i didn't think about before and nikolas thanks
+[0:57:43] think about before and nikolas thanks for uh giving a new perspective on it as
+[0:57:45] for uh giving a new perspective on it as well
+[0:57:46] well uh next week we'll have a talk by the
+[0:57:48] uh next week we'll have a talk by the celeste ganes from stanford university
+[0:57:51] celeste ganes from stanford university on automatically biased machine learning
+[0:57:53] on automatically biased machine learning for dynamic treatment effect and
+[0:57:55] for dynamic treatment effect and generalness and functional
+[0:57:57] generalness and functional um so next time
+[0:57:59] um so next time next week we're back at our regular time
+[0:58:01] next week we're back at our regular time so 8 30 a.m pacific time or 11 30 am
+[0:58:05] so 8 30 a.m pacific time or 11 30 am eastern time and so on uh you can find
+[0:58:08] eastern time and so on uh you can find out on the website and so we hope to see
+[0:58:11] out on the website and so we hope to see you all there
+[0:58:12] you all there have a great day
+[0:58:16] thank you

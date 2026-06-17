@@ -1,0 +1,1886 @@
+[0:00:06] Great. Hi everyone. Welcome to another online causal inference seminar. Today
+[0:00:08] online causal inference seminar. Today we have the pleasure of welcoming
+[0:00:09] we have the pleasure of welcoming Hansung Kang from University of
+[0:00:11] Hansung Kang from University of Wisconsin-Madison who will be talking
+[0:00:13] Wisconsin-Madison who will be talking about transfer learning between US
+[0:00:15] about transfer learning between US presidential elections. How much can we
+[0:00:17] presidential elections. How much can we learn from a 2020 ad campaign to inform
+[0:00:20] learn from a 2020 ad campaign to inform 2024 election. So a very topical given
+[0:00:24] 2024 election. So a very topical given the year.
+[0:00:25] the year. He will have some help in the Q&amp;A from
+[0:00:28] He will have some help in the Q&amp;A from one of his co-authors
+[0:00:30] one of his co-authors please do ask your questions there and
+[0:00:33] please do ask your questions there and our discussion today will be Melody
+[0:00:35] our discussion today will be Melody Huang from Harvard so forward to
+[0:00:38] Huang from Harvard so forward to that conversation as well. Ying will be
+[0:00:41] that conversation as well. Ying will be handling the questions today so I'll
+[0:00:43] handling the questions today so I'll switch over to her.
+[0:00:45] switch over to her. Thank you Emma.
+[0:00:47] Thank you Emma. Thank you Emma. As usual please submit
+[0:00:49] Thank you Emma. As usual please submit your questions through the Q&amp;A section.
+[0:00:52] your questions through the Q&amp;A section. It's a button at the bottom of the zoom
+[0:00:54] It's a button at the bottom of the zoom window.
+[0:00:55] window. Please submit it in
+[0:00:57] Please submit it in Q&amp;A part instead of the chat for us to
+[0:01:00] Q&amp;A part instead of the chat for us to better track the questions
+[0:01:02] better track the questions and I'll raise some of them to Hansung
+[0:01:04] and I'll raise some of them to Hansung as he
+[0:01:06] as he naturally stops and otherwise
+[0:01:09] naturally stops and otherwise I believe
+[0:01:10] I believe she will be answering them.
+[0:01:12] she will be answering them. Without further ado please
+[0:01:14] Without further ado please feel free to take over.
+[0:01:21] Uh
+[0:01:27] Can everyone see? Yes, that looks great. Great. Well I
+[0:01:30] Yes, that looks great. Great. Well I uh oh oh sorry. Uh so I I thank you for
+[0:01:34] uh oh oh sorry. Uh so I I thank you for the invitation to the the seminar.
+[0:01:37] the invitation to the the seminar. I was checking the last time I was here
+[0:01:38] I was checking the last time I was here for a seminar was like the second week
+[0:01:40] for a seminar was like the second week of when COVID lockdown happened. So this
+[0:01:42] of when COVID lockdown happened. So this is a wonderful thing to be back and it's
+[0:01:44] is a wonderful thing to be back and it's actually highly relevant because we're
+[0:01:45] actually highly relevant because we're going to be talking about how to learn
+[0:01:47] going to be talking about how to learn from the past specifically 2020 and how
+[0:01:49] from the past specifically 2020 and how to inform that in the future decision in
+[0:01:51] to inform that in the future decision in 2024. This is joint work with my
+[0:01:54] 2024. This is joint work with my fantastic students in Ramya who will be
+[0:01:55] fantastic students in Ramya who will be handling questions Jiwei from Biostat
+[0:01:58] handling questions Jiwei from Biostat and myself. And just before I begin,
+[0:02:00] and myself. And just before I begin, anything that's great about this you
+[0:02:02] anything that's great about this you should really contribute you should
+[0:02:03] should really contribute you should really attribute it to Zim Rat who's
+[0:02:04] really attribute it to Zim Rat who's been really doing a lot of the data
+[0:02:06] been really doing a lot of the data cleaning and also the development as
+[0:02:07] cleaning and also the development as well. And anything that's bad and wrong,
+[0:02:09] well. And anything that's bad and wrong, you can all point that to her to me.
+[0:02:12] you can all point that to her to me. Uh so this is a one slide review of
+[0:02:14] Uh so this is a one slide review of overview of the talk. So the motivation
+[0:02:16] overview of the talk. So the motivation for this entire talk is as follows. How
+[0:02:18] for this entire talk is as follows. How much can you learn from a 2020 ad
+[0:02:20] much can you learn from a 2020 ad campaign that people are ran to inform
+[0:02:22] campaign that people are ran to inform 2024 presidential ad campaigns coming up
+[0:02:24] 2024 presidential ad campaigns coming up this election cycle?
+[0:02:26] this election cycle? And the way we approach this question
+[0:02:28] And the way we approach this question answer this question is actually using
+[0:02:29] answer this question is actually using transfer learning. Apologize for the
+[0:02:31] transfer learning. Apologize for the typo here with sensitivity analysis. And
+[0:02:33] typo here with sensitivity analysis. And there are two elements to this. The
+[0:02:35] there are two elements to this. The design elements are what what is the
+[0:02:37] design elements are what what is the study design that we're using?
+[0:02:38] study design that we're using? Essentially, we're going to allow for
+[0:02:39] Essentially, we're going to allow for covariate shift which effectively means
+[0:02:41] covariate shift which effectively means that the voter demographics between 2020
+[0:02:43] that the voter demographics between 2020 and 2024 are allowed to be different.
+[0:02:45] and 2024 are allowed to be different. We're not going to assume that we
+[0:02:46] We're not going to assume that we measured the exact same thing in 2020
+[0:02:47] measured the exact same thing in 2020 and 2024. We're not going to also assume
+[0:02:49] and 2024. We're not going to also assume that the ad effects are the same between
+[0:02:51] that the ad effects are the same between 2020 and 2024. So we're going to make
+[0:02:53] 2020 and 2024. So we're going to make more or less realistic baselines to go
+[0:02:55] more or less realistic baselines to go through. Yeah, analysis elements are as
+[0:02:58] through. Yeah, analysis elements are as follows. We're going to actually use a
+[0:02:59] follows. We're going to actually use a very simple design inspired plugin
+[0:03:01] very simple design inspired plugin estimator that's non-parametric and
+[0:03:03] estimator that's non-parametric and efficient. We're also going to propose a
+[0:03:04] efficient. We're also going to propose a bootstrap approach that is theoretically
+[0:03:06] bootstrap approach that is theoretically correct in transfer learning. We do have
+[0:03:08] correct in transfer learning. We do have a if the time allows, we'll talk about
+[0:03:10] a if the time allows, we'll talk about the efficient influence function for
+[0:03:11] the efficient influence function for this problem. And we'll talk about how
+[0:03:13] this problem. And we'll talk about how the benchmark or calibrate sensitivity
+[0:03:14] the benchmark or calibrate sensitivity parameters or source data or source data
+[0:03:16] parameters or source data or source data as well. And this data we're going to do
+[0:03:18] as well. And this data we're going to do some preliminary
+[0:03:20] some preliminary data analysis of Pennsylvania so where I
+[0:03:22] data analysis of Pennsylvania so where I spent five years of my time long time
+[0:03:24] spent five years of my time long time ago.
+[0:03:26] ago. Uh before I begin, disclaimers. Uh none
+[0:03:28] Uh before I begin, disclaimers. Uh none of us are experts in US elections or
+[0:03:30] of us are experts in US elections or voter mobilization by training. So but
+[0:03:33] voter mobilization by training. So but as a data scientist or statistician,
+[0:03:35] as a data scientist or statistician, this particular cycle of elections are
+[0:03:37] this particular cycle of elections are very unique for a variety of reasons
+[0:03:39] very unique for a variety of reasons I'll talk about below. And actually, it
+[0:03:41] I'll talk about below. And actually, it helps us understand how do we use these
+[0:03:43] helps us understand how do we use these tools to transfer across time. And the
+[0:03:46] tools to transfer across time. And the beauty of this particular set of
+[0:03:48] beauty of this particular set of elections is that the two candidates are
+[0:03:49] elections is that the two candidates are identical. And again, I'll talk about
+[0:03:51] identical. And again, I'll talk about this more. We also hope to bridge the
+[0:03:53] this more. We also hope to bridge the gap between practice, specifically what
+[0:03:55] gap between practice, specifically what people use, and and modern statistical
+[0:03:57] people use, and and modern statistical methodology that has been developed over
+[0:03:58] methodology that has been developed over the past 10 years. And all of our data
+[0:04:00] the past 10 years. And all of our data analysis is preliminary. Voting data
+[0:04:02] analysis is preliminary. Voting data gets updated weekly, and we're still
+[0:04:03] gets updated weekly, and we're still gathering data from other battleground
+[0:04:05] gathering data from other battleground states. So, any comments and critiques
+[0:04:07] states. So, any comments and critiques are very, very encouraged throughout the
+[0:04:09] are very, very encouraged throughout the talk.
+[0:04:10] talk. So, the motivation for this talk comes
+[0:04:12] So, the motivation for this talk comes from a
+[0:04:13] from a 2020 digital ad campaign by Acronym
+[0:04:16] 2020 digital ad campaign by Acronym and our co-authors. So, they wanted to
+[0:04:18] and our co-authors. So, they wanted to estimate the impact of online
+[0:04:19] estimate the impact of online advertising against Donald Trump and
+[0:04:21] advertising against Donald Trump and voter turnout in five battleground
+[0:04:22] voter turnout in five battleground states: Arizona, Michigan, North
+[0:04:24] states: Arizona, Michigan, North Carolina, Pennsylvania, and my state,
+[0:04:26] Carolina, Pennsylvania, and my state, Wisconsin. And so, the way they did this
+[0:04:29] Wisconsin. And so, the way they did this is by a stratified randomized experiment
+[0:04:31] is by a stratified randomized experiment that they ran from 2020 all the way to
+[0:04:32] that they ran from 2020 all the way to November February 2020 to November 2020,
+[0:04:35] November February 2020 to November 2020, where they stratified by gender, race,
+[0:04:37] where they stratified by gender, race, and age groups. And all these are
+[0:04:38] and age groups. And all these are discrete, and this will come important
+[0:04:40] discrete, and this will come important later.
+[0:04:41] later. And about 1.7 million registered voters
+[0:04:44] And about 1.7 million registered voters were
+[0:04:44] were randomized to receive about on average
+[0:04:47] randomized to receive about on average 754 ads against Donald Trump by Acronym,
+[0:04:50] 754 ads against Donald Trump by Acronym, this left-leaning nonprofit organization
+[0:04:52] this left-leaning nonprofit organization that funded this entire study.
+[0:04:54] that funded this entire study. And the control group is that they
+[0:04:55] And the control group is that they didn't receive any ads from the Acronym
+[0:04:57] didn't receive any ads from the Acronym group.
+[0:04:58] group. The outcome that they were interested in
+[0:04:59] The outcome that they were interested in is whether they voted in the 2020
+[0:05:01] is whether they voted in the 2020 elections, and again, this is binary,
+[0:05:02] elections, and again, this is binary, and this will become important later
+[0:05:03] and this will become important later down the road. And really, the fun part
+[0:05:06] down the road. And really, the fun part of all this is that in practice, most
+[0:05:07] of all this is that in practice, most people just use linear regression.
+[0:05:09] people just use linear regression. Because this is not only the most
+[0:05:10] Because this is not only the most simplest, but it's also the easiest to
+[0:05:11] simplest, but it's also the easiest to explain throughout. And so, we're going
+[0:05:13] explain throughout. And so, we're going to actually use the exact same approach
+[0:05:15] to actually use the exact same approach to do this for our analysis.
+[0:05:17] to do this for our analysis. So, what are the type of ads that the
+[0:05:18] So, what are the type of ads that the treatment group faced? There are roughly
+[0:05:20] treatment group faced? There are roughly two ads that they are facing. One is
+[0:05:22] two ads that they are facing. One is just ad promoting news stories. So,
+[0:05:23] just ad promoting news stories. So, maybe there's a news news article, and
+[0:05:25] maybe there's a news news article, and then the these platforms are promoting
+[0:05:27] then the these platforms are promoting it. This one in particular is kind of
+[0:05:28] it. This one in particular is kind of interesting. They were about to they
+[0:05:30] interesting. They were about to they were concerned about turning Ruby Wax in
+[0:05:32] were concerned about turning Ruby Wax in 2020, and then it happened in 2022. So,
+[0:05:35] 2020, and then it happened in 2022. So, the again, the similar ads could be
+[0:05:36] the again, the similar ads could be used. And the second ad is a traditional
+[0:05:38] used. And the second ad is a traditional video campaign ad, where essentially,
+[0:05:40] video campaign ad, where essentially, there's like a video of some voter that
+[0:05:41] there's like a video of some voter that may have voted for Trump in 2016, but
+[0:05:44] may have voted for Trump in 2016, but don't want to vote in 2020.
+[0:05:47] don't want to vote in 2020. So, we're just going to summarize some
+[0:05:48] So, we're just going to summarize some key results in Agarwal et al. that's
+[0:05:50] key results in Agarwal et al. that's relevant to our effect. Uh so, the
+[0:05:51] relevant to our effect. Uh so, the effect that we're measuring was in
+[0:05:52] effect that we're measuring was in difference in voter turnout between
+[0:05:54] difference in voter turnout between treated and control. So, these are
+[0:05:55] treated and control. So, these are intent-to-treat effects in difference in
+[0:05:56] intent-to-treat effects in difference in probability scales.
+[0:05:58] probability scales. Uh just to just to give you a sense of
+[0:06:00] Uh just to just to give you a sense of what a negative effect means and a
+[0:06:01] what a negative effect means and a positive effect means, these are
+[0:06:02] positive effect means, these are important for practical reasons. So, a
+[0:06:04] important for practical reasons. So, a negative effect means that the ad
+[0:06:05] negative effect means that the ad against Donald Trump actually decreased
+[0:06:07] against Donald Trump actually decreased turnout at the end of day. So, this
+[0:06:08] turnout at the end of day. So, this could have happened a mechanism that
+[0:06:10] could have happened a mechanism that they hypothesize is that perhaps a Trump
+[0:06:12] they hypothesize is that perhaps a Trump supporter may be discouraged to vote
+[0:06:14] supporter may be discouraged to vote after the ads against a negative ad
+[0:06:16] after the ads against a negative ad against him.
+[0:06:17] against him. A positive ad on the other hand is an ad
+[0:06:18] A positive ad on the other hand is an ad against Trump actually increased voter
+[0:06:20] against Trump actually increased voter turnout in 2020. And so, one mechanism
+[0:06:22] turnout in 2020. And so, one mechanism that they explained could be possible
+[0:06:23] that they explained could be possible for this is that a Biden supporter may
+[0:06:25] for this is that a Biden supporter may be encouraged to vote after all the
+[0:06:26] be encouraged to vote after all the negative ads about 750 negative ads
+[0:06:28] negative ads about 750 negative ads against Trump during the February 2020
+[0:06:30] against Trump during the February 2020 to November 2020.
+[0:06:32] to November 2020. So, the overall ATE turns out to be
+[0:06:34] So, the overall ATE turns out to be negative 0.06 percentage points. So,
+[0:06:37] negative 0.06 percentage points. So, this is very very tiny with a standard
+[0:06:38] this is very very tiny with a standard error of 0.12% points. And as the paper
+[0:06:41] error of 0.12% points. And as the paper quote that we can affirm that the
+[0:06:43] quote that we can affirm that the overall effect estimate of the ad
+[0:06:44] overall effect estimate of the ad against Trump on voter turnout is
+[0:06:46] against Trump on voter turnout is effectively zero. And so, this isn't
+[0:06:49] effectively zero. And so, this isn't they had some interesting discussions
+[0:06:50] they had some interesting discussions about this, but what we're interested is
+[0:06:52] about this, but what we're interested is another interesting discussion in that
+[0:06:53] another interesting discussion in that in their discussion part of paper which
+[0:06:55] in their discussion part of paper which grabbed our attention and motivated this
+[0:06:57] grabbed our attention and motivated this work, which is one reasonable question
+[0:06:59] work, which is one reasonable question that they wanted to ask is how well our
+[0:07:01] that they wanted to ask is how well our findings would generalize to other
+[0:07:02] findings would generalize to other electoral context. It would It could be
+[0:07:04] electoral context. It would It could be that the 2020 election was exceptional
+[0:07:06] that the 2020 election was exceptional because of COVID and other
+[0:07:07] because of COVID and other idiosyncrasies and idiosyncrasies of the
+[0:07:09] idiosyncrasies and idiosyncrasies of the candidates. So, perhaps the digital
+[0:07:11] candidates. So, perhaps the digital advertising campaign that they ran in
+[0:07:13] advertising campaign that they ran in 2020 would have larger effects in more
+[0:07:15] 2020 would have larger effects in more typical settings such as not during
+[0:07:17] typical settings such as not during COVID.
+[0:07:20] COVID. So, that is the key question we try to
+[0:07:21] So, that is the key question we try to answer. The specifically the question
+[0:07:22] answer. The specifically the question that they raised, would the negative ad
+[0:07:24] that they raised, would the negative ad against Donald Trump remain ineffective
+[0:07:26] against Donald Trump remain ineffective in 2024? And the reason we chose 2024
+[0:07:29] in 2024? And the reason we chose 2024 out of all the other election cycles is
+[0:07:30] out of all the other election cycles is the 2024 provides a very unique
+[0:07:33] the 2024 provides a very unique opportunity to study this question.
+[0:07:35] opportunity to study this question. Notably, that the same there are two
+[0:07:36] Notably, that the same there are two same presumptive candidates from major
+[0:07:38] same presumptive candidates from major political parties, Biden and Trump. And
+[0:07:39] political parties, Biden and Trump. And both candidates are actually seeking a
+[0:07:40] both candidates are actually seeking a second term. And the last time these two
+[0:07:42] second term. And the last time these two happened was in 1892, about 100 years
+[0:07:44] happened was in 1892, about 100 years ago. Uh more than 100 years ago. You
+[0:07:47] ago. Uh more than 100 years ago. You could imagine similar ad campaigns which
+[0:07:49] could imagine similar ad campaigns which is the ad against Donald Trump or maybe
+[0:07:50] is the ad against Donald Trump or maybe even ad against Biden. And recent polls
+[0:07:53] even ad against Biden. And recent polls also suggest that the economy is still a
+[0:07:55] also suggest that the economy is still a major factor among uh voters.
+[0:07:58] major factor among uh voters. However, as you all of us may recall, uh
+[0:08:01] However, as you all of us may recall, uh there are some big differences between
+[0:08:02] there are some big differences between 2020 and 2024. 2020, COVID-19 happened,
+[0:08:05] 2020 and 2024. 2020, COVID-19 happened, George Floyd death of George Floyd and
+[0:08:07] George Floyd death of George Floyd and racial unrest. I was 4 years younger
+[0:08:09] racial unrest. I was 4 years younger back then. 2024 now, there's abortion,
+[0:08:11] back then. 2024 now, there's abortion, immigration, and Ukraine and Israel
+[0:08:13] immigration, and Ukraine and Israel that's happening at the end of the day.
+[0:08:14] that's happening at the end of the day. Okay.
+[0:08:16] Okay. So, how do we recognize the fact that
+[0:08:18] So, how do we recognize the fact that there are differences between 2020 and
+[0:08:19] there are differences between 2020 and 2024, but also at the same time learn
+[0:08:21] 2024, but also at the same time learn from all this very expensive advertising
+[0:08:23] from all this very expensive advertising campaign that they ran in 2020. So, the
+[0:08:24] campaign that they ran in 2020. So, the way we approach this question is through
+[0:08:27] way we approach this question is through transfer learning with sensitivity
+[0:08:28] transfer learning with sensitivity analysis. So, essentially we use
+[0:08:29] analysis. So, essentially we use transfer learning or specifically domain
+[0:08:31] transfer learning or specifically domain adaptation or distributional shift to
+[0:08:33] adaptation or distributional shift to learn from past ad campaigns in order to
+[0:08:35] learn from past ad campaigns in order to inform future ad campaigns.
+[0:08:37] inform future ad campaigns. The other part is the sensitivity
+[0:08:38] The other part is the sensitivity analysis to quantify our belief our
+[0:08:40] analysis to quantify our belief our well-known belief that the 2020 and 2024
+[0:08:43] well-known belief that the 2020 and 2024 are actually not the same and in doing
+[0:08:44] are actually not the same and in doing so provide a plausible range of ad
+[0:08:46] so provide a plausible range of ad effects that could happen in 2024 based
+[0:08:48] effects that could happen in 2024 based on how similar or different 2020 and
+[0:08:50] on how similar or different 2020 and 2024 are.
+[0:08:53] 2024 are. So,
+[0:08:55] So, some prior works in this area uh
+[0:08:56] some prior works in this area uh specifically on methodology. The closest
+[0:08:58] specifically on methodology. The closest related literature is transportability
+[0:09:00] related literature is transportability and generalizability. We are definitely
+[0:09:02] and generalizability. We are definitely not the first ones nor the only ones to
+[0:09:04] not the first ones nor the only ones to incorporate sensitivity analysis and
+[0:09:06] incorporate sensitivity analysis and transfer learning or generalizability.
+[0:09:07] transfer learning or generalizability. And this is a very small list. You can
+[0:09:09] And this is a very small list. You can dig through more and there's hundreds if
+[0:09:11] dig through more and there's hundreds if not thousands of papers in this area.
+[0:09:13] not thousands of papers in this area. And our goal really is to tailor these
+[0:09:14] And our goal really is to tailor these methods to address our particular
+[0:09:16] methods to address our particular question at the end.
+[0:09:18] question at the end. So, what is our particular setup and
+[0:09:19] So, what is our particular setup and question uh
+[0:09:21] question uh approach that we use? So, we allow for
+[0:09:24] approach that we use? So, we allow for voter demographics to shift between 2020
+[0:09:26] voter demographics to shift between 2020 and 2024 recognizing the fact that the
+[0:09:27] and 2024 recognizing the fact that the voters in between those two election
+[0:09:29] voters in between those two election cycles may actually be slightly
+[0:09:30] cycles may actually be slightly different. We also allow for the fact
+[0:09:32] different. We also allow for the fact that the ad effect between 2020 and 2024
+[0:09:35] that the ad effect between 2020 and 2024 might actually be different. So, the
+[0:09:36] might actually be different. So, the the whether you voted given ad in 2024,
+[0:09:39] the whether you voted given ad in 2024, which you call a target population, may
+[0:09:41] which you call a target population, may be different to whether you voted given
+[0:09:43] be different to whether you voted given ad in 2020, the source population.
+[0:09:46] ad in 2020, the source population. Also, we assume that the RCT was
+[0:09:48] Also, we assume that the RCT was conducted in the source, which is the
+[0:09:50] conducted in the source, which is the case for our data, and we assume that
+[0:09:51] case for our data, and we assume that the source and target did not measure
+[0:09:52] the source and target did not measure the exact same voter covariates at the
+[0:09:54] the exact same voter covariates at the end of the day. For example, in our RCT
+[0:09:56] end of the day. For example, in our RCT data in their RCT data, they measured
+[0:09:59] data in their RCT data, they measured voters Trump support score
+[0:10:01] voters Trump support score in in groups, whereas we don't have the
+[0:10:04] in in groups, whereas we don't have the score as of now. And also, generally, if
+[0:10:07] score as of now. And also, generally, if you have an RCT in the source
+[0:10:08] you have an RCT in the source population, they tend to collect more
+[0:10:10] population, they tend to collect more covariates based on the fact that it's
+[0:10:12] covariates based on the fact that it's an RCT, and usually that implies that
+[0:10:14] an RCT, and usually that implies that the source covariates actually are
+[0:10:15] the source covariates actually are bigger than the target covariates. And
+[0:10:17] bigger than the target covariates. And most of the work assumed that the source
+[0:10:19] most of the work assumed that the source covariates and the target covariates are
+[0:10:20] covariates and the target covariates are identical. And this has implications as
+[0:10:22] identical. And this has implications as we'll see in the efficient influence
+[0:10:23] we'll see in the efficient influence function down the road.
+[0:10:25] function down the road. Also, we have heavily heavily leveraged
+[0:10:28] Also, we have heavily heavily leveraged the discreteness of the voting data. We
+[0:10:29] the discreteness of the voting data. We were I was surprised that most voting
+[0:10:31] were I was surprised that most voting data is very discrete, probably for
+[0:10:33] data is very discrete, probably for privacy reason. They don't measure age
+[0:10:35] privacy reason. They don't measure age directly, they measure the range of age,
+[0:10:37] directly, they measure the range of age, and various other things as well. And
+[0:10:39] and various other things as well. And finally, our goal is to study the ATT in
+[0:10:40] finally, our goal is to study the ATT in the target population, which is the
+[0:10:42] the target population, which is the ad effect that would happen if in in
+[0:10:45] ad effect that would happen if in in 2024 against Donald Trump.
+[0:10:51] Uh for method-wise, so we're going to use regression, probably the most
+[0:10:53] use regression, probably the most popular and familiar tool for analysis.
+[0:10:55] popular and familiar tool for analysis. And we're going to use bootstrap because
+[0:10:56] And we're going to use bootstrap because this is also very simple to do rather
+[0:10:58] this is also very simple to do rather than sandwich estimators, which is what
+[0:10:59] than sandwich estimators, which is what the paper did. Just we just tailor for
+[0:11:02] the paper did. Just we just tailor for transfer learning. And actually, because
+[0:11:04] transfer learning. And actually, because of the data's discreteness, this
+[0:11:05] of the data's discreteness, this regression estimator is actually
+[0:11:06] regression estimator is actually non-parametric and efficient
+[0:11:08] non-parametric and efficient because the models delta models.
+[0:11:11] because the models delta models. The other one is that if, on the other
+[0:11:12] The other one is that if, on the other hand, this data is not discrete, we did
+[0:11:14] hand, this data is not discrete, we did develop an efficient influence function.
+[0:11:15] develop an efficient influence function. This, if time permits, I'll discuss some
+[0:11:16] This, if time permits, I'll discuss some interesting properties of this. If not,
+[0:11:19] interesting properties of this. If not, I'm happy to discuss offline as well.
+[0:11:21] I'm happy to discuss offline as well. Another big part of our paper is in the
+[0:11:23] Another big part of our paper is in the analysis portion is how to calibrate
+[0:11:24] analysis portion is how to calibrate sensitivity parameters. So, there's a
+[0:11:26] sensitivity parameters. So, there's a whole debate in this literature in what
+[0:11:28] whole debate in this literature in what is a large, or small, or plausible range
+[0:11:30] is a large, or small, or plausible range of sensitivity parameters. And the way
+[0:11:31] of sensitivity parameters. And the way we do this, and we way we think is I
+[0:11:33] we do this, and we way we think is I think particularly useful for transfer
+[0:11:35] think particularly useful for transfer learning where the source data is an RCT
+[0:11:36] learning where the source data is an RCT is by creating dissimilar partitions.
+[0:11:38] is by creating dissimilar partitions. So,
+[0:11:40] So, and I'll explain exactly what this is
+[0:11:41] and I'll explain exactly what this is and
+[0:11:42] and just as a reference point though,
+[0:11:44] just as a reference point though, another popular way of actually
+[0:11:45] another popular way of actually calibrating this is excluding one
+[0:11:47] calibrating this is excluding one covariate that's been measured and
+[0:11:48] covariate that's been measured and that's been talked about since the early
+[0:11:49] that's been talked about since the early 2000s. There is a discussion in section
+[0:11:52] 2000s. There is a discussion in section 6.2
+[0:11:53] 6.2 Carlos and Chad on whether this is a
+[0:11:55] Carlos and Chad on whether this is a good idea or not and this is just my own
+[0:11:58] good idea or not and this is just my own tangent that may be useful for future
+[0:12:00] tangent that may be useful for future discussion points. Actually,
+[0:12:01] discussion points. Actually, cross-fitting uh tries to create sample
+[0:12:04] cross-fitting uh tries to create sample splitting so that to create to reduce
+[0:12:05] splitting so that to create to reduce observable bias, specifically
+[0:12:06] observable bias, specifically overfitting bias, but actually for
+[0:12:08] overfitting bias, but actually for sensitivity analysis, I actually started
+[0:12:10] sensitivity analysis, I actually started to think that dissimilar partitions of
+[0:12:11] to think that dissimilar partitions of the data could help us understand
+[0:12:13] the data could help us understand observable bias in a non-parametric
+[0:12:14] observable bias in a non-parametric manner. And this is a general philosophy
+[0:12:16] manner. And this is a general philosophy that's advocated by Paul Rosenbaum's
+[0:12:18] that's advocated by Paul Rosenbaum's whole work on evidence factors again.
+[0:12:22] whole work on evidence factors again. So, before I begin, any questions?
+[0:12:27] So, before I begin, any questions? Hi Wilson, we received a question but
+[0:12:29] Hi Wilson, we received a question but she uh she has been
+[0:12:31] she uh she has been uh answering it. Okay.
+[0:12:33] uh answering it. Okay. Great.
+[0:12:35] Great. So then I I will continue on uh with
+[0:12:37] So then I I will continue on uh with some of the notations and uh how we set
+[0:12:39] some of the notations and uh how we set this up all formally. So,
+[0:12:41] this up all formally. So, uh
+[0:12:41] uh just a lot of notation but I'll walk you
+[0:12:43] just a lot of notation but I'll walk you through one by one. The population type
+[0:12:45] through one by one. The population type we denote with the variable S. S is a
+[0:12:47] we denote with the variable S. S is a binary that takes zero or one where S is
+[0:12:50] binary that takes zero or one where S is equal to one if it's in the source
+[0:12:51] equal to one if it's in the source population, specifically the 2020 data.
+[0:12:54] population, specifically the 2020 data. And S is equal to zero if it's in the
+[0:12:55] And S is equal to zero if it's in the target population. This is 2024 data.
+[0:12:58] target population. This is 2024 data. The outcome in our case is binary
+[0:12:59] The outcome in our case is binary whether you voted or not with Y equals
+[0:13:01] whether you voted or not with Y equals to one being that you voted. The
+[0:13:03] to one being that you voted. The treatment is whether uh a binary as well
+[0:13:05] treatment is whether uh a binary as well where A equals to one is an ad against
+[0:13:07] where A equals to one is an ad against Donald Trump.
+[0:13:08] Donald Trump. Covariates we partition into two types.
+[0:13:11] Covariates we partition into two types. So, we consider the entire set of
+[0:13:12] So, we consider the entire set of covariates XP and these are the source
+[0:13:14] covariates XP and these are the source covariates that the source covariates
+[0:13:15] covariates that the source covariates after this is RCT covariates. And the
+[0:13:18] after this is RCT covariates. And the target covariates the covariates in 2024
+[0:13:20] target covariates the covariates in 2024 is a subset of the 2022 RCT covariates.
+[0:13:24] is a subset of the 2022 RCT covariates. The potential outcomes are as follows.
+[0:13:26] The potential outcomes are as follows. Y1 is if you whether you voted or not if
+[0:13:28] Y1 is if you whether you voted or not if contrary to fact that the voter got the
+[0:13:29] contrary to fact that the voter got the negative ad. Y0 is whether you vote or
+[0:13:31] negative ad. Y0 is whether you vote or not contrary to fact voter did not get
+[0:13:33] not contrary to fact voter did not get the negative ad.
+[0:13:34] the negative ad. And the causal estimate of interest is
+[0:13:36] And the causal estimate of interest is the con linear contrast of this thing
+[0:13:38] the con linear contrast of this thing under target population S equals to
+[0:13:40] under target population S equals to zero.
+[0:13:42] zero. So it's helpful to look at the partial
+[0:13:44] So it's helpful to look at the partial got table for this. So and the on the
+[0:13:47] got table for this. So and the on the this table essentially illustrates what
+[0:13:48] this table essentially illustrates what the data look like if for the investor
+[0:13:50] the data look like if for the investor for the data scientist. So for the top
+[0:13:52] for the data scientist. So for the top row is the source RCT data where all the
+[0:13:55] row is the source RCT data where all the S is are one because it's from the RCT.
+[0:13:57] S is are one because it's from the RCT. These are the covariates that they
+[0:13:58] These are the covariates that they measured and this is their treatment
+[0:14:00] measured and this is their treatment indicator by suit by we get to observe
+[0:14:02] indicator by suit by we get to observe one of these two combinations and the
+[0:14:03] one of these two combinations and the outcome whether you vote or not. The
+[0:14:05] outcome whether you vote or not. The target data the 2024 data we have is S
+[0:14:07] target data the 2024 data we have is S equals to note S equals one. We only get
+[0:14:09] equals to note S equals one. We only get to observe a partial subset of this
+[0:14:10] to observe a partial subset of this thing and we don't get to observe any of
+[0:14:12] thing and we don't get to observe any of this at the end of the day. Now the goal
+[0:14:14] this at the end of the day. Now the goal at the end of the day is essentially
+[0:14:15] at the end of the day is essentially identify the column mean of this thing
+[0:14:16] identify the column mean of this thing and this thing on the second row of this
+[0:14:18] and this thing on the second row of this table and then to and to do that we
+[0:14:21] table and then to and to do that we first learn the column mean of this
+[0:14:22] first learn the column mean of this thing in the source data and then
+[0:14:23] thing in the source data and then transfer it over into here. Migrate it
+[0:14:25] transfer it over into here. Migrate it over based on the overlap between here.
+[0:14:27] over based on the overlap between here. It's essentially the idea of transfer
+[0:14:28] It's essentially the idea of transfer learning.
+[0:14:32] So what are the assumptions that actually enable this? So the first three
+[0:14:34] actually enable this? So the first three are the standard ones in stratified
+[0:14:35] are the standard ones in stratified RCTs.
+[0:14:37] RCTs. You have that the observed outcome is
+[0:14:39] You have that the observed outcome is one one of the versions of the one of
+[0:14:41] one one of the versions of the one of the versions of the treatment assignment
+[0:14:43] the versions of the treatment assignment A observed treatment assignment A. You
+[0:14:45] A observed treatment assignment A. You have a randomized treatment and in this
+[0:14:46] have a randomized treatment and in this case we do have a stratified randomized
+[0:14:48] case we do have a stratified randomized experiment so this is true. And that
+[0:14:50] experiment so this is true. And that there is overlap between that treatment
+[0:14:52] there is overlap between that treatment and control groups. And again if it's an
+[0:14:53] and control groups. And again if it's an RCT which is the case for us this pi X
+[0:14:56] RCT which is the case for us this pi X is known in advance.
+[0:14:58] is known in advance. The other assumptions are the
+[0:14:59] The other assumptions are the transportation assumptions. So once you
+[0:15:00] transportation assumptions. So once you estimate the AT in the source population
+[0:15:02] estimate the AT in the source population S equals to one how do we transport that
+[0:15:04] S equals to one how do we transport that in the target population? One is the
+[0:15:05] in the target population? One is the overlap that the covariates between the
+[0:15:07] overlap that the covariates between the source and target are similar
+[0:15:10] source and target are similar have all sufficient overlap to transfer.
+[0:15:12] have all sufficient overlap to transfer. And the fact that the the the sample
+[0:15:14] And the fact that the the the sample indicator does not depend on the
+[0:15:15] indicator does not depend on the potential outcomes given the voter
+[0:15:17] potential outcomes given the voter demographic we that share between 2020
+[0:15:19] demographic we that share between 2020 2024.
+[0:15:21] 2024. As you can recognize this is all written
+[0:15:22] As you can recognize this is all written in terms of observables, so you can
+[0:15:23] in terms of observables, so you can actually check this with the data, and I
+[0:15:25] actually check this with the data, and I think Melody has some nice work on this
+[0:15:27] think Melody has some nice work on this as well. Well, this one you have to take
+[0:15:29] as well. Well, this one you have to take it for faith that this thing is holds
+[0:15:31] it for faith that this thing is holds true. And now the reason you can't take
+[0:15:33] true. And now the reason you can't take check this is you don't get to observe
+[0:15:34] check this is you don't get to observe this. And it more importantly for our
+[0:15:35] this. And it more importantly for our context, 2024 election has not happened,
+[0:15:38] context, 2024 election has not happened, so we don't actually know what this the
+[0:15:40] so we don't actually know what this the implications of this as well. There are
+[0:15:41] implications of this as well. There are also several hundreds of works that that
+[0:15:43] also several hundreds of works that that discuss the plausibilities of these
+[0:15:45] discuss the plausibilities of these assumptions, and we refer to these works
+[0:15:47] assumptions, and we refer to these works for daily details.
+[0:15:52] So, if all these five assumptions are plausible, and if you believe they they
+[0:15:54] plausible, and if you believe they they are true, and we believe A1 through A4
+[0:15:56] are true, and we believe A1 through A4 are true, but maybe I5 may not be so,
+[0:15:59] are true, but maybe I5 may not be so, you can identify the target ATE on the
+[0:16:01] you can identify the target ATE on the source pop target population as follows.
+[0:16:04] source pop target population as follows. It's essentially a law of total
+[0:16:05] It's essentially a law of total expectations three times, where the
+[0:16:07] expectations three times, where the first expectation is essentially the
+[0:16:09] first expectation is essentially the conditional average treatment effects of
+[0:16:10] conditional average treatment effects of a heterogeneous treatment effect among
+[0:16:12] a heterogeneous treatment effect among participants X in the source population.
+[0:16:15] participants X in the source population. The second expectation is essentially
+[0:16:16] The second expectation is essentially projection of this onto the covariate
+[0:16:18] projection of this onto the covariate space that are shared between 2020 and
+[0:16:20] space that are shared between 2020 and 2024.
+[0:16:22] 2024. And the third one is to re-weigh this V
+[0:16:24] And the third one is to re-weigh this V so that it goes from the source
+[0:16:25] so that it goes from the source population into the target population.
+[0:16:27] population into the target population. So, that's the last expectation.
+[0:16:30] So, that's the last expectation. For reference, if these two are the
+[0:16:31] For reference, if these two are the same, so that the target covariates in
+[0:16:32] same, so that the target covariates in the source target covariates and source
+[0:16:34] the source target covariates and source covariates are identical, these data
+[0:16:35] covariates are identical, these data become exact the second step disappears.
+[0:16:38] become exact the second step disappears. In other words, actually, when the
+[0:16:40] In other words, actually, when the source and target covariates differ, we
+[0:16:41] source and target covariates differ, we actually have an additional nuisance
+[0:16:42] actually have an additional nuisance parameter, which is essentially the
+[0:16:44] parameter, which is essentially the projection of the KATE onto a smaller
+[0:16:46] projection of the KATE onto a smaller subspace. And there's a nice recent work
+[0:16:48] subspace. And there's a nice recent work by Zing et al. that discusses the
+[0:16:49] by Zing et al. that discusses the additional nuisance parameter that's
+[0:16:50] additional nuisance parameter that's introduced. And we'll talk about this if
+[0:16:52] introduced. And we'll talk about this if you have time for the influence function
+[0:16:53] you have time for the influence function part at the end.
+[0:16:59] However, uh we know that 2020 and 2024 probably not similar, and so how do we
+[0:17:01] probably not similar, and so how do we quantify that dissimilarity between it?
+[0:17:03] quantify that dissimilarity between it? So, suppose we assume suppose we let's
+[0:17:07] So, suppose we assume suppose we let's say that transportability does not hold.
+[0:17:08] say that transportability does not hold. That that essentially means that the
+[0:17:09] That that essentially means that the 2024's ad effect may be different than
+[0:17:12] 2024's ad effect may be different than the 2020's ad effect.
+[0:17:14] the 2020's ad effect. And so, to To the deviation between
+[0:17:16] And so, to To the deviation between these two, we actually use the odds
+[0:17:18] these two, we actually use the odds ratio approach. So essentially the odds
+[0:17:20] ratio approach. So essentially the odds ratio approach says that the probability
+[0:17:22] ratio approach says that the probability of the odd of voting in the target
+[0:17:24] of the odd of voting in the target population differs from the odd of
+[0:17:26] population differs from the odd of voting in the source population by an
+[0:17:28] voting in the source population by an exponential gamma one gamma A at the end
+[0:17:31] exponential gamma one gamma A at the end of the day. And odds is just the
+[0:17:32] of the day. And odds is just the probability of voting for a particular
+[0:17:34] probability of voting for a particular voter demographic in this particular
+[0:17:36] voter demographic in this particular population
+[0:17:37] population here.
+[0:17:39] here. And essentially this blue part is
+[0:17:41] And essentially this blue part is estimable in the sense that in the
+[0:17:43] estimable in the sense that in the source data we get to observe this and
+[0:17:45] source data we get to observe this and we get to estimate this. But in the
+[0:17:47] we get to estimate this. But in the target population A IE 2024, we don't
+[0:17:50] target population A IE 2024, we don't have information on this and we have to
+[0:17:52] have information on this and we have to rely on the assumptions. A5 allows us to
+[0:17:54] rely on the assumptions. A5 allows us to say that these things are equivalent
+[0:17:55] say that these things are equivalent which allows to transport. But in the
+[0:17:58] which allows to transport. But in the case where A5 fails, we allow these
+[0:17:59] case where A5 fails, we allow these things to deviate by this factor
+[0:18:01] things to deviate by this factor exponential gamma A.
+[0:18:04] exponential gamma A. And so again, if because this red part
+[0:18:06] And so again, if because this red part is observed there's no way to estimate
+[0:18:08] is observed there's no way to estimate this for those who are not familiar
+[0:18:09] this for those who are not familiar sensitivity analysis and these things
+[0:18:11] sensitivity analysis and these things are gamma A is chosen to quantify the
+[0:18:13] are gamma A is chosen to quantify the differences between the source and the
+[0:18:14] differences between the source and the target. We'll talk about what that means
+[0:18:16] target. We'll talk about what that means and how to calibrate that what is a
+[0:18:17] and how to calibrate that what is a plausible range of that in about 20
+[0:18:20] plausible range of that in about 20 slides from now.
+[0:18:21] slides from now. In general but though a larger gamma
+[0:18:24] In general but though a larger gamma implies that there's a large difference
+[0:18:25] implies that there's a large difference between the 2020 and 2024 elections.
+[0:18:28] between the 2020 and 2024 elections. So, how to interpret this before we go
+[0:18:31] So, how to interpret this before we go to data section is as follows and I want
+[0:18:33] to data section is as follows and I want to really thank Sundarajan for creating
+[0:18:35] to really thank Sundarajan for creating these wonderful slides for here. So, if
+[0:18:38] these wonderful slides for here. So, if gamma A is equal to zero then that means
+[0:18:40] gamma A is equal to zero then that means transportation assumption holds. That
+[0:18:41] transportation assumption holds. That means that if this is zero, this
+[0:18:43] means that if this is zero, this exponential is one which means that the
+[0:18:45] exponential is one which means that the odds between the two voting at in 2024
+[0:18:47] odds between the two voting at in 2024 and 2020 are identical. So, how does
+[0:18:50] and 2020 are identical. So, how does that relate to like a plot let's say?
+[0:18:52] that relate to like a plot let's say? So, on the left-hand side is a source
+[0:18:53] So, on the left-hand side is a source data where we get to observe some V and
+[0:18:55] data where we get to observe some V and the voting probability so let's say Y A
+[0:18:58] the voting probability so let's say Y A and the little dash lines here is some
+[0:19:00] and the little dash lines here is some observations of the V and this is the
+[0:19:02] observations of the V and this is the year observed voting probability. And by
+[0:19:04] year observed voting probability. And by the RCT assumptions A1 33, we can
+[0:19:07] the RCT assumptions A1 33, we can actually estimate roughly estimate this
+[0:19:09] actually estimate roughly estimate this curve. And then if gamma A equals to
+[0:19:11] curve. And then if gamma A equals to zero, that means these two odds are
+[0:19:13] zero, that means these two odds are identical. Effectively, what this is
+[0:19:14] identical. Effectively, what this is meaning is that you just can transfer at
+[0:19:16] meaning is that you just can transfer at the end of the day. And just as a side
+[0:19:17] the end of the day. And just as a side note, in the target, we don't get to
+[0:19:19] note, in the target, we don't get to observe voting probability because we
+[0:19:20] observe voting probability because we don't we haven't seen it yet, but we get
+[0:19:22] don't we haven't seen it yet, but we get to observe their voter demographics,
+[0:19:24] to observe their voter demographics, which is in this x-axis at the end.
+[0:19:30] So, what if gamma A is not equal to zero? So, these odds are different. The
+[0:19:32] zero? So, these odds are different. The odds ratio is not equal to one. So, a
+[0:19:34] odds ratio is not equal to one. So, a larger gamma as we recall is
+[0:19:36] larger gamma as we recall is implies that there's a larger
+[0:19:37] implies that there's a larger differences between 2020 and 2024. And
+[0:19:39] differences between 2020 and 2024. And it's important to actually recognize the
+[0:19:41] it's important to actually recognize the sign of this difference just because of
+[0:19:43] sign of this difference just because of the nature of odds ratio. So, a positive
+[0:19:46] the nature of odds ratio. So, a positive gamma means that there was more turnout
+[0:19:48] gamma means that there was more turnout in 2024 after receiving the ads against
+[0:19:50] in 2024 after receiving the ads against Donald Trump compared to that in 2020.
+[0:19:52] Donald Trump compared to that in 2020. And so, positive gamma would that
+[0:19:54] And so, positive gamma would that actually means that there's more turnout
+[0:19:55] actually means that there's more turnout on voting, which means the voting
+[0:19:56] on voting, which means the voting probability increased in this curve
+[0:19:58] probability increased in this curve here.
+[0:19:59] here. A negative gamma on the other hand is
+[0:20:01] A negative gamma on the other hand is actually that in 2024, there was less
+[0:20:03] actually that in 2024, there was less turnout after receiving an ad against
+[0:20:04] turnout after receiving an ad against Trump compared to that in 2020, which
+[0:20:06] Trump compared to that in 2020, which means that the voting probability also
+[0:20:07] means that the voting probability also decreased here. So, you can kind of see
+[0:20:09] decreased here. So, you can kind of see that depending on the sign of this, you
+[0:20:11] that depending on the sign of this, you can
+[0:20:12] can the way that the probability of a
+[0:20:13] the way that the probability of a transfer learning shifts in the upper
+[0:20:15] transfer learning shifts in the upper direction matters at the end of the day.
+[0:20:17] direction matters at the end of the day. And this also has implications for the
+[0:20:18] And this also has implications for the actual effect size that we're going to
+[0:20:20] actual effect size that we're going to effect estimates that we talk about
+[0:20:21] effect estimates that we talk about later down the road.
+[0:20:23] later down the road. We can also do a two-parameter
+[0:20:25] We can also do a two-parameter sensitivity model and it's simply just
+[0:20:27] sensitivity model and it's simply just an exponential tilting of this as well.
+[0:20:30] an exponential tilting of this as well. There is a whole set of remarks that I
+[0:20:32] There is a whole set of remarks that I think I might not have time, but I'll
+[0:20:34] think I might not have time, but I'll just highlight a couple.
+[0:20:36] just highlight a couple. This has already been known since the
+[0:20:37] This has already been known since the two early 2000s. This, even though we're
+[0:20:39] two early 2000s. This, even though we're making a modeling assumption, it doesn't
+[0:20:41] making a modeling assumption, it doesn't place any observable restrictions on the
+[0:20:42] place any observable restrictions on the observable data. And and the simple
+[0:20:44] observable data. And and the simple reason for this, although Robins has a
+[0:20:46] reason for this, although Robins has a technical reason for this, is that we
+[0:20:47] technical reason for this, is that we don't get to observe this whatsoever. We
+[0:20:49] don't get to observe this whatsoever. We don't get to observe what 2024 looked
+[0:20:50] don't get to observe what 2024 looked like. So, essentially put it placing
+[0:20:52] like. So, essentially put it placing this doesn't place any observable
+[0:20:54] this doesn't place any observable restrictions on what the data would have
+[0:20:56] restrictions on what the data would have looked like. And these are discussed in
+[0:20:57] looked like. And these are discussed in these two works here. There is a pseudo
+[0:20:59] these two works here. There is a pseudo R squared version to interpret this
+[0:21:01] R squared version to interpret this gamma if the if you prefer pseudo R
+[0:21:03] gamma if the if you prefer pseudo R squared and a binary outcome of this is
+[0:21:05] squared and a binary outcome of this is you can directly use proposition three
+[0:21:06] you can directly use proposition three of Frank and Elbers to do this.
+[0:21:08] of Frank and Elbers to do this. If you don't like the outcome
+[0:21:10] If you don't like the outcome parameterization this way, if you wanted
+[0:21:11] parameterization this way, if you wanted to parameterize it this way, you could
+[0:21:12] to parameterize it this way, you could also parameterize the opposite way by
+[0:21:15] also parameterize the opposite way by Bayes' rule and by following Ray
+[0:21:17] Bayes' rule and by following Ray Carroll's approach in partial linear
+[0:21:18] Carroll's approach in partial linear logistic regression model.
+[0:21:20] logistic regression model. You could also say I don't want to do it
+[0:21:22] You could also say I don't want to do it on this alone, I want to depend on
+[0:21:23] on this alone, I want to depend on covariates. You could actually have
+[0:21:25] covariates. You could actually have covariate dependence on here. We call
+[0:21:27] covariate dependence on here. We call this a local sensitivity analysis and if
+[0:21:29] this a local sensitivity analysis and if you're interested we can discuss this
+[0:21:30] you're interested we can discuss this more down the road. Uh there are some
+[0:21:32] more down the road. Uh there are some works that use this model and there are
+[0:21:33] works that use this model and there are many works that don't use this model,
+[0:21:35] many works that don't use this model, but just this is just as a small
+[0:21:36] but just this is just as a small reference to those. And you know, there
+[0:21:38] reference to those. And you know, there is a long and very very healthy
+[0:21:40] is a long and very very healthy discussion about what constitutes a good
+[0:21:41] discussion about what constitutes a good model for sensitivity analysis. If
+[0:21:42] model for sensitivity analysis. If you're particularly curious to this
+[0:21:44] you're particularly curious to this launch, you can kind of look at this
+[0:21:45] launch, you can kind of look at this commentary back and forth where they
+[0:21:48] commentary back and forth where they have some interesting uh things to say
+[0:21:49] have some interesting uh things to say about each others work about sensitivity
+[0:21:51] about each others work about sensitivity analysis at the end.
+[0:21:54] analysis at the end. So, with
+[0:21:56] So, with uh assumptions A1 through A4, which we
+[0:21:58] uh assumptions A1 through A4, which we think is we know
+[0:22:00] think is we know for a fact that holds with our data, uh
+[0:22:03] for a fact that holds with our data, uh and the sensitivity model that we
+[0:22:04] and the sensitivity model that we propose, uh we can identify the the
+[0:22:06] propose, uh we can identify the the potential outcome on the target
+[0:22:08] potential outcome on the target population as this thing here. And
+[0:22:10] population as this thing here. And really if you if you look at this very
+[0:22:12] really if you if you look at this very carefully, it's a exponential tilting of
+[0:22:15] carefully, it's a exponential tilting of this function, the projection of the
+[0:22:16] this function, the projection of the cate onto the space of we by the
+[0:22:18] cate onto the space of we by the exponential tilt here. And if again, if
+[0:22:21] exponential tilt here. And if again, if there the transportability assumption
+[0:22:22] there the transportability assumption holds, that means that the 2020 and 2024
+[0:22:25] holds, that means that the 2020 and 2024 are comparable, then this all boils down
+[0:22:27] are comparable, then this all boils down to just simply this thing. That means
+[0:22:28] to just simply this thing. That means that the denominator actually just
+[0:22:29] that the denominator actually just cancels out and you only get left with
+[0:22:31] cancels out and you only get left with the the numerator here at the end of the
+[0:22:32] the the numerator here at the end of the day.
+[0:22:38] So, this identification strategy actually
+[0:22:40] this identification strategy actually provides a very simple plug-in of
+[0:22:42] provides a very simple plug-in of estimator. Um I do have to admit though,
+[0:22:44] estimator. Um I do have to admit though, I I don't usually do this because of the
+[0:22:46] I I don't usually do this because of the fact that, you know, there are nuisance
+[0:22:47] fact that, you know, there are nuisance parameters that there's plug-in biases
+[0:22:49] parameters that there's plug-in biases that happen, but in our particular case
+[0:22:51] that happen, but in our particular case of voting data, this is actually the
+[0:22:52] of voting data, this is actually the simplest and also the most uh probably
+[0:22:54] simplest and also the most uh probably is the most efficient because of the
+[0:22:56] is the most efficient because of the fact that the data is discrete. So, if
+[0:22:58] fact that the data is discrete. So, if you look at this formula very carefully,
+[0:23:00] you look at this formula very carefully, the nuisance parameters are essentially
+[0:23:02] the nuisance parameters are essentially this portion here. So, this pulls out
+[0:23:03] this portion here. So, this pulls out and all you have to care about is the
+[0:23:05] and all you have to care about is the expectation of this thing as a function
+[0:23:06] expectation of this thing as a function of V. So, the projection of the cate
+[0:23:08] of V. So, the projection of the cate onto the function of V here. And as long
+[0:23:10] onto the function of V here. And as long as we estimate this well, then rest of
+[0:23:11] as we estimate this well, then rest of this is you can just plug in and then
+[0:23:13] this is you can just plug in and then take the sample average in the target
+[0:23:14] take the sample average in the target population. So, that's what we suggest
+[0:23:16] population. So, that's what we suggest that you do if voting data in general is
+[0:23:18] that you do if voting data in general is that you estimate this from the source
+[0:23:20] that you estimate this from the source data. One example is just regression
+[0:23:23] data. One example is just regression where you regress the weighted outcome.
+[0:23:25] where you regress the weighted outcome. This is a propensity score based on V to
+[0:23:27] This is a propensity score based on V to get this target here for the treated
+[0:23:29] get this target here for the treated data.
+[0:23:30] data. And if you don't want to do this,
+[0:23:31] And if you don't want to do this, certainly you can be very fancy about
+[0:23:33] certainly you can be very fancy about it. You Because it's an RCT data in the
+[0:23:35] it. You Because it's an RCT data in the source, you can find ways to
+[0:23:36] source, you can find ways to consistently estimate this using your
+[0:23:38] consistently estimate this using your favorite tool of inference
+[0:23:40] favorite tool of inference at your disposal. But, this is I think
+[0:23:43] at your disposal. But, this is I think by far the simplest and actually works
+[0:23:44] by far the simplest and actually works very well. And because these are
+[0:23:46] very well. And because these are discrete also becomes efficient, too.
+[0:23:48] discrete also becomes efficient, too. So, then after this thing, we just take
+[0:23:50] So, then after this thing, we just take the mean of the exponential tilted
+[0:23:52] the mean of the exponential tilted version. So, we take the plug-in
+[0:23:53] version. So, we take the plug-in estimate that we do literally plug in
+[0:23:54] estimate that we do literally plug in here and then just average it by the
+[0:23:56] here and then just average it by the target people in the target and then
+[0:23:58] target people in the target and then take the difference between these two
+[0:24:00] take the difference between these two and get our theta estimates as a
+[0:24:01] and get our theta estimates as a function of both the sensitivity
+[0:24:02] function of both the sensitivity parameter for the treated and the
+[0:24:04] parameter for the treated and the sensitivity parameter for the control.
+[0:24:06] sensitivity parameter for the control. Again, since our voter data is discrete,
+[0:24:08] Again, since our voter data is discrete, this plug-in estimator is non-parametric
+[0:24:10] this plug-in estimator is non-parametric and efficient. And for a formal, this is
+[0:24:13] and efficient. And for a formal, this is the one time where I can cite this paper
+[0:24:14] the one time where I can cite this paper that I read in grad school. Theorem one
+[0:24:16] that I read in grad school. Theorem one of Chamberlain directly applies
+[0:24:19] of Chamberlain directly applies because this is entirely discrete data.
+[0:24:26] So, in addition to just using simple
+[0:24:27] in addition to just using simple estimators, in practice, if you work
+[0:24:29] estimators, in practice, if you work with collaborators, they prefer
+[0:24:30] with collaborators, they prefer bootstrap over sandwich. And partly,
+[0:24:33] bootstrap over sandwich. And partly, even though I like sandwich a lot for
+[0:24:34] even though I like sandwich a lot for various reasons,
+[0:24:36] various reasons, bootstrap is just convenient. And we
+[0:24:38] bootstrap is just convenient. And we also propose a bootstrap way to do this.
+[0:24:39] also propose a bootstrap way to do this. Now, if you think about transfer
+[0:24:41] Now, if you think about transfer learning, there's an interesting
+[0:24:42] learning, there's an interesting concept about what is random and what is
+[0:24:44] concept about what is random and what is not random. But, if I have time, I'll
+[0:24:45] not random. But, if I have time, I'll talk about it. But, there's one valid
+[0:24:48] talk about it. But, there's one valid bootstrap way to do this and which is
+[0:24:49] bootstrap way to do this and which is the you just resample from the
+[0:24:52] the you just resample from the source data. You resample from the
+[0:24:53] source data. You resample from the target data. And then with the resampled
+[0:24:56] target data. And then with the resampled source and target data, you construct
+[0:24:57] source and target data, you construct the AT estimator based on what we just
+[0:24:59] the AT estimator based on what we just presented. And let's say you want to
+[0:25:01] presented. And let's say you want to construct a percentile bootstrap
+[0:25:02] construct a percentile bootstrap confidence interval here.
+[0:25:04] confidence interval here. And then if this thing is smooth enough,
+[0:25:06] And then if this thing is smooth enough, so the projection function of the CATE
+[0:25:08] so the projection function of the CATE onto the set of common covariates and
+[0:25:10] onto the set of common covariates and the Donsker conditions, all this
+[0:25:11] the Donsker conditions, all this procedure yields a valid asymptotic 1
+[0:25:13] procedure yields a valid asymptotic 1 minus alpha confidence intervals data.
+[0:25:15] minus alpha confidence intervals data. And thankfully again, because it is
+[0:25:17] And thankfully again, because it is leveraging the voter discrete data, this
+[0:25:18] leveraging the voter discrete data, this thing automatically holds for our thing.
+[0:25:20] thing automatically holds for our thing. So you could do this and get
+[0:25:22] So you could do this and get the inference for data just by
+[0:25:24] the inference for data just by straight-up bootstrap and sandwich,
+[0:25:26] straight-up bootstrap and sandwich, which is what the paper the original
+[0:25:27] which is what the paper the original Agrawal paper said actually.
+[0:25:30] Agrawal paper said actually. I think I have time for this. So there
+[0:25:32] I think I have time for this. So there is an interesting digression that I want
+[0:25:34] is an interesting digression that I want to talk about maybe that could come in
+[0:25:36] to talk about maybe that could come in the discussion.
+[0:25:37] the discussion. It's actually curious to think about
+[0:25:38] It's actually curious to think about what sampling uncertainties in transfer
+[0:25:40] what sampling uncertainties in transfer learning because it's always thinking
+[0:25:41] learning because it's always thinking about a hypothetical target population
+[0:25:43] about a hypothetical target population and it's not clear whether the
+[0:25:44] and it's not clear whether the hypothetical target population is sample
+[0:25:46] hypothetical target population is sample of the target population or the actual
+[0:25:48] of the target population or the actual entire target population. For our case,
+[0:25:50] entire target population. For our case, if the target population for the voting
+[0:25:52] if the target population for the voting ad is all registered voters in a state
+[0:25:55] ad is all registered voters in a state or census-level data or simply fixed,
+[0:25:57] or census-level data or simply fixed, then there's actually no randomness in
+[0:25:59] then there's actually no randomness in the target data and the only source of
+[0:26:01] the target data and the only source of randomness is essentially from the RCT
+[0:26:03] randomness is essentially from the RCT or the randomization of the treatment or
+[0:26:05] or the randomization of the treatment or the let's say you sampled in it. And
+[0:26:06] the let's say you sampled in it. And then if that means that you can for the
+[0:26:08] then if that means that you can for the bootstrap procedure above, you don't
+[0:26:09] bootstrap procedure above, you don't have to resample the target data yet. I
+[0:26:12] have to resample the target data yet. I think there's an interesting discussion
+[0:26:13] think there's an interesting discussion to be had about that's outside of this
+[0:26:15] to be had about that's outside of this talk, but I'm happy to talk with you if
+[0:26:16] talk, but I'm happy to talk with you if you're curious about this as well.
+[0:26:19] you're curious about this as well. One one more thing about efficiency. So
+[0:26:23] One one more thing about efficiency. So you can derive the efficient influence
+[0:26:25] you can derive the efficient influence function and we have derived it. This
+[0:26:26] function and we have derived it. This efficient influence function is probably
+[0:26:28] efficient influence function is probably the most messiest one that I've seen in
+[0:26:30] the most messiest one that I've seen in my lifetime so far. And part of the
+[0:26:32] my lifetime so far. And part of the reason is because the covariates between
+[0:26:34] reason is because the covariates between the target and the source are not the
+[0:26:35] the target and the source are not the same. And also the sensitivity analysis
+[0:26:37] same. And also the sensitivity analysis at this introducing another exponential
+[0:26:40] at this introducing another exponential gamma term that you have to deal with.
+[0:26:43] gamma term that you have to deal with. This thing is not doubly robust when the
+[0:26:45] This thing is not doubly robust when the transportability assumption is violated
+[0:26:46] transportability assumption is violated and this has been discussed a version of
+[0:26:48] and this has been discussed a version of this has been discussed when the case
+[0:26:50] this has been discussed when the case the covariates between target and the
+[0:26:51] the covariates between target and the source are identical. We think this is
+[0:26:53] source are identical. We think this is very useful if you actually have
+[0:26:55] very useful if you actually have transfer learning covariates or the
+[0:26:56] transfer learning covariates or the covariates are same between 20 and 2024
+[0:26:59] covariates are same between 20 and 2024 and are continuous.
+[0:27:00] and are continuous. Uh some technical remarks, if you wanted
+[0:27:02] Uh some technical remarks, if you wanted to use this, you do have to estimate a
+[0:27:04] to use this, you do have to estimate a lot of this thing. Really the the
+[0:27:06] lot of this thing. Really the the hardest thing to estimate is uh this
+[0:27:09] hardest thing to estimate is uh this function here if you do a if you're
+[0:27:10] function here if you do a if you're continuous free.
+[0:27:12] continuous free. Uh our EIF does recover uh Zang's EIF
+[0:27:15] Uh our EIF does recover uh Zang's EIF when when they assume transportability
+[0:27:17] when when they assume transportability because they do assume transportability
+[0:27:19] because they do assume transportability in their setup, but they allow for this
+[0:27:20] in their setup, but they allow for this to be different. Uh and also if you're
+[0:27:23] to be different. Uh and also if you're if you're at a more technically curious,
+[0:27:25] if you're at a more technically curious, uh a plug this EIF version does not
+[0:27:27] uh a plug this EIF version does not reduce the plug-in bias from this thing.
+[0:27:29] reduce the plug-in bias from this thing. So one source of concern if you notice
+[0:27:31] So one source of concern if you notice literature is that if you plug in simply
+[0:27:33] literature is that if you plug in simply the regression-based estimator, there
+[0:27:34] the regression-based estimator, there could be biases that doesn't cancel out.
+[0:27:36] could be biases that doesn't cancel out. Therefore, that's why use one of the
+[0:27:37] Therefore, that's why use one of the reasons of using efficient influence
+[0:27:39] reasons of using efficient influence function-based estimators. But with uh
+[0:27:41] function-based estimators. But with uh when the transportability assumption
+[0:27:42] when the transportability assumption hold, this plug-in bias does not go
+[0:27:44] hold, this plug-in bias does not go away. You still need to estimate this
+[0:27:45] away. You still need to estimate this very fast or it to to achieve any
+[0:27:48] very fast or it to to achieve any asymptotic normality result.
+[0:27:53] So before we go to the next part, which is the data part, any questions?
+[0:28:00] Uh currently we don't have um uh active question.
+[0:28:03] uh active question. Okay.
+[0:28:04] Okay. Thanks.
+[0:28:05] Thanks. Great.
+[0:28:06] Great. So uh rest of the talk will be on the
+[0:28:08] So uh rest of the talk will be on the data. So this is the most exciting part
+[0:28:10] data. So this is the most exciting part and what especially for people who are
+[0:28:11] and what especially for people who are living in Pennsylvania. Uh
+[0:28:13] living in Pennsylvania. Uh so we go got this data 2 weeks ago uh
+[0:28:16] so we go got this data 2 weeks ago uh and this gets updated every week. So uh
+[0:28:18] and this gets updated every week. So uh it's quite expensive to purchase this
+[0:28:20] it's quite expensive to purchase this every week. So we purchased one time,
+[0:28:23] every week. So we purchased one time, April 15th, right before the AC OCS talk
+[0:28:25] April 15th, right before the AC OCS talk and right before Zidong's poster session
+[0:28:27] and right before Zidong's poster session on this at ACIC. So this target
+[0:28:29] on this at ACIC. So this target population is 4.8 million registered
+[0:28:31] population is 4.8 million registered voters in Pennsylvania across all 67
+[0:28:33] voters in Pennsylvania across all 67 counties in uh
+[0:28:35] counties in uh Pennsylvania. So the shared covariates
+[0:28:37] Pennsylvania. So the shared covariates between the RCT from 2020 and 2024 are
+[0:28:40] between the RCT from 2020 and 2024 are the age group, gender, and party and an
+[0:28:41] the age group, gender, and party and an incomplete voting history that they had.
+[0:28:44] incomplete voting history that they had. However, the the RCT collected more
+[0:28:46] However, the the RCT collected more covariates. In addition to this, they
+[0:28:48] covariates. In addition to this, they collected race and missing voting data
+[0:28:49] collected race and missing voting data history, which the the
+[0:28:52] history, which the the data we purchased does not have. And so,
+[0:28:54] data we purchased does not have. And so, we look at each county at a time just to
+[0:28:57] we look at each county at a time just to see whether certain counties have a
+[0:28:58] see whether certain counties have a different effect a transfer learning
+[0:29:00] different effect a transfer learning effect or not. So, the registered voters
+[0:29:01] effect or not. So, the registered voters in each county range from about 1,000
+[0:29:03] in each county range from about 1,000 roughly registered voters all the way up
+[0:29:05] roughly registered voters all the way up to 685,000. So, the median county of
+[0:29:07] to 685,000. So, the median county of registered voter county uh number is
+[0:29:10] registered voter county uh number is about 25,000. And just so that if you
+[0:29:13] about 25,000. And just so that if you never if you never lived in Philadelphia
+[0:29:14] never if you never lived in Philadelphia uh and I uh UPenn is in the Philadelphia
+[0:29:17] uh and I uh UPenn is in the Philadelphia county, CMU is in Allegheny county, and
+[0:29:19] county, CMU is in Allegheny county, and Penn State in Centre uh Centre county,
+[0:29:20] Penn State in Centre uh Centre county, and this will become relevant as you go
+[0:29:22] and this will become relevant as you go on the next few slides. Uh for
+[0:29:24] on the next few slides. Uh for sensitivity parameters, we start with
+[0:29:25] sensitivity parameters, we start with this thing. I will talk about how to
+[0:29:27] this thing. I will talk about how to calibrate this thing or what is a
+[0:29:28] calibrate this thing or what is a plausible range of this. And for
+[0:29:29] plausible range of this. And for inference, much in the spirit of being
+[0:29:31] inference, much in the spirit of being applied friendly, we literally use the
+[0:29:33] applied friendly, we literally use the plug-in estimator of the bootstrap,
+[0:29:34] plug-in estimator of the bootstrap, which is theoretically correct.
+[0:29:41] So, when you believe we believe that transportability uh holds, that is, 2020
+[0:29:44] transportability uh holds, that is, 2020 and 2024 identical given voter
+[0:29:46] and 2024 identical given voter demographics, then the ads against Trump
+[0:29:48] demographics, then the ads against Trump on turnout will be ineffective for every
+[0:29:50] on turnout will be ineffective for every single county in Pennsylvania.
+[0:29:53] single county in Pennsylvania. However, if you believe 2020 and 2024
+[0:29:56] However, if you believe 2020 and 2024 are not different, then the ads can
+[0:29:57] are not different, then the ads can definitely be significant under certain
+[0:29:59] definitely be significant under certain values of gamma zero, gamma one, these
+[0:30:01] values of gamma zero, gamma one, these sensitivity parameters. And here is just
+[0:30:03] sensitivity parameters. And here is just a plot of two counties. We can generate
+[0:30:06] a plot of two counties. We can generate this plot for 67 counties. Let's focus
+[0:30:08] this plot for 67 counties. Let's focus on the Philadelphia county or UPenn's
+[0:30:10] on the Philadelphia county or UPenn's located and the CMU county or
+[0:30:11] located and the CMU county or Allegheny's located, Pittsburgh and
+[0:30:13] Allegheny's located, Pittsburgh and Philadelphia. So, on the x ax x axis is
+[0:30:17] Philadelphia. So, on the x ax x axis is the odds ratio in terms of the gamma
+[0:30:18] the odds ratio in terms of the gamma zero. On the y axis is the odds ratio in
+[0:30:21] zero. On the y axis is the odds ratio in terms of gamma one. The origin here is
+[0:30:23] terms of gamma one. The origin here is the case where the transfer uh A5 holds.
+[0:30:25] the case where the transfer uh A5 holds. So, in this case, in both counties, the
+[0:30:27] So, in this case, in both counties, the ad effect is insignificant, and this
+[0:30:30] ad effect is insignificant, and this holds for all of the counties that we
+[0:30:31] holds for all of the counties that we have uh looked in Pennsylvania.
+[0:30:34] have uh looked in Pennsylvania. On the di- on the upper left is that the
+[0:30:37] On the di- on the upper left is that the case where the ad effect is significant
+[0:30:38] case where the ad effect is significant in a positive direction. So, this
+[0:30:39] in a positive direction. So, this increases turnout. And that happens,
+[0:30:42] increases turnout. And that happens, let's say, as an example in Philadelphia
+[0:30:44] let's say, as an example in Philadelphia when if the ad against Trump raised odds
+[0:30:46] when if the ad against Trump raised odds of voting in 2024 by 1.5 times the same
+[0:30:49] of voting in 2024 by 1.5 times the same voting odds in 2020, and the odds under
+[0:30:51] voting odds in 2020, and the odds under the odds remain the same between 2020
+[0:30:53] the odds remain the same between 2020 and 2024. So, the treatment effect the
+[0:30:55] and 2024. So, the treatment effect the treatment potential outcome shifted by
+[0:30:57] treatment potential outcome shifted by about 1.5 times, where the control
+[0:30:59] about 1.5 times, where the control potential outcomes did not shift between
+[0:31:01] potential outcomes did not shift between 2020 and 2024. And if that's the case,
+[0:31:03] 2020 and 2024. And if that's the case, it represents the point here. The ad The
+[0:31:06] it represents the point here. The ad The ad effect is positive, meaning that
+[0:31:08] ad effect is positive, meaning that sending these negative ads against Trump
+[0:31:10] sending these negative ads against Trump will increase turnout in Philadelphia.
+[0:31:13] will increase turnout in Philadelphia. And the same goes for the
+[0:31:14] And the same goes for the You can interpret it the opposite way
+[0:31:15] You can interpret it the opposite way for the negative effects of that these
+[0:31:17] for the negative effects of that these ads, if you send it out, will decrease
+[0:31:19] ads, if you send it out, will decrease turnout in Philadelphia. And so, a
+[0:31:21] turnout in Philadelphia. And so, a couple of things to notice, these
+[0:31:23] couple of things to notice, these boundaries between where the ad is
+[0:31:24] boundaries between where the ad is significant in a positive or negative
+[0:31:25] significant in a positive or negative direction different differs between
+[0:31:27] direction different differs between county to county. And to summarize this
+[0:31:29] county to county. And to summarize this in more compact way, we decided to look
+[0:31:32] in more compact way, we decided to look at the smallest uh absolute value of the
+[0:31:34] at the smallest uh absolute value of the difference that makes the ad against the
+[0:31:35] difference that makes the ad against the Trump have a significant effect on
+[0:31:37] Trump have a significant effect on turnout. And so, what do we mean by uh
+[0:31:39] turnout. And so, what do we mean by uh small and large here? A small
+[0:31:42] small and large here? A small exponential of this suggests that the ad
+[0:31:44] exponential of this suggests that the ad is a very sensitive to small deviation
+[0:31:46] is a very sensitive to small deviation between 2020 and 2024 2024 differences.
+[0:31:49] between 2020 and 2024 2024 differences. And that means that essentially the ad
+[0:31:51] And that means that essentially the ad effect the
+[0:31:52] effect the What we say about the ad effect in 2024
+[0:31:55] What we say about the ad effect in 2024 is very sensitive to slight changes
+[0:31:56] is very sensitive to slight changes between 2020 and 2024 elections.
+[0:31:59] between 2020 and 2024 elections. A large exponential suggests that the ad
+[0:32:01] A large exponential suggests that the ad effect is insensitive to large
+[0:32:02] effect is insensitive to large differences between 2020 or other means
+[0:32:04] differences between 2020 or other means what we say about the ad effect in 2024
+[0:32:07] what we say about the ad effect in 2024 will be less sensitive to changes that
+[0:32:09] will be less sensitive to changes that happen between 2020 election and 2024
+[0:32:11] happen between 2020 election and 2024 election.
+[0:32:12] election. And so, on the first row is the most
+[0:32:14] And so, on the first row is the most sensitive counties. So, these are
+[0:32:15] sensitive counties. So, these are sensitive to very slight changes in
+[0:32:17] sensitive to very slight changes in between 2020 and 2024. The first column
+[0:32:19] between 2020 and 2024. The first column is the positive ad effect. This so, this
+[0:32:20] is the positive ad effect. This so, this increases turnout. The second column is
+[0:32:23] increases turnout. The second column is this decreases turnout. And you notice
+[0:32:25] this decreases turnout. And you notice that Philadelphia and Monroe County are
+[0:32:26] that Philadelphia and Monroe County are the most sensitive for a positive
+[0:32:28] the most sensitive for a positive effect. That is, even slight changes in
+[0:32:30] effect. That is, even slight changes in the 2020 and 2024 would potentially lead
+[0:32:33] the 2020 and 2024 would potentially lead to a increased turnout in these two
+[0:32:35] to a increased turnout in these two counties. On the other hand, Bedford and
+[0:32:37] counties. On the other hand, Bedford and Fulton is sensitive to a negative
+[0:32:39] Fulton is sensitive to a negative negative turnout as a negative added
+[0:32:41] negative turnout as a negative added effects or a decreased turnout. That
+[0:32:42] effects or a decreased turnout. That means that even at slight changes in
+[0:32:44] means that even at slight changes in 2020 and 2024 would actually lead to
+[0:32:46] 2020 and 2024 would actually lead to potentially lead to decreases in turnout
+[0:32:48] potentially lead to decreases in turnout at Bedford and Fulton County.
+[0:32:50] at Bedford and Fulton County. On the opposite side of the spectrum is
+[0:32:52] On the opposite side of the spectrum is the least sensitive counties. So, these
+[0:32:53] the least sensitive counties. So, these are counties are counties where
+[0:32:55] are counties are counties where they'll be least sensitive to a turnout
+[0:32:58] they'll be least sensitive to a turnout a positive higher turnout. And these
+[0:33:00] a positive higher turnout. And these counties are
+[0:33:02] counties are counties where they'll be
+[0:33:04] counties where they'll be least sensitive to a lower turnout. One
+[0:33:06] least sensitive to a lower turnout. One interesting thing here is that Clinton
+[0:33:08] interesting thing here is that Clinton County is the least sensitive for both
+[0:33:10] County is the least sensitive for both negative and positive added effects
+[0:33:12] negative and positive added effects between 2020 and 2024. And this will be
+[0:33:14] between 2020 and 2024. And this will be interesting if there's a political
+[0:33:15] interesting if there's a political scientist in the audience of why cuz we
+[0:33:18] scientist in the audience of why cuz we looked at this county. It's mostly
+[0:33:19] looked at this county. It's mostly Republican leaning. The only time they
+[0:33:21] Republican leaning. The only time they turned
+[0:33:22] turned Democrat leaning was in 20 2008 when
+[0:33:25] Democrat leaning was in 20 2008 when Obama was elected, but it is it'll be
+[0:33:27] Obama was elected, but it is it'll be curious to hear your thoughts on this
+[0:33:29] curious to hear your thoughts on this particular reason.
+[0:33:31] particular reason. So, as a a natural question if you look
+[0:33:34] So, as a a natural question if you look at that table is, you know, what is a
+[0:33:36] at that table is, you know, what is a large and small gamma, right? It could
+[0:33:37] large and small gamma, right? It could be that gamma of zero 1.001 is large or
+[0:33:41] be that gamma of zero 1.001 is large or gamma of 1.05 is large. And in
+[0:33:43] gamma of 1.05 is large. And in sensitivity analysis in general, there's
+[0:33:44] sensitivity analysis in general, there's always a question ever since I learned
+[0:33:46] always a question ever since I learned sensitivity analysis
+[0:33:48] sensitivity analysis in 2012 about what is a large or what is
+[0:33:51] in 2012 about what is a large or what is a small what is a plausible range of
+[0:33:52] a small what is a plausible range of gamma at the end of the day. And there
+[0:33:54] gamma at the end of the day. And there are many ways to answer this question.
+[0:33:56] are many ways to answer this question. So, we present one solution to this I
+[0:33:57] So, we present one solution to this I think that's particularly useful for
+[0:33:59] think that's particularly useful for transfer learning where the source
+[0:34:01] transfer learning where the source population is an RCT. And we do this by
+[0:34:04] population is an RCT. And we do this by fairly generic approach which is to
+[0:34:06] fairly generic approach which is to create dissimilar partitions of the
+[0:34:07] create dissimilar partitions of the source data. So, how we do this is as
+[0:34:09] source data. So, how we do this is as follows. We create two partitions of the
+[0:34:12] follows. We create two partitions of the source population into two similar two
+[0:34:14] source population into two similar two dissimilar groups. So, these two
+[0:34:15] dissimilar groups. So, these two subpopulations are not similar with
+[0:34:16] subpopulations are not similar with respect to what the added effect looks
+[0:34:18] respect to what the added effect looks like. For example, in Aggarwal et al.
+[0:34:20] like. For example, in Aggarwal et al. this is a source population. We created
+[0:34:22] this is a source population. We created these two partitions. The blue collar
+[0:34:24] these two partitions. The blue collar states or the blue wall so to speak and
+[0:34:27] states or the blue wall so to speak and the not blue wall so the not blue collar
+[0:34:28] the not blue wall so the not blue collar states here at the end of the day. And
+[0:34:30] states here at the end of the day. And so we just created because we felt that
+[0:34:31] so we just created because we felt that the added effect in these three states
+[0:34:32] the added effect in these three states may be different from the odd effect in
+[0:34:34] may be different from the odd effect in these two states.
+[0:34:36] these two states. And we use one of these partitions,
+[0:34:38] And we use one of these partitions, synthetic partitions I guess, as a
+[0:34:40] synthetic partitions I guess, as a source and the other as the target. And
+[0:34:42] source and the other as the target. And then the beauty of this is that because
+[0:34:44] then the beauty of this is that because the source had an RCT, you can actually
+[0:34:47] the source had an RCT, you can actually estimate the target's ATE in two ways.
+[0:34:49] estimate the target's ATE in two ways. One is simply using the leveraging the
+[0:34:51] One is simply using the leveraging the RCT to estimate the ATE in the target
+[0:34:53] RCT to estimate the ATE in the target population. Let's say this is the target
+[0:34:55] population. Let's say this is the target population. And you can get the
+[0:34:56] population. And you can get the confidence interval as well. We call
+[0:34:58] confidence interval as well. We call this the Oracle CI to
+[0:35:00] this the Oracle CI to similar to the gold standard that you
+[0:35:02] similar to the gold standard that you would want to run in these two states.
+[0:35:04] would want to run in these two states. The other CI you could estimate and get
+[0:35:07] The other CI you could estimate and get the AT effect is by using the transfer
+[0:35:08] the AT effect is by using the transfer learning approach. We can learn from
+[0:35:10] learning approach. We can learn from what we learned from the blue collar
+[0:35:11] what we learned from the blue collar states and see what the effect would
+[0:35:12] states and see what the effect would have looked like in these non-blue
+[0:35:14] have looked like in these non-blue collar states. And we can estimate the
+[0:35:15] collar states. And we can estimate the ATE and its CI for different values of
+[0:35:17] ATE and its CI for different values of gamma zero and gamma one, and we call
+[0:35:19] gamma zero and gamma one, and we call this the transported CI.
+[0:35:25] And then the C here, the subset C is essentially a subset of gamma subset of
+[0:35:27] essentially a subset of gamma subset of these
+[0:35:28] these inner gamma where this interval overlaps
+[0:35:31] inner gamma where this interval overlaps with the ATE for the Oracle CI. And this
+[0:35:34] with the ATE for the Oracle CI. And this is what we call the possible range of
+[0:35:36] is what we call the possible range of sensitivity parameters. So if the CI
+[0:35:38] sensitivity parameters. So if the CI from here overlaps with CI from here, we
+[0:35:40] from here overlaps with CI from here, we look at all the gammas where the CI from
+[0:35:42] look at all the gammas where the CI from here overlaps with the CI here. Because
+[0:35:44] here overlaps with the CI here. Because these are
+[0:35:46] these are this is the golden true the ground
+[0:35:48] this is the golden true the ground ground truth of the standard error, and
+[0:35:50] ground truth of the standard error, and this is what we transported because we
+[0:35:52] this is what we transported because we thought they're different and these are
+[0:35:53] thought they're different and these are the possible ranges of gamma you can
+[0:35:55] the possible ranges of gamma you can think about at the end.
+[0:35:56] think about at the end. Melody also has a wonder another idea of
+[0:35:58] Melody also has a wonder another idea of doing this for the what to assess a
+[0:36:00] doing this for the what to assess a different assumption A4, which is the
+[0:36:02] different assumption A4, which is the overlap condition.
+[0:36:08] So how does this look like in a plot? So on the X and Y axis are saying the gamma
+[0:36:10] on the X and Y axis are saying the gamma zero and gamma one. And And instead of
+[0:36:12] zero and gamma one. And And instead of significant and insignificant odd
+[0:36:13] significant and insignificant odd effects, now we have a possible range of
+[0:36:15] effects, now we have a possible range of odd effects, and outside of this is the
+[0:36:17] odd effects, and outside of this is the implausible range of odd effects. So
+[0:36:18] implausible range of odd effects. So within here are the intervals where the
+[0:36:21] within here are the intervals where the the transferred CI overlaps with the
+[0:36:23] the transferred CI overlaps with the Oracle CI. And outside of here the
+[0:36:26] Oracle CI. And outside of here the transfer a uh transfer learning CI that
+[0:36:28] transfer a uh transfer learning CI that not overlap with the uh
+[0:36:30] not overlap with the uh a Oracle CI at the end of the day. Uh
+[0:36:32] a Oracle CI at the end of the day. Uh and we'll actually then take this
+[0:36:34] and we'll actually then take this plausible range of C and then we'll
+[0:36:36] plausible range of C and then we'll actually overlap with the 2024 gammas
+[0:36:39] actually overlap with the 2024 gammas where the ad effect is significant to
+[0:36:40] where the ad effect is significant to figure out which counties actually are
+[0:36:43] figure out which counties actually are have a plausible range of gamma that
+[0:36:45] have a plausible range of gamma that will make their ad effect significant in
+[0:36:47] will make their ad effect significant in 2024.
+[0:36:50] 2024. And so that's the result here. So the
+[0:36:51] And so that's the result here. So the before calibration, so this is before we
+[0:36:53] before calibration, so this is before we overlap with the set C here this is the
+[0:36:56] overlap with the set C here this is the all. Pretty much every county except uh
+[0:36:59] all. Pretty much every county except uh Clinton County uh has a
+[0:37:01] Clinton County uh has a could have a significant positive ad
+[0:37:03] could have a significant positive ad effect. However, after we restrict our
+[0:37:05] effect. However, after we restrict our gamma to the set of C where it's
+[0:37:08] gamma to the set of C where it's plausible based on our dis- dissimilar
+[0:37:10] plausible based on our dis- dissimilar partitions, we end up with nine counties
+[0:37:12] partitions, we end up with nine counties where uh the ad effect positive ad
+[0:37:14] where uh the ad effect positive ad effect is plausible in 2024. And these
+[0:37:17] effect is plausible in 2024. And these counties are sensitive towards a
+[0:37:19] counties are sensitive towards a positive ad effect in that they are if
+[0:37:21] positive ad effect in that they are if you deliver the ads against Trump, they
+[0:37:22] you deliver the ads against Trump, they would increase turnout. Uh if you look
+[0:37:25] would increase turnout. Uh if you look at these counties in more detail and if
+[0:37:26] at these counties in more detail and if you know Pennsylvania a little bit,
+[0:37:27] you know Pennsylvania a little bit, these are mostly urban counties. So
+[0:37:29] these are mostly urban counties. So Philadelphia, Montgomery, Pittsburgh,
+[0:37:30] Philadelphia, Montgomery, Pittsburgh, and Allegheny here or in college towns.
+[0:37:32] and Allegheny here or in college towns. So Centre a Centre County members
+[0:37:34] So Centre a Centre County members depends or
+[0:37:35] depends or Penn State is.
+[0:37:38] Penn State is. Also interestingly enough, this set of
+[0:37:39] Also interestingly enough, this set of rows here uh Northampton County is
+[0:37:41] rows here uh Northampton County is called a pivot county by Ballotopia.
+[0:37:43] called a pivot county by Ballotopia. Biden actually only won this county by
+[0:37:45] Biden actually only won this county by 1,233 votes out of a 172,000 votes at
+[0:37:49] 1,233 votes out of a 172,000 votes at the end of the day. And most
+[0:37:50] the end of the day. And most importantly, perhaps interestingly
+[0:37:52] importantly, perhaps interestingly enough, all these counties are counties
+[0:37:54] enough, all these counties are counties are Biden won in 2020 at the at the
+[0:37:57] are Biden won in 2020 at the at the election. So this perhaps suggests based
+[0:37:59] election. So this perhaps suggests based on what we take away from Agarwal's uh
+[0:38:01] on what we take away from Agarwal's uh Kate analysis is that Biden needed maybe
+[0:38:04] Kate analysis is that Biden needed maybe encouraged to vote because the ad
+[0:38:05] encouraged to vote because the ad against Trump may be effective in 2024.
+[0:38:07] against Trump may be effective in 2024. And this actually aligns with uh the
+[0:38:09] And this actually aligns with uh the Agarwal suggestion that the you know the
+[0:38:11] Agarwal suggestion that the you know the AT effect may be actually more
+[0:38:13] AT effect may be actually more significant if you stratify by this
+[0:38:15] significant if you stratify by this Trump supporting score.
+[0:38:20] Now we can look at the negative effects. So this decreases turnout. And so again,
+[0:38:22] So this decreases turnout. And so again, before calibration, before we overlap
+[0:38:24] before calibration, before we overlap with the set C, and after we overlap
+[0:38:26] with the set C, and after we overlap with C, you notice that most counties
+[0:38:28] with C, you notice that most counties are actually sensitive towards a
+[0:38:29] are actually sensitive towards a negative effect. That is, the slight
+[0:38:30] negative effect. That is, the slight deviation from 2020 and 2024 could
+[0:38:32] deviation from 2020 and 2024 could actually suggest that the ad could
+[0:38:33] actually suggest that the ad could reduce turnout uh voter turnout.
+[0:38:36] reduce turnout uh voter turnout. Now, the most sensitive counties, the
+[0:38:38] Now, the most sensitive counties, the smallest gamma difference is in Fulton
+[0:38:39] smallest gamma difference is in Fulton and Bedford County. And so, I never
+[0:38:41] and Bedford County. And so, I never heard of this county when the data
+[0:38:43] heard of this county when the data analysis presented to me, so I looked it
+[0:38:44] analysis presented to me, so I looked it up. And actually, it's the counties with
+[0:38:46] up. And actually, it's the counties with the largest margin for Trump voting in
+[0:38:48] the largest margin for Trump voting in 2020 by far. So, they in this uh I think
+[0:38:50] 2020 by far. So, they in this uh I think in Fulton County, 85% of voters voted
+[0:38:53] in Fulton County, 85% of voters voted for Trump in uh voted for Trump. And
+[0:38:56] for Trump in uh voted for Trump. And Bedford County, 84% voted for Trump. So,
+[0:38:59] Bedford County, 84% voted for Trump. So, and and
+[0:39:00] and and uh
+[0:39:00] uh this could be interpreted various ways.
+[0:39:02] this could be interpreted various ways. We're we're not going to interpret it
+[0:39:03] We're we're not going to interpret it beyond what we noticed. Uh but one
+[0:39:06] beyond what we noticed. Uh but one general interesting thing here is a lot
+[0:39:08] general interesting thing here is a lot of this voting election voter
+[0:39:10] of this voting election voter mobilization campaigns talk about swing
+[0:39:12] mobilization campaigns talk about swing counties. We thought it'd be interesting
+[0:39:13] counties. We thought it'd be interesting to look at swing counties for ad
+[0:39:14] to look at swing counties for ad campaigns. And these are counties that
+[0:39:17] campaigns. And these are counties that actually show up in both. And
+[0:39:19] actually show up in both. And uh Centre County, Lehigh County, and
+[0:39:21] uh Centre County, Lehigh County, and Northampton County are sensitive in
+[0:39:22] Northampton County are sensitive in either direction. That is, slight
+[0:39:24] either direction. That is, slight changes in 2020 and 2024 could actually
+[0:39:26] changes in 2020 and 2024 could actually mean that the voter turnout could
+[0:39:27] mean that the voter turnout could increase or voter turnout could
+[0:39:28] increase or voter turnout could decrease. So, so we call these swing
+[0:39:30] decrease. So, so we call these swing counties for campaign ads.
+[0:39:37] So, some preliminary takeaways from our analysis. So, if we believe 2020 and
+[0:39:39] analysis. So, if we believe 2020 and 2024 identical after adjusting for
+[0:39:41] 2024 identical after adjusting for covariates, we then all counties will
+[0:39:43] covariates, we then all counties will have zero or near zero effects in 2024
+[0:39:46] have zero or near zero effects in 2024 based on the information provided in
+[0:39:47] based on the information provided in 2020.
+[0:39:48] 2020. However, if you believe that they're
+[0:39:50] However, if you believe that they're different, then you know, a few counties
+[0:39:51] different, then you know, a few counties could have a positive ad effect. That
+[0:39:53] could have a positive ad effect. That is, it increases turnout. Whereas, most
+[0:39:55] is, it increases turnout. Whereas, most counties could have a negative ad
+[0:39:56] counties could have a negative ad effect. Uh as in, it decreases turnout.
+[0:39:58] effect. Uh as in, it decreases turnout. The direction of positive and negative
+[0:40:00] The direction of positive and negative does depend largely on the counties
+[0:40:02] does depend largely on the counties leaning towards Trump and Biden based on
+[0:40:04] leaning towards Trump and Biden based on the 2020 elections. And the direction
+[0:40:06] the 2020 elections. And the direction can also go in very both ways in some
+[0:40:08] can also go in very both ways in some swing counties. So, the swing counties
+[0:40:10] swing counties. So, the swing counties that we mentioned in the three uh the
+[0:40:11] that we mentioned in the three uh the slide ago.
+[0:40:14] slide ago. More general takeaways, and again, this
+[0:40:15] More general takeaways, and again, this will definitely change as we analyze
+[0:40:17] will definitely change as we analyze different states. Is that a large set of
+[0:40:20] different states. Is that a large set of we could make this thing less sensitive.
+[0:40:22] we could make this thing less sensitive. I would would like to thank Melody
+[0:40:24] I would would like to thank Melody though for pointing out there's a
+[0:40:25] though for pointing out there's a there's a case where this is not the
+[0:40:27] there's a case where this is not the true if especially if you increase this
+[0:40:29] true if especially if you increase this for a variance based sensitivity model
+[0:40:30] for a variance based sensitivity model of an AIPW estimator, this could
+[0:40:32] of an AIPW estimator, this could actually hurt sensitivity analysis. But
+[0:40:34] actually hurt sensitivity analysis. But for us for what we see that a large
+[0:40:36] for us for what we see that a large actually a large and sort of we actually
+[0:40:39] actually a large and sort of we actually some helpful for our case. Our sample
+[0:40:42] some helpful for our case. Our sample size does matter, but the general
+[0:40:44] size does matter, but the general consensus that we're reaching right now
+[0:40:46] consensus that we're reaching right now as we're looking at more states is that
+[0:40:47] as we're looking at more states is that having a good good target covariate
+[0:40:50] having a good good target covariate actually matters a lot more than how
+[0:40:51] actually matters a lot more than how many sample size we have.
+[0:40:54] many sample size we have. So, some summary of the talk. So, this
+[0:40:57] So, some summary of the talk. So, this entire talk was motivated based on this
+[0:40:59] entire talk was motivated based on this paper and the discussion in this paper
+[0:41:00] paper and the discussion in this paper on what would the ad
+[0:41:03] on what would the ad ad against Donald Trump in 2020 remain
+[0:41:05] ad against Donald Trump in 2020 remain ineffective in 2024? And the way we
+[0:41:08] ineffective in 2024? And the way we address this question, obviously there
+[0:41:10] address this question, obviously there are many ways to address this question,
+[0:41:11] are many ways to address this question, is by using transfer learning and
+[0:41:12] is by using transfer learning and sensitivity analysis. We And the setup
+[0:41:14] sensitivity analysis. We And the setup is roughly that we have a source that is
+[0:41:16] is roughly that we have a source that is RCT and then the we the target
+[0:41:18] RCT and then the we the target population and source population do not
+[0:41:20] population and source population do not have the same covariates at the end. For
+[0:41:22] have the same covariates at the end. For the analysis approach, we could have
+[0:41:24] the analysis approach, we could have went the fancy approach and we did have
+[0:41:25] went the fancy approach and we did have one fancy approach, but we also propose
+[0:41:28] one fancy approach, but we also propose a very simple plug-in estimator with a
+[0:41:29] a very simple plug-in estimator with a bootstrap CSC confidence interval just
+[0:41:31] bootstrap CSC confidence interval just to avoid sandwiching part of it. And we
+[0:41:35] to avoid sandwiching part of it. And we also talk about this calibration
+[0:41:36] also talk about this calibration sensitivity analysis
+[0:41:37] sensitivity analysis source data as well. We present this in
+[0:41:39] source data as well. We present this in preliminary analysis of Pennsylvania.
+[0:41:41] preliminary analysis of Pennsylvania. Again, all this is preliminary. Voting
+[0:41:42] Again, all this is preliminary. Voting data gets updated every week and this
+[0:41:44] data gets updated every week and this may change as we go closer and closer to
+[0:41:46] may change as we go closer and closer to the election.
+[0:41:47] the election. Some ongoing work, we're repeating this
+[0:41:49] Some ongoing work, we're repeating this analysis in Wisconsin, North Carolina,
+[0:41:51] analysis in Wisconsin, North Carolina, and Georgia. Georgia's very interesting
+[0:41:53] and Georgia. Georgia's very interesting actually. Georgia uh
+[0:41:55] actually. Georgia uh Well, I have many things to say, but
+[0:41:56] Well, I have many things to say, but like there's there's like an interesting
+[0:41:58] like there's there's like an interesting voter demographic here
+[0:42:00] voter demographic here that and depending on which county you
+[0:42:02] that and depending on which county you focus this could have very very
+[0:42:04] focus this could have very very interesting results. Unfortunately, this
+[0:42:06] interesting results. Unfortunately, this anyway, I'll talk more if if there's
+[0:42:08] anyway, I'll talk more if if there's time I'll talk more.
+[0:42:09] time I'll talk more. The other thing that we want to work on
+[0:42:10] The other thing that we want to work on is a lot of political scientists and a
+[0:42:12] is a lot of political scientists and a lot of people who work in uh voter
+[0:42:13] lot of people who work in uh voter mobilization know that uh midterm
+[0:42:15] mobilization know that uh midterm elections matter, especially between
+[0:42:16] elections matter, especially between presidential campaigns. And we want also
+[0:42:19] presidential campaigns. And we want also use this to improve data hat estimate
+[0:42:21] use this to improve data hat estimate and also to improve calibration. How we
+[0:42:22] and also to improve calibration. How we do this, we're still figuring this out,
+[0:42:24] do this, we're still figuring this out, but there's something that we're working
+[0:42:25] but there's something that we're working on. And more general question I think
+[0:42:27] on. And more general question I think Melody will talk about is how the
+[0:42:28] Melody will talk about is how the calibration sensitivity analysis or
+[0:42:29] calibration sensitivity analysis or benchmark sensitivity analysis across
+[0:42:31] benchmark sensitivity analysis across time, which is something that hasn't
+[0:42:32] time, which is something that hasn't been discussed compared to across space,
+[0:42:35] been discussed compared to across space, which is what most uh I think people
+[0:42:36] which is what most uh I think people discuss.
+[0:42:37] discuss. Uh to end the talk, uh I wanted to thank
+[0:42:40] Uh to end the talk, uh I wanted to thank a couple several people. Uh Shelby, my
+[0:42:42] a couple several people. Uh Shelby, my second-year PhD student, who's also
+[0:42:43] second-year PhD student, who's also going to be at ACIC, for actually
+[0:42:45] going to be at ACIC, for actually finding this very very very unique data.
+[0:42:48] finding this very very very unique data. Uh thank you. Uh this And actually, she
+[0:42:50] Uh thank you. Uh this And actually, she also found another interesting data that
+[0:42:51] also found another interesting data that you can also talk to her about for her
+[0:42:53] you can also talk to her about for her poster, which is not related to this.
+[0:42:55] poster, which is not related to this. Also, for the Madison seminar students
+[0:42:57] Also, for the Madison seminar students having a participant yesterday, we
+[0:42:58] having a participant yesterday, we actually the pretested this slide just
+[0:43:01] actually the pretested this slide just so that if it if it made sense. And
+[0:43:03] so that if it if it made sense. And especially for Steven uh for finding
+[0:43:05] especially for Steven uh for finding typos, really appreciate it. Uh for
+[0:43:07] typos, really appreciate it. Uh for Melody, I thank you for the references
+[0:43:09] Melody, I thank you for the references that we missed as well as feedback, like
+[0:43:10] that we missed as well as feedback, like especially on a short notice, really
+[0:43:12] especially on a short notice, really appreciate that as well. An updated
+[0:43:13] appreciate that as well. An updated version of this will be at
+[0:43:15] version of this will be at uh at ACIC in Zin Ran's poster session.
+[0:43:17] uh at ACIC in Zin Ran's poster session. And again, this is all preliminary.
+[0:43:19] And again, this is all preliminary. We're not political scientists, so any
+[0:43:20] We're not political scientists, so any any comments and feedback will be really
+[0:43:22] any comments and feedback will be really appreciated. Uh yeah, so thank you very
+[0:43:24] appreciated. Uh yeah, so thank you very much.
+[0:43:26] much. Thank you, Hanson, for the great talk.
+[0:43:29] Thank you, Hanson, for the great talk. Maybe we can quickly uh do one or two
+[0:43:31] Maybe we can quickly uh do one or two questions. Uh we received a bunch of
+[0:43:33] questions. Uh we received a bunch of them and uh uh Zin Ran has uh answered
+[0:43:36] them and uh uh Zin Ran has uh answered most of them. So, one question uh
+[0:43:40] most of them. So, one question uh now is how can you decide if two
+[0:43:42] now is how can you decide if two populations are dissimilar enough?
+[0:43:46] populations are dissimilar enough? Yeah, fantastic question. Uh so, we
+[0:43:49] Yeah, fantastic question. Uh so, we initially chose based on uh what we
+[0:43:52] initially chose based on uh what we thought were reasonable, but again, what
+[0:43:54] thought were reasonable, but again, what we think is reasonable is not maybe not
+[0:43:55] we think is reasonable is not maybe not be reasonable to you. And I think this
+[0:43:57] be reasonable to you. And I think this choice could be better informed by
+[0:43:58] choice could be better informed by people who actually know about political
+[0:44:00] people who actually know about political campaigns better. We did it based on
+[0:44:02] campaigns better. We did it based on blue-collar states and not blue-collar
+[0:44:04] blue-collar states and not blue-collar states, based on the 2016 where the blue
+[0:44:07] states, based on the 2016 where the blue wall fell, so to speak, and then that's
+[0:44:09] wall fell, so to speak, and then that's why Donald Trump won these many
+[0:44:10] why Donald Trump won these many candidates, but and also we thought
+[0:44:12] candidates, but and also we thought there were definitely differences
+[0:44:13] there were definitely differences between added effects in these three
+[0:44:15] between added effects in these three counties based on my experience living
+[0:44:16] counties based on my experience living in these two and versus I haven't lived
+[0:44:18] in these two and versus I haven't lived here, but I that's my you know, maybe
+[0:44:20] here, but I that's my you know, maybe there are differences there. But there
+[0:44:22] there are differences there. But there are I think creating multiple dissimilar
+[0:44:24] are I think creating multiple dissimilar partitions in general can help you
+[0:44:27] partitions in general can help you understand the unobservable biases. So
+[0:44:29] understand the unobservable biases. So this is just one partition that we
+[0:44:30] this is just one partition that we looked at.
+[0:44:33] looked at. Thank you. Um maybe quickly another
+[0:44:35] Thank you. Um maybe quickly another question is about um
+[0:44:38] question is about um uh the concern of cherry picking when
+[0:44:41] uh the concern of cherry picking when you're singling out particular counties.
+[0:44:43] you're singling out particular counties. Like in that case, did you consider how
+[0:44:45] Like in that case, did you consider how to adjust for post model selection
+[0:44:47] to adjust for post model selection inference?
+[0:44:49] inference? Yeah, so uh
+[0:44:51] Yeah, so uh I I think there is a concern that, you
+[0:44:53] I I think there is a concern that, you know, we we could uh look at the
+[0:44:55] know, we we could uh look at the significant counties and further select
+[0:44:57] significant counties and further select the significant counties. Here I think
+[0:44:59] the significant counties. Here I think it's more uh I would say exploratory
+[0:45:01] it's more uh I would say exploratory certainly. I think if you wanted to I
+[0:45:04] certainly. I think if you wanted to I think the the bigger uh the the first
+[0:45:06] think the the bigger uh the the first question we have to ask is what kind of
+[0:45:08] question we have to ask is what kind of post election inference problem could
+[0:45:09] post election inference problem could happen here? I need to think about that
+[0:45:11] happen here? I need to think about that a little bit more. Um it could be that
+[0:45:13] a little bit more. Um it could be that the effect shifts. It could be that the
+[0:45:15] the effect shifts. It could be that the standard error gets larger or it could
+[0:45:16] standard error gets larger or it could be the distribution of it shifts. I
+[0:45:19] be the distribution of it shifts. I don't know uh on the top of my head. One
+[0:45:21] don't know uh on the top of my head. One thing to note here is that the target
+[0:45:22] thing to note here is that the target population is technically fixed because
+[0:45:24] population is technically fixed because we looked at every single registered
+[0:45:26] we looked at every single registered voter 2 weeks ago. So in some sense we
+[0:45:28] voter 2 weeks ago. So in some sense we avoid may avoid some of the traditional
+[0:45:31] avoid may avoid some of the traditional issues, but um yeah, this is a good
+[0:45:33] issues, but um yeah, this is a good question to explore. I think the first
+[0:45:34] question to explore. I think the first step to asking this question is yeah,
+[0:45:36] step to asking this question is yeah, what matters specifically? The point
+[0:45:38] what matters specifically? The point estimate, standard error, or the
+[0:45:40] estimate, standard error, or the distribution? Yeah.
+[0:45:42] distribution? Yeah. Thank you so much. Um I think for the
+[0:45:44] Thank you so much. Um I think for the interest of time we can move on to
+[0:45:46] interest of time we can move on to Melody's discussion.
+[0:46:03] Can everyone see? Yeah.
+[0:46:04] Yeah. Okay, perfect. Let me minimize Zoom
+[0:46:07] Okay, perfect. Let me minimize Zoom controls so that I can see. Okay, uh
+[0:46:10] controls so that I can see. Okay, uh hi everyone. I'm Melody. I'm currently a
+[0:46:12] hi everyone. I'm Melody. I'm currently a postdoc at Harvard and I'm very excited
+[0:46:15] postdoc at Harvard and I'm very excited to be here to discuss, I think, this
+[0:46:17] to be here to discuss, I think, this very excellent work by Sira, Jiwei, and
+[0:46:19] very excellent work by Sira, Jiwei, and Hyunsung.
+[0:46:20] Hyunsung. Uh this particular paper, I think,
+[0:46:22] Uh this particular paper, I think, merges two of my personal interests,
+[0:46:24] merges two of my personal interests, which is uh transfer learning and
+[0:46:26] which is uh transfer learning and generalizability and sensitivity
+[0:46:27] generalizability and sensitivity analysis.
+[0:46:29] analysis. So, I'll try to keep it short um and
+[0:46:31] So, I'll try to keep it short um and I'll start off with a summary of what I
+[0:46:33] I'll start off with a summary of what I thought the talk was about and then I'll
+[0:46:36] thought the talk was about and then I'll also end with some questions.
+[0:46:39] also end with some questions. Okay, so um this particular talk focuses
+[0:46:42] Okay, so um this particular talk focuses on transfer learning. And so, we're
+[0:46:44] on transfer learning. And so, we're interested in these particular settings
+[0:46:46] interested in these particular settings in thinking about how we can transfer or
+[0:46:48] in thinking about how we can transfer or transport or generalize the information
+[0:46:50] transport or generalize the information that we've learned about a specific
+[0:46:52] that we've learned about a specific intervention in one context to a new
+[0:46:55] intervention in one context to a new context.
+[0:46:57] context. And so, the estimate of interest in
+[0:46:58] And so, the estimate of interest in these sorts of settings is basically the
+[0:47:00] these sorts of settings is basically the average treatment effect uh in this uh
+[0:47:03] average treatment effect uh in this uh new particular context, which is denoted
+[0:47:06] new particular context, which is denoted by the indicator S = 0.
+[0:47:08] by the indicator S = 0. Okay, so um I guess to be more clear,
+[0:47:12] Okay, so um I guess to be more clear, when we have S = 1, that basically
+[0:47:13] when we have S = 1, that basically denotes that we're in a randomized
+[0:47:15] denotes that we're in a randomized control trial or perhaps a specific
+[0:47:17] control trial or perhaps a specific study and then basically we want to know
+[0:47:19] study and then basically we want to know what happened to the average human
+[0:47:21] what happened to the average human effect if we were to go to a new uh
+[0:47:23] effect if we were to go to a new uh target population, maybe in a new time
+[0:47:25] target population, maybe in a new time period.
+[0:47:27] period. And so, this particular talk focuses on
+[0:47:29] And so, this particular talk focuses on considering whether the results from an
+[0:47:31] considering whether the results from an experiment related to the 2020 election
+[0:47:33] experiment related to the 2020 election can be transported to the 2024 election.
+[0:47:37] can be transported to the 2024 election. So, I think this is very interesting. Um
+[0:47:39] So, I think this is very interesting. Um in particular, there are many dimensions
+[0:47:41] in particular, there are many dimensions of potential distribution shifts that
+[0:47:42] of potential distribution shifts that we're going to be worried about, um
+[0:47:44] we're going to be worried about, um which uh they talked about in the talk,
+[0:47:46] which uh they talked about in the talk, right? So, for example, there's
+[0:47:47] right? So, for example, there's different contexts between 2020 and
+[0:47:49] different contexts between 2020 and 2024. We're now in a different time
+[0:47:51] 2024. We're now in a different time period, so things could have changed
+[0:47:53] period, so things could have changed just by, you know, the passage of time.
+[0:47:55] just by, you know, the passage of time. And also, the underlying demographics of
+[0:47:57] And also, the underlying demographics of voters could have changed as well,
+[0:47:59] voters could have changed as well, right? So, maybe people have moved in
+[0:48:01] right? So, maybe people have moved in and out. Um
+[0:48:02] and out. Um And so, all of these could contribute to
+[0:48:04] And so, all of these could contribute to potential differences in basically this
+[0:48:06] potential differences in basically this average treatment effect that we're
+[0:48:07] average treatment effect that we're interested in.
+[0:48:09] interested in. Um I think a question that came up for
+[0:48:11] Um I think a question that came up for me during the talk is since we're
+[0:48:13] me during the talk is since we're interested in uh you know, these people
+[0:48:16] interested in uh you know, these people who are exposed to these ads in in the
+[0:48:18] who are exposed to these ads in in the first set of experiments and and and now
+[0:48:20] first set of experiments and and and now may potentially be exposed to the ad um
+[0:48:23] may potentially be exposed to the ad um again, right? In this hypothetical 2024
+[0:48:25] again, right? In this hypothetical 2024 setting. I'm wondering if we need to be
+[0:48:27] setting. I'm wondering if we need to be worried about things like carryover
+[0:48:29] worried about things like carryover effects. Like if the same person views
+[0:48:31] effects. Like if the same person views the ad twice, like would that
+[0:48:32] the ad twice, like would that potentially change uh the the the the
+[0:48:35] potentially change uh the the the the estimated treatment effect? Um just
+[0:48:36] estimated treatment effect? Um just something to think about.
+[0:48:38] something to think about. Okay. So, in general, when we think
+[0:48:40] Okay. So, in general, when we think about transporting, transferring, or
+[0:48:42] about transporting, transferring, or generalizing our causal effects, we rely
+[0:48:44] generalizing our causal effects, we rely on two crucial assumptions.
+[0:48:46] on two crucial assumptions. The first is uh something that the
+[0:48:48] The first is uh something that the authors have called transportability.
+[0:48:49] authors have called transportability. It's also referred to a selection on
+[0:48:51] It's also referred to a selection on observables or conditional ignorability.
+[0:48:53] observables or conditional ignorability. Where we basically say that given a set
+[0:48:55] Where we basically say that given a set of uh pre-treatment covariates, any sort
+[0:48:57] of uh pre-treatment covariates, any sort of selection effect we get from um
+[0:48:59] of selection effect we get from um entering the experiment is going to be
+[0:49:01] entering the experiment is going to be ignorable.
+[0:49:03] ignorable. And the second assumption is this
+[0:49:05] And the second assumption is this positivity or overlap assumption where
+[0:49:06] positivity or overlap assumption where basically um conditional on the set of
+[0:49:09] basically um conditional on the set of pre-treatment covariates, the
+[0:49:10] pre-treatment covariates, the probability of selection into the
+[0:49:12] probability of selection into the original experiment uh has to be
+[0:49:14] original experiment uh has to be non-zero.
+[0:49:16] non-zero. Okay. And so, these two assumptions
+[0:49:17] Okay. And so, these two assumptions generally allow us to identify our uh
+[0:49:19] generally allow us to identify our uh estimate of interest.
+[0:49:21] estimate of interest. But uh in practice, they can be pretty
+[0:49:23] But uh in practice, they can be pretty untenable, right? So, um the set of
+[0:49:25] untenable, right? So, um the set of covariates that we tend to collect
+[0:49:27] covariates that we tend to collect between both the experiment and our
+[0:49:28] between both the experiment and our target population is often limited.
+[0:49:31] target population is often limited. We're also worried about latent
+[0:49:32] We're also worried about latent confounders and also, you know,
+[0:49:35] confounders and also, you know, different covariates that can't
+[0:49:37] different covariates that can't necessarily capture all the confounding
+[0:49:38] necessarily capture all the confounding effects we get from changes across time
+[0:49:40] effects we get from changes across time as well as context.
+[0:49:43] as well as context. So, um what the authors propose is they
+[0:49:45] So, um what the authors propose is they want to embed a sensitivity analysis
+[0:49:47] want to embed a sensitivity analysis into the transfer learning process.
+[0:49:49] into the transfer learning process. And what this allows us to do is allows
+[0:49:51] And what this allows us to do is allows us evaluate the possible estimates that
+[0:49:53] us evaluate the possible estimates that could occur under violations of the
+[0:49:56] could occur under violations of the identifying assumptions. So, we can
+[0:49:57] identifying assumptions. So, we can essentially relax these identifying
+[0:49:59] essentially relax these identifying assumptions and figure out how much we
+[0:50:01] assumptions and figure out how much we can still say about our target estimate.
+[0:50:05] can still say about our target estimate. Um and so uh they do this with a
+[0:50:07] Um and so uh they do this with a two-parameter sensitivity analysis and
+[0:50:09] two-parameter sensitivity analysis and what this does is they constrain the
+[0:50:11] what this does is they constrain the deviations between this odds ratio of
+[0:50:14] deviations between this odds ratio of the potential outcome
+[0:50:16] the potential outcome um
+[0:50:16] um and basically if transportability holds,
+[0:50:20] and basically if transportability holds, then we would assume that there's no
+[0:50:21] then we would assume that there's no difference in this uh odds ratio ratio.
+[0:50:26] difference in this uh odds ratio ratio. And I think uh in reading this I had a
+[0:50:28] And I think uh in reading this I had a question, which is it seems that this
+[0:50:30] question, which is it seems that this gamma A is defined for a single value of
+[0:50:33] gamma A is defined for a single value of of the covariates V uh here. So,
+[0:50:37] of the covariates V uh here. So, I'm wondering if this means that in
+[0:50:38] I'm wondering if this means that in practice researchers should be
+[0:50:39] practice researchers should be evaluating different values of gamma uh
+[0:50:42] evaluating different values of gamma uh for different values of the covariate,
+[0:50:44] for different values of the covariate, right? So, or or if there's this like
+[0:50:46] right? So, or or if there's this like additional underlying assumption that is
+[0:50:49] additional underlying assumption that is sort of embedded here, which is we're
+[0:50:51] sort of embedded here, which is we're assuming that there's a single gamma A
+[0:50:53] assuming that there's a single gamma A um
+[0:50:54] um for which basically that this ratio is
+[0:50:56] for which basically that this ratio is constant for all covariate values.
+[0:50:59] constant for all covariate values. Um and I raised this question because I
+[0:51:00] Um and I raised this question because I think there could be a case in which
+[0:51:01] think there could be a case in which there is actually uh variation in this
+[0:51:04] there is actually uh variation in this underlying parameter depending on the
+[0:51:06] underlying parameter depending on the covariate value, uh especially in this
+[0:51:08] covariate value, uh especially in this particular context. Um and I'm wondering
+[0:51:10] particular context. Um and I'm wondering how researchers should think about this.
+[0:51:12] how researchers should think about this. So, in this particular setting you have
+[0:51:14] So, in this particular setting you have discrete covariates, so maybe it's
+[0:51:16] discrete covariates, so maybe it's reasonable to posit different values of
+[0:51:17] reasonable to posit different values of gamma, but in cases where
+[0:51:20] gamma, but in cases where you know, maybe we have these
+[0:51:21] you know, maybe we have these higher-order interactions, that could
+[0:51:23] higher-order interactions, that could still warrant a lot of different
+[0:51:24] still warrant a lot of different parameter values and that could be
+[0:51:26] parameter values and that could be difficult to track.
+[0:51:27] difficult to track. So, um I'm curious how we should think
+[0:51:29] So, um I'm curious how we should think about this in practice.
+[0:51:32] about this in practice. Okay, so uh
+[0:51:34] Okay, so uh some other questions. Um I was very
+[0:51:36] some other questions. Um I was very interested in the calibration approach
+[0:51:38] interested in the calibration approach and in particular I think the
+[0:51:40] and in particular I think the sensitivity analysis proposed here is is
+[0:51:42] sensitivity analysis proposed here is is nice in part because of its generality.
+[0:51:44] nice in part because of its generality. Uh and And what would be interesting is
+[0:51:47] Uh and And what would be interesting is to think about how we can use
+[0:51:48] to think about how we can use calibration to consider
+[0:51:50] calibration to consider different potential parameter values
+[0:51:52] different potential parameter values that map to different types of
+[0:51:53] that map to different types of violations to this underlying
+[0:51:54] violations to this underlying transportability assumption.
+[0:51:58] transportability assumption. So, uh currently we're using this gamma
+[0:52:00] So, uh currently we're using this gamma subscript A to represent all different
+[0:52:02] subscript A to represent all different sources of unaccounted for distribution
+[0:52:04] sources of unaccounted for distribution shifts.
+[0:52:05] shifts. Um and in particular, the way that is
+[0:52:07] Um and in particular, the way that is currently proposed is uh to partition
+[0:52:09] currently proposed is uh to partition the source into two {quote} {unquote}
+[0:52:11] the source into two {quote} {unquote} dissimilar subpopulations.
+[0:52:14] dissimilar subpopulations. Um and I think this this was actually
+[0:52:15] Um and I think this this was actually raised in in in the questions, but uh
+[0:52:17] raised in in in the questions, but uh from my understanding of it, this seemed
+[0:52:19] from my understanding of it, this seemed to be defined as subpopulations that
+[0:52:21] to be defined as subpopulations that would not be similar after adjusting for
+[0:52:24] would not be similar after adjusting for the observed covariates.
+[0:52:26] the observed covariates. Uh and
+[0:52:27] Uh and I'm I'm wondering if this is actually
+[0:52:28] I'm I'm wondering if this is actually what the authors mean because uh the
+[0:52:30] what the authors mean because uh the example given is a blue-collar states
+[0:52:32] example given is a blue-collar states versus not blue-collar states. So, we
+[0:52:34] versus not blue-collar states. So, we could imagine if we collected enough
+[0:52:35] could imagine if we collected enough covariates, um
+[0:52:38] covariates, um you could potentially re-weight these,
+[0:52:40] you could potentially re-weight these, you know, two different states such that
+[0:52:42] you know, two different states such that they could be more or less exchangeable.
+[0:52:45] they could be more or less exchangeable. Uh but this would obviously require
+[0:52:47] Uh but this would obviously require accounting for a very large set of
+[0:52:48] accounting for a very large set of covariates.
+[0:52:50] covariates. Uh when I think of dissimilar
+[0:52:52] Uh when I think of dissimilar subpopulations, I sort of think of an
+[0:52:53] subpopulations, I sort of think of an overlap violation. So, we think that
+[0:52:55] overlap violation. So, we think that there are systematic differences between
+[0:52:57] there are systematic differences between the source and the target that can't be
+[0:52:58] the source and the target that can't be accounted for by any set of covariates.
+[0:53:01] accounted for by any set of covariates. So, there's like actually a fixed
+[0:53:02] So, there's like actually a fixed effect, let's say, for being in, I don't
+[0:53:04] effect, let's say, for being in, I don't know, like North Carolina as opposed to
+[0:53:06] know, like North Carolina as opposed to Arizona uh that we wouldn't be able to
+[0:53:08] Arizona uh that we wouldn't be able to account for even if we measured all
+[0:53:10] account for even if we measured all possible covariates.
+[0:53:12] possible covariates. Um so, I think thinking about that a
+[0:53:14] Um so, I think thinking about that a little bit more precisely would be
+[0:53:15] little bit more precisely would be helpful for me.
+[0:53:17] helpful for me. Um I'm also wondering about other
+[0:53:18] Um I'm also wondering about other settings that we could be concerned
+[0:53:20] settings that we could be concerned about.
+[0:53:21] about. So, for example, um you have the classic
+[0:53:23] So, for example, um you have the classic omitted variable bias concerns, right?
+[0:53:25] omitted variable bias concerns, right? So, uh I think actually this particular
+[0:53:27] So, uh I think actually this particular setup lends itself well to considering
+[0:53:30] setup lends itself well to considering these sorts of concerns, right? In
+[0:53:31] these sorts of concerns, right? In particular, you have a set of covariates
+[0:53:32] particular, you have a set of covariates that are measured only in the experiment
+[0:53:35] that are measured only in the experiment but not in the target, and you could
+[0:53:36] but not in the target, and you could actually leverage those to help
+[0:53:37] actually leverage those to help calibrate reasonable parameter values to
+[0:53:40] calibrate reasonable parameter values to omitting specific confounders.
+[0:53:43] omitting specific confounders. Um
+[0:53:44] Um I had mentioned this before, but it
+[0:53:45] I had mentioned this before, but it might be useful to think about how we
+[0:53:46] might be useful to think about how we can calibrate shifts across time. I
+[0:53:48] can calibrate shifts across time. I particularly like the idea of thinking
+[0:53:51] particularly like the idea of thinking about the midterm elections. Maybe we
+[0:53:52] about the midterm elections. Maybe we can leverage that sort of data to think
+[0:53:54] can leverage that sort of data to think about what are reasonable gamma values
+[0:53:57] about what are reasonable gamma values if we have these distribution shifts
+[0:53:59] if we have these distribution shifts across time. And I think that's
+[0:54:01] across time. And I think that's particularly relevant for this
+[0:54:02] particularly relevant for this particular example, right? In
+[0:54:03] particular example, right? In particular, 2020 and 2024 is a huge
+[0:54:06] particular, 2020 and 2024 is a huge shift on this time dimension.
+[0:54:10] shift on this time dimension. Okay, and then some other discussion
+[0:54:11] Okay, and then some other discussion points. I would be curious to think
+[0:54:13] points. I would be curious to think about how we can evaluate slightly
+[0:54:15] about how we can evaluate slightly different transportability assumptions.
+[0:54:17] different transportability assumptions. Um in particular, a common assumption
+[0:54:20] Um in particular, a common assumption that's also used in practice in in this
+[0:54:22] that's also used in practice in in this literature is thinking about like this
+[0:54:25] literature is thinking about like this exchangeability of the treatment effects
+[0:54:28] exchangeability of the treatment effects given this covariate X.
+[0:54:30] given this covariate X. This is arguably weaker cuz we don't
+[0:54:32] This is arguably weaker cuz we don't need to
+[0:54:33] need to make assumptions on both Y1 and Y0.
+[0:54:36] make assumptions on both Y1 and Y0. And so I'm wondering how we would think
+[0:54:38] And so I'm wondering how we would think about generalizing in this particular
+[0:54:39] about generalizing in this particular framework.
+[0:54:41] framework. Sorry, how we would think about
+[0:54:42] Sorry, how we would think about generalizing this framework to this
+[0:54:44] generalizing this framework to this particular setting.
+[0:54:46] particular setting. I'd also be interested in
+[0:54:49] I'd also be interested in in understanding the relationship with
+[0:54:50] in understanding the relationship with this particular approach to alternative
+[0:54:52] this particular approach to alternative approaches.
+[0:54:53] approaches. And this is because there's sort of this
+[0:54:56] And this is because there's sort of this rich literature on thinking about
+[0:54:58] rich literature on thinking about weighted sensitivity methods where
+[0:55:00] weighted sensitivity methods where instead of constraining these deviations
+[0:55:03] instead of constraining these deviations between you know the outcomes here,
+[0:55:04] between you know the outcomes here, we're interested in constraining
+[0:55:06] we're interested in constraining deviations in the underlying weights
+[0:55:08] deviations in the underlying weights that we might re-weight the units with.
+[0:55:11] that we might re-weight the units with. And then my last point is thinking about
+[0:55:13] And then my last point is thinking about you know on the design and what we can
+[0:55:15] you know on the design and what we can do to recommend to researchers how to
+[0:55:17] do to recommend to researchers how to make their studies less sensitive to
+[0:55:19] make their studies less sensitive to these you know distribution shifts when
+[0:55:21] these you know distribution shifts when we transport our causal effects.
+[0:55:24] we transport our causal effects. This idea that we want larger sets of
+[0:55:26] This idea that we want larger sets of covariates to to to make our estimate
+[0:55:28] covariates to to to make our estimate less sensitive. I think this is sort of
+[0:55:31] less sensitive. I think this is sort of true, right? I think what we want is
+[0:55:33] true, right? I think what we want is ideally prognostic covariates.
+[0:55:35] ideally prognostic covariates. I think collecting more covariates
+[0:55:36] I think collecting more covariates doesn't necessarily help uh and could
+[0:55:38] doesn't necessarily help uh and could exacerbate sensitivity cuz you're
+[0:55:40] exacerbate sensitivity cuz you're essentially trying to account for more
+[0:55:43] essentially trying to account for more shifts in erroneous covariates. And
+[0:55:45] shifts in erroneous covariates. And there could be complexities with
+[0:55:46] there could be complexities with reconciling
+[0:55:48] reconciling um this positivity violation with this
+[0:55:50] um this positivity violation with this um underlying conditional ignorability
+[0:55:52] um underlying conditional ignorability assumption. So, this becomes more
+[0:55:53] assumption. So, this becomes more complicated with high-dimensional
+[0:55:55] complicated with high-dimensional covariates. Um but I agree with the
+[0:55:57] covariates. Um but I agree with the point that the uh
+[0:55:58] point that the uh the in in the talk that basically what
+[0:56:01] the in in the talk that basically what we want is um basically better better
+[0:56:04] we want is um basically better better covariates uh tends to be more important
+[0:56:07] covariates uh tends to be more important than just increasing our sample size
+[0:56:08] than just increasing our sample size arbitrarily.
+[0:56:10] arbitrarily. Okay, well, that's what I have. Thank
+[0:56:12] Okay, well, that's what I have. Thank you so much. Um
+[0:56:13] you so much. Um yeah, I'm looking forward to the
+[0:56:14] yeah, I'm looking forward to the discussion.
+[0:56:20] Thank you, Melody and Hassan. Uh very clear, great talks. Happy to hear some
+[0:56:23] clear, great talks. Happy to hear some discussion. We still have some time and
+[0:56:25] discussion. We still have some time and there were a lot of interesting
+[0:56:26] there were a lot of interesting questions. I don't know if you can
+[0:56:28] questions. I don't know if you can tackle all of them, Hassan, but Yeah, um
+[0:56:31] tackle all of them, Hassan, but Yeah, um I'll be happy to if it's okay if I
+[0:56:33] I'll be happy to if it's okay if I shared a slide again just to make sure
+[0:56:35] shared a slide again just to make sure uh Okay.
+[0:56:36] uh Okay. Yeah, absolutely.
+[0:56:38] Yeah, absolutely. So, I I
+[0:56:40] So, I I thank you, Melody, for raising
+[0:56:42] thank you, Melody, for raising uh great points and also helping us
+[0:56:44] uh great points and also helping us actually better contextualize how our
+[0:56:47] actually better contextualize how our work uh fits into the um
+[0:56:49] work uh fits into the um general framework. Uh the So, it is true
+[0:56:53] general framework. Uh the So, it is true uh the first point, it's a very good
+[0:56:55] uh the first point, it's a very good question. There could be a carryover
+[0:56:57] question. There could be a carryover effect into 2024 and there is a
+[0:57:00] effect into 2024 and there is a interesting discussion at the Agrawal et
+[0:57:02] interesting discussion at the Agrawal et al. paper actually about carryover
+[0:57:03] al. paper actually about carryover effects, how how the ad effect is over
+[0:57:05] effects, how how the ad effect is over time. Uh we think 2020 They think 2020
+[0:57:09] time. Uh we think 2020 They think 2020 and 2024 are far far apart enough that
+[0:57:11] and 2024 are far far apart enough that this will not matter, but you are
+[0:57:13] this will not matter, but you are absolutely right, it is plausible. And
+[0:57:15] absolutely right, it is plausible. And there are also different violations of
+[0:57:16] there are also different violations of this. You could Maybe if you're exposed
+[0:57:19] this. You could Maybe if you're exposed to 200 ads versus 800 ads, maybe that
+[0:57:21] to 200 ads versus 800 ads, maybe that might be different. Or you could have a
+[0:57:22] might be different. Or you could have a different ad between 2024 or maybe
+[0:57:25] different ad between 2024 or maybe voters talk between each other. Or
+[0:57:26] voters talk between each other. Or maybe, as you mentioned, carryover
+[0:57:27] maybe, as you mentioned, carryover effect. So, these are all possible. I
+[0:57:29] effect. So, these are all possible. I think this one is the less plausible uh
+[0:57:31] think this one is the less plausible uh maybe the least of the concerns versus I
+[0:57:33] maybe the least of the concerns versus I think this one in my personal opinion
+[0:57:35] think this one in my personal opinion the ads may actually be different.
+[0:57:38] the ads may actually be different. But actually maybe this is to highlight
+[0:57:39] But actually maybe this is to highlight that we actually picked these years
+[0:57:40] that we actually picked these years because the two candidates are
+[0:57:42] because the two candidates are identical. One of the students in our
+[0:57:43] identical. One of the students in our seminar mentioned what about what what
+[0:57:45] seminar mentioned what about what what if you go backwards in time in 2016 but
+[0:57:47] if you go backwards in time in 2016 but then it's Trump and Hillary which is a
+[0:57:48] then it's Trump and Hillary which is a different kind of ads that you could
+[0:57:50] different kind of ads that you could potentially imagine. And even if you go
+[0:57:51] potentially imagine. And even if you go back it's so this is one way to mitigate
+[0:57:54] back it's so this is one way to mitigate that concern. But thank you for raising
+[0:57:55] that concern. But thank you for raising it. The other one is the kind of
+[0:57:57] it. The other one is the kind of sensitivity about the dependent
+[0:57:58] sensitivity about the dependent covariates and yes so you can do this. I
+[0:58:01] covariates and yes so you can do this. I I think it it depends on what you want
+[0:58:04] I think it it depends on what you want to explore specifically what direction
+[0:58:06] to explore specifically what direction of the deviations between 2020 and 2024
+[0:58:09] of the deviations between 2020 and 2024 you want to explore. So for example, you
+[0:58:10] you want to explore. So for example, you could say that maybe the Democratic
+[0:58:12] could say that maybe the Democratic Democratic voters and the Republican
+[0:58:14] Democratic voters and the Republican voters are different so you could
+[0:58:15] voters are different so you could parameterize this for the let's say the
+[0:58:17] parameterize this for the let's say the control group's baseline voting
+[0:58:19] control group's baseline voting probability without it being exposed to
+[0:58:21] probability without it being exposed to ads into two different sensitivity
+[0:58:23] ads into two different sensitivity parameters if you believe that these
+[0:58:25] parameters if you believe that these changes are different across these two
+[0:58:27] changes are different across these two party affiliations. We call this local
+[0:58:29] party affiliations. We call this local sensitivity model. The only challenge
+[0:58:32] sensitivity model. The only challenge the biggest challenge here is how do you
+[0:58:33] the biggest challenge here is how do you interpret this thing because now you
+[0:58:34] interpret this thing because now you have one two plus another one for A1
+[0:58:36] have one two plus another one for A1 that you have to do that's four. There
+[0:58:38] that you have to do that's four. There may be very useful ways but I think I do
+[0:58:40] may be very useful ways but I think I do agree that this could be very useful to
+[0:58:43] agree that this could be very useful to actually explore different deviations
+[0:58:45] actually explore different deviations essentially between 2020 and 2024 based
+[0:58:47] essentially between 2020 and 2024 based on which direction the covariates that
+[0:58:49] on which direction the covariates that you're interested in. Um
+[0:58:51] you're interested in. Um the other one I think is on the
+[0:58:54] the other one I think is on the the dissimilar effects and overlap.
+[0:58:57] the dissimilar effects and overlap. Yes so I I I I do believe like there are
+[0:58:59] Yes so I I I I do believe like there are probably ways to explore this I think in
+[0:59:01] probably ways to explore this I think in different ways.
+[0:59:03] different ways. I this is just one approach. I The way
+[0:59:05] I this is just one approach. I The way we look at it it's that the dissimilar
+[0:59:07] we look at it it's that the dissimilar populations are the dissimilar in terms
+[0:59:09] populations are the dissimilar in terms of the ad effect not in terms of the
+[0:59:11] of the ad effect not in terms of the covariate distribution. So I think
+[0:59:13] covariate distribution. So I think there's a subtle differences between the
+[0:59:14] there's a subtle differences between the distribution being different at the
+[0:59:16] distribution being different at the covariate shift happening in 2020 and
+[0:59:18] covariate shift happening in 2020 and 2024 and whether those are the ad
+[0:59:20] 2024 and whether those are the ad effects between the 2020 and 2024 are
+[0:59:22] effects between the 2020 and 2024 are different. So what we're trying to do
+[0:59:24] different. So what we're trying to do with our calibration or benchmarking is
+[0:59:26] with our calibration or benchmarking is to is to calibrate the effect of the ad
+[0:59:30] to is to calibrate the effect of the ad whether they are different rather than
+[0:59:31] whether they are different rather than whether the voter demographic shifted or
+[0:59:34] whether the voter demographic shifted or not. And that's partly because we don't
+[0:59:36] not. And that's partly because we don't assume, I guess, in
+[0:59:38] assume, I guess, in we allow for covariate shift between the
+[0:59:40] we allow for covariate shift between the two populations. Hopefully that answers
+[0:59:42] two populations. Hopefully that answers your question and I'm happy to hear more
+[0:59:44] your question and I'm happy to hear more questions that you have.
+[0:59:49] I I guess I guess sort of like following up on that. I know the overall average
+[0:59:52] up on that. I know the overall average treatment effect was like basically
+[0:59:54] treatment effect was like basically null, right? There was no no real
+[0:59:56] null, right? There was no no real difference, but I think from what you
+[0:59:58] difference, but I think from what you showed with your dissimilar populations
+[1:00:00] showed with your dissimilar populations and also thinking I don't I haven't
+[1:00:02] and also thinking I don't I haven't checked the original study. I would
+[1:00:03] checked the original study. I would imagine there's probably we expect
+[1:00:05] imagine there's probably we expect differential impacts for
+[1:00:08] differential impacts for I don't know like Democrats versus
+[1:00:09] I don't know like Democrats versus Republicans, right? Because because the
+[1:00:10] Republicans, right? Because because the ads are all anti-Trump if I remember
+[1:00:13] ads are all anti-Trump if I remember correctly. So, wouldn't
+[1:00:16] correctly. So, wouldn't is it possible that perhaps for these
+[1:00:18] is it possible that perhaps for these subgroups they have, you know,
+[1:00:21] subgroups they have, you know, positive or negative impacts, but the
+[1:00:22] positive or negative impacts, but the aggregated ATE is is
+[1:00:25] aggregated ATE is is is null, right? So, it's like why why is
+[1:00:27] is null, right? So, it's like why why is specifically the overall average
+[1:00:29] specifically the overall average treatment effect actually our target and
+[1:00:30] treatment effect actually our target and not these like subgroups?
+[1:00:32] not these like subgroups? Yeah, that's a fantastic We want to, but
+[1:00:34] Yeah, that's a fantastic We want to, but we don't have the data. Like we don't
+[1:00:36] we don't have the data. Like we don't know 2024's
+[1:00:38] know 2024's people's leanings yet. And they they
+[1:00:40] people's leanings yet. And they they have that data because they actually in
+[1:00:42] have that data because they actually in well, I guess they yeah, they actually
+[1:00:44] well, I guess they yeah, they actually know the Trump they have this Trump
+[1:00:46] know the Trump they have this Trump leaning score that's partitioned between
+[1:00:48] leaning score that's partitioned between the 100, but we would love to do that
+[1:00:50] the 100, but we would love to do that because that's what the Agarwal et al.
+[1:00:52] because that's what the Agarwal et al. also did, but we simply don't have that
+[1:00:54] also did, but we simply don't have that particular covariate to use, yeah.
+[1:01:05] Great. All right. Um thank you both. I think we'll wrap this
+[1:01:08] thank you both. I think we'll wrap this up
+[1:01:09] up here
+[1:01:10] here and
+[1:01:12] and All right, just one sec.
+[1:01:13] All right, just one sec. There we go.
+[1:01:15] There we go. I'm sorry. I will stop your screen
+[1:01:16] I'm sorry. I will stop your screen share.
+[1:01:17] share. You already did it. Perfect.
+[1:01:20] You already did it. Perfect. Okay.
+[1:01:21] Okay. Great. So, I just want to thank uh
+[1:01:24] Great. So, I just want to thank uh Hansong, Sinrun, and Melody for Hansong
+[1:01:28] Hansong, Sinrun, and Melody for Hansong and Melody great talks, and Sinrun,
+[1:01:30] and Melody great talks, and Sinrun, thank you for answering all the
+[1:01:31] thank you for answering all the questions. I also don't know that I've
+[1:01:33] questions. I also don't know that I've ever seen any speaker so prepared for
+[1:01:35] ever seen any speaker so prepared for the discussion
+[1:01:37] the discussion uh with the slides, so I really
+[1:01:38] uh with the slides, so I really appreciate it. That was all very clear,
+[1:01:40] appreciate it. That was all very clear, and I Yeah, I really enjoyed that. I'm
+[1:01:42] and I Yeah, I really enjoyed that. I'm looking forward to seeing the poster at
+[1:01:43] looking forward to seeing the poster at the ASA.
+[1:01:44] the ASA. Uh next week, we have a talk from Ras
+[1:01:46] Uh next week, we have a talk from Ras Weerasinghe at Cornell
+[1:01:49] Weerasinghe at Cornell on integrating double robustness into
+[1:01:50] on integrating double robustness into causal latent factor models. So, I hope
+[1:01:53] causal latent factor models. So, I hope you all join us for that, and that's it
+[1:01:55] you all join us for that, and that's it for today. Have a great week.

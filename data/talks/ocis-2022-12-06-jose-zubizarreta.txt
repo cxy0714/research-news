@@ -1,0 +1,1748 @@
+[0:00:05] Uh welcome everyone to another online causal inference seminar. We are very
+[0:00:07] causal inference seminar. We are very excited today to welcome Jose
+[0:00:08] excited today to welcome Jose Zubizarreta from Harvard University.
+[0:00:11] Zubizarreta from Harvard University. Jose will be talking to us about
+[0:00:12] Jose will be talking to us about bridging, matching, regression, and
+[0:00:14] bridging, matching, regression, and weighting as mathematical programs for
+[0:00:16] weighting as mathematical programs for causal inference.
+[0:00:17] causal inference. Jose has his collaborator Ambuj Tewari
+[0:00:20] Jose has his collaborator Ambuj Tewari on Q&amp;A to answer questions. And um after
+[0:00:25] on Q&amp;A to answer questions. And um after Jose's talk, we have a discussion by
+[0:00:27] Jose's talk, we have a discussion by Mike Baiocchi. Um
+[0:00:30] Mike Baiocchi. Um questions today uh will be handled by
+[0:00:33] questions today uh will be handled by Jing Yuan uh and I'm switching over to
+[0:00:35] Jing Yuan uh and I'm switching over to him.
+[0:00:41] Yes. Um so for questions, please use the Q&amp;A box um instead of the chat box.
+[0:00:46] Q&amp;A box um instead of the chat box. Um this will help us to monitor the
+[0:00:48] Um this will help us to monitor the question and will help uh Ambuj to
+[0:00:50] question and will help uh Ambuj to answer the questions.
+[0:00:52] answer the questions. Um
+[0:00:53] Um um
+[0:00:54] um uh
+[0:00:55] uh from time to time uh I'll try to stop
+[0:00:58] from time to time uh I'll try to stop Jose to answer
+[0:01:00] Jose to answer questions uh in the Q&amp;A. Um also I'll
+[0:01:02] questions uh in the Q&amp;A. Um also I'll read the questions or
+[0:01:04] read the questions or maybe I'll reach out to whoever asked
+[0:01:07] maybe I'll reach out to whoever asked the question and let them
+[0:01:09] the question and let them um ask the questions themselves.
+[0:01:11] um ask the questions themselves. Um I guess without further ado, I will
+[0:01:14] Um I guess without further ado, I will just give the mic to Jose.
+[0:01:21] Thank you so much, Jing Yuan. Thank you so much, Georgia, for having me here
+[0:01:22] so much, Georgia, for having me here today and to all the organizers. Let me
+[0:01:25] today and to all the organizers. Let me share screens.
+[0:01:33] Is it working? Yes, great.
+[0:01:35] Yes, great. So uh today I'd like to offer a
+[0:01:37] So uh today I'd like to offer a perspective on um
+[0:01:40] perspective on um what I think are three fundamental
+[0:01:42] what I think are three fundamental methods for adjustment in observational
+[0:01:44] methods for adjustment in observational studies
+[0:01:45] studies from the standpoint of mathematical
+[0:01:47] from the standpoint of mathematical programming.
+[0:01:48] programming. Uh that is um from the standpoint of how
+[0:01:51] Uh that is um from the standpoint of how each of these methods are acting on the
+[0:01:54] each of these methods are acting on the individual level data
+[0:01:56] individual level data to approximate or emulate features of
+[0:01:59] to approximate or emulate features of this ideal randomized experiment that we
+[0:02:01] this ideal randomized experiment that we would that we would have done in
+[0:02:02] would that we would have done in practice.
+[0:02:05] practice. Um I have to thank many of my co-authors
+[0:02:08] Um I have to thank many of my co-authors um
+[0:02:09] um along these years, especially today
+[0:02:12] along these years, especially today I'd like to thank Ambarish
+[0:02:13] I'd like to thank Ambarish Chattopadhyay, Eddie Cohn, and Yixin
+[0:02:15] Chattopadhyay, Eddie Cohn, and Yixin Wang who wrote the papers that um
+[0:02:18] Wang who wrote the papers that um provide the basis for this talk today.
+[0:02:21] provide the basis for this talk today. And of course I need to thank my uh
+[0:02:23] And of course I need to thank my uh advisor and mentor Paul Rosenbaum who
+[0:02:25] advisor and mentor Paul Rosenbaum who has very deeply influenced my
+[0:02:27] has very deeply influenced my understanding of these ideas.
+[0:02:30] understanding of these ideas. This talk is based on these three papers
+[0:02:32] This talk is based on these three papers on linear regression, matching, and
+[0:02:35] on linear regression, matching, and weighting.
+[0:02:37] weighting. And what I'll try to do is to provide a
+[0:02:38] And what I'll try to do is to provide a connection between these methods again
+[0:02:40] connection between these methods again from the standpoint of optimization.
+[0:02:46] To begin, we're going to talk about causal
+[0:02:47] we're going to talk about causal inference. I believe that we should
+[0:02:50] inference. I believe that we should start from the beginning and that is the
+[0:02:52] start from the beginning and that is the uh
+[0:02:53] uh ideal of a randomized experiment. Uh so
+[0:02:55] ideal of a randomized experiment. Uh so to fix ideas, um what is so special
+[0:02:58] to fix ideas, um what is so special about a randomized experiment? I believe
+[0:03:00] about a randomized experiment? I believe I heard Phil David say once that no
+[0:03:03] I heard Phil David say once that no amount of being smart is a substitute
+[0:03:05] amount of being smart is a substitute for a randomized experiment.
+[0:03:07] for a randomized experiment. And I very much agree.
+[0:03:09] And I very much agree. Uh yet for many of the interesting
+[0:03:11] Uh yet for many of the interesting policy questions and scientific
+[0:03:13] policy questions and scientific questions we face uh regularly, we have
+[0:03:16] questions we face uh regularly, we have to rely on observational studies.
+[0:03:23] And in in so doing, I think it's key to follow um this piece of advice due to
+[0:03:25] follow um this piece of advice due to Cochran,
+[0:03:26] Cochran, which is that the planner of an
+[0:03:28] which is that the planner of an observational study should always ask um
+[0:03:31] observational study should always ask um the question, how would the study be
+[0:03:33] the question, how would the study be conducted if it were possible to do it
+[0:03:35] conducted if it were possible to do it by control experimentation?
+[0:03:38] by control experimentation? So what I'll try to do today is to take
+[0:03:40] So what I'll try to do today is to take very seriously this question as we
+[0:03:41] very seriously this question as we compare uh these three fundamental
+[0:03:44] compare uh these three fundamental methods
+[0:03:45] methods for covariate adjustment.
+[0:03:48] for covariate adjustment. And again to fix ideas, there's the
+[0:03:50] And again to fix ideas, there's the experimental ideal
+[0:03:52] experimental ideal in which randomization is equitable, it
+[0:03:54] in which randomization is equitable, it produces these these two groups that are
+[0:03:56] produces these these two groups that are similar in every way
+[0:03:58] similar in every way in terms of observed and unobserved
+[0:04:00] in terms of observed and unobserved covariates, in terms of the of the
+[0:04:02] covariates, in terms of the of the potential outcomes of the units.
+[0:04:08] If in addition we have that these samples of treated and control subjects
+[0:04:10] samples of treated and control subjects are a random sample from a population,
+[0:04:12] are a random sample from a population, we can say that our trial is
+[0:04:14] we can say that our trial is representative of a target population.
+[0:04:17] representative of a target population. So, what are four key features here that
+[0:04:19] So, what are four key features here that I would like to uh carefully analyze as
+[0:04:22] I would like to uh carefully analyze as we discuss these three methods.
+[0:04:24] we discuss these three methods. Uh one is covariate balance.
+[0:04:26] Uh one is covariate balance. Uh the groups are similar in terms of
+[0:04:28] Uh the groups are similar in terms of covariates that we can observe and
+[0:04:30] covariates that we can observe and others that we cannot. Study
+[0:04:31] others that we cannot. Study representativeness of this target
+[0:04:33] representativeness of this target population.
+[0:04:35] population. Uh this notion of self-weighted sampling
+[0:04:37] Uh this notion of self-weighted sampling or unweighted sampling such that without
+[0:04:40] or unweighted sampling such that without any differential weighting of the
+[0:04:42] any differential weighting of the individual unit observations.
+[0:04:44] individual unit observations. Um we have balance, we have
+[0:04:47] Um we have balance, we have representativeness, and the idea is that
+[0:04:49] representativeness, and the idea is that any differential weighting from these
+[0:04:51] any differential weighting from these homogeneous weights has a cost in terms
+[0:04:54] homogeneous weights has a cost in terms of efficiency.
+[0:04:56] of efficiency. Uh
+[0:04:57] Uh and fourth, there's this idea
+[0:04:59] and fourth, there's this idea of extrapolation because we have
+[0:05:01] of extrapolation because we have balance, our estimators will essentially
+[0:05:04] balance, our estimators will essentially be an interpolation
+[0:05:06] be an interpolation of the observed data as opposed to an
+[0:05:08] of the observed data as opposed to an extrapolation, a property that uh James
+[0:05:10] extrapolation, a property that uh James Robinson, Veroniki, and colleagues have
+[0:05:12] Robinson, Veroniki, and colleagues have called sample boundedness of an
+[0:05:14] called sample boundedness of an estimator.
+[0:05:15] estimator. The question is how are these features
+[0:05:17] The question is how are these features present or not in different methods for
+[0:05:19] present or not in different methods for covariate adjustment.
+[0:05:22] covariate adjustment. And we're going to focus in the setting
+[0:05:23] And we're going to focus in the setting of an observational study where the
+[0:05:25] of an observational study where the groups tend to differ systematically in
+[0:05:28] groups tend to differ systematically in their covariates.
+[0:05:30] their covariates. So, the motivating questions to be more
+[0:05:31] So, the motivating questions to be more specific are how are common methods for
+[0:05:35] specific are how are common methods for adjustment in observational studies
+[0:05:37] adjustment in observational studies approximating key features of this ideal
+[0:05:40] approximating key features of this ideal hypothetical experiment.
+[0:05:43] hypothetical experiment. We'll talk about matching, regression,
+[0:05:44] We'll talk about matching, regression, and weighting.
+[0:05:46] and weighting. And the question is how are they acting
+[0:05:48] And the question is how are they acting on the individual unit level data that
+[0:05:51] on the individual unit level data that we have at hand sitting in our
+[0:05:52] we have at hand sitting in our computers.
+[0:05:54] computers. And like other words that have provide
+[0:05:56] And like other words that have provide very valuable um
+[0:05:58] very valuable um um representations of estimates and uh
+[0:06:02] um representations of estimates and uh also the weights implied by these
+[0:06:04] also the weights implied by these procedures, here we're going to focus on
+[0:06:06] procedures, here we're going to focus on closed form expressions and the math
+[0:06:08] closed form expressions and the math programs that we're actually solving for
+[0:06:10] programs that we're actually solving for the data at hand.
+[0:06:13] the data at hand. And we're going to try to compare these
+[0:06:14] And we're going to try to compare these methods in terms of three dimensions,
+[0:06:17] methods in terms of three dimensions, study design or interpretability,
+[0:06:20] study design or interpretability, computational tractability or the
+[0:06:22] computational tractability or the ability to handle big data today, and
+[0:06:25] ability to handle big data today, and statistical efficiency.
+[0:06:27] statistical efficiency. Um how good of a use we're making of the
+[0:06:30] Um how good of a use we're making of the information provided in the data set.
+[0:06:36] The setup is as follows. We're going to focus on estimating the population
+[0:06:38] focus on estimating the population average treatment effect. This is for
+[0:06:40] average treatment effect. This is for the most. We can then target more
+[0:06:43] the most. We can then target more specific estimates such as the target
+[0:06:45] specific estimates such as the target average treatment effect.
+[0:06:47] average treatment effect. And for the most we're going to rely on
+[0:06:49] And for the most we're going to rely on the assumption of strong ignorability,
+[0:06:51] the assumption of strong ignorability, which in essence says there are no
+[0:06:53] which in essence says there are no unmeasured confounders.
+[0:06:56] unmeasured confounders. We can relax this assumption.
+[0:06:58] We can relax this assumption. Again, these methods are a building
+[0:06:59] Again, these methods are a building block for more uh complex and nuanced
+[0:07:02] block for more uh complex and nuanced methods and identification strategies.
+[0:07:05] methods and identification strategies. So we can extend this also to
+[0:07:06] So we can extend this also to instrumental variables, differences in
+[0:07:08] instrumental variables, differences in differences, and also discontinuity
+[0:07:10] differences, and also discontinuity designs.
+[0:07:11] designs. The question that motivates us here is
+[0:07:13] The question that motivates us here is how are we acting on the individual
+[0:07:15] how are we acting on the individual level data at hand.
+[0:07:21] Okay, so three methods for adjustment. Uh I'd like to start by matching, um
+[0:07:24] Uh I'd like to start by matching, um which I think is the one that perhaps
+[0:07:26] which I think is the one that perhaps more naturally answers to these
+[0:07:28] more naturally answers to these questions.
+[0:07:30] questions. Um and here I want to acknowledge that
+[0:07:32] Um and here I want to acknowledge that there's a big literature, a big body of
+[0:07:35] there's a big literature, a big body of work, um
+[0:07:38] work, um perhaps starting with uh Rubin and
+[0:07:40] perhaps starting with uh Rubin and nearest neighbor matching methods, uh
+[0:07:41] nearest neighbor matching methods, uh their formalization by Abadie and
+[0:07:43] their formalization by Abadie and Imbens, optimal matching by Rosenbaum
+[0:07:46] Imbens, optimal matching by Rosenbaum and Rubin,
+[0:07:46] and Rubin, the work by Gary King and others, and
+[0:07:49] the work by Gary King and others, and there have been many proposals for
+[0:07:50] there have been many proposals for matching methods.
+[0:07:52] matching methods. And there's some nice reviews by uh
+[0:07:53] And there's some nice reviews by uh Stuart Imbens, also Rosenbaum.
+[0:07:56] Stuart Imbens, also Rosenbaum. Um and here what's the idea of matching?
+[0:07:59] Um and here what's the idea of matching? I like very much the intuition that Ben
+[0:08:00] I like very much the intuition that Ben Hansen provides, which is that with
+[0:08:02] Hansen provides, which is that with matching we're trying to find this
+[0:08:04] matching we're trying to find this experiment that is hidden inside the
+[0:08:07] experiment that is hidden inside the observational study. So, for example, by
+[0:08:09] observational study. So, for example, by doing pair matching,
+[0:08:10] doing pair matching, we're trying to build this
+[0:08:12] we're trying to build this apples-to-apples comparisons,
+[0:08:14] apples-to-apples comparisons, so that in aggregate, uh covariates are
+[0:08:16] so that in aggregate, uh covariates are balanced, and hopefully the units are
+[0:08:19] balanced, and hopefully the units are also very close to each other.
+[0:08:24] If there's limited overlapping covariate distributions, that is, if the
+[0:08:25] distributions, that is, if the distribution of covariates in the
+[0:08:27] distribution of covariates in the treated group is different to the
+[0:08:28] treated group is different to the control group, we cannot, of course,
+[0:08:30] control group, we cannot, of course, afford to
+[0:08:32] afford to uh find good counterparts for every unit
+[0:08:34] uh find good counterparts for every unit in the treated group in the control
+[0:08:36] in the treated group in the control group, so we match a subset, and then
+[0:08:38] group, so we match a subset, and then the question is, um
+[0:08:40] the question is, um for whom are we making inferences?
+[0:08:43] for whom are we making inferences? Okay?
+[0:08:44] Okay? One setting to do matching in this
+[0:08:46] One setting to do matching in this setting, uh so one approach to matching
+[0:08:49] setting, uh so one approach to matching in this setting is this one that we have
+[0:08:51] in this setting is this one that we have provided over the years, where we use uh
+[0:08:54] provided over the years, where we use uh tools from
+[0:08:56] tools from what is sometimes called in operations
+[0:08:57] what is sometimes called in operations research modern optimization, um which
+[0:09:00] research modern optimization, um which in general we're going to use um
+[0:09:02] in general we're going to use um a mixed integer programming approach, um
+[0:09:05] a mixed integer programming approach, um to directly
+[0:09:07] to directly target different features, um
+[0:09:11] target different features, um that um
+[0:09:13] that um we want to optimize in the design of an
+[0:09:16] we want to optimize in the design of an observational study.
+[0:09:17] observational study. So, so in general, in an in an our
+[0:09:20] So, so in general, in an in an our observational data set,
+[0:09:22] observational data set, we're going to solve this optimization
+[0:09:24] we're going to solve this optimization problem,
+[0:09:25] problem, where we have this objective function
+[0:09:28] where we have this objective function composed by these two terms, D and I,
+[0:09:31] composed by these two terms, D and I, which um
+[0:09:34] which um on the one hand is trying to find close
+[0:09:36] on the one hand is trying to find close individual matches between match units
+[0:09:39] individual matches between match units and at the same time trying to match as
+[0:09:41] and at the same time trying to match as many observations as possible. So, to
+[0:09:43] many observations as possible. So, to maximize the information content if you
+[0:09:45] maximize the information content if you which we show the match study. All these
+[0:09:48] which we show the match study. All these subject to matching, balancing, and
+[0:09:50] subject to matching, balancing, and representativeness constraints.
+[0:09:52] representativeness constraints. So, the matching constraints are going
+[0:09:54] So, the matching constraints are going to enforce, for example, a pair matching
+[0:09:56] to enforce, for example, a pair matching structure or a full matching structure.
+[0:09:59] structure or a full matching structure. And the balance
+[0:10:02] And the balance and representativeness constraints are
+[0:10:04] and representativeness constraints are going to directly balance the covariates
+[0:10:07] going to directly balance the covariates not only one group relative to the
+[0:10:08] not only one group relative to the other, but also relative to a target
+[0:10:10] other, but also relative to a target population as described by um a set of
+[0:10:13] population as described by um a set of summary statistics.
+[0:10:16] summary statistics. I'm trying to connect um
+[0:10:18] I'm trying to connect um this um
+[0:10:20] this um matching approach to other regression
+[0:10:22] matching approach to other regression approaches and waiting approaches.
+[0:10:27] I want to say a couple of things. One is that if we don't have this information
+[0:10:29] that if we don't have this information term and we only have the matching
+[0:10:31] term and we only have the matching constraints, then we recover what um is
+[0:10:34] constraints, then we recover what um is called optimal matching in the sense of
+[0:10:36] called optimal matching in the sense of optimis- optimizing distances between
+[0:10:38] optimis- optimizing distances between match units.
+[0:10:40] match units. And um on the other extreme, if we focus
+[0:10:43] And um on the other extreme, if we focus on this idea of maximizing the
+[0:10:46] on this idea of maximizing the information content of the match sample,
+[0:10:49] information content of the match sample, um
+[0:10:50] um we have this a problem that we call
+[0:10:52] we have this a problem that we call cardinality matching because we're
+[0:10:54] cardinality matching because we're maximizing the cardinality or size of
+[0:10:57] maximizing the cardinality or size of the match study
+[0:10:58] the match study subject to certain design constraints
+[0:11:01] subject to certain design constraints about matching, balancing, and
+[0:11:02] about matching, balancing, and representativeness.
+[0:11:05] representativeness. Um
+[0:11:06] Um and this going to provide a I think a a
+[0:11:08] and this going to provide a I think a a closer connection to
+[0:11:10] closer connection to um what happens in regression.
+[0:11:17] So, to be more uh specific, the way this cardinality matching
+[0:11:19] the way this cardinality matching problem may look like
+[0:11:21] problem may look like is we're maximizing this objective
+[0:11:23] is we're maximizing this objective function, which is the number of match
+[0:11:25] function, which is the number of match pairs of the study,
+[0:11:27] pairs of the study, all these subject to these 0 1 matching
+[0:11:30] all these subject to these 0 1 matching constraints. So, a unit is to select or
+[0:11:32] constraints. So, a unit is to select or not into the study?
+[0:11:35] not into the study? Subject to these two first set of
+[0:11:37] Subject to these two first set of constraints, which in this case here and
+[0:11:39] constraints, which in this case here and are enforcing a pair matching structure,
+[0:11:42] are enforcing a pair matching structure, and this last set of constraints that
+[0:11:44] and this last set of constraints that says that for every category
+[0:11:46] says that for every category of every covariate P, we have the same
+[0:11:49] of every covariate P, we have the same counts in the matched treated and
+[0:11:51] counts in the matched treated and control groups. So, that we're balancing
+[0:11:53] control groups. So, that we're balancing marginal distributions, and by
+[0:11:55] marginal distributions, and by generating interactions of these
+[0:11:57] generating interactions of these covariates, we can balance
+[0:11:59] covariates, we can balance low-dimensional joints and perhaps even
+[0:12:00] low-dimensional joints and perhaps even the joint if the data allows us to do
+[0:12:03] the joint if the data allows us to do that.
+[0:12:05] that. But, what is the point here?
+[0:12:07] But, what is the point here? The point is that in general, this
+[0:12:08] The point is that in general, this problem here is an integer programming
+[0:12:11] problem here is an integer programming problem, an NP-hard problem,
+[0:12:14] problem, an NP-hard problem, but it's a problem that in practice it
+[0:12:16] but it's a problem that in practice it has a lot of structure, so we can solve
+[0:12:19] has a lot of structure, so we can solve very large instances
+[0:12:21] very large instances of this problem in in typical
+[0:12:23] of this problem in in typical observational data sets.
+[0:12:26] observational data sets. So, for example,
+[0:12:28] So, for example, um
+[0:12:30] um here in a simulation study with
+[0:12:32] here in a simulation study with Magdalena Bennett and Juan Pablo Vielma,
+[0:12:35] Magdalena Bennett and Juan Pablo Vielma, we tested how how large of a data set we
+[0:12:37] we tested how how large of a data set we could match with these methods,
+[0:12:39] could match with these methods, and what we found is that we could
+[0:12:40] and what we found is that we could handle data set with 700,000 of
+[0:12:43] handle data set with 700,000 of observations and perhaps more
+[0:12:45] observations and perhaps more in 3 minutes or so,
+[0:12:48] in 3 minutes or so, whereas
+[0:12:49] whereas the standard implementation
+[0:12:52] the standard implementation of optimal matching could handle this
+[0:12:55] of optimal matching could handle this case, but um
+[0:12:57] case, but um at least in our explorations, it
+[0:13:00] at least in our explorations, it couldn't handle bigger data sets. So,
+[0:13:02] couldn't handle bigger data sets. So, what is the point? The point is that
+[0:13:06] what is the point? The point is that in spite these kinds of problems have
+[0:13:08] in spite these kinds of problems have these NP-hard label,
+[0:13:10] these NP-hard label, we can solve very large instances of
+[0:13:12] we can solve very large instances of them in practice by relying on modern
+[0:13:15] them in practice by relying on modern optimization solvers, and in addition to
+[0:13:17] optimization solvers, and in addition to this by exploiting some structure of the
+[0:13:19] this by exploiting some structure of the balancing problem. Here, we're
+[0:13:21] balancing problem. Here, we're exploiting these fine balance
+[0:13:22] exploiting these fine balance constraints, balancing the marginal
+[0:13:24] constraints, balancing the marginal covariates.
+[0:13:26] covariates. Mhm.
+[0:13:27] Mhm. And we'd like to extend this so that um
+[0:13:31] And we'd like to extend this so that um we're not only finding one treatment
+[0:13:33] we're not only finding one treatment control group that is similar to each
+[0:13:34] control group that is similar to each other, but they're similar to a target
+[0:13:37] other, but they're similar to a target population or that they're balancing the
+[0:13:40] population or that they're balancing the sample towards an individual of specific
+[0:13:42] sample towards an individual of specific interest.
+[0:13:44] interest. So here the idea is to extend the
+[0:13:45] So here the idea is to extend the previous formulation
+[0:13:47] previous formulation uh to balance the covariates towards
+[0:13:49] uh to balance the covariates towards what we call a target covariate profile.
+[0:13:53] what we call a target covariate profile. And the idea is as follows, is that we
+[0:13:55] And the idea is as follows, is that we have this target population
+[0:13:58] have this target population which we describe by this um summary
+[0:14:01] which we describe by this um summary statistics. Here it's only the
+[0:14:02] statistics. Here it's only the proportion of females and so on, you
+[0:14:05] proportion of females and so on, you know?
+[0:14:06] know? And here in the second panel, we have
+[0:14:08] And here in the second panel, we have our data set at hand, the data before
+[0:14:10] our data set at hand, the data before matching.
+[0:14:11] matching. And we see that in terms of the same
+[0:14:13] And we see that in terms of the same profile, we don't have great balance.
+[0:14:16] profile, we don't have great balance. The summary statistics are quite
+[0:14:17] The summary statistics are quite different.
+[0:14:19] different. And what we do with this approach is to
+[0:14:22] And what we do with this approach is to find the largest sample that is
+[0:14:25] find the largest sample that is unweighted,
+[0:14:27] unweighted, that it's representative, that is
+[0:14:28] that it's representative, that is balanced in terms of this target
+[0:14:30] balanced in terms of this target covariate profile.
+[0:14:34] Um which is something that I think it's
+[0:14:36] which is something that I think it's helpful in some settings because not
+[0:14:38] helpful in some settings because not having differential weights
+[0:14:40] having differential weights uh can simplify certain analysis such as
+[0:14:42] uh can simplify certain analysis such as having graphical displays of the
+[0:14:44] having graphical displays of the outcomes or using after matching some
+[0:14:46] outcomes or using after matching some more complicated methods that do not
+[0:14:48] more complicated methods that do not readily um
+[0:14:50] readily um allow for weights.
+[0:14:52] allow for weights. But in practice, this can also be
+[0:14:54] But in practice, this can also be helpful because often times we don't
+[0:14:56] helpful because often times we don't have
+[0:14:58] have access to the individual level data of
+[0:15:00] access to the individual level data of the target population.
+[0:15:03] the target population. So for example, if if you're working in
+[0:15:06] So for example, if if you're working in health care and you're working data with
+[0:15:08] health care and you're working data with CMS, likely you will not have access to
+[0:15:10] CMS, likely you will not have access to the oral population of Medicare
+[0:15:13] the oral population of Medicare beneficiaries, but CMS may be willing to
+[0:15:15] beneficiaries, but CMS may be willing to share with you uh certain summary
+[0:15:17] share with you uh certain summary statistics of the target population.
+[0:15:20] statistics of the target population. Uh well, hereby balancing towards this
+[0:15:22] Uh well, hereby balancing towards this profile, you can still um
+[0:15:24] profile, you can still um balance these samples,
+[0:15:26] balance these samples, which again um they not need to be two
+[0:15:28] which again um they not need to be two treatment groups, they can be three or
+[0:15:30] treatment groups, they can be three or more,
+[0:15:31] more, um
+[0:15:32] um by solving one of these different
+[0:15:33] by solving one of these different optimization problems for uh each
+[0:15:36] optimization problems for uh each sample.
+[0:15:38] sample. And the profile can also describe an
+[0:15:40] And the profile can also describe an individual, so that we're balancing
+[0:15:42] individual, so that we're balancing towards this description of a single
+[0:15:44] towards this description of a single patient, for example.
+[0:15:50] In general, this kind of uh
+[0:15:51] uh matching problems uh
+[0:15:53] matching problems uh looks uh like this, as we described with
+[0:15:55] looks uh like this, as we described with Eric, is a multi-dimensional knapsack
+[0:15:58] Eric, is a multi-dimensional knapsack problem,
+[0:15:59] problem, which is a problem quite studied uh in
+[0:16:01] which is a problem quite studied uh in the operations research literature,
+[0:16:05] the operations research literature, where here we're maximizing the size of
+[0:16:07] where here we're maximizing the size of the study
+[0:16:09] the study for each treatment group,
+[0:16:11] for each treatment group, subject to these balancing constraints,
+[0:16:15] subject to these balancing constraints, um where we're balancing transformations
+[0:16:18] um where we're balancing transformations of the covariates relative to this
+[0:16:19] of the covariates relative to this description.
+[0:16:21] description. So, in the previous example, uh B was
+[0:16:24] So, in the previous example, uh B was the identity, so where were we were
+[0:16:26] the identity, so where were we were balancing just uh each component of the
+[0:16:29] balancing just uh each component of the covariates, the mean of each of the
+[0:16:31] covariates, the mean of each of the covariates.
+[0:16:33] covariates. But in this optimization problem, we
+[0:16:34] But in this optimization problem, we already start to see how regression
+[0:16:37] already start to see how regression starts to appear.
+[0:16:39] starts to appear. Okay?
+[0:16:40] Okay? Um I can talk about re-matching after
+[0:16:43] Um I can talk about re-matching after this first balancing step,
+[0:16:45] this first balancing step, uh but first to connect the methods, I'd
+[0:16:47] uh but first to connect the methods, I'd like to uh discuss what is going on in
+[0:16:49] like to uh discuss what is going on in terms of of
+[0:16:51] terms of of um balancing uh cell weighting uh
+[0:16:54] um balancing uh cell weighting uh extrapolation, and so on.
+[0:17:01] Okay, so I said this looks like regression, and
+[0:17:03] I said this looks like regression, and to be more specific, now I'll discuss
+[0:17:05] to be more specific, now I'll discuss this.
+[0:17:09] Uh maybe now is a natural moment for questions.
+[0:17:18] Yes, we do have uh one question from Q&amp;A.
+[0:17:19] Q&amp;A. Could you explain the third constraint?
+[0:17:22] Could you explain the third constraint? I think this is the third constraint in
+[0:17:23] I think this is the third constraint in your optimization problem.
+[0:17:26] your optimization problem. Is that constraint that makes the
+[0:17:27] Is that constraint that makes the optimization complicated because
+[0:17:29] optimization complicated because standard matching is polynomial time
+[0:17:32] standard matching is polynomial time solvable?
+[0:17:34] solvable? Okay, that's a good question.
+[0:17:36] Okay, that's a good question. Um
+[0:17:37] Um Yes, what makes the matching problem
+[0:17:38] Yes, what makes the matching problem complicated is this constraint here, the
+[0:17:40] complicated is this constraint here, the balancing constraint.
+[0:17:44] Mhm.
+[0:17:49] Sounds good. Uh yes. Um maybe you want to
+[0:17:53] Uh yes. Um maybe you want to Yes, and and the point is that um the
+[0:17:55] Yes, and and the point is that um the huge
+[0:17:57] huge kind of like part of the constraint
+[0:17:59] kind of like part of the constraint matrix is defined by these constraints
+[0:18:02] matrix is defined by these constraints here, and these are only a handful of
+[0:18:04] here, and these are only a handful of constraints. So, what break the nice
+[0:18:06] constraints. So, what break the nice properties of the optimization problem
+[0:18:08] properties of the optimization problem having this kind of like
+[0:18:10] having this kind of like um nice polyhedra that we would ideally
+[0:18:13] um nice polyhedra that we would ideally just explore the vertices of it is this
+[0:18:15] just explore the vertices of it is this part here.
+[0:18:16] part here. So, that is interesting because since
+[0:18:17] So, that is interesting because since it's not the entirety of the constraint
+[0:18:20] it's not the entirety of the constraint matrix, there's still a lot of structure
+[0:18:22] matrix, there's still a lot of structure here.
+[0:18:24] here. And uh what people have found in the
+[0:18:26] And uh what people have found in the field is that for example, in this fine
+[0:18:27] field is that for example, in this fine balance uh
+[0:18:29] balance uh optimization problem, if you have
+[0:18:31] optimization problem, if you have two fine balance covariates,
+[0:18:33] two fine balance covariates, two fine balance constraints, this
+[0:18:34] two fine balance constraints, this problem is still integral.
+[0:18:37] problem is still integral. Um so, it's still polynomially solvable,
+[0:18:39] Um so, it's still polynomially solvable, but if you go from two to three, then
+[0:18:40] but if you go from two to three, then this breaks.
+[0:18:42] this breaks. Which is an interesting behavior.
+[0:18:48] Yes, okay. Um Jose, maybe you want to go back to the full screen. Oh yeah,
+[0:18:49] back to the full screen. Oh yeah, perfect.
+[0:18:50] perfect. Okay.
+[0:18:51] Okay. Please carry on.
+[0:18:53] Please carry on. So, uh regression. Um there has been
+[0:18:55] So, uh regression. Um there has been great work in this area uh in economics,
+[0:18:59] great work in this area uh in economics, sample surveys, statistics, and
+[0:19:01] sample surveys, statistics, and biostatistics.
+[0:19:02] biostatistics. Um what we would like to emphasize here
+[0:19:05] Um what we would like to emphasize here are the
+[0:19:06] are the uh closed-form expressions of
+[0:19:09] uh closed-form expressions of um how regression regression is acting
+[0:19:11] um how regression regression is acting on the data. Um following here uh uh
+[0:19:15] on the data. Um following here uh uh mainly the work by Imbens and Abadie.
+[0:19:17] mainly the work by Imbens and Abadie. Um
+[0:19:18] Um although there's also a a history of
+[0:19:20] although there's also a a history of this work in sample surveys. A nice um
+[0:19:24] this work in sample surveys. A nice um um
+[0:19:25] um discussion of this provided in this work
+[0:19:27] discussion of this provided in this work by Fuller.
+[0:19:29] by Fuller. So uh Professor Stigler, one of the
+[0:19:32] So uh Professor Stigler, one of the historians of statistics, has said that
+[0:19:34] historians of statistics, has said that the method of least squares is the
+[0:19:36] the method of least squares is the automobile of modern statistical
+[0:19:37] automobile of modern statistical analysis.
+[0:19:39] analysis. Uh but the question is that when it
+[0:19:41] Uh but the question is that when it comes to causal inference, uh where's
+[0:19:42] comes to causal inference, uh where's the experiment here? So we know that by
+[0:19:45] the experiment here? So we know that by Cochran that we want to approximate this
+[0:19:47] Cochran that we want to approximate this experiment, yet when we are just running
+[0:19:50] experiment, yet when we are just running a regression, um
+[0:19:52] a regression, um in what sense, in what specific ways are
+[0:19:54] in what sense, in what specific ways are we approximating the features of
+[0:19:56] we approximating the features of experiments that I mentioned before?
+[0:20:07] So again, how's linear regression acting on the individual-level data to produce
+[0:20:09] on the individual-level data to produce an average treatment effect estimate,
+[0:20:12] an average treatment effect estimate, uh but without resorting to asymptotic
+[0:20:13] uh but without resorting to asymptotic approximations?
+[0:20:15] approximations? So in this paper with Ambarish, what we
+[0:20:17] So in this paper with Ambarish, what we do is to provide closed-form finite
+[0:20:20] do is to provide closed-form finite sample expressions
+[0:20:22] sample expressions of the implied weights for a range of
+[0:20:24] of the implied weights for a range of regression estimators,
+[0:20:26] regression estimators, such as traditional regression
+[0:20:27] such as traditional regression adjustments, which is what I'm going to
+[0:20:29] adjustments, which is what I'm going to be discussing today.
+[0:20:31] be discussing today. But um
+[0:20:33] But um our analysis also applies to what is
+[0:20:35] our analysis also applies to what is often called G-computation, to uh the
+[0:20:38] often called G-computation, to uh the doubly robust AIPW estimator,
+[0:20:41] doubly robust AIPW estimator, regression with multi-valued treatments,
+[0:20:43] regression with multi-valued treatments, um our working version paper our working
+[0:20:46] um our working version paper our working our working
+[0:20:48] our working paper version of the paper also
+[0:20:50] paper version of the paper also discusses regression after matching,
+[0:20:52] discusses regression after matching, instrumental variables, and uh by
+[0:20:55] instrumental variables, and uh by extension fixed effects.
+[0:21:00] What we do here is to analyze the weights in both finite and large sample
+[0:21:02] weights in both finite and large sample regimes, and also to provide diagnostics
+[0:21:05] regimes, and also to provide diagnostics for linear regression in causal
+[0:21:06] for linear regression in causal inference.
+[0:21:13] We start by analyzing what um may be fair to call the standard
+[0:21:15] may be fair to call the standard approach to regression adjustment in
+[0:21:17] approach to regression adjustment in observational studies,
+[0:21:19] observational studies, where we regress the observed outcome
+[0:21:22] where we regress the observed outcome on a set of observed covariates or
+[0:21:24] on a set of observed covariates or predictors or regressors,
+[0:21:26] predictors or regressors, and we're interested in estimating this
+[0:21:29] and we're interested in estimating this coefficient tau accompanying the
+[0:21:31] coefficient tau accompanying the treatment indicator here.
+[0:21:37] And we're going to do this to begin by OLS,
+[0:21:38] OLS, although we're going to extend it also
+[0:21:39] although we're going to extend it also to weighted least squares.
+[0:21:44] And the point is that to answer the previous
+[0:21:47] the point is that to answer the previous questions about the connection to
+[0:21:48] questions about the connection to experiments,
+[0:21:49] experiments, uh we can show that this estimator, this
+[0:21:51] uh we can show that this estimator, this OLS estimator, is equivalent to this uh
+[0:21:55] OLS estimator, is equivalent to this uh uni regression imputation procedure.
+[0:21:58] uni regression imputation procedure. Uni regression in the sense that we're
+[0:22:00] Uni regression in the sense that we're fitting one regression model
+[0:22:03] fitting one regression model in the treatment and control samples
+[0:22:04] in the treatment and control samples pooled, and then based on the um
+[0:22:07] pooled, and then based on the um estimated model, we predict the
+[0:22:09] estimated model, we predict the potential outcomes under treatment and
+[0:22:11] potential outcomes under treatment and under control, and we average those
+[0:22:13] under control, and we average those predictions. The OLS estimator is
+[0:22:15] predictions. The OLS estimator is equivalent to this procedure.
+[0:22:18] equivalent to this procedure. But once we write the
+[0:22:20] But once we write the estimator in this way, we're in business
+[0:22:22] estimator in this way, we're in business because in turn we can write this as a
+[0:22:23] because in turn we can write this as a high-end estimator, as a linear
+[0:22:26] high-end estimator, as a linear estimator where we're hitting the vector
+[0:22:28] estimator where we're hitting the vector of outcomes by this vector of weights.
+[0:22:30] of outcomes by this vector of weights. And the question is
+[0:22:33] And the question is is how do these weights look like?
+[0:22:35] is how do these weights look like? So, in this proposition, uh we have
+[0:22:37] So, in this proposition, uh we have these closed-form expressions for the
+[0:22:39] these closed-form expressions for the weights with a multivariate regression,
+[0:22:41] weights with a multivariate regression, where we can see that the weights are
+[0:22:43] where we can see that the weights are basically this uniform term depending on
+[0:22:46] basically this uniform term depending on the sample size, and this other term,
+[0:22:49] the sample size, and this other term, which is going to make the weights vary
+[0:22:52] which is going to make the weights vary depending, for example,
+[0:22:54] depending, for example, on the initial imbalances between the
+[0:22:56] on the initial imbalances between the treatment group and the overall sample.
+[0:22:59] treatment group and the overall sample. So, if we have perfect balance to begin,
+[0:23:00] So, if we have perfect balance to begin, the weights are going to be uniform, to
+[0:23:02] the weights are going to be uniform, to name an example.
+[0:23:04] name an example. And from here we can go back to our
+[0:23:06] And from here we can go back to our questions of how is regression emulating
+[0:23:09] questions of how is regression emulating key features of a randomized experiment
+[0:23:12] key features of a randomized experiment and find that um regression is balancing
+[0:23:15] and find that um regression is balancing the covariates. Uh that was something
+[0:23:17] the covariates. Uh that was something unclear to us when we were beginning
+[0:23:18] unclear to us when we were beginning this project. And it's balancing them
+[0:23:21] this project. And it's balancing them very well. It's actually balancing them
+[0:23:23] very well. It's actually balancing them exactly as opposed to approximately.
+[0:23:26] exactly as opposed to approximately. Yet towards a target covariate profile
+[0:23:29] Yet towards a target covariate profile X*
+[0:23:30] X* um URI for the unique regression
+[0:23:33] um URI for the unique regression approach, um which we can also uh
+[0:23:35] approach, um which we can also uh characterize
+[0:23:37] characterize and see that it's this expression here.
+[0:23:40] and see that it's this expression here. Which is not the
+[0:23:42] Which is not the mean of the treated subjects, it's not
+[0:23:43] mean of the treated subjects, it's not the mean of the controls, it's not the
+[0:23:45] the mean of the controls, it's not the overall mean, it's some other mean
+[0:23:47] overall mean, it's some other mean which um
+[0:23:49] which um I'll discuss more in a second.
+[0:23:51] I'll discuss more in a second. We can also find that the variance of
+[0:23:52] We can also find that the variance of the weights is given by this expression
+[0:23:55] the weights is given by this expression here and that this is the minimum
+[0:23:57] here and that this is the minimum variance that the weights can achieve.
+[0:23:59] variance that the weights can achieve. So, intuitively what regression is doing
+[0:24:02] So, intuitively what regression is doing is to find these weights of minimum
+[0:24:03] is to find these weights of minimum variance that perfectly balance the
+[0:24:05] variance that perfectly balance the means of the covariates towards this
+[0:24:07] means of the covariates towards this covariate profile X* URI.
+[0:24:11] covariate profile X* URI. Um
+[0:24:13] Um with one other observation that the
+[0:24:14] with one other observation that the weights can take negative values and
+[0:24:16] weights can take negative values and hence produce estimators that are not
+[0:24:18] hence produce estimators that are not sample bounded.
+[0:24:25] Uh to us this is interesting because uh when we analyze the balance and the
+[0:24:28] uh when we analyze the balance and the target population that regression is
+[0:24:31] target population that regression is is targeting
+[0:24:32] is targeting and we see the following. So, here we're
+[0:24:34] and we see the following. So, here we're going to return to the famous LaLonde
+[0:24:36] going to return to the famous LaLonde example
+[0:24:37] example where we have um
+[0:24:39] where we have um this um
+[0:24:41] this um observational part of the study, a
+[0:24:43] observational part of the study, a treatment and a control group, where
+[0:24:45] treatment and a control group, where subjects were um
+[0:24:47] subjects were um um enrolled or not to this labor
+[0:24:50] um enrolled or not to this labor training program uh to increase
+[0:24:52] training program uh to increase earnings. So, here we have a bunch of
+[0:24:54] earnings. So, here we have a bunch of covariates, age, education, the earnings
+[0:24:56] covariates, age, education, the earnings before
+[0:24:58] before um the the treatment, these indicators
+[0:25:01] um the the treatment, these indicators for
+[0:25:07] and so on. And here we're showing a balance in the
+[0:25:09] And here we're showing a balance in the samples before the regression
+[0:25:11] samples before the regression adjustments with a star and this plus
+[0:25:13] adjustments with a star and this plus sign.
+[0:25:14] sign. So we can see for example that that
+[0:25:16] So we can see for example that that there were these imbalances in age.
+[0:25:19] there were these imbalances in age. And here we have the
+[0:25:21] And here we have the values, the means of the covariates in
+[0:25:23] values, the means of the covariates in the full sample before the adjustments
+[0:25:25] the full sample before the adjustments with a solid dot.
+[0:25:26] with a solid dot. So here the mean is here somewhere in
+[0:25:28] So here the mean is here somewhere in the middle.
+[0:25:30] the middle. Uh if this were to be a random sample of
+[0:25:32] Uh if this were to be a random sample of a of a target population, this would be
+[0:25:34] a of a target population, this would be uh the mean age in the target
+[0:25:36] uh the mean age in the target population. And here with these hollow
+[0:25:38] population. And here with these hollow circles, we're showing what is the
+[0:25:41] circles, we're showing what is the uh what are the means of the covariates
+[0:25:42] uh what are the means of the covariates in the treatment and the control group
+[0:25:44] in the treatment and the control group after the regression adjustments.
+[0:25:47] after the regression adjustments. And and what we find uh it's quite
+[0:25:49] And and what we find uh it's quite interesting to us and and this again is
+[0:25:51] interesting to us and and this again is not based on on approximations. Uh these
+[0:25:53] not based on on approximations. Uh these are closed form uh calculations. We can
+[0:25:56] are closed form uh calculations. We can see that the mean of age for example uh
+[0:25:59] see that the mean of age for example uh is quite close to the treated group, but
+[0:26:01] is quite close to the treated group, but it's not really on top of it. It's
+[0:26:04] it's not really on top of it. It's actually kind of like outside its range,
+[0:26:07] actually kind of like outside its range, which is interesting. And here in this
+[0:26:09] which is interesting. And here in this indicator for race black, uh we can see
+[0:26:12] indicator for race black, uh we can see that the means of these natural
+[0:26:13] that the means of these natural populations, as we may call them, the
+[0:26:15] populations, as we may call them, the treated group, the control group, and
+[0:26:17] treated group, the control group, and the full sample
+[0:26:18] the full sample are these three values here.
+[0:26:21] are these three values here. Uh but the weighted mean is here
+[0:26:22] Uh but the weighted mean is here somewhere in the middle.
+[0:26:25] somewhere in the middle. Which is interesting to us because uh
+[0:26:27] Which is interesting to us because uh it's a population that may not may not
+[0:26:29] it's a population that may not may not exist.
+[0:26:30] exist. So
+[0:26:32] So um
+[0:26:33] um what this is saying is um
+[0:26:35] what this is saying is um in a different way is what Heroin
+[0:26:38] in a different way is what Heroin explained in in one of his works is that
+[0:26:40] explained in in one of his works is that regression here is taking um linearity
+[0:26:43] regression here is taking um linearity very very seriously. So if linearity
+[0:26:45] very very seriously. So if linearity holds, the intuition is that it doesn't
+[0:26:47] holds, the intuition is that it doesn't matter where you're fitting your um
+[0:26:50] matter where you're fitting your um your your model. If your model is
+[0:26:51] your your model. If your model is correctly specified, it doesn't matter
+[0:26:54] correctly specified, it doesn't matter on which population you're fitting it.
+[0:26:57] on which population you're fitting it. Um but if your model is misspecified,
+[0:26:59] Um but if your model is misspecified, then we can see how um fitting this
+[0:27:03] then we can see how um fitting this um misspecified model around the wrong
+[0:27:06] um misspecified model around the wrong population can matter.
+[0:27:12] So, the implied target population is this one here as described by these
+[0:27:13] this one here as described by these hollow circles.
+[0:27:18] Another regression approach is to fit this linear regression model separately
+[0:27:21] this linear regression model separately in the treatment and the control group,
+[0:27:22] in the treatment and the control group, what we call multi-regression
+[0:27:24] what we call multi-regression imputation,
+[0:27:25] imputation, and then average the predictions.
+[0:27:27] and then average the predictions. And here uh we have good balance towards
+[0:27:31] And here uh we have good balance towards the right target covariate profile,
+[0:27:32] the right target covariate profile, which we can modify, and again with
+[0:27:34] which we can modify, and again with weights of minimum variance,
+[0:27:36] weights of minimum variance, but these weights again can be negative.
+[0:27:39] but these weights again can be negative. Okay? So, if this is our observational
+[0:27:41] Okay? So, if this is our observational study and we're trying to approximate
+[0:27:42] study and we're trying to approximate the structure of a randomized experiment
+[0:27:45] the structure of a randomized experiment with uni-regression adjustments, uh
+[0:27:48] with uni-regression adjustments, uh we're achieving very good balance, but
+[0:27:50] we're achieving very good balance, but towards a population that is hidden in a
+[0:27:52] towards a population that is hidden in a sense,
+[0:27:53] sense, and with weights that can take negative
+[0:27:54] and with weights that can take negative values.
+[0:27:56] values. With multi-regression imputation, we're
+[0:27:58] With multi-regression imputation, we're targeting the right population as
+[0:28:00] targeting the right population as defined by the previous regression
+[0:28:01] defined by the previous regression model, and the weights uh can still take
+[0:28:04] model, and the weights uh can still take negative values.
+[0:28:06] negative values. We analyze this in more generality with
+[0:28:08] We analyze this in more generality with Ambarish and provide this uh theorem
+[0:28:11] Ambarish and provide this uh theorem that uh
+[0:28:12] that uh in a way um connects different
+[0:28:15] in a way um connects different regression approaches and also the IPW
+[0:28:17] regression approaches and also the IPW estimator.
+[0:28:19] estimator. And we find that um
+[0:28:21] And we find that um the adjustments implied by the weighted
+[0:28:23] the adjustments implied by the weighted least squares
+[0:28:25] least squares or by the augmented inverse probability
+[0:28:28] or by the augmented inverse probability weighting estimator, in general, can be
+[0:28:31] weighting estimator, in general, can be obtained by the solution to this
+[0:28:33] obtained by the solution to this optimization problem, where we're
+[0:28:35] optimization problem, where we're minimizing this measure of dispersion of
+[0:28:37] minimizing this measure of dispersion of the weights,
+[0:28:40] the weights, subject to these
+[0:28:42] subject to these balancing constraints
+[0:28:44] balancing constraints up to a certain extent delta, and making
+[0:28:46] up to a certain extent delta, and making the weights add up to one.
+[0:28:53] So, if delta is equal to zero, okay?
+[0:28:54] okay? Um
+[0:28:56] Um then uh we can recover um many of these
+[0:28:59] then uh we can recover um many of these estimators.
+[0:29:01] estimators. But, we want delta to vary freely in
+[0:29:03] But, we want delta to vary freely in order to connect this approach to
+[0:29:05] order to connect this approach to regression to other weighting
+[0:29:06] regression to other weighting approaches.
+[0:29:07] approaches. Okay?
+[0:29:10] Okay? Um in the paper, we also discuss the
+[0:29:12] Um in the paper, we also discuss the large sample properties of the resulting
+[0:29:14] large sample properties of the resulting regression estimators uh showing that
+[0:29:17] regression estimators uh showing that simple regression estimators such as the
+[0:29:19] simple regression estimators such as the simple URI model is consistent under
+[0:29:22] simple URI model is consistent under many underlying conditions for the true
+[0:29:25] many underlying conditions for the true unknown outcome and inverse probability
+[0:29:27] unknown outcome and inverse probability models.
+[0:29:29] models. And we provide this set of a regression
+[0:29:31] And we provide this set of a regression diagnostics.
+[0:29:33] diagnostics. For example, here measuring the
+[0:29:35] For example, here measuring the influence that a specific observation
+[0:29:38] influence that a specific observation has on the average treatment effect
+[0:29:40] has on the average treatment effect estimate.
+[0:29:42] estimate. And all this we provide it in a package
+[0:29:44] And all this we provide it in a package that we wrote with Noah Greifer.
+[0:29:49] And these considerations, of course, carry over to other settings and designs
+[0:29:52] carry over to other settings and designs such as diff-in-diff and instrumental
+[0:29:54] such as diff-in-diff and instrumental variables where OLS is kind of like the
+[0:29:56] variables where OLS is kind of like the working tool uh
+[0:29:58] working tool uh used in in in fitting the regression
+[0:30:01] used in in in fitting the regression models
+[0:30:03] models yet under different identification
+[0:30:05] yet under different identification assumptions.
+[0:30:07] assumptions. Um
+[0:30:09] Um maybe now is a good moment to ask more
+[0:30:11] maybe now is a good moment to ask more questions.
+[0:30:18] Okay, so one question. Yeah, and maybe you can see it, I guess,
+[0:30:21] Yeah, and maybe you can see it, I guess, Jose.
+[0:30:22] Jose. Yes, you want to read it yourself?
+[0:30:23] Yes, you want to read it yourself? That's fine.
+[0:30:24] That's fine. Yes, one of the questions is how to
+[0:30:26] Yes, one of the questions is how to think about the exact balance property
+[0:30:28] think about the exact balance property of OLS.
+[0:30:30] of OLS. Um I think that ultimately there's a
+[0:30:32] Um I think that ultimately there's a bias-variance tradeoff between exact
+[0:30:34] bias-variance tradeoff between exact balance and approximate balance.
+[0:30:37] balance and approximate balance. And I'm going to discuss this in the
+[0:30:38] And I'm going to discuss this in the next um
+[0:30:40] next um in the next part of the presentation.
+[0:30:42] in the next part of the presentation. Now, in connection to waiting.
+[0:30:45] Now, in connection to waiting. So, by trying to connect matching and
+[0:30:46] So, by trying to connect matching and regression,
+[0:30:48] regression, uh
+[0:30:48] uh we saw that in the profile matching
+[0:30:50] we saw that in the profile matching problem, we were maximizing the size of
+[0:30:53] problem, we were maximizing the size of the study with constant weights,
+[0:30:55] the study with constant weights, that is equivalent to minimizing the
+[0:30:57] that is equivalent to minimizing the variance of the linear estimator with
+[0:30:59] variance of the linear estimator with constant weights.
+[0:31:02] constant weights. Um
+[0:31:04] Um and here um in this regression problem,
+[0:31:08] and here um in this regression problem, we
+[0:31:10] we are minimizing of dispersion of the
+[0:31:12] are minimizing of dispersion of the weights, which for certain
+[0:31:14] weights, which for certain um choices of the base and the scale
+[0:31:17] um choices of the base and the scale weights, we're effectively minimizing
+[0:31:19] weights, we're effectively minimizing the variance of the estimate.
+[0:31:21] the variance of the estimate. So, it it's it's connected in that
+[0:31:23] So, it it's it's connected in that sense.
+[0:31:25] sense. So, now waiting methods. Uh there's a
+[0:31:27] So, now waiting methods. Uh there's a big body of work here.
+[0:31:30] big body of work here. Um there's a a very prominent literature
+[0:31:33] Um there's a a very prominent literature in sample surveys, uh perhaps following
+[0:31:35] in sample surveys, uh perhaps following the seminal work by Debus and Särndal.
+[0:31:38] the seminal work by Debus and Särndal. And then we have um work that has been
+[0:31:41] And then we have um work that has been done in econometrics and statistics, um
+[0:31:44] done in econometrics and statistics, um focusing on what we call the modeling
+[0:31:46] focusing on what we call the modeling approach to waiting.
+[0:31:48] approach to waiting. More recent works focusing on the
+[0:31:49] More recent works focusing on the balancing approach to waiting.
+[0:31:51] balancing approach to waiting. And uh approaches that uh connect these
+[0:31:54] And uh approaches that uh connect these two approaches, like the covariate
+[0:31:55] two approaches, like the covariate balancing propensity score.
+[0:31:58] balancing propensity score. And and here are some review papers for
+[0:32:00] And and here are some review papers for for these waiting methods.
+[0:32:06] So, we like to say that uh there's these two approaches to waiting, which are
+[0:32:08] two approaches to waiting, which are seemingly unrelated. One is the modeling
+[0:32:11] seemingly unrelated. One is the modeling approach to waiting,
+[0:32:12] approach to waiting, where for example, we fit a logistic
+[0:32:14] where for example, we fit a logistic regression model um for the probability
+[0:32:18] regression model um for the probability of receiving treatment given the
+[0:32:19] of receiving treatment given the covariates,
+[0:32:20] covariates, and then we invert the predicted
+[0:32:22] and then we invert the predicted probabilities to produce the weights.
+[0:32:25] probabilities to produce the weights. And then there's another approach um
+[0:32:27] And then there's another approach um that in a way says, "Okay, let's forget
+[0:32:29] that in a way says, "Okay, let's forget about modeling for a second. If what I
+[0:32:31] about modeling for a second. If what I care about is covariate balance and
+[0:32:33] care about is covariate balance and other features, let me optimize towards
+[0:32:35] other features, let me optimize towards that." And one such approach is entropy
+[0:32:38] that." And one such approach is entropy balancing.
+[0:32:40] balancing. Mhm.
+[0:32:41] Mhm. Um
+[0:32:43] Um a question is um
+[0:32:45] a question is um what are we pursuing when we're waiting
+[0:32:48] what are we pursuing when we're waiting uh our observational data sets?
+[0:32:50] uh our observational data sets? Uh we argue that we wait for covariate
+[0:32:53] Uh we argue that we wait for covariate balance.
+[0:32:54] balance. We wait for stability in the sense of
+[0:32:56] We wait for stability in the sense of producing estimators that are stable, uh
+[0:32:59] producing estimators that are stable, uh that they don't rely too much on a few
+[0:33:01] that they don't rely too much on a few observations, that they have minimum
+[0:33:02] observations, that they have minimum variance.
+[0:33:04] variance. So, that our adjustments are
+[0:33:05] So, that our adjustments are interpolation based on the available
+[0:33:07] interpolation based on the available data as opposed to an extrapolation that
+[0:33:09] data as opposed to an extrapolation that goes beyond the support of the data, and
+[0:33:12] goes beyond the support of the data, and that they can help us to generalize our
+[0:33:15] that they can help us to generalize our um to extend our inferences to target
+[0:33:18] um to extend our inferences to target populations.
+[0:33:21] populations. Um a way to think about um waiting more
+[0:33:24] Um a way to think about um waiting more formally is as discussed in this paper
+[0:33:26] formally is as discussed in this paper with um Eli Ben Michael,
+[0:33:29] with um Eli Ben Michael, Avi Feller, and and David Hughesberg, is
+[0:33:32] Avi Feller, and and David Hughesberg, is is as follows, where here our estimate
+[0:33:36] is as follows, where here our estimate is one half of the average treatment
+[0:33:37] is one half of the average treatment effect, the first component.
+[0:33:40] effect, the first component. Um the same logic applies to the other
+[0:33:42] Um the same logic applies to the other component, and we want to use this
+[0:33:44] component, and we want to use this estimator, this linear estimator again,
+[0:33:46] estimator, this linear estimator again, this Hajek estimator, and the question
+[0:33:49] this Hajek estimator, and the question is how to find the weights.
+[0:33:51] is how to find the weights. Well, uh one way to find these weights
+[0:33:54] Well, uh one way to find these weights is by looking at the error term
+[0:33:56] is by looking at the error term uh between the estimator and the
+[0:33:58] uh between the estimator and the estimate, which one we can decompose in
+[0:34:00] estimate, which one we can decompose in terms of these three terms. This first
+[0:34:02] terms of these three terms. This first term here,
+[0:34:04] term here, where here we have the regression of the
+[0:34:05] where here we have the regression of the outcome on the covariates,
+[0:34:08] outcome on the covariates, and this term due to noise,
+[0:34:10] and this term due to noise, and this term due to sampling variation.
+[0:34:12] and this term due to sampling variation. The point being that is this first term
+[0:34:15] The point being that is this first term here the one that uh controls the bias
+[0:34:19] here the one that uh controls the bias um
+[0:34:20] um of our estimator. So, by controlling
+[0:34:22] of our estimator. So, by controlling balance, hopefully over a large function
+[0:34:26] balance, hopefully over a large function class for the unknown outcome model, uh
+[0:34:30] class for the unknown outcome model, uh we can control uh
+[0:34:32] we can control uh uh this bias and do valid inferences.
+[0:34:35] uh this bias and do valid inferences. So, the intuition, the name of the game
+[0:34:38] So, the intuition, the name of the game is to
+[0:34:39] is to uh
+[0:34:40] uh balance a large enough function class so
+[0:34:43] balance a large enough function class so that we have valid inferences. And also,
+[0:34:46] that we have valid inferences. And also, I would argue protection against getting
+[0:34:49] I would argue protection against getting M wrong.
+[0:34:50] M wrong. Which uh I think can be achieved by
+[0:34:52] Which uh I think can be achieved by choosing the weights, for example, to be
+[0:34:54] choosing the weights, for example, to be non-negative as opposed to to negative.
+[0:34:57] non-negative as opposed to to negative. Uh there's room for discussion about
+[0:34:58] Uh there's room for discussion about this, however.
+[0:35:00] this, however. So, uh these two approaches
+[0:35:04] So, uh these two approaches in the modeling and balancing approach,
+[0:35:07] in the modeling and balancing approach, the balancing approach is uh targeting
+[0:35:09] the balancing approach is uh targeting balance uh against this model class M.
+[0:35:11] balance uh against this model class M. The modeling approach is trying to
+[0:35:13] The modeling approach is trying to maximize the fit of a model.
+[0:35:15] maximize the fit of a model. Uh well, these two approaches are are
+[0:35:17] Uh well, these two approaches are are indeed connected because if we look at
+[0:35:19] indeed connected because if we look at the dual of each of the problems, we
+[0:35:21] the dual of each of the problems, we recover the other problem.
+[0:35:23] recover the other problem. Mhm.
+[0:35:26] Mhm. And I'll be more specific about that in
+[0:35:27] And I'll be more specific about that in a second.
+[0:35:29] a second. But um
+[0:35:31] But um basically, what we document happens in
+[0:35:33] basically, what we document happens in practice is that often times by focusing
+[0:35:37] practice is that often times by focusing on the fit of a parametric propensity
+[0:35:39] on the fit of a parametric propensity score model, for example, we end up
+[0:35:41] score model, for example, we end up having the weights that look like this,
+[0:35:43] having the weights that look like this, where a few observations have an undue
+[0:35:45] where a few observations have an undue influence on the behavior of the
+[0:35:47] influence on the behavior of the estimator. Uh but by doing this other
+[0:35:50] estimator. Uh but by doing this other balancing approach, which explicitly
+[0:35:53] balancing approach, which explicitly restrains the variability or dispersion
+[0:35:55] restrains the variability or dispersion of the weights
+[0:35:57] of the weights while targeting balance
+[0:35:59] while targeting balance um
+[0:36:00] um we we are produce estimators that are
+[0:36:03] we we are produce estimators that are more stable.
+[0:36:04] more stable. Mhm.
+[0:36:06] Mhm. One example of this is um
+[0:36:09] One example of this is um what we discussed with Ishwaran in this
+[0:36:11] what we discussed with Ishwaran in this paper called the minimal weights,
+[0:36:13] paper called the minimal weights, which are the minimal weights in the
+[0:36:15] which are the minimal weights in the sense that they're the smallest weights
+[0:36:17] sense that they're the smallest weights in terms of a measure of dispersion here
+[0:36:20] in terms of a measure of dispersion here as defining the objective function that
+[0:36:22] as defining the objective function that approximately balance functions of the
+[0:36:24] approximately balance functions of the covariates.
+[0:36:26] covariates. We want these basis functions, these B
+[0:36:28] We want these basis functions, these B functions, to be expressive enough to
+[0:36:31] functions, to be expressive enough to span a large function class M.
+[0:36:34] span a large function class M. Okay?
+[0:36:35] Okay? And we want to do it approximately
+[0:36:38] And we want to do it approximately because um we want to have the
+[0:36:40] because um we want to have the opportunity to trade bias for variance.
+[0:36:43] opportunity to trade bias for variance. Okay?
+[0:36:45] Okay? In some settings, it's just impossible
+[0:36:46] In some settings, it's just impossible also to exactly balance the covariates,
+[0:36:49] also to exactly balance the covariates, especially if we have too many Bs. So,
+[0:36:51] especially if we have too many Bs. So, an important choice here is how to
+[0:36:52] an important choice here is how to choose delta, which is pretty much an
+[0:36:54] choose delta, which is pretty much an open question, although we have a couple
+[0:36:56] open question, although we have a couple of proposals.
+[0:36:58] of proposals. One example of these minimal weights is
+[0:37:00] One example of these minimal weights is what um can be called the stable
+[0:37:02] what um can be called the stable balancing weights, which are the weights
+[0:37:04] balancing weights, which are the weights of minimum variance that approximately
+[0:37:06] of minimum variance that approximately balance the covariates
+[0:37:08] balance the covariates subject to these weights that are
+[0:37:09] subject to these weights that are non-negative.
+[0:37:11] non-negative. An important feature of this approach is
+[0:37:13] An important feature of this approach is that the objective function is
+[0:37:15] that the objective function is quadratic,
+[0:37:18] quadratic, which is important in order to handle
+[0:37:20] which is important in order to handle larger data sets. So, with uh
+[0:37:22] larger data sets. So, with uh off-the-shelf solvers
+[0:37:24] off-the-shelf solvers like OSQP, provided by Stellato and
+[0:37:27] like OSQP, provided by Stellato and colleagues, we can use ADMM to solve
+[0:37:30] colleagues, we can use ADMM to solve very large instances of this problem
+[0:37:32] very large instances of this problem with more than 1 million observations in
+[0:37:34] with more than 1 million observations in seconds. Here for us, the bottleneck
+[0:37:36] seconds. Here for us, the bottleneck became memory uh rather than
+[0:37:38] became memory uh rather than computation.
+[0:37:40] computation. And we have a working paper with Kwangho
+[0:37:41] And we have a working paper with Kwangho Kim and Vishesh Nigam in which we
+[0:37:44] Kim and Vishesh Nigam in which we um we explore um
+[0:37:47] um we explore um this implementation as well as other
+[0:37:48] this implementation as well as other features,
+[0:37:49] features, such as balancing and RKHS.
+[0:37:53] such as balancing and RKHS. Um and and what is interesting to us
+[0:37:56] Um and and what is interesting to us with Ambady is that um if you were if
+[0:37:59] with Ambady is that um if you were if you were not to have this non-negativity
+[0:38:01] you were not to have this non-negativity constraints of the weights,
+[0:38:03] constraints of the weights, this uh weighting approach is uh
+[0:38:06] this uh weighting approach is uh equivalent to doing ridge regression and
+[0:38:09] equivalent to doing ridge regression and imputing the missing potential outcomes
+[0:38:11] imputing the missing potential outcomes based on ridge regression.
+[0:38:13] based on ridge regression. Uh this because we have delta here
+[0:38:15] Uh this because we have delta here greater than zero. If delta were to be
+[0:38:18] greater than zero. If delta were to be equal to zero, we would get the usual
+[0:38:20] equal to zero, we would get the usual regression problem. For delta greater
+[0:38:22] regression problem. For delta greater than zero, we have this rich regression
+[0:38:24] than zero, we have this rich regression imputation approach.
+[0:38:26] imputation approach. But, uh something that we don't know how
+[0:38:29] But, uh something that we don't know how to do with ambage is
+[0:38:31] to do with ambage is how to recover the behavior of this
+[0:38:33] how to recover the behavior of this waiting estimator from regression
+[0:38:36] waiting estimator from regression because
+[0:38:37] because imposing this non-negative constraint on
+[0:38:40] imposing this non-negative constraint on the regression front um
+[0:38:42] the regression front um is something that uh we don't know at
+[0:38:44] is something that uh we don't know at present how to do.
+[0:38:46] present how to do. So, an interpretation of this balancing
+[0:38:48] So, an interpretation of this balancing approach to waiting is like doing which
+[0:38:50] approach to waiting is like doing which regression imputation, but in order to
+[0:38:52] regression imputation, but in order to produce an estimator that is sample
+[0:38:54] produce an estimator that is sample bounded.
+[0:38:56] bounded. Uh which which to me is attractive
+[0:38:58] Uh which which to me is attractive because in a sense provides protection
+[0:39:00] because in a sense provides protection against getting wrong the model class M.
+[0:39:08] So, um the title of this talk was connecting matching, regression, and
+[0:39:10] connecting matching, regression, and waiting as a mathematical programs for
+[0:39:13] waiting as a mathematical programs for causal inference.
+[0:39:15] causal inference. In this slide, um we provide a
+[0:39:17] In this slide, um we provide a head-to-head comparison of the methods
+[0:39:19] head-to-head comparison of the methods or instances of these methods to be
+[0:39:21] or instances of these methods to be precise,
+[0:39:22] precise, combine comparing profile matching to
+[0:39:24] combine comparing profile matching to regression to waiting.
+[0:39:26] regression to waiting. And we can see that all these methods
+[0:39:29] And we can see that all these methods are uh
+[0:39:30] are uh minimizing a measure of dispersion of
+[0:39:32] minimizing a measure of dispersion of the implied weights or maximizing the
+[0:39:34] the implied weights or maximizing the information content of the adjusted
+[0:39:36] information content of the adjusted sample uh for a given estimator
+[0:39:39] sample uh for a given estimator subject to balancing constraints that we
+[0:39:42] subject to balancing constraints that we want them to be general enough to span a
+[0:39:45] want them to be general enough to span a large model class M.
+[0:39:47] large model class M. And then, what are the forms of the
+[0:39:49] And then, what are the forms of the weights that are explicitly used are
+[0:39:50] weights that are explicitly used are different.
+[0:39:52] different. Here with matching, in this form of
+[0:39:54] Here with matching, in this form of matching, it's all about study design
+[0:39:56] matching, it's all about study design and interpretability. So, we have these
+[0:39:57] and interpretability. So, we have these constant weights.
+[0:39:59] constant weights. Here in regression, the weights are free
+[0:40:01] Here in regression, the weights are free to vary.
+[0:40:02] to vary. And
+[0:40:04] And here
+[0:40:06] here the weights in for example in SBW
+[0:40:09] the weights in for example in SBW problem, the weights have to be um
+[0:40:11] problem, the weights have to be um non-negative in order for the estimator
+[0:40:13] non-negative in order for the estimator to be sample bounded down.
+[0:40:15] to be sample bounded down. So, um waiting as we have discussed it
+[0:40:18] So, um waiting as we have discussed it in the balancing approach is the
+[0:40:19] in the balancing approach is the solution to a convex, more specifically
+[0:40:21] solution to a convex, more specifically a quadratic programming pro- problem.
+[0:40:24] a quadratic programming pro- problem. We implement this in the SBW package for
+[0:40:27] We implement this in the SBW package for us for R. With Noah and Ambarish, we
+[0:40:30] us for R. With Noah and Ambarish, we have this LMW package to retrieve the
+[0:40:33] have this LMW package to retrieve the implied weights of linear regression.
+[0:40:35] implied weights of linear regression. And uh matching, as I discussed in the
+[0:40:37] And uh matching, as I discussed in the first part of the talk, can be
+[0:40:39] first part of the talk, can be implemented with the design match
+[0:40:40] implemented with the design match package.
+[0:40:42] package. Okay, I am running out of time. But here
+[0:40:46] Okay, I am running out of time. But here to to summarize, we have representations
+[0:40:49] to to summarize, we have representations of what the methods are doing in terms
+[0:40:51] of what the methods are doing in terms of balance, representativeness,
+[0:40:54] of balance, representativeness, self-weighted sampling, and sample
+[0:40:56] self-weighted sampling, and sample boundedness. Here with pair matching.
+[0:40:59] boundedness. Here with pair matching. Here with regression, the weights can be
+[0:41:01] Here with regression, the weights can be negative.
+[0:41:02] negative. And depending on the specification is
+[0:41:04] And depending on the specification is which population we're implicitly
+[0:41:05] which population we're implicitly targeting.
+[0:41:07] targeting. And then weighting, um,
+[0:41:09] And then weighting, um, with either the modeling or the
+[0:41:10] with either the modeling or the balancing approach.
+[0:41:14] So, a couple of thoughts, um,
+[0:41:21] a- along the lines of the recommendations by by Rubin in his work
+[0:41:23] recommendations by by Rubin in his work about designing observation studies and
+[0:41:26] about designing observation studies and so on, and also by Rosenbaum, of course,
+[0:41:29] so on, and also by Rosenbaum, of course, is uh
+[0:41:30] is uh that here we're seeing these matching,
+[0:41:32] that here we're seeing these matching, regression, and weighting methods um
+[0:41:36] regression, and weighting methods um e- either as methods that simultaneously
+[0:41:38] e- either as methods that simultaneously adjust for covariates and provide effect
+[0:41:40] adjust for covariates and provide effect estimates, as is often used by
+[0:41:42] estimates, as is often used by regression in practice, uh by just
+[0:41:44] regression in practice, uh by just fitting one model and simultaneously
+[0:41:45] fitting one model and simultaneously doing these two things,
+[0:41:47] doing these two things, or uh to separate what can be called the
+[0:41:50] or uh to separate what can be called the study design of the study, not touching
+[0:41:52] study design of the study, not touching the outcomes, um,
+[0:41:53] the outcomes, um, and adjusting first and checking balance
+[0:41:55] and adjusting first and checking balance and so on, and then doing the outcome
+[0:41:57] and so on, and then doing the outcome analysis.
+[0:41:59] analysis. Um, the closed-form expressions of the
+[0:42:01] Um, the closed-form expressions of the weights allow us to do regression as
+[0:42:03] weights allow us to do regression as part of the study design of the study.
+[0:42:06] part of the study design of the study. Um, which arguably is not the the case
+[0:42:09] Um, which arguably is not the the case in practice as routinely done.
+[0:42:12] in practice as routinely done. Um, we saw that these methods are quite
+[0:42:15] Um, we saw that these methods are quite related um but they're different.
+[0:42:18] related um but they're different. I would argue and people can
+[0:42:20] I would argue and people can challenge this that from the standpoint
+[0:42:22] challenge this that from the standpoint of uh
+[0:42:23] of uh study design or or interpretability
+[0:42:26] study design or or interpretability um matching is very very transparent.
+[0:42:28] um matching is very very transparent. It's very clear how it's acting on the
+[0:42:30] It's very clear how it's acting on the data. And I think that the unit level
+[0:42:32] data. And I think that the unit level weights um which are constant integer if
+[0:42:35] weights um which are constant integer if you wish are quite interpretable and can
+[0:42:39] you wish are quite interpretable and can mean a lot um to to a wide basis of
+[0:42:43] mean a lot um to to a wide basis of researchers, to a wide audience.
+[0:42:46] researchers, to a wide audience. And and in fact um
+[0:42:52] maybe that's a so I
+[0:42:54] so I I think that's also
+[0:42:56] I think that's also a reason why in high stake questions
+[0:42:58] a reason why in high stake questions like like we want to use uh uh
+[0:43:00] like like we want to use uh uh methods for adjustment that we know very
+[0:43:03] methods for adjustment that we know very well what they're doing with the data at
+[0:43:04] well what they're doing with the data at hand. And and in many of the real world
+[0:43:06] hand. And and in many of the real world evaluations of
+[0:43:08] evaluations of uh vaccines um during the pandemic um
+[0:43:11] uh vaccines um during the pandemic um these were based on matching methods. I
+[0:43:13] these were based on matching methods. I would I would argue for this and other
+[0:43:15] would I would argue for this and other reasons to also logistic reasons.
+[0:43:18] reasons to also logistic reasons. Um from the standpoint of statistical
+[0:43:19] Um from the standpoint of statistical efficiency, we see that the implied
+[0:43:21] efficiency, we see that the implied weights of matching are costly. They're
+[0:43:24] weights of matching are costly. They're very constrained. Uh the ones of
+[0:43:26] very constrained. Uh the ones of regression are essentially
+[0:43:27] regression are essentially unconstrained. So in terms of efficiency
+[0:43:31] unconstrained. So in terms of efficiency um I I would argue that these methods
+[0:43:33] um I I would argue that these methods are preferable.
+[0:43:35] are preferable. And then in terms of computational
+[0:43:36] And then in terms of computational tractability, in general the matching
+[0:43:38] tractability, in general the matching methods that I presented are these
+[0:43:40] methods that I presented are these NP-hard problems. So the other methods
+[0:43:42] NP-hard problems. So the other methods um
+[0:43:44] um um
+[0:43:46] um would more readily scale to larger data
+[0:43:48] would more readily scale to larger data sets.
+[0:43:49] sets. But the point is that here um
+[0:43:53] But the point is that here um we should not shy away I think from
+[0:43:54] we should not shy away I think from these more difficult matching problems
+[0:43:57] these more difficult matching problems because they have the NP-hard label
+[0:43:59] because they have the NP-hard label because in very large instances of these
+[0:44:01] because in very large instances of these problems, we have been able to solve
+[0:44:03] problems, we have been able to solve them just fine. Which is I think is an
+[0:44:05] them just fine. Which is I think is an interesting behavior of these um
+[0:44:07] interesting behavior of these um uh general IPs and mixed integer
+[0:44:09] uh general IPs and mixed integer programs because
+[0:44:11] programs because the in in the typical instance there
+[0:44:13] the in in the typical instance there seems to be a lot of structure that can
+[0:44:15] seems to be a lot of structure that can be exploited by by generic solvers.
+[0:44:19] be exploited by by generic solvers. Um I wish to thank P. Corey and Sloan
+[0:44:22] Um I wish to thank P. Corey and Sloan for for their support and stop here at
+[0:44:25] for for their support and stop here at the
+[0:44:25] the 45-minute mark so that I can
+[0:44:28] 45-minute mark so that I can provide comments. Thank you a lot.
+[0:44:34] Uh thank you, Jose, and thank you for staying on time. Uh we do have a
+[0:44:36] staying on time. Uh we do have a question Q&amp;A, but let's move to
+[0:44:38] question Q&amp;A, but let's move to discussion first and then if we have
+[0:44:40] discussion first and then if we have time in the end um
+[0:44:42] time in the end um we can uh get to the question.
+[0:44:45] we can uh get to the question. Um so, Mike, if you uh want to share
+[0:44:47] Um so, Mike, if you uh want to share your screen and
+[0:44:49] your screen and lead us through the discussion.
+[0:44:51] lead us through the discussion. Sure.
+[0:44:57] I think I need to switch it. Is this now showing the full screen?
+[0:44:58] showing the full screen? Yes.
+[0:44:58] Yes. Yes, okay. Jose, I'm very impressed
+[0:45:00] Yes, okay. Jose, I'm very impressed about Like you were exactly 45 minutes.
+[0:45:02] about Like you were exactly 45 minutes. That's commendable.
+[0:45:03] That's commendable. Um so, writing commentary like it's a
+[0:45:07] Um so, writing commentary like it's a little bit of a challenge. What do you
+[0:45:08] little bit of a challenge. What do you do? I mean, this this person just
+[0:45:10] do? I mean, this this person just explained their research in really great
+[0:45:12] explained their research in really great detail. And so, do I just re-tread that?
+[0:45:14] detail. And so, do I just re-tread that? Do I summarize?
+[0:45:15] Do I summarize? Um I'm going to go for trying to place
+[0:45:18] Um I'm going to go for trying to place this work in context in very large
+[0:45:20] this work in context in very large context and sort of like what is going
+[0:45:22] context and sort of like what is going on in causal inference? What is going on
+[0:45:24] on in causal inference? What is going on in data science uh level kind of uh
+[0:45:26] in data science uh level kind of uh thing.
+[0:45:27] thing. So, um I am trying to provide like sort
+[0:45:30] So, um I am trying to provide like sort of friendly commentary to like other
+[0:45:32] of friendly commentary to like other sort of junior causal inference folks,
+[0:45:35] sort of junior causal inference folks, maybe like sort of Screwtape Letters uh
+[0:45:38] maybe like sort of Screwtape Letters uh uh letters kind of thing here. So,
+[0:45:40] uh letters kind of thing here. So, let's start where Jose did. What what
+[0:45:42] let's start where Jose did. What what was he doing right at the very
+[0:45:43] was he doing right at the very beginning? Well, he start starts with
+[0:45:45] beginning? Well, he start starts with thinking about sampling and randomized
+[0:45:47] thinking about sampling and randomized control trials, which is where a lot of
+[0:45:49] control trials, which is where a lot of us who are trying to describe causal
+[0:45:51] us who are trying to describe causal inference start because that's where we
+[0:45:52] inference start because that's where we we reach back and we look at that
+[0:45:54] we reach back and we look at that because it is a very strong form of
+[0:45:56] because it is a very strong form of inference for us.
+[0:45:58] inference for us. Um and why is that true? Well, that's
+[0:46:00] Um and why is that true? Well, that's because
+[0:46:01] because as statisticians,
+[0:46:03] as statisticians, we create a data generating function. We
+[0:46:06] we create a data generating function. We reach into the world, we cause something
+[0:46:08] reach into the world, we cause something to happen, and then the following forms
+[0:46:11] to happen, and then the following forms of inference are predicated on that. So,
+[0:46:13] of inference are predicated on that. So, it's it's almost like a geometry or
+[0:46:15] it's it's almost like a geometry or something like that, where it's like,
+[0:46:16] something like that, where it's like, yes, it's rigorous mathematics, but it
+[0:46:18] yes, it's rigorous mathematics, but it is
+[0:46:19] is uh something where we can find it
+[0:46:20] uh something where we can find it intersection with the world. It's not
+[0:46:22] intersection with the world. It's not propositional, maybe the way like models
+[0:46:24] propositional, maybe the way like models are. We don't say we don't conjecture
+[0:46:26] are. We don't say we don't conjecture that something is linear, and then we
+[0:46:27] that something is linear, and then we try to like argue that that might be
+[0:46:29] try to like argue that that might be true. The reason we reach we keep
+[0:46:31] true. The reason we reach we keep reaching back to these forms of
+[0:46:32] reaching back to these forms of inference and causal inference because
+[0:46:33] inference and causal inference because they are the strongest ones we know.
+[0:46:37] they are the strongest ones we know. If we can find something in the real
+[0:46:38] If we can find something in the real world that looks like that, maybe it's a
+[0:46:40] world that looks like that, maybe it's a slightly divergent, maybe we have to do
+[0:46:41] slightly divergent, maybe we have to do a sensitivity analysis, but we are
+[0:46:43] a sensitivity analysis, but we are getting close to that. So, that's
+[0:46:45] getting close to that. So, that's usually if you ask most of us, that's
+[0:46:46] usually if you ask most of us, that's probably we'll probably give you some
+[0:46:48] probably we'll probably give you some argument like that.
+[0:46:49] argument like that. What Jose's doing is slightly different.
+[0:46:51] What Jose's doing is slightly different. There he does that, but there's also a
+[0:46:54] There he does that, but there's also a really important part here, which is
+[0:46:56] really important part here, which is that sampling in RCTs
+[0:46:58] that sampling in RCTs are transparently convincing.
+[0:47:02] are transparently convincing. So, when we think about them and when we
+[0:47:05] So, when we think about them and when we think about them we we spend a lot of
+[0:47:06] think about them we we spend a lot of time thinking as like causal inference
+[0:47:07] time thinking as like causal inference folks, but to our collaborators, they
+[0:47:09] folks, but to our collaborators, they can almost see what's happening. They
+[0:47:12] can almost see what's happening. They can they can think about if I broke
+[0:47:13] can they can think about if I broke these two into groups and I did it in a
+[0:47:15] these two into groups and I did it in a random kind of process, but maybe I like
+[0:47:17] random kind of process, but maybe I like did some blocking.
+[0:47:18] did some blocking. Now, I can think about if I set them
+[0:47:20] Now, I can think about if I set them into the future and like watch what
+[0:47:21] into the future and like watch what happens. Like, yeah, that will probably
+[0:47:23] happens. Like, yeah, that will probably convince me that there's some causal
+[0:47:25] convince me that there's some causal difference there. So,
+[0:47:27] difference there. So, don't get confused. There is both of
+[0:47:29] don't get confused. There is both of these happening, but I'm going to
+[0:47:30] these happening, but I'm going to emphasize the part uh which I found very
+[0:47:33] emphasize the part uh which I found very interesting and very instructive to me,
+[0:47:35] interesting and very instructive to me, which was uh
+[0:47:37] which was uh Jose pulling out these features and that
+[0:47:39] Jose pulling out these features and that other people thought about as well about
+[0:47:41] other people thought about as well about different features of let's just sort of
+[0:47:43] different features of let's just sort of think of this as like randomized
+[0:47:44] think of this as like randomized experiments, but some of this applies to
+[0:47:46] experiments, but some of this applies to sampling as well about why we should be
+[0:47:48] sampling as well about why we should be convinced or why we find these um useful
+[0:47:51] convinced or why we find these um useful forms of data generating functions. So,
+[0:47:53] forms of data generating functions. So, covariate balance, study
+[0:47:54] covariate balance, study representativeness, self-weighting
+[0:47:56] representativeness, self-weighting sampling, uh and sample badness, which
+[0:47:58] sampling, uh and sample badness, which are not know, we spend a lot of time I
+[0:48:00] are not know, we spend a lot of time I think in general in causal inference
+[0:48:01] think in general in causal inference thinking about covariate balance and
+[0:48:03] thinking about covariate balance and maybe like we think about
+[0:48:04] maybe like we think about transportability and that kind of stuff.
+[0:48:05] transportability and that kind of stuff. But some of these other ones are a
+[0:48:06] But some of these other ones are a little bit subtle. So I'm going to like
+[0:48:07] little bit subtle. So I'm going to like emphasize a little bit more some of the
+[0:48:08] emphasize a little bit more some of the self-weighted sampling and sample
+[0:48:10] self-weighted sampling and sample boundedness.
+[0:48:12] boundedness. Um
+[0:48:17] At the core of good causal inference is convincing.
+[0:48:19] convincing. All right, like you know, sometimes we
+[0:48:20] All right, like you know, sometimes we like we forget especially the academic
+[0:48:22] like we forget especially the academic statisticians in the audience that like
+[0:48:24] statisticians in the audience that like we think it's all about like proving
+[0:48:26] we think it's all about like proving fancy theorems and that kind of stuff.
+[0:48:27] fancy theorems and that kind of stuff. But we are really being held to task
+[0:48:29] But we are really being held to task that like we need to take real-world
+[0:48:32] that like we need to take real-world data, compress it in a useful way, and
+[0:48:35] data, compress it in a useful way, and then give rigorous conclusions to our
+[0:48:37] then give rigorous conclusions to our audience. Like that's our job. Like
+[0:48:39] audience. Like that's our job. Like that's I mean yes, we're we're some of
+[0:48:41] that's I mean yes, we're we're some of us are trying to get tenure, so we're
+[0:48:42] us are trying to get tenure, so we're going to do some fancy math and like
+[0:48:43] going to do some fancy math and like Jose does that. I'll point that out. But
+[0:48:46] Jose does that. I'll point that out. But we need to be able to draw these
+[0:48:48] we need to be able to draw these rigorous conclusions. And if you haven't
+[0:48:50] rigorous conclusions. And if you haven't and again, if you're like sort of a
+[0:48:51] and again, if you're like sort of a younger statistician even if you're sort
+[0:48:52] younger statistician even if you're sort of like in the middle ages of uh
+[0:48:54] of like in the middle ages of uh statistician, check out Bradford Hill.
+[0:48:56] statistician, check out Bradford Hill. So the environment and diseases in 1965
+[0:48:59] So the environment and diseases in 1965 paper. And if you've seen this before,
+[0:49:00] paper. And if you've seen this before, there's like the Bradford Hill criterion
+[0:49:02] there's like the Bradford Hill criterion and everybody's sort of like loves like
+[0:49:03] and everybody's sort of like loves like trashing and that kind of stuff cuz he
+[0:49:04] trashing and that kind of stuff cuz he he didn't get it right. But if you read
+[0:49:06] he didn't get it right. But if you read that paper,
+[0:49:08] that paper, you can see that what he's he actually
+[0:49:10] you can see that what he's he actually sort of sta- he takes a stake where he
+[0:49:12] sort of sta- he takes a stake where he says, you know, T test is super cool,
+[0:49:14] says, you know, T test is super cool, but like who cares? I'm here to
+[0:49:17] but like who cares? I'm here to reach into the world and and say like,
+[0:49:19] reach into the world and and say like, "Hey, that might be dangerous. We need
+[0:49:20] "Hey, that might be dangerous. We need to shut this machine down."
+[0:49:22] to shut this machine down." He's making those kinds of calls, which
+[0:49:24] He's making those kinds of calls, which are causal conjectures in the on you
+[0:49:27] are causal conjectures in the on you know, on under uncertainty. And um
+[0:49:31] know, on under uncertainty. And um it just really when I read this, it
+[0:49:33] it just really when I read this, it really like hit me um that our job is to
+[0:49:37] really like hit me um that our job is to as as causal inference people,
+[0:49:39] as as causal inference people, sometimes and I and I want to I really
+[0:49:42] sometimes and I and I want to I really like uh Jose's lecture because there's
+[0:49:43] like uh Jose's lecture because there's two parts. And so for his first part,
+[0:49:46] two parts. And so for his first part, there are sometimes when we're entering
+[0:49:48] there are sometimes when we're entering at interacting with an audience, think
+[0:49:49] at interacting with an audience, think like a medical doctor or we're thinking
+[0:49:51] like a medical doctor or we're thinking about like a policy, you know,
+[0:49:53] about like a policy, you know, educational policy person. We need to
+[0:49:55] educational policy person. We need to create an analysis that we can hand over
+[0:49:57] create an analysis that we can hand over to them that they can look at and they
+[0:49:59] to them that they can look at and they could say, "Hey, I don't like this. I
+[0:50:00] could say, "Hey, I don't like this. I find this this is wrong. Here's where I
+[0:50:02] find this this is wrong. Here's where I think you've got the analysis wrong." We
+[0:50:04] think you've got the analysis wrong." We need to be able to hand over data-based
+[0:50:07] need to be able to hand over data-based arguments
+[0:50:08] arguments that will either be convincing or not,
+[0:50:11] that will either be convincing or not, but they can be interrogated by the
+[0:50:12] but they can be interrogated by the people we're talking with, right? And so
+[0:50:15] people we're talking with, right? And so at least two discernibly different
+[0:50:17] at least two discernibly different audiences, sorry, Jose engages at these
+[0:50:20] audiences, sorry, Jose engages at these two different audiences during during
+[0:50:22] two different audiences during during this. So let's start with profile
+[0:50:23] this. So let's start with profile matching, which I think is a very
+[0:50:25] matching, which I think is a very clever, very thoughtful way to think
+[0:50:26] clever, very thoughtful way to think about building out
+[0:50:28] about building out some of this. So
+[0:50:29] some of this. So again, lots of different things going on
+[0:50:31] again, lots of different things going on with profile matching and I'm
+[0:50:32] with profile matching and I'm simplifying down, but we're when he was
+[0:50:35] simplifying down, but we're when he was engaging this, he's talking to an
+[0:50:37] engaging this, he's talking to an applied audience. He's thinking about,
+[0:50:39] applied audience. He's thinking about, "I have a profile. Listen, you know, I'm
+[0:50:41] "I have a profile. Listen, you know, I'm going to go talk to my applied colleague
+[0:50:44] going to go talk to my applied colleague and say, where are you going to think
+[0:50:46] and say, where are you going to think about this causality coming into the
+[0:50:48] about this causality coming into the world? Describe that to me. Give me a
+[0:50:50] world? Describe that to me. Give me a profile. Maybe it's like these are the
+[0:50:53] profile. Maybe it's like these are the kinds of students or maybe it's Tom. We
+[0:50:55] kinds of students or maybe it's Tom. We want to think what happened to Tom."
+[0:50:57] want to think what happened to Tom." That's also sort of a neat feature of
+[0:50:58] That's also sort of a neat feature of profile matching that we can maybe zoom
+[0:51:00] profile matching that we can maybe zoom in and think about heterogeneous
+[0:51:01] in and think about heterogeneous treatment effects down at individuals.
+[0:51:02] treatment effects down at individuals. So, but you describe a profile,
+[0:51:05] So, but you describe a profile, dear colleague, and I will generate a
+[0:51:10] dear colleague, and I will generate a study design that will get you in that
+[0:51:12] study design that will get you in that native language of that you just gave it
+[0:51:13] native language of that you just gave it to me,
+[0:51:14] to me, some analysis that will be fairly
+[0:51:16] some analysis that will be fairly rigorous and you can interrogate that.
+[0:51:18] rigorous and you can interrogate that. And the emphasis there, I really I keep
+[0:51:20] And the emphasis there, I really I keep using this this kind of hand gesture
+[0:51:21] using this this kind of hand gesture partly because I'm probably descended
+[0:51:23] partly because I'm probably descended from Italian, but like the other thing
+[0:51:24] from Italian, but like the other thing is that like
+[0:51:25] is that like we're pinching or we're going down to
+[0:51:27] we're pinching or we're going down to individual weights, right? We're not
+[0:51:30] individual weights, right? We're not expanding, we're not contracting, we're
+[0:51:31] expanding, we're not contracting, we're talking to an applied person in their
+[0:51:34] talking to an applied person in their native language of that they can use
+[0:51:36] native language of that they can use their intuition.
+[0:51:38] their intuition. Right? So when we're when Jose is
+[0:51:39] Right? So when we're when Jose is invoking idea of self weights,
+[0:51:42] invoking idea of self weights, he's constraining our analysis and our
+[0:51:44] he's constraining our analysis and our our flexibility, our mathematical
+[0:51:46] our flexibility, our mathematical structures to only be built out of LEGO
+[0:51:50] structures to only be built out of LEGO pieces that look like LEGO pieces that
+[0:51:52] pieces that look like LEGO pieces that our applied collaborators can think
+[0:51:54] our applied collaborators can think about very easily. They've built a lot a
+[0:51:56] about very easily. They've built a lot a lot of experience that we don't have.
+[0:51:58] lot of experience that we don't have. Wait, we get data sets. They have lived
+[0:52:01] Wait, we get data sets. They have lived experiences. So, when we keep our
+[0:52:03] experiences. So, when we keep our analyses in these self-weighted units,
+[0:52:06] analyses in these self-weighted units, they can bring to bear knowledge that we
+[0:52:08] they can bring to bear knowledge that we don't have. We are really great with
+[0:52:10] don't have. We are really great with data, but they have deep experience that
+[0:52:13] data, but they have deep experience that we don't have, right? So, and again, I
+[0:52:15] we don't have, right? So, and again, I love this. Go through this paper.
+[0:52:16] love this. Go through this paper. There's there's a lot of like nice
+[0:52:18] There's there's a lot of like nice little gems along the way.
+[0:52:20] little gems along the way. But, I don't want to like undersell
+[0:52:21] But, I don't want to like undersell this. Like, you know, the hard part here
+[0:52:23] this. Like, you know, the hard part here really is like knapsack problem, right?
+[0:52:25] really is like knapsack problem, right? Like, cool like optimization. How do we
+[0:52:28] Like, cool like optimization. How do we implement this? How do we do that?
+[0:52:29] implement this? How do we do that? That's our job, statisticians. We're and
+[0:52:32] That's our job, statisticians. We're and and you know, sort of data scientists in
+[0:52:33] and you know, sort of data scientists in general, but we're doing it off stage.
+[0:52:36] general, but we're doing it off stage. Like, the hard part is not for our
+[0:52:37] Like, the hard part is not for our applied colleagues. We bring back an
+[0:52:39] applied colleagues. We bring back an analysis that is in their language, and
+[0:52:42] analysis that is in their language, and we do all the hard part off stage. We
+[0:52:43] we do all the hard part off stage. We get everything prepped. That's where the
+[0:52:44] get everything prepped. That's where the math the hard math happens. It shouldn't
+[0:52:46] math the hard math happens. It shouldn't happen in front of them for this kind of
+[0:52:48] happen in front of them for this kind of target audience. So, again, let me let
+[0:52:49] target audience. So, again, let me let me get that clear. It's like, he's
+[0:52:51] me get that clear. It's like, he's talking to an applied audience at this
+[0:52:53] talking to an applied audience at this moment. He's thinking about people who
+[0:52:54] moment. He's thinking about people who are going to describe in their own
+[0:52:56] are going to describe in their own language a profile for where the
+[0:52:58] language a profile for where the inference is going to have or where the
+[0:52:59] inference is going to have or where the causality is going to happen, and then
+[0:53:00] causality is going to happen, and then it's our job to do hard math and bring
+[0:53:02] it's our job to do hard math and bring things back that will be very
+[0:53:03] things back that will be very convincing.
+[0:53:05] convincing. Um
+[0:53:06] Um then in the second half or second part,
+[0:53:09] then in the second half or second part, um Jose starts thinking about linear
+[0:53:11] um Jose starts thinking about linear regression.
+[0:53:12] regression. And we've switched to a different
+[0:53:14] And we've switched to a different audience. We're dealing with a little
+[0:53:15] audience. We're dealing with a little bit more of a sophisticated audience.
+[0:53:16] bit more of a sophisticated audience. Maybe I mean, I don't want to say that
+[0:53:17] Maybe I mean, I don't want to say that much more cuz they're like just
+[0:53:18] much more cuz they're like just economists, right? Cuz they're not that
+[0:53:20] economists, right? Cuz they're not that sophisticated.
+[0:53:22] sophisticated. I mean, look at the attendance audience.
+[0:53:23] I mean, look at the attendance audience. I'm sorry if there are many economists I
+[0:53:24] I'm sorry if there are many economists I just made that. Um but, linear
+[0:53:26] just made that. Um but, linear regression, it's out there. The
+[0:53:27] regression, it's out there. The computation is super fast, you know, the
+[0:53:30] computation is super fast, you know, the linearity makes sense, um and it and it
+[0:53:32] linearity makes sense, um and it and it and it's everywhere, right? Um so, it's
+[0:53:34] and it's everywhere, right? Um so, it's a really important part of you know,
+[0:53:36] a really important part of you know, causal inference. Even if like maybe
+[0:53:38] causal inference. Even if like maybe we've all been taught about all its
+[0:53:39] we've all been taught about all its problems that we think about that.
+[0:53:41] problems that we think about that. I'll tell you. Like, I I If you asked me
+[0:53:43] I'll tell you. Like, I I If you asked me or if you asked like any of us before we
+[0:53:44] or if you asked like any of us before we started hearing Jose talk, we would know
+[0:53:46] started hearing Jose talk, we would know that there's like yeah, under certain
+[0:53:48] that there's like yeah, under certain circumstances we could get kind of close
+[0:53:50] circumstances we could get kind of close to causality, but I couldn't have
+[0:53:52] to causality, but I couldn't have thought through
+[0:53:54] thought through quickly what the implied weights are or
+[0:53:55] quickly what the implied weights are or something like that.
+[0:53:57] something like that. Or sorry, I should say the implied study
+[0:53:58] Or sorry, I should say the implied study design. I could probably tell you
+[0:54:00] design. I could probably tell you something like hey, it's maybe like
+[0:54:01] something like hey, it's maybe like conditional on the covariates you have
+[0:54:03] conditional on the covariates you have and there's something like but I
+[0:54:04] and there's something like but I wouldn't have thought like carefully
+[0:54:06] wouldn't have thought like carefully about those weights and that's really,
+[0:54:07] about those weights and that's really, you know, important.
+[0:54:08] you know, important. Um and circling back to I'll say it
+[0:54:11] Um and circling back to I'll say it sorry, I'll return to that third bullet
+[0:54:13] sorry, I'll return to that third bullet point there in just just like another
+[0:54:14] point there in just just like another slide or two. Um
+[0:54:16] slide or two. Um but like what was the like sort of the
+[0:54:18] but like what was the like sort of the payoff of this line of research
+[0:54:21] payoff of this line of research or this like sort of paper is like
+[0:54:23] or this like sort of paper is like there's a moment where and
+[0:54:25] there's a moment where and where Jose points out like yes, it
+[0:54:27] where Jose points out like yes, it achieves the exact balance under some
+[0:54:28] achieves the exact balance under some conditions, but maybe and that's like
+[0:54:30] conditions, but maybe and that's like useful. That's one of the four criteria
+[0:54:32] useful. That's one of the four criteria that we sort of think about in sort of
+[0:54:34] that we sort of think about in sort of experimental designs that like are super
+[0:54:36] experimental designs that like are super useful for if the two groups looked
+[0:54:37] useful for if the two groups looked alike at baseline and then we walk
+[0:54:39] alike at baseline and then we walk through a few, but
+[0:54:41] through a few, but because he was very careful and his
+[0:54:43] because he was very careful and his collaborators I should make sure say his
+[0:54:44] collaborators I should make sure say his collaborators were very careful about
+[0:54:45] collaborators were very careful about this. There are other ways in which it
+[0:54:47] this. There are other ways in which it fails. And the payoff really is and this
+[0:54:50] fails. And the payoff really is and this is why you have to read this paper. This
+[0:54:51] is why you have to read this paper. This is really useful. They've now got some
+[0:54:53] is really useful. They've now got some nice plots, some ways of thinking about
+[0:54:56] nice plots, some ways of thinking about and interrogating for this type of
+[0:54:57] and interrogating for this type of audience, for cons, for folks who think
+[0:55:00] audience, for cons, for folks who think about causal inference using linear
+[0:55:01] about causal inference using linear models, ways to assess if some of the
+[0:55:03] models, ways to assess if some of the other criteria or like things that we
+[0:55:05] other criteria or like things that we features that we find convincing about
+[0:55:07] features that we find convincing about experimental designs are failing.
+[0:55:10] experimental designs are failing. But it's get it gets one thing exact
+[0:55:11] But it's get it gets one thing exact balance, but like hey, we've got like
+[0:55:13] balance, but like hey, we've got like negative people or something like that
+[0:55:14] negative people or something like that or like you know, like there's some
+[0:55:15] or like you know, like there's some weird things along the way that you
+[0:55:16] weird things along the way that you might want to assess because
+[0:55:19] might want to assess because it may cause problems. And now we can
+[0:55:21] it may cause problems. And now we can look at that more carefully. That's the
+[0:55:22] look at that more carefully. That's the kind of payoff that we're getting.
+[0:55:24] kind of payoff that we're getting. All right. Um so the last two major
+[0:55:27] All right. Um so the last two major points that I'll make on this slide and
+[0:55:28] points that I'll make on this slide and the next one.
+[0:55:29] the next one. Um probably inside causal inference,
+[0:55:32] Um probably inside causal inference, I'll tell you like so that I sort of got
+[0:55:33] I'll tell you like so that I sort of got my PhD in 2010.
+[0:55:35] my PhD in 2010. There's a lot of different tribes
+[0:55:37] There's a lot of different tribes running around inside of causal
+[0:55:38] running around inside of causal inference, you know, like the matchers
+[0:55:40] inference, you know, like the matchers and the inverse probability weights and
+[0:55:41] and the inverse probability weights and target maximum likelihood. There's like
+[0:55:42] target maximum likelihood. There's like just lots of folks running around. And
+[0:55:45] just lots of folks running around. And sometimes they talk to each other in
+[0:55:47] sometimes they talk to each other in openly positive ways. Um but it and we
+[0:55:50] openly positive ways. Um but it and we all knew that they were sort of
+[0:55:52] all knew that they were sort of different and maybe you would say
+[0:55:52] different and maybe you would say something like, "Hey, matching things
+[0:55:55] something like, "Hey, matching things about like one-off random you know, like
+[0:55:57] about like one-off random you know, like causal
+[0:55:58] causal sort of exposures." And maybe like
+[0:56:01] sort of exposures." And maybe like inverse probability weights are sort of
+[0:56:02] inverse probability weights are sort of more epidemiologists, so they're
+[0:56:03] more epidemiologists, so they're thinking like longitudinally or
+[0:56:04] thinking like longitudinally or something like that. Lots of different
+[0:56:05] something like that. Lots of different exposures, maybe target maximum
+[0:56:07] exposures, maybe target maximum likelihood grew out of like a different
+[0:56:08] likelihood grew out of like a different culture where there's like better
+[0:56:09] culture where there's like better measurements of of folks and the
+[0:56:11] measurements of of folks and the behaviors are a little bit like
+[0:56:12] behaviors are a little bit like differently constrained. You know,
+[0:56:14] differently constrained. You know, something like that. You could
+[0:56:16] something like that. You could But what Jose is trying to do here and
+[0:56:17] But what Jose is trying to do here and his collaborators, they've been thinking
+[0:56:19] his collaborators, they've been thinking very carefully not about directly
+[0:56:21] very carefully not about directly contrasting them, but sort of like a
+[0:56:23] contrasting them, but sort of like a Rosetta Stone. They're moving things
+[0:56:25] Rosetta Stone. They're moving things into experimental design framework,
+[0:56:29] into experimental design framework, thinking in terms of the weights. So, we
+[0:56:31] thinking in terms of the weights. So, we now have an ability to sort of and other
+[0:56:33] now have an ability to sort of and other folks have done this as well. I don't
+[0:56:34] folks have done this as well. I don't want to say that they don't, but like
+[0:56:35] want to say that they don't, but like they've done a really nice job of
+[0:56:37] they've done a really nice job of making it easy to move into something
+[0:56:39] making it easy to move into something that we feel comfortable with
+[0:56:40] that we feel comfortable with experimental design and then move back
+[0:56:42] experimental design and then move back out to another method. And it allows us
+[0:56:44] out to another method. And it allows us to think very clearly and carefully
+[0:56:46] to think very clearly and carefully about where the wins are, the
+[0:56:47] about where the wins are, the differences, and that kind of stuff.
+[0:56:49] differences, and that kind of stuff. Again, I think a lot of us carry these
+[0:56:51] Again, I think a lot of us carry these intuitions, but now it's like written
+[0:56:53] intuitions, but now it's like written out in very nice detail. It's a It's a
+[0:56:55] out in very nice detail. It's a It's a wonderful addition to the literature.
+[0:56:57] wonderful addition to the literature. Here's the last piece I want to leave
+[0:56:58] Here's the last piece I want to leave you folks with and this is a really I'm
+[0:57:00] you folks with and this is a really I'm getting meta. Um is right now sitting in
+[0:57:03] getting meta. Um is right now sitting in this time period, there's a lot of
+[0:57:05] this time period, there's a lot of different data science cultures. You
+[0:57:08] different data science cultures. You know, if you're on this call, you are
+[0:57:09] know, if you're on this call, you are probably self-described as something
+[0:57:11] probably self-described as something like a causal inference person. We are
+[0:57:13] like a causal inference person. We are all competing for different attention.
+[0:57:15] all competing for different attention. And this is sort of like I'm I'm I'm
+[0:57:16] And this is sort of like I'm I'm I'm calling out the machine learning folks
+[0:57:17] calling out the machine learning folks in the in the sort of black box in
+[0:57:19] in the in the sort of black box in particular.
+[0:57:21] particular. If you've been on Twitter, if you've
+[0:57:22] If you've been on Twitter, if you've been anywhere, like you've seen like
+[0:57:23] been anywhere, like you've seen like chat GPT and it's like, "Holy cow. This
+[0:57:26] chat GPT and it's like, "Holy cow. This is like magic." Like there's another
+[0:57:27] is like magic." Like there's another data science culture that has come along
+[0:57:30] data science culture that has come along and is doing massively interesting
+[0:57:31] and is doing massively interesting things. We wouldn't have done that,
+[0:57:34] things. We wouldn't have done that, right? Like there's no person who's like
+[0:57:36] right? Like there's no person who's like going to build up language models in a
+[0:57:37] going to build up language models in a causal inference way and get to there.
+[0:57:39] causal inference way and get to there. What are they doing? They're doing
+[0:57:40] What are they doing? They're doing something different.
+[0:57:42] something different. Right? And we started to engage and we
+[0:57:44] Right? And we started to engage and we started thinking about like pulling
+[0:57:45] started thinking about like pulling black boxes apart and maybe using some
+[0:57:47] black boxes apart and maybe using some causal inference or sampling things to
+[0:57:48] causal inference or sampling things to get in there. There's some really neat
+[0:57:49] get in there. There's some really neat work on that.
+[0:57:51] work on that. But I want to like pull you back and put
+[0:57:53] But I want to like pull you back and put this in contrast with the stuff that
+[0:57:54] this in contrast with the stuff that Jose and his team is doing right here
+[0:57:56] Jose and his team is doing right here just to sort of reassure you that what
+[0:57:58] just to sort of reassure you that what we are doing is very interesting and
+[0:57:59] we are doing is very interesting and very different and and it's
+[0:58:00] very different and and it's differentiated, right?
+[0:58:02] differentiated, right? When they build their algorithms, they
+[0:58:04] When they build their algorithms, they are their proof is in the in the sort of
+[0:58:06] are their proof is in the in the sort of like prediction space. We have built up
+[0:58:09] like prediction space. We have built up rigorous arguments where we are trying
+[0:58:11] rigorous arguments where we are trying to convince people that the pieces along
+[0:58:13] to convince people that the pieces along the way work and that you should that
+[0:58:15] the way work and that you should that the conclusions themselves should be
+[0:58:17] the conclusions themselves should be doing the things that we think they're
+[0:58:18] doing the things that we think they're there.
+[0:58:19] there. Also, in particular,
+[0:58:21] Also, in particular, let me try to say it this way, too, is
+[0:58:23] let me try to say it this way, too, is Jose's team is also trying to keep
+[0:58:25] Jose's team is also trying to keep things keep our analyses in the native
+[0:58:27] things keep our analyses in the native language or in a in a accessible way a
+[0:58:29] language or in a in a accessible way a way that can be challenged
+[0:58:31] way that can be challenged when we hand the analysis over. When you
+[0:58:33] when we hand the analysis over. When you use like a sample weight or you think
+[0:58:34] use like a sample weight or you think about the boundedness and you look you
+[0:58:36] about the boundedness and you look you think about like hey the regression is
+[0:58:37] think about like hey the regression is putting the weights in the wrong place.
+[0:58:39] putting the weights in the wrong place. There's like nobody there. Right? Like
+[0:58:41] There's like nobody there. Right? Like when we were with a hypothetical
+[0:58:43] when we were with a hypothetical population does it may not even exist.
+[0:58:44] population does it may not even exist. Are we even doing something? Nobody
+[0:58:46] Are we even doing something? Nobody cares about that in machine learning.
+[0:58:48] cares about that in machine learning. Like that's not the GPT-3 you know the
+[0:58:50] Like that's not the GPT-3 you know the GPT stuff like nobody's talking nobody
+[0:58:52] GPT stuff like nobody's talking nobody cares about that. But we do because
+[0:58:54] cares about that. But we do because we're going to hand this over and people
+[0:58:55] we're going to hand this over and people are going to interrogate and pull apart
+[0:58:57] are going to interrogate and pull apart our analyses and that's the right thing.
+[0:58:59] our analyses and that's the right thing. If we're going to make like Jose ended
+[0:59:00] If we're going to make like Jose ended it this way is like if we're going to
+[0:59:02] it this way is like if we're going to tell people what to do with COVID people
+[0:59:03] tell people what to do with COVID people are going to die. Like we need to be
+[0:59:05] are going to die. Like we need to be very careful and on our job we also need
+[0:59:07] very careful and on our job we also need to give an analysis that can be assessed
+[0:59:09] to give an analysis that can be assessed by other people who have different skill
+[0:59:11] by other people who have different skill sets.
+[0:59:12] sets. I'll leave this with this last this is a
+[0:59:14] I'll leave this with this last this is a proposition is I think our unique
+[0:59:16] proposition is I think our unique strength as statisticians as causal
+[0:59:18] strength as statisticians as causal inference people is we are very
+[0:59:19] inference people is we are very thoughtful
+[0:59:21] thoughtful in a way that other data science
+[0:59:22] in a way that other data science communities are about what data should
+[0:59:24] communities are about what data should come into existence. Right? So again,
+[0:59:27] come into existence. Right? So again, going all the way back, you know,
+[0:59:29] going all the way back, you know, sampling frameworks, randomized
+[0:59:31] sampling frameworks, randomized experiments. The reason we retreat to
+[0:59:33] experiments. The reason we retreat to that when we're under pressure is those
+[0:59:35] that when we're under pressure is those are the strongest forms of inference
+[0:59:37] are the strongest forms of inference that we know, and they are about as
+[0:59:39] that we know, and they are about as strong as we can ever get.
+[0:59:41] strong as we can ever get. And we are thinking about, given a study
+[0:59:44] And we are thinking about, given a study or given a question from our applied
+[0:59:45] or given a question from our applied researchers, what do we do? What data
+[0:59:47] researchers, what do we do? What data should be there? What what can we do to
+[0:59:49] should be there? What what can we do to bring in like the best quality data to
+[0:59:51] bring in like the best quality data to answer that question? That is our
+[0:59:53] answer that question? That is our strength. We are different than other
+[0:59:55] strength. We are different than other fields of data science because we think
+[0:59:57] fields of data science because we think about what data should come into
+[0:59:59] about what data should come into existence. Even when we're being
+[1:00:01] existence. Even when we're being observational, right? The big wins since
+[1:00:03] observational, right? The big wins since like the 1990s is the design features of
+[1:00:06] like the 1990s is the design features of causal inference. And that's a lot of
+[1:00:08] causal inference. And that's a lot of what like Jose and his team was talking
+[1:00:09] what like Jose and his team was talking about today is like, you get a data set,
+[1:00:11] about today is like, you get a data set, let's whittle it down or let's let's
+[1:00:13] let's whittle it down or let's let's move, you know, like let's upweight and
+[1:00:14] move, you know, like let's upweight and downweight such that the data we're
+[1:00:16] downweight such that the data we're about to analyze is is the stuff that
+[1:00:18] about to analyze is is the stuff that would answer the question question the
+[1:00:20] would answer the question question the best. So don't get I mean like be
+[1:00:22] best. So don't get I mean like be impressed. Machine learners are doing
+[1:00:24] impressed. Machine learners are doing fantastic things. But the causal
+[1:00:26] fantastic things. But the causal inference community has always been
+[1:00:27] inference community has always been doing something very important, which is
+[1:00:29] doing something very important, which is creating rigorous
+[1:00:31] creating rigorous designs
+[1:00:32] designs that think very carefully about what
+[1:00:34] that think very carefully about what data would really answer the question.
+[1:00:36] data would really answer the question. Right? And I I you see that through and
+[1:00:38] Right? And I I you see that through and through the work that Jose and his team
+[1:00:39] through the work that Jose and his team has been doing today. So I want to say
+[1:00:40] has been doing today. So I want to say congratulations on some very excellent
+[1:00:42] congratulations on some very excellent research, and you all should go and read
+[1:00:44] research, and you all should go and read their papers immediately.
+[1:00:50] Uh thank you, Mike. I thought I thought that was a a great combination of a talk
+[1:00:53] that was a a great combination of a talk and discussion. Thank you both. Uh Jose,
+[1:00:56] and discussion. Thank you both. Uh Jose, do you want to respond to some of Mike's
+[1:00:58] do you want to respond to some of Mike's many comments?
+[1:01:05] Um I have to say that uh I I learned a ton from listening to you,
+[1:01:07] I I learned a ton from listening to you, Mike, and and
+[1:01:09] Mike, and and emphasizing and explaining so
+[1:01:11] emphasizing and explaining so articulately uh
+[1:01:13] articulately uh how what we do connect to what um
+[1:01:15] how what we do connect to what um scientists and I don't know policy
+[1:01:18] scientists and I don't know policy analysts are
+[1:01:19] analysts are are doing and ultimately um
+[1:01:22] are doing and ultimately um what they care about. So I think that
+[1:01:24] what they care about. So I think that you you articulated that
+[1:01:26] you you articulated that way better than I did. Thank you. Also,
+[1:01:28] way better than I did. Thank you. Also, for your generous um
+[1:01:30] for your generous um um
+[1:01:32] um the description of the work. Um
+[1:01:36] the description of the work. Um I I I wish to answer one of the
+[1:01:37] I I I wish to answer one of the questions here in the the chat. It says,
+[1:01:40] questions here in the the chat. It says, "Any suggestions on which um on which
+[1:01:43] "Any suggestions on which um on which approach might be preferred when
+[1:01:45] approach might be preferred when ignorability's violated as it almost
+[1:01:48] ignorability's violated as it almost always is?" I agree. Strong ignorability
+[1:01:50] always is?" I agree. Strong ignorability is almost always violated.
+[1:01:53] is almost always violated. However, the point is that these methods
+[1:01:55] However, the point is that these methods are the building blocks um to use to be
+[1:01:59] are the building blocks um to use to be used under different designs, different
+[1:02:02] used under different designs, different assumptions. For example, with
+[1:02:03] assumptions. For example, with instrumental variables, you can use
+[1:02:05] instrumental variables, you can use matching or waiting or regression.
+[1:02:08] matching or waiting or regression. I think that what we try to do today in
+[1:02:10] I think that what we try to do today in the presentation is to differentiate
+[1:02:12] the presentation is to differentiate this method
+[1:02:13] this method in terms of, again, study design and
+[1:02:15] in terms of, again, study design and interpretability,
+[1:02:17] interpretability, um
+[1:02:18] um efficient use of the data at hand, and
+[1:02:20] efficient use of the data at hand, and the ability to handle large problems
+[1:02:22] the ability to handle large problems computationally.
+[1:02:23] computationally. And and in my mind, there isn't a winner
+[1:02:26] And and in my mind, there isn't a winner along the three dimensions.
+[1:02:28] along the three dimensions. So, so it depends again on who's your
+[1:02:29] So, so it depends again on who's your audience, as Mike is saying. What what
+[1:02:31] audience, as Mike is saying. What what would you like to emphasize?
+[1:02:37] All right. Thank you, Jose. Let's uh wrap up the seminar then for today, and
+[1:02:39] wrap up the seminar then for today, and uh
+[1:02:40] uh in fact, we are wrapping up the seminar
+[1:02:42] in fact, we are wrapping up the seminar for this year. So, we will see you again
+[1:02:44] for this year. So, we will see you again in January. We are doing something
+[1:02:46] in January. We are doing something special in January.
+[1:02:48] special in January. Uh the four talks starting on January
+[1:02:50] Uh the four talks starting on January 10th will be a mini seminar series on
+[1:02:53] 10th will be a mini seminar series on causality inference. So, we hope that we
+[1:02:56] causality inference. So, we hope that we will see you all on January 10th. Thank
+[1:02:58] will see you all on January 10th. Thank you for your attention.
+[1:02:59] you for your attention. And happy New Year.

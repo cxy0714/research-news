@@ -1,0 +1,1665 @@
+[0:00:04] okay welcome to the online causal inference seminar
+[0:00:06] inference seminar uh today we have two speakers who will
+[0:00:09] uh today we have two speakers who will talk for roughly 30 minutes each we have
+[0:00:12] talk for roughly 30 minutes each we have georgia from the university of florida
+[0:00:15] georgia from the university of florida talking about causal inference with
+[0:00:16] talking about causal inference with spatial temporal data
+[0:00:18] spatial temporal data estimating the effect of air strikes on
+[0:00:20] estimating the effect of air strikes on insurgent violence in iraq
+[0:00:23] insurgent violence in iraq in q a one of her collaborators fun will
+[0:00:26] in q a one of her collaborators fun will answer questions
+[0:00:27] answer questions and she might if we have enough time we
+[0:00:29] and she might if we have enough time we will also take some questions on air
+[0:00:32] will also take some questions on air the second speaker is leewa who will
+[0:00:35] the second speaker is leewa who will talk about
+[0:00:36] talk about conformal inference of counterfactuals
+[0:00:38] conformal inference of counterfactuals in individual individual treatment
+[0:00:40] in individual individual treatment effects
+[0:00:41] effects also in that case we have one of the
+[0:00:43] also in that case we have one of the collaborators emmanuel
+[0:00:45] collaborators emmanuel in q a and we're very much looking
+[0:00:48] in q a and we're very much looking forward to these talks
+[0:00:49] forward to these talks the questions are handled by michael so
+[0:00:52] the questions are handled by michael so i'm switching over to
+[0:00:54] i'm switching over to michael now uh thanks dominic uh so as
+[0:01:00] michael now uh thanks dominic uh so as dominic said
+[0:01:00] dominic said uh we're very lucky to have fondly and
+[0:01:02] uh we're very lucky to have fondly and emmanuel candace today to help us with
+[0:01:03] emmanuel candace today to help us with questions so
+[0:01:04] questions so please submit your questions through q a
+[0:01:07] please submit your questions through q a and
+[0:01:08] and uh we may ask you if you'd like to uh
+[0:01:10] uh we may ask you if you'd like to uh ask them
+[0:01:11] ask them live in which case i'll ask you to raise
+[0:01:13] live in which case i'll ask you to raise your hand
+[0:01:14] your hand and when we have time for questions uh
+[0:01:16] and when we have time for questions uh we will
+[0:01:17] we will allow you to ask it live so with that
+[0:01:21] allow you to ask it live so with that i'm gonna switch it over to georgia
+[0:01:28] who can uh so georgia please begin when you're ready
+[0:01:29] you're ready all right i'm gonna start sharing my
+[0:01:31] all right i'm gonna start sharing my screen
+[0:01:41] oh are you able to see my slides yes
+[0:01:45] are you able to see my slides yes um okay well uh thank you uh or
+[0:01:49] um okay well uh thank you uh or organizers for putting together this
+[0:01:51] organizers for putting together this excellent seminar series and for i'm i'm
+[0:01:53] excellent seminar series and for i'm i'm honored to be here
+[0:01:55] honored to be here um to present some of my work this is
+[0:01:57] um to present some of my work this is work that
+[0:01:58] work that uh we completed with my collaborators
+[0:02:00] uh we completed with my collaborators koshka in my jason leon
+[0:02:01] koshka in my jason leon fondly uh fun will be in the q a like
+[0:02:05] fondly uh fun will be in the q a like you said already um today i will be
+[0:02:07] you said already um today i will be talking to you about causal influence
+[0:02:08] talking to you about causal influence with spatial temporal
+[0:02:10] with spatial temporal point pattern data and the motivating
+[0:02:12] point pattern data and the motivating application is um
+[0:02:14] application is um the war in iraq so we will be working on
+[0:02:16] the war in iraq so we will be working on evaluating the effect of air strikes and
+[0:02:18] evaluating the effect of air strikes and insurgent violence
+[0:02:22] insurgent violence so um like i said we will be talk we
+[0:02:24] so um like i said we will be talk we will be discussing causal inference with
+[0:02:26] will be discussing causal inference with complex special temporal data and
+[0:02:29] complex special temporal data and in in our case the data are in the form
+[0:02:31] in in our case the data are in the form of time series of maps
+[0:02:33] of time series of maps so essentially the treatment and the
+[0:02:35] so essentially the treatment and the outcome are
+[0:02:36] outcome are locations in a continuous space
+[0:02:42] the methodological challenges that we have that we will be addressing
+[0:02:44] have that we will be addressing is the fact that spillover effects can
+[0:02:46] is the fact that spillover effects can occur
+[0:02:47] occur from one location to any other location
+[0:02:49] from one location to any other location in the country so treating one location
+[0:02:51] in the country so treating one location in iraq
+[0:02:52] in iraq might um lead to a change in insurgent
+[0:02:55] might um lead to a change in insurgent violence in any other place in iraq
+[0:02:57] violence in any other place in iraq but also there might be carryover
+[0:02:59] but also there might be carryover effects over time in the sense that
+[0:03:01] effects over time in the sense that treating one location might affect
+[0:03:03] treating one location might affect um the outcome process
+[0:03:06] um the outcome process in at any time in the future another
+[0:03:09] in at any time in the future another methodological challenge we have to face
+[0:03:11] methodological challenge we have to face um comes from the fact that the
+[0:03:14] um comes from the fact that the treatment and outcome are measured
+[0:03:15] treatment and outcome are measured measured in a continuous space and we
+[0:03:17] measured in a continuous space and we have infinitely many many locations
+[0:03:20] have infinitely many many locations that could be treated or could be the
+[0:03:23] that could be treated or could be the sites of outcome events
+[0:03:26] sites of outcome events so the motivating application like i
+[0:03:27] so the motivating application like i said is the war in iraq
+[0:03:29] said is the war in iraq and in this war in other words air
+[0:03:31] and in this war in other words air strikes are often used as a principal
+[0:03:33] strikes are often used as a principal tool for combating insurgency however in
+[0:03:36] tool for combating insurgency however in political science there's a large debate
+[0:03:37] political science there's a large debate about whether air strikes actually work
+[0:03:40] about whether air strikes actually work and reducing in reducing certain attacks
+[0:03:43] and reducing in reducing certain attacks in fact there have been researchers that
+[0:03:45] in fact there have been researchers that have um argued
+[0:03:47] have um argued that airstrikes actually lead to an
+[0:03:49] that airstrikes actually lead to an increase in subsequent insurgent
+[0:03:50] increase in subsequent insurgent violence
+[0:03:52] violence however previous work has uh made at
+[0:03:55] however previous work has uh made at least one of the two assumptions
+[0:03:57] least one of the two assumptions they have either um considered arbitrary
+[0:03:59] they have either um considered arbitrary arbitrary
+[0:04:00] arbitrary discretization of space so they have
+[0:04:02] discretization of space so they have taken the map of iraq or a map of
+[0:04:03] taken the map of iraq or a map of interest
+[0:04:04] interest and uh split it into regions or
+[0:04:07] and uh split it into regions or they have made um employees their
+[0:04:10] they have made um employees their explicit assumptions about the way
+[0:04:12] explicit assumptions about the way uh treatment spill spills over um
+[0:04:16] uh treatment spill spills over um other locations in space or carry over
+[0:04:18] other locations in space or carry over over time
+[0:04:20] over time so our goal is to evaluate the effect of
+[0:04:22] so our goal is to evaluate the effect of our strikes on
+[0:04:23] our strikes on surging violence while addressing these
+[0:04:26] surging violence while addressing these challenges
+[0:04:27] challenges and to give you an intuition of what our
+[0:04:29] and to give you an intuition of what our data look like like i said
+[0:04:30] data look like like i said we have spatial temporal point pattern
+[0:04:33] we have spatial temporal point pattern data that we want to draw causal
+[0:04:35] data that we want to draw causal inference from
+[0:04:36] inference from so our data are time series of maps from
+[0:04:39] so our data are time series of maps from january 2007 to july 2008 and they are
+[0:04:42] january 2007 to july 2008 and they are measured at
+[0:04:44] measured at daily intervals so we have a time series
+[0:04:48] daily intervals so we have a time series of um treatment locations which is the
+[0:04:50] of um treatment locations which is the top row here
+[0:04:52] top row here and a time series of outcome event
+[0:04:53] and a time series of outcome event locations which is the bottom row
+[0:04:55] locations which is the bottom row so for every day what my date are like
+[0:04:58] so for every day what my date are like they're essentially sets of coordinates
+[0:05:00] they're essentially sets of coordinates that where the locations of the bombs
+[0:05:03] that where the locations of the bombs were dropped
+[0:05:04] were dropped and also the locations of insurgent
+[0:05:06] and also the locations of insurgent attacks so
+[0:05:07] attacks so we would like to evaluate the effect of
+[0:05:09] we would like to evaluate the effect of a point pattern treatment
+[0:05:11] a point pattern treatment on a point pattern outcome
+[0:05:14] on a point pattern outcome so the in the bottom use uh i'm showing
+[0:05:17] so the in the bottom use uh i'm showing you the locations of insurgent attacks
+[0:05:19] you the locations of insurgent attacks for two different days in march 2008
+[0:05:22] for two different days in march 2008 and there are different shapes and
+[0:05:23] and there are different shapes and colors there and
+[0:05:25] colors there and these are insurgent attacks of different
+[0:05:27] these are insurgent attacks of different types i don't
+[0:05:28] types i don't i will return to this in the end of the
+[0:05:30] i will return to this in the end of the talk uh but there's more about that in
+[0:05:32] talk uh but there's more about that in the paper if you're interested
+[0:05:35] the paper if you're interested so again essentially we want to do
+[0:05:36] so again essentially we want to do causal inference that helps us
+[0:05:38] causal inference that helps us first define what it means for a point
+[0:05:41] first define what it means for a point pattern treatment to have
+[0:05:42] pattern treatment to have an effect on a point outcome but also
+[0:05:44] an effect on a point outcome but also allows us to estimate this taking into
+[0:05:46] allows us to estimate this taking into account that spatial spillover effects
+[0:05:48] account that spatial spillover effects and
+[0:05:48] and the portal carryover effects can can
+[0:05:50] the portal carryover effects can can occur in um
+[0:05:51] occur in um unstructured uh fashion
+[0:05:55] unstructured uh fashion so our contribution um is uh
+[0:05:58] so our contribution um is uh that is the formalization of causal
+[0:06:00] that is the formalization of causal inference in the context of point
+[0:06:01] inference in the context of point process treatment and outcome
+[0:06:03] process treatment and outcome uh like i said we allow for this
+[0:06:04] uh like i said we allow for this unrestricted spillover effects either
+[0:06:07] unrestricted spillover effects either over space
+[0:06:07] over space and over time and the fact that we deal
+[0:06:10] and over time and the fact that we deal with point patterns
+[0:06:11] with point patterns makes this work applicable to other
+[0:06:13] makes this work applicable to other settings and not just the settings of
+[0:06:14] settings and not just the settings of the
+[0:06:14] the of the of the political science science
+[0:06:17] of the of the political science science setting that i'm discussing here
+[0:06:19] setting that i'm discussing here but also situations like disease
+[0:06:21] but also situations like disease outbreaks and crime incidents
+[0:06:23] outbreaks and crime incidents where the location of events are
+[0:06:24] where the location of events are geocoded and we have on our data in the
+[0:06:26] geocoded and we have on our data in the form of coordinates essentially
+[0:06:33] the key idea is that of stochastic interventions
+[0:06:34] interventions um so instead of defining estimates and
+[0:06:37] um so instead of defining estimates and and uh
+[0:06:38] and uh estimating quantities when everybody is
+[0:06:40] estimating quantities when everybody is treated versus when everybody is
+[0:06:42] treated versus when everybody is controlled
+[0:06:43] controlled we uh use the the idea of stochastic
+[0:06:46] we uh use the the idea of stochastic intervention that has been applied in in
+[0:06:48] intervention that has been applied in in other
+[0:06:48] other parts of causal inference and instead of
+[0:06:50] parts of causal inference and instead of setting the treatment a specific level
+[0:06:52] setting the treatment a specific level it sets the distribution
+[0:06:54] it sets the distribution of of treatment so essentially we will
+[0:06:56] of of treatment so essentially we will be using uh
+[0:06:57] be using uh stochastic interventions that represent
+[0:07:00] stochastic interventions that represent distributions of
+[0:07:01] distributions of treatment point patterns or
+[0:07:03] treatment point patterns or distributions of airstrikes
+[0:07:08] under these stochastic interventions our estimates
+[0:07:10] estimates represent the expected number of
+[0:07:12] represent the expected number of insurgent attacks we would observe in
+[0:07:14] insurgent attacks we would observe in the region
+[0:07:15] the region and we can use the stochastic
+[0:07:17] and we can use the stochastic intervention framework to evaluate what
+[0:07:19] intervention framework to evaluate what happens
+[0:07:20] happens what would be the change in insurgent
+[0:07:21] what would be the change in insurgent violence if we could
+[0:07:23] violence if we could change the number of airstrikes so
+[0:07:25] change the number of airstrikes so change the dosage of airstrikes
+[0:07:27] change the dosage of airstrikes while keeping their the airstrike
+[0:07:29] while keeping their the airstrike spatial distribution the same
+[0:07:31] spatial distribution the same what would happen when we change the
+[0:07:33] what would happen when we change the spatial distribution of earth strikes um
+[0:07:35] spatial distribution of earth strikes um but keep the number of our strikes the
+[0:07:37] but keep the number of our strikes the same but also we can help
+[0:07:39] same but also we can help can help us evaluate interventions that
+[0:07:41] can help us evaluate interventions that take place over multiple time periods
+[0:07:43] take place over multiple time periods and specifically helps us evaluate
+[0:07:45] and specifically helps us evaluate lagged effects of air strikes on certain
+[0:07:47] lagged effects of air strikes on certain violence
+[0:07:49] violence for estimation we propose an estimator
+[0:07:51] for estimation we propose an estimator that is a combination of the ipw
+[0:07:53] that is a combination of the ipw estimator and spatial kernel smoothing
+[0:07:56] estimator and spatial kernel smoothing we rely on modifications of the classic
+[0:07:59] we rely on modifications of the classic overlapping unconfoundedness assumptions
+[0:08:01] overlapping unconfoundedness assumptions to the case of a single time series of
+[0:08:03] to the case of a single time series of coin patterns
+[0:08:05] coin patterns and we show that our estimator is
+[0:08:07] and we show that our estimator is consistent and asymptotically normal
+[0:08:09] consistent and asymptotically normal in the paper we have an extensive
+[0:08:11] in the paper we have an extensive simulation study um
+[0:08:12] simulation study um and appear in empirical application
+[0:08:15] and appear in empirical application results
+[0:08:16] results uh i will show you some of these results
+[0:08:18] uh i will show you some of these results today
+[0:08:24] so um i'm gonna stay on this slide for a little while because this is kind of
+[0:08:25] little while because this is kind of this is going to be our notation
+[0:08:27] this is going to be our notation and uh since we're dealing with point
+[0:08:29] and uh since we're dealing with point patterns it's going to be the
+[0:08:31] patterns it's going to be the probably the most complicated slide so
+[0:08:34] probably the most complicated slide so we use t
+[0:08:34] we use t to denote the total number of time here
+[0:08:37] to denote the total number of time here so in our case
+[0:08:38] so in our case that is about 500 days from january 2007
+[0:08:41] that is about 500 days from january 2007 to july 2008
+[0:08:44] to july 2008 omega represents the set of locations
+[0:08:48] omega represents the set of locations that can be the sites of treatment or
+[0:08:50] that can be the sites of treatment or outcome events so here omega you can
+[0:08:52] outcome events so here omega you can think of omega as
+[0:08:53] think of omega as the collection of coordinates that
+[0:08:56] the collection of coordinates that belong to
+[0:08:58] belong to the territory of iraq
+[0:09:01] the territory of iraq for the treatment variable we use w to
+[0:09:04] for the treatment variable we use w to denote treatment and
+[0:09:05] denote treatment and we use the subscript t to denote the
+[0:09:08] we use the subscript t to denote the treatment
+[0:09:08] treatment at time t now since our data are point
+[0:09:12] at time t now since our data are point patterns we have to think of
+[0:09:13] patterns we have to think of what was the treatment at each location
+[0:09:15] what was the treatment at each location s of omega so at each
+[0:09:17] s of omega so at each it's its coordinate uh set that belongs
+[0:09:21] it's its coordinate uh set that belongs in iraq
+[0:09:22] in iraq we uh we consider wts to be zero if uh
+[0:09:25] we uh we consider wts to be zero if uh valocation was not bombed and wt has to
+[0:09:28] valocation was not bombed and wt has to be one
+[0:09:29] be one if the location was bombed accounting
+[0:09:36] uh wt represents the collection of of the location specific treatments
+[0:09:39] of of the location specific treatments so you can think of wt as the map of
+[0:09:41] so you can think of wt as the map of iraq
+[0:09:42] iraq that is zero almost everywhere and it's
+[0:09:45] that is zero almost everywhere and it's equal to one
+[0:09:46] equal to one only at a finite number of locations and
+[0:09:47] only at a finite number of locations and those locations correspond exactly to
+[0:09:49] those locations correspond exactly to the bomb location
+[0:09:50] the bomb location so wt is the whole surface of iraq with
+[0:09:53] so wt is the whole surface of iraq with the bound locations flagged
+[0:09:56] the bound locations flagged now s we use the the notation s to
+[0:09:59] now s we use the the notation s to denote the
+[0:10:00] denote the set of treatment active locations so
+[0:10:03] set of treatment active locations so here s
+[0:10:03] here s is essentially a set of coordinates the
+[0:10:06] is essentially a set of coordinates the coordinates that were bound at that time
+[0:10:07] coordinates that were bound at that time point
+[0:10:09] point so um
+[0:10:14] following the classic notation and longitudinal treatments we use the
+[0:10:15] longitudinal treatments we use the overbar
+[0:10:16] overbar to denote the observed history up to or
+[0:10:19] to denote the observed history up to or the history up to time point t
+[0:10:21] the history up to time point t and we use small letters to denote
+[0:10:23] and we use small letters to denote realizations of our random variables
+[0:10:30] so we can use similar notation for the outcome variable remember that the
+[0:10:31] outcome variable remember that the outcome variable is also a
+[0:10:33] outcome variable is also a point pattern in our setting so for
+[0:10:35] point pattern in our setting so for example yts
+[0:10:36] example yts is equal to zero if location s
+[0:10:40] is equal to zero if location s was not the site of an insurgent attack
+[0:10:43] was not the site of an insurgent attack at time t and it's equal to one if it
+[0:10:45] at time t and it's equal to one if it was the side of an
+[0:10:46] was the side of an insurgent attack and syt
+[0:10:50] insurgent attack and syt is essentially the set of coordinates
+[0:10:52] is essentially the set of coordinates where insurgent attacks
+[0:10:54] where insurgent attacks happened at time point t and we refer to
+[0:10:56] happened at time point t and we refer to these as the outcome active locations
+[0:11:01] these as the outcome active locations now for each possible treatment history
+[0:11:04] now for each possible treatment history realization
+[0:11:06] realization we can consider one potential outcome
+[0:11:09] we can consider one potential outcome a potential outcome ytwt so now we have
+[0:11:13] a potential outcome ytwt so now we have a different set of locations that could
+[0:11:16] a different set of locations that could that would be the size of insurgent
+[0:11:18] that would be the size of insurgent violence insurgent violence
+[0:11:20] violence insurgent violence had airstrike strategies been w1w2
+[0:11:24] had airstrike strategies been w1w2 up to wt and of course we we assume that
+[0:11:28] up to wt and of course we we assume that the observed outcome
+[0:11:29] the observed outcome um is the same as the potential outcome
+[0:11:32] um is the same as the potential outcome under the observed treatment so this is
+[0:11:33] under the observed treatment so this is the common you know consistency or
+[0:11:35] the common you know consistency or whatever you want to call it assumption
+[0:11:36] whatever you want to call it assumption in causal inference
+[0:11:38] in causal inference we also allow for time varying
+[0:11:40] we also allow for time varying confounders that we denote as x and
+[0:11:42] confounders that we denote as x and um we follow similar notation with the
+[0:11:45] um we follow similar notation with the overbar
+[0:11:46] overbar uh for example representing the the
+[0:11:48] uh for example representing the the history of all the of
+[0:11:50] history of all the of the whole um history of the time very
+[0:11:52] the whole um history of the time very confounders up to time pointing
+[0:11:57] confounders up to time pointing so like i said the key idea in our
+[0:12:00] so like i said the key idea in our development is that of stochastic
+[0:12:01] development is that of stochastic interventions so um
+[0:12:03] interventions so um sarcastic interventions can be thought
+[0:12:05] sarcastic interventions can be thought of as distributions of the treatment
+[0:12:08] of as distributions of the treatment so we are not going to be evaluating the
+[0:12:10] so we are not going to be evaluating the effect of treating everyone versus
+[0:12:12] effect of treating everyone versus treating no one like how it's common in
+[0:12:13] treating no one like how it's common in causal inference
+[0:12:14] causal inference because we have point pattern data
+[0:12:16] because we have point pattern data instead we will be thinking
+[0:12:18] instead we will be thinking about average potential outcomes when
+[0:12:22] about average potential outcomes when the treatment was assigned with respect
+[0:12:24] the treatment was assigned with respect to a certain distribution so this
+[0:12:25] to a certain distribution so this distribution is this stochastic
+[0:12:26] distribution is this stochastic intervention
+[0:12:29] intervention and you can consider any distribution of
+[0:12:31] and you can consider any distribution of point patterns here
+[0:12:33] point patterns here that that is believed to be reasonable
+[0:12:35] that that is believed to be reasonable in your setting or is of interest in
+[0:12:36] in your setting or is of interest in your
+[0:12:38] your we will be considering non-homogeneous
+[0:12:40] we will be considering non-homogeneous person-point processes
+[0:12:41] person-point processes as um driving these these uh stochastic
+[0:12:45] as um driving these these uh stochastic interventions
+[0:12:46] interventions so if you're not familiar with
+[0:12:48] so if you're not familiar with non-homogeneous poisson processes
+[0:12:50] non-homogeneous poisson processes they are specified often by an intensity
+[0:12:53] they are specified often by an intensity function
+[0:12:53] function h of omega so h of omega
+[0:12:57] h of omega so h of omega um drives both the number of events that
+[0:13:01] um drives both the number of events that you would observe
+[0:13:02] you would observe um that would be expected under this
+[0:13:05] um that would be expected under this distribution
+[0:13:07] distribution but also the spatial distribution of
+[0:13:09] but also the spatial distribution of those events so if you
+[0:13:10] those events so if you think of the integral of h of omega over
+[0:13:13] think of the integral of h of omega over a set
+[0:13:14] a set that represents the expected number of
+[0:13:16] that represents the expected number of points under your intervention
+[0:13:18] points under your intervention and then the relative magnitude of h for
+[0:13:21] and then the relative magnitude of h for different
+[0:13:22] different regions represents how more likely
+[0:13:24] regions represents how more likely certain region is to
+[0:13:26] certain region is to um be treated compared to another so an
+[0:13:29] um be treated compared to another so an example is the one i show you here in
+[0:13:31] example is the one i show you here in the bottom where
+[0:13:32] the bottom where both of these intensities uh specify the
+[0:13:36] both of these intensities uh specify the same
+[0:13:36] same expecting number of air strikes but have
+[0:13:39] expecting number of air strikes but have different spatial distribution
+[0:13:41] different spatial distribution in fact the one to the right focuses a
+[0:13:43] in fact the one to the right focuses a lot more near this
+[0:13:44] lot more near this x point than the one to the left so even
+[0:13:47] x point than the one to the left so even though those two distributions
+[0:13:49] though those two distributions have uh the same expected number of
+[0:13:51] have uh the same expected number of airstrikes
+[0:13:52] airstrikes the one to the right will assign
+[0:13:55] the one to the right will assign treatment patterns that are more
+[0:13:56] treatment patterns that are more concentrated near
+[0:13:57] concentrated near acts of the one to the left
+[0:14:04] so it's under these interventions that we will be defining
+[0:14:05] we will be defining um causal estimates and our causal
+[0:14:07] um causal estimates and our causal estimates will represent
+[0:14:09] estimates will represent the expected number of outcome active
+[0:14:11] the expected number of outcome active locations
+[0:14:12] locations outcome active uh events within the
+[0:14:15] outcome active uh events within the region how do we follow
+[0:14:17] region how do we follow the given intervention the the
+[0:14:19] the given intervention the the stochastic intervention at the previous
+[0:14:21] stochastic intervention at the previous time point
+[0:14:22] time point so to walk you through this definition
+[0:14:24] so to walk you through this definition um
+[0:14:25] um yt wt minus one represents
+[0:14:29] yt wt minus one represents of the potential outcome we would
+[0:14:31] of the potential outcome we would observe had
+[0:14:33] observe had the treatment been as observed up to ten
+[0:14:36] the treatment been as observed up to ten point t minus one
+[0:14:37] point t minus one but at the last time point we had
+[0:14:39] but at the last time point we had assigned treatment according to our
+[0:14:41] assigned treatment according to our stochastic intervention
+[0:14:43] stochastic intervention and this n of b represents a count of
+[0:14:45] and this n of b represents a count of the number of
+[0:14:46] the number of uh of the number of outcome active
+[0:14:48] uh of the number of outcome active locations we observe within b
+[0:14:50] locations we observe within b so essentially this n over bar b of t
+[0:14:54] so essentially this n over bar b of t represents what is the expected number
+[0:14:57] represents what is the expected number of insurgent attacks we would observe in
+[0:14:59] of insurgent attacks we would observe in a region b
+[0:15:00] a region b of iraq had we intervened at the last
+[0:15:03] of iraq had we intervened at the last time point and assigned treatment
+[0:15:05] time point and assigned treatment according to f of h
+[0:15:10] we can average this quantity over time and we can compare this
+[0:15:12] and we can compare this uh expecting number of outcome active
+[0:15:14] uh expecting number of outcome active locations for two different
+[0:15:16] locations for two different interventions
+[0:15:17] interventions and by doing this we actually this
+[0:15:19] and by doing this we actually this quantity represents
+[0:15:20] quantity represents this tau of b represents what is the
+[0:15:24] this tau of b represents what is the difference in um number of insurgent
+[0:15:28] difference in um number of insurgent attacks
+[0:15:28] attacks we would expect to see in region b of
+[0:15:32] we would expect to see in region b of iraq
+[0:15:32] iraq had airstrikes been assigned according
+[0:15:34] had airstrikes been assigned according to h prime
+[0:15:36] to h prime versus h double prime so this
+[0:15:39] versus h double prime so this of being represents exactly the the
+[0:15:42] of being represents exactly the the causal effect that is the target of our
+[0:15:43] causal effect that is the target of our inference
+[0:15:44] inference represents um a causal effect
+[0:15:48] represents um a causal effect for any region b uh in iraq
+[0:15:52] for any region b uh in iraq now these are interventions this is
+[0:15:55] now these are interventions this is these are causal estimates that i define
+[0:15:57] these are causal estimates that i define for an intervention that takes place
+[0:15:59] for an intervention that takes place over a single
+[0:16:00] over a single time period and that's like the the last
+[0:16:02] time period and that's like the the last possible time period so here i'm
+[0:16:04] possible time period so here i'm i'm counting number of our number of
+[0:16:07] i'm counting number of our number of insurgent attacks in the region b a time
+[0:16:11] insurgent attacks in the region b a time t
+[0:16:11] t had i intervened at the uh exactly
+[0:16:13] had i intervened at the uh exactly previous treatment
+[0:16:15] previous treatment but we can also think about
+[0:16:16] but we can also think about interventions that take place over
+[0:16:18] interventions that take place over multiple time periods so here we can
+[0:16:20] multiple time periods so here we can think about an intervention
+[0:16:22] think about an intervention that um the last time period is assigned
+[0:16:25] that um the last time period is assigned according to intensity h1
+[0:16:27] according to intensity h1 two time periods ago according to
+[0:16:28] two time periods ago according to intensity h2
+[0:16:30] intensity h2 and m time periods ago according to uh
+[0:16:33] and m time periods ago according to uh intensity hm and we can similarly define
+[0:16:37] intensity hm and we can similarly define uh expected outcome uh expected outcomes
+[0:16:40] uh expected outcome uh expected outcomes and causal effects
+[0:16:42] and causal effects for interventions over multiple time
+[0:16:44] for interventions over multiple time periods
+[0:16:45] periods the good thing and the useful thing
+[0:16:47] the good thing and the useful thing about intervening about defining effects
+[0:16:50] about intervening about defining effects for multiple time periods is that if we
+[0:16:53] for multiple time periods is that if we fix
+[0:16:53] fix the first m minus one intensities
+[0:16:57] the first m minus one intensities to be the same but vary the intensity of
+[0:17:00] to be the same but vary the intensity of uh m time points ago then we can use
+[0:17:03] uh m time points ago then we can use this uh the causal effect of b to
+[0:17:06] this uh the causal effect of b to estimate
+[0:17:07] estimate um lag defects of treatment
+[0:17:10] um lag defects of treatment as we will see also later
+[0:17:17] so like i said in the beginning in order to perform estimation we need to
+[0:17:19] to perform estimation we need to um modify the unconfoundedness and
+[0:17:21] um modify the unconfoundedness and overlap assumption to the setting of a
+[0:17:23] overlap assumption to the setting of a of a single time series of of maps
+[0:17:28] of a single time series of of maps and our unconfounded assumption is
+[0:17:30] and our unconfounded assumption is related to the non-anticipating
+[0:17:32] related to the non-anticipating assumption of vagina from shepherd
+[0:17:34] assumption of vagina from shepherd and says that the treatment assignment
+[0:17:36] and says that the treatment assignment at time t
+[0:17:37] at time t only depends on the observed history and
+[0:17:40] only depends on the observed history and on
+[0:17:40] on none of the potential values for both
+[0:17:43] none of the potential values for both the outcome and the cuvettes
+[0:17:44] the outcome and the cuvettes so the fact that we have to include the
+[0:17:47] so the fact that we have to include the covers here
+[0:17:48] covers here is because we have a single time series
+[0:17:50] is because we have a single time series that we're trying to make inference on
+[0:17:52] that we're trying to make inference on so we can we do not have iid replicates
+[0:17:55] so we can we do not have iid replicates of time
+[0:17:55] of time series we have a single time series so
+[0:17:57] series we have a single time series so this complicates
+[0:17:59] this complicates our unrequited assumption and based on
+[0:18:01] our unrequited assumption and based on this assumption we can define the
+[0:18:03] this assumption we can define the the the treatment assignment process in
+[0:18:05] the the treatment assignment process in the observed world in terms of the of
+[0:18:07] the observed world in terms of the of this propensity score which is the
+[0:18:08] this propensity score which is the distribution of treatment
+[0:18:10] distribution of treatment at time t uh defined through a density
+[0:18:13] at time t uh defined through a density here
+[0:18:13] here given the observed history so these are
+[0:18:16] given the observed history so these are we can consider
+[0:18:16] we can consider the distribution of treatment at time t
+[0:18:18] the distribution of treatment at time t given previous treatments
+[0:18:20] given previous treatments previous outcomes and previous
+[0:18:24] previous outcomes and previous values of time varying compounders
+[0:18:27] values of time varying compounders now our overlap assumption is considered
+[0:18:30] now our overlap assumption is considered considerably simpler
+[0:18:32] considerably simpler and says that any treatment that is
+[0:18:34] and says that any treatment that is possible under stochastic intervention
+[0:18:36] possible under stochastic intervention is also possible to be observed in
+[0:18:39] is also possible to be observed in to be uh observed so essentially
+[0:18:42] to be uh observed so essentially we cannot evaluate interventions that
+[0:18:46] we cannot evaluate interventions that um assign treatment active locations in
+[0:18:49] um assign treatment active locations in a way that could not have been observed
+[0:18:50] a way that could not have been observed in the real world
+[0:18:56] all right um so now that we have defined our estimates
+[0:18:58] our estimates uh we have our causal assumptions we can
+[0:18:59] uh we have our causal assumptions we can proceed with estimation
+[0:19:01] proceed with estimation so in order to do estimation we define
+[0:19:04] so in order to do estimation we define an outcome surface
+[0:19:05] an outcome surface so for every omega in omega
+[0:19:08] so for every omega in omega we define this um
+[0:19:12] we define this um value for our estimate for our estimator
+[0:19:14] value for our estimate for our estimator where i'm gonna uh walk you through this
+[0:19:16] where i'm gonna uh walk you through this uh part by part
+[0:19:18] uh part by part the summation on the right right hand
+[0:19:20] the summation on the right right hand side is over
+[0:19:21] side is over all the locations that were the
+[0:19:22] all the locations that were the locations of insurgent attacks at time t
+[0:19:26] locations of insurgent attacks at time t this k of b is a kernel your favorite
+[0:19:30] this k of b is a kernel your favorite spatial or monument
+[0:19:31] spatial or monument or your favorite spatial kernel with uh
+[0:19:34] or your favorite spatial kernel with uh bandwidth b
+[0:19:36] bandwidth b so this summation over here represents
+[0:19:39] so this summation over here represents the spatially smoothed outcome so if you
+[0:19:41] the spatially smoothed outcome so if you think of of your outcome surface at time
+[0:19:43] think of of your outcome surface at time t as the map of iraq
+[0:19:44] t as the map of iraq where the locations of insurgent attacks
+[0:19:47] where the locations of insurgent attacks were flagged with an
+[0:19:48] were flagged with an x this summation on the right
+[0:19:51] x this summation on the right substitutes those x's with little hills
+[0:19:54] substitutes those x's with little hills around
+[0:19:55] around um around that location so these values
+[0:19:58] um around that location so these values are higher for locations of mega
+[0:20:00] are higher for locations of mega near the um observed locations of
+[0:20:04] near the um observed locations of insurgent attacks
+[0:20:05] insurgent attacks and then essentially this this summation
+[0:20:08] and then essentially this this summation to the right creates this uh continuous
+[0:20:11] to the right creates this uh continuous surface on uh on omega on the geography
+[0:20:14] surface on uh on omega on the geography of each
+[0:20:14] of each interest and we re-weigh this whole
+[0:20:16] interest and we re-weigh this whole surface according to your classic ipw8
+[0:20:20] surface according to your classic ipw8 in the denominator we have the
+[0:20:22] in the denominator we have the propensity score
+[0:20:24] propensity score in the numerator we have the density of
+[0:20:25] in the numerator we have the density of the observed treatment in this
+[0:20:27] the observed treatment in this under a counterfactual stochastic
+[0:20:29] under a counterfactual stochastic intervention
+[0:20:36] so now these uh yt for every if you if you take yt hat for
+[0:20:38] for every if you if you take yt hat for every omega this is a continuous
+[0:20:40] every omega this is a continuous and as long as your kernel is also
+[0:20:41] and as long as your kernel is also continuous this is also a continuous
+[0:20:43] continuous this is also a continuous surface
+[0:20:44] surface over omega which uh if you if we
+[0:20:47] over omega which uh if you if we integrate this over
+[0:20:48] integrate this over any set b uh any region b in iraq
+[0:20:52] any set b uh any region b in iraq we can use that to estimate the number
+[0:20:54] we can use that to estimate the number of outcome active locations in that
+[0:20:56] of outcome active locations in that region
+[0:20:58] region so this is our our estimator which um
+[0:21:00] so this is our our estimator which um gives rise to the
+[0:21:02] gives rise to the temporally averaged estimator for the
+[0:21:04] temporally averaged estimator for the number of outcome
+[0:21:05] number of outcome uh active locations in the region
+[0:21:08] uh active locations in the region um and we can compare and we can
+[0:21:11] um and we can compare and we can essentially in order to estimate the
+[0:21:13] essentially in order to estimate the causal effect we can
+[0:21:14] causal effect we can take differences of this temporally
+[0:21:17] take differences of this temporally average estimator
+[0:21:18] average estimator for different interventions um h
+[0:21:22] for different interventions um h f of h now we have extended this
+[0:21:25] f of h now we have extended this estimator of course interventions over
+[0:21:27] estimator of course interventions over multiple time periods
+[0:21:28] multiple time periods uh we showed that this estimator is
+[0:21:31] uh we showed that this estimator is consistent asymptotically normal and
+[0:21:32] consistent asymptotically normal and um without additional assumptions though
+[0:21:35] um without additional assumptions though you cannot use this asymptotic
+[0:21:37] you cannot use this asymptotic distribution
+[0:21:38] distribution uh to draw inference so instead we have
+[0:21:40] uh to draw inference so instead we have provided a consistent estimator
+[0:21:42] provided a consistent estimator for an upper bound of the variance
+[0:21:51] okay so now i will be returning to uh my data application and i'm going to be
+[0:21:54] my data application and i'm going to be discussing first how we define
+[0:21:56] discussing first how we define stochastic interventions so we want our
+[0:21:58] stochastic interventions so we want our stochastic interventions to resemble
+[0:22:00] stochastic interventions to resemble the observed airstrike patterns as
+[0:22:02] the observed airstrike patterns as closely as possible for them to be
+[0:22:03] closely as possible for them to be realistic
+[0:22:05] realistic so we have taken airstrike data from
+[0:22:08] so we have taken airstrike data from the time period before the one we study
+[0:22:10] the time period before the one we study so we have taken uh airstrike data from
+[0:22:12] so we have taken uh airstrike data from
+[0:22:16] and we use spatial kernel smoothing to find
+[0:22:17] find a baseline this spatial distribution for
+[0:22:20] a baseline this spatial distribution for airstrikes which is the one shown here
+[0:22:21] airstrikes which is the one shown here to the right
+[0:22:23] to the right so we use this spatial distribution as
+[0:22:27] so we use this spatial distribution as the
+[0:22:27] the the base for defining our um
+[0:22:30] the base for defining our um non-homogeneous poisson process
+[0:22:31] non-homogeneous poisson process intensities
+[0:22:33] intensities and the first type of question we wanted
+[0:22:34] and the first type of question we wanted to answer was how does increasing the
+[0:22:36] to answer was how does increasing the number of earth strikes affect insurgent
+[0:22:38] number of earth strikes affect insurgent violence
+[0:22:39] violence so by defining our our
+[0:22:42] so by defining our our stochastic intervention in this fashion
+[0:22:45] stochastic intervention in this fashion as c
+[0:22:46] as c times uh phi of zero
+[0:22:49] times uh phi of zero we can very see in order to say how much
+[0:22:52] we can very see in order to say how much does changing the dosage of airstrikes
+[0:22:55] does changing the dosage of airstrikes affect insurgent violence while keeping
+[0:22:58] affect insurgent violence while keeping the spatial distribution of airstrikes
+[0:22:59] the spatial distribution of airstrikes constant
+[0:23:01] constant we can also uh consider these types of
+[0:23:04] we can also uh consider these types of stochastic interventions over multiple
+[0:23:06] stochastic interventions over multiple time periods and specifically
+[0:23:08] time periods and specifically for the m minus one time periods we
+[0:23:11] for the m minus one time periods we consider interventions that um are
+[0:23:14] consider interventions that um are constant and equal to fee of zero
+[0:23:16] constant and equal to fee of zero but we vary the number of earth strikes
+[0:23:19] but we vary the number of earth strikes at m time points ago
+[0:23:20] at m time points ago so these types of interventions allow us
+[0:23:22] so these types of interventions allow us to evaluate how long does it take
+[0:23:24] to evaluate how long does it take for the air strikes uh to have an effect
+[0:23:26] for the air strikes uh to have an effect on insurgent violence
+[0:23:29] on insurgent violence we can also shift the priority
+[0:23:31] we can also shift the priority prioritization of certain
+[0:23:32] prioritization of certain locations um so like i showed you in the
+[0:23:35] locations um so like i showed you in the beginning
+[0:23:36] beginning we defined stochastic interventions that
+[0:23:38] we defined stochastic interventions that folk that increasingly focus on the area
+[0:23:41] folk that increasingly focus on the area around baghdad while keeping the uh
+[0:23:44] around baghdad while keeping the uh number of airstrikes fixed so
+[0:23:45] number of airstrikes fixed so essentially those interventions
+[0:23:47] essentially those interventions answer the question if the number of
+[0:23:49] answer the question if the number of airstrikes per day
+[0:23:50] airstrikes per day are constant does changing does changing
+[0:23:53] are constant does changing does changing the spatial distribution of air strikes
+[0:23:55] the spatial distribution of air strikes affecting surgeon violence
+[0:24:02] so here i will i'm presenting to you the results for
+[0:24:03] results for the causal effect of increasing the
+[0:24:05] the causal effect of increasing the number of airstrikes from
+[0:24:06] number of airstrikes from one to six per day for a period of one
+[0:24:10] one to six per day for a period of one day
+[0:24:11] day at the la the first column three days
+[0:24:13] at the la the first column three days seven days and 30 days
+[0:24:15] seven days and 30 days and the two rows are for two different
+[0:24:16] and the two rows are for two different types of insurgent violence so we have
+[0:24:18] types of insurgent violence so we have improvised explosive device attacks on
+[0:24:20] improvised explosive device attacks on the top and smaller fire attacks in the
+[0:24:22] the top and smaller fire attacks in the bottom
+[0:24:23] bottom so wherever you see red that implies
+[0:24:27] so wherever you see red that implies that increasing the number of airstrikes
+[0:24:30] that increasing the number of airstrikes leads to an increase in insurgent
+[0:24:32] leads to an increase in insurgent violence
+[0:24:32] violence in that area so what we see here is that
+[0:24:37] in that area so what we see here is that increasing the number of airstrikes for
+[0:24:38] increasing the number of airstrikes for 3 7 or 30 days
+[0:24:42] 3 7 or 30 days mostly leads to an increase in the
+[0:24:44] mostly leads to an increase in the number of of insurgent violence so if
+[0:24:46] number of of insurgent violence so if anything
+[0:24:47] anything these results show that in that
+[0:24:49] these results show that in that airstrikes increasing airstrikes
+[0:24:51] airstrikes increasing airstrikes actually not only do not reduce
+[0:24:53] actually not only do not reduce insurgent violence but also lead to an
+[0:24:55] insurgent violence but also lead to an increase in surge in violence and that
+[0:24:57] increase in surge in violence and that insurgent violence seemed to be
+[0:24:58] insurgent violence seemed to be concentrated around
+[0:25:00] concentrated around baghdad and mosul which is a city in the
+[0:25:03] baghdad and mosul which is a city in the north and the highway that connects them
+[0:25:06] north and the highway that connects them you have about five minutes left perfect
+[0:25:09] you have about five minutes left perfect thank you
+[0:25:10] thank you um so and also the the numbers that you
+[0:25:12] um so and also the the numbers that you see in the bottom they represent the
+[0:25:14] see in the bottom they represent the total effect over the whole
+[0:25:16] total effect over the whole uh iraq so if you uh look at the
+[0:25:18] uh iraq so if you uh look at the interventions over seven consecutive
+[0:25:20] interventions over seven consecutive days
+[0:25:21] days we see that increasing air strikes for a
+[0:25:23] we see that increasing air strikes for a week from one to six per day
+[0:25:25] week from one to six per day leads to ten more insurgent attacks uh
+[0:25:28] leads to ten more insurgent attacks uh ied attacks and about 16 more smaller
+[0:25:32] ied attacks and about 16 more smaller fire attacks
+[0:25:33] fire attacks and considering that there is an average
+[0:25:35] and considering that there is an average about 30 ied
+[0:25:36] about 30 ied and 30 uh smaller fire attacks a day
+[0:25:39] and 30 uh smaller fire attacks a day this is an increase
+[0:25:40] this is an increase of 33 to about 50 percent so these are
+[0:25:42] of 33 to about 50 percent so these are substantial
+[0:25:43] substantial increases uh insurgent violence
+[0:25:47] increases uh insurgent violence now we can also we also use our
+[0:25:49] now we can also we also use our methodology to evaluate
+[0:25:51] methodology to evaluate the um how long it takes for
+[0:25:54] the um how long it takes for for ins for airstrikes to have an effect
+[0:25:57] for ins for airstrikes to have an effect on insurgent violence
+[0:25:59] on insurgent violence and um these results show the the
+[0:26:02] and um these results show the the uh effect of uh
+[0:26:05] uh effect of uh of uh increasing the number of
+[0:26:07] of uh increasing the number of airstrikes from one
+[0:26:09] airstrikes from one to one two three four five and six on
+[0:26:11] to one two three four five and six on the x axis
+[0:26:13] the x axis um per day for a period again of one
+[0:26:15] um per day for a period again of one three seven
+[0:26:16] three seven thirty days and what we see uh is that
+[0:26:20] thirty days and what we see uh is that it's the increase of seven days um
+[0:26:23] it's the increase of seven days um before
+[0:26:24] before that matters most in the in the increase
+[0:26:27] that matters most in the in the increase in insurgent violence so essentially
+[0:26:29] in insurgent violence so essentially these results indicate
+[0:26:30] these results indicate that uh increasing the number of
+[0:26:32] that uh increasing the number of airstrikes
+[0:26:33] airstrikes leads to an increase in insurgent
+[0:26:35] leads to an increase in insurgent violence about a week
+[0:26:38] violence about a week and the last thing i would like to show
+[0:26:39] and the last thing i would like to show you uh from from our results is actually
+[0:26:42] you uh from from our results is actually probably the most striking result here
+[0:26:44] probably the most striking result here um
+[0:26:45] um so we these are again the the effects of
+[0:26:48] so we these are again the the effects of changing the focus of
+[0:26:50] changing the focus of airstrikes to concentrate more near
+[0:26:53] airstrikes to concentrate more near baghdad so back that is the point that
+[0:26:56] baghdad so back that is the point that is highlighted
+[0:26:57] is highlighted in in the middle of these maps
+[0:27:00] in in the middle of these maps what these results show especially for m
+[0:27:04] what these results show especially for m equals
+[0:27:04] equals seven for ieds and m equals 30 is that
+[0:27:08] seven for ieds and m equals 30 is that increasing airstrikes excuse me
+[0:27:11] increasing airstrikes excuse me while holding the number of airstrikes
+[0:27:13] while holding the number of airstrikes constant within a day
+[0:27:15] constant within a day if if air strikes focus more near
+[0:27:18] if if air strikes focus more near the uh baghdad area what we see
+[0:27:21] the uh baghdad area what we see is that insurgent violence in that area
+[0:27:23] is that insurgent violence in that area decreases
+[0:27:24] decreases but we see that the insurgents respond
+[0:27:27] but we see that the insurgents respond in
+[0:27:28] in mosul in a different part of the country
+[0:27:31] mosul in a different part of the country now
+[0:27:32] now this is a special spillover effect that
+[0:27:36] this is a special spillover effect that is
+[0:27:36] is at this distance of over 400 kilometers
+[0:27:39] at this distance of over 400 kilometers so essentially we are able to to
+[0:27:42] so essentially we are able to to identify
+[0:27:42] identify that um increasing air strikes in one
+[0:27:47] that um increasing air strikes in one area
+[0:27:47] area will actually lead to um
+[0:27:50] will actually lead to um a displacement of insurgent violence
+[0:27:58] so to conclude uh this is an approach we just
+[0:27:59] just developed an approach for causal
+[0:28:00] developed an approach for causal influence with especially the portal
+[0:28:01] influence with especially the portal point pattern data
+[0:28:03] point pattern data that avoids some of the assumptions that
+[0:28:05] that avoids some of the assumptions that are commonly made
+[0:28:07] are commonly made in the political science literature and
+[0:28:09] in the political science literature and and allows for both
+[0:28:11] and allows for both spatial spill over effects and carryover
+[0:28:13] spatial spill over effects and carryover effects
+[0:28:14] effects and the poorly effects the key idea was
+[0:28:17] and the poorly effects the key idea was that of stochastic intervention that
+[0:28:19] that of stochastic intervention that um we consider estimates
+[0:28:22] um we consider estimates that um represent quantities
+[0:28:26] that um represent quantities of under a treatment distribution rather
+[0:28:29] of under a treatment distribution rather than under its fixed treatment level
+[0:28:31] than under its fixed treatment level and it can handle the fact that we have
+[0:28:33] and it can handle the fact that we have infinitely many
+[0:28:34] infinitely many many possible locations that can be the
+[0:28:36] many possible locations that can be the site of our strikes
+[0:28:38] site of our strikes our estimator combines spatial smoothing
+[0:28:41] our estimator combines spatial smoothing with ipw weights
+[0:28:44] with ipw weights and we used this approach to evaluate
+[0:28:45] and we used this approach to evaluate the effect of burst rise in surging
+[0:28:47] the effect of burst rise in surging attacks
+[0:28:48] attacks and we were able to uh identify both the
+[0:28:51] and we were able to uh identify both the um the scale of temporal carryover
+[0:28:53] um the scale of temporal carryover effects but also
+[0:28:54] effects but also identify the unstructured spatial
+[0:28:56] identify the unstructured spatial spillover effects
+[0:28:58] spillover effects all right so some future research is we
+[0:29:01] all right so some future research is we are extending this work to
+[0:29:03] are extending this work to um account for civilian casualty as a
+[0:29:05] um account for civilian casualty as a mediator we believe that
+[0:29:07] mediator we believe that airstrikes might have an effect on the
+[0:29:08] airstrikes might have an effect on the surge in violence differently based on
+[0:29:10] surge in violence differently based on the number of civilian casualties they
+[0:29:11] the number of civilian casualties they cause
+[0:29:12] cause but also we want to compare air strikes
+[0:29:15] but also we want to compare air strikes compared to alternative strategies
+[0:29:17] compared to alternative strategies to combat insurgency thank you so i can
+[0:29:20] to combat insurgency thank you so i can take some questions
+[0:29:23] take some questions thank you for sending me uh sure maybe
+[0:29:26] thank you for sending me uh sure maybe just one quick question
+[0:29:28] just one quick question so one of the questions that came in is
+[0:29:30] so one of the questions that came in is what if armed airs what arm strikes are
+[0:29:32] what if armed airs what arm strikes are targeted at areas where it is expected
+[0:29:34] targeted at areas where it is expected to be
+[0:29:34] to be or there are expected to be insurgent
+[0:29:36] or there are expected to be insurgent attacks in the future is this method
+[0:29:38] attacks in the future is this method robust to this
+[0:29:40] robust to this uh so as long so that
+[0:29:44] uh so as long so that that would be that's the questions like
+[0:29:46] that would be that's the questions like is unconfoundedness violated
+[0:29:49] is unconfoundedness violated in this context if the army has some
+[0:29:52] in this context if the army has some information about insurgent attacks that
+[0:29:54] information about insurgent attacks that is
+[0:29:55] is not in the in our observed data
+[0:29:58] not in the in our observed data then our unconfoundedness assumption is
+[0:30:00] then our unconfoundedness assumption is violated but
+[0:30:01] violated but if our expectancy of future insurgent
+[0:30:04] if our expectancy of future insurgent attacks
+[0:30:04] attacks is based on patterns that we have
+[0:30:06] is based on patterns that we have already observed in the past
+[0:30:08] already observed in the past this approach would would account for
+[0:30:10] this approach would would account for that because we have the
+[0:30:12] that because we have the previous insurgent attacks in previous
+[0:30:14] previous insurgent attacks in previous uh air strikes
+[0:30:15] uh air strikes um including our propensity propensity
+[0:30:18] um including our propensity propensity score mode and
+[0:30:20] score mode and how that answered that yeah thank you
+[0:30:24] how that answered that yeah thank you um so thank you georgios uh we really
+[0:30:26] um so thank you georgios uh we really enjoyed the talk
+[0:30:27] enjoyed the talk maybe now we'll switch to leewa
+[0:30:30] maybe now we'll switch to leewa so let me spotlight
+[0:30:34] let me share my screen
+[0:30:44] so does that look good yeah yep okay so should i start yeah go ahead
+[0:30:47] yep okay so should i start yeah go ahead thanks
+[0:30:49] thanks great so um thanks uh the organizers for
+[0:30:53] great so um thanks uh the organizers for uh uh invitation and it's my great
+[0:30:55] uh uh invitation and it's my great pleasure to present
+[0:30:57] pleasure to present a recent work on conformal inference and
+[0:30:59] a recent work on conformal inference and causal inference
+[0:31:00] causal inference and this is a this is a joint work with
+[0:31:03] and this is a this is a joint work with my postdoc advisor
+[0:31:05] my postdoc advisor professor emmanuel candace so
+[0:31:08] professor emmanuel candace so the goal of this talk is on the
+[0:31:10] the goal of this talk is on the influence of individual treatment in
+[0:31:12] influence of individual treatment in fact
+[0:31:13] fact and to do this we will consider the
+[0:31:16] and to do this we will consider the potential outcome framework
+[0:31:17] potential outcome framework where we use t to denote a binary
+[0:31:19] where we use t to denote a binary treatment y1 y0 to denote
+[0:31:22] treatment y1 y0 to denote potential outcomes and acts to denote a
+[0:31:24] potential outcomes and acts to denote a generic covariance
+[0:31:26] generic covariance so in fact our method can be extended to
+[0:31:30] so in fact our method can be extended to other causal inference frameworks like
+[0:31:32] other causal inference frameworks like causal diagrams or invariant prediction
+[0:31:34] causal diagrams or invariant prediction but in this talk i will stick to this
+[0:31:37] but in this talk i will stick to this so given the potential outcomes we can
+[0:31:39] so given the potential outcomes we can define individual treatment effects
+[0:31:41] define individual treatment effects as y1 minus y0 so this is a random
+[0:31:44] as y1 minus y0 so this is a random variable in principle
+[0:31:47] variable in principle so our goal here is to find interval
+[0:31:49] so our goal here is to find interval estimate c hat
+[0:31:50] estimate c hat that covers this ide with probabilities
+[0:31:53] that covers this ide with probabilities at least
+[0:31:54] at least say 90 and that means for subject in the
+[0:31:58] say 90 and that means for subject in the study
+[0:31:59] study because only one of her potential
+[0:32:01] because only one of her potential outcome is missing
+[0:32:02] outcome is missing then we only need to make inference on
+[0:32:04] then we only need to make inference on the missing counter factor
+[0:32:06] the missing counter factor but for subjects not in the study both
+[0:32:09] but for subjects not in the study both of her potential outcomes are missing
+[0:32:11] of her potential outcomes are missing in in this case it's more challenging
+[0:32:13] in in this case it's more challenging because we need to make inference on
+[0:32:15] because we need to make inference on both kind of factors
+[0:32:16] both kind of factors and that's something we call pure i.t
+[0:32:19] and that's something we call pure i.t inference in this stock
+[0:32:25] so of course this individual treatment effect is not a new topic
+[0:32:27] effect is not a new topic and it's it's been a hot topic for a
+[0:32:29] and it's it's been a hot topic for a while
+[0:32:30] while and there has been a lot of brilliant
+[0:32:32] and there has been a lot of brilliant work on this topic
+[0:32:34] work on this topic and for most of them and their
+[0:32:36] and for most of them and their influential target is kate
+[0:32:38] influential target is kate which is defined as the conditional
+[0:32:40] which is defined as the conditional expectation of ite
+[0:32:42] expectation of ite so although kate has a lot of advantages
+[0:32:45] so although kate has a lot of advantages and merits
+[0:32:46] and merits and there has been tons of methods on
+[0:32:49] and there has been tons of methods on that
+[0:32:50] that but in some at least in some scenarios
+[0:32:53] but in some at least in some scenarios especially in those high stakes
+[0:32:55] especially in those high stakes sensitive and highly individualized
+[0:32:58] sensitive and highly individualized decision problems kate may be
+[0:33:00] decision problems kate may be problematic
+[0:33:01] problematic and here's an illustration so here we
+[0:33:04] and here's an illustration so here we have
+[0:33:05] have three scenarios with the same kate
+[0:33:08] three scenarios with the same kate well in the first one everybody get a
+[0:33:10] well in the first one everybody get a positive effect well in the last one
+[0:33:12] positive effect well in the last one only 20 or 20 of them get a huge
+[0:33:15] only 20 or 20 of them get a huge positive effect
+[0:33:16] positive effect while all the others have negative
+[0:33:18] while all the others have negative effect so if we are using kate
+[0:33:21] effect so if we are using kate then we cannot distinguish the three
+[0:33:23] then we cannot distinguish the three scenarios but
+[0:33:24] scenarios but clearly if we know this we should
+[0:33:26] clearly if we know this we should recommend the treatment for the first
+[0:33:29] recommend the treatment for the first while not recommended for the last
+[0:33:32] while not recommended for the last so i hope this will convince you that at
+[0:33:34] so i hope this will convince you that at least in some applications
+[0:33:36] least in some applications making direct inference of ide is
+[0:33:39] making direct inference of ide is important and valuable
+[0:33:42] important and valuable so throughout the talk we will only we
+[0:33:45] so throughout the talk we will only we will make three assumptions that are
+[0:33:47] will make three assumptions that are pretty standard
+[0:33:48] pretty standard in the literature they are the super
+[0:33:50] in the literature they are the super population
+[0:33:51] population and the sutwa and also strong
+[0:33:54] and the sutwa and also strong ignorability
+[0:33:56] ignorability so with all that let's start with the
+[0:33:59] so with all that let's start with the conflictual inference
+[0:34:02] conflictual inference so just consider a testing control unit
+[0:34:04] so just consider a testing control unit and by definition we can see
+[0:34:07] and by definition we can see we can observe her y zero so suppose we
+[0:34:10] we can observe her y zero so suppose we can get a c one hat
+[0:34:12] can get a c one hat that covers y one with probably a
+[0:34:14] that covers y one with probably a probability at least ninety percent
+[0:34:17] probability at least ninety percent then by contrasting the c1 hat
+[0:34:20] then by contrasting the c1 hat and the observed y0 we got an interval
+[0:34:24] and the observed y0 we got an interval that covers ite with the correct
+[0:34:26] that covers ite with the correct coverage
+[0:34:28] coverage so similarly we can do that for the
+[0:34:29] so similarly we can do that for the treated units
+[0:34:31] treated units and then we can define a ide interval
+[0:34:35] and then we can define a ide interval for the treated units and control units
+[0:34:38] for the treated units and control units and because they have the right coverage
+[0:34:40] and because they have the right coverage under both
+[0:34:42] under both treaty group and control group so
+[0:34:44] treaty group and control group so unconditionally
+[0:34:45] unconditionally we achieve our goal so in other words
+[0:34:49] we achieve our goal so in other words our task reduced to this and
+[0:34:52] our task reduced to this and equivalently
+[0:34:54] equivalently we want to find a c1 hat as an interval
+[0:34:57] we want to find a c1 hat as an interval estimate
+[0:34:58] estimate that covers y1 with probability at least
+[0:35:01] that covers y1 with probability at least 90 percent where x and y
+[0:35:03] 90 percent where x and y one are drawn from this distribution
+[0:35:06] one are drawn from this distribution conditioning on the control group
+[0:35:08] conditioning on the control group and this distribution can be further
+[0:35:10] and this distribution can be further decomposed as a parts on x
+[0:35:13] decomposed as a parts on x times the parts on y one
+[0:35:16] times the parts on y one and due to the strong ignorability we
+[0:35:18] and due to the strong ignorability we can simplify the part on y1 by removing
+[0:35:21] can simplify the part on y1 by removing t
+[0:35:23] t so this is our target distribution
+[0:35:26] so this is our target distribution but what we have are the observed treaty
+[0:35:29] but what we have are the observed treaty units
+[0:35:30] units which are id samples from another
+[0:35:32] which are id samples from another distribution
+[0:35:34] distribution and what we have is this red one while
+[0:35:37] and what we have is this red one while what we want
+[0:35:38] what we want is this blue one they have the same
+[0:35:40] is this blue one they have the same conditional distribution
+[0:35:42] conditional distribution while they differ in the covalent
+[0:35:44] while they differ in the covalent distribution
+[0:35:46] distribution so this is a problem called covalent
+[0:35:49] so this is a problem called covalent shift
+[0:35:50] shift and just to rephrase our goal we're
+[0:35:52] and just to rephrase our goal we're going to use id samples from
+[0:35:54] going to use id samples from the red distribution to construct this
+[0:35:57] the red distribution to construct this interval
+[0:35:57] interval estimate that has the right coverage
+[0:36:01] estimate that has the right coverage under another blue distribution
+[0:36:05] under another blue distribution and here by definition this covarial
+[0:36:07] and here by definition this covarial shift
+[0:36:08] shift equal to this likelihood ratio and using
+[0:36:11] equal to this likelihood ratio and using a simple
+[0:36:11] a simple base formula you can show that this is
+[0:36:14] base formula you can show that this is proportional to 1 minus e x
+[0:36:16] proportional to 1 minus e x over e x where e x is the propensity
+[0:36:18] over e x where e x is the propensity score
+[0:36:23] okay that's pretty much about the causal part of the stock
+[0:36:24] part of the stock and then let's get to the conformal part
+[0:36:26] and then let's get to the conformal part of this talk
+[0:36:28] of this talk and conformal inference is a generic
+[0:36:30] and conformal inference is a generic machinery
+[0:36:31] machinery to generate valid predictive intervals
+[0:36:34] to generate valid predictive intervals in finite samples without any
+[0:36:35] in finite samples without any asymptotics
+[0:36:37] asymptotics under no assumption other than
+[0:36:39] under no assumption other than exchangeability of data
+[0:36:41] exchangeability of data so this magical tool was initially
+[0:36:44] so this magical tool was initially proposed by wafk
+[0:36:46] proposed by wafk in 1990s and then it's developed by him
+[0:36:49] in 1990s and then it's developed by him and his colleagues and over the past
+[0:36:52] and his colleagues and over the past decades
+[0:36:53] decades a group of brilliant statisticians also
+[0:36:55] a group of brilliant statisticians also brought this
+[0:36:56] brought this conformal inference into statistics
+[0:37:03] and in this talk because of this covalent shift
+[0:37:05] covalent shift we no longer have id data or
+[0:37:07] we no longer have id data or exchangeable data
+[0:37:08] exchangeable data so we will use a variant of this
+[0:37:10] so we will use a variant of this conformal inference
+[0:37:12] conformal inference and in particular we will use the
+[0:37:14] and in particular we will use the weighted pre-conformalized quantile
+[0:37:16] weighted pre-conformalized quantile regression
+[0:37:17] regression and here the weighted parts come from
+[0:37:20] and here the weighted parts come from the barber candidates round us and tip
+[0:37:22] the barber candidates round us and tip johnny paper
+[0:37:23] johnny paper well the con the quantum regression part
+[0:37:26] well the con the quantum regression part comes from this romano patrician candice
+[0:37:28] comes from this romano patrician candice paper
+[0:37:29] paper so both are brilliant and we will use
+[0:37:32] so both are brilliant and we will use their tool
+[0:37:34] their tool so let me illustrate this procedure so
+[0:37:37] so let me illustrate this procedure so this procedure will start
+[0:37:38] this procedure will start splitting the data randomly into two
+[0:37:41] splitting the data randomly into two folds
+[0:37:42] folds and then on training sets it will fit
+[0:37:45] and then on training sets it will fit the 5 and 95
+[0:37:47] the 5 and 95 percentile of y 1 given x using
+[0:37:50] percentile of y 1 given x using any quantile regression method you like
+[0:37:52] any quantile regression method you like parametric or non-parametric
+[0:37:55] parametric or non-parametric then it will apply this estimate on the
+[0:37:58] then it will apply this estimate on the calibration set
+[0:38:00] calibration set so now you got two curves and then it
+[0:38:03] so now you got two curves and then it will calculate the sine
+[0:38:04] will calculate the sine distance so to get to get the sine
+[0:38:06] distance so to get to get the sine distance you first calculate
+[0:38:08] distance you first calculate the distance between each point to one
+[0:38:11] the distance between each point to one of these two black curves
+[0:38:12] of these two black curves which is closer and then
+[0:38:16] which is closer and then we give it a plus sign if it is outside
+[0:38:19] we give it a plus sign if it is outside this envelope
+[0:38:20] this envelope and a minus sign if it is inside
+[0:38:27] so once we do this we get a bunch of sine distance
+[0:38:28] sine distance and here's the histogram so the
+[0:38:30] and here's the histogram so the classical
+[0:38:31] classical conformal inference will directly work
+[0:38:33] conformal inference will directly work on this but for our purpose
+[0:38:36] on this but for our purpose we will re-weight it and for each
+[0:38:39] we will re-weight it and for each sign distance we will re-weight it by a
+[0:38:42] sign distance we will re-weight it by a weight
+[0:38:42] weight that can be computed using the
+[0:38:44] that can be computed using the covariance shift function
+[0:38:47] covariance shift function so here the exact formula of
+[0:38:50] so here the exact formula of of this weight is not important and
+[0:38:52] of this weight is not important and what's important here is that
+[0:38:54] what's important here is that once we get this blue histogram
+[0:38:57] once we get this blue histogram we are going to find the 90 quantile of
+[0:39:00] we are going to find the 90 quantile of this histogram
+[0:39:01] this histogram and finally we output c one hat
+[0:39:04] and finally we output c one hat as this two quantile estimate plus and
+[0:39:07] as this two quantile estimate plus and minus this
+[0:39:08] minus this this cutoff so this c one hat
+[0:39:12] this cutoff so this c one hat is the output of the weighted cqr
+[0:39:20] so what's the property of this and it turns out that this has
+[0:39:21] turns out that this has very strong theoretical guarantee so in
+[0:39:24] very strong theoretical guarantee so in the first scenario let's consider the
+[0:39:26] the first scenario let's consider the case where we know
+[0:39:27] case where we know propensity score exactly then what we
+[0:39:30] propensity score exactly then what we have is
+[0:39:31] have is this coverage is always greater than or
+[0:39:35] this coverage is always greater than or equal to 90 percent
+[0:39:36] equal to 90 percent in finite in finite samples without any
+[0:39:40] in finite in finite samples without any assumption other than
+[0:39:41] assumption other than the operating assumptions that i
+[0:39:43] the operating assumptions that i mentioned before
+[0:39:46] mentioned before and on the other hand suppose we we know
+[0:39:49] and on the other hand suppose we we know that
+[0:39:49] that design distance are almost surely
+[0:39:51] design distance are almost surely distinct and we have a
+[0:39:53] distinct and we have a weak overlap condition that this
+[0:39:56] weak overlap condition that this propensity score has an inverse second
+[0:39:58] propensity score has an inverse second moment
+[0:39:59] moment then we have the upper bound which is 90
+[0:40:02] then we have the upper bound which is 90 percent plus this
+[0:40:03] percent plus this constant which only depends on this
+[0:40:06] constant which only depends on this inverse moment
+[0:40:07] inverse moment times n to half so as you can see
+[0:40:10] times n to half so as you can see this constant only depends on this
+[0:40:12] this constant only depends on this moment
+[0:40:13] moment meaning that it's universal for any
+[0:40:16] meaning that it's universal for any conditional distribution
+[0:40:18] conditional distribution for any sample size and for any
+[0:40:20] for any sample size and for any procedure to fit conditional quantiles
+[0:40:22] procedure to fit conditional quantiles and actually this holds for the whole
+[0:40:25] and actually this holds for the whole theorem for both the lower bound and
+[0:40:26] theorem for both the lower bound and upper bound
+[0:40:29] upper bound so in other words if we treat this
+[0:40:31] so in other words if we treat this procedure to fit conditional quantiles
+[0:40:33] procedure to fit conditional quantiles as a black box
+[0:40:34] as a black box this weighted cqr is wrapping around the
+[0:40:36] this weighted cqr is wrapping around the black box
+[0:40:39] black box and it can always produce trustable
+[0:40:42] and it can always produce trustable confidence intervals
+[0:40:43] confidence intervals of y one so this theorem is applicable
+[0:40:46] of y one so this theorem is applicable to completely randomize and stratify
+[0:40:49] to completely randomize and stratify experiments
+[0:40:49] experiments with perfect compliance so that we can
+[0:40:52] with perfect compliance so that we can know this propensity score exactly
+[0:40:54] know this propensity score exactly but in general in observational studies
+[0:40:57] but in general in observational studies we don't know that and we have to
+[0:40:59] we don't know that and we have to estimate it so here if we
+[0:41:03] estimate it so here if we plug in an estimate then we will know
+[0:41:06] plug in an estimate then we will know that
+[0:41:06] that this coverage will be approximately 9
+[0:41:10] this coverage will be approximately 9 if either the propensity score or the
+[0:41:13] if either the propensity score or the conditional quantiles
+[0:41:14] conditional quantiles are accurately estimated
+[0:41:17] are accurately estimated so this is very similar to the double
+[0:41:19] so this is very similar to the double robustness for
+[0:41:20] robustness for every treatment fact in terms of the
+[0:41:23] every treatment fact in terms of the consistency of it
+[0:41:24] consistency of it in the sense that we only need to know
+[0:41:27] in the sense that we only need to know either
+[0:41:28] either the treatment assignment mechanism or
+[0:41:31] the treatment assignment mechanism or the outcome generating process
+[0:41:36] the outcome generating process so that's about the counterfactual
+[0:41:38] so that's about the counterfactual inference
+[0:41:39] inference and again in that we can move on to the
+[0:41:42] and again in that we can move on to the pure ide inference
+[0:41:44] pure ide inference and the first idea is we can just
+[0:41:48] and the first idea is we can just construct these intervals for y one y
+[0:41:50] construct these intervals for y one y zero separately
+[0:41:52] zero separately and then we directly contrast them so if
+[0:41:55] and then we directly contrast them so if we apply bonferronic correction
+[0:41:58] we apply bonferronic correction then we have theoretical guarantee
+[0:41:59] then we have theoretical guarantee because each of them
+[0:42:01] because each of them covers with coverage 95 percent so
+[0:42:04] covers with coverage 95 percent so we got 90 uh 90 uh coverage
+[0:42:07] we got 90 uh 90 uh coverage for the ite but it turns out that this
+[0:42:10] for the ite but it turns out that this method
+[0:42:11] method tends to be conservative in practice
+[0:42:14] tends to be conservative in practice so to overcome this we propose another
+[0:42:17] so to overcome this we propose another approach which
+[0:42:18] approach which we refer to as the nested approach
+[0:42:21] we refer to as the nested approach which uses the conflictual inference to
+[0:42:23] which uses the conflictual inference to generate ite intervals
+[0:42:25] generate ite intervals for subject indus in the study as an
+[0:42:28] for subject indus in the study as an intermediate step and then we're going
+[0:42:31] intermediate step and then we're going to
+[0:42:32] to generalize these intervals to subject
+[0:42:34] generalize these intervals to subject not in the study
+[0:42:36] not in the study and it turns out that in our at least in
+[0:42:39] and it turns out that in our at least in our cases
+[0:42:40] our cases this significantly reduces the
+[0:42:42] this significantly reduces the conservatism of the naive approach
+[0:42:46] conservatism of the naive approach so let me use a schematic description of
+[0:42:49] so let me use a schematic description of this
+[0:42:50] this so this approach will first randomly
+[0:42:53] so this approach will first randomly split data into two folds
+[0:42:55] split data into two folds vote one and vote two on which we can
+[0:42:58] vote one and vote two on which we can observe
+[0:42:58] observe x t and y
+[0:43:04] and then we have a hypothetical target the target population
+[0:43:06] the target population or their testing points on which we can
+[0:43:09] or their testing points on which we can only observe
+[0:43:10] only observe x so both potential outcomes are missing
+[0:43:12] x so both potential outcomes are missing here
+[0:43:18] and to start with this procedure will first take all treaty unit in vote one
+[0:43:21] first take all treaty unit in vote one and apply the conformal inference like
+[0:43:23] and apply the conformal inference like weighted
+[0:43:24] weighted split cqr to get the c1 hat
+[0:43:28] split cqr to get the c1 hat and then it will apply that on the
+[0:43:31] and then it will apply that on the control unit in fault 2.
+[0:43:37] and by doing that then we can contrast the c1 hat
+[0:43:38] the c1 hat and the observed y zero for this units
+[0:43:42] and the observed y zero for this units because they are in the study and if our
+[0:43:45] because they are in the study and if our c1 hat
+[0:43:46] c1 hat has the valid coverage then
+[0:43:49] has the valid coverage then the ci hat will have valid coverage on
+[0:43:52] the ci hat will have valid coverage on ide
+[0:43:54] ide and similarly we can do that on the
+[0:43:55] and similarly we can do that on the control units in for
+[0:43:57] control units in for one to produce c zero hats on the
+[0:44:00] one to produce c zero hats on the trigger unit in fault two
+[0:44:02] trigger unit in fault two and again we can define the c i hat by
+[0:44:05] and again we can define the c i hat by contrasting the
+[0:44:06] contrasting the two things and again by the construction
+[0:44:10] two things and again by the construction we get the ci hat
+[0:44:11] we get the ci hat the covers ide with the correct coverage
+[0:44:15] the covers ide with the correct coverage so after doing all of this we get
+[0:44:18] so after doing all of this we get xi and ci hats unfold too for each of
+[0:44:22] xi and ci hats unfold too for each of units in full two and by construction we
+[0:44:25] units in full two and by construction we know that ci
+[0:44:26] know that ci had covers the ide with the right
+[0:44:29] had covers the ide with the right coverage
+[0:44:29] coverage although ite is unobserved
+[0:44:33] although ite is unobserved so in other words the ci hat is an
+[0:44:36] so in other words the ci hat is an uncertainty measurement
+[0:44:38] uncertainty measurement of ide and motivated by this
+[0:44:42] of ide and motivated by this we can then try to fit a model on the ci
+[0:44:44] we can then try to fit a model on the ci hat
+[0:44:45] hat by treating ci hat as a outcome although
+[0:44:48] by treating ci hat as a outcome although it's two dimensional
+[0:44:50] it's two dimensional and we will apply any methods to learn
+[0:44:52] and we will apply any methods to learn the left and right
+[0:44:54] the left and right ends of c i hat using x i as covariates
+[0:44:58] ends of c i hat using x i as covariates and this will give us a curly c hat
+[0:45:02] and this will give us a curly c hat x as a function of x and finally we will
+[0:45:05] x as a function of x and finally we will produce this
+[0:45:06] produce this as the id interval for each testing
+[0:45:08] as the id interval for each testing point
+[0:45:11] point so the rationale behind it is that
+[0:45:14] so the rationale behind it is that the validity because we know c i hat is
+[0:45:16] the validity because we know c i hat is a valid
+[0:45:18] a valid interval on fault two and this photo is
+[0:45:21] interval on fault two and this photo is treated as a training set
+[0:45:23] treated as a training set so if our training if our estimation
+[0:45:26] so if our training if our estimation procedure is not
+[0:45:28] procedure is not it's successful then this validity of ci
+[0:45:31] it's successful then this validity of ci hat
+[0:45:31] hat is likely carried over to the testing
+[0:45:33] is likely carried over to the testing units
+[0:45:35] units but but of course as you can imagine if
+[0:45:38] but but of course as you can imagine if we are using some off the shelf method
+[0:45:39] we are using some off the shelf method to learn the c hat
+[0:45:41] to learn the c hat then we don't have any theoretical
+[0:45:44] then we don't have any theoretical guarantee
+[0:45:45] guarantee unless we um we propose more assumptions
+[0:45:49] unless we um we propose more assumptions to make sure this is consistent that
+[0:45:50] to make sure this is consistent that that's something we want to get rid of
+[0:45:54] that's something we want to get rid of but so if you really pursue for a strict
+[0:45:58] but so if you really pursue for a strict theoretical guarantee in our paper we
+[0:46:00] theoretical guarantee in our paper we propose a secondary conformal inference
+[0:46:03] propose a secondary conformal inference procedure to recalibrate this
+[0:46:05] procedure to recalibrate this so that you can guarantee to have
+[0:46:09] so that you can guarantee to have the right coverage but again that one
+[0:46:12] the right coverage but again that one will turn turns out to be conservative
+[0:46:16] will turn turns out to be conservative so for the rest of the talk i will focus
+[0:46:18] so for the rest of the talk i will focus on this inexact methods
+[0:46:24] okay so that's pretty much about our methods and now
+[0:46:26] methods and now for the rest of the talk i will talk
+[0:46:28] for the rest of the talk i will talk about our empirical results
+[0:46:34] so the first result is on a simple simulation study
+[0:46:35] simulation study which is a variant of the example from
+[0:46:37] which is a variant of the example from vagrant at the
+[0:46:39] vagrant at the 2018 paper on causal forest so here i
+[0:46:42] 2018 paper on causal forest so here i will just give you a very
+[0:46:44] will just give you a very short description of that so roughly
+[0:46:46] short description of that so roughly speaking will generate x
+[0:46:48] speaking will generate x as multivariate gaussian with either
+[0:46:51] as multivariate gaussian with either independent
+[0:46:52] independent or correlated features and the dimension
+[0:46:55] or correlated features and the dimension is either 10 or 100
+[0:46:58] is either 10 or 100 and for simplicity we will set this y
+[0:47:00] and for simplicity we will set this y zero to
+[0:47:01] zero to be always equal to zero so in other
+[0:47:03] be always equal to zero so in other words in this case the i t
+[0:47:05] words in this case the i t inference reduced to counterfactual
+[0:47:07] inference reduced to counterfactual inference
+[0:47:09] inference and then we generate y1 with a smooth
+[0:47:13] and then we generate y1 with a smooth mean that depends on x1 and x2 only two
+[0:47:16] mean that depends on x1 and x2 only two variables
+[0:47:17] variables and the variance can be either
+[0:47:19] and the variance can be either homoscodastic
+[0:47:21] homoscodastic or heteroskedastic but again it's a
+[0:47:24] or heteroskedastic but again it's a smooth function in the second case
+[0:47:26] smooth function in the second case and finally the propensity score is
+[0:47:29] and finally the propensity score is generated
+[0:47:30] generated with sufficient overlap and also it
+[0:47:32] with sufficient overlap and also it depends on x1 smoothly
+[0:47:35] depends on x1 smoothly so here you may wonder that this looks
+[0:47:37] so here you may wonder that this looks like an oversimplified simulation
+[0:47:40] like an oversimplified simulation and yes it is so typically when
+[0:47:42] and yes it is so typically when designing
+[0:47:43] designing simulations we want it to be complicated
+[0:47:46] simulations we want it to be complicated to mimic the reality rather than the
+[0:47:49] to mimic the reality rather than the oversimplified one
+[0:47:51] oversimplified one but here our goal is different and in
+[0:47:54] but here our goal is different and in this talk
+[0:47:55] this talk in our work we exactly want a
+[0:47:58] in our work we exactly want a oversimplified example because later on
+[0:48:01] oversimplified example because later on i will show you that even on this simple
+[0:48:04] i will show you that even on this simple data generating processes the existing
+[0:48:07] data generating processes the existing methods
+[0:48:08] methods may fail in terms of the coverage
+[0:48:11] may fail in terms of the coverage so by failure i don't mean the failure
+[0:48:14] so by failure i don't mean the failure in terms of the accuracy
+[0:48:16] in terms of the accuracy so i as i will show you later
+[0:48:19] so i as i will show you later so i will not show you the accuracy part
+[0:48:21] so i will not show you the accuracy part but all those methods
+[0:48:23] but all those methods are very good in terms of the accuracy
+[0:48:26] are very good in terms of the accuracy but
+[0:48:26] but all the comparisons i will show you are
+[0:48:29] all the comparisons i will show you are in terms of the coverage
+[0:48:30] in terms of the coverage so later on you will see some patterns
+[0:48:32] so later on you will see some patterns which may be different from what you
+[0:48:34] which may be different from what you have seen
+[0:48:35] have seen before that's only because we're using
+[0:48:38] before that's only because we're using the coverage as the criteria
+[0:48:39] the coverage as the criteria instead of the mean square error
+[0:48:42] instead of the mean square error so here we will compare our methods with
+[0:48:45] so here we will compare our methods with a bunch of other methods
+[0:48:46] a bunch of other methods and our method has been implemented in
+[0:48:49] and our method has been implemented in our package called cf causal
+[0:48:51] our package called cf causal which is available on github to download
+[0:48:54] which is available on github to download so if you want to play with it just go
+[0:48:56] so if you want to play with it just go for it
+[0:49:00] so here the first plot i'm going to show you is the marginal coverage of kate
+[0:49:03] you is the marginal coverage of kate which i call a sanity check the reason
+[0:49:07] which i call a sanity check the reason for that
+[0:49:07] for that is that all our theories are around
+[0:49:11] is that all our theories are around the coverage of ite we haven't proved
+[0:49:14] the coverage of ite we haven't proved anything about the coverage of kate
+[0:49:17] anything about the coverage of kate but the reason that i show you this
+[0:49:19] but the reason that i show you this first is because
+[0:49:21] first is because most of the existing methods are
+[0:49:23] most of the existing methods are designed to cover kate
+[0:49:25] designed to cover kate and in particular here i choose three
+[0:49:27] and in particular here i choose three methods the causal forest
+[0:49:29] methods the causal forest the ex-learner and the board
+[0:49:32] the ex-learner and the board so i choose the three method for two
+[0:49:34] so i choose the three method for two reasons first
+[0:49:35] reasons first they're all very popular methods and
+[0:49:39] they're all very popular methods and they all have well-written and
+[0:49:41] they all have well-written and well-documented softwares like our
+[0:49:44] well-documented softwares like our packages
+[0:49:47] packages and second is that they're very
+[0:49:50] and second is that they're very representative
+[0:49:51] representative in the sense that they have very
+[0:49:53] in the sense that they have very different ways to quantify
+[0:49:54] different ways to quantify uncertainty so here cause of forest uses
+[0:49:58] uncertainty so here cause of forest uses the infinitesimal jackknife
+[0:49:59] the infinitesimal jackknife xlearner is using the bootstrap and bart
+[0:50:03] xlearner is using the bootstrap and bart is using the built-in bayesian posterior
+[0:50:05] is using the built-in bayesian posterior uncertainty
+[0:50:08] uncertainty so here i'm gonna show you how
+[0:50:11] so here i'm gonna show you how how their coverage looked like and for
+[0:50:13] how their coverage looked like and for our method
+[0:50:15] our method as i mentioned before our method wrap
+[0:50:17] as i mentioned before our method wrap around black box
+[0:50:18] around black box so here we wrap around the random forest
+[0:50:21] so here we wrap around the random forest the gradient boosting
+[0:50:23] the gradient boosting and bart to produce the conditional
+[0:50:26] and bart to produce the conditional quantile estimates
+[0:50:28] quantile estimates and here you can see eight plots and in
+[0:50:31] and here you can see eight plots and in the top row
+[0:50:32] the top row we have the dimension equal to 10 and in
+[0:50:35] we have the dimension equal to 10 and in the bottom row we have dimension equal
+[0:50:36] the bottom row we have dimension equal to 100
+[0:50:38] to 100 and here in each column correspond to a
+[0:50:40] and here in each column correspond to a setting
+[0:50:41] setting depending on whether you have
+[0:50:42] depending on whether you have homogenatic or header scholastic errors
+[0:50:45] homogenatic or header scholastic errors or and whether you have independent or
+[0:50:48] or and whether you have independent or correlated features
+[0:50:55] now let's look at the results so here if you look at the bottom three
+[0:50:56] you look at the bottom three methods they all they are all designed
+[0:50:59] methods they all they are all designed to cover kate
+[0:51:02] to cover kate and here the red line is the desired
+[0:51:05] and here the red line is the desired coverage but you can see all those
+[0:51:08] coverage but you can see all those methods
+[0:51:09] methods fail to cover at least in some scenarios
+[0:51:13] fail to cover at least in some scenarios and things are worse off when the
+[0:51:16] and things are worse off when the dimension goes from 10 to 100.
+[0:51:20] dimension goes from 10 to 100. so all of this methods have
+[0:51:23] so all of this methods have some theoretical guarantee on the
+[0:51:25] some theoretical guarantee on the coverage in terms
+[0:51:26] coverage in terms of in some asymptotic regime or
+[0:51:28] of in some asymptotic regime or non-symptomatic regimes
+[0:51:30] non-symptomatic regimes so but you can see for this example um
+[0:51:33] so but you can see for this example um they didn't achieve that but for our
+[0:51:36] they didn't achieve that but for our method
+[0:51:37] method although we are not designed to cover
+[0:51:39] although we are not designed to cover kate but
+[0:51:40] kate but we're conservative so in statistics
+[0:51:43] we're conservative so in statistics being conservative
+[0:51:44] being conservative is not good but sometimes in
+[0:51:47] is not good but sometimes in at least in the sensitive settings being
+[0:51:50] at least in the sensitive settings being conservative
+[0:51:51] conservative is more it's better than being
+[0:51:53] is more it's better than being anti-conservative
+[0:51:55] anti-conservative so that's the first plot and the second
+[0:51:58] so that's the first plot and the second plot
+[0:51:59] plot is about our story it's the marginal
+[0:52:02] is about our story it's the marginal coverage of ite
+[0:52:04] coverage of ite so in this case we will evaluate the
+[0:52:07] so in this case we will evaluate the coverage
+[0:52:08] coverage of ite directly and so if you look at
+[0:52:12] of ite directly and so if you look at ex-learner and kosovo's you see that
+[0:52:14] ex-learner and kosovo's you see that they undercover
+[0:52:15] they undercover but that's not an argument against these
+[0:52:17] but that's not an argument against these two methods because they are not
+[0:52:19] two methods because they are not designed to cover ide
+[0:52:20] designed to cover ide so it's not surprising that they didn't
+[0:52:22] so it's not surprising that they didn't cover id
+[0:52:24] cover id and for bart because bart is a flexible
+[0:52:27] and for bart because bart is a flexible bayesian method
+[0:52:28] bayesian method so if you replace the credible interval
+[0:52:31] so if you replace the credible interval by
+[0:52:32] by predictive interval then you can also
+[0:52:34] predictive interval then you can also get
+[0:52:35] get um valid coverage for ide
+[0:52:39] um valid coverage for ide but here you can see in the hom schedule
+[0:52:41] but here you can see in the hom schedule case
+[0:52:42] case board has perfect coverage
+[0:52:45] board has perfect coverage well in heteroskedastic case bart may
+[0:52:48] well in heteroskedastic case bart may undercover
+[0:52:54] now let's look at our method so first our method has
+[0:52:55] our method has almost exact coverage in all cases
+[0:52:59] almost exact coverage in all cases and in all these cases we we don't
+[0:53:01] and in all these cases we we don't assume we know the propensity score so
+[0:53:02] assume we know the propensity score so everything is estimated
+[0:53:04] everything is estimated but we still have this exact coverage so
+[0:53:07] but we still have this exact coverage so this somehow
+[0:53:08] this somehow um corroborates our theory on
+[0:53:12] um corroborates our theory on on this near near exact coverage
+[0:53:20] and one more thing is we you see that even in this
+[0:53:21] you see that even in this heteroskedastic case
+[0:53:24] heteroskedastic case and even if we wrap around bart we
+[0:53:28] and even if we wrap around bart we get the correct coverage even if the
+[0:53:31] get the correct coverage even if the bart method doesn't
+[0:53:36] so those are about the coverage and the next thing is about the average lens
+[0:53:39] next thing is about the average lens so in this case we give this blue line
+[0:53:41] so in this case we give this blue line vertical line
+[0:53:42] vertical line as the oracle lens meaning that suppose
+[0:53:45] as the oracle lens meaning that suppose we're the oracle
+[0:53:47] we're the oracle who can observe the whole distribution
+[0:53:49] who can observe the whole distribution of ide
+[0:53:50] of ide then in principle we can use the 5 and
+[0:53:53] then in principle we can use the 5 and 95 percent
+[0:53:54] 95 percent quantile as the confidence interval so
+[0:53:57] quantile as the confidence interval so that's the oracle interval
+[0:53:59] that's the oracle interval and you see that in this case bart
+[0:54:02] and you see that in this case bart has almost near perfect
+[0:54:06] has almost near perfect average lens in the homo scadastic case
+[0:54:09] average lens in the homo scadastic case but in those two cases if we wrap around
+[0:54:12] but in those two cases if we wrap around part
+[0:54:13] part we almost get equally good average lens
+[0:54:17] we almost get equally good average lens so that means if we wrap around good
+[0:54:19] so that means if we wrap around good methods we're good
+[0:54:21] methods we're good but in a hydroscadastic case you see
+[0:54:24] but in a hydroscadastic case you see that
+[0:54:25] that in those cases bought undercover and in
+[0:54:27] in those cases bought undercover and in this case is
+[0:54:28] this case is our our methods kind of detect this
+[0:54:33] our our methods kind of detect this so the average lens becomes worse and
+[0:54:36] so the average lens becomes worse and also more
+[0:54:38] also more variable than wrapping around other
+[0:54:40] variable than wrapping around other methods
+[0:54:42] methods and over all scenarios we see that if we
+[0:54:44] and over all scenarios we see that if we wrap around gradient boosting and random
+[0:54:46] wrap around gradient boosting and random force
+[0:54:47] force they look very good and one more thing
+[0:54:50] they look very good and one more thing is this external and causal forest
+[0:54:53] is this external and causal forest you see they have very short intervals
+[0:54:55] you see they have very short intervals but that's because they own the cover
+[0:55:02] so that's about the marginal coverage and average lens and the final thing is
+[0:55:05] and average lens and the final thing is what about the conditional coverage
+[0:55:08] what about the conditional coverage and our theory only covers the marginal
+[0:55:11] and our theory only covers the marginal coverage
+[0:55:12] coverage which average over all covariate values
+[0:55:15] which average over all covariate values but in principle we can still see what
+[0:55:18] but in principle we can still see what happens for the conditional coverage
+[0:55:20] happens for the conditional coverage and to to visualize this we will use
+[0:55:24] and to to visualize this we will use this
+[0:55:24] this percentile of conditional variance as
+[0:55:27] percentile of conditional variance as the x-axis
+[0:55:28] the x-axis and we'll we will plot the conditional
+[0:55:31] and we'll we will plot the conditional coverage
+[0:55:32] coverage as a function of this so intuitively if
+[0:55:35] as a function of this so intuitively if this conditional variance is very large
+[0:55:38] this conditional variance is very large then it's harder to cover now you can
+[0:55:41] then it's harder to cover now you can see
+[0:55:42] see first for crossovers and x learner
+[0:55:44] first for crossovers and x learner because their overall coverage is low so
+[0:55:46] because their overall coverage is low so here their conditional coverage is also
+[0:55:48] here their conditional coverage is also low
+[0:55:49] low but for bart if you still remember
+[0:55:52] but for bart if you still remember here although borrowed on the cover but
+[0:55:55] here although borrowed on the cover but it's not that severe
+[0:55:57] it's not that severe but if you look at conditional coverage
+[0:55:59] but if you look at conditional coverage you see that at the
+[0:56:01] you see that at the right end of this plot where the
+[0:56:02] right end of this plot where the conditional coverage is very large
+[0:56:05] conditional coverage is very large bars clearly on the covers but if we
+[0:56:08] bars clearly on the covers but if we wrap around part
+[0:56:10] wrap around part you see that this gets much better
+[0:56:12] you see that this gets much better although you still see this decreasing
+[0:56:14] although you still see this decreasing trend
+[0:56:15] trend and finally if we wrap around random
+[0:56:18] and finally if we wrap around random forest and boosting
+[0:56:19] forest and boosting we see very very good conditional
+[0:56:21] we see very very good conditional coverage in these cases
+[0:56:27] okay so that's pretty much about the simulation
+[0:56:28] simulation and in order to mimic the reality we
+[0:56:31] and in order to mimic the reality we perform
+[0:56:32] perform another simulation study on a real data
+[0:56:35] another simulation study on a real data in particular we choose the national
+[0:56:37] in particular we choose the national study of unlearning mindset data
+[0:56:39] study of unlearning mindset data that used in 2018 acic conference
+[0:56:43] that used in 2018 acic conference and here we will fit models on this data
+[0:56:46] and here we will fit models on this data to generate
+[0:56:47] to generate the potential outcomes but for the
+[0:56:50] the potential outcomes but for the covariates
+[0:56:51] covariates we use theoretical variants and in this
+[0:56:54] we use theoretical variants and in this case we have the mixed types covariates
+[0:56:56] case we have the mixed types covariates including continuous and categorical and
+[0:56:59] including continuous and categorical and we also have a header scale that's
+[0:57:00] we also have a header scale that's adaptic errors
+[0:57:06] so here we only compare four methods and here we only wrap around
+[0:57:07] here we only wrap around uh we wrap our method around bars just
+[0:57:10] uh we wrap our method around bars just for comparison
+[0:57:11] for comparison so you can see in terms of coverage of
+[0:57:14] so you can see in terms of coverage of ite
+[0:57:14] ite you see that parts still on the cover
+[0:57:17] you see that parts still on the cover although this gap is not that large but
+[0:57:20] although this gap is not that large but our method covers
+[0:57:23] our method covers and in terms of the lens you see that
+[0:57:26] and in terms of the lens you see that our lens is not much longer than bart
+[0:57:29] our lens is not much longer than bart even if
+[0:57:31] even if um bar is on under covering and also
+[0:57:34] um bar is on under covering and also here the blue line again is the oracle
+[0:57:36] here the blue line again is the oracle lens
+[0:57:37] lens but now you see a much larger gap
+[0:57:39] but now you see a much larger gap compared to the previous setting
+[0:57:40] compared to the previous setting that's because in this setting both y1
+[0:57:44] that's because in this setting both y1 and y0
+[0:57:45] and y0 are non-zero so in this case
+[0:57:48] are non-zero so in this case we can never get the oracle lens because
+[0:57:51] we can never get the oracle lens because y1 and y0 can never be observed
+[0:57:53] y1 and y0 can never be observed simultaneously
+[0:57:54] simultaneously so even the best method should have some
+[0:57:56] so even the best method should have some gap from this blue line
+[0:58:02] and finally about the conditional coverage you see a very similar pattern
+[0:58:04] coverage you see a very similar pattern as the previous study
+[0:58:05] as the previous study and here our method has a pretty good
+[0:58:08] and here our method has a pretty good conditional coverage in terms of both
+[0:58:10] conditional coverage in terms of both if we stratify against both kate or
+[0:58:13] if we stratify against both kate or conditional variance
+[0:58:16] conditional variance okay so to conclude in this talk we
+[0:58:18] okay so to conclude in this talk we proposed a conformal inference
+[0:58:20] proposed a conformal inference of counterfactuals and individual
+[0:58:22] of counterfactuals and individual treatment facts and we found it's very
+[0:58:24] treatment facts and we found it's very reliable
+[0:58:25] reliable in the sense that for randomized
+[0:58:27] in the sense that for randomized experiments we achieve
+[0:58:28] experiments we achieve near exact coverage in finite samples
+[0:58:31] near exact coverage in finite samples with any black box
+[0:58:33] with any black box and for observational studies we have
+[0:58:35] and for observational studies we have doubly robust guarantees of coverage
+[0:58:38] doubly robust guarantees of coverage and finally just a little piece of
+[0:58:41] and finally just a little piece of advertisement of my gsm talk next
+[0:58:43] advertisement of my gsm talk next wednesday
+[0:58:44] wednesday so if we have a questions then just come
+[0:58:48] so if we have a questions then just come come to my talk and that that's that's
+[0:58:50] come to my talk and that that's that's just a contributed paper so i will not
+[0:58:52] just a contributed paper so i will not give a live talk
+[0:58:54] give a live talk but fortunately i will get a four hour
+[0:58:56] but fortunately i will get a four hour long time window for q a
+[0:58:59] long time window for q a so just talk to me if you have questions
+[0:59:01] so just talk to me if you have questions and thank you all for your attention
+[0:59:06] and thank you all for your attention thank you lihua um so we have a few a
+[0:59:08] thank you lihua um so we have a few a few questions
+[0:59:09] few questions uh so the first is uh pong ding
+[0:59:12] uh so the first is uh pong ding so i'm gonna unmute pong now
+[0:59:24] thank you for the wonderful talk i have a question about
+[0:59:25] a question about the more fundamental issue because my
+[0:59:28] the more fundamental issue because my understanding of individual treatment
+[0:59:30] understanding of individual treatment effect
+[0:59:30] effect is it's challenging because we don't
+[0:59:32] is it's challenging because we don't know the correlation
+[0:59:34] know the correlation between the potential outcomes y one y
+[0:59:36] between the potential outcomes y one y zero
+[0:59:37] zero based on the data because that is
+[0:59:39] based on the data because that is fundamentally beyond what we have
+[0:59:41] fundamentally beyond what we have that's why you usually will think ite is
+[0:59:44] that's why you usually will think ite is too difficult
+[0:59:45] too difficult yeah but here since uh the correlation
+[0:59:48] yeah but here since uh the correlation between the potential outcome does not
+[0:59:50] between the potential outcome does not play any role in your
+[0:59:51] play any role in your method or does it play any role even in
+[0:59:54] method or does it play any role even in the simulation
+[0:59:55] the simulation for example you can simulate y1 and y0
+[0:59:58] for example you can simulate y1 and y0 and
+[0:59:58] and randomly permute the column of y
+[1:00:02] randomly permute the column of y or y zero it will preserve the same
+[1:00:04] or y zero it will preserve the same marginal distributions but we'll change
+[1:00:06] marginal distributions but we'll change the correlation
+[1:00:08] the correlation how would the simulation change well
+[1:00:12] how would the simulation change well i i just didn't get this point that's a
+[1:00:15] i i just didn't get this point that's a great question
+[1:00:16] great question um so first as you can see
+[1:00:19] um so first as you can see if so we can always take the worst case
+[1:00:22] if so we can always take the worst case um
+[1:00:22] um combination of these two intervals and
+[1:00:25] combination of these two intervals and in that case
+[1:00:26] in that case for example if we use this naive
+[1:00:28] for example if we use this naive approach to generate c1 and c0
+[1:00:32] approach to generate c1 and c0 and then contrasting that then this
+[1:00:34] and then contrasting that then this interval will cover ide
+[1:00:36] interval will cover ide no regardless of the correlation
+[1:00:38] no regardless of the correlation structure of y1 and y0
+[1:00:41] structure of y1 and y0 okay it's just like for example worst
+[1:00:44] okay it's just like for example worst case
+[1:00:45] case combination or like in the in the
+[1:00:47] combination or like in the in the classical
+[1:00:48] classical pneumatic inference you ignore that uh
+[1:00:51] pneumatic inference you ignore that uh um unidentifiable term so you got the
+[1:00:54] um unidentifiable term so you got the upper bound
+[1:00:55] upper bound here this naive approach is similar and
+[1:00:58] here this naive approach is similar and also for the nasty approach as i
+[1:00:59] also for the nasty approach as i mentioned before
+[1:01:00] mentioned before if you do we do have the approach that
+[1:01:03] if you do we do have the approach that applies a secondary conformal inference
+[1:01:05] applies a secondary conformal inference to recalibrate our intervals so there
+[1:01:08] to recalibrate our intervals so there you can still get
+[1:01:09] you can still get this worst case combination but
+[1:01:13] this worst case combination but the method we introduce didn't take that
+[1:01:17] the method we introduce didn't take that into account so the method
+[1:01:21] into account so the method sorry the method i described in in this
+[1:01:24] sorry the method i described in in this talk
+[1:01:24] talk doesn't take that into account so in our
+[1:01:27] doesn't take that into account so in our simulation
+[1:01:28] simulation in this simulation we generate potential
+[1:01:31] in this simulation we generate potential outcome independently
+[1:01:32] outcome independently and what we found is if we generate the
+[1:01:35] and what we found is if we generate the potential outcomes
+[1:01:37] potential outcomes with um perfect positive dependence
+[1:01:40] with um perfect positive dependence say y1 minus y0 equal to a constant
+[1:01:43] say y1 minus y0 equal to a constant then we got a conservative coverage
+[1:01:46] then we got a conservative coverage and if we generate the potential
+[1:01:49] and if we generate the potential outcomes with
+[1:01:51] outcomes with very adversarial negative correlation
+[1:01:54] very adversarial negative correlation then our method will slightly undercover
+[1:01:57] then our method will slightly undercover but all other methods will undercover in
+[1:01:59] but all other methods will undercover in this case
+[1:02:00] this case we'll have more severe uh larger gap
+[1:02:03] we'll have more severe uh larger gap from this line
+[1:02:05] from this line so i think this is a very interesting
+[1:02:07] so i think this is a very interesting question like
+[1:02:08] question like how can we so if we want to
+[1:02:12] how can we so if we want to want to be as robust as possible then we
+[1:02:14] want to be as robust as possible then we should use
+[1:02:15] should use those conservative methods like the
+[1:02:17] those conservative methods like the naive approach or the secondary
+[1:02:19] naive approach or the secondary conformal inference approach
+[1:02:20] conformal inference approach in the nasty approach but in general if
+[1:02:23] in the nasty approach but in general if we do have some knowledge that this
+[1:02:25] we do have some knowledge that this correlation is not too negative
+[1:02:27] correlation is not too negative i think our method still makes sense so
+[1:02:30] i think our method still makes sense so does that make sense
+[1:02:32] does that make sense okay thank you
+[1:02:39] all right fantastic thanks i think we're now uh shortly running out
+[1:02:42] i think we're now uh shortly running out of time
+[1:02:43] of time so uh first uh thank you very much uh
+[1:02:45] so uh first uh thank you very much uh georgia and luha for
+[1:02:46] georgia and luha for fantastic talks thank you emmanuel and
+[1:02:49] fantastic talks thank you emmanuel and fan
+[1:02:50] fan for helping out in q a
+[1:02:53] for helping out in q a and next week
+[1:02:59] we have andrew gelman from colombia talk about 100 stories of causal inference we
+[1:03:02] about 100 stories of causal inference we are very much looking forward to that
+[1:03:04] are very much looking forward to that talk
+[1:03:05] talk until then we hope you stay safe and
+[1:03:08] until then we hope you stay safe and have a good week
+[1:03:09] have a good week thanks you all for joining and hope to
+[1:03:11] thanks you all for joining and hope to see you all next week
+[1:03:20] you

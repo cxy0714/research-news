@@ -1,0 +1,1550 @@
+[0:00:04] All right, welcome back to the online causal inference seminar. Today we're
+[0:00:07] causal inference seminar. Today we're very excited to have a a fantastic
+[0:00:09] very excited to have a a fantastic speaker and discussant. We have a Zjan
+[0:00:12] speaker and discussant. We have a Zjan Wu from Rutgers University who will talk
+[0:00:14] Wu from Rutgers University who will talk about multissource learning with miniax
+[0:00:16] about multissource learning with miniax optimization from adversarial robustness
+[0:00:18] optimization from adversarial robustness to causal invariance. And after that
+[0:00:20] to causal invariance. And after that we'll have a discussion by Kaisen Wang
+[0:00:22] we'll have a discussion by Kaisen Wang from Columbbo univers Columbia Colombia
+[0:00:24] from Columbbo univers Columbia Colombia University. Um, we also today have two
+[0:00:28] University. Um, we also today have two collaborators of Zjun uh in Q&amp;A. So feel
+[0:00:32] collaborators of Zjun uh in Q&amp;A. So feel free to uh ask any questions in Q&amp;A and
+[0:00:34] free to uh ask any questions in Q&amp;A and the collaborators are happy to help you
+[0:00:36] the collaborators are happy to help you out. Yes, without further ado, uh thank
+[0:00:39] out. Yes, without further ado, uh thank you all for coming and uh DJ John u
+[0:00:43] you all for coming and uh DJ John u please take us away. Okay.
+[0:00:46] please take us away. Okay. Uh so so this is full screen right now.
+[0:00:50] Uh so so this is full screen right now. Um now it is. Yes, it's a full screen
+[0:00:53] Um now it is. Yes, it's a full screen and it's moving. Yes. Okay. Great. Yeah.
+[0:00:57] and it's moving. Yes. Okay. Great. Yeah. So, uh thank you thank you all for
+[0:00:59] So, uh thank you thank you all for coming and uh thank Dominic for inviting
+[0:01:02] coming and uh thank Dominic for inviting me and also all the organizer for
+[0:01:05] me and also all the organizer for inviting me and um and introduce
+[0:01:08] inviting me and um and introduce introducing this talk. So it's really my
+[0:01:10] introducing this talk. So it's really my honor like to present some of my recent
+[0:01:11] honor like to present some of my recent work uh in the online co inference
+[0:01:14] work uh in the online co inference seminar. So uh I'm going to talk a few
+[0:01:16] seminar. So uh I'm going to talk a few works but I put them in a like host uh
+[0:01:19] works but I put them in a like host uh in the same under same theme and then uh
+[0:01:21] in the same under same theme and then uh discuss uh the connection uh between the
+[0:01:24] discuss uh the connection uh between the distribution of bus and the causal
+[0:01:26] distribution of bus and the causal inference or causal inference learning.
+[0:01:29] inference or causal inference learning. Okay. So the problem I will present is
+[0:01:32] Okay. So the problem I will present is from the the multisource learning. So
+[0:01:34] from the the multisource learning. So that means the data from different
+[0:01:36] that means the data from different institutions or from different sources.
+[0:01:38] institutions or from different sources. For example, here we got data from uh
+[0:01:40] For example, here we got data from uh four different sources and then um we
+[0:01:43] four different sources and then um we try to leverage the information from
+[0:01:46] try to leverage the information from across all of the four different sources
+[0:01:48] across all of the four different sources and then uh transfer the sharing
+[0:01:49] and then uh transfer the sharing information uh to our target
+[0:01:51] information uh to our target institution. So that's the main goal of
+[0:01:53] institution. So that's the main goal of this multisource learning and for the
+[0:01:56] this multisource learning and for the particular data type. So we are thinking
+[0:01:57] particular data type. So we are thinking like this we got this as example here we
+[0:02:00] like this we got this as example here we got the three different institutes and
+[0:02:02] got the three different institutes and then this institutes can be hospitals
+[0:02:04] then this institutes can be hospitals for example like um for the uh like
+[0:02:07] for example like um for the uh like three different hospitals and for each
+[0:02:09] three different hospitals and for each hospital we can have observation of the
+[0:02:11] hospital we can have observation of the coarience and also observation for the
+[0:02:13] coarience and also observation for the outcome across different hospitals and
+[0:02:16] outcome across different hospitals and our goal is actually try to build
+[0:02:18] our goal is actually try to build accurate prediction model or
+[0:02:19] accurate prediction model or generalizable prediction model for
+[0:02:21] generalizable prediction model for target hospital and for target hospital
+[0:02:23] target hospital and for target hospital um maybe it's a new it's a newly
+[0:02:25] um maybe it's a new it's a newly established hospital. So uh we do not
+[0:02:28] established hospital. So uh we do not have as much information. So as an
+[0:02:30] have as much information. So as an example here we may just have some
+[0:02:31] example here we may just have some covert observation but no outcome
+[0:02:33] covert observation but no outcome observations. So this is unsurprised
+[0:02:35] observations. So this is unsurprised setting for the target hospital or we
+[0:02:38] setting for the target hospital or we may have like um like a coar observation
+[0:02:42] may have like um like a coar observation also a little bit outcome observation.
+[0:02:44] also a little bit outcome observation. So in practice typically for this new
+[0:02:46] So in practice typically for this new hospital it's hard to get a lot of like
+[0:02:48] hospital it's hard to get a lot of like outcome annotation because uh it
+[0:02:50] outcome annotation because uh it requires like the some specialist uh to
+[0:02:53] requires like the some specialist uh to review the to review the patient and
+[0:02:55] review the to review the patient and then label the outcome. Okay. So this is
+[0:02:58] then label the outcome. Okay. So this is a basic setup and also this multisource
+[0:03:01] a basic setup and also this multisource learning is not just for like um
+[0:03:03] learning is not just for like um hospitals or or like it's can actually
+[0:03:05] hospitals or or like it's can actually be applied for a lot of scenarios. For
+[0:03:08] be applied for a lot of scenarios. For example, uh if the data are collected
+[0:03:10] example, uh if the data are collected from different time, different location
+[0:03:12] from different time, different location and also from different like people
+[0:03:14] and also from different like people doing the environment. So that's
+[0:03:16] doing the environment. So that's actually the multiple batch data and in
+[0:03:18] actually the multiple batch data and in this cases we also have the issue and
+[0:03:20] this cases we also have the issue and also the data can may come from like a
+[0:03:23] also the data can may come from like a different ancestry. Okay. So the main
+[0:03:25] different ancestry. Okay. So the main goal of this multisource learning is we
+[0:03:27] goal of this multisource learning is we try to uh think about the data they may
+[0:03:30] try to uh think about the data they may have distribution shift and we allow
+[0:03:32] have distribution shift and we allow there exists a distribution shift and we
+[0:03:34] there exists a distribution shift and we try to learn that's information that can
+[0:03:36] try to learn that's information that can be shared across different distribution
+[0:03:38] be shared across different distribution and then transfer the information to our
+[0:03:40] and then transfer the information to our target domain. So in the whole talk uh I
+[0:03:44] target domain. So in the whole talk uh I I will try to advocate this minimax
+[0:03:46] I will try to advocate this minimax framework. So not the minimax optimality
+[0:03:48] framework. So not the minimax optimality but it's a minimax optimization. So
+[0:03:50] but it's a minimax optimization. So basically um I'm I'm going to give more
+[0:03:53] basically um I'm I'm going to give more details later but here just a brief
+[0:03:55] details later but here just a brief overview. So we try to look at this data
+[0:03:57] overview. So we try to look at this data from uh X and Y from a target
+[0:04:00] from uh X and Y from a target distribution uh sorry from a possible
+[0:04:02] distribution uh sorry from a possible target distribution and then I divide
+[0:04:04] target distribution and then I divide the risk and then I do a a maximum of
+[0:04:08] the risk and then I do a a maximum of this uh this risk. So that's the worst
+[0:04:10] this uh this risk. So that's the worst case risk and then I do a minimization
+[0:04:12] case risk and then I do a minimization of this prediction model F. So in this
+[0:04:14] of this prediction model F. So in this way we can define uh this prediction
+[0:04:16] way we can define uh this prediction model far and then um we can uh study
+[0:04:19] model far and then um we can uh study like the property of this far. I see a
+[0:04:22] like the property of this far. I see a question from the
+[0:04:24] question from the chat. Oh okay thank you. So we'll talk
+[0:04:28] chat. Oh okay thank you. So we'll talk about three problems. The first one
+[0:04:29] about three problems. The first one we'll start with is the distributional
+[0:04:31] we'll start with is the distributional bus problem and then we'll move on to
+[0:04:33] bus problem and then we'll move on to the transfer learning and then we'll
+[0:04:35] the transfer learning and then we'll come back to this the inverse learning
+[0:04:37] come back to this the inverse learning problem. And as as the cartoon
+[0:04:39] problem. And as as the cartoon illustrate here, so the main difference
+[0:04:41] illustrate here, so the main difference is this uncertain class C is different
+[0:04:43] is this uncertain class C is different and just uh by like choosing this
+[0:04:46] and just uh by like choosing this uncertain class C uh in very careful way
+[0:04:49] uncertain class C uh in very careful way we can actually achieve these three
+[0:04:51] we can actually achieve these three tasks under the same framework. Okay. So
+[0:04:54] tasks under the same framework. Okay. So let me start with the the first part the
+[0:04:57] let me start with the the first part the distribution robust machine learning and
+[0:04:58] distribution robust machine learning and this part also will introduce the main
+[0:05:00] this part also will introduce the main idea for this uh distribution robust
+[0:05:03] idea for this uh distribution robust optimization. So let me review the data.
+[0:05:05] optimization. So let me review the data. For the data we are thinking about for
+[0:05:07] For the data we are thinking about for the each source data we got both X and Y
+[0:05:10] the each source data we got both X and Y observation. And then uh for the source
+[0:05:12] observation. And then uh for the source data we assume this PLX is the coariant
+[0:05:15] data we assume this PLX is the coariant distribution for the L source data and
+[0:05:17] distribution for the L source data and PL YMX is the um the condition outcome
+[0:05:21] PL YMX is the um the condition outcome uh distribution for the L source data.
+[0:05:23] uh distribution for the L source data. And this is just notation. And for
+[0:05:25] And this is just notation. And for target we got the coariant observation X
+[0:05:27] target we got the coariant observation X here. And we do not have outcome
+[0:05:29] here. And we do not have outcome observation Y here. And we use the qx to
+[0:05:31] observation Y here. And we use the qx to denote the coar observation coarity
+[0:05:33] denote the coar observation coarity distribution and q y qx to denote this
+[0:05:37] distribution and q y qx to denote this conditional like outcome distribution
+[0:05:39] conditional like outcome distribution for the target domain. Okay. So this is
+[0:05:41] for the target domain. Okay. So this is a particular setting we're going to look
+[0:05:43] a particular setting we're going to look at for uh in the following like few
+[0:05:45] at for uh in the following like few slides. And then uh this setting
+[0:05:46] slides. And then uh this setting actually has a name in uh this machine
+[0:05:49] actually has a name in uh this machine learning regime is called the
+[0:05:51] learning regime is called the unsurprised domain adaptation because in
+[0:05:53] unsurprised domain adaptation because in the target domain is unsurprised and we
+[0:05:55] the target domain is unsurprised and we try to do domain adaptation. So that's
+[0:05:57] try to do domain adaptation. So that's why it's called unsurprised domain
+[0:05:58] why it's called unsurprised domain adaptation. Okay. So for this case uh
+[0:06:01] adaptation. Okay. So for this case uh how can we define this distribution rob
+[0:06:03] how can we define this distribution rob model. So uh the first thing we try to
+[0:06:07] model. So uh the first thing we try to introduce is uncertain class. So across
+[0:06:09] introduce is uncertain class. So across the source and target. So we allow that
+[0:06:11] the source and target. So we allow that the coariant distribution can be
+[0:06:12] the coariant distribution can be different and also we allow that the
+[0:06:14] different and also we allow that the conditional outcome distribution can be
+[0:06:16] conditional outcome distribution can be different. So we try to allow as much
+[0:06:18] different. So we try to allow as much like data hygenity as possible. And in
+[0:06:20] like data hygenity as possible. And in this case we actually uh we realize that
+[0:06:23] this case we actually uh we realize that it's impossible for us to identify this
+[0:06:25] it's impossible for us to identify this conditional outcome distribution. And
+[0:06:27] conditional outcome distribution. And the only thing that we can do is we try
+[0:06:29] the only thing that we can do is we try to find a class and such that we it
+[0:06:31] to find a class and such that we it contains this uncertainty this uh uh
+[0:06:33] contains this uncertainty this uh uh future like true target population but
+[0:06:35] future like true target population but we never know where it is because we we
+[0:06:38] we never know where it is because we we don't really have outcome observations
+[0:06:40] don't really have outcome observations on the target domain. Okay. So we
+[0:06:42] on the target domain. Okay. So we actually define this uncertain class in
+[0:06:44] actually define this uncertain class in this form. So the qx is identifiable
+[0:06:46] this form. So the qx is identifiable because we have cover observation from
+[0:06:48] because we have cover observation from the target domain. But outcome
+[0:06:49] the target domain. But outcome distribution is not really identifiable.
+[0:06:51] distribution is not really identifiable. But what we do is we just uh imagine it
+[0:06:54] But what we do is we just uh imagine it come out of a mixture of this uh source
+[0:06:57] come out of a mixture of this uh source condition mean distribution. So that's
+[0:06:59] condition mean distribution. So that's uh defines this class of uh uh
+[0:07:01] uh defines this class of uh uh distributions and then uh if the true
+[0:07:04] distributions and then uh if the true conditional outcome distribution is
+[0:07:06] conditional outcome distribution is really a mixture of the source condition
+[0:07:07] really a mixture of the source condition mix conditional distribution then
+[0:07:09] mix conditional distribution then actually thisernic class will contain uh
+[0:07:12] actually thisernic class will contain uh this true um uh like target
+[0:07:16] this true um uh like target distribution. So after we define
+[0:07:19] distribution. So after we define uncernic class uh we can think about
+[0:07:21] uncernic class uh we can think about let's say this t is anything from this
+[0:07:24] let's say this t is anything from this class from this one of the future target
+[0:07:25] class from this one of the future target population and then uh with this t we
+[0:07:28] population and then uh with this t we can define uh the performance of a
+[0:07:30] can define uh the performance of a prediction model f. So we can think
+[0:07:32] prediction model f. So we can think about after it's any nonp parametric
+[0:07:34] about after it's any nonp parametric predictor such as realized by random
+[0:07:37] predictor such as realized by random forest or realized by neuron network and
+[0:07:39] forest or realized by neuron network and then for such a prediction model we can
+[0:07:42] then for such a prediction model we can do a evaluation like how much what's
+[0:07:45] do a evaluation like how much what's this prediction error and we compare it
+[0:07:47] this prediction error and we compare it with this null estimator we use a zero
+[0:07:48] with this null estimator we use a zero to predict okay and then we can define
+[0:07:51] to predict okay and then we can define the reward function and this reward
+[0:07:53] the reward function and this reward function basically says that for
+[0:07:55] function basically says that for targeted population generated from
+[0:07:57] targeted population generated from distribution t so how good is the
+[0:07:59] distribution t so how good is the performance of the f and we hope that
+[0:08:01] performance of the f and we hope that this reward to be at large as possible.
+[0:08:04] this reward to be at large as possible. That means a lot of the information from
+[0:08:06] That means a lot of the information from the Y can actually be explained by this
+[0:08:08] the Y can actually be explained by this app. Okay, so remember that we really
+[0:08:11] app. Okay, so remember that we really don't know what's the future target and
+[0:08:13] don't know what's the future target and we only have a class of populations that
+[0:08:15] we only have a class of populations that may contain the future target. So what
+[0:08:17] may contain the future target. So what we can do is a very like um intuitive
+[0:08:21] we can do is a very like um intuitive way. We're just looking at the worst
+[0:08:22] way. We're just looking at the worst case performance. So for this prediction
+[0:08:24] case performance. So for this prediction model for any target population we got a
+[0:08:26] model for any target population we got a reward and let's just look at the worst
+[0:08:28] reward and let's just look at the worst case reward and that's measures the
+[0:08:30] case reward and that's measures the performance of this prediction model and
+[0:08:32] performance of this prediction model and across the the whole extern class and
+[0:08:35] across the the whole extern class and then we just try to maximize uh this um
+[0:08:39] then we just try to maximize uh this um this worst case reward function and
+[0:08:41] this worst case reward function and that's will give us this definition of
+[0:08:43] that's will give us this definition of abstar. Okay. So this is just like a a
+[0:08:46] abstar. Okay. So this is just like a a proman like idea like if we don't know
+[0:08:49] proman like idea like if we don't know where is the target then let's just uh
+[0:08:52] where is the target then let's just uh um like brainstorm all possible future
+[0:08:54] um like brainstorm all possible future target and then minimize or maximize the
+[0:08:56] target and then minimize or maximize the worst case performance of a prediction
+[0:08:59] worst case performance of a prediction mode. Okay. So this is a graph
+[0:09:01] mode. Okay. So this is a graph illustration. Let's think about a
+[0:09:03] illustration. Let's think about a concrete example. Let's say we got um
+[0:09:05] concrete example. Let's say we got um like two hospitals. One hospital we got
+[0:09:07] like two hospitals. One hospital we got 900 the first hospital got 9,000
+[0:09:09] 900 the first hospital got 9,000 operation and the second hospital we
+[0:09:11] operation and the second hospital we have 1,000 observation. So this
+[0:09:13] have 1,000 observation. So this decommodation 90 and 10 90% and 10%. So
+[0:09:17] decommodation 90 and 10 90% and 10%. So uh if we imp implement the empirical
+[0:09:19] uh if we imp implement the empirical risk minimization we basically try to
+[0:09:21] risk minimization we basically try to optimize the prediction performance for
+[0:09:23] optimize the prediction performance for such a population. But let's imagine if
+[0:09:26] such a population. But let's imagine if in the future um we go to the other
+[0:09:28] in the future um we go to the other extreme. So the first hospital becomes
+[0:09:30] extreme. So the first hospital becomes the minority that only has 10%
+[0:09:31] the minority that only has 10% observation and the second hospital has
+[0:09:33] observation and the second hospital has 90% observ like observation for the
+[0:09:36] 90% observ like observation for the target. So in that case so this will be
+[0:09:38] target. So in that case so this will be actually our target and then the model
+[0:09:40] actually our target and then the model we trained for this mixture source
+[0:09:43] we trained for this mixture source mixture may not work well for the
+[0:09:45] mixture may not work well for the target. So that's actually explains why
+[0:09:48] target. So that's actually explains why ERM is not a good in general is not a
+[0:09:50] ERM is not a good in general is not a good method when there are distribution
+[0:09:52] good method when there are distribution shift and what exactly this distribution
+[0:09:55] shift and what exactly this distribution robust optimization is doing uh is
+[0:09:57] robust optimization is doing uh is actually like try to exhaust try to
+[0:09:59] actually like try to exhaust try to exhaustive search all possible like
+[0:10:02] exhaustive search all possible like future target population and then
+[0:10:04] future target population and then looking at the worst case and then try
+[0:10:06] looking at the worst case and then try to do a optimization of the worst case
+[0:10:08] to do a optimization of the worst case component. So uh before I move on so uh
+[0:10:11] component. So uh before I move on so uh any questions for the definition of this
+[0:10:14] any questions for the definition of this group distribution rob models because it
+[0:10:16] group distribution rob models because it it may be slightly new for for for the
+[0:10:19] it may be slightly new for for for the statistical perspective.
+[0:10:22] statistical perspective. I I think there are no questions. Yeah.
+[0:10:24] I I think there are no questions. Yeah. Thank you. Okay. Oh for the question. So
+[0:10:27] Thank you. Okay. Oh for the question. So you you allow arbitrary mixtures in y
+[0:10:29] you you allow arbitrary mixtures in y given x. Do I understand that correctly?
+[0:10:30] given x. Do I understand that correctly? You don't restrict that. Yeah. In any
+[0:10:33] You don't restrict that. Yeah. In any way. Yeah. Not just from a very good
+[0:10:37] way. Yeah. Not just from a very good question. just from a simplex it's not
+[0:10:38] question. just from a simplex it's not from anyway for the moment. Okay. Thank
+[0:10:41] from anyway for the moment. Okay. Thank you. Thank you. Yeah. Um actually
+[0:10:45] you. Thank you. Yeah. Um actually uh according to Dominic question
+[0:10:48] uh according to Dominic question actually there are a lot of grace for
+[0:10:50] actually there are a lot of grace for the group DRO and um for the point that
+[0:10:53] the group DRO and um for the point that this could be too conservative. So
+[0:10:54] this could be too conservative. So imagine the future just one point but
+[0:10:56] imagine the future just one point but we're looking at all possible
+[0:10:58] we're looking at all possible combination. So even though it's belongs
+[0:11:00] combination. So even though it's belongs to this one point is this point but it
+[0:11:02] to this one point is this point but it could lose a lot of information. So to
+[0:11:05] could lose a lot of information. So to address that we actually can incorporate
+[0:11:07] address that we actually can incorporate a little bit this information H. So if
+[0:11:10] a little bit this information H. So if we know like the the mixture is
+[0:11:11] we know like the the mixture is belonging to this as class H uh then
+[0:11:14] belonging to this as class H uh then actually we can define this minimax
+[0:11:16] actually we can define this minimax optimization problem by incorporate this
+[0:11:18] optimization problem by incorporate this optim this information H. So that's um
+[0:11:22] optim this information H. So that's um how we can like get more accurate like
+[0:11:25] how we can like get more accurate like get smaller answer in class and actually
+[0:11:28] get smaller answer in class and actually like some cases we may have wrong prior
+[0:11:31] like some cases we may have wrong prior information and this case we have like a
+[0:11:33] information and this case we have like a misspecified p information and then the
+[0:11:36] misspecified p information and then the prediction model will actually be not
+[0:11:38] prediction model will actually be not that accurate. Okay. So the first main
+[0:11:41] that accurate. Okay. So the first main result for from this paper is how can we
+[0:11:43] result for from this paper is how can we solve this minimax optimization problem.
+[0:11:45] solve this minimax optimization problem. It's actually seems very hard to me at
+[0:11:47] It's actually seems very hard to me at the very beginning. uh and then uh
+[0:11:49] the very beginning. uh and then uh actually we can identify a closed form
+[0:11:51] actually we can identify a closed form solution. So a little bit more notation.
+[0:11:54] solution. So a little bit more notation. So uh for the condition mean
+[0:11:55] So uh for the condition mean distribution we can use FL to denote the
+[0:11:57] distribution we can use FL to denote the condition mean from each source and then
+[0:11:59] condition mean from each source and then uh we write down the same like minimax
+[0:12:01] uh we write down the same like minimax optimization problem and then actually
+[0:12:04] optimization problem and then actually uh after some like mathematical
+[0:12:06] uh after some like mathematical derivation we actually can show that
+[0:12:08] derivation we actually can show that this FA star is just a complex
+[0:12:10] this FA star is just a complex combination of this FL and this FL is
+[0:12:13] combination of this FL and this FL is the condition mean model from each
+[0:12:14] the condition mean model from each sources and the gamma is the weight. I'm
+[0:12:16] sources and the gamma is the weight. I'm going to explain a little bit later.
+[0:12:18] going to explain a little bit later. Okay. So this actually provides a way
+[0:12:20] Okay. So this actually provides a way that we can compute the FA star instead
+[0:12:22] that we can compute the FA star instead of solving the minmax problem or we can
+[0:12:24] of solving the minmax problem or we can like estimate FL first and then like
+[0:12:27] like estimate FL first and then like estimate the weight the gamma secondly
+[0:12:29] estimate the weight the gamma secondly and then we can do a inseam to estimate
+[0:12:31] and then we can do a inseam to estimate FH star. Okay. And how does how do we
+[0:12:34] FH star. Okay. And how does how do we define this gamma star? So gamma star is
+[0:12:36] define this gamma star? So gamma star is actually a solution for optimization
+[0:12:38] actually a solution for optimization problem. So uh we first need to define
+[0:12:40] problem. So uh we first need to define this matrix gamma. So it's a L by L
+[0:12:42] this matrix gamma. So it's a L by L matrix and then it measures the
+[0:12:44] matrix and then it measures the similarity between L and FK. Okay. After
+[0:12:47] similarity between L and FK. Okay. After we got this gamma matrix, we can do this
+[0:12:49] we got this gamma matrix, we can do this quadratic minimization and then we use a
+[0:12:51] quadratic minimization and then we use a prior information. So if we have no
+[0:12:53] prior information. So if we have no prior information, the H is just a
+[0:12:55] prior information, the H is just a simplex. But if you have some prior
+[0:12:57] simplex. But if you have some prior information, we have this expression.
+[0:12:58] information, we have this expression. Okay. And the condition for this uh
+[0:13:01] Okay. And the condition for this uh serum is actually quite mild. Uh first
+[0:13:04] serum is actually quite mild. Uh first of all like um this function class we
+[0:13:06] of all like um this function class we need it need it need to be convex here
+[0:13:09] need it need it need to be convex here and also need to contain like all of
+[0:13:11] and also need to contain like all of this condition mean model uh and also we
+[0:13:13] this condition mean model uh and also we need h to be convex and then we have
+[0:13:15] need h to be convex and then we have this result okay and this is for general
+[0:13:18] this result okay and this is for general machine learning or for like um n
+[0:13:20] machine learning or for like um n parametric regression and like I would
+[0:13:22] parametric regression and like I would like to mention that this idea was first
+[0:13:24] like to mention that this idea was first established by uh Nikolai Manso and
+[0:13:27] established by uh Nikolai Manso and Peter Bulma in their 2015 annual paper
+[0:13:29] Peter Bulma in their 2015 annual paper and later by a paper myself like
+[0:13:32] and later by a paper myself like extending their results
+[0:13:33] extending their results to the coar ship study. Okay. And then
+[0:13:36] to the coar ship study. Okay. And then we actually from this observation or
+[0:13:39] we actually from this observation or from this theorem we can have we can
+[0:13:40] from this theorem we can have we can have a geometric interpretation of what
+[0:13:43] have a geometric interpretation of what exactly this far. So here we got six
+[0:13:46] exactly this far. So here we got six different condition mean distribution
+[0:13:48] different condition mean distribution and then we have a combination of them
+[0:13:50] and then we have a combination of them and then the far just the one that's
+[0:13:53] and then the far just the one that's closest to the origin. So that's the the
+[0:13:55] closest to the origin. So that's the the definition that's equivalent way of
+[0:13:57] definition that's equivalent way of looking at far. So basically if we got
+[0:14:00] looking at far. So basically if we got the condition like hogenous distribution
+[0:14:02] the condition like hogenous distribution then we can just find the one that's
+[0:14:04] then we can just find the one that's closest to the origin and that's the
+[0:14:06] closest to the origin and that's the another way of interpreting this uh um
+[0:14:09] another way of interpreting this uh um this distribution bus optimization like
+[0:14:11] this distribution bus optimization like solution abstar and if we got some p
+[0:14:14] solution abstar and if we got some p information h then actually we can
+[0:14:16] information h then actually we can incorporate that instead of looking at
+[0:14:18] incorporate that instead of looking at the whole convex combination we can look
+[0:14:20] the whole convex combination we can look at the convex combination belonging to h
+[0:14:22] at the convex combination belonging to h and that's the uh the projection fh star
+[0:14:26] and that's the uh the projection fh star okay and after this uh we can actually
+[0:14:29] okay and after this uh we can actually think about how do we estimate in a data
+[0:14:30] think about how do we estimate in a data dependent way and very intuitively we
+[0:14:32] dependent way and very intuitively we can estimate everything just by machine
+[0:14:34] can estimate everything just by machine learning say by a neural network and
+[0:14:35] learning say by a neural network and then we can plug in to estimate a gamma
+[0:14:37] then we can plug in to estimate a gamma and then we can uh ensemble this fad l
+[0:14:40] and then we can uh ensemble this fad l and then to have this f t that's a very
+[0:14:43] and then to have this f t that's a very intuitive way of how do we estimate fh
+[0:14:46] intuitive way of how do we estimate fh but actually here I would like to u like
+[0:14:49] but actually here I would like to u like mention a point like how we can apply
+[0:14:51] mention a point like how we can apply the the useful statistical idea to even
+[0:14:54] the the useful statistical idea to even improve some machine learning prediction
+[0:14:55] improve some machine learning prediction model so let's say this plug-in
+[0:14:57] model so let's say this plug-in estimator just do error decommodation
+[0:14:59] estimator just do error decommodation and then you just copy the definitions
+[0:15:02] and then you just copy the definitions and there is a main term for this error
+[0:15:05] and there is a main term for this error decommodation is this the first order
+[0:15:06] decommodation is this the first order term. So it measures the difference
+[0:15:08] term. So it measures the difference between F had L and F L and then
+[0:15:10] between F had L and F L and then multiply by F K and this is just the
+[0:15:13] multiply by F K and this is just the first order term and actually for this
+[0:15:15] first order term and actually for this term even though like asically it will
+[0:15:17] term even though like asically it will still go to zero if F had L is a
+[0:15:19] still go to zero if F had L is a consistent estimator of L but actually
+[0:15:21] consistent estimator of L but actually in finite sample we can improve it and
+[0:15:23] in finite sample we can improve it and the way to improve it also simple so
+[0:15:26] the way to improve it also simple so this FL it's what we don't know but what
+[0:15:28] this FL it's what we don't know but what we really have is we may have a
+[0:15:31] we really have is we may have a consistent estimator or unbiased
+[0:15:32] consistent estimator or unbiased estimator FL let's say if the Xi and Yi
+[0:15:35] estimator FL let's say if the Xi and Yi they are following this distribution
+[0:15:37] they are following this distribution Then actually the yi is like
+[0:15:39] Then actually the yi is like automatically unbiased estimator of this
+[0:15:41] automatically unbiased estimator of this FL and we can simply replace this FL by
+[0:15:43] FL and we can simply replace this FL by the Yi and then we use this way to
+[0:15:46] the Yi and then we use this way to estimate the weight to estimate this
+[0:15:48] estimate the weight to estimate this bias and also in practice we may not
+[0:15:51] bias and also in practice we may not have data sample from this but we can
+[0:15:53] have data sample from this but we can actually do some inverse do some density
+[0:15:55] actually do some inverse do some density ratio waiting to get a good estimator
+[0:15:57] ratio waiting to get a good estimator okay so if you're familiar with like
+[0:15:59] okay so if you're familiar with like double robustness or double machine
+[0:16:00] double robustness or double machine learning so this is actually the idea we
+[0:16:02] learning so this is actually the idea we borrow from that literature and then to
+[0:16:04] borrow from that literature and then to improve the estimation of this weight
+[0:16:06] improve the estimation of this weight matrix ga and actually I'm making a lot
+[0:16:10] matrix ga and actually I'm making a lot of details but the final takeaway from
+[0:16:12] of details but the final takeaway from for this proposal is uh when we do
+[0:16:15] for this proposal is uh when we do aggregation we actually can do a more
+[0:16:17] aggregation we actually can do a more accurate aggregation instead of using
+[0:16:19] accurate aggregation instead of using the plug-in estimator we can do a vice
+[0:16:20] the plug-in estimator we can do a vice correction by borrowing the idea of uh
+[0:16:23] correction by borrowing the idea of uh from the double machine learning or
+[0:16:24] from the double machine learning or double robustness literature we can get
+[0:16:27] double robustness literature we can get a more accurate estimator here and then
+[0:16:29] a more accurate estimator here and then uh we can get a more accurate estimator
+[0:16:31] uh we can get a more accurate estimator of gamma hat and then we do the example
+[0:16:33] of gamma hat and then we do the example okay so in the paper we At least here we
+[0:16:37] okay so in the paper we At least here we uh show that in terms of rate of
+[0:16:39] uh show that in terms of rate of convergence we have improvement after
+[0:16:40] convergence we have improvement after doing the bi correction and also like in
+[0:16:43] doing the bi correction and also like in terms of finance symbol performance we
+[0:16:44] terms of finance symbol performance we have a better performance after bi
+[0:16:46] have a better performance after bi scratching but for the sake of time uh
+[0:16:48] scratching but for the sake of time uh let me just post post point like that to
+[0:16:50] let me just post post point like that to the uh if you're interest you can read a
+[0:16:52] the uh if you're interest you can read a bit paper so we have talked about the
+[0:16:55] bit paper so we have talked about the distribution of learning and then we're
+[0:16:57] distribution of learning and then we're looking at this asern class as this
+[0:17:00] looking at this asern class as this simplex or slightly less than the
+[0:17:01] simplex or slightly less than the simplex is this uh the h but actually We
+[0:17:05] simplex is this uh the h but actually We can do better by generalize this idea to
+[0:17:08] can do better by generalize this idea to the transfer learning setting. And
+[0:17:09] the transfer learning setting. And what's the transfer learning setting?
+[0:17:11] what's the transfer learning setting? For the transfer learning setting,
+[0:17:12] For the transfer learning setting, actually we not only have the source
+[0:17:14] actually we not only have the source information, we also have the target for
+[0:17:16] information, we also have the target for the target data, we also have some
+[0:17:18] the target data, we also have some outcome observations. Okay. And that's a
+[0:17:21] outcome observations. Okay. And that's a illustration of the data. So for the
+[0:17:23] illustration of the data. So for the previous setting, we only have the
+[0:17:24] previous setting, we only have the source uh outcome, but now actually for
+[0:17:27] source uh outcome, but now actually for the target data, we also have some
+[0:17:29] the target data, we also have some outcome alteration for the target. So
+[0:17:31] outcome alteration for the target. So that's the main difference from the the
+[0:17:33] that's the main difference from the the previous setting. Now we have more
+[0:17:34] previous setting. Now we have more information from the target dome and
+[0:17:36] information from the target dome and also this is similar notation as before
+[0:17:38] also this is similar notation as before but just to simplify the discussion we
+[0:17:41] but just to simplify the discussion we only focus on the linear model and we
+[0:17:43] only focus on the linear model and we use a beta L to denote the condition
+[0:17:45] use a beta L to denote the condition mean model from each sources and then
+[0:17:48] mean model from each sources and then for the for the beta zero is a condition
+[0:17:49] for the for the beta zero is a condition mean from the target and our goal is to
+[0:17:52] mean from the target and our goal is to recover the beta z okay so the goal have
+[0:17:54] recover the beta z okay so the goal have the goal has shifted because in the
+[0:17:56] the goal has shifted because in the previous setting there's no way we can
+[0:17:58] previous setting there's no way we can identify beta zero but in the current
+[0:18:00] identify beta zero but in the current regime we do have some outcome
+[0:18:02] regime we do have some outcome alteration so give gives us the
+[0:18:05] alteration so give gives us the hope. So now let's think about how can
+[0:18:08] hope. So now let's think about how can we generalize this distribution of bus
+[0:18:10] we generalize this distribution of bus idea and the most important thing in the
+[0:18:12] idea and the most important thing in the distribution of bus idea is this uncert
+[0:18:14] distribution of bus idea is this uncert and how can we generalize that from the
+[0:18:16] and how can we generalize that from the this uh like unsuper domain adaptation
+[0:18:19] this uh like unsuper domain adaptation setting to the transfer learning setting
+[0:18:21] setting to the transfer learning setting and the first thing we do is we actually
+[0:18:23] and the first thing we do is we actually enlarge the uncertain class. So we
+[0:18:25] enlarge the uncertain class. So we include this source mixture also include
+[0:18:28] include this source mixture also include a target here. So it's a mixture of the
+[0:18:30] a target here. So it's a mixture of the source and target. Okay. So the
+[0:18:32] source and target. Okay. So the advantage of this is this must contains
+[0:18:34] advantage of this is this must contains a target population because we can set
+[0:18:36] a target population because we can set the Q0 equal to one and everything else
+[0:18:38] the Q0 equal to one and everything else to zero. So that will contain the true
+[0:18:40] to zero. So that will contain the true target population q. But the best thing
+[0:18:43] target population q. But the best thing is it makes the answering class even
+[0:18:44] is it makes the answering class even larger. And the second step so here is
+[0:18:48] larger. And the second step so here is actually the most most important
+[0:18:49] actually the most most important takeaway of this this work. So we
+[0:18:52] takeaway of this this work. So we actually can uh use this information
+[0:18:54] actually can uh use this information from target domain to filter out uh the
+[0:18:57] from target domain to filter out uh the arbitrary uh source mixture and all the
+[0:19:00] arbitrary uh source mixture and all the target mixture. Okay. So if you look at
+[0:19:02] target mixture. Okay. So if you look at this mixture of source and target any
+[0:19:04] this mixture of source and target any source and target mixture ty pmx um we
+[0:19:07] source and target mixture ty pmx um we can actually evaluate this prediction
+[0:19:10] can actually evaluate this prediction model and evaluate on the observed
+[0:19:12] model and evaluate on the observed target domain uh with the the target
+[0:19:14] target domain uh with the the target outcome observations and then if this
+[0:19:17] outcome observations and then if this risk is kind of like not so much worse
+[0:19:20] risk is kind of like not so much worse than the the benchmark risk. The
+[0:19:22] than the the benchmark risk. The benchmark risk is just we just use the
+[0:19:24] benchmark risk is just we just use the true conditional mean outcome model and
+[0:19:26] true conditional mean outcome model and then um use this one to uh to denote
+[0:19:30] then um use this one to uh to denote this uh the noise level or the benchmark
+[0:19:33] this uh the noise level or the benchmark like risk level and if this mixture
+[0:19:36] like risk level and if this mixture source or the target is not performing
+[0:19:38] source or the target is not performing much worse than the right hand side then
+[0:19:40] much worse than the right hand side then we'll keep this mix source mixing or
+[0:19:42] we'll keep this mix source mixing or this mixture of source and target
+[0:19:44] this mixture of source and target otherwise we'll just throw away because
+[0:19:46] otherwise we'll just throw away because it will be discarded from this
+[0:19:48] it will be discarded from this uncertainty class. Okay, so that's kind
+[0:19:50] uncertainty class. Okay, so that's kind of the the domain idea like how do we
+[0:19:52] of the the domain idea like how do we use this target data to filter out like
+[0:19:55] use this target data to filter out like arbitrary mixture but only retain a
+[0:19:57] arbitrary mixture but only retain a small set of mixture that performs well
+[0:19:59] small set of mixture that performs well on the target domain and here uh tall is
+[0:20:02] on the target domain and here uh tall is a training parameter so uh we typically
+[0:20:05] a training parameter so uh we typically choose it as one or nq but you have
+[0:20:07] choose it as one or nq but you have other way to choose it and also this
+[0:20:09] other way to choose it and also this tall actually reflects um like this
+[0:20:12] tall actually reflects um like this users u belief about what kind of
+[0:20:16] users u belief about what kind of tolerance we would like to have uh like
+[0:20:18] tolerance we would like to have uh like how much worse we the this mixture
+[0:20:20] how much worse we the this mixture source may perform like compared to just
+[0:20:22] source may perform like compared to just using a target only estimator. Okay, so
+[0:20:25] using a target only estimator. Okay, so that's the uh the key part for this uh
+[0:20:28] that's the uh the key part for this uh building class and the takeaway is we
+[0:20:30] building class and the takeaway is we just build an answering class such that
+[0:20:33] just build an answering class such that the mixture source and target it
+[0:20:34] the mixture source and target it performs reasonably well on the target
+[0:20:36] performs reasonably well on the target and that's only part of class we'll keep
+[0:20:40] and that's only part of class we'll keep and build on that we can actually
+[0:20:42] and build on that we can actually generalize the definition of this
+[0:20:43] generalize the definition of this distribution bus model. So we can
+[0:20:46] distribution bus model. So we can um define the the loss function or the
+[0:20:49] um define the the loss function or the reward function like this. So instead of
+[0:20:51] reward function like this. So instead of compare to this zero estimator we
+[0:20:53] compare to this zero estimator we compare to any initial estimator and we
+[0:20:55] compare to any initial estimator and we can also put this initial estimator as a
+[0:20:57] can also put this initial estimator as a zero estimator. Okay. So we can compare
+[0:20:59] zero estimator. Okay. So we can compare like you can use this one as a result
+[0:21:01] like you can use this one as a result and then when we're looking at this
+[0:21:03] and then when we're looking at this uncertain class we're actually looking
+[0:21:05] uncertain class we're actually looking at a bigger asserting class. Sorry a
+[0:21:08] at a bigger asserting class. Sorry a smaller class we put it as a CT is
+[0:21:11] smaller class we put it as a CT is defined here. So it's only uncertain
+[0:21:13] defined here. So it's only uncertain class um only possible target population
+[0:21:16] class um only possible target population or mixture source and target such that
+[0:21:18] or mixture source and target such that it performs well on the target domain.
+[0:21:20] it performs well on the target domain. Okay. So that's the definition of the
+[0:21:21] Okay. So that's the definition of the guard estimator and it com it's actually
+[0:21:24] guard estimator and it com it's actually extends the idea from like a
+[0:21:26] extends the idea from like a distribution of B learning to the
+[0:21:28] distribution of B learning to the transfer. Okay. So maybe I should pause
+[0:21:30] transfer. Okay. So maybe I should pause here a little bit to see is there any
+[0:21:32] here a little bit to see is there any questions? Are there any questions?
+[0:21:34] questions? Are there any questions? Thanks. There are no questions in Q&amp;A
+[0:21:36] Thanks. There are no questions in Q&amp;A right now. So yeah please feel
+[0:21:38] right now. So yeah please feel encouraged to post questions there. Um
+[0:21:41] encouraged to post questions there. Um yeah, one quick question that I had. Um
+[0:21:44] yeah, one quick question that I had. Um so you mostly use a quadratic loss here.
+[0:21:47] so you mostly use a quadratic loss here. So how much of a chance do you think we
+[0:21:50] So how much of a chance do you think we have to generalize that to any type of
+[0:21:52] have to generalize that to any type of loss function or let's say a specific
+[0:21:54] loss function or let's say a specific loss function like u logistic
+[0:21:57] loss function like u logistic regression?
+[0:21:58] regression? Yeah. Yeah. We actually we are working
+[0:22:00] Yeah. Yeah. We actually we are working on that direction like how to it's it's
+[0:22:02] on that direction like how to it's it's good point. So it's definitely
+[0:22:04] good point. So it's definitely generalizable. Um but as you may know
+[0:22:06] generalizable. Um but as you may know like the generalized generaliz that the
+[0:22:09] like the generalized generaliz that the cost is we do not have the close form
+[0:22:11] cost is we do not have the close form solution. So that that's the cost but
+[0:22:13] solution. So that that's the cost but it's it's generalizable u with an
+[0:22:16] it's it's generalizable u with an untrival effort I would say. Thank you.
+[0:22:19] untrival effort I would say. Thank you. Thank you. So uh as Dominic point out
+[0:22:22] Thank you. So uh as Dominic point out like if we use the le square loss so the
+[0:22:24] like if we use the le square loss so the main advantage is actually we have this
+[0:22:26] main advantage is actually we have this kind of close form expression. So it's a
+[0:22:28] kind of close form expression. So it's a weighted average of the beta L beta 0
+[0:22:30] weighted average of the beta L beta 0 and the beta L and then um we can have a
+[0:22:33] and the beta L and then um we can have a weighted average uh we can compute the
+[0:22:36] weighted average uh we can compute the weight in this form and then that's the
+[0:22:38] weight in this form and then that's the identification for the G estimator and
+[0:22:40] identification for the G estimator and then the gamma star is actually computed
+[0:22:42] then the gamma star is actually computed with a similar format as before. So it's
+[0:22:44] with a similar format as before. So it's this quadratic minimization and then
+[0:22:47] this quadratic minimization and then we're only looking at this like as tall
+[0:22:49] we're only looking at this like as tall belonging to this uncertainty class. So
+[0:22:51] belonging to this uncertainty class. So that's one uh making make sure that the
+[0:22:54] that's one uh making make sure that the mixture source and target performs well
+[0:22:56] mixture source and target performs well on the target domain.
+[0:22:58] on the target domain. Okay. So uh I'm going to I actually I'm
+[0:23:01] Okay. So uh I'm going to I actually I'm not going to present the full procedure
+[0:23:03] not going to present the full procedure here. You can take a look at the paper
+[0:23:05] here. You can take a look at the paper for the full procedure. But I would like
+[0:23:06] for the full procedure. But I would like to highlight the main idea for the
+[0:23:08] to highlight the main idea for the construction and what's the benefit of
+[0:23:10] construction and what's the benefit of using the discard estimator. So let's
+[0:23:12] using the discard estimator. So let's think about the setting. we got a lot of
+[0:23:15] think about the setting. we got a lot of source data and for the source data um
+[0:23:18] source data and for the source data um we can run this lasso estimator and we
+[0:23:20] we can run this lasso estimator and we show that if you assume the true
+[0:23:22] show that if you assume the true condition mean model then we can show
+[0:23:23] condition mean model then we can show that the lasso estimator has this this
+[0:23:25] that the lasso estimator has this this rate of convergence okay so just
+[0:23:27] rate of convergence okay so just remember this NL can be huge so that's
+[0:23:30] remember this NL can be huge so that's actually
+[0:23:31] actually um the setting we're looking at and so
+[0:23:34] um the setting we're looking at and so target domain we can also implement
+[0:23:35] target domain we can also implement lasso but because of small sample size
+[0:23:37] lasso but because of small sample size we only have this rate of conversion the
+[0:23:39] we only have this rate of conversion the NQ is much smaller and then we can just
+[0:23:42] NQ is much smaller and then we can just do the plug-in estimator as mentioned in
+[0:23:44] do the plug-in estimator as mentioned in the as hinted by the previous slide. So
+[0:23:46] the as hinted by the previous slide. So we got all of the beta head zero and
+[0:23:48] we got all of the beta head zero and beta head l and then we compute the
+[0:23:50] beta head l and then we compute the weight and then we do aggregation we got
+[0:23:52] weight and then we do aggregation we got this guard
+[0:23:53] this guard estimator. So the rate of the gart
+[0:23:57] estimator. So the rate of the gart estimator can actually be established
+[0:23:59] estimator can actually be established like this. This is a very nice result
+[0:24:01] like this. This is a very nice result established by the uh the moderator. So
+[0:24:04] established by the uh the moderator. So she is able to show that uh for the gart
+[0:24:07] she is able to show that uh for the gart estimator it converts to beta zero at
+[0:24:10] estimator it converts to beta zero at this rate. So on the right hand side
+[0:24:12] this rate. So on the right hand side let's look at the minimize the minimum
+[0:24:14] let's look at the minimize the minimum like term by term. So the first term is
+[0:24:17] like term by term. So the first term is uh k zero log p or nq. So this is
+[0:24:20] uh k zero log p or nq. So this is something very familiar. So it means
+[0:24:22] something very familiar. So it means that I just use the target only
+[0:24:24] that I just use the target only estimator. Okay. So that's correspond to
+[0:24:26] estimator. Okay. So that's correspond to a scenario if the mixture source is
+[0:24:28] a scenario if the mixture source is different from target. So then there's
+[0:24:30] different from target. So then there's like little hope we can do anything to
+[0:24:32] like little hope we can do anything to borrow the information from the source.
+[0:24:34] borrow the information from the source. So what we can do is we just use the
+[0:24:36] So what we can do is we just use the target only. And the right hand side is
+[0:24:40] target only. And the right hand side is actually corresponding to another more
+[0:24:42] actually corresponding to another more favorable scenario. So let's say the
+[0:24:44] favorable scenario. So let's say the mixture source is close to a target. So
+[0:24:46] mixture source is close to a target. So in this case the alpha is close to zero
+[0:24:48] in this case the alpha is close to zero or exactly equal to zero. So that's
+[0:24:50] or exactly equal to zero. So that's plotted by the right hand side. So you
+[0:24:52] plotted by the right hand side. So you can see when alpha is exactly equal to
+[0:24:54] can see when alpha is exactly equal to zero then um this tall like we choose as
+[0:24:58] zero then um this tall like we choose as one or nq and then for the whole thing
+[0:25:01] one or nq and then for the whole thing is is a constant or nq because l is
+[0:25:03] is is a constant or nq because l is typically small. Okay. So that's much
+[0:25:06] typically small. Okay. So that's much smaller than the first term because the
+[0:25:07] smaller than the first term because the k0 is typically much larger. So that
+[0:25:09] k0 is typically much larger. So that means if you compare the left and right
+[0:25:12] means if you compare the left and right um when the alpha is close to zero then
+[0:25:15] um when the alpha is close to zero then uh we basically compare the first term
+[0:25:17] uh we basically compare the first term and this term and we also mentioned that
+[0:25:19] and this term and we also mentioned that for the source we typically have a huge
+[0:25:20] for the source we typically have a huge sample size uh then actually um the
+[0:25:23] sample size uh then actually um the second term is smaller. It means that we
+[0:25:25] second term is smaller. It means that we can improve the target only estimator.
+[0:25:28] can improve the target only estimator. Okay. So the takeaway message are two.
+[0:25:30] Okay. So the takeaway message are two. The first one is uh actually as long as
+[0:25:33] The first one is uh actually as long as the source mixture host then actually we
+[0:25:35] the source mixture host then actually we can have a a much better rhythm
+[0:25:37] can have a a much better rhythm convergence than using a target only
+[0:25:39] convergence than using a target only estimator. And the second one is um
+[0:25:42] estimator. And the second one is um actually here we do not make the
+[0:25:44] actually here we do not make the assumption that the the source mixture
+[0:25:45] assumption that the the source mixture or the mixture source is close to a
+[0:25:47] or the mixture source is close to a target. Okay. So it's all data
+[0:25:49] target. Okay. So it's all data dependent. So if a data thinks they're
+[0:25:51] dependent. So if a data thinks they're close then we got a better rate. If not
+[0:25:54] close then we got a better rate. If not then we got like kind of the classical
+[0:25:57] then we got like kind of the classical the rate. we just apply the last one at.
+[0:26:00] the rate. we just apply the last one at. Okay. So we actually apply this to a uh
+[0:26:03] Okay. So we actually apply this to a uh like scientific problem. So we try to
+[0:26:05] like scientific problem. So we try to use this to do this uh the HDL the the
+[0:26:08] use this to do this uh the HDL the the the high sorry the HDL is important like
+[0:26:12] the high sorry the HDL is important like blood measurement associated with the
+[0:26:14] blood measurement associated with the the cardiovascular disease and each time
+[0:26:16] the cardiovascular disease and each time when we do this uh physical assessment
+[0:26:19] when we do this uh physical assessment we will the doctor will like blood test
+[0:26:21] we will the doctor will like blood test they will measure the HDL and actually
+[0:26:23] they will measure the HDL and actually it's also known that the genetic
+[0:26:25] it's also known that the genetic variance they predict HDL or the
+[0:26:27] variance they predict HDL or the association between genetic variance and
+[0:26:29] association between genetic variance and HDL varies across different ancestries.
+[0:26:32] HDL varies across different ancestries. So for people with different races then
+[0:26:34] So for people with different races then um their like association is different.
+[0:26:37] um their like association is different. So the question we're asking here is um
+[0:26:39] So the question we're asking here is um how about for the mixed racial group. So
+[0:26:42] how about for the mixed racial group. So say one parent is white and the other
+[0:26:44] say one parent is white and the other parent is Asian. So for this small group
+[0:26:46] parent is Asian. So for this small group of population but typically we do not
+[0:26:48] of population but typically we do not have that many observations and also
+[0:26:50] have that many observations and also there are less study uh like carried out
+[0:26:53] there are less study uh like carried out for this small group of populations.
+[0:26:55] for this small group of populations. Okay. So what we exactly do is we apply
+[0:26:58] Okay. So what we exactly do is we apply this we use the UK bio bank data. UK
+[0:27:00] this we use the UK bio bank data. UK bail bank has the people labeled as
+[0:27:02] bail bank has the people labeled as white, black, Asian others with their
+[0:27:05] white, black, Asian others with their sample size and then for each of this
+[0:27:07] sample size and then for each of this source population we build a prediction
+[0:27:10] source population we build a prediction model for HDL and also we build a
+[0:27:12] model for HDL and also we build a prediction model for HDL using the
+[0:27:14] prediction model for HDL using the target data. So that's uh this white and
+[0:27:17] target data. So that's uh this white and Asian uh one parent is white and one
+[0:27:19] Asian uh one parent is white and one parent is Asian and then we uh like um
+[0:27:23] parent is Asian and then we uh like um evaluate like what's the output of the
+[0:27:25] evaluate like what's the output of the data estimator. So the first output is
+[0:27:27] data estimator. So the first output is actually garter estimator is a weighted
+[0:27:28] actually garter estimator is a weighted average and as you can see from here the
+[0:27:31] average and as you can see from here the garter estimator is doing the right
+[0:27:32] garter estimator is doing the right thing because it's using the target
+[0:27:35] thing because it's using the target estimator and also it using this UKB
+[0:27:38] estimator and also it using this UKB white and UKB black okay so even though
+[0:27:40] white and UKB black okay so even though we don't tell the machine what exactly
+[0:27:42] we don't tell the machine what exactly we'll see but it actually um using the
+[0:27:45] we'll see but it actually um using the correct information okay and also if the
+[0:27:47] correct information okay and also if the target is UKB white and black so in this
+[0:27:50] target is UKB white and black so in this case we can see that the guard estimator
+[0:27:52] case we can see that the guard estimator only use the UKB the target domain and
+[0:27:56] only use the UKB the target domain and also the UKB white and the UKB black.
+[0:27:58] also the UKB white and the UKB black. Okay, so it means that at least the
+[0:28:00] Okay, so it means that at least the guard estimator is doing something
+[0:28:01] guard estimator is doing something sensible from like intuitive point of
+[0:28:04] sensible from like intuitive point of view and then we actually evaluate the
+[0:28:08] view and then we actually evaluate the performance on like auto sample
+[0:28:10] performance on like auto sample performance on a target domain. So uh we
+[0:28:12] performance on a target domain. So uh we use a white and black as a target domain
+[0:28:15] use a white and black as a target domain and then uh there are 50 observations
+[0:28:17] and then uh there are 50 observations and then we evaluate uh its MIS and
+[0:28:20] and then we evaluate uh its MIS and compare that to the MSE of just just
+[0:28:23] compare that to the MSE of just just using the the the target only estimator.
+[0:28:26] using the the the target only estimator. Okay. And then we compare how much we
+[0:28:28] Okay. And then we compare how much we can improve the MSE and we see that for
+[0:28:31] can improve the MSE and we see that for the guard estimator we do have
+[0:28:33] the guard estimator we do have improvement like improve like more than
+[0:28:35] improvement like improve like more than 60%. And uh we also try other
+[0:28:38] 60%. And uh we also try other state-of-art method like max mean and
+[0:28:40] state-of-art method like max mean and transo and
+[0:28:46] transgive way in the sense like all of this multisoft learning method or
+[0:28:48] this multisoft learning method or transfer learning method they do have
+[0:28:50] transfer learning method they do have encouraging result but this practical
+[0:28:52] encouraging result but this practical applications. So um they all improve the
+[0:28:54] applications. So um they all improve the target only estimator. Okay. But some
+[0:28:56] target only estimator. Okay. But some are more and some are less but it's all
+[0:28:58] are more and some are less but it's all depends on the particular data
+[0:29:00] depends on the particular data application. Okay. And we also actually
+[0:29:03] application. Okay. And we also actually try to think about what's the difference
+[0:29:06] try to think about what's the difference between the guard and the trans or
+[0:29:16] transgend white and black as a target on a different data. We try to we try to
+[0:29:18] a different data. We try to we try to try uh test this generalizability. So we
+[0:29:21] try uh test this generalizability. So we train the model on a data and we
+[0:29:22] train the model on a data and we evaluate on a different one and we can
+[0:29:24] evaluate on a different one and we can see that the guart estimator is a little
+[0:29:26] see that the guart estimator is a little bit favorable here and we interpret it
+[0:29:29] bit favorable here and we interpret it for the reason that we apply the the
+[0:29:31] for the reason that we apply the the distributional rob ID because when we do
+[0:29:33] distributional rob ID because when we do the distribution bus we're not only just
+[0:29:35] the distribution bus we're not only just optimizing what's for the target we're
+[0:29:37] optimizing what's for the target we're optimizing like a like uncertain class
+[0:29:40] optimizing like a like uncertain class containing a target and then um from
+[0:29:42] containing a target and then um from that perspective so if the distribution
+[0:29:45] that perspective so if the distribution the future distribution is even slightly
+[0:29:47] the future distribution is even slightly different from the current target so we
+[0:29:49] different from the current target so we may have some small guarantees. Okay, so
+[0:29:52] may have some small guarantees. Okay, so um that's the main part I would like to
+[0:29:55] um that's the main part I would like to talk about for this like guided what was
+[0:29:58] talk about for this like guided what was like robust transfer learning. So if you
+[0:30:00] like robust transfer learning. So if you got uh like more interest about this you
+[0:30:03] got uh like more interest about this you can take a look at our paper here. Okay.
+[0:30:06] can take a look at our paper here. Okay. So in the final part uh I would like to
+[0:30:09] So in the final part uh I would like to uh come to this like connection to the
+[0:30:11] uh come to this like connection to the the causal in learning and I would like
+[0:30:13] the causal in learning and I would like to show this figure. So but before I
+[0:30:16] to show this figure. So but before I move on so I would like to check again.
+[0:30:17] move on so I would like to check again. So is there any questions?
+[0:30:21] So is there any questions? and no questions in Q&amp;A right now. Thank
+[0:30:23] and no questions in Q&amp;A right now. Thank you. Okay, great. Then I'll just move
+[0:30:26] you. Okay, great. Then I'll just move on. So what we have discuss is we
+[0:30:29] on. So what we have discuss is we interpret we use this minimax
+[0:30:31] interpret we use this minimax optimization and we can use that to
+[0:30:33] optimization and we can use that to handle this distributional bus
+[0:30:34] handle this distributional bus optimization. Uh we can use that to
+[0:30:36] optimization. Uh we can use that to handle the transfer learning by
+[0:30:38] handle the transfer learning by leveraging like the target label data.
+[0:30:40] leveraging like the target label data. Um but also uh I would like to mention
+[0:30:43] Um but also uh I would like to mention that this is something surprising to me.
+[0:30:44] that this is something surprising to me. I just realized maybe uh like a year ago
+[0:30:48] I just realized maybe uh like a year ago actually we can also using this minimax
+[0:30:51] actually we can also using this minimax optimization uh to do this causal
+[0:30:53] optimization uh to do this causal inverse learning and as you can see from
+[0:30:55] inverse learning and as you can see from this cartoon here. So from distribution
+[0:30:58] this cartoon here. So from distribution robots to transfer learning we got a
+[0:30:59] robots to transfer learning we got a smaller class but we can think the other
+[0:31:01] smaller class but we can think the other way. So what if we got a larger class
+[0:31:04] way. So what if we got a larger class and then in this case actually we can do
+[0:31:06] and then in this case actually we can do uh the causal inverance learning. Okay.
+[0:31:08] uh the causal inverance learning. Okay. So before uh uh I actually need a few
+[0:31:11] So before uh uh I actually need a few slides. I will try to briefly review
+[0:31:13] slides. I will try to briefly review what is a causal inverse learning and
+[0:31:15] what is a causal inverse learning and then I will come back to discuss how can
+[0:31:18] then I will come back to discuss how can we use this causal invarance. So how can
+[0:31:20] we use this causal invarance. So how can we use this minimax framework uh to to
+[0:31:22] we use this minimax framework uh to to attack this causal invarance learning
+[0:31:24] attack this causal invarance learning problem. So for the causal invarance
+[0:31:26] problem. So for the causal invarance learning so um it's uh also in the multi
+[0:31:30] learning so um it's uh also in the multi domain um so multissource regime. So it
+[0:31:33] domain um so multissource regime. So it assumes that from for data from
+[0:31:35] assumes that from for data from different sources uh they share a same
+[0:31:37] different sources uh they share a same causal model. So this all of this uh
+[0:31:40] causal model. So this all of this uh sources their true causal model for y is
+[0:31:43] sources their true causal model for y is the same. It's a beta star sar and sar
+[0:31:45] the same. It's a beta star sar and sar is the the set of the causal variable.
+[0:31:47] is the the set of the causal variable. So as an illustration here so uh the co
+[0:31:50] So as an illustration here so uh the co the causal variable is x1. So in the two
+[0:31:53] the causal variable is x1. So in the two environment or in the two sources so
+[0:31:55] environment or in the two sources so this x1 affect y in the same way but y
+[0:31:59] this x1 affect y in the same way but y affect x2 different. Okay. So in this
+[0:32:01] affect x2 different. Okay. So in this case the SAR is just equal to one and X1
+[0:32:04] case the SAR is just equal to one and X1 is a causal model and for the causal
+[0:32:06] is a causal model and for the causal inverse learning it assumes that the
+[0:32:08] inverse learning it assumes that the causal model is the same across
+[0:32:09] causal model is the same across different domains. Um but for the
+[0:32:12] different domains. Um but for the non-causal one so for example the Y1 the
+[0:32:15] non-causal one so for example the Y1 the Y2X2 the relationship could could be
+[0:32:17] Y2X2 the relationship could could be different or could be heterogeneous.
+[0:32:19] different or could be heterogeneous. Okay. So then the we how can we identify
+[0:32:23] Okay. So then the we how can we identify this model? we can actually identify a
+[0:32:25] this model? we can actually identify a model B uh such that uh this prediction
+[0:32:28] model B uh such that uh this prediction model the variance of the prediction
+[0:32:30] model the variance of the prediction model is actually stable or shared
+[0:32:32] model is actually stable or shared across different domain. Okay. So that's
+[0:32:35] across different domain. Okay. So that's actually the um the main idea for the a
+[0:32:38] actually the um the main idea for the a little bit main idea for the causing. So
+[0:32:41] little bit main idea for the causing. So we try to find a prediction model such
+[0:32:43] we try to find a prediction model such that it has a stable performance across
+[0:32:46] that it has a stable performance across different domains and hopefully we can
+[0:32:48] different domains and hopefully we can differentiate X1 X2 by leveraging the
+[0:32:51] differentiate X1 X2 by leveraging the the information here because only X1 uh
+[0:32:54] the information here because only X1 uh affect Y1 in a stable in in a like
+[0:32:57] affect Y1 in a stable in in a like invariant way but X2 affect Y in like uh
+[0:33:01] invariant way but X2 affect Y in like uh not not invariant way.
+[0:33:03] not not invariant way. Okay. And uh let's look at what's
+[0:33:07] Okay. And uh let's look at what's happening in the literature through this
+[0:33:08] happening in the literature through this TW example. So for the twice example uh
+[0:33:10] TW example. So for the twice example uh same structure as before X1 is a true
+[0:33:12] same structure as before X1 is a true causal variable and X2 is affected by Y.
+[0:33:16] causal variable and X2 is affected by Y. And in this case um we assume that uh
+[0:33:19] And in this case um we assume that uh the model for for the outcome model is
+[0:33:22] the model for for the outcome model is invariant. Um but we also need some
+[0:33:25] invariant. Um but we also need some hetrogenity. So uh for the first
+[0:33:27] hetrogenity. So uh for the first environment so we interven like this X1
+[0:33:30] environment so we interven like this X1 the generation of X1 X2 and you can see
+[0:33:32] the generation of X1 X2 and you can see the two hammer here and the hammer
+[0:33:34] the two hammer here and the hammer actually means uh like how much
+[0:33:36] actually means uh like how much intervention they have received. So if
+[0:33:38] intervention they have received. So if they receive a small intervention then
+[0:33:40] they receive a small intervention then the hammer is smaller and if they
+[0:33:42] the hammer is smaller and if they receive a bigger intervention the hammer
+[0:33:43] receive a bigger intervention the hammer is bigger. So it means that for the
+[0:33:45] is bigger. So it means that for the second environment so we inter this two
+[0:33:48] second environment so we inter this two noise level more than the first
+[0:33:49] noise level more than the first environment. Okay. And then how can we
+[0:33:52] environment. Okay. And then how can we identify like which variable or which
+[0:33:54] identify like which variable or which model is avariant. So the most natural
+[0:33:57] model is avariant. So the most natural idea proposed by the sorry you have
+[0:34:00] idea proposed by the sorry you have around 10 minutes left just to remind
+[0:34:01] around 10 minutes left just to remind you. Okay great thank you. So uh the
+[0:34:05] you. Okay great thank you. So uh the first most natural idea is actually uh
+[0:34:07] first most natural idea is actually uh to enumerate all possible subset. So if
+[0:34:10] to enumerate all possible subset. So if we enumerate all possible subset here
+[0:34:12] we enumerate all possible subset here and then we can get a best prediction
+[0:34:14] and then we can get a best prediction model and evaluate the risk across
+[0:34:16] model and evaluate the risk across different sources uh then actually we
+[0:34:18] different sources uh then actually we can see whether risk depends on L or
+[0:34:20] can see whether risk depends on L or not. In this case we can see that only
+[0:34:22] not. In this case we can see that only when when we include a true causal
+[0:34:24] when when we include a true causal variable X1 so we have an invarant risk.
+[0:34:27] variable X1 so we have an invarant risk. So that's the intuitive way uh to to
+[0:34:30] So that's the intuitive way uh to to identify this s and also identify the
+[0:34:32] identify this s and also identify the beta star. Okay. And later u there's a
+[0:34:36] beta star. Okay. And later u there's a nice extension of this exhaustive search
+[0:34:39] nice extension of this exhaustive search idea to this optimization problem. So
+[0:34:41] idea to this optimization problem. So they can do a panalization here and then
+[0:34:44] they can do a panalization here and then to achieve the similar goal. Okay. So
+[0:34:47] to achieve the similar goal. Okay. So the proposal here is actually nice and
+[0:34:49] the proposal here is actually nice and then they propose the first method and
+[0:34:50] then they propose the first method and state of method to identify this star
+[0:34:53] state of method to identify this star and the beta star. But the issue is um
+[0:34:56] and the beta star. But the issue is um it's actually either based on exhaustive
+[0:34:58] it's actually either based on exhaustive search or based on uh this uh like
+[0:35:00] search or based on uh this uh like integer programming. So it's very hard
+[0:35:02] integer programming. So it's very hard to in to like scale this up. So if say p
+[0:35:05] to in to like scale this up. So if say p equal to 20 then both method may not
+[0:35:08] equal to 20 then both method may not implement well okay because of they take
+[0:35:11] implement well okay because of they take a lot of time and what's our proposal as
+[0:35:14] a lot of time and what's our proposal as promised from beginning is we actually
+[0:35:16] promised from beginning is we actually can enlarge this answering class. So we
+[0:35:18] can enlarge this answering class. So we include some negative weight and then
+[0:35:20] include some negative weight and then this gamma like we can put the gamma to
+[0:35:22] this gamma like we can put the gamma to be very positive and then uh we can get
+[0:35:24] be very positive and then uh we can get answering class like this and then we
+[0:35:26] answering class like this and then we take the maximum risk uh in this format.
+[0:35:29] take the maximum risk uh in this format. So and not just inside the uh like
+[0:35:33] So and not just inside the uh like simplex but actually we can include some
+[0:35:35] simplex but actually we can include some negative weight and then we can do this
+[0:35:37] negative weight and then we can do this minimization. Okay. So as promised so
+[0:35:40] minimization. Okay. So as promised so this is also a minimax optimization
+[0:35:41] this is also a minimax optimization problem but we just make the answering
+[0:35:43] problem but we just make the answering class larger and the first question I
+[0:35:45] class larger and the first question I try to answer here is why this will give
+[0:35:48] try to answer here is why this will give us the invarant risk prediction model.
+[0:35:50] us the invarant risk prediction model. So actually so the first equation is a
+[0:35:53] So actually so the first equation is a so maybe you can trust me. So this is
+[0:35:56] so maybe you can trust me. So this is actually is a equivalent form as this
+[0:35:58] actually is a equivalent form as this maximization problem and we can actually
+[0:36:01] maximization problem and we can actually show that um the negative dr or negative
+[0:36:04] show that um the negative dr or negative weight dr as our proposal admits this
+[0:36:07] weight dr as our proposal admits this following form. So it's a minimizing
+[0:36:10] following form. So it's a minimizing like a summation of two parts. So the
+[0:36:11] like a summation of two parts. So the first part is the maximum risk and the
+[0:36:13] first part is the maximum risk and the second part is a risk disparity. So the
+[0:36:17] second part is a risk disparity. So the this term is measures the difference
+[0:36:19] this term is measures the difference between the maximum risk and the average
+[0:36:21] between the maximum risk and the average risk. And then if we put the the gamma
+[0:36:24] risk. And then if we put the the gamma the radius of the asserting class really
+[0:36:26] the radius of the asserting class really large the gamma equal to infinity then
+[0:36:29] large the gamma equal to infinity then we force that the second term has to be
+[0:36:31] we force that the second term has to be the same. So it means that uh we have to
+[0:36:34] the same. So it means that uh we have to have a prediction model that is risk is
+[0:36:37] have a prediction model that is risk is invariant and that's give us this
+[0:36:39] invariant and that's give us this constraint and then if the risk is
+[0:36:41] constraint and then if the risk is invariant then the second part is
+[0:36:42] invariant then the second part is dropped then we just minimize this uh
+[0:36:45] dropped then we just minimize this uh shared or the invariant risk okay so
+[0:36:47] shared or the invariant risk okay so that's connects this negative dr and uh
+[0:36:50] that's connects this negative dr and uh this invarant risk prediction model and
+[0:36:53] this invarant risk prediction model and by um the above operation okay and I
+[0:36:57] by um the above operation okay and I hope like this convince you that we can
+[0:36:59] hope like this convince you that we can uh use this minimax problem uh to solve
+[0:37:02] uh use this minimax problem uh to solve this uh um the causal invariance
+[0:37:04] this uh um the causal invariance learning problem. Okay, at least it pro
+[0:37:06] learning problem. Okay, at least it pro propo uh pro provide one solution and in
+[0:37:10] propo uh pro provide one solution and in the following actually I will try to
+[0:37:11] the following actually I will try to answer two questions but maybe at a a
+[0:37:13] answer two questions but maybe at a a brief level but I hope to pass the main
+[0:37:15] brief level but I hope to pass the main message. So the first question is I have
+[0:37:18] message. So the first question is I have mentioned that the existing state-of-art
+[0:37:20] mentioned that the existing state-of-art method is either based on the exhaustive
+[0:37:22] method is either based on the exhaustive search or based on the some integer
+[0:37:24] search or based on the some integer programming. So it's hard to to solve it
+[0:37:26] programming. So it's hard to to solve it very fast. Um but we we are going to
+[0:37:29] very fast. Um but we we are going to show that actually for the negative
+[0:37:30] show that actually for the negative weighted dr we can show it solve it very
+[0:37:33] weighted dr we can show it solve it very fast and also um um and also we have
+[0:37:37] fast and also um um and also we have some theoretical guarantee like it
+[0:37:38] some theoretical guarantee like it definitely covers to the global minimum
+[0:37:40] definitely covers to the global minimum and for the second question uh and label
+[0:37:43] and for the second question uh and label that question one here we also try to
+[0:37:44] that question one here we also try to answer is uh in what scenario can we
+[0:37:47] answer is uh in what scenario can we actually identify the true cause effect
+[0:37:50] actually identify the true cause effect so in the literature there are some high
+[0:37:52] so in the literature there are some high level conditions but it's actually
+[0:37:53] level conditions but it's actually unclear like how many intervention or
+[0:37:56] unclear like how many intervention or how many environments do we need such
+[0:37:58] how many environments do we need such that we can identify this uh uh like
+[0:38:00] that we can identify this uh uh like true causal environment model. Okay, so
+[0:38:02] true causal environment model. Okay, so we're going to answer both questions. So
+[0:38:05] we're going to answer both questions. So in the paper actually we couldn't answer
+[0:38:07] in the paper actually we couldn't answer both questions fully. We can only answer
+[0:38:09] both questions fully. We can only answer both questions in a very specific like
+[0:38:12] both questions in a very specific like regime like it's called item
+[0:38:13] regime like it's called item intervention and Dominic is a leading
+[0:38:15] intervention and Dominic is a leading expert on this direction. Let me briefly
+[0:38:17] expert on this direction. Let me briefly introduce what's the intervention for
+[0:38:20] introduce what's the intervention for the item intervention. uh we assume the
+[0:38:22] the item intervention. uh we assume the same causal invarant model but also we
+[0:38:24] same causal invarant model but also we assume that there is a generating model
+[0:38:25] assume that there is a generating model for XL that's all the coarience and then
+[0:38:28] for XL that's all the coarience and then the noise is actually driven part for
+[0:38:30] the noise is actually driven part for gen for for having this hogenous uh
+[0:38:33] gen for for having this hogenous uh distribution and then the noise is
+[0:38:36] distribution and then the noise is actually generated as the noise here and
+[0:38:38] actually generated as the noise here and plus some intervention and the inter
+[0:38:40] plus some intervention and the inter intervention delta delta L is the
+[0:38:42] intervention delta delta L is the intervention we can add to each
+[0:38:44] intervention we can add to each environment and to generate
+[0:38:45] environment and to generate heterogeneous uh distribution and
+[0:38:48] heterogeneous uh distribution and actually that's the why it's called
+[0:38:50] actually that's the why it's called active intervention because we add the
+[0:38:52] active intervention because we add the intervention um to the noise level and
+[0:38:56] intervention um to the noise level and then it generates this uh uh like it it
+[0:38:59] then it generates this uh uh like it it generated the the hydrogenous
+[0:39:01] generated the the hydrogenous distribution. Okay. So that's actually
+[0:39:03] distribution. Okay. So that's actually the only intervention we focus on in the
+[0:39:05] the only intervention we focus on in the paper and we can provide a full solution
+[0:39:07] paper and we can provide a full solution based on the previous two answers. So
+[0:39:09] based on the previous two answers. So the for the for the first answer when we
+[0:39:11] the for the for the first answer when we can do the co when can we do the causal
+[0:39:13] can do the co when can we do the causal discovery. So we can actually do the
+[0:39:15] discovery. So we can actually do the causal discovery if there exist uh a
+[0:39:18] causal discovery if there exist uh a convex combination of the coarance
+[0:39:20] convex combination of the coarance matrix of the delta L from a collection
+[0:39:23] matrix of the delta L from a collection of environment is dominating the other
+[0:39:25] of environment is dominating the other collection of environment the coarance
+[0:39:27] collection of environment the coarance matrix from another collection of
+[0:39:29] matrix from another collection of environment in this scenario we can
+[0:39:31] environment in this scenario we can actually do the causal identification
+[0:39:33] actually do the causal identification and as illustration so um if the first
+[0:39:37] and as illustration so um if the first environment it has a lot of intervention
+[0:39:38] environment it has a lot of intervention and the second environment does not have
+[0:39:40] and the second environment does not have that many intervention then actually
+[0:39:42] that many intervention then actually this condition automatically mode and
+[0:39:44] this condition automatically mode and then we can do the causal identification
+[0:39:46] then we can do the causal identification and of course we have a a lot more other
+[0:39:49] and of course we have a a lot more other practical scenarios so we can verify
+[0:39:51] practical scenarios so we can verify this and there are two important
+[0:39:53] this and there are two important comments the first one is um we don't
+[0:39:55] comments the first one is um we don't need to know what's the weight so they
+[0:39:57] need to know what's the weight so they as long as there exist such a weight is
+[0:39:59] as long as there exist such a weight is fine and the second one is this one is
+[0:40:01] fine and the second one is this one is nearly nicer and sufficient for additive
+[0:40:03] nearly nicer and sufficient for additive intervention because if this condition
+[0:40:05] intervention because if this condition doesn't hold it's easy like we can
+[0:40:07] doesn't hold it's easy like we can construct a counter example such that we
+[0:40:09] construct a counter example such that we can never identify the the true cause
+[0:40:11] can never identify the the true cause effect
+[0:40:13] effect Okay. So in the talk uh in the paper we
+[0:40:17] Okay. So in the talk uh in the paper we actually uh introduce equivalent cause
+[0:40:19] actually uh introduce equivalent cause identification condition. So we write
+[0:40:20] identification condition. So we write the matrix a omega in this form and then
+[0:40:23] the matrix a omega in this form and then uh we use the lambda it's a minimum
+[0:40:25] uh we use the lambda it's a minimum value. So uh as hydrogenity measure. So
+[0:40:29] value. So uh as hydrogenity measure. So if the lambda is positive or it's a
+[0:40:30] if the lambda is positive or it's a constant it means there is a lot of
+[0:40:33] constant it means there is a lot of hydrogenity across different
+[0:40:34] hydrogenity across different environments. And in the paper we
+[0:40:36] environments. And in the paper we actually have shown that if there exist
+[0:40:38] actually have shown that if there exist a weight such that the minimum item
+[0:40:40] a weight such that the minimum item value is positive so it's equivalent to
+[0:40:42] value is positive so it's equivalent to the previous condition there is a
+[0:40:44] the previous condition there is a collection of environments dominating
+[0:40:46] collection of environments dominating the other collection of environments. So
+[0:40:48] the other collection of environments. So they actually they are equivalent and
+[0:40:50] they actually they are equivalent and you can refer to the paper to see the
+[0:40:52] you can refer to the paper to see the the exact proof and uh gen you build on
+[0:40:55] the exact proof and uh gen you build on this connection like um this is
+[0:40:58] this connection like um this is unexpected for me and then you build on
+[0:41:00] unexpected for me and then you build on this uh connection of this first
+[0:41:03] this uh connection of this first condition and the second condition.
+[0:41:04] condition and the second condition. Okay. And here is the first main result.
+[0:41:07] Okay. And here is the first main result. We can actually have shown that uh for
+[0:41:09] We can actually have shown that uh for this um minimax optimization problem uh
+[0:41:13] this um minimax optimization problem uh we can show that this negative dr is
+[0:41:16] we can show that this negative dr is convert beta star at this rate. Okay.
+[0:41:19] convert beta star at this rate. Okay. And let's look at the right hand side.
+[0:41:20] And let's look at the right hand side. So the lambda is this hydrogenity
+[0:41:22] So the lambda is this hydrogenity parameter. If lambda is positive then
+[0:41:24] parameter. If lambda is positive then this rate will uh then it's fine. And
+[0:41:28] this rate will uh then it's fine. And then the gamma is the radius of this
+[0:41:30] then the gamma is the radius of this uncertain class. G large and then we
+[0:41:32] uncertain class. G large and then we actually can make a right hand side goes
+[0:41:34] actually can make a right hand side goes to zero. So this shows that under this
+[0:41:36] to zero. So this shows that under this condition two or condition one this
+[0:41:38] condition two or condition one this causal identification condition the
+[0:41:40] causal identification condition the negative
+[0:41:41] negative drone. Okay. But actually it only answer
+[0:41:45] drone. Okay. But actually it only answer the first question. So uh the negative
+[0:41:47] the first question. So uh the negative dr is actually can identify the beta
+[0:41:49] dr is actually can identify the beta star under condition two for
+[0:41:50] star under condition two for intervention. But the other question we
+[0:41:53] intervention. But the other question we really haven't answer is we still cannot
+[0:41:56] really haven't answer is we still cannot solve it. So the objective function here
+[0:41:58] solve it. So the objective function here is nonconvex because there the there
+[0:42:00] is nonconvex because there the there some weight can be negative and this le
+[0:42:02] some weight can be negative and this le square loss and then it's a nonconvex
+[0:42:04] square loss and then it's a nonconvex optimization. Okay. And to solve that we
+[0:42:08] optimization. Okay. And to solve that we actually need the following theorem
+[0:42:09] actually need the following theorem which is a very surprising result uh
+[0:42:12] which is a very surprising result uh like approved by the collaborator uh uh
+[0:42:17] like approved by the collaborator uh uh uh EA. So he's actually optimization
+[0:42:20] uh EA. So he's actually optimization expert. So he actually can show that
+[0:42:23] expert. So he actually can show that under condition two. So if this uh um
+[0:42:26] under condition two. So if this uh um cause identification condition holds for
+[0:42:27] cause identification condition holds for the active intervention. So for any
+[0:42:29] the active intervention. So for any prediction model B is close to beta star
+[0:42:32] prediction model B is close to beta star in this format. Okay. So if you can
+[0:42:36] in this format. Okay. So if you can trust me. So everything else you can
+[0:42:37] trust me. So everything else you can drop them because they always goes to
+[0:42:39] drop them because they always goes to zero if we choose like this mu like
+[0:42:42] zero if we choose like this mu like that's a rich penalty if you choose that
+[0:42:43] that's a rich penalty if you choose that close to to zero. So and lambda is a
+[0:42:46] close to to zero. So and lambda is a positive constant and n is something
+[0:42:49] positive constant and n is something goes to infinity and gamma is something
+[0:42:50] goes to infinity and gamma is something goes to infinity. So they all goes to
+[0:42:52] goes to infinity. So they all goes to zero. So the intriguing part is we
+[0:42:55] zero. So the intriguing part is we establish a connection between the
+[0:42:56] establish a connection between the difference between B and beta star and
+[0:42:58] difference between B and beta star and this gradient. Okay. So if we can show
+[0:43:01] this gradient. Okay. So if we can show that there is a B such that this
+[0:43:04] that there is a B such that this gradient is close to zero then we show
+[0:43:06] gradient is close to zero then we show that this B is close to beta star. Okay.
+[0:43:09] that this B is close to beta star. Okay. So if you're familiar with convex
+[0:43:11] So if you're familiar with convex optimization so this is always the case.
+[0:43:12] optimization so this is always the case. So if you find a point that's the
+[0:43:14] So if you find a point that's the gradient is close to zero if a non if
+[0:43:17] gradient is close to zero if a non if like no constraint then uh actually it's
+[0:43:20] like no constraint then uh actually it's close to the global global minimum for
+[0:43:22] close to the global global minimum for the convex optimization but
+[0:43:24] the convex optimization but unfortunately this is extremely hard for
+[0:43:25] unfortunately this is extremely hard for nonconvex optimization. So in general
+[0:43:28] nonconvex optimization. So in general like finding this global minimum is very
+[0:43:31] like finding this global minimum is very hard but this theorem builds um a
+[0:43:34] hard but this theorem builds um a connection that you don't really need to
+[0:43:36] connection that you don't really need to find the global minimum you just find a
+[0:43:38] find the global minimum you just find a point such that the gradient close to
+[0:43:40] point such that the gradient close to zero and that's point is close to the
+[0:43:42] zero and that's point is close to the true beta star and that's the main
+[0:43:44] true beta star and that's the main takeaway of this theorem. Okay, so that
+[0:43:47] takeaway of this theorem. Okay, so that means we just need to find a point like
+[0:43:50] means we just need to find a point like prediction model such that it gradient
+[0:43:52] prediction model such that it gradient is uh close to there and actually for
+[0:43:54] is uh close to there and actually for that part um it's much easier to do for
+[0:43:57] that part um it's much easier to do for non-convex optimization. So for non comx
+[0:43:59] non-convex optimization. So for non comx optimization finding a global minimum is
+[0:44:01] optimization finding a global minimum is hard finding a point such that it's
+[0:44:03] hard finding a point such that it's gradient close to zero. So that's much
+[0:44:06] gradient close to zero. So that's much easier to do and then people know that
+[0:44:08] easier to do and then people know that like we can just apply the gradient
+[0:44:09] like we can just apply the gradient descent and then we can achieve that.
+[0:44:11] descent and then we can achieve that. Okay. All right. So this is sorry to
+[0:44:13] Okay. All right. So this is sorry to interrupt you. So, we're running out of
+[0:44:15] interrupt you. So, we're running out of time. So, if you could wrap up in the
+[0:44:17] time. So, if you could wrap up in the next two or three minutes, that would be
+[0:44:19] next two or three minutes, that would be great. Thank you. Okay, that that would
+[0:44:20] great. Thank you. Okay, that that would be great. I I can wrap up. So, then the
+[0:44:23] be great. I I can wrap up. So, then the takeaway message is like uh we can just
+[0:44:25] takeaway message is like uh we can just do a gradient descent and then the
+[0:44:27] do a gradient descent and then the gradient descent will give us um
+[0:44:30] gradient descent will give us um something like the gradient close to
+[0:44:32] something like the gradient close to close to zero as a final solution. Okay,
+[0:44:34] close to zero as a final solution. Okay, so this is the uh the final message for
+[0:44:36] so this is the uh the final message for this part. So we can actually show that
+[0:44:39] this part. So we can actually show that uh the proposed estimator even though
+[0:44:42] uh the proposed estimator even though it's for non-comax setting we can show
+[0:44:44] it's for non-comax setting we can show it rate of convergence and this t is
+[0:44:46] it rate of convergence and this t is number of iterations and it means we got
+[0:44:48] number of iterations and it means we got a a very long iteration uh like then we
+[0:44:51] a a very long iteration uh like then we can show that our proposed negative dr
+[0:44:53] can show that our proposed negative dr estimator will converge uh to the global
+[0:44:55] estimator will converge uh to the global minimum. Okay so this some simulations
+[0:44:59] minimum. Okay so this some simulations and here's a paper reference you can
+[0:45:00] and here's a paper reference you can take a look and I think that's the main
+[0:45:02] take a look and I think that's the main all the main message already passed. So
+[0:45:04] all the main message already passed. So let me just do a brief summary. So we
+[0:45:07] let me just do a brief summary. So we are looking at this multisource learning
+[0:45:10] are looking at this multisource learning and this is setup and then we use this
+[0:45:13] and this is setup and then we use this as a bigger umbrella to talk about both
+[0:45:15] as a bigger umbrella to talk about both distribution bus learning transfer
+[0:45:17] distribution bus learning transfer learning and causal inverse learning and
+[0:45:19] learning and causal inverse learning and they can all be written as minimax
+[0:45:21] they can all be written as minimax optimization form and I hope I already
+[0:45:24] optimization form and I hope I already passed the message from the left to
+[0:45:25] passed the message from the left to right the certain class becomes smaller
+[0:45:27] right the certain class becomes smaller and smaller. So we got a more and more
+[0:45:29] and smaller. So we got a more and more accurate prediction model for target and
+[0:45:31] accurate prediction model for target and from right to the left we get more and
+[0:45:33] from right to the left we get more and more generalization guarantee in the
+[0:45:35] more generalization guarantee in the sense we're looking at more and more
+[0:45:37] sense we're looking at more and more possible future target population and
+[0:45:39] possible future target population and then have a guarantee of the um like the
+[0:45:42] then have a guarantee of the um like the future like target population. So this
+[0:45:45] future like target population. So this is the final take home like for the
+[0:45:47] is the final take home like for the multissource learning I think it
+[0:45:48] multissource learning I think it provides a lot of opportunities for
+[0:45:50] provides a lot of opportunities for statistician like um it's use requires
+[0:45:53] statistician like um it's use requires different tools from the previous like
+[0:45:55] different tools from the previous like single source learning and also it's
+[0:45:57] single source learning and also it's intriguing how do we define what is a
+[0:45:59] intriguing how do we define what is a generalizable model there are millions
+[0:46:01] generalizable model there are millions of ways of defining that and each one of
+[0:46:04] of ways of defining that and each one of them can have their own advantage and
+[0:46:05] them can have their own advantage and disadvantage and also we highlight the
+[0:46:08] disadvantage and also we highlight the computation wise there's some challenge
+[0:46:09] computation wise there's some challenge and inference wise it's also quite
+[0:46:11] and inference wise it's also quite challenge and here is a reference if
+[0:46:14] challenge and here is a reference if you're interested in And finally, I
+[0:46:15] you're interested in And finally, I would like to thank all of my
+[0:46:17] would like to thank all of my collaborators and um yeah, so thank Jen
+[0:46:21] collaborators and um yeah, so thank Jen and Shin for to serve as the moderator.
+[0:46:23] and Shin for to serve as the moderator. Yeah, thank you. Uh thanks thanks for
+[0:46:26] Yeah, thank you. Uh thanks thanks for the very nice talk, Zjan. I think in the
+[0:46:28] the very nice talk, Zjan. I think in the interest of time we should uh quickly
+[0:46:30] interest of time we should uh quickly move over to the discussion. So Kaizen
+[0:46:33] move over to the discussion. So Kaizen um please take us away. Sure. Let me
+[0:46:36] um please take us away. Sure. Let me start by sharing my screen.
+[0:46:45] Okay. Okay. Wonderful. Um yeah, first of all I would like to congratulate Zen and
+[0:46:48] all I would like to congratulate Zen and all the collaborators uh for this series
+[0:46:52] all the collaborators uh for this series of wonderful work. Uh I really learned
+[0:46:55] of wonderful work. Uh I really learned quite a lot. Uh so I actually attended
+[0:46:58] quite a lot. Uh so I actually attended several of the talks before. So I got
+[0:47:00] several of the talks before. So I got the you know had the pleasure to learn
+[0:47:02] the you know had the pleasure to learn the key ideas and now for this uh this
+[0:47:06] the key ideas and now for this uh this special occasion it's uh super nice to
+[0:47:10] special occasion it's uh super nice to uh combine all the ideas uh in a very
+[0:47:13] uh combine all the ideas uh in a very coherent manner uh to highlight the main
+[0:47:15] coherent manner uh to highlight the main theme. So I would like just to share a
+[0:47:18] theme. So I would like just to share a few comments uh from my site. So um this
+[0:47:23] few comments uh from my site. So um this is the the key setup uh throughout Zen's
+[0:47:27] is the the key setup uh throughout Zen's talk that is the model source learning
+[0:47:29] talk that is the model source learning with minimax optimization. So we are
+[0:47:31] with minimax optimization. So we are already pretty familiar with the uh
+[0:47:34] already pretty familiar with the uh population risk minimization problem. So
+[0:47:37] population risk minimization problem. So we have some supervised learning problem
+[0:47:39] we have some supervised learning problem and we want to uh uh we want to optimize
+[0:47:43] and we want to uh uh we want to optimize the population risk over function class.
+[0:47:46] the population risk over function class. uh but due to the uncertainty uh and
+[0:47:49] uh but due to the uncertainty uh and also hydrogenity across the different
+[0:47:51] also hydrogenity across the different sources right so zujen's approach uh
+[0:47:54] sources right so zujen's approach uh proposal is to um not just directly
+[0:47:58] proposal is to um not just directly optimizing the loss for various reasons
+[0:48:00] optimizing the loss for various reasons but uh consider a set of ambiguity
+[0:48:03] but uh consider a set of ambiguity ambiguity set or a set of plausible
+[0:48:06] ambiguity set or a set of plausible distributions and uh then to optimize
+[0:48:10] distributions and uh then to optimize the worst case loss across that set. So
+[0:48:14] the worst case loss across that set. So this uh general framework this general
+[0:48:17] this uh general framework this general umbrella covers uh several key topics
+[0:48:20] umbrella covers uh several key topics and in particular the gen talk covers
+[0:48:22] and in particular the gen talk covers three of them. Uh in my in the language
+[0:48:25] three of them. Uh in my in the language or the jargon I'm the most familiar with
+[0:48:28] or the jargon I'm the most familiar with um the first one corresponds to
+[0:48:30] um the first one corresponds to unsupervised domain adaptation where you
+[0:48:33] unsupervised domain adaptation where you get the unlabelled data from the target
+[0:48:35] get the unlabelled data from the target distribution of interest and then the
+[0:48:38] distribution of interest and then the label data from a bunch of source
+[0:48:41] label data from a bunch of source distributions. Okay. Um the second part
+[0:48:44] distributions. Okay. Um the second part is supervised domain adaptation where
+[0:48:47] is supervised domain adaptation where the the t the data from your target
+[0:48:49] the the t the data from your target distribution is already labeled. Okay.
+[0:48:52] distribution is already labeled. Okay. So that's definitely more informative.
+[0:48:54] So that's definitely more informative. Uh and that's why uh in as mentioned you
+[0:48:58] Uh and that's why uh in as mentioned you can use smaller ambiguity set for the
+[0:49:01] can use smaller ambiguity set for the second part because you do have more
+[0:49:03] second part because you do have more information about the model and
+[0:49:05] information about the model and distribution. And the third part uh
+[0:49:08] distribution. And the third part uh invariance learning for causal
+[0:49:10] invariance learning for causal discovery. Um so this is a a different
+[0:49:14] discovery. Um so this is a a different setup. There's no particular
+[0:49:16] setup. There's no particular distribution of interest but you have a
+[0:49:19] distribution of interest but you have a family of distributions and you want to
+[0:49:21] family of distributions and you want to share you want to learn some commonality
+[0:49:24] share you want to learn some commonality uh shared by all of them. Okay.
+[0:49:27] uh shared by all of them. Okay. Um okay. So for the first part um the
+[0:49:32] Um okay. So for the first part um the you know we want to solve a minimization
+[0:49:34] you know we want to solve a minimization problem over Q distribution. Uh the key
+[0:49:37] problem over Q distribution. Uh the key challenge lies in the distribution
+[0:49:39] challenge lies in the distribution shift. So both in the coariate and also
+[0:49:41] shift. So both in the coariate and also in the posterior or the model. Um the
+[0:49:44] in the posterior or the model. Um the idea for this part is to conduct the
+[0:49:47] idea for this part is to conduct the minimax optimization for this particular
+[0:49:49] minimax optimization for this particular loss uh which represents the the amount
+[0:49:52] loss uh which represents the the amount of explained variance. Yeah. The
+[0:49:54] of explained variance. Yeah. The negative of this part is the explained
+[0:49:56] negative of this part is the explained variance. Um and so you look at the
+[0:49:59] variance. Um and so you look at the worst case over a family of plausible
+[0:50:02] worst case over a family of plausible distributions that so for those
+[0:50:04] distributions that so for those plausible ones they should be consistent
+[0:50:07] plausible ones they should be consistent with our target in the coari
+[0:50:10] with our target in the coari distribution and in terms of this
+[0:50:12] distribution and in terms of this posterior this can be any combination
+[0:50:15] posterior this can be any combination the comics combination of those uh
+[0:50:18] the comics combination of those uh source distributions. Yeah of course the
+[0:50:20] source distributions. Yeah of course the comics weight needs to satisfy certain
+[0:50:23] comics weight needs to satisfy certain constraint. Okay. And uh Zen showed a
+[0:50:26] constraint. Okay. And uh Zen showed a very nice result. Uh even though this
+[0:50:30] very nice result. Uh even though this this formulation looks daunting, uh the
+[0:50:32] this formulation looks daunting, uh the final solution admits a linear form,
+[0:50:36] final solution admits a linear form, right? It's a linear combination of a
+[0:50:38] right? It's a linear combination of a bunch of uh
+[0:50:40] bunch of uh individualized individual learners.
+[0:50:42] individualized individual learners. Yeah. Learned from the individual source
+[0:50:44] Yeah. Learned from the individual source data sets and you can obtain this comics
+[0:50:47] data sets and you can obtain this comics weight by solving some quadratic
+[0:50:49] weight by solving some quadratic program. Yeah. So there's a very nice
+[0:50:51] program. Yeah. So there's a very nice connection. there's a very nice uh
+[0:50:53] connection. there's a very nice uh result uh you know covering the
+[0:50:57] result uh you know covering the population version and then there's a
+[0:50:59] population version and then there's a nice estimator for the sample version.
+[0:51:02] nice estimator for the sample version. Okay. So for the second part now
+[0:51:05] Okay. So for the second part now supervised domain adaptation we have
+[0:51:07] supervised domain adaptation we have more knowledge about the source because
+[0:51:09] more knowledge about the source because we have the target because we have
+[0:51:11] we have the target because we have labels. Um and then uh here this this
+[0:51:15] labels. Um and then uh here this this part focus on linear models. Um the
+[0:51:19] part focus on linear models. Um the again minax problem uh max over
+[0:51:22] again minax problem uh max over ambiguity set and the ambiguity set not
+[0:51:26] ambiguity set and the ambiguity set not only consists of those comics
+[0:51:28] only consists of those comics combinations over the posteriors but
+[0:51:30] combinations over the posteriors but also they need to be compatible with the
+[0:51:34] also they need to be compatible with the existing uh label target data. So
+[0:51:38] existing uh label target data. So meaning that you you're roughly speaking
+[0:51:39] meaning that you you're roughly speaking the the risk over this plausible
+[0:51:42] the the risk over this plausible distribution cannot be too uh worse than
+[0:51:46] distribution cannot be too uh worse than the risk over the target distribution.
+[0:51:48] the risk over the target distribution. Right? The tow is some tolerance level.
+[0:51:50] Right? The tow is some tolerance level. Yeah. And again you can this this
+[0:51:54] Yeah. And again you can this this formulation admits a simple form of
+[0:51:56] formulation admits a simple form of solution. You have some convex
+[0:51:58] solution. You have some convex combination form a linear combination
+[0:52:00] combination form a linear combination form and you can get a ways from a
+[0:52:02] form and you can get a ways from a quadratic program. Theoretically you can
+[0:52:06] quadratic program. Theoretically you can prove the adaptivity to the unknown
+[0:52:08] prove the adaptivity to the unknown posterior drift which is the discrepancy
+[0:52:10] posterior drift which is the discrepancy among those underlying
+[0:52:12] among those underlying models. Okay. And finally for the last
+[0:52:15] models. Okay. And finally for the last part invarance learning via negative
+[0:52:18] part invarance learning via negative negatively weighted DRRO uh there's no
+[0:52:21] negatively weighted DRRO uh there's no particular uh distribution of interest
+[0:52:24] particular uh distribution of interest but you want to all of them share a
+[0:52:27] but you want to all of them share a common linear model with some support
+[0:52:30] common linear model with some support and you want to identify this common
+[0:52:32] and you want to identify this common structure right um again the idea is
+[0:52:36] structure right um again the idea is minimax optimization so there are two
+[0:52:39] minimax optimization so there are two objectives uh per se one is a maximum
+[0:52:42] objectives uh per se one is a maximum risk across the distribution ions I I
+[0:52:45] risk across the distribution ions I I denote it by big M and also there's a
+[0:52:49] denote it by big M and also there's a there's a average risk I denote by
+[0:52:51] there's a average risk I denote by little M. So you can the the big M
+[0:52:54] little M. So you can the the big M denotes the represents the maximum risk
+[0:52:57] denotes the represents the maximum risk and there difference between the big M
+[0:52:59] and there difference between the big M and little M shows the the risk
+[0:53:02] and little M shows the the risk disparity. So overall you want to uh
+[0:53:05] disparity. So overall you want to uh minimize the risk and also the risk
+[0:53:08] minimize the risk and also the risk disparity and there's a weight factor.
+[0:53:10] disparity and there's a weight factor. Okay. Uh to balance the two and the this
+[0:53:14] Okay. Uh to balance the two and the this problem admits a very nice reformulation
+[0:53:17] problem admits a very nice reformulation uh and super interpretable. I'm I'm very
+[0:53:20] uh and super interpretable. I'm I'm very impressed by this result. So it it it
+[0:53:22] impressed by this result. So it it it does look like what we uh showed before.
+[0:53:25] does look like what we uh showed before. So it's a minax formulation minax loss
+[0:53:28] So it's a minax formulation minax loss minimization problem. and the max you're
+[0:53:32] minimization problem. and the max you're not just looking at linear a common
+[0:53:35] not just looking at linear a common combination of individual losses but you
+[0:53:37] combination of individual losses but you enlarge the set a little bit so you you
+[0:53:40] enlarge the set a little bit so you you can even tolerate some negative weight
+[0:53:43] can even tolerate some negative weight okay so this is the and once you arrive
+[0:53:46] okay so this is the and once you arrive here you know there your toolbox there
+[0:53:49] here you know there your toolbox there are lots of tool uh tools uh for for
+[0:53:52] are lots of tool uh tools uh for for minax optimization problem and uh you so
+[0:53:56] minax optimization problem and uh you so for finite sample version you
+[0:53:58] for finite sample version you approximate population loss by empirical
+[0:54:00] approximate population loss by empirical one um add some ridge penalty also for
+[0:54:03] one um add some ridge penalty also for for the computation reasons and finally
+[0:54:06] for the computation reasons and finally you can use a gradient descent that's a
+[0:54:08] you can use a gradient descent that's a very nice first order algorithm to solve
+[0:54:11] very nice first order algorithm to solve it yeah so that's just a summary and
+[0:54:15] it yeah so that's just a summary and here I've got a few questions let me
+[0:54:17] here I've got a few questions let me start with the the the third one um you
+[0:54:22] start with the the the third one um you know first of all uh I think Dominate
+[0:54:24] know first of all uh I think Dominate brought it up during the second part um
+[0:54:28] brought it up during the second part um how do we go beyond linear model because
+[0:54:30] how do we go beyond linear model because when we look at the maximum uh loss or
+[0:54:33] when we look at the maximum uh loss or the loss disparity uh disparity we need
+[0:54:38] the loss disparity uh disparity we need the loss values to be directly
+[0:54:39] the loss values to be directly comparable. uh but for going beyond
+[0:54:42] comparable. uh but for going beyond linear model let's say for logistic
+[0:54:44] linear model let's say for logistic models uh the loss depends on the noise
+[0:54:48] models uh the loss depends on the noise level signal strength etc there you
+[0:54:50] level signal strength etc there you cannot directly uh compare them and look
+[0:54:53] cannot directly uh compare them and look at the max uh so here's a cliche example
+[0:54:56] at the max uh so here's a cliche example in this invariant learning literature
+[0:54:59] in this invariant learning literature your x is the image y is a binary label
+[0:55:01] your x is the image y is a binary label whether it's a cow or a camel uh the the
+[0:55:04] whether it's a cow or a camel uh the the set of useful feature corresponds to the
+[0:55:07] set of useful feature corresponds to the shape of the animal uh whereas you have
+[0:55:09] shape of the animal uh whereas you have a bunch of spears features telling you
+[0:55:11] a bunch of spears features telling you about the background color, right?
+[0:55:13] about the background color, right? Whether it's green background, that's
+[0:55:15] Whether it's green background, that's grassland or yellow, that's usually the
+[0:55:17] grassland or yellow, that's usually the sense. So, uh you that that's something
+[0:55:21] sense. So, uh you that that's something I'll be interested in learning more
+[0:55:23] I'll be interested in learning more about. And also I think there's um a key
+[0:55:27] about. And also I think there's um a key feature in this uh in this work that
+[0:55:31] feature in this uh in this work that even though in the uh in the problem
+[0:55:33] even though in the uh in the problem formulation you know uh it was motivated
+[0:55:36] formulation you know uh it was motivated through a common support assumption on
+[0:55:39] through a common support assumption on this uh on the beta right the common
+[0:55:41] this uh on the beta right the common beta and of course common support but
+[0:55:44] beta and of course common support but this learning procedure actually doesn't
+[0:55:46] this learning procedure actually doesn't direct doesn't explicitly enforce such
+[0:55:49] direct doesn't explicitly enforce such structure uh I think the the very nice
+[0:55:52] structure uh I think the the very nice thing here is that without enforcing
+[0:55:55] thing here is that without enforcing this uh this common support assumption
+[0:55:58] this uh this common support assumption the computation would definitely become
+[0:56:00] the computation would definitely become easier and also it this method this
+[0:56:03] easier and also it this method this framework has a strong potential to go
+[0:56:05] framework has a strong potential to go beyond uh linear mode features let's say
+[0:56:08] beyond uh linear mode features let's say nonlinear features right uh but on the
+[0:56:11] nonlinear features right uh but on the other hand uh would it be possible to to
+[0:56:15] other hand uh would it be possible to to get better error rates by explicitly
+[0:56:18] get better error rates by explicitly promoting sparsity right if the sparity
+[0:56:21] promoting sparsity right if the sparity in the linear model does code and we may
+[0:56:24] in the linear model does code and we may we may uh get it better. Um yeah, so
+[0:56:29] we may uh get it better. Um yeah, so yeah, maybe I can quickly go over some
+[0:56:31] yeah, maybe I can quickly go over some questions. Um yeah, so another minor
+[0:56:34] questions. Um yeah, so another minor question that this I noticed there's a
+[0:56:36] question that this I noticed there's a nonparametric error term in the error
+[0:56:38] nonparametric error term in the error bound. So I would definitely want to
+[0:56:40] bound. So I would definitely want to learn more about that.
+[0:56:43] learn more about that. Um so just to yeah for the other parts
+[0:56:46] Um so just to yeah for the other parts of parts one and two uh my yeah my key
+[0:56:50] of parts one and two uh my yeah my key question actually lies in the the impact
+[0:56:52] question actually lies in the the impact of coair shift because uh I remember in
+[0:56:55] of coair shift because uh I remember in the especially in part two the key focus
+[0:56:58] the especially in part two the key focus is on the model shift right the error
+[0:57:01] is on the model shift right the error bound the adaptivity is shown uh against
+[0:57:04] bound the adaptivity is shown uh against the unknown error the unknown
+[0:57:06] the unknown error the unknown discrepancy across the models uh but I
+[0:57:10] discrepancy across the models uh but I think it's a prevalent feature in all
+[0:57:12] think it's a prevalent feature in all those motivating example like hospitals
+[0:57:14] those motivating example like hospitals or mixture race mixture populations that
+[0:57:17] or mixture race mixture populations that the coar ship is can also be severe. So
+[0:57:20] the coar ship is can also be severe. So do we have any categorization and can we
+[0:57:23] do we have any categorization and can we have a an optimal quantification of this
+[0:57:26] have a an optimal quantification of this impact? Yeah. So uh yeah that's all for
+[0:57:31] impact? Yeah. So uh yeah that's all for the question and comments. Yeah I again
+[0:57:33] the question and comments. Yeah I again congratulations for uh the wonderful
+[0:57:36] congratulations for uh the wonderful work.
+[0:57:38] work. Thanks for the very interesting
+[0:57:39] Thanks for the very interesting discussion. Zjan, do you want to
+[0:57:41] discussion. Zjan, do you want to respond? Yeah for sure. Yeah. Uh thank
+[0:57:44] respond? Yeah for sure. Yeah. Uh thank you so much Kaja like yeah I cannot
+[0:57:47] you so much Kaja like yeah I cannot imagine how much effort you put into
+[0:57:48] imagine how much effort you put into like to ask so many insightful
+[0:57:50] like to ask so many insightful questions. So um maybe I can answer some
+[0:57:53] questions. So um maybe I can answer some like from uh I can do the backward
+[0:57:56] like from uh I can do the backward because for this one we indeed think
+[0:57:58] because for this one we indeed think about the coar shift. So actually uh the
+[0:58:01] about the coar shift. So actually uh the framework is kind of can handle coar
+[0:58:03] framework is kind of can handle coar shift but um but but like for the first
+[0:58:07] shift but um but but like for the first two first two works like we assume
+[0:58:11] two first two works like we assume they're already coarent on the target
+[0:58:13] they're already coarent on the target domain. So we can actually estimate a
+[0:58:15] domain. So we can actually estimate a density ratio model for the coarent
+[0:58:17] density ratio model for the coarent shift. Um but I think the open question
+[0:58:20] shift. Um but I think the open question is um what if like there's some non-over
+[0:58:23] is um what if like there's some non-over overlapping assumption or like the
+[0:58:25] overlapping assumption or like the density ratio model is not like a have
+[0:58:27] density ratio model is not like a have some positivity assumption. So for that
+[0:58:29] some positivity assumption. So for that part maybe
+[0:58:31] part maybe um we need to like borrow your technique
+[0:58:35] um we need to like borrow your technique or to handling some this some of that
+[0:58:37] or to handling some this some of that thing but we we haven't thought about
+[0:58:39] thing but we we haven't thought about it. So I would say the corrective is is
+[0:58:42] it. So I would say the corrective is is partially like handled in the paper but
+[0:58:44] partially like handled in the paper but by but under assumption of the
+[0:58:45] by but under assumption of the positivity assumption there. Yeah. So um
+[0:58:49] positivity assumption there. Yeah. So um for the this pure into the into a
+[0:58:51] for the this pure into the into a quarter so so that one is actually um we
+[0:58:54] quarter so so that one is actually um we believe is not sharp. Yeah. But uh for
+[0:58:57] believe is not sharp. Yeah. But uh for for our current implementation or for
+[0:58:59] for our current implementation or for our current algorithm uh I think it's
+[0:59:02] our current algorithm uh I think it's kind of sharp because in our simulation
+[0:59:04] kind of sharp because in our simulation genu actually uh do very careful
+[0:59:07] genu actually uh do very careful simulation to verify what's the
+[0:59:09] simulation to verify what's the dependence on n and actually dependence
+[0:59:11] dependence on n and actually dependence on n is like into a quarter and which is
+[0:59:14] on n is like into a quarter and which is unfortunate in in our current
+[0:59:15] unfortunate in in our current implementation but there there are ways
+[0:59:17] implementation but there there are ways maybe we can improve it like for for
+[0:59:20] maybe we can improve it like for for example we do some future screening
+[0:59:21] example we do some future screening first and then like retain this I star
+[0:59:25] first and then like retain this I star first and then we do a standard pull
+[0:59:27] first and then we do a standard pull over. So I think that will may that may
+[0:59:29] over. So I think that will may that may resolve the problem. Yeah. So for the
+[0:59:32] resolve the problem. Yeah. So for the previous one like uh the beyond the
+[0:59:34] previous one like uh the beyond the linear model like for both of two
+[0:59:36] linear model like for both of two questions I don't think I we have we
+[0:59:39] questions I don't think I we have we really have an answer. So for beyond the
+[0:59:41] really have an answer. So for beyond the linear model I we do have answers for
+[0:59:43] linear model I we do have answers for part one and two. So they are ongoing
+[0:59:45] part one and two. So they are ongoing works but for this u causal environ
+[0:59:49] works but for this u causal environ learning I think it's a it's a much
+[0:59:50] learning I think it's a it's a much harder problem. So uh like as like
+[0:59:54] harder problem. So uh like as like discussed in the talk so we can only
+[0:59:56] discussed in the talk so we can only solve it for the active interventions
+[0:59:58] solve it for the active interventions which is already a special setting for
+[1:00:00] which is already a special setting for linear model. It is not the full linear
+[1:00:02] linear model. It is not the full linear model say do intervention we don't know
+[1:00:04] model say do intervention we don't know how to do it. Um so I think the linear
+[1:00:07] how to do it. Um so I think the linear model definitely it's a great question
+[1:00:09] model definitely it's a great question but we we don't know how we don't know
+[1:00:11] but we we don't know how we don't know how to solve this this linear model
+[1:00:14] how to solve this this linear model assumption. Yeah. And um and regarding
+[1:00:17] assumption. Yeah. And um and regarding this common support
+[1:00:19] this common support um yeah actually uh yeah I don't have a
+[1:00:24] um yeah actually uh yeah I don't have a good answer for this but but what I want
+[1:00:26] good answer for this but but what I want to call comment is like um so for the
+[1:00:30] to call comment is like um so for the cause learning I think important thing
+[1:00:32] cause learning I think important thing is to learn the the causal variable so
+[1:00:35] is to learn the the causal variable so it's naturally will come with a star. So
+[1:00:38] it's naturally will come with a star. So some of variables shouldn't be included
+[1:00:40] some of variables shouldn't be included not because they are not strongly
+[1:00:41] not because they are not strongly associated with outcome it's because
+[1:00:43] associated with outcome it's because they could they are not stably
+[1:00:45] they could they are not stably associated with outcome so they are
+[1:00:46] associated with outcome so they are discarded. So, so that's why I think we
+[1:00:49] discarded. So, so that's why I think we they need the SAR but in our current
+[1:00:51] they need the SAR but in our current implementation we don't really like
+[1:00:54] implementation we don't really like learn the SAR directly but we I mean we
+[1:00:56] learn the SAR directly but we I mean we don't do like enumerate uh enumerate all
+[1:00:59] don't do like enumerate uh enumerate all possible subset or we don't like um do
+[1:01:02] possible subset or we don't like um do this integer programming so we kind of
+[1:01:04] this integer programming so we kind of avoid it in our algorithm but but I
+[1:01:07] avoid it in our algorithm but but I think for the model assumption we do
+[1:01:09] think for the model assumption we do need that yeah and and I also want to
+[1:01:12] need that yeah and and I also want to make a comment so the algorithm can
+[1:01:13] make a comment so the algorithm can actually be extended but the only way or
+[1:01:16] actually be extended but the only way or the only regime we can establish the
+[1:01:18] the only regime we can establish the theoretical guarantees for this active
+[1:01:20] theoretical guarantees for this active intervention. Yeah, that's a limitation.
+[1:01:23] intervention. Yeah, that's a limitation. But algorithm like this negative weight
+[1:01:25] But algorithm like this negative weight DRO. So we we believe there may be like
+[1:01:28] DRO. So we we believe there may be like more potential like in other regimes say
+[1:01:30] more potential like in other regimes say in do intervention or in some hard
+[1:01:32] in do intervention or in some hard intervention regime. Yeah, that that's
+[1:01:34] intervention regime. Yeah, that that's our current belief. Yeah, thank you so
+[1:01:36] our current belief. Yeah, thank you so much Kaj. Yeah, thank you.
+[1:01:40] much Kaj. Yeah, thank you. All right, awesome. I think in the
+[1:01:42] All right, awesome. I think in the interest of time uh we should uh quickly
+[1:01:45] interest of time uh we should uh quickly uh wrap up.
+[1:01:46] uh wrap up. Um so first yeah thank you so much Zjan
+[1:01:50] Um so first yeah thank you so much Zjan for an interesting talk and Kaising for
+[1:01:52] for an interesting talk and Kaising for a great discussion. Thank you all for
+[1:01:55] a great discussion. Thank you all for coming. So next week we're going to have
+[1:01:56] coming. So next week we're going to have Sam Pimemental from UC Berkeley who will
+[1:01:59] Sam Pimemental from UC Berkeley who will talk about design sensitivity and its
+[1:02:01] talk about design sensitivity and its implication for weighted observational
+[1:02:02] implication for weighted observational studies. Yeah. Thank you all for coming.
+[1:02:05] studies. Yeah. Thank you all for coming. I hope you have a great week and uh see
+[1:02:07] I hope you have a great week and uh see you next time. Yeah. Thank you. Thank
+[1:02:11] you next time. Yeah. Thank you. Thank you everyone. Bye. Bye bye.

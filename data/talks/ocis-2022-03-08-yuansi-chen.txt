@@ -1,0 +1,1483 @@
+[0:00:06] uh hi everyone uh welcome to the online causal inference seminar uh so today we
+[0:00:08] causal inference seminar uh so today we have jansi chen from duke university
+[0:00:11] have jansi chen from duke university talking about domain adaptation under
+[0:00:13] talking about domain adaptation under structural causal models and after his
+[0:00:16] structural causal models and after his about 45-minute talk we will have a
+[0:00:18] about 45-minute talk we will have a discussion by b way wonk from cmu
+[0:00:22] discussion by b way wonk from cmu and you will be able to ask your
+[0:00:24] and you will be able to ask your questions throughout
+[0:00:26] questions throughout so in terms of handling questions i will
+[0:00:29] so in terms of handling questions i will pass it on to dominic who will explain
+[0:00:32] pass it on to dominic who will explain this thank you emma yeah just as usual
+[0:00:34] this thank you emma yeah just as usual submit your questions via q a
+[0:00:36] submit your questions via q a and uh i will bring them forward to
+[0:00:38] and uh i will bring them forward to yonsi we might also uh unmute some of
+[0:00:41] yonsi we might also uh unmute some of you and uh to have a more live
+[0:00:42] you and uh to have a more live discussion yeah without further ado uh
+[0:00:44] discussion yeah without further ado uh let's get this party started and you
+[0:00:46] let's get this party started and you want to see whenever
+[0:00:48] want to see whenever you are ready
+[0:00:54] okay uh thank you dominic and thank you emma
+[0:00:55] emma let me
+[0:00:58] let me can you see
+[0:00:59] can you see my
+[0:01:00] my screen
+[0:01:04] yes okay cool
+[0:01:06] okay cool um
+[0:01:07] um yeah thank you uh for
+[0:01:09] yeah thank you uh for uh
+[0:01:11] uh for organizing this seminar and for
+[0:01:12] for organizing this seminar and for inviting me to this seminar actually i'm
+[0:01:15] inviting me to this seminar actually i'm uh
+[0:01:16] uh i'm a rather beginner in color in france
+[0:01:18] i'm a rather beginner in color in france so it's a great honor for me to speak in
+[0:01:21] so it's a great honor for me to speak in this uh seminar and
+[0:01:23] this uh seminar and um so i'm quite like i'm trying to use
+[0:01:26] um so i'm quite like i'm trying to use this kind of causal inference kind of
+[0:01:29] this kind of causal inference kind of literature and trying to to to see how
+[0:01:31] literature and trying to to to see how can that help
+[0:01:33] can that help kind of
+[0:01:34] kind of machine learning of domain adaptation
+[0:01:36] machine learning of domain adaptation problems so today i'm going to talk
+[0:01:38] problems so today i'm going to talk about this
+[0:01:39] about this domain adaptation under structural
+[0:01:41] domain adaptation under structural causal models we're trying to
+[0:01:43] causal models we're trying to uh deploy this causal kind of framework
+[0:01:46] uh deploy this causal kind of framework to understand like why domain annotation
+[0:01:48] to understand like why domain annotation works and in what kind of case it can
+[0:01:51] works and in what kind of case it can fail
+[0:01:52] fail this is a joint work with pwmen when i
+[0:01:55] this is a joint work with pwmen when i did my postdoc
+[0:01:57] did my postdoc with him at eth zurich
+[0:02:03] okay let's get started with the problem so
+[0:02:06] get started with the problem so then the the vague kind of motivation is
+[0:02:09] then the the vague kind of motivation is that the current currently many machine
+[0:02:12] that the current currently many machine learning systems they're not very good
+[0:02:14] learning systems they're not very good at domain adaptation uh this is reported
+[0:02:17] at domain adaptation uh this is reported in this uh uh brianna 2018 paper that
+[0:02:22] in this uh uh brianna 2018 paper that they report this ai system in clarify ai
+[0:02:26] they report this ai system in clarify ai that
+[0:02:27] that this system is not very good it's
+[0:02:30] this system is not very good it's at detecting
+[0:02:36] objects in uncommon context so the cause in a common context in alpine pastry
+[0:02:39] in a common context in alpine pastry they were detected and classified
+[0:02:41] they were detected and classified correctly but if you put the cow
+[0:02:43] correctly but if you put the cow on the beach
+[0:02:44] on the beach [Music]
+[0:02:46] [Music] or in a sea then
+[0:02:48] or in a sea then these are unusual context but they are
+[0:02:50] these are unusual context but they are real pictures that happen for humans we
+[0:02:52] real pictures that happen for humans we quickly adapt to those scenarios but for
+[0:02:55] quickly adapt to those scenarios but for machine learning systems they have
+[0:02:57] machine learning systems they have trouble
+[0:02:57] trouble detecting and classifying these objects
+[0:03:02] detecting and classifying these objects and more seriously
+[0:03:04] and more seriously in many of the
+[0:03:06] in many of the scientific problems recently
+[0:03:09] scientific problems recently because we collect more and more data
+[0:03:11] because we collect more and more data but the way we collect the data
+[0:03:14] but the way we collect the data each time it's slightly different
+[0:03:17] each time it's slightly different we also wish to adapt across multiple
+[0:03:20] we also wish to adapt across multiple domains so in this example on the right
+[0:03:23] domains so in this example on the right is the example given in bendy or 2018
+[0:03:27] is the example given in bendy or 2018 where they want to build a tumor
+[0:03:29] where they want to build a tumor prediction model that generalized to new
+[0:03:32] prediction model that generalized to new hospitals so the training data will be
+[0:03:35] hospitals so the training data will be the images from three hospitals and
+[0:03:38] the images from three hospitals and you have test data which is from another
+[0:03:40] you have test data which is from another hospital you can see the images slightly
+[0:03:42] hospital you can see the images slightly different
+[0:03:43] different but you wish actually to learn something
+[0:03:47] but you wish actually to learn something that is useful for the prediction in the
+[0:03:50] that is useful for the prediction in the last test data sets
+[0:03:52] last test data sets and also on the left there's this uh
+[0:03:56] and also on the left there's this uh picture propped from the pen and dot
+[0:03:57] picture propped from the pen and dot
+[0:04:02] uh they they were starting single cell and they had six data sets
+[0:04:05] and they had six data sets and they were trying to
+[0:04:08] and they were trying to do some kind of regression problem from
+[0:04:10] do some kind of regression problem from it but the problem is that those data
+[0:04:12] it but the problem is that those data sets have collected
+[0:04:15] sets have collected with different batches with different
+[0:04:17] with different batches with different technology and across different species
+[0:04:20] technology and across different species a single subset of those data sets is
+[0:04:23] a single subset of those data sets is kind of usually uh
+[0:04:25] kind of usually uh doesn't have enough sample size and then
+[0:04:28] doesn't have enough sample size and then they were questioning whether it's
+[0:04:29] they were questioning whether it's possible to aggregate those
+[0:04:31] possible to aggregate those uh different data sets together and
+[0:04:33] uh different data sets together and whether you can improve the performance
+[0:04:36] whether you can improve the performance okay um
+[0:04:38] okay um so the outline of the talk will be this
+[0:04:40] so the outline of the talk will be this so discuss
+[0:04:42] so discuss uh the empirical success of the main
+[0:04:45] uh the empirical success of the main adaptation in the field of like
+[0:04:48] adaptation in the field of like machine learning and especially computer
+[0:04:50] machine learning and especially computer vision
+[0:04:51] vision and and then we we actually think about
+[0:04:54] and and then we we actually think about whether it's actually valid in the in in
+[0:04:57] whether it's actually valid in the in in a more general context and can we apply
+[0:04:59] a more general context and can we apply those things in the scientific
+[0:05:01] those things in the scientific context
+[0:05:02] context and
+[0:05:03] and then we try to analyze those domain
+[0:05:05] then we try to analyze those domain adaptation algorithms under the
+[0:05:07] adaptation algorithms under the structural codal models
+[0:05:09] structural codal models and based on our analysis we'll
+[0:05:11] and based on our analysis we'll introduce
+[0:05:13] introduce a new domain adaptation method
+[0:05:15] a new domain adaptation method okay and then we show some numerical
+[0:05:17] okay and then we show some numerical validations
+[0:05:19] validations um
+[0:05:20] um the empirical success of domain
+[0:05:22] the empirical success of domain adaptation so let's try to
+[0:05:29] fix a little bit the terminology since the domain adaptation world is a
+[0:05:31] since the domain adaptation world is a little bit overloaded so the specific
+[0:05:34] little bit overloaded so the specific domain adaptation problem we consider is
+[0:05:37] domain adaptation problem we consider is when we have
+[0:05:38] when we have m source data sets the source data sets
+[0:05:41] m source data sets the source data sets are labeled
+[0:05:42] are labeled uh each of them
+[0:05:44] uh each of them coming from
+[0:05:45] coming from a distribution pm
+[0:05:48] a distribution pm uh
+[0:05:49] uh and then
+[0:05:50] and then m is larger than equal to one uh so it
+[0:05:53] m is larger than equal to one uh so it can be equal to one so we have target
+[0:05:56] can be equal to one so we have target data sets we have the unlabeled data
+[0:05:58] data sets we have the unlabeled data sets coming from a different
+[0:06:00] sets coming from a different distribution p field and the y's are not
+[0:06:03] distribution p field and the y's are not observed so the goal is to predict the
+[0:06:05] observed so the goal is to predict the y's so that
+[0:06:07] y's so that the target
+[0:06:09] the target risk is small
+[0:06:10] risk is small okay
+[0:06:12] okay with some loss function
+[0:06:19] so the natural baseline in this setting is to consider
+[0:06:20] is to consider a store support or people just call it
+[0:06:23] a store support or people just call it empirical risk any matter where you just
+[0:06:25] empirical risk any matter where you just use the source data
+[0:06:27] use the source data and you train a model based on the
+[0:06:28] and you train a model based on the source data as if like everything is
+[0:06:32] source data as if like everything is identically
+[0:06:33] identically it and you don't touch the target design
+[0:06:35] it and you don't touch the target design at all
+[0:06:36] at all okay that's the baseline we want to beat
+[0:06:38] okay that's the baseline we want to beat and it's kind of simple naruto method
+[0:06:41] and it's kind of simple naruto method but uh in many cases that actually works
+[0:06:44] but uh in many cases that actually works pretty well but how the question is how
+[0:06:47] pretty well but how the question is how can we actually
+[0:06:50] can we actually how can we actually find a method that
+[0:06:52] how can we actually find a method that beat this
+[0:06:53] beat this source poll if we don't assume any
+[0:06:55] source poll if we don't assume any relationship between the source and
+[0:06:57] relationship between the source and target so the domain adaptation problem
+[0:06:59] target so the domain adaptation problem is yield post
+[0:07:01] is yield post because like for any prediction rule
+[0:07:04] because like for any prediction rule you're coming out i can always design uh
+[0:07:07] you're coming out i can always design uh target data relabel the target data sets
+[0:07:10] target data relabel the target data sets and make your prediction rule fail
+[0:07:13] and make your prediction rule fail uh in general there's no free lunch but
+[0:07:15] uh in general there's no free lunch but actually if you look at the field of
+[0:07:18] actually if you look at the field of computer vision people are seeing a lot
+[0:07:19] computer vision people are seeing a lot of
+[0:07:20] of success in empirical success in domain
+[0:07:23] success in empirical success in domain adaptation so this is uh one of the
+[0:07:26] adaptation so this is uh one of the famous data sets and
+[0:07:29] famous data sets and called domain and data set
+[0:07:31] called domain and data set introduced by plan and all 2019 and
+[0:07:34] introduced by plan and all 2019 and there's actually uh there is a computer
+[0:07:36] there's actually uh there is a computer vision challenge we start 2019 challenge
+[0:07:38] vision challenge we start 2019 challenge where people try to uh predict unlabeled
+[0:07:41] where people try to uh predict unlabeled clippard images from other data sets so
+[0:07:44] clippard images from other data sets so you can observe
+[0:07:46] you can observe the images in other formats infogram
+[0:07:49] the images in other formats infogram painting quick draw real or sketch
+[0:07:54] painting quick draw real or sketch you want to
+[0:07:55] you want to do a prediction use your prediction
+[0:07:57] do a prediction use your prediction algorithm on a new unobserved
+[0:08:00] algorithm on a new unobserved new new data set where the labels are
+[0:08:02] new new data set where the labels are unobserved for the clip are data sets
+[0:08:05] unobserved for the clip are data sets okay and they share the labels like in
+[0:08:08] okay and they share the labels like in the vertical kind of colon sense
+[0:08:11] the vertical kind of colon sense and actually according to that challenge
+[0:08:13] and actually according to that challenge that
+[0:08:14] that they will be able to have an algorithm
+[0:08:17] they will be able to have an algorithm that has
+[0:08:18] that has acute 76 percent accuracy
+[0:08:21] acute 76 percent accuracy which is much better than just using the
+[0:08:24] which is much better than just using the source pro algorithm which only has
+[0:08:26] source pro algorithm which only has about 10 percent accuracy
+[0:08:33] and there's also other like smaller data sets people use in computer vision and
+[0:08:35] sets people use in computer vision and other
+[0:08:36] other text analysis
+[0:08:38] text analysis that
+[0:08:40] that have shown a success in in these papers
+[0:08:43] have shown a success in in these papers uh and also like even simpler data sets
+[0:08:46] uh and also like even simpler data sets like people starting those amnest digits
+[0:08:50] like people starting those amnest digits and then the colored like or modified
+[0:08:52] and then the colored like or modified amnes digits or other digits and
+[0:08:54] amnes digits or other digits and modified it in other contexts and we can
+[0:08:57] modified it in other contexts and we can show that actually
+[0:08:58] show that actually uh
+[0:09:00] uh the applying domain adaptation method
+[0:09:02] the applying domain adaptation method actually helps to improve the accuracy
+[0:09:04] actually helps to improve the accuracy and this dann is one of the famous
+[0:09:07] and this dann is one of the famous methods actually uh
+[0:09:10] methods actually uh on this uh domain adaptation method
+[0:09:13] on this uh domain adaptation method using images they
+[0:09:15] using images they acquire domain anniversary training of
+[0:09:17] acquire domain anniversary training of neural networks and you can see this uh
+[0:09:20] neural networks and you can see this uh this this method is actually quite
+[0:09:22] this this method is actually quite popular at least in the field of
+[0:09:23] popular at least in the field of computer vision that is more than 4000
+[0:09:26] computer vision that is more than 4000 citations
+[0:09:29] uh on the other hand
+[0:09:31] on the other hand uh
+[0:09:32] uh are there negative results on domain
+[0:09:34] are there negative results on domain adaptation
+[0:09:36] adaptation uh the answer is that yes even before
+[0:09:39] uh the answer is that yes even before this kind of uh their method
+[0:09:42] this kind of uh their method were introduced
+[0:09:43] were introduced at least in the causal prediction
+[0:09:45] at least in the causal prediction setting
+[0:09:46] setting uh the domain adaptation method is is
+[0:09:49] uh the domain adaptation method is is not useful uh by causal prediction
+[0:09:52] not useful uh by causal prediction setting i mean
+[0:09:53] setting i mean you use for
+[0:09:55] you use for first for simple example you generate
+[0:09:57] first for simple example you generate data like this you first generate x1 the
+[0:09:59] data like this you first generate x1 the first
+[0:10:00] first column of your data and then generate x2
+[0:10:03] column of your data and then generate x2 the second column of theta and then you
+[0:10:05] the second column of theta and then you generate y according to a function of y
+[0:10:09] generate y according to a function of y equals to
+[0:10:10] equals to f x one and x since two plus some noise
+[0:10:14] f x one and x since two plus some noise and in this kind of data generation
+[0:10:16] and in this kind of data generation what really matters is assaulting you in
+[0:10:20] what really matters is assaulting you in this kind of data generation you modeled
+[0:10:22] this kind of data generation you modeled the generation of x and generation of
+[0:10:24] the generation of x and generation of wagon as separately so in that sense you
+[0:10:27] wagon as separately so in that sense you don't gain additional information
+[0:10:30] don't gain additional information for why given s from observing the
+[0:10:32] for why given s from observing the target data so using the target data
+[0:10:36] target data so using the target data according to this logic might hurt your
+[0:10:39] according to this logic might hurt your estimation of y given x and this kind of
+[0:10:41] estimation of y given x and this kind of discussion appeared in this paper on
+[0:10:44] discussion appeared in this paper on column anticodon
+[0:10:50] 2012. um so there are kind of data sets that
+[0:10:53] um so there are kind of data sets that are called
+[0:10:55] are called by nature so there
+[0:10:57] by nature so there some
+[0:10:58] some we studied two data sets from uci data
+[0:11:00] we studied two data sets from uci data set one is the data dna splice junk
+[0:11:03] set one is the data dna splice junk junction data sets where they want to
+[0:11:06] junction data sets where they want to prediction predict junctions from a dna
+[0:11:08] prediction predict junctions from a dna sequence so you want to observe dna
+[0:11:10] sequence so you want to observe dna sequence whether it's a junction not
+[0:11:12] sequence whether it's a junction not it's
+[0:11:13] it's it's kind of uh
+[0:11:15] it's kind of uh something that it generated after you
+[0:11:17] something that it generated after you have observed your x
+[0:11:19] have observed your x and there's this chess data set they
+[0:11:22] and there's this chess data set they want to predict how many steps it takes
+[0:11:24] want to predict how many steps it takes the white to win given on a given
+[0:11:26] the white to win given on a given chessboard so once the chessboard is
+[0:11:28] chessboard so once the chessboard is given whether the white is going to win
+[0:11:31] given whether the white is going to win is just
+[0:11:32] is just generated after
+[0:11:34] generated after this
+[0:11:36] this this
+[0:11:37] this chessboard is being generated so on this
+[0:11:40] chessboard is being generated so on this type of data set we
+[0:11:42] type of data set we according to this paper is not helpful
+[0:11:44] according to this paper is not helpful to apply any kind of domain adaptation
+[0:11:46] to apply any kind of domain adaptation algorithms so given this kind of
+[0:11:49] algorithms so given this kind of empirical success and
+[0:11:51] empirical success and the the general negative results
+[0:11:54] the the general negative results we want to ask
+[0:11:55] we want to ask a question to study to study those
+[0:11:58] a question to study to study those domain adaptation algorithms
+[0:12:00] domain adaptation algorithms uh we need to understand what properties
+[0:12:03] uh we need to understand what properties do these success stories share
+[0:12:05] do these success stories share and we need to identify the assumptions
+[0:12:08] and we need to identify the assumptions needed for the main adaptation algorithm
+[0:12:11] needed for the main adaptation algorithm to have a low
+[0:12:12] to have a low target risk
+[0:12:18] okay so the
+[0:12:19] the the cons yeah so i mean you may wonder
+[0:12:21] the cons yeah so i mean you may wonder here right now
+[0:12:23] here right now say that every success family adaptation
+[0:12:25] say that every success family adaptation story
+[0:12:26] story is just based on domain knowledge and
+[0:12:29] is just based on domain knowledge and you cannot really
+[0:12:30] you cannot really extract some generic assumptions or
+[0:12:33] extract some generic assumptions or generic properties from those success
+[0:12:35] generic properties from those success stories
+[0:12:37] stories that is true and
+[0:12:39] that is true and uh but the the what what we want to
+[0:12:42] uh but the the what what we want to point out is the chuck the troubling
+[0:12:44] point out is the chuck the troubling trend in this literature is that many
+[0:12:46] trend in this literature is that many domain adaptation algorithms they are
+[0:12:48] domain adaptation algorithms they are advertised as generic method it's like
+[0:12:51] advertised as generic method it's like you just plug in those methods and you
+[0:12:53] you just plug in those methods and you get the results you want which is
+[0:12:56] get the results you want which is which is troubling for us and we think
+[0:12:58] which is troubling for us and we think that it's it's better to kind of lay out
+[0:13:00] that it's it's better to kind of lay out the assumptions needed for those
+[0:13:02] the assumptions needed for those algorithms before discussing their
+[0:13:04] algorithms before discussing their success
+[0:13:05] success okay so let's talk about the the the
+[0:13:12] the successful dominant adaptation methods one of them is called uh we call
+[0:13:15] methods one of them is called uh we call them vip or it's called dip domain
+[0:13:18] them vip or it's called dip domain invariant projection algorithm
+[0:13:25] the idea is quite simple it assumes the existence of a common sub space where
+[0:13:28] existence of a common sub space where the source and target feature lie
+[0:13:31] the source and target feature lie okay
+[0:13:32] okay so
+[0:13:33] so uh the generic formulation is like this
+[0:13:36] uh the generic formulation is like this your your prediction function f is a
+[0:13:39] your your prediction function f is a composition of two functions u and v
+[0:13:42] composition of two functions u and v and to find u and v you minimize
+[0:13:46] and to find u and v you minimize the the loss this is like typical empty
+[0:13:48] the the loss this is like typical empty velocity and then
+[0:13:50] velocity and then you plus a penalty
+[0:13:52] you plus a penalty that is based on some kind of
+[0:13:55] that is based on some kind of distributional distance between
+[0:13:57] distributional distance between v x and v x tilde so x is source theta x
+[0:14:01] v x and v x tilde so x is source theta x tilde is target data
+[0:14:03] tilde is target data so the feature mapping the middle layer
+[0:14:05] so the feature mapping the middle layer feature mapping
+[0:14:07] feature mapping is trying to say that the the the
+[0:14:10] is trying to say that the the the the middle layer feature mapping of
+[0:14:11] the middle layer feature mapping of source data and target data
+[0:14:13] source data and target data they are quite
+[0:14:15] they are quite close and
+[0:14:18] close and based on this uh based on this intuition
+[0:14:20] based on this uh based on this intuition and this generic formulation
+[0:14:23] and this generic formulation uh you have
+[0:14:24] uh you have a bunch of domain adaptation methods
+[0:14:27] a bunch of domain adaptation methods that were introduced in the in the
+[0:14:29] that were introduced in the in the literature um
+[0:14:32] literature um so
+[0:14:33] so when you change the you can change the
+[0:14:34] when you change the you can change the function class u and v from linear to
+[0:14:37] function class u and v from linear to convolutional neural networks
+[0:14:40] convolutional neural networks or you can change the distance that
+[0:14:41] or you can change the distance that controls the middle layer features
+[0:14:43] controls the middle layer features distances
+[0:14:45] distances uh or like controlling how the
+[0:14:48] uh or like controlling how the source feature and
+[0:14:50] source feature and target feature live in the same space
+[0:14:52] target feature live in the same space and you can change them from like mean
+[0:14:54] and you can change them from like mean difference
+[0:14:56] difference maximum mean
+[0:14:57] maximum mean discrepancy generative or using
+[0:14:59] discrepancy generative or using generative other adversarial neural
+[0:15:01] generative other adversarial neural networks the moment matching method or
+[0:15:03] networks the moment matching method or those are just like different kind of
+[0:15:06] those are just like different kind of distributional distances
+[0:15:08] distributional distances and then you introduce like all these
+[0:15:10] and then you introduce like all these different methods and people show that
+[0:15:11] different methods and people show that actually in some datasets this kind of
+[0:15:14] actually in some datasets this kind of algorithm are working and they're
+[0:15:16] algorithm are working and they're they're they have better performance
+[0:15:17] they're they have better performance than source code
+[0:15:25] so our our precise question is like what what assumptions are in these data sets
+[0:15:28] what assumptions are in these data sets their their need are are they they're
+[0:15:31] their their need are are they they're what assumptions are needed for dip to
+[0:15:33] what assumptions are needed for dip to outperform source code
+[0:15:35] outperform source code or and then can we design data sets that
+[0:15:37] or and then can we design data sets that make dip fail drastically so people
+[0:15:40] make dip fail drastically so people started in this question but uh
+[0:15:44] started in this question but uh not exactly in in our framework this
+[0:15:47] not exactly in in our framework this this problem is like
+[0:15:49] this problem is like uh
+[0:15:50] uh the the theory of domain adaptation
+[0:15:52] the the theory of domain adaptation started much much earlier than when i
+[0:15:54] started much much earlier than when i started this problem so
+[0:15:56] started this problem so uh domain adaptation the there are many
+[0:15:59] uh domain adaptation the there are many ways to formulate this domain tablation
+[0:16:01] ways to formulate this domain tablation problem uh one
+[0:16:03] problem uh one earlier approach is this
+[0:16:09] then david all and no approach that started from 2007 where the claim is
+[0:16:13] started from 2007 where the claim is that uh the domain adaptation can be
+[0:16:15] that uh the domain adaptation can be understand as
+[0:16:16] understand as uh using classic
+[0:16:18] uh using classic uh
+[0:16:19] uh vc dimension type of theory and then
+[0:16:23] vc dimension type of theory and then if we and plus some divergence results
+[0:16:26] if we and plus some divergence results from the source and domain target domain
+[0:16:28] from the source and domain target domain so
+[0:16:29] so what the the formulation in their head
+[0:16:31] what the the formulation in their head is that
+[0:16:32] is that um domain adaptation since we are
+[0:16:34] um domain adaptation since we are studying a problem where the source data
+[0:16:36] studying a problem where the source data and targeted
+[0:16:38] and targeted from different distribution so then if
+[0:16:40] from different distribution so then if we have a divergence term that controls
+[0:16:43] we have a divergence term that controls the difference between source and target
+[0:16:45] the difference between source and target distribution then we just have to pay
+[0:16:48] distribution then we just have to pay additional price for the target risk uh
+[0:16:52] additional price for the target risk uh in additional to the classical kind of
+[0:16:54] in additional to the classical kind of busy theory
+[0:16:56] busy theory um
+[0:16:57] um so this is kind of
+[0:16:58] so this is kind of a rather kind of person pessimistic view
+[0:17:01] a rather kind of person pessimistic view of that you have to pay
+[0:17:04] of that you have to pay that price that the divergence term
+[0:17:06] that price that the divergence term between the source and target if your
+[0:17:08] between the source and target if your source and target is not from is are not
+[0:17:10] source and target is not from is are not from the same distribution
+[0:17:13] from the same distribution and
+[0:17:14] and there are people also starting this
+[0:17:16] there are people also starting this domain adaptation from
+[0:17:20] domain adaptation from the classic kind of generative model
+[0:17:22] the classic kind of generative model point of view and data computation point
+[0:17:24] point of view and data computation point of view
+[0:17:26] of view if you have a very good generative model
+[0:17:28] if you have a very good generative model for the joint data x y distribution that
+[0:17:31] for the joint data x y distribution that is that works both for the source data
+[0:17:33] is that works both for the source data and target data then
+[0:17:35] and target data then getting
+[0:17:36] getting the data for y in a target data is is
+[0:17:40] the data for y in a target data is is just an imputation problem and that can
+[0:17:42] just an imputation problem and that can be solved by expectation maximization
+[0:17:44] be solved by expectation maximization but this actually uh
+[0:17:47] but this actually uh requires a very good generation model
+[0:17:50] requires a very good generation model for the joint distribution x and y
+[0:17:52] for the joint distribution x and y um and there are people also starting
+[0:17:54] um and there are people also starting this from a distributional robustness
+[0:17:57] this from a distributional robustness point of view actually started from this
+[0:18:00] point of view actually started from this cuber 1964 that starting this in a
+[0:18:04] cuber 1964 that starting this in a robustness setting where
+[0:18:11] since you don't know what's the target distribution
+[0:18:12] distribution you can make assumption that
+[0:18:14] you can make assumption that the target distribution is
+[0:18:17] the target distribution is is it's not very far
+[0:18:24] sorry there's some notation the target notation the target data set
+[0:18:26] the target notation the target data set q is not very far from the source
+[0:18:29] q is not very far from the source distribution p
+[0:18:30] distribution p and then you prepare for the worst case
+[0:18:33] and then you prepare for the worst case kind of target distribution that can
+[0:18:35] kind of target distribution that can appear and then the optimization problem
+[0:18:38] appear and then the optimization problem instead of just minimize f under the
+[0:18:40] instead of just minimize f under the empirical loss you optimize f over the
+[0:18:43] empirical loss you optimize f over the maximum over that q
+[0:18:46] maximum over that q in a in a ball in some distance
+[0:18:49] in a in a ball in some distance distribution distance ball around p with
+[0:18:51] distribution distance ball around p with epsilon distance and then you prepare
+[0:18:52] epsilon distance and then you prepare for the worst case
+[0:18:54] for the worst case q under epsilon perturbation
+[0:18:56] q under epsilon perturbation um
+[0:19:01] and there are also people starting this problem by
+[0:19:03] problem by assuming certain kind of invariance but
+[0:19:06] assuming certain kind of invariance but some parts are changing some parts are
+[0:19:07] some parts are changing some parts are changing are invariant so they assuming
+[0:19:09] changing are invariant so they assuming y given x in invariant but x
+[0:19:12] y given x in invariant but x distribution is changing
+[0:19:14] distribution is changing the order
+[0:19:15] the order people would also do the other way you
+[0:19:16] people would also do the other way you assume that x given y is invariant but
+[0:19:19] assume that x given y is invariant but the label distribution is changing
+[0:19:22] the label distribution is changing all these ways are all these different
+[0:19:24] all these ways are all these different ways are possible ways to formulate
+[0:19:26] ways are possible ways to formulate domain adaptation how which way you
+[0:19:29] domain adaptation how which way you should use actually it really depends on
+[0:19:31] should use actually it really depends on your assumptions about the target
+[0:19:32] your assumptions about the target distribution
+[0:19:37] so we are we are not really kind of
+[0:19:39] we are not really kind of dealing with these cases
+[0:19:41] dealing with these cases we are just trying to say that
+[0:19:43] we are just trying to say that there are scenarios
+[0:19:45] there are scenarios or like there are very generic scenarios
+[0:19:47] or like there are very generic scenarios that can come out with from those
+[0:19:49] that can come out with from those structural causal models introduced by
+[0:19:52] structural causal models introduced by pearl and
+[0:19:54] pearl and bahrain boeing in 2014 that you can use
+[0:19:57] bahrain boeing in 2014 that you can use those structural code models to study
+[0:19:59] those structural code models to study the performance domain adaptation
+[0:20:01] the performance domain adaptation algorithms and we can design cases where
+[0:20:04] algorithms and we can design cases where those domain adaptation algorithms
+[0:20:06] those domain adaptation algorithms succeed and fail but if you go out of
+[0:20:09] succeed and fail but if you go out of those scenarios and if you willing to
+[0:20:11] those scenarios and if you willing to assume
+[0:20:12] assume the other assumptions
+[0:20:15] the other assumptions uh
+[0:20:16] uh we don't know about the performance but
+[0:20:17] we don't know about the performance but we we just kind of right now it's most
+[0:20:20] we we just kind of right now it's most it's more like a kind of understanding
+[0:20:22] it's more like a kind of understanding how algorithm works and
+[0:20:25] how algorithm works and provide warnings if the algorithms is
+[0:20:28] provide warnings if the algorithms is doomed to fail in some scenarios okay
+[0:20:31] doomed to fail in some scenarios okay any questions about this uh
+[0:20:35] any questions about this uh our approach for studying domain
+[0:20:37] our approach for studying domain adaptation algorithms
+[0:20:39] adaptation algorithms there are no questions yet thank you
+[0:20:47] so we are going to focus uh the setting so
+[0:20:50] we are going to focus uh the setting so we'll
+[0:20:50] we'll focus the analysis of domain adaptation
+[0:20:53] focus the analysis of domain adaptation algorithms under structural causal
+[0:20:55] algorithms under structural causal models
+[0:21:05] so structural causal models uh uh crushed uh
+[0:21:07] crushed uh description is that they are kind of
+[0:21:09] description is that they are kind of mathematical models that describe causal
+[0:21:12] mathematical models that describe causal relationship between variables
+[0:21:14] relationship between variables uh it combines the structural equations
+[0:21:17] uh it combines the structural equations in economics and social science you can
+[0:21:19] in economics and social science you can see the
+[0:21:21] see the like the
+[0:21:22] like the the structural equations are used to
+[0:21:24] the structural equations are used to describe the relationship between the
+[0:21:27] describe the relationship between the variables but the on top of it there's
+[0:21:29] variables but the on top of it there's also this causal framework from layman
+[0:21:32] also this causal framework from layman and rubin
+[0:21:33] and rubin and
+[0:21:34] and the the the model does not does not only
+[0:21:36] the the the model does not does not only just describe the probabilistic kind of
+[0:21:39] just describe the probabilistic kind of mod
+[0:21:40] mod relationship between the variables but
+[0:21:42] relationship between the variables but also
+[0:21:44] also describe color relationships but in our
+[0:21:47] describe color relationships but in our setting
+[0:21:48] setting for simplicity for now you can just
+[0:21:50] for simplicity for now you can just think about the structural causal models
+[0:21:53] think about the structural causal models are a specific of type of data
+[0:21:55] are a specific of type of data generation models that specify the data
+[0:21:58] generation models that specify the data generation for the source data but also
+[0:22:00] generation for the source data but also for the target data and we are going to
+[0:22:02] for the target data and we are going to assume that the
+[0:22:04] assume that the source data and target data they mostly
+[0:22:06] source data and target data they mostly come from the same
+[0:22:09] come from the same same structural color models and except
+[0:22:12] same structural color models and except for a small part in those structural
+[0:22:13] for a small part in those structural product models that you change you
+[0:22:15] product models that you change you change across and source source and
+[0:22:18] change across and source source and target
+[0:22:19] target um
+[0:22:21] um we will we will we will use structural
+[0:22:23] we will we will we will use structural codon model to study
+[0:22:25] codon model to study theoretical guarantees of domain
+[0:22:27] theoretical guarantees of domain adaptation algorithms but actually we
+[0:22:28] adaptation algorithms but actually we don't assume that the domain adaptation
+[0:22:31] don't assume that the domain adaptation algorithms that you need
+[0:22:33] algorithms that you need have have to rely on this model to run
+[0:22:36] have have to rely on this model to run okay
+[0:22:37] okay um so the simplest setting we consider
+[0:22:41] um so the simplest setting we consider at first in the paper is this
+[0:22:43] at first in the paper is this linear structural equation models where
+[0:22:47] linear structural equation models where the source data and targeted they are
+[0:22:49] the source data and targeted they are generated by a similar
+[0:22:51] generated by a similar type of linear structural equation
+[0:22:53] type of linear structural equation models the only difference is that the
+[0:22:56] models the only difference is that the noise variables and
+[0:22:58] noise variables and the the interventions are different
+[0:23:01] the the interventions are different but and also they are kind of editing
+[0:23:04] but and also they are kind of editing like shift interventions as a plus sign
+[0:23:06] like shift interventions as a plus sign here okay so the a am
+[0:23:09] here okay so the a am like the intervention terms am and ato
+[0:23:13] like the intervention terms am and ato they can change across source domain
+[0:23:14] they can change across source domain across target domain and this is the
+[0:23:17] across target domain and this is the main thing that makes the difference
+[0:23:18] main thing that makes the difference between source and target data
+[0:23:21] between source and target data and epsilon m frontier they
+[0:23:23] and epsilon m frontier they they are different but they share the
+[0:23:25] they are different but they share the same distribution across and source and
+[0:23:26] same distribution across and source and target okay okay and the only difference
+[0:23:29] target okay okay and the only difference is here and the main part that specifies
+[0:23:32] is here and the main part that specifies the relationship between the variables
+[0:23:34] the relationship between the variables they're kept the same okay
+[0:23:42] and we have to introduce several domain adaptation methods in consideration so
+[0:23:45] adaptation methods in consideration so the the baseline method other than what
+[0:23:47] the the baseline method other than what we call the source for you can also
+[0:23:49] we call the source for you can also introduce
+[0:23:55] this method in the linear settings so in the linear setting
+[0:23:56] the linear setting uh
+[0:24:02] the best like oracle method will be just running ordinarily squares on the target
+[0:24:04] running ordinarily squares on the target data only
+[0:24:05] data only and that's the oracle performance that
+[0:24:09] and that's the oracle performance that if we have enough data on the target
+[0:24:11] if we have enough data on the target that's a data set then nothing can beat
+[0:24:13] that's a data set then nothing can beat this algorithm and we also consider the
+[0:24:15] this algorithm and we also consider the causal uh
+[0:24:18] causal uh prediction prediction rule where which
+[0:24:20] prediction prediction rule where which the w is directly read from the
+[0:24:23] the w is directly read from the structural equation models
+[0:24:25] structural equation models um
+[0:24:27] um in addition to the source four we also
+[0:24:29] in addition to the source four we also consider oil source that just runs the
+[0:24:32] consider oil source that just runs the ols on the first source data set
+[0:24:35] ols on the first source data set um
+[0:24:36] um okay then we are ready to introduce this
+[0:24:38] okay then we are ready to introduce this uh domain
+[0:24:40] uh domain domain
+[0:24:42] domain invariant projection algorithm
+[0:24:44] invariant projection algorithm eip algorithm so the dip algorithm in
+[0:24:47] eip algorithm so the dip algorithm in this linear setting has a very simple
+[0:24:50] this linear setting has a very simple formulation
+[0:24:51] formulation uh it just minimized the quadratic
+[0:24:54] uh it just minimized the quadratic square error loss
+[0:24:56] square error loss and then with the constraint that
+[0:24:59] and then with the constraint that the the feature
+[0:25:01] the the feature uh has the mean is the same so if you
+[0:25:05] uh has the mean is the same so if you think about that the generic formulation
+[0:25:07] think about that the generic formulation where f equals to u composed with v what
+[0:25:10] where f equals to u composed with v what we are doing is that
+[0:25:11] we are doing is that the simplification we are doing is
+[0:25:13] the simplification we are doing is taking u equals to identity and v equals
+[0:25:15] taking u equals to identity and v equals to
+[0:25:16] to x transpose beta
+[0:25:18] x transpose beta and what are we are matching that the
+[0:25:20] and what are we are matching that the distributional distance
+[0:25:23] distributional distance is just
+[0:25:24] is just the the mean difference
+[0:25:36] okay we're still so for this simple domain adaptation a dip method we're
+[0:25:38] domain adaptation a dip method we're going to analyze this performance on the
+[0:25:40] going to analyze this performance on the structural equation model um
+[0:25:43] structural equation model um yeah so i think you might wonder that a
+[0:25:46] yeah so i think you might wonder that a linear structural equation model too
+[0:25:48] linear structural equation model too restrictive to study domain adaptation
+[0:25:51] restrictive to study domain adaptation i would say yes and no and because like
+[0:25:55] i would say yes and no and because like partly
+[0:25:57] partly the the problem is very simple because
+[0:25:59] the the problem is very simple because all the relationships are linear as
+[0:26:00] all the relationships are linear as noise and subjective
+[0:26:02] noise and subjective but
+[0:26:06] we will show in simple examples that
+[0:26:10] simple examples that you
+[0:26:11] you you can use linear structural eq models
+[0:26:13] you can use linear structural eq models to design different cases and to
+[0:26:15] to design different cases and to illustrate the failure and success mode
+[0:26:17] illustrate the failure and success mode of
+[0:26:18] of uh many domain adaptation algorithms
+[0:26:22] uh many domain adaptation algorithms okay let's start with a very simple
+[0:26:25] okay let's start with a very simple cases
+[0:26:27] cases so in this data generation model we call
+[0:26:29] so in this data generation model we call the causal prediction setting where you
+[0:26:31] the causal prediction setting where you first generate
+[0:26:33] first generate x1 x2 and x3
+[0:26:36] x1 x2 and x3 and then you put an intervention so the
+[0:26:39] and then you put an intervention so the intervention part
+[0:26:40] intervention part a will be the part that makes the
+[0:26:42] a will be the part that makes the difference between source data and
+[0:26:44] difference between source data and target data
+[0:26:46] target data and once you generate this and you
+[0:26:48] and once you generate this and you generate the y according to a
+[0:26:51] generate the y according to a equation like this based on x1 and x2 so
+[0:26:54] equation like this based on x1 and x2 so it's called causal the prediction
+[0:26:56] it's called causal the prediction problem because we first generate x1 x2
+[0:26:59] problem because we first generate x1 x2 and then y and the the the thing the
+[0:27:01] and then y and the the the thing the response we want to predict
+[0:27:03] response we want to predict uh is coming after the the data is
+[0:27:06] uh is coming after the the data is generated okay
+[0:27:11] and then the second scenario caller is like we consider is anti-codon scenario
+[0:27:15] like we consider is anti-codon scenario where you first generate a y then you
+[0:27:18] where you first generate a y then you generate x1 and x2 and then on top of it
+[0:27:21] generate x1 and x2 and then on top of it you put the intervention a that makes
+[0:27:23] you put the intervention a that makes the difference between source and target
+[0:27:25] the difference between source and target data sets
+[0:27:27] data sets and then the third data set is similar
+[0:27:29] and then the third data set is similar to the second one but we also put
+[0:27:31] to the second one but we also put additional kind of
+[0:27:33] additional kind of intervention interventional shifts on
+[0:27:34] intervention interventional shifts on the y on the labels distribution
+[0:27:38] the y on the labels distribution um
+[0:27:40] um okay then we we design those kind of
+[0:27:42] okay then we we design those kind of very simple
+[0:27:43] very simple data sets and we
+[0:27:45] data sets and we generate data from them and we run
+[0:27:47] generate data from them and we run domain adaptation algorithm together
+[0:27:49] domain adaptation algorithm together with the baseline methods
+[0:27:51] with the baseline methods and what we observe is that
+[0:27:57] ols star is the oracle performance that should be having the lowest risk across
+[0:28:00] should be having the lowest risk across all data sets
+[0:28:01] all data sets that's true
+[0:28:03] that's true and in the corner setting the ol star
+[0:28:05] and in the corner setting the ol star and os source oel source is pretty
+[0:28:07] and os source oel source is pretty pretty is doing pretty well and kodo is
+[0:28:10] pretty is doing pretty well and kodo is also doing pretty well but actually eip
+[0:28:12] also doing pretty well but actually eip is kind of having a very large risk
+[0:28:16] is kind of having a very large risk in anti-cordo setting example two uh dip
+[0:28:19] in anti-cordo setting example two uh dip is it kind of works it's better than or
+[0:28:22] is it kind of works it's better than or source
+[0:28:23] source uh but in this last setting where you
+[0:28:26] uh but in this last setting where you have anti-codon and also perturbation on
+[0:28:28] have anti-codon and also perturbation on white then yeah you also have very large
+[0:28:30] white then yeah you also have very large risk
+[0:28:31] risk um
+[0:28:32] um that's kind of interesting to us that
+[0:28:35] that's kind of interesting to us that how could it happen that in this very
+[0:28:37] how could it happen that in this very simple scenarios that's
+[0:28:39] simple scenarios that's uh those domain adaptation algorithm vip
+[0:28:42] uh those domain adaptation algorithm vip has all like different behaviors
+[0:28:45] has all like different behaviors and we actually tried this dip on like
+[0:28:48] and we actually tried this dip on like some uci cardo data sets and actually we
+[0:28:51] some uci cardo data sets and actually we can show
+[0:28:52] can show uh
+[0:28:53] uh for classification as well that
+[0:28:56] for classification as well that dip
+[0:28:58] dip is like not this like this is not all
+[0:29:00] is like not this like this is not all resource but just source core
+[0:29:03] resource but just source core um
+[0:29:05] um for classification as well you can show
+[0:29:07] for classification as well you can show that uh
+[0:29:08] that uh vip has worse performance than just a
+[0:29:10] vip has worse performance than just a source for
+[0:29:16] okay so we started this in the linear structural
+[0:29:18] we started this in the linear structural caudal model setting and we first find
+[0:29:21] caudal model setting and we first find the sufficient conditions for
+[0:29:23] the sufficient conditions for dip to succeed so the sufficient
+[0:29:26] dip to succeed so the sufficient conditions for dip to succeed will be
+[0:29:29] conditions for dip to succeed will be a
+[0:29:29] a linear structural equation model
+[0:29:32] linear structural equation model and you assume anti-causal prediction
+[0:29:34] and you assume anti-causal prediction problem you first generate y then
+[0:29:36] problem you first generate y then generate x's
+[0:29:38] generate x's and there's no intervention on y
+[0:29:40] and there's no intervention on y y distribution is not perturbed across
+[0:29:43] y distribution is not perturbed across the source and target data sets
+[0:29:46] the source and target data sets and then the dip matching penalty fits
+[0:29:48] and then the dip matching penalty fits the noise intervention penalty means
+[0:29:50] the noise intervention penalty means that if the noise intervention is it's
+[0:29:53] that if the noise intervention is it's the mean shift then the matching penalty
+[0:29:55] the mean shift then the matching penalty should take care of the mean shift if
+[0:29:56] should take care of the mean shift if the noise panel intervention type is
+[0:29:58] the noise panel intervention type is like variance shift then the matching
+[0:30:00] like variance shift then the matching penalty should take care of the
+[0:30:04] penalty should take care of the or the distributional distance should
+[0:30:05] or the distributional distance should take care of the variance change
+[0:30:08] take care of the variance change if that is the case then we can show
+[0:30:11] if that is the case then we can show that
+[0:30:12] that the target risk of dip is is close to
+[0:30:15] the target risk of dip is is close to the source risk of dip and it's close to
+[0:30:17] the source risk of dip and it's close to the
+[0:30:18] the oracle target risk
+[0:30:20] oracle target risk on the other hand if you just use the
+[0:30:22] on the other hand if you just use the oil source like just run the algorithm
+[0:30:25] oil source like just run the algorithm on the source data then it is very
+[0:30:27] on the source data then it is very sensitive
+[0:30:28] sensitive to the x changes so in this setup
+[0:30:31] to the x changes so in this setup assumption we don't assume
+[0:30:33] assumption we don't assume uh we we do assume that the the the
+[0:30:36] uh we we do assume that the the the intervention on x the changes of the
+[0:30:38] intervention on x the changes of the perturbation on x can can can can be
+[0:30:41] perturbation on x can can can can be large
+[0:30:42] large and in this kind of setting if that is
+[0:30:44] and in this kind of setting if that is the case all risk will be very sensitive
+[0:30:46] the case all risk will be very sensitive to the change of x but the domain
+[0:30:48] to the change of x but the domain adaptation vip algorithm is going to
+[0:30:51] adaptation vip algorithm is going to take care of this this intervention
+[0:30:53] take care of this this intervention um
+[0:30:55] um okay so
+[0:30:57] okay so can i ask a quick question
+[0:30:59] can i ask a quick question so for the for the examples that you
+[0:31:01] so for the for the examples that you showed earlier do you think that
+[0:31:03] showed earlier do you think that this holds so do you think it's
+[0:31:04] this holds so do you think it's anti-causal
+[0:31:06] anti-causal or um
+[0:31:08] or um exactly i'm going to show one example
+[0:31:11] exactly i'm going to show one example yeah sorry okay so i'm going to show
+[0:31:12] yeah sorry okay so i'm going to show this example to where it's anti-causal
+[0:31:16] this example to where it's anti-causal data generation so you first generate y
+[0:31:19] data generation so you first generate y then you generate x and x two
+[0:31:22] then you generate x and x two and then you add some interventions a1
+[0:31:24] and then you add some interventions a1 and a2
+[0:31:30] so you can see that a1 and a2 is different from source data and target
+[0:31:32] is different from source data and target data in the source data you just do plus
+[0:31:34] data in the source data you just do plus one plus one in the target data you do
+[0:31:36] one plus one in the target data you do minus one minus one
+[0:31:37] minus one minus one so if you
+[0:31:39] so if you try to
+[0:31:40] try to run a mod run a regression problem on
+[0:31:43] run a mod run a regression problem on the source data x1 x2 and x3
+[0:31:47] the source data x1 x2 and x3 x 1 x 2 are useful for prediction of y
+[0:31:51] x 1 x 2 are useful for prediction of y but the problem is the prediction rule
+[0:31:53] but the problem is the prediction rule will change if you change a 1 a 2 2 from
+[0:31:56] will change if you change a 1 a 2 2 from man from plus 1 plus 1 to minus 1 minus
+[0:31:59] man from plus 1 plus 1 to minus 1 minus 1. the prediction rule will change you
+[0:32:01] 1. the prediction rule will change you can do a like this square calculation
+[0:32:02] can do a like this square calculation the prediction rule based on x1 x2 is
+[0:32:05] the prediction rule based on x1 x2 is changing
+[0:32:06] changing uh but the the dip what the vip
+[0:32:09] uh but the the dip what the vip constraint is doing is like trying to
+[0:32:11] constraint is doing is like trying to force
+[0:32:12] force uh the prediction rule to be less
+[0:32:14] uh the prediction rule to be less dependent on this a1 and a2 change and
+[0:32:17] dependent on this a1 and a2 change and what they do is
+[0:32:18] what they do is basically beta1
+[0:32:21] basically beta1 beta2 beta3 like transpose with
+[0:32:25] beta2 beta3 like transpose with x1 x2 and x3
+[0:32:28] x1 x2 and x3 want to match it
+[0:32:29] want to match it from the source data and target data
+[0:32:40] since there is no perturbation on why and also
+[0:32:43] and also the error distribution is the same
+[0:32:45] the error distribution is the same across certain target then the only
+[0:32:48] across certain target then the only thing you are matching is basically here
+[0:32:49] thing you are matching is basically here that beta 1 theta 2 beta 3 transpose
+[0:32:55] that beta 1 theta 2 beta 3 transpose a a1 a2 a3
+[0:32:57] a a1 a2 a3 is the same as
+[0:32:59] is the same as beta 1 beta 2 theta 3
+[0:33:01] beta 1 beta 2 theta 3 transpose a1 field a2
+[0:33:04] transpose a1 field a2 a32
+[0:33:05] a32 that means that you you predict a beta
+[0:33:07] that means that you you predict a beta that is orthogonal
+[0:33:09] that is orthogonal to the difference of the
+[0:33:12] to the difference of the interventions on source data and target
+[0:33:14] interventions on source data and target data
+[0:33:16] data in that sense that the the prediction
+[0:33:18] in that sense that the the prediction rule is changed from the oracle target
+[0:33:21] rule is changed from the oracle target prediction rule it will be orthogonal to
+[0:33:23] prediction rule it will be orthogonal to the differences then
+[0:33:25] the differences then it it
+[0:33:26] it it it will not be affected like you when
+[0:33:28] it will not be affected like you when you have a when you have a change from a
+[0:33:30] you have a when you have a change from a to a tilde and that's why you can show
+[0:33:32] to a tilde and that's why you can show that the the source the dip target rate
+[0:33:35] that the the source the dip target rate scan will be equal to the dirty source
+[0:33:37] scan will be equal to the dirty source brief in this anti-causal
+[0:33:40] brief in this anti-causal linear structural equation model setting
+[0:33:42] linear structural equation model setting and
+[0:33:44] and and in practice like or not in practice
+[0:33:47] and in practice like or not in practice it's like in
+[0:33:48] it's like in in theory if you made make additional
+[0:33:51] in theory if you made make additional assumptions like noise the gaussian id
+[0:33:53] assumptions like noise the gaussian id and you can show that the dip risk is
+[0:33:56] and you can show that the dip risk is just
+[0:34:01] a little bit far from the oracle task risk and the difference will be of order
+[0:34:03] risk and the difference will be of order one over d and b is the dimension and
+[0:34:06] one over d and b is the dimension and and the intuition is like why one
+[0:34:08] and the intuition is like why one already up here is that
+[0:34:10] already up here is that in the linear model you have d dimension
+[0:34:13] in the linear model you have d dimension to do to make the uh the prediction of y
+[0:34:16] to do to make the uh the prediction of y you can you have d features to use and
+[0:34:19] you can you have d features to use and you have to sacrifice one direction
+[0:34:21] you have to sacrifice one direction because that one direction is
+[0:34:23] because that one direction is is used to make sure your beta is
+[0:34:26] is used to make sure your beta is orthogonal to the difference of the uh
+[0:34:30] orthogonal to the difference of the uh m80 or the minus eight a
+[0:34:32] m80 or the minus eight a so that you you can adapt to the the
+[0:34:35] so that you you can adapt to the the target
+[0:34:39] data set um
+[0:34:40] um okay so that's in the in anticodon
+[0:34:42] okay so that's in the in anticodon setting and uh in the very simple cases
+[0:34:45] setting and uh in the very simple cases that is we cannot realize it it's it's
+[0:34:48] that is we cannot realize it it's it's very it's very simple idea that makes
+[0:34:50] very it's very simple idea that makes those domain adaptation algorithm work
+[0:34:52] those domain adaptation algorithm work and we try to generalize this to general
+[0:34:54] and we try to generalize this to general setting but uh this discussion is quite
+[0:34:57] setting but uh this discussion is quite vague here so we try to say that
+[0:35:00] vague here so we try to say that why do i where are we seeing the the
+[0:35:02] why do i where are we seeing the the empirical success of dip in the
+[0:35:06] empirical success of dip in the field of computer vision and it's
+[0:35:09] field of computer vision and it's because many data sets are like uh
+[0:35:12] because many data sets are like uh anti-cause
+[0:35:14] anti-cause or the to model them as anti-color data
+[0:35:16] or the to model them as anti-color data generation as possible like you you
+[0:35:19] generation as possible like you you first observe your y labels and generate
+[0:35:21] first observe your y labels and generate the 3d object then generate 2d
+[0:35:24] the 3d object then generate 2d images
+[0:35:25] images for the object recognition task
+[0:35:28] for the object recognition task and for the and then the perturbations
+[0:35:30] and for the and then the perturbations will be on top of those images usually
+[0:35:33] will be on top of those images usually like you put stuff on paper noises or
+[0:35:35] like you put stuff on paper noises or you rotate the images or perturb the
+[0:35:37] you rotate the images or perturb the images and on the on on those breasts
+[0:35:40] images and on the on on those breasts cancer diagnosis problem you first
+[0:35:41] cancer diagnosis problem you first generate y labels and then generate the
+[0:35:43] generate y labels and then generate the breast images
+[0:35:45] breast images and the perturbations also on top of
+[0:35:47] and the perturbations also on top of those images if you think about those
+[0:35:53] the the the difference is the difference that caused by the machines or people
+[0:35:55] that caused by the machines or people operating on those images
+[0:35:58] operating on those images and also that in general those data sets
+[0:36:00] and also that in general those data sets doesn't have y intervention because
+[0:36:03] doesn't have y intervention because mainly because those data sets are made
+[0:36:05] mainly because those data sets are made up and the people just put the same list
+[0:36:08] up and the people just put the same list usually people put the same just ui
+[0:36:09] usually people put the same just ui distribution across one
+[0:36:12] distribution across one and also all right just to remind you of
+[0:36:14] and also all right just to remind you of the time you have around 10 minutes left
+[0:36:17] the time you have around 10 minutes left uh yeah thank you
+[0:36:19] uh yeah thank you uh
+[0:36:21] uh so you the use of like
+[0:36:23] so you the use of like those convolutional neural network based
+[0:36:24] those convolutional neural network based generated other
+[0:36:26] generated other neural networks
+[0:36:27] neural networks for
+[0:36:28] for uh dip matching penalty or the
+[0:36:30] uh dip matching penalty or the distributional matching penalty actually
+[0:36:33] distributional matching penalty actually uh
+[0:36:33] uh you take advantage of the advance in
+[0:36:35] you take advantage of the advance in computer vision and that's why those
+[0:36:37] computer vision and that's why those those methods actually
+[0:36:43] helped to fit a large variety of intervention types and this is actually
+[0:36:45] intervention types and this is actually a plus word for for the success for of
+[0:36:48] a plus word for for the success for of failure for the success of domain
+[0:36:50] failure for the success of domain adaptation methods
+[0:36:51] adaptation methods and they are also
+[0:36:53] and they are also we are not the only one discuss the
+[0:36:55] we are not the only one discuss the failure of dip actually there are many
+[0:36:57] failure of dip actually there are many other situations on the failure of dip
+[0:36:59] other situations on the failure of dip beyond the linear structure called the
+[0:37:01] beyond the linear structure called the model settings and i provide some papers
+[0:37:04] model settings and i provide some papers here
+[0:37:09] and the the
+[0:37:11] the the the third problem that intrigues us is
+[0:37:14] the third problem that intrigues us is that why did the so yeah we got the vip
+[0:37:16] that why did the so yeah we got the vip fails in the color setting there is is
+[0:37:18] fails in the color setting there is is good in the anti-color setting but what
+[0:37:21] good in the anti-color setting but what intrigues us in the example three is
+[0:37:23] intrigues us in the example three is that the ip also fails if we put the
+[0:37:25] that the ip also fails if we put the intervention on y
+[0:37:27] intervention on y um
+[0:37:28] um this roughly intuitively just means that
+[0:37:32] this roughly intuitively just means that when you have a
+[0:37:33] when you have a intervention on y
+[0:37:35] intervention on y uh matching the distribution the middle
+[0:37:38] uh matching the distribution the middle layer distribution here in the simple
+[0:37:40] layer distribution here in the simple case it's just matching
+[0:37:42] case it's just matching x beta transpose x across the
+[0:37:45] x beta transpose x across the source and target domain
+[0:37:47] source and target domain and
+[0:37:49] and matching does distributions no longer
+[0:37:51] matching does distributions no longer aligns the conditional distribution y
+[0:37:53] aligns the conditional distribution y given x because of the y perturbation
+[0:37:56] given x because of the y perturbation when you try to match them you don't
+[0:37:58] when you try to match them you don't just match
+[0:38:00] just match uh this will not imply just you match
+[0:38:02] uh this will not imply just you match the a
+[0:38:03] the a and eight yield
+[0:38:05] and eight yield and because of the y interventions
+[0:38:07] and because of the y interventions and that that is the trouble and how do
+[0:38:10] and that that is the trouble and how do we deal with that
+[0:38:11] we deal with that uh
+[0:38:16] ideally we want to match the conditional distribution x given y like we want to
+[0:38:18] distribution x given y like we want to fix the y and then match the a
+[0:38:21] fix the y and then match the a a one and a a and a t but we cannot have
+[0:38:24] a one and a a and a t but we cannot have accessing y distribution in the target
+[0:38:26] accessing y distribution in the target domain and that's why we actually
+[0:38:28] domain and that's why we actually introduced a new method to deal with the
+[0:38:30] introduced a new method to deal with the y intervention
+[0:38:35] to introduce this method we actually need a little bit background on
+[0:38:37] need a little bit background on conditional invariant components
+[0:38:40] conditional invariant components cic so
+[0:38:47] this assumption assumes that there is some kind of
+[0:38:49] some kind of invariant features or
+[0:38:51] invariant features or uh core features that works across
+[0:38:53] uh core features that works across source and target domain that that are
+[0:38:55] source and target domain that that are like t axis given why is conditionally
+[0:38:58] like t axis given why is conditionally invariant across and source command
+[0:39:01] invariant across and source command source and target domain
+[0:39:02] source and target domain um
+[0:39:08] if the y intervention is not too large then the joint distribution of t x and y
+[0:39:10] then the joint distribution of t x and y becomes almost invariant
+[0:39:12] becomes almost invariant and we can use the tx as a proxy for y
+[0:39:15] and we can use the tx as a proxy for y and intuition here is that
+[0:39:17] and intuition here is that if you have those invariant features
+[0:39:20] if you have those invariant features you can recover the perturbations on y
+[0:39:23] you can recover the perturbations on y and why do we where do we find those
+[0:39:26] and why do we where do we find those invariant features it exists in some
+[0:39:28] invariant features it exists in some data sets
+[0:39:30] data sets and in this hence demo and 1000 2017
+[0:39:33] and in this hence demo and 1000 2017 paper they introduced this this example
+[0:39:36] paper they introduced this this example where they model the data generation
+[0:39:38] where they model the data generation like this you first generate the labels
+[0:39:40] like this you first generate the labels then generate the core features and
+[0:39:42] then generate the core features and generate style features the perturbation
+[0:39:43] generate style features the perturbation will be on the labels and on the style
+[0:39:45] will be on the labels and on the style features
+[0:39:50] but not on the core features so in this eye class detection problem the core
+[0:39:52] eye class detection problem the core features will be eyeglasses so if the
+[0:39:55] features will be eyeglasses so if the image the if the algorithm captures the
+[0:39:58] image the if the algorithm captures the eyeglasses then it detects eyeglasses
+[0:40:00] eyeglasses then it detects eyeglasses but there are also other features that
+[0:40:02] but there are also other features that algorithm might use
+[0:40:04] algorithm might use that the background feature or light
+[0:40:06] that the background feature or light condition or hair style features that
+[0:40:08] condition or hair style features that people might the algorithm might pick up
+[0:40:10] people might the algorithm might pick up because in one source data set there are
+[0:40:13] because in one source data set there are some biases like people although are
+[0:40:15] some biases like people although are more likely to wear glasses so the
+[0:40:18] more likely to wear glasses so the algorithm are likely to pick up those
+[0:40:20] algorithm are likely to pick up those background features and if it's outdoor
+[0:40:23] background features and if it's outdoor it's more likely to predict glasses
+[0:40:26] it's more likely to predict glasses and men are more likely to wear glasses
+[0:40:28] and men are more likely to wear glasses than women and then the algorithm might
+[0:40:29] than women and then the algorithm might pick up those features but those
+[0:40:31] pick up those features but those features are what they call the style
+[0:40:33] features are what they call the style features and not the core features
+[0:40:40] and so they're trying to claim that there exists those kind of conditional
+[0:40:42] there exists those kind of conditional invariant features and
+[0:40:44] invariant features and we follow their this kind of framework
+[0:40:46] we follow their this kind of framework to find those core features things those
+[0:40:48] to find those core features things those confusions doesn't suffer
+[0:40:50] confusions doesn't suffer the perturbation a those core features
+[0:40:53] the perturbation a those core features is very good proxy of the y labels and
+[0:40:56] is very good proxy of the y labels and that is what we are going to take
+[0:40:57] that is what we are going to take advantage of and the the conditional
+[0:41:00] advantage of and the the conditional invariant penalty algorithm cip
+[0:41:03] invariant penalty algorithm cip algorithm is going to minimize this
+[0:41:05] algorithm is going to minimize this conditional
+[0:41:07] conditional distribution the cost future
+[0:41:09] distribution the cost future you want to find the transformation t so
+[0:41:12] you want to find the transformation t so that
+[0:41:14] that once you transform axis condition on y
+[0:41:16] once you transform axis condition on y the conditional distribution is the same
+[0:41:18] the conditional distribution is the same across multiple uh source and source
+[0:41:21] across multiple uh source and source domains
+[0:41:22] domains and the formulation is like you you
+[0:41:25] and the formulation is like you you minimize the loss across
+[0:41:27] minimize the loss across m source domains and you also minimize
+[0:41:29] m source domains and you also minimize the descript the distributional distance
+[0:41:31] the descript the distributional distance the conditional distribution distances
+[0:41:33] the conditional distribution distances and the goal here is to find those
+[0:41:35] and the goal here is to find those transformations and we call the core
+[0:41:37] transformations and we call the core features
+[0:41:38] features and once we find the coffee trust we can
+[0:41:40] and once we find the coffee trust we can introduce
+[0:41:41] introduce what we call the conditional invariant
+[0:41:43] what we call the conditional invariant residue matching method cirm
+[0:41:47] residue matching method cirm and
+[0:41:49] and instead of doing dip which is just
+[0:41:52] instead of doing dip which is just minimize loss and some
+[0:41:54] minimize loss and some distributional distance between x
+[0:41:56] distributional distance between x transpose without exception with
+[0:41:58] transpose without exception with transpose beta you do
+[0:42:00] transpose beta you do the distribution distance
+[0:42:02] the distribution distance for modified version of x where the
+[0:42:04] for modified version of x where the modified version of x is a function of x
+[0:42:07] modified version of x is a function of x but also the cost features
+[0:42:09] but also the cost features you the idea is that you you are you
+[0:42:12] you the idea is that you you are you will use you will use the call features
+[0:42:14] will use you will use the call features as the proxy of y
+[0:42:15] as the proxy of y the core features as epoxy or white that
+[0:42:18] the core features as epoxy or white that can be learned by a crp across all
+[0:42:20] can be learned by a crp across all source environments once that proxy is
+[0:42:24] source environments once that proxy is learned
+[0:42:24] learned you can tell
+[0:42:26] you can tell the y perturbation from the call
+[0:42:28] the y perturbation from the call features distribution change then you
+[0:42:31] features distribution change then you can correct for the while perturbation
+[0:42:33] can correct for the while perturbation by this intervention and then you can
+[0:42:36] by this intervention and then you can reduce to the things in scenarios where
+[0:42:38] reduce to the things in scenarios where the actual works so that that is kind of
+[0:42:41] the actual works so that that is kind of the whole idea i don't have time to
+[0:42:43] the whole idea i don't have time to explain
+[0:42:45] explain this example that
+[0:42:52] in a simple example you can work it out that
+[0:42:53] that once you find the conditional invariant
+[0:42:56] once you find the conditional invariant features you can usually like design a
+[0:42:58] features you can usually like design a data set that
+[0:43:00] data set that does not have one a new data does not
+[0:43:02] does not have one a new data does not have y intervention and then you are
+[0:43:04] have y intervention and then you are back to the case where dfg is applicable
+[0:43:06] back to the case where dfg is applicable and the the the informal summary of our
+[0:43:10] and the the the informal summary of our result for cirm is that we can remove
+[0:43:12] result for cirm is that we can remove this assumption that you need you don't
+[0:43:14] this assumption that you need you don't need the y intervention on why but you
+[0:43:16] need the y intervention on why but you need to add an assumption that there is
+[0:43:18] need to add an assumption that there is some
+[0:43:19] some conditional invariant features and you
+[0:43:21] conditional invariant features and you will be able to learn those conditional
+[0:43:23] will be able to learn those conditional invariant features from your source data
+[0:43:26] invariant features from your source data okay and then
+[0:43:27] okay and then with this assumption we can establish
+[0:43:29] with this assumption we can establish this they are they are quite close
+[0:43:31] this they are they are quite close uh this the target risk of cim and the
+[0:43:34] uh this the target risk of cim and the oracle tablet target with their price
+[0:43:36] oracle tablet target with their price points
+[0:43:38] points but in this kind of scenario dip is very
+[0:43:40] but in this kind of scenario dip is very sensitive to the white intervention like
+[0:43:43] sensitive to the white intervention like we discussed in the previous algorithm
+[0:43:46] we discussed in the previous algorithm so it's possible to extend this
+[0:43:47] so it's possible to extend this framework to other
+[0:43:49] framework to other cases
+[0:43:51] cases beyond the causal and anticodon simple
+[0:43:53] beyond the causal and anticodon simple setting but already in the mixed causal
+[0:43:55] setting but already in the mixed causal and anti-color setting things has been
+[0:43:58] and anti-color setting things has been quite difficult
+[0:44:00] quite difficult quite difficult for us actually we
+[0:44:02] quite difficult for us actually we we will only be able to do it if we can
+[0:44:07] we will only be able to do it if we can discover the caudal variables for y we
+[0:44:10] discover the caudal variables for y we can discover the parent variables for y
+[0:44:12] can discover the parent variables for y then we can reduce it to the anti-causal
+[0:44:14] then we can reduce it to the anti-causal prediction problem but the challenge
+[0:44:17] prediction problem but the challenge here is that
+[0:44:18] here is that can we do domain adaptation actually
+[0:44:21] can we do domain adaptation actually without doing exact caudal discovery or
+[0:44:24] without doing exact caudal discovery or on the other hand can we show that
+[0:44:25] on the other hand can we show that actually domain adaptation problem is a
+[0:44:27] actually domain adaptation problem is a strictly harder problem than the caudal
+[0:44:29] strictly harder problem than the caudal discovery problem
+[0:44:31] discovery problem okay and so there are some numerical
+[0:44:33] okay and so there are some numerical experiments but they're
+[0:44:35] experiments but they're not that interesting and
+[0:44:38] not that interesting and i would suggest you take a look at our
+[0:44:40] i would suggest you take a look at our our paper basically we're trying to say
+[0:44:42] our paper basically we're trying to say that we can make up cases in linear
+[0:44:44] that we can make up cases in linear structural equation models
+[0:44:46] structural equation models and
+[0:44:46] and so that vip is is is only the best
+[0:44:50] so that vip is is is only the best estimator in some cases but in all the
+[0:44:52] estimator in some cases but in all the other cases
+[0:44:53] other cases it's not quite working um
+[0:44:57] it's not quite working um and then we also have some at least the
+[0:44:59] and then we also have some at least the digital data sets that that's
+[0:45:01] digital data sets that that's the new let's show this kind of similar
+[0:45:04] the new let's show this kind of similar experiment just trying to adapt trying
+[0:45:06] experiment just trying to adapt trying to
+[0:45:07] to go from a linear model to a more
+[0:45:08] go from a linear model to a more complicated and neural network model uh
+[0:45:11] complicated and neural network model uh the summary of this talk is that uh
+[0:45:14] the summary of this talk is that uh it's it's dangerous to blindly use the
+[0:45:17] it's it's dangerous to blindly use the domain adaptation more algorithms and
+[0:45:19] domain adaptation more algorithms and what we call for is
+[0:45:22] what we call for is is more kind of standardized
+[0:45:25] is more kind of standardized or more structured description of data
+[0:45:27] or more structured description of data set including
+[0:45:29] set including what are the domain knowledge that are
+[0:45:31] what are the domain knowledge that are needed for those domain adaptation
+[0:45:33] needed for those domain adaptation algorithms to succeed uh
+[0:45:37] algorithms to succeed uh you can take our frameworks the
+[0:45:38] you can take our frameworks the structural code of framework you can
+[0:45:40] structural code of framework you can also take other frameworks that start
+[0:45:42] also take other frameworks that start the frame formally formulate the domain
+[0:45:44] the frame formally formulate the domain adaptation problem where you assume x
+[0:45:46] adaptation problem where you assume x given y the same or this robustness
+[0:45:48] given y the same or this robustness framework but
+[0:45:49] framework but it's it's kind of not helpful for the
+[0:45:52] it's it's kind of not helpful for the field if
+[0:45:53] field if if those descriptions are missing and
+[0:45:56] if those descriptions are missing and the dfp
+[0:45:57] the dfp works under this anti-codon linear
+[0:46:00] works under this anti-codon linear structural equation model framework but
+[0:46:02] structural equation model framework but the ip we showed that it can also fail
+[0:46:04] the ip we showed that it can also fail under causal prediction setting mixed
+[0:46:06] under causal prediction setting mixed quad
+[0:46:08] quad code quarter ante color setting
+[0:46:10] code quarter ante color setting intervention on y or if you use a too
+[0:46:12] intervention on y or if you use a too complicated function class u which is
+[0:46:14] complicated function class u which is not discussing this talk but we briefly
+[0:46:16] not discussing this talk but we briefly discussed in our paper
+[0:46:19] discussed in our paper in the presence of y intervention the
+[0:46:21] in the presence of y intervention the conditional invariant features or
+[0:46:23] conditional invariant features or components become useful
+[0:46:25] components become useful and we use those conditional invariant
+[0:46:27] and we use those conditional invariant features to introduce the cirm
+[0:46:30] features to introduce the cirm but the general problem of
+[0:46:33] but the general problem of makes the caudal anticodonal adaptation
+[0:46:35] makes the caudal anticodonal adaptation is still very challenging if we don't
+[0:46:38] is still very challenging if we don't have then complete causal knowledge
+[0:46:40] have then complete causal knowledge about that codograph and the question is
+[0:46:43] about that codograph and the question is exact
+[0:46:44] exact is the exact causal inference discovery
+[0:46:46] is the exact causal inference discovery necessary to solve domain adaptation or
+[0:46:49] necessary to solve domain adaptation or problem
+[0:46:50] problem thank you thank you
+[0:46:55] thanks yancey all right wonderful so we will now move
+[0:46:57] all right wonderful so we will now move on to the discussion by bmw so be way
+[0:47:00] on to the discussion by bmw so be way feel free to share your screen
+[0:47:02] feel free to share your screen yeah sure
+[0:47:16] okay uh can you see my slides yes
+[0:47:17] yes great
+[0:47:18] great so thank you students for giving us a
+[0:47:20] so thank you students for giving us a one-fourth talk on domain adaptation
+[0:47:22] one-fourth talk on domain adaptation from the course of perspective
+[0:47:24] from the course of perspective together with interesting theoretical
+[0:47:26] together with interesting theoretical results
+[0:47:28] results so in the following i'd like to
+[0:47:29] so in the following i'd like to summarize and add a few points
+[0:47:38] so uh has shown us that causal knowledge is important in domestication
+[0:47:41] is important in domestication for some causal structures domain domain
+[0:47:43] for some causal structures domain domain adaptation helps but not for others
+[0:47:47] adaptation helps but not for others now let's have a quick review of the
+[0:47:49] now let's have a quick review of the following simple scenarios
+[0:47:52] following simple scenarios first
+[0:47:53] first let's suppose x causes y
+[0:47:56] let's suppose x causes y that is the prediction is in the causal
+[0:47:58] that is the prediction is in the causal direction
+[0:48:00] direction here
+[0:48:01] here i use theta to represent the latent
+[0:48:03] i use theta to represent the latent change vectors
+[0:48:05] change vectors first consider case 1 will the chain
+[0:48:08] first consider case 1 will the chain factor theta directly influence the
+[0:48:11] factor theta directly influence the feature x
+[0:48:13] feature x and this case is called covariance shift
+[0:48:17] and this case is called covariance shift in this case the marginal distribution
+[0:48:19] in this case the marginal distribution of x changes but not the but the
+[0:48:22] of x changes but not the but the conditional distribution of y given an
+[0:48:24] conditional distribution of y given an extended change
+[0:48:25] extended change so if we can learn a model that will
+[0:48:28] so if we can learn a model that will characterize the conditional
+[0:48:30] characterize the conditional distribution in the source domains
+[0:48:32] distribution in the source domains then actually no adaptation is needed in
+[0:48:35] then actually no adaptation is needed in the target domain
+[0:48:37] the target domain so in this table which is from unc stock
+[0:48:40] so in this table which is from unc stock we can see that
+[0:48:41] we can see that oers target and ois source as well as
+[0:48:44] oers target and ois source as well as the causal give us the same prediction
+[0:48:47] the causal give us the same prediction error
+[0:48:49] error and the moreover
+[0:48:50] and the moreover in the case where the prediction in is
+[0:48:53] in the case where the prediction in is in the is the same as the cost direction
+[0:48:56] in the is the same as the cost direction the distribution of x is irrelevant to
+[0:48:59] the distribution of x is irrelevant to the distribution of y given x so the
+[0:49:02] the distribution of y given x so the features in the target domain doesn't
+[0:49:05] features in the target domain doesn't help for the adaptation
+[0:49:07] help for the adaptation that's why dip doesn't work well in this
+[0:49:09] that's why dip doesn't work well in this case
+[0:49:15] instead in case two if the chain factor directly influence y
+[0:49:17] directly influence y then because p x is independent of p y
+[0:49:21] then because p x is independent of p y given x
+[0:49:22] given x and because in the target domain we
+[0:49:24] and because in the target domain we don't observe y variables
+[0:49:27] don't observe y variables it is not possible to do adaptation
+[0:49:29] it is not possible to do adaptation without further assumptions in this case
+[0:49:34] next let's consider the case where y causes x
+[0:49:38] let's consider the case where y causes x that is the prediction is in the
+[0:49:40] that is the prediction is in the anti-cos direction
+[0:49:42] anti-cos direction specifically if the change factor
+[0:49:45] specifically if the change factor directly influence y
+[0:49:47] directly influence y this is called tidal shift or label
+[0:49:49] this is called tidal shift or label shift
+[0:49:51] shift and if the chain factor directly
+[0:49:53] and if the chain factor directly influence x
+[0:49:54] influence x this is known as conditional shift
+[0:49:59] this is known as conditional shift we have seen from us talk that dip
+[0:50:02] we have seen from us talk that dip doesn't work
+[0:50:03] doesn't work doesn't work well
+[0:50:05] doesn't work well dip works well in this case
+[0:50:09] dip works well in this case and in all these three cases px is
+[0:50:12] and in all these three cases px is relevant to p y given x
+[0:50:15] relevant to p y given x so the features in the target domain
+[0:50:17] so the features in the target domain helps for the adaptation
+[0:50:23] moreover in case 5 when both x and y are directly
+[0:50:25] when both x and y are directly influenced by the chain factors which is
+[0:50:28] influenced by the chain factors which is sometimes called the generalized
+[0:50:30] sometimes called the generalized generalized target shift
+[0:50:32] generalized target shift dip doesn't work well in this case
+[0:50:36] dip doesn't work well in this case and the uh peter proposed an efficient
+[0:50:39] and the uh peter proposed an efficient method sum
+[0:50:40] method sum and ensure that in linear causal
+[0:50:42] and ensure that in linear causal relations with uh
+[0:50:44] relations with uh inter with linear interventions on why
+[0:50:47] inter with linear interventions on why the sum target the risk is approximate
+[0:50:50] the sum target the risk is approximate to the oracle task risk which is very
+[0:50:52] to the oracle task risk which is very promising
+[0:50:59] now besides the about benefits next let's reveal more benefits of the causal
+[0:51:01] let's reveal more benefits of the causal knowledge in domestication
+[0:51:04] knowledge in domestication specifically cost knowledge can tell us
+[0:51:07] specifically cost knowledge can tell us which features help for prediction we
+[0:51:09] which features help for prediction we know that not all measured features are
+[0:51:12] know that not all measured features are useful
+[0:51:13] useful and because knowledge can tell us where
+[0:51:16] and because knowledge can tell us where the changes are that is the location of
+[0:51:18] the changes are that is the location of the changes
+[0:51:20] the changes and because knowledge can also tell us
+[0:51:23] and because knowledge can also tell us which fee which changes need to be
+[0:51:25] which fee which changes need to be adapted and are able to be adapted
+[0:51:28] adapted and are able to be adapted and moreover the quantitative cost model
+[0:51:31] and moreover the quantitative cost model can tell us how the changes can be
+[0:51:35] can tell us how the changes can be adapted next let's look at these four
+[0:51:37] adapted next let's look at these four points in detail
+[0:51:43] first from the causal graph over the features x and the targeted variable y
+[0:51:46] features x and the targeted variable y it's easy to see which features help for
+[0:51:49] it's easy to see which features help for prediction
+[0:51:51] prediction so basically only the market blanket of
+[0:51:54] so basically only the market blanket of the target variable helps for prediction
+[0:51:57] the target variable helps for prediction which includes the parents the children
+[0:52:00] which includes the parents the children and the spouse of the target variable y
+[0:52:03] and the spouse of the target variable y for example here in this cause graph
+[0:52:05] for example here in this cause graph only the features with shaded nodes are
+[0:52:08] only the features with shaded nodes are helpful for the prediction
+[0:52:11] helpful for the prediction and second cos knowledge can tell us
+[0:52:14] and second cos knowledge can tell us where the changes are
+[0:52:17] where the changes are here we see that to represent the latent
+[0:52:20] here we see that to represent the latent chain factors that influence the x
+[0:52:22] chain factors that influence the x variables and the y variables
+[0:52:24] variables and the y variables and we consider and we consider an
+[0:52:27] and we consider and we consider an augmented variable uh causal graph of x
+[0:52:30] augmented variable uh causal graph of x y and zeta
+[0:52:33] y and zeta in this graph we can see that
+[0:52:35] in this graph we can see that theta y zeta 1 influence x y which means
+[0:52:39] theta y zeta 1 influence x y which means that the marginal distribution of x y
+[0:52:42] that the marginal distribution of x y changes across domains
+[0:52:45] changes across domains and the theta y influence y which means
+[0:52:48] and the theta y influence y which means the conditional distribution y given its
+[0:52:50] the conditional distribution y given its direct causes change across domains
+[0:52:54] direct causes change across domains from this augmented cause graph with
+[0:52:56] from this augmented cause graph with genuine vectors
+[0:52:58] genuine vectors it's obvious to identify the location of
+[0:53:00] it's obvious to identify the location of the changes
+[0:53:03] the changes and moreover with this augmented cause
+[0:53:06] and moreover with this augmented cause graph we can further analyze which
+[0:53:08] graph we can further analyze which changes need to be adapted and are able
+[0:53:11] changes need to be adapted and are able to be adapted
+[0:53:13] to be adapted in this example only cita y theta 2 and
+[0:53:16] in this example only cita y theta 2 and cs3 need to be adapted
+[0:53:19] cs3 need to be adapted because they are dependent on y
+[0:53:22] because they are dependent on y when given the marked blanket of y
+[0:53:29] and furthermore cause knowledge informs how the changes can be adapted
+[0:53:32] how the changes can be adapted basically by modeling the genera
+[0:53:35] basically by modeling the genera modeling the generative process with the
+[0:53:37] modeling the generative process with the structural cost models
+[0:53:39] structural cost models and embedding the changes in a compact
+[0:53:42] and embedding the changes in a compact way which are represented by the setup
+[0:53:44] way which are represented by the setup vectors
+[0:53:45] vectors we can know how the changes can be
+[0:53:48] we can know how the changes can be adapted and usually we only need to
+[0:53:50] adapted and usually we only need to adapt the only need to adapt the low
+[0:53:53] adapt the only need to adapt the low dimensional theta vectors
+[0:54:00] now you may have another question how can we find the cost of knowledge
+[0:54:03] can we find the cost of knowledge a traditional way is by doing randomized
+[0:54:05] a traditional way is by doing randomized concrete trials
+[0:54:07] concrete trials however we know that randomized
+[0:54:09] however we know that randomized experiments are usually time and
+[0:54:11] experiments are usually time and resource consuming and sometimes may
+[0:54:13] resource consuming and sometimes may even involve ethical issues
+[0:54:16] even involve ethical issues so an alternative way is to identify
+[0:54:19] so an alternative way is to identify cause relationships from observational
+[0:54:21] cause relationships from observational data which is known as causal discovery
+[0:54:24] data which is known as causal discovery and inference
+[0:54:26] and inference however the current matters in cause of
+[0:54:28] however the current matters in cause of discovery and causal inference usually
+[0:54:31] discovery and causal inference usually rely on some assumptions
+[0:54:33] rely on some assumptions for example assuming that there are no
+[0:54:35] for example assuming that there are no latent confounders or selection bios
+[0:54:38] latent confounders or selection bios will only allow a specific specific type
+[0:54:41] will only allow a specific specific type of latent confounders
+[0:54:44] now how what can we do
+[0:54:50] fortunately john and others have have assumed that
+[0:54:52] john and others have have assumed that learning a deck by extracting the
+[0:54:55] learning a deck by extracting the extracting the conditional independence
+[0:54:57] extracting the conditional independence relationships over the augmented
+[0:54:59] relationships over the augmented variable set
+[0:55:00] variable set which includes the observed variables
+[0:55:02] which includes the observed variables and the latent changing factors are
+[0:55:04] and the latent changing factors are enough for the prediction in domain
+[0:55:07] enough for the prediction in domain adaptation tasks
+[0:55:10] adaptation tasks for instance
+[0:55:11] for instance in this underlying causal graph
+[0:55:14] in this underlying causal graph where y crosses x and there's a
+[0:55:17] where y crosses x and there's a selection bias over x denoted by the s
+[0:55:20] selection bias over x denoted by the s variable
+[0:55:21] variable and the custom mechanism of s changes
+[0:55:24] and the custom mechanism of s changes across domains
+[0:55:26] across domains and notice that the source
+[0:55:28] and notice that the source this s variable is not observed
+[0:55:32] this s variable is not observed then the augmented data representation
+[0:55:35] then the augmented data representation that represents the conditional
+[0:55:37] that represents the conditional independence relationships is can be
+[0:55:39] independence relationships is can be represented as follows
+[0:55:42] represented as follows there's a direct age from x to y and the
+[0:55:45] there's a direct age from x to y and the distribution of x changes
+[0:55:51] another example is that x and y have a latent confounded error
+[0:55:54] x and y have a latent confounded error and the custom mechanism of x
+[0:55:57] and the custom mechanism of x changes across domains
+[0:55:59] changes across domains in this case the augmented degree
+[0:56:01] in this case the augmented degree representation is like this there's a
+[0:56:04] representation is like this there's a direct age from y to x and the
+[0:56:07] direct age from y to x and the conditional distribution of x changes
+[0:56:15] okay finally i have two questions regarding vance's talk the first
+[0:56:17] regarding vance's talk the first question is
+[0:56:18] question is does the current theorem assume cover
+[0:56:21] does the current theorem assume cover the case when the same latent vector
+[0:56:23] the case when the same latent vector influence both the features and the
+[0:56:25] influence both the features and the title variable
+[0:56:26] title variable and the second verb a second question is
+[0:56:30] and the second verb a second question is can the proposed method and the
+[0:56:32] can the proposed method and the corresponding theorem be extended to the
+[0:56:34] corresponding theorem be extended to the case with the multiple source domains
+[0:56:38] case with the multiple source domains thank you very much to you and
+[0:56:40] thank you very much to you and and the peter's uh talk and as well as
+[0:56:43] and the peter's uh talk and as well as the grade of paper thank you
+[0:56:45] the grade of paper thank you and here are three references
+[0:56:52] thanks billy um so yes would you like to respond to some of these questions
+[0:57:03] okay thank uh thank you b way for the for the entire very insightful uh
+[0:57:05] for the entire very insightful uh discussion yeah so i i i didn't mention
+[0:57:08] discussion yeah so i i i didn't mention but yeah it's good that you point out
+[0:57:10] but yeah it's good that you point out that there are people already kind of
+[0:57:13] that there are people already kind of being able to do uh causal discovery and
+[0:57:16] being able to do uh causal discovery and link them to domain adaptation um so
+[0:57:19] link them to domain adaptation um so regarding the first question uh
+[0:57:27] that's very good question actually the current
+[0:57:28] current theorem in on cim will not be able to
+[0:57:31] theorem in on cim will not be able to deal with latent factors that influence
+[0:57:33] deal with latent factors that influence both feature and target variables it's
+[0:57:35] both feature and target variables it's not hard to adapt to the case where the
+[0:57:38] not hard to adapt to the case where the latent factor influence only the future
+[0:57:40] latent factor influence only the future that future variables but if they are
+[0:57:42] that future variables but if they are done they are perturbing both feature
+[0:57:44] done they are perturbing both feature and target variables it's not we it's
+[0:57:46] and target variables it's not we it's not covered and
+[0:57:48] not covered and uh it's in general a different difficult
+[0:57:51] uh it's in general a different difficult problem when you have latent factors
+[0:57:52] problem when you have latent factors like that and i think one one source to
+[0:57:54] like that and i think one one source to look at is maybe to consider uh those
+[0:57:58] look at is maybe to consider uh those kind of uncalled regression type of
+[0:58:00] kind of uncalled regression type of regulations in the in dominic's paper
+[0:58:02] regulations in the in dominic's paper that might help with deal with those
+[0:58:04] that might help with deal with those latent vector
+[0:58:07] latent vector influences for the second question uh
+[0:58:11] influences for the second question uh actually we we
+[0:58:13] actually we we our methods are like taking advantage of
+[0:58:16] our methods are like taking advantage of multiple source domains
+[0:58:18] multiple source domains so
+[0:58:19] so the
+[0:58:20] the the conditional invariant penalty method
+[0:58:23] the conditional invariant penalty method cip method does have to use multiple
+[0:58:25] cip method does have to use multiple source domains to
+[0:58:27] source domains to to impose that conditional invariant
+[0:58:29] to impose that conditional invariant penalty uh like code feature given y is
+[0:58:31] penalty uh like code feature given y is invariant because you need multiple y
+[0:58:34] invariant because you need multiple y labels labeled data sets to be able to
+[0:58:37] labels labeled data sets to be able to impose that penalty um so as a
+[0:58:39] impose that penalty um so as a consequence the irm is also a multiple
+[0:58:42] consequence the irm is also a multiple source domain method we only show the
+[0:58:44] source domain method we only show the performance on the first source domain
+[0:58:47] performance on the first source domain or the performance on the target
+[0:58:51] or the performance on the target using the first source domain is because
+[0:58:53] using the first source domain is because we we want to prepare compared to the
+[0:58:55] we we want to prepare compared to the previous literature on dip the main
+[0:58:58] previous literature on dip the main invariant projection method dip method
+[0:59:01] invariant projection method dip method historically they were only introduced
+[0:59:03] historically they were only introduced for single source domain kind of
+[0:59:06] for single source domain kind of single source and single target and you
+[0:59:08] single source and single target and you match them and you get risk good results
+[0:59:10] match them and you get risk good results but our paper actually also discussed
+[0:59:12] but our paper actually also discussed how to adapt those dip to the multiple
+[0:59:14] how to adapt those dip to the multiple source domains in
+[0:59:16] source domains in under the assumption that you have
+[0:59:18] under the assumption that you have linear structural equilibrium model and
+[0:59:19] linear structural equilibrium model and you have anti-causal cases the dip can
+[0:59:22] you have anti-causal cases the dip can be adapted easily to multiple source
+[0:59:24] be adapted easily to multiple source domains and the the idea is mostly
+[0:59:26] domains and the the idea is mostly trying to choose the source domain that
+[0:59:28] trying to choose the source domain that works best for dip and
+[0:59:31] works best for dip and and then pick that source domain and you
+[0:59:33] and then pick that source domain and you get the best result but
+[0:59:34] get the best result but um
+[0:59:39] in general we're not sure how to adapt eip but uh in those are some under those
+[0:59:42] eip but uh in those are some under those assumptions we can adapt to the multiple
+[0:59:43] assumptions we can adapt to the multiple source domain cases
+[0:59:47] source domain cases great thank you so much for the very
+[0:59:48] great thank you so much for the very detailed answers
+[0:59:51] detailed answers it helps a lot
+[0:59:58] great thanks thank you both okay so then i suppose in the interest of time you
+[1:00:00] i suppose in the interest of time you will wrap up
+[1:00:02] will wrap up please feel free to
+[1:00:04] please feel free to send any of your questions to your
+[1:00:06] send any of your questions to your answer via email i'm sure he loves
+[1:00:09] answer via email i'm sure he loves getting all the emails
+[1:00:16] uh great so yeah once again uh just thank you to
+[1:00:17] yeah once again uh just thank you to yasi and uh vwa for very nice uh talks
+[1:00:20] yasi and uh vwa for very nice uh talks and discussions um
+[1:00:22] and discussions um next week
+[1:00:24] next week we will have a talk by chiang chong shi
+[1:00:26] we will have a talk by chiang chong shi from london school of economics on a
+[1:00:29] from london school of economics on a reinforcement learning framework for
+[1:00:31] reinforcement learning framework for dynamic causal effect evaluation in a b
+[1:00:33] dynamic causal effect evaluation in a b testing
+[1:00:34] testing so hope you can all join us for that and
+[1:00:38] so hope you can all join us for that and i hope you all have a great week
+[1:00:43] right

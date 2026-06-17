@@ -1,0 +1,1818 @@
+[0:00:05] All right, welcome to the online causal inference seminar. Today we're excited
+[0:00:07] inference seminar. Today we're excited to have Nathan Callas and Shashi Mao
+[0:00:10] to have Nathan Callas and Shashi Mao from Cornell talk about localized device
+[0:00:12] from Cornell talk about localized device machine learning efficient inference on
+[0:00:15] machine learning efficient inference on quantile treatment effects and beyond.
+[0:00:17] quantile treatment effects and beyond. So in Q&amp;A we have a collaborator
+[0:00:19] So in Q&amp;A we have a collaborator Masatoshi Ohara. Um but uh Nathan Callas
+[0:00:23] Masatoshi Ohara. Um but uh Nathan Callas and Georgia Mao will also stop in the
+[0:00:25] and Georgia Mao will also stop in the middle to take some questions. So please
+[0:00:28] middle to take some questions. So please uh submit
+[0:00:28] uh submit some.
+[0:00:29] some. And uh after the talk we will have a
+[0:00:32] And uh after the talk we will have a discussion by Alexandre Belloni and
+[0:00:35] discussion by Alexandre Belloni and after that if we have some time left we
+[0:00:36] after that if we have some time left we will take some more questions. Today
+[0:00:39] will take some more questions. Today questions will be
+[0:00:40] questions will be will be handled by Michael. So I'm going
+[0:00:42] will be handled by Michael. So I'm going to switch to him over now.
+[0:00:49] Uh thanks uh Dominic. So uh we have uh three people with us
+[0:00:51] uh we have uh three people with us today. So hopefully we can answer all
+[0:00:54] today. So hopefully we can answer all uh Q&amp;A. So please submit uh all your
+[0:00:57] uh Q&amp;A. So please submit uh all your questions. Uh keep in mind that they uh
+[0:01:00] questions. Uh keep in mind that they uh may be displayed publicly. Uh and uh if
+[0:01:03] may be displayed publicly. Uh and uh if you if we want to you to ask your
+[0:01:05] you if we want to you to ask your question live we'll uh reach out to you
+[0:01:07] question live we'll uh reach out to you and and ask you to to raise your hand.
+[0:01:10] and and ask you to to raise your hand. Uh so with that I'll hand it over to
+[0:01:12] Uh so with that I'll hand it over to Nathan.
+[0:01:18] Uh Nathan you can uh begin whenever you're ready.
+[0:01:18] you're ready. Okay.
+[0:01:19] Okay. Thank you. So
+[0:01:22] Thank you. So continue. So I have to share my screen.
+[0:01:30] Okay. Can everybody see my screen? Yeah? Yes.
+[0:01:31] Yes. Yes. Okay. Sorry.
+[0:01:33] Yes. Okay. Sorry. Okay. Thank you for the introduction and
+[0:01:36] Okay. Thank you for the introduction and thank you for the invitation. It's a
+[0:01:38] thank you for the invitation. It's a real pleasure to be here. So Shashi and
+[0:01:40] real pleasure to be here. So Shashi and I will be talking about work that's also
+[0:01:42] I will be talking about work that's also joint uh with Masa who's here also
+[0:01:45] joint uh with Masa who's here also answering questions.
+[0:01:46] answering questions. Uh and it's about a new methodology that
+[0:01:48] Uh and it's about a new methodology that we are calling localized device machine
+[0:01:51] we are calling localized device machine learning.
+[0:01:51] learning. And as our subtitle efficient inference
+[0:01:55] And as our subtitle efficient inference on quantile treatment effects and beyond
+[0:01:56] on quantile treatment effects and beyond is alluding to.
+[0:01:58] is alluding to. Um one of the uh uh primary applications
+[0:02:01] Um one of the uh uh primary applications of our new methodology is for quantile
+[0:02:03] of our new methodology is for quantile treatment effect estimation. Now, before
+[0:02:05] treatment effect estimation. Now, before I try and tell you a little bit about
+[0:02:06] I try and tell you a little bit about why we should care about quantiles, I
+[0:02:08] why we should care about quantiles, I just want to start by advertising that
+[0:02:10] just want to start by advertising that Jose is actually on the market this
+[0:02:11] Jose is actually on the market this year. So, if you're hiring, uh I cannot
+[0:02:14] year. So, if you're hiring, uh I cannot recommend him strongly enough. And you
+[0:02:16] recommend him strongly enough. And you should look him up and the other work
+[0:02:17] should look him up and the other work he's done. He's done some fantastic
+[0:02:19] he's done. He's done some fantastic work. So, now without further ado, why
+[0:02:21] work. So, now without further ado, why should we even care about quantile
+[0:02:23] should we even care about quantile treatment effects? And that should
+[0:02:24] treatment effects? And that should motivate uh our methodology LDML.
+[0:02:29] motivate uh our methodology LDML. So, to motivate this, consider a
+[0:02:31] So, to motivate this, consider a hypothetical new program where we take
+[0:02:33] hypothetical new program where we take everybody nationwide in high school and
+[0:02:35] everybody nationwide in high school and we're going to teach them some basic
+[0:02:37] we're going to teach them some basic computer and Microsoft Office skills.
+[0:02:39] computer and Microsoft Office skills. Uh so, now in addition to all the other
+[0:02:41] Uh so, now in addition to all the other qualifications they have, they now also
+[0:02:43] qualifications they have, they now also have qualifications necessary uh to gain
+[0:02:45] have qualifications necessary uh to gain access to a pool of uh of low-level
+[0:02:48] access to a pool of uh of low-level office jobs that let's suppose are in
+[0:02:50] office jobs that let's suppose are in demand. Probably not right now in the
+[0:02:52] demand. Probably not right now in the pandemic economy, but hopefully in the
+[0:02:53] pandemic economy, but hopefully in the near future.
+[0:02:55] near future. And then this essential question in
+[0:02:56] And then this essential question in program evaluation is, well, what is the
+[0:02:58] program evaluation is, well, what is the effect of this program?
+[0:03:00] effect of this program? Uh what is the effect of this program on
+[0:03:02] Uh what is the effect of this program on individuals' income, for example?
+[0:03:04] individuals' income, for example? So, suppose you do an analysis and you
+[0:03:07] So, suppose you do an analysis and you figure out that the difference in the
+[0:03:09] figure out that the difference in the average in the average income of an
+[0:03:11] average in the average income of an individual that was exposed to this
+[0:03:13] individual that was exposed to this program and was not exposed to this
+[0:03:15] program and was not exposed to this program,
+[0:03:16] program, on average their income increases by
+[0:03:18] on average their income increases by 0.1%, which is something, but it seems
+[0:03:21] 0.1%, which is something, but it seems pretty small.
+[0:03:23] pretty small. Well, what's probably uh contributing to
+[0:03:26] Well, what's probably uh contributing to the small increase in average is that
+[0:03:29] the small increase in average is that most of the income dollars
+[0:03:31] most of the income dollars uh in the pool of in aggregate income is
+[0:03:34] uh in the pool of in aggregate income is mostly being controlled by top earners
+[0:03:36] mostly being controlled by top earners who are getting, you know, very high
+[0:03:38] who are getting, you know, very high earning jobs regardless uh of this uh of
+[0:03:42] earning jobs regardless uh of this uh of this intervention. So, they're
+[0:03:43] this intervention. So, they're unaffected and that's where most of the
+[0:03:45] unaffected and that's where most of the dollars are coming from.
+[0:03:47] dollars are coming from. But, if we look at the distribution of
+[0:03:50] But, if we look at the distribution of incomes
+[0:03:52] incomes when we give the program and we don't
+[0:03:53] when we give the program and we don't give the program, it's plausible that we
+[0:03:55] give the program, it's plausible that we could see a very strong effect in the
+[0:03:57] could see a very strong effect in the first quartile of income because we're
+[0:03:59] first quartile of income because we're looking at these low-level
+[0:04:01] looking at these low-level jobs. So, what's happening here,
+[0:04:04] jobs. So, what's happening here, as is very well known, something like
+[0:04:07] as is very well known, something like income is a very skewed distribution and
+[0:04:09] income is a very skewed distribution and in such a situations,
+[0:04:11] in such a situations, uh
+[0:04:12] uh quantiles can be much more informative
+[0:04:14] quantiles can be much more informative than averages.
+[0:04:16] than averages. Okay, so just to in a picture explain
+[0:04:19] Okay, so just to in a picture explain what is a quantile effect. So, here
+[0:04:21] what is a quantile effect. So, here we're going to use
+[0:04:22] we're going to use the formalism of potential outcomes. So,
+[0:04:25] the formalism of potential outcomes. So, we can consider the distribution of the
+[0:04:27] we can consider the distribution of the control potential outcomes, or the
+[0:04:29] control potential outcomes, or the distribution of incomes if nobody got
+[0:04:31] distribution of incomes if nobody got this program, and the distribution of
+[0:04:32] this program, and the distribution of incomes if everybody got this program.
+[0:04:35] incomes if everybody got this program. Okay, and that would have two different
+[0:04:36] Okay, and that would have two different distributions which can be described by
+[0:04:37] distributions which can be described by CDF. So, we have the blue CDF and the
+[0:04:40] CDF. So, we have the blue CDF and the orange CDF.
+[0:04:41] orange CDF. When we are asking what is the quantile
+[0:04:43] When we are asking what is the quantile treatment effect at level 75%? We're
+[0:04:46] treatment effect at level 75%? We're asking
+[0:04:47] asking if we make a line at 75%, where does it
+[0:04:50] if we make a line at 75%, where does it intersect each one of these CDFs, and
+[0:04:52] intersect each one of these CDFs, and what is the horizontal distance between
+[0:04:54] what is the horizontal distance between these two CDFs? That is the quantile
+[0:04:55] these two CDFs? That is the quantile treatment effect. So, this distance
+[0:04:58] treatment effect. So, this distance indicated by this dash line is the
+[0:05:01] indicated by this dash line is the quantile treatment effect at 75% and
+[0:05:03] quantile treatment effect at 75% and this is the quantile treatment effect at
+[0:05:05] this is the quantile treatment effect at 95%. As we can see, we can really gauge
+[0:05:08] 95%. As we can see, we can really gauge how
+[0:05:10] how the program is affecting different
+[0:05:12] the program is affecting different quantiles of distribution which can be
+[0:05:15] quantiles of distribution which can be very heterogeneous. So, that's what what
+[0:05:17] very heterogeneous. So, that's what what a quantile treatment effect is.
+[0:05:20] a quantile treatment effect is. And just to fast forward a little bit,
+[0:05:22] And just to fast forward a little bit, just to tell you what this talk is all
+[0:05:25] just to tell you what this talk is all going to be about. So,
+[0:05:26] going to be about. So, it's going to be about a general
+[0:05:27] it's going to be about a general methodology and the theory around it,
+[0:05:30] methodology and the theory around it, but in terms of its impact for
+[0:05:31] but in terms of its impact for practitioners, for empiricists,
+[0:05:34] practitioners, for empiricists, we think that the most
+[0:05:36] we think that the most important takeaway from this talk will
+[0:05:38] important takeaway from this talk will be
+[0:05:39] be here's a methodology that's going to
+[0:05:41] here's a methodology that's going to allow you to do efficient estimation of
+[0:05:42] allow you to do efficient estimation of quantile treatment effects, or local
+[0:05:44] quantile treatment effects, or local quantile treatment effects if you're
+[0:05:45] quantile treatment effects if you're thinking about estimating them using
+[0:05:47] thinking about estimating them using instrumental variables and doing this in
+[0:05:50] instrumental variables and doing this in the presence of very high dimensional
+[0:05:51] the presence of very high dimensional controls
+[0:05:52] controls or otherwise high dimensional nuisances
+[0:05:55] or otherwise high dimensional nuisances when we are going to use just black box
+[0:05:58] when we are going to use just black box machine learning methods for supervised
+[0:06:00] machine learning methods for supervised regression and some very lax
+[0:06:01] regression and some very lax assumptions. So when I say supervised
+[0:06:03] assumptions. So when I say supervised regression, I mean you get data on
+[0:06:06] regression, I mean you get data on covariates and labels. So you get n
+[0:06:08] covariates and labels. So you get n pairs of such data points and you have
+[0:06:10] pairs of such data points and you have some black box that's going to estimate
+[0:06:13] some black box that's going to estimate the conditional expectation of the label
+[0:06:15] the conditional expectation of the label given the covariate.
+[0:06:17] given the covariate. So here
+[0:06:18] So here um
+[0:06:19] um the label can be binary or continuous.
+[0:06:21] the label can be binary or continuous. If it's binary, this is going to be a
+[0:06:23] If it's binary, this is going to be a conditional probability. So we're just
+[0:06:25] conditional probability. So we're just going to call this kind of supervised
+[0:06:28] going to call this kind of supervised regression black box a few times and be
+[0:06:31] regression black box a few times and be able to do efficient estimation and
+[0:06:33] able to do efficient estimation and inference on QTs and LQTS.
+[0:06:38] inference on QTs and LQTS. So
+[0:06:39] So the main motivation is going to be QTs
+[0:06:40] the main motivation is going to be QTs as I've mentioned. So let's start with
+[0:06:43] as I've mentioned. So let's start with how we might estimate them. Well, before
+[0:06:45] how we might estimate them. Well, before we can think about estimating them, we
+[0:06:46] we can think about estimating them, we have to think about identifying them
+[0:06:48] have to think about identifying them from data. So what is the
+[0:06:50] from data. So what is the quantile that we're interested in? Well,
+[0:06:52] quantile that we're interested in? Well, the quant the parameter that we're
+[0:06:54] the quant the parameter that we're interested in is this parameter theta
+[0:06:55] interested in is this parameter theta star defined as the theta star such that
+[0:06:58] star defined as the theta star such that we plug it into the CDF of treatment
+[0:07:01] we plug it into the CDF of treatment outcomes, it's equal to gamma. Right? So
+[0:07:03] outcomes, it's equal to gamma. Right? So gamma here is like 25% or 75% etc. We're
+[0:07:06] gamma here is like 25% or 75% etc. We're going to assume it's unique to make
+[0:07:08] going to assume it's unique to make things straightforward.
+[0:07:10] things straightforward. And we can think about an analogous
+[0:07:11] And we can think about an analogous question for the control treatment
+[0:07:14] question for the control treatment control outcome quantile
+[0:07:16] control outcome quantile and the difference of the treated
+[0:07:18] and the difference of the treated outcome and control outcome quantiles
+[0:07:20] outcome and control outcome quantiles and that's the quantile treatment
+[0:07:22] and that's the quantile treatment effect. And these estimation questions
+[0:07:24] effect. And these estimation questions are analogous. So just for making things
+[0:07:26] are analogous. So just for making things simple, I'll focus on just the quantile
+[0:07:28] simple, I'll focus on just the quantile of the treated outcome.
+[0:07:31] of the treated outcome. So it wouldn't be a talk in the online
+[0:07:34] So it wouldn't be a talk in the online causal inference seminar if I didn't
+[0:07:36] causal inference seminar if I didn't mention the central problem problem of
+[0:07:38] mention the central problem problem of causal inference. So why can't we just
+[0:07:39] causal inference. So why can't we just invert the CDF and get theta star?
+[0:07:42] invert the CDF and get theta star? Well, the problem is that we don't
+[0:07:44] Well, the problem is that we don't observe Y1. We don't observe
+[0:07:45] observe Y1. We don't observe counterfactual outcomes. For an
+[0:07:47] counterfactual outcomes. For an individual that did not receive the
+[0:07:48] individual that did not receive the program, we don't know what their
+[0:07:50] program, we don't know what their outcome would have been if they did
+[0:07:51] outcome would have been if they did receive the program. So, then we need to
+[0:07:53] receive the program. So, then we need to make assumptions in order to identify
+[0:07:55] make assumptions in order to identify this from data.
+[0:07:56] this from data. So, one setting that is often considered
+[0:07:59] So, one setting that is often considered is the setting of ignorable treatment
+[0:08:01] is the setting of ignorable treatment assignment. So, suppose that the data
+[0:08:03] assignment. So, suppose that the data that we see, so generically in the stock
+[0:08:05] that we see, so generically in the stock is Z, is going to indicate a data
+[0:08:07] is Z, is going to indicate a data observation. So, in this case, we're
+[0:08:09] observation. So, in this case, we're going to observe a triplet of covariates
+[0:08:11] going to observe a triplet of covariates X. So, this can be, for example, this
+[0:08:13] X. So, this can be, for example, this individual is a high school student in
+[0:08:15] individual is a high school student in Florida
+[0:08:16] Florida whose
+[0:08:18] whose parents did not graduate from college.
+[0:08:20] parents did not graduate from college. And then we have an indicator for
+[0:08:21] And then we have an indicator for whether they received the treatment or
+[0:08:23] whether they received the treatment or not. So, this is zero or one. And then
+[0:08:25] not. So, this is zero or one. And then we have the outcome, which is their
+[0:08:27] we have the outcome, which is their income down the line.
+[0:08:28] income down the line. And one identifying condition would be
+[0:08:31] And one identifying condition would be to assume that the treatment is
+[0:08:32] to assume that the treatment is ignorable, so that potential outcomes
+[0:08:34] ignorable, so that potential outcomes are independent of the treatment given
+[0:08:36] are independent of the treatment given covariate, and that we have overlap. So,
+[0:08:38] covariate, and that we have overlap. So, for every level of the covariates, each
+[0:08:41] for every level of the covariates, each treatment is uh possible uh in the data
+[0:08:44] treatment is uh possible uh in the data generating process. Alternatively, we
+[0:08:46] generating process. Alternatively, we can uh have identifying assumptions
+[0:08:49] can uh have identifying assumptions based on instrumental variable, and then
+[0:08:50] based on instrumental variable, and then we're estimating the local quantile
+[0:08:52] we're estimating the local quantile treatment effects. Uh we're going to
+[0:08:53] treatment effects. Uh we're going to mention that later, so let me for now
+[0:08:55] mention that later, so let me for now just focus on
+[0:08:57] just focus on just quantile treatment effects under
+[0:08:58] just quantile treatment effects under ignorability.
+[0:09:00] ignorability. So, if we make these assumptions,
+[0:09:01] So, if we make these assumptions, there's a way that we can identify theta
+[0:09:04] there's a way that we can identify theta using inverse propensity weighting.
+[0:09:06] using inverse propensity weighting. Okay? So, we can formulate the following
+[0:09:09] Okay? So, we can formulate the following uh
+[0:09:10] uh the estimating equation that's going to
+[0:09:11] the estimating equation that's going to identify theta uniquely. So, here we
+[0:09:15] identify theta uniquely. So, here we wanted to evaluate the CDF, but we
+[0:09:18] wanted to evaluate the CDF, but we didn't know Y1. So, the CDF is just the
+[0:09:21] didn't know Y1. So, the CDF is just the expectation of the indicator that Y is
+[0:09:23] expectation of the indicator that Y is smaller than equal to theta. And we want
+[0:09:25] smaller than equal to theta. And we want to Y1. Well, we only observe Y1 when
+[0:09:27] to Y1. Well, we only observe Y1 when treatment is one, so we're going to
+[0:09:28] treatment is one, so we're going to multiply by the indicator that treatment
+[0:09:30] multiply by the indicator that treatment is one. And we're going to upweight it
+[0:09:32] is one. And we're going to upweight it uh by the inverse propensity. Okay? So,
+[0:09:35] uh by the inverse propensity. Okay? So, if you take this equation, and you plug
+[0:09:37] if you take this equation, and you plug in the true propensity, which we're
+[0:09:39] in the true propensity, which we're going to call pi star, so the true
+[0:09:41] going to call pi star, so the true propensity is the probability of being
+[0:09:42] propensity is the probability of being treated given covariates, and we're
+[0:09:44] treated given covariates, and we're going to ask that the expectation of
+[0:09:46] going to ask that the expectation of this thing, which is the CDF of theta,
+[0:09:49] this thing, which is the CDF of theta, is going to be equal to gamma, that's
+[0:09:51] is going to be equal to gamma, that's going to specify what theta is. Okay, so
+[0:09:53] going to specify what theta is. Okay, so this is a way to identify theta. And
+[0:09:56] this is a way to identify theta. And then to estimate theta, we're just going
+[0:09:57] then to estimate theta, we're just going to replace expectations with empirical
+[0:09:59] to replace expectations with empirical expectations, and true propensities,
+[0:10:01] expectations, and true propensities, this should have a star,
+[0:10:03] this should have a star, with
+[0:10:04] with uh estimate propensities, and then we
+[0:10:06] uh estimate propensities, and then we solve the equation, the corresponding
+[0:10:08] solve the equation, the corresponding empirical estimating equation, and we
+[0:10:10] empirical estimating equation, and we get an estimator that I'm going to call
+[0:10:12] get an estimator that I'm going to call theta hat IPW. So that's one way to
+[0:10:14] theta hat IPW. So that's one way to estimate it.
+[0:10:15] estimate it. But it has problems.
+[0:10:17] But it has problems. So on the plus side, estimating the
+[0:10:19] So on the plus side, estimating the propensity, well, that's just a standard
+[0:10:22] propensity, well, that's just a standard binary regression task. So we have a
+[0:10:24] binary regression task. So we have a whole toolbox of tools to deal with this
+[0:10:26] whole toolbox of tools to deal with this from machine learning, whether it's
+[0:10:28] from machine learning, whether it's random forest, lasso, neural nets, cart,
+[0:10:30] random forest, lasso, neural nets, cart, bart, xgboost, what have you. This is
+[0:10:31] bart, xgboost, what have you. This is the central problem solved by machine
+[0:10:33] the central problem solved by machine learning, supervised regression.
+[0:10:36] learning, supervised regression. The problem is that this estimator theta
+[0:10:37] The problem is that this estimator theta hat IPW, uh well, it's extremely
+[0:10:41] hat IPW, uh well, it's extremely sensitive to how this estimation of the
+[0:10:43] sensitive to how this estimation of the propensities is done.
+[0:10:44] propensities is done. So in very special
+[0:10:47] So in very special um hypothetical cases, if we if there is
+[0:10:50] um hypothetical cases, if we if there is hypothetically some very extreme
+[0:10:52] hypothetically some very extreme smoothness assumed on the propensities,
+[0:10:54] smoothness assumed on the propensities, and if the propensities are estimated by
+[0:10:56] and if the propensities are estimated by very particular sieve or kernel
+[0:10:58] very particular sieve or kernel estimators, then in those unique
+[0:10:59] estimators, then in those unique settings, this estimator can be
+[0:11:01] settings, this estimator can be efficient. But all of that breaks down
+[0:11:03] efficient. But all of that breaks down if you're going to use some uh black box
+[0:11:06] if you're going to use some uh black box machine learning estimator for the
+[0:11:08] machine learning estimator for the propensity. So generally, these machine
+[0:11:11] propensity. So generally, these machine learning estimates are going to have
+[0:11:12] learning estimates are going to have some bias, whether it's regularization,
+[0:11:14] some bias, whether it's regularization, like in lasso, or over parametrization,
+[0:11:16] like in lasso, or over parametrization, like in neural nets that are just uh
+[0:11:18] like in neural nets that are just uh interpolating the data. And in general,
+[0:11:21] interpolating the data. And in general, they're going to have sub square root n
+[0:11:23] they're going to have sub square root n non-parametric convergence rates. And
+[0:11:25] non-parametric convergence rates. And now all of that is going to slow down
+[0:11:26] now all of that is going to slow down theta hat IPW and make it a slowly
+[0:11:28] theta hat IPW and make it a slowly converging and unstable estimate. What
+[0:11:31] converging and unstable estimate. What we would like is we would like to be
+[0:11:32] we would like is we would like to be completely insensitive to how we
+[0:11:34] completely insensitive to how we estimate the nuisances
+[0:11:36] estimate the nuisances so that we can plug in any black box and
+[0:11:38] so that we can plug in any black box and just know that everything is going to be
+[0:11:39] just know that everything is going to be okay.
+[0:11:41] okay. So, if you know if you've heard before
+[0:11:43] So, if you know if you've heard before about orthogonality or device machine
+[0:11:46] about orthogonality or device machine learning or double robustness, maybe
+[0:11:49] learning or double robustness, maybe those are the kind of things that come
+[0:11:50] those are the kind of things that come to mind when I say we want to be
+[0:11:51] to mind when I say we want to be insensitive to how to estimate
+[0:11:53] insensitive to how to estimate nuisances.
+[0:11:54] nuisances. So, indeed there's a way to fix this.
+[0:11:58] So, indeed there's a way to fix this. So, we can alternatively identify the
+[0:12:01] So, we can alternatively identify the parameter of interest data star using
+[0:12:03] parameter of interest data star using the efficient estimating equation for
+[0:12:06] the efficient estimating equation for the quantile of Y1.
+[0:12:08] the quantile of Y1. So, we can replace the
+[0:12:11] So, we can replace the estimating equation function by this
+[0:12:12] estimating equation function by this alternate function psi which has two
+[0:12:15] alternate function psi which has two parts. It has this first part which uses
+[0:12:19] parts. It has this first part which uses this function mu which is the
+[0:12:22] this function mu which is the regression of Y being smaller than equal
+[0:12:25] regression of Y being smaller than equal to theta on X and T. And if you notice
+[0:12:27] to theta on X and T. And if you notice if you take the expectation of mu star
+[0:12:30] if you take the expectation of mu star over X, you get the CDF of interest. So,
+[0:12:33] over X, you get the CDF of interest. So, this first part is already saying CDF of
+[0:12:36] this first part is already saying CDF of theta is equal to gamma.
+[0:12:38] theta is equal to gamma. And then we're also adding this
+[0:12:39] And then we're also adding this debiasing part using IPW.
+[0:12:42] debiasing part using IPW. So, this looks familiar
+[0:12:45] So, this looks familiar to those who know about double robust
+[0:12:47] to those who know about double robust estimation of ATs. This is kind of the
+[0:12:49] estimation of ATs. This is kind of the equivalent for QTs or here just for
+[0:12:52] equivalent for QTs or here just for quantiles.
+[0:12:54] quantiles. And this estimating equation has a very
+[0:12:56] And this estimating equation has a very magical and important property called
+[0:12:58] magical and important property called Neyman orthogonality. So, Neyman
+[0:13:00] Neyman orthogonality. So, Neyman orthogonality is the property that this
+[0:13:03] orthogonality is the property that this expectation
+[0:13:05] expectation over here, the estimating equation of
+[0:13:06] over here, the estimating equation of interest,
+[0:13:07] interest, if we think about it as a function of a
+[0:13:09] if we think about it as a function of a generic theta, a generic mu, and a
+[0:13:12] generic theta, a generic mu, and a generic pi,
+[0:13:13] generic pi, that function is going to have a zero
+[0:13:15] that function is going to have a zero derivative with respect to the nuisances
+[0:13:18] derivative with respect to the nuisances mu and pi at the point theta star, mu
+[0:13:21] mu and pi at the point theta star, mu star, pi star.
+[0:13:23] star, pi star. So, what does this mean? It means that
+[0:13:26] So, what does this mean? It means that if we have small errors mu and pi,
+[0:13:29] if we have small errors mu and pi, near theta star when we're trying to
+[0:13:31] near theta star when we're trying to solve this estimating equation, it
+[0:13:33] solve this estimating equation, it doesn't really change a lot as we change
+[0:13:35] doesn't really change a lot as we change mu a little bit near mu star or pi a
+[0:13:38] mu a little bit near mu star or pi a little bit near pi star.
+[0:13:40] little bit near pi star. So, that means if we have some small
+[0:13:42] So, that means if we have some small errors in their estimation, that doesn't
+[0:13:44] errors in their estimation, that doesn't actually change the expectation too much
+[0:13:46] actually change the expectation too much cuz the derivative is zero. It doesn't
+[0:13:47] cuz the derivative is zero. It doesn't really move a lot for infinitesimal
+[0:13:49] really move a lot for infinitesimal changes. So, that literally means that
+[0:13:51] changes. So, that literally means that we're insensitive to errors in
+[0:13:53] we're insensitive to errors in nuisances.
+[0:13:54] nuisances. So, this Neyman orthogonality is an idea
+[0:13:57] So, this Neyman orthogonality is an idea that has come up
+[0:13:58] that has come up very often in a lot of works and most
+[0:14:01] very often in a lot of works and most recently in
+[0:14:03] recently in more modern literature, it's come up in
+[0:14:05] more modern literature, it's come up in works by Victor and Alex, the discussion
+[0:14:07] works by Victor and Alex, the discussion who's going to speak later, and their
+[0:14:09] who's going to speak later, and their co-authors.
+[0:14:10] co-authors. And they've used it in a variety of
+[0:14:12] And they've used it in a variety of settings and most recently in this paper
+[0:14:16] settings and most recently in this paper debiased double debiased machine
+[0:14:18] debiased double debiased machine learning, here we're just going to call
+[0:14:19] learning, here we're just going to call it debiased machine learning.
+[0:14:20] it debiased machine learning. In this paper, Chernozhukov et al., they
+[0:14:23] In this paper, Chernozhukov et al., they propose a generic way to leverage this
+[0:14:26] propose a generic way to leverage this property of Neyman orthogonality to plug
+[0:14:28] property of Neyman orthogonality to plug in any machine learning black box
+[0:14:30] in any machine learning black box estimate of nuisances. So, in its
+[0:14:33] estimate of nuisances. So, in its simplest form, the procedure is
+[0:14:35] simplest form, the procedure is something like this.
+[0:14:36] something like this. We take all of our data and data points,
+[0:14:40] We take all of our data and data points, and we're going to split it into two
+[0:14:41] and we're going to split it into two parts. Okay, we're going to call these
+[0:14:42] parts. Okay, we're going to call these parts folds.
+[0:14:45] parts folds. And then we're going to try and
+[0:14:47] And then we're going to try and plug in zi to psi for every i.
+[0:14:51] plug in zi to psi for every i. And now we have these nuisances mu and
+[0:14:54] And now we have these nuisances mu and pi, and what we're going to do is we're
+[0:14:55] pi, and what we're going to do is we're going to for every zi, we're going to
+[0:14:57] going to for every zi, we're going to use nuisances that are estimated on the
+[0:15:00] use nuisances that are estimated on the fold that does not contain zi. Okay, so
+[0:15:03] fold that does not contain zi. Okay, so we have mu and pi that estimated on just
+[0:15:05] we have mu and pi that estimated on just the first fold and just in the second
+[0:15:07] the first fold and just in the second fold, and we plug them across the folds,
+[0:15:10] fold, and we plug them across the folds, average the psis that we get over the
+[0:15:12] average the psis that we get over the data to get an empirical moment
+[0:15:14] data to get an empirical moment condition, solve it for theta, and that
+[0:15:17] condition, solve it for theta, and that gives us our solution. And then what we
+[0:15:19] gives us our solution. And then what we get is if we did this just right, we
+[0:15:22] get is if we did this just right, we should get a synthetic behavior that's
+[0:15:24] should get a synthetic behavior that's uh essentially akin to using the true
+[0:15:25] uh essentially akin to using the true propensity the two nuisances.
+[0:15:28] propensity the two nuisances. That sounds fantastic, right?
+[0:15:30] That sounds fantastic, right? You can just use machine learning, plug
+[0:15:31] You can just use machine learning, plug it in, awesome.
+[0:15:33] it in, awesome. Well, there's just one catch. It does
+[0:15:35] Well, there's just one catch. It does not doesn't work that well here because
+[0:15:38] not doesn't work that well here because actually fitting new star we said oh we
+[0:15:40] actually fitting new star we said oh we have to fit new star and plug it in.
+[0:15:42] have to fit new star and plug it in. Well, new star here is a whole
+[0:15:44] Well, new star here is a whole conditional distribution function.
+[0:15:46] conditional distribution function. Right? So, we don't just have to learn a
+[0:15:49] Right? So, we don't just have to learn a single uh conditional expectation, but
+[0:15:51] single uh conditional expectation, but we have to learn a conditional
+[0:15:53] we have to learn a conditional distribution given X uh the whole
+[0:15:55] distribution given X uh the whole distribution of Y.
+[0:15:58] distribution of Y. So,
+[0:15:59] So, one another way to look at it from the
+[0:16:00] one another way to look at it from the point of view of estimating regression
+[0:16:01] point of view of estimating regression functions, we essentially have to
+[0:16:03] functions, we essentially have to estimate a continuum of regression
+[0:16:04] estimate a continuum of regression functions one for every value uh of
+[0:16:08] functions one for every value uh of theta.
+[0:16:09] theta. So, this doesn't exactly uh fit very
+[0:16:12] So, this doesn't exactly uh fit very nicely into standard ML supervised
+[0:16:15] nicely into standard ML supervised regression. There's kind of limited
+[0:16:17] regression. There's kind of limited options out there of what you could use.
+[0:16:18] options out there of what you could use. You could use I mean there's stuff out
+[0:16:20] You could use I mean there's stuff out there. You could use kernel weights to
+[0:16:21] there. You could use kernel weights to get a conditional distribution or KNN
+[0:16:24] get a conditional distribution or KNN weights or you could build a neural
+[0:16:26] weights or you could build a neural network that has a output say mixture of
+[0:16:28] network that has a output say mixture of 10 Gaussians, but that's pretty much it.
+[0:16:31] 10 Gaussians, but that's pretty much it. Uh and anything that's kind of like
+[0:16:32] Uh and anything that's kind of like these flexible machine learning things
+[0:16:34] these flexible machine learning things is going to be somewhat parametric or
+[0:16:36] is going to be somewhat parametric or have parametric outputs like this neural
+[0:16:38] have parametric outputs like this neural net.
+[0:16:39] net. Uh indeed if you look at earlier work by
+[0:16:41] Uh indeed if you look at earlier work by Alex and co-authors,
+[0:16:43] Alex and co-authors, um they constructed a hypothetical
+[0:16:46] um they constructed a hypothetical theoretical continuum of lasso
+[0:16:47] theoretical continuum of lasso estimators one for every theta when they
+[0:16:50] estimators one for every theta when they wanted to estimate QTEs using new
+[0:16:52] wanted to estimate QTEs using new orthogonality. So, hypothetically they
+[0:16:54] orthogonality. So, hypothetically they had to construct a continuum of losses,
+[0:16:55] had to construct a continuum of losses, prove stuff about that, and then in
+[0:16:57] prove stuff about that, and then in practice they had to discretize the
+[0:16:58] practice they had to discretize the range of theta.
+[0:17:00] range of theta. So, it's not so simple to solve uh these
+[0:17:02] So, it's not so simple to solve uh these QTE problems even when you have new
+[0:17:04] QTE problems even when you have new orthogonality. And just a quick note
+[0:17:06] orthogonality. And just a quick note about this discretization. So, we're
+[0:17:08] about this discretization. So, we're generally okay with discretizing the
+[0:17:10] generally okay with discretizing the vertical axis and saying for example we
+[0:17:12] vertical axis and saying for example we care about quantiles at level 75%
+[0:17:16] care about quantiles at level 75% and at 95% and And are just the the only
+[0:17:18] and at 95% and And are just the the only quantiles we care about, just these few
+[0:17:20] quantiles we care about, just these few quantiles.
+[0:17:21] quantiles. It's something different to uh
+[0:17:23] It's something different to uh discretize the vertical axis, sorry, the
+[0:17:26] discretize the vertical axis, sorry, the horizontal axis.
+[0:17:29] horizontal axis. Um where then, you know, we're
+[0:17:31] Um where then, you know, we're discretizing the theta range and we
+[0:17:34] discretizing the theta range and we might have we might not know exactly
+[0:17:36] might have we might not know exactly where this line is like the CDF because
+[0:17:38] where this line is like the CDF because we're only evaluating the CDF up to
+[0:17:40] we're only evaluating the CDF up to these discretization points. And if we
+[0:17:42] these discretization points. And if we make the discretization points finer and
+[0:17:44] make the discretization points finer and finer and finer, we have to make
+[0:17:46] finer and finer, we have to make estimate more and more and more and more
+[0:17:48] estimate more and more and more and more regressions.
+[0:17:50] regressions. So, just as a side note, uh you might
+[0:17:52] So, just as a side note, uh you might recall, you know,
+[0:17:54] recall, you know, this didn't appear in DML when uh we
+[0:17:57] this didn't appear in DML when uh we wanted to estimate average treatment
+[0:17:58] wanted to estimate average treatment effects. Indeed, what's happening in
+[0:18:00] effects. Indeed, what's happening in average treatment effects and other
+[0:18:02] average treatment effects and other types of average estimates, in those
+[0:18:04] types of average estimates, in those cases the efficient estimating equation
+[0:18:06] cases the efficient estimating equation is linear in theta. So, that means that
+[0:18:08] is linear in theta. So, that means that nuisances are not going to depend on the
+[0:18:10] nuisances are not going to depend on the parameters, they can just be estimated
+[0:18:12] parameters, they can just be estimated independently and plugged in and we can
+[0:18:14] independently and plugged in and we can solve for theta.
+[0:18:16] solve for theta. In some sense, what's going on here is
+[0:18:18] In some sense, what's going on here is that DML with non-linear estimating
+[0:18:20] that DML with non-linear estimating equations is just fundamentally hard.
+[0:18:21] equations is just fundamentally hard. So, one lens through which our work can
+[0:18:23] So, one lens through which our work can be understood is a way is a new way to
+[0:18:26] be understood is a way is a new way to deal with this hardness. And this also
+[0:18:28] deal with this hardness. And this also comes into a lot into the our
+[0:18:29] comes into a lot into the our theoretical analysis,
+[0:18:31] theoretical analysis, uh which Shaojie might touch upon, uh
+[0:18:34] uh which Shaojie might touch upon, uh but maybe only a little bit. More
+[0:18:36] but maybe only a little bit. More importantly, I'm just going to focus on
+[0:18:38] importantly, I'm just going to focus on what is the method that comes out of
+[0:18:40] what is the method that comes out of this and what are the things we can say
+[0:18:42] this and what are the things we can say for important practical problems like
+[0:18:44] for important practical problems like estimating quantiles.
+[0:18:46] estimating quantiles. So,
+[0:18:47] So, uh the basic idea is like this. So, with
+[0:18:51] uh the basic idea is like this. So, with DML, we had to estimate a continuum of
+[0:18:53] DML, we had to estimate a continuum of nuisances. Why? Because we didn't know
+[0:18:56] nuisances. Why? Because we didn't know what theta to use. There was a continuum
+[0:18:58] what theta to use. There was a continuum of thetas, we needed the nuisance at all
+[0:18:59] of thetas, we needed the nuisance at all of them.
+[0:19:00] of them. So, what if we did know? What if we did
+[0:19:02] So, what if we did know? What if we did know what theta we should use to plug
+[0:19:05] know what theta we should use to plug into that nuisance?
+[0:19:06] into that nuisance? That sounds a little like a catch-22.
+[0:19:09] That sounds a little like a catch-22. Well, if you told me theta, I'm done.
+[0:19:10] Well, if you told me theta, I'm done. Why am I estimating nuisances? I'll just
+[0:19:12] Why am I estimating nuisances? I'll just use this data. Right? That's what I want
+[0:19:14] use this data. Right? That's what I want to begin with. If you get data,
+[0:19:16] to begin with. If you get data, why do other things?
+[0:19:18] why do other things? So, it turns out that actually that's
+[0:19:20] So, it turns out that actually that's not quite right. You can have a very
+[0:19:23] not quite right. You can have a very rough initial guess, and that's enough.
+[0:19:25] rough initial guess, and that's enough. So, for example, for QTEs, uh it's going
+[0:19:28] So, for example, for QTEs, uh it's going to look something like this. We're going
+[0:19:29] to look something like this. We're going to start with a very rough initial
+[0:19:31] to start with a very rough initial guess, for example, uh theta hat IPW,
+[0:19:35] guess, for example, uh theta hat IPW, which is a very rough guess because it
+[0:19:37] which is a very rough guess because it has a slow convergence, right?
+[0:19:39] has a slow convergence, right? And then we're going to estimate
+[0:19:40] And then we're going to estimate nuisances just at this point, just at
+[0:19:43] nuisances just at this point, just at theta hat IPW, not at the continuum of
+[0:19:45] theta hat IPW, not at the continuum of thetas.
+[0:19:46] thetas. And then we're going to use an
+[0:19:47] And then we're going to use an orthogonal estimating equation to refine
+[0:19:50] orthogonal estimating equation to refine this estimate and get something that is
+[0:19:51] this estimate and get something that is efficient. Okay? And now this estimation
+[0:19:54] efficient. Okay? And now this estimation problem is just a single binary
+[0:19:56] problem is just a single binary regression task.
+[0:20:01] So, what I'm going to do next is I'm going to describe the method in a bit
+[0:20:03] going to describe the method in a bit more uh concrete detail
+[0:20:06] more uh concrete detail and explain to you why it might work and
+[0:20:08] and explain to you why it might work and how it works. And then I'm going to turn
+[0:20:10] how it works. And then I'm going to turn it over to Shaojie, who's going to tell
+[0:20:12] it over to Shaojie, who's going to tell us more about the theoretical things
+[0:20:14] us more about the theoretical things that we can say about this method
+[0:20:17] that we can say about this method and its asymptotic behavior. Uh and then
+[0:20:19] and its asymptotic behavior. Uh and then we're going to talk a little bit of a
+[0:20:21] we're going to talk a little bit of a about empirical results on estimating
+[0:20:23] about empirical results on estimating QTEs and LQTEs, and then we're going to
+[0:20:25] QTEs and LQTEs, and then we're going to conclude. And um before we turn to the
+[0:20:28] conclude. And um before we turn to the theoretical guarantees, we're going to
+[0:20:29] theoretical guarantees, we're going to uh take some questions.
+[0:20:31] uh take some questions. So, let me start by talking about the
+[0:20:33] So, let me start by talking about the method and flushing it out a little bit
+[0:20:35] method and flushing it out a little bit a little bit more in uh detail.
+[0:20:41] So, to understand the method, it's going to be to actually abstract away from the
+[0:20:43] to be to actually abstract away from the quantile estimation problem and think
+[0:20:46] quantile estimation problem and think more generally about any estimating
+[0:20:48] more generally about any estimating equation that's orthogonal.
+[0:20:50] equation that's orthogonal. Uh so, let's suppose that we have data
+[0:20:53] Uh so, let's suppose that we have data Z1 through Zn that is drawn IID from
+[0:20:56] Z1 through Zn that is drawn IID from some distribution P. Now, that's going
+[0:20:57] some distribution P. Now, that's going to be the data, and what we're trying to
+[0:21:00] to be the data, and what we're trying to estimate or conduct inference on is a
+[0:21:03] estimate or conduct inference on is a parameter theta star,
+[0:21:05] parameter theta star, uh a D-dimensional parameter that's
+[0:21:06] uh a D-dimensional parameter that's defined in terms of the following
+[0:21:08] defined in terms of the following D-dimensional moment conditions.
+[0:21:10] D-dimensional moment conditions. Okay. Okay, so it's uh defined by this
+[0:21:12] Okay. Okay, so it's uh defined by this moment being equal to zero. The moment
+[0:21:14] moment being equal to zero. The moment is given by a function psi
+[0:21:16] is given by a function psi applied to the data, applied to the
+[0:21:18] applied to the data, applied to the parameter, and with some nuisances that
+[0:21:21] parameter, and with some nuisances that define psi, where there's two types of
+[0:21:24] define psi, where there's two types of nuisances. One nuisance that doesn't
+[0:21:26] nuisances. One nuisance that doesn't care about the estimate, it's just a
+[0:21:28] care about the estimate, it's just a function, and another nuisance that
+[0:21:30] function, and another nuisance that depends on the parameter interest. Okay,
+[0:21:33] depends on the parameter interest. Okay, so these nuisances are unknown, but they
+[0:21:35] so these nuisances are unknown, but they are estimable from the data.
+[0:21:37] are estimable from the data. So this is going to be the uh condition
+[0:21:40] So this is going to be the uh condition that defines theta star, and notice we
+[0:21:42] that defines theta star, and notice we have a D-dimensional parameter uh
+[0:21:44] have a D-dimensional parameter uh defined by D-dimensional moment
+[0:21:45] defined by D-dimensional moment conditions, so we are in the just
+[0:21:47] conditions, so we are in the just identified setting.
+[0:21:49] identified setting. And there's many examples that we talk
+[0:21:50] And there's many examples that we talk about in the paper of settings like
+[0:21:52] about in the paper of settings like this, including estimating QTEs under
+[0:21:55] this, including estimating QTEs under ignorability, local QTEs using an
+[0:21:57] ignorability, local QTEs using an instrumental variable, estimating
+[0:21:59] instrumental variable, estimating conditional values at risk, expectiles,
+[0:22:02] conditional values at risk, expectiles, general estimating equations uh with
+[0:22:03] general estimating equations uh with incomplete data, etc. In all of these
+[0:22:06] incomplete data, etc. In all of these cases, whenever the estimate that we
+[0:22:08] cases, whenever the estimate that we care about is not an average parameter,
+[0:22:11] care about is not an average parameter, the efficient estimation equations are
+[0:22:12] the efficient estimation equations are going to have estimate-dependent
+[0:22:13] going to have estimate-dependent nuisances, which are going to lead us
+[0:22:15] nuisances, which are going to lead us again to this problem of having to
+[0:22:17] again to this problem of having to estimate a continuum of nuisances.
+[0:22:22] So, where should we start? How do we make
+[0:22:24] where should we start? How do we make progress? Let's think about first what
+[0:22:26] progress? Let's think about first what happens if we knew what the nuisances
+[0:22:28] happens if we knew what the nuisances were. So suppose we knew eta one star
+[0:22:31] were. So suppose we knew eta one star and eta two star exactly.
+[0:22:33] and eta two star exactly. Then one way to estimate theta is to
+[0:22:36] Then one way to estimate theta is to replace the expectation in the moment
+[0:22:38] replace the expectation in the moment with an empirical expectation and solve
+[0:22:40] with an empirical expectation and solve the empirical estimating equation.
+[0:22:42] the empirical estimating equation. Okay, so let's let's consider this
+[0:22:45] Okay, so let's let's consider this hypothetical infeasible estimator theta
+[0:22:47] hypothetical infeasible estimator theta tilde which solves this equation. With
+[0:22:49] tilde which solves this equation. With this expectation EN means take a sample
+[0:22:51] this expectation EN means take a sample average over the Zs.
+[0:22:54] average over the Zs. This is now just a standard Z
+[0:22:56] This is now just a standard Z estimation,
+[0:22:57] estimation, so uh using standard results we can
+[0:22:59] so uh using standard results we can understand how it behaves
+[0:23:00] understand how it behaves asymptotically.
+[0:23:02] asymptotically. And it's uh we can see that under some
+[0:23:05] And it's uh we can see that under some lax regularity condition, theta tilde is
+[0:23:08] lax regularity condition, theta tilde is going to have this representation
+[0:23:10] going to have this representation uh as an asymptotically linear
+[0:23:12] uh as an asymptotically linear estimator. So, it's going to look like a
+[0:23:14] estimator. So, it's going to look like a sample average plus some vanishing
+[0:23:16] sample average plus some vanishing noise.
+[0:23:17] noise. Okay, so in particular, it's also going
+[0:23:18] Okay, so in particular, it's also going to be asymptotically asymptotically
+[0:23:20] to be asymptotically asymptotically normal cuz it looks like a sample
+[0:23:21] normal cuz it looks like a sample average.
+[0:23:22] average. And its asymptotic variance is just
+[0:23:25] And its asymptotic variance is just going to be controlled by the variance
+[0:23:27] going to be controlled by the variance of this quantity that we're taking a
+[0:23:29] of this quantity that we're taking a sample average of. Okay, this is called
+[0:23:31] sample average of. Okay, this is called the influence function.
+[0:23:33] the influence function. So, the influence function here uh
+[0:23:35] So, the influence function here uh consists of psi, the function that uh
+[0:23:38] consists of psi, the function that uh controls the estimating equation, with
+[0:23:41] controls the estimating equation, with plugged in theta star, eta one star,
+[0:23:43] plugged in theta star, eta one star, theta star plugged into eta one star and
+[0:23:45] theta star plugged into eta one star and eta two star.
+[0:23:47] eta two star. And then in front, we're uh multiplying
+[0:23:49] And then in front, we're uh multiplying by the inverse of the Jacobian. So, this
+[0:23:52] by the inverse of the Jacobian. So, this matrix J star is defined as the Jacobian
+[0:23:56] matrix J star is defined as the Jacobian of the moment condition, which is take
+[0:23:58] of the moment condition, which is take the moment condition
+[0:23:59] the moment condition for a generic theta, differentiate it
+[0:24:01] for a generic theta, differentiate it with respect to theta,
+[0:24:03] with respect to theta, and then plug in theta star.
+[0:24:09] Um so, just a reminder, right, this is an infeasible estimator. The problem is
+[0:24:11] an infeasible estimator. The problem is that eta one star and eta two star are
+[0:24:13] that eta one star and eta two star are actually unknown. So, DML, the approach
+[0:24:15] actually unknown. So, DML, the approach of DML was to cross-fit these
+[0:24:17] of DML was to cross-fit these estimators, these nuisances, and plug
+[0:24:19] estimators, these nuisances, and plug them in and solve for theta. But the
+[0:24:21] them in and solve for theta. But the problem was that that meant estimating a
+[0:24:22] problem was that that meant estimating a continuum of nuisances.
+[0:24:24] continuum of nuisances. So, how do we make progress?
+[0:24:27] So, how do we make progress? Well, here's an idea. What if we change
+[0:24:29] Well, here's an idea. What if we change the oracle equation a little bit? So,
+[0:24:31] the oracle equation a little bit? So, instead of thinking about psi depending
+[0:24:33] instead of thinking about psi depending on theta both through its direct effect
+[0:24:36] on theta both through its direct effect through the argument
+[0:24:38] through the argument uh of theta here and through its effect
+[0:24:40] uh of theta here and through its effect via its effect on eta one star,
+[0:24:42] via its effect on eta one star, let's change this
+[0:24:44] let's change this into theta star.
+[0:24:46] into theta star. So, we're going to fix the argument of
+[0:24:47] So, we're going to fix the argument of eta one star to theta star and only
+[0:24:50] eta one star to theta star and only solve for theta in its effect on the
+[0:24:53] solve for theta in its effect on the argument of psi.
+[0:24:55] argument of psi. This is a different estimating equation,
+[0:24:57] This is a different estimating equation, but it's still in this case where we
+[0:24:59] but it's still in this case where we just think about these as true known
+[0:25:01] just think about these as true known quantities, it's just a Z estimator. So
+[0:25:03] quantities, it's just a Z estimator. So we can do the same trick and think about
+[0:25:05] we can do the same trick and think about what its asymptotic behavior will be
+[0:25:06] what its asymptotic behavior will be like. It will also be asymptotically
+[0:25:09] like. It will also be asymptotically linear.
+[0:25:10] linear. And now the Jacobian is slightly
+[0:25:12] And now the Jacobian is slightly different. So everything is the same
+[0:25:14] different. So everything is the same except this J quantity. Now instead of J
+[0:25:17] except this J quantity. Now instead of J star, we get something called J diamond.
+[0:25:19] star, we get something called J diamond. In J diamond, all that's changed is
+[0:25:22] In J diamond, all that's changed is before we take the derivative with
+[0:25:23] before we take the derivative with respect to theta, we fix uh the effect
+[0:25:26] respect to theta, we fix uh the effect of theta on eta one star at theta star,
+[0:25:29] of theta on eta one star at theta star, only differentiate with respect to this
+[0:25:31] only differentiate with respect to this theta, and then plug in theta star.
+[0:25:34] theta, and then plug in theta star. So they're different estimating
+[0:25:35] So they're different estimating equations.
+[0:25:36] equations. But what we're going to do is we're
+[0:25:38] But what we're going to do is we're going to make the very convenient
+[0:25:39] going to make the very convenient assumption
+[0:25:40] assumption that actually the Jacobians are exactly
+[0:25:42] that actually the Jacobians are exactly the same.
+[0:25:44] the same. So what this means is that these two
+[0:25:45] So what this means is that these two estimating equations lead to the same
+[0:25:48] estimating equations lead to the same asymptotic behavior.
+[0:25:51] asymptotic behavior. Okay, so both theta tildas would have
+[0:25:53] Okay, so both theta tildas would have the same asymptotic behavior. This seems
+[0:25:55] the same asymptotic behavior. This seems like an extremely convenient and nice
+[0:25:56] like an extremely convenient and nice assumption.
+[0:25:58] assumption. Next I want to argue to you that it's
+[0:26:00] Next I want to argue to you that it's actually going to happen in a lot of
+[0:26:02] actually going to happen in a lot of cases where you're dealing with
+[0:26:03] cases where you're dealing with orthogonal estimating equations. And
+[0:26:05] orthogonal estimating equations. And it's always you're always going to have
+[0:26:07] it's always you're always going to have this condition, which allows this very
+[0:26:09] this condition, which allows this very convenient reformulation of the problem.
+[0:26:12] convenient reformulation of the problem. So in fact, what we show in the paper is
+[0:26:15] So in fact, what we show in the paper is that um
+[0:26:16] that um if your estimating equation
+[0:26:18] if your estimating equation uh res- satisfies an orthogonality
+[0:26:21] uh res- satisfies an orthogonality condition with respect to the nuisance
+[0:26:25] condition with respect to the nuisance eta one,
+[0:26:26] eta one, with respect to a Fréchet derivative,
+[0:26:29] with respect to a Fréchet derivative, then the variant Jacobian assumption is
+[0:26:32] then the variant Jacobian assumption is satisfied. So essentially, what this is
+[0:26:34] satisfied. So essentially, what this is is just the Neyman orthogonality
+[0:26:36] is just the Neyman orthogonality condition, just with respect to the eta
+[0:26:38] condition, just with respect to the eta one nuisance, but using a Fréchet
+[0:26:40] one nuisance, but using a Fréchet derivative instead of a Gâteaux
+[0:26:42] derivative instead of a Gâteaux derivative, which is what's used in the
+[0:26:44] derivative, which is what's used in the Neyman orthogonality conditions in DML
+[0:26:46] Neyman orthogonality conditions in DML and the earlier papers.
+[0:26:48] and the earlier papers. So if you remember a little bit of your
+[0:26:49] So if you remember a little bit of your analysis, uh Fréchet derivatives are
+[0:26:52] analysis, uh Fréchet derivatives are generally stronger than Gâteaux
+[0:26:54] generally stronger than Gâteaux derivatives. So this is slightly
+[0:26:56] derivatives. So this is slightly slightly stronger, but it turns out that
+[0:26:58] slightly stronger, but it turns out that it holds almost everywhere.
+[0:27:00] it holds almost everywhere. It holds for all of the examples I
+[0:27:01] It holds for all of the examples I mentioned before thanks to double
+[0:27:03] mentioned before thanks to double robustness. So why are all of these
+[0:27:06] robustness. So why are all of these doubly robust estimating equations even
+[0:27:08] doubly robust estimating equations even orthogonal? They're orthogonal because
+[0:27:10] orthogonal? They're orthogonal because once we plug in one correct nuisance,
+[0:27:12] once we plug in one correct nuisance, they don't depend on the other nuisance.
+[0:27:14] they don't depend on the other nuisance. They're correct.
+[0:27:15] They're correct. So if for example we consider this
+[0:27:17] So if for example we consider this estimating equation and we plug in the
+[0:27:19] estimating equation and we plug in the correct uh eta 2 nuisance, so for
+[0:27:22] correct uh eta 2 nuisance, so for example for QTEs this would be the
+[0:27:23] example for QTEs this would be the correct propensity.
+[0:27:25] correct propensity. Well, now this is the actual CDF minus
+[0:27:27] Well, now this is the actual CDF minus gamma. It doesn't depend on eta 1
+[0:27:30] gamma. It doesn't depend on eta 1 anymore. So in particular, it has a zero
+[0:27:33] anymore. So in particular, it has a zero uh derivative with respect to eta 1, a
+[0:27:35] uh derivative with respect to eta 1, a Fréchet derivative because it doesn't
+[0:27:36] Fréchet derivative because it doesn't even depend on eta 1. So it's has a very
+[0:27:39] even depend on eta 1. So it's has a very good derivative and zero is of course
+[0:27:41] good derivative and zero is of course orthogonal to everything. So we satisfy
+[0:27:43] orthogonal to everything. So we satisfy the condition and we have invariant
+[0:27:45] the condition and we have invariant Jacobian assumption.
+[0:27:46] Jacobian assumption. So now we have an alternative moment
+[0:27:48] So now we have an alternative moment condition to target this moment
+[0:27:50] condition to target this moment condition.
+[0:27:51] condition. So now what we're going to propose is
+[0:27:53] So now what we're going to propose is the alternative algorithm to target this
+[0:27:55] the alternative algorithm to target this alternative formulation.
+[0:27:57] alternative formulation. And that's going to lead us to the LDML
+[0:27:59] And that's going to lead us to the LDML algorithm, the localized debiased
+[0:28:01] algorithm, the localized debiased machine learning algorithm.
+[0:28:03] machine learning algorithm. So we're going to take all of our data
+[0:28:05] So we're going to take all of our data and we're going to split it into K even
+[0:28:08] and we're going to split it into K even folds.
+[0:28:10] folds. And K is some fixed number.
+[0:28:12] And K is some fixed number. And then for each little K from 1 to
+[0:28:14] And then for each little K from 1 to capital K, we're going to do the
+[0:28:15] capital K, we're going to do the following. We're going to look at all
+[0:28:17] following. We're going to look at all the data that is not in the Kth fold.
+[0:28:19] the data that is not in the Kth fold. Okay, so the complement of the Kth fold
+[0:28:21] Okay, so the complement of the Kth fold and we're going to split that in turn
+[0:28:22] and we're going to split that in turn into two halves, complement 1 and
+[0:28:24] into two halves, complement 1 and complement 2.
+[0:28:25] complement 2. Complement 1 and complement 2.
+[0:28:28] Complement 1 and complement 2. Then we're going to use only the data in
+[0:28:29] Then we're going to use only the data in complement 1 to construct an initial
+[0:28:32] complement 1 to construct an initial guess for theta.
+[0:28:34] guess for theta. So for an example in problems like QTE,
+[0:28:37] So for an example in problems like QTE, we're going to use the IPW estimate of
+[0:28:39] we're going to use the IPW estimate of theta using just the data in complement
+[0:28:42] theta using just the data in complement 1.
+[0:28:43] 1. Then we're going to use complement 2 to
+[0:28:45] Then we're going to use complement 2 to construct an estimator of the estimate
+[0:28:48] construct an estimator of the estimate dependent nuisances 801 at the specific
+[0:28:51] dependent nuisances 801 at the specific value of the initial guess that we just
+[0:28:53] value of the initial guess that we just fit. So, instead of fitting this for all
+[0:28:56] fit. So, instead of fitting this for all possible theta, we're only estimating it
+[0:28:58] possible theta, we're only estimating it for this one particular theta. And this
+[0:29:00] for this one particular theta. And this particular theta is fixed with respect
+[0:29:02] particular theta is fixed with respect to the data that we're using. So, this
+[0:29:04] to the data that we're using. So, this looks like estimating a single nuisance.
+[0:29:05] looks like estimating a single nuisance. Or in the case of QT, just like
+[0:29:07] Or in the case of QT, just like estimating a single binary regression.
+[0:29:10] estimating a single binary regression. Finally, we're going to use the whole
+[0:29:11] Finally, we're going to use the whole complement to construct an estimator for
+[0:29:14] complement to construct an estimator for 802.
+[0:29:15] 802. And then, what we're going to do is
+[0:29:16] And then, what we're going to do is we're going to plug this in and solve
+[0:29:18] we're going to plug this in and solve for theta. Right? So, we're going to
+[0:29:19] for theta. Right? So, we're going to look over all the data I.
+[0:29:22] look over all the data I. And we're going to evaluate psi at ZI.
+[0:29:25] And we're going to evaluate psi at ZI. But when we do that, we're going to use
+[0:29:27] But when we do that, we're going to use the estimate the the nuisance estimators
+[0:29:30] the estimate the the nuisance estimators 801 hat 802 hat that were fit on the
+[0:29:34] 801 hat 802 hat that were fit on the complement of the fold that contains I.
+[0:29:37] complement of the fold that contains I. So, on the complement of DK.
+[0:29:40] So, on the complement of DK. And then, we're going to take the
+[0:29:41] And then, we're going to take the average over all the data and look for
+[0:29:43] average over all the data and look for the theta that minimizes
+[0:29:45] the theta that minimizes uh the the solves the least squares
+[0:29:47] uh the the solves the least squares problem or maybe solves it up to some
+[0:29:49] problem or maybe solves it up to some vanishing error. And that's it. That's
+[0:29:51] vanishing error. And that's it. That's the estimator.
+[0:29:52] the estimator. So, just to show this in another way,
+[0:29:55] So, just to show this in another way, let me give you this in a schematic kind
+[0:29:57] let me give you this in a schematic kind of representation. So, this is a
+[0:29:59] of representation. So, this is a representation of one run of the for
+[0:30:01] representation of one run of the for loop. So, for K little K equals to one.
+[0:30:05] loop. So, for K little K equals to one. So, we want to evaluate psi
+[0:30:07] So, we want to evaluate psi at some ZI that's in the first fold. So,
+[0:30:11] at some ZI that's in the first fold. So, we're going to take fold two and three.
+[0:30:13] we're going to take fold two and three. And from these two, we're going to
+[0:30:15] And from these two, we're going to construct an estimator theta hat in it.
+[0:30:18] construct an estimator theta hat in it. Some initial guess for theta.
+[0:30:20] Some initial guess for theta. From the fourth and fifth fold, we're
+[0:30:22] From the fourth and fifth fold, we're going to estimate 801 hat at this
+[0:30:24] going to estimate 801 hat at this particular value of theta.
+[0:30:27] particular value of theta. We're going to use folds two through
+[0:30:28] We're going to use folds two through five to estimate 802.
+[0:30:31] five to estimate 802. And then, we're going to plug all of
+[0:30:32] And then, we're going to plug all of these in into psi in order to get psi at
+[0:30:35] these in into psi in order to get psi at ZI. We're going to do these for all the
+[0:30:37] ZI. We're going to do these for all the I in the first fold. And then, we're
+[0:30:40] I in the first fold. And then, we're going to exchange the like the roles of
+[0:30:43] going to exchange the like the roles of the folds. So, we going to for little k
+[0:30:44] the folds. So, we going to for little k equals two, little k equals three,
+[0:30:46] equals two, little k equals three, little k equals four, little k equals
+[0:30:47] little k equals four, little k equals five, and average everything.
+[0:30:50] five, and average everything. And as an example, what can we do to get
+[0:30:52] And as an example, what can we do to get an initial guess? Well, we can do a
+[0:30:54] an initial guess? Well, we can do a cross-fold estimated IPW.
+[0:30:57] cross-fold estimated IPW. So, we can take for example, if we focus
+[0:30:59] So, we can take for example, if we focus on just this part of using D2, D3 to get
+[0:31:02] on just this part of using D2, D3 to get theta hat in it, we can for example use
+[0:31:04] theta hat in it, we can for example use D2
+[0:31:06] D2 to get a estimate for the propensities,
+[0:31:09] to get a estimate for the propensities, use D3 to get another estimate for the
+[0:31:10] use D3 to get another estimate for the propensities, plug each of those in in a
+[0:31:13] propensities, plug each of those in in a cross-fold way, average it, solve for
+[0:31:15] cross-fold way, average it, solve for theta, and get an initial guess. So, if
+[0:31:17] theta, and get an initial guess. So, if you put everything together, we get this
+[0:31:18] you put everything together, we get this complicated schematic, but this every
+[0:31:21] complicated schematic, but this every does everything just right so that we
+[0:31:23] does everything just right so that we get the right
+[0:31:24] get the right type of behavior that we can have
+[0:31:28] type of behavior that we can have guarantees for the estimates that we get
+[0:31:30] guarantees for the estimates that we get if we just use black box plugins. Uh
+[0:31:33] if we just use black box plugins. Uh which is something Shojaie will talk
+[0:31:35] which is something Shojaie will talk about. Uh I just want to mention briefly
+[0:31:37] about. Uh I just want to mention briefly that this was just an algorithm for
+[0:31:39] that this was just an algorithm for estimation, but we can also
+[0:31:42] estimation, but we can also desire some inference on these target
+[0:31:44] desire some inference on these target parameters. Well, we said we're going to
+[0:31:46] parameters. Well, we said we're going to be asymptotically normal, so all we need
+[0:31:48] be asymptotically normal, so all we need is the asymptotic variance to conduct
+[0:31:50] is the asymptotic variance to conduct inference. So, in the paper we propose a
+[0:31:52] inference. So, in the paper we propose a variance estimator,
+[0:31:54] variance estimator, which again is estimated using these
+[0:31:56] which again is estimated using these cross-fold things where for each unit I,
+[0:31:58] cross-fold things where for each unit I, you're going to use the cross-fold
+[0:32:00] you're going to use the cross-fold estimated nuisances.
+[0:32:02] estimated nuisances. And you can use these to construct
+[0:32:03] And you can use these to construct confidence intervals with exact
+[0:32:05] confidence intervals with exact asymptotic coverage.
+[0:32:09] asymptotic coverage. And just one note is you only need in
+[0:32:12] And just one note is you only need in this LDML procedure we started by
+[0:32:14] this LDML procedure we started by randomly splitting the data.
+[0:32:16] randomly splitting the data. Uh so, you actually only need just one
+[0:32:18] Uh so, you actually only need just one random split. That's enough to ensure
+[0:32:19] random split. That's enough to ensure the desirable asymptotics that Shojaie
+[0:32:21] the desirable asymptotics that Shojaie will talk about.
+[0:32:23] will talk about. Uh however,
+[0:32:24] Uh however, this in a finite sample sense is just
+[0:32:26] this in a finite sample sense is just unnecessary noise. In theory, we would
+[0:32:28] unnecessary noise. In theory, we would want to average over this, right? And
+[0:32:30] want to average over this, right? And average over all possible splits.
+[0:32:32] average over all possible splits. Uh in practice, what we recommend to do
+[0:32:35] Uh in practice, what we recommend to do is to just run several iterations of
+[0:32:37] is to just run several iterations of LDML, and then take a median or any
+[0:32:39] LDML, and then take a median or any winsorized mean of of the estimates. And
+[0:32:42] winsorized mean of of the estimates. And this is going to make sure that we're
+[0:32:44] this is going to make sure that we're not being badly affected by bad luck of
+[0:32:47] not being badly affected by bad luck of getting a bad split that's getting
+[0:32:49] getting a bad split that's getting giving us an outlier.
+[0:32:51] giving us an outlier. Uh and we can also use this to to expand
+[0:32:54] Uh and we can also use this to to expand the standard errors to account for
+[0:32:55] the standard errors to account for averaging over the iterations of LDML,
+[0:32:58] averaging over the iterations of LDML, but this is not necessary. This is like
+[0:33:00] but this is not necessary. This is like not something that comes into the
+[0:33:02] not something that comes into the asymptotic variance.
+[0:33:04] asymptotic variance. So, that's the method.
+[0:33:05] So, that's the method. Uh first you localize uh and then you
+[0:33:09] Uh first you localize uh and then you essentially do a DML type thing with a
+[0:33:11] essentially do a DML type thing with a three-way split of the data instead of
+[0:33:14] three-way split of the data instead of just a two-way split in its simplest
+[0:33:16] just a two-way split in its simplest form
+[0:33:17] form uh to localize it I guess and estimate
+[0:33:20] uh to localize it I guess and estimate the estimate independent nuisances only
+[0:33:22] the estimate independent nuisances only at that guess. So, next I'm going to I'm
+[0:33:24] at that guess. So, next I'm going to I'm going to turn it to Xiaojie who's going
+[0:33:26] going to turn it to Xiaojie who's going to tell us more about what we can say
+[0:33:28] to tell us more about what we can say about this method theoretically.
+[0:33:30] about this method theoretically. Uh and give us some empirical results
+[0:33:32] Uh and give us some empirical results and then conclude.
+[0:33:34] and then conclude. So, Michael, can you help me transfer
+[0:33:38] So, Michael, can you help me transfer Sure, yes.
+[0:33:39] Sure, yes. to Xiaojie? I mean and then maybe before
+[0:33:41] to Xiaojie? I mean and then maybe before we transfer, I think Dominic had a
+[0:33:43] we transfer, I think Dominic had a question.
+[0:33:44] question. Uh just just a quick question. So,
+[0:33:46] Uh just just a quick question. So, uh I guess you make an assump- I I might
+[0:33:49] uh I guess you make an assump- I I might have missed it, but you probably make an
+[0:33:50] have missed it, but you probably make an assumption somewhere that the density of
+[0:33:52] assumption somewhere that the density of Y is smooth. Uh
+[0:33:54] Y is smooth. Uh or what what happens if you have
+[0:33:56] or what what happens if you have probability mass?
+[0:33:57] probability mass? so we're going to we're going to
+[0:33:58] so we're going to we're going to That's exactly right. So, when I said in
+[0:34:00] That's exactly right. So, when I said in the beginning assume unique, essentially
+[0:34:02] the beginning assume unique, essentially what I was hiding, which is something
+[0:34:04] what I was hiding, which is something that's formal in our assumptions, is
+[0:34:06] that's formal in our assumptions, is that it has a it has a
+[0:34:08] that it has a it has a uh a density at
+[0:34:10] uh a density at at the quantile.
+[0:34:12] at the quantile. Okay, and and just
+[0:34:14] Okay, and and just So, that's absolutely there. And that's
+[0:34:15] So, that's absolutely there. And that's going to make sure that everything is
+[0:34:16] going to make sure that everything is regular. Yeah, thanks. And in if you if
+[0:34:19] regular. Yeah, thanks. And in if you if if that's not the case, did you try in
+[0:34:20] if that's not the case, did you try in simulation what
+[0:34:22] simulation what what happens basically? Do you still
+[0:34:23] what happens basically? Do you still kind of get
+[0:34:25] kind of get reasonable results? So, we did Yeah, we
+[0:34:27] reasonable results? So, we did Yeah, we didn't try that in simulation. That's a
+[0:34:29] didn't try that in simulation. That's a really good suggestion.
+[0:34:30] really good suggestion. Yeah, we'll try that.
+[0:34:36] Okay, Georgie, just Okay, good. Yeah. Can you see my screen? Yeah, maybe if
+[0:34:40] Can you see my screen? Yeah, maybe if you want to make the slides full screen.
+[0:34:42] you want to make the slides full screen. Yeah, there you go. That's good. Okay,
+[0:34:44] Yeah, there you go. That's good. Okay, cool.
+[0:34:44] cool. All right. Thanks Nathan for introducing
+[0:34:47] All right. Thanks Nathan for introducing the method. Now let me continue talking
+[0:34:49] the method. Now let me continue talking about the asymptotic guarantees. Um so
+[0:34:53] about the asymptotic guarantees. Um so first let me still talk about
+[0:34:54] first let me still talk about counterfactual effect. And as Nathan
+[0:34:57] counterfactual effect. And as Nathan already mentioned, we want to do the
+[0:34:58] already mentioned, we want to do the estimation based on the efficient
+[0:35:00] estimation based on the efficient estimation equation, which is basically
+[0:35:02] estimation equation, which is basically a augmented IPW estimation equation like
+[0:35:04] a augmented IPW estimation equation like this,
+[0:35:05] this, which involves two different
+[0:35:08] which involves two different two different nuisance parameters. And
+[0:35:10] two different nuisance parameters. And the first one is the propensity score,
+[0:35:12] the first one is the propensity score, which we assume to be bounded away from
+[0:35:14] which we assume to be bounded away from zero by a constant epsilon. And we also
+[0:35:17] zero by a constant epsilon. And we also have a another nuisance mu star, which
+[0:35:20] have a another nuisance mu star, which is this conditional CDF function
+[0:35:23] is this conditional CDF function you know, at the true quantile that we
+[0:35:24] you know, at the true quantile that we want to estimate. So that's why we want
+[0:35:26] want to estimate. So that's why we want to use this localization strategy. And
+[0:35:29] to use this localization strategy. And we localize our
+[0:35:30] we localize our conditional CDF estimator only at this
+[0:35:33] conditional CDF estimator only at this initial guess of the quantile and also
+[0:35:36] initial guess of the quantile and also estimate the
+[0:35:37] estimate the propensity score and then form this
+[0:35:39] propensity score and then form this sample analog of the estimation equation
+[0:35:41] sample analog of the estimation equation in order to get the final LDML estimator
+[0:35:44] in order to get the final LDML estimator for the gamma quantile of of Y1.
+[0:35:48] for the gamma quantile of of Y1. And in order to
+[0:35:50] And in order to ensure that our estimator has good
+[0:35:53] ensure that our estimator has good property, here we first specify the
+[0:35:55] property, here we first specify the convergence rates of the nuisance
+[0:35:57] convergence rates of the nuisance estimators. So we assume that with
+[0:35:59] estimators. So we assume that with probability of approaching to one, for
+[0:36:02] probability of approaching to one, for all of the nuisance estimators, we
+[0:36:03] all of the nuisance estimators, we assume that the the convergence rates of
+[0:36:06] assume that the the convergence rates of estimating the conditional CDF at this
+[0:36:09] estimating the conditional CDF at this initial guess and also estimating the
+[0:36:11] initial guess and also estimating the propensity score and also estimating,
+[0:36:13] propensity score and also estimating, you know,
+[0:36:14] you know, and also the convergence rate of this
+[0:36:16] and also the convergence rate of this initial guess are
+[0:36:19] initial guess are you know, rho mu n, rho pi n, and rho
+[0:36:21] you know, rho mu n, rho pi n, and rho theta n respectively. And because in the
+[0:36:24] theta n respectively. And because in the estimation equation, we need to use this
+[0:36:27] estimation equation, we need to use this inverse propensity score weight. So here
+[0:36:29] inverse propensity score weight. So here we also assume that
+[0:36:31] we also assume that the inverse asymmetric propensity score
+[0:36:33] the inverse asymmetric propensity score is upper bounded so that our estimator
+[0:36:35] is upper bounded so that our estimator is well defined.
+[0:36:39] is well defined. And moreover, we also need some
+[0:36:41] And moreover, we also need some regularity conditions on data generating
+[0:36:43] regularity conditions on data generating process. So here we assume that the true
+[0:36:45] process. So here we assume that the true quantile
+[0:36:46] quantile is in the interior of a compact
+[0:36:48] is in the interior of a compact parameter space data and we assume that
+[0:36:50] parameter space data and we assume that for any data within this space, the
+[0:36:53] for any data within this space, the marginal CDF function of this Y1 is
+[0:36:57] marginal CDF function of this Y1 is twice differentiable with the density
+[0:37:00] twice differentiable with the density that's upper bounded and also lower
+[0:37:02] that's upper bounded and also lower bounded away from zero.
+[0:37:04] bounded away from zero. And we also assume that second order
+[0:37:05] And we also assume that second order derivative is is bounded.
+[0:37:08] derivative is is bounded. And we assume a similar condition on the
+[0:37:10] And we assume a similar condition on the conditional CDF function and also its
+[0:37:14] conditional CDF function and also its first two derivatives. So here actually
+[0:37:16] first two derivatives. So here actually we can actually relax this condition a
+[0:37:19] we can actually relax this condition a bit.
+[0:37:20] bit. Actually we only
+[0:37:21] Actually we only only need to require that
+[0:37:23] only need to require that the density at a true quantile is
+[0:37:26] the density at a true quantile is bounded away from zero but you know, at
+[0:37:28] bounded away from zero but you know, at expense of introducing some actual
+[0:37:30] expense of introducing some actual technical conditions. But here for
+[0:37:32] technical conditions. But here for simplicity, let me just focus on this
+[0:37:34] simplicity, let me just focus on this stronger setting.
+[0:37:36] stronger setting. Um
+[0:37:37] Um So
+[0:37:38] So we can show that with all of these
+[0:37:40] we can show that with all of these assumptions, if we will further assume
+[0:37:42] assumptions, if we will further assume that
+[0:37:43] that all of these nuisances can be estimated
+[0:37:45] all of these nuisances can be estimated consistently. So all of their rates are
+[0:37:48] consistently. So all of their rates are you know, little o one. And we will also
+[0:37:50] you know, little o one. And we will also we assume that the
+[0:37:52] we assume that the product of the convergence rate for
+[0:37:54] product of the convergence rate for estimating the propensity score and the
+[0:37:57] estimating the propensity score and the convergence rate of
+[0:37:59] convergence rate of estimating the conditional CDF localized
+[0:38:01] estimating the conditional CDF localized at the initial guess and also the
+[0:38:04] at the initial guess and also the initial guess estimator is faster than
+[0:38:06] initial guess estimator is faster than square root n. Then we can show that our
+[0:38:09] square root n. Then we can show that our localized balanced machine learning
+[0:38:11] localized balanced machine learning estimator for the quantile is
+[0:38:13] estimator for the quantile is asymptotically linear.
+[0:38:15] asymptotically linear. And
+[0:38:15] And obviously it's also asymptotically
+[0:38:17] obviously it's also asymptotically normal and this
+[0:38:20] normal and this asymptotic The
+[0:38:21] asymptotic The is actually the semi-parametric
+[0:38:23] is actually the semi-parametric efficiency lower bound because we use
+[0:38:25] efficiency lower bound because we use the efficient
+[0:38:26] the efficient estimation equation. So, our estimator
+[0:38:28] estimation equation. So, our estimator is also asymptotically efficient.
+[0:38:35] So, in our paper, actually, we have strong
+[0:38:36] strong stronger results than this because we
+[0:38:38] stronger results than this because we take care of all the constants pretty
+[0:38:41] take care of all the constants pretty carefully. So, this asymptotic linear
+[0:38:43] carefully. So, this asymptotic linear expansion also holds uniformly over a
+[0:38:47] expansion also holds uniformly over a instance class, not just for a single
+[0:38:49] instance class, not just for a single instance.
+[0:38:51] instance. And here, back to one thing I mentioned
+[0:38:53] And here, back to one thing I mentioned before,
+[0:38:54] before, here I want to say that our analysis is
+[0:38:56] here I want to say that our analysis is somewhat different from the analysis in
+[0:38:59] somewhat different from the analysis in Chen, and all in 2018. And because if
+[0:39:03] Chen, and all in 2018. And because if for, you know, non-linear estimation
+[0:39:04] for, you know, non-linear estimation equation, if we use their analysis
+[0:39:07] equation, if we use their analysis directly, then we would need to assume
+[0:39:09] directly, then we would need to assume that
+[0:39:10] that all of the
+[0:39:12] all of the the convergence rates for all the
+[0:39:13] the convergence rates for all the nuisance parameters are faster than
+[0:39:16] nuisance parameters are faster than fourth root of n. But here, because we
+[0:39:19] fourth root of n. But here, because we use our new analysis, we only need to
+[0:39:21] use our new analysis, we only need to assume
+[0:39:22] assume this square root of n condition on the
+[0:39:25] this square root of n condition on the product of the convergence rates for
+[0:39:28] product of the convergence rates for estimating these nuisances instead of
+[0:39:31] estimating these nuisances instead of a rate condition on each individual
+[0:39:33] a rate condition on each individual nuisance parameter.
+[0:39:35] nuisance parameter. So, this is very nice because it allows
+[0:39:37] So, this is very nice because it allows us to, you know, sort of trade off the
+[0:39:41] us to, you know, sort of trade off the the convergence rates for different
+[0:39:42] the convergence rates for different nuisance estimation.
+[0:39:49] If we want to estimate the QTE, then, you know, we just estimate the two
+[0:39:51] you know, we just estimate the two quantiles for two potential outcomes,
+[0:39:53] quantiles for two potential outcomes, respectively, and then take the
+[0:39:55] respectively, and then take the difference. And we can show that this
+[0:39:57] difference. And we can show that this QTE estimator also inherits all of the
+[0:40:00] QTE estimator also inherits all of the good properties of,
+[0:40:01] good properties of, you know, each marginal quantile
+[0:40:03] you know, each marginal quantile estimator.
+[0:40:08] Also, as Nathan already mentioned, a natural candidate estimator for this
+[0:40:10] natural candidate estimator for this initial guess for quantile is this IPW
+[0:40:13] initial guess for quantile is this IPW initial estimator. And because we only
+[0:40:17] initial estimator. And because we only use propensity score here,
+[0:40:19] use propensity score here, we don't have the automatic condition.
+[0:40:21] we don't have the automatic condition. So usually the estimation the conversion
+[0:40:24] So usually the estimation the conversion rate for this initial guess has to be
+[0:40:27] rate for this initial guess has to be upper bounded by the conversion rate of
+[0:40:29] upper bounded by the conversion rate of the propensity score estimator. And in
+[0:40:31] the propensity score estimator. And in this case, if we want to
+[0:40:33] this case, if we want to satisfy this condition, then we have to
+[0:40:35] satisfy this condition, then we have to ensure we have to assume that the
+[0:40:37] ensure we have to assume that the propensity score is estimated at the
+[0:40:40] propensity score is estimated at the rate that's faster than 4th root of n.
+[0:40:43] rate that's faster than 4th root of n. And even in this case, even though we
+[0:40:46] And even in this case, even though we require it to be faster than 4th root of
+[0:40:48] require it to be faster than 4th root of n, because we only require this
+[0:40:51] n, because we only require this product rate condition, so if we can
+[0:40:53] product rate condition, so if we can estimate the propensity score at a
+[0:40:55] estimate the propensity score at a faster rate, then we only need to
+[0:40:58] faster rate, then we only need to estimate the condition CDF at a
+[0:41:00] estimate the condition CDF at a relatively slow rate in order to satisfy
+[0:41:02] relatively slow rate in order to satisfy this condition.
+[0:41:05] this condition. And in order to do
+[0:41:07] And in order to do to do inference, we need to estimate the
+[0:41:09] to do inference, we need to estimate the the asymptotic variance. And here we
+[0:41:12] the asymptotic variance. And here we have that J star term, which is
+[0:41:14] have that J star term, which is basically the density at a true
+[0:41:16] basically the density at a true quantile. And in order to estimate that,
+[0:41:18] quantile. And in order to estimate that, a natural candidate is to use this IPW
+[0:41:22] a natural candidate is to use this IPW kernel density estimator. Um but
+[0:41:25] kernel density estimator. Um but usually it might not be that stable
+[0:41:27] usually it might not be that stable because of some uh
+[0:41:29] because of some uh propensity score estimates that may be
+[0:41:31] propensity score estimates that may be close to 0 or 1. So in this case, we may
+[0:41:33] close to 0 or 1. So in this case, we may consider using self-normalization to
+[0:41:36] consider using self-normalization to stabilize the estimator or just to
+[0:41:38] stabilize the estimator or just to connect some extreme weights.
+[0:41:40] connect some extreme weights. So with all of these ingredients,
+[0:41:43] So with all of these ingredients, then we can you know construct the
+[0:41:46] then we can you know construct the asymptotic variance estimator pretty
+[0:41:48] asymptotic variance estimator pretty easily by using this plugin estimator.
+[0:41:51] easily by using this plugin estimator. And then also construct the confidence
+[0:41:54] And then also construct the confidence interval. And then we can show that
+[0:41:57] interval. And then we can show that under all of our assumptions, if this
+[0:41:59] under all of our assumptions, if this density estimator is consistent for the
+[0:42:01] density estimator is consistent for the true density at a true quantile, then
+[0:42:04] true density at a true quantile, then our
+[0:42:05] our confidence interval is also
+[0:42:07] confidence interval is also asymptotically valid.
+[0:42:13] So this is a you know the basic results for our QTE estimation. Uh but of course
+[0:42:15] for our QTE estimation. Uh but of course we made
+[0:42:16] we made one assumption there, that is we have
+[0:42:19] one assumption there, that is we have the unconfounded assumption, which it
+[0:42:21] the unconfounded assumption, which it might not really hold in practice,
+[0:42:23] might not really hold in practice, especially for observation data. And if
+[0:42:26] especially for observation data. And if that is violated, then one common com-
+[0:42:29] that is violated, then one common com- you know, solution uh is to use the
+[0:42:31] you know, solution uh is to use the instrumental variable.
+[0:42:33] instrumental variable. And in this case, we consider, for
+[0:42:35] And in this case, we consider, for example, uh a you know, the most common
+[0:42:38] example, uh a you know, the most common basic setting where we have a binary
+[0:42:41] basic setting where we have a binary instrumental variable W, and we also
+[0:42:43] instrumental variable W, and we also have a binary treatment variable T.
+[0:42:46] have a binary treatment variable T. And we assume all of the uh standard IV
+[0:42:49] And we assume all of the uh standard IV assumptions.
+[0:42:50] assumptions. And here, our goal is to estimate the uh
+[0:42:53] And here, our goal is to estimate the uh local gamma quantile of the you know,
+[0:42:56] local gamma quantile of the you know, this theta star parameter uh that is
+[0:42:58] this theta star parameter uh that is basically uh defined by the quantile of
+[0:43:01] basically uh defined by the quantile of the distribution of Y1 uh for the
+[0:43:03] the distribution of Y1 uh for the compliers, uh or individuals who choose
+[0:43:05] compliers, uh or individuals who choose their treatment status by following the
+[0:43:08] their treatment status by following the uh instrumental variable value.
+[0:43:12] uh instrumental variable value. So, in order to estimate Yes, sir. Can
+[0:43:14] So, in order to estimate Yes, sir. Can you wrap up in 5 to 7 minutes or so?
+[0:43:17] you wrap up in 5 to 7 minutes or so? Okay, sure. Um so, in order to estimate
+[0:43:21] Okay, sure. Um so, in order to estimate this, we still use the efficient
+[0:43:23] this, we still use the efficient estimation equation uh that's also
+[0:43:25] estimation equation uh that's also mentioned in uh study in uh Alex's paper
+[0:43:29] mentioned in uh study in uh Alex's paper before, and uh
+[0:43:31] before, and uh uh here, you know, we also have some
+[0:43:34] uh here, you know, we also have some muses, like the mu star uh mu tilde star
+[0:43:37] muses, like the mu star uh mu tilde star here, which is also some sort of
+[0:43:39] here, which is also some sort of conditional CDF type of muses. And uh
+[0:43:43] conditional CDF type of muses. And uh you know, again, uh we can use our um
+[0:43:46] you know, again, uh we can use our um you know, localization strategy to solve
+[0:43:48] you know, localization strategy to solve this, because we can also show that you
+[0:43:50] this, because we can also show that you know, this efficient estimation equation
+[0:43:52] know, this efficient estimation equation also satisfy the orthogonality
+[0:43:54] also satisfy the orthogonality condition.
+[0:43:55] condition. So, again, you know, we just estimate
+[0:43:57] So, again, you know, we just estimate all of the muses and plug them back into
+[0:44:00] all of the muses and plug them back into the estimation equation and solve this
+[0:44:02] the estimation equation and solve this sample analog uh to get our final um um,
+[0:44:05] sample analog uh to get our final um um, LDML estimator for local quantiles.
+[0:44:09] LDML estimator for local quantiles. So, here we have a one, um,
+[0:44:11] So, here we have a one, um, actual, uh, nuisance that I didn't
+[0:44:14] actual, uh, nuisance that I didn't really, uh, take much time to talk about
+[0:44:17] really, uh, take much time to talk about its meaning, but it's basically
+[0:44:18] its meaning, but it's basically estimating the, um,
+[0:44:21] estimating the, um, you know, the average causal effect of
+[0:44:22] you know, the average causal effect of the instrumental variable and the, uh,
+[0:44:25] the instrumental variable and the, uh, treatment variable. And in order to
+[0:44:27] treatment variable. And in order to estimate that, uh, actually we only need
+[0:44:29] estimate that, uh, actually we only need neither it to be consistent in order to
+[0:44:31] neither it to be consistent in order to ensure the, uh, nice theoretical
+[0:44:33] ensure the, uh, nice theoretical guarantees. Um,
+[0:44:35] guarantees. Um, you know, there are many choices for
+[0:44:36] you know, there are many choices for that and I think in Annex paper they use
+[0:44:38] that and I think in Annex paper they use like a W bus estimator, uh, for that.
+[0:44:41] like a W bus estimator, uh, for that. Uh, so we can, uh, definitely use that.
+[0:44:43] Uh, so we can, uh, definitely use that. And also, uh, we can show that, uh,
+[0:44:46] And also, uh, we can show that, uh, under, uh,
+[0:44:47] under, uh, you know, very similar conditions for
+[0:44:49] you know, very similar conditions for QDE, we we can also show that, uh, this
+[0:44:52] QDE, we we can also show that, uh, this LDML estimator for, uh, local quantile
+[0:44:55] LDML estimator for, uh, local quantile treatment effect estimator is also
+[0:44:57] treatment effect estimator is also asymptotically normal, is asymptotically
+[0:44:59] asymptotically normal, is asymptotically linear and also efficient, and we can
+[0:45:01] linear and also efficient, and we can also, uh, construct a confidence
+[0:45:03] also, uh, construct a confidence intervals that are asymptotically valid,
+[0:45:06] intervals that are asymptotically valid, uh, in a similar way.
+[0:45:08] uh, in a similar way. So,
+[0:45:13] besides the quantiles and also the local quantiles, we actually also have a
+[0:45:15] quantiles, we actually also have a general theory, uh, for solving, uh,
+[0:45:18] general theory, uh, for solving, uh, for using localized device machinery for
+[0:45:20] for using localized device machinery for estimating estimation and inference with
+[0:45:22] estimating estimation and inference with a, uh, generic non-linear orthogonal
+[0:45:25] a, uh, generic non-linear orthogonal estimation equation uh, that involves
+[0:45:27] estimation equation uh, that involves some nuisance that depends on the
+[0:45:29] some nuisance that depends on the estimate itself. And we only need this
+[0:45:32] estimate itself. And we only need this orthogonality condition and also generic
+[0:45:34] orthogonality condition and also generic read conditions for the nuisance
+[0:45:36] read conditions for the nuisance estimation.
+[0:45:37] estimation. And we already presented one uh,
+[0:45:39] And we already presented one uh, example, uh, two examples. Uh, the first
+[0:45:41] example, uh, two examples. Uh, the first one is the QT estimation, and then we
+[0:45:43] one is the QT estimation, and then we can actually consider more general uh,
+[0:45:45] can actually consider more general uh, parameters defined by, uh, some
+[0:45:47] parameters defined by, uh, some estimation equation, uh, for the
+[0:45:50] estimation equation, uh, for the potential outcomes. And under the
+[0:45:52] potential outcomes. And under the unconfoundedness assumption, we can show
+[0:45:54] unconfoundedness assumption, we can show that, uh, uh, you know, it is pretty
+[0:45:56] that, uh, uh, you know, it is pretty well known that the efficient estimation
+[0:45:57] well known that the efficient estimation equation uh, satisfy this orthogonality
+[0:45:59] equation uh, satisfy this orthogonality condition.
+[0:46:01] condition. And another example is like a
+[0:46:02] And another example is like a generalization for uh,
+[0:46:04] generalization for uh, local quantile treatment effect where we
+[0:46:06] local quantile treatment effect where we can consider this sort of IV setting
+[0:46:09] can consider this sort of IV setting where the estimation equation is defined
+[0:46:11] where the estimation equation is defined for the compliance
+[0:46:13] for the compliance the complier population. And again, you
+[0:46:16] the complier population. And again, you know, the efficient estimation equation
+[0:46:18] know, the efficient estimation equation would satisfy the orthogonality
+[0:46:20] would satisfy the orthogonality orthogonality condition. So in this way,
+[0:46:22] orthogonality condition. So in this way, you know, our framework provides a
+[0:46:23] you know, our framework provides a pretty generic and a unified recipe for
+[0:46:27] pretty generic and a unified recipe for solving a large family of problems
+[0:46:29] solving a large family of problems that's common in
+[0:46:31] that's common in causal inference and the missing data
+[0:46:32] causal inference and the missing data canonical problems.
+[0:46:34] canonical problems. All right, so
+[0:46:36] All right, so let me speed up a little bit for the
+[0:46:37] let me speed up a little bit for the empirical part.
+[0:46:39] empirical part. Uh so here
+[0:46:40] Uh so here basically we consider estimating the
+[0:46:44] basically we consider estimating the local quantile treatment effect using
+[0:46:45] local quantile treatment effect using pretty
+[0:46:47] pretty classic example about effects of 401k
+[0:46:51] classic example about effects of 401k participation on people's net assets.
+[0:46:54] participation on people's net assets. And here the streaming variable
+[0:46:55] And here the streaming variable participation might be confounded with
+[0:46:57] participation might be confounded with wealth. So previous studies considered
+[0:46:59] wealth. So previous studies considered using the 401k eligibility as an
+[0:47:02] using the 401k eligibility as an instrument for that. And in previous
+[0:47:04] instrument for that. And in previous studies, like Chernozhukov and Hansen
+[0:47:06] studies, like Chernozhukov and Hansen considered like a low dimensional linear
+[0:47:08] considered like a low dimensional linear models.
+[0:47:09] models. And then
+[0:47:11] And then uh and this paper
+[0:47:13] uh and this paper you know, extends that and
+[0:47:15] you know, extends that and include more high order interaction
+[0:47:17] include more high order interaction terms in order to make the model more
+[0:47:19] terms in order to make the model more flexible. But again, they need to
+[0:47:21] flexible. But again, they need to estimate the many many Lasso's on a
+[0:47:23] estimate the many many Lasso's on a discretized
+[0:47:24] discretized grid of betas. Um and also their results
+[0:47:27] grid of betas. Um and also their results are kind of specific to Lasso's. And the
+[0:47:29] are kind of specific to Lasso's. And the major contribution Chernozhukov et al.
+[0:47:31] major contribution Chernozhukov et al. uh extend you know, this idea to generic
+[0:47:33] uh extend you know, this idea to generic black box methods. But in their
+[0:47:35] black box methods. But in their empirical study, uh they only tackled
+[0:47:37] empirical study, uh they only tackled averages. And here we consider using
+[0:47:40] averages. And here we consider using like localized debiased machine learning
+[0:47:42] like localized debiased machine learning to do inference and also estimation for
+[0:47:45] to do inference and also estimation for QTE and AQTE using a variety of black
+[0:47:48] QTE and AQTE using a variety of black box regression methods.
+[0:47:50] box regression methods. So for the interest of time, let me only
+[0:47:52] So for the interest of time, let me only show you one result here.
+[0:47:54] show you one result here. Um
+[0:47:55] Um So here we estimate the local quantile
+[0:47:57] So here we estimate the local quantile treatment effects corresponding to
+[0:47:59] treatment effects corresponding to different quantile levels using our
+[0:48:01] different quantile levels using our estimator where we estimated using by
+[0:48:04] estimator where we estimated using by using different types of estimators like
+[0:48:06] using different types of estimators like lasso, neural nets, and boosting. And we
+[0:48:08] lasso, neural nets, and boosting. And we also use different number of folds in
+[0:48:11] also use different number of folds in cross-fitting. Uh so these are the
+[0:48:13] cross-fitting. Uh so these are the estimates and we can see that uh
+[0:48:16] estimates and we can see that uh uh when we use, you know, the the
+[0:48:19] uh when we use, you know, the the estimates are pretty stable across
+[0:48:21] estimates are pretty stable across different
+[0:48:22] different uh number of folds.
+[0:48:24] uh number of folds. And also when we change the uh nuisance
+[0:48:26] And also when we change the uh nuisance estimators, um you know, the results are
+[0:48:29] estimators, um you know, the results are roughly similar which kind of shows the
+[0:48:31] roughly similar which kind of shows the robustness of our method uh even though
+[0:48:34] robustness of our method uh even though we only target, you know,
+[0:48:36] we only target, you know, our nuisance at a single point.
+[0:48:38] our nuisance at a single point. Um
+[0:48:40] Um and also we have some plots here about
+[0:48:43] and also we have some plots here about the, you know, the whole curve for the
+[0:48:45] the, you know, the whole curve for the contact local quantile treatment effect.
+[0:48:47] contact local quantile treatment effect. Um so the punchline here I think is that
+[0:48:49] Um so the punchline here I think is that the uh the results are actually pretty
+[0:48:51] the uh the results are actually pretty similar to um to Adam's paper's results.
+[0:48:56] similar to um to Adam's paper's results. Um but here, arguably, our uh estimate
+[0:48:59] Um but here, arguably, our uh estimate is much simpler to implement and at the
+[0:49:01] is much simpler to implement and at the same time uh this result also shows that
+[0:49:04] same time uh this result also shows that you know, uh and this is for this
+[0:49:06] you know, uh and this is for this example, quantile treatment effect is
+[0:49:07] example, quantile treatment effect is like a pretty uh informative measure
+[0:49:10] like a pretty uh informative measure because it indeed reveals, you know,
+[0:49:12] because it indeed reveals, you know, these variations of the causal effect,
+[0:49:14] these variations of the causal effect, you know, over different uh quantile
+[0:49:17] you know, over different uh quantile levels.
+[0:49:18] levels. All right. So,
+[0:49:21] All right. So, we also have some actual uh results for
+[0:49:24] we also have some actual uh results for QTE estimation, uh but for the interest
+[0:49:26] QTE estimation, uh but for the interest of time, let me just uh skip them here
+[0:49:28] of time, let me just uh skip them here because their patterns are kind of very
+[0:49:30] because their patterns are kind of very similar.
+[0:49:32] similar. So, finally, let me conclude our talk
+[0:49:35] So, finally, let me conclude our talk here.
+[0:49:36] here. So, here we consider estimating the QTE
+[0:49:38] So, here we consider estimating the QTE and also
+[0:49:39] and also L QTE that are quite important in in
+[0:49:42] L QTE that are quite important in in future studies, uh especially when the
+[0:49:44] future studies, uh especially when the outcome distribution can be skewed.
+[0:49:46] outcome distribution can be skewed. Uh and these quantities are uh kind of
+[0:49:48] Uh and these quantities are uh kind of more difficult to estimate, especially
+[0:49:50] more difficult to estimate, especially if you have like a high-dimensional
+[0:49:52] if you have like a high-dimensional covariance, uh or some other compact
+[0:49:54] covariance, uh or some other compact settings. And the state-of-the-art DML
+[0:49:56] settings. And the state-of-the-art DML method requires us to estimate a whole
+[0:49:59] method requires us to estimate a whole continuum of nuisance, which might be
+[0:50:01] continuum of nuisance, which might be quite challenging, especially that the
+[0:50:03] quite challenging, especially that the it doesn't fit into the uh usual
+[0:50:05] it doesn't fit into the uh usual supervised learning framework in ML
+[0:50:07] supervised learning framework in ML pretty well.
+[0:50:08] pretty well. And then we propose to use this
+[0:50:11] And then we propose to use this localization approach to localize the
+[0:50:13] localization approach to localize the nuisance estimation only at a single
+[0:50:15] nuisance estimation only at a single point based on a rough initial guess.
+[0:50:18] point based on a rough initial guess. And then our estimator can still achieve
+[0:50:20] And then our estimator can still achieve the some particle uh behavior that's
+[0:50:23] the some particle uh behavior that's like the oracle estimation using the
+[0:50:24] like the oracle estimation using the true nuisance under only generic
+[0:50:26] true nuisance under only generic conditions for the, you know, black-box
+[0:50:29] conditions for the, you know, black-box regression methods for the nuisance
+[0:50:30] regression methods for the nuisance estimation. And the we do not need to
+[0:50:33] estimation. And the we do not need to fit many, many uh nuisance. We do not
+[0:50:35] fit many, many uh nuisance. We do not need to use the some ad hoc
+[0:50:38] need to use the some ad hoc discretization approach, uh which might
+[0:50:40] discretization approach, uh which might be um s- you know, sort of more uh easy
+[0:50:44] be um s- you know, sort of more uh easy to sort of easier to implement in
+[0:50:46] to sort of easier to implement in practice.
+[0:50:47] practice. And uh
+[0:50:48] And uh we also have more general theory about
+[0:50:51] we also have more general theory about uh
+[0:50:52] uh you know, any sort of a non-linear
+[0:50:54] you know, any sort of a non-linear orthogonal estimation equation, whenever
+[0:50:56] orthogonal estimation equation, whenever the nuisance might depend on the S-model
+[0:50:58] the nuisance might depend on the S-model itself. And here we basically need a uh
+[0:51:01] itself. And here we basically need a uh slightly stronger Fréchet derivative
+[0:51:03] slightly stronger Fréchet derivative orthogonality condition, uh which is
+[0:51:05] orthogonality condition, uh which is actually satisfied for a large family of
+[0:51:07] actually satisfied for a large family of problems in causal inference and the
+[0:51:09] problems in causal inference and the missing data problems.
+[0:51:11] missing data problems. So, I guess that's all I want to talk
+[0:51:13] So, I guess that's all I want to talk about today. Uh so, thank you so much
+[0:51:15] about today. Uh so, thank you so much for listening.
+[0:51:21] Fantastic. Uh thank you Jiao Ge and Nathan for the great talk and presenting
+[0:51:23] Nathan for the great talk and presenting your work here. Uh we're now switching
+[0:51:25] your work here. Uh we're now switching over to the discussion, so we will have
+[0:51:28] over to the discussion, so we will have Alexandra Belloni, and after that uh
+[0:51:30] Alexandra Belloni, and after that uh Nathan and Jiao Ge can respond.
+[0:51:35] Nathan and Jiao Ge can respond. So, I'm now switching over to you,
+[0:51:36] So, I'm now switching over to you, Alexandra, so you can unmute yourself.
+[0:51:38] Alexandra, so you can unmute yourself. Yeah. Thank you. Can I uh to share my
+[0:51:40] Yeah. Thank you. Can I uh to share my screen?
+[0:51:57] Okay. Can So, first I like to thank you
+[0:51:59] So, first I like to thank you for the very
+[0:52:02] for the very Nathan Jerry for the very
+[0:52:04] Nathan Jerry for the very good presentation.
+[0:52:06] good presentation. It was a pleasure to read
+[0:52:08] It was a pleasure to read to go over the paper.
+[0:52:10] to go over the paper. So,
+[0:52:13] So, in a nutshell, right? The The goal of
+[0:52:15] in a nutshell, right? The The goal of the paper
+[0:52:16] the paper wants to estimate
+[0:52:18] wants to estimate propose some
+[0:52:19] propose some efficient increase
+[0:52:21] efficient increase right? In the presence of this
+[0:52:22] right? In the presence of this high-dimensional nuisance parameters,
+[0:52:24] high-dimensional nuisance parameters, right? So, so we can actually blend all
+[0:52:26] right? So, so we can actually blend all these nice
+[0:52:27] these nice machine learning tools
+[0:52:29] machine learning tools and still produces
+[0:52:33] and still produces asymptotically valid confidence
+[0:52:34] asymptotically valid confidence intervals that we we like to measure
+[0:52:35] intervals that we we like to measure impact.
+[0:52:37] impact. So,
+[0:52:38] So, it has been motivated by causal effect
+[0:52:40] it has been motivated by causal effect estimation. There are plenty of
+[0:52:41] estimation. There are plenty of applications, but it's certainly
+[0:52:43] applications, but it's certainly applicable to any other setting. It's a
+[0:52:45] applicable to any other setting. It's a very nice uh framework, pretty much uh
+[0:52:49] very nice uh framework, pretty much uh aligned with the
+[0:52:51] aligned with the uh work of double machine learning that
+[0:52:53] uh work of double machine learning that yes, has a great application in causal
+[0:52:55] yes, has a great application in causal causal inference, but it's also uh
+[0:52:58] causal inference, but it's also uh good in other settings.
+[0:53:01] good in other settings. And right, so the idea we have these IID
+[0:53:04] And right, so the idea we have these IID data.
+[0:53:05] data. We have some parameter of interest we
+[0:53:07] We have some parameter of interest we like to estimate.
+[0:53:08] like to estimate. And the main challenge are the handling
+[0:53:10] And the main challenge are the handling of these parameters that are
+[0:53:12] of these parameters that are high-dimensional.
+[0:53:14] high-dimensional. And as Nathan made a very good case and
+[0:53:17] And as Nathan made a very good case and has been tested over and over,
+[0:53:19] has been tested over and over, the orthogonal moment conditions have
+[0:53:21] the orthogonal moment conditions have been incredibly useful to make this
+[0:53:25] been incredibly useful to make this uh blend between causal inference and
+[0:53:27] uh blend between causal inference and machine learning. That's kind of the uh
+[0:53:30] machine learning. That's kind of the uh the really what opened up these
+[0:53:32] the really what opened up these intrinsic bias to machine learning
+[0:53:34] intrinsic bias to machine learning methods that would by design kill any
+[0:53:37] methods that would by design kill any hope of
+[0:53:38] hope of building confidence intervals.
+[0:53:40] building confidence intervals. Orthogonal moment conditions really open
+[0:53:42] Orthogonal moment conditions really open up this nice
+[0:53:44] up this nice uh path do. to do.
+[0:53:49] And this is by no means new, right? This has been There's a huge huge literature
+[0:53:51] has been There's a huge huge literature um
+[0:53:52] um going back to of course uh Neyman in the
+[0:53:54] going back to of course uh Neyman in the '50s that motivates
+[0:53:56] '50s that motivates uh this
+[0:53:58] uh this orthogonal moment conditions to reduce
+[0:54:00] orthogonal moment conditions to reduce the influence of nuisance parameters.
+[0:54:03] the influence of nuisance parameters. And same parametric non-parametric
+[0:54:05] And same parametric non-parametric estimations have been uh used a lot
+[0:54:08] estimations have been uh used a lot in statistical metrics. And
+[0:54:11] in statistical metrics. And more recently, it's
+[0:54:14] more recently, it's really the push towards machine machine
+[0:54:17] really the push towards machine machine learning was done uh in in a several
+[0:54:20] learning was done uh in in a several papers that have been incorporating
+[0:54:22] papers that have been incorporating these
+[0:54:23] these using size.
+[0:54:25] using size. But it's really a huge literature. I do
+[0:54:27] But it's really a huge literature. I do want to apologize uh
+[0:54:30] want to apologize uh for many omissions that are uh happening
+[0:54:32] for many omissions that are uh happening here. And
+[0:54:34] here. And right?
+[0:54:35] right? There was the the machine learning that
+[0:54:38] There was the the machine learning that was a nice uh
+[0:54:40] was a nice uh just
+[0:54:41] just the machine learning was a nice way to
+[0:54:44] the machine learning was a nice way to apply these with sample splitting
+[0:54:47] apply these with sample splitting uh
+[0:54:47] uh that has been extremely well well
+[0:54:50] that has been extremely well well received and it has a for a good reason.
+[0:54:52] received and it has a for a good reason. And there are even more omissions after
+[0:54:55] And there are even more omissions after that that came and have been applied.
+[0:54:59] that that came and have been applied. So,
+[0:55:00] So, in the
+[0:55:02] in the the paper, right? A key issue is that
+[0:55:04] the paper, right? A key issue is that one of these nuisance parameters, right?
+[0:55:07] one of these nuisance parameters, right? It depends precisely on the what we want
+[0:55:11] It depends precisely on the what we want to estimate. Right? So, that pulls some
+[0:55:13] to estimate. Right? So, that pulls some challenges as uh maybe you describe.
+[0:55:16] challenges as uh maybe you describe. And
+[0:55:17] And but then again, what makes it
+[0:55:21] but then again, what makes it possible to achieve is the fact that
+[0:55:23] possible to achieve is the fact that since
+[0:55:24] since if we're using these orthogonal moment
+[0:55:26] if we're using these orthogonal moment conditions, the dependence on the
+[0:55:28] conditions, the dependence on the nuisance parameter itself is going to be
+[0:55:31] nuisance parameter itself is going to be small in a local neighborhood,
+[0:55:33] small in a local neighborhood, as long as
+[0:55:35] as long as we have a rough estimate of this uh
+[0:55:37] we have a rough estimate of this uh initial point.
+[0:55:39] initial point. We can replace with this estimator.
+[0:55:42] We can replace with this estimator. If the dependence of this function is
+[0:55:45] If the dependence of this function is is smooth with respect to your uh
+[0:55:49] is smooth with respect to your uh estimator, then you you are in business
+[0:55:51] estimator, then you you are in business again, right? So, that's a very
+[0:55:53] again, right? So, that's a very uh he found very nice examples where
+[0:55:57] uh he found very nice examples where you can use these initial crude
+[0:55:59] you can use these initial crude estimators
+[0:56:01] estimators for this data and here should be a data.
+[0:56:04] for this data and here should be a data. Apologies.
+[0:56:06] Apologies. And then
+[0:56:09] And then you are in business then you can uh
+[0:56:11] you are in business then you can uh proceed to estimate.
+[0:56:13] proceed to estimate. They also provide a very nice uh
+[0:56:16] They also provide a very nice uh kind of explicit data splitting
+[0:56:18] kind of explicit data splitting procedure to account for
+[0:56:20] procedure to account for uh
+[0:56:21] uh for this initial estimator that you
+[0:56:22] for this initial estimator that you have.
+[0:56:23] have. And this really brings you close to uh
+[0:56:26] And this really brings you close to uh black box black box regression methods
+[0:56:29] black box black box regression methods in machine learning which you want to
+[0:56:31] in machine learning which you want to leverage, right? So, you want to be able
+[0:56:33] leverage, right? So, you want to be able to uh
+[0:56:40] use all the tools that are available and these uh constructive schemes that will
+[0:56:42] these uh constructive schemes that will help combine and push you forward.
+[0:56:46] help combine and push you forward. So, let me this is kind of a nutshell
+[0:56:48] So, let me this is kind of a nutshell and I know I'm I don't have much time,
+[0:56:50] and I know I'm I don't have much time, but
+[0:56:52] but so, let me really emphasize that the
+[0:56:54] so, let me really emphasize that the assumption that Nathan explicitly wrote
+[0:56:58] assumption that Nathan explicitly wrote of the J diamond being equal to J star,
+[0:57:00] of the J diamond being equal to J star, right? It really holds uh
+[0:57:03] right? It really holds uh holds
+[0:57:09] quite generally. And
+[0:57:11] And it's uh it's an important takeaway of
+[0:57:13] it's uh it's an important takeaway of the talk.
+[0:57:14] the talk. Because it's
+[0:57:16] Because it's what he's saying is that in the nuisance
+[0:57:20] what he's saying is that in the nuisance function space definition
+[0:57:23] function space definition you can play a lot.
+[0:57:25] you can play a lot. So, if there's any overlap with the
+[0:57:29] So, if there's any overlap with the uh
+[0:57:30] uh other the you want to estimate you can
+[0:57:33] other the you want to estimate you can redefine them in different ways. So, you
+[0:57:34] redefine them in different ways. So, you can play You can choose very different
+[0:57:36] can play You can choose very different losers functions.
+[0:57:39] losers functions. So, you can try to take advantage of
+[0:57:41] So, you can try to take advantage of this mission procedure different ways.
+[0:57:43] this mission procedure different ways. So, for example, it could simplify
+[0:57:44] So, for example, it could simplify computation if you can plug in crude
+[0:57:48] computation if you can plug in crude estimates there
+[0:57:50] estimates there that will not feed back in your loop.
+[0:57:52] that will not feed back in your loop. So, but there are
+[0:57:54] So, but there are You have a degree of extra degree of
+[0:57:55] You have a degree of extra degree of freedom there that you want to take take
+[0:57:57] freedom there that you want to take take advantage when you are designing for
+[0:57:58] advantage when you are designing for this mission question.
+[0:58:01] this mission question. And
+[0:58:02] And this has showed up in other places,
+[0:58:04] this has showed up in other places, right? Especially when you do with
+[0:58:06] right? Especially when you do with multivariate
+[0:58:08] multivariate parameters. Like if theta one has many
+[0:58:10] parameters. Like if theta one has many components, it's very natural to think
+[0:58:12] components, it's very natural to think that one of the components influence the
+[0:58:14] that one of the components influence the other one and vice versa and you care
+[0:58:16] other one and vice versa and you care about all of them. Right? So, there is
+[0:58:19] about all of them. Right? So, there is some experience that your losers
+[0:58:21] some experience that your losers functions are depending on your
+[0:58:24] functions are depending on your uh
+[0:58:26] uh on the actual parameters you want to
+[0:58:28] on the actual parameters you want to estimate later on.
+[0:58:30] estimate later on. And at the same time,
+[0:58:32] And at the same time, you can also think about iterative
+[0:58:34] you can also think about iterative schemes, right? Once you estimate
+[0:58:37] schemes, right? Once you estimate the
+[0:58:38] the uh you get first estimators, you could
+[0:58:40] uh you get first estimators, you could plug back
+[0:58:42] plug back uh
+[0:58:43] uh once you get is the bias estimator, you
+[0:58:45] once you get is the bias estimator, you can plug back them into the losers
+[0:58:47] can plug back them into the losers functions themselves and see how this
+[0:58:49] functions themselves and see how this iteration goes, right?
+[0:58:51] iteration goes, right? Now, what happens is you have all this
+[0:58:54] Now, what happens is you have all this freedom
+[0:58:56] freedom and it all is first-order asymptotics
+[0:58:59] and it all is first-order asymptotics with the same.
+[0:59:00] with the same. So, it doesn't doesn't really matter
+[0:59:02] So, it doesn't doesn't really matter from the first-order asymptotics, right?
+[0:59:04] from the first-order asymptotics, right? What is interesting to to investigate
+[0:59:07] What is interesting to to investigate further
+[0:59:08] further is is there any choice that has an
+[0:59:11] is is there any choice that has an impact on higher-order asymptotics?
+[0:59:13] impact on higher-order asymptotics? Right? So, when you're doing these
+[0:59:14] Right? So, when you're doing these decisions for to gain computation,
+[0:59:17] decisions for to gain computation, are you
+[0:59:18] are you giving up something
+[0:59:20] giving up something in terms of higher-order asymptotics
+[0:59:22] in terms of higher-order asymptotics that could be important in your setting?
+[0:59:24] that could be important in your setting? So, this is a I think it's a
+[0:59:27] So, this is a I think it's a does not belong in this in this paper.
+[0:59:28] does not belong in this in this paper. It's just a potential
+[0:59:30] It's just a potential question if the authors have a comment
+[0:59:32] question if the authors have a comment on that would be would be interesting.
+[0:59:37] So, yes, so I remember I read a few times
+[0:59:39] yes, so I remember I read a few times like this in in this continuum of lasso
+[0:59:42] like this in in this continuum of lasso that showed up in this earlier paper.
+[0:59:44] that showed up in this earlier paper. And it is a to some extent is a way to
+[0:59:47] And it is a to some extent is a way to uh
+[0:59:49] uh to be able to achieve a
+[0:59:51] to be able to achieve a first rough estimator
+[0:59:53] first rough estimator in the process.
+[0:59:54] in the process. And so let me just comment that
+[0:59:57] And so let me just comment that you don't need to solve a continuum of
+[0:59:59] you don't need to solve a continuum of lasso because you only observe a finite
+[1:00:01] lasso because you only observe a finite number
+[1:00:03] number of values. So, anything between those is
+[1:00:05] of values. So, anything between those is the same. So,
+[1:00:07] the same. So, it's not a continuum. That that but
+[1:00:09] it's not a continuum. That that but that's a separate point.
+[1:00:11] that's a separate point. Um
+[1:00:12] Um but
+[1:00:13] but it's
+[1:00:15] it's the question is would be
+[1:00:17] the question is would be Right, so it's really about this initial
+[1:00:19] Right, so it's really about this initial estimator. So, if you can
+[1:00:21] estimator. So, if you can comment a little bit how general you
+[1:00:23] comment a little bit how general you would be
+[1:00:24] would be on that uh aspect in terms of
+[1:00:27] on that uh aspect in terms of initial estimator would be good.
+[1:00:29] initial estimator would be good. It seems that you have again as the
+[1:00:31] It seems that you have again as the double machine learning to uh
+[1:00:34] double machine learning to uh framework, you have a very nice connect
+[1:00:37] framework, you have a very nice connect with five-dimensional central limit
+[1:00:38] with five-dimensional central limit theorems.
+[1:00:39] theorems. So, uh
+[1:00:41] So, uh just want to touch there if you if you
+[1:00:43] just want to touch there if you if you can comment on that.
+[1:00:45] can comment on that. And then there is one technical question
+[1:00:46] And then there is one technical question you don't need to answer now, just
+[1:00:48] you don't need to answer now, just take offline uh
+[1:00:51] take offline uh given the time is about ques- uh
+[1:00:55] given the time is about ques- uh question 20 in the paper
+[1:00:58] question 20 in the paper on the remark that has some dependence
+[1:01:01] on the remark that has some dependence that
+[1:01:03] that I might be missing something, but this
+[1:01:04] I might be missing something, but this this is less important than than the the
+[1:01:07] this is less important than than the the other ones.
+[1:01:09] other ones. So, I might be a little bit
+[1:01:11] So, I might be a little bit uh over time,
+[1:01:13] uh over time, but if especially if you could give me
+[1:01:15] but if especially if you could give me some comments potentially on the higher
+[1:01:17] some comments potentially on the higher asymptotics if you have any views there,
+[1:01:20] asymptotics if you have any views there, it would be great.
+[1:01:28] Thanks for the nice discussion, Alexander and Nathan Jørgensen.
+[1:01:31] Alexander and Nathan Jørgensen. Do you want to respond?
+[1:01:37] So, I I guess I can respond a little bit on
+[1:01:40] I I guess I can respond a little bit on the tackle condition
+[1:01:43] the tackle condition about the equation 20 and also on the
+[1:01:45] about the equation 20 and also on the higher order of symptomatics. So, first
+[1:01:47] higher order of symptomatics. So, first of all for for the equation 20,
+[1:01:50] of all for for the equation 20, so this is actually all
+[1:01:53] so this is actually all a mistake because we were putting things
+[1:01:55] a mistake because we were putting things together in a sort of last minute. So,
+[1:01:57] together in a sort of last minute. So, actually in the latest version which we
+[1:01:59] actually in the latest version which we updated yesterday,
+[1:02:01] updated yesterday, this mistake was already fixed. So, here
+[1:02:04] this mistake was already fixed. So, here we actually don't really need the this
+[1:02:07] we actually don't really need the this you know this
+[1:02:09] you know this quadratic moment you know this square
+[1:02:11] quadratic moment you know this square moment
+[1:02:12] moment to be upper bounded by the
+[1:02:15] to be upper bounded by the you know the square of the distance
+[1:02:17] you know the square of the distance between theta and the theta star. We
+[1:02:19] between theta and the theta star. We actually only need that to be
+[1:02:20] actually only need that to be continuous. We only need the exponent to
+[1:02:23] continuous. We only need the exponent to be for example
+[1:02:25] be for example an arbitrary delta that's larger than
+[1:02:27] an arbitrary delta that's larger than zero. It doesn't need to be two in order
+[1:02:30] zero. It doesn't need to be two in order to ensure the whole conclusion holds
+[1:02:34] to ensure the whole conclusion holds because here you know the whole reason
+[1:02:36] because here you know the whole reason why we have this kind of
+[1:02:38] why we have this kind of tackle conditions because we want to
+[1:02:40] tackle conditions because we want to ensure that
+[1:02:41] ensure that our
+[1:02:42] our I think our asymptotic variance estimate
+[1:02:44] I think our asymptotic variance estimate is valid so that we can do inference.
+[1:02:46] is valid so that we can do inference. So, in that case we only need
+[1:02:48] So, in that case we only need consistency. We don't really need like a
+[1:02:50] consistency. We don't really need like a you know sort of rate control. So, here
+[1:02:53] you know sort of rate control. So, here we don't really need like a quadratic
+[1:02:56] we don't really need like a quadratic upper bound. So, for example for the
+[1:02:59] upper bound. So, for example for the bounding the in last night when I used
+[1:03:02] bounding the in last night when I used like a
+[1:03:03] like a absolute value rather than the squared
+[1:03:05] absolute value rather than the squared of theta one minus theta one star.
+[1:03:11] Okay, sounds good. Yeah, and for the higher order of
+[1:03:13] Yeah, and for the higher order of symptomatics I think that's really a
+[1:03:15] symptomatics I think that's really a interesting question.
+[1:03:17] interesting question. We don't really think of
+[1:03:19] We don't really think of much of on that, I think. Um because
+[1:03:22] much of on that, I think. Um because currently, you know,
+[1:03:24] currently, you know, when we control the influence of the
+[1:03:27] when we control the influence of the estimate of the
+[1:03:28] estimate of the you know, the influence of using the
+[1:03:31] you know, the influence of using the initial estimator, it's bounded in
+[1:03:34] initial estimator, it's bounded in somewhat a pretty crude way in that way
+[1:03:37] somewhat a pretty crude way in that way you use, you know, the continuity of the
+[1:03:40] you use, you know, the continuity of the sort of a niche continuity of the
+[1:03:41] sort of a niche continuity of the nuisance with with respect to theta.
+[1:03:44] nuisance with with respect to theta. So, you know, that crude analysis really
+[1:03:47] So, you know, that crude analysis really uh probably
+[1:03:49] uh probably won't give me give us much information
+[1:03:51] won't give me give us much information about its impact on the high order
+[1:03:53] about its impact on the high order asymptotics and such, but I think this
+[1:03:55] asymptotics and such, but I think this is a really really interesting question
+[1:03:57] is a really really interesting question that is worth exploring, especially
+[1:03:59] that is worth exploring, especially given your comments on how we can, you
+[1:04:02] given your comments on how we can, you know, sort of play around with all of
+[1:04:04] know, sort of play around with all of these
+[1:04:05] these nuisances and the few them in different
+[1:04:07] nuisances and the few them in different ways. It's really interesting to see
+[1:04:08] ways. It's really interesting to see like how
+[1:04:10] like how you know, what's the trade-off of using
+[1:04:12] you know, what's the trade-off of using like different estimators. Um
+[1:04:16] like different estimators. Um like how we view the nuisance
+[1:04:17] like how we view the nuisance parameters. So, yeah, I don't really
+[1:04:20] parameters. So, yeah, I don't really have answer for that, but I I just want
+[1:04:22] have answer for that, but I I just want to say that I really appreciate this
+[1:04:24] to say that I really appreciate this question.
+[1:04:33] Thanks. Nathan, do you also want to add something?
+[1:04:34] something? Uh no, I don't have a an answer to that
+[1:04:37] Uh no, I don't have a an answer to that question either. I also think it's
+[1:04:38] question either. I also think it's interesting, but I think it's it's just
+[1:04:41] interesting, but I think it's it's just I think it's beyond the analysis right
+[1:04:44] I think it's beyond the analysis right now, uh but I want to say thank you to
+[1:04:47] now, uh but I want to say thank you to Alex and thank you for really two really
+[1:04:48] Alex and thank you for really two really good catches, like a mistake that we
+[1:04:50] good catches, like a mistake that we found as well. And and that you're
+[1:04:53] found as well. And and that you're right, it's not a continuum, you only
+[1:04:55] right, it's not a continuum, you only have to do capital N lassos.
+[1:04:57] have to do capital N lassos. Um
+[1:04:58] Um That's true.
+[1:05:01] That's true. Yeah, I do not expect an answer for the
+[1:05:03] Yeah, I do not expect an answer for the high order asymptotic. Right. It's just
+[1:05:05] high order asymptotic. Right. It's just No, but it's it's a good point to put it
+[1:05:06] No, but it's it's a good point to put it out there.
+[1:05:08] out there. And and and even simulations might start
+[1:05:11] And and and even simulations might start to reveal if there is anything there.
+[1:05:13] to reveal if there is anything there. Right? So, to to to to
+[1:05:15] Right? So, to to to to But even in simulations, it's hard to
+[1:05:17] But even in simulations, it's hard to see second-order behavior. I mean, you
+[1:05:19] see second-order behavior. I mean, you have to do like really large
+[1:05:20] have to do like really large simulations.
+[1:05:22] simulations. It's about the design, right? Yeah,
+[1:05:24] It's about the design, right? Yeah, about finding a design in which it would
+[1:05:26] about finding a design in which it would matter.
+[1:05:27] matter. But there is plenty of work on
+[1:05:28] But there is plenty of work on higher-order asymptotics, so they can
+[1:05:30] higher-order asymptotics, so they can they can even make
+[1:05:32] they can even make Absolutely.
+[1:05:34] Absolutely. All right. Great. Thank you all. I think
+[1:05:36] All right. Great. Thank you all. I think it's now slowly time to uh
+[1:05:39] it's now slowly time to uh to wrap up. So, uh
+[1:05:41] to wrap up. So, uh first uh thank you all for volunteering
+[1:05:44] first uh thank you all for volunteering today. So,
+[1:05:46] today. So, one second.
+[1:05:53] So, thank you Nathan and Shaojie for volunteering to speak today. It was very
+[1:05:54] volunteering to speak today. It was very nice presentation. Thanks Alexander for
+[1:05:57] nice presentation. Thanks Alexander for a great discussion. Also, thanks to uh
+[1:06:00] a great discussion. Also, thanks to uh Masatoshi for uh for helping out in Q&amp;A
+[1:06:02] Masatoshi for uh for helping out in Q&amp;A today.
+[1:06:05] today. All right. Um yeah, and last but not
+[1:06:07] All right. Um yeah, and last but not least, thank you all for joining. Uh
+[1:06:08] least, thank you all for joining. Uh next time uh we have we have two
+[1:06:10] next time uh we have we have two speakers. Uh we have Falco Balgagli
+[1:06:14] speakers. Uh we have Falco Balgagli Stoffi who will talk about causal rule
+[1:06:16] Stoffi who will talk about causal rule ensemble interpretable inference for
+[1:06:18] ensemble interpretable inference for heterogeneous treatment effects. And we
+[1:06:21] heterogeneous treatment effects. And we have Eli Ben Michael from UC Berkeley
+[1:06:24] have Eli Ben Michael from UC Berkeley who will talk about synthetic controls
+[1:06:26] who will talk about synthetic controls with staggered adoption. So, we are
+[1:06:28] with staggered adoption. So, we are really looking forward to with that
+[1:06:29] really looking forward to with that talk. Uh hope to see you all there, and
+[1:06:31] talk. Uh hope to see you all there, and we hope you all stay safe uh until then.
+[1:06:34] we hope you all stay safe uh until then. Thank you all for joining. Uh see you
+[1:06:36] Thank you all for joining. Uh see you see you soon.
+[1:06:39] Great job, guys. Thanks.

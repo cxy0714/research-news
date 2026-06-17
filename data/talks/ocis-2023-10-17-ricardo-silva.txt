@@ -1,0 +1,1463 @@
+[0:00:05] okay welcome everyone to this week's online Cal inference seminar uh this
+[0:00:08] online Cal inference seminar uh this week we have Ricardo Silva from UCL uh
+[0:00:11] week we have Ricardo Silva from UCL uh giving us a talk on Intervention
+[0:00:14] giving us a talk on Intervention generalization A View From Factor graph
+[0:00:16] generalization A View From Factor graph models uh our our discussion today is
+[0:00:20] models uh our our discussion today is Anish agell from Columbia University uh
+[0:00:23] Anish agell from Columbia University uh the Q&amp;A will be handled by Emma today um
+[0:00:27] the Q&amp;A will be handled by Emma today um and Emma will let you explain the rules
+[0:00:37] thanks uh chinan so yes um please submit your questions throughout the talk uh
+[0:00:40] your questions throughout the talk uh please use the Q&amp;A form at the bottom of
+[0:00:42] please use the Q&amp;A form at the bottom of your screen to submit it not the chat uh
+[0:00:45] your screen to submit it not the chat uh we'll moderate well we'll kind of watch
+[0:00:48] we'll moderate well we'll kind of watch them rolling in and when Ricardo makes a
+[0:00:50] them rolling in and when Ricardo makes a pause uh we'll ask your
+[0:00:53] pause uh we'll ask your questions uh this is an old format
+[0:00:55] questions uh this is an old format seminar so please uh feel free to just
+[0:00:59] seminar so please uh feel free to just keep submitting your question questions
+[0:01:01] keep submitting your question questions throughout and um yeah hope you
+[0:01:05] throughout and um yeah hope you enjoy okay Ricardo I think you can start
+[0:01:18] sharing all right we can see it right yes we can see it yeah looks good
+[0:01:23] right yes we can see it yeah looks good okay oh let's start thank you very much
+[0:01:26] okay oh let's start thank you very much for the introduction for the
+[0:01:28] for the introduction for the invation say join to work up a few
+[0:01:30] invation say join to work up a few collaborators of M from UC Kings
+[0:01:34] collaborators of M from UC Kings college so I'm going to introduce what
+[0:01:37] college so I'm going to introduce what I'm about to talk about an example this
+[0:01:39] I'm about to talk about an example this is a wellknown example by uh some people
+[0:01:41] is a wellknown example by uh some people that work in graphical models where we
+[0:01:44] that work in graphical models where we have a assistant biology problem there
+[0:01:47] have a assistant biology problem there are some concentrations of proteins and
+[0:01:49] are some concentrations of proteins and lipids that are measured at cell level
+[0:01:52] lipids that are measured at cell level they have all sorts of perations to the
+[0:01:54] they have all sorts of perations to the metabolism that cell so it could have
+[0:01:56] metabolism that cell so it could have some Inhibitors or some other soft
+[0:02:00] some Inhibitors or some other soft stimuli that is added to the cells so
+[0:02:02] stimuli that is added to the cells so the act the behavior the cell will
+[0:02:04] the act the behavior the cell will change so here's a kind of high level
+[0:02:07] change so here's a kind of high level diagram showing some of these little
+[0:02:10] diagram showing some of these little green circles indicating types of
+[0:02:13] green circles indicating types of perations and the red ones are the types
+[0:02:16] perations and the red ones are the types of um
+[0:02:17] of um Inhibitors you want to know what will
+[0:02:19] Inhibitors you want to know what will happen the concentration of these
+[0:02:22] happen the concentration of these elements in the cell when those
+[0:02:24] elements in the cell when those perturbations take
+[0:02:26] perturbations take place but in principle we have maybe a
+[0:02:29] place but in principle we have maybe a large combinatory spaces of possible
+[0:02:31] large combinatory spaces of possible perations you have you may ask yourself
+[0:02:34] perations you have you may ask yourself given that some combinations might not
+[0:02:36] given that some combinations might not be in that data how what will happen if
+[0:02:38] be in that data how what will happen if I actually want to perform
+[0:02:41] I actually want to perform there this could in principle be done
+[0:02:44] there this could in principle be done you just fit a sort of model that Maps
+[0:02:47] you just fit a sort of model that Maps the
+[0:02:48] the perturbation status of past actions to
+[0:02:51] perturbation status of past actions to particular outcomes of interest but his
+[0:02:54] particular outcomes of interest but his space may be very uh large you may not
+[0:02:57] space may be very uh large you may not have any sort of good smoothness as
+[0:03:00] have any sort of good smoothness as assumption that link particular
+[0:03:01] assumption that link particular combinations of permutations in that
+[0:03:03] combinations of permutations in that data to unseen combinations that we have
+[0:03:06] data to unseen combinations that we have not done before and one extreme example
+[0:03:10] not done before and one extreme example is when you have observational data that
+[0:03:12] is when you have observational data that you do no perations at all you may want
+[0:03:14] you do no perations at all you may want to ask what would happen were to perturb
+[0:03:17] to ask what would happen were to perturb that c particular way then in this case
+[0:03:20] that c particular way then in this case you don't have basically any other
+[0:03:22] you don't have basically any other variation POs perations to rely on to be
+[0:03:25] variation POs perations to rely on to be able to make such a prediction so how
+[0:03:28] able to make such a prediction so how would you tackle this problem a
+[0:03:29] would you tackle this problem a systematic way is what I'm about to
+[0:03:33] systematic way is what I'm about to present but I'm going try to cover here
+[0:03:35] present but I'm going try to cover here not sort of completely all singing out
+[0:03:38] not sort of completely all singing out dening solution but to focus on
+[0:03:40] dening solution but to focus on particular types of generative processes
+[0:03:43] particular types of generative processes and what we can do in those cases for
+[0:03:45] and what we can do in those cases for the generative processes I'm interested
+[0:03:47] the generative processes I'm interested in are related to this type of data set
+[0:03:50] in are related to this type of data set in cell biology that may be riching
+[0:03:53] in cell biology that may be riching feedback loops so people try to learn
+[0:03:55] feedback loops so people try to learn for example some sort of CA structure
+[0:03:59] for example some sort of CA structure relating these measurements often they
+[0:04:00] relating these measurements often they fit ayylic models and they may not be
+[0:04:03] fit ayylic models and they may not be very representative what they going on
+[0:04:05] very representative what they going on because may have some sort of feedback
+[0:04:07] because may have some sort of feedback between the different parts of itself
+[0:04:09] between the different parts of itself cell also if you want to try to model
+[0:04:12] cell also if you want to try to model Dynamics you also be unlucky because in
+[0:04:14] Dynamics you also be unlucky because in many cases when I try to measure
+[0:04:16] many cases when I try to measure something like a cell if you do that
+[0:04:18] something like a cell if you do that once you destroy it so you're not able
+[0:04:20] once you destroy it so you're not able to really sample a path of any
+[0:04:23] to really sample a path of any particular indidual s long time only
+[0:04:25] particular indidual s long time only have one shot to measure
+[0:04:28] have one shot to measure things and and the peration themselves
+[0:04:31] things and and the peration themselves are not textbook clean intervention that
+[0:04:34] are not textbook clean intervention that may may have in theory they are to
+[0:04:37] may may have in theory they are to complex biological processes right this
+[0:04:39] complex biological processes right this is a table taken directly from the paper
+[0:04:41] is a table taken directly from the paper which try to provide a bit more of a
+[0:04:42] which try to provide a bit more of a level detail of what is going on when
+[0:04:45] level detail of what is going on when the say
+[0:04:46] the say theing protein
+[0:04:48] theing protein concentration we have all sorts of
+[0:04:51] concentration we have all sorts of inhibitions for example in different
+[0:04:53] inhibitions for example in different components of among a de Intervention
+[0:04:57] components of among a de Intervention which may actually affect several things
+[0:04:58] which may actually affect several things at the same time and as a matter of fact
+[0:05:01] at the same time and as a matter of fact people have tried to put these ideas to
+[0:05:03] people have tried to put these ideas to test so there are some papers like this
+[0:05:05] test so there are some papers like this old paper by Ethan Murphy where they did
+[0:05:07] old paper by Ethan Murphy where they did not assume they knew the thought of the
+[0:05:09] not assume they knew the thought of the interventions they tried to learn which
+[0:05:11] interventions they tried to learn which POS perturbations are linked which type
+[0:05:14] POS perturbations are linked which type of measurements in the cell and the
+[0:05:16] of measurements in the cell and the outcome was a very dense graph as you
+[0:05:18] outcome was a very dense graph as you can see here where this red nodes denote
+[0:05:21] can see here where this red nodes denote some sort of perturbation indicator
+[0:05:23] some sort of perturbation indicator whether you leading at rest or whether
+[0:05:25] whether you leading at rest or whether you actually adding the peration she
+[0:05:28] you actually adding the peration she just let a data driven approach find
+[0:05:30] just let a data driven approach find these links we're going to have a very
+[0:05:32] these links we're going to have a very dense set of connections sh showing that
+[0:05:35] dense set of connections sh showing that perations actually may shake up several
+[0:05:38] perations actually may shake up several variables at the same
+[0:05:40] variables at the same time so what we going to do here we do
+[0:05:43] time so what we going to do here we do assume that we have all sorts of data
+[0:05:45] assume that we have all sorts of data sets with different combinations of
+[0:05:47] sets with different combinations of interventions you're going to represent
+[0:05:49] interventions you're going to represent just as a plain Vector signal here that
+[0:05:52] just as a plain Vector signal here that encodes which type of peration you're
+[0:05:55] encodes which type of peration you're doing given this Vector Sig you want to
+[0:05:57] doing given this Vector Sig you want to know well what will happen to the to the
+[0:06:00] know well what will happen to the to the measurements that I actually make after
+[0:06:02] measurements that I actually make after adding this
+[0:06:03] adding this perations the DAT have basically single
+[0:06:06] perations the DAT have basically single snapshots of a possible stochastic
+[0:06:08] snapshots of a possible stochastic process don't measure trajectories
+[0:06:11] process don't measure trajectories measure single snapshot maybe on
+[0:06:13] measure single snapshot maybe on equilibrium maybe at a particular Upon
+[0:06:16] equilibrium maybe at a particular Upon Time the
+[0:06:17] Time the process Fe feedback loops the lower and
+[0:06:21] process Fe feedback loops the lower and interventions cannot be assumed to those
+[0:06:22] interventions cannot be assumed to those TG particular change S things at the
+[0:06:25] TG particular change S things at the same
+[0:06:27] same time and one we have view what may have
+[0:06:31] time and one we have view what may have is you have here representation of the
+[0:06:33] is you have here representation of the intervention Vector there are ways of
+[0:06:35] intervention Vector there are ways of encoding this probation done this other
+[0:06:38] encoding this probation done this other peration done let the clock run you do
+[0:06:41] peration done let the clock run you do some sort of measurement of your your
+[0:06:44] some sort of measurement of your your cross-sectional behavior that cell
+[0:06:46] cross-sectional behavior that cell destroy it that's it there's no more way
+[0:06:49] destroy it that's it there's no more way to be measured here may wait on a
+[0:06:51] to be measured here may wait on a particular time point you may wait long
+[0:06:53] particular time point you may wait long enough to be a to declare well this is
+[0:06:55] enough to be a to declare well this is equilibrium from that point this is a
+[0:06:57] equilibrium from that point this is a stationary distribution but whatever it
+[0:06:59] stationary distribution but whatever it is I'm assume that to know what you're
+[0:07:05] doing and while we are trying to do that maybe it's not a classical theal C
+[0:07:08] maybe it's not a classical theal C models that is lot in your literature
+[0:07:10] models that is lot in your literature start to understand that un underneath
+[0:07:13] start to understand that un underneath that measurement you're doing you have
+[0:07:15] that measurement you're doing you have to wait for some sort of process to take
+[0:07:17] to wait for some sort of process to take place so this is a kind of classical
+[0:07:20] place so this is a kind of classical paper by St and which some they imagine
+[0:07:23] paper by St and which some they imagine is a sof CH Behavior have random
+[0:07:26] is a sof CH Behavior have random variables where each particular time is
+[0:07:30] variables where each particular time is simple based on the states at the
+[0:07:33] simple based on the states at the previous time Point under particular
+[0:07:36] previous time Point under particular interventions that here Des what is AB
+[0:07:39] interventions that here Des what is AB by the end of the day measure what
+[0:07:41] by the end of the day measure what happens in the end this can happen
+[0:07:43] happens in the end this can happen social sciences too this is other
+[0:07:46] social sciences too this is other example
+[0:07:47] example ofab P where you have a social network
+[0:07:50] ofab P where you have a social network use some particular information let's
+[0:07:52] use some particular information let's say to people social network they may be
+[0:07:57] say to people social network they may be know each other in Gossip Through Time
+[0:07:59] know each other in Gossip Through Time about how this information is being
+[0:08:01] about how this information is being acquired or understood anded by people
+[0:08:03] acquired or understood anded by people on social network and by the end of the
+[0:08:06] on social network and by the end of the day we have a single interv process
+[0:08:08] day we have a single interv process asking people what they know about that
+[0:08:11] asking people what they know about that particular effect or how they behave
+[0:08:13] particular effect or how they behave under that particular
+[0:08:14] under that particular stimula so all this process get H and we
+[0:08:17] stimula so all this process get H and we want to say well there is some sort of
+[0:08:20] want to say well there is some sort of connection at the level of the
+[0:08:22] connection at the level of the cross-sectional S I
+[0:08:24] cross-sectional S I took but this connection may be confound
+[0:08:27] took but this connection may be confound in all sorts of ways because of the
+[0:08:29] in all sorts of ways because of the Hidden process you did not measure so
+[0:08:31] Hidden process you did not measure so may want do to understand that there is
+[0:08:34] may want do to understand that there is some sort of um approximate structure of
+[0:08:37] some sort of um approximate structure of Independence that you still rely on so
+[0:08:40] Independence that you still rely on so if you think that need to have some sort
+[0:08:42] if you think that need to have some sort of social connectivity for information
+[0:08:45] of social connectivity for information to propagate they want to say that
+[0:08:47] to propagate they want to say that whatever stimulate the beginning will
+[0:08:49] whatever stimulate the beginning will propagate only via this physical social
+[0:08:52] propagate only via this physical social connections that you have in the system
+[0:08:55] connections that you have in the system is the type of information that you see
+[0:08:58] is the type of information that you see here that will allow you to
+[0:09:00] here that will allow you to kind of create a a piecewise
+[0:09:03] kind of create a a piecewise representation how this entire initial
+[0:09:06] representation how this entire initial shock ofation will propagate indicate
+[0:09:09] shock ofation will propagate indicate what the state of the system will be
+[0:09:13] what the state of the system will be eventually and sometimes this also shows
+[0:09:15] eventually and sometimes this also shows up as ways of problems related to
+[0:09:18] up as ways of problems related to mediation so one often formulated
+[0:09:22] mediation so one often formulated questions such as what is the effect of
+[0:09:24] questions such as what is the effect of a treatment by particular paway and
+[0:09:27] a treatment by particular paway and sometimes in F this is yeah
+[0:09:30] sometimes in F this is yeah two versions of a treatment being set
+[0:09:32] two versions of a treatment being set through a path way or set to another
+[0:09:34] through a path way or set to another path way so an example like this here
+[0:09:37] path way so an example like this here which is a made up example but may be
+[0:09:39] which is a made up example but may be interesting as a illustration may have
+[0:09:42] interesting as a illustration may have the effect of cigar consumption like
+[0:09:44] the effect of cigar consumption like cancer we want to understand what it
+[0:09:47] cancer we want to understand what it means if it goes indirectly via deposits
+[0:09:50] means if it goes indirectly via deposits of time LS and one reason why may wanted
+[0:09:53] of time LS and one reason why may wanted to know that is what if you were able to
+[0:09:57] to know that is what if you were able to to try to decou the effect of nitin and
+[0:10:00] to try to decou the effect of nitin and cigarette and everything else assume
+[0:10:03] cigarette and everything else assume that nicotine operating mechanistically
+[0:10:04] that nicotine operating mechanistically only by this paway of
+[0:10:07] only by this paway of timelines now there are a proes for that
+[0:10:10] timelines now there are a proes for that based on necess counterfactuals and
+[0:10:12] based on necess counterfactuals and principal structure how people respond
+[0:10:15] principal structure how people respond to par exposures they can
+[0:10:17] to par exposures they can be contentions in that sense that they
+[0:10:19] be contentions in that sense that they do have this crossw flavor taking
+[0:10:22] do have this crossw flavor taking counters that canot res at the same time
+[0:10:25] counters that canot res at the same time but another way of understanding this is
+[0:10:27] but another way of understanding this is if you think about components of a
+[0:10:29] if you think about components of a treatment maybe you wanted to know
+[0:10:31] treatment maybe you wanted to know whether you can explicitly separate them
+[0:10:34] whether you can explicitly separate them so we able to say whether a cigarette
+[0:10:36] so we able to say whether a cigarette has nitin components and other
+[0:10:38] has nitin components and other components maybe you can Envision a sort
+[0:10:41] components maybe you can Envision a sort of treatment where just component of of
+[0:10:45] of treatment where just component of of it is
+[0:10:46] it is deactivated so you could have here a
+[0:10:49] deactivated so you could have here a contrast such as this that you like to
+[0:10:51] contrast such as this that you like to know what will happen to a person if I
+[0:10:54] know what will happen to a person if I canot deactivate this mechanism by dep
+[0:10:57] canot deactivate this mechanism by dep positive Tang l so If this means a
+[0:11:01] positive Tang l so If this means a treatment that has structure may say
+[0:11:03] treatment that has structure may say that you're trying to contrast what will
+[0:11:05] that you're trying to contrast what will happen to individual when we flip one
+[0:11:07] happen to individual when we flip one the entr from one status to another
+[0:11:10] the entr from one status to another status and this has links this idea of
+[0:11:13] status and this has links this idea of finding effects of combinations because
+[0:11:16] finding effects of combinations because your data what you may have is just
+[0:11:18] your data what you may have is just smokers and nonsmokers in this case
+[0:11:20] smokers and nonsmokers in this case don't consume any part of cigarette
+[0:11:22] don't consume any part of cigarette consume all P or a
+[0:11:24] consume all P or a cigarette but you want to quy this type
+[0:11:27] cigarette but you want to quy this type of combination which has not been your
+[0:11:30] of combination which has not been your structure may help you with that a model
+[0:11:33] structure may help you with that a model like this will have under the
+[0:11:35] like this will have under the assumptions of this model that the
+[0:11:38] assumptions of this model that the compon affects the outcome only via this
+[0:11:41] compon affects the outcome only via this depos timelines so be able to learn from
+[0:11:45] depos timelines so be able to learn from the DAT you have this particular fact of
+[0:11:47] the DAT you have this particular fact of the system and Al this particular effect
+[0:11:50] the system and Al this particular effect of the system for any combinations of A1
+[0:11:53] of the system for any combinations of A1 A2 as positive distribution being be
+[0:11:56] A2 as positive distribution being be able to reconstruct this particular
+[0:11:59] able to reconstruct this particular scenario of interest you can see that in
+[0:12:01] scenario of interest you can see that in the literature is motivating some sort
+[0:12:03] the literature is motivating some sort of nonc Conta purely Interventional
+[0:12:06] of nonc Conta purely Interventional definitions of
+[0:12:08] definitions of mediation okay so what we going to do
+[0:12:10] mediation okay so what we going to do next based on these
+[0:12:12] next based on these ideas of understanding what you're
+[0:12:16] ideas of understanding what you're actually measuring snapshotting how the
+[0:12:18] actually measuring snapshotting how the composing an action may be relevant to
+[0:12:21] composing an action may be relevant to understand new
+[0:12:22] understand new combinations I going to describe ways of
+[0:12:26] combinations I going to describe ways of just putting them together relatively
+[0:12:27] just putting them together relatively simple graphical model that includes
+[0:12:29] simple graphical model that includes intervention indicators explicitly on it
+[0:12:33] intervention indicators explicitly on it and the B of the technical part that
+[0:12:35] and the B of the technical part that talk talking about how you identify or
+[0:12:38] talk talking about how you identify or can able to say where you can identify
+[0:12:41] can able to say where you can identify combinations of Interest even those that
+[0:12:43] combinations of Interest even those that are writing
+[0:12:46] are writing dat so let's start by what I'll be
+[0:12:50] dat so let's start by what I'll be assuming on the data before I describe
+[0:12:52] assuming on the data before I describe which type of models will'll be able to
+[0:12:55] which type of models will'll be able to make use of
+[0:12:57] make use of them but there assumtions I said have a
+[0:12:59] them but there assumtions I said have a collection of data sets t t data sets
+[0:13:03] collection of data sets t t data sets here each one is generated On a par
+[0:13:07] here each one is generated On a par regime the way I'm describing the regime
+[0:13:09] regime the way I'm describing the regime is just of a vector taking categorical
+[0:13:12] is just of a vector taking categorical values as U its entries so any
+[0:13:16] values as U its entries so any particular entry here will come out of
+[0:13:19] particular entry here will come out of here encoded natural number Des which
+[0:13:22] here encoded natural number Des which type of treatment level you have so it
+[0:13:24] type of treatment level you have so it could have zero for example indicating C
+[0:13:27] could have zero for example indicating C observation regime
+[0:13:30] observation regime the data set will have samples some
+[0:13:33] the data set will have samples some vectors X and
+[0:13:35] vectors X and Y under each of these
+[0:13:38] Y under each of these regimes why may be some sort of lentry
+[0:13:42] regimes why may be some sort of lentry of X that are particular interested in
+[0:13:45] of X that are particular interested in but in general maybe the systems a whole
+[0:13:48] but in general maybe the systems a whole the whole Vector
+[0:13:49] the whole Vector X and given a sorry given a set of data
+[0:13:55] X and given a sorry given a set of data sets which you know which you know which
+[0:13:57] sets which you know which you know which regime they have collect in collect Ed
+[0:13:59] regime they have collect in collect Ed on may have a new regim interested in
+[0:14:02] on may have a new regim interested in where may want to notice the behavior
+[0:14:03] where may want to notice the behavior the entire system or just one particular
+[0:14:06] the entire system or just one particular variable a summary of it distribution
+[0:14:09] variable a summary of it distribution like um the expected value this a setup
+[0:14:12] like um the expected value this a setup that appears in all sorts of other
+[0:14:14] that appears in all sorts of other papers to including for example
+[0:14:16] papers to including for example approaches to understand what happens
+[0:14:19] approaches to understand what happens when your interventions may not be
+[0:14:21] when your interventions may not be necessarily exact but only
+[0:14:24] necessarily exact but only stochastic so in terms of assumptions on
+[0:14:27] stochastic so in terms of assumptions on model we know a
+[0:14:29] model we know a factorization or the density in a way
+[0:14:32] factorization or the density in a way that I described
+[0:14:34] that I described shortly it will correspond to some sort
+[0:14:36] shortly it will correspond to some sort of canonic graphical model that will in
+[0:14:39] of canonic graphical model that will in one sense facilitate knowledge
+[0:14:41] one sense facilitate knowledge elicitation structural learning for
+[0:14:43] elicitation structural learning for obtain it and I'll describe after that
+[0:14:47] obtain it and I'll describe after that how would you be able to say whether
+[0:14:49] how would you be able to say whether from the training regions you have what
+[0:14:52] from the training regions you have what you be able to piece together
+[0:14:54] you be able to piece together information to inform what will happen
+[0:14:56] information to inform what will happen on the new scenario and sence
+[0:15:13] so I start about adopting a very standard family of
+[0:15:15] standard family of um multiv Val distributions that take
+[0:15:18] um multiv Val distributions that take this shape that sometimes know as energy
+[0:15:20] this shape that sometimes know as energy based modeling so the idea here is again
+[0:15:24] based modeling so the idea here is again should be familiar to many of you
+[0:15:25] should be familiar to many of you because it's one the oldest ways of
+[0:15:27] because it's one the oldest ways of creating multiv distribution is inspired
+[0:15:29] creating multiv distribution is inspired by statistical mechanics we have joint
+[0:15:32] by statistical mechanics we have joint distribution is defined by just
+[0:15:34] distribution is defined by just renormalizing some sort of exponentiated
+[0:15:37] renormalizing some sort of exponentiated inner energy function but the idea here
+[0:15:40] inner energy function but the idea here is that low values for this function
+[0:15:43] is that low values for this function will will correspond to high probability
+[0:15:45] will will correspond to high probability State and depend on the shape of this
+[0:15:48] State and depend on the shape of this energy function have kind of notional
+[0:15:50] energy function have kind of notional modularity not the type of modularity
+[0:15:52] modularity not the type of modularity seeing things like graphs the type of
+[0:15:55] seeing things like graphs the type of modularity that nevertheless can be used
+[0:15:57] modularity that nevertheless can be used to carry out ca modeling if explicit
+[0:16:01] to carry out ca modeling if explicit represent how this run on interactive
+[0:16:09] actions so the actual um vectors here will have meaningful physical
+[0:16:13] will have meaningful physical interpretations that domain dependent
+[0:16:16] interpretations that domain dependent may as I say Cod the level zero as as a
+[0:16:20] may as I say Cod the level zero as as a default state with no
+[0:16:22] default state with no peration ining principle ining more
+[0:16:27] peration ining principle ining more Atomic intervention that is inflence
+[0:16:29] Atomic intervention that is inflence literature where there is maybe one
+[0:16:31] literature where there is maybe one particular Val XI that has set precisely
+[0:16:34] particular Val XI that has set precisely the particular value but in general they
+[0:16:37] the particular value but in general they don't need to be this sort of size
+[0:16:40] don't need to be this sort of size interen of many kind you throw inhibitor
+[0:16:43] interen of many kind you throw inhibitor in the middle of the
+[0:16:45] in the middle of the cell and this inhibitor doesn't need to
+[0:16:47] cell and this inhibitor doesn't need to have a exact correspondence with a
+[0:16:49] have a exact correspondence with a single random value it could affect a
+[0:16:52] single random value it could affect a set of values at the same time now we'll
+[0:16:55] set of values at the same time now we'll need somehow understand the dependency
+[0:16:57] need somehow understand the dependency structure between these interventions
+[0:16:59] structure between these interventions and the random variables you will have
+[0:17:01] and the random variables you will have to understand or extend the noal
+[0:17:03] to understand or extend the noal condition dependence to the use to this
+[0:17:08] condition dependence to the use to this regime indicators because they not
+[0:17:09] regime indicators because they not running
+[0:17:10] running on kind of switch saying one part regime
+[0:17:14] on kind of switch saying one part regime or
+[0:17:15] or another there are very formal ways of
+[0:17:17] another there are very formal ways of carrying this out but for the sake of
+[0:17:20] carrying this out but for the sake of this talk we can understand that you say
+[0:17:22] this talk we can understand that you say whether a particular intervention a
+[0:17:24] whether a particular intervention a particular random Val independent all
+[0:17:27] particular random Val independent all you're saying is this random that was
+[0:17:29] you're saying is this random that was equal in distribution on a different
+[0:17:31] equal in distribution on a different levels of this intervention
+[0:17:34] levels of this intervention di let's see this motivated both with a
+[0:17:40] di let's see this motivated both with a highly simplified
+[0:17:43] highly simplified problem so this follow here as you
+[0:17:45] problem so this follow here as you imagine is Again mtiv by dynamic system
+[0:17:47] imagine is Again mtiv by dynamic system that reaches an equilibrium this case we
+[0:17:50] that reaches an equilibrium this case we have a kind of buff where fluids are
+[0:17:53] have a kind of buff where fluids are getting in and some fluids are getting
+[0:17:55] getting in and some fluids are getting out there's a depth of the buff and
+[0:17:57] out there's a depth of the buff and there's a press the Buton of it you
+[0:18:00] there's a press the Buton of it you could ask some mechanistic model to
+[0:18:03] could ask some mechanistic model to write a set of differential equations on
+[0:18:05] write a set of differential equations on how these different measurements are
+[0:18:06] how these different measurements are varying over time that depth is vary
+[0:18:09] varying over time that depth is vary over time according to pressure is the
+[0:18:12] over time according to pressure is the rate of change by PR of pressure and at
+[0:18:15] rate of change by PR of pressure and at equilibrium all these rates of change be
+[0:18:18] equilibrium all these rates of change be zeros and you Define particular
+[0:18:19] zeros and you Define particular constraints on these one
+[0:18:22] constraints on these one variables now in a system like this is
+[0:18:24] variables now in a system like this is very mechanical maybe you could control
+[0:18:27] very mechanical maybe you could control some of this maybe could control the Gap
+[0:18:30] some of this maybe could control the Gap and this uh flow here to see what was
+[0:18:33] and this uh flow here to see what was the ratio by which liquids are invading
+[0:18:35] the ratio by which liquids are invading that
+[0:18:36] that pool but in practice there sorts of
+[0:18:39] pool but in practice there sorts of problems that real data would POs to you
+[0:18:41] problems that real data would POs to you to begin with You observe Dynamics in a
+[0:18:45] to begin with You observe Dynamics in a system like a cell biolog uh application
+[0:18:49] system like a cell biolog uh application be very hard to have much confidence in
+[0:18:52] be very hard to have much confidence in Fr equations be writing and also the
+[0:18:55] Fr equations be writing and also the interventions we have as I said they're
+[0:18:57] interventions we have as I said they're not exactly controlling run VAR
+[0:19:01] not exactly controlling run VAR directly so from pragmatic point of view
+[0:19:03] directly so from pragmatic point of view this
+[0:19:04] this motivate defining which sets of
+[0:19:07] motivate defining which sets of variables will be tied by constraints
+[0:19:10] variables will be tied by constraints the the parametric shape of the
+[0:19:12] the the parametric shape of the constraints will be unknown but there
+[0:19:14] constraints will be unknown but there will be modified by interventions again
+[0:19:16] will be modified by interventions again in a way that you may need to learn from
+[0:19:19] in a way that you may need to learn from B now this may be very loader in terms
+[0:19:23] B now this may be very loader in terms of assumption but in principle
+[0:19:24] of assumption but in principle everything is formulated in a way that
+[0:19:27] everything is formulated in a way that you could test by experiment ation so
+[0:19:30] you could test by experiment ation so even observe only a partial set of
+[0:19:32] even observe only a partial set of experiments they will have fif fi
+[0:19:35] experiments they will have fif fi implications in terms of which
+[0:19:37] implications in terms of which interventions are interacting with which
+[0:19:39] interventions are interacting with which R
+[0:19:40] R variables the energy function here is
+[0:19:43] variables the energy function here is kind of as describing that the the more
+[0:19:46] kind of as describing that the the more you violate these constraints the low
+[0:19:49] you violate these constraints the low the lower the probability of the um
+[0:19:53] the lower the probability of the um system your system state to and
+[0:19:56] system your system state to and everything is predicated that you have
+[0:19:58] everything is predicated that you have agreed on what what the timeing of the
+[0:20:00] agreed on what what the timeing of the cross-section C we doing is because if
+[0:20:03] cross-section C we doing is because if you have a
+[0:20:05] you have a nonstationary uh Behavior after cation
+[0:20:08] nonstationary uh Behavior after cation of course at each stage in time you have
+[0:20:10] of course at each stage in time you have a different distribution it may be a
+[0:20:12] a different distribution it may be a different set of qualitative constraint
+[0:20:14] different set of qualitative constraint so you have to agree upon exactly which
+[0:20:17] so you have to agree upon exactly which period in time you be measuring your
+[0:20:20] period in time you be measuring your your
+[0:20:27] par so given that we have this classical Way Des distributions what is the go of
+[0:20:30] Way Des distributions what is the go of a caal intervention
+[0:20:33] a caal intervention it you could drive classical caal de
+[0:20:37] it you could drive classical caal de with explicit regime indicators here not
+[0:20:40] with explicit regime indicators here not of the square vertices saying that each
+[0:20:43] of the square vertices saying that each one is variously modified according to
+[0:20:45] one is variously modified according to this particular Interventional C so it's
+[0:20:48] this particular Interventional C so it's condition distribution modified days
+[0:20:50] condition distribution modified days upon
+[0:20:51] upon that one way of understanding this in
+[0:20:54] that one way of understanding this in terms of energy base mod is to say well
+[0:20:57] terms of energy base mod is to say well but the Y that dat are just factors
+[0:20:59] but the Y that dat are just factors factors that depends on subsets of
+[0:21:01] factors that depends on subsets of variables and subsets of intervention
+[0:21:04] variables and subsets of intervention variables so in the lra model you
+[0:21:07] variables so in the lra model you already have a language for that called
+[0:21:09] already have a language for that called the effector graph model where it
+[0:21:11] the effector graph model where it indicate the interactions that you have
+[0:21:14] indicate the interactions that you have so if you have
+[0:21:15] so if you have X3 having a conditional distribution
+[0:21:18] X3 having a conditional distribution between X1 X Sigma 3 that condition
+[0:21:21] between X1 X Sigma 3 that condition distribution can be uh qually described
+[0:21:26] distribution can be uh qually described as interaction between all variabl all Z
+[0:21:30] as interaction between all variabl all Z and intervention varable Sigma 3 so this
+[0:21:33] and intervention varable Sigma 3 so this Factor Z correspond to the factor of
+[0:21:36] Factor Z correspond to the factor of attack this is just a way of describe an
+[0:21:39] attack this is just a way of describe an example because to describe a set of
+[0:21:42] example because to describe a set of factors like this you don't need to
+[0:21:44] factors like this you don't need to start from a but start from some sort of
+[0:21:48] start from a but start from some sort of rough set of differential equations you
+[0:21:51] rough set of differential equations you think would hold in your system from
+[0:21:53] think would hold in your system from that derve which factors interactions
+[0:21:55] that derve which factors interactions you have if these factors are not just
+[0:21:58] you have if these factors are not just describing condition dependence
+[0:22:00] describing condition dependence constraints also describing partic sorts
+[0:22:03] constraints also describing partic sorts of interactions may or may not have
+[0:22:05] of interactions may or may not have because if you were to write down class
+[0:22:07] because if you were to write down class graphical model describing the blanket
+[0:22:10] graphical model describing the blanket of these variables well this Val
+[0:22:13] of these variables well this Val X1 be connected to
+[0:22:16] X1 be connected to everything uh
+[0:22:18] everything uh given by condition the other remaining
+[0:22:21] given by condition the other remaining Rand variables right you look at this
+[0:22:22] Rand variables right you look at this system that you have here condition X2
+[0:22:25] system that you have here condition X2 condition X3 connect X1 to every F so in
+[0:22:30] condition X3 connect X1 to every F so in principle to have no indication this
+[0:22:32] principle to have no indication this graph that as a matter of fact there's
+[0:22:34] graph that as a matter of fact there's no factor that include c one two and
+[0:22:37] no factor that include c one two and three together which would otherwise be
+[0:22:40] three together which would otherwise be read off on this graph so there is not
+[0:22:42] read off on this graph so there is not only Independence constraints that you
+[0:22:44] only Independence constraints that you see may be able to express with this
+[0:22:47] see may be able to express with this type of factorization but also these
+[0:22:49] type of factorization but also these types of interaction constraints here
+[0:22:52] types of interaction constraints here indicating that there's no Factor
+[0:22:53] indicating that there's no Factor containing all three intervention values
+[0:22:55] containing all three intervention values at the same time so formula this is very
+[0:22:59] at the same time so formula this is very standard when describe energy based
+[0:23:01] standard when describe energy based model just here explicitly indicating
+[0:23:03] model just here explicitly indicating that each factor can switch for
+[0:23:06] that each factor can switch for different uh composition based on the
+[0:23:09] different uh composition based on the status of these intervention
+[0:23:11] status of these intervention vares so the formulation identification
+[0:23:13] vares so the formulation identification problem here now can be described in
+[0:23:17] problem here now can be described in terms of identifying densities that have
+[0:23:21] terms of identifying densities that have this shape that includes uh the energy
+[0:23:25] this shape that includes uh the energy based
+[0:23:27] based formulation
+[0:23:29] formulation how this is compar against deag
+[0:23:30] how this is compar against deag formulations I mean this is of course
+[0:23:32] formulations I mean this is of course very general approach in that de de CA
+[0:23:35] very general approach in that de de CA model literature for example the sigma
+[0:23:37] model literature for example the sigma calculus ofing boy that come up with vas
+[0:23:41] calculus ofing boy that come up with vas so this problem when you have de
+[0:23:43] so this problem when you have de structures with intervention targeting a
+[0:23:46] structures with intervention targeting a single variable in a situation like this
+[0:23:49] single variable in a situation like this intervention doesn't need to be Atomic
+[0:23:52] intervention doesn't need to be Atomic can just be stastically changing the
+[0:23:54] can just be stastically changing the distribution but the de structure
+[0:23:57] distribution but the de structure assumption is single varable connection
+[0:23:59] assumption is single varable connection usually assumed when we think about this
+[0:24:01] usually assumed when we think about this problem
+[0:24:03] problem bels however the idea here is not really
+[0:24:06] bels however the idea here is not really targeting right as you saw in the
+[0:24:08] targeting right as you saw in the initial example of the sex data you what
+[0:24:12] initial example of the sex data you what may be quite no changing the relations
+[0:24:15] may be quite no changing the relations among many and this is knowing the
+[0:24:16] among many and this is knowing the literature to under different gues you
+[0:24:19] literature to under different gues you can think our intervention changing not
+[0:24:22] can think our intervention changing not a particular variable but changing for
+[0:24:24] a particular variable but changing for instance coefficients in struct equation
+[0:24:28] instance coefficients in struct equation is be one particular way of
+[0:24:30] is be one particular way of understanding that the interpretation
+[0:24:32] understanding that the interpretation here is a changing relationship not
+[0:24:34] here is a changing relationship not really changing a particular
+[0:24:37] really changing a particular variable in this case you don't need
+[0:24:39] variable in this case you don't need necessarily the asymmetric
+[0:24:41] necessarily the asymmetric considerations that the same de that
+[0:24:43] considerations that the same de that particular factors marginalize the child
+[0:24:46] particular factors marginalize the child Val that factor disappears right there's
+[0:24:49] Val that factor disappears right there's no no short child or paring Factor when
+[0:24:52] no no short child or paring Factor when you think of just as a product of soft
+[0:24:59] constraints now even that you have this set up you
+[0:25:03] now even that you have this set up you can just kind of um set up
+[0:25:05] can just kind of um set up identification result that complements
+[0:25:08] identification result that complements what we have already in the de
+[0:25:09] what we have already in the de literature I'll describe here via some
+[0:25:12] literature I'll describe here via some examples there's a companion paper for
+[0:25:14] examples there's a companion paper for this stop we going the details in uh
+[0:25:17] this stop we going the details in uh step by step but here just illustrate
+[0:25:20] step by step but here just illustrate how we could Poss decide whether you
+[0:25:23] how we could Poss decide whether you have identific identifiability from the
+[0:25:25] have identific identifiability from the data that you
+[0:25:26] data that you have so we have Baseline regime this is
+[0:25:29] have so we have Baseline regime this is just arbitrary here I'm just defying
+[0:25:32] just arbitrary here I'm just defying that the Baseline regime is all all
+[0:25:34] that the Baseline regime is all all intervention levels are set to zero
+[0:25:37] intervention levels are set to zero cross a vector I want to think about how
+[0:25:40] cross a vector I want to think about how to move from this Baseline regime to the
+[0:25:43] to move from this Baseline regime to the particular Target regim get interested
+[0:25:46] particular Target regim get interested in let's see this by an
+[0:25:49] in let's see this by an example suppose you have a graph like
+[0:25:52] example suppose you have a graph like this and you have the
+[0:25:55] this and you have the corresponding energy function described
+[0:25:58] corresponding energy function described what these two factors factors that
+[0:25:59] what these two factors factors that depend on Sigma one two or which depends
+[0:26:02] depend on Sigma one two or which depends on two and
+[0:26:03] on two and three your your data you have all these
+[0:26:06] three your your data you have all these six combinations of possible uh values
+[0:26:11] six combinations of possible uh values of the intervention here is all
+[0:26:13] of the intervention here is all binary and the target distribution inter
+[0:26:17] binary and the target distribution inter is what if you switch all the
+[0:26:18] is what if you switch all the interventions from zero to
+[0:26:21] interventions from zero to one one starting point is well suppose I
+[0:26:25] one one starting point is well suppose I take this density race right to where
+[0:26:27] take this density race right to where Sigma 2 and sigma 3 are the same in both
+[0:26:30] Sigma 2 and sigma 3 are the same in both cases so this factor of two would get
+[0:26:34] cases so this factor of two would get cancelled now suppose that just multiply
+[0:26:37] cancelled now suppose that just multiply the numerator denominator by same
+[0:26:40] the numerator denominator by same factor so again just Define to be
+[0:26:42] factor so again just Define to be canceling out but then I could rearrange
+[0:26:46] canceling out but then I could rearrange them so that this numerator becomes the
+[0:26:49] them so that this numerator becomes the target distribution of Interest
+[0:26:51] target distribution of Interest denominator becomes something else after
+[0:26:53] denominator becomes something else after normalizing constant so
+[0:26:57] normalizing constant so here the ratio I started with is in the
+[0:27:00] here the ratio I started with is in the training set the denominator I have here
+[0:27:03] training set the denominator I have here is in the training set and the target I
+[0:27:05] is in the training set and the target I care is in the numerator here so I'll be
+[0:27:07] care is in the numerator here so I'll be able to Define how will be able to
+[0:27:10] able to Define how will be able to reconstruct this pink distribution here
+[0:27:13] reconstruct this pink distribution here out in principle of distributions I
+[0:27:16] out in principle of distributions I could identify
+[0:27:17] could identify from the idea behind this is you imagine
+[0:27:21] from the idea behind this is you imagine a kind of De composition of this graph
+[0:27:25] a kind of De composition of this graph where it could separate valos one and
+[0:27:27] where it could separate valos one and three
+[0:27:29] three and they have only Comm the variable two
+[0:27:32] and they have only Comm the variable two I could agree upon on the value of
+[0:27:34] I could agree upon on the value of variable two here is the one that is
+[0:27:36] variable two here is the one that is required by tet
+[0:27:38] required by tet distribution and think about ratios that
+[0:27:40] distribution and think about ratios that don't necessarily needs to agree on the
+[0:27:42] don't necessarily needs to agree on the first variable because it can separate
+[0:27:45] first variable because it can separate them in the factorization of the energy
+[0:27:47] them in the factorization of the energy function this is actually type of
+[0:27:49] function this is actually type of message passing scheme that able to
+[0:27:52] message passing scheme that able to decompose subsets of effectors and
+[0:27:55] decompose subsets of effectors and independent sets where I can just think
+[0:27:58] independent sets where I can just think about agreement on the interection the
+[0:28:03] about agreement on the interection the sets this would have to assume some sort
+[0:28:05] sets this would have to assume some sort of um the composable structure of a
+[0:28:09] of um the composable structure of a graph that includes these regime
+[0:28:11] graph that includes these regime indicators but in principle you be able
+[0:28:14] indicators but in principle you be able to
+[0:28:15] to solve whether the identification problem
+[0:28:18] solve whether the identification problem holds globally for the entire system but
+[0:28:22] holds globally for the entire system but which extent it also hold for particular
+[0:28:24] which extent it also hold for particular subsets of that this is a graph that is
+[0:28:29] subsets of that this is a graph that is assembl by checking which regim
+[0:28:31] assembl by checking which regim indicators belong to a common factor by
+[0:28:34] indicators belong to a common factor by looking at this graph and seeing there
+[0:28:36] looking at this graph and seeing there is some sort of Separation I could think
+[0:28:38] is some sort of Separation I could think of some problems I could partially solve
+[0:28:40] of some problems I could partially solve but that necessarily solve the entire
+[0:28:42] but that necessarily solve the entire problem for instance so even you don't
+[0:28:44] problem for instance so even you don't have Global identification princi may be
+[0:28:47] have Global identification princi may be able to S some partial identification
+[0:28:49] able to S some partial identification for some subsets of
+[0:28:54] combinations now that type of approach is really
+[0:28:59] now that type of approach is really aimed as some sort of DEC composable
+[0:29:01] aimed as some sort of DEC composable structure but in general you can come up
+[0:29:03] structure but in general you can come up with Solutions also that's indicates
+[0:29:06] with Solutions also that's indicates whether a global problem is solvable or
+[0:29:08] whether a global problem is solvable or not solvable and way understanding that
+[0:29:11] not solvable and way understanding that is get inspiration from this message
+[0:29:14] is get inspiration from this message pass approach that all you're doing
+[0:29:16] pass approach that all you're doing there is taking products and ratios of
+[0:29:18] there is taking products and ratios of densities that you do know if you think
+[0:29:21] densities that you do know if you think about the space of possible products and
+[0:29:24] about the space of possible products and ratios that you can do where the the
+[0:29:27] ratios that you can do where the the densi is not train set can think about
+[0:29:30] densi is not train set can think about which ways I could do products and
+[0:29:33] which ways I could do products and ratios to reconstruct a t density of
+[0:29:36] ratios to reconstruct a t density of Interest so here I'm going to explain
+[0:29:39] Interest so here I'm going to explain this complicated table by an example
+[0:29:41] this complicated table by an example again in this example the factorization
+[0:29:44] again in this example the factorization doesn't have this nicely composable
+[0:29:46] doesn't have this nicely composable project which so things
+[0:29:49] project which so things locally uh independently independently
+[0:29:53] locally uh independently independently and separately and combine them together
+[0:29:55] and separately and combine them together here there's some sort of a cycle
+[0:29:59] here there's some sort of a cycle between the sigma variables Sigma one
+[0:30:01] between the sigma variables Sigma one con to two 2 to 3 1 to 3 able to build a
+[0:30:05] con to two 2 to 3 1 to 3 able to build a graph like this you can have Cycles
+[0:30:08] graph like this you can have Cycles among the sigma varable so w be able to
+[0:30:11] among the sigma varable so w be able to apply this ideal message passing here
+[0:30:14] apply this ideal message passing here but instead what I can think of is you
+[0:30:16] but instead what I can think of is you should fix the the value of the the
+[0:30:20] should fix the the value of the the random variables to any particular
+[0:30:22] random variables to any particular constant
+[0:30:23] constant X the factors that you have in this
+[0:30:26] X the factors that you have in this model
+[0:30:28] model can we interpret types of monomials on
+[0:30:32] can we interpret types of monomials on the space of the sigma variables so what
+[0:30:34] the space of the sigma variables so what do I mean by that so if they're all
+[0:30:37] do I mean by that so if they're all binary for the sake of this example we
+[0:30:40] binary for the sake of this example we can think this Factor here for instance
+[0:30:43] can think this Factor here for instance is just a symbol a symbol which that
+[0:30:46] is just a symbol a symbol which that takes different instances depends on the
+[0:30:48] takes different instances depends on the values of Sigma one Sigma 2 so Sigma one
+[0:30:52] values of Sigma one Sigma 2 so Sigma one to a binary this would be one of
+[0:30:54] to a binary this would be one of possible four symbols depending on the
+[0:30:56] possible four symbols depending on the state of Sigma one Sigma 2 likewise this
+[0:31:00] state of Sigma one Sigma 2 likewise this could be
+[0:31:01] could be F again as symbols that indexed by Sigma
+[0:31:05] F again as symbols that indexed by Sigma 2 and three and so on and so
+[0:31:07] 2 and three and so on and so forth now if you have a density like the
+[0:31:10] forth now if you have a density like the density that to take place when all
+[0:31:12] density that to take place when all three interventions are switch to one
+[0:31:15] three interventions are switch to one this could be expressed up to
+[0:31:17] this could be expressed up to normalizing constant as a monomial on
+[0:31:19] normalizing constant as a monomial on these symbols in this case the symbol
+[0:31:21] these symbols in this case the symbol where everything is set
+[0:31:23] where everything is set to now this Momi need to be reconstruct
+[0:31:27] to now this Momi need to be reconstruct as than ratios of the distributions
+[0:31:29] as than ratios of the distributions which I have access
+[0:31:31] which I have access to one way of thinking about this is if
+[0:31:34] to one way of thinking about this is if you take the prodct all distributions I
+[0:31:36] you take the prodct all distributions I have access to you can raise them par
+[0:31:40] have access to you can raise them par exponent representing whether uh whether
+[0:31:44] exponent representing whether uh whether I'm taking a product this key if this is
+[0:31:48] I'm taking a product this key if this is the exponent is one or W is minus one
+[0:31:51] the exponent is one or W is minus one what is ignored if it's
+[0:31:54] what is ignored if it's zero this part example having the train
+[0:31:57] zero this part example having the train set s possible
+[0:31:59] set s possible regimes and that the dens of interest is
+[0:32:02] regimes and that the dens of interest is the one all
+[0:32:04] the one all ones uh in this case
+[0:32:08] ones uh in this case sorry I can't think of the possible
+[0:32:12] sorry I can't think of the possible combinations indicating
+[0:32:14] combinations indicating which which symbols are including the
+[0:32:17] which which symbols are including the corresponding monomial so the monomial
+[0:32:19] corresponding monomial so the monomial for the distribution signals are zero is
+[0:32:22] for the distribution signals are zero is one correspond the product of these
+[0:32:25] one correspond the product of these symbols and each one of these from
+[0:32:27] symbols and each one of these from multiply them together correspond that
+[0:32:29] multiply them together correspond that some the monomials have the
+[0:32:31] some the monomials have the corresponding exponents added up so this
+[0:32:34] corresponding exponents added up so this monomial here for F1 not not appears in
+[0:32:37] monomial here for F1 not not appears in the first regime and the fifth
+[0:32:39] the first regime and the fifth regime so the exponent q1 plus Q5 with
+[0:32:44] regime so the exponent q1 plus Q5 with exponent of this symbol this symbol
+[0:32:47] exponent of this symbol this symbol doesn't show up on the T distribution
+[0:32:49] doesn't show up on the T distribution therefore q1 plus Q5 need to add up to
+[0:32:53] therefore q1 plus Q5 need to add up to zero so this defines the linear system
+[0:32:57] zero so this defines the linear system this linear system will have a solution
+[0:32:59] this linear system will have a solution or not you can show it doesn't have a
+[0:33:03] or not you can show it doesn't have a solution so in general there will be is
+[0:33:05] solution so in general there will be is not identifiable under products and rati
+[0:33:08] not identifiable under products and rati if it does there solution this will
+[0:33:10] if it does there solution this will provide one way of
+[0:33:13] provide one way of reconstructing U the corresponding taret
+[0:33:15] reconstructing U the corresponding taret density by protos of ratios on those
+[0:33:18] density by protos of ratios on those densities which in PR we can learn from
+[0:33:24] dat okay
+[0:33:26] okay so our would like to say a bit more
+[0:33:29] so our would like to say a bit more about how we do some sort of knowledge
+[0:33:33] about how we do some sort of knowledge elicitation out that to
+[0:33:36] elicitation out that to provide a constructive procedure on how
+[0:33:39] provide a constructive procedure on how to create these models out of an expert
+[0:33:41] to create these models out of an expert of a structure learning
+[0:33:43] of a structure learning algorithm I realize I'm running a bit
+[0:33:45] algorithm I realize I'm running a bit short on time so instead of focus on
+[0:33:48] short on time so instead of focus on that which you can Vis today slides here
+[0:33:51] that which you can Vis today slides here which I hope are useful I'm going to
+[0:33:53] which I hope are useful I'm going to focus on the final part of the talk
+[0:33:56] focus on the final part of the talk which is just practical way of fitting
+[0:33:58] which is just practical way of fitting these models to data and how to link
+[0:34:01] these models to data and how to link this particular prediction
+[0:34:08] problems so one way of Define what our likelihood function for this or at least
+[0:34:11] likelihood function for this or at least a way of uh estimating Target densities
+[0:34:15] a way of uh estimating Target densities of Interest out of it is to reduce the
+[0:34:18] of Interest out of it is to reduce the problem to in some situations to density
+[0:34:21] problem to in some situations to density ratio estimation because under some
+[0:34:23] ratio estimation because under some particular graphical structures we may
+[0:34:26] particular graphical structures we may be able to expect is the target density
+[0:34:28] be able to expect is the target density of Interest as ratios of densities which
+[0:34:31] of Interest as ratios of densities which you can estimate from data so in
+[0:34:34] you can estimate from data so in principle you be we could learn from
+[0:34:37] principle you be we could learn from data this density
+[0:34:39] data this density ratios directly and multiply them to
+[0:34:42] ratios directly and multiply them to rearrange our den of
+[0:34:44] rearrange our den of interest uh I tried this and maybe to my
+[0:34:48] interest uh I tried this and maybe to my own incompetence it didn't work to well
+[0:34:51] own incompetence it didn't work to well by something that in theory could do
+[0:34:53] by something that in theory could do reduce the problem to density ra
+[0:34:54] reduce the problem to density ra estimation
+[0:34:56] estimation problems
+[0:34:58] problems in practice I found that fitting and
+[0:34:59] in practice I found that fitting and likelihood function directly was uh more
+[0:35:04] likelihood function directly was uh more fruitful and here everything is can be
+[0:35:07] fruitful and here everything is can be done very black boxy we could think of
+[0:35:10] done very black boxy we could think of the log factors Z Energy function being
+[0:35:13] the log factors Z Energy function being parameterized by a black box like a NE
+[0:35:15] parameterized by a black box like a NE Network we had to take some care for
+[0:35:18] Network we had to take some care for what infin need normalizing constants of
+[0:35:20] what infin need normalizing constants of course in practice I find that actually
+[0:35:24] course in practice I find that actually a discreet highing that date is not a
+[0:35:26] a discreet highing that date is not a bad idea
+[0:35:28] bad idea the number of parameters wouldn't change
+[0:35:31] the number of parameters wouldn't change the levation because just the VAR as
+[0:35:34] the levation because just the VAR as real Val anyway so this guarantee a
+[0:35:36] real Val anyway so this guarantee a finite normalizing constant and of
+[0:35:39] finite normalizing constant and of course you have the the old the ancient
+[0:35:42] course you have the the old the ancient problem of this partition function is
+[0:35:44] problem of this partition function is intractable but there's now a lot out of
+[0:35:48] intractable but there's now a lot out of there to fit the steps of intractable
+[0:35:51] there to fit the steps of intractable Problems by different criteria different
+[0:35:54] Problems by different criteria different score functions in experence done us
+[0:35:57] score functions in experence done us likelihood because is on the simplest
+[0:35:59] likelihood because is on the simplest and better understood but there's a
+[0:36:00] and better understood but there's a whole literature on how to deal with
+[0:36:03] whole literature on how to deal with this problems of fitting this possibly
+[0:36:06] this problems of fitting this possibly deep energy based model so to speak with
+[0:36:09] deep energy based model so to speak with methods that avoid the computation
+[0:36:11] methods that avoid the computation normalizing
+[0:36:14] normalizing constant and one way of using this is I
+[0:36:16] constant and one way of using this is I mean she could have a targeted variable
+[0:36:18] mean she could have a targeted variable of interest and all you want to know is
+[0:36:21] of interest and all you want to know is if I set up my design that on a
+[0:36:24] if I set up my design that on a particular level what will be the
+[0:36:26] particular level what will be the expected Val
+[0:36:28] expected Val it shows up a lot recently machine
+[0:36:30] it shows up a lot recently machine learning literature the guyses sgg just
+[0:36:33] learning literature the guyses sgg just caal band or caal basing optimization
+[0:36:36] caal band or caal basing optimization when we have a reward function of
+[0:36:38] when we have a reward function of Interest a real outcome of interest and
+[0:36:41] Interest a real outcome of interest and a subset of values which you can
+[0:36:43] a subset of values which you can control so you want to know how why set
+[0:36:47] control so you want to know how why set up a level for this design variables to
+[0:36:49] up a level for this design variables to maximize and expect a reward is all
+[0:36:52] maximize and expect a reward is all embedded with a caal model so the
+[0:36:55] embedded with a caal model so the interventions you do in this mon about
+[0:36:57] interventions you do in this mon about variables are the things you can control
+[0:37:00] variables are the things you can control and the outcome will be a function that
+[0:37:02] and the outcome will be a function that you get from marginalizing the structure
+[0:37:04] you get from marginalizing the structure between your control signal and the
+[0:37:07] between your control signal and the outcome so this can be embeded if you
+[0:37:09] outcome so this can be embeded if you wish to do so in a sort of active
+[0:37:11] wish to do so in a sort of active learning scheme where you try to
+[0:37:13] learning scheme where you try to minimize number of interventions to be
+[0:37:15] minimize number of interventions to be able to have for
+[0:37:17] able to have for instance a high expect
+[0:37:20] instance a high expect reward so one way of formulating this
+[0:37:23] reward so one way of formulating this problem is it's simplified if for able
+[0:37:25] problem is it's simplified if for able to say that your reward outcome variable
+[0:37:28] to say that your reward outcome variable it's conditionally dependent of the
+[0:37:30] it's conditionally dependent of the design VOR given that that was your
+[0:37:33] design VOR given that that was your system and ways of estimating the
+[0:37:36] system and ways of estimating the problem to of soling the problem down
+[0:37:39] problem to of soling the problem down among other things estimating the
+[0:37:41] among other things estimating the expected outcome under a Target
+[0:37:44] expected outcome under a Target intervention of
+[0:37:50] Interest now given the shortness of time all we want to do here is some sort of
+[0:37:53] all we want to do here is some sort of very brief summary of The Experience
+[0:37:55] very brief summary of The Experience done in the companion paper
+[0:37:57] done in the companion paper if you please do look at the details
+[0:37:59] if you please do look at the details there if you wish to get more details
+[0:38:01] there if you wish to get more details but what I've done what we've done there
+[0:38:05] but what I've done what we've done there so the sensitivity of the of
+[0:38:08] so the sensitivity of the of Independence constraints you have
+[0:38:10] Independence constraints you have compared to Alternatives like a dag
+[0:38:13] compared to Alternatives like a dag based model or a completely blackbox
+[0:38:17] based model or a completely blackbox model because of course what you could
+[0:38:19] model because of course what you could do is to have a design vect have outcome
+[0:38:22] do is to have a design vect have outcome very we can completely you know any
+[0:38:23] very we can completely you know any structure with the data that we have
+[0:38:25] structure with the data that we have just try to f from the designing Vector
+[0:38:29] just try to f from the designing Vector to the
+[0:38:30] to the outcome this is doable on a variety of
+[0:38:32] outcome this is doable on a variety of situation but we have a very SP set of
+[0:38:36] situation but we have a very SP set of combination training data just basically
+[0:38:39] combination training data just basically B about that best linear model it
+[0:38:41] B about that best linear model it depends which configuration you have
+[0:38:43] depends which configuration you have available to
+[0:38:44] available to you now let's let me jump
+[0:38:52] to an explanation of this figure means here so Al the following we have
+[0:38:55] here so Al the following we have something like a s set of data set which
+[0:38:59] something like a s set of data set which have only limited number combinations so
+[0:39:01] have only limited number combinations so if you want to evaluate what happen on
+[0:39:03] if you want to evaluate what happen on no combinations need some sort of
+[0:39:05] no combinations need some sort of synthetic ground proof so I fit a model
+[0:39:09] synthetic ground proof so I fit a model to this data to generate a synthetic
+[0:39:11] to this data to generate a synthetic ground proof which is based on real dat
+[0:39:13] ground proof which is based on real dat at
+[0:39:15] at least uh I fit a model that has a deex
+[0:39:18] least uh I fit a model that has a deex structure that follows the original
+[0:39:20] structure that follows the original paper and fit a model has this energy
+[0:39:22] paper and fit a model has this energy based rization that uh is a relaxation
+[0:39:26] based rization that uh is a relaxation of that de model ter of dependence
+[0:39:29] of that de model ter of dependence constraints so these are two ground
+[0:39:31] constraints so these are two ground proof models for which a sample training
+[0:39:35] proof models for which a sample training data so I measured then some sort of
+[0:39:39] data so I measured then some sort of ring spread error in a test set of
+[0:39:41] ring spread error in a test set of conditions that are not in the train set
+[0:39:44] conditions that are not in the train set and just see how they average over this
+[0:39:47] and just see how they average over this set of conditions that are not
+[0:39:50] set of conditions that are not um that no that test conditions I have
+[0:39:54] um that no that test conditions I have 100 synthetic y variables so the final
+[0:39:57] 100 synthetic y variables so the final outcome that was is completely sythetic
+[0:40:00] outcome that was is completely sythetic I generate 100 scenarios and I make a
+[0:40:02] I generate 100 scenarios and I make a box F down uh the RO is normaliz also by
+[0:40:08] box F down uh the RO is normaliz also by the scale of the outcome
+[0:40:10] the scale of the outcome variable so what see here first site
+[0:40:13] variable so what see here first site looks a bit disappointing that when the
+[0:40:15] looks a bit disappointing that when the Str does come from a de the de mode does
+[0:40:18] Str does come from a de the de mode does extremely well and the black Black Box
+[0:40:20] extremely well and the black Black Box Mode actually doesn't do too badly which
+[0:40:23] Mode actually doesn't do too badly which is here is an indication that my
+[0:40:25] is here is an indication that my synthetic pipeline is actually almost
+[0:40:27] synthetic pipeline is actually almost linear in the intervention
+[0:40:30] linear in the intervention variables the this intervention Factor
+[0:40:33] variables the this intervention Factor model didn't do too well this Cas as you
+[0:40:35] model didn't do too well this Cas as you can see Bigg spread when it came from
+[0:40:38] can see Bigg spread when it came from this ground proof it's interesting to
+[0:40:40] this ground proof it's interesting to see what happens in the other scenario
+[0:40:43] see what happens in the other scenario where the data does come on the this
+[0:40:46] where the data does come on the this energy base
+[0:40:48] energy base model in this case as expect that do
+[0:40:52] model in this case as expect that do much worse but another thing to keep in
+[0:40:55] much worse but another thing to keep in mind here is even though it looks like a
+[0:40:58] mind here is even though it looks like a wind loose
+[0:41:00] wind loose scenario I when I plotted this I try to
+[0:41:03] scenario I when I plotted this I try to make things a bit more visually
+[0:41:05] make things a bit more visually appealing but the magnitude of the y
+[0:41:07] appealing but the magnitude of the y axis is very different here these two uh
+[0:41:12] axis is very different here these two uh that behavior this this spectum mod in
+[0:41:15] that behavior this this spectum mod in both cases similar you look at the
+[0:41:17] both cases similar you look at the actual values or the Y
+[0:41:21] actual values or the Y AIS while the degree by whiches are the
+[0:41:24] AIS while the degree by whiches are the two approaches are much worse that par
+[0:41:27] two approaches are much worse that par of a much higher magnitude than the
+[0:41:29] of a much higher magnitude than the degree by which the effector model is
+[0:41:31] degree by which the effector model is here the effector model is slightly more
+[0:41:34] here the effector model is slightly more stable in this sense which is under a
+[0:41:36] stable in this sense which is under a adversar condition may not do as well as
+[0:41:39] adversar condition may not do as well as other
+[0:41:40] other approaches but when is in a favor
+[0:41:43] approaches but when is in a favor condition this alternative approach get
+[0:41:45] condition this alternative approach get much worse then so there's a type of
+[0:41:49] much worse then so there's a type of reassurance there that at least under
+[0:41:52] reassurance there that at least under less optimal condition it be actually
+[0:41:55] less optimal condition it be actually doing not too bad in terms of absolute
+[0:41:59] doing not too bad in terms of absolute error and to
+[0:42:01] error and to conclude I still not very satisfied that
+[0:42:04] conclude I still not very satisfied that that installation estimation apply
+[0:42:06] that installation estimation apply didn't quite work well so I us
+[0:42:09] didn't quite work well so I us likelihood but I think there there's
+[0:42:11] likelihood but I think there there's something to be said of exploiting
+[0:42:12] something to be said of exploiting better ways of applying dity rati
+[0:42:14] better ways of applying dity rati estimation to this problem and of course
+[0:42:17] estimation to this problem and of course everything is predicated what we call a
+[0:42:20] everything is predicated what we call a fantasy right that if you were to start
+[0:42:22] fantasy right that if you were to start a factorization this factorization still
+[0:42:25] a factorization this factorization still be stable if you to diver a lot from the
+[0:42:28] be stable if you to diver a lot from the from the training regimes you have I
+[0:42:30] from the training regimes you have I know even you turn your mechanics breaks
+[0:42:32] know even you turn your mechanics breaks down just go close to speed of life
+[0:42:34] down just go close to speed of life right so there's a limit where things
+[0:42:36] right so there's a limit where things will breakdown that extrapolate too far
+[0:42:39] will breakdown that extrapolate too far away from the train regions we have and
+[0:42:41] away from the train regions we have and which will be ways of diagnosing that
+[0:42:43] which will be ways of diagnosing that when you're pushing things too hard
+[0:42:46] when you're pushing things too hard there something to be set of course a
+[0:42:48] there something to be set of course a ways of detecting whether par reg those
+[0:42:51] ways of detecting whether par reg those identified we should don't trust the
+[0:42:53] identified we should don't trust the results of course compute density ratios
+[0:42:55] results of course compute density ratios and see weather are too
+[0:42:58] and see weather are too extreme but maybe there are more more
+[0:43:01] extreme but maybe there are more more smarter more Focus ways or than that and
+[0:43:04] smarter more Focus ways or than that and everything here was really based on this
+[0:43:06] everything here was really based on this extreme scenary way assum no smoothness
+[0:43:08] extreme scenary way assum no smoothness at all between the designning vector
+[0:43:11] at all between the designning vector state to another design that state in
+[0:43:14] state to another design that state in practice we want to have to if you have
+[0:43:16] practice we want to have to if you have particular denser sets of training
+[0:43:18] particular denser sets of training conditions you may be able to also think
+[0:43:21] conditions you may be able to also think through that s s movement conditions can
+[0:43:23] through that s s movement conditions can be applied to fill out the gaps between
+[0:43:26] be applied to fill out the gaps between the you see and those you
+[0:43:28] the you see and those you don't okay that's what I wanted to say
+[0:43:31] don't okay that's what I wanted to say for now thank you very
+[0:43:40] much thanks Ricardo um I actually have a few questions I don't I hope you don't
+[0:43:41] few questions I don't I hope you don't mind if I ask they're partly related to
+[0:43:44] mind if I ask they're partly related to the question we got two questions from
+[0:43:45] the question we got two questions from the
+[0:43:46] the audience uh I'm so I'm just trying to
+[0:43:50] audience uh I'm so I'm just trying to understand the model it's uh really
+[0:43:52] understand the model it's uh really interesting so is the idea of kind of
+[0:43:55] interesting so is the idea of kind of assuming this fact Factor model to be
+[0:43:58] assuming this fact Factor model to be able to incorporate flexibility on
+[0:44:01] able to incorporate flexibility on various structures of the dags so the
+[0:44:04] various structures of the dags so the graph could be cyclic you could have
+[0:44:08] graph could be cyclic you could have hidden variables you could have various
+[0:44:11] hidden variables you could have various interventions so this is kind of a way
+[0:44:13] interventions so this is kind of a way to make that more flexible right like
+[0:44:16] to make that more flexible right like what the underlying I guess graph would
+[0:44:18] what the underlying I guess graph would be or my
+[0:44:21] be or my understand this actually I was going to
+[0:44:24] understand this actually I was going to talk about this but I kind of ran out of
+[0:44:26] talk about this but I kind of ran out of time I mean in fact one way of looking
+[0:44:29] time I mean in fact one way of looking at these models is the essence is
+[0:44:32] at these models is the essence is condition dependence between
+[0:44:33] condition dependence between interventions and random vus right so
+[0:44:35] interventions and random vus right so you don't really care about
+[0:44:37] you don't really care about whether what possible interpretations of
+[0:44:40] whether what possible interpretations of how this F come to be so this is work
+[0:44:43] how this F come to be so this is work there's a lot of work by Phil David for
+[0:44:45] there's a lot of work by Phil David for example on these ideas of just boil down
+[0:44:48] example on these ideas of just boil down C of PL to disc condition dependency
+[0:44:51] C of PL to disc condition dependency could they have conditionability
+[0:44:53] could they have conditionability here at treatment X and varable Y by
+[0:44:56] here at treatment X and varable Y by just saying well it's just a condition
+[0:44:59] just saying well it's just a condition depends the statement right between why
+[0:45:01] depends the statement right between why and this intervention condition given x
+[0:45:05] and this intervention condition given x and z is basically saying how X chos is
+[0:45:07] and z is basically saying how X chos is relevant know which X took so just boil
+[0:45:11] relevant know which X took so just boil down everything terms of these
+[0:45:13] down everything terms of these statements if you have directionality
+[0:45:16] statements if you have directionality between X and Y what is it is you have
+[0:45:19] between X and Y what is it is you have this condition you have this condition
+[0:45:21] this condition you have this condition dependence between vation legs that is
+[0:45:24] dependence between vation legs that is margin dependence between these guys
+[0:45:27] margin dependence between these guys the direction here is artifact of that
+[0:45:29] the direction here is artifact of that right because you want to flip this Edge
+[0:45:32] right because you want to flip this Edge this will not hold what to treat is a
+[0:45:35] this will not hold what to treat is a chain gra this will not hold treat is a
+[0:45:38] chain gra this will not hold treat is a different type of chain gra this will
+[0:45:39] different type of chain gra this will not hold but under if everything just
+[0:45:42] not hold but under if everything just this condition Depend and this energy
+[0:45:44] this condition Depend and this energy based mod is as simple as it gets if you
+[0:45:47] based mod is as simple as it gets if you want to have hidden
+[0:45:49] want to have hidden variables again may get to express that
+[0:45:54] variables again may get to express that marinal Independence constraint which
+[0:45:56] marinal Independence constraint which may be dense and maybe useless if you
+[0:45:58] may be dense and maybe useless if you have two many interactions between that
+[0:46:00] have two many interactions between that s but that's that's what it is right but
+[0:46:03] s but that's that's what it is right but it's Gnostic whether they have Cycles or
+[0:46:05] it's Gnostic whether they have Cycles or hidden what not just on to
+[0:46:08] hidden what not just on to that so it's not crucial that the
+[0:46:11] that so it's not crucial that the interventions are on these factors they
+[0:46:14] interventions are on these factors they could be on the variables themselves
+[0:46:16] could be on the variables themselves that's also what I wanted to ask because
+[0:46:19] that's also what I wanted to ask because in these examples you just need you
+[0:46:21] in these examples you just need you you're just um hinting that the
+[0:46:23] you're just um hinting that the important property is that these
+[0:46:25] important property is that these interventions are inde dep of some
+[0:46:27] interventions are inde dep of some variables in the system right or yes so
+[0:46:31] variables in the system right or yes so if you think
+[0:46:33] if you think about intervention single VAR be one
+[0:46:36] about intervention single VAR be one factor for that variable that you
+[0:46:38] factor for that variable that you diverge from a particular Target then
+[0:46:40] diverge from a particular Target then the energy goes really down
+[0:46:43] the energy goes really down right okay yeah um so just to clarify
+[0:46:46] right okay yeah um so just to clarify one short question from the
+[0:46:49] one short question from the audience uh the interventions that you
+[0:46:51] audience uh the interventions that you consider here they're not necessarily
+[0:46:53] consider here they're not necessarily binary they're not necessarily due
+[0:46:55] binary they're not necessarily due interventions you're allowing for
+[0:46:57] interventions you're allowing for various things
+[0:46:59] various things right yes the the the meaning of these
+[0:47:03] right yes the the the meaning of these levels is completely abstract right you
+[0:47:06] levels is completely abstract right you have here I'm assuming just for the sake
+[0:47:09] have here I'm assuming just for the sake of identification result is you have a
+[0:47:11] of identification result is you have a finite set of
+[0:47:14] finite set of possibilities it could be because this
+[0:47:17] possibilities it could be because this yeah any of these models you could
+[0:47:18] yeah any of these models you could parameterize
+[0:47:20] parameterize these vectors as continuous functions of
+[0:47:23] these vectors as continuous functions of sign but here's just a look up table you
+[0:47:25] sign but here's just a look up table you change sign value is a different set of
+[0:47:27] change sign value is a different set of parameters but it could be a Smo a
+[0:47:29] parameters but it could be a Smo a function of sment
+[0:47:31] function of sment to all right great thank you for
+[0:47:34] to all right great thank you for indulging my questions as well uh okay
+[0:47:36] indulging my questions as well uh okay we'll move on to the discussion now and
+[0:47:38] we'll move on to the discussion now and hopefully we'll have some uh time
+[0:47:39] hopefully we'll have some uh time afterwards
+[0:47:40] afterwards for more questions Anish please take the
+[0:47:43] for more questions Anish please take the stage thanks
+[0:47:52] Ricardo okay uh can you see my screen yes awesome um yeah thank you
+[0:47:56] screen yes awesome um yeah thank you Ricardo for a wonderful talk uh and
+[0:47:59] Ricardo for a wonderful talk uh and inviting me to be a discussion so from
+[0:48:02] inviting me to be a discussion so from my perspective you know my understanding
+[0:48:03] my perspective you know my understanding of causal dags and and and that line of
+[0:48:06] of causal dags and and and that line of work is is rather lacking so I felt the
+[0:48:07] work is is rather lacking so I felt the best thing I could do is try to find
+[0:48:10] best thing I could do is try to find connections between uh the type of work
+[0:48:12] connections between uh the type of work you're doing and potentially connections
+[0:48:15] you're doing and potentially connections with Le in Factor models that are quite
+[0:48:17] with Le in Factor models that are quite ubiquitous in econometrics that's where
+[0:48:20] ubiquitous in econometrics that's where my work comes in and so really what what
+[0:48:22] my work comes in and so really what what I was going to do is is ask this
+[0:48:24] I was going to do is is ask this question this big question of how to
+[0:48:25] question this big question of how to bridge IND vention generalization in
+[0:48:27] bridge IND vention generalization in causal tags and intervention Factor
+[0:48:29] causal tags and intervention Factor models with latent factor models that we
+[0:48:31] models with latent factor models that we study and say econometrics to things
+[0:48:34] study and say econometrics to things like difference and differences
+[0:48:35] like difference and differences synthetic control so even recommendation
+[0:48:36] synthetic control so even recommendation systems and collaborative filtering um
+[0:48:39] systems and collaborative filtering um and so that's really what I want to get
+[0:48:40] and so that's really what I want to get that so I thought maybe as a way to do
+[0:48:42] that so I thought maybe as a way to do that uh so there are two specific
+[0:48:44] that uh so there are two specific questions as part of that the first one
+[0:48:46] questions as part of that the first one is is there a way to generalize these
+[0:48:48] is is there a way to generalize these ifms to allow for unobserved confounding
+[0:48:51] ifms to allow for unobserved confounding where the unobserved confounders have a
+[0:48:52] where the unobserved confounders have a latent factorization and the second one
+[0:48:54] latent factorization and the second one is is there a way to map the ident
+[0:48:56] is is there a way to map the ident ification conditions required for
+[0:48:57] ification conditions required for intervention generalization L Factor
+[0:48:59] intervention generalization L Factor models those in ifms and vice versa so
+[0:49:02] models those in ifms and vice versa so those are the two questions I'd like to
+[0:49:04] those are the two questions I'd like to discuss uh and it'll be an open
+[0:49:06] discuss uh and it'll be an open discussion I don't know the answer
+[0:49:07] discussion I don't know the answer either but I thought just to set that up
+[0:49:10] either but I thought just to set that up I'll um maybe give a two- minute Prime
+[0:49:12] I'll um maybe give a two- minute Prime on what Laten Factor models are and then
+[0:49:14] on what Laten Factor models are and then using that we can have the language to
+[0:49:16] using that we can have the language to have this discussion that's right
+[0:49:24] Ricardo okay so what is the lat Factor model so here's a two minut so uh it's
+[0:49:27] model so here's a two minut so uh it's normally imposed on on the potential
+[0:49:29] normally imposed on on the potential outcomes for view so say I have some
+[0:49:30] outcomes for view so say I have some potential outcome for some unit n say
+[0:49:32] potential outcome for some unit n say it's an individual or a cell type
+[0:49:34] it's an individual or a cell type whatever you have and some outcome T so
+[0:49:37] whatever you have and some outcome T so you know different kind of variable and
+[0:49:39] you know different kind of variable and you want to know for that unit and that
+[0:49:41] you want to know for that unit and that outcome what is the uh outcome under sum
+[0:49:43] outcome what is the uh outcome under sum intervention a the type of assumption
+[0:49:47] intervention a the type of assumption you make in the L Factor model world is
+[0:49:48] you make in the L Factor model world is that you can write it in terms of a
+[0:49:50] that you can write it in terms of a bilinear product of a unit specific
+[0:49:52] bilinear product of a unit specific Laten factor which is called VN here and
+[0:49:55] Laten factor which is called VN here and the outcome an intervention specific
+[0:49:57] the outcome an intervention specific Laden factor which is WTA okay and it's
+[0:49:59] Laden factor which is WTA okay and it's taken as an inner product of those two
+[0:50:01] taken as an inner product of those two things so VN and WTA have a low
+[0:50:03] things so VN and WTA have a low dimensional representation and there
+[0:50:05] dimensional representation and there some residual term Epsilon NTA that's
+[0:50:07] some residual term Epsilon NTA that's your source of Randomness in such models
+[0:50:10] your source of Randomness in such models and the key thing that's being used is
+[0:50:12] and the key thing that's being used is that that lets you kind of generalize is
+[0:50:14] that that lets you kind of generalize is that the unit specifically in factor is
+[0:50:16] that the unit specifically in factor is invariant across interventions and
+[0:50:17] invariant across interventions and outcomes and that's kind of the key
+[0:50:19] outcomes and that's kind of the key structural assumption a parametric
+[0:50:20] structural assumption a parametric assumption that's made and the second
+[0:50:22] assumption that's made and the second assumption that's made is that the the
+[0:50:24] assumption that's made is that the the Epsilon NT which is the uh the residual
+[0:50:26] Epsilon NT which is the uh the residual term is an independent random variable
+[0:50:28] term is an independent random variable that is mean zero conditional related
+[0:50:30] that is mean zero conditional related factors okay so that's the basically the
+[0:50:32] factors okay so that's the basically the parametric assumption that's made and
+[0:50:35] parametric assumption that's made and the type of dag that we that's
+[0:50:36] the type of dag that we that's fundamentally studied these things is is
+[0:50:38] fundamentally studied these things is is the following which is you have some Lan
+[0:50:40] the following which is you have some Lan factors those Lan factors we saw the V
+[0:50:42] factors those Lan factors we saw the V the VN and wtas they can affect both the
+[0:50:44] the VN and wtas they can affect both the treatment assignment and the potential
+[0:50:47] treatment assignment and the potential outcomes okay and so as a result there's
+[0:50:49] outcomes okay and so as a result there's confounding because L factors affect
+[0:50:50] confounding because L factors affect both the assignment and the outcomes and
+[0:50:53] both the assignment and the outcomes and the potential outcomes are also a
+[0:50:54] the potential outcomes are also a function of this additional uh
+[0:50:56] function of this additional uh idiosyncratic shock Epsilon NTA but the
+[0:50:58] idiosyncratic shock Epsilon NTA but the general assumption that's made is the
+[0:50:59] general assumption that's made is the treatment assignment doesn't uh it's not
+[0:51:01] treatment assignment doesn't uh it's not a function of these idiosyncratic shocks
+[0:51:03] a function of these idiosyncratic shocks so essentially the confounders have some
+[0:51:05] so essentially the confounders have some sort of low dimensional
+[0:51:06] sort of low dimensional representation okay in in some latent
+[0:51:09] representation okay in in some latent space that's the fundamental assumption
+[0:51:10] space that's the fundamental assumption made in these kinds of
+[0:51:12] made in these kinds of models and the two the kind
+[0:51:14] models and the two the kind identification conditions for for
+[0:51:16] identification conditions for for generalization are as follows they're
+[0:51:18] generalization are as follows they're both kind of span inclusion conditions
+[0:51:20] both kind of span inclusion conditions so the idea is that if I want to find
+[0:51:22] so the idea is that if I want to find figure out what happened to some unit n
+[0:51:24] figure out what happened to some unit n under some unseen intervention a the
+[0:51:26] under some unseen intervention a the assumption is that the lat factor for
+[0:51:28] assumption is that the lat factor for that unit n can be written as some
+[0:51:29] that unit n can be written as some linear combination of the of some other
+[0:51:32] linear combination of the of some other units that received intervention a okay
+[0:51:34] units that received intervention a okay and so that basically can write your the
+[0:51:36] and so that basically can write your the outcome of one unit as some linear
+[0:51:38] outcome of one unit as some linear combination of the outcomes of other
+[0:51:39] combination of the outcomes of other units that receive the given
+[0:51:42] units that receive the given intervention and there's another
+[0:51:43] intervention and there's another inclusion which is that if I want to
+[0:51:46] inclusion which is that if I want to learn my model like you you said you
+[0:51:47] learn my model like you you said you have some observed outcomes under some
+[0:51:49] have some observed outcomes under some intervention similarly here the model
+[0:51:52] intervention similarly here the model the outcomes that you learn the
+[0:51:53] the outcomes that you learn the intervention you learn under right the
+[0:51:55] intervention you learn under right the WT you learn under that you observe
+[0:51:57] WT you learn under that you observe those need to be richer than the uh
+[0:52:00] those need to be richer than the uh latent factors that you generalize that
+[0:52:02] latent factors that you generalize that you want to generalize to and that's
+[0:52:04] you want to generalize to and that's normally given as the linear algebraic
+[0:52:05] normally given as the linear algebraic condition which is that you take the
+[0:52:06] condition which is that you take the Matrix of wtas for which you have
+[0:52:09] Matrix of wtas for which you have observations that the the column span of
+[0:52:12] observations that the the column span of that needs to contain the column span of
+[0:52:13] that needs to contain the column span of the lane factors for which you want to
+[0:52:15] the lane factors for which you want to generalize so you have kind of these two
+[0:52:17] generalize so you have kind of these two kinds of uh span inclusions for the unit
+[0:52:19] kinds of uh span inclusions for the unit specifically in factor and the
+[0:52:22] specifically in factor and the measurement and intervention
+[0:52:23] measurement and intervention specifically in factor and that's what
+[0:52:24] specifically in factor and that's what lets you generalize
+[0:52:26] lets you generalize okay so just to to uh to go back it's
+[0:52:29] okay so just to to uh to go back it's this L Factor model uh it's this kind of
+[0:52:32] this L Factor model uh it's this kind of conditional exity conditional lat
+[0:52:34] conditional exity conditional lat factors between the assignment and
+[0:52:35] factors between the assignment and outcomes and then these two span
+[0:52:37] outcomes and then these two span inclusions okay and so that with that I
+[0:52:40] inclusions okay and so that with that I kind want to go back to my the two
+[0:52:41] kind want to go back to my the two questions which is that um is there a
+[0:52:44] questions which is that um is there a way to generalize these ifms to allow
+[0:52:46] way to generalize these ifms to allow for this unobserved confounding when the
+[0:52:48] for this unobserved confounding when the unobserved confounders have some
+[0:52:50] unobserved confounders have some factorization and two is there a way to
+[0:52:51] factorization and two is there a way to map these these identification
+[0:52:53] map these these identification conditions in terms of span inclusions
+[0:52:55] conditions in terms of span inclusions that we have in the lean Factor models
+[0:52:57] that we have in the lean Factor models to conditions you would have in ifms and
+[0:52:58] to conditions you would have in ifms and vice versa so I have no idea what the
+[0:53:01] vice versa so I have no idea what the answer is but I thought maybe we can all
+[0:53:03] answer is but I thought maybe we can all of us can have that
+[0:53:10] discussion right thank you yeah this a very good question actually
+[0:53:13] very good question actually sorry oh no I just said Thank you please
+[0:53:16] sorry oh no I just said Thank you please feel free to discuss
+[0:53:18] feel free to discuss yeah yeah I what what I can share my
+[0:53:21] yeah yeah I what what I can share my screen just to refer to some of this SL
+[0:53:23] screen just to refer to some of this SL I had there already um
+[0:53:27] I had there already um yeah that I keep I'm think about
+[0:53:29] yeah that I keep I'm think about something like what you mention is which
+[0:53:32] something like what you mention is which kind of alternative formulations you
+[0:53:33] kind of alternative formulations you could have if you look at some the
+[0:53:36] could have if you look at some the motivating processes we have here right
+[0:53:38] motivating processes we have here right like
+[0:53:39] like this it is kind of a later process
+[0:53:42] this it is kind of a later process between the exposure and the outcome
+[0:53:44] between the exposure and the outcome right so I could think that maybe
+[0:53:46] right so I could think that maybe there's a sufficient reduction approach
+[0:53:49] there's a sufficient reduction approach that creat a bottle NE between these and
+[0:53:52] that creat a bottle NE between these and will be interventions on the L
+[0:53:54] will be interventions on the L distribution and for the lat
+[0:53:55] distribution and for the lat distribution of the outcomes being
+[0:53:59] distribution of the outcomes being variant to extent you can formulate this
+[0:54:03] variant to extent you can formulate this there is this some growing literature
+[0:54:05] there is this some growing literature something
+[0:54:08] something called C representation learning is kind
+[0:54:12] called C representation learning is kind of trying to do
+[0:54:14] of trying to do this although sometimes their goals may
+[0:54:16] this although sometimes their goals may be a bit fuzzy I mean I I like these
+[0:54:18] be a bit fuzzy I mean I I like these ideas a lot but sometimes not very clear
+[0:54:21] ideas a lot but sometimes not very clear what is ultimately that problem they try
+[0:54:22] what is ultimately that problem they try to solve so have interventions and have
+[0:54:24] to solve so have interventions and have the signal doesn't quite correspond to a
+[0:54:27] the signal doesn't quite correspond to a one to one but you have images for
+[0:54:30] one to one but you have images for instance you have exposures to a patient
+[0:54:33] instance you have exposures to a patient what mod your fmri what does it mean to
+[0:54:37] what mod your fmri what does it mean to say you have your stimulus causing some
+[0:54:39] say you have your stimulus causing some chain in activation you kind of want to
+[0:54:42] chain in activation you kind of want to extract some sort of pictures that have
+[0:54:44] extract some sort of pictures that have some meaning and way they can isolate
+[0:54:48] some meaning and way they can isolate the contribution
+[0:54:50] the contribution interventions so there something along
+[0:54:52] interventions so there something along those lines which again I'm trying to
+[0:54:54] those lines which again I'm trying to learn also myself how does it connect to
+[0:54:56] learn also myself how does it connect to instead of using factors down south more
+[0:55:00] instead of using factors down south more this factors on reserve sou more this
+[0:55:03] this factors on reserve sou more this latent components that mediate exposure
+[0:55:06] latent components that mediate exposure to
+[0:55:08] to outcome yeah absolutely do you think
+[0:55:10] outcome yeah absolutely do you think there could be any particular
+[0:55:12] there could be any particular algorithmic speed UPS or benefits by
+[0:55:15] algorithmic speed UPS or benefits by somehow regularizing the you know the
+[0:55:17] somehow regularizing the you know the unobserved Compounders to kind of have a
+[0:55:20] unobserved Compounders to kind of have a latent factorization in some way like
+[0:55:22] latent factorization in some way like one would do in in kind of the Matrix
+[0:55:23] one would do in in kind of the Matrix completion literature or PCA self
+[0:55:26] completion literature or PCA self um that gives you some sort of speed up
+[0:55:28] um that gives you some sort of speed up because rather than maybe learn the
+[0:55:29] because rather than maybe learn the densities of everything you're you know
+[0:55:31] densities of everything you're you know you're saying that the densities have
+[0:55:33] you're saying that the densities have some sort of factorization that that
+[0:55:35] some sort of factorization that that might speed up the the learning process
+[0:55:38] might speed up the the learning process because you said density estimation is
+[0:55:40] because you said density estimation is kind of a key bottleneck that shows up
+[0:55:42] kind of a key bottleneck that shows up when bring this to
+[0:55:44] when bring this to data I mean the actual factors that you
+[0:55:47] data I mean the actual factors that you may have the moment you you parametrize
+[0:55:50] may have the moment you you parametrize as a as a NE Network disect to
+[0:55:52] as a as a NE Network disect to themselves even the the scope effect
+[0:55:56] themselves even the the scope effect that could be a life set usually when
+[0:55:59] that could be a life set usually when I'm using the parameterizing data of a
+[0:56:01] I'm using the parameterizing data of a neuro Network I have Boton X in it right
+[0:56:03] neuro Network I have Boton X in it right what the dimensionality that you have
+[0:56:05] what the dimensionality that you have effectively is the dimens the smallest
+[0:56:06] effectively is the dimens the smallest hidden layer that you have in the ne
+[0:56:09] hidden layer that you have in the ne Network so there some way of think about
+[0:56:12] Network so there some way of think about how these factors could be compressed
+[0:56:15] how these factors could be compressed with smaller dimensionality than the
+[0:56:16] with smaller dimensionality than the actual elements in the density as a
+[0:56:19] actual elements in the density as a global
+[0:56:20] global compression I don't know how e this you
+[0:56:23] compression I don't know how e this you is something more
+[0:56:26] is something more along the lines of sharing some basis
+[0:56:29] along the lines of sharing some basis functions that are common to different
+[0:56:31] functions that are common to different factors and be processing them on
+[0:56:33] factors and be processing them on different stat this might be one yeah
+[0:56:35] different stat this might be one yeah one thing i' I've seen is where you kind
+[0:56:37] one thing i' I've seen is where you kind of uh make the Lan factors you take your
+[0:56:39] of uh make the Lan factors you take your high dimensional data you kind of learn
+[0:56:41] high dimensional data you kind of learn two separate neural networks uh one for
+[0:56:44] two separate neural networks uh one for say the unit specific L factors one for
+[0:56:47] say the unit specific L factors one for the intervention specific L factors one
+[0:56:48] the intervention specific L factors one for the outcome specifically in factors
+[0:56:51] for the outcome specifically in factors and then the last step of the Neal
+[0:56:52] and then the last step of the Neal network is kind of doing an inner
+[0:56:53] network is kind of doing an inner product between those various things and
+[0:56:55] product between those various things and so that's one way of regularizing the
+[0:56:57] so that's one way of regularizing the fit is that the last step of it is an
+[0:56:59] fit is that the last step of it is an inner product like as a bilinear inner
+[0:57:01] inner product like as a bilinear inner product and the the neur networks are
+[0:57:03] product and the the neur networks are kind of learning that latent
+[0:57:04] kind of learning that latent representation that brings you to that
+[0:57:06] representation that brings you to that latent factor um so that's one potential
+[0:57:09] latent factor um so that's one potential way you could regularize your neural
+[0:57:11] way you could regularize your neural network architecture I've seen that
+[0:57:12] network architecture I've seen that works kind of
+[0:57:17] effectively I think you have some questions coming I I have a sort of a um
+[0:57:21] questions coming I I have a sort of a um maybe a silly question so it looks like
+[0:57:24] maybe a silly question so it looks like this kind of
+[0:57:26] this kind of um Factor models are very general um so
+[0:57:29] um Factor models are very general um so how is it exactly related to causal
+[0:57:32] how is it exactly related to causal inference it seems that you could really
+[0:57:34] inference it seems that you could really describe a lot of kind of structures
+[0:57:37] describe a lot of kind of structures with these Factor graphs um but uh um I
+[0:57:42] with these Factor graphs um but uh um I guess there is there some kind of
+[0:57:45] guess there is there some kind of modularity that that's shared between
+[0:57:47] modularity that that's shared between the different regimes that somehow
+[0:57:49] the different regimes that somehow captured in these
+[0:57:51] captured in these graphs yes the modularity is in the
+[0:57:54] graphs yes the modularity is in the factor structure right if you think
+[0:57:56] factor structure right if you think about the
+[0:57:58] about the um let see one one motivat example I use
+[0:58:02] um let see one one motivat example I use was from mediation right if you were to
+[0:58:05] was from mediation right if you were to have factors describing how variables
+[0:58:08] have factors describing how variables responding to
+[0:58:09] responding to exposure this factors may depend on
+[0:58:12] exposure this factors may depend on subsets of the components of the
+[0:58:14] subsets of the components of the exposure so here the the exposure is a
+[0:58:17] exposure so here the the exposure is a vector to
+[0:58:19] vector to entries
+[0:58:21] entries and part of it is using water factors
+[0:58:24] and part of it is using water factors but part of it is using another factor
+[0:58:28] but part of it is using another factor and this is what the trick here would be
+[0:58:29] and this is what the trick here would be to be able to say well what would happen
+[0:58:31] to be able to say well what would happen if I had this imagine there is cigarette
+[0:58:34] if I had this imagine there is cigarette there's no ni there's everything else
+[0:58:37] there's no ni there's everything else when my data only has smokers and know
+[0:58:40] when my data only has smokers and know smokers so this is compositions about
+[0:58:43] smokers so this is compositions about how the exposures go into factors this a
+[0:58:45] how the exposures go into factors this a kind of more general idea than we have
+[0:58:48] kind of more general idea than we have with a specific graphical model imagine
+[0:58:50] with a specific graphical model imagine we have any factorization model doesn't
+[0:58:52] we have any factorization model doesn't need to be a net work we have
+[0:58:54] need to be a net work we have Independence model
+[0:58:55] Independence model that dictates a particular Factor Rising
+[0:58:59] that dictates a particular Factor Rising distribution how does your action Vector
+[0:59:02] distribution how does your action Vector decompose and these different factors
+[0:59:04] decompose and these different factors will tell you ways how it could be able
+[0:59:05] will tell you ways how it could be able to rearrange and your comination out of
+[0:59:09] to rearrange and your comination out of the factors that we
+[0:59:16] identify okay thank you Ricardo I think um we're just on time to finish um the
+[0:59:21] um we're just on time to finish um the seminar could I ask one more question
+[0:59:23] seminar could I ask one more question and if
+[0:59:26] and if I'll
+[0:59:26] I'll finish so I have h a question so I
+[0:59:30] finish so I have h a question so I thought that you had some comments on
+[0:59:33] thought that you had some comments on Discovery and I am very curious so in
+[0:59:36] Discovery and I am very curious so in terms of these Factor models I guess
+[0:59:38] terms of these Factor models I guess they
+[0:59:39] they are how do you think about like
+[0:59:42] are how do you think about like equivalence between these models like
+[0:59:43] equivalence between these models like there seem to be like many
+[0:59:45] there seem to be like many different cases that could like Factor
+[0:59:49] different cases that could like Factor model could represent such a huge class
+[0:59:51] model could represent such a huge class of possible models does that matter how
+[0:59:54] of possible models does that matter how do you think about discovering I guess
+[0:59:56] do you think about discovering I guess yes so the two m test to be Sol right
+[1:00:00] yes so the two m test to be Sol right one of them
+[1:00:01] one of them is condition dependencies among the
+[1:00:04] is condition dependencies among the components of the model so if you have
+[1:00:07] components of the model so if you have variable one run variable inde dependent
+[1:00:09] variable one run variable inde dependent another run variable given something
+[1:00:11] another run variable given something else you could principle query an oracle
+[1:00:14] else you could principle query an oracle for that whatever it
+[1:00:16] for that whatever it is the structureal learning form of
+[1:00:18] is the structureal learning form of course say you don't have just like when
+[1:00:20] course say you don't have just like when you have observational data only you
+[1:00:22] you have observational data only you only have that part regim I don't have
+[1:00:24] only have that part regim I don't have the intervention regim right you need to
+[1:00:25] the intervention regim right you need to come be able to link what happens under
+[1:00:27] come be able to link what happens under one regim to another one you need some
+[1:00:29] one regim to another one you need some sort of kind of fith like assumptions we
+[1:00:33] sort of kind of fith like assumptions we have a definition of basine as being SE
+[1:00:36] have a definition of basine as being SE is all zeros and there you say well if I
+[1:00:39] is all zeros and there you say well if I find this condition dependence all these
+[1:00:41] find this condition dependence all these random values under this design of all
+[1:00:44] random values under this design of all zeros I assume that this also hold under
+[1:00:47] zeros I assume that this also hold under other
+[1:00:49] other designs so this is kind of
+[1:00:52] designs so this is kind of generalization of fat to not only
+[1:00:56] generalization of fat to not only if it's observation to intervention
+[1:00:59] if it's observation to intervention procedure right under the observational
+[1:01:01] procedure right under the observational condition say depend constra some that
+[1:01:04] condition say depend constra some that independent con also hold an
+[1:01:06] independent con also hold an intervention so here translate into this
+[1:01:09] intervention so here translate into this langage me whatever discover equals z
+[1:01:12] langage me whatever discover equals z car the
+[1:01:14] car the sign doesn't need to adap to a tank
+[1:01:18] sign doesn't need to adap to a tank right it need to adap just to the
+[1:01:19] right it need to adap just to the independence model of a
+[1:01:23] independence model of a fact the the more
+[1:01:26] fact the the more have yeah this factorization that are
+[1:01:28] have yeah this factorization that are not Independence constraints there a
+[1:01:32] not Independence constraints there a type of interaction problem right so
+[1:01:34] type of interaction problem right so this this is interpret of course this
+[1:01:36] this this is interpret of course this are not random
+[1:01:38] are not random Val this independency is not a Us
+[1:01:41] Val this independency is not a Us Independence it's a kind of operational
+[1:01:43] Independence it's a kind of operational definition say well if we're able to
+[1:01:46] definition say well if we're able to factorize the these indicators and
+[1:01:49] factorize the these indicators and different factors that include the
+[1:01:52] different factors that include the data this would simplify the model CES
+[1:01:55] data this would simplify the model CES to break apart interaction of the it's
+[1:01:58] to break apart interaction of the it's like unov on graphical Mod Space like
+[1:02:01] like unov on graphical Mod Space like where interactions would go it depends
+[1:02:04] where interactions would go it depends where how they can be over factors this
+[1:02:07] where how they can be over factors this is of course hard test there the ways
+[1:02:09] is of course hard test there the ways some are to test interaction but even
+[1:02:12] some are to test interaction but even then you don't have much range of
+[1:02:14] then you don't have much range of variability between your factors you be
+[1:02:17] variability between your factors you be able to test that but you may have ideas
+[1:02:20] able to test that but you may have ideas like what we have Hier Ling you have
+[1:02:22] like what we have Hier Ling you have wise interactions that are not there we
+[1:02:25] wise interactions that are not there we assume that there's no three-way
+[1:02:26] assume that there's no three-way interaction like we
+[1:02:29] interaction like we do so these are ways think well how how
+[1:02:32] do so these are ways think well how how which other concepts of faithfulness
+[1:02:35] which other concepts of faithfulness would apply
+[1:02:43] here okay thanks I have a million more questions but I think I can email you
+[1:02:45] questions but I think I can email you out uh it's super
+[1:02:48] out uh it's super interesting okay I believe that's a good
+[1:02:50] interesting okay I believe that's a good time to end our um seminar today um
+[1:02:53] time to end our um seminar today um thanks again to to Ricardo for the talk
+[1:02:56] thanks again to to Ricardo for the talk and Anish for the discussion uh next
+[1:02:59] and Anish for the discussion uh next week we will have a early career uh
+[1:03:02] week we will have a early career uh event with two talks from um Michael
+[1:03:05] event with two talks from um Michael Santino from UC Berkeley and Chris
+[1:03:08] Santino from UC Berkeley and Chris harshaw from UC Berkeley and MIT so
+[1:03:11] harshaw from UC Berkeley and MIT so Michael was uh one of the uh sort of
+[1:03:15] Michael was uh one of the uh sort of found co-founders of the seminar series
+[1:03:17] found co-founders of the seminar series and uh and I know among all the
+[1:03:20] and uh and I know among all the organizers we're very excited to see him
+[1:03:22] organizers we're very excited to see him back so I hope I'll see you there as
+[1:03:25] back so I hope I'll see you there as well um thanks for coming to the seminar
+[1:03:28] well um thanks for coming to the seminar today thanks
