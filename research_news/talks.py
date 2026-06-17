@@ -380,41 +380,96 @@ def build_user_message(
 _DRIVE_ID_RE = re.compile(r"/file/d/([^/]+)|[?&]id=([^&]+)")
 
 
+def _drive_id(url: str) -> str | None:
+    m = _DRIVE_ID_RE.search(url or "")
+    return (m.group(1) or m.group(2)) if m else None
+
+
 def _drive_pdf_url(url: str) -> str:
     """Turn a Google Drive 'file/d/<id>/view' (or '?id=') link into a direct
     download URL; pass other URLs through (a direct .pdf works as-is)."""
-    m = _DRIVE_ID_RE.search(url or "")
-    if m:
-        fid = m.group(1) or m.group(2)
-        return f"https://drive.google.com/uc?export=download&id={fid}"
-    return url
+    fid = _drive_id(url)
+    return f"https://drive.google.com/uc?export=download&id={fid}" if fid else url
+
+
+def slides_path(talk_id: str) -> Path:
+    return SLIDES_DIR / f"{_slug(talk_id)}.pdf"
+
+
+def download_slides(talk: Talk, *, force: bool = False) -> Path | None:
+    """Download the talk's slide deck to data/talks/slides/<id>.pdf (best-effort).
+    Returns the path, or None (no slides URL, Drive permission/scan page, non-PDF,
+    network error). Reuses a cached file unless `force`."""
+    if not talk.slides:
+        return None
+    dest = slides_path(talk.id)
+    if dest.exists() and not force:
+        return dest
+    import httpx
+    fid = _drive_id(talk.slides)
+    # `drive.usercontent.google.com/...confirm=t` bypasses the virus-scan
+    # interstitial that the plain uc?export=download URL returns for many decks.
+    candidates = (
+        [f"https://drive.usercontent.google.com/download?id={fid}&export=download&confirm=t",
+         f"https://drive.google.com/uc?export=download&id={fid}"]
+        if fid else [talk.slides]
+    )
+    SLIDES_DIR.mkdir(parents=True, exist_ok=True)
+    try:
+        with httpx.Client(timeout=90, follow_redirects=True,
+                          headers={"User-Agent": "Mozilla/5.0 (research-news)"}) as c:
+            for url in candidates:
+                r = c.get(url)
+                if r.status_code == 200 and r.content.startswith(b"%PDF-"):
+                    dest.write_bytes(r.content)
+                    return dest
+    except Exception as e:  # noqa: BLE001
+        log.info("slides download failed for %s: %s", talk.id, e)
+        return None
+    log.info("slides for %s: Drive returned no PDF (private / scan page?)", talk.id)
+    return None
 
 
 def fetch_slides_text(talk: Talk, *, max_chars: int = MAX_SLIDES_CHARS) -> str:
-    """Download the talk's slide deck (best-effort) and extract its text. Cached
-    at data/talks/slides/<id>.pdf. Returns '' on any failure (no slides, a Drive
-    permission/scan page, a non-PDF, etc.)."""
-    if not talk.slides:
+    """Download (if needed) the talk's slide deck and extract its text. '' on any
+    failure."""
+    dest = download_slides(talk)
+    if not dest:
         return ""
-    import httpx
-
     from .deep_read import extract_pdf_text
-    SLIDES_DIR.mkdir(parents=True, exist_ok=True)
-    dest = SLIDES_DIR / f"{_slug(talk.id)}.pdf"
-    if not dest.exists():
-        try:
-            with httpx.Client(timeout=60, follow_redirects=True,
-                              headers={"User-Agent": "research-news/0.1"}) as c:
-                r = c.get(_drive_pdf_url(talk.slides))
-                r.raise_for_status()
-            if not r.content.startswith(b"%PDF-"):
-                log.info("slides for %s not a PDF (Drive scan/permission page?) — skipping", talk.id)
-                return ""
-            dest.write_bytes(r.content)
-        except Exception as e:  # noqa: BLE001
-            log.info("slides fetch failed for %s: %s", talk.id, e)
-            return ""
     return extract_pdf_text(dest, max_chars=max_chars)
+
+
+def run_slides(
+    *,
+    talk_ids: list[str] | None = None,
+    force: bool = False,
+    dry_run: bool = False,
+) -> int:
+    """Download slide decks for the selected talks. Returns how many are available
+    locally afterwards."""
+    _, talks = load_talks()
+    talks = _selected(talks, talk_ids)
+    have = [t for t in talks if t.slides]
+    log.info("%d/%d selected talk(s) have a slides URL", len(have), len(talks))
+    if dry_run:
+        for t in have:
+            log.info("  %s — %s", t.id, "cached" if slides_path(t.id).exists() else "to download")
+        return 0
+    delay = float(os.environ.get("TALKS_SLIDES_DELAY", "1"))
+    ok = fail = 0
+    for i, t in enumerate(have, 1):
+        if slides_path(t.id).exists() and not force:
+            ok += 1
+            continue
+        log.info("slides %d/%d: %s", i, len(have), t.id)
+        if download_slides(t, force=force):
+            ok += 1
+        else:
+            fail += 1
+        time.sleep(delay)
+    log.info("slides: %d available locally, %d failed (of %d with a URL)", ok, fail, len(have))
+    return ok
 
 
 def ground_truth_context(talk: Talk) -> str:
@@ -790,6 +845,12 @@ def main() -> None:
     p_rd.add_argument("--force", action="store_true", help="re-read even if a page exists")
     p_rd.add_argument("--dry-run", action="store_true", help="list what would be read, no LLM")
 
+    p_sl = sub.add_parser("slides", help="download talk slide decks to data/talks/slides/ (local)")
+    p_sl.add_argument("--id", action="append", default=[], help="talk id (repeatable); omit with --all")
+    p_sl.add_argument("--all", action="store_true", help="download every talk's slides")
+    p_sl.add_argument("--force", action="store_true", help="re-download even if cached")
+    p_sl.add_argument("--dry-run", action="store_true", help="list what has slides, download nothing")
+
     p_oc = sub.add_parser("import-ocis",
                           help="import the OCIS catalog → config/talks.ocis.yaml (local)")
     p_oc.add_argument("--season", action="append", default=[],
@@ -812,6 +873,14 @@ def main() -> None:
 
     if args.cmd == "list":
         _print_list()
+        return
+
+    if args.cmd == "slides":
+        ids = list(args.id) or None
+        if not ids and not args.all:
+            ap.error("pass --id <id> (repeatable) or --all")
+        n = run_slides(talk_ids=ids, force=args.force, dry_run=args.dry_run)
+        print(f"slides available locally: {n}")
         return
 
     if args.cmd == "import-ocis":
