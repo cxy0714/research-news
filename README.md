@@ -170,6 +170,18 @@ git add -A && git commit -m "daily report $(date -I)" && git push
 - `git add -A` 会把报告（`docs/`）、数据（`data/`）和当天日志（`logs/`）一起提交——
   敏感 / 大文件（`.env`、`data/highlights/` 等）已在 `.gitignore` 里，不会误传。
 
+**服务器入口 `run_rn.sh`**：cron 直接指它即可。它负责机器相关的环节——cd 进仓库、激活
+venv、`git pull --rebase --autostash`（先同步网页 / agent 合进来的改动，省得收尾 `git push`
+被拒），再 `exec ./run_daily.sh`（真正的管道 + 锁都在那）。逻辑集中在 `run_daily.sh`（进版本
+控制），`run_rn.sh` 这层基本不用动。
+
+```cron
+# 工作日 09:10，只留这一个执行者
+10 9 * * 1-5 /root/research-news/run_rn.sh >> /root/rn.log 2>&1
+```
+
+放仓库外（如 `/root/run_rn.sh`）就设 `RN_REPO=/root/research-news`；放仓库里则自动定位。
+
 ### 显示全部论文（含低相关）+ 补全历史
 
 每日报告现在**展示当天打过分的所有论文**，不再只留阈值以上的。够格的（score ≥
