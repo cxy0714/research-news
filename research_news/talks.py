@@ -392,41 +392,54 @@ def _drive_pdf_url(url: str) -> str:
     return f"https://drive.google.com/uc?export=download&id={fid}" if fid else url
 
 
-def slides_path(talk_id: str) -> Path:
-    return SLIDES_DIR / f"{_slug(talk_id)}.pdf"
+_PRESENTATION_RE = re.compile(r"docs\.google\.com/presentation/d/([^/?#]+)")
+
+
+def _slides_candidates(url: str) -> list[str]:
+    """Ordered list of direct-download URLs to try for a slides link, by host:
+    Google Drive file, Google Slides presentation (→ export/pdf), Dropbox
+    (→ dl=1), or a plain PDF URL as-is."""
+    fid = _drive_id(url)
+    if fid:
+        # confirm=t bypasses the Drive virus-scan interstitial; uc?... is fallback
+        return [f"https://drive.usercontent.google.com/download?id={fid}&export=download&confirm=t",
+                f"https://drive.google.com/uc?export=download&id={fid}"]
+    m = _PRESENTATION_RE.search(url)
+    if m:
+        return [f"https://docs.google.com/presentation/d/{m.group(1)}/export/pdf"]
+    if "dropbox.com" in url:
+        u = re.sub(r"[?&]dl=0", "", url)
+        return [u + ("&" if "?" in u else "?") + "dl=1"]
+    return [url]
 
 
 def download_slides(talk: Talk, *, force: bool = False) -> Path | None:
     """Download the talk's slide deck to data/talks/slides/<id>.pdf (best-effort).
-    Returns the path, or None (no slides URL, Drive permission/scan page, non-PDF,
-    network error). Reuses a cached file unless `force`."""
+    Returns the path, or None (no slides URL, private / stale link, non-PDF,
+    network error). Reuses a cached file unless `force`. Handles Google Drive +
+    Google Slides + Dropbox + plain PDF URLs."""
     if not talk.slides:
         return None
     dest = slides_path(talk.id)
     if dest.exists() and not force:
         return dest
     import httpx
-    fid = _drive_id(talk.slides)
-    # `drive.usercontent.google.com/...confirm=t` bypasses the virus-scan
-    # interstitial that the plain uc?export=download URL returns for many decks.
-    candidates = (
-        [f"https://drive.usercontent.google.com/download?id={fid}&export=download&confirm=t",
-         f"https://drive.google.com/uc?export=download&id={fid}"]
-        if fid else [talk.slides]
-    )
     SLIDES_DIR.mkdir(parents=True, exist_ok=True)
+    headers = {"User-Agent": "Mozilla/5.0 (research-news)", "Accept": "application/pdf,*/*"}
     try:
-        with httpx.Client(timeout=90, follow_redirects=True,
-                          headers={"User-Agent": "Mozilla/5.0 (research-news)"}) as c:
-            for url in candidates:
-                r = c.get(url)
+        with httpx.Client(timeout=90, follow_redirects=True, headers=headers) as c:
+            for url in _slides_candidates(talk.slides):
+                try:
+                    r = c.get(url)
+                except Exception:  # noqa: BLE001 - try the next candidate
+                    continue
                 if r.status_code == 200 and r.content.startswith(b"%PDF-"):
                     dest.write_bytes(r.content)
                     return dest
     except Exception as e:  # noqa: BLE001
         log.info("slides download failed for %s: %s", talk.id, e)
         return None
-    log.info("slides for %s: Drive returned no PDF (private / scan page?)", talk.id)
+    log.info("slides for %s: no downloadable PDF (private / stale / unsupported host)", talk.id)
     return None
 
 

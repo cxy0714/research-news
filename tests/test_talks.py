@@ -274,6 +274,20 @@ def test_drive_pdf_url():
     assert talks._drive_pdf_url("https://example.com/deck.pdf") == "https://example.com/deck.pdf"
 
 
+def test_slides_candidates_by_host():
+    # Google Drive file → confirm-bypass first
+    d = talks._slides_candidates("https://drive.google.com/file/d/ABC/view")
+    assert d[0].startswith("https://drive.usercontent.google.com/download?id=ABC")
+    # Google Slides presentation → export/pdf
+    p = talks._slides_candidates("https://docs.google.com/presentation/d/XYZ/edit?usp=sharing")
+    assert p == ["https://docs.google.com/presentation/d/XYZ/export/pdf"]
+    # Dropbox → force dl=1
+    db = talks._slides_candidates("https://www.dropbox.com/s/abc/deck.pdf?dl=0")
+    assert db == ["https://www.dropbox.com/s/abc/deck.pdf?dl=1"]
+    # plain PDF → as-is
+    assert talks._slides_candidates("https://x.edu/talk.pdf") == ["https://x.edu/talk.pdf"]
+
+
 def test_ground_truth_context_includes_abstract():
     # No papers → no network call; just the OCIS abstract block.
     t = talks.Talk(id="x", url="u", abstract="The talk is about proximal causal inference.")
