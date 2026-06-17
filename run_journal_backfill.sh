@@ -45,7 +45,8 @@ echo "[$(date -Iseconds)] journal backfill done: $*"
 if [[ -n "$(git status --porcelain)" ]]; then
   git add -A
   git commit -m "journal backfill: $* ($(date -I))"
-  git push
+  # If the push is rejected (remote moved on), rebase onto it and retry once.
+  git push || { git pull --rebase --autostash && git push; }
 else
   echo "[$(date -Iseconds)] no new pages — unit already covered, nothing to commit"
 fi
