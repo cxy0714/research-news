@@ -268,6 +268,21 @@ def test_prefer_subs_skips_instead_of_asr(tmp_path, monkeypatch):
     assert not (tmp_path / "nocaps.txt").exists()
 
 
+def test_ground_truth_context_includes_abstract():
+    # No papers → no network call; just the OCIS abstract block.
+    t = talks.Talk(id="x", url="u", abstract="The talk is about proximal causal inference.")
+    ctx = talks.ground_truth_context(t)
+    assert "proximal causal inference" in ctx and "权威" in ctx
+
+
+def test_build_user_message_includes_context_and_discussant():
+    t = talks.Talk(id="x", url="u", title="T", discussant="Dr. D")
+    msg = talks.build_user_message(t, "transcript body", "interests",
+                                   context="## 报告摘要\nGROUND TRUTH ABSTRACT")
+    assert "GROUND TRUTH ABSTRACT" in msg
+    assert "Discussant: Dr. D" in msg
+
+
 def test_build_user_message_caps_and_includes(monkeypatch):
     monkeypatch.setattr(talks, "MAX_TRANSCRIPT_CHARS", 20)
     t = talks.Talk(id="x", url="u", title="T", papers=["2606.11421"])

@@ -183,6 +183,35 @@ def test_structured_quoted_title():
     assert r["title"] == "Testing an Elaborate Theory"      # discussant + (w/ ...) excluded
 
 
+def test_structured_captures_abstract_and_discussant():
+    block = (
+        "Tuesday, June 02, 2026:\n"
+        "- Speaker:\nJane Doe <https://x>\n(MIT)\n"
+        "- Title:\nA Talk\n"
+        "- Abstract:\nWe study double robustness under weak overlap.\n"
+        "- Discussant:\nBob Roe <https://y>\n(CMU)\n"
+        "[\nVideo <https://youtu.be/abc>\n]"
+    )
+    r = ocis.parse_talks_structured(block)[0]
+    assert r["abstract"] == "We study double robustness under weak overlap."
+    assert r["discussant"] == "Bob Roe"          # affiliation + url stripped
+    e = ocis.row_to_talk_entry(r)
+    assert e["abstract"].startswith("We study") and e["discussant"] == "Bob Roe"
+
+
+def test_merge_talk_entries_enriches(tmp_path):
+    path = tmp_path / "talks.ocis.yaml"
+    ocis.write_talks_yaml([{"id": "a", "url": "u1", "title": "A"}], path=path)
+    merged = ocis.merge_talk_entries(
+        [{"id": "a", "url": "u1", "title": "A", "abstract": "now with abstract"},
+         {"id": "b", "url": "u2", "title": "B"}],
+        path=path,
+    )
+    by_id = {e["id"]: e for e in merged}
+    assert by_id["a"]["abstract"] == "now with abstract"   # existing entry enriched
+    assert "b" in by_id and len(merged) == 2               # new id appended, none dropped
+
+
 def test_structured_skips_panel_without_video():
     block = (
         "Tuesday, April 21, 2026:\n"

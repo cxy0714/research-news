@@ -88,6 +88,11 @@ class Talk:
     # arXiv ids / DOIs the talk is about → cross-linked to their deep-read pages
     # (and optionally auto-queued into the paper deep-read pipeline).
     papers: list[str] = field(default_factory=list)
+    # The talk's own abstract + discussant, when the source page carries them
+    # (OCIS season pages do). The abstract is authoritative, ASR-error-free
+    # ground truth fed into the read; the discussant is shown for context.
+    abstract: str | None = None
+    discussant: str | None = None
     # One of llm.prompts.TOPICS — used to slot the talk into the archive's topic
     # grouping. Defaults to "other" when unset.
     topic: str | None = None

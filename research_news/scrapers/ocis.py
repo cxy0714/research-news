@@ -195,10 +195,10 @@ def parse_talks_structured(text: str) -> list[dict]:
             m = _MARKER_RE.match(ln) or _BARE_MARKER_RE.match(ln)
             if m:
                 label = m.group(1).strip().lower()
-                if label.startswith(("discussant", "panel")):
-                    cur = "_skip"      # drop discussant / panel lines
+                if label.startswith("panel"):
+                    cur = "_skip"      # drop panel lines (not a single-speaker talk)
                 else:
-                    cur = label
+                    cur = label        # speaker / title / abstract / discussant / ...
                     fields[cur] = [m.group(2)] if m.group(2).strip() else []
                 continue
             if cur is None:
@@ -245,6 +245,9 @@ def parse_talks_structured(text: str) -> list[dict]:
                 title = " ".join(cands)
         title = title.strip(" \"“”'")
 
+        abstract = _clean_inline(" ".join(fields.get("abstract", [])))
+        discussant = _clean_speaker(" ".join(fields.get("discussant", [])))
+
         kinds: dict[str, str] = {}
         for u in _INLINE_URL_RE.findall("\n".join(block)):
             kind = classify_link(u)
@@ -255,6 +258,8 @@ def parse_talks_structured(text: str) -> list[dict]:
             "date": normalize_date(date_str),
             "speaker": speaker or None,
             "title": title or None,
+            "abstract": abstract or None,
+            "discussant": discussant or None,
             "video": kinds.get("video"),
             "arxiv": kinds.get("arxiv") or kinds.get("doi"),
             "slides": kinds.get("slides"),
@@ -327,6 +332,8 @@ def row_to_talk_entry(row: dict) -> dict | None:
         "date": normalize_date(row.get("date")),
         "topic": "causal_inference",
         "language": "en",
+        "discussant": (row.get("discussant") or "").strip() or None,
+        "abstract": (row.get("abstract") or "").strip() or None,
     }
     aid = arxiv_id_from_url(row.get("arxiv") or "")
     if aid:
@@ -354,6 +361,33 @@ def dedupe_entries(entries: list[dict]) -> list[dict]:
 def write_catalog(rows: list[dict], path: Path = CATALOG_PATH) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(rows, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def merge_talk_entries(new_entries: list[dict], path: Path = OCIS_TALKS_YAML) -> list[dict]:
+    """Merge freshly-parsed entries into the existing talks.ocis.yaml by id.
+
+    Existing entries are kept (in order); a matching id gets the new non-empty
+    fields filled in / refreshed (season pages are richer than the index, so they
+    add abstract / discussant without dropping anything); new ids are appended.
+    """
+    existing: list[dict] = []
+    if path.exists():
+        cfg = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+        existing = cfg.get("talks", []) or []
+    by_id: dict[str, dict] = {e["id"]: dict(e) for e in existing if e.get("id")}
+    order: list[str] = [e["id"] for e in existing if e.get("id")]
+    for ne in new_entries:
+        eid = ne.get("id")
+        if not eid:
+            continue
+        if eid in by_id:
+            for k, v in ne.items():
+                if v not in (None, "", []):
+                    by_id[eid][k] = v
+        else:
+            by_id[eid] = ne
+            order.append(eid)
+    return [by_id[i] for i in order]
 
 
 def write_talks_yaml(entries: list[dict], path: Path = OCIS_TALKS_YAML) -> None:
@@ -482,8 +516,9 @@ def import_pages(
         rows = rows[:limit]
     write_catalog(rows)
     entries = dedupe_entries([e for r in rows if (e := row_to_talk_entry(r))])
-    log.info("OCIS import: %d talk(s), %d with video → %s",
-             len(rows), len(entries), OCIS_TALKS_YAML)
+    n_abstracts = sum(1 for e in entries if e.get("abstract"))
+    log.info("OCIS import: %d talk(s), %d with video, %d with abstract → %s",
+             len(rows), len(entries), n_abstracts, OCIS_TALKS_YAML)
     if not catalog_only:
-        write_talks_yaml(entries)
+        write_talks_yaml(merge_talk_entries(entries))
     return rows

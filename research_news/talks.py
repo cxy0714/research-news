@@ -92,6 +92,8 @@ def _talk_from_raw(raw: dict) -> Talk | None:
         asr_prompt=raw.get("asr_prompt"),
         language=raw.get("language"),
         segments=list(raw.get("segments") or []),
+        abstract=raw.get("abstract"),
+        discussant=raw.get("discussant"),
     )
 
 
@@ -346,6 +348,7 @@ def build_user_message(
     transcript: str,
     interests_text: str,
     *,
+    context: str = "",
     segment_title: str | None = None,
     segment_speaker: str | None = None,
 ) -> str:
@@ -356,16 +359,44 @@ def build_user_message(
         f"Date: {talk.date or 'unknown'}",
         f"Video: {talk.url}",
     ]
+    if talk.discussant:
+        meta.append(f"Discussant: {talk.discussant}")
     if talk.papers:
-        meta.append("Candidate papers (from curator, verify against the talk): "
-                    + ", ".join(talk.papers))
+        meta.append("Candidate papers (verify against the talk): " + ", ".join(talk.papers))
     transcript = transcript[:MAX_TRANSCRIPT_CHARS]
     return (
         "## Researcher interests\n" + interests_text + "\n\n"
         "## Talk metadata\n" + "\n".join(meta) + "\n\n"
-        "## Transcript (ASR — may contain errors; timestamps are [H:MM:SS])\n"
+        + (context + "\n\n" if context else "")
+        + "## Transcript (ASR — may contain errors; timestamps are [H:MM:SS])\n"
         + transcript + "\n"
     )
+
+
+def ground_truth_context(talk: Talk) -> str:
+    """Authoritative, ASR-error-free context for the read: the talk's own OCIS
+    abstract plus the abstract(s) of its arXiv paper(s). Best-effort — arXiv is
+    fetched live, so failures are skipped silently."""
+    blocks: list[str] = []
+    if talk.abstract:
+        blocks.append(
+            "## 报告摘要（来源页面官方，权威、无 ASR 错误——据此校正转写里听错的"
+            "标题 / 人名 / 术语）\n" + talk.abstract
+        )
+    for pid in talk.papers or []:
+        if not _is_arxiv_id(pid):
+            continue
+        try:
+            p = fetch_arxiv_by_id(pid)
+        except Exception:  # noqa: BLE001
+            p = None
+        if p and p.abstract:
+            authors = ", ".join(p.authors[:8]) + (" et al." if len(p.authors) > 8 else "")
+            blocks.append(
+                f"## 对应论文摘要（arXiv {pid}，权威）\nTitle: {p.title}\n"
+                f"Authors: {authors}\nAbstract: {p.abstract}"
+            )
+    return "\n\n".join(blocks)
 
 
 def read_talk(
@@ -379,8 +410,11 @@ def read_talk(
     segment_speaker: str | None = None,
 ) -> str:
     """Return a Markdown reading-note body for one talk (empty on failure)."""
+    context = ground_truth_context(talk)
+    if context:
+        log.info("talk %s: attached ground-truth abstract(s) (%d chars)", talk.id, len(context))
     user = build_user_message(
-        talk, transcript, interests_text,
+        talk, transcript, interests_text, context=context,
         segment_title=segment_title, segment_speaker=segment_speaker,
     )
     try:
@@ -420,12 +454,16 @@ def _render_talk_page(
     lines = [f"# {title}\n"]
     if speaker:
         lines.append(f"**讲者**: {speaker}  ")
+    if talk.discussant:
+        lines.append(f"**讨论人**: {talk.discussant}  ")
     if talk.venue:
         lines.append(f"**来源**: {talk.venue}  ")
     if talk.date:
         lines.append(f"**日期**: {talk.date}  ")
     lines.append(f"**主题**: {topic_label}  ")
     lines.append(f"**视频**: <{talk.url}>\n")
+    if talk.abstract:
+        lines.append(f"> **官方摘要**：{talk.abstract}\n")
     lines.append(
         "> 本页据讲座录音的自动转写（ASR）生成。**人名 / 术语 / 公式 / 具体的率与界可能被听错**，"
         "关键处请对照视频或讲者论文核对。\n"
