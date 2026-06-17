@@ -650,6 +650,10 @@ def _print_list() -> None:
 
 def main() -> None:
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
+    # The HuggingFace model download spams INFO-level httpx request lines; keep
+    # the console focused on ingest/transcribe progress.
+    for noisy in ("httpx", "httpcore", "huggingface_hub", "urllib3", "filelock"):
+        logging.getLogger(noisy).setLevel(logging.WARNING)
     ap = argparse.ArgumentParser(
         description="Conference talk pipeline: transcribe lectures and read them into notes.")
     sub = ap.add_subparsers(dest="cmd", required=True)
