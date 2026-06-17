@@ -3,15 +3,16 @@ set -euo pipefail
 
 cd "$(dirname "$0")"
 
-# ── Mutual-exclusion: bail if another instance is still running ──
-# Guards against two triggers firing at once (e.g. a system crontab AND an
-# OpenClaw/agent cron both starting this around the same minute).
-LOCKDIR=/tmp/research-news-daily.lock
-if ! mkdir "$LOCKDIR" 2>/dev/null; then
-  echo "[$(date -Iseconds)] Another instance is running (lockdir=$LOCKDIR). Exiting." >&2
-  exit 1
+# ── single-run lock ───────────────────────────────────────────────────────────
+# Guard against two triggers firing at once (e.g. a system crontab AND an
+# OpenClaw/agent cron starting this around the same minute). flock holds the lock
+# for the lifetime of this process; the kernel releases it automatically on exit
+# — even on kill -9 — so there's no stale lock to clean up by hand.
+exec 9>"${TMPDIR:-/tmp}/research-news-daily.lock"
+if ! flock -n 9; then
+  echo "[$(date -Iseconds)] another run is already in progress — exiting" >&2
+  exit 0
 fi
-trap 'rmdir "$LOCKDIR" 2>/dev/null' EXIT
 
 # Activate venv if you use one:
 # source .venv/bin/activate

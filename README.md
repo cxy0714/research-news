@@ -150,7 +150,7 @@ python -m research_news.backfill_deep_reads --retry-stubs --dry-run
 ### 自动化：每天跑完顺手恢复（cron + 锁）
 
 `run_daily.sh` 已是「日跑 → 修乱码摘要 → **恢复当天失败的精读** → `git add -A` 提交推送」
-一条龙，并在最前面加了互斥锁（`mkdir` 锁目录）：
+一条龙，并在最前面加了互斥锁（`flock`）：
 
 ```bash
 python -m research_news.daily
@@ -164,9 +164,8 @@ git add -A && git commit -m "daily report $(date -I)" && git push
 - **只留一个执行者**。最稳是系统 crontab 直接跑脚本；agent 那边的 cron 改成「跑完后检查
   结果并汇报」，不要也去 `exec` 跑一遍。锁能兜住「同一分钟两个触发」并行的情况（第二个检测到
   锁直接退出），但单一触发更干净。
-- 脚本用锁目录 `/tmp/research-news-daily.lock`（`mkdir` 原子创建，`trap … EXIT` 退出时
-  清理）；若进程被 `kill -9` / 断电没跑到 trap，锁目录会残留，手动 `rmdir` 即可，或改用
-  `flock` 锁（内核在进程退出时自动释放、无残留）。
+- 锁用 `flock`（锁文件 `${TMPDIR:-/tmp}/research-news-daily.lock`）：内核在进程退出时
+  自动释放，`kill -9` / 断电都不会留下死锁，无需手动清理。
 - `git add -A` 会把报告（`docs/`）、数据（`data/`）和当天日志（`logs/`）一起提交——
   敏感 / 大文件（`.env`、`data/highlights/` 等）已在 `.gitignore` 里，不会误传。
 
