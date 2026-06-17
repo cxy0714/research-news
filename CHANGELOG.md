@@ -60,6 +60,13 @@
   补全复用，保证两条路径渲染一致。
 
 ### Fixed
+- **重复运行 daily 会把当天报告覆盖成近乎空白（数据丢失）**：`seen_papers.json` 是跨天全局
+  去重，对同一天再跑一次 daily 时 `filter_new` 会把当天**已处理**的论文全过滤掉，
+  `render_daily` 随即用只剩零星几篇的页**覆盖**掉完整报告（2026-06-17 实际从 66KB 被覆盖成
+  6.5KB）。新增**重跑保护**：目标日期报告已存在且未加 `--force` 时直接跳过渲染、绝不覆盖；
+  `--force` 重生成时跳过 seen 去重以产出完整页。这样 `run_daily.sh` 一天内被重复触发也安全
+  （daily 步骤跳过、`--retry-stubs` 照常补当天失败的精读）。被覆盖的 06-17 报告已从 git
+  历史恢复。
 - **被引检索 / 机构查询失败显示真实状态码，404 不再重试**：`references.py`（Semantic
   Scholar）与 `affiliations.py`（OpenAlex）原先把异常被 `RetryError[HTTPStatusError]`
   吞掉，看不出是 404（论文尚未被收录）还是 429（限速）——而两者解法完全不同。新增

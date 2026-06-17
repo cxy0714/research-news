@@ -15,7 +15,7 @@ from .highlights import save_highlights
 from .llm.pipeline import extract_events, score_papers, summarize_paper
 from .llm.sjtu_client import SJTUClient
 from .models import Event, Paper
-from .render.markdown import render_daily, update_index
+from .render.markdown import DOCS_DIR, render_daily, update_index
 from .score_log import append_scored as append_score_log
 from .scrapers import affiliations as affil
 from .scrapers import arxiv as arxiv_scraper
@@ -71,19 +71,39 @@ def _parse_thresholds(interests_text: str) -> tuple[float, float, float]:
     )
 
 
-def run(dry_run: bool = False, for_date: date | None = None) -> Path:
+def run(dry_run: bool = False, for_date: date | None = None,
+        force: bool = False) -> Path:
     load_dotenv()
     sources_cfg, interests_text = _load_config()
     th_show, th_highlight, th_deepread = _parse_thresholds(interests_text)
 
     report_date = for_date or date.today()
+    out_path = DOCS_DIR / f"{report_date.isoformat()}.md"
+
+    # Re-run guard. The seen-set (data/seen_papers.json) is global, so re-running
+    # daily for a date that already has a report makes filter_new strip that
+    # date's already-processed papers, and render_daily would then overwrite the
+    # good page with an almost-empty one. Refuse to clobber unless --force.
+    if out_path.exists() and not force and not dry_run:
+        log.warning(
+            "daily report %s already exists — skipping render so a re-run can't "
+            "clobber it with a deduped (near-empty) page. Pass --force to "
+            "regenerate from scratch.", out_path,
+        )
+        return out_path
+
     log.info("collecting papers for %s ...", report_date)
     papers = _collect_papers(sources_cfg, for_date=for_date)
     log.info("collected %d papers before dedup", len(papers))
 
     seen = load_seen()
-    papers = filter_new(papers, seen)
-    log.info("%d papers after dedup", len(papers))
+    if force:
+        # A forced regen wants the whole day's set, not the leftover after dedup
+        # (those papers are 'seen' from the run we're replacing).
+        log.info("--force: skipping seen-set dedup for a complete re-render")
+    else:
+        papers = filter_new(papers, seen)
+        log.info("%d papers after dedup", len(papers))
 
     if dry_run:
         log.info("dry run: skipping LLM")
@@ -233,6 +253,13 @@ def main() -> None:
         metavar="N",
         help="Fetch papers from N days ago (e.g. 3 on Monday to get Friday's papers)",
     )
+    ap.add_argument(
+        "--force",
+        action="store_true",
+        help="Regenerate even if the date's report already exists (skips seen-set "
+             "dedup so the re-render is complete). Without this, an existing "
+             "report is left untouched to avoid clobbering it on a re-run.",
+    )
     args = ap.parse_args()
 
     for_date: date | None = None
@@ -241,7 +268,7 @@ def main() -> None:
     elif args.lookback_days > 0:
         for_date = date.today() - timedelta(days=args.lookback_days)
 
-    run(dry_run=args.dry_run, for_date=for_date)
+    run(dry_run=args.dry_run, for_date=for_date, force=args.force)
 
 
 if __name__ == "__main__":
