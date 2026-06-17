@@ -22,6 +22,8 @@
   8/10 [daily]
 - [Semiparametric Dynamic Logit Model with Endogenous Networks](deep_reads/2026-06-17-2606.16230.md)  
   8/10 [daily]
+- [Decision Theory for the Archetype Discovery Problem](deep_reads/2026-06-17-2606.15002.md)  
+  7/10 [daily]
 - [Anytime-valid Optimal Policy Identification](deep_reads/2026-06-17-2606.17515.md)  
   7/10 [daily]
 - [Partial Identification from LLM Prompts](deep_reads/2026-06-17-2606.15031.md)  

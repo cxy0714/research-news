@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-06-17.md)
 
-### 精读论文（33 篇）
+### 精读论文（34 篇）
 
 - [Semiparametric Mediation Analysis with Separately Observed Mediator and Outcome under Unmeasured Confounding](deep_reads/2026-06-17-2606.17232.md)  
   `因果推断` · 相关性 10/10
@@ -49,6 +49,8 @@
   `因果推断` · 相关性 8/10
 - [Scalable Bayesian data curation for next-generation radio experiments](deep_reads/2026-06-17-2606.16525.md)  
   `天体统计` · 相关性 8/10
+- [Decision Theory for the Archetype Discovery Problem](deep_reads/2026-06-17-2606.15002.md)  
+  `因果推断` · 相关性 7/10
 - [Anytime-valid Optimal Policy Identification](deep_reads/2026-06-17-2606.17515.md)  
   `因果推断` · 相关性 7/10
 - [A Polyak-Ruppert Central Limit Theorem for SA-Adam with Momentum and Non-Convergent Adaptive Preconditioning](deep_reads/2026-06-17-2606.17364.md)  
