@@ -4,6 +4,16 @@
 
 ### Daily
 
+- [Semiparametric Mediation Analysis with Separately Observed Mediator and Outcome under Unmeasured Confounding](deep_reads/2026-06-17-2606.17232.md)  
+  10/10 [daily]
+- [Proximal Mediation Analysis with Hidden Recanting Witnesses](deep_reads/2026-06-17-2606.17600.md)  
+  9/10 [daily]
+- [Beyond Parallel Trends in Staggered Difference-in-Differences: Identification under Higher-Order Parallelism](deep_reads/2026-06-17-2606.17977.md)  
+  9/10 [daily]
+- [Statistical Foundations of LLM-based A/B Testing: A Surrogacy Framework for Human Causal Inference](deep_reads/2026-06-17-2606.17165.md)  
+  8/10 [daily]
+- [Kernel-Based Functional Balancing for Causal Inference with Compositional Treatments](deep_reads/2026-06-17-2606.17308.md)  
+  8/10 [daily]
 - [Causal Sufficient Dimension Reduction for Multiple Continuous Exposures with an Application to Environmental Mixtures](deep_reads/2026-06-17-2606.14840.md)  
   8/10 [daily]
 - [Bounding Causal Effects for Ordinal Outcomes Under Positive Dependence](deep_reads/2026-06-17-2606.15754.md)  
@@ -12,8 +22,14 @@
   8/10 [daily]
 - [Semiparametric Dynamic Logit Model with Endogenous Networks](deep_reads/2026-06-17-2606.16230.md)  
   8/10 [daily]
+- [Anytime-valid Optimal Policy Identification](deep_reads/2026-06-17-2606.17515.md)  
+  7/10 [daily]
 - [Partial Identification from LLM Prompts](deep_reads/2026-06-17-2606.15031.md)  
   7/10 [daily]
+- [On Response-Adaptive Targeting Strategies for Multi-Treatment Experiments](deep_reads/2026-06-17-2606.17777.md)  
+  6/10 [daily]
+- [Subgroup analysis in randomized controlled trials with binary outcomes: dilution and logic-respecting properties](deep_reads/2026-06-17-2606.17841.md)  
+  6/10 [daily]
 - [Semiparametric Local Projections](deep_reads/2026-06-13-2606.13519.md)  
   9/10 [daily]
 - [Causal invariance in graphical models with latent variables](deep_reads/2026-06-13-2606.13281.md)  
@@ -408,6 +424,8 @@
 
 ### Daily
 
+- [Non-asymptotic Tail Bounds for the Kostlan--Shub--Smale Field: Tensor PCA and Spherical $k$-Spin Complexity](deep_reads/2026-06-17-2606.17665.md)  
+  8/10 [daily]
 - [Higher-order spectral perturbation expansions II: Kernel matrices and manifold learning](deep_reads/2026-06-17-2606.16373.md)  
   7/10 [daily]
 - [Phase transition of Schott's statistic for high-dimensional heavy-tailed data](deep_reads/2026-06-13-2606.12943.md)  
@@ -576,6 +594,8 @@
   7/10 [daily]
 - [Optimal Multiscale Learning of Linear Operators](deep_reads/2026-06-17-2606.16913.md)  
   7/10 [daily]
+- [Inference Optimal Long Run Variance Estimation with Lugsail Kernels](deep_reads/2026-06-17-2606.17369.md)  
+  6/10 [daily]
 - [Bias-Reduced GEE via Adjusted Estimating Equations, with Odds-Ratio Extensions](deep_reads/2026-06-17-2606.16043.md)  
   6/10 [daily]
 - [Volterra--Wiener--Kunchenko Orthogonalization: From Wiener--Hermite to Distribution-Matched Volterra Bases](deep_reads/2026-06-13-2606.12884.md)  
@@ -1102,6 +1122,8 @@
 
 ### Daily
 
+- [A Polyak-Ruppert Central Limit Theorem for SA-Adam with Momentum and Non-Convergent Adaptive Preconditioning](deep_reads/2026-06-17-2606.17364.md)  
+  7/10 [daily]
 - [Spectral Sparsification of Laplacian-Constrained Gaussian and H\"usler-Reiss Graphical Models](deep_reads/2026-06-17-2606.16681.md)  
   7/10 [daily]
 - [On the design distribution for predictive Bayesian regression](deep_reads/2026-06-16-2606.14544.md)  
@@ -1251,6 +1273,10 @@
 
 - [Scalable Bayesian data curation for next-generation radio experiments](deep_reads/2026-06-17-2606.16525.md)  
   8/10 [daily]
+- [On-sky binary source hypothesis testing beyond the diffraction limit using spatial mode demultiplexing based detection](deep_reads/2026-06-17-2606.18025.md)  
+  6/10 [daily]
+- [Querying an astronomical database using large language models: the ALeRCE text-to-SQL system](deep_reads/2026-06-17-2606.18108.md)  
+  6/10 [daily]
 - [Artifact-Conditioned Interval Diagnostics for Flow-Matching Neural Posterior Estimation in a Controlled Gravitational-Wave Benchmark](deep_reads/2026-06-13-2606.12496.md)  
   7/10 [daily]
 - [Feasibility of up-the-ramp sampling under variable sky for ground-based spectrographs](deep_reads/2026-06-13-2606.13600.md)  

@@ -17,14 +17,26 @@
 
 [→ 查看完整报告](daily/2026-06-17.md)
 
-### 精读论文（20 篇）
+### 精读论文（33 篇）
 
+- [Semiparametric Mediation Analysis with Separately Observed Mediator and Outcome under Unmeasured Confounding](deep_reads/2026-06-17-2606.17232.md)  
+  `因果推断` · 相关性 10/10
+- [Proximal Mediation Analysis with Hidden Recanting Witnesses](deep_reads/2026-06-17-2606.17600.md)  
+  `因果推断` · 相关性 9/10
+- [Beyond Parallel Trends in Staggered Difference-in-Differences: Identification under Higher-Order Parallelism](deep_reads/2026-06-17-2606.17977.md)  
+  `因果推断` · 相关性 9/10
 - [Bias-Aware External-Model-Assisted Inference in High-Dimensional Regression](deep_reads/2026-06-17-2606.15602.md)  
   `效率理论 / Debiased ML` · 相关性 9/10
 - [Paired Sample Tests for High-dimensional Uncorrelatedness via Random Integration](deep_reads/2026-06-17-2606.15636.md)  
   `数理统计 / 假设检验` · 相关性 9/10
 - [Limit theorems of Azadkia-Chatterjee's conditional graph correlation](deep_reads/2026-06-17-2606.15433.md)  
   `非参数 / 半参数` · 相关性 9/10
+- [Statistical Foundations of LLM-based A/B Testing: A Surrogacy Framework for Human Causal Inference](deep_reads/2026-06-17-2606.17165.md)  
+  `因果推断` · 相关性 8/10
+- [Kernel-Based Functional Balancing for Causal Inference with Compositional Treatments](deep_reads/2026-06-17-2606.17308.md)  
+  `因果推断` · 相关性 8/10
+- [Non-asymptotic Tail Bounds for the Kostlan--Shub--Smale Field: Tensor PCA and Spherical $k$-Spin Complexity](deep_reads/2026-06-17-2606.17665.md)  
+  `高维统计 / 随机矩阵` · 相关性 8/10
 - [Causal Sufficient Dimension Reduction for Multiple Continuous Exposures with an Application to Environmental Mixtures](deep_reads/2026-06-17-2606.14840.md)  
   `因果推断` · 相关性 8/10
 - [Bounding Causal Effects for Ordinal Outcomes Under Positive Dependence](deep_reads/2026-06-17-2606.15754.md)  
@@ -37,6 +49,10 @@
   `因果推断` · 相关性 8/10
 - [Scalable Bayesian data curation for next-generation radio experiments](deep_reads/2026-06-17-2606.16525.md)  
   `天体统计` · 相关性 8/10
+- [Anytime-valid Optimal Policy Identification](deep_reads/2026-06-17-2606.17515.md)  
+  `因果推断` · 相关性 7/10
+- [A Polyak-Ruppert Central Limit Theorem for SA-Adam with Momentum and Non-Convergent Adaptive Preconditioning](deep_reads/2026-06-17-2606.17364.md)  
+  `统计计算 / 算法` · 相关性 7/10
 - [Kernel Density Estimation by Spectral Decomposition: Data-Driven Tapering and Superposition](deep_reads/2026-06-17-2606.15450.md)  
   `非参数 / 半参数` · 相关性 7/10
 - [Wild bootstrap for mean response inference in functional linear regression models](deep_reads/2026-06-17-2606.16089.md)  
@@ -53,6 +69,16 @@
   `非参数 / 半参数` · 相关性 7/10
 - [Partial Identification from LLM Prompts](deep_reads/2026-06-17-2606.15031.md)  
   `因果推断` · 相关性 7/10
+- [On Response-Adaptive Targeting Strategies for Multi-Treatment Experiments](deep_reads/2026-06-17-2606.17777.md)  
+  `因果推断` · 相关性 6/10
+- [Subgroup analysis in randomized controlled trials with binary outcomes: dilution and logic-respecting properties](deep_reads/2026-06-17-2606.17841.md)  
+  `因果推断` · 相关性 6/10
+- [Inference Optimal Long Run Variance Estimation with Lugsail Kernels](deep_reads/2026-06-17-2606.17369.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [On-sky binary source hypothesis testing beyond the diffraction limit using spatial mode demultiplexing based detection](deep_reads/2026-06-17-2606.18025.md)  
+  `天体统计` · 相关性 6/10
+- [Querying an astronomical database using large language models: the ALeRCE text-to-SQL system](deep_reads/2026-06-17-2606.18108.md)  
+  `天体统计` · 相关性 6/10
 - [Bartlett adjustment for Gaussian random effects meta-analysis](deep_reads/2026-06-17-2606.14837.md)  
   `数理统计 / 假设检验` · 相关性 6/10
 - [Separate versus pooled winsorization for group mean contrasts: a finite-sample theory](deep_reads/2026-06-17-2606.15097.md)  
