@@ -7,6 +7,7 @@
 ### 1. [10.1016/j.jeconom.2026.106219](https://doi.org/10.1016/j.jeconom.2026.106219) — The informativeness of combined experimental and observational data under dynamic selection
 - **作者**: Yechan Park, Yuya Sasaki
 - **期刊/来源**: Journal of Econometrics
+- **机构**: Harvard University Press · Vanderbilt University
 - **分类**: vol 254 · pp 106219
 - 相关性 9/10 · novelty: `new_theory`
 - **摘要**: 在动态选择（survivorship bias）设定下，本文研究长期因果效应 ATETS（Average Treatment Effect on the Treated Survivors）的 identification 问题。第一个理论结果：在无模型约束且无辅助数据时，ATETS 的 informative bounds 不可能获得——即 partial identification 下的完全负结果。第二个结果：利用短期实验数据与长期观测数据的组合（data combination，沿 Athey et al. 2020 路线），可以在不施加经典模型约束下获得 informative bounds，推翻上述不可能性。基于 Chesher & Rosen (2017) 的 systematic partial identification framework，本文推导了融合 data-combination principle 与经典模型约束的 sharp bounds。实证应用于职业培训项目对就业的长期效应。对您有用：本文的 impossibility-to-possibility via data combination 逻辑与 proximal CI 用 negative control 打破 identification impossibility 的思路有结构相似性，且 ATETS 的 dynamic selection 设定直接连接您 longitudinal causal inference 的子方向。

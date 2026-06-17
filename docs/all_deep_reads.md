@@ -4,6 +4,20 @@
 
 ### Daily
 
+- [Causal Sufficient Dimension Reduction for Multiple Continuous Exposures with an Application to Environmental Mixtures](deep_reads/2026-06-17-2606.14840.md)  
+  9/10 [daily]
+- [Bounding Causal Effects for Ordinal Outcomes Under Positive Dependence](deep_reads/2026-06-17-2606.15754.md)  
+  8/10 [daily]
+- [Identification and Inference for Algorithmic Frontiers with Selective Labels](deep_reads/2026-06-17-2606.14977.md)  
+  8/10 [daily]
+- [Two fully specified Bayes factors for hypothesis testing and sensitivity analysis in process tracing](deep_reads/2026-06-17-2606.16683.md)  
+  7/10 [daily]
+- [Decision Theory for the Archetype Discovery Problem](deep_reads/2026-06-17-2606.15002.md)  
+  7/10 [daily]
+- [Partial Identification from LLM Prompts](deep_reads/2026-06-17-2606.15031.md)  
+  7/10 [daily]
+- [Semiparametric Dynamic Logit Model with Endogenous Networks](deep_reads/2026-06-17-2606.16230.md)  
+  7/10 [daily]
 - [Semiparametric Local Projections](deep_reads/2026-06-13-2606.13519.md)  
   9/10 [daily]
 - [Causal invariance in graphical models with latent variables](deep_reads/2026-06-13-2606.13281.md)  
@@ -398,6 +412,8 @@
 
 ### Daily
 
+- [Higher-order spectral perturbation expansions II: Kernel matrices and manifold learning](deep_reads/2026-06-17-2606.16373.md)  
+  8/10 [daily]
 - [Phase transition of Schott's statistic for high-dimensional heavy-tailed data](deep_reads/2026-06-13-2606.12943.md)  
   8/10 [daily]
 - [Geometric bias in eigenspace perturbation under random heterogeneous noise](deep_reads/2026-06-12-2606.11263.md)  
@@ -554,6 +570,16 @@
 
 ### Daily
 
+- [Optimal Multiscale Learning of Linear Operators](deep_reads/2026-06-17-2606.16913.md)  
+  9/10 [daily]
+- [On the Geometry of Separation in Finite Gaussian Mixtures](deep_reads/2026-06-17-2606.16179.md)  
+  8/10 [daily]
+- [Kernel Density Estimation by Spectral Decomposition: Data-Driven Tapering and Superposition](deep_reads/2026-06-17-2606.15450.md)  
+  7/10 [daily]
+- [Wild bootstrap for mean response inference in functional linear regression models](deep_reads/2026-06-17-2606.16089.md)  
+  7/10 [daily]
+- [Spectral Sparsification of Laplacian-Constrained Gaussian and H\"usler-Reiss Graphical Models](deep_reads/2026-06-17-2606.16681.md)  
+  7/10 [daily]
 - [Volterra--Wiener--Kunchenko Orthogonalization: From Wiener--Hermite to Distribution-Matched Volterra Bases](deep_reads/2026-06-13-2606.12884.md)  
   8/10 [daily]
 - [Consistency of variational approximations under bounded Kullback--Leibler divergence](deep_reads/2026-06-13-2606.13230.md)  
@@ -749,6 +775,8 @@
 
 ### Daily
 
+- [Bias-Aware External-Model-Assisted Inference in High-Dimensional Regression](deep_reads/2026-06-17-2606.15602.md)  
+  9/10 [daily]
 - [Statistical Optimality of Prediction-Powered Inference](deep_reads/2026-06-09-2606.08730.md)  
   8/10 [daily]
 - [Ising Models on Inhomogeneous Random Graphs: Inference, Local Asymptotic Minimaxity, and Limit of Experiments](deep_reads/2026-06-08-2606.07065.md)  
@@ -852,6 +880,14 @@
 
 ### Daily
 
+- [Paired Sample Tests for High-dimensional Uncorrelatedness via Random Integration](deep_reads/2026-06-17-2606.15636.md)  
+  8/10 [daily]
+- [Limit theorems of Azadkia-Chatterjee's conditional graph correlation](deep_reads/2026-06-17-2606.15433.md)  
+  8/10 [daily]
+- [Bartlett adjustment for Gaussian random effects meta-analysis](deep_reads/2026-06-17-2606.14837.md)  
+  7/10 [daily]
+- [Separate versus pooled winsorization for group mean contrasts: a finite-sample theory](deep_reads/2026-06-17-2606.15097.md)  
+  6/10 [daily]
 - [Pivotal and identification-robust nonparametric inference in linear IV models](deep_reads/2026-06-12-2606.12185.md)  
   9/10 [daily]
 - [Cauchy Aggregation of Ridge-Regularized Hotelling Tests for High-Dimensional Change-Point Detection](deep_reads/2026-06-12-2606.14092.md)  
@@ -1211,6 +1247,8 @@
 
 ### Daily
 
+- [Scalable Bayesian data curation for next-generation radio experiments](deep_reads/2026-06-17-2606.16525.md)  
+  8/10 [daily]
 - [Artifact-Conditioned Interval Diagnostics for Flow-Matching Neural Posterior Estimation in a Controlled Gravitational-Wave Benchmark](deep_reads/2026-06-13-2606.12496.md)  
   7/10 [daily]
 - [Feasibility of up-the-ramp sampling under variable sky for ground-based spectrographs](deep_reads/2026-06-13-2606.13600.md)  
@@ -1588,6 +1626,8 @@
 
 ### Daily
 
+- [Minimax Synthesis of Network Mechanisms](deep_reads/2026-06-17-2606.15836.md)  
+  7/10 [daily]
 - [Testing Preferential Sampling](deep_reads/2026-06-12-2606.14615.md)  
   6/10 [daily]
 - [Introducing precision-weighted bias as a performance measure to inform the inclusion of adaptive designs in meta-analysis](deep_reads/2026-06-12-2606.12015.md)  
