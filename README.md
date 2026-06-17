@@ -123,6 +123,53 @@ python -m research_news.backfill_deep_reads --date 2026-05-29 --force
 
 两种模式补完都会自动刷新首页与存档页。
 
+### 恢复精读失败的页面（stub）
+
+深度阅读偶尔会失败（LLM 超时 / 报错），这时精读页只剩一行 `*（精读失败，请查看
+日志）*` 占位（其余 header 还在）。这些 stub 页可以一键全部重生成——从
+`data/llm_scores.jsonl` 还原论文（摘要 / 作者），按 `data/deep_reads_index.json` 的
+元数据补回 header，重跑深度阅读、就地覆盖：
+
+```bash
+# 把所有日期里失败的精读页全部重生成
+python -m research_news.backfill_deep_reads --retry-stubs
+
+# 只补某天 / 某段区间（跑完当天 daily 后只补当天）
+python -m research_news.backfill_deep_reads --retry-stubs --date 2026-06-17
+python -m research_news.backfill_deep_reads --retry-stubs --since 2026-06-08 --until 2026-06-17
+
+# 先空跑看会补哪些（不调 LLM、不下 PDF、不写盘）
+python -m research_news.backfill_deep_reads --retry-stubs --dry-run
+```
+
+- **找谁**：扫 `docs/deep_reads/*.md` 里带失败占位符的页；优先按文件名对上索引拿到真实
+  paper_id（arXiv 与 DOI 都行），索引里没有的退回从文件名解析（arXiv id 即文件名 slug）。
+- **幂等**：只重生成仍是 stub 的页，成功的精读不动；可放进每日 cron 反复跑。
+- 取代了早期一次性脚本 `rerun_stubs.py` / `rerun_deep_reads.py`（硬编码日期、且后者已失效）。
+
+### 自动化：每天跑完顺手恢复（cron + 锁）
+
+`run_daily.sh` 已是「日跑 → 修乱码摘要 → **恢复当天失败的精读** → `git add -A` 提交推送」
+一条龙，并在最前面加了互斥锁（`mkdir` 锁目录）：
+
+```bash
+python -m research_news.daily
+python -m research_news.rerun --date "$(date -I)"
+python -m research_news.backfill_deep_reads --retry-stubs --date "$(date -I)"   # ← 恢复 stub
+git add -A && git commit -m "daily report $(date -I)" && git push
+```
+
+部署建议（尤其是 OpenClaw / agent 这类托管环境）：
+
+- **只留一个执行者**。最稳是系统 crontab 直接跑脚本；agent 那边的 cron 改成「跑完后检查
+  结果并汇报」，不要也去 `exec` 跑一遍。锁能兜住「同一分钟两个触发」并行的情况（第二个检测到
+  锁直接退出），但单一触发更干净。
+- 脚本用锁目录 `/tmp/research-news-daily.lock`（`mkdir` 原子创建，`trap … EXIT` 退出时
+  清理）；若进程被 `kill -9` / 断电没跑到 trap，锁目录会残留，手动 `rmdir` 即可，或改用
+  `flock` 锁（内核在进程退出时自动释放、无残留）。
+- `git add -A` 会把报告（`docs/`）、数据（`data/`）和当天日志（`logs/`）一起提交——
+  敏感 / 大文件（`.env`、`data/highlights/` 等）已在 `.gitignore` 里，不会误传。
+
 ### 显示全部论文（含低相关）+ 补全历史
 
 每日报告现在**展示当天打过分的所有论文**，不再只留阈值以上的。够格的（score ≥

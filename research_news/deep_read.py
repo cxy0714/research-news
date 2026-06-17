@@ -42,6 +42,11 @@ FETCH_REFS = os.environ.get("DEEP_READ_FETCH_REFS", "1").strip().lower() not in 
 HOMEPAGE_URL = "https://cxy0714.github.io/"
 REPO_URL = "https://github.com/cxy0714/research-news"
 
+# Body written when the deep-read LLM call fails, so the page still has its
+# header. `backfill_deep_reads --retry-stubs` scans for this marker to find and
+# regenerate failed deep reads.
+DEEP_READ_FAILED_MARKER = "*（精读失败，请查看日志）*"
+
 
 def _slug(s: str) -> str:
     return re.sub(r"[^A-Za-z0-9_.-]+", "_", s).strip("_") or "unknown"
@@ -241,7 +246,7 @@ def _render_deep_read_page(
         lines.append(f"**链接**: <{paper.url}>\n")
     lines += [
         "---\n",
-        content if content else "*（精读失败，请查看日志）*",
+        content if content else DEEP_READ_FAILED_MARKER,
         f"\n---\n\nMaintained by 陈星宇 · "
         f"[Homepage]({HOMEPAGE_URL}) · [Source on GitHub]({REPO_URL})\n",
     ]

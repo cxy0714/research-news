@@ -36,17 +36,23 @@ from __future__ import annotations
 import argparse
 import logging
 import os
+import re
 from datetime import date
 from pathlib import Path
 
 import yaml
 from dotenv import load_dotenv
 
-from .deep_read import generate_deep_read_report, load_index
+from .deep_read import (
+    DEEP_READ_FAILED_MARKER,
+    DEEP_READS_DIR,
+    generate_deep_read_report,
+    load_index,
+)
 from .highlights import save_highlights
 from .models import Paper
 from .render.markdown import update_index
-from .rerun import _paper_from_row, load_score_index
+from .rerun import _paper_from_row, _pick_row, load_score_index
 
 log = logging.getLogger("research_news.backfill")
 
@@ -118,31 +124,23 @@ def qualifying_papers(
     return papers
 
 
-def backfill_date(
+def _deep_read_papers(
+    papers: list[Paper],
     run_date: str,
     *,
-    threshold: float,
     client,
     interests_text: str,
     model: str | None,
-    limit: int | None,
     dry_run: bool,
-    sources: set[str] | None,
-    force: bool,
+    verb: str,
 ) -> int:
-    """Backfill deep reads for one date. Returns the number deep-read."""
-    papers = qualifying_papers(run_date, threshold, sources=sources, force=force)
-    if limit is not None:
-        papers = papers[:limit]
-
+    """Shared tail: first-pass summary → download PDFs → deep read + index.
+    Returns the number deep-read (0 on empty / dry-run)."""
     if not papers:
-        log.info("%s: nothing to backfill (no new papers >= %.0f)", run_date, threshold)
+        log.info("%s: nothing to %s", run_date, verb)
         return 0
 
-    verb = "re-run" if force else "backfill"
-    log.info("%s: %d paper(s) to %s (score >= %.0f%s):",
-             run_date, len(papers), verb, threshold,
-             ", incl. already-deep-read" if force else "")
+    log.info("%s: %d paper(s) to %s:", run_date, len(papers), verb)
     for p in papers:
         log.info("  %s  score=%.0f  topic=%s  %s",
                  p.paper_id, p.score or 0, p.topic or "?", p.title[:70])
@@ -175,6 +173,127 @@ def backfill_date(
     return len(papers)
 
 
+def backfill_date(
+    run_date: str,
+    *,
+    threshold: float,
+    client,
+    interests_text: str,
+    model: str | None,
+    limit: int | None,
+    dry_run: bool,
+    sources: set[str] | None,
+    force: bool,
+) -> int:
+    """Backfill deep reads for one date. Returns the number deep-read."""
+    papers = qualifying_papers(run_date, threshold, sources=sources, force=force)
+    if limit is not None:
+        papers = papers[:limit]
+
+    if not papers:
+        log.info("%s: nothing to backfill (no new papers >= %.0f)", run_date, threshold)
+        return 0
+
+    verb = (f"re-run (score >= {threshold:.0f}, incl. already-deep-read)"
+            if force else f"backfill (score >= {threshold:.0f})")
+    return _deep_read_papers(
+        papers, run_date, client=client, interests_text=interests_text,
+        model=model, dry_run=dry_run, verb=verb,
+    )
+
+
+# ── failed-deep-read (stub) recovery ──────────────────────────────────────────
+
+def find_stub_entries(dates: set[str] | None = None) -> list[dict]:
+    """Deep-reads index entries whose page is a failure stub (the LLM call failed
+    and left ``DEEP_READ_FAILED_MARKER``). Matched by filename so both arxiv ids
+    and slugified DOIs resolve to their real paper_id. Restricted to ``dates``
+    (run dates) when given."""
+    index_by_name = {
+        Path(e["doc_path"]).name: e for e in load_index() if e.get("doc_path")
+    }
+    out: list[dict] = []
+    if not DEEP_READS_DIR.exists():
+        return out
+    for f in sorted(DEEP_READS_DIR.glob("*.md")):
+        try:
+            if DEEP_READ_FAILED_MARKER not in f.read_text(encoding="utf-8"):
+                continue
+        except OSError:
+            continue
+        entry = index_by_name.get(f.name)
+        if entry is None:
+            # Stub page with no index entry (e.g. an older / partial run). Recover
+            # date + id from the filename: for arxiv ids the slug == paper_id
+            # (DOIs are lossy, but those are virtually always indexed).
+            m = re.match(r"^(\d{4}-\d{2}-\d{2})-(.+)$", f.stem)
+            if not m:
+                log.warning("stub %s: can't parse date/id from name — skipping", f.name)
+                continue
+            entry = {"paper_id": m.group(2), "date": m.group(1),
+                     "doc_path": f"deep_reads/{f.name}",
+                     "topic": None, "score": None, "title": None}
+        if dates and entry.get("date") not in dates:
+            continue
+        out.append(entry)
+    return out
+
+
+def stub_papers(
+    entries: list[dict], score_index: dict[str, list[dict]], run_date: str
+) -> list[Paper]:
+    """Rebuild Paper objects for stub ``entries`` from the score log (abstract /
+    authors), patched with the index metadata (topic / score / title) so the
+    regenerated page keeps its header."""
+    papers: list[Paper] = []
+    for e in entries:
+        rows = score_index.get(e["paper_id"])
+        if not rows:
+            log.warning("stub %s (%s): not in score log — cannot rebuild, skipping",
+                        e["paper_id"], run_date)
+            continue
+        p = _paper_from_row(_pick_row(rows, run_date))
+        p.topic = p.topic or e.get("topic")
+        if e.get("score") is not None:
+            p.score = float(e["score"])
+        if not p.title:
+            p.title = e.get("title") or ""
+        papers.append(p)
+    return papers
+
+
+def retry_stubs(
+    *,
+    dates: set[str] | None,
+    client,
+    interests_text: str,
+    model: str | None,
+    dry_run: bool,
+) -> int:
+    """Regenerate every failed (stub) deep-read page, optionally limited to
+    ``dates``. Returns the number regenerated."""
+    entries = find_stub_entries(dates=dates)
+    if not entries:
+        log.info("no stub deep reads found%s", " in scope" if dates else "")
+        return 0
+
+    by_date: dict[str, list[dict]] = {}
+    for e in entries:
+        by_date.setdefault(e["date"], []).append(e)
+    log.info("found %d stub deep read(s) across %d date(s): %s",
+             len(entries), len(by_date), ", ".join(sorted(by_date)))
+
+    score_index = load_score_index()
+    total = 0
+    for d in sorted(by_date):
+        papers = stub_papers(by_date[d], score_index, d)
+        total += _deep_read_papers(
+            papers, d, client=client, interests_text=interests_text,
+            model=model, dry_run=dry_run, verb="retry failed deep-read",
+        )
+    return total
+
+
 def _dates_in_range(since: str, until: str) -> list[str]:
     """Every run_date in the score log between since and until (inclusive)."""
     index = load_score_index()
@@ -193,11 +312,33 @@ def run(
     dry_run: bool = False,
     sources: set[str] | None = None,
     force: bool = False,
+    retry_stubs_mode: bool = False,
 ) -> int:
     """Backfill deep reads for one date or a date range. Returns total deep-read."""
     load_dotenv()
     threshold = threshold if threshold is not None else _default_threshold()
     interests_text = _interests_text()
+
+    # Stub recovery has its own paper selection (scan pages, not score threshold)
+    # and date scope (all stub dates by default), so it branches early.
+    if retry_stubs_mode:
+        if date_str:
+            dates: set[str] | None = {date_str}
+        elif since and until:
+            dates = {d for d in {e["date"] for e in find_stub_entries()}
+                     if since <= d <= until}
+        else:
+            dates = None  # all stub dates
+        client = None
+        if not dry_run:
+            from .llm.sjtu_client import SJTUClient
+            client = SJTUClient()
+        total = retry_stubs(dates=dates, client=client, interests_text=interests_text,
+                            model=model or DAILY_MODEL, dry_run=dry_run)
+        if total and not dry_run:
+            update_index()
+            log.info("retry-stubs done: %d deep read(s) regenerated; index refreshed", total)
+        return total
 
     if date_str:
         target_dates = [date_str]
@@ -270,11 +411,15 @@ def main() -> None:
         description="Backfill deep-read reports for past dailies under today's "
                     "(lower) score threshold, using data/llm_scores.jsonl."
     )
-    g = ap.add_mutually_exclusive_group(required=True)
+    g = ap.add_mutually_exclusive_group()
     g.add_argument("--date", metavar="YYYY-MM-DD", help="backfill a single run date")
     g.add_argument("--since", metavar="YYYY-MM-DD",
                    help="start of a date range (requires --until)")
     ap.add_argument("--until", metavar="YYYY-MM-DD", help="end of a date range")
+    ap.add_argument("--retry-stubs", action="store_true",
+                    help="instead of threshold backfill, regenerate every FAILED "
+                         "deep-read page (the '精读失败' stubs) from the score log; "
+                         "scope to --date / --since..--until or default to all dates")
     ap.add_argument("--threshold", type=float,
                     help="score cutoff (default: score_threshold_deepread from "
                          "config/interests.yaml)")
@@ -296,6 +441,8 @@ def main() -> None:
 
     if args.since and not args.until:
         ap.error("--since requires --until")
+    if not args.retry_stubs and not args.date and not args.since:
+        ap.error("specify --date, --since/--until, or --retry-stubs")
 
     run(
         date_str=args.date,
@@ -307,6 +454,7 @@ def main() -> None:
         dry_run=args.dry_run,
         sources=set(args.sources) if args.sources else None,
         force=args.force,
+        retry_stubs_mode=args.retry_stubs,
     )
 
 

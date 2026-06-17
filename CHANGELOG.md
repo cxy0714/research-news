@@ -17,6 +17,14 @@
 ## [Unreleased]
 
 ### Added
+- **恢复失败的精读页 `backfill_deep_reads --retry-stubs`**：深度阅读偶尔失败（LLM 超时 /
+  报错），精读页只剩 `*（精读失败，请查看日志）*` 占位。新增 `--retry-stubs` 扫
+  `docs/deep_reads/*.md` 找这些 stub，从 `data/llm_scores.jsonl` 还原论文、按
+  `data/deep_reads_index.json` 补回 header，重跑深度阅读就地覆盖。按文件名对索引拿真实
+  paper_id（arXiv / DOI 都行），索引缺失则从文件名解析（arXiv id 即 slug）；幂等（只重生
+  成仍是 stub 的），可放进每日 cron。取代硬编码的一次性脚本 `rerun_stubs.py` /
+  `rerun_deep_reads.py`。`run_daily.sh` 已接入（日跑后补当天 stub），并加了 `flock` 互斥锁
+  防止两个触发并行、`git add -A` 一并提交 `docs/` + `data/` + `logs/`。
 - **每日报告展示全部论文 + 历史补全 `backfill_low_relevance`**：每日页不再只留阈值以上
   的论文。够格的（score ≥ `score_threshold_show`）照旧分组 + 生成中文摘要；其余的（低于
   阈值）汇到页尾 **🗂 其他论文** 一节，按评分由高到低排列，**只列 LLM 评分 + 一句简评，
