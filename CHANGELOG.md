@@ -17,6 +17,17 @@
 ## [Unreleased]
 
 ### Added
+- **期刊历史卷期回补 `run_journal_backfill.sh` + `ops/journal-backfill.md`**：把期刊积压的
+  历史卷期节奏化补齐——每天 daily 后补一个单元（一本刊若干期），顺序、绝不并行。去重让
+  「逐步加大 `--n-issues`」天然可续跑、重跑已覆盖单元零提交。脚本自动 pull → 抢锁（与 daily
+  同一把 `flock`）→ 跑 `research_news.journals` → 提交推送；`ops/journal-backfill.md` 是给
+  OpenClaw / 定时 agent 读的 runbook：按价值排序的待办队列（先补零覆盖的 prob_stats / astro /
+  epi，再加深 core / econ / applied / ieee）、操作流程与安全规则，状态用清单勾选记在 git 里。
+- **部署脚本统一 `run_rn.sh` + `run_daily.sh`**：`run_rn.sh` 作服务器入口（cd 仓库 → 激活
+  venv → `git pull --rebase --autostash` 先同步免得收尾 push 被拒 → `exec run_daily.sh`）；
+  `run_daily.sh` 持管道与锁（daily → 修摘要 → 恢复当天 stub → `git add -A` 提交推送）。逻辑
+  集中、进版本控制，cron 指 `run_rn.sh` 即可。互斥锁用 `flock`（进程退出内核自动释放，
+  `kill -9` / 断电不留死锁），daily 与期刊回补共用同一把、保证不并行。
 - **恢复失败的精读页 `backfill_deep_reads --retry-stubs`**：深度阅读偶尔失败（LLM 超时 /
   报错），精读页只剩 `*（精读失败，请查看日志）*` 占位。新增 `--retry-stubs` 扫
   `docs/deep_reads/*.md` 找这些 stub，从 `data/llm_scores.jsonl` 还原论文、按

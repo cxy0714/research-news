@@ -324,7 +324,28 @@ python -m research_news.journals --rerun --only AoS --issue v54-i1 \
   单页（如旧的 `2026-05-26-jasa.md`）暂不在 issue-rerun 范围内——JMLR 直接用普通
   `--only JMLR` 重抓即可。
 
-### 抓取完整性检查 + 报缺
+### 回补历史卷期（节奏化、agent 驱动）
+
+把期刊的历史卷期一点点补齐——每天 daily 跑完后补一个单元（一本刊的若干期），顺序进行、
+绝不并行，攒一两周补完积压。去重（`data/seen_papers.json`）让它天然可续跑：跑更大的
+`--n-issues` 只处理新冒出来的更老的期，重跑已覆盖的单元不产生任何提交。
+
+```bash
+# 一个单元（脚本自动 pull → 抢锁（与 daily 同一把）→ 跑 → 提交推送）
+./run_journal_backfill.sh --only AoS --n-issues 12
+./run_journal_backfill.sh --only JMLR --jmlr-n 3
+./run_journal_backfill.sh --only-group prob_stats --n-issues 8
+
+# 先估量（不调 LLM、不写盘、不抢锁）——大刊务必先看篇数再决定 N
+python -m research_news.journals --only TIT --n-issues 2 --dry-run
+```
+
+完整的待办清单 + agent 操作流程在 **[`ops/journal-backfill.md`](ops/journal-backfill.md)**：
+按价值排序的队列（先补完全没有的 prob_stats / astro / epi，再加深 core / econ / applied /
+ieee），状态用清单里的勾选记在 git 里。OpenClaw / 定时 agent 读它、每天补一项、打勾提交即可。
+**唯一硬约束是不并行**——`run_journal_backfill.sh` 和 `run_daily.sh` 共用同一把 `flock` 锁。
+
+
 
 期刊抓取偶尔会漏文章（Crossref 的 issue 列表按发表日排序 + `rows` 窗口截断，或个别文章
 缺 vol/issue 元数据没归进该期）。**权威目录脚本自己抓**，你只给期号就行：
