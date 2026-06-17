@@ -64,7 +64,11 @@ if (git status --porcelain) {
     for ($i = 1; $i -le 4; $i++) {
         git push
         if ($LASTEXITCODE -eq 0) { break }
+        # Push failed. Most often the remote moved on (another machine, or a
+        # web/agent merge) → a plain retry won't fix a non-fast-forward; rebase
+        # onto it, then retry (the backoff also rides out a transient network blip).
         Start-Sleep -Seconds ([math]::Pow(2, $i))
+        git pull --rebase --autostash
     }
 }
 

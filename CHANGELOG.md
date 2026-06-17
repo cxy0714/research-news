@@ -69,6 +69,10 @@
   补全复用，保证两条路径渲染一致。
 
 ### Fixed
+- **收尾 `git push` 被远程超前拒绝时会先 rebase 再重试**：之前 push 失败只是原样重试（带退避），
+  对 non-fast-forward（远程在本次运行期间被另一台机器 / 网页合并推进）无效，于是放弃、要手动
+  `git pull` 再推。现在 `run_daily.ps1` / `catch-up.ps1` / `run_daily.sh` / `run_journal_backfill.sh`
+  在 push 失败后都会 `git pull --rebase --autostash` 再推一次。
 - **多机日志文件名带机器名，避免跨机覆盖 / 混淆**：多台机器（云服务器 + 台式机）对同一仓库跑
   时，都写 `logs/<日期>.log` 会撞名、两边运行互相覆盖 / 交错，回看时分不清哪台跑的。新增
   `logsetup.host_tag()`，日志改名为 `logs/<日期>-<机器名>.log`（期刊 `journals-...`、Windows

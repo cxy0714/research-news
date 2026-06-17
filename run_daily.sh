@@ -31,7 +31,8 @@ python -m research_news.backfill_deep_reads --retry-stubs --date "$(date -I)"
 git add -A
 if [[ -n "$(git status --porcelain)" ]]; then
   git commit -m "daily report $(date -I)"
-  git push
+  # If the push is rejected (remote moved on), rebase onto it and retry once.
+  git push || { git pull --rebase --autostash && git push; }
 fi
 
 # Crontab example (run every weekday at 09:10) — use ONE executor only, either

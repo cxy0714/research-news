@@ -94,6 +94,9 @@ if ($missing.Count -gt 0 -and (git status --porcelain)) {
     for ($i = 1; $i -le 4; $i++) {
         git push
         if ($LASTEXITCODE -eq 0) { break }
+        # Rebase onto the remote before retrying — a non-fast-forward won't clear
+        # on a plain retry.
         Start-Sleep -Seconds ([math]::Pow(2, $i))
+        git pull --rebase --autostash
     }
 }
