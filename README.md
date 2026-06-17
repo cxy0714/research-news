@@ -641,10 +641,12 @@ Start-ScheduledTask -TaskName research-news-daily   # 立刻测一次
 
 期刊回补按 `ops/journal-backfill.md` 手动 / 半自动跑即可，不用进每日任务。
 
-**日志会自动传 GitHub**：每次跑会写两份到 `logs\`——`logs\<日期>.log`（管道详细日志：抓取 /
-打分 / 摘要 / 精读 / 报错）和 `logs\run-<日期>.log`（整次运行的完整 transcript：含 git、锁、
-PowerShell 层输出）。`run_daily.ps1` 收尾 `git add -A` 会把 `logs\` 一并提交推送，所以在 GitHub
-上就能回看每天跑了什么、哪步失败（比如 429 限流）。无人值守也有记录可查。
+**日志会自动传 GitHub（按机器分开）**：每次跑会写两份到 `logs\`——`logs\<日期>-<机器名>.log`
+（管道详细日志：抓取 / 打分 / 摘要 / 精读 / 报错）和 `logs\run-<日期>-<机器名>.log`（整次运行的
+完整 transcript：含 git、锁、PowerShell 层输出）。文件名带**机器名**（`host_tag()` / `COMPUTERNAME`），
+所以云服务器和台式机即使同一天跑也各写各的、**不会互相覆盖或混在一起**，回看时不会误判是哪台
+跑的。`run_daily.ps1` 收尾 `git add -A` 会把 `logs\` 一并提交推送，无人值守也有据可查（比如某步
+429 限流）。
 
 ## 部署到 GitHub Pages
 

@@ -360,7 +360,8 @@ def _setup_logging(log_dir: str = "logs") -> None:
     fmt = "%(asctime)s %(levelname)s %(name)s: %(message)s"
     datefmt = "%Y-%m-%d %H:%M:%S"
     Path(log_dir).mkdir(exist_ok=True)
-    log_file = Path(log_dir) / f"{date.today().isoformat()}.log"
+    from .logsetup import host_tag
+    log_file = Path(log_dir) / f"{date.today().isoformat()}-{host_tag()}.log"
     root = logging.getLogger()
     root.setLevel(logging.INFO)
     formatter = logging.Formatter(fmt, datefmt=datefmt)

@@ -11,9 +11,14 @@
 Set-Location -LiteralPath $PSScriptRoot
 $today = Get-Date -Format "yyyy-MM-dd"
 
-# Capture this run's console (wrapper + git + python) to a per-day transcript.
+# Capture this run's console (wrapper + git + python) to a per-day, per-machine
+# transcript, so logs from different machines pushing to the same repo don't
+# collide.
 New-Item -ItemType Directory -Force -Path "logs" | Out-Null
-Start-Transcript -Path "logs\run-$today.log" -Append -ErrorAction SilentlyContinue | Out-Null
+$hostTag = $env:COMPUTERNAME
+if (-not $hostTag) { $hostTag = "host" }
+$hostTag = ($hostTag -replace '[^A-Za-z0-9._-]', '-').ToLower()
+Start-Transcript -Path "logs\run-$today-$hostTag.log" -Append -ErrorAction SilentlyContinue | Out-Null
 
 # ── single-instance lock (Windows equivalent of flock) ────────────────────────
 # A named mutex the OS releases automatically when this process exits, so two
