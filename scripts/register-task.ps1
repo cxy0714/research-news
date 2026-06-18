@@ -2,15 +2,20 @@
 # repo root. Registering tasks can require admin — if you get "Access denied",
 # re-run this from an ELEVATED PowerShell (Start menu -> Windows PowerShell ->
 # Run as administrator; then `cd <repo>; .\scripts\register-task.ps1`).
-#   .\scripts\register-task.ps1                 # daily weekdays 09:10 + catch-up at logon
+#   .\scripts\register-task.ps1                       # daily 09:10 + catch-up + journals
 #   .\scripts\register-task.ps1 -Time "08:30"
-#   .\scripts\register-task.ps1 -NoCatchUp      # only the daily task
+#   .\scripts\register-task.ps1 -NoCatchUp -NoJournals  # only the daily task
+#   .\scripts\register-task.ps1 -JournalTime "14:00" -JournalMax 2
 
 param(
     [datetime]$Time = "09:10",
+    [datetime]$JournalTime = "10:30",
+    [int]$JournalMax = 1,
     [string]$TaskName = "research-news-daily",
     [string]$CatchUpTaskName = "research-news-catchup",
-    [switch]$NoCatchUp
+    [string]$JournalTaskName = "research-news-journals",
+    [switch]$NoCatchUp,
+    [switch]$NoJournals
 )
 
 $repo = Split-Path -Parent $PSScriptRoot          # repo root (script is in scripts\)
@@ -27,12 +32,13 @@ $settings = New-ScheduledTaskSettingsSet `
     -ExecutionTimeLimit (New-TimeSpan -Hours 6) `
     -DontStopIfGoingOnBatteries -AllowStartIfOnBatteries
 
-function Register-RnTask([string]$name, [string]$scriptFile, $trigger, [string]$desc) {
+function Register-RnTask([string]$name, [string]$scriptFile, $trigger, [string]$desc, [string]$extraArgs = "") {
     $path = Join-Path $repo $scriptFile
     if (-not (Test-Path $path)) { Write-Warning "$scriptFile not found at $path - skipped"; return $false }
+    $argument = "-NoProfile -ExecutionPolicy Bypass -File `"$path`""
+    if ($extraArgs) { $argument += " $extraArgs" }
     $action = New-ScheduledTaskAction -Execute "powershell.exe" `
-        -Argument "-NoProfile -ExecutionPolicy Bypass -File `"$path`"" `
-        -WorkingDirectory $repo
+        -Argument $argument -WorkingDirectory $repo
     try {
         # Current user, "run only when logged on" (no stored password).
         Register-ScheduledTask -TaskName $name -Action $action -Trigger $trigger `
@@ -64,6 +70,18 @@ if (-not $NoCatchUp) {
     }
 }
 
+# Journal back-catalog — weekdays at $JournalTime (after daily). Does the next
+# $JournalMax unit(s) of ops\journal-backfill.md; shares the daily lock so it
+# never overlaps the daily run.
+if (-not $NoJournals) {
+    $journalTrigger = New-ScheduledTaskTrigger -Weekly `
+        -DaysOfWeek Monday, Tuesday, Wednesday, Thursday, Friday -At $JournalTime
+    if (Register-RnTask $JournalTaskName "run_journal_backfill.ps1" $journalTrigger `
+            "research-news journal back-catalog backfill" "-Max $JournalMax") {
+        Write-Host "OK: '$JournalTaskName' - weekdays at $($JournalTime.ToString('HH:mm')) (max $JournalMax unit/run)."
+    }
+}
+
 Write-Host ""
 Write-Host "Test now:  Start-ScheduledTask -TaskName '$TaskName'"
-Write-Host "List both: Get-ScheduledTask -TaskName 'research-news-*'"
+Write-Host "List all:  Get-ScheduledTask -TaskName 'research-news-*'"
