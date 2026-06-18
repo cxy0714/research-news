@@ -21,13 +21,15 @@ $hostTag = ($hostTag -replace '[^A-Za-z0-9._-]', '-').ToLower()
 Start-Transcript -Path "logs\run-$today-$hostTag.log" -Append -ErrorAction SilentlyContinue | Out-Null
 
 # ── single-instance lock (Windows equivalent of flock) ────────────────────────
-# A named mutex the OS releases automatically when this process exits, so two
-# triggers (scheduled + a manual run) can never run in parallel. (The pipeline
-# itself also refuses to overwrite an existing report, so a re-run can't clobber
-# it — this lock just avoids wasting tokens on a redundant parallel run.)
+# A named mutex the OS releases automatically when this process exits, so the
+# daily run never overlaps a journal-backfill unit. We WAIT (up to 3h) for it
+# rather than bail, so daily is never skipped just because a journal unit is
+# mid-flight — it queues behind the current unit and runs as soon as it frees
+# the lock (the journal loop yields during the daily window, so the wait is
+# usually zero). The re-run guard in daily.py still prevents clobbering.
 $mutex = New-Object System.Threading.Mutex($false, "Global\research-news-daily")
-if (-not $mutex.WaitOne(0)) {
-    Write-Host "[$(Get-Date -Format o)] another run is already in progress - exiting"
+if (-not $mutex.WaitOne([TimeSpan]::FromHours(3))) {
+    Write-Host "[$(Get-Date -Format o)] lock held >3h - skipping this daily run"
     Stop-Transcript -ErrorAction SilentlyContinue | Out-Null
     return
 }

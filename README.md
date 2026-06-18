@@ -345,15 +345,18 @@ python -m research_news.journals --only TIT --n-issues 2 --dry-run
 里的勾选记在 git 里。
 
 **全自动（无需 agent）**：`python -m research_news.journal_backfill` 读这份清单，跑**下一个未
-打勾**的单元、成功后自动打勾。`--max N` 一次多跑几个、`--dry-run` 只看下一个。Windows 上用
-`run_journal_backfill.ps1`（注册成定时任务，见下方「定时」一节）每天自动补一格。
+打勾**的单元、成功后自动打勾（队列空时退出码非 0）。`--max N` 一次多跑几个、`--dry-run` 只看
+下一个。Windows 上 `run_journal_backfill.ps1` 是一个**连续循环**：一格接一格地补、直到队列空，
+单元之间释放锁；注册成开机自启的定时任务（见下方「定时」），机器常开就让它一直补。
 
-**唯一硬约束是不并行**——`run_journal_backfill.sh/.ps1` 和 `run_daily.ps1` 共用同一把锁
-（Windows 命名 Mutex / Linux flock），期刊回补会**排在 daily 之后**跑、绝不并行。
+**唯一硬约束是不并行**——`run_journal_backfill.ps1` 和 `run_daily.ps1` 共用同一把锁
+（Windows 命名 Mutex / Linux flock）。循环在 **daily 时段（默认 9:00–11:00、当天报告还没出来时）
+主动让路**、不抢锁；`run_daily.ps1` 也改成**等锁**（最多 3h）而不是跳过，所以 daily 永远不会因
+为期刊正在跑而被跳过——一格未跑完就 9:10 了的话，daily 会排在那格之后、跑完即出。
 
-> 每天跑多少？**token 不是瓶颈**（周配额 10 亿，日常只用 ~2-3%；一个单元才 0.2-0.5M）。
-> 瓶颈是**机器开机时长**：一本刊 `--n-issues 2-4` ≈ 40-120 篇 ≈ 30-90 分钟。所以默认**一天
-> 一格**（`-Max 1`），整个待办清单约 3-4 周补完；想快就 `-Max 2-3`、并让机器多开一会儿。
+> 跑多快？**token 不是瓶颈**（周配额 10 亿，日常只用 ~2-3%；一个单元才 0.2-0.5M）；瓶颈是
+> **机器开机时长**：一本刊 `--n-issues 2-4` ≈ 40-120 篇 ≈ 30-90 分钟。整个 28 格清单连续跑约
+> **1-2 天**（机器常开）就能补完，之后循环自动退出。`-Max N` 可限制每轮只跑 N 格。
 
 
 
@@ -641,11 +644,13 @@ Start-ScheduledTask -TaskName research-news-daily   # 立刻测一次
   开机后它会看最后一份日报是哪天，把**关机错过的工作日**用 `python -m research_news.daily --date <X>`
   一次性补齐（跳过周末，今天留给 09:10 那个任务）。默认最多往前补 14 天（`-MaxDays` 调），手动跑：
   `.\scripts\catch-up.ps1`。
-- `research-news-journals`：工作日 **10:30**（daily 之后）跑 `run_journal_backfill.ps1`，按
-  `ops\journal-backfill.md` 的队列**每天补一格期刊往期**（`-Max` 调每次格数）。换时间 / 格数 /
-  关掉：`register-task.ps1 -JournalTime "14:00" -JournalMax 2` / `-NoJournals`。
+- `research-news-journals`：**登录时启动一个连续循环** `run_journal_backfill.ps1`，按
+  `ops\journal-backfill.md` 的队列一格接一格补期刊往期、**直到队列空才退出**（每天 10:30 还有个
+  重启触发器兜底）。机器常开就让它一直补，约 1-2 天补完 28 格。它在 **daily 时段主动让路**。
+  限格数 / 改重启时间 / 关掉：`register-task.ps1 -JournalMax 5` / `-JournalTime "14:00"` / `-NoJournals`。
 
-三个任务**共用同一把锁**，所以会自动排队、绝不并行；daily 有重跑保护，已存在的报告不会被覆盖。
+三个任务**共用同一把锁**，所以绝不并行；期刊循环会给 daily 让路，daily 也改成**等锁不跳过**——
+所以 daily 永不被期刊挤掉，且有重跑保护、已存在的报告不会被覆盖。
 
 > 手动建任务的话：创建任务 → 触发器 周一至周五 09:10 → 操作
 > `powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\path\to\research-news\run_daily.ps1"`

@@ -103,7 +103,11 @@ def main() -> None:
     ap.add_argument("--dry-run", action="store_true",
                     help="show the next unit(s) without running journals")
     args = ap.parse_args()
-    run(max_units=args.max_units, dry_run=args.dry_run)
+    done = run(max_units=args.max_units, dry_run=args.dry_run)
+    # Exit non-zero on "no progress" (queue empty, or the unit failed) so a
+    # wrapper loop knows to stop; 0 means at least one unit was done.
+    if not args.dry_run and done == 0:
+        sys.exit(7)
 
 
 if __name__ == "__main__":

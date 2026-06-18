@@ -17,13 +17,16 @@
 ## [Unreleased]
 
 ### Added
-- **期刊往期回补全自动 `journal_backfill` + Windows 定时任务**：`python -m research_news.journal_backfill`
+- **期刊往期回补全自动 `journal_backfill` + Windows 连续循环任务**：`python -m research_news.journal_backfill`
   读 `ops/journal-backfill.md` 的待办清单，跑**下一个未打勾**的单元（一本刊的若干期）、成功后
-  自动打勾，无需 agent。`--max N` 一次多跑几格、`--dry-run` 预览。新增 `run_journal_backfill.ps1`
-  作 Windows 定时任务包装（与 daily 共用锁、排队不并行、pull→跑→提交推送、按机器名记 transcript），
-  `register-task.ps1` 现在第三个任务 `research-news-journals`（工作日 10:30、`-Max`/`-JournalTime`
-  可调、`-NoJournals` 关）。每天默认补一格——token 不是瓶颈（周配额 10 亿，单元才 0.2-0.5M），
-  限制是机器开机时长（一本刊 `--n-issues 2-4` ≈ 30-90 分钟）。
+  自动打勾、队列空时退出码非 0，无需 agent。`--max N` / `--dry-run`。`run_journal_backfill.ps1`
+  是一个**连续循环**：一格接一格补到队列空、单元间释放锁、pull→跑→提交推送（按机器名记日志）。
+  `register-task.ps1` 加第三个任务 `research-news-journals`（**登录自启循环** + 每日 10:30 重启兜底，
+  `-JournalMax`/`-JournalTime`/`-NoJournals` 可调）。机器常开约 1-2 天补完整个清单——token 不是
+  瓶颈（周配额 10 亿，单元才 0.2-0.5M），限制是开机时长。
+- **期刊循环给 daily 让路 + daily 改为等锁**：期刊循环在 daily 时段（默认 9:00–11:00、当天报告
+  还没出来时）不抢锁、主动让路；`run_daily.ps1` 的锁从「占用即跳过」改为「**等锁**最多 3h」。
+  两者配合保证 daily 永远不会因为期刊正在跑而被跳过（一格未跑完就到 9:10 的话，daily 排在其后）。
 - **期刊每期导览 `journal_overview`**：期刊每期页顶部加一段 LLM **导览**（归纳本期主线 /
   主题，**不打分、不排名**），和 OCIS 季页共用同一套「导览」模式。新跑的期自动带
   （`journals` → `render_journal_page(overview=…)`）；历史页用
