@@ -211,25 +211,18 @@ def test_render_talk_page_has_metadata(tmp_path, monkeypatch):
     assert "这场报告在讲哪条工作线" in body
 
 
-def test_update_index_dedups_and_writes_archive(tmp_path, monkeypatch):
+def test_update_index_dedups(tmp_path, monkeypatch):
     idx = tmp_path / "talks_index.json"
     monkeypatch.setattr(talks, "TALKS_INDEX", idx)
-    monkeypatch.setattr(talks, "DOCS_DIR", tmp_path)  # keep all_talks.md out of real docs/
     e1 = {"id": "a", "talk_id": "a", "date": "2026-06-01", "title": "Old",
           "venue": "OCIS", "topic": "causal_inference", "doc_path": "talks/a.md"}
     talks._update_index([e1])
-    # Re-run with the same id overwrites; a new id is added.
-    talks._update_index([{**e1, "title": "New"}])
+    talks._update_index([{**e1, "title": "New"}])              # same id overwrites
     talks._update_index([{"id": "b", "talk_id": "b", "date": "2026-06-10",
-                          "title": "Second", "venue": "INI", "topic": "other",
-                          "doc_path": "talks/b.md"}])
+                          "title": "Second", "doc_path": "talks/b.md"}])
     data = json.loads(idx.read_text(encoding="utf-8"))
-    assert len(data) == 2
-    assert [e["id"] for e in data] == ["b", "a"]                  # newest date first
+    assert [e["id"] for e in data] == ["b", "a"]               # newest date first
     assert [e for e in data if e["id"] == "a"][0]["title"] == "New"
-    archive = (tmp_path / "all_talks.md").read_text(encoding="utf-8")
-    assert "## OCIS" in archive and "## INI" in archive
-    assert "(talks/a.md)" in archive
 
 
 def test_ingest_from_subs_file(tmp_path, monkeypatch):

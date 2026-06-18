@@ -95,6 +95,9 @@ class Talk:
     # Slide deck URL (e.g. Google Drive PDF). Its extracted text is fed into the
     # read as another authoritative source alongside transcript + abstract + paper.
     slides: str | None = None
+    # Source season slug ('spring-2024') from the OCIS season page, used to group
+    # talks into per-season overview pages. Falls back to a date-derived season.
+    season: str | None = None
     # One of llm.prompts.TOPICS — used to slot the talk into the archive's topic
     # grouping. Defaults to "other" when unset.
     topic: str | None = None

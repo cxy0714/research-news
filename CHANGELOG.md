@@ -17,6 +17,13 @@
 ## [Unreleased]
 
 ### Added
+- **OCIS 讲座按季成页 + 导览 `talks seasons`**：把讲座目录按季（对齐 OCIS 官方分季，
+  `import-ocis` 现给每场打 `season` 标签，缺失则按日期派生）成页 `docs/talks/seasons/<季>.md`。
+  每页一段 **LLM 导览**（归纳本季主线、反复出现的方法、值得先看的几场，不打分不排名）+ 全部
+  报告：每场链到精读，**网页有元数据但未精读的也列出**（标「暂无精读」+ 视频/幻灯片/论文链接）。
+  `docs/all_talks.md` 改为**按季的索引**（年份分组、每季一行带场数与一句话导览），由
+  `talk_seasons` 接管（读流程不再重写它）。季页从全量 catalog 生成（含无视频/未精读的场次），
+  精读链接据 `data/talks_index.json` 解析。`--season` / `--no-overview`（离线）/ `--dry-run`。
 - **Windows 开机补齐缺天 `scripts\catch-up.ps1`**：台式机不会 24 小时开，关机会错过当天的
   定时跑。catch-up 找到最新的 `docs\daily\<日期>.md`，把从那以后到**昨天**缺的**工作日**用
   `daily --date <X>` 一次性补齐（跳过周末，今天留给 09:10 的 daily 任务）。靠 daily 的重跑

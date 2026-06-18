@@ -36,6 +36,14 @@ PAST_TALKS = "https://sites.google.com/view/ocis/past-talks"
 SEASONS = ("winter", "spring", "summer", "fall")
 VENUE = "OCIS (Online Causal Inference Seminar)"
 
+_SEASON_URL_RE = re.compile(r"/(winter|spring|summer|fall)-(\d{4})-talks")
+
+
+def season_from_url(url: str) -> str | None:
+    """'…/spring-2024-talks' → 'spring-2024'; None for the index page / other."""
+    m = _SEASON_URL_RE.search(url or "")
+    return f"{m.group(1)}-{m.group(2)}" if m else None
+
 CATALOG_PATH = Path("data/ocis_catalog.json")
 OCIS_TALKS_YAML = Path("config/talks.ocis.yaml")
 
@@ -335,6 +343,7 @@ def row_to_talk_entry(row: dict) -> dict | None:
         "discussant": (row.get("discussant") or "").strip() or None,
         "abstract": (row.get("abstract") or "").strip() or None,
         "slides": (row.get("slides") or "").strip() or None,
+        "season": (row.get("season") or "").strip() or None,
     }
     aid = arxiv_id_from_url(row.get("arxiv") or "")
     if aid:
@@ -358,6 +367,30 @@ def dedupe_entries(entries: list[dict]) -> list[dict]:
 
 
 # ── writers ───────────────────────────────────────────────────────────────────
+
+def merge_catalog(new_rows: list[dict], path: Path = CATALOG_PATH) -> list[dict]:
+    """Union the freshly-parsed rows with the existing catalog, keyed by talk id
+    (make_talk_id). New non-empty fields fill / refresh existing rows (so a
+    season re-import adds season + abstract without dropping the index rows)."""
+    existing: list[dict] = []
+    if path.exists():
+        try:
+            existing = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            existing = []
+    by_id: dict[str, dict] = {}
+    order: list[str] = []
+    for r in existing + new_rows:
+        rid = make_talk_id(r)
+        if rid not in by_id:
+            by_id[rid] = dict(r)
+            order.append(rid)
+        else:
+            for k, v in r.items():
+                if v not in (None, "", []):
+                    by_id[rid][k] = v
+    return [by_id[i] for i in order]
+
 
 def write_catalog(rows: list[dict], path: Path = CATALOG_PATH) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -508,14 +541,19 @@ def import_pages(
             page_rows = parse_talks_structured(clean_text_with_links(html, max_chars=2_000_000))
             if not page_rows:
                 log.warning("%s: structured parse found 0 talks — try --llm", label)
-        log.info("  %s: %d talk(s)", label, len(page_rows))
+        season = season_from_url(label)
+        if season:
+            for r in page_rows:
+                r.setdefault("season", season)
+        log.info("  %s: %d talk(s)%s", label, len(page_rows),
+                 f" [{season}]" if season else "")
         rows.extend(page_rows)
 
     if not rows:
         return rows
     if limit:
         rows = rows[:limit]
-    write_catalog(rows)
+    write_catalog(merge_catalog(rows))
     entries = dedupe_entries([e for r in rows if (e := row_to_talk_entry(r))])
     n_abstracts = sum(1 for e in entries if e.get("abstract"))
     log.info("OCIS import: %d talk(s), %d with video, %d with abstract → %s",

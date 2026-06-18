@@ -98,6 +98,7 @@ def _talk_from_raw(raw: dict) -> Talk | None:
         abstract=raw.get("abstract"),
         discussant=raw.get("discussant"),
         slides=raw.get("slides"),
+        season=raw.get("season"),
     )
 
 
@@ -621,7 +622,8 @@ def _load_index() -> list[dict]:
 
 def _update_index(new_entries: list[dict]) -> None:
     """Upsert talk entries (keyed by id) into data/talks_index.json, newest run
-    wins, then refresh docs/all_talks.md."""
+    wins. The site archive (docs/all_talks.md) is the per-season index, owned by
+    `talk_seasons` and refreshed via `talks seasons` — not rewritten on each read."""
     by_id = {e["id"]: e for e in _load_index()}
     for e in new_entries:
         by_id[e["id"]] = e
@@ -632,40 +634,6 @@ def _update_index(new_entries: list[dict]) -> None:
     )
     TALKS_INDEX.parent.mkdir(parents=True, exist_ok=True)
     TALKS_INDEX.write_text(json.dumps(merged, ensure_ascii=False, indent=2), encoding="utf-8")
-    _write_archive(merged)
-
-
-def _write_archive(entries: list[dict]) -> None:
-    """Refresh docs/all_talks.md (linked from the site nav), grouped by venue."""
-    lines = [
-        "# 讲座精读\n",
-        "会议 / seminar 录像（如 OCIS、INI workshop）转写后，按 deep-read 风格读成结构化笔记："
-        "工作线背景、最小内核、报告主体、对应论文与开放问题。**不打分、不排名**；"
-        "因来自自动转写，技术细节请对照视频 / 论文核对。\n",
-    ]
-    by_venue: dict[str, list[dict]] = {}
-    for e in entries:
-        by_venue.setdefault(e.get("venue") or "其他", []).append(e)
-    for venue in sorted(by_venue):
-        lines.append(f"## {venue}\n")
-        for e in sorted(by_venue[venue], key=lambda e: e.get("date") or "", reverse=True):
-            doc_path = e.get("doc_path")
-            if not doc_path:
-                continue
-            bits = []
-            if e.get("speaker"):
-                bits.append(e["speaker"])
-            if e.get("date"):
-                bits.append(e["date"])
-            topic_label = TOPIC_LABELS_ZH.get(e.get("topic", "other"), e.get("topic", "other"))
-            bits.append(topic_label)
-            meta = " · ".join(bits)
-            lines.append(f"- [{e.get('title') or e['id']}]({doc_path})  \n  {meta}")
-        lines.append("")
-    lines.append(
-        f"\n---\n\nMaintained by 陈星宇 · [Homepage]({HOMEPAGE_URL}) · [Source]({REPO_URL})\n"
-    )
-    (DOCS_DIR / "all_talks.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
 # ── run ───────────────────────────────────────────────────────────────────────
@@ -868,6 +836,14 @@ def main() -> None:
     p_sl.add_argument("--force", action="store_true", help="re-download even if cached")
     p_sl.add_argument("--dry-run", action="store_true", help="list what has slides, download nothing")
 
+    p_se = sub.add_parser("seasons",
+                          help="generate OCIS per-season overview pages + 导览 (local; uses LLM)")
+    p_se.add_argument("--season", action="append", default=[],
+                      help="season slug e.g. spring-2024 (repeatable); omit = all seasons")
+    p_se.add_argument("--no-overview", action="store_true", help="skip the LLM 导览 (offline)")
+    p_se.add_argument("--model", default=None, help="override the 导览 model")
+    p_se.add_argument("--dry-run", action="store_true", help="list seasons + counts, no write")
+
     p_oc = sub.add_parser("import-ocis",
                           help="import the OCIS catalog → config/talks.ocis.yaml (local)")
     p_oc.add_argument("--season", action="append", default=[],
@@ -898,6 +874,13 @@ def main() -> None:
             ap.error("pass --id <id> (repeatable) or --all")
         n = run_slides(talk_ids=ids, force=args.force, dry_run=args.dry_run)
         print(f"slides available locally: {n}")
+        return
+
+    if args.cmd == "seasons":
+        from . import talk_seasons
+        paths = talk_seasons.run(seasons=list(args.season) or None, model=args.model,
+                                 overview=not args.no_overview, dry_run=args.dry_run)
+        print(f"wrote {len(paths)} season page(s)")
         return
 
     if args.cmd == "import-ocis":
