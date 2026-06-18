@@ -161,6 +161,35 @@
 
 ### 期刊
 
+#### Electronic Journal of Statistics Vol 20 Issue 1
+
+- [Estimation and inference for high-dimensional nonparametric additive instrumental-variables regression](deep_reads/2026-06-18-10.1214_26-ejs2525.md)  
+  9/10 [journals]
+- [Inference for heterogeneous treatment effects with efficient instruments and machine learning](deep_reads/2026-06-18-10.1214_26-ejs2498.md)  
+  9/10 [journals]
+- [Mediation analysis with unmeasured confounding between parallel mediators and outcome](deep_reads/2026-06-18-10.1214_26-ejs2517.md)  
+  9/10 [journals]
+- [Robust Bayesian inference for measurement error misspecification: The Berkson and classical cases](deep_reads/2026-06-18-10.1214_26-ejs2487.md)  
+  8/10 [journals]
+- [Valid post-selection inference for penalized G-estimation](deep_reads/2026-06-18-10.1214_26-ejs2520.md)  
+  8/10 [journals]
+- [Statistical inference with nonignorable non-probability survey samples](deep_reads/2026-06-18-10.1214_26-ejs2531.md)  
+  7/10 [journals]
+- [Positivity in linear Gaussian structural equation models](deep_reads/2026-06-18-10.1214_26-ejs2493.md)  
+  7/10 [journals]
+- [Hyperplane representations of interventional characteristic imset polytopes](deep_reads/2026-06-18-10.1214_26-ejs2518.md)  
+  6/10 [journals]
+
+#### Electronic Journal of Statistics Vol 19 Issue 2
+
+- [Domain adaptation under hidden confounding](deep_reads/2026-06-18-10.1214_25-ejs2474.md)  
+  8/10 [journals]
+
+#### Electronic Journal of Statistics Vol 19 Issue 1
+
+- [Efficient surrogate-assisted inference for patient-reported outcome measures with complex missing mechanism](deep_reads/2026-06-18-10.1214_24-ejs2335.md)  
+  7/10 [journals]
+
 #### Bernoulli Vol 32 Issue 2
 
 - [Causal inference on process graphs: Causal structure and effect identification](deep_reads/2026-06-18-10.3150_25-bej1909.md)  
@@ -499,6 +528,43 @@
 
 ### 期刊
 
+#### Electronic Journal of Statistics Vol 20 Issue 1
+
+- [Exact recovery in the double sparse model: Sufficient and necessary signal conditions](deep_reads/2026-06-18-10.1214_26-ejs2486.md)  
+  8/10 [journals]
+- [Sharp bounds for multiple models in matrix completion](deep_reads/2026-06-18-10.1214_26-ejs2503.md)  
+  8/10 [journals]
+- [On ridge estimation in high-dimensional rotationally sparse linear regression](deep_reads/2026-06-18-10.1214_26-ejs2496.md)  
+  8/10 [journals]
+- [High-dimensional convolution-smoothed quantile linear models for Hilbert manifold covariates](deep_reads/2026-06-18-10.1214_26-ejs2530.md)  
+  7/10 [journals]
+- [ℓ1-regularized generalized least squares](deep_reads/2026-06-18-10.1214_26-ejs2515.md)  
+  6/10 [journals]
+- [Negative moment bounds for sample autocovariance matrices of stationary processes driven by conditional heteroscedastic errors and their applications](deep_reads/2026-06-18-10.1214_26-ejs2495.md)  
+  6/10 [journals]
+
+#### Electronic Journal of Statistics Vol 19 Issue 2
+
+- [Correlation tests and sample spectral coherence matrix in the high-dimensional regime](deep_reads/2026-06-18-10.1214_25-ejs2467.md)  
+  9/10 [journals]
+- [Sparse linear regression when noises and covariates are heavy-tailed and contaminated by outliers](deep_reads/2026-06-18-10.1214_25-ejs2448.md)  
+  9/10 [journals]
+- [Concentration and consistency of sample covariance matrix functionals in sub-Gaussian models](deep_reads/2026-06-18-10.1214_25-ejs2447.md)  
+  8/10 [journals]
+- [Posterior contraction rates in a sparse non-linear mixed-effects model](deep_reads/2026-06-18-10.1214_25-ejs2449.md)  
+  7/10 [journals]
+- [High-dimensional change point detection with missing values](deep_reads/2026-06-18-10.1214_25-ejs2455.md)  
+  6/10 [journals]
+
+#### Electronic Journal of Statistics Vol 19 Issue 1
+
+- [High dimensional regression with many nuisance parameters: Both cases of specified and unspecified parameters of interest](deep_reads/2026-06-18-10.1214_25-ejs2401.md)  
+  8/10 [journals]
+- [Minimax estimation of partially-observed vector autoregressions](deep_reads/2026-06-18-10.1214_25-ejs2387.md)  
+  8/10 [journals]
+- [Low-rank regularization in two-sided matrix regression](deep_reads/2026-06-18-10.1214_25-ejs2360.md)  
+  6/10 [journals]
+
 #### Bernoulli Vol 32 Issue 3
 
 - [Universality of estimators for high-dimensional linear models with block dependency](deep_reads/2026-06-18-10.3150_25-bej1941.md)  
@@ -805,6 +871,85 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Electronic Journal of Statistics Vol 20 Issue 1
+
+- [Uniform Bahadur representation of the backfitting estimator for additive quantile models and its applications](deep_reads/2026-06-18-10.1214_25-ejs2481.md)  
+  7/10 [journals]
+- [Lower bounds for nonparametric estimation of ordinary differential equations](deep_reads/2026-06-18-10.1214_26-ejs2484.md)  
+  7/10 [journals]
+- [High-dimensional partial linear model with trend filtering](deep_reads/2026-06-18-10.1214_26-ejs2522.md)  
+  7/10 [journals]
+- [Solving Fredholm integral equations of the second kind via Wasserstein gradient flows](deep_reads/2026-06-18-10.1214_26-ejs2504.md)  
+  7/10 [journals]
+- [Skeleton regression: A graph-based approach to estimation with manifold structure](deep_reads/2026-06-18-10.1214_26-ejs2509.md)  
+  6/10 [journals]
+- [Statistical learnability of smooth boundaries via pairwise binary classification with deep ReLU networks](deep_reads/2026-06-18-10.1214_26-ejs2512.md)  
+  6/10 [journals]
+- [Non-parametric estimation for the stochastic wave equation](deep_reads/2026-06-18-10.1214_26-ejs2491.md)  
+  6/10 [journals]
+- [Comparing regularisation paths of (conjugate) gradient estimators in ridge regression](deep_reads/2026-06-18-10.1214_26-ejs2497.md)  
+  6/10 [journals]
+- [Nonparametric estimation for a log-concave distribution function with interval-censored data](deep_reads/2026-06-18-10.1214_26-ejs2540.md)  
+  6/10 [journals]
+- [Consistency of nonparametric density estimators in CAT(0) orthant space](deep_reads/2026-06-18-10.1214_26-ejs2501.md)  
+  6/10 [journals]
+- [Sampling depth trade-off in function estimation under a two-level design](deep_reads/2026-06-18-10.1214_26-ejs2539.md)  
+  6/10 [journals]
+
+#### Electronic Journal of Statistics Vol 19 Issue 2
+
+- [Characterizing the minimax rate of nonparametric regression under bounded star-shaped constraints](deep_reads/2026-06-18-10.1214_25-ejs2419.md)  
+  9/10 [journals]
+- [Deconvolution of repeated measurements corrupted by unknown noise](deep_reads/2026-06-18-10.1214_25-ejs2415.md)  
+  8/10 [journals]
+- [Nonparametric regression for a circular response with error-in-covariate](deep_reads/2026-06-18-10.1214_25-ejs2437.md)  
+  7/10 [journals]
+- [Parametric convergence rate of some nonparametric estimators in mixtures of power series distributions](deep_reads/2026-06-18-10.1214_25-ejs2423.md)  
+  7/10 [journals]
+- [Functional adaptive group lasso with its non-asymptotic bounds](deep_reads/2026-06-18-10.1214_25-ejs2414.md)  
+  7/10 [journals]
+- [Convergence rates for estimating multivariate scale mixtures of uniform densities](deep_reads/2026-06-18-10.1214_25-ejs2426.md)  
+  7/10 [journals]
+- [On mixing rates for Bayesian CART](deep_reads/2026-06-18-10.1214_25-ejs2397.md)  
+  6/10 [journals]
+- [Automatic structure identification and variable selection for additive accelerated failure time model with ultra high dimensional covariates](deep_reads/2026-06-18-10.1214_25-ejs2408.md)  
+  6/10 [journals]
+- [Balancing weights for non-monotone missing data](deep_reads/2026-06-18-10.1214_25-ejs2438.md)  
+  6/10 [journals]
+- [Local Fréchet regression with spherical predictors](deep_reads/2026-06-18-10.1214_25-ejs2462.md)  
+  6/10 [journals]
+- [smoothEM: A new approach for the simultaneous assessment of smooth patterns and spikes](deep_reads/2026-06-18-10.1214_25-ejs2428.md)  
+  6/10 [journals]
+- [Inference for dependent error functional data: Covariance function](deep_reads/2026-06-18-10.1214_25-ejs2458.md)  
+  6/10 [journals]
+- [Existence and breakdown analysis of M-quantiles in general Hilbert spaces](deep_reads/2026-06-18-10.1214_25-ejs2472.md)  
+  5/10 [journals]
+
+#### Electronic Journal of Statistics Vol 19 Issue 1
+
+- [Semi-parametric Bernstein-von Mises theorem in linear inverse problems](deep_reads/2026-06-18-10.1214_25-ejs2372.md)  
+  9/10 [journals]
+- [Multivariate weighted empirical likelihood MLE for the Cox model with various types of censored data](deep_reads/2026-06-18-10.1214_25-ejs2375.md)  
+  8/10 [journals]
+- [Robust estimation under a semiparametric propensity model for nonignorable missing data](deep_reads/2026-06-18-10.1214_25-ejs2355.md)  
+  8/10 [journals]
+- [Covariance constraints for stochastic inverse problems of computer models](deep_reads/2026-06-18-10.1214_25-ejs2376.md)  
+  7/10 [journals]
+- [Covariate-informed reconstruction of partially observed functional data via factor models](deep_reads/2026-06-18-10.1214_25-ejs2381.md)  
+  7/10 [journals]
+- [Fast robust kernel regression through sign gradient descent with early stopping](deep_reads/2026-06-18-10.1214_25-ejs2361.md)  
+  7/10 [journals]
+- [Local differential privacy in survival analysis using private failure indicators](deep_reads/2026-06-18-10.1214_25-ejs2396.md)  
+  7/10 [journals]
+- [Strong identifiability and parameter learning in regression with heterogeneous response](deep_reads/2026-06-18-10.1214_24-ejs2339.md)  
+  6/10 [journals]
+- [Adaptive nonparametric estimation in the functional linear model with functional output](deep_reads/2026-06-18-10.1214_25-ejs2400.md)  
+  6/10 [journals]
+- [Regression analysis of semiparametric Cox-Aalen transformation models with partly interval-censored data](deep_reads/2026-06-18-10.1214_24-ejs2341.md)  
+  5/10 [journals]
+- [On a general class of functionals: Statistical inference and application to risk measures](deep_reads/2026-06-18-10.1214_25-ejs2391.md)  
+  5/10 [journals]
 
 #### Bernoulli Vol 32 Issue 3
 
@@ -1252,6 +1397,57 @@
 
 ### 期刊
 
+#### Electronic Journal of Statistics Vol 20 Issue 1
+
+- [The existence of unbiased hypothesis tests: An algebraic approach](deep_reads/2026-06-18-10.1214_26-ejs2511.md)  
+  8/10 [journals]
+- [A new class of asymptotically distribution-free smooth tests](deep_reads/2026-06-18-10.1214_26-ejs2542.md)  
+  7/10 [journals]
+- [Multiple testing with anytime-valid Monte Carlo p-values](deep_reads/2026-06-18-10.1214_26-ejs2514.md)  
+  7/10 [journals]
+- [A scalable Nyström-based kernel two-sample test with permutations](deep_reads/2026-06-18-10.1214_26-ejs2537.md)  
+  7/10 [journals]
+- [Resampling-free inference for time series via RKHS embedding](deep_reads/2026-06-18-10.1214_26-ejs2488.md)  
+  6/10 [journals]
+- [Efficiency of pattern-based independence test](deep_reads/2026-06-18-10.1214_26-ejs2527.md)  
+  6/10 [journals]
+- [Accurate FWER control for Gaussian related fields: Riding the SuRF to continuous land](deep_reads/2026-06-18-10.1214_26-ejs2490.md)  
+  2/10 [journals]
+
+#### Electronic Journal of Statistics Vol 19 Issue 2
+
+- [Unified and robust tests for cross sectional independence in large panel data models](deep_reads/2026-06-18-10.1214_25-ejs2456.md)  
+  8/10 [journals]
+- [Randomization tests for conditional group symmetry](deep_reads/2026-06-18-10.1214_25-ejs2473.md)  
+  8/10 [journals]
+- [k-sample inference via multimarginal optimal transport](deep_reads/2026-06-18-10.1214_25-ejs2439.md)  
+  7/10 [journals]
+- [Confidence sets in a sparse stochastic block model with two communities of unknown sizes](deep_reads/2026-06-18-10.1214_25-ejs2454.md)  
+  6/10 [journals]
+- [Selective inference using randomized group lasso estimators for general models](deep_reads/2026-06-18-10.1214_25-ejs2416.md)  
+  6/10 [journals]
+- [Exact bounds of Spearman’s footrule in the presence of missing data with applications to independence testing](deep_reads/2026-06-18-10.1214_25-ejs2479.md)  
+  6/10 [journals]
+
+#### Electronic Journal of Statistics Vol 19 Issue 1
+
+- [Differentially private multivariate statistics with an application to contingency table analysis](deep_reads/2026-06-18-10.1214_25-ejs2368.md)  
+  8/10 [journals]
+- [Differentially private Kolmogorov-Smirnov-type tests](deep_reads/2026-06-18-10.1214_25-ejs2349.md)  
+  8/10 [journals]
+- [Integrated empirical measures and generalizations of classical goodness-of-fit statistics](deep_reads/2026-06-18-10.1214_25-ejs2386.md)  
+  7/10 [journals]
+- [Information-theoretic limits for testing community structures in weighted networks](deep_reads/2026-06-18-10.1214_25-ejs2404.md)  
+  7/10 [journals]
+- [A bipartite ranking approach to the two-sample problem](deep_reads/2026-06-18-10.1214_25-ejs2392.md)  
+  7/10 [journals]
+- [A new class of tests for convex-ordered families based on expected order statistics](deep_reads/2026-06-18-10.1214_25-ejs2398.md)  
+  6/10 [journals]
+- [Fast and optimal inference for change points in piecewise polynomials via differencing](deep_reads/2026-06-18-10.1214_25-ejs2345.md)  
+  6/10 [journals]
+- [FDP control in mass-univariate linear models using the residual bootstrap](deep_reads/2026-06-18-10.1214_25-ejs2354.md)  
+  5/10 [journals]
+
 #### Bernoulli Vol 32 Issue 3
 
 - [SID: A novel class of nonparametric tests of independence for censored outcomes](deep_reads/2026-06-18-10.3150_25-bej1927.md)  
@@ -1493,6 +1689,18 @@
   6/10 [daily]
 
 ### 期刊
+
+#### Electronic Journal of Statistics Vol 20 Issue 1
+
+- [Analysis of Multiple-try Metropolis via Poincaré inequalities](deep_reads/2026-06-18-10.1214_26-ejs2502.md)  
+  7/10 [journals]
+
+#### Electronic Journal of Statistics Vol 19 Issue 2
+
+- [An analysis of precision in estimation with the stochastic EM algorithm](deep_reads/2026-06-18-10.1214_25-ejs2405.md)  
+  7/10 [journals]
+- [Scalable solutions for crossed random-effect models with random slopes](deep_reads/2026-06-18-10.1214_25-ejs2461.md)  
+  6/10 [journals]
 
 #### Bernoulli Vol 32 Issue 3
 
@@ -2065,6 +2273,18 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Electronic Journal of Statistics Vol 20 Issue 1
+
+- [Two-sample covariance inference in high-dimensional elliptical models](deep_reads/2026-06-18-10.1214_26-ejs2499.md)  
+  9/10 [journals]
+- [Consistency of Lloyd’s algorithm under perturbations](deep_reads/2026-06-18-10.1214_26-ejs2526.md)  
+  6/10 [journals]
+
+#### Electronic Journal of Statistics Vol 19 Issue 1
+
+- [Hoeffding-type decomposition for U-statistics on bipartite networks](deep_reads/2026-06-18-10.1214_25-ejs2402.md)  
+  9/10 [journals]
 
 #### Bernoulli Vol 32 Issue 3
 

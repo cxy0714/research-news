@@ -17,8 +17,26 @@
 
 [→ 查看完整报告](daily/2026-06-18.md)
 
-### 精读论文（150 篇）
+### 精读论文（236 篇）
 
+- [Hoeffding-type decomposition for U-statistics on bipartite networks](deep_reads/2026-06-18-10.1214_25-ejs2402.md)  
+  `其他` · 相关性 9/10
+- [Semi-parametric Bernstein-von Mises theorem in linear inverse problems](deep_reads/2026-06-18-10.1214_25-ejs2372.md)  
+  `非参数 / 半参数` · 相关性 9/10
+- [Correlation tests and sample spectral coherence matrix in the high-dimensional regime](deep_reads/2026-06-18-10.1214_25-ejs2467.md)  
+  `高维统计 / 随机矩阵` · 相关性 9/10
+- [Characterizing the minimax rate of nonparametric regression under bounded star-shaped constraints](deep_reads/2026-06-18-10.1214_25-ejs2419.md)  
+  `非参数 / 半参数` · 相关性 9/10
+- [Sparse linear regression when noises and covariates are heavy-tailed and contaminated by outliers](deep_reads/2026-06-18-10.1214_25-ejs2448.md)  
+  `高维统计 / 随机矩阵` · 相关性 9/10
+- [Estimation and inference for high-dimensional nonparametric additive instrumental-variables regression](deep_reads/2026-06-18-10.1214_26-ejs2525.md)  
+  `因果推断` · 相关性 9/10
+- [Inference for heterogeneous treatment effects with efficient instruments and machine learning](deep_reads/2026-06-18-10.1214_26-ejs2498.md)  
+  `因果推断` · 相关性 9/10
+- [Two-sample covariance inference in high-dimensional elliptical models](deep_reads/2026-06-18-10.1214_26-ejs2499.md)  
+  `其他` · 相关性 9/10
+- [Mediation analysis with unmeasured confounding between parallel mediators and outcome](deep_reads/2026-06-18-10.1214_26-ejs2517.md)  
+  `因果推断` · 相关性 9/10
 - [Extreme singular values of inhomogeneous sparse random rectangular matrices](deep_reads/2026-06-18-10.3150_23-bej1699.md)  
   `高维统计 / 随机矩阵` · 相关性 9/10
 - [Shrinkage estimation of higher-order Bochner integrals](deep_reads/2026-06-18-10.3150_23-bej1692.md)  
@@ -69,6 +87,40 @@
   `高维统计 / 随机矩阵` · 相关性 9/10
 - [Exact phase transitions for stochastic block models and reconstruction on trees](deep_reads/2026-06-18-10.1214_24-aop1723.md)  
   `其他` · 相关性 9/10
+- [High dimensional regression with many nuisance parameters: Both cases of specified and unspecified parameters of interest](deep_reads/2026-06-18-10.1214_25-ejs2401.md)  
+  `高维统计 / 随机矩阵` · 相关性 8/10
+- [Differentially private multivariate statistics with an application to contingency table analysis](deep_reads/2026-06-18-10.1214_25-ejs2368.md)  
+  `数理统计 / 假设检验` · 相关性 8/10
+- [Minimax estimation of partially-observed vector autoregressions](deep_reads/2026-06-18-10.1214_25-ejs2387.md)  
+  `高维统计 / 随机矩阵` · 相关性 8/10
+- [Differentially private Kolmogorov-Smirnov-type tests](deep_reads/2026-06-18-10.1214_25-ejs2349.md)  
+  `数理统计 / 假设检验` · 相关性 8/10
+- [Multivariate weighted empirical likelihood MLE for the Cox model with various types of censored data](deep_reads/2026-06-18-10.1214_25-ejs2375.md)  
+  `非参数 / 半参数` · 相关性 8/10
+- [Robust estimation under a semiparametric propensity model for nonignorable missing data](deep_reads/2026-06-18-10.1214_25-ejs2355.md)  
+  `非参数 / 半参数` · 相关性 8/10
+- [Domain adaptation under hidden confounding](deep_reads/2026-06-18-10.1214_25-ejs2474.md)  
+  `因果推断` · 相关性 8/10
+- [Unified and robust tests for cross sectional independence in large panel data models](deep_reads/2026-06-18-10.1214_25-ejs2456.md)  
+  `数理统计 / 假设检验` · 相关性 8/10
+- [Concentration and consistency of sample covariance matrix functionals in sub-Gaussian models](deep_reads/2026-06-18-10.1214_25-ejs2447.md)  
+  `高维统计 / 随机矩阵` · 相关性 8/10
+- [Deconvolution of repeated measurements corrupted by unknown noise](deep_reads/2026-06-18-10.1214_25-ejs2415.md)  
+  `非参数 / 半参数` · 相关性 8/10
+- [Randomization tests for conditional group symmetry](deep_reads/2026-06-18-10.1214_25-ejs2473.md)  
+  `数理统计 / 假设检验` · 相关性 8/10
+- [Robust Bayesian inference for measurement error misspecification: The Berkson and classical cases](deep_reads/2026-06-18-10.1214_26-ejs2487.md)  
+  `因果推断` · 相关性 8/10
+- [Exact recovery in the double sparse model: Sufficient and necessary signal conditions](deep_reads/2026-06-18-10.1214_26-ejs2486.md)  
+  `高维统计 / 随机矩阵` · 相关性 8/10
+- [Valid post-selection inference for penalized G-estimation](deep_reads/2026-06-18-10.1214_26-ejs2520.md)  
+  `因果推断` · 相关性 8/10
+- [Sharp bounds for multiple models in matrix completion](deep_reads/2026-06-18-10.1214_26-ejs2503.md)  
+  `高维统计 / 随机矩阵` · 相关性 8/10
+- [The existence of unbiased hypothesis tests: An algebraic approach](deep_reads/2026-06-18-10.1214_26-ejs2511.md)  
+  `数理统计 / 假设检验` · 相关性 8/10
+- [On ridge estimation in high-dimensional rotationally sparse linear regression](deep_reads/2026-06-18-10.1214_26-ejs2496.md)  
+  `高维统计 / 随机矩阵` · 相关性 8/10
 - [Detecting changes in the trend function of heteroscedastic time series](deep_reads/2026-06-18-10.3150_23-bej1686.md)  
   `其他` · 相关性 8/10
 - [Penalized spline estimation of principal components for sparse functional data: Rates of convergence](deep_reads/2026-06-18-10.3150_23-bej1695.md)  
@@ -127,6 +179,58 @@
   `高维统计 / 随机矩阵` · 相关性 8/10
 - [Kronecker-product random matrices and a matrix least squares problem](deep_reads/2026-06-18-10.1214_25-aop1784.md)  
   `高维统计 / 随机矩阵` · 相关性 8/10
+- [Integrated empirical measures and generalizations of classical goodness-of-fit statistics](deep_reads/2026-06-18-10.1214_25-ejs2386.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Covariance constraints for stochastic inverse problems of computer models](deep_reads/2026-06-18-10.1214_25-ejs2376.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Covariate-informed reconstruction of partially observed functional data via factor models](deep_reads/2026-06-18-10.1214_25-ejs2381.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Information-theoretic limits for testing community structures in weighted networks](deep_reads/2026-06-18-10.1214_25-ejs2404.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Fast robust kernel regression through sign gradient descent with early stopping](deep_reads/2026-06-18-10.1214_25-ejs2361.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Efficient surrogate-assisted inference for patient-reported outcome measures with complex missing mechanism](deep_reads/2026-06-18-10.1214_24-ejs2335.md)  
+  `因果推断` · 相关性 7/10
+- [A bipartite ranking approach to the two-sample problem](deep_reads/2026-06-18-10.1214_25-ejs2392.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Local differential privacy in survival analysis using private failure indicators](deep_reads/2026-06-18-10.1214_25-ejs2396.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Nonparametric regression for a circular response with error-in-covariate](deep_reads/2026-06-18-10.1214_25-ejs2437.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Posterior contraction rates in a sparse non-linear mixed-effects model](deep_reads/2026-06-18-10.1214_25-ejs2449.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [k-sample inference via multimarginal optimal transport](deep_reads/2026-06-18-10.1214_25-ejs2439.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Parametric convergence rate of some nonparametric estimators in mixtures of power series distributions](deep_reads/2026-06-18-10.1214_25-ejs2423.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Functional adaptive group lasso with its non-asymptotic bounds](deep_reads/2026-06-18-10.1214_25-ejs2414.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Convergence rates for estimating multivariate scale mixtures of uniform densities](deep_reads/2026-06-18-10.1214_25-ejs2426.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [An analysis of precision in estimation with the stochastic EM algorithm](deep_reads/2026-06-18-10.1214_25-ejs2405.md)  
+  `统计计算 / 算法` · 相关性 7/10
+- [A new class of asymptotically distribution-free smooth tests](deep_reads/2026-06-18-10.1214_26-ejs2542.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Uniform Bahadur representation of the backfitting estimator for additive quantile models and its applications](deep_reads/2026-06-18-10.1214_25-ejs2481.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Multiple testing with anytime-valid Monte Carlo p-values](deep_reads/2026-06-18-10.1214_26-ejs2514.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Statistical inference with nonignorable non-probability survey samples](deep_reads/2026-06-18-10.1214_26-ejs2531.md)  
+  `因果推断` · 相关性 7/10
+- [Analysis of Multiple-try Metropolis via Poincaré inequalities](deep_reads/2026-06-18-10.1214_26-ejs2502.md)  
+  `统计计算 / 算法` · 相关性 7/10
+- [High-dimensional convolution-smoothed quantile linear models for Hilbert manifold covariates](deep_reads/2026-06-18-10.1214_26-ejs2530.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Lower bounds for nonparametric estimation of ordinary differential equations](deep_reads/2026-06-18-10.1214_26-ejs2484.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [A scalable Nyström-based kernel two-sample test with permutations](deep_reads/2026-06-18-10.1214_26-ejs2537.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [High-dimensional partial linear model with trend filtering](deep_reads/2026-06-18-10.1214_26-ejs2522.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Solving Fredholm integral equations of the second kind via Wasserstein gradient flows](deep_reads/2026-06-18-10.1214_26-ejs2504.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Positivity in linear Gaussian structural equation models](deep_reads/2026-06-18-10.1214_26-ejs2493.md)  
+  `因果推断` · 相关性 7/10
 - [Some rapidly mixing hit-and-run samplers for latent counts in linear inverse problems](deep_reads/2026-06-18-10.3150_23-bej1690.md)  
   `统计计算 / 算法` · 相关性 7/10
 - [Boundary adaptive local polynomial conditional density estimators](deep_reads/2026-06-18-10.3150_23-bej1711.md)  
@@ -213,6 +317,64 @@
   `非参数 / 半参数` · 相关性 7/10
 - [Gaussian measure on the dual of U(N), random partitions and topological expansion of the partition function](deep_reads/2026-06-18-10.1214_24-aop1749.md)  
   `高维统计 / 随机矩阵` · 相关性 7/10
+- [A new class of tests for convex-ordered families based on expected order statistics](deep_reads/2026-06-18-10.1214_25-ejs2398.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Strong identifiability and parameter learning in regression with heterogeneous response](deep_reads/2026-06-18-10.1214_24-ejs2339.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Adaptive nonparametric estimation in the functional linear model with functional output](deep_reads/2026-06-18-10.1214_25-ejs2400.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Low-rank regularization in two-sided matrix regression](deep_reads/2026-06-18-10.1214_25-ejs2360.md)  
+  `高维统计 / 随机矩阵` · 相关性 6/10
+- [Fast and optimal inference for change points in piecewise polynomials via differencing](deep_reads/2026-06-18-10.1214_25-ejs2345.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Confidence sets in a sparse stochastic block model with two communities of unknown sizes](deep_reads/2026-06-18-10.1214_25-ejs2454.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [High-dimensional change point detection with missing values](deep_reads/2026-06-18-10.1214_25-ejs2455.md)  
+  `高维统计 / 随机矩阵` · 相关性 6/10
+- [Selective inference using randomized group lasso estimators for general models](deep_reads/2026-06-18-10.1214_25-ejs2416.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [On mixing rates for Bayesian CART](deep_reads/2026-06-18-10.1214_25-ejs2397.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Automatic structure identification and variable selection for additive accelerated failure time model with ultra high dimensional covariates](deep_reads/2026-06-18-10.1214_25-ejs2408.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Balancing weights for non-monotone missing data](deep_reads/2026-06-18-10.1214_25-ejs2438.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Scalable solutions for crossed random-effect models with random slopes](deep_reads/2026-06-18-10.1214_25-ejs2461.md)  
+  `统计计算 / 算法` · 相关性 6/10
+- [Local Fréchet regression with spherical predictors](deep_reads/2026-06-18-10.1214_25-ejs2462.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [smoothEM: A new approach for the simultaneous assessment of smooth patterns and spikes](deep_reads/2026-06-18-10.1214_25-ejs2428.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Exact bounds of Spearman’s footrule in the presence of missing data with applications to independence testing](deep_reads/2026-06-18-10.1214_25-ejs2479.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Inference for dependent error functional data: Covariance function](deep_reads/2026-06-18-10.1214_25-ejs2458.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Skeleton regression: A graph-based approach to estimation with manifold structure](deep_reads/2026-06-18-10.1214_26-ejs2509.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Resampling-free inference for time series via RKHS embedding](deep_reads/2026-06-18-10.1214_26-ejs2488.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Statistical learnability of smooth boundaries via pairwise binary classification with deep ReLU networks](deep_reads/2026-06-18-10.1214_26-ejs2512.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Consistency of Lloyd’s algorithm under perturbations](deep_reads/2026-06-18-10.1214_26-ejs2526.md)  
+  `其他` · 相关性 6/10
+- [Non-parametric estimation for the stochastic wave equation](deep_reads/2026-06-18-10.1214_26-ejs2491.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Comparing regularisation paths of (conjugate) gradient estimators in ridge regression](deep_reads/2026-06-18-10.1214_26-ejs2497.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [ℓ1-regularized generalized least squares](deep_reads/2026-06-18-10.1214_26-ejs2515.md)  
+  `高维统计 / 随机矩阵` · 相关性 6/10
+- [Hyperplane representations of interventional characteristic imset polytopes](deep_reads/2026-06-18-10.1214_26-ejs2518.md)  
+  `因果推断` · 相关性 6/10
+- [Nonparametric estimation for a log-concave distribution function with interval-censored data](deep_reads/2026-06-18-10.1214_26-ejs2540.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Efficiency of pattern-based independence test](deep_reads/2026-06-18-10.1214_26-ejs2527.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Consistency of nonparametric density estimators in CAT(0) orthant space](deep_reads/2026-06-18-10.1214_26-ejs2501.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Negative moment bounds for sample autocovariance matrices of stationary processes driven by conditional heteroscedastic errors and their applications](deep_reads/2026-06-18-10.1214_26-ejs2495.md)  
+  `高维统计 / 随机矩阵` · 相关性 6/10
+- [Sampling depth trade-off in function estimation under a two-level design](deep_reads/2026-06-18-10.1214_26-ejs2539.md)  
+  `非参数 / 半参数` · 相关性 6/10
 - [Approximate double-transform inversion when time is one of the variables](deep_reads/2026-06-18-10.3150_23-bej1698.md)  
   `统计计算 / 算法` · 相关性 6/10
 - [Local polynomial trend regression for spatial data on Rd](deep_reads/2026-06-18-10.3150_23-bej1694.md)  
@@ -283,6 +445,14 @@
   `统计计算 / 算法` · 相关性 6/10
 - [Large deviations of the largest eigenvalue of supercritical sparse Wigner matrices](deep_reads/2026-06-18-10.1214_25-aop1770.md)  
   `高维统计 / 随机矩阵` · 相关性 6/10
+- [FDP control in mass-univariate linear models using the residual bootstrap](deep_reads/2026-06-18-10.1214_25-ejs2354.md)  
+  `数理统计 / 假设检验` · 相关性 5/10
+- [Regression analysis of semiparametric Cox-Aalen transformation models with partly interval-censored data](deep_reads/2026-06-18-10.1214_24-ejs2341.md)  
+  `非参数 / 半参数` · 相关性 5/10
+- [On a general class of functionals: Statistical inference and application to risk measures](deep_reads/2026-06-18-10.1214_25-ejs2391.md)  
+  `非参数 / 半参数` · 相关性 5/10
+- [Existence and breakdown analysis of M-quantiles in general Hilbert spaces](deep_reads/2026-06-18-10.1214_25-ejs2472.md)  
+  `非参数 / 半参数` · 相关性 5/10
 - [Smoothed circulas: Nonparametric estimation of circular cumulative distribution functions and circulas](deep_reads/2026-06-18-10.3150_23-bej1693.md)  
   `非参数 / 半参数` · 相关性 5/10
 - [Yule’s “nonsense correlation”: Moments and density](deep_reads/2026-06-18-10.3150_24-bej1733.md)  
@@ -295,6 +465,8 @@
   `数理统计 / 假设检验` · 相关性 4/10
 - [Robust functional data analysis: From sparse to dense designs](deep_reads/2026-06-18-10.3150_25-bej1920.md)  
   `非参数 / 半参数` · 相关性 4/10
+- [Accurate FWER control for Gaussian related fields: Riding the SuRF to continuous land](deep_reads/2026-06-18-10.1214_26-ejs2490.md)  
+  `数理统计 / 假设检验` · 相关性 2/10
 - [Asymptotic analysis of statistical estimators related to MultiGraphex processes under misspecification](deep_reads/2026-06-18-10.3150_23-bej1689.md)  
   `数理统计 / 假设检验` · 相关性 2/10
 - [Inference in balanced community modulated recursive trees](deep_reads/2026-06-18-10.3150_24-bej1735.md)  
