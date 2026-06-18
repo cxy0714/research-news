@@ -471,6 +471,35 @@
 
 ### 期刊
 
+#### Annals of Probability Vol 54 Issue 3
+
+- [Nonrigidity properties of the Coulomb gas](deep_reads/2026-06-18-10.1214_25-aop1787.md)  
+  1/10 [journals]
+
+#### Annals of Probability Vol 54 Issue 2
+
+- [Extremal random matrices with independent entries and matrix superconcentration inequalities](deep_reads/2026-06-18-10.1214_25-aop1776.md)  
+  8/10 [journals]
+- [Kronecker-product random matrices and a matrix least squares problem](deep_reads/2026-06-18-10.1214_25-aop1784.md)  
+  8/10 [journals]
+
+#### Annals of Probability Vol 54 Issue 1
+
+- [Large deviations of the largest eigenvalue of supercritical sparse Wigner matrices](deep_reads/2026-06-18-10.1214_25-aop1770.md)  
+  6/10 [journals]
+
+#### Annals of Probability Vol 53 Issue 6
+
+- [On the spectral edge of non-Hermitian random matrices](deep_reads/2026-06-18-10.1214_25-aop1761.md)  
+  8/10 [journals]
+
+#### Annals of Probability Vol 53 Issue 5
+
+- [Large gaps of CUE and GUE](deep_reads/2026-06-18-10.1214_24-aop1747.md)  
+  8/10 [journals]
+- [Gaussian measure on the dual of U(N), random partitions and topological expansion of the partition function](deep_reads/2026-06-18-10.1214_24-aop1749.md)  
+  7/10 [journals]
+
 #### Annals of Applied Statistics Vol 20 Issue 1
 
 - [Integrative learning of linear non-Gaussian directed acyclic graphs with application on multisource gene regulatory network analysis](deep_reads/2026-06-10-10.1214_25-aoas2116.md)  
@@ -1147,6 +1176,11 @@
 
 ### 期刊
 
+#### Annals of Probability Vol 53 Issue 5
+
+- [Taming singular stochastic differential equations: A numerical method](deep_reads/2026-06-18-10.1214_24-aop1750.md)  
+  6/10 [journals]
+
 #### Biostatistics Vol 27 Issue 1
 
 - [Joint modeling of high-dimensional longitudinal data and survival using supervised low-rank tensor decomposition](deep_reads/2026-06-10-10.1093_biostatistics_kxag007.md)  
@@ -1676,6 +1710,37 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Annals of Probability Vol 54 Issue 2
+
+- [Fractal geometry of the parabolic Anderson model in 2D and 3D with white noise potential](deep_reads/2026-06-18-10.1214_25-aop1780.md)  
+  0/10 [journals]
+
+#### Annals of Probability Vol 53 Issue 6
+
+- [Loop soup representation for zeta-regularised determinants of twisted Laplacians and covariant Symanzik identities](deep_reads/2026-06-18-10.1214_24-aop1757.md)  
+  0/10 [journals]
+
+#### Annals of Probability Vol 53 Issue 4
+
+- [Multiscale genesis of a tiny giant for percolation on scale-free random graphs](deep_reads/2026-06-18-10.1214_24-aop1735.md)  
+  2/10 [journals]
+- [Boundary Harnack principle for nonlocal operators on metric measure spaces](deep_reads/2026-06-18-10.1214_24-aop1734.md)  
+  1/10 [journals]
+
+#### Annals of Probability Vol 53 Issue 3
+
+- [Exact phase transitions for stochastic block models and reconstruction on trees](deep_reads/2026-06-18-10.1214_24-aop1723.md)  
+  9/10 [journals]
+- [Boundary touching probability and nested-path exponent for nonsimple CLE](deep_reads/2026-06-18-10.1214_24-aop1722.md)  
+  0/10 [journals]
+
+#### Annals of Probability Vol 53 Issue 2
+
+- [The contact process on dynamic regular graphs: Subcritical phase and monotonicity](deep_reads/2026-06-18-10.1214_24-aop1721.md)  
+  1/10 [journals]
+- [Approximation method to metastability: An application to nonreversible, two-dimensional Ising and Potts models without external fields](deep_reads/2026-06-18-10.1214_24-aop1717.md)  
+  1/10 [journals]
 
 #### Journal of the Royal Statistical Society Series C Vol 75 Issue 2
 

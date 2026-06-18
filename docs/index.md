@@ -17,6 +17,41 @@
 
 [→ 查看完整报告](daily/2026-06-18.md)
 
+### 精读论文（16 篇）
+
+- [Exact phase transitions for stochastic block models and reconstruction on trees](deep_reads/2026-06-18-10.1214_24-aop1723.md)  
+  `其他` · 相关性 9/10
+- [Large gaps of CUE and GUE](deep_reads/2026-06-18-10.1214_24-aop1747.md)  
+  `高维统计 / 随机矩阵` · 相关性 8/10
+- [On the spectral edge of non-Hermitian random matrices](deep_reads/2026-06-18-10.1214_25-aop1761.md)  
+  `高维统计 / 随机矩阵` · 相关性 8/10
+- [Extremal random matrices with independent entries and matrix superconcentration inequalities](deep_reads/2026-06-18-10.1214_25-aop1776.md)  
+  `高维统计 / 随机矩阵` · 相关性 8/10
+- [Kronecker-product random matrices and a matrix least squares problem](deep_reads/2026-06-18-10.1214_25-aop1784.md)  
+  `高维统计 / 随机矩阵` · 相关性 8/10
+- [Gaussian measure on the dual of U(N), random partitions and topological expansion of the partition function](deep_reads/2026-06-18-10.1214_24-aop1749.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Taming singular stochastic differential equations: A numerical method](deep_reads/2026-06-18-10.1214_24-aop1750.md)  
+  `统计计算 / 算法` · 相关性 6/10
+- [Large deviations of the largest eigenvalue of supercritical sparse Wigner matrices](deep_reads/2026-06-18-10.1214_25-aop1770.md)  
+  `高维统计 / 随机矩阵` · 相关性 6/10
+- [Multiscale genesis of a tiny giant for percolation on scale-free random graphs](deep_reads/2026-06-18-10.1214_24-aop1735.md)  
+  `其他` · 相关性 2/10
+- [The contact process on dynamic regular graphs: Subcritical phase and monotonicity](deep_reads/2026-06-18-10.1214_24-aop1721.md)  
+  `其他` · 相关性 1/10
+- [Approximation method to metastability: An application to nonreversible, two-dimensional Ising and Potts models without external fields](deep_reads/2026-06-18-10.1214_24-aop1717.md)  
+  `其他` · 相关性 1/10
+- [Boundary Harnack principle for nonlocal operators on metric measure spaces](deep_reads/2026-06-18-10.1214_24-aop1734.md)  
+  `其他` · 相关性 1/10
+- [Nonrigidity properties of the Coulomb gas](deep_reads/2026-06-18-10.1214_25-aop1787.md)  
+  `高维统计 / 随机矩阵` · 相关性 1/10
+- [Boundary touching probability and nested-path exponent for nonsimple CLE](deep_reads/2026-06-18-10.1214_24-aop1722.md)  
+  `其他` · 相关性 0/10
+- [Loop soup representation for zeta-regularised determinants of twisted Laplacians and covariant Symanzik identities](deep_reads/2026-06-18-10.1214_24-aop1757.md)  
+  `其他` · 相关性 0/10
+- [Fractal geometry of the parabolic Anderson model in 2D and 3D with white noise potential](deep_reads/2026-06-18-10.1214_25-aop1780.md)  
+  `其他` · 相关性 0/10
+
 ## 收藏
 
 - [→ 打开收藏](favorites.md) · 登录后在各页点 ☆ 收藏即可自动汇总

@@ -31,6 +31,19 @@
 - [Vol 87 Issue 5 · 2026-05-26](journals/2026-05-26-jrssb-v87-i5.md)
 - [Vol 87 Issue 4 · 2026-05-26](journals/2026-05-26-jrssb-v87-i4.md)
 
+## 概率统计 (Prob-Stats)
+
+### AoP
+
+- [Vol 54 Issue 3 · 2026-06-18](journals/2026-06-18-aop-v54-i3.md)
+- [Vol 54 Issue 2 · 2026-06-18](journals/2026-06-18-aop-v54-i2.md)
+- [Vol 54 Issue 1 · 2026-06-18](journals/2026-06-18-aop-v54-i1.md)
+- [Vol 53 Issue 6 · 2026-06-18](journals/2026-06-18-aop-v53-i6.md)
+- [Vol 53 Issue 5 · 2026-06-18](journals/2026-06-18-aop-v53-i5.md)
+- [Vol 53 Issue 4 · 2026-06-18](journals/2026-06-18-aop-v53-i4.md)
+- [Vol 53 Issue 3 · 2026-06-18](journals/2026-06-18-aop-v53-i3.md)
+- [Vol 53 Issue 2 · 2026-06-18](journals/2026-06-18-aop-v53-i2.md)
+
 ## 应用 / 生物统计 (Applied & Biostat)
 
 ### AoAS

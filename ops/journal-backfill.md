@@ -57,7 +57,7 @@
 ### 阶段一 · 零覆盖的组（最高优先）
 
 概率统计 prob_stats：
-- [ ] `--only AoP --n-issues 8`
+- [x] (2026-06-18) `--only AoP --n-issues 8`
 - [ ] `--only Bernoulli --n-issues 8`
 - [ ] `--only EJS --n-issues 4`   ⚠ 电子刊、文章多，先 dry-run
 - [ ] `--only "Statistica Sinica" --n-issues 8`
