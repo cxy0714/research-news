@@ -1,6 +1,6 @@
 # OCIS · Spring 2024
 
-- 共 17 场 · 15 篇精读 · Online Causal Inference Seminar
+- 共 17 场 · 15 篇精读
 
 ## 本季导览
 

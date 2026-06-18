@@ -1,6 +1,6 @@
 # OCIS · Fall 2021
 
-- 共 13 场 · 8 篇精读 · Online Causal Inference Seminar
+- 共 13 场 · 8 篇精读
 
 ## 本季导览
 
