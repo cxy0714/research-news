@@ -17,6 +17,13 @@
 ## [Unreleased]
 
 ### Added
+- **期刊每期导览 `journal_overview`**：期刊每期页顶部加一段 LLM **导览**（归纳本期主线 /
+  主题，**不打分、不排名**），和 OCIS 季页共用同一套「导览」模式。新跑的期自动带
+  （`journals` → `render_journal_page(overview=…)`）；历史页用
+  `python -m research_news.journal_overview` 回填——**从页面自身解析**每篇的题目 + 主题 +
+  中文摘要（不重抓、不重打分、不依赖快照），生成导览插到计数行下方、首个主题分组之前。幂等
+  （已有导览的页跳过，`--force` 重生成），范围 `--only AoS,JASA` / `--date` /
+  `--since..--until` / `--dry-run`（只数页、不调 LLM）。
 - **OCIS 讲座按季成页 + 导览 `talks seasons`**：把讲座目录按季（对齐 OCIS 官方分季，
   `import-ocis` 现给每场打 `season` 标签，缺失则按日期派生）成页 `docs/talks/seasons/<季>.md`。
   每页一段 **LLM 导览**（归纳本季主线、反复出现的方法、值得先看的几场，不打分不排名）+ 全部

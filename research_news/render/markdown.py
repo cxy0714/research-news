@@ -272,6 +272,18 @@ def _venue_issue_label(papers: list[Paper]) -> str:
     return f"{sorted_p[0][0]}({sorted_p[0][1]}) - {sorted_p[-1][0]}({sorted_p[-1][1]})"
 
 
+JOURNAL_OVERVIEW_HEADING = "## 本期导览"
+
+
+def render_journal_overview(overview: str) -> list[str]:
+    """The '## 本期导览' section block, shared by the live render and the backfill."""
+    return [
+        JOURNAL_OVERVIEW_HEADING + "\n",
+        "> 自动生成：归纳本期主要主题与脉络，**不打分、不排名**。\n",
+        overview.strip() + "\n",
+    ]
+
+
 def render_journal_page(
     papers: list[Paper],
     short: str,
@@ -281,6 +293,7 @@ def render_journal_page(
     when: date | None = None,
     output_dir: Path = JOURNALS_DIR,
     completeness_note: str | None = None,
+    overview: str | None = None,
 ) -> Path:
     """Write one Markdown page for a single journal issue. Returns the path.
 
@@ -316,6 +329,8 @@ def render_journal_page(
     if completeness_note:
         lines.append(f"- {completeness_note}")
     lines.append("")
+    if overview:
+        lines.extend(render_journal_overview(overview))
     lines.extend(_render_topic_groups(papers_sorted, heading_prefix="##"))
     lines.append(_footer())
     out.write_text("\n".join(lines) + "\n", encoding="utf-8")

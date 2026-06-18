@@ -199,8 +199,21 @@ def _process_issue(
     log.info("[%s v%s i%s] looking up institutions for %d papers ...",
              short, vol, iss, len(issue_papers))
     affil.backfill_affiliations(issue_papers)
+
+    # ── 本期导览 (overview of the issue's themes) ─────────────────────────────
+    overview = ""
+    ov_items = [{"title": p.title, "topic": p.topic, "summary": p.summary_zh}
+                for p in issue_papers if p.summary_zh]
+    if ov_items:
+        from . import journal_overview
+        ov_label = short + (f" Vol {vol}" if vol else "") + (f" Issue {iss}" if iss else "")
+        try:
+            overview = journal_overview.generate(client, ov_items, ov_label, model=model)
+        except Exception as e:  # noqa: BLE001
+            log.warning("[%s v%s i%s] overview failed: %s", short, vol, iss, e)
+
     out = render_journal_page(issue_papers, short, venue, vol=vol, iss=iss,
-                              when=when, completeness_note=note)
+                              when=when, completeness_note=note, overview=overview or None)
 
     # ── deep read (score >= th_deepread, plus institution green-lights) ──────
     deep_read_papers = select_deep_read_papers(
