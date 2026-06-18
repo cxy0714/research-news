@@ -29,7 +29,8 @@
   const GH_API = "https://api.github.com";
 
   // ── in-memory state ───────────────────────────────────────────────────────
-  // { version, read: {paperId: isoTime}, favorites: {paperId: {...}} }
+  // { version, read: {paperId: isoTime}, favorites: {paperId: {...}},
+  //   queue: {paperId: {...}} }  ← queue = papers requested for deep-read
   let state = emptyState();
   let gistReady = false;     // true once the gist has been located/created
   let _synced = false;       // true once we've pulled from the gist this session
@@ -38,7 +39,7 @@
   let _publicCache = null;
 
   function emptyState() {
-    return { version: 1, read: {}, favorites: {} };
+    return { version: 1, read: {}, favorites: {}, queue: {} };
   }
 
   // ── tiny localStorage helpers (never throw) ────────────────────────────────
@@ -73,6 +74,7 @@
         state = Object.assign(emptyState(), parsed);
         state.read = state.read || {};
         state.favorites = state.favorites || {};
+        state.queue = state.queue || {};
       }
     } catch (e) { state = emptyState(); }
     migrateLegacyReads();
@@ -146,6 +148,7 @@
         state = Object.assign(emptyState(), remote);
         state.read = state.read || {};
         state.favorites = state.favorites || {};
+        state.queue = state.queue || {};
         saveLocal();
       }
       return true;
@@ -222,6 +225,63 @@
       state.favorites[id].note = text;
       scheduleSync();
     }
+  }
+
+  // ── deep-read request queue ─────────────────────────────────────────────────
+  // Parse one or more arXiv ids out of pasted text (URLs or bare ids, one or
+  // many, separated by whitespace / commas / newlines). Returns [{id, url}].
+  function parseArxivIds(text) {
+    const out = [];
+    const seen = new Set();
+    const re = /(?:arxiv\.org\/(?:abs|pdf)\/)?(\d{4}\.\d{4,6})(?:v\d+)?|([a-z\-]+(?:\.[A-Z]{2})?\/\d{7})(?:v\d+)?/g;
+    let m;
+    while ((m = re.exec(text || "")) !== null) {
+      const id = m[1] || m[2];
+      if (id && !seen.has(id)) {
+        seen.add(id);
+        out.push({ id: id, url: "https://arxiv.org/abs/" + id });
+      }
+    }
+    return out;
+  }
+
+  // Queue a paper for deep-read (processed by the next daily run) AND add it to
+  // favorites by default — both live in the same gist, synced across devices.
+  function queuePaper(info) {
+    const id = info.id;
+    if (!id) return false;
+    if (!state.queue[id]) {
+      state.queue[id] = {
+        paper_id: id,
+        url: info.url || ("https://arxiv.org/abs/" + id),
+        requested: new Date().toISOString(),
+        source_url: location.pathname,
+      };
+    }
+    if (!state.favorites[id]) {
+      state.favorites[id] = {
+        paper_id: id,
+        title: info.title || id,
+        url: info.url || ("https://arxiv.org/abs/" + id),
+        deep_read_url: "",
+        source: "手动录入",
+        source_url: location.pathname,
+        category: UNCATEGORIZED,
+        date: pageDate(),
+        week: isoWeek(new Date()),
+        added: new Date().toISOString(),
+        note: "",
+      };
+    }
+    scheduleSync();
+    document.dispatchEvent(new CustomEvent("rn:favchange"));
+    return true;
+  }
+
+  function removeQueued(id) {
+    delete state.queue[id];
+    scheduleSync();
+    document.dispatchEvent(new CustomEvent("rn:favchange"));
   }
 
   // ── page / paper helpers ────────────────────────────────────────────────────
@@ -634,18 +694,111 @@
     );
   }
 
+  // Fill in deep_read_url for favorites that don't have one yet, by looking the
+  // paper up in the deep-reads index. Handles papers favorited *before* their
+  // deep read existed — notably manually-requested papers (queued, then deep-read
+  // by the next daily run). Resolves the same Promise shape for both views.
+  function enrichDeepReadUrls(favs) {
+    return loadDeepReads().then((byId) => {
+      favs.forEach((f) => {
+        if (!f.deep_read_url && f.paper_id && byId.has(f.paper_id)) {
+          f.deep_read_url = deepReadHref(byId.get(f.paper_id));
+        }
+      });
+      return favs;
+    }).catch(() => favs);
+  }
+
   function renderCollection() {
     const host = document.getElementById("rn-collection");
+    renderRequestBox();
     if (!host) return;
     if (active()) {
-      renderFavs(host, Object.values(state.favorites), false);
+      enrichDeepReadUrls(Object.values(state.favorites))
+        .then((favs) => renderFavs(host, favs, false));
     } else {
       loadPublicFavs().then((favs) => {
-        if (favs && favs.length) renderFavs(host, favs, true);
+        if (favs && favs.length) enrichDeepReadUrls(favs).then((e) => renderFavs(host, e, true));
         else host.innerHTML = '<p class="rn-c-empty">还没有公开的收藏。' +
           '点右下角 <b>👤 登录</b> 可管理你自己的收藏。</p>';
       });
     }
+  }
+
+  // ── deep-read request box (申请精读 / 手动录入) ───────────────────────────────
+  function renderRequestBox() {
+    const host = document.getElementById("rn-request");
+    if (!host) return;
+
+    // The queue lives in the gist, so a request needs signing in.
+    if (!active()) {
+      host.innerHTML = '<p class="rn-c-empty">想手动录入论文做精读？先点右下角 ' +
+        '<b>👤 登录</b>（带 <code>gist</code> 权限的 Token），录入的论文会存进你的私密 ' +
+        'Gist，并默认加入收藏。</p>';
+      return;
+    }
+
+    host.innerHTML =
+      '<div class="rn-q-form">' +
+      '<textarea id="rn-q-in" rows="2" placeholder="粘贴 arXiv 链接或编号（可多条，按行 / 空格分隔）&#10;例如 https://arxiv.org/abs/2405.08525"></textarea>' +
+      '<button id="rn-q-add" type="button">加入收藏并排队精读</button>' +
+      '<div class="rn-q-msg" id="rn-q-msg"></div>' +
+      '</div>' +
+      '<div id="rn-q-list"></div>';
+
+    const inp = host.querySelector("#rn-q-in");
+    const add = host.querySelector("#rn-q-add");
+    const msg = host.querySelector("#rn-q-msg");
+
+    function submit() {
+      const found = parseArxivIds(inp.value);
+      if (!found.length) {
+        msg.textContent = "没识别出 arXiv 编号，请检查链接。";
+        return;
+      }
+      found.forEach((f) => queuePaper(f));
+      inp.value = "";
+      msg.textContent = "已加入 " + found.length + " 篇（默认收藏）。" +
+        "下次定时任务会自动精读，完成后这里会显示 🔍 精读 链接。";
+      renderRequestBox();
+    }
+    add.addEventListener("click", submit);
+    inp.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) { e.preventDefault(); submit(); }
+    });
+
+    renderQueueList(host.querySelector("#rn-q-list"));
+  }
+
+  function renderQueueList(host) {
+    if (!host) return;
+    const ids = Object.keys(state.queue);
+    if (!ids.length) {
+      host.innerHTML = '<p class="rn-c-empty">还没有手动录入的论文。</p>';
+      return;
+    }
+    loadDeepReads().then((byId) => {
+      const rows = ids
+        .map((id) => state.queue[id])
+        .sort((a, b) => (b.requested || "").localeCompare(a.requested || ""));
+      const lis = rows.map((q) => {
+        const id = q.paper_id;
+        const dr = byId.get(id);
+        const status = dr
+          ? '<span class="rn-q-done">✅ 已精读</span> · <a href="' +
+            deepReadHref(dr) + '">🔍 精读</a>'
+          : '<span class="rn-q-wait">⏳ 排队中（下次定时任务精读）</span>';
+        const rm = dr ? '' :
+          '<button class="rn-q-rm" data-id="' + escapeHtml(id) + '" title="移除排队" type="button">✕</button>';
+        return '<li><a href="' + escapeHtml(q.url || "#") + '" target="_blank" rel="noopener">' +
+          escapeHtml(id) + '</a> ' + status + ' ' + rm + '</li>';
+      });
+      host.innerHTML = '<h3>已录入（' + rows.length + '）</h3><ul class="rn-q-ul">' +
+        lis.join("") + '</ul>';
+      host.querySelectorAll(".rn-q-rm").forEach((b) => {
+        b.addEventListener("click", () => { removeQueued(b.getAttribute("data-id")); renderRequestBox(); });
+      });
+    });
   }
 
   function renderFavs(host, favs, readonly) {
@@ -861,6 +1014,24 @@
       .rn-c-rm { float: right; border: none; background: transparent; cursor: pointer;
         color: #b00; font-size: 0.9em; }
       .rn-c-empty { opacity: 0.8; }
+
+      .rn-q-form { display: flex; flex-direction: column; gap: 0.5em; margin: 0.3em 0 0.6em; }
+      .rn-q-form textarea { width: 100%; box-sizing: border-box; padding: 0.5em;
+        border: 1px solid rgba(0,0,0,0.25); border-radius: 0.3em; resize: vertical;
+        background: var(--md-default-bg-color, #fff); color: var(--md-default-fg-color, #222);
+        font-family: inherit; }
+      .rn-q-form button { align-self: flex-start; padding: 0.4em 1em; border-radius: 0.3em;
+        border: 1px solid #c79100; background: #ffce3a; color: #1a1400; cursor: pointer; }
+      .rn-q-msg { font-size: 0.82em; opacity: 0.85; }
+      .rn-q-ul { list-style: none; padding-left: 0; }
+      .rn-q-ul li { margin: 0.35em 0; padding: 0.3em 0; border-bottom: 1px dashed rgba(0,0,0,0.1);
+        font-size: 0.9em; }
+      .rn-q-done { color: #2e7d32; font-weight: 600; }
+      .rn-q-wait { color: #8a6500; }
+      [data-md-color-scheme="slate"] .rn-q-done { color: #7fd18a; }
+      [data-md-color-scheme="slate"] .rn-q-wait { color: #ffd966; }
+      .rn-q-rm { border: none; background: transparent; cursor: pointer; color: #b00;
+        font-size: 0.9em; }
     `;
     const style = document.createElement("style");
     style.id = "rn-extras-style";

@@ -8,8 +8,8 @@ in the Chinese summary / score / key techniques (so the gist itself stays tiny),
 and writes ``docs/data/favorites_public.json``. The favorites page then renders
 that snapshot for visitors who are not signed in.
 
-Only favorites are published — read state is never exposed. Per the owner's
-choice, comments ARE included in the public snapshot.
+Only favorites are published — read state and the deep-read queue are never
+exposed. Per the owner's choice, comments ARE included in the public snapshot.
 
 Env:
   GIST_TOKEN   GitHub token with ``gist`` scope (required).
@@ -23,11 +23,7 @@ import os
 import sys
 from pathlib import Path
 
-import httpx
-
-GH_API = "https://api.github.com"
-STATE_FILE = "research-news-state.json"
-GIST_DESC = "research-news · 已读与收藏状态（请勿删除）"
+from . import gist_state
 
 HIGHLIGHTS_PATH = Path("data/highlights.json")
 OUT_PATH = Path("docs/data/favorites_public.json")
@@ -35,40 +31,6 @@ OUT_PATH = Path("docs/data/favorites_public.json")
 # Fields copied from the highlights manifest into each published entry.
 ENRICH_FIELDS = ("summary_zh", "score", "key_techniques", "why_relevant",
                  "venue", "authors")
-
-
-def _headers(token: str) -> dict:
-    return {
-        "Authorization": f"Bearer {token}",
-        "Accept": "application/vnd.github+json",
-        "X-GitHub-Api-Version": "2022-11-28",
-    }
-
-
-def _find_gist_id(client: httpx.Client, token: str) -> str | None:
-    r = client.get(f"{GH_API}/gists", headers=_headers(token),
-                   params={"per_page": 100})
-    r.raise_for_status()
-    for g in r.json():
-        files = g.get("files") or {}
-        if g.get("description") == GIST_DESC or STATE_FILE in files:
-            return g["id"]
-    return None
-
-
-def _load_state(client: httpx.Client, token: str, gist_id: str) -> dict:
-    r = client.get(f"{GH_API}/gists/{gist_id}", headers=_headers(token))
-    r.raise_for_status()
-    g = r.json()
-    f = (g.get("files") or {}).get(STATE_FILE)
-    if not f:
-        return {}
-    # Files >1 MB come back truncated; fetch the raw blob in that case.
-    if f.get("truncated") and f.get("raw_url"):
-        raw = client.get(f["raw_url"], headers=_headers(token))
-        raw.raise_for_status()
-        return json.loads(raw.text or "{}")
-    return json.loads(f.get("content") or "{}")
 
 
 def _load_highlights() -> dict[str, dict]:
@@ -124,18 +86,14 @@ def _write_atomic(path: Path, text: str) -> None:
 
 
 def main() -> int:
-    token = os.environ.get("GIST_TOKEN", "").strip()
-    if not token:
+    if not os.environ.get("GIST_TOKEN", "").strip():
         print("GIST_TOKEN not set — nothing to publish.", file=sys.stderr)
         return 1
 
-    with httpx.Client(timeout=30) as client:
-        gist_id = os.environ.get("RN_GIST_ID", "").strip() or \
-            _find_gist_id(client, token)
-        if not gist_id:
-            print("No state gist found on this account.", file=sys.stderr)
-            return 1
-        state = _load_state(client, token, gist_id)
+    state, gist_id = gist_state.fetch_state()
+    if not gist_id:
+        print("No state gist found on this account.", file=sys.stderr)
+        return 1
 
     public = build_public(state, _load_highlights())
     _write_atomic(OUT_PATH, json.dumps(public, ensure_ascii=False, indent=2))

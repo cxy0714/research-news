@@ -17,6 +17,15 @@
 ## [Unreleased]
 
 ### Added
+- **网页手动录入论文 → 次日定时精读（与 Gist 联动）**：收藏页顶部新增「✍️ 手动录入论文」框，
+  登录后粘贴 arXiv 链接 / 编号（可多条）即可。论文 **默认加入收藏**，并写进同一个私密 Gist 的
+  新字段 `queue`（与收藏一样跨设备同步）。`run_daily.*` 新增一步 `research_news.manual_requests`：
+  用 `GIST_TOKEN` 读队列，对**尚未精读**的链接按 id 抓元数据（新增 `arxiv.fetch_by_ids`）→ 打分 +
+  首过摘要 → 下 PDF → **精读**（`run_type="manual"`），并把结果幂等地注入当天日报的
+  **「✍️ 手动录入的论文」** 章节（计数行下方、digest 之前），同时进精读存档。去重靠
+  「`paper_id` 已在精读索引中则跳过」，无需把状态写回 Gist；精读完成后前端从
+  `deep_reads_index.json` 回填收藏 / 录入列表的 **🔍 精读** 链接。无 `GIST_TOKEN` 时该步安静跳过，
+  绝不影响日跑。新增共享模块 `research_news.gist_state`（`publish_favorites` 同步改用）。
 - **期刊往期回补全自动 `journal_backfill` + Windows 连续循环任务**：`python -m research_news.journal_backfill`
   读 `ops/journal-backfill.md` 的待办清单，跑**下一个未打勾**的单元（一本刊的若干期）、成功后
   自动打勾、队列空时退出码非 0，无需 agent。`--max N` / `--dry-run`。`run_journal_backfill.ps1`

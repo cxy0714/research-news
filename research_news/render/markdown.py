@@ -28,6 +28,12 @@ RERUN_MARKER = "⚠️ *摘要不完整，待重跑（`python -m research_news.r
 # (research_news.backfill_low_relevance) can find + replace the section.
 LOW_SECTION_HEADING = "## 🗂 其他论文（仅 LLM 评分，未生成摘要）"
 
+# Heading for the "manually requested" section of a daily report: papers the
+# owner queued for deep-read on the web (paste an arXiv link → 默认收藏 + 排队).
+# Kept as a stable constant so research_news.manual_requests can find + replace
+# the section idempotently.
+MANUAL_SECTION_HEADING = "## ✍️ 手动录入的论文（精读）"
+
 
 def format_institutions_line(institutions: list[str]) -> str:
     """The '- **机构**: ...' line for a paper, shared by the renderer and the
@@ -174,6 +180,23 @@ def render_low_section(papers_low: list[Paper]) -> list[str]:
     ]
     for i, p in enumerate(ordered, 1):
         out.append(_low_paper_block(p, i))
+    return out
+
+
+def render_manual_section(papers: list[Paper]) -> list[str]:
+    """Lines for the '✍️ 手动录入的论文' section — papers the owner queued on the
+    web and which were deep-read by ``research_news.manual_requests``. Grouped by
+    topic like the main digest, so the JS overlay injects the '🔍 精读' / '☆ 收藏'
+    badges on these headings too. Returns ``[]`` when there are none. Shared by
+    the manual-request processor so the section renders identically each run."""
+    if not papers:
+        return []
+    out = [
+        MANUAL_SECTION_HEADING + "\n",
+        "> 你在网页上手动录入（粘贴 arXiv 链接）申请精读的论文，已默认加入收藏，"
+        "并由当天的定时任务精读。点标题旁的 **🔍 精读** 查看解读。\n",
+    ]
+    out.extend(_render_topic_groups(papers, heading_prefix="###"))
     return out
 
 

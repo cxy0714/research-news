@@ -50,6 +50,10 @@ try {
 
     # Regenerate any deep reads whose LLM call failed today (the '精读失败' stubs).
     python -m research_news.backfill_deep_reads --retry-stubs --date $today
+
+    # Deep-read papers the owner queued on the website (the gist 'queue': paste an
+    # arXiv link -> default-favorite + queue). Fails open without GIST_TOKEN.
+    python -m research_news.manual_requests --date $today
 }
 finally {
     $mutex.ReleaseMutex()

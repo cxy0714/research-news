@@ -252,6 +252,56 @@ def fetch_api(
     return all_papers
 
 
+# ── fetch specific papers by id (manual deep-read requests) ───────────────────
+
+def normalize_arxiv_id(text: str) -> str:
+    """Pull a bare arXiv id (new or old style) out of a URL or id string.
+
+    Accepts e.g. ``https://arxiv.org/pdf/2405.08525``, ``arxiv.org/abs/2405.08525v2``,
+    ``2405.08525``, or ``math.ST/0123456``. Returns ``""`` when nothing matches.
+    """
+    return _extract_arxiv_id(text or "")
+
+
+def fetch_by_ids(ids: list[str], *, batch_size: int = 25) -> list[Paper]:
+    """Fetch paper metadata for explicit arXiv ids via the API ``id_list`` query.
+
+    Ids may be raw ids or full URLs (``normalize_arxiv_id`` is applied). Unknown
+    or unparseable ids are skipped. Order follows the input where possible.
+    """
+    norm: list[str] = []
+    seen: set[str] = set()
+    for raw in ids:
+        aid = normalize_arxiv_id(raw)
+        if aid and aid not in seen:
+            seen.add(aid)
+            norm.append(aid)
+    if not norm:
+        return []
+
+    by_id: dict[str, Paper] = {}
+    for offset in range(0, len(norm), batch_size):
+        chunk = norm[offset:offset + batch_size]
+        params = {"id_list": ",".join(chunk), "max_results": len(chunk)}
+        try:
+            xml = _fetch_api(params)
+        except Exception as e:
+            log.warning("arXiv id_list fetch failed for %s: %s", chunk, e)
+            continue
+        root = ET.fromstring(xml)
+        for entry in root.findall(f"{ATOM}entry"):
+            result = _api_entry_to_paper(entry)
+            if result is None:
+                continue
+            paper, _primary = result
+            by_id[paper.paper_id] = paper
+        time.sleep(3)  # arXiv API rate limit: 3 req/sec max
+
+    out = [by_id[aid] for aid in norm if aid in by_id]
+    log.info("arxiv id_list: requested %d, resolved %d", len(norm), len(out))
+    return out
+
+
 # ── public interface ──────────────────────────────────────────────────────────
 
 def fetch_all(cfg: dict, for_date: date | None = None) -> list[Paper]:

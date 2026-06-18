@@ -149,13 +149,14 @@ python -m research_news.backfill_deep_reads --retry-stubs --dry-run
 
 ### 自动化：每天跑完顺手恢复（cron + 锁）
 
-`run_daily.sh` 已是「日跑 → 修乱码摘要 → **恢复当天失败的精读** → `git add -A` 提交推送」
-一条龙，并在最前面加了互斥锁（`flock`）：
+`run_daily.sh` 已是「日跑 → 修乱码摘要 → **恢复当天失败的精读** → **手动录入队列精读** →
+`git add -A` 提交推送」一条龙，并在最前面加了互斥锁（`flock`）：
 
 ```bash
 python -m research_news.daily
 python -m research_news.rerun --date "$(date -I)"
 python -m research_news.backfill_deep_reads --retry-stubs --date "$(date -I)"   # ← 恢复 stub
+python -m research_news.manual_requests --date "$(date -I)"                      # ← 网页录入的精读队列
 git add -A && git commit -m "daily report $(date -I)" && git push
 ```
 
@@ -576,6 +577,24 @@ Token（classic）。Token 只存在你本机浏览器的 localStorage，首次�
 每篇收藏都能直接在网页上写 **评论 / 笔记**（点「✎ 评论」），随状态一起同步；
 还能一键「复制为 Markdown」。类别分组所需的主题分类表由管道写入
 `docs/data/topic_labels.json`。
+
+### 手动录入论文（申请精读）
+
+想读一篇没出现在每日 / 期刊列表里的论文（一般是 arXiv）？登录后到 **收藏页**
+顶部的「✍️ 手动录入论文」框，把网址或编号粘进去（可多条），点「加入收藏并排队精读」：
+
+- 论文 **默认加入收藏**，并写入同一个私密 Gist 的 `queue` 字段（与收藏一样跨设备同步）；
+- **下一次定时任务**（`run_daily.*` 里的 `research_news.manual_requests`）用 `GIST_TOKEN`
+  读这个队列，对每个**还没精读过**的 arXiv 链接：按 id 抓元数据
+  （`arxiv.fetch_by_ids`）→ 打分 + 首过摘要 → 下载 PDF → **精读**（`run_type="manual"`），
+  并把结果放进当天日报的 **「✍️ 手动录入的论文」** 章节（置于计数行下方、digest 之前），
+  同时进入 [精读存档](docs/all_deep_reads.md)；
+- 精读完成后，收藏页的录入列表与收藏条目会自动显示 **🔍 精读** 链接
+  （前端从 `deep_reads_index.json` 回填，无需把链接写回 Gist）。
+
+去重：队列里 `paper_id` 已在精读索引中的直接跳过，所以重复跑既便宜又不会精读两遍。
+**本机需要 `GIST_TOKEN`**（与 publish-favorites 同一个 `gist` PAT，写进 `.env`）；
+没配 token 时这一步会安静跳过，绝不影响日跑提交。`--date` / `--dry-run` 可调。
 
 ### 公开收藏快照（让访客也能看）
 
