@@ -61,6 +61,10 @@
 - [Vol 19 Issue 2 · 2026-06-18](journals/2026-06-18-ejs-v19-i2.md)
 - [Vol 19 Issue 1 · 2026-06-18](journals/2026-06-18-ejs-v19-i1.md)
 
+### Statistica Sinica
+
+- [2026-06-19](journals/2026-06-19-statistica-sinica.md)
+
 ## 应用 / 生物统计 (Applied & Biostat)
 
 ### AoAS

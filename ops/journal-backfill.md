@@ -60,7 +60,7 @@
 - [x] (2026-06-18) `--only AoP --n-issues 8`
 - [x] (2026-06-18) `--only Bernoulli --n-issues 8`
 - [x] (2026-06-19) `--only EJS --n-issues 4`   ⚠ 电子刊、文章多，先 dry-run
-- [ ] `--only "Statistica Sinica" --n-issues 8`
+- [x] (2026-06-19) `--only "Statistica Sinica" --n-issues 8`
 - [ ] `--only "Scand. J. Stat." --n-issues 8`
 
 流行病 epi：
