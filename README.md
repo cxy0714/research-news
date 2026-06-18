@@ -340,10 +340,20 @@ python -m research_news.journals --rerun --only AoS --issue v54-i1 \
 python -m research_news.journals --only TIT --n-issues 2 --dry-run
 ```
 
-完整的待办清单 + agent 操作流程在 **[`ops/journal-backfill.md`](ops/journal-backfill.md)**：
-按价值排序的队列（先补完全没有的 prob_stats / astro / epi，再加深 core / econ / applied /
-ieee），状态用清单里的勾选记在 git 里。OpenClaw / 定时 agent 读它、每天补一项、打勾提交即可。
-**唯一硬约束是不并行**——`run_journal_backfill.sh` 和 `run_daily.sh` 共用同一把 `flock` 锁。
+完整的待办清单在 **[`ops/journal-backfill.md`](ops/journal-backfill.md)**：按价值排序的队列
+（先补完全没有的 prob_stats / astro / epi，再加深 core / econ / applied / ieee），状态用清单
+里的勾选记在 git 里。
+
+**全自动（无需 agent）**：`python -m research_news.journal_backfill` 读这份清单，跑**下一个未
+打勾**的单元、成功后自动打勾。`--max N` 一次多跑几个、`--dry-run` 只看下一个。Windows 上用
+`run_journal_backfill.ps1`（注册成定时任务，见下方「定时」一节）每天自动补一格。
+
+**唯一硬约束是不并行**——`run_journal_backfill.sh/.ps1` 和 `run_daily.ps1` 共用同一把锁
+（Windows 命名 Mutex / Linux flock），期刊回补会**排在 daily 之后**跑、绝不并行。
+
+> 每天跑多少？**token 不是瓶颈**（周配额 10 亿，日常只用 ~2-3%；一个单元才 0.2-0.5M）。
+> 瓶颈是**机器开机时长**：一本刊 `--n-issues 2-4` ≈ 40-120 篇 ≈ 30-90 分钟。所以默认**一天
+> 一格**（`-Max 1`），整个待办清单约 3-4 周补完；想快就 `-Max 2-3`、并让机器多开一会儿。
 
 
 
@@ -623,15 +633,19 @@ daily 全流程交给 Windows 任务计划程序跑 `run_daily.ps1` 即可，**�
 Start-ScheduledTask -TaskName research-news-daily   # 立刻测一次
 ```
 
-它注册**两个**任务，都勾好关键项（**错过自动补跑** `-StartWhenAvailable`、**绝不并行**
+它注册**三个**任务，都勾好关键项（**错过自动补跑** `-StartWhenAvailable`、**绝不并行**
 `-MultipleInstances IgnoreNew`、电池不挡）：
 
 - `research-news-daily`：工作日 09:10 跑 `run_daily.ps1`。
 - `research-news-catchup`：**登录时**（+10 分钟）跑 `scripts\catch-up.ps1`——台式机不会 24 小时开，
   开机后它会看最后一份日报是哪天，把**关机错过的工作日**用 `python -m research_news.daily --date <X>`
-  一次性补齐（跳过周末，今天留给 09:10 那个任务）。它和 daily **共用同一把锁**，所以会排队、不并行；
-  靠重跑保护，已存在的报告不会被覆盖。默认最多往前补 14 天（`-MaxDays` 调），手动跑：
+  一次性补齐（跳过周末，今天留给 09:10 那个任务）。默认最多往前补 14 天（`-MaxDays` 调），手动跑：
   `.\scripts\catch-up.ps1`。
+- `research-news-journals`：工作日 **10:30**（daily 之后）跑 `run_journal_backfill.ps1`，按
+  `ops\journal-backfill.md` 的队列**每天补一格期刊往期**（`-Max` 调每次格数）。换时间 / 格数 /
+  关掉：`register-task.ps1 -JournalTime "14:00" -JournalMax 2` / `-NoJournals`。
+
+三个任务**共用同一把锁**，所以会自动排队、绝不并行；daily 有重跑保护，已存在的报告不会被覆盖。
 
 > 手动建任务的话：创建任务 → 触发器 周一至周五 09:10 → 操作
 > `powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\path\to\research-news\run_daily.ps1"`
@@ -647,7 +661,8 @@ Start-ScheduledTask -TaskName research-news-daily   # 立刻测一次
 - **只留一个执行者**：要从云服务器搬到台式机，就把云上的 cron 关掉，别两台都跑（会各自
   commit/push 打架；锁只防同机并行）。
 
-期刊回补按 `ops/journal-backfill.md` 手动 / 半自动跑即可，不用进每日任务。
+期刊往期回补由独立的 `research-news-journals` 任务每天补一格（见上），和每日任务分开、共用锁。
+想手动多补几格随时：`python -m research_news.journal_backfill --max 3`。
 
 **日志会自动传 GitHub（按机器分开）**：每次跑会写两份到 `logs\`——`logs\<日期>-<机器名>.log`
 （管道详细日志：抓取 / 打分 / 摘要 / 精读 / 报错）和 `logs\run-<日期>-<机器名>.log`（整次运行的
