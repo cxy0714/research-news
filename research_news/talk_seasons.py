@@ -66,10 +66,32 @@ def season_label(slug: str) -> str:
     return f"{m.group(1).capitalize()} {m.group(2)}" if m else slug
 
 
-def _first_sentence(text: str, limit: int = 80) -> str:
-    t = re.sub(r"\s+", " ", (text or "").strip())
+def _first_sentence(text: str, limit: int = 100) -> str:
+    """A clean one-line blurb for the index: drop markdown emphasis, take the
+    first sentence, else cut at a clean boundary + '…' (never mid-`**bold**`)."""
+    t = re.sub(r"\*\*|`|#", "", (text or "").strip())
+    t = re.sub(r"\s+", " ", t).strip()
+    if not t:
+        return ""
     m = re.match(r"(.{0,%d}?[。！？.!?])" % limit, t)
-    return (m.group(1) if m else t[:limit]).strip()
+    if m:
+        return m.group(1).strip()
+    head = t[:limit]
+    cut = max(head.rfind("、"), head.rfind("，"), head.rfind("（"), head.rfind("："))
+    if cut >= limit // 2:
+        head = head[:cut]
+    return head.strip(" 、，（：") + "…"
+
+
+def _existing_overview(slug: str) -> str:
+    """The 导览 already written into a season page, so a re-run can reuse it
+    instead of paying for the LLM again."""
+    p = SEASONS_DIR / f"{slug}.md"
+    if not p.exists():
+        return ""
+    body = p.read_text(encoding="utf-8")
+    m = re.search(r"##\s*本季导览\s*\n+>[^\n]*\n+(.*?)\n+##\s*报告列表", body, re.DOTALL)
+    return m.group(1).strip() if m else ""
 
 
 # ── data loading ──────────────────────────────────────────────────────────────
@@ -255,6 +277,7 @@ def run(
     seasons: list[str] | None = None,
     model: str | None = None,
     overview: bool = True,
+    force: bool = False,
     dry_run: bool = False,
 ) -> list[Path]:
     rows = _load_catalog()
@@ -275,13 +298,19 @@ def run(
                      sum(1 for r in es if make_talk_id(r) in read_idx))
         return []
 
-    client = None
-    if overview:
-        from dotenv import load_dotenv
+    # Reuse the 导览 already on each page unless --force; only spin up the LLM
+    # client (and need an API key) when something actually has to be generated.
+    client: "SJTUClient | None" = None
 
-        from .llm.sjtu_client import SJTUClient
-        load_dotenv()
-        client = SJTUClient()
+    def _get_client() -> "SJTUClient":
+        nonlocal client
+        if client is None:
+            from dotenv import load_dotenv
+
+            from .llm.sjtu_client import SJTUClient
+            load_dotenv()
+            client = SJTUClient()
+        return client
 
     written: list[Path] = []
     index_entries: list[dict] = []
@@ -296,10 +325,13 @@ def run(
                 entries.append(e)
         ov = ""
         if overview:
-            try:
-                ov = generate_overview(client, entries, season_label(slug), model=model)
-            except Exception as e:  # noqa: BLE001
-                log.warning("overview failed for %s: %s", slug, e)
+            if not force:
+                ov = _existing_overview(slug)
+            if not ov:
+                try:
+                    ov = generate_overview(_get_client(), entries, season_label(slug), model=model)
+                except Exception as e:  # noqa: BLE001
+                    log.warning("overview failed for %s: %s", slug, e)
         page = render_season_page(slug, entries, ov)
         written.append(page)
         index_entries.append({

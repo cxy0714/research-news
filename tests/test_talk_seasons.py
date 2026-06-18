@@ -56,6 +56,22 @@ def test_first_sentence():
     assert ts._first_sentence("") == ""
 
 
+def test_first_sentence_strips_bold_and_cuts_clean():
+    # A long first "sentence" with no period within the limit must not end inside
+    # a **bold** span (which would break the markdown).
+    long = "这一季围绕**未观测混杂**（A、B、C）、**半参数效率与去偏**（D、E、F）、" + "讨论" * 60
+    s = ts._first_sentence(long)
+    assert "**" not in s and s.endswith("…")
+
+
+def test_existing_overview_roundtrip(tmp_path, monkeypatch):
+    monkeypatch.setattr(ts, "SEASONS_DIR", tmp_path)
+    entries = [ts._entry({"date": "2024-03-01", "speaker": "A", "title": "T"}, {})]
+    ts.render_season_page("spring-2024", entries, "本季围绕 proximal 展开。\n\n第二段。")
+    assert ts._existing_overview("spring-2024") == "本季围绕 proximal 展开。\n\n第二段。"
+    assert ts._existing_overview("fall-1999") == ""        # no page → empty
+
+
 def test_write_archive_groups_by_year(tmp_path, monkeypatch):
     monkeypatch.setattr(ts, "DOCS", tmp_path)
     ts.write_archive([

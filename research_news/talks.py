@@ -841,6 +841,8 @@ def main() -> None:
     p_se.add_argument("--season", action="append", default=[],
                       help="season slug e.g. spring-2024 (repeatable); omit = all seasons")
     p_se.add_argument("--no-overview", action="store_true", help="skip the LLM 导览 (offline)")
+    p_se.add_argument("--force", action="store_true",
+                      help="regenerate the 导览 via LLM (default reuses the page's existing one)")
     p_se.add_argument("--model", default=None, help="override the 导览 model")
     p_se.add_argument("--dry-run", action="store_true", help="list seasons + counts, no write")
 
@@ -879,7 +881,8 @@ def main() -> None:
     if args.cmd == "seasons":
         from . import talk_seasons
         paths = talk_seasons.run(seasons=list(args.season) or None, model=args.model,
-                                 overview=not args.no_overview, dry_run=args.dry_run)
+                                 overview=not args.no_overview, force=args.force,
+                                 dry_run=args.dry_run)
         print(f"wrote {len(paths)} season page(s)")
         return
 
