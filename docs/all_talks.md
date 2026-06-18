@@ -5,44 +5,44 @@ Online Causal Inference Seminar 历史讲座，按季分组。每季一页：**�
 ## 2026
 
 - [Spring 2026](talks/seasons/spring-2026.md) · 10 场（6 精读） — OCIS Spring 2026 的十场报告可归纳为三条主线。
-- [Winter 2026](talks/seasons/winter-2026.md) · 9 场（9 精读） — OCIS Winter 2026 的九场报告可归纳为三条主线：**半参数效率与调参**（Mukherjee、Young Researchers' Seminar
+- [Winter 2026](talks/seasons/winter-2026.md) · 9 场（9 精读） — OCIS Winter 2026 的九场报告可归纳为三条主线：半参数效率与调参（Mukherjee、Young Researchers' Seminar on DAGs）、因果识别与偏识别…
 
 ## 2025
 
-- [Fall 2025](talks/seasons/fall-2025.md) · 9 场（9 精读） — 这一季的 9 场报告大致可归纳为四条主线：**未观测混杂下的识别与敏感性分析**（Cinelli, Antonelli, Miles, Wang）、**半参数模
-- [Spring 2025](talks/seasons/spring-2025.md) · 11 场（9 精读） — OCIS Spring 2025 的 11 场报告可归纳为四条主线：**多维与复杂设计下的因果推断**（Cattaneo、Keele、Small）、**高维与部
-- [Winter 2025](talks/seasons/winter-2025.md) · 11 场（11 精读） — 这一季的 11 场报告围绕四条主线展开：**面板数据与非参数识别**（Imbens）、**合成控制与实验设计**（Abadie）、**近端因果推断及其应用**（
+- [Fall 2025](talks/seasons/fall-2025.md) · 9 场（9 精读） — 这一季的 9 场报告大致可归纳为四条主线：未观测混杂下的识别与敏感性分析（Cinelli, Antonelli, Miles, Wang）、半参数模型诊断与可解释性（Shah, Gao）…
+- [Spring 2025](talks/seasons/spring-2025.md) · 11 场（9 精读） — OCIS Spring 2025 的 11 场报告可归纳为四条主线：多维与复杂设计下的因果推断（Cattaneo、Keele、Small）、高维与部分识别下的稳健推断（Kennedy、Zhou…
+- [Winter 2025](talks/seasons/winter-2025.md) · 11 场（11 精读） — 这一季的 11 场报告围绕四条主线展开：面板数据与非参数识别（Imbens）、合成控制与实验设计（Abadie）、近端因果推断及其应用…
 
 ## 2024
 
-- [Fall 2024](talks/seasons/fall-2024.md) · 8 场（8 精读） — 这一季的 8 场报告围绕三条主线展开：**实验设计与复杂处理效应检验**（Panos Toulis/Wenxuan Guo、Tianchen Qian、Toru
-- [Spring 2024](talks/seasons/spring-2024.md) · 17 场（15 精读） — 这一季的 17 场报告大致可归纳为四条主线：**因果识别与推断的基础框架**（Pinto、Miao）、**因果效应估计中的偏差与稳健性**（Ye、Díaz、Ya
-- [Winter 2024](talks/seasons/winter-2024.md) · 2 场（1 精读） — OCIS Winter 2024 两场报告聚焦于因果推断的**基础数学结构**与**因果表示学习的可识别性**，分别从公理化与交互式学习两个方向切入。
+- [Fall 2024](talks/seasons/fall-2024.md) · 8 场（8 精读） — 这一季的 8 场报告围绕三条主线展开：实验设计与复杂处理效应检验（Panos Toulis/Wenxuan Guo、Tianchen Qian、Toru Kitagawa）、异质性建模与加权视角…
+- [Spring 2024](talks/seasons/spring-2024.md) · 17 场（15 精读） — 这一季的 17 场报告大致可归纳为四条主线：因果识别与推断的基础框架（Pinto、Miao）、因果效应估计中的偏差与稳健性（Ye、Díaz、Yang、Robertson & Dahabreh…
+- [Winter 2024](talks/seasons/winter-2024.md) · 2 场（1 精读） — OCIS Winter 2024 两场报告聚焦于因果推断的基础数学结构与因果表示学习的可识别性，分别从公理化与交互式学习两个方向切入。
 
 ## 2023
 
-- [Fall 2023](talks/seasons/fall-2023.md) · 13 场（11 精读） — OCIS Fall 2023 的 13 场报告可归纳为四条主线：**因果参数的实质解释与识别陷阱**（Stensrud & Sarvet、Miles 等）、**
-- [Spring 2023](talks/seasons/spring-2023.md) · 7 场（6 精读） — OCIS Spring 2023 的七场报告可归纳为三条主线：**高维与半参数因果推断**（Yuhao Wang、Philipp Bach & Sven Kla
-- [Winter 2023](talks/seasons/winter-2023.md) · 10 场（8 精读） — 这一季 OCIS Winter 2023 的 10 场报告可归纳为四条主线：**因果建模与参数化**（Robin Evans、Stijn Vansteeland
+- [Fall 2023](talks/seasons/fall-2023.md) · 13 场（11 精读） — OCIS Fall 2023 的 13 场报告可归纳为四条主线：因果参数的实质解释与识别陷阱（Stensrud & Sarvet、Miles 等）、面板数据与干扰下的因果推断（Agarwal…
+- [Spring 2023](talks/seasons/spring-2023.md) · 7 场（6 精读） — OCIS Spring 2023 的七场报告可归纳为三条主线：高维与半参数因果推断（Yuhao Wang、Philipp Bach & Sven Klaassen）、图模型与结构方程的形式化约束（M.
+- [Winter 2023](talks/seasons/winter-2023.md) · 10 场（8 精读） — 这一季 OCIS Winter 2023 的 10 场报告可归纳为四条主线：因果建模与参数化（Robin Evans、Stijn Vansteelandt）、因果推断中的偏倚与敏感性分析…
 
 ## 2022
 
-- [Fall 2022](talks/seasons/fall-2022.md) · 13 场（11 精读） — 这一季的 13 场报告可归纳为四条主线：**因果推断中的统一框架与优化视角**（Zubizarreta、Lei、Singh）、**因果发现与表示学习**（Lam
-- [Spring 2022](talks/seasons/spring-2022.md) · 12 场（10 精读） — 这一季的12场报告大致可以归纳为四条主线：**因果发现与不确定性量化**（Samuel Wang, Mona Azadkia, Mathias Drton）、*
-- [Winter 2022](talks/seasons/winter-2022.md) · 9 场（8 精读） — 这一季的 9 场报告围绕三条主线展开：**动态系统下的因果推断与策略学习**（Chengchun Shi、Kosuke Imai）、**分布漂移与域适应**（Y
+- [Fall 2022](talks/seasons/fall-2022.md) · 13 场（11 精读） — 这一季的 13 场报告可归纳为四条主线：因果推断中的统一框架与优化视角（Zubizarreta、Lei、Singh）、因果发现与表示学习（Lam、Zhang、Huang）、实验设计与网络因果…
+- [Spring 2022](talks/seasons/spring-2022.md) · 12 场（10 精读） — 这一季的12场报告大致可以归纳为四条主线：因果发现与不确定性量化（Samuel Wang, Mona Azadkia, Mathias Drton）、数据融合与异质性处理效应…
+- [Winter 2022](talks/seasons/winter-2022.md) · 9 场（8 精读） — 这一季的 9 场报告围绕三条主线展开：动态系统下的因果推断与策略学习（Chengchun Shi、Kosuke Imai）、分布漂移与域适应（Yuansi Chen…
 
 ## 2021
 
-- [Fall 2021](talks/seasons/fall-2021.md) · 13 场（8 精读） — OCIS Fall 2021 的 13 场报告可归纳为四条主线：**图模型与反事实框架的统一**（Richardson）、**非标准数据与因果推断**（Wang
-- [Summer 2021](talks/seasons/summer-2021.md) · 9 场（9 精读） — 这一季的九场报告围绕三条主线展开：**因果鲁棒性与分布漂移**（Makar）、**面板数据与多干预因果推断**（Agarwal & Shen, Menchett
-- [Spring 2021](talks/seasons/spring-2021.md) · 11 场（9 精读） — 这一季的 11 场报告围绕三条主线展开：**分布偏移与不变性**（Bottou、Pfister、Magliacane）、**干扰与网络结构下的因果推断**（Jo
-- [Winter 2021](talks/seasons/winter-2021.md) · 10 场（8 精读） — 这一季OCIS Winter 2021的10场报告大致可归纳为三条主线：**因果推断的识别与估计方法**（Angrist、Keele、Athey、van der
+- [Fall 2021](talks/seasons/fall-2021.md) · 13 场（8 精读） — OCIS Fall 2021 的 13 场报告可归纳为四条主线：图模型与反事实框架的统一（Richardson）、非标准数据与因果推断（Wang, Westling）、高效率估计与双机器学习…
+- [Summer 2021](talks/seasons/summer-2021.md) · 9 场（9 精读） — 这一季的九场报告围绕三条主线展开：因果鲁棒性与分布漂移（Makar）、面板数据与多干预因果推断（Agarwal & Shen, Menchetti & Taeb）、以及实验设计与选择性推断…
+- [Spring 2021](talks/seasons/spring-2021.md) · 11 场（9 精读） — 这一季的 11 场报告围绕三条主线展开：分布偏移与不变性（Bottou、Pfister、Magliacane）、干扰与网络结构下的因果推断（Johari、Zigler、Abadie）…
+- [Winter 2021](talks/seasons/winter-2021.md) · 10 场（8 精读） — 这一季OCIS Winter 2021的10场报告大致可归纳为三条主线：因果推断的识别与估计方法（Angrist、Keele、Athey、van der Laan）、因果表示学习与高维随机化检验…
 
 ## 2020
 
-- [Fall 2020](talks/seasons/fall-2020.md) · 14 场（14 精读） — 这一季 OCIS Fall 2020 的 14 场报告可归纳为四条主线：**（1）随机化实验中的设计与分析**（Luke Miratrix、Fan Li、Pen
-- [Summer 2020](talks/seasons/summer-2020.md) · 13 场（13 精读） — OCIS Summer 2020 的 13 场报告可归纳为四条主线：**匹配与设计基础**（Rudin/Volfovsky/Roy、Toulis、Eckles、
-- [Spring 2020](talks/seasons/spring-2020.md) · 9 场（9 精读） — 这一季的九场报告大致可归纳为三条主线：**工业实验与自适应推断**（Ya Xu, Susan Murphy）、**半参数效率与双稳健估计**（Eric Tche
+- [Fall 2020](talks/seasons/fall-2020.md) · 14 场（14 精读） — 这一季 OCIS Fall 2020 的 14 场报告可归纳为四条主线：（1）随机化实验中的设计与分析（Luke Miratrix、Fan Li、Peng Ding、Esther Duflo 访谈）…
+- [Summer 2020](talks/seasons/summer-2020.md) · 13 场（13 精读） — OCIS Summer 2020 的 13 场报告可归纳为四条主线：匹配与设计基础（Rudin/Volfovsky/Roy、Toulis、Eckles、Rosenbaum）、半参数效率与有限样本推断…
+- [Spring 2020](talks/seasons/spring-2020.md) · 9 场（9 精读） — 这一季的九场报告大致可归纳为三条主线：工业实验与自适应推断（Ya Xu, Susan Murphy）、半参数效率与双稳健估计…
 
 
 ---
