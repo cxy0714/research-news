@@ -61,7 +61,7 @@
 - [x] (2026-06-18) `--only Bernoulli --n-issues 8`
 - [x] (2026-06-19) `--only EJS --n-issues 4`   ⚠ 电子刊、文章多，先 dry-run
 - [x] (2026-06-19) `--only "Statistica Sinica" --n-issues 8`
-- [ ] `--only "Scand. J. Stat." --n-issues 8`
+- [x] (2026-06-19) `--only "Scand. J. Stat." --n-issues 8`
 
 流行病 epi：
 - [ ] `--only StatMed --n-issues 2`   ⚠ 双周刊、量大

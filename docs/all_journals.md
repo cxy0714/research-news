@@ -61,6 +61,17 @@
 - [Vol 19 Issue 2 · 2026-06-18](journals/2026-06-18-ejs-v19-i2.md)
 - [Vol 19 Issue 1 · 2026-06-18](journals/2026-06-18-ejs-v19-i1.md)
 
+### Scand. J. Stat.
+
+- [Vol 53 Issue 2 · 2026-06-19](journals/2026-06-19-scand-j-stat-v53-i2.md)
+- [Vol 53 Issue 1 · 2026-06-19](journals/2026-06-19-scand-j-stat-v53-i1.md)
+- [Vol 52 Issue 4 · 2026-06-19](journals/2026-06-19-scand-j-stat-v52-i4.md)
+- [Vol 52 Issue 3 · 2026-06-19](journals/2026-06-19-scand-j-stat-v52-i3.md)
+- [Vol 52 Issue 2 · 2026-06-19](journals/2026-06-19-scand-j-stat-v52-i2.md)
+- [Vol 52 Issue 1 · 2026-06-19](journals/2026-06-19-scand-j-stat-v52-i1.md)
+- [Vol 51 Issue 4 · 2026-06-19](journals/2026-06-19-scand-j-stat-v51-i4.md)
+- [Vol 51 Issue 3 · 2026-06-19](journals/2026-06-19-scand-j-stat-v51-i3.md)
+
 ### Statistica Sinica
 
 - [2026-06-19](journals/2026-06-19-statistica-sinica.md)
