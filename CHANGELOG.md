@@ -41,6 +41,11 @@
   `docs/all_talks.md` 改为**按季的索引**（年份分组、每季一行带场数与一句话导览），由
   `talk_seasons` 接管（读流程不再重写它）。季页从全量 catalog 生成（含无视频/未精读的场次），
   精读链接据 `data/talks_index.json` 解析。`--season` / `--no-overview`（离线）/ `--dry-run`。
+  **按会议（series）分组**：页面与索引先按会议（OCIS / INI…）再按季分，页名
+  `docs/talks/seasons/<series>-<季>.md`；series 取自每场 `series`（缺则按 venue 派生）。
+  并**纳入手工 `config/talks.yaml`** 的非 OCIS 讲座（如 INI 的 Robins keynote），不再只看
+  OCIS catalog——之前手工讲座虽已精读却不在任何季页里。`--force` 重写导览，否则复用既有
+  （含旧无前缀页名兜底），全量刷新会清掉过期季页。
 - **Windows 开机补齐缺天 `scripts\catch-up.ps1`**：台式机不会 24 小时开，关机会错过当天的
   定时跑。catch-up 找到最新的 `docs\daily\<日期>.md`，把从那以后到**昨天**缺的**工作日**用
   `daily --date <X>` 一次性补齐（跳过周末，今天留给 09:10 的 daily 任务）。靠 daily 的重跑

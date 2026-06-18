@@ -98,6 +98,9 @@ class Talk:
     # Source season slug ('spring-2024') from the OCIS season page, used to group
     # talks into per-season overview pages. Falls back to a date-derived season.
     season: str | None = None
+    # Conference / series the talk belongs to (e.g. "OCIS", "INI"). Season pages
+    # group by series; derived from the venue when unset.
+    series: str | None = None
     # One of llm.prompts.TOPICS — used to slot the talk into the archive's topic
     # grouping. Defaults to "other" when unset.
     topic: str | None = None

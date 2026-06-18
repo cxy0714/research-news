@@ -1,14 +1,15 @@
-"""OCIS per-season overview pages.
+"""Per-series, per-season overview pages for the talk catalog.
 
-Group the OCIS talk catalog (data/ocis_catalog.json) by season into
-docs/talks/seasons/<slug>.md — each page an LLM 导览 (the season's themes +
-what to read first) followed by every talk in that season, linking to its
-deep-read when one exists and listing metadata-only (with a 「暂无精读」 tag)
-otherwise. docs/all_talks.md becomes the season index.
+Group every talk — the OCIS catalog (data/ocis_catalog.json) *and* the
+hand-curated config/talks.yaml (INI, etc.) — by **series** (conference) then
+**season** into docs/talks/seasons/<series>-<season>.md. Each page is an LLM
+导览 (themes + what to read first) + every talk in that (series, season): linked
+to its deep-read when one exists, listed metadata-only ("暂无精读") otherwise.
+docs/all_talks.md becomes the index, grouped by series.
 
-Self-contained; refresh with `python -m research_news.talks seasons`. The season
-label comes from the OCIS source page (Talk.season, via import-ocis), falling
-back to a date-derived season.
+Refresh with `python -m research_news.talks seasons`. Series come from each
+talk's `series` (or are derived from the venue: OCIS / INI / …); the OCIS season
+comes from its source page (date-derived fallback).
 """
 from __future__ import annotations
 
@@ -19,6 +20,8 @@ import re
 from collections import defaultdict
 from pathlib import Path
 from typing import TYPE_CHECKING
+
+import yaml
 
 from .llm.prompts import TALK_SEASON_OVERVIEW_SYSTEM
 from .scrapers.ocis import CATALOG_PATH, make_talk_id, normalize_date
@@ -32,6 +35,7 @@ DOCS = Path("docs")
 SEASONS_DIR = DOCS / "talks" / "seasons"
 SEASONS_INDEX = Path("data/talk_seasons_index.json")
 TALKS_INDEX = Path("data/talks_index.json")
+TALKS_CONFIG = Path("config/talks.yaml")
 DEFAULT_MODEL = os.environ.get("TALK_OVERVIEW_MODEL", os.environ.get("DAILY_MODEL", "glm-5.1"))
 
 HOMEPAGE_URL = "https://cxy0714.github.io/"
@@ -40,7 +44,11 @@ REPO_URL = "https://github.com/cxy0714/research-news"
 _SEASON_ORDER = {"winter": 0, "spring": 1, "summer": 2, "fall": 3}
 
 
-# ── season helpers (pure) ─────────────────────────────────────────────────────
+# ── season / series helpers (pure) ────────────────────────────────────────────
+
+def _slug(s: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "-", (s or "").lower()).strip("-") or "x"
+
 
 def _date_season(date_str: str | None) -> str | None:
     m = re.match(r"(\d{4})-(\d{2})", date_str or "")
@@ -52,8 +60,22 @@ def _date_season(date_str: str | None) -> str | None:
 
 
 def season_of(row: dict) -> str:
-    """The season a talk belongs to: its OCIS source season, else date-derived."""
+    """The season a talk belongs to: its tagged season, else date-derived."""
     return (row.get("season") or "").strip().lower() or _date_season(row.get("date")) or "unknown"
+
+
+def series_of(row: dict) -> str:
+    """The series (conference) a talk belongs to: its `series`, else derived from
+    the venue (OCIS / INI), else the venue string."""
+    s = (row.get("series") or "").strip()
+    if s:
+        return s
+    v = (row.get("venue") or "").lower()
+    if "ocis" in v:
+        return "OCIS"
+    if "ini" in v or "isaac newton" in v:
+        return "INI"
+    return (row.get("venue") or "其他").strip()
 
 
 def season_sort_key(slug: str) -> tuple[int, int]:
@@ -66,9 +88,13 @@ def season_label(slug: str) -> str:
     return f"{m.group(1).capitalize()} {m.group(2)}" if m else slug
 
 
+def page_slug(series: str, season: str) -> str:
+    return f"{_slug(series)}-{season}"
+
+
 def _first_sentence(text: str, limit: int = 100) -> str:
-    """A clean one-line blurb for the index: drop markdown emphasis, take the
-    first sentence, else cut at a clean boundary + '…' (never mid-`**bold**`)."""
+    """A clean one-line blurb: drop markdown emphasis, take the first sentence,
+    else cut at a clean boundary + '…' (never mid-`**bold**`)."""
     t = re.sub(r"\*\*|`|#", "", (text or "").strip())
     t = re.sub(r"\s+", " ", t).strip()
     if not t:
@@ -83,17 +109,6 @@ def _first_sentence(text: str, limit: int = 100) -> str:
     return head.strip(" 、，（：") + "…"
 
 
-def _existing_overview(slug: str) -> str:
-    """The 导览 already written into a season page, so a re-run can reuse it
-    instead of paying for the LLM again."""
-    p = SEASONS_DIR / f"{slug}.md"
-    if not p.exists():
-        return ""
-    body = p.read_text(encoding="utf-8")
-    m = re.search(r"##\s*本季导览\s*\n+>[^\n]*\n+(.*?)\n+##\s*报告列表", body, re.DOTALL)
-    return m.group(1).strip() if m else ""
-
-
 # ── data loading ──────────────────────────────────────────────────────────────
 
 def _load_catalog() -> list[dict]:
@@ -106,8 +121,46 @@ def _load_catalog() -> list[dict]:
         return []
 
 
+def _handcurated_rows(path: Path = TALKS_CONFIG) -> list[dict]:
+    """Rows for the hand-curated talks (talks.yaml: INI etc.) — NOT the OCIS yaml.
+    id is the explicit talk id; the arXiv link is the first arXiv paper."""
+    if not path.exists():
+        return []
+    cfg = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    rows: list[dict] = []
+    for t in cfg.get("talks", []) or []:
+        if not t.get("id"):
+            continue
+        papers = [str(p) for p in (t.get("papers") or [])]
+        arxiv = next((f"https://arxiv.org/abs/{p}" for p in papers if re.match(r"^\d{4}\.\d", p)), None)
+        rows.append({
+            "id": t["id"], "series": series_of(t), "season": t.get("season"),
+            "date": str(t["date"]) if t.get("date") is not None else None,
+            "title": t.get("title"), "speaker": t.get("speaker"),
+            "discussant": t.get("discussant"), "abstract": t.get("abstract"),
+            "video": t.get("url"), "slides": t.get("slides"), "arxiv": arxiv,
+        })
+    return rows
+
+
+def load_rows() -> list[dict]:
+    """Unified talk rows from the OCIS catalog + hand-curated talks.yaml, each
+    tagged with `id` + `series`, deduped by id."""
+    rows: list[dict] = []
+    for r in _load_catalog():
+        rows.append({**r, "id": make_talk_id(r), "series": r.get("series") or "OCIS"})
+    rows.extend(_handcurated_rows())
+    seen: set[str] = set()
+    out: list[dict] = []
+    for r in rows:
+        if r["id"] in seen:
+            continue
+        seen.add(r["id"])
+        out.append(r)
+    return out
+
+
 def _load_read_index() -> dict[str, dict]:
-    """talk_id → talks_index entry (the talks that have a deep-read page)."""
     if not TALKS_INDEX.exists():
         return {}
     try:
@@ -118,7 +171,6 @@ def _load_read_index() -> dict[str, dict]:
 
 
 def _read_excerpt(doc_path: str | None, max_chars: int = 600) -> str:
-    """Pull the '一、…' section of a deep-read note for the overview prompt."""
     if not doc_path:
         return ""
     p = DOCS / doc_path
@@ -131,7 +183,7 @@ def _read_excerpt(doc_path: str | None, max_chars: int = 600) -> str:
 
 
 def _entry(row: dict, read_idx: dict[str, dict]) -> dict:
-    tid = make_talk_id(row)
+    tid = row.get("id") or make_talk_id(row)
     e = read_idx.get(tid)
     return {
         "id": tid,
@@ -159,7 +211,7 @@ def build_overview_input(entries: list[dict], label: str) -> str:
         if excerpt:
             lines.append("  精读摘录: " + excerpt)
         blocks.append("\n".join(lines))
-    return f"OCIS {label}，共 {len(entries)} 场：\n\n" + "\n\n".join(blocks)
+    return f"{label}，共 {len(entries)} 场：\n\n" + "\n\n".join(blocks)
 
 
 def generate_overview(client: "SJTUClient", entries: list[dict], label: str,
@@ -174,16 +226,31 @@ def generate_overview(client: "SJTUClient", entries: list[dict], label: str,
     )
 
 
+def _existing_overview(*slugs: str) -> str:
+    """The 导览 already on a season page (trying each slug, e.g. the new
+    series-prefixed one then a legacy bare-season one), so a re-run reuses it."""
+    for slug in slugs:
+        if not slug:
+            continue
+        p = SEASONS_DIR / f"{slug}.md"
+        if not p.exists():
+            continue
+        m = re.search(r"##\s*本季导览\s*\n+>[^\n]*\n+(.*?)\n+##\s*报告列表",
+                      p.read_text(encoding="utf-8"), re.DOTALL)
+        if m:
+            return m.group(1).strip()
+    return ""
+
+
 # ── render ────────────────────────────────────────────────────────────────────
 
-def render_season_page(slug: str, entries: list[dict], overview: str) -> Path:
+def render_season_page(slug: str, title: str, entries: list[dict], overview: str) -> Path:
     SEASONS_DIR.mkdir(parents=True, exist_ok=True)
     out = SEASONS_DIR / f"{slug}.md"
-    label = season_label(slug)
     n_read = sum(1 for e in entries if e["doc_path"])
     lines = [
-        f"# OCIS · {label}\n",
-        f"- 共 {len(entries)} 场 · {n_read} 篇精读 · Online Causal Inference Seminar\n",
+        f"# {title}\n",
+        f"- 共 {len(entries)} 场 · {n_read} 篇精读\n",
     ]
     if overview:
         lines += [
@@ -232,28 +299,34 @@ def _write_index(new_entries: list[dict]) -> list[dict]:
             existing = json.loads(SEASONS_INDEX.read_text(encoding="utf-8"))
         except Exception:
             existing = []
-    by_season = {e["season"]: e for e in existing if e.get("season")}
+    by_slug = {e["slug"]: e for e in existing if e.get("slug")}
     for e in new_entries:
-        by_season[e["season"]] = e
-    merged = sorted(by_season.values(), key=lambda e: season_sort_key(e["season"]), reverse=True)
+        by_slug[e["slug"]] = e
+    merged = sorted(by_slug.values(),
+                    key=lambda e: (e.get("series", ""), season_sort_key(e["season"])), reverse=True)
     SEASONS_INDEX.parent.mkdir(parents=True, exist_ok=True)
     SEASONS_INDEX.write_text(json.dumps(merged, ensure_ascii=False, indent=2), encoding="utf-8")
     return merged
 
 
+def _series_order(series: str) -> tuple[int, str]:
+    # OCIS first, then alphabetical.
+    return (0 if series == "OCIS" else 1, series)
+
+
 def write_archive(index_entries: list[dict]) -> None:
-    """Rewrite docs/all_talks.md as the season index (site nav target)."""
+    """Rewrite docs/all_talks.md as the index, grouped by series then season."""
     lines = [
-        "# 讲座精读（OCIS）\n",
-        "Online Causal Inference Seminar 历史讲座，按季分组。每季一页：**导览** + 全部报告"
+        "# 讲座精读\n",
+        "会议 / seminar 录像（OCIS、INI…）按**会议**与**季**分组。每季一页：**导览** + 全部报告"
         "（每场链到精读；网页有元数据但未精读的也列出，标「暂无精读」）。\n",
     ]
-    by_year: dict[str, list[dict]] = defaultdict(list)
-    for e in sorted(index_entries, key=lambda e: season_sort_key(e["season"]), reverse=True):
-        by_year[e["season"].split("-")[-1]].append(e)
-    for year in sorted(by_year, reverse=True):
-        lines.append(f"## {year}\n")
-        for e in by_year[year]:
+    by_series: dict[str, list[dict]] = defaultdict(list)
+    for e in index_entries:
+        by_series[e.get("series", "其他")].append(e)
+    for series in sorted(by_series, key=_series_order):
+        lines.append(f"## {series}\n")
+        for e in sorted(by_series[series], key=lambda e: season_sort_key(e["season"]), reverse=True):
             blurb = f" — {e['blurb']}" if e.get("blurb") else ""
             lines.append(
                 f"- [{e['label']}]({e['doc_path']}) · {e['n']} 场（{e['n_read']} 精读）{blurb}"
@@ -265,10 +338,10 @@ def write_archive(index_entries: list[dict]) -> None:
 
 # ── run ───────────────────────────────────────────────────────────────────────
 
-def group_by_season(rows: list[dict]) -> dict[str, list[dict]]:
-    groups: dict[str, list[dict]] = defaultdict(list)
+def group_by_series_season(rows: list[dict]) -> dict[tuple[str, str], list[dict]]:
+    groups: dict[tuple[str, str], list[dict]] = defaultdict(list)
     for r in rows:
-        groups[season_of(r)].append(r)
+        groups[(series_of(r), season_of(r))].append(r)
     return groups
 
 
@@ -280,26 +353,24 @@ def run(
     force: bool = False,
     dry_run: bool = False,
 ) -> list[Path]:
-    rows = _load_catalog()
+    rows = load_rows()
     if not rows:
-        log.warning("no OCIS catalog at %s — run `talks import-ocis` first", CATALOG_PATH)
+        log.warning("no talks found — run `talks import-ocis` and/or fill config/talks.yaml")
         return []
     read_idx = _load_read_index()
-    groups = group_by_season(rows)
-    slugs = sorted(groups, key=season_sort_key, reverse=True)
+    groups = group_by_series_season(rows)
+    keys = sorted(groups, key=lambda k: (_series_order(k[0]), season_sort_key(k[1])), reverse=True)
     if seasons:
         want = {s.strip().lower() for s in seasons}
-        slugs = [s for s in slugs if s in want]
+        keys = [k for k in keys if k[1] in want or page_slug(*k) in want]
 
     if dry_run:
-        for s in slugs:
-            es = groups[s]
-            log.info("  %s: %d talks (%d read)", s, len(es),
-                     sum(1 for r in es if make_talk_id(r) in read_idx))
+        for series, season in keys:
+            es = groups[(series, season)]
+            log.info("  %s · %s: %d talks (%d read)", series, season, len(es),
+                     sum(1 for r in es if (r.get("id") or make_talk_id(r)) in read_idx))
         return []
 
-    # Reuse the 导览 already on each page unless --force; only spin up the LLM
-    # client (and need an API key) when something actually has to be generated.
     client: "SJTUClient | None" = None
 
     def _get_client() -> "SJTUClient":
@@ -314,35 +385,44 @@ def run(
 
     written: list[Path] = []
     index_entries: list[dict] = []
-    for slug in slugs:
-        # Dedupe talks by id (the catalog can carry the same talk twice).
+    for series, season in keys:
+        slug = page_slug(series, season)
+        # Dedupe talks by id within the group.
         seen: set[str] = set()
         entries: list[dict] = []
-        for r in groups[slug]:
+        for r in groups[(series, season)]:
             e = _entry(r, read_idx)
             if e["id"] not in seen:
                 seen.add(e["id"])
                 entries.append(e)
+        title = f"{series} · {season_label(season)}"
         ov = ""
         if overview:
             if not force:
-                ov = _existing_overview(slug)
+                # reuse: new series-prefixed slug, then the legacy bare-season slug
+                ov = _existing_overview(slug, season if series == "OCIS" else "")
             if not ov:
                 try:
-                    ov = generate_overview(_get_client(), entries, season_label(slug), model=model)
+                    ov = generate_overview(_get_client(), entries, title, model=model)
                 except Exception as e:  # noqa: BLE001
                     log.warning("overview failed for %s: %s", slug, e)
-        page = render_season_page(slug, entries, ov)
+        page = render_season_page(slug, title, entries, ov)
         written.append(page)
         index_entries.append({
-            "season": slug,
-            "label": season_label(slug),
-            "n": len(entries),
+            "slug": slug, "series": series, "season": season,
+            "label": season_label(season), "n": len(entries),
             "n_read": sum(1 for e in entries if e["doc_path"]),
-            "doc_path": f"talks/seasons/{page.name}",
-            "blurb": _first_sentence(ov),
+            "doc_path": f"talks/seasons/{page.name}", "blurb": _first_sentence(ov),
         })
         log.info("wrote %s (%d talks, %d read)", page, len(entries), index_entries[-1]["n_read"])
+
+    # On a full refresh, drop stale season pages (e.g. legacy bare-season names).
+    if seasons is None:
+        keep = {p.name for p in written}
+        for f in SEASONS_DIR.glob("*.md"):
+            if f.name not in keep:
+                f.unlink()
+                log.info("removed stale season page %s", f.name)
 
     if index_entries:
         merged = _write_index(index_entries)
