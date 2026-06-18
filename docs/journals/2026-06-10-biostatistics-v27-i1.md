@@ -3,6 +3,21 @@
 - 共 17 篇 · Biostatistics
 - 目录核对 ✅ 17 篇全部抓到（对照 OpenAlex 18 篇）
 
+## 本期导览
+
+> 自动生成：归纳本期主要主题与脉络，**不打分、不排名**。
+
+这一期《Biostatistics》共10篇论文，整体围绕三个主线展开：**因果推断与处理效应估计**（涉及工具变量、principal stratification、疫苗有效性动态估计）、**高维/纵向数据的统计推断**（包括GEE去偏推断、单侧假设检验、纵向与生存联合建模）、以及**迁移学习与外部数据借用**（在RCT、生存分析、时间-事件数据中利用外部或历史数据）。此外，还有一篇关于分布预测变量与深度学习不变性的方法学评论，以及一篇针对microRNA-seq数据的负二项softmax回归模型。
+
+在因果推断主线中，**IV-learner** 一文在principal stratification框架下处理连续型中间变量，通过stepped wedge设计校准sensitivity参数，实现principal causal effects的部分识别，这是对传统二值中间变量方法的实质性扩展。**Dynamic case-control sampling** 则聚焦流行病学监测，提出一种嵌套抽样设计，利用新旧变异株的病例对照数据动态估计疫苗有效性，其核心是条件似然估计与部分测序数据，为实时因果效应估计提供了可操作的抽样框架。这两篇分别从识别和抽样角度推进了因果推断的实践。
+
+高维推断主线中，**Statistical inference for high-dimensional generalized estimating equations** 针对纵向/聚类数据，通过投影估计方程实现回归系数线性泛函的去偏推断，并引入数据驱动交叉验证选择调优参数，填补了高维GEE推断中调参问题的空白。**High-dimensional test for one-sided hypotheses** 则提出Sum Max-Component检验，专门处理p≫n下的单侧假设，在基因集富集分析中具有直接应用。这两篇分别从估计和检验角度拓展了高维统计推断的工具箱。
+
+迁移学习与外部数据借用主线中，**SAM-HC** 采用贝叶斯非参数Shared Atoms Model识别跨数据集的重叠子群，仅对共同子群借信息形成hybrid control，避免过度借用。**Adaptive transfer learning for time-to-event modeling** 则通过density ratio weighting与importance weighting分别处理协变量与系数偏移，实现生存分析中的迁移学习。**Risk functions with outcome measurement error** 提出贝叶斯借力半参数模型，通过ensemble average允许基线风险任意形式，并引入lump-and-smear先验控制冲突下的I类错误。这三篇从不同角度（子群识别、偏移处理、先验设计）探讨了外部数据借用的鲁棒性。
+
+对于因果推断方向的研究者，**IV-learner**（连续中间变量下的PCE识别）和**Dynamic case-control sampling**（动态VE估计）最值得优先阅读。对于半参数效率方向，**Statistical inference for high-dimensional GEE**（去偏推断与交叉验证调参）和**SAM-HC**（子群识别的借力框架）提供了方法学参考。对于高维方向，**High-dimensional test for one-sided hypotheses**（单侧检验）和**Joint modeling of high-dimensional longitudinal data and survival**（张量分解与SGD计算）值得关注。
+
+
 ## 因果推断  *(causal_inference, 4 篇)*
 
 ### 1. [10.1093/biostatistics/kxag009](https://doi.org/10.1093/biostatistics/kxag009) — IV-learner: learning conditional average treatment effects using instrumental variables

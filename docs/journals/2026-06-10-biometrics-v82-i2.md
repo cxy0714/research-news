@@ -3,6 +3,19 @@
 - 共 42 篇 · Biometrics
 - 目录核对 ⚠️ 疑似漏 3 篇（对照 OpenAlex 50 篇）：10.1093/biomtc/ujag008、10.1093/biomtc/ujag007、10.1093/biomtc/ujag005
 
+## 本期导览
+
+> 自动生成：归纳本期主要主题与脉络，**不打分、不排名**。
+
+这一期《Biometrics》第82卷第2期共18篇论文，整体围绕**因果推断与效率提升**、**半参数/非参数方法**、**高维与异质性数据建模**、以及**临床试验与流行病学设计**四条主线展开。因果推断主线集中处理多时间点中介分析、个性化治疗设计与异质性因果效应，涉及目标最大似然估计、Q-learning与贝叶斯加性回归树等工具。半参数/非参数主线关注转移学习、交互效应分析与效率界收紧，涵盖加速失效时间模型、随机对照试验中的高效交互分析。高维与异质性主线包括分布式生存数据异质性学习、零膨胀层次变换模型与知识引导双聚类，处理大规模数据与噪声图谱。临床试验与流行病学主线覆盖两阶段设计、成本-效果分析与安全性监测，强调间歇观察与终止事件下的推断。
+
+在因果推断与效率提升主线中，**Targeted maximum likelihood estimation for mediation analysis with multiple time-varying mediators** 将AUMCF作为多事件时间设定下的因果estimand，发展augmentation estimator以提升效率并处理终止性竞争风险。**Personalized treatment design in the context of functional confounding** 针对clustered adaptive intervention中的非正则性问题，提出clustered Q-learning配合M-out-of-N cluster bootstrap。**Heterogeneous causal mediation analysis using Bayesian additive regression trees** 在SMART框架下利用贝叶斯后验概率实现响应自适应随机化，优化病理完全缓解率。**Efficient interaction analysis in randomized controlled trials** 利用外部二值化数据收紧semiparametric efficiency bound，保证效率提升。**Heterogeneity learning in distributed networks with large-scale survival data** 通过Distributed Spanning-Tree-Based Fused Lasso识别跨节点异质性系数，但未涉及效率界推导。
+
+在半参数/非参数与高维主线中，**Transfer learning estimation of the accelerated failure time model based on high-dimensional data** 在去中心化联邦学习下提出momentum network EM，实现异质数据下的渐近有效估计。**A zero-inflated hierarchical generalized transformation model** 通过层次变换处理空间转录组数据的零膨胀问题，但处于生物信息学语境。**Knowledge-guided Bayesian biclustering model for omics data with noisy graphs** 显式建模图谱假阳性与假阴性，避免传统方法因图谱误设导致的偏误。**Mixed membership latent variable model with unknown factors** 针对noncollapsible效应量提出基于nonparanormal模型的调整边际推断，理论证明调整预后变量可提高估计精度。
+
+与因果推断方向最贴的论文包括：**Targeted maximum likelihood estimation for mediation analysis with multiple time-varying mediators**（多时间点中介分析）、**Personalized treatment design in the context of functional confounding**（个性化治疗设计）、**Heterogeneous causal mediation analysis using Bayesian additive regression trees**（异质性中介分析）、**Efficient interaction analysis in randomized controlled trials**（效率界收紧）。与半参数效率方向最贴的包括：**Transfer learning estimation of the accelerated failure time model**（联邦学习下的渐近效率）、**Efficient interaction analysis**（效率界收紧）。与高维方向最贴的包括：**Heterogeneity learning in distributed networks with large-scale survival data**（分布式异质性学习）、**Knowledge-guided Bayesian biclustering model**（噪声图谱整合）。
+
+
 ## 因果推断  *(causal_inference, 14 篇)*
 
 ### 1. [10.1093/biomtc/ujag102](https://doi.org/10.1093/biomtc/ujag102) — Targeted maximum likelihood estimation for mediation analysis with multiple time-varying mediators

@@ -2,6 +2,19 @@
 
 - 共 2 篇 · Journal of Econometrics
 
+## 本期导览
+
+> 自动生成：归纳本期主要主题与脉络，**不打分、不排名**。
+
+这一期《Journal of Econometrics》的两篇论文分别聚焦于因果推断中的弱工具变量稳健子向量检验，以及网络连通性度量的新识别框架，主题跨度较大，但各自在方法论上均有实质性推进。
+
+在因果推断主线中，**“Weak-instrument-robust subvector inference”** 一文针对工具变量回归中因果参数子向量的弱工具变量稳健推断，提出了首个恢复标准Wald检验自由度的子向量LM检验，并证明了其渐近size-correct性质。该文还给出了反转子向量AR置信集的闭式解，并揭示了其与k-class估计量的中心化关系，以及置信集有界性与第一阶段降秩检验（Anderson LR检验）之间的等价条件。这一工作直接回应了弱工具变量下子向量推断的长期难题，尤其适合关注因果参数部分识别与稳健推断的研究者。
+
+在经济理论/网络计量主线中，**“Clustered network connectedness”** 一文在VAR方差分解网络连通性框架下，提出了介于完全正交化（Sims）与无正交化（Koop-Pesaran-Shin）之间的clustered identification方案。该方法允许跨cluster冲击正交（需排序）、cluster内冲击相关（无需排序），从而在保留经济可解释性的同时避免了极端假设。核心贡献在于定义了clustered方差分解矩阵及其导出的方向性/总连通性指数，为全球股票市场等应用提供了更灵活的度量工具。
+
+对于因果推断方向的研究者，**“Weak-instrument-robust subvector inference”** 是本期最直接相关的论文，其子向量LM检验和AR置信集性质分析具有理论深度。对于网络计量或金融计量方向，**“Clustered network connectedness”** 提供了新的识别策略，适合关注冲击传播与连通性度量的读者。
+
+
 ## 因果推断  *(causal_inference, 1 篇)*
 
 ### 1. [10.1016/j.jeconom.2026.106239](https://doi.org/10.1016/j.jeconom.2026.106239) — Weak-instrument-robust subvector inference in instrumental variables regression: A subvector Lagrange multiplier test and properties of subvector Anderson-Rubin confidence sets

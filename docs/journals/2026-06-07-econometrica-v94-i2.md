@@ -2,6 +2,21 @@
 
 - 共 11 篇 · Econometrica
 
+## 本期导览
+
+> 自动生成：归纳本期主要主题与脉络，**不打分、不排名**。
+
+这一期 Econometrica 的 11 篇论文大致可归为三条主线：**因果识别与结构估计**（OT-GMM、Firm Accommodation、Trade and Informality、Food Policy、Multidimensional Learning、Deferred Acceptance）、**半参数与高维估计的效率问题**（Empirical Bayes、Optimal Shrinkage of Fixed Effects、Spatial Economics for Granular Settings）、以及**经济理论与机制设计**（Monotonicity and Robust Implementation、Dynamic Incentives）。其中，因果识别与结构估计线最为密集，覆盖了从矩条件过度识别、政策弹性估计到 RCT 机制评估的多种策略。
+
+在因果识别与结构估计线中，**OT-GMM** 用最优传输替代传统重加权，在过度识别拒绝时仍能解释变量误差结构，为 IV 估计提供了新的诊断工具。**Firm Accommodation** 与 **Trade and Informality** 均采用结构模型结合政策变动或校准，前者用摩擦模型分析工伤补贴的福利效应，后者在非正式部门扭曲下放大贸易收益，展示了 reduced-form 与结构估计的互补。**Food Policy** 与 **Multidimensional Learning** 则分别利用面板数据与 RCT 识别极端天气对政策响应及农户动态学习，前者强调政策响应的累退性，后者关注多维互补性下的异质性采纳轨迹。**Deferred Acceptance** 的 RCT 实验直接比较匹配机制，揭示策略性沟通如何削弱 strategyproof 机制的收益。
+
+半参数与高维估计线中，**Empirical Bayes** 放松了 precision independence 假设，通过 location-scale 族建模参数条件分布，为后续决策提供 regret 最优的默认选择。**Optimal Shrinkage of Fixed Effects** 在无分布假设下构造 MSE 最优的 shrinkage 估计量，允许固定效应随时间变化并吸收协方差结构，对面板数据因果推断中的 FE 估计有直接参考价值。**Spatial Economics for Granular Settings** 则指出高维个体异质性下传统校准失效，提出简约空间连接参数化以改进反事实预测，其不确定性量化思路与因果推断中的有限样本问题相通。
+
+经济理论线中的 **Monotonicity and Robust Implementation** 与 **Dynamic Incentives** 分别从信念层级单调性和不完全指定环境下的动态激励入手，前者解决了序贯机制的前向归纳实现问题，后者刻画了 ex post perfect equilibrium 的可行路径，为机制设计的识别基础提供了理论工具。
+
+对于因果推断方向的研究者，**OT-GMM**（过度识别下的误差结构）、**Firm Accommodation**（结构模型+政策变动）、**Food Policy**（面板数据识别政策响应）以及 **Deferred Acceptance**（RCT 机制评估）最贴近应用。半参数效率方向可优先看 **Empirical Bayes** 与 **Optimal Shrinkage of Fixed Effects**。高维设定下 **Spatial Economics for Granular Settings** 的反事实不确定性分析也值得关注。
+
+
 ## 因果推断  *(causal_inference, 1 篇)*
 
 ### 1. [10.3982/ecta22486](https://doi.org/10.3982/ecta22486) — Optimally‐Transported Generalized Method of Moments

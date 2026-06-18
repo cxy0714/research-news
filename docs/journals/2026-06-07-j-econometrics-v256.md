@@ -2,6 +2,19 @@
 
 - 共 7 篇 · Journal of Econometrics
 
+## 本期导览
+
+> 自动生成：归纳本期主要主题与脉络，**不打分、不排名**。
+
+这一期《Journal of Econometrics》第256卷的5篇论文主要围绕三条主线展开：**因果识别与推断**（2篇）、**半参数/非参数方法**（2篇）、以及**时间序列与因子模型**（1篇）。因果推断方向的两篇分别处理边界断点设计下的局部多项式估计和倾向得分重叠性不足时的部分识别；半参数/非参数方向的两篇分别涉及非参数二元选择模型（基于最优传输）和特征驱动分位数因子模型；时间序列方向的一篇关注非基本ARMA模型在异方差下的GMM估计。
+
+在**因果识别与推断**主线上，两篇论文从不同角度处理识别困难。第一篇《Estimation and inference in boundary discontinuity designs》针对边界断点设计，提出基于距离的局部多项式估计器，直接利用二元位置评分坐标，为边界平均处理效应曲线（BATEC）及其加权/最大聚合提供逐点与一致推断，覆盖sharp与fuzzy设计。第二篇《Bounding treatment effects by pooling limited information》则针对倾向得分重叠性不足或协变量过多的情况，提出“有限信息池化”估计量——一种阶数受限的U-statistic型估计量，在Manski bounds（稳健但宽）与IPW（窄但依赖强overlap）之间探索中间地带，并提供推断方法。两篇都关注因果效应的稳健推断，但前者依赖空间连续性，后者依赖有限信息池化。
+
+在**半参数/非参数方法**主线上，两篇论文分别引入新工具。第一篇《A kernelization-based approach to nonparametric binary choice models》将最优传输理论与筛法半参数估计结合，用于可转移效用多维匹配模型，证明非参数识别性并给出筛法估计量的一致性与渐近正态性，实证发现认知能力偏向的技术进步幅度远超参数模型。第二篇《Estimation of characteristics-based quantile factor models》提出三阶段估计程序（因子估计→载荷函数非参数估计→因子个数一致选择），在误差重尾、时间维度小、因子数超过特征数等困难情形下仍有效，收敛速率与极限分布被推导。两篇都涉及非参数函数估计与半参数效率，但前者聚焦匹配模型的结构识别，后者聚焦因子模型的载荷函数估计。
+
+对于因果推断方向的研究者，优先看《Estimation and inference in boundary discontinuity designs》和《Bounding treatment effects by pooling limited information》；对于半参数效率方向，优先看《A kernelization-based approach to nonparametric binary choice models》和《Estimation of characteristics-based quantile factor models》；对于高维或时间序列方向，可关注《Time domain estimation of non-fundamental ARMA models》。
+
+
 ## 因果推断  *(causal_inference, 3 篇)*
 
 ### 1. [10.1016/j.jeconom.2026.106253](https://doi.org/10.1016/j.jeconom.2026.106253) · [arXiv](https://arxiv.org/abs/2007.10432) — Treatment effects with targeting instruments

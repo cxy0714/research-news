@@ -2,6 +2,19 @@
 
 - 共 8 篇 · Econometrica
 
+## 本期导览
+
+> 自动生成：归纳本期主要主题与脉络，**不打分、不排名**。
+
+这一期 Econometrica 的 8 篇论文大致可归为三条主线：**政策靶向与因果识别**（Choosing Who Chooses、Coordination and Commitment）、**结构估计与部分识别**（Markup Estimation、Subgroup Decomposition）、以及**机制设计与博弈论**（Equilibrium Existence、Multidimensional Screening、Partisan Gerrymandering、Geoeconomics）。其中前两条主线与因果推断、半参数效率及识别问题直接相关，后两条主线更偏向纯理论或应用理论。
+
+在**政策靶向与因果识别**主线上，**Choosing Who Chooses** 将基于可观测变量的靶向与基于自我选择的靶向统一为最优分配规则，核心是利用 IV/LATE 框架识别不同 complier 子群体的 LATE，再通过最优化决定哪些个体应被允许自选择。**Coordination and Commitment** 则通过动态结构模型评估国际贸易政策的环境效果，其识别依赖于生产与贸易弹性的结构估计，并通过反事实模拟比较不同政策情景的减排量与福利成本。两篇的共同点是都涉及政策干预的异质性效果识别，但前者更依赖实验/准实验变异，后者更依赖结构假设。
+
+在**结构估计与部分识别**主线上，**Markup Estimation** 处理企业级财务数据中缺失价格信息时的 markup 估计问题，证明跨期趋势与分散度可被良好识别，但均值水平需要价格数据，并提出一致估计量——这本质上是部分识别与缺失数据下的结构估计问题。**Subgroup Decomposition** 则提出一种公理化的 Gini 系数分解，保证组内与组间项之和等于总体 Gini，且分解唯一，为应用因果工作中的不平等分解提供了工具。
+
+对于因果推断方向的研究者，**Choosing Who Chooses**（IV/LATE 框架下的最优靶向）和**Coordination and Commitment**（结构估计与反事实政策评估）最直接相关；对于半参数效率与识别方向，**Markup Estimation**（部分识别与一致估计）和**Subgroup Decomposition**（公理化分解）值得关注；高维方向本期无直接论文。
+
+
 ## 经济理论 / 应用  *(econ_theory, 8 篇)*
 
 ### 1. [10.3982/ecta21180](https://doi.org/10.3982/ecta21180) — Choosing Who Chooses: Selection‐Driven Targeting in Energy Rebate Programs

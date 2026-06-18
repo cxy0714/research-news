@@ -2,6 +2,23 @@
 
 - 共 12 篇 · Journal of Econometrics
 
+## 本期导览
+
+> 自动生成：归纳本期主要主题与脉络，**不打分、不排名**。
+
+这一期《Journal of Econometrics》第254卷共9篇论文，整体围绕三条主线展开：**因果识别与数据组合**（2篇）、**非参数/半参数方法与收敛速率**（2篇）、**高频金融计量与波动率建模**（4篇）。剩余1篇属于假设检验，聚焦高频跳跃检验与内生采样。
+
+**因果识别与数据组合**是本期最突出的主线之一。两篇论文分别从不同角度处理因果推断中的识别挑战。The informativeness of combined experimental and observational data under dynamic selection 在动态选择（幸存者偏差）设定下，证明无模型约束时ATETS的informative bounds不可能获得（完全负结果），但通过组合短期实验与长期观测数据（沿Athey et al. 2020路线）可恢复有信息量的界。Regularizing fairness in optimal policy learning with distributional targets 则从政策学习角度切入，虽未直接处理因果识别，但其非参数条件因子回归（NCFR）模型中的Indian Buffet Process先验与潜因子结构，若嵌入proximal causal inference框架，可能为处理高维混淆变量提供新工具。两篇共同点在于：都依赖数据组合或结构假设来突破识别瓶颈，但前者给出的是边界结果，后者提供的是预测导向的降维方法。
+
+**非参数/半参数方法**主线包含两篇理论性较强的论文。Minimax rates of convergence for nonparametric location-scale models 将经典熵驱动速率结构推广至更一般的location-scale框架（涵盖mean、quantile、expectile回归），核心结论是minimax rate完全由函数类的metric entropy决定，并验证了asymmetric Laplace、Cauchy等误差分布下的Hellinger可微条件。Intraday volatility patterns from short-dated options 虽标题涉及波动率，但其核心贡献在方法论：通过几何测度论分析排序算子的Hadamard可微性，进而应用functional delta method得到二元约束最优分配价值函数及plug-in ROC估计量的渐近分布，并构造double/debiased估计量。两篇均依赖半参数效率理论中的关键工具（熵、可微性），但前者聚焦收敛速率，后者聚焦推断与偏差校正。
+
+**高频金融计量与波动率建模**是本期论文数量最多的主线，共4篇。To be or not to be: Roughness or long memory in volatility? 通过composite likelihood估计随机波动率过程的参数，在粗糙波动率与长记忆波动率模型间进行区分，实证发现加密货币市场存在短期与长期相关性结构。Efficient sampling for realized variance estimation in time-changed diffusion models 提出robust realized integrated beta估计量，并建立DR Beta模型填补非参数估计与低频动态模型之间的gap。Realized drift 在Itō半鞅框架下将realized variance分解为漂移与波动率分量，实证表明该分解提升波动率预测精度。A multivariate realized GARCH model 利用matrix logarithmic transformation实现无约束相关矩阵参数化，结合factor approach处理高维系统。这四篇共享高频数据与半鞅框架，但分别处理波动率的长记忆/粗糙性、beta时变、漂移检测、多变量GARCH，覆盖了波动率建模的不同侧面。
+
+**假设检验**主线仅1篇：Testing for jumps in a discretely observed price process with endogenous sampling times，提出非参数高频跳跃检验，利用对称双边界首次退出时间构造阈值准则，在endogenous sampling下仍可行且对微结构噪声稳健，模拟显示优于现有方法。
+
+**优先阅读建议**：若关注因果推断与数据组合，优先看The informativeness of combined experimental and observational data under dynamic selection（负结果与组合策略）和Regularizing fairness in optimal policy learning with distributional targets（潜因子降维与因果推断的潜在接口）；若关注半参数效率与收敛速率，优先看Minimax rates of convergence for nonparametric location-scale models（熵驱动速率推广）和Intraday volatility patterns from short-dated options（Hadamard可微性与debiased估计）；若关注高维或高频计量，优先看A multivariate realized GARCH model（无约束参数化与高维因子结构）和Realized drift（漂移-波动率分解）。
+
+
 ## 因果推断  *(causal_inference, 2 篇)*
 
 ### 1. [10.1016/j.jeconom.2026.106219](https://doi.org/10.1016/j.jeconom.2026.106219) — The informativeness of combined experimental and observational data under dynamic selection

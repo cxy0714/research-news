@@ -2,6 +2,17 @@
 
 - 共 10 篇 · Econometrica
 
+## 本期导览
+
+> 自动生成：归纳本期主要主题与脉络，**不打分、不排名**。
+
+这一期整体围绕三条主线展开：**非标准推断与分布连续性**、**因果识别与高维方法**、以及**结构模型与匹配理论**。非标准推断方向以《Continuity of the Distribution Function of the argmax of a Gaussian Process》为核心，提供极值估计量分布函数连续性的通用条件，直接支撑bootstrap与subsampling在非正态极限下的有效性。因果识别与高维方法方向涵盖多篇应用论文，其中《Training Specificity and Occupational Mobility》与《Rural Migrants and Urban Informality》均使用IV设计（高维IV与shift-share IV）处理内生性，前者还涉及高维选择设定下的控制变量选择。结构模型与匹配理论方向则包括《Assortative Matching on Income》扩展了非单调匹配的SMM方法，以及《Holding up Green Energy》与《Fisher–Schultz Lecture》分别用准自然实验与合约模型分析交易对手风险与返利谈判。
+
+在非标准推断主线中，《Continuity of the Distribution Function》通过Cameron–Martin定理建立高斯过程平移下的分布连续性，假设接近最小化且可验证于最大得分估计、经验风险最小化等经典设定，为半参数M-估计中非正态极限的推断提供了统一工具。因果识别主线中，《Training Specificity》用vacancy IV估计培训-职业错配的工资惩罚（14%），并扩展高维IV/控制变量选择；《Rural Migrants》以干旱冲击作为shift-share IV，发现移民长期降低非正式就业率，短期则相反，并辅以结构模型解释机制。这两篇均将IV与高维或结构方法结合，是应用因果工作的典型范例。结构模型主线中，《Assortative Matching》将Galichon–Salanié的SMM扩展至非单调匹配，用线性规划与矩约束识别surplus函数，实证发现多数正匹配但少数显著负匹配；《Work Hours Mismatch》用显示偏好方法识别工时错配，通过跳槽行为估计MRS/工资率比值（0.5–0.6），揭示低工资工人受约束更严重。
+
+与因果推断、半参数效率、高维方向最贴合的论文包括：《Continuity of the Distribution Function》（非标准推断基础）、《Training Specificity》（高维IV+选择）、《Rural Migrants》（shift-share IV+结构模型）、《Communicating Scientific Uncertainty》（近似后验的regret界限，涉及bootstrap作为后验替代）。纯理论论文（《Existence of Myopic‐Farsighted Stable Sets》《Outside Options》）与统计方法无直接关联，可跳过。
+
+
 ## 非参数 / 半参数  *(nonparam_semipara, 1 篇)*
 
 ### 1. [10.3982/ecta23862](https://doi.org/10.3982/ecta23862) — Continuity of the Distribution Function of the argmax of a Gaussian Process

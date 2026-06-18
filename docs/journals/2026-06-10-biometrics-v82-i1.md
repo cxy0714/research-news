@@ -3,6 +3,19 @@
 - 共 8 篇 · Biometrics
 - 目录核对 ⚠️ 疑似漏 42 篇（对照 OpenAlex 59 篇）：10.1093/biomtc/ujaf132、10.1093/biomtc/ujaf169、10.1093/biomtc/ujaf177、10.1093/biomtc/ujag052、10.1093/biomtc/ujaf109 等
 
+## 本期导览
+
+> 自动生成：归纳本期主要主题与脉络，**不打分、不排名**。
+
+这一期《Biometrics》的六篇论文大致可归为三条主线：**因果推断中的识别与估计权衡**（两篇）、**半参数/非参数推断**（两篇）、以及**流行病学中的建模与监测**（两篇）。因果主线聚焦于处理协变量重叠不足时的 estimand 选择与分布式 ITR 学习；半参数主线关注异质性变量重要性的推断与混合效应 ODE 模型的估计；流行病学主线则涉及环境混合物暴露分组建模与报告延迟的 nowcasting。
+
+因果推断主线中，**“A framework for causal estimand selection under positivity violations”** 将总偏差分解为统计偏差与 estimand mismatch 偏差，并引入 design-based metrics 指导 estimand 选择，直接回应了重叠不足下 ATE 与 overlap weighting 之间的经典两难。**“Scalable and distributed individualized treatment rules for multicenter datasets”** 则通过卷积平滑加权 SVM 实现分布式 ITR 学习，在固定通信轮数下达到最优价值函数收敛率，其凸平滑技术为统计-计算权衡提供了新工具。两篇分别从 estimand 层面和算法层面推进了因果推断的实用性。
+
+半参数/非参数主线中，**“A general framework for heterogeneous variable importance: Pointwise and uniform inference”** 将变量重要性定义为条件均方误差之比，并建立逐点与均匀收敛率及置信带，本质是条件期望之比的半参数推断问题，涉及 empirical process 工具。**“Estimation of mixed-effects ordinary differential equation models linear in the parameters”** 虽标题为 ODE 模型，但摘要实际聚焦于微生物-代谢物关联网络中的多重检验，引入二分随机块模型刻画图结构以提升 FDR 控制功效，将随机块模型与假设检验结合。流行病学主线中，**“Multiple-index interaction models to accommodate exposure grouping in environmental mixtures”** 提出半参数多指标交互模型，将高维暴露按生物学特征分组为组级指标，允许组内非线性与组间交互，适用于连续、二元及生存结局。**“Bayesian nowcasting for delay adjustments using time-varying parametric functions of cumulative reporting probability”** 则用 Bayesian 层次模型处理报告延迟，以时变参数捕捉报告行为变化，在非完全报告环境下优于传统方法。
+
+与因果推断方向最贴的是前两篇（estimand 选择与分布式 ITR）；半参数效率方向可关注变量重要性论文中的均匀推断与 empirical process 应用；高维/假设检验方向可看 ODE 模型论文中的随机块模型与 FDR 控制结合。
+
+
 ## 因果推断  *(causal_inference, 3 篇)*
 
 ### 1. [10.1093/biomtc/ujag017](https://doi.org/10.1093/biomtc/ujag017) · [arXiv](https://arxiv.org/abs/2404.18256) — Semiparametric causal mediation analysis of cluster-randomized trials for indirect and spillover effects

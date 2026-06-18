@@ -3,6 +3,19 @@
 - 共 18 篇 · Biostatistics
 - 目录核对 ⚠️ 疑似漏 67 篇（对照 OpenAlex 86 篇）：10.1093/biostatistics/kxae031、10.1093/biostatistics/kxae044、10.1093/biostatistics/kxae040、10.1093/biostatistics/kxae014、10.1093/biostatistics/kxae020 等
 
+## 本期导览
+
+> 自动生成：归纳本期主要主题与脉络，**不打分、不排名**。
+
+这一期《Biostatistics》的5篇论文在主题上较为分散，但可归纳为两条主线：一是**高维与函数型数据的推断方法**，二是**复杂相关数据与空间/结构建模**。前者包括高维函数回归假设检验（High-dimensional inference for functional regression）和贝叶斯张量回归（Bayesian scalar-on-tensor regression）；后者涵盖网络广义估计方程（Network generalized estimating equations）、元分析中的组结构模型（Meta-analysis models with group structure）以及空间转录组学均值-方差校正（Addressing the mean–variance relationship）。此外，还有一篇关于区间删失数据半参数半Markov模型的计算方法（Bayesian scalar-on-tensor regression的摘要实际描述的是该主题，但题目与摘要内容不匹配，需注意），可归入计算方法主线。
+
+在高维与函数型数据推断方面，**High-dimensional inference for functional regression** 将高维假设检验框架拓展至函数型协变量设定，克服了传统基于功率谱密度特征提取的信息损失，并建立了渐近理论性质，适用于阿尔茨海默病脑磁图数据中关键脑区的识别。**Bayesian scalar-on-tensor regression** 则利用Tucker分解实现稀疏空间建模，为张量回归提供了贝叶斯计算方案，与高维函数回归形成互补——前者关注检验，后者关注稀疏估计。
+
+在复杂相关数据与结构建模方面，**Network generalized estimating equations** 针对聚类随机试验中复杂相关数据提出网络GEE方法，处理了组内与组间相关性。**Meta-analysis models with group structure** 利用汇总统计量检测基因与变异层面的多效性，引入组结构以提升检测效率。**Addressing the mean–variance relationship** 则聚焦空间转录组学中log变换导致的均值-方差关系扭曲，用经验贝叶斯校正偏差以更准确识别空间变异基因。这三篇均涉及数据中的结构依赖性，但处理方式各异：GEE侧重相关性建模，元分析侧重组结构，空间转录组学侧重方差校正。
+
+对于因果推断方向，**Network generalized estimating equations** 与聚类随机试验直接相关，适合关注试验数据分析的读者。半参数效率方向无直接论文。高维方向可优先看 **High-dimensional inference for functional regression**，其高维函数型假设检验框架与理论性质对高维统计研究者有直接参考价值。
+
+
 ## 因果推断  *(causal_inference, 5 篇)*
 
 ### 1. [10.1093/biostatistics/kxaf031](https://doi.org/10.1093/biostatistics/kxaf031) · [arXiv](https://arxiv.org/abs/2403.09928) — Identification and estimation of mediational effects of longitudinal modified treatment policies

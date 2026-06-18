@@ -2,6 +2,21 @@
 
 - 共 10 篇 · Econometrica
 
+## 本期导览
+
+> 自动生成：归纳本期主要主题与脉络，**不打分、不排名**。
+
+这一期 Econometrica 的 10 篇论文大致可归为三条主线：**因果识别与实验设计**（空间 RDD、RCT、IV 结构估计）、**经济理论与结构模型**（搜索摩擦、平台竞争、身份政治、货币政策）、以及**统计方法与效率理论**（模型误设下的自适应估计、重复博弈中的声誉可达性）。此外，宏观贸易与增长、招生政策的结构分解等也构成独立支线。
+
+**因果识别与实验设计**是本期实证核心。多篇论文在经典识别策略上做了精巧的变体或结合：`Gangs, Labor Mobility, and Development` 利用黑帮自创边界做空间 RDD，断点仅隔 50 米，排除了选择性迁移等替代机制；`The Social Tax` 通过 RCT 中的封锁储蓄账户设计，分离了再分配压力对劳动供给的因果效应，并辅以隐私屏蔽实验检验机制；`Consumer Surplus From Suppliers` 将 IV 识别嵌入宏观增长核算，估计供应商增减对下游边际成本的弹性；`Search Frictions and Product Design` 利用州法规差异作为 IV，将产品设计内生性与搜索摩擦联系起来。这些论文的共同特点是：识别策略直接服务于结构参数的估计（如弹性、福利损失），而非仅报告平均处理效应。
+
+**经济理论与结构模型**是本期另一大块，且多与因果识别交叉。`Competing Platforms and Transport Equilibrium` 构建空间竞争模型，用结构估计量化合并与互操作性规制的福利效应；`Transparency and Percent Plans` 将招生政策效应分解为信息效应与机械效应，结构模型与行政数据结合；`Presidential Address: Identity Politics` 在内生身份框架中加入政党策略传播，并用 China Shock 的 IV 验证文化冲突加剧与再分配冲突减弱；`Integrated Monetary and Financial Policies` 是纯理论，在小型开放经济中推导约束最优的政策组合。这些论文展示了结构模型如何与因果识别（IV、RDD）或反事实模拟协同，而非孤立存在。
+
+**统计方法与效率理论**仅有一篇，但值得单独指出：`Adapting to Misspecification` 处理模型误设下的 robustness–efficiency tradeoff，当 bias bound 未知时提出 adaptive estimator，最小化相对于 oracle 的 worst-case risk。这是本期唯一直接讨论半参数效率与自适应估计的方法论文，适合关注因果推断中模型误设稳健性的读者。
+
+**优先阅读建议**：若关注因果识别与实验设计，可先看 `Gangs, Labor Mobility, and Development`（空间 RDD 的边界设计）和 `The Social Tax`（RCT 中的机制分离）；若关注结构模型与因果识别的交叉，`Consumer Surplus From Suppliers`（IV 嵌入增长核算）和 `Competing Platforms and Transport Equilibrium`（结构估计与反事实）是典型；若关注半参数效率与自适应方法，`Adapting to Misspecification` 是唯一选项。
+
+
 ## 效率理论 / Debiased ML  *(efficiency_dml, 1 篇)*
 
 ### 1. [10.3982/ecta21991](https://doi.org/10.3982/ecta21991) — Adapting to Misspecification

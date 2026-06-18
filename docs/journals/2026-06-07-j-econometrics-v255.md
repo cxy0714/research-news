@@ -2,6 +2,21 @@
 
 - 共 13 篇 · Journal of Econometrics
 
+## 本期导览
+
+> 自动生成：归纳本期主要主题与脉络，**不打分、不排名**。
+
+这一期《Journal of Econometrics》第255卷的11篇论文，整体上围绕三条主线展开：**高维与低秩结构下的估计与推断**、**时间序列与面板数据的非线性与误设稳健方法**、以及**假设检验的最优性与偏差修正**。高维主线涵盖空间自回归模型降维、面板因子模型误差修正、以及预测回归的LASSO推断；时间序列主线聚焦于分数积分模型偏差修正、时变参数滤波的极限理论、以及多市场高频波动率估计；检验主线则涉及高斯混合的信息矩阵检验与短面板因子个数的最优检验。
+
+在**高维与低秩结构**方面，多篇论文处理参数维度随样本或变量发散时的识别与估计问题。`Reduced rank multivariate spatial autoregressive model for large-scale networks` 对多变量空间自回归施加低秩约束，在响应维度与网络规模双发散下建立最小二乘估计的渐近理论，并用信息准则选秩。`Using spatial modeling to address covariate measurement error` 在交互固定效应面板中，针对回归变量低秩导致的因子个数识别问题，提出核范数正则化与核范数最小化两种凸估计，并证明有限步迭代后与Bai (2009)渐近等价。`LASSO inference for high dimensional predictive regressions` 则处理高维预测回归中局部单位根非平稳系数，通过IVX投影消除Stambaugh偏、再用desparsified步骤修正LASSO收缩偏，实现n^{-1/2}-CAN推断。
+
+在**时间序列与面板的稳健与非线性方法**上，`The modified conditional sum-of-squares estimator for fractionally integrated models` 推导了CSS估计量偏差的解析表达式，通过修改目标函数提出MCSS估计量，显著降低小样本偏差。`Consistency, distributional convergence, and optimality of time-varying parameters in score-driven models` 证明即使动态设定严重误设，score-driven滤波仍收敛至KL最优路径，并导出最优滤波器本身具有score-driven结构。`Implicit score-driven filters for time-varying parameter models` 提出隐式分数驱动滤波，在log-concave假设下对所有学习率稳定，每步更新向伪真值收缩。`Integrated variance estimation for assets traded in multiple venues` 针对多市场交易产生的乘性碎片噪声，提出两步估计器，在跳跃与加性噪声下分别选用不同稳健方法。`Mixture matrix-valued autoregressive model` 用混合模型捕捉矩阵值时间序列的体制转换，基于EM算法实现MLE并建立渐近理论。
+
+在**假设检验**方面，`The information matrix test for Gaussian mixtures` 利用EM原理将不可观测成分下的矩条件转化为可观测成分的条件期望，导出调整后的渐近协方差矩阵，参数bootstrap提供可靠有限样本性质。`Latent factor analysis in short panels` 在短面板中基于似然比统计量构造因子个数检验的渐近最优不变检验，通过正态变量下正定二次型的单调似然比性质严格推导。此外，`Robust econometrics for growth-at-risk` 放宽Pareto指数恒定假设，用Hill-type估计与局部平稳性估计条件尾部指数，建立一致性与渐近正态性。
+
+对于因果推断方向，`Using spatial modeling to address covariate measurement error` 直接处理面板因果估计中的测量误差与因子结构识别，`LASSO inference for high dimensional predictive regressions` 涉及高维预测回归中的因果推断偏差修正。半参数效率方向可关注`Consistency, distributional convergence, and optimality of time-varying parameters in score-driven models` 中的KL最优滤波与in-fill渐近。高维与随机矩阵方向则优先看`Reduced rank multivariate spatial autoregressive model for large-scale networks` 的双发散渐近与低秩空间矩阵结构，以及`Latent factor analysis in short panels` 的AUMPI检验与MLR性质。
+
+
 ## 因果推断  *(causal_inference, 2 篇)*
 
 ### 1. [10.1016/j.jeconom.2026.106250](https://doi.org/10.1016/j.jeconom.2026.106250) · [arXiv](https://arxiv.org/abs/2305.01435) — Transfer estimates for causal effects across heterogeneous sites
