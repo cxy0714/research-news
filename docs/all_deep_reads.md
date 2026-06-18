@@ -161,6 +161,34 @@
 
 ### 期刊
 
+#### Bernoulli Vol 32 Issue 2
+
+- [Causal inference on process graphs: Causal structure and effect identification](deep_reads/2026-06-18-10.3150_25-bej1909.md)  
+  7/10 [journals]
+
+#### Bernoulli Vol 32 Issue 1
+
+- [Faithlessness in Gaussian graphical models](deep_reads/2026-06-18-10.3150_25-bej1873.md)  
+  8/10 [journals]
+
+#### Bernoulli Vol 31 Issue 4
+
+- [Data fusion methods for the heterogeneity of treatment effect and confounding function](deep_reads/2026-06-18-10.3150_24-bej1835.md)  
+  9/10 [journals]
+- [Sequential kernel embedding for mediated and time-varying dose response curves](deep_reads/2026-06-18-10.3150_24-bej1836.md)  
+  9/10 [journals]
+- [Treatment effect estimation with efficient data aggregation](deep_reads/2026-06-18-10.3150_24-bej1782.md)  
+  8/10 [journals]
+- [Weak equivalence of local independence graphs](deep_reads/2026-06-18-10.3150_24-bej1825.md)  
+  7/10 [journals]
+
+#### Bernoulli Vol 31 Issue 2
+
+- [Optimal transport and Wasserstein distances for causal models](deep_reads/2026-06-18-10.3150_24-bej1773.md)  
+  9/10 [journals]
+- [Blessing of dependence: Identifiability and geometry of discrete models with multiple binary latent variables](deep_reads/2026-06-18-10.3150_24-bej1754.md)  
+  6/10 [journals]
+
 #### Biostatistics Vol 27 Issue 1
 
 - [IV-learner: learning conditional average treatment effects using instrumental variables](deep_reads/2026-06-10-10.1093_biostatistics_kxag009.md)  
@@ -471,6 +499,84 @@
 
 ### 期刊
 
+#### Bernoulli Vol 32 Issue 3
+
+- [Universality of estimators for high-dimensional linear models with block dependency](deep_reads/2026-06-18-10.3150_25-bej1941.md)  
+  9/10 [journals]
+- [Strong convergence for tensor GUE random matrices](deep_reads/2026-06-18-10.3150_25-bej1933.md)  
+  9/10 [journals]
+- [Liberating dimension and spectral norm: A universal approach to spectral properties of sample covariance matrices](deep_reads/2026-06-18-10.3150_25-bej1954.md)  
+  9/10 [journals]
+- [Limiting laws for spiked eigenvalues and largest non-spiked eigenvalues of sample covariance matrices in elliptical distributions](deep_reads/2026-06-18-10.3150_25-bej1957.md)  
+  9/10 [journals]
+- [Identifiability of overcomplete independent component analysis](deep_reads/2026-06-18-10.3150_25-bej1929.md)  
+  8/10 [journals]
+
+#### Bernoulli Vol 32 Issue 2
+
+- [The asymptotic properties of the extreme eigenvectors of high-dimensional generalized spiked covariance models](deep_reads/2026-06-18-10.3150_25-bej1924.md)  
+  9/10 [journals]
+- [Detecting spectral breaks in spiked covariance models](deep_reads/2026-06-18-10.3150_25-bej1900.md)  
+  8/10 [journals]
+
+#### Bernoulli Vol 32 Issue 1
+
+- [A CLT for the difference of eigenvalue statistics of sample covariance matrices](deep_reads/2026-06-18-10.3150_25-bej1872.md)  
+  9/10 [journals]
+- [On adaptive confidence ellipsoids for sparse high-dimensional linear models](deep_reads/2026-06-18-10.3150_25-bej1863.md)  
+  8/10 [journals]
+- [Smallest gaps between eigenvalues of real Gaussian matrices](deep_reads/2026-06-18-10.3150_25-bej1860.md)  
+  7/10 [journals]
+- [Benign overfitting in time-series linear models with over-parameterization](deep_reads/2026-06-18-10.3150_25-bej1877.md)  
+  6/10 [journals]
+
+#### Bernoulli Vol 31 Issue 4
+
+- [Nearly minimax robust estimator of the mean vector by iterative spectral dimension reduction](deep_reads/2026-06-18-10.3150_24-bej1822.md)  
+  8/10 [journals]
+- [A new non-parametric Kendall’s tau for matrix-valued elliptical observations](deep_reads/2026-06-18-10.3150_24-bej1849.md)  
+  7/10 [journals]
+
+#### Bernoulli Vol 31 Issue 3
+
+- [Laplace and saddlepoint approximations in high dimensions](deep_reads/2026-06-18-10.3150_24-bej1758.md)  
+  9/10 [journals]
+- [Asymptotic limits of spiked eigenvalues and eigenvectors of signal-plus-noise matrices with weak signals and heteroskedastic noise](deep_reads/2026-06-18-10.3150_24-bej1808.md)  
+  9/10 [journals]
+- [Asymptotic normality of log likelihood ratio and fundamental limit of the weak detection for spiked Wigner matrices](deep_reads/2026-06-18-10.3150_24-bej1805.md)  
+  9/10 [journals]
+- [Uniform error bound for PCA matrix denoising](deep_reads/2026-06-18-10.3150_24-bej1804.md)  
+  7/10 [journals]
+- [Clustering a mixture of Gaussians with unknown covariance](deep_reads/2026-06-18-10.3150_24-bej1798.md)  
+  7/10 [journals]
+- [On Lasso estimator for the drift function in diffusion models](deep_reads/2026-06-18-10.3150_24-bej1781.md)  
+  6/10 [journals]
+- [Covariance operator estimation: Sparsity, lengthscale, and ensemble Kalman filters](deep_reads/2026-06-18-10.3150_24-bej1809.md)  
+  6/10 [journals]
+
+#### Bernoulli Vol 31 Issue 2
+
+- [High-dimensional variable selection with heterogeneous signals: A precise asymptotic perspective](deep_reads/2026-06-18-10.3150_24-bej1767.md)  
+  9/10 [journals]
+- [Sharper dimension-free bounds on the Frobenius distance between sample covariance and its expectation](deep_reads/2026-06-18-10.3150_24-bej1787.md)  
+  8/10 [journals]
+- [Optimal spectral recovery of a planted vector in a subspace](deep_reads/2026-06-18-10.3150_24-bej1763.md)  
+  7/10 [journals]
+
+#### Bernoulli Vol 31 Issue 1
+
+- [No eigenvalues outside the support of the limiting spectral distribution of large dimensional noncentral sample covariance matrices](deep_reads/2026-06-18-10.3150_24-bej1744.md)  
+  9/10 [journals]
+- [Maximum interpoint distance of high-dimensional random vectors](deep_reads/2026-06-18-10.3150_24-bej1738.md)  
+  8/10 [journals]
+- [On the expected number of critical points of locally isotropic Gaussian random fields](deep_reads/2026-06-18-10.3150_24-bej1719.md)  
+  6/10 [journals]
+
+#### Bernoulli Vol 30 Issue 4
+
+- [Extreme singular values of inhomogeneous sparse random rectangular matrices](deep_reads/2026-06-18-10.3150_23-bej1699.md)  
+  9/10 [journals]
+
 #### Annals of Probability Vol 54 Issue 3
 
 - [Nonrigidity properties of the Coulomb gas](deep_reads/2026-06-18-10.1214_25-aop1787.md)  
@@ -699,6 +805,132 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Bernoulli Vol 32 Issue 3
+
+- [Nonparametric estimation of ordinary differential equations: Snake and stubble](deep_reads/2026-06-18-10.3150_25-bej1936.md)  
+  8/10 [journals]
+- [Asymptotic bias reduction of maximum likelihood estimates via penalized likelihoods with differential geometry](deep_reads/2026-06-18-10.3150_25-bej1938.md)  
+  7/10 [journals]
+- [Optimal level set estimation for non-parametric tournament and crowdsourcing problems](deep_reads/2026-06-18-10.3150_25-bej1960.md)  
+  7/10 [journals]
+- [Dimension-free uniform concentration bound for logistic regression](deep_reads/2026-06-18-10.3150_25-bej1931.md)  
+  6/10 [journals]
+
+#### Bernoulli Vol 32 Issue 2
+
+- [Parametrization, prior independence, and the semiparametric Bernstein-von Mises theorem for the partially linear model](deep_reads/2026-06-18-10.3150_25-bej1917.md)  
+  9/10 [journals]
+- [Functional estimation in high-dimensional and infinite-dimensional models](deep_reads/2026-06-18-10.3150_25-bej1882.md)  
+  9/10 [journals]
+- [Addressing both variable selection and misclassified responses with parametric and semiparametric methods](deep_reads/2026-06-18-10.3150_25-bej1907.md)  
+  8/10 [journals]
+- [Nonparametric logistic regression with deep learning](deep_reads/2026-06-18-10.3150_25-bej1887.md)  
+  7/10 [journals]
+- [Contraction rates and projection subspace estimation with Gaussian process priors in high dimension](deep_reads/2026-06-18-10.3150_25-bej1925.md)  
+  7/10 [journals]
+- [Monotone measure-transportation maps in Hilbert spaces, with statistical applications](deep_reads/2026-06-18-10.3150_25-bej1899.md)  
+  6/10 [journals]
+- [Nonparametric Bayesian intensity estimation for covariate-driven inhomogeneous point processes](deep_reads/2026-06-18-10.3150_25-bej1890.md)  
+  6/10 [journals]
+- [Covariance change point localisation and inference in fragmented functional data](deep_reads/2026-06-18-10.3150_25-bej1914.md)  
+  5/10 [journals]
+- [Robust functional data analysis: From sparse to dense designs](deep_reads/2026-06-18-10.3150_25-bej1920.md)  
+  4/10 [journals]
+
+#### Bernoulli Vol 32 Issue 1
+
+- [Series ridge regression for spatial data on Rd](deep_reads/2026-06-18-10.3150_25-bej1871.md)  
+  8/10 [journals]
+- [Nonparametric curve estimation in measurement error problems with conditionally heteroscedastic variances](deep_reads/2026-06-18-10.3150_25-bej1874.md)  
+  7/10 [journals]
+- [Non-linear wavelet density estimation on the real line](deep_reads/2026-06-18-10.3150_25-bej1861.md)  
+  7/10 [journals]
+- [Concentration inequalities for classical and smoothed empirical processes of independent and dependent random variables](deep_reads/2026-06-18-10.3150_25-bej1868.md)  
+  7/10 [journals]
+- [Azadkia–Chatterjee’s dependence coefficient for infinite dimensional data](deep_reads/2026-06-18-10.3150_25-bej1866.md)  
+  6/10 [journals]
+- [Quantifying and estimating dependence via sensitivity of conditional distributions](deep_reads/2026-06-18-10.3150_25-bej1854.md)  
+  6/10 [journals]
+
+#### Bernoulli Vol 31 Issue 4
+
+- [Simultaneous semiparametric inference for single-index models](deep_reads/2026-06-18-10.3150_24-bej1834.md)  
+  8/10 [journals]
+- [Information geometry and asymptotics for Kronecker covariances](deep_reads/2026-06-18-10.3150_24-bej1842.md)  
+  8/10 [journals]
+- [Nonparametric estimation for additive concurrent regression models](deep_reads/2026-06-18-10.3150_24-bej1828.md)  
+  7/10 [journals]
+- [Varying coefficient regression: Revisit and parametric help](deep_reads/2026-06-18-10.3150_24-bej1817.md)  
+  7/10 [journals]
+- [Efficient quantile regression under censoring using Laguerre polynomials](deep_reads/2026-06-18-10.3150_24-bej1829.md)  
+  7/10 [journals]
+- [Estimating the history of a random recursive tree](deep_reads/2026-06-18-10.3150_24-bej1846.md)  
+  7/10 [journals]
+- [Log-concave density estimation in undirected graphical models](deep_reads/2026-06-18-10.3150_24-bej1831.md)  
+  6/10 [journals]
+- [Non-parametric estimates for graphon mean-field particle systems](deep_reads/2026-06-18-10.3150_24-bej1833.md)  
+  6/10 [journals]
+
+#### Bernoulli Vol 31 Issue 3
+
+- [A model-based approach to density estimation in sup-norm](deep_reads/2026-06-18-10.3150_24-bej1800.md)  
+  9/10 [journals]
+- [Convergence of empirical optimal transport in unbounded settings](deep_reads/2026-06-18-10.3150_24-bej1792.md)  
+  8/10 [journals]
+- [From dense to sparse design: Optimal rates under the supremum norm for estimating the mean function in functional data analysis](deep_reads/2026-06-18-10.3150_24-bej1789.md)  
+  7/10 [journals]
+- [A new adaptive local polynomial density estimation procedure on complicated domains](deep_reads/2026-06-18-10.3150_24-bej1802.md)  
+  6/10 [journals]
+- [PDE characterization of geometric distribution functions and quantiles](deep_reads/2026-06-18-10.3150_24-bej1797.md)  
+  1/10 [journals]
+
+#### Bernoulli Vol 31 Issue 2
+
+- [Accuracy of Gaussian approximation for high-dimensional posterior distributions](deep_reads/2026-06-18-10.3150_21-bej1412.md)  
+  9/10 [journals]
+- [An adaptive model checking test for the functional linear model](deep_reads/2026-06-18-10.3150_24-bej1752.md)  
+  8/10 [journals]
+- [Adaptive estimation of irregular mean and covariance functions](deep_reads/2026-06-18-10.3150_24-bej1759.md)  
+  8/10 [journals]
+- [Theoretical properties of angular halfspace depth](deep_reads/2026-06-18-10.3150_24-bej1756.md)  
+  7/10 [journals]
+- [Bayesian inference for k-monotone densities with applications to multiple testing](deep_reads/2026-06-18-10.3150_24-bej1778.md)  
+  7/10 [journals]
+- [Functional linear and single-index models: A unified approach via Gaussian Stein identity](deep_reads/2026-06-18-10.3150_24-bej1755.md)  
+  6/10 [journals]
+- [Generalized Hadamard differentiability of the copula mapping and its applications](deep_reads/2026-06-18-10.3150_24-bej1777.md)  
+  6/10 [journals]
+
+#### Bernoulli Vol 31 Issue 1
+
+- [Nearest neighbor empirical processes](deep_reads/2026-06-18-10.3150_24-bej1729.md)  
+  8/10 [journals]
+- [Fréchet mean set estimation in the Hausdorff metric, via relaxation](deep_reads/2026-06-18-10.3150_24-bej1734.md)  
+  8/10 [journals]
+- [Cross-validation for change-point regression: Pitfalls and solutions](deep_reads/2026-06-18-10.3150_24-bej1732.md)  
+  7/10 [journals]
+- [Adaptive deep learning for nonlinear time series models](deep_reads/2026-06-18-10.3150_24-bej1726.md)  
+  7/10 [journals]
+- [Tractably modelling dependence in networks beyond exchangeability](deep_reads/2026-06-18-10.3150_24-bej1740.md)  
+  7/10 [journals]
+- [Poisson hulls](deep_reads/2026-06-18-10.3150_24-bej1731.md)  
+  6/10 [journals]
+- [Strong limit theorems for empirical halfspace depth trimmed regions](deep_reads/2026-06-18-10.3150_24-bej1751.md)  
+  6/10 [journals]
+
+#### Bernoulli Vol 30 Issue 4
+
+- [Penalized spline estimation of principal components for sparse functional data: Rates of convergence](deep_reads/2026-06-18-10.3150_23-bej1695.md)  
+  8/10 [journals]
+- [Boundary adaptive local polynomial conditional density estimators](deep_reads/2026-06-18-10.3150_23-bej1711.md)  
+  7/10 [journals]
+- [Local polynomial trend regression for spatial data on Rd](deep_reads/2026-06-18-10.3150_23-bej1694.md)  
+  6/10 [journals]
+- [Principal feature detection via ϕ-Sobolev inequalities](deep_reads/2026-06-18-10.3150_23-bej1702.md)  
+  6/10 [journals]
+- [Smoothed circulas: Nonparametric estimation of circular cumulative distribution functions and circulas](deep_reads/2026-06-18-10.3150_23-bej1693.md)  
+  5/10 [journals]
 
 #### Journal of the Royal Statistical Society Series C Vol 75 Issue 2
 
@@ -1020,6 +1252,92 @@
 
 ### 期刊
 
+#### Bernoulli Vol 32 Issue 3
+
+- [SID: A novel class of nonparametric tests of independence for censored outcomes](deep_reads/2026-06-18-10.3150_25-bej1927.md)  
+  7/10 [journals]
+- [Regularized e-processes: Anytime valid inference with knowledge-based efficiency gains](deep_reads/2026-06-18-10.3150_25-bej1939.md)  
+  7/10 [journals]
+- [Detecting a late changepoint in the preferential attachment model](deep_reads/2026-06-18-10.3150_25-bej1935.md)  
+  7/10 [journals]
+- [On some geometric identities involving the sample covariance matrix and its adjugate](deep_reads/2026-06-18-10.3150_25-bej1944.md)  
+  6/10 [journals]
+- [Functional central limit theorem for the subgraph count of the voter model on dynamic random graphs](deep_reads/2026-06-18-10.3150_25-bej1961.md)  
+  6/10 [journals]
+- [On the breakdown point of transport-based quantiles](deep_reads/2026-06-18-10.3150_25-bej1962.md)  
+  6/10 [journals]
+
+#### Bernoulli Vol 32 Issue 2
+
+- [Locally sharp goodness-of-fit testing in sup norm for high-dimensional counts](deep_reads/2026-06-18-10.3150_25-bej1911.md)  
+  9/10 [journals]
+- [A general maximal projection approach to uniformity testing on the hypersphere](deep_reads/2026-06-18-10.3150_25-bej1889.md)  
+  8/10 [journals]
+- [Empirical Bayes large-scale multiple testing for high-dimensional binary outcome data](deep_reads/2026-06-18-10.3150_25-bej1904.md)  
+  6/10 [journals]
+
+#### Bernoulli Vol 32 Issue 1
+
+- [Minimax optimal goodness-of-fit testing with kernel Stein discrepancy](deep_reads/2026-06-18-10.3150_25-bej1859.md)  
+  7/10 [journals]
+- [A procedure for multiple testing of partial conjunction hypotheses based on a hazard rate inequality](deep_reads/2026-06-18-10.3150_25-bej1858.md)  
+  7/10 [journals]
+- [Sharp phase transitions in high-dimensional changepoint detection](deep_reads/2026-06-18-10.3150_25-bej1879.md)  
+  6/10 [journals]
+- [O. E. Barndorff-Nielsen’s approximate conditional inference](deep_reads/2026-06-18-10.3150_25-bej1906.md)  
+  6/10 [journals]
+- [On the impossibility of detecting a late change-point in the preferential attachment random graph model](deep_reads/2026-06-18-10.3150_24-bej1851.md)  
+  4/10 [journals]
+
+#### Bernoulli Vol 31 Issue 4
+
+- [Local goodness-of-fit testing for Hölder-continuous densities: Minimax rates](deep_reads/2026-06-18-10.3150_24-bej1824.md)  
+  9/10 [journals]
+- [Hypothesis testing for functional linear models via bootstrapping](deep_reads/2026-06-18-10.3150_24-bej1848.md)  
+  7/10 [journals]
+- [PEBBLE: A second order correct bootstrap method in logistic regression](deep_reads/2026-06-18-10.3150_24-bej1827.md)  
+  6/10 [journals]
+- [Semi-parametric goodness-of-fit testing for INAR models](deep_reads/2026-06-18-10.3150_24-bej1844.md)  
+  6/10 [journals]
+
+#### Bernoulli Vol 31 Issue 3
+
+- [Edgeworth expansion by Stein’s method](deep_reads/2026-06-18-10.3150_24-bej1795.md)  
+  9/10 [journals]
+- [Goodness-of-fit tests for high-dimensional parametric multiresponse regressions](deep_reads/2026-06-18-10.3150_24-bej1801.md)  
+  6/10 [journals]
+
+#### Bernoulli Vol 31 Issue 2
+
+- [Multiple testing under negative dependence](deep_reads/2026-06-18-10.3150_24-bej1768.md)  
+  7/10 [journals]
+- [A nonparametric distribution-free test of independence among continuous random vectors based on L1-norm](deep_reads/2026-06-18-10.3150_24-bej1772.md)  
+  7/10 [journals]
+- [Change-point detection in low-rank VAR processes](deep_reads/2026-06-18-10.3150_24-bej1760.md)  
+  7/10 [journals]
+- [A bootstrapped test of covariance stationarity based on orthonormal transformations](deep_reads/2026-06-18-10.3150_24-bej1780.md)  
+  4/10 [journals]
+
+#### Bernoulli Vol 31 Issue 1
+
+- [Distribution-free tests of multivariate independence based on center-outward quadrant, Spearman, Kendall, and van der Waerden statistics](deep_reads/2026-06-18-10.3150_24-bej1721.md)  
+  9/10 [journals]
+- [Self-normalized Cramér type moderate deviations for martingales and applications](deep_reads/2026-06-18-10.3150_24-bej1722.md)  
+  7/10 [journals]
+- [Asymptotically optimal sequential multiple testing with asynchronous decisions](deep_reads/2026-06-18-10.3150_24-bej1727.md)  
+  7/10 [journals]
+- [Yule’s “nonsense correlation”: Moments and density](deep_reads/2026-06-18-10.3150_24-bej1733.md)  
+  5/10 [journals]
+- [Inference in balanced community modulated recursive trees](deep_reads/2026-06-18-10.3150_24-bej1735.md)  
+  2/10 [journals]
+
+#### Bernoulli Vol 30 Issue 4
+
+- [Kernel two-sample tests for manifold data](deep_reads/2026-06-18-10.3150_23-bej1685.md)  
+  8/10 [journals]
+- [Asymptotic analysis of statistical estimators related to MultiGraphex processes under misspecification](deep_reads/2026-06-18-10.3150_23-bej1689.md)  
+  2/10 [journals]
+
 #### Biostatistics Vol 27 Issue 1
 
 - [High-dimensional test for one-sided hypotheses](deep_reads/2026-06-10-10.1093_biostatistics_kxag016.md)  
@@ -1175,6 +1493,43 @@
   6/10 [daily]
 
 ### 期刊
+
+#### Bernoulli Vol 32 Issue 3
+
+- [Optimal importance sampling for overdamped Langevin dynamics](deep_reads/2026-06-18-10.3150_25-bej1934.md)  
+  7/10 [journals]
+
+#### Bernoulli Vol 32 Issue 2
+
+- [Principles of statistical inference in online problems](deep_reads/2026-06-18-10.3150_25-bej1894.md)  
+  7/10 [journals]
+- [Dimension-free relaxation times of informed MCMC samplers on discrete spaces](deep_reads/2026-06-18-10.3150_25-bej1912.md)  
+  7/10 [journals]
+
+#### Bernoulli Vol 31 Issue 3
+
+- [Scaling of piecewise deterministic Monte Carlo for anisotropic targets](deep_reads/2026-06-18-10.3150_24-bej1807.md)  
+  6/10 [journals]
+- [Optimal scaling results for Moreau-Yosida Metropolis-adjusted Langevin algorithms](deep_reads/2026-06-18-10.3150_24-bej1790.md)  
+  6/10 [journals]
+- [Explicit constraints on the geometric rate of convergence of random walk Metropolis-Hastings](deep_reads/2026-06-18-10.3150_24-bej1796.md)  
+  6/10 [journals]
+
+#### Bernoulli Vol 31 Issue 2
+
+- [Speeding up Monte Carlo integration: Control neighbors for optimal convergence](deep_reads/2026-06-18-10.3150_24-bej1765.md)  
+  7/10 [journals]
+- [On a near-optimal and efficient algorithm for the sparse pooled data problem](deep_reads/2026-06-18-10.3150_24-bej1784.md)  
+  6/10 [journals]
+
+#### Bernoulli Vol 30 Issue 4
+
+- [Gaussian differentially private robust mean estimation and inference](deep_reads/2026-06-18-10.3150_23-bej1706.md)  
+  8/10 [journals]
+- [Some rapidly mixing hit-and-run samplers for latent counts in linear inverse problems](deep_reads/2026-06-18-10.3150_23-bej1690.md)  
+  7/10 [journals]
+- [Approximate double-transform inversion when time is one of the variables](deep_reads/2026-06-18-10.3150_23-bej1698.md)  
+  6/10 [journals]
 
 #### Annals of Probability Vol 53 Issue 5
 
@@ -1710,6 +2065,27 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Bernoulli Vol 32 Issue 3
+
+- [Misspecified Bernstein–von Mises theorem for hierarchical models](deep_reads/2026-06-18-10.3150_25-bej1940.md)  
+  7/10 [journals]
+- [The football model, stochastic ordering and martingale transport](deep_reads/2026-06-18-10.3150_25-bej1955.md)  
+  2/10 [journals]
+
+#### Bernoulli Vol 31 Issue 2
+
+- [Phase transitions of the maximum likelihood estimators in the p-spin Curie-Weiss model](deep_reads/2026-06-18-10.3150_24-bej1779.md)  
+  8/10 [journals]
+
+#### Bernoulli Vol 30 Issue 4
+
+- [Shrinkage estimation of higher-order Bochner integrals](deep_reads/2026-06-18-10.3150_23-bej1692.md)  
+  9/10 [journals]
+- [Detecting changes in the trend function of heteroscedastic time series](deep_reads/2026-06-18-10.3150_23-bej1686.md)  
+  8/10 [journals]
+- [Nonuniform Berry-Esseen bounds for studentized U-statistics](deep_reads/2026-06-18-10.3150_23-bej1714.md)  
+  8/10 [journals]
 
 #### Annals of Probability Vol 54 Issue 2
 
