@@ -173,6 +173,30 @@
 
 ### 期刊
 
+#### Journal of the Royal Statistical Society Series C Vol 75 Issue 3
+
+- [Estimating causal effect in case–control studies with nondifferential misclassified outcomes](deep_reads/2026-06-20-10.1093_jrsssc_qlag012.md)  
+  8/10 [journals]
+- [Diagnosing the role of observable distribution shift in effect generalization for psychological experiments](deep_reads/2026-06-20-10.1093_jrsssc_qlag019.md)  
+  7/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 74 Issue 4
+
+- [Correcting for bias due to mismeasured exposure in mediation analysis with a survival outcome](deep_reads/2026-06-20-10.1093_jrsssc_qlaf010.md)  
+  9/10 [journals]
+- [Synergistic self-learning approach to establishing individualized treatment rules from multiple benefit outcomes in a calcium supplementation trial](deep_reads/2026-06-20-10.1093_jrsssc_qlaf008.md)  
+  8/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 74 Issue 3
+
+- [Accommodating informative visit times for analysing irregular longitudinal data: a sensitivity analysis approach with balancing weights estimators](deep_reads/2026-06-20-10.1093_jrsssc_qlaf002.md)  
+  8/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 74 Issue 2
+
+- [Doubly robust estimation of policy-relevant causal effects under interference](deep_reads/2026-06-20-10.1093_jrsssc_qlae066.md)  
+  9/10 [journals]
+
 #### Biostatistics Vol 27 Issue 1
 
 - [IV-learner: learning conditional average treatment effects using instrumental variables](deep_reads/2026-06-10-10.1093_biostatistics_kxag009.md)  
@@ -1433,6 +1457,18 @@
 
 ### 期刊
 
+#### Journal of the Royal Statistical Society Series C Vol 74 Issue 5
+
+- [Modelling time-varying relations in housing prices: a semiparametric panel approach](deep_reads/2026-06-20-10.1093_jrsssc_qlaf020.md)  
+  7/10 [journals]
+- [Location smoothed Bayesian additive regression trees: a method for interpretable and robust quality assurance of organ contours in radiotherapy treatment planning](deep_reads/2026-06-20-10.1093_jrsssc_qlaf024.md)  
+  4/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 74 Issue 1
+
+- [Predicting 5G throughput with BAMMO, a boosted additive model for data with missing observations](deep_reads/2026-06-20-10.1093_jrsssc_qlae054.md)  
+  4/10 [journals]
+
 #### Biostatistics Vol 27 Issue 1
 
 - [Multilevel functional quantile principal component analysis](deep_reads/2026-06-20-10.1093_biostatistics_kxag017.md)  
@@ -2314,6 +2350,26 @@
 
 ### 期刊
 
+#### Journal of the Royal Statistical Society Series C Vol 75 Issue 3
+
+- [Adaptive Fisher’s method using weakly geometric grid for combining <i>p</i> -values with application to COVID-19 surveillance](deep_reads/2026-06-20-10.1093_jrsssc_qlaf069.md)  
+  4/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 74 Issue 5
+
+- [Doubly regularized generalized linear models for spatial observations with high-dimensional covariates](deep_reads/2026-06-20-10.1093_jrsssc_qlaf023.md)  
+  6/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 74 Issue 3
+
+- [Combining density forecast accuracy tests: an application to agricultural, energy, and metal commodities](deep_reads/2026-06-20-10.1093_jrsssc_qlae069.md)  
+  6/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 74 Issue 2
+
+- [Inferring bivariate associations with continuous data from studies using respondent-driven sampling](deep_reads/2026-06-20-10.1093_jrsssc_qlae061.md)  
+  7/10 [journals]
+
 #### Biostatistics Vol 25 Issue 2
 
 - [Differential transcript usage analysis incorporating quantification uncertainty via compositional measurement error regression modeling](deep_reads/2026-06-20-10.1093_biostatistics_kxad008.md)  
@@ -2809,6 +2865,16 @@
   6/10 [daily]
 
 ### 期刊
+
+#### Journal of the Royal Statistical Society Series C Vol 74 Issue 5
+
+- [Robust sparse Bayesian regression for longitudinal gene–environment interactions](deep_reads/2026-06-20-10.1093_jrsssc_qlaf027.md)  
+  5/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 74 Issue 3
+
+- [Exploring first and second-order spatio-temporal structures of lightning strike impacts in the French Alps using heavy subsampling](deep_reads/2026-06-20-10.1093_jrsssc_qlae068.md)  
+  6/10 [journals]
 
 #### Biostatistics Vol 25 Issue 3
 
@@ -3487,6 +3553,50 @@
 
 ### 期刊
 
+#### Journal of the Royal Statistical Society Series C Vol 75 Issue 3
+
+- [Precision mental health: predicting heterogeneous treatment effects for depression through data integration](deep_reads/2026-06-20-10.1093_jrsssc_qlaf068.md)  
+  7/10 [journals]
+- [A multivariate Bayesian hierarchical model for small area estimation of criminal victimization rates in domains defined by age and sex](deep_reads/2026-06-20-10.1093_jrsssc_qlaf070.md)  
+  2/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 74 Issue 5
+
+- [Statistical methods for cost-effectiveness analysis of left-truncated and right-censored survival data with treatment delays](deep_reads/2026-06-20-10.1093_jrsssc_qlaf035.md)  
+  6/10 [journals]
+- [A Bayesian hierarchical framework to integrate dietary exposure and biomarker measurements into aetiological models](deep_reads/2026-06-20-10.1093_jrsssc_qlaf029.md)  
+  5/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 74 Issue 4
+
+- [High-resolution urban air quality monitoring from citizen science data with echo-state transformer networks](deep_reads/2026-06-20-10.1093_jrsssc_qlaf007.md)  
+  1/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 74 Issue 3
+
+- [Evaluating treatment effect modifiers using data from randomized two-sequence, two-period crossover clinical trials: application to a diabetes study](deep_reads/2026-06-20-10.1093_jrsssc_qlae072.md)  
+  7/10 [journals]
+- [A Bayesian spatio-temporal Poisson auto-regressive model for the disease infection rate: application to COVID-19 cases in England](deep_reads/2026-06-20-10.1093_jrsssc_qlae067.md)  
+  7/10 [journals]
+- [Personalized dynamic super learning: an application in predicting hemodiafiltration convection volumes](deep_reads/2026-06-20-10.1093_jrsssc_qlae070.md)  
+  6/10 [journals]
+- [Wastewater surveillance using differentiable Gaussian processes](deep_reads/2026-06-20-10.1093_jrsssc_qlae073.md)  
+  5/10 [journals]
+- [A patient similarity-embedded Bayesian approach to prognostic biomarker inference with application to thoracic cancer immunity](deep_reads/2026-06-20-10.1093_jrsssc_qlaf001.md)  
+  4/10 [journals]
+- [Tree models for assessing covariate-dependent method agreement with an application to physical activity measurements](deep_reads/2026-06-20-10.1093_jrsssc_qlae077.md)  
+  3/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 74 Issue 2
+
+- [Multiphasic stochastic epidemic models](deep_reads/2026-06-20-10.1093_jrsssc_qlae064.md)  
+  6/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 74 Issue 1
+
+- [Modelling particle number size distribution: a continuous approach](deep_reads/2026-06-20-10.1093_jrsssc_qlae053.md)  
+  2/10 [journals]
+
 #### Biostatistics Vol 25 Issue 4
 
 - [Identifying predictors of resilience to stressors in single-arm studies of pre–post change](deep_reads/2026-06-20-10.1093_biostatistics_kxad018.md)  
@@ -4056,6 +4166,33 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Journal of the Royal Statistical Society Series C Vol 75 Issue 3
+
+- [Change of support for zero-inflated data: deriving fine-scale species distribution inferences from spatially aggregated data](deep_reads/2026-06-20-10.1093_jrsssc_qlaf056.md)  
+  1/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 74 Issue 4
+
+- [Data-driven segmentation of observation-level logistic regression models](deep_reads/2026-06-20-10.1093_jrsssc_qlaf015.md)  
+  4/10 [journals]
+- [A multivariate spatial statistical model for statistical downscaling of sea surface temperature in the Great Barrier Reef region](deep_reads/2026-06-20-10.1093_jrsssc_qlaf019.md)  
+  2/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 74 Issue 3
+
+- [Understanding power grid network vulnerability through the stochastic lens of network motif evolution](deep_reads/2026-06-20-10.1093_jrsssc_qlae071.md)  
+  4/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 74 Issue 2
+
+- [Semiparametric Bayesian modelling of nonstationary joint extremes: How do big tech’s extreme losses behave?](deep_reads/2026-06-20-10.1093_jrsssc_qlae062.md)  
+  7/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 74 Issue 1
+
+- [A noisy-input generalized additive model for relative sea-level change along the Atlantic coast of North America](deep_reads/2026-06-20-10.1093_jrsssc_qlae044.md)  
+  4/10 [journals]
 
 #### Biostatistics Vol 25 Issue 4
 

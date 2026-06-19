@@ -79,7 +79,7 @@
 - [x] (2026-06-19) `--only AoAS --n-issues 8`
 - [x] (2026-06-20) `--only Biometrics --n-issues 8`
 - [x] (2026-06-20) `--only Biostatistics --n-issues 8`
-- [ ] `--only "JRSS-C" --n-issues 8`
+- [x] (2026-06-20) `--only "JRSS-C" --n-issues 8`
 
 理论核心 core：
 - [ ] `--only AoS --n-issues 12`
