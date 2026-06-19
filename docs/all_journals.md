@@ -127,6 +127,17 @@
 - [Vol 16 Issue 4 · 2026-06-07](journals/2026-06-07-quant-econ-v16-i4.md)
 - [Vol 16 Issue 3 · 2026-06-07](journals/2026-06-07-quant-econ-v16-i3.md)
 
+## 流行病学 (Epidemiology)
+
+### SMMR
+
+- [Vol 35 Issue 5 · 2026-06-19](journals/2026-06-19-smmr-v35-i5.md)
+- [Vol 35 Issue 4 · 2026-06-19](journals/2026-06-19-smmr-v35-i4.md)
+- [Vol 35 Issue 3 · 2026-06-19](journals/2026-06-19-smmr-v35-i3.md)
+- [Vol 35 Issue 2 · 2026-06-19](journals/2026-06-19-smmr-v35-i2.md)
+- [Vol 35 Issue 1 · 2026-06-19](journals/2026-06-19-smmr-v35-i1.md)
+- [Vol 34 Issue 12 · 2026-06-19](journals/2026-06-19-smmr-v34-i12.md)
+
 ## IEEE 系列 (IEEE)
 
 ### JSAIT

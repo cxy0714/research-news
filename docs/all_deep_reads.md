@@ -211,6 +211,53 @@
 - [Time‐Scale Target Parameters and Two‐Step Estimation in Longitudinal Trials for Progressive Diseases](deep_reads/2026-06-19-10.1002_sim.70591.md)  
   5/10 [journals]
 
+#### Statistical Methods in Medical Research Vol 35 Issue 5
+
+- [Eliminating residual confounding in the stratified estimator via smoothing along with the propensity score](deep_reads/2026-06-19-10.1177_09622802261432998.md)  
+  8/10 [journals]
+- [Implementing empirical likelihood within the causal inference framework to study causal effects of air pollution on reproductive development](deep_reads/2026-06-19-10.1177_09622802261435966.md)  
+  7/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 35 Issue 4
+
+- [Mediation analysis in longitudinal intervention studies with an ordinal treatment-dependent confounder](deep_reads/2026-06-19-10.1177_09622802261418211.md)  
+  9/10 [journals]
+- [Estimating conditional survival benefit for the allocation of scarce resources](deep_reads/2026-06-19-10.1177_09622802261420699.md)  
+  8/10 [journals]
+- [Parametric and nonparametric propensity score weighting analysis with subgroup covariate balance](deep_reads/2026-06-19-10.1177_09622802251415157.md)  
+  8/10 [journals]
+- [Improving finite sample performance of causal discovery by exploiting temporal structure](deep_reads/2026-06-19-10.1177_09622802261422162.md)  
+  7/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 35 Issue 2
+
+- [Joint mixed-effects models for causal inference in clustered network-based observational studies](deep_reads/2026-06-19-10.1177_09622802251403355.md)  
+  9/10 [journals]
+- [Two stage least squares with time-varying instruments: An application to an evaluation of treatment intensification for type-2 diabetes](deep_reads/2026-06-19-10.1177_09622802251404064.md)  
+  9/10 [journals]
+- [Generalized pairwise comparisons using pseudo-observations for time-to-event censored data in a randomized controlled trial setting](deep_reads/2026-06-19-10.1177_09622802251406536.md)  
+  6/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 35 Issue 1
+
+- [Using inverse probability of censoring weighting to estimate hypothetical estimands in clinical trials: Should we implement stabilisation, and if so how?](deep_reads/2026-06-19-10.1177_09622802251387456.md)  
+  8/10 [journals]
+- [Two-stage Bayesian network meta-analysis of individualized treatment rules for multiple treatments with siloed data](deep_reads/2026-06-19-10.1177_09622802251387430.md)  
+  8/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 34 Issue 12
+
+- [Center-specific causal inference with multicenter trials—Interpreting trial evidence in the context of each participating center](deep_reads/2026-06-19-10.1177_09622802251380624.md)  
+  9/10 [journals]
+- [Assessing spillover effects: Handling missing outcomes in network-based studies](deep_reads/2026-06-19-10.1177_09622802251382586.md)  
+  9/10 [journals]
+- [Investigations of sharp bounds for causal effects under selection bias](deep_reads/2026-06-19-10.1177_09622802251374168.md)  
+  9/10 [journals]
+- [On identification and estimation for sufficient cause interaction through a quasi-instrumental variable](deep_reads/2026-06-19-10.1177_09622802251376236.md)  
+  9/10 [journals]
+- [Augmented two-stage estimation for treatment switching in oncology trials: Leveraging external data for improved precision](deep_reads/2026-06-19-10.1177_09622802251374838.md)  
+  8/10 [journals]
+
 #### Statistica Sinica
 
 - [Conformal Causal Inference for Cluster Randomized Trials: Model-robust Inference Without Asymptotic Approximations](deep_reads/2026-06-19-10.5705_ss.202025.0476.md)  
@@ -650,6 +697,11 @@
 
 ### 期刊
 
+#### Statistical Methods in Medical Research Vol 35 Issue 4
+
+- [Joint estimation of multiple graphical models for an fMRI study of brain connectivity networks](deep_reads/2026-06-19-10.1177_09622802261432804.md)  
+  7/10 [journals]
+
 #### Statistica Sinica
 
 - [High-Dimensional Log Contrast Models with Measurement Errors](deep_reads/2026-06-19-10.5705_ss.202025.0223.md)  
@@ -1042,6 +1094,25 @@
   6/10 [journals]
 - [A Tree‐Based Model for Addressing Sparsity and Taxa Covariance in Microbiome Compositional Count Data](deep_reads/2026-06-19-10.1002_sim.70584.md)  
   6/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 35 Issue 5
+
+- [Linearized maximum rank correlation estimation of doubly truncated data](deep_reads/2026-06-19-10.1177_09622802261432834.md)  
+  6/10 [journals]
+- [A Bayesian transformation model for informative partly interval-censored data with covariates subject to measurement error](deep_reads/2026-06-19-10.1177_09622802261432830.md)  
+  6/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 35 Issue 4
+
+- [Regression analysis of interval-censored competing risks data with missing causes of failure: A direct likelihood approach](deep_reads/2026-06-19-10.1177_09622802261420820.md)  
+  3/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 35 Issue 1
+
+- [Estimation of the short-term and long-term hazard ratios for interval-censored and truncated data](deep_reads/2026-06-19-10.1177_09622802251399915.md)  
+  7/10 [journals]
+- [Penalized estimation of general frailty Poisson models for recurrent count events](deep_reads/2026-06-19-10.1177_09622802251393722.md)  
+  5/10 [journals]
 
 #### Statistica Sinica
 
@@ -1747,6 +1818,19 @@
 - [Two‐Stage Double‐Arm Trial Optimal Design of Restricted Mean Survival Time With Sculpted Critical Region](deep_reads/2026-06-19-10.1002_sim.70589.md)  
   4/10 [journals]
 
+#### Statistical Methods in Medical Research Vol 35 Issue 4
+
+- [Covariate hypothesis tests for the cure rate in mixture cure models based on martingale difference correlation](deep_reads/2026-06-19-10.1177_09622802261421453.md)  
+  7/10 [journals]
+- [Asymptotic validity of Schoenfeld’s sample size formula for the Cox proportional hazards model via the Wald test approach](deep_reads/2026-06-19-10.1177_09622802261427024.md)  
+  6/10 [journals]
+- [Confidence intervals and point estimates for treatment effects in adaptive enrichment designs](deep_reads/2026-06-19-10.1177_09622802261423180.md)  
+  6/10 [journals]
+- [Likelihood ratio test for the disease progression model to measure saved time in Alzheimer’s disease](deep_reads/2026-06-19-10.1177_09622802261424515.md)  
+  3/10 [journals]
+- [Rank-based methods for assessing equivalence/non-inferiority with assay sensitivity in a three-arm trial with ordinal endpoints](deep_reads/2026-06-19-10.1177_09622802261417216.md)  
+  3/10 [journals]
+
 #### Statistica Sinica
 
 - [Structural Testing of High-dimensional Correlation Matrices](deep_reads/2026-06-19-10.5705_ss.202024.0078.md)  
@@ -2139,6 +2223,16 @@
 
 - [Computationally Efficient Approach to Operational Prior Specification in Phase I Clinical Trials](deep_reads/2026-06-19-10.1002_sim.70621.md)  
   3/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 35 Issue 4
+
+- [An ensemble approach to tensor learning](deep_reads/2026-06-19-10.1177_09622802261424654.md)  
+  7/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 35 Issue 2
+
+- [The use of the EM algorithm for regularization problems in high-dimensional linear mixed-effects models](deep_reads/2026-06-19-10.1177_09622802251399913.md)  
+  8/10 [journals]
 
 #### Statistica Sinica
 
@@ -2695,6 +2789,36 @@
 - [Authors' Response to Comments by Di Tanna et al.](deep_reads/2026-06-19-10.1002_sim.70594.md)  
   0/10 [journals]
 
+#### Statistical Methods in Medical Research Vol 35 Issue 5
+
+- [Addressing nonignorable missing data and heterogeneity in prognostic biomarker assessment](deep_reads/2026-06-19-10.1177_09622802261432996.md)  
+  7/10 [journals]
+- [Vaccine efficacy estimands and power considerations](deep_reads/2026-06-19-10.1177_09622802251412833.md)  
+  6/10 [journals]
+- [Model-based clustering of multiple images incorporating covariates](deep_reads/2026-06-19-10.1177_09622802251393631.md)  
+  2/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 35 Issue 2
+
+- [Dynamic prediction of death risk given a renewal hospitalization process](deep_reads/2026-06-19-10.1177_09622802251404065.md)  
+  6/10 [journals]
+- [Dynamic prediction by landmarking with data from cohort subsampling designs](deep_reads/2026-06-19-10.1177_09622802251403279.md)  
+  6/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 35 Issue 1
+
+- [Diagnostic accuracy analysis for multiple raters using probit hierarchical model for ordinal ratings](deep_reads/2026-06-19-10.1177_09622802251404063.md)  
+  2/10 [journals]
+- [Joint time-to-event partial order continual reassessment method and Joint time-to-event Bayesian logistic regression model: Statistical designs for dual agent phase I/II dose finding studies with late-onset toxicity and activity outcomes](deep_reads/2026-06-19-10.1177_09622802251403384.md)  
+  2/10 [journals]
+- [Adaptive sample size re-estimation designs for a two-stage randomized trial with binary outcome](deep_reads/2026-06-19-10.1177_09622802251399914.md)  
+  1/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 34 Issue 12
+
+- [Meta-analysis with a single study](deep_reads/2026-06-19-10.1177_09622802251380628.md)  
+  3/10 [journals]
+
 #### Scandinavian Journal of Statistics Vol 51 Issue 3
 
 - [Confidence bands for survival curves from outcome‐dependent stratified samples](deep_reads/2026-06-19-10.1111_sjos.12700.md)  
@@ -2805,6 +2929,21 @@
 
 - [Longitudinal Sparse Single‐Omics Factor Analysis for High‐Dimensional Blood Biomarkers in Alzheimer's Disease](deep_reads/2026-06-19-10.1002_sim.70601.md)  
   6/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 35 Issue 5
+
+- [Penalized estimation of linear transformation models for interval-censored data with time-dependent covariates](deep_reads/2026-06-19-10.1177_09622802261433000.md)  
+  5/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 35 Issue 3
+
+- [CiFGNA: Comprehensive information-based functional gene network analysis](deep_reads/2026-06-19-10.1177_09622802251411550.md)  
+  1/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 35 Issue 2
+
+- [A fast integrative clustering and feature selection approach for high-dimensional multiview data](deep_reads/2026-06-19-10.1177_09622802251406584.md)  
+  5/10 [journals]
 
 #### Scandinavian Journal of Statistics Vol 53 Issue 2
 
