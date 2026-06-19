@@ -17,8 +17,12 @@
 
 [→ 查看完整报告](daily/2026-06-19.md)
 
-### 精读论文（235 篇）
+### 精读论文（267 篇）
 
+- [Evaluating the 2023 Mexican Dietary Guidelines for type 2 diabetes prevention: a target trial emulation in Mexican women](deep_reads/2026-06-19-10.1093_aje_kwag037.md)  
+  `流行病学` · 相关性 9/10
+- [Resurrecting complete-case analysis: a defense](deep_reads/2026-06-19-10.1093_aje_kwaf284.md)  
+  `因果推断` · 相关性 9/10
 - [Center-specific causal inference with multicenter trials—Interpreting trial evidence in the context of each participating center](deep_reads/2026-06-19-10.1177_09622802251380624.md)  
   `因果推断` · 相关性 9/10
 - [Assessing spillover effects: Handling missing outcomes in network-based studies](deep_reads/2026-06-19-10.1177_09622802251382586.md)  
@@ -75,6 +79,14 @@
   `因果推断` · 相关性 9/10
 - [Semiparametric Efficient Estimation of Quantile Regression](deep_reads/2026-06-19-10.5705_ss.202024.0378.md)  
   `非参数 / 半参数` · 相关性 9/10
+- [Bringing spatial confounding into the causal inferential fold](deep_reads/2026-06-19-10.1093_aje_kwag062.md)  
+  `因果推断` · 相关性 8/10
+- [An approach to estimating how effective and well targeted Extreme Risk Protection Orders have been with respect to suicide prevention](deep_reads/2026-06-19-10.1093_aje_kwag038.md)  
+  `因果推断` · 相关性 8/10
+- [Referral of patients with cognitive impairment to specialty memory care: associations with patient-centered outcomes and specificity of diagnoses](deep_reads/2026-06-19-10.1093_aje_kwag034.md)  
+  `流行病学` · 相关性 8/10
+- [The protective effect of housing affordability on childhood asthma risk: a longitudinal fixed-effects analysis](deep_reads/2026-06-19-10.1093_aje_kwag013.md)  
+  `流行病学` · 相关性 8/10
 - [Augmented two-stage estimation for treatment switching in oncology trials: Leveraging external data for improved precision](deep_reads/2026-06-19-10.1177_09622802251374838.md)  
   `因果推断` · 相关性 8/10
 - [Using inverse probability of censoring weighting to estimate hypothetical estimands in clinical trials: Should we implement stabilisation, and if so how?](deep_reads/2026-06-19-10.1177_09622802251387456.md)  
@@ -177,6 +189,20 @@
   `非参数 / 半参数` · 相关性 8/10
 - [On Efficient Estimation for Value-at-Risk via Location-Scale Time Series Models](deep_reads/2026-06-19-10.5705_ss.202024.0167.md)  
   `非参数 / 半参数` · 相关性 8/10
+- [Target trial emulation under nonmutually exclusive assignment: structural pitfalls and methodological remedies](deep_reads/2026-06-19-10.1093_aje_kwag014.md)  
+  `流行病学` · 相关性 7/10
+- [Living DAGs: the future of DAGs in epidemiology](deep_reads/2026-06-19-10.1093_aje_kwag029.md)  
+  `流行病学` · 相关性 7/10
+- [How can the use of different modes of survey data collection introduce bias? An introduction to mode effects using directed acyclic graphs (DAGs)](deep_reads/2026-06-19-10.1093_aje_kwag017.md)  
+  `流行病学` · 相关性 7/10
+- [Smoking hot joint models for attrition bias—XMAR-ks the spot](deep_reads/2026-06-19-10.1093_aje_kwag063.md)  
+  `流行病学` · 相关性 7/10
+- [Leukotriene-modifying agent chemoprophylaxis for severe influenza illness: a multi-approach study](deep_reads/2026-06-19-10.1093_aje_kwag072.md)  
+  `流行病学` · 相关性 7/10
+- [Estimating the effect of hepatitis C infection on multidrug-resistant tuberculosis treatment outcomes under hypothetical interventions on regimen composition and adherence](deep_reads/2026-06-19-10.1093_aje_kwag024.md)  
+  `流行病学` · 相关性 7/10
+- [Exploring the association between higher education and steeper cognitive decline in a nationally representative longitudinal study in India](deep_reads/2026-06-19-10.1093_aje_kwag009.md)  
+  `流行病学` · 相关性 7/10
 - [Estimation of the short-term and long-term hazard ratios for interval-censored and truncated data](deep_reads/2026-06-19-10.1177_09622802251399915.md)  
   `非参数 / 半参数` · 相关性 7/10
 - [Improving finite sample performance of causal discovery by exploiting temporal structure](deep_reads/2026-06-19-10.1177_09622802261422162.md)  
@@ -293,6 +319,18 @@
   `高维统计 / 随机矩阵` · 相关性 7/10
 - [A Data-Adaptive Integrated Approach to Covariance Change Point Detection in High-dimensional Settings](deep_reads/2026-06-19-10.5705_ss.202025.0327.md)  
   `数理统计 / 假设检验` · 相关性 7/10
+- [Use of the test-negative design to estimate the protective effect of a scalar immune measure: a simulation analysis](deep_reads/2026-06-19-10.1093_aje_kwag036.md)  
+  `流行病学` · 相关性 6/10
+- [Commentary on “ <i>Resurrecting complete-case analysis: a defense</i> ”: the loss of information remains unresolved](deep_reads/2026-06-19-10.1093_aje_kwag068.md)  
+  `流行病学` · 相关性 6/10
+- [Requirement for written informed consent and selection bias in a chart-review prostate cancer study](deep_reads/2026-06-19-10.1093_aje_kwag043.md)  
+  `流行病学` · 相关性 6/10
+- [Cardiovascular disease and mortality following placental abruption](deep_reads/2026-06-19-10.1093_aje_kwaf289.md)  
+  `流行病学` · 相关性 6/10
+- [Spatiotemporal analysis of human response to wildfire events and PM2.5 exposure](deep_reads/2026-06-19-10.1093_aje_kwag002.md)  
+  `流行病学` · 相关性 6/10
+- [Obstructive sleep apnea and functional hearing loss over 8 years: results from the National Health and Aging Trends Study](deep_reads/2026-06-19-10.1093_aje_kwag006.md)  
+  `流行病学` · 相关性 6/10
 - [Generalized pairwise comparisons using pseudo-observations for time-to-event censored data in a randomized controlled trial setting](deep_reads/2026-06-19-10.1177_09622802251406536.md)  
   `因果推断` · 相关性 6/10
 - [Dynamic prediction of death risk given a renewal hospitalization process](deep_reads/2026-06-19-10.1177_09622802251404065.md)  
@@ -403,6 +441,8 @@
   `数理统计 / 假设检验` · 相关性 6/10
 - [Robust Jackknife Model Averaging](deep_reads/2026-06-19-10.5705_ss.202025.0057.md)  
   `非参数 / 半参数` · 相关性 6/10
+- [Cash transfers do not increase traumatic injury and mortality: evidence from Alaska](deep_reads/2026-06-19-10.1093_aje_kwag007.md)  
+  `流行病学` · 相关性 5/10
 - [Penalized estimation of general frailty Poisson models for recurrent count events](deep_reads/2026-06-19-10.1177_09622802251393722.md)  
   `非参数 / 半参数` · 相关性 5/10
 - [A fast integrative clustering and feature selection approach for high-dimensional multiview data](deep_reads/2026-06-19-10.1177_09622802251406584.md)  
@@ -423,6 +463,10 @@
   `其他` · 相关性 5/10
 - [Integrating External Summary Information via James-Stein Shrinkage](deep_reads/2026-06-19-10.5705_ss.202025.0225.md)  
   `数理统计 / 假设检验` · 相关性 5/10
+- [Association of nonfatal overdose surveillance data with concurrent and future overdose deaths in Rhode Island](deep_reads/2026-06-19-10.1093_aje_kwag018.md)  
+  `流行病学` · 相关性 4/10
+- [Network analysis of pairwise relative tuberculosis transmission probabilities in Lima, Peru](deep_reads/2026-06-19-10.1093_aje_kwag067.md)  
+  `流行病学` · 相关性 4/10
 - [Two‐Stage Double‐Arm Trial Optimal Design of Restricted Mean Survival Time With Sculpted Critical Region](deep_reads/2026-06-19-10.1002_sim.70589.md)  
   `数理统计 / 假设检验` · 相关性 4/10
 - [Design and Analysis of Randomized Clinical Trials With Average Hazard: Practical Guidance and Tools for Implementation](deep_reads/2026-06-19-10.1002_sim.70624.md)  
@@ -445,6 +489,14 @@
   `高维统计 / 随机矩阵` · 相关性 4/10
 - [Estimation and Inference for Density-convoluted Support Vector Machine with Streaming Data](deep_reads/2026-06-19-10.5705_ss.202025.0083.md)  
   `效率理论 / Debiased ML` · 相关性 4/10
+- [The effect of damp housing on psychological distress: does respiratory health matter?](deep_reads/2026-06-19-10.1093_aje_kwag042.md)  
+  `流行病学` · 相关性 3/10
+- [The role of institutional trust in shaping the relationship between vaccine concerns and ongoing COVID-19 vaccination in a US national cohort](deep_reads/2026-06-19-10.1093_aje_kwag012.md)  
+  `流行病学` · 相关性 3/10
+- [Beyond Black and White: relationships between segregation, environmental burden, and birth outcomes among Black and Latino populations](deep_reads/2026-06-19-10.1093_aje_kwag051.md)  
+  `流行病学` · 相关性 3/10
+- [Flush with data: harnessing emergency department wastewater as an innovative approach for surveillance of infectious diseases](deep_reads/2026-06-19-10.1093_aje_kwag019.md)  
+  `流行病学` · 相关性 3/10
 - [Meta-analysis with a single study](deep_reads/2026-06-19-10.1177_09622802251380628.md)  
   `流行病学` · 相关性 3/10
 - [Regression analysis of interval-censored competing risks data with missing causes of failure: A direct likelihood approach](deep_reads/2026-06-19-10.1177_09622802261420820.md)  
@@ -463,6 +515,18 @@
   `其他` · 相关性 3/10
 - [Efficient Decoding from Heterogeneous 1-Bit Compressive Measurements over Networks](deep_reads/2026-06-19-10.5705_ss.202024.0329.md)  
   `高维统计 / 随机矩阵` · 相关性 3/10
+- [More lessons from the Lung Health Study](deep_reads/2026-06-19-10.1093_aje_kwag004.md)  
+  `流行病学` · 相关性 2/10
+- [An adaptive method of emergency department syndromic surveillance to nowcast the frequency of presentations that will have a severe 28-day outcome following influenza or COVID-19 infection: a retrospective analytical record linkage study](deep_reads/2026-06-19-10.1093_aje_kwag028.md)  
+  `流行病学` · 相关性 2/10
+- [Interaction effects are only a piece of the puzzle: reintroducing MAIHDA as a powerful tool to advance understanding of intersectional inequities](deep_reads/2026-06-19-10.1093_aje_kwag022.md)  
+  `流行病学` · 相关性 2/10
+- [Trends in obesity-related cardiovascular and cancer mortality in Switzerland 1995-2019: an analysis of multiple causes of death](deep_reads/2026-06-19-10.1093_aje_kwag003.md)  
+  `流行病学` · 相关性 2/10
+- [Increasing and inequitable US pregnancy-related mortality ratios among non-Hispanic Black and White women, 2000-2019](deep_reads/2026-06-19-10.1093_aje_kwaf287.md)  
+  `流行病学` · 相关性 2/10
+- [The relationship between psychological stress and SARS-CoV-2 nucleocapsid-antibody response following natural infection: longitudinal findings from the Aegis study](deep_reads/2026-06-19-10.1093_aje_kwag048.md)  
+  `流行病学` · 相关性 2/10
 - [Diagnostic accuracy analysis for multiple raters using probit hierarchical model for ordinal ratings](deep_reads/2026-06-19-10.1177_09622802251404063.md)  
   `流行病学` · 相关性 2/10
 - [Joint time-to-event partial order continual reassessment method and Joint time-to-event Bayesian logistic regression model: Statistical designs for dual agent phase I/II dose finding studies with late-onset toxicity and activity outcomes](deep_reads/2026-06-19-10.1177_09622802251403384.md)  

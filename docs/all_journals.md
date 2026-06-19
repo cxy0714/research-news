@@ -129,6 +129,12 @@
 
 ## 流行病学 (Epidemiology)
 
+### AJE
+
+- [Vol 195 Issue 6 · 2026-06-19](journals/2026-06-19-aje-v195-i6.md)
+- [Vol 195 Issue 5 · 2026-06-19](journals/2026-06-19-aje-v195-i5.md)
+- [Vol 195 Issue 4 · 2026-06-19](journals/2026-06-19-aje-v195-i4.md)
+
 ### SMMR
 
 - [Vol 35 Issue 5 · 2026-06-19](journals/2026-06-19-smmr-v35-i5.md)
