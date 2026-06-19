@@ -4,6 +4,18 @@
 
 ### Daily
 
+- [Apportioning Causal Responsibility of Two Risk Factors for an Adverse Outcome via Counterfactual Attribution](deep_reads/2026-06-19-2606.18459.md)  
+  8/10 [daily]
+- [Wasserstein Policy Learning for Distributional Outcomes](deep_reads/2026-06-19-2606.19117.md)  
+  8/10 [daily]
+- [Causal Forecasting in Panel Data: A Two-Way Synthetic Forecasting Approach](deep_reads/2026-06-19-2606.18512.md)  
+  8/10 [daily]
+- [Shrinkage priors for Bayesian Substitute Confounders](deep_reads/2026-06-19-2606.18535.md)  
+  7/10 [daily]
+- [Balanced Twins: Causal Inference on Time Series with Hidden Confounding](deep_reads/2026-06-19-2606.18969.md)  
+  7/10 [daily]
+- [Ranking Treatment Saturations under Clustered Network Interference](deep_reads/2026-06-19-2606.18590.md)  
+  7/10 [daily]
 - [Semiparametric Mediation Analysis with Separately Observed Mediator and Outcome under Unmeasured Confounding](deep_reads/2026-06-17-2606.17232.md)  
   10/10 [daily]
 - [Proximal Mediation Analysis with Hidden Recanting Witnesses](deep_reads/2026-06-17-2606.17600.md)  
@@ -931,6 +943,10 @@
 
 ### Daily
 
+- [Optimal score function estimation via derivatives constraints](deep_reads/2026-06-19-2606.19084.md)  
+  7/10 [daily]
+- [Bayesian Prediction in Gamma Models: Admissibility and Infinitesimal Prediction](deep_reads/2026-06-19-2606.18700.md)  
+  6/10 [daily]
 - [Limit theorems of Azadkia-Chatterjee's conditional graph correlation](deep_reads/2026-06-17-2606.15433.md)  
   9/10 [daily]
 - [On the Geometry of Separation in Finite Gaussian Mixtures](deep_reads/2026-06-17-2606.16179.md)  
@@ -1610,6 +1626,11 @@
 
 - [Near-optimal inference in adaptive linear regression](deep_reads/2026-05-26-10.1214_24-aos2450.md)  
   8/10 [journals]
+
+### 其他
+
+- [Doubly-robust inference and optimality in structure-agnostic models with smoothness](deep_reads/2026-06-19-2405.08525.md)  
+  9/10 [manual]
 
 ## 数理统计 / 假设检验
 
@@ -2328,6 +2349,14 @@
 
 ### Daily
 
+- [Ultra-High-Resolution Astronomy with the Solar Gravitational Lens](deep_reads/2026-06-19-2606.18300.md)  
+  7/10 [daily]
+- [The Chandra-Gaia Catalog of Counterparts: Resolving ambiguous Gaia matches to X-ray sources in the Chandra Source Catalog using Machine Learning](deep_reads/2026-06-19-2606.19329.md)  
+  7/10 [daily]
+- [Regularized covariance estimation from partially observed interferometric data](deep_reads/2026-06-19-2606.19065.md)  
+  6/10 [daily]
+- [Modeling Doppler Shifts in Radial-Velocity Data with Deep Learning toward Earth-mass Exoplanet Detection](deep_reads/2026-06-19-2606.18464.md)  
+  6/10 [daily]
 - [Scalable Bayesian data curation for next-generation radio experiments](deep_reads/2026-06-17-2606.16525.md)  
   8/10 [daily]
 - [On-sky binary source hypothesis testing beyond the diffraction limit using spatial mode demultiplexing based detection](deep_reads/2026-06-17-2606.18025.md)  
@@ -2625,6 +2654,8 @@
 
 ### Daily
 
+- [Applying the Weibull Shape Parameter test for signal detection in pharmacovigilance using the R package WSPsignal](deep_reads/2026-06-19-2606.18809.md)  
+  6/10 [daily]
 - [Typical Healthcare Pathways as a Basis for Admixture Modeling of Patient Trajectories](deep_reads/2026-06-12-2606.14587.md)  
   6/10 [daily]
 - [Bayesian machine learning approach for recurrent events studies using Soft Bayesian Additive Regression Trees (SBART)](deep_reads/2026-06-12-2606.12701.md)  
