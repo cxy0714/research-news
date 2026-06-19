@@ -64,7 +64,7 @@
 - [x] (2026-06-19) `--only "Scand. J. Stat." --n-issues 8`
 
 流行病 epi：
-- [ ] `--only StatMed --n-issues 2`   ⚠ 双周刊、量大
+- [x] (2026-06-19) `--only StatMed --n-issues 2`   ⚠ 双周刊、量大
 - [ ] `--only SMMR --n-issues 6`
 - [ ] `--only AJE --n-issues 4`   ⚠ 月刊
 - [ ] `--only Epidemiology --n-issues 6`

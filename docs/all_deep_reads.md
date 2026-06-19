@@ -161,6 +161,44 @@
 
 ### 期刊
 
+#### Statistics in Medicine Vol 45 Issue 13-14
+
+- [Global Sensitivity Analysis for Studies Extending Inferences From a Randomized Trial to a Target Population](deep_reads/2026-06-19-10.1002_sim.70083.md)  
+  9/10 [journals]
+- [Estimating Effects of Longitudinal Modified Treatment Policies ( <scp>LMTPs</scp> ) on Rates of Change in Health Outcomes](deep_reads/2026-06-19-10.1002_sim.70604.md)  
+  9/10 [journals]
+- [Structural Nested Mean Models for Modified Treatment Policies](deep_reads/2026-06-19-10.1002_sim.70586.md)  
+  9/10 [journals]
+- [Causal Inference in the Presence of Missing Outcome and Treatment Variables: Triply Robust Estimator and Sensitivity Analysis](deep_reads/2026-06-19-10.1002_sim.70630.md)  
+  8/10 [journals]
+- [Robust Estimation of Population Attributable Fractions in the Presence of Multiple Ordered Mediators](deep_reads/2026-06-19-10.1002_sim.70636.md)  
+  8/10 [journals]
+- [Randomized Interventional Effects in Semicompeting Risks, With Application to a Hematopoietic Cell Transplantation Study](deep_reads/2026-06-19-10.1002_sim.70628.md)  
+  8/10 [journals]
+- [Assessing Racial Disparities in Healthcare Expenditures via Mediator Distribution Shifts](deep_reads/2026-06-19-10.1002_sim.70606.md)  
+  8/10 [journals]
+- [Cost‐Effectiveness Analyses for Sequential Multiple Assignment Randomized Trials](deep_reads/2026-06-19-10.1002_sim.70634.md)  
+  7/10 [journals]
+- [Doubly Robust Estimators of the Restricted Mean Time in Favor Estimands in Individual‐ and Cluster‐Randomized Trials](deep_reads/2026-06-19-10.1002_sim.70599.md)  
+  7/10 [journals]
+- [Mediation Analysis With Bayesian Nonlinear Joint Models: Evaluation of the Treatment Causal Pathways Between Tumor Growth Kinetics and Overall Survival](deep_reads/2026-06-19-10.1002_sim.70574.md)  
+  7/10 [journals]
+- [Exploring Sensitive Biomarkers Associated With Short‐Term Responses and Long‐Term Outcomes Using Bayesian Additive Regression Trees](deep_reads/2026-06-19-10.1002_sim.70620.md)  
+  6/10 [journals]
+
+#### Statistics in Medicine Vol 45 Issue 10-12
+
+- [Mediation Analysis of Failure Time Data Under Interval Censoring](deep_reads/2026-06-19-10.1002_sim.70583.md)  
+  8/10 [journals]
+- [Varying Treatment Effects in Subgroups: A Unified Framework for Longitudinal Data Analysis](deep_reads/2026-06-19-10.1002_sim.70600.md)  
+  8/10 [journals]
+- [On the Inclusion of Non‐Concurrent Controls in Platform Trials With an Interim Analysis](deep_reads/2026-06-19-10.1002_sim.70585.md)  
+  7/10 [journals]
+- [Copas‐Heckman‐Type Sensitivity Analysis for Publication Bias in Rare‐Event Meta‐Analysis Under Generalized Linear Mixed Models](deep_reads/2026-06-19-10.1002_sim.70595.md)  
+  6/10 [journals]
+- [Time‐Scale Target Parameters and Two‐Step Estimation in Longitudinal Trials for Progressive Diseases](deep_reads/2026-06-19-10.1002_sim.70591.md)  
+  5/10 [journals]
+
 #### Statistica Sinica
 
 - [Conformal Causal Inference for Cluster Randomized Trials: Model-robust Inference Without Asymptotic Approximations](deep_reads/2026-06-19-10.5705_ss.202025.0476.md)  
@@ -978,6 +1016,17 @@
 
 ### 期刊
 
+#### Statistics in Medicine Vol 45 Issue 10-12
+
+- [Regularized Tensor Quantile Regression With Applications to Neuroimaging Data Analysis](deep_reads/2026-06-19-10.1002_sim.70582.md)  
+  7/10 [journals]
+- [Incorporating Auxiliary Information into Assessment of Accuracy and Discrimination of Risk Models When Some Predictors are Missing](deep_reads/2026-06-19-10.1002_sim.70587.md)  
+  6/10 [journals]
+- [Multi‐Level Variable Selection Using a <scp>BART</scp> ‐Enhanced Mixed‐Effects Framework](deep_reads/2026-06-19-10.1002_sim.70593.md)  
+  6/10 [journals]
+- [A Tree‐Based Model for Addressing Sparsity and Taxa Covariance in Microbiome Compositional Count Data](deep_reads/2026-06-19-10.1002_sim.70584.md)  
+  6/10 [journals]
+
 #### Statistica Sinica
 
 - [Asymptotic Theory for Linear Functionals of Kernel Ridge Regression](deep_reads/2026-06-19-10.5705_ss.202024.0256.md)  
@@ -1457,6 +1506,11 @@
 
 ### 期刊
 
+#### Statistics in Medicine Vol 45 Issue 13-14
+
+- [Rank‐Based Transfer Learning for High‐Dimensional Survival Data With Application to Sepsis Data](deep_reads/2026-06-19-10.1002_sim.70629.md)  
+  6/10 [journals]
+
 #### Statistica Sinica
 
 - [Inference for High-dimensional Model Averaging Estimators](deep_reads/2026-06-19-10.5705_ss.202025.0211.md)  
@@ -1651,6 +1705,26 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Statistics in Medicine Vol 45 Issue 13-14
+
+- [Nonparametric Tests for Treatment Effect Leveraging Information on Recurrent and Terminal Events and Physiological Decline](deep_reads/2026-06-19-10.1002_sim.70615.md)  
+  7/10 [journals]
+- [Design and Analysis of Randomized Clinical Trials With Average Hazard: Practical Guidance and Tools for Implementation](deep_reads/2026-06-19-10.1002_sim.70624.md)  
+  4/10 [journals]
+- [Sample Size Determination for Response‐Adaptive Randomization With Recurrent Event Responses and Unequal Follow‐Up Time](deep_reads/2026-06-19-10.1002_sim.70611.md)  
+  3/10 [journals]
+- [Sample Size Calculation for the <scp>ROCI</scp> Design](deep_reads/2026-06-19-10.1002_sim.70619.md)  
+  2/10 [journals]
+
+#### Statistics in Medicine Vol 45 Issue 10-12
+
+- [Testing Random Effects in Nonlinear Mixed‐Effects Models](deep_reads/2026-06-19-10.1002_sim.70605.md)  
+  7/10 [journals]
+- [Synergy Area With <scp>FDR</scp> ‐Controlled Evaluation ( <scp>SAFE</scp> ) to Robustly Assess Safety Profile in Clinical Trials](deep_reads/2026-06-19-10.1002_sim.70592.md)  
+  6/10 [journals]
+- [Two‐Stage Double‐Arm Trial Optimal Design of Restricted Mean Survival Time With Sculpted Critical Region](deep_reads/2026-06-19-10.1002_sim.70589.md)  
+  4/10 [journals]
 
 #### Statistica Sinica
 
@@ -2039,6 +2113,11 @@
   6/10 [daily]
 
 ### 期刊
+
+#### Statistics in Medicine Vol 45 Issue 13-14
+
+- [Computationally Efficient Approach to Operational Prior Specification in Phase I Clinical Trials](deep_reads/2026-06-19-10.1002_sim.70621.md)  
+  3/10 [journals]
 
 #### Statistica Sinica
 
@@ -2559,6 +2638,32 @@
 
 ### 期刊
 
+#### Statistics in Medicine Vol 45 Issue 13-14
+
+- [Cluster Trials Inference With <scp>CARE</scp>](deep_reads/2026-06-19-10.1002_sim.70610.md)  
+  6/10 [journals]
+- [Variable Selection for Illness‐Death Processes Under Dual Observation Schemes](deep_reads/2026-06-19-10.1002_sim.70608.md)  
+  4/10 [journals]
+- [Variable Selection in Multistate Models for Correlated Data With Application in a <scp>COVID</scp> ‐19 Vaccination Study](deep_reads/2026-06-19-10.1002_sim.70623.md)  
+  3/10 [journals]
+
+#### Statistics in Medicine Vol 45 Issue 10-12
+
+- [Dynamic Borrowing From Historical Controls via the Synthetic Prior With Covariates in Randomized Clinical Trials](deep_reads/2026-06-19-10.1002_sim.70567.md)  
+  7/10 [journals]
+- [Interrupted Time Series Methods for Nonrandom Sampling Study Designs With Known Sampling Weights](deep_reads/2026-06-19-10.1002_sim.70560.md)  
+  7/10 [journals]
+- [Correcting Measurement Error and Zero Inflation in Functional Covariates for Scalar‐on‐Function Quantile Regression](deep_reads/2026-06-19-10.1002_sim.70598.md)  
+  7/10 [journals]
+- [Joint Frailty Mixture Cure Model for Recurrent Event Data With Dependent Censoring: An MCEM Approach](deep_reads/2026-06-19-10.1002_sim.70579.md)  
+  6/10 [journals]
+- [An Overview and Recent Developments in the Analysis of Multistate Processes](deep_reads/2026-06-19-10.1002_sim.70493.md)  
+  6/10 [journals]
+- [Proportional Hazards Regression for Interval‐Censored Outcomes With an Interval‐Censored Covariate](deep_reads/2026-06-19-10.1002_sim.70573.md)  
+  5/10 [journals]
+- [Authors' Response to Comments by Di Tanna et al.](deep_reads/2026-06-19-10.1002_sim.70594.md)  
+  0/10 [journals]
+
 #### Scandinavian Journal of Statistics Vol 51 Issue 3
 
 - [Confidence bands for survival curves from outcome‐dependent stratified samples](deep_reads/2026-06-19-10.1111_sjos.12700.md)  
@@ -2657,6 +2762,18 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Statistics in Medicine Vol 45 Issue 13-14
+
+- [Safety‐Driven Response Adaptive Randomization: An Application in Noninferiority Oncology Trials](deep_reads/2026-06-19-10.1002_sim.70612.md)  
+  2/10 [journals]
+- [Effect Size Rules of Thumb for One‐Dimensional Functional Data With an Application to Gait Analysis](deep_reads/2026-06-19-10.1002_sim.70633.md)  
+  1/10 [journals]
+
+#### Statistics in Medicine Vol 45 Issue 10-12
+
+- [Longitudinal Sparse Single‐Omics Factor Analysis for High‐Dimensional Blood Biomarkers in Alzheimer's Disease](deep_reads/2026-06-19-10.1002_sim.70601.md)  
+  6/10 [journals]
 
 #### Scandinavian Journal of Statistics Vol 53 Issue 2
 
