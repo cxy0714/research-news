@@ -384,6 +384,152 @@
 - [L or M 1—Critical Challenges in Mediation Analysis](deep_reads/2026-06-19-10.1097_ede.0000000000001888.md)  
   8/10 [journals]
 
+#### Biometrics Vol 82 Issue 2
+
+- [Targeted maximum likelihood estimation for mediation analysis with multiple time-varying mediators](deep_reads/2026-06-10-10.1093_biomtc_ujag102.md)  
+  9/10 [journals]
+- [Measurement error-robust causal inference via constructed instrumental variables](deep_reads/2026-06-10-10.1093_biomtc_ujag057.md)  
+  9/10 [journals]
+- [Causal inference targeting a concentration index for studies of health inequalities](deep_reads/2026-06-10-10.1093_biomtc_ujag082.md)  
+  9/10 [journals]
+- [Integration of aggregate data in causally interpretable meta-analysis by inverse weighting](deep_reads/2026-06-19-10.1093_biomtc_ujag107.md)  
+  8/10 [journals]
+- [A generalized difference-in-differences estimator for stepped-wedge cluster-randomized trials](deep_reads/2026-06-19-10.1093_biomtc_ujag105.md)  
+  8/10 [journals]
+- [Bayesian Structured Mediation analysis with Unobserved confounders](deep_reads/2026-06-19-10.1093_biomtc_ujag110.md)  
+  8/10 [journals]
+- [Nonparametric estimation of the total treatment effect with multiple outcomes in the presence of terminal events](deep_reads/2026-06-10-10.1093_biomtc_ujag053.md)  
+  8/10 [journals]
+- [Personalized treatment design in the context of functional confounding](deep_reads/2026-06-10-10.1093_biomtc_ujag056.md)  
+  8/10 [journals]
+- [Assessing interactive causes of an occurred outcome due to two binary exposures](deep_reads/2026-06-10-10.1093_biomtc_ujag100.md)  
+  8/10 [journals]
+- [Efficient collaborative learning of the average treatment effect](deep_reads/2026-06-10-10.1093_biomtc_ujag076.md)  
+  8/10 [journals]
+- [Uncertainty quantification and multi-stage variable selection for personalized treatment regimes](deep_reads/2026-06-10-10.1093_biomtc_ujag081.md)  
+  8/10 [journals]
+- [<i>Q</i> -Learning with clustered-SMART (cSMART) data: examining moderators in the construction of clustered adaptive interventions](deep_reads/2026-06-10-10.1093_biomtc_ujag078.md)  
+  7/10 [journals]
+- [Heterogeneous causal mediation analysis using Bayesian additive regression trees](deep_reads/2026-06-10-10.1093_biomtc_ujag079.md)  
+  7/10 [journals]
+- [Integrative learning of individualized treatment rules from multiple studies with partially overlapping treatments](deep_reads/2026-06-10-10.1093_biomtc_ujag083.md)  
+  7/10 [journals]
+- [Bayesian shrinkage priors for penalized synthetic control estimators in the presence of spillovers](deep_reads/2026-06-10-10.1093_biomtc_ujag054.md)  
+  7/10 [journals]
+- [Pseudo-observation regression for sequentially truncated data](deep_reads/2026-06-19-10.1093_biomtc_ujag084.md)  
+  6/10 [journals]
+- [Practical considerations when using the covariate-adjusted log-rank test for the analysis of time-to-event endpoints in oncology trials](deep_reads/2026-06-19-10.1093_biomtc_ujag109.md)  
+  6/10 [journals]
+- [A First Course in Causal Inference](deep_reads/2026-06-10-10.1093_biomtc_ujag012.md)  
+  6/10 [journals]
+
+#### Biometrics Vol 82 Issue 1
+
+- [Causal inference with misspecified network interference structure](deep_reads/2026-06-19-10.1093_biomtc_ujag023.md)  
+  9/10 [journals]
+- [Semiparametric causal mediation analysis of cluster-randomized trials for indirect and spillover effects](deep_reads/2026-06-10-10.1093_biomtc_ujag017.md)  
+  9/10 [journals]
+- [Learning optimal early decision treatment rules with multi-domain intermediate outcomes](deep_reads/2026-06-19-10.1093_biomtc_ujaf167.md)  
+  8/10 [journals]
+- [A robust covariate-balancing method for estimating individualized treatment with censored data](deep_reads/2026-06-19-10.1093_biomtc_ujag050.md)  
+  8/10 [journals]
+- [Estimating optimal dynamic treatment regimes with Gaussian process emulation](deep_reads/2026-06-19-10.1093_biomtc_ujaf174.md)  
+  8/10 [journals]
+- [Distributed fusion <i>R</i> -learner of heterogeneous treatment effect using distributed medicaid data](deep_reads/2026-06-19-10.1093_biomtc_ujag034.md)  
+  8/10 [journals]
+- [Handling incomplete outcomes and covariates in cluster-randomized trials: doubly robust estimation, efficiency considerations, and sensitivity analysis](deep_reads/2026-06-19-10.1093_biomtc_ujag030.md)  
+  8/10 [journals]
+- [A framework for causal estimand selection under positivity violations](deep_reads/2026-06-10-10.1093_biomtc_ujag014.md)  
+  8/10 [journals]
+- [Long-term memory effects of an incremental blood pressure intervention in a mortal cohort](deep_reads/2026-06-19-10.1093_biomtc_ujaf176.md)  
+  7/10 [journals]
+- [Bias mitigation in matched observational studies with continuous treatments: calipered non-bipartite matching and bias-corrected estimation and inference](deep_reads/2026-06-19-10.1093_biomtc_ujag022.md)  
+  7/10 [journals]
+- [Estimating the causal effect of redlining on present-day air pollution](deep_reads/2026-06-19-10.1093_biomtc_ujaf173.md)  
+  7/10 [journals]
+- [An adaptive design for optimizing treatment assignment in randomized clinical trials](deep_reads/2026-06-19-10.1093_biomtc_ujaf168.md)  
+  6/10 [journals]
+- [Scalable and distributed individualized treatment rules for multicenter datasets](deep_reads/2026-06-10-10.1093_biomtc_ujag003.md)  
+  6/10 [journals]
+
+#### Biometrics Vol 81 Issue 4
+
+- [Distal causal excursion effects: modeling long-term effects of time-varying treatments in micro-randomized trials](deep_reads/2026-06-19-10.1093_biomtc_ujaf134.md)  
+  9/10 [journals]
+- [Statistical inference for heterogeneous treatment effect with right-censored data from synthesizing randomized clinical trials and real-world data](deep_reads/2026-06-19-10.1093_biomtc_ujaf131.md)  
+  9/10 [journals]
+- [Variable importance measures for heterogeneous treatment effects](deep_reads/2026-06-19-10.1093_biomtc_ujaf140.md)  
+  9/10 [journals]
+- [Flexible and efficient estimation of causal effects with error-prone exposures: a control variates approach for measurement error](deep_reads/2026-06-19-10.1093_biomtc_ujaf151.md)  
+  9/10 [journals]
+- [A meta-learning method for estimation of causal excursion effects to assess time-varying moderation](deep_reads/2026-06-19-10.1093_biomtc_ujaf129.md)  
+  8/10 [journals]
+- [Bridging the gap between design and analysis: randomization inference and sensitivity analysis for matched observational studies with treatment doses](deep_reads/2026-06-19-10.1093_biomtc_ujaf156.md)  
+  8/10 [journals]
+- [Estimating heterogeneous treatment effects for general responses](deep_reads/2026-06-19-10.1093_biomtc_ujaf162.md)  
+  8/10 [journals]
+- [Adaptive stratified sampling design in two-phase studies for average causal effect estimation](deep_reads/2026-06-19-10.1093_biomtc_ujaf143.md)  
+  7/10 [journals]
+- [Inverse-intensity weighted generalized estimating equations for longitudinal data subject to irregular observation: which variables should be included in the visit rate model?](deep_reads/2026-06-19-10.1093_biomtc_ujaf128.md)  
+  7/10 [journals]
+
+#### Biometrics Vol 81 Issue 3
+
+- [Causal machine learning for heterogeneous treatment effects in the presence of missing outcome data](deep_reads/2026-06-19-10.1093_biomtc_ujaf098.md)  
+  9/10 [journals]
+- [A positivity robust strategy to study effects of switching treatment](deep_reads/2026-06-19-10.1093_biomtc_ujaf085.md)  
+  8/10 [journals]
+- [Valid and efficient inference for nonparametric variable importance in two-phase studies](deep_reads/2026-06-19-10.1093_biomtc_ujaf095.md)  
+  8/10 [journals]
+- [Tree-based additive noise directed acyclic graphical models for nonlinear causal discovery with interactions](deep_reads/2026-06-19-10.1093_biomtc_ujaf089.md)  
+  8/10 [journals]
+- [Sensitivity analysis for attributable effects in case2 studies](deep_reads/2026-06-19-10.1093_biomtc_ujaf102.md)  
+  7/10 [journals]
+- [Sparse 2-stage Bayesian meta-analysis for individualized treatments](deep_reads/2026-06-19-10.1093_biomtc_ujaf082.md)  
+  6/10 [journals]
+
+#### Biometrics Vol 81 Issue 2
+
+- [Double robust variance estimation with parametric working models](deep_reads/2026-06-19-10.1093_biomtc_ujaf054.md)  
+  9/10 [journals]
+- [Towards efficient and interpretable assumption-lean generalized linear modeling of continuous exposure effects](deep_reads/2026-06-19-10.1093_biomtc_ujaf071.md)  
+  8/10 [journals]
+- [Continuous-time mediation analysis for repeatedly measured mediators and outcomes](deep_reads/2026-06-19-10.1093_biomtc_ujaf062.md)  
+  8/10 [journals]
+- [Doubly robust omnibus sensitivity analysis of externally controlled trials with intercurrent events](deep_reads/2026-06-19-10.1093_biomtc_ujaf047.md)  
+  8/10 [journals]
+- [Optimal dynamic treatment regime estimation in the presence of nonadherence](deep_reads/2026-06-19-10.1093_biomtc_ujaf041.md)  
+  8/10 [journals]
+- [Addressing confounding and continuous exposure measurement error using corrected score functions](deep_reads/2026-06-19-10.1093_biomtc_ujaf045.md)  
+  8/10 [journals]
+- [Variant specific treatment effects with applications in vaccine studies](deep_reads/2026-06-19-10.1093_biomtc_ujaf068.md)  
+  8/10 [journals]
+- [Regularized principal spline functions to mitigate spatial confounding](deep_reads/2026-06-19-10.1093_biomtc_ujaf076.md)  
+  7/10 [journals]
+- [Estimating weighted quantile treatment effects with missing outcome data by double sampling](deep_reads/2026-06-19-10.1093_biomtc_ujaf038.md)  
+  7/10 [journals]
+- [Nonparametric assessment of regimen response curve estimators](deep_reads/2026-06-19-10.1093_biomtc_ujaf066.md)  
+  7/10 [journals]
+- [Data integration methods for micro-randomized trials](deep_reads/2026-06-19-10.1093_biomtc_ujaf002.md)  
+  7/10 [journals]
+- [Multiple bias calibration for valid statistical inference under nonignorable nonresponse](deep_reads/2026-06-19-10.1093_biomtc_ujaf044.md)  
+  6/10 [journals]
+- [Learn-As-you-GO (LAGO) trials: optimizing treatments and preventing trial failure through ongoing learning](deep_reads/2026-06-19-10.1093_biomtc_ujaf061.md)  
+  5/10 [journals]
+
+#### Biometrics Vol 81 Issue 1
+
+- [Causal inference with cross-temporal design](deep_reads/2026-06-19-10.1093_biomtc_ujae163.md)  
+  8/10 [journals]
+- [Penalized G-estimation for effect modifier selection in a structural nested mean model for repeated outcomes](deep_reads/2026-06-19-10.1093_biomtc_ujae165.md)  
+  8/10 [journals]
+- [Instrumental variable estimation of complier casual treatment effects with interval-censored competing risks data](deep_reads/2026-06-19-10.1093_biomtc_ujaf010.md)  
+  7/10 [journals]
+- [Addressing selection bias in cluster randomized experiments via weighting](deep_reads/2026-06-19-10.1093_biomtc_ujaf013.md)  
+  7/10 [journals]
+- [Optimal treatment regime estimation in practice: challenges and choices in a randomized clinical trial for depression](deep_reads/2026-06-19-10.1093_biomtc_ujaf026.md)  
+  5/10 [journals]
+
 #### Annals of Applied Statistics Vol 19 Issue 4
 
 - [Modified treatment policy effect estimation with weighted energy distance](deep_reads/2026-06-19-10.1214_24-aoas1991.md)  
@@ -538,44 +684,6 @@
 - [Multi-study <i>R</i> -learner for estimating heterogeneous treatment effects across studies using statistical machine learning](deep_reads/2026-06-10-10.1093_biostatistics_kxaf040.md)  
   8/10 [journals]
 - [Counterfactual fairness for small subgroups](deep_reads/2026-06-10-10.1093_biostatistics_kxaf046.md)  
-  6/10 [journals]
-
-#### Biometrics Vol 82 Issue 2
-
-- [Targeted maximum likelihood estimation for mediation analysis with multiple time-varying mediators](deep_reads/2026-06-10-10.1093_biomtc_ujag102.md)  
-  9/10 [journals]
-- [Measurement error-robust causal inference via constructed instrumental variables](deep_reads/2026-06-10-10.1093_biomtc_ujag057.md)  
-  9/10 [journals]
-- [Causal inference targeting a concentration index for studies of health inequalities](deep_reads/2026-06-10-10.1093_biomtc_ujag082.md)  
-  9/10 [journals]
-- [Nonparametric estimation of the total treatment effect with multiple outcomes in the presence of terminal events](deep_reads/2026-06-10-10.1093_biomtc_ujag053.md)  
-  8/10 [journals]
-- [Personalized treatment design in the context of functional confounding](deep_reads/2026-06-10-10.1093_biomtc_ujag056.md)  
-  8/10 [journals]
-- [Assessing interactive causes of an occurred outcome due to two binary exposures](deep_reads/2026-06-10-10.1093_biomtc_ujag100.md)  
-  8/10 [journals]
-- [Efficient collaborative learning of the average treatment effect](deep_reads/2026-06-10-10.1093_biomtc_ujag076.md)  
-  8/10 [journals]
-- [Uncertainty quantification and multi-stage variable selection for personalized treatment regimes](deep_reads/2026-06-10-10.1093_biomtc_ujag081.md)  
-  8/10 [journals]
-- [<i>Q</i> -Learning with clustered-SMART (cSMART) data: examining moderators in the construction of clustered adaptive interventions](deep_reads/2026-06-10-10.1093_biomtc_ujag078.md)  
-  7/10 [journals]
-- [Heterogeneous causal mediation analysis using Bayesian additive regression trees](deep_reads/2026-06-10-10.1093_biomtc_ujag079.md)  
-  7/10 [journals]
-- [Integrative learning of individualized treatment rules from multiple studies with partially overlapping treatments](deep_reads/2026-06-10-10.1093_biomtc_ujag083.md)  
-  7/10 [journals]
-- [Bayesian shrinkage priors for penalized synthetic control estimators in the presence of spillovers](deep_reads/2026-06-10-10.1093_biomtc_ujag054.md)  
-  7/10 [journals]
-- [A First Course in Causal Inference](deep_reads/2026-06-10-10.1093_biomtc_ujag012.md)  
-  6/10 [journals]
-
-#### Biometrics Vol 82 Issue 1
-
-- [Semiparametric causal mediation analysis of cluster-randomized trials for indirect and spillover effects](deep_reads/2026-06-10-10.1093_biomtc_ujag017.md)  
-  9/10 [journals]
-- [A framework for causal estimand selection under positivity violations](deep_reads/2026-06-10-10.1093_biomtc_ujag014.md)  
-  8/10 [journals]
-- [Scalable and distributed individualized treatment rules for multicenter datasets](deep_reads/2026-06-10-10.1093_biomtc_ujag003.md)  
   6/10 [journals]
 
 #### Annals of Applied Statistics Vol 20 Issue 1
@@ -856,6 +964,30 @@
 - [On high‐dimensional variance estimation in survey sampling](deep_reads/2026-06-19-10.1111_sjos.12776.md)  
   8/10 [journals]
 - [Support estimation and sign recovery in high‐dimensional heteroscedastic mean regression](deep_reads/2026-06-19-10.1111_sjos.12772.md)  
+  7/10 [journals]
+
+#### Biometrics Vol 82 Issue 1
+
+- [Sparse robust discriminant analysis for high-dimensional and heavy-tailed data](deep_reads/2026-06-19-10.1093_biomtc_ujag039.md)  
+  6/10 [journals]
+
+#### Biometrics Vol 81 Issue 4
+
+- [Statistical inference on high-dimensional covariate-dependent Gaussian graphical regressions](deep_reads/2026-06-19-10.1093_biomtc_ujaf165.md)  
+  7/10 [journals]
+- [Entrywise splitting cross-validation in generalized factor models: from sample splitting to entrywise splitting](deep_reads/2026-06-19-10.1093_biomtc_ujaf153.md)  
+  6/10 [journals]
+- [SPLasso for high-dimensional additive hazards regression with covariate measurement error](deep_reads/2026-06-19-10.1093_biomtc_ujaf130.md)  
+  6/10 [journals]
+
+#### Biometrics Vol 81 Issue 2
+
+- [PDC-MAKES: a conditional screening method for controlling false discoveries in high-dimensional multi-response setting](deep_reads/2026-06-19-10.1093_biomtc_ujaf042.md)  
+  8/10 [journals]
+
+#### Biometrics Vol 81 Issue 1
+
+- [Positive-definite regularized estimation for high-dimensional covariance on scalar regression](deep_reads/2026-06-19-10.1093_biomtc_ujaf017.md)  
   7/10 [journals]
 
 #### Annals of Applied Statistics Vol 19 Issue 3
@@ -1378,6 +1510,73 @@
 - [A two‐step estimation procedure for semiparametric mixture cure models](deep_reads/2026-06-19-10.1111_sjos.12713.md)  
   6/10 [journals]
 
+#### Biometrics Vol 82 Issue 1
+
+- [Nonparametric ANCOVA for longitudinal outcomes in a randomized clinical trial](deep_reads/2026-06-19-10.1093_biomtc_ujag047.md)  
+  8/10 [journals]
+- [DNN-based semiparametric AFT model for integrating genomic and pathological imaging data in cancer prognosis](deep_reads/2026-06-19-10.1093_biomtc_ujag045.md)  
+  8/10 [journals]
+- [Variable selection in functional linear Cox model](deep_reads/2026-06-19-10.1093_biomtc_ujag044.md)  
+  7/10 [journals]
+- [Reduced varying coefficient models for regional quantile regression with multiple responses](deep_reads/2026-06-19-10.1093_biomtc_ujag040.md)  
+  7/10 [journals]
+- [A general framework for heterogeneous variable importance: Pointwise and uniform inference](deep_reads/2026-06-10-10.1093_biomtc_ujag015.md)  
+  7/10 [journals]
+- [Quasi-likelihood estimation for semiparametric circular regression models](deep_reads/2026-06-19-10.1093_biomtc_ujag002.md)  
+  6/10 [journals]
+
+#### Biometrics Vol 81 Issue 4
+
+- [A semiparametric Gaussian Mixture Model with spatial dependence and its application to whole-slide image clustering analysis](deep_reads/2026-06-19-10.1093_biomtc_ujaf149.md)  
+  7/10 [journals]
+- [Generalized nonparametric temporal modeling of recurrent events with application to a malaria vaccine trial](deep_reads/2026-06-19-10.1093_biomtc_ujaf146.md)  
+  7/10 [journals]
+- [Deep partially linear transformation model for right-censored survival data](deep_reads/2026-06-19-10.1093_biomtc_ujaf126.md)  
+  6/10 [journals]
+- [A Bayesian collocation integral method for system identification of ordinary differential equations](deep_reads/2026-06-19-10.1093_biomtc_ujaf141.md)  
+  4/10 [journals]
+- [Bayesian monotone single-index quantile regression model with bounded response and misaligned functional covariates](deep_reads/2026-06-19-10.1093_biomtc_ujaf145.md)  
+  4/10 [journals]
+
+#### Biometrics Vol 81 Issue 3
+
+- [Binary regression and classification with covariates in metric spaces](deep_reads/2026-06-19-10.1093_biomtc_ujaf123.md)  
+  9/10 [journals]
+- [Smooth and shape-constrained quantile distributed lag models](deep_reads/2026-06-19-10.1093_biomtc_ujaf101.md)  
+  8/10 [journals]
+- [Nonparametric Bayesian approach for dynamic borrowing of historical control data](deep_reads/2026-06-19-10.1093_biomtc_ujaf118.md)  
+  6/10 [journals]
+- [Adjusted predictions for generalized estimating equations](deep_reads/2026-06-19-10.1093_biomtc_ujaf090.md)  
+  5/10 [journals]
+- [Regression analysis of interval-censored failure time data with change points and a cured subgroup](deep_reads/2026-06-19-10.1093_biomtc_ujaf100.md)  
+  4/10 [journals]
+- [Exploring the heterogeneity in recurrent episode lengths based on quantile regression](deep_reads/2026-06-19-10.1093_biomtc_ujaf122.md)  
+  3/10 [journals]
+- [The Cox-Pólya-Gamma algorithm for flexible Bayesian inference of multilevel survival models](deep_reads/2026-06-19-10.1093_biomtc_ujaf121.md)  
+  3/10 [journals]
+- [A group distributional ICA method for decomposing multi-subject diffusion tensor imaging](deep_reads/2026-06-19-10.1093_biomtc_ujaf117.md)  
+  2/10 [journals]
+
+#### Biometrics Vol 81 Issue 2
+
+- [Semiparametric joint modeling for biomarker trajectory before disease onset](deep_reads/2026-06-19-10.1093_biomtc_ujaf064.md)  
+  7/10 [journals]
+- [Non-parametric estimators of hazard ratios for comparing two survival curves](deep_reads/2026-06-19-10.1093_biomtc_ujaf072.md)  
+  5/10 [journals]
+- [Distance weighted directional regression for Fréchet sufficient dimension reduction](deep_reads/2026-06-19-10.1093_biomtc_ujaf051.md)  
+  4/10 [journals]
+- [Probabilistic exponential family inverse regression and its applications](deep_reads/2026-06-19-10.1093_biomtc_ujaf065.md)  
+  4/10 [journals]
+- [Conformal predictive intervals in survival analysis: a resampling approach](deep_reads/2026-06-19-10.1093_biomtc_ujaf063.md)  
+  3/10 [journals]
+
+#### Biometrics Vol 81 Issue 1
+
+- [Statistical inference on change points in generalized semiparametric segmented models](deep_reads/2026-06-19-10.1093_biomtc_ujaf022.md)  
+  7/10 [journals]
+- [High-dimensional partially linear functional Cox models](deep_reads/2026-06-19-10.1093_biomtc_ujae164.md)  
+  6/10 [journals]
+
 #### Annals of Applied Statistics Vol 19 Issue 4
 
 - [Studying the long-term natural history of diseases using a shape-restricted nonparametric temporal realignment method](deep_reads/2026-06-19-10.1214_25-aoas2092.md)  
@@ -1652,11 +1851,6 @@
 - [Transfer learning estimation of the accelerated failure time model based on high-dimensional data](deep_reads/2026-06-10-10.1093_biomtc_ujag103.md)  
   7/10 [journals]
 
-#### Biometrics Vol 82 Issue 1
-
-- [A general framework for heterogeneous variable importance: Pointwise and uniform inference](deep_reads/2026-06-10-10.1093_biomtc_ujag015.md)  
-  7/10 [journals]
-
 #### Annals of Applied Statistics Vol 20 Issue 1
 
 - [Data harmonization via regularized nonparametric mixing distribution estimation](deep_reads/2026-06-10-10.1214_25-aoas2024.md)  
@@ -1814,6 +2008,28 @@
 
 - [Semiparametric efficient estimation in high‐dimensional partial linear regression models](deep_reads/2026-06-19-10.1111_sjos.12716.md)  
   9/10 [journals]
+
+#### Biometrics Vol 82 Issue 1
+
+- [Jointly modeling multiple endpoints for efficient treatment effect estimation in randomized controlled trials](deep_reads/2026-06-19-10.1093_biomtc_ujaf166.md)  
+  8/10 [journals]
+
+#### Biometrics Vol 81 Issue 4
+
+- [Federated double machine learning for high-dimensional semiparametric models](deep_reads/2026-06-19-10.1093_biomtc_ujaf150.md)  
+  9/10 [journals]
+
+#### Biometrics Vol 81 Issue 3
+
+- [Doubly robust nonparametric estimators of the predictive value of covariates for survival data](deep_reads/2026-06-19-10.1093_biomtc_ujaf084.md)  
+  7/10 [journals]
+- [Semi-supervised linear regression: enhancing efficiency and robustness in high dimensions](deep_reads/2026-06-19-10.1093_biomtc_ujaf113.md)  
+  7/10 [journals]
+
+#### Biometrics Vol 81 Issue 1
+
+- [Improving estimation efficiency for survival data analysis by integrating a coarsened time-to-event outcome from an external study](deep_reads/2026-06-19-10.1093_biomtc_ujae168.md)  
+  4/10 [journals]
 
 #### Annals of Applied Statistics Vol 19 Issue 2
 
@@ -2123,6 +2339,40 @@
   7/10 [journals]
 - [Asymptotic inference of the ARMA model with time‐functional variance noises](deep_reads/2026-06-19-10.1111_sjos.12708.md)  
   2/10 [journals]
+
+#### Biometrics Vol 82 Issue 1
+
+- [Making all pairwise comparisons in multi-arm clinical trials without control treatment](deep_reads/2026-06-19-10.1093_biomtc_ujag048.md)  
+  7/10 [journals]
+- [Ultra-high-dimensional threshold selection for quantile feature screening with false discovery rate error rate control: a case study on high blood pressure analysis](deep_reads/2026-06-19-10.1093_biomtc_ujag035.md)  
+  6/10 [journals]
+- [Rank-adaptive covariance testing with applications to genomics and neuroimaging](deep_reads/2026-06-19-10.1093_biomtc_ujag052.md)  
+  6/10 [journals]
+- [Repeated inclusion cluster randomized trials: a new class of designs for assessing group-level interventions](deep_reads/2026-06-19-10.1093_biomtc_ujag009.md)  
+  3/10 [journals]
+
+#### Biometrics Vol 81 Issue 4
+
+- [Double robust conditional independence test for novel biomarkers given established risk factors with survival data](deep_reads/2026-06-19-10.1093_biomtc_ujaf133.md)  
+  9/10 [journals]
+- [Clarifying the role of the Mantel–Haenszel risk difference estimator in randomized clinical trials](deep_reads/2026-06-19-10.1093_biomtc_ujaf142.md)  
+  7/10 [journals]
+
+#### Biometrics Vol 81 Issue 3
+
+- [Statistical significance of clustering for count data](deep_reads/2026-06-19-10.1093_biomtc_ujaf120.md)  
+  6/10 [journals]
+
+#### Biometrics Vol 81 Issue 2
+
+- [Statistical inference on the relative risk following covariate-adaptive randomization](deep_reads/2026-06-19-10.1093_biomtc_ujaf036.md)  
+  7/10 [journals]
+- [On the finite-sample and asymptotic error control of a randomization-probability test for response-adaptive clinical trials](deep_reads/2026-06-19-10.1093_biomtc_ujaf069.md)  
+  6/10 [journals]
+- [A semiparametric quantile regression rank score test for zero-inflated data](deep_reads/2026-06-19-10.1093_biomtc_ujaf050.md)  
+  6/10 [journals]
+- [Power-enhanced two-sample mean tests for high-dimensional microbiome compositional data](deep_reads/2026-06-19-10.1093_biomtc_ujaf034.md)  
+  6/10 [journals]
 
 #### Annals of Applied Statistics Vol 19 Issue 4
 
@@ -2489,6 +2739,13 @@
 
 - [An Improved Pooled Logistic Regression Implementation](deep_reads/2026-06-19-10.1097_ede.0000000000001945.md)  
   7/10 [journals]
+
+#### Biometrics Vol 81 Issue 3
+
+- [Mastering rare event analysis: subsample-size determination in Cox and logistic regressions](deep_reads/2026-06-19-10.1093_biomtc_ujaf110.md)  
+  5/10 [journals]
+- [Model robust designs for dose-response models](deep_reads/2026-06-19-10.1093_biomtc_ujaf112.md)  
+  2/10 [journals]
 
 #### Annals of Applied Statistics Vol 19 Issue 3
 
@@ -3308,6 +3565,86 @@
 - [Medium-term Exposure to Wildfire Smoke PM2.5 and Cardiorespiratory Hospitalization Risks](deep_reads/2026-06-19-10.1097_ede.0000000000001881.md)  
   1/10 [journals]
 
+#### Biometrics Vol 82 Issue 2
+
+- [Multivariate causal effects: a Bayesian causal regression factor model](deep_reads/2026-06-10-10.1093_biomtc_ujag101.md)  
+  7/10 [journals]
+- [Two-phase designs for biomarker studies when disease processes are under intermittent observation](deep_reads/2026-06-10-10.1093_biomtc_ujag088.md)  
+  6/10 [journals]
+- [Two-phase designs for cost-effective evaluation of cancer screening tests](deep_reads/2026-06-10-10.1093_biomtc_ujag058.md)  
+  6/10 [journals]
+- [Competing-triggering effect models for multitype recurrent event data](deep_reads/2026-06-19-10.1093_biomtc_ujag094.md)  
+  5/10 [journals]
+- [Regression methods for cost-effectiveness analysis with different censoring times or terminating events for survival time and costs](deep_reads/2026-06-10-10.1093_biomtc_ujag073.md)  
+  3/10 [journals]
+- [A mixed effect similarity matrix regression model (SMRmix) for integrating multiple microbiome datasets at the community level](deep_reads/2026-06-10-10.1093_biomtc_ujag077.md)  
+  3/10 [journals]
+- [Correcting random effect distributions to account for survivorship bias in individual heterogeneity Cormack–Jolly–Seber models](deep_reads/2026-06-10-10.1093_biomtc_ujag086.md)  
+  2/10 [journals]
+- [Mixed membership latent variable model with unknown factors, factor loadings and number of extreme profiles](deep_reads/2026-06-10-10.1093_biomtc_ujag089.md)  
+  2/10 [journals]
+
+#### Biometrics Vol 82 Issue 1
+
+- [Improving transportability of regression calibration under the main/external validation study design](deep_reads/2026-06-19-10.1093_biomtc_ujag019.md)  
+  6/10 [journals]
+- [Multiple-index interaction models to accommodate exposure grouping in environmental mixtures](deep_reads/2026-06-10-10.1093_biomtc_ujaf175.md)  
+  6/10 [journals]
+- [Bayesian randomized basket trial design: a case study from the ultra-rare invasive mold infections](deep_reads/2026-06-19-10.1093_biomtc_ujag001.md)  
+  5/10 [journals]
+- [OPERA: a new algorithm for patient stratification based on partially ordered risk factors](deep_reads/2026-06-19-10.1093_biomtc_ujag036.md)  
+  4/10 [journals]
+
+#### Biometrics Vol 81 Issue 4
+
+- [Super learner for survival prediction in case-cohort and generalized case-cohort studies](deep_reads/2026-06-19-10.1093_biomtc_ujaf155.md)  
+  7/10 [journals]
+- [A semiparametric method for addressing underdiagnosis using electronic health record data](deep_reads/2026-06-19-10.1093_biomtc_ujaf157.md)  
+  7/10 [journals]
+- [Censoring-robust estimation in fixed sample time-to-event clinical trials with adaptive randomization](deep_reads/2026-06-19-10.1093_biomtc_ujaf161.md)  
+  5/10 [journals]
+- [Bayesian scalar-on-image regression with spatial interactions for modeling Alzheimer’s disease](deep_reads/2026-06-19-10.1093_biomtc_ujaf144.md)  
+  5/10 [journals]
+- [Prediction of transition probabilities in multi-state models with nested case-control data](deep_reads/2026-06-19-10.1093_biomtc_ujaf164.md)  
+  5/10 [journals]
+- [A regularized continuous-time hidden Markov model for identifying latent state transition patterns of poly-tobacco use](deep_reads/2026-06-19-10.1093_biomtc_ujaf138.md)  
+  4/10 [journals]
+- [Analysis of cross-platform health communication with a network approach](deep_reads/2026-06-19-10.1093_biomtc_ujaf154.md)  
+  2/10 [journals]
+
+#### Biometrics Vol 81 Issue 3
+
+- [Semiparametric joint modeling to estimate the treatment effect on a longitudinal surrogate with application to chronic kidney disease trials](deep_reads/2026-06-19-10.1093_biomtc_ujaf104.md)  
+  7/10 [journals]
+- [Evaluating longitudinal treatment effects for Duchenne muscular dystrophy using dynamically enriched Bayesian small sample, sequential, multiple assignment randomized trial (snSMART)](deep_reads/2026-06-19-10.1093_biomtc_ujaf103.md)  
+  7/10 [journals]
+- [Simple simulation based reconstruction of incidence rates from death data](deep_reads/2026-06-19-10.1093_biomtc_ujaf088.md)  
+  6/10 [journals]
+- [Cumulative incidence function estimation using population-based biobank data](deep_reads/2026-06-19-10.1093_biomtc_ujaf049.md)  
+  6/10 [journals]
+- [Joint disease mapping for bivariate count data with residual correlation due to unknown number of common cases](deep_reads/2026-06-19-10.1093_biomtc_ujaf119.md)  
+  2/10 [journals]
+- [Bayesian inference for copy number intra-tumoral heterogeneity from single-cell RNA-sequencing data](deep_reads/2026-06-19-10.1093_biomtc_ujaf115.md)  
+  2/10 [journals]
+- [Negative binomial mixed effects location-scale models for intensive longitudinal count-type physical activity data provided by wearable devices](deep_reads/2026-06-19-10.1093_biomtc_ujaf099.md)  
+  2/10 [journals]
+
+#### Biometrics Vol 81 Issue 2
+
+- [A semicompeting risks model with an application to UK Biobank data to identify risk factors for diabetes onset and progression](deep_reads/2026-06-19-10.1093_biomtc_ujaf003.md)  
+  4/10 [journals]
+
+#### Biometrics Vol 81 Issue 1
+
+- [Change surface regression for nonlinear subgroup identification with application to warfarin pharmacogenomics data](deep_reads/2026-06-19-10.1093_biomtc_ujae169.md)  
+  5/10 [journals]
+- [A model-free framework for evaluating the reliability of a new device with multiple imperfect reference standards](deep_reads/2026-06-19-10.1093_biomtc_ujaf025.md)  
+  4/10 [journals]
+- [Distributed lag models for retrospective cohort data with application to a study of built environment and body weight](deep_reads/2026-06-19-10.1093_biomtc_ujae166.md)  
+  4/10 [journals]
+- [Jointly modeling means and variances for nonlinear mixed effects models with measurement errors and outliers](deep_reads/2026-06-19-10.1093_biomtc_ujaf018.md)  
+  4/10 [journals]
+
 #### Annals of Applied Statistics Vol 19 Issue 4
 
 - [Inferring epidemics from multiple dependent data via pseudo-marginal methods](deep_reads/2026-06-19-10.1214_25-aoas2015.md)  
@@ -3478,28 +3815,6 @@
 - [Meta-analysis models with group structure for pleiotropy detection at gene and variant level using summary statistics from multiple datasets](deep_reads/2026-06-10-10.1093_biostatistics_kxaf037.md)  
   4/10 [journals]
 
-#### Biometrics Vol 82 Issue 2
-
-- [Multivariate causal effects: a Bayesian causal regression factor model](deep_reads/2026-06-10-10.1093_biomtc_ujag101.md)  
-  7/10 [journals]
-- [Two-phase designs for biomarker studies when disease processes are under intermittent observation](deep_reads/2026-06-10-10.1093_biomtc_ujag088.md)  
-  6/10 [journals]
-- [Two-phase designs for cost-effective evaluation of cancer screening tests](deep_reads/2026-06-10-10.1093_biomtc_ujag058.md)  
-  6/10 [journals]
-- [Regression methods for cost-effectiveness analysis with different censoring times or terminating events for survival time and costs](deep_reads/2026-06-10-10.1093_biomtc_ujag073.md)  
-  3/10 [journals]
-- [A mixed effect similarity matrix regression model (SMRmix) for integrating multiple microbiome datasets at the community level](deep_reads/2026-06-10-10.1093_biomtc_ujag077.md)  
-  3/10 [journals]
-- [Correcting random effect distributions to account for survivorship bias in individual heterogeneity Cormack–Jolly–Seber models](deep_reads/2026-06-10-10.1093_biomtc_ujag086.md)  
-  2/10 [journals]
-- [Mixed membership latent variable model with unknown factors, factor loadings and number of extreme profiles](deep_reads/2026-06-10-10.1093_biomtc_ujag089.md)  
-  2/10 [journals]
-
-#### Biometrics Vol 82 Issue 1
-
-- [Multiple-index interaction models to accommodate exposure grouping in environmental mixtures](deep_reads/2026-06-10-10.1093_biomtc_ujaf175.md)  
-  6/10 [journals]
-
 #### Annals of Applied Statistics Vol 20 Issue 1
 
 - [Random forests and mixed effects random forests for small area estimation of general parameters: A poverty mapping case study in Mozambique](deep_reads/2026-06-10-10.1214_25-aoas2126.md)  
@@ -3598,6 +3913,23 @@
 
 - [What Would You Do?](deep_reads/2026-06-19-10.1097_ede.0000000000001948.md)  
   0/10 [journals]
+
+#### Biometrics Vol 82 Issue 1
+
+- [Quantifying uncertainty in RNA velocity](deep_reads/2026-06-19-10.1093_biomtc_ujag018.md)  
+  3/10 [journals]
+
+#### Biometrics Vol 81 Issue 3
+
+- [Precision generalized phase I-II designs](deep_reads/2026-06-19-10.1093_biomtc_ujaf043.md)  
+  3/10 [journals]
+- [Spatially aware adjusted Rand index for evaluating spatial transcriptomics clustering](deep_reads/2026-06-19-10.1093_biomtc_ujaf127.md)  
+  2/10 [journals]
+
+#### Biometrics Vol 81 Issue 2
+
+- [Continuous-space occupancy models](deep_reads/2026-06-19-10.1093_biomtc_ujaf055.md)  
+  2/10 [journals]
 
 #### Astrophysical Journal Supplement Series Vol 284 Issue 2
 
