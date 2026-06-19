@@ -330,6 +330,60 @@
 - [Estimation of treatment effect among treatment responders with a time‐to‐event endpoint](deep_reads/2026-06-19-10.1111_sjos.12706.md)  
   9/10 [journals]
 
+#### Epidemiology Vol 37 Issue 4
+
+- [Empirically Assessing the Plausibility of Unconfoundedness in Observational Studies](deep_reads/2026-06-19-10.1097_ede.0000000000001985.md)  
+  8/10 [journals]
+- [Defining and Estimating Outcomes Directly Averted by a Vaccination Program when Rollout Occurs Over Time](deep_reads/2026-06-19-10.1097_ede.0000000000001953.md)  
+  8/10 [journals]
+- [Re: Generalizing and Transporting Causal Inferences from Randomized Trials in the Presence of Trial Engagement Effects](deep_reads/2026-06-19-10.1097_ede.0000000000001969.md)  
+  7/10 [journals]
+
+#### Epidemiology Vol 37 Issue 3
+
+- [Where Do Target Trials Come From? Specifying the Protocol of a Target Trial When Repurposing Data for Causal Inference](deep_reads/2026-06-19-10.1097_ede.0000000000001951.md)  
+  8/10 [journals]
+
+#### Epidemiology Vol 37 Issue 2
+
+- [The Ideal Trial: Defining Causal Estimands that Balance Relevance and Feasibility in Target Trial Emulations and Actual Randomized Trials](deep_reads/2026-06-19-10.1097_ede.0000000000001933.md)  
+  9/10 [journals]
+- [Considerations for Estimating Causal Effects of Informatively Timed Treatments](deep_reads/2026-06-19-10.1097_ede.0000000000001943.md)  
+  8/10 [journals]
+
+#### Epidemiology Vol 37 Issue 1
+
+- [Causal Mediation Analysis with Mediator-outcome Confounders Affected by Exposure: On Definition and Identification of Generalized Natural Indirect Effect](deep_reads/2026-06-19-10.1097_ede.0000000000001922.md)  
+  9/10 [journals]
+- [Doubly Robust Control Outcome Calibration Approach Estimation of Conditional Effects with Uncontrolled Confounding](deep_reads/2026-06-19-10.1097_ede.0000000000001907.md)  
+  9/10 [journals]
+- [Causal Identification Conditions for the Effect of Treatment in the Treated: Illustration Using the Northwest Germany Stroke Registry](deep_reads/2026-06-19-10.1097_ede.0000000000001924.md)  
+  8/10 [journals]
+- [Bounds and E-values for Marginal Causal Effects](deep_reads/2026-06-19-10.1097_ede.0000000000001919.md)  
+  8/10 [journals]
+- [Transporting Results from a Trial to an External Target Population When Trial Participation Impacts Adherence](deep_reads/2026-06-19-10.1097_ede.0000000000001925.md)  
+  8/10 [journals]
+- [Identification and Estimation of Vaccine Effectiveness in the Test-Negative Design Under Equi-confounding](deep_reads/2026-06-19-10.1097_ede.0000000000001926.md)  
+  8/10 [journals]
+- [Spatial Difference-in-Differences with Bayesian Disease Mapping Models](deep_reads/2026-06-19-10.1097_ede.0000000000001912.md)  
+  7/10 [journals]
+
+#### Epidemiology Vol 36 Issue 6
+
+- [Is Checking for Sequential Positivity Violations Getting You Down? Try sPoRT!](deep_reads/2026-06-19-10.1097_ede.0000000000001902.md)  
+  8/10 [journals]
+- [Reducing Prescription Opioid Dose and Duration to Reduce Risk of Opioid Use Disorder Among Patients With Musculoskeletal Pain](deep_reads/2026-06-19-10.1097_ede.0000000000001899.md)  
+  6/10 [journals]
+
+#### Epidemiology Vol 36 Issue 5
+
+- [Regression-based Proximal Causal Inference for Right-censored Time-to-event Data](deep_reads/2026-06-19-10.1097_ede.0000000000001884.md)  
+  9/10 [journals]
+- [Definition and Interpretation of Separable Path-specific Effects With Multiple Ordered Mediators](deep_reads/2026-06-19-10.1097_ede.0000000000001887.md)  
+  9/10 [journals]
+- [L or M 1—Critical Challenges in Mediation Analysis](deep_reads/2026-06-19-10.1097_ede.0000000000001888.md)  
+  8/10 [journals]
+
 #### American Journal of Epidemiology Vol 195 Issue 6
 
 - [Resurrecting complete-case analysis: a defense](deep_reads/2026-06-19-10.1093_aje_kwaf284.md)  
@@ -2272,6 +2326,11 @@
 - [On maximizing the likelihood function of general geostatistical models](deep_reads/2026-06-19-10.1111_sjos.12722.md)  
   6/10 [journals]
 
+#### Epidemiology Vol 37 Issue 3
+
+- [An Improved Pooled Logistic Regression Implementation](deep_reads/2026-06-19-10.1097_ede.0000000000001945.md)  
+  7/10 [journals]
+
 #### Electronic Journal of Statistics Vol 20 Issue 1
 
 - [Analysis of Multiple-try Metropolis via Poincaré inequalities](deep_reads/2026-06-18-10.1214_26-ejs2502.md)  
@@ -2833,6 +2892,159 @@
 - [Confidence bands for survival curves from outcome‐dependent stratified samples](deep_reads/2026-06-19-10.1111_sjos.12700.md)  
   6/10 [journals]
 
+#### Epidemiology Vol 37 Issue 4
+
+- [Improving Assessment of Vaccine Effectiveness by Coupling Test-negative Design Studies with Survival Models](deep_reads/2026-06-19-10.1097_ede.0000000000001972.md)  
+  8/10 [journals]
+- [Improving Inference in Air Pollution Epidemiology: The Case for Rethinking Multipollutant Adjustment](deep_reads/2026-06-19-10.1097_ede.0000000000001967.md)  
+  8/10 [journals]
+- [The Illusion of the “Self-correcting” Nature of Science](deep_reads/2026-06-19-10.1097_ede.0000000000001987.md)  
+  7/10 [journals]
+- [Latent Variation in Pathogen Strain-specific Effects Under Multiple-Versions-of-Treatment Theory](deep_reads/2026-06-19-10.1097_ede.0000000000001975.md)  
+  7/10 [journals]
+- [Informed Presence in Electronic Health Record Data: Illustrating Bias and Bias Reduction Approaches in Longitudinal Analyses](deep_reads/2026-06-19-10.1097_ede.0000000000001974.md)  
+  7/10 [journals]
+- [Illustrating Poststratification Methods in Medical Claims Data: A Korean Example](deep_reads/2026-06-19-10.1097_ede.0000000000001980.md)  
+  7/10 [journals]
+- [Electrical Power Outages and Asthma-related Emergency Department Visits in New York City, 2018–2022](deep_reads/2026-06-19-10.1097_ede.0000000000001991.md)  
+  6/10 [journals]
+- [Association of Maternal Gestational Diabetes Mellitus with Infant Visual Acuity Development](deep_reads/2026-06-19-10.1097_ede.0000000000001984.md)  
+  6/10 [journals]
+- [Long-term Cardiovascular Outcomes Following Bariatric Surgery: Reconciling Seemingly Conflicting Evidence](deep_reads/2026-06-19-10.1097_ede.0000000000001952.md)  
+  6/10 [journals]
+- [An Expedited Chart Review Process for Large Database Studies Using Natural Language Processing and Multiwave Adaptive Sampling](deep_reads/2026-06-19-10.1097_ede.0000000000001978.md)  
+  5/10 [journals]
+- [Income Volatility During Early to Mid-adulthood and 10-year Memory Decline in a Longitudinal Synthetic Cohort](deep_reads/2026-06-19-10.1097_ede.0000000000001979.md)  
+  5/10 [journals]
+- [Validity of Military Service as Reported on U.S. Death Certificates](deep_reads/2026-06-19-10.1097_ede.0000000000001983.md)  
+  4/10 [journals]
+- [Temporal Variation in the Association Between Short-term Exposure to Fine Particulate Matter and Mortality Across Subpopulations in North Carolina and Michigan, U.S.](deep_reads/2026-06-19-10.1097_ede.0000000000001977.md)  
+  4/10 [journals]
+- [Spatial Heterogeneity in Synergistic Effects of Extreme Heat and NO2 Exposures on Cardiorespiratory Hospitalizations in California](deep_reads/2026-06-19-10.1097_ede.0000000000001970.md)  
+  4/10 [journals]
+- [Validation of Body Mass Index-For-Age Percentile Curves in Older Adults Using Data From the Canadian Longitudinal Study on Aging](deep_reads/2026-06-19-10.1097_ede.0000000000001973.md)  
+  3/10 [journals]
+
+#### Epidemiology Vol 37 Issue 3
+
+- [Mind the Gap: Addressing Missing Person Time When Estimating Outcome Incidence in Longitudinal Data](deep_reads/2026-06-19-10.1097_ede.0000000000001958.md)  
+  8/10 [journals]
+- [Sibling Comparison Designs to Assess Social Exposures and Empirical Tools to Guide Interpretation: An Illustrative Study of Childhood Income and Subsequent Mental Disorders](deep_reads/2026-06-19-10.1097_ede.0000000000001937.md)  
+  8/10 [journals]
+- [Antibiotics and Preterm Delivery: The Prevalent New-user Cohort Design to Resolve Immortal Time Bias](deep_reads/2026-06-19-10.1097_ede.0000000000001947.md)  
+  8/10 [journals]
+- [Applying the Target Study Conceptual Model to Measure Racial and Ethnic Disparities in Hypertension Treatment Intensification](deep_reads/2026-06-19-10.1097_ede.0000000000001964.md)  
+  7/10 [journals]
+- [Differential Reporting of Severe Maternal Morbidity on US Birth Certificate and Claims Data by Race and Ethnicity](deep_reads/2026-06-19-10.1097_ede.0000000000001954.md)  
+  7/10 [journals]
+- [State Minimum Wages and Food Insecurity Among Households Receiving Government Food Assistance](deep_reads/2026-06-19-10.1097_ede.0000000000001955.md)  
+  6/10 [journals]
+- [Discretizing Continuous Event Time Data](deep_reads/2026-06-19-10.1097_ede.0000000000001946.md)  
+  6/10 [journals]
+- [Understanding Algorithmic Fairness for Clinical Prediction in Terms of Subgroup Net Benefit and Health Equity](deep_reads/2026-06-19-10.1097_ede.0000000000001949.md)  
+  6/10 [journals]
+- [Considerations for the Analysis of Urinary Environmental Chemical Concentrations During Pregnancy](deep_reads/2026-06-19-10.1097_ede.0000000000001960.md)  
+  6/10 [journals]
+- [Development and Validation of Gestational Age Estimation Algorithms for Nonlive Births in Administrative Healthcare Databases](deep_reads/2026-06-19-10.1097_ede.0000000000001956.md)  
+  6/10 [journals]
+- [A Framework for Thinking About the Potential Public Health Impact of Epidemiologic Research](deep_reads/2026-06-19-10.1097_ede.0000000000001939.md)  
+  4/10 [journals]
+- [Novel Psychometric Indicator Assessments: The Relative Excess Correlation and Associated Matrices](deep_reads/2026-06-19-10.1097_ede.0000000000001963.md)  
+  4/10 [journals]
+- [Re: Confounders, Mediators, or Colliders: What Types of Shared Covariates Does a Sibling Comparison Design Control For?](deep_reads/2026-06-19-10.1097_ede.0000000000001959.md)  
+  4/10 [journals]
+
+#### Epidemiology Vol 37 Issue 2
+
+- [Test-negative Designs with Various Reasons for Testing: Statistical Bias and Solution](deep_reads/2026-06-19-10.1097_ede.0000000000001940.md)  
+  9/10 [journals]
+- [Comparing Area-level Patient Density and Physician Prescribing Preference Instruments for the Effect of Antidiabetics on Adverse Cardiovascular Events Among Medicare Beneficiaries](deep_reads/2026-06-19-10.1097_ede.0000000000001938.md)  
+  8/10 [journals]
+- [Generalizability Analyses with a Partially Nested Trial Design: The Necrotizing Enterocolitis Surgery Trial](deep_reads/2026-06-19-10.1097_ede.0000000000001875.md)  
+  8/10 [journals]
+- [Effect of School Reopenings on Children’s Mental Health During COVID-19: Quasi-experimental Evidence from California](deep_reads/2026-06-19-10.1097_ede.0000000000001930.md)  
+  7/10 [journals]
+- [Adapting Back-calculation Methods to Estimate the Incidence of Tuberculosis](deep_reads/2026-06-19-10.1097_ede.0000000000001936.md)  
+  6/10 [journals]
+- [Longer-term Survival of UK People with Bleeding Disorders Infected by Human Immunodeficiency Virus and/or Hepatitis C Virus Through Contaminated Blood Transfusions](deep_reads/2026-06-19-10.1097_ede.0000000000001935.md)  
+  5/10 [journals]
+- [Neighborhood-level Measures of Structural Racism and Severe Maternal Morbidity Among Black Mothers in California](deep_reads/2026-06-19-10.1097_ede.0000000000001941.md)  
+  4/10 [journals]
+- [Historical Neighborhood Redlining and Fertility in a Cohort of US Black Women](deep_reads/2026-06-19-10.1097_ede.0000000000001942.md)  
+  4/10 [journals]
+- [Comparison of Lactation Information from Electronic Health Records with Survey Data Across Five US Health Systems](deep_reads/2026-06-19-10.1097_ede.0000000000001931.md)  
+  3/10 [journals]
+
+#### Epidemiology Vol 37 Issue 1S
+
+- [Confounding and scale-dependency of interactions: Threats to validity when quantifying the contribution of air conditioning to heat adaptation](deep_reads/2026-06-19-10.1097_01.ede.0001193384.94971.ba.md)  
+  7/10 [journals]
+- [How Small Outcome Misclassification and Large Sample Sizes Can Distort Rare-Event Analyses in Differentiated Thyroid Cancer](deep_reads/2026-06-19-10.1097_01.ede.0001193348.87092.20.md)  
+  6/10 [journals]
+- [Metabolic syndrome and memory decline: evidence from a longitudinal aging cohort in rural South Africa](deep_reads/2026-06-19-10.1097_01.ede.0001193332.82657.09.md)  
+  3/10 [journals]
+
+#### Epidemiology Vol 37 Issue 1
+
+- [Constructing G-computation Estimators: Two Case Studies in Selection Bias](deep_reads/2026-06-19-10.1097_ede.0000000000001916.md)  
+  8/10 [journals]
+- [How Should We Study the Indirect Effects of Antimicrobial Treatment Strategies?: A Causal Perspective](deep_reads/2026-06-19-10.1097_ede.0000000000001921.md)  
+  8/10 [journals]
+- [Using Measurement Error Parameters From Validation Data](deep_reads/2026-06-19-10.1097_ede.0000000000001917.md)  
+  7/10 [journals]
+- [Obesity from Childhood to Mid-adulthood in the United States: A Synthetic Cohort Approach to Measuring Health Trajectories](deep_reads/2026-06-19-10.1097_ede.0000000000001927.md)  
+  5/10 [journals]
+- [OpenSAFELY: Effectiveness of COVID-19 Vaccination in Children and Adolescents](deep_reads/2026-06-19-10.1097_ede.0000000000001908.md)  
+  5/10 [journals]
+- [Pregnancy Length Measurement Error: A Comparison of Last Menstrual Period and Ultrasonography with Ovulation-based Estimation](deep_reads/2026-06-19-10.1097_ede.0000000000001918.md)  
+  5/10 [journals]
+- [Use of Routinely Collected Data to Classify Planned Mode of Delivery Among Pregnancies With a Previous Cesarean Delivery: A Validation Study](deep_reads/2026-06-19-10.1097_ede.0000000000001915.md)  
+  4/10 [journals]
+- [Comparative Risks of Opioid Overdose in Patients on Oxycodone Initiating Selective Serotonin Reuptake Inhibitors](deep_reads/2026-06-19-10.1097_ede.0000000000001914.md)  
+  4/10 [journals]
+- [Sensitivity of Cancer Registry Linkage with Missing or Incomplete Social Security Number and Implications for Cancer Cohorts](deep_reads/2026-06-19-10.1097_ede.0000000000001913.md)  
+  4/10 [journals]
+
+#### Epidemiology Vol 36 Issue 6
+
+- [Causal Approaches to Disease Progression Analyses](deep_reads/2026-06-19-10.1097_ede.0000000000001893.md)  
+  9/10 [journals]
+- [Illustrating an Adaptive Prespecification Framework for Observational Research: Target Trial Emulations Comparing Immunomodulator Treatments for COVID-19](deep_reads/2026-06-19-10.1097_ede.0000000000001901.md)  
+  8/10 [journals]
+- [Algorithm Selection for Estimating Causal Effects: Nulliparous Pregnancy Outcomes Study: Monitoring Mothers to Be](deep_reads/2026-06-19-10.1097_ede.0000000000001906.md)  
+  8/10 [journals]
+- [Addressing Measurement Error in Intimate Partner Violence Self-report Data Using Multiple Overimputation and Multidimensional Quantitative Bias Analysis](deep_reads/2026-06-19-10.1097_ede.0000000000001896.md)  
+  7/10 [journals]
+- [Time-related Bias When Studying Perinatal Complications After Maternal Injuries: Application to Maternal Injuries and Preterm Birth](deep_reads/2026-06-19-10.1097_ede.0000000000001898.md)  
+  6/10 [journals]
+- [Disaggregating Health Differences and Disparities With Machine Learning and Observed-to-expected Ratios: Application to Major Lower Limb Amputation](deep_reads/2026-06-19-10.1097_ede.0000000000001892.md)  
+  6/10 [journals]
+- [Life Course Financial Hardship and Fecundability in a North American Preconception Cohort Study](deep_reads/2026-06-19-10.1097_ede.0000000000001900.md)  
+  5/10 [journals]
+- [Unexpected Transmission Dynamics in a University Town: Lessons From COVID-19](deep_reads/2026-06-19-10.1097_ede.0000000000001903.md)  
+  4/10 [journals]
+- [Opioid Agonist Therapy Adherence Trajectories Among Commercially and Publicly Insured People Living With Hepatitis C in the United States](deep_reads/2026-06-19-10.1097_ede.0000000000001895.md)  
+  4/10 [journals]
+
+#### Epidemiology Vol 36 Issue 5
+
+- [Vaccine Effects on In-hospital COVID-19 Outcomes](deep_reads/2026-06-19-10.1097_ede.0000000000001877.md)  
+  7/10 [journals]
+- [Estimating the Effects of Lifestyle Interventions on Mortality Among Cancer Survivors: A Methodologic Framework](deep_reads/2026-06-19-10.1097_ede.0000000000001889.md)  
+  7/10 [journals]
+- [Racial and Ethnic Differences in the Relationship of SARS-CoV-2 Infection and the COVID-19 Pandemic Period With Perinatal Health in California](deep_reads/2026-06-19-10.1097_ede.0000000000001878.md)  
+  7/10 [journals]
+- [Computing True Parameter Values in Simulation Studies Using Monte Carlo Integration](deep_reads/2026-06-19-10.1097_ede.0000000000001873.md)  
+  5/10 [journals]
+- [Use of Health Administrative Data to Identify Migraine in Individuals With a Recognized Pregnancy: A Validation Study in Ontario, Canada](deep_reads/2026-06-19-10.1097_ede.0000000000001890.md)  
+  2/10 [journals]
+- [Early Detection of Dengue Outbreaks: Transmission Model Analysis of a Dengue Outbreak in a Remote Setting in Ecuador](deep_reads/2026-06-19-10.1097_ede.0000000000001874.md)  
+  2/10 [journals]
+- [Potential Impact of Maternal Nighttime Light Exposure and Its Interaction With Sociodemographic Characteristics on the Risk of Various Congenital Heart Diseases](deep_reads/2026-06-19-10.1097_ede.0000000000001883.md)  
+  1/10 [journals]
+- [Medium-term Exposure to Wildfire Smoke PM2.5 and Cardiorespiratory Hospitalization Risks](deep_reads/2026-06-19-10.1097_ede.0000000000001881.md)  
+  1/10 [journals]
+
 #### American Journal of Epidemiology Vol 195 Issue 6
 
 - [Evaluating the 2023 Mexican Dietary Guidelines for type 2 diabetes prevention: a target trial emulation in Mexican women](deep_reads/2026-06-19-10.1093_aje_kwag037.md)  
@@ -3046,6 +3258,11 @@
 #### Scandinavian Journal of Statistics Vol 51 Issue 4
 
 - [On some publications of Sir David Cox](deep_reads/2026-06-19-10.1111_sjos.12752.md)  
+  0/10 [journals]
+
+#### Epidemiology Vol 37 Issue 3
+
+- [What Would You Do?](deep_reads/2026-06-19-10.1097_ede.0000000000001948.md)  
   0/10 [journals]
 
 #### Electronic Journal of Statistics Vol 20 Issue 1

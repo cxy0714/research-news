@@ -135,6 +135,15 @@
 - [Vol 195 Issue 5 · 2026-06-19](journals/2026-06-19-aje-v195-i5.md)
 - [Vol 195 Issue 4 · 2026-06-19](journals/2026-06-19-aje-v195-i4.md)
 
+### Epidemiology
+
+- [Vol 37 Issue 4 · 2026-06-19](journals/2026-06-19-epidemiology-v37-i4.md)
+- [Vol 37 Issue 3 · 2026-06-19](journals/2026-06-19-epidemiology-v37-i3.md)
+- [Vol 37 Issue 2 · 2026-06-19](journals/2026-06-19-epidemiology-v37-i2.md)
+- [Vol 37 Issue 1 · 2026-06-19](journals/2026-06-19-epidemiology-v37-i1.md)
+- [Vol 36 Issue 6 · 2026-06-19](journals/2026-06-19-epidemiology-v36-i6.md)
+- [Vol 36 Issue 5 · 2026-06-19](journals/2026-06-19-epidemiology-v36-i5.md)
+
 ### SMMR
 
 - [Vol 35 Issue 5 · 2026-06-19](journals/2026-06-19-smmr-v35-i5.md)
@@ -170,6 +179,10 @@
 - [2026-06-05](journals/2026-06-05-tsp.md)
 
 ## 其他 / Unmatched
+
+### EPIDEMIOLOGY V37 I1S
+
+- [2026-06-19](journals/2026-06-19-epidemiology-v37-i1S.md)
 
 ### STATMED V45 I10 12
 
