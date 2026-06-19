@@ -37,6 +37,7 @@
   let _deepReadsCache = null;
   let _topicLabelsCache = null;
   let _publicCache = null;
+  let _resolvedCache = null;   // manual_resolved.json (lookup → preprint status)
 
   function emptyState() {
     return { version: 1, read: {}, favorites: {}, queue: {} };
@@ -284,6 +285,43 @@
     document.dispatchEvent(new CustomEvent("rn:favchange"));
   }
 
+  // Non-arXiv request: a title / citation / DOI. The next daily run tries to
+  // find an arXiv preprint by title (LLM extracts the title, then an arXiv
+  // search); found → deep-read, not found → kept as a bookmark. Key starts "q:".
+  function lookupKey(text) {
+    const slug = (text || "").toLowerCase()
+      .replace(/[^\w]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60);
+    return "q:" + (slug || String(Date.now()));
+  }
+  function extractDoi(text) {
+    const m = (text || "").match(/10\.\d{4,9}\/[^\s"<>]+/);
+    return m ? m[0].replace(/[.,;)]+$/, "") : "";
+  }
+  function queueLookup(rawText) {
+    const text = (rawText || "").trim();
+    if (text.length < 8) return false;     // too short to be a title
+    const key = lookupKey(text);
+    const doi = extractDoi(text);
+    const url = doi ? "https://doi.org/" + doi : "";
+    if (!state.queue[key]) {
+      state.queue[key] = {
+        kind: "lookup", query: text, doi: doi, url: url,
+        requested: new Date().toISOString(), source_url: location.pathname,
+      };
+    }
+    if (!state.favorites[key]) {
+      state.favorites[key] = {
+        paper_id: key, title: text, url: url || "#", deep_read_url: "",
+        source: "手动录入", source_url: location.pathname,
+        category: UNCATEGORIZED, date: pageDate(), week: isoWeek(new Date()),
+        added: new Date().toISOString(), note: "", manual_lookup: true,
+      };
+    }
+    scheduleSync();
+    document.dispatchEvent(new CustomEvent("rn:favchange"));
+    return true;
+  }
+
   // ── page / paper helpers ────────────────────────────────────────────────────
   // Absolute site root, derived from this script's own URL so it is correct on
   // any page depth and under any GitHub Pages base path.
@@ -406,6 +444,22 @@
       .then((r) => (r.ok ? r.json() : []))
       .then((arr) => { _publicCache = Array.isArray(arr) ? arr : []; return _publicCache; })
       .catch(() => []);
+  }
+
+  // Resolution map for non-arXiv lookups, written by research_news.manual_requests:
+  //   { "q:<slug>": { status: "deep_read"|"no_preprint", arxiv_id, deep_read, title } }
+  function loadResolved() {
+    if (_resolvedCache) return Promise.resolve(_resolvedCache);
+    return fetch(siteRoot() + "data/manual_resolved.json", { cache: "no-cache" })
+      .then((r) => (r.ok ? r.json() : {}))
+      .then((j) => { _resolvedCache = (j && typeof j === "object") ? j : {}; return _resolvedCache; })
+      .catch(() => ({}));
+  }
+
+  function resolvedDeepReadHref(entry) {
+    // entry.deep_read is an index doc_path like "deep_reads/<file>.md".
+    return entry && entry.deep_read
+      ? siteRoot() + entry.deep_read.replace(/\.md$/i, "/") : "";
   }
 
   const UNCATEGORIZED = "未分类";
@@ -699,10 +753,17 @@
   // deep read existed — notably manually-requested papers (queued, then deep-read
   // by the next daily run). Resolves the same Promise shape for both views.
   function enrichDeepReadUrls(favs) {
-    return loadDeepReads().then((byId) => {
+    return Promise.all([loadDeepReads(), loadResolved()]).then(([byId, resolved]) => {
       favs.forEach((f) => {
-        if (!f.deep_read_url && f.paper_id && byId.has(f.paper_id)) {
+        if (f.deep_read_url || !f.paper_id) return;
+        if (byId.has(f.paper_id)) {
           f.deep_read_url = deepReadHref(byId.get(f.paper_id));
+        } else if (resolved[f.paper_id]) {
+          // A non-arXiv bookmark whose preprint was found + deep-read.
+          const r = resolved[f.paper_id];
+          const href = resolvedDeepReadHref(r);
+          if (href) f.deep_read_url = href;
+          if (r.title) f.title = r.title;   // upgrade citation text → real title
         }
       });
       return favs;
@@ -740,7 +801,7 @@
 
     host.innerHTML =
       '<div class="rn-q-form">' +
-      '<textarea id="rn-q-in" rows="2" placeholder="粘贴 arXiv 链接或编号（可多条，按行 / 空格分隔）&#10;例如 https://arxiv.org/abs/2405.08525"></textarea>' +
+      '<textarea id="rn-q-in" rows="2" placeholder="粘贴 arXiv 链接 / 编号，或非 arXiv 论文的标题 / DOI（可多条，每行一篇）&#10;例如 https://arxiv.org/abs/2405.08525&#10;或 On polynomial chaos expansion via gradient-enhanced l1-minimization"></textarea>' +
       '<button id="rn-q-add" type="button">加入收藏并排队精读</button>' +
       '<div class="rn-q-msg" id="rn-q-msg"></div>' +
       '</div>' +
@@ -751,15 +812,27 @@
     const msg = host.querySelector("#rn-q-msg");
 
     function submit() {
-      const found = parseArxivIds(inp.value);
-      if (!found.length) {
-        msg.textContent = "没识别出 arXiv 编号，请检查链接。";
+      const text = inp.value || "";
+      // arXiv ids anywhere in the text → queued as arXiv (full treatment).
+      const arxiv = parseArxivIds(text);
+      arxiv.forEach((f) => queuePaper(f));
+      // Lines with NO arXiv id are non-arXiv lookups (title / citation / DOI).
+      let nLookup = 0;
+      text.split(/\r?\n/).forEach((line) => {
+        line = line.trim();
+        if (!line || parseArxivIds(line).length) return;   // blank or already arXiv
+        if (queueLookup(line)) nLookup++;
+      });
+      if (!arxiv.length && !nLookup) {
+        msg.textContent = "没识别出 arXiv 编号或论文标题，请检查输入。";
         return;
       }
-      found.forEach((f) => queuePaper(f));
       inp.value = "";
-      msg.textContent = "已加入 " + found.length + " 篇（默认收藏）。" +
-        "下次定时任务会自动精读，完成后这里会显示 🔍 精读 链接。";
+      const bits = [];
+      if (arxiv.length) bits.push(arxiv.length + " 篇 arXiv");
+      if (nLookup) bits.push(nLookup + " 篇非 arXiv（待查预印本）");
+      msg.textContent = "已加入 " + bits.join(" + ") + "（默认收藏）。" +
+        "下次定时任务会处理：arXiv 直接精读；非 arXiv 先按标题找预印本，找到就精读。";
       renderRequestBox();
     }
     add.addEventListener("click", submit);
@@ -772,31 +845,51 @@
 
   function renderQueueList(host) {
     if (!host) return;
-    const ids = Object.keys(state.queue);
-    if (!ids.length) {
+    const keys = Object.keys(state.queue);
+    if (!keys.length) {
       host.innerHTML = '<p class="rn-c-empty">还没有手动录入的论文。</p>';
       return;
     }
-    loadDeepReads().then((byId) => {
-      const rows = ids
-        .map((id) => state.queue[id])
-        .sort((a, b) => (b.requested || "").localeCompare(a.requested || ""));
-      const lis = rows.map((q) => {
-        const id = q.paper_id;
-        const dr = byId.get(id);
-        const status = dr
-          ? '<span class="rn-q-done">✅ 已精读</span> · <a href="' +
-            deepReadHref(dr) + '">🔍 精读</a>'
-          : '<span class="rn-q-wait">⏳ 排队中（下次定时任务精读）</span>';
-        const rm = dr ? '' :
-          '<button class="rn-q-rm" data-id="' + escapeHtml(id) + '" title="移除排队" type="button">✕</button>';
-        return '<li><a href="' + escapeHtml(q.url || "#") + '" target="_blank" rel="noopener">' +
-          escapeHtml(id) + '</a> ' + status + ' ' + rm + '</li>';
+    Promise.all([loadDeepReads(), loadResolved()]).then(([byId, resolved]) => {
+      const rows = keys
+        .map((k) => ({ key: k, q: state.queue[k] || {} }))
+        .sort((a, b) => (b.q.requested || "").localeCompare(a.q.requested || ""));
+      const lis = rows.map(({ key, q }) => {
+        const isLookup = q.kind === "lookup";
+        const label = escapeHtml(isLookup ? (q.query || "(无标题)") : (q.paper_id || key));
+        const linkHref = q.url || (isLookup ? "#" : ("https://arxiv.org/abs/" + (q.paper_id || key)));
+        let status, done = false;
+        if (isLookup) {
+          const r = resolved[key];
+          if (r && r.status === "deep_read") {
+            done = true;
+            status = '<span class="rn-q-done">✅ 找到预印本 · 已精读</span> · <a href="' +
+              resolvedDeepReadHref(r) + '">🔍 精读</a>';
+          } else if (r && r.status === "no_preprint") {
+            done = true;   // settled — it stays as a bookmark, no remove button
+            status = '<span class="rn-q-none">📕 未找到 arXiv 预印本（已书签收藏）</span>';
+          } else {
+            status = '<span class="rn-q-wait">⏳ 排队中（下次定时任务找预印本）</span>';
+          }
+        } else {
+          const dr = byId.get(q.paper_id || key);
+          if (dr) {
+            done = true;
+            status = '<span class="rn-q-done">✅ 已精读</span> · <a href="' +
+              deepReadHref(dr) + '">🔍 精读</a>';
+          } else {
+            status = '<span class="rn-q-wait">⏳ 排队中（下次定时任务精读）</span>';
+          }
+        }
+        const rm = done ? '' :
+          '<button class="rn-q-rm" data-key="' + escapeHtml(key) + '" title="移除排队" type="button">✕</button>';
+        return '<li><a href="' + escapeHtml(linkHref) + '" target="_blank" rel="noopener">' +
+          label + '</a> ' + status + ' ' + rm + '</li>';
       });
       host.innerHTML = '<h3>已录入（' + rows.length + '）</h3><ul class="rn-q-ul">' +
         lis.join("") + '</ul>';
       host.querySelectorAll(".rn-q-rm").forEach((b) => {
-        b.addEventListener("click", () => { removeQueued(b.getAttribute("data-id")); renderRequestBox(); });
+        b.addEventListener("click", () => { removeQueued(b.getAttribute("data-key")); renderRequestBox(); });
       });
     });
   }
@@ -1028,8 +1121,10 @@
         font-size: 0.9em; }
       .rn-q-done { color: #2e7d32; font-weight: 600; }
       .rn-q-wait { color: #8a6500; }
+      .rn-q-none { color: #777; }
       [data-md-color-scheme="slate"] .rn-q-done { color: #7fd18a; }
       [data-md-color-scheme="slate"] .rn-q-wait { color: #ffd966; }
+      [data-md-color-scheme="slate"] .rn-q-none { color: #aaa; }
       .rn-q-rm { border: none; background: transparent; cursor: pointer; color: #b00;
         font-size: 0.9em; }
     `;

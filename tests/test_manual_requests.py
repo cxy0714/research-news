@@ -1,15 +1,18 @@
 """Offline tests for the manual deep-read queue (no network / LLM).
 
 Covers: arXiv id normalization + id_list fetch (parsing a canned Atom feed),
-reading the gist queue, and the idempotent injection of the '✍️ 手动录入' section
-into a day's report.
+reading the gist queue (arXiv + non-arXiv lookups), resolving lookups to a
+preprint by title, and the idempotent injection of the '✍️ 手动录入' section.
 """
 from __future__ import annotations
+
+from datetime import date
 
 from research_news import manual_requests as mr
 from research_news.models import Paper
 from research_news.render.markdown import MANUAL_SECTION_HEADING, render_manual_section
 from research_news.scrapers import arxiv as arxiv_scraper
+from research_news.scrapers import crossref
 
 
 # ── arXiv id normalization ────────────────────────────────────────────────────
@@ -90,6 +93,85 @@ def test_queued_ids_normalizes_orders_dedupes():
 def test_queued_ids_empty():
     assert mr.queued_ids({}) == []
     assert mr.queued_ids({"queue": {}}) == []
+
+
+def test_queue_entries_classifies_arxiv_and_lookup():
+    state = {"queue": {
+        "2405.08525": {"paper_id": "2405.08525", "url": "https://arxiv.org/abs/2405.08525"},
+        "q:foo": {"kind": "lookup", "query": "Some non arxiv paper title here",
+                  "doi": "10.1/x", "url": "https://doi.org/10.1/x"},
+        "bad": {},   # no id, no query → dropped
+    }}
+    es = mr.queue_entries(state)
+    assert len(es) == 2
+    arxiv = [e for e in es if e["kind"] == "arxiv"]
+    lookup = [e for e in es if e["kind"] == "lookup"]
+    assert arxiv[0]["arxiv_id"] == "2405.08525"
+    assert lookup[0]["query"] == "Some non arxiv paper title here"
+    assert lookup[0]["doi"] == "10.1/x"
+
+
+# ── lookup resolution (non-arXiv → preprint by title) ─────────────────────────
+
+class _EchoClient:
+    """Stand-in SJTU client: echoes the citation back as the parsed title."""
+    def chat(self, messages, **kw):
+        import json as _j
+        return _j.dumps({"title": messages[-1]["content"], "doi": ""})
+
+
+def test_resolve_lookups_finds_preprint_or_bookmarks(monkeypatch):
+    monkeypatch.setattr(mr.time, "sleep", lambda *a, **k: None)
+
+    def fake_match(title):
+        if "polynomial chaos" in title.lower():
+            return ("https://arxiv.org/abs/1506.00343", "abstract")
+        return None
+    monkeypatch.setattr(crossref, "_arxiv_search_match", fake_match)
+
+    lookups = [
+        {"key": "q:a", "kind": "lookup", "doi": "", "url": "",
+         "query": "Peng Hampton Doostan. On polynomial chaos expansion via gradient l1"},
+        {"key": "q:b", "kind": "lookup", "doi": "", "url": "",
+         "query": "Roderick Anitescu Fischer. Polynomial regression derivative info"},
+    ]
+    resolved = {}
+    to_read = mr._resolve_lookups(lookups, resolved, client=_EchoClient(),
+                                  run_date="2026-06-19", model="m")
+    assert to_read == {"1506.00343"}
+    assert resolved["q:a"]["status"] == "resolved"
+    assert resolved["q:a"]["arxiv_id"] == "1506.00343"
+    assert resolved["q:b"]["status"] == "no_preprint"
+
+    # Re-run: 'resolved' is re-confirmed, recent 'no_preprint' is NOT re-searched.
+    def boom(title):
+        raise AssertionError("re-searched a recently-checked lookup")
+    monkeypatch.setattr(crossref, "_arxiv_search_match", boom)
+    to_read2 = mr._resolve_lookups(lookups, resolved, client=_EchoClient(),
+                                   run_date="2026-06-19", model="m")
+    assert to_read2 == {"1506.00343"}   # q:a re-added from cache; q:b skipped
+
+
+def test_finalize_resolved_marks_deep_read(monkeypatch):
+    monkeypatch.setattr(mr, "load_index", lambda: [
+        {"paper_id": "1506.00343", "date": "2026-06-19",
+         "doc_path": "deep_reads/2026-06-19-1506.00343.md", "title": "Real Title"},
+    ])
+    resolved = {
+        "q:a": {"status": "resolved", "arxiv_id": "1506.00343", "title": "echoed"},
+        "q:b": {"status": "no_preprint", "title": "no preprint paper"},
+    }
+    mr._finalize_resolved(resolved)
+    assert resolved["q:a"]["status"] == "deep_read"
+    assert resolved["q:a"]["deep_read"] == "deep_reads/2026-06-19-1506.00343.md"
+    assert resolved["q:a"]["title"] == "Real Title"
+    assert resolved["q:b"]["status"] == "no_preprint"   # untouched
+
+
+def test_stale():
+    assert mr._stale(None) is True
+    assert mr._stale("2000-01-01") is True
+    assert mr._stale(date.today().isoformat()) is False
 
 
 # ── section rendering + injection ─────────────────────────────────────────────

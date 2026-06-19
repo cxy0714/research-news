@@ -35,6 +35,7 @@ import json
 import logging
 import os
 import re
+import time
 from datetime import date
 from pathlib import Path
 
@@ -57,6 +58,15 @@ log = logging.getLogger("research_news.manual")
 DAILY_MODEL = os.environ.get("DAILY_MODEL", "glm-5.1")
 DEEP_READ_MODEL = os.environ.get("DEEP_READ_MODEL", "deepseek-reasoner")
 
+# Published map (committed, like favorites_public.json) that reports the fate of
+# non-arXiv "lookup" requests back to the read-only browser client: which got a
+# preprint + deep read, which had none (bookmark only). Also dedupes server-side
+# so a title isn't re-searched on arXiv every single day.
+RESOLVED_PATH = Path("docs/data/manual_resolved.json")
+# Re-check a "no preprint found" lookup at most this often (a preprint may appear
+# later). Keeps the daily arXiv title search cheap for permanently-offline papers.
+NO_PREPRINT_RETRY_DAYS = 7
+
 _COUNT_LINE_RE = re.compile(r"^- 高相关论文 .*$", re.M)
 _H1_RE = re.compile(r"^# .*$", re.M)
 _FOOTER_SEP_RE = re.compile(r"\n---\n")
@@ -69,15 +79,22 @@ def _interests_text() -> str:
 
 # ── reading the queue ─────────────────────────────────────────────────────────
 
-def queued_ids(state: dict) -> list[str]:
-    """Normalized arXiv ids requested in the gist ``queue``, input order, deduped.
+def queue_entries(state: dict) -> list[dict]:
+    """Structured view of the gist ``queue``, in input order.
 
-    Each queue entry is ``{paper_id, url, requested, ...}``; we re-normalize from
-    paper_id then url so a pasted PDF/abs link still resolves to a bare id.
+    Each item is either::
+
+        {"key": <gist key>, "kind": "arxiv",  "arxiv_id": "2405.08525"}
+        {"key": <gist key>, "kind": "lookup", "query": "<title/citation>",
+         "doi": "...", "url": "..."}
+
+    An arXiv id is recovered from paper_id / url / key (so a pasted PDF or abs
+    link still resolves). Anything without an arXiv id but with query text is a
+    *lookup* (non-arXiv paper to resolve by title). arXiv ids are deduped.
     """
     queue = (state or {}).get("queue") or {}
-    out: list[str] = []
-    seen: set[str] = set()
+    out: list[dict] = []
+    seen_arxiv: set[str] = set()
     for key, entry in queue.items():
         entry = entry or {}
         aid = (
@@ -85,15 +102,147 @@ def queued_ids(state: dict) -> list[str]:
             or arxiv_scraper.normalize_arxiv_id(entry.get("url") or "")
             or arxiv_scraper.normalize_arxiv_id(key)
         )
-        if aid and aid not in seen:
-            seen.add(aid)
-            out.append(aid)
+        if aid:
+            if aid in seen_arxiv:
+                continue
+            seen_arxiv.add(aid)
+            out.append({"key": key, "kind": "arxiv", "arxiv_id": aid})
+            continue
+        query = (entry.get("query") or entry.get("title") or "").strip()
+        if not query:
+            continue
+        out.append({
+            "key": key, "kind": "lookup", "query": query,
+            "doi": (entry.get("doi") or "").strip(),
+            "url": (entry.get("url") or "").strip(),
+        })
     return out
+
+
+def queued_ids(state: dict) -> list[str]:
+    """Normalized arXiv ids requested in the gist ``queue`` (input order, deduped).
+    Lookup (non-arXiv) entries are not included — see :func:`queue_entries`."""
+    return [e["arxiv_id"] for e in queue_entries(state) if e["kind"] == "arxiv"]
 
 
 def _already_deep_read() -> set[str]:
     """paper_ids that already have a deep-read page (any date / run type)."""
     return {e.get("paper_id") for e in load_index() if e.get("paper_id")}
+
+
+# ── resolving non-arXiv "lookup" requests to an arXiv preprint ─────────────────
+
+def _load_resolved() -> dict:
+    if not RESOLVED_PATH.exists():
+        return {}
+    try:
+        d = json.loads(RESOLVED_PATH.read_text(encoding="utf-8"))
+        return d if isinstance(d, dict) else {}
+    except Exception:  # noqa: BLE001
+        return {}
+
+
+def _save_resolved(m: dict) -> None:
+    RESOLVED_PATH.parent.mkdir(parents=True, exist_ok=True)
+    RESOLVED_PATH.write_text(json.dumps(m, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def _stale(checked: str | None, days: int = NO_PREPRINT_RETRY_DAYS) -> bool:
+    """True if a 'no_preprint' result is old enough to re-check on arXiv."""
+    if not checked:
+        return True
+    try:
+        return (date.today() - date.fromisoformat(checked[:10])).days >= days
+    except Exception:  # noqa: BLE001
+        return True
+
+
+def _extract_title(client, query: str, model: str | None) -> tuple[str, str]:
+    """Use the LLM to pull a clean paper title (+DOI) out of a pasted citation,
+    so the arXiv title search isn't diluted by author names / venue / year.
+    Fails open: returns the raw text as the title if parsing is unavailable."""
+    from .llm.pipeline import _extract_json
+    system = (
+        "You extract bibliographic fields from a single citation string. "
+        'Return ONLY JSON: {"title": "<the paper title, no authors/venue/year>", '
+        '"doi": "<DOI if present, else empty>"}.'
+    )
+    try:
+        raw = client.chat(
+            [{"role": "system", "content": system},
+             {"role": "user", "content": query}],
+            model=model, max_tokens=300,
+        )
+        obj = _extract_json(raw)
+        if isinstance(obj, dict) and (obj.get("title") or "").strip():
+            return obj["title"].strip(), (obj.get("doi") or "").strip()
+    except Exception as e:  # noqa: BLE001 — fall back to the raw text
+        log.warning("citation title parse failed (%s); using raw text", e)
+    return query.strip(), ""
+
+
+def _resolve_lookups(lookups: list[dict], resolved: dict, *, client,
+                     run_date: str, model: str | None) -> set[str]:
+    """Resolve each non-arXiv lookup to an arXiv preprint by title, updating the
+    ``resolved`` map in place. Returns the set of arXiv ids that should be
+    deep-read (newly resolved this run, plus prior 'resolved' not yet read)."""
+    from .scrapers import crossref
+
+    to_read: set[str] = set()
+    for e in lookups:
+        key = e["key"]
+        prev = resolved.get(key) or {}
+        status = prev.get("status")
+        if status == "deep_read":
+            continue                      # already found + read
+        if status == "resolved" and prev.get("arxiv_id"):
+            to_read.add(prev["arxiv_id"])  # found before, (re)confirm the read
+            continue
+        if status == "no_preprint" and not _stale(prev.get("checked")):
+            continue                      # checked recently, don't re-search yet
+
+        title, doi = e["query"], e.get("doi") or ""
+        if client is not None:
+            title, doi2 = _extract_title(client, e["query"], model)
+            doi = doi or doi2
+
+        match = None
+        try:
+            match = crossref._arxiv_search_match(title)
+        except Exception as ex:  # noqa: BLE001 — fail open, treat as no preprint
+            log.warning("arXiv title search failed for %r: %s", title[:60], ex)
+
+        if match:
+            arxiv_id = arxiv_scraper.normalize_arxiv_id(match[0])
+            if arxiv_id:
+                resolved[key] = {"status": "resolved", "arxiv_id": arxiv_id,
+                                 "title": title, "doi": doi, "query": e["query"],
+                                 "checked": run_date}
+                to_read.add(arxiv_id)
+                log.info("manual lookup %r → arXiv:%s", title[:60], arxiv_id)
+                time.sleep(3)            # arXiv API courtesy between searches
+                continue
+        resolved[key] = {"status": "no_preprint", "title": title, "doi": doi,
+                         "query": e["query"], "checked": run_date}
+        log.info("manual lookup %r → no arXiv preprint found", title[:60])
+        time.sleep(3)
+    return to_read
+
+
+def _finalize_resolved(resolved: dict) -> None:
+    """After deep-reading, mark resolved lookups whose arXiv paper now has a
+    deep-read page as ``deep_read`` (+ its doc_path) so the browser can link it."""
+    idx: dict[str, dict] = {}
+    for e in load_index():            # newest first
+        pid = e.get("paper_id")
+        if pid and pid not in idx:
+            idx[pid] = e
+    for info in resolved.values():
+        aid = info.get("arxiv_id")
+        if aid and aid in idx and info.get("status") != "no_preprint":
+            info["status"] = "deep_read"
+            info["deep_read"] = idx[aid].get("doc_path")
+            info["title"] = idx[aid].get("title") or info.get("title")
 
 
 # ── reconstructing papers for the report section ──────────────────────────────
@@ -227,13 +376,10 @@ def update_daily_page(run_date: str, *, daily_dir: Path = DOCS_DIR,
 
 # ── orchestration ─────────────────────────────────────────────────────────────
 
-def _deep_read_new(papers: list[Paper], run_date: str, *, interests_text: str,
-                   model: str, deep_model: str) -> int:
+def _deep_read_new(papers: list[Paper], run_date: str, *, client,
+                   interests_text: str, model: str, deep_model: str) -> int:
     """Score + summary → PDF → deep-read (run_type=manual). Returns count done."""
     from .llm.pipeline import score_papers, summarize_paper
-    from .llm.sjtu_client import SJTUClient
-
-    client = SJTUClient()
 
     # Score so the deep-read page header / index carry a relevance number (the
     # renderer needs a non-None score). The user explicitly asked for these, so
@@ -289,38 +435,68 @@ def run(*, date_str: str | None = None, dry_run: bool = False,
         log.info("no state gist found — skipping manual deep-read queue.")
         return 0
 
-    requested = queued_ids(state)
-    if not requested:
+    entries = queue_entries(state)
+    arxiv_direct = [e["arxiv_id"] for e in entries if e["kind"] == "arxiv"]
+    lookups = [e for e in entries if e["kind"] == "lookup"]
+    if not entries:
         log.info("manual deep-read queue is empty.")
         return 0
+    log.info("manual queue: %d arXiv link(s), %d non-arXiv lookup(s)",
+             len(arxiv_direct), len(lookups))
 
     already = _already_deep_read()
-    new_ids = [aid for aid in requested if aid not in already]
-    log.info("manual queue: %d requested, %d already deep-read, %d new",
-             len(requested), len(requested) - len(new_ids), len(new_ids))
 
+    if dry_run:
+        new_direct = [a for a in arxiv_direct if a not in already]
+        log.info("dry run: %d new arXiv to deep-read (%s); %d lookup(s) to resolve",
+                 len(new_direct), ", ".join(new_direct) or "—", len(lookups))
+        update_daily_page(run_date, dry_run=True)
+        return 0
+
+    from .llm.sjtu_client import SJTUClient
+    client = SJTUClient()
+    model = model or DAILY_MODEL
+    deep_model = deep_model or DEEP_READ_MODEL
+    interests = _interests_text()
+
+    # 1) Resolve non-arXiv lookups to arXiv preprints by title (LLM extracts the
+    #    title, then an arXiv title search). Updates + persists the resolved map.
+    resolved = _load_resolved()
+    resolved_ids = _resolve_lookups(lookups, resolved, client=client,
+                                    run_date=run_date, model=model)
+
+    # 2) Deep-read every new arXiv id (pasted links + resolved preprints), in
+    #    queue order, skipping anything already deep-read.
+    to_read = [a for a in dict.fromkeys(arxiv_direct + sorted(resolved_ids))
+               if a not in already]
     n_done = 0
-    if new_ids:
-        papers = arxiv_scraper.fetch_by_ids(new_ids)
-        missing = set(new_ids) - {p.paper_id for p in papers}
+    if to_read:
+        papers = arxiv_scraper.fetch_by_ids(to_read)
+        missing = set(to_read) - {p.paper_id for p in papers}
         if missing:
             log.warning("arXiv metadata not found for: %s", ", ".join(sorted(missing)))
-        if papers and not dry_run:
+        if papers:
             n_done = _deep_read_new(
-                papers, run_date, interests_text=_interests_text(),
-                model=model or DAILY_MODEL, deep_model=deep_model or DEEP_READ_MODEL,
+                papers, run_date, client=client, interests_text=interests,
+                model=model, deep_model=deep_model,
             )
-        elif papers:
-            log.info("dry run: would deep-read %d paper(s): %s",
-                     len(papers), ", ".join(p.paper_id for p in papers))
 
-    # (Re)render the day's manual section from all of its manual deep reads, then
-    # refresh the homepage / archives so the new pages are linked everywhere.
-    changed = update_daily_page(run_date, dry_run=dry_run)
-    if (n_done or changed) and not dry_run:
+    # 3) Mark resolved lookups whose preprint now has a deep-read page, and
+    #    publish the map so the browser can show status + link the read.
+    _finalize_resolved(resolved)
+    if resolved:
+        _save_resolved(resolved)
+
+    # 4) (Re)render the day's manual section, then refresh homepage / archives.
+    changed = update_daily_page(run_date)
+    if n_done or changed:
         from .render.markdown import update_index
         update_index()
-        log.info("manual deep reads done: %d new; report + index refreshed", n_done)
+    log.info("manual queue done: %d deep read(s); %d lookup(s) resolved, "
+             "%d without preprint",
+             n_done,
+             sum(1 for v in resolved.values() if v.get("status") in ("resolved", "deep_read")),
+             sum(1 for v in resolved.values() if v.get("status") == "no_preprint"))
     return n_done
 
 

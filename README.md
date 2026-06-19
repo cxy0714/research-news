@@ -592,9 +592,17 @@ Token（classic）。Token 只存在你本机浏览器的 localStorage，首次�
 - 精读完成后，收藏页的录入列表与收藏条目会自动显示 **🔍 精读** 链接
   （前端从 `deep_reads_index.json` 回填，无需把链接写回 Gist）。
 
-去重：队列里 `paper_id` 已在精读索引中的直接跳过，所以重复跑既便宜又不会精读两遍。
-**本机需要 `GIST_TOKEN`**（与 publish-favorites 同一个 `gist` PAT，写进 `.env`）；
-没配 token 时这一步会安静跳过，绝不影响日跑提交。`--date` / `--dry-run` 可调。
+**非 arXiv 论文也支持**：直接粘 **标题 / 整条引用 / DOI**（不必是 arXiv）。这类「lookup」
+条目同样默认收藏 + 进队列（gist 里 `kind:"lookup"`）。`manual_requests` 处理时：用 LLM 从
+引用里抽出**干净标题**，再调期刊管道现成的 `crossref._arxiv_search_match` 按标题去 arXiv
+**找预印本**——找到就解析出 arXiv id、照常精读；找不到就**只保留为书签收藏**（题目 + DOI/链接，
+不精读）。结果写进 `docs/data/manual_resolved.json`（像 `favorites_public.json` 一样**提交进仓库**，
+作为只读回传给浏览器的通道，也充当去重记录）；前端据此显示每条状态（排队中 / 已精读 / 未找到预印本），
+并把找到预印本的书签链到精读页。"找不到预印本"的会每 `NO_PREPRINT_RETRY_DAYS`(7) 天复查一次。
+
+去重：arXiv 条目里 `paper_id` 已在精读索引中的直接跳过；lookup 条目按 `manual_resolved.json`
+的状态跳过，所以重复跑既便宜又不会精读两遍。**本机需要 `GIST_TOKEN`**（与 publish-favorites 同一个
+`gist` PAT，写进 `.env`）；没配 token 时这一步会安静跳过，绝不影响日跑提交。`--date` / `--dry-run` 可调。
 
 ### 公开收藏快照（让访客也能看）
 

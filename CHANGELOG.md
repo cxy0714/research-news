@@ -26,6 +26,11 @@
   「`paper_id` 已在精读索引中则跳过」，无需把状态写回 Gist；精读完成后前端从
   `deep_reads_index.json` 回填收藏 / 录入列表的 **🔍 精读** 链接。无 `GIST_TOKEN` 时该步安静跳过，
   绝不影响日跑。新增共享模块 `research_news.gist_state`（`publish_favorites` 同步改用）。
+- **手动录入支持非 arXiv 论文（按标题找预印本）**：录入框现在也接受**标题 / 整条引用 / DOI**，
+  不必是 arXiv。这类 `kind:"lookup"` 请求由 `manual_requests` 处理：LLM 抽出干净标题 → 复用
+  `crossref._arxiv_search_match` 按标题去 arXiv 找预印本——找到就解析 id、照常精读；找不到就只作
+  书签收藏。结果写进**提交进仓库**的 `docs/data/manual_resolved.json`（只读回传给浏览器 + 去重 +
+  每 7 天复查"未找到"项）；前端据此显示状态（排队中 / 已精读 / 未找到预印本）并把找到的书签链到精读页。
 - **期刊往期回补全自动 `journal_backfill` + Windows 连续循环任务**：`python -m research_news.journal_backfill`
   读 `ops/journal-backfill.md` 的待办清单，跑**下一个未打勾**的单元（一本刊的若干期）、成功后
   自动打勾、队列空时退出码非 0，无需 agent。`--max N` / `--dry-run`。`run_journal_backfill.ps1`
