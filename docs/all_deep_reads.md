@@ -2584,6 +2584,64 @@
 
 ### 期刊
 
+#### Astrophysical Journal Supplement Series Vol 285 Issue 1
+
+- [A General Formulation of the Kinematic Dipole as a Functional of Selection and Source Properties: Beyond the Ellis–Baldwin Approximation](deep_reads/2026-06-19-10.3847_1538-4365_ae6a89.md)  
+  8/10 [journals]
+- [The Phenomenological Classification of TESS Eclipsing Binaries](deep_reads/2026-06-19-10.3847_1538-4365_ae6eee.md)  
+  6/10 [journals]
+- [Hierarchical Cosmological Constraints through a Strong-lensing Distance Ratio](deep_reads/2026-06-19-10.3847_1538-4365_ae6782.md)  
+  6/10 [journals]
+- [An Improved HDBSCAN-based Detection and Tracking Method for Solar Active Regions in Magnetograms](deep_reads/2026-06-19-10.3847_1538-4365_ae6fb3.md)  
+  6/10 [journals]
+
+#### Astrophysical Journal Supplement Series Vol 284 Issue 2
+
+- [Uniform Rolling: An LSST Observing Cadence Offering Sufficient Survey Uniformity for Comprehensive Cosmological Analysis](deep_reads/2026-06-19-10.3847_1538-4365_ae6069.md)  
+  8/10 [journals]
+- [Machine Learning–based Separation of the He <scp>I</scp> 10830 Å Chromospheric Signal: Quantitative Analysis of Chromosphere–Corona Intensity in the Quiet Sun](deep_reads/2026-06-19-10.3847_1538-4365_ae6911.md)  
+  7/10 [journals]
+- [A Semisupervised Approach Using the Adaptive Threshold Mechanism and Boundary-aware Learning for Radio-frequency Interference Segmentation](deep_reads/2026-06-19-10.3847_1538-4365_ae5d39.md)  
+  7/10 [journals]
+- [A Framework for Multitype Solar Radio Burst Detection and Automated Parameter Extraction](deep_reads/2026-06-19-10.3847_1538-4365_ae6510.md)  
+  7/10 [journals]
+- [A Transformer-based Fermi/GBM Background Predictor](deep_reads/2026-06-19-10.3847_1538-4365_ae6269.md)  
+  7/10 [journals]
+- [A Catalog of Mid-infrared Variable Sources from unTimely](deep_reads/2026-06-19-10.3847_1538-4365_ae623c.md)  
+  7/10 [journals]
+- [A Value-added Physical Properties Catalog for Low-redshift Galaxies from DESI Legacy Imaging Surveys DR10](deep_reads/2026-06-19-10.3847_1538-4365_ae6242.md)  
+  7/10 [journals]
+- [Robust Cosmic Microwave Background B-mode Inference from Single-frequency Observations Using a Self-attention-based Generative Framework](deep_reads/2026-06-19-10.3847_1538-4365_ae5c01.md)  
+  7/10 [journals]
+- [A General Framework for Radial Velocity Calibration in Low-resolution Spectroscopic Surveys: Correcting Wavelength-dependent and Global Systematics with Application to LAMOST Data Release 9](deep_reads/2026-06-19-10.3847_1538-4365_ae6265.md)  
+  6/10 [journals]
+- [The TESS All-Sky Rotation Survey: Periods for 1,046,317 Stars within 500 pc](deep_reads/2026-06-19-10.3847_1538-4365_ae6657.md)  
+  6/10 [journals]
+- [A Search for High-frequency Oscillations in TESS Cycle 7](deep_reads/2026-06-19-10.3847_1538-4365_ae6b73.md)  
+  6/10 [journals]
+- [Automatic Detection and Tracking of Coronal Mass Ejections Based on a Self-supervised Pretraining Model](deep_reads/2026-06-19-10.3847_1538-4365_ae66e6.md)  
+  6/10 [journals]
+- [Automatic Detection and Segmentation of Coronal Mass Ejections in LASCO C3 Images](deep_reads/2026-06-19-10.3847_1538-4365_ae5e60.md)  
+  6/10 [journals]
+- [FRTSearch: Unified Detection and Parameter Inference of Fast Radio Transients Using Instance Segmentation](deep_reads/2026-06-19-10.3847_1538-4365_ae5e76.md)  
+  6/10 [journals]
+- [Mock Catalogs of Strongly Lensed Gravitational Waves via a Halo Model Approach with Ground-based Detectors](deep_reads/2026-06-19-10.3847_1538-4365_ae6117.md)  
+  6/10 [journals]
+- [Magnetic Activity in X-Ray Stars from eROSITA: Insights from the TESS and LAMOST Surveys](deep_reads/2026-06-19-10.3847_1538-4365_ae5d2d.md)  
+  6/10 [journals]
+- [Characterizing the Origins of the Gamma-Ray Variability of the Jetted Active Galactic Nuclei Observed with Fermi-LAT](deep_reads/2026-06-19-10.3847_1538-4365_ae6075.md)  
+  6/10 [journals]
+- [VarWISE: Infrared Variability via NEOWISE Single-exposure Photometry](deep_reads/2026-06-19-10.3847_1538-4365_ae562f.md)  
+  6/10 [journals]
+- [Photometric Metallicities for 367,324 Stars of <i>ω</i> Centauri](deep_reads/2026-06-19-10.3847_1538-4365_ae5db8.md)  
+  5/10 [journals]
+- [Stellar Characteristics Based on the Michigan Spectral Catalogue Classifications. I. The Main-sequence Stars](deep_reads/2026-06-19-10.3847_1538-4365_ae53dc.md)  
+  3/10 [journals]
+- [State-selective Charge Exchange in the 6.43–42.86 keV u <sup>−1</sup> <sup>14</sup> N <sup>6</sup> Collision with He](deep_reads/2026-06-19-10.3847_1538-4365_ae690d.md)  
+  2/10 [journals]
+- [Implementation of Cosmic Ray Energy Spectrum (CRESP) Algorithm in PIERNIK MHD Code. II. Propagation of Primary and Secondary Nuclei in a Magnetohydrodynamic Environment](deep_reads/2026-06-19-10.3847_1538-4365_ae4879.md)  
+  0/10 [journals]
+
 #### Annals of Applied Statistics Vol 20 Issue 1
 
 - [Neural posterior estimation with autoregressive tiling for detecting objects in astronomical images](deep_reads/2026-06-10-10.1214_25-aoas2125.md)  
@@ -3263,6 +3321,15 @@
 #### Epidemiology Vol 37 Issue 3
 
 - [What Would You Do?](deep_reads/2026-06-19-10.1097_ede.0000000000001948.md)  
+  0/10 [journals]
+
+#### Astrophysical Journal Supplement Series Vol 284 Issue 2
+
+- [A Study of the Physical Properties and Star Formation Activity of a Large Sample of Molecular Clouds. I. Distances](deep_reads/2026-06-19-10.3847_1538-4365_ae6580.md)  
+  6/10 [journals]
+- [Efficient Evaluation of Gravitational Lensing Amplification Factors: A Deep Learning Framework](deep_reads/2026-06-19-10.3847_1538-4365_ae64e4.md)  
+  6/10 [journals]
+- [<tt>thornado+</tt> F <scp>LASH</scp> -X: A Hybrid Discontinuous Galerkin–Implicit-explicit and Finite-volume Framework for Neutrino-radiation Hydrodynamics in Core-collapse Supernovae*](deep_reads/2026-06-19-10.3847_1538-4365_ae57ad.md)  
   0/10 [journals]
 
 #### Electronic Journal of Statistics Vol 20 Issue 1

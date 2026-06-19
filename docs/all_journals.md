@@ -129,6 +129,11 @@
 
 ## 天文统计 (Astrostatistics)
 
+### ApJS
+
+- [Vol 285 Issue 1 · 2026-06-19](journals/2026-06-19-apjs-v285-i1.md)
+- [Vol 284 Issue 2 · 2026-06-19](journals/2026-06-19-apjs-v284-i2.md)
+
 ### MNRAS
 
 - [Vol 549 Issue 4 · 2026-06-19](journals/2026-06-19-mnras-v549-i4.md)

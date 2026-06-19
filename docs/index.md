@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-06-19.md)
 
-### 精读论文（353 篇）
+### 精读论文（382 篇）
 
 - [Regression-based Proximal Causal Inference for Right-censored Time-to-event Data](deep_reads/2026-06-19-10.1097_ede.0000000000001884.md)  
   `因果推断` · 相关性 9/10
@@ -93,6 +93,10 @@
   `因果推断` · 相关性 9/10
 - [Semiparametric Efficient Estimation of Quantile Regression](deep_reads/2026-06-19-10.5705_ss.202024.0378.md)  
   `非参数 / 半参数` · 相关性 9/10
+- [Uniform Rolling: An LSST Observing Cadence Offering Sufficient Survey Uniformity for Comprehensive Cosmological Analysis](deep_reads/2026-06-19-10.3847_1538-4365_ae6069.md)  
+  `天体统计` · 相关性 8/10
+- [A General Formulation of the Kinematic Dipole as a Functional of Selection and Source Properties: Beyond the Ellis–Baldwin Approximation](deep_reads/2026-06-19-10.3847_1538-4365_ae6a89.md)  
+  `天体统计` · 相关性 8/10
 - [L or M 1—Critical Challenges in Mediation Analysis](deep_reads/2026-06-19-10.1097_ede.0000000000001888.md)  
   `因果推断` · 相关性 8/10
 - [Is Checking for Sequential Positivity Violations Getting You Down? Try sPoRT!](deep_reads/2026-06-19-10.1097_ede.0000000000001902.md)  
@@ -245,6 +249,20 @@
   `非参数 / 半参数` · 相关性 8/10
 - [On Efficient Estimation for Value-at-Risk via Location-Scale Time Series Models](deep_reads/2026-06-19-10.5705_ss.202024.0167.md)  
   `非参数 / 半参数` · 相关性 8/10
+- [Machine Learning–based Separation of the He <scp>I</scp> 10830 Å Chromospheric Signal: Quantitative Analysis of Chromosphere–Corona Intensity in the Quiet Sun](deep_reads/2026-06-19-10.3847_1538-4365_ae6911.md)  
+  `天体统计` · 相关性 7/10
+- [A Semisupervised Approach Using the Adaptive Threshold Mechanism and Boundary-aware Learning for Radio-frequency Interference Segmentation](deep_reads/2026-06-19-10.3847_1538-4365_ae5d39.md)  
+  `天体统计` · 相关性 7/10
+- [A Framework for Multitype Solar Radio Burst Detection and Automated Parameter Extraction](deep_reads/2026-06-19-10.3847_1538-4365_ae6510.md)  
+  `天体统计` · 相关性 7/10
+- [A Transformer-based Fermi/GBM Background Predictor](deep_reads/2026-06-19-10.3847_1538-4365_ae6269.md)  
+  `天体统计` · 相关性 7/10
+- [A Catalog of Mid-infrared Variable Sources from unTimely](deep_reads/2026-06-19-10.3847_1538-4365_ae623c.md)  
+  `天体统计` · 相关性 7/10
+- [A Value-added Physical Properties Catalog for Low-redshift Galaxies from DESI Legacy Imaging Surveys DR10](deep_reads/2026-06-19-10.3847_1538-4365_ae6242.md)  
+  `天体统计` · 相关性 7/10
+- [Robust Cosmic Microwave Background B-mode Inference from Single-frequency Observations Using a Self-attention-based Generative Framework](deep_reads/2026-06-19-10.3847_1538-4365_ae5c01.md)  
+  `天体统计` · 相关性 7/10
 - [Vaccine Effects on In-hospital COVID-19 Outcomes](deep_reads/2026-06-19-10.1097_ede.0000000000001877.md)  
   `流行病学` · 相关性 7/10
 - [Estimating the Effects of Lifestyle Interventions on Mortality Among Cancer Survivors: A Methodologic Framework](deep_reads/2026-06-19-10.1097_ede.0000000000001889.md)  
@@ -407,6 +425,36 @@
   `高维统计 / 随机矩阵` · 相关性 7/10
 - [A Data-Adaptive Integrated Approach to Covariance Change Point Detection in High-dimensional Settings](deep_reads/2026-06-19-10.5705_ss.202025.0327.md)  
   `数理统计 / 假设检验` · 相关性 7/10
+- [A General Framework for Radial Velocity Calibration in Low-resolution Spectroscopic Surveys: Correcting Wavelength-dependent and Global Systematics with Application to LAMOST Data Release 9](deep_reads/2026-06-19-10.3847_1538-4365_ae6265.md)  
+  `天体统计` · 相关性 6/10
+- [The TESS All-Sky Rotation Survey: Periods for 1,046,317 Stars within 500 pc](deep_reads/2026-06-19-10.3847_1538-4365_ae6657.md)  
+  `天体统计` · 相关性 6/10
+- [A Study of the Physical Properties and Star Formation Activity of a Large Sample of Molecular Clouds. I. Distances](deep_reads/2026-06-19-10.3847_1538-4365_ae6580.md)  
+  `其他` · 相关性 6/10
+- [A Search for High-frequency Oscillations in TESS Cycle 7](deep_reads/2026-06-19-10.3847_1538-4365_ae6b73.md)  
+  `天体统计` · 相关性 6/10
+- [Automatic Detection and Tracking of Coronal Mass Ejections Based on a Self-supervised Pretraining Model](deep_reads/2026-06-19-10.3847_1538-4365_ae66e6.md)  
+  `天体统计` · 相关性 6/10
+- [Automatic Detection and Segmentation of Coronal Mass Ejections in LASCO C3 Images](deep_reads/2026-06-19-10.3847_1538-4365_ae5e60.md)  
+  `天体统计` · 相关性 6/10
+- [FRTSearch: Unified Detection and Parameter Inference of Fast Radio Transients Using Instance Segmentation](deep_reads/2026-06-19-10.3847_1538-4365_ae5e76.md)  
+  `天体统计` · 相关性 6/10
+- [Mock Catalogs of Strongly Lensed Gravitational Waves via a Halo Model Approach with Ground-based Detectors](deep_reads/2026-06-19-10.3847_1538-4365_ae6117.md)  
+  `天体统计` · 相关性 6/10
+- [Magnetic Activity in X-Ray Stars from eROSITA: Insights from the TESS and LAMOST Surveys](deep_reads/2026-06-19-10.3847_1538-4365_ae5d2d.md)  
+  `天体统计` · 相关性 6/10
+- [Characterizing the Origins of the Gamma-Ray Variability of the Jetted Active Galactic Nuclei Observed with Fermi-LAT](deep_reads/2026-06-19-10.3847_1538-4365_ae6075.md)  
+  `天体统计` · 相关性 6/10
+- [Efficient Evaluation of Gravitational Lensing Amplification Factors: A Deep Learning Framework](deep_reads/2026-06-19-10.3847_1538-4365_ae64e4.md)  
+  `其他` · 相关性 6/10
+- [VarWISE: Infrared Variability via NEOWISE Single-exposure Photometry](deep_reads/2026-06-19-10.3847_1538-4365_ae562f.md)  
+  `天体统计` · 相关性 6/10
+- [The Phenomenological Classification of TESS Eclipsing Binaries](deep_reads/2026-06-19-10.3847_1538-4365_ae6eee.md)  
+  `天体统计` · 相关性 6/10
+- [Hierarchical Cosmological Constraints through a Strong-lensing Distance Ratio](deep_reads/2026-06-19-10.3847_1538-4365_ae6782.md)  
+  `天体统计` · 相关性 6/10
+- [An Improved HDBSCAN-based Detection and Tracking Method for Solar Active Regions in Magnetograms](deep_reads/2026-06-19-10.3847_1538-4365_ae6fb3.md)  
+  `天体统计` · 相关性 6/10
 - [Reducing Prescription Opioid Dose and Duration to Reduce Risk of Opioid Use Disorder Among Patients With Musculoskeletal Pain](deep_reads/2026-06-19-10.1097_ede.0000000000001899.md)  
   `因果推断` · 相关性 6/10
 - [Time-related Bias When Studying Perinatal Complications After Maternal Injuries: Application to Maternal Injuries and Preterm Birth](deep_reads/2026-06-19-10.1097_ede.0000000000001898.md)  
@@ -555,6 +603,8 @@
   `数理统计 / 假设检验` · 相关性 6/10
 - [Robust Jackknife Model Averaging](deep_reads/2026-06-19-10.5705_ss.202025.0057.md)  
   `非参数 / 半参数` · 相关性 6/10
+- [Photometric Metallicities for 367,324 Stars of <i>ω</i> Centauri](deep_reads/2026-06-19-10.3847_1538-4365_ae5db8.md)  
+  `天体统计` · 相关性 5/10
 - [Computing True Parameter Values in Simulation Studies Using Monte Carlo Integration](deep_reads/2026-06-19-10.1097_ede.0000000000001873.md)  
   `流行病学` · 相关性 5/10
 - [Life Course Financial Hardship and Fecundability in a North American Preconception Cohort Study](deep_reads/2026-06-19-10.1097_ede.0000000000001900.md)  
@@ -645,6 +695,8 @@
   `高维统计 / 随机矩阵` · 相关性 4/10
 - [Estimation and Inference for Density-convoluted Support Vector Machine with Streaming Data](deep_reads/2026-06-19-10.5705_ss.202025.0083.md)  
   `效率理论 / Debiased ML` · 相关性 4/10
+- [Stellar Characteristics Based on the Michigan Spectral Catalogue Classifications. I. The Main-sequence Stars](deep_reads/2026-06-19-10.3847_1538-4365_ae53dc.md)  
+  `天体统计` · 相关性 3/10
 - [Comparison of Lactation Information from Electronic Health Records with Survey Data Across Five US Health Systems](deep_reads/2026-06-19-10.1097_ede.0000000000001931.md)  
   `流行病学` · 相关性 3/10
 - [Metabolic syndrome and memory decline: evidence from a longitudinal aging cohort in rural South Africa](deep_reads/2026-06-19-10.1097_01.ede.0001193332.82657.09.md)  
@@ -677,6 +729,8 @@
   `其他` · 相关性 3/10
 - [Efficient Decoding from Heterogeneous 1-Bit Compressive Measurements over Networks](deep_reads/2026-06-19-10.5705_ss.202024.0329.md)  
   `高维统计 / 随机矩阵` · 相关性 3/10
+- [State-selective Charge Exchange in the 6.43–42.86 keV u <sup>−1</sup> <sup>14</sup> N <sup>6</sup> Collision with He](deep_reads/2026-06-19-10.3847_1538-4365_ae690d.md)  
+  `天体统计` · 相关性 2/10
 - [Use of Health Administrative Data to Identify Migraine in Individuals With a Recognized Pregnancy: A Validation Study in Ontario, Canada](deep_reads/2026-06-19-10.1097_ede.0000000000001890.md)  
   `流行病学` · 相关性 2/10
 - [Early Detection of Dengue Outbreaks: Transmission Model Analysis of a Dengue Outbreak in a Remote Setting in Ecuador](deep_reads/2026-06-19-10.1097_ede.0000000000001874.md)  
@@ -719,6 +773,10 @@
   `其他` · 相关性 1/10
 - [Effect Size Rules of Thumb for One‐Dimensional Functional Data With an Application to Gait Analysis](deep_reads/2026-06-19-10.1002_sim.70633.md)  
   `其他` · 相关性 1/10
+- [<tt>thornado+</tt> F <scp>LASH</scp> -X: A Hybrid Discontinuous Galerkin–Implicit-explicit and Finite-volume Framework for Neutrino-radiation Hydrodynamics in Core-collapse Supernovae*](deep_reads/2026-06-19-10.3847_1538-4365_ae57ad.md)  
+  `其他` · 相关性 0/10
+- [Implementation of Cosmic Ray Energy Spectrum (CRESP) Algorithm in PIERNIK MHD Code. II. Propagation of Primary and Secondary Nuclei in a Magnetohydrodynamic Environment](deep_reads/2026-06-19-10.3847_1538-4365_ae4879.md)  
+  `天体统计` · 相关性 0/10
 - [What Would You Do?](deep_reads/2026-06-19-10.1097_ede.0000000000001948.md)  
   `其他` · 相关性 0/10
 - [Authors' Response to Comments by Di Tanna et al.](deep_reads/2026-06-19-10.1002_sim.70594.md)  
