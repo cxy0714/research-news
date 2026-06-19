@@ -127,6 +127,12 @@
 - [Vol 16 Issue 4 · 2026-06-07](journals/2026-06-07-quant-econ-v16-i4.md)
 - [Vol 16 Issue 3 · 2026-06-07](journals/2026-06-07-quant-econ-v16-i3.md)
 
+## 天文统计 (Astrostatistics)
+
+### MNRAS
+
+- [Vol 549 Issue 4 · 2026-06-19](journals/2026-06-19-mnras-v549-i4.md)
+
 ## 流行病学 (Epidemiology)
 
 ### AJE

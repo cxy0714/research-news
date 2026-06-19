@@ -70,7 +70,7 @@
 - [x] (2026-06-19) `--only Epidemiology --n-issues 6`
 
 天文 astro：
-- [ ] `--only MNRAS --n-issues 1`   ⚠⚠ 体量巨大，务必先 dry-run，必要时只 1 期
+- [x] (2026-06-19) `--only MNRAS --n-issues 1`   ⚠⚠ 体量巨大，务必先 dry-run，必要时只 1 期
 - [ ] `--only ApJS --n-issues 2`   ⚠ 大刊，先 dry-run
 
 ### 阶段二 · 加深已有的组（目前只到最近 ~2–4 期）
