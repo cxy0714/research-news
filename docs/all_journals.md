@@ -81,7 +81,13 @@
 ### AoAS
 
 - [Vol 20 Issue 1 · 2026-06-10](journals/2026-06-10-aoas-v20-i1.md)
+- [Vol 19 Issue 4 · 2026-06-19](journals/2026-06-19-aoas-v19-i4.md)
 - [Vol 19 Issue 4 · 2026-06-10](journals/2026-06-10-aoas-v19-i4.md)
+- [Vol 19 Issue 3 · 2026-06-19](journals/2026-06-19-aoas-v19-i3.md)
+- [Vol 19 Issue 2 · 2026-06-19](journals/2026-06-19-aoas-v19-i2.md)
+- [Vol 19 Issue 1 · 2026-06-19](journals/2026-06-19-aoas-v19-i1.md)
+- [Vol 18 Issue 4 · 2026-06-19](journals/2026-06-19-aoas-v18-i4.md)
+- [Vol 18 Issue 3 · 2026-06-19](journals/2026-06-19-aoas-v18-i3.md)
 
 ### Biometrics
 

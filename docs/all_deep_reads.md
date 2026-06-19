@@ -384,6 +384,72 @@
 - [L or M 1—Critical Challenges in Mediation Analysis](deep_reads/2026-06-19-10.1097_ede.0000000000001888.md)  
   8/10 [journals]
 
+#### Annals of Applied Statistics Vol 19 Issue 4
+
+- [Modified treatment policy effect estimation with weighted energy distance](deep_reads/2026-06-19-10.1214_24-aoas1991.md)  
+  8/10 [journals]
+- [Simultaneous adjustment of nonignorable verification bias and imperfect gold standard bias in diagnostic test studies, with an application to Alzheimer’s disease detection](deep_reads/2026-06-10-10.1214_25-aoas2081.md)  
+  7/10 [journals]
+- [Time-varying mediation analysis for incomplete data with application to DNA methylation study for PTSD](deep_reads/2026-06-10-10.1214_25-aoas2076.md)  
+  7/10 [journals]
+
+#### Annals of Applied Statistics Vol 19 Issue 3
+
+- [Averaged Prediction Models (APM): Identifying causal effects in controlled pre-post settings with application to gun policy](deep_reads/2026-06-19-10.1214_25-aoas2011.md)  
+  9/10 [journals]
+- [Modeling time-varying effects of mobile health interventions using longitudinal functional data from HeartSteps micro-randomized trial](deep_reads/2026-06-19-10.1214_25-aoas2043.md)  
+  9/10 [journals]
+- [Treatment effect heterogeneity and importance measures for multivariate continuous treatments](deep_reads/2026-06-19-10.1214_25-aoas2060.md)  
+  7/10 [journals]
+- [Bayesian differential causal directed acyclic graphs for observational zero-inflated counts with an application to two-sample single-cell data](deep_reads/2026-06-19-10.1214_25-aoas2042.md)  
+  7/10 [journals]
+
+#### Annals of Applied Statistics Vol 19 Issue 2
+
+- [Sensitivity analysis and power in the presence of many weak instruments: Application to the effect of incarceration on future earnings](deep_reads/2026-06-19-10.1214_24-aoas1920.md)  
+  9/10 [journals]
+- [Federated learning of robust individualized decision rules with application to heterogeneous multihospital sepsis population](deep_reads/2026-06-19-10.1214_25-aoas2017.md)  
+  8/10 [journals]
+- [Estimating heterogeneous causal effects of high-dimensional treatments: Application to conjoint analysis](deep_reads/2026-06-19-10.1214_24-aoas1994.md)  
+  8/10 [journals]
+- [Effects of adolescent victimization on offending: Flexible methods for missing data and unmeasured confounding](deep_reads/2026-06-19-10.1214_24-aoas2005.md)  
+  8/10 [journals]
+- [Thompson sampling for zero-inflated count outcomes with an application to the Drink Less mobile health study](deep_reads/2026-06-19-10.1214_25-aoas2030.md)  
+  3/10 [journals]
+
+#### Annals of Applied Statistics Vol 19 Issue 1
+
+- [Nonparametric causal decomposition of group disparities](deep_reads/2026-06-19-10.1214_24-aoas1990.md)  
+  9/10 [journals]
+- [Overlap violations in external validity: Application to Ugandan cash transfer programs](deep_reads/2026-06-19-10.1214_24-aoas1963.md)  
+  9/10 [journals]
+- [Risk set matched difference-in-differences for the analysis of effect modification in an observational study on the impact of gun violence on health outcomes](deep_reads/2026-06-19-10.1214_24-aoas1918.md)  
+  8/10 [journals]
+- [Design-based inference for spatial experiments under unknown interference](deep_reads/2026-06-19-10.1214_24-aoas1986.md)  
+  8/10 [journals]
+- [Heterogeneous treatment and spillover effects under clustered network interference](deep_reads/2026-06-19-10.1214_24-aoas1913.md)  
+  8/10 [journals]
+- [Identifying peer influence in therapeutic communities adjusting for latent homophily](deep_reads/2026-06-19-10.1214_24-aoas1971.md)  
+  7/10 [journals]
+- [More power to you: Using machine learning to augment human coding for more efficient inference in text-based randomized trials](deep_reads/2026-06-19-10.1214_24-aoas1967.md)  
+  7/10 [journals]
+
+#### Annals of Applied Statistics Vol 18 Issue 4
+
+- [A new design for observational studies applied to the study of the effects of high school football on cognition late in life](deep_reads/2026-06-19-10.1214_24-aoas1949.md)  
+  9/10 [journals]
+- [A new multiple-mediator model maximally uncovering the mediation pathway: Evaluating the role of neuroimaging measures in age-related cognitive decline](deep_reads/2026-06-19-10.1214_24-aoas1905.md)  
+  8/10 [journals]
+
+#### Annals of Applied Statistics Vol 18 Issue 3
+
+- [Integrating Mendelian randomization with causal mediation analyses for characterizing direct and indirect exposure-to-outcome effects](deep_reads/2026-06-19-10.1214_24-aoas1901.md)  
+  8/10 [journals]
+- [Exposure effects on count outcomes with observational data, with application to incarcerated women](deep_reads/2026-06-19-10.1214_24-aoas1874.md)  
+  8/10 [journals]
+- [Benefits and costs of matching prior to a difference in differences analysis when parallel trends does not hold](deep_reads/2026-06-19-10.1214_24-aoas1872.md)  
+  7/10 [journals]
+
 #### American Journal of Epidemiology Vol 195 Issue 6
 
 - [Resurrecting complete-case analysis: a defense](deep_reads/2026-06-19-10.1093_aje_kwaf284.md)  
@@ -516,13 +582,6 @@
 
 - [Multiply robust estimation for causal survival analysis with treatment noncompliance](deep_reads/2026-06-10-10.1214_25-aoas2117.md)  
   9/10 [journals]
-
-#### Annals of Applied Statistics Vol 19 Issue 4
-
-- [Simultaneous adjustment of nonignorable verification bias and imperfect gold standard bias in diagnostic test studies, with an application to Alzheimer’s disease detection](deep_reads/2026-06-10-10.1214_25-aoas2081.md)  
-  7/10 [journals]
-- [Time-varying mediation analysis for incomplete data with application to DNA methylation study for PTSD](deep_reads/2026-06-10-10.1214_25-aoas2076.md)  
-  7/10 [journals]
 
 #### Quantitative Economics Vol 17 Issue 1
 
@@ -797,6 +856,23 @@
 - [On high‐dimensional variance estimation in survey sampling](deep_reads/2026-06-19-10.1111_sjos.12776.md)  
   8/10 [journals]
 - [Support estimation and sign recovery in high‐dimensional heteroscedastic mean regression](deep_reads/2026-06-19-10.1111_sjos.12772.md)  
+  7/10 [journals]
+
+#### Annals of Applied Statistics Vol 19 Issue 3
+
+- [Pseudo-likelihood ratio screening based on network data with applications](deep_reads/2026-06-19-10.1214_25-aoas2058.md)  
+  6/10 [journals]
+- [Factor-assisted learning of ultrahigh-dimensional covariates with distributed functional and scalar mixtures with applications to the Avon Longitudinal Study of Parents and Children](deep_reads/2026-06-19-10.1214_25-aoas2044.md)  
+  4/10 [journals]
+
+#### Annals of Applied Statistics Vol 19 Issue 2
+
+- [Cooperative differential network learning with hub detection for multicenter neuroimaging data](deep_reads/2026-06-19-10.1214_25-aoas2026.md)  
+  6/10 [journals]
+
+#### Annals of Applied Statistics Vol 18 Issue 3
+
+- [Scalable multiple network inference with the joint graphical horseshoe](deep_reads/2026-06-19-10.1214_23-aoas1863.md)  
   7/10 [journals]
 
 #### Electronic Journal of Statistics Vol 20 Issue 1
@@ -1302,6 +1378,60 @@
 - [A two‐step estimation procedure for semiparametric mixture cure models](deep_reads/2026-06-19-10.1111_sjos.12713.md)  
   6/10 [journals]
 
+#### Annals of Applied Statistics Vol 19 Issue 4
+
+- [Studying the long-term natural history of diseases using a shape-restricted nonparametric temporal realignment method](deep_reads/2026-06-19-10.1214_25-aoas2092.md)  
+  7/10 [journals]
+- [Clipped multiscale spatial processes for multivariate plant cover data](deep_reads/2026-06-19-10.1214_25-aoas2088.md)  
+  2/10 [journals]
+
+#### Annals of Applied Statistics Vol 19 Issue 3
+
+- [Fast variable selection for distributional regression with application to continuous glucose monitoring data](deep_reads/2026-06-19-10.1214_25-aoas2038.md)  
+  6/10 [journals]
+
+#### Annals of Applied Statistics Vol 19 Issue 2
+
+- [Nonparametric additive value functions: Interpretable reinforcement learning with an application to surgical recovery](deep_reads/2026-06-19-10.1214_24-aoas1987.md)  
+  6/10 [journals]
+- [A deep neural network two-part model and feature importance test for semicontinuous data](deep_reads/2026-06-19-10.1214_25-aoas2013.md)  
+  5/10 [journals]
+- [Bayesian nonparametric clustering with feature selection for spatially resolved transcriptomics data](deep_reads/2026-06-19-10.1214_25-aoas2014.md)  
+  3/10 [journals]
+- [A Pólya Tree modelling framework for batch-mark data](deep_reads/2026-06-19-10.1214_25-aoas2019.md)  
+  2/10 [journals]
+
+#### Annals of Applied Statistics Vol 19 Issue 1
+
+- [Accounting for shared covariates in semiparametric Bayesian additive regression trees](deep_reads/2026-06-19-10.1214_24-aoas1960.md)  
+  7/10 [journals]
+- [Variable screening and spatial smoothing in Fréchet regression with application to diffusion tensor imaging](deep_reads/2026-06-19-10.1214_24-aoas1978.md)  
+  6/10 [journals]
+
+#### Annals of Applied Statistics Vol 18 Issue 4
+
+- [A semiparametric method for risk prediction using integrated electronic health record data](deep_reads/2026-06-19-10.1214_24-aoas1938.md)  
+  8/10 [journals]
+- [Statistical curve models for inferring 3D chromatin architecture](deep_reads/2026-06-19-10.1214_24-aoas1917.md)  
+  3/10 [journals]
+- [Modelling correlation matrices in multivariate data, with application to reciprocity and complementarity of child-parent exchanges of support](deep_reads/2026-06-19-10.1214_24-aoas1921.md)  
+  1/10 [journals]
+
+#### Annals of Applied Statistics Vol 18 Issue 3
+
+- [Semiparametric linear regression with an interval-censored covariate in the atherosclerosis risk in communities study](deep_reads/2026-06-19-10.1214_24-aoas1881.md)  
+  7/10 [journals]
+- [Joint modeling of multistate and nonparametric multivariate longitudinal data](deep_reads/2026-06-19-10.1214_24-aoas1889.md)  
+  7/10 [journals]
+- [Semiparametric estimation for dynamic networks with shifted connecting intensities](deep_reads/2026-06-19-10.1214_23-aoas1870.md)  
+  6/10 [journals]
+- [Outcome-guided disease subtyping by generative model and weighted joint likelihood in transcriptomic applications](deep_reads/2026-06-19-10.1214_23-aoas1865.md)  
+  4/10 [journals]
+- [Bayesian joint modeling of high-dimensional discrete multivariate longitudinal data using generalized linear mixed models](deep_reads/2026-06-19-10.1214_24-aoas1883.md)  
+  4/10 [journals]
+- [Probabilistic contrastive dimension reduction for case-control study data](deep_reads/2026-06-19-10.1214_24-aoas1877.md)  
+  4/10 [journals]
+
 #### Electronic Journal of Statistics Vol 20 Issue 1
 
 - [Uniform Bahadur representation of the backfitting estimator for additive quantile models and its applications](deep_reads/2026-06-18-10.1214_25-ejs2481.md)  
@@ -1685,6 +1815,11 @@
 - [Semiparametric efficient estimation in high‐dimensional partial linear regression models](deep_reads/2026-06-19-10.1111_sjos.12716.md)  
   9/10 [journals]
 
+#### Annals of Applied Statistics Vol 19 Issue 2
+
+- [Augmented doubly robust post-imputation inference for proteomic data](deep_reads/2026-06-19-10.1214_25-aoas2012.md)  
+  7/10 [journals]
+
 #### Biostatistics Vol 27 Issue 1
 
 - [Statistical inference for high-dimensional generalized estimating equations](deep_reads/2026-06-10-10.1093_biostatistics_kxag013.md)  
@@ -1989,6 +2124,35 @@
 - [Asymptotic inference of the ARMA model with time‐functional variance noises](deep_reads/2026-06-19-10.1111_sjos.12708.md)  
   2/10 [journals]
 
+#### Annals of Applied Statistics Vol 19 Issue 4
+
+- [Feature screening for clustering analysis of count data with an application to single-cell RNA-sequencing](deep_reads/2026-06-19-10.1214_25-aoas2102.md)  
+  3/10 [journals]
+- [Optimal robust strategies for accelerated life tests and fatigue testing of polymer composite materials](deep_reads/2026-06-10-10.1214_25-aoas2075.md)  
+  3/10 [journals]
+
+#### Annals of Applied Statistics Vol 19 Issue 3
+
+- [Inference with combined data from subgroup selection and validation phases in clinical trials](deep_reads/2026-06-19-10.1214_25-aoas2034.md)  
+  5/10 [journals]
+
+#### Annals of Applied Statistics Vol 19 Issue 2
+
+- [Learn then test: Calibrating predictive algorithms to achieve risk control](deep_reads/2026-06-19-10.1214_24-aoas1998.md)  
+  7/10 [journals]
+
+#### Annals of Applied Statistics Vol 19 Issue 1
+
+- [A novel framework to quantify uncertainty in peptide-tandem mass spectrum matches with application to nanobody peptide identification](deep_reads/2026-06-19-10.1214_24-aoas1975.md)  
+  1/10 [journals]
+
+#### Annals of Applied Statistics Vol 18 Issue 3
+
+- [A bootstrap model comparison test for identifying genes with context-specific patterns of genetic regulation](deep_reads/2026-06-19-10.1214_23-aoas1859.md)  
+  3/10 [journals]
+- [A forensic statistical analysis of fraud in the federal food stamp program](deep_reads/2026-06-19-10.1214_24-aoas1891.md)  
+  2/10 [journals]
+
 #### Electronic Journal of Statistics Vol 20 Issue 1
 
 - [The existence of unbiased hypothesis tests: An algebraic approach](deep_reads/2026-06-18-10.1214_26-ejs2511.md)  
@@ -2147,11 +2311,6 @@
 
 - [Ranking and selection in large-scale inference of heteroscedastic units](deep_reads/2026-06-10-10.1214_25-aoas2123.md)  
   7/10 [journals]
-
-#### Annals of Applied Statistics Vol 19 Issue 4
-
-- [Optimal robust strategies for accelerated life tests and fatigue testing of polymer composite materials](deep_reads/2026-06-10-10.1214_25-aoas2075.md)  
-  3/10 [journals]
 
 #### Quantitative Economics Vol 16 Issue 4
 
@@ -2330,6 +2489,32 @@
 
 - [An Improved Pooled Logistic Regression Implementation](deep_reads/2026-06-19-10.1097_ede.0000000000001945.md)  
   7/10 [journals]
+
+#### Annals of Applied Statistics Vol 19 Issue 3
+
+- [An accumulation method for early fault warning and its application to wind turbine systems](deep_reads/2026-06-19-10.1214_25-aoas2063.md)  
+  0/10 [journals]
+
+#### Annals of Applied Statistics Vol 19 Issue 1
+
+- [Ultra-sparse small area estimation with super heavy-tailed priors for internal migration flows](deep_reads/2026-06-19-10.1214_24-aoas1932.md)  
+  2/10 [journals]
+
+#### Annals of Applied Statistics Vol 18 Issue 4
+
+- [A latent variable mixture model for composition-on-composition regression with application to chemical recycling](deep_reads/2026-06-19-10.1214_24-aoas1935.md)  
+  3/10 [journals]
+- [Deconvolution analysis of spatial transcriptomics by multiplicative-additive Poisson-gamma models](deep_reads/2026-06-19-10.1214_24-aoas1953.md)  
+  2/10 [journals]
+
+#### Annals of Applied Statistics Vol 18 Issue 3
+
+- [Dynamic modeling and online monitoring of tensor data streams with application to passenger flow surveillance](deep_reads/2026-06-19-10.1214_23-aoas1845.md)  
+  6/10 [journals]
+- [Nonconvex SVM for cancer diagnosis based on morphologic features of tumor microenvironment](deep_reads/2026-06-19-10.1214_24-aoas1876.md)  
+  3/10 [journals]
+- [A latent variable approach for modeling relational data with multiple receivers](deep_reads/2026-06-19-10.1214_24-aoas1885.md)  
+  2/10 [journals]
 
 #### Electronic Journal of Statistics Vol 20 Issue 1
 
@@ -2642,6 +2827,16 @@
 - [Implementation of Cosmic Ray Energy Spectrum (CRESP) Algorithm in PIERNIK MHD Code. II. Propagation of Primary and Secondary Nuclei in a Magnetohydrodynamic Environment](deep_reads/2026-06-19-10.3847_1538-4365_ae4879.md)  
   0/10 [journals]
 
+#### Annals of Applied Statistics Vol 19 Issue 1
+
+- [Poisson cluster process models for detecting ultra-diffuse galaxies](deep_reads/2026-06-19-10.1214_24-aoas1958.md)  
+  8/10 [journals]
+
+#### Annals of Applied Statistics Vol 18 Issue 4
+
+- [A robust Bayesian meta-analysis for estimating the Hubble constant via time delay cosmography](deep_reads/2026-06-19-10.1214_24-aoas1937.md)  
+  7/10 [journals]
+
 #### Annals of Applied Statistics Vol 20 Issue 1
 
 - [Neural posterior estimation with autoregressive tiling for detecting objects in astronomical images](deep_reads/2026-06-10-10.1214_25-aoas2125.md)  
@@ -2687,6 +2882,16 @@
   6/10 [daily]
 
 ### 期刊
+
+#### Annals of Applied Statistics Vol 19 Issue 3
+
+- [Quantile regression with a one-sided misclassified binary regressor](deep_reads/2026-06-19-10.1214_25-aoas2062.md)  
+  7/10 [journals]
+
+#### Annals of Applied Statistics Vol 19 Issue 1
+
+- [Additive density-on-scalar regression in Bayes Hilbert spaces with an application to gender economics](deep_reads/2026-06-19-10.1214_24-aoas1979.md)  
+  7/10 [journals]
 
 #### Journal of the Royal Statistical Society Series C Vol 75 Issue 1
 
@@ -3103,6 +3308,84 @@
 - [Medium-term Exposure to Wildfire Smoke PM2.5 and Cardiorespiratory Hospitalization Risks](deep_reads/2026-06-19-10.1097_ede.0000000000001881.md)  
   1/10 [journals]
 
+#### Annals of Applied Statistics Vol 19 Issue 4
+
+- [Inferring epidemics from multiple dependent data via pseudo-marginal methods](deep_reads/2026-06-19-10.1214_25-aoas2015.md)  
+  7/10 [journals]
+- [Exploring spatiotemporal variation in Covid-19 waves: Non-Euclidean spatially aware functional registration](deep_reads/2026-06-10-10.1214_25-aoas2077.md)  
+  4/10 [journals]
+- [Supervised learning of outcome-relevant items from a questionnaire via mixed integer optimization](deep_reads/2026-06-10-10.1214_25-aoas2093.md)  
+  3/10 [journals]
+
+#### Annals of Applied Statistics Vol 19 Issue 3
+
+- [Time-to-event analysis of preterm birth accounting for gestational age uncertainties](deep_reads/2026-06-19-10.1214_25-aoas2040.md)  
+  6/10 [journals]
+- [Bayesian quantile regression with subset selection: A decision analysis perspective](deep_reads/2026-06-19-10.1214_25-aoas2053.md)  
+  6/10 [journals]
+- [Exact Bayesian inference for fitting stochastic epidemic models to partially observed incidence data](deep_reads/2026-06-19-10.1214_25-aoas2048.md)  
+  6/10 [journals]
+- [Estimating life expectancy in the Canadian elderly population with dementia using prevalent cohort survival data](deep_reads/2026-06-19-10.1214_25-aoas2039.md)  
+  5/10 [journals]
+- [Integrative ecological regression analysis of U.S. county and state level COVID-19 death data for studying health disparity associations](deep_reads/2026-06-19-10.1214_25-aoas2055.md)  
+  5/10 [journals]
+
+#### Annals of Applied Statistics Vol 19 Issue 2
+
+- [Bayesian data augmentation for recurrent events under intermittent assessment in overlapping intervals with applications to EMR data](deep_reads/2026-06-19-10.1214_24-aoas2007.md)  
+  6/10 [journals]
+- [Biomarker detection for disease classification in longitudinal microbiome data](deep_reads/2026-06-19-10.1214_24-aoas1995.md)  
+  6/10 [journals]
+- [Analyzing environmental bioassays with spatial odds, risk, and survival probability ratio regressions](deep_reads/2026-06-19-10.1214_24-aoas1923.md)  
+  2/10 [journals]
+
+#### Annals of Applied Statistics Vol 19 Issue 1
+
+- [Inferring synergistic and antagonistic interactions in mixtures of exposures](deep_reads/2026-06-19-10.1214_24-aoas1948.md)  
+  7/10 [journals]
+- [Functional clustering for longitudinal associations between social determinants of health and stroke mortality in the U.S.](deep_reads/2026-06-19-10.1214_24-aoas1989.md)  
+  6/10 [journals]
+- [Low-rank longitudinal factor regression with application to chemical mixtures](deep_reads/2026-06-19-10.1214_24-aoas1988.md)  
+  6/10 [journals]
+- [Leveraging cellphone-derived mobility networks to assess Covid-19 travel risk](deep_reads/2026-06-19-10.1214_24-aoas1914.md)  
+  5/10 [journals]
+- [Dynamic prediction with multivariate longitudinal outcomes and longitudinal magnetic resonance imaging data](deep_reads/2026-06-19-10.1214_24-aoas1970.md)  
+  2/10 [journals]
+
+#### Annals of Applied Statistics Vol 18 Issue 4
+
+- [Causal health impacts of power plant emission controls under modeled and uncertain physical process interference](deep_reads/2026-06-19-10.1214_24-aoas1904.md)  
+  8/10 [journals]
+- [Early effects of 2014 U.S. Medicaid expansions on mortality: Design-based inference for impacts on small subgroups despite small-cell suppression](deep_reads/2026-06-19-10.1214_24-aoas1910.md)  
+  7/10 [journals]
+- [Utilizing a capture–recapture strategy to accelerate infectious disease surveillance](deep_reads/2026-06-19-10.1214_24-aoas1927.md)  
+  7/10 [journals]
+- [Multisite disease analytics with applications to estimating COVID-19 undetected cases in Canada](deep_reads/2026-06-19-10.1214_24-aoas1915.md)  
+  6/10 [journals]
+- [Regularized scalar-on-function regression analysis to assess functional association of critical physical activity window with biological age](deep_reads/2026-06-19-10.1214_24-aoas1903.md)  
+  6/10 [journals]
+- [A Bayesian model of underreporting for sexual assault on college campuses](deep_reads/2026-06-19-10.1214_24-aoas1928.md)  
+  6/10 [journals]
+- [Predicting COVID-19 hospitalisation using a mixture of Bayesian predictive syntheses](deep_reads/2026-06-19-10.1214_24-aoas1941.md)  
+  6/10 [journals]
+- [Individual dynamic prediction for cure and survival based on longitudinal biomarkers](deep_reads/2026-06-19-10.1214_24-aoas1906.md)  
+  4/10 [journals]
+
+#### Annals of Applied Statistics Vol 18 Issue 3
+
+- [Semiparametric modeling of SARS-CoV-2 transmission using tests, cases, deaths, and seroprevalence data](deep_reads/2026-06-19-10.1214_24-aoas1882.md)  
+  7/10 [journals]
+- [Patient recruitment using electronic health records under selection bias: A two-phase sampling framework](deep_reads/2026-06-19-10.1214_23-aoas1860.md)  
+  7/10 [journals]
+- [Quantile regression decomposition analysis of disparity research using complex survey data: Application to disparities in BMI and telomere length between U.S. minority and white population groups](deep_reads/2026-06-19-10.1214_23-aoas1868.md)  
+  6/10 [journals]
+- [A nonparametric mixed-effects mixture model for patterns of clinical measurements associated with COVID-19](deep_reads/2026-06-19-10.1214_23-aoas1871.md)  
+  6/10 [journals]
+- [Weighted biomarker variability in joint analysis of longitudinal and time-to-event data](deep_reads/2026-06-19-10.1214_24-aoas1896.md)  
+  4/10 [journals]
+- [Joint mixed membership modeling of multivariate longitudinal and survival data for learning the individualized disease progression](deep_reads/2026-06-19-10.1214_23-aoas1864.md)  
+  3/10 [journals]
+
 #### American Journal of Epidemiology Vol 195 Issue 6
 
 - [Evaluating the 2023 Mexican Dietary Guidelines for type 2 diabetes prevention: a target trial emulation in Mexican women](deep_reads/2026-06-19-10.1093_aje_kwag037.md)  
@@ -3232,13 +3515,6 @@
 - [Latent class analysis with discrete failure time model](deep_reads/2026-06-10-10.1214_25-aoas2111.md)  
   3/10 [journals]
 
-#### Annals of Applied Statistics Vol 19 Issue 4
-
-- [Exploring spatiotemporal variation in Covid-19 waves: Non-Euclidean spatially aware functional registration](deep_reads/2026-06-10-10.1214_25-aoas2077.md)  
-  4/10 [journals]
-- [Supervised learning of outcome-relevant items from a questionnaire via mixed integer optimization](deep_reads/2026-06-10-10.1214_25-aoas2093.md)  
-  3/10 [journals]
-
 ## 其他
 
 ### Daily
@@ -3331,6 +3607,58 @@
   6/10 [journals]
 - [<tt>thornado+</tt> F <scp>LASH</scp> -X: A Hybrid Discontinuous Galerkin–Implicit-explicit and Finite-volume Framework for Neutrino-radiation Hydrodynamics in Core-collapse Supernovae*](deep_reads/2026-06-19-10.3847_1538-4365_ae57ad.md)  
   0/10 [journals]
+
+#### Annals of Applied Statistics Vol 19 Issue 4
+
+- [Estimation for multistate models subject to reporting delays and incomplete event adjudication with application to disability insurance](deep_reads/2026-06-19-10.1214_25-aoas2068.md)  
+  6/10 [journals]
+- [A finite population parametric Bayesian bootstrap for quick counts](deep_reads/2026-06-19-10.1214_25-aoas2066.md)  
+  3/10 [journals]
+- [Sequence interaction model with applications to TCR-peptide binding](deep_reads/2026-06-19-10.1214_25-aoas2114.md)  
+  2/10 [journals]
+- [Multiobject data integration in the study of primary progressive aphasia](deep_reads/2026-06-19-10.1214_25-aoas2071.md)  
+  2/10 [journals]
+
+#### Annals of Applied Statistics Vol 19 Issue 3
+
+- [Network-based modeling of emotional expressions for multiple cancers via a linguistic analysis of an online health community](deep_reads/2026-06-19-10.1214_25-aoas2047.md)  
+  1/10 [journals]
+- [Surrogate selection oversamples expanded T cell clonotypes](deep_reads/2026-06-19-10.1214_25-aoas2032.md)  
+  1/10 [journals]
+
+#### Annals of Applied Statistics Vol 19 Issue 2
+
+- [Estimating reporting bias in 311 complaint data](deep_reads/2026-06-19-10.1214_24-aoas2003.md)  
+  3/10 [journals]
+- [Rice-distributed autoregressive time series modeling of magnitude functional MRI data](deep_reads/2026-06-19-10.1214_24-aoas1981.md)  
+  2/10 [journals]
+- [An application of vine-based regression to flight landing data](deep_reads/2026-06-19-10.1214_24-aoas1997.md)  
+  2/10 [journals]
+- [A dual-dictionary model for mining domain-specific Chinese texts](deep_reads/2026-06-19-10.1214_25-aoas2035.md)  
+  1/10 [journals]
+
+#### Annals of Applied Statistics Vol 19 Issue 1
+
+- [Periodogram regression: A two-stage mixed effects approach for modelling multiple integer-valued time series of tropical cyclone frequency](deep_reads/2026-06-19-10.1214_24-aoas1895.md)  
+  6/10 [journals]
+- [Inferring mechanistic parameters of somatic hypermutation using neural networks and approximate Bayesian computation](deep_reads/2026-06-19-10.1214_24-aoas1985.md)  
+  2/10 [journals]
+
+#### Annals of Applied Statistics Vol 18 Issue 4
+
+- [Spatio-temporal analysis of dependent risk with an application to cyberattacks data](deep_reads/2026-06-19-10.1214_24-aoas1952.md)  
+  2/10 [journals]
+- [A copula model for marked point process with a terminal event: An application in dynamic prediction of insurance claims](deep_reads/2026-06-19-10.1214_24-aoas1902.md)  
+  2/10 [journals]
+
+#### Annals of Applied Statistics Vol 18 Issue 3
+
+- [An integrative network-based mediation model (NMM) to estimate multiple genetic effects on outcomes mediated by functional connectivity](deep_reads/2026-06-19-10.1214_24-aoas1880.md)  
+  8/10 [journals]
+- [Sparse clustering for customer segmentation with high-dimensional mixed-type data](deep_reads/2026-06-19-10.1214_24-aoas1886.md)  
+  4/10 [journals]
+- [Multiscale Poisson process approaches for detecting and estimating differences from high-throughput sequencing assays](deep_reads/2026-06-19-10.1214_23-aoas1828.md)  
+  3/10 [journals]
 
 #### Electronic Journal of Statistics Vol 20 Issue 1
 
