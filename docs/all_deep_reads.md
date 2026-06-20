@@ -173,6 +173,23 @@
 
 ### 期刊
 
+#### Econometrica Vol 93 Issue 4
+
+- [Fisher–Schultz Lecture: Generic Machine Learning Inference on Heterogeneous Treatment Effects in Randomized Experiments, With an Application to Immunization in India](deep_reads/2026-06-21-10.3982_ecta19303.md)  
+  9/10 [journals]
+- [Selecting the Most Effective Nudge: Evidence From a Large‐Scale Experiment on Immunization](deep_reads/2026-06-21-10.3982_ecta19739.md)  
+  8/10 [journals]
+
+#### Econometrica Vol 92 Issue 5
+
+- [Exact Bias Correction for Linear Adjustment of Randomized Controlled Trials](deep_reads/2026-06-21-10.3982_ecta20289.md)  
+  0/10 [journals]
+
+#### Econometrica Vol 92 Issue 4
+
+- [Multinational Enforcement of Labor Law: Experimental Evidence on Strengthening Occupational Safety and Health Committees](deep_reads/2026-06-21-10.3982_ecta19408.md)  
+  6/10 [journals]
+
 #### Journal of the Royal Statistical Society Series C Vol 75 Issue 3
 
 - [Estimating causal effect in case–control studies with nondifferential misclassified outcomes](deep_reads/2026-06-20-10.1093_jrsssc_qlag012.md)  
@@ -1898,6 +1915,16 @@
 
 ### 期刊
 
+#### Econometrica Vol 93 Issue 5
+
+- [Gaussian Transforms Modeling and the Estimation of Distributional Regression Functions](deep_reads/2026-06-21-10.3982_ecta19153.md)  
+  8/10 [journals]
+
+#### Econometrica Vol 92 Issue 6
+
+- [Sparse Network Asymptotics for Logistic Regression Under Possible Misspecification](deep_reads/2026-06-21-10.3982_ecta19051.md)  
+  9/10 [journals]
+
 #### Journal of the Royal Statistical Society Series C Vol 74 Issue 5
 
 - [Modelling time-varying relations in housing prices: a semiparametric panel approach](deep_reads/2026-06-20-10.1093_jrsssc_qlaf020.md)  
@@ -2835,6 +2862,11 @@
 
 ### 期刊
 
+#### Econometrica Vol 93 Issue 2
+
+- [Double Robust Bayesian Inference on Average Treatment Effects](deep_reads/2026-06-21-10.3982_ecta21442.md)  
+  9/10 [journals]
+
 #### Journal of the Royal Statistical Society Series B Vol 87 Issue 3
 
 - [Prediction sets for high-dimensional mixture of experts models](deep_reads/2026-06-20-10.1093_jrsssb_qkae117.md)  
@@ -3151,6 +3183,16 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Econometrica Vol 93 Issue 3
+
+- [Risk and Optimal Policies in Bandit Experiments](deep_reads/2026-06-21-10.3982_ecta21075.md)  
+  8/10 [journals]
+
+#### Econometrica Vol 92 Issue 6
+
+- [Adaptive, Rate‐Optimal Hypothesis Testing in Nonparametric IV Models](deep_reads/2026-06-21-10.3982_ecta18602.md)  
+  9/10 [journals]
 
 #### Journal of the Royal Statistical Society Series C Vol 75 Issue 3
 
@@ -4545,6 +4587,158 @@
   6/10 [daily]
 
 ### 期刊
+
+#### Econometrica Vol 93 Issue 5
+
+- [Optimal Estimation When Researcher and Social Preferences Are Misaligned](deep_reads/2026-06-21-10.3982_ecta18640.md)  
+  7/10 [journals]
+- [Rural Pensions, Labor Reallocation, and Aggregate Income: An Empirical and Quantitative Analysis of China](deep_reads/2026-06-21-10.3982_ecta19699.md)  
+  7/10 [journals]
+- [Structural Estimation of Higher Order Risk Preferences](deep_reads/2026-06-21-10.3982_ecta22260.md)  
+  6/10 [journals]
+- [Who Benefits From Surge Pricing?](deep_reads/2026-06-21-10.3982_ecta19106.md)  
+  5/10 [journals]
+- [Bayesian Impact Evaluation With Informative Priors: An Application to a Colombian Management and Export Improvement Program](deep_reads/2026-06-21-10.3982_ecta21567.md)  
+  4/10 [journals]
+- [Landmines and Spatial Development](deep_reads/2026-06-21-10.3982_ecta17951.md)  
+  3/10 [journals]
+- [Women in Science. Lessons From the Baby Boom](deep_reads/2026-06-21-10.3982_ecta22741.md)  
+  2/10 [journals]
+- [Running Primary Deficits Forever in a Dynamically Efficient Economy: Feasibility and Optimality](deep_reads/2026-06-21-10.3982_ecta22749.md)  
+  2/10 [journals]
+- [Can Trade Policy Mitigate Climate Change?](deep_reads/2026-06-21-10.3982_ecta20153.md)  
+  1/10 [journals]
+- [Non‐Stationary Search and Assortative Matching](deep_reads/2026-06-21-10.3982_ecta22257.md)  
+  0/10 [journals]
+
+#### Econometrica Vol 93 Issue 4
+
+- [Fiduciary Duty and the Market for Financial Advice](deep_reads/2026-06-21-10.3982_ecta18492.md)  
+  6/10 [journals]
+- [Producing Health: Measuring Value Added of Nursing Homes](deep_reads/2026-06-21-10.3982_ecta21016.md)  
+  5/10 [journals]
+- [You Can Lead a Horse to Water: Spatial Learning and Path Dependence in Consumer Search](deep_reads/2026-06-21-10.3982_ecta19576.md)  
+  4/10 [journals]
+- [Dynamic Concern for Misspecification](deep_reads/2026-06-21-10.3982_ecta22139.md)  
+  4/10 [journals]
+- [Private Information and Price Regulation in the US Credit Card Market](deep_reads/2026-06-21-10.3982_ecta18063.md)  
+  3/10 [journals]
+- [Contract Labor and Establishment Growth in India](deep_reads/2026-06-21-10.3982_ecta20046.md)  
+  3/10 [journals]
+- [Competitive Capture of Public Opinion](deep_reads/2026-06-21-10.3982_ecta22072.md)  
+  2/10 [journals]
+
+#### Econometrica Vol 93 Issue 3
+
+- [Making Subsidies Work: Rules versus Discretion](deep_reads/2026-06-21-10.3982_ecta21319.md)  
+  7/10 [journals]
+- [Adaptive Maximization of Social Welfare](deep_reads/2026-06-21-10.3982_ecta22351.md)  
+  7/10 [journals]
+- [Quality Disclosure and Regulation: Scoring Design in Medicare Advantage](deep_reads/2026-06-21-10.3982_ecta21182.md)  
+  5/10 [journals]
+- [The Cost of Consumer Collateral: Evidence From Bunching](deep_reads/2026-06-21-10.3982_ecta22303.md)  
+  4/10 [journals]
+- [Location Sorting and Endogenous Amenities: Evidence From Amsterdam](deep_reads/2026-06-21-10.3982_ecta21394.md)  
+  4/10 [journals]
+- [Soaking up the Sun: Battery Investment, Renewable Energy, and Market Equilibrium](deep_reads/2026-06-21-10.3982_ecta20411.md)  
+  3/10 [journals]
+- [Personalized Pricing and the Value of Time: Evidence From Auctioned Cab Rides](deep_reads/2026-06-21-10.3982_ecta18838.md)  
+  3/10 [journals]
+- [Auctioning Control and Cash‐Flow Rights Separately](deep_reads/2026-06-21-10.3982_ecta21343.md)  
+  1/10 [journals]
+- [Insurance and Inequality With Persistent Private Information](deep_reads/2026-06-21-10.3982_ecta20404.md)  
+  1/10 [journals]
+
+#### Econometrica Vol 93 Issue 2
+
+- [The Impact of Incarceration on Employment, Earnings, and Tax Filing](deep_reads/2026-06-21-10.3982_ecta22028.md)  
+  9/10 [journals]
+- [Estimating Candidate Valence](deep_reads/2026-06-21-10.3982_ecta20496.md)  
+  8/10 [journals]
+- [Uniform Priors for Impulse Responses](deep_reads/2026-06-21-10.3982_ecta21101.md)  
+  5/10 [journals]
+- [Choices and Outcomes in Assignment Mechanisms: The Allocation of Deceased Donor Kidneys](deep_reads/2026-06-21-10.3982_ecta20203.md)  
+  4/10 [journals]
+- [People Are More Moral in Uncertain Environments](deep_reads/2026-06-21-10.3982_ecta20574.md)  
+  3/10 [journals]
+- [Feedback Design in Dynamic Moral Hazard](deep_reads/2026-06-21-10.3982_ecta21871.md)  
+  2/10 [journals]
+- [Cap‐and‐Trade and Carbon Tax Meet Arrow–Debreu](deep_reads/2026-06-21-10.3982_ecta22923.md)  
+  2/10 [journals]
+
+#### Econometrica Vol 93 Issue 1
+
+- [History's Masters The Effect of European Monarchs on State Performance](deep_reads/2026-06-21-10.3982_ecta20830.md)  
+  7/10 [journals]
+- [Tell Me Something I Don't Already Know: Learning in Low‐ and High‐Inflation Settings](deep_reads/2026-06-21-10.3982_ecta22764.md)  
+  7/10 [journals]
+- [How Well Does Bargaining Work in Consumer Markets? A Robust Bounds Approach](deep_reads/2026-06-21-10.3982_ecta20125.md)  
+  5/10 [journals]
+- [Mussa Puzzle Redux](deep_reads/2026-06-21-10.3982_ecta20849.md)  
+  5/10 [journals]
+- [Seeding a Simple Contagion](deep_reads/2026-06-21-10.3982_ecta22448.md)  
+  4/10 [journals]
+- [The Margins of Trade](deep_reads/2026-06-21-10.3982_ecta17510.md)  
+  2/10 [journals]
+- [Minimum Wages, Efficiency, and Welfare](deep_reads/2026-06-21-10.3982_ecta21466.md)  
+  2/10 [journals]
+
+#### Econometrica Vol 92 Issue 6
+
+- [The Impacts of Managerial Autonomy on Firm Outcomes](deep_reads/2026-06-21-10.3982_ecta19872.md)  
+  6/10 [journals]
+- [Social Media and Collective Action in China](deep_reads/2026-06-21-10.3982_ecta20146.md)  
+  6/10 [journals]
+- [Aggregate Implications of Barriers to Female Entrepreneurship](deep_reads/2026-06-21-10.3982_ecta20396.md)  
+  4/10 [journals]
+- [Matching and Agglomeration: Theory and Evidence From Japanese Firm‐to‐Firm Trade](deep_reads/2026-06-21-10.3982_ecta19697.md)  
+  3/10 [journals]
+- [Stationary Social Learning in a Changing Environment](deep_reads/2026-06-21-10.3982_ecta20475.md)  
+  2/10 [journals]
+- [Privacy‐Preserving Signals](deep_reads/2026-06-21-10.3982_ecta22017.md)  
+  1/10 [journals]
+- [Caution and Reference Effects](deep_reads/2026-06-21-10.3982_ecta21748.md)  
+  1/10 [journals]
+- [Ambiguous Contracts](deep_reads/2026-06-21-10.3982_ecta22687.md)  
+  1/10 [journals]
+
+#### Econometrica Vol 92 Issue 5
+
+- [Spatial Unit Roots and Spurious Regression](deep_reads/2026-06-21-10.3982_ecta21654.md)  
+  7/10 [journals]
+- [Lifestyle Behaviors and Wealth‐Health Gaps in Germany](deep_reads/2026-06-21-10.3982_ecta20603.md)  
+  5/10 [journals]
+- [Historical Self‐Governance and Norms of Cooperation](deep_reads/2026-06-21-10.3982_ecta20579.md)  
+  4/10 [journals]
+- [Propagation and Amplification of Local Productivity Spillovers](deep_reads/2026-06-21-10.3982_ecta20029.md)  
+  3/10 [journals]
+- [Endogenous Production Networks Under Supply Chain Uncertainty](deep_reads/2026-06-21-10.3982_ecta20629.md)  
+  0/10 [journals]
+- [The Rise of Fiscal Capacity: Administration and State Consolidation in the Holy Roman Empire](deep_reads/2026-06-21-10.3982_ecta20612.md)  
+  0/10 [journals]
+- [Can Deficits Finance Themselves?](deep_reads/2026-06-21-10.3982_ecta21791.md)  
+  0/10 [journals]
+- [On the Structure of Informationally Robust Optimal Mechanisms](deep_reads/2026-06-21-10.3982_ecta20240.md)  
+  0/10 [journals]
+- [Contractual Chains](deep_reads/2026-06-21-10.3982_ecta19797.md)  
+  0/10 [journals]
+
+#### Econometrica Vol 92 Issue 4
+
+- [Nonparametric Identification of Differentiated Products Demand Using Micro Data](deep_reads/2026-06-21-10.3982_ecta20731.md)  
+  8/10 [journals]
+- [The State Capacity Ceiling on Tax Rates: Evidence From Randomized Tax Abatements in the DRC](deep_reads/2026-06-21-10.3982_ecta19959.md)  
+  7/10 [journals]
+- [The Unequal Effects of Pollution on Labor Supply](deep_reads/2026-06-21-10.3982_ecta20484.md)  
+  7/10 [journals]
+- [Monotone Additive Statistics](deep_reads/2026-06-21-10.3982_ecta19967.md)  
+  6/10 [journals]
+- [Peak‐Hour Road Congestion Pricing: Experimental Evidence and Equilibrium Implications](deep_reads/2026-06-21-10.3982_ecta18422.md)  
+  6/10 [journals]
+- [Presidential Address: Economics and Measurement: New Measures to Model Decision Making](deep_reads/2026-06-21-10.3982_ecta21528.md)  
+  5/10 [journals]
+- [The U.S. Public Debt Valuation Puzzle](deep_reads/2026-06-21-10.3982_ecta20497.md)  
+  1/10 [journals]
 
 #### Annals of Applied Statistics Vol 19 Issue 3
 

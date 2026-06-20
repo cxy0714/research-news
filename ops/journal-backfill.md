@@ -89,7 +89,7 @@
 - [x] (2026-06-21) `--only JMLR --jmlr-n 3`   （JMLR 用 --jmlr-n，不是 --n-issues）
 
 经济 / 计量 econ：
-- [ ] `--only Econometrica --n-issues 12`
+- [x] (2026-06-21) `--only Econometrica --n-issues 12`
 - [ ] `--only "J. Econometrics" --n-issues 4`   ⚠ 出刊密、量大
 - [ ] `--only "Quant. Econ." --n-issues 8`
 - [ ] `--only JBES --n-issues 8`
