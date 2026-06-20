@@ -173,6 +173,17 @@
 
 ### 期刊
 
+#### Journal of Econometrics Vol 256
+
+- [Treatment effects with targeting instruments](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106253.md)  
+  9/10 [journals]
+- [Identification and estimation in a time-varying endogenous random coefficient panel data model](deep_reads/2026-06-21-10.1016_j.jeconom.2026.106272.md)  
+  8/10 [journals]
+- [Estimation and inference in boundary discontinuity designs: Distance-based methods](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106266.md)  
+  8/10 [journals]
+- [Bounding treatment effects by pooling limited information across observations](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106254.md)  
+  8/10 [journals]
+
 #### Econometrica Vol 93 Issue 4
 
 - [Fisher–Schultz Lecture: Generic Machine Learning Inference on Heterogeneous Treatment Effects in Randomized Experiments, With an Application to Immunization in India](deep_reads/2026-06-21-10.3982_ecta19303.md)  
@@ -1112,15 +1123,6 @@
 #### Quantitative Economics Vol 16 Issue 3
 
 - [Estimation of optimal dynamic treatment assignment rules under policy constraints](deep_reads/2026-06-07-10.3982_qe2288.md)  
-  8/10 [journals]
-
-#### Journal of Econometrics Vol 256
-
-- [Treatment effects with targeting instruments](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106253.md)  
-  9/10 [journals]
-- [Estimation and inference in boundary discontinuity designs: Distance-based methods](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106266.md)  
-  8/10 [journals]
-- [Bounding treatment effects by pooling limited information across observations](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106254.md)  
   8/10 [journals]
 
 #### Journal of Econometrics Vol 255
@@ -4588,6 +4590,13 @@
 
 ### 期刊
 
+#### Journal of Econometrics Vol 256
+
+- [Distributional effects with two-sided measurement error: An application to intergenerational income mobility](deep_reads/2026-06-21-10.1016_j.jeconom.2026.106268.md)  
+  7/10 [journals]
+- [Estimation of characteristics-based quantile factor models](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106267.md)  
+  4/10 [journals]
+
 #### Econometrica Vol 93 Issue 5
 
 - [Optimal Estimation When Researcher and Social Preferences Are Misaligned](deep_reads/2026-06-21-10.3982_ecta18640.md)  
@@ -4808,11 +4817,6 @@
 - [Dynamic ordered panel logit models](deep_reads/2026-06-07-10.3982_qe2052.md)  
   5/10 [journals]
 - [Forecasting with shadow rate VARs](deep_reads/2026-06-07-10.3982_qe2547.md)  
-  4/10 [journals]
-
-#### Journal of Econometrics Vol 256
-
-- [Estimation of characteristics-based quantile factor models](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106267.md)  
   4/10 [journals]
 
 #### Journal of Econometrics Vol 255

@@ -177,9 +177,11 @@
 
 ### J. Econometrics
 
+- [Vol 256 · 2026-06-21](journals/2026-06-21-j-econometrics-v256.md)
 - [Vol 256 · 2026-06-07](journals/2026-06-07-j-econometrics-v256.md)
 - [Vol 255 · 2026-06-07](journals/2026-06-07-j-econometrics-v255.md)
 - [Vol 254 · 2026-06-07](journals/2026-06-07-j-econometrics-v254.md)
+- [2026-06-21](journals/2026-06-21-j-econometrics.md)
 - [2026-06-07](journals/2026-06-07-j-econometrics.md)
 
 ### JBES

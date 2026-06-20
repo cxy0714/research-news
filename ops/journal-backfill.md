@@ -90,7 +90,7 @@
 
 经济 / 计量 econ：
 - [x] (2026-06-21) `--only Econometrica --n-issues 12`
-- [ ] `--only "J. Econometrics" --n-issues 4`   ⚠ 出刊密、量大
+- [x] (2026-06-21) `--only "J. Econometrics" --n-issues 4`   ⚠ 出刊密、量大
 - [ ] `--only "Quant. Econ." --n-issues 8`
 - [ ] `--only JBES --n-issues 8`
 
